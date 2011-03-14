@@ -22,7 +22,7 @@
     <auteur> [Val&eacute;rie Journet-Texier->http://valerie.journet.free.fr], [Perline->http://perline.org/] </auteur>
     <version>0.1</version>
     <version_base>0.1</version_base> 
-    <etat>experimental</etat>
+    <etat>test</etat>
     <icon>img_pack/sel-vignette.png</icon>
     <description>
 	<multi>
@@ -40,36 +40,44 @@
     <!-- URL de documentation http://www.spip-contrib.net/ -->
     <lien>http://www.spip-contrib.net/SEL-systeme-d-echange-local</lien>
 
-    <!-- pr?se le prefixe utilis?our toutes les fonctions du plugin, en g?ral le nom du plugin -->
+    <!-- precise le prefixe utilis?our toutes les fonctions du plugin, en g?ral le nom du plugin -->
     <prefix>sel</prefix>
 
-    <!-- pr?se le fichier ?harger ?haque recalcul, partie publique-->
+    <!-- precise le fichier a charger ?haque recalcul, partie publique-->
     <fonctions>sel_fonctions.php</fonctions>
-    <!-- pr?se le fichier ?harger ?haque appel de la page, partie publique -->
+    <!-- precise le fichier a charger ?haque appel de la page, partie publique -->
     <options>sel_options.php</options>
 
     <!-- Chemin du fichier d'installation et de mise ?our -->
     <install>base/sel_install.php</install>
 
-    <!--pipeline, surcharge de fonction ?es moments pr?s de la g?ration d'une page SPIP -->
-    <pipeline>
-       <!-- pour conna?e l'ensemble des pipelines voir :
+    <!-- ensemble des pipelines :
       http://doc.spip.org/@Les-points-d-entree-pipelines
-      http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc_version.php -->
-		<nom>point_entree</nom>
-       <!-- nom de la fonction ?ppeler sans son prefixe -->
-       <action>fonction</action>
-       <!-- chemin du fichier contenant la fonction -->
-       <inclure>fichier.php</inclure>
-   </pipeline>
+      http://trac.rezo.net/trac/spip/browser/spip/ecrire/inc_version.php
+	  On peut rajouter dans la section pipeline <action>fonction</action>...
+	-->	
+	
+    <pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/structure.php</inclure>
+	</pipeline>
 
-   <!-- pr?se les d?ndances vis-?is de d'autres plugins (ou de spip), voir plus bas <necessite id="nomplugin" version="[versionminimale;versionmax]" />-->
-   
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/structure.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/structure.php</inclure>
+	</pipeline>
+	
+   <!-- precise les dependances vis-vis de d'autres plugins (ou de spip), voir plus bas <necessite id="nomplugin" version="[versionminimale;versionmax]" />-->  
 	<necessite id="SPIP" version='[2.0.0;]' />
-	<necessite id="cfg" version='[1.15.2;]' />
+	<utilise id="cfg" version='[1.15.2;]' />
 
 
-   <!-- indique un zip externe n?ssaire 
+   <!-- indique un zip externe necessaire 
       branche 1.9.3 ?artir de spip svn 98xx 
       id indique le r?rtoire o?st charg?e zip,  /lib/nom
    <necessite id="lib:nom" src="http://url-complete-du/fichier.zip" /> -->
