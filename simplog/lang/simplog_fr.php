@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'clic_rafraichir' => 'Cliquer pour rafra&icirc;chir',
+'clic_senstri' => 'Cliquer pour inverser l\'ordre d\'affichage des donn&eacute;es',
 'consultation_logs' => 'Consultation des fichiers de traces',
 
 // D
