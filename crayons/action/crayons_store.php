@@ -393,7 +393,7 @@ function action_crayons_store_dist() {
 
 // permettre de passer une autre fonction de stockage des informations
 function action_crayons_store_args($store = 'crayons_store') {
-	header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+	header("Content-Type: text/plain; charset=".$GLOBALS['meta']['charset']);
 	lang_select($GLOBALS['auteur_session']['lang']);
 
 	$r = $store();
