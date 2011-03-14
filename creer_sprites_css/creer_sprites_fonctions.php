@@ -59,6 +59,7 @@ function creer_sprites($flux) {
 			if ($date_src < $date_max) $creer = true;
 			if ($largeur != largeur($fichier) || $hauteur != hauteur ($fichier)) $creer = true;
 			
+			if (in_array($_GET['var_mode'], array('recalcul', 'debug'))) $creer = true;
 			
 			if ($creer) { 
 			
