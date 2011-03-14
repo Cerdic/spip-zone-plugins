@@ -60,6 +60,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'demande_ok' => 'Votre demande a bien &#233;t&#233; prise en compte. Vous recevrez prochainement une confirmation.'
 , 'demande_ko' => 'D&#233;sol&#233;, mais une erreur a &#233;t&#233; rencontr&#233;e lors de l\'envoi de la confirmation d\'abonnement.
 		SVP, essayez de vous inscrire plus tard.'
+, 'champ_obligatoire' => 'Ce champ est obligatoire'
 
 // balise/formulaire_modif_abonnement.php
 , 'abonnement_modifie' => 'Vos modifications sont prises en compte'

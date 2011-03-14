@@ -22,34 +22,44 @@ function formulaires_spip_listes_inscription_charger_dist ($id_liste='')
 function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 {
 	$erreurs = array();
+	
 	// verifier que les champs obligatoires sont bien la :
 	foreach(array('email') as $obligatoire) {
-		if (!_request($obligatoire)) $erreurs[$obligatoire] = 'Ce champ est obligatoire';
+		if (!_request($obligatoire))
+		{
+			$erreurs[$obligatoire] = _T('spiplistes:champ_obligatoire');
+		}
 	}
 	
-	if(!in_array(_request('format_abo'),array('html','texte')))
+	if (!in_array(_request('format_abo'), array('html','texte')))
+	{
 		$erreurs['format'] = 'format inconnu';
+	}
 	
-	$listes = _request('listes') ;
-	if(is_array($listes))
-	 foreach($listes as $liste)
-		if(!intval($liste)) 
+	$listes = _request('listes');
+	
+	if (is_array($listes))
+	{
+		foreach($listes as $liste)
 		{
-			$erreurs['liste'] = _T('spiplistes:liste_inconnue');
+			$id_liste = intval($liste);
+			if(!$id_liste) 
+			{
+				$erreurs['liste'] = _T('spiplistes:liste_inconnue');
+			}
 		}
-
+	}
 
 	// verifier que si un email a ete saisi, il est bien valide :
 	include_spip('inc/filtres');
-	if (_request('email') AND !email_valide(_request('email'))) 
+	$email = _request('email');
+	if ($email && !email_valide($email)) 
 	{
 		$erreurs['email'] = _T('spiplistes:cet_email_pas_valide');
 	}
 	
-	$email = _request('email') ;
-	
 	// Verifier si le mail est deja connu
-	if(email_valide(_request('email'))) {
+	if (email_valide(_request('email'))) {
 		if (sql_getfetsel('id_auteur','spip_auteurs',"id_auteur !='".intval($id_auteur)."' AND email = '$email'")) {
 			$erreurs['email'] = _T('spiplistes:cet_email_deja_enregistre');
 		}
