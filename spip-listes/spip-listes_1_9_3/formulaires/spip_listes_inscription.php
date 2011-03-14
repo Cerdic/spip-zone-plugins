@@ -28,7 +28,7 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 	}
 	
 	if(!in_array(_request('format_abo'),array('html','texte')))
-		$erreurs['format'] = "format inconnu";
+		$erreurs['format'] = 'format inconnu';
 	
 	$listes = _request('listes') ;
 	if(is_array($listes))
@@ -50,7 +50,7 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 	
 	// Verifier si le mail est deja connu
 	if(email_valide(_request('email'))) {
-		if (sql_getfetsel("id_auteur","spip_auteurs","id_auteur !='".intval($id_auteur)."' AND email = '$email'")) {
+		if (sql_getfetsel('id_auteur','spip_auteurs',"id_auteur !='".intval($id_auteur)."' AND email = '$email'")) {
 			$erreurs['email'] = _T('spiplistes:cet_email_deja_enregistre');
 		}
 	}
@@ -93,30 +93,18 @@ function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 			
 	// envoyer mail de confirmation
 	
-	if(spiplistes_envoyer_mail(
-		$val['email']
-		, _T('spiplistes:confirmation_inscription')
-		, _T('spiplistes:inscription_reponses_s', array('s' => $GLOBALS['meta']["nom_site"]))
-							   )) {
+	if (
+		spiplistes_envoyer_mail (
+			$val['email']
+			, _T('spiplistes:confirmation_inscription')
+			, _T('spiplistes:inscription_reponses_s', array('s' => $GLOBALS['meta']['nom_site']))
+	   )
+	) {
 		$contexte = array('message_ok'=>_T('spiplistes:demande_ok'),'editable' => false,);
 	}
 	else {
 		$contexte = array('message_ok'=>_T('spiplistes:demande_ko'),'editable' => false,);
 	}
-	/*
-	 // CP-20100203
-	 // ne prend pas en compte les prefs d'envoi SMTP
-	 // code à supprimer
-	$envoyer_mail = charger_fonction('envoyer_mail','inc');
-	$email_to = _request('email');
-	$email_from = _request('email');
-	$sujet = _T('spiplistes:confirmation_inscription');
-	$message = _T('spiplistes:inscription_reponses_s', array('s' => $GLOBALS['meta']["nom_site"])) ;
-
-	$envoyer_mail($email_to,$sujet,$message,$email_from);
-*/
-	
-	
 	
 	return ($contexte);
 }

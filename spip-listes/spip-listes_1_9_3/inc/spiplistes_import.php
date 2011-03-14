@@ -217,12 +217,10 @@ function spiplistes_import(
 				$sql_col_values .= '('.implode(',', $values).'),';
 			}
 			$sql_col_values = rtrim($sql_col_values,',');
-			//syslog(LOG_NOTICE, $sql_col_values);
 			
 			$r = sql_insert('spip_auteurs', $sql_col_names, $sql_col_values);
-			//syslog(LOG_NOTICE, 'rr:'.(is_bool($r) ? ($r?'ok':'ko') : $r));
 			
-			syslog(LOG_NOTICE, 'size of imported values: ' . strlen($sql_col_values));
+			spiplistes_debug_log ('size of imported values: ' . strlen($sql_col_values));
 			
 			//syslog(LOG_NOTICE, 'memory_get_usage[6]: ' . memory_get_usage());
 			

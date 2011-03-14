@@ -63,68 +63,6 @@ function spiplistes_courrier_propre($texte){
 	return $texte;
 }
 
-/*
- * complete caracteres manquants dans HTML -> ISO
- * @return la chaine transcrite
- * @param $texte le texte a transcrire
- * @param $charset le charset souhaite'. Normalement 'iso-8859-1' (voir page de config)
- * @param $is_html flag. Pour ne pas transcrire completement la version html
- * @see http://fr.wikipedia.org/wiki/ISO_8859-1
- * @see http://www.w3.org/TR/html401/sgml/entities.html
- */
-function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = false) {
-	
-	$texte = charset2unicode($texte);
-	$texte = unicode2charset($texte, $charset);
-	if($charset != "utf-8") {
-		$remplacements = array(
-			"&#8217;" => "'"	// quote
-			, "&#8220;" => '"' // guillemets
-			, "&#8221;" => '"' // guillemets
-			)
-			;
-		if(!$is_html) {
-			$remplacements = array_merge(
-				$remplacements
-				, array(
-							// Latin Extended
-					  '&#255;' => chr(255) // 'ÿ' // yuml inconnu php ?
-					, '&#338;' => "OE"  // OElig
-					, '&#339;' => "oe"  // oelig
-					, '&#352;' => "S"  // Scaron
-					, '&#353;' => "s"  // scaron
-					, '&#376;' => "Y"  // Yuml
-						// General Punctuation
-					, '&#8194;' => " " // ensp
-					, '&#8195;' => " " // emsp
-					, '&#8201;' => " " // thinsp
-					, '&#8204;' => " " // zwnj
-					, '&#8205;' => " " // zwj
-					, '&#8206;' => " " // lrm
-					, '&#8207;' => " " // rlm
-					, '&#8211;' => "-" // ndash
-					, '&#8212;' => "--" // mdash
-					, '&#39;' => "'" // apos
-					, '&#8216;' => "'" // lsquo
-					, '&#8217;' => "'" // rsquo
-					, '&#8218;' => "'" // sbquo
-					, '&#8220;' => '"' // ldquo
-					, '&#8221;' => '"' // rdquo
-					, '&#8222;' => '"' // bdquo
-					, '&#8224;' => "+" // dagger
-					, '&#8225;' => "++" // Dagger
-					, '&#8240;' => "0/00" // permil
-					, '&#8249;' => "." // lsaquo
-					, '&#8250;' => "." // rsaquo
-						// sans oublier
-					, '&#8364;' => "euros"  // euro
-				)
-			);
-		}
-		$texte = strtr($texte, $remplacements);
-	}
-	return($texte);
-}
 
 
 /****

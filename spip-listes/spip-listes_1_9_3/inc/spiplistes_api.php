@@ -1181,18 +1181,20 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 	if(!$opt_simuler_envoi) {
 		$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
 	}
-	if(!$from) {
+	if (!$from)
+	{
 		$from = spiplistes_email_from_default();
 	}
-	if(strpos($from, "<") === false) {
+	if(strpos($from, '<') === false) {
 		$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
-		if ($charset!=$GLOBALS['meta']['charset']){
+		
+		if ($charset != $GLOBALS['meta']['charset']){
 			include_spip('inc/charsets');
 			$fromname = unicode2charset(charset2unicode($fromname),$charset);
 		}
 	}
 	// @TODO: voir email_reply_to ?
-	$reply_to = "no-reply".preg_replace("|.*(@[a-z.]+)|i", "$1", email_valide($from));
+	$reply_to = 'no-reply'.preg_replace("|.*(@[a-z.]+)|i", "$1", email_valide($from));
 	
 	if($opt_simuler_envoi == 'oui') {
 		spiplistes_log("!!! MAIL SIMULATION MODE !!!");
@@ -1220,12 +1222,16 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 			}
 			$message = $message['texte']->Body;
 		}
-		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', html_entity_decode($message), $charset);
+		//$message = spiplistes_html_entity_decode ($message, $charset);
+		$message = spiplistes_translate_2_charset ($message, $charset, true);
+		
+		//$email_a_envoyer['texte'] = new phpMail($to, $subject, '', html_entity_decode($message), $charset);
+		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', $message, $charset);
 		$email_a_envoyer['texte']->From = $from ;
 		if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
-		$email_a_envoyer['texte']->AddCustomHeader("Errors-To: ".$return_path); 
-		$email_a_envoyer['texte']->AddCustomHeader("Reply-To: ".$reply_to); 
-		$email_a_envoyer['texte']->AddCustomHeader("Return-Path: ".$return_path); 
+		$email_a_envoyer['texte']->AddCustomHeader('Errors-To: '.$return_path); 
+		$email_a_envoyer['texte']->AddCustomHeader('Reply-To: '.$reply_to); 
+		$email_a_envoyer['texte']->AddCustomHeader('Return-Path: '.$return_path); 
 		$email_a_envoyer['texte']->SMTPKeepAlive = true;
 		
 		$result = $email_a_envoyer[$format]->send();
@@ -1239,7 +1245,7 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 function spiplistes_listes_statuts_periodiques () {
 	static $s;
 	if($s === null) {
-		$s = explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES);
+		$s = explode(';', _SPIPLISTES_LISTES_STATUTS_PERIODIQUES);
 	}
 	return($s);
 }
