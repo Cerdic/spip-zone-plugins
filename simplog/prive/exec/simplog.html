@@ -47,7 +47,7 @@
     <h2><:simplog:liste_fic:></h2>
     <dl>
         <BOUCLE_fics(DATA){source ls, #EVAL{_DIR_TMP}/*.log*}{par file}>
-        <dt><a href="#URL_ECRIRE{#ENV{exec},fic=#FILE}">#FILE</a></dt>
+        <dt><a href="[(#URL_ECRIRE{#ENV{exec}}|parametre_url{fic,#FILE}|parametre_url{senstri,#ENV{senstri,0}})]">#FILE</a></dt>
         </BOUCLE_fics>
     </dl>
 
