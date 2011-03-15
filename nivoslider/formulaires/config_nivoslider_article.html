@@ -1,0 +1,21 @@
+[(#REM) Cette partie là n'as pas l'air de fonctionner sous SPIP 2.1.0	]
+		<p>
+		<label for="_ir_id_defaut"><:nivoslider:default:> :</label>
+		<select name="id_defaut"  id="_ir_id_defaut" style="width:324px">
+		<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre}>
+		<optgroup label="[(#TITRE|supprimer_numero)]">
+			<BOUCLE_articles_secteur(ARTICLES){id_secteur}{par num titre}>
+			<option value="#ID_ARTICLE"[(#CONFIG{nivoslider/id_defaut}|=={#ID_ARTICLE}|?{selected="selected",''})]>[(#TITRE|supprimer_numero)]</option>
+			</BOUCLE_articles_secteur>
+			<BOUCLE_rubriques(RUBRIQUES){id_parent}{par num titre}>
+			<optgroup label="[(#TITRE|supprimer_numero)]">
+				<BOUCLE_articles_rubrique(ARTICLES){id_parent}{par num titre}>
+					<option value="#ID_ARTICLE"[(#CONFIG{nivoslider/id_defaut}|=={#ID_ARTICLE}|?{selected="selected",''})]>[(#TITRE|supprimer_numero)]</option>
+				</BOUCLE_articles_rubrique>
+				<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+			</optgroup>
+			</BOUCLE_rubriques>
+		</optgroup>
+		</BOUCLE_secteurs>
+		</select>
+		</p>
