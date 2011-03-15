@@ -164,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_depots' => 'D&eacute;p&ocirc;ts',
 	'titre_page_edition_depot' => '&Eacute;dition d\'un d&eacute;p&ocirc;t',
 	'titre_page_plugins' => 'Plugins',
+	'titre_page_prefixes' => 'Pr&eacute;fixes',
 	'titre_page_svp' => 'SerVeur d\'information sur les Plugins',
 	'titre_page_statistiques' => 'Statistiques',
 	'titre_page_telechargements' => 'T&eacute;l&eacute;chargements',

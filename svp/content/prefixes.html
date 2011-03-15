@@ -1,0 +1,32 @@
+[(#REM)
+	Partie contenu de la page affichant les prefixes utilises :
+	- soit pour tous les depots (pas d'id_depot)
+	- soit pour un depot donne
+]
+
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie">
+	<a href="#URL_SITE_SPIP/"><:accueil_site:></a>
+	<span class="sep"> &gt; </span>
+	<strong class="on"><:svp:titre_page_prefixes:></strong>
+</p>
+
+[(#REM) Cartouche avec le titre de la page et les informations generales ]
+<div class="cartouche">
+	<h1 class="h1">
+		<:svp:titre_page_prefixes:>
+		<BOUCLE_depot(DEPOTS){id_depot}>[ : (#TITRE)]</BOUCLE_depot>
+	</h1>
+</div>
+<br class="nettoyeur" />
+
+[(#REM) Statistiques globales ]
+<BOUCLE_prefixes(PLUGINS){id_depot?}{par prefixe}>
+[<li id="prefixe-#PREFIXE" class="liste-items">
+	<div class="unit size50">(#PREFIXE)</div>
+	<div class="unit size50 lastUnit">[(#NOM)]</div>
+</li>]
+</BOUCLE_prefixes>
+</B_prefixes>
+<br class="nettoyeur" />
+
