@@ -1,8 +1,7 @@
 <plugin>
 	<nom>Manuel de r&eacute;daction du site</nom>
-	<auteur>
-		Yffic
-	</auteur>
+	<auteur>Yffic</auteur>
+	<licence>GPL v3</licence>
 	<version>0.4</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
@@ -32,6 +31,7 @@
 	<necessite id="cfg" version="[1.10;]" />
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="palette" version="[1.2.2;]" />
 	<utilise id="pages" version="[0.3.5;]" />
 	<categorie>edition</categorie>
