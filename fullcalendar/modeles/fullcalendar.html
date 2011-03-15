@@ -1,18 +1,10 @@
+[(#REM) L'appel depuis un article se fait par < fullcalendarXX >, alors id_fullcalendar=XX
+ ou par un modele CROCHET(# MODELE{fullcalendar}{id_fullcalendar=XX})CROCHET , alors id_fullcalendar=XX
+]
+
 <?php
 
-/* * * * * * * * * * * * * * * * * * * *
- * 
- *     - FullCalendar pour SPIP -
- * 
- * modele pour l'inclusion d'un fullcalendar
- * 
- * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 28/02/2011
- * 
- */
-
-	# Récupère l'id du calendrier
-	$id = '[(#ID|texte_script)]';
+	$id = '[(#ENV{id_fullcalendar,0}|texte_script)]';
 
 	# Quelle source de donnée ?
 	$sql = "SELECT type FROM spip_fullcalendar_main WHERE id_fullcalendar='".$id."'";
@@ -129,11 +121,11 @@
 			},
 
 			loading: function(bool) {
-			if (bool) {
-				$('#loading').show();
-			}else{
-				$('#loading').hide();
-			}
+				if (bool) {
+					$('#loading').show();
+				}else{
+					$('#loading').hide();
+				}
 			}
 			";
 
@@ -141,13 +133,14 @@
 			default:
 		}
 		
-		# Récupère les variable CFG 
+		# Récupère les variable Paramètres / CFG 
 		
-		$aspectRatio 				= "[(#CONFIG{fullcalendar/aspectRatio, '1.35'}|texte_script)]";
-		$useTheme 					= "[(#CONFIG{fullcalendar/useTheme, 'true'}|texte_script)]";
+		$aspectRatio 				= "[(#ENV{aspectRatio,#CONFIG{fullcalendar/aspectRatio,'1.35'}}|texte_script)]";
+		$useTheme 					= "[(#ENV{useTheme,#CONFIG{fullcalendar/useTheme,true}}|texte_script)]";
 		$useTheme					= ($useTheme=='true')? 'theme: true,' : '' ;
-		$weekends 					= "[(#CONFIG{fullcalendar/weekends, 'true'}|texte_script)]";
-		$defaultView 				= "[(#CONFIG{fullcalendar/defaultView, 'month'}|texte_script)]";
+		$weekends 					= "[(#ENV{weekends,#CONFIG{fullcalendar/weekends,true}}|texte_script)]";
+		$defaultView 				= "[(#ENV{defaultView,#CONFIG{fullcalendar/defaultView,month}}|texte_script)]";
+		
 		$headerLeft 				= "[(#CONFIG{fullcalendar/headerLeft, 'prev,next'}|texte_script)]";
 		$headerCenter 				= "[(#CONFIG{fullcalendar/headerCenter, 'title'}|texte_script)]";
 		$headerRight 				= "[(#CONFIG{fullcalendar/headerRight, 'month,agendaWeek,agendaDay'}|texte_script)]";
@@ -200,10 +193,9 @@
 				});
 		});
 		</script>
-		".$CSS."
-		<br/><br/><br/>
+		
 		<div id='calendar".$id."'></div>
-		<br/><br/><br/>
+		
 		";
 
 	}
