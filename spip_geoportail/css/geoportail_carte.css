@@ -24,6 +24,16 @@ span.gpFormSmall
 {	font-size:0.8em;
 }
 
+.gpControlGraphicScale,.gpControlInformation select
+{	font-size:9px;
+}
+.gpControlProjections, .gpControlCopyright,
+.gpControlMousePosition input
+{	font-size:10px;
+}
+.gpControlMousePosition
+{	font-size:11px;
+}
 /** */
 img.gpGeocodeMatchCodeMatchType
 {	position:static;

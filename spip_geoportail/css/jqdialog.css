@@ -25,10 +25,13 @@
 	background:transparent url("closebox.png") no-repeat 0 0;
 	width:28px;
 	height:25px;
-	float:right;
 	cursor:pointer; 
 	margin:0.5em; 
 	padding:0;
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:1;
 }
 #jqDialog .jqCloseButton:hover
 {	background-position:0 -25px;

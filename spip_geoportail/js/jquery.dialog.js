@@ -64,7 +64,7 @@
 		if (jQuery('#jqDialog').length != 0) jQuery('#jqDialog').remove();
 		var dialog = "<div class='"+param.classe+"' id=jqDialog "
 			+"style='position:absolute; z-index:2001; display:block; "+prop+"' >"
-			+"<div class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' style='position:absolute; z-index:1'></div>"
+			+"<div class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' ></div>"
 //			+"<input type=image class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' value='' />"
 			+(title ? "<p>"+title+"</p>" : "")
 			+"<div class=jqDialogBlock >";
