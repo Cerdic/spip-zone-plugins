@@ -11,10 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'caption_opacity' => 'Universal caption opacity',
 	'controlnav' => 'Show bullets',
-	'cfg_title_nivoslider' => 'NivoSlider configration',
-	'cfg_boite_nivoslider' => 'Nivo Slider plugin configuration.<br /><br />',
+	'cfg_title_nivoslider' => 'Nivo Slider',
+	'cfg_boite_nivoslider' => 'Nivo Slider plugin configuration.<br /><br />[Documentation->http://www.spip-contrib.net/Nivo-Slider-pour-SPIP]',
 	// D
-	'directionnav' => 'Show Next &amp; Prev arrows ',
+	'default' => 'Default article',
+	'directionnav' => 'Show Next &amp; Prev arrows',
 	'directionnavhide' => 'Only show on hover',
 	// E
 	'effect' => 'Transition effect',
