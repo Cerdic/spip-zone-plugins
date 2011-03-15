@@ -1,5 +1,11 @@
-#SET{taille_max_image,#CONFIG{manuelsite/largeur,300}|moins{20}}
-<a id="manuelsite_bouton_fermer" href="#" title="<:manuelsite:fermer_le_manuel:>">X</a>
+[(#REM) Largeur max image. Soit largeur définie dans la config, soit largeur #extra de prive/style_prive.html (180 moins 20 de marge) ]
+#SET{taille_max_image,180}
+[(#CONFIG{manuelsite/afficher_bord_gauche}|oui)
+	#SET{taille_max_image,#CONFIG{manuelsite/largeur,300}|moins{20}}
+]
+[(#ENV{bouton_fermer}|oui)
+	<a id="manuelsite_bouton_fermer" href="#" title="<:manuelsite:fermer_le_manuel:>">X</a>
+]
 
 <BOUCLE_contenu_article(ARTICLES){id_article}>
 	<div class="contenu-principal">
@@ -46,15 +52,16 @@
 					});
 			 });
 		 });
-
-		// pour decharger le contenu
-		$("#manuelsite_bouton_fermer").click(function() {
-			// en premier on le masque, plus joli
-			$('#manuelsite_contenu').hide(300,function(){
-				// en deuz on le vide...
-				$( "#manuelsite_contenu" ).empty();
+		[(#ENV{bouton_fermer}|oui)
+			// pour decharger le contenu
+			$("#manuelsite_bouton_fermer").click(function() {
+				// en premier on le masque, plus joli
+				$('#manuelsite_contenu').hide(300,function(){
+					// en deuz on le vide...
+					$( "#manuelsite_contenu" ).empty();
+				});
+				return false;
 			});
-			return false;
-		});
+		]
 	});
 </script>

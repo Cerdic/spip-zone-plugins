@@ -11,7 +11,7 @@ function exec_manuelsite_affiche(){
 	// Affichage de la page
 	//
 	if($id_article){
-		echo recuperer_fond('prive/inclure/manuelsite_article',array('id_article'=>$id_article));
+		echo recuperer_fond('prive/inclure/manuelsite_article',array('id_article'=>$id_article,'bouton_fermer'=>_request('bouton_fermer')));
 	}else{
 		echo _T('manuelsite:erreur_pas_darticle') ;
 	}

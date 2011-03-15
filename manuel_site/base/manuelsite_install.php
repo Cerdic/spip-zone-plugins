@@ -25,6 +25,7 @@ function manuelsite_upgrade($nom_meta_base_version,$version_cible){
 				'cacher_public' => '',
 				'intro' => '',
 				'email' => '',
+				'afficher_bord_gauche' => 'on',
 				'largeur' => '300',
 				'background_color' => '#D6DDE5'
 		), $config);

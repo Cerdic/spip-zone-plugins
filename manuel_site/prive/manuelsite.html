@@ -1,9 +1,9 @@
 <div id="manuelsite_divbouton" >
-   <a id="manuelsite_bouton" [href="?exec=manuelsite_affiche&amp;id_article=(#ID_ARTICLE)"] title="<:manuelsite:titre_manuel:>">
+   <a id="manuelsite_bouton" [href="?exec=manuelsite_affiche&amp;id_article=(#ID_ARTICLE)&amp;bouton_fermer=1"] title="<:manuelsite:titre_manuel:>">
       [(#CHEMIN{images/manuelsite-32.png}|balise_img{<:manuelsite:titre_manuel:>})] 
    </a>
 </div>
-<div id="manuelsite_contenu" style="background-color:#CONFIG{manuelsite/background_color};width:#CONFIG{manuelsite/largeur}px;">
+<div id="manuelsite_contenu" class="manuelsite_contenu_bord_gauche" style="background-color:#CONFIG{manuelsite/background_color};width:#CONFIG{manuelsite/largeur}px;">
  
 	[(#REM) le contenu de manuelsite_article.html sera charge ici ]
 
