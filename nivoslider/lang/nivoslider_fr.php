@@ -11,9 +11,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'caption_opacity' => 'Transparence du message',
 	'controlnav' => 'Afficher les puces',
-	'cfg_title_nivoslider' => 'Configuration de NivoSlider',
-	'cfg_boite_nivoslider' => 'Configuration du plugin Nivo Slider.<br /><br />',
+	'cfg_title_nivoslider' => 'Nivo Slider',
+	'cfg_boite_nivoslider' => 'Configuration du plugin Nivo Slider.<br /><br />[Documentation->http://www.spip-contrib.net/Nivo-Slider-pour-SPIP]',
 	// D
+	'default' => 'Diaporama par défaut',
 	'directionnav' => 'Utiliser les flèches',
 	'directionnavhide' => 'Cacher les fl&egrave;ches (afficher au survol)',
 	// E
