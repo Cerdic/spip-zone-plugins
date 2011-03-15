@@ -1,40 +1,46 @@
 <plugin>
 	<nom>
-		JQuery FullCalendar pour SPIP
+		FullCalendar
 	</nom>
 	<auteur>
-		[Grégory Pascal->http://www.spip-contrib.net/ngombe] basé sur [FullCalendar v1.4.10->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/]<br/>
-		<br/>
-		Distribu&#233; sous licence GNU/GPL
+		[Grégory Pascal->http://www.spip-contrib.net/ngombe], 
+		distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<version>
-		0.1
+		0.1.2
 	</version>
 	<etat>
 		test
 	</etat>
 	<description>
-		Affiche un calendrier dans l'espace public .<br/>
+		Gestion de calendriers pour l'espace public basée sur [FullCalendar v1.4.10->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/], <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a> et le plugin [jQuery UI->http://www.spip-contrib.net/jQuery-UI-pour-SPIP].
  		<h4>[Configuration->.?exec=cfg&amp;cfg=fullcalendar]</h4>
 	</description>
-	<prefix>fullcalendar</prefix>
-	<icon>img_pack/ir-22.png</icon>
+		<icon>img_pack/fullcalendar-32.png</icon>
 	<lien></lien>
+	<prefix>fullcalendar</prefix>
 	<install>base/fullcalendar_init.php</install>
+	<noisette>modeles/fullcalendar.html</noisette>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>fullcalendar_pipelines.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
-		<inclure>head.php</inclure>
+		<inclure>fullcalendar_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
-		<inclure>head.php</inclure>
+		<action>insert_head</action>
+		<inclure>fullcalendar_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='config_fullcalendar' parent='configuration'>
-	      <icone>img_pack/ir-22.png</icone>
+	      <icone>img_pack/fullcalendar-24.png</icone>
 	      <titre>FullCalendar</titre>
-	      <url>cfg</url>
-	      <args>cfg=fullcalendar</args>
+	      <url>fullcalendar_add</url>
 	</bouton>
+	<categorie>date</categorie>
+	<necessite id="jqueryui" version="[1.8.5;]" />
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id='cfg' version='[1.0.4;]' />
 </plugin>
