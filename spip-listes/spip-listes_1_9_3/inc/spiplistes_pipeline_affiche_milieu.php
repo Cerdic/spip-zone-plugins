@@ -32,9 +32,13 @@ function spiplistes_auteur_abonnement () {
 	$id_auteur = intval(_request('id_auteur'));
 	if($id_auteur > 0) {
 		
-		if($row = sql_fetsel("email,statut", "spip_auteurs", "id_auteur=".sql_quote($id_auteur)." LIMIT 1")) {
+		//if($row = sql_fetsel("email,statut", "spip_auteurs", "id_auteur=".sql_quote($id_auteur)." LIMIT 1")) {
+		if ($row = spiplistes_auteurs_auteur_select ('email,statut'
+													 , 'id_auteur='.sql_quote($id_auteur)
+													 )
+			) {
 			
-			if($row['statut'] == "5poubelle")
+			if($row['statut'] == '5poubelle')
 			{
 				// le compte est supprime'. Desabonner de tout
 				spiplistes_abonnements_auteur_desabonner($id_auteur);
@@ -45,11 +49,15 @@ function spiplistes_auteur_abonnement () {
 					$result = spiplistes_auteur_abonnement_details($id_auteur, $row['statut'], $auteur_email);
 				}
 				else {
-					$result =	""
-						. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png", true, "", _T('spiplistes:abonnements_aux_courriers'))
-						. "<p class='verdana2'>"
+					$result =	''
+						. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+											 , true
+											 , ''
+											 , _T('spiplistes:abonnements_aux_courriers')
+											 )
+						. '<p class="verdana2">'
 						. _T('spiplistes:Adresse_email_obligatoire')
-						. "</p>"
+						. '</p>'
 						. fin_cadre_relief(true)
 						;
 				}

@@ -9,6 +9,9 @@
 	// formulaire d'inscription
 	// necessite SPIP >= 2
 	
+	include_spip('inc/acces');
+	include_spip('inc/spiplistes_api');
+
 function formulaires_spip_listes_inscription_charger_dist ($id_liste='')
 {
 	$valeurs = array(
@@ -58,12 +61,12 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 		$erreurs['email'] = _T('spiplistes:cet_email_pas_valide');
 	}
 	
-	// Verifier si le mail est deja connu
-	if (email_valide(_request('email'))) {
-		if (sql_getfetsel('id_auteur','spip_auteurs',"id_auteur !='".intval($id_auteur)."' AND email = '$email'")) {
-			$erreurs['email'] = _T('spiplistes:cet_email_deja_enregistre');
-		}
-	}
+	//// Verifier si le mail est deja connu
+	//if (email_valide(_request('email'))) {
+	//	if (sql_getfetsel('id_auteur','spip_auteurs',"id_auteur !='".intval($id_auteur)."' AND email = '$email'")) {
+	//		$erreurs['email'] = _T('spiplistes:cet_email_deja_enregistre');
+	//	}
+	//}
 
 	if (count($erreurs)) {
 		$erreurs['message_erreur'] = _T('spiplistes:saisie_erreurs');
@@ -73,13 +76,10 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 }
 
 
-function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
+function formulaires_spip_listes_inscription_traiter_dist ($id_liste='') {
 	
 	// enregistre dans spip_auteurs, spip_auteurs_elargis, spip_auteurs_listes			
 			
-	include_spip('inc/acces');
-	include_spip('inc/spiplistes_api');
-
 	$val['email'] = _request('email');
 	$val['nom'] = _request('email');
 	$alea_actuel = creer_uniqid();
@@ -89,20 +89,47 @@ function formulaires_spip_listes_inscription_traiter_dist($id_liste=''){
 	$val['low_sec'] = '';
 	$val['statut'] = 'aconfirmer';
 	
-	$format = _request('format_abo') ;
+	$format = _request('format_abo');
 	$listes = _request('listes');
+
+	spiplistes_debug_log ('inscription auteur #'.$id_auteur.' email:'.$val['email']);
+
+	// si l'auteur existe deja, 
+	$auteur = spiplistes_auteurs_auteur_select('id_auteur,statut', 'email='.sql_quote($val['email']));
+	if ($auteur)
+	{
+		$id_auteur = $auteur['id_auteur'];
+		// reactiver le compte si necessaire
+		if ($auteur['statut'] == '5poubelle')
+		{
+			spiplistes_auteurs_auteur_statut_modifier ($id_auteur, 'aconfirmer');
+		}
+	}
+	else
+	{
+		// creer le compte abonne'
+		if ($id_auteur = spiplistes_auteurs_auteur_insertq ($val))
+		{
+			sql_insertq(
+					'spip_auteurs_elargis'
+				  , array('id_auteur'=>$id_auteur
+						 ,'spip_listes_format'=>$format
+						 )
+				  );
+		}
+	}
 	
-	$id_auteur = sql_insertq("spip_auteurs",$val);			
-	$ok = sql_insertq("spip_auteurs_elargis",array('id_auteur'=>$id_auteur,'spip_listes_format'=>$format));
-	
-	if($listes) {
+	if ($listes) {
 		foreach($listes as $liste) {
-			$ok = sql_insertq("spip_auteurs_listes",array('id_auteur'=>$id_auteur,'id_liste'=>$liste));
+			sql_insertq ('spip_auteurs_listes'
+					, array('id_auteur'=>$id_auteur
+							,'id_liste'=>$liste
+							)
+					);
 		}
 	}
 			
 	// envoyer mail de confirmation
-	
 	if (
 		spiplistes_envoyer_mail (
 			$val['email']

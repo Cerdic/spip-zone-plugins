@@ -623,7 +623,9 @@ function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur,
 
 	$result_html = $result_texte = "";
 	
-	if($auteur = sql_fetsel("*", 'spip_auteurs', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
+	//if($auteur = sql_fetsel("*", 'spip_auteurs', "id_auteur=".sql_quote($id_auteur), '','', 1)) {
+	if ($auteur = spiplistes_auteurs_auteur_select ('*', 'id_auteur='.sql_quote($id_auteur)))
+	{
 		$ii = 0;
 		$pattern = array();
 		$replace = array();
@@ -646,7 +648,7 @@ function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur,
 		$result_texte = preg_replace($pattern, $replace, $page_texte);
 		$result_texte = spiplistes_personnaliser_courrier_urls($result_texte, $url);
 		
-		spiplistes_debug_log($prefix_log."personnalisation du courrier pour id_auteur #$id_auteur");
+		spiplistes_debug_log(_SPIPLISTES_PREFIX_LOG.'personnalisation du courrier pour id_auteur #'.$id_auteur);
 	} 
 	return(array($result_html, $result_texte));
 }

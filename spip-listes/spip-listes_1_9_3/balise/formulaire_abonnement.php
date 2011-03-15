@@ -100,9 +100,11 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	{
 		if(email_valide($email_oubli))
 		{
-			$sql_result = spiplistes_auteurs_auteur_select('id_auteur,statut', "email=".sql_quote($email_oubli));
+			$row = spiplistes_auteurs_auteur_select('id_auteur,statut'
+													, 'email='.sql_quote($email_oubli)
+													);
 			
-			if($row = sql_fetch($sql_result))
+			if($row /* = sql_fetch($sql_result) */ )
 			{
 				if($row['statut'] == '5poubelle')
 				{
@@ -364,9 +366,10 @@ function spiplistes_formulaire_abonnement (
 		if($abonne['email'])
 		{
 			// si l'abonne existe deja mais pas d'action demandee, affiche formulaire complet
-			if($row = sql_fetch(
-				spiplistes_auteurs_auteur_select('id_auteur,login,nom,statut,lang', "email=".sql_quote($abonne['email']))
-				)
+			//if($row = sql_fetch(
+			if ($row = 
+				spiplistes_auteurs_auteur_select ('id_auteur,login,nom,statut,lang', 'email='.sql_quote($abonne['email']))
+				
 			) {
 				
 				$abonne['id_auteur'] = intval($row['id_auteur']);
@@ -568,6 +571,5 @@ function spiplistes_texte_inventaire_abos ($id_abonne, $type_abo, $nom_site_spip
  * @return string
  * */
 function spiplistes_patron_message () {
-	return('standard');
+	return ('standard');
 }
-?>

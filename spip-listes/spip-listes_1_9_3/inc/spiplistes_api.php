@@ -1123,10 +1123,16 @@ function spiplistes_auteurs_non_abonnes_compter ()
 	return($nb);
 }
 
-
-//CP-20080511
-function spiplistes_auteurs_auteur_select ($sql_select, $sql_where) {
-	return(sql_select($sql_select, 'spip_auteurs', $sql_where." LIMIT 1"));
+/**
+ * CP-20080511 20110315
+ * Renvoie la selection pour un seul auteur
+ * @return array OR false
+ */
+function spiplistes_auteurs_auteur_select ($select, $where = array())
+{
+	//$result = sql_select($select, 'spip_auteurs', $where, '', '', 1);
+	$auteur = sql_fetsel($select, 'spip_auteurs', $where, '', '', 1);
+	return($auteur);
 }
 
 //CP-20080511
@@ -1145,9 +1151,13 @@ function spiplistes_auteurs_auteur_delete ($sql_where) {
 	return($result);
 }
 
-//CP-20080511
+/**
+ * CP-20080511
+ * @return int OR boolean
+ */
 function spiplistes_auteurs_auteur_insertq ($champs_array) {
-	return(sql_insertq('spip_auteurs', $champs_array));
+	$id_auteur = sql_insertq('spip_auteurs', $champs_array);
+	return($id_auteur);
 }
 
 //CP-20090409
@@ -1167,6 +1177,20 @@ function spiplistes_auteurs_auteur_valider ($id_auteur, $as_redact = false) {
 	return($result);
 }
 
+/**
+ * CP-20110315
+ * @return bool
+ */
+function spiplistes_auteurs_auteur_statut_modifier ($id_auteur, $statut)
+{
+	spiplistes_debug_log ('modification status for auteur #'.$id_auteur);
+	$result = sql_update(
+					'spip_auteurs'
+					, array('statut' => sql_quote($statut))
+					, 'id_auteur='.$id_auteur.' LIMIT 1'
+				);
+	return ($result);
+}
 
 //CP-20080511
 // CP-20090111: utiliser l'api pour pouvoir envoyer par smtp si besoin
