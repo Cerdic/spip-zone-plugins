@@ -407,6 +407,26 @@ Le squelette <span style="font-weight: bold;">abonnement.html</span>
 illustre l'utilisation de cette derni&egrave;re balise.<br>
 Ce squelette est dans le r&eacute;pertoire du plugin.<br>
 <br>
+La balise <span style="font-weight: bold;">#FORMULAIRE_SPIP_LISTES_INSCRIPTION</span>
+renvoie une confirmation par mail laconique. <br>
+<br>
+Si vous souhaitez adapter une r&eacute;ponse de confirmation
+d'abonnement, utilisez plut&ocirc;t la balise&nbsp; <span
+ style="font-weight: bold;">#FORMULAIRE_ABONNEMENT</span> apr&egrave;s
+avoir adapt&eacute; le patron <span style="font-weight: bold;">patrons/messages_abo/standard.html</span>
+et <span style="font-weight: bold;">standard_text.html</span>
+(recopiez ces deux patrons dans votre dossier de squelettes en
+respectant la hi&eacute;rarchie).<br>
+<br>
+Vous pouvez &eacute;galement adapter le squelette <span
+ style="font-weight: bold;">abonnement.html</span>. Toujours dans le
+m&ecirc;me principe : recopiez ce squelette dans votre
+r&eacute;pertoire de squelettes, adaptez-le &agrave; vos besoins et
+pour que vos visiteurs acc&eacute;dent &agrave; cette nouvelle page,
+ajoutez un lien dans les autres squelettes, vos menus, etc. Ce lien
+doit &ecirc;tre du style <span style="font-weight: bold;">http://votre_site/?page=abonnement</span><br>
+<br>
+<span style="font-weight: bold;"></span>
 <h2><a name="mozTocId342886" class="mozTocH2"></a>Abonnement par la
 fiche auteur</h2>
 <p>Pour abonner un auteur &agrave; une ou plusieurs listes, cliquez sur
@@ -418,8 +438,8 @@ appara&icirc;tre sa fiche. En bas de cette fiche se trouve la
 bo&icirc;te <strong>Abonnemens aux courriers</strong> :</p>
 <p><img alt="Boite des
         abonnements"
- src="../img_docs/2008-01-16_062732.png" border="0" height="63"
- width="510"></p>
+ src="../img_docs/2008-01-16_062732.png" height="63" width="510"
+ border="0"></p>
 <p>Cliquez sur le petit triangle &agrave; gauche du titre de cette
 bo&icirc;te pour d&eacute;plier cette bo&icirc;te et laisser
 appara&icirc;tre la liste des listes de diffusion publiques
@@ -537,6 +557,7 @@ dans le r&eacute;pertoire des patrons. </p>
 
 
 
+
       </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Placez
 dans
@@ -546,13 +567,15 @@ r&eacute;pertoire
 les
 principaux
 patrons,
-ceux du corps de votre
+ceux
+du corps de votre
 message </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
 patron choisi sera appliqu&eacute; &agrave; la liste de diffusion. </td>
     </tr>
     <tr>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/lien_en_tete_courriers/
+
 
 
 
@@ -568,7 +591,8 @@ de
 messages.
 En
 g&eacute;n&eacute;ral,
-un patron plac&eacute; ici
+un
+patron plac&eacute; ici
 contient un lien sur le message permettant au lecteur de consulter le
 message directement sur le site. </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;"
@@ -584,12 +608,14 @@ sortants au moment de l&#8217;envoi. </td>
 
 
 
+
       </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
 tampon des courriers est appliqu&eacute; en fin de message. </td>
     </tr>
     <tr>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/pieds_courriers/
+
 
 
 
@@ -684,6 +710,7 @@ de
 
 
 
+
     <strong>@spiplistes_name@</strong> sur la zone</a> ;</li>
   <li><a href="http://www.spip-contrib.net/SPIP-Listes">La page
 consacr&eacute;e &agrave; SPIP-Listes sur SPIP-contrib</a> ;</li>
@@ -696,9 +723,9 @@ courrier
 sur
 
 
+
     <strong>@spiplistes_name@</strong> sur SPIP-contrib</a> ;</li>
   <li><a href="http://www.spip-contrib.net/Comment-ca-marche"><strong>@spiplistes_name@</strong>,
-
 comment
 &ccedil;a
 marche
