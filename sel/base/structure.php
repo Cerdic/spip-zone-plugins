@@ -71,7 +71,7 @@ où id_traducteur = 1 autre champ de la table auteur, pointant vers un id_auteur 
 		"id_sel"  =>  "BIGINT(21) DEFAULT NULL",
 		"num_adhesion_sel"   => "VARCHAR(10) DEFAULT NULL",
 		"etat_compte" => "VARCHAR(20) DEFAULT NULL", // "actif" ou "inactif"
-		"etat_compte_depuis"   => "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", //= format datetime 2011-03-14 22:20:33
+		"etat_compte_depuis"   => "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'", //= format datetime 2011-03-14 22:20:33
 		"adresse1"  => "VARCHAR(70) NOT NULL DEFAULT ''",
 		"adresse2" => "VARCHAR(70) DEFAULT NULL",
 		"code_postal" => "VARCHAR(15) NOT NULL DEFAULT ''",
@@ -143,7 +143,7 @@ où id_traducteur = 1 autre champ de la table auteur, pointant vers un id_auteur 
 		"offreur_ext"  => "VARCHAR(255) DEFAULT NULL",
 		"offreur_sel_ext"   => "VARCHAR(255) DEFAULT NULL",
 		"titre" => "VARCHAR(150) NOT NULL DEFAULT ''",
-		"date_echange"  => "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP", // = format datetime 2011-03-14 22:20:33
+		"date_echange"  => "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'", // = format datetime 2011-03-14 22:20:33
 		"saisi_par" => "VARCHAR(150) NOT NULL DEFAULT 'offreur'", // 'offreur', 'demandeur' ou 'automatique'
 		"date_saisie" => "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'", //  = format timestamp 2011-03-14 22:20:33
 		"nature"   => "VARCHAR(20) NOT NULL DEFAULT 'echange'",  // 'echange', 'cotizunite', 'cloturecompte'
@@ -151,7 +151,7 @@ où id_traducteur = 1 autre champ de la table auteur, pointant vers un id_auteur 
 		"demandeur_ext"  =>  "VARCHAR(255) DEFAULT NULL",
 		"demandeur_sel_ext" => "VARCHAR(255) DEFAULT NULL",
 		"valeur" => "INT(10) NOT NULL DEFAULT '0'",
-		"date_validation"  => "DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00'",
+		"date_validation"  => "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",
 		"valide_par" => "BIGINT(21) DEFAULT NULL", // vers id_auteur
 		"commentaires"  => "TEXT DEFAULT NULL"
 
