@@ -133,6 +133,9 @@ function analyser_backend_spip2spip($rss){
 	$rss = str_replace("&lt;multi&gt;",  "@@@MULTI@@@", $rss);
 	$rss = str_replace("&lt;/multi&gt;",  "@@@MULTJ@@@", $rss);
 	
+	// lien interne  <- (pas echappe)
+	$rss = str_replace("&lt;-",  "@@@LIEN_INV@@@", $rss);
+	
 	// version du flux
 	$version_flux = 0;
 	if (preg_match_all(',<spip2spip version="(.*?)">,Uims',$rss,$r, PREG_SET_ORDER)) 
@@ -300,7 +303,8 @@ function analyser_backend_spip2spip($rss){
 				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
       if (!defined("_SPIP2SPIP_IMPORT_HTML")) $data[$var] = trim(textebrut($data[$var]));  // protection import HTML 
 			$data[$var] = str_replace("@@@MULTI@@@", "<multi>", $data[$var]);
-	    $data[$var] = str_replace("@@@MULTJ@@@", "</multi>", $data[$var]);	
+	    $data[$var] = str_replace("@@@MULTJ@@@", "</multi>", $data[$var]);
+      $data[$var] = str_replace("@@@LIEN_INV@@@", "<-", $data[$var]);	
 		}
 
 		//$data['item'] = $item;  //utile pour spip2spip ?		
