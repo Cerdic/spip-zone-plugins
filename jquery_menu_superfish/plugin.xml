@@ -1,0 +1,25 @@
+<plugin>
+	<nom>Menu jQuery Superfish</nom>
+	<auteur>Yffic</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description>
+		Le plugin Menu jQuery Superfish est une adaptation pour spip du plugin jQuery : http://users.tpg.com.au/j_birch/plugins/superfish/
+	</description>
+	<prefix>jquerysuperfish</prefix>
+	<install>base/jquerysuperfish_install.php</install>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>jquerysuperfish_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>jquerysuperfish_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="cfg" version="[1.10;]" />
+	<necessite id="saisies" version="[1.1;]" />
+	<categorie>navigation</categorie>
+</plugin>

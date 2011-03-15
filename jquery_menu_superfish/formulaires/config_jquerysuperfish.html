@@ -1,0 +1,125 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=jquerysuperfish -->
+[(#SET{saisies,
+   #ARRAY{
+      0, #ARRAY{
+         saisie, fieldset,
+         options, #ARRAY{
+            nom, fmenu_hori,
+            label, <:jquerysuperfish:legend_menu{type=horizontal}:>
+         },
+         saisies, #ARRAY{
+           	0, #ARRAY{
+               saisie, oui_non,
+               options, #ARRAY{
+                  nom, menu_hori,
+                  label, <:jquerysuperfish:label_menu{type=horizontal}:>,
+                  explication, <:jquerysuperfish:explication_menu{type=horizontal}:>,
+                  obligatoire, oui,
+                  defaut, 
+               }
+            },
+            1, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, classe_hori,
+                  label, <:jquerysuperfish:label_classe:>,
+                  obligatoire, oui,
+                  explication, <:jquerysuperfish:explication_classe:>,
+                  defaut, sf_horizontal,
+                  afficher_si, '@menu_hori@ == "on"' 
+               }
+            },
+            2, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, animation_hori,
+                  label, <:jquerysuperfish:label_animation:>,
+                  explication, <:jquerysuperfish:explication_animation:>,
+                  defaut, "opacity:'show',height:'show'",
+                  afficher_si, '@menu_hori@ == "on"' 
+               }
+            },
+            3, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, delai_hori,
+                  label, <:jquerysuperfish:label_delai:>,
+                  explication, <:jquerysuperfish:explication_delai:>,
+                  defaut, 200,
+                  afficher_si, '@menu_hori@ == "on"' 
+               }
+            }
+         }
+      },
+      1, #ARRAY{
+         saisie, fieldset,
+         options, #ARRAY{
+            nom, fmenu_vert,
+            label, <:jquerysuperfish:legend_menu{type=vertical}:>
+         },
+         saisies, #ARRAY{
+           	0, #ARRAY{
+               saisie, oui_non,
+               options, #ARRAY{
+                  nom, menu_vert,
+                  label, <:jquerysuperfish:label_menu{type=vertical}:>,
+                  explication, <:jquerysuperfish:explication_menu{type=vertical}:>,
+                  obligatoire, oui,
+                  defaut, 
+               }
+            },
+            1, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, classe_vert,
+                  label, <:jquerysuperfish:label_classe:>,
+                  obligatoire, oui,
+                  explication, <:jquerysuperfish:explication_classe:>,
+                  defaut, sf_vertical,
+                  afficher_si, '@menu_vert@ == "on"' 
+               }
+            },
+            2, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, animation_vert,
+                  label, <:jquerysuperfish:label_animation:>,
+                  explication, <:jquerysuperfish:explication_animation:>,
+                  defaut, "height:'show'",
+                  afficher_si, '@menu_vert@ == "on"' 
+               }
+            },
+            3, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, delai_vert,
+                  label, <:jquerysuperfish:label_delai:>,
+                  explication, <:jquerysuperfish:explication_delai:>,
+                  defaut, 200,
+                  afficher_si, '@menu_vert@ == "on"' 
+               }
+            }
+         }
+      }
+   }
+})]
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_jquerysuperfish">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   <form name="formulaire_config_jquerysuperfish" method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <ul>
+      	#GENERER_SAISIES{#GET{saisies}}
+      </ul>
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>
