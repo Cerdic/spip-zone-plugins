@@ -140,11 +140,14 @@
 		
 			si une seule liste dispo, precocher la case d'abonnement
 			
-			-->]<label lang='#LANG'>
+			-->][<!--(#REM)
+				La selection des listes desirees est
+				accessible a la confirmation recue par mail
+				<label lang='#LANG'>
 				<input type="checkbox" name="list&#91;&#93;" checked="checked" value="#ID_LISTE" />
-				<span class='liste-titre'>#TITRE</span>
+				-->]<span class='liste-titre'>#TITRE</span>
 				<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
-				</label>
+				[<!--(#REM)</label>-->]
 			</li>
 			][<!--(#REM)
 			
@@ -153,11 +156,14 @@
 			-->]<BOUCLE_inscription(AUTEURS){tous}{id_liste}{id_auteur=#ENV{id_auteur}}></BOUCLE_inscription>
 			[(#TOTAL_BOUCLE|!={1}|?{' ',''})
 			<li>
+				[<!--(#REM)
+				La selection des listes desirees est
+				accessible a la confirmation recue par mail
 						<label lang='#LANG'>
 							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
-							<span class='liste-titre'>#TITRE</span>
+							-->]<span class='liste-titre'>#TITRE</span>
 							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
-						</label>
+						[<!--(#REM)</label>-->]
 					</li>
 			]
 	</BOUCLE_listes>
