@@ -30,20 +30,16 @@ function saisies_affichage_final($flux){
 	return $flux;
 }
 
-// Déclaration du pipeline
+// Déclaration des pipelines
 function saisies_saisies_autonomes($flux) { return $flux; }
+function saisies_formulaire_saisies($flux) { return $flux; }
 
 // Déclarer automatiquement les champs d'un CVT si on les trouve dans un tableau de saisies et s'ils ne sont pas déjà déclarés
 function saisies_formulaire_charger($flux){
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
-	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$flux['args']['form'], true)
-		and $saisies = call_user_func_array($fonction_saisies, $flux['args']['args'])
-		and is_array($saisies)
-	){
-		include_spip('inc/saisies');
-		
+	if (include_spip('inc/saisies') and $saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'])){
 		// On ajoute au contexte les champs à déclarer
-		$contexte = saisies_charger_champs($saisies);
+		$contexte = saisies_lister_valeurs_defaut($saisies);
 		$flux['data'] = array_merge($contexte, $flux['data']);
 		
 		// On ajoute le tableau complet des saisies
@@ -71,12 +67,7 @@ function saisies_styliser($flux){
 // Ajouter les vérifications déclarées dans la fonction "saisies" du CVT
 function saisies_formulaire_verifier($flux){
 	// Il faut que la fonction existe et qu'elle retourne bien un tableau
-	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$flux['args']['form'], true)
-		and $saisies = call_user_func_array($fonction_saisies, $flux['args']['args'])
-		and is_array($saisies)
-	){
-		include_spip('inc/saisies');
-		
+	if (include_spip('inc/saisies') and $saisies = saisies_chercher_formulaire($flux['args']['form'], $flux['args']['args'])){
 		// On ajoute au contexte les champs à déclarer
 		$erreurs = saisies_verifier($saisies);
 		$flux['data'] = array_merge($erreurs, $flux['data']);

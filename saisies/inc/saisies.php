@@ -130,6 +130,31 @@ function saisies_charger_champs($contenu) {
 }
 
 /*
+ * Cherche la description des saisies d'un formulaire CVT dont on donne le nom
+ *
+ * @param string $form Nom du formulaire dont on cherche les saisies
+ * @return array Retourne les saisies du formulaire sinon false
+ */
+function saisies_chercher_formulaire($form, $args){
+	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$form, true)
+		and $saisies = call_user_func_array($fonction_saisies, $args)
+		and is_array($saisies)
+	){
+		// On passe les saisies dans un pipeline normé comme pour CVT
+		$saisies = pipeline(
+			'formulaire_saisies',
+			array(
+				'args' => array('form' => $form, 'args' => $args),
+				'data' => $saisies
+			)
+		);
+		return $saisies;
+	}
+	else
+		return false;
+}
+
+/*
  * Cherche une saisie par son nom ou son chemin et renvoie soit la saisie, soit son chemin
  *
  * @param array $saisies Un tableau décrivant les saisies
