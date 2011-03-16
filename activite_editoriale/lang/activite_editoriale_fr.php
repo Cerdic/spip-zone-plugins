@@ -25,8 +25,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'gestionnaire'     					=> 'Vous êtes identifié comme un gestionnaire de la rubrique',
 
 	//I
-	'identifiants' 						=> 'Identifiants des auteurs &agrave; alerter',
-	'identifiants_precisions' 			=> '(id_auteur s&eacute;par&eacute;s par des ",")',
+	'identifiants' 						=> 'Identifiants ou email  des auteurs &agrave; alerter',
+	'identifiants_precisions' 			=> '(s&eacute;par&eacute;s par des ",")',
 	'icone_statistics'					=> 'Voir les statistiques de la rubrique',
 	'icone_mots_cles'					=> 'Voir le détail',
 	'id_article'						=> 'ID de l\'article',

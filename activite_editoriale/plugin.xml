@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Activit&eacute; &eacute;ditoriale</nom>
-	<auteur>Stéphanie Caron de [Clever Age->http://www.clever-age.com/] , Maïeul ROUQUETTE (amélioration) et Thierry Cazalet [Phracktale->http://www.phracktale.com/]</auteur>
+	<auteur>Stéphanie Caron de [Clever Age->http://www.clever-age.com/] , [Maïeul ROUQUETTE->http://www.maieul.net] (amélioration) et Thierry Cazalet [Phracktale->http://www.phracktale.com/]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.3</version>
+	<version>0.4</version>
 	<version_base>0.1</version_base>
 	<description>Ce plugin a pour objectif de compl&eacute;ter les fonctionnalit&eacute;s de suivi de l'activit&eacute; &eacute;ditoriale de SPIP.
 
@@ -46,6 +46,7 @@ Envisag&eacute; dans l'avenir :
 	</bouton>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version='[2.0.0;]' />
+	
 	<necessite id='spip_bonux' version='[1.9.1;]' />
 	<necessite id='cfg' version='[1.9.1;]' />
 </plugin>

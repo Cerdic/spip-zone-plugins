@@ -62,6 +62,7 @@ function activite_tester_date_modif_rubrique(){
 }
 
 function activite_editoriale_envoyer_mail($list){
+	
     $envoyer_mail = charger_fonction('envoyer_mail', 'inc');
     $subject = _T('activite_editoriale:rubrique_doit_maj');
     include_spip('activite_editoriale_fonctions');
@@ -69,8 +70,10 @@ function activite_editoriale_envoyer_mail($list){
     $body = _T('activite_editoriale:rubrique_pas_maj',array('titre'=>$list['titre'],'jours'=>age_rubrique($list['maj'])))."\n\n";
     $body = $body._T('activite_editoriale:gestionnaire')."\n\n";
     $body = $body.$url;
+   
     if ($auteurLists = sql_select("*", "spip_auteurs", "id_auteur in (".$list['extras_identifiants'].")")) {
         while($auteurs = sql_fetch($auteurLists)) {
+        var_dump($auteurs);
             $to = $auteurs['email'];
             if ($envoyer_mail($to, $subject, $body)) {
                 spip_log("Message envoyé à".$to, "activite_editoriale");
@@ -79,7 +82,26 @@ function activite_editoriale_envoyer_mail($list){
             }
         }
     }
+	$to = '';
+	$verifier = charger_fonction('verifier','inc');
+    foreach (explode(',',activite_editoriale_emails($list['extras_identifiants'])) as $to){
+    	
+    	if ($to!=''){
+    		
+	    	if ($envoyer_mail($to, $subject, $body)) {
+	                spip_log("Message envoyé à".$to, "activite_editoriale");
+	            } else {
+	                spip_log("Message n'a pu être envoyé à ".$to, "activite_editoriale");
+	            }
+	    	}
+    }
 
 
+}
+
+function activite_editoriale_emails($champ){
+	$champ = ','.str_replace(' ','',$champ).',';
+	$champ = preg_replace('#,[0-9]*,#',',',$champ);
+	return $champ;
 }
 ?>
