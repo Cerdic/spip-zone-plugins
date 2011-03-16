@@ -1,4 +1,5 @@
 <?php
+
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
@@ -9,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_modifier_comptes() {
@@ -17,10 +17,20 @@ function action_modifier_comptes() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_compte=$securiser_action();
 
-	$date= _request('date');
-	$imputation= _request('imputation');
+	action_modifier_comptes_args(_request('date'),
+		 _request('imputation'),
+		 _request('montant'),
+		 _request('recette'),
+		 _request('depense'),
+		 _request('justification'),
+		 _request('journal'),
+		 _request('id_journal'));
+}
+
+function action_modifier_comptes_args($date, $imputation, $montant_req, $recette_req, $depense_req, $justification, $journal, $id_journal)
+{
 	if ($GLOBALS['association_metas']['comptes_stricts']=="on") {
-		if ($montant_req = _request('montant')){
+		if ($montant_req){
 			$montant = floatval(preg_replace("/,/",".",$montant_req));
 		} else $montant = 0;
 		$r = sql_fetsel('direction', 'spip_asso_plan', "code=$imputation");
@@ -37,16 +47,13 @@ function action_modifier_comptes() {
 	}
 	else
 	{
-		if ($recette_req = _request('recette')){
+		if ($recette_req){
 			$recette = floatval(preg_replace("/,/",".",$recette_req));
 		} else $recette = 0;
-		if ($depense_req = _request('depense')){
+		if ($depense_req){
 			$depense = floatval(preg_replace("/,/",".",$depense_req));
 		} else $depense = 0;
 	}
-	$justification= _request('justification');
-	$journal= _request('journal');
-	$id_journal= _request('id_journal');
 
 	/* on verifie les valeurs de recette et depense: positif et pas d'entree recette et depense simultanees */
 	if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0))
