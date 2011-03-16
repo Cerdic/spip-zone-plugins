@@ -3,14 +3,13 @@
 	<auteur>[Grégory Pascal->http://www.spip-contrib.net/ngombe], distribu&#233; sous licence GNU/GPL</auteur>
 	<version>0.1.0</version>
 	<etat>test</etat>
-	<description><a href="http://nivo.dev7studios.com/" title="dev7studio">Diaporama "Nivo Slider" </a> param&#233;trable via <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a> pour Spip.</description>
+	<description><multi>
+	[fr] Ajoute {{&lt;nivosliderXX&gt;}} et {{&lt;nivoslider_doc&gt;}} pour cr&#233;er un diaporama <a href="http://nivo.dev7studios.com/" title="dev7studio">"Nivo Slider" </a> param&#233;trable via <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+	[en] Add {{&lt;nivosliderXX&gt;}} and {{&lt;nivoslider_doc&gt;}} to create a <a href="http://nivo.dev7studios.com/" title="dev7studio">"Nivo Slider" </a> using <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+	</multi></description>
 	<lien>http://www.spip-contrib.net/Nivo-Slider-pour-SPIP</lien>
 		<icon>img_pack/nivoslider-32.png</icon>
 	<prefix>nivoslider</prefix>
-	<pipeline>
-		<nom>insert_head_css</nom>
-		<inclure>nivoslider_pipelines.php</inclure>
-	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>nivoslider_pipelines.php</inclure>
@@ -19,5 +18,5 @@
 	<noisette>modeles/nivoslider_doc.html</noisette>
 	<categorie>multimedia</categorie>
 	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id='cfg' version='[1.0.0;]' />
+	<necessite id='cfg' version='[1.16.0;]' />
 </plugin>

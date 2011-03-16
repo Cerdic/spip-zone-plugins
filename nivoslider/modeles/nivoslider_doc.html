@@ -21,7 +21,7 @@
 <B_doc>
 <br/><br/>
 <div id='slider' style="[width:(#GET{width})px;][height:(#GET{height})px]">
-	<div id="slider_#GET{id_rand}" class="nivoSlider" style="[width:(#GET{width}px;][height:(#GET{height})px]">
+	<div id="slider_#GET{id_rand}" class="nivoSlider" style="[width:(#GET{width})px;][height:(#GET{height})px]">
 	<BOUCLE_doc(DOCUMENTS){extension IN png,jpg,gif}{id_document==^((#ENV{id}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
 		[(#FICHIER|image_recadre{#CONFIG{nivoslider/width,500},#CONFIG{nivoslider/height,300}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]})]
 	</BOUCLE_doc>
