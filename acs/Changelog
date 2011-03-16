@@ -1,5 +1,14 @@
-Suivi des principales révisions - Version ACS actuelle : 0.7.2
+Suivi des principales révisions - Version ACS actuelle : 0.8.0
 
+ACS version 0.8
+- nouvelle balise #ACS_AUTORISE{};
+- nouveau parametre de composant : preview_type (inline ou iframe=valeur par defaut);
+
+Modele Cat pour ACS vesion 0.8 :
+- nouveaux composants Carte et Keynav;
+- gestion amelioree des droits d'acces a un article par mot-cle;
+
+_______________________________________
 ACS version 0.7
  - amelioration du schema de page
  - gestion des librairies javascript requises par les composants : chaque composant déclare les librairies dont il a besoin et celles-ci ne sont incluses qu'une fois.

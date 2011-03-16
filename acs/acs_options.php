@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2010
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 /**
  * \file acs_options.php

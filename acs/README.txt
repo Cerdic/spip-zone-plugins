@@ -6,7 +6,7 @@ Version : 0.6
 Documentation : http:// acs.geomaticien.org
 Licence: cf LICENCES.txt
 ________________________________________________________________________________
-Dernière mise à jour de ce document le: 21-06-2010
+Dernière mise à jour de ce document le: 21-06-2011
 Par: Daniel FAIVRE
 ________________________________________________________________________________
 

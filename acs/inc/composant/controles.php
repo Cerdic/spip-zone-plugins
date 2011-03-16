@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2010
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 // Requis pour fonction typo() utilisee dans ctlKey() :
@@ -123,7 +123,7 @@ function ctlFontFamily($composant, $nic, $nom, $style='sans-serif', $param, $wid
 // Choix de valeur, avec + / - (todo)
 function ctlNombre($composant, $nic, $nom, $nombre=0, $param, $wid) {
   $var =  nomvar($composant, $nic, $nom);
-	return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" name="'.$var.'_'.$wid.'" size="8" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table></div>';
+	return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$var.'_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td><td><input type="text" id="'.$var.'" name="'.$var.'_'.$wid.'" size="8" class="forml" value="'.$nombre.'" style="text-align:'.$GLOBALS['spip_lang_right'].'" /></td></tr></table></div>';
 }
 
 // Saisie d'un texte
@@ -191,6 +191,7 @@ function ctlKey($composant, $nic, $nom, $value, $param, $wid) {
   if ($param['label'] != 'non')
     $r .= '<td><label for "'.$var.'Key_'.$wid.'" title="'.$var.'"  class="label">'._TC($composant, $nom).'</label>&nbsp;</td>';
 	$r .= '<td><select id="select_'.$var.'Group_'.$wid.'" name="'.$var.'Group_'.$wid.'" class="forml" onchange="submit()">';
+	$r .= '<option value=""'.($vid_group =='' ? ' selected' : '').'></option>';	
 	$groups_query = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");	
 	while ($row_groupes = sql_fetch($groups_query)) {
 		$id_groupe = $row_groupes['id_groupe'];

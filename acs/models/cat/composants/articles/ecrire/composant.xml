@@ -2,8 +2,8 @@
   <!-- Nom du composant -->
   <nom>Articles</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.7.2</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.0</version>
 	<necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -35,7 +35,7 @@
     <nom>Pagination</nom>
     <type>nombre</type>
     <valeur>10</valeur>
-  </variable>  
+  </variable>
   <variable>
     <nom>Dates</nom>
     <type>choix</type>
@@ -45,6 +45,13 @@
   </variable>
   <variable>
     <nom>Aut</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>ChapoGras</nom>
     <type>choix</type>
     <option>oui</option>
     <option>non</option>

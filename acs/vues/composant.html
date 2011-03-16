@@ -1,7 +1,15 @@
-#CACHE{0}
-<?php // Widget's style is not included yet in above css if just activated
+[(#CACHE{0})][(#REM)
+
+Vue d'un composant. 
+
+]<?php // Widget's style is not included yet in above css if just activated
+$styles = '';
 $fond='#ENV{c}.css';
-if ($fond=@recuperer_fond($fond,array('var_mode' => 'recalcul'))) echo '<style>'.$fond.'</style>';
+if (find_in_path($fond.'.html') && ($fond=@recuperer_fond($fond,array('var_mode' => 'recalcul'))))
+  $styles .= $fond;
 $fond='#ENV{c}_instances.css';
-if ($fond=@recuperer_fond($fond,array('nic' => '#NIC', 'var_mode' => 'recalcul'))) echo '<style>'.$fond.'</style>';
+if (find_in_path($fond.'.html') && ($fond=@recuperer_fond($fond,array('nic' => '#NIC', 'var_mode' => 'recalcul'))))
+  $styles .= $fond;
+if($styles != '')
+  echo '<style>'.$styles.'</style>';
 ?><INCLURE {fond=#ENV{c}}{nic=#NIC}{env}>

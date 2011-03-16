@@ -3,7 +3,7 @@
   <nom>Keynav</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
-  <version>0.7.2</version>
+  <version>0.8.0</version>
   <necessite id='acs' version='[0.7.2;]' />
   
   <param>
@@ -12,23 +12,40 @@
   </param>
   
   <variable>
-    <nom>Key1</nom>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>  
+  
+  <variable>
+    <nom>1</nom>
     <type>key</type>
   </variable>  
   <variable>
-    <nom>Key2</nom>
+    <nom>2</nom>
     <type>key</type>
   </variable>
   <variable>
-    <nom>Key3</nom>
+    <nom>3</nom>
     <type>key</type>
   </variable>
   <variable>
-    <nom>Key4</nom>
+    <nom>4</nom>
     <type>key</type>
   </variable>
   <variable>
-    <nom>Key5</nom>
+    <nom>5</nom>
+    <type>key</type>
+  </variable>
+  <variable>
+    <nom>6</nom>
+    <type>key</type>
+  </variable>
+  <variable>
+    <nom>7</nom>
+    <type>key</type>
+  </variable>
+  <variable>
+    <nom>8</nom>
     <type>key</type>
   </variable>
 </composant>

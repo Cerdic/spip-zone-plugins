@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2010
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -334,7 +334,19 @@ class AdminComposant {
 		$r .= '<div id="'.$varconf.'" '.(isset($this->display) ? 'style="'.$this->display.'"' : '').' class="c_config">';
 		if (($mode != 'controleur') && isset($this->preview) && ($this->preview != 'non')  && ($this->preview != 'no') && ($this->preview != 'false')) {
 			$url = '../?page=wrap&c=composants/'.$this->class.'/'.$this->class.($this->nic ? '&amp;nic='.$this->nic : '').'&v='.$GLOBALS['meta']['acsDerniereModif'].'&var_mode=recalcul';
-			$r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend><iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0; background:'.$GLOBALS['meta']['acsFondColor'].'" src="'.$url.'"></iframe></fieldset>';
+    switch($this->preview_type) {
+      case 'inline':
+         require_once _DIR_ACS.'balise/acs_balises.php';
+		     $preview = '<link rel="stylesheet" href="../spip.php?page=habillage.css" type="text/css" media="projection, screen, tv" /><div id="'.$this->fullname.'" style="border:0;overflow: auto; width: 100%; height: '.(is_numeric($this->preview) ? $this->preview : 80).'px">'.recuperer_fond('vues/composant', array(
+		     'c' => 'composants/'.$this->class.'/'.$this->class,
+		     'nic' => $this->nic,
+		     'lang' => $GLOBALS['spip_lang']
+		     )).'</div>';
+         break;
+			 default:
+         $preview = '<iframe id="'.$this->fullname.'" width="100%" height="'.(is_numeric($this->preview) ? $this->preview : 80).'px" frameborder="0" style="border:0; background:'.$GLOBALS['meta']['acsFondColor'].'" src="'.$url.'"></iframe>';
+    }
+			$r .= '<fieldset class="apercu"><legend><a href="javascript:void(0)" onclick=" findObj(\''.$this->fullname.'\').src=\''.$url.'\';return false;" title="'._T('admin_recalculer').'">'._T('previsualisation').'</a></legend>'.$preview.'</fieldset>';
 		}
 		// Affiche les variables paramétrables du composant:
 		$controls = array();

@@ -5,10 +5,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Articles',
 'description' => 'Articles and lists for rubrics, Une, abstract, sitemap, ...',
-'info' => 'Colors 2 to 6 are for rubrics level 2 to 6 in sitemap
+'info' => 'Appearance and behaviour depends on the page in which Articles component is inserted.
+<br /><br />
+Colors 2 to 6 are for rubrics level 2 to 6 in sitemap
  <br /><br />
-Access control limit access to articles tagged with keyword _ide, _aut, or _adm to registered members, authors, and administrors.
-Summary embed a summary from subtitles.',
+Access control limit access to articles tagged with keyword _ide, _aut, _adm, or _acs to registered members, authors, administrators, and ACS administrors.',
 
 'Bord' => 'Border top',
 'MargeBas' => 'Margin bottom',
@@ -17,7 +18,7 @@ Summary embed a summary from subtitles.',
 
 'Dates' => 'Dates',
 'Aut' => 'Authors',
-'Sommaire' => 'Summary',
+'ChapoGras' => 'Set the header\'s font weight to bold',
 'Stats' => 'Visits',
 'Lock' => 'Access control',
 'Pagination' => 'Articles per page',

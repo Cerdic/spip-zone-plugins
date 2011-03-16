@@ -5,14 +5,16 @@
   [border-color: (#VAR{acsRubnavBord/Color});]
   [background: (#VAR{acsRubnavFond});]
   position: static;
-  z-index: 9999;
-  [(#MODELE{c_css_shadow}{c=Rubnav})]
+  z-index: 9999;[
+  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond}{v=sauf_bas})][
+  (#MODELE{c_css_shadow}{c=Rubnav})]
 }
 
 .cRubnav .bloc-title {
   text-align : center;
   font-weight: bold;
-  [background: (#VAR{acsRubnavTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsRubnavTitreFondImage}})") repeat top left];]
+  [background: (#VAR{acsRubnavTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsRubnavTitreFondImage}})") repeat top left];][
+  (#MODELE{c_css_border-radius}{c=Rubnav}{var=BordRond}{v=sauf_bas})]
 }
 
 .cRubnav .menu-item {

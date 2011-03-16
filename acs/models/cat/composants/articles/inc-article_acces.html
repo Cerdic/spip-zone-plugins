@@ -4,13 +4,10 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2010
+Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-Les articles avec les mots-clés _ide, _aut, et _adm sont à accès restreint aux visiteurs enregistrés, membres, et admins.
-Access to articles tagged with keywords _ide, _aut, and _adm is restricted to registered members, authors, and administrators.
+Les articles avec les mots-clés _ide, _aut, _adm, et _acs sont à accès restreint aux visiteurs enregistrés, membres, admin, et admins ACS.
+Access to articles tagged with keywords _ide, _aut, _adm and _acs is restricted to registered members, authors, administrators, and ACS admins.
 
-Attention : la balise  #SESSION ne fait partie du noyau de spip que depuis la version 2.0.0 : un plugin permet d'en disposer pour les versions antérieures de SPIP.
-
-]<B_acces_restreint><BOUCLE_acces_restreint(ARTICLES) {id_article} {statut==[publie|propose|refuse]} {titre_mot==(_ide|_aut|_adm)}>[(#SESSION{statut}|?{'',' '})<INCLUDE{fond=composants/articles/redirect}{url_redirect=?page=login&url=#SELF}>]</BOUCLE_acces_restreint></B_acces_restreint>
-<INCLUDE{fond=composants/articles/inc-article}{id_article}{env}{self}{ouvrir}{debut_doc}{debut_forums}><//B_acces_restreint>
+]<B_acces_restreint><BOUCLE_acces_restreint(ARTICLES){id_article}{titre_mot==(_ide|_aut|_adm|_acs)}>[(#ACS_AUTORISE{#TITRE_MOT}|?{'', ' '})]</BOUCLE_acces_restreint></B_acces_restreint><INCLUDE{fond=composants/articles/inc-article}{id_article}{env}{self}><//B_acces_restreint>

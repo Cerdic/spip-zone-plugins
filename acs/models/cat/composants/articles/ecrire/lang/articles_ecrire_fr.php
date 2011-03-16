@@ -5,13 +5,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Articles',
 'description' => 'Articles et listes d\'articles, pour rubriques, une, r&eacute;sum&eacute;, plan ...',
-'info' => 'Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans le plan du site:
+'info' => 'L\'apprence et le comportement de ce composant dépendent de la page où il est utilisé.
+<br /><br />
+Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans le plan du site:
  elles d&eacute;finissent l\'&eacute;claircissement ou l\'assombrissement du fond selon la profondeur.
  <br /><br />
  La fonction contrôle d\'accès limite l\'accès aux articles avec mot-clé 
-_ide, _aut, ou _adm aux visiteurs enregistrés, aux rédacteurs, et aux administrateurs.
-<br /><br />
-Sommaire ins&egrave;re un sommaire d\'article &agrave; partir des intertitres.',
+_ide, _aut, _adm ou _acs aux visiteurs enregistrés, aux rédacteurs, aux administrateurs, ou aux administrateurs ACS.',
 
 'Bord' => 'Bord sup&eacute;rieur',
 'MargeBas' => 'Marge inf&eacute;rieure',
@@ -20,6 +20,7 @@ Sommaire ins&egrave;re un sommaire d\'article &agrave; partir des intertitres.',
 
 'Dates' => 'Dates',
 'Aut' => 'Auteurs',
+'ChapoGras' => 'Mettre le chapeau de l\'article en gras',
 'Sommaire' => 'Sommaire',
 'Stats' => 'Statistiques de visites',
 'Lock' => 'Contrôle d\'accès',

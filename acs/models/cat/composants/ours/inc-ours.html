@@ -5,6 +5,6 @@
 #SET{statut,#EVAL{$GLOBALS['auteur_session']['statut']}}
 [(#VAR{acsOursLienRefus,oui}|=={oui}|?{' '})
   [(#GET{statut}|?{' '})<span class="screen_only"><a title="<:acs:ours_refus:>" href="?page=refus"><:acs:ours_refus:></a></span> | ]
-][(#VAR{acsOursLienSPIP,oui}|=={oui}|?{' '})<span class="screen_only"><a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a></span> | ][(#VAR{acsOursLienACS,oui}|=={oui}|?{' '})<span class="screen_only"><a title="<:acs:ours_acs_powered_tip:> ([(#EVAL{ACS_VERSION})])"  href="http://acs.geomaticien.org"><img src="[(#CHEMIN{images/acs_32x32.gif})]" alt="ACS powered" /></a></span>]
+][(#VAR{acsOursLienSPIP,oui}|=={oui}|?{' '})<span class="screen_only"><a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a></span> | ][(#VAR{acsOursLienACS,oui}|=={oui}|?{' '})<span class="screen_only"><a title="<:acs:ours_acs_powered_tip:> ([(#ACS_VERSION)])"  href="http://acs.geomaticien.org"><img src="[(#CHEMIN{images/acs_32x32.gif})]" alt="ACS powered" /></a></span>]
   </div>
 </fieldset>

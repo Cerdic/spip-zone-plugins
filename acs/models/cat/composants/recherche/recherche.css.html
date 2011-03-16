@@ -1,12 +1,12 @@
 #CACHE{0}
-
 .cRecherche {
-  width: 100%;
-  [border-width: (#VAR{acsRechercheBord/Width});]
-  [border-style: (#VAR{acsRechercheBord/Style});]
-  [border-color: (#VAR{acsRechercheBord/Color});]
-  [background: (#VAR{acsRechercheFond});]
-  [(#MODELE{c_css_shadow}{c=Recherche})]
+  width: 100%;[
+  border-width: (#VAR{acsRechercheBord/Width});][
+  border-style: (#VAR{acsRechercheBord/Style});][
+  border-color: (#VAR{acsRechercheBord/Color});][
+  background: (#VAR{acsRechercheFond});][
+  (#MODELE{c_css_border-radius}{c=Recherche}{var=BordRond})][
+  (#MODELE{c_css_shadow}{c=Recherche})]
 }
 
 .cRecherche .formulaire_recherche {
@@ -31,15 +31,26 @@
 
 .cRecherche .formulaire_recherche label {
   display: block;
-  [background: (#VAR{acsRechercheTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsRechercheTitreFondImage}})") repeat top left];]  
+  [background: (#VAR{acsRechercheTitreFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsRechercheTitreFondImage}})") repeat top left];]
   color: #VAR{acsFondText,#00008f};
   text-align: center;
   font-weight: bold;
   border: 0;
-  [border-bottom: 1px solid (#VAR{acsRubnavSep});]
+  [border-bottom: 1px solid (#VAR{acsRubnavSep});][
+  (#MODELE{c_css_border-radius}{c=Recherche}{var=BordRond}{v=sauf_bas})]
 }
 
 [(#REM) submit]
 .cRecherche .formulaire_recherche input.submit {
-  margin:4px;
+  margin:3px;
+  padding: 2px;
+  border: thin solid #VAR{acsRechercheFond};
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -khtml-border-radius: 4px;
+}
+.cRecherche .formulaire_recherche input.submit:hover {
+  [background: (#VAR{acsRechercheTitreFond});
+  border: thin outset #VAR{acsRechercheTitreFond};]
 }

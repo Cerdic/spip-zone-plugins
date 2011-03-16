@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2010
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'right' => 'droit',
   'top' => 'haut',
   'bottom' => 'bas',
+  'height' => 'Hauteur',
 
   'font' => 'Fonte(s)',
   'fontsize' => 'Taille',

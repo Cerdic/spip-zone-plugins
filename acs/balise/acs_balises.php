@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2010
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 require_once _DIR_ACS.'inc/composant/composants_liste.php';
@@ -180,14 +180,11 @@ function composants_head($type) {
   }
   return $libs.$r;
 }
-/* inutilisee pour l'instant : à elargir pour usage avec les groupes acs voire pour droits sur le public
+/* inutilisee pour l'instant : à elargir pour usage avec les groupes acs voire pour droits sur le public*/
 function balise_ACS_AUTORISE($p) {
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
-	$admins = explode($GLOBALS['meta']['ACS_ADMINS'],'');
-  $p->code = 'acs_autorise()';
+  $rs = interprete_argument_balise(1,$p);
+  $p->code = 'acs_autorise('.$rs.')';
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p;
 }
-*/
-

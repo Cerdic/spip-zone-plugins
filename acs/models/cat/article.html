@@ -4,7 +4,7 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2010
+Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Cliquez <u><a href="?exec=acs&onglet=pages&pg=composants/articles/inc-article">ici</a></u> pour d&eacute;finir le contenu de la page.
@@ -12,4 +12,4 @@ Click <u><a href="?exec=acs&onglet=pages&pg=composants/articles/inc-article">her
 
 Pas de mise en cache ici pour gerer le controle d'acces 
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/inc-article_acces}{{env=#ENV}id_article}{self=#SELF}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>][(#VAR{acsArticlesLock}|!={oui}|?{' '}) <INCLUDE{fond=composants/articles/inc-article}{id_article}{self=#SELF}{env=#ENV}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/page-article_acces}{{env=#ENV}id_article}{self=#SELF}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>][(#VAR{acsArticlesLock}|!={oui}|?{' '}) <INCLUDE{fond=composants/articles/page-article}{id_article}{self=#SELF}{env=#ENV}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]

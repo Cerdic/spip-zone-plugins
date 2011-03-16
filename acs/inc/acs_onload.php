@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2010
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 /**
@@ -86,10 +86,31 @@ function acs_get_from_active_plugin($plugin, $variable = false) {
 }
 
 // Vérifie que l'utilisateur connecté est un admin ACS autorisé, ou le(s) webmestre(s) si ACS n'est pas encore configuré
-function acs_autorise() {
+// ou qu'il dispose des droits requis (_acs, _adm, _aut, ou _ide)
+function acs_autorise($requested_statut='_acs') {
+  // Si l'utilisateur n'est pas identifie, pas la peine d'aller plus loin
+  if (!isset($GLOBALS['auteur_session']['statut']))
+    return false;
+  
+  switch($requested_statut) {
+    case '_adm':
+      $rs = Array('0minirezo');
+      break;
+    case '_aut':
+      $rs = Array('0minirezo', '1redacteur');
+      break;
+    case '_ide':
+      $rs = Array('0minirezo', '1redacteur', '6visiteur');
+      break;
+  }
+  // Si un droit plus faible que "_acs" est demandé, on retourne le resultat
+  if (is_array($rs))
+    return in_array($GLOBALS['auteur_session']['statut'], $rs);
+  
 	// Si l'utilisateur n'est pas admin, pas la peine d'aller plus loin
 	if ($GLOBALS['auteur_session']['statut'] != "0minirezo")
 		return false;
+	// Cet admin est-il aussi admin ACS ?
 	$id_admin = $GLOBALS['auteur_session']['id_auteur'];
   if (isset($GLOBALS['meta']['ACS_ADMINS']) && $GLOBALS['meta']['ACS_ADMINS'] != '')
     return in_array($id_admin, explode(',', $GLOBALS['meta']['ACS_ADMINS']) );

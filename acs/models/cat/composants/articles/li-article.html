@@ -1,19 +1,13 @@
-<li>
-  <div class="entete">
-    [(#PLUGIN{notation}|oui)<div style="float:#LANG_RIGHT; text-align: #LANG_LEFT; margin-left: 0.5em; margin-right:0.5em">[(#NOTATION_ETOILE{#ENV{note}})]</div>]
-    <div class="titres">
-      <span class="infos_article nav nsize">
-      [(#VAR{acsArticlesDates}|=={oui}|?{[(#DATE_REDAC|?{[(#DATE_REDAC|affdate)],[(#DATE|affdate)]})]})]
-      [(#VAR{acsArticlesAut}|=={oui}|?{' '})[(#AUTEURS)]][ &mdash; <em>(#TAGS|afficher_tags)</em>]
-      <BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '})[(#VAR{acsArticlesDates}|=={oui}|?{ - })]<i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero|coupe{80,...})]</a></i>]</BOUCLE_Rubb2>
-        </span>  
-      [<p class="surtitre stsize">(#SURTITRE|coupe{80,...})</p>]
-      <h3 class="titre tsize"><a href="#URLA">#TITRE</a></h3>
-      [<p class="soustitre stsize">(#SOUSTITRE|coupe{80,...})</p>]
-      [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
-    </div>
-  </div>
-  <br class="nettoyeur" />
-  [<div class="extrait">[<a href="#URLA">(#LOGO_ARTICLE_RUBRIQUE|left|image_reduire{#VAR{acsArticlesListesLogoTailleMax,50},#VAR{acsArticlesListesLogoTailleMax,50}})</a>](#TEXTE|coupe{#ENV{coupe,200},... <i><a href="#URLA" class="nsize"> (<:acs:articles_lire_la_suite:>)</a></i>})</div>]
-  <br class="nettoyeur" />
-</li>
+#CACHE{0}[(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Un article dans une liste d'articles. On verifie ses droits d'acces si l'option est activee
+
+][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/inc-li-article_acces}{env}>][(#VAR{acsArticlesLock}|!={oui}|?{' '}) <INCLUDE{fond=composants/articles/inc-li-article}{env}>]

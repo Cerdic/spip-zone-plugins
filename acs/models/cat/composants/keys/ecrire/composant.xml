@@ -2,7 +2,7 @@
   <!-- Nom du composant -->
   <nom>Keys</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
   <version>0.7.3</version>
   <necessite id='acs' version='[0.7.1;]' />
 

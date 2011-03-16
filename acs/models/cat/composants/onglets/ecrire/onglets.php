@@ -1,6 +1,6 @@
 <?php
 # ACS
-# Copyright Daniel FAIVRE 2008-2010 - Copyleft licence GPL
+# Copyright Daniel FAIVRE 2008-2011 - Copyleft licence GPL
 #
 /**
  * La classe acsOngletsEdit étend CEdit,

@@ -1,0 +1,83 @@
+[(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]
+<script type="text/javascript">
+	var URLbase = "[(#CHEMIN{plugins}|url_absolue)]";
+	var map[(#GET{id_carte_gis})] = null;
+	var markers[(#GET{id_carte_gis})] = null;
+	[(#REM) Centrer sur les coordonnees de l'article passe en parametre, sinon celles de la sur la rubrique ]
+	<BOUCLE_centrer_article(GIS){id_article}{0,1}>
+		[(#ENV{latit}|non)
+			#SET{latitude,#LAT}]
+		[(#ENV{lonxit}|non)
+			#SET{lonxitude,#LONX}]
+		[(#ENV{zoom}|non)
+			#SET{zoommapa,#ZOOM}]
+	</BOUCLE_centrer_article>
+		<BOUCLE_centrer_rubrique(GIS){id_rubrique}{0,1}>
+			[(#ENV{latit}|non)
+				#SET{latitude,#LAT}]
+			[(#ENV{lonxit}|non)
+				#SET{lonxitude,#LONX}]
+			[(#ENV{zoom}|non)
+				#SET{zoommapa,#ZOOM}]
+		</BOUCLE_centrer_rubrique>
+	<//B_centrer_article>
+	
+	[(#REM) Sinon centrer sur les coordonnes passees en parametre, ou sur celle du composant, ou sur celles par defaut]
+	[(#GET{latitude}|non)
+	#SET{latitude,#ENV{latit,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lat'},#CONFIG**{geomap/latitude,0}}}}]
+	[(#GET{lonxitude}|non)
+	#SET{lonxitude,#ENV{lonxit,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lon'},#CONFIG**{geomap/longitude,0}}}}]
+	[(#GET{zoommapa}|non)
+	#SET{zoommapa, #ENV{zoom,#VAR{#EVAL{'acsCarte'.'#NIC'.'Zoom'},#CONFIG**{geomap/zoom,0}}}}]
+	
+	function init[(#GET{id_carte_gis})](){
+		map[(#GET{id_carte_gis})] = new OpenLayers.Map("map[(#GET{id_carte_gis})]",{
+			maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
+			numZoomLevels: 19,
+			maxResolution: 156543.0399,
+			units: 'm',
+			projection: new OpenLayers.Projection("EPSG:900913"),
+			displayProjection: new OpenLayers.Projection("EPSG:4326")
+		});
+		markers[(#GET{id_carte_gis})] = new OpenLayers.Layer.Markers("Markers");
+		var lon = #GET{lonxitude};
+		var lat = #GET{latitude};
+		var zoom = #GET{zoommapa};
+		var lonlat = new OpenLayers.LonLat(lon, lat);
+		var osm = new OpenLayers.Layer.OSM();
+ 		var wms = new OpenLayers.Layer.WMS(
+			"#CONFIG{openlayer/nom_serveur_openlayer,OpenLayers WMS}",
+			"#CONFIG{openlayer/url_script_openlayer,http://labs.metacarta.com/wms/vmap0}",
+			{layers: 'basic'}
+		);
+		var osma = new OpenLayers.Layer.OSM.Osmarender("Osmarender");
+		map[(#GET{id_carte_gis})].addLayers([osm, osma, wms]);
+		map[(#GET{id_carte_gis})].addLayer(markers[(#GET{id_carte_gis})]);
+		map[(#GET{id_carte_gis})].zoomTo(zoom);
+		map[(#GET{id_carte_gis})].setCenter(lonlat.fromDataToDisplay());
+		map[(#GET{id_carte_gis})].addControl(new OpenLayers.Control.LayerSwitcher());
+    if (jQuery("#acsCarteLat").length && jQuery("#acsCarteLon").length && jQuery("#acsCarteZoom").length) {
+      map[(#GET{id_carte_gis})].events.register("mousemove", map[(#GET{id_carte_gis})], function(e) { 
+        var position = map[(#GET{id_carte_gis})].getCenter();
+        position = position.transform(map[(#GET{id_carte_gis})].projection,map[(#GET{id_carte_gis})].displayProjection);
+        jQuery("#acsCarteLat").attr('value', position.lat);
+        jQuery("#acsCarteLon").attr('value', position.lon);
+        jQuery("#acsCarteZoom").attr('value', map[(#GET{id_carte_gis})].getZoom());
+      });
+    }
+    
+	[(#ENV{recursive}|=={1}|?{' ',''})
+		jQuery.get('[(#URL_PAGE{c})]', {c:'carte', p:'rss-gis-recursive', [limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_parent:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:'(#RECHERCHE)'][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
+	][(#ENV{recursive}|=={1}|?{'',' '})
+		jQuery.get('[(#URL_PAGE{c})]', {c:'carte', p:'rss-gis', [limit:(#ENV{limit, 50})][, id_rubrique:(#ID_RUBRIQUE)][, id_secteur:(#ID_SECTEUR)][, id_mot:(#ID_MOT)][, id_auteur:(#ID_AUTEUR)][, recherche:(#RECHERCHE)][, id_article:(#ID_ARTICLE)][, id_groupe:(#ID_GROUPE)]}, function(xml[(#GET{id_carte_gis})]){
+	]
+			jQuery("item", xml[(#GET{id_carte_gis})]).each(function(item[(#GET{id_carte_gis})]){
+				var xmlItem[(#GET{id_carte_gis})] = xml[(#GET{id_carte_gis})].documentElement.getElementsByTagName("item")[item[(#GET{id_carte_gis})]];
+ 				agregarMarcador(xmlItem[(#GET{id_carte_gis})], markers[(#GET{id_carte_gis})], map[(#GET{id_carte_gis})]);
+			});
+		});
+	}
+	$(document).ready(function(){
+		init[(#GET{id_carte_gis})]();
+	});
+</script>

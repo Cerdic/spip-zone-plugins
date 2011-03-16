@@ -10,10 +10,11 @@
 	Dans le cas d'une simple image (mode=vignette), on affiche
 	le document lui-meme, sans lien de telechargement
 
-  Cette variante du modele de la dist tient compte de la presence eventuelle
-  du plugin dw2, afin de ne pas devoir activer la transformation automatique des urls par dw2
+  Cette variante du modele de la dist tient compte de la presence eventuelle :
+  - du plugin dw2, afin de ne pas devoir activer la transformation automatique des urls par dw2
   qui fait planter les applications Flash basee sur des urls de documents,
   comme le plugin Lecteur_multimedia ou le lecteur multimedia d'ACS.
+  - du plugin thickbox
 
 ]
   #SET{document,#EVAL{@is_dir(_DIR_PLUGIN_DW2)}|?{#URL_DOC_OUT,#ENV{lien}}}
@@ -31,7 +32,7 @@
 ]
 
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});[width:(#GET{width}|min{350}|max{120})]px;']>
-<dt>[<a href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
+<dt>[<a class="thickbox" href="(#GET{url})"[ class="(#ENV{lien_class})"] title='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]'[ (#ENV{lien}|?{'',type="#MIME_TYPE"})]>]<img src='#GET{fichier}' width='#GET{width}' height='#GET{height}' alt='#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets|texte_backend)]' />[(#GET{url}|?{</a>})]</dt>[
 <dt class='spip_doc_titre'[ style='width:(#GET{width}|min{350}|max{120})px;']><strong>(#TITRE)</strong></dt>][
 <dd class='spip_doc_descriptif'[ style='width:(#GET{width}|min{350}|max{120})px;']>(#DESCRIPTIF)#NOTES</dd>]
 </dl>

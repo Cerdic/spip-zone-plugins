@@ -2,8 +2,8 @@
   <!-- Nom du composant -->
   <nom>Carte</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.7.2</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.0</version>
   <necessite id='acs' version='[0.7.1;]' />
   <necessite id='gis' version='[0.7.1;]' />
   <necessite id='openlayers' version='[0.7.1;]' />
@@ -13,6 +13,10 @@
     <valeur>300</valeur>
   </param>
   <param>
+    <nom>preview_type</nom>
+    <valeur>inline</valeur>
+  </param>  
+  <param>
     <nom>instanciable</nom>
   </param>
 
@@ -20,7 +24,23 @@
     <nom>Nom</nom>
     <type>text</type>
   </variable>
-
+  <variable>
+    <nom>Height</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+    <nom>Lat</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+    <nom>Lon</nom>
+    <type>nombre</type>
+  </variable>
+  <variable>
+    <nom>Zoom</nom>
+    <type>nombre</type>
+  </variable>
+      
   <variable>
     <nom>TitreFontSize</nom>
     <type>nombre</type>

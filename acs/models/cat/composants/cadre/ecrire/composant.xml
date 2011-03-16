@@ -2,8 +2,8 @@
   <!-- Nom du composant -->
   <nom>Cadre</nom>
   <!-- Auteur du composant -->
-  <auteur>Daniel FAIVRE &copy; 2008-2010 - licence GPL</auteur>
-  <version>0.7.2</version>
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.0</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -51,6 +51,10 @@
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
+  <variable>
+    <nom>BordRond</nom>
+    <type>nombre</type>
+  </variable>  
   <variable>
     <nom>Text</nom>
     <type>color</type>
@@ -136,7 +140,7 @@
     <type>text</type>
     <label>non</label>
   </variable>
-  
+
   <variable>
     <nom>Shadow</nom>
     <type>color</type>

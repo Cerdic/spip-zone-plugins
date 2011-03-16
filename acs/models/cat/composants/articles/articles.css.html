@@ -28,8 +28,11 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 }
 .cArticle .texte, .cArticle .chapo {
   text-align: justify;
+}[(#VAR{acsArticlesChapoGras}|!={non}|?{" "})
+.cArticle .chapo {
+  font-weight: bold;
 }
-.cArticle .sommaire {
+].cArticle .sommaire {
   float:  #LANG_RIGHT;
   margin: 5px;
   border: #VAR{acsArticlesBord/Width,thin}[ (#VAR{acsArticlesBord/Style,dotted})][ (#VAR{acsArticlesBord/Color})];
@@ -43,8 +46,15 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 .cArticle #forum_lire_tous, #forum_repondre[(#PLUGIN{notation}|?{' '}), .cArticle .notation ]{
   margin-left: 5px;
   margin-right: 5px;
+}[(#PLUGIN{recommander}|?{' '})
+#recommander {
+  margin-left: 5px;
+  margin-right: 5px;
 }
-[(#REM)
+#recommander h2.menu-titre {
+  cursor: pointer;
+}
+][(#REM)
 
 ***** Mise en page des listes d'articles *****
 
@@ -153,11 +163,6 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
   [margin-top: (#VAR{acsArticlesMargeBas})px;]
   [margin-bottom: (#VAR{acsArticlesMargeBas})px;]
   -moz-border-radius: 8px;
-/*
-  border-right: 0;
-  -moz-border-radius-topright: 0;
-  -moz-border-radius-bottomright: 0;
-*/
   min-height: #VAR{acsArticlesListesLogoTailleMax,50}px;
 }
 
