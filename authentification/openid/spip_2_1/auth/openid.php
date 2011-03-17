@@ -109,6 +109,12 @@ function auth_openid_retrouver_login($login, $serveur=''){
 		return $r;
 	}
 
+	// ou par email
+	if ($r = sql_getfetsel("login", "spip_auteurs", array("statut!=".sql_quote("5poubelle") , "email=" . sql_quote($login). " AND openid>''"),'','','','',$serveur)){
+		return $r;
+	}
+
+
 	return false;
 }
 
