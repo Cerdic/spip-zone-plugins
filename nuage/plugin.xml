@@ -1,30 +1,35 @@
 <plugin>
-	<version>1.5.1</version>
-	<nom><multi>[fr]Nuage[en]Tag cloud</multi></nom>
+	<version>3.0.1</version>
+	<nom>Nuage</nom>
 	<prefix>nuage</prefix>
-	<auteur>(c)2005-2007 Booz, Fil, James, St&#233;phane.</auteur>
-	<licence>GNU/GPL</licence>
-	<etat>test</etat>
-	<lien>http://www.spip-contrib.net/Nuage-de-mots-cles</lien>
+	<auteur>Booz, Fil, James, St&#233;phane, Bill(stephane (at) rezo.net), Camille Lafitte</auteur>
+	<licence>2005 - 2011 GNU/GPL</licence>
+	<etat>stable</etat>
+	<lien>Afficher les mots-cl&#233;s en faisant varier la taille de la police</lien>
 	<description>
-		<multi>
-			[fr]Version plugin avec mod&#232;les et filtres de la contrib nuage de tags.
-			[en]Plugin version with the templates and filters from the contrib "tag cloud".
-		</multi>
+	Plusieurs modeles disponibles :
+	- article_nuage : affiche les mots cles de l'article la taille variant en fonction de 
+	la frequence des mots dans les articles du site
+	- rubrique_nuage : affiche les mots cles des articles de la branche, la taille variant
+	 en fonction de la frequence des mots dans les articles de cette branche
+	- nuage_popularite : affiche les mots cles du site (ou d'un groupe), la taille variant
+	 en fonction de sa popularite relative (somme des popularitedes articles ayant ce mot)
+	
+	La feuille de style est personnalisable (nuage_style.css.html), en particulier la taille
+	des mots : une classe nuageN etant affectee en fonction de la "note" (par defaut de 1 a 10)
+	
+	Les modeles sont personnalisable et exploitent 3 nouveaux criteres et leurs balises associees
 	</description>
-	<icon>images/nuage-64.png</icon>
+	<icon>
+	nuage.png
+	</icon>
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
-		<nom>insert_head_css</nom> 
-		<inclure>nuage_pipelines_public.php</inclure>
+		<nom>insert_head</nom> 
+		<inclure>nuage_options.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>insert_head</nom>
-		<action>insert_head_css</action>
-		<inclure>nuage_pipelines_public.php</inclure>
-	</pipeline>
-	<noisette>modeles/nuage.html</noisette>
+	<chemin dir='' />
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
-	<utilise id="cfg" version="[1.15.2;]" />
+	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="spip_bonux" version="[2.0;]" />
 </plugin>

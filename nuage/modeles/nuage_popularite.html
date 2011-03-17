@@ -1,9 +1,36 @@
-[(#CONFIG{multi_articles}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
-#SET{expose,#ARRAY}<BOUCLE_expose(MOTS){id_article ?}>[(#SET{expose,[(#GET{expose}|push{#ID_MOT})]})]</BOUCLE_expose>
-<BOUCLE_tags(MOTS){type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}{par #ENV{tri,titre}}>[
-(#ID_MOT|nuage{#TITRE,[(#URL_MOT|parametre_url{lang,#GET{lang}})]})
-]<BOUCLE_pop(ARTICLES){id_mot}{par popularite}{inverse}{0,200}>[
-(#ID_MOT|nuage{'','',#POPULARITE_ABSOLUE})
-]</BOUCLE_pop></BOUCLE_tags>[<ul class="nuage menu-liste">
-	(#FOREACH{NUAGE,foreach_nuage_pop})
-</ul>]
+#SET{max,0}
+<BOUCLE_maxmot(MOTS) {id_groupe=#ENV{id_groupe}}>
+        #SET{pop,0}
+        <BOUCLE_pop(ARTICLES) {id_mot}>
+                [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
+        </BOUCLE_pop>
+        [(#GET{pop}|>{[(#GET{max})]}|oui)
+                [(#SET{max,[(#GET{pop})]})]
+        ]
+</BOUCLE_maxmot>
+
+<ul class="nuage menu-liste">
+<BOUCLE_tags(MOTS){id_groupe=#ENV{id_groupe}}{par num titre,titre}>
+    [(#REM) définir les mot exposés]
+    #SET{expose,''}
+    <BOUCLE_expose(ARTICLES){id_article}{id_mot}{0,1}>
+        #SET{expose,' '}
+    </BOUCLE_expose>
+    [(#ENV{id_mot}|=={#ID_MOT}|oui)
+        #SET{expose,' '}
+    ]
+
+    #SET{pop,0}
+    <BOUCLE_popularite(ARTICLES) {id_mot}>
+        [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
+    </BOUCLE_popularite>
+
+ <li class="menu-entree [(#GET{expose}|oui) expose]">
+  <span class="frequence">
+    [(#GET{pop})/#GET{max}]
+  </span>
+  <a rel="tag" href="#URL_MOT" class="nuage[(#GET{pop}|nuage_note{#GET{max},10})] [(#GET{expose}|oui) on]">#TITRE</a>
+ </li>
+</BOUCLE_tags>
+</ul>
+</B_tags>
