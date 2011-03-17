@@ -52,41 +52,42 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 
 	// On recupere les items du fichier de langue si celui ci n'est pas vide
 	$source = $GLOBALS[$var_source] ? $GLOBALS[$var_source] : array();
-	// Si on demande de generer le fichier corrige alors on fournit la liste des items a ajouter
+	// Si on demande de generer le fichier corrige
+	// alors on fournit la liste des items a ajouter
 	$source = ($mode == 'oublie') ? array_merge($source, $oublis_inutiles) : $source;
 	if ($mode != 'inutile') $oublis_inutiles = array();
 	foreach ($source as $_item => $_valeur) {
-		$valeur_cible = $GLOBALS[$var_cible][$_item];
+		$texte = $GLOBALS[$var_cible][$_item];
 		$comm = false;
 		if ($GLOBALS[$var_cible][$_item]) {
-			$texte = "'" . addslashes($valeur_cible) . "'";
-			$comm = ($oublis_inutiles AND in_array($_item, $oublis_inutiles));
+			$comm = in_array($_item, $oublis_inutiles);
 		}
 		else {
 			if ($mode != 'pas_item') {
 				if ($mode == 'new')
-					$valeur_cible = '<NEW>';
+					$texte = '<NEW>';
 				else if ($mode == 'new_index')
-					$valeur_cible = '<NEW>'.$_item;
+					$texte = '<NEW>'.$_item;
 				else if ($mode == 'new_valeur')
-					$valeur_cible = '<NEW>'.addslashes($_valeur);
+					$texte = '<NEW>'.$_valeur;
 				else if ($mode == 'valeur')
-					$valeur_cible = addslashes($_valeur);
+					$texte = $_valeur;
 				else if ($mode == 'vide')
-					$valeur_cible = '';
+					$texte = '';
 				else if ($mode == 'oublie')
-					$valeur_cible = '<LANGONET_DEFINITION_MANQUANTE>';
+					$texte = '<LANGONET_DEFINITION_MANQUANTE>';
 				else
-					$valeur_cible = $_item;
-				$texte = "'" . $valeur_cible . "'";
+					$texte = $_item;
 			}
 		}
 		if ($encodage == 'utf8') $texte = entite2utf($texte);
-		$source[$_item] = "\n\t'" . $_item . "' => $texte,";
-		if ($comm) $source[$_item] = "\n/*\t<LANGONET_DEFINITION_OBSOLETE>" . $source[$_item]  . "*/\n";
+		$source[$_item] = $comm ? array("<LANGONET_DEFINITION_OBSOLETE>", $texte) : $texte;
 	}
 	return $source;
 }
+
+// Produit un fichier de langues a partir d'un tableau (index => trad)
+// Si trad n'est pas une chaine mais un tableau, on le met en commentaire
 
 function ecrire_fichier_langue_php($dir, $langue, $module, $items, $comm='')
 {
@@ -109,7 +110,9 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 			$initiale = strtoupper($k[0]);
 			$contenu .= "\n// $initiale\n";
 		}
-		$contenu .= $v;
+		if (is_string($v))
+			$contenu .= "\n\t'" . $k . "' => '" . addslashes($v) . "',";
+		else $contenu .= "\n/*\t" . $v[0] ."\n\t'" . $k . "' => '" . addslashes($v[1]) ."',*/\n"; 
 	}
 	$contenu .= "\n);\n}\n?".'>';
 
