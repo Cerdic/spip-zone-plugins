@@ -306,7 +306,7 @@ function formulaires_taches_verifier_dist(){
     $erreurs = array();
     foreach($obligatoire as $champ) {
         if (!_request($champ)) {
-            $erreurs[$champ] = "Cette information est obligatoire !";
+            $erreurs[$champ] = _T('spip:info_obligatoire');
         }
     }
     

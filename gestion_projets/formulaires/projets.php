@@ -182,7 +182,7 @@ function formulaires_projets_verifier_dist($id_projet=''){
     $erreurs = array();
     foreach($obligatoire as $champ) {
         if (!trim(_request($champ))) {
-            $erreurs[$champ] = "Cette information est obligatoire !";
+            $erreurs[$champ] = _T('spip:info_obligatoire');
         }
     }
     if($date_debut=trim(_request('date_debut')) AND $date_fin_estimee=trim(_request('date_fin_estimee'))){
