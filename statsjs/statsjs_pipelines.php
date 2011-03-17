@@ -19,7 +19,7 @@ function statsjs_affichage_final($page) {
 			$page, 1);
 	}
 
-	if (!strpos('<!-- MOUCHARD STATS SPIP -->', $page))
+	if (!strpos($page, '<!-- MOUCHARD STATS SPIP -->'))
 		$page = preg_replace(',</body>,i', statsjs_mouchard()."\n".'\0', $page, 1);
 
 
