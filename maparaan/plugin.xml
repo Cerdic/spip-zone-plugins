@@ -16,4 +16,5 @@
 	<utilise id="socialtags" />
 	<utilise id="gravatar" />
 	<utilise id="slogan" />
+	<categorie>squelette</categorie>
 </plugin>

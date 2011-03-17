@@ -42,4 +42,5 @@ Il fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code
 		<inclure>inc/thickbox_pipelines.php</inclure>
 	</pipeline>	
 	<necessite id='SPIP' version='[2.0.0;]' />
+	<categorie>multimedia</categorie>
 </plugin>

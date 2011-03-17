@@ -1,25 +1,22 @@
 <plugin>
+	<nom>LESSpip</nom>
+	<auteur>Jean-Baptiste Bourgoin</auteur>
+	<licence>MIT</licence>
+	<version>0.2</version>
+	<description>
+Int&eacute;gration de l'impl&eacute;mentation php de LESS dans SPIP.
 
-  <nom>LESSpip</nom>
-  <auteur>Jean-Baptiste Bourgoin</auteur>
-  <licence>MIT</licence>
-  <version>0.2</version>
-  <categorie>outils</categorie>
-  <description>
-  LESSpip est un plugin d'intégration de l'implémentation php de LESS.
+LESS est une extension de CSS ajoutant les variables, les classes,
+les op&eacute;rations, les imbrications au langage. Facilitant ainsi
+l'&eacute;criture de feuilles de style complexes.
+
+Ce plugin cr&eacute;&eacute; les fichiers css correspondant &agrave; vos fichiers less dans le r&eacute;pertoire o&ugrave; ces derniers ont &eacute;t&eacute; cr&eacute;&eacute;s.
   
-  LESS est une extension de CSS ajoutant les variables, les classes,
-  les opérations, les imbrications au langage. Facilitant ainsi
-  l'écriture de feuilles de style complexes.
-
-  Ce plugin créé les fichiers css correspondant à vos fichiers less dans
-  le répertoire où ces derniers ont été créés.
-  </description>
-  <etat>dev</etat>
-  <prefix>lesspip</prefix>
-  <icon>img/lesspip.png</icon>
-  <lien>http://leafo.net/lessphp/</lien>
-
-  <fonctions>lessphp/gen_styles.php</fonctions>
+	</description>
+	<etat>dev</etat>
+	<prefix>lesspip</prefix>
+	<icon>img/lesspip.png</icon>
+	<lien>http://leafo.net/lessphp/</lien>
 	<categorie>outil</categorie>
+	<fonctions>lessphp/gen_styles.php</fonctions>
 </plugin>

@@ -29,5 +29,6 @@
 	</bouton>
 	<necessite id='spip' version='[2.1.0;]' />
 	<necessite id='iterateurs'  />
-  <utilise id="bando" version="[;]" /> 
+	<utilise id="bando" version="[;]" /> 
+	<categorie>outil</categorie>
 </plugin>
