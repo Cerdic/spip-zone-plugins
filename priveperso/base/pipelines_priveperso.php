@@ -91,7 +91,8 @@ function priveperso_init_tables_principales($tables_principales){
         );
        
         return $tables_principales;
-}	
+}
+	
 function priveperso_init_tables_interfaces($tables_interfaces){
 
 			$tables_interfaces['table_des_tables']['PRIVEPERSO'] = 'priveperso';
@@ -125,4 +126,4 @@ function priveperso_exec_init(){
 }
 
 	
-?> 
+?>
