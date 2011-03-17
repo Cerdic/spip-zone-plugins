@@ -504,6 +504,63 @@ function saisies_comparer_rappel($a, $b){
 	else return 1;
 }
 
+
+/**
+ * Retourne si une saisie peut être affichée.
+ * On s'appuie sur l'éventuelle clé "editable" du $champ.
+ * Si editable vaut :
+ *  absent : le champ est éditable
+ *  1, le champ est éditable
+ *  0, le champ n'est pas éditable
+ * -1, le champ est éditable s'il y a du contenu dans le champ (l'environnement)
+ *     ou dans un de ses enfants (fieldsets)
+ *
+ * @param $champ tableau de description de la saisie
+ * @param $env environnement transmis à la saisie, certainement l'environnement du formulaire
+ * @param $utiliser_editable false pour juste tester le cas -1
+ * 
+ * @return bool la saisie est-elle éditable ?
+**/
+function saisie_editable($champ, $env, $utiliser_editable=true) {
+	if ($utiliser_editable) {
+		// si le champ n'est pas éditable, on sort.
+		if (!isset($champ['editable'])) {
+			return true;
+		}
+		$editable = $champ['editable'];
+
+		if ($editable > 0) {
+			return true;
+		}
+		if ($editable == 0) {
+			return false;
+		}
+	}
+
+	// cas -1
+	// name de la saisie
+	if (isset($champ['options']['nom'])) {
+		// si on a le name dans l'environnement, on le teste
+		$nom = $champ['options']['nom'];
+		if (isset($env[$nom])) {
+			return $env[$nom] ? true : false ;
+		}
+	}
+	// sinon, si on a des sous saisies
+	if (isset($champ['saisies']) and is_array($champ['saisies'])) {
+		foreach($champ['saisies'] as $saisie) {
+			if (saisie_editable($saisie, $env, false)) {
+				return true;
+			}
+		}
+	}
+	
+	// aucun des paramètres demandés n'avait de contenu
+	return false;
+	
+}
+
+
 /*
  * Génère une saisie à partir d'un tableau la décrivant et de l'environnement
  * Le tableau doit être de la forme suivante :
@@ -521,6 +578,11 @@ function saisies_generer_html($champ, $env=array()){
 	// Si le parametre n'est pas bon, on genere du vide
 	if (!is_array($champ))
 		return '';
+
+	// Si la saisie n'est pas editable, on sort aussi.
+	if (!saisie_editable($champ, $env)) {
+		return '';
+	}
 	
 	$contexte = array();
 	
@@ -529,6 +591,8 @@ function saisies_generer_html($champ, $env=array()){
 	
 	// Peut-être des transformations à faire sur les options textuelles
 	$options = $champ['options'];
+
+	
 	foreach ($options as $option => $valeur){
 		$options[$option] = _T_ou_typo($valeur, 'multi');
 	}
