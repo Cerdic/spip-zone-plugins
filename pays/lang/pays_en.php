@@ -8,7 +8,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// N
 	'nom' => 'Country name',
-	
+
+	// P
+	'pays' => 'Country',
+
 	// T
 	'titre_page_test' => 'List of Planet Earth countries',
 );

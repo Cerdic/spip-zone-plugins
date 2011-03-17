@@ -9,7 +9,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nom' => 'Nom du pays',
-	
+
+	// P
+	'pays' => 'Pays',
+
 	// T
 	'titre_page_test' => 'La liste des pays du monde',
 );
