@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.0.3</version>
+	<version>0.1.0</version>
 	
 	<nom>Rep&egrave;res - Des squelettes au pixel pr&egrave;s !</nom>
 	
@@ -38,5 +38,8 @@
 	</pipeline>
 
 	<necessite id='cfg' version='[1.0;]' />
+	<necessite id='saisies' version='[1.0;]' />
+	<necessite id='spip_bonux' version='[1.0;]' />
+	
 	<categorie>outil</categorie>
 </plugin>
