@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'squelette' => 'Skeleton',
 	'statistique' => 'Statistics, SEO',
 	'theme' => 'Theme',
+	
 
 );
 

@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_on' => 'Activer le plugin &laquo;@plugin@&raquo; (version : @version@)',
 	'message_action_stop' => 'D&eacute;sinstaller le plugin &laquo;@plugin@&raquo; (version : @version@)',
 	'message_action_up' => 'Mise &agrave; jour du plugin &laquo;@plugin@&raquo; (version : @version@)',
+	'message_action_upon' => 'Mise &agrave; jour et activation du plugin &laquo;@plugin@&raquo; (version : @version@)',
 	'message_action_finale_get_fail' => 'Le plugin &laquo;@plugin@&raquo; (version : @version@) n\'a pu &ecirc;tre correctement r&eacute;cup&eacute;r&eacute;',
 	'message_action_finale_get_ok' => 'Le plugin &laquo;@plugin@&raquo; (version : @version@) a &eacute;t&eacute; correctement r&eacute;cup&eacute;r&eacute;',
 	'message_action_finale_install_fail' => 'L\'installation du plugin &laquo;@plugin@&raquo; (version : @version@) a &eacute;chou&eacute;',
