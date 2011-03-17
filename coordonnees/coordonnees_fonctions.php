@@ -6,10 +6,10 @@
 
 function logo_type_adresse($type_adresse) {
 	static $types = array(
-		'pro' 		=> array('images/type_pro-16.png', 		'cop:adresse_pro'),
-		'perso' 	=> array('images/type_domicile-16.png', 	'cop:adresse_perso'),
-		'fax' 		=> array('images/type_fax-16.png', 		'cop:fax'),
-		#'mobile' 	=> array('images/type_mobile-128.png', 		'cop:mobile'),
+		'pro' 		=> array('images/type_pro-16.png', 		'coordonnees:adresse_pro'),
+		'perso' 	=> array('images/type_domicile-16.png', 	'coordonnees:adresse_perso'),
+		'fax' 		=> array('images/type_fax-16.png', 		'coordonnees:fax'),
+		#'mobile' 	=> array('images/type_mobile-128.png', 		'coordonnees:mobile'),
 	);
 	$type = substr(strtolower($type_adresse),0,5);
 	if (isset($types[$type])) {

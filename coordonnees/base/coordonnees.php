@@ -4,7 +4,7 @@
  * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
  */
 
-function cop_declarer_tables_interfaces($interface){
+function coordonnees_declarer_tables_interfaces($interface){
 	
 	$interface['table_des_tables']['adresses'] = 'adresses';
 	$interface['table_des_tables']['numeros'] = 'numeros';
@@ -25,7 +25,7 @@ function cop_declarer_tables_interfaces($interface){
 }
 
 
-function cop_declarer_tables_principales($tables_principales){
+function coordonnees_declarer_tables_principales($tables_principales){
 
 	//-- Table adresses ------------------------------------------
 	$adresses = array(
@@ -80,7 +80,7 @@ function cop_declarer_tables_principales($tables_principales){
 
 
 
-function cop_declarer_tables_auxiliaires($tables_auxiliaires){
+function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table adresses_liens ---------------------------------------
 	$adresses_liens = array(

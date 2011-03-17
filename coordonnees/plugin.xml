@@ -15,42 +15,42 @@
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
 	
-	<prefix>cop</prefix>
-	<fonctions>cop_fonctions.php</fonctions>
+	<prefix>coordonnees</prefix>
+	<fonctions>coordonnees_fonctions.php</fonctions>
 
-	<install>base/cop_upgrade.php</install>
+	<install>base/coordonnees_upgrade.php</install>
 	<version_base>1.1</version_base>
 
 	<!-- Declaration des tables -->
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/cop.php</inclure>
+		<inclure>base/coordonnees.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/cop.php</inclure>
+		<inclure>base/coordonnees.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/cop.php</inclure>
+		<inclure>base/coordonnees.php</inclure>
 	</pipeline>
 
 	<!-- Autorisations -->
 	<pipeline>
 		<nom>autoriser</nom>
-		<inclure>cop_autorisations.php</inclure>
+		<inclure>coordonnees_autorisations.php</inclure>
 	</pipeline>
 
 	<!-- Éléments d'interface -->
 	<pipeline>
 		<nom>affiche_milieu</nom>
-		<inclure>cop_pipelines.php</inclure>
+		<inclure>coordonnees_pipelines.php</inclure>
 	</pipeline>
 
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
-		<inclure>cop_pipelines.php</inclure>
+		<inclure>coordonnees_pipelines.php</inclure>
 	</pipeline>
 		
 	<necessite id="SPIP" version="[2.1;]" />	

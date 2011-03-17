@@ -26,7 +26,7 @@ function action_editer_adresse_dist() {
 
 function insert_adresse() {
 	$champs = array(
-		'voie' => _T('cop:item_nouvelle_adresse')
+		'voie' => _T('coordonnees:item_nouvelle_adresse')
 	);
 	
 	// Envoyer aux plugins

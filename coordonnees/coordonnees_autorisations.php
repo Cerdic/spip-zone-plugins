@@ -4,6 +4,6 @@
  * Licence GPL (c) 2010 Matthieu Marcillaud 
 **/
 
-function cop_autoriser(){}
+function coordonnees_autoriser(){}
 
 ?>

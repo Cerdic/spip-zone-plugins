@@ -1,5 +1,5 @@
 [(#VAL{inc/presentation}|include_spip|oui)]
-[(#SET{identifiant,[(#VAL{cop_#ENV{objet}_#ENV{id_objet}})]})]
+[(#SET{identifiant,[(#VAL{coordonnees_#ENV{objet}_#ENV{id_objet}})]})]
 [(#SET{icone,[(#CHEMIN{images/addressbook-24.png}|url_absolue)]})]
 [(#SET{plie,0})][(#SET{form,0})]
 [(#REM)
@@ -15,7 +15,7 @@
 		|parametre_url{id_email,''}
 		|parametre_url{id_numero,''})]})]
 
-[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:cop:titre_coordonnees:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:coordonnees:titre_coordonnees:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
 
 	[(#INCLURE{fond=prive/liste/adresses, objet, id_objet, retour=#GET{retour}})]
 	[(#INCLURE{fond=prive/liste/numeros, objet, id_objet, retour=#GET{retour}})]
@@ -28,15 +28,15 @@
 	
 		[(#GET{form}|oui)
 			[(#ENV{id_adresse}|oui)
-				<h3>[(#ENV{id_adresse}|intval|?{<:cop:editer_adresse:>,<:cop:nouvelle_adresse:>})]</h3>
+				<h3>[(#ENV{id_adresse}|intval|?{<:coordonnees:editer_adresse:>,<:coordonnees:nouvelle_adresse:>})]</h3>
 				<div class='ajax'>[(#FORMULAIRE_EDITER_ADRESSE{#ENV{id_adresse},#ENV{objet},#ENV{id_objet},#GET{retour}#adresses_#ENV{objet}_#ENV{id_objet}})]</div>
 			]
 			[(#ENV{id_numero}|oui)
-				<h3>[(#ENV{id_numero}|intval|?{<:cop:editer_numero:>,<:cop:nouveau_numero:>})]</h3>
+				<h3>[(#ENV{id_numero}|intval|?{<:coordonnees:editer_numero:>,<:coordonnees:nouveau_numero:>})]</h3>
 				<div class='ajax'>[(#FORMULAIRE_EDITER_NUMERO{#ENV{id_numero},#ENV{objet},#ENV{id_objet},#GET{retour}#numeros_#ENV{objet}_#ENV{id_objet}})]</div>
 			]
 			[(#ENV{id_email}|oui)
-				<h3>[(#ENV{id_email}|intval|?{<:cop:editer_email:>,<:cop:nouvel_email:>})]</h3>
+				<h3>[(#ENV{id_email}|intval|?{<:coordonnees:editer_email:>,<:coordonnees:nouvel_email:>})]</h3>
 				<div class='ajax'>[(#FORMULAIRE_EDITER_EMAIL{#ENV{id_email},#ENV{objet},#ENV{id_objet},#GET{retour}#emails_#ENV{objet}_#ENV{id_objet}})]</div>
 			]
 		]
@@ -44,8 +44,8 @@
 
 		<div class='boutons'>
 		[(#BOUTON_ACTION{[(#CHEMIN{images/adresse-add-24.png}
-			|balise_img{<:cop:ajouter_adresse:>}
-			|concat{' ',<:cop:ajouter_adresse:>})],
+			|balise_img{<:coordonnees:ajouter_adresse:>}
+			|concat{' ',<:coordonnees:ajouter_adresse:>})],
 			[(#URL_ECRIRE{adresse_edit}
 				|parametre_url{objet,#ENV{objet}}
 				|parametre_url{id_objet,#ENV{id_objet}}
@@ -53,8 +53,8 @@
 				|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
 
 		[(#BOUTON_ACTION{[(#CHEMIN{images/telephone-add-24.png}
-			|balise_img{<:cop:ajouter_telephone:>}
-			|concat{' ',<:cop:ajouter_telephone:>})],
+			|balise_img{<:coordonnees:ajouter_telephone:>}
+			|concat{' ',<:coordonnees:ajouter_telephone:>})],
 			[(#URL_ECRIRE{numero_edit}
 				|parametre_url{objet,#ENV{objet}}
 				|parametre_url{id_objet,#ENV{id_objet}}
@@ -62,8 +62,8 @@
 				|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
 
 		[(#BOUTON_ACTION{[(#CHEMIN{images/email-add-24.png}
-			|balise_img{<:cop:ajouter_email:>}
-			|concat{' ',<:cop:ajouter_email:>})],
+			|balise_img{<:coordonnees:ajouter_email:>}
+			|concat{' ',<:coordonnees:ajouter_email:>})],
 			[(#URL_ECRIRE{email_edit}
 				|parametre_url{objet,#ENV{objet}}
 				|parametre_url{id_objet,#ENV{id_objet}}

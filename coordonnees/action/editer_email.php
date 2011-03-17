@@ -26,7 +26,7 @@ function action_editer_email_dist() {
 
 function insert_email() {
 	$champs = array(
-		'email' => _T('cop:item_nouvel_email')
+		'email' => _T('coordonnees:item_nouvel_email')
 	);
 	
 	// Envoyer aux plugins

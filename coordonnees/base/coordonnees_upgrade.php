@@ -4,7 +4,7 @@
  * Licence GPL (c) 2010 - Marcimat / Ateliers CYM
  */
 
-function cop_upgrade($nom_meta_base_version, $version_cible){
+function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 	include_spip('inc/meta');
 	
 	
@@ -31,13 +31,13 @@ function cop_upgrade($nom_meta_base_version, $version_cible){
 			array("numero IS NOT NULL", "numero <> ''"));
 		// on supprime le champ "numero"
 		sql_alter("TABLE spip_adresses DROP COLUMN numero");
-		spip_log('Tables coordonnées correctement passsées en version 1.1','cop');
+		spip_log('Tables coordonnées correctement passsées en version 1.1','coordonnees');
 		ecrire_meta($nom_meta_base_version, $current_version="1.1");
 	}
 
 }
 
-function cop_vider_tables($nom_meta_base_version) {
+function coordonnees_vider_tables($nom_meta_base_version) {
 	
 	sql_drop_table("spip_adresses");
 	sql_drop_table("spip_adresses_liens");

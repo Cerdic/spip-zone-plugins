@@ -1,8 +1,8 @@
 [(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 	<!--#hierarchie-->
 	<ul id="chemin">
-		<li><span class="bloc"><:cop:editer_adresse:></li>
-		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_adresse}|intval|?{<:cop:editer_adresse:>,<:cop:nouvelle_adresse:>})]</span></li>
+		<li><span class="bloc"><:coordonnees:editer_adresse:></li>
+		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_adresse}|intval|?{<:coordonnees:editer_adresse:>,<:coordonnees:nouvelle_adresse:>})]</span></li>
 	</ul>
 	<!--/#hierarchie-->
 	 
@@ -23,7 +23,7 @@
 	<div class="entete-formulaire">
 		[(#ENV{retour,#SELF}|icone{<:icone_retour:>, #CHEMIN{images/adresse-24.png}, #LANG_LEFT})]
 
-		<h1>[(#ENV{id_adresse}|intval|?{<:cop:editer_adresse:>,<:cop:nouvelle_adresse:>})]</h1>
+		<h1>[(#ENV{id_adresse}|intval|?{<:coordonnees:editer_adresse:>,<:coordonnees:nouvelle_adresse:>})]</h1>
 	</div>
 		<div class='ajax'>
 		#FORMULAIRE_EDITER_ADRESSE{#ENV{id_adresse,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}

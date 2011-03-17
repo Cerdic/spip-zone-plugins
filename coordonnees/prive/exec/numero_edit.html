@@ -1,8 +1,8 @@
 [(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 	<!--#hierarchie-->
 	<ul id="chemin">
-		<li><span class="bloc"><:cop:editer_numero:></li>
-		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_numero}|intval|?{<:cop:editer_numero:>,<:cop:nouveau_numero:>})]</span></li>
+		<li><span class="bloc"><:coordonnees:editer_numero:></li>
+		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_numero}|intval|?{<:coordonnees:editer_numero:>,<:coordonnees:nouveau_numero:>})]</span></li>
 	</ul>
 	<!--/#hierarchie-->
 	 
@@ -23,7 +23,7 @@
 	<div class="entete-formulaire">
 		[(#ENV{retour,#SELF}|icone{<:icone_retour:>, #CHEMIN{images/telephone-24.png}, #LANG_LEFT})]
 
-		<h1>[(#ENV{id_numero}|intval|?{<:cop:editer_numero:>,<:cop:nouveau_numero:>})]</h1>
+		<h1>[(#ENV{id_numero}|intval|?{<:coordonnees:editer_numero:>,<:coordonnees:nouveau_numero:>})]</h1>
 	</div>
 		<div class='ajax'>
 		#FORMULAIRE_EDITER_NUMERO{#ENV{id_numero,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}

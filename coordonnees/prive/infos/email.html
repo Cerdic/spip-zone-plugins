@@ -1,13 +1,13 @@
 <BOUCLE_email_info(EMAILS){id_email=#ENV{id}}{tout}>
 <div class='infos'>
 	<div class='numero'>
-		<:cop:info_gauche_numero_email:>
+		<:coordonnees:info_gauche_numero_email:>
 		<p>#ID_EMAIL</p>
 	</div>
 
 	<div class='utilisation'>
 		<B_email_utilise>
-		<:cop:info_email_utilise_par:>
+		<:coordonnees:info_email_utilise_par:>
 		<ul>
 		<BOUCLE_email_utilise(emails_liens){id_email}{par objet,id_objet}>
 			<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#OBJET / #ID_OBJET</a></li>

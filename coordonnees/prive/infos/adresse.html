@@ -1,13 +1,13 @@
 <BOUCLE_adresse_info(ADRESSES){id_adresse=#ENV{id}}{tout}>
 <div class='infos'>
 	<div class='numero'>
-		<:cop:info_gauche_numero_adresse:>
+		<:coordonnees:info_gauche_numero_adresse:>
 		<p>#ID_ADRESSE</p>
 	</div>
 
 	<div class='utilisation'>
 		<B_adresse_utilisee>
-		<:cop:info_adresse_utilisee_par:>
+		<:coordonnees:info_adresse_utilisee_par:>
 		<ul>
 		<BOUCLE_adresse_utilisee(adresses_liens){id_adresse}{par objet,id_objet}>
 			<li><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#OBJET / #ID_OBJET</a></li>

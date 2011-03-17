@@ -1,8 +1,8 @@
 [(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 	<!--#hierarchie-->
 	<ul id="chemin">
-		<li><span class="bloc"><:cop:editer_email:></li>
-		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_email}|intval|?{<:cop:editer_email:>,<:cop:nouvel_email:>})]</span></li>
+		<li><span class="bloc"><:coordonnees:editer_email:></li>
+		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_email}|intval|?{<:coordonnees:editer_email:>,<:coordonnees:nouvel_email:>})]</span></li>
 	</ul>
 	<!--/#hierarchie-->
 	 
@@ -23,7 +23,7 @@
 	<div class="entete-formulaire">
 		[(#ENV{retour,#SELF}|icone{<:icone_retour:>, #CHEMIN{images/email-24.png}, #LANG_LEFT})]
 
-		<h1>[(#ENV{id_email}|intval|?{<:cop:editer_email:>,<:cop:nouvel_email:>})]</h1>
+		<h1>[(#ENV{id_email}|intval|?{<:coordonnees:editer_email:>,<:coordonnees:nouvel_email:>})]</h1>
 	</div>
 		<div class='ajax'>
 		#FORMULAIRE_EDITER_EMAIL{#ENV{id_email,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}
