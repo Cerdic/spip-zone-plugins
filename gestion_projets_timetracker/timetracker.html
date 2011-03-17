@@ -1,11 +1,23 @@
-[(#ACTIVE|non)[(#ID_TACHE|duree)]]
-[(#ACTIVE|oui)
+#HTTP_HEADER{Content-Type: text/html; charset=#CHARSET}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title><:plan_site:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+#INSERT_HEAD 
+<!--<script type="text/javascript">
+var refreshId = setInterval(function()
+{
+     $('#responsecontainer').fadeOut("slow").load('#URL_PAGE{timer}').fadeIn("slow");
+}, 10);
+</script>-->
 <script>
 	$(document).ready(function() {
-	$("#responsecontainer").load("#URL_PAGE{timer}");
+	$("#timer").load("[(#URL_PAGE{timer}|parametre_url{randval,+ Math.random()})]&id_session=#ENV{id_session}");
 	var refreshId = setInterval(function() {
-	$("#responsecontainer").load('[(#URL_PAGE{timer}|parametre_url{randval,+ Math.random()})]&id_projet=#ID_PROJET');
-	}, 6000);
+	$("#timer").load('[(#URL_PAGE{timer}|parametre_url{randval,+ Math.random()})]&id_session=#ENV{id_session}');
+	}, 60000);
 	
 	//stop the clock when this button is clicked
 	$("#stop").click(function()
@@ -14,15 +26,15 @@
 	});			
 	});
 </script>
-<div id="responsecontainer"></div>
-]
-				</td>
-				
-					[(#STATUT|=={active}|oui)
-						[(#ACTIVE|non)
-						<a href="#URL_ACTION_AUTEUR{session,#ID_PROJET-1,#SELF}"><:gestpro:start:></a>
-						]
-						[(#ACTIVE|oui)
-						<a href="#URL_ACTION_AUTEUR{session,#ID_PROJET,#SELF}"><:gestpro:stop:></a>
-						]
-						]
+
+</head>
+<html>
+<body>
+
+<div id="timer"></div>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE webproject>
+<webproject>
+  <project type="Local" name="plugin timetracker" encoding="utf8" >
+    <upload/>
+    <author/>
+    <email/>
+    <defaultDTD>-//W3C//DTD XHTML 1.0 Strict//EN</defaultDTD>
+    <item url="action/" uploadstatus="1" />
+    <item url="action/session.php" uploadstatus="1" />
+    <item url="base/" uploadstatus="1" />
+    <item url="formulaires/" uploadstatus="1" />
+    <item url="formulaires/timetracker.html" uploadstatus="1" />
+    <item url="formulaires/timetracker.php" uploadstatus="1" />
+    <item url="inc/" uploadstatus="1" />
+    <item url="inc/timer.php" uploadstatus="1" />
+    <item url="plugin.xml" uploadstatus="1" />
+    <item url="timer.html" uploadstatus="1" />
+    <item url="timetracker.html" uploadstatus="1" />
+    <item url="" uploadstatus="1" />
+    <templates>templates/</templates>
+    <toolbars>toolbars/</toolbars>
+    <annotations/>
+    <item url="base/projets_tt_tables_interfaces.php" uploadstatus="1" />
+    <item url="base/projets_tt_tables_principales.php" uploadstatus="1" />
+    <item url="base/projets_tt_install.php" uploadstatus="1" />
+    <item url="action/.svn/" uploadstatus="1" />
+    <item url="action/.svn/prop-base/" uploadstatus="1" />
+    <item url="action/.svn/props/" uploadstatus="1" />
+    <item url="action/.svn/text-base/" uploadstatus="1" />
+    <item url="action/.svn/text-base/session.php.svn-base" uploadstatus="1" />
+    <item url="action/.svn/tmp/" uploadstatus="1" />
+    <item url="action/.svn/tmp/prop-base/" uploadstatus="1" />
+    <item url="action/.svn/tmp/props/" uploadstatus="1" />
+    <item url="action/.svn/tmp/text-base/" uploadstatus="1" />
+    <item url="action/.svn/entries" uploadstatus="1" />
+    <item url="base/.svn/" uploadstatus="1" />
+    <item url="base/.svn/prop-base/" uploadstatus="1" />
+    <item url="base/.svn/props/" uploadstatus="1" />
+    <item url="base/.svn/text-base/" uploadstatus="1" />
+    <item url="base/.svn/text-base/projets_tt_install.php.svn-base" uploadstatus="1" />
+    <item url="base/.svn/text-base/projets_tt_tables_interfaces.php.svn-base" uploadstatus="1" />
+    <item url="base/.svn/text-base/projets_tt_tables_principales.php.svn-base" uploadstatus="1" />
+    <item url="base/.svn/tmp/" uploadstatus="1" />
+    <item url="base/.svn/tmp/prop-base/" uploadstatus="1" />
+    <item url="base/.svn/tmp/props/" uploadstatus="1" />
+    <item url="base/.svn/tmp/text-base/" uploadstatus="1" />
+    <item url="base/.svn/entries" uploadstatus="1" />
+    <item url="base/gestion_projets_tables_principales.php~" uploadstatus="1" />
+    <item url="base/projets_tt_tables_interfaces.php~" uploadstatus="1" />
+    <item url="base/timetracker_install.php" uploadstatus="1" />
+    <item url="formulaires/.svn/" uploadstatus="1" />
+    <item url="formulaires/.svn/prop-base/" uploadstatus="1" />
+    <item url="formulaires/.svn/props/" uploadstatus="1" />
+    <item url="formulaires/.svn/text-base/" uploadstatus="1" />
+    <item url="formulaires/.svn/text-base/timetracker.html.svn-base" uploadstatus="1" />
+    <item url="formulaires/.svn/text-base/timetracker.php.svn-base" uploadstatus="1" />
+    <item url="formulaires/.svn/tmp/" uploadstatus="1" />
+    <item url="formulaires/.svn/tmp/prop-base/" uploadstatus="1" />
+    <item url="formulaires/.svn/tmp/props/" uploadstatus="1" />
+    <item url="formulaires/.svn/tmp/text-base/" uploadstatus="1" />
+    <item url="formulaires/.svn/entries" uploadstatus="1" />
+    <item url="img/" uploadstatus="1" />
+    <item url="img/.svn/" uploadstatus="1" />
+    <item url="img/.svn/prop-base/" uploadstatus="1" />
+    <item url="img/.svn/prop-base/Clock - Time.png.svn-base" uploadstatus="1" />
+    <item url="img/.svn/props/" uploadstatus="1" />
+    <item url="img/.svn/text-base/" uploadstatus="1" />
+    <item url="img/.svn/text-base/Clock - Time.png.svn-base" uploadstatus="1" />
+    <item url="img/.svn/tmp/" uploadstatus="1" />
+    <item url="img/.svn/tmp/prop-base/" uploadstatus="1" />
+    <item url="img/.svn/tmp/props/" uploadstatus="1" />
+    <item url="img/.svn/tmp/text-base/" uploadstatus="1" />
+    <item url="img/.svn/entries" uploadstatus="1" />
+    <item url="img/Clock - Time.png" uploadstatus="1" />
+    <item url="inc/.svn/" uploadstatus="1" />
+    <item url="inc/.svn/prop-base/" uploadstatus="1" />
+    <item url="inc/.svn/props/" uploadstatus="1" />
+    <item url="inc/.svn/text-base/" uploadstatus="1" />
+    <item url="inc/.svn/text-base/timer.php.svn-base" uploadstatus="1" />
+    <item url="inc/.svn/tmp/" uploadstatus="1" />
+    <item url="inc/.svn/tmp/prop-base/" uploadstatus="1" />
+    <item url="inc/.svn/tmp/props/" uploadstatus="1" />
+    <item url="inc/.svn/tmp/text-base/" uploadstatus="1" />
+    <item url="inc/.svn/entries" uploadstatus="1" />
+    <item url=".svn/" uploadstatus="1" />
+    <item url=".svn/prop-base/" uploadstatus="1" />
+    <item url=".svn/props/" uploadstatus="1" />
+    <item url=".svn/text-base/" uploadstatus="1" />
+    <item url=".svn/text-base/plugin.xml.svn-base" uploadstatus="1" />
+    <item url=".svn/text-base/timer.html.svn-base" uploadstatus="1" />
+    <item url=".svn/text-base/timetracker.html.svn-base" uploadstatus="1" />
+    <item url=".svn/tmp/" uploadstatus="1" />
+    <item url=".svn/tmp/prop-base/" uploadstatus="1" />
+    <item url=".svn/tmp/props/" uploadstatus="1" />
+    <item url=".svn/tmp/text-base/" uploadstatus="1" />
+    <item url=".svn/entries" uploadstatus="1" />
+    <item url="templates/" uploadstatus="1" />
+    <item url="toolbars/" uploadstatus="1" />
+    <item url="toolbars/.svn/" uploadstatus="1" />
+    <item url="toolbars/.svn/prop-base/" uploadstatus="1" />
+    <item url="toolbars/.svn/props/" uploadstatus="1" />
+    <item url="toolbars/.svn/text-base/" uploadstatus="1" />
+    <item url="toolbars/.svn/tmp/" uploadstatus="1" />
+    <item url="toolbars/.svn/tmp/prop-base/" uploadstatus="1" />
+    <item url="toolbars/.svn/tmp/props/" uploadstatus="1" />
+    <item url="toolbars/.svn/tmp/text-base/" uploadstatus="1" />
+    <item url="toolbars/.svn/entries" uploadstatus="1" />
+    <item url="plugintimetracker.session" uploadstatus="1" />
+    <item url="plugintimetracker.webprj" uploadstatus="1" />
+    <item url="plugin.xml~" uploadstatus="1" />
+    <item url="img/logo_timetracker_32.png" uploadstatus="1" />
+    <item url="img/logo_timetracker_24.png" uploadstatus="1" />
+    <item url="img/logo_timetracker_16.png" uploadstatus="1" />
+    <item url="projets_tt_pipelines.php" uploadstatus="1" />
+    <item url="prive/" uploadstatus="1" />
+    <item url="prive/colonne_droite/" uploadstatus="1" />
+    <item url="prive/colonne_droite/timetracker.html" uploadstatus="1" />
+    <item url="projets_tt_fonctions.php" uploadstatus="1" />
+    <item url="action/session.php~" />
+    <item url="base/.svn/text-base/timetracker_install.php.svn-base" />
+    <item url="base/projets_tt_install.php~" />
+    <item url="base/projets_tt_tables_principales.php~" />
+    <item url="img/.svn/prop-base/logo_timetracker_16.png.svn-base" />
+    <item url="img/.svn/prop-base/logo_timetracker_24.png.svn-base" />
+    <item url="img/.svn/prop-base/logo_timetracker_32.png.svn-base" />
+    <item url="img/.svn/text-base/logo_timetracker_16.png.svn-base" />
+    <item url="img/.svn/text-base/logo_timetracker_24.png.svn-base" />
+    <item url="img/.svn/text-base/logo_timetracker_32.png.svn-base" />
+    <item url="prive/colonne_droite/.svn/" />
+    <item url="prive/colonne_droite/.svn/prop-base/" />
+    <item url="prive/colonne_droite/.svn/props/" />
+    <item url="prive/colonne_droite/.svn/text-base/" />
+    <item url="prive/colonne_droite/.svn/tmp/" />
+    <item url="prive/colonne_droite/.svn/tmp/prop-base/" />
+    <item url="prive/colonne_droite/.svn/tmp/props/" />
+    <item url="prive/colonne_droite/.svn/tmp/text-base/" />
+    <item url="prive/colonne_droite/.svn/entries" />
+    <item url="prive/colonne_droite/timetracker.html~" />
+    <item url="prive/.svn/" />
+    <item url="prive/.svn/prop-base/" />
+    <item url="prive/.svn/props/" />
+    <item url="prive/.svn/text-base/" />
+    <item url="prive/.svn/tmp/" />
+    <item url="prive/.svn/tmp/prop-base/" />
+    <item url="prive/.svn/tmp/props/" />
+    <item url="prive/.svn/tmp/text-base/" />
+    <item url="prive/.svn/entries" />
+    <item url=".svn/prop-base/projets_tt_pipelines.php.svn-base" />
+    <item url=".svn/text-base/projets_tt_fonctions.php.svn-base" />
+    <item url=".svn/text-base/projets_tt_pipelines.php.svn-base" />
+    <item url="templates/.svn/" />
+    <item url="templates/.svn/prop-base/" />
+    <item url="templates/.svn/props/" />
+    <item url="templates/.svn/text-base/" />
+    <item url="templates/.svn/tmp/" />
+    <item url="templates/.svn/tmp/prop-base/" />
+    <item url="templates/.svn/tmp/props/" />
+    <item url="templates/.svn/tmp/text-base/" />
+    <item url="templates/.svn/entries" />
+    <item url="gestion_projets_tt_pipelines.php~" />
+    <item url="projets_tt_fonctions.php~" />
+    <item url="projets_tt_pipelines.php~" />
+    <item url="timer.html~" />
+    <item url="timetracker.html~" />
+    <item url="lang/" />
+    <item url="lang/timetracker_fr.php" />
+    <item url="css/" />
+    <item url="css/timetracker_styles.css" />
+  </project>
+</webproject>

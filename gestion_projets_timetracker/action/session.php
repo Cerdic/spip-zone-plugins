@@ -5,7 +5,7 @@
 	 $securiser_action = charger_fonction('securiser_action', 'inc');
 	 $arg = $securiser_action();
 	 $explode=explode('-',_request('arg'));
- 	$id_tache= $explode[0];
+ 	$id_session= $explode[0];
  	$action =$explode[1];
  	
 
@@ -25,18 +25,13 @@
     	break;
     	
      	case 'arreter':
-     	$secondes=3600;
 
 		$date_fin=date('Y-m-d G:i:s');	
-		$session=sql_fetsel('id_session,date_debut','spip_projets_timetracker','date_fin="0000-00-00 00:00:00"');
-		$date_debut=$session['date_debut'];
-		
-		
+		$date_debut=sql_getfetsel('date_debut','spip_projets_timetracker','id_session='.sql_quote($id_session));
 
-		
 		$duree= difference($date_debut,$date_fin);
 		
-		sql_updateq('spip_projets_timetracker',array('date_fin'=>$date_fin,'id_projet'=>$id_projet,'duree'=>$duree),'id_session='.sql_quote($session['id_session']));	
+		sql_updateq('spip_projets_timetracker',array('date_fin'=>$date_fin,'duree'=>$duree,'statut'=>$action),'id_session='.sql_quote($id_session));	
     	
     	break;   	
     	

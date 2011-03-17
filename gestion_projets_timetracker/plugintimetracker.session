@@ -1,0 +1,21 @@
+<!DOCTYPE webprojectsession>
+<webprojectsession>
+  <session usePreviewPrefix="0" previewPrefix="" >
+    <itemcursorpositions>
+      <item line="6" column="92" url="base/projets_tt_tables_interfaces.php" />
+      <item line="31" column="53" url="base/projets_tt_tables_principales.php" />
+      <item line="0" column="23" url="css/timetracker_styles_admin.css" />
+    </itemcursorpositions>
+    <treestatus>
+      <openfolder url="action" />
+      <openfolder url="base" />
+      <openfolder url="css" />
+      <openfolder url="formulaires" />
+      <openfolder url="img" />
+      <openfolder url="inc" />
+      <openfolder url="lang" />
+      <openfolder url="prive" />
+      <openfolder url="prive/colonne_droite" />
+    </treestatus>
+  </session>
+</webprojectsession>

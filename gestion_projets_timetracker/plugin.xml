@@ -23,6 +23,10 @@
 		<nom>affiche_droite</nom>
 		<inclure>projets_tt_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>projets_tt_pipelines.php</inclure>
+	</pipeline>		
 	<fonctions>projets_tt_fonctions.php</fonctions>
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="saisies" version="[1.8.12;]" />	

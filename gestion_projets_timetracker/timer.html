@@ -1,9 +1,10 @@
 #CACHE{0}
-<div><:gestpro:total_projet:> : 
-[(#ENV{id_tache}|duree{difference})]
+<BOUCLE_art(PROJETS_TIMETRACKER){id_session}>#STATUT
+<div class=timer>
+	<span><BOUCLE_nom(PROJETS_TACHES){id_tache}>#NOM</BOUCLE_nom> : [(#ID_SESSION|duree{difference})]</span>
+	<span><a href="#URL_ACTION_AUTEUR{session,arreter-#ID_SESSION,#SELF}" title="<:gestpro:stop:>"><img src="#CHEMIN{img/Stop_8.png}" alt"stop" /></a></span>
+
 </div>
-<div><:gestpro:heure:> : 
-[(#DATE|affdate{H:i})]
-</div>
+</BOUCLE_art>
 
 

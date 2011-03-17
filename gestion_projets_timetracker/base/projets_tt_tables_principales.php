@@ -24,7 +24,7 @@ function projets_tt_declarer_tables_principales($tables_principales){
 		);
 		
 	$spip_projets_timetracker_join = array(
-		"id_session"		=> "id_session",
+		"id_session"			=> "id_session",
 		"id_tache"			=> "id_tache",	
 		"id_auteur"			=> "id_auteur",			
 		);		
