@@ -1,7 +1,7 @@
 <?php
-function loopedslider_insert_head($flux)
+function tagsphere_insert_head($flux)
 {
-	$flux .= '<script type="text/javascript" src="'.url_absolue(find_in_path('js/jquery.tagsphere.js')).'"></script>';
+	$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_TAGSPHERE.'js/jquery.tagSphere.js"></script>';
 
 return $flux;
 }
