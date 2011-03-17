@@ -70,6 +70,15 @@ function auth_openid_terminer_identifier_login($login, $serveur=''){
 	  AND $auteur = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login)." AND openid=".sql_quote($openid),"","","","",$serveur)){
 
 		$auteur['auth'] = 'openid'; // on se log avec cette methode, donc
+
+		// prevoir la redirection
+		if (!_request('redirect')
+		AND $r = _request('openid_return_to')
+		AND $p = parametre_url($r, 'redirect')) {
+			set_request('redirect', $GLOBALS['redirect'] = $p);
+			#var_dump($p, $r, $_REQUEST);
+		}
+
 		return $auteur;
 	}
 	return false;
