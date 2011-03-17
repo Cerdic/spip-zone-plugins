@@ -23,9 +23,9 @@
 	
 	<lien>http://www.spip-contrib.net/Criteres-precedent-et-suivant</lien>
 	
-	<prefix>csp</prefix>
+	<prefix>suivant_precedent</prefix>
 	
-	<fonctions>public/csp_criteres.php</fonctions>
+	<fonctions>public/suivant_precedent_criteres.php</fonctions>
 	
 	<necessite id="SPIP" version="[2.1;]" />
 	<categorie>navigation</categorie>	
