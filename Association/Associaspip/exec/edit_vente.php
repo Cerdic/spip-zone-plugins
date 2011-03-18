@@ -23,9 +23,12 @@ function exec_edit_vente() {
 	} else {
 		
 		$url_agir_ventes = generer_url_ecrire('agir_ventes');
-		
+
+		$id_vente= intval(_request('id'));		
+
 		$action=$_REQUEST['agir'];
-		$id_vente= intval(_request('id'));
+		if (!$action) $action = $id_vente ? 'modifier' : 'ajouter';
+
 		$url_retour = $_SERVER["HTTP_REFERER"];
 		
 		$data = !$id_vente ? '' : sql_fetsel("*", "spip_asso_ventes INNER JOIN spip_asso_comptes ON id_vente=id_journal ", "id_vente=$id_vente AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_ventes']));
@@ -45,6 +48,7 @@ function exec_edit_vente() {
 			$commentaire=$data['commentaire'];
 			if ($GLOBALS['association_metas']['destinations']=="on")
 			{
+				include_spip('inc/association_comptabilite');
 				$id_compte = sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_ventes']." AND id_journal=$id_vente");
 				$destination = association_liste_destinations_associees($id_compte);
 			} else $id_compte = NULL;

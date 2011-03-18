@@ -111,6 +111,7 @@ function exec_agir_ventes(){
 
 function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $id_vente, $journal, $justification, $recette, $id_compte)
 {
+	include_spip('inc/association_comptabilite');
 	sql_updateq('spip_asso_ventes', array(
 		"date_vente" => $date_vente,
 		"article" => $article,
@@ -136,6 +137,7 @@ function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, 
 
 function ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette)
 {
+	include_spip('inc/association_comptabilite');
 	$id_vente = sql_insertq('spip_asso_ventes', array(
 		'date_vente' => $date_vente,
 		'article' => $article,

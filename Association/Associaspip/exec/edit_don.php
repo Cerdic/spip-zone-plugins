@@ -42,6 +42,7 @@ function exec_edit_don(){
 			$commentaire=$data['commentaire'];
 			if ($GLOBALS['association_metas']['destinations']=="on")
 			{
+				include_spip('inc/association_comptabilite');
 				$id_compte = sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_dons']." AND id_journal=$id_don");
 				$destination = association_liste_destinations_associees($id_compte);
 			}

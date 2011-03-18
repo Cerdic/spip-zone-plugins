@@ -32,16 +32,9 @@ function action_cotisation() {
 function cotisation_insert($id_auteur, $montant, $journal, $justification, $imputation, $date, $validite)
 {
 	include_spip('base/association');
+	include_spip('inc/association_comptabilite');
 	association_ajouter_operation_comptable($date, $montant, 0, $justification, $imputation, $journal, $id_auteur);
-/*	sql_insertq('spip_asso_comptes', array(
-				       'date' => $date,
-				       'journal' => $journal,
-				       'recette' => $montant,
-				       'justification' => $justification,
-				       'imputation' => $imputation,
-				       'id_journal' => $id_auteur)
-		    );
-*/
+
 	sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
 				   array(
 					 "validite" => $validite,

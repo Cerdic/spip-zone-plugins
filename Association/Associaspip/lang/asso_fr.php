@@ -421,8 +421,9 @@ Commentaire: @commentaire@
 			'toutes_destination' => 'toutes destinations',
 
 	# Verifications
-			'erreur_titre' => 'Erreur',
+			'erreur_titre' => 'Une erreur est pr&eacute;sente dans votre saisie',
 			'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas etre n&eacute;gatives',
+			'erreur_montant' => 'le montant ne peut pas etre n&eacute;gatif',
 			'erreur_montant_destination' => 'La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l\'op&eacute;ration',
 			'erreur_destination_dupliquee' => 'Une meme destination a &eacute;t&eacute; s&eacute;lectionn&eacute;e plusieurs fois',
 			'erreur_code_plan' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-etre d&eacute;sactiv&eacute;e)',

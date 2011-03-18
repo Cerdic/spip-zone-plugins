@@ -254,3 +254,8 @@ span.nettoyeur{
 }
 span.erreur { display:block; color:red;}
 
+.formulaire_spip li div.formulaire_edition_destinations div li {
+	padding:0px;
+	display:inline;
+}
+

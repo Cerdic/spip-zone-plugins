@@ -38,7 +38,8 @@ function action_ajouter_dons() {
 
 function don_insert($id_adherent, $date_don, $argent, $bienfaiteur='', $valeur='', $journal='', $contrepartie='', $colis='', $commentaire='', $vu=0)
 {
-	include_spip('base/association');		
+	include_spip('base/association');
+	include_spip('inc/association_comptabilite');	
 	$id_adherent = intval($id_adherent);
 	if (!$bienfaiteur AND $id_adherent)
 	  $bienfaiteur = sql_getfetsel('nom_famille', _ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_adherent");
