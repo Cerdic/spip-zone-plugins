@@ -101,7 +101,7 @@ function spiplistes_meleuse ($last_time) {
 		
 		$eol = "\n";
 		$eol2 =$eol.$eol;
-		$body_html_debut = '<html>'.$eol2.'<body>'.$eol2;
+		$body_html_debut = '<html>'.$eol2.'<body style="margin:0;padding:0;">'.$eol2;
 		$body_html_fin = $eol2.'</body></html>';						
 
 		spiplistes_log($prefix_log.$nb_etiquettes.' job(s), distribution...');
