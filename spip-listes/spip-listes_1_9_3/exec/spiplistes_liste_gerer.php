@@ -110,7 +110,7 @@ function exec_spiplistes_liste_gerer () {
 			
 			$pied_page = _SPIPLISTES_PATRON_PIED_DEFAUT;
 			
-			if($id_liste = spiplistes_listes_liste_creer(_SPIPLISTES_PRIVATE_LIST, $GLOBALS['spip_lang']
+			if($id_liste = spiplistes_listes_liste_creer(_SPIPLISTES_LIST_PRIVATE, $GLOBALS['spip_lang']
 				, $titre, $texte, $pied_page)) {
 					spiplistes_log("id_liste #$id_liste added by id_auteur #$connect_id_auteur");
 			}
@@ -176,7 +176,7 @@ function exec_spiplistes_liste_gerer () {
 					spiplistes_debug_log ('Modification statut: '.$statut);
 					$sql_champs['statut'] = $statut;
 					// si la liste passe en privee, retire les invites
-					if($statut == _SPIPLISTES_PRIVATE_LIST) {
+					if($statut == _SPIPLISTES_LIST_PRIVATE) {
 						$auteur_statut = '6forum';
 						spiplistes_abonnements_auteurs_supprimer($auteur_statut);
 						spiplistes_log("AUTEURS ($auteur_statut) REMOVED FROM LISTE #$id_liste ($statut) BY ID_AUTEUR #$connect_id_auteur");
@@ -535,7 +535,7 @@ function exec_spiplistes_liste_gerer () {
 			($flag_editable)
 			? ""
 				. "<select class='verdana2 fondl' name='statut' size='1' id='change_statut'>\n"
-				. "<option" . mySel(_SPIPLISTES_PRIVATE_LIST, $statut) ." style='background-color: white'>"._T('spiplistes:statut_interne')."</option>\n"
+				. "<option" . mySel(_SPIPLISTES_LIST_PRIVATE, $statut) ." style='background-color: white'>"._T('spiplistes:statut_interne')."</option>\n"
 				. "<option" . $mySelMulti . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."</option>\n"
 				. "<option" . mySel(_SPIPLISTES_TRASH_LIST, $statut) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."</option>\n"
 				. "</select>\n"
@@ -812,7 +812,7 @@ function exec_spiplistes_liste_gerer () {
 			//////////////////////////
 			// propose de forcer les membres sauf invites si la liste est privee
 			.	(
-					($statut==_SPIPLISTES_PRIVATE_LIST)
+					($statut==_SPIPLISTES_LIST_PRIVATE)
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='auteurs' id='forcer_abo_tous' />\n"
 						. "<label for='forcer_abo_tous'>"._T('spiplistes:Abonner_tous_les_inscrits_prives')."</label>"
 						. "</div>\n"
@@ -822,7 +822,7 @@ function exec_spiplistes_liste_gerer () {
 			//
 			// propose de forcer les invites si la liste est publique ou periodique
 			.	(
-					(($statut!=_SPIPLISTES_PRIVATE_LIST) && ($statut!=_SPIPLISTES_TRASH_LIST))
+					(($statut!=_SPIPLISTES_LIST_PRIVATE) && ($statut!=_SPIPLISTES_TRASH_LIST))
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='6forum' id='forcer_abo_6forum' />\n"
 						. "<label for='forcer_abo_6forum'>"._T('spiplistes:Abonner_tous_les_invites_public')."</label></div>\n"
 						. spiplistes_boutons_forcer_format('forcer_format', _T('spiplistes:forcer_abonnements_nouveaux'))

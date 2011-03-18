@@ -171,7 +171,7 @@ function exec_spiplistes_liste_edit(){
 			? "<input type='hidden' name='id_liste' value='$id_liste' />" 
 			: "<input type='hidden' name='new' value='oui' />"
 				// une nouvelle liste est toujours privee
-				. "<input type='hidden' name='statut_nouv' value='"._SPIPLISTES_PRIVATE_LIST."' />"
+				. "<input type='hidden' name='statut_nouv' value='"._SPIPLISTES_LIST_PRIVATE."' />"
 			)
 		.	(
 			// ne sert pas pour le moment (CP-20070922)

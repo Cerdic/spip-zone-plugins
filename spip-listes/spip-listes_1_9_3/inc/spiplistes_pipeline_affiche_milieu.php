@@ -93,7 +93,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			
 		// les auteurs ont droit aux listes privees (internes)
 		if(($auteur_statut == '1comite') || ($auteur_statut == '0minirezo')) {
-			$sql_where .= " OR statut=".sql_quote(_SPIPLISTES_PRIVATE_LIST);
+			$sql_where .= " OR statut=".sql_quote(_SPIPLISTES_LIST_PRIVATE);
 		}
 
 		$sql_result = sql_select(

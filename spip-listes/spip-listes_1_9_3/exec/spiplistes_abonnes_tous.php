@@ -141,7 +141,7 @@ function exec_spiplistes_abonnes_tous () {
 
 		// Total des abonnés listes privées (internes)
 		. "<li>- "._T('spiplistes:Listes_diffusion_prive') . ": "
-			. (0 + $nb_abonnes_listes[_SPIPLISTES_PRIVATE_LIST])
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIVATE])
 			. "</li>"
 		// Total des abonnés listes périodiques (hebdomadaires)
 	 	. "<li>- ". _T('spiplistes:Listes_diffusion_hebdo') . ": "

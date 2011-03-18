@@ -81,7 +81,7 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 		// prepare la liste des non-abonnes elligibles
 		$sql_where = array("email <> ''"); // email obligatoire !
 		// si liste privee, ne prend que l'equipe de redacs
-		if($statut_liste == _SPIPLISTES_PRIVATE_LIST) {
+		if($statut_liste == _SPIPLISTES_LIST_PRIVATE) {
 			$sql_where[] = "(statut=".sql_quote('0minirezo')." OR statut=".sql_quote('1comite').")";
 		}
 	}
@@ -699,7 +699,7 @@ function spiplistes_listes_selectionner_elligibles (
 			, "LENGTH(a.email)"
 			, "(statut=".sql_quote('0minirezo')." OR statut=".sql_quote('1comite')
 				// si pas une liste privée, complète le where
-				. (($statut_liste != _SPIPLISTES_PRIVATE_LIST) ? " OR statut=".sql_quote('6forum') : "")
+				. (($statut_liste != _SPIPLISTES_LIST_PRIVATE) ? " OR statut=".sql_quote('6forum') : "")
 				. ")"
 			, "NOT EXISTS (SELECT NULL FROM spip_auteurs_listes AS l WHERE l.id_auteur = a.id_auteur AND l.id_liste = ".sql_quote($id_liste).")"
 			);

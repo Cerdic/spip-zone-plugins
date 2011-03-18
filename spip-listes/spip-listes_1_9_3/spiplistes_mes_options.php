@@ -78,15 +78,24 @@ define('_SPIPLISTES_COURRIER_STATUT_ERREUR', 'erreur'); // en erreur
 define('_SPIPLISTES_COURRIER_TYPE_NEWSLETTER', 'nl');
 define('_SPIPLISTES_COURRIER_TYPE_LISTEAUTO', 'auto');
 
-// champ 'statut' de 'spip_listes' varchar(10)
+// champ 'statut' de la table 'spip_listes' varchar(10)
+// les listes privees (reservees aux auteurs et admins)
+define('_SPIPLISTES_LIST_PRIVATE', 'inact');
+define('_SPIPLISTES_LIST_PRIV_DAILY', 'prv_jour'); // periode = nb jours
+define('_SPIPLISTES_LIST_PRIV_HEBDO', 'prv_hebdo');
+define('_SPIPLISTES_LIST_PRIV_WEEKLY', 'prv_7jours'); // debut de semaine
+define('_SPIPLISTES_LIST_PRIV_MENSUEL', 'prv_mensul'); // mensuelle
+define('_SPIPLISTES_LIST_PRIV_MONTHLY', 'prv_mois'); // debut de mois
+define('_SPIPLISTES_LIST_PRIV_YEARLY', 'prv_an');
+// les listes publiques (pour tous les inscrits)
 define('_SPIPLISTES_LIST_PUBLIC', 'liste');
-define('_SPIPLISTES_PRIVATE_LIST', 'inact');
 define('_SPIPLISTES_LIST_PUB_DAILY', 'pub_jour'); // periode = nb jours
 define('_SPIPLISTES_LIST_PUB_HEBDO', 'pub_hebdo');
 define('_SPIPLISTES_LIST_PUB_WEEKLY', 'pub_7jours'); // debut de semaine
 define('_SPIPLISTES_LIST_PUB_MENSUEL', 'pub_mensul'); // mensuelle
 define('_SPIPLISTES_LIST_PUB_MONTHLY', 'pub_mois'); // debut de mois
 define('_SPIPLISTES_LIST_PUB_YEARLY', 'pub_an');
+// statut commun
 define('_SPIPLISTES_TRASH_LIST', 'poublist');
 
 // les statuts des periodique
@@ -101,7 +110,7 @@ define('_SPIPLISTES_LISTES_STATUTS_PERIODIQUES',
 
 // les statuts des listes publiees
 define('_SPIPLISTES_LISTES_STATUTS_OK', 
-	_SPIPLISTES_PRIVATE_LIST
+	_SPIPLISTES_LIST_PRIVATE
 	. ';' . _SPIPLISTES_LIST_PUBLIC
 	. ';' . _SPIPLISTES_LISTES_STATUTS_PERIODIQUES
 	);
@@ -389,7 +398,7 @@ $spiplistes_items = array(
 		, 'desc' => null
 		)
 	// les listes
-	, _SPIPLISTES_PRIVATE_LIST  => array(
+	, _SPIPLISTES_LIST_PRIVATE  => array(
 		'puce' => _DIR_IMG_PACK.'puce-rouge.gif'
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
 		, 'icon_color' => 'ff0'
