@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.2.0</version>
+	<version>1.0</version>
 	
 	<nom>Rep&egrave;res - Des squelettes au pixel pr&egrave;s !</nom>
 	
@@ -11,7 +11,7 @@
 	
     <licence>&#169; 2009 Ateliers CYM - PARIS - Licence GNU/GPL</licence>
 	
-	<etat>dev</etat>
+	<etat>stable</etat>
 	
 	<icon>img_pack/picto_reperes_64x64.png</icon>
 	
