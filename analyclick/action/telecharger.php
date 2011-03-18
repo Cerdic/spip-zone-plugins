@@ -12,6 +12,7 @@
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+include_spip("base/analiclic");
 
 function action_telecharger() 
 {	// Id du document
