@@ -10,8 +10,8 @@ function action_reperes_dist() {
 	if (!_request('type')) {
 		if (!$reperes) {
 			$reperes = array(
-				'horizontal' => array(array('distance' => 200, 'couleur' => '#ff3300')),
-				'vertical' => array(array('distance' => 200, 'couleur' => '#33ff00'))
+				'horizontal' => array(),
+				'vertical' => array()
 			);
 		}
 		include_spip('inc/json');
