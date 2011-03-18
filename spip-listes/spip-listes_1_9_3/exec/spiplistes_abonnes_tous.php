@@ -25,7 +25,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_listes_selectionner_auteur');
@@ -42,7 +42,7 @@ function exec_spiplistes_abonnes_tous () {
 		, $connect_id_auteur
 		;
 
-	$flag_autorise = ($connect_statut == "0minirezo");
+	$flag_autorise = ($connect_statut == '0minirezo');
 	
 	if($flag_autorise) {
 	
@@ -54,7 +54,7 @@ function exec_spiplistes_abonnes_tous () {
 		//evaluer les formats de tous les auteurs + compter tous les auteurs
 		$sql_result = sql_select(
 			"`spip_listes_format` AS format, COUNT(`spip_listes_format`) AS nb"
-			, "spip_auteurs_elargis", "", "`spip_listes_format`"
+			, 'spip_auteurs_elargis', '', "`spip_listes_format`"
 		);
 		//repartition des formats
 		$total_abonnes_format = 0;
@@ -74,6 +74,8 @@ function exec_spiplistes_abonnes_tous () {
 			, "spip_listes AS listes LEFT JOIN spip_auteurs_listes AS abonnements USING (id_liste)"
 			, "", "listes.statut"
 		);
+		// etablit l'inventaire des listes
+		// tries pas statut de la liste
 		$nb_abonnes_listes = array();
 		while ($row = sql_fetch($sql_result)) {
 			$nb_abonnes_listes[$row['statut']] = intval($row['nb']);
@@ -87,7 +89,7 @@ function exec_spiplistes_abonnes_tous () {
 	$titre_page = _T('spiplistes:suivi');
 	// Permet entre autres d'ajouter les classes a' la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
-	$sous_rubrique = "abonnes_tous";
+	$sous_rubrique = 'abonnes_tous';
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo($commencer_page( _T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
@@ -97,8 +99,8 @@ function exec_spiplistes_abonnes_tous () {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 	
-	$page_result = ""
-		. "<br /><br /><br />\n"
+	$page_result = ''
+		. '<br /><br /><br />' . PHP_EOL
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
@@ -130,42 +132,64 @@ function exec_spiplistes_abonnes_tous () {
 		;
 	
 	// première boite des stats
-	$page_result .= ""
-		. debut_cadre_trait_couleur("forum-interne-24.gif", true)
+	$page_result .= ''
+		. debut_cadre_trait_couleur('forum-interne-24.gif', true)
 		. spiplistes_titre_boite_info(_T('spiplistes:abonnes_titre'))
-		. "<div class='verdana2' style='position:relative;margin:1ex;height:9em'>"
+		. '<div class="verdana2" style="position:relative;margin:1ex;height:14em">'
 		// bloc de gauche. Répartition des abonnés.
-		. "<div style='position:absolute;top:0;left:0;width:250px' id='info_abo'>"
-		. "<p style='margin:0;'>"._T('spiplistes:repartition_abonnes')." : </p>"
-		. "<ul style='margin:0;padding:0 1ex;list-style:none'>"
+		. '<div style="position:absolute;top:0;left:0;width:250px" id="info_abo">'
+		. PHP_EOL
+		. '<p style="margin:0;">'._T('spiplistes:repartition_abonnes').' : </p>'
+		. PHP_EOL
+		. '<ul style="margin:0;padding:0 1ex;list-style:none">' . PHP_EOL
 
 		// Total des abonnés listes privées (internes)
-		. "<li>- "._T('spiplistes:Listes_diffusion_prive') . ": "
+		. '<li>- '._T('spiplistes:Listes_diffusion_prive') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIVATE])
-			. "</li>"
+			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (hebdomadaires)
-	 	. "<li>- ". _T('spiplistes:Listes_diffusion_hebdo') . ": "
+	 	. '<li>- '. _T('spiplistes:Listes_diffusion_hebdo') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_HEBDO] 
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_WEEKLY])
-			. "</li>"
+			. '</li>' . PHP_EOL
+		// privees hebdo
+	 	. '<li>- '. _T('spiplistes:listes_privees_hebdo') . ': '
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_HEBDO] 
+				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_WEEKLY])
+			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (mensuels)
-	 	. "<li>- ". _T('spiplistes:Listes_diffusion_mensuelle') . ": "
+	 	. '<li>- '. _T('spiplistes:Listes_diffusion_mensuelle') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_MENSUEL] 
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_MONTHLY])
-			. "</li>"
+			. '</li>' . PHP_EOL
+		// privees mensuelles
+	 	. '<li>- '. _T('spiplistes:listes_privees_mensuelle') . ': '
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_MENSUEL] 
+				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_MONTHLY])
+			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (annuelles)
-	 	. "<li>- ". _T('spiplistes:Listes_diffusion_annuelle') . ": "
+	 	. '<li>- '. _T('spiplistes:Listes_diffusion_annuelle') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_YEARLY])
-			. "</li>"
+			. '</li>' . PHP_EOL
+		// privees annuelles
+	 	. '<li>- '. _T('spiplistes:listes_privees_annuelle') . ': '
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_YEARLY])
+			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (periode ou envoi manuel)
-	 	. "<li>- ". _T('spiplistes:Listes_autre_periode') . ": "
+	 	. '<li>- '. _T('spiplistes:Listes_autre_periode') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUBLIC] 
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_DAILY])
-			. "</li>"
+			. '</li>' . PHP_EOL
+		// privees quotidiennes
+	 	. '<li>- '. _T('spiplistes:listes_privees_autre_periode') . ': '
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIVATE] 
+				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_DAILY])
+			. '</li>' . PHP_EOL
 		// Total des non abonnés
-	 	. "<li>- ". _T('spiplistes:abonne_aucune_liste') . ": ".$nb_abonnes_a_rien. "</li>"
-		. "</ul>"
-		. "</div>\n"
+	 	. '<li>- '. _T('spiplistes:abonne_aucune_liste') . ': '.$nb_abonnes_a_rien
+			. '</li>' . PHP_EOL
+		. '</ul>' . PHP_EOL
+		. '</div>' . PHP_EOL
 
 		// bloc de droite. Répartition des formats.
 		. "<div style='position:absolute;top:0;right:0;width:180px;' id='info_fmt'>\n"
