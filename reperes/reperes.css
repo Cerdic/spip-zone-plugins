@@ -1,13 +1,15 @@
-.invisible 									{ display:block}
-.travaux 									{ background:orange; border-top:4px dashed red}
-.trait										{ position:absolute; background-color:black; z-index:10; border:none; margin:0; padding:0; background-color:#efefef;}
-.trait.vertical								{ width:1px; height:1000px; top:0; left:0; }
-.trait.horizontal							{ width:100%; height:1px; line-height:0; font-size:0; top:0; }
-html .trait.horizontal						{ height:-10px; }
-.trait.vertical.gauche 						{ left:0; background-color:blue;}
-.trait.vertical.bord_gauche 				{ left:330px !important; background-color:lime;}
-.trait.vertical.milieu 						{ left:350px !important; background-color:red;}
-.trait.vertical.bord_droite 				{ left:370px !important; background-color:lime;}
-.trait.vertical.droite 						{ right:300px !important; background-color:blue;}
-.trait.horizontal.centre					{ top:247px !important; }
-span.repere 								{ display:block; padding:3px; font-size:11px; font-weight:bold; color:black; position:absolute; top:-8px; }
+#reperes .trait.horizontal:hover{ cursor:row-resize; -moz-box-shadow: 0px 0px 10px #888;}
+#reperes .trait.vertical:hover	{ cursor:col-resize; -moz-box-shadow: 0px 0px 10px #888;}
+.invisible 						{ display:block}
+.travaux 						{ background:orange; border-top:4px dashed red}
+.trait							{ position:absolute; background-color:transparent; z-index:10; border:none; margin:0; padding:0;}
+.trait.vertical					{ width:1px; height:1000px; top:0; left:0; border-right:1px solid #ff3300;}
+.trait.horizontal				{ width:100%; height:1px; line-height:0; font-size:0; top:0; border-bottom:1px solid #ff3300;}
+html .trait.horizontal			{ height:-10px; }
+.trait.vertical.gauche 			{ left:0; background-color:blue;}
+.trait.vertical.bord_gauche 	{ left:330px !important; background-color:lime;}
+.trait.vertical.milieu 			{ left:350px !important; background-color:red;}
+.trait.vertical.bord_droite		{ left:370px !important; background-color:lime;}
+.trait.vertical.droite 			{ right:300px !important; background-color:blue;}
+.trait.horizontal.centre		{ top:247px !important; }
+span.repere 					{ display:block; padding:3px; font-size:11px; font-weight:bold; color:black; position:absolute; top:-8px; }

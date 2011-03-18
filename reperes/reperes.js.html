@@ -3,26 +3,63 @@
 ;if(window.jQuery) (function($){
 
 $(document).ready(function(){
-    // ici lire la variable reperes/bloc pour remplacer le nom de la div
-    // lire aussi la variable reperes/insertion (pour remplacer after|before ou append)
-    // voir en ligne : http://docs.jquery.com/Manipulation
-    // lire enfin le tableau de valeurs pour construire les divs
-[(#SET{reperes,[(#ARRAY{
-0,[(#ARRAY{position,horizontal,distance,200,couleur,#ff6600})],
-1,[(#ARRAY{position,vertical,distance,100,couleur,#66ff00})],
-})]})]
 
-$('[(#CONFIG{reperes/calque/selecteur})]')
-<BOUCLE_reperes(POUR){tableau #GET{reperes}}>
-.[(#CONFIG{reperes/calque/position})]('<div id="repere_[(#CLE)]" class="invisible trait[ (#VALEUR
-	|table_valeur{position})]" style="[(#VALEUR
-	|table_valeur{position}|=={horizontal}|?{top,left})]:[ (#VALEUR
-	|table_valeur{distance})]px; border-[(#VALEUR
-	|table_valeur{position}|=={horizontal}|?{bottom,left})]:1px solid[ (#VALEUR
-	|table_valeur{couleur})]"><span class="repere">Rep. [(#CLE)]</span></div>')
-</BOUCLE_reperes>
-;});
+dessiner_repere = function($id, $position, $distance, $couleur) {
+	$ou = 'top';
+	if ($position == 'vertical') { $ou = 'left'; }
+ return '<div id="repere_h_' + $id + '" class="invisible trait ' + $position + '" style="' + $ou +' :' + $distance + 'px; border-color:' + $couleur + '">' + 
+			'<span class="repere">Rep. ' + $id + '</span>' + 
+		'</div>';
+}
 
+$.get('#URL_ACTION_AUTEUR{reperes}', function(data) {
+	if (data) {
+		$('[(#CONFIG{reperes/calque/selecteur})]').[(#CONFIG{reperes/calque/position})]('<div id="reperes"></div>');
+
+		$reperes = $('#reperes');
+		console.log(data);
+		if (typeof(data.horizontal) != 'undefined') {
+			$.each(data.horizontal, function(key, def) {
+				if (def) {
+					$reperes.append(dessiner_repere(key, 'horizontal', def.distance, def.couleur));
+				}
+			});
+		}
+
+		if (typeof(data.vertical) != 'undefined') {
+			$.each(data.vertical, function(key, def) {
+				if (def) {
+					$reperes.append(dessiner_repere(key, 'vertical', def.distance, def.couleur));
+				}
+			});
+		}
+		
+		$('#reperes .horizontal').draggable({
+			axis: 'y',
+			cursor: 'row-resize',
+			stop: function(event, ui) { $.post('#URL_ACTION_AUTEUR{reperes}', {
+				 id: event.target.id.substring(9),
+				 type: 'horizontal',
+				 valeur: event.target.offsetTop,
+				 couleur: '#ff3300' });
+			 }
+		});
+		
+		$('#reperes .vertical').draggable({
+			axis: 'x',
+			cursor: 'col-resize',
+			stop: function(event, ui) { $.post('#URL_ACTION_AUTEUR{reperes}', {
+				 id: event.target.id.substring(9),
+				 type: 'vertical',
+				 valeur: event.target.offsetLeft,
+				 couleur: '#33ff00' });
+			 }
+		});
+	}
+});
+
+
+});
 })(jQuery);
 
 

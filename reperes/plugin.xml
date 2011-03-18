@@ -7,6 +7,7 @@
 	<prefix>reperes</prefix>
 	
 	<auteur>Cyril MARION</auteur>
+	<auteur>Matthieu Marcillaud</auteur>
 	
     <licence>&#169; 2009 Ateliers CYM - PARIS - Licence GNU/GPL</licence>
 	
@@ -36,10 +37,16 @@
 		<nom>insert_head</nom>
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
+	
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>reperes_pipelines.php</inclure>
+	</pipeline>
 
 	<necessite id='cfg' version='[1.0;]' />
 	<necessite id='saisies' version='[1.0;]' />
 	<necessite id='spip_bonux' version='[1.0;]' />
+	<necessite id="jqueryui" version="[1.8.5;]" />
 	
 	<categorie>outil</categorie>
 </plugin>

@@ -1,0 +1,45 @@
+<?php
+
+function action_reperes_dist() {
+	
+	if (!autoriser('configurer')) {
+		return;
+	}
+	
+	$reperes = lire_config('reperes/points');
+	if (!_request('type')) {
+		if (!$reperes) {
+			$reperes = array(
+				'horizontal' => array(array('distance' => 200, 'couleur' => '#ff3300')),
+				'vertical' => array(array('distance' => 200, 'couleur' => '#33ff00'))
+			);
+		}
+		include_spip('inc/json');
+		header("Content-Type: text/json; charset=". $GLOBALS['meta']['charset']);
+		echo json_encode($reperes);
+		return;
+	}
+
+	$position = _request('type');
+	if (!in_array($position, array('horizontal', 'vertical'))) {
+		$position = 'horizontal';
+	}
+	$valeur   = _request('valeur');
+	$couleur  = _request('couleur');
+
+	$ligne = array(
+		'distance' => $valeur,
+		'couleur' => $couleur,
+	);
+	
+	// modifier des reperes existants
+	if ($id = _request('id')) {
+		$reperes[$position][$id] = $ligne;
+	}
+	// ajouter un repere
+	else {
+		$reperes[$position][] = $ligne;
+	}
+	ecrire_config('reperes/points', $reperes);
+}
+?>

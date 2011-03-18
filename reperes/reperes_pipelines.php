@@ -24,5 +24,10 @@ function reperes_insert_head($flux){
 	
 }
 
+function reperes_jqueryui_forcer($scripts){
+	$scripts[] = "jquery.ui.draggable";
+	return $scripts;
+}
+
 
 ?>
