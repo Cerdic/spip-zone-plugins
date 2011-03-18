@@ -379,8 +379,11 @@ function step_maj_liste_plugins($id_zone, $liste) {
 
 // passe simplement un '[version;version]'
 function step_verifier_plugin_compatible_version_spip($version){
+	static $versions = false;
+	if ($versions === false) { $versions = array(); }
+	if (isset($versions[$version])) { return $versions[$version]; }
 	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	return plugin_version_compatible($version, $version_spip);
+	return $versions[$version] = plugin_version_compatible($version, $version_spip);
 }
 
 
@@ -664,4 +667,48 @@ function step_selectionner_maj() {
 	}
 	return $ids;
 }
+
+
+
+/* fonction (pas au point pour installer un plugin)
+ *
+ * @param $prefixe : prefixe du plugin 
+ *
+ */
+function step_install($prefixe, $redirect='') {
+	if (!$redirect) {
+		$redirect = generer_url_ecrire('step');
+	}
+
+	$id = sql_getfetsel('id_plugin', 'spip_plugins', array(
+		'prefixe=' . sql_quote('meta_concurrences'),
+		'obsolete=' . sql_quote('non')
+	));
+
+	if ($id) {
+
+		include_spip('inc/step_decideur');
+		$decideur = new Decideur;
+		$decideur->verifier_dependances(array($id => "on"));
+
+		$_todo = array();
+		foreach ($decideur->todo as $info) {
+			$_todo[$info['i']] = $info['todo'];
+		}
+
+		// todo : erreurs ?
+		
+		include_spip('inc/step_actionneur');
+		$actionneur = new Actionneur();
+		$actionneur->ajouter_actions($_todo);
+		$actionneur->sauver_actions();
+
+		
+		include_spip('inc/headers');
+
+		$url = generer_action_auteur('step_install', '', $redirect);
+		redirige_par_entete(str_replace('&amp;','&', $url));
+	}
+}
+ 
 ?>
