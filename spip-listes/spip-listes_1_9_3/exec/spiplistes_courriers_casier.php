@@ -66,17 +66,23 @@ function spiplistes_afficher_pile_messages() {
 	
 		$date_dernier = date(_T('spiplistes:format_date'), strtotime($maj)) ;
 		switch($statut) {
+			case _SPIPLISTES_LIST_PRIV_HEBDO:
+			case _SPIPLISTES_LIST_PRIV_WEEKLY:
 			case _SPIPLISTES_LIST_PUB_HEBDO:
 			case _SPIPLISTES_LIST_PUB_WEEKLY:
 				$periodicite = _T('spiplistes:Liste_hebdo');
 				break;
+			case _SPIPLISTES_LIST_PRIV_MENSUEL:
+			case _SPIPLISTES_LIST_PRIV_MONTHLY:
 			case _SPIPLISTES_LIST_PUB_MENSUEL:
 			case _SPIPLISTES_LIST_PUB_MONTHLY:
 				$periodicite = _T('spiplistes:Liste_mensuelle');
 				break;
+			case _SPIPLISTES_LIST_PRIV_YEARLY:
 			case _SPIPLISTES_LIST_PUB_YEARLY:
 				$periodicite = _T('spiplistes:Liste_annuelle');
 				break;
+			case _SPIPLISTES_LIST_PRIV_DAILY:
 			case _SPIPLISTES_LIST_PUB_DAILY:
 				if($periode) {
 					$periodicite = _T('spiplistes:Tous_les_s'
@@ -91,16 +97,17 @@ function spiplistes_afficher_pile_messages() {
 		}
 	
 		$ii = 0;
-		$pile_result .= ""
-			. "<tr " . ((($couleur_ligne++) % 2) ? "class='row-even'" : "") . ">\n"
-			. "<td><a href='" . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier")."'>$patron</a>"
-			. "<br />$periodicite</td>\n"
-			. "<td><a href='" . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste") . "'>$titre</a>"
-			. "<br />".spiplistes_nb_abonnes_liste_str_get($id_liste)."."
-			. "</td>"
-			. "<td>"
+		$pile_result .= ''
+			. '<tr ' . ((($couleur_ligne++) % 2) ? 'class="row-even"' : '') . '>' . PHP_EOL
+			. '<td><a href="' . generer_url_public('patron_switch','patron=$patron&date=$date_dernier').'">$patron</a>'
+			. '<br />'.$periodicite.'</td>' . PHP_EOL
+			. '<td><a href="' . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, 'id_liste='.$id_liste) . '">'
+				. $titre . '</a>'
+			. '<br />'.spiplistes_nb_abonnes_liste_str_get($id_liste).'.'
+			. '</td>'
+			. '<td>'
 			. spiplistes_affdate ($date)
-			. "</td></tr>\n"
+			. '</td></tr>' . PHP_EOL
 			;
 	} // end while
 	
