@@ -45,8 +45,9 @@
 
 	<necessite id='cfg' version='[1.0;]' />
 	<necessite id='saisies' version='[1.0;]' />
-	<necessite id='spip_bonux' version='[1.0;]' />
+	<necessite id='spip_bonux' version='[1.8;]' />
 	<necessite id="jqueryui" version="[1.8.5;]" />
+	<necessite id='palette' version='[1.0;]' />
 	
 	<categorie>outil</categorie>
 </plugin>

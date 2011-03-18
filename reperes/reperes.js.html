@@ -4,10 +4,11 @@
 
 $(document).ready(function(){
 
-dessiner_repere = function($id, $position, $distance, $couleur) {
+dessiner_repere = function($id, $position, $distance) {
 	$ou = 'top';
-	if ($position == 'vertical') { $ou = 'left'; }
-	return '<div id="repere_h_' + $id + '" class="invisible trait ' + $position + '" style="' + $ou +' :' + $distance + 'px; border-color:' + $couleur + '">' + 
+    $l = 'h';
+	if ($position == 'vertical') { $ou = 'left'; $l = 'v';}
+	return '<div id="repere_' + $l + '_' + $id + '" class="invisible trait ' + $position + '" style="' + $ou +' :' + $distance + 'px; ">' + 
 			'<span class="repere">' + $ou + ' ' + $distance + 'px</span>' + 
 		'</div>';
 }
@@ -24,8 +25,8 @@ deplacements_reperes = function() {
 			$.post('#URL_ACTION_AUTEUR{reperes}', {
 			 id: event.target.id.substring(9),
 			 type: 'horizontal',
-			 valeur: event.target.offsetTop,
-			 couleur: '#ff3300' });
+			 valeur: event.target.offsetTop
+             });
 		 }
 	})
 	.dblclick(function(event){
@@ -53,8 +54,8 @@ deplacements_reperes = function() {
 			$.post('#URL_ACTION_AUTEUR{reperes}', {
 			 id: event.target.id.substring(9),
 			 type: 'vertical',
-			 valeur: event.target.offsetLeft,
-			 couleur: '#33ff00' });
+			 valeur: event.target.offsetLeft
+			 });
 		 }
 	})
 	.dblclick(function(event){
@@ -86,7 +87,7 @@ recuperer_reperes = function() {
 				if (typeof(data.horizontal) != 'undefined') {
 					$.each(data.horizontal, function(key, def) {
 						if (def) {
-							$reperes.append(dessiner_repere(key, 'horizontal', def.distance, def.couleur));
+							$reperes.append(dessiner_repere(key, 'horizontal', def.distance));
 						}
 					});
 				}
@@ -94,7 +95,7 @@ recuperer_reperes = function() {
 				if (typeof(data.vertical) != 'undefined') {
 					$.each(data.vertical, function(key, def) {
 						if (def) {
-							$reperes.append(dessiner_repere(key, 'vertical', def.distance, def.couleur));
+							$reperes.append(dessiner_repere(key, 'vertical', def.distance));
 						}
 					});
 				}
@@ -113,8 +114,8 @@ $('#repere_vertical_plus')
 	.click(function(){
 		$.post('#URL_ACTION_AUTEUR{reperes}', {
 			type: 'vertical',
-			valeur: 100,
-			couleur: '#33ff00' },
+			valeur: 100
+            },
 			function (data){
 				recuperer_reperes();
 		});
@@ -125,8 +126,8 @@ $('#repere_horizontal_plus')
 	.click(function(){
 		$.post('#URL_ACTION_AUTEUR{reperes}', {
 			type: 'horizontal',
-			valeur: 100,
-			couleur: '#ff3300'},
+			valeur: 100
+            },
 			function (data){
 				recuperer_reperes();
 		});	

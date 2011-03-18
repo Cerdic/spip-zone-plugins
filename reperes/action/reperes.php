@@ -25,11 +25,9 @@ function action_reperes_dist() {
 		$position = 'horizontal';
 	}
 	$valeur   = _request('valeur');
-	$couleur  = _request('couleur');
 
 	$ligne = array(
 		'distance' => $valeur,
-		'couleur' => $couleur,
 	);
 	
 	// modifier des reperes existants
