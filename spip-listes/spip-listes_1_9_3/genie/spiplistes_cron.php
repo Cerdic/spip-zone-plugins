@@ -25,7 +25,7 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2007-09-22 18:27:40 +0200 (sam., 22 sept. 2007) $
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
 	// Appele' en tache de fond (CRON SPIP)
@@ -63,7 +63,7 @@ function cron_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_courrier');
 	include_spip('inc/spiplistes_api_abstract_sql');
 
-	$prefix_log = "CRON: ";
+	$prefix_log = 'CRON: ';
 
 	// initialise les options (prefs spiplistes)
 	foreach(array(
@@ -73,8 +73,8 @@ function cron_spiplistes_cron ($last_time) {
 	}
 
 	if($opt_suspendre_trieuse == 'oui') {
-		spiplistes_log($prefix_log."SUSPEND MODE !!!");
-		if(spiplistes_courriers_en_queue_compter("etat=".sql_quote("")) > 0) {
+		spiplistes_log($prefix_log.'SUSPEND MODE !!!');
+		if(spiplistes_courriers_en_queue_compter('etat='.sql_quote('')) > 0) {
 			include_spip('inc/spiplistes_meleuse');
 			return(spiplistes_meleuse($last_time));
 		}
@@ -91,11 +91,11 @@ function cron_spiplistes_cron ($last_time) {
 	);
 
 	// demande les listes auto a' envoyer (date <= maintenant)
-	$sql_where = "message_auto=".sql_quote('oui')."
+	$sql_where = 'message_auto='.sql_quote('oui').'
 			AND date > 0  
 			AND date <= NOW()
-			AND (".spiplistes_listes_sql_where_or(_SPIPLISTES_LISTES_STATUTS_OK).")
-			"
+			AND ('.spiplistes_listes_sql_where_or(_SPIPLISTES_LISTES_STATUTS_OK).')
+			'
 		;
 	$listes_privees_et_publiques = sql_select(
 		$sql_select
@@ -109,7 +109,7 @@ function cron_spiplistes_cron ($last_time) {
 
 	if($nb_listes_ok > 0) {
 	
-		$mod_listes_ids = spiplistes_mod_listes_get_id_auteur("toutes");
+		$mod_listes_ids = spiplistes_mod_listes_get_id_auteur('toutes');
 		
 		while($row = sql_fetch($listes_privees_et_publiques)) {
 		
@@ -132,7 +132,7 @@ function cron_spiplistes_cron ($last_time) {
 			
 			// Tampon date prochain envoi (dans 'date') et d'envoi (dans 'maj')
 			$sql_set = $next_time = false;
-			if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES))) 
+			if(in_array($statut, explode(';', _SPIPLISTES_LISTES_STATUTS_PERIODIQUES))) 
 			{
 				// prendre la date du jour plutot que la dernier date choisie
 				// sinon, une lettre quotidienne du mois precedent
@@ -140,28 +140,34 @@ function cron_spiplistes_cron ($last_time) {
 				//$job_time = strtotime($envoyer_quand);
 				$job_time = strtotime(spiplistes_sql_now());
 					
-				$job_heure = date("H", $job_time);
-				$job_minute = date("i", $job_time);
-				$job_mois = date("m", $job_time);
+				$job_heure = date('H', $job_time);
+				$job_minute = date('i', $job_time);
+				$job_mois = date('m', $job_time);
 				$job_jour = (($statut == _SPIPLISTES_LIST_PUB_MONTHLY) ? 1 : date('j', $job_time));
-				$job_an = date("Y"); // la date est forcee par celle du systeme (eviter erreurs)
+				$job_an = date('Y'); // la date est forcee par celle du systeme (eviter erreurs)
 				switch($statut) {
+					case _SPIPLISTES_LIST_PRIV_YEARLY:
 					case _SPIPLISTES_LIST_PUB_YEARLY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour, $job_an+1);
 						break;
+					case _SPIPLISTES_LIST_PRIV_MENSUEL:
+					case _SPIPLISTES_LIST_PRIV_MONTHLY:
 					case _SPIPLISTES_LIST_PUB_MENSUEL:
 					case _SPIPLISTES_LIST_PUB_MONTHLY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois+1, $job_jour, $job_an);
 						break;
+					case _SPIPLISTES_LIST_PRIV_HEBDO:
+					case _SPIPLISTES_LIST_PRIV_WEEKLY:
 					case _SPIPLISTES_LIST_PUB_HEBDO:
 					case _SPIPLISTES_LIST_PUB_WEEKLY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour+7, $job_an);
 						break;
+					case _SPIPLISTES_LIST_PRIV_DAILY:
 					case _SPIPLISTES_LIST_PUB_DAILY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour+$periode, $job_an);
 						break;
 					default:
-						$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote("non"));
+						$sql_set = array('date' => sql_quote(''), 'message_auto' => sql_quote('non'));
 						break;
 				}
 			}
@@ -196,7 +202,7 @@ function cron_spiplistes_cron ($last_time) {
 				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
 			
 			$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($courrier_html))) > 10);
-			spiplistes_debug_log($prefix_log."taille courrier pour la liste $id_liste : $n");
+			spiplistes_debug_log($prefix_log.'taille courrier pour la liste $id_liste : '.$n);
 
 			if($taille_courrier_ok) {
 				include_spip('inc/filtres');
@@ -205,16 +211,16 @@ function cron_spiplistes_cron ($last_time) {
 				$statut = _SPIPLISTES_COURRIER_STATUT_ENCOURS;
 			}
 			else {
-				$date_debut_envoi = $date_fin_envoi = "NOW()";
+				$date_debut_envoi = $date_fin_envoi = 'NOW()';
 				$statut = _SPIPLISTES_COURRIER_STATUT_VIDE;
-				spiplistes_debug_log($prefix_log."envoi mail nouveautes : courrier vide");
+				spiplistes_debug_log($prefix_log.'envoi mail nouveautes : courrier vide');
 			}
 			
 			// Place le courrier dans le casier
 			$id_courrier = sql_insert(
 				'spip_courriers'
-				,	"("
-					. "titre
+				,	'('
+					. 'titre
 						,date
 						,statut
 						,type
@@ -223,20 +229,20 @@ function cron_spiplistes_cron ($last_time) {
 						,date_debut_envoi
 						,date_fin_envoi
 						,texte
-						,message_texte"
-					. ")"
-				, 	"("
+						,message_texte'
+					. ')'
+				, 	'('
 					. sql_quote($titre)
-					. ",NOW()"
-					. ",".sql_quote($statut)
-					. ",".sql_quote(_SPIPLISTES_COURRIER_TYPE_LISTEAUTO)
-					. ",".sql_quote($id_auteur)
-					. ",".sql_quote($id_liste)
-					. ",".$date_debut_envoi
-					. ",".$date_fin_envoi
-					. ",".sql_quote($courrier_html)
-					. ",".sql_quote($courrier_texte)
-					. ")"
+					. ',NOW()'
+					. ','.sql_quote($statut)
+					. ','.sql_quote(_SPIPLISTES_COURRIER_TYPE_LISTEAUTO)
+					. ','.sql_quote($id_auteur)
+					. ','.sql_quote($id_liste)
+					. ','.$date_debut_envoi
+					. ','.$date_fin_envoi
+					. ','.sql_quote($courrier_html)
+					. ','.sql_quote($courrier_texte)
+					. ')'
 			);
 
 			if($taille_courrier_ok) {
@@ -251,16 +257,16 @@ function cron_spiplistes_cron ($last_time) {
 	// Si panier des etiquettes plein, appel de la meleuse
 	if(
 		$n = 
-			spiplistes_courriers_en_queue_compter("etat=".sql_quote(""))
+			spiplistes_courriers_en_queue_compter('etat='.sql_quote(''))
 	){
 
-		spiplistes_debug_log($prefix_log."$n job(s), appel meleuse");
+		spiplistes_debug_log($prefix_log.$n.' job(s), appel meleuse');
 
 		include_spip('inc/spiplistes_meleuse');
 		return(spiplistes_meleuse($last_time));
 	}
 	else {
-		spiplistes_debug_log($prefix_log."NO JOB");
+		spiplistes_debug_log($prefix_log.'NO JOB');
 	}
 	return ($last_time); 
 } // cron_spiplistes_cron()
@@ -270,7 +276,7 @@ function cron_spiplistes_cron ($last_time) {
 
 function genie_spiplistes_cron ($last_time) {
 	include_spip('inc/spiplistes_api_globales');
-// spiplistes_debug_log("GENI: genie_spiplistes_cron() 193");
+// spiplistes_debug_log('GENI: genie_spiplistes_cron() 193');
 	cron_spiplistes_cron ($last_time);
 }
 
