@@ -8,7 +8,7 @@ dessiner_repere = function($id, $position, $distance, $couleur) {
 	$ou = 'top';
 	if ($position == 'vertical') { $ou = 'left'; }
 	return '<div id="repere_h_' + $id + '" class="invisible trait ' + $position + '" style="' + $ou +' :' + $distance + 'px; border-color:' + $couleur + '">' + 
-			'<span class="repere">Rep. ' + $id + '</span>' + 
+			'<span class="repere">' + $ou + ' ' + $distance + 'px</span>' + 
 		'</div>';
 }
 
@@ -16,7 +16,12 @@ deplacements_reperes = function() {
 	$('#reperes .horizontal').draggable({
 		axis: 'y',
 		cursor: 'row-resize',
-		stop: function(event, ui) { $.post('#URL_ACTION_AUTEUR{reperes}', {
+        drag: function(event, ui) { 
+        	$('#' + event.target.id + ' span').html('top ' + event.target.offsetTop + 'px');
+        },
+		stop: function(event, ui) {
+        	$('#' + event.target.id + ' span').html('top ' + event.target.offsetTop + 'px');
+			$.post('#URL_ACTION_AUTEUR{reperes}', {
 			 id: event.target.id.substring(9),
 			 type: 'horizontal',
 			 valeur: event.target.offsetTop,
@@ -40,7 +45,12 @@ deplacements_reperes = function() {
 	$('#reperes .vertical').draggable({
 		axis: 'x',
 		cursor: 'col-resize',
-		stop: function(event, ui) { $.post('#URL_ACTION_AUTEUR{reperes}', {
+        drag: function(event, ui) { 
+        	$('#' + event.target.id + ' span').html('left ' + event.target.offsetLeft + 'px');
+        },
+		stop: function(event, ui) { 
+        	$('#' + event.target.id + ' span').html('left ' + event.target.offsetLeft + 'px');
+			$.post('#URL_ACTION_AUTEUR{reperes}', {
 			 id: event.target.id.substring(9),
 			 type: 'vertical',
 			 valeur: event.target.offsetLeft,
