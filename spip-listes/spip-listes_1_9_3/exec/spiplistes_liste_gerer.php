@@ -168,10 +168,12 @@ function exec_spiplistes_liste_gerer () {
 			
 			// Modifier diffusion ?
 			if($btn_modifier_diffusion) {
+				spiplistes_debug_log ('Modification diffusion');
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS)) 
 					&& ($statut!=$current_liste['statut'])
 				) {
+					spiplistes_debug_log ('Modification statut: '.$statut);
 					$sql_champs['statut'] = $statut;
 					// si la liste passe en privee, retire les invites
 					if($statut == _SPIPLISTES_PRIVATE_LIST) {

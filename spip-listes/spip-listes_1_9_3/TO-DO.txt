@@ -8,6 +8,14 @@ TO-DO:
 
 Si supprimer courrier, supprimer documents attachés ?
 
++ permettre la programmation d'une liste privee (http://www.spip-contrib.net/SPIP-Listes#comment442802).
+Il faut enrichir le statut d'une liste. A l'heure actuelle (18/03/2011), une liste privee
+programmee devient publique. Lui redonner le statut prive' retire la programmation.
+Peut-etre ajouter des statuts (PRI_<periode>). Voir ligne 82 fr *mes__options.php ?
+Et tout le code qui va avec ?
+Ou autre solution, sans trop toucher aux tables ?
+
+
 + a verifier: semble ne pas tenir compte des options d habillage dans le calcul du poids du mail. cf.:
 http://www.spip-contrib.net/SPIP-Listes#comment436451
 
