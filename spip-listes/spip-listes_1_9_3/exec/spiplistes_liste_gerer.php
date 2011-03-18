@@ -235,38 +235,38 @@ function exec_spiplistes_liste_gerer () {
 					
 					switch($auto_chrono) {
 						case 'auto_jour':
-							$sql_champs['statut'] = _SPIPLISTES_DAILY_LIST;
+							$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_DAILY;
 							// force au minimum 1 jour
 							$sql_champs['periode'] = (($periode > 0) ? $periode : 1);
 							break;
 						case 'auto_hebdo':
 							if($auto_weekly == 'oui') {
 								// debut de semaine ?
-								$sql_champs['statut'] = _SPIPLISTES_WEEKLY_LIST;
+								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_WEEKLY;
 								// corrige la date pour le lundi de la semaine
 								$time = strtotime($envoyer_quand);
 								$time = mktime(0,0,0,date("m", $time),date("d", $time)-date("w", $time)+1,date("Y", $time));
     							$envoyer_quand = date("Y-m-d H:i:s", $time);
 	 							$sql_champs['date'] = $envoyer_quand;
 							} else {
-								$sql_champs['statut'] = _SPIPLISTES_HEBDO_LIST;
+								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_HEBDO;
 							}
 							$sql_champs['periode'] = 0;
 							break;
 						case 'auto_mensuel':
 							if($auto_mois == 'oui') {
 								// debut du mois ?
-								$sql_champs['statut'] = _SPIPLISTES_MONTHLY_LIST;
+								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_MONTHLY;
 								// corrige la date, 1' du mois
 								$envoyer_quand = substr($envoyer_quand, 0, 8)."01 00:00:00";
 								$sql_champs['date'] = $envoyer_quand;
 							} else {
-								$sql_champs['statut'] = _SPIPLISTES_MENSUEL_LIST;
+								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_MENSUEL;
 							}
 							$sql_champs['periode'] = 0;
 							break;
 						case 'auto_an':
-							$sql_champs['statut'] = _SPIPLISTES_YEARLY_LIST;
+							$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_YEARLY;
 							$sql_champs['periode'] = 0;
 							break;
 					}
@@ -523,9 +523,9 @@ function exec_spiplistes_liste_gerer () {
 		. "</span>\n"
 		;
 
-		$mySelMulti = " value='"._SPIPLISTES_PUBLIC_LIST."'" 
+		$mySelMulti = " value='"._SPIPLISTES_LIST_PUBLIC."'" 
 			. (
-				(in_array($statut, spiplistes_listes_statuts_periodiques()) || ($statut == _SPIPLISTES_PUBLIC_LIST))
+				(in_array($statut, spiplistes_listes_statuts_periodiques()) || ($statut == _SPIPLISTES_LIST_PUBLIC))
 				? " selected='selected'" 
 				: ""
 			  )
@@ -621,7 +621,7 @@ function exec_spiplistes_liste_gerer () {
 			. "<p class='verdana2'>"
 			. spiplistes_items_get_item('alt', $statut)."<br />\n"
 			.	(	
-					($statut == _SPIPLISTES_MONTHLY_LIST)
+					($statut == _SPIPLISTES_LIST_PUB_MONTHLY)
 					?	"<strong>" . spiplistes_items_get_item("tab_t", $statut) . "</strong><br />"
 					:	""
 				)
@@ -700,7 +700,7 @@ function exec_spiplistes_liste_gerer () {
 			. "<li style='margin-top:0.5em'>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_jour'
 					, ''
-					, ($statut == _SPIPLISTES_DAILY_LIST)
+					, ($statut == _SPIPLISTES_LIST_PUB_DAILY)
 					, true, false
 					)
 				. _T('spiplistes:Tous_les')
@@ -711,25 +711,25 @@ function exec_spiplistes_liste_gerer () {
 			. "<li>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_hebdo'
 					, _T('spiplistes:Toutes_les_semaines')
-					, (($statut == _SPIPLISTES_HEBDO_LIST) || ($statut == _SPIPLISTES_WEEKLY_LIST))
+					, (($statut == _SPIPLISTES_LIST_PUB_HEBDO) || ($statut == _SPIPLISTES_LIST_PUB_WEEKLY))
 					, true, false)
 				. spiplistes_form_input_checkbox('auto_weekly', 'oui'
-					, _T('spiplistes:en_debut_de_semaine'), ($statut == _SPIPLISTES_WEEKLY_LIST), true, false)
+					, _T('spiplistes:en_debut_de_semaine'), ($statut == _SPIPLISTES_LIST_PUB_WEEKLY), true, false)
 				. "</li>\n"
 			// chrono mois
 			. "<li>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_mensuel'
 					, _T('spiplistes:Tous_les_mois')
-					, (($statut == _SPIPLISTES_MENSUEL_LIST) || ($statut == _SPIPLISTES_MONTHLY_LIST))
+					, (($statut == _SPIPLISTES_LIST_PUB_MENSUEL) || ($statut == _SPIPLISTES_LIST_PUB_MONTHLY))
 					, true, false)
 				. spiplistes_form_input_checkbox('auto_mois', 'oui'
-					, _T('spiplistes:en_debut_de_mois'), ($statut == _SPIPLISTES_MONTHLY_LIST), true, false)
+					, _T('spiplistes:en_debut_de_mois'), ($statut == _SPIPLISTES_LIST_PUB_MONTHLY), true, false)
 				. "</li>\n"
 			// chrono annee
 			. "<li>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_an'
 					, _T('spiplistes:Tous_les_ans')
-					, ($statut == _SPIPLISTES_YEARLY_LIST)
+					, ($statut == _SPIPLISTES_LIST_PUB_YEARLY)
 					, true, false)
 				. "</li>\n"
 			. "<li style='margin-top:0.5em'>"._T('spiplistes:A_partir_de')." : <br />\n"

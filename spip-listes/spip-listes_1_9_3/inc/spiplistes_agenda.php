@@ -262,14 +262,14 @@ function spiplistes_listes_completer_planning ($inventaire, $periode_max) {
 			foreach($inventaire[$date_sql] as $liste) {
 				$rythme_jour = 0;
 				switch($liste['statut']) {
-					case _SPIPLISTES_DAILY_LIST:
+					case _SPIPLISTES_LIST_PUB_DAILY:
 						$rythme_jour = 
 							($liste['periode'] > 0)
 							? $liste['periode']
 							: 1
 							; // pas de break, continue sur rythme_jour
-					case _SPIPLISTES_HEBDO_LIST:
-					case _SPIPLISTES_WEEKLY_LIST:
+					case _SPIPLISTES_LIST_PUB_HEBDO:
+					case _SPIPLISTES_LIST_PUB_WEEKLY:
 						if(!$rythme_jour) {
 							$rythme_jour = 7;
 						}
@@ -277,13 +277,13 @@ function spiplistes_listes_completer_planning ($inventaire, $periode_max) {
 							$planning, $liste, $rythme_jour, $ii, $periode_max
 						);
 						break;
-					case _SPIPLISTES_MENSUEL_LIST:
-					case _SPIPLISTES_MONTHLY_LIST:
+					case _SPIPLISTES_LIST_PUB_MENSUEL:
+					case _SPIPLISTES_LIST_PUB_MONTHLY:
 						$planning = spiplistes_listes_completer_planning_mois(
 							$planning, $liste, $ii, $periode_max
 						);
 						break;
-					//case _SPIPLISTES_YEARLY_LIST: // inutile, pour l'instant
+					//case _SPIPLISTES_LIST_PUB_YEARLY: // inutile, pour l'instant
 					default:
 						if(!isset($planning[$date_sql])) {
 							$planning[$date_sql] = array();

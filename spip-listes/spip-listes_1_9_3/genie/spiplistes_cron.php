@@ -143,21 +143,21 @@ function cron_spiplistes_cron ($last_time) {
 				$job_heure = date("H", $job_time);
 				$job_minute = date("i", $job_time);
 				$job_mois = date("m", $job_time);
-				$job_jour = (($statut == _SPIPLISTES_MONTHLY_LIST) ? 1 : date('j', $job_time));
+				$job_jour = (($statut == _SPIPLISTES_LIST_PUB_MONTHLY) ? 1 : date('j', $job_time));
 				$job_an = date("Y"); // la date est forcee par celle du systeme (eviter erreurs)
 				switch($statut) {
-					case _SPIPLISTES_YEARLY_LIST:
+					case _SPIPLISTES_LIST_PUB_YEARLY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour, $job_an+1);
 						break;
-					case _SPIPLISTES_MENSUEL_LIST:
-					case _SPIPLISTES_MONTHLY_LIST:
+					case _SPIPLISTES_LIST_PUB_MENSUEL:
+					case _SPIPLISTES_LIST_PUB_MONTHLY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois+1, $job_jour, $job_an);
 						break;
-					case _SPIPLISTES_HEBDO_LIST:
-					case _SPIPLISTES_WEEKLY_LIST:
+					case _SPIPLISTES_LIST_PUB_HEBDO:
+					case _SPIPLISTES_LIST_PUB_WEEKLY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour+7, $job_an);
 						break;
-					case _SPIPLISTES_DAILY_LIST:
+					case _SPIPLISTES_LIST_PUB_DAILY:
 						$next_time = mktime($job_heure, $job_minute, 0, $job_mois, $job_jour+$periode, $job_an);
 						break;
 					default:

@@ -66,18 +66,18 @@ function spiplistes_afficher_pile_messages() {
 	
 		$date_dernier = date(_T('spiplistes:format_date'), strtotime($maj)) ;
 		switch($statut) {
-			case _SPIPLISTES_HEBDO_LIST:
-			case _SPIPLISTES_WEEKLY_LIST:
+			case _SPIPLISTES_LIST_PUB_HEBDO:
+			case _SPIPLISTES_LIST_PUB_WEEKLY:
 				$periodicite = _T('spiplistes:Liste_hebdo');
 				break;
-			case _SPIPLISTES_MENSUEL_LIST:
-			case _SPIPLISTES_MONTHLY_LIST:
+			case _SPIPLISTES_LIST_PUB_MENSUEL:
+			case _SPIPLISTES_LIST_PUB_MONTHLY:
 				$periodicite = _T('spiplistes:Liste_mensuelle');
 				break;
-			case _SPIPLISTES_YEARLY_LIST:
+			case _SPIPLISTES_LIST_PUB_YEARLY:
 				$periodicite = _T('spiplistes:Liste_annuelle');
 				break;
-			case _SPIPLISTES_DAILY_LIST:
+			case _SPIPLISTES_LIST_PUB_DAILY:
 				if($periode) {
 					$periodicite = _T('spiplistes:Tous_les_s'
 					, array('s' => spiplistes_singulier_pluriel_str_get($periode, _T('spiplistes:jour'), _T('spiplistes:jours')))

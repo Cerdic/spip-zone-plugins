@@ -145,22 +145,22 @@ function exec_spiplistes_abonnes_tous () {
 			. "</li>"
 		// Total des abonnés listes périodiques (hebdomadaires)
 	 	. "<li>- ". _T('spiplistes:Listes_diffusion_hebdo') . ": "
-			. (0 + $nb_abonnes_listes[_SPIPLISTES_HEBDO_LIST] 
-				+ $nb_abonnes_listes[_SPIPLISTES_WEEKLY_LIST])
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_HEBDO] 
+				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_WEEKLY])
 			. "</li>"
 		// Total des abonnés listes périodiques (mensuels)
 	 	. "<li>- ". _T('spiplistes:Listes_diffusion_mensuelle') . ": "
-			. (0 + $nb_abonnes_listes[_SPIPLISTES_MENSUEL_LIST] 
-				+ $nb_abonnes_listes[_SPIPLISTES_MONTHLY_LIST])
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_MENSUEL] 
+				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_MONTHLY])
 			. "</li>"
 		// Total des abonnés listes périodiques (annuelles)
 	 	. "<li>- ". _T('spiplistes:Listes_diffusion_annuelle') . ": "
-			. (0 + $nb_abonnes_listes[_SPIPLISTES_YEARLY_LIST])
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_YEARLY])
 			. "</li>"
 		// Total des abonnés listes périodiques (periode ou envoi manuel)
 	 	. "<li>- ". _T('spiplistes:Listes_autre_periode') . ": "
-			. (0 + $nb_abonnes_listes[_SPIPLISTES_PUBLIC_LIST] 
-				+ $nb_abonnes_listes[_SPIPLISTES_DAILY_LIST])
+			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUBLIC] 
+				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_DAILY])
 			. "</li>"
 		// Total des non abonnés
 	 	. "<li>- ". _T('spiplistes:abonne_aucune_liste') . ": ".$nb_abonnes_a_rien. "</li>"

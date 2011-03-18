@@ -78,7 +78,7 @@ function spiplistes_header_prive ($flux) {
 				$flux .= ""
 					. "<meta id='x-spiplistes-alert' content='" . $js_alert . "' />\n"
 					. "<meta id='x-spiplistes-pri' name='" . _SPIPLISTES_PRIVATE_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PRIVATE_LIST) . "' />\n"
-					. "<meta id='x-spiplistes-pub' name='" . _SPIPLISTES_PUBLIC_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_PUBLIC_LIST) . "' />\n"
+					. "<meta id='x-spiplistes-pub' name='" . _SPIPLISTES_LIST_PUBLIC . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_LIST_PUBLIC) . "' />\n"
 					. "<meta id='x-spiplistes-tra' name='" . _SPIPLISTES_TRASH_LIST . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_TRASH_LIST) . "' />\n"
 					. "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_liste_gerer.js\"></script>\n"
 					. "<style type='text/css'>
