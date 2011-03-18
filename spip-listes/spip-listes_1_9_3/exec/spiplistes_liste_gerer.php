@@ -167,11 +167,18 @@ function exec_spiplistes_liste_gerer () {
 			}
 			
 			// Modifier diffusion ?
-			if($btn_modifier_diffusion) {
-				spiplistes_debug_log ('Modification diffusion');
+			if($btn_modifier_diffusion)
+			{
+				$current_statut = ($statut)
+					? $statut
+					: $current_liste['statut']
+					;
+					
+				spiplistes_debug_log ('Modification diffusion statut: '.$current_statut);
+				
 				// Modifier le statut ?
 				if(in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_TOUS)) 
-					&& ($statut!=$current_liste['statut'])
+					&& ($statut != $current_liste['statut'])
 				) {
 					spiplistes_debug_log ('Modification statut: '.$statut);
 					$sql_champs['statut'] = $statut;
@@ -195,8 +202,16 @@ function exec_spiplistes_liste_gerer () {
 
 			////////////////////////////////////
 			// Modifier message_auto ?
-			if($btn_modifier_courrier_auto) {
-			
+			// bloc "courriers automatiques"
+			if($btn_modifier_courrier_auto)
+			{
+				$current_statut = ($statut)
+					? $statut
+					: $current_liste['statut']
+					;
+					
+				spiplistes_debug_log ('Modification periodicite statut: '.$current_statut);
+				
 				$envoyer_quand = spiplistes_formate_date_form($annee, $mois, $jour, $heure, $minute);
 			
 				if(time() > strtotime($envoyer_quand)) {
@@ -235,38 +250,62 @@ function exec_spiplistes_liste_gerer () {
 					
 					switch($auto_chrono) {
 						case 'auto_jour':
-							$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_DAILY;
+							$sql_champs['statut'] =
+								($current_statut == _SPIPLISTES_LIST_PRIVATE)
+								? _SPIPLISTES_LIST_PRIV_DAILY
+								: _SPIPLISTES_LIST_PUB_DAILY
+								;
 							// force au minimum 1 jour
 							$sql_champs['periode'] = (($periode > 0) ? $periode : 1);
 							break;
 						case 'auto_hebdo':
 							if($auto_weekly == 'oui') {
 								// debut de semaine ?
-								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_WEEKLY;
+								$sql_champs['statut'] =
+									($current_statut == _SPIPLISTES_LIST_PRIVATE)
+									? _SPIPLISTES_LIST_PRIV_WEEKLY
+									: _SPIPLISTES_LIST_PUB_WEEKLY
+									;
 								// corrige la date pour le lundi de la semaine
 								$time = strtotime($envoyer_quand);
 								$time = mktime(0,0,0,date("m", $time),date("d", $time)-date("w", $time)+1,date("Y", $time));
     							$envoyer_quand = date("Y-m-d H:i:s", $time);
 	 							$sql_champs['date'] = $envoyer_quand;
 							} else {
-								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_HEBDO;
+								$sql_champs['statut'] =
+									($current_statut == _SPIPLISTES_LIST_PRIVATE)
+									? _SPIPLISTES_LIST_PRIV_HEBDO
+									: _SPIPLISTES_LIST_PUB_HEBDO
+									;
 							}
 							$sql_champs['periode'] = 0;
 							break;
 						case 'auto_mensuel':
 							if($auto_mois == 'oui') {
 								// debut du mois ?
-								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_MONTHLY;
+								$sql_champs['statut'] =
+									($current_statut == _SPIPLISTES_LIST_PRIVATE)
+									? _SPIPLISTES_LIST_PRIV_MONTHLY
+									: _SPIPLISTES_LIST_PUB_MONTHLY
+									;
 								// corrige la date, 1' du mois
 								$envoyer_quand = substr($envoyer_quand, 0, 8)."01 00:00:00";
 								$sql_champs['date'] = $envoyer_quand;
 							} else {
-								$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_MENSUEL;
+								$sql_champs['statut'] =
+									($current_statut == _SPIPLISTES_LIST_PRIVATE)
+									? _SPIPLISTES_LIST_PRIV_MENSUEL
+									: _SPIPLISTES_LIST_PUB_MENSUEL
+									;
 							}
 							$sql_champs['periode'] = 0;
 							break;
 						case 'auto_an':
-							$sql_champs['statut'] = _SPIPLISTES_LIST_PUB_YEARLY;
+							$sql_champs['statut'] =
+								($current_statut == _SPIPLISTES_LIST_PRIVATE)
+								? _SPIPLISTES_LIST_PRIV_YEARLY
+								: _SPIPLISTES_LIST_PUB_YEARLY
+								;
 							$sql_champs['periode'] = 0;
 							break;
 					}
@@ -413,7 +452,7 @@ function exec_spiplistes_liste_gerer () {
 
 	}
 	else {
-		$gros_bouton_modifier = $gros_bouton_supprimer = $grosse_boite_abonnements = "";
+		$gros_bouton_modifier = $gros_bouton_supprimer = $grosse_boite_abonnements = '';
 	}
 
 ////////////////////////////////////
@@ -423,18 +462,18 @@ function exec_spiplistes_liste_gerer () {
 	$titre_page = _T('spiplistes:gestion_dune_liste');
 	// Permet entre autres d'ajouter les classes a la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = _SPIPLISTES_PREFIX;
-	$sous_rubrique = "liste_gerer";
+	$sous_rubrique = 'liste_gerer';
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . $titre_page, $rubrique, $sous_rubrique));
+	echo($commencer_page(_T('spiplistes:spiplistes') . ' - ' . $titre_page, $rubrique, $sous_rubrique));
 
 	// la gestion des listes de courriers est reservee aux admins 
-	if($connect_statut != "0minirezo") {
+	if($connect_statut != '0minirezo') {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}
 
-	$page_result .= ""
-		. "<br /><br /><br />\n"
+	$page_result .= ''
+		. '<br /><br /><br />' . PHP_EOL
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
@@ -442,7 +481,7 @@ function exec_spiplistes_liste_gerer () {
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
 		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
 			, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:Patron_grand_')
-			, ($patron ? $patron : "")
+			, ($patron ? $patron : '')
 			, $patron)
 		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
 			, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
@@ -463,9 +502,10 @@ function exec_spiplistes_liste_gerer () {
 
 	// message alerte et demande de confirmation si supprimer liste
 	if(($btn_supprimer_liste > 0) && ($btn_supprimer_liste == $id_liste)) {
-		$page_result .= ""
-			. spiplistes_boite_alerte (_T('spiplistes:Attention_suppression_liste')."<br />"._T('spiplistes:Confirmez_requete'), true)
-			. "<form name='form_suppr_liste' id='form_suppr_liste' method='post' action='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE, "")."'>\n"
+		$page_result .= ''
+			. spiplistes_boite_alerte (_T('spiplistes:Attention_suppression_liste').'<br />'._T('spiplistes:Confirmez_requete'), true)
+			. '<form name="form_suppr_liste" id="form_suppr_liste" method="post"
+				action="'.generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE, '').'">' . PHP_EOL
 			. "<div class='verdana2' style='text-align:right;'>\n"
 			. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
    		. "<label>"._T('spiplistes:Confirmer_la_suppression_de_la_liste')."# $id_liste : \n"
@@ -500,8 +540,14 @@ function exec_spiplistes_liste_gerer () {
 	//////////////////////////////////////////////////////
 	// Modifier le statut de la liste
 	//$email_defaut = entites_html($meta['email_webmaster']);
-	$email_defaut = ($m = email_valide($GLOBALS['meta']['email_defaut'])) ? $m : $GLOBALS['meta']['email_webmaster'];
-	$email_envoi = ($m = email_valide($email_envoi)) ? $m : $email_defaut ;
+	$email_defaut = ($m = email_valide($GLOBALS['meta']['email_defaut']))
+		? $m
+		: $GLOBALS['meta']['email_webmaster']
+		;
+	$email_envoi = ($m = email_valide($email_envoi))
+		? $m
+		: $email_defaut
+		;
 
 	$page_result .= ""
 		//. debut_cadre_relief("racine-site-24.gif", true)
@@ -511,61 +557,95 @@ function exec_spiplistes_liste_gerer () {
 		// Formulaire diffusion
 		.	(
 			($flag_editable)
-			? ""
-				. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste"), true)
-				. "<input type='hidden' name='exec' value='listes' />\n"
-				. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
-			: ""
+			? ''
+				. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,'id_liste='.$id_liste), true)
+				. '<input type="hidden" name="exec" value="listes" />' . PHP_EOL
+				. '<input type="hidden" name="id_liste" value="'.$id_liste.'" />' . PHP_EOL
+			: ''
 			)
-		. "<span class='verdana2'>"
+		. '<span class="verdana2">'
 			. _T('spiplistes:cette_liste_est_'
-			 	, array('s' => spiplistes_bullet_titre_liste('puce', $statut, 'img_statut', true)))
-		. "</span>\n"
+			 	, array('s' => spiplistes_bullet_titre_liste ('puce', $statut, 'img_statut', true)))
+		. '</span>' . PHP_EOL
 		;
 
-		$mySelMulti = " value='"._SPIPLISTES_LIST_PUBLIC."'" 
-			. (
-				(in_array($statut, spiplistes_listes_statuts_periodiques()) || ($statut == _SPIPLISTES_LIST_PUBLIC))
-				? " selected='selected'" 
-				: ""
-			  )
-			;
-	$page_result .= ""
+		$sel_private = ' value="' . _SPIPLISTES_LIST_PRIVATE . '" ' 
+			. 	(
+					in_array ($statut, array(
+									_SPIPLISTES_LIST_PRIVATE
+									, _SPIPLISTES_LIST_PRIV_DAILY
+									, _SPIPLISTES_LIST_PRIV_HEBDO
+									, _SPIPLISTES_LIST_PRIV_WEEKLY
+									, _SPIPLISTES_LIST_PRIV_MENSUEL
+									, _SPIPLISTES_LIST_PRIV_MONTHLY
+									, _SPIPLISTES_LIST_PRIV_YEARLY
+									)
+						 )
+					? ' selected="selected"' 
+					: ''
+				)
+				;
+		$sel_publique = ' value="' . _SPIPLISTES_LIST_PUBLIC . '" ' 
+			. 	(
+					in_array ($statut, array(
+									_SPIPLISTES_LIST_PUBLIC
+									, _SPIPLISTES_LIST_PUB_DAILY
+									, _SPIPLISTES_LIST_PUB_HEBDO
+									, _SPIPLISTES_LIST_PUB_WEEKLY
+									, _SPIPLISTES_LIST_PUB_MENSUEL
+									, _SPIPLISTES_LIST_PUB_MONTHLY
+									, _SPIPLISTES_LIST_PUB_YEARLY
+									)
+						 )
+					? ' selected="selected"' 
+					: ''
+				)
+				;
+	$page_result .= PHP_EOL
 		.	(
 			($flag_editable)
-			? ""
-				. "<select class='verdana2 fondl' name='statut' size='1' id='change_statut'>\n"
-				. "<option" . mySel(_SPIPLISTES_LIST_PRIVATE, $statut) ." style='background-color: white'>"._T('spiplistes:statut_interne')."</option>\n"
-				. "<option" . $mySelMulti . " style='background-color: #B4E8C5'>"._T('spiplistes:statut_publique')."</option>\n"
-				. "<option" . mySel(_SPIPLISTES_TRASH_LIST, $statut) . " style='background:url("._DIR_IMG_PACK."rayures-sup.gif)'>"._T('texte_statut_poubelle')."</option>\n"
-				. "</select>\n"
-			: "<span class='verdana2' style='font-weight:bold;'>".spiplistes_items_get_item("alt", $statut)."</span>\n"
+			? ''
+				. '<select class="verdana2 fondl" name="statut" size="1" id="change_statut">' . PHP_EOL
+				. '<option' . $sel_private . ' style="background-color:#fff">'
+					. _T('spiplistes:statut_interne')
+					. '</option>' . PHP_EOL
+				. '<option' . $sel_publique . ' style="background-color:#B4E8C5">'
+					. _T('spiplistes:statut_publique')
+					. '</option>' . PHP_EOL
+				. '<option' . mySel(_SPIPLISTES_TRASH_LIST, $statut)
+					. ' style="background:url(' . _DIR_IMG_PACK.'rayures-sup.gif)">'
+					. _T('texte_statut_poubelle').'</option>' . PHP_EOL
+				. '</select>' . PHP_EOL
+			: '<span class="verdana2" style="font-weight:bold;">'
+				. spiplistes_items_get_item('alt', $statut)
+				. '</span>'. PHP_EOL
 			)
-		. "<div style='margin:10px 0px;'>\n"
+		. '<div style="margin:10px 0px;">' . PHP_EOL
 		.	(
-			($flag_editable && strpos($GLOBALS['meta']['langues_multilingue'], ","))
-			? ""
-				. "<label class='verdana2' for='changer_lang'>"._T('info_multi_herit')." : </label>\n"
-				. "<select name='changer_lang'  class='fondl' id='changer_lang'>\n"
-				. liste_options_langues('changer_lang', $lang , _T('spiplistes:langue_'),'', '')
-				. "</select>\n"
-			: ""
+			($flag_editable && strpos($GLOBALS['meta']['langues_multilingue'], ','))
+			? ''
+				. '<label class="verdana2" for="changer_lang">'
+					. _T('info_multi_herit').' : </label>' . PHP_EOL
+				. '<select name="changer_lang" class="fondl" id="changer_lang">' . PHP_EOL
+				. liste_options_langues('changer_lang', $lang , _T('spiplistes:langue_'), '', '')
+				. '</select>' . PHP_EOL
+			: ''
 				//. "<span class='verdana2'>". _T('info_multi_herit')." : "
 				//. "<span class='verdana2' style='font-weight:bold;'>".traduire_nom_langue($lang)."</span>\n"
 			)
-		. "</div>\n"
+		. '</div>' . PHP_EOL
 		.	(
 				($flag_editable)
 				? spiplistes_form_bouton_valider('btn_modifier_diffusion')
 					. spiplistes_form_fin(true)
-				: ""
+				: ''
 			)
 		. fin_cadre_relief(true)
 		;
 
 		////////////////////////////
 		// Formulaire adresse email pour le reply-to
-	$page_result .= ""
+	$page_result .= ''
 		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste"), true)
 		. "<p class='verdana2'>\n"

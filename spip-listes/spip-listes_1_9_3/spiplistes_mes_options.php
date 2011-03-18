@@ -442,6 +442,15 @@ $spiplistes_items = array(
 		, 'tab_t' => _T('spiplistes:Listes_diffusion_mensuelle')
 		, 'desc' => _T('spiplistes:Listes_diffusion_publiques_desc')
 		)
+	, _SPIPLISTES_LIST_PRIV_YEARLY => array(
+		'puce' => _DIR_IMG_PACK.'puce-rouge.gif'
+		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'
+		, 'icon_color' => 'ff0'
+		, 'alt' => _T('spiplistes:Liste_annuelle')
+		, 'nav_t' => _T('spiplistes:privees_annuelles')
+		, 'tab_t' => _T('spiplistes:listes_privees_annuelle')
+		, 'desc' => _T('spiplistes:Listes_diffusion_privees_desc')
+		)
 	, _SPIPLISTES_LIST_PUB_YEARLY => array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'puce-bleue.gif'
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_listes-24.png'

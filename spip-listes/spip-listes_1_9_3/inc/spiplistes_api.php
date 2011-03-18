@@ -1271,7 +1271,7 @@ function spiplistes_listes_statuts_periodiques () {
 	if($s === null) {
 		$s = explode(';', _SPIPLISTES_LISTES_STATUTS_PERIODIQUES);
 	}
-	return($s);
+	return ($s);
 }
 
 /*

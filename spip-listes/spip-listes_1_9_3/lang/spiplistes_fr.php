@@ -611,6 +611,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Listes_diffusion_publiques_desc' => 'L&#8217;abonnement &#224; ces listes est propos&#233; sur le site public.'
 , 'Liste_annuelle' => 'Liste annuelle'
 , 'Publiques_annuelles' => 'Publiques, annuelles'
+, 'privees_annuelles' => 'Priv&#233;es, annuelles'
 , 'Listes_diffusion_annuelle' => 'Listes publiques annuelles'
 , 'listes_privees_annuelle' => 'Listes priv&#233;es annuelles'
 , 'Listes_diffusion_publique' => 'Listes de diffusion publiques'

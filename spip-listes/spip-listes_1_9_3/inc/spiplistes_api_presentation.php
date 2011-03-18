@@ -49,8 +49,10 @@ function spiplistes_bullet_titre_liste ($type, $statut, $id=false, $return=false
 	else echo($result);
 }
 
-// renvoie un element de definition courriers/listes (icone, puce, alternate text, etc.)
-// voir spsiplites_mes_options, tableau $spiplistes_items
+/** renvoie un element de definition courriers/listes
+ * (icone, puce, alternate text, etc.)
+ * voir spsiplites_mes_options, tableau $spiplistes_items
+ */
 function spiplistes_items_get_item($item, $statut) {
 	global $spiplistes_items;
 
