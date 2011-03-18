@@ -1,6 +1,6 @@
 <plugin>
 
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	
 	<nom>Rep&egrave;res - Des squelettes au pixel pr&egrave;s !</nom>
 	
@@ -28,13 +28,18 @@
 	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Reperes?var_mode=preview]
 	</lien>
 	
-	<pipeline>
+	<!--pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
 
 	<pipeline>
 		<nom>insert_head</nom>
+		<inclure>reperes_pipelines.php</inclure>
+	</pipeline-->
+	
+	<pipeline>
+		<nom>affichage_final</nom>
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
 	

@@ -26,6 +26,35 @@ function reperes_insert_head($flux){
 	
 }
 
+function reperes_affichage_final($page){
+	
+	
+	
+	$pos_head = strpos($page, '</head>');
+	// si pas de </head>
+	if ($pos_head === false) {
+		return $page;
+	}
+	
+	// si admin
+	include_spip('inc/autoriser');
+	if (autoriser('configurer')) {
+		
+
+		$jsFile = generer_url_public('reperes.js');
+		include_spip('public/spip_bonux_balises');
+
+		$head_reperes  = "<!-- insertion du js reperes --><script src='$jsFile' type='text/javascript'></script>";
+		$head_reperes .= '<!-- insertion de la css reperes --><link rel="stylesheet" type="text/css" href="' . produire_css_fond('reperes.css') . '" media="all" />';
+		
+		$page = substr_replace($page, $head_reperes, $pos_head, 0);
+
+	}
+
+	return $page;
+		
+}
+
 function reperes_jqueryui_forcer($scripts){
 	$scripts[] = "jquery.ui.draggable";
 	return $scripts;
