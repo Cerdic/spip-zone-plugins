@@ -100,10 +100,6 @@
 							array('FROM' => 'spip_abonnes_rubriques', 'WHERE' => sql_in('id_rubrique',$rubriques), 'ORDER BY' => 'date_abonnement DESC'), array('id_rubrique' => $id_rubrique));
 			$flux['data'].= icone_inline(_T('lettresprive:ajouter_abonne'), generer_url_ecrire("abonnes_edit", "id_rubrique=$id_rubrique"), _DIR_PLUGIN_LETTRES.'prive/images/abonne.png',"creer.gif", $spip_lang_right);
 			$flux['data'].= icone_inline(_T('lettresprive:import_abonnes'), generer_url_ecrire("naviguer_import","id_rubrique=$id_rubrique"), _DIR_PLUGIN_LETTRES.'prive/images/import.png', "rien.gif", $spip_lang_right);
-			if (sql_count($res)) {
-				$flux['data'].= icone_inline(_T('lettresprive:export_abonnes'), generer_url_ecrire("naviguer_export","id_rubrique=$id_rubrique"), _DIR_PLUGIN_LETTRES.'prive/images/export.png', "rien.gif", $spip_lang_right);
-				$flux['data'].= icone_inline(_T('lettresprive:purge_abonnes'), generer_url_ecrire("naviguer_purge","id_rubrique=$id_rubrique"), _DIR_PLUGIN_LETTRES.'prive/images/purge.png', "rien.gif", $spip_lang_right);
-			}
 			$flux['data'].= '<br class="nettoyeur" />';
 		}
 		return $flux;
