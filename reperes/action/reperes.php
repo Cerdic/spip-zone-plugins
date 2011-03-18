@@ -33,13 +33,22 @@ function action_reperes_dist() {
 	);
 	
 	// modifier des reperes existants
-	if ($id = _request('id')) {
-		$reperes[$position][$id] = $ligne;
+	$id = _request('id');
+	if (strlen($id)) {
+		if ($id[0] == '-') {
+			unset($reperes[$position][substr($id,1)]);
+		} else {
+			$reperes[$position][$id] = $ligne;
+		}
 	}
 	// ajouter un repere
 	else {
 		$reperes[$position][] = $ligne;
 	}
+
+	// remettre les clés dans l'ordre...
+	$reperes['horizontal'] = array_values($reperes['horizontal']);
+	$reperes['vertical'] = array_values($reperes['vertical']);
 	ecrire_config('reperes/points', $reperes);
 }
 ?>
