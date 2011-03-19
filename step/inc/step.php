@@ -2,9 +2,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_FILE_PLUGIN_CONFIG', "plugin.xml");
-
-include_spip('inc/plugin'); // pour spip_version_compare(), plugin_version_compatible()
+// pour spip_version_compare, plugin_version_compatible et _FILE_PLUGIN_CONFIG
+include_spip('inc/plugin'); 
 // 3 fonctions du inc/plugin de SPIP2.1 absentes de SPIP 2.2
 if (!function_exists('actualise_plugins_actifs')) {
   function actualise_plugins_actifs() {
@@ -23,9 +22,7 @@ if (!function_exists('installe_un_plugin')) {
 if (!function_exists('desinstalle_un_plugin')) {
 	function desinstalle_un_plugin($plug,$infos,$dir = '_DIR_PLUGINS'){
 	  $f = charger_fonction('installer', 'plugins');
-	  spip_log("exec $f");
 	  $f = $f($plug, 'uninstall');
-	  spip_log("$plug $f");
 	  return is_array($f) ? $f['install_test'][0] : $f;
 	}
 }
@@ -120,13 +117,16 @@ function step_ajouter_zone($url){
 		return;
 	}
 
+	include_spip('inc/distant');
+	if (!$xml = recuperer_page($url)) {
+		return false;
+	}
 	// lire les donnees d'une zone de plugins
-	$paquets = step_xml_parse_zone($url);
+	$paquets = step_xml_parse_zone($xml);
 	
 	if (count($paquets)){
 		// nom et description a definir dans le fichier xml de la source ?
-		$nom = $url;
-		$id_zone = sql_insertq('spip_zones_plugins', array('nom'=>$nom, 'adresse'=>$url, 'nombre_plugins'=>count($paquets)));
+		$id_zone = sql_insertq('spip_zones_plugins', array('nom'=>$url, 'adresse'=>$url, 'nombre_plugins'=>count($paquets)));
 		
 		// ajouter les plugins dans spip_plugins
 		step_maj_liste_plugins($id_zone, $paquets);
@@ -134,9 +134,6 @@ function step_ajouter_zone($url){
 	
 	return count($paquets);
 }
-
-
-
 
 
 // actualise une zone de plugins
@@ -149,15 +146,19 @@ function step_actualiser_zone($id){
 		return;
 	}
 	
+	include_spip('inc/distant');
+	if (!$xml = recuperer_page($z['adresse'])) {
+		return false;
+	}
+
 	// lire les donnees d'une zone de plugins
-	$paquets = step_xml_parse_zone($z['adresse']);
+	$paquets = step_xml_parse_zone($xml);
 	
 	if (count($paquets)){
 		// nom et description a definir dans le fichier xml de la source ?
-		$nom = $url = $z['adresse'];
 		sql_updateq('spip_zones_plugins', array(
-				'nom'=>$nom, 
-				'adresse'=>$url, 
+				'nom'=> $z['adresse'],
+				'adresse'=> $z['adresse'],
 				'nombre_plugins'=>count($paquets)), 
 				'id_zone=' . sql_quote($z['id_zone'])
 		);
@@ -177,7 +178,6 @@ function step_actualiser_plugins_locaux(){
 		$actifs = step_liste_plugin_actifs();
 		$recents = step_liste_plugin_recents();
 
-		include_spip('inc/xml');
 		// recuperer les plugins.xml
 		// et mettre a jour la bdd...
 		// si le plugin n'est pas activable,
@@ -195,38 +195,11 @@ function step_actualiser_plugins_locaux(){
 
 
 function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
-	$dir = constant($constante);
-	lire_fichier($dir . $p . '/' . _FILE_PLUGIN_CONFIG, $xml);
-	// enlever la balise doctype qui provoque une erreur "balise non fermee" lors du parsage
-	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
-	// traduire le xml en php
-	if (is_array($plugin = spip_xml_parse($xml))) {
-		
-		// [extrait] de plugins/verifie_conformite.php
-		// chercher la declaration <plugin spip='...'> a prendre pour cette version de SPIP
-		if ($n = spip_xml_match_nodes(",^plugin(\s|$),", $plugin, $matches)){
-			// version de SPIP
-			$vspip = $GLOBALS['spip_version_branche'];
-			foreach($matches as $tag => $sous){
-				list($tagname, $atts) = spip_xml_decompose_tag($tag);
-				if ($tagname == 'plugin' AND is_array($sous)){
-					if (!isset($atts['spip'])
-						OR plugin_version_compatible($atts['spip'], $vspip))
-						// on prend la derniere declaration avec ce nom
-						$plugin = end($sous);
-				}
-			}
-			unset($sous, $tagname, $atts, $matches, $vspip, $n);
-		} else {
-			return false;
-		}
-		// [/extrait] de plugins/verifie_conformite.php
+	 include_spip('inc/step_infos_plugin');
 
-		 
-		// applatir les champs du plugin (ie les balises <multi> sont des chaines...) 
-		if ($insert = step_xml_parse_plugin($plugin)) {
-			// recuperer les champs sql utiles
-			if ($insert = step_selectionner_champs_sql_plugin($insert)) {
+	if ($insert = step_get_infos_plugin($constante, $p, $actifs, $recents)) {
+		// recuperer les champs sql utiles
+		if ($insert = step_selectionner_champs_sql_plugin($insert)) {
 				$insert['id_zone'] = 0;
 				$insert['present'] = 'oui';
 				$insert['constante'] = $constante; 
@@ -272,8 +245,7 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 					if ($invalides) {
 						sql_updateq('spip_plugins',array('obsolete'=>'oui'), sql_in('id_plugin', $invalides));
 					}
-				}								
-
+				}
 				// on recherche d'eventuelle mises a jour existantes
 				if ($res = sql_select(array('id_plugin','version','superieur'),'spip_plugins',array(
 					'actif=' . sql_quote('non'),
@@ -297,14 +269,12 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 					if ($superieurs) {
 						sql_updateq('spip_plugins',array('superieur'=>'oui'), sql_in('id_plugin', $superieurs));
 					}
-				}				
+				}			
 				
-				return sql_insertq('spip_plugins', $insert);	
-			}
-		}					
+				sql_insertq('spip_plugins', $insert);	
+		}
 	}
-}
-
+}					
 
 // supprime une zone de plugins (et sa liste de plugins)
 // $id = adresse zone OU id_zone dans la table spip_zones_plugins
@@ -438,112 +408,6 @@ function step_selectionner_champs_sql_plugin($p) {
 		'lien' => $p['lien'],
 	);
 }
-
-
-
-
-
-// ----------------------- Analyses XML ---------------------------------
-
-
-// parse un fichier de source dont l'url est donnee
-// ce fichier est un fichier XML contenant <zone><zone_elt/></zone>
-function step_xml_parse_zone($url){
-	include_spip('inc/xml');
-
-	$arbre = array();
-	
-	include_spip('inc/distant');
-	if (!$xml = recuperer_page($url)) {
-		return false;
-	}
-
-	// enlever la balise doctype qui provoque une erreur "balise non fermee" lors du parsage
-	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
-	if (!is_array($arbre = spip_xml_parse($xml)) OR !is_array($arbre = $arbre['archives'][0])){
-		return false;
-	}
-
-	// boucle sur les elements pour creer un tableau array (url_zip => datas)
-	$paquets = array();			
-	foreach ($arbre as $z=>$c){
-		$c = $c[0];
-		// si plugin et fichier zip, on ajoute le paquet dans la liste
-		if ((is_array($c['plugin'])) AND ($url = $c['file'][0])) {
-			$paquets[$url] = array(
-				'plugin' => step_xml_parse_plugin($c['plugin'][0]), 
-				'file' => $url, 
-			);
-		}
-	}
-	if (!$paquets) {
-		return false;
-	}
-	
-	return $paquets;
-}
-
-// aplatit plusieurs cles d'un arbre xml dans un tableau
-// effectue un trim() au passage
-function step_xml_aplatit_multiple($array, $arbre){
-	$a = array();
-	// array('uri','archive'=>'zip',...)
-	foreach ($array as $i=>$n){
-		if (is_string($i)) $cle = $i;
-		else $cle = $n;
-		$a[$n] = trim(spip_xml_aplatit($arbre[$cle]));
-	}
-	return $a;	
-}
-
-
-// parse un plugin.xml genere par spip_xml_parse()
-// en un tableau plus facilement utilisable
-// cette fonction doit permettre de mapper des changements 
-// de syntaxe entre plugin.xml et step
-function step_xml_parse_plugin($arbre){
-
-	if (!is_array($arbre)) 
-		return false;
-	
-	// on commence par les simples !
-	$plug_arbre = step_xml_aplatit_multiple(
-				array('nom','icon','auteur','licence','version','version_base','etat','shortdesc','categorie','tags',
-				'description','lien','options','fonctions','prefix','install'), 
-				$arbre);
-	$plug_arbre['prefix'] = strtolower($plug_arbre['prefix']);
-	
-	// on continue avec les plus complexes...	
-	// 1) balises avec attributs
-	foreach (array(
-			'necessite'=>array('necessite', null),
-			'utilise'=>array('utilise', null),
-			'chemin'=>array('path', array('dir'=>'')))
-				as $balise=>$p){
-		$params = $res = array();
-		// recherche de la balise et extraction des attributs
-		if (spip_xml_match_nodes(",^$balise,",$arbre, $res)){
-			foreach(array_keys($res) as $tag){
-				list($tag,$att) = spip_xml_decompose_tag($tag);
-				$params[] = $att;
-			}
-		} 
-		// valeur par defaut
-		else {
-			if ($p[1]!==null)
-				$params[] = $p[1];
-		}
-		$plug_arbre[$p[0]] = $params;		
-	}
-
-	// 2) balises impriquees
-	// (pipeline, boutons, onglets)
-	// on verra plus tard si besoin !
-
-	return $plug_arbre;
-}
-
-
 
 
 
