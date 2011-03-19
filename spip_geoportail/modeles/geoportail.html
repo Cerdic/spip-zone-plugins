@@ -99,6 +99,8 @@ jQuery.geoportail.addMap(
 					minZ: '#MIN_ZOOM',
 					maxZ:'#MAX_ZOOM'
 				});
+			// Internationalisation
+			map.getMap().setLocale("#LANG");
 			// Style d'affichage par defaut
 			OpenLayers.Feature.Vector.style['default'].externalGraphic = "#CHEMIN{img/punaise.gif}";
 			

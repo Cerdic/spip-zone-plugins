@@ -438,6 +438,7 @@ jQuery.geoportail =
 		{	var stl = $('#'+id);
 			if (!stl.length) stl = $("<div id='"+id+"'></div>").appendTo("body").hide();
 			style.defaultStyle = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+			style.defaultStyle.cursor = 'pointer';
 			style.defaultStyle.pointRadius = stl.width();
 			style.defaultStyle.externalGraphic = stl.css("background-image").replace(/url\("(.+)"\)/i, '$1');
 			style.defaultStyle.strokeWidth = stl.css('borderBottomWidth').replace('px', '');
@@ -453,7 +454,7 @@ jQuery.geoportail =
 			l = new OpenLayers.Layer.GXT(name, url);
 			map.getMap().addLayer(l);
 		}
-		else l = map.getMap().addLayer(type, name, url, { opacity: 1, visibility: true, originators: jQuery.geoportail.originators });
+		else l = map.getMap().addLayer(type, name, url, { opacity: 1, visibility: true, originators: jQuery.geoportail.originators}, { preventDefaultBehavior : true });
 		if (l) 
 		{	// Recherche des styles
 			setStyle(l.styleMap.styles['default'], 'geoportailDefaultStyle');
@@ -954,8 +955,21 @@ jQuery.geoportail =
 		return false;
 	},
 
+	unselectAll : function(id)
+	{	if (typeof(id)=='undefined')
+		{	var i;
+			for (i=0; i<this.cartes.length; i++)
+				if (this.cartes[i].map.hasOwnProperty('selectControl')) this.cartes[i].map.selectControl.unselectAll();
+		}
+		else
+		{	var c = this.getCarte(id);
+			if (c && c.map.hasOwnProperty('selectControl')) c.map.selectControl.unselectAll(); 
+		}
+	},
+	
 	showImg : function (link, width, height)
-	{	jQuery.jqDialog("",
+	{	jQuery.geoportail.unselectAll();
+		jQuery.jqDialog("",
 			{	dialog: "<img src='"+link+"' width='100%'/>",
 				classe:'viewer',
 				width: width,
