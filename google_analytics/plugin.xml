@@ -1,16 +1,8 @@
 <plugin>
-	<nom>
-	Google Analytics
-	</nom>
-	<auteur>
-	Phil
-	</auteur>
-	<version>
-	0.4.0
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom> Google Analytics </nom>
+	<auteur> Phil </auteur>
+	<version> 0.4.1 </version>
+	<etat> stable </etat>
 	<licence>GNU/GPL</licence>
 	<description>
 		<multi>
@@ -20,13 +12,16 @@
 	</description>
 	<icon>images/ga.png</icon>
 	<lien>http://www.spip-contrib.net/?article2495</lien>
-	<prefix>
-	googleanalytics
-	</prefix>
+	
+	<prefix> googleanalytics </prefix>
+	
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>googleanalytics_insert_head.php</inclure>
 	</pipeline>
+	
 	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="cfg" version="[0.0.0;]" />
+	
 	<categorie>statistique</categorie>
 </plugin>
