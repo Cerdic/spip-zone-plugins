@@ -21,12 +21,16 @@
 <br class="nettoyeur" />
 
 [(#REM) Statistiques globales ]
+
+<B_prefixes>
+<ul>
 <BOUCLE_prefixes(PLUGINS){id_depot?}{par prefixe}>
-[<li id="prefixe-#PREFIXE" class="liste-items">
-	<div class="unit size50">(#PREFIXE)</div>
-	<div class="unit size50 lastUnit">[(#NOM)]</div>
-</li>]
+	[<li id="prefixe-#PREFIXE" class="liste-items">
+		<div class="unit size50">(#PREFIXE|strtolower)</div>
+		<div class="unit size50 lastUnit">[(#NOM)]</div>
+	</li>]
 </BOUCLE_prefixes>
+</ul>
 </B_prefixes>
 <br class="nettoyeur" />
 
