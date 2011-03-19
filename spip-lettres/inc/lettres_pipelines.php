@@ -86,10 +86,10 @@
 		global $spip_lang_right;
 		if (autoriser('voir', 'lettres')) {
 			$id_rubrique = $flux['args']['id_rubrique'];
-			$afficher_boutons_uniquement_dans_themes = lire_config('spip_lettres_afficher_boutons_uniquement_dans_themes');
+			$admin_abo_toutes_rubriques = lire_config('spip_lettres_admin_abo_toutes_rubriques');
 
 			// lettres
-			if ($id_rubrique && ( ($afficher_boutons_uniquement_dans_themes == 'non')
+			if ($id_rubrique && ( ($admin_abo_toutes_rubriques == 'oui')
 									   || lettres_rubrique_autorisee($id_rubrique))) {
 				$flux['data'].= afficher_objets('lettre', _T('lettresprive:toutes_lettres_rubrique'), array('FROM' => 'spip_lettres', 'WHERE' => 'id_rubrique='.intval($id_rubrique)." AND statut!='poub'", 'ORDER BY' => 'maj DESC'));
 				if (autoriser('creerlettredans','rubrique',$id_rubrique)) {
@@ -98,7 +98,7 @@
 				}
 			}
 			// abonnés
-			if ( ($afficher_boutons_uniquement_dans_themes == 'non') || ($id_rubrique && lettres_rubrique_autorisee($id_rubrique)) ) {
+			if ( ($admin_abo_toutes_rubriques == 'oui') || ($id_rubrique && lettres_rubrique_autorisee($id_rubrique)) ) {
 				$rubriques = lettres_recuperer_toutes_les_rubriques_parentes($id_rubrique);
 				$flux['data'].= afficher_objets('abonne', _T('lettresprive:tous_abonnes_rubrique'), 
 								array('FROM' => 'spip_abonnes_rubriques', 'WHERE' => sql_in('id_rubrique',$rubriques), 'ORDER BY' => 'date_abonnement DESC'), array('id_rubrique' => $id_rubrique));

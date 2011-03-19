@@ -273,7 +273,6 @@
 				ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
 				ecrire_meta('spip_lettres_cliquer_anonyme', 'oui');
 				ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', 'non');
-				ecrire_meta('spip_lettres_afficher_boutons_uniquement_dans_themes', 'non');
 				if (!strpos($GLOBALS['meta']['preview'],',0minirezo,'))
 					ecrire_meta('preview',',0minirezo,');
 				ecrire_metas();
@@ -357,7 +356,6 @@
 			if (version_compare($current_version,'4.1','<'))
 				ecrire_meta('spip_lettres_cliquer_anonyme', 'oui');
 				ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', 'non');
-				ecrire_meta('spip_lettres_afficher_boutons_uniquement_dans_themes', 'non');
 				ecrire_meta($nom_meta_base_version,$current_version='4.1','non');
 		}
 	}
@@ -404,7 +402,6 @@
 		effacer_meta('spip_lettres_abonnement_par_defaut');
 		effacer_meta('spip_lettres_cliquer_anonyme');
 		effacer_meta('spip_lettres_admin_abo_toutes_rubriques');
-		effacer_meta('spip_lettres_afficher_boutons_uniquement_dans_themes');
 		include_spip('inc/getdocument');
 		effacer_repertoire_temporaire(_DIR_LETTRES);
 		effacer_meta($nom_meta_base_version);

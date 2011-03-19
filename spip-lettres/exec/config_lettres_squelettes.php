@@ -72,9 +72,6 @@
 			$spip_lettres_admin_abo_toutes_rubriques = $_POST['spip_lettres_admin_abo_toutes_rubriques'];
 			ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', $spip_lettres_admin_abo_toutes_rubriques);
 			
-			$spip_lettres_afficher_boutons_uniquement_dans_themes = $_POST['spip_lettres_afficher_boutons_uniquement_dans_themes'];
-			ecrire_meta('spip_lettres_afficher_boutons_uniquement_dans_themes', $spip_lettres_afficher_boutons_uniquement_dans_themes);
-			
 			ecrire_metas();
 
 			$url = generer_url_ecrire('config_lettres_squelettes');
@@ -88,12 +85,11 @@
 		$spip_lettres_fond_lettre_texte				= $GLOBALS['meta']['spip_lettres_fond_lettre_texte'];
 		$spip_lettres_utiliser_articles				= $GLOBALS['meta']['spip_lettres_utiliser_articles'];
 		$spip_lettres_utiliser_descriptif			= $GLOBALS['meta']['spip_lettres_utiliser_descriptif'];
-		$spip_lettres_utiliser_chapo				= $GLOBALS['meta']['spip_lettres_utiliser_chapo'];
-		$spip_lettres_utiliser_ps					= $GLOBALS['meta']['spip_lettres_utiliser_ps'];
+		$spip_lettres_utiliser_chapo					= $GLOBALS['meta']['spip_lettres_utiliser_chapo'];
+		$spip_lettres_utiliser_ps						= $GLOBALS['meta']['spip_lettres_utiliser_ps'];
 		$spip_lettres_notifier_suppression_abonne	= $GLOBALS['meta']['spip_lettres_notifier_suppression_abonne'];
-		$spip_lettres_cliquer_anonyme				= $GLOBALS['meta']['spip_lettres_cliquer_anonyme'];
-		$spip_lettres_admin_abo_toutes_rubriques				= $GLOBALS['meta']['spip_lettres_admin_abo_toutes_rubriques'];
-		$spip_lettres_afficher_boutons_uniquement_dans_themes		= $GLOBALS['meta']['spip_lettres_afficher_boutons_uniquement_dans_themes'];
+		$spip_lettres_cliquer_anonyme					= $GLOBALS['meta']['spip_lettres_cliquer_anonyme'];
+		$spip_lettres_admin_abo_toutes_rubriques	= $GLOBALS['meta']['spip_lettres_admin_abo_toutes_rubriques'];
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_configuration'), "configuration", "configuration");
@@ -209,15 +205,6 @@
 		echo '<input type="radio" class="radio" name="spip_lettres_admin_abo_toutes_rubriques" value="oui" id="spip_lettres_admin_abo_toutes_rubriques_oui" '.($spip_lettres_admin_abo_toutes_rubriques == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_admin_abo_toutes_rubriques_oui">'._T('lettresprive:oui').'</label>';
 		echo '&nbsp;';
 		echo '<input type="radio" class="radio" name="spip_lettres_admin_abo_toutes_rubriques" value="non" id="spip_lettres_admin_abo_toutes_rubriques_non" '.($spip_lettres_admin_abo_toutes_rubriques == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_admin_abo_toutes_rubriques_non">'._T('lettresprive:non').'</label>';
-		echo '</td>';
-		echo '</tr>';
-
-	    echo '<tr>';
-		echo '<td><label>'._T("lettresprive:afficher_boutons_uniquement_dans_themes").'</label></td>';
-		echo '<td>';
-		echo '<input type="radio" class="radio" name="spip_lettres_afficher_boutons_uniquement_dans_themes" value="oui" id="spip_lettres_afficher_boutons_uniquement_dans_themes_oui" '.($spip_lettres_afficher_boutons_uniquement_dans_themes == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_afficher_boutons_uniquement_dans_themes_oui">'._T('lettresprive:oui').'</label>';
-		echo '&nbsp;';
-		echo '<input type="radio" class="radio" name="spip_lettres_afficher_boutons_uniquement_dans_themes" value="non" id="spip_lettres_afficher_boutons_uniquement_dans_themes_non" '.($spip_lettres_afficher_boutons_uniquement_dans_themes == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_afficher_boutons_uniquement_dans_themes_non">'._T('lettresprive:non').'</label>';
 		echo '</td>';
 		echo '</tr>';
 

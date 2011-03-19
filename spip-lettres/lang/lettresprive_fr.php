@@ -200,7 +200,6 @@
 		'supprimer_cron' => "retirer des envois récurrents",
 		'ajouter_rubrique' => "Ajouter une rubrique",
 		'aucun_envoi_programme' => "Aucun envoi programmé.",
-		'afficher_boutons_uniquement_dans_themes' => "Afficher les boutons \"Cr&eacute;er une nouvelle lettre\", \"Ajouter des abonn&eacute;s\"  et \"Importer des abonn&eacute;s\" uniquement dans les rubriques th&eacute;matiques",
 		
 // Thematiques et abonnement par defaut
 		'theme_par_defaut' 			=> 'Abonnement par défaut',
