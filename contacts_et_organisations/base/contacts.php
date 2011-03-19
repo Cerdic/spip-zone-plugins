@@ -74,7 +74,7 @@ function contacts_declarer_tables_principales($tables_principales){
 		"prenom"		=> "tinytext NOT NULL DEFAULT ''",
 		"fonction"		=> "tinytext DEFAULT '' NOT NULL", // gérant, membre, trésorier, etc.
 		"date_naissance"=> "datetime NOT NULL default '0000-00-00 00:00:00'",
-		"descriptif" 	=> "tinytext DEFAULT '' NOT NULL",
+		"descriptif" 	=> "text DEFAULT '' NOT NULL",
 		"maj"			=> "TIMESTAMP"
 		);
 	$contacts_key = array(
