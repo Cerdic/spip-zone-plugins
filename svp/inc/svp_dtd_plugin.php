@@ -2,52 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// ----------------------- Traitements des depots ---------------------------------
-
-// parse un plugin.xml genere par spip_xml_parse()
-// en un tableau plus facilement utilisable
-// cette fonction doit permettre de mapper des changements 
-// de syntaxe entre plugin.xml et step
-function svp_xml_parse_plugin($arbre){
-
-	include_spip('inc/xml');
-	include_spip('inc/svp_outiller');
-
-	if (!is_array($arbre)) 
-		return false;
-	
-	// on commence par les simples !
-	$plug_arbre = svp_xml_aplatit_multiple(
-				array('nom','icon','auteur','licence','version','version_base','etat','slogan','categorie','tags',
-				'description','lien','options','fonctions','prefix','install'), 
-				$arbre);
-	$plug_arbre['prefix'] = strtolower($plug_arbre['prefix']);
-	
-	// on continue avec les plus complexes...	
-	// 1) balises avec attributs
-	foreach (array(
-			'necessite'=>array('necessite', null),
-			'utilise'=>array('utilise', null),
-			'chemin'=>array('path', array('dir'=>'')))
-				as $balise=>$p){
-		$params = $res = array();
-		// recherche de la balise et extraction des attributs
-		if (spip_xml_match_nodes(",^$balise,",$arbre, $res)){
-			foreach(array_keys($res) as $tag){
-				list($tag,$att) = spip_xml_decompose_tag($tag);
-				$params[] = $att;
-			}
-		} 
-		// valeur par defaut
-		else {
-			if ($p[1]!==null)
-				$params[] = $p[1];
-		}
-		$plug_arbre[$p[0]] = $params;		
-	}
-
-	return $plug_arbre;
-}
 
 
 // Les archives xml sont deja applaties, pas la peine de se compliquer.

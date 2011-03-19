@@ -53,4 +53,19 @@ function formulaires_ajouter_depot_traiter_dist(){
 
 	return $retour;
 }
+
+
+/**
+ * Teste la validite d'une url d'un depot de paquets
+ *
+ * @param string $url
+ * @return boolean
+ */
+
+// $url	=> url du fichier xml de description du depot
+function svp_verifier_adresse_depot($url){
+	include_spip('inc/distant');
+	return (!$xml = recuperer_page($url)) ? false : true;
+}
+
 ?>

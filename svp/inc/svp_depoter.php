@@ -471,67 +471,21 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 }
 
 
-// parse un fichier de source dont l'url est donnee
+// Phraser un fichier de source dont l'url est donnee
 // ce fichier est un fichier XML contenant <depot>...</depot>
 // et <archives>...</archives>
 function svp_xml_parse_depot($url){
-	include_spip('inc/xml');
 	include_spip('inc/distant');
-	include_spip('inc/svp_outiller');
-	// -- Les traitements du XML dependent de la DTD utilisee
-	$traiteur =  'svp_dtd_' . _SVP_DTD_PLUGIN;
-	include_spip('inc/'. $traiteur);
 
 	// On lit le fichier xml
 	if (!$xml = recuperer_page($url)) {
 		return false;
 	}
 
-	// On enleve la balise doctype qui provoque une erreur "balise non fermee" lors du parsage
-	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
-
-	// Deux cas d'erreur de fichier non conforme
-	// - la syntaxe xml est incorrecte
-	// - aucun plugin dans le depot
-	// Si le bloc <depot> n'est pas renseigne on ne considere pas cela comme une erreur
-	$arbre = array();
-	if (!is_array($arbre = spip_xml_parse($xml)) OR !is_array($archives = $arbre['archives'][0])){
-		return false;
-	}
-
-	// On extrait les informations du depot si elles existent (balise <depot>)
-	$infos = array('depot' => array(), 'paquets' => array());
-	if (is_array($depot = $arbre['depot'][0]))
-		$infos['depot'] = svp_xml_aplatit_multiple(array('titre', 'descriptif', 'type', 'url_serveur', 'url_archives'), $depot);
-	if (!$infos['depot']['titre'])
-		$infos['depot']['titre'] = _T('svp:titre_nouveau_depot');
-	if (!$infos['depot']['type'])
-		$infos['depot']['type'] = 'svn';
-
-	// On extrait les informations de chaque plugin du depot (balise <archives>)
-	foreach ($archives as $z=>$c){
-		$c = $c[0];
-		// si fichier zip, on ajoute le paquet dans la liste
-		// - cas 1 : c'est un plugin donc on integre les infos du plugin
-		// - cas 2 : c'est une archive non plugin, pas d'infos autres que celles de l'archive
-		if ($url = $c['file'][0]) {
-			if (is_array($c[_SVP_DTD_PLUGIN]))
-				$plugin = svp_xml_parse_plugin($c[_SVP_DTD_PLUGIN][0]);
-			else
-				$plugin = array();
-			// On remplit les infos dans les deux cas
-			$infos['paquets'][$url] = array(
-				'plugin' => $plugin, 
-				'file' => $url,
-				'size' => $c['size'][0],
-				'date' => $c['date'][0],	// c'est la date de generation du zip
-				'source' => $c['source'][0],
-				'last_commit' => $c['last_commit'][0]
-			);
-		}
-	}
-	
-	return $infos;
+	// -- Les traitements du XML dependent de la DTD utilisee
+	$traiteur =  'svp_dtd_' . _SVP_DTD_PLUGIN;
+	include_spip('inc/'. $traiteur);
+	include_spip('inc/svp_outiller');
+	return svp_xml_parse_zone($xml);
 }
-
 ?>
