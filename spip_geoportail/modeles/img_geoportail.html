@@ -22,5 +22,9 @@
 	,
 	$.geoportail.addImg ([(#ENV{id_geoportail,0})], #ID_DOCUMENT, "[(#ENV{titre}|sinon{[(#TITRE|attribut_html)]})]", #LON, #LAT, "[(#LOGO_DOCUMENT||extraire_attribut{src})]", "[(#ENV{align})]", "[(#ENV{taille,20})]", att);
 	})]
+
+    if ("[(#ENV{align})]" == "center")
+		$.geoportail.onLoad([(#ENV{id_geoportail,0})], function(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );
+		
 </script>
 </BOUCLE_doc>

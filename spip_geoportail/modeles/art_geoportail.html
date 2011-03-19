@@ -20,7 +20,7 @@ exemple :<artxx|geoportail>
 	})]
 	    
     if ("[(#ENV{align})]" == "center")
-		$.geoportail.onLoad([(#ENV{id_geoportail,0})], function centerMap(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );
+		$.geoportail.onLoad([(#ENV{id_geoportail,0})], function(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );
 
 </script>
 </BOUCLE_geo_article>
@@ -42,7 +42,7 @@ sur une idee de flouvel http://www.spip-contrib.net/Plugin-SPIP-Geoportail#forum
 	})]
     
     if ("[(#ENV{align})]" == "center")
-		$.geoportail.onLoad([(#ENV{id_geoportail,0})], function centerMap(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );
+		$.geoportail.onLoad([(#ENV{id_geoportail,0})], function(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );
 
 </script>
 </BOUCLE_geo_rubrique>

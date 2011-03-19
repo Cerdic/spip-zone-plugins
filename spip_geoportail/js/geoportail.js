@@ -454,7 +454,9 @@ jQuery.geoportail =
 			l = new OpenLayers.Layer.GXT(name, url);
 			map.getMap().addLayer(l);
 		}
-		else l = map.getMap().addLayer(type, name, url, { opacity: 1, visibility: true, originators: jQuery.geoportail.originators}, { preventDefaultBehavior : true });
+		else l = map.getMap().addLayer(type, name, url, 
+				{ opacity: 1, visibility: true, originators: jQuery.geoportail.originators}, 
+				{ formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
 		if (l) 
 		{	// Recherche des styles
 			setStyle(l.styleMap.styles['default'], 'geoportailDefaultStyle');

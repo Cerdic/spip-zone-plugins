@@ -7,5 +7,5 @@
 [(#ENV{id_rubrique}|oui{" "})	[(#SET{id,#ID_RUBRIQUE})]	[(#SET{obj,rubrique})] ]
 [(#ENV{id_article}|oui{" "})	[(#SET{id,#ID_ARTICLE})]	[(#SET{obj,article})] ]
 <BOUCLE_geo(GEOPOSITIONS){id_objet=#GET{id}}{objet=#GET{obj}}>
-<script>$.geoportail.onLoad([(#ENV{id_geoportail,0})], function centerMap(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );</script>
+<script>$.geoportail.onLoad([(#ENV{id_geoportail,0})], function(map,id){ map.getMap().setCenterAtLonLat(#LON, #LAT, #ZOOM); } );</script>
 </BOUCLE_geo>
