@@ -56,7 +56,7 @@ function exec_spiplistes_liste_edit(){
 	}
 
 	$flag_editable = false;
-	$clearonfocus = "";
+	$clearonfocus = '';
 	
 	// MODE LISTE EDIT: modification ou creation
 	
@@ -65,7 +65,7 @@ function exec_spiplistes_liste_edit(){
 	// Modification de la liste transmise
 	//
 		// les admins toutes rubriques et le moderateur seuls peuvent modifier la liste
-		$flag_editable = autoriser('moderer', 'liste', $connect_id_auteur);
+		$flag_editable = autoriser('moderer', 'liste', $id_liste);
 
 		$sql_select_array = array('titre', 'lang', 'pied_page', 'texte', 'date', 'statut');
 	
