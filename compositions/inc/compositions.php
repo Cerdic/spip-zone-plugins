@@ -47,6 +47,13 @@ function compositions_charger_infos($nom,$info=""){
 				$composition['description'] = isset($xml['description'])?_T_ou_typo(spip_xml_aplatit($xml['description'])):'';
 				$composition['icon'] = isset($xml['icon'])?find_in_path(reset($xml['icon'])):'';
 				$composition['configuration'] = isset($xml['configuration'])?spip_xml_aplatit($xml['configuration']):'';
+				$composition['branche'] = array();
+				if (spip_xml_match_nodes(',^branche,', $xml, $branches)){
+					foreach (array_keys($branches) as $branche){
+						list($balise, $attributs) = spip_xml_decompose_tag($branche);
+						$composition['branche'][$attributs['type']] = $attributs['composition'];
+					}
+				}
 			}
 		}
 		if (!$info)

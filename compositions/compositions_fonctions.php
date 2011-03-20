@@ -171,4 +171,80 @@ function compositions_types(){
 	}
 	return $liste;
 }
+
+/**
+ * Renvoie la composition qui s'applique à un objet
+ * en tenant compte, le cas échéant, de la composition héritée
+ *
+ * @param string $type
+ * @param integer $id
+ * @param string $serveur
+ * @return string
+ */
+function compositions_determiner($type, $id, $serveur=''){
+	include_spip('base/abstract_sql');
+	$table = table_objet($type);
+	$table_sql = table_objet_sql($type);
+	$_id_table = id_table_objet($type);
+
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($table,$serveur);
+	if (isset($desc['field']['composition']) AND $id){
+			$composition = sql_getfetsel('composition', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
+			if ($composition == '-')
+				return '';
+			elseif ($composition != '')
+				return $composition;
+			elseif (isset($desc['field']['id_rubrique'])) {
+				$_id_rubrique = ($type == 'rubrique') ? 'id_parent' : 'id_rubrique';
+				$id_rubrique = sql_getfetsel($_id_rubrique,$table_sql,"$_id_table=".intval($id),'','','','',$serveur);
+				return compositions_heriter($type, $id_rubrique, $serveur);
+			} else
+				return '';
+	}
+	else return '';
+}
+
+/**
+ * Renvoie la composition héritée par un objet selon sa rubrique
+ *
+ * @param string $type
+ * @param integer $id_rubrique
+ * @param string $serveur
+ * @return string
+ */
+function compositions_heriter($type, $id_rubrique, $serveur=''){
+	if ($type=='syndic') $type='site'; //grml
+	if (intval($id_rubrique) < 1) return '';
+	if($infos_rubrique = sql_fetsel(array('id_parent','composition'),'spip_rubriques','id_rubrique='.intval($id_rubrique),'','','','',$serveur)) {
+		if (
+			$infos_rubrique['composition'] != ''
+			AND $infos = compositions_lister_disponibles('rubrique')
+			AND isset($infos['rubrique'][$infos_rubrique['composition']])
+			AND isset($infos['rubrique'][$infos_rubrique['composition']]['branche'])
+			AND isset($infos['rubrique'][$infos_rubrique['composition']]['branche'][$type])
+			)
+			return ($infos['rubrique'][$infos_rubrique['composition']]['branche'][$type]=='-') ? '' : $infos['rubrique'][$infos_rubrique['composition']]['branche'][$type];
+		else
+			return compositions_heriter($type, $infos_rubrique['id_parent'],$serveur);
+	}
+	return '';
+}
+
+/**
+ * #COMPOSITION
+ * Renvoie la composition s'appliquant à un objet
+ * en tenant compte, le cas échéant, de l'héritage
+ *
+ * @param <type> $p
+ * @return <type>
+ */
+function balise_COMPOSITION_dist($p) {
+	$_id_objet = $p->boucles[$p->id_boucle]->primary;
+	$id_objet = champ_sql($_id_objet, $p);
+	$objet = $p->boucles[$p->id_boucle]->id_table;
+	$p->code = "compositions_determiner(objet_type('$objet'), $id_objet)";
+	return $p;
+}
+
 ?>

@@ -63,18 +63,9 @@ function compositions_styliser($flux){
 				$serveur = $flux['args']['connect'];
 
 				$ext = $flux['args']['ext'];
-				$table = table_objet($type);
-				$table_sql = table_objet_sql($type);
 				$_id_table = id_table_objet($type);
 
-				$trouver_table = charger_fonction('trouver_table', 'base');
-				$desc = $trouver_table($table,$serveur);
-				if (
-					isset($desc['field']['composition'])
-					AND isset($contexte[$_id_table])
-					AND $id = $contexte[$_id_table]
-					AND $composition = sql_getfetsel('composition',$table_sql,"$_id_table=".intval($id))){
-
+				if ($id = $contexte[$_id_table] AND $composition = compositions_determiner($type,$id,$serveur)){
 					if ($fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
 						$flux['data'] = substr($fond, 0, - strlen(".$ext"));
 					}
@@ -89,18 +80,9 @@ function compositions_styliser($flux){
 				$serveur = $flux['args']['connect'];
 
 				$ext = $flux['args']['ext'];
-				$table = table_objet($type);
-				$table_sql = table_objet_sql($type);
 				$_id_table = id_table_objet($type);
 
-				$trouver_table = charger_fonction('trouver_table', 'base');
-				$desc = $trouver_table($table,$serveur);
-				if (
-					isset($desc['field']['composition'])
-					AND isset($contexte[$_id_table])
-					AND $id = $contexte[$_id_table]
-					AND $composition = sql_getfetsel('composition',$table_sql,"$_id_table=".intval($id))){
-
+				if ($id = $contexte[$_id_table] AND $composition = compositions_determiner($type,$id,$serveur)){
 					if ($fond = compositions_selectionner($composition, $type, '', $ext, true, "")){
 						$flux['data'] = substr($fond, 0, - strlen(".$ext"));
 					}
