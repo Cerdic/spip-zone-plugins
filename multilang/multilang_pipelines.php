@@ -67,7 +67,7 @@ function multilang_inserer_head($config=array()){
 		$root = '' ;
 
 		if($config['siteconfig']){
-			$root .= 'div#configurer-accueil' ; // Config Site
+			$root .= 'div#configurer-accueil,div.formulaire_configurer_identite' ; // Config Site
 		}
 		if($config['article']) { // Articles
 			$root .= ',div.formulaire_editer_article';
@@ -125,7 +125,7 @@ function multilang_inserer_head($config=array()){
 	jQuery(document).ready(function(){
 		function multilang_init(){
 			var root = "'.$root.'";
-			var fields_selector = "textarea,input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
+			var fields_selector = "textarea:not(textarea#adresses_secondaires),input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
 			// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
 			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 			// Les div qui ont un formulaire de classe multilang (pour accélérer la recherche dans le DOM,
