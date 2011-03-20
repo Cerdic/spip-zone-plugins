@@ -1,0 +1,12 @@
+<plugin>
+  <nom>radioactivite</nom>
+  <auteur>Anne-lise Martenot contact@elastick.net</auteur>
+  <icon>images/cercle-rouge.png</icon>
+  <licence>(c) 2008-2011 GPL</licence>
+  <version>0.1</version>
+  <etat>test</etat>
+  <description>Ceci est un fichier de d&eacute;monstration a r&eacute;utiliser.
+ Une seule page pour r&eacute;cup&eacute;rer les donn&eacute;es des pages de http://www.bousai.ne.jp/eng/ qui mesure toutes les 10 minutes la radioactivit&eacute; au Japon.</description>
+  <necessite id='SPIP' version='[2.0.0;]' />
+  <categorie>outil</categorie>
+</plugin>
