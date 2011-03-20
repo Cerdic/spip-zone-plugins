@@ -51,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_ajouter_depot' => 'En ajoutant des d&eacute;p&ocirc;ts &agrave; votre base, vous aurez la possiblit&eacute; d\'obtenir des informations et d\'effectuer des recherches sur tous les paquets h&eacute;berg&eacute;s par les d&eacute;p&ocirc;ts ajout&eacute;s.<br />Un d&eacute;p&ocirc;t est d&eacute;crit par un fichier XML contenant les informations sur le d&eacute;p&ocirc;t et sur tous ses paquets.',
 	'info_aucun_depot_disponible' => 'Aucun d&eacute;p&ocirc;t disponible.',
 	'info_aucun_plugin_disponible' => 'Aucun plugin disponible.',
+	'info_aucun_module' => 'aucun module de langue utilis&eacute;',
 	'info_aucun_paquet_disponible' => 'Aucun paquet disponible.',
 	'info_aucune_contribution_disponible' => 'Aucune autre contribution disponible en dehors des plugins',
 	'info_aucune_version_spip' => 'Non communiqu&eacute;e',
@@ -63,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_fichier_depot' => 'Saisissez l\'url du fichier de description du d&eacute;p&ocirc;t &agrave; ajouter.<br /> Pour ajouter la Zone des plugins SPIP cliquez sur ce lien : ',
 	'info_liste_aucun_depot' => 'Aucun d&eacute;p&ocirc;t n\'a encore &eacute;t&eacute; charg&eacute; dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
 	'info_liste_depots' => 'Vous trouverez ci-dessous la liste des d&eacute;p&ocirc;ts ajout&eacute;s &agrave; votre base. Tous les plugins h&eacute;berg&eacute;s par ces d&eacute;p&ocirc;ts ont eux aussi &eacute;t&eacute; charg&eacute;s.',
+	'info_modules_utilises' => '@total_modules@ module(s) utilis&eacute;(s) : <em>@liste_modules@</em>',
 	'info_paquets_disponibles' => '@total_paquets@ paquet(s) disponible(s)',
 	'info_plugins_disponibles' => '@total_plugins@ plugin(s) disponible(s)',
 	'info_plugins_heberges' => '@total_plugins@ plugin(s) h&eacute;berg&eacute;(s)',
@@ -119,6 +121,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_depot' => 'H&eacute;berg&eacute;e par',
 	'label_maj' => 'G&eacute;n&eacute;r&eacute;e le',
 	'label_necessite' => 'N&eacute;cessite les plugins',
+	'label_resume_traductions' => 'R&eacute;sum&eacute; des traductions',
+	'label_module' => 'Module',
+	'label_langue_reference' => 'Langue r&eacute;f&eacute;rence',
+	'label_gestionnaire' => 'Gestionnaire',
+	'label_traductions' => 'Traductions',
 
 // M
 	'message_nok_aucun_paquet_ajoute' => 'Le d&eacute;p&ocirc;t &#171; @url@ &#187; ne fournit aucun nouveau paquet par rapport &agrave; la base d&eacute;j&agrave; enregistr&eacute;e. Il n\'a donc pas &eacute;t&eacute ajout&eacute;',
