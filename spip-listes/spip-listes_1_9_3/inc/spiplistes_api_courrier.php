@@ -65,62 +65,66 @@ function spiplistes_courrier_propre($texte){
 
 
 
-/****
- * titre : spiplistes_courrier_propre_bloog
+/**
  * Enleve les enluminures Spip pour la bloogletter
- Vincent CARON
-****/
-
+ * Vincent CARON
+ * @return string
+ * @todo revoir certaines regles (<p><p></p></p> mal corrigé)
+ */
 function spiplistes_courrier_propre_bloog($texte) {
+	
+	static $eol = PHP_EOL;
+	
+	spiplistes_debug_log ("spiplistes_courrier_propre_bloog()");
 
-	$texte = ereg_replace("<p class=\"spip\">(\r\n|\n|\r)?</p>",'',$texte);
-	$texte = eregi_replace("\n{3}", "\n", $texte);
+	// eliminer les paragraphes vides
+	$texte = preg_replace ('@<p class="spip">\s*</p>@i', '', $texte);
+	
+	// limiter les tabulations verticales 
+	$texte = preg_replace ('@\v{3,}@', $eol, $texte);
 	
 	
 	// div imbrique dans un p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<div([^>]*)>" , "<div\\2>" , $texte);
-	$texte = eregi_replace( "<\/div>(\r\n|\n|\r| )*<\/p>" , "</div>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*<div([^>]*)>@i', '<div\\2>' , $texte);
+	$texte = preg_replace ('@</div>\s*</p>@i' , '</div>' , $texte);
 	
 	// style imbrique dans un p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<style([^>]*)>" , "<style>" , $texte);
-	$texte = eregi_replace( "<\/style>(\r\n|\n|\r| )*<\/p>" , "</style>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*<style([^>]*)>@i', '<style>' , $texte);
+	$texte = preg_replace ('@</style>\s*</p>@i', '</style>', $texte);
 	
 	
 	// h3 imbrique dans un p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<h3 class=\"spip\">" , "<h3>" , $texte);
-	$texte = eregi_replace( "<\/h3>(\r\n|\n|\r| )*<\/p>" , "</h3>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*<h3 class="spip">@i', '<h3>', $texte);
+	$texte = preg_replace ('@</h3>\s*</p>@i', '</h3>', $texte);
 	
 	// h2 imbrique dans un p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<h2>" , "<h2>" , $texte);
-	$texte = eregi_replace( "<\/h2>(\r\n|\n|\r| )*<\/p>" , "</h2>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*<h2>@i', '<h2>' , $texte);
+	$texte = preg_replace ('@</h2>\s*</p>@i', '</h2>' , $texte);
 	
 	// h1 imbrique dans un p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<h1>" , "<h1>" , $texte);
-	$texte = eregi_replace( "<\/h1>(\r\n|\n|\r| )*<\/p>" , "</h1>" , $texte);
-	
+	$texte = preg_replace ('@<p class="spip">\s*<h1>@i', '<h1>' , $texte);
+	$texte = preg_replace ('@</h1>\s*</p>@i' , '</h1>' , $texte);
 	
 	// tableaux imbriques dans p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<(table|TABLE)" , "<table" , $texte);
-	$texte = eregi_replace( "<\/(table|TABLE)>(\r\n|\n|\r| )*<\/p>" , "</table>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*<table@i' , '<table' , $texte);
+	$texte = preg_replace ('@</table>\s*</p>@i' , '</table>' , $texte);
 	
 	// TD imbriques dans p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<(\/td|\/TD)" , "</td" , $texte);
-	//$texte = eregi_replace( "<\/(td|TD)>(\r\n|\n|\r| )*<\/p>" , "</td>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*</td@i' , '</td' , $texte);
 	
 	// p imbriques dans p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<(p|P)" , "<p" , $texte);
-	//$texte = eregi_replace( "<\/(td|TD)>(\r\n|\n|\r| )*<\/p>" , "</td>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*<p@i' , '<p' , $texte);
 	
 	// DIV imbriques dans p
-	$texte = eregi_replace( "<p class=\"spip\">(\r\n|\n|\r| )*<(div|DIV)" , "<div" , $texte);
-	$texte = eregi_replace( "<\/(DIV|div)>(\r\n|\n|\r| )*<\/p>" , "</div>" , $texte);
+	$texte = preg_replace ('@<p class="spip">\s*<div@i' , '<div' , $texte);
+	$texte = preg_replace ('@</div>\s*</p>@i' , '</div>' , $texte);
 	
-	//$texte = PtoBR($texte);
-	$texte = ereg_replace ("\.php3&nbsp;\?",".php3?", $texte);
-	$texte = ereg_replace ("\.php&nbsp;\?",".php?", $texte);
+	// correction url ?
+	$texte = preg_replace ('@\.php3&nbsp;\?@', '.php3?', $texte);
+	$texte = preg_replace ('@\.php&nbsp;\?@', '.php?', $texte);
 	
-	return $texte;
-} // end spiplistes_courrier_propre_bloog()
+	return ($texte);
+} 
 
 
 
