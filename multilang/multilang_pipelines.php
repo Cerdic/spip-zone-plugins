@@ -148,7 +148,9 @@ function multilang_affichage_final($flux){
 		$root = '' ;
 		$config = lire_config('multilang',array());
 		if(($config['multilang_public'] == 'on') && ($config['multilang_crayons'] == 'on')){
-		
+			if($config['siteconfig']){
+				$root .= ',input[type=hidden][name*=name_][value|=meta-valeur]';
+			}
 			if($config['article']) { // Articles
 				$root .= ',input[type=hidden][name*=name_][value|=article]:not(input[value|=article-logo])';
 			}
