@@ -849,16 +849,30 @@ function spiplistes_mod_listes_id_auteur ($id_auteur) {
 	return($result);
 }
 
-//function spiplistes_texte_propre($texte)
-// passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html
-// 	Remplace spiplistes_courrier_propre() qui est a supprimer apres verif.
-function spiplistes_texte_propre($texte){
-	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
-	if (isset($style_reg[0])) 
-		$style_str = $style_reg[0]; 
-	else 
-		$style_str = "";
-	$texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
+/**
+ * passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html
+ * @return string
+ * Remplace spiplistes_courrier_propre() qui est a supprimer apres verif.
+ */
+function spiplistes_texte_propre ($texte) {
+	spiplistes_debug_log ('spiplistes_texte_propre()');
+	static $adresse_site;
+	if (!$adresse_site) { $adresse_site = $GLOBALS['meta']['adresse_site']; }
+	static $style_rev = '__STYLE__';
+	
+	if (preg_match ('@<style[^>]*>[^<]*</style>@'
+							  , $texte
+							  , $style_reg
+							  )
+		> 0
+	) {
+		$style_str = $style_reg[0];
+	}
+	else {
+		$style_str = '';
+	}
+	$texte = preg_replace ('@<style[^>]*>[^<]*</style>@', $style_rev, $texte);
+	
 	//passer propre si y'a pas de html (balises fermantes)
 	if( !preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $texte) ) 
 	$texte = propre($texte); // pb: enleve aussi <style>...  
@@ -867,22 +881,31 @@ function spiplistes_texte_propre($texte){
 	$patterns = array();
 	$replacements = array();
 	// html
-	$patterns[] = "#<br>#i";
-	$replacements[] = "<br />";
-	$patterns[] = "#<b>([^<]*)</b>#i";
+	$patterns[] = '#<br>#i';
+	$replacements[] = '<br />';
+	$patterns[] = '#<b>([^<]*)</b>#i';
 	$replacements[] = '<strong>\\1</strong>';
-	$patterns[] = "#<i>([^<]*)</i>#i";
+	$patterns[] = '#<i>([^<]*)</i>#i';
 	$replacements[] = '<em>\\1</em>';
 	// spip class
-	$patterns[] = "# class=\"spip\"#";
-	$replacements[] = "";	
+	$patterns[] = '# class="spip"#';
+	$replacements[] = '';	
 	
 	$texte = preg_replace($patterns, $replacements, $texte);
 
-	$texte = ereg_replace("__STYLE__", $style_str, $texte);
+	// remettre en place les styles
+	$texte = str_replace ($style_rev, $style_str, $texte);
 	
 	//les liens avec double debut #URL_SITE_SPIP/#URL_ARTICLE
-	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
+	$texte = preg_replace (
+				'@'
+				. $adresse_site
+					. '/'
+					. $adresse_site
+					. '@'
+				, $adresse_site
+				, $texte
+				);
 	$texte = spiplistes_liens_absolus ($texte);
 	
 	return ($texte);

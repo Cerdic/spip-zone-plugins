@@ -282,7 +282,10 @@ function exec_spiplistes_courrier_gerer () {
 				//$titre = propre($titre); // pas de propre ici, ca fait un <p> </p>
 				// Le statut n'est modifie ici, mais 
 				// par courrier_casier en retour de ce formulaire
-				$texte = spiplistes_courrier_propre($texte);
+				
+				// $texte = spiplistes_courrier_propre($texte);
+				$texte = spiplistes_texte_propre ($texte);
+				
 				spiplistes_courrier_modifier(
 					$id_courrier
 					, array(
@@ -305,8 +308,10 @@ function exec_spiplistes_courrier_gerer () {
 					, _SPIPLISTES_COURRIER_STATUT_PUBLIE
 					, _SPIPLISTES_COURRIER_STATUT_STOPE
 					))
-				) {
-				$texte = spiplistes_courrier_propre($texte);
+			) {
+				
+				//$texte = spiplistes_courrier_propre($texte);
+				$texte = spiplistes_texte_propre ($texte);
 			}
 			if(!empty($message_texte)){
 				$alt_message_texte = _T('spiplistes:calcul_patron');

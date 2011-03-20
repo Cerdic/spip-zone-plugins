@@ -43,24 +43,55 @@
  * ca s'utilise pour afficher un courrier dans l espace prive
  * on l'applique au courrier avant de confirmer l'envoi
  * @return string
+ * @deprecated
  */
-function spiplistes_courrier_propre($texte){
-	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
-	if (isset($style_reg[0])) 
-		$style_str = $style_reg[0]; 
-	else 
-		$style_str = "";
-	$texte = ereg_replace("<style[^>]*>[^<]*</style>", "__STYLE__", $texte);
+function spiplistes_courrier_propre ($texte) {
+	spiplistes_debug_log ('spiplistes_courrier_propre()');
+	static $adresse_site;
+	if (!$adresse_site) { $adresse_site = $GLOBALS['meta']['adresse_site']; }
+	static $style_rev = '__STYLE__';
+	
+	if (preg_match ('@<style[^>]*>[^<]*</style>@'
+							  , $texte
+							  , $style_reg
+							  )
+		> 0
+	) {
+		
+	}
+	
+	if (isset($style_reg[0])) {
+		$style_str = $style_reg[0].'<!-- hole -->';
+	}
+	else {
+		$style_str = '';
+	}
+	$texte = preg_replace ('@<style[^>]*>[^<]*</style>@', $style_rev, $texte);
+	
 	//passer propre si y'a pas de html (balises fermantes)
-	if( !preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],iS', $texte) ) 
-	$texte = propre($texte); // pb: enleve aussi <style>...  
-	$texte = spiplistes_courrier_propre_bloog($texte); //nettoyer les spip class truc en trop
-	$texte = ereg_replace("__STYLE__", $style_str, $texte);
+	if (!preg_match ('@</?('._BALISES_BLOCS.')[>[:space:]]@iS', $texte))
+	{
+		$texte = propre($texte); // pb: enleve aussi <style>...
+	}
+	//nettoyer les spip class truc en trop
+	$texte = spiplistes_courrier_propre_bloog ($texte); 
+	
+	// remettre en place les styles
+	$texte = str_replace ($style_rev, $style_str, $texte);
+	
 	//les liens avec double debut #URL_SITE_SPIP/#URL_ARTICLE
-	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
+	$texte = preg_replace (
+				'@'
+				. $adresse_site
+					. '/'
+					. $adresse_site
+					. '@'
+				, $adresse_site
+				, $texte
+				);
 	$texte = spiplistes_liens_absolus ($texte);
 	
-	return $texte;
+	return ($texte);
 }
 
 
