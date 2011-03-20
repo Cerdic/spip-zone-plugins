@@ -3,7 +3,7 @@
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
 	<version>0.4.1</version>
-	<version_base>0.1</version_base>
+	<version_base>0.2</version_base>
 	<etat>test</etat>
 	<description>
 	<multi>[fr]Ce plugin installe une ic&ocirc;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&eacute; le manuel de r&eacute;daction du site. Ce manuel est un article du site</multi>
