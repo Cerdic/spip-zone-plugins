@@ -206,7 +206,7 @@ function cron_spiplistes_cron ($last_time) {
 
 			if($taille_courrier_ok) {
 				include_spip('inc/filtres');
-				$courrier_html = liens_absolus($courrier_html);
+				$courrier_html = spiplistes_liens_absolus ($courrier_html);
 				$date_debut_envoi = $date_fin_envoi = "''";
 				$statut = _SPIPLISTES_COURRIER_STATUT_ENCOURS;
 			}

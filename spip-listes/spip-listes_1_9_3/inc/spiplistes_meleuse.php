@@ -282,7 +282,7 @@ function spiplistes_meleuse ($last_time) {
 			foreach(array('pied_html', 'pied_texte'
 				, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
 				if(!empty($$key)) {
-					$$key = liens_absolus($$key);
+					$$key = spiplistes_liens_absolus ($$key);
 				}
 			}
 			

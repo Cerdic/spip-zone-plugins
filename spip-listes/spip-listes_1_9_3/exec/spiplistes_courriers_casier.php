@@ -186,11 +186,21 @@ function exec_spiplistes_courriers_casier () {
 				// destinataire(s) = abonnés à une liste
 				// si id_liste == 0, destinataire = adresse email de test
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
+
+spiplistes_debug_log ("..: spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur_test)");
+
+
 				spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste, $id_auteur_test);
 				if($id_liste > 0) {
-spiplistes_debug_log("SEND id_courrier #$id_courrier ON id_liste #$id_liste BY id_auteur #$connect_id_auteur");
+					spiplistes_debug_log('SEND id_courrier #'.$id_courrier
+										. ' ON id_liste #'.$id_liste
+										. ' BY id_auteur #'.$connect_id_auteur
+										);
 				} else {
-spiplistes_debug_log("SEND id_courrier #$id_courrier TO #$id_auteur_test TEST BY id_auteur #$connect_id_auteur");
+					spiplistes_debug_log('SEND id_courrier #'.$id_courrier
+										 . ' TO id_auteur #'.$id_auteur_test
+										 . ' TEST BY id_auteur #'.$connect_id_auteur
+										 );
 				}
 			}
 			spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ENCOURS);

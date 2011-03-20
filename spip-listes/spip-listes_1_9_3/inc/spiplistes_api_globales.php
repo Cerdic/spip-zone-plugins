@@ -530,6 +530,7 @@ function spiplistes_code2utf($number)  {
 } //spiplistes_code2utf()
 
 /**
+ * CP-20110320
  * Version liens_absolus compatible DATA URL SHEME
  * @return string
  */

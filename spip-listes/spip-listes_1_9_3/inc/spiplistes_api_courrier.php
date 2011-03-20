@@ -58,7 +58,7 @@ function spiplistes_courrier_propre($texte){
 	$texte = ereg_replace("__STYLE__", $style_str, $texte);
 	//les liens avec double debut #URL_SITE_SPIP/#URL_ARTICLE
 	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
-	$texte = liens_absolus($texte);
+	$texte = spiplistes_liens_absolus ($texte);
 	
 	return $texte;
 }
@@ -236,6 +236,7 @@ function spiplistes_courrier_version_texte($in) {
  * Ajouter les abonnes d'une liste a un envoi
  * @param : $id_courrier : reference d'un envoi
  * @param $id_liste : reference d'une liste
+ * @return bool
  */
 function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste, $id_auteur = 0) {
 	$id_courrier = intval($id_courrier);

@@ -883,7 +883,7 @@ function spiplistes_texte_propre($texte){
 	
 	//les liens avec double debut #URL_SITE_SPIP/#URL_ARTICLE
 	$texte = ereg_replace($GLOBALS['meta']['adresse_site']."/".$GLOBALS['meta']['adresse_site'], $GLOBALS['meta']['adresse_site'], $texte);
-	$texte = liens_absolus($texte);
+	$texte = spiplistes_liens_absolus ($texte);
 	
 	return ($texte);
 }

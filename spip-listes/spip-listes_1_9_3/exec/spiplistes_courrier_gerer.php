@@ -422,24 +422,28 @@ function exec_spiplistes_courrier_gerer () {
 				}
 			}
 			if(($id_liste > 0) || ($id_auteur_test > 0)) {
-				$boite_confirme_envoi = ""
-					. debut_cadre_couleur('', true)
+				$boite_confirme_envoi = 
+					  debut_cadre_couleur('', true)
 					// formulaire de confirmation envoi
 					// renvoie sur la page des casiers
-					. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,"id_courrier=$id_courrier")."' method='post'>"
-					. "<p style='text-align:center;font-weight:bold;' class='verdana2'>"
-					. _T('spiplistes:confirme_envoi')
-					. "</p>"
-					. "<input type='hidden' name='id_liste' value='$id_liste' />"
-					. "<input type='hidden' name='id_courrier' value='$id_courrier' />"
-					. "<input type='hidden' name='id_auteur_test' value='$id_auteur_test' />"
-					. "<div style='text-align:left;'>"
-					. "<input type='submit' name='btn_annuler_envoi' value='"._T('spiplistes:annuler_envoi')."' class='fondo' style='float:left' />"
-					. "<div style='text-align:right;width:100%'>"
-					. "<input type='submit' name='btn_confirmer_envoi' value='"._T('spiplistes:Envoyer_ce_courrier')."' class='fondo' />"
-					. "</div>\n"
-					. "</div>\n"
-					. "</form>"
+					. '<form action="'
+						. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE,'id_courrier='.$id_courrier)
+						. '" method="post">'.$eol
+					. '<p style="text-align:center;font-weight:bold;" class="verdana2">'
+						. _T('spiplistes:confirme_envoi')
+						. '</p>'.$eol
+					. '<input type="hidden" name="id_liste" value="'.$id_liste.'" />'.$eol
+					. '<input type="hidden" name="id_courrier" value="'.$id_courrier.'" />'.$eol
+					. '<input type="hidden" name="id_auteur_test" value="'.$id_auteur_test.'" />'.$eol
+					. '<div style="text-align:left;">'.$eol
+					. '<input type="submit" name="btn_annuler_envoi" value="'
+						. _T('spiplistes:annuler_envoi').'" class="fondo" style="float:left" />'.$eol
+					. '<div style="text-align:right;width:100%">'.$eol
+					. '<input type="submit" name="btn_confirmer_envoi" value="'
+						. _T('spiplistes:Envoyer_ce_courrier').'" class="fondo" />'.$eol
+					. '</div>'.$eol
+					. '</div>'.$eol
+					. '</form>'
 					. fin_cadre_couleur(true)
 					;
 			}

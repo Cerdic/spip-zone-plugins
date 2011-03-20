@@ -301,8 +301,8 @@ function exec_spiplistes_courrier_previsu () {
 			: generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_GERER)
 			;
 		
-		$message_html = liens_absolus($intro_html . $message_html);
-		$message_texte = liens_absolus($intro_texte . $message_texte);
+		$message_html = spiplistes_liens_absolus ($intro_html . $message_html);
+		$message_texte = spiplistes_liens_absolus ($intro_texte . $message_texte);
 		
 		spiplistes_debug_log('ACTION: generate page');
 
