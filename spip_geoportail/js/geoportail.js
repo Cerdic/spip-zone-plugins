@@ -496,6 +496,8 @@ jQuery.geoportail =
 
 			// Forcer pour IE !
 			// l.events.triggerEvent("loadend");
+			
+			return l;
 		}
 	},
 
@@ -989,10 +991,15 @@ jQuery.geoportail =
 		var spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true });
 		var html = "";
 		var att = feature.attributes;
+		// Fonction popup perso
+		if (typeof (att.popup) == 'function')
+		{	att.popup(feature);
+			return;
+		}
 		var lien = null;
 		if (att.url) 
 		{	// Affichage des images
-			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.showImg('" + att.url + "',"+att.width+","+att.heigth+")\">";
+			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.showImg('" + att.url + "',"+att.width+","+att.height+")\">";
 			else lien = "<a href='" + att.url + "'>";
 		}
 		if (att.logo) html += att.logo;
