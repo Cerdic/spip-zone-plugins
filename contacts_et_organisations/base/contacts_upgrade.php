@@ -121,8 +121,9 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 
 	// le champ descriptif ne changeait pas sur les nouvelles installations (c'etait encore declare tinytext
     if (version_compare($current_version,"1.3.3","<")){
-		if (!sql_alter("TABLE spip_contacts CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL")) {
+		sql_alter("TABLE spip_contacts CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL");
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.3");
+		
 	}
 }
 
