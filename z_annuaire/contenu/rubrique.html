@@ -11,7 +11,6 @@
 	</div>
 
 	[<div class="#EDIT{texte} chapo">(#TEXTE)</div>]
-</div>
 
 	[(#REM) Si aucun article, affiche un plan de la rubrique ]
 	<B_sous_rubriques>
@@ -38,28 +37,28 @@
 		</ul>
 		</div>
 	</B_sous_rubriques>
-<//B_articles>
 
-[(#REM) Sites de la rubrique ]
-<B_sites>
-<div class="liste sites">
+	[(#REM) Sites de la rubrique ]
+	<B_sites>
+	<div class="liste sites">
 		<h2 class="h2"><:sur_web:></h2>
 		<ul class="liste-items">
-				<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+			<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
 				<li class="item">
-						<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
-						<B_syndic>
+					<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
+					<B_syndic>
 						<ul>
 							<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
 								<li><a href="#URL_ARTICLE" class="spip_out">#TITRE</a></li>
 							</BOUCLE_syndic>
 						</ul>
-						</B_syndic>
+					</B_syndic>
 				</li>
-				</BOUCLE_sites>
+			</BOUCLE_sites>
 		</ul>
+	</div>
+	</B_sites>
 </div>
-</B_sites>
 
-[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
+	[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
 </BOUCLE_contenu_rubrique>

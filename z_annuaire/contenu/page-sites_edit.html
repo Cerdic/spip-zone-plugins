@@ -1,16 +1,27 @@
-[(#REM)
-	Une page pour editer les sites
-]
-<div class='cadre-formulaire-editer'>
-<div class="entete-formulaire">
-	#ENV**{icone_retour}
-	<B_titre><:icone_modifier_site:>
-	<BOUCLE_titre(SITES) {id_syndic}>
-	<h1>#NOM_SITE</h1></BOUCLE_titre></B_titre>
-	<h1><:annuaire:nouveau_site:></h1><//B_titre>
-</div>
-[(#AUTORISER{modifier, site, #ID_SYNDIC})
-#FORMULAIRE_EDITER_SITE{#ID_SYNDIC, #ID_RUBRIQUE, #ENV{retour}}
-]
-[(#AUTORISER{ecrire}|non)<:annuaire:pas_le_droit_ecrire:>]
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span>
+	<strong class="on">
+		#ENV**{icone_retour}
+		<B_titre><:icone_modifier_site:>
+		<BOUCLE_titre(SITES) {id_syndic}>
+		<h1>#NOM_SITE</h1></BOUCLE_titre></B_titre>
+		<h1><:annuaire:nouveau_site:></h1><//B_titre>
+	</strong>
+</p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h1 class="h1">
+			#ENV**{icone_retour}
+			<B_titre><:icone_modifier_site:>
+			<BOUCLE_titre(SITES) {id_syndic}>
+			#NOM_SITE</BOUCLE_titre></B_titre>
+			<:annuaire:nouveau_site:><//B_titre>
+		</h1>
+	</div>
+	<div class='cadre-formulaire-editer'>
+	[(#AUTORISER{modifier, site, #ID_SYNDIC})
+	#FORMULAIRE_EDITER_SITE{#ID_SYNDIC, #ID_RUBRIQUE, #ENV{retour}}
+	]
+	[(#AUTORISER{ecrire}|non)<:annuaire:pas_le_droit_ecrire:>]
 </div>

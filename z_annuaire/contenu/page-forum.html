@@ -3,16 +3,16 @@
 
 	<BOUCLE_contexte_site(SITES) {id_syndic}>
 	<BOUCLE_ariane_site(HIERARCHIE) {id_rubrique}>
-	&gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a>
+	<span class="sep"> &gt; </span><a href="#URL_RUBRIQUE">[(#TITRE|couper{80}|supprimer_numero)]</a>
 	</BOUCLE_ariane_site>
-	&gt; <a href="[(#ID_SYNDIC|generer_url_entite{site})]">[(#NOM_SITE|couper{80})]</a>
+	<span class="sep"> &gt; </span><a href="[(#ID_SYNDIC|generer_url_entite{site})]">[(#NOM_SITE|couper{80})]</a>
 	</BOUCLE_contexte_site>
 
 	<BOUCLE_contexte_forum(FORUMS) {id_forum}>
-	&gt; <a href="#URL_FORUM">[(#TITRE|couper{80}|supprimer_numero)]</a>
+	<span class="sep"> &gt; </span><a href="#URL_FORUM">[(#TITRE|couper{80}|supprimer_numero)]</a>
 	</BOUCLE_contexte_forum>
 
-	&gt; <strong class="on"><:poster_message:></strong> 
+	<span class="sep"> &gt; </span><strong class="on"><:poster_message:></strong> 
   
 </p><!--#hierarchie-->
 
