@@ -9,7 +9,6 @@ function formulaires_ajouter_depot_charger_dist(){
 }
 
 function formulaires_ajouter_depot_verifier_dist(){
-	include_spip('inc/svp_outiller');
 	
 	$erreurs = array();
 	$xml = _request('xml_paquets');

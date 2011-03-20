@@ -19,6 +19,17 @@ d'autre part, la liste des paquets suivants :
 <size>16862</size>
 <date>1274302824</date>
 <source>_plugins_/plugin_1</source>
+<last_commit>2011-03-10 21:21:10</last_commit>
+<traductions>
+	<traduction module="a2a" reference="fr">
+		<langue code="en"></langue>
+		<langue code="es"></langue>
+		<langue code="it"></langue>
+	</traduction>
+	<traduction module="a2a_prive" reference="fr">
+		<langue code="en"></langue>
+	</traduction>
+</traductions>
 <plugin>
     <prefix>plugin1</prefix>
 	<nom>
@@ -56,6 +67,7 @@ d'autre part, la liste des paquets suivants :
 <size>5263</size>
 <date>1275519604</date>
 <source>_plugins_/plugin_2</source>
+<last_commit>2010-08-26 20:20:27</last_commit>
 <plugin>
 	<prefix>plugin2</prefix>
 	<nom>Plugin_2</nom>
@@ -97,6 +109,11 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 <size>5434</size>
 <date>1275519604</date>
 <source>_plugins_/plugin_2</source>
+<last_commit>2010-01-16 00:25:19</last_commit>
+<traductions>
+	<traduction module="plugin2" reference="fr">
+	</traduction>
+</traductions>
 <plugin>
 	<prefix>plugin2</prefix>
 	<nom>Plugin_2 2</nom>
@@ -138,6 +155,18 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 <size>6221</size>
 <date>1275519604</date>
 <source>_plugins_/plugin_2</source>
+<traductions>
+	<traduction module="plugin2" gestionnaire="salvatore" reference="fr">
+		<langue code="de">
+			<traducteur nom="Klaus" />
+			<traducteur nom="Kent1" />
+		</langue>
+		<langue code="en">
+			<traducteur nom="Paolo" />
+		</langue>
+		<langue code="it"></langue>
+	</traduction>
+</traductions>
 <plugin>
 	<prefix>plugin2</prefix>
 	<nom>Plugin_2 3</nom>

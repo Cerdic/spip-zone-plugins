@@ -2,6 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/plugin');
+include_spip('inc/svp_phraser');
 
 // ----------------------- Traitements des depots ---------------------------------
 
@@ -238,10 +239,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		$insert_paquet['maj_archive'] = date('Y-m-d H:i:s', $_infos['date']);
 		$insert_paquet['src_archive'] = $_infos['source'];
 		$insert_paquet['date_modif'] = $_infos['last_commit'];
+		// On serialise le tableau des traductions par module
+		$insert_paquet['traductions'] = serialize($_infos['traductions']);
 
 		// On verifie si le paquet est celui d'un plugin ou pas
 		// -- Les traitements du XML dependent de la DTD utilisee
-		$traiteur =  'svp_dtd_' . _SVP_DTD_PLUGIN;
+		$traiteur =  'svp_informer_' . _SVP_DTD_PLUGIN;
 		include_spip('inc/'. $traiteur);
 		if ($champs = svp_remplir_champs_sql($_infos['plugin'])) {
 			$paquet_plugin = true;
@@ -468,24 +471,5 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 	}
 	
 	return true;
-}
-
-
-// Phraser un fichier de source dont l'url est donnee
-// ce fichier est un fichier XML contenant <depot>...</depot>
-// et <archives>...</archives>
-function svp_xml_parse_depot($url){
-	include_spip('inc/distant');
-
-	// On lit le fichier xml
-	if (!$xml = recuperer_page($url)) {
-		return false;
-	}
-
-	// -- Les traitements du XML dependent de la DTD utilisee
-	$traiteur =  'svp_dtd_' . _SVP_DTD_PLUGIN;
-	include_spip('inc/'. $traiteur);
-	include_spip('inc/svp_outiller');
-	return svp_xml_parse_zone($xml);
 }
 ?>

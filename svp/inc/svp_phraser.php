@@ -4,7 +4,24 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/xml');
 
-function svp_xml_parse_zone($xml){
+
+// Phraser un fichier de source dont l'url est donnee
+// ce fichier est un fichier XML contenant <depot>...</depot>
+// et <archives>...</archives>
+function svp_xml_parse_depot($url){
+	include_spip('inc/distant');
+
+	// On lit le fichier xml
+	if (!$xml = recuperer_page($url)) {
+		return false;
+	}
+
+	// -- Les traitements du XML dependent de la DTD utilisee
+	return svp_xml_parse_archives($xml);
+}
+
+
+function svp_xml_parse_archives($xml){
 	// On enleve la balise doctype qui provoque une erreur "balise non fermee" lors du parsage
 	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
 
@@ -33,36 +50,29 @@ function svp_xml_parse_zone($xml){
 		// - cas 1 : c'est un plugin donc on integre les infos du plugin
 		// - cas 2 : c'est une archive non plugin, pas d'infos autres que celles de l'archive
 		if ($url = $c['file'][0]) {
+			// Recuperation des infos du plugin (balise <plugin>)
+			$plugin = array();
 			if (is_array($c[_SVP_DTD_PLUGIN]))
 				$plugin = svp_xml_parse_plugin($c[_SVP_DTD_PLUGIN][0]);
-			else
-				$plugin = array();
-			// On remplit les infos dans les deux cas
+
+			// Recuperation des infos de traductions (balise <traductions>)
+			$traductions = array();
+			if (is_array($c['traductions']))
+				$traductions = svp_xml_parse_traduction($c['traductions'][0]);
+
+			// On compile les infos du paquet
 			$infos['paquets'][$url] = array(
 				'plugin' => $plugin, 
 				'file' => $url,
 				'size' => $c['size'][0],
 				'date' => $c['date'][0],	// c'est la date de generation du zip
 				'source' => $c['source'][0],
-				'last_commit' => $c['last_commit'][0]
+				'last_commit' => $c['last_commit'][0],
+				'traductions' => $traductions
 			);
 		}
 	}
-	
 	return $infos;
-}
-
-// aplatit plusieurs cles d'un arbre xml dans un tableau
-// effectue un trim() au passage
-function svp_xml_aplatit_multiple($array, $arbre){
-	$a = array();
-	// array('uri','archive'=>'zip',...)
-	foreach ($array as $i=>$n){
-		if (is_string($i)) $cle = $i;
-		else $cle = $n;
-		$a[$n] = trim(spip_xml_aplatit($arbre[$cle]));
-	}
-	return $a;	
 }
 
 
@@ -91,8 +101,8 @@ function svp_xml_parse_plugin($arbre){
 				as $balise=>$p){
 		$params = $res = array();
 		// recherche de la balise et extraction des attributs
-		if (spip_xml_match_nodes(",^$balise,",$arbre, $res)){
-			foreach(array_keys($res) as $tag){
+		if (spip_xml_match_nodes(",^$balise,", $arbre, $res)){
+			foreach (array_keys($res) as $tag){
 				list($tag,$att) = spip_xml_decompose_tag($tag);
 				$params[] = $att;
 			}
@@ -108,5 +118,54 @@ function svp_xml_parse_plugin($arbre){
 	return $plug_arbre;
 }
 
+
+// parse le contenu d'une balise <traductions> genere par spip_xml_parse()
+// en un tableau plus facilement utilisable
+function svp_xml_parse_traduction($arbre){
+
+	if (!is_array($arbre)) 
+		return false;
+	
+	$traductions = array();
+	
+	foreach ($arbre as $_tag => $_langues) {
+		// On commence par les balises <traduction> et leurs attributs	
+		list($tag, $attributs_traduction) = spip_xml_decompose_tag($_tag);
+		$traductions[$attributs_traduction['module']]['reference'] = $attributs_traduction['reference'];
+		$traductions[$attributs_traduction['module']]['gestionnaire'] = isset($attributs_traduction['gestionnaire']) ? $attributs_traduction['gestionnaire'] : '' ;
+
+		// On continue par les balises <langue> qui donnent le code en attribut
+		// et les balises <traducteur> qui donnent uniquement le nom en attribut
+		if (trim($_langues[0])) {
+			foreach ($_langues[0] as $_tag => $_traducteurs) {
+				list($tag, $attributs_langue) = spip_xml_decompose_tag($_tag);
+				$traducteurs = array();
+				if (trim($_traducteurs[0])) {
+					foreach ($_traducteurs[0] as $_tag => $_vide) {
+						list($tag, $attributs_traducteur) = spip_xml_decompose_tag($_tag);
+						$traducteurs[] = $attributs_traducteur['nom'];
+					}
+				}
+				$traductions[$attributs_traduction['module']]['langues'][$attributs_langue['code']] = $traducteurs;
+			}
+		}
+	}
+
+	return $traductions;
+}
+
+
+// aplatit plusieurs cles d'un arbre xml dans un tableau
+// effectue un trim() au passage
+function svp_xml_aplatit_multiple($array, $arbre){
+	$a = array();
+	// array('uri','archive'=>'zip',...)
+	foreach ($array as $i=>$n){
+		if (is_string($i)) $cle = $i;
+		else $cle = $n;
+		$a[$n] = trim(spip_xml_aplatit($arbre[$cle]));
+	}
+	return $a;	
+}
 
 ?>
