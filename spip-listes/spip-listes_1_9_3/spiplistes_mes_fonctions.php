@@ -77,8 +77,12 @@ function boucle_COURRIERS ($id_boucle, &$boucles) {
 }
 
 // Filtres SPIP-listes
-function supprimer_destinataires($texte) {
- return eregi_replace("__bLg__[0-9@\.A-Z_-]+__bLg__","",$texte);
+
+/**
+ * @deprecated
+ */
+function supprimer_destinataires ($texte) {
+	return eregi_replace("__bLg__[0-9@\.A-Z_-]+__bLg__","",$texte);
 }
 
 

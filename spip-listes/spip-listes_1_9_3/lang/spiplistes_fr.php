@@ -702,6 +702,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'fichier_' => 'Fichier '
 
 , 'jquery_inactif' => 'jQuery non d&#233;tect&#233;. Merci de l&#8217;activer.'
+, 'javascript_inactif' => 'Javascript inactif. Cette page ne peut pas fonctionner
+	sans Javascript. Merci de l&#8217;activer.'
 
 
 // description de la page abonnement

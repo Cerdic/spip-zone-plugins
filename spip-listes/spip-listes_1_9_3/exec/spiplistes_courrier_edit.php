@@ -191,7 +191,7 @@ function exec_spiplistes_courrier_edit(){
 		;
 		
 	$titre_block_depliable = _T('spiplistes:Generer_le_contenu');
-	$page_result .= ""
+	$page_result .= ''
 		//
 		// generer le contenu
 		// Reprise du Formulaire adapte de abomailman () // MaZiaR - NetAktiv	// tech@netaktiv.com
@@ -203,7 +203,16 @@ function exec_spiplistes_courrier_edit(){
 			. "</span>\n"
 		. spiplistes_debut_block_invisible(md5(_T('spiplistes:charger_patron')))
 		// 
-		. "<div id='ajax-loader' align='right'><img src='"._DIR_PLUGIN_SPIPLISTES_IMG_PACK."ajax_indicator.gif' alt='' /></div>\n"
+		. '<div id="ajax-loader" align="right">'
+			. '<script type="text/javascript">'.$eol
+			. 'document.write(\'<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />\');'	
+			. '</script>'.$eol
+			. '<noscript>'.$eol
+			. spiplistes_boite_alerte (_T('spiplistes:javascript_inactif'), true)
+			. $eol
+			. '</noscript>'.$eol
+			//. '<img src="' . _DIR_PLUGIN_SPIPLISTES_IMG_PACK . 'ajax_indicator.gif" alt="" />'
+			. '</div>'.$eol
 		;
 	
 	if(strpos($GLOBALS['meta']['langues_multilingue'], ",") !== false) {
