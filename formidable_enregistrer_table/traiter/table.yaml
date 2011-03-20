@@ -1,0 +1,17 @@
+
+titre: 'Table utilisateur'
+description: 'La sauvegarde est faite dans une table utilisateur'
+options:
+  -
+    saisie: 'input'
+    options:
+      nom: 'table_destinataire'
+      label: 'table destinataire'
+      explication: 'Indiquez le nom de la table destinataire des enregistrements'
+  -
+    saisie: 'textarea'
+    options:
+      nom: 'correspondance_champs_formulaire_table'
+      label: 'correspondances du formulaire vers la table'
+      explication : 'Indiquez pour chaque champ du formulaire, le nom du champ de la table utilisateur'
+      defaut: 'input_1|titre...'

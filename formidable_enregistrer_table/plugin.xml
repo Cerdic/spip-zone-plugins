@@ -1,0 +1,14 @@
+<plugin>
+	<nom>Formidable_enregistrement_table, nouveau traitement pour formidable</nom>
+	<auteur>JLuc</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Nouveau traitements associ&eacute;s pour formidable : enregistrement normal dans une table utilisateur, avec correspondance champ pour champ du formulaire formidable vers la table utilisateur.</description>
+	<lien>http://www.spip-contrib.net/Formidable-Enregistrement-Table</lien>	
+	<prefix>formidabletable</prefix>
+	<necessite id="formidable" />
+	<categorie>communication</categorie>
+</plugin>
+
