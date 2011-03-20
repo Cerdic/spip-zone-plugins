@@ -528,3 +528,45 @@ function spiplistes_code2utf($number)  {
    
     return (false);
 } //spiplistes_code2utf()
+
+/**
+ * Version liens_absolus compatible DATA URL SHEME
+ * @return string
+ */
+function spiplistes_liens_absolus ($texte, $base='') {
+	
+	static $url_sheme = 'data:image/png;base64';
+	static $hide_sheme = '<__HIDEME__ ';
+	$switch_me = false;
+	
+	if (preg_match_all(
+		// masque = tout
+		',(?P<masque>'
+		// tag, 'img' uniquement
+		. '<(?P<tag>img)[[:space:]]+[^<>]*'
+		// src ? data url sheme ?
+		.'(?P<attr>src=["\']?'.$url_sheme.')'
+		// tout ce qui suit jusqu'au tag fermant
+		. '(?P<right>[^>]*>)),isS', 
+		$texte, $matches, PREG_SET_ORDER
+	)) {
+		foreach ($matches as $match) {
+			
+			$texte = str_replace(
+				$match['masque']
+				, $hide_sheme.$match['right']
+				, $texte
+				);
+		}
+		$switch_me = true;
+	}
+	
+	$texte = liens_absolus($texte, $base);
+	
+	if ($switch_me)
+	{
+		$texte = str_replace($hide_sheme, '<img src="'.$url_sheme, $texte);
+	}
+	return ($texte);
+}
+
