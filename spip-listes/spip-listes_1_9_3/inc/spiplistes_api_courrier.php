@@ -38,12 +38,12 @@
 */
 
 
-/*
-	function spiplistes_courrier_propre($texte)
-	passe propre() sur un texte puis nettoye les trucs rajoutes par spip sur du html
-	ca s'utilise pour afficher un courrier dans l espace prive
-	on l'applique au courrier avant de confirmer l'envoi
-*/
+/**
+ * passe propre() sur un texte puis nettoye les trucs rajoutes par spip sur du html
+ * ca s'utilise pour afficher un courrier dans l espace prive
+ * on l'applique au courrier avant de confirmer l'envoi
+ * @return string
+ */
 function spiplistes_courrier_propre($texte){
 	$temp_style = ereg("<style[^>]*>[^<]*</style>", $texte, $style_reg);
 	if (isset($style_reg[0])) 
@@ -150,7 +150,10 @@ function spiplistes_courrier_version_texte($in) {
 	$out = preg_replace("/<style[^>]*>[^<]*<\/style>/", '', $out);
 	
 	// les puces
-	$out = str_replace($GLOBALS['puce'], $eol.'-', $out);
+	// @see http://www.spip.net/fr_article1825.html
+	if (isset($GLOBALS['puce'])) {
+		$out = str_replace($GLOBALS['puce'], $eol.'-', $out);
+	}
 	
 	// Remplace tous les liens	
 	$patterns = array("/\<a href=['\"](.*?)['\"][^>]*>(.*?)<\/a>/ims");
