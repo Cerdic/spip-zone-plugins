@@ -1,0 +1,10 @@
+<traduction module="rainette" gestionnaire="salvatore" reference="fr">
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="es" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fr" />
+</traduction>
