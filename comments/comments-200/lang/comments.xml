@@ -1,0 +1,16 @@
+<traduction module="comments" gestionnaire="salvatore" reference="fr">
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="es" />
+	<langue code="fa" />
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="it" />
+	<langue code="pt" />
+</traduction>
