@@ -61,7 +61,7 @@ include_spip('inc/spiplistes_api_globales');
 	
 function spiplistes_meleuse ($last_time) { 
 
-	spiplistes_debug_log('spiplistes_meleuse()');
+	//spiplistes_debug_log('spiplistes_meleuse()');
 	
 	include_spip('inc/meta');
 	include_spip('inc/texte');
@@ -114,7 +114,6 @@ function spiplistes_meleuse ($last_time) {
 			spiplistes_log($prefix_log.'SIMULATION MODE !!!');
 		}
 
-		$nomsite = $GLOBALS['meta']['nom_site'];
 		$urlsite = $GLOBALS['meta']['adresse_site'];
 
 		// prepare le tampon editeur
@@ -154,7 +153,7 @@ function spiplistes_meleuse ($last_time) {
 			foreach(array('id_courrier','id_liste','total_abonnes') as $key) {
 				$$key = intval($$key);
 			}
-			
+		
 			$objet_html = filtrer_entites(typo(spiplistes_calculer_balise_titre(extraire_multi($titre))));
 			$page_html = stripslashes($texte);
 			$message_texte = stripslashes($message_texte);
@@ -213,11 +212,12 @@ function spiplistes_meleuse ($last_time) {
 			$from = $email_envoi;
 			if($from_valide = email_valide($from)) {
 				if(strpos($from, '<') === false) {
-					$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
-					if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
-						include_spip('inc/charsets');
-						$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
-					}
+					$fromname = spiplistes_nom_site_texte ($lang);
+					//$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
+					//if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+					//	include_spip('inc/charsets');
+					//	$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+					//}
 					//$from = $fromname.' <$from>';
 				}
 			}

@@ -1214,6 +1214,38 @@ function spiplistes_auteurs_auteur_statut_modifier ($id_auteur, $statut)
 	return ($result);
 }
 
+/**
+ * CP-20110321
+ * Retourne une version texte pure du nom du site
+ * @return string
+ */
+function spiplistes_nom_site_texte ($lang = '') {
+	
+	static $nom_site;
+	$lang = trim ($lang);
+	if (empty($lang)) {
+		$lang = $GLOBALS['meta']['langue_site'];
+	}
+	
+	if ($nom_site === null) 
+	{
+		$nom_site = array();
+	}
+	if (!isset($nom_site[$lang]))
+	{
+		$n = strip_tags(html_entity_decode(extraire_multi($GLOBALS['meta']['nom_site'])));
+		
+		$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
+		if ($charset != $GLOBALS['meta']['charset']) {
+			include_spip('inc/charsets');
+			$n = unicode2charset(charset2unicode($n), $charset);
+		}
+		$n = preg_replace ('@\s*@', ' ', $n);
+		$nom_site[$lang] = trim($n);
+	}
+	return ($nom_site[$lang]);
+}
+
 //CP-20080511
 // CP-20090111: utiliser l'api pour pouvoir envoyer par smtp si besoin
 function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $headers = '', $format = 'texte') {
@@ -1232,7 +1264,7 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 		$from = spiplistes_email_from_default();
 	}
 	if(strpos($from, '<') === false) {
-		$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
+		$fromname = spiplistes_nom_site_texte();
 		
 		if ($charset != $GLOBALS['meta']['charset']){
 			include_spip('inc/charsets');

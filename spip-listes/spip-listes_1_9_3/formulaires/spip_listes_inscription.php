@@ -92,10 +92,9 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste='') {
 	$format = _request('format_abo');
 	$listes = _request('listes');
 
-	spiplistes_debug_log ('inscription auteur #'.$id_auteur.' email:'.$val['email']);
-
 	// si l'auteur existe deja, 
-	$auteur = spiplistes_auteurs_auteur_select('id_auteur,statut', 'email='.sql_quote($val['email']));
+	$auteur = spiplistes_auteurs_auteur_select('id_auteur,statut,lang'
+											   , 'email='.sql_quote($val['email']));
 	if ($auteur)
 	{
 		$id_auteur = $auteur['id_auteur'];
@@ -104,6 +103,7 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste='') {
 		{
 			spiplistes_auteurs_auteur_statut_modifier ($id_auteur, 'aconfirmer');
 		}
+		spiplistes_debug_log ('inscription auteur #'.$id_auteur.' email:'.$val['email']);
 	}
 	else
 	{
@@ -117,6 +117,8 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste='') {
 						 )
 				  );
 		}
+		spiplistes_debug_log ('NEW inscription email:'.$val['email']);
+		$lang = $GLOBALS['meta']['langue_site'];
 	}
 	
 	if ($listes) {
@@ -128,13 +130,15 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste='') {
 					);
 		}
 	}
-			
+	
 	// envoyer mail de confirmation
 	if (
 		spiplistes_envoyer_mail (
 			$val['email']
 			, _T('spiplistes:confirmation_inscription')
-			, _T('spiplistes:inscription_reponses_s', array('s' => $GLOBALS['meta']['nom_site']))
+			, _T('spiplistes:inscription_reponses_s'
+				 , array('s' => spiplistes_nom_site_texte ($lang))
+				 )
 	   )
 	) {
 		$contexte = array('message_ok'=>_T('spiplistes:demande_ok'),'editable' => false,);

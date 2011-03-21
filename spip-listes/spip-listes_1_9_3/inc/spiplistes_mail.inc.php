@@ -36,16 +36,6 @@ if(!spiplistes_utiliser_facteur() && !class_exists('PHPMailer'))
 
 		function phpMail($email, $objet, $message_html, $message_texte, $charset) {
 		
-			// CP-20081129
-			// c'est plutot a la meleuse de faire ce boulot
-			/*
-			$fromname = $GLOBALS['meta']['nom_site'];
-				if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
-				include_spip('inc/charsets');
-				$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
-				}
-			*/
-			
 			$this->FromName    =  $fromname ; 
 			$this->CharSet	= $charset ;
 	    	$this->Mailer	= 'mail';

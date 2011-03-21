@@ -194,8 +194,12 @@ function cron_spiplistes_cron ($last_time) {
 	
 			/////////////////////////////
 			// preparation du courrier a placer dans le panier (spip_courriers)
-			// en cas de periode, la date est dans le passe' pour avoir les elements publies depuis cette date
-			$titre = ($titre_message =='') ? $titre._T('spiplistes:_de_').$GLOBALS['meta']['nom_site'] : $titre_message;
+			// en cas de periode, la date est dans le passe'
+			// pour avoir les elements publies depuis cette date
+			$titre = (empty($titre_message))
+				? $titre._T('spiplistes:_de_').spiplistes_nom_site_texte($lang)
+				: $titre_message
+				;
 
 			list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
 				_SPIPLISTES_PATRONS_DIR . $patron
@@ -217,7 +221,7 @@ function cron_spiplistes_cron ($last_time) {
 				$statut = _SPIPLISTES_COURRIER_STATUT_VIDE;
 				spiplistes_debug_log($prefix_log.'envoi mail nouveautes : courrier vide');
 			}
-			
+
 			// Place le courrier dans le casier
 			$id_courrier = sql_insert(
 				'spip_courriers'

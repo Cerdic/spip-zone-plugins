@@ -37,7 +37,8 @@ function exec_spiplistes_import_export(){
 		, $connect_toutes_rubriques
 		, $connect_id_auteur
 		;
-
+	static $eol = PHP_EOL;
+	
 	// initialise les variables postées par le formulaire
 	foreach(array(
 		'btn_valider_import', 'abos_liste', 'format_abo', 'forcer_abo'	// retour import
@@ -108,29 +109,29 @@ function exec_spiplistes_import_export(){
 			$nb_inscrits = sql_count($sql_result);
 			$exporter_statut_auteur = ($exporter_statut_auteur == 'oui');
 			
-			$str_export = ""
-				. "# " . spiplistes_html_signature(_SPIPLISTES_PREFIX, false)."\n"
-				. "# "._T('spiplistes:membres_liste')."\n"
-				. "# liste id: $export_id\n"
-				. "# ".$GLOBALS['meta']['nom_site']."\n"
-				. "# ".$GLOBALS['meta']['adresse_site']."\n"
-				. "# date: ".date("Y-m-d")."\n"
-				. "# nb abos: ".$nb_inscrits."\n\n"
-				. "#\n"
-				. "# 'email'".$separateur."'login'".$separateur."'nom'"
-				. ($exporter_statut_auteur ? $separateur."'statut'" : "")
-				. "\n\n"
+			$str_export = ''
+				. '# ' . spiplistes_html_signature(_SPIPLISTES_PREFIX, false).$eol
+				. '# '._T('spiplistes:membres_liste').$eol
+				. '# liste id: $export_id\n'
+				. '# '.spiplistes_nom_site_texte().$eol
+				. '# '.$GLOBALS['meta']['adresse_site'].$eol
+				. '# date: '.date('Y-m-d').$eol
+				. '# nb abos: '.$nb_inscrits.$eol.$eol
+				. '#'.$eol
+				. '# \'email\''.$separateur.'\'login\''.$separateur.'\'nom\''
+				. ($exporter_statut_auteur ? $separateur.'\'statut\'' : '')
+				. $eol.$eol
 				;
 			
 			while($row = sql_fetch($sql_result)) {
 				$str_export .= $row['email'].$separateur.$row['login'].$separateur.$row['nom']
-					. ($exporter_statut_auteur ? $separateur.$row['statut'] : "")
+					. ($exporter_statut_auteur ? $separateur.$row['statut'] : '')
 					. "\n"
 					;
 			}
 			// envoie le fichier
-			header("Content-type: text/plain");
-			header("Content-Disposition: attachment; filename=\"export_liste_$export_id-".date("Y-m-d").".txt\"");
+			header('Content-type: text/plain');
+			header('Content-Disposition: attachment; filename="export_liste_$export_id-'.date("Y-m-d").'.txt"');
 			echo ($str_export);
 			exit;
 		}

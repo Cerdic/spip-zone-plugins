@@ -85,16 +85,9 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	
 	$affiche_formulaire = $inscription_redacteur = $inscription_visiteur = '';
 	
-	$nom_site_spip = $GLOBALS['meta']['nom_site'];
+	$nom_site_spip = spiplistes_nom_site_texte ($lang);
 	$adresse_site = $GLOBALS['meta']['adresse_site'];
 	
-	$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
-	if($charset != $GLOBALS['meta']['charset'])
-	{
-		include_spip('inc/charsets');
-		$nom_site_spip = unicode2charset(charset2unicode($nom_site_spip), $charset);
-	}
-
 	// envoyer le cookie de relance mot de passe si pass oublie
 	if($email_oubli)
 	{
