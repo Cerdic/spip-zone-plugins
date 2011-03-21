@@ -1,0 +1,12 @@
+<traduction module="verifier" gestionnaire="salvatore" reference="fr">
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en">
+		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="es" />
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+</traduction>
