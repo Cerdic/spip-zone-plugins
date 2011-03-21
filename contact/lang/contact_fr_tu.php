@@ -1,12 +1,14 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/contact/lang/
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_effacement' => 'Confirmez l\'effacement des donn&eacute;es de configuration de contact.',
+	'alerte_effacement' => 'Confirme l\'effacement des donn&eacute;es de configuration de contact.',
 	'aucun_message' => 'Aucun message &agrave; afficher',
 
 	// B
@@ -14,8 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'champ_adresse' => 'Adresse',
-	'champ_civi_explication' => 'R&eacute;glages avanc&eacute;es du champ civilit&eacute;',
-	'champ_civi_mademoiselle_ok' => 'Proposer un choix « Mademoiselle » dans le champ civilit&eacute;',
+	'champ_civi_explication' => 'R&eacute;glages avanc&eacute;s du champ civilit&eacute;',
+	'champ_civi_mademoiselle_ok' => 'Proposer un choix &laquo; Mademoiselle &raquo; dans le champ civilit&eacute;',
 	'champ_civilite' => 'Civilit&eacute;',
 	'champ_code_postal' => 'Code postal',
 	'champ_etat' => '&Eacute;tat',
@@ -39,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_champs_message_explication' => 'R&eacute;glage de la barre typographique associ&eacute;e au texte du message.',
 	'configuration_description' => 'Permet de configurer le formulaire de contact.',
 	'configuration_destinataires' => 'Destinataires',
-	'configuration_destinataires_explication' => 'Choisissez un ou plusieurs auteurs que les visiteurs pourront contacter. Si rien n\'est d&eacute;fini, c\'est l\'auteur num&eacute;ro 1 (celui qui a install&eacute; le site) qui sera utilis&eacute;.',
+	'configuration_destinataires_explication' => 'Choisis un ou plusieurs auteurs que les visiteurs pourront contacter. Si rien n\'est d&eacute;fini, c\'est l\'auteur num&eacute;ro 1 (celui qui a install&eacute; le site) qui sera utilis&eacute;.',
 	'configuration_destinataires_plusieurs' => 'Permettre aux visiteurs de choisir <b>plusieurs</b> destinataires parmi la liste s&eacute;lectionn&eacute;e ci-dessus',
 	'configuration_destinataires_plusieurs_et' => '... major&eacute;e par les auteurs &eacute;ventuellement transmis au formulaire.',
 	'configuration_destinataires_plusieurs_ou' => '... ou parmi le groupe d\'auteurs &eacute;ventuellement transmis au formulaire',
@@ -50,28 +52,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_destinataires_un_et' => '... major&eacute;e par les auteurs &eacute;ventuellement transmis au formulaire.',
 	'configuration_destinataires_un_ou' => '... ou parmi le groupe d\'auteurs &eacute;ventuellement transmis au formulaire',
 	'configuration_intro' => 'Introduction',
-	'configuration_intro_explication' => '&Eacute;crivez &eacute;ventuellement un texte qui introduira le formulaire.',
+	'configuration_intro_explication' => '&Eacute;cris &eacute;ventuellement un texte qui introduira le formulaire.',
 	'configuration_no_barre' => 'Ne pas proposer de barre typo.',
 	'configuration_no_previsualisation' => 'Afficher la barre typo sans le bouton de pr&eacute;visualisation.',
 	'configuration_pj' => 'Pi&egrave;ces jointes',
 	'configuration_pj_autoriser' => 'Autoriser l\'envoi de pi&egrave;ces jointes',
-	'configuration_pj_facteur_absent' => 'Pour utiliser cette fonction, vous devez installer le plugin Facteur.',
+	'configuration_pj_facteur_absent' => 'Pour utiliser cette fonction, tu dois installer le plugin Facteur.',
 	'configuration_pj_nb_max' => 'Nombre maximal de pi&egrave;ces jointes',
-	'configuration_regle_liste_explication' => 'Choisissez une r&egrave;gle de calcul de la liste des destinataires potentiels et de la m&eacute;thode de s&eacute;lection propos&eacute;e &agrave; l\'internaute.',
-	'configuration_texteinfolettre' => 'Texte infolettre',
-	'configuration_texteinfolettre_explication' => '&Eacute;crivez le texte associ&eacute; &agrave; la case &agrave; cocher infolettre',
-	'consulter_memoire' => 'Ce message est enregistr&eacute; sur votre site :',
+	'configuration_regle_liste_explication' => 'Choisis une r&egrave;gle de calcul de la liste des destinataires potentiels et de la m&eacute;thode de s&eacute;lection propos&eacute;e &agrave; l\'internaute.',
+	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
+	'configuration_texteinfolettre_explication' => '&Eacute;crivez le texte associ&eacute; &agrave; la case &agrave; cocher infolettre', # NEW
+	'consulter_memoire' => 'Ce message est enregistr&eacute; sur ton site :',
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
 
 	// D
 	'deplacement_possible' => 'D&eacute;placement vertical par gliss&eacute;-d&eacute;pos&eacute;',
 	'description_menu_contact' => '&Eacute;l&eacute;ment de menu vers la page du formulaire de contact',
-	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez &agrave; ajouter un lien dans vos menus).',
+	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pense &agrave; ajouter un lien dans tes menus).',
 
 	// F
-	'form_destinataire' => 'Choisissez un destinataire',
-	'form_destinataires' => 'Choisissez les destinataires',
+	'form_destinataire' => 'Choisis un destinataire',
+	'form_destinataires' => 'Choisis les destinataires',
 	'form_pj_ajouter_pluriel' => 'Ajouter des pi&egrave;ces jointes',
 	'form_pj_ajouter_singulier' => 'Ajouter une pi&egrave;ce jointe',
 	'form_pj_fichier_ajoute' => 'Le fichier a bien &eacute;t&eacute; ajout&eacute; : ',
@@ -80,10 +82,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_pj_previsu_singulier' => 'Pi&egrave;ce jointe',
 	'form_pj_supprimer' => 'Supprimer',
 	'form_pj_titre' => 'Titre du fichier',
-	'forum_attention_nbre_caracteres' => '<b>Attention&nbsp;!</b> votre message doit contenir au moins @nbre_caract@ caract&egrave;res.',
+	'forum_attention_nbre_caracteres' => '<b>Attention&nbsp;!</b> ton message doit contenir au moins @nbre_caract@ caract&egrave;res.',
 
 	// H
-	'horodatage' => 'Formulaire posté le : @horodatage@.',
+	'horodatage' => 'Formulaire post&eacute; le : @horodatage@.',
 
 	// I
 	'inforigine' => 'Information transmise par le formulaire : ',
@@ -97,13 +99,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modele_label_auteur' => 'Pr&eacute;-s&eacute;lectionner un auteur (facultatif)&nbsp;?',
 	'modele_nom_formulaire' => 'un formulaire de contact',
 	'monsieur' => 'Monsieur',
-	'msg_accueil' => 'Vous trouverez ici les messages de contact que vous avez re&ccedil;u.',
+	'msg_accueil' => 'Tu trouveras ici les messages de contact que tu as re&ccedil;u.',
 	'msg_contact' => 'Message de contact',
 	'msg_expediteur' => 'Exp&eacute;diteur : ',
 	'msg_lus' => 'Messages d&eacute;j&agrave; lus',
 	'msg_messagerie' => 'Messagerie de contact',
 	'msg_nouveaux' => 'Nouveaux messages',
-	'msg_pas_nouveaux' => 'Vous n\'avez pas de nouveaux messages.',
+	'msg_pas_nouveaux' => 'Tu n\'as pas de nouveaux messages.',
 	'msg_revenir_accueil' => 'Revenir &agrave; la liste de messages de contact re&ccedil;us.',
 	'msg_supprimer_message' => 'Supprimer le message',
 
@@ -114,13 +116,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalis&eacute;',
 
 	// P
-	'preselection' => 'D&eacute;cocher tous les items de la liste de destinataires',
+	'preselection' => 'D&eacute;cocher tous les &eacute;l&eacute;ments de la liste de destinataires',
 
 	// S
 	'sauv_message' => 'Sauvegarder les messages de contact',
 	'sauv_message_explication' => 'Permet d\'enregistrer les messages de contacts et de les afficher dans une messagerie d&eacute;di&eacute;e.',
 	'sauv_message_ok' => 'Sauvegarder les messages de contacts',
-	'succes' => 'Merci, votre message a bien &#233;t&#233; envoy&#233;.<br />Nous vous r&#233;pondrons d&#232;s que possible.<br />L\'&#233;quipe de @equipe_site@',
+	'succes' => 'Merci, ton message a bien &eacute;t&eacute; envoy&eacute;.<br />Nous te r&eacute;pondrons d&egrave;s que possible.<br />L\'&eacute;quipe de @equipe_site@',
 
 	// T
 	'titre' => 'Formulaire de contact',
