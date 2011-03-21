@@ -1,0 +1,31 @@
+<traduction module="noie" gestionnaire="salvatore" reference="fr">
+	<langue code="ar" />
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="ca" />
+	<langue code="cs" />
+	<langue code="da" />
+	<langue code="de" />
+	<langue code="en">
+		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="es" />
+	<langue code="fa" />
+	<langue code="fi" />
+	<langue code="fr" />
+	<langue code="fr_tu" />
+	<langue code="gl" />
+	<langue code="it" />
+	<langue code="km" />
+	<langue code="lt" />
+	<langue code="nb" />
+	<langue code="nl" />
+	<langue code="pt" />
+	<langue code="ro" />
+	<langue code="ru" />
+	<langue code="sk" />
+	<langue code="sv" />
+	<langue code="tr" />
+	<langue code="zh" />
+</traduction>
