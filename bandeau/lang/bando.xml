@@ -1,0 +1,24 @@
+<traduction module="bando" gestionnaire="salvatore" reference="fr">
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="ca">
+		<traducteur nom="merce" />
+	</langue>
+	<langue code="de" />
+	<langue code="en">
+		<traducteur nom="filou" />
+		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="es">
+		<traducteur nom="davux" />
+	</langue>
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="sk" />
+</traduction>
