@@ -1,0 +1,22 @@
+<traduction module="inscription2" gestionnaire="salvatore" reference="fr">
+	<langue code="ast" />
+	<langue code="ca" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
+	<langue code="en">
+		<traducteur nom="paolo2" />
+	</langue>
+	<langue code="es" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="gl" />
+	<langue code="it" />
+	<langue code="sk" />
+	<langue code="tr" />
+</traduction>
