@@ -46,7 +46,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	return $resultats;
 }
 
-function langonet_generer_couples($module, $var_source, $var_cible, $mode='index', $oublis_inutiles=array())
+function langonet_generer_couples($module, $var_source, $var_cible, $mode='index', $encodage, $oublis_inutiles=array())
 {
 	if ($encodage == 'utf8') include_spip('inc/langonet_utils');
 
