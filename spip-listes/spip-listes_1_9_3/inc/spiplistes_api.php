@@ -1002,12 +1002,11 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 	if (!$texte_ok) {
 		$result_texte= spiplistes_courrier_version_texte($message_html) . PHP_EOL ;
 	}
+	// eliminer les espaces pour un vrai calcul de poids
+	$result_html = trim($result_html);
+	$result_texte = trim($result_texte);
 	
-	
-	
-	
-	
-	$result = array($result_html, $result_texte);
+	$result = array ($result_html, $result_texte);
 	
 	return($result);
 }

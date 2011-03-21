@@ -201,8 +201,10 @@ function cron_spiplistes_cron ($last_time) {
 				_SPIPLISTES_PATRONS_DIR . $patron
 				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
 			
-			$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($courrier_html))) > 10);
-			spiplistes_debug_log($prefix_log.'taille courrier pour la liste $id_liste : '.$n);
+			//$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($courrier_html))) > 10);
+			$taille_courrier_ok = (($n = strlen($courrier_texte)) > 10);
+			
+			spiplistes_debug_log($prefix_log.'taille courrier pour la liste #'.$id_liste.' : '.$n);
 
 			if($taille_courrier_ok) {
 				include_spip('inc/filtres');

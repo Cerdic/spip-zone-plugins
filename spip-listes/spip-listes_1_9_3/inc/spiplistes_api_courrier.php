@@ -46,7 +46,7 @@
  * @deprecated
  */
 function spiplistes_courrier_propre ($texte) {
-	spiplistes_debug_log ('spiplistes_courrier_propre()');
+	//spiplistes_debug_log ('spiplistes_courrier_propre()');
 	static $adresse_site;
 	if (!$adresse_site) { $adresse_site = $GLOBALS['meta']['adresse_site']; }
 	static $style_rev = '__STYLE__';
@@ -455,8 +455,8 @@ function spiplistes_courriers_total_abonnes ($id_courrier = 0) {
  */
 function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignorer = false) {
 
-	if($ignorer) {
-		$result = array("", "");
+	if ($ignorer) {
+		$result = array('', '');
 	}
 	else {
 		$result = spiplistes_assembler_patron($path_patron, $contexte);
