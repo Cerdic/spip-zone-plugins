@@ -67,10 +67,12 @@ function svp_afficher_traductions($balise_serialisee, $mode='resume', $module=''
 function svp_afficher_langues($langues, $sep=', '){
 	$texte = '';
 	
+	if ($langues) {
 	foreach ($langues as $_code => $_traducteurs) {
 		if ($texte) 
 			$texte .= $sep;
 		$texte .= $_code . (count($_traducteurs) > 0 ? ' (' . implode(', ', $_traducteurs) . ')' : '');
+		}
 	}
 
 	return $texte;
