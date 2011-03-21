@@ -1,0 +1,15 @@
+<traduction module="ajaxform" gestionnaire="salvatore" reference="fr">
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en">
+		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="fa" />
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+</traduction>
