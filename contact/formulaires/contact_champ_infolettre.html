@@ -3,6 +3,6 @@
 <div class='choix'>
 <label for="#ENV{name}">
 <input type='checkbox' class='checkbox' name='#ENV{name}' id='#ENV{name}' value="oui"[ (#ENV{#ENV{name}}|=={oui}|oui)checked="checked"] />
-&nbsp;<:contact:informez_moi:></label>
+&nbsp;#CONFIG{contact/texteinfolettre}</label>
 </div>
 </li>
