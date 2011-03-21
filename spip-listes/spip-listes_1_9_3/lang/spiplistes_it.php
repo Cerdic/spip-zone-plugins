@@ -128,7 +128,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 	riprendere gli invii in corso. "
 , 'nombre_lot' => 'Numero di invii per lotto'
 , 'php_mail' => 'Utilizza la funzione mail() di PHP'
-, 'Patron_du_tampon' => "Modello della sezione "
+, 'patron_du_tampon_' => "Modello della sezione : "
 , 'Patron_de_pied_' => "Modello del piede "
 , 'personnaliser_le_courrier_label' => "Attiva la personalizzazione delle email"
 , 'parametrer_la_meleuse' => "Parametri dell'invio"

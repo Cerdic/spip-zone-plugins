@@ -164,7 +164,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	reprendre les exp&#233;ditions en cours. '
 , 'nombre_lot' => 'Nombre d&#8217;envois par lot'
 , 'php_mail' => 'Utiliser la fonction mail() de PHP'
-, 'Patron_du_tampon' => 'Patron du tampon '
+, 'patron_du_tampon_' => 'Patron du tampon : '
 , 'Patron_de_pied_' => 'Patron de pied '
 , 'personnaliser_le_courrier_label' => 'Activer la personnalisation du courrier'
 , 'parametrer_la_meleuse' => 'Param&#233;trer la meleuse'

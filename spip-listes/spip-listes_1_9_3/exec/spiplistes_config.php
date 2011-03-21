@@ -25,7 +25,7 @@
 // $LastChangedBy$
 // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
@@ -37,7 +37,7 @@ function exec_spiplistes_config () {
 	include_spip('inc/meta');
 	include_spip('inc/config');
 
-	spiplistes_debug_log ('Appel page de configuration');
+	//spiplistes_debug_log ('Appel page de configuration');
 	
 	global $connect_statut
 		, $connect_toutes_rubriques
@@ -369,7 +369,7 @@ function exec_spiplistes_config () {
 		// coordonnées editeur: bloc coordonnes_editeur
 		. "<div id='div-ajout-tampon-editeur' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : '')."margin-top:1em;'>"
 		// tampon sélecteur
-   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:Patron_du_tampon').'.' . $eol
+   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:patron_du_tampon_') . $eol
 		. spiplistes_boite_selection_patrons($tampon_patron, true, _SPIPLISTES_PATRONS_TAMPON_DIR, "tampon_patron", 1)
 		. '</label>'
 		. "<ul class='verdana2' style='list-style:none;padding-left:2ex;'>" . $eol

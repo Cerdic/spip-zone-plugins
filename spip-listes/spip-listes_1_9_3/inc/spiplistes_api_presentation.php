@@ -342,7 +342,9 @@ function spiplistes_bouton_block_depliable ($titre = "", $deplie = true, $nom_bl
 }
 
 // construit la boite de selection patrons (CP-20071012)
-function spiplistes_boite_selection_patrons ($patron="", $return=false, $chemin="patrons/", $select_nom="patron", $size_select=10, $width='34ex') {
+function spiplistes_boite_selection_patrons ($patron="", $return=false
+						, $chemin="patrons/", $select_nom="patron"
+						, $size_select=10, $width='34ex') {
 	global $couleur_claire;
 	$result = "";
 	// va chercher la liste des patrons

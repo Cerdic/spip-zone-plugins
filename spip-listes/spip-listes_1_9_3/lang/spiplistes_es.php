@@ -146,7 +146,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 	los env&iacute;os pendientes. "
 , 'nombre_lot' => 'N&uacute;mero de env&iacute;os por lote'
 , 'php_mail' => 'Utilizar la funci&oacute;n mail() de PHP'
-, 'Patron_du_tampon' => "Plantilla del sello "
+, 'patron_du_tampon_' => "Plantilla del sello : "
 , 'Patron_de_pied_' => "Plantilla del pie "
 , 'personnaliser_le_courrier_label' => "Activar la personnalizaci&oacute;n de los emails"
 , 'parametrer_la_meleuse' => "Configurar el env&iacute;o"
