@@ -58,8 +58,8 @@
 							<p class="explication"><:langonet:info_encodage:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{encodage})</span>]
 							<select name="encodage" id="encodage">
-								<option value="html" [(#ENV{mode, html}|=={html}|oui) selected="selected"]><:langonet:option_encodage_html:></option>
-								<option value="utf8" [(#ENV{mode, html}|=={utf8}|oui) selected="selected"]><:langonet:option_encodage_utf8:></option>
+								<option value="html" [(#ENV{encodage, html}|=={html}|oui) selected="selected"]><:langonet:option_encodage_html:></option>
+								<option value="utf8" [(#ENV{encodage, html}|=={utf8}|oui) selected="selected"]><:langonet:option_encodage_utf8:></option>
 							</select>
 						</li>
  -->
