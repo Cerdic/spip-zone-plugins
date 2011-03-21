@@ -1,0 +1,58 @@
+<plugin>
+	<nom>Produits</nom>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Ce plugin permet la création de produits commerciaux dans l'arborescence du site, c'est-à-dire rangés dans les rubriques comme les articles. Un produit est un objet matériel ou un service ayant un prix. La vente en ligne n'est pas le but de ce plugin, il ne s'occupe que de l'ajout de ce nouvel objet éditorial.</description>
+	<icon>images/produits-128.png</icon>
+	<categorie>divers</categorie>
+	
+	<prefix>produits</prefix>
+	
+	<install>base/produits_installation.php</install>
+	<options>produits_options.php</options>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/produits_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/produits_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_jointures</nom>
+		<inclure>base/produits_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/produits_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_enfants</nom>
+		<inclure>produits_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>objet_compte_enfants</nom>
+		<inclure>produits_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>produits_pipelines.php</inclure>
+	</pipeline>
+	
+	<bouton id='configurer_produits' parent="bando_configuration">
+		<titre>produits:produits_titre</titre>
+		<icone>images/produits-16.png</icone>
+		<url>configurer_produits</url>
+	</bouton>
+	
+	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="spip_bonux" version="[2.2.17;]" />
+	<necessite id="saisies" version="[1.9.0;]" />
+	<necessite id="prix" version="[0.1;]" />
+	<necessite id="afficher_objets" version="[1.1.9;]" />
+	<necessite id="medias" version="[1.6.2;]" />
+</plugin>
