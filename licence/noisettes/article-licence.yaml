@@ -91,4 +91,4 @@ parametres:
       defaut: 'oui'
       datas:
         oui: '<:ecrire:item_oui:>'
-        '': '<:ecrire:item_non:>'
+        non: '<:ecrire:item_non:>'
