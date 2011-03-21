@@ -7,6 +7,7 @@
   <etat>test</etat>
   <description>Ceci est un fichier de d&eacute;monstration a r&eacute;utiliser.
  Une seule page pour r&eacute;cup&eacute;rer les donn&eacute;es des pages de http://www.bousai.ne.jp/eng/ qui mesure toutes les 10 minutes la radioactivit&eacute; au Japon.</description>
+  <prefix>radioactivite</prefix>
   <necessite id='SPIP' version='[2.0.0;]' />
   <categorie>outil</categorie>
 </plugin>
