@@ -137,6 +137,7 @@ function pages_pre_edition_ajouter_page($flux){
 			 */
 			$flux['data']['page'] = $page;
 			$flux['data']['id_rubrique'] = '-1';
+			$flux['data']['id_secteur'] = '0';
 		}
 		/**
 		 * si l'id_parent est supérieur à 0 on que l'on ne récupère pas de champ_page,
