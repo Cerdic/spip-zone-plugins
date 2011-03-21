@@ -153,8 +153,13 @@ function spiplistes_meleuse ($last_time) {
 			foreach(array('id_courrier','id_liste','total_abonnes') as $key) {
 				$$key = intval($$key);
 			}
-		
+		//spiplistes_debug_log($titre);
+			// objet (subject) ne peut pas être en html ?!
+			// sauf pour le webmail (et encore)
 			$objet_html = filtrer_entites(typo(spiplistes_calculer_balise_titre(extraire_multi($titre))));
+			$titre = spiplistes_texte_2_charset ($titre
+												 , $GLOBALS['meta']['spiplistes_charset_envoi']
+												 );
 			$page_html = stripslashes($texte);
 			$message_texte = stripslashes($message_texte);
 			
@@ -204,7 +209,7 @@ function spiplistes_meleuse ($last_time) {
 			// email emetteur
 			$email_envoi = spiplistes_listes_email_emetteur($id_liste);
 			if(!$is_a_test && !($email_envoi)) { 
-				$str_log .= ' [ERROR] ID_LISTE #id_liste or from email MISSING'; 
+				$str_log .= ' [ERROR] ID_LISTE #'.$id_liste.' or from email MISSING'; 
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_ERREUR);
 				// quitte while() principal
 				break;
@@ -235,8 +240,12 @@ function spiplistes_meleuse ($last_time) {
 			
 			////////////////////////////////////
 			// Prepare la version texte
-			$objet_texte = spiplistes_courrier_version_texte($objet_html);
-			$page_texte = ($message_texte !='') ? $message_texte : spiplistes_courrier_version_texte($page_html);
+			//$objet_texte = spiplistes_courrier_version_texte($objet_html);
+			$objet_texte = $titre;
+			$page_texte = ($message_texte !='')
+				? $message_texte
+				: spiplistes_courrier_version_texte($page_html)
+				;
 			
 			////////////////////////////////////
 			// Ajoute lien tete de courrier
@@ -296,7 +305,13 @@ function spiplistes_meleuse ($last_time) {
 			$email_a_envoyer['texte']->AddCustomHeader('Return-Path: '.$return_path); 
 			$email_a_envoyer['texte']->SMTPKeepAlive = true;
 
-			$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
+			//$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
+			$email_a_envoyer['html'] = new phpMail(''
+												   , $titre
+												   , $page_html
+												   , $page_texte
+												   , $GLOBALS['meta']['spiplistes_charset_envoi']
+												   );
 			$email_a_envoyer['html']->From = $from ; 
 			if($fromname) {
 				$email_a_envoyer['html']->FromName = $fromname ;

@@ -1235,15 +1235,24 @@ function spiplistes_nom_site_texte ($lang = '') {
 	{
 		$n = strip_tags(html_entity_decode(extraire_multi($GLOBALS['meta']['nom_site'])));
 		
-		$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
-		if ($charset != $GLOBALS['meta']['charset']) {
-			include_spip('inc/charsets');
-			$n = unicode2charset(charset2unicode($n), $charset);
-		}
-		$n = preg_replace ('@\s*@', ' ', $n);
+		// incorrect avec utf-8. Abime les diacritiques
+		//$n = preg_replace ('@\s*@', ' ', $n);
+		
 		$nom_site[$lang] = trim($n);
 	}
 	return ($nom_site[$lang]);
+}
+
+/**
+ * CP-20110321
+ * @return string
+ */
+function spiplistes_texte_2_charset ($texte, $charset) {
+	if ($charset && ($charset != $GLOBALS['meta']['charset'])) {
+		include_spip('inc/charsets');
+		$texte = unicode2charset(charset2unicode($texte), $charset);
+	}
+	return ($texte);
 }
 
 //CP-20080511
