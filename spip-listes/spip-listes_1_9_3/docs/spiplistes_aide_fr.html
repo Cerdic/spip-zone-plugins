@@ -19,9 +19,13 @@ body {
 h1 {
 	color: #333333;
 }
-p ,table {
+p ,table, pre {
 	margin:0.5em 4em;
 	padding:0;
+}
+pre { 
+	margin-left:6em; 
+	font-size: 1.2em;
 }
 p.h1 {
 	display:block;
@@ -34,13 +38,19 @@ p.h1 {
 	font-weight: normal;
 	overflow:hidden;
 }
-ol {
+ol, ul {
 	list-style: square;
 	margin:0;
 	padding:0 0 0 6em;
 }
 li {
 	margin: 0.5em 0;
+	padding:0; 
+}
+li ul { 
+	padding-left: 2ex;
+	margin-left: 2ex;
+	list-style: circle;
 }
 .avertissement {
 	color: #FFFFFF;
@@ -91,6 +101,8 @@ r&eacute;ception</a></li>
   <li><a href="#mozTocId381221">Personnaliser un patron</a></li>
   <li><a href="#mozTocId91756">Un num&eacute;ro dans le sujet de
 votre message</a></li>
+  <li><a href="#imgincrust">Une image incrust&eacute;e dans votre
+message</a></li>
   <li><a href="#personsujet">Personnaliser le sujet de votre
 message</a></li>
   <li><a href="#mozTocId568121">D&eacute;sactiver
@@ -389,45 +401,45 @@ s'inscrit via la formulaire abonnement.</p>
 </p>
 <h2><a name="mozTocId862843" class="mozTocH2"></a>Abonnement par le
 formulaire en espace public</h2>
-Deux balises sont disponibles :<br>
+<p>Deux balises sont disponibles :</p>
 <ul>
   <li>#FORMULAIRE_ABONNEMENT</li>
   <li>#FORMULAIRE_SPIP_LISTES_INSCRIPTION (SPIP &gt; 2)</li>
 </ul>
-Le squelette <span style="font-weight: bold;">abonnement.html</span>
+<p>Le squelette <span style="font-weight: bold;">abonnement.html</span>
 permet d'illustrer l'utilisation de cette derni&egrave;re balise. Par
-exemple :<br>
+exemple :</p>
 <span style="font-style: italic; color: rgb(153, 153, 153);"></span><br>
-<img style="width: 267px; height: 294px;" alt=""
+<p><img style="width: 267px; height: 294px;" alt=""
  title="Exemple de formulaire d'abonnement. Squelette abonnement.html"
  src="../img_docs/formulaire_abonnement.png">Deux autres balises
-permettent de g&eacute;rer les abonnements :<br>
+permettent de g&eacute;rer les abonnements :</p>
 <ul>
   <li>#FORMULAIRE_MODIF_ABONNEMENT2</li>
   <li>#FORMULAIRE_GESTION_ABONNEMENT</li>
 </ul>
-Le squelette <span style="font-weight: bold;">abonnement.html</span>
-illustre l'utilisation de cette derni&egrave;re balise.<br>
-Ce squelette est dans le r&eacute;pertoire du plugin.<br>
+<p>Le squelette <span style="font-weight: bold;">abonnement.html</span>
+illustre l'utilisation de cette derni&egrave;re balise.</p>
+<p>Ce squelette est dans le r&eacute;pertoire du plugin.</p>
 <br>
-La balise <span style="font-weight: bold;">#FORMULAIRE_SPIP_LISTES_INSCRIPTION</span>
-renvoie une confirmation par mail laconique. <br>
+<p>La balise <span style="font-weight: bold;">#FORMULAIRE_SPIP_LISTES_INSCRIPTION</span>
+renvoie une confirmation par mail laconique. </p>
 <br>
-Si vous souhaitez adapter une r&eacute;ponse de confirmation
+<p>Si vous souhaitez adapter une r&eacute;ponse de confirmation
 d'abonnement, utilisez plut&ocirc;t la balise&nbsp; <span
  style="font-weight: bold;">#FORMULAIRE_ABONNEMENT</span> apr&egrave;s
 avoir adapt&eacute; le patron <span style="font-weight: bold;">patrons/messages_abo/standard.html</span>
 et <span style="font-weight: bold;">standard_text.html</span>
 (recopiez ces deux patrons dans votre dossier de squelettes en
-respectant la hi&eacute;rarchie).<br>
+respectant la hi&eacute;rarchie).</p>
 <br>
-Vous pouvez &eacute;galement adapter le squelette <span
+<p>Vous pouvez &eacute;galement adapter le squelette <span
  style="font-weight: bold;">abonnement.html</span>. Toujours dans le
 m&ecirc;me principe : recopiez ce squelette dans votre
 r&eacute;pertoire de squelettes, adaptez-le &agrave; vos besoins et
 pour que vos visiteurs acc&eacute;dent &agrave; cette nouvelle page,
 ajoutez un lien dans les autres squelettes, vos menus, etc. Ce lien
-doit &ecirc;tre du style <span style="font-weight: bold;">http://votre_site/?page=abonnement</span><br>
+doit &ecirc;tre du style <span style="font-weight: bold;">http://votre_site/?page=abonnement</span></p>
 <br>
 <span style="font-weight: bold;"></span>
 <h2><a name="mozTocId342886" class="mozTocH2"></a>Abonnement par la
@@ -558,50 +570,25 @@ dans le r&eacute;pertoire des patrons. </p>
 
 
 
-
-
-
-
       </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Placez
 dans
 ce
-
-r&eacute;pertoire
-les
-principaux
-patrons,
-ceux
-du
-corps de votre
-message </td>
+r&eacute;pertoire les principaux patrons,
+ceux du corps de votre message </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
 patron choisi sera appliqu&eacute; &agrave; la liste de diffusion. </td>
     </tr>
     <tr>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/lien_en_tete_courriers/
 
-
-
-
-
-
-
       </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Patrons
-des
-en-t&ecirc;tes
-
-
-de
-messages.
-En
-g&eacute;n&eacute;ral,
-un
-patron
-plac&eacute; ici
-contient un lien sur le message permettant au lecteur de consulter le
-message directement sur le site. </td>
+des en-t&ecirc;tes de messages.
+En g&eacute;n&eacute;ral, un patron plac&eacute;
+ici contient un lien sur le message permettant
+au lecteur de consulter le message directement
+sur le site. </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;"
  rowspan="2">L&#8217;administrateur du site doit activer ces
 fonctionnalit&eacute;s via le menu de configuration.<br>
@@ -612,22 +599,12 @@ sortants au moment de l&#8217;envoi. </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/tampons_courriers/
 
 
-
-
-
-
-
       </td>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">Le
 tampon des courriers est appliqu&eacute; en fin de message. </td>
     </tr>
     <tr>
       <td style="border: 1px solid gray; padding: 1ex; width: 30%;">patrons/pieds_courriers/
-
-
-
-
-
 
 
       </td>
@@ -651,22 +628,38 @@ format 'texte seul' (retirez tous les &eacute;l&eacute;ments HTML,
 etc.).</p>
 <h2><a name="mozTocId91756" class="mozTocH2"></a>Un num&eacute;ro dans
 le sujet de votre message</h2>
-Si vous d&eacute;sirez faire figurer un num&eacute;ro dans le titre de
+<p>Si vous d&eacute;sirez faire figurer un num&eacute;ro dans le titre
+de
 votre message (par exemple: Courrier de mon association n&deg; 24), il
 est possible d'ins&eacute;rer une balise 'a-la-SPIP' dans le champ
 sujet. Cette pseudo balise est calcul&eacute;e lors de l'envoi de la
-liste de diffusion.<br>
+liste de diffusion.</p>
 <br>
-Exemple :<br>
-Pour un courrier dont le num&eacute;ro correspond au num&eacute;ro de
-la semaine dans l'ann&eacute;e :<br>
+<p>Exemple :</p>
+<p>Pour un courrier dont le num&eacute;ro correspond au num&eacute;ro
+de
+la semaine dans l'ann&eacute;e :</p>
 <br>
 <pre>Courrier de la semaine [(#DATE|affdate{'W'})]</pre>
 <br>
-Vous pouvez incr&eacute;menter ce num&eacute;ro via le filtre 'plus'.
-Par exemple pour ajouter 100 au num&eacute;ro de la semaine :<br>
+<p>Vous pouvez incr&eacute;menter ce num&eacute;ro via le filtre
+'plus'.
+Par exemple pour ajouter 100 au num&eacute;ro de la semaine :</p>
 <br>
 <pre>Courrier de la semaine [(#DATE|affdate{'W'}|plus{100})]<br><br></pre>
+<h2><a name="imgincrust">Une image incrust&eacute;e dans votre message</a></h2>
+<p>Les images contenues dans les articles sont pr&eacute;sent&eacute;es
+dans les courriers sous forme de lien URL. Les images restent sur votre
+serveur. Elles sont appel&eacute;es &agrave; l'affichage de votre
+courrier. Cela &eacute;vite d'alourdir un courrier en n'acheminant que
+le strict n&eacute;cessaire : le contenu texte.<br>
+Il est possible d'incruster une image, directement dans votre message,
+sans lien URL. Cette m&eacute;thode convient bien pour l'incrustation
+automatique des tampons, signatures de messages, ou toute autre image
+permanente de petite taille.<br>
+Le patron <span style="font-weight: bold;">patrons/pieds_courriers/pied_logo_image.html</span>
+illustre cet usage.<br>
+</p>
 <h2><a name="personsujet"></a>Personnaliser le sujet de votre message</h2>
 <p>D'autres options sont disponibles pour la personnalisation du sujet
 d'un nouveau courrier via les filtres :</p>
@@ -713,35 +706,17 @@ compl&eacute;mentaires</h2>
 <ul>
   <li><a href="http://files.spip.org/spip-zone/spip-listes_1_9_3.zip">Distribution
 officielle
-de
-
-
-
-
-
-
-
-    <strong>@spiplistes_name@</strong> sur la zone</a> ;</li>
+de <strong>@spiplistes_name@</strong> sur la zone</a> ;</li>
   <li><a href="http://www.spip-contrib.net/SPIP-Listes">La page
 consacr&eacute;e &agrave; SPIP-Listes sur SPIP-contrib</a> ;</li>
   <li><a
  href="http://www.spip-contrib.net/Premier-courrier-sur-SPIP-Listes">Envoyer
 mon
-premier
-
-courrier
-sur
-
-
-
-
-    <strong>@spiplistes_name@</strong> sur SPIP-contrib</a> ;</li>
+premier courrier sur <strong>@spiplistes_name@</strong> sur
+SPIP-contrib</a> ;</li>
   <li><a href="http://www.spip-contrib.net/Comment-ca-marche"><strong>@spiplistes_name@</strong>,
 comment
-&ccedil;a
-marche
-sur
-SPIP-contrib</a> ;</li>
+&ccedil;a marche sur SPIP-contrib</a> ;</li>
   <li><a href="http://www.spip.net/fr">Le site SPIP, outil de gestion
 de contenu (CMS)</a> ;</li>
   <li><a href="http://www.quesaco.org/SPIP-Listes-documentation">Documentation

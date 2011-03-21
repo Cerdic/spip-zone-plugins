@@ -25,11 +25,8 @@ dans le meleuse.
 . personnaliser les abonnement (s’abonner en « html » a la liste x, « texte » a la liste y, ou « non » a la liste z). Utiliser la table spip_auteurs_liste (completer le format qui est pour l'instant toujours html).
 . complement statistiques : liens sur courrier, taux d'ouverture, de clic, liens cliques. etc...
 . semble y avoir qq conflits avec autres plug-in. Verifier ! see: http://docs.jquery.com/Core/jQuery.noConflict
-. verifier envoi du test. Il doit etre au format HTML suivi d'un autre au format Texte. Test au 24/06/2008, seule la version texte est envoyee.
 . corriger les CSS pour espace public des formulaires (le cache, toujours le cache)
 . revoir la doc docs/__installation_*.txt
 . permettre l'import direct d'une image dans le courrier (sans lien). Un poil complique, mais faisable.
-. corriger documentation contextuelle (to-do perpetuel ;-))
-. maintenance: mettre en place l'auth. par FTP.
 . icone 'casier a courrier' a revoir. Idem 'listes de diffusion'
 
