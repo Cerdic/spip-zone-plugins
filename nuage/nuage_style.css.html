@@ -1,16 +1,18 @@
 #CACHE{24*3600,cache-client}
 #HTTP_HEADER{'Content-type: text/css'}
 
-ul.nuage {
+ul.nuage,dl.nuage {
 	margin:0;
 	padding: 0;
 	list-style: none;
 }
-ul.nuage li {
+ul.nuage li,dl.nuage dt {
 	display: inline;
 	white-space: inherit;
+	font-size:1em;
 }
-ul.nuage span.frequence {
+
+.nuage .frequence {
 	display: block;
 	float: left;
 	height: 0;
