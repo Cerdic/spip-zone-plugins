@@ -20,10 +20,6 @@
 <BOUCLE_document(DOCUMENTS){id_document}{tout}>[(#SET{id_licence,[(#ID_LICENCE|=={0}|?{#GET{id_licence},#ID_LICENCE})]})]</BOUCLE_document>
 <//B_article>
 #SET{licences,#EVAL{$GLOBALS['licence_licences']}}
-[(#REM) pas de licence, pas d'affichage si option non cochee]
-[(#GET{id_licence}|non|et{#ENV{afficher_licence_vide}|=={non}})
-	#SET{licences, #ARRAY}
-]
 <BOUCLE_selection(POUR){tableau #GET{licences}}{cle=#GET{id_licence}}>
 	#SET{name_licence,#VALEUR|table_valeur{name}}
 	#SET{link_licence,#VALEUR|table_valeur{link}}
