@@ -1,0 +1,11 @@
+<traduction module="menus" gestionnaire="salvatore" reference="fr">
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en">
+		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="fr" />
+	<langue code="it" />
+	<langue code="ru" />
+	<langue code="sk" />
+</traduction>
