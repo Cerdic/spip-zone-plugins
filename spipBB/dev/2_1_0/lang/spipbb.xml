@@ -1,0 +1,30 @@
+<traduction module="spipbb" gestionnaire="salvatore" reference="fr">
+	<langue code="ast">
+		<traducteur nom="xuacu" />
+	</langue>
+	<langue code="bg" />
+	<langue code="ca" />
+	<langue code="cs" />
+	<langue code="da" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
+	<langue code="en">
+		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="es" />
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="gl" />
+	<langue code="it_fem" />
+	<langue code="km" />
+	<langue code="nl" />
+	<langue code="oc_lnc" />
+	<langue code="oc_ni" />
+	<langue code="pt" />
+	<langue code="ro" />
+	<langue code="sk" />
+	<langue code="tr" />
+</traduction>
