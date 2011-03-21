@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
-	'annuler' => '&#6036;&#6084;&#6087;&#6036;&#6020;&#6091;',
+	'annuler' => 'បោះបង់',
 
 	// B
 	'bouton_supprimer' => 'Supprimer', # NEW
@@ -19,37 +19,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'donnees_mal_formatees' => 'Invalid request format', # NEW
 
 	// E
-	'editer' => '&#6016;&#6082;&#6036;&#6098;&#6042;&#6082;',
+	'editer' => 'កែប្រែ',
 	'editer_@type@_@id@' => 'Edit the whole @type@ @id@', # NEW
-	'editer_tout' => '&#6016;&#6082;&#6036;&#6098;&#6042;&#6082; &#6033;&#6070;&#6086;&#6020;&#6050;&#6047;&#6091;',
+	'editer_tout' => 'កែប្រែ ទាំងអស់',
 	'effets' => 'Effets', # NEW
-	'explication_exec_autorise' => 'Pages autoris&eacute;es &agrave; la modification
-		(?exec=...) : (, pour s&eacute;parer les exec - * pour toutes).', # NEW
-	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caract&egrave;res (chapeau puis texte).', # NEW
-	'explication_reduire_logo' => 'R&#233;duire le logo s\'il d&#233;passe
+	'explication_exec_autorise' => 'Pages autorisées à la modification
+		(?exec=...) : (, pour séparer les exec - * pour toutes).', # NEW
+	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
+	'explication_reduire_logo' => 'Réduire le logo s\'il dépasse
 		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
 
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
-	'label_activer_crayons_prive' => 'Activer crayons pour la partie priv&eacute;e.', # NEW
+	'label_activer_crayons_prive' => 'Activer crayons pour la partie privée.', # NEW
 	'label_barre_typo' => 'Barre typographique', # NEW
 	'label_clickhide' => 'Un clic en-dehors masque les crayons', # NEW
 	'label_effets' => 'Choix des effets', # NEW
-	'label_espaceprive' => 'Crayons dans le priv&eacute; ?', # NEW
-	'label_exec_autorise' => 'Pages autoris&eacute;es', # NEW
+	'label_espaceprive' => 'Crayons dans le privé ?', # NEW
+	'label_exec_autorise' => 'Pages autorisées', # NEW
 	'label_filet' => 'Filet', # NEW
 	'label_message' => 'Obtenir un message', # NEW
 	'label_msg_abandon' => 'Sur abandon', # NEW
 	'label_msg_no_change' => 'Si pas de changement', # NEW
-	'label_reduire_logo' => 'R&eacute;duire les logos', # NEW
+	'label_reduire_logo' => 'Réduire les logos', # NEW
 	'label_yellow_fade' => 'Fade', # NEW
 	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
-	'legend_controleur_logo' => 'Choisir un logo&nbsp;:', # NEW
+	'legend_controleur_logo' => 'Choisir un logo :', # NEW
 	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
 	'legend_controleur_qui' => 'Qui ?', # NEW
-	'legend_controleur_vignette' => 'Choisir une vignette&nbsp;:', # NEW
+	'legend_controleur_vignette' => 'Choisir une vignette :', # NEW
 	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
-	'legend_editer_prive' => '&Eacute;diter l\'espace priv&eacute; (exp&eacute;rimental)', # NEW
+	'legend_editer_prive' => 'Éditer l\'espace privé (expérimental)', # NEW
 	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
 
 	// M
@@ -58,15 +58,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'modifie_par_ailleurs' => 'Was modified elsewhere in the meantime', # NEW
 
 	// N
-	'non_autorise' => '<NEW>&#6018;&#6098;&#6040;&#6070;&#6035;&#6050;&#6035;&#6075;&#6025;&#6098;&#6025;&#6070;&#6031;',
+	'non_autorise' => '<NEW>គ្មានអនុញ្ញាត',
 	'non_implemente' => 'Not implemented', # NEW
 
 	// P
-	'pas_de_modification' => '<NEW>&#6018;&#6098;&#6040;&#6070;&#6035;&#6036;&#6086;&#6043;&#6070;&#6047;&#6091;&#6036;&#6098;&#6031;&#6076;&#6042;',
-	'pas_de_valeur' => '<NEW>&#6018;&#6098;&#6040;&#6070;&#6035;&#6031;&#6086;&#6043;&#6083; &#6047;&#6086;&#6042;&#6070;&#6036;&#6091;&#6050;&#6031;&#6098;&#6031;&#6047;&#6025;&#6098;&#6025;&#6070; (ID) &#6035;&#6081;&#6087;',
+	'pas_de_modification' => '<NEW>គ្មានបំលាស់ប្តូរ',
+	'pas_de_valeur' => '<NEW>គ្មានតំលៃ សំរាប់អត្តសញ្ញា (ID) នេះ',
 
 	// S
-	'sauvegarder' => '<NEW>&#6042;&#6016;&#6098;&#6047;&#6070;&#6033;&#6075;&#6016; &#6036;&#6086;&#6043;&#6070;&#6047;&#6091;&#6036;&#6098;&#6031;&#6076;&#6042;?',
+	'sauvegarder' => '<NEW>រក្សាទុក បំលាស់ប្តូរ?',
 	'svp_copier_coller' => 'Sorry, copy/paste your changes and retry', # NEW
 
 	// T
@@ -74,10 +74,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_crayons' => 'Crayons', # NEW
 
 	// U
-	'update_impossible' => '&#6016;&#6070;&#6042;&#6036;&#6035;&#6098;&#6033;&#6070;&#6035;&#6091;&#6047;&#6040;&#6096;&#6041; &#6036;&#6070;&#6035;&#6036;&#6042;&#6070;&#6023;&#6096;&#6041;&#6100;',
+	'update_impossible' => 'ការបន្ទាន់សម័យ បានបរាជ័យ។',
 
 	// V
-	'veuillez_patienter' => '&#6016;&#6086;&#6038;&#6075;&#6020;&#6047;&#6098;&#6044;&#6082;&#6020;&#6042;&#6016; ...'
+	'veuillez_patienter' => 'កំពុងស្វែងរក ...'
 );
 
 ?>

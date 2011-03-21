@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer' => 'Elimina',
 
 	// D
-	'deja_modifie' => 'Gi&agrave; modificato',
+	'deja_modifie' => 'Già modificato',
 	'donnees_mal_formatees' => 'Dati mal formattati',
 
 	// E
@@ -24,8 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_tout' => 'Modifica tutto',
 	'effets' => 'Effetti',
 	'explication_exec_autorise' => 'Pagine autorizzate per la modifica
-  (?exec=...) : (, per separare gli exec).', # MODIF
-	'explication_introduction_article' => 'L\'introduzione di un articolo mostra la descrizione di un articolo, altrimenti mostra i suoi primi 600 caratteri (cappello pi&ugrave; testo)',
+  (?exec=...) : (, per separare gli exec - * per tutti).',
+	'explication_introduction_article' => 'L\'introduzione di un articolo mostra la descrizione di un articolo, altrimenti mostra i suoi primi 600 caratteri (cappello più testo)',
 	'explication_reduire_logo' => 'Riduci il logo se supera
   la dimensione massima indicata in pixel. Esempio: 100. (0 = mai)', # MODIF
 
@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_filet' => 'Bordo',
 	'label_message' => 'Ottieni un messaggio',
 	'label_msg_abandon' => 'Sull\'abbandono',
-	'label_msg_no_change' => 'Se non c\'&egrave; nessuna modifica',
+	'label_msg_no_change' => 'Se non c\'è nessuna modifica',
 	'label_reduire_logo' => 'Riduci i logo',
 	'label_yellow_fade' => 'Fade',
 	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_crayons' => 'Pennarelli',
 
 	// U
-	'update_impossible' => 'L\'aggiornamento &egrave; fallito.',
+	'update_impossible' => 'L\'aggiornamento è fallito.',
 
 	// V
 	'veuillez_patienter' => 'Attendere...'

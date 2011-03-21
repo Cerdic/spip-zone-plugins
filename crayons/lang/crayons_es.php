@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Otro plugin impide el uso de la barra de herramientas en el espacio p&uacute;blico.',
+	'activation_barre_impossible' => 'Otro plugin impide el uso de la barra de herramientas en el espacio público.',
 	'annuler' => 'Cancelar',
 
 	// B
@@ -23,34 +23,34 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_@type@_@id@' => 'Editar @type@ @id@ entero',
 	'editer_tout' => 'Editar todo',
 	'effets' => 'Efectos',
-	'explication_exec_autorise' => 'P&aacute;ginas cuya modificaci&oacute;n es permitida
+	'explication_exec_autorise' => 'Páginas cuya modificación es permitida
   (?exec=...) : (, para separar los exec).', # MODIF
-	'explication_introduction_article' => 'La introducci&oacute;n de un art&iacute;culo ense&ntilde;a la descripci&oacute;n del art&iacute;culo, o los primeros 600 car&aacute;cteres (ep&iacute;grafe y luego texto).',
-	'explication_reduire_logo' => 'Reducir el logotipo si va mas all&aacute;
-  del tama&ntilde;o indicado en p&iacute;xeles.Ejemplo: 100. (0 = nunca)', # MODIF
+	'explication_introduction_article' => 'La introducción de un artículo enseña la descripción del artículo, o los primeros 600 carácteres (epígrafe y luego texto).',
+	'explication_reduire_logo' => 'Reducir el logotipo si va mas allá
+  del tamaño indicado en píxeles.Ejemplo: 100. (0 = nunca)', # MODIF
 
 	// L
-	'label_activer_barre_typo' => '&iquest;Activar la barra tipogr&aacute;fica en los l&aacute;pices?',
-	'label_activer_crayons_prive' => 'Activar los l&aacute;pices en el espacio privado.',
-	'label_barre_typo' => 'Barra tipogr&aacute;fica',
-	'label_clickhide' => 'Un clic afuera esconde los l&aacute;pices',
+	'label_activer_barre_typo' => '¿Activar la barra tipográfica en los lápices?',
+	'label_activer_crayons_prive' => 'Activar los lápices en el espacio privado.',
+	'label_barre_typo' => 'Barra tipográfica',
+	'label_clickhide' => 'Un clic afuera esconde los lápices',
 	'label_effets' => 'Elegir los efectos',
-	'label_espaceprive' => '&iquest;L&aacute;pices en el espacio privado?',
-	'label_exec_autorise' => 'P&aacute;ginas permitidas',
+	'label_espaceprive' => '¿Lápices en el espacio privado?',
+	'label_exec_autorise' => 'Páginas permitidas',
 	'label_filet' => 'Filete',
 	'label_message' => 'Obtener un mensaje',
 	'label_msg_abandon' => 'Cuando se abandona',
 	'label_msg_no_change' => 'Si no hay cambios',
-	'label_reduire_logo' => 'Reducir el tama&ntilde;o de los logotipos',
+	'label_reduire_logo' => 'Reducir el tamaño de los logotipos',
 	'label_yellow_fade' => 'Fundido',
 	'legend_controleur_hyperlien' => 'Enlace hipertexto',
 	'legend_controleur_logo' => 'Elegir un logotipo:',
 	'legend_controleur_logo_remplacer' => 'Reemplazar este logotipo',
-	'legend_controleur_qui' => '&iquest;Qui&eacute;n?',
-	'legend_controleur_vignette' => 'Escoger una vi&ntilde;eta:',
-	'legend_controleur_vignette_remplacer' => 'Reemplazar esta vi&ntilde;eta',
-	'legend_editer_prive' => 'Edici&oacute;n en el espacio privado (experimental)',
-	'legend_introduction_article' => 'Texto introductivo del art&iacute;culo',
+	'legend_controleur_qui' => '¿Quién?',
+	'legend_controleur_vignette' => 'Escoger una viñeta:',
+	'legend_controleur_vignette_remplacer' => 'Reemplazar esta viñeta',
+	'legend_editer_prive' => 'Edición en el espacio privado (experimental)',
+	'legend_introduction_article' => 'Texto introductivo del artículo',
 
 	// M
 	'message_image_obligatoire' => 'Hay que escoger una imagen',
@@ -66,15 +66,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_valeur' => 'No hay valor',
 
 	// S
-	'sauvegarder' => '&iquest;Guardar las modificaciones?',
+	'sauvegarder' => '¿Guardar las modificaciones?',
 	'svp_copier_coller' => 'Perdon, copia/pega tus cambios y vuelve a empezar',
 
 	// T
-	'titre_config_crayons' => 'Configuraci&oacute;n de los l&aacute;pices',
-	'titre_crayons' => 'L&aacute;pices',
+	'titre_config_crayons' => 'Configuración de los lápices',
+	'titre_crayons' => 'Lápices',
 
 	// U
-	'update_impossible' => 'La actualizaci&oacute;n fracas&oacute;.',
+	'update_impossible' => 'La actualización fracasó.',
 
 	// V
 	'veuillez_patienter' => 'Favor esperar...'

@@ -13,12 +13,13 @@
 	<langue code="fa">
 		<traducteur nom="davood" />
 	</langue>
-	<langue code="fr" />
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>
 	<langue code="gl" />
-	<langue code="it" />
+	<langue code="it">
+		<traducteur nom="filou" />
+	</langue>
 	<langue code="it_fem" />
 	<langue code="km" />
 	<langue code="lb" />
