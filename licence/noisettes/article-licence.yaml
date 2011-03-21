@@ -87,7 +87,7 @@ parametres:
     saisie: 'radio'
     options:
       nom: 'cacher_defaut'
-      label: '<:licence:noisette_cacher_licence_vide:>'
+      label: '<:licence:noisette_cacher_defaut:>'
       defaut: 'non'
       datas:
         oui: '<:ecrire:item_oui:>'
