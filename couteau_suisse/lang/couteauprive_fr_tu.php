@@ -55,10 +55,10 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 @puce@ Quels statuts d\'auteurs peuvent &ecirc;tre list&eacute;s sur cette page ?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Page des auteurs',
-	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]]', # MODIF
+	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML &lt;br />.[[%alinea%]][[->%alinea2%]]',
 	'autobr:nom' => 'Retours de ligne automatiques',
-	'autobr_non' => 'Tous les textes du site, mais seulement &agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>', # MODIF
-	'autobr_oui' => 'Tous les textes d\'article et messages publics (balise #TEXTE)', # MODIF
+	'autobr_non' => '&Agrave; l\'int&eacute;rieur des balises &lt;alinea>&lt;/alinea>',
+	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
 	'autobr_racc' => 'Retours de ligne : <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
@@ -261,7 +261,7 @@ Cet outil peut &ecirc;tre coupl&eacute; avec &laquo;&nbsp;[.->sommaire]&nbsp;&ra
 	'detail_spip_options' => '{{Note}} : En cas de dysfonctionnement de cet outil, place les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.',
 	'detail_spip_options2' => 'Il est recommand&eacute; de placer les options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;[.->cs_comportement]&raquo;.',
 	'detail_spip_options_ok' => '{{Note}} : Cet outil place actuellement des options SPIP en amont gr&acirc;ce &agrave; l\'outil &laquo;@lien@&raquo;.',
-	'detail_surcharge' => 'Outil surcharg&eacute; :', # NEW
+	'detail_surcharge' => 'Outil surcharg&eacute; :',
 	'detail_traitements' => 'Traitements :',
 	'devdebug:description' => '{{Cet outil te permet de voir les erreurs PHP &agrave; l\'&eacute;cran.}}<br />Tu peux choisir le niveau d\'erreurs d\'ex&eacute;cution PHP qui sera affich&eacute; si le d&eacute;bogueur est actif, ainsi que l\'espace SPIP sur lequel ces r&eacute;glages s\'appliqueront.',
 	'devdebug:item_e_all' => 'Tous les messages d\'erreur (all)',
