@@ -1,3 +1,7 @@
+#CACHE{600}<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr" dir="ltr">
+<head>
+<title>radioactivite</title>
 #INSERT_HEAD
 
 <style>
@@ -7,14 +11,15 @@ tr.changearea td{border-top:2px solid #000;}
 .centrer{text-align:center}
 .centrer div{margin:0 auto}
 </style>
+</head>
+</body>
 
 <?php
-echo "<small>source <a href='http://www.bousai.ne.jp/eng/'>http://www.bousai.ne.jp/eng/</a></small> ";
-echo "<small><a href='squelettes/squelt-radiations.tar.gz'>squelette</a>";
+echo "<small>source <a href='http://www.bousai.ne.jp/eng/'>http://www.bousai.ne.jp/eng/</a> ";
 echo "<br /> Les d&eacute;bits de dose sont exprim&eacute;s en nanoGray/heure (nGy/h) soit 1 milliardi&egrave;me de Gray/heure. Le premier niveau de pr&eacute;-alarme en France est fix&eacute; &agrave; 350 nGy/h.</small>";
 include_spip('inc/filtres');
 include_spip('inc/distant');
-//on incr&eacute;mente pour les 8 pages
+//on incremente pour les 8 pages
 $id="01";
 $i=1;
 while($i<=8) {
@@ -23,9 +28,9 @@ while($i<=8) {
 	AND $b = extraire_balises($recup, 'table')
 	AND $b = extraire_balise($b[2], 'table')
 	) $c[] = extraire_balises($b, 'tr');
-	//$c = array_merge(null, $total);
 	$i++;
 }
+
 //print_r($c)."<br />";
 function aff_style($multi) 
     {
@@ -69,7 +74,7 @@ function aff_table($multi)
 			echo  $d[0]."</td><td>".$d[1]."</td><td>".$d[2]."</td><td>".$d[3]."</td><td>".$d[4];
 			echo "</td>";
 			echo "<td class='centrer'><div id=A".$id.$d[0].">";
-			echo "<img src='squelettes/images/".$imgcercle."' width='100%' />";
+			echo "<img src='"._DIR_PLUGIN_RADIOACTIVITE."images/".$imgcercle."' width='100%' />";
 			echo "</div></td>";
 			echo "</tr>"."\n";
 			$i++;
@@ -88,4 +93,6 @@ echo "<thead><tr><td>code</td><td>station</td><td>rate nGy/h</td><td>wind</td><t
 aff_table($c);
 echo "</tbody></table>";
 
+?>
 
+</body></html>
