@@ -40,7 +40,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_lien' => 'Afficher le lien vers la description de la licence&nbsp;?',
 	'noisette_logo' => 'Afficher le logo de la licence&nbsp;?',
 	'noisette_nom_licence' => 'Afficher le nom de la licence&nbsp;?',
-	
 
 	// S
 	'sans_licence' => 'Sans licence',
