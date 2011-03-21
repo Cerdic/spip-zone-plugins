@@ -136,6 +136,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Complement_ajouter_lien_en_tete' => 'Ajouter un lien en en-t&ecirc;te du courrier'
 , 'Complement_lien_en_tete_desc' => 'Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&#233; le lien 
    du courrier original pr&#233;sent sur votre site.'
+, 'completer_titre_courrier_nom_site' => 'Compl&#233;ter le titre du courrier'
+, 'completer_titre_courrier_nom_site_desc' => 'Le titre des listes est
+	automatiquement compl&#233;t&#233; par le nom du site.'
 , 'Complement_tampon_editeur' => 'Ajouter le tampon Editeur'
 , 'Complement_tampon_editeur_desc' => 'Cette option vous permet de rajouter le tampon de l&#8217;&#233;diteur en fin de courrier. '
 , 'Complement_tampon_editeur_label' => 'Ajouter le tampon Editeur en fin de courrier'

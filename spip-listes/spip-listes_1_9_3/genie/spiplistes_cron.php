@@ -196,10 +196,16 @@ function cron_spiplistes_cron ($last_time) {
 			// preparation du courrier a placer dans le panier (spip_courriers)
 			// en cas de periode, la date est dans le passe'
 			// pour avoir les elements publies depuis cette date
-			$titre = (empty($titre_message))
-				? $titre._T('spiplistes:_de_').spiplistes_nom_site_texte($lang)
-				: $titre_message
-				;
+			if (
+				empty($titre_message)
+				&& (spiplistes_pref_lire('opt_completer_titre_nom_site') == 'oui')
+			) {
+					$titre .= _T('spiplistes:_de_')
+						. spiplistes_nom_site_texte($lang);
+			}
+			else {
+				$titre = $titre_message;
+			}
 
 			list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
 				_SPIPLISTES_PATRONS_DIR . $patron

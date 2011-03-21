@@ -358,11 +358,16 @@ function exec_spiplistes_liste_gerer () {
 	// les supers-admins et le moderateur seuls peuvent modifier la liste
 	$flag_editable = autoriser('moderer', 'liste', $id_liste);
 
-	$titre_message = (empty($titre_message))
-				? $titre._T('spiplistes:_de_').spiplistes_nom_site_texte($lang)
-				: $titre_message
-				;
-
+	if (empty($titre_message))
+	{
+		$titre_message = $titre;
+		if (spiplistes_pref_lire('opt_completer_titre_nom_site') == 'oui')
+		{
+			$titre_message .= _T('spiplistes:_de_')
+				. spiplistes_nom_site_texte($lang);
+		}
+	}
+	
 	$nb_abonnes = spiplistes_listes_nb_abonnes_compter($id_liste);
 
 	// preparation des boutons 

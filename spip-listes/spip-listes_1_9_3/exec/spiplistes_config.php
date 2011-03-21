@@ -63,6 +63,7 @@ function exec_spiplistes_config () {
 			'opt_personnaliser_courrier'
 			, 'opt_lien_en_tete_courrier', 'lien_patron'
 			, 'opt_ajout_tampon_editeur', 'tampon_patron'
+			, 'opt_completer_titre_nom_site'
 			);
 		$keys_complement_courrier = array_merge($keys_complement_courrier
 												, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
@@ -122,7 +123,19 @@ function exec_spiplistes_config () {
 			) as $key) {
 			$$key = _request($key);
 		}
-	
+		// historiquement, ajoute le nom du site en
+		// fin de titre. Permettre de ne pas le faire.
+		$in_post = _request('opt_completer_titre_nom_site');
+		$in_meta = spiplistes_pref_lire('opt_completer_titre_nom_site');
+		$opt_completer_titre_nom_site =
+			// ni dans le POST, ni dans les metas ?
+			(!$in_post && !$in_meta)
+			// comportement par défaut
+			? 'oui'
+			// un imput vide n'est jamais renvoyé
+			// donc si manquant, c'est un 'non'
+			: ($in_post ? $in_post : 'non');
+
 		$doit_ecrire_metas = false;
 		$str_log = '';
 		if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
@@ -318,6 +331,7 @@ function exec_spiplistes_config () {
 	//////////////////////////////////////////////////////
 	// Boite parametrage complément du courrier
 	$opt_personnaliser_courrier = (spiplistes_pref_lire('opt_personnaliser_courrier') == 'oui');
+	$opt_completer_titre_nom_site = (spiplistes_pref_lire('opt_completer_titre_nom_site') == 'oui');
 	$opt_lien_en_tete_courrier = (spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui');
 	$lien_patron = spiplistes_pref_lire('lien_patron');
 	$opt_ajout_tampon_editeur = (spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui');
@@ -335,41 +349,51 @@ function exec_spiplistes_config () {
 		. debut_cadre_relief('', true, '', _T('spiplistes:personnaliser_le_courrier'))
 		. "<p class='verdana2'>"._T('spiplistes:personnaliser_le_courrier_desc')."</p>"
 		. "<label class='verdana2'>"
-   	. "<input type='checkbox' name='opt_personnaliser_courrier' value='oui' "
+		. "<input type='checkbox' name='opt_personnaliser_courrier' value='oui' "
 			. (($opt_personnaliser_courrier == 'oui') ? "checked='checked'" : '')
 			. ' />' . $eol
-   	. _T('spiplistes:personnaliser_le_courrier_label').'</label>' . $eol
+		. _T('spiplistes:personnaliser_le_courrier_label').'</label>' . $eol
 		. fin_cadre_relief(true)
 		//
 		// ajout du renvoi de tete, lien courrier
 		. debut_cadre_relief('', true, '', _T('spiplistes:Complement_lien_en_tete'))
 		. "<p class='verdana2'>"._T('spiplistes:Complement_lien_en_tete_desc')."</p>"
-   	. "<input type='checkbox' name='opt_lien_en_tete_courrier' value='oui' id='opt-lien-en-tete-courrier' "
-			. (($opt_lien_en_tete_courrier) ? "checked='checked'" : '')
-			. " />" . $eol
-   	. "<label class='verdana2' for='opt-lien-en-tete-courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete').'</label>' . $eol
+		. '<input type="checkbox" name="opt_lien_en_tete_courrier" value="oui" id="opt-lien-en-tete-courrier" '
+			. (($opt_lien_en_tete_courrier) ? 'checked="checked"' : '')
+			. ' />' . $eol
+		. "<label class='verdana2' for='opt-lien-en-tete-courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete').'</label>' . $eol
 		//
 		// lien courrier: boite de selection
 		. "<div id='div-lien-en-tete-courrier' style='".(!$opt_lien_en_tete_courrier ? "display:none;" : '')."margin-top:1em;'>"
-   	. '<label class="verdana2" style="padding-left:2ex;">'
+		. '<label class="verdana2" style="padding-left:2ex;">'
 		. _T('spiplistes:Patron_du_lien').'.' . $eol
 		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_TETE_DIR, "lien_patron", 1)
 		. '</label>' . $eol
 		. "</div>" . $eol // fin bloc div-lien-en-tete-courrier
 		. fin_cadre_relief(true)
 		//
+		// compléter le titre des listes par le nom du serveur ?
+		. debut_cadre_relief('', true, '', _T('spiplistes:completer_titre_courrier_nom_site'))
+		. '<label class="verdana2" style="padding-left:2ex;">'
+			. '<input type="checkbox" name="opt_completer_titre_nom_site" value="oui" id="opt_completer_titre_nom_site" '
+			. (($opt_completer_titre_nom_site) ? 'checked="checked"' : '')
+			. ' />' . $eol
+			. _T('spiplistes:completer_titre_courrier_nom_site_desc') . $eol
+		. '</label>' . $eol
+		. fin_cadre_relief(true)
+		//
 		// ajout tampon editeur
 		. debut_cadre_relief('', true, '', _T('spiplistes:Complement_tampon_editeur'))
 		. "<p class='verdana2'>"._T('spiplistes:Complement_tampon_editeur_desc')."</p>"
-   	. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt-ajout-tampon-editeur' "
+		. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt-ajout-tampon-editeur' "
 			. ($opt_ajout_tampon_editeur ? "checked='checked'" : '')
 			. " />" . $eol
-   	. "<label class='verdana2' for='opt-ajout-tampon-editeur'>"._T('spiplistes:Complement_tampon_editeur_label').'</label>' . $eol
+		. "<label class='verdana2' for='opt-ajout-tampon-editeur'>"._T('spiplistes:Complement_tampon_editeur_label').'</label>' . $eol
 		//
 		// coordonnées editeur: bloc coordonnes_editeur
 		. "<div id='div-ajout-tampon-editeur' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : '')."margin-top:1em;'>"
 		// tampon sélecteur
-   	. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:patron_du_tampon_') . $eol
+		. "<label class='verdana2' style='padding-left:2ex;'>"._T('spiplistes:patron_du_tampon_') . $eol
 		. spiplistes_boite_selection_patrons($tampon_patron, true, _SPIPLISTES_PATRONS_TAMPON_DIR, "tampon_patron", 1)
 		. '</label>'
 		. "<ul class='verdana2' style='list-style:none;padding-left:2ex;'>" . $eol
@@ -570,8 +594,6 @@ function exec_spiplistes_config () {
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		, spiplistes_html_signature(_SPIPLISTES_PREFIX)
 		, fin_gauche(), fin_page();
-	
-	
 } // exec_config()
 
 /*
@@ -629,6 +651,5 @@ function spiplistes_array_values_in_keys($array) {
 	}
 	return($result);
 } // spiplistes_array_values_in_keys()
-
 
 
