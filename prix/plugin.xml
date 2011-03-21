@@ -1,0 +1,23 @@
+<plugin>
+	<nom>API Prix</nom>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Interface de programmation pour connaitre le prix d'un objet SPIP. Ce plugin est un outil pour développeur.</description>
+	<icon>images/prix-128.png</icon>
+	<categorie>outil</categorie>
+	
+	<prefix>prix</prefix>
+	
+	<fonctions>prix_fonctions.php</fonctions>
+	<pipeline>
+		<nom>prix_ht</nom>
+		<inclure>prix_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>prix</nom>
+		<action>prix_prix</action>
+		<inclure>prix_pipelines.php</inclure>
+	</pipeline>
+</plugin>
