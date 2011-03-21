@@ -1,0 +1,10 @@
+<traduction module="piwik" gestionnaire="salvatore" reference="fr">
+	<langue code="ca" />
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="fa" />
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+</traduction>
