@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'a_confirmer' => 'Zu best&amp;auml;tigen',
 	'accesrestreint' => 'Eingeschr&amp;auml;nkter Zugang',
-	'aconfirmer' => 'Zu best&amp;auml;tigen',
+	'aconfirmer' => 'Zu best&auml;tigen',
 	'action_adherent' => 'Aktionen',
 	'activation_compte' => 'Aktivieren Sie Ihr Konto',
 	'adherents' => 'Nutzer',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bio' => 'Biographie',
 
 	// C
-	'caracteres' => 'Zeichen', # MODIF
+	'caracteres' => 'Unzul&auml;ssige Zeichen!',
 	'categorie' => 'Beitragsart',
 	'chaine_valide' => 'Bitte f&uuml;gen Sie eine Zeichenkette ein',
 	'chainelettre' => '(besteht nur aus Buchstaben)',
