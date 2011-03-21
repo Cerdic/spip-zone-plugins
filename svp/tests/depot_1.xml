@@ -22,12 +22,12 @@ d'autre part, la liste des paquets suivants :
 <last_commit>2011-03-10 21:21:10</last_commit>
 <traductions>
 	<traduction module="a2a" reference="fr">
-		<langue code="en"></langue>
-		<langue code="es"></langue>
-		<langue code="it"></langue>
+		<langue code="en" />
+		<langue code="es" />
+		<langue code="it" />
 	</traduction>
 	<traduction module="a2a_prive" reference="fr">
-		<langue code="en"></langue>
+		<langue code="en" />
 	</traduction>
 </traductions>
 <plugin>
@@ -164,7 +164,7 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 		<langue code="en">
 			<traducteur nom="Paolo" />
 		</langue>
-		<langue code="it"></langue>
+		<langue code="it" />
 	</traduction>
 </traductions>
 <plugin>
