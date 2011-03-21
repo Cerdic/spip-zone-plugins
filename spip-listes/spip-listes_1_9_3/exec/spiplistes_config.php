@@ -375,9 +375,10 @@ function exec_spiplistes_config () {
 		. "<ul class='verdana2' style='list-style:none;padding-left:2ex;'>" . $eol
 		;
 		foreach($_tampon_cles as $key) {
+			$value = ($$key == 'non') ? '' : $$key;
 			$page_result .= ''
 				. "<li><label for='id_$key'>".$tampon_labels[$key].":</label>"
-				. "<input type='text' name='$key' id='id_$key' size='40' class='forml' value=\"{$$key}\" /></li>" . $eol
+				. "<input type='text' name='$key' id='id_$key' size='40' class='forml' value=\"{$value}\" /></li>" . $eol
 				;
 		}
 	$page_result .= ''
