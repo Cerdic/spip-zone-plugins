@@ -1,0 +1,37 @@
+<traduction module="forms" gestionnaire="salvatore" reference="fr">
+	<langue code="ar" />
+	<langue code="ast" />
+	<langue code="bg" />
+	<langue code="br" />
+	<langue code="ca" />
+	<langue code="cpf" />
+	<langue code="da" />
+	<langue code="de" />
+	<langue code="en" />
+	<langue code="eo" />
+	<langue code="es" />
+	<langue code="fa" />
+	<langue code="fr" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="gl" />
+	<langue code="hu" />
+	<langue code="it" />
+	<langue code="km" />
+	<langue code="nl" />
+	<langue code="oc_auv" />
+	<langue code="oc_gsc" />
+	<langue code="oc_lms" />
+	<langue code="oc_ni" />
+	<langue code="oc_prv" />
+	<langue code="oc_va" />
+	<langue code="pl" />
+	<langue code="pt" />
+	<langue code="pt_br" />
+	<langue code="sk" />
+	<langue code="sv" />
+	<langue code="tr" />
+	<langue code="vi" />
+	<langue code="zh" />
+</traduction>
