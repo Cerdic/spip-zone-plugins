@@ -21,14 +21,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_copie_fichier' => 'Impossibile copiare il file @fichier@ nella sua destinazione definitiva',
-	'erreur_enregistrement' => 'Si &egrave; verificato un errore durante il salvataggio di <b>@nom@</b>',
+	'erreur_enregistrement' => 'Si è verificato un errore durante il salvataggio di <b>@nom@</b>',
 	'erreur_lecture' => 'Impossibile leggere @nom@',
 	'erreur_open_w_fichier' => 'Impossibile aprire il file @fichier@ in scrittura',
-	'erreur_suppression' => 'Si &egrave; verificato un errore durante la cancellazione di <b>@nom@</b>',
+	'erreur_suppression' => 'Si è verificato un errore durante la cancellazione di <b>@nom@</b>',
 	'erreur_suppression_fichier' => 'Impossibile cancellare il file @fichier@.',
 	'erreur_type_id' => 'Il campo @champ@ deve cominciare con una lettera o un trattino basso',
 	'erreur_type_idnum' => 'Il campo @champ@ deve essere numerico',
-	'erreur_type_pwd' => 'Il campo @champ@ deve avere pi&ugrave; di 5 caratteri',
+	'erreur_type_pwd' => 'Il campo @champ@ deve avere più di 5 caratteri',
 
 	// I
 	'id_manquant' => 'Identificativo assente',

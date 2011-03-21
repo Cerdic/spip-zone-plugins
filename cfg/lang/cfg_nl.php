@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_modules' => 'Configuratie van de modules',
 
 	// E
-	'erreur_copie_fichier' => 'Onmogelijk om het bestand @fichier@ aan zijn definitieve plaats tekopi&euml;ren',
+	'erreur_copie_fichier' => 'Onmogelijk om het bestand @fichier@ aan zijn definitieve plaats tekopiëren',
 	'erreur_enregistrement' => 'Een fout is bij de registratie van voorgekomen <b>@nom@</b>',
 	'erreur_lecture' => 'Onmogelijk om te lezen @nom@',
 	'erreur_open_w_fichier' => 'Onmogelijk om het bestand @fichier@ in schrift te openen',
@@ -34,8 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_manquant' => 'Ontbrekende identificatie',
 	'installation_librairies' => 'Download van boekhandels',
 	'installation_liste_libs' => 'Lijst van de boekhandels',
-	'installer_dossier_lib' => 'U moet een dossier @dir@ aan de wortel van uw SPIP cre&euml;ren dat toestemmingen van schrift heeft.',
-	'installer_lib_192' => 'Om een boekhandel te plaatsen, d&eacute;compressez manueel zip en kopi&euml;ert zijn inhoud in het dossier @dir@.',
+	'installer_dossier_lib' => 'U moet een dossier @dir@ aan de wortel van uw SPIP creëren dat toestemmingen van schrift heeft.',
+	'installer_lib_192' => 'Om een boekhandel te plaatsen, décompressez manueel zip en kopiëert zijn inhoud in het dossier @dir@.',
 
 	// L
 	'label_activer' => 'Activeren',

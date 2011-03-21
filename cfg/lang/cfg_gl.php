@@ -14,47 +14,47 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg' => 'CFG',
-	'choisir_module_a_configurer' => 'Escoller o m&oacute;dulo para configuraci&oacute;n.',
+	'choisir_module_a_configurer' => 'Escoller o módulo para configuración.',
 	'config_enregistree' => 'Rexistro de <b>@nom@</b> realizado',
-	'config_supprimee' => 'Supresi&oacute;n de <b>@nom@</b> realizada',
-	'configuration_modules' => 'Configuraci&oacute;n de m&oacute;dulos',
+	'config_supprimee' => 'Supresión de <b>@nom@</b> realizada',
+	'configuration_modules' => 'Configuración de módulos',
 
 	// E
 	'erreur_copie_fichier' => 'Resultou imposible copiar o ficheiro @fichier@ ao seu emprazamento definitivo',
 	'erreur_enregistrement' => 'Un erro acaeu tras o rexistro de <b>@nom@</b>',
 	'erreur_lecture' => 'Imposible de ler @nom@',
 	'erreur_open_w_fichier' => 'Imposible de abrir o ficheiro @fichier@ en modo de escritura',
-	'erreur_suppression' => 'Un erro acaeu logo da supresi&oacute;n de <b>@nom@</b>',
+	'erreur_suppression' => 'Un erro acaeu logo da supresión de <b>@nom@</b>',
 	'erreur_suppression_fichier' => 'Resultou imposible suprimir o ficheiro @fichier@.',
-	'erreur_type_id' => 'O campo @champ@ debe comezar por unha letra ou un subli&ntilde;ado',
-	'erreur_type_idnum' => 'O campo @champ@ debe ser num&eacute;rico',
-	'erreur_type_pwd' => 'O campo @champ@ dbe ter m&aacute;is de 5 caracteres',
+	'erreur_type_id' => 'O campo @champ@ debe comezar por unha letra ou un subliñado',
+	'erreur_type_idnum' => 'O campo @champ@ debe ser numérico',
+	'erreur_type_pwd' => 'O campo @champ@ dbe ter máis de 5 caracteres',
 
 	// I
 	'id_manquant' => 'Falta o identificador',
-	'installation_librairies' => 'Descarga de librer&iacute;as',
-	'installation_liste_libs' => 'Lista de librar&iacute;as',
-	'installer_dossier_lib' => 'Debe crear un dosier @dir@ na ra&iacute;z do seu web SPIP cos permisos de escritura.',
-	'installer_lib_192' => 'Para instalar unha librar&iacute;a, descomprima manualmente o zip e copie o seu contido no cartafol @dir@.',
+	'installation_librairies' => 'Descarga de librerías',
+	'installation_liste_libs' => 'Lista de librarías',
+	'installer_dossier_lib' => 'Debe crear un dosier @dir@ na raíz do seu web SPIP cos permisos de escritura.',
+	'installer_lib_192' => 'Para instalar unha libraría, descomprima manualmente o zip e copie o seu contido no cartafol @dir@.',
 
 	// L
 	'label_activer' => 'Activar',
-	'label_obligatoire' => 'Sa&iacute;da obrigada',
+	'label_obligatoire' => 'Saída obrigada',
 
 	// N
-	'nom_table_manquant' => 'Nome da t&aacute;boa SQL que falta',
+	'nom_table_manquant' => 'Nome da táboa SQL que falta',
 	'nouveau' => 'Novo',
 
 	// O
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Ning&uacute;n campo encontrado en @nom@', # MODIF
-	'pas_de_changement' => 'Ning&uacute;n cambio en <b>@nom@</b>',
+	'pas_de_champs_dans' => 'Ningún campo encontrado en @nom@', # MODIF
+	'pas_de_changement' => 'Ningún cambio en <b>@nom@</b>',
 
 	// R
-	'refus_configuration_administrateur' => 'Soamente os administradores do web est&aacute;n autorizados para modificar estes par&aacute;metros.',
-	'refus_configuration_webmestre' => 'S&oacute; os webmasters do web est&aacute;n autorizados para modificar estes par&aacute;metros.',
+	'refus_configuration_administrateur' => 'Soamente os administradores do web están autorizados para modificar estes parámetros.',
+	'refus_configuration_webmestre' => 'Só os webmasters do web están autorizados para modificar estes parámetros.',
 	'reset' => 'Borrar',
 
 	// S

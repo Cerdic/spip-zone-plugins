@@ -14,32 +14,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg' => 'CFG',
-	'choisir_module_a_configurer' => 'Escolha o m&oacute;dula para configurar',
-	'config_enregistree' => 'Inclus&atilde;o de <b>@nom@</b> efetuada',
-	'config_supprimee' => 'Exclus&atilde;o de <b>@nom@</b> efetuada',
-	'configuration_modules' => 'Configura&ccedil;&atilde;o dos m&oacute;dulos',
+	'choisir_module_a_configurer' => 'Escolha o módula para configurar',
+	'config_enregistree' => 'Inclusão de <b>@nom@</b> efetuada',
+	'config_supprimee' => 'Exclusão de <b>@nom@</b> efetuada',
+	'configuration_modules' => 'Configuração dos módulos',
 
 	// E
-	'erreur_copie_fichier' => 'N&atilde;o foi poss&iacute;vel copiar o arquivo @fichier@ para o seu local definitivo',
+	'erreur_copie_fichier' => 'Não foi possível copiar o arquivo @fichier@ para o seu local definitivo',
 	'erreur_enregistrement' => 'Um erro ocorreu ao registrar <b>@nom@</b>',
-	'erreur_lecture' => 'N&atilde;o foi poss&iacute;vel ler @nom@',
-	'erreur_open_w_fichier' => 'N&atilde;o foi poss&iacute;vel abrir o arquivo  @fichier@ para escrita',
+	'erreur_lecture' => 'Não foi possível ler @nom@',
+	'erreur_open_w_fichier' => 'Não foi possível abrir o arquivo  @fichier@ para escrita',
 	'erreur_suppression' => 'Ocorreu um erro ao excluir <b>@nom@</b>',
-	'erreur_suppression_fichier' => 'N&atilde;o foi poss&iacute;vel excluir o arquivo @fichier@.',
-	'erreur_type_id' => 'O campo @champ@ precisa come&ccedil;ar por uma letra ou sublinhado',
-	'erreur_type_idnum' => 'O campo @champ@ precisa ser num&eacute;rico',
+	'erreur_suppression_fichier' => 'Não foi possível excluir o arquivo @fichier@.',
+	'erreur_type_id' => 'O campo @champ@ precisa começar por uma letra ou sublinhado',
+	'erreur_type_idnum' => 'O campo @champ@ precisa ser numérico',
 	'erreur_type_pwd' => 'O campo @champ@ precisa ter mais de 5 caracteres',
 
 	// I
 	'id_manquant' => 'Faltando identificador',
-	'installation_librairies' => 'Transfer&ecirc;ncia de bibliotecas',
+	'installation_librairies' => 'Transferência de bibliotecas',
 	'installation_liste_libs' => 'Lista de bibliotecas',
-	'installer_dossier_lib' => 'Voc&ecirc; precisa criar um diret&oacute;rio @dir@ na raiz do seu SPIP, com permiss&atilde;o de escrita.',
-	'installer_lib_192' => 'Para instalar uma biblioteca, expanda manualmente o zip e copie o seu conte&uacute;do no diret&oacute;rio @dir@.',
+	'installer_dossier_lib' => 'Você precisa criar um diretório @dir@ na raiz do seu SPIP, com permissão de escrita.',
+	'installer_lib_192' => 'Para instalar uma biblioteca, expanda manualmente o zip e copie o seu conteúdo no diretório @dir@.',
 
 	// L
 	'label_activer' => 'Ativar',
-	'label_obligatoire' => 'Campo obrigat&oacute;rio',
+	'label_obligatoire' => 'Campo obrigatório',
 
 	// N
 	'nom_table_manquant' => 'Nome da tabela faltando',
@@ -50,15 +50,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_de_champs_dans' => 'Nenhum campo encontrado em @nom@',
-	'pas_de_changement' => 'Nenhuma altera&ccedil;&atilde;o em <b>@nom@</b>',
+	'pas_de_changement' => 'Nenhuma alteração em <b>@nom@</b>',
 
 	// R
-	'refus_configuration_administrateur' => 'Apenas os administradores do site est&atilde;o autorizados a modificar estes par&acirc;metros.',
-	'refus_configuration_webmestre' => 'Apenas os webmasters do site est&atilde;o autorizados a modificar estes par&acirc;metros.',
+	'refus_configuration_administrateur' => 'Apenas os administradores do site estão autorizados a modificar estes parâmetros.',
+	'refus_configuration_webmestre' => 'Apenas os webmasters do site estão autorizados a modificar estes parâmetros.',
 	'reset' => 'Apagar',
 
 	// S
-	'supprimer' => 'Voltar aos valores padr&atilde;o'
+	'supprimer' => 'Voltar aos valores padrão'
 );
 
 ?>

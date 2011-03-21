@@ -9,56 +9,56 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer' => 'Effacer', # NEW
-	'bouton_mettre_a_jour' => 'Aduce&#355;i la zi',
+	'bouton_mettre_a_jour' => 'Aduceţi la zi',
 	'bouton_reset' => 'Reset', # NEW
 
 	// C
 	'cfg' => 'CFG',
-	'choisir_module_a_configurer' => 'Alege&#355;i modulul de configurat',
-	'config_enregistree' => '&Icirc;nregistrarea lui <b>@nom@</b> a fost f&#259;cut&#259;',
-	'config_supprimee' => '&#350;tergerea lui <b>@nom@</b> a fost f&#259;cut&#259;',
+	'choisir_module_a_configurer' => 'Alegeţi modulul de configurat',
+	'config_enregistree' => 'Înregistrarea lui <b>@nom@</b> a fost făcută',
+	'config_supprimee' => 'Ştergerea lui <b>@nom@</b> a fost făcută',
 	'configuration_modules' => 'Configurarea modulelor',
 
 	// E
-	'erreur_copie_fichier' => 'Imposibil de copiat fi&#351;ierul @fichier@ &icirc;n loca&#355;ia sa definitiv&#259;',
-	'erreur_enregistrement' => 'O eroare a intervenit &icirc;n timpul &icirc;nregistr&#259;rii lui <b>@nom@</b>',
+	'erreur_copie_fichier' => 'Imposibil de copiat fişierul @fichier@ în locaţia sa definitivă',
+	'erreur_enregistrement' => 'O eroare a intervenit în timpul înregistrării lui <b>@nom@</b>',
 	'erreur_lecture' => 'Imposibil de citit @nom@',
-	'erreur_open_w_fichier' => 'Imposibil de deschis fi&#351;ierul @fichier@ &icirc;n mod scriere',
-	'erreur_suppression' => 'O eroare a intervenit &icirc;n timpul &#351;tergerii lui <b>@nom@</b>',
-	'erreur_suppression_fichier' => 'Imposibil de &#351;ters fi&#351;ierul @fichier@',
-	'erreur_type_id' => 'C&acirc;mpul @champ@ trebuie s&#259; &icirc;nceap&#259; cu o liter&#259; sau underscore (_)',
-	'erreur_type_idnum' => 'C&acirc;mpul @champ@ trebuie s&#259; fie numeric',
-	'erreur_type_pwd' => 'C&acirc;mpul @champ@ trebuie s&#259; aib&#259; mai mult de 5 caractere',
+	'erreur_open_w_fichier' => 'Imposibil de deschis fişierul @fichier@ în mod scriere',
+	'erreur_suppression' => 'O eroare a intervenit în timpul ştergerii lui <b>@nom@</b>',
+	'erreur_suppression_fichier' => 'Imposibil de şters fişierul @fichier@',
+	'erreur_type_id' => 'Câmpul @champ@ trebuie să înceapă cu o literă sau underscore (_)',
+	'erreur_type_idnum' => 'Câmpul @champ@ trebuie să fie numeric',
+	'erreur_type_pwd' => 'Câmpul @champ@ trebuie să aibă mai mult de 5 caractere',
 
 	// I
-	'id_manquant' => 'Identificator care lipse&#351;te',
-	'installation_librairies' => 'Desc&#259;rcarea de libr&#259;rii',
-	'installation_liste_libs' => 'Lista de libr&#259;rii',
-	'installer_dossier_lib' => 'Trebuie s&#259; crea&#355;i un director @dir@ &icirc;n directorul r&#259;d&#259;cin&#259; al site-ului SPIP - cu drepturi de scriere.',
-	'installer_lib_192' => 'Pentru a instala o libr&#259;rie, decomprima&#355;i  zip-ul &#351;i copia&#355;i con&#355;inutul s&#259;u &icirc;n directorul @dir@.',
+	'id_manquant' => 'Identificator care lipseşte',
+	'installation_librairies' => 'Descărcarea de librării',
+	'installation_liste_libs' => 'Lista de librării',
+	'installer_dossier_lib' => 'Trebuie să creaţi un director @dir@ în directorul rădăcină al site-ului SPIP - cu drepturi de scriere.',
+	'installer_lib_192' => 'Pentru a instala o librărie, decomprimaţi  zip-ul şi copiaţi conţinutul său în directorul @dir@.',
 
 	// L
-	'label_activer' => 'Activa&#355;i',
+	'label_activer' => 'Activaţi',
 	'label_obligatoire' => 'Intrare obligatorie',
 
 	// N
-	'nom_table_manquant' => 'Numele de tabel&#259; SQL lipse&#351;te',
+	'nom_table_manquant' => 'Numele de tabelă SQL lipseşte',
 	'nouveau' => 'Nou',
 
 	// O
 	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => 'Nici un c&acirc;mp g&#259;sit &icirc;n @nom@', # MODIF
-	'pas_de_changement' => 'Nici o schimbare &icirc;n <b>@nom@</b>',
+	'pas_de_champs_dans' => 'Nici un câmp găsit în @nom@', # MODIF
+	'pas_de_changement' => 'Nici o schimbare în <b>@nom@</b>',
 
 	// R
-	'refus_configuration_administrateur' => 'Doar administratorii site-ului sunt autoriza&#355;i s&#259; modifice ace&#351;ti parametrii.',
-	'refus_configuration_webmestre' => 'Doar webmaster-ii acestui site sunt autorizati s&#259; modifice ace&#351;ti parametrii.',
-	'reset' => '&#350;terge&#355;i',
+	'refus_configuration_administrateur' => 'Doar administratorii site-ului sunt autorizaţi să modifice aceşti parametrii.',
+	'refus_configuration_webmestre' => 'Doar webmaster-ii acestui site sunt autorizati să modifice aceşti parametrii.',
+	'reset' => 'Ştergeţi',
 
 	// S
-	'supprimer' => '&#350;terge&#355;i' # MODIF
+	'supprimer' => 'Ştergeţi' # MODIF
 );
 
 ?>

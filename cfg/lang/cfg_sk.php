@@ -58,7 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reset' => 'Delete', # MODIF
 
 	// S
-	'supprimer' => '<MODIF>Odstr&aacute;ni&#357;'
+	'supprimer' => '<MODIF>Odstrániť'
 );
 
 ?>
