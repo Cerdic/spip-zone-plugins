@@ -361,7 +361,7 @@ function exec_spiplistes_liste_gerer () {
 	if (empty($titre_message))
 	{
 		$titre_message = $titre;
-		if (spiplistes_pref_lire('opt_completer_titre_nom_site') == 'oui')
+		if (spiplistes_pref_lire_defaut('opt_completer_titre_nom_site', 'oui') == 'oui')
 		{
 			$titre_message .= _T('spiplistes:_de_')
 				. spiplistes_nom_site_texte($lang);

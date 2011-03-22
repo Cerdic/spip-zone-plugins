@@ -198,7 +198,7 @@ function cron_spiplistes_cron ($last_time) {
 			// pour avoir les elements publies depuis cette date
 			if (
 				empty($titre_message)
-				&& (spiplistes_pref_lire('opt_completer_titre_nom_site') == 'oui')
+				&& (spiplistes_pref_lire_defaut('opt_completer_titre_nom_site', 'oui') == 'oui')
 			) {
 					$titre .= _T('spiplistes:_de_')
 						. spiplistes_nom_site_texte($lang);
