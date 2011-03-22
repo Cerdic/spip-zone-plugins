@@ -139,8 +139,13 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'completer_titre_courrier_nom_site' => 'Compl&#233;ter le titre du courrier'
 , 'completer_titre_courrier_nom_site_desc' => 'Le titre des listes est
 	automatiquement compl&#233;t&#233; par le nom du site.'
-, 'Complement_tampon_editeur' => 'Ajouter le tampon Editeur'
-, 'Complement_tampon_editeur_desc' => 'Cette option vous permet de rajouter le tampon de l&#8217;&#233;diteur en fin de courrier. '
+, 'Complement_tampon_editeur' => 'Tampon Editeur'
+, 'Complement_tampon_editeur_desc' => '
+	Le tampon &#233;diteur est un petit bloc texte
+	ajout&#233; automatiquement en fin de courrier au moment de l&#8217;envoi.<br />
+	Ce bloc est un petit patron modifiable, configurable, compos&#233;
+	du nom de l&#39;&#233;diteur, de ses coordonn&#233;es, voire de son logotype.
+	'
 , 'Complement_tampon_editeur_label' => 'Ajouter le tampon Editeur en fin de courrier'
 , 'Envoi_des_courriers' => 'Envoi des courriers'
 , 'log_console' => 'Console'

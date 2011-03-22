@@ -217,11 +217,11 @@ function spiplistes_meleuse ($last_time) {
 				if(strpos($from, '<') === false) {
 					$fromname = spiplistes_nom_site_texte ($lang);
 					$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
-					if ($charset_dest!=$charset_spip){
+					if ($charset_dest!=$charset_spip)
+					{
 						include_spip('inc/charsets');
 						$fromname = unicode2charset(charset2unicode($fromname),$charset_dest);
 					}
-					//$from = $fromname.' <$from>';
 				}
 			}
 			else {
