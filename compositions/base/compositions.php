@@ -22,6 +22,7 @@ function compositions_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_syndic']['field']['composition'] = "varchar(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_articles']['field']['composition_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
 	$tables_principales['spip_rubriques']['field']['composition_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
+	$tables_principales['spip_rubriques']['field']['composition_branche_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
 	$tables_principales['spip_auteurs']['field']['composition_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
 	$tables_principales['spip_breves']['field']['composition_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
 	$tables_principales['spip_mots']['field']['composition_lock'] = "tinyint(1) DEFAULT 0 NOT NULL";
@@ -62,6 +63,10 @@ function compositions_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_syndic ADD composition_lock tinyint(1) DEFAULT 0 NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.3.0",'non');
 		}
+		if (version_compare($current_version,'0.4.0','<')){
+			sql_alter("TABLE spip_rubriques ADD composition_branche_lock tinyint(1) DEFAULT 0 NOT NULL");
+			ecrire_meta($nom_meta_base_version,$current_version="0.4.0",'non');
+		}
 	}
 }
 
@@ -82,6 +87,7 @@ function compositions_vider_tables($nom_meta_base_version) {
 	sql_alter("TABLE spip_syndic DROP composition");
 	sql_alter("TABLE spip_articles DROP composition_lock");
 	sql_alter("TABLE spip_rubriques DROP composition_lock");
+	sql_alter("TABLE spip_rubriques DROP composition_branche_lock");
 	sql_alter("TABLE spip_auteurs DROP composition_lock");
 	sql_alter("TABLE spip_breves DROP composition_lock");
 	sql_alter("TABLE spip_mots DROP composition_lock");

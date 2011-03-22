@@ -255,10 +255,36 @@ function compositions_verrouiller($type, $id, $serveur=''){
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table,$serveur);
 	if (isset($desc['field']['composition_lock']) AND $id){
-			$lock = sql_getfetsel('composition_lock', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
-			return $lock; 
+		$lock = sql_getfetsel('composition_lock', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
+		if ($lock)
+			return true;
+		elseif (isset($desc['field']['id_rubrique'])) {
+			$id_rubrique = sql_getfetsel('id_rubrique', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
+			return compositions_verrou_branche($id_rubrique, $serveur);
+		}
+		else
+			return false;
 	}
 	else return false;
 }
+
+/**
+ * Indique si les objets d'une branche sont verrouillés
+ * @param integer $id_rubrique
+ * @param string $serveur
+ * @return string
+ */
+function compositions_verrou_branche($id_rubrique, $serveur=''){
+	
+	if (intval($id_rubrique) < 1) return false;
+	if($infos_rubrique = sql_fetsel(array('id_parent','composition_branche_lock'),'spip_rubriques','id_rubrique='.intval($id_rubrique),'','','','',$serveur)) {
+		if ($infos_rubrique['composition_branche_lock'])
+			return true;
+		else
+			return compositions_verrou_branche($infos_rubrique['id_parent'],$serveur);
+	}
+	return '';
+}
+
 
 ?>

@@ -6,7 +6,7 @@
 	</auteur>
 	<licence>GPL</licence>
 	<version>2.0.0</version>
-	<version_base>0.3.0</version_base>
+	<version_base>0.4.0</version_base>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -41,5 +41,6 @@ Articles may also be assigned a as home of a section. Fields "id_article_accueil
 	</pipeline>
  	<necessite id='SPIP' version='[2.0.6;]' />
 	<necessite id='spip_bonux' version='[1.8.10;]' />
+	<utilise id='Z' version='[1.7.10;]' />
 	<categorie>outil</categorie>
 </plugin>

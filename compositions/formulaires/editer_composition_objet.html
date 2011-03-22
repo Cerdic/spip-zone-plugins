@@ -1,13 +1,14 @@
 <div class='ajax'>
 	<div class="compo-utilisee">
-		[(#ENV{composition}|oui)<:compositions:composition_utilisee:> <strong>[(#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{nom})]</strong> [((#ENV{composition}))]
+		[(#ENV{composition}|oui)<:compositions:composition_utilisee:> <strong>[(#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{nom}|sinon{#ENV{composition}})]</strong>
 		][(#ENV{composition}|non)
-			[(#ENV{composition_defaut}|oui)<:compositions:composition_heritee:>
-				[(#ENV{composition_defaut}|=={'-'}|oui)<strong><:compositions:composition_de_base:></strong>]
-				[(#ENV{composition_defaut}|!={'-'}|oui)<strong>[(#ENV{_compositions}|table_valeur{''}|table_valeur{nom})]</strong> [((#ENV{composition_defaut}))]]
+			[(#ENV{composition_heritee}|oui)<:compositions:composition_utilisee:>
+				[(#ENV{composition_heritee}|=={'-'}|oui)<strong><:compositions:composition_defaut:></strong>]
+				[(#ENV{composition_heritee}|!={'-'}|oui)<strong>[(#ENV{_compositions}|table_valeur{''}|table_valeur{nom}|sinon{#ENV{composition_heritee}})]</strong>]
+				(<:compositions:composition_heritee:>)
 			]
-			[(#ENV{composition_defaut}|non)<:compositions:composition_de_base:>]
-		][(#ENV{composition_verrouillee}|oui)(<:compositions:composition_verrouillee:>)]
+			[(#ENV{composition_heritee}|non)<:compositions:composition_defaut:>]
+		][(#ENV{composition_verrouillee}|oui)(<em><:compositions:composition_verrouillee:></em>)]
 		<B_heritages><p><:compositions:heritages:> <BOUCLE_heritages(POUR){tableau #ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>.</p></B_heritages>
 	</div>
 
@@ -32,10 +33,11 @@
 			[<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 					[<span class='erreur_message'>(#GET{erreurs})</span>]
-					(#INCLURE{fond=formulaires/inc-selecteur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions}{composition_defaut})
+					(#INCLURE{fond=formulaires/inc-selecteur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions}{composition_heritee})
 			</li>]
-			
-			[(#AUTORISER{webmestre}|oui)
+
+			#SET{lock,''}
+			[(#AUTORISER{webmestre}|et{#ENV{verrou_branche}|non}|et{#CONFIG{compositions/tout_verrouiller}|non}|oui)
 			#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
 			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -44,8 +46,38 @@
 					<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				</div>
-			</li>]
+			</li>
+			[(#ENV{objet}|=={rubrique}|oui)
+			#SET{name,composition_branche_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<div class="choix">
+					<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+				</div>
+			</li>
+			]
+			#SET{lock,'oui'}
+			]
+			[(#ENV{verrou_branche}|oui)
+			<li>
+				<label><:compositions:label_information:></label>
+				<:compositions:label_branche_verrouillee:>
+			</li>
+			]
+			[(#CONFIG{compositions/tout_verrouiller}|oui)
+			<li>
+				<label><:compositions:label_information:></label>
+				<:compositions:label_toutes_verrouilles:>
+			</li>
+			]
 		</ul>
+		[(#GET{lock}|non)
+			<input type="hidden" name="composition_lock" id="composition_lock" value="#ENV{composition_lock}" />
+			[(#ENV{objet}|=={rubrique}|oui)
+				<input type="hidden" name="composition_branche_lock" id="composition_branche_lock" value="#ENV{composition_branche_lock}" />
+			]
+		]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
