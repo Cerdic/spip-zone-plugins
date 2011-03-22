@@ -65,7 +65,7 @@
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
 		[<li [ class="(#GET{erreurs}|oui)erreur"]>
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			(#ENV{destinations}|oui)#EDITEUR_DESTINATIONS{id_compte}
+			(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS{id_dest,montant_dest}
 		</li>]
 		
 	</ul>

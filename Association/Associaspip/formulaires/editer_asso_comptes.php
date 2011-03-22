@@ -18,11 +18,22 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 	$contexte = formulaires_editer_objet_charger('asso_comptes', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
 
 	/* si c'est une nouvelle operation, on charge la date d'aujourd'hui */
-	if ($id_compte=='new') $contexte['date'] = date('Y-m-d');
+	if (!$id_compte) $contexte['date'] = date('Y-m-d');
 
 	// on ajoute les metas de classe_banques, destinations et comptes stricts
 	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
-	if ($GLOBALS['association_metas']['destinations']) $contexte['destinations'] = true;
+	if ($GLOBALS['association_metas']['destinations']) {
+		include_spip('inc/association_comptabilite');
+		$contexte['destinations_on'] = true;
+		$dest_id_montant = association_liste_destinations_associees($id_compte);
+		if (is_array($dest_id_montant)) {
+			$contexte['id_dest'] = array_keys($dest_id_montant);
+			$contexte['montant_dest'] = array_values($dest_id_montant);
+		} else {
+			$contexte['id_dest'] = '';
+			$contexte['montant_dest'] = '';	
+		}
+	}
 	if  ($GLOBALS['association_metas']['comptes_stricts']) {
 		$contexte['montant'] = association_nbrefr($contexte['depense']+$contexte['recette']);
 		unset($contexte['depense']); /* le test dans le formulaire pour l'affichage de montant ou recette et depense et base sur l'existence de cette variable d'environement */
@@ -77,7 +88,6 @@ function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
 }
 
 function formulaires_editer_asso_comptes_traiter($id_compte) {
-	if (!$_POST['destination_id1']) return "Erreur";
 	return formulaires_editer_objet_traiter('asso_comptes', $id_compte, '', '',  generer_url_ecrire('comptes'), '');
 }
 ?>

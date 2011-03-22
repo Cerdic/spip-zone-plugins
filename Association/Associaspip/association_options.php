@@ -160,8 +160,8 @@ $table_des_tables['asso_prets'] = 'asso_prets';
 $table_des_tables['asso_activites'] = 'asso_activites';
 $table_des_tables['asso_membres'] = 'asso_membres';
 $table_des_tables['association_metas'] = 'association_metas';
-$table_Des_tables['asso_destinations'] = 'asso_destinations';
-$table_Des_tables['asso_destinations_op'] = 'asso_destinations_op';
+$table_des_tables['asso_destination'] = 'asso_destination';
+$table_des_tables['asso_destination_op'] = 'asso_destination_op';
 
 // Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
 global $table_titre;

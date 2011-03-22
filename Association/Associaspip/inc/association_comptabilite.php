@@ -53,7 +53,7 @@ function association_toutes_destination_option_list()
 // le troisieme parametre permet de regler une destination par defaut[contient l'id de la destination] - quand $destination est vide
 function association_editeur_destinations($destination, $unique=false, $defaut='')
 {
-	// recupere la liste de toutes les destination dans un code HTML <option value="destinatio_id">destination</option>
+	// recupere la liste de toutes les destination dans un code HTML <option value="destination_id">destination</option>
 	$liste_destination = association_toutes_destination_option_list();
 
 	$res = '';
@@ -70,14 +70,14 @@ function association_editeur_destinations($destination, $unique=false, $defaut='
 			foreach ($destination as $destId => $destMontant) {						
 				$liste_destination_selected = preg_replace('/(value=\''.$destId.'\')/', '$1 selected="selected"', $liste_destination);
 				$res .= '<div class="formo" id="row'.$idIndex.'">';
-				$res .= '<li class="editer_destination_id'.$idIndex.'">'
-				. '<select name="destination_id'.$idIndex.'" id="destination_id'.$idIndex.'" >'
+				$res .= '<li class="editer_id_dest['.$idIndex.']">'
+				. '<select name="id_dest['.$idIndex.']" id="id_dest['.$idIndex.']" >'
 				. $liste_destination_selected
 				. '</select></li>';
 				if ($unique==false) {
-					$res .= '<li class="editer_montant_destination_id'.$idIndex.'"><input name="montant_destination_id'.$idIndex.'" value="'
+					$res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
 					. association_nbrefr($destMontant)
-					. '" type="text" id="montant_destination_id'.$idIndex.'" /></li>'
+					. '" type="text" id="montant_dest['.$idIndex.']" /></li>'
 					. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
 					if ($idIndex>1)	{
 						$res .= "<button class='destButton' type='button' onClick='removeFormField(\"#row".$idIndex."\"); return false;'>-</button>";
@@ -91,13 +91,13 @@ function association_editeur_destinations($destination, $unique=false, $defaut='
 			if ($defaut!='') {
 				$liste_destination = preg_replace('/(value=\''.$defaut.'\')/', '$1 selected="selected"', $liste_destination);
 			}
-			$res .= '<div id="row1" class="formo"><li class="editer_destination_id1"><select name="destination_id1" id="destination_id1" >'
+			$res .= '<div id="row1" class="formo"><li class="editer_id_dest[1]"><select name="id_dest[1]" id="id_dest[1]" >'
 			. $liste_destination
 			. '</select></li>';
 			if ($unique==false) {
-				$res .= '<li class="editer_montant_destination_id1"><input name="montant_destination_id1" value="'
+				$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
 				. ''
-				. '" type="text" id="montant_destination_id1"/></li>'
+				. '" type="text" id="montant_dest[1]"/></li>'
 				. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
 			}
 			$res .= '</div>';
@@ -121,6 +121,7 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 {
 	include_spip('base/association');		
 
+	/* TODO: enlever ces verif quand dons et ventes seront passes en CVT */
 	/* on verifie les valeurs de recette et depense: positif et pas d'entree recette et depense simultanees */
 	if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0))
 	{
@@ -200,18 +201,17 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 function association_verifier_montant_destinations($montant_attendu)
 {
 	$err = '';
-	/* on recupere dans $_POST toutes les keys des entrees commencant par destination_id */
-	$toutesDestinationsPOST = array_filter(array_keys($_POST), "destination_post_filter");
+
+	$toutesDestinations = _request('id_dest');
+	$toutesDestinationsMontants = _request('montant_dest');
 
 	/* on verifie que le montant des destinations correspond au montant global et qu'il n'y a pas deux fois la meme destination (uniquement si on a plusieurs destinations) */
 	$total_destination = 0;
 	$id_inserted = array();
 
-	if (count($toutesDestinationsPOST) > 1) {
-		foreach ($toutesDestinationsPOST as $destination_id)
-		{
-			$id_destination = _request($destination_id);
-				
+	if (count($toutesDestinations) > 1) {
+		foreach ($toutesDestinations as $id => $id_destination)
+		{		
 			/* on verifie qu'on n'a pas deja insere une destination avec cette id */
 			if (!array_key_exists($id_destination,$id_inserted)) {
 				$id_inserted[$id_destination]=0;
@@ -220,19 +220,18 @@ function association_verifier_montant_destinations($montant_attendu)
 				$err = _T('asso:erreur_destination_dupliquee');
 			}
 
-			$total_destination += floatval(preg_replace("/,/",".",_request('montant_'.$destination_id)));
+			$total_destination += floatval(preg_replace("/,/",".",$toutesDestinationsMontants[$id])); /* les montants sont dans un autre tableau aux meme cles */
 		}
 	
 		/* on verifie que la somme des montants des destinations correspond au montant attendu */
 		if ($montant_attendu != $total_destination) {
-			$err .= ' '._T('asso:erreur_montant_destination');
+			$err .= _T('asso:erreur_montant_destination');
 		}
 
 	} else { /* une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base */
-		$toutesDestinationsPOST_val = array_values($toutesDestinationsPOST);
-		$destination_id = $toutesDestinationsPOST_val[0];
-		if ($montant_req=_request('montant_'.$destination_id)) {
-			$montant = floatval(preg_replace("/,/",".",$montant_req));
+		/* quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur */
+		if ($toutesDestinationsMontants[1]) {
+			$montant = floatval(preg_replace("/,/",".",$toutesDestinationsMontants[1]));
 			/* on verifie que le montant indique correspond au montant de l'operation($recette+$depense) dont l'un des deux est egal a 0 */
 			if ($montant_attendu != $montant) {
 				$err = _T('asso:erreur_montant_destination');
@@ -257,21 +256,17 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 		$attribution_montant = "depense";
 	}
 
-	/* on recupere dans $_POST toutes les keys des entrees commencant par destination_id */
-	$toutesDestinationsPOST = array_filter(array_keys($_POST), "destination_post_filter");
-	
-	/* on boucle sur toutes les cles trouvees, les montants ont des noms de champs identiques mais prefixes par montant_ */
+	$toutesDestinations = _request('id_dest');
+	$toutesDestinationsMontants = _request('montant_dest');
 
 	/* TODO: enlever ces verif quand dons et ventes seront passes en CVT */
 	/* on verifie que le montant des destinations correspond au montant global et qu'il n'y a pas deux fois la meme destination (uniquement si on a plusieurs destinations) */
 	$total_destination = 0;
 	$id_inserted = array();
 
-	if (count($toutesDestinationsPOST) > 1) {
-		foreach ($toutesDestinationsPOST as $destination_id)
-		{
-			$id_destination = _request($destination_id);
-				
+	if (count($toutesDestinations) > 1) {
+		foreach ($toutesDestinations as $id => $id_destination)
+		{		
 			/* on verifie qu'on n'a pas deja insere une destination avec cette id */
 			if (!array_key_exists($id_destination,$id_inserted)) {
 				$id_inserted[$id_destination]=0;
@@ -282,7 +277,7 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 				exit;
 			}
 
-			$total_destination += floatval(preg_replace("/,/",".",_request('montant_'.$destination_id)));
+			$total_destination += floatval(preg_replace("/,/",".",$toutesDestinationsMontants[$id])); /* le tableau des montants a des cles indentique a celui des id */
 		}
 	
 		/* on verifie que la somme des montants des destinations correspond au montant de l'operation($recette+$depense) dont l'un des deux est egal a 0 */
@@ -293,20 +288,18 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 		}
 
 		/* Pas d'erreur, on insere dans la base */
-		foreach ($toutesDestinationsPOST as $destination_id)
+		foreach ($toutesDestinations as $id => $id_destination)
 		{
-			$id_destination = _request($destination_id);
-			$montant = floatval(preg_replace("/,/",".",_request('montant_'.$destination_id)));		
+			$montant = floatval(preg_replace("/,/",".",$toutesDestinationsMontants[$id]));	/* le tableau des montants a des cles indentique a celui des id */
 			sql_insertq('spip_asso_destination_op', array(
 			    'id_compte' => $id_compte,
 			    'id_destination' => $id_destination,
 			    $attribution_montant => $montant));
 		}
 	} else { /* une seule destination, le montant peut ne pas avoir ete precise, dans ce cas on entre directement le total recette+depense */
-		$toutesDestinationsPOST_val = array_values($toutesDestinationsPOST);
-		$destination_id = $toutesDestinationsPOST_val[0];
-		if ($montant_req=_request('montant_'.$destination_id)) {
-			$montant = floatval(preg_replace("/,/",".",$montant_req));
+		/* par construction de l'editeur, si il y a une seule destination, l'id dans les tableaux destination_id et montant_destination_id est egal a 1 */
+		if ($toutesDestinationsMontants[1]) {
+			$montant = floatval(preg_replace("/,/",".",$toutesDestinationsMontants[1]));
 			/* TODO: enlever ces verif quand dons et ventes seront passes en CVT */	
 			/* on verifie que le montant indique correspond au montant de l'operation($recette+$depense) dont l'un des deux est egal a 0 */
 			if ($recette+$depense != $montant) {
@@ -318,10 +311,10 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 		else { /* pas de montant indique, on recupere directement celui de l'operation */
 			$montant = $depense+$recette;
 		}
-		$id_destination = _request($destination_id);
+		
 		sql_insertq('spip_asso_destination_op', array(
 		    'id_compte' => $id_compte,
-		    'id_destination' => $id_destination,
+		    'id_destination' => $toutesDestinations[1],
 		    $attribution_montant => $montant));
 	}
 }
