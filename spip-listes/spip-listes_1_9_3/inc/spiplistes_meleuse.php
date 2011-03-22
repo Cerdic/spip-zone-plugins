@@ -102,7 +102,9 @@ function spiplistes_meleuse ($last_time) {
 		$eol = "\n";
 		$eol2 =$eol.$eol;
 		$body_html_debut = '<html>'.$eol2.'<body style="margin:0;padding:0;">'.$eol2;
-		$body_html_fin = $eol2.'</body></html>';						
+		$body_html_fin = $eol2.'</body></html>';
+		$charset_spip = $GLOBALS['meta']['charset'];
+		$charset_dest = $GLOBALS['meta']['spiplistes_charset_envoi'];
 
 		spiplistes_log($prefix_log.$nb_etiquettes.' job(s), distribution...');
 		
@@ -113,8 +115,6 @@ function spiplistes_meleuse ($last_time) {
 		if($simuler_envoi) {
 			spiplistes_log($prefix_log.'SIMULATION MODE !!!');
 		}
-
-		$urlsite = $GLOBALS['meta']['adresse_site'];
 
 		// prepare le tampon editeur
 		if($opt_ajout_tampon_editeur == 'oui')
@@ -137,11 +137,13 @@ function spiplistes_meleuse ($last_time) {
 				  $sql_courrier_select
 				, 'id_courrier='.sql_quote($id_courrier)
 			);
-			spiplistes_log($prefix_log.'etiquette en cours pour id_courrier #'.$id_courrier);
+			spiplistes_debug_log ($prefix_log.'etiquette en cours pour id_courrier #'.$id_courrier);
 		} else {
 			// un vieux bug dans une ancienne version, eradique depuis (j'espere ;-)
 			//spiplistes_log($prefix_log."premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement !");
-			spiplistes_log(_T('erreur_queue_supprimer_courrier', array('s' => $prefix_log)));
+			spiplistes_log(_T('spiplistes:erreur_queue_supprimer_courrier'
+							  , array('s' => $prefix_log))
+						   );
 		}
 		
 		// boucle (sur LIMIT 1) pour pouvoir sortir par break si erreur
@@ -153,13 +155,9 @@ function spiplistes_meleuse ($last_time) {
 			foreach(array('id_courrier','id_liste','total_abonnes') as $key) {
 				$$key = intval($$key);
 			}
-		//spiplistes_debug_log($titre);
 			// objet (subject) ne peut pas être en html ?!
 			// sauf pour le webmail (et encore)
 			$objet_html = filtrer_entites(typo(spiplistes_calculer_balise_titre(extraire_multi($titre))));
-			$titre = spiplistes_texte_2_charset ($titre
-												 , $GLOBALS['meta']['spiplistes_charset_envoi']
-												 );
 			$page_html = stripslashes($texte);
 			$message_texte = stripslashes($message_texte);
 			
@@ -219,9 +217,9 @@ function spiplistes_meleuse ($last_time) {
 				if(strpos($from, '<') === false) {
 					$fromname = spiplistes_nom_site_texte ($lang);
 					//$fromname = extraire_multi($GLOBALS['meta']['nom_site']);
-					//if ($GLOBALS['meta']['spiplistes_charset_envoi']!=$GLOBALS['meta']['charset']){
+					//if ($charset_dest!=$charset_spip){
 					//	include_spip('inc/charsets');
-					//	$fromname = unicode2charset(charset2unicode($fromname),$GLOBALS['meta']['spiplistes_charset_envoi']);
+					//	$fromname = unicode2charset(charset2unicode($fromname),$charset_dest);
 					//}
 					//$from = $fromname.' <$from>';
 				}
@@ -240,7 +238,6 @@ function spiplistes_meleuse ($last_time) {
 			
 			////////////////////////////////////
 			// Prepare la version texte
-			//$objet_texte = spiplistes_courrier_version_texte($objet_html);
 			$objet_texte = $titre;
 			$page_texte = ($message_texte !='')
 				? $message_texte
@@ -268,7 +265,7 @@ function spiplistes_meleuse ($last_time) {
 			$pied_rappel_texte = _T('spiplistes:abonnement_mail_text');
 			
 			// transcrire le contenu
-			if($GLOBALS['meta']['spiplistes_charset_envoi'] != $GLOBALS['meta']['charset']){
+			if($charset_dest != $charset_spip){
 				include_spip('inc/charsets');
 				foreach(array(
 					  'objet_html', 'objet_texte'
@@ -280,7 +277,7 @@ function spiplistes_meleuse ($last_time) {
 					if(!empty($$key)) {
 						$$key = spiplistes_translate_2_charset(
 							$$key
-							, $GLOBALS['meta']['spiplistes_charset_envoi']
+							, $charset_dest
 							, (strpos($key, 'texte') === false)
 							);
 					}
@@ -296,7 +293,8 @@ function spiplistes_meleuse ($last_time) {
 			}
 			
 			$email_a_envoyer = array();
-			$email_a_envoyer['texte'] = new phpMail('', $objet_texte, '', $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
+			$email_a_envoyer['texte'] = new phpMail('', $objet_texte, ''
+													, $page_texte, $charset_dest);
 			$email_a_envoyer['texte']->From = $from ; 
 			if($fromname) $email_a_envoyer['texte']->FromName = $fromname ;
 			// Errors-To:,    Non-standard @see: http://www.ietf.org/rfc/rfc2076.txt
@@ -305,12 +303,12 @@ function spiplistes_meleuse ($last_time) {
 			$email_a_envoyer['texte']->AddCustomHeader('Return-Path: '.$return_path); 
 			$email_a_envoyer['texte']->SMTPKeepAlive = true;
 
-			//$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $GLOBALS['meta']['spiplistes_charset_envoi']);
+			//$email_a_envoyer['html'] = new phpMail('', $objet_html, $page_html, $page_texte, $charset_dest);
 			$email_a_envoyer['html'] = new phpMail(''
-												   , $titre
+												   , $objet_html
 												   , $page_html
 												   , $page_texte
-												   , $GLOBALS['meta']['spiplistes_charset_envoi']
+												   , $charset_dest
 												   );
 			$email_a_envoyer['html']->From = $from ; 
 			if($fromname) {
@@ -523,7 +521,9 @@ function spiplistes_meleuse ($last_time) {
 			}
 			else {
 				//aucun destinataire connu pour ce message
-				spiplistes_debug_log($prefix_log._T('spiplistes:erreur_sans_destinataire')."---"._T('spiplistes:envoi_annule'));
+				spiplistes_debug_log($prefix_log._T('spiplistes:erreur_sans_destinataire')
+									 . '---' . _T('spiplistes:envoi_annule')
+									 );
 				spiplistes_courrier_statut_modifier($id_courrier, _SPIPLISTES_COURRIER_STATUT_IGNORE);
 				spiplistes_courrier_supprimer_queue_envois('id_courrier', $id_courrier);
 				$str_log .= ' END #'.$id_courrier;
@@ -633,9 +633,12 @@ function spiplistes_personnaliser_courrier_urls ($txt, $url) {
 	return($txt);
 }
 
-//CP-20080608 :: personnalisation du courrier
-// recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
-// (toutes les cles presentes dans la table *_auteur sont utilisables)
+/**
+ * CP-20080608 :: personnalisation du courrier
+ * recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
+ * (toutes les cles presentes dans la table *_auteur sont utilisables)
+ * @return array
+ */
 function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur, $format_abo) {
 
 	$result_html = $result_texte = "";
@@ -671,7 +674,7 @@ function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur,
 }
 
 
-/*
+/**
  * Repasse un courrier en mode redac (en general, un test d'envoi)
  * @return 
  * @param $id_courrier int
@@ -689,8 +692,9 @@ function spiplistes_courriers_statut_redac ($id_courrier) {
 	return(true);
 }
 
-/*
+/**
  * petite ligne pour trace dans le log
+ * @return string
 */
 function spiplistes_trace_compteur ($id, $sent, $html, $text, $none, $echec, $type='TOTAL')
 {

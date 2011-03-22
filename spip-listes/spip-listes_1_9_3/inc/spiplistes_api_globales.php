@@ -395,53 +395,59 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = fal
 		$texte = spiplistes_html_entity_decode ($texte, $charset);
 	}
 	if($charset != 'utf-8') {
-		$remplacements = array(
-			'&#8217;' => "'"	// quote
-			, '&#8220;' => '"' // guillemets
-			, '&#8221;' => '"' // guillemets
-			)
-			;
-		if(!$is_html) {
-			$remplacements = array_merge(
-				$remplacements
-				, array(
-							// Latin Extended
-					  '&#255;' => chr(255) // 'ÿ' // yuml inconnu php ?
-					, '&#338;' => 'OE'  // OElig
-					, '&#339;' => 'oe'  // oelig
-					, '&#352;' => 'S'  // Scaron
-					, '&#353;' => 's'  // scaron
-					, '&#376;' => 'Y'  // Yuml
-						// General Punctuation
-					, '&#8194;' => ' ' // ensp
-					, '&#8195;' => ' ' // emsp
-					, '&#8201;' => ' ' // thinsp
-					, '&#8204;' => ' ' // zwnj
-					, '&#8205;' => ' ' // zwj
-					, '&#8206;' => ' ' // lrm
-					, '&#8207;' => ' ' // rlm
-					, '&#8211;' => '-' // ndash
-					, '&#8212;' => '--' // mdash
-					, '&#39;' => "'" // apos
-					, '&#8216;' => "'" // lsquo
-					, '&#8217;' => "'" // rsquo
-					, '&#8218;' => "'" // sbquo
-					, '&#8220;' => '"' // ldquo
-					, '&#8221;' => '"' // rdquo
-					, '&#8222;' => '"' // bdquo
-					, '&#8224;' => '+' // dagger
-					, '&#8225;' => '++' // Dagger
-					, '&#8240;' => '0/00' // permil
-					, '&#8249;' => '.' // lsaquo
-					, '&#8250;' => '.' // rsaquo
-						// sans oublier
-					, '&#8364;' => 'euros'  // euro
-				)
-			);
-		}
-		$texte = strtr($texte, $remplacements);
+		$texte = spiplistes_iso2ascii ($texte, $is_html);		
 	}
 	return($texte);
+}
+
+function spiplistes_iso2ascii ($texte, $is_html = false) {
+	$remplacements = array(
+		'&#8217;' => "'"	// quote
+		, '&#8220;' => '"' // guillemets
+		, '&#8221;' => '"' // guillemets
+		)
+		;
+	if(!$is_html) {
+		$remplacements = array_merge(
+			$remplacements
+			, array(
+						// Latin Extended
+				  '&#255;' => chr(255) // 'ÿ' // yuml inconnu php ?
+				, '&#338;' => 'OE'  // OElig
+				, '&#339;' => 'oe'  // oelig
+				, '&#352;' => 'S'  // Scaron
+				, '&#353;' => 's'  // scaron
+				, '&#376;' => 'Y'  // Yuml
+					// General Punctuation
+				, '&#8194;' => ' ' // ensp
+				, '&#8195;' => ' ' // emsp
+				, '&#8201;' => ' ' // thinsp
+				, '&#8204;' => ' ' // zwnj
+				, '&#8205;' => ' ' // zwj
+				, '&#8206;' => ' ' // lrm
+				, '&#8207;' => ' ' // rlm
+				, '&#8211;' => '-' // ndash
+				, '&#8212;' => '--' // mdash
+				, '&#39;' => "'" // apos
+				, '&#8216;' => "'" // lsquo
+				, '&#8217;' => "'" // rsquo
+				, '&#8218;' => "'" // sbquo
+				, '&#8220;' => '"' // ldquo
+				, '&#8221;' => '"' // rdquo
+				, '&#8222;' => '"' // bdquo
+				, '&#8224;' => '+' // dagger
+				, '&#8225;' => '++' // Dagger
+				, '&#8240;' => '0/00' // permil
+				, '&#8249;' => '.' // lsaquo
+				, '&#8250;' => '.' // rsaquo
+					// sans oublier
+				, '&#8364;' => 'euros'  // euro
+			)
+		);
+	}
+	$texte = strtr($texte, $remplacements);
+	
+	return ($texte);
 }
 
 /**
