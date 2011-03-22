@@ -86,4 +86,61 @@ function icone_auteur_12($statut){
 	return _DIR_IMG_PACK . 'visit-12.gif';
 }
 
+
+
+
+
+/**
+ * Retroune les identifiants des zones a laquelle appartient une rubrique
+ * et ses rubriques parentes
+ * (quelquesoit la visibilité de la zone (publique, prive, les 2 ou aucun)
+ *
+ * @param int $id_rubrique
+ * @return array identifiants des zones
+**/
+function accesrestreint_zones_rubrique_et_hierarchie($id_rubrique) {
+	static $zones = array();
+	
+	if (!$id_rubrique) {
+		return array();
+	}
+	
+	if (isset($zones[$id_rubrique])) {
+		return $zones[$id_rubrique];
+	}
+
+	// on teste notre rubrique deja
+	$idz = accesrestreint_zones_rubrique($id_rubrique);
+	
+	// on parcours toute l'arborescence jusqu'a la racine en testant les zones
+	// pour completer les zones deja trouvees
+	if ($id_parent = sql_getfetsel('id_parent', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique))) {
+		// on teste notre parent
+		$idz_parent = accesrestreint_zones_rubrique_et_hierarchie($id_parent);
+		$idz = array_merge($idz, $idz_parent);
+	}
+
+	// on renvoie la rubrique
+	return $zones[$id_rubrique] = $idz;
+}
+
+
+/**
+ * Retroune les identifiants des zones a laquelle appartient une rubrique
+ * (quelquesoit la visibilité de la zone (publique, prive, les 2 ou aucun)
+ * 
+ * @param int $id_rubrique
+ * @return array identifiants des zones
+**/
+function accesrestreint_zones_rubrique($id_rubrique) {
+	// on teste notre rubrique deja
+	$idz = sql_allfetsel('id_zone', 'spip_zones_rubriques', 'id_rubrique='. intval($id_rubrique));
+	if (is_array($idz)) {
+		$idz = array_map('reset', $idz);
+		return $idz;
+	}
+	return array();
+}
+
+
 ?>
