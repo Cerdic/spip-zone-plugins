@@ -321,7 +321,13 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'statut_interne' => 'Priv&#233;'
 , 'statut_publique' => 'Publique'
 , 'adresse' => 'Indiquez ici l&#8217;adresse &#224; utiliser pour les r&#233;ponses de mails 
-	(&#224; d&#233;faut, l&#8217;adresse du webmestre sera utilis&#233;e comme adresse de r&#233;ponse) :'
+	(&#224; d&#233;faut, l&#8217;adresse du webmestre sera utilis&#233;e comme adresse de r&#233;ponse).
+	<br /><br />
+	L&#8217;adresse peut &#234;tre de la forme :
+	<ul style="margin-top:0">
+	<li>webmaster@example.org</li>
+	<li>Nom &#60;webmaster@example.org&#62;</li>
+	</ul>'
 , 'Ce_courrier_ne_sera_envoye_qu_une_fois' => 'Ce courrier ne sera envoy&#233; qu&#8217;une fois.'
 , 'adresse_de_reponse' => 'Adresse de r&#233;ponse'
 , 'adresse_mail_retour' => 'Adresse email du gestionnaire de la liste (reply-to)'

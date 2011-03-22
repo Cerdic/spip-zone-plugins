@@ -553,7 +553,7 @@ function exec_spiplistes_liste_gerer () {
 		: $GLOBALS['meta']['email_webmaster']
 		;
 	$email_envoi = ($m = email_valide($email_envoi))
-		? $m
+		? $email_envoi
 		: $email_defaut
 		;
 
@@ -654,14 +654,18 @@ function exec_spiplistes_liste_gerer () {
 		////////////////////////////
 		// Formulaire adresse email pour le reply-to
 	$page_result .= ''
-		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png", true, '', _T('spiplistes:adresse_de_reponse').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "replyto"))
+		. debut_cadre_relief(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply_to-24.png"
+							, true
+							, ''
+							, _T('spiplistes:adresse_de_reponse').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE
+								, "replyto")
+							)
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=$id_liste"), true)
 		. "<p class='verdana2'>\n"
 		. _T('spiplistes:adresse_mail_retour').":<br />\n"
 		.	(
 			($flag_editable)
-			?	""
-				. ""._T('spiplistes:adresse')."</p>\n"
+			? _T('spiplistes:adresse')."</p>\n"
 				. "<div style='text-align:center'>\n"
 				. "<input type='text' name='email_envoi' value=\"".$email_envoi."\" size='40' class='fondl' /></div>\n"
 				. spiplistes_form_bouton_valider('btn_modifier_replyto')
