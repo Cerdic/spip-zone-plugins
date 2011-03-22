@@ -1,5 +1,6 @@
 [(#SET{id_rubrique, #ENV{id_rubrique}|intval})]
-[(#SET{niveau, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
+[(#SET{niveau_max_txt, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
+[(#SET{niveau_max, #ENV{niveau}|intval|?{#ENV{niveau},1000}})]
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
 
@@ -7,10 +8,10 @@
 	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
 	<div class="titre">#GET{titre}</div>
 	<div class="infos">
-		[(#GET{niveau}|=={infini}|non)
-			<:menus:entree_sur_n_niveaux{n=#GET{niveau}}:>
+		[(#GET{niveau_max_txt}|=={infini}|non)
+			<:menus:entree_sur_n_niveaux{n=#GET{niveau_max_txt}}:>
 		]
-		[(#GET{niveau}|=={infini}|oui)
+		[(#GET{niveau_max_txt}|=={infini}|oui)
 			<:menus:entree_infini:>
 		]
 		<br /><:menus:info_tri:> [(#GET{tri_num}) <:menus:info_tri_num:>][(#GET{tri_num}|et{GET{tri_alpha}}), ][(#GET{tri_alpha}) <:menus:info_tri_alpha:>]
@@ -18,17 +19,17 @@
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
-		#SET{niveau_actuel,1}
+		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
-			<BOUCLE_test_niveau(CONDITION){si #GET{niveau_actuel}|!={#GET{niveau}}}>
+			<BOUCLE_test_niveau(CONDITION){si #GET{niveau_max}|>={#GET{niveau_actuel}}}>
 			<B_sous_rubriques>
 			<ul class="menu-liste">
 				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 				#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
 				<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 					<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
-					<BOUCLE_test_niveau2(CONDITION){si #GET{niveau}|>={#GET{niveau_actuel}}}>
+					<BOUCLE_test_niveau2(CONDITION){si #GET{niveau_max}|>={#GET{niveau_actuel}}}>
 					<BOUCLE_sous_sous(BOUCLE_sous_rubriques)></BOUCLE_sous_sous>
 					</BOUCLE_test_niveau2>
 				</li>
