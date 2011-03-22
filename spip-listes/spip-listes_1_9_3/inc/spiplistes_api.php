@@ -1022,7 +1022,8 @@ function spiplistes_tampon_assembler_patron () {
 	if(!empty($path_patron))
 	{
 		foreach(explode(",", _SPIPLISTES_TAMPON_CLES) as $key) {
-			$contexte[$key] = spiplistes_pref_lire($key);
+			$s = spiplistes_pref_lire($key);
+			$contexte[$key] = (!empty($s) && ($s != 'non')) ? $s : '';
 		}
 		$result = spiplistes_assembler_patron(_SPIPLISTES_PATRONS_TAMPON_DIR . $path_patron, $contexte);
 	}
