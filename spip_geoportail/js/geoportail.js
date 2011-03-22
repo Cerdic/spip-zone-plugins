@@ -454,9 +454,11 @@ jQuery.geoportail =
 			l = new OpenLayers.Layer.GXT(name, url);
 			map.getMap().addLayer(l);
 		}
-		else l = map.getMap().addLayer(type, name, url, 
-				{ opacity: 1, visibility: true, originators: jQuery.geoportail.originators}, 
+		else 
+		{	l = map.getMap().addLayer(type, name, url, 
+				{ preFeatureInsert:Geoportal.Popup.setPointerCursorForFeature, opacity: 1, visibility: true, originators: jQuery.geoportail.originators}, 
 				{ formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
+		}
 		if (l) 
 		{	// Recherche des styles
 			setStyle(l.styleMap.styles['default'], 'geoportailDefaultStyle');
