@@ -145,6 +145,7 @@ function step_actualiser_zone($id){
 	if (!$z = sql_fetsel(array('id_zone', 'adresse'), 'spip_zones_plugins', 'adresse=' . sql_quote($id) . ' OR id_zone='. sql_quote($id)) ){
 		return;
 	}
+
 	
 	include_spip('inc/distant');
 	if (!$xml = recuperer_page($z['adresse'])) {
@@ -153,7 +154,7 @@ function step_actualiser_zone($id){
 
 	// lire les donnees d'une zone de plugins
 	$paquets = step_xml_parse_zone($xml);
-	
+
 	if (count($paquets)){
 		// nom et description a definir dans le fichier xml de la source ?
 		sql_updateq('spip_zones_plugins', array(

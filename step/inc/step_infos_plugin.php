@@ -40,8 +40,9 @@ function step_get_infos_plugin($constante, $p, $actifs, $recents) {
 
 // parse un fichier de source dont l'url est donnee
 // ce fichier est un fichier XML contenant <zone><zone_elt/></zone>
-function step_xml_parse_zone($url){
+function step_xml_parse_zone($xml){
 
+	
 	// enlever la balise doctype qui provoque une erreur "balise non fermee"
 	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
 	if (!is_array($arbre = spip_xml_parse($xml)) OR !is_array($arbre = $arbre['archives'][0])){
