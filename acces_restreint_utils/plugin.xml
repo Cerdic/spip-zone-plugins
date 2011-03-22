@@ -12,7 +12,7 @@
 		<inclure>ar_utils.php</inclure>
 	</pipeline>
 
-	<necessite id="accesrestreint" version="[3.0;]" />
+	<necessite id="accesrestreint" version="[3.0.3;]" />
 	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id="saisies" version="[1.5.0;]" />
 	<necessite id="afficher_objets" version="[1.0.0;]" />

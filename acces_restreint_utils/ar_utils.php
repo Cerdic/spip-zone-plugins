@@ -15,18 +15,10 @@ function ar_utils_affiche_gauche($flux) {
 	if ($exec=='naviguer'){
 	
 		// on récupère l'id_rubrique
-		$id_rubrique = $flux['args']['id_rubrique'];
-		$afficher = true;
+		# $id_rubrique = $flux['args']['id_rubrique'];	
 
-		if ($afficher) {
-			$contexte = array();
-			foreach($_GET as $key=>$val)
-				$contexte[$key] = $val;
-				
-			// on charge la petite boite
-			$acces = recuperer_fond('prive/contenu/acces_rubrique',$contexte);
-			$flux['data'] .= $acces;
-		}
+		// on charge la petite boite
+		$flux['data'] .= recuperer_fond('prive/contenu/acces_rubrique', $_GET);
 	}
 
 	return $flux;
@@ -68,5 +60,7 @@ function proteger_rubrique($id_rubrique,$les_auteurs='',$la_zone=''){
 	// Renvoie le numéro de la nouvelle zone
 	return $la_zone;
 }
+
+
 
 ?>
