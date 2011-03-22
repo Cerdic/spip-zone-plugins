@@ -5,7 +5,7 @@
 ]<B_tags>
 
 
-<ul class="nuage menu-liste">
+<ul class="nuage">
 <BOUCLE_tags(MOTS){id_groupe=#ENV{id_groupe}}{compteur articles}{par num titre,titre}>
     [(#REM) définir les mot exposés]
     #SET{expose,''}
@@ -16,7 +16,7 @@
         #SET{expose,' '}   
     ]
 
- <li class="menu-entree [(#GET{expose}|oui) expose]">
+ <li[(#GET{expose}|oui) class="expose"]>
   <span class="frequence">
     [(#COMPTEUR{articles})/#GET{max}]
   </span>    

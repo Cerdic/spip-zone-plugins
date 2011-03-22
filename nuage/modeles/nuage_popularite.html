@@ -9,7 +9,7 @@
         ]
 </BOUCLE_maxmot>
 
-<ul class="nuage menu-liste">
+<ul class="nuage">
 <BOUCLE_tags(MOTS){id_groupe==^((#ENV{id_groupe,.*}))$}{par num titre,titre}>
     [(#REM) définir les mot exposés]
     #SET{expose,''}
@@ -25,7 +25,7 @@
         [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
     </BOUCLE_popularite>
 
- <li class="menu-entree [(#GET{expose}|oui) expose]">
+ <li[(#GET{expose}|oui) class="expose"]>
   <span class="frequence">
     [(#GET{pop})/#GET{max}]
   </span>
