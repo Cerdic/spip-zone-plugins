@@ -14,7 +14,6 @@
  */
 function compositions_declarer_tables_principales($tables_principales){
 	
-	$tables_principales['spip_rubriques']['field']['id_article_accueil'] = "bigint(21) DEFAULT '0' NOT NULL";
 	$tables_principales['spip_articles']['field']['composition'] = "varchar(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_rubriques']['field']['composition'] = "varchar(255) DEFAULT '' NOT NULL";
 	$tables_principales['spip_auteurs']['field']['composition'] = "varchar(255) DEFAULT '' NOT NULL";
@@ -45,7 +44,6 @@ function compositions_upgrade($nom_meta_base_version,$version_cible){
 			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_articles ADD composition varchar(255) DEFAULT '' NOT NULL");
 			sql_alter("TABLE spip_rubriques ADD composition varchar(255) DEFAULT '' NOT NULL");
-			sql_alter("TABLE spip_rubriques ADD id_article_accueil bigint(21) DEFAULT '0' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.1",'non');
 		}
 		if (version_compare($current_version,'0.2.0','<')){
@@ -76,7 +74,6 @@ function compositions_upgrade($nom_meta_base_version,$version_cible){
 function compositions_vider_tables($nom_meta_base_version) {
 	include_spip('inc/meta');
 	include_spip('base/abstract_sql');
-	sql_alter("TABLE spip_rubriques DROP id_article_accueil");
 	sql_alter("TABLE spip_articles DROP composition");
 	sql_alter("TABLE spip_rubriques DROP composition");
 	sql_alter("TABLE spip_auteurs DROP composition");

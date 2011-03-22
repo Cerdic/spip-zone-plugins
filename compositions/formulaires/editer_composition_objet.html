@@ -1,12 +1,15 @@
 <div class='ajax'>
 	<div class="compo-utilisee">
-		[(#ENV{composition}|oui)
-		<:compositions:composition_utilisee:> <strong>[(#ENV{composition})]</strong> [(#ENV{composition_lock}|oui)(<:compositions:composition_verrouillee:>)]
+		[(#ENV{composition}|oui)<:compositions:composition_utilisee:> <strong>[(#ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{nom})]</strong> [((#ENV{composition}))]
 		][(#ENV{composition}|non)
-		<:compositions:label_pas_de_composition:>
-		]
+			[(#ENV{composition_defaut}|oui)<:compositions:composition_heritee:>
+				[(#ENV{composition_defaut}|=={'-'}|oui)<strong><:compositions:composition_de_base:></strong>]
+				[(#ENV{composition_defaut}|!={'-'}|oui)<strong>[(#ENV{_compositions}|table_valeur{''}|table_valeur{nom})]</strong> [((#ENV{composition_defaut}))]]
+			]
+			[(#ENV{composition_defaut}|non)<:compositions:composition_de_base:>]
+		][(#ENV{composition_verrouillee}|oui)(<:compositions:composition_verrouillee:>)]
+		<B_heritages><p><:compositions:heritages:> <BOUCLE_heritages(POUR){tableau #ENV{_compositions}|table_valeur{#ENV{composition}}|table_valeur{branche}}{', '}>#CLE (#VALEUR)</BOUCLE_heritages>.</p></B_heritages>
 	</div>
-	<INCLURE{fond=formulaires/inc-compositions,type=#ENV{objet},id=#ENV{id_objet},id_article_accueil,ajax}>
 
 [<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}" id="formulaire_#FORM-#ENV{id,nouveau}"[(#ENV{_hide})style="display:none;"]>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -16,42 +19,36 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-	  <ul>
-	  	#SET{fl,compositions}
-	  	[(#ENV{id_article_accueil,''}|strlen|oui)
-	  	#SET{name,id_article_accueil}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-	   	[<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				(#INCLURE{fond=formulaires/inc-selecteur_accueil}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}})]
-	    </li>]
-			#SET{lockable,''}
-	  	#SET{name,composition}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-	  	[(#AUTORISER{webmestre}|ou{#ENV{composition_lock}|non}|oui)
-	    [<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
-				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				(#INCLURE{fond=formulaires/inc-selecteur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions})
-	    </li>#SET{lockable,' '}]
-			][(#AUTORISER{webmestre}|non|et{#ENV{composition_lock}}|oui)
-	    [<li class="informer_composition">
-				(#INCLURE{fond=formulaires/inc-informeur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions})
-				<em><:compositions:composition_verrouillee:></em>
-	    </li>]]
-	  	[(#AUTORISER{webmestre}|oui|et{#GET{lockable}})
-	  	#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
-	    <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+		<ul>
+			#SET{fl,compositions}
+			[(#ENV{id_article_accueil,''}|strlen|oui)
+			#SET{name,id_article_accueil}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			[<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					(#INCLURE{fond=formulaires/inc-selecteur_accueil}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}})]
+			</li>]
+			#SET{name,composition}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			[<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+				<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					(#INCLURE{fond=formulaires/inc-selecteur_composition}{name=#GET{name}}{id=#GET{name}}{id_rubrique}{selected=#ENV{#GET{name}}}{_compositions}{composition_defaut})
+			</li>]
+			
+			[(#AUTORISER{webmestre}|oui)
+			#SET{name,composition_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}
+			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<label><:compositions:label_composition_explication:></label>
 				<div class="choix">
-				<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
-	    	<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
+					<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
+					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				</div>
-	    </li>]
-	  </ul>
-	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
-	  <!--extra-->
-	  <p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+			</li>]
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 </div>]
 </div>

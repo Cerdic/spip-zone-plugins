@@ -33,15 +33,8 @@ function compositions_autoriser(){}
 function autoriser_styliser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
 	if (!autoriser('modifier',$type,$id,$qui,$opt))
 		return false;
-	if (!isset($opt['row'])){
-		$table_objet_sql = table_objet_sql($type);
-		$id_table_objet = id_table_objet($type);
-		$opt['row'] = sql_fetsel('composition,composition_lock',$table_objet_sql,"$id_table_objet=".intval($id));
-	}
-/*	if ($opt['row']['composition_lock']
-		AND !autoriser('webmestre')
-	)
-		return false;*/
+	if (compositions_verrouiller($type, $id) AND !autoriser('webmestre'))
+		return false;
 	return true;
 }
 
@@ -105,12 +98,16 @@ function compositions_affiche_milieu($flux){
 		$type = $GLOBALS['compositions_exec'][$exec];
 		$_id = id_table_objet($type);
 		if ($id = $flux['args'][$_id]) {
-			$deplie = false;
-			$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
-			$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
-			$flux['data'] .= debut_cadre('e', chemin('compositions-24.png','images/'),'',$bouton, '', '', true);
-			$flux['data'] .= recuperer_fond('prive/editer/compositions', array_merge($_GET, array('type'=>$type,'id'=>$id)));
-			$flux['data'] .= fin_cadre();
+			$config = unserialize($GLOBALS['meta']['compositions']);
+			$aut = autoriser('styliser',$type,$id);
+			if ($config['masquer_formulaire'] != 'oui' OR $aut) {
+				$deplie = $aut ? false : -1;
+				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
+				$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
+				$flux['data'] .= debut_cadre('e', chemin('compositions-24.png','images/'),'',$bouton, '', '', true);
+				$flux['data'] .= recuperer_fond('prive/editer/compositions', array_merge($_GET, array('type'=>$type,'id'=>$id)));
+				$flux['data'] .= fin_cadre();
+			}
 		}
 	}
 

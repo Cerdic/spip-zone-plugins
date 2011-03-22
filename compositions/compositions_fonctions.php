@@ -27,21 +27,6 @@ function compositions_chemin(){
 	return $config_chemin;
 }
 
-
-/**
- * Tester si les reglages permettent d'utiliser les articles d'accueil ou non
- *
- * @return string
- */
-function compositions_utiliser_article_accueil(){
-		$config_accueil = true;
-		if (isset($GLOBALS['meta']['compositions'])){
-			$config = unserialize($GLOBALS['meta']['compositions']);
-			$config_accueil = $config['utiliser_article_accueil'] != 'non';
-		}
-		return $config_accueil?' ':'';
-}
-
 /**
  * Tester si la stylisation auto est activee
  * @return <type>
@@ -187,22 +172,22 @@ function compositions_determiner($type, $id, $serveur=''){
 	$table_sql = table_objet_sql($type);
 	$_id_table = id_table_objet($type);
 
+	$retour = '';
+
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table,$serveur);
 	if (isset($desc['field']['composition']) AND $id){
 			$composition = sql_getfetsel('composition', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
-			if ($composition == '-')
-				return '';
-			elseif ($composition != '')
-				return $composition;
+			if ($composition != '')
+				$retour = $composition;
 			elseif (isset($desc['field']['id_rubrique'])) {
 				$_id_rubrique = ($type == 'rubrique') ? 'id_parent' : 'id_rubrique';
 				$id_rubrique = sql_getfetsel($_id_rubrique,$table_sql,"$_id_table=".intval($id),'','','','',$serveur);
-				return compositions_heriter($type, $id_rubrique, $serveur);
+				$retour = compositions_heriter($type, $id_rubrique, $serveur);
 			} else
-				return '';
+				$retour = '';
 	}
-	else return '';
+	return ($retour == '-') ? '' : $retour;
 }
 
 /**
@@ -224,7 +209,7 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 			AND isset($infos['rubrique'][$infos_rubrique['composition']]['branche'])
 			AND isset($infos['rubrique'][$infos_rubrique['composition']]['branche'][$type])
 			)
-			return ($infos['rubrique'][$infos_rubrique['composition']]['branche'][$type]=='-') ? '' : $infos['rubrique'][$infos_rubrique['composition']]['branche'][$type];
+			return $infos['rubrique'][$infos_rubrique['composition']]['branche'][$type];
 		else
 			return compositions_heriter($type, $infos_rubrique['id_parent'],$serveur);
 	}
@@ -245,6 +230,31 @@ function balise_COMPOSITION_dist($p) {
 	$objet = $p->boucles[$p->id_boucle]->id_table;
 	$p->code = "compositions_determiner(objet_type('$objet'), $id_objet)";
 	return $p;
+}
+
+
+/**
+ * Indique si la composition d'un objet est verrouillée ou non,
+ * auquel cas, seul le webmaster peut la modifier
+ *
+ * @param string $type
+ * @param integer $id
+ * @param string $serveur
+ * @return string
+ */
+function compositions_verrouiller($type, $id, $serveur=''){
+	include_spip('base/abstract_sql');
+	$table = table_objet($type);
+	$table_sql = table_objet_sql($type);
+	$_id_table = id_table_objet($type);
+
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($table,$serveur);
+	if (isset($desc['field']['composition_lock']) AND $id){
+			$lock = sql_getfetsel('composition_lock', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
+			return $lock; 
+	}
+	else return false;
 }
 
 ?>
