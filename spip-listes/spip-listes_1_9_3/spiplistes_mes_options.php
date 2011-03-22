@@ -31,10 +31,6 @@ if (!defined('_DIR_PLUGIN_SPIPLISTES')) {
 // avis aux specialistes !!
 define('_SIGNALER_ECHOS', false); // horrible 
 
-// mode debug dans le log, peut-etre augmente pour avoir tous
-// les messages dans spip.log (par exemple)
-// voir doc php
-define('_SPIPLISTES_LOG_DEBUG', LOG_DEBUG);
 define('_SPIPLISTES_PREFIX_LOG', 'MEL: ');
 
 define('_DIR_PLUGIN_SPIPLISTES_IMG_PACK', _DIR_PLUGIN_SPIPLISTES.'img_pack/');

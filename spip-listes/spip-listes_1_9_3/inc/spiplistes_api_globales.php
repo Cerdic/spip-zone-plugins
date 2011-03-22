@@ -93,7 +93,7 @@ function spiplistes_log ($texte, $level = LOG_WARNING) {
  * Le mode debug doit etre selectionne' dans la page de configuration
  * @return bool
  */
-function spiplistes_debug_log ($msg)
+function spiplistes_debug_log ($msg = '')
 {
 	static $debug;
 		
@@ -101,12 +101,22 @@ function spiplistes_debug_log ($msg)
 	{
 		$debug = (spiplistes_pref_lire('opt_console_debug') == 'oui');
 	}
-	if ($debug)
+	$msg = trim ($msg);
+	if ($debug && !empty($msg))
 	{
 		spiplistes_log ($msg, LOG_DEBUG);
 	}
 	
 	return ($debug);
+}
+
+/**
+ * CP-20110322
+ * alias pour récupérer le mode debug
+ * @return bool
+ */
+function spiplistes_debug_mode () {
+	return (spiplistes_debug_log () );
 }
 
 /**

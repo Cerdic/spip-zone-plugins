@@ -569,10 +569,10 @@ function spiplistes_meleuse ($last_time) {
 				spiplistes_courrier_modifier($id_courrier, $sql_set_array, false);
 				
 				// placer en log le suivi des compteurs si mode debug
-				if(_SPIPLISTES_LOG_DEBUG)
+				if (spiplistes_debug_log())
 				{					
-					if($row = sql_fetch(sql_select(
-						"nb_emails_envoyes,nb_emails_echec,nb_emails_non_envoyes,nb_emails_texte,nb_emails_html"
+					if ($row = sql_fetch(sql_select(
+						'nb_emails_envoyes,nb_emails_echec,nb_emails_non_envoyes,nb_emails_texte,nb_emails_html'
 						, 'spip_courriers'
 						, 'id_courrier='.sql_quote($id_courrier)
 						, '', '', 1
@@ -586,7 +586,9 @@ function spiplistes_meleuse ($last_time) {
 												   , $row['nb_emails_texte']
 												   , $row['nb_emails_non_envoyes']
 												   , $row['nb_emails_echec']
-												   , 'FROM_DB');
+												   , 'FROM_DB')
+												. ' END #'.$id_courrier;
+												;
 					}
 				}
 				
