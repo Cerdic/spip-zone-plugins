@@ -26,6 +26,13 @@
 					<label for="masquer_formulaire"><:compositions:label_masquer_formulaire_composition:></label>
 				</div>
 			</li>
+			<li class='configurer_tout_verrouiller'>
+				<label><:compositions:label_tout_verrouiller:></label>
+				<div class="choix">
+					<input type="checkbox" name="tout_verrouiller" [checked="(#ENV{tout_verrouiller}|=={oui}|?{checked})"] id="tout_verrouiller" value='oui' />
+					<label for="tout_verrouiller"><:compositions:label_verrouiller_toutes_compositions:></label>
+				</div>
+			</li>
 		</ul>
 		<p class='boutons'><input class='submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
 	</div></form>

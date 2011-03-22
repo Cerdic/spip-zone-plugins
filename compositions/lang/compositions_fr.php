@@ -30,6 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_pas_de_composition' => 'Aucune composition',
 	'label_styliser' => 'S&eacute;lection des squelettes',
 	'label_styliser_auto' => 'Ne pas utiliser la s&eacute;lection automatique. La s&eacute;lection est prise en charge par mes squelettes.',
+	'label_tout_verrouiller' => 'Tout verrouiller',
+	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmasters pourront les modifier).',
 	'label_utiliser_article_accueil' => 'Ne pas utiliser les articles d\'accueil de rubrique',
 
 	// U

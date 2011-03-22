@@ -243,6 +243,10 @@ function balise_COMPOSITION_dist($p) {
  * @return string
  */
 function compositions_verrouiller($type, $id, $serveur=''){
+	$config = unserialize($GLOBALS['meta']['compositions']);
+	if ($config['tout_verrouiller'] == 'oui')
+		return true;
+	
 	include_spip('base/abstract_sql');
 	$table = table_objet($type);
 	$table_sql = table_objet_sql($type);
