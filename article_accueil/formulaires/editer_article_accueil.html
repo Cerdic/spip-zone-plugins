@@ -1,0 +1,35 @@
+<div class='ajax'>
+	<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+	<div class="info_article_accueil">
+	<B_article>
+	<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}>
+		<:article_accueil:rubrique_article_en_accueil:> <a href="#URL_ARTICLE">#TITRE</a>
+	</BOUCLE_article>
+	</B_article>
+	<:article_accueil:aucun_article_accueil:>
+	<//B_article>
+	</div>
+	</BOUCLE_rubrique>
+
+[<div class="formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_rubrique}" id="formulaire_#FORM-#ENV{id_rubrique}"[(#ENV{_hide})style="display:none;"]>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			#SET{erreurs,#ENV**{erreurs}|table_valeur{id_article_accueil}}
+			<li class="editer_id_article_accueil[ (#GET{erreurs}|oui)erreur]">
+				<label for="id_article_accueil"><:article_accueil:label_id_article_accueil:></label>
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					#INCLURE{fond=formulaires/inc-selecteur_accueil,id_rubrique}
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><span class='image_loading'></span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>]
+</div>

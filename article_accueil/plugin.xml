@@ -1,0 +1,31 @@
+<plugin>
+	<nom>Article d'accueil</nom>
+	<icon>images/article_accueil-48.png</icon>
+	<auteur>	<!-- Auteur du plugin -->
+ 	[Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, Joseph pour la mise en plugin autonome
+	</auteur>
+	<licence>GPL</licence>
+	<version>1.0.0</version>
+	<version_base>0.1.0</version_base>
+	<etat>test</etat>
+	<description>
+		<multi>
+			[fr]Ce plugin vous permet de d'attribuer un article d'accueil aux rubriques. Le champ id_article_accueil peut ensuite &eacirc;tre utilis&#233; par les squelettes.
+			[en]This plugin allows you to assign an article as home of a section. Field "id_article_accueil" can then be used by the skeletons.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/compositions</lien> <!-- URI de documentation -->
+	<install>base/compositions.php</install>
+	<prefix>article_accueil</prefix>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/article_accueil.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>article_accueil_pipeline.php</inclure>
+	</pipeline>
+ 	<necessite id='SPIP' version='[2.0.6;]' />
+	<necessite id='spip_bonux' version='[1.8.10;]' />
+	<categorie>outil</categorie>
+</plugin>
