@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_propos_auteur_dpt' => 'Tout &agrave; propos de :', # NEW
+	'a_propos_auteur_dpt' => 'Tout à propos de :', # NEW
 	'admin_action_01_configuration' => 'Konfigurer',
 	'admin_action_02_etat' => 'Forums overblik',
 	'admin_action_ZZ_debug' => 'Debug',
-	'admin_action_effacer' => 'Messages rejet&eacute;s', # NEW
+	'admin_action_effacer' => 'Messages rejetés', # NEW
 	'admin_action_fromphorum' => 'Import de Phorum', # NEW
 	'admin_action_fromphpbb' => 'Importer fra PhpBB',
 	'admin_action_gere_ban' => 'Gestion des bans', # NEW
@@ -32,10 +32,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_average_posts' => 'Daglige indlæg snit',
 	'admin_average_users' => 'Daglige påskrifter snit',
 	'admin_ban_email' => 'Gestion des adresses email bannies', # NEW
-	'admin_ban_email_info' => 'Pour sp&eacute;cifier plus d\'une adresse e-mail, s&eacute;parez-les par des virgules. Pour sp&eacute;cifier un joker pour le nom d\'utilisateur, utilisez * ; par exemple *@hotmail.com', # NEW
+	'admin_ban_email_info' => 'Pour spécifier plus d\'une adresse e-mail, séparez-les par des virgules. Pour spécifier un joker pour le nom d\'utilisateur, utilisez * ; par exemple *@hotmail.com', # NEW
 	'admin_ban_email_none' => 'Aucune adresse bannie', # NEW
 	'admin_ban_ip' => 'Gestion des adresses IP bannies', # NEW
-	'admin_ban_ip_info' => 'Pour sp&eacute;cifier plusieurs IP ou noms de serveurs diff&eacute;rents, s&eacute;parez-les par des virgules. Pour sp&eacute;cifier un intervalle d\'adresses IP, s&eacute;parez le d&eacute;but et la fin avec un trait d\'union (-), pour sp&eacute;cifier un joker, utilisez une &eacute;toile (*)', # NEW
+	'admin_ban_ip_info' => 'Pour spécifier plusieurs IP ou noms de serveurs différents, séparez-les par des virgules. Pour spécifier un intervalle d\'adresses IP, séparez le début et la fin avec un trait d\'union (-), pour spécifier un joker, utilisez une étoile (*)', # NEW
 	'admin_ban_ip_none' => 'Aucune adresse bannie', # NEW
 	'admin_ban_user' => 'Gestion des login bannis', # NEW
 	'admin_ban_user_info' => 'Vous pouvez bannir plusieurs utilisateurs en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier', # NEW
@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_config_spipbb' => 'tænd SpipBB',
 	'admin_config_spipbb_info' => 'Vælg Ja til at tænde SpipBB',
 	'admin_config_tables' => 'Configuration des tables de SpipBB', # NEW
-	'admin_config_tables_erreur' => 'Probl&egrave;me avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
+	'admin_config_tables_erreur' => 'Problème avec les tables de SpipBB : @tables_erreur@ sont incorrectes (les tables @tables_ok@ semblent correctes).
 Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB-le-forum] ou le [support sur spipbb.spip-zone->http://spipbb.free.fr/spip.php?article11]', # NEW
 	'admin_config_tables_ok' => 'SpipBB database tabeller: OK',
 	'admin_date_ouverture' => 'Åbnings dato',
@@ -60,61 +60,61 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'admin_form_deplacer' => 'Flyt',
 	'admin_form_descendre' => 'Ned',
 	'admin_form_editer' => 'Rediger',
-	'admin_form_messages' => '&nbsp;',
+	'admin_form_messages' => ' ',
 	'admin_form_monter' => 'Op',
-	'admin_form_sujets' => '&nbsp;',
-	'admin_forums_affiche_membre_defaut' => 'Voulez-vous afficher les membres dans la liste de membres lorsqu\'il n\'ont pas fait de choix ?<br />[ Non par d&eacute;faut ]', # NEW
+	'admin_form_sujets' => ' ',
+	'admin_forums_affiche_membre_defaut' => 'Voulez-vous afficher les membres dans la liste de membres lorsqu\'il n\'ont pas fait de choix ?<br />[ Non par défaut ]', # NEW
 	'admin_forums_configuration' => 'Konfigurer SpipBB',
 	'admin_forums_configuration_avatar' => 'General konfigurering af avatarer',
 	'admin_forums_configuration_options' => 'Options de SpipBB', # NEW
-	'admin_forums_log_level' => 'Choix du niveau de logs produites par SpipBB.<br />[ 3 (maximum)- Par d&eacute;faut ]', # NEW
+	'admin_forums_log_level' => 'Choix du niveau de logs produites par SpipBB.<br />[ 3 (maximum)- Par défaut ]', # NEW
 	'admin_forums_log_level_0' => 'Pas de logs', # NEW
 	'admin_forums_log_level_1' => 'Un peu de logs', # NEW
 	'admin_forums_log_level_2' => 'Beaucoup de logs', # NEW
-	'admin_forums_log_level_3' => 'Enorm&eacute;ment de logs', # NEW
-	'admin_id_mjsc' => 'N&deg;', # NEW
+	'admin_forums_log_level_3' => 'Enormément de logs', # NEW
+	'admin_id_mjsc' => 'N°', # NEW
 	'admin_infos' => 'SpipBB - Admin - Opsummering',
 	'admin_interface' => 'Offentlig brugerflade muligheder',
 	'admin_nombre_lignes_messages' => 'Antal linnier i et indlæg',
 	'admin_plugin_requis_erreur' => 'mangler påkrævet Plugin',
-	'admin_plugin_requis_erreur_balisesession' => 'Installez le plugin Balise SESSION et activez le ! [Documentation ici->http://www.spip-contrib.net/?article1224], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/balise_session.zip].', # NEW
-	'admin_plugin_requis_erreur_cfg' => 'Installez le plugin CFG et activez le ! [Documentation ici->http://www.spip-contrib.net/?article1605], [Archive ZIP l&agrave;->http://files.spip.org/spip-zone/cfg.zip].', # NEW
+	'admin_plugin_requis_erreur_balisesession' => 'Installez le plugin Balise SESSION et activez le ! [Documentation ici->http://www.spip-contrib.net/?article1224], [Archive ZIP là->http://files.spip.org/spip-zone/balise_session.zip].', # NEW
+	'admin_plugin_requis_erreur_cfg' => 'Installez le plugin CFG et activez le ! [Documentation ici->http://www.spip-contrib.net/?article1605], [Archive ZIP là->http://files.spip.org/spip-zone/cfg.zip].', # NEW
 	'admin_plugin_requis_erreur_s' => 'Les plugins requis suivants manquent. Activez-les !', # NEW
 	'admin_plugin_requis_ok' => 'påkrævet Plugin installered',
-	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifi&eacute;.', # NEW
+	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : fourni les informations sur les visiteurs authentifié.', # NEW
 	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : fourni des fonctions et des balises.', # NEW
 	'admin_sous_titre' => 'Gå til SpipBB forums admin panel',
-	'admin_spip_config_forums' => 'Configuration de SPIP&nbsp;:', # NEW
+	'admin_spip_config_forums' => 'Configuration de SPIP :', # NEW
 	'admin_spip_forums_ok' => 'SPIPs offentlige forums er tændt.',
-	'admin_spip_forums_warn' => '<p>{{Attention}} : vos forums sont d&eacute;sactiv&eacute;s par d&eacute;faut, il vous est recommand&eacute; d\'utiliser la publication imm&eacute;diate : [voir ici->@config_contenu@].</p><p>Sinon vous devrez les activer articles par articles.</p>', # NEW
+	'admin_spip_forums_warn' => '<p>{{Attention}} : vos forums sont désactivés par défaut, il vous est recommandé d\'utiliser la publication immédiate : [voir ici->@config_contenu@].</p><p>Sinon vous devrez les activer articles par articles.</p>', # NEW
 	'admin_spip_mots_cles_ok' => 'SPIPs Keywords er tændt',
-	'admin_spip_mots_cles_warn' => '<p>{{Attention}} : Les mots-cl&eacute;s sont pas actifs dans SPIP, vous ne pourrez pas utiliser les fonctions avanc&eacute;es associ&eacute;es.</p><p>Il vous est recommand&eacute; de les activer : [voir ici->@configuration@].</p>', # NEW
+	'admin_spip_mots_cles_warn' => '<p>{{Attention}} : Les mots-clés sont pas actifs dans SPIP, vous ne pourrez pas utiliser les fonctions avancées associées.</p><p>Il vous est recommandé de les activer : [voir ici->@configuration@].</p>', # NEW
 	'admin_spip_mots_forums_ok' => 'SPIPs Keywords er tændt',
-	'admin_spip_mots_forums_warn' => '<p>{{Attention}} : Les mots-cl&eacute;s dans les forums du site public sont pas actifs dans SPIP, vous ne pourrez pas utiliser les fonctions avanc&eacute;es associ&eacute;es.</p><p>Il vous est recommand&eacute; de permettre leur utilisation : [voir ici->@configuration@].</p>', # NEW
+	'admin_spip_mots_forums_warn' => '<p>{{Attention}} : Les mots-clés dans les forums du site public sont pas actifs dans SPIP, vous ne pourrez pas utiliser les fonctions avancées associées.</p><p>Il vous est recommandé de permettre leur utilisation : [voir ici->@configuration@].</p>', # NEW
 	'admin_spipbb_release' => 'SpipBB version',
 	'admin_statistique' => 'Information',
 	'admin_surtitre' => 'Forums styring',
 	'admin_temps_deplacement' => 'Tid før en admin kan flytte',
 	'admin_titre' => 'SpipBB Admin',
 	'admin_titre_page_spipbb_admin' => 'Gestion des forums', # NEW
-	'admin_titre_page_spipbb_admin_anti_spam_config' => 'Configuration g&eacute;n&eacute;rale du filtrage du spam', # NEW
-	'admin_titre_page_spipbb_admin_anti_spam_forum' => 'Posts marqu&eacute;s', # NEW
+	'admin_titre_page_spipbb_admin_anti_spam_config' => 'Configuration générale du filtrage du spam', # NEW
+	'admin_titre_page_spipbb_admin_anti_spam_forum' => 'Posts marqués', # NEW
 	'admin_titre_page_spipbb_admin_anti_spam_log' => 'Log du spam', # NEW
 	'admin_titre_page_spipbb_admin_anti_spam_words' => 'Filtrage de mots', # NEW
 	'admin_titre_page_spipbb_admin_debug' => 'Debogage', # NEW
-	'admin_titre_page_spipbb_admin_etat' => 'SpipBB - Administration - R&eacute;capitulatif', # NEW
+	'admin_titre_page_spipbb_admin_etat' => 'SpipBB - Administration - Récapitulatif', # NEW
 	'admin_titre_page_spipbb_admin_gere_ban' => 'Gestion du banissement', # NEW
 	'admin_titre_page_spipbb_admin_migre' => 'Import de @nom_base@', # NEW
 	'admin_titre_page_spipbb_configuration' => 'Configuration de SpipBB', # NEW
-	'admin_titre_page_spipbb_effacer' => 'Gestion des messages rejet&eacute;s', # NEW
+	'admin_titre_page_spipbb_effacer' => 'Gestion des messages rejetés', # NEW
 	'admin_titre_page_spipbb_inscrits' => 'Gestion des membres', # NEW
-	'admin_titre_page_spipbb_sujet' => '&Eacute;dition d\'un fil', # NEW
+	'admin_titre_page_spipbb_sujet' => 'Édition d\'un fil', # NEW
 	'admin_total_posts' => 'Total antal indlæg',
 	'admin_total_users' => 'Antal medlemmer',
 	'admin_total_users_online' => 'Medlemmer Online',
-	'admin_unban_email_info' => 'Vous pouvez d&eacute;bannir plusieurs adresses en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier', # NEW
-	'admin_unban_ip_info' => 'Vous pouvez d&eacute;bannir plusieurs adresses en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier', # NEW
-	'admin_unban_user_info' => 'Vous pouvez d&eacute;bannir plusieurs utilisateurs en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier', # NEW
+	'admin_unban_email_info' => 'Vous pouvez débannir plusieurs adresses en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier', # NEW
+	'admin_unban_ip_info' => 'Vous pouvez débannir plusieurs adresses en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier', # NEW
+	'admin_unban_user_info' => 'Vous pouvez débannir plusieurs utilisateurs en une fois en utilisant la combinaison CTRL ou MAJ avec la souris ou le clavier', # NEW
 	'admin_valeur' => 'Værdi',
 	'aecrit' => 'wrote',
 	'alerter_abus' => 'Dette indlæg er fornærmende...',
@@ -127,20 +127,20 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'avatar' => 'Avatar', # NEW
 
 	// B
-	'bouton_select_all' => 'Tout s&eacute;lectionner', # NEW
-	'bouton_speciaux_sur_skels' => 'Configurer les boutons sp&eacute;cifiques sur les squelettes publics', # NEW
-	'bouton_unselect_all' => 'Tout d&eacute;-s&eacute;lectionner', # NEW
+	'bouton_select_all' => 'Tout sélectionner', # NEW
+	'bouton_speciaux_sur_skels' => 'Configurer les boutons spécifiques sur les squelettes publics', # NEW
+	'bouton_unselect_all' => 'Tout dé-sélectionner', # NEW
 
 	// C
 	'champs_obligatoires' => 'Felter markeret med en * skal udfyldes.',
 	'chercher' => 'Søg',
 	'choix_mots_annonce' => 'lav et meddelelse',
-	'choix_mots_creation' => 'Si vous voulez cr&eacute;er <strong>automatiquement</strong> les mot-cl&eacute;s d&eacute;di&eacute;s &agrave; SpipBB, appuyez sur ce bouton. Ces mot-clefs peuvent &ecirc;tre modifi&eacute;s ou supprim&eacute;s ult&eacute;rieurement...', # NEW
+	'choix_mots_creation' => 'Si vous voulez créer <strong>automatiquement</strong> les mot-clés dédiés à SpipBB, appuyez sur ce bouton. Ces mot-clefs peuvent être modifiés ou supprimés ultérieurement...', # NEW
 	'choix_mots_creation_submit' => 'Configuration auto des mots-clefs', # NEW
 	'choix_mots_ferme' => 'Luk tråden',
 	'choix_mots_postit' => 'Placer en sticky',
 	'choix_mots_selection' => 'Denne keyword gruppe skal mindst indeholde tre keywords. Normalt, vil dette plugin lave dem under installation. SpipBB har brug for - generalt - ordene {ferme} (lukket), {annonce} (kundgøre) and {postit} (postering) keywords, men du kan vælge andre.',
-	'choix_rubrique_creation' => 'Si vous voulez cr&eacute;er <strong>automatiquement</strong> le secteur contenant les forums SpipBB et un premier forum vide, appuyez sur ce bouton. Ce forum et la hi&eacute;rarchie cr&eacute;&eacute;s peuvent &ecirc;tre modifi&eacute;s ou supprim&eacute;s ult&eacute;rieurement...', # NEW
+	'choix_rubrique_creation' => 'Si vous voulez créer <strong>automatiquement</strong> le secteur contenant les forums SpipBB et un premier forum vide, appuyez sur ce bouton. Ce forum et la hiérarchie créés peuvent être modifiés ou supprimés ultérieurement...', # NEW
 	'choix_rubrique_creation_submit' => 'Configuration auto du secteur', # NEW
 	'choix_rubrique_selection' => 'Vælg det afsnit (rubrique) der skal være det afsnit der bliver dit forum. I denne , vil hver underafsnit være et "underforum" (en forum group), hver ny offentliggjort artikel åbner et nyt forum.',
 	'choix_squelettes' => 'Du må gerne bruge andre lay out (Squelette), husk blot at filerne der skal erstatte groupeforum.html og filforum.html skal ekistere når du skifter!',
@@ -153,29 +153,29 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'config_affiche_champ_extra' => 'Afficher le champ : <b>@nom_champ@</b>', # NEW
 	'config_affiche_extra' => 'Afficher ces champs dans les squelettes', # NEW
 	'config_champs_auteur' => 'Champs SPIPBB', # NEW
-	'config_champs_auteurs_plus' => 'Gestion champs auteurs suppl&eacute;mentaires', # NEW
-	'config_champs_requis' => 'Les champs n&eacute;cessaires &agrave; SpipBB', # NEW
+	'config_champs_auteurs_plus' => 'Gestion champs auteurs supplémentaires', # NEW
+	'config_champs_requis' => 'Les champs nécessaires à SpipBB', # NEW
 	'config_choix_mots' => 'Vælg keyword gruppen',
 	'config_choix_rubrique' => 'Vælg det afsnitsom spipBB bruger',
 	'config_choix_squelettes' => 'Vælg lay out (Squelette)',
-	'config_orig_extra' => 'Quel support utiliser pour les champs suppl&eacute;mentaires', # NEW
+	'config_orig_extra' => 'Quel support utiliser pour les champs supplémentaires', # NEW
 	'config_orig_extra_info' => 'Infos champs EXTRA ou autre table, table auteurs_profils.', # NEW
 	'config_spipbb' => 'Grundliggende spipBB konfigurering for at kunne etablere et forum med dette plugin.',
 	'contacter' => 'Kontakt',
 	'contacter_dpt' => 'Kontakt: ',
-	'creer_categorie' => 'Cr&eacute;er Nouvelle Cat&eacute;gorie', # NEW
-	'creer_forum' => 'Cr&eacute;er Nouveau Forum', # NEW
+	'creer_categorie' => 'Créer Nouvelle Catégorie', # NEW
+	'creer_forum' => 'Créer Nouveau Forum', # NEW
 
 	// D
 	'dans_forum' => 'i dette forum',
 	'deconnexion_' => 'Log af ',
-	'deplacer' => 'D&eacute;placer', # NEW
+	'deplacer' => 'Déplacer', # NEW
 	'deplacer_confirmer' => 'Bekræft flytning',
 	'deplacer_dans_dpt' => 'Flyt til forum:',
 	'deplacer_sujet_dpt' => 'Flytning af:',
 	'deplacer_vide' => 'Der er ikke noget forum tilbage, det er ikke muligt at flytte denne tråd!',
-	'dernier' => '&nbsp;Dernier', # exec/spipbb_admin.php NEW
-	'dernier_membre' => 'Dernier membre enregistr&eacute; : ', # NEW
+	'dernier' => ' Dernier', # exec/spipbb_admin.php NEW
+	'dernier_membre' => 'Dernier membre enregistré : ', # NEW
 	'derniers_messages' => 'Derniers Messages', # NEW
 	'diviser' => 'Diviser', # NEW
 	'diviser_confirmer' => 'Del emne kontrol panel',
@@ -187,11 +187,11 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'diviser_vide' => 'Der er ikke andre forum tilbage: det er ikke muligt at dele det!',
 
 	// E
-	'ecrirea' => 'Ecrire un email &agrave;', # NEW
+	'ecrirea' => 'Ecrire un email à', # NEW
 	'effacer' => 'Effacer', # NEW
 	'email' => 'E-mail',
 	'en_ligne' => 'Hvem er online?',
-	'en_rep_sujet_' => '&nbsp;:::&nbsp;Emne : ',
+	'en_rep_sujet_' => ' ::: Emne : ',
 	'en_reponse_a' => 'Besvar indlæg',
 	'etplus' => '... et plus ...', # NEW
 	'extra_avatar_saisie_url' => 'URL de votre avatar (http://... ...)', # NEW
@@ -216,7 +216,7 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'fiche_contact' => 'Kontakt form',
 	'fil_annonce_annonce' => 'Passer le Sujet en Annonce', # NEW
 	'fil_annonce_desannonce' => 'Supprimer le mode Annonce', # NEW
-	'fil_deplace' => 'D&eacute;placer ce fil', # NEW
+	'fil_deplace' => 'Déplacer ce fil', # NEW
 	'filtrer' => 'Filtrer', # NEW
 	'forum' => 'Forums',
 	'forum_annonce_annonce' => 'Poser le marquage d\'annonce', # NEW
@@ -230,58 +230,58 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'forums_spipbb' => 'Forums SpipBB', # NEW
 	'forums_titre' => 'Mon premier forum créé', # NEW
 	'fromphpbb_erreur_db_phpbb_config' => 'umuligt at læse config værdier i phpBB databasen',
-	'fromphpbb_migre_categories' => 'Import des cat&eacute;gories', # NEW
-	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantation des forums dans la rubrique&nbsp;:', # NEW
+	'fromphpbb_migre_categories' => 'Import des catégories', # NEW
+	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implantation des forums dans la rubrique :', # NEW
 	'fromphpbb_migre_categories_forum' => 'Forum', # NEW
 	'fromphpbb_migre_categories_groupe' => 'Groupe', # NEW
-	'fromphpbb_migre_categories_impossible' => 'Impossible de r&eacute;cup&eacute;rer les cat&eacute;gories', # NEW
-	'fromphpbb_migre_categories_kw_ann_dpt' => 'Les annonces recevront le mot-clef&nbsp;:', # NEW
-	'fromphpbb_migre_categories_kw_ferme_dpt' => 'Les sujets clos recevront le mot-clef&nbsp;:', # NEW
-	'fromphpbb_migre_categories_kw_postit_dpt' => 'Les post its recevront le mot-clef&nbsp;:', # NEW
-	'fromphpbb_migre_existe_dpt' => 'existe&nbsp;:', # NEW
+	'fromphpbb_migre_categories_impossible' => 'Impossible de récupérer les catégories', # NEW
+	'fromphpbb_migre_categories_kw_ann_dpt' => 'Les annonces recevront le mot-clef :', # NEW
+	'fromphpbb_migre_categories_kw_ferme_dpt' => 'Les sujets clos recevront le mot-clef :', # NEW
+	'fromphpbb_migre_categories_kw_postit_dpt' => 'Les post its recevront le mot-clef :', # NEW
+	'fromphpbb_migre_existe_dpt' => 'existe :', # NEW
 	'fromphpbb_migre_thread' => 'Import des topics et des posts', # NEW
 	'fromphpbb_migre_thread_ajout' => 'Ajout thread', # NEW
 	'fromphpbb_migre_thread_annonce' => 'Annonce', # NEW
-	'fromphpbb_migre_thread_existe_dpt' => 'Forum existe&nbsp;:', # NEW
-	'fromphpbb_migre_thread_ferme' => 'Ferm&eacute;', # NEW
-	'fromphpbb_migre_thread_impossible_dpt' => 'Impossible de r&eacute;cup&eacute;rer les posts&nbsp;:', # NEW
+	'fromphpbb_migre_thread_existe_dpt' => 'Forum existe :', # NEW
+	'fromphpbb_migre_thread_ferme' => 'Fermé', # NEW
+	'fromphpbb_migre_thread_impossible_dpt' => 'Impossible de récupérer les posts :', # NEW
 	'fromphpbb_migre_thread_postit' => 'Post-it', # NEW
-	'fromphpbb_migre_thread_total_dpt' => 'Nombre total de topics et de posts ajout&eacute;s&nbsp;:', # NEW
+	'fromphpbb_migre_thread_total_dpt' => 'Nombre total de topics et de posts ajoutés :', # NEW
 	'fromphpbb_migre_utilisateurs' => 'Import des utilisateurs', # NEW
 	'fromphpbb_migre_utilisateurs_admin_restreint_add' => 'Ajout admin restreint', # NEW
 	'fromphpbb_migre_utilisateurs_admin_restreint_already' => 'Deja admin restreint', # NEW
-	'fromphpbb_migre_utilisateurs_impossible' => 'Impossible de r&eacute;cup&eacute;rer les utilisateurs', # NEW
-	'fromphpbb_migre_utilisateurs_total_dpt' => 'Nombre total d\'utilisateurs ajout&eacute;s&nbsp;:', # NEW
+	'fromphpbb_migre_utilisateurs_impossible' => 'Impossible de récupérer les utilisateurs', # NEW
+	'fromphpbb_migre_utilisateurs_total_dpt' => 'Nombre total d\'utilisateurs ajoutés :', # NEW
 
 	// H
 	'haut_page' => 'Haut de page', # NEW
 
 	// I
 	'icone_ferme' => 'Fermer', # NEW
-	'import_base' => 'Nom de la base&nbsp;:', # NEW
-	'import_choix_test' => 'R&eacute;aliser un import de test (choix par d&eacute;faut)&nbsp;:', # NEW
-	'import_choix_test_titre' => 'Import &agrave; blanc ou r&eacute;el', # NEW
-	'import_erreur_db' => 'Impossible de se connecter &agrave; la base @nom_base@', # NEW
+	'import_base' => 'Nom de la base :', # NEW
+	'import_choix_test' => 'Réaliser un import de test (choix par défaut) :', # NEW
+	'import_choix_test_titre' => 'Import à blanc ou réel', # NEW
+	'import_erreur_db' => 'Impossible de se connecter à la base @nom_base@', # NEW
 	'import_erreur_db_config' => 'Impossible de lire la configuration dans la base @nom_base@', # NEW
-	'import_erreur_db_rappel_connexion' => 'Impossible de se reconnecter &agrave; la base @nom_base@', # NEW
-	'import_erreur_db_spip' => 'Impossible de se connecter &agrave; la base SPIP', # NEW
+	'import_erreur_db_rappel_connexion' => 'Impossible de se reconnecter à la base @nom_base@', # NEW
+	'import_erreur_db_spip' => 'Impossible de se connecter à la base SPIP', # NEW
 	'import_erreur_forums' => 'Impossible de recuperer les forums', # NEW
-	'import_fichier' => 'Fichier de configuration @nom_base@ trouv&eacute;&nbsp;:', # NEW
+	'import_fichier' => 'Fichier de configuration @nom_base@ trouvé :', # NEW
 	'import_host' => 'Nom/adresse du serveur', # NEW
-	'import_login' => 'Identifiant&nbsp;:', # NEW
-	'import_parametres_base' => 'Choisissez soit le chemin vers le fichier de configuration de @nom_base@, soit de renseigner les param&egrave;tres d\'acc&egrave;s &agrave; la base contenant les forums de @nom_base@&nbsp;:', # NEW
-	'import_parametres_rubrique' => 'Choisissez la rubrique dans laquelle seront import&eacute;s les forums de @nom_base@', # NEW
+	'import_login' => 'Identifiant :', # NEW
+	'import_parametres_base' => 'Choisissez soit le chemin vers le fichier de configuration de @nom_base@, soit de renseigner les paramètres d\'accès à la base contenant les forums de @nom_base@ :', # NEW
+	'import_parametres_rubrique' => 'Choisissez la rubrique dans laquelle seront importés les forums de @nom_base@', # NEW
 	'import_parametres_titre' => 'Informations sur la base @nom_base@', # NEW
-	'import_password' => 'Mot de passe&nbsp;:', # NEW
-	'import_prefix' => 'Pr&eacute;fixe des tables&nbsp;:', # NEW
-	'import_racine' => 'Chemin vers @nom_base@ (avatars)&nbsp;:', # NEW
-	'import_table' => 'Table de configuration @nom_base@ trouv&eacute;e&nbsp;:', # NEW
+	'import_password' => 'Mot de passe :', # NEW
+	'import_prefix' => 'Préfixe des tables :', # NEW
+	'import_racine' => 'Chemin vers @nom_base@ (avatars) :', # NEW
+	'import_table' => 'Table de configuration @nom_base@ trouvée :', # NEW
 	'import_titre' => 'Import d\'un forum @nom_base@', # NEW
-	'import_titre_etape' => 'Import d\'un forum  @nom_base@ - &eacute;tape', # NEW
+	'import_titre_etape' => 'Import d\'un forum  @nom_base@ - étape', # NEW
 	'info' => 'Information',
 	'info_annonce_ferme' => 'Etat Annonce / Fermer', # NEW
 	'info_confirmer_passe' => 'bekræft nyt password:',
-	'info_ferme' => 'Etat Ferm&eacute;', # NEW
+	'info_ferme' => 'Etat Fermé', # NEW
 	'info_inscription_invalide' => 'Umuligt at registrere',
 	'info_plus_cinq_car' => 'mere end fem bogstaver/tal',
 	'infos_refus_suivi_sujet' => 'Ne plus suivre les sujets', # NEW
@@ -303,7 +303,7 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 
 	// M
 	'maintenance' => 'Maintenance', # NEW
-	'maintenance_fermer' => 'a ferm&eacute; l\'article/forum :', # NEW
+	'maintenance_fermer' => 'a fermé l\'article/forum :', # NEW
 	'maintenance_pour' => 'pour MAINTENANCE.', # NEW
 	'membres_en_ligne' => 'membres en ligne', # NEW
 	'membres_inscrits' => 'registrerede medlemmer',
@@ -315,21 +315,21 @@ Consultez la [documentation sur Spip-Contrib->http://www.spip-contrib.net/SpipBB
 	'messages_anonymes' => 'rendre anonymes', # NEW
 	'messages_derniers' => 'Seneste indlæg',
 	'messages_laisser_nom' => 'laisser le nom', # NEW
-	'messages_supprimer_titre_dpt' => 'Pour les messages&nbsp;:', # NEW
+	'messages_supprimer_titre_dpt' => 'Pour les messages :', # NEW
 	'messages_supprimer_tous' => 'les supprimer', # NEW
 	'messages_voir_dernier' => 'Spring til seneste indlæg',
 	'messages_voir_dernier_s' => 'Læs seneste indlæg',
-	'moderateur' => 'Mod&eacute;rateur', # NEW
+	'moderateur' => 'Modérateur', # NEW
 	'moderateur_dpt' => 'Moderator: ',
 	'moderateurs' => 'Moderatore',
 	'moderateurs_dpt' => 'Moderatore: ',
 	'modif_parametre' => 'Skift dine parametre',
 	'mot_annonce' => 'Annonce
-_ Une annonce est situ&eacute;e en t&ecirc;te de forum sur toutes les pages.', # NEW
-	'mot_ferme' => 'Ferm&eacute;
--* Lorsqu\'un article-forum a ce mot-clef, seul les mod&eacute;rateurs peuvent y ajouter des messages.
--* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les mod&eacute;rateurs peuvent y ajouter des r&eacute;ponses.', # NEW
-	'mot_groupe_moderation' => 'Goupe de mot-clefs utilis&eacute; pour la mod&eacute;ration de SpipBB', # NEW
+_ Une annonce est située en tête de forum sur toutes les pages.', # NEW
+	'mot_ferme' => 'Fermé
+-* Lorsqu\'un article-forum a ce mot-clef, seul les modérateurs peuvent y ajouter des messages.
+-* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les modérateurs peuvent y ajouter des réponses.', # NEW
+	'mot_groupe_moderation' => 'Goupe de mot-clefs utilisé pour la modération de SpipBB', # NEW
 	'mot_postit' => 'Postit
 _ Un postit est situé en dessous des annonces, avant les messages ordinaires. Il n\'appara&icirc;t qu\'une seule fois dans la liste.', # NEW
 
@@ -340,47 +340,47 @@ _ Un postit est situé en dessous des annonces, avant les messages ordinaires. I
 
 	// O
 	'ordre_croissant' => 'Croissant', # NEW
-	'ordre_decroissant' => 'D&eacute;croissant', # NEW
-	'ordre_dpt' => 'Ordre&nbsp;:', # NEW
+	'ordre_decroissant' => 'Décroissant', # NEW
+	'ordre_dpt' => 'Ordre :', # NEW
 	'oui' => 'ja',
 
 	// P
 	'pagine_page_' => '.. side ',
-	'pagine_post_' => ' r&eacute;ponse', # NEW
+	'pagine_post_' => ' réponse', # NEW
 	'pagine_post_s' => 'Indlæg', # MODIF
 	'pagine_sujet_' => ' sujet', # NEW
 	'pagine_sujet_s' => 'emner',
 	'par_' => 'af',
 	'plugin_auteur' => 'La SpipBB Team : [voir la liste des contributeurs sur Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]', # NEW
 	'plugin_description' => 'Le plugin SpipBB permet :
--* De g&eacute;rer de fa&ccedil;on centralis&eacute;e les forums de SPIP (interface priv&eacute;e),
--* D\'utiliser un secteur comme base d\'un groupe de forums comme les &laquo;Bulletin Board&raquo; tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y d&eacute;marre un thread.
+-* De gérer de façon centralisée les forums de SPIP (interface privée),
+-* D\'utiliser un secteur comme base d\'un groupe de forums comme les «Bulletin Board» tels que phpBB. Dans ce secteur, les sous-rubriques sont des groupes de forums, les articles des forums, chaque message dans le forum d\'un article y démarre un thread.
 
 {{Consultez :}}
--* &bull;[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
--* &bull;[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
+-* •[l\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11],
+-* •[La documentation sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum].
 
-_ {{Plugin spipbb en cours de developpement. Vous l\'utilisez &agrave; vos risques et p&eacute;rils}}
+_ {{Plugin spipbb en cours de developpement. Vous l\'utilisez à vos risques et périls}}
 
-_ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]', # NEW
-	'plugin_licence' => 'Distribu&eacute; sous licence GPL', # NEW
+_ [Accès au panneau d\'administration-> .?exec=spipbb_configuration]', # NEW
+	'plugin_licence' => 'Distribué sous licence GPL', # NEW
 	'plugin_lien' => '[Consulter la documentation du plugin sur Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]', # NEW
 	'plugin_mauvaise_version' => 'Cette version du plugin n\'est pas compatible avec votre version de SPIP !', # NEW
 	'plugin_nom' => 'SpipBB : Gestion des forums de SPIP', #  Pour faciliter les traductions de plugin.xml NEW
-	'post_aucun_pt' => 'aucun&nbsp;!', # NEW
-	'post_efface_lui' => 'Ce sujet comprend @nbr_post@ message(s). Effac&eacute;s avec lui&nbsp;!\\n', # NEW
-	'post_ip' => 'Messages post&eacute; &agrave; partie de l\'adresse IP', # NEW
-	'post_propose' => 'Message propos&eacute;', # NEW
-	'post_rejete' => 'Message rejet&eacute;', # NEW
-	'post_titre' => '&nbsp;:::&nbsp;Titel: ',
-	'post_verifier_sujet' => 'V&eacute;rifier ce sujet', # NEW
-	'poste_valide' => 'Post(s) &agrave; valider ...', # NEW
+	'post_aucun_pt' => 'aucun !', # NEW
+	'post_efface_lui' => 'Ce sujet comprend @nbr_post@ message(s). Effacés avec lui !\\n', # NEW
+	'post_ip' => 'Messages posté à partie de l\'adresse IP', # NEW
+	'post_propose' => 'Message proposé', # NEW
+	'post_rejete' => 'Message rejeté', # NEW
+	'post_titre' => ' ::: Titel: ',
+	'post_verifier_sujet' => 'Vérifier ce sujet', # NEW
+	'poste_valide' => 'Post(s) à valider ...', # NEW
 	'poster_date_' => 'Skrevet den: ',
 	'poster_message' => 'Skriv et indlæg',
 	'postit' => 'Postering',
 	'postit_dpt' => 'Postering: ',
-	'posts_effaces' => 'Messages effac&eacute;s&nbsp;!', # NEW
-	'posts_refuses' => 'Messages refus&eacute;s, &agrave; effacer&nbsp;!', # NEW
+	'posts_effaces' => 'Messages effacés !', # NEW
+	'posts_refuses' => 'Messages refusés, à effacer !', # NEW
 	'previsualisation' => 'Preview',
 	'profil' => 'Profil',
 
@@ -393,7 +393,7 @@ _ [Acc&egrave;s au panneau d\'administration-> .?exec=spipbb_configuration]', # 
 	'reglement' => '<p>Regler: Vi sletter alt vi finder ufedt.
 Forum registrerer IP addresser, og vil blokere disse ved misbrug.
 Vi bruger ikke din mail adresse til andet end at sende dig et password.</p>', # MODIF
-	'repondre' => 'R&eacute;pondre', # NEW
+	'repondre' => 'Répondre', # NEW
 	'reponse_s_' => 'Svar',
 	'resultat_s_pour_' => ' resultat',
 	'retour_forum' => 'Tilbage til forum forside',
@@ -401,15 +401,15 @@ Vi bruger ikke din mail adresse til andet end at sende dig et password.</p>', # 
 	// S
 	's_abonner_a' => 'RSS: aboner på denne tråd',
 	'secteur_forum' => 'RACINE', # NEW
-	'selection_efface' => 'Effacer la s&eacute;lection .. ', # NEW
-	'selection_tri_dpt' => 'S&eacute;lectionner la m&eacute;thode de tri&nbsp;:', # NEW
-	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne acc&egrave;s &agrave; la configuration du plugin &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; ainsi qu\'&agrave; la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consultez&nbsp;:
-_ &bull; [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
-_ &bull; [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@', # NEW
-	'sign_maj' => '<br />Version plus r&eacute;cente disponible&nbsp;: @version@', # NEW
-	'sign_ok' => '&agrave; jour.', # NEW
-	'sign_reinit' => '<p>R&eacute;-initialisation&nbsp;:
-_ &bull; [de tout le plugin->@plugin@]</p>', # NEW
+	'selection_efface' => 'Effacer la sélection .. ', # NEW
+	'selection_tri_dpt' => 'Sélectionner la méthode de tri :', # NEW
+	'sign_admin' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne accès à la configuration du plugin «{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}» ainsi qu\'à la gestion des forums du site.</p><p>Version : @version@ @distant@</p><p>Consultez :
+_ • [La documentation sur Spip-Contrib->http://www.spip-contrib.net/?article2460]
+_ • [L\'aide et support sur spipbb.spip-zone.info->http://spipbb.free.fr/spip.php?article11]</p>@reinit@', # NEW
+	'sign_maj' => '<br />Version plus récente disponible : @version@', # NEW
+	'sign_ok' => 'à jour.', # NEW
+	'sign_reinit' => '<p>Ré-initialisation :
+_ • [de tout le plugin->@plugin@]</p>', # NEW
 	'sign_tempo' => 'Bygget med <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
 	'signature' => 'Signature', # NEW
 	'sinscrire' => 'Registrer',
@@ -426,13 +426,13 @@ _ &bull; [de tout le plugin->@plugin@]</p>', # NEW
 	'sujet_clos_texte' => 'Dette emne er lukket, du kan ikke kommentere.',
 	'sujet_clos_titre' => 'Emne lukket',
 	'sujet_dpt' => 'Emne: ',
-	'sujet_ferme' => 'Sujet : ferm&eacute;', # NEW
+	'sujet_ferme' => 'Sujet : fermé', # NEW
 	'sujet_nombre' => 'Nombre de Sujets', # NEW
 	'sujet_nouveau' => 'Nyt emne',
-	'sujet_rejete' => 'Sujet rejet&eacute;', # NEW
+	'sujet_rejete' => 'Sujet rejeté', # NEW
 	'sujet_repondre' => 'Svar',
 	'sujet_s' => 'emner',
-	'sujet_valide' => 'Sujet &agrave; valider', # NEW
+	'sujet_valide' => 'Sujet à valider', # NEW
 	'sujets' => 'Emner',
 	'sujets_aucun' => 'Der er ingen indlæg i dette forum endnu, skriv løs!',
 	'support_extra_normal' => 'extra', # NEW
@@ -466,11 +466,11 @@ _ &bull; [de tout le plugin->@plugin@]</p>', # NEW
 
 	// T
 	'title_ferme' => 'Fermer le forum/article', # NEW
-	'title_libere' => 'R&eacute;ouvrir le forum/article', # NEW
-	'title_libere_maintenance' => 'Lib&eacute;rer le verrou de Maintenance', # NEW
+	'title_libere' => 'Réouvrir le forum/article', # NEW
+	'title_libere_maintenance' => 'Libérer le verrou de Maintenance', # NEW
 	'title_maintenance' => 'Fermer le forum/article pour Maintenance', # NEW
 	'title_sujet_ferme' => 'Fermer ce sujet', # NEW
-	'title_sujet_libere' => 'R&eacute;ouvrir ce sujet', # NEW
+	'title_sujet_libere' => 'Réouvrir ce sujet', # NEW
 	'titre_spipbb' => 'SpipBB',
 	'total_membres' => 'Vi har totalt ',
 	'total_messages_membres' => 'Medlemmerne har totalt skrevet',
