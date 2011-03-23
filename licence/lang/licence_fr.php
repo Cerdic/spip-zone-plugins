@@ -8,18 +8,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_boite_licence' => 'Configuration du plugin licence',
 	'cfg_descr_licence' => 'Des licences pour vos articles',
-	'cfg_lbl_licence_defaut' => 'Licence par d&eacute;faut',
+	'cfg_lbl_licence_defaut' => 'Licence par défaut',
 	'cfg_titre_licence' => 'Licence',
 
 	// D
 	'description_art_libre' => 'licence Art libre',
-	'description_cc_by' => 'Creative Commons - Paternit&eacute;',
-	'description_cc_by_nc' => 'Creative Commons - Paternit&eacute; Pas d\'Utilisation Commerciale',
-	'description_cc_by_nc_nd' => 'Creative Commons - Paternit&eacute; Pas d\'Utilisation Commerciale Pas de Modification',
+	'description_cc_by' => 'Creative Commons - Paternité',
+	'description_cc_by_nc' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale',
+	'description_cc_by_nc_nd' => 'Creative Commons - Paternité Pas d\'Utilisation Commerciale Pas de Modification',
 	'description_cc_by_nc_sa' => 'Creative Commons - Paternit&eacute; Pas d\'Utilisation Commerciale Partage des Conditions Initiales à l\'Identique',
 	'description_cc_by_nd' => 'Creative Commons - Paternité pas de modification',
 	'description_cc_by_sa' => 'Creative Commons - Paternit&eacute; Partage des Conditions Initiales à l\'Identique',
-	'description_copyright' => '&copy; copyright auteur de l\'article',
+	'description_copyright' => '© copyright auteur de l\'article',
 	'description_gpl' => 'licence GPL',
 
 	// L
@@ -35,11 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?',
-	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels)&nbsp;:',
-	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels)&nbsp;:',
-	'noisette_lien' => 'Afficher le lien vers la description de la licence&nbsp;?',
-	'noisette_logo' => 'Afficher le logo de la licence&nbsp;?',
-	'noisette_nom_licence' => 'Afficher le nom de la licence&nbsp;?',
+	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels) :',
+	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels) :',
+	'noisette_lien' => 'Afficher le lien vers la description de la licence ?',
+	'noisette_logo' => 'Afficher le logo de la licence ?',
+	'noisette_nom_licence' => 'Afficher le nom de la licence ?',
 
 	// S
 	'sans_licence' => 'Sans licence',

@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_sa' => 'Creative Commons - Attribution Non-Commercial Share Alike',
 	'description_cc_by_nd' => 'Creative Commons - Attribution No Derivatives',
 	'description_cc_by_sa' => 'Creative Commons - Attribution Share Alike',
-	'description_copyright' => '&copy; copyright the article\'s author',
+	'description_copyright' => '© copyright the article\'s author',
 	'description_gpl' => 'GPL License',
 
 	// L

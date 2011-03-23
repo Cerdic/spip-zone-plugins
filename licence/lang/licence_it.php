@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_cc_by_nc_sa' => 'Creative Commons - Attribuzione Non uso commerciale Condividi allo stesso modo',
 	'description_cc_by_nd' => 'Creative Commons - Attribuzione Non opere derivate',
 	'description_cc_by_sa' => 'Creative Commons - Attribuzione Condividi allo stesso modo',
-	'description_copyright' => '&copy; copyright autore dell\'articolo',
+	'description_copyright' => '© copyright autore dell\'articolo',
 	'description_gpl' => 'licenza GPL',
 
 	// L
@@ -37,11 +37,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?', # NEW
-	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels)&nbsp;:', # NEW
-	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels)&nbsp;:', # NEW
-	'noisette_lien' => 'Afficher le lien vers la description de la licence&nbsp;?', # NEW
-	'noisette_logo' => 'Afficher le logo de la licence&nbsp;?', # NEW
-	'noisette_nom_licence' => 'Afficher le nom de la licence&nbsp;?', # NEW
+	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels) :', # NEW
+	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels) :', # NEW
+	'noisette_lien' => 'Afficher le lien vers la description de la licence ?', # NEW
+	'noisette_logo' => 'Afficher le logo de la licence ?', # NEW
+	'noisette_nom_licence' => 'Afficher le nom de la licence ?', # NEW
 
 	// S
 	'sans_licence' => 'Senza licenza',

@@ -8,24 +8,24 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_boite_licence' => 'Configuraci&oacute; del connector llic&egrave;ncia',
-	'cfg_descr_licence' => 'Llic&egrave;ncies pels vostres articles',
-	'cfg_lbl_licence_defaut' => 'Llic&egrave;ncia per defecte',
-	'cfg_titre_licence' => 'Llic&egrave;ncia',
+	'cfg_boite_licence' => 'Configuració del connector llicència',
+	'cfg_descr_licence' => 'Llicències pels vostres articles',
+	'cfg_lbl_licence_defaut' => 'Llicència per defecte',
+	'cfg_titre_licence' => 'Llicència',
 
 	// D
-	'description_art_libre' => 'Llic&egrave;ncia Art lliure',
+	'description_art_libre' => 'Llicència Art lliure',
 	'description_cc_by' => 'Creative Commons - Reconeixement',
 	'description_cc_by_nc' => 'Creative Commons - No comercial',
 	'description_cc_by_nc_nd' => 'Creative Commons - No comercial No es pot modificar',
-	'description_cc_by_nc_sa' => 'Creative Commons - Reconeixement No &uacute;s comercial Compartir amb les mateixes condicions inicials i amb llic&egrave;ncia id&egrave;ntica',
-	'description_cc_by_nd' => 'Creative Commons - Reconeixement sense modificaci&oacute;',
-	'description_cc_by_sa' => 'Creative Commons - Reconeixement Compartir amb les mateixes condicions inicials i llic&egrave;ncia id&egrave;ntica',
-	'description_copyright' => '&copy; copyright autor de l\'article',
-	'description_gpl' => 'llic&egrave;ncia GPL',
+	'description_cc_by_nc_sa' => 'Creative Commons - Reconeixement No ús comercial Compartir amb les mateixes condicions inicials i amb llicència idèntica',
+	'description_cc_by_nd' => 'Creative Commons - Reconeixement sense modificació',
+	'description_cc_by_sa' => 'Creative Commons - Reconeixement Compartir amb les mateixes condicions inicials i llicència idèntica',
+	'description_copyright' => '© copyright autor de l\'article',
+	'description_gpl' => 'llicència GPL',
 
 	// L
-	'label_select_licence' => 'Escolliu una llic&egrave;ncia',
+	'label_select_licence' => 'Escolliu una llicència',
 	'lien_art_libre' => 'http://artlibre.org/',
 	'lien_cc_by' => 'http://creativecommons.org/licenses/by/3.0/deed.ca',
 	'lien_cc_by_nc' => 'http://creativecommons.org/licenses/by-nc/3.0/deed.ca',
@@ -37,14 +37,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?', # NEW
-	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels)&nbsp;:', # NEW
-	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels)&nbsp;:', # NEW
-	'noisette_lien' => 'Afficher le lien vers la description de la licence&nbsp;?', # NEW
-	'noisette_logo' => 'Afficher le logo de la licence&nbsp;?', # NEW
-	'noisette_nom_licence' => 'Afficher le nom de la licence&nbsp;?', # NEW
+	'noisette_hauteur_logo' => 'Hauteur maximale du logo (en pixels) :', # NEW
+	'noisette_largeur_logo' => 'Largeur maximale du logo (en pixels) :', # NEW
+	'noisette_lien' => 'Afficher le lien vers la description de la licence ?', # NEW
+	'noisette_logo' => 'Afficher le logo de la licence ?', # NEW
+	'noisette_nom_licence' => 'Afficher le nom de la licence ?', # NEW
 
 	// S
-	'sans_licence' => 'Sense llic&egrave;ncia',
+	'sans_licence' => 'Sense llicència',
 
 	// T
 	'titre_art_libre' => 'LAL',
