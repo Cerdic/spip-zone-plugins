@@ -965,15 +965,6 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 	$patron_html = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], false);
 	$contexte['patron_html'] = $patron_html;
 	
-	// le resultat assemble' au format html
-/* CP-20100516, suite http://www.spip-contrib.net/SPIP-Listes#comment430071 (yazul)
-	$result_html = 
-		$patron_html
-		// ? recuperer_fond($patron_html, $contexte)
-		? recuperer_page(generer_url_public('patron_switch')."&".spiplistes_http_build_query($contexte,"","&"),true)
-		: ""
-		;*/
-
 	$result_html =
 		($patron_html && find_in_path('patron_switch.html'))
 		? recuperer_fond('patron_switch', $contexte)
@@ -984,28 +975,22 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 	$patron_texte = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], true);
 	unset($contexte['patron_html']);
 	$contexte['patron_texte'] = $patron_texte;
-/* CP-20100516, suite http://www.spip-contrib.net/SPIP-Listes#comment430071 (yazul)
-	$result_texte = 
-		($patron_texte && ($patron_html != $patron_texte))
-		// ? recuperer_fond($patron_texte, $contexte) . "\n"
-		? recuperer_page(generer_url_public('patron_switch')."&".spiplistes_http_build_query($contexte,"","&"),true)
-		: spiplistes_courrier_version_texte($message_html) . "\n"
-		;*/
-	$result_texte= '';
-	$texte_ok= false;
+	$result_texte = '';
+	$texte_ok = false;
 	if ($patron_texte && ($patron_texte != $patron_html)) {
 		if (find_in_path('patron_switch.html')) {
 			$result_texte= recuperer_fond('patron_switch', $contexte);
 			$texte_ok= true;
 		}
 	}
+	// si version texte manque, la calculer
+	// a partir de la version html
 	if (!$texte_ok) {
-		$result_texte= spiplistes_courrier_version_texte($message_html) . PHP_EOL ;
+		$result_texte= spiplistes_courrier_version_texte($result_html) . PHP_EOL ;
 	}
 	// eliminer les espaces pour un vrai calcul de poids
 	$result_html = trim($result_html);
 	$result_texte = trim($result_texte);
-	
 	$result = array ($result_html, $result_texte);
 	
 	return($result);

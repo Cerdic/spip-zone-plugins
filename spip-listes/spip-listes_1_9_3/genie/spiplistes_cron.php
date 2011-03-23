@@ -206,7 +206,9 @@ function cron_spiplistes_cron ($last_time) {
 			else {
 				$titre = $titre_message;
 			}
-
+			
+			spiplistes_debug_log ($prefix_log.'utiliser patron '._SPIPLISTES_PATRONS_DIR.$patron);
+			
 			list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
 				_SPIPLISTES_PATRONS_DIR . $patron
 				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
@@ -225,7 +227,7 @@ function cron_spiplistes_cron ($last_time) {
 			else {
 				$date_debut_envoi = $date_fin_envoi = 'NOW()';
 				$statut = _SPIPLISTES_COURRIER_STATUT_VIDE;
-				spiplistes_debug_log($prefix_log.'envoi mail nouveautes : courrier vide');
+				spiplistes_debug_log($prefix_log.'courrier vide');
 			}
 
 			// Place le courrier dans le casier
