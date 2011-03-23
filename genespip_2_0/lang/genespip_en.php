@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'a_ete_mise_a_la_poubelle' => 'has been put in the wastebin',
-	'acces_non' => 'Access rights &raquo; Restricted',
-	'acces_oui' => 'Access rights &raquo; Details of the files',
+	'acces_non' => 'Access rights » Restricted',
+	'acces_oui' => 'Access rights » Details of the files',
 	'acces_restreint' => 'Access to this site is restricted',
 	'administrateur' => 'Administrator',
 	'adresse' => 'Address',
@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuler' => 'Cancel',
 	'arborescence_des' => 'View the tree for the',
 	'arbre_asc' => 'Ascendant tree',
-	'article_spip_lie' => 'Linked SPIP article N&deg;',
+	'article_spip_lie' => 'Linked SPIP article N°',
 	'aucune_fiche_possede_numero' => 'There is no file with that number',
 	'avec' => 'with',
 
@@ -79,8 +79,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fiche_enfant' => 'Child file',
 	'fiche_evt_par_lieu' => 'Events file per location',
 	'fiche_lieux' => 'Locations file',
-	'fiche_no' => 'File n&ordm;',
-	'fiche_num' => 'File N&deg;',
+	'fiche_no' => 'File nº',
+	'fiche_num' => 'File N°',
 	'fiche_parents' => 'Parents file',
 	'fiche_union' => 'Union file',
 	'fiches' => 'Files',
@@ -124,8 +124,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lieu' => 'location',
 	'lieux' => 'Locations',
 	'limitation' => 'Make dates invisible on the public site',
-	'limitation_non' => '(&raquo; Dates visible)',
-	'limitation_oui' => '(&raquo; Dates invisible)',
+	'limitation_non' => '(» Dates visible)',
+	'limitation_oui' => '(» Dates invisible)',
 	'liste_des_articles' => 'List of SPIP articles',
 	'liste_des_enfants' => 'List of children',
 	'liste_des_lieux' => 'List of locations',
@@ -158,9 +158,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'note' => 'Note',
 	'note_individu' => 'Individual note',
 	'nouvelle_fiche' => 'New file',
-	'nouvelle_liaison_document_realise' => 'New &#148;document&#147; link made',
+	'nouvelle_liaison_document_realise' => 'New document link made',
 	'nouvelle_union' => 'New union',
-	'num_departement' => 'Dpt. N&ordm;',
+	'num_departement' => 'Dpt. Nº',
 
 	// P
 	'pagerank_actuel' => 'Current PageRank',
@@ -211,7 +211,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'union' => 'Unions, marriages',
-	'union_fiche_no' => 'Union file n&ordm;',
+	'union_fiche_no' => 'Union file nº',
 
 	// V
 	'valider' => 'OK',
