@@ -8,156 +8,156 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_confirmer' => '&#1576;&#1585;&#1575;&#1610; &#1578;&#1571;&#1610;&#1610;&#1583;',
-	'accesrestreint' => '&#1583;&#1587;&#1578;&#1585;&#1587;&#1610; &#1605;&#1581;&#1583;&#1608;&#1583;',
-	'aconfirmer' => '&#1576;&#1585;&#1575;&#1610; &#1578;&#1571;&#1610;&#1610;&#1583;',
-	'action_adherent' => '&#1593;&#1605;&#1604;&#1610;&#1575;&#1578;',
-	'activation_compte' => '&#1581;&#1587;&#1575;&#1576; &#1582;&#1608;&#1583; &#1585;&#1575; &#1601;&#1593;&#1575;&#1604; &#1587;&#1575;&#1586;&#1610;&#1583;',
-	'adherents' => '&#1575;&#1593;&#1590;&#1575;&#1569;',
-	'admin' => '&#1575;&#1583;&#1605;&#1610;&#1606; ',
-	'admin_modifier_auteur_supp' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1578;&#1603;&#1605;&#1610;&#1604;&#1610; ',
-	'adresse' => '&#1606;&#1588;&#1575;&#1606;&#1610;',
-	'adresse_pro' => '&#1606;&#1588;&#1575;&#1606;&#1610; &#1581;&#1585;&#1601;&#1607;&#8204;&#1575;&#1610; (.Pro)',
-	'afficher_tous' => '&#1606;&#1605;&#1575;&#1610;&#1588; &#1575;&#1593;&#1590;&#1575;&#1569;',
-	'ajouter_adherent' => '&#1575;&#1601;&#1586;&#1608;&#1583;&#1606; &#1610;&#1603; &#1593;&#1590;&#1608; &#1580;&#1583;&#1610;&#1583;',
-	'ans' => '&#1587;&#1575;&#1604;&#8204;&#1607;&#1575;',
-	'aout' => '&#1575;&#1608;&#1578; ',
-	'aucun_resultat_recherche' => '&#1576;&#1585;&#1575;&#1610; &#1580;&#1587;&#1578;&#1580;&#1608;&#1610; &#1588;&#1605;&#1575; &#1607;&#1610;&#1670; &#1606;&#1578;&#1610;&#1580;&#1607;&#8204;&#1575;&#1610; &#1605;&#1608;&#1580;&#1608;&#1583; &#1606;&#1610;&#1587;&#1578;.',
-	'auteur' => '&#1606;&#1608;&#1610;&#1587;&#1606;&#1583;&#1607;',
-	'autre' => '&#1583;&#1610;&#1711;&#1585;&#1610;',
-	'avril' => '&#1570;&#1608;&#1585;&#1610;&#1604;',
+	'a_confirmer' => 'براي تأييد',
+	'accesrestreint' => 'دسترسي محدود',
+	'aconfirmer' => 'براي تأييد',
+	'action_adherent' => 'عمليات',
+	'activation_compte' => 'حساب خود را فعال سازيد',
+	'adherents' => 'اعضاء',
+	'admin' => 'ادمين ',
+	'admin_modifier_auteur_supp' => 'اطلاعات تكميلي ',
+	'adresse' => 'نشاني',
+	'adresse_pro' => 'نشاني حرفه‌اي (.Pro)',
+	'afficher_tous' => 'نمايش اعضاء',
+	'ajouter_adherent' => 'افزودن يك عضو جديد',
+	'ans' => 'سال‌ها',
+	'aout' => 'اوت ',
+	'aucun_resultat_recherche' => 'براي جستجوي شما هيچ نتيجه‌اي موجود نيست.',
+	'auteur' => 'نويسنده',
+	'autre' => 'ديگري',
+	'avril' => 'آوريل',
 
 	// B
-	'bio' => '&#1586;&#1606;&#1583;&#1711;&#1610;&#1606;&#1575;&#1605;&#1607;',
+	'bio' => 'زندگينامه',
 
 	// C
-	'caracteres' => '&#1603;&#1575;&#1585;&#1570;&#1603;&#1578;&#1585;&#1607;&#1575;&#1610; &#1605;&#1605;&#1606;&#1608;&#1593;',
-	'categorie' => '&#1606;&#1608;&#1593; &#1603;&#1605;&#1603; ',
-	'chaine_valide' => '&#1604;&#1591;&#1601;&#1575;&#1611; &#1610;&#1603; &#1586;&#1606;&#1580;&#1610;&#1585;&#1607; &#1608;&#1575;&#1585;&#1583; &#1603;&#1606;&#1610;&#1583;',
-	'chainelettre' => '(&#1601;&#1602;&#1591; &#1605;&#1585;&#1603;&#1576; &#1575;&#1586; &#1581;&#1585;&#1608;&#1601;)',
-	'chainenombre' => '(&#1605;&#1585;&#1603;&#1576; &#1575;&#1586; &#1581;&#1585;&#1608;&#1601; &#1608;/&#1610;&#1575; &#1575;&#1586; &#1575;&#1585;&#1602;&#1575;&#1605;)',
-	'champ_obligatoire' => '&#1575;&#1610;&#1606; &#1605;&#1610;&#1583;&#1575;&#1606; &#1575;&#1604;&#1586;&#1575;&#1605;&#1610; &#1575;&#1587;&#1578;',
-	'choisir_categories' => '&#1583;&#1585; &#1601;&#1607;&#1585;&#1587;&#1578; &#1586;&#1610;&#1585; &#1575;&#1606;&#1578;&#1582;&#1575;&#1576;&#1588;&#1575;&#1606; &#1603;&#1606;&#1610;&#1583;&nbsp;: ',
-	'choisir_nouveau_password' => '&#1576;&#1575; &#1603;&#1604;&#1610;&#1603; &#1603;&#1585;&#1583;&#1606; &#1662;&#1610;&#1608;&#1606;&#1583; &#1586;&#1610;&#1585; &#1605;&#1610;&#8204;&#1578;&#1608;&#1575;&#1606;&#1610;&#1583; &#1610;&#1603; &#1711;&#1584;&#1585;&#1608;&#1575;&#1688;&#1607; &#1581;&#1583;&#1610;&#1583; &#1576;&#1585;&#1711;&#1586;&#1610;&#1606;&#1610;&#1583;.',
-	'choisir_zones' => '&#1605;&#1606;&#1575;&#1591;&#1602;&#1610; &#1585;&#1575; &#1575;&#1606;&#1578;&#1582;&#1575;&#1576; &#1603;&#1606;&#1610;&#1583; &#1603;&#1607; &#1575;&#1585;&#1602;&#1575;&#1605; &#1580;&#1583;&#1610;&#1583; &#1576;&#1607; &#1570;&#1606;&#8204;&#1607;&#1575; &#1575;&#1582;&#1578;&#1589;&#1575;&#1589; &#1610;&#1575;&#1576;&#1606;&#1583;',
-	'choisissez' => '&#1711;&#1586;&#1610;&#1606;&#1588; &#1603;&#1606;&#1610;&#1583;',
-	'choix_affordance_email' => '&#1575;&#1610;&#1605;&#1610;&#1604;',
-	'choix_affordance_login' => '&#1604;&#1575;&#1711;&#1610;&#1606; (&#1662;&#1610;&#1588;&#8204;&#1711;&#1586;&#1610;&#1583;&#1607; &#1575;&#1587;&#1662;&#1610;&#1662;)',
-	'choix_affordance_login_email' => '&#1604;&#1575;&#1711;&#1610;&#1606; &#1608; &#1575;&#1610;&#1605;&#1610;&#1604; ',
-	'choix_domaine' => '&#1583;&#1575;&#1605;&#1610;&#1606; &#1582;&#1608;&#1583; &#1585;&#1575; &#1575;&#1606;&#1578;&#1582;&#1575;&#1576; &#1603;&#1606;&#1610;&#1583;',
-	'civilite' => '&#1593;&#1606;&#1608;&#1575;&#1606;',
-	'code_postal' => '&#1603;&#1583; &#1662;&#1587;&#1578;&#1610;',
-	'code_postal_pro' => '&#1603;&#1583; &#1662;&#1587;&#1578;&#1610; (Pro.)',
-	'commentaire' => '&#1606;&#1592;&#1585;&#1575;&#1578;',
-	'compte_active' => '&#1581;&#1587;&#1575;&#1576; &#1588;&#1605;&#1575; &#1585;&#1608;&#1610; &#1587;&#1575;&#1610;&#1578;  @nom_site@',
-	'compte_efface' => '&#1581;&#1587;&#1575;&#1576; &#1588;&#1605;&#1575; &#1581;&#1584;&#1601; &#1588;&#1583;&#1607;.',
-	'conf_plugin' => '&#1578;&#1606;&#1592;&#1610;&#1605;&#1575;&#1578; &#1606;&#1711;&#1575;&#1585;&#1588; 2&#1548;0',
-	'conf_plugin_page' => '&#1578;&#1606;&#1592;&#1610;&#1605;&#1575;&#1578; &#1579;&#1578;&#1576; &#1588;&#1583;&#1607; &#1575;&#1586; &#1606;&#1711;&#1575;&#1585;&#1588; 2&#1548;0 &#1662;&#1604;&#1575;&#1711;&#1610;&#1606;',
-	'configs' => '&#1662;&#1610;&#1603;&#1585;&#1576;&#1606;&#1583;&#1610;&#8204;&#1607;&#1575;',
-	'configuration' => '&#1662;&#1610;&#1603;&#1585;&#1576;&#1606;&#1583;&#1610; &#1605;&#1610;&#1583;&#1575;&#1606;&#8204;&#1607;&#1575;&#1610; &#1603;&#1575;&#1585;&#1576;&#1585;',
-	'confirmation' => '<p>&#1605;&#1591;&#1605;&#1574;&#1606;&#8204;&#1575;&#1610;&#1583; &#1603;&#1607; &#1605;&#1610;&#8204;&#1582;&#1608;&#1575;&#1607;&#1610;&#1583; &#1575;&#1583;&#1575;&#1605;&#1607; &#1583;&#1607;&#1610;&#1583;&#1567;</p><p> &#1578;&#1605;&#1575;&#1605; &#1575;&#1589;&#1604;&#1575;&#1581;&#8204;&#1607;&#1575; &#1576;&#1575;&#1586;&#1606;&#1575;&#1610;&#1575;&#1601;&#1578;&#1606;&#1610; &#1607;&#1587;&#1578;&#1606;&#1583;!!!',
-	'contacts_personnels' => '&#1578;&#1605;&#1575;&#1587;&#8204;&#1607;&#1575;&#1610; &#1588;&#1582;&#1589;&#1610;',
-	'contacts_pros' => '&#1578;&#1605;&#1575;&#1587;&#8204;&#1607;&#1575;&#1610; &#1581;&#1585;&#1601;&#1607;&#8204;&#1575;&#1610;',
-	'cp_valide' => '&#1604;&#1591;&#1601;&#1575;&#1611; &#1610;&#1603; &#1603;&#1583; &#1662;&#1587;&#1578;&#1610; &#1605;&#1593;&#1578;&#1576;&#1585; &#1576;&#1583;&#1607;&#1610;&#1583;',
-	'creation' => '&#1578;&#1575;&#1585;&#1610;&#1582; &#1575;&#1610;&#1580;&#1575;&#1583; &#1585;&#1603;&#1608;&#1585;&#1583;',
+	'caracteres' => 'كارآكترهاي ممنوع',
+	'categorie' => 'نوع كمك ',
+	'chaine_valide' => 'لطفاً يك زنجيره وارد كنيد',
+	'chainelettre' => '(فقط مركب از حروف)',
+	'chainenombre' => '(مركب از حروف و/يا از ارقام)',
+	'champ_obligatoire' => 'اين ميدان الزامي است',
+	'choisir_categories' => 'در فهرست زير انتخابشان كنيد : ',
+	'choisir_nouveau_password' => 'با كليك كردن پيوند زير مي‌توانيد يك گذرواژه حديد برگزينيد.',
+	'choisir_zones' => 'مناطقي را انتخاب كنيد كه ارقام جديد به آن‌ها اختصاص يابند',
+	'choisissez' => 'گزينش كنيد',
+	'choix_affordance_email' => 'ايميل',
+	'choix_affordance_login' => 'لاگين (پيش‌گزيده اسپيپ)',
+	'choix_affordance_login_email' => 'لاگين و ايميل ',
+	'choix_domaine' => 'دامين خود را انتخاب كنيد',
+	'civilite' => 'عنوان',
+	'code_postal' => 'كد پستي',
+	'code_postal_pro' => 'كد پستي (Pro.)',
+	'commentaire' => 'نظرات',
+	'compte_active' => 'حساب شما روي سايت  @nom_site@',
+	'compte_efface' => 'حساب شما حذف شده.',
+	'conf_plugin' => 'تنظيمات نگارش 2،0',
+	'conf_plugin_page' => 'تنظيمات ثتب شده از نگارش 2،0 پلاگين',
+	'configs' => 'پيكربندي‌ها',
+	'configuration' => 'پيكربندي ميدان‌هاي كاربر',
+	'confirmation' => '<p>مطمئن‌ايد كه مي‌خواهيد ادامه دهيد؟</p><p> تمام اصلاح‌ها بازنايافتني هستند!!!',
+	'contacts_personnels' => 'تماس‌هاي شخصي',
+	'contacts_pros' => 'تماس‌هاي حرفه‌اي',
+	'cp_valide' => 'لطفاً يك كد پستي معتبر بدهيد',
+	'creation' => 'تاريخ ايجاد ركورد',
 
 	// D
-	'decembre' => '&#1583;&#1587;&#1575;&#1605;&#1576;&#1585;',
-	'delete_user_select' => '&#1581;&#1584;&#1601; &#1603;&#1575;&#1585;&#1576;&#1585;(&#1607;&#1575;&#1610;)&#8204;&#1711;&#1586;&#1610;&#1606;&#1588; &#1588;&#1583;&#1607;',
-	'demande_password' => '&#1711;&#1584;&#1585;&#1608;&#1575;&#1688;&#1607;&#8204;&#1610; &#1588;&#1605;&#1575;&nbsp;: ',
-	'descriptif_plugin' => ' &#1578;&#1605;&#1575;&#1605; &#1575;&#1593;&#1590;&#1575;&#1610; &#1587;&#1575;&#1610;&#1578; &#1575;&#1610;&#1606;&#1580;&#1575; &#1607;&#1587;&#1578;&#1606;&#1583;. &#1605;&#1608;&#1602;&#1593;&#1610;&#1578; &#1570;&#1606;&#1575;&#1606; &#1576;&#1575; &#1585;&#1606;&#1711; &#1570;&#1583;&#1605;&#1603; &#1570;&#1606;&#1575;&#1606; &#1606;&#1588;&#1575;&#1606; &#1583;&#1575;&#1583;&#1607; &#1605;&#1610;&#8204;&#1588;&#1608;&#1583;.<br /><br />&#1605;&#1610;&#8204;&#1578;&#1608;&#1575;&#1606;&#1610;&#1583; &#1605;&#1610;&#1583;&#1575;&#1606;&#8204;&#1607;&#1575;&#1610; &#1575;&#1590;&#1575;&#1601;&#1610; &#1578;&#1593;&#1610;&#1610;&#1606; &#1603;&#1606;&#1610;&#1583; &#1603;&#1607; &#1607;&#1606;&#1711;&#1575;&#1605; &#1579;&#1576;&#1578; &#1606;&#1575;&#1605; &#1576;&#1607; &#1576;&#1575;&#1586;&#1583;&#1610;&#1583;&#8204;&#1603;&#1606;&#1606;&#1583;&#1607; &#1662;&#1610;&#1588;&#1606;&#1607;&#1575;&#1583; &#1605;&#1610;&#8204;&#1588;&#1608;&#1583;.',
-	'description_cfg' => '&#1662;&#1610;&#1603;&#1585;&#1576;&#1606;&#1583;&#1610; &#1605;&#1610;&#1583;&#1575;&#1606;&#8204;&#1607;&#1575;&#1610; &#1575;&#1590;&#1575;&#1601;&#1610; &#1603;&#1575;&#1585;&#1576;&#1585;',
-	'description_page' => '&#1575;&#1610;&#1606;&#1580;&#1575; &#1605;&#1610;&#8204;&#1578;&#1608;&#1575;&#1606;&#1610;&#1583; &#1578;&#1606;&#1592;&#1610;&#1605;&#1575;&#1578; &#1579;&#1576;&#1578; &#1588;&#1583;&#1607;&#8204;&#1610; &#1582;&#1608;&#1583; &#1585;&#1575; &#1670;&#1603; &#1603;&#1606;&#1610;&#1583;',
-	'divers' => '&#1587;&#1575;&#1610;&#1585;',
-	'domaine' => '&#1583;&#1575;&#1605;&#1606;&#1607;',
-	'domaines' => '&#1583;&#1575;&#1605;&#1606;&#1607;',
+	'decembre' => 'دسامبر',
+	'delete_user_select' => 'حذف كاربر(هاي)‌گزينش شده',
+	'demande_password' => 'گذرواژه‌ي شما : ',
+	'descriptif_plugin' => ' تمام اعضاي سايت اينجا هستند. موقعيت آنان با رنگ آدمك آنان نشان داده مي‌شود.<br /><br />مي‌توانيد ميدان‌هاي اضافي تعيين كنيد كه هنگام ثبت نام به بازديد‌كننده پيشنهاد مي‌شود.',
+	'description_cfg' => 'پيكربندي ميدان‌هاي اضافي كاربر',
+	'description_page' => 'اينجا مي‌توانيد تنظيمات ثبت شده‌ي خود را چك كنيد',
+	'divers' => 'ساير',
+	'domaine' => 'دامنه',
+	'domaines' => 'دامنه',
 
 	// E
-	'editer_adherent' => '&#1608;&#1610;&#1585;&#1575;&#1610;&#1588; &#1575;&#1593;&#1590;&#1575;&#1569;',
-	'effacement_auto_impossible' => '&#1581;&#1587;&#1575;&#1576; &#1582;&#1608;&#1583; &#1576;&#1607; &#1582;&#1608;&#1583; &#1581;&#1584;&#1601; &#1606;&#1605;&#1610;&#8204;&#1588;&#1608;&#1583;&#1548; &#1578;&#1605;&#1575;&#1587; &#1576;&#1711;&#1610;&#1585;&#1610;&#1583;.',
-	'email' => '&#1575;&#1610;&#1605;&#1610;&#1604;',
-	'email_bonjour' => '&#1587;&#1604;&#1575;&#1605; @nom@, ',
-	'email_deja_enregistre' => '&#1575;&#1610;&#1606; &#1606;&#1588;&#1575;&#1606;&#1610; &#1575;&#1610;&#1605;&#1610;&#1604; &#1662;&#1610;&#1588;&#1578;&#1585; &#1579;&#1576;&#1578; &#1588;&#1583;&#1607;. &#1576;&#1585;&#1575;&#1610; &#1583;&#1587;&#1578;&#1610;&#1575;&#1576;&#1610; &#1576;&#1607; &#1581;&#1587;&#1575;&#1576; &#1582;&#1608;&#1583; &#1575;&#1586; &#1601;&#1585;&#1605; &#1604;&#1575;&#1711;&#1610;&#1606; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1603;&#1606;&#1610;&#1583;.',
-	'email_obligatoire' => '&#1610;&#1603; &#1606;&#1588;&#1575;&#1606;&#1610; &#1575;&#1610;&#1605;&#1610;&#1604; &#1604;&#1575;&#1586;&#1605; &#1575;&#1587;&#1578;',
-	'email_valide' => '&#1604;&#1591;&#1601;&#1575;&#1611; &#1610;&#1603; &#1606;&#1588;&#1575;&#1606;&#1610; &#1575;&#1610;&#1605;&#1610;&#1604; &#1605;&#1593;&#1578;&#1576;&#1585; &#1608;&#1575;&#1585;&#1583; &#1603;&#1606;&#1610;&#1583;',
-	'erreur_reglement_obligatoire' => '&#1602;&#1608;&#1575;&#1593;&#1583; &#1587;&#1575;&#1610;&#1578; &#1585;&#1575; &#1576;&#1575;&#1610;&#1583; &#1602;&#1576;&#1608;&#1604; &#1603;&#1606;&#1610;&#1583;',
-	'exp_divers' => '&#1605;&#1610;&#1583;&#1575;&#1606;&#1610; &#1603;&#1607; &#1576;&#1575; &#1606;&#1575;&#1605; &laquo;&#1606;&#1592;&#1585;&#1575;&#1578;&raquo; &#1576;&#1607; &#1576;&#1575;&#1586;&#1583;&#1610;&#1583;&#8204;&#1603;&#1606;&#1606;&#1583;&#1711;&#1575;&#1606; &#1593;&#1585;&#1590;&#1607; &#1582;&#1608;&#1575;&#1607;&#1583; &#1588;&#1583;',
-	'exp_publication' => '&#1575;&#1580;&#1575;&#1586;&#1607;&#8204;&#1610; &#1606;&#1588;&#1585; &#1583;&#1575;&#1583;&#1607;&#8204;&#1607;&#1575;&#1610; &#1588;&#1582;&#1589;&#1610; ',
-	'exp_statut' => '&#1605;&#1608;&#1602;&#1593;&#1610;&#1578;&#1610; &#1585;&#1575; &#1603;&#1607; &#1605;&#1575;&#1610;&#1604;&#1610;&#1583; &#1576;&#1607; &#1575;&#1593;&#1590;&#1575;&#1569;&#8204;&#1580;&#1583;&#1610;&#1583; &#1576;&#1583;&#1607;&#1610;&#1583; &#1576;&#1585;&#1711;&#1586;&#1610;&#1606;&#1610;&#1583;',
-	'exp_statut_rel' => '&#1575;&#1610;&#1606; &#1605;&#1610;&#1583;&#1575;&#1606; &#1576;&#1575; &#1608;&#1590;&#1593;&#1610;&#1578; &#1575;&#1587;&#1662;&#1610;&#1662; &#1605;&#1578;&#1602;&#1575;&#1608;&#1578; &#1575;&#1587;&#1578;&#1548; &#1575;&#1610;&#1606; &#1610;&#1603;&#1610; &#1576;&#1585;&#1575;&#1610; &#1603;&#1606;&#1578;&#1585;&#1604; &#1583;&#1575;&#1582;&#1604;&#1610; &#1610;&#1603; &#1605;&#1572;&#1587;&#1587;&#1607; &#1605;&#1608;&#1585;&#1583; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1602;&#1585;&#1575;&#1585;&#1605;&#1610;&#8204;&#1711;&#1610;&#1585;&#1583;',
-	'explication_affordance_form' => '&#1605;&#1610;&#1583;&#1575;&#1606;&#8204;&#1607;&#1575;&#1610; &#1605;&#1608;&#1585;&#1583; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1583;&#1585; &#1601;&#1585;&#1605;&#8204;&#1607;&#1575;&#1610; &#1588;&#1606;&#1575;&#1587;&#1575;&#1610;&#1610;(#LOGIN_PUBLIC) ',
+	'editer_adherent' => 'ويرايش اعضاء',
+	'effacement_auto_impossible' => 'حساب خود به خود حذف نمي‌شود، تماس بگيريد.',
+	'email' => 'ايميل',
+	'email_bonjour' => 'سلام @nom@, ',
+	'email_deja_enregistre' => 'اين نشاني ايميل پيشتر ثبت شده. براي دستيابي به حساب خود از فرم لاگين استفاده كنيد.',
+	'email_obligatoire' => 'يك نشاني ايميل لازم است',
+	'email_valide' => 'لطفاً يك نشاني ايميل معتبر وارد كنيد',
+	'erreur_reglement_obligatoire' => 'قواعد سايت را بايد قبول كنيد',
+	'exp_divers' => 'ميداني كه با نام «نظرات» به بازديد‌كنندگان عرضه خواهد شد',
+	'exp_publication' => 'اجازه‌ي نشر داده‌هاي شخصي ',
+	'exp_statut' => 'موقعيتي را كه مايليد به اعضاء‌جديد بدهيد برگزينيد',
+	'exp_statut_rel' => 'اين ميدان با وضعيت اسپيپ متقاوت است، اين يكي براي كنترل داخلي يك مؤسسه مورد استفاده قرارمي‌گيرد',
+	'explication_affordance_form' => 'ميدان‌هاي مورد استفاده در فرم‌هاي شناسايي(#LOGIN_PUBLIC) ',
 
 	// F
-	'fax' => '&#1601;&#1575;&#1603;&#1587;',
-	'fax_pro' => '&#1601;&#1575;&#1603;&#1587; &#1581;&#1585;&#1601;&#1607;&#8204;&#1575;&#1610;',
-	'feminin' => '&#1582;&#1575;&#1606;&#1605;',
-	'fevrier' => '&#1601;&#1608;&#1585;&#1610;&#1607;',
-	'fiche' => '&#1601;&#1610;&#1588;',
-	'fiche_adherent' => '&#1601;&#1610;&#1588; &#1593;&#1590;&#1608;',
-	'fiche_expl' => ':&#1575;&#1610;&#1606; &#1605;&#1610;&#1583;&#1575;&#1606; &#1583;&#1585; &#1601;&#1610;&#1588; &#1593;&#1590;&#1608; &#1583;&#1610;&#1583;&#1607; &#1605;&#1610;&#8204;&#1588;&#1608;&#1583; (&#1602;&#1587;&#1605;&#1578; &#1582;&#1589;&#1608;&#1589;&#1610;)',
-	'fiche_mod' => '&#1575;&#1589;&#1604;&#1575;&#1581; &#1588;&#1583;&#1606;&#1610;',
-	'fiche_mod_expl' => '&#1575;&#1711;&#1585; &#1662;&#1604;&#1575;&#1711;&#1610;&#1606; #CRAYONS &#1601;&#1593;&#1575;&#1604; &#1588;&#1608;&#1583; &#1575;&#1610;&#1606; &#1605;&#1610;&#1583;&#1575;&#1606; &#1578;&#1608;&#1587;&#1591; &#1593;&#1590;&#1608; &#1575;&#1589;&#1604;&#1575;&#1581; &#1588;&#1583;&#1606;&#1610; &#1582;&#1608;&#1575;&#1607;&#1583; &#1588;&#1583;',
-	'fonction' => '&#1603;&#1575;&#1585;&#1603;&#1585;&#1583;',
-	'form' => '&#1601;&#1585;&#1605;',
-	'form_expl' => '&#1575;&#1610;&#1606; &#1605;&#1610;&#1583;&#1575;&#1606; &#1583;&#1585; &#1601;&#1585;&#1605; #INSCRIPTION2 &#1606;&#1605;&#1575;&#1610;&#1588;&#1610; &#1605;&#1610;&#8204;&#1588;&#1608;&#1583;',
-	'form_oblig_expl' => ':&#1605;&#1610;&#1583;&#1606; &#1604;&#1575;&#1586;&#1605; &#1583;&#1585; &#1601;&#1585;&#1605;',
-	'format' => '&#1601;&#1585;&#1605;&#1578;',
-	'formulaire_inscription' => '&#1601;&#1585;&#1605; &#1579;&#1576;&#1578; &#1606;&#1575;&#1605;',
-	'formulaire_inscription_ok' => '&#1579;&#1576;&#1578; &#1606;&#1575;&#1605; &#1588;&#1605;&#1575; &#1610;&#1575;&#1583;&#1583;&#1575;&#1588;&#1578; &#1588;&#1583;. &#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1578;&#1605;&#1575;&#1587; &#1575;&#1610;&#1605;&#1610;&#1604; &#1605;&#1610;&#8204;&#1588;&#1608;&#1583;.',
-	'formulaire_login_deja_utilise' => '&#1575;&#1586; &#1575;&#1610;&#1606; &#1604;&#1575;&#1711;&#1610;&#1606; &#1662;&#1610;&#1588;&#1578;&#1585; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1588;&#1583;. &#1610;&#1603;&#1610; &#1583;&#1610;&#1711;&#1585; &#1575;&#1606;&#1578;&#1582;&#1575;&#1576; &#1603;&#1606;&#1610;&#1583;.',
-	'formulaire_remplir_obligatoires' => '&#1604;&#1591;&#1601;&#1575;&#1611; &#1605;&#1610;&#1583;&#1575;&#1606;&#8204;&#1607;&#1575;&#1610; &#1604;&#1575;&#1586;&#1605; &#1585;&#1575; &#1662;&#1585;&#1603;&#1606;&#1610;&#1583;',
-	'formulaire_remplir_validation' => '&#1604;&#1591;&#1601;&#1575;&#1611; &#1605;&#1610;&#1583;&#1575;&#1606;&#8204;&#1607;&#1575;&#1610; &#1606;&#1575;&#1605;&#1593;&#1578;&#1576;&#1585; &#1585;&#1575; &#1670;&#1603; &#1603;&#1606;&#1610;&#1583;.',
+	'fax' => 'فاكس',
+	'fax_pro' => 'فاكس حرفه‌اي',
+	'feminin' => 'خانم',
+	'fevrier' => 'فوريه',
+	'fiche' => 'فيش',
+	'fiche_adherent' => 'فيش عضو',
+	'fiche_expl' => ':اين ميدان در فيش عضو ديده مي‌شود (قسمت خصوصي)',
+	'fiche_mod' => 'اصلاح شدني',
+	'fiche_mod_expl' => 'اگر پلاگين #CRAYONS فعال شود اين ميدان توسط عضو اصلاح شدني خواهد شد',
+	'fonction' => 'كاركرد',
+	'form' => 'فرم',
+	'form_expl' => 'اين ميدان در فرم #INSCRIPTION2 نمايشي مي‌شود',
+	'form_oblig_expl' => ':ميدن لازم در فرم',
+	'format' => 'فرمت',
+	'formulaire_inscription' => 'فرم ثبت نام',
+	'formulaire_inscription_ok' => 'ثبت نام شما يادداشت شد. اطلاعات تماس ايميل مي‌شود.',
+	'formulaire_login_deja_utilise' => 'از اين لاگين پيشتر استفاده شد. يكي ديگر انتخاب كنيد.',
+	'formulaire_remplir_obligatoires' => 'لطفاً ميدان‌هاي لازم را پركنيد',
+	'formulaire_remplir_validation' => 'لطفاً ميدان‌هاي نامعتبر را چك كنيد.',
 
 	// G
-	'general_infos' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1607;&#1605;&#1711;&#1575;&#1606;&#1610;',
-	'geoloc' => '&#1605;&#1608;&#1602;&#1593;&#1610;&#1578; &#1580;&#1594;&#1585;&#1575;&#1601;&#1610;&#1575;&#1610;&#1610;',
-	'geomap_obligatoire' => '&#1576;&#1585;&#1575;&#1610; &#1575;&#1587;&#1578;&#1601;&#1575;&#1583;&#1607; &#1575;&#1586; &#1583;&#1575;&#1583;&#1607;&#8204;&#8204;&#1607;&#1575;&#1610; &#1608;&#1590;&#1593;&#1610;&#1578; &#1580;&#1594;&#1585;&#1575;&#1601;&#1610;&#1575;&#1610;&#1610; &#1575;&#1601;&#1585;&#1575;&#1583;&#1548; &#1606;&#1610;&#1575;&#1586; &#1583;&#1575;&#1585;&#1610;&#1583; &#1662;&#1604;&#1575;&#1711;&#1610;&#1606; GoogleMapApi &#1585;&#1575; &#1606;&#1589;&#1576; &#1603;&#1606;&#1610;&#1583;.',
-	'gerent' => '&#1593;&#1590;&#1608;',
-	'gestion_adherent' => '&#1605;&#1583;&#1610;&#1585;&#1610;&#1578; &#1575;&#1593;&#1590;&#1575;&#1569; ',
+	'general_infos' => 'اطلاعات همگاني',
+	'geoloc' => 'موقعيت جغرافيايي',
+	'geomap_obligatoire' => 'براي استفاده از داده‌‌هاي وضعيت جغرافيايي افراد، نياز داريد پلاگين GoogleMapApi را نصب كنيد.',
+	'gerent' => 'عضو',
+	'gestion_adherent' => 'مديريت اعضاء ',
 
 	// H
-	'html' => '&#1575;&#1670;&#8204;&#1575;&#1578;&#1610;&#8204;&#1575;&#1605;&#8204;&#1575;&#1604;',
+	'html' => 'اچ‌اتي‌ام‌ال',
 
 	// I
-	'icone_afficher_utilisateurs' => '&#1606;&#1605;&#1575;&#1610;&#1588; &#1575;&#1593;&#1590;&#1575;&#1569;',
-	'icone_menu_config' => '&#1662;&#1610;&#1603;&#1585;&#1576;&#1606;&#1583;&#1610; &#1662;&#1610;&#1588;&#1585;&#1601;&#1578;&#1607; &#1575;&#1593;&#1590;&#1575;&#1569;',
-	'identification' => '&#1607;&#1608;&#1610;&#1578;',
-	'info_connection' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1575;&#1585;&#1578;&#1576;&#1575;&#1591; ',
-	'info_defaut' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1605;&#1608;&#1585;&#1583; &#1606;&#1610;&#1575;&#1586; ',
-	'info_defaut_desc' => '&#1711;&#1586;&#1610;&#1606;&#1607;&#8204;&#1607;&#1575;&#1610; &#1662;&#1610;&#1603;&#1585;&#1576;&#1606;&#1583;&#1610;',
-	'info_gener' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1607;&#1605;&#1711;&#1575;&#1606;&#1610;',
-	'info_gener_desc' => '&#1711;&#1586;&#1610;&#1606;&#1607;&#8204;&#1607;&#1575;&#1610; &#1583;&#1585;&#1582;&#1608;&#1575;&#1587;&#1578;&#1610; &#1575;&#1586; &#1575;&#1593;&#1590;&#1575;&#1569; &#1580;&#1583;&#1610;&#1583;',
-	'info_internes' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1583;&#1575;&#1582;&#1604;&#1610;',
-	'info_internes_desc' => '&#1711;&#1586;&#1610;&#1606;&#1607;&#8204;&#1607;&#1575;&#1610;&#1610; &#1603;&#1607; &#1583;&#1585; &#1662;&#1575;&#1610;&#1711;&#1575;&#1607; &#1583;&#1575;&#1583;&#1607;&#8204;&#1607;&#1575; &#1584;&#1582;&#1610;&#1585;&#1607; &#1582;&#1608;&#1575;&#1607;&#1583; &#1588;&#1583; &#1575;&#1605;&#1575; &#1583;&#1585; &#1601;&#1585;&#1605; &#1575;&#1593;&#1590;&#1575;&#1569; &#1580;&#1583;&#1610;&#1583; &#1606;&#1605;&#1575;&#1610;&#1588; &#1583;&#1575;&#1583;&#1607; &#1606;&#1582;&#1608;&#1575;&#1607;&#1583; &#1588;&#1583;',
-	'info_perso' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1588;&#1582;&#1589;&#1610; ',
-	'info_perso_desc' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1588;&#1582;&#1589;&#1610; &#1583;&#1585;&#1582;&#1608;&#1575;&#1587;&#1578;&#1610; &#1575;&#1586; &#1575;&#1593;&#1590;&#1575;&#1569; &#1580;&#1583;&#1610;&#1583; &#1587;&#1575;&#1610;&#1578;',
-	'info_pro' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1662;&#1585;&#1608;&#1601;&#1588;&#1606;&#1575;&#1604; (&#1581;&#1585;&#1601;&#1607;&#8204;&#1575;&#1610;)',
-	'infos_adherent' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1578;&#1603;&#1605;&#1610;&#1604;&#1610;',
-	'infos_complementaires' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1578;&#1603;&#1605;&#1610;&#1604;&#1610;',
-	'infos_personnelles' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1588;&#1582;&#1589;&#1610; ',
-	'inscription2' => ' (&#1603;&#1578;&#1610;&#1576;&#1607; .&#1548;2)Inscription 2.0',
-	'inscriptions' => '&#1603;&#1578;&#1610;&#1576;&#1607;&#8204;&#1607;&#1575;',
-	'inserez_infos' => '&#1575;&#1591;&#1604;&#1575;&#1593;&#1575;&#1578; &#1583;&#1585;&#1582;&#1608;&#1575;&#1587;&#1578;&#1610; &#1585;&#1575; &#1608;&#1575;&#1585;&#1583; &#1603;&#1606;&#1610;&#1583;',
+	'icone_afficher_utilisateurs' => 'نمايش اعضاء',
+	'icone_menu_config' => 'پيكربندي پيشرفته اعضاء',
+	'identification' => 'هويت',
+	'info_connection' => 'اطلاعات ارتباط ',
+	'info_defaut' => 'اطلاعات مورد نياز ',
+	'info_defaut_desc' => 'گزينه‌هاي پيكربندي',
+	'info_gener' => 'اطلاعات همگاني',
+	'info_gener_desc' => 'گزينه‌هاي درخواستي از اعضاء جديد',
+	'info_internes' => 'اطلاعات داخلي',
+	'info_internes_desc' => 'گزينه‌هايي كه در پايگاه داده‌ها ذخيره خواهد شد اما در فرم اعضاء جديد نمايش داده نخواهد شد',
+	'info_perso' => 'اطلاعات شخصي ',
+	'info_perso_desc' => 'اطلاعات شخصي درخواستي از اعضاء جديد سايت',
+	'info_pro' => 'اطلاعات پروفشنال (حرفه‌اي)',
+	'infos_adherent' => 'اطلاعات تكميلي',
+	'infos_complementaires' => 'اطلاعات تكميلي',
+	'infos_personnelles' => 'اطلاعات شخصي ',
+	'inscription2' => ' (كتيبه .،2)Inscription 2.0',
+	'inscriptions' => 'كتيبه‌ها',
+	'inserez_infos' => 'اطلاعات درخواستي را وارد كنيد',
 
 	// J
-	'janvier' => '&#1688;&#1575;&#1606;&#1608;&#1610;&#1607;',
-	'juillet' => '&#1688;&#1608;&#1574;&#1610;&#1607;',
-	'juin' => '&#1688;&#1608;&#1574;&#1606;',
+	'janvier' => 'ژانويه',
+	'juillet' => 'ژوئيه',
+	'juin' => 'ژوئن',
 
 	// L
-	'label_affordance_form' => '&#1662;&#1610;&#1603;&#1585;&#1576;&#1606;&#1583;&#1610; &#1589;&#1601;&#1581;&#1607;&#8204;&#1610; &#1575;&#1585;&#1578;&#1576;&#1575;&#1591;',
-	'label_public_reglement' => 'J\'ai lu et j\'accepte le r&egrave;glement', # NEW
-	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">r&egrave;glement</a>', # NEW
-	'label_reglement' => 'R&egrave;glement &agrave; valider', # NEW
-	'label_reglement_article' => 'Article original du site correspondant au r&egrave;glement', # NEW
-	'label_validation_numero_international' => 'Forcer les num&eacute;ros de t&eacute;l&eacute;phone &agrave; &ecirc;tre sous la forme internationale', # NEW
+	'label_affordance_form' => 'پيكربندي صفحه‌ي ارتباط',
+	'label_public_reglement' => 'J\'ai lu et j\'accepte le règlement', # NEW
+	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">règlement</a>', # NEW
+	'label_reglement' => 'Règlement à valider', # NEW
+	'label_reglement_article' => 'Article original du site correspondant au règlement', # NEW
+	'label_validation_numero_international' => 'Forcer les numéros de téléphone à être sous la forme internationale', # NEW
 	'latitude' => 'Latitude', # NEW
 	'legend_affordance_form' => 'Formulaire d\'identification', # NEW
-	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;', # NEW
-	'legend_reglement' => 'R&egrave;glement du site', # NEW
+	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oublié', # NEW
+	'legend_reglement' => 'Règlement du site', # NEW
 	'legend_validation' => 'Validations', # NEW
-	'legende' => 'L&eacute;gende', # NEW
-	'lisez_mail' => 'Un email vient d\'&ecirc;tre envoy&eacute; &agrave; l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.', # NEW
+	'legende' => 'Légende', # NEW
+	'lisez_mail' => 'Un email vient d\'être envoyé à l\'adresse fournie. Pour activer votre compte veuillez suivre les instructions.', # NEW
 	'liste_adherents' => 'Voir la liste des utilisateurs', # NEW
 	'liste_comptes_titre' => 'Liste des utilisateurs', # NEW
 	'login' => 'Nom d\'utilisateur (login)', # NEW
@@ -166,8 +166,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mai' => 'mai', # NEW
-	'mail_non_domaine' => 'L\'adresse email que vous avez donn&eacute;e n\'appartient pas au domaine que vous avez indiqu&eacute; veuillez essayer &agrave; nouveau', # NEW
-	'mail_renvoye' => 'Cette adresse email a d&eacute;j&agrave; &eacute;t&eacute; enregistr&eacute;e, veuillez activer votre compte en suivant les instructions contenues dans le mail.', # NEW
+	'mail_non_domaine' => 'L\'adresse email que vous avez donnée n\'appartient pas au domaine que vous avez indiqué veuillez essayer à nouveau', # NEW
+	'mail_renvoye' => 'Cette adresse email a déjà été enregistrée, veuillez activer votre compte en suivant les instructions contenues dans le mail.', # NEW
 	'mars' => 'mars', # NEW
 	'masculin' => 'Monsieur', # NEW
 	'message_auto' => '(ceci est un message automatique)', # NEW
@@ -175,22 +175,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mobile_pro' => 'Mobile professionnel', # NEW
 	'modif_pass_titre' => 'Modifier votre mot de passe', # NEW
 	'moins_seconde' => 'moins d\'une seconde', # NEW
-	'mot_passe_reste_identique' => 'Votre mot de passe n\'a pas &eacute;t&eacute; modifi&eacute;.', # NEW
+	'mot_passe_reste_identique' => 'Votre mot de passe n\'a pas été modifié.', # NEW
 
 	// N
 	'naissance' => 'Date de naissance', # NEW
-	'nb_users_supprimes' => '@nb@ suppression(s) effectu&eacute;e(s).', # NEW
+	'nb_users_supprimes' => '@nb@ suppression(s) effectuée(s).', # NEW
 	'nettoyer_tables' => 'Nettoyer tables', # NEW
-	'no_user_selected' => 'Vous n\'avez s&eacute;lectionn&eacute; aucun utilisateur.', # NEW
+	'no_user_selected' => 'Vous n\'avez sélectionné aucun utilisateur.', # NEW
 	'nom' => 'Signature', # NEW
-	'nom_explication' => 'votre nom ou votre&nbsp;pseudo', # NEW
+	'nom_explication' => 'votre nom ou votre pseudo', # NEW
 	'nom_famille' => 'Nom de famille', # NEW
 	'nom_site' => 'Nom du site', # NEW
-	'non_renseigne' => 'non renseign&eacute;.', # NEW
-	'non_renseignee' => 'non renseign&eacute;e.', # NEW
+	'non_renseigne' => 'non renseigné.', # NEW
+	'non_renseignee' => 'non renseignée.', # NEW
 	'novembre' => 'novembre', # NEW
-	'numero_valide' => 'Veuillez ins&eacute;rer un num&eacute;ro valide', # NEW
-	'numero_valide_international' => 'Ce num&eacute;ro doit &ecirc;tre sous la forme internationale (ex: +32 475 123 456)', # NEW
+	'numero_valide' => 'Veuillez insérer un numéro valide', # NEW
+	'numero_valide_international' => 'Ce numéro doit être sous la forme internationale (ex: +32 475 123 456)', # NEW
 
 	// O
 	'octobre' => 'octobre', # NEW
@@ -199,27 +199,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_confirmation' => 'Page de confirmation de votre inscription', # NEW
 	'par_defaut' => 'Ce champ est obligatoire', # NEW
 	'pass' => 'Mot de passe', # NEW
-	'pass_egal' => 'Veuillez entrer le m&ecirc;me mot de passe que pr&eacute;c&eacute;demment.', # NEW
+	'pass_egal' => 'Veuillez entrer le même mot de passe que précédemment.', # NEW
 	'pass_indiquez_cidessous' => 'Indiquez ci-dessous l\'adresse email sous laquelle vous
-			vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
-			recevrez un email vous indiquant la marche &agrave; suivre pour
-			modifier votre acc&egrave;s.', # NEW
-	'pass_minimum' => 'Votre mot de passe doit comporter au moins 5 caract&egrave;res', # NEW
+			vous êtes précédemment enregistré. Vous
+			recevrez un email vous indiquant la marche à suivre pour
+			modifier votre accès.', # NEW
+	'pass_minimum' => 'Votre mot de passe doit comporter au moins 5 caractères', # NEW
 	'pass_oubli_mot' => 'Changement de votre mot de passe', # NEW
 	'pass_rappel_email' => 'Rappel : votre adresse email est "@email@".', # NEW
 	'pass_rappel_login_email' => 'Rappel : votre login est "@login@" et votre adresse email est "@email@".', # NEW
-	'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre acc&egrave;s au site.', # NEW
+	'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre accès au site.', # NEW
 	'password_obligatoire' => 'Le mot de passe est obligatoire.', # NEW
 	'password_retaper' => 'Confirmez le mot de passe', # NEW
 	'pays' => 'Pays', # NEW
-	'pays_defaut' => 'Pays par d&eacute;faut', # NEW
+	'pays_defaut' => 'Pays par défaut', # NEW
 	'pays_pro' => 'Pays (Pro.)', # NEW
-	'pgp' => 'Cl&eacute; PGP', # NEW
-	'prenom' => 'Pr&eacute;nom', # NEW
-	'probleme_email' => 'Probl&egrave;me de mail&nbsp;: l\'email d\'activation ne peut pas &ecirc;tre envoy&eacute;.', # NEW
+	'pgp' => 'Clé PGP', # NEW
+	'prenom' => 'Prénom', # NEW
+	'probleme_email' => 'Problème de mail : l\'email d\'activation ne peut pas être envoyé.', # NEW
 	'profession' => 'Profession', # NEW
-	'profil_droits_insuffisants' => 'Desol&eacute; vous n\'avez pas le droit de modifier cet auteur<br />', # NEW
-	'profil_modifie_ok' => 'Les modifications de votre profil ont bien &eacute;t&eacute; prises en compte.', # NEW
+	'profil_droits_insuffisants' => 'Desolé vous n\'avez pas le droit de modifier cet auteur<br />', # NEW
+	'profil_modifie_ok' => 'Les modifications de votre profil ont bien été prises en compte.', # NEW
 	'publication' => 'Publication', # NEW
 
 	// R
@@ -229,41 +229,41 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recherche_case' => 'Dans le champ :', # NEW
 	'recherche_utilisateurs' => 'Rechercher un utilisateur', # NEW
 	'recherche_valeur' => 'Rechercher :', # NEW
-	'redemande_password' => 'R&eacute;inserez votre mot de passe&nbsp;:', # NEW
-	'rien_a_faire' => 'Rien &agrave; faire', # NEW
+	'redemande_password' => 'Réinserez votre mot de passe :', # NEW
+	'rien_a_faire' => 'Rien à faire', # NEW
 
 	// S
 	'saisir_email_valide' => 'Veuillez saisir une adresse email valide', # NEW
 	'secondes' => 'secondes', # NEW
 	'secteur' => 'Secteur', # NEW
 	'septembre' => 'septembre', # NEW
-	'sexe' => 'Civilit&eacute;', # NEW
-	'societe' => 'Soci&eacute;t&eacute; / Association ...', # NEW
+	'sexe' => 'Civilité', # NEW
+	'societe' => 'Société / Association ...', # NEW
 	'statut' => 'Statut', # NEW
 	'statut_rel' => 'Statut interne', # NEW
 	'statuts_actifs' => 'Les couleurs des icones correspondent aux statuts suivants : ', # NEW
-	'suppression_faite' => 'La suppression de vos donn&eacute;es a &eacute;t&eacute; effectu&eacute;e', # NEW
+	'suppression_faite' => 'La suppression de vos données a été effectuée', # NEW
 	'supprimer_adherent' => 'Supprimer utilisateurs', # NEW
 	'supprimer_adherent_red' => 'Sup', # NEW
 	'surnom' => 'Surnom', # NEW
 
 	// T
 	'table' => 'Table', # NEW
-	'table_expl' => ' : Le champ sera affich&eacute; sur la liste des utilisateurs (espace priv&eacute;)', # NEW
-	'tel' => 'T&eacute;l.', # NEW
-	'telephone' => 'T&eacute;l&eacute;phone', # NEW
-	'telephone_pro' => 'T&eacute;l&eacute;phone professionnel', # NEW
+	'table_expl' => ' : Le champ sera affiché sur la liste des utilisateurs (espace privé)', # NEW
+	'tel' => 'Tél.', # NEW
+	'telephone' => 'Téléphone', # NEW
+	'telephone_pro' => 'Téléphone professionnel', # NEW
 	'texte' => 'Texte', # NEW
-	'texte_email_confirmation' => 'Votre compte est actif, vous pouvez d&egrave;s maintenant vous connecter au site en utilisant vos identifiants personnels.
+	'texte_email_confirmation' => 'Votre compte est actif, vous pouvez dès maintenant vous connecter au site en utilisant vos identifiants personnels.
 
-Votre login est&nbsp;: @login@
+Votre login est : @login@
 et vous venez de choisir votre mot de passe.
 
 Merci de votre confiance
 
-L\'&eacute;quipe de @nom_site@
+L\'équipe de @nom_site@
 @url_site@', # NEW
-	'texte_email_inscription' => 'vous &ecirc;tes sur le point de confirmer votre inscription au site @nom_site@.
+	'texte_email_inscription' => 'vous êtes sur le point de confirmer votre inscription au site @nom_site@.
 
 Cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de passe.
 
@@ -272,10 +272,10 @@ Cliquer le lien ci-dessous pour activer votre compte et choisir votre mot de pas
 
 Merci de votre confiance.
 
-L\'&eacute;quipe de @nom_site@.
+L\'équipe de @nom_site@.
 @url_site@
 
-Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.
+Si vous n\'avez pas demandé cette inscription ou si vous ne voulez plus faire partie de notre site, cliquez le lien ci-dessous.
 @link_suppresion@
 
 
@@ -290,10 +290,10 @@ Si vous n\'avez pas demand&eacute; cette inscription ou si vous ne voulez plus f
 	'une_minute' => 'une minute', # NEW
 	'une_seconde' => 'une seconde', # NEW
 	'url_site' => 'Url du site', # NEW
-	'url_societe' => 'Site soci&eacute;t&eacute;', # NEW
+	'url_societe' => 'Site société', # NEW
 
 	// V
-	'validite' => 'Date de validit&eacute;', # NEW
+	'validite' => 'Date de validité', # NEW
 	'ville' => 'Ville', # NEW
 	'ville_pro' => 'Ville (Pro.)', # NEW
 	'visiteur' => 'Visiteur', # NEW

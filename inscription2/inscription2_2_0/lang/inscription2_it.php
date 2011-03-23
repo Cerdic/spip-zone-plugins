@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chaine_valide' => 'Inserisci una stringa di caratteri',
 	'chainelettre' => '(composta unicamente da lettere)',
 	'chainenombre' => '(composta da lettere e/o cifre)',
-	'champ_obligatoire' => 'Questo campo &egrave; obbligatorio',
+	'champ_obligatoire' => 'Questo campo è obbligatorio',
 	'choisir_categories' => 'Scegli una voce tra le seguenti:',
 	'choisir_nouveau_password' => 'Puoi scegliere una nuova password cliccando sul seguente link',
 	'choisir_zones' => 'Scegli le zone per nelle quali vuoi che i nuovi iscritti siano aggiunti',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'code_postal_pro' => 'CAP (lavoro)',
 	'commentaire' => 'Commento',
 	'compte_active' => 'Il tuo account su @nom_site@',
-	'compte_efface' => 'Il tuo account &egrave; stato cancellato.',
+	'compte_efface' => 'Il tuo account è stato cancellato.',
 	'conf_plugin' => 'Configurazione Inscription 2.0',
 	'conf_plugin_page' => 'Configurazione memorizzata del plugin Inscription 2.0',
 	'configs' => 'Configurazioni',
@@ -65,7 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'decembre' => 'Dicembre',
 	'delete_user_select' => 'Cancella gli utenti selezionati',
 	'demande_password' => 'La tua password:',
-	'descriptif_plugin' => 'Troverai qui tutti gli utenti iscritti al sito. Il loro stato &egrave; indicato dal colore della loro icona.<br /><br />Puoi configurare dei campi supplementari, proposti in opzione ai visitatori al momento dell\'iscrizione.',
+	'descriptif_plugin' => 'Troverai qui tutti gli utenti iscritti al sito. Il loro stato è indicato dal colore della loro icona.<br /><br />Puoi configurare dei campi supplementari, proposti in opzione ai visitatori al momento dell\'iscrizione.',
 	'description_cfg' => 'Parametrizza i campi supplementari per gli utenti',
 	'description_page' => 'Qui puoi verificare le tue scelte di configurazione salvate',
 	'divers' => 'Varie',
@@ -74,11 +74,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'editer_adherent' => 'Modifica utente',
-	'effacement_auto_impossible' => 'L\'account non pu&ograve; essere cancellato automaticamente, contattaci.',
+	'effacement_auto_impossible' => 'L\'account non può essere cancellato automaticamente, contattaci.',
 	'email' => 'E-Mail',
 	'email_bonjour' => 'Buongiorno @nom@,',
-	'email_deja_enregistre' => 'Questo indirizzo email &egrave; gi&agrave; registrato. Utilizza il form di login per accedere al tuo account.',
-	'email_obligatoire' => 'Il campo email &egrave; obbligatorio',
+	'email_deja_enregistre' => 'Questo indirizzo email è già registrato. Utilizza il form di login per accedere al tuo account.',
+	'email_obligatoire' => 'Il campo email è obbligatorio',
 	'email_valide' => 'Inserisci una email valida',
 	'erreur_reglement_obligatoire' => 'Devi accettare il regolamento',
 	'exp_divers' => 'Campo proposto ai visitatori con il nome del commento',
@@ -94,24 +94,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fevrier' => 'Febbraio',
 	'fiche' => 'Pagina',
 	'fiche_adherent' => 'Pagina utente',
-	'fiche_expl' => 'Il campo sar&agrave; visibile nella pagina dell\'utente (spazio redazionale)',
+	'fiche_expl' => 'Il campo sarà visibile nella pagina dell\'utente (spazio redazionale)',
 	'fiche_mod' => 'Modificabile',
-	'fiche_mod_expl' => 'Il campo sar&agrave; modificabile dall\'interfaccia pubblica dall\'utente a condizione di usare il plugin #CRAYONS',
+	'fiche_mod_expl' => 'Il campo sarà modificabile dall\'interfaccia pubblica dall\'utente a condizione di usare il plugin #CRAYONS',
 	'fonction' => 'Funzione',
 	'form' => 'Form',
-	'form_expl' => 'Il campo sar&agrave; mostrato sul form  #INSCRIPTION2',
+	'form_expl' => 'Il campo sarà mostrato sul form  #INSCRIPTION2',
 	'form_oblig_expl' => 'Rendi l\'inserimento obbligatorio nel form',
 	'format' => 'Formato',
 	'formulaire_inscription' => 'Modulo di iscrizione',
-	'formulaire_inscription_ok' => 'La tua iscrizione &egrave; stata ricevuta. Riceverai una email con i tuoi parametri di connessione',
-	'formulaire_login_deja_utilise' => 'Il nome utente &egrave; gi&agrave; registrato, scegline un altro',
+	'formulaire_inscription_ok' => 'La tua iscrizione è stata ricevuta. Riceverai una email con i tuoi parametri di connessione',
+	'formulaire_login_deja_utilise' => 'Il nome utente è già registrato, scegline un altro',
 	'formulaire_remplir_obligatoires' => 'Inserisci i campi obbligatori',
 	'formulaire_remplir_validation' => 'Verifica i campi che non sono corretti.',
 
 	// G
 	'general_infos' => 'Informazioni generali',
 	'geoloc' => 'Geolocalizzazione',
-	'geomap_obligatoire' => 'Per utilizzare i dati di geolocalizzazione delle persone, &egrave; necessario installare il plugin GoogleMapApi...',
+	'geomap_obligatoire' => 'Per utilizzare i dati di geolocalizzazione delle persone, è necessario installare il plugin GoogleMapApi...',
 	'gerent' => 'Iscritto',
 	'gestion_adherent' => 'Gestione degli utenti',
 
@@ -124,7 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'identification' => 'Identificazione',
 	'info_connection' => 'Informazioni di connessione',
 	'info_defaut' => 'Informazioni obbligatorie',
-	'info_defaut_desc' => 'Possibilit&agrave; di parametrizzazione',
+	'info_defaut_desc' => 'Possibilità di parametrizzazione',
 	'info_gener' => 'Informazioni generali',
 	'info_gener_desc' => 'Opzioni che saranno richieste ai nuovi iscritti al sito',
 	'info_internes' => 'Informazioni interne',
@@ -157,7 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_reglement' => 'Regolamento del sito',
 	'legend_validation' => 'Validazioni',
 	'legende' => 'Legenda',
-	'lisez_mail' => 'Una email &egrave; stata inviata all\'indirizzo fornito. Per attivare il tuo account segui le istruzioni.',
+	'lisez_mail' => 'Una email è stata inviata all\'indirizzo fornito. Per attivare il tuo account segui le istruzioni.',
 	'liste_adherents' => 'Vedi la lista degli utenti',
 	'liste_comptes_titre' => 'Lista degli utenti',
 	'login' => 'Nome utente (login)',
@@ -167,15 +167,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mai' => 'Maggio',
 	'mail_non_domaine' => 'L\'indirizzo email che hai fornito non appartiene al dominio che hai indicato. Verifica i dati',
-	'mail_renvoye' => 'Questo indirizzo email &egrave; gi&agrave; stato memorizzato, attiva il tuo account seguendo le istruzioni contenute nell\'email.',
+	'mail_renvoye' => 'Questo indirizzo email è già stato memorizzato, attiva il tuo account seguendo le istruzioni contenute nell\'email.',
 	'mars' => 'Marzo',
 	'masculin' => 'Maschile',
-	'message_auto' => '(questo &egrave; un messaggio automatico)',
+	'message_auto' => '(questo è un messaggio automatico)',
 	'mobile' => 'Cellulare',
 	'mobile_pro' => 'Cellulare di lavoro',
 	'modif_pass_titre' => 'Modifica la tua password',
 	'moins_seconde' => 'meno di un secondo',
-	'mot_passe_reste_identique' => 'La tua password non &egrave; stata modificata.',
+	'mot_passe_reste_identique' => 'La tua password non è stata modificata.',
 
 	// N
 	'naissance' => 'Data di nascita',
@@ -197,23 +197,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'page_confirmation' => 'Pagina di conferma della tua iscrizione',
-	'par_defaut' => 'Questo campo &egrave; obbligatorio',
+	'par_defaut' => 'Questo campo è obbligatorio',
 	'pass' => 'Password',
 	'pass_egal' => 'Inserisci nuovamente la password.',
 	'pass_indiquez_cidessous' => 'Indica di seguito l\'indirizzo email con il quale ti sei precedentemente registrato. Riceverai una email con le istruzioni da seguire per modificare i tuoi dati.',
 	'pass_minimum' => 'La tua password deve essere lunga almeno 5 caratteri',
 	'pass_oubli_mot' => 'Modifica della password',
-	'pass_rappel_email' => 'Promemoria: il tuo indirizzo email &egrave; "@email@".',
-	'pass_rappel_login_email' => 'Promemoria: il tuo login &egrave; "@login@" ed il tuo indirizzo email &egrave; "@email@".',
-	'pass_recevoir_mail' => 'Riceverai una email che ti indicher&agrave; come modificare il tuo accesso al sito.',
-	'password_obligatoire' => 'La password &egrave; obbligatoria.',
+	'pass_rappel_email' => 'Promemoria: il tuo indirizzo email è "@email@".',
+	'pass_rappel_login_email' => 'Promemoria: il tuo login è "@login@" ed il tuo indirizzo email è "@email@".',
+	'pass_recevoir_mail' => 'Riceverai una email che ti indicherà come modificare il tuo accesso al sito.',
+	'password_obligatoire' => 'La password è obbligatoria.',
 	'password_retaper' => 'Conferma la password',
 	'pays' => 'Stato',
 	'pays_defaut' => 'Stato predefinito',
 	'pays_pro' => 'Stato (lavoro)',
 	'pgp' => 'Chiave PGP',
 	'prenom' => 'Nome',
-	'probleme_email' => 'Problema con la posta: l\'email di attivazione non pu&ograve; essere inviata.',
+	'probleme_email' => 'Problema con la posta: l\'email di attivazione non può essere inviata.',
 	'profession' => 'Professione',
 	'profil_droits_insuffisants' => 'Spiacente non hai il permesso di modificare questo autore<br />',
 	'profil_modifie_ok' => 'Le modifiche al tuo profilo sono state memorizzate correttamente.',
@@ -221,7 +221,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'raccourcis' => 'Scelta rapida',
-	'rappel_login' => 'Promemoria: il tuo login &egrave;: ',
+	'rappel_login' => 'Promemoria: il tuo login è: ',
 	'rappel_password' => 'La tua password',
 	'recherche_case' => 'Nel campo:',
 	'recherche_utilisateurs' => 'Ricerca un utente',
@@ -235,25 +235,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'secteur' => 'Settore',
 	'septembre' => 'Settembre',
 	'sexe' => 'Sesso',
-	'societe' => 'Societ&agrave; / Associazione ...',
+	'societe' => 'Società / Associazione ...',
 	'statut' => 'Stato',
 	'statut_rel' => 'Stato interno',
 	'statuts_actifs' => 'I colori delle icone corrispondono ai seguenti stati:',
-	'suppression_faite' => 'La cancellazione dei tuoi dati &egrave; stata effettuata',
+	'suppression_faite' => 'La cancellazione dei tuoi dati è stata effettuata',
 	'supprimer_adherent' => 'Cancella utenti',
 	'supprimer_adherent_red' => 'Canc',
 	'surnom' => 'Pseudonimo',
 
 	// T
 	'table' => 'Tabella',
-	'table_expl' => 'Il campo sar&agrave; mostrato sulla lista degli utenti (in redazione)',
+	'table_expl' => 'Il campo sarà mostrato sulla lista degli utenti (in redazione)',
 	'tel' => 'Tel',
 	'telephone' => 'Telefono',
 	'telephone_pro' => 'Telefono di lavoro',
 	'texte' => 'Testo',
-	'texte_email_confirmation' => 'Il tuo account &egrave; attivo, puoi d\'ora in poi connetterti al sito utilizzando i tuoi parametri di accesso personali.
+	'texte_email_confirmation' => 'Il tuo account è attivo, puoi d\'ora in poi connetterti al sito utilizzando i tuoi parametri di accesso personali.
 
-il tuo login &egrave;: @login@
+il tuo login è: @login@
 ed hai impostato la tua password.
 
 Grazie per esserti registrato
@@ -272,7 +272,7 @@ Grazie per la fiducia.
 Il team di @nom_site@.
 @url_site@
 
-Si non hai richiesto questa iscrizione o se non vuoi pi&ugrave; iscriverti al nostro sito, clicca il link qui sotto.
+Si non hai richiesto questa iscrizione o se non vuoi più iscriverti al nostro sito, clicca il link qui sotto.
 @link_suppresion@
 
 
@@ -287,12 +287,12 @@ Si non hai richiesto questa iscrizione o se non vuoi pi&ugrave; iscriverti al no
 	'une_minute' => 'un minuto',
 	'une_seconde' => 'un secondo',
 	'url_site' => 'Url del sito',
-	'url_societe' => 'Sito societ&agrave;',
+	'url_societe' => 'Sito società',
 
 	// V
 	'validite' => 'Data di scadenza',
-	'ville' => 'Citt&agrave;',
-	'ville_pro' => 'Citt&agrave; (lavoro)',
+	'ville' => 'Città',
+	'ville_pro' => 'Città (lavoro)',
 	'visiteur' => 'Visitatore',
 	'vos_contacts_personnels' => 'I tuoi contatti personali',
 	'votre_adresse' => 'Il tuo indirizzo personale',

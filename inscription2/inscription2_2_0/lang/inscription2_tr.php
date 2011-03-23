@@ -9,22 +9,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'a_confirmer' => 'Onaylanacak',
-	'accesrestreint' => 'S&#305;n&#305;rl&#305; Eri&#351;im',
+	'accesrestreint' => 'Sınırlı Erişim',
 	'aconfirmer' => 'Onaylanacak',
-	'action_adherent' => '&#304;&#351;lemler', # MODIF
-	'activation_compte' => 'Hesab&#305;n&#305;z&#305; etkinle&#351;tirin',
-	'adherents' => '&Uuml;yeler', # MODIF
-	'admin' => 'Y&ouml;netici',
+	'action_adherent' => 'İşlemler', # MODIF
+	'activation_compte' => 'Hesabınızı etkinleştirin',
+	'adherents' => 'Üyeler', # MODIF
+	'admin' => 'Yönetici',
 	'admin_modifier_auteur_supp' => 'Ek bilgiler',
 	'adresse' => 'Adres',
-	'adresse_pro' => '&#304;&#351; adresi (&#304;&#351;)',
+	'adresse_pro' => 'İş adresi (İş)',
 	'afficher_tous' => 'Afficher tous les utilisateurs', # NEW
-	'ajouter_adherent' => 'Yeni bir ziyaret&ccedil;i olu&#351;tur', # MODIF
+	'ajouter_adherent' => 'Yeni bir ziyaretçi oluştur', # MODIF
 	'ans' => 'ans', # NEW
-	'aout' => 'A&#287;ustos',
-	'aucun_resultat_recherche' => 'Araman&#305;z i&ccedil;in hi&ccedil;bir sonu&ccedil; yok.',
+	'aout' => 'Ağustos',
+	'aucun_resultat_recherche' => 'Aramanız için hiçbir sonuç yok.',
 	'auteur' => 'Yazar',
-	'autre' => 'Di&#287;er',
+	'autre' => 'Diğer',
 	'avril' => 'Nisan',
 
 	// B
@@ -32,88 +32,88 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'caracteres' => 'karakter', # MODIF
-	'categorie' => '&Ouml;deme kategorisi',
-	'chaine_valide' => 'L&uuml;tfen bir karakter j&#351;zv&#351;&#305;&#351; &uuml;&#351;&#305;&#351;z',
-	'chainelettre' => '(yaln&#305;z harflerden olu&#351;an)',
-	'chainenombre' => '(harf ve/veya rakamlardan olu&#351;an)',
+	'categorie' => 'Ödeme kategorisi',
+	'chaine_valide' => 'Lütfen bir karakter jşzvşış üşışz',
+	'chainelettre' => '(yalnız harflerden oluşan)',
+	'chainenombre' => '(harf ve/veya rakamlardan oluşan)',
 	'champ_obligatoire' => 'Bu alan zorunludur',
-	'choisir_categories' => 'A&#351;&#287;&#305;dan se&ccedil;iniz&nbsp;:',
-	'choisir_nouveau_password' => '&#350;u ba&#287;lant&#305;ya t&#305;klayarak yeni bir &#351;ifre se&ccedil;ebilirsiniz',
-	'choisir_zones' => 'Yeni &uuml;yelerin atanaca&#287;&#305; alanlar&#305; se&ccedil;iniz',
+	'choisir_categories' => 'Aşğıdan seçiniz :',
+	'choisir_nouveau_password' => 'Şu bağlantıya tıklayarak yeni bir şifre seçebilirsiniz',
+	'choisir_zones' => 'Yeni üyelerin atanacağı alanları seçiniz',
 	'choisissez' => 'Choisissez', # NEW
 	'choix_affordance_email' => 'Email', # NEW
-	'choix_affordance_login' => 'Login (par d&eacute;faut dans SPIP)', # NEW
+	'choix_affordance_login' => 'Login (par défaut dans SPIP)', # NEW
 	'choix_affordance_login_email' => 'Login et email', # NEW
-	'choix_domaine' => 'B&ouml;lgenizi se&ccedil;iniz ("domaine")',
-	'civilite' => 'Meden&icirc; durum',
+	'choix_domaine' => 'Bölgenizi seçiniz ("domaine")',
+	'civilite' => 'Medenî durum',
 	'code_postal' => 'Posta Kodu',
-	'code_postal_pro' => 'Posta Kodu (&#304;&#351;)',
+	'code_postal_pro' => 'Posta Kodu (İş)',
 	'commentaire' => 'Yorum',
-	'compte_active' => '@nom_site@ sitesindeki hesab&#305;n&#305;z',
-	'compte_efface' => 'Hesab&#305;n&#305;z silindi.', # MODIF
-	'conf_plugin' => 'Inscription2 Konfig&uuml;rasyonu', # MODIF
-	'conf_plugin_page' => 'Inscription2 eklentisinin kay&#305;tl&#305; konfig&uuml;rasyonu', # MODIF
-	'configs' => 'Konfig&uuml;rasyonlar',
-	'configuration' => 'Konfig&uuml;rasyon', # MODIF
-	'confirmation' => '<p>Devam etmek istedi&#287;inizden emin misiniz?</p><p>Yap&#305;lan de&#287;i&#351;iklikler geri al&#305;namaz!!!',
-	'contacts_personnels' => 'Ki&#351;isel ba&#287;lant&#305;lar',
-	'contacts_pros' => 'Meslek&icirc; ba&#287;lant&#305;lar',
-	'cp_valide' => 'L&uuml;tfen ge&ccedil;erli bir e-posta adresi giriniz',
-	'creation' => 'Fi&#351;in olu&#351;turulma tarihi',
+	'compte_active' => '@nom_site@ sitesindeki hesabınız',
+	'compte_efface' => 'Hesabınız silindi.', # MODIF
+	'conf_plugin' => 'Inscription2 Konfigürasyonu', # MODIF
+	'conf_plugin_page' => 'Inscription2 eklentisinin kayıtlı konfigürasyonu', # MODIF
+	'configs' => 'Konfigürasyonlar',
+	'configuration' => 'Konfigürasyon', # MODIF
+	'confirmation' => '<p>Devam etmek istediğinizden emin misiniz?</p><p>Yapılan değişiklikler geri alınamaz!!!',
+	'contacts_personnels' => 'Kişisel bağlantılar',
+	'contacts_pros' => 'Meslekî bağlantılar',
+	'cp_valide' => 'Lütfen geçerli bir e-posta adresi giriniz',
+	'creation' => 'Fişin oluşturulma tarihi',
 
 	// D
-	'decembre' => 'Aral&#305;k',
-	'delete_user_select' => 'Supprimer le(s) utilisateur(s) s&eacute;lectionn&eacute;(s)', # NEW
-	'demande_password' => '&#350;ifreniz&nbsp;:',
-	'descriptif_plugin' => 'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqu&eacute; par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs suppl&eacute;mentaires, propos&eacute;s en option aux visiteurs au moment de l\'inscription.', # NEW
-	'description_cfg' => 'Bu eklenti sitenizin yazarlar&#305;na ait bilgileri geni&#351;letmeye olanak tan&#305;r, burada ek alanlar se&ccedil;ebilirsiniz', # MODIF
-	'description_page' => 'Burada konfig&uuml;rasyon tercihlerinizi kaydedildikleri gibi kontrol edebilirsiniz.',
-	'divers' => '&Ccedil;e&#351;itli',
+	'decembre' => 'Aralık',
+	'delete_user_select' => 'Supprimer le(s) utilisateur(s) sélectionné(s)', # NEW
+	'demande_password' => 'Şifreniz :',
+	'descriptif_plugin' => 'Vous trouverez ici tous les utilisateurs inscrits sur le site. Leur statut est indiqué par la couleur de leur icone.<br /><br />Vous pouvez configurer des champs supplémentaires, proposés en option aux visiteurs au moment de l\'inscription.', # NEW
+	'description_cfg' => 'Bu eklenti sitenizin yazarlarına ait bilgileri genişletmeye olanak tanır, burada ek alanlar seçebilirsiniz', # MODIF
+	'description_page' => 'Burada konfigürasyon tercihlerinizi kaydedildikleri gibi kontrol edebilirsiniz.',
+	'divers' => 'Çeşitli',
 	'domaine' => 'Alan ("Domaine")',
 	'domaines' => 'Alan ("Domaine")',
 
 	// E
-	'editer_adherent' => '&Uuml;ye bilgilerini d&uuml;zenle', # MODIF
+	'editer_adherent' => 'Üye bilgilerini düzenle', # MODIF
 	'effacement_auto_impossible' => 'Hesap otomatik olarak silinemez, bizle temas kurun.',
 	'email' => 'E-Posta',
-	'email_bonjour' => 'G&uuml;nayd&#305;n @nom@,',
-	'email_deja_enregistre' => 'Cette adresse email est d&eacute;j&agrave; enregistr&eacute;e. Utilisez le formulaire de connexion pour acc&eacute;der &agrave; votre compte.', # NEW
-	'email_obligatoire' => 'E-posta alan&#305; zorunludur',
-	'email_valide' => 'L&uuml;tfen ge&ccedil;erli bi re-posta giriniz',
-	'erreur_reglement_obligatoire' => 'Vous devez accepter le r&egrave;glement', # NEW
-	'exp_divers' => 'Ziyaret&ccedil;ilere yorum ismiyle birlikte sunulacak alan',
-	'exp_publication' => 'Ki&#351;isel bilgilerin yay&#305;nlanma izni',
-	'exp_statut' => 'Yeni &uuml;yelere atamak istedi&#287;iniz durumu se&ccedil;in',
-	'exp_statut_rel' => 'SPIP durumundan farkl&#305; alan, bir kurumun i&ccedil;ten kontrol&uuml; i&ccedil;in kullan&#305;l&#305;r',
-	'explication_affordance_form' => 'Champ affich&eacute; sur les formulaires d\'identification (#LOGIN_PUBLIC)', # NEW
+	'email_bonjour' => 'Günaydın @nom@,',
+	'email_deja_enregistre' => 'Cette adresse email est déjà enregistrée. Utilisez le formulaire de connexion pour accéder à votre compte.', # NEW
+	'email_obligatoire' => 'E-posta alanı zorunludur',
+	'email_valide' => 'Lütfen geçerli bi re-posta giriniz',
+	'erreur_reglement_obligatoire' => 'Vous devez accepter le règlement', # NEW
+	'exp_divers' => 'Ziyaretçilere yorum ismiyle birlikte sunulacak alan',
+	'exp_publication' => 'Kişisel bilgilerin yayınlanma izni',
+	'exp_statut' => 'Yeni üyelere atamak istediğiniz durumu seçin',
+	'exp_statut_rel' => 'SPIP durumundan farklı alan, bir kurumun içten kontrolü için kullanılır',
+	'explication_affordance_form' => 'Champ affiché sur les formulaires d\'identification (#LOGIN_PUBLIC)', # NEW
 
 	// F
 	'fax' => 'Faks',
-	'fax_pro' => 'Faks (&#304;&#351;)',
+	'fax_pro' => 'Faks (İş)',
 	'feminin' => 'Bayan',
-	'fevrier' => '&#350;ubat',
-	'fiche' => 'Fi&#351;',
-	'fiche_adherent' => '&Uuml;ye fi&#351;i', # MODIF
-	'fiche_expl' => ' : Alan &uuml;ye fi&#351;inde g&ouml;r&uuml;necek', # MODIF
-	'fiche_mod' => 'De&#287;i&#351;tirilebilir',
-	'fiche_mod_expl' => ' : Alan, CRAYON eklentisi kullanmas&#305; ko&#351;uluyla &uuml;ye taraf&#305;ndan kamusal aray&uuml;zden de&#287;i&#351;tirilebilecek', # MODIF
-	'fonction' => '&#304;&#351;lev',
+	'fevrier' => 'Şubat',
+	'fiche' => 'Fiş',
+	'fiche_adherent' => 'Üye fişi', # MODIF
+	'fiche_expl' => ' : Alan üye fişinde görünecek', # MODIF
+	'fiche_mod' => 'Değiştirilebilir',
+	'fiche_mod_expl' => ' : Alan, CRAYON eklentisi kullanması koşuluyla üye tarafından kamusal arayüzden değiştirilebilecek', # MODIF
+	'fonction' => 'İşlev',
 	'form' => 'Form',
-	'form_expl' => ' : Alan INSCRIPTION2 formunda g&ouml;r&uuml;necek', # MODIF
-	'form_oblig_expl' => ' : Formda giri&#351;i zorunlu k&#305;l',
+	'form_expl' => ' : Alan INSCRIPTION2 formunda görünecek', # MODIF
+	'form_oblig_expl' => ' : Formda girişi zorunlu kıl',
 	'format' => 'Format',
-	'formulaire_inscription' => 'Kay&#305;t formu',
-	'formulaire_inscription_ok' => 'Kayd&#305;n&#305;z sorunsuz bi&ccedil;imde al&#305;nd&#305;. Ba&#287;lant&#305; i&ccedil;in gerekli kullan&#305;c&#305; bilgilerinizi bir e-posta ile alacaks&#305;n&#305;z.',
-	'formulaire_login_deja_utilise' => 'Bu kullan&#305;c&#305; ismi &ouml;nceden al&#305;nm&#305;&#351;, l&uuml;tfen ba&#351;ka bir isim se&ccedil;iniz.',
-	'formulaire_remplir_obligatoires' => 'L&uuml;tfen zorunlu alanlar&#305; doldurun',
-	'formulaire_remplir_validation' => 'L&uuml;tfen onaylanmayan alanlar&#305; kontrol edin.',
+	'formulaire_inscription' => 'Kayıt formu',
+	'formulaire_inscription_ok' => 'Kaydınız sorunsuz biçimde alındı. Bağlantı için gerekli kullanıcı bilgilerinizi bir e-posta ile alacaksınız.',
+	'formulaire_login_deja_utilise' => 'Bu kullanıcı ismi önceden alınmış, lütfen başka bir isim seçiniz.',
+	'formulaire_remplir_obligatoires' => 'Lütfen zorunlu alanları doldurun',
+	'formulaire_remplir_validation' => 'Lütfen onaylanmayan alanları kontrol edin.',
 
 	// G
 	'general_infos' => 'Genel bilgiler', # MODIF
-	'geoloc' => 'Jeo-Yerelle&#351;tirme',
-	'geomap_obligatoire' => 'Ki&#351;ilerin jeo-yerelle&#351;tirilmesi bilgilerinin kullan&#305;labilmesi i&ccedil;in GoogleMapApi eklentisinin kurulmas&#305; gerekli...',
-	'gerent' => '&Uuml;ye',
-	'gestion_adherent' => '&Uuml;yelerin i&#351;letilmesi', # MODIF
+	'geoloc' => 'Jeo-Yerelleştirme',
+	'geomap_obligatoire' => 'Kişilerin jeo-yerelleştirilmesi bilgilerinin kullanılabilmesi için GoogleMapApi eklentisinin kurulması gerekli...',
+	'gerent' => 'Üye',
+	'gestion_adherent' => 'Üyelerin işletilmesi', # MODIF
 
 	// H
 	'html' => 'HTML',
@@ -122,22 +122,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_afficher_utilisateurs' => 'Afficher les utilisateurs', # NEW
 	'icone_menu_config' => 'Inscription2', # MODIF
 	'identification' => 'Identification', # NEW
-	'info_connection' => 'Ba&#287;lant&#305; bilgileri',
-	'info_defaut' => 'Varsay&#305;lan bilgiler', # MODIF
-	'info_defaut_desc' => 'Zorunlu, varsay&#305;lan bilgiler', # MODIF
+	'info_connection' => 'Bağlantı bilgileri',
+	'info_defaut' => 'Varsayılan bilgiler', # MODIF
+	'info_defaut_desc' => 'Zorunlu, varsayılan bilgiler', # MODIF
 	'info_gener' => 'Genel Bilgiler', # MODIF
-	'info_gener_desc' => 'Sitenin yeni &uuml;yelerinden istenecek se&ccedil;enekler',
-	'info_internes' => '&#304;&ccedil; bilgiler',
-	'info_internes_desc' => 'Veritaban&#305;nda saklanacak ama yeni &uuml;ye formunda g&ouml;r&uuml;nmeyecek se&ccedil;enekler',
-	'info_perso' => 'Ki&#351;isel bilgiler',
-	'info_perso_desc' => 'Yeni &uuml;yelere sorulacak ki&#351;isel bilgiler',
-	'info_pro' => '&#304;&#351; bilgileri',
+	'info_gener_desc' => 'Sitenin yeni üyelerinden istenecek seçenekler',
+	'info_internes' => 'İç bilgiler',
+	'info_internes_desc' => 'Veritabanında saklanacak ama yeni üye formunda görünmeyecek seçenekler',
+	'info_perso' => 'Kişisel bilgiler',
+	'info_perso_desc' => 'Yeni üyelere sorulacak kişisel bilgiler',
+	'info_pro' => 'İş bilgileri',
 	'infos_adherent' => 'Ek bilgiler',
-	'infos_complementaires' => 'Informations compl&eacute;mentaires', # NEW
-	'infos_personnelles' => 'Ki&#351;isel bilgiler',
+	'infos_complementaires' => 'Informations complémentaires', # NEW
+	'infos_personnelles' => 'Kişisel bilgiler',
 	'inscription2' => 'Inscription 2.0', # NEW
-	'inscriptions' => 'Kay&#305;tlar',
-	'inserez_infos' => 'L&uuml;tfen istenen bilgileri girin',
+	'inscriptions' => 'Kayıtlar',
+	'inserez_infos' => 'Lütfen istenen bilgileri girin',
 
 	// J
 	'janvier' => 'Ocak',
@@ -145,134 +145,134 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'juin' => 'Haziran',
 
 	// L
-	'label_affordance_form' => 'Param&eacute;trage des formulaires d\'identification', # NEW
-	'label_public_reglement' => 'J\'ai lu et j\'accepte le r&egrave;glement', # NEW
-	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">r&egrave;glement</a>', # NEW
-	'label_reglement' => 'R&egrave;glement &agrave; valider', # NEW
-	'label_reglement_article' => 'Article original du site correspondant au r&egrave;glement', # NEW
-	'label_validation_numero_international' => 'Forcer les num&eacute;ros de t&eacute;l&eacute;phone &agrave; &ecirc;tre sous la forme internationale', # NEW
+	'label_affordance_form' => 'Paramétrage des formulaires d\'identification', # NEW
+	'label_public_reglement' => 'J\'ai lu et j\'accepte le règlement', # NEW
+	'label_public_reglement_url' => 'J\'ai lu et j\'accepte le <a href="@url@" class="spip_in reglement">règlement</a>', # NEW
+	'label_reglement' => 'Règlement à valider', # NEW
+	'label_reglement_article' => 'Article original du site correspondant au règlement', # NEW
+	'label_validation_numero_international' => 'Forcer les numéros de téléphone à être sous la forme internationale', # NEW
 	'latitude' => 'Enlem',
 	'legend_affordance_form' => 'Formulaire d\'identification', # NEW
-	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oubli&eacute;', # NEW
-	'legend_reglement' => 'R&egrave;glement du site', # NEW
+	'legend_oubli_pass' => 'Pas de mot de passe / mot de passe oublié', # NEW
+	'legend_reglement' => 'Règlement du site', # NEW
 	'legend_validation' => 'Validations', # NEW
 	'legende' => 'Lejand',
-	'lisez_mail' => 'Verilen adrese bir e-posta g&ouml;nderildi.Hesab&#305;n&#305;z&#305; etkinle&#351;tirmek i&ccedil;in l&uuml;tfen talimatlar&#305; izleyiniz.',
-	'liste_adherents' => 'comptes_utilisateurs\'leri g&ouml;r&uuml;nt&uuml;le', # MODIF
-	'liste_comptes_titre' => 'Kullan&#305;c&#305; hesaplar&#305; listesi', # MODIF
-	'login' => 'Kullan&#305;c&#305; ismi (login)',
+	'lisez_mail' => 'Verilen adrese bir e-posta gönderildi.Hesabınızı etkinleştirmek için lütfen talimatları izleyiniz.',
+	'liste_adherents' => 'comptes_utilisateurs\'leri görüntüle', # MODIF
+	'liste_comptes_titre' => 'Kullanıcı hesapları listesi', # MODIF
+	'login' => 'Kullanıcı ismi (login)',
 	'logo_auteur' => 'Logo', # NEW
 	'longitude' => 'Boylam',
 
 	// M
-	'mai' => 'May&#305;s',
-	'mail_non_domaine' => 'Girdi&#287;iniz e-posta adresi belirtti&#287;iniz alana ait de&#287;il l&uuml;tfen tekrar deneyiniz',
-	'mail_renvoye' => 'Bu e-posta adresi &ouml;nceden kaydedilmi&#351;, e-postada belirtilen talimatlar&#305; izleyerek hesab&#305;n&#305;z&#305; etkinle&#351;tirin.',
+	'mai' => 'Mayıs',
+	'mail_non_domaine' => 'Girdiğiniz e-posta adresi belirttiğiniz alana ait değil lütfen tekrar deneyiniz',
+	'mail_renvoye' => 'Bu e-posta adresi önceden kaydedilmiş, e-postada belirtilen talimatları izleyerek hesabınızı etkinleştirin.',
 	'mars' => 'Mart',
 	'masculin' => 'Bay',
-	'message_auto' => '(bu otomatik bir mesajd&#305;r)',
+	'message_auto' => '(bu otomatik bir mesajdır)',
 	'mobile' => 'Cep',
-	'mobile_pro' => 'Cep (&#304;&#351;)',
-	'modif_pass_titre' => '&#350;ifrenizi de&#287;i&#351;tirin',
+	'mobile_pro' => 'Cep (İş)',
+	'modif_pass_titre' => 'Şifrenizi değiştirin',
 	'moins_seconde' => 'moins d\'une seconde', # NEW
-	'mot_passe_reste_identique' => '&#350;ifreniz de&#287;i&#351;tirilmedi.',
+	'mot_passe_reste_identique' => 'Şifreniz değiştirilmedi.',
 
 	// N
-	'naissance' => 'Do&#287;um tarihi',
-	'nb_users_supprimes' => '@nb@ suppression(s) effectu&eacute;e(s).', # NEW
-	'nettoyer_tables' => 'Tablolar&#305; temizle',
-	'no_user_selected' => 'Vous n\'avez s&eacute;lectionn&eacute; aucun utilisateur.', # NEW
-	'nom' => '&#304;mza',
-	'nom_explication' => 'isminiz veya &nbsp;takma ad&#305;n&#305;z',
-	'nom_famille' => 'Soyad&#305;',
+	'naissance' => 'Doğum tarihi',
+	'nb_users_supprimes' => '@nb@ suppression(s) effectuée(s).', # NEW
+	'nettoyer_tables' => 'Tabloları temizle',
+	'no_user_selected' => 'Vous n\'avez sélectionné aucun utilisateur.', # NEW
+	'nom' => 'İmza',
+	'nom_explication' => 'isminiz veya  takma adınız',
+	'nom_famille' => 'Soyadı',
 	'nom_site' => 'Site ismi',
 	'non_renseigne' => 'bildirilmedi.',
 	'non_renseignee' => 'bildirilmedi.',
-	'novembre' => 'Kas&#305;m',
-	'numero_valide' => 'GL&uuml;tfen ge&ccedil;erli bir say&#305; giriniz',
-	'numero_valide_international' => 'Ce num&eacute;ro doit &ecirc;tre sous la forme internationale (ex: +32 475 123 456)', # NEW
+	'novembre' => 'Kasım',
+	'numero_valide' => 'GLütfen geçerli bir sayı giriniz',
+	'numero_valide_international' => 'Ce numéro doit être sous la forme internationale (ex: +32 475 123 456)', # NEW
 
 	// O
 	'octobre' => 'Ekim',
 
 	// P
-	'page_confirmation' => 'Kayd&#305;n&#305;z&#305;n onay sayfas&#305;',
+	'page_confirmation' => 'Kaydınızın onay sayfası',
 	'par_defaut' => 'Bu alan zorunlu', # MODIF
-	'pass' => '&#350;ifre',
-	'pass_egal' => 'L&uuml;tfen bir &ouml;ncekiyle ayn&#305; &#351;ifreyi girin.',
-	'pass_indiquez_cidessous' => 'A&#351;a&#287;&#305;dan kay&#305;t oldu&#287;unuzda verdi&#287;iniz e-posta adresini belirtin. Eri&#351;iminizi de&#287;i&#351;tirmek i&ccedil;in gerekli ad&#305;mlar&#305; g&ouml;steren bir e-posta alacaks&#305;n&#305;z.',
-	'pass_minimum' => '&#350;ifreniz en az 5 karakter i&ccedil;ermelidir',
-	'pass_oubli_mot' => '&#350;ifrenizin de&#287;i&#351;tirilmesi',
+	'pass' => 'Şifre',
+	'pass_egal' => 'Lütfen bir öncekiyle aynı şifreyi girin.',
+	'pass_indiquez_cidessous' => 'Aşağıdan kayıt olduğunuzda verdiğiniz e-posta adresini belirtin. Erişiminizi değiştirmek için gerekli adımları gösteren bir e-posta alacaksınız.',
+	'pass_minimum' => 'Şifreniz en az 5 karakter içermelidir',
+	'pass_oubli_mot' => 'Şifrenizin değiştirilmesi',
 	'pass_rappel_email' => 'Rappel : votre adresse email est "@email@".', # NEW
 	'pass_rappel_login_email' => 'Rappel : votre login est "@login@" et votre adresse email est "@email@".', # NEW
-	'pass_recevoir_mail' => 'Siteye eri&#351;iminizi nas&#305;l de&#287;i&#351;tirebilece&#287;inizi belirten bir e-posta alacaks&#305;n&#305;z.',
-	'password_obligatoire' => '&#350;ifre zorunludur.',
-	'password_retaper' => '&#350;ifreyi onaylay&#305;n',
-	'pays' => '&Uuml;lke',
-	'pays_defaut' => 'Pays par d&eacute;faut', # NEW
-	'pays_pro' => '&Uuml;lke (&#304;&#351;)',
-	'pgp' => 'PGP anahtar&#305;',
-	'prenom' => '&#304;sim',
-	'probleme_email' => 'E-posta sorunu&nbsp;: etkinle&#351;tirmek e-postas&#305; g&ouml;nderilemiyor.',
+	'pass_recevoir_mail' => 'Siteye erişiminizi nasıl değiştirebileceğinizi belirten bir e-posta alacaksınız.',
+	'password_obligatoire' => 'Şifre zorunludur.',
+	'password_retaper' => 'Şifreyi onaylayın',
+	'pays' => 'Ülke',
+	'pays_defaut' => 'Pays par défaut', # NEW
+	'pays_pro' => 'Ülke (İş)',
+	'pgp' => 'PGP anahtarı',
+	'prenom' => 'İsim',
+	'probleme_email' => 'E-posta sorunu : etkinleştirmek e-postası gönderilemiyor.',
 	'profession' => 'Meslek',
-	'profil_droits_insuffisants' => '&Uuml;zg&uuml;n&uuml;m, bu yazar&#305; de&#287;i&#351;tirme yetkiniz yok<br/>', # MODIF
-	'profil_modifie_ok' => 'Profilinizde yapt&#305;p&#305;n&#305;z de&#287;i&#351;iklikler dikkate al&#305;nd&#305;.',
-	'publication' => 'Yay&#305;nlama',
+	'profil_droits_insuffisants' => 'Üzgünüm, bu yazarı değiştirme yetkiniz yok<br/>', # MODIF
+	'profil_modifie_ok' => 'Profilinizde yaptıpınız değişiklikler dikkate alındı.',
+	'publication' => 'Yayınlama',
 
 	// R
-	'raccourcis' => 'K&#305;sa yollar',
-	'rappel_login' => 'Hat&#305;rlatma : kullan&#305;c&#305; isminiz &#351;&ouml;yle : ',
-	'rappel_password' => '&#350;ifreniz',
-	'recherche_case' => 'Arama alan&#305;', # MODIF
-	'recherche_utilisateurs' => 'kullan&#305;c&#305;larda arama', # MODIF
-	'recherche_valeur' => 'Aranan i&ccedil;erik', # MODIF
-	'redemande_password' => '&#350;ifrenizi tekrar girin&nbsp;:',
-	'rien_a_faire' => 'Yap&#305;lacak bi r&#351;ey yok',
+	'raccourcis' => 'Kısa yollar',
+	'rappel_login' => 'Hatırlatma : kullanıcı isminiz şöyle : ',
+	'rappel_password' => 'Şifreniz',
+	'recherche_case' => 'Arama alanı', # MODIF
+	'recherche_utilisateurs' => 'kullanıcılarda arama', # MODIF
+	'recherche_valeur' => 'Aranan içerik', # MODIF
+	'redemande_password' => 'Şifrenizi tekrar girin :',
+	'rien_a_faire' => 'Yapılacak bi rşey yok',
 
 	// S
-	'saisir_email_valide' => 'L&uuml;tfen ge&ccedil;erli bi re-posta adresi giriniz',
+	'saisir_email_valide' => 'Lütfen geçerli bi re-posta adresi giriniz',
 	'secondes' => 'secondes', # NEW
-	'secteur' => 'Sekt&ouml;r',
-	'septembre' => 'Eyl&uuml;l',
-	'sexe' => 'Meden&icirc; durum',
+	'secteur' => 'Sektör',
+	'septembre' => 'Eylül',
+	'sexe' => 'Medenî durum',
 	'societe' => 'Firma / Dernek ...',
 	'statut' => 'Durum',
-	'statut_rel' => '&#304;&ccedil; durum',
+	'statut_rel' => 'İç durum',
 	'statuts_actifs' => 'Les couleurs des icones correspondent aux statuts suivants : ', # NEW
 	'suppression_faite' => 'Verileriniz silindi',
-	'supprimer_adherent' => '&Uuml;ye sil', # MODIF
+	'supprimer_adherent' => 'Üye sil', # MODIF
 	'supprimer_adherent_red' => 'Sil',
 	'surnom' => 'Takma isim',
 
 	// T
 	'table' => 'Tablo',
-	'table_expl' => ' : alan &uuml;ye listesinde g&ouml;r&uuml;necek (&ouml;zel alan)', # MODIF
+	'table_expl' => ' : alan üye listesinde görünecek (özel alan)', # MODIF
 	'tel' => 'Tel.',
 	'telephone' => 'Telefon',
-	'telephone_pro' => 'Telefon (&#304;&#351;)',
+	'telephone_pro' => 'Telefon (İş)',
 	'texte' => 'Metin',
-	'texte_email_confirmation' => 'Hesab&#305;n&#305;z etkin, &#351;imdiden ki&#351;isel bilgilerinizi kullanarak siteye ba&#287;lanabilirsiniz.
+	'texte_email_confirmation' => 'Hesabınız etkin, şimdiden kişisel bilgilerinizi kullanarak siteye bağlanabilirsiniz.
 
-Kullan&#305;c&#305; isminiz&nbsp;: @login@
-ve &#351;ifrenizi de se&ccedil;tiniz.
+Kullanıcı isminiz : @login@
+ve şifrenizi de seçtiniz.
 
-G&uuml;veniniz i&ccedil;in te&#351;ekk&uuml;rler
+Güveniniz için teşekkürler
 
 @nom_site@ ekibi
  @url_site@', # MODIF
-	'texte_email_inscription' => '@nom_site@ sitesine kayd&#305;n&#305;z&#305; onaylamak &uuml;zeresiniz. 
+	'texte_email_inscription' => '@nom_site@ sitesine kaydınızı onaylamak üzeresiniz. 
 
-Hesab&#305;n&#305;z&#305; etkinle&#351;tirmek ve bir &#351;ifre tan&#305;mlamak i&ccedil;in a&#351;a&#287;&#305;daki ba&#287;lant&#305;ya t&#305;klay&#305;n.
+Hesabınızı etkinleştirmek ve bir şifre tanımlamak için aşağıdaki bağlantıya tıklayın.
 
 @link_activation@
 
 
-G&uuml;veninize te&#351;ekk&uuml;rler.
+Güveninize teşekkürler.
 
 @nom_site@ ekibi.
 @url_site@
 
-Bu kayd&#305; siz talep etmediyseniz veya art&#305;k bu siteye &uuml;ye olmak istemiyorsan&#305;z a&#351;a&#287;&#305;daki ba&#287;lant&#305;ya t&#305;klay&#305;n&#305;z.
+Bu kaydı siz talep etmediyseniz veya artık bu siteye üye olmak istemiyorsanız aşağıdaki bağlantıya tıklayınız.
 @link_suppresion@
 
 
@@ -290,20 +290,20 @@ Bu kayd&#305; siz talep etmediyseniz veya art&#305;k bu siteye &uuml;ye olmak is
 	'url_societe' => 'Firma sitesi',
 
 	// V
-	'validite' => 'Ge&ccedil;erlilik tarihi',
-	'ville' => '&#351;ehir',
-	'ville_pro' => '&#350;ehir (&#304;&#351;)',
-	'visiteur' => 'Ziyaret&ccedil;i',
-	'vos_contacts_personnels' => 'Ki&#351;isel ba&#287;lant&#305;lar',
-	'votre_adresse' => '&#304;&#351; adresiniz',
-	'votre_adresse_pro' => 'Adresiniz (&#304;&#351;)',
+	'validite' => 'Geçerlilik tarihi',
+	'ville' => 'şehir',
+	'ville_pro' => 'Şehir (İş)',
+	'visiteur' => 'Ziyaretçi',
+	'vos_contacts_personnels' => 'Kişisel bağlantılar',
+	'votre_adresse' => 'İş adresiniz',
+	'votre_adresse_pro' => 'Adresiniz (İş)',
 	'votre_login_mail' => 'Votre login ou email :', # NEW
-	'votre_mail' => 'E-postan&#305;z :',
+	'votre_mail' => 'E-postanız :',
 	'votre_nom_complet' => 'Tam isminiz',
 	'votre_profil' => 'Profiliniz',
 
 	// W
-	'website' => '&#304;nternet sitesi'
+	'website' => 'İnternet sitesi'
 );
 
 ?>
