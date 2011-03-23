@@ -8,29 +8,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => 'Aten&#355;ie, acest con&#355;inut este publicat, dar are leg&#259;turi c&#259;tre con&#355;inuturi care nu sunt (&icirc;nc&#259;) publicate !',
-	'aucun_objets_avec_lien_depuis_courant' => 'Acest con&#355;inut nu are leg&#259;turi c&#259;tre alte con&#355;inuturi.',
-	'aucun_objets_avec_lien_vers_courant' => 'Nici un con&#355;inut nu are leg&#259;turi c&#259;tre acest con&#355;inut.',
+	'alerte_publie_contenant' => 'Atenţie, acest conţinut este publicat, dar are legături către conţinuturi care nu sunt (încă) publicate !',
+	'aucun_objets_avec_lien_depuis_courant' => 'Acest conţinut nu are legături către alte conţinuturi.',
+	'aucun_objets_avec_lien_vers_courant' => 'Nici un conţinut nu are legături către acest conţinut.',
 
 	// C
-	'confirmation_depublication' => 'Aten&#355;ie, un con&#355;inut publicat este legat de acest con&#355;inut, &#351;i va fi impactat dac&#259; de-publica&#355;i ! Vre&#355;i cu adev&#259;rat s&#259; schimba&#355;i status-ul ?',
-	'confirmation_publication' => 'Aten&#355;ie, un con&#355;inut c&#259;tre care v&#259; lega&#355;i nu este publicat. Vre&#355;i cu adev&#259;rat s&#259; schimba&#355;i status-ul ?',
-	'confirmation_suppression' => 'Aten&#355;ie, un con&#355;inut publicat este legat de acesta &#351;i va fi impactat dac&#259; &icirc;l &#351;terge&#355;i. Dori&#355;i cu adev&#259;rat s&#259; &icirc;l &#351;terge&#355;i ?',
+	'confirmation_depublication' => 'Atenţie, un conţinut publicat este legat de acest conţinut, şi va fi impactat dacă de-publicaţi ! Vreţi cu adevărat să schimbaţi status-ul ?',
+	'confirmation_publication' => 'Atenţie, un conţinut către care vă legaţi nu este publicat. Vreţi cu adevărat să schimbaţi status-ul ?',
+	'confirmation_suppression' => 'Atenţie, un conţinut publicat este legat de acesta şi va fi impactat dacă îl ştergeţi. Doriţi cu adevărat să îl ştergeţi ?',
 
 	// I
-	'information_element_contenu' => 'Aten&#355;ie, un alt con&#355;inut indic&#259; c&#259;tre acesta !',
+	'information_element_contenu' => 'Atenţie, un alt conţinut indică către acesta !',
 
 	// L
-	'legende_liens_faux_objets' => 'Leg&#259;turile &icirc;n ro&#351;u &#351;i barate indic&#259; con&#355;inuturi legate care nu exist&#259;.',
-	'liens_inter_contenus' => 'Leg&#259;turi inter-con&#355;inuturi',
+	'legende_liens_faux_objets' => 'Legăturile în roşu şi barate indică conţinuturi legate care nu există.',
+	'liens_inter_contenus' => 'Legături inter-conţinuturi',
 
 	// O
-	'objets_avec_liens_depuis_courant' => 'Acest con&#355;inut are leg&#259;turi c&#259;tre:',
-	'objets_avec_liens_vers_courant' => 'Aceste con&#355;inuturi au leg&#259;turi c&#259;tre acesta:',
+	'objets_avec_liens_depuis_courant' => 'Acest conţinut are legături către:',
+	'objets_avec_liens_vers_courant' => 'Aceste conţinuturi au legături către acesta:',
 
 	// S
-	'statut_poubelle' => 'La co&#351;ul de gunoi',
-	'statut_prepa' => '&Icirc;n preparare',
+	'statut_poubelle' => 'La coşul de gunoi',
+	'statut_prepa' => 'În preparare',
 	'statut_prop' => 'Propus',
 	'statut_publie' => 'Publicat',
 	'statut_refuse' => 'Refuzat'

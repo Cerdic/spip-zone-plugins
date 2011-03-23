@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'information_element_contenu' => 'Attention, un autre contenu pointe vers celui-ci !',
 
 	// L
-	'legende_liens_faux_objets' => 'Les liens en rouge et barr&eacute;s indiquent des contenus li&eacute;s qui n\'existent pas.',
+	'legende_liens_faux_objets' => 'Les liens en rouge et barrés indiquent des contenus liés qui n\'existent pas.',
 	'liens_inter_contenus' => 'Liens inter-contenus',
 
 	// O
@@ -28,10 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'statut_poubelle' => 'A la poubelle',
-	'statut_prepa' => 'En pr&eacute;paration',
-	'statut_prop' => 'Propos&eacute;',
-	'statut_publie' => 'Publi&eacute;',
-	'statut_refuse' => 'Refus&eacute;'
+	'statut_prepa' => 'En préparation',
+	'statut_prop' => 'Proposé',
+	'statut_publie' => 'Publié',
+	'statut_refuse' => 'Refusé'
 );
 
 ?>

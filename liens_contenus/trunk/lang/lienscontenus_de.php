@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => 'Achtung, dieses Objekt ist ver&ouml;ffentlicht, enth&auml;lt jedoch Links zu nicht ver&ouml;ffentlichten Inhalten!',
-	'aucun_objets_avec_lien_depuis_courant' => 'Dieses Objekt enth&auml;lt keinen Links zu anderen Inhalten.',
-	'aucun_objets_avec_lien_vers_courant' => 'Kein anderes Objekt enth&auml;lt Links zu diesem.',
+	'alerte_publie_contenant' => 'Achtung, dieses Objekt ist veröffentlicht, enthält jedoch Links zu nicht veröffentlichten Inhalten!',
+	'aucun_objets_avec_lien_depuis_courant' => 'Dieses Objekt enthält keinen Links zu anderen Inhalten.',
+	'aucun_objets_avec_lien_vers_courant' => 'Kein anderes Objekt enthält Links zu diesem.',
 
 	// C
-	'confirmation_depublication' => 'Achtung, ein ver&ouml;ffentlichtes Objekt enth&auml;lt Links zu diesem!nnWollen Sie den Status wirklich &auml;ndern?',
-	'confirmation_publication' => 'Achtung, ein Links in diesem Objekt verweist auf nicht ver&ouml;ffentlichte Inhalte!nnWollen Sie den Status wirklich &auml;ndern?',
-	'confirmation_suppression' => 'Achtung, ein ver&ouml;ffentlichter Link verweist auf dieses Objekt und wird von seiner L&ouml;schung betroffen sein.!nnWollen Sie es wirklich l&ouml;schen?',
+	'confirmation_depublication' => 'Achtung, ein veröffentlichtes Objekt enthält Links zu diesem!nnWollen Sie den Status wirklich ändern?',
+	'confirmation_publication' => 'Achtung, ein Links in diesem Objekt verweist auf nicht veröffentlichte Inhalte!nnWollen Sie den Status wirklich ändern?',
+	'confirmation_suppression' => 'Achtung, ein veröffentlichter Link verweist auf dieses Objekt und wird von seiner Löschung betroffen sein.!nnWollen Sie es wirklich löschen?',
 
 	// I
 	'information_element_contenu' => 'Achtung, ein anderes Objekt verweist auf dieses!',
@@ -25,14 +25,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_inter_contenus' => 'Links zwischen Objekten',
 
 	// O
-	'objets_avec_liens_depuis_courant' => 'Dieses Objekt enth&auml;lt Links zu folgenden:',
+	'objets_avec_liens_depuis_courant' => 'Dieses Objekt enthält Links zu folgenden:',
 	'objets_avec_liens_vers_courant' => 'Diese Objekte enthalten Links zu folgenden:',
 
 	// S
 	'statut_poubelle' => 'Im Papierkorb',
 	'statut_prepa' => 'In Vorbereitung',
 	'statut_prop' => 'Vorgeschlagen',
-	'statut_publie' => 'Ver&ouml;ffentlicht',
+	'statut_publie' => 'Veröffentlicht',
 	'statut_refuse' => 'Abgelehnt'
 );
 
