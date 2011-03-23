@@ -14,11 +14,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_recents_court' => 'Articles recents',
 
 	// C
-	'connexion' => 'Connexi&oacute;',
+	'connexion' => 'Connexió',
 
 	// D
-	'deconnexion' => 'Desconnexi&oacute;',
-	'derniere_syndication' => 'La darrera sindicaci&oacute; realitzada d\'aquest lloc',
+	'deconnexion' => 'Desconnexió',
+	'derniere_syndication' => 'La darrera sindicació realitzada d\'aquest lloc',
 	'deuxjours' => 'Dos dies',
 
 	// L
@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'Cap article durant aquest periode&nbsp;!',
+	'pas_articles' => 'Cap article durant aquest periode !',
 	'pas_synchro' => 'No sincronitzar',
-	'preferences' => 'Prefer&egrave;ncies',
-	'probleme_de_syndication' => 'problema de sindicaci&oacute;',
+	'preferences' => 'Preferències',
+	'probleme_de_syndication' => 'problema de sindicació',
 
 	// S
 	'semaine' => 'Setmana',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'synchro' => 'Sincronitzar',
 	'synchro_titre' => 'Deseu al lloc Web el llistat dels articles llegits',
 	'syndication_ajour' => 'Actualitzar ara',
-	'syndication_fait' => 'Sindicaci&oacute; feta',
+	'syndication_fait' => 'Sindicació feta',
 
 	// T
 	'toutes' => 'Totes'

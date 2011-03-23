@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aff_resume' => 'Afichar lu resumits',
-	'afficher_sources' => 'Afichar aquela f&ograve;nt',
+	'afficher_sources' => 'Afichar aquela fònt',
 	'annee' => 'An',
 	'articles_recents_court' => 'Articles recents',
 
@@ -27,21 +27,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer_resume' => 'Mascar lu resumits',
-	'masquer_sources' => 'Mascar aquela f&ograve;nt',
+	'masquer_sources' => 'Mascar aquela fònt',
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'I a minga d\'article dins aqueu peri&ograve;de!',
+	'pas_articles' => 'I a minga d\'article dins aqueu periòde!',
 	'pas_synchro' => 'Non sincronizar ',
-	'preferences' => 'Prefer&eacute;ncias',
-	'probleme_de_syndication' => 'Probl&egrave;ma de sindicacion',
+	'preferences' => 'Preferéncias',
+	'probleme_de_syndication' => 'Problèma de sindicacion',
 
 	// S
 	'semaine' => 'Setmana',
-	'sources' => 'F&ograve;nts',
+	'sources' => 'Fònts',
 	'synchro' => 'Sincronizar',
 	'synchro_titre' => 'Registrar dins aqueu sit la lista dei articles legits',
-	'syndication_ajour' => 'Actualizar a&uuml;ra',
+	'syndication_ajour' => 'Actualizar aüra',
 	'syndication_fait' => 'La sincronizacion s\'es facha',
 
 	// T

@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Maand',
 
 	// P
-	'pas_articles' => 'Geen artikel voor periode&nbsp;!',
+	'pas_articles' => 'Geen artikel voor periode !',
 	'pas_synchro' => 'Niet synchroniseren',
 	'preferences' => 'Voorkeuren',
 	'probleme_de_syndication' => 'syndicatie probleem',

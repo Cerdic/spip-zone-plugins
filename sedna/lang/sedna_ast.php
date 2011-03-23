@@ -10,20 +10,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aff_resume' => 'Amosar los resumes',
 	'afficher_sources' => 'Amosar esta fonte',
-	'annee' => 'A&ntilde;u',
-	'articles_recents_court' => 'Art&iacute;culos recientes',
+	'annee' => 'Añu',
+	'articles_recents_court' => 'Artículos recientes',
 
 	// C
-	'connexion' => 'Conex&oacute;n',
+	'connexion' => 'Conexón',
 
 	// D
-	'deconnexion' => 'Desconex&oacute;n',
-	'derniere_syndication' => 'La cabera sindicaci&oacute;n d\'esti sitiu f&iacute;zose',
-	'deuxjours' => 'Dos d&iacute;es',
+	'deconnexion' => 'Desconexón',
+	'derniere_syndication' => 'La cabera sindicación d\'esti sitiu fízose',
+	'deuxjours' => 'Dos díes',
 
 	// L
-	'liens' => 'art&iacute;culu',
-	'liens_pluriel' => 'art&iacute;culos',
+	'liens' => 'artículu',
+	'liens_pluriel' => 'artículos',
 
 	// M
 	'masquer_resume' => 'Esconder los resumes',
@@ -31,18 +31,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'Ensin art&iacute;culos nesti periodu',
+	'pas_articles' => 'Ensin artículos nesti periodu',
 	'pas_synchro' => 'Non sincronizar',
 	'preferences' => 'Preferencies',
-	'probleme_de_syndication' => 'problema cola sindicaci&oacute;n',
+	'probleme_de_syndication' => 'problema cola sindicación',
 
 	// S
 	'semaine' => 'Selmana',
 	'sources' => 'Fontes',
 	'synchro' => 'Sincronizar',
-	'synchro_titre' => 'Grabar nel sitiu la llista d\'art&iacute;culos lle&iacute;os',
+	'synchro_titre' => 'Grabar nel sitiu la llista d\'artículos lleíos',
 	'syndication_ajour' => 'Actualizar agora',
-	'syndication_fait' => 'Fecha la sindicaci&oacute;n',
+	'syndication_fait' => 'Fecha la sindicación',
 
 	// T
 	'toutes' => 'Toes'

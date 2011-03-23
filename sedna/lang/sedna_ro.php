@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'Afi&#351;a&#355;i rezumatele',
-	'afficher_sources' => 'Afi&#351;a&#355;i aceast&#259; surs&#259;',
+	'aff_resume' => 'Afişaţi rezumatele',
+	'afficher_sources' => 'Afişaţi această sursă',
 	'annee' => 'Anul',
 	'articles_recents_court' => 'Articole recente',
 
@@ -18,31 +18,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Deconexiune',
-	'derniere_syndication' => 'Ultima sindicalizare a acestui site efectuat&#259;',
-	'deuxjours' => 'Dou&#259; zile',
+	'derniere_syndication' => 'Ultima sindicalizare a acestui site efectuată',
+	'deuxjours' => 'Două zile',
 
 	// L
 	'liens' => 'articol',
 	'liens_pluriel' => 'articole',
 
 	// M
-	'masquer_resume' => 'Masca&#355;i rezumatele',
-	'masquer_sources' => 'Masca&#355;i aceast&#259; surs&#259;',
+	'masquer_resume' => 'Mascaţi rezumatele',
+	'masquer_sources' => 'Mascaţi această sursă',
 	'mois' => 'Luni',
 
 	// P
-	'pas_articles' => 'Nici un articol &icirc;n aceast&#259; perioad&#259;&nbsp;!',
-	'pas_synchro' => 'Nu sincroniza&#355;i',
-	'preferences' => 'Preferin&#355;e',
-	'probleme_de_syndication' => 'problem&#259; de sindicalizare',
+	'pas_articles' => 'Nici un articol în această perioadă !',
+	'pas_synchro' => 'Nu sincronizaţi',
+	'preferences' => 'Preferinţe',
+	'probleme_de_syndication' => 'problemă de sindicalizare',
 
 	// S
-	'semaine' => 'S&#259;pt&#259;m&acirc;n&#259;',
+	'semaine' => 'Săptămână',
 	'sources' => 'Surse',
-	'synchro' => 'Sincroniza&#355;i',
-	'synchro_titre' => '&Icirc;nregistra&#355;i pe site lista articolelor citite',
-	'syndication_ajour' => 'Aduce&#355;i la zi acum',
-	'syndication_fait' => 'Sindicalizare efectuat&#259;',
+	'synchro' => 'Sincronizaţi',
+	'synchro_titre' => 'Înregistraţi pe site lista articolelor citite',
+	'syndication_ajour' => 'Aduceţi la zi acum',
+	'syndication_fait' => 'Sindicalizare efectuată',
 
 	// T
 	'toutes' => 'Toate'

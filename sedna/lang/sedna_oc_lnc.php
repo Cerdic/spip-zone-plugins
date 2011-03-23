@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Desconnexion',
-	'derniere_syndication' => 'La darri&egrave;ra sindicacion facha d\'aquel sit',
+	'derniere_syndication' => 'La darrièra sindicacion facha d\'aquel sit',
 	'deuxjours' => 'Dos jorns',
 
 	// L
@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'I a pas cap d\'article dins aquel peri&ograve;de!',
+	'pas_articles' => 'I a pas cap d\'article dins aquel periòde!',
 	'pas_synchro' => 'Sincronizar pas',
-	'preferences' => 'Prefer&eacute;ncias',
-	'probleme_de_syndication' => 'Probl&egrave;ma de sindicacion',
+	'preferences' => 'Preferéncias',
+	'probleme_de_syndication' => 'Problèma de sindicacion',
 
 	// S
 	'semaine' => 'Setmana',

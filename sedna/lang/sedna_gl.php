@@ -14,12 +14,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_recents_court' => 'Artigos recentes',
 
 	// C
-	'connexion' => 'Conexi&oacute;n',
+	'connexion' => 'Conexión',
 
 	// D
-	'deconnexion' => 'Desconexi&oacute;n',
-	'derniere_syndication' => 'A &uacute;ltima sindicaci&oacute;n deste web foi efectuada',
-	'deuxjours' => 'Dous d&iacute;as',
+	'deconnexion' => 'Desconexión',
+	'derniere_syndication' => 'A última sindicación deste web foi efectuada',
+	'deuxjours' => 'Dous días',
 
 	// L
 	'liens' => 'artigo',
@@ -31,10 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'Non hai ning&uacute;n artigo deste per&iacute;odo&nbsp;!',
+	'pas_articles' => 'Non hai ningún artigo deste período !',
 	'pas_synchro' => 'Non sincronizar',
 	'preferences' => 'Preferencias',
-	'probleme_de_syndication' => 'Problema de sindicaci&oacute;n',
+	'probleme_de_syndication' => 'Problema de sindicación',
 
 	// S
 	'semaine' => 'Semana',
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'synchro' => 'Sincronizar',
 	'synchro_titre' => 'Rexistrar no web a lista dos artigos lidos',
 	'syndication_ajour' => 'Actualizar agora',
-	'syndication_fait' => 'A sindicaci&oacute;n foi efectuada',
+	'syndication_fait' => 'A sindicación foi efectuada',
 
 	// T
 	'toutes' => 'Todos'

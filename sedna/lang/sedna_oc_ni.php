@@ -31,17 +31,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'Li a minga d\'article dins aquest peri&ograve;de&nbsp;!',
+	'pas_articles' => 'Li a minga d\'article dins aquest periòde !',
 	'pas_synchro' => 'Non sincronisar ',
-	'preferences' => 'Prefer&eacute;n&ccedil;as',
-	'probleme_de_syndication' => 'Probl&egrave;ma de sindicacion',
+	'preferences' => 'Preferénças',
+	'probleme_de_syndication' => 'Problèma de sindicacion',
 
 	// S
 	'semaine' => 'Setmana',
-	'sources' => 'F&ograve;nts',
+	'sources' => 'Fònts',
 	'synchro' => 'Sincronisar',
-	'synchro_titre' => 'Registrar dins aqueu sit la ti&egrave;ra dei articles legits',
-	'syndication_ajour' => 'Actualisar a&uuml;ra',
+	'synchro_titre' => 'Registrar dins aqueu sit la tièra dei articles legits',
+	'syndication_ajour' => 'Actualisar aüra',
 	'syndication_fait' => 'La sincronisacion s\'es facha',
 
 	// T

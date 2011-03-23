@@ -8,17 +8,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'Diskouez ar berradenno&ugrave;',
-	'afficher_sources' => 'Diskouez an orin-ma&ntilde;',
+	'aff_resume' => 'Diskouez ar berradennoù',
+	'afficher_sources' => 'Diskouez an orin-mañ',
 	'annee' => 'Bloaz',
-	'articles_recents_court' => 'Pennado&ugrave; nevez',
+	'articles_recents_court' => 'Pennadoù nevez',
 
 	// C
-	'connexion' => 'Kennaska&ntilde;',
+	'connexion' => 'Kennaskañ',
 
 	// D
-	'deconnexion' => 'Digennaska&ntilde;',
-	'derniere_syndication' => 'Dastumet titouro&ugrave; diwar al lec\'hienn-ma&ntilde; ar wech diwezha&ntilde; d\'an',
+	'deconnexion' => 'Digennaskañ',
+	'derniere_syndication' => 'Dastumet titouroù diwar al lec\'hienn-mañ ar wech diwezhañ d\'an',
 	'deuxjours' => 'Daou zevezh',
 
 	// L
@@ -26,23 +26,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_pluriel' => 'pennad',
 
 	// M
-	'masquer_resume' => 'Kuzhat ar berradenno&ugrave;',
-	'masquer_sources' => 'Kuzhat an orin-ma&ntilde;',
+	'masquer_resume' => 'Kuzhat ar berradennoù',
+	'masquer_sources' => 'Kuzhat an orin-mañ',
 	'mois' => 'Miz',
 
 	// P
-	'pas_articles' => 'Pennad ebet er mare-se&nbsp;!',
-	'pas_synchro' => 'Chom hep kenamzeria&ntilde;',
-	'preferences' => 'Dibabo&ugrave;',
-	'probleme_de_syndication' => 'Kudenn evit dastum titouro&ugrave;',
+	'pas_articles' => 'Pennad ebet er mare-se !',
+	'pas_synchro' => 'Chom hep kenamzeriañ',
+	'preferences' => 'Dibaboù',
+	'probleme_de_syndication' => 'Kudenn evit dastum titouroù',
 
 	// S
 	'semaine' => 'Sizhun',
-	'sources' => 'Orino&ugrave;',
-	'synchro' => 'Kenamzeria&ntilde;',
-	'synchro_titre' => 'Enrolla&ntilde; war al lec\'hienn listenn ar pennado&ugrave; bet lennet',
-	'syndication_ajour' => 'Hizivaat brema&ntilde;',
-	'syndication_fait' => 'Dastumet eo bet an titouo&ugrave;',
+	'sources' => 'Orinoù',
+	'synchro' => 'Kenamzeriañ',
+	'synchro_titre' => 'Enrollañ war al lec\'hienn listenn ar pennadoù bet lennet',
+	'syndication_ajour' => 'Hizivaat bremañ',
+	'syndication_fait' => 'Dastumet eo bet an titouoù',
 
 	// T
 	'toutes' => 'Holl'

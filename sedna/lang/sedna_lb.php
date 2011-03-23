@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'R&eacute;sum&eacute; weisen',
-	'afficher_sources' => 'D&euml;s Source weisen',
-	'annee' => 'Jo&euml;r',
+	'aff_resume' => 'Résumé weisen',
+	'afficher_sources' => 'Dës Source weisen',
+	'annee' => 'Joër',
 	'articles_recents_court' => 'Nei Artikelen',
 
 	// C
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Ofbroch vun der Verbindung',
-	'derniere_syndication' => 'L&auml;scht Syndicatioun vun d&euml;sem Site',
+	'derniere_syndication' => 'Läscht Syndicatioun vun dësem Site',
 	'deuxjours' => 'Zwee Deeg',
 
 	// L
@@ -26,23 +26,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_pluriel' => 'Artikelen',
 
 	// M
-	'masquer_resume' => 'R&eacute;sum&eacute; verstoppen',
+	'masquer_resume' => 'Résumé verstoppen',
 	'masquer_sources' => 'Source verstoppen',
 	'mois' => 'Mount',
 
 	// P
-	'pas_articles' => 'Keng Artikelen an d&euml;ser Period!',
-	'pas_synchro' => 'N&euml;t synchronis&eacute;ieren',
+	'pas_articles' => 'Keng Artikelen an dëser Period!',
+	'pas_synchro' => 'Nët synchroniséieren',
 	'preferences' => 'Optiounen',
 	'probleme_de_syndication' => 'Syndicatiouns-Problem',
 
 	// S
 	'semaine' => 'Woch',
 	'sources' => 'Sourcen',
-	'synchro' => 'Synchronis&eacute;ieren',
-	'synchro_titre' => 'D\'L&euml;scht vun de geliesenen Artikelen um Site sp&auml;icheren',
+	'synchro' => 'Synchroniséieren',
+	'synchro_titre' => 'D\'Lëscht vun de geliesenen Artikelen um Site späicheren',
 	'syndication_ajour' => 'Elo updaten',
-	'syndication_fait' => 'Syndicatioun f&auml;rdeg',
+	'syndication_fait' => 'Syndicatioun färdeg',
 
 	// T
 	'toutes' => 'All'

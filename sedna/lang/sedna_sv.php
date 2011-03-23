@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aff_resume' => 'Visa sammanfattningarna',
 	'afficher_sources' => 'Visa denna syndikering',
-	'annee' => 'Senaste &aring;ret',
+	'annee' => 'Senaste året',
 	'articles_recents_court' => 'De senaste artiklarna',
 
 	// C
@@ -18,29 +18,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Logga ut',
-	'derniere_syndication' => 'Den senaste syndikeringen genomf&ouml;rdes',
-	'deuxjours' => 'Senaste tv&aring; dagarna',
+	'derniere_syndication' => 'Den senaste syndikeringen genomfördes',
+	'deuxjours' => 'Senaste två dagarna',
 
 	// L
-	'liens' => 'inl&auml;gg',
-	'liens_pluriel' => 'inl&auml;gg',
+	'liens' => 'inlägg',
+	'liens_pluriel' => 'inlägg',
 
 	// M
-	'masquer_resume' => 'G&ouml;m sammanfattningarna',
-	'masquer_sources' => 'G&ouml;m den h&auml;r syndikeringen',
-	'mois' => 'Senaste m&aring;naden',
+	'masquer_resume' => 'Göm sammanfattningarna',
+	'masquer_sources' => 'Göm den här syndikeringen',
+	'mois' => 'Senaste månaden',
 
 	// P
 	'pas_articles' => 'Det finns inga artiklar under denna period.',
 	'pas_synchro' => 'Synkronisera inte',
-	'preferences' => 'Inst&auml;llningar',
+	'preferences' => 'Inställningar',
 	'probleme_de_syndication' => 'Syndikeringsproblem',
 
 	// S
 	'semaine' => 'Senaste veckan',
-	'sources' => 'Syndikeringsk&auml;llor',
+	'sources' => 'Syndikeringskällor',
 	'synchro' => 'Synkronisera',
-	'synchro_titre' => 'Spara listan &ouml;ver l&auml;sta meddelanden p&aring; webbplatsen',
+	'synchro_titre' => 'Spara listan över lästa meddelanden på webbplatsen',
 	'syndication_ajour' => 'Uppdatera nu',
 	'syndication_fait' => 'Syndikeringen klar',
 

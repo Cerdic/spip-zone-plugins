@@ -8,41 +8,41 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'Mostrar los res&uacute;menes',
+	'aff_resume' => 'Mostrar los resúmenes',
 	'afficher_sources' => 'Mostrar la fuente',
-	'annee' => 'A&ntilde;o',
-	'articles_recents_court' => 'Art&iacute;culos recientes',
+	'annee' => 'Año',
+	'articles_recents_court' => 'Artículos recientes',
 
 	// C
-	'connexion' => 'Conexi&oacute;n',
+	'connexion' => 'Conexión',
 
 	// D
-	'deconnexion' => 'Desconexi&oacute;n',
-	'derniere_syndication' => 'La &uacute;ltima sindicaci&oacute;n de este sitio se efectu&oacute;',
-	'deuxjours' => 'Dos d&iacute;as',
+	'deconnexion' => 'Desconexión',
+	'derniere_syndication' => 'La última sindicación de este sitio se efectuó',
+	'deuxjours' => 'Dos días',
 
 	// L
-	'liens' => 'art&iacute;culo',
-	'liens_pluriel' => 'art&iacute;culos',
+	'liens' => 'artículo',
+	'liens_pluriel' => 'artículos',
 
 	// M
-	'masquer_resume' => 'Enmascarar los res&uacute;menes',
+	'masquer_resume' => 'Enmascarar los resúmenes',
 	'masquer_sources' => 'Enmascarar esta fuente',
 	'mois' => 'Mes',
 
 	// P
-	'pas_articles' => 'Sin art&iacute;culos durante este periodo',
+	'pas_articles' => 'Sin artículos durante este periodo',
 	'pas_synchro' => 'No sincronizar',
 	'preferences' => 'Preferencias',
-	'probleme_de_syndication' => 'hay un problema con la sindicaci&oacute;n',
+	'probleme_de_syndication' => 'hay un problema con la sindicación',
 
 	// S
 	'semaine' => 'Semana',
 	'sources' => 'Fuentes',
 	'synchro' => 'Sincronizar',
-	'synchro_titre' => 'Grabar en el sitio la lista de los art&iacute;culos le&iacute;dos',
+	'synchro_titre' => 'Grabar en el sitio la lista de los artículos leídos',
 	'syndication_ajour' => 'Actualizar ahora',
-	'syndication_fait' => 'Efectuada la sindicaci&oacute;n',
+	'syndication_fait' => 'Efectuada la sindicación',
 
 	// T
 	'toutes' => 'Todas'

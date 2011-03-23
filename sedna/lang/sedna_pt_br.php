@@ -11,38 +11,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aff_resume' => 'Exibir os resumos',
 	'afficher_sources' => 'Exibir esta fonte',
 	'annee' => 'Ano',
-	'articles_recents_court' => 'Mat&eacute;rias recentes',
+	'articles_recents_court' => 'Matérias recentes',
 
 	// C
-	'connexion' => 'Conex&atilde;o',
+	'connexion' => 'Conexão',
 
 	// D
-	'deconnexion' => 'Desconex&atilde;o',
-	'derniere_syndication' => '&Uacute;ltima sindica&ccedil;&atilde;o deste site efetuada',
+	'deconnexion' => 'Desconexão',
+	'derniere_syndication' => 'Última sindicação deste site efetuada',
 	'deuxjours' => 'Dois dias',
 
 	// L
-	'liens' => 'mat&eacute;ria',
-	'liens_pluriel' => 'mat&eacute;rias',
+	'liens' => 'matéria',
+	'liens_pluriel' => 'matérias',
 
 	// M
 	'masquer_resume' => 'Esconder os resumos',
 	'masquer_sources' => 'Esconder esta fonte',
-	'mois' => 'M&ecirc;s',
+	'mois' => 'Mês',
 
 	// P
-	'pas_articles' => 'Nenhuma mat&eacute;ria neste per&iacute;odo!',
-	'pas_synchro' => 'N&atilde;o sincronizar',
-	'preferences' => 'Prefer&ecirc;ncias',
-	'probleme_de_syndication' => 'problema de sindica&ccedil;&atilde;o',
+	'pas_articles' => 'Nenhuma matéria neste período!',
+	'pas_synchro' => 'Não sincronizar',
+	'preferences' => 'Preferências',
+	'probleme_de_syndication' => 'problema de sindicação',
 
 	// S
 	'semaine' => 'Semana',
 	'sources' => 'Fontes',
 	'synchro' => 'Sincronizar',
-	'synchro_titre' => 'Registrar no site a lista de mat&eacute;rias lidas',
+	'synchro_titre' => 'Registrar no site a lista de matérias lidas',
 	'syndication_ajour' => 'Atualizar agora',
-	'syndication_fait' => 'Sindica&ccedil;&atilde;o efetuada',
+	'syndication_fait' => 'Sindicação efetuada',
 
 	// T
 	'toutes' => 'Todas'

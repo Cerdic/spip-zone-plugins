@@ -8,41 +8,41 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => '&Ouml;sszefoglal&aacute;sok megjelen&iacute;t&eacute;se',
-	'afficher_sources' => 'Forr&aacute;s megjelen&iacute;t&eacute;se',
-	'annee' => '&Eacute;v',
-	'articles_recents_court' => '&Uacute;jabb cikkek',
+	'aff_resume' => 'Összefoglalások megjelenítése',
+	'afficher_sources' => 'Forrás megjelenítése',
+	'annee' => 'Év',
+	'articles_recents_court' => 'Újabb cikkek',
 
 	// C
-	'connexion' => 'Csatlakoz&aacute;s',
+	'connexion' => 'Csatlakozás',
 
 	// D
-	'deconnexion' => 'Kijelentkez&eacute;s',
-	'derniere_syndication' => 'E honlap leg&uacute;jabb szindik&aacute;l&aacute;sa megt&ouml;rt&eacute;nt',
-	'deuxjours' => 'K&eacute;t nap',
+	'deconnexion' => 'Kijelentkezés',
+	'derniere_syndication' => 'E honlap legújabb szindikálása megtörtént',
+	'deuxjours' => 'Két nap',
 
 	// L
 	'liens' => 'cikk',
 	'liens_pluriel' => 'cikk',
 
 	// M
-	'masquer_resume' => '&Ouml;sszefoglal&aacute;sok rejt&eacute;se',
-	'masquer_sources' => 'Forr&aacute;s rejt&eacute;se',
-	'mois' => 'H&oacute;nap',
+	'masquer_resume' => 'Összefoglalások rejtése',
+	'masquer_sources' => 'Forrás rejtése',
+	'mois' => 'Hónap',
 
 	// P
-	'pas_articles' => 'Nincs cikk abban az id&#337;szakban&nbsp;!',
-	'pas_synchro' => 'Nincs szinkroniz&aacute;l&aacute;s',
-	'preferences' => 'Be&aacute;ll&iacute;t&aacute;sok',
-	'probleme_de_syndication' => 'szindik&aacute;l&aacute;si hiba',
+	'pas_articles' => 'Nincs cikk abban az időszakban !',
+	'pas_synchro' => 'Nincs szinkronizálás',
+	'preferences' => 'Beállítások',
+	'probleme_de_syndication' => 'szindikálási hiba',
 
 	// S
-	'semaine' => 'H&eacute;t',
-	'sources' => 'Forr&aacute;sok',
-	'synchro' => 'Szinkroniz&aacute;l&aacute;s',
-	'synchro_titre' => 'Menteni a honlapon az olvasott cikkek list&aacute;j&aacute;t',
-	'syndication_ajour' => 'Friss&iacute;teni most',
-	'syndication_fait' => 'Szindik&aacute;l&aacute;s megt&ouml;rt&eacute;nt',
+	'semaine' => 'Hét',
+	'sources' => 'Források',
+	'synchro' => 'Szinkronizálás',
+	'synchro_titre' => 'Menteni a honlapon az olvasott cikkek listáját',
+	'syndication_ajour' => 'Frissíteni most',
+	'syndication_fait' => 'Szindikálás megtörtént',
 
 	// T
 	'toutes' => 'Mindegyik'

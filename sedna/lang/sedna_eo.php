@@ -8,17 +8,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'Afi&#349;i resumojn',
-	'afficher_sources' => 'Afi&#349;i tiun fonton',
+	'aff_resume' => 'Afiŝi resumojn',
+	'afficher_sources' => 'Afiŝi tiun fonton',
 	'annee' => 'Jaro',
-	'articles_recents_court' => 'Fre&#349;aj artikoloj',
+	'articles_recents_court' => 'Freŝaj artikoloj',
 
 	// C
 	'connexion' => 'Ensaluti',
 
 	// D
 	'deconnexion' => 'Elsaluti',
-	'derniere_syndication' => 'Lasta abonrilato-&#285;isdatigo farita',
+	'derniere_syndication' => 'Lasta abonrilato-ĝisdatigo farita',
 	'deuxjours' => 'Du tagoj',
 
 	// L
@@ -26,12 +26,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_pluriel' => 'artikoloj',
 
 	// M
-	'masquer_resume' => 'Ka&#349;i la resumojn',
-	'masquer_sources' => 'Ka&#349;i tiun fonton',
+	'masquer_resume' => 'Kaŝi la resumojn',
+	'masquer_sources' => 'Kaŝi tiun fonton',
 	'mois' => 'Monato',
 
 	// P
-	'pas_articles' => 'Neniu artikolo dum &#265;i tiu periodo&nbsp;!',
+	'pas_articles' => 'Neniu artikolo dum ĉi tiu periodo !',
 	'pas_synchro' => 'Ne sinkronigi',
 	'preferences' => 'Preferoj',
 	'probleme_de_syndication' => 'Abonrilato-problemo',
@@ -40,12 +40,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'semaine' => 'Semajno',
 	'sources' => 'Fontoj',
 	'synchro' => 'Sinkronigi',
-	'synchro_titre' => 'Registri &#265;e la retejo la liston de la legitaj artikoloj',
-	'syndication_ajour' => '&#284;isdatigi nun',
+	'synchro_titre' => 'Registri ĉe la retejo la liston de la legitaj artikoloj',
+	'syndication_ajour' => 'Ĝisdatigi nun',
 	'syndication_fait' => 'Abonligita',
 
 	// T
-	'toutes' => '&#264;iuj'
+	'toutes' => 'Ĉiuj'
 );
 
 ?>

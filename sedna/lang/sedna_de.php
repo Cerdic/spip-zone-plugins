@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
 	'deconnexion' => 'Verbindung trennen',
-	'derniere_syndication' => 'Letzte Daten&uuml;bernehme dieser Website',
+	'derniere_syndication' => 'Letzte Datenübernehme dieser Website',
 	'deuxjours' => 'Zwei Tage',
 
 	// L
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'synchro' => 'Synchronisieren',
 	'synchro_titre' => 'Diese Website in die Liste gelesener Artikel aufnehmen',
 	'syndication_ajour' => 'Jetzt aktualisieren',
-	'syndication_fait' => 'Syndication ausgef&uuml;hrt',
+	'syndication_fait' => 'Syndication ausgeführt',
 
 	// T
 	'toutes' => 'Alle'

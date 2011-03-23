@@ -10,42 +10,42 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'aff_resume' => 'Zobrazovat souhrny',
 	'afficher_sources' => 'Zobrazit tento zdroj',
-	'annee' => 'Uplynul&yacute; rok',
-	'articles_recents_court' => 'P&#345;&iacute;sp&#283;vky z posledn&iacute; doby',
+	'annee' => 'Uplynulý rok',
+	'articles_recents_court' => 'Příspěvky z poslední doby',
 
 	// C
-	'connexion' => 'U&#382;ivatelsk&eacute; jm&eacute;no',
+	'connexion' => 'Uživatelské jméno',
 
 	// D
-	'deconnexion' => 'Odhl&aacute;&#353;en&iacute;',
-	'derniere_syndication' => 'Datum posledn&iacute;ho zpracov&aacute;n&iacute; dat na t&#283;chto internetov&yacute;ch str&aacute;nk&aacute;ch',
+	'deconnexion' => 'Odhlášení',
+	'derniere_syndication' => 'Datum posledního zpracování dat na těchto internetových stránkách',
 	'deuxjours' => 'Dva dny',
 
 	// L
-	'liens' => '&#269;l&aacute;nek',
-	'liens_pluriel' => '&#269;l&aacute;nky',
+	'liens' => 'článek',
+	'liens_pluriel' => 'články',
 
 	// M
-	'masquer_resume' => 'Skr&yacute;t souhrny',
-	'masquer_sources' => 'Skr&yacute;t tento zdroj',
-	'mois' => 'M&#283;s&iacute;c',
+	'masquer_resume' => 'Skrýt souhrny',
+	'masquer_sources' => 'Skrýt tento zdroj',
+	'mois' => 'Měsíc',
 
 	// P
-	'pas_articles' => 'V zadan&eacute;m obdob&iacute; nejsou &#382;&aacute;dn&eacute; &#269;l&aacute;nky!',
+	'pas_articles' => 'V zadaném období nejsou žádné články!',
 	'pas_synchro' => 'Nesynchronizovat',
-	'preferences' => 'Nastaven&iacute;',
-	'probleme_de_syndication' => 'Probl&eacute;m se zpracov&aacute;n&iacute;m dat',
+	'preferences' => 'Nastavení',
+	'probleme_de_syndication' => 'Problém se zpracováním dat',
 
 	// S
-	'semaine' => 'T&yacute;den',
+	'semaine' => 'Týden',
 	'sources' => 'Zdroje',
 	'synchro' => 'Synchronizovat',
-	'synchro_titre' => 'Ulo&#382;it seznam p&#345;e&#269;ten&yacute;ch p&#345;&iacute;sp&#283;vk&#367; na webu',
+	'synchro_titre' => 'Uložit seznam přečtených příspěvků na webu',
 	'syndication_ajour' => 'Aktualizovat',
-	'syndication_fait' => 'Zpracov&aacute;n&iacute; dat provedeno',
+	'syndication_fait' => 'Zpracování dat provedeno',
 
 	// T
-	'toutes' => 'V&#353;echny'
+	'toutes' => 'Všechny'
 );
 
 ?>

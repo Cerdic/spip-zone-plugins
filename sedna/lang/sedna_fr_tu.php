@@ -8,17 +8,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'Afficher les r&eacute;sum&eacute;s',
+	'aff_resume' => 'Afficher les résumés',
 	'afficher_sources' => 'Afficher cette source',
-	'annee' => 'Ann&eacute;e',
-	'articles_recents_court' => 'Articles r&eacute;cents',
+	'annee' => 'Année',
+	'articles_recents_court' => 'Articles récents',
 
 	// C
 	'connexion' => 'Connexion',
 
 	// D
-	'deconnexion' => 'D&eacute;connexion',
-	'derniere_syndication' => 'Derni&egrave;re syndication de ce site effectu&eacute;e',
+	'deconnexion' => 'Déconnexion',
+	'derniere_syndication' => 'Dernière syndication de ce site effectuée',
 	'deuxjours' => 'Deux jours',
 
 	// L
@@ -26,23 +26,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liens_pluriel' => 'articles',
 
 	// M
-	'masquer_resume' => 'Masquer les r&eacute;sum&eacute;s',
+	'masquer_resume' => 'Masquer les résumés',
 	'masquer_sources' => 'Masquer cette source',
 	'mois' => 'Mois',
 
 	// P
-	'pas_articles' => 'Pas d\'article dans cette p&eacute;riode&nbsp;!',
+	'pas_articles' => 'Pas d\'article dans cette période !',
 	'pas_synchro' => 'Ne pas synchroniser',
-	'preferences' => 'Pr&eacute;f&eacute;rences',
-	'probleme_de_syndication' => 'probl&egrave;me de syndication',
+	'preferences' => 'Préférences',
+	'probleme_de_syndication' => 'problème de syndication',
 
 	// S
 	'semaine' => 'Semaine',
 	'sources' => 'Sources',
 	'synchro' => 'Synchroniser',
 	'synchro_titre' => 'Enregistrer sur le site la liste des articles lus',
-	'syndication_ajour' => 'Mettre &agrave; jour maintenant',
-	'syndication_fait' => 'Syndication effectu&eacute;e',
+	'syndication_ajour' => 'Mettre à jour maintenant',
+	'syndication_fait' => 'Syndication effectuée',
 
 	// T
 	'toutes' => 'Toutes'
