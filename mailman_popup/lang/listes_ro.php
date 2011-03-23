@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adresa &lt;@var_email@&gt; va fi ad&#259;ugat&#259; la lista &lt;@liste@&gt; dup&#259; verificare. V&#259; rug&#259;m s&#259; r&#259;spunde&#355;i la mesajul care tocmai v-a fost trimis.',
+	'ajoutee' => 'Adresa <@var_email@> va fi adăugată la lista <@liste@> după verificare. Vă rugăm să răspundeţi la mesajul care tocmai v-a fost trimis.',
 
 	// C
-	'confirm' => 'O cerere de confirmare a fost adresat&#259; la &lt;@var_email@&gt;.',
+	'confirm' => 'O cerere de confirmare a fost adresată la <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: sunte&#355;i deja &icirc;nscris(&#259;) pe lista &lt;@liste@&gt;.',
-	'desabo' => 'Dezabonare efectuat&#259;.',
+	'deja' => '<@var_email@> : sunteţi deja înscris(ă) pe lista <@liste@>.',
+	'desabo' => 'Dezabonare efectuată.',
 
 	// F
-	'fermer' => '&icirc;nchide&#355;i',
+	'fermer' => 'închideţi',
 
 	// I
-	'inscription' => '&Icirc;nscriere la &lt;@liste@&gt;',
+	'inscription' => 'Înscriere la <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Adresa <@var_email@> a fost &#351;tears&#259; de pe lista @liste@.
+Adresa <@var_email@> a fost ştearsă de pe lista @liste@.
 
-&Icirc;n caz de probleme, sau dac&#259; nu a&#355;i cerut aceast&#259; dezabonare,
-v&#259; rug&#259;m s&#259; v&#259; adresa&#355;i la <@responsable@>.
+În caz de probleme, sau dacă nu aţi cerut această dezabonare,
+vă rugăm să vă adresaţi la <@responsable@>.
 
-La revedere &#351;i v&#259; mul&#355;umim.
+La revedere şi vă mulţumim.
 ',
-	'merci' => 'Mul&#355;umesc.',
+	'merci' => 'Mulţumesc.',
 
 	// P
-	'pasabo' => 'Adresa &lt;@var_email@&gt; nu este abonat&#259; la lista &lt;@liste@&gt;.',
-	'patientez' => 'V&#259; rug&#259;m s&#259; a&#351;tepta&#355;i un moment...',
+	'pasabo' => 'Adresa <@var_email@> nu este abonată la lista <@liste@>.',
+	'patientez' => 'Vă rugăm să aşteptaţi un moment...',
 
 	// Q
 	'quitter' => 'Dezabonare',
 
 	// S
-	'subject_removed' => 'Adresa dumneavoastr&#259; a fost &#351;tears&#259; de pe lista @liste@.',
+	'subject_removed' => 'Adresa dumneavoastră a fost ştearsă de pe lista @liste@.',
 
 	// T
-	'titrefenetre' => '&Icirc;nscriere',
+	'titrefenetre' => 'Înscriere',
 
 	// V
-	'veuillez' => 'V&#259; rug&#259;m s&#259; preciza&#355;i adresa dumneavoastr&#259;.',
-	'votreemail' => 'Email-ul dumneavoastr&#259;&nbsp;:'
+	'veuillez' => 'Vă rugăm să precizaţi adresa dumneavoastră.',
+	'votreemail' => 'Email-ul dumneavoastră :'
 );
 
 ?>

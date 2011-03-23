@@ -8,35 +8,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Osoite &lt;@var_email@&gt; lis&auml;t&auml;&auml;n listaan &lt;@liste@&gt; kunhan se on varmennettu. Vastaa viestiin, joka on juuri l&auml;hetetty sinulle.',
+	'ajoutee' => 'Osoite <@var_email@> lisätään listaan <@liste@> kunhan se on varmennettu. Vastaa viestiin, joka on juuri lähetetty sinulle.',
 
 	// C
-	'confirm' => 'Varmennuspyynt&ouml; on l&auml;hetetty osoitteseen &lt;@var_email@&gt;.',
+	'confirm' => 'Varmennuspyyntö on lähetetty osoitteseen <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;: olet jo listan &lt;@liste@&gt; tilaajana.',
+	'deja' => '<@var_email@>: olet jo listan <@liste@> tilaajana.',
 	'desabo' => 'Tilaus peruttu.',
 
 	// F
 	'fermer' => 'sulje',
 
 	// I
-	'inscription' => 'Tilaus listaan &lt;@liste@&gt;',
+	'inscription' => 'Tilaus listaan <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Osoite &lt;@var_email@&gt; on poistettu listalta @liste@.
+Osoite <@var_email@> on poistettu listalta @liste@.
 
-Jos sinulla on ongelmia, tai et pyyt&auml;nyt peruutusta niin ota yhteys osoitteseen
-&lt;@responsable@&gt;.
+Jos sinulla on ongelmia, tai et pyytänyt peruutusta niin ota yhteys osoitteseen
+<@responsable@>.
 
-Kiitos ja n&auml;kemiin.
+Kiitos ja näkemiin.
 ',
 	'merci' => 'Kiitos.',
 
 	// P
-	'pasabo' => 'Osoite &lt;@var_email@&gt; ei ole &lt;@liste@&gt; listan tilaaja.',
+	'pasabo' => 'Osoite <@var_email@> ei ole <@liste@> listan tilaaja.',
 	'patientez' => 'Odota...',
 
 	// Q
@@ -50,7 +50,7 @@ Kiitos ja n&auml;kemiin.
 
 	// V
 	'veuillez' => 'Anna osoitteesi.',
-	'votreemail' => 'Sinun s&auml;hk&ouml;posti:'
+	'votreemail' => 'Sinun sähköposti:'
 );
 
 ?>

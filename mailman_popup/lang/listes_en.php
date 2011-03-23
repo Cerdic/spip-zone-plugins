@@ -8,35 +8,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'The address &lt;@var_email@&gt; will be added to the list &lt;@liste@&gt; once it has been checked. Please reply to the message which has just been sent to you.',
+	'ajoutee' => 'The address <@var_email@> will be added to the list <@liste@> once it has been checked. Please reply to the message which has just been sent to you.',
 
 	// C
-	'confirm' => 'A confirmation request has been sent to &lt;@var_email@&gt;.',
+	'confirm' => 'A confirmation request has been sent to <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;: You are already subcribed to the &lt;@liste@&gt; list.',
+	'deja' => '<@var_email@>: You are already subcribed to the <@liste@> list.',
 	'desabo' => 'Subscription cancelled.',
 
 	// F
 	'fermer' => 'close',
 
 	// I
-	'inscription' => 'Subscription to &lt;@liste@&gt;',
+	'inscription' => 'Subscription to <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-The address &lt;@var_email@&gt; has been removed from the @liste@ list.
+The address <@var_email@> has been removed from the @liste@ list.
 
 If there is a problem, or if you did not request this cancellation
-please write to &lt;@responsable@&gt;.
+please write to <@responsable@>.
 
 Goodbye and thanks.
 ',
 	'merci' => 'Thank you.',
 
 	// P
-	'pasabo' => 'The address &lt;@var_email@&gt; is not subscribed the &lt;@liste@&gt; list.',
+	'pasabo' => 'The address <@var_email@> is not subscribed the <@liste@> list.',
 	'patientez' => 'Please wait...',
 
 	// Q

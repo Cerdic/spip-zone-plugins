@@ -8,25 +8,25 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Die Adresse &lt;@var_email@&gt; wird der Liste &lt;@liste@&gt; nach einer &Uuml;berpr&uuml;fung hinzugef&uuml;gt. Bitte beantworten Sie die Mail, welche Ihnen zur &Uuml;berpr&uuml;fung Ihrer Adresse geschickt wurde.',
+	'ajoutee' => 'Die Adresse <@var_email@> wird der Liste <@liste@> nach einer Überprüfung hinzugefügt. Bitte beantworten Sie die Mail, welche Ihnen zur Überprüfung Ihrer Adresse geschickt wurde.',
 
 	// C
-	'confirm' => 'Die Bitte um Best&auml;tigung wurde an &lt;@var_email@&gt; geschickt.',
+	'confirm' => 'Die Bitte um Bestätigung wurde an <@var_email@> geschickt.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: Sie sind bereits Mitglied der Liste &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : Sie sind bereits Mitglied der Liste <@liste@>.',
 	'desabo' => 'Abmeldung erfolgreich.',
 
 	// F
-	'fermer' => 'schlie&szlig;en',
+	'fermer' => 'schließen',
 
 	// I
-	'inscription' => 'Abonnieren von &lt;@liste@&gt;',
+	'inscription' => 'Abonnieren von <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Die Adresse <@var_email@> wurde von der Liste @liste@ gl&ouml;scht.
+Die Adresse <@var_email@> wurde von der Liste @liste@ glöscht.
 
 Falls ein Problem auftritt oder Sie die Liste nicht abbestellt haben, schreiben Sie bitte an <@responsable@>.
 
@@ -35,14 +35,14 @@ Vielen Dank und auf Wiedersehen!
 	'merci' => 'Danke.',
 
 	// P
-	'pasabo' => 'Die Adresse &lt;@var_email@&gt; geh&ouml;rt nicht  zu den Empf&auml;ngern der Liste &lt;@liste@&gt;.',
+	'pasabo' => 'Die Adresse <@var_email@> gehört nicht  zu den Empfängern der Liste <@liste@>.',
 	'patientez' => 'Bitte warten...',
 
 	// Q
 	'quitter' => 'Abbestellen',
 
 	// S
-	'subject_removed' => 'Ihre Adresse wurde aus der Liste @liste@ gel&ouml;scht.',
+	'subject_removed' => 'Ihre Adresse wurde aus der Liste @liste@ gelöscht.',
 
 	// T
 	'titrefenetre' => 'Abonnieren',

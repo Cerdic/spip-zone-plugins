@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'D\'Adress &lt;@var_email@&gt; g&euml;tt op d\'L&euml;scht &lt;@liste@&gt; no enger Kontroll abonn&eacute;iert. &Auml;ntwert weg op de Message deen Iech gesch&eacute;ckt ginn ass.',
+	'ajoutee' => 'D\'Adress <@var_email@> gëtt op d\'Lëscht <@liste@> no enger Kontroll abonnéiert. Äntwert weg op de Message deen Iech geschéckt ginn ass.',
 
 	// C
-	'confirm' => 'Eng Konfirmatiouns-Demande ass un d\'Adress &lt;@var_email@&gt; gesch&eacute;ckt ginn.',
+	'confirm' => 'Eng Konfirmatiouns-Demande ass un d\'Adress <@var_email@> geschéckt ginn.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: dir sidd schon un der L&euml;scht &lt;@liste@&gt; abonn&eacute;iert.',
-	'desabo' => 'Annul&eacute;iert.',
+	'deja' => '<@var_email@> : dir sidd schon un der Lëscht <@liste@> abonnéiert.',
+	'desabo' => 'Annuléiert.',
 
 	// F
 	'fermer' => 'zoumaachen',
 
 	// I
-	'inscription' => 'Aschreiwung op d\'L&euml;scht &lt;@liste@&gt;',
+	'inscription' => 'Aschreiwung op d\'Lëscht <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-D\'Adress <@var_email@> ass vun der L&euml;scht @liste@ gel&auml;scht ginn.
+D\'Adress <@var_email@> ass vun der Lëscht @liste@ geläscht ginn.
 
-Wann dat e Problem ass oder wann dier d&euml;s Annulatioun n&euml;t gefrot hut,
+Wann dat e Problem ass oder wann dier dës Annulatioun nët gefrot hut,
 schreiwt weg un <@responsable@>.
 
 Au revoir a merci.
@@ -36,21 +36,21 @@ Au revoir a merci.
 	'merci' => 'Merci.',
 
 	// P
-	'pasabo' => 'D\'Adress &lt;@var_email@&gt; ass n&euml;t un der L&euml;scht &lt;@liste@&gt; abonn&eacute;iert.',
+	'pasabo' => 'D\'Adress <@var_email@> ass nët un der Lëscht <@liste@> abonnéiert.',
 	'patientez' => 'Waart weg...',
 
 	// Q
 	'quitter' => 'Ofmelden',
 
 	// S
-	'subject_removed' => '&Auml;r Adress ass vun der L&euml;scht @liste@ gel&auml;scht ginn.',
+	'subject_removed' => 'Är Adress ass vun der Lëscht @liste@ geläscht ginn.',
 
 	// T
 	'titrefenetre' => 'Aschreiwen',
 
 	// V
-	'veuillez' => 'Gidd weg &auml;r Adress un.',
-	'votreemail' => '&Auml;r Email-Adress:'
+	'veuillez' => 'Gidd weg är Adress un.',
+	'votreemail' => 'Är Email-Adress:'
 );
 
 ?>

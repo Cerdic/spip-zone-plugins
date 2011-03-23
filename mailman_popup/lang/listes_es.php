@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'La direcci&oacute;n &lt;@var_email@&gt; ser&aacute; agregada a la lista &lt;@liste@&gt; luego de ser verificada. Se ruega responder al mensaje que acaba de ser enviado.',
+	'ajoutee' => 'La dirección <@var_email@> será agregada a la lista <@liste@> luego de ser verificada. Se ruega responder al mensaje que acaba de ser enviado.',
 
 	// C
-	'confirm' => 'Un pedido de confirmaci&oacute;n fue enviado a  &lt;@var_email@&gt;.',
+	'confirm' => 'Un pedido de confirmación fue enviado a  <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;: Ya est&aacute;s inscrita o inscrito a la lista &lt;@liste@&gt;.',
-	'desabo' => 'Desuscripci&oacute;n efectuada.',
+	'deja' => '<@var_email@>: Ya estás inscrita o inscrito a la lista <@liste@>.',
+	'desabo' => 'Desuscripción efectuada.',
 
 	// F
 	'fermer' => 'cerrar',
 
 	// I
-	'inscription' => 'Inscripci&oacute;n a &lt;@liste@&gt;',
+	'inscription' => 'Inscripción a <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Se suprimi&oacute; la direcci&oacute;n <@var_email@> de la lista @liste@.
+Se suprimió la dirección <@var_email@> de la lista @liste@.
 
-En caso de problema, o si no fuiste t&uacute; quien pidi&oacute; esta cancelaci&oacute;n de suscripci&oacute;n,
+En caso de problema, o si no fuiste tú quien pidió esta cancelación de suscripción,
 no dudes en contactar <@responsable@>.
 
 Hasta luego, y gracias.
@@ -36,20 +36,20 @@ Hasta luego, y gracias.
 	'merci' => 'Gracias.',
 
 	// P
-	'pasabo' => 'La direcci&oacute;n &lt;@var_email@&gt; no est&aacute; suscrita a la lista &lt;@liste@&gt;.',
+	'pasabo' => 'La dirección <@var_email@> no está suscrita a la lista <@liste@>.',
 	'patientez' => 'Un momento, por favor...',
 
 	// Q
-	'quitter' => 'Desuscripci&oacute;n',
+	'quitter' => 'Desuscripción',
 
 	// S
-	'subject_removed' => 'Se suprimi&oacute; tu direcci&oacute;n de la lista @liste@.',
+	'subject_removed' => 'Se suprimió tu dirección de la lista @liste@.',
 
 	// T
-	'titrefenetre' => 'Inscripci&oacute;n',
+	'titrefenetre' => 'Inscripción',
 
 	// V
-	'veuillez' => 'Por favor indica tu direcci&oacute;n.',
+	'veuillez' => 'Por favor indica tu dirección.',
 	'votreemail' => 'Tu e-milio:'
 );
 

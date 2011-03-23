@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'A c&iacute;m &lt;@var_email@&gt; ker&uuml;l a &lt;@liste@&gt; list&aacute;ba ellen&#337;rz&eacute;s ut&aacute;n. El&#337;re k&ouml;sz&ouml;juk, hogy v&aacute;laszol a most k&uuml;ld&ouml;tt &uuml;zenetre.',
+	'ajoutee' => 'A cím <@var_email@> kerül a <@liste@> listába ellenőrzés után. Előre köszöjuk, hogy válaszol a most küldött üzenetre.',
 
 	// C
-	'confirm' => 'Egy meger&#337;s&iacute;t&eacute;si k&eacute;relem lett k&uuml;ldve ennek: &lt;@var_email@&gt;.',
+	'confirm' => 'Egy megerősítési kérelem lett küldve ennek: <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: m&aacute;r szerepel a list&aacute;ban &lt;@liste@&gt;.',
-	'desabo' => 'Ki&iacute;ratkoz&aacute;s megt&ouml;rt&eacute;nt.',
+	'deja' => '<@var_email@> : már szerepel a listában <@liste@>.',
+	'desabo' => 'Kiíratkozás megtörtént.',
 
 	// F
-	'fermer' => 'bez&aacute;r&aacute;s',
+	'fermer' => 'bezárás',
 
 	// I
-	'inscription' => 'Be&iacute;ratkoz&aacute;s a list&aacute;ban &lt;@liste@&gt;',
+	'inscription' => 'Beíratkozás a listában <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-A cim <@var_email@> lett t&ouml;r&ouml;lve a list&aacute;b&oacute;l @liste@.
+A cim <@var_email@> lett törölve a listából @liste@.
 
-En cas de probl&egrave;me, ou si vous n\'avez pas demand&eacute; ce d&eacute;sabonnement,
-veuillez &eacute;crire &agrave; <@responsable@>.
+En cas de problème, ou si vous n\'avez pas demandé ce désabonnement,
+veuillez écrire à <@responsable@>.
 
 Au revoir, et merci.
 ',
-	'merci' => 'K&ouml;sz&ouml;nj&uuml;k.',
+	'merci' => 'Köszönjük.',
 
 	// P
-	'pasabo' => 'A c&iacute;m &lt;@var_email@&gt; nem szerepel a list&aacute;ban &lt;@liste@&gt;.',
-	'patientez' => 'Egy kis t&uuml;relmet k&eacute;r&uuml;nk...',
+	'pasabo' => 'A cím <@var_email@> nem szerepel a listában <@liste@>.',
+	'patientez' => 'Egy kis türelmet kérünk...',
 
 	// Q
-	'quitter' => 'Ki&iacute;ratkoz&aacute;s',
+	'quitter' => 'Kiíratkozás',
 
 	// S
-	'subject_removed' => 'Az &Ouml;n c&iacute;me kiker&uuml;lt a list&aacute;b&oacute;l @liste@.',
+	'subject_removed' => 'Az Ön címe kikerült a listából @liste@.',
 
 	// T
-	'titrefenetre' => 'Be&iacute;ratkoz&aacute;s',
+	'titrefenetre' => 'Beíratkozás',
 
 	// V
-	'veuillez' => 'Legyen sz&iacute;ves pontos&iacute;tani az &Ouml;n c&iacute;m&eacute;t.',
-	'votreemail' => 'Az &Ouml;n e-mailje&nbsp;:'
+	'veuillez' => 'Legyen szíves pontosítani az Ön címét.',
+	'votreemail' => 'Az Ön e-mailje :'
 );
 
 ?>

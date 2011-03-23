@@ -8,48 +8,48 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adresa &lt;@var_email@&gt; bude zkontrolov&aacute;na a pot&eacute; p&#345;id&aacute;na do skupiny &lt;@liste@&gt;. Byla v&aacute;m zasl&aacute;na zpr&aacute;va. Pros&iacute;m, odpov&#283;zte na ni.',
+	'ajoutee' => 'Adresa <@var_email@> bude zkontrolována a poté přidána do skupiny <@liste@>. Byla vám zaslána zpráva. Prosím, odpovězte na ni.',
 
 	// C
-	'confirm' => 'Na adresu &lt;@var_email@&gt; byla zasl&aacute;na potvrzovac&iacute; zpr&aacute;va.',
+	'confirm' => 'Na adresu <@var_email@> byla zaslána potvrzovací zpráva.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;: Do skupiny &lt;@liste@&gt; jste ji&#382; p&#345;ihl&aacute;&#353;eni.',
-	'desabo' => 'P&#345;ihl&aacute;&#353;en&iacute; bylo zru&#353;eno.',
+	'deja' => '<@var_email@>: Do skupiny <@liste@> jste již přihlášeni.',
+	'desabo' => 'Přihlášení bylo zrušeno.',
 
 	// F
-	'fermer' => 'zav&#345;&iacute;t',
+	'fermer' => 'zavřít',
 
 	// I
-	'inscription' => 'P&#345;ihl&aacute;&#353;en&iacute; do &lt;@liste@&gt;',
+	'inscription' => 'Přihlášení do <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Adresa &lt;@var_email@&gt; byla odebr&aacute;na ze skupiny @liste@.
+Adresa <@var_email@> byla odebrána ze skupiny @liste@.
 
-V p&#345;&iacute;pad&#283; pot&iacute;&#382;&iacute;, resp. pokud jste o zru&#353;en&iacute; ne&#382;&aacute;dali, obra&#357;te se pros&iacute;m na &lt;@responsable@&gt;.
+V případě potíží, resp. pokud jste o zrušení nežádali, obraťte se prosím na <@responsable@>.
 
-D&#283;kujeme a zdrav&iacute;me.
+Děkujeme a zdravíme.
 ',
-	'merci' => 'D&#283;kujeme.',
+	'merci' => 'Děkujeme.',
 
 	// P
-	'pasabo' => 'Adresa &lt;@var_email@&gt; nen&iacute; do skupiny &lt;@liste@&gt; p&#345;ihl&aacute;&#353;ena.',
-	'patientez' => 'Vy&#269;kejte pros&iacute;m ...',
+	'pasabo' => 'Adresa <@var_email@> není do skupiny <@liste@> přihlášena.',
+	'patientez' => 'Vyčkejte prosím ...',
 
 	// Q
-	'quitter' => 'Zru&#353;en&iacute;',
+	'quitter' => 'Zrušení',
 
 	// S
-	'subject_removed' => 'Adresa byla odebr&aacute;na ze skupiny @liste@.',
+	'subject_removed' => 'Adresa byla odebrána ze skupiny @liste@.',
 
 	// T
-	'titrefenetre' => 'P&#345;ihl&aacute;&#353;en&iacute;',
+	'titrefenetre' => 'Přihlášení',
 
 	// V
-	'veuillez' => 'Zadejte pros&iacute;m adresu.',
-	'votreemail' => 'V&aacute;&#353; e-mail:'
+	'veuillez' => 'Zadejte prosím adresu.',
+	'votreemail' => 'Váš e-mail:'
 );
 
 ?>

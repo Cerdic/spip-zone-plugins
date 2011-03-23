@@ -8,35 +8,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adressen &lt;@var_email@&gt; vil bli lagt til epostlisten &lt;@liste@&gt; s&aring; fort den er kontrollert. Vennligst svar p&aring; den eposten som er sendt deg.',
+	'ajoutee' => 'Adressen <@var_email@> vil bli lagt til epostlisten <@liste@> så fort den er kontrollert. Vennligst svar på den eposten som er sendt deg.',
 
 	// C
-	'confirm' => 'En bekreftselsesforesp&oslash;rsel er sendt til &lt;@var_email@&gt;.',
+	'confirm' => 'En bekreftselsesforespørsel er sendt til <@var_email@>.',
 
 	// D
-	'deja' => ' &lt;@var_email@&gt;: Du har allerede meldt deg p&aring; epostlisten &lt;@liste@&gt;.', # MODIF
-	'desabo' => 'P&aring;melding avbrutt.',
+	'deja' => ' <@var_email@>: Du har allerede meldt deg på epostlisten <@liste@>.',
+	'desabo' => 'Påmelding avbrutt.',
 
 	// F
 	'fermer' => 'steng',
 
 	// I
-	'inscription' => 'P&aring;melding til &lt;@liste@&gt;',
+	'inscription' => 'Påmelding til <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Adressen &lt;@var_email@&gt; er fjernet fra epostlisten @liste@.
+Adressen <@var_email@> er fjernet fra epostlisten @liste@.
 
-Hvis du er et problem eller hvis du ikke har bedt om &aring; meldes av
-vennligst skriv til &lt;@responsable@&gt;.
+Hvis du er et problem eller hvis du ikke har bedt om å meldes av
+vennligst skriv til <@responsable@>.
 
 Takk, ha en fin dag.
 ',
 	'merci' => 'Takk.',
 
 	// P
-	'pasabo' => 'Adressen &lt;@var_email@&gt; er ikke p&aring;meldt epostlisten &lt;@liste@&gt;.',
+	'pasabo' => 'Adressen <@var_email@> er ikke påmeldt epostlisten <@liste@>.',
 	'patientez' => 'Veuillez patienter...', # NEW
 
 	// Q

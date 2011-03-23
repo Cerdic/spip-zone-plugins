@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adres &lt;@var_email@&gt; zostanie dodany do listy &lt;@liste@&gt; po koniecznej weryfikacji. Prosimy o odpowied&#378; na wiadomo&#347;&#263;, kt&oacute;ra w&#322;a&#347;nie zosta&#322;a do Ciebie wys&#322;ana.',
+	'ajoutee' => 'Adres <@var_email@> zostanie dodany do listy <@liste@> po koniecznej weryfikacji. Prosimy o odpowiedź na wiadomość, która właśnie została do Ciebie wysłana.',
 
 	// C
-	'confirm' => 'Zapytanie o potwierdzenie zosta&#322;o zaadresowane do &lt;@var_email@&gt;.',
+	'confirm' => 'Zapytanie o potwierdzenie zostało zaadresowane do <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: jeste&#347; ju&#380; zapisany(a) na list&#281; &lt;@liste@&gt;.',
-	'desabo' => 'Adres usuni&#281;ty z powodzeniem.',
+	'deja' => '<@var_email@> : jesteś już zapisany(a) na listę <@liste@>.',
+	'desabo' => 'Adres usunięty z powodzeniem.',
 
 	// F
 	'fermer' => 'zamknij',
 
 	// I
-	'inscription' => 'Zapis na list&#281; &lt;@liste@&gt;',
+	'inscription' => 'Zapis na listę <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Adres <@var_email@> zosta&#322; usuni&#281;ty z listy @liste@.
+Adres <@var_email@> został usunięty z listy @liste@.
 
-W przypadku jakich&#347; problem&oacute;w, lub je&#347;li nie prosi&#322;e&#347; o usuni&#281;cie,
+W przypadku jakichś problemów, lub jeśli nie prosiłeś o usunięcie,
 prosimy o kontakt z odpowiedzialnym <@responsable@>.
 
-Dzi&#281;kujemy, mi&#322;ego dnia.
+Dziękujemy, miłego dnia.
 ',
-	'merci' => 'Dzi&#281;kujemy.',
+	'merci' => 'Dziękujemy.',
 
 	// P
-	'pasabo' => 'Adresu &lt;@var_email@&gt; nie ma na li&#347;cie &lt;@liste@&gt;.',
-	'patientez' => 'Prosimy o chwil&#281; cierpliwo&#347;ci...',
+	'pasabo' => 'Adresu <@var_email@> nie ma na liście <@liste@>.',
+	'patientez' => 'Prosimy o chwilę cierpliwości...',
 
 	// Q
-	'quitter' => 'Usuni&#281;cie',
+	'quitter' => 'Usunięcie',
 
 	// S
-	'subject_removed' => 'Tw&oacute;j adres zosta&#322; usuni&#281;ty z listy @liste@.',
+	'subject_removed' => 'Twój adres został usunięty z listy @liste@.',
 
 	// T
-	'titrefenetre' => 'Zapisz si&#281;',
+	'titrefenetre' => 'Zapisz się',
 
 	// V
 	'veuillez' => 'Prosimy o podanie adresu.',
-	'votreemail' => 'Tw&oacute;j e-mail&nbsp;:'
+	'votreemail' => 'Twój e-mail :'
 );
 
 ?>

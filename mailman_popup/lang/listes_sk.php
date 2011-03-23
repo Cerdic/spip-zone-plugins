@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'The address &lt;@var_email@&gt; will be added to the list &lt;@liste@&gt; once it has been checked. Please reply to the message which has just been sent to you.', # MODIF
+	'ajoutee' => 'The address <@var_email@> will be added to the list <@liste@> once it has been checked. Please reply to the message which has just been sent to you.',
 
 	// C
-	'confirm' => '<NEW>&#381;iados&#357; o potvrdenie bola odoslan&aacute; na &lt;@var_email@&gt;.',
+	'confirm' => '<NEW>Žiadosť o potvrdenie bola odoslaná na <@var_email@>.',
 
 	// D
-	'deja' => '<NEW>&lt;@var_email@&gt;: U&#382; ste prihl&aacute;sen&yacute; do zoznamu &lt;@liste@&gt;.',
-	'desabo' => '<NEW>Registr&aacute;cia bola zru&#353;en&aacute;.',
+	'deja' => '<NEW><@var_email@>: Už ste prihlásený do zoznamu <@liste@>.',
+	'desabo' => '<NEW>Registrácia bola zrušená.',
 
 	// F
-	'fermer' => '<NEW>Zatvori&#357;',
+	'fermer' => '<NEW>Zatvoriť',
 
 	// I
-	'inscription' => '<NEW>Registr&aacute;cia do &lt;@liste@&gt;',
+	'inscription' => '<NEW>Registrácia do <@liste@>',
 
 	// M
 	'mail_removed' => '<NEW>
 
-Adresa &lt;@var_email@&gt; bola odstr&aacute;nen&aacute; zo zoznamu @liste@.
+Adresa <@var_email@> bola odstránená zo zoznamu @liste@.
 
-Ak sa vyskytol probl&eacute;m alebo ak ste
-ne&#382;iadali o zru&#353;enie, pros&iacute;m, nap&iacute;&#353;te na &lt;@responsable@&gt;.
+Ak sa vyskytol problém alebo ak ste
+nežiadali o zrušenie, prosím, napíšte na <@responsable@>.
 
-Dovidenia a &#271;akujeme.
+Dovidenia a ďakujeme.
 ',
-	'merci' => '<NEW>&#270;akujeme.',
+	'merci' => '<NEW>Ďakujeme.',
 
 	// P
-	'pasabo' => '<NEW>Adresa &lt;@var_email@&gt; nie je prihl&aacute;sen&aacute; do zoznamu &lt;@liste@&gt;.',
-	'patientez' => '<NEW>Pros&iacute;m, po&#269;kajte...',
+	'pasabo' => '<NEW>Adresa <@var_email@> nie je prihlásená do zoznamu <@liste@>.',
+	'patientez' => '<NEW>Prosím, počkajte...',
 
 	// Q
-	'quitter' => '<NEW>Zru&#353;enie',
+	'quitter' => '<NEW>Zrušenie',
 
 	// S
-	'subject_removed' => '<NEW>Va&#353;a adresa bola odstr&aacute;nen&aacute; zo zoznamu @liste@.',
+	'subject_removed' => '<NEW>Vaša adresa bola odstránená zo zoznamu @liste@.',
 
 	// T
-	'titrefenetre' => '<NEW>Prihl&aacute;si&#357; sa',
+	'titrefenetre' => '<NEW>Prihlásiť sa',
 
 	// V
-	'veuillez' => '<NEW>Pros&iacute;m, dajte n&aacute;m svoju adresu.',
-	'votreemail' => '<NEW>V&aacute;&#353; e-mail:'
+	'veuillez' => '<NEW>Prosím, dajte nám svoju adresu.',
+	'votreemail' => '<NEW>Váš e-mail:'
 );
 
 ?>

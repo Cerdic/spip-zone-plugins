@@ -8,39 +8,39 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adressen &lt;@var_email@&gt; kommer att l&auml;ggas till listan &lt;@liste@&gt; n&auml;r den har blivit kontrollerad. Var god och svara p&aring; meddelandet som just skickats till dig.',
+	'ajoutee' => 'Adressen <@var_email@> kommer att läggas till listan <@liste@> när den har blivit kontrollerad. Var god och svara på meddelandet som just skickats till dig.',
 
 	// C
-	'confirm' => 'En beg&auml;ran om bekr&auml;ftelse har skickats till &lt;@var_email@&gt;.',
+	'confirm' => 'En begäran om bekräftelse har skickats till <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;: Du prenumerar redan p&aring; &lt;@liste@&gt; listan.',
+	'deja' => '<@var_email@>: Du prenumerar redan på <@liste@> listan.',
 	'desabo' => 'Prenumeration avbruten.',
 
 	// F
-	'fermer' => 'st&auml;ng',
+	'fermer' => 'stäng',
 
 	// I
-	'inscription' => 'Prenumerera p&aring; &lt;@liste@&gt;',
+	'inscription' => 'Prenumerera på <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Adressen &lt;@var_email@&gt; har tagits bort som prenumerant fr&aring;n @liste@ listan.
-Om det orsakar problem, eller om du inte beg&auml;rt detta: skriv till &lt;@responsable@&gt;.
-Hejd&aring; och tack.
+Adressen <@var_email@> har tagits bort som prenumerant från @liste@ listan.
+Om det orsakar problem, eller om du inte begärt detta: skriv till <@responsable@>.
+Hejdå och tack.
 ',
 	'merci' => 'Tack',
 
 	// P
-	'pasabo' => 'Adressen &lt;@var_email@&gt; &auml;r inte anm&auml;ld som prenumerant p&aring; &lt;@liste@&gt; listan.',
-	'patientez' => 'V&auml;nta...',
+	'pasabo' => 'Adressen <@var_email@> är inte anmäld som prenumerant på <@liste@> listan.',
+	'patientez' => 'Vänta...',
 
 	// Q
 	'quitter' => 'Avsluta',
 
 	// S
-	'subject_removed' => 'Din adress har tagits bort fr&aring;n @liste@ listan.',
+	'subject_removed' => 'Din adress har tagits bort från @liste@ listan.',
 
 	// T
 	'titrefenetre' => 'Prenumerera',

@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Ladrs &lt;@var_email@&gt; i sar azout&eacute; andan lo list &lt;@liste@&gt; kank zot lora v&eacute;rifi&eacute; ali. M&egrave;rsi r&eacute;ponn lo mod&eacute;kri ni la fin anvway&eacute; azot.',
+	'ajoutee' => 'Ladrs <@var_email@> i sar azouté andan lo list <@liste@> kank zot lora vérifié ali. Mèrsi réponn lo modékri ni la fin anvwayé azot.',
 
 	// C
-	'confirm' => 'N&eacute;na in domann lakofirmasyon sak la fin d&egrave;t anvway&eacute; si ladr&egrave;s &lt;@var_email@&gt;.',
+	'confirm' => 'Néna in domann lakofirmasyon sak la fin dèt anvwayé si ladrès <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: ou l&eacute; d&eacute;za inskri ast&egrave;r si lo &lt;@liste@&gt;.',
-	'desabo' => 'Lo d&eacute;zabonman la finn mars&eacute; ast&egrave;r.',
+	'deja' => '<@var_email@> : ou lé déza inskri astèr si lo <@liste@>.',
+	'desabo' => 'Lo dézabonman la finn marsé astèr.',
 
 	// F
-	'fermer' => 'Rof&egrave;rm',
+	'fermer' => 'Rofèrm',
 
 	// I
-	'inscription' => 'Inskrisyon si &lt;@liste@&gt;',
+	'inscription' => 'Inskrisyon si <@liste@>',
 
 	// M
 	'mail_removed' => ' 
 
-Ladrs <@var_email@> la finn d&egrave;t d&eacute;gr&eacute;n&eacute; si lo list @liste@.
+Ladrs <@var_email@> la finn dèt dégréné si lo list @liste@.
 
-Si n&eacute;na in larlik ou si ou la pa ryin dmand&eacute; pou lo d&eacute;zabonman,
-m&egrave;rsi &eacute;kri <@responsable@>.
+Si néna in larlik ou si ou la pa ryin dmandé pou lo dézabonman,
+mèrsi ékri <@responsable@>.
 
-M&egrave;rsi aou, nartrouv&eacute;.
+Mèrsi aou, nartrouvé.
 ',
-	'merci' => 'M&egrave;rsi aou.',
+	'merci' => 'Mèrsi aou.',
 
 	// P
-	'pasabo' => 'Ladr&egrave;s &lt;@var_email@&gt;  li l&eacute; pa abon&eacute; si lo list &lt;@liste@&gt;.',
-	'patientez' => 'M&egrave;si &eacute;sp&egrave;r...',
+	'pasabo' => 'Ladrès <@var_email@>  li lé pa aboné si lo list <@liste@>.',
+	'patientez' => 'Mèsi éspèr...',
 
 	// Q
-	'quitter' => 'D&eacute;zabonman',
+	'quitter' => 'Dézabonman',
 
 	// S
-	'subject_removed' => 'Out ladr&egrave;s la finn d&egrave;t d&eacute;gr&eacute;n&eacute; si lo list @liste@.',
+	'subject_removed' => 'Out ladrès la finn dèt dégréné si lo list @liste@.',
 
 	// T
 	'titrefenetre' => 'Inskri aou',
 
 	// V
-	'veuillez' => 'M&egrave;rsi pr&eacute;siz&eacute; out ladr&egrave;s.',
-	'votreemail' => 'Out lim&egrave;l&nbsp;:'
+	'veuillez' => 'Mèrsi présizé out ladrès.',
+	'votreemail' => 'Out limèl :'
 );
 
 ?>

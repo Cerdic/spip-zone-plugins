@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adresa &lt;@var_email@&gt; do t&euml; shtohet n&euml; list&euml;n &lt;@liste@&gt; sapo t&euml; shqyrtohet. Ju lutemi, p&euml;rgjigjiuni mesazhit t&euml; konfirmimit q&euml; do ju d&euml;rgohet me email.',
+	'ajoutee' => 'Adresa <@var_email@> do të shtohet në listën <@liste@> sapo të shqyrtohet. Ju lutemi, përgjigjiuni mesazhit të konfirmimit që do ju dërgohet me email.',
 
 	// C
-	'confirm' => 'K&euml;rkesa p&euml;r konfirmim u d&euml;rgua n&euml; adres&euml;n  &lt;@var_email@&gt;.',
+	'confirm' => 'Kërkesa për konfirmim u dërgua në adresën  <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: kjo adres&euml; ishte e pranishme n&euml; list&euml;n &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : kjo adresë ishte e pranishme në listën <@liste@>.',
 	'desabo' => 'Fshirja nga lista u krye.',
 
 	// F
 	'fermer' => 'mbyll',
 
 	// I
-	'inscription' => 'Regjistrim n&euml; list&euml;n &lt;@liste@&gt;',
+	'inscription' => 'Regjistrim në listën <@liste@>',
 
 	// M
 	'mail_removed' => '
 
 Adresa <@var_email@> u fshi nga lista @liste@.
 
-N&euml; rast se ka probleme apo n&euml;se kjo fshirje ishte e pad&euml;shiruar,
+Në rast se ka probleme apo nëse kjo fshirje ishte e padëshiruar,
 shkruani tek <@responsable@>.
 
 Faleminderit.
@@ -36,20 +36,20 @@ Faleminderit.
 	'merci' => 'Faleminderit.',
 
 	// P
-	'pasabo' => 'Adresa &lt;@var_email@&gt; nuk &euml;sht&euml; e pranishme n&euml; list&euml;n &lt;@liste@&gt;.',
+	'pasabo' => 'Adresa <@var_email@> nuk është e pranishme në listën <@liste@>.',
 	'patientez' => 'Ju lutem prisni...',
 
 	// Q
 	'quitter' => 'Fshirje nga lista',
 
 	// S
-	'subject_removed' => 'Adresa juaj &euml;sht&euml; fshir&euml; nga lista @liste@.',
+	'subject_removed' => 'Adresa juaj është fshirë nga lista @liste@.',
 
 	// T
 	'titrefenetre' => 'Regjistrim',
 
 	// V
-	'veuillez' => 'Vendosni adres&euml;n tuaj email.',
+	'veuillez' => 'Vendosni adresën tuaj email.',
 	'votreemail' => 'Adresa email:'
 );
 

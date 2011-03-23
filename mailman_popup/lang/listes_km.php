@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adresse &lt;@var_email@&gt; sera ajout&eacute;e &agrave; la liste &lt;@liste@&gt; apr&egrave;s v&eacute;rification. Merci de r&eacute;pondre au message qui vient de vous &ecirc;tre envoy&eacute;.', # NEW
+	'ajoutee' => 'L\'adresse <@var_email@> sera ajoutée à la liste <@liste@> après vérification. Merci de répondre au message qui vient de vous être envoyé.', # NEW
 
 	// C
-	'confirm' => 'Une demande de confirmation a &eacute;t&eacute; adress&eacute;e &agrave; &lt;@var_email@&gt;.', # NEW
+	'confirm' => 'Une demande de confirmation a été adressée à <@var_email@>.', # NEW
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: vous &ecirc;tes d&eacute;j&agrave; inscrit(e) &agrave; la liste &lt;@liste@&gt;.', # NEW
-	'desabo' => 'D&eacute;sabonnement effectu&eacute;.', # NEW
+	'deja' => '<@var_email@> : vous êtes déjà inscrit(e) à la liste <@liste@>.', # NEW
+	'desabo' => 'Désabonnement effectué.', # NEW
 
 	// F
-	'fermer' => '&#6036;&#6071;&#6033;',
+	'fermer' => 'បិទ',
 
 	// I
-	'inscription' => '&#6016;&#6070;&#6042;&#6021;&#6075;&#6087;&#6024;&#6098;&#6040;&#6084;&#6087; &#6033;&#6085; &lt;@liste@&gt;',
+	'inscription' => 'ការចុះឈ្មោះ ទៅ <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-L\'adresse <@var_email@> a &eacute;t&eacute; supprim&eacute;e de la liste @liste@.
+L\'adresse <@var_email@> a été supprimée de la liste @liste@.
 
-En cas de probl&egrave;me, ou si vous n\'avez pas demand&eacute; ce d&eacute;sabonnement,
-veuillez &eacute;crire &agrave; <@responsable@>.
+En cas de problème, ou si vous n\'avez pas demandé ce désabonnement,
+veuillez écrire à <@responsable@>.
 
 Au revoir, et merci.
 ', # NEW
-	'merci' => '&#6050;&#6042;&#6018;&#6075;&#6030;&#6100;',
+	'merci' => 'អរគុណ។',
 
 	// P
-	'pasabo' => 'L\'adresse &lt;@var_email@&gt; n\'est pas abonn&eacute;e &agrave; la liste &lt;@liste@&gt;.', # NEW
-	'patientez' => '&#6047;&#6076;&#6040;&#6038;&#6098;&#6041;&#6070;&#6041;&#6070;&#6040;...',
+	'pasabo' => 'L\'adresse <@var_email@> n\'est pas abonnée à la liste <@liste@>.', # NEW
+	'patientez' => 'សូមព្យាយាម...',
 
 	// Q
-	'quitter' => 'D&eacute;sabonnement', # NEW
+	'quitter' => 'Désabonnement', # NEW
 
 	// S
-	'subject_removed' => '&#6050;&#6070;&#6047;&#6041;&#6026;&#6098;&#6027;&#6070;&#6035; &#6042;&#6036;&#6047;&#6091;&#6050;&#6098;&#6035;&#6016; &#6031;&#6098;&#6042;&#6076;&#6044;&#6036;&#6070;&#6035;&#6043;&#6075;&#6036;&#6021;&#6081;&#6025;&#6048;&#6078;&#6041; &#6038;&#6072; &#6036;&#6025;&#6098;&#6023;&#6072; @liste@&#6100;',
+	'subject_removed' => 'អាសយដ្ឋាន របស់អ្នក ត្រូវបានលុបចេញហើយ ពី បញ្ជី @liste@។',
 
 	// T
-	'titrefenetre' => '&#6016;&#6070;&#6042;&#6021;&#6075;&#6087;&#6024;&#6098;&#6040;&#6084;&#6087;',
+	'titrefenetre' => 'ការចុះឈ្មោះ',
 
 	// V
-	'veuillez' => '&#6047;&#6076;&#6040;&#6036;&#6025;&#6098;&#6023;&#6070;&#6016;&#6091; &#6050;&#6070;&#6047;&#6041;&#6026;&#6098;&#6027;&#6070;&#6035; &#6042;&#6036;&#6047;&#6091;&#6050;&#6098;&#6035;&#6016;&#6100;',
-	'votreemail' => '&#6050;&#6090;&#6072;&#6040;&#6082;&#6044;&#6043;&#6093; &#6042;&#6036;&#6047;&#6091;&#6050;&#6098;&#6035;&#6016;&nbsp;&#6102;'
+	'veuillez' => 'សូមបញ្ជាក់ អាសយដ្ឋាន របស់អ្នក។',
+	'votreemail' => 'អ៊ីមែវល៍ របស់អ្នក ៖'
 );
 
 ?>

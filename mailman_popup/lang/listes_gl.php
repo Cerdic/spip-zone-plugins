@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'O enderezo &lt;@var_email@&gt; ser&aacute; engadido &aacute; lista &lt;@liste@&gt; despois da verificaci&oacute;n. Agradeceremos que responda &aacute; mensaxe que acaba de lle ser enviada.',
+	'ajoutee' => 'O enderezo <@var_email@> será engadido á lista <@liste@> despois da verificación. Agradeceremos que responda á mensaxe que acaba de lle ser enviada.',
 
 	// C
-	'confirm' => 'Unha solicitude de confirmaci&oacute;n foi dirixida a &lt;@var_email@&gt;.',
+	'confirm' => 'Unha solicitude de confirmación foi dirixida a <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: xa est&aacute; subscrito/a(e) &aacute; lista &lt;@liste@&gt;.',
-	'desabo' => 'Desubscrici&oacute;n efectuada.',
+	'deja' => '<@var_email@> : xa está subscrito/a(e) á lista <@liste@>.',
+	'desabo' => 'Desubscrición efectuada.',
 
 	// F
 	'fermer' => 'pechar',
 
 	// I
-	'inscription' => 'Subscrici&oacute;n a &lt;@liste@&gt;',
+	'inscription' => 'Subscrición a <@liste@>',
 
 	// M
 	'mail_removed' => '
 
 O enderezo <@var_email@> foi suprimido da lista @liste@.
 
-En caso de problema, ou se vostede non ten solicitado a desubscrici&oacute;n,
-escr&iacute;balle a  <@responsable@>.
+En caso de problema, ou se vostede non ten solicitado a desubscrición,
+escríballe a  <@responsable@>.
 
 Deica logo, e gracias.
 ',
 	'merci' => 'Gracias.',
 
 	// P
-	'pasabo' => 'O enderezo &lt;@var_email@&gt; non est&aacute; subscrito &aacute; lista &lt;@liste@&gt;.',
-	'patientez' => 'Te&ntilde;a un pouco de paciencia...',
+	'pasabo' => 'O enderezo <@var_email@> non está subscrito á lista <@liste@>.',
+	'patientez' => 'Teña un pouco de paciencia...',
 
 	// Q
-	'quitter' => 'Desubscrici&oacute;n',
+	'quitter' => 'Desubscrición',
 
 	// S
 	'subject_removed' => 'O seu enderezo foi suprimido da lista',
 
 	// T
-	'titrefenetre' => 'Inscrici&oacute;n',
+	'titrefenetre' => 'Inscrición',
 
 	// V
 	'veuillez' => 'Precise o seu enderezo',
-	'votreemail' => 'O seu correo&nbsp;:'
+	'votreemail' => 'O seu correo :'
 );
 
 ?>

@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'indirizzo &lt;@var_email@&gt; sar&agrave; aggiunto all\'elenco &lt;@liste@&gt; dopo essere stato verificato. Rispondere al messaggio di conferma che vi verr&agrave; inviato, per favore.',
+	'ajoutee' => 'L\'indirizzo <@var_email@> sarà aggiunto all\'elenco <@liste@> dopo essere stato verificato. Rispondere al messaggio di conferma che vi verrà inviato, per favore.',
 
 	// C
-	'confirm' => 'La richiesta di conferma &egrave; stata inviata a &lt;@var_email@&gt;.',
+	'confirm' => 'La richiesta di conferma è stata inviata a <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: indirizzo gi&agrave; presente nella mailing list &lt;@liste@&gt;.',
-	'desabo' => 'La cancellazione dalla lista &egrave; stata effettuata.',
+	'deja' => '<@var_email@> : indirizzo già presente nella mailing list <@liste@>.',
+	'desabo' => 'La cancellazione dalla lista è stata effettuata.',
 
 	// F
 	'fermer' => 'chiudi',
 
 	// I
-	'inscription' => 'Iscrizione a &lt;@liste@&gt;',
+	'inscription' => 'Iscrizione a <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-L\'indirizzo <@var_email@> &egrave; stato cancellato dalla lista @liste@.
+L\'indirizzo <@var_email@> è stato cancellato dalla lista @liste@.
 
-In caso di problemi, oppure se tale cancellazione non &egrave; stata richiesta,
+In caso di problemi, oppure se tale cancellazione non è stata richiesta,
 scrivere a <@responsable@>.
 
 Grazie.
@@ -36,14 +36,14 @@ Grazie.
 	'merci' => 'Grazie.',
 
 	// P
-	'pasabo' => 'L\'indirizzo &lt;@var_email@&gt; non risulta abbonato alla lista &lt;@liste@&gt;.',
+	'pasabo' => 'L\'indirizzo <@var_email@> non risulta abbonato alla lista <@liste@>.',
 	'patientez' => 'Attendere prego...',
 
 	// Q
 	'quitter' => 'Cancellazione dalla lista',
 
 	// S
-	'subject_removed' => 'Il suo indirizzo &egrave; stato cancellato dalla lista @liste@.',
+	'subject_removed' => 'Il suo indirizzo è stato cancellato dalla lista @liste@.',
 
 	// T
 	'titrefenetre' => 'Iscrizione',

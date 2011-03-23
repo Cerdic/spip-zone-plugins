@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Ouzhpennet e vo ar chomlec\'h &lt;@var_email@&gt; d\'al listenn &lt;@liste@&gt; goude beza&ntilde; bet gwiriet. Trugarez da respont d\'ar c\'hemennadenn a zo o paouez beza&ntilde; kaset deoc\'h.',
+	'ajoutee' => 'Ouzhpennet e vo ar chomlec\'h <@var_email@> d\'al listenn <@liste@> goude bezañ bet gwiriet. Trugarez da respont d\'ar c\'hemennadenn a zo o paouez bezañ kaset deoc\'h.',
 
 	// C
-	'confirm' => 'Kaset ez eus bet ur goulenn-gwiria&ntilde; da &lt;@var_email@&gt;.',
+	'confirm' => 'Kaset ez eus bet ur goulenn-gwiriañ da <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: c\'hoazh oc\'h ensrkivet d\'al listenn &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : c\'hoazh oc\'h ensrkivet d\'al listenn <@liste@>.',
 	'desabo' => 'Tennet eo bet ho chomlec\'h.',
 
 	// F
-	'fermer' => 'serri&ntilde;',
+	'fermer' => 'serriñ',
 
 	// I
-	'inscription' => 'Enrolla&ntilde; da &lt;@liste@&gt;',
+	'inscription' => 'Enrollañ da <@liste@>',
 
 	// M
 	'mail_removed' => '
 
 Tennet eo bet ar chomlec\'h <@var_email@> eus al listenn @liste@.
 
-Ma sav ur gudenn, pe ma n\'ho peus ket goulennet kement-ma&ntilde;, 
+Ma sav ur gudenn, pe ma n\'ho peus ket goulennet kement-mañ, 
 skrivit da <@responsable@>.
 
 Kenavo, ha trugarez.
@@ -36,7 +36,7 @@ Kenavo, ha trugarez.
 	'merci' => 'Trugarez.',
 
 	// P
-	'pasabo' => 'N\\ema&ntilde; ket enrollet ar chomlec\'h &lt;@var_email@&gt; war al listenn &lt;@liste@&gt;.',
+	'pasabo' => 'N\\emañ ket enrollet ar chomlec\'h <@var_email@> war al listenn <@liste@>.',
 	'patientez' => 'Gortozit mar-plij...',
 
 	// Q
@@ -46,11 +46,11 @@ Kenavo, ha trugarez.
 	'subject_removed' => 'Tennet eo bet ho chomlec\'h ouzh al listenn @liste@.',
 
 	// T
-	'titrefenetre' => 'Enrolla&ntilde;',
+	'titrefenetre' => 'Enrollañ',
 
 	// V
 	'veuillez' => 'Resisait ho chomlec\'h.',
-	'votreemail' => 'Ho postel&nbsp;:'
+	'votreemail' => 'Ho postel :'
 );
 
 ?>

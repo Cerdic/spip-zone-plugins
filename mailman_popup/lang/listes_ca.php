@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adre&ccedil;a &lt;@var_email@&gt; ser&agrave; afegida a la llista &lt;@liste@&gt; despr&eacute;s de la verificaci&oacute;. Gr&agrave;cies per respondre al missatge que acaba de ser-vos enviat.',
+	'ajoutee' => 'L\'adreça <@var_email@> serà afegida a la llista <@liste@> després de la verificació. Gràcies per respondre al missatge que acaba de ser-vos enviat.',
 
 	// C
-	'confirm' => 'Una petici&oacute; de confirmaci&oacute; ha sigut dirigida cap a &lt;@var_email@&gt;.',
+	'confirm' => 'Una petició de confirmació ha sigut dirigida cap a <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: Ja est&agrave; subscrit(a) a la llista &lt;@liste@&gt;.',
-	'desabo' => 'Desubscripci&oacute; efectuada',
+	'deja' => '<@var_email@> : Ja està subscrit(a) a la llista <@liste@>.',
+	'desabo' => 'Desubscripció efectuada',
 
 	// F
 	'fermer' => 'tancar',
 
 	// I
-	'inscription' => 'Inscripci&oacute; a &lt;@liste@&gt;',
+	'inscription' => 'Inscripció a <@liste@>',
 
 	// M
 	'mail_removed' => ' 
 
-L\'adre&ccedil;a <@var_email@> ha estat suprimida de la llista @liste@.
+L\'adreça <@var_email@> ha estat suprimida de la llista @liste@.
 
-En cas de problemes, o si no ha  demanat aquesta desubscripci&oacute;,
+En cas de problemes, o si no ha  demanat aquesta desubscripció,
 si us plau escrigau a <@responsable@>.
 
-Fins aviat i gr&agrave;cies.
+Fins aviat i gràcies.
 ',
-	'merci' => 'Gr&agrave;cies.',
+	'merci' => 'Gràcies.',
 
 	// P
-	'pasabo' => 'L\'adre&ccedil;a &lt;@var_email@&gt; no est&agrave; pas abonada a la llista &lt;@liste@&gt;.',
+	'pasabo' => 'L\'adreça <@var_email@> no està pas abonada a la llista <@liste@>.',
 	'patientez' => 'Espereu, si us plau...',
 
 	// Q
-	'quitter' => 'Desubscripci&oacute;',
+	'quitter' => 'Desubscripció',
 
 	// S
-	'subject_removed' => 'La vostre adre&ccedil;a ha estat suprimida de la llista @liste@.',
+	'subject_removed' => 'La vostre adreça ha estat suprimida de la llista @liste@.',
 
 	// T
-	'titrefenetre' => 'Inscripci&oacute;',
+	'titrefenetre' => 'Inscripció',
 
 	// V
-	'veuillez' => 'Si us plau indiqueu la vostre adre&ccedil;a.',
-	'votreemail' => 'El vostre email&nbsp;:'
+	'veuillez' => 'Si us plau indiqueu la vostre adreça.',
+	'votreemail' => 'El vostre email :'
 );
 
 ?>

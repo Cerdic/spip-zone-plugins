@@ -8,48 +8,48 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'La direci&oacute;n &lt;@var_email@&gt; va axuntase a la llista &lt;@liste@&gt; llueu de verificase. Por favor, responde al corr&eacute;u que vamos unviate de secute.',
+	'ajoutee' => 'La direción <@var_email@> va axuntase a la llista <@liste@> llueu de verificase. Por favor, responde al corréu que vamos unviate de secute.',
 
 	// C
-	'confirm' => 'Unvi&oacute;se un corr&eacute;u de confirmaci&oacute;n a &lt;@var_email@&gt;.',
+	'confirm' => 'Unvióse un corréu de confirmación a <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: ya ta apunt&aacute;u(a) a la llista &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : ya ta apuntáu(a) a la llista <@liste@>.',
 	'desabo' => 'Fechu el desapuntamientu.',
 
 	// F
 	'fermer' => 'pesllar',
 
 	// I
-	'inscription' => 'Apuntase a &lt;@liste@&gt;',
+	'inscription' => 'Apuntase a <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-La direci&oacute;n <@var_email@> quitose de la llista @liste@.
+La direción <@var_email@> quitose de la llista @liste@.
 
 En casu de problemes, o si non pediste que se quitara,
 escribe a <@responsable@>.
 
-Al&oacute;n, y gracies.
+Alón, y gracies.
 ',
 	'merci' => 'Gracies.',
 
 	// P
-	'pasabo' => 'La direci&oacute;n &lt;@var_email@&gt; nun ta apuntada la llista &lt;@liste@&gt;.',
-	'patientez' => 'Un moment&iacute;n...',
+	'pasabo' => 'La direción <@var_email@> nun ta apuntada la llista <@liste@>.',
+	'patientez' => 'Un momentín...',
 
 	// Q
 	'quitter' => 'Borrase',
 
 	// S
-	'subject_removed' => 'la to direci&oacute;n borrose de la llista @liste@.',
+	'subject_removed' => 'la to direción borrose de la llista @liste@.',
 
 	// T
 	'titrefenetre' => 'Apuntase',
 
 	// V
-	'veuillez' => 'Tienes que poner la to direci&oacute;n.',
+	'veuillez' => 'Tienes que poner la to direción.',
 	'votreemail' => 'El to email:'
 );
 

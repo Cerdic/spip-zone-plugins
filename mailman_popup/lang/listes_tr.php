@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => '&lt;@var_email@&gt; adresi onayland&#305;ktan sonra &lt;@liste@&gt; listesine eklenecek. Size g&ouml;nderilen iletiyi yan&#305;tlad&#305;&#287;&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;r ederiz.',
+	'ajoutee' => '<@var_email@> adresi onaylandıktan sonra <@liste@> listesine eklenecek. Size gönderilen iletiyi yanıtladığınız için teşekkür ederiz.',
 
 	// C
-	'confirm' => '&lt;@var_email@&gt; adresine bir kay&#305;t onay iletisi g&ouml;nderildi.',
+	'confirm' => '<@var_email@> adresine bir kayıt onay iletisi gönderildi.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: siz zaten &lt;@liste@&gt; listesine kay&#305;tl&#305;s&#305;n&#305;z.',
+	'deja' => '<@var_email@> : siz zaten <@liste@> listesine kayıtlısınız.',
 	'desabo' => 'Abonelik iptal edildi.',
 
 	// F
 	'fermer' => 'kapat',
 
 	// I
-	'inscription' => '&lt;@liste@&gt; listesine kay&#305;t ',
+	'inscription' => '<@liste@> listesine kayıt ',
 
 	// M
 	'mail_removed' => '
 
- <@var_email@> adresi @liste@ listesinden silinmi&#351;.
+ <@var_email@> adresi @liste@ listesinden silinmiş.
 
 Problem olursa veya abonelik iptalini siz istemediyseniz,
-l&uuml;tfen <@responsable@> adresine yaz&#305;n&#305;z.  
+lütfen <@responsable@> adresine yazınız.  
 
-Te&#351;ekk&uuml;rler. G&ouml;r&uuml;&#351;mek &uuml;zere.
+Teşekkürler. Görüşmek üzere.
 ',
-	'merci' => 'Te&#351;ekk&uuml;rler.',
+	'merci' => 'Teşekkürler.',
 
 	// P
-	'pasabo' => '&lt;@var_email@&gt; adresi  &lt;@liste@&gt; listesine abone de&#287;il.',
-	'patientez' => 'L&uuml;tfen bekleyiniz...',
+	'pasabo' => '<@var_email@> adresi  <@liste@> listesine abone değil.',
+	'patientez' => 'Lütfen bekleyiniz...',
 
 	// Q
 	'quitter' => 'Abonelik iptali',
 
 	// S
-	'subject_removed' => 'Adresiniz @liste@ listesinden silinmi&#351;.',
+	'subject_removed' => 'Adresiniz @liste@ listesinden silinmiş.',
 
 	// T
-	'titrefenetre' => 'Kay&#305;t',
+	'titrefenetre' => 'Kayıt',
 
 	// V
-	'veuillez' => 'L&uuml;tfen adresinizi belirtiniz.',
-	'votreemail' => 'E-posta adresiniz&nbsp;:'
+	'veuillez' => 'Lütfen adresinizi belirtiniz.',
+	'votreemail' => 'E-posta adresiniz :'
 );
 
 ?>

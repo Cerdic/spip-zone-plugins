@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adrei&ccedil;a &lt;@var_email@&gt; s\'apondr&agrave; a la lista &lt;@liste@&gt; apr&egrave;s verificacion. Merc&eacute; de resp&ograve;ndre au messatge que ven&egrave;m de vos mandar.',
+	'ajoutee' => 'L\'adreiça <@var_email@> s\'apondrà a la lista <@liste@> après verificacion. Mercé de respòndre au messatge que venèm de vos mandar.',
 
 	// C
-	'confirm' => 'Una demanda de confirmacion s\'es adrei&ccedil;ada a &lt;@var_email@&gt;.',
+	'confirm' => 'Una demanda de confirmacion s\'es adreiçada a <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: ja siatz inscrich(a) a la lista &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : ja siatz inscrich(a) a la lista <@liste@>.',
 	'desabo' => 'Desabonament fach.',
 
 	// F
 	'fermer' => 'barrar',
 
 	// I
-	'inscription' => 'Inscripcion a &lt;@liste@&gt;',
+	'inscription' => 'Inscripcion a <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-L\'adrei&ccedil;a <@var_email@> es estada suprimida de la lista @liste@.
+L\'adreiça <@var_email@> es estada suprimida de la lista @liste@.
 
-En cas de probl&egrave;ma, &ograve; se non demandat minga d\'abonament,
+En cas de problèma, ò se non demandat minga d\'abonament,
 vorgatz escriure a <@responsable@>.
 
-Adieu-siatz e merc&eacute;.
+Adieu-siatz e mercé.
 ',
-	'merci' => 'Merc&eacute;.',
+	'merci' => 'Mercé.',
 
 	// P
-	'pasabo' => 'L\'adrei&ccedil;a &lt;@var_email@&gt; non es abonada a la lista &lt;@liste@&gt;.',
-	'patientez' => 'Merc&eacute; de pacientar...',
+	'pasabo' => 'L\'adreiça <@var_email@> non es abonada a la lista <@liste@>.',
+	'patientez' => 'Mercé de pacientar...',
 
 	// Q
 	'quitter' => 'Desabonament',
 
 	// S
-	'subject_removed' => 'S\'es suprimit la v&ograve;stra adrei&ccedil;a de la lista @liste@.',
+	'subject_removed' => 'S\'es suprimit la vòstra adreiça de la lista @liste@.',
 
 	// T
 	'titrefenetre' => 'Inscripcion',
 
 	// V
-	'veuillez' => 'Vorgatz precisar la v&ograve;stra adrei&ccedil;a.',
-	'votreemail' => 'Lo v&ograve;stre e-mail:'
+	'veuillez' => 'Vorgatz precisar la vòstra adreiça.',
+	'votreemail' => 'Lo vòstre e-mail:'
 );
 
 ?>

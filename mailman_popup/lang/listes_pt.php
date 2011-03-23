@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'O endere&ccedil;o &lt;@var_email@&gt; ser&aacute; acrescentado &agrave; lista &lt;@liste@&gt; ap&oacute;s confirma&ccedil;&atilde;o. Por favor responda &agrave; mensagem que acaba de lhe ser enviada.',
+	'ajoutee' => 'O endereço <@var_email@> será acrescentado à lista <@liste@> após confirmação. Por favor responda à mensagem que acaba de lhe ser enviada.',
 
 	// C
-	'confirm' => 'Um pedido de confirma&ccedil;&atilde;o foi dirigido a &lt;@var_email@&gt;.',
+	'confirm' => 'Um pedido de confirmação foi dirigido a <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: j&aacute; est&aacute; inscrito(a) na lista &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : já está inscrito(a) na lista <@liste@>.',
 	'desabo' => 'Fim da assinatura efectuado.',
 
 	// F
 	'fermer' => 'fechar',
 
 	// I
-	'inscription' => 'Inscri&ccedil;&atilde;o a &lt;@liste@&gt;',
+	'inscription' => 'Inscrição a <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-O endere&ccedil;o <@var_email@> foi retirado da lista @liste@.
+O endereço <@var_email@> foi retirado da lista @liste@.
 
-Se houver problema, ou se n&atilde;o pediu esse fim de assinatura,
+Se houver problema, ou se não pediu esse fim de assinatura,
 favor escrever a <@responsable@>.
 
 Adeus, e obrigado.
@@ -36,21 +36,21 @@ Adeus, e obrigado.
 	'merci' => 'Obrigado',
 
 	// P
-	'pasabo' => 'O endere&ccedil;o &lt;@var_email@&gt; n&atilde;o assinou a lista  &lt;@liste@&gt;.',
+	'pasabo' => 'O endereço <@var_email@> não assinou a lista  <@liste@>.',
 	'patientez' => 'Aguarde, por favor...',
 
 	// Q
 	'quitter' => 'Fim da assinatura',
 
 	// S
-	'subject_removed' => 'O seu endere&ccedil;o foi retirado da lista @liste@.',
+	'subject_removed' => 'O seu endereço foi retirado da lista @liste@.',
 
 	// T
-	'titrefenetre' => 'Inscri&ccedil;&atilde;o',
+	'titrefenetre' => 'Inscrição',
 
 	// V
-	'veuillez' => 'Favor indicar o seu endere&ccedil;o.',
-	'votreemail' => 'O seu email&nbsp;:'
+	'veuillez' => 'Favor indicar o seu endereço.',
+	'votreemail' => 'O seu email :'
 );
 
 ?>

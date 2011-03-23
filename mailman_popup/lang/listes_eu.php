@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Egiaztatu ondonan &lt;@var_email@&gt; helbidea &lt;@liste@&gt; zerrendan gehitua izanen da. Igorria izan zaizun mezuari erantzutea eskertzen zaitugu.',
+	'ajoutee' => 'Egiaztatu ondonan <@var_email@> helbidea <@liste@> zerrendan gehitua izanen da. Igorria izan zaizun mezuari erantzutea eskertzen zaitugu.',
 
 	// C
-	'confirm' => 'Egiaztatze eskaera bat helbide honetara igorria izan da :&lt;@var_email@&gt;.',
+	'confirm' => 'Egiaztatze eskaera bat helbide honetara igorria izan da :<@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: &lt;@liste@&gt; zerrendan jadanik harpidetua zira.',
+	'deja' => '<@var_email@> : <@liste@> zerrendan jadanik harpidetua zira.',
 	'desabo' => 'Harpidetza ezeztatua da.',
 
 	// F
 	'fermer' => 'hetsi',
 
 	// I
-	'inscription' => '&lt;@liste@&gt; zerrendara harpidetza',
+	'inscription' => '<@liste@> zerrendara harpidetza',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Agur eta milesker.
 	'merci' => 'Milesker.',
 
 	// P
-	'pasabo' => '&lt;@var_email@&gt; helbidea ez da &lt;@liste@&gt; zerrendari harpidetua.',
+	'pasabo' => '<@var_email@> helbidea ez da <@liste@> zerrendari harpidetua.',
 	'patientez' => 'Igurikatu mesedez...',
 
 	// Q
@@ -50,7 +50,7 @@ Agur eta milesker.
 
 	// V
 	'veuillez' => 'Zure helbidea zehaztea eskertzen dizugu.',
-	'votreemail' => 'Zure emaila&nbsp;:'
+	'votreemail' => 'Zure emaila :'
 );
 
 ?>

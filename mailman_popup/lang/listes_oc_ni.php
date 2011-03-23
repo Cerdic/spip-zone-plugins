@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adre&ccedil;a &lt;@var_email@&gt; ser&agrave; ajustada &agrave; la ti&egrave;ra &lt;@liste@&gt; apr&egrave;s verificacion. Merc&eacute; de respoandre au messatge que vene de v\'&egrave;stre mandat.',
+	'ajoutee' => 'L\'adreça <@var_email@> serà ajustada à la tièra <@liste@> après verificacion. Mercé de respoandre au messatge que vene de v\'èstre mandat.',
 
 	// C
-	'confirm' => 'Une demanda de confirmacion es estada mandada &agrave; &lt;@var_email@&gt;.',
+	'confirm' => 'Une demanda de confirmacion es estada mandada à <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: si&egrave;tz ja inscrich sus la ti&egrave;ra &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : siètz ja inscrich sus la tièra <@liste@>.',
 	'desabo' => 'Desabonament efetuat.',
 
 	// F
 	'fermer' => 'plegar',
 
 	// I
-	'inscription' => 'Inscripcion &agrave; &lt;@liste@&gt;',
+	'inscription' => 'Inscripcion à <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-L\'adre&ccedil;a &lt;@var_email@&gt; es estada suprimida de la ti&egrave;ra @liste@.
+L\'adreça <@var_email@> es estada suprimida de la tièra @liste@.
 
-En cas de problema, &ograve; s\'avetz pas demandat aquest desabonament,
-vorgatz escriure &agrave; &lt;@responsable@&gt;.
+En cas de problema, ò s\'avetz pas demandat aquest desabonament,
+vorgatz escriure à <@responsable@>.
 
-&Agrave; ben l&egrave;u, e merc&eacute;.
+À ben lèu, e mercé.
 ',
-	'merci' => 'Merc&eacute;.',
+	'merci' => 'Mercé.',
 
 	// P
-	'pasabo' => 'L\'adre&ccedil;a &lt;@var_email@&gt; es pas abonada &agrave; la ti&egrave;ra &lt;@liste@&gt;.',
+	'pasabo' => 'L\'adreça <@var_email@> es pas abonada à la tièra <@liste@>.',
 	'patientez' => 'Vorgatz esperar...',
 
 	// Q
 	'quitter' => 'Desabonament',
 
 	// S
-	'subject_removed' => 'La voastra adre&ccedil;a es estada suprimida de la ti&egrave;ra @liste@.',
+	'subject_removed' => 'La voastra adreça es estada suprimida de la tièra @liste@.',
 
 	// T
 	'titrefenetre' => 'Inscripcion',
 
 	// V
-	'veuillez' => 'Vorgatz precisar la voastra adre&ccedil;a.',
-	'votreemail' => 'Lo voastre e-mail&nbsp;:'
+	'veuillez' => 'Vorgatz precisar la voastra adreça.',
+	'votreemail' => 'Lo voastre e-mail :'
 );
 
 ?>

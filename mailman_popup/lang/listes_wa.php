@@ -8,49 +8,49 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'&nbsp;adresse &lt;@var_email@&gt; ser&egrave; radjout&ecirc;ye al copinreye &lt;@liste@&gt; apr&egrave;s verifiaedje. Gr&aring;ces di responde a l\'&nbsp;emile ki vs a st&icirc; evoy&icirc;.',
+	'ajoutee' => 'L\' adresse <@var_email@> serè radjoutêye al copinreye <@liste@> après verifiaedje. Gråces di responde a l\' emile ki vs a stî evoyî.',
 
 	// C
-	'confirm' => 'Ene dimande d\'&nbsp;acertinaedje a st&icirc; evoyeye a &lt;@var_email@&gt;.',
+	'confirm' => 'Ene dimande d\' acertinaedje a stî evoyeye a <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;: vos estoz ddja aboun&eacute;(&ecirc;ye) al copinreye &lt;@liste@&gt;.',
+	'deja' => '<@var_email@>: vos estoz ddja abouné(êye) al copinreye <@liste@>.',
 	'desabo' => 'Dizabounaedje fwait.',
 
 	// F
-	'fermer' => 'cl&ocirc;re',
+	'fermer' => 'clôre',
 
 	// I
-	'inscription' => 'Abounmint a &lt;@liste@&gt;',
+	'inscription' => 'Abounmint a <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-L\'&nbsp;adresse <@var_email@> a st&icirc; disfac&ecirc;ye del copinreye @liste@.
+L\' adresse <@var_email@> a stî disfacêye del copinreye @liste@.
 
-S\'&nbsp;i gn a-st on problinme, ou si vos n\'&nbsp;av&icirc;z n&eacute;n dmand&eacute; l\'&nbsp;dizabounmint,
+S\' i gn a-st on problinme, ou si vos n\' avîz nén dmandé l\' dizabounmint,
 sicrijhoz a <@responsable@>.
 
-Ki &ccedil;a vos v&aring;ye b&eacute;n, et gr&aring;ces.
+Ki ça vos våye bén, et gråces.
 ',
-	'merci' => 'Gr&aring;ces.',
+	'merci' => 'Gråces.',
 
 	// P
-	'pasabo' => 'L\'&nbsp;adresse &lt;@var_email@&gt; n\'&nbsp;est n&eacute;n aboun&ecirc;ye al copinreye &lt;@liste@&gt;.',
-	'patientez' => 'T&aring;rdj&icirc;z ene miete s\'&nbsp;i vs plait...',
+	'pasabo' => 'L\' adresse <@var_email@> n\' est nén abounêye al copinreye <@liste@>.',
+	'patientez' => 'Tårdjîz ene miete s\' i vs plait...',
 
 	// Q
 	'quitter' => 'Si dizabouner',
 
 	// S
-	'subject_removed' => 'L\'&nbsp;adresse da vosse a st&icirc; disfac&ecirc;ye del copinreye @liste@.',
+	'subject_removed' => 'L\' adresse da vosse a stî disfacêye del copinreye @liste@.',
 
 	// T
-	'titrefenetre' => 'Edj&icirc;straedje',
+	'titrefenetre' => 'Edjîstraedje',
 
 	// V
-	'veuillez' => 'Dinez voste adresse emile s\'&nbsp;i vs plait.',
-	'votreemail' => 'L\'&nbsp;emile da vosse:'
+	'veuillez' => 'Dinez voste adresse emile s\' i vs plait.',
+	'votreemail' => 'L\' emile da vosse:'
 );
 
 ?>

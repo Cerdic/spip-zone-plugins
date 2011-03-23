@@ -8,34 +8,34 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Het adres &lt;@var_email@&gt; zal na verificatie aan de lijst &lt;@liste@&gt; worden toegevoegd. Gelieve het bericht te beantwoorden dat je werd toegestuurd.',
+	'ajoutee' => 'Het adres <@var_email@> zal na verificatie aan de lijst <@liste@> worden toegevoegd. Gelieve het bericht te beantwoorden dat je werd toegestuurd.',
 
 	// C
-	'confirm' => 'Een vraag voor bevestiging is gestuurd naar &lt;@var_email@&gt;.',
+	'confirm' => 'Een vraag voor bevestiging is gestuurd naar <@var_email@>.',
 
 	// D
-	'deja' => '&lt;@var_email@&gt;&nbsp;: je bent al ingeschreven op de lijst &lt;@liste@&gt;.',
+	'deja' => '<@var_email@> : je bent al ingeschreven op de lijst <@liste@>.',
 	'desabo' => 'Uitschrijving is voltooid.',
 
 	// F
 	'fermer' => 'sluiten',
 
 	// I
-	'inscription' => 'Inschrijving bij &lt;@liste@&gt;',
+	'inscription' => 'Inschrijving bij <@liste@>',
 
 	// M
 	'mail_removed' => '
 
-Het adres &lt;@var_email@&gt; is van de lijst @liste@ geschrapt.
+Het adres <@var_email@> is van de lijst @liste@ geschrapt.
 
-Bij problemen of indien je de uitschrijving niet hebt gevraagd, kan je &lt;@responsable@&gt; contacteren.
+Bij problemen of indien je de uitschrijving niet hebt gevraagd, kan je <@responsable@> contacteren.
 
 Bedankt en tot ziens.
 ',
 	'merci' => 'Bedankt.',
 
 	// P
-	'pasabo' => 'Het adres &lt;@var_email@&gt; is niet ingeschreven op de lijst &lt;@liste@&gt;.',
+	'pasabo' => 'Het adres <@var_email@> is niet ingeschreven op de lijst <@liste@>.',
 	'patientez' => 'Even geduld...',
 
 	// Q
@@ -49,7 +49,7 @@ Bedankt en tot ziens.
 
 	// V
 	'veuillez' => 'Gelieve je adres op te geven.',
-	'votreemail' => 'Je e-mail&nbsp;:'
+	'votreemail' => 'Je e-mail :'
 );
 
 ?>
