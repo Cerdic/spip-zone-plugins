@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'coucher_soleil' => 'puesta del sol',
 
 	// D
-	'demain' => 'ma&ntilde;ana',
+	'demain' => 'mañana',
 	'derniere_maj' => 'actualizado',
 	'direction_E' => 'este',
 	'direction_ENE' => 'este noreste',
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'humidite' => 'humedad',
 
 	// J
-	'jour' => 'd&iacute;a',
+	'jour' => 'día',
 
 	// L
 	'latitude' => 'latitude', # NEW
@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'longitude' => 'longitude', # NEW
 
 	// M
-	'meteo' => 'meteorolog&iacute;a',
+	'meteo' => 'meteorología',
 	'meteo_0' => 'tornado',
 	'meteo_1' => 'tempestad tropical',
 	'meteo_10' => 'lluvia heladiza',
@@ -55,13 +55,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_17' => 'granizo',
 	'meteo_18' => 'aguanieve',
 	'meteo_19' => 'polva',
-	'meteo_2' => 'hurac&aacute;n',
+	'meteo_2' => 'huracán',
 	'meteo_20' => 'brumoso',
 	'meteo_21' => 'bruma',
 	'meteo_22' => 'niebla',
 	'meteo_23' => 'borrasca',
 	'meteo_24' => 'viento',
-	'meteo_25' => 'fr&iacute;o',
+	'meteo_25' => 'frío',
 	'meteo_26' => 'nubes',
 	'meteo_27' => 'claro de luna y nubes',
 	'meteo_28' => 'muy nuboso',
@@ -92,40 +92,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'meteo_8' => 'llovizna heladiza',
 	'meteo_9' => 'llovizna',
 	'meteo_conditions' => 'condiciones actuales',
-	'meteo_consultation' => 'Consultez la m&eacute;t&eacute;o de @ville@', # NEW
-	'meteo_de' => 'M&eacute;t&eacute;o de @ville@', # NEW
+	'meteo_consultation' => 'Consultez la météo de @ville@', # NEW
+	'meteo_de' => 'Météo de @ville@', # NEW
 	'meteo_na' => 'desconocido',
-	'meteo_previsions' => 'pron&oacute;stico',
-	'meteo_previsions_aujourdhui' => 'pr&eacute;visions pour aujourd\'hui', # NEW
-	'meteo_previsions_n_jours' => 'pr&eacute;visions &agrave; @nbj@ jours', # NEW
+	'meteo_previsions' => 'pronóstico',
+	'meteo_previsions_aujourdhui' => 'prévisions pour aujourd\'hui', # NEW
+	'meteo_previsions_n_jours' => 'prévisions à @nbj@ jours', # NEW
 
 	// N
 	'nuit' => 'noche',
 
 	// P
-	'point_rosee' => 'punto de roc&iacute;o',
-	'pression' => 'presi&oacute;n',
+	'point_rosee' => 'punto de rocío',
+	'pression' => 'presión',
 
 	// R
 	'risque_precipitation' => 'riesgo de precip.',
 
 	// S
-	'station_observation' => 'estaci&oacute;n',
+	'station_observation' => 'estación',
 
 	// T
 	'temperature_max' => 'max.',
 	'temperature_min' => 'min.',
 	'temperature_ressentie' => 'percibida',
-	'tendance_symbole_falling' => '&darr;',
-	'tendance_symbole_rising' => '&uarr;',
-	'tendance_symbole_steady' => '&rarr;',
+	'tendance_symbole_falling' => '↓',
+	'tendance_symbole_rising' => '↑',
+	'tendance_symbole_steady' => '→',
 	'tendance_texte_falling' => 'bajando',
 	'tendance_texte_rising' => 'subiendo',
 	'tendance_texte_steady' => 'estable',
 
 	// U
-	'unite_angle_metrique' => '&deg;',
-	'unite_angle_standard' => '&deg;',
+	'unite_angle_metrique' => '°',
+	'unite_angle_standard' => '°',
 	'unite_distance_metrique' => 'km',
 	'unite_distance_standard' => 'milas',
 	'unite_pourcentage_metrique' => '%',
@@ -134,8 +134,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'unite_precipitation_standard' => 'pulgadas',
 	'unite_pression_metrique' => 'mbar',
 	'unite_pression_standard' => 'pulgadas',
-	'unite_temperature_metrique' => '&deg;C',
-	'unite_temperature_standard' => '&deg;F',
+	'unite_temperature_metrique' => '°C',
+	'unite_temperature_standard' => '°F',
 	'unite_vitesse_metrique' => 'km/h',
 	'unite_vitesse_standard' => 'mph',
 
