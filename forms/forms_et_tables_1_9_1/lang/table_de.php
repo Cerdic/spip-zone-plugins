@@ -18,31 +18,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire' => 'Tabelle',
 
 	// I
-	'icone_ajouter_donnees' => 'Daten hinzuf&uuml;gen',
+	'icone_ajouter_donnees' => 'Daten hinzufügen',
 	'icone_creer_table' => 'Neue Tabelle anlegen',
 	'importer_donnees_csv' => 'Daten importieren',
-	'info_supprimer_formulaire' => 'Wollen Sie diese Tabelle wirklich l&ouml;schen?',
-	'info_supprimer_formulaire_reponses' => 'Diese Tabelle enth&auml;lt Daten. Wollen Sie sie wirklich l&ouml;schen?',
+	'info_supprimer_formulaire' => 'Wollen Sie diese Tabelle wirklich löschen?',
+	'info_supprimer_formulaire_reponses' => 'Diese Tabelle enthält Daten. Wollen Sie sie wirklich löschen?',
 
 	// L
 	'lien_retirer_donnee_liante' => 'Link aus diesem Datensatz entfernen',
 	'lien_retirer_donnee_liee' => 'Diesen Datensatz entfernen',
 
 	// N
-	'nombre_reponses' => '@nombre@ Datens&auml;tze',
+	'nombre_reponses' => '@nombre@ Datensätze',
 	'nouveau_formulaire' => 'Neue Tabelle',
 
 	// S
 	'suivi_reponses' => 'Daten ansehen',
-	'supprimer_formulaire' => 'Diese Tabelle l&ouml;schen',
+	'supprimer_formulaire' => 'Diese Tabelle löschen',
 
 	// T
 	'telecharger_reponses' => 'Daten herunterladen',
 	'texte_donnee_statut' => 'Status dieses Datensatzes',
-	'texte_statut_poubelle' => 'Datensatz gel&ouml;scht',
+	'texte_statut_poubelle' => 'Datensatz gelöscht',
 	'texte_statut_prepa' => 'Datensatz in Bearbeitung',
 	'texte_statut_prop' => 'vorgeschlagener Datensatz',
-	'texte_statut_publie' => 'ver&ouml;ffentlichter Datensatz',
+	'texte_statut_publie' => 'veröffentlichter Datensatz',
 	'texte_statut_refuse' => 'abgelehnter Datensatz',
 	'titre_formulaire' => 'Titel der Tabelle',
 	'toutes_tables' => 'Alle Tabellen',

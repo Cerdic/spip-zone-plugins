@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_ajouter_donnees' => 'Gegevens toevoegen',
-	'icone_creer_table' => 'Een nieuwe tabel cre&euml;ren',
+	'icone_creer_table' => 'Een nieuwe tabel creëren',
 	'importer_donnees_csv' => 'Gegevens invoeren',
 	'info_supprimer_formulaire' => 'Wilt u deze tabel echt afschaffen ?',
 	'info_supprimer_formulaire_reponses' => 'Gegevens worden verenigd met deze tafel. Wilt u het echt afschaffen ?',

@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'articles_utilisant' => 'Articles utilisant cette table', # NEW
-	'aucune_reponse' => 'Aucune donn&eacute;e', # NEW
+	'aucune_reponse' => 'Aucune donnée', # NEW
 
 	// C
 	'champs_formulaire' => 'Champs de la table', # NEW
@@ -18,38 +18,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire' => 'Table', # NEW
 
 	// I
-	'icone_ajouter_donnees' => 'Ajouter des donn&eacute;es', # NEW
-	'icone_creer_table' => 'Cr&eacute;er une nouvelle table', # NEW
-	'importer_donnees_csv' => 'Importer des donn&eacute;es', # NEW
+	'icone_ajouter_donnees' => 'Ajouter des données', # NEW
+	'icone_creer_table' => 'Créer une nouvelle table', # NEW
+	'importer_donnees_csv' => 'Importer des données', # NEW
 	'info_supprimer_formulaire' => 'Vill du verkligen radera tabellen ? ',
-	'info_supprimer_formulaire_reponses' => 'Des donn&eacute;es sont associ&eacute;es &agrave; cette table. Voulez-vous vraiment la supprimer ?', # NEW
+	'info_supprimer_formulaire_reponses' => 'Des données sont associées à cette table. Voulez-vous vraiment la supprimer ?', # NEW
 
 	// L
-	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette donn&eacute;e', # NEW
-	'lien_retirer_donnee_liee' => 'Retirer cette donn&eacute;e', # NEW
+	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette donnée', # NEW
+	'lien_retirer_donnee_liee' => 'Retirer cette donnée', # NEW
 
 	// N
-	'nombre_reponses' => '@nombre@ donn&eacute;es', # NEW
+	'nombre_reponses' => '@nombre@ données', # NEW
 	'nouveau_formulaire' => 'Nouvelle table', # NEW
 
 	// S
-	'suivi_reponses' => 'Voir les donn&eacute;es', # NEW
+	'suivi_reponses' => 'Voir les données', # NEW
 	'supprimer_formulaire' => 'Supprimer cette table', # NEW
 
 	// T
-	'telecharger_reponses' => 'T&eacute;l&eacute;chargez les donn&eacute;es', # NEW
-	'texte_donnee_statut' => 'Statut de cette donn&eacute;e', # NEW
-	'texte_statut_poubelle' => 'Donn&eacute;e supprim&eacute;e', # NEW
-	'texte_statut_prepa' => 'Donn&eacute;e en cours de r&eacute;daction', # NEW
-	'texte_statut_prop' => 'Donn&eacute;e propos&eacute;e', # NEW
-	'texte_statut_publie' => 'Donn&eacute;e publi&eacute;e', # NEW
-	'texte_statut_refuse' => 'Donn&eacute;e refus&eacute;e', # NEW
+	'telecharger_reponses' => 'Téléchargez les données', # NEW
+	'texte_donnee_statut' => 'Statut de cette donnée', # NEW
+	'texte_statut_poubelle' => 'Donnée supprimée', # NEW
+	'texte_statut_prepa' => 'Donnée en cours de rédaction', # NEW
+	'texte_statut_prop' => 'Donnée proposée', # NEW
+	'texte_statut_publie' => 'Donnée publiée', # NEW
+	'texte_statut_refuse' => 'Donnée refusée', # NEW
 	'titre_formulaire' => 'Titre de la table', # NEW
 	'toutes_tables' => 'Toutes les tables', # NEW
 	'type_des_tables' => 'Tables', # NEW
 
 	// U
-	'une_reponse' => 'Une donn&eacute;e' # NEW
+	'une_reponse' => 'Une donnée' # NEW
 );
 
 ?>

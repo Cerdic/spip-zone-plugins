@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'articles_utilisant' => 'Articles utilisant cette table',
-	'aucune_reponse' => 'Aucune donn&eacute;e',
+	'aucune_reponse' => 'Aucune donnée',
 
 	// C
 	'champs_formulaire' => 'Champs de la table',
@@ -16,38 +16,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire' => 'Table',
 
 	// I
-	'icone_ajouter_donnees' => 'Ajouter des donn&eacute;es',
-	'icone_creer_table' => 'Cr&eacute;er une nouvelle table',
-	'importer_donnees_csv' => 'Importer des donn&eacute;es',
+	'icone_ajouter_donnees' => 'Ajouter des données',
+	'icone_creer_table' => 'Créer une nouvelle table',
+	'importer_donnees_csv' => 'Importer des données',
 	'info_supprimer_formulaire' => 'Voulez-vous vraiment supprimer cette table ?',
-	'info_supprimer_formulaire_reponses' => 'Des donn&eacute;es sont associ&eacute;es &agrave; cette table. Voulez-vous vraiment la supprimer ?',
+	'info_supprimer_formulaire_reponses' => 'Des données sont associées à cette table. Voulez-vous vraiment la supprimer ?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette donn&eacute;e',
-	'lien_retirer_donnee_liee' => 'Retirer cette donn&eacute;e',
+	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette donnée',
+	'lien_retirer_donnee_liee' => 'Retirer cette donnée',
 
 	// N
-	'nombre_reponses' => '@nombre@ donn&eacute;es',
+	'nombre_reponses' => '@nombre@ données',
 	'nouveau_formulaire' => 'Nouvelle table',
 
 	// S
-	'suivi_reponses' => 'Voir les donn&eacute;es',
+	'suivi_reponses' => 'Voir les données',
 	'supprimer_formulaire' => 'Supprimer cette table',
 
 	// T
-	'telecharger_reponses' => 'T&eacute;l&eacute;chargez les donn&eacute;es',
-	'texte_donnee_statut' => 'Statut de cette donn&eacute;e',
-	'texte_statut_poubelle' => 'Donn&eacute;e supprim&eacute;e',
-	'texte_statut_prepa' => 'Donn&eacute;e en cours de r&eacute;daction',
-	'texte_statut_prop' => 'Donn&eacute;e propos&eacute;e',
-	'texte_statut_publie' => 'Donn&eacute;e publi&eacute;e',
-	'texte_statut_refuse' => 'Donn&eacute;e refus&eacute;e',
+	'telecharger_reponses' => 'Téléchargez les données',
+	'texte_donnee_statut' => 'Statut de cette donnée',
+	'texte_statut_poubelle' => 'Donnée supprimée',
+	'texte_statut_prepa' => 'Donnée en cours de rédaction',
+	'texte_statut_prop' => 'Donnée proposée',
+	'texte_statut_publie' => 'Donnée publiée',
+	'texte_statut_refuse' => 'Donnée refusée',
 	'titre_formulaire' => 'Titre de la table',
 	'toutes_tables' => 'Toutes les tables',
 	'type_des_tables' => 'Tables',
 
 	// U
-	'une_reponse' => 'Une donn&eacute;e'
+	'une_reponse' => 'Une donnée'
 );
 
 ?>

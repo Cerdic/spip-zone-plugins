@@ -9,47 +9,47 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'articles_utilisant' => 'Articles utilisant cette table', # NEW
-	'aucune_reponse' => '&#6018;&#6098;&#6040;&#6070;&#6035;&#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;',
+	'aucune_reponse' => 'គ្មានទិន្នន័យ',
 
 	// C
-	'champs_formulaire' => '&#6044;&#6070;&#6043; &#6035;&#6083;&#6031;&#6070;&#6042;&#6070;&#6020;',
+	'champs_formulaire' => 'វាល នៃតារាង',
 
 	// F
-	'formulaire' => '&#6031;&#6070;&#6042;&#6070;&#6020;',
+	'formulaire' => 'តារាង',
 
 	// I
-	'icone_ajouter_donnees' => '&#6036;&#6035;&#6098;&#6032;&#6082;&#6040; &#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;',
-	'icone_creer_table' => '&#6036;&#6020;&#6098;&#6016;&#6078;&#6031; &#6040;&#6077;&#6041;&#6031;&#6070;&#6042;&#6070;&#6020;&#6032;&#6098;&#6040;&#6072;',
-	'importer_donnees_csv' => '&#6035;&#6070;&#6086;&#6021;&#6076;&#6043; &#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;',
-	'info_supprimer_formulaire' => '&#6050;&#6098;&#6035;&#6016;&#6036;&#6098;&#6042;&#6070;&#6026;&#6021;&#6020;&#6091; &#6043;&#6075;&#6036;&#6021;&#6081;&#6025; &#6031;&#6070;&#6042;&#6070;&#6020;&#6035;&#6081;&#6087;?',
-	'info_supprimer_formulaire_reponses' => 'Des donn&eacute;es sont associ&eacute;es &agrave; cette table. Voulez-vous vraiment la supprimer ?', # NEW
+	'icone_ajouter_donnees' => 'បន្ថែម ទិន្នន័យ',
+	'icone_creer_table' => 'បង្កើត មួយតារាងថ្មី',
+	'importer_donnees_csv' => 'នាំចូល ទិន្នន័យ',
+	'info_supprimer_formulaire' => 'អ្នកប្រាដចង់ លុបចេញ តារាងនេះ?',
+	'info_supprimer_formulaire_reponses' => 'Des données sont associées à cette table. Voulez-vous vraiment la supprimer ?', # NEW
 
 	// L
-	'lien_retirer_donnee_liante' => '&#6026;&#6016;&#6021;&#6081;&#6025; &#6031;&#6086;&#6030;&#6039;&#6098;&#6023;&#6070;&#6036;&#6091; &#6038;&#6072;&#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;&#6035;&#6081;&#6087;',
-	'lien_retirer_donnee_liee' => 'Retirer cette donn&eacute;e', # NEW
+	'lien_retirer_donnee_liante' => 'ដកចេញ តំណភ្ជាប់ ពីទិន្នន័យនេះ',
+	'lien_retirer_donnee_liee' => 'Retirer cette donnée', # NEW
 
 	// N
-	'nombre_reponses' => '@nombre@ &#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;',
-	'nouveau_formulaire' => '&#6031;&#6070;&#6042;&#6070;&#6020;&#6032;&#6098;&#6040;&#6072;',
+	'nombre_reponses' => '@nombre@ ទិន្នន័យ',
+	'nouveau_formulaire' => 'តារាងថ្មី',
 
 	// S
-	'suivi_reponses' => '&#6040;&#6078;&#6043; &#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;&#8203;',
-	'supprimer_formulaire' => '&#6043;&#6075;&#6036;&#6021;&#6081;&#6025; &#6031;&#6070;&#6042;&#6070;&#6020;&#6035;&#6081;&#6087;',
+	'suivi_reponses' => 'មើល ទិន្នន័យ​',
+	'supprimer_formulaire' => 'លុបចេញ តារាងនេះ',
 
 	// T
-	'telecharger_reponses' => 'T&eacute;l&eacute;chargez les donn&eacute;es', # NEW
-	'texte_donnee_statut' => '&#6047;&#6098;&#6032;&#6070;&#6035;&#6039;&#6070;&#6038; &#6035;&#6083;&#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;&#6035;&#6081;&#6087;',
-	'texte_statut_poubelle' => '&#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041; &#6031;&#6098;&#6042;&#6076;&#6044;&#6036;&#6070;&#6035;&#6043;&#6075;&#6036;&#6021;&#6081;&#6025;',
-	'texte_statut_prepa' => 'Donn&eacute;e en cours de r&eacute;daction', # NEW
-	'texte_statut_prop' => 'Donn&eacute;e propos&eacute;e', # NEW
-	'texte_statut_publie' => 'Donn&eacute;e publi&eacute;e', # NEW
-	'texte_statut_refuse' => 'Donn&eacute;e refus&eacute;e', # NEW
-	'titre_formulaire' => '&#6021;&#6086;&#6030;&#6020;&#6023;&#6078;&#6020; &#6035;&#6083;&#6031;&#6070;&#6042;&#6070;&#6020;',
-	'toutes_tables' => '&#6018;&#6098;&#6042;&#6036;&#6091;&#6031;&#6070;&#6042;&#6070;&#6020;',
-	'type_des_tables' => '&#6031;&#6070;&#6042;&#6070;&#6020;',
+	'telecharger_reponses' => 'Téléchargez les données', # NEW
+	'texte_donnee_statut' => 'ស្ថានភាព នៃទិន្នន័យនេះ',
+	'texte_statut_poubelle' => 'ទិន្នន័យ ត្រូវបានលុបចេញ',
+	'texte_statut_prepa' => 'Donnée en cours de rédaction', # NEW
+	'texte_statut_prop' => 'Donnée proposée', # NEW
+	'texte_statut_publie' => 'Donnée publiée', # NEW
+	'texte_statut_refuse' => 'Donnée refusée', # NEW
+	'titre_formulaire' => 'ចំណងជើង នៃតារាង',
+	'toutes_tables' => 'គ្រប់តារាង',
+	'type_des_tables' => 'តារាង',
 
 	// U
-	'une_reponse' => '&#6040;&#6077;&#6041;&#6033;&#6071;&#6035;&#6098;&#6035;&#6035;&#6096;&#6041;'
+	'une_reponse' => 'មួយទិន្នន័យ'
 );
 
 ?>
