@@ -38,8 +38,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_bouton_valider' => 'vaildate button',
 	'cfg_bouton_valider_texte' => 'You can specify which kind of button to use in the forms:',
 	'cfg_desactiver' => 'No',
-	'cfg_inserer_head' => 'Insert in &lt;head&gt;',
-	'cfg_inserer_head_texte' => 'Automatically insert links to the following files in the &lt;head&gt; section of the site\'s pages (recommended):',
+	'cfg_inserer_head' => 'Insert in <head>',
+	'cfg_inserer_head_texte' => 'Automatically insert links to the following files in the <head> section of the site\'s pages (recommended):',
 	'champ_descendre' => 'down',
 	'champ_email_details' => 'Please enter a valid email address (e.g. you@provider.com).',
 	'champ_listable_admin' => 'Display this field in lists in the private area',
@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_champs_formulaire' => 'Here, you can create and modify the fields that the visitors will fill.',
 	'info_obligatoire_02' => '[Required]',
 	'info_rubriques_liees_donnee' => 'Linked sections',
-	'info_sondage' => 'If your form is a poll, the results of the &laquo;choice&raquo; fields will be added and displayed.',
+	'info_sondage' => 'If your form is a poll, the results of the «choice» fields will be added and displayed.',
 	'info_supprimer_formulaire' => 'Are you sure you want to delete this form?',
 	'info_supprimer_formulaire_reponses' => 'This form received replies. Are you sure you want to delete it?',
 
@@ -149,7 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moderation_donnees' => 'Validate data before publishing:',
 	'modifiable_donnees' => 'Data which can be modified from the public site:',
 	'monetaire_invalide' => 'Invalid currency field',
-	'monnaie_euro' => 'Euro (&euro;)',
+	'monnaie_euro' => 'Euro (€)',
 	'multiple_donnees' => 'Editing of data from the public site:',
 
 	// N

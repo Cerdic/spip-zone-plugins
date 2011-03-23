@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'activer_barre_typo' => 'Attivare la barra tipografica',
-	'adresse_invalide' => 'Questo indirizzo non &egrave; valido.',
+	'adresse_invalide' => 'Questo indirizzo non è valido.',
 	'afficher' => 'Aggiungi Dati',
 	'aide_contextuelle' => 'Aiuto contestuale',
 	'ajouter_champ' => 'Aggiungi un campo',
@@ -22,13 +22,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'articles_utilisant' => 'Gli articoli che utilizzano questo form',
 	'attention' => 'Attenzione :',
 	'aucune_reponse' => 'nessun dato',
-	'avis_message_confirmation' => 'Un messaggio di conferma &egrave; stato inviato a @mail@',
+	'avis_message_confirmation' => 'Un messaggio di conferma è stato inviato a @mail@',
 
 	// B
 	'boite_info' => 'Clicca su un form per modificarlo o per visualizzarlo prima della cancellazione.',
 
 	// C
-	'cfg_activer' => 'S&igrave;',
+	'cfg_activer' => 'Sì',
 	'cfg_associer_donnees' => 'Associare i dati delle tabelle',
 	'cfg_associer_donnees_articles' => 'Permettere di associare i dati agli articoli:',
 	'cfg_associer_donnees_auteurs' => 'Permettere di associare i dati agli autori:',
@@ -36,10 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_bouton_type_image' => 'pulsante di tipo immagine',
 	'cfg_bouton_type_texte' => 'pulsante di tipo testo (invia)',
 	'cfg_bouton_valider' => 'Tipo di pulsante conferma',
-	'cfg_bouton_valider_texte' => '&Egrave; possibile precisare quale tipo di pulsante conferma utilizzare nei form:',
+	'cfg_bouton_valider_texte' => 'È possibile precisare quale tipo di pulsante conferma utilizzare nei form:',
 	'cfg_desactiver' => 'No',
-	'cfg_inserer_head' => 'Inserimento nell\'&lt;head&gt;',
-	'cfg_inserer_head_texte' => 'Inserire automaticamente le chiamate ai file seguenti nella sezione &lt;head&gt; delle pagine del sito (raccomandato):',
+	'cfg_inserer_head' => 'Inserimento nell\'<head>',
+	'cfg_inserer_head_texte' => 'Inserire automaticamente le chiamate ai file seguenti nella sezione <head> delle pagine del sito (raccomandato):',
 	'champ_descendre' => 'scendi',
 	'champ_email_details' => 'Inserisci un indirizzo e-mail valido (es: mioindirizzo@mioprovider.com).',
 	'champ_listable_admin' => 'Visualizza questo campo negli elenchi dell\'area riservata',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_nom_bloc' => 'Nome del gruppo',
 	'champ_nom_groupe' => 'Gruppo',
 	'champ_nom_texte' => 'Testo',
-	'champ_public' => 'Questo campo &egrave; visibile nell\'area pubblica',
+	'champ_public' => 'Questo campo è visibile nell\'area pubblica',
 	'champ_saisie_desactivee' => 'Disattiva la modifica di questo campo',
 	'champ_specifiant' => 'Questo campo qualifica il dato (ordinamento, filtro, descrizione)',
 	'champ_table_jointure_type' => 'Tipo di tabella per i join',
@@ -96,8 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dupliquer' => 'Crea una copia',
 
 	// E
-	'echec_upload' => 'Il trasferimento del file &egrave; fallito.',
-	'edit_champ_obligatoire' => 'questo campo &egrave; obbligatorio',
+	'echec_upload' => 'Il trasferimento del file è fallito.',
+	'edit_champ_obligatoire' => 'questo campo è obbligatorio',
 	'editer' => 'Modifica',
 	'email_independant' => 'Email indipendente dalla risposta',
 	'exporter' => 'Esporta',
@@ -106,12 +106,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'fichier_trop_gros' => 'File troppo grande.',
 	'fichier_type_interdit' => 'Questo tipo di file non è permesso.',
-	'form_erreur' => 'Errore&nbsp;:',
-	'format_fichier' => 'Formato del file&nbsp;:',
+	'form_erreur' => 'Errore :',
+	'format_fichier' => 'Formato del file :',
 	'format_liste' => 'menu a tendina',
 	'format_liste_ou_radio' => 'Formato della lista',
 	'format_radio' => 'bottoni radio',
-	'forms_obligatoires' => 'Form obbligatori pour la saisie de celui-ci&nbsp;:',
+	'forms_obligatoires' => 'Form obbligatori pour la saisie de celui-ci :',
 	'formulaire' => 'Form',
 	'formulaire_aller' => 'Vai al form',
 	'formulaires_copie' => 'Copia di @nombre@',
@@ -125,19 +125,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_creer_formulaire' => 'Crea un nuovo form',
 	'icone_creer_table' => 'Crea una nuova tabella',
 	'importer_form' => 'Importare un form',
-	'info_apparence' => 'Questa &egrave; un\'anteprima di visualizzazione del form cos&igrave; come apparir&agrave; ai visitatori del sito pubblico.',
+	'info_apparence' => 'Questa è un\'anteprima di visualizzazione del form così come apparirà ai visitatori del sito pubblico.',
 	'info_articles_lies_donnee' => 'Articoli collegati',
-	'info_champs_formulaire' => 'In questa sezione &egrave; possibile creare e modificare i campi che i visitatori potranno compilare.',
+	'info_champs_formulaire' => 'In questa sezione è possibile creare e modificare i campi che i visitatori potranno compilare.',
 	'info_obligatoire_02' => '[Obbligatorio]',
 	'info_rubriques_liees_donnee' => 'Le rubriche collegate',
-	'info_sondage' => 'Se il tuo form &egrave; un sondaggio, le risposte ai campi di tipo &laquo; scelta &raquo; saranno sommati e poi visualizzati.',
+	'info_sondage' => 'Se il tuo form è un sondaggio, le risposte ai campi di tipo « scelta » saranno sommati e poi visualizzati.',
 	'info_supprimer_formulaire' => 'Vuoi veramente cancellare questo form?',
 	'info_supprimer_formulaire_reponses' => 'Sono state memorizzate delle risposte per questo form. Vuoi veramente cancellarlo?',
 
 	// L
 	'lien_apercu' => 'Anteprima',
 	'lien_champ' => 'Campi',
-	'lien_propriete' => 'Propriet&agrave;',
+	'lien_propriete' => 'Proprietà',
 	'lien_retirer_donnee_liante' => 'Elimina il link',
 	'lien_retirer_donnee_liee' => 'Elimina il link',
 	'lier_articles' => 'Permettere di associare i dati a un\'articolo',
@@ -147,10 +147,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'moderation_donnees' => 'Validazione dei dati prima della pubblicazione:',
-	'modifiable_donnees' => 'Dati modificabili nello spazio pubblico&nbsp;:',
+	'modifiable_donnees' => 'Dati modificabili nello spazio pubblico :',
 	'monetaire_invalide' => 'Campo monetario non valido',
-	'monnaie_euro' => 'Euro (&euro;)',
-	'multiple_donnees' => 'Inserimento di dati nello spazio pubblico&nbsp;:',
+	'monnaie_euro' => 'Euro (€)',
+	'multiple_donnees' => 'Inserimento di dati nello spazio pubblico :',
 
 	// N
 	'nb_decimales' => 'Numero di decimali',
@@ -163,8 +163,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'page' => 'Pagina',
 	'pas_mail_confirmation' => 'Nessuna conferma delle risposte',
-	'probleme_technique' => 'Problema tecnico. La tua risposta non &egrave; stata inviata.',
-	'probleme_technique_upload' => 'Problema tecnico. Il trasferimento del file &egrave; fallito.',
+	'probleme_technique' => 'Problema tecnico. La tua risposta non è stata inviata.',
+	'probleme_technique_upload' => 'Problema tecnico. Il trasferimento del file è fallito.',
 	'publication_donnees' => 'Pubblicazione dei dati',
 
 	// R
@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remplir_un_champ' => 'Compila almeno un campo.',
 	'reponse' => 'Risposta @id_reponse@',
 	'reponse_depuis' => 'Dalla pagina ',
-	'reponse_enregistree' => 'La tua risposta &egrave; stata memorizzata.',
+	'reponse_enregistree' => 'La tua risposta è stata memorizzata.',
 	'reponse_envoyee' => 'Risposta inviata il ',
 	'reponse_envoyee_a' => 'a',
 	'reponse_retrovez' => 'Visualizza questa risposta dall\'interfaccia redazionale:',
@@ -181,9 +181,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'site_introuvable' => 'Impossibile trovare questo sito.',
-	'sondage_deja_repondu' => 'Hai gi&agrave; risposto a questo sondaggio.',
-	'sondage_non' => 'Questo form non &egrave; un sondaggio',
-	'sondage_oui' => 'Questo form &egrave; un sondaggio.',
+	'sondage_deja_repondu' => 'Hai già risposto a questo sondaggio.',
+	'sondage_non' => 'Questo form non è un sondaggio',
+	'sondage_oui' => 'Questo form è un sondaggio.',
 	'suivi_formulaire' => 'Gestione delle risposte del form',
 	'suivi_formulaires' => 'Gestione delle risposte dei form',
 	'suivi_reponses' => 'Leggi le risposte',
@@ -209,7 +209,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// U
 	'une_reponse' => 'una risposta',
-	'unite_monetaire' => 'Unit&agrave; monetaria',
+	'unite_monetaire' => 'Unità monetaria',
 
 	// V
 	'valider' => 'Invia',
