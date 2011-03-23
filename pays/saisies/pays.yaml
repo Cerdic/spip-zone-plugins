@@ -61,6 +61,18 @@ options:
       -
         saisie: 'input'
         options:
+          nom: 'option_intro'
+          label: '<:saisies:option_option_intro_label:>'
+          size: 50
+      -
+        saisie: 'case'
+        options:
+          nom: 'cacher_option_intro'
+          label_case: '<:saisies:option_cacher_option_intro_label:>'
+          defaut: 'on'
+      -
+        saisie: 'input'
+        options:
           nom: 'attention'
           label: '<:saisies:option_attention_label:>'
           explication: '<:saisies:option_attention_explication:>'
