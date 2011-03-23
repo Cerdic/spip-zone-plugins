@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'c_paypal' => 'PayPal',
 	'cart_configuration' => 'Warenkorb-Konfiguration',
 	'cart_headers' => 'Warenkorb Kopfzeilen',
-	'cart_headers_explication' => 'Sie k&ouml;nnen einstellen, wie der Warenkorn angezeigt wird. Die Seite zur <a href="http://simplecartjs.com/documentation.html">Warenkorb-Konfiguration</a> erl&auml;utert Details.',
+	'cart_headers_explication' => 'Sie können einstellen, wie der Warenkorn angezeigt wird. Die Seite zur <a href="http://simplecartjs.com/documentation.html">Warenkorb-Konfiguration</a> erläutert Details.',
 	'checkout' => 'Bezahlen',
 	'checkout2email' => 'Bezahlvorgang per Mail',
 	'checkout2email_explication' => 'Die Bestellung wurde an folgende Adresse geschickt (Damit wird keine bestimmte Zahlungsmethode festgelegt):',
@@ -36,21 +36,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'dineromail_country_argentine' => 'Argentinien',
 	'dineromail_country_brazil' => 'Brasilien',
 	'dineromail_country_chile' => 'Chile',
-	'dineromail_country_explication' => 'W&auml;hlen sie das Land, in dem sie ihr DineroMail Konto er&ouml;ffnet haben.',
+	'dineromail_country_explication' => 'Wählen sie das Land, in dem sie ihr DineroMail Konto eröffnet haben.',
 	'dineromail_country_mexico' => 'Mexiko',
-	'dineromail_currency' => 'Transaktionsw&auml;hrung',
-	'dineromail_currency_explication' => 'W&auml;hrung f&uuml;r die Transaktion. Es findet keine Umrechnung statt. Preise m&uuml;ssen in der augew&auml;hlten W&auml;rung angegeben werden.',
-	'dineromail_currency_local' => 'Lokale W&auml;hrung',
+	'dineromail_currency' => 'Transaktionswährung',
+	'dineromail_currency_explication' => 'Währung für die Transaktion. Es findet keine Umrechnung statt. Preise müssen in der augewählten Wärung angegeben werden.',
+	'dineromail_currency_local' => 'Lokale Währung',
 	'dineromail_currency_usd' => 'US Dollar',
 	'dineromail_header_image' => 'Titelbild', # MODIF
-	'dineromail_header_image_explication' => 'Absoluter URL eines Logos f&uuml;r den DineroMail Kopf(jpg oder gif, 150px x 50px)',
-	'dineromail_merchant_id' => 'H&auml;ndler-Nummer',
-	'dineromail_merchant_id_explication' => 'H&auml;ndler-Nummer of ihres DineroMail Kontos, ohne Pr&uuml;fnummer',
+	'dineromail_header_image_explication' => 'Absoluter URL eines Logos für den DineroMail Kopf(jpg oder gif, 150px x 50px)',
+	'dineromail_merchant_id' => 'Händler-Nummer',
+	'dineromail_merchant_id_explication' => 'Händler-Nummer of ihres DineroMail Kontos, ohne Prüfnummer',
 	'dineromail_payments_methods' => 'DineroMail Zahlungsmethoden',
-	'dineromail_payments_methods_explication' => 'Zeichenkette zum Aktivieren von Zahlungsmethoden. Frei lassen um alle Zahlungsmethoden f&uuml;r ein Land zu autorisieren',
+	'dineromail_payments_methods_explication' => 'Zeichenkette zum Aktivieren von Zahlungsmethoden. Frei lassen um alle Zahlungsmethoden für ein Land zu autorisieren',
 	'dineromail_see' => 'Ver', # NEW
-	'dineromail_seller_name' => 'H&auml;ndlername',
-	'dineromail_seller_name_explication' => 'Ersatztext f&uuml;r \'email\' im Kopf. Frei lassen um Ersetzung auszuschalten. ',
+	'dineromail_seller_name' => 'Händlername',
+	'dineromail_seller_name_explication' => 'Ersatztext für \'email\' im Kopf. Frei lassen um Ersetzung auszuschalten. ',
 
 	// E
 	'empty' => 'Leer',
@@ -61,8 +61,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'final_total' => 'Summe',
 
 	// G
-	'google_merchant_id' => 'H&auml;ndler ID',
-	'google_merchant_id_explication' => 'ID Ihres Google H&auml;ndler Kontos',
+	'google_merchant_id' => 'Händler ID',
+	'google_merchant_id_explication' => 'ID Ihres Google Händler Kontos',
 
 	// H
 	'header_name' => 'Name',
@@ -84,11 +84,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'shipping_cost' => 'Versandkosten',
 	'shipping_flat_rate' => 'Pauschale Versandkosten',
-	'shipping_flat_rate_explication' => 'F&uuml;gen sie der gesamten Bestellung pauschale Versandkosten hinzu.',
-	'shipping_quantity_rate' => 'Mengenabh&auml;ngige Versandkosten',
-	'shipping_quantity_rate_explication' => 'F&uuml;gen sie einen festen Betrag Versandkosten pro Objekt im Warenkorb hinzu.',
+	'shipping_flat_rate_explication' => 'Fügen sie der gesamten Bestellung pauschale Versandkosten hinzu.',
+	'shipping_quantity_rate' => 'Mengenabhängige Versandkosten',
+	'shipping_quantity_rate_explication' => 'Fügen sie einen festen Betrag Versandkosten pro Objekt im Warenkorb hinzu.',
 	'shipping_total_rate' => 'Gesamte Versandkosten',
-	'shipping_total_rate_explication' => 'F&uuml;gen sie den zu Gesamtkosten proportionale Versandkosten hinzu',
+	'shipping_total_rate_explication' => 'Fügen sie den zu Gesamtkosten proportionale Versandkosten hinzu',
 	'subtotal' => 'Zwischensumme',
 
 	// T
