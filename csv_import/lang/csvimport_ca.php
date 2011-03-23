@@ -12,25 +12,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_donnees' => 'Afegir dades ',
 	'ajouter_table' => 'Afegir a la taula',
 	'aucune_donnee' => 'No hi ha dades a l\'arxiu.',
-	'aucune_table_declaree' => 'Cap taula declarada per la importaci&oacute; CSV',
-	'avertissement_ajout' => 'Les dades de l\'arxiu CSV seran afegides a la taula "@table@" tal i com es mostra a continuaci&oacute;.',
-	'avertissement_remplacement' => 'Aquesta operaci&oacute; suposar&agrave; la supressi&oacute; de totes les dades que hi ha a la taula. Les dades del fitxer s\'inseriran com m&eacute;s avall:  ',
+	'aucune_table_declaree' => 'Cap taula declarada per la importació CSV',
+	'avertissement_ajout' => 'Les dades de l\'arxiu CSV seran afegides a la taula "@table@" tal i com es mostra a continuació.',
+	'avertissement_remplacement' => 'Aquesta operació suposarà la supressió de totes les dades que hi ha a la taula. Les dades del fitxer s\'inseriran com més avall:  ',
 
 	// C
-	'caracteres_separation' => 'Car&agrave;cter separador',
+	'caracteres_separation' => 'Caràcter separador',
 	'champs_csv' => 'Camps de l\'arxiu CSV',
 	'champs_table' => 'Camps de la taula',
-	'correspondance_incomplete' => 'Correspond&egrave;ncies CSV-Taula incompletes',
-	'correspondance_indefinie' => 'Correspond&egrave;ncies CSV-Table no definides',
+	'correspondance_incomplete' => 'Correspondències CSV-Taula incompletes',
+	'correspondance_indefinie' => 'Correspondències CSV-Table no definides',
 	'csvimport' => 'Importa CSV',
 
 	// D
 	'delimiteur_indefini' => 'Delimitador sense definir',
-	'description_table_introuvable' => 'Descripci&oacute; de la taula introbable',
+	'description_table_introuvable' => 'Descripció de la taula introbable',
 
 	// E
 	'erreurs_ajout_base' => 'Hi ha hagut @nb@ errors quan s\'ha afegit a la base. ',
-	'export_classique' => 'CSV cl&agrave;ssic (,)',
+	'export_classique' => 'CSV clàssic (,)',
 	'export_excel' => 'CSV per Excel (;)',
 	'export_format' => 'Format de l\'arxiu:',
 	'export_table' => 'Exportar la taula: @table@',
@@ -47,29 +47,29 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_export_tables' => 'Importar / Exportar a les taules',
 
 	// L
-	'ligne_entete' => '1a. l&iacute;nia de cap&ccedil;alera',
-	'lignes_table' => 'Hi ha @nb_resultats@ l&iacute;nies a la taula "@table@".',
-	'lignes_totales' => '@nb@ l&iacute;nies en total.',
-	'lignes_totales_csv' => '@nb@ l&iacute;nies en total a l\'arxiu CSV.',
+	'ligne_entete' => '1a. línia de capçalera',
+	'lignes_table' => 'Hi ha @nb_resultats@ línies a la taula "@table@".',
+	'lignes_totales' => '@nb@ línies en total.',
+	'lignes_totales_csv' => '@nb@ línies en total a l\'arxiu CSV.',
 
 	// N
 	'nb_enregistrements' => '@nb@ registres',
 
 	// P
 	'pas_importer' => 'No importar',
-	'premieres_lignes' => '<@nb@ primeres l&iacute;nies de l\'arxiu.',
-	'probleme_chargement_fichier' => 'Problema durant la c&agrave;rrega de l\'arxiu',
-	'probleme_chargement_fichier_erreur' => 'Problema durant la c&agrave;rrega de l\'arxiu (error @erreur@).',
+	'premieres_lignes' => '<@nb@ primeres línies de l\'arxiu.',
+	'probleme_chargement_fichier' => 'Problema durant la càrrega de l\'arxiu',
+	'probleme_chargement_fichier_erreur' => 'Problema durant la càrrega de l\'arxiu (error @erreur@).',
 	'probleme_inextricable' => 'Problema inextricable...',
 
 	// R
 	'remplacer_toute_table' => 'Substituir tota la taula',
 
 	// T
-	'table_vide' => 'La taula "@table@" est&agrave; buida.',
+	'table_vide' => 'La taula "@table@" està buida.',
 	'tables_declarees' => 'Taules declarades',
 	'tables_presentes' => 'Taules presents a la base',
-	'tout_remplacer' => 'Reempla&ccedil;ar-ho tot ',
+	'tout_remplacer' => 'Reemplaçar-ho tot ',
 
 	// Z
 	'z' => 'zzz'

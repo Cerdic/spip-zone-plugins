@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucune_donnee' => 'Il file non contiene alcun dato.',
 	'aucune_table_declaree' => 'Nessuna tabella dichiarata per l\'importazione CSV',
 	'avertissement_ajout' => 'I dati del file CSV saranno aggiunti alla tabella "@table@" come mostrato di seguito.',
-	'avertissement_remplacement' => 'Questa operazione sopprimer&agrave; tutti i dati presenti nella tabella. I dati del file saranno inseriti come mostrato di seguito:',
+	'avertissement_remplacement' => 'Questa operazione sopprimerà tutti i dati presenti nella tabella. I dati del file saranno inseriti come mostrato di seguito:',
 
 	// C
 	'caracteres_separation' => 'Carattere di separazione',
@@ -66,7 +66,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'remplacer_toute_table' => 'Sostituisci tutta la tabella',
 
 	// T
-	'table_vide' => 'La tabella "@table@" &egrave; vuota.',
+	'table_vide' => 'La tabella "@table@" è vuota.',
 	'tables_declarees' => 'Tabelle dichiarate',
 	'tables_presentes' => 'Tabelle presenti in database',
 	'tout_remplacer' => 'Sostituire tutto',

@@ -9,18 +9,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'administrer_tables' => 'Tabellen verwalten',
-	'ajouter_donnees' => 'Daten hinzuf&uuml;gen',
-	'ajouter_table' => 'Tabelle hinzuf&uuml;gen',
-	'aucune_donnee' => 'Diese Datei enth&auml;lt keine Daten.',
-	'aucune_table_declaree' => 'Es wurde keine Tabelle f&uuml;r den CSV-Import deklariert',
-	'avertissement_ajout' => 'Die Daten der CSV-Datei werden, wie weiter unten gezeigt, der Tabelle "@table@" hinzugrf&uuml;gt.',
-	'avertissement_remplacement' => 'Dieser Vorgang wird alle in der Tabelle vorhandenen Daten l&ouml;schen. Die Daten aus der Datei werden wie weiter unten gezeigt an ihrer Stelle eingef&uuml;gt.',
+	'ajouter_donnees' => 'Daten hinzufügen',
+	'ajouter_table' => 'Tabelle hinzufügen',
+	'aucune_donnee' => 'Diese Datei enthält keine Daten.',
+	'aucune_table_declaree' => 'Es wurde keine Tabelle für den CSV-Import deklariert',
+	'avertissement_ajout' => 'Die Daten der CSV-Datei werden, wie weiter unten gezeigt, der Tabelle "@table@" hinzugrfügt.',
+	'avertissement_remplacement' => 'Dieser Vorgang wird alle in der Tabelle vorhandenen Daten löschen. Die Daten aus der Datei werden wie weiter unten gezeigt an ihrer Stelle eingefügt.',
 
 	// C
 	'caracteres_separation' => 'Trennzeichen',
 	'champs_csv' => 'Feld der CSV-Datei',
 	'champs_table' => 'Felder der Tabelle',
-	'correspondance_incomplete' => 'Relationen CSV-Tabelle unvollst&auml;ndig',
+	'correspondance_incomplete' => 'Relationen CSV-Tabelle unvollständig',
 	'correspondance_indefinie' => 'Relationen CSV-Tabelle nicht definiert',
 	'csvimport' => 'CSV-Import',
 
@@ -29,9 +29,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_table_introuvable' => 'Beschreibung der unauffindbaren Tabelle',
 
 	// E
-	'erreurs_ajout_base' => 'Beim hinzuf&uuml;gen der Daten in die Tabelle sind @nb@  Fehler aufgetreten.',
+	'erreurs_ajout_base' => 'Beim hinzufügen der Daten in die Tabelle sind @nb@  Fehler aufgetreten.',
 	'export_classique' => 'Klassisches CSV (,)',
-	'export_excel' => 'CSV f&uuml;r Excel (;)',
+	'export_excel' => 'CSV für Excel (;)',
 	'export_format' => 'Format der Datei:',
 	'export_table' => 'Export der Tabelle:  @table@',
 	'export_tabulation' => 'CSV mit Tabulatoren',
@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'fichier_absent' => 'Datei nicht vorhanden',
-	'fichier_choisir' => 'CSV-Date f&uuml;r den Import',
+	'fichier_choisir' => 'CSV-Date für den Import',
 	'fichier_vide' => 'leere Datei',
 
 	// I
@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'premieres_lignes' => '@nb@ erste Zeilen der Datei',
 	'probleme_chargement_fichier' => 'Ein Problem bei Laden der Datei ist aufgetreten',
 	'probleme_chargement_fichier_erreur' => 'Ein Problem bei Laden der Datei ist aufgetreten (Fehler @erreur@).',
-	'probleme_inextricable' => 'unl&ouml;sbares Problem',
+	'probleme_inextricable' => 'unlösbares Problem',
 
 	// R
 	'remplacer_toute_table' => 'Ganze Tabelle ersetzen',

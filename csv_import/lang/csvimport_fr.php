@@ -7,37 +7,37 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'administrer_tables' => 'Administrer les tables',
-	'ajouter_donnees' => 'Ajouter les donn&eacute;es',
-	'ajouter_table' => 'Ajouter &agrave; la table',
-	'aucune_donnee' => 'Il n\'y a aucune donn&eacute;e dans le fichier.',
-	'aucune_table_declaree' => 'Aucune table n\'est d&eacute;clar&eacute;e pour l\'import CSV',
-	'avertissement_ajout' => 'Les donn&eacute;es du fichier CSV vont &ecirc;tre ajout&eacute;es &agrave; la table "@table@" comme illustr&eacute; ci-dessous.',
-	'avertissement_remplacement' => 'Cette op&eacute;ration va entra&icirc;ner la suppression de toutes les donn&eacute;es pr&eacute;sentes dans la table. Les donn&eacute;es du fichier seront ins&eacute;r&eacute;es comme ci-dessous :',
+	'ajouter_donnees' => 'Ajouter les données',
+	'ajouter_table' => 'Ajouter à la table',
+	'aucune_donnee' => 'Il n\'y a aucune donnée dans le fichier.',
+	'aucune_table_declaree' => 'Aucune table n\'est déclarée pour l\'import CSV',
+	'avertissement_ajout' => 'Les données du fichier CSV vont être ajoutées à la table "@table@" comme illustré ci-dessous.',
+	'avertissement_remplacement' => 'Cette opération va entraîner la suppression de toutes les données présentes dans la table. Les données du fichier seront insérées comme ci-dessous :',
 
 	// C
-	'caracteres_separation' => 'Caract&egrave;re de s&eacute;paration',
+	'caracteres_separation' => 'Caractère de séparation',
 	'champs_csv' => 'Champs du fichier CSV',
 	'champs_table' => 'Champs de la table',
-	'correspondance_incomplete' => 'Correspondances CSV-Table incompl&egrave;tes',
-	'correspondance_indefinie' => 'Correspondances CSV-Table non d&eacute;finies',
+	'correspondance_incomplete' => 'Correspondances CSV-Table incomplètes',
+	'correspondance_indefinie' => 'Correspondances CSV-Table non définies',
 	'csvimport' => 'Import CSV',
 
 	// D
-	'delimiteur_indefini' => 'D&eacute;limiteur non d&eacute;fini',
+	'delimiteur_indefini' => 'Délimiteur non défini',
 	'description_table_introuvable' => 'Description de la table introuvable',
 
 	// E
 	'erreurs_ajout_base' => 'Il y a eu @nb@ erreurs lors de l\'ajout dans la base.',
 	'export_classique' => 'CSV classique (,)',
 	'export_excel' => 'CSV pour Excel (;)',
-	'export_format' => 'Format du fichier&nbsp;:',
+	'export_format' => 'Format du fichier :',
 	'export_table' => 'Export de la table : @table@',
 	'export_tabulation' => 'CSV avec tabulations',
 	'exporter' => 'Exporter',
 
 	// F
 	'fichier_absent' => 'Fichier absent',
-	'fichier_choisir' => 'Fichier CSV &agrave; importer',
+	'fichier_choisir' => 'Fichier CSV à importer',
 	'fichier_vide' => 'Fichier vide',
 
 	// I
@@ -45,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_export_tables' => 'Import / Export dans les tables',
 
 	// L
-	'ligne_entete' => '1<sup>&egrave;re</sup> ligne d\'en-t&ecirc;te',
+	'ligne_entete' => '1<sup>ère</sup> ligne d\'en-tête',
 	'lignes_table' => 'Il y a @nb_resultats@ lignes dans la table "@table@".',
 	'lignes_totales' => '@nb@ lignes au total.',
 	'lignes_totales_csv' => '@nb@ lignes au total dans le fichier CSV.',
@@ -55,18 +55,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'pas_importer' => 'Ne pas importer',
-	'premieres_lignes' => '@nb@ premi&egrave;res lignes du fichier.',
-	'probleme_chargement_fichier' => 'Probl&egrave;me lors du chargement du fichier',
-	'probleme_chargement_fichier_erreur' => 'Probl&egrave;me lors du chargement du fichier (erreur @erreur@).',
-	'probleme_inextricable' => 'Probl&egrave;me inextricable...',
+	'premieres_lignes' => '@nb@ premières lignes du fichier.',
+	'probleme_chargement_fichier' => 'Problème lors du chargement du fichier',
+	'probleme_chargement_fichier_erreur' => 'Problème lors du chargement du fichier (erreur @erreur@).',
+	'probleme_inextricable' => 'Problème inextricable...',
 
 	// R
 	'remplacer_toute_table' => 'Remplacer toute la table',
 
 	// T
 	'table_vide' => 'La table "@table@" est vide.',
-	'tables_declarees' => 'Tables d&eacute;clar&eacute;es',
-	'tables_presentes' => 'Tables pr&eacute;sentes dans la base',
+	'tables_declarees' => 'Tables déclarées',
+	'tables_presentes' => 'Tables présentes dans la base',
 	'tout_remplacer' => 'Tout remplacer',
 
 	// Z

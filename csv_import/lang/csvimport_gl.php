@@ -8,33 +8,33 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'administrer_tables' => 'Administrar as t&aacute;boas',
+	'administrer_tables' => 'Administrar as táboas',
 	'ajouter_donnees' => 'Engadir os datos',
-	'ajouter_table' => 'Engadir &aacute; t&aacute;boa',
-	'aucune_donnee' => 'Non hai ning&uacute;n dato dentro do ficheiro',
-	'aucune_table_declaree' => 'Ningunha t&aacute;boa foi declarada para a importaci&oacute;n CSV',
-	'avertissement_ajout' => 'Os datos do ficheiro CSV vanse engadir &aacute; t&aacute;boa "@table@" como se ilustra a seguir.',
-	'avertissement_remplacement' => 'Esta operaci&oacute;n sup&oacute;n a supresi&oacute;n de todos os datos presentes na t&aacute;boa. Os datos do ficheiro inseriranse a seguir:',
+	'ajouter_table' => 'Engadir á táboa',
+	'aucune_donnee' => 'Non hai ningún dato dentro do ficheiro',
+	'aucune_table_declaree' => 'Ningunha táboa foi declarada para a importación CSV',
+	'avertissement_ajout' => 'Os datos do ficheiro CSV vanse engadir á táboa "@table@" como se ilustra a seguir.',
+	'avertissement_remplacement' => 'Esta operación supón a supresión de todos os datos presentes na táboa. Os datos do ficheiro inseriranse a seguir:',
 
 	// C
-	'caracteres_separation' => 'Car&aacute;cter de separaci&oacute;n',
+	'caracteres_separation' => 'Carácter de separación',
 	'champs_csv' => 'Campos do ficheiro CSV',
-	'champs_table' => 'Campos da t&aacute;boa',
-	'correspondance_incomplete' => 'As correspondencias CSV-T&aacute;boa son incompletas',
-	'correspondance_indefinie' => 'As correspondencias entre CSV-T&aacute;boa non est&aacute;n definidas',
+	'champs_table' => 'Campos da táboa',
+	'correspondance_incomplete' => 'As correspondencias CSV-Táboa son incompletas',
+	'correspondance_indefinie' => 'As correspondencias entre CSV-Táboa non están definidas',
 	'csvimport' => 'Importar un CSV',
 
 	// D
 	'delimiteur_indefini' => 'Delimitador non definido',
-	'description_table_introuvable' => 'Non se pode encontrar a descrici&oacute;n da t&aacute;boa',
+	'description_table_introuvable' => 'Non se pode encontrar a descrición da táboa',
 
 	// E
 	'erreurs_ajout_base' => 'Houbo @nb@ erros logo de engadilos na base.',
-	'export_classique' => 'CSV cl&aacute;sico (,)',
+	'export_classique' => 'CSV clásico (,)',
 	'export_excel' => 'CSV para Excel (;)',
 	'export_format' => 'Formato do ficheiro:',
-	'export_table' => 'Exportaci&oacute;n da t&aacute;boa: @table@',
-	'export_tabulation' => 'CSV con tabulaci&oacute;n',
+	'export_table' => 'Exportación da táboa: @table@',
+	'export_tabulation' => 'CSV con tabulación',
 	'exporter' => 'Exportar',
 
 	// F
@@ -44,32 +44,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'import_csv' => 'Importar o CSV : @table@',
-	'import_export_tables' => 'Importar / Exportar nas t&aacute;boas',
+	'import_export_tables' => 'Importar / Exportar nas táboas',
 
 	// L
-	'ligne_entete' => '1<sup>ro</sup> li&ntilde;a de cabeceira',
-	'lignes_table' => 'Hai @nb_resultats@ li&ntilde;as na t&aacute;boa "@table@".',
-	'lignes_totales' => '@nb@ li&ntilde;as en total.',
-	'lignes_totales_csv' => '@nb@ li&ntilde;as en total no ficheiro CSV.',
+	'ligne_entete' => '1<sup>ro</sup> liña de cabeceira',
+	'lignes_table' => 'Hai @nb_resultats@ liñas na táboa "@table@".',
+	'lignes_totales' => '@nb@ liñas en total.',
+	'lignes_totales_csv' => '@nb@ liñas en total no ficheiro CSV.',
 
 	// N
 	'nb_enregistrements' => '@nb@ rexistros',
 
 	// P
 	'pas_importer' => 'Non importar',
-	'premieres_lignes' => '@nb@ primeiras li&ntilde;as do ficheiro.',
+	'premieres_lignes' => '@nb@ primeiras liñas do ficheiro.',
 	'probleme_chargement_fichier' => 'Problema logo da carga do ficheiro',
 	'probleme_chargement_fichier_erreur' => 'Problema logo da carga do ficheiro (erro @erreur@).',
 	'probleme_inextricable' => 'Problema inextricable...',
 
 	// R
-	'remplacer_toute_table' => 'Substitu&iacute;r toda a t&aacute;boa',
+	'remplacer_toute_table' => 'Substituír toda a táboa',
 
 	// T
-	'table_vide' => 'A t&aacute;boa "@table@" est&aacute; baleira.',
-	'tables_declarees' => 'T&aacute;boas declaradas',
-	'tables_presentes' => 'T&aacute;boas presentes na t&aacute;boa',
-	'tout_remplacer' => 'Substitu&iacute;r todo',
+	'table_vide' => 'A táboa "@table@" está baleira.',
+	'tables_declarees' => 'Táboas declaradas',
+	'tables_presentes' => 'Táboas presentes na táboa',
+	'tout_remplacer' => 'Substituír todo',
 
 	// Z
 	'z' => 'zzz'
