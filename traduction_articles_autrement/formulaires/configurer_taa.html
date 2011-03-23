@@ -26,16 +26,6 @@
 							]
 						</div>
 					</li>
-					
-									
-					#SET{erreurs,#ENV**{erreurs}|table_valeur{edition_seule}}
-					<li class="editer_edition_seule[ (#GET{erreurs}|oui)erreur]">
-						[<span class='erreur_message'>(#GET{erreurs})</span>]
-						<div class="choix">
-							<input type="checkbox" name="edition_seule" class="checkbox" value="on" id="edition_seule" [(#ENV{edition_seule}|oui) checked="checked"] />
-							<label for='edition_seule'><:taa:affichage_edition_seule:></label>
-						</div>
-					</li>
 				</ul>
 				</fieldset>
 			</li>

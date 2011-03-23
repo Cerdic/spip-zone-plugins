@@ -40,9 +40,10 @@ return $flux;
 
    if ($type=='article'){
 	$id_article= _request('id_article');
-	$contenu_article=charger_fonction('article_afficher_contenu','inc');
-	$affichage=$contenu_article($id_article);
-	return $affichage;
+	$barre=charger_fonction('barre_langues','inc');
+	$barre_langue=$barre($id_article);
+	
+	$flux['data'] =preg_replace('/<div class=\'boite_onglets\'/',$barre_langue.'<div id=\'boite_onglets\'',$flux['data']);
 	}
 return $flux;
 }
