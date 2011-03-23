@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Per',
 
 	// C
-	'cfg_description' => 'Aquest connector permet afegir f&agrave;cilment etiquetes als articles.',
+	'cfg_description' => 'Aquest connector permet afegir fàcilment etiquetes als articles.',
 
 	// E
 	'explication_ajout_tag' => 'Per afegir diverses etiquetes a la vegada, utilitzeu el separador: "@separateur@".',
@@ -31,8 +31,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'message_aucun_tags' => 'No hi ha cap etiqueta associada',
-	'message_installation_activation' => 'Instal&middot;laci&oacute; de taules i configuraci&oacute; per defecte de spip.icio.us',
-	'message_upgrade_database' => 'Actualitzaci&oacute; de la base de dades de spip.ici.ous a la versi&oacute; @version@<br/>',
+	'message_installation_activation' => 'Instal·lació de taules i configuració per defecte de spip.icio.us',
+	'message_upgrade_database' => 'Actualització de la base de dades de spip.ici.ous a la versió @version@<br/>',
 
 	// N
 	'no_tags_associes' => 'No teniu cap paraula clau associada',
@@ -48,13 +48,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tags' => 'Etiquetes:',
 	'tags_ajoutes' => 'Heu afegit diverses etiquetes:<br />@name@', # MODIF
 	'tags_supprimes' => 'Heu suprimit diverses etiquetes:<br />@name@', # MODIF
-	'title_tag_utilise_nb' => 'Aquesta paraula clau est&agrave; associada per @nb@ persones.',
-	'title_tag_utilise_un' => 'Aquesta paraula clau est&agrave; associada per una persona.',
+	'title_tag_utilise_nb' => 'Aquesta paraula clau està associada per @nb@ persones.',
+	'title_tag_utilise_un' => 'Aquesta paraula clau està associada per una persona.',
 	'to' => 'amb',
-	'types_utilisateurs' => 'Qui t&eacute; acc&eacute;s al formulari?',
+	'types_utilisateurs' => 'Qui té accés al formulari?',
 
 	// V
-	'vos_tags' => 'Les vostres etiquetes (modificaci&oacute;)',
+	'vos_tags' => 'Les vostres etiquetes (modificació)',
 
 	// W
 	'waiting' => 'cerca de les vostres etiquetes'

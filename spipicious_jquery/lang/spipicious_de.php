@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'add_tags' => 'Tags hinzuf&uuml;gen',
+	'add_tags' => 'Tags hinzufügen',
 	'aucun_tags' => 'Kein Tag zugeordnet',
 	'auteur_tag_usage' => 'Dieser Autor hat diesen Tag @nb@ mal verwendet',
 
@@ -16,14 +16,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Von',
 
 	// C
-	'cfg_description' => 'Dieses Plugin erm&ouml;glicht einfaches Taggen von Artikeln.',
+	'cfg_description' => 'Dieses Plugin ermöglicht einfaches Taggen von Artikeln.',
 
 	// E
 	'explication_ajout_tag' => 'Um mehrere Tags auf einmal zuzuordnen, verwenden sie bitte das Trennzeichen "@separateur@".',
-	'explication_suppression_tag' => 'W&auml;hlen sie ihre Tags in der Liste aus, und best&auml;tigen sie das L&ouml;schen.',
+	'explication_suppression_tag' => 'Wählen sie ihre Tags in der Liste aus, und bestätigen sie das Löschen.',
 
 	// I
-	'identifier' => 'Um diesem Artikel Tags zuzuordnen, m&uuml;ssen sie sich anmelden.',
+	'identifier' => 'Um diesem Artikel Tags zuzuordnen, müssen sie sich anmelden.',
 
 	// L
 	'label_tags' => 'Tags:',
@@ -44,17 +44,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'tag_ajoute' => 'Sie haben ein Tag zugeordnet:<br />@name@', # MODIF
 	'tag_deja_present' => 'Sie haben dieses Tag bereits zugeordnet.',
-	'tag_supprime' => 'Sie haben das Tag gel&ouml;scht:<br />@name@', # MODIF
+	'tag_supprime' => 'Sie haben das Tag gelöscht:<br />@name@', # MODIF
 	'tags' => 'Tags:',
 	'tags_ajoutes' => 'Sie haben mehrere Tags zugeordnet:<br />@name@', # MODIF
-	'tags_supprimes' => 'Sie haben mehrere Tags gel&ouml;scht:<br />@name@', # MODIF
+	'tags_supprimes' => 'Sie haben mehrere Tags gelöscht:<br />@name@', # MODIF
 	'title_tag_utilise_nb' => 'Dieses Schlagwort wurde von @nb@ Besuchern zugeordnet.',
 	'title_tag_utilise_un' => 'Dieses Schlagwort wurde von einem Besucher zugeordnet.',
 	'to' => 'mit',
 	'types_utilisateurs' => 'Wer hat Zugriff auf das Formular?',
 
 	// V
-	'vos_tags' => 'Ihre Tages (&Auml;nderung)',
+	'vos_tags' => 'Ihre Tages (Änderung)',
 
 	// W
 	'waiting' => 'ihre Tags suchen'
