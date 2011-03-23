@@ -71,8 +71,6 @@ function formulaires_editer_composition_objet_charger($type,$id,$hide_form=false
 	
 	$valeurs['_hidden'] = "<input type='hidden' name='$id_table_objet' value='$id' />";
 
-	if (!is_array($valeurs['_compositions']))
-		$valeurs['editable'] = false;
 	if (!autoriser('styliser',$type,$id))
 		$valeurs['editable'] = false;
 

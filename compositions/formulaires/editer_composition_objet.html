@@ -42,10 +42,13 @@
 			<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<label><:compositions:label_composition_explication:></label>
+				[(#ENV{_compositions}|is_array|oui)
 				<div class="choix">
 					<input type="checkbox" class="checkbox" name="#GET{name}" value="1" id="#GET{name}"[ (#ENV{#GET{name}}|oui)checked="checked"] />
 					<label for="#GET{name}">[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>
 				</div>
+				]
+				[(#ENV{_compositions}|is_array|non)<input type="hidden" name="composition_lock" id="composition_lock" value="#ENV{composition_lock}" />]
 			</li>
 			[(#ENV{objet}|=={rubrique}|oui)
 			#SET{name,composition_branche_lock}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}#SET{obli,''}

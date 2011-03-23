@@ -100,7 +100,9 @@ function compositions_affiche_milieu($flux){
 		if ($id = $flux['args'][$_id]) {
 			$config = unserialize($GLOBALS['meta']['compositions']);
 			$aut = autoriser('styliser',$type,$id);
-			if ($config['masquer_formulaire'] != 'oui' OR $aut) {
+			if (($config['masquer_formulaire'] != 'oui' OR $aut) 
+				AND (is_array(reset(compositions_lister_disponibles($type))) OR ($type == 'rubrique' AND $config['tout_verrouiller'] != 'oui'))
+				) {
 				$deplie = $aut ? false : -1;
 				$ids = 'formulaire_editer_composition_objet-' . "$type-$id";
 				$bouton = bouton_block_depliable(strtoupper(_T('compositions:composition')), $deplie, $ids);
