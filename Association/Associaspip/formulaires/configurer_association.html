@@ -59,7 +59,7 @@
 		<br/><label><strong><:asso:config_libelle_num_dc:></strong> </label>	
 		<B_dc_cotisations>
 		<select name="dc_cotisations" id="dc_cotisations"> 
-		<BOUCLE_dc_cotisations(spip_asso_destination){par intitule}>
+		<BOUCLE_dc_cotisations(ASSO_DESTINATION){par intitule}>
 		<option value="#ID_DESTINATION" [(#ENV{dc_cotisations}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
 		</BOUCLE_dc_cotisations>
 		</select>
@@ -83,7 +83,7 @@
 		<br/><label><strong><:asso:config_libelle_num_dc:></strong> </label>	
 		<B_dc_dons>
 		<select name="dc_dons" id="dc_dons"> 
-		<BOUCLE_dc_dons(spip_asso_destination){par intitule}>
+		<BOUCLE_dc_dons(ASSO_DESTINATION){par intitule}>
 		<option value="#ID_DESTINATION" [(#ENV{dc_dons}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
 		</BOUCLE_dc_dons>
 		</select>
@@ -117,7 +117,7 @@
 		<br/><label><strong><:asso:config_libelle_num_dc:></strong> </label>	
 		<B_dc_ventes>
 		<select name="dc_ventes" id="dc_ventes"> 
-		<BOUCLE_dc_ventes(spip_asso_destination){par intitule}>
+		<BOUCLE_dc_ventes(ASSO_DESTINATION){par intitule}>
 		<option value="#ID_DESTINATION" [(#ENV{dc_ventes}|=={#ID_DESTINATION}|?{selected="selected"})]>#INTITULE</option>
 		</BOUCLE_dc_ventes>
 		</select>
