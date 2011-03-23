@@ -11,11 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_accueil' => 'Accueil',
 	'icone_administration' => 'Maintenance',
 	'icone_configuration' => 'Configuration',
-	'icone_edition' => '&Eacute;dition',
+	'icone_edition' => 'Édition',
 	'icone_langage' => 'Ma langue',
 	'icone_mes_infos' => 'Mes informations',
-	'icone_preferences' => 'Mes pr&eacute;f&eacute;rences',
-	'icone_reactions' => 'Activit&eacute;',
+	'icone_preferences' => 'Mes préférences',
+	'icone_reactions' => 'Activité',
 	'icone_squelette' => 'Squelettes',
 	'icone_suivi_edito' => 'Publication',
 	'icone_suivi_publication' => 'Suivi de la publication',
@@ -33,11 +33,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte_et_icones_page' => 'Affichage dans la page',
 
 	// T
-	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'acc&egrave;der &agrave; ton site.
-  Ces adresses seront redirig&eacute;es automatiquement vers l\'adresse principale. Indique une adresse par ligne',
+	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'accèder à ton site.
+  Ces adresses seront redirigées automatiquement vers l\'adresse principale. Indique une adresse par ligne',
 	'titre_config_langage' => 'Configurer la langue',
-	'titre_configurer_preferences' => 'Configurer tes pr&eacute;f&eacute;rences',
-	'titre_identite_site' => 'Identit&eacute; du site',
+	'titre_configurer_preferences' => 'Configurer tes préférences',
+	'titre_identite_site' => 'Identité du site',
 	'titre_infos_perso' => 'Mes informations personnelles'
 );
 

@@ -11,11 +11,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_accueil' => 'Launch pad', # MODIF
 	'icone_administration' => 'Maintenance', # MODIF
 	'icone_configuration' => 'Configuration', # MODIF
-	'icone_edition' => 'Site edit', # MODIF
+	'icone_edition' => 'Site edit',
 	'icone_langage' => 'My language', # MODIF
 	'icone_mes_infos' => 'My informations', # MODIF
-	'icone_preferences' => 'My preferences', # MODIF
-	'icone_reactions' => 'Activity', # MODIF
+	'icone_preferences' => 'My preferences',
+	'icone_reactions' => 'Activity',
 	'icone_squelette' => 'Templates', # MODIF
 	'icone_suivi_edito' => 'Publication', # MODIF
 	'icone_suivi_publication' => 'To follow the publication', # MODIF
@@ -36,8 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'acc&egrave;der à votre site.
 		Ces adresses seront redirig&eacute;es automatiquement vers l\'adresse principale. Indiquez une adresse par ligne', # NEW
 	'titre_config_langage' => 'Configurer la langue', # MODIF
-	'titre_configurer_preferences' => 'Configure your preferences', # MODIF
-	'titre_identite_site' => 'Site\'s identity', # MODIF
+	'titre_configurer_preferences' => 'Configure your preferences',
+	'titre_identite_site' => 'Site\'s identity',
 	'titre_infos_perso' => 'Mes informations personnelles' # NEW
 );
 
