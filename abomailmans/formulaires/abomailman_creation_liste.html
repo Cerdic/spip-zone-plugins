@@ -9,12 +9,12 @@
 			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur] editer_type_input">
 				<label for="titre" class="obligatoire"><:texte_titre_obligatoire:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
-				<input type="text"  id="titre" name="titre" value="[(#ENV**{titre})]" size="50" />
+				<input type="text" id="titre" name="titre" value="[(#ENV**{titre})]" class="multilang" size="50" />
 			</li>
 			 <li class='editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
 				<label for='descriptif'><:abomailmans:texte_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
-				]<textarea name='descriptif' id='descriptif' cols='40' rows='2'>[(#ENV**{descriptif})]</textarea>
+				]<textarea name='descriptif' id='descriptif' class='multilang' cols='40' rows='2'>[(#ENV**{descriptif})]</textarea>
 			</li>
 	<li class="fieldset">
 	      <fieldset><h3 class="legend"><:abomailmans:emails_a_renseigner:></h3>

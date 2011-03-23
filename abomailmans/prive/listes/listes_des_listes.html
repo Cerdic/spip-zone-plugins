@@ -5,9 +5,9 @@
 		<li class="editer_listes">
 		<BOUCLE_listes(ABOMAILMANS){id_abomailman ?}{desactive=0}>
 		<div class="choix">
-			<label for="liste_#ID_ABOMAILMAN">#TITRE</label>
+			<label for="liste_#ID_ABOMAILMAN" class="#EDIT{titre}">#TITRE</label>
 			<input name="listes[]" type="checkbox" id="liste_#ID_ABOMAILMAN" value="#ID_ABOMAILMAN"[(#GRAND_TOTAL|=={1}|oui) checked="checked"] />
-			[<p class="explications">
+			[<p class="explications #EDIT{descriptif}">
 			(#DESCRIPTIF|PtoBR)
 			</p>]
 		</div>

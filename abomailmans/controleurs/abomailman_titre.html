@@ -1,0 +1,13 @@
+[(#REM)
+
+	Controleur pour le crayon 'abomailman_titre', uniquement html
+
+	Permet de bénéficier du plugin multilang
+	
+]
+#CACHE{0}
+
+<BOUCLE_a(ABOMAILMANS){id_abomailman}>
+<input class="crayon-active multilang" name="#ENV{name_titre}"
+ style="width:#ENV{largeur}px;#ENV{style}" value="[(#TITRE**)]" />
+</BOUCLE_a>
