@@ -8,23 +8,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Bu sayfa b&uuml;y&uuml;tecin stilini konfig&uuml;re etmeye yarar. Ki&#351;iselle&#351;tirilmi&#351; bir stil tan&#305;mlanabilir; <a href="http://plugins.spip.net/?page=article&amp;id_article=48">&ccedil;evrimi&ccedil;i makaleye bkz </a>.',
+	'descriptif' => 'Bu sayfa büyütecin stilini konfigüre etmeye yarar. Kişiselleştirilmiş bir stil tanımlanabilir; <a href="http://plugins.spip.net/?page=article&id_article=48">çevrimiçi makaleye bkz </a>.',
 
 	// E
-	'example' => 'Grafik sonu&ccedil;',
+	'example' => 'Grafik sonuç',
 
 	// N
 	'nostyle' => 'Stilsiz',
 
 	// O
-	'other' => 'Ba&#351;ka',
+	'other' => 'Başka',
 
 	// S
-	'size_vignette' => '&#304;konun Maksimum Geni&#351;li&#287;i',
-	'style' => 'B&uuml;y&uuml;te&ccedil; Stili',
+	'size_vignette' => 'İkonun Maksimum Genişliği',
+	'style' => 'Büyüteç Stili',
 
 	// T
-	'titre' => 'B&uuml;y&uuml;te&ccedil; D&uuml;zenlemesi'
+	'titre' => 'Büyüteç Düzenlemesi'
 );
 
 ?>

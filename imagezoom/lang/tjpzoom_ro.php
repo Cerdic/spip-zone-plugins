@@ -8,23 +8,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Aceast&#259; pagin&#259; permite configurarea stilului lupei. Un stil personalizat poate fi declarat; vede&#355;i <a href="http://plugins.spip.net/?page=article&amp;id_article=48">documenta&#355;ia on-line</a>.',
+	'descriptif' => 'Această pagină permite configurarea stilului lupei. Un stil personalizat poate fi declarat; vedeţi <a href="http://plugins.spip.net/?page=article&id_article=48">documentaţia on-line</a>.',
 
 	// E
 	'example' => 'Rezultat grafic',
 
 	// N
-	'nostyle' => 'F&#259;r&#259; stil',
+	'nostyle' => 'Fără stil',
 
 	// O
 	'other' => 'Altul',
 
 	// S
-	'size_vignette' => 'M&#259;rimea maxim&#259; a vinietei',
+	'size_vignette' => 'Mărimea maximă a vinietei',
 	'style' => 'Stilul lupei',
 
 	// T
-	'titre' => 'Configura&#355;ia lupei'
+	'titre' => 'Configuraţia lupei'
 );
 
 ?>

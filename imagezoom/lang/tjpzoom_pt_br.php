@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Esta p&aacute;gina permite configurar o estilo da lupa. Um estilo personalizado pode ser declarado; ver <a href="http://plugins.spip.net/?page=article&amp;id_article=48">a documenta&ccedil;&atilde;o online</a>.',
+	'descriptif' => 'Esta página permite configurar o estilo da lupa. Um estilo personalizado pode ser declarado; ver <a href="http://plugins.spip.net/?page=article&id_article=48">a documentação online</a>.',
 
 	// E
-	'example' => 'Resultado gr&aacute;fico',
+	'example' => 'Resultado gráfico',
 
 	// N
 	'nostyle' => 'Sem Estilo',
@@ -20,11 +20,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'other' => 'Outro',
 
 	// S
-	'size_vignette' => 'Largura M&aacute;xima da Miniatura',
+	'size_vignette' => 'Largura Máxima da Miniatura',
 	'style' => 'Estilo da Lupa',
 
 	// T
-	'titre' => 'Configura&ccedil;&atilde;o da Lupa'
+	'titre' => 'Configuração da Lupa'
 );
 
 ?>

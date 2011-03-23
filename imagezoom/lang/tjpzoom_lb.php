@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'D&euml;s S&auml;it erlaabt de Style vun der Loupe anzest&euml;llen. E personalis&eacute;ierte Style kann gemaach gin; liest <a href="http://plugins.spip.net/?page=article&amp;id_article=48">d\'Dokumentatioun</a>.',
+	'descriptif' => 'Dës Säit erlaabt de Style vun der Loupe anzestëllen. E personaliséierte Style kann gemaach gin; liest <a href="http://plugins.spip.net/?page=article&id_article=48">d\'Dokumentatioun</a>.',
 
 	// E
-	'example' => 'Graph&euml;scht Resultat',
+	'example' => 'Graphëscht Resultat',
 
 	// N
 	'nostyle' => 'Ouni Style',

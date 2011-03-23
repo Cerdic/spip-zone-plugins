@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Esta p&aacute;xina permite configurar l\'estilu de la lente. Pue declarase un estilu personaliz&aacute;u; ver <a href="http://plugins.spip.net/?page=article&amp;id_article=48">la documentaci&oacute;n en llinia</a>.',
+	'descriptif' => 'Esta páxina permite configurar l\'estilu de la lente. Pue declarase un estilu personalizáu; ver <a href="http://plugins.spip.net/?page=article&id_article=48">la documentación en llinia</a>.',
 
 	// E
-	'example' => 'Resultau gr&aacute;ficu',
+	'example' => 'Resultau gráficu',
 
 	// N
 	'nostyle' => 'Ensin Estilu',
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'other' => 'Otru',
 
 	// S
-	'size_vignette' => 'Tama&ntilde;u M&aacute;simu de la Vi&ntilde;eta',
+	'size_vignette' => 'Tamañu Másimu de la Viñeta',
 	'style' => 'Estilu de la Lente',
 
 	// T

@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => '<NEW>Dre ar bajenn-ma&ntilde; e c\'haller keflunia&ntilde; stil ar werenn-greski&ntilde;. Gallout a c\'haller diskl&ecirc;ria&ntilde; ur stil personelaet; gwelet <a href="http://plugins.spip.net/?page=article&amp;id_article=48">an teulio&ugrave; skoazell enlinenn</a>.',
+	'descriptif' => '<NEW>Dre ar bajenn-mañ e c\'haller kefluniañ stil ar werenn-greskiñ. Gallout a c\'haller disklêriañ ur stil personelaet; gwelet <a href="http://plugins.spip.net/?page=article&id_article=48">an teulioù skoazell enlinenn</a>.',
 
 	// E
 	'example' => '<NEW>Disoc\'h grafek',
@@ -17,14 +17,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nostyle' => '<NEW>Distil',
 
 	// O
-	'other' => '<NEW>Trao&ugrave; all',
+	'other' => '<NEW>Traoù all',
 
 	// S
-	'size_vignette' => '<NEW>Ledander brasa&ntilde; ar vignetenn',
-	'style' => '<NEW>Stil ar werenn-greski&ntilde;',
+	'size_vignette' => '<NEW>Ledander brasañ ar vignetenn',
+	'style' => '<NEW>Stil ar werenn-greskiñ',
 
 	// T
-	'titre' => '<NEW>Kefluniadur ar werenn-greski&ntilde;'
+	'titre' => '<NEW>Kefluniadur ar werenn-greskiñ'
 );
 
 ?>
