@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_traduction' => 'Afegir una traducci&oacute;',
+	'ajouter_traduction' => 'Afegir una traducció',
 
 	// R
-	'rubrique_reference' => '(secci&oacute; de refer&egrave;ncia)'
+	'rubrique_reference' => '(secció de referència)'
 );
 
 ?>
