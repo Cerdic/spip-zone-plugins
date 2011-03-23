@@ -8,72 +8,72 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajouter_droits_auteur' => 'Adaug&#259;-mi drepturile de acces la aceast&#259; zon&#259;',
+	'ajouter_droits_auteur' => 'Adaugă-mi drepturile de acces la această zonă',
 	'aucune_zone' => 'Aucune zone', # NEW
 	'auteurs' => 'autori',
 
 	// B
-	'bouton_creer_la_zone' => 'Crea&#355;i noua zon&#259;',
+	'bouton_creer_la_zone' => 'Creaţi noua zonă',
 
 	// C
 	'colonne_id' => 'Num',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
-	'confirmer_retirer_auteur_zone' => 'Sunte&#355;i sigur ca vre&#355;i s&#259; scoate&#355;i autorul din aceast&#259; zon&#259; ?',
-	'confirmer_retirer_auteurs' => 'Sunte&#355;i sigur c&#259; vre&#355;i s&#259; retrage&#355;i to&#355;i autorii din aceast&#259; zon&#259; ?',
-	'confirmer_supprimer_zone' => 'Sunte&#355;i sigur c&#259; vre&#355;i s&#259; suprima&#355;i aceast&#259; zon&#259; ?',
-	'creer_zone' => 'Crea&#355;i o zon&#259; nou&#259;',
+	'confirmer_ajouter_auteurs' => 'Êtes vous sûr de vouloir ajouter cet auteur à la zone ?', # NEW
+	'confirmer_retirer_auteur_zone' => 'Sunteţi sigur ca vreţi să scoateţi autorul din această zonă ?',
+	'confirmer_retirer_auteurs' => 'Sunteţi sigur că vreţi să retrageţi toţi autorii din această zonă ?',
+	'confirmer_supprimer_zone' => 'Sunteţi sigur că vreţi să suprimaţi această zonă ?',
+	'creer_zone' => 'Creaţi o zonă nouă',
 
 	// D
 	'descriptif' => 'Descriere',
 
 	// I
-	'icone_menu_config' => 'Acces Restr&acirc;ns',
-	'icone_supprimer_zone' => '&#350;terge&#355;i aceast&#259; zon&#259;',
-	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
-	'info_ajouter_auteur' => 'Ad&#259;uga&#355;i acest autor',
-	'info_ajouter_auteurs' => 'Ad&#259;uga&#355;i to&#355;i autorii',
-	'info_ajouter_zones' => 'Ad&#259;uga&#355;i toate zonele',
+	'icone_menu_config' => 'Acces Restrâns',
+	'icone_supprimer_zone' => 'Ştergeţi această zonă',
+	'info_acces_restreint' => 'L\'accès à cette page est restreint. Identifiez vous pour y accéder', # NEW
+	'info_ajouter_auteur' => 'Adăugaţi acest autor',
+	'info_ajouter_auteurs' => 'Adăugaţi toţi autorii',
+	'info_ajouter_zones' => 'Adăugaţi toate zonele',
 	'info_aucun_acces' => 'Nici un acces autorizat',
-	'info_aucun_auteur' => 'Nici un autor &icirc;n aceast&#259; zon&#259;',
-	'info_aucune_zone' => 'Nici o zon&#259;',
-	'info_auteurs_lies_zone' => 'Autorii care au acces la aceast&#259; zon&#259;',
-	'info_page' => 'Aceast&#259; pagin&#259; v&#259; permite s&#259; gestiona&#355;i zonele de acces restr&acirc;ns din cadrul site-ului dumneavostr&#259;',
-	'info_retirer_auteurs' => 'Retrage&#355;i to&#355;i autorii',
-	'info_retirer_zone' => 'Scoate&#355;i din zon&#259;',
-	'info_retirer_zones' => 'Scoate&#355;i din toate zonele',
+	'info_aucun_auteur' => 'Nici un autor în această zonă',
+	'info_aucune_zone' => 'Nici o zonă',
+	'info_auteurs_lies_zone' => 'Autorii care au acces la această zonă',
+	'info_page' => 'Această pagină vă permite să gestionaţi zonele de acces restrâns din cadrul site-ului dumneavostră',
+	'info_retirer_auteurs' => 'Retrageţi toţi autorii',
+	'info_retirer_zone' => 'Scoateţi din zonă',
+	'info_retirer_zones' => 'Scoateţi din toate zonele',
 
 	// M
-	'modifier_zone' => 'Modifica&#355;i zona',
+	'modifier_zone' => 'Modificaţi zona',
 
 	// P
-	'page_zones_acces' => 'Acces Restr&acirc;ns',
-	'par_titre' => 'Dup&#259; titlu',
-	'privee' => 'Privat&#259;',
-	'publique' => 'Public&#259;',
+	'page_zones_acces' => 'Acces Restrâns',
+	'par_titre' => 'După titlu',
+	'privee' => 'Privată',
+	'publique' => 'Publică',
 
 	// R
 	'rubriques' => 'rubrici',
 	'rubriques_zones_acces' => 'Rubricile zonei',
 
 	// S
-	'selectionner_une_zone' => 'Selec&#355;iona&#355;i o zon&#259;',
+	'selectionner_une_zone' => 'Selecţionaţi o zonă',
 
 	// T
 	'titre' => 'Titlu',
-	'titre_ajouter_zone' => 'Reg&#259;si&#355;i zona',
-	'titre_cadre_modifier_zone' => 'Modifica&#355;i o zon&#259;',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_ajouter_zone' => 'Regăsiţi zona',
+	'titre_cadre_modifier_zone' => 'Modificaţi o zonă',
+	'titre_page_config' => 'Configuration des accès', # NEW
 	'titre_table' => 'Toate zonele de acces',
-	'titre_zones_acces' => 'Zonele de acces restr&acirc;ns',
+	'titre_zones_acces' => 'Zonele de acces restrâns',
 	'toutes' => 'Toate',
 
 	// V
-	'voir_toutes' => 'Vede&#355;i toate zonele',
+	'voir_toutes' => 'Vedeţi toate zonele',
 
 	// Z
-	'zone_numero' => 'ZONA NUM&#258;RUL&nbsp;:',
-	'zone_restreinte_espace_prive' => 'Restr&acirc;nge&#355;i accesul la aceast&#259; zon&#259; &icirc;n cadrul spa&#355;iului privat',
-	'zone_restreinte_publique' => 'Restr&acirc;nge&#355;i accesul la aceast&#259; zon&#259; &icirc;n cadrul p&#259;r&#355;ii publice'
+	'zone_numero' => 'ZONA NUMĂRUL :',
+	'zone_restreinte_espace_prive' => 'Restrângeţi accesul la această zonă în cadrul spaţiului privat',
+	'zone_restreinte_publique' => 'Restrângeţi accesul la această zonă în cadrul părţii publice'
 );
 
 ?>

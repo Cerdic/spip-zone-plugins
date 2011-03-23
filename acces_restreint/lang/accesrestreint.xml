@@ -1,5 +1,7 @@
 <traduction module="accesrestreint" gestionnaire="salvatore" reference="fr">
-	<langue code="ar" />
+	<langue code="ar">
+		<traducteur nom="kandalaft" />
+	</langue>
 	<langue code="ast">
 		<traducteur nom="xuacu" />
 	</langue>
@@ -12,7 +14,6 @@
 	</langue>
 	<langue code="eu" />
 	<langue code="fa" />
-	<langue code="fr" />
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>

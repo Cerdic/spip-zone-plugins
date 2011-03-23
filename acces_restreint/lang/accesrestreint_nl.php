@@ -13,15 +13,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'auteurs' => 'auteurs',
 
 	// B
-	'bouton_creer_la_zone' => 'De nieuwe zone cre&euml;ren',
+	'bouton_creer_la_zone' => 'De nieuwe zone creëren',
 
 	// C
 	'colonne_id' => 'Num',
-	'confirmer_ajouter_auteurs' => '&Ecirc;tes vous s&ucirc;r de vouloir ajouter cet auteur &agrave; la zone ?', # NEW
+	'confirmer_ajouter_auteurs' => 'Êtes vous sûr de vouloir ajouter cet auteur à la zone ?', # NEW
 	'confirmer_retirer_auteur_zone' => 'Bent u te willen zeker deze auteur van de zone terugtrekken?',
 	'confirmer_retirer_auteurs' => 'Bent u te willen zeker alle auteurs van deze zone terugtrekken ?',
 	'confirmer_supprimer_zone' => 'Bent u te willen zeker deze zone afschaffen?',
-	'creer_zone' => 'Een nieuwe zone cre&euml;ren',
+	'creer_zone' => 'Een nieuwe zone creëren',
 
 	// D
 	'descriptif' => 'Werktekening',
@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_menu_config' => 'Beperkte toegang',
 	'icone_supprimer_zone' => 'Deze zone afschaffen',
-	'info_acces_restreint' => 'L\'acc&egrave;s &agrave; cette page est restreint. Identifiez vous pour y acc&eacute;der', # NEW
+	'info_acces_restreint' => 'L\'accès à cette page est restreint. Identifiez vous pour y accéder', # NEW
 	'info_ajouter_auteur' => 'Deze auteur toevoegen',
 	'info_ajouter_auteurs' => 'Alle auteurs toevoegen',
 	'info_ajouter_zones' => 'Alle zones toevoegen',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'Met de zone overeenkomen',
 	'titre_cadre_modifier_zone' => 'Een zone wijzigen',
-	'titre_page_config' => 'Configuration des acc&egrave;s', # NEW
+	'titre_page_config' => 'Configuration des accès', # NEW
 	'titre_table' => 'Alle zones van toegang',
 	'titre_zones_acces' => 'Zones van beperkte toegang',
 	'toutes' => 'Iedereen',
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'voir_toutes' => 'Zie alle zones',
 
 	// Z
-	'zone_numero' => 'ZONE NUMBER&nbsp;:',
+	'zone_numero' => 'ZONE NUMBER :',
 	'zone_restreinte_espace_prive' => 'De toegang tot deze zone in de particuliere ruimte beperken',
 	'zone_restreinte_publique' => 'De toegang tot deze zone in het openbare deel beperken'
 );
