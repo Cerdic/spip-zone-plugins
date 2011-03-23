@@ -9,38 +9,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_forum_longueur' => 'Tamanho das mensagens',
-	'cfg_forum_longueur_maxi' => 'Comprimento m&aacute;ximo',
-	'cfg_forum_longueur_mini' => 'Comprimento m&iacute;nimo',
-	'comment' => 'coment&aacute;rio',
-	'comments' => 'coment&aacute;rios',
-	'comments_h' => 'Seus coment&aacute;rios',
+	'cfg_forum_longueur_maxi' => 'Comprimento máximo',
+	'cfg_forum_longueur_mini' => 'Comprimento mínimo',
+	'comment' => 'comentário',
+	'comments' => 'comentários',
+	'comments_h' => 'Seus comentários',
 
 	// D
 	'date_heure_a' => 'em',
 	'date_jour_le' => 'No',
 
 	// F
-	'forum_qui_etes_vous' => 'Quem &eacute; voc&ecirc;?',
+	'forum_qui_etes_vous' => 'Quem é você?',
 
 	// L
-	'label_email' => 'Email (n&atilde;o publicado)',
+	'label_email' => 'Email (não publicado)',
 	'label_nom' => 'Nome',
 	'label_url' => 'Seu website',
 
 	// M
-	'moderation_info' => 'Aten&ccedil;&atilde;o, a mensagem s&oacute; ser&aacute; exibida depois de ter sido verificado e aprovado.',
+	'moderation_info' => 'Atenção, a mensagem só será exibida depois de ter sido verificado e aprovado.',
 
 	// P
-	'permalink_to' => 'Link permanente para o coment&aacute;rio',
+	'permalink_to' => 'Link permanente para o comentário',
 
 	// R
-	'reponse_comment_modere' => 'Seu coment&aacute;rio foi salvado e est&aacute; aguardando revis&atilde;o antes de ser publicado.',
-	'reponse_comment_ok' => 'Obrigado pelo seu coment&aacute;rio!',
+	'reponse_comment_modere' => 'Seu comentário foi salvado e está aguardando revisão antes de ser publicado.',
+	'reponse_comment_ok' => 'Obrigado pelo seu comentário!',
 
 	// S
-	'saisie_texte_info' => 'Este formul&aacute;rio aceita SPIP atajos, [-&gt;url] {{negrita}} {cursiva} &lt;quote&gt; &lt;code&gt; e o c&oacute;digo HTML. Para criar par&aacute;grafos, basta deixar linhas em branco.',
-	'saisie_texte_legend' => 'Deixe seu coment&aacute;rio aqu&iacute;',
-	'submit1' => 'Visualiza&ccedil;&atilde;o',
+	'saisie_texte_info' => 'Este formulário aceita SPIP atajos, [->url] {{negrita}} {cursiva} <quote> <code> e o código HTML. Para criar parágrafos, basta deixar linhas em branco.',
+	'saisie_texte_legend' => 'Deixe seu comentário aquí',
+	'submit1' => 'Visualização',
 	'submit2' => 'Submeter',
 
 	// T

@@ -23,7 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_qui_etes_vous' => 'Who are you?',
 
 	// L
-	'label_email' => 'Email (not&nbsp;published)',
+	'label_email' => 'Email (not published)',
 	'label_nom' => 'Name',
 	'label_url' => 'Your web site',
 
@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Thank you for your comment!',
 
 	// S
-	'saisie_texte_info' => 'This form accepts SPIP&nbsp;shortcuts <code>[-&gt;urls] {{bold}} {italics} &lt;quotes&gt; &lt;code&gt;</code> and HTML&nbsp;code <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. To create paragraphs, just leave empty lines.',
+	'saisie_texte_info' => 'This form accepts SPIP shortcuts <code>[->urls] {{bold}} {italics} <quotes> <code></code> and HTML code <code><q> <del> <ins></code>. To create paragraphs, just leave empty lines.',
 	'saisie_texte_legend' => 'Enter your comment here',
 	'submit1' => 'Preview',
 	'submit2' => 'Submit',

@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_forum_longueur' => 'Llargada dels missatges',
-	'cfg_forum_longueur_maxi' => 'Llargada m&agrave;xima',
-	'cfg_forum_longueur_mini' => 'Llargada m&iacute;nima',
+	'cfg_forum_longueur_maxi' => 'Llargada màxima',
+	'cfg_forum_longueur_mini' => 'Llargada mínima',
 	'comment' => 'comentari',
 	'comments' => 'comentaris',
 	'comments_h' => 'Els teus comentaris',
@@ -23,24 +23,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_qui_etes_vous' => 'Qui ets?',
 
 	// L
-	'label_email' => 'Correu electr&ograve;nic (no&nbsp;publicat)',
+	'label_email' => 'Correu electrònic (no publicat)',
 	'label_nom' => 'Nom',
 	'label_url' => 'El teu lloc Web',
 
 	// M
-	'moderation_info' => 'Atenci&oacute;, el teu missatge no apareixer&agrave; fins que no hagi estat rellegit i aprovat. ',
+	'moderation_info' => 'Atenció, el teu missatge no apareixerà fins que no hagi estat rellegit i aprovat. ',
 
 	// P
-	'permalink_to' => 'Enlla&ccedil; permanent cap el comentari',
+	'permalink_to' => 'Enllaç permanent cap el comentari',
 
 	// R
-	'reponse_comment_modere' => 'El teu comentari s\'ha enregistrat correctament i est&agrave; esperant la relectura abans de ser publicat.',
-	'reponse_comment_ok' => 'Gr&agrave;cies pel comentari!',
+	'reponse_comment_modere' => 'El teu comentari s\'ha enregistrat correctament i està esperant la relectura abans de ser publicat.',
+	'reponse_comment_ok' => 'Gràcies pel comentari!',
 
 	// S
-	'saisie_texte_info' => 'Aquest formulari accepta les dreceres SPIP <code>[-&gt;url] {{italique}} {italique} &lt;quote&gt; &lt;code&gt;</code> i el codi HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Per crear par&agrave;grafs, deixeu simplement l&iacute;nies buides.',
-	'saisie_texte_legend' => 'Afegeix el comentari aqu&iacute;',
-	'submit1' => 'Visualitzaci&oacute; pr&egrave;via',
+	'saisie_texte_info' => 'Aquest formulari accepta les dreceres SPIP <code>[->url] {{italique}} {italique} <quote> <code></code> i el codi HTML <code><q> <del> <ins></code>. Per crear paràgrafs, deixeu simplement línies buides.',
+	'saisie_texte_legend' => 'Afegeix el comentari aquí',
+	'submit1' => 'Visualització prèvia',
 	'submit2' => 'Confirmar l\'enviament',
 
 	// T

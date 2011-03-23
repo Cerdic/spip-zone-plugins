@@ -9,8 +9,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_forum_longueur' => 'Longitud de los mensajes',
-	'cfg_forum_longueur_maxi' => 'Longitud m&aacute;xima',
-	'cfg_forum_longueur_mini' => 'Longitud m&iacute;nima',
+	'cfg_forum_longueur_maxi' => 'Longitud máxima',
+	'cfg_forum_longueur_mini' => 'Longitud mínima',
 	'comment' => 'comentario',
 	'comments' => 'comentarios',
 	'comments_h' => 'Tus comentarios',
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_le' => 'El',
 
 	// F
-	'forum_qui_etes_vous' => '&iquest;Qui&eacute;n eres?',
+	'forum_qui_etes_vous' => '¿Quién eres?',
 
 	// L
 	'label_email' => 'Email (no publicado)',
@@ -28,19 +28,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url' => 'Su sitio web',
 
 	// M
-	'moderation_info' => 'Aviso, su mensaje s&oacute;lo ser&aacute; mostrado despu&eacute;s de haber sido rele&iacute;do y aprobado.',
+	'moderation_info' => 'Aviso, su mensaje sólo será mostrado después de haber sido releído y aprobado.',
 
 	// P
 	'permalink_to' => 'Enlace permanente al comentario',
 
 	// R
-	'reponse_comment_modere' => 'Su comentario ha sido guardado y est&aacute; a la espera de ser comprobado antes de que sea publicado.',
-	'reponse_comment_ok' => '&iexcl;Gracias por su comentario!',
+	'reponse_comment_modere' => 'Su comentario ha sido guardado y está a la espera de ser comprobado antes de que sea publicado.',
+	'reponse_comment_ok' => '¡Gracias por su comentario!',
 
 	// S
-	'saisie_texte_info' => 'Este formulario acepta los atajos de SPIP, [-&gt;url] {{negrita}} {cursiva} &lt;quote&gt; &lt;code&gt;  y el c&oacute;digo HTML. Para crear p&aacute;rrafos, dejen simplemente unas l&iacute;neas vac&iacute;as.',
-	'saisie_texte_legend' => 'A&ntilde;ade tu comentario aqu&iacute;',
-	'submit1' => 'Previsualizaci&oacute;n',
+	'saisie_texte_info' => 'Este formulario acepta los atajos de SPIP, [->url] {{negrita}} {cursiva} <quote> <code>  y el código HTML. Para crear párrafos, dejen simplemente unas líneas vacías.',
+	'saisie_texte_legend' => 'Añade tu comentario aquí',
+	'submit1' => 'Previsualización',
 	'submit2' => 'Confirmar el envio',
 
 	// T

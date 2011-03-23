@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_forum_longueur' => 'Llonxit&uacute; de los mensaxes',
-	'cfg_forum_longueur_maxi' => 'Llonxit&uacute; m&aacute;xima',
-	'cfg_forum_longueur_mini' => 'Llonxit&uacute; m&iacute;nima',
+	'cfg_forum_longueur' => 'Llonxitú de los mensaxes',
+	'cfg_forum_longueur_maxi' => 'Llonxitú máxima',
+	'cfg_forum_longueur_mini' => 'Llonxitú mínima',
 	'comment' => 'comentariu',
 	'comments' => 'comentarios',
 	'comments_h' => 'Los tos comentarios',
@@ -20,26 +20,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_le' => 'El',
 
 	// F
-	'forum_qui_etes_vous' => '&iquest;Qui&eacute;n yes?',
+	'forum_qui_etes_vous' => '¿Quién yes?',
 
 	// L
-	'label_email' => 'Corr&eacute;u (nun apaecer&aacute;)',
+	'label_email' => 'Corréu (nun apaecerá)',
 	'label_nom' => 'Nome',
 	'label_url' => 'El to sitiu web',
 
 	// M
-	'moderation_info' => 'Atenci&oacute;n, el to mensaxe nun apaecer&aacute; fasta que se llea y apruebe.',
+	'moderation_info' => 'Atención, el to mensaxe nun apaecerá fasta que se llea y apruebe.',
 
 	// P
 	'permalink_to' => 'Enllaz permanente al comentariu',
 
 	// R
-	'reponse_comment_modere' => 'El to comentariu se guard&oacute; correutamente y ta esperando revisi&oacute;n enantes d\'espublizase.',
-	'reponse_comment_ok' => '&iexcl;Gracies pol to comentariu!',
+	'reponse_comment_modere' => 'El to comentariu se guardó correutamente y ta esperando revisión enantes d\'espublizase.',
+	'reponse_comment_ok' => '¡Gracies pol to comentariu!',
 
 	// S
-	'saisie_texte_info' => 'Esti formulariu permite los atayos&nbsp;de&nbsp;SPIP <code>[-&gt;url] {{negrina}} {cursiva} &lt;quote&gt; &lt;code&gt;</code> y el c&oacute;digu&nbsp;HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Pa crear p&aacute;rrafos, basta nam&aacute;i con dexar llinies baleres.',
-	'saisie_texte_legend' => 'Escribe equ&iacute; el to comentariu',
+	'saisie_texte_info' => 'Esti formulariu permite los atayos de SPIP <code>[->url] {{negrina}} {cursiva} <quote> <code></code> y el códigu HTML <code><q> <del> <ins></code>. Pa crear párrafos, basta namái con dexar llinies baleres.',
+	'saisie_texte_legend' => 'Escribe equí el to comentariu',
 	'submit1' => 'Vista previa',
 	'submit2' => 'Confirmar l\'unviu',
 
