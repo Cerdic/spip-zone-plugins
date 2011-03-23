@@ -12,8 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cc_commerciale' => 'CC - Usu comercial posible',
-	'cc_modification' => 'CC - Modificaci&oacute;n posible',
-	'cc_pas_de_restriction' => 'Ensin torgues conoc&iacute;es',
+	'cc_modification' => 'CC - Modificación posible',
+	'cc_pas_de_restriction' => 'Ensin torgues conocíes',
 	'cc_paternite' => 'Creative Commons - Reconocimientu d\'autor',
 
 	// F
@@ -30,8 +30,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'rechercher_flickr' => 'Restolar en Flickr',
 	'resultat_par_date' => 'por fecha',
-	'resultat_par_interet' => 'pol inter&eacute;s',
-	'resultat_par_pertinence' => 'polo atin&aacute;o'
+	'resultat_par_interet' => 'pol interés',
+	'resultat_par_pertinence' => 'polo atináo'
 );
 
 ?>

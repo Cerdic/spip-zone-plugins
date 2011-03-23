@@ -12,20 +12,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cc_commerciale' => 'CC - Uso comercial aceptado',
-	'cc_modification' => 'CC - Modificaci&oacute;n aceptada',
-	'cc_pas_de_restriction' => 'Non se declara ningunha restrici&oacute;n',
-	'cc_paternite' => 'Creative Commons - Autor&iacute;a',
+	'cc_modification' => 'CC - Modificación aceptada',
+	'cc_pas_de_restriction' => 'Non se declara ningunha restrición',
+	'cc_paternite' => 'Creative Commons - Autoría',
 
 	// F
 	'fermer' => 'Pechar',
-	'flickr_cc_explication' => '<p>Procurar imaxes con licenza Creative Commons sobre Flickr indicando os termos da procura seguintes. Pode precisar a natureza das licenzas &aacute;s que est&aacute;n sometidas as imaxes.</p>
-<p>Prema sobre a (ou as) imaxes(s) escollida(s) entre os resultados da procura&nbsp;: est&aacute; inmediatamente asociada ao seu artigo. Prema sobre o nome do autor para acceder &aacute; p&aacute;xina de Flickr correspondente a esta imaxe.</p>
-<p>Estas imaxes ofrecidas polos seus autores respectivos&nbsp;: para respectar os seus dereitos de autor e o seu traballo,</p>
-<ul><li>non suprima a menci&oacute;n do autor nin a ligaz&oacute;n sobre a s&uacute;a p&aacute;xina de Flick&nbsp;;</li>
-<li>respecte rigorosamente a licenza Creative Commons asociada &aacute; cada imaxe (en particular, non empregue unha imaxe nun &aacute;mbito comercial se a licenza non o autoriza&nbsp;;</li>
+	'flickr_cc_explication' => '<p>Procurar imaxes con licenza Creative Commons sobre Flickr indicando os termos da procura seguintes. Pode precisar a natureza das licenzas ás que están sometidas as imaxes.</p>
+<p>Prema sobre a (ou as) imaxes(s) escollida(s) entre os resultados da procura : está inmediatamente asociada ao seu artigo. Prema sobre o nome do autor para acceder á páxina de Flickr correspondente a esta imaxe.</p>
+<p>Estas imaxes ofrecidas polos seus autores respectivos : para respectar os seus dereitos de autor e o seu traballo,</p>
+<ul><li>non suprima a mención do autor nin a ligazón sobre a súa páxina de Flick ;</li>
+<li>respecte rigorosamente a licenza Creative Commons asociada á cada imaxe (en particular, non empregue unha imaxe nun ámbito comercial se a licenza non o autoriza ;</li>
 <li>se o autor da imaxe llo demanda, debe retirar a imaxe do seu web nun prazo de 24 horas.</li>
 </ul>
-<p>Este produto usa a API de Flickr mais non es&aacute; sustentado, nin certificado por Flickr.</p>',
+<p>Este produto usa a API de Flickr mais non esá sustentado, nin certificado por Flickr.</p>',
 
 	// R
 	'rechercher_flickr' => 'Procurar sobre Flickr',

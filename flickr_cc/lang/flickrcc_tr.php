@@ -11,27 +11,27 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_image_flickr' => 'Bir Flickr resmi ekle',
 
 	// C
-	'cc_commerciale' => 'CC - Ticar&icirc; kullan&#305;m m&uuml;mk&uuml;n',
-	'cc_modification' => 'CC - D&uuml;zeltme m&uuml;mk&uuml;n',
-	'cc_pas_de_restriction' => 'Bilinen bir k&#305;s&#305;tlama yok',
+	'cc_commerciale' => 'CC - Ticarî kullanım mümkün',
+	'cc_modification' => 'CC - Düzeltme mümkün',
+	'cc_pas_de_restriction' => 'Bilinen bir kısıtlama yok',
 	'cc_paternite' => 'Creative Commons - Aidiyet',
 
 	// F
 	'fermer' => 'Kapat',
-	'flickr_cc_explication' => 'Flickr\'da, yukar&#305;daki arama terimlerini belirterek Creative Commons resimleri aray&#305;n. Ayr&#305;ca resimlerin lisans tiplerini de belirtin. </p>
-<p>Arama sonucundaki resme veya resimlere t&#305;klay&#305;n&nbsp;: resim hemen makalenize ba&#287;lanacakt&#305;r. Bu resme ait sayfaya eri&#351;mek i&ccedil;in yazar ismine t&#305;klay&#305;n. </p>
-<p>Bu resimler s&#305;rayla belirtilen yazarlara aittir ve kullan&#305;m&#305;n&#305;za sunulmu&#351;tur&nbsp;: haklar&#305;na ve &ccedil;al&#305;&#351;malar&#305;na sayg&#305; g&ouml;stermek i&ccedil;in ,</p>
-<ul><li>yazar&#305;n ismine ve Flickr sayfas&#305;na y&ouml;nlendiren ba&#287;lant&#305;y&#305; silmeyin&nbsp;;</li>
-<li>Creative Commons lisans&#305;na harfiyen uyun (&ouml;zllikle, e&#287;er lisans buna izin vermiyorsa resmi ticar&icirc; bir alanda kullanmay&#305;n&nbsp;;</li>
-<li>e&#287;er yazar talep ederse resmi sitenizden 24 saat i&ccedil;inde silmelisiniz.</li>
+	'flickr_cc_explication' => 'Flickr\'da, yukarıdaki arama terimlerini belirterek Creative Commons resimleri arayın. Ayrıca resimlerin lisans tiplerini de belirtin. </p>
+<p>Arama sonucundaki resme veya resimlere tıklayın : resim hemen makalenize bağlanacaktır. Bu resme ait sayfaya erişmek için yazar ismine tıklayın. </p>
+<p>Bu resimler sırayla belirtilen yazarlara aittir ve kullanımınıza sunulmuştur : haklarına ve çalışmalarına saygı göstermek için ,</p>
+<ul><li>yazarın ismine ve Flickr sayfasına yönlendiren bağlantıyı silmeyin ;</li>
+<li>Creative Commons lisansına harfiyen uyun (özllikle, eğer lisans buna izin vermiyorsa resmi ticarî bir alanda kullanmayın ;</li>
+<li>eğer yazar talep ederse resmi sitenizden 24 saat içinde silmelisiniz.</li>
 </ul>
-<p>Bu r&uuml;&uuml;rn Flickr API\'sini kullan&#305;r ama ne destek verir ne de Flickr taraf&#305;ndan tan&#305;nm&#305;&#351;t&#305;r.</p>',
+<p>Bu rüürn Flickr API\'sini kullanır ama ne destek verir ne de Flickr tarafından tanınmıştır.</p>',
 
 	// R
 	'rechercher_flickr' => 'Flickr\'da ara',
-	'resultat_par_date' => 'tarihe g&ouml;re',
-	'resultat_par_interet' => 'ilgiye g&ouml;re',
-	'resultat_par_pertinence' => 'tutarl&#305;l&#305;&#287;a g&ouml;re'
+	'resultat_par_date' => 'tarihe göre',
+	'resultat_par_interet' => 'ilgiye göre',
+	'resultat_par_pertinence' => 'tutarlılığa göre'
 );
 
 ?>
