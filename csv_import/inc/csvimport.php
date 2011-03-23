@@ -47,7 +47,7 @@ function csvimport_table_importable($nom_table,&$titre,&$operations){
 function csvimport_afficher_tables($titre_table, $icone = '') {
 	$csvimport_tables_auth = csvimport_tables_auth();
 	global $connect_statut;
-        $vals = $table = array();
+    $vals = $table = array();
 
 	if (!$icone) $icone = _DIR_PLUGIN_CSVIMPORT."img_pack/csvimport-24.png";
 
@@ -70,9 +70,11 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 			}
 			if ($declared) {
 
-				$maj_exist = true;
-		 		$result = sql_select("maj",$latable,"","","maj DESC");
-		 		if (!$result) {
+				if (in_array('maj', $info['field'])) {
+					$result = sql_select("maj",$latable,"","","maj DESC");
+					$maj_exist = true;
+				}
+				else {
 			 		$result = sql_select("*",$latable);
 			 		$maj_exist = false;
 		 		}
@@ -212,15 +214,22 @@ function csvimport_show_erreurs($erreur){
 }
 
 function csvimport_table_visu_extrait($nom_table,$nombre_lignes = 0){
-        $maj_exist = true;
+        
 	$limit = "";
 	if ($nombre_lignes > 0)
 		$limit = $nombre_lignes+1;
-	$result = sql_select("*",$nom_table,"","","maj DESC",$limit);
-	if (!$result) {
- 		$result = sql_select("*",$nom_table,"","","",$limit);
- 		$maj_exist = false;
+
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$desc = $trouver_table($nom_table);
+	if (in_array('maj', $desc['field'])) {
+		$maj_exist = true;
+		$result = sql_select("*",$nom_table,"","","maj DESC",$limit);
 	}
+	else {
+		$maj_exist = false;
+		$result = sql_select("*",$nom_table,"","","",$limit);
+	}
+		  
 	$nb_data=sql_count($result);
 	if ($nombre_lignes==0)
 		$nombre_lignes = $nb_data;
@@ -339,7 +348,7 @@ function csvimport_field_associate($data, $table_fields, $assoc_field){
 	global $tables_principales;
 	$assoc=$assoc_field;
 	if (!is_array($assoc)) $assoc = array();
-	$csvfield=array_keys($data{1});
+	$csvfield=array_keys($data{0});
 	foreach($csvfield as $k=>$v){
 		$csvfield[$k] = csvimport_nettoie_key($v);
 	}
@@ -387,7 +396,7 @@ function csvimport_field_associate($data, $table_fields, $assoc_field){
 
 function csvimport_field_configure($data, $table_fields, $assoc){
 	$output = "";
-	$csvfield=array_keys($data{1});
+	$csvfield=array_keys($data{0});
 
 	$output .= "<table><tr><td>"._T("csvimport:champs_csv")."</td><td>"._T("csvimport:champs_table")."</td></tr>";
 	foreach($csvfield as $csvkey){

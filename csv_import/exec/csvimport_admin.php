@@ -214,7 +214,11 @@ function exec_csvimport_admin(){
 		// evite les melanges sur une base avec plusieurs spip installes
 		if (substr($table,0,strlen($table_prefix))==$table_prefix){
 			$table_abr = substr($table,strlen($table_prefix)+1);
-			if (!isset($tables_for_link["spip_$table_abr"]) && !in_array($table_abr,$tables_defendues)){
+			// option de config $GLOBALS['csvimport_tables_jointures'] = true pour gérer aussi les tables de jointures
+			if ((!isset($tables_for_link["spip_$table_abr"])
+				|| (isset($GLOBALS['csvimport_tables_jointures'])&& $GLOBALS['csvimport_tables_jointures']))
+				&& !in_array($table_abr,$tables_defendues)
+			){
 				$liste_des_tables_spip[]=$table;
 			}
 		}
@@ -222,7 +226,7 @@ function exec_csvimport_admin(){
 			$liste_des_tables_autres[] = $table;
 		}
 	}
-	
+
 	$milieu .= "<div class='formulaire_spip'>";
 	$action = generer_url_ecrire("csvimport_admin", "modif=1&retour=".urlencode($retour));
 	
