@@ -4,6 +4,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pour spip_version_compare, plugin_version_compatible et _FILE_PLUGIN_CONFIG
 include_spip('inc/plugin'); 
+
+// pour step_get_infos_plugin et step_ajouter_zone (step_xml_parse_zone)
+include_spip('inc/step_infos_plugin');
+
 // 3 fonctions du inc/plugin de SPIP2.1 absentes de SPIP 2.2
 if (!function_exists('actualise_plugins_actifs')) {
   function actualise_plugins_actifs() {
@@ -196,7 +200,7 @@ function step_actualiser_plugins_locaux(){
 
 
 function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
-	 include_spip('inc/step_infos_plugin');
+
 
 	if ($insert = step_get_infos_plugin($constante, $p, $actifs, $recents)) {
 		// recuperer les champs sql utiles
