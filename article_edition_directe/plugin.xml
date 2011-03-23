@@ -1,0 +1,32 @@
+<plugin>
+	<nom><multi>[fr]Articles en édition directe[en]Edition mode for articles[es]Editar artículos directamente</multi></nom>
+	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[fr]
+			Afficher le champs d'édition de l'article au lieu de sa prévisualisation
+		</multi>	
+	</description>
+<!--	<lien>http://www.spip-contrib.net/Traductions-d-articles-autrement</lien>-->
+	<licence>GPL 3</licence>
+	<prefix>aed</prefix>
+<!--	<icon>img_pack/Translation-icon_32.png</icon>-->
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>aed_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_fiche_objet</nom>
+		<inclure>aed_pipelines.php</inclure>
+	</pipeline>		
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>aed_pipelines.php</inclure>
+        </pipeline>	
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<utilise id="medias" version='[1.6.1;]'/>	
+</plugin>
+
