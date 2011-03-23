@@ -8,9 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'config_desc' => '<strong>Palette</strong> afegir&agrave; autom&agrave;ticament un selector de colors a un camp d\'entrada, simplement si li donem la classe CSS &laquo;palette&raquo;',
+	'config_desc' => '<strong>Palette</strong> afegirà automàticament un selector de colors a un camp d\'entrada, simplement si li donem la classe CSS «palette»',
 	'config_exemple' => 'Exemple:',
-	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Segons la documentaci&oacute;</a>',
+	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Segons la documentació</a>',
 
 	// F
 	'fermer' => 'Tancar la palette',
@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'palette' => 'Palette',
 	'palette_ecrire' => 'Activar Palette a l\'espai privat',
-	'palette_public' => 'Activar Palette al lloc p&uacute;blic'
+	'palette_public' => 'Activar Palette al lloc públic'
 );
 
 ?>
