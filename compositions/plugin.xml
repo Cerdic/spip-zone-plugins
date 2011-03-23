@@ -22,7 +22,6 @@ Articles may also be assigned a as home of a section. Fields "id_article_accueil
 	<install>base/compositions.php</install>
 	<prefix>compositions</prefix>
 	<fonctions>compositions_fonctions.php</fonctions>
-	<options>compositions_options.php</options>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/compositions.php</inclure>
@@ -37,6 +36,10 @@ Articles may also be assigned a as home of a section. Fields "id_article_accueil
 	</pipeline>
 	<pipeline>
 		<nom>styliser</nom>
+		<inclure>compositions_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>compositions_lister_disponibles</nom>
 		<inclure>compositions_pipeline.php</inclure>
 	</pipeline>
  	<necessite id='SPIP' version='[2.0.6;]' />

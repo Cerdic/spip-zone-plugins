@@ -114,4 +114,6 @@ function compositions_affiche_milieu($flux){
 	return $flux;
 }
 
+function compositions_compositions_lister_disponibles($flux){return $flux;}
+
 ?>
