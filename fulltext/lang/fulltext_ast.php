@@ -8,17 +8,17 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'accents_pas_pris' => 'Los acentos nun se tienen en cuenta (&laquo;cu&aacute;nto&raquo; o &laquo;cuanto&raquo;, devuelven el mesmu &laquo;cu&aacute;nto&raquo;, &laquo;cuanto&raquo;, &laquo;cuant&oacute;&raquo;...)',
+	'accents_pas_pris' => 'Los acentos nun se tienen en cuenta («cuánto» o «cuanto», devuelven el mesmu «cuánto», «cuanto», «cuantó»...)',
 	'asie' => 'asia',
-	'asterisque_terminale' => 'nun devolver&aacute; nada: l\'asteriscu * tien que tar al final',
-	'aussi' => 'tami&eacute;n',
+	'asterisque_terminale' => 'nun devolverá nada: l\'asteriscu * tien que tar al final',
+	'aussi' => 'tamién',
 
 	// C
-	'casse_indifferente' => 'La capitalizaci&oacute;n (min&uacute;scules/may&uacute;scules) de les pallabres guet&aacute;es ye indiferente.',
+	'casse_indifferente' => 'La capitalización (minúscules/mayúscules) de les pallabres guetáes ye indiferente.',
 	'convertir_myisam' => 'Convertir en MyISAM',
 	'convertir_toutes' => 'Convertir toles tables en MyISAM',
 	'convertir_utf8' => 'convertir a UTF-8 pa restaurar la coherencia',
-	'creer_tous' => 'Crear tolos indices FULLTEXT encament&aacute;os',
+	'creer_tous' => 'Crear tolos indices FULLTEXT encamentáos',
 
 	// E
 	'enfan' => 'enfan', # NEW
@@ -34,17 +34,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 	'fant' => 'fant', # NEW
 	'fonctionnement_recherche' => 'Funcionamientu del motor de gueta d\'esti sitiu',
-	'fulltext_cree' => 'FULLTEXT cre&aacute;u',
+	'fulltext_cree' => 'FULLTEXT creáu',
 
 	// I
 	'il_faut_myisam' => 'fai falta MyISAM',
 	'incoherence_charset' => 'Una incoherencia ente\'l xuegu de carauteres del to sitiu y el de les tables de la base de datos amenaza con dar fallos nes guetes con carauteres acentuaos:',
-	'index_regenere' => '&iacute;ndices de la tabla rexeneraos',
+	'index_regenere' => 'índices de la tabla rexeneraos',
 	'index_reinitialise' => 'Los documentos en error se reaniciaron',
-	'index_supprime' => 'indiz desanici&aacute;u',
+	'index_supprime' => 'indiz desaniciáu',
 
 	// L
-	'liste_tables_connues' => 'Esta ye la llista de tables conoc&iacute;es de la gueta. Puedes amesta-y elementos FULLTEXT, cf. la documentaci&oacute;n na direici&oacute;n',
+	'liste_tables_connues' => 'Esta ye la llista de tables conocíes de la gueta. Puedes amesta-y elementos FULLTEXT, cf. la documentación na direición',
 
 	// M
 	'mais_pas' => 'pero NON',
@@ -57,9 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'premier_soit' => 'O',
 
 	// R
-	'regenerer_tous' => 'Rexenerar tolos &iacute;ndices FULLTEXT',
+	'regenerer_tous' => 'Rexenerar tolos índices FULLTEXT',
 	'reinitialise_index_doc' => 'Reaniciar l\'indizamientu de los documentos en error',
-	'reserve_webmestres' => 'P&aacute;xina acutada pa los webmasters',
+	'reserve_webmestres' => 'Páxina acutada pa los webmasters',
 	'retourne' => 'Tornar los testos que contengan',
 
 	// S
@@ -74,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'textes_premier' => 'pero presenta primero los testos que contengan',
 
 	// U
-	'utiliser_operateurs_logiques' => 'La gueta utiliza los operadores l&oacute;xicos m&aacute;s corrientes.'
+	'utiliser_operateurs_logiques' => 'La gueta utiliza los operadores lóxicos más corrientes.'
 );
 
 ?>
