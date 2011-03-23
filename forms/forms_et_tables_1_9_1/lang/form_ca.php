@@ -26,7 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Realment el voleu suprimir?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Treure l\'enlla&ccedil; a partir d\'aquesta resposta',
+	'lien_retirer_donnee_liante' => 'Treure l\'enllaç a partir d\'aquesta resposta',
 	'lien_retirer_donnee_liee' => 'Treure aquesta resposta',
 
 	// N
@@ -41,11 +41,11 @@ Realment el voleu suprimir?',
 	'telecharger_reponses' => 'Baixar les respostes',
 	'texte_donnee_statut' => 'Estat d\'aquesta resposta',
 	'texte_statut_poubelle' => 'Resposta suprimida',
-	'texte_statut_prepa' => 'Resposta en proc&eacute;s de redacci&oacute; ',
+	'texte_statut_prepa' => 'Resposta en procés de redacció ',
 	'texte_statut_prop' => 'Resposta proposada',
 	'texte_statut_publie' => 'Resposta publicada',
 	'texte_statut_refuse' => 'Resposta refusada',
-	'titre_formulaire' => 'T&iacute;tol del formulari',
+	'titre_formulaire' => 'Títol del formulari',
 	'toutes_tables' => 'Tots els formularis',
 	'type_des_tables' => 'Formularis',
 

@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'icone_ajouter_donnees' => 'Antwoorden toevoegen',
-	'icone_creer_table' => 'Een nieuw formulier cre&euml;ren',
+	'icone_creer_table' => 'Een nieuw formulier creëren',
 	'importer_donnees_csv' => 'Antwoorden invoeren',
 	'info_supprimer_formulaire' => 'Wilt u dit formulier echt afschaffen ?',
 	'info_supprimer_formulaire_reponses' => 'Een Antwoord worden verenigd met dit formulier. 

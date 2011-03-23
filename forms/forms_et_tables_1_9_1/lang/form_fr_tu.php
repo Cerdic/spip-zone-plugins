@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'articles_utilisant' => 'Articles utilisant ce formulaire',
-	'aucune_reponse' => 'Aucune r&eacute;ponse',
+	'aucune_reponse' => 'Aucune réponse',
 
 	// C
 	'champs_formulaire' => 'Champs du formulaire',
@@ -18,39 +18,39 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire' => 'Formulaire',
 
 	// I
-	'icone_ajouter_donnees' => 'Ajouter des r&eacute;ponses',
-	'icone_creer_table' => 'Cr&eacute;er un nouveau formulaire',
-	'importer_donnees_csv' => 'Importer des r&eacute;ponses',
+	'icone_ajouter_donnees' => 'Ajouter des réponses',
+	'icone_creer_table' => 'Créer un nouveau formulaire',
+	'importer_donnees_csv' => 'Importer des réponses',
 	'info_supprimer_formulaire' => 'Veux-tu vraiment supprimer ce formulaire ?',
-	'info_supprimer_formulaire_reponses' => 'Des R&eacute;ponse sont associ&eacute;es &agrave; ce formulaire. 
+	'info_supprimer_formulaire_reponses' => 'Des Réponse sont associées à ce formulaire. 
 Veux-tu vraiment le supprimer ?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette r&eacute;ponse',
-	'lien_retirer_donnee_liee' => 'Retirer cette r&eacute;ponse',
+	'lien_retirer_donnee_liante' => 'Retirer le lien depuis cette réponse',
+	'lien_retirer_donnee_liee' => 'Retirer cette réponse',
 
 	// N
-	'nombre_reponses' => '@nombre@ r&eacute;ponses',
+	'nombre_reponses' => '@nombre@ réponses',
 	'nouveau_formulaire' => 'Nouveau formulaire',
 
 	// S
-	'suivi_reponses' => 'Voir les r&eacute;ponses',
+	'suivi_reponses' => 'Voir les réponses',
 	'supprimer_formulaire' => 'Supprimer ce formulaire',
 
 	// T
-	'telecharger_reponses' => 'T&eacute;l&eacute;charge les r&eacute;ponses',
-	'texte_donnee_statut' => 'Statut de cette r&eacute;ponse',
-	'texte_statut_poubelle' => 'R&eacute;ponse supprim&eacute;e',
-	'texte_statut_prepa' => 'R&eacute;ponse en cours de r&eacute;daction',
-	'texte_statut_prop' => 'R&eacute;ponse propos&eacute;e',
-	'texte_statut_publie' => 'R&eacute;ponse publi&eacute;e',
-	'texte_statut_refuse' => 'R&eacute;ponse refus&eacute;e',
+	'telecharger_reponses' => 'Télécharge les réponses',
+	'texte_donnee_statut' => 'Statut de cette réponse',
+	'texte_statut_poubelle' => 'Réponse supprimée',
+	'texte_statut_prepa' => 'Réponse en cours de rédaction',
+	'texte_statut_prop' => 'Réponse proposée',
+	'texte_statut_publie' => 'Réponse publiée',
+	'texte_statut_refuse' => 'Réponse refusée',
 	'titre_formulaire' => 'Titre du formulaire',
 	'toutes_tables' => 'Tous les formulaires',
 	'type_des_tables' => 'Formulaires',
 
 	// U
-	'une_reponse' => 'Une r&eacute;ponse'
+	'une_reponse' => 'Une réponse'
 );
 
 ?>

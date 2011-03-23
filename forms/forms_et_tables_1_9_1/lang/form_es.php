@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_utilisant' => 'Art&iacute;culos que usan este formulario',
+	'articles_utilisant' => 'Artículos que usan este formulario',
 	'aucune_reponse' => 'No hay respuestas',
 
 	// C
@@ -18,12 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire' => 'Formulario',
 
 	// I
-	'icone_ajouter_donnees' => 'A&ntilde;adir respuestas',
+	'icone_ajouter_donnees' => 'Añadir respuestas',
 	'icone_creer_table' => 'Crear un formulario nuevo',
 	'importer_donnees_csv' => 'Importar respuestas',
-	'info_supprimer_formulaire' => '&iquest;Realmente quieres suprimir este formulario?',
+	'info_supprimer_formulaire' => '¿Realmente quieres suprimir este formulario?',
 	'info_supprimer_formulaire_reponses' => 'Hay respuestas asociadas con el formulario. 
-&iquest;Realmente quieres suprimirlo?',
+¿Realmente quieres suprimirlo?',
 
 	// L
 	'lien_retirer_donnee_liante' => 'Retirar el enlace de esta respuesta',
@@ -41,11 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'telecharger_reponses' => 'Descarga las respuestas',
 	'texte_donnee_statut' => 'Estado de esta respuesta',
 	'texte_statut_poubelle' => 'Respuesta suprimida',
-	'texte_statut_prepa' => 'Respuesta en proceso de redacci&oacute;n',
+	'texte_statut_prepa' => 'Respuesta en proceso de redacción',
 	'texte_statut_prop' => 'Respuesta propuesta',
 	'texte_statut_publie' => 'Respuesta publicada',
 	'texte_statut_refuse' => 'Respuesta rehusada',
-	'titre_formulaire' => 'T&iacute;tulo del formulario',
+	'titre_formulaire' => 'Título del formulario',
 	'toutes_tables' => 'Todos los formularios',
 	'type_des_tables' => 'Formularios',
 

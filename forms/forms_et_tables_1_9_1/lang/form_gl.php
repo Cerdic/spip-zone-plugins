@@ -21,12 +21,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_ajouter_donnees' => 'Engadir respostas',
 	'icone_creer_table' => 'Crear un formulario novo',
 	'importer_donnees_csv' => 'Importar as respostas',
-	'info_supprimer_formulaire' => 'Est&aacute; certo de que quere suprimir este formulario ?',
+	'info_supprimer_formulaire' => 'Está certo de que quere suprimir este formulario ?',
 	'info_supprimer_formulaire_reponses' => 'Hai respostas asociadas a este formulario. 
-Est&aacute; certo de que o quere suprimir ?',
+Está certo de que o quere suprimir ?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Retirar a ligaz&oacute;n desde esta resposta',
+	'lien_retirer_donnee_liante' => 'Retirar a ligazón desde esta resposta',
 	'lien_retirer_donnee_liee' => 'Retirar esta resposta',
 
 	// N
@@ -41,11 +41,11 @@ Est&aacute; certo de que o quere suprimir ?',
 	'telecharger_reponses' => 'Descargar as respostas',
 	'texte_donnee_statut' => 'Estado desta resposta',
 	'texte_statut_poubelle' => 'Resposta suprimida',
-	'texte_statut_prepa' => 'Resposta en curso de redacci&oacute;n',
+	'texte_statut_prepa' => 'Resposta en curso de redacción',
 	'texte_statut_prop' => 'Resposta proposta',
 	'texte_statut_publie' => 'Resposta publicada',
 	'texte_statut_refuse' => 'Resposta rexeitada',
-	'titre_formulaire' => 'T&iacute;tulo do formulario',
+	'titre_formulaire' => 'Título do formulario',
 	'toutes_tables' => 'Todos os formularios',
 	'type_des_tables' => 'Formularios',
 

@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_utilisant' => 'Art&iacute;culos que usen esti formulariu',
+	'articles_utilisant' => 'Artículos que usen esti formulariu',
 	'aucune_reponse' => 'Denguna respuesta',
 
 	// C
@@ -18,12 +18,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire' => 'Formulariu',
 
 	// I
-	'icone_ajouter_donnees' => 'A&ntilde;adir les respuestes',
+	'icone_ajouter_donnees' => 'Añadir les respuestes',
 	'icone_creer_table' => 'Crear un nuevu formulariu',
 	'importer_donnees_csv' => 'Importar les respuestes',
-	'info_supprimer_formulaire' => '&iquest;De verd&aacute; quies desaniciar esti formulariu?',
-	'info_supprimer_formulaire_reponses' => 'Hai respuestes asoci&aacute;es con esti formulariu. 
-&iquest;De verd&aacute; quies desanicialu?',
+	'info_supprimer_formulaire' => '¿De verdá quies desaniciar esti formulariu?',
+	'info_supprimer_formulaire_reponses' => 'Hai respuestes asociáes con esti formulariu. 
+¿De verdá quies desanicialu?',
 
 	// L
 	'lien_retirer_donnee_liante' => 'Retirar el enllaz d\'esta respuesta',
@@ -39,13 +39,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'telecharger_reponses' => 'Descargar les respuestes',
-	'texte_donnee_statut' => 'Est&aacute;u d\'esta respuesta',
+	'texte_donnee_statut' => 'Estáu d\'esta respuesta',
 	'texte_statut_poubelle' => 'Respuesta desaniciada',
-	'texte_statut_prepa' => 'Respuesta en cursu de redaici&oacute;n',
+	'texte_statut_prepa' => 'Respuesta en cursu de redaición',
 	'texte_statut_prop' => 'Repuesta propuesta',
 	'texte_statut_publie' => 'Respuesta publicada',
 	'texte_statut_refuse' => 'Respuesta refugada',
-	'titre_formulaire' => 'T&iacute;tulu del formulariu',
+	'titre_formulaire' => 'Títulu del formulariu',
 	'toutes_tables' => 'Toos los formularios',
 	'type_des_tables' => 'Formularios',
 

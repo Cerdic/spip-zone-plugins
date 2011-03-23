@@ -9,48 +9,48 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'articles_utilisant' => 'Articole folosind acest formular',
-	'aucune_reponse' => 'Nici un r&#259;spuns',
+	'aucune_reponse' => 'Nici un răspuns',
 
 	// C
-	'champs_formulaire' => 'C&acirc;mpurile formularului',
+	'champs_formulaire' => 'Câmpurile formularului',
 
 	// F
 	'formulaire' => 'Formular',
 
 	// I
-	'icone_ajouter_donnees' => 'Ad&#259;uga&#355;i r&#259;spunsuri',
-	'icone_creer_table' => 'Crea&#355;i un nou formular',
-	'importer_donnees_csv' => 'Importa&#355;i r&#259;spunsuri',
-	'info_supprimer_formulaire' => 'Vre&#355;i cu adev&#259;rat s&#259; &#351;terge&#355;i acest formular ?',
-	'info_supprimer_formulaire_reponses' => 'Exist&#259; r&#259;spunsuri asociate cu acest forumalar.
- Vre&#355;i cu adev&#259;rat s&#259; &icirc;l &#351;terge&#355;i ?',
+	'icone_ajouter_donnees' => 'Adăugaţi răspunsuri',
+	'icone_creer_table' => 'Creaţi un nou formular',
+	'importer_donnees_csv' => 'Importaţi răspunsuri',
+	'info_supprimer_formulaire' => 'Vreţi cu adevărat să ştergeţi acest formular ?',
+	'info_supprimer_formulaire_reponses' => 'Există răspunsuri asociate cu acest forumalar.
+ Vreţi cu adevărat să îl ştergeţi ?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Retrage&#355;i leg&#259;tura de la acest r&#259;spuns',
-	'lien_retirer_donnee_liee' => 'Retrage&#355;i acest r&#259;spuns',
+	'lien_retirer_donnee_liante' => 'Retrageţi legătura de la acest răspuns',
+	'lien_retirer_donnee_liee' => 'Retrageţi acest răspuns',
 
 	// N
-	'nombre_reponses' => '@nombre@ r&#259;spunsuri',
+	'nombre_reponses' => '@nombre@ răspunsuri',
 	'nouveau_formulaire' => 'Formular nou',
 
 	// S
-	'suivi_reponses' => 'Vede&#355;i r&#259;spunsurile',
-	'supprimer_formulaire' => '&#350;terge&#355;i acest forumlar',
+	'suivi_reponses' => 'Vedeţi răspunsurile',
+	'supprimer_formulaire' => 'Ştergeţi acest forumlar',
 
 	// T
-	'telecharger_reponses' => 'Desc&#259;rca&#355;i r&#259;spunsurile',
-	'texte_donnee_statut' => 'Starea acestui r&#259;spuns',
-	'texte_statut_poubelle' => 'R&#259;spuns &#351;ters',
-	'texte_statut_prepa' => 'R&#259;spuns &icirc;n curs de redactare',
-	'texte_statut_prop' => 'R&#259;spuns propus',
-	'texte_statut_publie' => 'R&#259;spuns publicat',
-	'texte_statut_refuse' => 'R&#259;spuns refuzat',
+	'telecharger_reponses' => 'Descărcaţi răspunsurile',
+	'texte_donnee_statut' => 'Starea acestui răspuns',
+	'texte_statut_poubelle' => 'Răspuns şters',
+	'texte_statut_prepa' => 'Răspuns în curs de redactare',
+	'texte_statut_prop' => 'Răspuns propus',
+	'texte_statut_publie' => 'Răspuns publicat',
+	'texte_statut_refuse' => 'Răspuns refuzat',
 	'titre_formulaire' => 'Titlul formularului',
 	'toutes_tables' => 'Toate formularele',
 	'type_des_tables' => 'Formulare',
 
 	// U
-	'une_reponse' => 'Un r&#259;spuns'
+	'une_reponse' => 'Un răspuns'
 );
 
 ?>
