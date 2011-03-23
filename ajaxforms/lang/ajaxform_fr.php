@@ -6,14 +6,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_fichier_recu' => 'Vous devez s&eacute;lectionner un fichier.',
+	'aucun_fichier_recu' => 'Vous devez sélectionner un fichier.',
 
 	// C
 	'changer_document' => 'Changer le document',
-	'confirmer_suppression' => 'La suppression a &eacute;t&eacute; effectu&eacute;e.',
+	'confirmer_suppression' => 'La suppression a été effectuée.',
 
 	// D
-	'document_ajoute' => 'Le document a &eacute;t&eacute; ajout&eacute;.',
+	'document_ajoute' => 'Le document a été ajouté.',
 
 	// E
 	'erreur_ajout_document' => 'Une erreur est survenue lors de l\'ajout du document.',
@@ -21,10 +21,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'logo' => 'Logo',
 	'logo_maj' => 'Le logo a &eacute;t&eacute; mis à jour.',
-	'logo_survol' => 'Logo survol&eacute;',
+	'logo_survol' => 'Logo survolé',
 
 	// M
-	'mauvaise_reception' => 'Oups ! Erreur dans la r&eacute;ception du fichier. R&eacute;essayez...'
+	'mauvaise_reception' => 'Oups ! Erreur dans la réception du fichier. Réessayez...'
 );
 
 ?>

@@ -15,18 +15,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_suppression' => 'El desaniciu ta fechu.',
 
 	// D
-	'document_ajoute' => 'S\'amest&oacute; el documentu.',
+	'document_ajoute' => 'S\'amestó el documentu.',
 
 	// E
 	'erreur_ajout_document' => 'Hebo un error al amestar el documentu.',
 
 	// L
 	'logo' => 'Logo',
-	'logo_maj' => 'El logo s\'anov&oacute;.',
+	'logo_maj' => 'El logo s\'anovó.',
 	'logo_survol' => 'Logo de pasu del mur',
 
 	// M
-	'mauvaise_reception' => '&iexcl;Ui! Error na receici&oacute;n de ficheru. Vuelvi a tentalo...'
+	'mauvaise_reception' => '¡Ui! Error na receición de ficheru. Vuelvi a tentalo...'
 );
 
 ?>

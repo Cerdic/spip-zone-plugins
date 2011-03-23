@@ -8,22 +8,22 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_fichier_recu' => 'Sie m&uuml;ssen eine Datei ausw&auml;hlen.',
+	'aucun_fichier_recu' => 'Sie müssen eine Datei auswählen.',
 
 	// C
-	'changer_document' => 'Dokument &auml;ndern',
-	'confirmer_suppression' => 'L&ouml;schen ausgef&uuml;hrt',
+	'changer_document' => 'Dokument ändern',
+	'confirmer_suppression' => 'Löschen ausgeführt',
 
 	// D
-	'document_ajoute' => 'Dokument hinzugef&uuml;gt',
+	'document_ajoute' => 'Dokument hinzugefügt',
 
 	// E
-	'erreur_ajout_document' => 'Beim Hinzuf&uuml;gen des Dokuments ist ein Fehler aufgetreten.',
+	'erreur_ajout_document' => 'Beim Hinzufügen des Dokuments ist ein Fehler aufgetreten.',
 
 	// L
 	'logo' => 'Logo',
 	'logo_maj' => 'Logo aktualisiert',
-	'logo_survol' => 'Logo ber&uuml;hrt',
+	'logo_survol' => 'Logo berührt',
 
 	// M
 	'mauvaise_reception' => 'Ups! Fehler beim Empfang der Datei. Bitte noch einmal versuchen ...'
