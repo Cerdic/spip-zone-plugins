@@ -73,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_code_langue_existant' => 'Cette variante de langue existe d&eacute;j&agrave; pour ce module',
 'erreur_code_langue_invalide' => 'Ce code de langue est invalide',
 'erreur_code_langue_vide' => 'Le code de langue est obligatoire',
+'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
 
 
 // G
@@ -116,9 +117,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_langues_dispo_module_langue' => 'Langues d&eacute;j&agrave; disponibles pour ce module',
 'label_nommodule' => 'Personnaliser le nom du module',
 'label_repertoire_module_langue' => 'R&eacute;pertoire du module',
+'label_synchro_base_fichier' => 'Synchroniser la base et les fichiers',
 'label_tradlang_status' => 'Statut de la traduction',
 'label_tradlang_str' => 'Cha&icirc;ne traduite',
-'label_synchro_base_fichier' => 'Synchroniser la base et les fichiers',
 'label_update_langues_cible_mere' => 'Mettre &agrave; jour cette langue dans la base',
 'lancerimport' => 'Lancer import',
 'languesdispo' => 'Langues disponibles',
@@ -250,7 +251,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // Z
-'zz_timestamp_nepastraduire' => '2009-11-06 03:47:01'
+'zz_timestamp_nepastraduire' => ''
 
 );
 

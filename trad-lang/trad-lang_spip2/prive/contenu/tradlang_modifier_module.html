@@ -1,4 +1,13 @@
 #CACHE{0}
+<BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{nom_mod}}>
 <div>
 	#FORMULAIRE_TRADLANG_MODIFIER_MODULE{#ENV{nom_mod}}
 </div>
+</BOUCLE_module>
+</B_module>
+<div>
+	<div class="formulaire_spip">
+		<p class="erreur_message"><:tradlang:erreur_module_inconnu:></p>
+	</div>
+</div>
+<//B_module>

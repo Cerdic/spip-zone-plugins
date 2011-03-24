@@ -98,11 +98,6 @@ function tradlang_visumodule(){
 		return false;
 	
 	$modules = tradlang_getmodules_base();
-		
-	if (!isset($modules[$module]))
-		return;
-	
-	$modok = $modules[$module];
 	
 	debut_cadre_relief("", false, "", _T('tradlang:visumodule'));
 	
@@ -110,10 +105,10 @@ function tradlang_visumodule(){
 	
 	fin_cadre_relief();
 	
+	if (isset($modules[$module])){
 	debut_cadre_relief("", false, "", _T('tradlang:infos_trad_module'));
-	
-	echo recuperer_fond('prive/infos/tradlang_infos_module',array('module'=>$modok['nom_mod']));
-	 
+		echo recuperer_fond('prive/infos/tradlang_infos_module',array('module'=>$modules[$module]['nom_mod']));
 	fin_cadre_relief();
+	}
 }
 ?>
