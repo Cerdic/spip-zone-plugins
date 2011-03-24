@@ -28,11 +28,14 @@ function noizetier_recuperer_fond($flux){
 		if ($composition!='' AND noizetier_page_composition($fond)=='' AND noizetier_page_type($fond)!='page')
 			$fond .= '-'.$composition;
 		
-		if (in_array($fond,noizetier_lister_blocs_avec_noisettes())) {
-			$contexte = $flux['data']['contexte'];
-			$contexte['bloc'] = substr($fond,0,strpos($fond,'/'));
-			$complements = recuperer_fond('noizetier-generer-bloc',$contexte,array('raw'=>true));
-			$flux['data']['texte'] .= $complements['texte'];
+		// Tester l'installation du noizetier pour éviter un message d'erreur à l'installation
+		if (isset($GLOBALS['meta']['noizetier_base_version'])) {
+			if (in_array($fond,noizetier_lister_blocs_avec_noisettes())) {
+				$contexte = $flux['data']['contexte'];
+				$contexte['bloc'] = substr($fond,0,strpos($fond,'/'));
+				$complements = recuperer_fond('noizetier-generer-bloc',$contexte,array('raw'=>true));
+				$flux['data']['texte'] .= $complements['texte'];
+			}
 		}
 	}
 	return $flux;
