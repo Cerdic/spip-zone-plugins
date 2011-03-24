@@ -8,7 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte' => 'Visualitzaci&oacute; compacta de la llista d\'articles',
+	'affichage_edition_seule' => 'Visualització dels articles només en mode edició',
+	'affichage_liste_compacte' => 'Visualització compacta de la llista d\'articles',
 
 	// C
 	'changer_langue' => 'Canviar la llengua de l\'article',
@@ -17,19 +18,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fermer' => 'Tancar',
 
 	// L
-	'lier_traduction' => 'Vincular una traducci&oacute;',
+	'lier_traduction' => 'Vincular una traducció',
 
 	// M
 	'modifier_options_langue' => 'opcions',
 
 	// N
-	'necesite_afficher_objet' => 'Per poder utiiltzar aquesta funci&oacute; heu d\'instal&middot;lar el connector',
+	'necesite_afficher_objet' => 'Per poder utiiltzar aquesta funció heu d\'instal·lar el connector',
 
 	// O
 	'options' => 'Opcions', # MODIF
 
 	// T
-	'titre_plugin' => 'Traducci&oacute; d\'articles d\'una altra manera',
+	'titre_plugin' => 'Traducció d\'articles d\'una altra manera',
 	'traductions' => 'Traduccions',
 
 	// V

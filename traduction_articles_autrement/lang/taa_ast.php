@@ -8,28 +8,29 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_liste_compacte' => 'Presentaci&oacute;n compauta de les llistes d\'art&iacute;culos',
+	'affichage_edition_seule' => 'Amosar los artículos namái en mou d\'edición',
+	'affichage_liste_compacte' => 'Presentación compauta de les llistes d\'artículos',
 
 	// C
-	'changer_langue' => 'Camudar la llingua del art&iacute;culu',
+	'changer_langue' => 'Camudar la llingua del artículu',
 
 	// F
 	'fermer' => 'Zarrar',
 
 	// L
-	'lier_traduction' => 'Axuntar una traducci&oacute;n',
+	'lier_traduction' => 'Axuntar una traducción',
 
 	// M
 	'modifier_options_langue' => 'opciones',
 
 	// N
-	'necesite_afficher_objet' => 'Pa poder utilizar esta funci&oacute;n tienes d\'instalar el complementu',
+	'necesite_afficher_objet' => 'Pa poder utilizar esta función tienes d\'instalar el complementu',
 
 	// O
 	'options' => 'Camudar les opciones de llingua',
 
 	// T
-	'titre_plugin' => 'Traducci&oacute;n d\'art&iacute;culos d\'otra miente',
+	'titre_plugin' => 'Traducción d\'artículos d\'otra miente',
 	'traductions' => 'Traducciones',
 
 	// V

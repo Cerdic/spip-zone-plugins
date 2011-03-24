@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'affichage_edition_seule' => 'Affichage des articles seulement en mode édition',
 	'affichage_liste_compacte' => 'Affichage compacte des liste des articles',
 
 	// C
@@ -33,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'traductions' => 'Traductions',
 
 	// V
-	'voir_traductions' => 'Voir le d&eacute;tail des traductions'
+	'voir_traductions' => 'Voir le détail des traductions'
 );
 
 ?>

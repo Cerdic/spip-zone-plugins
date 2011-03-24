@@ -8,6 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'affichage_edition_seule' => 'Modus Artikel direkt bearbeiten - ohne Vorschau', # MODIF
 	'affichage_liste_compacte' => 'Kompakte Artikel Liste',
 
 	// C
@@ -26,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'necesite_afficher_objet' => 'Diese Fuktion erfordert die Installierung des Plugins',
 
 	// O
-	'options' => '<MODIF>Sprachoptionen ver&auml;ndern',
+	'options' => '<MODIF>Sprachoptionen verändern',
 
 	// T
 	'titre_plugin' => 'Artikel Übersetzung mal Anders',
