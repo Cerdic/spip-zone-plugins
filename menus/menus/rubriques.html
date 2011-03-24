@@ -3,7 +3,6 @@
 [(#SET{niveau_max, #ENV{niveau}|intval|?{#ENV{niveau},1000}})]
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
-
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
 	<div class="titre">#GET{titre}</div>
@@ -22,7 +21,7 @@
 		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
-			<BOUCLE_test_niveau(CONDITION){si #GET{niveau_max}|>={#GET{niveau_actuel}}}>
+			<BOUCLE_test_niveau(CONDITION){si #GET{niveau_max}|>{#GET{niveau_actuel}}}>
 			<B_sous_rubriques>
 			<ul class="menu-liste">
 				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
