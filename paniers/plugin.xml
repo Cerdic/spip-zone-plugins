@@ -1,59 +1,45 @@
 <plugin>
-
-	<nom>Paniers - Ajoute une gestion de panier a votre site SPIP !</nom>
-
-	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
-
-	<icon>img/picto_spip_paniers.png</icon>
-
-	<licence>GNU/GPL</licence>
-
-	<version>0</version>
-
+	<nom>Paniers</nom>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
 	<etat>dev</etat>
-
-	<description>
-Ce plugin permet de g&eacute;rer des s&eacute;lections d'articles, par des auteurs. Il n&eacute;cessite le plugin Catalogue pour la s&eacute;lection d'articles, et le plugin Comptes et Contacts pour la gestion des personnes.</description>
+	<description>Permet de créer des sélections d'objets ayant un prix.</description>
+	<icon>images/paniers-48.png</icon>
+	<categorie>divers</categorie>
 	
 	<prefix>paniers</prefix>
+	
+	<install>base/paniers_installation.php</install>
 	
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
 		<inclure>paniers_fonctions.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/paniers_tables.php</inclure>
 	</pipeline>
-	
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/paniers_tables.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/paniers_tables.php</inclure>
 	</pipeline>
-
-	
-	<install>base/paniers_upgrade.php</install>
-	
-	<fonctions>paniers_fonctions.php</fonctions>
-	
-	<options>paniers_options.php</options>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/paniers_autoriser.php</inclure>
+	</pipeline>	
 	
 	<bouton id='paniers' parent='naviguer'>
 		<icone>img/picto_spip_paniers.png</icone>
 		<titre>paniers:paniers</titre>
 	</bouton>
 
-	<pipeline>
-		<nom>autoriser</nom>
-		<inclure>paniers_autorisations.php</inclure>
-	</pipeline>	
-	
-	<necessite id="SPIP" version="[2.0.10;]" />
-	<necessite id="catalogue" version="[1.0;]" />	
-	<necessite id="comptes" version="[1.0;]" />
-	
-	<categorie>divers</categorie>
-
+	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="prix" version="[0.1;]" />	
 </plugin>
