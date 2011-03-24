@@ -5,11 +5,11 @@
 		<BOUCLE_mot(MOTS){id_syndic}{par num titre, titre}>
 			<h3>[(#TYPE|supprimer_numero)]</h3>
 			<ul class="liste-items">
-					<BOUCLE_mots(MOTS){id_groupe}{id_syndic}{par num titre, titre}{doublons}>
-				<li class="item">
+				<BOUCLE_mots(MOTS){id_groupe}{id_syndic}{par num titre, titre}{doublons}>
+					<li class="item">
 					<a href="#URL_MOT">[(#TITRE|supprimer_numero|ucfirst)]</a>
 					<BOUCLE_site_mot1(SITES) {id_mot}> </BOUCLE_site_mot1>([(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:site,annuaire:sites})])</B_site_mot1>
-				</li>
+					</li>
 				</BOUCLE_mots>
 				</ul>
 		</BOUCLE_mot>
@@ -18,12 +18,12 @@
 		<BOUCLE_mot1(GROUPES_MOTS){par num titre, titre}{titre !IN _META,Affichage,#CONFIG{annuaire_colonne/groupe_mots}}>
 			<h3>[(#TITRE|supprimer_numero)]</h3>
 			<ul class="liste-items">
-					<BOUCLE_mots2(MOTS){id_groupe}{par num titre, titre}{id_syndic>0}>
-				<li class="item">
+				<BOUCLE_mots2(MOTS){id_groupe}{par num titre, titre}{id_syndic>0}>
+					<li class="item">
 					<a href="#URL_MOT">[(#TITRE|supprimer_numero|ucfirst)]</a>
 					<BOUCLE_site_mot2(SITES) {id_mot}> </BOUCLE_site_mot2>([(#TOTAL_BOUCLE|singulier_ou_pluriel{annuaire:site,annuaire:sites})])</B_site_mot2>
-				</li>
-					</BOUCLE_mots2>
+					</li>
+				</BOUCLE_mots2>
 			</ul>
 		</BOUCLE_mot1>
 	<//B_mot>
