@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2008 Pierre Cassat (piero DOT wbmstr AT gmail DOT com || http://creadesignweb.free.fr)
+ * Copyright (c) 2008 Pierre Cassat (piero DOT wbmstr AT gmail DOT com || http://trac.ateliers-pierrot.fr/)
  * Licensed under GPL (http://www.opensource.org/licenses/gpl-license.php) license.
  */
 
