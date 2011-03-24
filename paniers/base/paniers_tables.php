@@ -46,7 +46,7 @@ function paniers_declarer_tables_auxiliaires($tables_auxiliaires){
 	//-- Table de relations des paniers avec les objets
 	$spip_paniers_liens = array(
 		'id_panier' => 'bigint(21) not null default 0',
-		'id_objet' => 'bigint(21) not null default 0'
+		'id_objet' => 'bigint(21) not null default 0',
 		'objet' => 'varchar(25) not null default ""',
 	);
 	
