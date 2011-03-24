@@ -48,6 +48,7 @@ function paniers_declarer_tables_auxiliaires($tables_auxiliaires){
 		'id_panier' => 'bigint(21) not null default 0',
 		'id_objet' => 'bigint(21) not null default 0',
 		'objet' => 'varchar(25) not null default ""',
+		'quantite' => 'int not null default 1',
 	);
 	
 	$spip_paniers_liens_cles = array(
