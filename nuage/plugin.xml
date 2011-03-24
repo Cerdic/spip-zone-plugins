@@ -25,6 +25,10 @@
 	</icon>
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
+		<nom>insert_head_css</nom> 
+		<inclure>nuage_options.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>nuage_options.php</inclure>
 	</pipeline>
