@@ -15,7 +15,7 @@
 		<inclure>base/tradlang.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>declarer_tables_principales</nom>
+		<nom>declarer_tables_objets_sql</nom>
 		<inclure>base/tradlang.php</inclure>
 	</pipeline>
 	<pipeline>
