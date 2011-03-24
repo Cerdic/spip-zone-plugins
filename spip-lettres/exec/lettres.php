@@ -273,6 +273,15 @@
 				$res.='<li>'._T('lettresprive:nb_annules').' : '.$lettre->calculer_nb_envois('annule').'/'.$lettre->calculer_nb_envois().'</li>';
 			if ($lettre->calculer_nb_envois('echec'))
 				$res.='<li>'._T('lettresprive:nb_echecs').' : '.$lettre->calculer_nb_envois('echec').'/'.$lettre->calculer_nb_envois().'</li>';
+			if ($nt = $lettre->calculer_nb_envois_hors_abo()) {
+				$res.= '<li><strong>Hors abo</strong></li>';
+				if ($n=$lettre->calculer_nb_envois_hors_abo('envoye'))
+					$res.='<li>'._T('lettresprive:nb_envois')." : $n/$nt</li>";
+				if ($n=$lettre->calculer_nb_envois_hors_abo('annule')) // pas prévu pour l'instant
+					$res.='<li>'._T('lettresprive:nb_annules')." : $n/$nt</li>";
+				if ($n=$lettre->calculer_nb_envois_hors_abo('echec'))
+					$res.='<li>'._T('lettresprive:nb_echecs')." : $n/$nt</li>";
+			};
 			$res.='</ul>';
 			$res.='</li>';
 			$res.='<li>';

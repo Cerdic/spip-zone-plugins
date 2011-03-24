@@ -93,6 +93,7 @@ function lettres_envoyer_une_lettre_email ($id_lettre, $email, $champs=array(), 
 	if ($envoyer_mail($email, $objet, $corps)) {
 		spip_log("OK Envoi lettre email $id_lettre -> $email",
 				'lettres_delivrer_ok');
+		$lettre->enregistrer_envoi_hors_abo('envoye');			
 		if (lettres_envois_restants($id_lettre)<=1)
 			$lettre->enregistrer_statut('envoyee');
 	}
@@ -107,7 +108,10 @@ function lettres_envoyer_une_lettre_email ($id_lettre, $email, $champs=array(), 
 		 // si reprogrammé, enregistrer l'echec
 		spip_log("RETRY#$try Envoi lettre email $id_lettre -> $email",
 				'lettres_delivrer_fail');
-	else // sinon, abandon
-		spip_log("FAIL Envoi lettre email $id_lettre -> $email",'lettres_delivrer_fail');
+	else { // sinon, abandon
+		spip_log("FAIL Envoi lettre email $id_lettre à $email",'lettres_delivrer_fail');
+		$lettre->enregistrer_envoi_hors_abo('echec');
+	};
 }
+
 ?>

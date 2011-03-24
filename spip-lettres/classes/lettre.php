@@ -12,13 +12,20 @@
 	 *  
 	 **/
 
-
 	include_spip('lettres_fonctions');
 	include_spip('public/assembler');
 	include_spip('inc/distant');
 	include_spip('inc/rubriques');
 	include_spip('base/lettres');
 	include_spip('classes/abonne');
+
+// define ('_LETTRES_STATS_ENVOIS_HORS_ABO', 'spip_lettres_statistiques_hors_abo');
+//
+// Pour les stats sur les lettres hors abo, créer et référencer ici une table avec 
+// - id_lettre, 
+// - statut('envoye', 'annule' (inutilise), 'echec'), 
+// - nb_envois 
+// - periode (mois) ? non.
 
 	/**
 	 * lettre - classe pour la gestion des lettres
@@ -44,7 +51,6 @@
 		var $statut = 'brouillon';
 
 		var $existe = false;
-
 
 		/**
 		 * lettre : constructeur
@@ -383,12 +389,28 @@
 			calculer_langues_rubriques();
 		}
 
-
 		function supprimer_article($id_article) {
 			sql_delete('spip_articles_lettres', 'id_article='.intval($id_article).' AND id_lettre='.intval($this->id_lettre));
 		}
-		
-		
-	}
 
+		function enregistrer_envoi_hors_abo ($statut) {
+			if (defined ('_LETTRES_STATS_ENVOIS_HORS_ABO')) 
+			{
+				if (!sql_countsel(_LETTRES_STATS_ENVOIS_HORS_ABO, array("id_lettre=".$this->id_lettre, "statut='$statut'")))
+					sql_insertq(_LETTRES_STATS_ENVOIS_HORS_ABO, array('id_lettre' => $this->id_lettre, 'statut' =>$statut, 'nb_envois' => 1));
+				else
+					sql_update (_LETTRES_STATS_ENVOIS_HORS_ABO, array ('nb_envois'=>'nb_envois+1'), array("id_lettre=".$this->id_lettre, "statut='$statut'"));
+			}
+		}
+		
+		function calculer_nb_envois_hors_abo($statut='') {
+			if (!defined('_LETTRES_STATS_ENVOIS_HORS_ABO'))
+				return 0;
+			if ($statut)
+				return sql_getfetsel ("SUM(nb_envois)", _LETTRES_STATS_ENVOIS_HORS_ABO, array("id_lettre=".intval($this->id_lettre),"statut='$statut'"));
+			else return sql_getfetsel ("SUM(nb_envois)", _LETTRES_STATS_ENVOIS_HORS_ABO, array("id_lettre=".intval($this->id_lettre)));
+		}
+	
+
+	}
 ?>
