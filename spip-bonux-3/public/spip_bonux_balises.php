@@ -130,62 +130,6 @@ function calculer_balise_criteres($nom, $p, $motif="") {
   return $p;
 }
 
-
-
-
-/**
- * Savoir si on objet est publie ou non
- *
- * @param <type> $p
- * @return <type>
- */
-function balise_PUBLIE_dist($p) {
-
-	$type = $p->type_requete;
-
-	$_statut = champ_sql('statut',$p);
-
-
-	$_texte = champ_sql('texte', $p);
-	$_descriptif = "''";
-
-	switch ($type){
-		case 'articles':
-			$p->code = "$_statut=='publie'";
-			if ($GLOBALS['meta']["post_dates"] == 'non'){
-				$_date_pub = champ_sql('date',$p);
-				$p->code .= "AND $_date_pub<quete_date_postdates()";
-			}
-			break;
-		case 'auteurs':
-			$_id = champ_sql('id_auteur',$p);
-			$p->code = "sql_countsel('spip_articles AS AR JOIN spip_auteurs_articles AS AU ON AR.id_article=AU.id_article',
-				'AU.id_auteur=intval('.$_id.') AND AR.statut=\'publie\''"
-				.(($GLOBALS['meta']['post_dates'] == 'non')?".' AND AR.date<'.sql_quote(quete_date_postdates())":'')
-			.")>0";
-			break;
-		// le cas des documents prend directement en compte la mediatheque
-		// car le fonctionnement par defaut de SPIP <=2.0 est trop tordu et insatisfaisant
-		case 'documents':
-			$p->code = "$_statut=='publie'";
-			if ($GLOBALS['meta']["post_dates"] == 'non'){
-				$_date_pub = champ_sql('date_publication',$p);
-				$p->code .= "AND $_date_pub<quete_date_postdates()";
-			}
-			break;
-		default:
-			$p->code = "($_statut=='publie'?' ':'')";
-			break;
-	}
-
-	$p->code = "((".$p->code.")?' ':'')";
-
-	#$p->interdire_scripts = true;
-	return $p;
-}
-
-
-
 /**
  * Produire un fichier statique a partir d'un squelette dynamique
  * Permet ensuite a apache de le servir en statique sans repasser
