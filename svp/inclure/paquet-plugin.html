@@ -82,15 +82,17 @@
 	</ul>]
 	<br class="nettoyeur" />
 	
-	[<ul class="bloc_infos">
+
+[(#TRADUCTIONS|unserialize|count|>{0}|?{
+	[(#TRADUCTIONS|unserialize|iterer_modele{paquet-traductions})],
+	<ul class="bloc_infos">
 		<li class="liste-items">
-			<div class="unit size30"><strong><:svp:label_resume_traductions:></strong></div>
-			<div class="unit size70 lastUnit">(#TRADUCTIONS|svp_afficher_traductions{resume})</div>
+			<div class="unit size30"><strong><:svp:label_module:></strong></div>
+			<div class="unit size70 lastUnit"><:svp:info_aucun_module:></div>
 		</li>
-	</ul>]
-	<br class="nettoyeur" />
-	[(#TRADUCTIONS|unserialize|iterer_modele{paquet-traductions})]
-	
+	</ul>
+	<br class="nettoyeur" />}
+)]
 </BOUCLE_paquet>
 	<br class="nettoyeur" />
 </div>
