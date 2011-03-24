@@ -42,6 +42,6 @@
 		<nom>autoriser</nom>
 		<inclure>tradlang_autoriser.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.9;]" />
-	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="SPIP" version="[2.3.0-dev;)" />
+	<necessite id="revisions" version="[1.4.1;]" />
 </plugin>
