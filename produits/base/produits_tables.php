@@ -27,7 +27,7 @@ function produits_declarer_tables_principales($tables_principales){
 		'descriptif' => 'text not null default ""',
 		'texte' => 'text not null default ""',
 		'prix_ht' => 'float not null default 0',
-		'taxe' => 'decimal(4,3)',
+		'taxe' => 'decimal(4,3) default null',
 		'statut' => 'varchar(10)',
 		'lang' => 'varchar(10) not null default ""',
 		'date' => 'datetime not null default "0000-00-00 00:00:00"',
