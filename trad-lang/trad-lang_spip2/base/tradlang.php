@@ -20,7 +20,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'texte_retour' => 'icone_retour',
 		'titre' => 'nom_module',
 		'field'=> array(
-			"idmodule" => "bigint(21) NOT NULL",
+			"idmodule" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"nom_module" => "varchar(128) NOT NULL",
 			"nom_mod" => "varchar(16) NOT NULL",
 			"lang_mere" => "varchar(16) NOT NULL default 'fr'",
@@ -49,7 +49,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'titre' => 'id, lang',
 		'date' => 'date_modif',
 		'field'=> array(
-			"id_tradlang" => "bigint(21) NOT NULL",
+			"id_tradlang" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"id" => "varchar(128) NOT NULL default ''",
 			"module" => "varchar(32) NOT NULL default 0",
 			"lang" => "varchar(16) NOT NULL default ''",

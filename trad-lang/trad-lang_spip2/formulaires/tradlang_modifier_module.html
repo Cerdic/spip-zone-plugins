@@ -35,6 +35,11 @@
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{codelangue})</span>]
 				<input type='text' size='8' class='text' id='codelangue' name='codelangue' value='#ENV{codelangue}' />
 			</li>
+			<li class='editer_texte[(#ENV{erreurs}|table_valeur{texte}|oui)erreur]'>
+				<label for='texte'><:tradlang:label_texte:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{texte})</span>]
+				<textarea id='texte_module' name='texte' cols='40' rows='15' class='text'>#ENV*{texte}</textarea>
+			</li>
 		</ul>
 		<p class='boutons'>
 			<input type='submit' class='submit' value='<:bouton_valider:>' />

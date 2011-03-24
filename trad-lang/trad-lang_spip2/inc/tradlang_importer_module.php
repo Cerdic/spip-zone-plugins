@@ -51,11 +51,14 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 	array_unshift($langues_module, $module['lang_mere']);
 	array_unique($langues_module);
 	foreach($langues_module as $langue){
+		$chs = null;
 		$fichier = $module_choisi[$langue]['fichier'];
-		
+		spip_log($fichier,'tradlang');
 		$orig = 0;
-		if ($langue == $module['lang_mere'])
+		if ($langue == $module['lang_mere']){
+			spip_log('insertion de la langue mère','tradlang');
 			$orig = 1;
+		}
 			
 		$ret .= _T('tradlang:insertionlangue')." : ".$langue."<br />";
 		$nom_fichier = _DIR_RACINE.$module['dir_lang']."/".$fichier;
@@ -72,6 +75,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		// nettoyer le contenu de ses <MODIF>
 		$status = array();
 		foreach($chs as $id=>$v) {
+			spip_log("$id => $v",'tradlang');
 			if (preg_match(',^<(MODIF|NEW|PLUS_UTILISE)>,US', $v, $r)) {
 				$chs[$id] = preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $v);
 				$status[$id] = $r[1];
@@ -97,6 +101,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 					array_merge(array_keys($existant), array_keys($chs))
 				) as $id) {
 			if (isset($chs[$id]) AND !isset($existant[$id])){
+				spip_log('cas 1','tradlang');
 				unset($md5);
 				if ($orig) {
 					$md5 = md5($chs[$id]);
@@ -127,6 +132,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 			else
 			// * chaine existante
 			if (isset($chs[$id]) AND isset($existant[$id])){
+				spip_log('cas 2','tradlang');
 				// * identique ? => NOOP
 				$md5 = md5($chs[$id]);
 				if ($md5 == $existant[$id]) {
@@ -153,6 +159,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 			else
 			// * chaine supprimee
 			if (!isset($chs[$id]) AND isset($existant[$id])){
+				spip_log('cas 3','tradlang');
 				// mettre au grenier
 				sql_updateq("spip_tradlang",array(
 					'id' => $nom_mod.'_'.$id,
@@ -160,8 +167,10 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				$supprimees++;
 			}
 
-			if ($orig AND isset($chs[$id]))
+			if ($orig AND isset($chs[$id])){
+				spip_log('cas 4','tradlang');
 				$liste_id_orig[$id]=md5($chs[$id]);
+			}
 		}
 		
 		/**

@@ -1,4 +1,4 @@
-<BOUCLE_langue_mere(TRADLANG_MODULES){nom_mod=#ENV{module}}>
+<BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}> module trouvé
 #SET{str_mere,#ARRAY}
 <BOUCLE_revise(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}{par id}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
 #SET{total_mere,#GRAND_TOTAL}
@@ -97,4 +97,9 @@
 	</tbody>
 </table>
 </B_revise_en_trop>
-</BOUCLE_langue_mere>
+</BOUCLE_module>
+</B_module>
+<div class="formulaire_spip">
+	<p class="message_erreur"><:tradlang:erreur_module_inconnu:></p>
+</div>
+<//B_module>

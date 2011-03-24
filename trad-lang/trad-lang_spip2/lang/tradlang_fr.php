@@ -70,10 +70,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // E
 'entrerlangue' => 'Ajouter un code langue',
+'erreur_aucun_module' => 'Il n\'y a pas de modules disponibles dans la base.',
 'erreur_code_langue_existant' => 'Cette variante de langue existe d&eacute;j&agrave; pour ce module',
 'erreur_code_langue_invalide' => 'Ce code de langue est invalide',
 'erreur_code_langue_vide' => 'Le code de langue est obligatoire',
 'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
+'erreur_pas_langue_cible' => 'S&eacute;lectionnez une langue cible',
 
 
 // G

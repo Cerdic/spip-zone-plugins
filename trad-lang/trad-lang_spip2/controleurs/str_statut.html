@@ -12,8 +12,7 @@
 	<label><:tradlang:label_tradlang_status:></label>
 	<select class="text crayon_active" name="#ENV{name_status}">
 		<option value=""[(#STATUS|=={''}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
-		<option value="NEW"[(#STATUS|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
-		<option value="MODIF"[(#STATUS|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+		<option value="MODIF"[(#STATUS|=={MODIF}|ou{#STATUS|=={NEW}}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
 	</select>
 </li>
 <li class="editer_str">

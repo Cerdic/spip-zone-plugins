@@ -24,6 +24,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 				$lg = $langue["lang"];
 				$fichiers[$lg] = $nom_mod."_".$lg.".php";
 				foreach($fichiers as $key => $fichier){
+					spip_log("synchro $key => $fichier",'tradlang');
 					$chemin_fichier = _DIR_RACINE.$module['dir_lang'].'/'.$fichier;
 					/**
 					 * On récupère la date de modification du fichier sur le disque
@@ -44,11 +45,11 @@ function action_tradlang_synchro_base_fichier_dist(){
 					 * (celui sur lequel travaille le développeur)
 					 */
 					else if($key == $module['lang_mere']){
-						spip_log("$key est la lang_mere");
+						spip_log("$key est la lang_mere",'tradlang');
 						include($chemin_fichier);
 						$chs = $GLOBALS[$GLOBALS['idx_lang']];
 						$ts_synchro = $chs["zz_timestamp_nepastraduire"];
-						spip_log("TIMESTAMP synchro : $ts_synchro");
+						spip_log("TIMESTAMP synchro : $ts_synchro",'tradlang');
 						// Comparer le contenu de la base avec le contenu du fichier
 						$contenu_base = sql_select('id,str','spip_tradlang','module='.sql_quote($nom_mod).' AND lang='.sql_quote($lg),'','id ASC');
 						while($contenu_element = sql_fetch($contenu_base)){
@@ -56,25 +57,25 @@ function action_tradlang_synchro_base_fichier_dist(){
 						}
 						unset($array_contenu['zz_timestamp_nepastraduire']);
 						unset($chs['zz_timestamp_nepastraduire']);
-						spip_log(count($chs));
-						spip_log(count($array_contenu));
+						spip_log(count($chs),'tradlang');
+						spip_log(count($array_contenu),'tradlang');
 						if($diff = array_diff_assoc($chs,$array_contenu)){
-							spip_log("Count diff");
-							spip_log(count($diff));
-							spip_log("Array diff");
-							spip_log($diff);
+							spip_log("Count diff",'tradlang');
+							spip_log(count($diff),'tradlang');
+							spip_log("Array diff",'tradlang');
+							spip_log($diff,'tradlang');
 							$import = charger_fonction('tradlang_importer_module','inc');
 							$import($module);
-							spip_log("Mise à jour de la base avec le contenu du module $nom_mod");
+							spip_log("Mise à jour de la base avec le contenu du module $nom_mod",'tradlang');
 						}
 						else{
 							$ts_base = sql_getfetsel('ts','spip_tradlang','module='.sql_quote($nom_mod).' AND lang='.sql_quote($lg),'','ts DESC','0,1');
-							spip_log("TIMESTAMP base : $ts_base");
+							spip_log("TIMESTAMP base : $ts_base",'tradlang');
 							
 							/**
 							 * Cas où la base est plus récente que le ts incorporé dans le fichier
 							 **/
-							if($ts_synchro && ($ts_synchro < $ts_base)){
+							if($ts_synchro < $ts_base){
 								/**
 								 * Cas simple :
 								 * - Le fichier est un fichier généré par tradlang car $ts_synchro
@@ -83,25 +84,25 @@ function action_tradlang_synchro_base_fichier_dist(){
 								 */
 								$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
 								$sauvegarder_module($module,$lg);
-								spip_log("On regénère le fichier à partir de la base $lg");
+								spip_log("On regénère le fichier à partir de la base $lg",'tradlang');
 							}
 						}
 						unset($GLOBALS[$GLOBALS['idx_lang']]);
 						unset($chs);
 					}else{
 						$ts_base = sql_getfetsel('ts','spip_tradlang','module='.sql_quote($nom_mod).' AND lang='.sql_quote($lg),'','ts DESC','0,1');
-						spip_log("TIMESTAMP base : $ts_base");
+						spip_log("else TIMESTAMP base : $ts_base",'tradlang');
 						
 						include($chemin_fichier);
 						$chs = $GLOBALS[$GLOBALS['idx_lang']];
 						$ts_synchro = $chs["zz_timestamp_nepastraduire"];
 						unset($GLOBALS[$GLOBALS['idx_lang']]);
-						spip_log("TIMESTAMP synchro : $ts_synchro");
+						spip_log("TIMESTAMP synchro : $ts_synchro",'tradlang');
 						
 						/**
 						 * Cas où la base est plus récente que le ts incorporé dans le fichier
 						 **/
-						if($ts_synchro && ($ts_synchro < $ts_base)){
+						if(!$ts_synchro OR ($ts_synchro < $ts_base)){
 							/**
 							 * Cas simple :
 							 * - Le fichier est un fichier généré par tradlang car $ts_synchro
@@ -110,7 +111,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 							 */
 							$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
 							$sauvegarder_module($module,$lg);
-							spip_log("On regénère le fichier à partir de la base");
+							spip_log("On regénère le fichier à partir de la base",'tradlang');
 						}
 					}
 				}

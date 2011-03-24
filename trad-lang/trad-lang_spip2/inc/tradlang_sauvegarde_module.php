@@ -15,10 +15,11 @@
  * @return 
  */
 function inc_tradlang_sauvegarde_module_dist($module,$langue){
+	spip_log('sauvegarde','tradlang');
 	// Debut du fichier de langue
-	$lang_prolog = "<"."?php\n\n// This is a SPIP language file  --  Ceci est un fichier langue de SPIP\n\n";
+	$lang_prolog = "<"."?php\n// This is a SPIP language file  --  Ceci est un fichier langue de SPIP\nif (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
 	// Fin du fichier de langue
-	$lang_epilog = "\n\n?".">\n";
+	$lang_epilog = "\n?".">\n";
 
 	$fic_exp = _DIR_RACINE.$module["dir_lang"]."/".$module["nom_mod"]."_".$langue.".php";
 	$tab = array();
@@ -35,7 +36,7 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue){
 		if (!array_key_exists($code, $conflit)){
 			if ($initiale != strtoupper($code[0])){
 				$initiale = strtoupper($code[0]);
-				$texte .= "\n\n// $initiale\n";
+				$texte .= "\n// $initiale\n";
 			}
 			$texte .= "'".$code."' => '".texte_script($chaine)."',\n";
 		}
@@ -51,7 +52,7 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue){
 			$texte .= "'".$code."' => '".texte_script($chaine)."',\n";
 	}
 
-	$texte = ereg_replace(",\n$", "\n\n);\n", $texte);
+	$texte = preg_replace("/\,\n$/", "\n\n);\n", $texte);
 	$texte .= $lang_epilog;
 	
 	include_spip('inc/flock');
@@ -71,6 +72,7 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue){
  * @return 
  */
 function tradlang_lirelang($module, $langue, $type=""){
+	spip_log('lire_lang','tradlang');
 	$ret = array();
 
 	if ($type=="md5"){
@@ -79,6 +81,7 @@ function tradlang_lirelang($module, $langue, $type=""){
 		$ret[$row["id"]] = $row["md5"];
 	}
 	else{
+		spip_log('type != md5','tradlang');
 		$nom_mod = $module["nom_mod"];
 		$res = sql_select("id,str,status","spip_tradlang","module = '$nom_mod' AND lang='$langue'","","id ASC");
 		
@@ -91,11 +94,12 @@ function tradlang_lirelang($module, $langue, $type=""){
 		}
 
 		// initialise la chaine de tag timestamp sauvegarde
-		$quer = "SELECT MAX(ts) as ts FROM ".$prefix."_tradlang ".
+		$quer = "SELECT MAX(ts) as ts FROM spip_tradlang ".
 			"WHERE module = '".$nom_mod."' AND lang='".$langue."'";
 		$res = sql_query($quer);
 		$row = sql_fetch($res);
 		$ts = $row["ts"];
+		spip_log($ts,'tradlang');
 
 		$ret["zz_timestamp_nepastraduire"] = $ts;
 	}
