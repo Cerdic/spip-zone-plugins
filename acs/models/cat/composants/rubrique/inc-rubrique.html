@@ -1,6 +1,6 @@
 #CACHE{0}<B_rubrique>
 <div class="cRubrique">
-<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<BOUCLE_rubrique(RUBRIQUES){tous}{id_rubrique}>
   <div class="entete">
     [(#VAR{acsRubriqueLogoAlign}|=={left}|?{' '})[(#LOGO_RUBRIQUE|left|image_reduire{200,200})]
     ][(#VAR{acsRubriqueLogoAlign}|=={right}|?{' '})[(#LOGO_RUBRIQUE|right|image_reduire{200,200})]

@@ -337,7 +337,7 @@ class AdminComposant {
     switch($this->preview_type) {
       case 'inline':
          require_once _DIR_ACS.'balise/acs_balises.php';
-		     $preview = '<link rel="stylesheet" href="../spip.php?page=habillage.css" type="text/css" media="projection, screen, tv" /><div id="'.$this->fullname.'" style="border:0;overflow: auto; width: 100%; height: '.(is_numeric($this->preview) ? $this->preview : 80).'px">'.recuperer_fond('vues/composant', array(
+		     $preview = '<script type="text/javascript" src="../spip.php?page=acs.js"></script><link rel="stylesheet" href="../spip.php?page=habillage.css" type="text/css" media="projection, screen, tv" /><div id="'.$this->fullname.'" style="border:0;overflow: auto; width: 100%; height: '.(is_numeric($this->preview) ? $this->preview : 80).'px">'.recuperer_fond('vues/composant', array(
 		     'c' => 'composants/'.$this->class.'/'.$this->class,
 		     'nic' => $this->nic,
 		     'lang' => $GLOBALS['spip_lang']

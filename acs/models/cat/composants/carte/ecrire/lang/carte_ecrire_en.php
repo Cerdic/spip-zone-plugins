@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Display last updated geolocated categories on the map. If these have keywords from group marker_icon, 
 these categories are displayed with their keyword icon as marker on the map.',
 
+'ShowLayerSwitcher' => 'Show layer switcher',
 'tooltip' => 'Tooltip',
 'TitreFont' => 'Tilte font',
 'TitreFontFamily' => 'Family',

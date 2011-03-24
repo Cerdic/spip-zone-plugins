@@ -11,6 +11,7 @@ elles sont affichées avec leurs logos de mot-clé comme pictogrammes personnali
 <br /><br />
 Le centrage et le zoom sont ceux pass&eacute;s en param&egrave;tres, ou ceux de l\'aricle ou de la rubrique, ou les valeurs par defaut du compossant carte,',
 
+'ShowLayerSwitcher' => 'Afficher le s&eacute;lecteur de cartes',
 'tooltip' => 'Info-Bulle',
 'TitreFont' => 'Fonte du titre',
 'TitreFontFamily' => 'Famille',

@@ -1,0 +1,144 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011 (forked from GIS Escoitar plugin)
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Insere une carte interactive utilisant JSON. Requiert les plugins gis_escoitar et openlayers.
+
+]<script type="text/javascript">
+  if (document.namespaces) { // only needed in IE
+    document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
+  }
+  //<![CDATA[
+  URLbase = "[(#EVAL{_DIR_PLUGIN_GEOMAP}|url_absolue)]";
+  URLbaseGis = "[(#EVAL{_DIR_PLUGIN_GIS}|url_absolue)]";
+  MarkerImgBase = "[(#CHEMIN{img_pack/correxir.png}|url_absolue)]";
+  MarkerBaseWidth = "[(#CHEMIN{img_pack/correxir.png}|largeur)]";
+  MarkerBaseHeight = "[(#CHEMIN{img_pack/correxir.png}|hauteur)]";
+  MarkerShadowBase = "[(#CHEMIN{img_pack/shadow.png}|url_absolue)]";
+  MarkerShadowWidth = "[(#CHEMIN{img_pack/shadow.png}|largeur)]";
+  MarkerShadowHeight = "[(#CHEMIN{img_pack/shadow.png}|hauteur)]";
+  
+  [(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]
+  var map[(#GET{id_carte_gis})];
+  var markerManager[(#GET{id_carte_gis})];
+  
+  [(#REM) Centrer sur les coordonnees de l'article passe en parametre, sinon celles de la sur la rubrique ]
+  <BOUCLE_centrer_article(GIS){id_article}{0,1}>
+    [(#ENV{latit}|non)
+      #SET{latitude,#LAT}]
+    [(#ENV{lonxit}|non)
+      #SET{lonxitude,#LONX}]
+    [(#ENV{zoom}|non)
+      #SET{zoommapa,#ZOOM}]
+  </BOUCLE_centrer_article>
+    <BOUCLE_centrer_rubrique(GIS){id_rubrique}{0,1}>
+      [(#ENV{latit}|non)
+        #SET{latitude,#LAT}]
+      [(#ENV{lonxit}|non)
+        #SET{lonxitude,#LONX}]
+      [(#ENV{zoom}|non)
+        #SET{zoommapa,#ZOOM}]
+    </BOUCLE_centrer_rubrique>
+  <//B_centrer_article>
+  
+  [(#REM) Sinon centrer sur les coordonnes passees en parametre ou sur celle par defaut ]
+  [(#GET{latitude}|non)
+  #SET{latitude,#ENV{latit,#CONFIG**{geomap/latitude,0}}}]
+  [(#GET{lonxitude}|non)
+  #SET{lonxitude,#ENV{lonxit,#CONFIG**{geomap/longitude,0}}}]
+  [(#GET{zoommapa}|non)
+  #SET{zoommapa, #ENV{zoom,#CONFIG**{geomap/zoom,0}}]
+  
+  [(#SET{control,#ENV{control,'small'}})]
+  [(#ENV{type}|=={'satellite'}|?{#SET{type,G_SATELLITE_MAP},''})]
+  [(#ENV{type}|=={'carte'}|?{#SET{type,G_NORMAL_MAP},''})]
+  [(#ENV{type}|=={'hybride'}|?{#SET{type,G_HYBRID_MAP},''})]
+  [(#ENV{type}|=={'physique'}|?{#SET{type,G_PHYSICAL_MAP},''})]
+  [(#ENV{type}|=={''}|?{#SET{type,G_SATELLITE_MAP},''})]
+
+  function load[(#GET{id_carte_gis})]() {
+  	jQuery("[#(#GET{id_carte_gis})]").css("overflow", "hidden");
+    map[(#GET{id_carte_gis})] = new OpenLayers.Map("map[(#GET{id_carte_gis})]",{
+      maxExtent: new OpenLayers.Bounds(-180,-90,180,90),
+      numZoomLevels: 19,
+      maxResolution: 156543.0399,
+      units: 'm',
+      projection: new OpenLayers.Projection("EPSG:900913"),
+      displayProjection: new OpenLayers.Projection("EPSG:4326"),
+      eventListeners: {
+        "zoomend": function() {
+        if (map[(#GET{id_carte_gis})].initialized)
+          loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/html&c=carte&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>');
+        }
+      }
+    });
+    map[(#GET{id_carte_gis})].initialized = false;
+    if (jQuery("#acsCarteLat").length && jQuery("#acsCarteLon").length && jQuery("#acsCarteZoom").length) {
+      map[(#GET{id_carte_gis})].events.register("mousemove", map[(#GET{id_carte_gis})], function(e) { 
+        var position = map[(#GET{id_carte_gis})].getCenter();
+        position = position.transform(map[(#GET{id_carte_gis})].projection,map[(#GET{id_carte_gis})].displayProjection);
+        jQuery("#acsCarteLat").attr('value', position.lat);
+        jQuery("#acsCarteLon").attr('value', position.lon);
+        jQuery("#acsCarteZoom").attr('value', map[(#GET{id_carte_gis})].getZoom());
+      });
+    }      
+    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ShowLayerSwitcher'}}|!={non}|?{" "})map[(#GET{id_carte_gis})].addControl(new OpenLayers.Control.LayerSwitcher());]
+    markers[(#GET{id_carte_gis})] = new OpenLayers.Layer.Markers("Markers");
+    var lon = #GET{lonxitude};
+    var lat = #GET{latitude};
+    var zoom = #GET{zoommapa};
+    var lonlat = new OpenLayers.LonLat(lon, lat);
+    var lyrs = new Array;
+    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'OpenStreetmap'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.OSM());]
+    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'Osmarender'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.OSM.Osmarender("Osmarender"));]
+    if (typeof G_PHYSICAL_MAP != "undefined") {
+      [(#VAR{#EVAL{'acsCarte'.'#NIC'.'gPhy'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.Google("<:acs:carte_rues_google:>",{type: G_PHYSICAL_MAP}));]
+      [(#VAR{#EVAL{'acsCarte'.'#NIC'.'gMap'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.Google("<:acs:carte_google:>"));]
+      [(#VAR{#EVAL{'acsCarte'.'#NIC'.'gHyb'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.Google("<:acs:carte_sat_rues_google:>",{type: G_HYBRID_MAP}));]
+      [(#VAR{#EVAL{'acsCarte'.'#NIC'.'gSat'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.Google("<:acs:carte_sat_google:>",{type: G_SATELLITE_MAP}));]
+    }    
+    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'WMS'}}|!={non}|?{" "})lyrs.push(new OpenLayers.Layer.WMS(
+      "#CONFIG{openlayer/nom_serveur_openlayer,OpenLayers WMS}",
+      "#CONFIG{openlayer/url_script_openlayer,http://labs.metacarta.com/wms/vmap0}",
+      {layers: 'basic'}
+    ));]
+    map[(#GET{id_carte_gis})].addLayers(lyrs);
+    map[(#GET{id_carte_gis})].addLayer(markers[(#GET{id_carte_gis})]);
+    map[(#GET{id_carte_gis})].zoomTo(zoom);
+    map[(#GET{id_carte_gis})].setCenter(lonlat.fromDataToDisplay());
+
+    // Chargement KML article
+    <BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>[
+      (#ENV{id_article}|=={''}|non)
+      var kml = new OpenLayers.Layer.GML("KML", "[(#URL_DOCUMENT|url_absolue)]", {
+      format: OpenLayers.Format.KML
+    });
+      map[(#GET{id_carte_gis})].addLayer(kml);
+    ]</BOUCLE_kml_art>
+    
+    // Chargement KML rubrique
+    <BOUCLE_kml_rub(documents){id_rubrique}{0,1}{extension=kml}>
+    [(#ENV{id_rubrique}|=={''}|non)
+    var kml = new OpenLayers.Layer.GML("KML", "[(#URL_DOCUMENT|url_absolue)]", {
+      format: OpenLayers.Format.KML
+    });
+    map[(#GET{id_carte_gis})].addLayer(kml);
+    ]
+    </BOUCLE_kml_rub>
+    <//B_kml_art>
+    loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/html&c=carte&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>');
+    map[(#GET{id_carte_gis})].initialized = true;
+  }
+  [(#ENV{load_map}|!={'non'}|oui)
+  jQuery(document).ready(function(){
+    load[(#GET{id_carte_gis})]();
+    [(#ENV{attente}|=={1}|oui) $("#map[(#GET{id_carte_gis})]").append('<div id="attente[(#GET{id_carte_gis})]" style="position: absolute; z-index: 1000; top: 0; left: 0; background-color: #FFFFFF; filter:alpha(opacity=70); -moz-opacity: 0.7; opacity: 0.7;[ width: (#ENV{largeur});][ height: (#ENV{hauteur});]"><span style="display: block; width: 100%; height: 100%; background: transparent url([(#CHEMIN{img_pack/attente.gif})]) center center no-repeat;"></span></div>'); ]    
+  });]
+  
+  //]]>
+  </script>

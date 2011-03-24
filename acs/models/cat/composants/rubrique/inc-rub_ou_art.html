@@ -1,5 +1,5 @@
 #CACHE{0}
-<BOUCLE_principale(RUBRIQUES) {id_rubrique}>
+<BOUCLE_principale(RUBRIQUES){tous}{id_rubrique}>
   <B_articles_multiples>
   <BOUCLE_articles_multiples(ARTICLES) {id_rubrique} {1,1}></BOUCLE_articles_multiples>
     [(#TOTAL_BOUCLE|<{2}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rubrique}{lang=#LANG}{self}{env}{id_rubrique=#ID_RUBRIQUE}>]

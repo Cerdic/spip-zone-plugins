@@ -1,0 +1,14 @@
+[(#CACHE{15})]
+<BOUCLE_rub(RUBRIQUES){tous}{id_rubrique}>
+  [<a href='#URL_RUBRIQUE'>(#LOGO_RUBRIQUE|left|image_reduire{100,100})</a>]
+  [<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]
+  [<p>(#DESCRIPTIF)</p>]
+  [<p>(#TEXTE)</p>]
+  <B_articles>
+  <ul>
+  <BOUCLE_articles(ARTICLES){id_rubrique}{par date}{inverse}{0, #ENV{limit,10}}{lang}>
+    [<li><a href="#URL_ARTICLE">(#TITRE|supprimer_numero|texte_backend)</a></li>]
+  </BOUCLE_articles>
+  </ul>
+  </B_articles>
+</BOUCLE_rub>

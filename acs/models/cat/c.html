@@ -1,1 +1,1 @@
-[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})][(#INCLURE{fond=composants/#ENV{c}/#ENV{p}}{env}{self})]
+[(#CACHE{0})][(#HTTP_HEADER{[Content-type: (#ENV{type,text/xml})][; charset=(#CHARSET)]})][(#INCLURE{fond=composants/#ENV{c}/#ENV{p}}{env}{self})]

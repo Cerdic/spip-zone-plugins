@@ -1,0 +1,42 @@
+[(#CACHE{7200})][(#HTTP_HEADER{'Content-Type: text/javascript'})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011 (forked from GIS Escoitar plugin)
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Recupere les rubriques, sous-rubriques, et articles georeference a afficher, avec leurs pictogrammes, au format json.
+
+Retrieve pictograms to display in json format
+
+]{
+  "pictos": [
+  <BOUCLE_json_rubriques(RUBRIQUES gis){tous}{id_rubrique ?}{id_secteur ?}{id_mot ?}{recherche ?}{gis.lat >= #ENV{minlat}}{gis.lat <= #ENV{maxlat}}{gis.lonx >= #ENV{minlon}}{gis.lonx <= #ENV{maxlon}}{par date}{inverse}{0, #ENV{limit}}{", "}>{
+    ["id": "rub(#ID_RUBRIQUE)",]
+    ["lat": "(#LAT)",]
+    ["lon": "(#LONX)",]
+    ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
+    ["url": "(#URL_RUBRIQUE)",]
+    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_rubrique=#ID_RUBRIQUE",]
+    "icon": {<BOUCLE_pictor(MOTS){id_rubrique}{type=marker_icon}{0,1}>["image": "(#LOGO_MOT_NORMAL|extraire_attribut{src})"][, "imageWidth": "(#LOGO_MOT_NORMAL|largeur)"][, "imageHeight": "(#LOGO_MOT_NORMAL|hauteur)"][, "over": "(#LOGO_MOT_SURVOL|extraire_attribut{src})"][, "overWidth": "(#LOGO_MOT_SURVOL|largeur)"][, "overHeight": "(#LOGO_MOT_SURVOL|hauteur)"]</BOUCLE_pictor>}
+  }[(#SET{hasRubs,", "})]</BOUCLE_json_rubriques><BOUCLE_rubs2(RUBRIQUES gis){tous}{id_parent}{gis.lat >= #ENV{minlat}}{gis.lat <= #ENV{maxlat}}{gis.lonx >= #ENV{minlon}}{gis.lonx <= #ENV{maxlon}}{par date}{inverse}{0, #ENV{limit}}{", "}>{
+    ["id": "rub(#ID_RUBRIQUE)",]
+    ["lat": "(#LAT)",]
+    ["lon": "(#LONX)",]
+    ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
+    ["url": "(#URL_RUBRIQUE)",]
+    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_rubrique=#ID_RUBRIQUE",]
+    "icon": {<BOUCLE_pictor2(MOTS){id_rubrique}{type=marker_icon}{0,1}>["image": "(#LOGO_MOT_NORMAL|extraire_attribut{src})"][, "imageWidth": "(#LOGO_MOT_NORMAL|largeur)"][, "imageHeight": "(#LOGO_MOT_NORMAL|hauteur)"][, "over": "(#LOGO_MOT_SURVOL|extraire_attribut{src})"][, "overWidth": "(#LOGO_MOT_SURVOL|largeur)"][, "overHeight": "(#LOGO_MOT_SURVOL|hauteur)"]</BOUCLE_pictor2>}
+  }[(#SET{hasRubs,", "})]<BOUCLE_rec(BOUCLE_rubs2)></BOUCLE_rec></BOUCLE_rubs2><BOUCLE_json_articles(ARTICLES gis){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{gis.lat >= #ENV{minlat}}{gis.lat <= #ENV{maxlat}}{gis.lonx >= #ENV{minlon}}{gis.lonx <= #ENV{maxlon}}{par date}{inverse}{0, #ENV{limit}}{", "}>[(#GET{hasRubs})][(#SET{hasRubs,""})]{
+    ["id": "art(#ID_ARTICLE)",]
+    ["lat": "(#LAT)",]
+    ["lon": "(#LONX)",]
+    ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
+    ["url": "(#URL_ARTICLE)",]
+    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_article=#ID_ARTICLE",]
+    "icon": {<BOUCLE_pictoa(MOTS){id_article}{type=marker_icon}{0,1}>["image": "(#LOGO_MOT_NORMAL|extraire_attribut{src})"][, "imageWidth": "(#LOGO_MOT_NORMAL|largeur)"][, "imageHeight": "(#LOGO_MOT_NORMAL|hauteur)"][, "over": "(#LOGO_MOT_SURVOL|extraire_attribut{src})"][, "overWidth": "(#LOGO_MOT_SURVOL|largeur)"][, "overHeight": "(#LOGO_MOT_SURVOL|hauteur)"]</BOUCLE_pictoa>}
+  }</BOUCLE_json_articles>
+  ]
+}
