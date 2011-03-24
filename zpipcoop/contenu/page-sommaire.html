@@ -1,5 +1,8 @@
-<div class="liste nouveautes sommaire">
-	<h2><:nouveautes:></h2>
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h2 class="h2"><:nouveautes:></h2>
+	</div><!--#cartouche-->
+	<div class="liste nouveautes sommaire">
 		<ul id="feed" class="liste-items">
 			<BOUCLE_forums(FORUMS) {!par date} {0,5} {plat}>
 				<BOUCLE_articles(ARTICLES) {!par date} {doublons} {date>#DATE} {lang}{0,5}>
@@ -31,6 +34,7 @@
 			<li class="item file[ (#EXTENSION)]"><em><:zpipcoop:documents:></em>&nbsp;[<a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a> <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>][<small> | (#DATE|affdate_court)</small>]</li>
 			</BOUCLE_documents_fin2>
 		</ul><!--#feed-->
-</div>
+	</div><!--#liste nouveautes sommaire-->
 
-[<div class="list shoutbox post">(#SHOUTBOX{normal,10})</div>]
+	[<div class="list shoutbox post">(#SHOUTBOX{normal,10})</div>]
+</div><!--#contenu-principal-->

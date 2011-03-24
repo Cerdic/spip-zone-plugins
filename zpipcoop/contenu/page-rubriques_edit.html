@@ -1,16 +1,18 @@
 [(#REM)
 	Une page pour editer les rubriques
 ]
-<div class='cadre-formulaire-editer'>
-<div class="entete-formulaire">
-	#ENV**{icone_retour}
-	<B_titre><:icone_modifier_rubrique:>
-	<BOUCLE_titre(RUBRIQUES) {id_rubrique}>
-	<h1>#TITRE</h1></BOUCLE_titre></B_titre>
-	<h1><:zpipcoop:nouveau_groupe:></h1><//B_titre>
-</div>
-[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
-#FORMULAIRE_EDITER_RUBRIQUE{#ID_RUBRIQUE,#ID_PARENT,#ENV{retour}}
-]
-[(#AUTORISER{ecrire}|non)<:zpipcoop:pas_le_droit_ecrire:>]
-</div>
+<div class="contenu-principal">
+	<div class="cartouche">
+		#ENV**{icone_retour}
+		<B_titre><:texte_modifier_article:>
+		<BOUCLE_titre(RUBRIQUES) {id_rubrique}>
+		<h2>#TITRE</h2>
+		</BOUCLE_titre>
+		</B_titre>
+		<h2 class="h2"><:zpipcoop:nouveau_groupe:></h2><//B_titre>
+	</div><!--#cartouche-->
+	<div class="cadre-formulaire-editer">
+	[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})#FORMULAIRE_EDITER_RUBRIQUE{#ID_RUBRIQUE,#ID_PARENT,#ENV{retour}}]
+	[(#AUTORISER{ecrire}|non)<:zpipcoop:pas_le_droit_ecrire:>]
+	</div><!--#cadre-formulaire-editer-->
+</div><!--#contenu-principal-->

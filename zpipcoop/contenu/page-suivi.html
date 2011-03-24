@@ -1,52 +1,50 @@
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:notifications:notifications:></strong></p>
+
+<div class="contenu-principal">
 	<div class="cartouche">
-		<h1><:notifications:notifications:></h1>
+		<h2 class="h2"><:notifications:notifications:></h2>
 		<div class="chapo">
 		<p><:notifications:suivis_public_votre_page:></p>
 		<p><:notifications:suivis_public_description:></p>
 		</div><!--.chapo-->
 	</div><!--.cartouche-->
 	<BOUCLE_perso(AUTEURS){id_auteur=#SESSION{id_auteur}}{tous}>
-		<dl>
-		<dt>
-		<div style="float:#LANG_RIGHT;" class="#EDIT{logo}">[(#LOGO_AUTEUR||image_reduire{64}|sinon{charger un logo})]</div>
-		<dt><:info_nom:></dt>
-		<dd class="#EDIT{nom}"> #NOM</dd>
-		<dt><:notifications:suivis_public_info_email:></dt>
-		<dd class="#EDIT{email}"> #EMAIL</dd>
-		</dl>
+		<div style="float:#LANG_RIGHT;" class="#EDIT{logo}">[(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html}|inserer_attribut{'border','0'}|inserer_attribut{'class','spip_logos photo avatar'})]</div>
+		<:info_nom:> <dt class="#EDIT{nom}"> #NOM</dt>
+		<:zpipcoop:suivis_public_info_email:> <dt class="#EDIT{email}"> #EMAIL</dt>
 	</BOUCLE_perso>
 
 	<div class="menu articles">
-		<h2>Options :</h2>
+		<h2 class="h2">Options :</h2>
 
 		<p><:notifications:suivis_public_notif_desactiver:></p>
 		<p><:notifications:suivis_public_article_thread:></p>
 		<p><:notifications:suivis_public_changer_email:></p>
 
-		#SESSION{nom}
-
 		<B_forums>
 		#ANCRE_PAGINATION
-		<h2><:notifications:suivis_public_vos_forums:></h2>
+		<h2 class="h2"><:notifications:suivis_public_vos_forums:></h2>
 		[<p class="pagination">(#PAGINATION)</p>]
-		<ul>
-		<BOUCLE_forums(FORUMS) {id_auteur=#SESSION{id_auteur}}{!par date_heure} {plat} {pagination}{statut?}>
-		<li>[(#DATE|affdate_court) &ndash; ]
-		[(#STATUT|=={publie}|?{
-		<a href="#URL_FORUM"[ title="(#TITRE|couper{80}|texte_backend)"]>[(#TEXTE|couper{80})]</a>
-		,
-		[(#TEXTE|couper{80})]
-		})]
+		<ul class="liste-items">
+			<BOUCLE_forums(FORUMS) {id_auteur=#SESSION{id_auteur}}{!par date_heure} {plat} {pagination}{statut?}>
+			<li class="item">[(#DATE|affdate_court) &ndash; ]
+				[(#STATUT|=={publie}|?{
+					<a href="#URL_FORUM"[ title="(#TITRE|couper{80}|texte_backend)"]>[(#TEXTE|couper{80})]</a>
+					,
+					[(#TEXTE|couper{80})]
+				})]
 
-		[(#REM) todo: une couleur pour les statuts autres que 'publie',
-		attention aussi aux messages de l'espace prive ; doivent-ils
-		etre mentionnes sur cette page ?]
-		<small>(#STATUT)</small>
+				[(#REM) todo: une couleur pour les statuts autres que 'publie',
+				attention aussi aux messages de l'espace prive ; doivent-ils
+				etre mentionnes sur cette page ?]
+				<small>(#STATUT)</small>
 
-		</li>
-		</BOUCLE_forums>
-		</ul>
+			</li>
+			</BOUCLE_forums>
+		</ul><!--#liste-items-->
 		[<p class="pagination">(#PAGINATION)</p>]
 		</B_forums>
 
 	</div><!--.menu article-->
+</div><!--#contenu-principal-->

@@ -1,11 +1,15 @@
-<B_sites>
-	<div class="liste sites">
-		#ANCRE_PAGINATION
+<div class="contenu-principal">
+	<div class="cartouche">
 		<h2 class="h2"><:sur_web:></h2>
-		<ul class="liste-items">
-		<BOUCLE_sites(SITES){!par date}{pagination 5}>
-		<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]" title="[(#NOM_SITE|attribut_html)]">[(#NOM_SITE)]</a> | <small><a href="[(#URL_SITE)]" title="<:voir_en_ligne|attribut_html:>" class="spip_out"><:voir_en_ligne:></a></small></li>
-		</BOUCLE_sites>
-		</ul>
 	</div>
-</B_sites>
+	<B_sites>
+		<div class="liste sites">
+			#ANCRE_PAGINATION
+			<ul class="liste-items">
+			<BOUCLE_sites(SITES){!par date}{pagination 5}>
+			<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]" title="[(#NOM_SITE|attribut_html)]">[(#NOM_SITE)]</a> | <small><a href="[(#URL_SITE)]" title="<:voir_en_ligne|attribut_html:>" class="spip_out"><:voir_en_ligne:></a></small></li>
+			</BOUCLE_sites>
+			</ul>
+		</div>
+	</B_sites>
+</div>

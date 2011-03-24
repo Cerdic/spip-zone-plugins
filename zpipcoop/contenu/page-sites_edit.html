@@ -1,16 +1,18 @@
 [(#REM)
 	Une page pour editer les sites
 ]
-<div class='cadre-formulaire-editer'>
-<div class="entete-formulaire">
-	#ENV**{icone_retour}
-	<B_titre><:icone_modifier_site:>
-	<BOUCLE_titre(SITES) {id_syndic}{statut IN prepa,prop,publies}>
-	<h1>#NOM_SITE</h1></BOUCLE_titre></B_titre>
-	<h1><:zpipcoop:nouveau_site:></h1><//B_titre>
-</div>
-[(#AUTORISER{modifier, site, #ID_SYNDIC})
-#FORMULAIRE_EDITER_SITE{#ID_SYNDIC, #ID_RUBRIQUE, #ENV{retour}}
-]
-[(#AUTORISER{ecrire}|non)<:zpipcoop:pas_le_droit_ecrire:>]
-</div>
+<div class="contenu-principal">
+	<div class="cartouche">
+		#ENV**{icone_retour}
+		<B_titre><:texte_modifier_article:>
+		<BOUCLE_titre(SITES) {id_syndic}{statut IN prepa,prop,publie}>
+		<h2>#TITRE</h2>
+		</BOUCLE_titre>
+		</B_titre>
+		<h2 class="h2"><:zpipcoop:nouveau_site:></h2><//B_titre>
+	</div><!--#cartouche-->
+	<div class="cadre-formulaire-editer">
+	[(#AUTORISER{modifier, site, #ID_SYNDIC})#FORMULAIRE_EDITER_SITE{#ID_SYNDIC, #ID_RUBRIQUE, #ENV{retour}}]
+	[(#AUTORISER{ecrire}|non)<:zpipcoop:pas_le_droit_ecrire:>]
+	</div><!--#cadre-formulaire-editer-->
+</div><!--#contenu-principal-->

@@ -30,14 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'afaire_tickets_termines' => 'Tickets termin&eacute;s',
 'agenda' => 'Agenda',
 'annuaire' => 'Annuaire',
-'antispam_champ_vide' => 'Antispam champ vide',
 'aucune_breve' => 'Aucune br&egrave;ve',
 'aucun_document' => 'Aucun document',
 'aucun_message' => 'Aucun message',
 
 //B
-'bouton_ajouter_document' => 'Ajouter un document',
-'bouton_radio_modere_priori' => 'Mod&ecute;r&ecute; &agrave; priori',
 'bouton_telecharger' => 'T&ecute;l&ecute;charger',
 'breves' => 'Br&egrave;ves',
 
@@ -63,8 +60,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //H
 
 //I
+'info_breves' => 'Les br&egrave;ves',
 'info_breves_prop' => 'Les br&egrave;ves propos&eacute;s &agrave la publication',
 'info_breves_publies' => 'Vos br&egrave;ves publi&eacute;s',
+'info_messages' => 'Vos messages',
 'info_messages_edition' => 'Vos messages en cours de r&eacute;daction',
 'info_messages_prop' => 'Vos messages propos&eacute;s &agrave la publication',
 'info_messages_publies' => 'Vos messages publi&eacute;s',
@@ -96,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //S
 'sites' => 'Sites',
+'suivis_public_info_email' => 'Adresse de suivis des notifications',
 
 //T
 'texte_modifier_breve' => 'Modifier la br&egrave;ve :',

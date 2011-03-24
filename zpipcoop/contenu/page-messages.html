@@ -1,14 +1,21 @@
-<B_articles>
-<div class="liste articles sommaire">
-	#ANCRE_PAGINATION
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:zpipcoop:abonnement:></strong></p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
 	<h2 class="h2"><:derniers_articles:></h2>
-	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
-	<ul class="liste-items">
-		<BOUCLE_articles(ARTICLES) {!par date} {pagination 5}>
-		#INCLURE{fond=inclure/article-resume,id_article}
-		</BOUCLE_articles>
-	</ul>
-	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
-	[<p class="pagination">(#PAGINATION)</p>]
-</div>
-</B_articles>
+	</div><!--#cartouche-->
+	<B_articles>
+	<div class="liste articles messages">
+		#ANCRE_PAGINATION
+		[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+		<ul class="liste-items">
+			<BOUCLE_articles(ARTICLES) {!par date} {pagination 5}>
+			#INCLURE{fond=inclure/article-resume,id_article}
+			</BOUCLE_articles>
+		</ul><!--#liste-items-->
+		[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+		[<p class="pagination">(#PAGINATION)</p>]
+	</div><!--#liste articles messages-->
+	</B_articles>
+</div><!--#contenu-principale-->

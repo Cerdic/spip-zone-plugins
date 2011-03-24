@@ -1,18 +1,18 @@
 #CACHE{0}
 <BOUCLE_contenu_auteur(AUTEURS){id_auteur}{tout}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><a href="#URL_PAGE{annuaire}"><:info_auteurs:></a>[<span class="sep"> &gt; </span><strong class="on">(#NOM|couper{80})</strong>]</p>
 
-	[(#REM) Fil d'Ariane ]
-	<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{annuaire}"><:info_auteurs:></a>[ &gt; <strong class="on">(#NOM|couper{80})</strong>]</p>
+<div class="contenu-principal">
+	<div class="vcard">
+		<div class="cartouche">
+			[(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html}|inserer_attribut{'border','0'}|inserer_attribut{'class','spip_logos photo avatar'})]
+			<h1 class="h1 #EDIT{qui} fn">#NOM</h1>
+		</div><!--#cartouche-->
 
-	<div class="vcard">[(#REM) microformat vcard]
-	<div class="cartouche">
-		[(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html}|inserer_attribut{'border','0'}|inserer_attribut{'class','spip_logos photo avatar'})]
-		<h1 class="h1 #EDIT{qui} fn">#NOM</h1>
-	</div>
-
-	[<div class="#EDIT{bio} texte note">(#BIO)</div>]
-	[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
-	</div>[(#REM) / vcard]
+		[<div class="#EDIT{bio} texte note">(#BIO)</div>]
+		[<p class="#EDIT{hyperlien} hyperlien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="url org spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+	</div><!--#vcard-->
 
 	[(#REM) Articles de l'auteur ]
 	<B_articles>
@@ -23,13 +23,14 @@
 			<BOUCLE_articles(ARTICLES) {id_auteur} {!par popularite} {pagination 10}>
 			<li class="item"><a href="#URL_ARTICLE">#TITRE</a></li>
 			</BOUCLE_articles>
-		</ul>
+		</ul><!--#liste-items-->
 		[<p class="pagination">(#PAGINATION)</p>]
-	</div>
+	</div><!--#liste articles-->
 	</B_articles>
 
 	#FORMULAIRE_ECRIRE_AUTEUR
 
 	[<div class="notes"><h2 class="h2"><:info_notes:></h2>(#NOTES)</div>]
 
+</div><!--#contenu-principale-->
 </BOUCLE_contenu_auteur>

@@ -1,63 +1,62 @@
-      
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:plan_site:></strong></p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:plan_site:></strong></p>
 
 <div class="contenu-principal">
-<div class="cartouche">
-	<h1 class="h1"><:plan_site:></h1>
-</div>
+	<div class="cartouche">
+		<h2 class="h2"><:plan_site:></h2>
+	</div><!--#cartouche-->
 
-<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+	<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
 
-	<h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+		<h2 class="h2"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
 
-	[(#REM) Articles et sous-rubriques ]
-	<B_articles_racine>
-	<h3 class="h3"><:articles:></h3>
-	<ul class="plan">
-		<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
-		<li><a href="#URL_ARTICLE">#TITRE</a></li>
-		</BOUCLE_articles_racine>
-	</ul>
-	</B_articles_racine>
+		[(#REM) Articles et sous-rubriques ]
+		<B_articles_racine>
+		<h3 class="h3"><:articles:></h3>
+		<ul class="liste-items">
+			<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+			<li class="item"><a href="#URL_ARTICLE">#TITRE</a></li>
+			</BOUCLE_articles_racine>
+		</ul><!--#liste-items-->
+		</B_articles_racine>
 
-    [(#REM) Sites ]
-	<B_sites_racine>
-	<h3 class="h3"><:sites_web:></h3>
-	<ul class="plan">
-		<BOUCLE_sites_racine(SITES) {id_rubrique} {par nom_site}>
-		<li><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
-		</BOUCLE_sites_racine>
-	</ul>
-	</B_sites_racine>
+		[(#REM) Sites ]
+		<B_sites_racine>
+		<h3 class="h3"><:sites_web:></h3>
+		<ul class="liste-items">
+			<BOUCLE_sites_racine(SITES) {id_rubrique} {par nom_site}>
+			<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
+			</BOUCLE_sites_racine>
+		</ul><!--#liste-items-->
+		</B_sites_racine>
 
-	<B_rubriques>
-	<ul class="plan">
-		<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
-		<li>
-			<strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
-			
-			<B_articles>
-			<ul>
-				<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
-				<li><a href="#URL_ARTICLE">#TITRE</a></li>
-				</BOUCLE_articles>
-			</ul>
-			</B_articles>
+		<B_rubriques>
+		<ul class="liste-items">
+			<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+			<li class="item">
+				<strong><a href="#URL_RUBRIQUE">#TITRE</a></strong>
+				
+				<B_articles>
+				<ul class="liste-items">
+					<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+					<li class="item"><a href="#URL_ARTICLE">#TITRE</a></li>
+					</BOUCLE_articles>
+				</ul><!--#liste-items-->
+				</B_articles>
 
-			<B_sites>
-			<ul>
-				<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-				<li><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
-				</BOUCLE_sites>
-			</ul>
-			</B_sites>
+				<B_sites>
+				<ul class="liste-items">
+					<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+					<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
+					</BOUCLE_sites>
+				</ul><!--#liste-items-->
+				</B_sites>
 
-			<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
-		</li>
-		</BOUCLE_rubriques>
-	</ul>
-	</B_rubriques>
+				<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+			</li><!--#items-->
+			</BOUCLE_rubriques>
+		</ul><!--#liste-items-->
+		</B_rubriques>
 
-</BOUCLE_secteurs>
-</div>
+	</BOUCLE_secteurs>
+</div><!--#contenu-principal-->

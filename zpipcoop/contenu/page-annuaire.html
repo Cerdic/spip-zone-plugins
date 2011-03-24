@@ -1,17 +1,24 @@
 #CACHE{0}
-<B_auteurs>
-<div class="liste auteurs annuaire">
-<h2 class="h2"><:zpipcoop:annuaire:></h2>
-<table border="0" width="100%">
-		<BOUCLE_auteurs(AUTEURS) {tous} {par nom}>
-		[(#COMPTEUR_BOUCLE|alterner{'<tr>','','',''})]
-		<td align="center" style="width:25%; vertical-align:top;">
-			<a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">[(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html}|inserer_attribut{'border','0'}|inserer_attribut{'class','spip_logos photo avatar'})<br />]
-			<strong>#NOM</strong></a>
-		</td>
-		[(#COMPTEUR_BOUCLE|alterner{'','','','</tr>'})]
-		</BOUCLE_auteurs>
-		[(#TOTAL_BOUCLE|alterner{'<td></td><td></td></tr>','<td></td></tr>', ''})]
-</table>
-</div>
-</B_auteurs>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:zpipcoop:annuaire:></strong></p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h2 class="h2"><:zpipcoop:annuaire:></h2>
+	</div><!--#cartouche-->
+	<B_auteurs>
+	<div class="liste auteurs annuaire">
+		<table border="0" width="100%">
+				<BOUCLE_auteurs(AUTEURS) {tous} {par nom}>
+				[(#COMPTEUR_BOUCLE|alterner{'<tr>','','',''})]
+				<td align="center" style="width:25%; vertical-align:top;">
+					<a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">[(#LOGO_AUTEUR||sinon{#CHEMIN{img/nophoto.png}}|image_passe_partout{80}|inserer_attribut{alt, #NOM|attribut_html}|inserer_attribut{'border','0'}|inserer_attribut{'class','spip_logos photo avatar'})<br />]
+					<strong>#NOM</strong></a>
+				</td>
+				[(#COMPTEUR_BOUCLE|alterner{'','','','</tr>'})]
+				</BOUCLE_auteurs>
+				[(#TOTAL_BOUCLE|alterner{'<td></td><td></td></tr>','<td></td></tr>', ''})]
+		</table>
+	</div><!--#liste auteurs annuaire-->
+	</B_auteurs>
+</div><!--#contenu-principale-->

@@ -1,11 +1,9 @@
-<div id="content_wrap">
-	<div id="content">
-		<div id="caption">
-			<h2><:tickets:tickets:></h2>
-		</div><!--#caption-->
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h2 class="h2"><:tickets:tickets:></h2>
+	</div><!--#cartouche-->
 		[(#REM) <!-- Listes de tickets pour chaque jalon considere --> ]
  		[(#EVAL{_TICKETS_LISTE_JALONS}|afaire_liste_par_jalon)]
 		[(#REM) <!-- Liste des tickets non planifies (uniquement si pas de jalon) --> ]
  		<INCLURE{fond=inclure/afaire/inc_afaire_non_planifie}>
-	</div><!--#content-->
-</div><!--#content_wrap-->
+</div><!--#contenu-principal-->

@@ -1,26 +1,33 @@
-<B_documents_joints>
-<div class="liste documents documents_joints">
-<h2><:zpipcoop:documents:></h2>
-#ANCRE_PAGINATION
-#PAGINATION{precedent_suivant}
-	<ul class="liste-items">
-	<BOUCLE_documents_joints(DOCUMENTS) {tous} {vu=non}{!par date}{pagination 20}>
-	<li class="item">
-		[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
-		[<a href="[(#URL_DOCUMENT)]" title="<:bouton_telecharger:>" type="#MIME_TYPE">(#MODELE{emb}|image_reduire{52})</a>]
-		,
-		[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
-		})]
-		[<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
-		<small><span>([(#TYPE_DOCUMENT)][ &ndash; (#TAILLE|taille_en_octets)])[ | (#DATE|affdate_court)]</span></small>
-		#DESCRIPTIF]
-	<br class="nettoyeur" />
-	</li><!--.document-->
-	</BOUCLE_documents_joints>
-	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
-	[<p class="pagination">(#PAGINATION)</p>]
-	</ul>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:zpipcoop:documents:></strong></p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h2 class="h2"><:zpipcoop:documents:></h2>
+	</div>
+	<B_documents_joints>
+		<div class="liste documents documents_joints">
+		#ANCRE_PAGINATION
+		#PAGINATION{precedent_suivant}
+			<ul class="liste-items">
+				<BOUCLE_documents_joints(DOCUMENTS) {tous} {vu=non}{!par date}{pagination 20}>
+				<li class="item">
+					[(#EXTENSION|match{'^(gif|jpg|png)$'}|?{
+					[<a href="[(#URL_DOCUMENT)]" title="<:bouton_telecharger:>" type="#MIME_TYPE">(#MODELE{emb}|image_reduire{52})</a>]
+					,
+					[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+					})]
+					[<strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename)]})]</a></strong>
+					<small><span>([(#TYPE_DOCUMENT)][ &ndash; (#TAILLE|taille_en_octets)])[ | (#DATE|affdate_court)]</span></small>
+					#DESCRIPTIF]
+				<br class="nettoyeur" />
+				</li><!--#item-->
+				</BOUCLE_documents_joints>
+				[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+				[<p class="pagination">(#PAGINATION)</p>]
+			</ul><!--#liste-items-->
+		</div>
+	</B_documents_joints>
+	<p><:zpipcoop:aucun_document:></p>
+	<//B_documents_joints>
 </div>
-</B_documents_joints>
-<div class="post"><p><:zpipcoop:aucun_document:></p></div>
-<//B_documents_joints>

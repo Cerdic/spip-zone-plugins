@@ -1,35 +1,44 @@
-<B_propo>
-<div class="liste articles auteur">
-	#ANCRE_PAGINATION
-	<h2 class="h2"><:zpipcoop:info_breves_prop:></h2>
-	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
-	<ul class="liste-items">
-<BOUCLE_propo(BREVES) {statut=prop}{!par date}{pagination}>
-		#INCLURE{fond=inclure/breve-prop-resume,id_breve}
-</BOUCLE_propo>
-	</ul>
-	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
-	[<p class="pagination">(#PAGINATION)</p>]
-</div>
-</B_propo>
-<//B_propo>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:zpipcoop:info_breves:></strong></p>
 
-<B_publies>
-<div class="liste articles auteur">
-	#ANCRE_PAGINATION
-	<h2 class="h2"><:zpipcoop:info_breves_publies:></h2>
-	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
-	<ul class="liste-items">
-<BOUCLE_publies(BREVES) {statut=publie}{!par date}{pagination}>
-		#INCLURE{fond=inclure/breve-resume,id_breve}
-</BOUCLE_publies>
-	</ul>
-	[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
-	[<p class="pagination">(#PAGINATION)</p>]
-</div>
-</B_publies>
-<div class="liste articles auteur">
-	<h2 class="h2"><:zpipcoop:info_breves_publies:></h2>
-	<p><:zpipcoop:aucune_breve:></p>
-</div>
-<//B_publies>
+<div class="contenu-principal">
+	<B_propo>
+	<div class="liste breves auteur">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:zpipcoop:info_breves_prop:></h2>
+		[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+		<ul class="liste-items">
+	<BOUCLE_propo(BREVES) {statut=prop}{!par date}{pagination 5}>
+			#INCLURE{fond=inclure/breve-prop-resume,id_breve}
+	</BOUCLE_propo>
+		</ul><!--#liste-items-->
+		[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+		[<p class="pagination">(#PAGINATION)</p>]
+	</div><!--#liste breves auteur-->
+	</B_propo>
+	<div class="liste breves auteur">
+		<h2 class="h2"><:zpipcoop:info_breves_prop:></h2>
+		<p><:zpipcoop:aucune_breve:></p>
+	</div><!--#liste breves auteur-->
+	<//B_propo>
+
+	<B_publies>
+	<div class="liste breves auteur">
+		#ANCRE_PAGINATION
+		<h2 class="h2"><:zpipcoop:info_breves_publies:></h2>
+		[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+		<ul class="liste-items">
+	<BOUCLE_publies(BREVES) {statut=publie}{!par date}{pagination 5}>
+			#INCLURE{fond=inclure/breve-resume,id_breve}
+	</BOUCLE_publies>
+		</ul><!--#liste-items-->
+		[<p class="pagination">(#PAGINATION{precedent_suivant})</p>]
+		[<p class="pagination">(#PAGINATION)</p>]
+	</div><!--#liste breves auteur-->
+	</B_publies>
+	<div class="liste breves auteur">
+		<h2 class="h2"><:zpipcoop:info_breves_prop:></h2>
+		<p><:zpipcoop:aucune_breve:></p>
+	</div><!--#liste breves auteur-->
+	<//B_publies>
+</div><!--#contenu-principal-->

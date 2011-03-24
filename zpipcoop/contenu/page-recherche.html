@@ -1,6 +1,6 @@
 		
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:info_rechercher:>[ &gt; <strong class="on">(#RECHERCHE)</strong>]</p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><:info_rechercher:>[<span class="sep"> &gt; </span><strong class="on">(#RECHERCHE)</strong>]</p>
 
 <div class="contenu-principal">
 	[<div class="cartouche">
@@ -17,9 +17,9 @@
 			<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination 5}>
 			<li class="item"><a href="#URL_ARTICLE">#TITRE</a></li>
 			</BOUCLE_articles>
-		</ul>
+		</ul><!--#liste-items-->
 		[<p class="pagination">(#PAGINATION)</p>]
-	</div>
+	</div><!--#liste resultats articles-->
 	</B_articles>
 
 	[(#REM) Rubriques trouvees ]
@@ -31,9 +31,9 @@
 			<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
 			<li class="item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
 			</BOUCLE_rubriques>
-		</ul>
+		</ul><!--#liste-items-->
 		[<p class="pagination">(#PAGINATION)</p>]
-	</div>
+	</div><!--#liste resultats rubriques-->
 	</B_rubriques>
 
 	[(#REM) Sites trouvees ]
@@ -45,8 +45,8 @@
 			<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
 			<li class="item"><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></li>
 			</BOUCLE_sites>
-		</ul>
+		</ul><!--#liste-items-->
 		[<p class="pagination">(#PAGINATION)</p>]
-	</div>
+	</div><!--#liste resultats sites-->
 	</B_sites>
 </div>
