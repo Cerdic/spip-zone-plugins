@@ -24,7 +24,7 @@ function inc_prix_ht_dist($type_objet, $id_objet, $arrondi=2){
 		// Existe-t-il une fonction précise pour le prix HT de ce type d'objet : prix_ht_<objet>() dans prix/<objet>.php
 		if ($fonction_ht = charger_fonction('ht', "prix/$type_objet", true)){
 			// On passe la ligne SQL en paramètre pour ne pas refaire la requête
-			$prix_ht = $fonction_ht($type_objet, $id_objet, $ligne);
+			$prix_ht = $fonction_ht($id_objet, $ligne);
 		}
 		// S'il n'y a pas de fonction, regardons s'il existe des champs normalisés, ce qui évite d'écrire une fonction pour rien
 		elseif ($ligne['prix_ht'])
