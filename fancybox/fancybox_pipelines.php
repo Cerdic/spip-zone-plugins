@@ -26,7 +26,7 @@ function fancybox_insert_head($flux){
 		'overlayopacity' => '0.3',
 		'overlaycolor' => '#666',
 		'titleshow' => 'true',
-		'titleposition' => 'outside',
+		'titleposition' => 'float',
 		'titleformat' => 'null',
 		'transitionin' => 'fade',
 		'transitionout' => 'fade',
