@@ -394,7 +394,7 @@ Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant su
 @puce@ Par d&amp;eacute;faut, les points de suite ajout&amp;eacute;s au r&amp;eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>.Tu peux ici pr&amp;eacute;ciser ta propre cha&amp;icirc;ne de caract&amp;egrave;res indiquant au lecteur que le texte tronqu&amp;eacute; a bien une suite.
 [[%suite_introduction%]]
 @puce@ Si la balise #INTRODUCTION est utilis&amp;eacute;e pour r&amp;eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&amp;eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &amp;laquo;Lire la suite de l\'article…&amp;raquo;
-[[%lien_introduction%]]',
+[[%lien_introduction%]]', # MODIF
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
 	// J
