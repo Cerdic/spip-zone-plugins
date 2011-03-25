@@ -27,20 +27,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   (?exec=...) : (exec-Skripte mit Komma trennen).', # MODIF
 	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'Logo verkleinern wenn es
- gr&ouml;&szlig;er als x Pixel ist.Beispiel: 100. (0 = niemals)', # MODIF
+ gr&amp;ouml;&amp;szlig;er als x Pixel ist.Beispiel: 100. (0 = niemals)', # MODIF
 
 	// L
-	'label_activer_barre_typo' => 'Funktionsleisten f&uuml;r die Stifte aktivieren?',
+	'label_activer_barre_typo' => 'Funktionsleisten f&amp;uuml;r die Stifte aktivieren?',
 	'label_activer_crayons_prive' => 'Stifte im Redaktionssystem aktivieren',
 	'label_barre_typo' => 'Funktonsleiste',
-	'label_clickhide' => 'Ein Klick au&szlig;erhalb versteckt den Stift',
-	'label_effets' => 'Effekte w&auml;hlen',
+	'label_clickhide' => 'Ein Klick au&amp;szlig;erhalb versteckt den Stift',
+	'label_effets' => 'Effekte w&amp;auml;hlen',
 	'label_espaceprive' => 'Stifte im Redaktionssystem verwenden?',
 	'label_exec_autorise' => 'Erlaubte Seiten',
 	'label_filet' => 'Netz',
 	'label_message' => 'Nachricht erhalten',
 	'label_msg_abandon' => 'bei Abbruch',
-	'label_msg_no_change' => 'wenn keine &Auml;nderung',
+	'label_msg_no_change' => 'wenn keine &amp;Auml;nderung',
 	'label_reduire_logo' => 'Logos verkleinern',
 	'label_yellow_fade' => 'Ausblenden',
 	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
