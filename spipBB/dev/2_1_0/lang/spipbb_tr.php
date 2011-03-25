@@ -328,7 +328,7 @@ Bkz [Spip-Contrib ile ilgili belgeler->http://www.spip-contrib.net/SpipBB-le-for
 _ Duyuru, tüm sayfalarda forumun en başında yer alır.',
 	'mot_ferme' => 'Kapalı
 -* Bir makale/forum bu anahtar sözcüğü içeririyorsa sadece moderatörler mesaj ekleyebilir.
--* Lorsqu\'un sujet de forum est ferm&ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
+-* Lorsqu\'un sujet de forum est ferm&amp;ecute;, seuls les modérateurs peuvent y ajouter des réponses.',
 	'mot_groupe_moderation' => 'SpipBB\'nin idaresi için kullanılan anahtar sözcük grubu',
 	'mot_postit' => 'Postit
 _ Duyuruların altında, basit mesajlardan önce bir postit vardır. Listede yalnız bir kere görülür.',
