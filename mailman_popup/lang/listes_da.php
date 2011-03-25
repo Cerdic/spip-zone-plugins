@@ -8,35 +8,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adressen <@var_email@> vil blive føjet til listen <@liste@> når den er blevet kontrolleret. Vær venlig at besvare den besked, som netop er blevet sendt til dig.',
+	'ajoutee' => 'Adressen &lt;@var_email@&gt; vil blive føjet til listen &lt;@liste@&gt; når den er blevet kontrolleret. Vær venlig at besvare den besked, som netop er blevet sendt til dig.',
 
 	// C
-	'confirm' => 'En anmodning om bekræftelse er blevet sendt til <@var_email@>.',
+	'confirm' => 'En anmodning om bekræftelse er blevet sendt til &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => ' <@var_email@>: Du abonnerer allerede på listen <@liste@>.',
+	'deja' => ' &lt;@var_email@&gt;: Du abonnerer allerede på listen &lt;@liste@&gt;.',
 	'desabo' => 'Abonnementet er opsagt.',
 
 	// F
 	'fermer' => 'luk',
 
 	// I
-	'inscription' => 'Abonnement på <@liste@>',
+	'inscription' => 'Abonnement på &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
 
-Adressen <@var_email@> er slettet fra listen @liste@.
+Adressen &lt;@var_email@&gt; er slettet fra listen @liste@.
 
 Hvis der er et problem, eller hvis du ikke har bedt om denne opsigelsen
-så skriv venligst til <@responsable@>.
+så skriv venligst til &lt;@responsable@&gt;.
 
 Farvel og tak.
 ',
 	'merci' => 'Fak.',
 
 	// P
-	'pasabo' => 'Adressen <@var_email@> abonnerer ikke på listen <@liste@>.',
+	'pasabo' => 'Adressen &lt;@var_email@&gt; abonnerer ikke på listen &lt;@liste@&gt;.',
 	'patientez' => 'Vent venligst...',
 
 	// Q

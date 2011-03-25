@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Ladrs <@var_email@> i sar azouté andan lo list <@liste@> kank zot lora vérifié ali. Mèrsi réponn lo modékri ni la fin anvwayé azot.',
+	'ajoutee' => 'Ladrs &lt;@var_email@&gt; i sar azouté andan lo list &lt;@liste@&gt; kank zot lora vérifié ali. Mèrsi réponn lo modékri ni la fin anvwayé azot.',
 
 	// C
-	'confirm' => 'Néna in domann lakofirmasyon sak la fin dèt anvwayé si ladrès <@var_email@>.',
+	'confirm' => 'Néna in domann lakofirmasyon sak la fin dèt anvwayé si ladrès &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : ou lé déza inskri astèr si lo <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : ou lé déza inskri astèr si lo &lt;@liste@&gt;.',
 	'desabo' => 'Lo dézabonman la finn marsé astèr.',
 
 	// F
@@ -36,7 +36,7 @@ Mèrsi aou, nartrouvé.
 	'merci' => 'Mèrsi aou.',
 
 	// P
-	'pasabo' => 'Ladrès <@var_email@>  li lé pa aboné si lo list <@liste@>.',
+	'pasabo' => 'Ladrès &lt;@var_email@&gt;  li lé pa aboné si lo list &lt;@liste@&gt;.',
 	'patientez' => 'Mèsi éspèr...',
 
 	// Q

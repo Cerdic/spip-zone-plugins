@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adresa <@var_email@> va fi adăugată la lista <@liste@> după verificare. Vă rugăm să răspundeţi la mesajul care tocmai v-a fost trimis.',
+	'ajoutee' => 'Adresa &lt;@var_email@&gt; va fi adăugată la lista &lt;@liste@&gt; după verificare. Vă rugăm să răspundeţi la mesajul care tocmai v-a fost trimis.',
 
 	// C
-	'confirm' => 'O cerere de confirmare a fost adresată la <@var_email@>.',
+	'confirm' => 'O cerere de confirmare a fost adresată la &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : sunteţi deja înscris(ă) pe lista <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : sunteţi deja înscris(ă) pe lista &lt;@liste@&gt;.',
 	'desabo' => 'Dezabonare efectuată.',
 
 	// F
 	'fermer' => 'închideţi',
 
 	// I
-	'inscription' => 'Înscriere la <@liste@>',
+	'inscription' => 'Înscriere la &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ La revedere şi vă mulţumim.
 	'merci' => 'Mulţumesc.',
 
 	// P
-	'pasabo' => 'Adresa <@var_email@> nu este abonată la lista <@liste@>.',
+	'pasabo' => 'Adresa &lt;@var_email@&gt; nu este abonată la lista &lt;@liste@&gt;.',
 	'patientez' => 'Vă rugăm să aşteptaţi un moment...',
 
 	// Q

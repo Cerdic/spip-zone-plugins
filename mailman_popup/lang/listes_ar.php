@@ -8,35 +8,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'ستتم اضافة العنوان <@var_email@> الى القائمة البريدية <@liste@> بعد التدقيق. الرجاء الرد على الرسالة التي استلمتها.',
+	'ajoutee' => 'ستتم اضافة العنوان &lt;@var_email@&gt; الى القائمة البريدية &lt;@liste@&gt; بعد التدقيق. الرجاء الرد على الرسالة التي استلمتها.',
 
 	// C
-	'confirm' => 'تم ارسال طلب تثبيت الى <@var_email@>.',
+	'confirm' => 'تم ارسال طلب تثبيت الى &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@>: انت مسجل مسبقاً في القائمة البريدية <@liste@>.',
+	'deja' => '&lt;@var_email@&gt;: انت مسجل مسبقاً في القائمة البريدية &lt;@liste@&gt;.',
 	'desabo' => 'تم الغاء الاشتراك.',
 
 	// F
 	'fermer' => 'اقفال',
 
 	// I
-	'inscription' => 'التسجيل في <@liste@>',
+	'inscription' => 'التسجيل في &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
 
-تم حذف العنوان <@var_email@> من القائمة البريدية @liste@.
+تم حذف العنوان &lt;@var_email@&gt; من القائمة البريدية @liste@.
 
 في حال حصول مشكلة، او اذا لم تكن قد طلبت الغاء الاشتراك،
-الرجاء الكتابة الى <@responsable@>.
+الرجاء الكتابة الى &lt;@responsable@&gt;.
 
 شكراً والسلام.
 ',
 	'merci' => 'شكراً.',
 
 	// P
-	'pasabo' => 'العنوان <@var_email@> ليس مشتركاً في القائمة البريدية <@liste@>. ',
+	'pasabo' => 'العنوان &lt;@var_email@&gt; ليس مشتركاً في القائمة البريدية &lt;@liste@&gt;. ',
 	'patientez' => 'الرجاء الانتظار...',
 
 	// Q

@@ -8,35 +8,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adreça <@var_email@> serà ajustada à la tièra <@liste@> après verificacion. Mercé de respoandre au messatge que vene de v\'èstre mandat.',
+	'ajoutee' => 'L\'adreça &lt;@var_email@&gt; serà ajustada à la tièra &lt;@liste@&gt; après verificacion. Mercé de respoandre au messatge que vene de v\'èstre mandat.',
 
 	// C
-	'confirm' => 'Une demanda de confirmacion es estada mandada à <@var_email@>.',
+	'confirm' => 'Une demanda de confirmacion es estada mandada à &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : siètz ja inscrich sus la tièra <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : siètz ja inscrich sus la tièra &lt;@liste@&gt;.',
 	'desabo' => 'Desabonament efetuat.',
 
 	// F
 	'fermer' => 'plegar',
 
 	// I
-	'inscription' => 'Inscripcion à <@liste@>',
+	'inscription' => 'Inscripcion à &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
 
-L\'adreça <@var_email@> es estada suprimida de la tièra @liste@.
+L\'adreça &lt;@var_email@&gt; es estada suprimida de la tièra @liste@.
 
 En cas de problema, ò s\'avetz pas demandat aquest desabonament,
-vorgatz escriure à <@responsable@>.
+vorgatz escriure à &lt;@responsable@&gt;.
 
 À ben lèu, e mercé.
 ',
 	'merci' => 'Mercé.',
 
 	// P
-	'pasabo' => 'L\'adreça <@var_email@> es pas abonada à la tièra <@liste@>.',
+	'pasabo' => 'L\'adreça &lt;@var_email@&gt; es pas abonada à la tièra &lt;@liste@&gt;.',
 	'patientez' => 'Vorgatz esperar...',
 
 	// Q

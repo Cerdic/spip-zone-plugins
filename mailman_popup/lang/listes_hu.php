@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'A cím <@var_email@> kerül a <@liste@> listába ellenőrzés után. Előre köszöjuk, hogy válaszol a most küldött üzenetre.',
+	'ajoutee' => 'A cím &lt;@var_email@&gt; kerül a &lt;@liste@&gt; listába ellenőrzés után. Előre köszöjuk, hogy válaszol a most küldött üzenetre.',
 
 	// C
-	'confirm' => 'Egy megerősítési kérelem lett küldve ennek: <@var_email@>.',
+	'confirm' => 'Egy megerősítési kérelem lett küldve ennek: &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : már szerepel a listában <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : már szerepel a listában &lt;@liste@&gt;.',
 	'desabo' => 'Kiíratkozás megtörtént.',
 
 	// F
 	'fermer' => 'bezárás',
 
 	// I
-	'inscription' => 'Beíratkozás a listában <@liste@>',
+	'inscription' => 'Beíratkozás a listában &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Au revoir, et merci.
 	'merci' => 'Köszönjük.',
 
 	// P
-	'pasabo' => 'A cím <@var_email@> nem szerepel a listában <@liste@>.',
+	'pasabo' => 'A cím &lt;@var_email@&gt; nem szerepel a listában &lt;@liste@&gt;.',
 	'patientez' => 'Egy kis türelmet kérünk...',
 
 	// Q

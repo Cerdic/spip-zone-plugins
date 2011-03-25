@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'La direción <@var_email@> va axuntase a la llista <@liste@> llueu de verificase. Por favor, responde al corréu que vamos unviate de secute.',
+	'ajoutee' => 'La direción &lt;@var_email@&gt; va axuntase a la llista &lt;@liste@&gt; llueu de verificase. Por favor, responde al corréu que vamos unviate de secute.',
 
 	// C
-	'confirm' => 'Unvióse un corréu de confirmación a <@var_email@>.',
+	'confirm' => 'Unvióse un corréu de confirmación a &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : ya ta apuntáu(a) a la llista <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : ya ta apuntáu(a) a la llista &lt;@liste@&gt;.',
 	'desabo' => 'Fechu el desapuntamientu.',
 
 	// F
@@ -36,7 +36,7 @@ Alón, y gracies.
 	'merci' => 'Gracies.',
 
 	// P
-	'pasabo' => 'La direción <@var_email@> nun ta apuntada la llista <@liste@>.',
+	'pasabo' => 'La direción &lt;@var_email@&gt; nun ta apuntada la llista &lt;@liste@&gt;.',
 	'patientez' => 'Un momentín...',
 
 	// Q

@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\' adresse <@var_email@> serè radjoutêye al copinreye <@liste@> après verifiaedje. Gråces di responde a l\' emile ki vs a stî evoyî.',
+	'ajoutee' => 'L\' adresse &lt;@var_email@&gt; serè radjoutêye al copinreye &lt;@liste@&gt; après verifiaedje. Gråces di responde a l\' emile ki vs a stî evoyî.',
 
 	// C
-	'confirm' => 'Ene dimande d\' acertinaedje a stî evoyeye a <@var_email@>.',
+	'confirm' => 'Ene dimande d\' acertinaedje a stî evoyeye a &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@>: vos estoz ddja abouné(êye) al copinreye <@liste@>.',
+	'deja' => '&lt;@var_email@&gt;: vos estoz ddja abouné(êye) al copinreye &lt;@liste@&gt;.',
 	'desabo' => 'Dizabounaedje fwait.',
 
 	// F
@@ -36,7 +36,7 @@ Ki ça vos våye bén, et gråces.
 	'merci' => 'Gråces.',
 
 	// P
-	'pasabo' => 'L\' adresse <@var_email@> n\' est nén abounêye al copinreye <@liste@>.',
+	'pasabo' => 'L\' adresse &lt;@var_email@&gt; n\' est nén abounêye al copinreye &lt;@liste@&gt;.',
 	'patientez' => 'Tårdjîz ene miete s\' i vs plait...',
 
 	// Q

@@ -8,27 +8,27 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'nyikɔ <@var_email@&gt ; na gɔna ɖiɖèmɛ ɔ <@liste@&gt, nu mi vɔ lɛ kpɔn fo ɔ. Mi nu mi na yi gbè nu wɛn é sɛ ɖo mi é ',
+	'ajoutee' => 'nyikɔ &lt;@var_email@&gt ; na gɔna ɖiɖèmɛ ɔ &lt;@liste@&gt, nu mi vɔ lɛ kpɔn fo ɔ. Mi nu mi na yi gbè nu wɛn é sɛ ɖo mi é ',
 
 	// C
-	'confirm' => 'Yé ɖalɔwemamɛ bo  sɛ  ɖo <@var_email@>.',
+	'confirm' => 'Yé ɖalɔwemamɛ bo  sɛ  ɖo &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@>: Mi ko na nyikɔ mi tɔn <@liste@>.',
+	'deja' => '&lt;@var_email@&gt;: Mi ko na nyikɔ mi tɔn &lt;@liste@&gt;.',
 	'desabo' => 'ɖiɖetɔn sin agun ɔ mɛ é ko sɔ gbè',
 
 	// F
 	'fermer' => 'Su',
 
 	// I
-	'inscription' => 'nyikɔ ni na ɖo <@liste@>',
+	'inscription' => 'nyikɔ ni na ɖo &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => 'nyikɔ <@var_email@> sunsun sin agun ɔ mɛ @liste@.Nu nɖé jɔ ɔ , kabi nu mi ma byɔ ɖiɖetɔn si mɛ a ,Mi kɛnklin bo wlan <@gân@>.O ɖabɔ, mi kuɖéwu.',
 	'merci' => 'mi kudewu.',
 
 	// P
-	'pasabo' => 'nyikɔ <@var_emailu@> é lo agun ɔ mɛ a  <@liste@>.',
+	'pasabo' => 'nyikɔ &lt;@var_emailu@&gt; é lo agun ɔ mɛ a  &lt;@liste@&gt;.',
 	'patientez' => 'Mi kɛnklin bo kuhun ',
 
 	// Q

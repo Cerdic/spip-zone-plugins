@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Ouzhpennet e vo ar chomlec\'h <@var_email@> d\'al listenn <@liste@> goude bezañ bet gwiriet. Trugarez da respont d\'ar c\'hemennadenn a zo o paouez bezañ kaset deoc\'h.',
+	'ajoutee' => 'Ouzhpennet e vo ar chomlec\'h &lt;@var_email@&gt; d\'al listenn &lt;@liste@&gt; goude bezañ bet gwiriet. Trugarez da respont d\'ar c\'hemennadenn a zo o paouez bezañ kaset deoc\'h.',
 
 	// C
-	'confirm' => 'Kaset ez eus bet ur goulenn-gwiriañ da <@var_email@>.',
+	'confirm' => 'Kaset ez eus bet ur goulenn-gwiriañ da &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : c\'hoazh oc\'h ensrkivet d\'al listenn <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : c\'hoazh oc\'h ensrkivet d\'al listenn &lt;@liste@&gt;.',
 	'desabo' => 'Tennet eo bet ho chomlec\'h.',
 
 	// F
 	'fermer' => 'serriñ',
 
 	// I
-	'inscription' => 'Enrollañ da <@liste@>',
+	'inscription' => 'Enrollañ da &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Kenavo, ha trugarez.
 	'merci' => 'Trugarez.',
 
 	// P
-	'pasabo' => 'N\\emañ ket enrollet ar chomlec\'h <@var_email@> war al listenn <@liste@>.',
+	'pasabo' => 'N\\emañ ket enrollet ar chomlec\'h &lt;@var_email@&gt; war al listenn &lt;@liste@&gt;.',
 	'patientez' => 'Gortozit mar-plij...',
 
 	// Q

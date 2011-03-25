@@ -8,35 +8,35 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adressen <@var_email@> vil bli lagt til epostlisten <@liste@> så fort den er kontrollert. Vennligst svar på den eposten som er sendt deg.',
+	'ajoutee' => 'Adressen &lt;@var_email@&gt; vil bli lagt til epostlisten &lt;@liste@&gt; så fort den er kontrollert. Vennligst svar på den eposten som er sendt deg.',
 
 	// C
-	'confirm' => 'En bekreftselsesforespørsel er sendt til <@var_email@>.',
+	'confirm' => 'En bekreftselsesforespørsel er sendt til &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => ' <@var_email@>: Du har allerede meldt deg på epostlisten <@liste@>.',
+	'deja' => ' &lt;@var_email@&gt;: Du har allerede meldt deg på epostlisten &lt;@liste@&gt;.',
 	'desabo' => 'Påmelding avbrutt.',
 
 	// F
 	'fermer' => 'steng',
 
 	// I
-	'inscription' => 'Påmelding til <@liste@>',
+	'inscription' => 'Påmelding til &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
 
-Adressen <@var_email@> er fjernet fra epostlisten @liste@.
+Adressen &lt;@var_email@&gt; er fjernet fra epostlisten @liste@.
 
 Hvis du er et problem eller hvis du ikke har bedt om å meldes av
-vennligst skriv til <@responsable@>.
+vennligst skriv til &lt;@responsable@&gt;.
 
 Takk, ha en fin dag.
 ',
 	'merci' => 'Takk.',
 
 	// P
-	'pasabo' => 'Adressen <@var_email@> er ikke påmeldt epostlisten <@liste@>.',
+	'pasabo' => 'Adressen &lt;@var_email@&gt; er ikke påmeldt epostlisten &lt;@liste@&gt;.',
 	'patientez' => 'Veuillez patienter...', # NEW
 
 	// Q

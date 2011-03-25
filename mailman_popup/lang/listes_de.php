@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Die Adresse <@var_email@> wird der Liste <@liste@> nach einer Überprüfung hinzugefügt. Bitte beantworten Sie die Mail, welche Ihnen zur Überprüfung Ihrer Adresse geschickt wurde.',
+	'ajoutee' => 'Die Adresse &lt;@var_email@&gt; wird der Liste &lt;@liste@&gt; nach einer Überprüfung hinzugefügt. Bitte beantworten Sie die Mail, welche Ihnen zur Überprüfung Ihrer Adresse geschickt wurde.',
 
 	// C
-	'confirm' => 'Die Bitte um Bestätigung wurde an <@var_email@> geschickt.',
+	'confirm' => 'Die Bitte um Bestätigung wurde an &lt;@var_email@&gt; geschickt.',
 
 	// D
-	'deja' => '<@var_email@> : Sie sind bereits Mitglied der Liste <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : Sie sind bereits Mitglied der Liste &lt;@liste@&gt;.',
 	'desabo' => 'Abmeldung erfolgreich.',
 
 	// F
@@ -35,7 +35,7 @@ Vielen Dank und auf Wiedersehen!
 	'merci' => 'Danke.',
 
 	// P
-	'pasabo' => 'Die Adresse <@var_email@> gehört nicht  zu den Empfängern der Liste <@liste@>.',
+	'pasabo' => 'Die Adresse &lt;@var_email@&gt; gehört nicht  zu den Empfängern der Liste &lt;@liste@&gt;.',
 	'patientez' => 'Bitte warten...',
 
 	// Q

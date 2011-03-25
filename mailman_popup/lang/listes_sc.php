@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm' => 'Sa dimanda de cunfirma est istada imbiada a <@var_email@>.',
 
 	// D
-	'deja' => '<@var_email@> : ses zai marcadu in sa lista <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : ses zai marcadu in sa lista &lt;@liste@&gt;.',
 	'desabo' => 'Sa cantzellatzione dae sa lista est istada fata.',
 
 	// F

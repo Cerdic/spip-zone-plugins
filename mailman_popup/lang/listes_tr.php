@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => '<@var_email@> adresi onaylandıktan sonra <@liste@> listesine eklenecek. Size gönderilen iletiyi yanıtladığınız için teşekkür ederiz.',
+	'ajoutee' => '&lt;@var_email@&gt; adresi onaylandıktan sonra &lt;@liste@&gt; listesine eklenecek. Size gönderilen iletiyi yanıtladığınız için teşekkür ederiz.',
 
 	// C
-	'confirm' => '<@var_email@> adresine bir kayıt onay iletisi gönderildi.',
+	'confirm' => '&lt;@var_email@&gt; adresine bir kayıt onay iletisi gönderildi.',
 
 	// D
-	'deja' => '<@var_email@> : siz zaten <@liste@> listesine kayıtlısınız.',
+	'deja' => '&lt;@var_email@&gt; : siz zaten &lt;@liste@&gt; listesine kayıtlısınız.',
 	'desabo' => 'Abonelik iptal edildi.',
 
 	// F
 	'fermer' => 'kapat',
 
 	// I
-	'inscription' => '<@liste@> listesine kayıt ',
+	'inscription' => '&lt;@liste@&gt; listesine kayıt ',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Teşekkürler. Görüşmek üzere.
 	'merci' => 'Teşekkürler.',
 
 	// P
-	'pasabo' => '<@var_email@> adresi  <@liste@> listesine abone değil.',
+	'pasabo' => '&lt;@var_email@&gt; adresi  &lt;@liste@&gt; listesine abone değil.',
 	'patientez' => 'Lütfen bekleyiniz...',
 
 	// Q

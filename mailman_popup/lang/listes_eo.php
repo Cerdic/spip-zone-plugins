@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Post kontrolo, la adreso <@var_email@> estos aldonita en la liston. Bonvolu respondi al la mesaĝo kiu ĵus estis sendita al vi.',
+	'ajoutee' => 'Post kontrolo, la adreso &lt;@var_email@&gt; estos aldonita en la liston. Bonvolu respondi al la mesaĝo kiu ĵus estis sendita al vi.',
 
 	// C
 	'confirm' => 'Peto pri konfirmo estis sendita al <@var_email@>.',
 
 	// D
-	'deja' => '<@var_email@> : vi jam estas registrita en la listo <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : vi jam estas registrita en la listo &lt;@liste@&gt;.',
 	'desabo' => 'Malaboniĝinta.',
 
 	// F
 	'fermer' => 'fermi',
 
 	// I
-	'inscription' => 'Aliĝo al <@liste@>',
+	'inscription' => 'Aliĝo al &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '

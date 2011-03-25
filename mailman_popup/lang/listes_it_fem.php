@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'indirizzo <@var_email@> sarà aggiunto all\'elenco <@liste@> dopo essere stato verificato. Rispondere al messaggio di conferma che vi verrà inviato, per favore.',
+	'ajoutee' => 'L\'indirizzo &lt;@var_email@&gt; sarà aggiunto all\'elenco &lt;@liste@&gt; dopo essere stato verificato. Rispondere al messaggio di conferma che vi verrà inviato, per favore.',
 
 	// C
-	'confirm' => 'La richiesta di conferma è stata inviata a <@var_email@>.',
+	'confirm' => 'La richiesta di conferma è stata inviata a &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : indirizzo già presente nella mailing list <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : indirizzo già presente nella mailing list &lt;@liste@&gt;.',
 	'desabo' => 'La cancellazione dalla lista è stata effettuata.',
 
 	// F

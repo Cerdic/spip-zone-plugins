@@ -8,34 +8,34 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adresa <@var_email@> bude zkontrolována a poté přidána do skupiny <@liste@>. Byla vám zaslána zpráva. Prosím, odpovězte na ni.',
+	'ajoutee' => 'Adresa &lt;@var_email@&gt; bude zkontrolována a poté přidána do skupiny &lt;@liste@&gt;. Byla vám zaslána zpráva. Prosím, odpovězte na ni.',
 
 	// C
-	'confirm' => 'Na adresu <@var_email@> byla zaslána potvrzovací zpráva.',
+	'confirm' => 'Na adresu &lt;@var_email@&gt; byla zaslána potvrzovací zpráva.',
 
 	// D
-	'deja' => '<@var_email@>: Do skupiny <@liste@> jste již přihlášeni.',
+	'deja' => '&lt;@var_email@&gt;: Do skupiny &lt;@liste@&gt; jste již přihlášeni.',
 	'desabo' => 'Přihlášení bylo zrušeno.',
 
 	// F
 	'fermer' => 'zavřít',
 
 	// I
-	'inscription' => 'Přihlášení do <@liste@>',
+	'inscription' => 'Přihlášení do &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
 
-Adresa <@var_email@> byla odebrána ze skupiny @liste@.
+Adresa &lt;@var_email@&gt; byla odebrána ze skupiny @liste@.
 
-V případě potíží, resp. pokud jste o zrušení nežádali, obraťte se prosím na <@responsable@>.
+V případě potíží, resp. pokud jste o zrušení nežádali, obraťte se prosím na &lt;@responsable@&gt;.
 
 Děkujeme a zdravíme.
 ',
 	'merci' => 'Děkujeme.',
 
 	// P
-	'pasabo' => 'Adresa <@var_email@> není do skupiny <@liste@> přihlášena.',
+	'pasabo' => 'Adresa &lt;@var_email@&gt; není do skupiny &lt;@liste@&gt; přihlášena.',
 	'patientez' => 'Vyčkejte prosím ...',
 
 	// Q

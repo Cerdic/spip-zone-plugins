@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adreça <@var_email@> serà afegida a la llista <@liste@> després de la verificació. Gràcies per respondre al missatge que acaba de ser-vos enviat.',
+	'ajoutee' => 'L\'adreça &lt;@var_email@&gt; serà afegida a la llista &lt;@liste@&gt; després de la verificació. Gràcies per respondre al missatge que acaba de ser-vos enviat.',
 
 	// C
-	'confirm' => 'Una petició de confirmació ha sigut dirigida cap a <@var_email@>.',
+	'confirm' => 'Una petició de confirmació ha sigut dirigida cap a &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : Ja està subscrit(a) a la llista <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : Ja està subscrit(a) a la llista &lt;@liste@&gt;.',
 	'desabo' => 'Desubscripció efectuada',
 
 	// F
 	'fermer' => 'tancar',
 
 	// I
-	'inscription' => 'Inscripció a <@liste@>',
+	'inscription' => 'Inscripció a &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => ' 
@@ -36,7 +36,7 @@ Fins aviat i gràcies.
 	'merci' => 'Gràcies.',
 
 	// P
-	'pasabo' => 'L\'adreça <@var_email@> no està pas abonada a la llista <@liste@>.',
+	'pasabo' => 'L\'adreça &lt;@var_email@&gt; no està pas abonada a la llista &lt;@liste@&gt;.',
 	'patientez' => 'Espereu, si us plau...',
 
 	// Q

@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'D\'Adress <@var_email@> gëtt op d\'Lëscht <@liste@> no enger Kontroll abonnéiert. Äntwert weg op de Message deen Iech geschéckt ginn ass.',
+	'ajoutee' => 'D\'Adress &lt;@var_email@&gt; gëtt op d\'Lëscht &lt;@liste@&gt; no enger Kontroll abonnéiert. Äntwert weg op de Message deen Iech geschéckt ginn ass.',
 
 	// C
-	'confirm' => 'Eng Konfirmatiouns-Demande ass un d\'Adress <@var_email@> geschéckt ginn.',
+	'confirm' => 'Eng Konfirmatiouns-Demande ass un d\'Adress &lt;@var_email@&gt; geschéckt ginn.',
 
 	// D
-	'deja' => '<@var_email@> : dir sidd schon un der Lëscht <@liste@> abonnéiert.',
+	'deja' => '&lt;@var_email@&gt; : dir sidd schon un der Lëscht &lt;@liste@&gt; abonnéiert.',
 	'desabo' => 'Annuléiert.',
 
 	// F
 	'fermer' => 'zoumaachen',
 
 	// I
-	'inscription' => 'Aschreiwung op d\'Lëscht <@liste@>',
+	'inscription' => 'Aschreiwung op d\'Lëscht &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Au revoir a merci.
 	'merci' => 'Merci.',
 
 	// P
-	'pasabo' => 'D\'Adress <@var_email@> ass nët un der Lëscht <@liste@> abonnéiert.',
+	'pasabo' => 'D\'Adress &lt;@var_email@&gt; ass nët un der Lëscht &lt;@liste@&gt; abonnéiert.',
 	'patientez' => 'Waart weg...',
 
 	// Q

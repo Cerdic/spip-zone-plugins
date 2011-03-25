@@ -8,10 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Osoite <@var_email@> lisätään listaan <@liste@> kunhan se on varmennettu. Vastaa viestiin, joka on juuri lähetetty sinulle.',
+	'ajoutee' => 'Osoite &lt;@var_email@&gt; lisätään listaan &lt;@liste@&gt; kunhan se on varmennettu. Vastaa viestiin, joka on juuri lähetetty sinulle.',
 
 	// C
-	'confirm' => 'Varmennuspyyntö on lähetetty osoitteseen <@var_email@>.',
+	'confirm' => 'Varmennuspyyntö on lähetetty osoitteseen &lt;@var_email@&gt;.',
 
 	// D
 	'deja' => '<@var_email@>: olet jo listan <@liste@> tilaajana.',
@@ -26,10 +26,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'mail_removed' => '
 
-Osoite <@var_email@> on poistettu listalta @liste@.
+Osoite &lt;@var_email@&gt; on poistettu listalta @liste@.
 
 Jos sinulla on ongelmia, tai et pyytänyt peruutusta niin ota yhteys osoitteseen
-<@responsable@>.
+&lt;@responsable@&gt;.
 
 Kiitos ja näkemiin.
 ',

@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm' => 'Een vraag voor bevestiging is gestuurd naar <@var_email@>.',
 
 	// D
-	'deja' => '<@var_email@> : je bent al ingeschreven op de lijst <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : je bent al ingeschreven op de lijst &lt;@liste@&gt;.',
 	'desabo' => 'Uitschrijving is voltooid.',
 
 	// F

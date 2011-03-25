@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adresa <@var_email@> do të shtohet në listën <@liste@> sapo të shqyrtohet. Ju lutemi, përgjigjiuni mesazhit të konfirmimit që do ju dërgohet me email.',
+	'ajoutee' => 'Adresa &lt;@var_email@&gt; do të shtohet në listën &lt;@liste@&gt; sapo të shqyrtohet. Ju lutemi, përgjigjiuni mesazhit të konfirmimit që do ju dërgohet me email.',
 
 	// C
-	'confirm' => 'Kërkesa për konfirmim u dërgua në adresën  <@var_email@>.',
+	'confirm' => 'Kërkesa për konfirmim u dërgua në adresën  &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : kjo adresë ishte e pranishme në listën <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : kjo adresë ishte e pranishme në listën &lt;@liste@&gt;.',
 	'desabo' => 'Fshirja nga lista u krye.',
 
 	// F
 	'fermer' => 'mbyll',
 
 	// I
-	'inscription' => 'Regjistrim në listën <@liste@>',
+	'inscription' => 'Regjistrim në listën &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Faleminderit.
 	'merci' => 'Faleminderit.',
 
 	// P
-	'pasabo' => 'Adresa <@var_email@> nuk është e pranishme në listën <@liste@>.',
+	'pasabo' => 'Adresa &lt;@var_email@&gt; nuk është e pranishme në listën &lt;@liste@&gt;.',
 	'patientez' => 'Ju lutem prisni...',
 
 	// Q

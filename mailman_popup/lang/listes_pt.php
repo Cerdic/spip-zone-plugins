@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'O endereço <@var_email@> será acrescentado à lista <@liste@> após confirmação. Por favor responda à mensagem que acaba de lhe ser enviada.',
+	'ajoutee' => 'O endereço &lt;@var_email@&gt; será acrescentado à lista &lt;@liste@&gt; após confirmação. Por favor responda à mensagem que acaba de lhe ser enviada.',
 
 	// C
-	'confirm' => 'Um pedido de confirmação foi dirigido a <@var_email@>.',
+	'confirm' => 'Um pedido de confirmação foi dirigido a &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : já está inscrito(a) na lista <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : já está inscrito(a) na lista &lt;@liste@&gt;.',
 	'desabo' => 'Fim da assinatura efectuado.',
 
 	// F
 	'fermer' => 'fechar',
 
 	// I
-	'inscription' => 'Inscrição a <@liste@>',
+	'inscription' => 'Inscrição a &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Adeus, e obrigado.
 	'merci' => 'Obrigado',
 
 	// P
-	'pasabo' => 'O endereço <@var_email@> não assinou a lista  <@liste@>.',
+	'pasabo' => 'O endereço &lt;@var_email@&gt; não assinou a lista  &lt;@liste@&gt;.',
 	'patientez' => 'Aguarde, por favor...',
 
 	// Q

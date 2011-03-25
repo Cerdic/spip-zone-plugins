@@ -8,14 +8,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => '@liste@: آدرس ايميل <@var_email@> به ليست اضافه شد',
+	'ajoutee' => '@liste@: آدرس ايميل &lt;@var_email@&gt; به ليست اضافه شد',
 
 	// C
 	'confirm' => '@var_email@   : يك درخواست تأئيد به آدرس
 زير فرستاده شده',
 
 	// D
-	'deja' => '<@var_email@> : @liste@:شما قبلأ ثبت نام كرده ايد',
+	'deja' => '&lt;@var_email@&gt; : @liste@:شما قبلأ ثبت نام كرده ايد',
 	'desabo' => 'شما ديگر مشترك نيستيد',
 
 	// F

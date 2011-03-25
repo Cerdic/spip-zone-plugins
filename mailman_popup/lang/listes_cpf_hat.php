@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Ladres <@var_email@> ka ajoute nan lis sa-a <@liste@> aprè li ki verifye. Mèsi w reponn mesaj ki ap voye a w.',
+	'ajoutee' => 'Ladres &lt;@var_email@&gt; ka ajoute nan lis sa-a &lt;@liste@&gt; aprè li ki verifye. Mèsi w reponn mesaj ki ap voye a w.',
 
 	// C
-	'confirm' => 'Yon domann w konfime enskripsyon-an ki ap voye w sou ladrès <@var_email@>.',
+	'confirm' => 'Yon domann w konfime enskripsyon-an ki ap voye w sou ladrès &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : w se deja enskri sou lis-la <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : w se deja enskri sou lis-la &lt;@liste@&gt;.',
 	'desabo' => 'Enskripsyon w te fin rete.',
 
 	// F

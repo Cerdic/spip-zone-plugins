@@ -8,13 +8,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adreiça <@var_email@> s\'apondrà a la lista <@liste@> après verificacion. Mercé de respòndre au messatge que venèm de vos mandar.',
+	'ajoutee' => 'L\'adreiça &lt;@var_email@&gt; s\'apondrà a la lista &lt;@liste@&gt; après verificacion. Mercé de respòndre au messatge que venèm de vos mandar.',
 
 	// C
-	'confirm' => 'Una demanda de confirmacion s\'es adreiçada a <@var_email@>.',
+	'confirm' => 'Una demanda de confirmacion s\'es adreiçada a &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@> : ja siatz inscrich(a) a la lista <@liste@>.',
+	'deja' => '&lt;@var_email@&gt; : ja siatz inscrich(a) a la lista &lt;@liste@&gt;.',
 	'desabo' => 'Desabonament fach.',
 
 	// F
@@ -36,7 +36,7 @@ Adieu-siatz e mercé.
 	'merci' => 'Mercé.',
 
 	// P
-	'pasabo' => 'L\'adreiça <@var_email@> non es abonada a la lista <@liste@>.',
+	'pasabo' => 'L\'adreiça &lt;@var_email@&gt; non es abonada a la lista &lt;@liste@&gt;.',
 	'patientez' => 'Mercé de pacientar...',
 
 	// Q

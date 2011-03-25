@@ -8,32 +8,32 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'Adressen <@var_email@> kommer att läggas till listan <@liste@> när den har blivit kontrollerad. Var god och svara på meddelandet som just skickats till dig.',
+	'ajoutee' => 'Adressen &lt;@var_email@&gt; kommer att läggas till listan &lt;@liste@&gt; när den har blivit kontrollerad. Var god och svara på meddelandet som just skickats till dig.',
 
 	// C
-	'confirm' => 'En begäran om bekräftelse har skickats till <@var_email@>.',
+	'confirm' => 'En begäran om bekräftelse har skickats till &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@>: Du prenumerar redan på <@liste@> listan.',
+	'deja' => '&lt;@var_email@&gt;: Du prenumerar redan på &lt;@liste@&gt; listan.',
 	'desabo' => 'Prenumeration avbruten.',
 
 	// F
 	'fermer' => 'stäng',
 
 	// I
-	'inscription' => 'Prenumerera på <@liste@>',
+	'inscription' => 'Prenumerera på &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
 
-Adressen <@var_email@> har tagits bort som prenumerant från @liste@ listan.
-Om det orsakar problem, eller om du inte begärt detta: skriv till <@responsable@>.
+Adressen &lt;@var_email@&gt; har tagits bort som prenumerant från @liste@ listan.
+Om det orsakar problem, eller om du inte begärt detta: skriv till &lt;@responsable@&gt;.
 Hejdå och tack.
 ',
 	'merci' => 'Tack',
 
 	// P
-	'pasabo' => 'Adressen <@var_email@> är inte anmäld som prenumerant på <@liste@> listan.',
+	'pasabo' => 'Adressen &lt;@var_email@&gt; är inte anmäld som prenumerant på &lt;@liste@&gt; listan.',
 	'patientez' => 'Vänta...',
 
 	// Q

@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'O endereço <@var_email@> será incluído na lista <@liste@> após verificação. Por favor, responda à mensagem que acabou de lhe ser enviada.',
+	'ajoutee' => 'O endereço &lt;@var_email@&gt; será incluído na lista &lt;@liste@&gt; após verificação. Por favor, responda à mensagem que acabou de lhe ser enviada.',
 
 	// C
-	'confirm' => 'Um pedido de confirmação foi enviado para o endereço <@var_email@>.',
+	'confirm' => 'Um pedido de confirmação foi enviado para o endereço &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<@var_email@>: você já está inscrito(a) na lista <@liste@>.',
+	'deja' => '&lt;@var_email@&gt;: você já está inscrito(a) na lista &lt;@liste@&gt;.',
 	'desabo' => 'Cancelamento efetuado.',
 
 	// F
 	'fermer' => 'fechar',
 
 	// I
-	'inscription' => 'Inscrição na <@liste@>',
+	'inscription' => 'Inscrição na &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Adeus e obrigado.
 	'merci' => 'Obrigado.',
 
 	// P
-	'pasabo' => 'O endereço <@var_email@> não está cadastrado na lista <@liste@>.',
+	'pasabo' => 'O endereço &lt;@var_email@&gt; não está cadastrado na lista &lt;@liste@&gt;.',
 	'patientez' => 'Por favor, aguarde...',
 
 	// Q

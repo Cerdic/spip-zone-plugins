@@ -11,32 +11,32 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajoutee' => 'The address <@var_email@> will be added to the list <@liste@> once it has been checked. Please reply to the message which has just been sent to you.',
 
 	// C
-	'confirm' => '<NEW>Žiadosť o potvrdenie bola odoslaná na <@var_email@>.',
+	'confirm' => '<NEW>Žiadosť o potvrdenie bola odoslaná na &lt;@var_email@&gt;.',
 
 	// D
-	'deja' => '<NEW><@var_email@>: Už ste prihlásený do zoznamu <@liste@>.',
+	'deja' => '<NEW>&lt;@var_email@&gt;: Už ste prihlásený do zoznamu &lt;@liste@&gt;.',
 	'desabo' => '<NEW>Registrácia bola zrušená.',
 
 	// F
 	'fermer' => '<NEW>Zatvoriť',
 
 	// I
-	'inscription' => '<NEW>Registrácia do <@liste@>',
+	'inscription' => '<NEW>Registrácia do &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '<NEW>
 
-Adresa <@var_email@> bola odstránená zo zoznamu @liste@.
+Adresa &lt;@var_email@&gt; bola odstránená zo zoznamu @liste@.
 
 Ak sa vyskytol problém alebo ak ste
-nežiadali o zrušenie, prosím, napíšte na <@responsable@>.
+nežiadali o zrušenie, prosím, napíšte na &lt;@responsable@&gt;.
 
 Dovidenia a ďakujeme.
 ',
 	'merci' => '<NEW>Ďakujeme.',
 
 	// P
-	'pasabo' => '<NEW>Adresa <@var_email@> nie je prihlásená do zoznamu <@liste@>.',
+	'pasabo' => '<NEW>Adresa &lt;@var_email@&gt; nie je prihlásená do zoznamu &lt;@liste@&gt;.',
 	'patientez' => '<NEW>Prosím, počkajte...',
 
 	// Q

@@ -8,20 +8,20 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'ajoutee' => 'L\'adresse <@var_email@> sera ajoutée à la liste <@liste@> après vérification. Merci de répondre au message qui vient de vous être envoyé.', # NEW
+	'ajoutee' => 'L\'adresse &lt;@var_email@&gt; sera ajoutée à la liste &lt;@liste@&gt; après vérification. Merci de répondre au message qui vient de vous être envoyé.', # NEW
 
 	// C
-	'confirm' => 'Une demande de confirmation a été adressée à <@var_email@>.', # NEW
+	'confirm' => 'Une demande de confirmation a été adressée à &lt;@var_email@&gt;.', # NEW
 
 	// D
-	'deja' => '<@var_email@> : vous êtes déjà inscrit(e) à la liste <@liste@>.', # NEW
+	'deja' => '&lt;@var_email@&gt; : vous êtes déjà inscrit(e) à la liste &lt;@liste@&gt;.', # NEW
 	'desabo' => 'Désabonnement effectué.', # NEW
 
 	// F
 	'fermer' => 'បិទ',
 
 	// I
-	'inscription' => 'ការចុះឈ្មោះ ទៅ <@liste@>',
+	'inscription' => 'ការចុះឈ្មោះ ទៅ &lt;@liste@&gt;',
 
 	// M
 	'mail_removed' => '
@@ -36,7 +36,7 @@ Au revoir, et merci.
 	'merci' => 'អរគុណ។',
 
 	// P
-	'pasabo' => 'L\'adresse <@var_email@> n\'est pas abonnée à la liste <@liste@>.', # NEW
+	'pasabo' => 'L\'adresse &lt;@var_email@&gt; n\'est pas abonnée à la liste &lt;@liste@&gt;.', # NEW
 	'patientez' => 'សូមព្យាយាម...',
 
 	// Q

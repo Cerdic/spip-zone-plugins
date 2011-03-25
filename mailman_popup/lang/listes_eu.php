@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirm' => 'Egiaztatze eskaera bat helbide honetara igorria izan da :<@var_email@>.',
 
 	// D
-	'deja' => '<@var_email@> : <@liste@> zerrendan jadanik harpidetua zira.',
+	'deja' => '&lt;@var_email@&gt; : &lt;@liste@&gt; zerrendan jadanik harpidetua zira.',
 	'desabo' => 'Harpidetza ezeztatua da.',
 
 	// F
