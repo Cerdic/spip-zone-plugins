@@ -14,7 +14,7 @@
 			[en]This plugin allows you to assign an article as home of a section. Field "id_article_accueil" can then be used by the skeletons.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/compositions</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/?article3776</lien> <!-- URI de documentation -->
 	<install>base/compositions.php</install>
 	<prefix>article_accueil</prefix>
 	<pipeline>
