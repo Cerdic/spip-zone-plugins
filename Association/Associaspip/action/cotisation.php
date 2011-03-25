@@ -16,17 +16,20 @@ function action_cotisation() {
 		
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
-	$date= $_POST['date'];
-	$journal= $_POST['journal'];
+	$date = _request('date');
+	$journal = _request('journal');
 	if ($montant_req =  _request('montant')) {
 		$montant = floatval(preg_replace("/,/",".",$montant_req));
 	}
 	else $montant = 0;
-	$justification =$_POST['justification'];
-	$imputation=$GLOBALS['association_metas']['pc_cotisations'];
-	$validite =$_POST['validite'];
+
+	$justification = _request('justification');
+	$imputation = $GLOBALS['association_metas']['pc_cotisations'];
+	$validite = _request('validite');
 
 	cotisation_insert($id_auteur, $montant, $journal, $justification, $imputation, $date, $validite);
+
+	return array($id_auteur, '');
 }
 
 function cotisation_insert($id_auteur, $montant, $journal, $justification, $imputation, $date, $validite)

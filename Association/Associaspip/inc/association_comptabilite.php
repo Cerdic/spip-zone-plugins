@@ -51,7 +51,7 @@ function association_toutes_destination_option_list()
 // le second parametre (optionnel) permet de specifier si on veut associer une destination unique, par default on peut ventiler sur
 // plusieurs destinations
 // le troisieme parametre permet de regler une destination par defaut[contient l'id de la destination] - quand $destination est vide
-function association_editeur_destinations($destination, $unique=false, $defaut='')
+function association_editeur_destinations($destination, $unique='', $defaut='')
 {
 	// recupere la liste de toutes les destination dans un code HTML <option value="destination_id">destination</option>
 	$liste_destination = association_toutes_destination_option_list();
@@ -94,7 +94,7 @@ function association_editeur_destinations($destination, $unique=false, $defaut='
 			$res .= '<div id="row1" class="formo"><li class="editer_id_dest[1]"><select name="id_dest[1]" id="id_dest[1]" >'
 			. $liste_destination
 			. '</select></li>';
-			if ($unique==false) {
+			if (!$unique) {
 				$res .= '<li class="editer_montant_dest[1]"><input name="montant_dest[1]" value="'
 				. ''
 				. '" type="text" id="montant_dest[1]"/></li>'

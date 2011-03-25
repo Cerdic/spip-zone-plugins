@@ -33,6 +33,9 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 			$contexte['id_dest'] = '';
 			$contexte['montant_dest'] = '';	
 		}
+		$contexte['unique_dest'] = '';
+		$contexte['defaut_dest'] = ''; /* ces variables sont recuperees par la balise dynamique directement dans l'environnement */
+
 	}
 	if  ($GLOBALS['association_metas']['comptes_stricts']) {
 		$contexte['montant'] = association_nbrefr($contexte['depense']+$contexte['recette']);

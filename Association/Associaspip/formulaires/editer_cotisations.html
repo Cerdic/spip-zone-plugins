@@ -1,0 +1,55 @@
+<div class="formulaire_spip formulaire_demo">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_date">
+			<label for="date"><strong><:asso:date_du_paiement_aaaa_mm_jj:></strong></label>
+			<input type="text" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date"  class='formo'/>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{montant}}
+		<li class="editer_montant[ (#GET{erreurs}|oui)erreur]">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="montant"><strong><:asso:montant_paye_en_euros:></strong></label>
+			<input type="text" name="montant" value="[(#ENV{montant})]" id="montant"  class='formo'/>
+		</li>
+
+		<li class="editer_journal">
+			<label for="journal"><strong><:asso:prets_libelle_mode_paiement:></strong></label>
+			<B_mode_paiement>
+			<select name="journal" id="journal" class="formo" > 
+			<BOUCLE_mode_paiement(ASSO_PLAN){par classe}{par code}{classe==#ENV{classe_banques}}>
+			<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+			</BOUCLE_mode_paiement>
+			</select>
+			</B_mode_paiement>
+			<span class="spip_form_erreur">Aucune classe de comptes financiers définie au plan comptable !</span>
+			<//B_mode_paiement>
+		</li>
+
+		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
+		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
+		<li [ class="(#GET{erreurs}|oui)erreur"]>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
+		</li>]
+
+		<li class="editer_validite">
+			<label for="validite"><strong><:asso:Validite:></strong></label>
+			<input type="text" name="validite" [value="(#ENV{validite})"] id="validite"  class='formo'/>
+		</li>
+
+		<li class="editer_justification">
+			<label for="justification"><strong><:asso:justification:></strong></label>
+			<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class='formo'/>
+		</li>
+
+		
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>
