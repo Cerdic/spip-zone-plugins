@@ -17,6 +17,7 @@ function action_remplir_panier_dist($arg=null) {
 	// On récupère les infos de l'argument
 	@list($objet, $id_objet, $quantite) = explode('-', $arg);
 	$id_objet = intval($id_objet);
+	$quantite = intval($quantite);
 	
 	// Il faut cherche le panier du visiteur en cours, et sinon le créer
 	include_spip('inc/paniers');
