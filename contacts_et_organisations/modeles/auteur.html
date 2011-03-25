@@ -12,7 +12,7 @@
 
 				<B_o>
 				<dt><:contacts:label_nom_organisation:></dt>
-				<BOUCLE_o(ORGANISATIONS spip_organisations_contacts){id_contact}>
+				<BOUCLE_o(ORGANISATIONS organisations_contacts){id_contact}>
 				<dd class="#EDIT{nom}">#NOM</dd>
 				</BOUCLE_o>
 				</B_o><dd>pas d'organisation trouvée</dd>
@@ -21,7 +21,7 @@
 				<dt><:contacts:label_fonction:></dt>
 				<dd class="#EDIT{fonction}">[(#FONCTION|sinon{'...'})]</dd>
 				
-				[(#PLUGIN{cop}|oui)]
+				[(#PLUGIN{coordonnees}|oui)]
 				<B_num>
 				<dt><:contacts:label_telephone:></dt>
 				<BOUCLE_num(NUMEROS){id_auteur}>
@@ -30,7 +30,7 @@
 				
 				<B_mail>
 				<dt><:contacts:label_email:></dt>
-				<BOUCLE_mail(emails){id_auteur}>
+				<BOUCLE_mail(EMAILS){id_auteur}>
 				<dd class="#EDIT{titre}">#EMAIL</dd>
 				</BOUCLE_mail>
 				
