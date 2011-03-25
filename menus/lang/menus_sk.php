@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mapage' => '<NEW>Ak sa návštevník pripojí, pridať odkaz na jeho autorskú stránku.',
 	'description_menu_mots' => '<NEW>Automaticky zobrazí menu s článkami s kľúčovým slovom.',
 	'description_menu_objet' => '<NEW>Vytvorí odkaz na objekt SPIP: článok, rubriku alebo iný. Štandardne bude položka niesť názov objektu.',
-	'description_menu_page_speciale' => '<NEW>Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&param1=xx&param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
+	'description_menu_page_speciale' => '<NEW>Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
