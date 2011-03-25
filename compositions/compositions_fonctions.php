@@ -6,7 +6,6 @@
  *
  */
 
-
 define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
 
 /**
@@ -96,7 +95,6 @@ function compositions_lister_utilisations($type,$composition){
 	return sql_allfetsel("$_id_table_objet as id,titre", $table_sql, "composition=".sql_quote($composition));
 }
 
-
 /**
  * Selectionner le fond en fonction du type et de la composition
  * en prenant en compte la configuration pour le chemin
@@ -135,7 +133,6 @@ function compositions_selectionner($composition,$type,$defaut="",$ext="html",$fu
 	// rien mais ca fera une erreur dans le squelette si appele en filtre
 	return '';
 }
-
 
 /**
  * Liste les types d'objets qui ont une composition
@@ -232,7 +229,6 @@ function balise_COMPOSITION_dist($p) {
 	return $p;
 }
 
-
 /**
  * Indique si la composition d'un objet est verrouillée ou non,
  * auquel cas, seul le webmaster peut la modifier
@@ -285,6 +281,4 @@ function compositions_verrou_branche($id_rubrique, $serveur=''){
 	}
 	return '';
 }
-
-
 ?>
