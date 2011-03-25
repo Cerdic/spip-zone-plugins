@@ -27,6 +27,6 @@
         </pipeline>	
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />
-	<utilise id="medias" version='[1.6.1;]'/>	
+	<necessite id="medias" version='[1.6.1;]'/>	
 </plugin>
 
