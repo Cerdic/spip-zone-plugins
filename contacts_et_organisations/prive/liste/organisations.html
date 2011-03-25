@@ -16,7 +16,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_orga(ORGANISATIONS){id_contact?}{id_auteur?}{recherche?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_liste_orga(ORGANISATIONS){id_contact?}{id_auteur?}{recherche?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
 			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>

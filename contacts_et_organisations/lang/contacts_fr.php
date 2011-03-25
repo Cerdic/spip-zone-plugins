@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_organisations' => 'Organisations',
 	
 	// C
+	'chercher_contact' => "Chercher",
+	'chercher_statut' => "Statut",
 	'contacts' => 'Contacts',
 	'confirmer_supprimer_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
 		les informations relatives &agrave; ce contact ?",
@@ -76,11 +78,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_cette_organisation' => "Lier cette organisation",
 	'lier_contact' => "Lier un contact",
 	'lier_organisation' => "Lier une organisation",
-	'liste_contacts' => 'Liste les contacts de la base',
-	'liste_organisations' => 'Liste les organisations de la base',
+	'liste_contacts' => 'Liste les contacts',
+	'liste_organisations' => 'Liste les organisations',
 
 	// O
 	'organisations' => 'Organisations',
+
+	// R
+	'rechercher' => "Rechercher",
+	'recherche_de' => "Recherche de «@recherche@»",
 	
 	// S
 	'supprimer_contact' => "Supprimer ce contact",

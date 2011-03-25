@@ -1,5 +1,4 @@
-<!--#hierarchie-->
-<!--/#hierarchie-->
+<!--#hierarchie--><!--/#hierarchie-->
  
 
 
@@ -13,12 +12,12 @@
  
 
 
-<!--#extra-->
-
-<!--/#extra-->
+<!--#extra--><!--/#extra-->
 
 
 
 <h1><:contacts:titre_page_contacts:></h1>
 
-[(#INCLURE{fond=prive/liste/contacts, env, sinon=<:contacts:aucun_contact:>})]
+<div class='ajax'>
+[(#FORMULAIRE_RECHERCHE_CONTACTS)]
+</div>
