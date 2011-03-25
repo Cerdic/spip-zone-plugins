@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		(?exec=...) : (, pour séparer les exec - * pour toutes).', # NEW
 	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
 	'explication_reduire_logo' => 'Réduire le logo s\'il dépasse
-		la taille maximale indiquee en pixels. Exemple : 100. (0 = jamais)', # NEW
+		la taille maximale indiquée en pixels. Exemple : 100. (0 = jamais)', # NEW
 
 	// L
 	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW

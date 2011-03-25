@@ -5,7 +5,9 @@
 	</langue>
 	<langue code="br" />
 	<langue code="ca" />
-	<langue code="de" />
+	<langue code="de">
+		<traducteur nom="filou" />
+	</langue>
 	<langue code="en" />
 	<langue code="eo" />
 	<langue code="es" />
