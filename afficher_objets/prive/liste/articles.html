@@ -1,6 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	date,#ENV{date_sens,-1},
 	titre,1,
+	num titre,1,
 	id_article,1
 }})
 ]<B_liste_art>
@@ -11,6 +12,7 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='rang'>[(#TRI{num titre,<:afficher_objets:rang:>,ajax})]</th>
 			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
 			<th class='auteur'><:auteur:></th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
@@ -21,7 +23,8 @@
 	<BOUCLE_liste_art(ARTICLES){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
-			<td class='titre'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">#TITRE</a></td>
+			<td class='rang'>#RANG</td>
+			<td class='titre'>[(#LOGO_ARTICLE||image_reduire{20,26})]<a href="[(#ID_ARTICLE|generer_url_entite{article})]">[(#TITRE|supprimer_numero)]</a></td>
 			<td class='auteur'><BOUCLE_auteurs(AUTEURS){id_article}{', '}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteurs></td>
 			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='id'>[(#AUTORISER{modifier,article,#ID_ARTICLE}|?{
