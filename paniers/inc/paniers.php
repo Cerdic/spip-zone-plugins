@@ -9,6 +9,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return Retourne l'identifiant du panier en cours
  */
 function paniers_id_panier_encours(){
+	static $id_panier;
+	
+	// Si on a déjà fait les calculs, on termine déjà
+	if ($id_panier > 0) return $id_panier;
+	
 	include_spip('inc/session');
 	include_spip('inc/cookie');
 	include_spip('inc/config');
