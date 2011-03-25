@@ -14,11 +14,6 @@
 	<install>base/paniers_installation.php</install>
 	
 	<pipeline>
-		<nom>insert_head</nom>
-		<action>insert_head</action>
-		<inclure>paniers_fonctions.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/paniers_tables.php</inclure>
 	</pipeline>
@@ -33,7 +28,11 @@
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/paniers_autoriser.php</inclure>
-	</pipeline>	
+	</pipeline>
+	<pipeline>
+		<nom>optimiser_base_disparus</nom>
+		<inclure>paniers_pipelines.php</inclure>
+	</pipeline>
 	
 	<bouton id='paniers' parent='naviguer'>
 		<icone>img/picto_spip_paniers.png</icone>
