@@ -3,4 +3,4 @@ $(document).ready(function() {
 		window.open(this.href);
 		return false;
 	});
-})
+});
