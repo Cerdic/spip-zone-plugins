@@ -20,7 +20,7 @@
 #SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
 #SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
 
-li.item .actions {display:block;float:#GET{right};}
+.liste_items li.item > .actions {display:block;float:#GET{right};}
 li.item p.actions {float:none;text-align:#GET{right};margin:0;}
 
 li.item.zone .quoi {display:block;padding-left:20px;background:url(#EVAL{_DIR_PLUGIN_ACCESRESTREINT}img_pack/restreint-16.png) center left no-repeat;}
