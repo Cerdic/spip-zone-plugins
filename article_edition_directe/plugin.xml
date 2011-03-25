@@ -12,7 +12,7 @@
 <!--	<lien>http://www.spip-contrib.net/Traductions-d-articles-autrement</lien>-->
 	<licence>GPL 3</licence>
 	<prefix>aed</prefix>
-<!--	<icon>img_pack/Translation-icon_32.png</icon>-->
+	<icon>img/logo_aed_edit_32.png</icon>
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>aed_pipelines.php</inclure>
