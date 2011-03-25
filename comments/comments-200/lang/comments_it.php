@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Grazie per il tuo commento!',
 
 	// S
-	'saisie_texte_info' => 'Questo form accetta scorciatoie SPIP <code>[->url] {{gras}} {italique} <quote> <code></code> et le code HTML <code><q> <del> <ins></code>. Per creare i paragrafi, lascia delle linee vuote.',
+	'saisie_texte_info' => 'Questo form accetta scorciatoie SPIP <code>[-&gt;url] {{gras}} {italique} &lt;quote&gt; &lt;code&gt;</code> et le code HTML <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Per creare i paragrafi, lascia delle linee vuote.',
 	'saisie_texte_legend' => 'Inserisci qui il tuo commento',
 	'submit1' => 'Anteprima',
 	'submit2' => 'Invia',

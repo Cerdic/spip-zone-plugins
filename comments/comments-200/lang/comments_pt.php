@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Obrigado pelo seu comentário!',
 
 	// S
-	'saisie_texte_info' => 'Este formulário aceita SPIP atajos, [->url] {{negrita}} {cursiva} <quote> <code> e o código HTML. Para criar parágrafos, basta deixar linhas em branco.',
+	'saisie_texte_info' => 'Este formulário aceita SPIP atajos, [-&gt;url] {{negrita}} {cursiva} &lt;quote&gt; &lt;code&gt; e o código HTML. Para criar parágrafos, basta deixar linhas em branco.',
 	'saisie_texte_legend' => 'Deixe seu comentário aquí',
 	'submit1' => 'Visualização',
 	'submit2' => 'Submeter',

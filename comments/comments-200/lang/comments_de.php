@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reponse_comment_ok' => 'Vielen Dank für Ihren Kommentar!',
 
 	// S
-	'saisie_texte_info' => 'Dieses Feld akzeptiert SPIP-Abkürzungen <code>[->urls] {{bold}} {italics} <quotes> <code></code> und HTML-Codes <code><q> <del> <ins></code>. Um einen Absatz zu erzeugen, lassen Sie einfach eine Zeile frei.',
+	'saisie_texte_info' => 'Dieses Feld akzeptiert SPIP-Abkürzungen <code>[-&gt;urls] {{bold}} {italics} &lt;quotes&gt; &lt;code&gt;</code> und HTML-Codes <code>&lt;q&gt; &lt;del&gt; &lt;ins&gt;</code>. Um einen Absatz zu erzeugen, lassen Sie einfach eine Zeile frei.',
 	'saisie_texte_legend' => 'Hinterlassen Sie Ihren Kommentar hier.',
 	'submit1' => 'Vorschau',
 	'submit2' => 'Abschicken',
