@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ': نعم',
 
 	// S
-	'SPIP_liens:description' => '@puce@ كل روابط الموقع تفتح افتراضياً في النافذة الحالية. ولكن قد نحتاج الى فتح الروابط الخارجية في نافذة جديدة مما يتطلب اضافة {target="_blank"} الى كل علامات <a> المزودة بخصائص {spip_out} او {spip_url} او {spip_glossaire}. من الضروري احياناً اضافة احدى تلك الخصائص الى روابط صفحات الموقع النموذجية (اي ملفات html) للاستفادة الى اقصى حد من هذه الوظيفة.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ كل روابط الموقع تفتح افتراضياً في النافذة الحالية. ولكن قد نحتاج الى فتح الروابط الخارجية في نافذة جديدة مما يتطلب اضافة {target=\\"_blank\\"} الى كل علامات &lt;a&gt; المزودة بخصائص {spip_out} او {spip_url} او {spip_glossaire}. من الضروري احياناً اضافة احدى تلك الخصائص الى روابط صفحات الموقع النموذجية (اي ملفات html) للاستفادة الى اقصى حد من هذه الوظيفة.[[%radio_target_blank3%]]
 
 @puce@ يتيح SPIP ربط كلمات بتفسيراتها بفضل اختصار <code>[?كلمة]</code>. افتراضياً (او اذا ابقيت على الخانة ادناه فارغة)، يأخذ الفهرس الخارجي الى موسوعة ويكيبيديا. ويعود اليك اختيار عنوان آخر.<br />رابط للاختبار:[?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ يوفر SPIP نمط في اوراق الأنماط للتعامل مع روابط من نوع «:mailto»: يظهر ظرف صغير أمام أي رابط يدل على عنوان بريد الكتروني. ولكن بما ان بعض برامج التصفح لا تتمكن من عرضه (خاصة انترنت اكسبلورر ٦ وانترنت اكسبلورر ٧ وسافاري ٣)، يعود الأمر اليك لتقرر اذا كنت تريد هذه الإضافة أم لا.
@@ -57,7 +57,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'صفحة المؤلفين',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'À l\'intérieur des balises <alinea></alinea>', # NEW
+	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
 	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # NEW
 
@@ -70,10 +70,10 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'barres_typo_forum' => 'رسائل المنتدى',
 	'barres_typo_intro' => 'تم العثور على ملحق الريشة. اختر هنا أشرطة أدوات الكتابة حيث سيتم إدخال بعض الأزرار.',
 	'basique' => 'أساسي',
-	'blocs:aide' => 'كتلة قابلة للبسط:<b><كتلة></كتلة></b> (كناية:<b><مخفية></مخفية></b>)او<b><ظاهرة></ظاهرة></b>',
+	'blocs:aide' => 'كتلة قابلة للبسط:<b>&lt;كتلة&gt;&lt;/كتلة&gt;</b> (كناية:<b>&lt;مخفية&gt;&lt;/مخفية&gt;</b>)او<b>&lt;ظاهرة&gt;&lt;/ظاهرة&gt;</b>',
 	'blocs:description' => 'يتيح لك انشاء كتل يمكن النقر على عناوينها لتصبح ظاهرة او مخفية.
 
-@puce@ {{في نصوص SPIP}}: هناك علامات جديدة تتواقر للمحررين هي <bloc> (او <invisible>) و<visible> ليستخدمونها في نصوصهم بالطريقة التالية:
+@puce@ {{في نصوص SPIP}}: هناك علامات جديدة تتواقر للمحررين هي &lt;bloc&gt; (او &lt;invisible&gt;) و&lt;visible&gt; ليستخدمونها في نصوصهم بالطريقة التالية:
 
 <quote><code>
 <bloc>
@@ -96,8 +96,8 @@ BLOC_FIN#</code></quote>
 
 @puce@ اذا اخترت «نعم» أدناه، سيتم تخزين وضعية الكتل المرقمة في كعكة مدتها تساوي مدة الزيارة وذلك للحفاظ على شكل الصفحة لدى العودة اليها.[[%blocs_cookie%]]
 
-@puce@ يستخدم سكين الجيب افتراضياً علامة HTML للعناوين <h4> لعناوين الكتل التي يمكن بسطها. اختر من هنا علامة اخرى <hN>:[[%bloc_h4%]]
-@puce@ للحصول على مؤثر ناعم عند النقر، يمكن للكتل التي تطوى ان تتحرك على شكل "انزلاق".[[%blocs_slide%]][[->%blocs_millisec% الف من الثانية]]', # MODIF
+@puce@ يستخدم سكين الجيب افتراضياً علامة HTML للعناوين &lt;h4&gt; لعناوين الكتل التي يمكن بسطها. اختر من هنا علامة اخرى &lt;hN&gt;:[[%bloc_h4%]]
+@puce@ للحصول على مؤثر ناعم عند النقر، يمكن للكتل التي تطوى ان تتحرك على شكل \\"انزلاق\\".[[%blocs_slide%]][[->%blocs_millisec% الف من الثانية]]', # MODIF
 	'blocs:nom' => 'كتل قابلة للبسط',
 	'boites_privees:description' => 'كل المربعات المذكورة ادناه تظهر في المجال الخاص.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{تعديلات سكين الجيب}}: اطار في الصفحة الحالية من الاعدادات، يعرض آخر التعديلات التي دخلت على برمجة الملحق ([المصدر->@_CS_RSS_SOURCE@]).
@@ -136,7 +136,7 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'chatons:description' => 'يدرج صوراً (او وجوه ضاحكة حسب مدمني الدردشة) في كل النصوص حيث تظهر سلسلة اسم من نوع <code>:nom</code>.
 _ تستبدل هذه الاداة الاختصارات بالصور التي تحمل الاسم نفسه اذا وجدت في المجلد <code>my_template/img/chatons/</code>، او في المجلدplugins/couteau_suisse/img/chatons.', # MODIF
 	'chatons:nom' => 'الوجوه الضاحكة',
-	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises <quote> par des balises <q> quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par <q> et les citations contenant des paragraphes par <blockquote>.', # NEW
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # NEW
 	'citations_bb:nom' => 'اقتباسات مرقمة جيداً',
 	'class_spip:description1' => 'هنا يمكنك تحديد بعض اختصارات SPIP. ادا تركت قيمة فارغة يتم استخدام القيمة الافراضية المناسبة.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{اختصارات SPIP}}.
@@ -144,25 +144,25 @@ _ تستبدل هذه الاداة الاختصارات بالصور التي ت
 يمكنك هنا تحديد بعض اختصارات SPIP. اذا تركت قيمة فارغة سيتم استخدام القيمة الافتراضية.[[%racc_hr%]][[%puce%]]', # MODIF
 	'class_spip:description3' => '
 
-{{تنبيه: اذا كانت الأداة «[.->pucesli]» نشطة، لا يتم استبدال الخط «-». وسيتم استخدام لائحة <ul><li> بدلاً منه.}}
+{{تنبيه: اذا كانت الأداة «[.->pucesli]» نشطة، لا يتم استبدال الخط «-». وسيتم استخدام لائحة &lt;ul>&lt;li> بدلاً منه.}}
 
-يستخدم SPIP عادة علامة <h3> لعناوين الفقرات.اختر هنا بديلاً لها:[[%racc_h1%]][[->%racc_h2%]]', # MODIF
+يستخدم SPIP عادة علامة &lt;h3&gt; لعناوين الفقرات.اختر هنا بديلاً لها:[[%racc_h1%]][[->%racc_h2%]]', # MODIF
 	'class_spip:description4' => '
 
-اختار SPIP استخدام علامة <strong> لتحويل النص الى الأسود.لكن استخدام <b> سليم ايضاً. الخيار لك: [[%racc_g1%]][[->%racc_g2%]]
+اختار SPIP استخدام علامة &lt;strong> لتحويل النص الى الأسود.لكن استخدام &lt;b> سليم ايضاً. الخيار لك: [[%racc_g1%]][[->%racc_g2%]]
 
-اختار SPIP استخدام علامة <i> لتحويل النص الى المائل. لكن استخدام <em> سليم ايضاً. الخيار لك:[[%racc_i1%]][[->%racc_i2%]]
+اختار SPIP استخدام علامة &lt;i> لتحويل النص الى المائل. لكن استخدام &lt;em> سليم ايضاً. الخيار لك:[[%racc_i1%]][[->%racc_i2%]]
 
 يمكن أيضاً تحديد علامتي الفتح والاقفال لنداء الحواشي (تنبيه! لا تظهر التغييرات الا في الموقع العمومي): [[%ouvre_ref%]][[->%ferme_ref%]]
  
 يمكن تحديد علامتي الفتح والاقفال للحواشي: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{أنماط SPIP الافتراضية}}. حتى الاصدار 1.9.2 من SPIP، كانت اختصارات الكتابة تنتج علامات تخضع دائماً لنمط "spip". مثلاً: <code><p class="spip"></code>. يمكنك هنا تحديد نمط هذه العلامات بالاعتماد على اوراق انماطك. وترك خانة فارغة يعني انه لن يتم استخدام اي نمط معين.
+@puce@ {{أنماط SPIP الافتراضية}}. حتى الاصدار 1.9.2 من SPIP، كانت اختصارات الكتابة تنتج علامات تخضع دائماً لنمط \\"spip\\". مثلاً: <code><p class=\\"spip\\"></code>. يمكنك هنا تحديد نمط هذه العلامات بالاعتماد على اوراق انماطك. وترك خانة فارغة يعني انه لن يتم استخدام اي نمط معين.
 
 {{تنبيه: اذا تم تعديل بعض العلامات (الخط الأفقي او عنوان الفقرة او المائل او الأسود) أعلاه، لن يتم تطبيق الأنماط أدناه.}}
 <q1>
-_ {{١.}} العلامات <p> و<i> و<strong>: [[%style_p%]]
-_ {{٢.}} العلامات <tables> و<hr> و<h3> و<blockquote> واللوائح (<ol> و<ul> الخ.):[[%style_h%]]
+_ {{١.}} العلامات &lt;p&gt; و&lt;i&gt; و&lt;strong&gt;: [[%style_p%]]
+_ {{٢.}} العلامات &lt;tables&gt; و&lt;hr&gt; و&lt;h3&gt; و&lt;blockquote&gt; واللوائح (&lt;ol&gt; و&lt;ul&gt; الخ.):[[%style_h%]]
 
 ملاحظة: بتعديل هذا العامل الثاني، ستفقد الانماط القياسية المناسبة لهذه العلامات.</q1>', # MODIF
 	'class_spip:nom' => 'SPIP واختصاراته',
@@ -215,9 +215,9 @@ _ {{٢.}} العلامات <tables> و<hr> و<h3> و<blockquote> واللوائ�
 	'cs_spip_options_on' => 'خيارات SPIP في «<html>@_CS_FILE_OPTIONS@</html>»',
 
 	// D
-	'decoration:aide' => 'زخرفة: <b><علامة>اختبار</علامة></b>، مع <b>علامة</b> = @liste@',
+	'decoration:aide' => 'زخرفة: <b>&lt;علامة&gt;اختبار&lt;/علامة&gt;</b>، مع <b>علامة</b> = @liste@',
 	'decoration:description' => 'الأنماط الجديدة التي يمكن إعدادها في نصوصك والمتوافرة من خلال علامات يحيطها قوسان. مثال: 
-<mytag>النص</mytag>او: <mytag/>.<br />حدد أدناه الأنماط التي تحتاجها، علامة في كل سطر، حسب الكتابة التالية:
+&lt;mytag&gt;النص&lt;/mytag&gt;او: &lt;mytag/&gt;.<br />حدد أدناه الأنماط التي تحتاجها، علامة في كل سطر، حسب الكتابة التالية:
 - {type.mytag = نمط CSS}
 - {type.mytag.class = صنف CSS}
 - {type.mytag.lang = اللغة (مثلاً: ar)}
@@ -230,14 +230,14 @@ _ {{٢.}} العلامات <tables> و<hr> و<h3> و<blockquote> واللوائ�
 
 [[%decoration_styles%]]', # MODIF
 	'decoration:nom' => 'زخرفة',
-	'decoupe:aide' => 'كتلة الالسنة: <b><onglets></onglets></b><br />فاصل بين الصفحات او الالسنة: @sep@',
+	'decoupe:aide' => 'كتلة الالسنة: <b>&lt;onglets>&lt;/onglets></b><br />فاصل بين الصفحات او الالسنة: @sep@',
 	'decoupe:aide2' => 'اللقب: @sep@',
 	'decoupe:description' => '@puce@ يعرض مقالاً في الموقع العمومي في عدة صفحات بفضل ترقيم الصفحات الآلي. يكفي وضع ارعة رموز زائد متتالية (<code>++++</code>) في المقال في الموقع الذي يجب قطع المقال فيه.
 
 افتراضياً، يُدخل سكين الجيب ترقيم الصفحات في اعلى المقال واسفله آلياً. لكن يمكنك وضع هذا الترقيم في مكان آخر في الصفحة النموذجية بفضل علامة CS_DECOUPE# التي يمكن تفعيلها هنا:
 [[%balise_decoupe%]]
 
-@puce@ اذا كنت تستخدم هذا الفاصل داخل علامتي <onglets> و</onglets> تحصل على مجموعة من التبويبات.
+@puce@ اذا كنت تستخدم هذا الفاصل داخل علامتي &lt;onglets&gt; و&lt;/onglets&gt; تحصل على مجموعة من التبويبات.
 
 في الصفحات النموذجية: تتوافر لديك العلامات الجديدة ONGLETS_DEBUT# وONGLETS_TITRE# وONGLETS_FIN#.
 
@@ -378,7 +378,7 @@ Arguments disponibles : {zone}, {format} et/ou {id}.', # NEW
 
 Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».', # NEW
 	'icone_visiter:nom' => 'Bouton « <:icone_visiter_site:> »', # NEW
-	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre <head> et </head>. Grâce à cette option, les plugins pourront insérer du javascript (.js) ou des feuilles de style (.css).', # MODIF
+	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du javascript (.js) ou des feuilles de style (.css).', # MODIF
 	'insert_head:nom' => 'علامة #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de développement !! [[%insertions%]]', # NEW
 	'insertions:nom' => 'تدقيق آلي',
@@ -386,7 +386,7 @@ Pour définir ce logo, rendez-vous sur la page «<:titre_configuration:>» en cl
 <p>{{Attention}} : Avant d\'activer cette fonctionnalité, vérifiez bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe déjà dans votre squelette ou vos plugins, la surcharge produirait alors une erreur de compilation.</p>
 @puce@ Vous pouvez préciser (en pourcentage par rapport à la valeur utilisée par défaut) la longueur du texte renvoyé par balise #INTRODUCTION. Une valeur nulle ou égale à 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par défaut suivantes : 500 caractères pour les articles, 300 pour les brèves et 600 pour les forums ou les rubriques.
 [[%lgr_introduction% %]]
-@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>«&nbsp;(…)»</html>. Vous pouvez ici préciser votre propre chaîne de caratère indiquant au lecteur que le texte tronqué a bien une suite.
+@puce@ Par défaut, les points de suite ajoutés au résultat de la balise #INTRODUCTION si le texte est trop long sont : <html>«&amp;nbsp;(…)»</html>. Vous pouvez ici préciser votre propre chaîne de caratère indiquant au lecteur que le texte tronqué a bien une suite.
 [[%suite_introduction%]]
 @puce@ Si la balise #INTRODUCTION est utilisée pour résumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite définis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : «Lire la suite de l\'article…»
 [[%lien_introduction%]]
@@ -608,16 +608,16 @@ Si vous réinitialisez le plugin en cliquant sur un pack, le Couteau Suisse se r
 	'pack_titre' => 'Configuration Actuelle', # NEW
 	'pack_variables_defaut' => 'Installation des variables par défaut', # NEW
 	'par_defaut' => 'Par défaut', # NEW
-	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> insère des balises <p> et </p> dans tous les textes qui sont dépourvus de paragraphes. Afin de gérer plus finement vos styles et vos mises en page, vous avez la possibilité d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]', # NEW
+	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> insère des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont dépourvus de paragraphes. Afin de gérer plus finement vos styles et vos mises en page, vous avez la possibilité d\'uniformiser l\'aspect des textes de votre site.[[%paragrapher%]]', # MODIF
 	'paragrapher2:nom' => 'Paragrapher', # NEW
 	'pipelines' => 'Pipelines utilisés :', # NEW
 	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration>Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
 	'previsualisation:nom' => 'Prévisualisation des articles', # NEW
 	'puceSPIP' => 'Autoriser le raccourci «*»', # NEW
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>', # NEW
-	'pucesli:description' => 'Remplace les puces «-» (tiret simple) des articles par des listes notées «-*» (traduites en HTML par : <ul><li>…</li></ul>) et dont le style peut être personnalisé par css.', # MODIF
+	'pucesli:description' => 'Remplace les puces «-» (tiret simple) des articles par des listes notées «-*» (traduites en HTML par : &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) et dont le style peut être personnalisé par css.', # MODIF
 	'pucesli:nom' => 'Belles puces', # NEW
 
 	// Q
@@ -655,18 +655,31 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # NEW
 	'soft_scroller:nom' => 'Ancres douces', # NEW
-	'sommaire:description' => 'Construit un sommaire pour vos articles afin d’accéder rapidement aux gros titres (balises HTML <h3>Un intertitre</h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour vos articles afin d’accéder rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+
+
 
 @puce@ Vous pouvez définir ici le nombre maximal de caractères retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caractères]]
 
+
+
 @puce@ Vous pouvez aussi fixer le comportement du plugin concernant la création du sommaire: 
+
 _ • Systématique pour chaque article (une balise <code>[!sommaire]</code> placée n’importe où à l’intérieur du texte de l’article créera une exception).
+
 _ • Uniquement pour les articles contenant la balise <code>[sommaire]</code>.
+
+
 
 [[%auto_sommaire%]]
 
+
+
 @puce@ Par défaut, le Couteau Suisse insère le sommaire en tête d\'article automatiquement. Mais vous avez la possibilté de placer ce sommaire ailleurs dans votre squelette grâce à une balise #CS_SOMMAIRE que vous pouvez activer ici :
+
 [[%balise_sommaire%]]
+
+
 
 Ce sommaire peut être couplé avec : {Découpe en pages et onglets}.', # MODIF
 	'sommaire:nom' => 'صفحة محتويات آلية',
@@ -674,9 +687,12 @@ Ce sommaire peut être couplé avec : {Découpe en pages et onglets}.', # MODIF
 	'sommaire_avec' => 'نص مع محتويات:<b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'نص بدون محتويات:<b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises <a></a> sont interdits.
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
+
+
 
 Listez ici les séquences interdites@_CS_ASTER@ en les séparant par des espaces. [[%spam_mots%]]
+
 @_CS_ASTER@Pour spécifier un mot entier, mettez-le entre paranthèses. Pour une expression avec des espaces, placez-la entre guillemets.', # MODIF
 	'spam:nom' => 'Lutte contre le SPAM', # NEW
 	'spam_ip' => 'Blocage IP de @ip@ :', # NEW

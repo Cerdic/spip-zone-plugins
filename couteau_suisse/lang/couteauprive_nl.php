@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : ja',
 
 	// S
-	'SPIP_liens:description' => '@puce@ begint Alle band van de plaats bij verstek in het lopende venster van scheepvaart. Maar het kan nuttig zijn om de externe band te openen aan de plaats in een nieuw buitenlands venster  dat komt terug om {target toe te voegen ="_blank"} aan alle bakens <a> voorzien door SPIP van klasse {spip_out}, {spip_url} of {spip_glossaire}. Het is soms noodzakelijk om één van deze klassen toe te voegen aan de band van het skelet van de plaats (bestanden HTML) teneinde deze functionaliteit zoveel mogelijk uit te breiden. [[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ begint Alle band van de plaats bij verstek in het lopende venster van scheepvaart. Maar het kan nuttig zijn om de externe band te openen aan de plaats in een nieuw buitenlands venster  dat komt terug om {target toe te voegen =\\"_blank\\"} aan alle bakens &lt;a&gt; voorzien door SPIP van klasse {spip_out}, {spip_url} of {spip_glossaire}. Het is soms noodzakelijk om één van deze klassen toe te voegen aan de band van het skelet van de plaats (bestanden HTML) teneinde deze functionaliteit zoveel mogelijk uit te breiden. [[%radio_target_blank3%]]
 @puce@ SPIP maakt het mogelijk om woorden te verbinden met hun definitie dank zij de typografische kortere weg <code> [? woord] </code>. Per gebrek (of als u leegte het hokje hieronder laat), stuurt het externe glossarium naar de vrije encyclopedie wikipedia.org terug. Om het te gebruiken adres te kiezen. <br/>Band van test: [? SPIP] [[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '<REVIEW>@puce@ SPIP voorziet een CSS stijl voor de «~mailto:~» linken : een briefje komtzich plaatsen voor ieder maillink; aangezien een aantal browsers kunnen die stijl niet aanpassen (o.a. IE6, IE7 et SAF3), besluit hier dit stijl te houden of niet.
 _ Testlink : [->test@test.com] (herlaad het hele pagina).[[%enveloppe_mails%]]', # MODIF
@@ -53,7 +53,7 @@ De waarde van 1~000~000 pixels lijkt juist voor een configuratie met weinig gehe
 	'auteurs:nom' => 'Bladzijde van de auteurs',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'À l\'intérieur des balises <alinea></alinea>', # NEW
+	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
 	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # NEW
 
@@ -69,7 +69,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'blocs:aide' => 'Openvouwen blokken : <b><bloc></bloc></b> (alias : <b><invisible></invisible></b>) et <b><visible></visible></b>',
 	'blocs:description' => 'Laat u toe om blokken te creëren waarvan de klikeerbare titel  ze zichtbaar of onzichtbaar kan maken.
 
-@puce@ {{In de SPIP teksten}} : de redacteuren hebben ter beschikking de nieuwe bakens <bloc> (om <invisible>) en <visible> om bij hun teksten zoals dit te gebruiken : 
+@puce@ {{In de SPIP teksten}} : de redacteuren hebben ter beschikking de nieuwe bakens &lt;bloc&gt; (om &lt;invisible&gt;) en &lt;visible&gt; om bij hun teksten zoals dit te gebruiken : 
 
 <quote><code>
 <bloc>
@@ -92,9 +92,9 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ Door «ja» aan te strepen hieronder, de stand van de genummeerde bokken zal tidens de sessie in een cookie opgeslaan worden om de aanblik van het pagina gelijk te houden in geval van terug.[[%blocs_cookie%]]
 
-@puce@ De Zwitse Mes (Couteau Suisse) gebruikt standaard het HTML baken <h4> voor de openvouwen blok title. Kies hier voor een andere baak <hN> :[[%bloc_h4%]]
+@puce@ De Zwitse Mes (Couteau Suisse) gebruikt standaard het HTML baken &lt;h4&gt; voor de openvouwen blok title. Kies hier voor een andere baak &lt;hN&gt; :[[%bloc_h4%]]
 
-@puce@ Om een zachtere effect te krijgen op het klil, uw openvouwen blokken kunnen op een "glijdende manier" bewegen.[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
+@puce@ Om een zachtere effect te krijgen op het klil, uw openvouwen blokken kunnen op een \\"glijdende manier\\" bewegen.[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
 	'blocs:nom' => 'Openvouwen Blokken',
 	'boites_privees:description' => 'Alle beschreven dozen hieronder komen in het particuliere deel voor.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 
@@ -127,7 +127,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'chatons:description' => 'Neemt beelden (of katjes voor {tchats}) op in alle teksten waar een keten van het soort blijkt {{<code>:nom</code>}}.
 _ Dit werktuig vervangt deze link door de beelden van dezelfde naam die hij in uw dossier <code>mon_squelette_toto/img/chatons/</code>, ou par défaut, le dossier <code>couteau_suisse/img/chatons/</code> vindt.', # MODIF
 	'chatons:nom' => 'Katjes',
-	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises <quote> par des balises <q> quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent ?tre entourées par <q> et les citations contenant des paragraphes par <blockquote>.', # MODIF
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent ?tre entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # MODIF
 	'citations_bb:nom' => 'Goed bebakende aanhalingen',
 	'class_spip:description1' => 'U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelijk om de waarde per gebrek te gebruiken.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{De kortere wegen van SPIP}}.
@@ -135,25 +135,25 @@ _ Dit werktuig vervangt deze link door de beelden van dezelfde naam die hij in u
 U kunt hier bepaalde kortere wegen van SPIP bepalen. Een lege waarde staat gelijk om de waarde per gebrek te gebruiken.[[%racc_hr%]][[%puce%]]', # MODIF
 	'class_spip:description3' => '
 
-{Let op: of het « [.->pucesli] » werktuig aktief is, het vervangen van de « - » wordt niet meer gedaan; een <ul><li> lijst wordt dan gebruikt.}
+{Let op: of het « [.->pucesli] » werktuig aktief is, het vervangen van de « - » wordt niet meer gedaan; een &lt;ul>&lt;li> lijst wordt dan gebruikt.}
 
-SPIP gebruikt gewoonlijk het baken <h3> voor intertitres. Kies hier een andere vervanging :[[%racc_h1%]][[->%racc_h2%]]', # MODIF
+SPIP gebruikt gewoonlijk het baken &lt;h3&gt; voor intertitres. Kies hier een andere vervanging :[[%racc_h1%]][[->%racc_h2%]]', # MODIF
 	'class_spip:description4' => '<MODIF>
 
-SPIP heeft verkozen om het baken <strong> te gebruiken om vette letters te schrijven. Maar <b> had eveneens kunnen passen. Aan u om te beslissen :[[%racc_g1%]][[->%racc_g2%]]
+SPIP heeft verkozen om het baken &lt;strong> te gebruiken om vette letters te schrijven. Maar &lt;b> had eveneens kunnen passen. Aan u om te beslissen :[[%racc_g1%]][[->%racc_g2%]]
 
-SPIP heeft gekozen om <i> te gebruiken om italiques te schrijven. Maar <em> zou ook gekunt hebben, met of zonder stijl.Aan u om te beslissen[[%racc_i1%]][[->%racc_i2%]]
+SPIP heeft gekozen om &lt;i> te gebruiken om italiques te schrijven. Maar &lt;em> zou ook gekunt hebben, met of zonder stijl.Aan u om te beslissen[[%racc_i1%]][[->%racc_i2%]]
 
 Vous pouvez aussi définir le code ouvrant et fermant pour les appels de notes de bas de pages (Attention ! Les modifications ne seront visibles que sur l\'espace public.) : [[%ouvre_ref%]][[->%ferme_ref%]]
  
  Vous pouvez définir le code ouvrant et fermant pour les notes de bas de pages : [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{De stijlen van SPIP}}. Tot de versie 1.92 van SPIP, produceerden de typografische kortere wegen bakens systematisch van de stijl "spip". Bijvoorbeeld : <code><p class="spip"></code>. U kunt hier de stijl van deze bakens bepalen in functie van uw bladen van stijl. Een leeg hokje betekent dat geen enkele bijzondere stijl zal toegepast zijn.
+@puce@ {{De stijlen van SPIP}}. Tot de versie 1.92 van SPIP, produceerden de typografische kortere wegen bakens systematisch van de stijl \\"spip\\". Bijvoorbeeld : <code><p class=\\"spip\\"></code>. U kunt hier de stijl van deze bakens bepalen in functie van uw bladen van stijl. Een leeg hokje betekent dat geen enkele bijzondere stijl zal toegepast zijn.
 {Attention : si certains raccourcis (ligne horizontale, intertitre, italique, gras) ont été modifiés ci-dessus, alors les styles ci-dessous ne seront pas appliqués.}
 
 <q1>
-_ {{1.}} Bakens <p>, <i>, <strong>:[[%style_p%]]
-_ {{2.}} Bakens <tables>, <hr>, <h3> et <blockquote> en de lijsten (<ol>, <ul>, etc.) :[[%style_h%]]
+_ {{1.}} Bakens &lt;p&gt;, &lt;i&gt;, &lt;strong&gt;:[[%style_p%]]
+_ {{2.}} Bakens &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt; et &lt;blockquote&gt; en de lijsten (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
 Opgelet: door deze tweede parameter te wijzigen, verliest u dan de standaardstijlen die met deze bakens worden verenigd.</blockquote>', # MODIF
 	'class_spip:nom' => 'SPIP en zijn kortere wegen…',
@@ -204,9 +204,9 @@ Idem om de bodem te veranderen, als de keuze hieronder het toelaat:@_CS_EXEMPLE_
 	'cs_spip_options_on' => 'De SPIP opties in «@_CS_FILE_OPTIONS@»',
 
 	// D
-	'decoration:aide' => 'Versiering : <b><balise>test</balise></b>, met <b>balise</b> = @liste@',
+	'decoration:aide' => 'Versiering : <b>&lt;balise&gt;test&lt;/balise&gt;</b>, met <b>balise</b> = @liste@',
 	'decoration:description' => '<MODIF>Nieuwe lettertype zijn te parametreren in u teksten en toegankelijk dankzij des balises à chevrons. Voorbeeld : 
-<mabalise>texte</mabalise> ou : <mabalise/>.<br />Definier hieronder de CSS die u nodig heeft, une balise per lijn, zoals de hierna volgende syntaxes  :
+&lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />Definier hieronder de CSS die u nodig heeft, une balise per lijn, zoals de hierna volgende syntaxes  :
 - {type.mabalise = mon style CSS}
 - {type.mabalise.class = ma classe CSS}
 - {type.mabalise.lang = ma langue (ex : fr)}
@@ -219,14 +219,14 @@ De parameter {type} hieronder kan drie verschillende waarden:
 
 [[%decoration_styles%]]', # MODIF
 	'decoration:nom' => 'Versiering',
-	'decoupe:aide' => 'Blok tabben : <b><onglets></onglets></b><br/>Séparateur van bladzijdes of tabben : @sep@', # MODIF
+	'decoupe:aide' => 'Blok tabben : <b>&lt;onglets>&lt;/onglets></b><br/>Séparateur van bladzijdes of tabben : @sep@', # MODIF
 	'decoupe:aide2' => 'Alias : @sep@',
 	'decoupe:description' => '<MODIF>@puce@ Découpe l\'affichage public d\'un article en plusieurs pages grâce à une pagination automatique. Placez simplement dans votre article quatre signes plus consécutifs (<code>++++</code>) à l\'endroit qui doit recevoir la coupure.
 
 Par défaut, le Couteau Suisse insère la pagination en tête et en pied d\'article automatiquement. Mais vous avez la possibilité de placer cette pagination ailleurs dans votre squelette grâce à une balise #CS_DECOUPE que vous pouvez activer ici :
 [[%balise_decoupe%]]
 
-@puce@ Si vous utilisez ce séparateur à l\'intérieur des balises <onglets> et </onglets> alors vous obtiendrez un jeu d\'onglets.
+@puce@ Si vous utilisez ce séparateur à l\'intérieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors vous obtiendrez un jeu d\'onglets.
 
 Dans les squelettes : vous avez à votre disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 
@@ -363,10 +363,10 @@ Pour définir ce logo, rendez-vous sur la page « Configuration du site » en 
 	'introduction:description' => 'Dit baken dat in de skeletten moet geplaatst worden, dient in het algemeen tot een of in de rubrieken teneinde een samenvatting van de artikelen, van kort te produceren, enz..</p>
 <p>{{Opgelet}} : Alvorens deze functionaliteit te activeren, controleert goed dat geen enkele functie {balise_INTRODUCTION ()} bestaat niet reeds in uw plugins skelet , overbelasting zouden dan een fout van compilatie produceren.</p>
 @puce@ U kunt (in percent ten opzichte van de waarde die per gebrek wordt gebruikt) de lengte van de tekst aangeven die per baken #INTRODUCTION wordt teruggestuurd. Een nul of gelijke waarde aan 100 wijzigt het aspect van de inleiding niet en gebruikt dus de waarden per gebrek volgend: 500 karakters voor de artikelen, 300 voor kort en 600 voor de forums of de rubrieken.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. U kunt hier uw eigen keten van carat&egrave;re aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
+[[%lgr_introduction%&amp;nbsp;%]]
+@puce@ Per gebrek, zijn de punten van vervolg die aan het resultaat van het baken #INTRODUCTION worden toegevoegd, als de tekst te lang is : <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. U kunt hier uw eigen keten van carat&amp;egrave;re aangeven die de lezer mededeelt, dat de verminkte tekst goed een vervolg heeft.
 [[%suite_introduction%]]
-@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: &laquo;Het vervolg van het artikel lezen…&raquo;
+@puce@ Als het baken #INTRODUCTION wordt gebruikt om een artikel kort samen te vatten, dan kan het Mes Zwitserland een band hypertexte op de hierboven bepaalde punten van vervolg vervaardigen teneinde de lezer naar de originele tekst te leiden. Bijvoorbeeld: &amp;laquo;Het vervolg van het artikel lezen…&amp;raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baken #INTRODUCTION',
@@ -591,11 +591,13 @@ Als u plugin réinitialiserd door op een pakijs te klikken, reconfiguratie van h
 	'pipelines' => 'Gebruikte pijpleidingen :',
 	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration>Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # MODIF
+
+
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # MODIF
 	'previsualisation:nom' => 'Prévisualisation des articles', # NEW
 	'puceSPIP' => 'Autoriser le raccourci «*»', # NEW
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>', # NEW
-	'pucesli:description' => 'Vervangt de chips &laquo;-&raquo; (eenvoudig koppelteken) van de artikelen door genoteerde lijsten &laquo;-*&raquo; (in HTML door worden vertaald: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) en waarvan de stijl per css verpersoonlijkt kan worden.', # MODIF
+	'pucesli:description' => 'Vervangt de chips «-» (eenvoudig koppelteken) van de artikelen door genoteerde lijsten «-*» (in HTML door worden vertaald: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) en waarvan de stijl per css verpersoonlijkt kan worden.', # MODIF
 	'pucesli:nom' => 'Mooie chips',
 
 	// Q
@@ -633,28 +635,31 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Zachte ankers',
-	'sommaire:description' => '<MODIF>Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => '<MODIF>Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
-@puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
+@puce@ Vous pouvez définir ici le nombre maximal de caractères retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caractères]]
 
-@puce@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-_ • Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
+@puce@ Vous pouvez aussi fixer le comportement du plugin concernant la création du sommaire: 
+_ • Systématique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> placée n’importe où à l’intérieur du texte de l’article créera une exception).
 _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d\'article automatiquement. Mais vous avez la possibilit&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
+@puce@ Par défaut, le Couteau Suisse insère le sommaire en tête d\'article automatiquement. Mais vous avez la possibilité de placer ce sommaire ailleurs dans votre squelette grâce à une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[%balise_sommaire%]]
 
-Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.', # MODIF
+Ce sommaire peut être couplé avec : « [.->decoupe] ».', # MODIF
 	'sommaire:nom' => 'Een overzicht voor uw artikelen', # MODIF
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>', # NEW
 	'sommaire_avec' => 'Een artikel met overzicht : <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Een artikel zonder overzicht : <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises <a></a> sont interdits.
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots et les balises &lt;a>&lt;/a> sont interdits.
+
+
 
 Listez ici les séquences interdites@_CS_ASTER@ en les séparant par des espaces. [[%spam_mots%]]
+
 @_CS_ASTER@Pour spécifier un mot entier, mettez-le entre paranthèses. Pour une expression avec des espaces, placez-la entre guillemets.', # MODIF
 	'spam:nom' => 'SPAM Bestrijding',
 	'spam_ip' => 'Blocage IP de @ip@ :', # NEW

@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : evet',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Sitedeki t&uuml;m ba&#287;lar akt&uuml;el sayfada a&ccedil;&#305;l&#305;r. Ama d&#305;&#351; ba&#287;lar&#305; yeni pencerede a&ccedil;mak kullan&#305;&#351;l&#305; olabilir -- cela revient &agrave; ajouter {target="_blank"} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Sitedeki tüm bağlar aktüel sayfada açılır. Ama dış bağları yeni pencerede açmak kullanışlı olabilir -- cela revient à ajouter {target=\\"_blank\\"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l’encyclop&eacute;die libre wikipedia.org. &Agrave; vous de choisir l\'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
+@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À vous de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP «~mailto:~» bağlantıları için bir CSS stil öngördü : e-posta bağlantılarının önünde küçük bir zarf görünecek; ama tüm gezginler bunu görüntüleyemeyeceği için (bjğllşmlğ IE6, IE7 et SAF3) bunu kullanıp kullanmamak size kalmış.
 _ test bağlantısı : [->test@test.com] (sayfayı baştan yükleyin).[[%enveloppe_mails%]]', # MODIF
 	'SPIP_liens:nom' => 'SPIP ve dış bağlantılar',
@@ -56,7 +56,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Yazarlar sayfası',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'À l\'intérieur des balises <alinea></alinea>', # NEW
+	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
 	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # NEW
 
@@ -71,7 +71,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'basique' => 'Temel',
 	'blocs:aide' => 'Katlanabilir bloklar : <b><bloc></bloc></b> (alias : <b><invisible></invisible></b>) et <b><visible></visible></b>',
 	'blocs:description' => 'Tıklanabilir başlıklar sayesinde görünür veya görünmez olabilen bloklar oluşturmanıza olanak tanır.
-@puce@ {{SPIP metinlerinde}} : yazarlar için yeni komutlar sunulmuştur <bloc> (ou <invisible>) ve <visible> bu komutlar metinlerde şu biçimde kullanılabilir : 
+@puce@ {{SPIP metinlerinde}} : yazarlar için yeni komutlar sunulmuştur &lt;bloc&gt; (ou &lt;invisible&gt;) ve &lt;visible&gt; bu komutlar metinlerde şu biçimde kullanılabilir : 
 
 <quote><code>
 <bloc>
@@ -119,7 +119,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'chatons:description' => '<code>:nom</code> tipinden zincirler bulunan tüm metinlere resim veya ({chat} için "chaton") ekler.
 _ Bu alet kısayolları plugins/couteau_suisse/img/chatons dizininde bulacağı aynı isimdeki resimlerle değiştirir.', # MODIF
 	'chatons:nom' => '"Chaton"lar',
-	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises <quote> par des balises <q> quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par <q> et les citations contenant des paragraphes par <blockquote>.', # NEW
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # NEW
 	'citations_bb:nom' => 'Citations bien balisées', # NEW
 	'class_spip:description1' => 'Burada bazı SPIP kısayollarını tanımlayabilirsiniz. Boş bir değer "Varsayılanı kullan" anlamındadır.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{SPIP kısayolları}}.
@@ -127,22 +127,22 @@ _ Bu alet kısayolları plugins/couteau_suisse/img/chatons dizininde bulacağı 
 Burada bazı SPIP kısayollarını tanımlayabilirsiniz. Boş değer varsayılan değerin kullanılması demektir.[[%racc_hr%]][[%puce%]]', # MODIF
 	'class_spip:description3' => '
 
-SPIP normalde ara başlıklar için <h3> komutunu kullanır. Burada başka bir komut seçiniz :[[%racc_h1%]][[->%racc_h2%]]', # MODIF
+SPIP normalde ara başlıklar için &lt;h3&gt; komutunu kullanır. Burada başka bir komut seçiniz :[[%racc_h1%]][[->%racc_h2%]]', # MODIF
 	'class_spip:description4' => '
 
-SPIP koyuluk için <strong> komutunu kullanmayı tercih etmiştir. Ama <b> komutu da gayet uygun olur. Bu size kalmış :[[%racc_g1%]][[->%racc_g2%]]
+SPIP koyuluk için &lt;strong> komutunu kullanmayı tercih etmiştir. Ama &lt;b> komutu da gayet uygun olur. Bu size kalmış :[[%racc_g1%]][[->%racc_g2%]]
 
-SPIP italik için <i> komutunu kullanmayı tercih etmiştir. Ama <em> komutu da gayet uygun olur. . Bu size kalmış :[[%racc_i1%]][[->%racc_i2%]]
+SPIP italik için &lt;i> komutunu kullanmayı tercih etmiştir. Ama &lt;em> komutu da gayet uygun olur. . Bu size kalmış :[[%racc_i1%]][[->%racc_i2%]]
 
  Dipnotlar için komut açan ve kapatan kodları da siz belirleyebilirsiniz. (Dikkat ! Değişiklikler yalnız kamusal alanda görünür.) : [[%ouvre_ref%]][[->%ferme_ref%]]
  
-@puce@ {{Varsayılan SPIP stilleri}}. 1.92 sürümüne kadar, tipografik kısayollar hep "spip" tipinde komutlar üretiyordu. Örneğin: <code><p class="spip"></code>. Burada komut stillerini stil sayfalarınıza göre tanımlayabilirsiniz. Boş bir kutu hiçbir stil uygulanmayacağını gösterir.
+@puce@ {{Varsayılan SPIP stilleri}}. 1.92 sürümüne kadar, tipografik kısayollar hep \\"spip\\" tipinde komutlar üretiyordu. Örneğin: <code><p class=\\"spip\\"></code>. Burada komut stillerini stil sayfalarınıza göre tanımlayabilirsiniz. Boş bir kutu hiçbir stil uygulanmayacağını gösterir.
 
 {Dikkat : eğer yukarıda (yatay çizgi, ara başlık, italik, koyu) gibi kısayollar değiştirilirse aşağıda stiller uygulanmayacaktır.}
 
 <q1>
-_ {{1.}} <p>, <i>, <strong> :[[%style_p%]] komutları
-_ {{2.}} <tables>, <hr>, <h3>, <blockquote> et les listes (<ol>, <ul>, etc.) :[[%style_h%]] komutları
+_ {{1.}} &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]] komutları
+_ {{2.}} &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]] komutları
  
 Önemli : 2. stili değiştirirseniz SPIP\'in bu komutlara bağlı stillerini kaybedersiniz.</q1>', # MODIF
 	'class_spip:nom' => 'SPIP ve k&#305;sayollar&#305;…',
@@ -193,9 +193,9 @@ Fon rengini değiştirmek için (eğer yukarıdaki seçenek izin veriyorsa) :@_C
 	'cs_spip_options_on' => '«@_CS_FILE_OPTIONS@» içindeki SPIP seçenekleri', # MODIF
 
 	// D
-	'decoration:aide' => 'Dekorasyon : <b><balise>test</balise></b> ile <b>balise</b> = @liste@',
+	'decoration:aide' => 'Dekorasyon : <b>&lt;balise&gt;test&lt;/balise&gt;</b> ile <b>balise</b> = @liste@',
 	'decoration:description' => '<NEW>De nouveaux styles paramétrables dans vos textes et accessibles grâce à des balises à chevrons. Exemple : 
-<mabalise>texte</mabalise> ou : <mabalise/>.<br />Définissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
+&lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />Définissez ci-dessous les styles CSS dont vous avez besoin, une balise par ligne, selon les syntaxes suivantes :
 - {type.mabalise = mon style CSS}
 - {type.mabalise.class = ma classe CSS}
 - {type.mabalise.lang = ma langue (ex : fr)}
@@ -208,10 +208,10 @@ Le paramètre {type} ci-dessus peut prendre trois valeurs :
 
 [[%decoration_styles%]]', # MODIF
 	'decoration:nom' => 'Dekorasyon',
-	'decoupe:aide' => 'Tırnak bloğu : <b><onglets></onglets></b><br/>Sayfa veya tırnak ayracı : @sep@', # MODIF
+	'decoupe:aide' => 'Tırnak bloğu : <b>&lt;onglets>&lt;/onglets></b><br/>Sayfa veya tırnak ayracı : @sep@', # MODIF
 	'decoupe:aide2' => 'Alias : @sep@',
 	'decoupe:description' => 'Bir makalenin, otomatik bir sayfalama ile kamusal alanda bir kaç sayfaya bölünerek gösterilmesini sağlar. Makalenizde sadece peşpeşe artı işaretlerini(<code>++++</code>) kesinti yapılacak yerde kullanın.
-_ Eğer bu ayracı <onglets> ve </onglets> komutlarıyla kullanırsanız bir çift tırnak elde edersiniz.
+_ Eğer bu ayracı &lt;onglets&gt; ve &lt;/onglets&gt; komutlarıyla kullanırsanız bir çift tırnak elde edersiniz.
 _ İskeletlerde : şu yeni komutlara sahipsiniz #ONGLETS_DEBUT, #ONGLETS_TITRE ve #ONGLETS_FIN.
 _ Bu gereç {makaleleriniz için bir özet} ile birlikte kullanılabilir.', # MODIF
 	'decoupe:nom' => 'Sayfalara ve başlıklara ayır',
@@ -343,17 +343,17 @@ _ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@
 
 Bu logoyu tanımlamak için « Konfigürasyon » düğmesine tıklayarak « Site konfigürasyonu » sayfasına gidiniz.', # MODIF
 	'icone_visiter:nom' => '« Ziyaret Et » düğmesi', # MODIF
-	'insert_head:description' => '[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu (bu komutu <head> ve </head> arasında içerseler de içermeseler de) tüm iskeletlerde etkinleştirir . Bu seçenek sayesinde eklentiler javascript (.js) veya stil sayfası (.css) ekleyebilirler.',
+	'insert_head:description' => '[#INSERT_HEAD->http://www.spip.net/fr_article1902.html] komutunu (bu komutu &lt;head&gt; ve &lt;/head&gt; arasında içerseler de içermeseler de) tüm iskeletlerde etkinleştirir . Bu seçenek sayesinde eklentiler javascript (.js) veya stil sayfası (.css) ekleyebilirler.',
 	'insert_head:nom' => '#INSERT_HEAD komutu',
 	'insertions:description' => 'DiKKAT : geliştirilmekte olan gereç !! [[%insertions%]]',
 	'insertions:nom' => 'Otomatik düzeltmeler',
-	'introduction:description' => '&#304;skeletlere yerle&#351;tirilecek bu komut genelde ana sayfaya veya ba&#351;l&#305;klarda makalelerin veya k&#305;sa haberlerin bir &ouml;zetini olu&#351;turmaya yarar.</p>
-<p>{{Dikkat}} : Bu i&#351;levi aktive etmeden &ouml;nce iskeletinizde veya eklentilerinizde hi&ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmad&#305;&#287;&#305;ndan emin olun, aksi halde derleme hatas&#305; olu&#351;acakt&#305;r.</p>
-@puce@ #INTRODUCTION komutu taraf&#305;ndan g&ouml;nderilen metnin uzunlu&#287;unu (varsay&#305;lan de&#287;ere g&ouml;re y&uuml;zde olarak) belirtebilirsiniz. Bo&#351; bir de&#287;er veya 100 de&#287;eri metni de&#287;i&#351;tirmeyecektir ve &#351;u varsay&#305;lan de&#287;erleri kullanacakt&#305;r : makaleler i&ccedil;in 500 karakter, k&#305;sa haberler i&ccedil;in 300karakter, forumlar veya ba&#351;l&#305;klar i&ccedil;in 600 karakter.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ E&#287;er metin &ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsay&#305;lan &uuml;&ccedil; nokta &#351;&ouml;yledir : <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Burada, metnin kesildi&#287;ini ve devam&#305; oldu&#287;unu siz kendi &ouml;zel karakter zincirinizi kullanarak okuyucular&#305;n&#305;za belirtebilirsiniz.
+	'introduction:description' => '&amp;#304;skeletlere yerle&amp;#351;tirilecek bu komut genelde ana sayfaya veya ba&amp;#351;l&amp;#305;klarda makalelerin veya k&amp;#305;sa haberlerin bir &amp;ouml;zetini olu&amp;#351;turmaya yarar.</p>
+<p>{{Dikkat}} : Bu i&amp;#351;levi aktive etmeden &amp;ouml;nce iskeletinizde veya eklentilerinizde hi&amp;ccedil;bir {balise_INTRODUCTION()} fonksiyonunun  olmad&amp;#305;&amp;#287;&amp;#305;ndan emin olun, aksi halde derleme hatas&amp;#305; olu&amp;#351;acakt&amp;#305;r.</p>
+@puce@ #INTRODUCTION komutu taraf&amp;#305;ndan g&amp;ouml;nderilen metnin uzunlu&amp;#287;unu (varsay&amp;#305;lan de&amp;#287;ere g&amp;ouml;re y&amp;uuml;zde olarak) belirtebilirsiniz. Bo&amp;#351; bir de&amp;#287;er veya 100 de&amp;#287;eri metni de&amp;#287;i&amp;#351;tirmeyecektir ve &amp;#351;u varsay&amp;#305;lan de&amp;#287;erleri kullanacakt&amp;#305;r : makaleler i&amp;ccedil;in 500 karakter, k&amp;#305;sa haberler i&amp;ccedil;in 300karakter, forumlar veya ba&amp;#351;l&amp;#305;klar i&amp;ccedil;in 600 karakter.
+[[%lgr_introduction%&amp;nbsp;%]]
+@puce@ E&amp;#287;er metin &amp;ccedil;ok uzunsa, #INTRODUCTION komutuna eklenen varsay&amp;#305;lan &amp;uuml;&amp;ccedil; nokta &amp;#351;&amp;ouml;yledir : <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. Burada, metnin kesildi&amp;#287;ini ve devam&amp;#305; oldu&amp;#287;unu siz kendi &amp;ouml;zel karakter zincirinizi kullanarak okuyucular&amp;#305;n&amp;#305;za belirtebilirsiniz.
 [[%suite_introduction%]]
-@puce@ #INTRODUCTION komutu bir makaleyi &ouml;zetlemek i&ccedil;in kulan&#305;lm&#305;&#351;sa &#304;svi&ccedil;re &Ccedil;ak&#305;s&#305; &uuml;&ccedil; noktalar&#305;n &uuml;zerine bir hipermetin olu&#351;turarak okuru orijinal metne y&ouml;nlendirir. &Ouml;rne&#287;in : &laquo;Makalenin devam&#305; i&ccedil;in…&raquo;
+@puce@ #INTRODUCTION komutu bir makaleyi &amp;ouml;zetlemek i&amp;ccedil;in kulan&amp;#305;lm&amp;#305;&amp;#351;sa &amp;#304;svi&amp;ccedil;re &amp;Ccedil;ak&amp;#305;s&amp;#305; &amp;uuml;&amp;ccedil; noktalar&amp;#305;n &amp;uuml;zerine bir hipermetin olu&amp;#351;turarak okuru orijinal metne y&amp;ouml;nlendirir. &amp;Ouml;rne&amp;#287;in : &amp;laquo;Makalenin devam&amp;#305; i&amp;ccedil;in…&amp;raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => '#INTRODUCTION komutu',
@@ -573,16 +573,16 @@ Eğer eklentiyi bir pakete tıklayarak sıfırlarsanız İsviçre Çakısı kend
 	'pack_titre' => 'Aktüel Konfigürasyon',
 	'pack_variables_defaut' => 'Varsayılan değişkenlerin kurulumu',
 	'par_defaut' => 'Varsayılan',
-	'paragrapher2:description' => '<code>paragrapher()</code> SPIP fonksiyonu <p> ve </p> komutlarını paragraf içermeyen tüm metinlere ekler. Stillerinizi ve sayfa düzenlemelerinizi daha zarif biçimde yönetmek için sitenizdeki metinleri tektip hale getirme olanağı tanır.[[%paragrapher%]]',
+	'paragrapher2:description' => '<code>paragrapher()</code> SPIP fonksiyonu &lt;p&gt; ve &lt;/p&gt; komutlarını paragraf içermeyen tüm metinlere ekler. Stillerinizi ve sayfa düzenlemelerinizi daha zarif biçimde yönetmek için sitenizdeki metinleri tektip hale getirme olanağı tanır.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrafla',
 	'pipelines' => 'Kullanılan boru hatları :',
 	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration>Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
 	'previsualisation:nom' => 'Prévisualisation des articles', # NEW
 	'puceSPIP' => 'Autoriser le raccourci «*»', # NEW
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>', # NEW
-	'pucesli:description' => 'Makalelerdeki &laquo;-&raquo; (basit tire) i&#351;aretlerini &laquo;-*&raquo; ile de&#287;i&#351;tirir (HTML\'e : &lt;ul>&lt;li>…&lt;/li>&lt;/ul> olarak &ccedil;evrilir). Bunlar&#305;n bi&ccedil;imi css ile ki&#351;iselle&#351;tirilebilir.', # MODIF
+	'pucesli:description' => 'Makalelerdeki «-» (basit tire) işaretlerini «-*» ile değiştirir (HTML\'e : &lt;ul>&lt;li>…&lt;/li>&lt;/ul> olarak çevrilir). Bunların biçimi css ile kişiselleştirilebilir.', # MODIF
 	'pucesli:nom' => 'Güzel simgeler',
 
 	// Q
@@ -620,26 +620,26 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]', # MODIF
 Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si vous cochez les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
  @_CS_PLUGIN_JQUERY192@ Dikkat, bu gereç çalışmak için «DOCTYPE XHTML» tipinden sayfalara (HTML değil!) ve iki {jQuery} eklentisine gereksinim duyar : {ScrollTo} ve {LocalScroll}. İsviçre Çakısı, eğer şu kutucukları işaratlerseniz bunları direkt olarak kurabilir. [[%scrollTo%]][[->%LocalScroll%]]', # MODIF
 	'soft_scroller:nom' => 'Yumuşak çapalar',
-	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour le texte de vos articles et de vos rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;h3>Un intertitre&lt;/h3> ou raccourcis SPIP : intertitres de la forme :<code>{{{Un gros titre}}}</code>).
 
-@puce@ Vous pouvez d&eacute;finir ici le nombre maximal de caract&egrave;res retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caract&egrave;res]]
+@puce@ Vous pouvez définir ici le nombre maximal de caractères retenus des intertitres pour construire le sommaire :[[%lgr_sommaire% caractères]]
 
-@puce@ Vous pouvez aussi fixer le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-_ • Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
+@puce@ Vous pouvez aussi fixer le comportement du plugin concernant la création du sommaire: 
+_ • Systématique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> placée n’importe où à l’intérieur du texte de l’article créera une exception).
 _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re le sommaire en t&ecirc;te d\'article automatiquement. Mais vous avez la possibilit&eacute; de placer ce sommaire ailleurs dans votre squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE que vous pouvez activer ici :
+@puce@ Par défaut, le Couteau Suisse insère le sommaire en tête d\'article automatiquement. Mais vous avez la possibilité de placer ce sommaire ailleurs dans votre squelette grâce à une balise #CS_SOMMAIRE que vous pouvez activer ici :
 [[%balise_sommaire%]]
 
-Ce sommaire peut &ecirc;tre coupl&eacute; avec : &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.', # MODIF
+Ce sommaire peut être couplé avec : « [.->decoupe] ».', # MODIF
 	'sommaire:nom' => 'Makaleleriniz için bir özet', # MODIF
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>', # NEW
 	'sommaire_avec' => 'Özet içeren bir makale : <b>@racc@</b>',
 	'sommaire_sans' => 'Özetsiz bir makale : <b>@racc@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
-	'spam:description' => 'Kamusal bölümde otomatik veya kötü niyetli mesaj gönderilmesine karşı savaşır. Bazı sözcükler ve <a></a> komutları yasaktır.
+	'spam:description' => 'Kamusal bölümde otomatik veya kötü niyetli mesaj gönderilmesine karşı savaşır. Bazı sözcükler ve &lt;a>&lt;/a> komutları yasaktır.
 
 Burada yasaklanacak serileri @_CS_ASTER@ aralarında bir boşluk bırakarak listeleyiniz. [[%spam_mots%]]
 @_CS_ASTER@Tek bir sözcüğü parantez içine alınız. Boşluklar içeren bir deyimi tırnak içine alınız.', # MODIF

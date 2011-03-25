@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : oui',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par d&eacute;faut dans la fen&ecirc;tre de navigation en cours. Mais il peut &ecirc;tre utile d\'ouvrir les liens externes au site dans une nouvelle fen&ecirc;tre ext&eacute;rieure -- cela revient &agrave; ajouter {target="_blank"} &agrave; toutes les balises &lt;a&gt; dot&eacute;es par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois n&eacute;cessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'&eacute;tendre au maximum cette fonctionnalit&eacute;.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tous les liens du site s\'ouvrent par défaut dans la fenêtre de navigation en cours. Mais il peut être utile d\'ouvrir les liens externes au site dans une nouvelle fenêtre extérieure -- cela revient à ajouter {target=\\"_blank\\"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet de relier des mots &agrave; leur d&eacute;finition gr&acirc;ce au raccourci typographique <code>[?mot]</code>. Par d&eacute;faut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l’encyclop&eacute;die libre wikipedia.org. &Agrave; toi de choisir l\'adresse &agrave; utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si tu laisses vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À toi de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à toi de voir s\'il faut conserver cet ajout.
 _ Lien de test : [->test@test.com] (recharge la page entièrement).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP et les liens… externes',
@@ -57,7 +57,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Page des auteurs',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]',
 	'autobr:nom' => 'Retours de ligne automatiques',
-	'autobr_non' => 'À l\'intérieur des balises <alinea></alinea>',
+	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>',
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)',
 	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>',
 
@@ -70,10 +70,10 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'barres_typo_forum' => 'Messages de Forum',
 	'barres_typo_intro' => 'Le plugin «Porte-Plume» a été détecté. Choisi ici les barres typographiques où certains boutons seront insérés.',
 	'basique' => 'Basique',
-	'blocs:aide' => 'Blocs Dépliables : <b><bloc></bloc></b> (alias : <b><invisible></invisible></b>) et <b><visible></visible></b>',
+	'blocs:aide' => 'Blocs Dépliables : <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (alias : <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) et <b>&lt;visible&gt;&lt;/visible&gt;</b>',
 	'blocs:description' => 'Te permet  de créer des blocs dont le titre cliquable peut les rendre visibles ou invisibles.
 
-@puce@ {{Dans les textes SPIP}} : les rédacteurs ont à disposition les  nouvelles balises <bloc> (ou <invisible>) et <visible> à utiliser dans leurs textes comme ceci : 
+@puce@ {{Dans les textes SPIP}} : les rédacteurs ont à disposition les  nouvelles balises &lt;bloc&gt; (ou &lt;invisible&gt;) et &lt;visible&gt; à utiliser dans leurs textes comme ceci : 
 
 <quote><code>
 <bloc>
@@ -97,9 +97,9 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ En cochant «oui» ci-dessous, l\'état des blocs numérotés sera stocké dans un cookie le temps de la session, afin de conserver l\'aspect de la page en cas de retour.[[%blocs_cookie%]]
 
-@puce@ Le Couteau Suisse utilise par défaut la balise HTML <h4> pour le titre des blocs dépliables. Choisis ici une autre balise <hN> :[[%bloc_h4%]]
+@puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisis ici une autre balise &lt;hN&gt; :[[%bloc_h4%]]
 
-@puce@ Afin d\'obtenir un effet plus doux au moment du clic, tes blocs dépliables peuvent s\'animer à la manière d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
+@puce@ Afin d\'obtenir un effet plus doux au moment du clic, tes blocs dépliables peuvent s\'animer à la manière d\'un \\"glissement\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Dépliables',
 	'boites_privees:description' => 'Toutes les boîtes décrites ci-dessous apparaissent ici ou là dans la partie privée.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les révisions du Couteau Suisse}} : un cadre sur la présente page de configuration, indiquant les dernières modifications apportées au code du plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -138,7 +138,7 @@ _ • Un champ de recherche &agrave; partir de %select_max_auteurs% auteurs(s).<
 	'chatons:description' => 'Insère des images (ou chatons pour les {tchats}) dans tous les textes où apparaît une chaîne du genre {{<code>:nom</code>}}.
 _ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve dans ton dossier <code>mon_squelette_toto/img/chatons/</code>, ou par défaut, le dossier <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Chatons',
-	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de ton site (articles, rubriques, etc.), cet outil remplace les balises <quote> par des balises <q> quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par <q> et les citations contenant des paragraphes par <blockquote>.',
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de ton site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citations bien balisées',
 	'class_spip:description1' => 'Tu peux ici définir certains raccourcis de SPIP. Une valeur vide équivaut à utiliser la valeur par défaut.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Les raccourcis de SPIP}}.
@@ -146,26 +146,26 @@ _ Cet outil remplace ces raccourcis par les images du même nom qu\'il trouve da
 Tu peux ici définir certains raccourcis de SPIP. Une valeur vide équivaut à utiliser la valeur par défaut.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
 
-{Attention : si l\'outil « [.->pucesli] » est activé, le remplacement du tiret « - » ne sera plus effectué ; une liste <ul><li> sera utilisée à la place.}
+{Attention : si l\'outil « [.->pucesli] » est activé, le remplacement du tiret « - » ne sera plus effectué ; une liste &lt;ul>&lt;li> sera utilisée à la place.}
 
-SPIP utilise habituellement la balise <h3> pour les intertitres. Choisis ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
+SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisis ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
 
-SPIP a choisi d\'utiliser la balise <strong> pour transcrire les gras. Mais <b> aurait pu également convenir, avec ou sans style. À toi de voir :[[%racc_g1%]][[->%racc_g2%]]
+SPIP a choisi d\'utiliser la balise &lt;strong> pour transcrire les gras. Mais &lt;b> aurait pu également convenir, avec ou sans style. À toi de voir :[[%racc_g1%]][[->%racc_g2%]]
 
-SPIP a choisi d\'utiliser la balise <i> pour transcrire les italiques. Mais <em> aurait pu également convenir, avec ou sans style. À toi de voir :[[%racc_i1%]][[->%racc_i2%]]
+SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu également convenir, avec ou sans style. À toi de voir :[[%racc_i1%]][[->%racc_i2%]]
 
  Tu peux aussi définir le code ouvrant et fermant pour les appels de notes de bas de pages (Attention ! Les modifications ne seront visibles que sur l\'espace public.) : [[%ouvre_ref%]][[->%ferme_ref%]]
 
  Tu peux définir le code ouvrant et fermant pour les notes de bas de pages : [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Les styles de SPIP par défaut}}. Jusqu\'à la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises systématiquement affublés du style "spip". Par exemple : <code><p class="spip"></code>. Tu peux ici définir le style de ces balises en fonction de tes feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqué.
+@puce@ {{Les styles de SPIP par défaut}}. Jusqu\'à la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises systématiquement affublés du style \\"spip\\". Par exemple : <code><p class=\\"spip\\"></code>. Tu peux ici définir le style de ces balises en fonction de tes feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqué.
 
 {Attention : si certains raccourcis (ligne horizontale, intertitre, italique, gras) ont été modifiés ci-dessus, alors les styles ci-dessous ne seront pas appliqués.}
 
 <q1>
-_ {{1.}} Balises <p>, <i>, <strong> :[[%style_p%]]
-_ {{2.}} Balises <tables>, <hr>, <h3>, <blockquote> et les listes (<ol>, <ul>, etc.) :[[%style_h%]]
+_ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
+_ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
 Note bien : en modifiant ce deuxième style, tu perds alors les styles standards de SPIP associés à ces balises.</q1>',
 	'class_spip:nom' => 'SPIP et ses raccourcis…',
@@ -219,9 +219,9 @@ Si les requêtes externes de ton serveur posent des problèmes ou par souci d\'u
 	'cs_spip_options_on' => 'Les options SPIP dans «<html>@_CS_FILE_OPTIONS@</html>@»',
 
 	// D
-	'decoration:aide' => 'Décoration : <b><balise>test</balise></b>, avec <b>balise</b> = @liste@',
+	'decoration:aide' => 'Décoration : <b>&lt;balise&gt;test&lt;/balise&gt;</b>, avec <b>balise</b> = @liste@',
 	'decoration:description' => 'De nouveaux styles paramétrables dans tes textes et accessibles grâce à des balises à chevrons. Exemple : 
-<mabalise>texte</mabalise> ou : <mabalise/>.<br />Définis ci-dessous les styles CSS dont tu as besoin, une balise par ligne, selon les syntaxes suivantes :
+&lt;mabalise&gt;texte&lt;/mabalise&gt; ou : &lt;mabalise/&gt;.<br />Définis ci-dessous les styles CSS dont tu as besoin, une balise par ligne, selon les syntaxes suivantes :
 - {type.mabalise = mon style CSS}
 - {type.mabalise.class = ma classe CSS}
 - {type.mabalise.lang = ma langue (ex : fr)}
@@ -234,14 +234,14 @@ Le paramètre {type} ci-dessus peut prendre trois valeurs :
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Décoration',
-	'decoupe:aide' => 'Bloc d\'onglets : <b><onglets></onglets></b><br />Séparateur de pages ou d\'onglets : @sep@',
+	'decoupe:aide' => 'Bloc d\'onglets : <b>&lt;onglets>&lt;/onglets></b><br />Séparateur de pages ou d\'onglets : @sep@',
 	'decoupe:aide2' => 'Alias : @sep@',
 	'decoupe:description' => '@puce@ Découpe l\'affichage public d\'un article en plusieurs pages grâce à une pagination automatique. Place simplement dans votre article quatre signes plus consécutifs (<code>++++</code>) à l\'endroit qui doit recevoir la coupure.
 
 Par défaut, le Couteau Suisse insère la pagination en tête et en pied d\'article automatiquement. Mais tu as la possibilité de placer cette pagination ailleurs dans ton squelette grâce à une balise #CS_DECOUPE que tu peux activer ici :
 [[%balise_decoupe%]]
 
-@puce@ Si tu utilises ce séparateur à l\'intérieur des balises <onglets> et </onglets> alors tu obtiendras un jeu d\'onglets.
+@puce@ Si tu utilises ce séparateur à l\'intérieur des balises &lt;onglets&gt; et &lt;/onglets&gt; alors tu obtiendras un jeu d\'onglets.
 
 Dans les squelettes : tu as à ta disposition les nouvelles balises #ONGLETS_DEBUT, #ONGLETS_TITRE et #ONGLETS_FIN.
 
@@ -291,7 +291,7 @@ Cet outil peut être couplé avec « [.->sommaire] ».',
 	'ecran_maj_ok' => '(semble à jour).',
 	'ecran_securite:description' => 'L\'écran de sécurité est un fichier PHP directement téléchargé du site officiel de SPIP, qui protège tes sites en bloquant certaines attaques liées à des trous de sécurité. Ce système permet de réagir très rapidement lorsqu\'un problème est découvert, en colmatant le trou sans pour autant devoir mettre à niveau tout son site ni appliquer un « patch » complexe.
 
-A savoir : l\'écran verrouille certaines variables. Ainsi, par exemple, les  variables nommées <code>id_xxx</code> sont toutes  contrôlées comme étant obligatoirement des valeurs numériques entières, afin d\'éviter toute injection de code SQL via ce genre de variable très courante. Certains plugins ne sont pas compatibles avec toutes les règles de l\'écran, utilisant par exemple <code>&id_x=new</code> pour créer un objet {x}.
+A savoir : l\'écran verrouille certaines variables. Ainsi, par exemple, les  variables nommées <code>id_xxx</code> sont toutes  contrôlées comme étant obligatoirement des valeurs numériques entières, afin d\'éviter toute injection de code SQL via ce genre de variable très courante. Certains plugins ne sont pas compatibles avec toutes les règles de l\'écran, utilisant par exemple <code>&amp;id_x=new</code> pour créer un objet {x}.
 
 Outre la sécurité, cet écran a la capacité réglable de moduler les accès des robots  d\'indexation aux scripts PHP, de manière à leur dire de « revenir plus tard »  lorsque le serveur est saturé.[[ %ecran_actif%]][[->
 @puce@ Régler la protection anti-robots quand la charge du serveur (load)  excède la valeur : %ecran_load%
@@ -383,17 +383,17 @@ Arguments disponibles : {zone}, {format} et/ou {id}.',
 
 Pour définir ce logo, va sur la page «<:titre_configuration:>» en cliquant sur le bouton «<:icone_configuration_site:>».',
 	'icone_visiter:nom' => 'Bouton « <:icone_visiter_site:> »',
-	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre <head> et </head>. Grâce à cette option, les plugins pourront insérer du JavaScript (.js) ou des feuilles de style (.css).',
+	'insert_head:description' => 'Active automatiquement la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] sur tous les squelettes, qu\'ils aient ou non cette balise entre &lt;head&gt; et &lt;/head&gt;. Grâce à cette option, les plugins pourront insérer du JavaScript (.js) ou des feuilles de style (.css).',
 	'insert_head:nom' => 'Balise #INSERT_HEAD',
 	'insertions:description' => 'ATTENTION : outil en cours de développement !! [[%insertions%]]',
 	'insertions:nom' => 'Corrections automatiques',
-	'introduction:description' => 'Cette balise &agrave; placer dans les squelettes sert en g&eacute;n&eacute;ral &agrave; la une ou dans les rubriques afin de produire un r&eacute;sum&eacute; des articles, des br&egrave;ves, etc..</p>
-<p>{{Attention}} : Avant d\'activer cette fonctionnalit&eacute;, v&eacute;rifie bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe d&eacute;j&agrave; dans ton squelette ou tes plugins, la surcharge produirait alors une erreur de compilation.</p>
-@puce@ Tu peux pr&eacute;ciser (en pourcentage par rapport &agrave; la valeur utilis&eacute;e par d&eacute;faut) la longueur du texte renvoy&eacute; par balise #INTRODUCTION. Une valeur nulle ou &eacute;gale &agrave; 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par d&eacute;faut suivantes : 500 caract&egrave;res pour les articles, 300 pour les br&egrave;ves et 600 pour les forums ou les rubriques.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Par d&eacute;faut, les points de suite ajout&eacute;s au r&eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&laquo;&amp;nbsp;(…)&raquo;</html>.Tu peux ici pr&eacute;ciser ta propre cha&icirc;ne de caract&egrave;res indiquant au lecteur que le texte tronqu&eacute; a bien une suite.
+	'introduction:description' => 'Cette balise &amp;agrave; placer dans les squelettes sert en g&amp;eacute;n&amp;eacute;ral &amp;agrave; la une ou dans les rubriques afin de produire un r&amp;eacute;sum&amp;eacute; des articles, des br&amp;egrave;ves, etc..</p>
+<p>{{Attention}} : Avant d\'activer cette fonctionnalit&amp;eacute;, v&amp;eacute;rifie bien qu\'aucune fonction {balise_INTRODUCTION()} n\'existe d&amp;eacute;j&amp;agrave; dans ton squelette ou tes plugins, la surcharge produirait alors une erreur de compilation.</p>
+@puce@ Tu peux pr&amp;eacute;ciser (en pourcentage par rapport &amp;agrave; la valeur utilis&amp;eacute;e par d&amp;eacute;faut) la longueur du texte renvoy&amp;eacute; par balise #INTRODUCTION. Une valeur nulle ou &amp;eacute;gale &amp;agrave; 100 ne modifie pas l\'aspect de l\'introduction et utilise donc les valeurs par d&amp;eacute;faut suivantes : 500 caract&amp;egrave;res pour les articles, 300 pour les br&amp;egrave;ves et 600 pour les forums ou les rubriques.
+[[%lgr_introduction%&amp;nbsp;%]]
+@puce@ Par d&amp;eacute;faut, les points de suite ajout&amp;eacute;s au r&amp;eacute;sultat de la balise #INTRODUCTION si le texte est trop long sont : <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>.Tu peux ici pr&amp;eacute;ciser ta propre cha&amp;icirc;ne de caract&amp;egrave;res indiquant au lecteur que le texte tronqu&amp;eacute; a bien une suite.
 [[%suite_introduction%]]
-@puce@ Si la balise #INTRODUCTION est utilis&eacute;e pour r&eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &laquo;Lire la suite de l\'article…&raquo;
+@puce@ Si la balise #INTRODUCTION est utilis&amp;eacute;e pour r&amp;eacute;sumer un article, alors le Couteau Suisse peut fabriquer un lien hypertexte sur les points de suite d&amp;eacute;finis ci-dessus afin de mener le lecteur vers le texte original. Par exemple : &amp;laquo;Lire la suite de l\'article…&amp;raquo;
 [[%lien_introduction%]]',
 	'introduction:nom' => 'Balise #INTRODUCTION',
 
@@ -613,18 +613,18 @@ Si tu réinitialises le plugin en cliquant sur un pack, le Couteau Suisse se rec
 	'pack_titre' => 'Configuration Actuelle',
 	'pack_variables_defaut' => 'Installation des variables par défaut',
 	'par_defaut' => 'Par défaut',
-	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> insère des balises <p> et </p> dans tous les textes qui sont dépourvus de paragraphes. Afin de gérer plus finement tes styles et vos mises en page, tu as la possibilité d\'uniformiser l\'aspect des textes de ton site.[[%paragrapher%]]',
+	'paragrapher2:description' => 'La fonction SPIP <code>paragrapher()</code> insère des balises &lt;p&gt; et &lt;/p&gt; dans tous les textes qui sont dépourvus de paragraphes. Afin de gérer plus finement tes styles et vos mises en page, tu as la possibilité d\'uniformiser l\'aspect des textes de ton site.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paragrapher',
 	'pipelines' => 'Pipelines utilisés :',
-	'previsualisation:description' => 'Par d&eacute;faut, SPIP permet de pr&eacute;visualiser un article dans sa version publique et styl&eacute;e, mais uniquement lorsque celui-ci a &eacute;t&eacute; &laquo; propos&eacute; &agrave; l’&eacute;valuation &raquo;. Hors cet outil permet aux auteurs de pr&eacute;visualiser &eacute;galement les articles pendant leur r&eacute;daction. Chacun peut alors pr&eacute;visualiser et modifier son texte &agrave; sa guise.
+	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalit&eacute; ne modifie pas les droits de pr&eacute;visualisation. Pour que tes r&eacute;dacteurs aient effectivement le droit de pr&eacute;visualiser leurs articles &laquo; en cours de r&eacute;daction &raquo;, tu dois l’autoriser (dans le menu {[Configuration&gt;Fonctions avanc&eacute;es->./?exec=config_fonctions]} de l’espace priv&eacute;).',
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que tes rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », tu dois l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).',
 	'previsualisation:nom' => 'Prévisualisation des articles',
 	'puceSPIP' => 'Autoriser le raccourci «*»',
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>',
-	'pucesli:description' => 'Remplace les puces &laquo;-&raquo; (tiret simple) des diff&eacute;rents contenus de ton site par des listes not&eacute;es &laquo;-*&raquo; (traduites en HTML par : &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) et dont le style peut &ecirc;tre facilement personnalis&eacute; par css.
+	'pucesli:description' => 'Remplace les puces «-» (tiret simple) des différents contenus de ton site par des listes notées «-*» (traduites en HTML par : &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) et dont le style peut être facilement personnalisé par css.
 
-Afin de conserver l\'acc&egrave;s &agrave; la puce image originale de SPIP (le petit triangle), un nouveau raccourci en d&eacute;but de ligne &laquo;*&raquo; peut &ecirc;tre propos&eacute; &agrave; tes r&eacute;dacteurs :[[%puceSPIP%]]',
+Afin de conserver l\'accès à la puce image originale de SPIP (le petit triangle), un nouveau raccourci en début de ligne «*» peut être proposé à tes rédacteurs :[[%puceSPIP%]]',
 	'pucesli:nom' => 'Belles puces',
 
 	// Q
@@ -662,43 +662,43 @@ _ Dessins : [Sylvain Michel->http://www.guaph.net/]',
 Attention, cet outil a besoin pour fonctionner de pages au «DOCTYPE XHTML» (non HTML !) et de deux plugins {jQuery} : {ScrollTo} et {LocalScroll}. Le Couteau Suisse peut les installer directement si tu coches les cases suivantes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@',
 	'soft_scroller:nom' => 'Ancres douces',
-	'sommaire:description' => 'Construit un sommaire pour le texte de tes articles et de tes rubriques afin d’acc&eacute;der rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
+	'sommaire:description' => 'Construit un sommaire pour le texte de tes articles et de tes rubriques afin d’accéder rapidement aux gros titres (balises HTML &lt;@h3@>Un gros titre&lt;/@h3@>) ou aux intertitres SPIP (de syntaxe <code>{{{Un intertitre}}}</code>).
 
-Pour information, l\'outil &laquo;&nbsp;[.->class_spip]&nbsp;&raquo; permet de choisir la balise &lt;hN> utilis&eacute;e pour les intertitres de SPIP.
+Pour information, l\'outil « [.->class_spip] » permet de choisir la balise &lt;hN> utilisée pour les intertitres de SPIP.
 
-@puce@ D&eacute;finis ici la profondeur retenue sur les intertitres pour construire le sommaire (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
+@puce@ Définis ici la profondeur retenue sur les intertitres pour construire le sommaire (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
 
-@puce@ D&eacute;finis ici le nombre maximal de caract&egrave;res retenus par intertitre :[[%lgr_sommaire% caract&egrave;res]]
+@puce@ Définis ici le nombre maximal de caractères retenus par intertitre :[[%lgr_sommaire% caractères]]
 
-@puce@ Les ancres du sommaire peuvent &ecirc;tre calcul&eacute;es &agrave; partir du titre et non ressembler &agrave; : {outil_sommaire_NN}. Cette option donne &eacute;galement acc&egrave;s &agrave; la syntaxe <code>{{{Mon titre<mon_ancre>}}}</code> qui permet de choisir l\'ancre utilis&eacute;e.[[%jolies_ancres%]]
+@puce@ Les ancres du sommaire peuvent être calculées à partir du titre et non ressembler à : {outil_sommaire_NN}. Cette option donne également accès à la syntaxe <code>{{{Mon titre<mon_ancre>}}}</code> qui permet de choisir l\'ancre utilisée.[[%jolies_ancres%]]
 
-@puce@ Fixe ici le comportement du plugin concernant la cr&eacute;ation du sommaire: 
-_ • Syst&eacute;matique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> plac&eacute;e n’importe o&ugrave; &agrave; l’int&eacute;rieur du texte de l’article cr&eacute;era une exception).
+@puce@ Fixe ici le comportement du plugin concernant la création du sommaire: 
+_ • Systématique pour chaque article (une balise <code>@_CS_SANS_SOMMAIRE@</code> placée n’importe où à l’intérieur du texte de l’article créera une exception).
 _ • Uniquement pour les articles contenant la balise <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Par d&eacute;faut, le Couteau Suisse ins&egrave;re automatiquement le sommaire en t&ecirc;te d\'article. Mais tu as ce sommaire ailleurs dans ton squelette gr&acirc;ce &agrave; une balise #CS_SOMMAIRE.
+@puce@ Par défaut, le Couteau Suisse insère automatiquement le sommaire en tête d\'article. Mais tu as ce sommaire ailleurs dans ton squelette grâce à une balise #CS_SOMMAIRE.
 [[%balise_sommaire%]]
 
-Ce sommaire est compatible avec &laquo;&nbsp;[.->decoupe]&nbsp;&raquo; et &laquo;&nbsp;[.->titres_typo]&nbsp;&raquo;.',
+Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] ».',
 	'sommaire:nom' => 'Sommaire automatique',
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>',
 	'sommaire_avec' => 'Un texte avec sommaire : <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texte sans sommaire : <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
-	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : incite tes r&eacute;dacteurs &agrave; utiliser les raccourcis de liens au format SPIP.
+	'spam:description' => 'Tente de lutter contre les envois de messages automatiques et malveillants en partie publique. Certains mots, tout comme les balises en clair &lt;a>&lt;/a>, sont interdits : incite tes rédacteurs à utiliser les raccourcis de liens au format SPIP.
 
-@puce@ Liste ici les s&eacute;quences interdites en les s&eacute;parant par des espaces.[[%spam_mots%]]
+@puce@ Liste ici les séquences interdites en les séparant par des espaces.[[%spam_mots%]]
 <q1>• Pour une expression avec des espaces, place-la entre guillemets.
-_ • Pour sp&eacute;cifier un mot entier, mets-le entre parenth&egrave;ses. Exemple~:~{(asses)}.
-_ • Pour une expression r&eacute;guli&egrave;re, v&eacute;rifie bien la syntaxe et place-la entre slashes puis entre guillemets.
-_ Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.
-_ • Pour une expression r&eacute;guli&egrave;re devant agir sur des caract&egrave;res HTML, place le test entre &laquo;&amp;#&raquo; et &laquo;;&raquo;.
-_ Exemple~:~{<html>"/&amp;#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
+_ • Pour spécifier un mot entier, mets-le entre parenthèses. Exemple~:~{(asses)}.
+_ • Pour une expression régulière, vérifie bien la syntaxe et place-la entre slashes puis entre guillemets.
+_ Exemple~:~{<html>\\"/@test\\.(com|fr)/\\"</html>}.
+_ • Pour une expression régulière devant agir sur des caractères HTML, place le test entre «&#» et «;».
+_ Exemple~:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 
-@puce@ Certaines adresses IP peuvent &eacute;galement &ecirc;tre bloqu&eacute;es &agrave; la source. Note toutefois que derri&egrave;re ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un r&eacute;seau entier.[[%spam_ips%]]
-<q1>• Utilise le caract&egrave;re &laquo;*&raquo; pour plusieurs chiffres, &laquo;?&raquo; pour un seul et les crochets pour des classes de chiffres.</q1>',
+@puce@ Certaines adresses IP peuvent également être bloquées à la source. Note toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
+<q1>• Utilise le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam_ip' => 'Blocage IP de @ip@ :',
 	'spam_test_ko' => 'Ce message serait bloqué par le filtre anti-SPAM !',

@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ': sí',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tolos enllaces del sitiu abrense por omisión nel ventanu de ñavegación actual. Pero pue ser amañoso abrir los enllaces esternos al sitiu nun ventanu esterior nuevu -- lo que lleva a amesta-yos {target="_blank"} a toles balices <a> a les que SPIP conseña les clases {spip_out}, {spip_url} o {spip_glossaire}. Pue ser necesario amesta-yos una d\'estes clases a los enllaces de la cadarma del sitiu (archivos html) pa estender al másimu esta carauterística.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tolos enllaces del sitiu abrense por omisión nel ventanu de ñavegación actual. Pero pue ser amañoso abrir los enllaces esternos al sitiu nun ventanu esterior nuevu -- lo que lleva a amesta-yos {target=\\"_blank\\"} a toles balices &lt;a&gt; a les que SPIP conseña les clases {spip_out}, {spip_url} o {spip_glossaire}. Pue ser necesario amesta-yos una d\'estes clases a los enllaces de la cadarma del sitiu (archivos html) pa estender al másimu esta carauterística.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enllazar les pallabres cola so definición gracies a l\'atayu tipográficu <code>[?pallabra]</code>. Por omisión (o si dexes vacía la caxina d\'embaxo), el glosariu esternu empobina pa la enciclopedia llibre wikipedia.org. A to eleición l\'enllaz a utilizar. <br />Enllaz de preba: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP tien previstu un estilu CSS pa los enllaces «~mailto:»: un sobre pequeñu tendría que apaecer delantre de cada enllaz lligau a un corréu; pero como hai ñavegadores que nun puen amosalo (notablemente IE6, IE7 y SAF3), tú decides si quies mantener esta carauterística.
@@ -56,7 +56,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Páxina d\'autores',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'À l\'intérieur des balises <alinea></alinea>', # NEW
+	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
 	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # NEW
 
@@ -72,7 +72,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'blocs:aide' => 'Bloques Desplegables: <b><bloc></bloc></b> (alias: <b><invisible></invisible></b>) y <b><visible></visible></b>',
 	'blocs:description' => 'Te permite crear bloques que puen facese visibles o invisibles al calcar nel so títulu.
 
-@puce@ {{Nos testos SPIP}}: los redactores disponen de les nueves balices <bloc> (o <invisible>) y <visible> pa utilizar nos testos así: 
+@puce@ {{Nos testos SPIP}}: los redactores disponen de les nueves balices &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; pa utilizar nos testos así: 
 
 <quote><code>
 <bloc>
@@ -95,7 +95,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ si marques «sí» embaxo, l\'estáu de los bloques numberaos atroxarase nuna cookie demientres la sesion, pa conservar l\'aspeutu de la páxina en casu de volver.[[%blocs_cookie%]]
 
-@puce@ La Navaya Suiza utiliza por omisión la etiqueta HTML <h4> pal títulu de los bloques estenderexables. Equí pue escoyese otra etiqueta <hN>: [[%bloc_h4%]]', # MODIF
+@puce@ La Navaya Suiza utiliza por omisión la etiqueta HTML &lt;h4&gt; pal títulu de los bloques estenderexables. Equí pue escoyese otra etiqueta &lt;hN&gt;: [[%bloc_h4%]]', # MODIF
 	'blocs:nom' => 'Bloques Desplegables',
 	'boites_privees:description' => 'Toes les caxes descrites embaxo apaecen per dayuri na parte privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisiones de La Navaya Suiza}}: un cuadru na presente páxina de configuración, que indica les caberes modificaciones amestáes al códigu del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -128,7 +128,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'chatons:description' => 'Inxerta imaxes (o emoticonos pa los {chats}) en tolos testos nos que apaeza una cadena de tipu <code>:nome</code>.
 _ Esta ferramienta camuda esos atayos poles imaxes del mesmu nome qu\'alcuentre nel direutoriu <code>mon_squelette_toto/img/chatons/</code> o, por omisión, nel direutoriu <code>couteau_suisse/img/chatons/</code>.', # MODIF
 	'chatons:nom' => 'Emoticonos',
-	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises <quote> par des balises <q> quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par <q> et les citations contenant des paragraphes par <blockquote>.', # NEW
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # NEW
 	'citations_bb:nom' => 'Citations bien balisées', # NEW
 	'class_spip:description1' => 'Equí vas poder definir dellos atayos de SPIP. Un valor vacíu ye lo mesmo que utilizar el valor por omisión.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Los atayos de SPIP}}.
@@ -136,26 +136,26 @@ _ Esta ferramienta camuda esos atayos poles imaxes del mesmu nome qu\'alcuentre 
 Equí vas poder definir dellos atayos de SPIP. Un valor vacíu ye igual que utilizar el valor por omisión.[[%racc_hr%]][[%puce%]]', # MODIF
 	'class_spip:description3' => '
 
-{Atención: si la ferramienta «[.->pucesli]» ta activada, el remplazu del guión « - » nun s\'efeutua; nel so llugar se utilizará una llista <ul><li>.}
+{Atención: si la ferramienta «[.->pucesli]» ta activada, el remplazu del guión « - » nun s\'efeutua; nel so llugar se utilizará una llista &lt;ul>&lt;li>.}
 
-SPIP utiliza habitualmente la etiqueta <h3> pa los intertítulos. Escueye equí otra si quiés cambeala:[[%racc_h1%]][[->%racc_h2%]]', # MODIF
+SPIP utiliza habitualmente la etiqueta &lt;h3&gt; pa los intertítulos. Escueye equí otra si quiés cambeala:[[%racc_h1%]][[->%racc_h2%]]', # MODIF
 	'class_spip:description4' => '
 
-SPIP escueye utilizar la marca<strong> pa trescribir les negrines. Pero <b> podría convenir lo mesmo, con o ensin estilu. Como tú lo veas: [[%racc_g1%]][[->%racc_g2%]]
+SPIP escueye utilizar la marca&lt;strong> pa trescribir les negrines. Pero &lt;b> podría convenir lo mesmo, con o ensin estilu. Como tú lo veas: [[%racc_g1%]][[->%racc_g2%]]
 
-SPIP escueye utilizar la marca <i> pa trescribir les itáliques. Pero <em> podría convenir lo mesmo, con o ensin estilu. Como tú lo veas: [[%racc_i1%]][[->%racc_i2%]]
+SPIP escueye utilizar la marca &lt;i> pa trescribir les itáliques. Pero &lt;em> podría convenir lo mesmo, con o ensin estilu. Como tú lo veas: [[%racc_i1%]][[->%racc_i2%]]
 
  Lo mesmo puedes definir el códigu d\'apertura y zarre pa les llamáes a notes de pie de páxina (¡Atención! Les modificaciones nun van vese más que nel espaciu públicu.): [[%ouvre_ref%]][[->%ferme_ref%]]
  
  Puedes definir el códigu d\'apertura y zarre pa les notes de pie de páxina: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atayos tipográficos producíen balices col estilu "spip" conseñáu por sistema. Por exemplu: <code><p class="spip"></code>. Equí pues definir l\'estilu d\'estes balices en función de les tos fueyes d\'estilu. Una caxa vacía significa que nun va aplicase dengún estilu en particular.
+@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atayos tipográficos producíen balices col estilu \\"spip\\" conseñáu por sistema. Por exemplu: <code><p class=\\"spip\\"></code>. Equí pues definir l\'estilu d\'estes balices en función de les tos fueyes d\'estilu. Una caxa vacía significa que nun va aplicase dengún estilu en particular.
 
 {Atención: si se cambearon más enriba dellos atayos (llinia horizontal, intertítulu, itálica, negrina), los estilos d\'embaxo nun s\'aplicarán.}
 
 <q1>
-_ {{1.}} Balices <p>, <i>, <strong>:[[%style_p%]]
-_ {{2.}} Balices <tables>, <hr>, <h3>, <blockquote> y les llistes (<ol>, <ul>, etc.) :[[%style_h%]]
+_ {{1.}} Balices &lt;p&gt;, &lt;i&gt;, &lt;strong&gt;:[[%style_p%]]
+_ {{2.}} Balices &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; y les llistes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
 Decátate: al modificar esti segundu estilu, pierdes los estilos estándar de SPIP asociaos con eses balices.</q1>', # MODIF
 	'class_spip:nom' => 'SPIP y los sos atayos…',
@@ -206,9 +206,9 @@ Idem pa camudar el fondu, si la opci&oacute;n d\'embaxo lo permite:@_CS_EXEMPLE_
 	'cs_spip_options_on' => 'Les opciones de SPIP en «@_CS_FILE_OPTIONS@»', # MODIF
 
 	// D
-	'decoration:aide' => 'Decoración: <b><baliza>test</baliza></b>, con <b>baliza</b> = @liste@',
+	'decoration:aide' => 'Decoración: <b>&lt;baliza&gt;test&lt;/baliza&gt;</b>, con <b>baliza</b> = @liste@',
 	'decoration:description' => 'Nuevos estilos paramétricos nos testos que son accesibles gracies a balices ente signos angulares. Exemplu: 
-<miobaliza>testu</miobaliza> o: <miobaliza/>.<br />Define embaxo los estilos CSS que necesites, una baliza per llinia, según les sintaxis siguientes :
+&lt;miobaliza&gt;testu&lt;/miobaliza&gt; o: &lt;miobaliza/&gt;.<br />Define embaxo los estilos CSS que necesites, una baliza per llinia, según les sintaxis siguientes :
 - {type.miobaliza = mio estilu CSS}
 - {type.miobaliza.class = mio clase CSS}
 - {type.miobaliza.lang = mio llingua (p.ex: ast)}
@@ -221,14 +221,14 @@ El parámetru {type} d\'enriba pue tener tres valores:
 
 [[%decoration_styles%]]', # MODIF
 	'decoration:nom' => 'Decoración',
-	'decoupe:aide' => 'Bloque de llingüetes : <b><onglets></onglets></b><br/>Separtador de páxines o de llingüetes: @sep@', # MODIF
+	'decoupe:aide' => 'Bloque de llingüetes : <b>&lt;onglets>&lt;/onglets></b><br/>Separtador de páxines o de llingüetes: @sep@', # MODIF
 	'decoupe:aide2' => 'Alias: @sep@',
 	'decoupe:description' => '@puce@ Divide la presentación pública d\'un artículu en delles páxines gracies a una paxinación automática. Namái pon nel artículu cuatro signos más consecutivos (<code>++++</code>) nel llugar u vaya tar el corte.
 
 Por omisión, la Navaya Suiza enxerta los númberos de páxina na cabecera y el pie de l\'artículu automáticamente. Pero tienes la posibilidá de poner esti númberu n\'otru llugar de la to cadarma gracies a una baliza #CS_DECOUPE que puedes activar equí:
 [[%balise_decoupe%]]
 
-@puce@ Si utilices esti separtaor dientro de les balices <onglets> y </onglets> vas tener un xueu de llingüetes.
+@puce@ Si utilices esti separtaor dientro de les balices &lt;onglets&gt; y &lt;/onglets&gt; vas tener un xueu de llingüetes.
 
 Nes cadarmes: tienes a to disposición les nueves balices #ONGLETS_DEBUT, #ONGLETS_TITRE y #ONGLETS_FIN.
 
@@ -368,17 +368,17 @@ _ • [De tol plugin|Tornar a l\'est&aacute;u inicial del plugin->@reset@]@insta
 
 Pa definir esti logo, vete a la páxina de «Configuración del sitiu» calcando nel botón «Configuración».', # MODIF
 	'icone_visiter:nom' => 'Botón «Visitar»', # MODIF
-	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en toes les cadarmes, da igual que tengan o non esta baliza ente <head> y </head>. Gracies a esta opción, los plugins podrán enxertar JavaScript (.js) o fueyes d\'estilu (.css).',
+	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] en toes les cadarmes, da igual que tengan o non esta baliza ente &lt;head&gt; y &lt;/head&gt;. Gracies a esta opción, los plugins podrán enxertar JavaScript (.js) o fueyes d\'estilu (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN: ¡¡ferramienta en cursu de desendolcu!! [[%insertions%]]',
 	'insertions:nom' => 'Correiciones automátiques',
-	'introduction:description' => 'Esta baliza pa amestar nes cadarmes sirve en xeneral pa la portada o pa les estayes col env&iacute;s de producir un resume de art&iacute;culos, de breves, etc...</p>
-<p>{{Atenci&oacute;n}}: Enantes d\'activar esta funci&oacute;n, compreba bien que denguna funci&oacute;n {balise_INTRODUCTION()} nun esista ya na cadarma o nos plugins, la sobrecarga producir&iacute;a un error de compilaci&oacute;n.</p>
-@puce@ Puedes precisar (en porcentaxe relativu del valor utiliz&aacute;u por omisi&oacute;n) el llargu del testu devueltu pela baliza #INTRODUCTION. Un valor nulu o igual a 100 nun modifica l\'aspeutu de la introducci&oacute;n utilizando ent&oacute;s los valores por omisi&oacute;n siguientes: 500 carauteres pa los art&iacute;culos, 300 pa les breves y 600 pa los foros o les estayes.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Por omisi&oacute;n, los puntos de siguir amestaos al resultau de la baliza #INTRODUCTION si el testu ye enforma llargu son: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Equ&iacute; pues conse&ntilde;ar una cadena de carauteres propia que indique al llector que el testu cort&aacute;u tien una continuaci&oacute;n.
+	'introduction:description' => 'Esta baliza pa amestar nes cadarmes sirve en xeneral pa la portada o pa les estayes col env&amp;iacute;s de producir un resume de art&amp;iacute;culos, de breves, etc...</p>
+<p>{{Atenci&amp;oacute;n}}: Enantes d\'activar esta funci&amp;oacute;n, compreba bien que denguna funci&amp;oacute;n {balise_INTRODUCTION()} nun esista ya na cadarma o nos plugins, la sobrecarga producir&amp;iacute;a un error de compilaci&amp;oacute;n.</p>
+@puce@ Puedes precisar (en porcentaxe relativu del valor utiliz&amp;aacute;u por omisi&amp;oacute;n) el llargu del testu devueltu pela baliza #INTRODUCTION. Un valor nulu o igual a 100 nun modifica l\'aspeutu de la introducci&amp;oacute;n utilizando ent&amp;oacute;s los valores por omisi&amp;oacute;n siguientes: 500 carauteres pa los art&amp;iacute;culos, 300 pa les breves y 600 pa los foros o les estayes.
+[[%lgr_introduction%&amp;nbsp;%]]
+@puce@ Por omisi&amp;oacute;n, los puntos de siguir amestaos al resultau de la baliza #INTRODUCTION si el testu ye enforma llargu son: <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. Equ&amp;iacute; pues conse&amp;ntilde;ar una cadena de carauteres propia que indique al llector que el testu cort&amp;aacute;u tien una continuaci&amp;oacute;n.
 [[%suite_introduction%]]
-@puce@ Si la baliza #INTRODUCTION util&iacute;zase pa resumir un art&iacute;culu, la Navaya Suiza pue fabricar un enllaz d\'hipertestu pa amestar a los puntos de siguir definios enriba, col fin de llevar al llector al testu orixinal. Por exemplu: &laquo;Lleer el restu de l\'art&iacute;culu…&raquo;
+@puce@ Si la baliza #INTRODUCTION util&amp;iacute;zase pa resumir un art&amp;iacute;culu, la Navaya Suiza pue fabricar un enllaz d\'hipertestu pa amestar a los puntos de siguir definios enriba, col fin de llevar al llector al testu orixinal. Por exemplu: &amp;laquo;Lleer el restu de l\'art&amp;iacute;culu…&amp;raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baliza #INTRODUCTION',
@@ -599,16 +599,16 @@ Si reanicies el plugin calcando nun paquete, la Navaya Suiza reconfigurarase aut
 	'pack_titre' => 'Configuración Actual',
 	'pack_variables_defaut' => 'Instalación de les variables por omisión',
 	'par_defaut' => 'Por omisión',
-	'paragrapher2:description' => 'La función de SPIP <code>paragrapher()</code> amesta-yos balices <p> y </p> a tolos testos que nun tengan párrafos. A la fin d\'iguar más finamente los estilos y les paxinaciones, tienes la posibilidá d\'uniformizar l\'aspeutu de los testos del sitiu Web.[[%paragrapher%]]',
+	'paragrapher2:description' => 'La función de SPIP <code>paragrapher()</code> amesta-yos balices &lt;p&gt; y &lt;/p&gt; a tolos testos que nun tengan párrafos. A la fin d\'iguar más finamente los estilos y les paxinaciones, tienes la posibilidá d\'uniformizar l\'aspeutu de los testos del sitiu Web.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Amestar párrafos',
 	'pipelines' => 'Tuberíes (pipelines) utilizáes:',
 	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration>Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
 	'previsualisation:nom' => 'Prévisualisation des articles', # NEW
 	'puceSPIP' => 'Autoriser le raccourci «*»', # NEW
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>', # NEW
-	'pucesli:description' => 'Reemplaza les marques &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por llistes anot&aacute;es &laquo;-*&raquo; (traduc&iacute;es en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) nes que l\'estilu pue personalizase con css.', # MODIF
+	'pucesli:description' => 'Reemplaza les marques «-» (guión simple) de los artículos por llistes anotáes «-*» (traducíes en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) nes que l\'estilu pue personalizase con css.', # MODIF
 	'pucesli:nom' => 'Marques guapes',
 
 	// Q
@@ -646,31 +646,31 @@ _ Diseñu d\'iconos: [Sylvain Michel->http://www.guaph.net/]', # MODIF
 Atención, pa que esta ferramienta funcione necesita páxines en «DOCTYPE XHTML» (¡non HTML!) dos plugins {jQuery}: {ScrollTo} y {LocalScroll}. La Navaya Suiza pue instalalos direutamente si marques los cuadros siguientes. [[%scrollTo%]][[-->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Ancles seles',
-	'sommaire:description' => 'Construi un sumariu pal testu de los art&iacute;culos y de les estayes a la fin d’acceder r&aacute;pidamente a los t&iacute;tulos destac&aacute;os (etiquetes HTML &lt;h3>Un intert&iacute;tulu&lt;/h3> o atayos SPIP: intert&iacute;tulos na forma: <code>{{{Un titular}}}</code>).
+	'sommaire:description' => 'Construi un sumariu pal testu de los artículos y de les estayes a la fin d’acceder rápidamente a los títulos destacáos (etiquetes HTML &lt;h3>Un intertítulu&lt;/h3> o atayos SPIP: intertítulos na forma: <code>{{{Un titular}}}</code>).
 
-@puce@ Equ&iacute; vas poder conse&ntilde;ar el n&uacute;mberu m&aacute;simu de caraut&egrave;res tom&aacute;os de los intert&iacute;tulos pa construir el sumariu:[[%lgr_sommaire% caraut&egrave;res]]
+@puce@ Equí vas poder conseñar el númberu másimu de carautères tomáos de los intertítulos pa construir el sumariu:[[%lgr_sommaire% carautères]]
 
-@puce@ Tami&eacute;n pues axustar el comportamientu del plugin tocante a la creaci&oacute;n del sumariu: 
-_ • Sistem&aacute;ticu pa cada art&iacute;culu (una baliza <code>@_CS_SANS_SOMMAIRE@</code> puesta n’ayuri dientro\'l testu de l’art&iacute;culu crear&aacute; una esceici&oacute;n).
-_ • &Uacute;nicamente pa los art&iacute;culos que tengan la baliza <code>@_CS_AVEC_SOMMAIRE@</code>.
+@puce@ Tamién pues axustar el comportamientu del plugin tocante a la creación del sumariu: 
+_ • Sistemáticu pa cada artículu (una baliza <code>@_CS_SANS_SOMMAIRE@</code> puesta n’ayuri dientro\'l testu de l’artículu creará una esceición).
+_ • Únicamente pa los artículos que tengan la baliza <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Por omisi&oacute;n, la Navaya Suiza enxerta el sumariu en cabeza de l\'art&iacute;culu autom&aacute;ticamente. Pero tienes la posibilida d\'allugar esti sumariu ayuri na cadarma gracies a una baliza #CS_SOMMAIRE que pues activar equ&iacute;:
+@puce@ Por omisión, la Navaya Suiza enxerta el sumariu en cabeza de l\'artículu automáticamente. Pero tienes la posibilida d\'allugar esti sumariu ayuri na cadarma gracies a una baliza #CS_SOMMAIRE que pues activar equí:
 [[%balise_sommaire%]]
 
-Esti sumariu pue acoplase con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.', # MODIF
+Esti sumariu pue acoplase con: « [.->decoupe] ».', # MODIF
 	'sommaire:nom' => 'Un sumariu automáticu', # MODIF
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>', # NEW
 	'sommaire_avec' => 'Un testu con sumariu: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un testu ensin sumariu: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
-	'spam:description' => 'Tenta lluchar escontra los unv&iacute;os de mensaxes autom&aacute;ticos y gafientos na parte p&uacute;blica. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torg&aacute;es: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
+	'spam:description' => 'Tenta lluchar escontra los unvíos de mensaxes automáticos y gafientos na parte pública. Delles pallabres, igual que les balices en claro &lt;a>&lt;/a>, tan torgáes: encamienta a los redactores a usar los atayos pa enllaces de SPIP.
 
-Llista equ&iacute; les secuencies torg&aacute;es separtandoles con espacios. [[%spam_mots%]]
-• Pa una espresi&oacute;n con espacios, ponla ente comines.
-_ • Pa especificar una pallabra entera, m&eacute;tela ente par&eacute;ntesis. Exemplu:~{(premiu)}.
-_ • Pa una espresi&oacute;n regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{<html>"/@test\\.(com|org|ast)/"</html>}.', # MODIF
+Llista equí les secuencies torgáes separtandoles con espacios. [[%spam_mots%]]
+• Pa una espresión con espacios, ponla ente comines.
+_ • Pa especificar una pallabra entera, métela ente paréntesis. Exemplu:~{(premiu)}.
+_ • Pa una espresión regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{<html>\\"/@test\\.(com|org|ast)/\\"</html>}.', # MODIF
 	'spam:nom' => 'Llucha escontra la puxarra',
 	'spam_ip' => 'Blocage IP de @ip@ :', # NEW
 	'spam_test_ko' => '¡Esti mensaxe bloquiarase pol filtru anti-SPAM!',

@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : sí',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación -- esto se reduce a añadir {target="_blank"} en todas las balizas <a> a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación -- esto se reduce a añadir {target=\\"_blank\\"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enlazar palabras con su definición gracias al atajo tipográfico <code>[?palabra]</code>. Por omisión (o si dejas en blanco este cuadro), el glosario externo reenvía hacia la enciclopedia libre wikipedia.org. Aquí puedes elegir la dirección que se utilizará. <br />Enlace de prueba: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à vous de voir s\'il faut conserver cet ajout.
@@ -56,7 +56,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'auteurs:nom' => 'Página de los autores',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
-	'autobr_non' => 'À l\'intérieur des balises <alinea></alinea>', # NEW
+	'autobr_non' => 'À l\'intérieur des balises &lt;alinea>&lt;/alinea>', # NEW
 	'autobr_oui' => 'Articles et messages publics (balises @BALISES@)', # NEW
 	'autobr_racc' => 'Retours de ligne : <b><alinea></alinea></b>', # NEW
 
@@ -72,7 +72,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 	'blocs:aide' => '<Bloques Desplegables : <b><bloc></bloc></b> (alias : <b><invisible></invisible></b>) et <b><visible></visible></b>',
 	'blocs:description' => 'Permite crear bloques que pueden hacerse visibles o invisibles al pulsar en su título.
 
-@puce@ {{En los textos de SPIP}}: los redactores disponen de las  nuevas balizas <bloc> (o <invisible>) y <visible> para utilizarlas en sus textos así: 
+@puce@ {{En los textos de SPIP}}: los redactores disponen de las  nuevas balizas &lt;bloc&gt; (o &lt;invisible&gt;) y &lt;visible&gt; para utilizarlas en sus textos así: 
 
 <quote><code>
 <bloc>
@@ -129,7 +129,7 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'chatons:description' => 'Inserta imágenes (o caritas para los {chats}) en todos los textos donde aparezca una cadena de tipo <code>:nombre</code>.
 _ Esta herramienta reemplaza estos atajos con las imágenes con el mismo nombre que encuentre en la carpeta plugins/couteau_suisse/img/chatons.', # MODIF
 	'chatons:nom' => 'Caritas',
-	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises <quote> par des balises <q> quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par <q> et les citations contenant des paragraphes par <blockquote>.', # NEW
+	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # NEW
 	'citations_bb:nom' => 'Citations bien balisées', # NEW
 	'class_spip:description1' => 'Aquí puedes definir ciertos atajos de SPIP. Un valor vacío equivale a utilizar el valor por omisión.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Los atajos de SPIP}}.
@@ -137,21 +137,21 @@ _ Esta herramienta reemplaza estos atajos con las imágenes con el mismo nombre 
 Aquí puedes definir ciertos atajos de SPIP. Un valor vacío equivale a utilizar el valor por omisión.[[%racc_hr%]][[%puce%]]', # MODIF
 	'class_spip:description3' => '
 
-{Atención: si la herramienta « [.->pucesli] » está activada, el reemplazo del guión « - » ya no se efectuará; en su lugar se usará una lista <ul><li>.}
+{Atención: si la herramienta « [.->pucesli] » está activada, el reemplazo del guión « - » ya no se efectuará; en su lugar se usará una lista &lt;ul>&lt;li>.}
 
-SPIP utiliza habitualmente la baliza <h3> para los intertítulos. Elige aquí otra alternativa: [[%racc_h1%]][[->%racc_h2%]]', # MODIF
+SPIP utiliza habitualmente la baliza &lt;h3&gt; para los intertítulos. Elige aquí otra alternativa: [[%racc_h1%]][[->%racc_h2%]]', # MODIF
 	'class_spip:description4' => '
 
-SPIP ha elegido usar la baliza <strong> para transcribir las negritas. Pero <b> también podría ser conveniente, con o sin estilo. A tu elección:[[%racc_g1%]][[->%racc_g2%]]
+SPIP ha elegido usar la baliza &lt;strong> para transcribir las negritas. Pero &lt;b> también podría ser conveniente, con o sin estilo. A tu elección:[[%racc_g1%]][[->%racc_g2%]]
 
-SPIP ha elegido usar la baliza <i> para transcribir las itálicas. Pero <em> también podría ser conveniente, con o sin estilo. A tu elección:[[%racc_i1%]][[->%racc_i2%]]
+SPIP ha elegido usar la baliza &lt;i> para transcribir las itálicas. Pero &lt;em> también podría ser conveniente, con o sin estilo. A tu elección:[[%racc_i1%]][[->%racc_i2%]]
 
-@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atajos tipográficos producían balizas con el estilo "spip" asignado siempre. Por ejemplo: <code><p class="spip"></code>. Aquí puedes definir el estilo de estas balizas en función de tus hojas de estilo. Un cuadro vacío significa que no se aplica ningún estilo en particular.
+@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atajos tipográficos producían balizas con el estilo \\"spip\\" asignado siempre. Por ejemplo: <code><p class=\\"spip\\"></code>. Aquí puedes definir el estilo de estas balizas en función de tus hojas de estilo. Un cuadro vacío significa que no se aplica ningún estilo en particular.
 {Atención: si ciertos atajos (linea horizontal, intertítulo, itálica, negrita) se han modificado más abajo, los estilos siguientes no se aplicarán.}
 
 <q1>
-_ {{1.}} Balizas <p>, <i>, <strong> :[[%style_p%]]
-_ {{2.}} Balizas <tables>, <hr>, <h3>, <blockquote> y las listas (<ol>, <ul>, etc.) :[[%style_h%]]
+_ {{1.}} Balizas &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
+_ {{2.}} Balizas &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; y las listas (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
 Nota: al modificar este segundo estilo, también pierdes los estilos estándar de SPIP asociados con estas balizas.</blockquote>', # MODIF
 	'class_spip:nom' => 'SPIP y sus atajos…',
@@ -202,9 +202,9 @@ Lo mismo para cambiar el fondo, si la opci&oacute;n de abajo lo permite:@_CS_EXE
 	'cs_spip_options_on' => 'Las opciones de SPIP en «@_CS_FILE_OPTIONS@»', # MODIF
 
 	// D
-	'decoration:aide' => 'Decoración: <b><balise>prueba</balise></b>, con <b>balise</b> = @liste@',
+	'decoration:aide' => 'Decoración: <b>&lt;balise&gt;prueba&lt;/balise&gt;</b>, con <b>balise</b> = @liste@',
 	'decoration:description' => 'Nuevos estilos paramétricos en tus textos, accesibles mediante balizas entre angulares. Ejemplo:
-<mibaliza>texto</mibaliza> o: <mibaliza/>.<br />Define debajo los estilos CSS que necesites, una baliza por línea, según las sintaxis siguientes:
+&lt;mibaliza&gt;texto&lt;/mibaliza&gt; o: &lt;mibaliza/&gt;.<br />Define debajo los estilos CSS que necesites, una baliza por línea, según las sintaxis siguientes:
 - {type.mibaliza = mi estilo CSS}
 - {type.mibaliza.class = mi clase CSS}
 - {type.mibaliza.lang = mi idioma (p. ej: es)}
@@ -217,14 +217,14 @@ El parámetro {type} puede tomar tres valores:
 
 [[%decoration_styles%]]', # MODIF
 	'decoration:nom' => 'Decoración',
-	'decoupe:aide' => 'Bloque de pestañas: <b><onglets></onglets></b><br/>Separador de páginas o de pestañas: @sep@', # MODIF
+	'decoupe:aide' => 'Bloque de pestañas: <b>&lt;onglets>&lt;/onglets></b><br/>Separador de páginas o de pestañas: @sep@', # MODIF
 	'decoupe:aide2' => 'Alias: @sep@',
 	'decoupe:description' => '@puce@ Divide la presentación pública de un artículo en varias páginas mediante una compaginación automática. Simplemente sitúa en tu artículo cuatro signos de suma consecutivos (<code>++++</code>) en el lugar donde haya que cortar.
 
 Por omisión, la Navaja Suiza inserta la numeración de página en el encabezado y en el pie del artículo automáticamente. Pero tienes la posibilidad de situar esta numeración en otro lugar del esqueleto gracias a la baliza #CS_DECOUPE que puedes activar aquí:
 [[%balise_decoupe%]]
 
-@puce@ Si utilizas este separador entre las balizas <onglets> y </onglets> lo que obtienes es un conjunto de pestañas.
+@puce@ Si utilizas este separador entre las balizas &lt;onglets&gt; y &lt;/onglets&gt; lo que obtienes es un conjunto de pestañas.
 
 En los esqueletos: tienes a tu disposición las nuevas balizas #ONGLETS_DEBUT, #ONGLETS_TITRE y #ONGLETS_FIN.
 
@@ -366,17 +366,17 @@ Arguments disponibles : {zone}, {format} et/ou {id}.', # NEW
 
 Para definir el logo, entra en la página de «Configuración de sitio» pulsando el botón «Configuración».', # MODIF
 	'icone_visiter:nom' => 'Botón «Visitar»', # MODIF
-	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->http://www.spip.net/es_article2132.html] en todos los esqueletos, tengan o no esta baliza entre <head> y </head>. Gracias a esta opción, los plugins podrán insertar JavaScript (.js) u hojas de estilo (.css).',
+	'insert_head:description' => 'Activa automáticamente la baliza [#INSERT_HEAD->http://www.spip.net/es_article2132.html] en todos los esqueletos, tengan o no esta baliza entre &lt;head&gt; y &lt;/head&gt;. Gracias a esta opción, los plugins podrán insertar JavaScript (.js) u hojas de estilo (.css).',
 	'insert_head:nom' => 'Baliza #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓN : ¡¡herramienta en fase de desarrollo!! [[%insertions%]]',
 	'insertions:nom' => 'Correcciones automáticas',
-	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&iacute;culos, las breves, etc.</p>
-<p>{{Atenci&oacute;n}} : Antes de activar esta funci&oacute;n, comprueba bien que no exista ninguna otra funci&oacute;n {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producir&aacute; un error de compilaci&oacute;n.</p>
-@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisi&oacute;n) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducci&oacute;n utilizando en este caso los siguientes valores por omisi&oacute;n: 500 caracteres para los art&iacute;culos, 300 para las breves y 600 para los foros o las secciones.
-[[%lgr_introduction%&nbsp;%]]
-@puce@ Por omisi&oacute;n, los puntos de seguir a&ntilde;adidos al resultado de la baliza #INTRODUCTION si el texto es m&aacute;s largo son: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Puedes precisar aqu&iacute; tu propia cadena de caracteres para indicar al lector que el texto truncado contin&uacute;a.
+	'introduction:description' => 'Esta baliza situada en los esqueletos se usa, en general, en portada o en las secciones para producir un resumen de los art&amp;iacute;culos, las breves, etc.</p>
+<p>{{Atenci&amp;oacute;n}} : Antes de activar esta funci&amp;oacute;n, comprueba bien que no exista ninguna otra funci&amp;oacute;n {balise_INTRODUCTION()} en tu esqueleto o en tus plugins, porque entonces la sobrecarga producir&amp;aacute; un error de compilaci&amp;oacute;n.</p>
+@puce@ Puedes precisar (en porcentaje respecto al valor utilizado por omisi&amp;oacute;n) la longitud del texto devuelto por la baliza #INTRODUCTION. Un valor nulo o igual a 100 no modifica el aspecto de la introducci&amp;oacute;n utilizando en este caso los siguientes valores por omisi&amp;oacute;n: 500 caracteres para los art&amp;iacute;culos, 300 para las breves y 600 para los foros o las secciones.
+[[%lgr_introduction%&amp;nbsp;%]]
+@puce@ Por omisi&amp;oacute;n, los puntos de seguir a&amp;ntilde;adidos al resultado de la baliza #INTRODUCTION si el texto es m&amp;aacute;s largo son: <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. Puedes precisar aqu&amp;iacute; tu propia cadena de caracteres para indicar al lector que el texto truncado contin&amp;uacute;a.
 [[%suite_introduction%]]
-@puce@ Si se usa la baliza #INTRODUCTION para resumir un art&iacute;culo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: &laquo;Leer el resto del art&iacute;culo…&raquo;
+@puce@ Si se usa la baliza #INTRODUCTION para resumir un art&amp;iacute;culo, la Navaja Suiza puede fabricar un enlace de hipertexto en los puntos de seguir definidos anteriormente para dirigir al lector hacia el texto original. Por ejemplo: &amp;laquo;Leer el resto del art&amp;iacute;culo…&amp;raquo;
 [[%lien_introduction%]]
 ', # MODIF
 	'introduction:nom' => 'Baliza #INTRODUCTION',
@@ -596,16 +596,16 @@ Si reinicializas el plugin pulsando en un paquete, la Navaja Suiza volverá a co
 	'pack_titre' => 'Configuración Actual',
 	'pack_variables_defaut' => 'Instalación de variables por defecto',
 	'par_defaut' => 'Por omisión',
-	'paragrapher2:description' => 'La función SPIP <code>paragrapher()</code> inserta balizas <p> y </p> en todos los textos desprovistos de párrafo. Para de un ajuste más fino de tus estilos y compaginaciones, tienes la posibilidad de uniformizar el aspecto de los textos de tu sitio.[[%paragrapher%]]',
+	'paragrapher2:description' => 'La función SPIP <code>paragrapher()</code> inserta balizas &lt;p&gt; y &lt;/p&gt; en todos los textos desprovistos de párrafo. Para de un ajuste más fino de tus estilos y compaginaciones, tienes la posibilidad de uniformizar el aspecto de los textos de tu sitio.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Párrafos',
 	'pipelines' => 'Pipelines utilizadas:',
 	'previsualisation:description' => 'Par défaut, SPIP permet de prévisualiser un article dans sa version publique et stylée, mais uniquement lorsque celui-ci a été « proposé à l’évaluation ». Hors cet outil permet aux auteurs de prévisualiser également les articles pendant leur rédaction. Chacun peut alors prévisualiser et modifier son texte à sa guise.
 
-@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration>Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
+@puce@ Attention : cette fonctionnalité ne modifie pas les droits de prévisualisation. Pour que vos rédacteurs aient effectivement le droit de prévisualiser leurs articles « en cours de rédaction », vous devez l’autoriser (dans le menu {[Configuration&gt;Fonctions avancées->./?exec=config_fonctions]} de l’espace privé).', # NEW
 	'previsualisation:nom' => 'Prévisualisation des articles', # NEW
 	'puceSPIP' => 'Autoriser le raccourci «*»', # NEW
 	'puceSPIP_aide' => 'Une puce SPIP : <b>*</b>', # NEW
-	'pucesli:description' => 'Reemplaza las vi&ntilde;etas &laquo;-&raquo; (gui&oacute;n simple) de los art&iacute;culos por listas anotadas &laquo;-*&raquo; (traducidas en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) cuyo estilo puede personalizars mediante css.', # MODIF
+	'pucesli:description' => 'Reemplaza las viñetas «-» (guión simple) de los artículos por listas anotadas «-*» (traducidas en HTML como: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) cuyo estilo puede personalizars mediante css.', # MODIF
 	'pucesli:nom' => 'Viñetas mejoradas',
 
 	// Q
@@ -643,26 +643,26 @@ _ Dibujos: [Sylvain Michel->http://www.guaph.net/]', # MODIF
 Atención, para que funcione esta herramienta se necesitan páginas con «DOCTYPE XHTML» (¡no HTML!) y dos plugins {jQuery}: {ScrollTo} y {LocalScroll}. La Navaja Suiza puede instalarlos directamente si marcas las casillas siguientes. [[%scrollTo%]][[->%LocalScroll%]]
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Anclas suaves',
-	'sommaire:description' => 'Construye un sumario para el texto de tus art&iacute;culos y secciones con el fin de acceder r&aacute;pidamente a los intert&iacute;tulos (etiquetas HTML &lt;h3>Un intert&iacute;tulo&lt;/h3> o atajos de SPIP: intert&iacute;tulos de la forma: <code>{{{Un intert&iacute;tulo}}}</code>).
+	'sommaire:description' => 'Construye un sumario para el texto de tus artículos y secciones con el fin de acceder rápidamente a los intertítulos (etiquetas HTML &lt;h3>Un intertítulo&lt;/h3> o atajos de SPIP: intertítulos de la forma: <code>{{{Un intertítulo}}}</code>).
 
-@puce@ Aqu&iacute; puedes definir el n&uacute;mero m&aacute;ximo de caracteres tomados de los intert&iacute;tulos para construir el sumario: [[%lgr_sommaire% caracteres]]
+@puce@ Aquí puedes definir el número máximo de caracteres tomados de los intertítulos para construir el sumario: [[%lgr_sommaire% caracteres]]
 
-@puce@ Tambi&eacute;n puedes regular el comportamiento del plugin respecto a la creaci&oacute;n de sumario: 
-_ • Por sistema para cada art&iacute;culo (una baliza <code>>@_CS_SANS_SOMMAIRE@</code> situada en cualquier lugar del texto del art&iacute;culo crear&aacute; una excepci&oacute;n).
-_ • &Uacute;nicamente para los art&iacute;culos que contengan la baliza <code>@_CS_AVEC_SOMMAIRE@</code>.
+@puce@ También puedes regular el comportamiento del plugin respecto a la creación de sumario: 
+_ • Por sistema para cada artículo (una baliza <code>>@_CS_SANS_SOMMAIRE@</code> situada en cualquier lugar del texto del artículo creará una excepción).
+_ • Únicamente para los artículos que contengan la baliza <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 [[%auto_sommaire%]]
 
-@puce@ Por omisi&oacute;n, la Navaja Suiza inserta el sumario autom&aacute;ticamente en el encabezamiento del art&iacute;culo. Pero tienes la posibilidad situar este sumario en otro lugar de tu esqueleto gracias a una baliza #CS_SOMMAIRE que puedes activar aqu&iacute;:
+@puce@ Por omisión, la Navaja Suiza inserta el sumario automáticamente en el encabezamiento del artículo. Pero tienes la posibilidad situar este sumario en otro lugar de tu esqueleto gracias a una baliza #CS_SOMMAIRE que puedes activar aquí:
 [[%balise_sommaire%]]
 
-Este sumario puede combinarse con: &laquo;&nbsp;[.->decoupe]&nbsp;&raquo;.', # MODIF
+Este sumario puede combinarse con: « [.->decoupe] ».', # MODIF
 	'sommaire:nom' => 'Un sumario automático', # MODIF
 	'sommaire_ancres' => 'Ancres choisies : <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>', # NEW
 	'sommaire_avec' => 'Un texto con sumario: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un texto sin sumario: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Intertitres hiérarchisés : <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.', # NEW
-	'spam:description' => 'Intenta luchar contra los envíos de mensajes automáticos y malintencionados en la parte pública. Ciertas palabras y las etiquetas <a></a> están prohibidas.
+	'spam:description' => 'Intenta luchar contra los envíos de mensajes automáticos y malintencionados en la parte pública. Ciertas palabras y las etiquetas &lt;a>&lt;/a> están prohibidas.
 
 Lista aquí las secuencias prohibidas@_CS_ASTER@ separándolas por espacios. [[%spam_mots%]]
 @_CS_ASTER@Para especificar una palabra completa, ponla entre paréntesis. Para una expresión con espacios, ponla entre comillas.', # MODIF

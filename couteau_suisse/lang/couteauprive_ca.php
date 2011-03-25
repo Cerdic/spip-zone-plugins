@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : si',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tots els enllaços del lloc s\'obren, per defecte, a la mateixa finestra de navegació en la que esteu. Però pot ser útil obrir els enllaços externs al lloc en una nova finestra -- això es pot aconseguir afegint {target="_blank"} a totes les etiquetes <a> dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enllaços de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al màxim aquesta funcionalitat.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tots els enllaços del lloc s\'obren, per defecte, a la mateixa finestra de navegació en la que esteu. Però pot ser útil obrir els enllaços externs al lloc en una nova finestra -- això es pot aconseguir afegint {target=\\"_blank\\"} a totes les etiquetes &lt;a&gt; dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enllaços de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al màxim aquesta funcionalitat.[[%radio_target_blank3%]]
 
 @puce@ SPIP permet lligar paraules amb la seva definició gràcies a la drecera tipogràfica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de més avall), el glossari extern us envia cap a l\'enciclopèdia lliure wikipedia.org. Us toca a vosaltres escollir quina adreça voleu utilitzar. <br />Enllaç de prova: [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enllaços «~mailto:~»: un petit sobre hauria d\'aparèixer al davant de cada enllaç lligat a un correu electrònic; però com que no tots els navegadors el poden mostrar (sobretot IE6, IE7 i SAF3), heu de veure si voleu conservar aquest afegit.
@@ -55,11 +55,11 @@ El valor de 1~000~000 píxels sembla correcte per una configuració amb poca mem
 @puce@ Quins estats d\'autors es poden llistar en aquesta pàgina?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Pàgina d\'autors',
-	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de línia simples per un salt de línia HTML <br />.[[%alinea%]]', # MODIF
+	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de línia simples per un salt de línia HTML &lt;br />.[[%alinea%]]', # MODIF
 	'autobr:nom' => 'Retorns de línia automàtics',
-	'autobr_non' => 'Tots els textos del lloc, però només a l\'interior d\'etiquetes <alinea></alinea>', # MODIF
+	'autobr_non' => 'Tots els textos del lloc, però només a l\'interior d\'etiquetes &lt;alinea>&lt;/alinea>', # MODIF
 	'autobr_oui' => 'Tots els textos d\'article i missatges públics (etiqueta #TEXTE)', # MODIF
-	'autobr_racc' => 'Retorns de línia: <b><alinea></alinea></b>',
+	'autobr_racc' => 'Retorns de línia: <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
 	'balise_set:description' => 'Per simplificar les escriptures del tipus <code>#SET{x,#GET{x}|un_filtre}</code>, aquesta eina us ofereix la següent drecera: <code>#SET_UN_FILTRE{x}</code>. El filtre aplicat a una variable passa, per tant, al nom de l\'etiqueta.
@@ -70,10 +70,10 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 	'barres_typo_forum' => 'Missatges del Fòrum',
 	'barres_typo_intro' => 'S\'ha detectar el connector «Porte-Plume». Vulgueu escollir aquí les barres tipogràfiques on s\'inseriran alguns botons. ',
 	'basique' => 'Bàsic',
-	'blocs:aide' => 'Blocs Desplegables: <b><bloc></bloc></b> (àlies: <b><invisible></invisible></b>) i <b><visible></visible></b>',
+	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (àlies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
 	'blocs:description' => 'Us permet crear blocs que, amb el títol clicable, els pot tornar visibles o invisibles.
 
-@puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes <bloc> (o <invisible>) i <visible> per utilitzar en el seus textos d\'aquesta manera: 
+@puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos d\'aquesta manera: 
 
 <quote><code>
 <bloc>
@@ -97,9 +97,9 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 
 @puce@ Marcant amb una creu «si» més avall, l\'estat dels blocs enumerats serà emmagatzemat a una galeta el temps de la sessió, per tal de conservar l\'aspecte de la pàgina en cas de retorn.[[%blocs_cookie%]]
 
-@puce@ El Ganivet Suís utilitza, per defecte, l\'etiqueta HTML <h4> pel títol dels blocs desplegables. Escolliu aquí una altra etiqueta <hN> :[[%bloc_h4%]]
+@puce@ El Ganivet Suís utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel títol dels blocs desplegables. Escolliu aquí una altra etiqueta &lt;hN&gt; :[[%bloc_h4%]]
 
-@puce@ Per tal d\'obtenir un efecte més agradable al moment del clic, els vostres blocs desplegables es poden animar com si "llisquessin".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
+@puce@ Per tal d\'obtenir un efecte més agradable al moment del clic, els vostres blocs desplegables es poden animar com si \\"llisquessin\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Desplegables',
 	'boites_privees:description' => 'Tots els quadres descrits més avall apareixen aquí o a la part privada.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les revisions del Ganivet Suís}}: un quadre a la pàgina actual de configuració, indicant les últimes modificacions aportades al codi del plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -138,7 +138,7 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
 _ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Emoticones',
-	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes <quote> per les etiquetes <q> quan no hi ha salt de línia. Efectivament, les citacions curtes han d\'estar envoltades per <q> i les citacions que contenen paràgrafs per <blockquote>.',
+	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes &lt;quote&gt; per les etiquetes &lt;q&gt; quan no hi ha salt de línia. Efectivament, les citacions curtes han d\'estar envoltades per &lt;q&gt; i les citacions que contenen paràgrafs per &lt;blockquote&gt;.',
 	'citations_bb:nom' => 'Citacions ben etiquetades',
 	'class_spip:description1' => 'Aquí podeu definir algunes dreceres d\'SPIP. Un valor buit equival a utilitzar el valor per defecte.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Les dreceres d\'SPIP}}.
@@ -146,26 +146,26 @@ _ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom q
 Aquí podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer servir el valor per defecte.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
 
-{Atenció: si l\'eina « [.->pucesli] » està activada, la substitució del guionet « - » no es farà; al seu lloc s\'utilitzarà una llista del tipus <ul><li>.}
+{Atenció: si l\'eina « [.->pucesli] » està activada, la substitució del guionet « - » no es farà; al seu lloc s\'utilitzarà una llista del tipus &lt;ul>&lt;li>.}
 
-SPIP utilitza habitualment l\'etiqueta <h3> pels subtítols. Escolliu aquí un altre emplaçament:[[%racc_h1%]][[->%racc_h2%]]',
+SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subtítols. Escolliu aquí un altre emplaçament:[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
 
-SPIP ha escollit utilitzar l\'etiqueta <strong> per transcriure les negretes. Però <b> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu:[[%racc_g1%]][[->%racc_g2%]]
+SPIP ha escollit utilitzar l\'etiqueta &lt;strong> per transcriure les negretes. Però &lt;b> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu:[[%racc_g1%]][[->%racc_g2%]]
 
-SPIP ha escollit utilitzar l\'etiqueta <i> per transcriure les itàliques. Però <em> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu: [[%racc_i1%]][[->%racc_i2%]]
+SPIP ha escollit utilitzar l\'etiqueta &lt;i> per transcriure les itàliques. Però &lt;em> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu: [[%racc_i1%]][[->%racc_i2%]]
 
  Podeu també definir el codi obrint i tancant per les crides de notas a peu de pàgina (Atenció! Les modificacions només seran visibles a l\'espai públic: [[%ouvre_ref%]][[->%ferme_ref%]]
 
  Podeu definir el codi obrint i tancant per les notes de peu de pàgina: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versió 1.92 d\'SPIP, les dreceres tipogràfiques produeixen etiquetes sistemàticament vestides de l\'estil "spip". Per exemple: <code><p class="spip"></code>. Aquí podeu definir l\'estil d\'aquestes etiquetes en funció dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicarà cap estil en particular.
+@puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versió 1.92 d\'SPIP, les dreceres tipogràfiques produeixen etiquetes sistemàticament vestides de l\'estil \\"spip\\". Per exemple: <code><p class=\\"spip\\"></code>. Aquí podeu definir l\'estil d\'aquestes etiquetes en funció dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicarà cap estil en particular.
 
 {Atenció: si algunes dreceres (línia horitzontal, subtítol, itàlica, negreta) s\'han modificat més amunt, els estils posteriors no s\'aplicaran.}
 
 <q1>
-_ {{1.}} Etiquetes <p>, <i>, <strong> :[[%style_p%]]
-_ {{2.}} Etiquetes <tables>, <hr>, <h3>, <blockquote> i les llistes (<ol>, <ul>, etc.) :[[%style_h%]]
+_ {{1.}} Etiquetes &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
+_ {{2.}} Etiquetes &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; i les llistes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
 Anoteu: modificant aquest segon estil, també perdeu els estils estàndards d\'SPIP associats a aquestes etiquetes.</q1>',
 	'class_spip:nom' => 'SPIP i les seves dreceres…',
@@ -219,9 +219,9 @@ Si els requeriments externs del vostre servidor us posen problemes o teniu probl
 	'cs_spip_options_on' => 'Les opcions SPIP a «<html>@_CS_FILE_OPTIONS@</html>»',
 
 	// D
-	'decoration:aide' => 'Decoració: <b><etiqueta>test</etiqueta></b>, amb <b>etiqueta</b> = @liste@',
+	'decoration:aide' => 'Decoració: <b>&lt;etiqueta&gt;test&lt;/etiqueta&gt;</b>, amb <b>etiqueta</b> = @liste@',
 	'decoration:description' => 'Nous estils parametrables a dins dels vostres textos i accessibles gràcies a les etiquetes à chevrons. Exemple: 
-<lamevaetiqueta>text</lamevaetiqueta> o: <lamevaetiqueta/>.<br />Definiu més avall els estils CSS que necessiteu, una etiqueta per línia, segons les següents sintaxis:
+&lt;lamevaetiqueta&gt;text&lt;/lamevaetiqueta&gt; o: &lt;lamevaetiqueta/&gt;.<br />Definiu més avall els estils CSS que necessiteu, una etiqueta per línia, segons les següents sintaxis:
 - {tipus.lamevaetiqueta = el meu estil CSS}
 - {tipus.lamevaetiqueta.class = la meva  classe CSS}
 - {tipus.lamevaetiqueta.lang = la meva llengua (ex: ca)}
@@ -234,14 +234,14 @@ El paràmetre {tipus} de més amunt pot agafar tres valors:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoració',
-	'decoupe:aide' => 'Bloc de pestanyes: <b><pestanyes></pestanyes></b><br />Separador de pàgines o de pestanyes : @sep@',
+	'decoupe:aide' => 'Bloc de pestanyes: <b>&lt;pestanyes>&lt;/pestanyes></b><br />Separador de pàgines o de pestanyes : @sep@',
 	'decoupe:aide2' => 'Àlies: @sep@',
 	'decoupe:description' => '@puce@ Talla la visualització pública d\'un article en diverses pàgines gràcies a una paginació automàtica. Situeu simplement a dins del vostre article quatre signes més consecutius (<code>++++</code>) a l\'indret on s\'hagi de realitzar el tall.
 
 Per defecte, el Ganivet Suís insereix la paginació al capdamunt i al peu de l\'article automàticament. Però teniu la possibilitat de situar aquesta paginació allà on us interessi del vostre esquelet gràcies a una etiqueta #CS_DECOUPE que podeu activar aquí:
 [[%balise_decoupe%]]
 
-@puce@ Si feu servir aquest separador a l\'interior d\'etiquetes <onglets> i </onglets> obtindreu aleshores un joc de pestanyes.
+@puce@ Si feu servir aquest separador a l\'interior d\'etiquetes &lt;onglets&gt; i &lt;/onglets&gt; obtindreu aleshores un joc de pestanyes.
 
 A dins dels esquelets: teniu a la vostra disposició les noves etiquetes #ONGLETS_DEBUT, #ONGLETS_TITRE i #ONGLETS_FIN.
 
@@ -291,7 +291,7 @@ Aquesta eina es pot acompanyar amb « [.->sommaire] ».',
 	'ecran_maj_ok' => '(sembla actualitzat).',
 	'ecran_securite:description' => 'La pantalla de seguretat és un fitxer PHP que es pot descarregar directament del lloc oficial d\'SPIP, que protegeix els vostres llocs bloquejant certs atacs lligats a forats de seguretat. Aquest sistema permet reaccionar molt ràpidament quan es descobreix un problema de seguretat, tapant el forat sense necessitat d\'actualitzar tot el lloc ni aplicar un « patch » complexe.
 
-A tenir en compte: la pantalla tanca algunes variables. D\'aquesta manera, per exemple, les  variables anomenades <code>id_xxx</code> estan totes controlades com si fossin obligatòriament valors numèrics sencers, per tal d\'evitar qualsevol injecció de codi SQL via aquest tipus de variable molt corrent. Alguns connectors no són compatibles amb amb totes les regles de la pantalla, utilitzant per exemple <code>&id_x=new</code> per crear un objecte {x}.
+A tenir en compte: la pantalla tanca algunes variables. D\'aquesta manera, per exemple, les  variables anomenades <code>id_xxx</code> estan totes controlades com si fossin obligatòriament valors numèrics sencers, per tal d\'evitar qualsevol injecció de codi SQL via aquest tipus de variable molt corrent. Alguns connectors no són compatibles amb amb totes les regles de la pantalla, utilitzant per exemple <code>&amp;id_x=new</code> per crear un objecte {x}.
 
 A més a més de la seguretat, aquesta pantalla té la capacitat de modular els accessos dels robots d\'infaccès des robots  d\'indexació als scripts PHP, per tal de dir-los-hi de « tornar més tard » quan el servidor està saturat.[[ %ecran_actif%]][[->
 @puce@ Regular la protecció anti-robots quan la càrrega del servidor (load) excedeix el valor: %ecran_load%
@@ -409,23 +409,23 @@ Arguments disponibles: {zona}, {format} i/o {id}.', # MODIF
 
 Per definir aquest logotip, dirigiu-vos a la pàgina «<:titre_configuration:>» fent un clic damunt del botó «<:icone_configuration_site:>».', # MODIF
 	'icone_visiter:nom' => '« <:icone_visiter_site:> »',
-	'insert_head:description' => 'Activa automàticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre <head> i </head>. Gràcies a aquesta opció, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
+	'insert_head:description' => 'Activa automàticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gràcies a aquesta opció, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓ: eina en curs de desenvolupament!! [[%insertions%]]',
 	'insertions:nom' => 'Correccions automàtiques',
-	'introduction:description' => 'Aquesta etiqueta que cal posar a dins dels esquelets serveix, en general a la p&agrave;gina principal o a les seccions, per fer un resum dels articles, de les notes breus, etc..</p>
+	'introduction:description' => 'Aquesta etiqueta que cal posar a dins dels esquelets serveix, en general a la p&amp;agrave;gina principal o a les seccions, per fer un resum dels articles, de les notes breus, etc..</p>
 
-<p>{{Atenci&oacute;}}: Abans d\'activar aquesta funcionalitat, verifiqueu b&eacute; que no existeix ja cap funci&oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&agrave;rrega produ&iuml;ra un error de compilaci&oacute;.</p>
+<p>{{Atenci&amp;oacute;}}: Abans d\'activar aquesta funcionalitat, verifiqueu b&amp;eacute; que no existeix ja cap funci&amp;oacute; {balise_INTRODUCTION()} al vostre esquelet o als vostres plugins. La sobrec&amp;agrave;rrega produ&amp;iuml;ra un error de compilaci&amp;oacute;.</p>
 
-@puce@ Podeu precisar (en percentatge per relaci&oacute; al valor utilitzat per defecte) la llargada del text a retornar per l\'etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l\'aspecte de la introducci&oacute; i utilitza, per tant, els valors per defecte seg&uuml;ents: 500 car&agrave;cters pels articles, 300 per les notes breus i 600 pels f&ograve;rums i les seccions.
+@puce@ Podeu precisar (en percentatge per relaci&amp;oacute; al valor utilitzat per defecte) la llargada del text a retornar per l\'etiqueta #INTRODUCTION. Cap valor o igual a 100 no modifica l\'aspecte de la introducci&amp;oacute; i utilitza, per tant, els valors per defecte seg&amp;uuml;ents: 500 car&amp;agrave;cters pels articles, 300 per les notes breus i 600 pels f&amp;ograve;rums i les seccions.
 
-[[%lgr_introduction%&nbsp;%]]
+[[%lgr_introduction%&amp;nbsp;%]]
 
-@puce@ Per defecte, els punts de continuaci&oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &eacute;s massa llarg s&oacute;n: <html>&laquo;&amp;nbsp;(…)&raquo;</html>. Aqu&iacute; podeu precisar la vostra pr&ograve;pia cadena de car&agrave;cters que indiqui al lector que el text tallat t&eacute; una continuaci&oacute;.
+@puce@ Per defecte, els punts de continuaci&amp;oacute; afegits al resultat de l\'etiqueta #INTRODUCTION si el text &amp;eacute;s massa llarg s&amp;oacute;n: <html>&amp;laquo;&amp;amp;nbsp;(…)&amp;raquo;</html>. Aqu&amp;iacute; podeu precisar la vostra pr&amp;ograve;pia cadena de car&amp;agrave;cters que indiqui al lector que el text tallat t&amp;eacute; una continuaci&amp;oacute;.
 
 [[%suite_introduction%]]
 
-@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&iacute;s pot fabricar un hipervincle al damunt dels punts de continuaci&oacute; definits m&eacute;s amunt per tal portar al lector cap al text original. Per exemple: &laquo;Llegir la continuaci&oacute; de l\'article…&raquo;
+@puce@ Si l\'etiqueta #INTRODUCTION es fa servir per resumir un article, llavors el Ganivet Su&amp;iacute;s pot fabricar un hipervincle al damunt dels punts de continuaci&amp;oacute; definits m&amp;eacute;s amunt per tal portar al lector cap al text original. Per exemple: &amp;laquo;Llegir la continuaci&amp;oacute; de l\'article…&amp;raquo;
 
 [[%lien_introduction%]]
 
@@ -677,7 +677,7 @@ Si torneu a carregar el plugin fent un clic sobre un pack, el Ganivet Suís es t
 	'pack_titre' => 'Configuració Actual',
 	'pack_variables_defaut' => 'Instal·lació de variables per defecte',
 	'par_defaut' => 'Per defecte',
-	'paragrapher2:description' => 'La funció SPIP <code>paragrapher()</code> insereix etiquetes <p> i </p> a tots els textos que estan desproveïts de paràgrafs. Per tal de gestionar més finament els vostres estils i les vostres compaginacions, teniu la possibilitat d\'uniformitzar l\'aspecte dels textos del vostre lloc.[[%paragrapher%]]',
+	'paragrapher2:description' => 'La funció SPIP <code>paragrapher()</code> insereix etiquetes &lt;p&gt; i &lt;/p&gt; a tots els textos que estan desproveïts de paràgrafs. Per tal de gestionar més finament els vostres estils i les vostres compaginacions, teniu la possibilitat d\'uniformitzar l\'aspecte dels textos del vostre lloc.[[%paragrapher%]]',
 	'paragrapher2:nom' => 'Paràgraf',
 	'pipelines' => 'Pipelines utilitzades:',
 	'previsualisation:description' => 'Per defecte, SPIP permet fer una visualitzaci&oacute; pr&egrave;via d\'un article en la seva versi&oacute; p&uacute;blica i amb estil, per&ograve; nom&eacute;s quan aquest ha estat &laquo;proposat per a ser avaluat&raquo;. Aquesta eina tamb&eacute; permet als autors previsualitzar els articles durant la seva redacci&oacute;. Cadasc&uacute; pot, llavors, previsualitzar i modifica el seu text al seu gust.
@@ -688,11 +688,11 @@ Si torneu a carregar el plugin fent un clic sobre un pack, el Ganivet Suís es t
 	'previsualisation:nom' => 'Previsualització dels articles',
 	'puceSPIP' => 'Autoritzar la drecera «*»',
 	'puceSPIP_aide' => 'Un símbol SPIP : <b>*</b>',
-	'pucesli:description' => 'Substitueix els car&agrave;cters &laquo;-&raquo; (guionet simple) dels diferents continguts del vostre lloc per llistes numerades &laquo;-*&raquo; (tradu&iuml;des a HTML per: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) i del qual l\'estil por ser personalitzat f&agrave;cilment amb CSS.
+	'pucesli:description' => 'Substitueix els caràcters «-» (guionet simple) dels diferents continguts del vostre lloc per llistes numerades «-*» (traduïdes a HTML per: &lt;ul>&lt;li>…&lt;/li>&lt;/ul>) i del qual l\'estil por ser personalitzat fàcilment amb CSS.
 
 
 
-Per tal de conservar l\'acc&eacute;s al car&agrave;cter imatge original d\'SPIP (el petit triangle), es pot proposar als vostres redactor una nova drecera al comen&ccedil;ament de l&iacute;nia:[[%puceSPIP%]]', # MODIF
+Per tal de conservar l\'accés al caràcter imatge original d\'SPIP (el petit triangle), es pot proposar als vostres redactor una nova drecera al començament de línia:[[%puceSPIP%]]', # MODIF
 	'pucesli:nom' => 'Caràcters bonics',
 
 	// Q
@@ -735,31 +735,31 @@ Alerta, aquesta eina necessita per funcionar pàgines al «DOCTYPE XHTML» (no H
 
 @_CS_PLUGIN_JQUERY192@', # MODIF
 	'soft_scroller:nom' => 'Àncores suaus',
-	'sommaire:description' => 'Construeix un resum pel text dels vostres articles i les vostres seccions per tal d\'accedir r&agrave;pidament als titulars (balises HTML &lt;h3>Un gran t&iacute;tol/@h3@>) o als subt&iacute;tols SPIP : subt&iacute;tols del tipus: (de sintaxi <code>{{{Un subt&iacute;tol}}}</code>).
+	'sommaire:description' => 'Construeix un resum pel text dels vostres articles i les vostres seccions per tal d\'accedir ràpidament als titulars (balises HTML &lt;h3>Un gran títol/@h3@>) o als subtítols SPIP : subtítols del tipus: (de sintaxi <code>{{{Un subtítol}}}</code>).
 
 
 
-Per informaci&oacute;, l\'eina &laquo;&nbsp;[.->class_spip]&nbsp;&raquo; permet escollir l\'etiqueta &lt;hN> utilitzada pels subt&iacute;tols d\'SPIP.
+Per informació, l\'eina « [.->class_spip] » permet escollir l\'etiqueta &lt;hN> utilitzada pels subtítols d\'SPIP.
 
 
 
-@puce@ Podeu definir aqu&iacute; la profunditat que es tindr&agrave; en compte pels subt&iacute;tols per construir el resum (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
+@puce@ Podeu definir aquí la profunditat que es tindrà en compte pels subtítols per construir el resum (1 = &lt;@h3@>, 2 = &lt;@h3@> et &lt;@h4@>, etc.) :[[%prof_sommaire%]]
 
 
 
-@puce@ Definiu aqu&iacute; el n&uacute;mero m&agrave;xim de car&agrave;cters que es tindran en compte pel subt&iacute;tol:[[%lgr_sommaire% caract&egrave;res]]
+@puce@ Definiu aquí el número màxim de caràcters que es tindran en compte pel subtítol:[[%lgr_sommaire% caractères]]
 
 
 
-@puce@ Les &agrave;ncores del resum es poden calcular a partir del t&iacute;tol i no assemblar-se a: {outil_sommaire_NN}. Aquesta opci&oacute; permet accedir tamb&eacute; a la sintaxi <code>{{{Mon titre<mon_ancre>}}}</code> que permet escollir l\'&agrave;ncora utilitzada.[[%jolies_ancres%]]
+@puce@ Les àncores del resum es poden calcular a partir del títol i no assemblar-se a: {outil_sommaire_NN}. Aquesta opció permet accedir també a la sintaxi <code>{{{Mon titre<mon_ancre>}}}</code> que permet escollir l\'àncora utilitzada.[[%jolies_ancres%]]
 
 
 
-@puce@ Fixeu aqu&iacute; el comportament del connector pel que fa a la creaci&oacute; del resum: 
+@puce@ Fixeu aquí el comportament del connector pel que fa a la creació del resum: 
 
-_ • Sistem&agrave;tic per cada article (una etiqueta <code>@_CS_SANS_SOMMAIRE@</code> situada a qualsevol lloc o a l\'interior del text de l\'article crear&agrave; una excepci&oacute;).
+_ • Sistemàtic per cada article (una etiqueta <code>@_CS_SANS_SOMMAIRE@</code> situada a qualsevol lloc o a l\'interior del text de l\'article crearà una excepció).
 
-_ • Nom&eacute;s pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAIRE@</code>.
+_ • Només pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMMAIRE@</code>.
 
 
 
@@ -767,41 +767,41 @@ _ • Nom&eacute;s pels articles que continguin l\'etiqueta <code>@_CS_AVEC_SOMM
 
 
 
-@puce@ Per defecte, el Ganivet Su&iacute;s insereix autom&agrave;ticament el resum a la cap&ccedil;alera de l\'article. Per&ograve; vosaltres teniu la possibilitat de situar-lo a qualsevol indret a dins de la vostra plantilla gr&agrave;cies a una etiqueta #CS_SOMMAIRE.
+@puce@ Per defecte, el Ganivet Suís insereix automàticament el resum a la capçalera de l\'article. Però vosaltres teniu la possibilitat de situar-lo a qualsevol indret a dins de la vostra plantilla gràcies a una etiqueta #CS_SOMMAIRE.
 
 [[%balise_sommaire%]]
 
 
 
-Aquest resum es compatible amb &laquo;&nbsp;[.->decoupe]&nbsp;&raquo; i &laquo;&nbsp;[.->titres_typo]&nbsp;&raquo;.', # MODIF
+Aquest resum es compatible amb « [.->decoupe] » i « [.->titres_typo] ».', # MODIF
 	'sommaire:nom' => 'Resum automàtic',
-	'sommaire_ancres' => 'àncores escollides: <b><html>{{{Mon Titre<mon_ancre>}}}</html></b>',
+	'sommaire_ancres' => 'àncores escollides: <b><html>{{{Mon Titre&lt;mon_ancre&gt;}}}</html></b>',
 	'sommaire_avec' => 'Un text amb sumari:  <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'Un text sense sumari: <b>@_CS_SANS_SOMMAIRE@</b>',
 	'sommaire_titres' => 'Subtítols jerarquitzats: <b><html>{{{*Titre}}}</html></b>, <b><html>{{{**Sous-titre}}}</html></b>, etc.',
-	'spam:description' => 'Intenta lluitar contra els enviaments de missatges autom&agrave;tics i mal&egrave;vols a la part p&uacute;blica. Algunes paraules, com les etiquetes en clar &lt;a>&lt;/a>, estan prohibides: animeu als vostres redactors a fer servir les dreceres d\'enlla&ccedil;os en format SPIP.
+	'spam:description' => 'Intenta lluitar contra els enviaments de missatges automàtics i malèvols a la part pública. Algunes paraules, com les etiquetes en clar &lt;a>&lt;/a>, estan prohibides: animeu als vostres redactors a fer servir les dreceres d\'enllaços en format SPIP.
 
 
 
-@puce@ Llisteu aqu&iacute; les seq&uuml;&egrave;ncies prohibides separant-les per espais.[[%spam_mots%]]
+@puce@ Llisteu aquí les seqüències prohibides separant-les per espais.[[%spam_mots%]]
 
-<q1>• Per una expressi&oacute; amb espais, poseu-la entre cometes.
+<q1>• Per una expressió amb espais, poseu-la entre cometes.
 
-_ • Per especificar una paraula sencera, poseu-la entre par&egrave;ntesi. Exemple~:~{(asses)}.
+_ • Per especificar una paraula sencera, poseu-la entre parèntesi. Exemple~:~{(asses)}.
 
-_ • Per una expressi&oacute; regular, verifiqueu b&eacute; la sintaxi i poseu-la entre barres inclinades i entre cometes.
+_ • Per una expressió regular, verifiqueu bé la sintaxi i poseu-la entre barres inclinades i entre cometes.
 
-_ Exemple~:~{<html>"/@test.(com|fr)/"</html>}.
+_ Exemple~:~{<html>\\"/@test.(com|fr)/\\"</html>}.
 
-_ • Per una expressi&oacute; regular que tingui efecte sobre els car&agrave;cters HTML, situeue el test entre &laquo;&amp;#&raquo; et &laquo;;&raquo;.
+_ • Per una expressió regular que tingui efecte sobre els caràcters HTML, situeue el test entre «&#» et «;».
 
-_ Exemple~:~{<html>"/&amp;#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
+_ Exemple~:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
 
 
 
-@puce@ Algunes adreces IP es poden bloquejar tamb&eacute; a la font. Sapigueu, no obstant, que al darrera d\'aquestes adreces (sovint variables), pot haver-hi diversos usuaris, una xarxa sencera.[[%spam_ips%]]
+@puce@ Algunes adreces IP es poden bloquejar també a la font. Sapigueu, no obstant, que al darrera d\'aquestes adreces (sovint variables), pot haver-hi diversos usuaris, una xarxa sencera.[[%spam_ips%]]
 
-<q1>• Utilitzeu el car&agrave;cter &laquo;*&raquo; per diverses xifres, &laquo;?&raquo; per nom&eacute;s una i els claud&agrave;tors per les classes de xifres.</q1>', # MODIF
+<q1>• Utilitzeu el caràcter «*» per diverses xifres, «?» per només una i els claudàtors per les classes de xifres.</q1>', # MODIF
 	'spam:nom' => 'Lluita contra l\'SPAM',
 	'spam_ip' => 'Bloqueig IP de @ip@ :',
 	'spam_test_ko' => 'Aquest missatge serà bloquejat pel filtre anti-SPAM!',
