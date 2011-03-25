@@ -65,9 +65,11 @@ function ck_verifier_options(){
  */
 function formulaires_configurer_ck_charger_dist(){
 	ck_verifier_options();
+	$opt = isset($GLOBALS['meta']['ck_options']) ? $GLOBALS['meta']['ck_options'] : '';
 	$valeurs = array(
 		'dossier_squelettes' => ck_recupere_dossier_squelette($GLOBALS['dossier_squelettes']),
-		'supprimer_numero' => preg_match(",supprimer_numero,",reset($GLOBALS['table_des_traitements']['TITRE']))?1:0,
+		// Pour supprimer numero, on regarde dans la meta ck_options, car supprimer_numero n'est pas appliqué dans l'espace privé
+		'supprimer_numero' => preg_match(",supprimer_numero,",$opt)?1:0,
 		'toujours_paragrapher' => $GLOBALS['toujours_paragrapher']?1:0,
 		'forcer_lang' => $GLOBALS['forcer_lang']?1:0,
 		'no_set_html_base' => defined('_SET_HTML_BASE')?(_SET_HTML_BASE==false):0,
@@ -130,8 +132,8 @@ function formulaires_configurer_ck_traiter_dist(){
 	set_request('dossier_squelettes');
 
 	if (_request('supprimer_numero')){
-		$code .= "\$GLOBALS['table_des_traitements']['TITRE'][]= 'typo(supprimer_numero(%s), \"TYPO\", \$connect)';\n";
-		$code .= "\$GLOBALS['table_des_traitements']['NOM'][]= 'typo(supprimer_numero(%s), \"TYPO\", \$connect)';\n";
+		$code .= "\$GLOBALS['table_des_traitements']['TITRE'][]= (_DIR_RESTREINT ? 'typo(supprimer_numero(%s), \"TYPO\", \$connect)' : 'typo(%s, \"TYPO\", \$connect)');\n";
+		$code .= "\$GLOBALS['table_des_traitements']['NOM'][]= (_DIR_RESTREINT ? 'typo(supprimer_numero(%s), \"TYPO\", \$connect)' : 'typo(%s, \"TYPO\", \$connect)');\n";
 	}
 
 	$code .= ck_code_globale('toujours_paragrapher',_request('toujours_paragrapher')?'true':'false');
