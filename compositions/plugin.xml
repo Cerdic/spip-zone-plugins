@@ -18,7 +18,7 @@ Les rubriques peuvent aussi se voir attribuer un article d'accueil. Les champs i
 Articles may also be assigned a as home of a section. Fields "id_article_accueil" and "composition" can then be used by the skeletons.
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/compositions</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/?article3777</lien> <!-- URI de documentation -->
 	<install>base/compositions.php</install>
 	<prefix>compositions</prefix>
 	<fonctions>compositions_fonctions.php</fonctions>
