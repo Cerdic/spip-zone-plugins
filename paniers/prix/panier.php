@@ -9,11 +9,11 @@ function prix_panier_ht_dist($id_panier, $ligne){
 	$prix_ht = 0;
 	
 	// On va chercher tous les objets liés
-	$objets = sql_allfetsel('objet, id_objet', 'spip_paniers_liens', 'id_panier = '.$id_panier);
+	$objets = sql_allfetsel('objet, id_objet, quantite', 'spip_paniers_liens', 'id_panier = '.$id_panier);
 	
-	// Pour chaque objet on va chercher son prix HT
+	// Pour chaque objet on va chercher son prix HT x sa quantité
 	foreach($objets as $objet){
-		$prix_ht += $fonction_ht($objet['objet'], $objet['id_objet']);
+		$prix_ht += $fonction_ht($objet['objet'], $objet['id_objet']) * $objet['quantite'];
 	}
 	
 	return $prix_ht;
@@ -25,11 +25,11 @@ function prix_panier_dist($id_panier, $prix_ht){
 	$prix = 0;
 	
 	// On va chercher tous les objets liés
-	$objets = sql_allfetsel('objet, id_objet', 'spip_paniers_liens', 'id_panier = '.$id_panier);
+	$objets = sql_allfetsel('objet, id_objet, quantite', 'spip_paniers_liens', 'id_panier = '.$id_panier);
 	
-	// Pour chaque objet on va chercher son prix TTC
+	// Pour chaque objet on va chercher son prix TTC x sa quantité
 	foreach($objets as $objet){
-		$prix += $fonction_ttc($objet['objet'], $objet['id_objet']);
+		$prix += $fonction_ttc($objet['objet'], $objet['id_objet']) * $objet['quantite'];
 	}
 	
 	return $prix;
