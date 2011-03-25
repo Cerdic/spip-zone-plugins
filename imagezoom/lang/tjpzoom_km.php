@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'ទំព័រនេះ អនុញ្ញាតអ្នក កំណត់ទំរង់ រចនាបថនៃឧបករពង្រីក។ រចនាបថផ្ទាល់ខ្លួន អាចត្រូវបានកំណត់ទំរង់៖ មើល <a href="http://plugins.spip.net/?page=article&id_article=48">កំរងឯកសារ លើបណ្តាញ</a>។',
+	'descriptif' => 'ទំព័រនេះ អនុញ្ញាតអ្នក កំណត់ទំរង់ រចនាបថនៃឧបករពង្រីក។ រចនាបថផ្ទាល់ខ្លួន អាចត្រូវបានកំណត់ទំរង់៖ មើល <a href="http://plugins.spip.net/?page=article&amp;id_article=48">កំរងឯកសារ លើបណ្តាញ</a>។',
 
 	// E
 	'example' => 'លទ្ធផល ជាក្រាភិក',

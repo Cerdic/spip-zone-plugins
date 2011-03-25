@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => '<NEW>Dre ar bajenn-mañ e c\'haller kefluniañ stil ar werenn-greskiñ. Gallout a c\'haller disklêriañ ur stil personelaet; gwelet <a href="http://plugins.spip.net/?page=article&id_article=48">an teulioù skoazell enlinenn</a>.',
+	'descriptif' => '<NEW>Dre ar bajenn-mañ e c\'haller kefluniañ stil ar werenn-greskiñ. Gallout a c\'haller disklêriañ ur stil personelaet; gwelet <a href="http://plugins.spip.net/?page=article&amp;id_article=48">an teulioù skoazell enlinenn</a>.',
 
 	// E
 	'example' => '<NEW>Disoc\'h grafek',
