@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// C
 	'chercher_contact' => "Chercher",
+	'chercher_organisation' => "Chercher",
 	'chercher_statut' => "Statut",
 	'contacts' => 'Contacts',
 	'confirmer_supprimer_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer

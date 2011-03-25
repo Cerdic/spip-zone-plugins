@@ -12,7 +12,7 @@ function contacts_declarer_tables_interfaces($interface){
 	// -- Liaisons comptes/auteurs, contacts/auteurs et comptes/contacts
 	$interface['tables_jointures']['spip_contacts'][]= 'contacts_liens';
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts_liens';
-	$interface['tables_jointures']['spip_organisations'][]= 'auteurs';
+	$interface['tables_jointures']['spip_organisations'][] = 'auteurs';
 	$interface['tables_jointures']['spip_auteurs'][]= 'organisations';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
@@ -59,12 +59,14 @@ function contacts_declarer_tables_principales($tables_principales){
 		"PRIMARY KEY"		=> "id_organisation",
 		"UNIQUE KEY id_auteur" => "id_auteur"
 		);
-/*	$organisations_join = array(
-		"id_auteur" 		=> "id_auteur",
+	$organisations_join = array(
+		// sinon (ORGANISATIONS){auteurs.statut = xxx} ne fonctionne pas...
+		// va comprendre...
+		"id_auteur" 		=> "id_auteur", 
 		"id_organisation" 	=> "id_organisation"
-	);*/
+	);
 	$tables_principales['spip_organisations'] =
-		array('field' => &$organisations, 'key' => &$organisations_key, /*'join' => &$organisations_join*/);
+		array('field' => &$organisations, 'key' => &$organisations_key, 'join' => &$organisations_join);
 
 	//-- Table contacts ------------------------------------------
 	$contacts = array(
