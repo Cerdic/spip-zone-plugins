@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'Bu sayfa büyütecin stilini konfigüre etmeye yarar. Kişiselleştirilmiş bir stil tanımlanabilir; <a href="http://plugins.spip.net/?page=article&amp;id_article=48">çevrimiçi makaleye bkz </a>.',
+	'descriptif' => 'Bu sayfa büyütecin stilini konfigüre etmeye yarar. Kişiselleştirilmiş bir stil tanımlanabilir; <a href="http://plugins.spip.net/?page=article&amp;id_article=48">çevrimiçi makaleye bkz </a>.', # MODIF
 
 	// E
 	'example' => 'Grafik sonuç',
