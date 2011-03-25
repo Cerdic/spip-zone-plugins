@@ -12,12 +12,12 @@
  
 
 
-<!--#extra-->
-
-<!--/#extra-->
+<!--#extra--><!--/#extra-->
 
 
 
 <h1><:contacts:titre_page_organisations:></h1>
 
-[(#INCLURE{fond=prive/liste/organisations, env, sinon=<:contacts:aucune_organisation:>})]
+<div class='ajax'>
+[(#FORMULAIRE_RECHERCHE_ORGANISATIONS)]
+</div>
