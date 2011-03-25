@@ -21,7 +21,7 @@ function paniers_declarer_tables_principales($tables_principales){
 		'id_panier' => 'bigint(21) not null',
 		'id_auteur' => 'bigint(21) not null defaut 0',
 		'cookie' => 'varchar(255) not null default ""',
-		'statut' => 'varchar(10) not null defaut "attente"',
+		'statut' => 'varchar(20) not null defaut "encours"', // Un panier pourrait être "encours", "commande", "paye", "envoye", "retour", "retour_partiel"
 		'date' => 'datetime not null default "0000-00-00 00:00:00"',
 		'maj' => 'timestamp not null',
 	);

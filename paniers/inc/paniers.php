@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 /*
  * Chercher le panier associé au visiteur actuel, et sinon le créer
  *
- * @return Retourne l'identifiant du panier en attente
+ * @return Retourne l'identifiant du panier en cours
  */
 function paniers_id_panier_encours(){
 	include_spip('inc/session');
@@ -18,14 +18,14 @@ function paniers_id_panier_encours(){
 	$nom_cookie = $GLOBALS['cookie_prefix'].'panier';
 	$cookie = $_COOKIE[$nom_cookie];
 	
-	// On va chercher un panier existant en attente correspondant au cookie
+	// On va chercher un panier existant en cours, correspondant au cookie
 	if ($cookie){
 		$id_panier = intval(sql_getfetsel(
 			'id_panier',
 			'spip_paniers',
 			array(
 				'cookie = '.sql_quote($cookie),
-				'statut = '.sql_quote('attente')
+				'statut = '.sql_quote('encours')
 			)
 		));
 	}
@@ -39,7 +39,7 @@ function paniers_id_panier_encours(){
 				'spip_paniers',
 				array(
 					'id_auteur = '.$id_auteur,
-					'statut = '.sql_quote('attente')
+					'statut = '.sql_quote('encours')
 				),
 				'',
 				'date desc',
