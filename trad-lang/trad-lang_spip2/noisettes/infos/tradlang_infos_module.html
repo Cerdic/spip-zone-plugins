@@ -12,15 +12,17 @@
 	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
 	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{status=MODIF}{lang=#LANG}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_langue_mere_modif>
 	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
+	[(#CONFIG{tradlang/sauvegarde_locale}|=={on}|oui)
 	[(#IDMODULE|tradlang_testesynchro{#LANG}|oui)
 		<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>
 	]
+	
 	[(#IDMODULE|tradlang_testesynchro{#LANG}|non)
 		<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
 		[(#AUTORISER{configurer,tradlang}|oui)
 			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
 		]
-	]
+	]]
 </li>
 <BOUCLE_langues(TRADLANG){module}{fusion lang}{lang !IN #LANG_MERE}>
 #SET{str_cible,#ARRAY}
@@ -49,13 +51,14 @@
 			<p><:tradlang:message_demande_update_langues_cible_mere:></p>
 		]
 	]
+	[(#CONFIG{tradlang/sauvegarde_locale}|=={on}|oui)
 	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|oui)<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
 	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|non)
 		<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
 		[(#AUTORISER{configurer,tradlang}|oui)
 			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
 		]
-	]
+	]]
 </li>
 </BOUCLE_langues>
 </ul>

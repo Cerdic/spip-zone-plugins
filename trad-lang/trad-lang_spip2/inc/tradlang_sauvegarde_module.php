@@ -14,14 +14,17 @@
  * @param object $langue la langue cible
  * @return 
  */
-function inc_tradlang_sauvegarde_module_dist($module,$langue){
+function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang){
 	spip_log('sauvegarde','tradlang');
 	// Debut du fichier de langue
 	$lang_prolog = "<"."?php\n// This is a SPIP language file  --  Ceci est un fichier langue de SPIP\nif (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
 	// Fin du fichier de langue
 	$lang_epilog = "\n?".">\n";
 
-	$fic_exp = _DIR_RACINE.$module["dir_lang"]."/".$module["nom_mod"]."_".$langue.".php";
+	if(!is_dir($dir_lang)){
+		return false;
+	}
+	$fic_exp = $dir_lang."/".$module["nom_mod"]."_".$langue.".php";
 	$tab = array();
 	$conflit = array();  
 	$tab = tradlang_lirelang($module, $langue);

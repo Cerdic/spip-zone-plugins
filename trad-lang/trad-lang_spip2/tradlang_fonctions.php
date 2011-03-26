@@ -47,40 +47,54 @@ function tradlang_getmodules_base(){
  * @return 
  */
 function tradlang_testesynchro($idmodule, $langue){
-	spip_log("testesynchro $idmodule - $langue");
+	global $dossier_squelettes;
+	if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes')){
+		return false;
+	}
+	else{
+		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
+	}
+	
+	if(!is_dir($dir_lang=$squelettes.'lang/')){
+		return false;
+	}
+	spip_log($dir_lang);
+	spip_log("testesynchro $idmodule - $langue",'tradlang');
 	$module = sql_fetsel('*','spip_tradlang_modules','idmodule='.intval($idmodule));
 	$nom_module = $module["nom_module"];
 	$nom_mod = $module["nom_mod"];
-	$dir_lang = $module["dir_lang"];
+	//$dir_lang = $module["dir_lang"];
 	
 	$modules = tradlang_getmodules_base();
 	$modok = $modules[$nom_mod];
 	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
+	
 	$modules2 = $getmodules_fics($dir_lang);
 	$modok2 = $modules2[$nom_mod];
 
 	// union entre modok et modok2
-	foreach($modok2 as $cle=>$item){
-		if (strncmp($cle, "langue_", 7) == 0){
-			$sel = "";
-			$lang = substr($cle,7);
-			if (!array_key_exists($lang, $modok)){
-				$module["langue_".$lang] = $item;
+	if(is_array($modok2)){
+		foreach($modok2 as $cle=>$item){
+			if (strncmp($cle, "langue_", 7) == 0){
+				$sel = "";
+				$lang = substr($cle,7);
+				if (!array_key_exists($lang, $modok)){
+					$module["langue_".$lang] = $item;
+				}
 			}
 		}
 	}
-	
 	// Le fichier n'existe pas
 	if(!$module["langue_".$langue]){
 		return false;
 	}
 	
 	// lit le timestamp fichier
-	$fic = _DIR_RACINE.$dir_lang."/".$module["langue_".$langue];
+	$fic = $dir_lang."/".$module["langue_".$langue];
 	include($fic);
 	$chs = $GLOBALS[$GLOBALS['idx_lang']];
 	$tsf = $chs["zz_timestamp_nepastraduire"];
-	spip_log($tsf);
+	spip_log($tsf,'tradlang');
 	unset($GLOBALS[$GLOBALS['idx_lang']]);
 
 	// lit le timestamp  base

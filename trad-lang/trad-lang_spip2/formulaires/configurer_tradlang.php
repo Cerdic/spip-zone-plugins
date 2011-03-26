@@ -8,7 +8,6 @@ function formulaires_configurer_tradlang_charger_dist(){
 	if (!is_array($valeurs))
 		$valeurs = array();
 	
-	spip_log($valeurs,'config');
 	return $valeurs;
 }
 
@@ -20,6 +19,7 @@ function formulaires_configurer_tradlang_verifier_dist(){
 function formulaires_configurer_tradlang_traiter_dist(){
 	$res = array('editable'=>true);
 	foreach(array(
+		"sauvegarde_locale",
 		"configurer_type",
 		"configurer_statuts",
 		"configurer_auteurs",
@@ -33,7 +33,6 @@ function formulaires_configurer_tradlang_traiter_dist(){
 			if (!is_null($v=_request($m)))
 				$config[$m] = _request($m);
 		}
-		spip_log($config);
 		ecrire_meta('tradlang',serialize($config));
 	$res['message_ok'] = _T('config_info_enregistree');
 	return $res;
