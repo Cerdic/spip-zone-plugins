@@ -86,7 +86,6 @@ function langonet_creer_bulle_fichier($fichier, $type='log', $action='telecharge
 function entite2utf($sujet) {
 	if (!$sujet) return;
 	include_spip('inc/charsets');
-	return unicode_to_utf_8(html_entity_decode($sujet, ENT_NOQUOTES, 'utf-8'));
+	return unicode_to_utf_8(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $sujet), ENT_NOQUOTES, 'utf-8'));
 }
-
 ?>
