@@ -17,6 +17,9 @@
 			<div class="titre">[(#VALEUR|table_valeur{nom}|typo) ](#CLE)</div>
 			[<div class="infos">(#VALEUR|table_valeur{description}|propre)</div>]
 			<p class='actions'>[(#GET{auth}|oui)
+				[(#_types:CLE|=={rubrique}|oui)
+				<span class='lien_modifier_heritages'>&#91;<a href='[(#URL_ECRIRE{noizetier_composition_heritages,id=#_types:CLE-#CLE})]'><:noizetier:editer_composition_heritages:></a>&#93;</span> 
+				]
 				<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{noizetier_composition_editer,id=#_types:CLE-#CLE})]'><:noizetier:editer_composition:></a>&#93;</span> 
 			]
 			</p>

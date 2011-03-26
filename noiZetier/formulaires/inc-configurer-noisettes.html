@@ -75,7 +75,7 @@
 		<//B_pas_demande_noisette>
 	</li>
 </ul>
-[(#AUTORISER{configurer,noizetier}|et{#ENV{bloc_page_nouvelle_noisette}|=={#ENV{bloc_page}}|non})
+[(#AUTORISER{configurer,noizetier}|et{#ENV{bloc_page_nouvelle_noisette}|=={#ENV{bloc_page}}|non}|et{#ENV{noisette}|non})
 <p class='boutons' style="display: none;">
 	<input type="submit" class="submit link" name="annuler_deplacer_noisette" value="<:bouton_annuler:>" />
 	<input type="submit" class="submit" name="dragndrop_noisette" value="<:bouton_enregistrer:>" />

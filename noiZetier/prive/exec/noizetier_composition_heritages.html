@@ -1,0 +1,31 @@
+[(#SET{type,[(#ENV{id}|noizetier_page_type)]})]
+[(#SET{compo,[(#ENV{id}|noizetier_page_composition)]})]
+[(#SET{compo_infos,[(#CONFIG{noizetier_compositions}|unserialize|table_valeur{#GET{type}}|table_valeur{#GET{compo}})]})]
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<a href="#URL_ECRIRE{noizetier_compositions}" class="icone36" style="float:left;">
+			<img width="24" height="24" src="#CHEMIN{img/compositions-24.png}" alt="<:retour:>" />
+			<span><:retour:></span>
+		</a>
+		<:noizetier:formulaire_modifier_composition_heritages:>
+		<h1>[(#GET{compo_infos}|table_valeur{nom}|typo)]</h1>
+		[(#GET{compo_infos}|table_valeur{description}|typo)]
+	</div>
+	[(#FORMULAIRE_EDITER_COMPOSITION_HERITAGES_NOIZETIER{#ENV{id}})]
+
+</div>
+
+<!--#navigation-->
+[(#ENV{id}|oui)
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		[<p><img src="(#GET{compo_infos}|table_valeur{icon}|chemin|image_reduire{24}|extraire_attribut{src})" /></p>]
+		<:noizetier:info_composition:>
+		<p style='font-size:1.75em;'>#ENV{id}</p>
+	</div>
+</div>
+]
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->
