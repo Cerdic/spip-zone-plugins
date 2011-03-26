@@ -376,7 +376,7 @@ function agenda_calculer_critere_evenementrelatif($id_table,$_dateref,$not,$choi
 					)
 				);
 			} else {
-				$where_a_venir = $where_a_venir_sans_heure;
+				$where = $where_a_venir_sans_heure;
 			}
 			return $where;
 			break;
