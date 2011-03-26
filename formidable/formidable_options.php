@@ -49,6 +49,20 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 			'rows' => 5,
 			'class' => 'multilang'
 		)
+	),
+	array(
+		'saisie' => 'selection',
+		'options' => array(
+			'nom' => 'apres',
+			'label' => 'Afficher ensuite',
+			'explication' => 'Apres validation, afficher à la place du formulaire :',
+			'datas' => 
+"formulaire|Le formulaire, à nouveau
+valeurs|Les valeurs saisies
+rien|Rien du tout",
+			'defaut' => 'formulaire',
+			'cacher_option_intro' => 'on'
+		)
 	)
 );
 

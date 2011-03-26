@@ -3,6 +3,8 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Importation d'un formulaire forms&table
+
 function echanger_formulaire_forms_importer_dist($fichier){
 	include_spip('inc/xml');
 	$arbre = spip_xml_load($fichier, false);
@@ -23,10 +25,10 @@ function echanger_formulaire_forms_importer_dist($fichier){
 				$descriptif = trim(spip_xml_aplatit($form['descriptif']));
 				$formulaire['descriptif'] = $descriptif ? $descriptif : '';
 				
-				// Le message de retour
+				// Le message de retour si ok
 				$message_retour = trim(spip_xml_aplatit($form['texte']));
 				$formulaire['message_retour'] = $message_retour ? $message_retour : '';
-				
+
 				// Les champs
 				$formulaire['saisies'] = array();
 				foreach($form['fields'] as $fields){

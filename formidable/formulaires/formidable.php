@@ -89,6 +89,10 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 		$contexte['message_erreur'] = _T('formidable:erreur_inexistant');
 	}
 	
+	$contexte['_hidden'] .= "\n".'<input type="hidden" name="formidable_afficher_apres'/*.$formulaire['id_formulaire']*/.'" value="'.$formulaire['apres'].'"/>';// marche pas
+	
+	$contexte['formidable_afficher_apres']=$formulaire['apres'];
+	
 	return $contexte;
 }
 
@@ -107,19 +111,24 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_f
 	$saisies = unserialize($formulaire['saisies']);
 	
 	$erreurs = saisies_verifier($saisies);
-		
+	
+	if ($erreurs and !isset($erreurs['message_erreur']))
+		$erreurs['message_erreur'] = _T('formidable:message_generique_erreur_saisie');
+
 	return $erreurs;
 }
 
 
 function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_formulaires_reponse=false){
 	$retours = array();
-	// Par défaut le formulaire se remet en route à la fin
-	$retours['editable'] = true;
 	
 	$id_formulaire = intval(_request('id_formulaire'));
 	$formulaire = sql_fetsel('*', 'spip_formulaires', 'id_formulaire = '.$id_formulaire);
 	$traitements = unserialize($formulaire['traitements']);
+		
+	// selon le choix, le formulaire se remet en route à la fin ou non
+	$retours['editable'] = ($formulaire['apres']=='formulaire');
+	$retours['formidable_afficher_apres'] = $formulaire['apres'];
 	
 	if (is_array($traitements) and !empty($traitements)){
 		foreach($traitements as $type_traitement=>$options){

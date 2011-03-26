@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_menu_formulaire' => 'Configurer le formulaire',
 'editer_menu_traitements' => 'Configurer les traitements',
 'editer_message_ok' => 'Message de retour',
-'editer_message_ok_explication' => 'Vous pouvez personnalisez le message qui sera affich&eacute; &agrave; l\'utilisateur apr&egrave;s l\'envoi du formulaire.',
+'editer_message_ok_explication' => 'Vous pouvez personnaliser le message qui sera affich&eacute; &agrave; l\'utilisateur apr&egrave;s l\'envoi d\'un formulaire valide.',
 'editer_modifier_formulaire' => 'Modifier le formulaire',
 'editer_nouveau' => 'Nouveau formulaire',
 'editer_titre' => 'Titre',
@@ -131,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'voir_exporter' => 'Exporter le formulaire',
 'voir_numero' => 'Formulaire num&eacute;ro :',
 'voir_reponses' => 'Voir les r&eacute;ponses',
-'voir_traitements' => 'Traitements'
+'voir_traitements' => 'Traitements',
+'message_generique_erreur_saisie' => 'Il y a des erreurs dans votre saisie.'
 );
-
 ?>
