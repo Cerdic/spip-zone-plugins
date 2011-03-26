@@ -93,9 +93,9 @@
 		jQuery('#jqDialog').css('top',scrollY+(h-jQuery('#jqDialog').height())/3);
 
 		// Gestion des raccourcis clavier
-		jQuery('#jqDialog').keydown(function (e) 
+		jQuery(document).keydown(function (e) 
 		{	var code = (e.keyCode ? e.keyCode : e.which); 
-			if (code == 13) { $.jqDialog.action('ok'); return false; }
+			//if (code == 13) { $.jqDialog.action('ok'); return false; }
 			if (code == 27) { $.jqDialog.action('undo'); return false; }
  			return true;
 		});

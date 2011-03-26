@@ -432,7 +432,7 @@ jQuery.geoportail =
 	/** Ajouter un fichier GPX,KML,GXT
 	Zoom sur l'extension du fichier
 	*/
-	addLayer: function(carte, type, id_document, name, url, nozoom) 
+	addLayer: function(carte, type, id_document, name, url, nozoom, opts) 
 	{	// Recherche des styles dans le css
 		function setStyle(style, id) 
 		{	var stl = $('#'+id);
@@ -451,13 +451,16 @@ jQuery.geoportail =
 		// Ajouter la couche
 		var l;
 		if (type == "GXT") {
-			l = new OpenLayers.Layer.GXT(name, url);
+			l = new OpenLayers.Layer.GXT(name, url, opts);
 			map.getMap().addLayer(l);
 		}
 		else 
-		{	l = map.getMap().addLayer(type, name, url, 
-				{ preFeatureInsert:Geoportal.Popup.setPointerCursorForFeature, opacity: 1, visibility: true, originators: jQuery.geoportail.originators}, 
-				{ formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
+		{	if (!opts) opts = {};
+			opts.preFeatureInsert = Geoportal.Popup.setPointerCursorForFeature;
+			opts.opacity = 1;
+			opts.visibility = true;
+			opts.originators = jQuery.geoportail.originators;
+			l = map.getMap().addLayer(type, name, url, opts, { formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
 		}
 		if (l) 
 		{	// Recherche des styles
@@ -1110,30 +1113,30 @@ function geoportail_selectionnable (l)
 @param options : { fichier:geoportail, type:'remarque', sstype:'point', attributs:["remarque","commune","departement"] }
 */
 function geoportail_loadData (formatType, sel, proj, options)
-{	// Changement de format
-	var str, format;
+{	var str, format, formatf;
+	// Recherche le format
 	switch (formatType)
 	{	case 'kml':
-			format = new OpenLayers.Format.KML( options );
+			formatf = OpenLayers.Format.KML;
 			if (!proj) proj = 'IGNF:RGF93G';
 		break;
 		case 'osm' :
-			format = new OpenLayers.Format.OSM( options );
+			formatf = OpenLayers.Format.OSM;
 			if (!proj) proj = 'IGNF:RGF93G';
 		break;
 		case 'gml' :
-			format = new OpenLayers.Format.GML( options );
+			formatf = OpenLayers.Format.GML;
 			if (!proj) proj = 'IGNF:RGF93G';
 			if (!options) options={};
 			if (!options.featureNS) options.featureNS='http://interop.ign.fr/exchange';
 		break;
 		case 'gpx':
-			format = new Geoportal.Format.GPX( options );
+			formatf = Geoportal.Format.GPX;
 			if (!proj) proj = 'IGNF:RGF93G';
 		break;
 		case 'gxt':
 			//format = new Geoportal.Format.Geoconcept( options );
-			format = new Geoportal.Format.Geoconcept.rip( options );
+			formatf = Geoportal.Format.Geoconcept.rip;
 			if (!proj) proj = 'IGNF:LAMB93';
 		break;
 		default:
@@ -1141,8 +1144,10 @@ function geoportail_loadData (formatType, sel, proj, options)
 		break;
 	}
 	// Changement de projection
-	format.internalProjection = this.getMap().getProjection();
-	format.externalProjection = new OpenLayers.Projection(proj);
+	if (!options) options={};
+	options.internalProjection = this.getMap().getProjection();
+	options.externalProjection = new OpenLayers.Projection(proj);
+	format = new formatf(options);
 	// Ecrire l'export
 	if (sel=='all') str = format.write(this.rlayer.features);
 	else if (sel=='extent')
