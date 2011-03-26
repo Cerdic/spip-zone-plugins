@@ -18,9 +18,6 @@ a.spip_out,
 a.spip_url,
 a.external { padding-right: 13px; background-image: url(img/external.gif); }
 
-/* hreflang */
-a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
-
 /* Liens courriel */
 a.spip_mail,
 a[href ^="mailto:"] { padding-right: 14px; background-image: url(img/mail.gif); }
@@ -51,6 +48,11 @@ a.spip_glossaire { padding-right: 13px; background-image: url(img/glossaire.gif)
 /* Documents a telecharger */
 a.download { padding-right: 13px; background-image: url(img/download.gif); }
 
+a[href$=".pdf"], a[href$=".PDF"],
+a[href*=".pdf#"], a[href*=".PDF#"],
+a[href*=".pdf?"], a[href*=".PDF?"],
+a.pdf { padding-right: 13px; background-image: url(img/pdf.gif); }
+
 a[href $=".ogg"], a[href $=".OGG"],
 a[href $=".mid"], a[href $=".MID"],
 a[href $=".midi"], a[href $=".MIDI"],
@@ -65,17 +67,19 @@ a[href $=".mpeg"], a[href $=".MPEG"],
 a[href $=".mpg"], a[href $=".MPG"],
 a.video { padding-right: 13px; background-image: url(img/video.gif); }
 
-a[href$=".pdf"], a[href$=".PDF"],
-a[href*=".pdf#"], a[href*=".PDF#"],
-a[href*=".pdf?"], a[href*=".PDF?"],
-a.pdf { padding-right: 13px; background-image: url(img/pdf.gif); }
+/* hreflang */
+a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
+
+/* Autres medias */
+@media print {
+a { text-decoration: underline; }
+a.external,
+a[href ^="mailto:"] { padding-right: 0; background: none; }
+a.external:after,
+a[href ^="mailto:"]:after { content: "\0000a0("attr(href)")"; }
+}
 
 /* Liens exposes */
 .on { font-weight: bold; }
-
-@media print {
-a.external { padding-right: 0; background: none; text-decoration: underline; }
-a.external:after { content: " (" attr(href) ") "; font-size: 90%; font-weight: normal; }
-}
 
 /* end */
