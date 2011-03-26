@@ -21,5 +21,5 @@ Construction du lien de gestion d'abonnement
 -->
 ][
 	<:spiplistes:modif_abonnement_text:>
-		(#TEST|trim|generer_url_public{page=abonnement&d=#ENV{d}})"
+		(#ENV{_url})?page=abonnement&d=#ENV{d}"
 	]

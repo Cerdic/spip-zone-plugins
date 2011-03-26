@@ -431,7 +431,7 @@ function spiplistes_meleuse ($last_time) {
 									$ventre_texte = $page_texte;
 								}
 								// le &amp; semble poser probleme sur certains MUA. A suivre...
-								$_url = preg_replace(',(&amp;),','&', $_url);
+								//$_url = preg_replace(',(&amp;),','&', $_url);
 								
 								// Pour le moment (27/03/2011), un seul patron connu
 								$lien_rappel = 'lien_standard';
@@ -440,7 +440,7 @@ function spiplistes_meleuse ($last_time) {
 									_SPIPLISTES_PATRONS_LIEN_DIR . $lien_rappel
 									, array('id_courrier' => $id_courrier
 											, 'id_liste' => $id_liste
-											, '_url' => $url
+											, '_url' => generer_url_public()
 											, 'lang' => $lang
 											, 'd' => $cookie
 											)
