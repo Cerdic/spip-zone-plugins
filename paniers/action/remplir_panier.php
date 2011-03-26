@@ -19,14 +19,13 @@ function action_remplir_panier_dist($arg=null) {
 	$id_objet = intval($id_objet);
 	$quantite = intval($quantite) ? intval($quantite) : 1;
 	
-	// Il faut cherche le panier du visiteur en cours, et sinon le créer
-	include_spip('inc/paniers');
-	$id_panier = paniers_id_panier_encours();
-	
+	// Il faut cherche le panier du visiteur en cours
+	include_spip('inc/session');
+	$id_panier = session_get('id_panier');
 	// On ne fait que s'il y a bien un panier existant et un objet valable
 	if ($id_panier > 0 and $objet and $id_objet) {
 		// Il faut maintenant chercher si cet objet précis est *déjà* dans le panier
-		$quantite_deja = sql_getfetsel(
+		$quantite_deja = intval(sql_getfetsel(
 			'quantite',
 			'spip_paniers_liens',
 			array(
@@ -34,13 +33,12 @@ function action_remplir_panier_dist($arg=null) {
 				'objet = '.sql_quote($objet),
 				'id_objet = '.$id_objet
 			)
-		);
-		
+		));
 		// Si on a déjà une quantité, on fait une mise à jour
-		if ($quantite_deja !== false){
+		if ($quantite_deja){
 			sql_updateq(
 				'spip_paniers_liens',
-				array('quantite' => intval($quantite_deja) + $quantite),
+				array('quantite' => $quantite_deja + $quantite),
 				'id_panier = '.$id_panier.' and objet = '.sql_quote($objet).' and id_objet = '.$id_objet
 			);
 		}

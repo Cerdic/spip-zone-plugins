@@ -10,7 +10,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  */
 function paniers_id_panier_encours(){
 	static $id_panier;
-	
 	// Si on a déjà fait les calculs, on termine déjà
 	if ($id_panier > 0) return $id_panier;
 	
@@ -20,9 +19,8 @@ function paniers_id_panier_encours(){
 	include_spip('base/abstract_sql');
 	$id_panier = 0;
 	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
-	$nom_cookie = $GLOBALS['cookie_prefix'].'panier';
+	$nom_cookie = $GLOBALS['cookie_prefix'].'_panier';
 	$cookie = $_COOKIE[$nom_cookie];
-	
 	// On va chercher un panier existant en cours, correspondant au cookie
 	if ($cookie){
 		$id_panier = intval(sql_getfetsel(
@@ -55,7 +53,7 @@ function paniers_id_panier_encours(){
 			$cookie = $panier['cookie'];
 			
 			// Mais ce panier n'est valide que s'il n'est pas trop vieux
-			if (time() < strtotime($date + lire_config('paniers/limite_enregistres', 7*24*3600))){
+			if (time() < strtotime("$date + ".lire_config('paniers/limite_enregistres', 7*24*3600).'seconds')){
 				// Dans ce cas on le prend
 				$id_panier = intval($panier['id_panier']);
 			}
@@ -67,14 +65,15 @@ function paniers_id_panier_encours(){
 			// On crée l'identifiant du cookie
 			$cookie = creer_uniqid();
 			// On crée le panier
-			$id_panier = sql_insertq(
+#			var_dump($cookie,$id_auteur);
+			$id_panier = intval(sql_insertq(
 				'spip_paniers',
 				array(
 					'id_auteur' => $id_auteur ? $id_auteur : 0,
 					'cookie' => $cookie,
 					'date' => 'NOW()'
 				)
-			);
+			));
 		}
 	}
 	

@@ -6,6 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 function paniers_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['paniers'] = 'paniers';
+	$interface['table_des_tables']['paniers_liens'] = 'paniers_liens';
 	
 	//-- Jointures ----------------------------------------------------
 	$interface['tables_jointures']['spip_auteurs'][]= 'paniers';
@@ -19,9 +20,9 @@ function paniers_declarer_tables_principales($tables_principales){
 	//-- Table paniers -----------------------------------------------------------
 	$paniers = array(
 		'id_panier' => 'bigint(21) not null',
-		'id_auteur' => 'bigint(21) not null defaut 0',
+		'id_auteur' => 'bigint(21) not null default 0',
 		'cookie' => 'varchar(255) not null default ""',
-		'statut' => 'varchar(20) not null defaut "encours"', // Un panier pourrait être "encours", "commande", "paye", "envoye", "retour", "retour_partiel"
+		'statut' => 'varchar(20) not null default "encours"', // Un panier pourrait être "encours", "commande", "paye", "envoye", "retour", "retour_partiel"
 		'date' => 'datetime not null default "0000-00-00 00:00:00"',
 		'maj' => 'timestamp not null',
 	);

@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Paniers</nom>
-	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<auteur>[Les Développements Durables->http://www.ldd.fr], Cédric Morin ([yterium.net->http://www.yterium.net])</auteur>
 	<licence>GPL v3</licence>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
@@ -12,6 +12,7 @@
 	<prefix>paniers</prefix>
 	
 	<install>base/paniers_installation.php</install>
+	<options>paniers_options.php</options>
 	
 	<pipeline>
 		<nom>declarer_tables_principales</nom>

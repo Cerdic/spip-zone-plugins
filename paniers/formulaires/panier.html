@@ -1,0 +1,57 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_#ENV{form}[ formulaire_#ENV{form}-(#ENV{id,nouveau})]">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+	<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		
+		<B_contenu_panier>
+		<table>
+			<thead>
+				<tr>
+					<th class="description"><:paniers:panier_description:></th>
+					<th class="prix_unitaire"><:paniers:panier_prix_unitaire:></th>
+					<th class="quantite"><:paniers:panier_quantite:></th>
+					<th class="montant"><:paniers:panier_montant:></th>
+				</tr>
+			</thead>
+			<tbody>
+				<BOUCLE_contenu_panier(PANIERS_LIENS){id_panier=#ENV{_id_panier}}>
+				#SET{prix_unitaire,#PRIX_HT{#OBJET,#ID_OBJET}}
+				<tr>
+					<td class="description">#INFO_TITRE{#OBJET,#ID_OBJET}</td>
+					<td class="prix_unitaire">#GET{prix_unitaire}</td>
+					<td class="quantite">#QUANTITE</td>
+					<td class="montant">[(#GET{prix_unitaire}|mult{#QUANTITE})]</td>
+				</tr>
+				</BOUCLE_contenu_panier>
+				#SET{total_ht,#PRIX_HT{panier,#ENV{_id_panier}}}
+				#SET{total_ttc,#PRIX{panier,#ENV{_id_panier}}}
+				#SET{taxes,#GET{total_ttc}|moins{#GET{total_ht}}}
+				<tr class="total_ht">
+					<td colspan="3"><:paniers:panier_total_ht:></td>
+					<td class="montant">#GET{total_ht}</td>
+				</tr>
+				<tr class="taxes">
+					<td colspan="3"><:paniers:panier_taxes:></td>
+					<td class="montant">#GET{taxes}</td>
+				</tr>
+				<tr class="total_ttc">
+					<td colspan="3"><:paniers:panier_total_ttc:></td>
+					<td class="montant">#GET{total_ttc}</td>
+				</tr>
+			</tbody>
+		</table>
+		
+		<p class="boutons">
+			<span class="image_loading"></span>
+			<input type="submit" class="submit" value="<:bouton_enregistrer:>" />
+		</p>
+		</B_contenu_panier>
+		<:paniers:panier_vide:>
+		<//B_contenu_panier>
+	</div></form>
+</div>
