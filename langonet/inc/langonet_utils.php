@@ -82,7 +82,7 @@ function langonet_creer_bulle_fichier($fichier, $type='log', $action='telecharge
 	return $bulle;
 }
 
-// fonction purement utilitaire
+// Conversion d'un texte en utf-8
 function entite2utf($sujet) {
 	if (!$sujet) return;
 	include_spip('inc/charsets');

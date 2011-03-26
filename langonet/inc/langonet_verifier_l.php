@@ -1,4 +1,7 @@
 <?php
+// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
+// -- pour les fichiers .php et la detection de _L
+define("_LANGONET_TROUVER_FONCTION_L_P", "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm");
 
 /**
  * Vérification de l'utilisation de la fonction _L() dans le code PHP 

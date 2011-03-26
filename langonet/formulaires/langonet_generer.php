@@ -2,7 +2,7 @@
 
 function formulaires_langonet_generer_charger(){
 	$valeurs = array();
-	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode', 'encodage');
+	$champs = array('module', 'langue_source', 'chemin_langue', 'langue_cible', 'mode');
 	foreach($champs as $_champ){
 		$valeurs[$_champ] = _request($_champ);
 	}

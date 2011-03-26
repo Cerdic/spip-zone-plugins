@@ -1,7 +1,7 @@
 <plugin>
 	<nom>LangOnet</nom>
 	<auteur>Eric Lupinacci, denisb avec le support d&eacute;vou&eacute; de Kent1</auteur>
-	<version>0.5.2</version>
+	<version>0.6.0</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
 	<icon>prive/themes/spip/images/langonet-64.png</icon>
@@ -12,7 +12,7 @@ et d'effectuer des recherches d'items dans les fichiers de langue de SPIP.
 	<lien>http://www.spip-contrib.net/langOnet-Presentation-generale</lien>
 	<prefix>langonet</prefix>
 
-	<options>langonet_options.php</options>
+	<fonctions>langonet_fonctions.php</fonctions>
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/langonet_autoriser.php</inclure>

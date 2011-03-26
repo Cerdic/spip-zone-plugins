@@ -9,6 +9,7 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
+		<div><input type="hidden" name="encodage" id="encodage_defaut" value="utf8" /></div>
 		<ul>
 			<li class="fieldset">
 				<fieldset>
@@ -43,26 +44,15 @@
 							<p class="explication"><:langonet:info_mode:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{mode})</span>]
 							<select name="mode" id="mode">
-								<option value="index" [(#ENV{mode, index}|=={index}|oui) selected="selected"]><:langonet:option_mode_index:></option>
-								<option value="valeur" [(#ENV{mode, index}|=={valeur}|oui) selected="selected"]><:langonet:option_mode_valeur:></option>
-								<option value="new" [(#ENV{mode, index}|=={new}|oui) selected="selected"]><:langonet:option_mode_new:></option>
-								<option value="new_index" [(#ENV{mode, index}|=={new_index}|oui) selected="selected"]><:langonet:option_mode_new_index:></option>
-								<option value="new_valeur" [(#ENV{mode, index}|=={new_valeur}|oui) selected="selected"]><:langonet:option_mode_new_valeur:></option>
-								<option value="vide" [(#ENV{mode, index}|=={vide}|oui) selected="selected"]><:langonet:option_mode_vide:></option>
-								<option value="pas_item" [(#ENV{mode, index}|=={pas_item}|oui) selected="selected"]><:langonet:option_mode_pas_item:></option>
+								<option value="index" [(#ENV{mode, valeur}|=={index}|oui) selected="selected"]><:langonet:option_mode_index:></option>
+								<option value="valeur" [(#ENV{mode, valeur}|=={valeur}|oui) selected="selected"]><:langonet:option_mode_valeur:></option>
+								<option value="new" [(#ENV{mode, valeur}|=={new}|oui) selected="selected"]><:langonet:option_mode_new:></option>
+								<option value="new_index" [(#ENV{mode, valeur}|=={new_index}|oui) selected="selected"]><:langonet:option_mode_new_index:></option>
+								<option value="new_valeur" [(#ENV{mode, valeur}|=={new_valeur}|oui) selected="selected"]><:langonet:option_mode_new_valeur:></option>
+								<option value="vide" [(#ENV{mode, valeur}|=={vide}|oui) selected="selected"]><:langonet:option_mode_vide:></option>
+								<option value="pas_item" [(#ENV{mode, valeur}|=={pas_item}|oui) selected="selected"]><:langonet:option_mode_pas_item:></option>
 							</select>
 						</li>
-<!-- 
-						<li class="editer_encodage[(#ENV{erreurs}|table_valeur{encodage}|oui) erreur]">
-							<label for="encodage"><:langonet:label_encodage:></label>
-							<p class="explication"><:langonet:info_encodage:></p>
-							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{encodage})</span>]
-							<select name="encodage" id="encodage">
-								<option value="html" [(#ENV{encodage, html}|=={html}|oui) selected="selected"]><:langonet:option_encodage_html:></option>
-								<option value="utf8" [(#ENV{encodage, html}|=={utf8}|oui) selected="selected"]><:langonet:option_encodage_utf8:></option>
-							</select>
-						</li>
- -->
 					</ul>
 				</fieldset>
 			</li>

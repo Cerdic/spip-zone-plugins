@@ -1,12 +1,4 @@
 <?php
-// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
-// -- pour les fichiers .html et .php sans detection de _L
-define("_LANGONET_TROUVER_ITEM_HP", ",(?:<:|_[TU]\(['\"])(?:([a-z0-9_]+):)?((?:\\$|[\"\']\s*\.\s*\\$*)?[a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");
-// -- pour les fichiers .php et la detection de _L
-define("_LANGONET_TROUVER_FONCTION_L_P", "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm");
-// -- pour les fichiers .xml
-define("_LANGONET_TROUVER_ITEM_X", ",<[a-z0-9_]+>[\n|\t|\s]*([a-z0-9_]+):([a-z0-9_]+)[\n|\t|\s]*</[a-z0-9_]+()>,iS");
-
 
 /**
  * Creation du select des fichiers de langue
