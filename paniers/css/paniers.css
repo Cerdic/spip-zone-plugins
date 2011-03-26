@@ -1,7 +1,22 @@
 .formulaire_panier table{
 	width:100%;
+	border-spacing:0;
 }
 
 .formulaire_panier .prix_unitaire, .formulaire_panier .quantite, .formulaire_panier .montant, .formulaire_panier .total_ht,.formulaire_panier .taxes, .formulaire_panier .total_ttc{
 	text-align:right;
+}
+
+.formulaire_panier thead th, .formulaire_panier .emplette td{
+	padding:0.5em;
+	border-bottom:1px solid #ddd;
+}
+
+/* Si on ajoute des images dans une description, on centre l'aligement */
+.formulaire_panier .emplette .description img{
+	vertical-align:middle;
+}
+
+.formulaire_panier .total_ttc{
+	font-weight:bold;
 }

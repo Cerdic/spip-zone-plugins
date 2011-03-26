@@ -9,7 +9,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		
 		<B_contenu_panier>
-		<table>
+		<table cellspacing="0">
 			<thead>
 				<tr>
 					<th class="description"><:paniers:panier_description:></th>
@@ -21,8 +21,8 @@
 			<tbody>
 				<BOUCLE_contenu_panier(PANIERS_LIENS){id_panier=#ENV{_id_panier}}>
 				#SET{prix_unitaire,#PRIX_HT{#OBJET,#ID_OBJET}}
-				<tr>
-					<td class="description">#INFO_TITRE{#OBJET,#ID_OBJET}</td>
+				<tr class="emplette">
+					<td class="description">#INCLURE{fond=formulaires/inc-panier-description-emplette,objet=#OBJET,id_objet=#ID_OBJET}</td>
 					<td class="prix_unitaire">#GET{prix_unitaire}</td>
 					<td class="quantite">#QUANTITE</td>
 					<td class="montant">[(#GET{prix_unitaire}|mult{#QUANTITE})]</td>
