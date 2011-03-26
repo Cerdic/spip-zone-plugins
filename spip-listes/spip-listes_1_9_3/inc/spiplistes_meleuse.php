@@ -81,6 +81,7 @@ function spiplistes_meleuse ($last_time) {
 		, 'opt_ajout_tampon_editeur'
 		, 'opt_personnaliser_courrier'
 		, 'opt_log_voir_destinataire'
+		, 'opt_ajout_lien_desabo'
 		) as $key) {
 		$$key = spiplistes_pref_lire($key);
 	}
@@ -443,6 +444,10 @@ function spiplistes_meleuse ($last_time) {
 											, '_url' => generer_url_public()
 											, 'lang' => $lang
 											, 'd' => $cookie
+											// pour formulaire de desabo
+											// en cours 26/03/2011
+											//, 'lien_desabo' => 'oui' 
+											, 'lien_desabo' => $opt_ajout_lien_desabo
 											)
 								);
 								

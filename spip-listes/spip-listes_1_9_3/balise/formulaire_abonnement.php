@@ -16,7 +16,6 @@ include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
 
 // Balise independante du contexte
 
-
 function balise_FORMULAIRE_ABONNEMENT ($p) {
 
 	spiplistes_debug_log('balise_FORMULAIRE_ABONNEMENT()');

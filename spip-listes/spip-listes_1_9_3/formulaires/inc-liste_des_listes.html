@@ -3,11 +3,18 @@
 	<fieldset><legend class="legend">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:listes_de_diffusion_:>})]</legend>
 	[<p class="explication">(#ENV{explication})</p>]
 	<ul>
-	<BOUCLE_listes(LISTES){id_liste?} {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}>
+		[<!--(#REM) @todo 20110326, manque les listes privées (inact)-->]
+	<BOUCLE_listes(LISTES) {id_liste?} {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}>
 		<li>
 	#SET{checked,non}<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}>#SET{checked,oui}</BOUCLE_inscription>
 		<div class="choix">
-			<input type="checkbox" class="checkbox" name="listes[]" value="#ID_LISTE" id="liste_#ID_LISTE"[(#GET{checked}|=={oui}|oui) checked="checked"] />
+			<input type="checkbox"
+				   class="checkbox"
+				   name="listes[]"
+				   value="#ID_LISTE"
+				   id="liste_#ID_LISTE"
+				   [(#GET{checked}|=={oui}|oui)checked="checked"]
+				   />
 			<label for="liste_#ID_LISTE">#TITRE[ ((#TEXTE|textebrut|couper{80}))]</label>
 		</div>
 		</li>
