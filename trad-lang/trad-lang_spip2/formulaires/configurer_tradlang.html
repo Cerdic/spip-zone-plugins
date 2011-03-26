@@ -1,0 +1,13 @@
+#CACHE{0}
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_configurer_tradlang_autorisations">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<INCLURE{fond=noisettes/formulaires/tradlang_autorisations}{env}>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+			<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+		</p>
+	</div></form>
+</div>

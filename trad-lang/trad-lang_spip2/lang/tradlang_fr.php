@@ -105,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'items_en_trop' => '@nb@ items sont en trop dans cette langue (par rapport &agrave; la langue m&egrave;re)',
 'items_manquants' => '@nb@ items sont manquants dans cette langue (par rapport &agrave; la langue m&egrave;re)',
 'items_modif' => 'Items modifi&eacute;s',
+'items_modifies' => 'Items modifi&eacute;s',
 'items_new' => 'Nouveaux items',
 'items_total_nb' => 'Nombre total d\'items',
 
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_nommodule' => 'Personnaliser le nom du module',
 'label_repertoire_module_langue' => 'R&eacute;pertoire du module',
 'label_synchro_base_fichier' => 'Synchroniser la base et les fichiers',
+'label_texte' => 'Descriptif du module',
 'label_tradlang_status' => 'Statut de la traduction',
 'label_tradlang_str' => 'Cha&icirc;ne traduite',
 'label_update_langues_cible_mere' => 'Mettre &agrave; jour cette langue dans la base',
@@ -236,6 +238,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_total_chaine_traduite' => 'Nombre de chaines traduites :',
 'texte_tout_selectionner' => 'Tous s&eacute;lectionner',
 'texte_type_operation' => 'Type d\'op&eacute;ration',
+'titre_page_configurer_tradlang' => 'Configuration du plugin Trad-lang',
+'titre_tradlang' => 'Trad-lang',
 'titre_traduction' => 'Traductions',
 'titre_traduction_de' => 'Traduction de ',
 'titre_traduction_module_de_vers' => 'Traduction du module @module@ de @lang_orig@ vers @lang_cible@',
@@ -250,10 +254,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // V
 'visumodule' => 'R&eacute;sum&eacute; du module',
-
-
-// Z
-'zz_timestamp_nepastraduire' => ''
 
 );
 
