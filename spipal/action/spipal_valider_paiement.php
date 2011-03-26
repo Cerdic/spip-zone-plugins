@@ -43,7 +43,11 @@ function spipal_validation_arg($env, $url)
 // a refaire avec "recuperer_page" qui gere les redirections et les port != 80
 function validation_pp_http_post($env, $url)
 {
-	$fp = fsockopen ($url, 80, $errno, $errstr, 30);
+	if (preg_match('@^https@', $url)) {
+		$url = preg_replace('@^https:@', 'ssl:', $url);
+		$port = 443;
+	} else $port = 80;
+	$fp = fsockopen ($url, $port, $errno, $errstr, 30);
 	if (!$fp) return false;
 	$body   = validation_pp_http_body($env);
 	$header = validation_pp_http_header(strlen($body));
