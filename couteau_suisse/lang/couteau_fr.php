@@ -89,7 +89,7 @@ Découvrez dans ce plugin vos outils favoris : {Supprime le numéro}, {Format de
 N\'hésitez pas à consulter les articles de documentation du plugin publiés sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilité : SPIP v1.92x, v2.0.x et v2.1.x',
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques',
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques',
 	'pp_blocs_bloc' => 'Insérer un bloc replié',
 	'pp_blocs_visible' => 'Insérer un bloc déplié',
 	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »',
