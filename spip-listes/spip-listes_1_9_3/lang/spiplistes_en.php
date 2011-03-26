@@ -427,9 +427,9 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 , 'envoi_annule' => 'Send Cancelled'
 , 'sans_adresse' => ' No e-mail has been sent -> please specify a reply-to address'
 , 'erreur_mail' => 'Error: sending impossible (make sure that  mail() of php is available)'
-, 'abonnement_mail_text' => 'To change your subscription, please visit the following webpage: '
+, 'modif_abonnement_text' => 'To change your subscription, please visit the following webpage: '
 , 'msg_abonne_sans_format' => "email format is missing"
-, 'Cliquez_ici_pour_modifier_votre_abonnement' => "<br /> Click here to change your subscription"
+, 'modif_abonnement_html' => "<br /> Click here to change your subscription"
 
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php

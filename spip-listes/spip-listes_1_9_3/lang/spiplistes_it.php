@@ -433,9 +433,9 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'envoi_annule' => 'Invio annullato'
 , 'sans_adresse' => ' Email non inviata -> Definisci un indirizzo per le risposte'
 , 'erreur_mail' => 'Errore: invio dell\'email impossibile (verifica se mail() del php &egrave; disponibile)'
-, 'abonnement_mail_text' => 'Per modificare il tuo abbonamento, vai all\'indirizzo seguente: '
+, 'modif_abonnement_text' => 'Per modificare il tuo abbonamento, vai all\'indirizzo seguente: '
 , 'msg_abonne_sans_format' => "formato di ricezione mancante"
-, 'Cliquez_ici_pour_modifier_votre_abonnement' => "<br />Clicca qui per modificare il tuo abbonamento"
+, 'modif_abonnement_html' => "<br />Clicca qui per modificare il tuo abbonamento"
 
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php

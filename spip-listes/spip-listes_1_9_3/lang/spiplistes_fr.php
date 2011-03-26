@@ -518,9 +518,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'envoi_annule' => 'Envoi annul&#233;'
 , 'sans_adresse' => ' Mail non envoy&#233; -> Veuillez d&#233;finir une adresse de r&#233;ponse'
 , 'erreur_mail' => 'Erreur : envoi du mail impossible (v&#233;rifier si mail() de php est disponible)'
-, 'abonnement_mail_text' => 'Pour modifier votre abonnement, veuillez vous rendre &#224; l&#8217;adresse suivante : '
+, 'modif_abonnement_text' => 'Pour modifier votre abonnement, veuillez vous rendre &#224; l&#8217;adresse suivante : '
 , 'msg_abonne_sans_format' => 'format de reception manquant'
-, 'Cliquez_ici_pour_modifier_votre_abonnement' => '<br />Cliquez ici pour modifier votre abonnement'
+, 'modif_abonnement_html' => '<br />Cliquez ici pour modifier votre abonnement'
 , 'erreur_queue_supprimer_courrier' => '@s@ premiere etiquette en erreur. id_courier = 0. Supprimer cette etiquette manuellement de la table spip_auteurs_courriers !'
 
 // inc/spiplistes_naviguer_paniers.php

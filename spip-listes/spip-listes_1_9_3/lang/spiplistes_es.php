@@ -463,9 +463,9 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'envoi_annule' => 'Env&iacute;o anulado'
 , 'sans_adresse' => ' Mail no enviado -> Hay que indicar una direcci&oacute;n de respuesta'
 , 'erreur_mail' => 'Error: env&iacute;o del mail imposible (comprueba si mail() de php est&aacute; disponible)'
-, 'abonnement_mail_text' => 'Si quieres modificar tus datos de inscripci&oacute;n, entra en la siguiente direcci&oacute;n: '
+, 'modif_abonnement_text' => 'Si quieres modificar tus datos de inscripci&oacute;n, entra en la siguiente direcci&oacute;n: '
 , 'msg_abonne_sans_format' => "no hay formato para la recepci&oacute;n de emails"
-, 'Cliquez_ici_pour_modifier_votre_abonnement' => "<br />Cliquea aqu&iacute; si quieres modificar tus datos de inscripci&oacute;n"
+, 'modif_abonnement_html' => "<br />Cliquea aqu&iacute; si quieres modificar tus datos de inscripci&oacute;n"
 
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php

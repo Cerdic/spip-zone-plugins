@@ -480,9 +480,9 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'envoi_annule' => 'Verzending abroken'
 , 'sans_adresse' => ' De mail werd niet verzonden -> Gelieve een antwoordadres op te geven'
 , 'erreur_mail' => 'Error: het bericht kan  niet verstuurd worden (nagaan of de php mail () beschikbaar is)'
-, 'abonnement_mail_text' => 'Om uw abonnement te wijzigen, gelieve de volgende link aan te klikken: '
+, 'modif_abonnement_text' => 'Om uw abonnement te wijzigen, gelieve de volgende link aan te klikken: '
 , 'msg_abonne_sans_format' => "format de reception manquant"
-, 'Cliquez_ici_pour_modifier_votre_abonnement' => "<br />Cliquez ici pour modifier votre abonnement"
+, 'modif_abonnement_html' => "<br />Cliquez ici pour modifier votre abonnement"
 
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php
