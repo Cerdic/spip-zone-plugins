@@ -18,7 +18,7 @@
 		<h4 class="titrem">
 			[(#VU|=={oui}|oui)<img src='#CHEMIN{images/vu-16-10.png}' width='16' height='10' alt='<:medias:document_vu:>' title='<:medias:document_vu:>'/> ]
 			[<span class="fichier">(#FICHIER*|basename)</span>]
-			[<span class="#EDIT{titre} titre">(#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
+			[<span class="#EDIT{titre} titre">[<span class="rang">(#RANG).</span> ](#TITRE|sinon{<i class="sanstitre"><:info_sans_titre:></i>})</span>]
 			<span class="image_loading"></span>
 		</h4>
 		<div class="infos">
