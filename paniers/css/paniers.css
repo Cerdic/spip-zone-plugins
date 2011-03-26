@@ -17,6 +17,11 @@
 	vertical-align:middle;
 }
 
+.formulaire_panier .emplette input.text{
+	width:2.5em;
+	text-align:center;
+}
+
 .formulaire_panier .total_ttc{
 	font-weight:bold;
 }
