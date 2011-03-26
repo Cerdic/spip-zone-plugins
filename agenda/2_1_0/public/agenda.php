@@ -340,7 +340,7 @@ function critere_evenementrelatif_dist($idb, &$boucles, $crit) {
 	else
 		$_dateref = "date('Y-m-d H:i:00')";
 	$not = $crit->not ? 'oui' : '';
-	$choix = isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) : '';
+	$choix = isset($crit->param[0]) ? calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent) : "''";
 	$horaire = array_key_exists('horaire', $boucle->show['field']) ? 'oui' : '';
 	
 	$boucle->where[] = "agenda_calculer_critere_evenementrelatif('$id_table',$_dateref,'$not',$choix,'$horaire')";
