@@ -40,6 +40,7 @@ define('_SPIPLISTES_MAX_LOGIN_NN', 32766);
 
 define('_SPIPLISTES_PATRONS_DIR', 'patrons/');
 define('_SPIPLISTES_PATRONS_TETE_DIR', _SPIPLISTES_PATRONS_DIR.'lien_en_tete_courriers/');
+define('_SPIPLISTES_PATRONS_LIEN_DIR', _SPIPLISTES_PATRONS_DIR.'lien_en_pied_courriers/');
 define('_SPIPLISTES_PATRONS_PIED_DIR', _SPIPLISTES_PATRONS_DIR.'pieds_courriers/');
 define('_SPIPLISTES_PATRON_PIED_DEFAUT', 'piedmail');
 define('_SPIPLISTES_PATRON_PIED_IGNORE', 'aucun');

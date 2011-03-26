@@ -1,0 +1,28 @@
+#CACHE{1}
+#HTTP_HEADER{Content-Type: text/html}
+[<!--(#REM)
+
+CP-20110326
+Squelette pour spip-listes    
+Construction du lien de gestion d'abonnement
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+*
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail 
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+-->
+]
+[<div style="font-family:sans-serif;font-size:80%;line-height:1.3em;padding:0.25em 1ex;background-color:transparent;
+	color:#00cc00;margin:0;text-align:center;">
+	<p style='margin:0;'> 
+	<a href="(#TEST|trim|generer_url_public{page=abonnement&d=#ENV{d}})"><:spiplistes:modif_abonnement_html:></a>.
+	</p>
+	</div>]

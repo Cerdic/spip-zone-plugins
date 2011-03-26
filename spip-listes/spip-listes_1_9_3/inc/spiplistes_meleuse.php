@@ -261,8 +261,8 @@ function spiplistes_meleuse ($last_time) {
 
 			////////////////////////////////////
 			// La petite ligne du renvoi du cookie pour modifier son abonnement
-			$pied_rappel_html = _T('spiplistes:Cliquez_ici_pour_modifier_votre_abonnement');
-			$pied_rappel_texte = _T('spiplistes:abonnement_mail_text');
+			//$pied_rappel_html = _T('spiplistes:modif_abonnement_html');
+			//$pied_rappel_texte = _T('spiplistes:modif_abonnement_text');
 			
 			// transcrire le contenu
 			if($charset_dest != $charset_spip){
@@ -271,7 +271,7 @@ function spiplistes_meleuse ($last_time) {
 					  'objet_html', 'objet_texte'
 					, 'page_html', 'page_texte'
 					, 'pied_html', 'pied_texte'
-					, 'pied_rappel_html', 'pied_rappel_texte'
+					//, 'pied_rappel_html', 'pied_rappel_texte'
 					, 'tampon_html', 'tampon_texte') as $key) 
 				{
 					if(!empty($$key)) {
@@ -286,7 +286,8 @@ function spiplistes_meleuse ($last_time) {
 			
 			// corrige les liens relatifs (celui de texte a deja ete corrige par la trieuse (cron)
 			foreach(array('pied_html', 'pied_texte'
-				, 'pied_rappel_html', 'pied_rappel_texte', 'tampon_html', 'tampon_texte') as $key) {
+				//, 'pied_rappel_html', 'pied_rappel_texte'
+				, 'tampon_html', 'tampon_texte') as $key) {
 				if(!empty($$key)) {
 					$$key = spiplistes_liens_absolus ($$key);
 				}
@@ -415,7 +416,7 @@ function spiplistes_meleuse ($last_time) {
 							spiplistes_auteurs_cookie_oubli_updateq($cookie, $email);
 		
 							if($from_valide) {
-								$_url = generer_url_public('abonnement','d='.$cookie);
+								//$_url = generer_url_public('abonnement','d='.$cookie);
 								
 								if($opt_personnaliser_courrier == 'oui') {
 									list($ventre_html, $ventre_texte) = spiplistes_personnaliser_courrier(
@@ -431,17 +432,32 @@ function spiplistes_meleuse ($last_time) {
 								}
 								// le &amp; semble poser probleme sur certains MUA. A suivre...
 								$_url = preg_replace(',(&amp;),','&', $_url);
+								
+								// Pour le moment (27/03/2011), un seul patron connu
+								$lien_rappel = 'lien_standard';
+								
+								list($pied_rappel_html, $pied_rappel_texte) = spiplistes_courriers_assembler_patron (
+									_SPIPLISTES_PATRONS_LIEN_DIR . $lien_rappel
+									, array('id_courrier' => $id_courrier
+											, 'id_liste' => $id_liste
+											, '_url' => $url
+											, 'lang' => $lang
+											, 'd' => $cookie
+											)
+								);
+								
 								switch($format_abo) {
 									case 'html':
 										// Si on ne trouve pas les tags HTML alors on les ajoutes
 										if (FALSE === strpos($ventre_html, '</html>')) {
 											$email_a_envoyer[$format_abo]->Body =
-												  $body_html_debut 
-												. $ventre_html
-												. $pied_html
-												. '<a href="'.$_url.'">'.$pied_rappel_html.'</a>'
+												  $body_html_debut . $eol
+												. $ventre_html . $eol
+												. $pied_html . $eol
+												//. '<a href="'.$_url.'">'.$pied_rappel_html.'</a>'
+												. $pied_rappel_html . $eol
+												. $tampon_html . $eol
 												. $body_html_fin
-												. $tampon_html
 												;										
 										} else {
 											// Si on trouve les tags HTML cela veut dire que l'auteur
@@ -453,8 +469,9 @@ function spiplistes_meleuse ($last_time) {
 										// la version alternative texte 
 										$email_a_envoyer[$format_abo]->AltBody = 
 											$ventre_texte .$eol2
-											. $pied_texte
-											. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
+											. $pied_texte . $eol2
+											//. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
+											. $pied_rappel_texte . $eol2
 											. $tampon_texte
 											;
 										break;
