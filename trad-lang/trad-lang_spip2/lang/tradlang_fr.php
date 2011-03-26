@@ -76,7 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_code_langue_vide' => 'Le code de langue est obligatoire',
 'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
 'erreur_pas_langue_cible' => 'S&eacute;lectionnez une langue cible',
-
+'explication_sauvegarde_locale' => 'Sauvegardera les fichiers dans le dossier squelette du site',
 
 // G
 'gestion_des_traductions' => 'Gestion des traductions',
@@ -120,6 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_langues_dispo_module_langue' => 'Langues d&eacute;j&agrave; disponibles pour ce module',
 'label_nommodule' => 'Personnaliser le nom du module',
 'label_repertoire_module_langue' => 'R&eacute;pertoire du module',
+'label_sauvegarde_locale' => 'Permettre de sauvegarder localement les fichiers',
 'label_synchro_base_fichier' => 'Synchroniser la base et les fichiers',
 'label_texte' => 'Descriptif du module',
 'label_tradlang_status' => 'Statut de la traduction',

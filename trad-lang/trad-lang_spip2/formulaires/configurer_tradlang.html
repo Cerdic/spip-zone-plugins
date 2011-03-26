@@ -4,6 +4,9 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
+		[(#SAISIE{case,sauvegarde_locale,
+			label=<:tradlang:label_sauvegarde_locale:>,
+			explication=<:tradlang:explication_sauvegarde_locale:>})]
 		<INCLURE{fond=noisettes/formulaires/tradlang_autorisations}{env}>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
