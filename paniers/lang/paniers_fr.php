@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_taxes' => 'Taxes',
 	'panier_total_ht' => 'Total hors taxe',
 	'panier_total_ttc' => 'Total',
-	'panier_vide' => 'Le panier est vide',
+	'panier_vide' => 'Le panier est vide.',
 	'paniers' => 'Paniers',
 );
 

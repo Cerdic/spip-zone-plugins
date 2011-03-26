@@ -34,6 +34,10 @@
 		<nom>optimiser_base_disparus</nom>
 		<inclure>paniers_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>paniers_pipelines.php</inclure>
+	</pipeline>
 	
 	<bouton id='paniers' parent='naviguer'>
 		<icone>img/picto_spip_paniers.png</icone>
