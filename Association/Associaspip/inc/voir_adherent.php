@@ -20,22 +20,25 @@ function voir_adherent_paiements($data, $lien, $type)
 		  : nettoyer_raccourcis_typo($row['justification']);
 		$id = $row['id'];
 		$data[$k] = "<tr id='$type$id' style='background-color: #EEEEEE;'>"
-		  . "<td class='arial11 border1' style='text-align:right;'>$id</td>\n"
-		  . '<td class="arial11 border1">'.$row['journal']."</td>\n"
-		  . '<td class="arial11 border1">'.association_datefr($row['date'])."</td>\n"
-		  . '<td class="arial11 border1">'.propre($j)."</td>\n"
-		  . '<td class="arial11 border1" style="text-align:right;">'.$row['montant'].' &euro;</td>'
-		  . '<td class="arial11 border1" style="text-align:right;">'
-		  . ($row['vu'] ? _T('asso:adherent_libelle_oui') : _T('asso:adherent_libelle_non'))
-		  . '</td>'
-		  . '</tr>';
+		. "<td class='arial11 border1' style='text-align:right;'>$id</td>\n"
+		. '<td class="arial11 border1">'.$row['journal']."</td>\n"
+		. '<td class="arial11 border1">'.association_datefr($row['date'])."</td>\n"
+		. '<td class="arial11 border1">'.propre($j)."</td>\n"
+		. '<td class="arial11 border1" style="text-align:right;">'.$row['montant'].' &euro;</td>'
+		. '<td class="arial11 border1" style="text-align:right;">'
+		. ($row['vu'] ? _T('asso:adherent_libelle_oui') : _T('asso:adherent_libelle_non'))
+		. '</td>'
+		. '<td style="text-align:right;">'
+			. association_bouton(_T('asso:adherent_label_voir_operation'), 'voir-12.png', 'comptes','id_compte='.$id)
+		. "</td>"
+		. '</tr>';
 	}
 	return $data;
 }
 
 function voir_adherent_cotisations($id_auteur, $full=false)
 {
-	$row = sql_allfetsel('id_compte AS id, recette AS montant, date, justification, journal, vu', "spip_asso_comptes", "id_journal=$id_auteur AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']), '', "date DESC" );
+	$row = sql_allfetsel('id_compte AS id, recette AS montant, date, justification, journal, vu', "spip_asso_comptes", "id_journal=$id_auteur AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']), '', "date DESC, id_compte DESC" );
 
 	if (!$row) return '';
 
@@ -47,6 +50,7 @@ function voir_adherent_cotisations($id_auteur, $full=false)
 	. '<th>'._T('asso:adherent_entete_justification').'</th>'
 	. '<th style="text-align:right;">'._T('asso:montant').'</th>'
 	. '<th style="text-align:right;">'._T('asso:validite').'</th>'
+	. '<th style="text-align:right;">'._T('asso:action').'</th>'
 	. '</tr>'
 	  . join("\n", voir_adherent_paiements($row, $full, 'cotisation'))
 	. '</table>';
@@ -70,6 +74,8 @@ function voir_adherent_dons($id_auteur, $full=false)
 	.  '<th>'._T('asso:adherent_entete_justification').'</th>'
 	.  '<th style="text-align:right;">'._T('asso:montant').'</th>'
 	. '<th style="text-align:right;">'._T('asso:validite').'</th>'
+	. '<th style="text-align:right;">'._T('asso:action').'</th>'
+	. '</tr>'
 	  .  join("\n", voir_adherent_paiements($row, $full, 'don'))
 	  .  '</table>';
 }

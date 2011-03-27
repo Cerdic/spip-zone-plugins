@@ -182,6 +182,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_label_ajouter_cotisation' => 'Ajouter une cotisation',
 	'adherent_label_modifier_membre' => 'Modifier membre',
 	'adherent_label_voir_membre' => 'Voir le membre',
+	'adherent_label_voir_operation' => 'Voir l\'op&eacute;ration comptable',
 
 	# Message
 	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',

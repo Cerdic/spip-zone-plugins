@@ -30,12 +30,26 @@ function exec_comptes() {
 		else { $imputation= "%"; }
 		$max = intval(_request('max'));
 		if (!$max) $max = 30;
-		exec_comptes_args($annee, $vu, $imputation, _request('debut'), $max);
+		$id_compte = _request('id_compte', $_GET);
+		$id_compte = $id_compte ? intval($id_compte):'';
+		exec_comptes_args($annee, $vu, $imputation, _request('debut'), $max, $id_compte);
 	}
 }
 
-function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page) 
+function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_compte) 
 {
+	/* si on a id_compte a afficher, recuperer son annee pour afficher celle la et reinitialiser les autres parametres */
+	if ($id_compte) {
+		$annee_id_compte = sql_getfetsel("date_format( date, '%Y' )", 'spip_asso_comptes', "id_compte=$id_compte");
+		if ($annee_id_compte) {
+			$annee = $annee_id_compte;
+			/* on reinitialise les autres parametres */
+			$imputation = '%';
+			$vu = '';
+		} else { /* on n'a pas trouve l'id_compte */
+			$id_compte = '';
+		}
+	}
 	$where = "imputation like " . sql_quote($imputation)
 	  . (!is_numeric($vu) ? '' : (" AND vu=$vu"));
 
@@ -85,9 +99,24 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page)
 	echo '</select></div></form></td>';
 	echo '</tr></table>';
 
+	/* (re)calculer la pagination en fonction de id_compte */
+	if ($id_compte) {
+		/* on recupere les id_comptes de la requete sans le critere de limite et on en tire l'index de l'id_compte recherche parmis tous ceux disponible */
+		$all_id_compte = sql_allfetsel("id_compte", "spip_asso_comptes", $where, '',  'date DESC,id_compte DESC');
+		$index_id_compte = -1;
+		reset($all_id_compte);
+		while (($index_id_compte<0) && (list($k,$v) = each($all_id_compte))) {
+			if ($v['id_compte'] == $id_compte) $index_id_compte = $k;
+		}
+		/* on recalcule le parametre de limite de la requete */
+		if ($index_id_compte>=0) {
+			$debut = intval($index_id_compte/$max_par_page)*$max_par_page;
+		}
+	}
+
 	//TABLEAU
 
-	$table = comptes_while($where, intval($debut) . "," . $max_par_page);
+	$table = comptes_while($where, intval($debut).",".$max_par_page, $id_compte);
 
 	if ($table) {
 
@@ -104,28 +133,28 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page)
 			else { $h = generer_url_ecrire('comptes',$args.'&debut='.$position);
 			  $nav .= "<a href='$h'>$position</a>\n"; }
 		  }
-
-		$table = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
-	. "<tr style='background-color: #DBE1C5;'>\n"
-	. '<th style="text-align: right;">' . _T('asso:id'). "</th>\n"
-	. '<th style="text-align: right;">' . _T('asso:date') . "</th>\n"
-	. '<th>' . _T('asso:compte') . "</th>\n"
-	. '<th>' . _T('asso:justification') . "</th>\n"
-	. '<th style="text-align: right;">' . _T('asso:montant') . "</th>\n"
-	. '<th>' . _T('asso:financier') . "</th>\n"
-	. '<td colspan="3" style="text-align: center;"><strong>&nbsp;</strong></td>'
-	. '</tr>'
-	. $table
-	. "</table>\n"
-	. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="' . _L('Valider') . '" class="fondo" /></td></tr></table>';
-
+		
+		$table = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>"
+		. "<tr style='background-color: #DBE1C5;'>\n"
+		. '<th style="text-align: right;">' . _T('asso:id'). "</th>\n"
+		. '<th style="text-align: right;">' . _T('asso:date') . "</th>\n"
+		. '<th>' . _T('asso:compte') . "</th>\n"
+		. '<th>' . _T('asso:justification') . "</th>\n"
+		. '<th style="text-align: right;">' . _T('asso:montant') . "</th>\n"
+		. '<th>' . _T('asso:financier') . "</th>\n"
+		. '<td colspan="3" style="text-align: center;"><strong>&nbsp;</strong></td>'
+		. '</tr>'
+		. $table
+		. "</table>\n"
+		. "<table width='100%'><tr>\n<td>" . $nav . '</td><td style="text-align:right;"><input type="submit" value="' . _L('Valider') . '" class="fondo" /></td></tr></table>';
+	
 		echo generer_form_ecrire('action_comptes', $table);
 	}
 	fin_cadre_relief();  
 	echo fin_page_association(); 
 }
 
-function comptes_while($where, $limit)
+function comptes_while($where, $limit, $id_compte)
 {
 	$query = sql_select('*', "spip_asso_comptes", $where,'',  'date DESC,id_compte DESC', $limit);
 	$auteurs = '';
@@ -134,10 +163,15 @@ function comptes_while($where, $limit)
 		if ($data['recette'] >0) { $class= "pair";}
 		else { $class="impair";}	   
 		$id = $data['id_compte'];
-		$auteurs .= "\n<tr>"
+		
+		if($id_compte==$id) {
+			$onload_option .= 'onLoad="document.getElementById(\'id_compte'.$id_compte.'\').scrollIntoView(true);"';
+		}
+
+		$auteurs .= "\n<tr id='id_compte$id'>"
 		. '<td class="'
 		. $class. ' border1" style="text-align:right;">'
-		. $id
+		.$id
 		. "</td>\n<td class=\""
 		. $class. ' border1" style="text-align:right;">'
 		. association_datefr($data['date'])
@@ -155,8 +189,8 @@ function comptes_while($where, $limit)
 		. $data['journal']
 		. '</td>'
 		. ($data['vu'] ?
-			("<td class='$class' colspan='3' style='border-top: 1px solid #CCCCCC;'>&nbsp;</td>\n")
-		   :  ("<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:mettre_a_jour'), 'edit-12.gif', 'edit_compte', 'id='.$id) . "</td>\n"
+			("<td class='$class' colspan='3' style='text-align: center;'><img src=\""._DIR_PLUGIN_ASSOCIATION_ICONES."puce-verte.gif\" $onload_option /></td>\n")
+		   :  ("<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:mettre_a_jour'), 'edit-12.gif', 'edit_compte', 'id='.$id, $onload_option) . "</td>\n"
 			. "<td class='$class border1' style='text-align: center;'>" . association_bouton(_T('asso:supprimer'), 'poubelle.gif', 'action_comptes', 'id='.$id) . "</td>\n"
 		       . "<td class='$class border1' style='text-align: center;'><input name='valide[]' type='checkbox' value='".$data['id_compte']. "' /></td>\n"))
 		 . '</tr>';

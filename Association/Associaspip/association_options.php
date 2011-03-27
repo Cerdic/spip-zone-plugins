@@ -47,7 +47,7 @@ function association_icone($texte, $lien, $image, $sup='rien.gif')
 	return icone_horizontale($texte, $lien, _DIR_PLUGIN_ASSOCIATION_ICONES. $image, $sup, false);
 }
 
-function association_bouton($texte, $image, $script, $args='')
+function association_bouton($texte, $image, $script, $args='', $img_attributes='')
 {
 	return '<a href="'
 	. generer_url_ecrire($script, $args)
@@ -55,7 +55,9 @@ function association_bouton($texte, $image, $script, $args='')
 	. _DIR_PLUGIN_ASSOCIATION_ICONES. $image 
 	. '" alt=" " title="'
 	. $texte
-	. '" /></a>';
+	. '" '
+	. $img_attributes
+	.' /></a>';
 }
 
 function association_retour()
