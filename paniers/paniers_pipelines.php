@@ -11,10 +11,31 @@ function paniers_optimiser_base_disparus($flux){
 	$depuis_enregistres = date('Y-m-d H:i:s', time() - lire_config('paniers/limite_enregistres', 7*24*3600));
 	
 	// Soit le panier est à un anonyme donc on prend la limite éphémère, soit le panier appartient à un auteur et on prend l'autre limite
-	$nombre = intval(sql_delete(
+	$paniers = sql_allfetsel(
+		'id_panier',
 		'spip_paniers',
 		'statut = '.sql_quote('encours').' and ((id_auteur=0 and date<'.sql_quote($depuis_ephemere).') or (id_auteur>0 and date<'.sql_quote($depuis_enregistres).'))'
-	));
+	);
+	if (is_array($paniers))
+		$paniers = array_map('reset', $paniers);
+	
+	// S'il y a bien des paniers à supprimer
+	if ($paniers){
+		// Le in
+		$in = sql_in('id_panier', $paniers);
+		
+		// On supprime d'abord les liens
+		sql_delete(
+			'spip_paniers_liens',
+			$in
+		);
+		
+		// Puis les paniers
+		$nombre = intval(sql_delete(
+			'spip_paniers',
+			$in
+		));
+	}
 	
 	$flux['data'] += $nombre;
 }
