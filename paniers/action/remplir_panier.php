@@ -54,6 +54,13 @@ function action_remplir_panier_dist($arg=null) {
 				)
 			);
 		}
+		
+		// Mais dans tous les cas on met la date du panier à jour
+		sql_updateq(
+			'spip_paniers',
+			array('date'=>'NOW()'),
+			'id_panier = '.$id_panier
+		);
 	}
 }
 
