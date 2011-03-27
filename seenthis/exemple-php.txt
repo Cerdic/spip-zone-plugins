@@ -1,0 +1,71 @@
+	include_spip('inc/seenthis');
+
+	$seenthis = new Seenthis();
+	$rep = $seenthis->update('Hello', 'message:14586');
+
+	if (!$rep->error) {
+		$new = $rep->id;
+		$rep = $seenthis->post('Reply 2', $rep->id);
+	}
+
+#	var_dump($rep);
+	echo $rep->content;
+
+
+	/*
+	object(SimpleXMLIterator)#4 (9) {
+  ["id"]=>
+  string(13) "message:14586"
+  ["title"]=>
+  string(26) "Hello, world ! (again &..."
+  ["author"]=>
+  object(SimpleXMLIterator)#5 (2) {
+    ["name"]=>
+    string(18) "kiosque (@kiosque)"
+    ["uri"]=>
+    string(34) "http://seenthis.net/people/kiosque"
+  }
+  ["updated"]=>
+  string(20) "2011-03-26T14:39:20Z"
+  ["link"]=>
+  object(SimpleXMLIterator)#6 (1) {
+    ["@attributes"]=>
+    array(1) {
+      ["href"]=>
+      string(34) "http://seenthis.net/messages/14586"
+    }
+  }
+  ["summary"]=>
+  string(30) "Hello, world! (#again & again)"
+  ["content"]=>
+  string(159) "<div lang="fi" dir="ltr"><p>Hello, world ! (<span class='lien_tag'>#<a rel='nofollow' href='http://seenthis.net/tags/again'>again</a></span> & again)</p></div>"
+  ["xml"]=>
+  string(788) "<?xml 
+version="1.0" encoding="utf-8"?>
+
+<entry xmlns='http://www.w3.org/2005/Atom' 
+	xmlns:thr='http://purl.org/syndication/thread/1.0' 
+	xmlns:docs='http://schemas.google.com/docs/2007'>
+	<id>message:14586</id>
+	<title>Hello, world ! (again &amp;...</title>
+
+	<author>
+		<name>kiosque (@kiosque)</name>
+		<uri>http://seenthis.net/people/kiosque</uri>
+		
+	</author>
+	<updated>2011-03-26T14:39:20Z</updated>
+	<link href="http://seenthis.net/messages/14586" />
+	
+	<summary>Hello, world! (#again &amp; again)</summary>
+
+	<content type="html">&lt;div lang=&quot;fi&quot; dir=&quot;ltr&quot;&gt;&lt;p&gt;Hello, world ! (&lt;span class='lien_tag'&gt;#&lt;a rel='nofollow' href='http://seenthis.net/tags/again'&gt;again&lt;/a&gt;&lt;/span&gt; &amp; again)&lt;/p&gt;&lt;/div&gt;</content>
+
+</entry>"
+}
+
++  eventuellement  ["error"]=>
+  string(1) "XXXXXX"
+
+  */
+  
