@@ -1,16 +1,44 @@
-<BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}>
+[<!--(#REM)
+
+// $LastChangedRevision: 45629 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2011-03-21 16:36:52 +0100 (Lun 21 mar 2011) $
+
+Formulaire
+- abonnement
+- desabonnement
+
+Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
+
+-->]<BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}{0,1}>
 <div class="message-formulaire">
 	<p class='nom'>#NOM</p>
-	<p class='souhait'><:spiplistes:effectuez_modif_validez{s=#NOM}:></p>
+	[(#SET{nom_auteur,#NOM})]
 </div>
 </BOUCLE_auteur>
 
 <div class="formulaire_spip formulaire_gestion_abonnement ajax">
+
+[(#ENV{d}|oui|et{#ENV{stop}|oui})
+	<p class='souhait'><:spiplistes:desabonnement_confirmez_:></p>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	[(#INCLURE{fond=formulaires/inc-liste_details}{id_liste=#ENV{stop}})]
+	<input type="hidden" name="d" value="[(#ENV{d})]" />
+	<p class="boutons spip_bouton">
+		<input type='submit' class='submit' name='valider' value='<:spiplistes:je_confirme_desinscrition:>' />
+	</p>
+	</form>
+]
+[(#ENV{d}|oui|et{#ENV{stop}|non})
+		<p class='souhait'><:spiplistes:effectuez_modif_validez:></p>
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	[(#ENV{editable})
-	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="d" value="[(#ENV{d})]" />
 		<ul>
@@ -44,4 +72,15 @@
 			<input type='submit' class='submit' name='valider' value='<:spiplistes:abonnement_bouton:>' />
 		</p>
 	</div></form>]
-</div>
+]
+
+</div>[<!--(#REM) fin div.formulaire_spip -->]
+
+</B_auteur>
+[<!--(#REM)
+	Le squelette a été appelé directement.
+	A voir si message d'erreur ici
+	ou redirection brutale sur 404
+	ou autre...
+-->]
+<//B_auteur>

@@ -462,7 +462,6 @@ function spiplistes_meleuse ($last_time) {
 												  $body_html_debut . $eol
 												. $ventre_html . $eol
 												. $pied_html . $eol
-												//. '<a href="'.$_url.'">'.$pied_rappel_html.'</a>'
 												. $pied_rappel_html . $eol
 												. $tampon_html . $eol
 												. $body_html_fin
@@ -478,7 +477,6 @@ function spiplistes_meleuse ($last_time) {
 										$email_a_envoyer[$format_abo]->AltBody = 
 											$ventre_texte .$eol2
 											. $pied_texte . $eol2
-											//. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
 											. $pied_rappel_texte . $eol2
 											. $tampon_texte
 											;
@@ -487,7 +485,6 @@ function spiplistes_meleuse ($last_time) {
 										$email_a_envoyer[$format_abo]->Body =
 											$ventre_texte .$eol2
 											. $pied_texte . $eol2
-											//. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
 											. $pied_rappel_texte . $eol2
 											. $tampon_texte
 											;

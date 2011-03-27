@@ -60,6 +60,19 @@ form.formulaire-spiplistes-abo p.message-formulaire {
 	color:red; 
 	font-size: 110%
 }
+div.formulaire_spip p.desabo_liste {
+	text-align: center;
+}
+div.formulaire_spip p.desabo_liste span.titre {
+	font-weight:700;
+	font-size:1.2em;
+}
+div.formulaire_spip p.desabo_liste span.descriptif {
+	display:block;
+	text-align:center;
+	font-weight:500;
+	font-size:1em;
+}
 form.formulaire-spiplistes-abo p.spip_bouton {
 	background-color:transparent !important;
 	text-align:right !important;

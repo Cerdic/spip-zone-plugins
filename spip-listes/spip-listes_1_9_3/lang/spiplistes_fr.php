@@ -571,6 +571,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	Votre demande est enregistr&#233;e. Vous allez recevoir un mail de confirmation.
 	'
 , 'effectuez_modif_validez' => 'Effectuez les modifications souhait&#233;es pour votre abonnement, puis validez.'
+, 'desabonnement_confirmez_' => 'Veuillez confirmer la d&#233;sinscription
+	&#224; la liste de diffusion : '
+, 'je_confirme_desinscrition' => 'Supprimer cette inscription'
 , 'vous_etes_desabonne' => '
 	Vous &#234;tes maintenant d&#233;sabonn&#233; aux listes de diffusion,
 	mais votre inscription sur ce site est toujours valide. Pour revenir &#224; ce formulaire de modification

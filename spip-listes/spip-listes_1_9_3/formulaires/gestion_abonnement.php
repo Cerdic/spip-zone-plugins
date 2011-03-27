@@ -4,6 +4,12 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2011-03-21 16:36:52 +0100 (Lun 21 mar 2011) $
 
+/**
+ * @since SPIP 2.0
+ * @see http://www.spip.net/fr_article3800.html (les formulaires CVT)
+ * @see http://www.spip.net/fr_article3796.html (CVT par l'exemple)
+ */
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('inc/spiplistes_api');
