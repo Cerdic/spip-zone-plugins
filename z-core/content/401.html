@@ -5,6 +5,6 @@
 	<div class="cartouche">
 		<h1 class="h1"><:pass_erreur:>[ (#ENV{status})]</h1>
 	</div>
-	[<div class="chapo">(#ENV*{erreur}|propre)</div>]
+	[<div class="chapo">(#ENV{erreur})</div>]
 	#FORMULAIRE_LOGIN{#ENV{cible},'',0}
 </div>
