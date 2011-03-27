@@ -47,23 +47,6 @@ function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $
 	return $texte;
 }
 
-function svp_afficher_traductions($balise_serialisee, $mode='resume', $module=''){
-	$texte = '';
-	$traductions = unserialize($balise_serialisee);
-	
-	if ($mode == 'resume') {
-		if (count($traductions) == 0)
-			$texte = _T('svp:info_aucun_module');
-		else {
-			$liste_modules = implode(', ', array_keys($traductions));
-			$texte = _T('svp:info_modules_utilises', 
-						array('total_modules' => count($traductions), 'liste_modules' => $liste_modules));
-		}
-	}
-	
-	return $texte;
-}
-
 function svp_afficher_langues($langues, $sep=', '){
 	$texte = '';
 	
