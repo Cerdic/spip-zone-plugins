@@ -19,7 +19,7 @@
     Add the slideshow and do some adaptations to this example.
 -->
 
-<script type='text/javascript'>
+<script type='text/javascript'><!--
 	hs.graphicsDir = 'squelettes/graphics/';
 	hs.transitions = ['expand', 'crossfade'];
 	hs.restoreCursor = null;
@@ -107,6 +107,7 @@
 			}
 		}
 	});
+//-->
 </script>
 
 
