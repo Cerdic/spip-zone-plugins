@@ -19,7 +19,7 @@
 /* extending grids to allow a unit that takes the width of its content */
 .media{width:auto;}
 /* **************** PAGE PLUGIN ***************** */
-.telecharger { position: relative; display: inline-block; width: auto; padding: 5px 1em 6px; overflow: visible; cursor: pointer;
+.telecharger { position: relative; display: inline-block; float: right; width: auto; padding: 5px 1em 6px; overflow: visible; cursor: pointer;
 background-color: #888; box-shadow: 0 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 border: 0; border-bottom: 1px solid rgba(0,0,0,0.25); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
 font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
@@ -29,4 +29,4 @@ font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba
 span .telecharger { float:right; }
 
 .paquet {margin-bottom: 30px;}
-.paquet .bloc_infos {margin-bottom: 15px;}
+.paquet .bloc_infos { margin-bottom: 15px; margin-left: 30px; padding-left: 0; padding-bottom: 5px; border-bottom: 1px dotted #ddd; }
