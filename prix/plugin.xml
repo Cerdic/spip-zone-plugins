@@ -17,7 +17,7 @@
 	</pipeline>
 	<pipeline>
 		<nom>prix</nom>
-		<action>prix_prix</action>
+		<action>priiix</action>
 		<inclure>prix_pipelines.php</inclure>
 	</pipeline>
 </plugin>
