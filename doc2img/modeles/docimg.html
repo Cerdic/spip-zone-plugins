@@ -1,0 +1,16 @@
+<BOUCLE_document(DOCUMENTS){id_document=#ENV{id,#ENV{id_document}}}>
+<B_d2c>
+	#ANCRE_PAGINATION
+	<div class="spip_docimg_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok"[ style='float:(#ENV{align}|match{left|right});']>
+	[(#ENV{no_pagination}|non)[<p class="pagination">(#PAGINATION)</p>]]
+	<BOUCLE_d2c(DOC2IMG) {id_document} {pagination 1}>
+		#SET{fichier,#EVAL{_DIR_IMG}#FICHIER}
+		<a href="#GET{fichier}" class="mediabox">
+		[(#GET{fichier}|image_reduire{#ENV{largeur,640},#ENV{hauteur,0}}|inserer_attribut{alt,''})]
+		</a>
+	</BOUCLE_d2c>
+    [(#ENV{no_desc}|non)[<p>(#GRAND_TOTAL|singulier_ou_pluriel{<:doc2img:info_desc_page:>,<:doc2img:info_desc_pages:>})</p>]]
+    [(#ENV{no_pagination}|non)[<p class="pagination">(#PAGINATION)</p>]]
+	</div>
+</B_d2c>
+</BOUCLE_document>

@@ -35,7 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'formulaire_erreur_pas_doc' => 'No available document for this article',
-	'formulaire_label_choix_doc' => 'Choose the document (@formats@) to convert in picture(s)'
+	'formulaire_label_choix_doc' => 'Choose the document (@formats@) to convert in picture(s)',
+
+	// I
+	'info_desc_page' => 'This document is composed by one unique sheet.',
+	'info_desc_pages' => 'This document is composed by @nb@ sheets.',
 );
 
 ?>

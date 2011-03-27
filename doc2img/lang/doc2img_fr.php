@@ -35,7 +35,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'formulaire_erreur_pas_doc' => 'Aucun document ne correspond pour cet article',
-	'formulaire_label_choix_doc' => 'Choisissez le document (@formats@) &agrave; convertir en image'
+	'formulaire_label_choix_doc' => 'Choisissez le document (@formats@) &agrave; convertir en image',
+
+	// I
+	'info_desc_page' => 'Ce document est compos&eacute; d\'une pages.',
+	'info_desc_pages' => 'Ce document est compos&eacute; de @nb@ pages.',
 );
 
 ?>
