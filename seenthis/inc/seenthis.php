@@ -25,7 +25,7 @@ class Seenthis {
 		else
 			$this->pass = _SEENTHIS_PASS;
 
-		$this->post_url = "https://seenthis.net/api/messages";
+		$this->post_url = "https://seenthis.net/api/";
 	}
 
 	function create_message($titre, $link, $quote, $comment, $tags) {
@@ -64,9 +64,9 @@ class Seenthis {
 		return $xml;
 	}
 	
-	function curl($xml, $method) {
+	function curl($xml, $method, $uri) {
 		$request = curl_init(); // initiate curl object
-		curl_setopt($request, CURLOPT_URL, $this->post_url);
+		curl_setopt($request, CURLOPT_URL, $this->post_url.$uri);
 		curl_setopt($request, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($request, CURLOPT_HEADER, 0); // set to 0 to eliminate header info from response
 		curl_setopt($request, CURLOPT_HTTPHEADER, array("Content-Type: application/atom+xml;type=entry"));
@@ -79,7 +79,7 @@ class Seenthis {
 		curl_close ($request); // close curl object
 
 		if (is_object($r = new SimpleXmlIterator($post_response))
-		AND $r->id  # le controle d'erreur n'est pas proprement indique dans la reponse de l'API, on se rabat sur la presence d'un id
+		AND !$r->body  # le controle d'erreur n'est pas proprement indique dans la reponse de l'API, on se rabat sur la presence d'un body
 		) {
 			$r->xml = $post_response;
 			unset($r->error);
@@ -87,7 +87,7 @@ class Seenthis {
 		else {
 			$r = new stdClass();
 			$r->xml = $post_response;
-			$r->error = strip_tags($post_response); # pas beau
+			$r->error = trim(strip_tags($post_response)); # pas beau
 			if (!$r->error)
 				$r->error = "Empty response";
 		}
@@ -95,16 +95,22 @@ class Seenthis {
 		return $r;
 	}
 	
-	
 	function post($message, $inreplyto=0) {
 		$xml = $this->create_xml($message, 0, $inreplyto) ;
-		return $this->curl($xml, "POST");
+		return $this->curl($xml, 'POST', 'messages');
 	}
 	
 	function update($message, $me) {
 		$xml = $this->create_xml($message, $me);
-		return $this->curl($xml, "PUT");
+		return $this->curl($xml, 'PUT', 'messages');
 	}
+
+	function feed($login=null, $pagination=0) {
+		if (!strlen($login))
+			$login = $this->login;
+		return $this->curl("", 'GET', 'people/'.$login.'/messages/'.$nb);
+	}
+
 
 } // class Seenthis
 
