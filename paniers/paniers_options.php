@@ -8,7 +8,7 @@ if (_DIR_RESTREINT) {
 	include_spip('inc/paniers');
 	include_spip('inc/session');
 	// Si on a bien un panier
-	if ($id_panier = paniers_id_panier_encours()){
+	if (_request('action') != 'cron' and $id_panier = paniers_id_panier_encours()){
 		// On met le panier dans la session
 		session_set('id_panier', $id_panier);
 	}

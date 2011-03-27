@@ -80,14 +80,14 @@ function paniers_id_panier_encours(){
 	// Si on a bien un panier et un cookie à la fin
 	if ($id_panier > 0 and $cookie){
 		// On met son cookie en mémoire
-		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, lire_config('paniers/limite_ephemere', 24*3600));
+		spip_setcookie($nom_cookie, $_COOKIE[$nom_cookie] = $cookie, time()+lire_config('paniers/limite_ephemere', 24*3600));
 	}
 	// Sinon on vide le cookie
 	else{
 		spip_setcookie($nom_cookie, '', 0);
 		unset($_COOKIE[$nom_cookie]);
 	}
-	
+#	spip_log("url=".self()." / id_encours:$id_panier / id_auteur:$id_auteur / ".var_export($_COOKIE,true),'paniers');
 	// On retourne enfin un panier
 	return $id_panier;
 }
