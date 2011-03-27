@@ -450,6 +450,9 @@ function spiplistes_meleuse ($last_time) {
 											, 'lien_desabo' => $opt_ajout_lien_desabo
 											)
 								);
+								$pied_rappel_texte = spiplistes_translate_2_charset ($pied_rappel_texte
+																					 , $charset_dest
+																					 , true);
 								
 								switch($format_abo) {
 									case 'html':
@@ -483,8 +486,9 @@ function spiplistes_meleuse ($last_time) {
 									case 'texte':
 										$email_a_envoyer[$format_abo]->Body =
 											$ventre_texte .$eol2
-											. $pied_texte
-											. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
+											. $pied_texte . $eol2
+											//. str_replace('&amp;', '&', $pied_rappel_texte). ' ' . $_url.$eol2
+											. $pied_rappel_texte . $eol2
 											. $tampon_texte
 											;
 										break;

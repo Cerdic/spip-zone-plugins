@@ -18,8 +18,18 @@ Construction du lien de gestion d'abonnement
 * - les urls et liens images seront automatiquement converties en absolues
 *  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
 *
+
+Le trim doit etre applique afin d'eviter un \n
+(coupe URL)
+
 -->
-][
-	<:spiplistes:modif_abonnement_text:>
-		(#ENV{_url})?page=abonnement&d=#ENV{d}"
+][(#SET{texte_lien,
+	[(#ENV{lien_desabo}|?{<:spiplistes:stop_abonnement_text:>,<:spiplistes:modif_abonnement_text:>})]
+	})]
+[(#SET{stop,
+	[(#ENV{lien_desabo}|?{[&stop=(#ENV{id_liste})],''})]
+	})]
+	[
+	[(#GET{texte_lien}|trim)]
+(#ENV{_url})?page=abonnement[(#GET{stop}|trim)]&d=#ENV{d}
 	]
