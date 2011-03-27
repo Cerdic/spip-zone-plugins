@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_code_langue_vide' => 'Le code de langue est obligatoire',
 'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
 'erreur_pas_langue_cible' => 'S&eacute;lectionnez une langue cible',
+'erreur_repertoire_local_inexistant' => 'Attention : le répertoire pour la sauvegarde locale "squelettes/lang" est inexistant',
 'explication_sauvegarde_locale' => 'Sauvegardera les fichiers dans le dossier squelette du site',
 
 // G

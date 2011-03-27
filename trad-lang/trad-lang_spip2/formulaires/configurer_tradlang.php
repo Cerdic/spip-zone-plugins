@@ -38,3 +38,17 @@ function formulaires_configurer_tradlang_traiter_dist(){
 	return $res;
 }
 
+function tradlang_test_repertoire_local(){
+	global $dossier_squelettes;
+	if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes')){
+		return false;
+	}
+	else{
+		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
+	}
+	if(!is_dir($dir_lang=$squelettes.'lang')){
+		return false;
+	}else{
+		return $dir_lang;
+	}
+}

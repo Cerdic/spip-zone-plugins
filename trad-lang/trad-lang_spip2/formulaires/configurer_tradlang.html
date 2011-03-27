@@ -4,9 +4,18 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		[(#SAISIE{case,sauvegarde_locale,
-			label=<:tradlang:label_sauvegarde_locale:>,
-			explication=<:tradlang:explication_sauvegarde_locale:>})]
+		<li class="editer editer_sauvegarde_locale saisie_case[(#ENV*{erreurs}|table_valeur{sauvegarde_locale}|oui)erreur]">
+			<label for="champ_sauvegarde_locale"><:tradlang:label_sauvegarde_locale:></label>
+			<p class='explication'><:tradlang:explication_sauvegarde_locale:></p>
+			[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{sauvegarde_locale})</span>]
+			[(#ENV{sauvegarde_locale}|=={on}|et{[(#REM|tradlang_test_repertoire_local|non)]}|oui)
+			<span class='erreur_message'><:tradlang:erreur_repertoire_local_inexistant:></span>
+			]
+			<div class="choix">
+				<input type="checkbox" name="sauvegarde_locale" class="checkbox" id='champ_sauvegarde_locale'  checked='checked' value='#ENV{sauvegarde_locale}' />
+			</div>
+		</li>
+		
 		<INCLURE{fond=noisettes/formulaires/tradlang_autorisations}{env}>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
