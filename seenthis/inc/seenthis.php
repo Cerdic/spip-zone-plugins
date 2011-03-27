@@ -53,12 +53,19 @@ class Seenthis {
 	}
 	
 	
-	function create_xml($message, $id_me=0, $inreplyto=0) {
+	function create_xml($message, $id=null, $inreplyto=null) {
+
 		$xml = "<?xml version='1.0' encoding='UTF-8'?>\n"
 				."<entry xmlns='http://www.w3.org/2005/Atom' xmlns:thr='http://purl.org/syndication/thread/1.0'>\n";
-		if ($id_me) $xml .= "<id>$id_me</id>\n";
+
+		if ($id = $this->numeric($id))
+			$xml .= "<id>message:$id</id>\n";
+
 		$xml .= "<summary><![CDATA[".trim($message)."]]></summary>\n";
-		if ($inreplyto) $xml .= "<thr:in-reply-to ref='$inreplyto'/>\n";
+
+		if ($inreplyto = $this->numeric($inreplyto))
+			$xml .= "<thr:in-reply-to ref='message:$inreplyto'/>\n";
+
 		$xml .= "</entry>\n";
 	
 		return $xml;
@@ -74,7 +81,7 @@ class Seenthis {
 		curl_setopt($request, CURLOPT_RETURNTRANSFER, true );	
 		curl_setopt($request, CURLOPT_USERPWD, $this->login.':'.$this->pass);
 		curl_setopt($request, CURLOPT_POSTFIELDS, "$xml");
-		
+
 		$post_response = curl_exec($request); // execute curl post and store results in $post_response
 		curl_close ($request); // close curl object
 
@@ -95,22 +102,46 @@ class Seenthis {
 		return $r;
 	}
 	
-	function post($message, $inreplyto=0) {
-		$xml = $this->create_xml($message, 0, $inreplyto) ;
+	function read($id = null) {
+		// si on ne précise pas le message, c'est le plus récent de notre feed
+		// sinon c'est le message demandé
+		if (is_null($id)) {
+			$a = $this->feed();
+			if (!$a->error) {
+				$b = $a->entry[0];
+				$b->xml = (string) $a->xml;
+				return $b;
+			}
+			else
+				return $a;
+		}
+
+		else
+			return $this->curl("", 'GET', 'messages/'.$this->numeric($id));
+	}
+
+	function post($message, $inreplyto=null) {
+		$xml = $this->create_xml($message, null, $inreplyto) ;
 		return $this->curl($xml, 'POST', 'messages');
 	}
 	
-	function update($message, $me) {
-		$xml = $this->create_xml($message, $me);
+	function update($message, $id) {
+		$xml = $this->create_xml($message, $id);
 		return $this->curl($xml, 'PUT', 'messages');
 	}
 
 	function feed($login=null, $pagination=0) {
 		if (!strlen($login))
 			$login = $this->login;
-		return $this->curl("", 'GET', 'people/'.$login.'/messages/'.$nb);
+		return $this->curl("", 'GET', 'people/'.rawurlencode($login).'/messages/'.$nb);
 	}
 
+
+	// supprimer le 'message:' d'un id
+	private function numeric($id) {
+		if ($id = intval(preg_replace('/^message:/', '', $id)))
+			return $id;
+	}
 
 } // class Seenthis
 
