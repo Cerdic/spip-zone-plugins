@@ -22,6 +22,12 @@ function action_remplir_panier_dist($arg=null) {
 	// Il faut cherche le panier du visiteur en cours
 	include_spip('inc/session');
 	$id_panier = session_get('id_panier');
+	// S'il n'y a pas de panier, on le crée
+	if (!$id_panier){
+		include_spip('inc/paniers');
+		$id_panier = paniers_creer_panier();
+	}
+	
 	// On ne fait que s'il y a bien un panier existant et un objet valable
 	if ($id_panier > 0 and $objet and $id_objet) {
 		// Il faut maintenant chercher si cet objet précis est *déjà* dans le panier

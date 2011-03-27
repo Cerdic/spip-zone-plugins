@@ -12,6 +12,9 @@ if (_DIR_RESTREINT) {
 		// On met le panier dans la session
 		session_set('id_panier', $id_panier);
 	}
+	else{
+		session_set('id_panier');
+	}
 }
 
 ?>
