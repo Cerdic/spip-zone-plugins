@@ -47,21 +47,11 @@ function tradlang_getmodules_base(){
  * @return 
  */
 function tradlang_testesynchro($idmodule, $langue){
-	global $dossier_squelettes;
-	if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes')){
-		return false;
-	}
-	else{
-		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
-	}
-	
-	if(!is_dir($dir_lang=$squelettes.'lang/')){
-		return false;
-	}
+	$dir_lang = tradlang_dir_lang();
 	spip_log($dir_lang);
 	spip_log("testesynchro $idmodule - $langue",'tradlang');
 	$module = sql_fetsel('*','spip_tradlang_modules','idmodule='.intval($idmodule));
-	$nom_module = $module["nom_module"];
+	$nom_module = $module["module"];
 	$nom_mod = $module["nom_mod"];
 	//$dir_lang = $module["dir_lang"];
 	
@@ -108,5 +98,20 @@ function tradlang_testesynchro($idmodule, $langue){
 function tradlang_to_langue($id,$lang){
 	$str_lang = sql_getfetsel('str','spip_tradlang','id='.sql_quote($id).' AND lang='.sql_quote($lang));
 	return $str_lang;
+}
+
+function tradlang_dir_lang(){
+	global $dossier_squelettes;
+	if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes')){
+		return false;
+	}
+	else{
+		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
+	}
+	if(!is_dir($dir_lang=$squelettes.'lang')){
+		spip_log("pas de squelette $squelettes",'test');
+		return false;
+	}
+	return $dir_lang;
 }
 ?>

@@ -20,6 +20,7 @@ function formulaires_configurer_tradlang_traiter_dist(){
 	$res = array('editable'=>true);
 	foreach(array(
 		"sauvegarde_locale",
+		"sauvegarde_post_edition",
 		"configurer_type",
 		"configurer_statuts",
 		"configurer_auteurs",

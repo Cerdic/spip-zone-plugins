@@ -5,13 +5,6 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
-// 0
-'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-'0_langue' => 'Fran&ccedil;ais [fr]',
-'0_liste' => 'spip-dev@rezo.net',
-'0_mainteneur' => 'spip-dev@rezo.net',
-
-
 // A
 'ajoutercode' => 'Ajouter',
 'ajouterlangue' => 'Ajouter une langue',
@@ -78,6 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_pas_langue_cible' => 'S&eacute;lectionnez une langue cible',
 'erreur_repertoire_local_inexistant' => 'Attention : le répertoire pour la sauvegarde locale "squelettes/lang" est inexistant',
 'explication_sauvegarde_locale' => 'Sauvegardera les fichiers dans le dossier squelette du site',
+'explication_sauvegarde_post_edition' => 'Sauvegardera les fichiers temporaires &agrave; chaque modification de chaine de langue',
 
 // G
 'gestion_des_traductions' => 'Gestion des traductions',
@@ -122,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_nommodule' => 'Personnaliser le nom du module',
 'label_repertoire_module_langue' => 'R&eacute;pertoire du module',
 'label_sauvegarde_locale' => 'Permettre de sauvegarder localement les fichiers',
+'label_sauvegarde_post_edition' => 'Sauvegarder les fichiers &agrave; chaque modification',
 'label_synchro_base_fichier' => 'Synchroniser la base et les fichiers',
 'label_texte' => 'Descriptif du module',
 'label_tradlang_status' => 'Statut de la traduction',
@@ -244,6 +239,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'th_langue_origine' => 'Texte de la langue d\'origine',
 'th_module' => 'Module',
 'th_traduction' => 'Traduction',
+'th_status' => 'Statut',
 'titre_page_configurer_tradlang' => 'Configuration du plugin Trad-lang',
 'titre_recherche_tradlang' => 'Chaines de langue',
 'titre_tradlang' => 'Trad-lang',

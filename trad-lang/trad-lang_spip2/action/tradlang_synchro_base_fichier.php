@@ -20,18 +20,11 @@ function action_tradlang_synchro_base_fichier_dist(){
 		spip_log("action_tradlang_synchro_base_fichier $arg pas compris");
 	}
 	else {
-		global $dossier_squelettes;
-		if(!$dossier_squelettes && !is_dir(_DIR_RACINE.'squelettes')){
+		include_spip('tradlang_fonctions');
+		$dir_lang = tradlang_dir_lang();
+		if(!$dir_lang)
 			return false;
-		}
-		else{
-			$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
-		}
-		
-		if(!is_dir($dir_lang=$squelettes.'lang')){
-			return false;
-		}
-
+			
 		$nom_mod = $r[1];
 		$module = sql_fetsel('*','spip_tradlang_modules','nom_mod='.sql_quote($nom_mod));
 		if(is_array($module)){

@@ -12,10 +12,17 @@
 			<span class='erreur_message'><:tradlang:erreur_repertoire_local_inexistant:></span>
 			]
 			<div class="choix">
-				<input type="checkbox" name="sauvegarde_locale" class="checkbox" id='champ_sauvegarde_locale'  checked='checked' value='#ENV{sauvegarde_locale}' />
+				<input type="checkbox" name="sauvegarde_locale" class="checkbox" id='champ_sauvegarde_locale'[(#ENV{sauvegarde_locale}|=={on}|oui)checked='checked'] />
 			</div>
 		</li>
-		
+		<li class="editer editer_sauvegarde_post_edition saisie_case[(#ENV*{erreurs}|table_valeur{sauvegarde_post_edition}|oui)erreur]">
+			<label for="champ_sauvegarde_post_edition"><:tradlang:label_sauvegarde_post_edition:></label>
+			<p class='explication'><:tradlang:explication_sauvegarde_post_edition:></p>
+			[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{sauvegarde_post_edition})</span>]
+			<div class="choix">
+				<input type="checkbox" name="sauvegarde_post_edition" class="checkbox" id='champ_sauvegarde_post_edition'[(#ENV{sauvegarde_post_edition}|=={on}|oui)checked='checked'] />
+			</div>
+		</li>
 		<INCLURE{fond=noisettes/formulaires/tradlang_autorisations}{env}>
 		<p class="boutons">
 			<input type="submit" class="submit" value="<:bouton_valider:>" />
