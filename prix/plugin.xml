@@ -12,6 +12,10 @@
 	
 	<fonctions>prix_fonctions.php</fonctions>
 	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>prix_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>prix_ht</nom>
 		<inclure>prix_pipelines.php</inclure>
 	</pipeline>

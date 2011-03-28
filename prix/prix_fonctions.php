@@ -43,4 +43,22 @@ function balise_PRIX_dist($p) {
 	return $p;
 }
 
+/*
+ * Formater un nombre pour l'afficher comme un prix avec une devise
+ *
+ * @param float $prix Valeur du prix à formater
+ * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
+ */
+function prix_formater($prix){
+	// On formate d'abord le montant suivant les conventions du pays
+	setlocale(LC_MONETARY, 'fr_FR');
+	$prix = money_format('%i', $prix);
+	
+	// Ensuite on ajoute la devise
+	$prix .= ' €';
+	
+	// Fini
+	return $prix;
+}
+
 ?>
