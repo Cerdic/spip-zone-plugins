@@ -68,7 +68,7 @@ function compositions_styliser($flux){
 		else {
 			$contexte = isset($flux['args']['contexte'])?$flux['args']['contexte']:$GLOBALS['contexte'];
 			if (preg_match(',(^|/)contenu/([^/]*)$,i',$flux['args']['fond'],$regs)
-			  AND $type = $regs[1]
+			  AND $type = $regs[2]
 			  AND in_array($type,compositions_types())){
 				$serveur = $flux['args']['connect'];
 
