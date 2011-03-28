@@ -78,6 +78,9 @@ form.formulaire-spiplistes-abo p.spip_bouton {
 	text-align:right !important;
 	margin:0;
 }
+div.formulaire_spip p.errormsg {
+	text-align:center;
+}
 
 /* css de abonnement.html */
 

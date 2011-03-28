@@ -18,12 +18,15 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 </BOUCLE_auteur>
 
 <div class="formulaire_spip formulaire_gestion_abonnement ajax">
-
+[<!--(#REM)
+	Formulaire de desabonnement
+-->]
 [(#ENV{d}|oui|et{#ENV{stop}|oui})
+	[(#ENV{message_ok}|non)
 	<p class='souhait'><:spiplistes:desabonnement_confirmez_:></p>
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+		#ACTION_FORMULAIRE{#ENV{action}}
 	[(#INCLURE{fond=formulaires/inc-liste_details}{id_liste=#ENV{stop}})]
 	<input type="hidden" name="d" value="[(#ENV{d})]" />
 	<input type="hidden" name="stop" value="[(#ENV{stop})]" />
@@ -31,8 +34,13 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 		<input type='submit' class='submit' name='valider' value='<:spiplistes:je_confirme_desinscrition:>' />
 	</p>
 	</form>
+	]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
 ]
-[(#ENV{d}|oui|et{#ENV{stop}|non})
+[<!--(#REM)
+	Formulaire de gestion d'abonnement
+-->]
+[(#ENV{d}|oui|et{#ENV{stop}|non}|et{#ENV{errormsg}|non})
 		<p class='souhait'><:spiplistes:effectuez_modif_validez:></p>
 	<!-- <br class='bugajaxie' /> -->
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -74,7 +82,7 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 		</p>
 	</div></form>]
 ]
-
+[<p class="errormsg">(#ENV{errormsg})</p>]
 </div>[<!--(#REM) fin div.formulaire_spip -->]
 
 </B_auteur>
@@ -83,5 +91,5 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 	A voir si message d'erreur ici
 	ou redirection brutale sur 404
 	ou autre...
--->]
+-->][<p class="errormsg">(#ENV{errormsg})</p>]
 <//B_auteur>

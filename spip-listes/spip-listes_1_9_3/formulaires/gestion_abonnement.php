@@ -16,7 +16,7 @@ include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_api_globales');
 
 function formulaires_gestion_abonnement_charger_dist($id_liste=''){
-	spiplistes_debug_log ('formulaires_gestion_abonnement_charger_dist()');
+	//spiplistes_debug_log ('formulaires_gestion_abonnement_charger_dist()');
 	
 	$d = _request('d');
 	$stop = intval(_request('stop'));
@@ -32,6 +32,10 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 		$valeurs['format'] = spiplistes_format_abo_demande($id_auteur);
 		$valeurs['editable'] = true;
 		
+		// la liste des abonnements en cours
+		// pour cet auteur (avec titre des  listes)
+		$mes_abos = spiplistes_abonnements_listes_auteur ($id_auteur, true);
+		
 		// si c'est un desabonnement a une liste
 		// affiche juste la demande de confirmation
 		if ($stop > 0)
@@ -39,83 +43,122 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 			if ($id_auteur > 0)
 			{
 				$id_liste = $stop;
-				// demande la liste des abonnelents en cours
-				// pour cet auteur, histoire de verifier
-				// qu'il est encore abonné a cette liste
+				
+				// verifier qu'il est encore abonne' a cette liste
 				if (
-					($auteurs_abos = spiplistes_abonnements_listes_auteur ($id_auteur, true))
-					&& $auteurs_abos
-					&& isset($auteurs_abos[$id_liste])
+					$mes_abos
+					&& isset($mes_abos[$id_liste])
 				)
 				{
-					$valeurs['titre_liste'] = $row['titre'];
 					$row = spiplistes_listes_liste_fetsel ($id_liste, 'titre,descriptif');
+					$valeurs['titre_liste'] = $row['titre'];
 					$valeurs['descriptif'] = $row['descriptif'];
 					$valeurs['stop'] = $stop;
 				}
+				else
+				{
+					$valeurs['errormsg'] = _T('spiplistes:pas_abonne_liste');
+				}
+			}
+			else
+			{
+				unset ($valeurs['d']);
+				unset ($valeurs['editable']);
 			}
 		}
+	}
+	else
+	{
+		spiplistes_log ('ERR: UNSUBSCRIBE id_auteur #'.$id_auteur.' id_liste #'.$id_liste);
+		$valeurs['errormsg'] = _T('spiplistes:action_interdite');
 	}
 	return $valeurs;
 }
 
 function formulaires_gestion_abonnement_verifier($id_liste='') {
-	spiplistes_debug_log('formulaires_gestion_abonnement_verifier()');
+	//spiplistes_debug_log('formulaires_gestion_abonnement_verifier()');
+	
 	$erreurs = array();
 	return $erreurs;
 }
 
-function formulaires_gestion_abonnement_traiter_dist($id_liste=''){
-	spiplistes_debug_log('formulaires_gestion_abonnement_traiter_dist()');
+function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
+	//spiplistes_debug_log('formulaires_gestion_abonnement_traiter_dist()');
+	
 	$d = _request('d');
 	$listes = _request('listes');
 	$format = _request('suppl_abo');
+	$stop = intval(_request('stop'));
 	
-	if($auteur = auteur_cookie_ou_session($d)) {
+	if ($auteur = auteur_cookie_ou_session($d))
+	{
 		$id_auteur = $auteur['id_auteur'];
 		$email = $auteur['email'];
-	}
-	
-	$prev_format = spiplistes_format_abo_demande($id_auteur);
-
-	// pour chaque liste sélectionnée
-	if(is_array($listes) && count($listes)) {
-		foreach($listes as $id_liste) {
-			// ajouter le nouvel abonnement
-			if(spiplistes_abonnements_ajouter($id_auteur, $id_liste) !== false) {
-				$message_ok = _T('spiplistes:abonnement_modifie');
-			}
-			// si changement dans l'abonnement
-			if($format != $prev_format) {
-				// désabonner l'auteur ou modifier son format d'abonnement
-				if($format == 'non') {
-					spiplistes_abonnements_auteur_desabonner($id_auteur, $id_liste);
-					$message_ok = _T('spiplistes:desabonnement_valid')." :&nbsp;".$email;  
-				}else{
-					spiplistes_format_abo_modifier($id_auteur, $format);
-					$message_ok = _T('spiplistes:abonnement_modifie');
-					$message_ok .= "<br />"._T('spiplistes:abonnement_nouveau_format').$format;
-				}
+		
+		// la liste des abonnements en cours
+		// pour cet auteur
+		$mes_abos = spiplistes_abonnements_listes_auteur ($id_auteur, true);
+				
+		if ($stop > 0)
+		{
+			$id_liste = $stop;
+			
+			if (isset ($mes_abos[$id_liste]))
+			{
+				spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste);
+				$contexte = array(
+					'message_ok' => _T('spiplistes:vous_etes_desinscrit')
+				);
 			}
 		}
+		else
+		{
+			$prev_format = spiplistes_format_abo_demande($id_auteur);
+		
+			// pour chaque liste sélectionnée
+			if(is_array($listes) && count($listes))
+			{
+				foreach($listes as $id_liste)
+				{
+					// ajouter le nouvel abonnement
+					if(spiplistes_abonnements_ajouter($id_auteur, $id_liste) !== false)
+					{
+						$message_ok = _T('spiplistes:abonnement_modifie');
+					}
+					// si changement dans l'abonnement
+					if($format != $prev_format) {
+						// désabonner l'auteur ou modifier son format d'abonnement
+						if($format == 'non') {
+							spiplistes_abonnements_auteur_desabonner($id_auteur, $id_liste);
+							$message_ok = _T('spiplistes:desabonnement_valid')." :&nbsp;".$email;  
+						}else{
+							spiplistes_format_abo_modifier($id_auteur, $format);
+							$message_ok = _T('spiplistes:abonnement_modifie');
+							$message_ok .= "<br />"._T('spiplistes:abonnement_nouveau_format').$format;
+						}
+					}
+				}
+			}
+		
+			spiplistes_auteurs_cookie_oubli_updateq('', $d, $true);
+		
+			$contexte = array(
+				'editable' => true,
+				'message_ok' => $message_ok,
+				'format' => $format
+			);
+		}
 	}
-
-	spiplistes_auteurs_cookie_oubli_updateq('', $d, $true);
-
-	$contexte = array(
-		'editable' => true,
-		'message_ok' => $message_ok,
-		'format' => $format
-	);
 	
-	return $contexte;
+	return ($contexte);
 }
 
 // recuperer id_auteur, statut, nom et email pour :
 // -* l'auteur associé au cookie de l'environnement
 // -* ou l'auteur de la session en cours
-function auteur_cookie_ou_session($d){
-	spiplistes_debug_log ("auteur_cookie_ou_session($d)");
+function auteur_cookie_ou_session($d)
+{
+	//spiplistes_debug_log ("auteur_cookie_ou_session($d)");
 	$return = array();
 	// si pas de cookie on chope l'auteur de la session
 	if(empty($d)) {

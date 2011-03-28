@@ -610,6 +610,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'liste_inconnue' => 'liste inconnue'
 , 'cet_email_pas_valide' => 'Cet email n&#8217;est pas valide'
 , 'cet_email_deja_enregistre' => 'Cet email est d&#233;ja enregistr&#233;.'
+, 'erreur_traitement_action' => 'Une erreur technique ne permet pas cette action.'
+, 'pas_abonne_liste' => 'Vous n&#8217;&#234;tes pas, ou plus, abonn&#233; &#224; cette liste de diffusion.'
+, 'action_interdite' => 'Cette action n&#8217;est pas autoris&#233;e.'
+, 'vous_etes_desinscrit' => 'Vous &#234;tes maintenant d&#233;sinscrit de cette liste de diffusion.'
 
 // tableau items *_options
 , 'Liste_de_destination' => 'Liste de destination'

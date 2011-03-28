@@ -296,39 +296,48 @@ function spiplistes_abonnements_listes_auteur ($id_auteur, $avec_titre = false) 
 // CP-20080508 : ou de toutes les listes si $id_liste = 'toutes'
 // CP-20090111: ou tous les abonnes si id_auteur == 'tous'
 // CP-20090410: ou une serie si array
-function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false) {
+function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false)
+{
+	//spiplistes_debug_log("spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste)");
+	
 	$result = false;
-	$msg1 = $msg2 = "";
+	$msg1 = $msg2 = '';
 	$sql_where = array();
 	if($id_auteur == 'tous') {
-		$sql_where[] = "id_auteur>0";
+		$sql_where[] = 'id_auteur>0';
 		$msg1 = $id_auteur;
 	}
 	else if(is_array($id_auteur)) {
-		$ii = implode(",", $id_auteur);
-		$sql_where[] = "id_auteur IN ($ii)";
-		$msg1 = "id_auteur #$ii";
+		$ii = implode(',', $id_auteur);
+		$sql_where[] = 'id_auteur IN ('.$ii.')';
+		$msg1 = 'id_auteur #'.$ii;
 	}
 	else if(($id_auteur = intval($id_auteur)) > 0) {
-		$sql_where[] = "id_auteur=$id_auteur";
-		$msg1 = "id_auteur #$id_auteur";
+		$sql_where[] = 'id_auteur='.sql_quote($id_auteur);
+		$msg1 = 'id_auteur #'.$id_auteur;
 	}
-	if(count($sql_where)) {
-		$sql_table = "spip_auteurs_listes";
-		if($id_liste == "toutes") {
-			$msg2 = " des listes";
-		} else if(($id_liste = intval($id_liste)) > 0) {
-			$sql_where[] = "id_liste=$id_liste";
-			$msg2 = " de la liste #$id_liste";
+	if(count($sql_where))
+	{
+		$sql_table = 'spip_auteurs_listes';
+		
+		if($id_liste == 'toutes')
+		{
+			$msg2 = ' des listes';
 		}
-		if(($result = sql_delete($sql_table, $sql_where)) === false) {
-			spiplistes_sqlerror_log("abonnements_auteur_desabonner()");
+		else if(($id_liste = intval($id_liste)) > 0)
+		{
+			$sql_where[] = 'id_liste='.$id_liste;
+			$msg2 = ' de la liste #'.$id_liste;
+		}
+		if(($result = sql_delete($sql_table, $sql_where)) === false)
+		{
+			spiplistes_debug_log ('ERR sql_delete: abonnements_auteur_desabonner()');
 		}
 		else {
-			spiplistes_log_api("desabonne $msg1 $msg2");
+			spiplistes_log_api('desabonne '.$msg1.' '.$msg2);
 		}
 	}
-	return($result);
+	return ($result);
 }
 
 //CP-20080512 : supprimer des abonnements
