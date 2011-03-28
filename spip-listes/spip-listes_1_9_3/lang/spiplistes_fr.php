@@ -139,6 +139,14 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'completer_titre_courrier_nom_site' => 'Compl&#233;ter le titre du courrier'
 , 'completer_titre_courrier_nom_site_desc' => 'Le titre des listes est
 	automatiquement compl&#233;t&#233; par le nom du site.'
+, 'lien_gestion_inscription' => 'Lien de gestion d&#8217;inscription'
+, 'lien_gestion_inscription_desc' => 'Lorsque le courrier est envoy&#233;,
+	un petit lien est ajout&#233; en pied de ce courrier,
+	proposant &#224; l&#8217;abonn&#233; la gestion de ses inscriptions
+	via un formulaire sur le site (abonnements et format de r&#233;ception).'
+, 'lien_gestion_inscription_label' => 'Remplacer ce lien par
+	un lien sur un simple formulaire de d&#233;sinscription
+	(ne propose pas les autres lites disponibles, ni le format de r&#233;ception)'
 , 'Complement_tampon_editeur' => 'Tampon Editeur'
 , 'Complement_tampon_editeur_desc' => '
 	Le tampon &#233;diteur est un petit bloc texte

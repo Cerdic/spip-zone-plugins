@@ -64,6 +64,7 @@ function exec_spiplistes_config () {
 			, 'opt_lien_en_tete_courrier', 'lien_patron'
 			, 'opt_ajout_tampon_editeur', 'tampon_patron'
 			, 'opt_completer_titre_nom_site'
+			, 'opt_ajout_lien_desabo'
 			);
 		$keys_complement_courrier = array_merge($keys_complement_courrier
 												, $_tampon_cles = explode(",", _SPIPLISTES_TAMPON_CLES));
@@ -335,6 +336,7 @@ function exec_spiplistes_config () {
 	$opt_lien_en_tete_courrier = (spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui');
 	$lien_patron = spiplistes_pref_lire('lien_patron');
 	$opt_ajout_tampon_editeur = (spiplistes_pref_lire('opt_ajout_tampon_editeur') == 'oui');
+	$opt_ajout_lien_desabo = (spiplistes_pref_lire('opt_ajout_lien_desabo') == 'oui');
 	$tampon_patron = spiplistes_pref_lire('tampon_patron');
 	foreach($_tampon_cles as $key)
 	{
@@ -380,6 +382,16 @@ function exec_spiplistes_config () {
 			. ' />' . $eol
 			. _T('spiplistes:completer_titre_courrier_nom_site_desc') . $eol
 		. '</label>' . $eol
+		. fin_cadre_relief(true)
+		//
+		// opt_ajout_lien_desabo
+		. debut_cadre_relief('', true, '', _T('spiplistes:lien_gestion_inscription'))
+		. '<p class="verdana2">'._T('spiplistes:lien_gestion_inscription_desc').'</p>'.$eol
+		. '<input type="checkbox" name="opt_ajout_lien_desabo" value="oui" id="opt_ajout_lien_desabo" '
+			. ($opt_ajout_lien_desabo ? 'checked="checked"' : '')
+			. ' />' . $eol
+		. '<label class="verdana2" for="opt_ajout_lien_desabo">'
+			. _T('spiplistes:lien_gestion_inscription_label').'</label>'.$eol
 		. fin_cadre_relief(true)
 		//
 		// ajout tampon editeur

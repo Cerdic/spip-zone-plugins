@@ -444,10 +444,7 @@ function spiplistes_meleuse ($last_time) {
 											, '_url' => generer_url_public()
 											, 'lang' => $lang
 											, 'd' => $cookie
-											// pour formulaire de desabo
-											// en cours 26/03/2011
-											//, 'lien_desabo' => 'oui' 
-											, 'lien_desabo' => $opt_ajout_lien_desabo
+											, 'lien_desabo' => ($opt_ajout_lien_desabo == 'oui')
 											)
 								);
 								$pied_rappel_texte = spiplistes_translate_2_charset ($pied_rappel_texte
