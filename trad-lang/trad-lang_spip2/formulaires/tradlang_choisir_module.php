@@ -44,7 +44,7 @@ function formulaires_tradlang_choisir_module_traiter($module="",$lang_orig="",$l
 	$lang_crea = _request('lang_crea');
 	if($traduire = _request('traduire')){
 		$res['message_ok'] = 'On passe à la traduction';
-		$res['redirect'] = generer_url_public("trad_lang","etape=traduction&module=$module&lang_orig=$lang_orig&lang_cible=$lang_cible");
+		$res['redirect'] = generer_url_public("tradlang","etape=traduction&module=$module&lang_orig=$lang_orig&lang_cible=$lang_cible");
 	}else{
 		$res['editable'] = true;
 	}

@@ -1,0 +1,14 @@
+<div id="contenu">
+	[<div class="cartouche">
+		<h1 class="h1"><:resultats_recherche:></h1>
+		<p class="soustitre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
+	</div>]
+	
+	<INCLURE{fond=noisettes/listes/tradlang_liste_recherche,env}>
+	
+</div>
+<div id="navigation">
+	<div class="ajax tradlang_choisir_module">
+	[(#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{module},#ENV{lang_orig},#ENV{lang_cible},#ENV{lang_crea}})]
+	</div>
+</div>

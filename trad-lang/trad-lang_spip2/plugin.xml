@@ -40,5 +40,4 @@
 	<necessite id="SPIP" version="[2.3.0-dev;)" />
 	<necessite id="revisions" version="[1.4.1;]" />
 	<necessite id="saisies" version="[1.9.1;]" />
-	<necessite id="Zcore" version="[2.0.0-dev]" />
 </plugin>
