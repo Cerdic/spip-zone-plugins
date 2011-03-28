@@ -18,10 +18,10 @@ function tradlang_declarer_tables_interfaces($interface){
 function tradlang_declarer_tables_objets_sql($tables){
 	$tables['spip_tradlang_modules'] = array(
 		'texte_retour' => 'icone_retour',
-		'titre' => 'nom_module',
+		'titre' => 'nom_mod',
 		'field'=> array(
-			"idmodule" => "bigint(21) NOT NULL AUTO_INCREMENT",
-			"nom_module" => "varchar(128) NOT NULL",
+			"id_tradlang_module" => "bigint(21) NOT NULL AUTO_INCREMENT",
+			"module" => "varchar(128) NOT NULL",
 			"nom_mod" => "varchar(16) NOT NULL",
 			"lang_mere" => "varchar(16) NOT NULL default 'fr'",
 			"type_export" => "varchar(16) NOT NULL default 'spip'",
@@ -30,18 +30,19 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"lang_prefix" => "varchar(16) NOT NULL"
 		),
 		'key' => array(
-			"PRIMARY KEY" => "idmodule",
-			"KEY" => "nom_module",
+			"PRIMARY KEY" => "id_tradlang_module",
+			"KEY" => "module",
 			"UNIQUE" => "nom_mod"
 		),
 		'join' => array(
-			"idmodule"=>"idmodule",
-			"module"=>"nom_module"
+			"id_tradlang_module"=>"id_tradlang_module",
+			"module"=>"module"
 		),
 		'rechercher_champs' => array(
-		  'nom_module' => 8
+			'module' => 8,
+			'nom_mod' => 8
 		),
-		'champs_versionnes' => array('nom_module','nom_mod', 'lang_mere')
+		'champs_versionnes' => array('module','nom_mod', 'lang_mere')
 	);
 
 	$tables['spip_tradlang'] = array(
