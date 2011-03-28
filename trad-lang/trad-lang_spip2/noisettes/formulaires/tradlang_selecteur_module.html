@@ -1,7 +1,7 @@
 <B_modules>
 	<select name="module" id="module" class="text">
-	<BOUCLE_modules(TRADLANG_MODULES){par nom_module}{tout}>
-		<option value="#NOM_MOD"[(#NOM_MOD|=={#ENV{module}}|oui)selected="selected"]>#NOM_MODULE</option>
+	<BOUCLE_modules(TRADLANG_MODULES){par nom_mod}{tout}>
+		<option value="#MODULE"[(#MODULE|=={#ENV{module}}|oui)selected="selected"]>#NOM_MOD</option>
 	</BOUCLE_modules>
 	</select>
 </B_modules>

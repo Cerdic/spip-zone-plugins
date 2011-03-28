@@ -50,7 +50,7 @@ function tradlang_testesynchro($idmodule, $langue){
 	$dir_lang = tradlang_dir_lang();
 	spip_log($dir_lang);
 	spip_log("testesynchro $idmodule - $langue",'tradlang');
-	$module = sql_fetsel('*','spip_tradlang_modules','idmodule='.intval($idmodule));
+	$module = sql_fetsel('*','spip_tradlang_modules','id_tradlang_module='.intval($idmodule));
 	$nom_module = $module["module"];
 	$nom_mod = $module["nom_mod"];
 	//$dir_lang = $module["dir_lang"];

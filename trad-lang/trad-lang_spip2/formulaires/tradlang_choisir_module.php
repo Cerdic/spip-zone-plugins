@@ -17,11 +17,11 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 			$valeurs[$key] = _request($key);
 		}
 	}
-	if(!$module OR !sql_getfetsel('idmodule','spip_tradlang_modules','nom_mod='.sql_quote($module))){
+	if(!$module OR !sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($module))){
 		$valeurs['module'] = $module_defaut;
 	}
 	
-	$valeurs['lang_mere'] = sql_getfetsel('lang_mere','spip_tradlang_modules',"nom_mod=".sql_quote($valeurs['module']));
+	$valeurs['lang_mere'] = sql_getfetsel('lang_mere','spip_tradlang_modules',"module=".sql_quote($valeurs['module']));
 
 	if(!$lang_orig){
 		$valeurs['lang_orig'] = $valeurs['lang_mere'];
