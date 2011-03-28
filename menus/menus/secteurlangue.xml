@@ -3,6 +3,7 @@
 	<description><:menus:description_menu_secteurlangue:></description>
 	<icone>images/menus_secteurlangue.png</icone>
 	<parametre nom="niveau" label="menus:entree_niveau" />
+	<parametre nom="sousrub_cond" label="menus:entree_sousrub_cond" />
 	<parametre nom="tri_num" label="menus:entree_tri_num" />
 	<parametre nom="tri_alpha" label="menus:entree_tri_alpha" />
 	<refuser_sous_menu/>
