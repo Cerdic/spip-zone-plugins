@@ -47,9 +47,17 @@ include_spip('inc/spiplistes_api_globales');
 	
 	Ne sert que pour la liste des courriers et des listes de diffusion
 */
-function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='listes', $statut=''
-	, $apres_maintenant=false, $nom_position='position'
-	, $exec, $id_auteur=0, $pas=10, $return=true) {
+function spiplistes_lister_courriers_listes (
+	$titre_tableau
+	, $image
+	, $element='listes'
+	, $statut=''
+	, $apres_maintenant=false
+	, $nom_position='position'
+	, $exec
+	, $id_auteur=0
+	, $pas=10
+	, $return=true) {
 
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_courrier'); 
@@ -57,7 +65,7 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 	$position = intval($_GET[$nom_position]);
 	$pas = intval($pas);
 	$id_auteur = intval($id_auteur);
-	$retour = _DIR_RESTREINT_ABS.self();
+	//$retour = _DIR_RESTREINT_ABS.self();
 	$clause_where = '';
 	
 	//////////////////////////////////
@@ -122,7 +130,12 @@ function spiplistes_lister_courriers_listes ($titre_tableau, $image, $element='l
 				case 'abonnements':
 					$id_row = $row['id_liste'];
 					$url_row	= generer_url_ecrire($exec, 'id_liste='.$id_row);
-					$url_desabo = generer_action_auteur(_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE, $row['id_auteur']."-listedesabo-$id_row", $retour);
+					$retour = self();
+					$url_desabo = generer_action_auteur(_SPIPLISTES_ACTION_CHANGER_STATUT_ABONNE
+											, $row['id_auteur'].'-listedesabo-'.$id_row
+											, $retour);
+					spiplistes_debug_log('desabo: '.$url_desabo);
+					spiplistes_debug_log('retour: '.$retour);
 					$statut = $row['statut'];
 					break;
 				case 'courriers':

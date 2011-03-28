@@ -26,6 +26,7 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
 	[(#INCLURE{fond=formulaires/inc-liste_details}{id_liste=#ENV{stop}})]
 	<input type="hidden" name="d" value="[(#ENV{d})]" />
+	<input type="hidden" name="stop" value="[(#ENV{stop})]" />
 	<p class="boutons spip_bouton">
 		<input type='submit' class='submit' name='valider' value='<:spiplistes:je_confirme_desinscrition:>' />
 	</p>

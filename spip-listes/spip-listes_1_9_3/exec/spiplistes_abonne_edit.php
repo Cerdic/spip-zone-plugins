@@ -240,8 +240,8 @@ function exec_spiplistes_abonne_edit () {
 			;
 	}
 	
-	$page_result .= ""
-		. fin_cadre_relief(true)
+	$page_result .=
+		fin_cadre_relief(true)
 		//
 		. "<br />\n"
 		// Liste des abonnements
