@@ -24,7 +24,6 @@ function exec_tradlang() {
 		echo $commencer_page(_T('tradlang:tradlang'),"configuration","langues");
 	
 		echo gros_titre(_T('tradlang:tradlang'), '', false);
-	  	echo barre_onglets("config_lang", "tradlang");
 		echo debut_gauche('', true);
 		
 		echo debut_boite_info(true);

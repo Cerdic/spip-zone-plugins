@@ -7,19 +7,6 @@
  * 
  */
 
-/**
- * Ajout d'un bouton dans la barre d'onglet de configuration des langues
- * 
- * @param object $flux
- * @return 
- */
-function tradlang_ajouter_onglets($flux) {
-	if($flux['args']=='config_lang')
-		$flux['data']['tradlang'] = new Bouton( 
-			"traductions-24.gif", _L('tradlang:gestion_des_traductions'),
-			generer_url_ecrire("tradlang"));
-	return $flux;
-}
 
 /**
  * Insertion dans le pipeline declarer_tables_objets_surnoms (base/connect_sql.php)

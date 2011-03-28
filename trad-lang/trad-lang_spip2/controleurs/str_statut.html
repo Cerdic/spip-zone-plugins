@@ -12,13 +12,13 @@
 	<label><:tradlang:label_tradlang_status:></label>
 	<select class="text crayon_active" name="#ENV{name_status}">
 		<option value=""[(#STATUS|=={''}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
-		<option value="MODIF"[(#STATUS|=={MODIF}|ou{#STATUS|=={NEW}}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+		<option value="MODIF"[(#STATUS|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
 	</select>
 </li>
 <li class="editer_str">
 	<label><:tradlang:label_tradlang_str:></label>
-	<input class="crayon-active" name="#ENV{name_str}"
-	 style="width:#ENV{largeur}px; height:#ENV{hauteur}px;#ENV{style}" value="[(#STR**|entites_html)]" />
+	<textarea class="crayon-active" name="#ENV{name_str}"
+	 style="width:#ENV{largeur}px; height:#ENV{hauteur}px;#ENV{style}">[(#STR**|entites_html)]</textarea>
 </li>
 </BOUCLE_a>
 </ul>

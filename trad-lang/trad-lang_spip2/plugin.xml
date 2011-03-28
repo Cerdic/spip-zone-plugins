@@ -19,19 +19,11 @@
 		<inclure>base/tradlang.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>ajouter_onglets</nom>
-        <inclure>tradlang_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>declarer_tables_objets_surnoms</nom>
         <inclure>tradlang_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_objets_surnoms</nom>
-        <inclure>tradlang_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>gouverneur_infos_tables</nom>
         <inclure>tradlang_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -48,4 +40,5 @@
 	<necessite id="SPIP" version="[2.3.0-dev;)" />
 	<necessite id="revisions" version="[1.4.1;]" />
 	<necessite id="saisies" version="[1.9.1;]" />
+	<necessite id="Zcore" version="[2.0.0-dev]" />
 </plugin>

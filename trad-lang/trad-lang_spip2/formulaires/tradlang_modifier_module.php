@@ -65,7 +65,9 @@ function formulaires_tradlang_modifier_module_traiter($module){
 		
 		$datas = array(
 			'nom_module' => _request('nom_module') ? _request('nom_module') : $module,
-			'lang_mere' => _request('lang_mere'));
+			'lang_mere' => _request('lang_mere'),
+			'texte' => _request('texte')
+		);
 		
 		sql_updateq('spip_tradlang_modules',$datas,'nom_mod='.sql_quote($module));
 		$ret['message_ok'] = _T('tradlang:message_module_updated',array('module'=>$module));

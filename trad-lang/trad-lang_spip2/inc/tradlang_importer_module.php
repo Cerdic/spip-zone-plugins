@@ -75,7 +75,6 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		// nettoyer le contenu de ses <MODIF>
 		$status = array();
 		foreach($chs as $id=>$v) {
-			spip_log("$id => $v",'tradlang');
 			if (preg_match(',^<(MODIF|NEW|PLUS_UTILISE)>,US', $v, $r)) {
 				$chs[$id] = preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $v);
 				$status[$id] = $r[1];

@@ -31,7 +31,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 		if(!is_dir($dir_lang=$squelettes.'lang')){
 			return false;
 		}
-		spip_log($dir_lang,'test');
+
 		$nom_mod = $r[1];
 		$module = sql_fetsel('*','spip_tradlang_modules','nom_mod='.sql_quote($nom_mod));
 		if(is_array($module)){

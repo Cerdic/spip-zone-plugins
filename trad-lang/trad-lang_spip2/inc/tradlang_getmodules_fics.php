@@ -14,7 +14,6 @@ function inc_tradlang_getmodules_fics($rep){
 	while (($fichier = readdir($handle)) != ''){
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
-		if ($fichier == 'CVS') continue;
       
 		$nom_fichier = $rep."/".$fichier;
 		if (is_file($nom_fichier)){
