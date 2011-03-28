@@ -83,8 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_contacts' => 'Liste les contacts',
 	'liste_organisations' => 'Liste les organisations',
 	
-	'nb_contact' => 'contact',
-	'nb_contacts' => 'contacts',
+	'nb_contact' => '1 contact',
+	'nb_contacts' => '@nb@ contacts',
 
 	// O
 	'organisations' => 'Organisations',
