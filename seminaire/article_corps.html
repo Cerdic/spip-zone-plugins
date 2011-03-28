@@ -1,0 +1,50 @@
+<BOUCLE_article_corps(ARTICLES){id_article}>
+
+<!-- Affichage de l'article -->
+
+<div class="groupetitre">
+  [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+  [<h2 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h2>]
+  [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+  <!--[<p class="auteur"><:par_auteur:> (#LESAUTEURS)[ - (#DATE|affdate_jourcourt)]</p>]-->
+</div>
+
+[<span class="vignette">(#LOGO_ARTICLE)</span>]
+[<div class="#EDIT{chapo} chapeau">(#CHAPO)</div>]
+	<INCLURE{fond=compte_evenements}{env}>[(#REM)affichage des événements et des boutons s'il y a lieu]
+[<div class="#EDIT{texte}">(#TEXTE)</div>]
+[<p class="lien_article"><:voir_en_ligne:>&nbsp;: <a href="(#URL_SITE)">[(#NOM_SITE)]</a></p>]
+[<p class="#EDIT{ps} postscriptum"><:post_scriptum:>&nbsp;: (#PS)</p>] 
+[<div class="separateur">
+  <hr class="accessibility" />
+</div>
+<div class="notes">(#NOTES)</div>] 
+
+<B_motscles>
+<h3 class="spip"><:mots_clefs:></h3>
+<p>
+<BOUCLE_motscles(MOTS){id_article}{", "}>
+#TITRE</BOUCLE_motscles>
+</p>
+</B_motscles>
+
+
+<B_documents_joints>
+<table class="docjoints">
+<tr>
+<BOUCLE_documents_joints(DOCUMENTS){id_article}{mode=document}{0,3}{doublons}>
+<td>
+  [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+  [<p class="titredoc">(#TITRE)[ - (#TAILLE|taille_en_octets)]</p>]
+  [<p>(#DESCRIPTIF)</p>]
+</td>
+</BOUCLE_documents_joints>
+</tr>
+<BOUCLE_docs_suite(BOUCLE_documents_joints)></BOUCLE_docs_suite>
+</table>
+</B_documents_joints>
+
+
+<!-- Fin de l'affichage de l'article -->
+
+</BOUCLE_article_corps>
