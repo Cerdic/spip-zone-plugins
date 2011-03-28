@@ -1,3 +1,4 @@
+#CACHE{0}
 <BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}>
 #SET{str_mere,#ARRAY}
 <div>
@@ -13,11 +14,12 @@
 	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{status=MODIF}{lang=#LANG}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_langue_mere_modif>
 	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
 	[(#CONFIG{tradlang/sauvegarde_locale}|=={on}|oui)
-	[(#IDMODULE|tradlang_testesynchro{#LANG}|oui)
+	[(#SET{sync,[(#ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG})]})]
+	[(#GET{sync}|oui)
 		<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>
 	]
 	
-	[(#IDMODULE|tradlang_testesynchro{#LANG}|non)
+	[(#GET{sync}|non)
 		<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
 		[(#AUTORISER{configurer,tradlang}|oui)
 			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
@@ -52,8 +54,9 @@
 		]
 	]
 	[(#CONFIG{tradlang/sauvegarde_locale}|=={on}|oui)
-	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|oui)<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
-	[(#_module:IDMODULE|tradlang_testesynchro{#LANG}|non)
+	[(#SET{sync,[(#_module:ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG})]})]
+	[(#GET{sync}|oui)<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>]
+	[(#GET{sync}|non)
 		<p><img src="#CHEMIN{img_pack/rouge.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_pas_ok:></p>
 		[(#AUTORISER{configurer,tradlang}|oui)
 			[(#BOUTON_ACTION{<:tradlang:label_synchro_base_fichier:>,#URL_ACTION_AUTEUR{tradlang_synchro_base_fichier,#ENV{module},#SELF}})]
