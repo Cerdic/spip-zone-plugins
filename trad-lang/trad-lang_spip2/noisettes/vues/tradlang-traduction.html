@@ -1,12 +1,11 @@
-<div class="tradlang_entete">
-	<h1><:tradlang:titre_traduction_module_de_vers{module=#ENV{module},lang_orig=#ENV{lang_orig},lang_cible=#ENV{lang_cible}}:></h1>
-</div>
-
-<div class="contenu">
+<div id="contenu">
+	<div class="tradlang_entete">
+		<h1><:tradlang:titre_traduction_module_de_vers{module=#ENV{module},lang_orig=#ENV{lang_orig},lang_cible=#ENV{lang_cible}}:></h1>
+	</div>
 	<INCLURE{fond=noisettes/listes/tradlang_liste_tous}{env}>
 </div>
 
-<div class="options">
+<div id="navigation">
 	<div class="ajax">
 		[(#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{module},#ENV{lang_orig},#ENV{lang_cible}})]
 	</div>

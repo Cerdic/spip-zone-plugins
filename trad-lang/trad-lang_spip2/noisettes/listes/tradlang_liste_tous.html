@@ -1,4 +1,4 @@
-<BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}> module trouvé
+<BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}>
 #SET{str_mere,#ARRAY}
 <BOUCLE_revise(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}{par id}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
 #SET{total_mere,#GRAND_TOTAL}
@@ -30,7 +30,7 @@
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
 		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
-		<td>[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		<td class="status[_(#STATUS|strtolower)]">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>

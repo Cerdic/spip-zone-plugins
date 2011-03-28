@@ -1,0 +1,50 @@
+#SET{str_cible,#ARRAY}
+<B_revise_cible>
+<div class="liste resultats tradlang">
+#ANCRE_PAGINATION
+<h2 class="h2"><:tradlang:titre_recherche_tradlang:> (#GRAND_TOTAL)</h2>
+#SET{total,#GRAND_TOTAL}
+<table class="liste_traductions">
+	<thead>
+		<tr>
+			<th>
+				<:tradlang:codelangue:>
+			</th>
+			<th>
+				<:tradlang:th_module:>
+			</th>
+			<th>
+				<:tradlang:th_langue_origine:>
+			</th>
+			<th>
+				<:tradlang:th_traduction:>
+			</th>
+			<th>
+				<:tradlang:th_langue:>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
+	<BOUCLE_revise_cible(TRADLANG){recherche}{par points}{inverse}{pagination 20}>
+	#SET{str_cible,#GET{str_cible}|push{#ID}}
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+		<td>#ID</td>
+		<BOUCLE_module(TRADLANG_MODULES){nom_mod=#MODULE}>
+		<td>#MODULE</td>
+		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}>
+		<td class="status[_(#STATUS|strtolower)]">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		</BOUCLE_revise_orig>
+		<td><:tradlang:str_existe_plus:></td>
+		<//B_revise_orig>
+		</BOUCLE_module>
+		<td class="#EDIT{str_statut}">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		<td><abbr title="[(#LANG|traduire_nom_langue)]">#LANG</abbr></td>
+	</tr>
+	</BOUCLE_revise_cible>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_revise_cible>
+<//B_revise_cible>
