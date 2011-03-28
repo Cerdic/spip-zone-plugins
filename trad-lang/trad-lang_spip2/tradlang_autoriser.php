@@ -55,6 +55,7 @@ function definir_autorisations_tradlang($action,$utiliser_defaut=true){
  * Autorisation de configurer et d'administrer trad-lang
  * Permet de : 
  * - importer un nouveau module de langue
+ * - créer une nouvelle version dans une langue
  * - synchroniser les fichiers de langue avec la base
  * - traduire des locutions
  * 

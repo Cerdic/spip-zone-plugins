@@ -1,10 +1,22 @@
+[(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|oui)
 <div id="contenu">
 	<div class="tradlang_entete">
-		<h1><:tradlang:titre_traduction_module_de_vers{module=#ENV{module},lang_orig=#ENV{lang_orig},lang_cible=#ENV{lang_cible}}:></h1>
+		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}
+		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
+		<h1><:tradlang:titre_traduction_module_de_vers{module=#ENV{module},lang_orig=#ENV{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
 	</div>
 	<INCLURE{fond=noisettes/listes/tradlang_liste_tous}{env}>
+</div>]
+[(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|non)
+<div id="contenu">
+	[(#ENV{module}|non)
+	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
+	[(#ENV{lang_orig}|non)
+	<p class="erreur_message"><:tradlang:erreur_choisir_lang_orig:></p>]
+	[(#ENV{lang_cible}|non)
+	<p class="erreur_message"><:tradlang:erreur_choisir_lang_cible:></p>]
 </div>
-
+]
 <div id="navigation">
 	<div class="ajax">
 		[(#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{module},#ENV{lang_orig},#ENV{lang_cible}})]

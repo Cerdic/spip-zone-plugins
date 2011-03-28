@@ -76,7 +76,9 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"module"=>"module"
 		),
 		'rechercher_champs' => array(
-		  'id' => 8,'str' => 8, 'comm' => 4
+			'id' => 8,
+			'str' => 8,
+			'comm' => 4
 		),
 		'champs_versionnes' => array('str','comm', 'status')
 	);

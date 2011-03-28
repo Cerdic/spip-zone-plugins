@@ -23,11 +23,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lang_cible})</span>
 				]<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{env}{lang_select=#ENV{lang_cible}}{lang_exclue=#ENV{lang_mere}}{name=lang_cible}>
 		    </li>
-			<li class='creer_lang_cible[ (#ENV**{erreurs}|table_valeur{creer_lang_cible}|oui)erreur]'>
-				<label for='creer_lang_cible'><:tradlang:item_creer_langue_cible:></label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{creer_lang_cible})</span>]
-				<input class="text" name='creer_lang_cible' id='creer_lang_cible' value='#ENV{creer_lang_cible}' size='5' />
-			</li>
+			[(#AUTORISER{tradlang,configurer}|oui)<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_possible_creation}{env}>]
 		</ul>
 		<p class='boutons'>
 			<input type='submit' class='submit' name='traduire' value='<:tradlang:bouton_traduire:>' />

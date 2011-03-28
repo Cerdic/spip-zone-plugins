@@ -1,0 +1,12 @@
+<B_module_langue_possible>
+<li class='creer_lang_cible[ (#ENV**{erreurs}|table_valeur{creer_lang_cible}|oui)erreur]'>
+	<label for='creer_lang_cible'><:tradlang:item_creer_langue_cible:></label>[
+	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{creer_lang_cible})</span>]
+	<select name="creer_lang_cible" id="creer_lang_cible">
+		<option value="">--</option>
+		<BOUCLE_module_langue_possible(POUR){tableau #ENV{_langues_possibles}}>
+		<option value="#CLE"[(#CLE|=={#ENV{creer_lang_cible}}|oui)selected="selected"]>#VALEUR</option>
+		</BOUCLE_module_langue_possible>
+	</select>
+</li>
+</B_module_langue_dispo>

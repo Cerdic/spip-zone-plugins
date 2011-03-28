@@ -40,7 +40,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 	}
 	
 	if ($new_only && ($mode=='update')){
-		$ret .= propre(_T('tradlang:module_deja_importe',array('module'=>$module['nom_module'])));
+		$ret .= propre(_T('tradlang:module_deja_importe',array('module'=>$module['module'])));
 		return array($ret,false);
 	}
 	
@@ -209,9 +209,9 @@ function tradlang_select_liste_rep_lang($name="repertoirelangue",$selected='',$n
 	$tous_modules_en_base = array();
 	if($new_only){
 		$tous_modules_en_base = array();
-		$tous_modules_base = sql_allfetsel('nom_module','spip_tradlang_modules');
+		$tous_modules_base = sql_allfetsel('module','spip_tradlang_modules');
 		foreach($tous_modules_base as $module => $nom_module){
-			$tous_modules_en_base[] = $nom_module['nom_module'];
+			$tous_modules_en_base[] = $nom_module['module'];
 		}
 	}
 	$tous_modules = array();

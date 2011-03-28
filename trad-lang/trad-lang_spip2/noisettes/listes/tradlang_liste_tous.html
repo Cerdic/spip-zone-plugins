@@ -30,7 +30,7 @@
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
 	<BOUCLE_revise_cible(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}>
 	#SET{str_cible,#GET{str_cible}|push{#ID}}
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|sinon{ok})]">
 		<td>#ID</td>
 		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
 		<td class="status[_(#STATUS|strtolower)]">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
@@ -38,7 +38,7 @@
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		<td class="#EDIT{str_statut}">[(#STR**)]</td>
-		<td>#STATUS</td>
+		<td>[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
 	</tr>
 	</BOUCLE_revise_cible>
 	</tbody>

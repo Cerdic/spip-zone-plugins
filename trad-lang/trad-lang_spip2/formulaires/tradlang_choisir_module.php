@@ -2,7 +2,7 @@
 
 function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$lang_cible="",$lang_crea=""){
 	$module_defaut = sql_getfetsel('nom_mod','spip_tradlang_modules','','','','0,1');
-	
+	$module = _request('module') ? _request('module') : $module;
 	/**
 	 * Si aucun module dans la base
 	 */
@@ -22,7 +22,14 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 	}
 	
 	$valeurs['lang_mere'] = sql_getfetsel('lang_mere','spip_tradlang_modules',"module=".sql_quote($valeurs['module']));
-
+	include_spip('inc/lang_liste');
+	$langues_modules = sql_select('DISTINCT lang','spip_tradlang','module='.sql_quote($module));
+	while($langue = sql_fetch($langues_modules)){
+		$langues_presentes[$langue['lang']] = traduire_nom_langue($langue['lang']);
+	}
+	$langues_possibles = array_diff($GLOBALS['codes_langues'],$langues_presentes);
+	spip_log($langues_presentes);
+	$valeurs['_langues_possibles'] = $langues_possibles;
 	if(!$lang_orig){
 		$valeurs['lang_orig'] = $valeurs['lang_mere'];
 	}
@@ -31,7 +38,7 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 
 function formulaires_tradlang_choisir_module_verifier($module="",$lang_orig="",$lang_cible="",$lang_crea=""){
 	$erreur = array();
-	if(!_request('lang_cible')){
+	if(!_request('lang_cible') && !_request('creer_lang_cible')){
 		$erreur['lang_cible'] = _T('tradlang:erreur_pas_langue_cible');
 	}
 	return $erreur;
@@ -41,10 +48,19 @@ function formulaires_tradlang_choisir_module_traiter($module="",$lang_orig="",$l
 	$module = _request('module');
 	$lang_orig = _request('lang_orig');
 	$lang_cible = _request('lang_cible');
-	$lang_crea = _request('lang_crea');
+	$lang_crea = _request('creer_lang_cible');
 	if($traduire = _request('traduire')){
-		$res['message_ok'] = 'On passe à la traduction';
-		$res['redirect'] = generer_url_public("tradlang","etape=traduction&module=$module&lang_orig=$lang_orig&lang_cible=$lang_cible");
+		include_spip('inc/autoriser');
+		$res['message_ok'] = _T('tradlang:message_passage_trad');
+		if($lang_crea && autoriser('tradlang','configurer')){
+			// Import de la langue mere
+			$infos_module = sql_fetsel('*','spip_tradlang_modules','nom_mod='.sql_quote($module));
+			$ajouter_code_langue = charger_fonction('tradlang_ajouter_code_langue','inc');
+			$ajouter_code_langue($infos_module,$lang_crea);
+			$lang_cible = $lang_crea;
+			$res['message_ok'] = _T('tradlang:message_passage_trad_creation_lang',array('lang'=>$lang_crea));
+		}
+		$res['redirect'] = parametre_url(parametre_url(parametre_url(parametre_url(generer_url_public("tradlang","etape=traduction"),"module",$module),"lang_orig",$lang_orig),"lang_cible",$lang_cible),'lang_crea',$lang_crea);
 	}else{
 		$res['editable'] = true;
 	}
