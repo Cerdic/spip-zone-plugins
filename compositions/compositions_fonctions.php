@@ -216,16 +216,27 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 /**
  * #COMPOSITION
  * Renvoie la composition s'appliquant à un objet
- * en tenant compte, le cas échéant, de l'héritage
+ * en tenant compte, le cas échéant, de l'héritage.
  *
- * @param <type> $p
- * @return <type>
+ * Sans precision, l'objet et son identifiant sont pris
+ * dans la boucle en cours, mais l'on peut spécifier notre recherche
+ * en passant objet et id_objet en argument de la balise :
+ * #COMPOSITION{article, 8}
+ * 
+ *
+ * @param array $p 	AST au niveau de la balise
+ * @return array	AST->code modifié pour calculer le nom de la composition
  */
 function balise_COMPOSITION_dist($p) {
-	$_id_objet = $p->boucles[$p->id_boucle]->primary;
-	$id_objet = champ_sql($_id_objet, $p);
-	$objet = $p->boucles[$p->id_boucle]->id_table;
-	$p->code = "compositions_determiner(objet_type('$objet'), $id_objet)";
+	if ($objet = interprete_argument_balise(1, $p)) {
+		$id_objet = interprete_argument_balise(2, $p);
+	} else {
+		$_id_objet = $p->boucles[$p->id_boucle]->primary;
+		$id_objet = champ_sql($_id_objet, $p);
+		$objet = "'" . $p->boucles[$p->id_boucle]->id_table . "'";
+	}
+	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+	$p->code = "compositions_determiner(objet_type($objet), $id_objet, '$connect')";
 	return $p;
 }
 
