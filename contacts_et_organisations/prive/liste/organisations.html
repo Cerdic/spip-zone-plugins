@@ -12,6 +12,7 @@
 		<tr class='first_row'>
 			<th class="logo"></th>
 			<th class='nom'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+            <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
 			<th class='action'></th>
 		</tr>
 	</thead>
@@ -22,6 +23,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
 			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
+            <td class='nb_contacts'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#MODELE{nb_contacts}{id_organisation})]</a></td>
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_organisation:>})],

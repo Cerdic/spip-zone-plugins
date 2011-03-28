@@ -1,0 +1,4 @@
+[(#REM) Retourne le nombre de contacts liés à une organisation ]
+<BOUCLE_o(ORGANISATIONS){id_organisation}>
+<BOUCLE_c(CONTACTS){id_organisation}> </BOUCLE_c>[#TOTAL_BOUCLE (#TOTAL_BOUCLE|=={1}|?{<:contacts:nb_contact:>,<:contacts:nb_contacts:>})]</B_c>
+</BOUCLE_o>

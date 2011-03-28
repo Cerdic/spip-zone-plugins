@@ -37,6 +37,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'infos_contacts_ou_organisations' => "Contacts & Organisations",
 	'info_tous_contacts' => "All the contacts",
+	'info_nb_contacts' => 'Linked contacts',	
 	'info_toutes_organisations' => "All the organisations",
 	'info_organisation_appartenance' => "Belonging Organisation",
 	'info_contacts_organisation' => "Organisation's contacts",
