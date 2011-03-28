@@ -1,7 +1,7 @@
 <?php
 
 function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$lang_cible="",$lang_crea=""){
-	$module_defaut = sql_getfetsel('nom_mod','spip_tradlang_modules','','','','0,1');
+	$module_defaut = sql_getfetsel('module','spip_tradlang_modules','','','','0,1');
 	$module = _request('module') ? _request('module') : $module;
 	/**
 	 * Si aucun module dans la base
@@ -28,7 +28,16 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 		$langues_presentes[$langue['lang']] = traduire_nom_langue($langue['lang']);
 	}
 	$langues_possibles = array_diff($GLOBALS['codes_langues'],$langues_presentes);
-	spip_log($langues_presentes);
+	
+	$config = @unserialize($GLOBALS['meta']['tradlang']);
+	if (is_array($config) && is_array($config['langues_autorisees'])){
+		foreach($config['langues_autorisees'] as $key=>$val){
+			$langues_conf[$val] = traduire_nom_langue($val);
+		}
+		spip_log($langues_conf);
+		$langues_possibles = array_intersect_key($langues_possibles,$langues_conf);	
+	}
+		
 	$valeurs['_langues_possibles'] = $langues_possibles;
 	if(!$lang_orig){
 		$valeurs['lang_orig'] = $valeurs['lang_mere'];

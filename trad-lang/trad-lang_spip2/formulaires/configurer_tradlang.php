@@ -8,11 +8,16 @@ function formulaires_configurer_tradlang_charger_dist(){
 	if (!is_array($valeurs))
 		$valeurs = array();
 	
+	include_spip('inc/lang_liste');
+	$valeurs['_langues_possibles'] = $GLOBALS['codes_langues'];
 	return $valeurs;
 }
 
 function formulaires_configurer_tradlang_verifier_dist(){
 	$erreurs = array();
+	if(($langues_autorisees = _request('langues_autorisees')) && (count($langues_autorisees)<2)){
+		$erreurs['langues_autorisees'] = _T('tradlang:erreur_langues_autorisees_insuffisantes');
+	}
 	return $erreurs;
 }
 
@@ -21,6 +26,7 @@ function formulaires_configurer_tradlang_traiter_dist(){
 	foreach(array(
 		"sauvegarde_locale",
 		"sauvegarde_post_edition",
+		"langues_autorisees",
 		"configurer_type",
 		"configurer_statuts",
 		"configurer_auteurs",

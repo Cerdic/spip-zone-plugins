@@ -47,8 +47,18 @@ table.liste_traductions td {
 	vertical-align:top;
 }
 
+
+
 table.liste_traductions tr.odd td {
 	background-color:#F0F0F6;
+}
+
+table.liste_traductions tr.statut_NEW td{
+	background-image:url(images/back_new.png);
+}
+
+table.liste_traductions tr.statut_MODIF td{
+	background-image:url(images/back_modify.png);
 }
 
 .traducteur #contenu{

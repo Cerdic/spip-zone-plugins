@@ -70,9 +70,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_code_langue_existant' => 'Cette variante de langue existe d&eacute;j&agrave; pour ce module',
 'erreur_code_langue_invalide' => 'Ce code de langue est invalide',
 'erreur_code_langue_vide' => 'Le code de langue est obligatoire',
+'erreur_langues_autorisees_insuffisantes' => 'Vous devez au moins s&eacute;lectionner deux langues',
 'erreur_module_inconnu' => 'Ce module n\'est pas disponible',
 'erreur_pas_langue_cible' => 'S&eacute;lectionnez une langue cible',
 'erreur_repertoire_local_inexistant' => 'Attention : le répertoire pour la sauvegarde locale "squelettes/lang" est inexistant',
+'explication_langues_autorisees' => 'Les utilisateurs ne pourront cr&eacute;er de nouvelles traductions que dans les langues s&eacute;lectionn&eacute;es.',
 'explication_sauvegarde_locale' => 'Sauvegardera les fichiers dans le dossier squelette du site',
 'explication_sauvegarde_post_edition' => 'Sauvegardera les fichiers temporaires &agrave; chaque modification de chaine de langue',
 
@@ -115,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_choisir_module_langue' => 'Choisir un module de langue',
 'label_idmodule' => 'ID du module',
 'label_langue_mere' => 'Langue m&egrave;re',
+'label_langues_autorisees' => 'N\'autoriser que certaines langues',
 'label_langues_dispo_module_langue' => 'Langues d&eacute;j&agrave; disponibles pour ce module',
 'label_nommodule' => 'Personnaliser le nom du module',
 'label_repertoire_module_langue' => 'R&eacute;pertoire du module',
@@ -144,6 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // M
+'message_aucune_nouvelle_langue_dispo' => 'Ce module est disponible dans toutes les langues possibles',
 'message_demande_update_langues_cible_mere' => 'Vous pouvez demander &agrave; un administrateur de resynchroniser cette langue avec la langue principale.',
 'message_module_langue_ajoutee' => 'La langue "@langue@" a &eacute;t&eacute; ajout&eacute;e au module "@module@".',
 'message_module_updated' => 'Le module de langue "@module@" a &eacute;t&eacute; mis &agrave; jour.',
