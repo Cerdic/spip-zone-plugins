@@ -11,7 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_tradlang_synchro_base_fichier_dist(){
 	$config = @unserialize($GLOBALS['meta']['tradlang']);
-	if(is_array($config) && ($config['sauvegarde_locale'] == 'on')){
+	if(is_array($config) && ($config['sauvegarde_locale'] != 'on')){
 		return false;
 	}
 	$securiser_action = charger_fonction('securiser_action', 'inc');
