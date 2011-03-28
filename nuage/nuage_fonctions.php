@@ -95,6 +95,7 @@ function critere_popularite_branche($idb, &$boucles, $crit){
 }
 
 function nuage_note($score,$scoremax=1,$max=10) {
+	if ($scoremax == 0) $scoremax = 1;
 	$score = pow(($score/$scoremax),1.5); # lissage
 	return ceil($max*$score);
 }
