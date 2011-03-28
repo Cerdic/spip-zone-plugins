@@ -7,7 +7,7 @@
 </nom>
 <auteur>Amaury Adon avec beaucoup d'aide sur la zone (merci à tous !)</auteur>
 <licence>GNU/GPL</licence>
-<version>1.1</version>
+<version>1.2</version>
 <etat>test</etat>
 <version_base>0.1</version_base>
 <description>
@@ -32,7 +32,9 @@ Vous pouvez également installer le plugin Crayons avec lequel ce plugin est ent
 
 	<necessite id="agenda" version="[2.0;]" src="http://files.spip.org/spip-zone/agenda2.zip"/>
 	<necessite id="cextras" version="[1.0.1;]" />
+	<necessite id="kitcnrs" version="[4.0.8;]" src="http://www.harmoweb.cnrs.fr/spip.php?article79"/>
 	<necessite id="SPIP" version="[2.0.10;]" />
+
 
 	<options>seminaire_options.php</options>
 	<install>base/seminaire_install.php</install>
