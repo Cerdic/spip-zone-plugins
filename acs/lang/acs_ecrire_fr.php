@@ -1,4 +1,4 @@
-  <?php
+<?php
 
 // Espace ecrire d'ACS
 
