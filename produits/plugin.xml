@@ -31,6 +31,10 @@
 		<inclure>base/produits_tables.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>produits_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>affiche_enfants</nom>
 		<inclure>produits_pipelines.php</inclure>
 	</pipeline>

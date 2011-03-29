@@ -3,6 +3,12 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// Déclarer pour l'URL des produits
+function produits_declarer_url_objets($objets){
+	$objets[] = 'produit';
+	return $objets;
+}
+
 // Insérer les listes de produits et le bouton de création dans les pages rubriques
 function produits_affiche_enfants($flux){
 	if ($flux['args']['id_rubrique'] > 0){
