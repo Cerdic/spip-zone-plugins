@@ -958,6 +958,15 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 								$class_li = 'editer_'.$saisie['options']['nom'];
 						}
 						$condition = $saisie['options']['afficher_si'];
+						// On gère le cas @plugin:non_plugin@
+						preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
+						foreach ($matches[1] as $plug) {
+							if (defined('_DIR_PLUGIN_'.strtoupper($plug)))
+								$condition = preg_replace('#@plugin:'.$plug.'@#U', 'true', $condition);
+							else
+								$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
+						}
+						// On transforme en une condition valide
 						preg_match_all('#@(.+)@#U', $condition, $matches);
 						foreach ($matches[1] as $nom) {
 							switch($saisies[$nom]['saisie']) {
@@ -1010,6 +1019,15 @@ function saisies_verifier_afficher_si($saisies,$env) {
 	foreach ($saisies as $cle => $saisie) {
 		if (isset($saisie['options']['afficher_si'])) {
 			$condition = $saisie['options']['afficher_si'];
+			// On gère le cas @plugin:non_plugin@
+			preg_match_all('#@plugin:(.+)@#U', $condition, $matches);
+			foreach ($matches[1] as $plug) {
+				if (defined('_DIR_PLUGIN_'.strtoupper($plug)))
+					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'true', $condition);
+				else
+					$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
+			}
+			// On transforme en une condition valide
 			$condition = preg_replace('#@(.+)@#U', '$env["valeurs"][\'$1\']', $condition);
 			eval('$ok = '.$condition.';');
 			if (!$ok)
