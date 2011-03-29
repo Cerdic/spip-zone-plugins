@@ -158,12 +158,23 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 					}
 				}
 			}
+			else if (count ($mes_abos))
+			{
+				// tout est déselectionné ?
+				// supprimer tout les abonnements !
+				spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
+				$mes_abos = array();
+			}
 			
 			if($format != $prev_format)
 			{
-				if($format == 'non')
+				if ($format == 'non')
 				{
-					spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
+					if (count ($mes_abos))
+					{
+						spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
+					}
+					
 					$message_ok = _T('spiplistes:desabonnement_valid').' :&nbsp;'.$email;  
 				}
 				else {
