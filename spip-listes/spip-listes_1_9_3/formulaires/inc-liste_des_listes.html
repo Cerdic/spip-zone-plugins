@@ -1,10 +1,33 @@
+[<!-- (#REM)
+
+// $LastChangedRevision: 45629 $
+// $LastChangedBy: paladin@quesaco.org $
+// $LastChangedDate: 2011-03-21 16:36:52 +0100 (Lun 21 mar 2011) $
+
+/**
+ * @since SPIP 2
+ */
+
+mini-squelette
+Présente la liste des listes de diffusion
+- privées et publiques si l'abonné est auteur ou admin
+- publiques dans les autres cas
+
+Le STATUT&nbsp;est transmis par le squelette appelant
+
+-->]
+
+#SET{liste_statuts, #ARRAY{0,liste,1,pub_jour,2,pub_hebdo,3,pub_7jours,4,pub_mensul,5,pub_mois,6,pub_an}} 
+
+[(#STATUT|=={0minirezo}|ou{#STATUT|=={1comite}}|?{#SET{liste_statuts, #GET{liste_statuts}|push{inact}}})]
+
 <B_listes>
 <li class="liste-des-listes fieldset">
 	<fieldset><legend class="legend">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:listes_de_diffusion_:>})]</legend>
 	[<p class="explication">(#ENV{explication})</p>]
 	<ul>
 		[<!--(#REM) @todo 20110326, manque les listes privées (inact)-->]
-	<BOUCLE_listes(LISTES) {id_liste?} {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}>
+	<BOUCLE_listes(LISTES) {id_liste?} {statut IN #GET{liste_statuts}}>
 		<li>
 	#SET{checked,non}<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}>#SET{checked,oui}</BOUCLE_inscription>
 		<div class="choix">
@@ -15,7 +38,7 @@
 				   id="liste_#ID_LISTE"
 				   [(#GET{checked}|=={oui}|oui)checked="checked"]
 				   />
-			<label for="liste_#ID_LISTE">#TITRE[ ((#TEXTE|textebrut|couper{80}))]</label>
+			<label for="liste_#ID_LISTE">#ID_LISTE #TITRE[ ((#TEXTE|textebrut|couper{80}))]</label>
 		</div>
 		</li>
 	</BOUCLE_listes>
