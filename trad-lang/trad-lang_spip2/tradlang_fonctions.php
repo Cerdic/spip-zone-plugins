@@ -48,18 +48,17 @@ function tradlang_getmodules_base(){
  */
 function tradlang_testesynchro($idmodule, $langue){
 	$dir_lang = tradlang_dir_lang();
-	spip_log($dir_lang);
 	spip_log("testesynchro $idmodule - $langue",'tradlang');
 	$module = sql_fetsel('*','spip_tradlang_modules','id_tradlang_module='.intval($idmodule));
 	$nom_module = $module["module"];
 	$nom_mod = $module["nom_mod"];
-	//$dir_lang = $module["dir_lang"];
-	
+
 	$modules = tradlang_getmodules_base();
 	$modok = $modules[$nom_mod];
-	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
 	
+	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
 	$modules2 = $getmodules_fics($dir_lang);
+	
 	$modok2 = $modules2[$nom_mod];
 
 	// union entre modok et modok2

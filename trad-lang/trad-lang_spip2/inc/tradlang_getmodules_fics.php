@@ -8,7 +8,6 @@
  */
 function inc_tradlang_getmodules_fics($rep){
 	$ret = array();
-	$rep = _DIR_RACINE.$rep;
 	// parcourt de l'ensemble des fichiers
 	$handle = opendir($rep);  
 	while (($fichier = readdir($handle)) != ''){
@@ -18,7 +17,7 @@ function inc_tradlang_getmodules_fics($rep){
 		$nom_fichier = $rep."/".$fichier;
 		if (is_file($nom_fichier)){
 			// cherche un fichier de la forme <nom module>_<langue>.php
-			if (preg_match("/^([a-z]*)_([a-z_]*)\.php$/i", $fichier, $match)){
+			if (preg_match("/^([a-z0-9]*)_([a-z_]*)\.php$/i", $fichier, $match)){
 				if(array_key_exists($match[2],$GLOBALS['codes_langues'])){
 					$nommod = $match[1];
 					$langue = $match[2];
@@ -33,7 +32,7 @@ function inc_tradlang_getmodules_fics($rep){
 						}
 						$ret[$nommod]["langue_".$langue] = $fichier;
 					}
-				}else if(preg_match('/^([a-z]*_[a-z]*)_([a-z_]*)\.php$/i',$fichier,$match)){
+				}else if(preg_match('/^([a-z0-9]*_[a-z0-9]*)_([a-z_]*)\.php$/i',$fichier,$match)){
 					if(array_key_exists($match[2],$GLOBALS['codes_langues'])){
 						$nommod = $match[1];
 						$langue = $match[2];
