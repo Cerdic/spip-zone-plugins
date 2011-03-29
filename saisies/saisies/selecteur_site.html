@@ -10,6 +10,7 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
     (seulement si non multiple)
   - cacher_option_intro : pas de premier option vide  (defaut:"")
+  - syndication : 'oui' ou 'non' (sélectionner uniquement les sites avec ou sans syndication)
 
 ]
 <select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"]>
@@ -18,7 +19,7 @@ Par défaut ne liste que ceux des rubriques à la racine (secteurs)
 	<BOUCLE_secteurs(RUBRIQUES){racine}{par num titre, titre}{tout}>
 	<B_sites>
 	<optgroup label="#TITRE">
-		<BOUCLE_sites(SITES){id_secteur}{par nom_site}>
+		<BOUCLE_sites(SITES){id_secteur}{par nom_site}{syndication ?}>
 		[(#ENV{multiple}|oui)
 		<option value="#ID_SYNDIC"[(#ID_SYNDIC|in_array{#ENV{valeur,#ENV{defaut,#ARRAY}}}|oui) selected="selected"]>#NOM_SITE</option>]
 		[(#ENV{multiple}|non)
