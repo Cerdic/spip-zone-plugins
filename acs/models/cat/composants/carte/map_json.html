@@ -4,30 +4,30 @@
          Squelette Cat
     http://acs.geomaticien.org
 
-Copyright Daniel FAIVRE, 2007-2011 (forked from GIS Escoitar plugin)
+Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Insere une carte interactive utilisant JSON. Requiert les plugins gis_escoitar et openlayers.
+
+Note: les fonds de plan Google ne sont disponibles que si la librairie Google Map API a été chargée par le plugin eponyme
 
 ]<script type="text/javascript">
   if (document.namespaces) { // only needed in IE
     document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
   }
   //<![CDATA[
-  URLbase = "[(#EVAL{_DIR_PLUGIN_GEOMAP}|url_absolue)]";
-  URLbaseGis = "[(#EVAL{_DIR_PLUGIN_GIS}|url_absolue)]";
-  MarkerImgBase = "[(#CHEMIN{img_pack/correxir.png}|url_absolue)]";
-  MarkerBaseWidth = "[(#CHEMIN{img_pack/correxir.png}|largeur)]";
-  MarkerBaseHeight = "[(#CHEMIN{img_pack/correxir.png}|hauteur)]";
-  MarkerShadowBase = "[(#CHEMIN{img_pack/shadow.png}|url_absolue)]";
-  MarkerShadowWidth = "[(#CHEMIN{img_pack/shadow.png}|largeur)]";
-  MarkerShadowHeight = "[(#CHEMIN{img_pack/shadow.png}|hauteur)]";
+  defPicto = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePicto,interrogation.png}}|url_absolue)]";
+  defPictoWidth = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePicto,interrogation.png}}|largeur)]";
+  defPictoHeight = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePicto,interrogation.png}}|hauteur)]";
+  defPictoHover = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePictoHover,interrogation_hover.png}}|url_absolue)]";
+  defPictoHoverWidth = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePictoHover,interrogation_hover.png}}|largeur)]";
+  defPictoHoverHeight = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePictoHover,interrogation_hover.png}}|hauteur)]";
   
   [(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]
   var map[(#GET{id_carte_gis})];
   var markerManager[(#GET{id_carte_gis})];
   
-  [(#REM) Centrer sur les coordonnees de l'article passe en parametre, sinon celles de la sur la rubrique ]
+  [(#REM) Centrer sur les coordonnees de l'article passe en parametre, sinon sur celles de la rubrique ]
   <BOUCLE_centrer_article(GIS){id_article}{0,1}>
     [(#ENV{latit}|non)
       #SET{latitude,#LAT}]

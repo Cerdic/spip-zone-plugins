@@ -12,4 +12,4 @@ if (find_in_path($fond.'.html') && ($fond=@recuperer_fond($fond,array('nic' => '
   $styles .= $fond;
 if($styles != '')
   echo '<style>'.$styles.'</style>';
-?><INCLURE {fond=#ENV{c}}{nic=#NIC}{env}>
+?><INCLURE {fond=#ENV{c}}{nic=#NIC}{env}{self}{lang}>

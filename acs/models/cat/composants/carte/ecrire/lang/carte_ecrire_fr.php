@@ -18,6 +18,9 @@ Le centrage et le zoom sont ceux pass&eacute;s en param&egrave;tres, ou ceux de 
 'TitreFontSize' => 'Taille',
 'TextFont' => 'Fonte du texte',
 'TextFontFamily' => 'Famille',
-'TextFontSize' => 'Taille'
+'TextFontSize' => 'Taille',
+
+'Picto' => 'Pictogramme par d&eacute;faut',
+'PictoHover' => 'Au survol'
 );
 ?>

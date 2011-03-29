@@ -1,5 +1,15 @@
-[(#CACHE{15})]
-<BOUCLE_rub(RUBRIQUES){tous}{id_rubrique}>
+[(#CACHE{15})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Affiche la bulle d'information de la rubrique ou de l'article
+
+]<BOUCLE_rub(RUBRIQUES){tous}{id_rubrique}>
   [<a href='#URL_RUBRIQUE'>(#LOGO_RUBRIQUE|left|image_reduire{100,100})</a>]
   [<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]
   [<p>(#DESCRIPTIF)</p>]
@@ -12,3 +22,9 @@
   </ul>
   </B_articles>
 </BOUCLE_rub>
+<BOUCLE_art(ARTICLES){tous}{id_article}>
+  [<a href='#URL_ARTICLE'>(#LOGO_ARTICLE|left|image_reduire{100,100})</a>]
+  [<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]
+  [<p>(#DESCRIPTIF)</p>]
+  [<p>(#TEXTE)</p>]
+</BOUCLE_art>

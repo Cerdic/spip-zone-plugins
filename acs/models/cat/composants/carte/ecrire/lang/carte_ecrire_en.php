@@ -16,6 +16,9 @@ these categories are displayed with their keyword icon as marker on the map.',
 'TitreFontSize' => 'Size',
 'TextFont' => 'Text font',
 'TextFontFamily' => 'Family',
-'TextFontSize' => 'Size'
+'TextFontSize' => 'Size',
+
+'Picto' => 'Default marker',
+'PictoHover' => 'Hover'
 );
 ?>

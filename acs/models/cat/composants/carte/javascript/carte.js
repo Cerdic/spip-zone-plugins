@@ -25,32 +25,38 @@ function loadPictos(map, urlPictos, idmap, msg) {
 	});
 }
 
+function img2icon(i, dp, dpW, dpH) {
+  if (typeof i == "undefined") {
+    var url = dp;
+    var imgW = dpW;
+    var imgH = dpH;
+  }
+  else {
+    var url = i.image;
+    var imgW = parseInt(i.width);
+    var imgH = parseInt(i.height);
+  }
+  var size = new OpenLayers.Size(imgW,imgH);
+  var offset = function(size) { return new OpenLayers.Pixel(-size.w/2, -size.h/2); };
+  var icon = new OpenLayers.Icon(
+		url,
+    size,
+    null,
+    offset
+  );
+  return icon;
+}
+
 function addPicto(item, markerLayer, map) {
 	if ((typeof(item.lat) == "undefined")||(typeof(item.lon) == "undefined")) return;
 	else {
 		var popup = null;
 		var lat = parseFloat(item.lat);
 		var lng = parseFloat(item.lon);
-		var point = new OpenLayers.LonLat(lng,lat);    
-    var i = item.icon;
-    if (typeof i.image != "undefined") {
-	    var img = i.image;
-	    var imgW = parseInt(i.imageWidth);
-	    var imgH = parseInt(i.imageHeight);
-    }
-    else {
-	    var img = MarkerImgBase;
-	    var imgW = MarkerBaseWidth;
-	    var imgH = MarkerBaseHeight;
-    }
-    var size = new OpenLayers.Size(imgW,imgH);
-    var offset = function(size) { return new OpenLayers.Pixel(-size.w/2, -size.h/2); };
-    var icon = new OpenLayers.Icon(
-    	img,
-      size,
-      null,
-      offset
-    );
+		var point = new OpenLayers.LonLat(lng,lat);
+    var icon = img2icon(item.icon, defPicto, defPictoWidth, defPictoHeight);
+    var iconUrl = icon.url;
+    var overUrl = img2icon(item.over, defPictoHover, defPictoHoverWidth, defPictoHoverHeight).url;
     var html = '<div class="bulle"><p class="titre"><a href="' + item.url + '">' + item.title + '</a></p><div id="pa' + item.id + '"><img src="" /></div></div>';
 		var marker = new OpenLayers.Marker(point.fromDataToDisplay(), icon);
 		jQuery(marker.icon.imageDiv).attr("title", item.title);
@@ -73,10 +79,12 @@ function addPicto(item, markerLayer, map) {
     });
 		marker.events.register("mouseover", marker, function onmouseover(evt) {
       jQuery(marker.icon.imageDiv).css("cursor", "pointer");
+      marker.setUrl(overUrl);
       OpenLayers.Event.stop(evt);
     });
  		marker.events.register("mouseout", marker, function onmouseout(evt) {
       jQuery(marker.icon.imageDiv).css("cursor", "");
+      marker.setUrl(iconUrl);
       OpenLayers.Event.stop(evt);
     });
 		markerLayer.addMarker(marker);
