@@ -110,6 +110,7 @@ div.bloc-formats {text-align: left;}
 
 ul.liste-des-listes {}
 ul.liste-des-listes li { margin-bottom:3px }
+ul.liste-des-listes span.text-list { font-style:italic }
 
 ul.liste-formats {}
 ul.liste-formats input {display:block; width:2ex; float:left }

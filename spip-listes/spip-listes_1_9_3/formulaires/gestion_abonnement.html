@@ -50,7 +50,7 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 		<div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="d" value="[(#ENV{d})]" />
-		<ul>
+		<ul class="liste-des-listes">
 		[(#INCLURE{fond=formulaires/inc-liste_des_listes}{env}{statut=#GET{statut_auteur}}
 			{explication=<:spiplistes:vous_etes_abonne_aux_listes_selectionnees_:>})]
 		<li class="bloc-formats fieldset">

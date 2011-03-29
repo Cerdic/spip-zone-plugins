@@ -38,7 +38,7 @@ Le STATUT&nbsp;est transmis par le squelette appelant
 				   id="liste_#ID_LISTE"
 				   [(#GET{checked}|=={oui}|oui)checked="checked"]
 				   />
-			<label for="liste_#ID_LISTE">#TITRE[ ((#TEXTE|textebrut|couper{80}))]</label>
+			<label for="liste_#ID_LISTE">#TITRE[ <span class="text-list">((#TEXTE|textebrut|couper{80}))</span>]</label>
 		</div>
 		</li>
 	</BOUCLE_listes>
