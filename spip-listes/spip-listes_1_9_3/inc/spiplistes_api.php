@@ -316,7 +316,7 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false
 		$sql_where[] = 'id_auteur='.sql_quote($id_auteur);
 		$msg1 = 'id_auteur #'.$id_auteur;
 	}
-	if(count($sql_where))
+	if(count($sql_where) && $id_liste)
 	{
 		$sql_table = 'spip_auteurs_listes';
 		

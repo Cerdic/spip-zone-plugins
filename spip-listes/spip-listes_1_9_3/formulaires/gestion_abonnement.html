@@ -13,7 +13,7 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 -->]<BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}{0,1}>
 <div class="message-formulaire">
 	<p class='nom'>#NOM</p>
-	[(#SET{nom_auteur,#NOM})]
+	[(#SET{statut_auteur,#STATUT})]
 </div>
 </BOUCLE_auteur>
 
@@ -51,7 +51,7 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input type="hidden" name="d" value="[(#ENV{d})]" />
 		<ul>
-		[(#INCLURE{fond=formulaires/inc-liste_des_listes}{env}
+		[(#INCLURE{fond=formulaires/inc-liste_des_listes}{env}{statut=#GET{statut_auteur}}
 			{explication=<:spiplistes:vous_etes_abonne_aux_listes_selectionnees_:>})]
 		<li class="bloc-formats fieldset">
 			<fieldset><legend class="legend"><:spiplistes:format_de_reception:></legend>
