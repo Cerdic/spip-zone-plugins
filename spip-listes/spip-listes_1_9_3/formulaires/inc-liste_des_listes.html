@@ -26,7 +26,6 @@ Le STATUT&nbsp;est transmis par le squelette appelant
 	<fieldset><legend class="legend">[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:abo_1_lettre:>,<:spiplistes:listes_de_diffusion_:>})]</legend>
 	[<p class="explication">(#ENV{explication})</p>]
 	<ul>
-		[<!--(#REM) @todo 20110326, manque les listes privées (inact)-->]
 	<BOUCLE_listes(LISTES) {id_liste?} {statut IN #GET{liste_statuts}}>
 		<li>
 	#SET{checked,non}<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}>#SET{checked,oui}</BOUCLE_inscription>
