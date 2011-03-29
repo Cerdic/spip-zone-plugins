@@ -1,40 +1,85 @@
-.texteencadre-spip {
-	color: #000033;
-	background: #EEF;
-	border-bottom: 2px solid #0066CC;
-	border-left: 1px solid #3399FF;
-	border-right: 2px solid #0066CC;
-	border-top: 1px solid #3399FF;
-	margin: 1em 0;	
-	padding: .25em;	
-	position: relative;
+.texteencadre-spip {
+	color: #000033;
+	background: #EEF;
+	border-bottom: 2px solid #0066CC;
+	border-left: 1px solid #3399FF;
+	border-right: 2px solid #0066CC;
+	border-top: 1px solid #3399FF;
+	margin: 1em 0;	
+	padding: .25em;	
+	position: relative;
+}
+
+.caractencadre-spip {
+	color: #F60;
+	font-weight: bold;
+}
+
+.caractencadre2-spip {
+	color: #009;
+	font-weight: bold;
+}
+
+acronym.spip_acronym {
+	cursor: help;
+	border-bottom: 1px dotted;
+}
+
+/* ne marche pas sur MSIE, a refaire en jQuery */
+a[hreflang]:after {
+content: "\0000a0[" attr(hreflang) "]";
+color: #999;
+background: transparent;
+font-size:x-small;
+}
+
+sup {
+	vertical-align:20%;
+	font-variant: small-caps;
+	font-size: .5em;
 }
 
-.caractencadre-spip {
-	color: #F60;
-	font-weight: bold;
+/* boite a choses */
+.bac{
+	display:block;
+	padding:0 20px 0 0;
+	margin:10px;
+	width:145px;
+	float:right;
+}
+}
+.bac div.subac {
+	padding:2px 0 0 0;
+	margin:0;
+}
+.bac div.subac ul {padding:0;margin:0}
+.bac div.subac ul li{
+	padding:5px;margin:0;
+	li-style:none;
+	display:block;
+	background-color:#820132;
+/*	border-top: 1px solid #ff8c00;*/
+	font-family:arial, helvetica, sans-sherif;
+	font-size:7pt;
+	color:#ff8c00;
+}
+.bac div.subac p {
+	padding:5px;margin:0;
+	background-color:#820132;
+	color:#ff8c00;
 }
 
-.caractencadre2-spip {
-	color: #009;
-	font-weight: bold;
+.bac div.subac li:first-child, .bacnoborder {	border-top: none;}
+
+.bac div.subac ul li a {
+	color:#ff8c00;
+	text-decoration:none;
+	font-size:14pt;
 }
 
-acronym.spip_acronym {
-	cursor: help;
-	border-bottom: 1px dotted;
-}
+.boitedepliante {display:none;}
+.boitedepliante_encadre{border:1px solid #CCD10A; padding:8px}
 
-/* ne marche pas sur MSIE, a refaire en jQuery */
-a[hreflang]:after {
-content: "\0000a0[" attr(hreflang) "]";
-color: #999;
-background: transparent;
-font-size:x-small;
-}
+.boitejaune {background-color:#DBDF53}
 
-sup {
-	vertical-align:20%;
-	font-variant: small-caps;
-	font-size: .5em;
-}
+.bonasavoir{border:none;}

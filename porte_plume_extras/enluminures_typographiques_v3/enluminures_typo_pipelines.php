@@ -174,6 +174,66 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 				"display"     => true,
 				"selectionType" => "line",
 			),
+			// Gestion de la <boitedepliante>
+			array(
+				"id"          => 'boite_depliante',
+				"name"        => _T('barre_outils:boite_depliante'),
+				"className"   => "outil_boite_depliante", 
+				"openWith"    => "\n&lt;boitedepliante&gt;", 
+				"closeWith"   => "&lt;/boitedepliante&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+			// Gestion de la <boitejaune>
+			array(
+				"id"          => 'boite_jaune',
+				"name"        => _T('barre_outils:boite_jaune'),
+				"className"   => "outil_boite_jaune", 
+				"openWith"    => "\n&lt;boitejaune&gt;", 
+				"closeWith"   => "&lt;/boitejaune&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+			// Gestion de la <bonasavoir>
+			array(
+				"id"          => 'bonasavoir',
+				"name"        => _T('barre_outils:bonasavoir'),
+				"className"   => "outil_bonasavoir", 
+				"openWith"    => "\n&lt;bonasavoir&gt;", 
+				"closeWith"   => "&lt;/bonasavoir&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+			// Gestion de la <attention>
+			array(
+				"id"          => 'attention',
+				"name"        => _T('barre_outils:attention'),
+				"className"   => "outil_attention", 
+				"openWith"    => "\n&lt;attention&gt;", 
+				"closeWith"   => "&lt;/attention&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+			// Gestion de la <exemple>
+			array(
+				"id"          => 'exemple',
+				"name"        => _T('barre_outils:exemple'),
+				"className"   => "outil_exemple", 
+				"openWith"    => "\n&lt;exemple&gt;", 
+				"closeWith"   => "&lt;/exemple&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+			// Gestion de la <lettrine>
+			array(
+				"id"          => 'lettrine',
+				"name"        => _T('barre_outils:lettrine'),
+				"className"   => "outil_lettrine", 
+				"openWith"    => "\n&lt;lettrine&gt;", 
+				"closeWith"   => "&lt;/lettrine&gt;\n",
+				"display"     => true,
+				"selectionType" => "word",
+			),
 		),
 	));	
 	
@@ -204,6 +264,13 @@ function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
 		'outil_barre_code' => 'page_white_code_red.png',
 		'outil_barre_cadre' => 'page_white_code.png',
 		'outil_barre_poesie' => 'poesie.png',
+
+		'outil_boite_depliante' => 'note.png',
+		'outil_boite_jaune' => 'note.png',
+		'outil_bonasavoir' => 'bonasavoir-a.png',
+		'outil_attention' => 'attention-a.png',
+		'outil_exemple' => 'note.png',
+		'outil_lettrine' => 'lettrine.png',
 
 		'outil_miseenevidence' => 'miseenevidence.png',
 		'outil_miseenevidence2' => 'miseenevidence2.png',
