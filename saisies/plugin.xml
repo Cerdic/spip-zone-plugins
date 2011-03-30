@@ -63,5 +63,6 @@
     
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="verifier" />
+	<utilise id="spip_bonux" />
 	<traduire gestionnaire="salvatore" module="saisies" reference="fr" />
 </plugin>
