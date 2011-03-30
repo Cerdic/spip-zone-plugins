@@ -9,10 +9,10 @@
 #ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li class="editer_taille">
-			<label for="taille"><:qrcode:taille:></label></th>
-			<p class="explication"><:qrcode:taille_aide:></p>
+			<label for="taille"><:qrcode:label_taille:></label>
+			<p class="explication"><:qrcode:explication_taille_aide:></p>
 			<select name="taille" id="taille">
-				<option value=""[(#ENV{taille}|=={''}|?{' selected'})]>non configuré</option>
+				<option value=""[(#ENV{taille}|=={''}|?{' selected'})]><:qrcode:option_non_configure:></option>
 				<option value="1"[(#ENV{taille}|=={1}|?{' selected'})]>1 pixel</option>
 				<option value="2"[(#ENV{taille}|=={2}|?{' selected'})]>2 pixels</option>
 				<option value="3"[(#ENV{taille}|=={3}|?{' selected'})]>3 pixels</option>
@@ -26,10 +26,10 @@
 			</select>
 		</li>
 		<li class="editer_eed">
-			<label for="ecc"><:qrcode:ecc:></label></th>
-			<p class="explication"><:qrcode:ecc_aide:></p>
+			<label for="ecc"><:qrcode:label_ecc:></label>
+			<p class="explication"><:qrcode:explication_ecc_aide:></p>
 			<select name="ecc" id="eec">
-				<option value=""[(#ENV{ecc}|=={''}|?{' selected'})]>non configuré</option>
+				<option value=""[(#ENV{ecc}|=={''}|?{' selected'})]><:qrcode:option_non_configure:></option>
 				<option value="L"[(#ENV{ecc}|=={'L'}|?{' selected'})]>&nbsp;7%</option>
 				<option value="M"[(#ENV{ecc}|=={'M'}|?{' selected'})]>15%</option>
 				<option value="Q"[(#ENV{ecc}|=={'Q'}|?{' selected'})]>25%</option>
@@ -39,22 +39,22 @@
 		<li class="editer_documents">
 			<div class="choix">
 				<input type="checkbox" name="documents" id="documents" class="checkbox"[(#ENV{documents}|?{' checked'})]/>
-				<label for="documents"><:qrcode:utiliser_pour_documents_joints:></label>
+				<label for="documents"><:qrcode:label_utiliser_pour_documents_joints:></label>
 			</div>
-		</tr>
+		</li>
 		<li class="editer_remplacecssid">
-			<label for="remplacecssid"><:qrcode:remplace_css_id:></label>
-			<p class="explication"><:qrcode:remplace_css_id_aide:></p>
+			<label for="remplacecssid"><:qrcode:label_remplace_css_id:></label>
+			<p class="explication"><:qrcode:explication_remplace_css_id_aide:></p>
 			<input type="text" name="remplacecssid" class="text" id="remplacecssid" value="#ENV{remplacecssid}"/>
 		</li>
 		<li class="editer_css">
-			<label for="css"><:qrcode:css:></label>
-			<p class="explication"><:qrcode:css_aide:></p>
+			<label for="css"><:qrcode:label_css:></label>
+			<p class="explication"><:qrcode:explication_css_aide:></p>
 			<input type="text" name="css" id="css" class="text" value="#ENV{css}"/>
-		</tr>
+		</li>
 		<li class="editer_style">
-			<label for="style"><:qrcode:style:></label>
-			<p class="explication"><:qrcode:style_aide:></p>
+			<label for="style"><:qrcode:label_style:></label>
+			<p class="explication"><:qrcode:explication_style_aide:></p>
 			<input type="text" name="style" id="style" class="text" value="#ENV{style}"/>
 		</li>
 	</ul>
