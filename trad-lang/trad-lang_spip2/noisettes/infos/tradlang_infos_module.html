@@ -10,9 +10,9 @@
 	#SET{total_mere,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p>
 	</B_langue_mere>
 	<BOUCLE_total_item_langue_mere_new(TRADLANG){module}{status=NEW}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_langue_mere_new>
-	<p>#LANG <:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
+	<p class="items_new"><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_new>
 	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{status=MODIF}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_langue_mere_modif>
-	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
+	<p class="items_modif"><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
 	[(#CONFIG{tradlang/sauvegarde_locale}|=={on}|oui)
 	[(#SET{sync,[(#ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG})]})]
 	[(#GET{sync}|oui)
@@ -35,9 +35,9 @@
 	<BOUCLE_total_item(TRADLANG){module}{lang=#LANG}{id != zz_timestamp_nepastraduire}>[(#SET{str_cible,#GET{str_cible}|push{#ID}})] </BOUCLE_total_item>
 	#SET{total,#TOTAL_BOUCLE}<p><:tradlang:items_total_nb:> : #TOTAL_BOUCLE</p></B_total_item>
 	<BOUCLE_total_item_new(TRADLANG){module}{status=NEW}{lang=#LANG}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_new>
-	<p><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_new>
+	<p class="items_new"><:tradlang:items_new:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_new>
 	<BOUCLE_total_item_modif(TRADLANG){module}{status=MODIF}{lang=#LANG}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_modif>
-	<p><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_modif>
+	<p class="items_modif"><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total}[ ((#GRAND_TOTAL|div{#GET{total}}|mult{100}|round)%)]</p></B_total_item_modif>
 	<BOUCLE_revise_inexistants(TRADLANG){module}{lang=#LANG_MERE}{!id IN #GET{str_cible}}{id != zz_timestamp_nepastraduire}> </BOUCLE_revise_inexistants>
 	[(#SET{nb_manquant,#TOTAL_BOUCLE})]  #SET{update,oui}
 	<p class="attention"><:tradlang:items_manquants{nb=#GET{nb_manquant}}:></p>

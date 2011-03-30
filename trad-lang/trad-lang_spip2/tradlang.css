@@ -53,12 +53,18 @@ table.liste_traductions tr.odd td {
 	background-color:#F0F0F6;
 }
 
-table.liste_traductions tr.statut_NEW td{
+table.liste_traductions tr.statut_new td.statut,.traducteur #navigation ul.infos p.items_new{
 	background-image:url(images/back_new.png);
+	background-repeat:no-repeat;
+	background-position:2px center;
+	padding-left:10px;
 }
 
-table.liste_traductions tr.statut_MODIF td{
+table.liste_traductions tr.statut_modif td.statut,.traducteur #navigation ul.infos p.items_modif{
 	background-image:url(images/back_modify.png);
+	background-repeat:no-repeat;
+	background-position:2px center;
+	padding-left:10px;
 }
 
 .traducteur #contenu{

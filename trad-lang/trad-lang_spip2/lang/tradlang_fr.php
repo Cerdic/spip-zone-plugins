@@ -12,7 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'bouton_supprimer_module' => 'Supprimer ce module',
 'bouton_traduire' => 'Traduire >>',
-'bouton_valider' => 'Valider',
 
 
 // C
