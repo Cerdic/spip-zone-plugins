@@ -79,7 +79,7 @@ function noizetier_compositions_lister_disponibles($flux){
 			$noizetier_compositions[$type] = array();
 		$flux['data'][$type] = array_merge($flux['data'][$type],$noizetier_compositions[$type]);
 	}
-	return $flux['data'];
+	return $flux;
 }
 
 /**
