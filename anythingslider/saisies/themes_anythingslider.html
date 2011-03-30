@@ -1,0 +1,12 @@
+[(#REM) 
+  Parametres :
+  - class : classe(s) css ajoutes au select
+]
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+	<option value="default"[(#ENV{valeur,#ENV{defaut}}|=={default}|oui)selected="selected"]>Default</option>
+	<option value="minimalist-round"[(#ENV{valeur,#ENV{defaut}}|=={minimalist-round}|oui)selected="selected"]>Minimalist-Round</option>
+	<option value="minimalist-square"[(#ENV{valeur,#ENV{defaut}}|=={minimalist-square}|oui)selected="selected"]>Minimalist-Square</option>
+	<option value="metallic"[(#ENV{valeur,#ENV{defaut}}|=={metallic}|oui)selected="selected"]>Metallic</option>
+	<option value="construction"[(#ENV{valeur,#ENV{defaut}}|=={construction}|oui)selected="selected"]>Construction</option>
+	<option value="cs-portfolio"[(#ENV{valeur,#ENV{defaut}}|=={cs-portfolio}|oui)selected="selected"]>CS-Portfolio</option>
+</select>
