@@ -3,7 +3,7 @@
 	<icon>images/icones_semantiques_logo-32.png</icon>
 	<auteur>&#169; 2010 Bertrand Marne</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>stable</etat>
 	<description>Permet au porte plume d'ajouter des raccourcis s&eacute;mantiques plut&ocirc;t que typographiques:
 
