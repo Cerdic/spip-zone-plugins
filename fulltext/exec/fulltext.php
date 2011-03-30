@@ -5,7 +5,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/headers');
 
 include_spip('inc/fulltext_exec');
-
+include_spip('inc/presentation');
 
 function exec_fulltext()
 {
@@ -35,12 +35,12 @@ function exec_fulltext()
 	include_spip('inc/rechercher');
 	include_spip('base/abstract_sql');
 	$tables = liste_des_champs();
-	
-	// Requette créer tous
+	spip_log($tables,'fulltext');
+	// Requette creer tous
 	if (_request('creer') == 'tous') 
 		Fulltext_creer_tous($tables);
 	
-	// Parcour des tables retournée
+	// Parcour des tables retournee
 	foreach($tables as $table => $vals) {
 		
 		// Affichage du nom de la table
@@ -60,7 +60,7 @@ function exec_fulltext()
 			}
 		} else {
 		
-			// Différente requette possible	
+			// Diffï¿½rente requette possible	
 			// Creer un index
 			if ($table == _request('table') AND $nom = _request('nom') AND preg_match(',^[a-z_0-9]+$,', "$nom$table"))
 				echo Fulltext_creer_index($table, $nom, array_keys($vals));
@@ -69,14 +69,14 @@ function exec_fulltext()
 			if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
 				echo Fulltext_regenerer_index($table);
 			
-			// Réinitialiser les documents
+			// Rï¿½initialiser les documents
 			if (_request('reinitialise') == $table OR _request('reinitialise') == 'tous')
 				echo Fulltext_reinitialiser_document();
 				
-			// Récupération des index déjà existant
+			// Rï¿½cupï¿½ration des index dï¿½jï¿½ existant
 			$keys = fulltext_keys($table);
 
-			// Vérification des index existants + suppression en cas de requette
+			// Vï¿½rification des index existants + suppression en cas de requette
 			if ($keys) {
 				foreach($keys as $key=>$def) {
 					echo "<dt>$key".'<a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table.'&index='.$key).'" title="'._T('fulltext:supprimer').'">
@@ -91,10 +91,10 @@ function exec_fulltext()
 				if (!(_request('creer') == 'tous'))
 					echo "<p>"._T('fulltext:pas_index')."</p>\n";
 					
-			// Rafraichissement des index déjà existant
+			// Rafraichissement des index dï¿½jï¿½ existant
 			$keys = fulltext_keys($table);
 
-			// Liens pour créer des index
+			// Liens pour crï¿½er des index
 			$champs = array_keys($vals);
 			asort($vals); // le champ de titre est celui qui a le poids le plus eleve
 			$champs2 = array_keys($vals);
