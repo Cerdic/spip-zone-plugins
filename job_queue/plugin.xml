@@ -1,7 +1,7 @@
 <plugin>
   <nom>Job Queue</nom>
   <auteur>Cedric&amp;Fil</auteur>
-  <version>0.6.4</version>
+  <version>0.6.5</version>
   <version_base>0.3.4</version_base>
   <etat>test</etat>
   <description>
@@ -10,7 +10,7 @@
 		[en]Managing a queue of jobs to perform.
 	</multi>
   </description>
-  <icon>img_pack/job_queue-32.png</icon>
+  <icon>prive/themes/spip/images/queue-process-32.png</icon>
   <install>base/queue.php</install>
   <options>queue_options.php</options>
 	<lien></lien> <!-- URI de documentation -->
@@ -41,7 +41,7 @@
 	</pipeline>
 
 	<bouton id="job_queue" parent='bando_administration'>
-		<icone>images/job_queue-16.png</icone>
+		<icone>images/queue-process-16.png</icone>
 		<titre>Job Queue</titre>
 	</bouton>
 
