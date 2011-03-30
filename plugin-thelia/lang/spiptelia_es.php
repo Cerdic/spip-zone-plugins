@@ -151,7 +151,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'etape_compte' => 'Compte',
 'etape_livraison' => 'Livraison',
 'etape_paiement' => 'Paiement',
-'etape_terminer' => 'Terminer'
+'etape_terminer' => 'Terminer',
+'etape' => 'Paso'
 
 
 

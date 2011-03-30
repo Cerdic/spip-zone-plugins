@@ -1,13 +1,5 @@
-
-			
 				[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
-				<ul id='infos_etapes' class='infos_etape_2'>
-				    <li class='valides'><div class='fond'><a href="[(#URL_PAGE{panier})]"><em>&Eacute;tape </em><span class='numero_etape'>1</span><em>&nbsp;: </em><:spipthelia:etape_panier:></a></div></li>
-				    <li class='on'><div class='fond'><strong><em>&Eacute;tape </em><span class='numero_etape'>2</span><em>&nbsp;: </em><:spipthelia:etape_compte:></strong></div></li>
-				    <li class='prochains'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>3</span><em>&nbsp;: </em><:spipthelia:etape_livraison:></div></li>
-				    <li class='prochains'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>4</span><em>&nbsp;: </em><:spipthelia:etape_paiement:></div></li>
-				    <li class='prochains'><div class='fond'><em>&Eacute;tape </em><span class='numero_etape'>5</span><em>&nbsp;: </em><:spipthelia:etape_terminer:></div></li>
-				</ul>
+				<INCLURE{fond=inc/inc-etapes-achat}{etape=2}>
 
 				[(#REM) Titre de la page]
 

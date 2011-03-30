@@ -161,7 +161,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'suppr' => 'Suppr.',
 'portfolio_produits' => 'Photos du produit',
 'adresse_complement' => 'Compl&eacute;ment d\'adresse',
-'nous_vous_suggerons' => 'Nous vous sugg&eacute;rons :'
+'nous_vous_suggerons' => 'Nous vous sugg&eacute;rons :',
+'etape' => 'Eactue;tape'
 
 );
 ?>

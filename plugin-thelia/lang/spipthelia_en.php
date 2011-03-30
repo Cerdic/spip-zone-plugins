@@ -138,13 +138,14 @@ Write here information about the settlement by transfer ...<br /><br />',
 'nom_de_la_rubrique' => "Nom de la rubrique",
 'nom_du_produit' => "Nom du produit",
 'prix' => "Prix",
-'rubrique_en_ligne' => "Rubrique THELIA en ligne",
-'rubrique_non_publiee' => "Rubrique THELIA non publi&eacute;e",
-'etape_panier' => 'Panier',
-'etape_compte' => 'Compte',
-'etape_livraison' => 'Livraison',
-'etape_paiement' => 'Paiement',
-'etape_terminer' => 'Terminer'
+'rubrique_en_ligne' => "Category THELIA online",
+'rubrique_non_publiee' => "Category THELIA unpublished",
+'etape_panier' => 'Cart',
+'etape_compte' => 'Account',
+'etape_livraison' => 'Shipping',
+'etape_paiement' => 'Payment',
+'etape_terminer' => 'Finish',
+'etape' => 'Step'
 
 
 

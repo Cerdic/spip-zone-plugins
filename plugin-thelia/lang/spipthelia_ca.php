@@ -119,8 +119,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'site_realise_avec_spip' => 'web realitzat per Thelia', 
 'et' => 'i',
 'plugin_thelia' => 'amb el plugin Th&eacute;lia per spip',
-'retour_boutique' => 'Continuer mes achats',
+'retour_boutique' => 'Seguir comprant',
 'mes_achats' => 'Mes achats',
-'bonjour' => 'Bonjour');
+'bonjour' => 'Hola',
+'etape' => 'Pas');
 
 ?>

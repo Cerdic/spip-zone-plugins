@@ -137,7 +137,8 @@ geven. U heeft waarschijnlijk een fout gemaakt."',
 'produits_associes_rubrique' => 'Product aan rubriek verenigen',
 'mettre_a_jour' => 'update',
 'etapes_achat' => 'De verschillende stadia van mijn bestelling',
-'envoyer_commande' => 'Ik verstuur miin bestelling'
+'envoyer_commande' => 'Ik verstuur miin bestelling',
+'etape' => 'Stap'
 
 );
 ?>

@@ -1,0 +1,42 @@
+[(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
+<ul id='infos_etapes' class='infos_etape_#ENV{etape}'>
+	<li class='valides'>
+		<div class='fond [(#ENV{etape}|=={1}|oui)on][(#ENV{etape}|>{1}|oui)valides]'>
+			[(#ENV{etape}|>{1}|oui)[(#ENV{etape}|<{5}|oui)<a href="[(#URL_PAGE{panier})]">]]
+			[(#ENV{etape}|=={1}|oui)<strong>]
+			<em><:spipthelia:etape:> </em><span class='numero_etape'>1</span><em>&nbsp;: </em><:spipthelia:etape_panier:>
+			[(#ENV{etape}|=={1}|oui)</strong>]
+			[(#ENV{etape}|>{1}|oui)[(#ENV{etape}|<{5}|oui)</a>]]
+		</div>
+	</li>
+	<li class='[(#ENV{etape}|=={2}|oui)on][(#ENV{etape}|>{2}|oui)valides][(#ENV{etape}|<{2}|oui)prochains]'>
+		<div class='fond'>
+			[(#ENV{etape}|=={2}|oui)<strong>]
+			<em><:spipthelia:etape:> </em><span class='numero_etape'>2</span><em>&nbsp;: </em><:spipthelia:etape_compte:>
+			[(#ENV{etape}|=={2}|oui)</strong>]
+		</div>
+	</li>
+	<li class='[(#ENV{etape}|=={3}|oui)on][(#ENV{etape}|>{3}|oui)valides][(#ENV{etape}|<{3}|oui)prochains]'>
+		<div class='fond'>
+			[(#ENV{etape}|>{3}|oui)[(#ENV{etape}|<{5}|oui)<a href="[(#URL_PAGE{adresse})]">]]
+			[(#ENV{etape}|=={3}|oui)<strong>]
+			<strong><em><:spipthelia:etape:> </em><span class='numero_etape'>3</span><em>&nbsp;: </em><:spipthelia:etape_livraison:></strong>
+			[(#ENV{etape}|=={3}|oui)</strong>]
+			[(#ENV{etape}|>{3}|oui)[(#ENV{etape}|<{5}|oui)</a>]]
+		</div>
+	</li>
+	<li class='[(#ENV{etape}|=={4}|oui)on][(#ENV{etape}|>{4}|oui)valides][(#ENV{etape}|<{4}|oui)prochains]'>
+		<div class='fond'>
+			[(#ENV{etape}|=={4}|oui)<strong>]
+			<em><:spipthelia:etape:> </em><span class='numero_etape'>4</span><em>&nbsp;: </em><:spipthelia:etape_paiement:>
+			[(#ENV{etape}|=={4}|oui)</strong>]
+		</div>
+	</li>
+	<li class='[(#ENV{etape}|=={5}|oui)on][(#ENV{etape}|<{5}|oui)prochains]'>
+		<div class='fond'>
+			[(#ENV{etape}|=={5}|oui)<strong>]
+			<em><:spipthelia:etape:> </em><span class='numero_etape'>5</span><em>&nbsp;: </em><:spipthelia:etape_terminer:>
+			[(#ENV{etape}|=={5}|oui)</strong>]
+		</div>
+	</li>
+</ul>
