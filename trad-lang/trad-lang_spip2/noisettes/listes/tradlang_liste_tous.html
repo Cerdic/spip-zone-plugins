@@ -5,6 +5,11 @@
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
 </B_revise>
 
+[(#SET{defaut_tri,#ARRAY{
+	status,#ENV{status_sens,-1},
+	id,1,
+	str,1
+}})]
 #SET{str_cible,#ARRAY}
 <B_revise_cible>
 #SET{total,#GRAND_TOTAL}
@@ -12,33 +17,36 @@
 <table class="liste_traductions">
 	<thead>
 		<tr>
-			<th>
-				<:tradlang:codelangue:>
+			<th class="code_langue">
+				[(#TRI{id,<:tradlang:codelangue:>,ajax})]
+				
 			</th>
-			<th>
-				<:tradlang:traduction{lang=#ENV{lang_orig}}:>
+			<th class="origine">
+				[(#SET{lang_orig,#ENV{lang_orig}})]
+				[(#SET{str,#VAL{tradlang:traduction}|_T{#ARRAY{lang,#GET{lang_orig}}}})]
+				[(#TRI{str,#GET{str},ajax})]
 			</th>
-			<th>
+			<th class="cible">
 				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
 			</th>
-			<th>
-				<:tradlang:th_status:>
+			<th class="statut">
+				[(#TRI{status,<:tradlang:th_status:>,ajax})]
 			</th>
 		</tr>
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}>
+	<BOUCLE_revise_cible(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{tri #ENV{par,status},#GET{defaut_tri}}>
 	#SET{str_cible,#GET{str_cible}|push{#ID}}
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|sinon{ok})]">
-		<td>#ID</td>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|strtolower|sinon{ok})]">
+		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
-		<td class="status[_(#STATUS|strtolower)]">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		<td class="origine">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
 		</BOUCLE_revise_orig>
-		<td><:tradlang:str_existe_plus:></td>
+		<td class="origine"><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
-		<td class="#EDIT{str_statut}">[(#STR**)]</td>
-		<td>[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
+		<td class="cible #EDIT{str_statut}">[(#STR**)]</td>
+		<td class="statut">[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
 	</tr>
 	</BOUCLE_revise_cible>
 	</tbody>
@@ -53,13 +61,13 @@
 <table class="liste_traductions">
 	<thead>
 		<tr>
-			<th>
+			<th class="code_langue">
 				<:tradlang:codelangue:>
 			</th>
-			<th>
+			<th class="origine">
 				<:tradlang:traduction{lang=#ENV{lang_orig}}:>
 			</th>
-			<th>
+			<th class="statut">
 				<:tradlang:th_status:>
 			</th>
 		</tr>
@@ -87,13 +95,13 @@
 <table class="liste_traductions">
 	<thead>
 		<tr>
-			<th>
+			<th class="code_langue">
 				<:tradlang:codelangue:>
 			</th>
-			<th>
+			<th class="cible">
 				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
 			</th>
-			<th>
+			<th class="statut">
 				<:tradlang:th_status:>
 			</th>
 		</tr>
