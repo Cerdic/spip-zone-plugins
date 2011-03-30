@@ -35,7 +35,7 @@ function exec_fulltext()
 	include_spip('inc/rechercher');
 	include_spip('base/abstract_sql');
 	$tables = liste_des_champs();
-	spip_log($tables,'fulltext');
+
 	// Requette creer tous
 	if (_request('creer') == 'tous') 
 		Fulltext_creer_tous($tables);
