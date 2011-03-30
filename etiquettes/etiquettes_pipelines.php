@@ -11,7 +11,8 @@ function etiquettes_insert_head($flux){
 
 	$etiquettes = find_in_path('javascript/etiquettes.js');
 	$css = find_in_path('css/etiquettes.css');
-	if(isset($GLOBALS['meta']['plugin']['SelecteurGenerique'])){
+	$f = chercher_filtre('info_plugin');
+	if ($f('SelecteurGenerique', 'est_actif')) {
 		$autocomplete = find_in_path('javascript/jquery.autocomplete.js');
 		$selecteur_generique = '<script type="text/javascript" src="'.$autocomplete.'"></script>';
 	}
