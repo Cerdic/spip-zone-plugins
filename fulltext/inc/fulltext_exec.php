@@ -88,7 +88,7 @@ function Fulltext_reinitialiser_document() {
 }
 
 function Fulltext_creer_tous($tables = false) {
-	if(!$tables) { // Si les tables ne sont pas donnée, on va les chercher
+	if(!$tables) { // Si les tables ne sont pas donnï¿½e, on va les chercher
 		include_spip('inc/rechercher');
 		include_spip('base/abstract_sql');
 		$tables = liste_des_champs();

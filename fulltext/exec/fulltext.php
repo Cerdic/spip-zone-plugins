@@ -60,7 +60,7 @@ function exec_fulltext()
 			}
 		} else {
 		
-			// Diff�rente requette possible	
+			// Differente requette possible	
 			// Creer un index
 			if ($table == _request('table') AND $nom = _request('nom') AND preg_match(',^[a-z_0-9]+$,', "$nom$table"))
 				echo Fulltext_creer_index($table, $nom, array_keys($vals));
@@ -69,14 +69,14 @@ function exec_fulltext()
 			if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
 				echo Fulltext_regenerer_index($table);
 			
-			// R�initialiser les documents
+			// Reinitialiser les documents
 			if (_request('reinitialise') == $table OR _request('reinitialise') == 'tous')
 				echo Fulltext_reinitialiser_document();
 				
-			// R�cup�ration des index d�j� existant
+			// Recuperation des index deja existant
 			$keys = fulltext_keys($table);
 
-			// V�rification des index existants + suppression en cas de requette
+			// Verification des index existants + suppression en cas de requette
 			if ($keys) {
 				foreach($keys as $key=>$def) {
 					echo "<dt>$key".'<a href="'.generer_url_ecrire(_request('exec'), 'supprimer='.$table.'&index='.$key).'" title="'._T('fulltext:supprimer').'">
@@ -91,10 +91,10 @@ function exec_fulltext()
 				if (!(_request('creer') == 'tous'))
 					echo "<p>"._T('fulltext:pas_index')."</p>\n";
 					
-			// Rafraichissement des index d�j� existant
+			// Rafraichissement des index deja existant
 			$keys = fulltext_keys($table);
 
-			// Liens pour cr�er des index
+			// Liens pour creer des index
 			$champs = array_keys($vals);
 			asort($vals); // le champ de titre est celui qui a le poids le plus eleve
 			$champs2 = array_keys($vals);
