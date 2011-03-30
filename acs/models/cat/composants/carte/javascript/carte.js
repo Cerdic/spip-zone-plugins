@@ -1,4 +1,4 @@
-function loadPictos(map, urlPictos, idmap, msg) {
+function loadPictos(map, urlPictos, idmap, msg, pins) {
   var bbox = map.getExtent();
   bbox.transform(map.projection, map.displayProjection);
   var markerMgr = eval('markers'+idmap);
@@ -16,7 +16,10 @@ function loadPictos(map, urlPictos, idmap, msg) {
 		success: function(data) {
 			var nb = data.pictos.length;
 			for (var i=0;i<nb;i++) {
-				addPicto(data.pictos[i], markerMgr, map);
+				if (jQuery.inArray(data.pictos[i].id, map.pictos) >= 0)
+					continue;
+				addPicto(data.pictos[i], markerMgr, map, pins);
+				map.pictos.push(data.pictos[i].id);
 			}
 		},
 		complete: function() {
@@ -25,7 +28,7 @@ function loadPictos(map, urlPictos, idmap, msg) {
 	});
 }
 
-function img2icon(i, dp, dpW, dpH) {
+function img2icon(i, dp, dpW, dpH, pins) {
   if (typeof i == "undefined") {
     var url = dp;
     var imgW = dpW;
@@ -37,9 +40,13 @@ function img2icon(i, dp, dpW, dpH) {
     var imgH = parseInt(i.height);
   }
   var size = new OpenLayers.Size(imgW,imgH);
-  var offset = function(size) { return new OpenLayers.Pixel(-size.w/2, -size.h/2); };
+  if (pins)
+  	var dh = - size.h;
+  else
+  	var dh = - size.h/2;
+  var offset = function(size) { return new OpenLayers.Pixel(-size.w/2, dh); };
   var icon = new OpenLayers.Icon(
-		url,
+    url,
     size,
     null,
     offset
@@ -47,16 +54,14 @@ function img2icon(i, dp, dpW, dpH) {
   return icon;
 }
 
-function addPicto(item, markerLayer, map) {
+function addPicto(item, markerLayer, map, pins) {
 	if ((typeof(item.lat) == "undefined")||(typeof(item.lon) == "undefined")) return;
 	else {
 		var popup = null;
-		var lat = parseFloat(item.lat);
-		var lng = parseFloat(item.lon);
-		var point = new OpenLayers.LonLat(lng,lat);
-    var icon = img2icon(item.icon, defPicto, defPictoWidth, defPictoHeight);
+		var point = new OpenLayers.LonLat(parseFloat(item.lon), parseFloat(item.lat));
+    var icon = img2icon(item.icon, defPicto, defPictoWidth, defPictoHeight, pins);
     var iconUrl = icon.url;
-    var overUrl = img2icon(item.over, defPictoHover, defPictoHoverWidth, defPictoHoverHeight).url;
+    var overUrl = img2icon(item.over, defPictoHover, defPictoHoverWidth, defPictoHoverHeight, pins).url;
     var html = '<div class="bulle"><p class="titre"><a href="' + item.url + '">' + item.title + '</a></p><div id="pa' + item.id + '"><img src="" /></div></div>';
 		var marker = new OpenLayers.Marker(point.fromDataToDisplay(), icon);
 		jQuery(marker.icon.imageDiv).attr("title", item.title);

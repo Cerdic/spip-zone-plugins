@@ -20,6 +20,7 @@ Le centrage et le zoom sont ceux pass&eacute;s en param&egrave;tres, ou ceux de 
 'TextFontFamily' => 'Famille',
 'TextFontSize' => 'Taille',
 
+'PictosPins' => 'Pictogrammes punaises',
 'Picto' => 'Pictogramme par d&eacute;faut',
 'PictoHover' => 'Au survol'
 );

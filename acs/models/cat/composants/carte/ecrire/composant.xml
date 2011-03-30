@@ -111,7 +111,14 @@
     <chemin>pictos</chemin>
     <valeur>interrogation_over.png</valeur>
   </variable>
-
+  <variable>
+    <nom>PictosPins</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  
   <variable>
     <nom>TitreFontSize</nom>
     <type>nombre</type>

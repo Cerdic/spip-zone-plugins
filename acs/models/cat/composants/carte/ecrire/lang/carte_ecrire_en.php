@@ -18,6 +18,7 @@ these categories are displayed with their keyword icon as marker on the map.',
 'TextFontFamily' => 'Family',
 'TextFontSize' => 'Size',
 
+'PictosPins' => 'Pins markers',
 'Picto' => 'Default marker',
 'PictoHover' => 'Hover'
 );

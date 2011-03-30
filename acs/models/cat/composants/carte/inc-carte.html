@@ -19,7 +19,7 @@ Insere une carte interactive. Requiert les plugins gis_escoitar et openlayers.
   [(#SET{id_rubrique,#ENV{id_rubrique,#GET{rub2}}})]
 ]
 [(#INCLURE{fond=composants/carte/map_json}{nic}{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_groupe}{id_article}{id_auteur}{recherche}
-{latit}{lonxit}{zoom}{type}{id_carte_gis}{recursive=#ENV{recursive}}{limit=#ENV{limit}}{attente=#ENV{attente}}{ombre=#ENV{ombre}}{hauteur=#GET{height}}{largeur=#GET{width}}{load_map=#ENV{load_map}}
+{latit}{lonxit}{zoom}{type}{id_carte_gis}{limit=#ENV{limit}}{attente=#ENV{attente}}{ombre=#ENV{ombre}}{hauteur=#GET{height}}{largeur=#GET{width}}{load_map=#ENV{load_map}}
 {control}{control_type=#ENV{control_type}}{control_move=#ENV{control_move}}{control_zoom=#ENV{control_zoom}}{zoom_molette=#ENV{zoom_molette}}{id_a_ouvrir=#ENV{id_a_ouvrir}}{swfobject=#CONFIG{gis/swfobject,oui}})]
 
-<div id="map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],1})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[(#ENV{attente}|=={1}|oui)z-index: 0; ][width:(#GET{width});][ height:(#GET{height});]"]></div>
+<div id="map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],1})]" class="carte_gis"[ (#ENV{style}|!={'non'}|?{' '})style="[(#ENV{attente}|=={1}|oui)z-index: 0; ][width:(#GET{width});][ height:(#GET{height});]"]></div>
