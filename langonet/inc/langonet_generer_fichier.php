@@ -15,12 +15,13 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 
 	include_spip('inc/traduire');
 	$var_source = "i18n_".$module."_".$langue_source;
+	spip_log($GLOBALS[$var_source],'langonet');
 	if (empty($GLOBALS[$var_source])) {
 		if (!file_exists($source = _DIR_RACINE.$ou_langue.$module.'_'.$langue_source.'.php'))
 			return array('message_erreur' =>  _T('langonet:message_nok_fichier_langue',  array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue)));
+		include($source);
 	}
-	$GLOBALS['idx_lang'] = $var_source;
-	include($source);
+	$GLOBALS['idx_lang'] = $var_source;	
 
 	$var_cible = "i18n_".$module."_".$langue_cible;
 	if (empty($GLOBALS[$var_cible])) {
