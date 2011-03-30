@@ -11,36 +11,48 @@ function formulaires_tradlang_choisir_module_charger($module="",$lang_orig="",$l
 		$valeurs['editable'] = false;
 		return $valeurs;
 	}
-	$valeurs = array('module' => $module,'lang_orig' => $lang_orig,'lang_cible'=>$lang_cible,'lang_crea'=> $lang_crea);
-	foreach($valeurs as $key => $val){
-		if(_request($key)){
-			$valeurs[$key] = _request($key);
-		}
-	}
+	
 	if(!$module OR !sql_getfetsel('id_tradlang_module','spip_tradlang_modules','module='.sql_quote($module))){
-		$valeurs['module'] = $module_defaut;
+		$valeurs['module'] = $module = $module_defaut;
 	}
 	
-	$valeurs['lang_mere'] = sql_getfetsel('lang_mere','spip_tradlang_modules',"module=".sql_quote($valeurs['module']));
-	include_spip('inc/lang_liste');
-	$langues_modules = sql_select('DISTINCT lang','spip_tradlang','module='.sql_quote($module));
-	while($langue = sql_fetch($langues_modules)){
-		$langues_presentes[$langue['lang']] = traduire_nom_langue($langue['lang']);
-	}
-	$langues_possibles = array_diff($GLOBALS['codes_langues'],$langues_presentes);
-	
-	$config = @unserialize($GLOBALS['meta']['tradlang']);
-	if (is_array($config) && is_array($config['langues_autorisees'])){
-		foreach($config['langues_autorisees'] as $key=>$val){
-			$langues_conf[$val] = traduire_nom_langue($val);
+	include_spip('inc/autoriser');
+	if(autoriser('modifier','tradlang')){
+		$valeurs = array('module' => $module,'lang_orig' => $lang_orig,'lang_cible'=>$lang_cible,'lang_crea'=> $lang_crea);
+		foreach($valeurs as $key => $val){
+			if(_request($key)){
+				$valeurs[$key] = _request($key);
+			}
 		}
-		spip_log($langues_conf);
-		$langues_possibles = array_intersect_key($langues_possibles,$langues_conf);	
-	}
 		
-	$valeurs['_langues_possibles'] = $langues_possibles;
-	if(!$lang_orig){
-		$valeurs['lang_orig'] = $valeurs['lang_mere'];
+		$valeurs['lang_mere'] = sql_getfetsel('lang_mere','spip_tradlang_modules',"module=".sql_quote($valeurs['module']));
+		
+		include_spip('inc/lang_liste');
+		$langues_possibles = $GLOBALS['codes_langues'];
+		
+		$langues_modules = sql_select('DISTINCT lang','spip_tradlang','module='.sql_quote($module));
+		while($langue = sql_fetch($langues_modules)){
+			$langues_presentes[$langue['lang']] = traduire_nom_langue($langue['lang']);
+		}
+		if(is_array($langues_presentes))
+			$langues_possibles = array_diff($langues_possibles,$langues_presentes);
+		
+		$config = @unserialize($GLOBALS['meta']['tradlang']);
+		if (is_array($config) && is_array($config['langues_autorisees'])){
+			foreach($config['langues_autorisees'] as $key=>$val){
+				$langues_conf[$val] = traduire_nom_langue($val);
+			}
+			spip_log($langues_conf);
+			$langues_possibles = array_intersect_key($langues_possibles,$langues_conf);	
+		}
+			
+		$valeurs['_langues_possibles'] = $langues_possibles;
+		if(!$lang_orig){
+			$valeurs['lang_orig'] = $valeurs['lang_mere'];
+		}
+	}else{
+		$valeurs['editable'] = false;
+		$valeurs['message_erreur'] = _T('tradlang:erreur_autorisation_modifier_modules');
 	}
 	return $valeurs;
 }

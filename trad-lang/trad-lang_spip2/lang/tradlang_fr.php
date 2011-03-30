@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'entrerlangue' => 'Ajouter un code langue',
 'erreur_aucun_module' => 'Il n\'y a pas de modules disponibles dans la base.',
+'erreur_autorisation_modifier_modules' => 'Vous n\'&ecirc;tes pas autoris&eacute; &agrave; traduire les modules de langue.',
 'erreur_choisir_lang_cible' => 'Choisissez une langue cible de traduction.',
 'erreur_choisir_lang_orig' => 'Choisissez une langue d\'origine qui servira de base &agrave; la traduction.',
 'erreur_choisir_module' => 'Choisissez un module &agrave; traduire.',
