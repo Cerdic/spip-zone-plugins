@@ -1,4 +1,5 @@
 #SET{str_cible,#ARRAY}
+#SET{lang,#ENV{lang_string,.*}}
 <B_recherche_tradlang>
 <div class="liste resultats tradlang">
 #ANCRE_PAGINATION
@@ -28,7 +29,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANG){recherche}{module?}{status?}{module != attic}{par points}{inverse}{pagination 20}>
+	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{module?}{status?}{lang==#GET{lang}}{module != attic}{par points}{inverse}{pagination 20}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|strtolower)]">
 		<td>#ID</td>
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>

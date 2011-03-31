@@ -8,6 +8,10 @@
 			<input[ (#HTML5|?{type="search" class="search text",type="text" class="text"})] size="10" name="recherche" id="recherche"[ value="(#ENV{recherche})"] accesskey="4" />
 		</li>
 		<li>
+			<label for="lang_string"><:tradlang:item_langue_cible:></label>
+			<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo,env,name=lang_string,option_vide=oui}>
+		</li>
+		<li>
 			<label for="status"><:tradlang:label_recherche_status:></label>
 			<select name="status" id="status">
 				<option value=""[(#ENV{status}|=={''}|oui)selected="selected"]>--</option>
