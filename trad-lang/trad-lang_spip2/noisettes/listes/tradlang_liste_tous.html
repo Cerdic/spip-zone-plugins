@@ -1,19 +1,39 @@
 <BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}>
 #SET{str_mere,#ARRAY}
+#SET{str_cible,#ARRAY}
+#SET{str_status,#ARRAY}
 <BOUCLE_revise(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}{par id}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
 #SET{total_mere,#GRAND_TOTAL}
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
 </B_revise>
-
+<BOUCLE_langue_complete(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}>
+#SET{str_cible,#GET{str_cible}|push{#ID}}
+</BOUCLE_langue_complete>
+#SET{total_cible,#GRAND_TOTAL}
+</B_langue_complete>
 [(#SET{defaut_tri,#ARRAY{
 	status,#ENV{status_sens,-1},
 	id,1,
 	str,1
 }})]
-#SET{str_cible,#ARRAY}
+
+<p><:tradlang:nb_items_langue_cible{nb=#GET{total_cible},langue=#ENV{lang_cible}}:></p>
+
+<B_status>
+[(#GRAND_TOTAL|>{1}|oui)
+<p class="filtrer"><:tradlang:info_filtrer_status:>
+[(#ENV{status}|oui)<a href="[(#SELF|parametre_url{status,''})]" class="ajax"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
+[(#ENV{status}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
+<BOUCLE_status(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{fusion status}{'<span class="sep"> | </span>'}>
+[(#GRAND_TOTAL|>{1}|oui)
+[(#STATUS|!={#ENV{status}}|oui)<a href="[(#SELF|parametre_url{status,#STATUS})]" class="ajax">#STATUS</a>]
+[(#STATUS|!={#ENV{status}}|non)#STATUS]]
+</BOUCLE_status>
+[(#GRAND_TOTAL|>{1}|oui)
+</p>]
+</B_status>
+</B_status>
 <B_revise_cible>
-#SET{total,#GRAND_TOTAL}
-<p><:tradlang:nb_items_langue_cible{nb=#GET{total},langue=#ENV{lang_cible}}:></p>
 <table class="liste_traductions">
 	<thead>
 		<tr>
@@ -36,16 +56,15 @@
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{tri #ENV{par,status},#GET{defaut_tri}}>
-	#SET{str_cible,#GET{str_cible}|push{#ID}}
+	<BOUCLE_revise_cible(TRADLANG){module}{status ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{tri #ENV{par,status},#GET{defaut_tri}}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|strtolower)]">
 		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
-		<td class="origine">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		<td class="origine">[&lt;(#STATUS|!={OK}|?{#STATUS})&gt; ][(#STR**|entites_html)]</td>
 		</BOUCLE_revise_orig>
 		<td class="origine"><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
-		<td class="cible #EDIT{str_statut}">[(#STR**)]</td>
+		<td class="cible #EDIT{str_statut}">[(#STR**|entites_html)]</td>
 		<td class="statut">[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
 	</tr>
 	</BOUCLE_revise_cible>
@@ -77,7 +96,7 @@
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
 		<BOUCLE_revise_inexistants_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
-		<td>[(#STR**)]</td>
+		<td>[(#STR**|entites_html)]</td>
 		</BOUCLE_revise_inexistants_orig>
 		<td><:tradlang:str_existe_pas_in_langue:></td>
 		<//B_revise_inexistants_orig>
@@ -110,7 +129,7 @@
 	<BOUCLE_revise_en_trop(TRADLANG){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
-		<td>[(#STR**)]</td>
+		<td>[(#STR**|entites_html)]</td>
 		<td>#STATUS</td>
 	</tr>
 	</BOUCLE_revise_en_trop>

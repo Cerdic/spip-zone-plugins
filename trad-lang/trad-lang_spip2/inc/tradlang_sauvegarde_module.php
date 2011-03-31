@@ -89,7 +89,7 @@ function tradlang_lirelang($module, $langue, $type=""){
 		$res = sql_select("id,str,status","spip_tradlang","module = '$nom_mod' AND lang='$langue'","","id ASC");
 		
 		while($row = sql_fetch($res)){
-			if ($row["status"] != "")
+			if (($row["status"] != "") && ($row["status"] != "OK"))
 				$statut = "<".$row["status"].">";
 			else
 				$statut = "";

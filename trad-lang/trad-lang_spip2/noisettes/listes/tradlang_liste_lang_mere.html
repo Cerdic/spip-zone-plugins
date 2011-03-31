@@ -19,7 +19,7 @@
 	#SET{str_cible,#GET{str_cible}|push{#ID}}
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
-		<td class="#EDIT{str_statut}">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		<td class="#EDIT{str_statut}">[&lt;(#STATUS|!={OK}|?{#STATUS})&gt; ][(#STR**|entites_html)]</td>
 	</tr>
 	</BOUCLE_revise>
 	</tbody>

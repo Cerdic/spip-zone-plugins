@@ -5,7 +5,7 @@
 		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
 		<h1><:tradlang:titre_traduction_module_de_vers{module=#ENV{module},lang_orig=#ENV{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
 	</div>
-	<INCLURE{fond=noisettes/listes/tradlang_liste_tous}{env}>
+	<INCLURE{fond=noisettes/listes/tradlang_liste_tous,env,ajax}>
 </div>]
 [(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|non)
 <div id="contenu">

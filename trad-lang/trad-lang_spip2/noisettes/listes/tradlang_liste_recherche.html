@@ -35,12 +35,12 @@
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
 		<td>#MODULE</td>
 		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}>
-		<td class="status[_(#STATUS|strtolower)]">[(#STR**)]</td>
+		<td class="status[_(#STATUS|strtolower)]">[(#STR**|entites_html)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		</BOUCLE_module>
-		<td class="#EDIT{str_statut}">[(#STR**)]</td>
+		<td class="#EDIT{str_statut}">[(#STR**|entites_html)]</td>
 		<td><abbr title="[(#LANG|traduire_nom_langue)]">#LANG</abbr></td>
 		<td class="status">[(#STATUS)]</td>
 	</tr>

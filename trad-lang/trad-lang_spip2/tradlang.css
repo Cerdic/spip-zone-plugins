@@ -12,9 +12,10 @@ a {
 }
 .traducteur #entete{overflow:auto;background-color:#ccc;}
 
-.traducteur #entete .formulaire_spip{width:45%;float:left;clear:none;}
+.traducteur #entete .formulaire_spip{float:left;clear:none;}
 
-.traducteur #entete #formulaire_recherche{float:right;}
+.traducteur #entete .entete_recherche{float:right;}
+.traducteur #entete .entete_recherche p{clear:both}
 
 .tradlang_footer{
 	font-size:.8em;
