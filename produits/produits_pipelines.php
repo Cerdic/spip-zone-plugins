@@ -14,7 +14,7 @@ function produits_affiche_enfants($flux){
 	if ($flux['args']['id_rubrique'] > 0){
 		$flux['data'] .= recuperer_fond(
 			'prive/objets/liste/produits',
-			array(),
+			array('id_rubrique' => $flux['args']['id_rubrique']),
 			array(
 				'ajax' => true
 			)
