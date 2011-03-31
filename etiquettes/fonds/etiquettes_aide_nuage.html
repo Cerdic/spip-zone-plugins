@@ -9,44 +9,44 @@
 	nouvelle table, il faut rajouter une boucle ici
 ]
 
-<BOUCLE_frequence_articles(MOTS){frequence articles}{type ?}>
-#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
-#SET{max_la,#MAX_FREQUENCE}
+<BOUCLE_frequence_articles(MOTS){compteur articles}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{articles}}}}}
+[(#COMPTEUR{articles}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{articles}}]
 </BOUCLE_frequence_articles>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_articles>
 
-<BOUCLE_frequence_forum(MOTS){frequence forum}{type ?}>
-#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
-#SET{max_la,#MAX_FREQUENCE}
+<BOUCLE_frequence_forum(MOTS){compteur forum}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{forum}}}}}
+[(#COMPTEUR{forum}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{forum}}]
 </BOUCLE_frequence_forum>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_forum>
 
-<BOUCLE_frequence_documents(MOTS){frequence documents}{type ?}>
-#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
-#SET{max_la,#MAX_FREQUENCE}
+<BOUCLE_frequence_documents(MOTS){compteur documents}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{documents}}}}}
+[(#COMPTEUR{documents}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{documents}}]
 </BOUCLE_frequence_documents>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_documents>
 
-<BOUCLE_frequence_syndic(MOTS){frequence syndic}{type ?}>
-#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
-#SET{max_la,#MAX_FREQUENCE}
+<BOUCLE_frequence_syndic(MOTS){compteur syndic}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{syndic}}}}}
+[(#COMPTEUR{articles}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{syndic}}]
 </BOUCLE_frequence_syndic>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_syndic>
 
-<BOUCLE_frequence_breves(MOTS){frequence breves}{type ?}>
-#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
-#SET{max_la,#MAX_FREQUENCE}
+<BOUCLE_frequence_breves(MOTS){compteur breves}{type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{breves}}}}}
+[(#COMPTEUR{breves}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{breves}}]
 </BOUCLE_frequence_breves>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_breves>
 
-<BOUCLE_frequence_rubriques(MOTS){frequence rubriques}{type ?}>
-#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#FREQUENCE}}}}
-#SET{max_la,#MAX_FREQUENCE}
+<BOUCLE_frequence_rubriques(MOTS){compteur rubriques} {type ?}>
+#SET{frequences,#GET{frequences}|array_merge{#ARRAY{#TITRE*,#GET{frequences}|table_valeur{#TITRE*,0}|plus{#COMPTEUR{rubriques}}}}}
+[(#COMPTEUR{rubriques}|>{#GET{max_la}}|oui)#SET{max_la,#COMPTEUR{rubriques}}]
 </BOUCLE_frequence_rubriques>
 #SET{max_frequence,#GET{max_frequence}|plus{#GET{max_la}}}
 </B_frequence_rubriques>
