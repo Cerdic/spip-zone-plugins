@@ -69,18 +69,28 @@
 		<nom>post_edition</nom>
 		<inclure>abonnement_pipelines.php</inclure>
 	</pipeline>
-	<bouton id='abonnements' parent='configuration'>
-		<icone>img/abonnement_22.png</icone>
-		<titre>abo:abonnements</titre>
-	</bouton>
-	<bouton id='abonnements_stats' parent='statistiques_visites'>
-		<icone>img/abonnement_22.png</icone>
-		<titre>abo:abonnements</titre>
-	</bouton>
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>abonnement_autorisations.php</inclure>
 	</pipeline>
+	<bouton id='abonnements_stats' parent='naviguer'>
+		<titre>abo:abonnements</titre>
+		<icone>img/abonnement_22.png</icone>
+		<url>abonnements_stats</url>
+	</bouton>
+	<bouton id='abonnements_stats2' parent='bando_edition'>
+		<titre>abo:abonnements</titre>
+		<icone>img/abonnement_22.png</icone>
+		<url>abonnements_stats</url>
+	</bouton>
+	<onglet id='abonnements' parent='configuration'>
+		<icone>img/abonnement_22.png</icone>
+		<titre>abo:abonnements</titre>
+	</onglet>
+	<bouton id='abonnements' parent='bando_configuration'>
+		<icone>img/abonnement_22.png</icone>
+		<titre>abo:abonnements</titre>
+	</bouton>
 
 	<chemin dir='' />
 	<necessite id="SPIP" version="[2.0.6;]" />
