@@ -1,0 +1,28 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM" id="formulaire_#FORM">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{oembed-24.png}" class="cadre-icone" /><:oembed:titre_configurer_oembed:></h3>
+<INCLURE{fond=prive/objets/liste/oembed_providers,sinon=<:oembed:aucun_provider:>,env} />
+<h3 class='titrem'><:oembed:titre_ajouter_provider:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_scheme[ (#ENV**{erreurs}|table_valeur{scheme}|oui)erreur]">
+			<label for="scheme"><:oembed:label_scheme:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{scheme})</span>]
+			<p class="explication"><:oembed:explication_scheme:></p>
+			<input type="text" name="scheme" id="scheme" class='text obligatoire' size='40' value="[(#ENV{scheme})]" />
+		</li>
+		<li class="editer_endpoint[ (#ENV**{erreurs}|table_valeur{endpoint}|oui)erreur]">
+			<label for="endpoint"><:oembed:label_endpoint:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{endpoint})</span>]
+			<input type="text" name="endpoint" id="endpoint" class='text obligatoire' size='40' value="[(#ENV{endpoint})]" />
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" value="<:oembed:valider:>" name='valider' />
+	</p>
+	</div>
+</form>
+</div>

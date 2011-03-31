@@ -1,0 +1,31 @@
+<plugin>
+	<nom>oEmbed</nom>
+	<auteur>b_b</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<prefix>oembed</prefix>
+	<categorie>multimedia</categorie>
+	<description>oEmbed client/provider pour SPIP. Icone de icojoy http://www.icojoy.com/articles/44/</description>
+	<licence>GNU/GPL</licence>
+	<icon>prive/themes/spip/images/oembed-48.png</icon>
+	<lien></lien>
+	<install>base/oembed_upgrade.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/oembed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/oembed.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>renseigner_document_distant</nom>
+		<inclure>oembed_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='configurer_oembed' parent='bando_configuration'>
+		<icone>images/oembed-16.png</icone>
+		<titre>oembed:titre_oembed</titre>
+	</bouton>
+	<necessite id='SPIP' version='[2.3.0-dev;]' />
+</plugin>

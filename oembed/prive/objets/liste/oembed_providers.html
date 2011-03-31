@@ -1,0 +1,31 @@
+<B_liste_providers>
+#ANCRE_PAGINATION
+<div class="liste-objets oembed_providers">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{oembed:info_1_provider,oembed:info_nb_providers}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id'><:info_numero_abbreviation:></th>
+			<th class='provider_endpoint'><:oembed:label_endpoint:></th>
+			<th class='provider_scheme'><:oembed:label_scheme:></th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_providers(OEMBED_PROVIDERS){pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='id'>#ID_PROVIDER</td>
+			<td class='provider_endpoint'>#ENDPOINT</td>
+			<td class='provider_scheme'>#SCHEME</td>
+			<td class='action'>[(#AUTORISER{modifier,provider,#ID_PROVIDER}|oui)
+				[(#BOUTON_ACTION{<:oembed:supprimer_provider:>,#URL_ACTION_AUTEUR{supprimer_provider,#ID_PROVIDER,#SELF},ajax})]
+			]</td>
+		</tr>
+	</BOUCLE_liste_providers>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_providers>[
+<div class="liste-objets sites"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_providers>
