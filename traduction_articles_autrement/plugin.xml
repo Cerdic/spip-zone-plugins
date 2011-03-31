@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Traduction d'articles autrement[en]Article translations differently[es]Traducción de artículos repensada[de]Artikel Übersetzung mal Anders</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.3.2</version>
+	<version>0.3.3</version>
 	<etat>test</etat>
 	<description>
 		<multi>
