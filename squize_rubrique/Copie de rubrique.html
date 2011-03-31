@@ -1,0 +1,12 @@
+<BOUCLE_principale_rubrique(RUBRIQUES){id_rubrique}>
+   [(#REM) la boucle accueil vérifie s'il existe un article d'accueil pour cette rubrique et si oui, on y va]
+   <BOUCLE_accueil(ARTICLES){id_article=#ID_ARTICLE_ACCUEIL}>
+      [(#HTTP_HEADER{Location: [(#URL_ARTICLE|url_absolue)]})][(#HTTP_HEADER{HTTP/1.1 301 Moved Permanently})][(#HTTP_HEADER{Status: 301 Moved Permanently})]
+   </BOUCLE_accueil>
+      [(#REM) s'il n'existe pas on appelle le squelette de rubrique ]
+      <INCLURE{fond=structure}{env}{id_secteur=#ID_SECTEUR}{type=rubrique}{composition=#COMPOSITION} />
+      [(#PLUGIN{z}|oui)
+          <INCLURE{fond=#EVAL{_DIR_PLUGIN_Z}/rubrique,env}
+      ] 
+   <//B_accueil>
+</BOUCLE_principale_rubrique>

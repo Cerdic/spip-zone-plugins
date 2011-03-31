@@ -1,0 +1,86 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=squizerubrique -->
+[(#SET{saisies,
+   #ARRAY{
+      0, #ARRAY{
+         saisie, oui_non,
+         options, #ARRAY{
+            nom, article_accueil,
+            label, <:squizerubrique:label_article_accueil:>,
+            explication, <:squizerubrique:explication_article_accueil:>,
+            obligatoire, oui,
+            afficher_si, '@plugin:article_accueil@',
+            defaut, on
+         }
+      },
+      1, #ARRAY{
+         saisie, oui_non,
+         options, #ARRAY{
+            nom, article_unique,
+            label, <:squizerubrique:label_article_unique:>,
+            explication, <:squizerubrique:explication_article_unique:>,
+            obligatoire, oui,
+            defaut, on
+         }
+      },
+      2, #ARRAY{
+         saisie, oui_non,
+         options, #ARRAY{
+            nom, aucun_article,
+            label, <:squizerubrique:label_aucun_article:>,
+            explication, <:squizerubrique:explication_aucun_article:>,
+            obligatoire, oui,
+            defaut,
+         }
+      },
+      3, #ARRAY{
+         saisie, selection,
+         options, #ARRAY{
+            nom, aucun_article_tri,
+            label, <:squizerubrique:label_aucun_article_tri:>,
+            explication, <:squizerubrique:explication_aucun_article_tri:>,
+            defaut, num titre,
+            datas, #ARRAY{
+               titre, <:squizerubrique:item_titre:>,
+               num titre, <:squizerubrique:item_num_titre:>,
+               date, <:squizerubrique:item_date_rubrique:>
+            },
+            afficher_si, '@aucun_article@ == "on"' 
+         }
+      },
+      4, #ARRAY{
+         saisie, selection,
+         options, #ARRAY{
+            nom, aucun_article_senstri,
+            label, <:squizerubrique:label_aucun_article_senstri:>,
+            explication, <:squizerubrique:explication_aucun_article_senstri:>,
+            datas, #ARRAY{
+               direct, <:squizerubrique:item_ascendant:>,
+               inverse, <:squizerubrique:item_descendant:>
+            },
+            afficher_si, '@aucun_article@ == "on"',
+            defaut, direct,
+         }
+      }
+   }
+})]
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_squizerubrique">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   <form name="formulaire_config_squizerubrique" method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <ul>
+
+      	#GENERER_SAISIES{#GET{saisies}}
+      </ul>
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>

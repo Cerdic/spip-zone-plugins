@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Squize Rubrique</nom>
+	<auteur>Yffic d'apr&egrave;s des codes r&eacute;cup&eacute;r&eacute;s &agrave; droite et &agrave; gauche, mais surtout &agrave; gauche</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description>Court circuiter une rubrique vers un article d'accueil ou un article unique ou encore une sous-rubrique si aucun article n'est pr&eacute;sent</description>
+	<icon>images/squizerubrique-32.png</icon>
+	<prefix>squizerubrique</prefix>
+	<install>base/squizerubrique_install.php</install>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="cfg" version="[1.10;]" />
+	<necessite id="saisies" version="[1.9.3;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="Iterateurs" version="[0.2.6;]" />
+	<utilise id="article_accueil" version="[1.0;]" />
+	<necessite id="Z" />
+	<categorie>squelette</categorie>
+</plugin>
