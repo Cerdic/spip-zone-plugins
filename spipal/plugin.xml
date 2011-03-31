@@ -8,6 +8,7 @@
 	<version_base>1</version_base>
 	 <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	<etat>dev</etat>
+	<icon>img_pack/av_edit.png</icon>
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;]" />
 	<meta>spipal_metas</meta>
@@ -29,5 +30,13 @@
 	  <titre>spipal:versements</titre>
 	  <icone>img_pack/av_edit.png</icone>
 	  <url>spipal</url>
+	</bouton>
+	<onglet id='configurer_spipal' parent='configuration'>
+		<icone>img_pack/av_edit.png</icone>
+		<titre>SPIPAL</titre>
+	</onglet>
+	<bouton id='configurer_spipal' parent='bando_configuration'>
+		<icone>img_pack/av_edit.png</icone>
+		<titre>SPIPAL</titre>
 	</bouton>
 </plugin>

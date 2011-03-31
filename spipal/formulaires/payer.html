@@ -16,13 +16,13 @@
 		<alt type="hidden" name="tax" value="#ENV{taxes}" />
 		<input type="hidden" name="amount" size="5" style="text-align: right" value="#ENV{prix_unitaire_ht}" />
         ]
-	<input type="text" name="currency_code" value="#ENV{monnaie,EUR}" readonly="readonly" size="3"/>
+        <input type="text" name="currency_code" value="#ENV{monnaie,EUR}" readonly="readonly" size="3"/>
         <input type="hidden" name="item_name" value="#ENV{nom_com}" />
         <input type="hidden" name="display" value="1" />
         <input type="hidden" name="page_style" value="#META{/spipal/style_page}" />
         <input type="hidden" name="custom" value="#ENV{custom}" />
         <input type="hidden" name="return" value="#META{/spipal/url_retour}" />
         <input type="hidden" name="notify_url" value="#META{/spipal/notify_url}" />
-            <img src="https://www.paypal.com/<:spipal:lang_lang:>/i/btn/x-click-but0[(#ENV{taxes}|?{4,2})].gif" style="margin: 0px; border: 0px none transparent; cursor:pointer; vertical-align: middle;" onclick="document.getElementById('_xclick').submit();" alt=""/>
+        <img src="https://www.paypal.com/<:spipal:lang_lang:>/i/btn/x-click-but0[(#ENV{taxes}|?{4,2})].gif" style="margin: 0px; border: 0px none transparent; cursor:pointer; vertical-align: middle;" onclick="document.getElementById('_xclick').submit();" alt=""/>
     </div>    
 </form>
