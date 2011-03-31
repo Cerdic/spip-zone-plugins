@@ -56,3 +56,11 @@ ul#feed li small {font-size:.82em;}
 
 /* Spip listes (avec plugins) */
 .message-formulaire {background: #fff;margin-top: 15px;padding: 5px 15px 15px 15px;}
+
+/* Instituer article */
+ul.instituer_article {list-style-type: none; padding: 0px; }
+ul.instituer ul {padding: 0px; }
+ul.instituer li {list-style: none outside none; padding: 0px; }
+ul.instituer li ul li img {border: 1px solid #F8F7F3; margin: 1px 5px -1px 1px; visibility: hidden; }
+ul.instituer li.selected img, ul.instituer li a:hover img {visibility: visible; }
+img.aide {height: 12px;  margin-bottom: -1px; margin-top: -1px; vertical-align: middle; width: 12px; }

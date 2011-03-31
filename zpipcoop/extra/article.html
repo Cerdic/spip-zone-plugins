@@ -5,6 +5,9 @@
 [(#LOGO_SITE_SPIP||image_reduire{226,226})]
 [(#LOGO_RUBRIQUE||image_reduire{226,226})]
 
+[(#AUTORISER{instituer,article,#ID_ARTICLE}|oui)
+	[(#ID_ARTICLE|instituer_article{#ID_RUBRIQUE,#STATUT})]]
+
 <INCLURE{fond=inclure/redaction,env}>
 
 <INCLURE{fond=inclure/groupes,env}>
