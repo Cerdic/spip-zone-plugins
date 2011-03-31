@@ -304,31 +304,6 @@ function typoenluminee_post_typo($texte) {
 	$texte = str_replace("<sc>",
 		"<span class=\"spip\" style=\"font-variant: small-caps\">", $texte);
 	$texte = str_replace("</sc>", "</span>", $texte);
-
-	// Gestion de la <boitedepliante>
-	$texte = str_replace("<boitedepliante>", "<div class=\"boitedepliante\"><img src=\"squelettes/images/plus-boite-depliante.gif\" alt=\"en savoir plus\"></div>\n<div class=\"boitedepliante_encadre\">", $texte);
-	$texte = str_replace("</boitedepliante>", "</div>", $texte);
-
-	// Gestion de la <boitejaune>
-	$texte = str_replace("<boitejaune>", "<div class=\"boitejaune\">\n<div class=\"bj1\"><div class=\"bj2\"><div>", $texte);
-	$texte = str_replace("</boitejaune>", "</div></div></div></div>", $texte);
-
-	// Gestion de <bonasavoir>
-	$texte = str_replace("<bonasavoir>", "<div class=\"bonasavoir\">\n<div class=\"bonasavoir1\"></div><div class=\"bonasavoir2\"><div>", $texte);
-	$texte = str_replace("</bonasavoir>", "</div></div></div>", $texte);
-
-	// Gestion de <attention>
-	$texte = str_replace("<attention>", "<div class=\"attention\">\n<div class=\"attention1\"></div><div class=\"attention2\"><div>", $texte);
-	$texte = str_replace("</attention>", "</div></div></div>", $texte);
-
-	// Gestion de <exemple>
-	$texte = str_replace("<exemple>", "<div class=\"exemple\">\n<div class=\"exemple1\"></div><div class=\"exemple2\"><div>", $texte);
-	$texte = str_replace("</exemple>", "</div></div></div>", $texte);
-
-	// Gestion de <lettrine>
-	$texte = str_replace("<lettrine>", "<span class=\"lettrine\">", $texte);
-	$texte = str_replace("</lettrine>", "</span>", $texte);
-
 	return $texte;
 }
 
