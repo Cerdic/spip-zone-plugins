@@ -4,6 +4,7 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $retour=''){
+	include_spip('inc/config');
 	return array(
 		array(
 			'saisie' => 'input',
@@ -34,14 +35,30 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'prix_ht',
-				'obligatoire' => 'oui',
 				'label' => _T('produits:produit_champ_prix_ht_label'),
-				'defaut' => 0
+				'defaut' => 0,
 			),
 			'verifier' => array(
 				'type' => 'decimal',
 				'options' => array(
 					'min' => 0
+				)
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'taxe',
+				'obligatoire' => 'oui',
+				'label' => _T('produits:produit_champ_taxe_label'),
+				'explication' => _T('produits:produit_champ_taxe_explication', array('taxe'=>lire_config('produits/taxe', 0))),
+				'defaut' => lire_config('produits/taxe', 0)
+			),
+			'verifier' => array(
+				'type' => 'decimal',
+				'options' => array(
+					'min' => 0,
+					'max' => 1
 				)
 			)
 		),
