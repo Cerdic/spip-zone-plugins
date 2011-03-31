@@ -20,6 +20,9 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 	$maj['create'] = array(
 		array('maj_tables',array('spip_tradlang','spip_tradlang_modules')),
 	);
+	$maj['0.3.1'] = array(
+		array('sql_alter',"TABLE spip_tradlang CHANGE status status VARCHAR(16) NOT NULL DEFAULT 'OK'"),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

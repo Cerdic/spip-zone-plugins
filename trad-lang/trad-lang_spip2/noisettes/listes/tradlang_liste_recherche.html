@@ -22,22 +22,26 @@
 			<th>
 				<:tradlang:th_langue:>
 			</th>
+			<th>
+				<:tradlang:th_status:>
+			</th>
 		</tr>
 	</thead>
 	<tbody>
 	<BOUCLE_recherche_tradlang(TRADLANG){recherche}{module?}{status?}{module != attic}{par points}{inverse}{pagination 20}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|strtolower)]">
 		<td>#ID</td>
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
 		<td>#MODULE</td>
 		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}>
-		<td class="status[_(#STATUS|strtolower)]">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		<td class="status[_(#STATUS|strtolower)]">[(#STR**)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		</BOUCLE_module>
-		<td class="#EDIT{str_statut}">[&lt;(#STATUS)&gt; ][(#STR**)]</td>
+		<td class="#EDIT{str_statut}">[(#STR**)]</td>
 		<td><abbr title="[(#LANG|traduire_nom_langue)]">#LANG</abbr></td>
+		<td class="status">[(#STATUS)]</td>
 	</tr>
 	</BOUCLE_recherche_tradlang>
 	</tbody>
