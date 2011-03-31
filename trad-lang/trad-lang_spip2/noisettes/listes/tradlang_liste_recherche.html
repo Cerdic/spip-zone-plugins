@@ -25,7 +25,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANG){recherche}{module != attic}{par points}{inverse}{pagination 20}>
+	<BOUCLE_recherche_tradlang(TRADLANG){recherche}{module?}{status?}{module != attic}{par points}{inverse}{pagination 20}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>

@@ -76,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_tradlang_str' => 'Cha&icirc;ne traduite',
 'label_update_langues_cible_mere' => 'Mettre &agrave; jour cette langue dans la base',
 'languesdispo' => 'Langues disponibles',
+'lien_aide_recherche' => 'Aide &agrave; la recherche',
 'lien_bilan' => 'Bilan des traductions courantes.',
 'lien_code_langue' => 'Code langue non valide. Le code langue doit avoir au moins deux lettres  (code ISO-631).',
 'lien_confirm_export' => 'Confirmer l\'export du fichier courant (c.a.d &eacute;crasement du fichier @fichier@)',
