@@ -1,0 +1,17 @@
+
+jquery.oembed.mod.js charge des documents distants (vidéos, photos, sons) lorsqu'il trouve un lien vers un site tel que Youtube, Flickr...
+
+Je n'appelle pas ce script directement, sinon il chargerait l'intégralité des documents distants référencés; ce que je veux éviter (sur Seenthis, les pages de liens sont très longues).
+
+J'ai donc modifié LazyLoad:
+jquery.lazyoembed.js
+Lazyload est censé charger les images au fur et à mesure de leur apparition à l'écran. Ici, ce ne sont pas les images, mais les documents distants oembed qui sont appelés.
+
+Ce script déclenche les oembed sur les éléments définis dans la fonction suivante:
+
+function afficher_oe() {
+	$(".texte a.spip_out").lazyload({ threshold : 200 });
+}
+
+Je déclenche la fonction afficher_oe() au document.ready.
+
