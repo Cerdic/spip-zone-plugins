@@ -1,15 +1,21 @@
 <plugin>
-	<nom><multi>[fr]Articles en édition directe[en]Edition mode for articles[es]Editar artículos directamente</multi></nom>
+	<nom><multi>[fr]Articles en édition directe[en]Edition mode for articles[es]Editar artículos directamente[de]Redaktion Modus für Artikel</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>
 		[fr]
-			Afficher le champs d'édition de l'article au lieu de sa prévisualisation
+			Afficher le champs d'édition de l'article au lieu de sa prévisualisation.
+		[en]
+			Makes the editing  posssible directly from the articles page in the backoffice.
+		[es] 
+			Permite editar directamente el artículo en el epacio privado 
+		[de] 
+			Ermöglicht es den Artikel im Backoffice direkt auf der Artikel Seite zu bearbeiten.
 		</multi>	
 	</description>
-<!--	<lien>http://www.spip-contrib.net/Traductions-d-articles-autrement</lien>-->
+	<lien>http://www.spip-contrib.net/Articles-en-edition-directe</lien>
 	<licence>GPL 3</licence>
 	<prefix>aed</prefix>
 	<icon>img/logo_aed_edit_32.png</icon>
@@ -26,7 +32,7 @@
 		<inclure>aed_pipelines.php</inclure>
         </pipeline>	
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.14;]" />
 	<necessite id="medias" version='[1.6.1;]'/>	
 </plugin>
 
