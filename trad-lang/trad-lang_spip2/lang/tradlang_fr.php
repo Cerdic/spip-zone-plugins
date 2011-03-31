@@ -15,7 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'cfg_descr_tradlang' => 'Configuration du plugin Trad-lang',
 'cfg_form_tradlang_autorisations' => 'Les autorisations',
 'cfg_inf_type_autorisation' => 'Si vous choisissez par statut ou par auteur, il vous sera demand&eacute; ci-dessous votre s&eacute;lection de statuts ou d\'auteurs.',
 'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d\'auteurs',
@@ -27,7 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cfg_legend_autorisation_configurer' => 'G&eacute;rer le plugin',
 'cfg_legende_autorisation_modifier' => 'Modifier les traductions',
 'cfg_legende_autorisation_voir' => 'Voir l\'interface de traduction',
-'cfg_titre_tradlang' => 'Trad-Lang',
 'codelangue' => 'Code de langue',
 
 // E
@@ -67,6 +65,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_langue_mere' => 'Langue m&egrave;re',
 'label_langues_autorisees' => 'N\'autoriser que certaines langues',
 'label_nommodule' => 'Personnaliser le nom du module',
+'label_recherche_module' => 'Dans le module : ',
+'label_recherche_status' => 'Avec le statut : ',
 'label_repertoire_module_langue' => 'R&eacute;pertoire du module',
 'label_sauvegarde_locale' => 'Permettre de sauvegarder localement les fichiers',
 'label_sauvegarde_post_edition' => 'Sauvegarder les fichiers &agrave; chaque modification',
@@ -93,6 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // M
+'message_aucun_resultat_chaine' => 'Aucun r&eacute;sultat correspondant &agrave; vos crit&egrave;res dans les cha&icirc;nes de langue.',
 'message_aucune_nouvelle_langue_dispo' => 'Ce module est disponible dans toutes les langues possibles',
 'message_demande_update_langues_cible_mere' => 'Vous pouvez demander &agrave; un administrateur de resynchroniser cette langue avec la langue principale.',
 'message_module_langue_ajoutee' => 'La langue "@langue@" a &eacute;t&eacute; ajout&eacute;e au module "@module@".',

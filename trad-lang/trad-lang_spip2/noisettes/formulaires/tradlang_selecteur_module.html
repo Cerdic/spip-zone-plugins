@@ -1,5 +1,7 @@
 <B_modules>
 	<select name="module" id="module" class="text">
+	[(#ENV{option_vide}|oui)
+		<option value="">--</option>]
 	<BOUCLE_modules(TRADLANG_MODULES){par nom_mod}{tout}>
 		<option value="#MODULE"[(#MODULE|=={#ENV{module}}|oui)selected="selected"]>#NOM_MOD</option>
 	</BOUCLE_modules>
