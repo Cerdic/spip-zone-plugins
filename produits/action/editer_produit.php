@@ -97,6 +97,14 @@ function produit_set($id_produit, $set=null) {
 	foreach ($champs as $champ)
 		$c[$champ] = _request($champ,$set);
 
+	// on donne une taxe null si le champ est vide
+	// MAIS spip < 2.3 ne gere pas les null avec sql_updateq..
+	// nous appliquons une requete en plus pour ce cas
+	if (isset($c['taxe']) and !strlen(trim($c['taxe']))) {
+		sql_update('spip_produits', array('taxe'=>'NULL'), 'id_produit='.$id_produit);
+		unset ($c['taxe']);
+	}
+		
 	include_spip('inc/modifier');
 	revision_produit($id_produit, $c);
 	

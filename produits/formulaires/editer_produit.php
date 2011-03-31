@@ -35,6 +35,7 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'prix_ht',
+				'obligatoire' => 'oui',
 				'label' => _T('produits:produit_champ_prix_ht_label'),
 				'defaut' => 0,
 			),
@@ -49,10 +50,9 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 			'saisie' => 'input',
 			'options' => array(
 				'nom' => 'taxe',
-				'obligatoire' => 'oui',
 				'label' => _T('produits:produit_champ_taxe_label'),
 				'explication' => _T('produits:produit_champ_taxe_explication', array('taxe'=>lire_config('produits/taxe', 0))),
-				'defaut' => lire_config('produits/taxe', 0)
+				'defaut' => '' // = null
 			),
 			'verifier' => array(
 				'type' => 'decimal',
@@ -101,7 +101,7 @@ function formulaires_editer_produit_traiter($id_produit='new', $id_rubrique=0, $
 	$id_parent = _request('id_parent');
 	$id_parent = str_replace('rubrique|', '', $id_parent);
 	set_request('id_parent', $id_parent);
-	
+		
 	$retours = formulaires_editer_objet_traiter('produit',$id_produit,$id_rubrique,0,$retour);
 	return $retours;
 }
