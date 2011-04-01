@@ -87,7 +87,7 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 	$desc = $trouver_table('spip_documents');
 	if(array_key_exists('taille',$desc['field'])) if($infosVideo) $champs['taille'] = $infosVideo->duration;
 	if(array_key_exists('credits',$desc['field'])) if($infosVideo) $champs['credits'] = $infosVideo->author;
-	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'prepa';
+	if(array_key_exists('statut',$desc['field'])) $champs['statut'] = 'publie';
 
 	/* Cas de la présence d'une vignette à attacher */
 	if($logoDocument){
