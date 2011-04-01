@@ -25,25 +25,28 @@ function svp_afficher_etat($etat) {
 	return plugin_etat_en_clair($etat);
 }
 
-function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $type='plugins', $sep='<br />'){
+function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $sep='<br />'){
 	$texte = '';
 	
 	$dependances = unserialize($balise_serialisee);
 	foreach($dependances[$dependance] as $_dependance) {
-		if (($type == 'plugins' ) AND ($_dependance['id'] != 'SPIP')) {
-			if ($texte) 
-				$texte .= $sep;
-			if ($plugin = sql_fetsel('id_plugin, nom', 'spip_plugins', 'prefixe=' . sql_quote($_dependance['id'])))
+		if ($texte) 
+			$texte .= $sep;
+		if (($dependance == 'necessite' ) OR ($dependance == 'utilise')) {
+			if ($plugin = sql_fetsel('id_plugin, nom', 'spip_plugins', 'prefixe=' . sql_quote($_dependance['nom'])))
 				$logiciel = '<a href="' . generer_url_entite($plugin['id_plugin'], 'plugin') . '" title="' . _T('svp:bulle_aller_plugin') . '">' .
 							extraire_multi($plugin['nom']) . '</a>';
 			else
 				// Cas ou le plugin n'est pas encore dans la base SVP. 
-				// On affiche son préfixe, cependant ce n'est pas un affichage evant perdurer
-				$logiciel = $_dependance['id'];
+				// On affiche son préfixe, cependant ce n'est pas un affichage devant perdurer
+				$logiciel = $_dependance['nom'];
 			$texte .= svp_afficher_version($_dependance['version'], $logiciel);
 		}
+		else 
+			// On demande l'affichage des librairies
+			$texte .= '<a href="' . $_dependance['lien'] . '" title="' . _T('svp:bulle_telecharger_librairie') . '">' .	$_dependance['nom'] . '</a>';
 	}
-	
+
 	return $texte;
 }
 

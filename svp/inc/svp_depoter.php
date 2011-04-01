@@ -20,7 +20,8 @@ function svp_ajouter_depot($url, &$erreur=''){
 	$url = trim($url);
 
 	// Lire les donnees d'un depot de paquets
-	$infos = svp_xml_parse_depot($url);
+// 	$infos = svp_xml_parse_depot($url);
+	$infos = svp_phraser_depot($url);
 	if (!$infos) {
 		$erreur = _T('svp:message_nok_xml_non_conforme', array('fichier' => $url));
 		return false;
@@ -162,13 +163,14 @@ function svp_actualiser_depot($id){
 	else {
 		// Le fichier a bien change il faut actualiser tout le depot
 		$infos = svp_xml_parse_depot($depot['xml_paquets']);
+//		$infos = svp_phraser_depot($depot['xml_paquets']);
 		if (!$infos)
 			return false;
 	
 		// On actualise les paquets dans spip_paquets uniquement car le depot n'est
 		// mis a jour que par le formulaire d'edition d'un depot.
 		// Lors de la mise a jour des paquets, les plugins aussi sont actualises
-		$ok = svp_actualiser_paquets($depot['id_depot'], $infos['paquets'], 
+		$ok = svp_actualiser_paquets($depot['id_depot'], $infos['paquets'],
 									$nb_paquets, $nb_plugins, $nb_autres);
 		if ($ok) {
 			// On met à jour le nombre de paquets et de plugins du depot ainsi que le nouveau sha1
@@ -244,9 +246,13 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 
 		// On verifie si le paquet est celui d'un plugin ou pas
 		// -- Les traitements du XML dependent de la DTD utilisee
-		$traiteur =  'svp_informer_' . _SVP_DTD_PLUGIN;
-		include_spip('inc/'. $traiteur);
-		if ($champs = svp_remplir_champs_sql($_infos['plugin'])) {
+		// Formatage des informations extraites du plugin pour insertion dans la base SVP
+		$formater = charger_fonction('preparer_sql_' . $_infos['dtd'], 'plugins');
+		if ($champs_aplat = $formater($_infos['plugin'])) {
+			// Eclater les champs recuperer en deux sous tableaux, un par table (plugin, paquet)
+			// Cette fonction disparaitra quand les deux tables seront fusionnees
+			$champs = eclater_plugin_paquet($champs_aplat);
+
 			$paquet_plugin = true;
 			// On complete les informations du paquet et du plugin
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
@@ -472,4 +478,28 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 	
 	return true;
 }
+
+function eclater_plugin_paquet($champs_aplat) {
+	return array(
+		'plugin' => array(
+			'prefixe' => $champs_aplat['prefixe'],
+			'nom' => $champs_aplat['nom'],
+			'slogan' => $champs_aplat['slogan'],
+			'categorie' => $champs_aplat['categorie'],
+			'tags' => $champs_aplat['tags']),
+		'paquet' => array(
+			'logo' => $champs_aplat['logo'],
+			'description' => $champs_aplat['description'],
+			'auteur' => $champs_aplat['auteur'],
+			'version' => $champs_aplat['version'],
+			'version_base' => $champs_aplat['version_base'],
+			'version_spip' => $champs_aplat['version_spip'],
+			'etat' => $champs_aplat['etat'],
+			'etatnum' => $champs_aplat['etatnum'],
+			'licence' => $champs_aplat['licence'],
+			'lien' => $champs_aplat['lien'],
+			'dependances' => $champs_aplat['dependances'])
+	);
+}
+
 ?>

@@ -120,11 +120,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_taille' => 'Taille',
 	'label_depot' => 'H&eacute;berg&eacute;e par',
 	'label_maj' => 'G&eacute;n&eacute;r&eacute;e le',
-	'label_necessite' => 'N&eacute;cessite les plugins',
+	'label_necessite_plugins' => 'N&eacute;cessite les plugins',
+	'label_necessite_librairies' => 'N&eacute;cessite les librairies',
 	'label_module' => 'Module de langue',
 	'label_langue_reference' => 'Langue r&eacute;f&eacute;rence',
 	'label_gestionnaire' => 'Gestionnaire',
 	'label_traductions' => 'Traductions',
+	'label_utilise_plugins' => 'Fonctions suppl&eacute;mentaires avec les plugins',
 
 // M
 	'message_nok_aucun_paquet_ajoute' => 'Le d&eacute;p&ocirc;t &#171; @url@ &#187; ne fournit aucun nouveau paquet par rapport &agrave; la base d&eacute;j&agrave; enregistr&eacute;e. Il n\'a donc pas &eacute;t&eacute ajout&eacute;',
