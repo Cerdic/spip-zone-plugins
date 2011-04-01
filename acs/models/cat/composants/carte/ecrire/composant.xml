@@ -10,7 +10,7 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>300</valeur>
+    <valeur>400</valeur>
   </param>
   <param>
     <nom>preview_type</nom>

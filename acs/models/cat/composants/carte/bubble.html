@@ -17,7 +17,7 @@ Affiche la bulle d'information de la rubrique ou de l'article
   <B_articles>
   <ul>
   <BOUCLE_articles(ARTICLES){id_rubrique}{par date}{inverse}{0, #ENV{limit,10}}{lang}>
-    [<li><a href="#URL_ARTICLE">(#TITRE|supprimer_numero|texte_backend)</a></li>]
+    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{masquer_rubrique=oui}>
   </BOUCLE_articles>
   </ul>
   </B_articles>

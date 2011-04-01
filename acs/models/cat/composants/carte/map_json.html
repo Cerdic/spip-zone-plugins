@@ -1,4 +1,4 @@
-[(#REM)
+[(#CACHE{0})][(#REM)
              ACS
          (Plugin Spip)
          Squelette Cat
@@ -9,49 +9,34 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Insere une carte interactive utilisant JSON. Requiert les plugins gis_escoitar et openlayers.
 
-Note: les fonds de plan Google ne sont disponibles que si la librairie Google Map API a été chargée par le plugin eponyme
+Note: les fonds de plan Google ne sont disponibles QUE si la librairie Google Map API a été chargée par le plugin eponyme
 
-]<script type="text/javascript">
+][(#SET{id_carte_gis,#ENV{id_carte_gis,1}})][(#REM)
+  
+  Centrer sur les coordonnees de l'article passe en parametre, sinon sur celles de la rubrique
+  
+  ]<BOUCLE_centrer_article(GIS){id_rubrique=0}{id_article}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_article>
+<BOUCLE_centrer_rubrique(GIS){id_rubrique}{id_article=0}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_rubrique>[(#REM)
+  
+  Sinon centrer sur les coordonnes passees en parametre ou sur celles par defaut
+  
+  ][(#GET{latitude}|non)#SET{latitude,#ENV{latit,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lat'},#CONFIG**{geomap/latitude,0}}}}]
+  [(#GET{lonxitude}|non)#SET{lonxitude,#ENV{lonxit,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lon'},#CONFIG**{geomap/longitude,0}}}}]
+  [(#GET{zoommapa}|non)#SET{zoommapa, #ENV{zoom,#VAR{#EVAL{'acsCarte'.'#NIC'.'Zoom'},#CONFIG**{geomap/zoom,0}}}]
+  <script type="text/javascript">
   if (document.namespaces) { // only needed in IE
     document.namespaces.add("v", "urn:schemas-microsoft-com:vml");
   }
   //<![CDATA[
-  defPicto = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePicto,interrogation.png}}|url_absolue)]";
-  defPictoWidth = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePicto,interrogation.png}}|largeur)]";
-  defPictoHeight = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePicto,interrogation.png}}|hauteur)]";
-  defPictoHover = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePictoHover,interrogation_hover.png}}|url_absolue)]";
-  defPictoHoverWidth = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePictoHover,interrogation_hover.png}}|largeur)]";
-  defPictoHoverHeight = "[(#ACS_CHEMIN{pictos/#VAR{acsCartePictoHover,interrogation_hover.png}}|hauteur)]";
+  defPicto = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'Picto'},interrogation.png}}|url_absolue)]";
+  defPictoWidth = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'Picto'},interrogation.png}}|largeur)]";
+  defPictoHeight = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'Picto'},interrogation.png}}|hauteur)]";
+  defPictoHover = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'PictoHover'},interrogation_hover.png}}|url_absolue)]";
+  defPictoHoverWidth = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'PictoHover'},interrogation_hover.png}}|largeur)]";
+  defPictoHoverHeight = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'PictoHover'},interrogation_hover.png}}|hauteur)]";  
   
-  [(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]
   var map[(#GET{id_carte_gis})];
   var markerManager[(#GET{id_carte_gis})];
-
-  [(#REM) Centrer sur les coordonnees de l'article passe en parametre, sinon sur celles de la rubrique
-  ]<B_centrer_article><BOUCLE_centrer_article(GIS){id_article}{0,1}>
-    [(#ENV{latit}|non)#SET{latitude,#LAT}]
-    [(#ENV{lonxit}|non)#SET{lonxitude,#LONX}]
-    [(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]
-  </BOUCLE_centrer_article>
-  </B_centrer_article>
-  <BOUCLE_centrer_rubrique(GIS){id_rubrique}{0,1}>
-    [(#ENV{latit}|non)#SET{latitude,#LAT}]
-    [(#ENV{lonxit}|non)#SET{lonxitude,#LONX}]
-    [(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]
-  </BOUCLE_centrer_rubrique>
-  <//B_centrer_article>
-    
-  [(#REM) Sinon centrer sur les coordonnes passees en parametre ou sur celle par defaut
-  ][(#GET{latitude}|non)#SET{latitude,#ENV{latit,#CONFIG**{geomap/latitude,0}}}]
-  [(#GET{lonxitude}|non)#SET{lonxitude,#ENV{lonxit,#CONFIG**{geomap/longitude,0}}}]
-  [(#GET{zoommapa}|non)#SET{zoommapa, #ENV{zoom,#CONFIG**{geomap/zoom,0}}]
-  
-  [(#SET{control,#ENV{control,'small'}})]
-  [(#ENV{type}|=={'satellite'}|?{#SET{type,G_SATELLITE_MAP},''})]
-  [(#ENV{type}|=={'carte'}|?{#SET{type,G_NORMAL_MAP},''})]
-  [(#ENV{type}|=={'hybride'}|?{#SET{type,G_HYBRID_MAP},''})]
-  [(#ENV{type}|=={'physique'}|?{#SET{type,G_PHYSICAL_MAP},''})]
-  [(#ENV{type}|=={''}|?{#SET{type,G_SATELLITE_MAP},''})]
 
   function load[(#GET{id_carte_gis})]() {
   	jQuery("[#(#GET{id_carte_gis})]").css("overflow", "hidden");
