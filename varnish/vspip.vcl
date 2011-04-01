@@ -136,7 +136,7 @@ sub vcl_recv {
 		## les cookies (ici, les répertoires SPIP & Drupal + les images
 		## css, scripts, etc.)
 		## (le ?\d+ final est un éventuel timestamp)
-		if (req.url ~ "\.(css|js|jpg|jpeg|gif|png|ico|txt|mp3)(\?\d+)?$"
+		if (req.url ~ "^[^?]*\.(css|js|jpg|jpeg|gif|png|ico|txt|mp3)(\?\d+)?$"
 		|| req.url ~ "^/(local|IMG|extensions|plugins|static)/") {
 			remove req.http.Cookie;
 		}
