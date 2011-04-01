@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_erreur_quantites' => 'Les quantités doivent être des nombres entiers.',
 	'panier_montant' => 'Montant',
 	'panier_quantite' => 'Quantité',
+	'panier_quantite_ok' => 'Les quantités ont bien été modifiées.',
 	'panier_prix_unitaire' => 'Prix unitaire',
 	'panier_recalculer' => 'Recalculer',
 	'panier_taxes' => 'Taxes',
