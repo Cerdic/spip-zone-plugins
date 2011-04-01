@@ -1,17 +1,33 @@
 <plugin>
-	<nom><multi>[en]Invoices[fr]Factures</multi></nom>
+	<nom><multi>[en]Invoices &amp; Quotations[fr]Factures &amp; Devis</multi></nom>
 	<icon>images/factures-32.png</icon>
 
-	<version>0.0.0</version>
+	<version>0.0.1</version>
 	<version_base>1.0.1</version_base>
 	<install>base/factures_upgrade.php</install>
 
 	<auteur>Cyril Marion, [Ateliers CYM->http://www.cym.fr] et Camille Lafitte, [Webelys->http://www.webelys.com]</auteur>	
 	<licence>GPL</licence>
 	<etat>experimental</etat>
+	
+	<shortdesc><multi>
+	[fr]Faire des devis et facturer avec SPIP...
+	[en]Making quotations and invoicing with SPIP...
+	</multi></shortdesc>
+
 	<description><multi>
-	[fr]Facturer avec SPIP...
-	[en]Invoicing with SPIP...
+	[fr]Le plugin Factures & Devis permet de créer facilement des offres commeciales et des factures avec SPIP.
+_ Chaque facture est liée à un auteur SPIP, qui peut (ou pas) être un Contact ou une Organisation.
+
+Le plugin nécessite les plugins suivants :
+- Coordonnées, pour pouvoir gérer les adresses postales
+
+Le plugin utilise (sans les nécessiter) les plugins suivants :
+- Commandes, afin de pouvoir éditer la facture correspondant à une commande
+- C&amp;0, afin de pouvoir différencier Contacts et Organisations
+- Projets, afin que les actions d'un projet puissent etre liés à une facture
+
+	[en]Invoicing with SPIP (description to be translated when stable
 	</multi></description>
 	<lien></lien>
 	

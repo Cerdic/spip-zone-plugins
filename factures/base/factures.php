@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin factures - Facturer avec Spip 2.0
+ * Plugin Devis et Factures - Facturer avec Spip 2.0
  * Licence GPL (c) 2010 - 2011
  * par Cyril Marion - Camille Lafitte
  */
@@ -17,17 +17,13 @@ function factures_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['lignes_factures'] = 'lignes_factures';
 
 	// -- Liaisons
-	$interface['tables_jointures']['spip_factures'][]= 'organisations';
-	$interface['tables_jointures']['spip_organisations'][]= 'factures';
+	$interface['tables_jointures']['spip_factures'][]= 'auteurs';
+	$interface['tables_jointures']['spip_auteurs'][]= 'factures';
 
 	// gerer le critere de date
 	$interface['table_date']['factures'] = 'date_facture';
 	$interface['table_date']['factures'] = 'date_payement';
 	$interface['table_date']['factures'] = 'fin_validite';
-
-	// titre
-	$interface['table_titre']['contacts'] = "CONCAT(nom,' ',prenom) AS titre, '' AS lang";
-	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang";
 
 	// -- traitemnets sur les champs texte
 	$interface['table_des_traitements']['DESIGNATION'][] = _TRAITEMENT_RACCOURCIS;
@@ -53,7 +49,7 @@ function factures_declarer_tables_principales($tables_principales){
 		"date_payement"			=>	"DATETIME NULL NULL",
 		"reglement"				=>	"varchar(50) default NULL",
 		"fin_validite"			=>	"DATETIME NULL default NULL",
-		"id_organisation"		=>	"int(11) default NULL",
+		"id_auteur"				=>	"int(11) default NULL", // precedemment id_organisation
 		"id_projet"				=>	"smallint(6) default NULL",
 		"id_type_presta"		=>	"int(11) default NULL",
 		"montant"				=>	"decimal(18,2) default NULL",
