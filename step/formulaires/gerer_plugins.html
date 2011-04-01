@@ -106,7 +106,7 @@
 				<li class="editer_recherche">
 					<label for='step_selection'><:step:rechercher:></label>
 					<input type='text' name='recherche' class='text' id='step_selection' value='#ENV{recherche}' size="40" />
-					<input type='submit' name='rechercher' class='submit' style="display:none;" value='<:info_rechercher:>' />
+					<input type='submit' name='rechercher' class='submit' style="position:absolute;width:1px;height:1px;left:-9999px;" value='<:info_rechercher:>' />
 				</li>
 				[(#SET{afficher,[(#ENV{actif}|!={''}
 					|ou{[(#ENV{present}|!={''})]}
