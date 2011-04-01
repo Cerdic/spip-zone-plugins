@@ -81,7 +81,7 @@
 					var url = document.location;
 					id = me.attr('id');
 					me.addClass('replier').find('td:last').append('<span class="image_loading"> <\/span>').parent().animeajax();
-					$.get('#URL_PAGE{inc_information_plugin}',{'id_plugin':id_plugin,'hash':hash},function(data){
+					$.get('#URL_PAGE{inc_information_plugin}',{'id_plugin':id_plugin,'hash':hash, 'lang':'#ENV{lang}'},function(data){
 						me.after(data);
 						me.removeClass('loading').find('.image_loading').detach();
 						me.children().css('opacity', 1);
