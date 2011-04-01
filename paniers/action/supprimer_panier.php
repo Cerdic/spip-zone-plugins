@@ -19,10 +19,6 @@ function action_supprimer_panier_dist() {
 		sql_delete('spip_paniers_liens', 'id_panier=' . $id_panier);
 	}
 
-	// retour
-	include_spip('inc/headers');
-	redirige_par_entete(_request('redirect'));
-
 }
 
 ?>
