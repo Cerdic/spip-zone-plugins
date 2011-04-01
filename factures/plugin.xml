@@ -6,7 +6,7 @@
 	<version_base>1.0.1</version_base>
 	<install>base/factures_upgrade.php</install>
 
-	<auteur>Cyril Marion, [Ateliers CYM->http://www.cym.fr] et Camille Lafitte, [Webelys->http://www.webelys.com]</auteur>	
+	<auteur>Cyril Marion, [Ateliers CYM->http://www.cym.fr], Camille Lafitte, [Webelys->http://www.webelys.com] et Matthieu Marcillaud, [Magraine->http://magraine.net]</auteur>	
 	<licence>GPL</licence>
 	<etat>experimental</etat>
 	
@@ -27,7 +27,7 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 - C&amp;0, afin de pouvoir différencier Contacts et Organisations
 - Projets, afin que les actions d'un projet puissent etre liés à une facture
 
-	[en]Invoicing with SPIP (description to be translated when stable
+	[en]Invoicing with SPIP (description to be translated when stable...)
 	</multi></description>
 	<lien></lien>
 	

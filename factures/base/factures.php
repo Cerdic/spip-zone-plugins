@@ -41,8 +41,8 @@ function factures_declarer_tables_principales($tables_principales){
 	// structure de la table factures
 	$factures = array(
 		"id_facture"			=>	"int(11) NOT NULL auto_increment",
-		"num_facture"			=>	"varchar(50) default NULL",
-		"num_devis"				=>	"varchar(50) default NULL",
+		"num_facture"			=>	"varchar(50) default NULL", // un numéro unique selon l'organisation
+		"num_devis"				=>	"varchar(50) default NULL", // l'éventuel numéro de devis d'où est issu la facture
 		"id_type_facture"		=>	"int(11) default NULL",
 		"delais_validite"		=>	"int(11) default NULL",
 		"date_facture"			=>	"DATETIME NULL default NULL",
@@ -50,14 +50,13 @@ function factures_declarer_tables_principales($tables_principales){
 		"reglement"				=>	"varchar(50) default NULL",
 		"fin_validite"			=>	"DATETIME NULL default NULL",
 		"id_auteur"				=>	"int(11) default NULL", // precedemment id_organisation
-		"id_projet"				=>	"smallint(6) default NULL",
+		"id_projet"				=>	"int(11) default NULL",
 		"id_type_presta"		=>	"int(11) default NULL",
 		"montant"				=>	"decimal(18,2) default NULL",
-		"charge_estimee"		=>	"float default NULL",
-		"delais"				=>	"varchar(50) default NULL",
-		"nb_heures_vendues"		=>	"decimal(18,2) default NULL",
+		"delais"				=>	"varchar(50) default NULL", // delais de livraison prévus
+		"charge_estimee"		=>	"float default NULL", // charge de travail estimee en heures
+		"nb_heures_vendues"		=>	"decimal(18,2) default NULL", // total des heures de la facture
 		"libelle_facture"		=>	"mediumtext",
-		"libelle_forfait"		=>	"mediumtext",
 		"nota_bene"				=>	"mediumtext"
 	);
 	$factures_key = array(
