@@ -4,7 +4,7 @@
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
 <version>2.1.6</version>
 <etat>stable</etat>
-<description>Aussit&ocirc;t activ&eacute; ce plugin affiche les messages en liste de commentaires de type blog, avec formulaire simplifi&eacute;.</description>
+<description>Affichage des messages en liste, fa&ccedil;on commentaires de blog, avec formulaire simplifi&eacute;. Commentaires microformat&eacute;s, nomenclature homog&eacute;ne.</description>
 <lien>[Comments&nbsp;2.0 pour SPIP&nbsp;2.0->http://www.spip-contrib.net/?article3448]</lien>
 <prefix>comments</prefix>
 <chemin dir="" />
