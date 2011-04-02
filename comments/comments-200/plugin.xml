@@ -3,7 +3,7 @@
 <icon>icon.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
 <version>2.1.6</version>
-<etat>dev</etat>
+<etat>stable</etat>
 <description>Aussit&ocirc;t activ&eacute; ce plugin affiche les messages en liste de commentaires de type blog, avec formulaire simplifi&eacute;.</description>
 <lien>[Comments&nbsp;2.0 pour SPIP&nbsp;2.0->http://www.spip-contrib.net/?article3448]</lien>
 <prefix>comments</prefix>
