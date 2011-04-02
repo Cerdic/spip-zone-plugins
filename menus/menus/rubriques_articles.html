@@ -43,10 +43,12 @@
 					</BOUCLE_test_niveau2>
 				</li>
 				</BOUCLE_sous_rubriques>
-			</ul>
+			[(#SET{sous_rubrique#ID_RUBRIQUE,oui})]
 			</B_sous_rubriques>
 			<B_articles>
-			<ul class="menu-liste">
+			[(#GET{sous_rubrique#ID_RUBRIQUE}|non)
+				<ul class="menu-liste">
+			]
 				<BOUCLE_articles(ARTICLES){id_rubrique} {par num #GET{tri_num}}{par #GET{tri_alpha}}>
 						<li class="menu-entree [ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 							<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
@@ -54,7 +56,10 @@
 				</BOUCLE_articles>
 			</ul>
 			</B_articles>
-			
+			[(#GET{sous_rubrique#ID_RUBRIQUE}|oui)
+				</ul>
+			]
+			<//B_articles>
 			</BOUCLE_test_niveau>
 		</li>
 	</BOUCLE_rubriques>
