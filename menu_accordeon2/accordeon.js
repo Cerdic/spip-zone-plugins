@@ -1,3 +1,3 @@
 $(function() {
-		$( ".accordeon" ).accordion();
+		$( ".accordeon" ).accordion({ autoHeight: false });
 	});
