@@ -5,13 +5,15 @@
  *
  */
 ]#SET{self,#SELF|parametre_url{debut_zones|tri,''}}
-<B_zones><p class='pagination'>[(#PAGINATION) | ]<a href='[(#GET{self}|parametre_url{tri,titre})]'><:accesrestreint:par_titre:></a> 
+#FORMULAIRE_RECHERCHE{#GET{self}}
+<B_zones>
+<p class='pagination'>[(#PAGINATION) | ]<a href='[(#GET{self}|parametre_url{tri,titre})]'><:accesrestreint:par_titre:></a> 
 [(#ENV{publique}|non)| <a href='[(#GET{self}|parametre_url{publique,oui})]'><:accesrestreint:publique:></a>]
 [(#ENV{publique}|ou{#ENV{privee}}|oui)| <a href='[(#GET{self}|parametre_url{publique|privee,''})]'><:accesrestreint:toutes:></a>]
 [(#ENV{privee}|non)| <a href='[(#GET{self}|parametre_url{privee,oui})]'><:accesrestreint:privee:></a>]
 </p>
 <ul class='liste_items'>
-<BOUCLE_zones(ZONES){par #ENV{tri,id_zone}}{publique==#ENV{publique,.*}}{privee==#ENV{privee,.*}}{pagination 10}>
+<BOUCLE_zones(ZONES){par #ENV{tri,id_zone}}{publique==#ENV{publique,.*}}{privee==#ENV{privee,.*}}{pagination 10}{recherche ?}>
 <li class='item zone[ (#ID_ZONE|accesrestreint_acces_zone|?{ok,interdit})]'><h3>#TITRE</h3>
 <span class='contenu'>[(#ID_ZONE|accesrestreint_liste_contenu_zone_rub|count) <:accesrestreint:rubriques:>, ]
 [(#ID_ZONE|accesrestreint_liste_contenu_zone_auteur|count) <:accesrestreint:auteurs:>]

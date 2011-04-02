@@ -1,0 +1,31 @@
+[(#REM)
+	Boîte d'informations.
+	Sur une zone protégée : affiche le N° de la zone avec un lien pour y accéder.
+	Sur une rubrique non protégée : affiche un bouton pour la protéger.
+
+]
+<div class="cadre cadre-r cadre_padding">
+	[(#CHEMIN{img_pack/zones-acces-24.png}|image_reduire{24}|inserer_attribut{class,cadre-icone})]
+	<B_restreint>
+		<h2><:accesrestreint:titre_boite_protegee_oui:></h2>
+		[<p>(#GRAND_TOTAL|singulier_ou_pluriel{'accesrestreint:info_rubrique_dans_zone','accesrestreint:info_rubrique_dans_zones'})</p>]
+		<ul>
+	<BOUCLE_restreint(ZONES){id_zone IN (#ENV{id_rubrique}|accesrestreint_zones_rubrique_et_hierarchie)}>
+		<li>
+			<a href="[(#URL_ECRIRE{zones_edit,id_zone=#ID_ZONE}|parametre_url{retour,#SELF})]">
+				n&deg; #ID_ZONE : #TITRE 
+			</a>
+		</li>
+	</BOUCLE_restreint>
+	</ul>
+	</B_restreint>
+		<h2 class='h2'><:accesrestreint:titre_boite_protegee_non:></h2>
+		<p>
+			<a href="[(#URL_ECRIRE{zones_edit,new=oui}
+				|parametre_url{rubriques,#ENV{id_rubrique}}
+				|parametre_url{retour,#SELF})]">
+				<:accesrestreint:info_lien_action_proteger:>
+			</a>
+		</p>
+	<//B_restreint>
+</div>

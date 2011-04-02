@@ -51,6 +51,21 @@ function accesrestreint_affiche_milieu($flux){
 }
 
 /**
+ * Ajouter la boite des zones sur la fiche de rubrique
+ *
+ * @param string $flux
+ * @return string
+ */
+function accesrestreint_affiche_gauche($flux) {
+	if ($flux['args']['exec'] == 'naviguer'){
+		if (autoriser('administrer', 'zone', 0)) {
+			$flux['data'] .= recuperer_fond('prive/inclure/acces_rubrique', $_GET);
+		}
+	}
+	return $flux;
+}
+
+/**
  * Detecter les demande d'acces aux pages restreintes
  * et re-orienter vers une 401 si necessaire
  *

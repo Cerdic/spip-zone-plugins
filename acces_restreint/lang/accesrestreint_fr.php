@@ -35,10 +35,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Aucun auteur dans la zone',
 	'info_aucune_zone' => 'Aucune zone',
 	'info_auteurs_lies_zone' => 'Les auteurs ayant accès à cette zone',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.',
 	'info_page' => 'Cette page vous permet de gérer les zones d\'accès restreint de votre site',
 	'info_retirer_auteurs' => 'Retirer tous les auteurs',
 	'info_retirer_zone' => 'Enlever de la zone',
 	'info_retirer_zones' => 'Enlever de toutes les zones',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :',
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :',
 
 	// M
 	'modifier_zone' => 'Modifier la zone',
@@ -59,6 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titre',
 	'titre_ajouter_zone' => 'Rejoindre la zone',
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;',
 	'titre_cadre_modifier_zone' => 'Modifier une zone',
 	'titre_page_config' => 'Configuration des accès',
 	'titre_table' => 'Toutes les zones d\'accès',

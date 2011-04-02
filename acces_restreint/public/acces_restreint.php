@@ -168,4 +168,11 @@ function accesrestreint_documents_accessibles_where($primary, $_publique=''){
 	return $where;
 }
 
+
+/*	Champs declares pour la recherche */
+function accesrestreint_rechercher_liste_des_champs($tables) {
+	$tables['zone']['titre'] = 8;
+	$tables['zone']['descriptif'] = 3;
+	return $tables;
+}
 ?>

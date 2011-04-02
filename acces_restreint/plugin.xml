@@ -5,7 +5,7 @@
 	<icon>img_pack/zones-acces-48.png</icon>
 	<auteur>[cedric.morin@yterium.com->http://www.yterium.net]</auteur>
 	<licence>GPL &#169; 2007-2008</licence>
-	<version>3.0.5</version>
+	<version>3.1.0</version>
 	<version_base>0.3.0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -52,6 +52,10 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden �berladen, und um die �b
 		<nom>pre_boucle</nom>
 		<inclure>public/acces_restreint.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>public/acces_restreint.php</inclure>
+	</pipeline>
 
 	<pipeline>
 		<nom>accesrestreint_liste_zones_autorisees</nom>
@@ -65,6 +69,10 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden �berladen, und um die �b
 	</pipeline>
 	<pipeline>
 		<nom>affiche_milieu</nom>
+		<inclure>acces_restreint_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
