@@ -20,7 +20,6 @@ function svp_ajouter_depot($url, &$erreur=''){
 	$url = trim($url);
 
 	// Lire les donnees d'un depot de paquets
-// 	$infos = svp_xml_parse_depot($url);
 	$infos = svp_phraser_depot($url);
 	if (!$infos) {
 		$erreur = _T('svp:message_nok_xml_non_conforme', array('fichier' => $url));
@@ -162,8 +161,7 @@ function svp_actualiser_depot($id){
 	}
 	else {
 		// Le fichier a bien change il faut actualiser tout le depot
-		$infos = svp_xml_parse_depot($depot['xml_paquets']);
-//		$infos = svp_phraser_depot($depot['xml_paquets']);
+		$infos = svp_phraser_depot($depot['xml_paquets']);
 		if (!$infos)
 			return false;
 	
