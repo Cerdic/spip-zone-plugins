@@ -15,11 +15,13 @@ d'autre part, la liste des paquets suivants :
 
 <archives>
 <archive id="paquet1.zip">
-<file>paquet1.zip</file>
-<size>16862</size>
-<date>1274302824</date>
-<source>_plugins_/plugin_1</source>
-<last_commit>2011-03-10 21:21:10</last_commit>
+<zip>
+	<file>paquet1.zip</file>
+	<size>16862</size>
+	<date>1274302824</date>
+	<source>_plugins_/plugin_1</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
 <traductions>
 	<traduction module="a2a" reference="fr">
 		<langue code="en" />
@@ -50,24 +52,34 @@ d'autre part, la liste des paquets suivants :
     <lien>http://www.spip-contrib.net/a2a</lien>
     <fonctions>a2a_fonctions.php</fonctions>
     <options>a2a_options.php</options>
+    <options>a2a2_options.php</options>
     <install>base/a2a_upgrade.php</install>
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<necessite id="spip_bonux" version="[1.8.7;]" />
+	<necessite id="lib:jquery-ui-1.8.9" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.8.9.zip" />
+	<utilise id="noizetier" version="[0.8.1;]" />
+	<utilise id="saisies" version="[1.9.3;]" />
+	<utilise id="agenda" version="[2.2.0;]" />
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
 		<inclure>a2a_pipelines.php</inclure>
 	</pipeline>
+	<chemin dir="spip_200" />
+	<traduire gestionnaire="salvatore" module="a2a" reference="fr" />
+	<traduire gestionnaire="salvatore" module="a2a_prive" reference="fr" />
 </plugin>
 </archive>
 
 <archive id="paquet2.zip">
-<file>paquet2.zip</file>
-<size>5263</size>
-<date>1275519604</date>
-<source>_plugins_/plugin_2</source>
-<last_commit>2010-08-26 20:20:27</last_commit>
+<zip>
+	<file>paquet2.zip</file>
+	<size>5263</size>
+	<date>1275519604</date>
+	<source>_plugins_/plugin_2</source>
+	<last_commit>2010-08-26 20:20:27</last_commit>
+</zip>
 <plugin>
 	<prefix>plugin2</prefix>
 	<nom>Plugin_2</nom>
@@ -101,15 +113,32 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.0;]" />
 	<necessite id="cfg" version="[1.0.0;]" />
+    <bouton id="boussole" parent="configuration">
+		<icone>prive/themes/spip/images/boussole_icone-24.png</icone>
+		<titre>boussole:bouton_boussole</titre>
+		<url>boussoles_gerer</url>
+	</bouton>
+	<bouton id='boussole_21' parent='bando_squelette'>
+		<icone>images/boussole_icone-16.png</icone>
+		<titre>boussole:bouton_boussole</titre>
+		<url>boussoles_gerer</url>
+	</bouton>
+	<onglet id='gerer' parent='boussoles'>
+		<icone>prive/themes/spip/images/boussole_icone-24.png</icone>
+		<titre>boussole:onglet_boussoles</titre>
+		<url>boussoles_gerer</url>
+	</onglet>
 </plugin>
 </archive>
 
 <archive id="paquet3.zip">
-<file>paquet3.zip</file>
-<size>5434</size>
-<date>1275519604</date>
-<source>_plugins_/plugin_2</source>
-<last_commit>2010-01-16 00:25:19</last_commit>
+<zip>
+	<file>paquet3.zip</file>
+	<size>5434</size>
+	<date>1275519604</date>
+	<source>_plugins_/plugin_2</source>
+	<last_commit>2010-01-16 00:25:19</last_commit>
+</zip>
 <traductions>
 	<traduction module="plugin2" reference="fr">
 	</traduction>
@@ -151,10 +180,12 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 </archive>
 
 <archive id="paquet4.zip">
-<file>paquet4.zip</file>
-<size>6221</size>
-<date>1275519604</date>
-<source>_plugins_/plugin_2</source>
+<zip>
+	<file>paquet4.zip</file>
+	<size>6221</size>
+	<date>1275519604</date>
+	<source>_plugins_/plugin_2</source>
+</zip>
 <traductions>
 	<traduction module="plugin2" gestionnaire="salvatore" reference="fr">
 		<langue code="de">
@@ -205,10 +236,12 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 </archive>
 
 <archive id="paquet5.zip">
-<file>paquet5.zip</file>
-<size>16862</size>
-<date>1274302824</date>
-<source>_plugins_/plugin_1</source>
+<zip>
+	<file>paquet5.zip</file>
+	<size>16862</size>
+	<date>1274302824</date>
+	<source>_plugins_/plugin_1</source>
+</zip>
 <plugin>
     <prefix>plugin1</prefix>
 	<nom>
@@ -241,10 +274,12 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 </archive>
 
 <archive id="paquet12.zip">
-<file>paquet12.zip</file>
-<size>10830</size>
-<date>1272537538</date>
-<source>_plugins_/memobox</source>
+<zip>
+	<file>paquet12.zip</file>
+	<size>10830</size>
+	<date>1272537538</date>
+	<source>_plugins_/memobox</source>
+</zip>
 <plugin>
 	<prefix>memobox</prefix>
 	<nom>Memobox 2</nom>
