@@ -3,7 +3,7 @@
 <icon>icon.png</icon>
 <description>Acc&eacute;s direct aux articles et reset des squelettes par d&eacute;faut pour &eacute;viter les diffusions intempestives.</description>
 <lien>http://www.spip-contrib.net/court-circuit</lien>
-<version>1.1</version>
+<version>1.2</version>
 <etat>stable</etat>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2011</auteur>
 <prefix>courtcircuit</prefix>
