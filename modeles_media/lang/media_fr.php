@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	'credits' => 'Cr&eacute;dits&nbsp;:',
 	'erreur_taille' => 'Vous devez saisir un nombre entier positif.',
+	'erreur_saisies' => 'Votre saisie contient des erreurs !',
 	'explication_configurer_media' => 'Vous pouvez d&eacute;finir quatre tailles standards utilisables avec les mod&egrave;les &lt;media&gt; via le param&egrave;tre <i>|taille</i>.',
 	'explication_descriptif' => 'Les raccourcis typographiques de SPIP sont accept&eacute;s.',
 	'explication_lien' => 'Vous pouvez saisie une URL de la forme http://monsite.net, une adresse mail ou un raccourci SPIP (rub1, art3, breve4...).',
