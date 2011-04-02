@@ -5,8 +5,8 @@ function accordeon_jqueryui_forcer($array){
 	return $array;	
 }
 
-function accordeon_jquery_plugins($array){
-	$array[]='accordeon.js';
-	return $array;
+function accordeon_insert_head($flux){
+	$flux .="<script type='text/javascript' src='".generer_url_public('accordeon.js')."'></script>";
+	return $flux;
 }
 ?>

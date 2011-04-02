@@ -4,7 +4,7 @@
 	<licence>GPL</licence>
     <categorie>navigation</categorie>
     <auteur> Maïeul Rouquette d'après b_b </auteur>
-    <version>2.0</version>
+    <version>2.1</version>
    
   
     <etat>dev</etat>
@@ -21,7 +21,7 @@
    </pipeline>
    
    <pipeline>
-		<nom>jquery_plugins</nom>
+		<nom>insert_head</nom>
 		<inclure>accordeon_pip.php</inclure>
    </pipeline>
 

@@ -1,0 +1,19 @@
+<div class="formulaire_spip">
+<!-- titre=Configuration avancée du plugin accordéon -->
+	<form action="#SELF" method="post">
+    [<div>(#ENV{_cfg_}|form_hidden)</div>]
+        
+        <ul>
+            <li>
+                <label for="options">Options du script</label>
+               	<div class="explication">Vous pouvez mettre ici les options à passer au script d'effet accordéon. <a href="http://jqueryui.com/demos/accordion/">Voir la documentation d'accordéon</a>. Ne pas mettre les accolades..
+                    <textarea name="options" id="options">#ENV{options}</textarea>
+                </select>
+            </li>
+
+        </ul>
+    <p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:OK:>" />
+	</p>
+	</form>
+</div>
