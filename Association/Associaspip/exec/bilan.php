@@ -80,7 +80,7 @@ function exec_bilan(){
 		if ($plan) {
 			$join = " RIGHT JOIN spip_asso_plan ON imputation=code";
 			$sel = ", code, intitule, classe";
-			$having =  " AND classe <> $clas";
+			$having =  " AND classe <> " . sql_quote($clas);
 			$order = "code,";
 		} else $join = $sel = $having = $order = '';		
 		
