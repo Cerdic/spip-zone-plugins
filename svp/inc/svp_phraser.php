@@ -15,6 +15,7 @@ function svp_phraser_depot($url){
 	include_spip('inc/distant');
 	if (!$xml = recuperer_page($url))
 		return false;
+ecrire_fichier('_DIR_TMP' . 'archives-reecrit.xml', $xml);
 
 	// Initialisation du tableau des informations
 	// -- Si aucun bloc depot n'est trouve le titre et le type prennent une valeur par defaut
@@ -35,8 +36,8 @@ function svp_phraser_depot($url){
 
 	// Extraction et phrasage du bloc des archives si il existe
 	// -- Si le bloc <archives> n'existe pas c'est une erreur
-	if (!preg_match(_SVP_REGEXP_BALISE_ARCHIVES, $xml, $matches))
-		return false;
+// 	if (!preg_match(_SVP_REGEXP_BALISE_ARCHIVES, $xml, $matches))
+//  		return false;
 	// -- Si aucun bloc <archive> c'est aussi une erreur
 	if (!preg_match_all(_SVP_REGEXP_BALISE_ARCHIVE, $xml, $matches))
 		return false;
