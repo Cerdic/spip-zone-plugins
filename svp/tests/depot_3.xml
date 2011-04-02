@@ -6,10 +6,13 @@
 
 <archives>
 <archive id="paquet8.zip">
-<file>paquet8.zip</file>
-<size>5467</size>
-<date>1275519604</date>
-<source>_plugins_/plugin_2</source>
+<zip>
+	<file>paquet8.zip</file>
+	<size>5467</size>
+	<date>1275519604</date>
+	<source>_plugins_/plugin_2</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
 <plugin>
 	<prefix>aa</prefix>
 	<nom>Plugin_2 3</nom>
@@ -47,10 +50,13 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 </archive>
 
 <archive id="paquet9.zip">
-<file>paquet9.zip</file>
-<size>23180</size>
-<date>1277463606</date>
-<source>_plugins_/splickrbox</source>
+<zip>
+	<file>paquet9.zip</file>
+	<size>23180</size>
+	<date>1277463606</date>
+	<source>_plugins_/splickrbox</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
 <plugin>
 	<prefix>Splickr</prefix>
 	<nom>Splickrbox</nom>
@@ -90,10 +96,13 @@ _ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, i
 </archive>
 
 <archive id="paquet10.zip">
-<file>paquet10.zip</file>
-<size>1225605</size>
-<date>1277478026</date>
-<source>_plugins_/mediabox</source>
+<zip>
+	<file>paquet10.zip</file>
+	<size>1225605</size>
+	<date>1277478026</date>
+	<source>_plugins_/mediabox</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
 <plugin>
 	<prefix>mediabox</prefix>
 	<nom><multi>[fr]MediaBox[ar]&#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1601;&#1585;&#1580;&#1577;</multi></nom>
@@ -175,10 +184,13 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 </archive>
 
 <archive id="paquet11.zip">
-<file>paquet11.zip</file>
-<size>152695</size>
-<date>1278511202</date>
-<source>_plugins_/gestion_documents</source>
+<zip>
+	<file>paquet11.zip</file>
+	<size>152695</size>
+	<date>1278511202</date>
+	<source>_plugins_/gestion_documents</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
 <plugin>
 	<prefix>medias</prefix>
 	<nom>
@@ -268,10 +280,12 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 </archive>
 
 <archive id="mutualisation.zip">
-<file>mutualisation_2.zip</file>
-<size>42342</size>
-<date>1280223474</date>
-<source>_plugins_/mutualisation</source>
+<zip>
+	<file>mutualisation_2.zip</file>
+	<size>42342</size>
+	<date>1280223474</date>
+	<source>_plugins_/mutualisation</source>
+</zip>
 <plugin>
 
 	<nom>
@@ -344,11 +358,13 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 
 
 <archive id="sktheme4.zip">
-<file>sktheme4.zip</file>
-<size>2508721</size>
-<date>1280235944</date>
-<source>_plugins_/sktheme4</source>
-<last_commit>2010-12-12 20:39:15</last_commit>
+<zip>
+	<file>sktheme4.zip</file>
+	<size>2508721</size>
+	<date>1280235944</date>
+	<source>_plugins_/sktheme4</source>
+	<last_commit>2010-12-12 20:39:15</last_commit>
+</zip>
 <plugin>
  <nom>SkTheme3</nom>
  <version>1.3.2</version>

@@ -5,10 +5,13 @@ Ce d&eacute;p&ocirc;t ne pas la nouvelle balise <code><depot></code> et sa liste
  -->
 <archives>
 <archive id="paquet6.zip">
-<file>paquet6.zip</file>
-<size>84618</size>
-<date>1279627226</date>
-<source>_plugins_/plugin_1</source>
+<zip>
+	<file>paquet6.zip</file>
+	<size>84618</size>
+	<date>1279627226</date>
+	<source>_plugins_/plugin_1</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
 <plugin>
     <prefix>a2a</prefix>
 	<nom>
@@ -42,10 +45,13 @@ Ce d&eacute;p&ocirc;t ne pas la nouvelle balise <code><depot></code> et sa liste
 </archive>
 
 <archive id="paquet7.zip">
-<file>paquet7.zip</file>
-<size>84618</size>
-<date>1279627226</date>
-<source>_plugins_/plugin_3</source>
+<zip>
+	<file>paquet7.zip</file>
+	<size>84618</size>
+	<date>1279627226</date>
+	<source>_plugins_/plugin_3</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
 <plugin>
 	<prefix>spipmotion</prefix>
 	<nom>SPIPmotion</nom>

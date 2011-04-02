@@ -11,11 +11,13 @@ Ce d&eacute;p&ocirc;t ne pas la nouvelle balise <code><depot></code> et sa liste
 
 <archives>
 <archive id="fancyboxy.zip">
-<file>fancyboxy.zip</file>
-<size>50872</size>
-<date>1280223744</date>
-<source>_plugins_/fancyboxy</source>
-<last_commit>2010-06-29 12:57:03</last_commit>
+<zip>
+	<file>fancyboxy.zip</file>
+	<size>50872</size>
+	<date>1280223744</date>
+	<source>_plugins_/fancyboxy</source>
+	<last_commit>2010-06-29 12:57:03</last_commit>
+</zip>
 <plugin>
 	<nom>FancyBoxy</nom>
 	<auteur>
@@ -82,11 +84,13 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 </archive>
 
 <archive>
-<file>cs.zip</file>
-<size>521872</size>
-<date>1280223744</date>
-<source>_plugins_/couteau_suisse</source>
-<last_commit>2010-08-25 19:45:49</last_commit>
+<zip>
+	<file>cs.zip</file>
+	<size>521872</size>
+	<date>1280223744</date>
+	<source>_plugins_/couteau_suisse</source>
+	<last_commit>2010-08-25 19:45:49</last_commit>
+</zip>
 <plugin>
 	<nom><multi>Swiss Knife[fr]Le Couteau Suisse[ca]El Ganivet Su&#237;s[ar]&#1587;&#1603;&#1610;&#1606; &#1575;&#1604;&#1580;&#1610;&#1576;[nl]Het Zwitserland Mes[gl]A navalla su&#237;za[es]La Navaja Suiza[de]Schweizer Taschenmesser[tr]&#304;svi&#231;re &#199;ak&#305;s&#305;[br]Ar Gontell Suis[pt_br]Canivete Su&#237;&#231;o[ast]La Navaya Suiza[gl]A navalla su&#237;za[ro]Cu&#355;itul Elve&#355;ian[it]Coltellino Svizzero</multi></nom>
 	<icon>img/couteau-50.gif</icon>
@@ -372,11 +376,13 @@ Compatibilit&#224; : SPIP v1.92x, v2.0.x e v2.1.0
 </archive>
 
 <archive id="sktheme2.zip">
-<file>sktheme2.zip</file>
-<size>150872</size>
-<date>1280225944</date>
-<source>_plugins_/sktheme2</source>
-<last_commit>2010-11-28 20:39:15</last_commit>
+<zip>
+	<file>sktheme2.zip</file>
+	<size>150872</size>
+	<date>1280225944</date>
+	<source>_plugins_/sktheme2</source>
+	<last_commit>2010-11-28 20:39:15</last_commit>
+</zip>
 <plugin>
  <nom>SkTheme2</nom>
  <version>0.5</version>
@@ -412,11 +418,13 @@ _ Cette version ne contient pas de switcher
 </archive>
 
 <archive id="sktheme3.zip">
-<file>sktheme3.zip</file>
-<size>250872</size>
-<date>1280225944</date>
-<source>_plugins_/sktheme3</source>
-<last_commit>2010-12-02 20:39:16</last_commit>
+<zip>
+	<file>sktheme3.zip</file>
+	<size>250872</size>
+	<date>1280225944</date>
+	<source>_plugins_/sktheme3</source>
+	<last_commit>2010-12-02 20:39:16</last_commit>
+</zip>
 <plugin>
  <nom>SkTheme2</nom>
  <version>1.0</version>
@@ -452,11 +460,13 @@ _ Cette version ne contient pas de switcher
 </archive>
 
 <archive id="contrib_siou.zip">
-<file>contrib_siou.zip</file>
-<size>2875868</size>
-<date>1280223520</date>
-<source>_plugins_/siou</source>
-<last_commit>2009-07-15 04:48:31</last_commit>
+<zip>
+	<file>contrib_siou.zip</file>
+	<size>2875868</size>
+	<date>1280223520</date>
+	<source>_plugins_/siou</source>
+	<last_commit>2009-07-15 04:48:31</last_commit>
+</zip>
 </archive>
 
 </archives>
