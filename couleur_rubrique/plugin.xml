@@ -44,7 +44,7 @@ _ Le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtas
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>maintenance</categorie>
 	
-	<necessite id="lib:farbtastic_1_3" src="http://files.spip.org/spip-zone/farbtastic_1_3.zip" />
+	<necessite id="palette" />
 	
 </plugin>
 
