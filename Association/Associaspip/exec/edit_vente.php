@@ -9,10 +9,11 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
+include_spip ('inc/association_comptabilite');
 
 function exec_edit_vente() {
 		
@@ -49,7 +50,7 @@ function exec_edit_vente() {
 			if ($GLOBALS['association_metas']['destinations']=="on")
 			{
 				include_spip('inc/association_comptabilite');
-				$id_compte = sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_ventes']." AND id_journal=$id_vente");
+				$id_compte = sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".sql_quote($GLOBALS['association_metas']['pc_ventes']) ." AND id_journal=$id_vente");
 				$destination = association_liste_destinations_associees($id_compte);
 			} else $id_compte = NULL;
 		} else {

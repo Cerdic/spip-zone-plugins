@@ -47,7 +47,7 @@
 			<label for="journal"><strong><:asso:prets_libelle_mode_paiement:></strong></label>
 			<B_mode_paiement>
 			<select name="journal" id="journal" class="formo" > 
-			<BOUCLE_mode_paiement(ASSO_PLAN){par classe}{par code}{classe==#ENV{classe_banques}}>
+			<BOUCLE_mode_paiement(ASSO_PLAN){par classe}{par code}{classe==#ENV{classe_banques,.*}}>
 			<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
 			</BOUCLE_mode_paiement>
 			</select>

@@ -12,8 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
+include_spip ('inc/association_comptabilite');
 
 function exec_edit_don(){
 		
