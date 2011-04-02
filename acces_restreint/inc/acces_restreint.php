@@ -77,6 +77,31 @@ function accesrestreint_liste_contenu_zone_rub($id_zone){
 	return $liste_rubriques;
 }
 
+
+/**
+ * liste des rubriques d'une zone et leurs rubriques parentes.
+ *
+ * @param int/string $id_zone
+ * @return array
+ */
+function accesrestreint_liste_parentee_zone_rub($id_zone){
+	include_spip('inc/rubriques');
+	$liste_rubriques = accesrestreint_liste_contenu_zone_rub_direct($id_zone);
+	if (!count($liste_rubriques))
+		return $liste_rubriques;
+
+	$id = $liste_rubriques;
+	while ($parents = sql_allfetsel('id_parent', 'spip_rubriques',
+	sql_in('id_rubrique', $id))) {
+		$parents = array_map('array_shift', $parents);
+		$parents = array_diff($parents, array(0));
+		$id = $parents;
+		$liste_rubriques = array_merge($liste_rubriques, $parents);
+	}
+	
+	return $liste_rubriques;
+}
+
 /**
  * Lister les zones auxquelles un auteur appartient
  *
@@ -156,6 +181,7 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		elseif ($id_auteur)
 			$where[] = sql_in('zr.id_zone',accesrestreint_liste_zones_autorisees('',$id_auteur),'NOT');
 
+		// liste les rubriques (+branches) des zones dont ne fait pas parti l'auteur
 		$liste_rub_exclues[$id_auteur][$publique] = accesrestreint_liste_contenu_zone_rub($where);
 		#$liste_rub_exclues[$publique] = array_unique($liste_rub_exclues[$publique]);
 	}
@@ -168,7 +194,16 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		// Une restriction faible donne acces à une rubrique, même restreinte par 
 		// plusieurs zones, aux membres de chaque zone concernee.
 		// valeurs : 'faible', 'forte, ou 'exclusive'		
-		
+
+		// Autrement dit, si une rubrique 2 est enfant d'une rubrique 1,
+		// et qu'il existe une zone 1 (rubrique 1) et une zone 2 (rubrique 2) :
+		// - un auteur present dans la zone 1 (uniquement) ne pourra pas voir la rubrique 2
+		//   lorsque la restriction est "forte". Il le pourra avec une restriction "faible"
+		//
+		// - A l'inverse, un auteur present uniquement dans la zone 2 ne pourra pas voir
+		//   la rubrique 1 meme si la restriction est "faible" car la parentee n'est pas concernee.
+		//   il faut (si souhaite) dans ce cas definir en plus AR_TYPE_RESTRICTION_PARENTEE a "faible"
+		//   pour l'autoriser.
 		if (!isset($liste_rub_inclues[$id_auteur][$publique]) OR !is_array($liste_rub_inclues[$id_auteur][$publique])) {
 
 			$where = array();
@@ -186,7 +221,16 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 			elseif ($id_auteur)
 				$where[] = sql_in('zr.id_zone',accesrestreint_liste_zones_autorisees('',$id_auteur));
 
+			// liste les rubriques (+branches) des zones de l'auteur
 			$liste_rub_inclues[$id_auteur][$publique] = accesrestreint_liste_contenu_zone_rub($where);
+
+			// pour autoriser la vue des rubriques parentes
+			// memes si elles sont restreintes par une autre zone
+			if (defined("AR_TYPE_RESTRICTION_PARENTEE") AND AR_TYPE_RESTRICTION_PARENTEE == "faible") {
+				$liste_rub_inclues[$id_auteur][$publique] =
+					array_merge($liste_rub_inclues[$id_auteur][$publique],
+						accesrestreint_liste_parentee_zone_rub($where));
+			}
 		}
 
 		// Ne pas exclure les elements qui sont autorises
