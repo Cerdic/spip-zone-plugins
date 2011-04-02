@@ -9,22 +9,6 @@
 
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<fieldset class="todo">
-		<legend><:comments:cfg_forum_longueur:></legend>
-		<ul>
-			<li class="comments_forum_longueur_mini[ (#ENV**{erreurs}|table_valeur{forum_longueur_mini}|oui)erreur]">
-				<label for="forum_longueur_mini"><:comments:cfg_forum_longueur_mini:><br /><b>SANS EFFET&nbsp;!</b></label>[
-				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_mini})</span>
-				]<input type="text" class="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
-				<p class="explication">La longueur minimale des messages n'est pas encore param&egrave;trable dans SPIP qui n&eacute;cessite des messages d'au moins 10&nbsp;caract&egrave;res.</p>
-			</li>
-			<li class="comments_forum_longueur_maxi[ (#ENV**{erreurs}|table_valeur{forum_longueur_maxi}|oui)erreur]">
-				<label for="forum_longueur_maxi"><:comments:cfg_forum_longueur_maxi:><br /><b>SANS EFFET&nbsp;!</b></label>[
-				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_maxi})</span>
-				]<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" disabled="disabled" />
-			</li>
-		</ul>
-	</fieldset>
 	<fieldset>
 		<legend>Liste ou thread ?</legend>
 		<ul>
@@ -55,6 +39,22 @@
 		</ul>
 	</fieldset>
 	<fieldset class="todo">
+		<legend><:comments:cfg_forum_longueur:></legend>
+		<ul>
+			<li class="comments_forum_longueur_mini[ (#ENV**{erreurs}|table_valeur{forum_longueur_mini}|oui)erreur]">
+				<label for="forum_longueur_mini"><:comments:cfg_forum_longueur_mini:><br /><b class='erreur'>SANS EFFET&nbsp;!</b></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_mini})</span>
+				]<input type="text" class="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
+				<p class="explication">La longueur minimale des messages n'est pas encore param&egrave;trable dans SPIP qui n&eacute;cessite des messages d'au moins 10&nbsp;caract&egrave;res.</p>
+			</li>
+			<li class="comments_forum_longueur_maxi[ (#ENV**{erreurs}|table_valeur{forum_longueur_maxi}|oui)erreur]">
+				<label for="forum_longueur_maxi"><:comments:cfg_forum_longueur_maxi:><br /><b>SANS EFFET&nbsp;!</b></label>[
+				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_maxi})</span>
+				]<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" disabled="disabled" />
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset class="todo none">
 		<legend>Style</legend>
 		<ul>
 			<li class="comments_style[ (#ENV**{erreurs}|table_valeur{comments_style}|oui)erreur]">
