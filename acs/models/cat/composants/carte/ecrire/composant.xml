@@ -25,10 +25,6 @@
     <type>text</type>
   </variable>
   <variable>
-    <nom>Height</nom>
-    <type>nombre</type>
-  </variable>
-  <variable>
     <nom>Lat</nom>
     <type>nombre</type>
   </variable>

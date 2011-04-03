@@ -20,8 +20,8 @@
       <p class="titre tsize"><a href="#URL_ARTICLE">#TITRE</a></p>
       [<p class="soustitre stsize">(#SOUSTITRE)</p>]
       <small class="infos_article nsize">[(#DATE_REDAC|affdate|sinon{#DATE|affdate})][, <:par_auteur:> (#LESAUTEURS)]</small>
-      [<br /><div class="chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> (lire la suite)</a></i></small>})</div>]
-      [<span class="texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> (lire la suite)</a></i></small>})</span><br />]
+      [<br /><div class="chapo">(#CHAPO|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</div>]
+      [<span class="texte">(#TEXTE|coupe{#VAR{acsEditoNbLettres,500},... <small><i><a href="#URL_ARTICLE"> <:acs:articles_lire_la_suite:></a></i></small>})</span><br />]
       <BOUCLE_mot(MOTS) {id_article} {titre=#GET{acsEditoKeyword}} {0,1}><a href="#URL_MOT"><img src="#ACS_CHEMIN{triangles/deplierhaut.gif}" alt=">" /> <:acs:edito_previous:></a></BOUCLE_mot>
     </BOUCLE_edito>
 </fieldset>

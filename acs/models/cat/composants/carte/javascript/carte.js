@@ -62,21 +62,30 @@ function addPicto(item, markerLayer, map, pins) {
     var icon = img2icon(item.icon, defPicto, defPictoWidth, defPictoHeight, pins);
     var iconUrl = icon.url;
     var overUrl = img2icon(item.over, defPictoHover, defPictoHoverWidth, defPictoHoverHeight, pins).url;
-    var html = '<div class="bulle"><p class="titre"><a href="' + item.url + '">' + item.title + '</a></p><div id="pa' + item.id + '"><img src="" /></div></div>';
+    var html = '<div class="titre"><a href="' + item.url + '">' + item.title + '</a></div>';
 		var marker = new OpenLayers.Marker(point.fromDataToDisplay(), icon);
 		jQuery(marker.icon.imageDiv).attr("title", item.title);
 		marker.events.register("click", marker, function click(evt) {
       if (popup == null) {
-        popup = new OpenLayers.Popup.FramedCloud("popup" + item.id, point.fromDataToDisplay(), new OpenLayers.Size(300,200), html, undefined, true);
-        popup.autoSize = false;
-        popup.contentDisplayClass = "ccPopup";
+        popup = new OpenLayers.Popup.FramedCloud("popup" + item.id, point.fromDataToDisplay(), undefined, html + '<div style="display: block; width: 100%; height: 100%; background: transparent url(plugins/gis/img_pack/attente.gif) center center no-repeat;"></div>', undefined, true);
+        popup.autoSize = true;
+        popup.maxSize = new OpenLayers.Size(map.size.w/2 + 40, map.size.h/2 + 40);
         map.addPopup(popup);
         jQuery.ajax({
         	url: item.urlajax,
         	success: function(data) {
-        		jQuery("#pa" + item.id).html(data);
+        		popup.setContentHTML(html + data);
         	},
-        });        
+        	complete: function() {
+        		var h = jQuery("#popup" + item.id).height();
+        		h -= jQuery(".titre", "#popup" + item.id).height();
+        		h -= jQuery(".date", "#popup" + item.id).height();
+        		h -= 60;
+        		jQuery(".bulle", "#popup" + item.id).height(h);        		
+        		popup.updateSize();
+        		popup.panIntoView();
+        	}
+        });
       } else {
         popup.toggle();
       }

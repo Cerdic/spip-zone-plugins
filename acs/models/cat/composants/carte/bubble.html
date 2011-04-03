@@ -8,23 +8,23 @@ Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Affiche la bulle d'information de la rubrique ou de l'article
+Le style des listes d'articles d'une rubrique est defini par le composant Articles.
 
-]<BOUCLE_rub(RUBRIQUES){tous}{id_rubrique}>
-  [<a href='#URL_RUBRIQUE'>(#LOGO_RUBRIQUE|left|image_reduire{100,100})</a>]
-  [<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]
-  [<p>(#DESCRIPTIF)</p>]
-  [<p>(#TEXTE)</p>]
-  <B_articles>
-  <ul>
-  <BOUCLE_articles(ARTICLES){id_rubrique}{par date}{inverse}{0, #ENV{limit,10}}{lang}>
-    <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{masquer_rubrique=oui}>
-  </BOUCLE_articles>
-  </ul>
-  </B_articles>
-</BOUCLE_rub>
-<BOUCLE_art(ARTICLES){tous}{id_article}>
-  [<a href='#URL_ARTICLE'>(#LOGO_ARTICLE|left|image_reduire{100,100})</a>]
-  [<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]
-  [<p>(#DESCRIPTIF)</p>]
-  [<p>(#TEXTE)</p>]
+]<BOUCLE_rub(RUBRIQUES){tous}{id_rubrique}>[<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]
+  <div class="bulle liste-articles">
+    [<a href='#URL_RUBRIQUE'>(#LOGO_RUBRIQUE|left|image_reduire{100,100})</a>]
+    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}][(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>]]
+    <B_articles><ul>
+    <BOUCLE_articles(ARTICLES){id_rubrique}{par date}{inverse}{0, #ENV{limit,10}}{lang}>
+      <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{masquer_rubrique=oui}>
+    </BOUCLE_articles>
+    </ul></B_articles>
+  </div></BOUCLE_rub>
+<BOUCLE_art(ARTICLES){tous}{id_article}>[<div class='date'><small><:dernier_ajout:>: (#DATE_MODIF|affdate)</small></div>]
+  <div class="bulle">
+    [<a href='#URL_ARTICLE'>(#LOGO_ARTICLE|left|image_reduire{100,100})</a>]
+    [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]
+    [(#GET{done}|!={oui}|?{' '})[<p>(#CHAPO|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]]
+    [(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>]]
+  </div>
 </BOUCLE_art>

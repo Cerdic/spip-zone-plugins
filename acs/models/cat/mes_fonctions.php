@@ -22,7 +22,7 @@ function sans_guillemets($texte) {
 
 function coupe($texte, $taille=50, $suite) {
 	$texte = couper($texte, $taille);
-	$texte = PtoBR(propre(supprimer_tags($texte)));
+	$texte = PtoBR(propre($texte));
 	$texte = str_replace('&nbsp;(...)', $suite, $texte);
 	return $texte;
 }

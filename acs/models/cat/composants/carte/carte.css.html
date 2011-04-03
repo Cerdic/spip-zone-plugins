@@ -1,0 +1,299 @@
+[(#CACHE{0})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Feuille de style de la carte, derivee de theme/default/style.css d'Openlayers 2.10
+
+Map stylesheet derived from theme/default/style.css d'Openlayers 2.10
+
+].cCarte, .cCarte .carte_gis {
+  height: 100%;
+  width: 100%;
+}
+.cCarte div.olMap {
+    z-index: 0;
+    padding: 0px!important;
+    margin: 0px!important;
+    cursor: default;
+}
+.cCarte div.olMapViewport {
+    text-align: left;
+}
+.cCarte div.olLayerDiv {
+   -moz-user-select: none;
+}
+.cCarte .olLayerGoogleCopyright {
+    left: 2px;
+    bottom: 2px;
+}
+.cCarte .olLayerGooglePoweredBy {
+    left: 2px;
+    bottom: 15px;
+}
+.cCarte .olControlAttribution {
+    font-size: smaller;
+    right: 3px;
+    bottom: 3px;
+    position: absolute;
+    display: block;
+}
+.cCarte .olControlScale {
+    right: 3px;
+    bottom: 3em;
+    display: block;
+    position: absolute;
+    font-size: smaller;
+}
+.cCarte .olControlScaleLine {
+   display: block;
+   position: absolute;
+   left: 10px;
+   bottom: 15px;
+   font-size: xx-small;
+}
+.cCarte .olControlScaleLineBottom {
+   border: solid 2px black;
+   border-bottom: none;
+   margin-top:-2px;
+   text-align: center;
+}
+.cCarte .olControlScaleLineTop {
+   border: solid 2px black;
+   border-top: none;
+   text-align: center;
+}
+
+.cCarte .olControlPermalink {
+    right: 3px;
+    bottom: 1.5em;
+    display: block;
+    position: absolute;
+    font-size: smaller;
+}
+
+.cCarte div.olControlMousePosition {
+    bottom: 0em;
+    right: 3px;
+    display: block;
+    position: absolute;
+    font-family: Arial;
+    font-size: smaller;
+}
+
+.cCarte .olControlNavToolbar {
+    width:0px;
+    height:0px;
+}
+.cCarte .olControlNavToolbar div {
+  display:block;
+  width:  28px;
+  height: 28px;
+  top: 300px;
+  left: 6px;
+  position: relative;
+}
+
+.cCarte .olControlNavigationHistory {
+   background-image: url("img/navigation_history.png");
+   background-repeat: no-repeat;
+   width:  24px;
+   height: 24px;
+
+}
+.cCarte .olControlNavigationHistoryPreviousItemActive {
+  background-position: 0px 0px;
+}
+.cCarte .olControlNavigationHistoryPreviousItemInactive {
+   background-position: 0px -24px;
+}
+.cCarte .olControlNavigationHistoryNextItemActive {
+   background-position: -24px 0px;
+}
+.cCarte .olControlNavigationHistoryNextItemInactive {
+   background-position: -24px -24px;
+}
+
+.cCarte .olControlNavToolbar .olControlNavigationItemActive {
+  background-image: url("img/panning-hand-on.png");
+  background-repeat: no-repeat;
+}
+.cCarte .olControlNavToolbar .olControlNavigationItemInactive {
+  background-image: url("img/panning-hand-off.png");
+  background-repeat: no-repeat;
+}
+.cCarte .olControlNavToolbar .olControlZoomBoxItemActive {
+  background-image: url("img/drag-rectangle-on.png");
+  background-color: orange;
+  background-repeat: no-repeat;
+}
+.cCarte .olControlNavToolbar .olControlZoomBoxItemInactive {
+  background-image: url("img/drag-rectangle-off.png");
+  background-repeat: no-repeat;
+}
+
+.cCarte .olControlPanPanel {
+    top: 10px;
+    left: 5px;
+}
+
+.cCarte .olControlPanPanel div {
+    background-image: url(img/pan-panel.png);
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+    position: absolute;
+}
+
+.cCarte .olControlPanPanel .olControlPanNorthItemInactive {
+    top: 0px;
+    left: 9px;
+    background-position: 0px 0px;
+}
+.cCarte .olControlPanPanel .olControlPanSouthItemInactive {
+    top: 36px;
+    left: 9px;
+    background-position: 18px 0px;
+}
+.cCarte .olControlPanPanel .olControlPanWestItemInactive {
+    position: absolute;
+    top: 18px;
+    left: 0px;
+    background-position: 0px 18px;
+}
+.cCarte .olControlPanPanel .olControlPanEastItemInactive {
+    top: 18px;
+    left: 18px;
+    background-position: 18px 18px;
+}
+
+.cCarte .olControlZoomPanel {
+    top: 71px;
+    left: 14px;
+}
+
+.cCarte .olControlZoomPanel div {
+    background-image: url(img/zoom-panel.png);
+    position: absolute;
+    height: 18px;
+    width: 18px;
+    cursor: pointer;
+}
+
+.cCarte .olControlZoomPanel .olControlZoomInItemInactive {
+    top: 0px;
+    left: 0px;
+    background-position: 0px 0px;
+}
+
+.cCarte .olControlZoomPanel .olControlZoomToMaxExtentItemInactive {
+    top: 18px;
+    left: 0px;
+    background-position: 0px -18px;
+}
+
+.cCarte .olControlZoomPanel .olControlZoomOutItemInactive {
+    top: 36px;
+    left: 0px;
+    background-position: 0px 18px;
+}
+
+.cCarte .olPopupCloseBox {
+  background: url("[(#ACS_CHEMIN{mapui/close.gif}|url_absolue)]") no-repeat;
+  cursor: pointer;
+}
+.cCarte .olPopupCloseBox:hover {
+  background: url("[(#ACS_CHEMIN{mapui/close_over.gif}|url_absolue)]") no-repeat;
+}
+
+.cCarte .olFramedCloudPopupContent {
+  min-height:100px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+.cCarte .olFramedCloudPopupContent .bulle {
+  overflow: auto;
+  height: 100%;
+  padding-right: 5px;
+}
+
+.cCarte .olControlNoSelect {
+ -moz-user-select: none;
+}
+
+.cCarte .olImageLoadError {
+    background-color: pink;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* IE */
+}
+
+/**
+ * Cursor styles
+ */
+
+.cCarte .olCursorWait {
+    cursor: wait;
+}
+.cCarte .olDragDown {
+    cursor: move;
+}
+.cCarte .olDrawBox {
+    cursor: crosshair;
+}
+.cCarte .olControlDragFeatureOver {
+    cursor: move;
+}
+.cCarte .olControlDragFeatureActive.olControlDragFeatureOver.olDragDown {
+    cursor: -moz-grabbing;
+}
+
+/**
+ * Layer switcher
+ */
+.cCarte .olControlLayerSwitcher {
+    position: absolute;
+    top: 25px;
+    right: 0px;
+    width: 20em;
+    font-family: sans-serif;
+    font-weight: bold;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-bottom: 3px;
+    font-size: smaller;
+    color: black;
+    background-color: transparent;
+}
+
+.cCarte .olControlLayerSwitcher .layersDiv {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-right: 75px;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+}
+
+.cCarte .olControlLayerSwitcher .layersDiv .baseLbl,
+.olControlLayerSwitcher .layersDiv .dataLbl {
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-bottom: 3px;
+}
+
+.cCarte .olControlLayerSwitcher .layersDiv .baseLayersDiv,
+.cCarte .olControlLayerSwitcher .layersDiv .dataLayersDiv {
+    padding-left: 10px;
+}
+
+.cCarte .olControlLayerSwitcher .maximizeDiv,
+.cCarte .olControlLayerSwitcher .minimizeDiv {
+    top: 5px;
+    right: 0px;
+}

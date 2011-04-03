@@ -16,6 +16,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'table' => 'Table',
 'sommaire' => 'Summary',
 
+'lire_la_suite' => 'read more',
+
 'aucun_article_note' => 'No article rated'
 
 );
