@@ -2,7 +2,7 @@
 	<nom>SVP</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GPL</licence>
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/svp-64.png</icon>
 	<etat>dev</etat>
@@ -61,7 +61,7 @@
 		<url>depots_gerer</url>
 	</onglet>
 
-	<necessite id="SPIP" version='[2.1.1;]' />
+	<necessite id="SPIP" version='[2.1.9;]' />
 	<utilise id="zcore" version='[2.0.0-dev;]' />
 
 	<categorie>maintenance</categorie>
