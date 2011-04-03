@@ -19,6 +19,32 @@
 #SET{color,#CONFIG{petronille/typo/color,#666666}} [ color: (#GET{color});]
 */
 
+/* Listes SPIP */
+ul.spip, ol.spip { margin-left: #GET{text-indent}; }
+ul.spip { list-style-type: disc; }
+li ul.spip { list-style-type: circle; }
+ol { list-style-type: decimal; }
+ol.spip {}
+
+dl.spip dt,
+dl.spip dd { padding-left: #GET{text-indent}; }
+dl.spip dt { clear: both; }
+dl.spip dd {}
+
+/* Tableaux SPIP */
+table.spip {}
+table.spip caption {}
+table.spip tr.row_first {}
+table.spip tr.row_odd {}
+table.spip tr.row_even {}
+
+/* Citations, code et poesie */
+blockquote.spip {}
+.spip_poesie {}
+.spip_poesie div { margin-left: #GET{text-indent}; text-indent: -#GET{text-indent}; }
+
+.spip_code,.spip_cadre {}
+
 /* Logos, documents et images */
 .spip_logos { float: left; margin: 0 10px .1em 0; padding: 0; border: none; }
 dl.spip_documents,
@@ -38,6 +64,21 @@ dl.spip_documents,
 
 /* Modeles par defaut */
 .spip_modele { float: right; display: block; width: 25%; border: 1px dotted #666; }
+
+/* Previsu */
+.previsu {}
+
+/* Reponses */
+.reponse_formulaire { font-size: 120%; }
+.reponse_formulaire_erreur,
+.erreur_message { color: red; }
+.reponse_formulaire_ok { color: green; }
+
+li.erreur input[type="text"], li.erreur input.text,
+li.erreur input[type="password"], li.erreur input.password,
+li.erreur textarea { border-color: red; }
+
+.spip_surligne { background-color: yellow; }
 
 /* Liens de SPIP */
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */

@@ -13,21 +13,6 @@ input[type="button"],input.button,
 input[type="image"],input.image,
 button { cursor: pointer; }
 
-/* Previsu */
-.previsu {}
-
-/* Reponses */
-.reponse_formulaire { font-size: 120%; }
-.reponse_formulaire_erreur,
-.erreur_message { color: red; }
-.reponse_formulaire_ok { color: green; }
-
-li.erreur input[type="text"], li.erreur input.text,
-li.erreur input[type="password"], li.erreur input.password,
-li.erreur textarea { border-color: red; }
-
-.spip_surligne { background-color: yellow; }
-
 /* Success, notice and error boxes */
 
 .error,

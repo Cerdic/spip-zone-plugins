@@ -51,17 +51,8 @@ sub { vertical-align: sub; }
 ul, ol, li, dl, dt, dd {}
 ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
 
-ul.spip, ol.spip { margin-left: #GET{text-indent}; }
-ul.spip { list-style-type: disc; }
-li ul.spip { list-style-type: circle; }
-ol { list-style-type: decimal; }
-ol.spip {}
-
 dl dt { font-weight: bold; }
-dl.spip dt,
-dl.spip dd { padding-left: #GET{text-indent}; }
-dl.spip dt { clear: both; }
-dl.spip dd {}
+dl dd {}
 
 /* Tableaux */
 table { border-collapse: collapse; border-spacing: 0; }
@@ -74,25 +65,14 @@ tr.odd td { background: #DDD; }
 tr.even td { background: #EEE; }
 tfoot { font-style: italic; }
 
-/* Tableaux SPIP */
-table.spip {}
-table.spip caption {}
-table.spip tr.row_first {}
-table.spip tr.row_odd {}
-table.spip tr.row_even {}
-
 /* Citations, code et poesie */
 q { font-style: italic; }
 blockquote { padding: 0 #GET{text-indent}; }
-blockquote.spip {}
-.spip_poesie {}
-.spip_poesie div { margin-left: #GET{text-indent}; text-indent: -#GET{text-indent}; }
 cite { font-style: italic; }
 
 address { font-style: italic; }
 
-pre,code,kbd,samp,var,tt,
-.spip_code,.spip_cadre { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
+pre,code,kbd,samp,var,tt { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
 pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
 kbd { background-color: #GET{color}; color: #GET{background-color}; }
 samp { font-weight: bold; }
