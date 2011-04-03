@@ -9,7 +9,7 @@ include_spip('inc/xml');
 // Le fichier est un fichier XML contenant deux balises principales :
 // - <depot>...</depot> : informations de description du depot (facultatif)
 // - <archives>...</archives> : liste des informations sur chaque archive (obligatoire)
-function svp_phraser_depot($url){
+function svp_phraser_depot($url) {
 
 	// On lit le fichier xml. A priori il ne peut y avoir d'erreur, l'url a ete verifiee par l'appelant...
 	include_spip('inc/distant');
@@ -53,7 +53,7 @@ function svp_phraser_depot($url){
 	// - <zip> : contient les balises d'information sur le zip (obligatoire)
 	// - <traductions> : contient la compilation des informations de traduction (facultatif)
 	// - <plugin> ou <paquet> suivant la DTD : le contenu du fichier plugin.xml ou paquet.xml (facultatif)
-function svp_phraser_archives($archives){
+function svp_phraser_archives($archives) {
 	$paquets = array();
 
 	// On verifie qu'il existe au moins une archive
@@ -81,17 +81,26 @@ function svp_phraser_archives($archives){
 				// -- On stocke la DTD d'extraction des infos du plugin
 				$paquets[$zip[file]]['dtd'] = (isset($attributs['dtd'])) ? $attributs['dtd'] : _SVP_DTD_PLUGIN;
 
-				// Extraction de la balise plugin ou paquet suivant la DTD et la version SPIP
+				// Extraction *des balises* plugin ou *de la balise* paquet suivant la DTD et la version SPIP
 				// -- DTD : si on utilise plugin.xml on extrait la balise <plugin> sinon la balise <paquet>
 				// -- Pour SPIP < 2.2, seule la DTD de plugin.xml est utilisee. 
 				// -- De plus, la fonction infos_plugins() n'existant pas dans SPIP 2.1, son backport 
 				// est inclus dans SVP
 				$paquets[$zip[file]]['plugin'] = array();
 				$regexp = ($paquets[$zip[file]]['dtd'] == 'plugin') ? _SVP_REGEXP_BALISE_PLUGIN : _SVP_REGEXP_BALISE_PAQUET;
-				if (preg_match($regexp, $_archive, $matches)) {
-					// Extraction des informations du plugin suivant le standard SPIP
-					$informer = charger_fonction('infos_' . $paquets[$zip[file]]['dtd'], 'plugins');
-					$paquets[$zip[file]]['plugin'] = $informer($matches[0]);
+				if ($nb_balises = preg_match_all($regexp, $_archive, $matches)) {
+					$plugins = array();
+					// Pour chacune des occurences de la balise on extrait les infos
+					foreach ($matches[0] as $_balise_plugin) {
+						// Extraction des informations du plugin suivant le standard SPIP
+						$informer = charger_fonction('infos_' . $paquets[$zip[file]]['dtd'], 'plugins');
+						$plugins[] = $informer($_balise_plugin);
+					}
+					// Si le nombre de balises est superieur a 1, on est forcement en presence d'une DTD plugin
+					// -- On fusionne donc les informations recoltees sinon on renvoie la balise unique
+					if ($paquets[$zip[file]]['dtd'] == 'plugin')
+						$fusionner = charger_fonction('fusion_' . $paquets[$zip[file]]['dtd'], 'plugins');
+					$paquets[$zip[file]]['plugin'] = ($nb_balises > 1) ? $fusionner($plugins) : $plugins[0];
 				}
 			}
 		}
@@ -115,7 +124,7 @@ function svp_phraser_zip($contenu) {
 
 // Phrase le contenu d'une balise <traductions> en un tableau plus facilement utilisable
 // -- Par module, la langue de reference, le gestionnaire, les langues traduites et leurs traducteurs
-function svp_phraser_traductions($contenu){
+function svp_phraser_traductions($contenu) {
 	
 	$traductions = array();
 	if (is_array($arbre = spip_xml_parse($contenu))) {

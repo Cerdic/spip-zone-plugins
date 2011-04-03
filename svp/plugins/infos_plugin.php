@@ -14,8 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // lecture d'un texte ecrit en pseudo-xml issu d'un fichier plugin.xml
 // et conversion approximative en tableau PHP.
-function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
-{
+function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS) {
 	include_spip('inc/xml');
 	$arbre = spip_xml_parse($desc);
 
@@ -79,8 +78,7 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS)
 	return $ret;
 }
 
-function info_plugin_normalise_necessite($necessite)
-{
+function info_plugin_normalise_necessite($necessite) {
 	$res = array('necessite' => array(), 'lib' => array());
 
 	if (is_array($necessite)) {
@@ -100,8 +98,7 @@ function info_plugin_normalise_necessite($necessite)
 	return $res;
 }
 
-function info_plugin_normalise_utilise($utilise)
-{
+function info_plugin_normalise_utilise($utilise) {
 	$res = array();
 
 	if (is_array($utilise)) {

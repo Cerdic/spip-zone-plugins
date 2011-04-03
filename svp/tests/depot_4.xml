@@ -52,11 +52,11 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	<nom>FancyBoxy</nom>
 	<auteur>
 	fancyboxy par [fancyboxy.net->http://fancyboxy.net/]
-_ Mis en plugin par b_b
+_ Mis en plugin par b_b et eric
 	</auteur>
 	<version>0.5</version>
 	<icon></icon>
-	<etat>test</etat>
+	<etat>dev</etat>
 	<description>
 Fen&#234;tre de dialogue ou de galerie photo.
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
