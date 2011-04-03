@@ -68,6 +68,134 @@ function addPicto(item, markerLayer, map, pins) {
 		marker.events.register("click", marker, function click(evt) {
       if (popup == null) {
         popup = new OpenLayers.Popup.FramedCloud("popup" + item.id, point.fromDataToDisplay(), undefined, html + '<div style="display: block; width: 100%; height: 100%; background: transparent url(plugins/gis/img_pack/attente.gif) center center no-repeat;"></div>', undefined, true);
+        popup.imageSize = new OpenLayers.Size(676, 736);
+        popup.positionBlocks = {
+            "tl": {
+          'offset': new OpenLayers.Pixel(44, 20),
+          'padding': new OpenLayers.Bounds(8, 60, 20, 9),
+          'blocks': [
+              { // top-left
+                  size: new OpenLayers.Size('auto', 'auto'),
+                  anchor: new OpenLayers.Bounds(0, 72, 39, 0),
+                  position: new OpenLayers.Pixel(0, 0)
+              },
+              { //top-right
+                  size: new OpenLayers.Size(39, 'auto'),
+                  anchor: new OpenLayers.Bounds(null, 72, 0, 0),
+                  position: new OpenLayers.Pixel(-621, 0)
+              },
+              { //bottom-left
+                  size: new OpenLayers.Size('auto', 38),
+                  anchor: new OpenLayers.Bounds(0, 34, 39, null),
+                  position: new OpenLayers.Pixel(0, -611)
+              },
+              { //bottom-right
+                  size: new OpenLayers.Size(39, 38),
+                  anchor: new OpenLayers.Bounds(null, 34, 0, null),
+                  position: new OpenLayers.Pixel(-621, -611)
+              },
+              { // stem
+                  size: new OpenLayers.Size(81, 54),
+                  anchor: new OpenLayers.Bounds(null, 0, 0, null),
+                  position: new OpenLayers.Pixel(0, -685)
+              }
+          ]
+      },
+      "tr": {
+          'offset': new OpenLayers.Pixel(-36, 20),
+          'padding': new OpenLayers.Bounds(8, 60, 20, 9),
+          'blocks': [
+              { // top-left
+                   size: new OpenLayers.Size('auto', 'auto'),
+                  anchor: new OpenLayers.Bounds(0, 72, 39, 0),
+                  position: new OpenLayers.Pixel(0, 0)
+              },
+              { //top-right
+                  size: new OpenLayers.Size(39, 'auto'),
+                  anchor: new OpenLayers.Bounds(null, 72, 0, 0),
+                  position: new OpenLayers.Pixel(-621, 0)
+              },
+              { //bottom-left
+                  size: new OpenLayers.Size('auto', 38),
+                  anchor: new OpenLayers.Bounds(0, 34, 39, null),
+                  position: new OpenLayers.Pixel(0, -611)
+              },
+              { //bottom-right
+                  size: new OpenLayers.Size(39, 38),
+                  anchor: new OpenLayers.Bounds(null, 34, 0, null),
+                  position: new OpenLayers.Pixel(-621, -611)
+              },
+              { // stem
+                  size: new OpenLayers.Size(81, 54),
+                  anchor: new OpenLayers.Bounds(0, 0, null, null),
+                  position: new OpenLayers.Pixel(-225, -685)
+              }
+          ]
+      },
+      "bl": {
+          'offset': new OpenLayers.Pixel(45, 0),
+          'padding': new OpenLayers.Bounds(8, 29, 20, 40),
+          'blocks': [
+              { // top-left
+                  size: new OpenLayers.Size('auto', 'auto'),
+                  anchor: new OpenLayers.Bounds(0, 38, 39, 32),
+                  position: new OpenLayers.Pixel(0, 0)
+              },
+              { //top-right
+                  size: new OpenLayers.Size(39, 'auto'),
+                  anchor: new OpenLayers.Bounds(null, 38, 0, 32),
+                  position: new OpenLayers.Pixel(-621, 0)
+              },
+              { //bottom-left
+                  size: new OpenLayers.Size('auto', 55),
+                  anchor: new OpenLayers.Bounds(0, -17, 39, null),
+                  position: new OpenLayers.Pixel(0, -611)
+              },
+              { //bottom-right
+                  size: new OpenLayers.Size(39, 55),
+                  anchor: new OpenLayers.Bounds(null, -17, 0, null),
+                  position: new OpenLayers.Pixel(-621, -611)
+              },
+              { // stem
+                  size: new OpenLayers.Size(81, 37),
+                  anchor: new OpenLayers.Bounds(null, null, 0, 0),
+                  position: new OpenLayers.Pixel(-101, -674)
+              }
+          ]
+      },
+      "br": {
+          'offset': new OpenLayers.Pixel(-27, 0),
+          'padding': new OpenLayers.Bounds(8, 29, 20, 40),
+          'blocks': [
+              { // top-left
+                  size: new OpenLayers.Size('auto', 'auto'),
+                  anchor: new OpenLayers.Bounds(0, 38, 39, 32),
+                  position: new OpenLayers.Pixel(0, 0)
+              },
+              { //top-right
+                  size: new OpenLayers.Size(39, 'auto'),
+                  anchor: new OpenLayers.Bounds(null, 38, 0, 32),
+                  position: new OpenLayers.Pixel(-621, 0)
+              },
+              { //bottom-left
+                  size: new OpenLayers.Size('auto', 55),
+                  anchor: new OpenLayers.Bounds(0, -17, 39, null),
+                  position: new OpenLayers.Pixel(0, -611)
+              },
+              { //bottom-right
+                  size: new OpenLayers.Size(39, 55),
+                  anchor: new OpenLayers.Bounds(null, -17, 0, null),
+                  position: new OpenLayers.Pixel(-621, -611)
+              },
+              { // stem
+                  size: new OpenLayers.Size(81, 37),
+                  anchor: new OpenLayers.Bounds(0, null, null, 0),
+                  position: new OpenLayers.Pixel(-328, -674)
+              }
+          ]
+      }
+  };
+
         popup.autoSize = true;
         popup.maxSize = new OpenLayers.Size(map.size.w/2 + 40, map.size.h/2 + 40);
         map.addPopup(popup);
@@ -80,7 +208,7 @@ function addPicto(item, markerLayer, map, pins) {
         		var h = jQuery("#popup" + item.id).height();
         		h -= jQuery(".titre", "#popup" + item.id).height();
         		h -= jQuery(".date", "#popup" + item.id).height();
-        		h -= 60;
+        		h -= 65;
         		jQuery(".bulle", "#popup" + item.id).height(h);        		
         		popup.updateSize();
         		popup.panIntoView();
