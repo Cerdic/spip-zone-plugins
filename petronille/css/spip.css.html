@@ -23,8 +23,7 @@
 ul.spip, ol.spip { margin-left: #GET{text-indent}; }
 ul.spip { list-style-type: disc; }
 li ul.spip { list-style-type: circle; }
-ol { list-style-type: decimal; }
-ol.spip {}
+ol.spip { list-style-type: decimal; }
 
 dl.spip dt,
 dl.spip dd { padding-left: #GET{text-indent}; }
@@ -47,6 +46,7 @@ blockquote.spip {}
 
 /* Logos, documents et images */
 .spip_logos { float: left; margin: 0 10px .1em 0; padding: 0; border: none; }
+
 dl.spip_documents,
 .spip_documents dt,
 .spip_documents dd { margin: 0 auto; padding: 0; background: none; }
@@ -80,6 +80,9 @@ li.erreur textarea { border-color: red; }
 
 .spip_surligne { background-color: yellow; }
 
+/* Paragraphes */
+div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: #GET{margin-bottom}; }
+
 /* Liens de SPIP */
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
 a.spip_in {} /* liens internes */
@@ -87,6 +90,5 @@ a.spip_mail {}
 a.spip_out {} /* liens sortants */
 a.spip_url {} /* liens url sortants */
 a.spip_glossaire {} /* liens vers encyclopedie */
-.on { font-weight: bold; } /* liens exposes */
 
 /* end */
