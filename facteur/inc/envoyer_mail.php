@@ -48,15 +48,16 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 	
 	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
-	if (!empty($from))
+	if (!empty($from)) {
 		$facteur->From = $from;
-	
+		// la valeur par défaut de la config n'est probablement pas valable pour ce mail,
+		// on l'écrase pour cet envoi
+		$facteur->FromName = $from;
+	}
+
 	// On ajoute le nom de l'envoyeur s'il fait partie des options
 	if ($nom_envoyeur)
 		$facteur->FromName = $nom_envoyeur;
-	// Sinon on met le courriel
-	else
-		$facteur->FromName = $from;
 	
 	// S'il y a des copies à envoyer
 	if ($cc){
