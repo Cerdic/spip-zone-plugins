@@ -10,6 +10,7 @@
 		</BOUCLE_auteur>
 		[<abbr class="dtreviewed"[ title="(#DATE|date_iso)"]><:comments:date_jour_le:> (#DATE|affdate_jourcourt)[ <:comments:date_heure_a:>&nbsp;(#DATE|heures)][:(#DATE|minutes)]</abbr>][<span class="reviewer vcard"><span class="sep">, </span><:par_auteur:> [<a rel="external nofollow" href="(#URL_SITE)"[ title="(#NOM_SITE*|attribut_html)"] class="#EDIT{hyperlien} url spip_out">]<strong class="#EDIT{qui} fn n">(#NOM|sinon{[(#PLUGIN{gravatar}|oui)?]})</strong>[</a>(#URL_SITE|oui)][(#PLUGIN{gravatar}|oui)[ (#MODELE{gravatar}{email=#EMAIL*})]]</span>]
 		<//B_auteur>
+		[<span class="item"><:en_reponse:> <a class="url fn" href="#URL_ARTICLE">(#TITRE)</a></span>]
 	</p>
 	<div class="comment-content description">
 		[<div class="comment-texte #EDIT{texte}">(#TEXTE|lignes_longues)</div>]
