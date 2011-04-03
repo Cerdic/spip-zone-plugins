@@ -6,6 +6,7 @@
 	<icon>bandeau-32.png</icon>
 	<etat>stable</etat>
 	<description>Revisitons la barre de nav de SPIP</description>
+	<lien>http://www.spip-contrib.net/bandeau</lien>
 	<prefix>bando</prefix>
 
 	<necessite id="SPIP" version="[2.0.3;2.2.0-dev]" />
