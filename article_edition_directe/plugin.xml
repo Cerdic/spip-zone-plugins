@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Articles en édition directe[en]Edition mode for articles[es]Editar artículos directamente[de]Redaktion Modus für Artikel</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>test</etat>
 	<description>
 		<multi>
