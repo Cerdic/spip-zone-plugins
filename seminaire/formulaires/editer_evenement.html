@@ -24,7 +24,7 @@
 	    
 	    [(#REM)gestion des mots clés]
 		 [<li class="editer_mots[ (#ENV**{erreurs}|table_valeur{mots}|oui)erreur] obligatoire">
-	    <label for="mots"><:seminaire:choix_mot:></label>(#INCLURE{fond=formulaires/inc-mots_evenements}{name=mots}{id_evenement}{selected=#ENV{mots}}|trim)
+	<label for="mots"><:seminaire:choix_mot:></label>  <em class='explication attention rouge'><:seminaire:attention_mot_cle:></em>(#INCLURE{fond=formulaires/inc-mots_evenements}{name=mots}{id_evenement}{selected=#ENV{mots}}|trim)
 	    </li>]
 
 
