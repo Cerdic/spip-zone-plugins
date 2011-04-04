@@ -3,8 +3,11 @@
 	vertical-align: baseline;
 }
 #wysiwyg .rubriques{
- margin-top:-50px;
+
+ clear:left;
 }
+
+
 .onglets_traduction div.options{
 	margin :0;
 	padding:0; 
@@ -84,3 +87,4 @@ div.ref span {display:none;}
 .rubriques div.ref :hover span {display:block;position:absolute;color: #000000;
 	margin-top:-43px;	
 	} 
+.rubriques .fiche_objet div.nettoyeur{clear:left;}
