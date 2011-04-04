@@ -1,3 +1,4 @@
+
 function loadPictos(map, urlPictos, idmap, msg, pins) {
   var bbox = map.getExtent();
   bbox.transform(map.projection, map.displayProjection);
@@ -10,9 +11,9 @@ function loadPictos(map, urlPictos, idmap, msg, pins) {
 		jQuery("#attente" + idmap).show();
 	}
 	jQuery.ajax({
-		url: urlPictos,
+		url: urlPictos + '&minlat=' + bbox.bottom + '&maxlat=' + bbox.top + '&minlon=' + bbox.left + '&maxlon=' + bbox.right,
 		dataType: "json",
-		data: 'minlat=' + bbox.bottom + '&maxlat=' + bbox.top + '&minlon=' + bbox.left + '&maxlon=' + bbox.right,
+		data: '',
 		success: function(data) {
 			var nb = data.pictos.length;
 			for (var i=0;i<nb;i++) {
@@ -21,6 +22,10 @@ function loadPictos(map, urlPictos, idmap, msg, pins) {
 				addPicto(data.pictos[i], markerMgr, map, pins);
 				map.pictos.push(data.pictos[i].id);
 			}
+		},
+		error: function(r) {
+			jQuery("#attente" + idmap).hide();
+			window.status = "Ajax request failed in carte.js: " + r.status + ' ' + r.statusText;
 		},
 		complete: function() {
 			jQuery("#attente" + idmap).hide();
@@ -67,7 +72,19 @@ function addPicto(item, markerLayer, map, pins) {
 		jQuery(marker.icon.imageDiv).attr("title", item.title);
 		marker.events.register("click", marker, function click(evt) {
       if (popup == null) {
-        popup = new OpenLayers.Popup.FramedCloud("popup" + item.id, point.fromDataToDisplay(), undefined, html + '<div style="display: block; width: 100%; height: 100%; background: transparent url(plugins/gis/img_pack/attente.gif) center center no-repeat;"></div>', undefined, true);
+        popup = new OpenLayers.Popup.FramedCloud("popup" + item.id, point.fromDataToDisplay(),
+        		undefined,
+        		html + '<div style="display: block; width: 100%; height: 100%; background: transparent url(plugins/gis/img_pack/attente.gif) center center no-repeat;"></div>',
+        		undefined,
+        		true,
+        		function() {
+        			try {
+        				soundManager.stopAll();
+        			}
+        			catch(e){}
+        			this.hide();
+        		}
+        );
         popup.imageSize = new OpenLayers.Size(676, 736);
         popup.positionBlocks = {
             "tl": {

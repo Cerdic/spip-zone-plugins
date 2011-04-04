@@ -37,7 +37,7 @@ Retrieve pictograms to display in json format
     ["lon": "(#LONX)",]
     ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
     ["url": "(#URL_ARTICLE)",]
-    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_article=#ID_ARTICLE",]<BOUCLE_pictoa(MOTS){id_article}{type=marker_icon}{0,1}>,
+    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_article=#ID_ARTICLE"]<BOUCLE_pictoa(MOTS){id_article}{type=marker_icon}{0,1}>,
     ["icon": {"image": "(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)"[, "width": "(#LOGO_MOT_NORMAL|largeur)"][, "height": "(#LOGO_MOT_NORMAL|hauteur)"]}][,
     "over": {"image": "(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)"][, "width": "(#LOGO_MOT_SURVOL|largeur)"][, "height": "(#LOGO_MOT_SURVOL|hauteur)"}]</BOUCLE_pictoa>
   }</BOUCLE_json_articles>

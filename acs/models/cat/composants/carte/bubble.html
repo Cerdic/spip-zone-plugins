@@ -12,6 +12,7 @@ Le style des listes d'articles d'une rubrique est defini par le composant Articl
 
 ]<BOUCLE_rub(RUBRIQUES){tous}{id_rubrique}>[<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]
   <div class="bulle liste-articles">
+  <BOUCLE_mp3(DOCUMENTS){id_rubrique}{mode=document}{extension=mp3}{0,1}>[(#MODELE{doc_player}{id_document}{autostart=yes}{downloadlink=no}{align=#LANG_RIGHT})]</BOUCLE_mp3>
     [<a href='#URL_RUBRIQUE'>(#LOGO_RUBRIQUE|left|image_reduire{100,100})</a>]
     [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}][(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>]]
     <B_articles><ul>
@@ -22,6 +23,7 @@ Le style des listes d'articles d'une rubrique est defini par le composant Articl
   </div></BOUCLE_rub>
 <BOUCLE_art(ARTICLES){tous}{id_article}>[<div class='date'><small><:dernier_ajout:>: (#DATE_MODIF|affdate)</small></div>]
   <div class="bulle">
+    <BOUCLE_mp3a(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}>[(#MODELE{doc_player}{id_document}{autostart=yes}{downloadlink=no}{align=#LANG_RIGHT})]</BOUCLE_mp3a>
     [<a href='#URL_ARTICLE'>(#LOGO_ARTICLE|left|image_reduire{100,100})</a>]
     [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]
     [(#GET{done}|!={oui}|?{' '})[<p>(#CHAPO|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_ARTICLE" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]]

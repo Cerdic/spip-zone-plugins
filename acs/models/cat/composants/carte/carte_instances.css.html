@@ -1,22 +1,23 @@
 [(#CACHE{0})]
+/*
 .cCarte#NIC, .cCarte#NIC .olMapViewport {
   min-height: 150px;
   min-width: 150px;
   height:100%;
-  
-  /*[height: (#VAR{acsCarte[(#NIC)]Height, 100%});]*/
 }
-.cCarte#NIC .olFramedCloudPopupContent p, .cCarte#NIC .olFramedCloudPopupContent div {
-  margin: 0;
-  font-family: [(#VAR{acsCarte[(#NIC)]TextFont, Arial}),][ (#VAR{acsCarte[(#NIC)]TextFontFamily, sans-serif})];
-  font-size: [(#VAR{acsCarte[(#NIC)]TextFontSize, 0.88em})];
+*/
+.cCarte#NIC .olFramedCloudPopupContent p {
+  margin: 0;[
   text-align: justify;
+  font-family: (#VAR{acsCarte[(#NIC)]TextFont, Arial}),][ (#VAR{acsCarte[(#NIC)]TextFontFamily, sans-serif});][
+  font-size: (#VAR{acsCarte[(#NIC)]TextFontSize, 0.88em});]
 }
 .cCarte#NIC .olFramedCloudPopupContent div.titre {
   text-align: center;
-  margin-right: 12px; 
-  font-family: [(#VAR{acsCarte[(#NIC)]TitreFont, Arial}),][ (#VAR{acsCarte[(#NIC)]TitreFontFamily, sans-serif})];
-  font-size: [(#VAR{acsCarte[(#NIC)]TitreFontSize, 1.09em})];
+  margin-left: 12px;
+  margin-right: 12px;[
+  font-family: (#VAR{acsCarte[(#NIC)]TitreFont, Arial}),][ (#VAR{acsCarte[(#NIC)]TitreFontFamily, sans-serif});][
+  font-size: (#VAR{acsCarte[(#NIC)]TitreFontSize, 1.09em});]
 }
 .cCarte#NIC .olFramedCloudPopupContent div.date {
   text-align: #LANG_RIGHT;
