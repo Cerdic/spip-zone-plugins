@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Tourinfrance</nom>
+	<version>1.0</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+  	<auteur>Guillaume Michard ([OpenStudio->http://www.openstudio.fr/])</auteur>
+  	<licence><a href='http://www.gnu.org/licenses/gpl.html' rel='licence'>GNU General Public License</a></licence>
+  	<description>
+	Import des données de flux Tourinsoft, et les transforme en articles Spip.
+  	</description>
+	<prefix>tourinfrance</prefix>
+	<necessite id="SPIP" version="[2.0;]" />
+	<install>base/tourinfrance_install.php</install>
+    <pipeline>
+        <nom>declarer_tables_interfaces</nom>
+        <inclure>base/tourinfrance_table.php</inclure>
+    </pipeline>
+	<pipeline>
+        <nom>declarer_tables_principales</nom>
+        <inclure>base/tourinfrance_table.php</inclure>
+	</pipeline>
+	<fonctions>tourinfrance_fonctions.php</fonctions>
+	<categorie>edition</categorie>
+</plugin>

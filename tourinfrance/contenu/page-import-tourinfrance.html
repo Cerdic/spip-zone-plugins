@@ -1,0 +1,16 @@
+<B_flux>
+<ul>
+	<BOUCLE_flux(TOURINFRANCE_FLUX)>
+	
+		[<b>#ID_FLUX - (#URL_FLUX)</b><br />]
+		
+		#SET{infos_flux, #ARRAY{id_offre, #ID_OFFRE, nom_offre, #NOM_OFFRE, description_offre, #DESCRIPTION_OFFRE, datecrea, #DATECREA, datemaj, #DATEMAJ, id_objettour, #ID_OBJETTOUR, id_type, #ID_TYPE, id_cat_cam, #ID_CAT_CAM}|serialize}
+				
+		[(#URL_FLUX|copie_locale{force}|traiter_donnees_tourinfrance{#ID_FLUX, #GET{infos_flux}})]
+		
+	</BOUCLE_flux>
+</ul>
+</B_flux>
+<b>Aucun Flux n'est import&eacute;.</b>
+<//B_flux>
+
