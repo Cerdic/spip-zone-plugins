@@ -22,7 +22,47 @@ function notation_affichage_final($flux){
 		$incHead = compacte_head($incHead);
 	}
 	return substr_replace($flux, $incHead, strpos($flux, '</body>'), 0);
-
 }
 
+/**
+ * Boite de configuration des objets articles
+ *
+ * @param array $flux
+ * @return array
+ */
+function notation_afficher_config_objet($flux){
+	if (($type = $flux['args']['type'])
+		AND $id = $flux['args']['id']){
+		if (autoriser('moderernote', $type, $id)) {
+			$id_table_objet = id_table_objet($type);
+			$flux['data'] .= recuperer_fond("prive/configurer/configurer_note",array('id_objet'=>$id,'objet'=>  objet_type(table_objet($type))));
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Remplissage des champs a la creation d'objet
+ *
+ * @param array $flux
+ * @return array
+ */
+function notation_pre_insertion($flux){
+	if ($flux['args']['table']=='spip_articles'){
+		$flux['args']['data']['accepter_note'] = substr($GLOBALS['meta']['notations_public'],0,3);
+	}
+	return $flux;
+}
+
+/**
+ * Definir les meta de configuration liee aux notations
+ *
+ * @param array $metas
+ * @return array
+ */
+function notation_configurer_liste_metas($metas){
+	$metas['notations_publics'] = 'oui';
+
+	return $metas;
+}
 ?>

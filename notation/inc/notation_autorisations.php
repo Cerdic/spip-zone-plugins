@@ -34,5 +34,32 @@ function autoriser_notation_modifier_dist($faire, $type, $id, $qui, $opt){
 	return true;
 }
 
+/**
+ * Autorisation pouvant être utilisée pour limiter la divulgation des  noms des personnes qui notent
+ * 
+ * @param unknown_type $faire
+ * @param unknown_type $type
+ * @param unknown_type $id
+ * @param unknown_type $qui
+ * @param unknown_type $opt
+ */
+function autoriser_notation_administrer_dist($faire,$type,$id,$qui,$opt){
+	return $qui['statut'] == '0minirezo';
+}
 
+/**
+ * Moderer les notes ?
+ * -* modifier l'objet correspondant (si note attache a un objet)
+ * -* droits par defaut sinon (admin complet pour moderation complete)
+ * Enter description here ...
+ * @param unknown_type $faire
+ * @param unknown_type $type
+ * @param unknown_type $id
+ * @param unknown_type $qui
+ * @param unknown_type $opt
+ */
+function autoriser_moderernote_dist($faire, $type, $id, $qui, $opt) {
+	return
+		autoriser('modifier', $type, $id, $qui, $opt);
+}
 ?>

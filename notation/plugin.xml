@@ -1,8 +1,8 @@
 <plugin>
 	<nom><multi>[fr]Notation[en]Rating</multi></nom>
 	<auteur>JEM - b_b - Matthieu Marcillaud</auteur>
-	<version>0.9.1</version>
-	<version_base>0.6.1</version_base>
+	<version>0.9.2</version>
+	<version_base>0.6.2</version_base>
 	<etat>stable</etat>
 	<prefix>notation</prefix>
 	<description>
@@ -58,6 +58,18 @@
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_config_objet</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>notation_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>configurer_liste_metas</nom>
 		<inclure>notation_pipelines.php</inclure>
 	</pipeline>
 	

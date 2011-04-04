@@ -13,6 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function notation_declarer_tables_principales($tables_principales){
+	/**
+	 * Un champ accepter_note sur les articles permettant de choisir si oui ou non on peut noter
+	 * l'article
+	 */
+	$tables_principales['spip_articles']['field']['accepter_note'] = "CHAR(3) DEFAULT '' NOT NULL";
 	
 	// cette table recoit les votes des participants...
 	// c'est plus finalement une table de liaison entre

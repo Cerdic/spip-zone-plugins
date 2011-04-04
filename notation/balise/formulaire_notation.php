@@ -50,6 +50,20 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 	} else {
 		$objet = table_objet($objet);
 	}
+	
+	// ca s'apparenterait presque a une autorisation...
+	// si on n'avait pas a envoyer la valeur $accepter_forum au formulaire
+	$accepter_note = substr($GLOBALS['meta']["notations_publics"], 0, 3);
+	// il y a un cas particulier pour l'acceptation de forum d'article...
+	if ($f = charger_fonction($objet . '_accepter_notes', 'inc', true)){
+		$accepter_note = $f($id_objet);
+	}
+	
+	spip_log($accepter_note,'notation');
+	if ($accepter_note == 'non') {
+		return false;
+	}
+	
 	// on envoie les arguments a la fonction charger
 	// du formulaire CVT fomulaires/notation.php
 	return array($objet, $id_objet);

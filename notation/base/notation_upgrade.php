@@ -17,6 +17,9 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 		if ($current_version==0.0){
 			include_spip('base/notation');
 			creer_base();
+			// mettre les metas par defaut
+			$config = charger_fonction('config','inc');
+			$config();
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 		}
 		if (version_compare($current_version,"0.5.0","<")){
@@ -37,12 +40,12 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_notations ADD INDEX (id_forum)");
 			sql_alter("TABLE spip_notations ADD INDEX (objet)");
 			// insertion de "articles" dans les champs "objet" des deux tables 
-			// (les donnees présentes avant la maj ne concernent que des articles)
+			// (les donnees presentes avant la maj ne concernent que des articles)
 			// change ensuite (0.6) en 'article' (comme le core - cf spip_documents_liens)
 			sql_updateq("spip_notations", array("objet" => "articles"));
 			sql_updateq("spip_notations_objets", array("objet" => "articles"));
 
-			//on vire les metas dans la verison précédente (maintenant on se sert de CFG)
+			//on vire les metas dans la verison precedente (maintenant on se sert de CFG)
 			sql_delete("spip_meta","nom =" .sql_quote("notation_acces"));
 			sql_delete("spip_meta","nom =" .sql_quote("notation_ip"));
 			sql_delete("spip_meta","nom =" .sql_quote("notation_nb"));
@@ -81,6 +84,13 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			sql_updateq("spip_notations_objets", array("objet" => "article"), "objet=".sql_quote($a="articles"));
 		
 			ecrire_meta($nom_meta_base_version,$current_version="0.6.1");
+		}
+		if (version_compare($current_version,"0.6.2","<")){
+			maj_tables(array('spip_articles'));
+			// mettre les metas par defaut
+			$config = charger_fonction('config','inc');
+			$config();
+			ecrire_meta($nom_meta_base_version,$current_version="0.6.2");
 		}
 	}
 }
