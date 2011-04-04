@@ -51,6 +51,38 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		}
 		else return false;
 	}
+	
+	// On passe les pays en code ISO, beaucoup plus génériques que les ids SQL
+	if (version_compare($current_version, "1.3", "<")) { 
+		$ok = true;
+		
+		// On ajoute un champ pour le code car il faut les deux champs pour la transistion
+		$ok &= sql_alter('TABLE spip_adresses ADD pays_code varchar(2) not null default ""');
+		
+		// On parcourt les adresses pour remplir le code du pays
+		$adresses = sql_allfetsel('id_adresse,pays', 'spip_adresses');
+		if ($adresses and is_array($adresses)){
+			foreach ($adresses as $adresse){
+				$ok &= sql_update(
+					'spip_adresses',
+					array('pays_code' => '(SELECT code FROM spip_pays WHERE id_pays='.intval($adresse['pays']).')'),
+					'id_adresse='.intval($adresse['id_adresse'])
+				);
+			}
+		}
+		
+		// On supprime l'ancien
+		$ok &= sql_alter('TABLE spip_adresses DROP pays');
+		
+		// On change le nom du nouveau
+		$ok &= sql_alter('TABLE spip_adresses CHANGE pays_code pays varchar(2) not null default ""');
+		
+		if ($ok){
+			spip_log('Tables coordonnées correctement passsées en version 1.3','coordonnees');
+			ecrire_meta($nom_meta_base_version, $current_version="1.3");
+		}
+		else return false;
+	}
 
 }
 

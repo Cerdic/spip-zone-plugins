@@ -12,7 +12,7 @@
 				[<div class='complement'>(#COMPLEMENT)</div>]
 				[<div class='boite_postale'>(#BOITE_POSTALE)</div>]
 				[<div class='code_postal'>#CODE_POSTAL (#VILLE)</div>]
-				<BOUCLE_pays(PAYS){id_pays=#PAYS}><div class='pays'>#NOM</div></BOUCLE_pays>
+				<BOUCLE_pays(PAYS){code=#PAYS}><div class='pays'>#NOM</div></BOUCLE_pays>
 				[(#REM) Un coup pour les champs extras ]
 				[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,adresse,id_objet,#ID_ADRESSE,contexte,[(#ENV**|unserialize)]})],data,''})]})]
 			</td>

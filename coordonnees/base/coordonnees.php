@@ -36,7 +36,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 		"boite_postale" => "VARCHAR(10) DEFAULT '' NOT NULL", 
 		"code_postal" => "VARCHAR(10) DEFAULT '' NOT NULL",
 		"ville" => "tinytext DEFAULT '' NOT NULL",
-		"pays" => "bigint(21) DEFAULT 0 NOT NULL",
+		"pays" => "varchar(2) not null default ''",
 		"maj" => "TIMESTAMP"
 		);
 	$adresses_key = array(
