@@ -42,7 +42,6 @@ function step_get_infos_plugin($constante, $p, $actifs, $recents) {
 // ce fichier est un fichier XML contenant <zone><zone_elt/></zone>
 function step_xml_parse_zone($xml){
 
-	
 	// enlever la balise doctype qui provoque une erreur "balise non fermee"
 	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
 	if (!is_array($arbre = spip_xml_parse($xml)) OR !is_array($arbre = $arbre['archives'][0])){
@@ -54,13 +53,14 @@ function step_xml_parse_zone($xml){
 	foreach ($arbre as $z=>$c){
 		$c = $c[0];
 		// si plugin et fichier zip, on ajoute le paquet dans la liste
-		if ((is_array($c['plugin'])) AND ($url = $c['file'][0])) {
+		if ((is_array($c['plugin'])) AND ($url = $c['zip'][0]['file'][0])) {
 			$paquets[$url] = array(
 				'plugin' => step_xml_parse_plugin($c['plugin'][0]), 
 				'file' => $url, 
 			);
 		}
 	}
+
 	if (!$paquets) {
 		return false;
 	}
