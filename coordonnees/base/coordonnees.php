@@ -29,15 +29,15 @@ function coordonnees_declarer_tables_principales($tables_principales){
 
 	//-- Table adresses ------------------------------------------
 	$adresses = array(
-		"id_adresse"	=> "bigint(21) NOT NULL auto_increment",
-		"type_adresse"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // perso, pro, vacance...
-		"voie"			=> "tinytext DEFAULT '' NOT NULL", // p. ex. 21 rue de cotte
-		"complement"	=> "tinytext DEFAULT '' NOT NULL", // p. ex. 3? ?tage
-		"boite_postale"	=> "VARCHAR(10) DEFAULT '' NOT NULL", 
-		"code_postal"	=> "VARCHAR(10) DEFAULT '' NOT NULL",
-		"ville"			=> "tinytext DEFAULT '' NOT NULL",
-		"pays"			=> "bigint(21) DEFAULT 0 NOT NULL",
-		"maj"			=> "TIMESTAMP"
+		"id_adresse" => "bigint(21) NOT NULL auto_increment",
+		"titre" => "VARCHAR(10) DEFAULT '' NOT NULL", // perso, pro, vacance...
+		"voie" => "tinytext DEFAULT '' NOT NULL", // p. ex. 21 rue de cotte
+		"complement" => "tinytext DEFAULT '' NOT NULL", // p. ex. 3? ?tage
+		"boite_postale" => "VARCHAR(10) DEFAULT '' NOT NULL", 
+		"code_postal" => "VARCHAR(10) DEFAULT '' NOT NULL",
+		"ville" => "tinytext DEFAULT '' NOT NULL",
+		"pays" => "bigint(21) DEFAULT 0 NOT NULL",
+		"maj" => "TIMESTAMP"
 		);
 	$adresses_key = array(
 		"PRIMARY KEY"	=> "id_adresse"
@@ -48,23 +48,23 @@ function coordonnees_declarer_tables_principales($tables_principales){
 
 	//-- Table numeros ------------------------------------------
 	$numeros = array(
-		"id_numero"		=> "bigint(21) NOT NULL auto_increment",
-		"type_numero"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre domicile, bureau, portable
-		"numero" 		=> "tinytext DEFAULT '' NOT NULL",
-		"maj"			=> "TIMESTAMP"
+		"id_numero" => "bigint(21) NOT NULL auto_increment",
+		"type_numero" => "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre domicile, bureau, portable
+		"numero" => "tinytext DEFAULT '' NOT NULL",
+		"maj" => "TIMESTAMP"
 		);
 	$numeros_key = array(
-		"PRIMARY KEY"	=> "id_numero"
+		"PRIMARY KEY" => "id_numero"
 		);
 	$tables_principales['spip_numeros'] =
 		array('field' => &$numeros, 'key' => &$numeros_key, 'join' => &$numeros_join);
 
 	//-- Table emails ------------------------------------------
 	$emails = array(
-		"id_email"		=> "bigint(21) NOT NULL auto_increment",
-		"type_email"	=> "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
-		"email" 		=> "VARCHAR(40) DEFAULT '' NOT NULL",
-		"maj"			=> "TIMESTAMP"
+		"id_email" => "bigint(21) NOT NULL auto_increment",
+		"type_email" => "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
+		"email" => "VARCHAR(40) DEFAULT '' NOT NULL",
+		"maj" => "TIMESTAMP"
 		);
 	$emails_key = array(
 		"PRIMARY KEY"	=> "id_email",
@@ -84,13 +84,13 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table adresses_liens ---------------------------------------
 	$adresses_liens = array(
-		"id_adresse"		=> "BIGINT(21) NOT NULL",
-		"id_objet"			=> "BIGINT(21) NOT NULL",
-		"objet"				=> "varchar(25) NOT NULL" // peut etre un compte ou un contact
+		"id_adresse" => "BIGINT(21) NOT NULL",
+		"id_objet" => "BIGINT(21) NOT NULL",
+		"objet" => "varchar(25) NOT NULL" // peut etre un compte ou un contact
 	);
 	$adresses_liens_key = array(
-		"PRIMARY KEY"		=> "id_adresse, id_objet, objet",
-		"KEY id_adresse"	=> "id_adresse"
+		"PRIMARY KEY" => "id_adresse, id_objet, objet",
+		"KEY id_adresse" => "id_adresse"
 	);
 	$tables_auxiliaires['spip_adresses_liens'] =
 		array('field' => &$adresses_liens, 'key' => &$adresses_liens_key);
@@ -98,13 +98,13 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table numeros_liens ------------------------------------------
 	$numeros_liens = array(
-		"id_numero"			=> "bigint(21) NOT NULL DEFAULT 0",
-		"id_objet"			=> "bigint(21) NOT NULL DEFAULT 0", 
-		"objet"				=> "varchar(25) NOT NULL" // peut etre un contact ou un compte
+		"id_numero" => "bigint(21) NOT NULL DEFAULT 0",
+		"id_objet" => "bigint(21) NOT NULL DEFAULT 0", 
+		"objet" => "varchar(25) NOT NULL" // peut etre un contact ou un compte
 		);
 	$numeros_liens_key = array(
-		"PRIMARY KEY"		=> "id_numero, id_objet, objet",
-		"KEY id_numero"		=> "id_numero"
+		"PRIMARY KEY" => "id_numero, id_objet, objet",
+		"KEY id_numero" => "id_numero"
 		);
 	$tables_auxiliaires['spip_numeros_liens'] =
 		array('field' => &$numeros_liens, 'key' => &$numeros_liens_key);
@@ -112,13 +112,13 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 
 	//-- Table emails_liens ------------------------------------------
 	$emails_liens = array(
-		"id_email"			=> "bigint(21) NOT NULL DEFAULT 0",
-		"id_objet"			=> "bigint(21) NOT NULL DEFAULT 0", 
-		"objet"				=> "varchar(25) NOT NULL" // peut etre un contact ou un compte
+		"id_email" => "bigint(21) NOT NULL DEFAULT 0",
+		"id_objet" => "bigint(21) NOT NULL DEFAULT 0", 
+		"objet" => "varchar(25) NOT NULL" // peut etre un contact ou un compte
 		);
 	$emails_liens_key = array(
-		"PRIMARY KEY"		=> "id_email, id_objet, objet",
-		"KEY id_email"		=> "id_email"
+		"PRIMARY KEY" => "id_email, id_objet, objet",
+		"KEY id_email" => "id_email"
 		);
 	$tables_auxiliaires['spip_emails_liens'] =
 		array('field' => &$emails_liens, 'key' => &$emails_liens_key);
