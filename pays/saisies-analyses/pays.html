@@ -8,7 +8,6 @@
 
 <tr class="tr_liste">
 <BOUCLE_pays(PAYS){id_pays in #ENV**{valeurs}}>
-
 	<td class="choix">#NOM - #VALEUR</td>
 	<td class="stat">[(#GET{stats}|table_valeur{choix-#CLE}|sinon{0})]</td>
 </BOUCLE_pays>

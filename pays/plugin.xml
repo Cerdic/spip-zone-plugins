@@ -9,7 +9,7 @@
 	
 	<licence>GNU/GPL</licence>
 	
-	<version>1.0.4</version>
+	<version>1.0.5</version>
 	
 	<version_base>1.1</version_base>
 	
@@ -39,6 +39,7 @@
 	</pipeline>
 	
 	<necessite id="SPIP" version="[2.0.9;]" />
+	<utilise id="saisies" />
 
 	<categorie>outil</categorie>
 
