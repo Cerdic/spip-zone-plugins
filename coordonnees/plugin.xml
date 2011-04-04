@@ -56,7 +56,7 @@
 	<necessite id="SPIP" version="[2.1;]" />	
 	<necessite id="saisies" version="[1.5.0;]" />
 
-	<necessite id="pays" version="[1.0.0;]" />
+	<necessite id="pays" version="[1.0.5;]" />
 	
 	<categorie>auteur</categorie>
 	
