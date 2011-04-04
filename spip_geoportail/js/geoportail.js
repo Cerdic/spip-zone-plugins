@@ -976,15 +976,17 @@ jQuery.geoportail =
 		}
 	},
 	
-	showImg : function (link, width, height)
+	showImg : function (link, width, height, titre)
 	{	jQuery.geoportail.unselectAll();
 		jQuery.jqDialog("",
-			{	dialog: "<img src='"+link+"' width='100%'/>",
+			{	dialog: "<img src='"+link+"' width='100%'/><div class='legende'>"+titre+"</div>",
 				classe:'viewer',
 				width: width,
 				height: height,
 				clickout:true,
+				clickin:true,
 				undo: false,
+				speed:'fast',
 				ok: false
 			});
 	},
@@ -1004,7 +1006,7 @@ jQuery.geoportail =
 		var lien = null;
 		if (att.url) 
 		{	// Affichage des images
-			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.showImg('" + att.url + "',"+att.width+","+att.height+")\">";
+			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.showImg('" + att.url + "',"+att.width+","+att.height+",'"+att.name+"')\">";
 			else lien = "<a href='" + att.url + "'>";
 		}
 		if (att.logo) html += att.logo;

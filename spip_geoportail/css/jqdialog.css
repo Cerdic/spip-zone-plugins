@@ -13,7 +13,12 @@
 {	margin-right:0.5em;
 }
 
-#jqDialog p
+#jqDialog .legende
+{	background-color:White;
+	padding:0.5em;
+}
+
+#jqDialog p.titre
 {	padding:0.5em;
 	margin:0.5em; 
 	font-weight:bold;
@@ -52,6 +57,7 @@
 	font-size:0.88em;
 	text-align:left;
 	display:block;
+	overflow:auto;
 }
 
 #jqDialog.error 

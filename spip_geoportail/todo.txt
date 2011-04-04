@@ -5,14 +5,14 @@ x Permettre la personnalisation des styles des documents (GPX...)
 x bug 1.9 validation dans l'espace privé
 x Définir un logo pour les couches SPIP (config)
 
-- Dans les modeles (doc, etc) pouvoir afficher la fiche (idem geoportail_articles)
+x Dans les modeles (doc, etc) pouvoir afficher la fiche (idem geoportail_articles)
 
 x Architecture : Intégrer les scripts dans le head de la page (plus propre lors du chargement) => pipeline affichage_final + parse du fichier.
 x Passer en mode viewer plutot qu'instance (?) => objectif : s'affranchir du passage par le Géoportail (avoir OL en ligne)
 
 x Personnaliser l'affichage de la carte (fenêtre, navigation)
-- Squelettes rubriques.html pour la navigation à partir d'une carte.
 x Modèle pour synchroniser deux (ou plus) cartes.
+- Squelettes rubriques.html pour la navigation à partir d'une carte => plugin SPIP-Mashup
 
 x Niveau d'affichage des geoservices pour définir plus finement l'empilement des couches
 x Afficher les geoservices dans les rubriques associées (pipeline afficher_milieu) => reporte dans la page geoservice

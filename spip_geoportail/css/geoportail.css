@@ -160,16 +160,19 @@ div.gpLUSResult:hover, div.gpLUSResultAlternate:hover
 /** Cartes Google **/
 /** Decaler les conditions d'utilisation vers le haut */
 .GMAP .gpControlTermsOfService 
-{	margin:4px !important; 
-	bottom:14px !important; 
+{	margin:0px 4px !important; 
+	bottom:0px !important; 
 } 
 
 /** Decaler le logo Google */
 .GMAP .olLayerGooglePoweredBy {
-	bottom:26px !important;
+	bottom:8px !important;
 }
-
-/** Ne pas masquer les conditions d'utilisation */
+/** Decaler le logo GeoPortail */
+.GMAP .gpControlPermanentLogo 
+{	bottom:25px !important;
+}
+/** Ne pas masquer les conditions d'utilisation de Google */
 .GMAP .gpControlLogo 
 {	bottom:12px !important; 
 }

@@ -41,32 +41,15 @@
 		if (jQuery('#jqDialog_back').length != 0) jQuery('#jqDialog_back').remove();
 		var back = $("<div class=jqDialog_back id=jqDialog_back "
 			+"style='position:absolute; background-color:black; z-index:2000; display:block; ' >"
-			+"</div>").width(wt).height(ht).css("left",0).css("top",0).css("opacity",0.4).appendTo("body");
-		// Fermer si clickout
-		if (param.clickout) back.click(jQuery.jqDialog.action);
+			+"</div>").width(wt).height(ht).css("left",0).css("top",0).css("opacity",param.bgopacity).appendTo("body");
 		
-		// Fenetre proportionnelle
-		var dw=param.width;
-		var dh=param.height;
-		var prop="";
-		if (dw && dh)
-		{	if (dw>$(window).width()*0.9) 
-			{	dw = Math.round($(window).width()*0.9);
-				dh = Math.round(param.height * dw / param.width );
-			}
-			if (dh>$(window).height()*0.9)
-			{	dh = Math.round($(window).height()*0.9);
-				dw = Math.round(param.width * dh / param.height);
-			}
-			prop = "width:"+dw+"px; height:"+dh+"px; ";
-		}
-		
+		// Le dialogue
 		if (jQuery('#jqDialog').length != 0) jQuery('#jqDialog').remove();
 		var dialog = "<div class='"+param.classe+"' id=jqDialog "
-			+"style='position:absolute; z-index:2001; display:block; "+prop+"' >"
+			+"style='position:absolute; z-index:2001; display:block; ' >"
 			+"<div class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' ></div>"
 //			+"<input type=image class='jqCloseButton' onclick='javascript:jQuery.jqDialog.action(\"undo\")' value='' />"
-			+(title ? "<p>"+title+"</p>" : "")
+			+(title ? "<p class='titre'>"+title+"</p>" : "")
 			+"<div class=jqDialogBlock >";
 		if (param.icon) 
 		{	dialog += "<table width=100% border=0 ><tr valign=top>"
@@ -80,7 +63,30 @@
 		if (param.undo) dialog += "<input class=jqDialogButton onclick='javascript:jQuery.jqDialog.action(\"undo\")' type=button value='"+param.undo.replace("\'","&acute;")+"' />";
 		dialog += "</div></div></div>";
 		
-		var d = $(dialog).appendTo("body");
+		var d = $(dialog).hide().appendTo("body");
+
+		// Fenetre proportionnelle
+		var dw=param.width;
+		var dh=param.height;
+		var prop="";
+		
+		if (dw && dh)
+		{	if (dw>$(window).width()*0.9) 
+			{	dw = Math.round($(window).width()*0.9);
+				dh = Math.round(param.height * dw / param.width );
+			}
+			if (dh>$(window).height()*0.9)
+			{	dh = Math.round($(window).height()*0.9);
+				dw = Math.round(param.width * dh / param.height);
+			}
+			d.width(dw).height(dh);
+		}
+		// ou pas trop grande
+		else if (d.height() > 0.8*h) $("#jqDialog .jqDialogInner").height(Math.round(0.8*h));
+		
+		// Fermer si clickout
+		if (param.clickout) back.click(jQuery.jqDialog.action);
+		if (param.clickin) d.click(jQuery.jqDialog.action);
 
 		// Verifier la coherence
 		if (!$('#jqDialog .jqDialogBlock').css('padding')
@@ -92,6 +98,19 @@
 		jQuery('#jqDialog').css('left',scrollX+(w-jQuery('#jqDialog').width())/2);
 		jQuery('#jqDialog').css('top',scrollY+(h-jQuery('#jqDialog').height())/3);
 
+		// Ombrage
+		if (jQuery('#jqDialogShadow').length != 0) jQuery('#jqDialogShadow').remove();
+		if (param.shadow)
+		{	var shadow = "<div class='"+param.classe+"' id=jqDialogShadow style='position:absolute; z-index:2000; display:none'></div>";
+			var sh = $(shadow).width(d.width()).height(d.height()).css("opacity",0.3).appendTo("body");
+			if (sh.css('background-color')=='transparent') sh.css('background-color','#000');
+			sh.css('left',scrollX+(w-jQuery('#jqDialog').width())/2 +param.shadow);
+			sh.css('top',scrollY+(h-jQuery('#jqDialog').height())/3 +param.shadow);
+		}
+		
+		// Affichage
+		$.jqDialog.replay(param.speed);
+		
 		// Gestion des raccourcis clavier
 		jQuery(document).keydown(function (e) 
 		{	var code = (e.keyCode ? e.keyCode : e.which); 
@@ -105,15 +124,17 @@
 	};
 	
 	// Rejouer le dialogue (si champs mal remplis)
-	$.jqDialog.replay = function()
+	$.jqDialog.replay = function(speed)
 	{	jQuery('#jqDialog_back').show();
-		jQuery('#jqDialog').show();
+		jQuery('#jqDialog').fadeIn(speed);
+		jQuery('#jqDialogShadow').fadeIn(speed);
 	};
 	
 	// On a fini (ne pas detruire ici si on veut rejouer)
 	$.jqDialog.action = function(action)
 	{	jQuery('#jqDialog_back').hide();
 		jQuery('#jqDialog').hide();
+		jQuery('#jqDialogShadow').hide();
 		$.jqDialog.param.callback (action);
 	};
 	
@@ -127,7 +148,11 @@
  		dialog	: '...',			// The dialog
  		width	: null,				// Dialog size (proportion)
  		height	: null,				// 
- 		clickout: false,			// Close de dialog when clickout
+ 		clickout: false,			// Close the dialog when clickout
+ 		clickin	:false,				// Close the dialog when clickin
+ 		bgopacity : 0.4,			// Background Opacity
+ 		shadow	: 0,				// Shadow offset (px)
+ 		speed	: 0,				// Speed to fade in
  		callback : function(action)	// Function to callback when closing
  		{	// NB: $('#jqDialog') is not destroy at this step, 
  			// You can access the input you put in the dialog param
