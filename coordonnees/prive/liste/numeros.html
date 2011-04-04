@@ -6,7 +6,7 @@
 	<tbody>
 	<BOUCLE_telephones(NUMEROS){numeros_liens.objet}{numeros_liens.id_objet}{par numero}{pagination #ENV{nb,10}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='type_numero'>[(#TYPE_NUMERO|logo_type_adresse|image_reduire{16})]</td>
+			<td class='titre'>[(#TITRE)]</td>
 			<td class='numero'>#NUMERO</td>
 			<td class='action'>
 			[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)

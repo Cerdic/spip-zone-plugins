@@ -30,7 +30,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 	//-- Table adresses ------------------------------------------
 	$adresses = array(
 		"id_adresse" => "bigint(21) NOT NULL auto_increment",
-		"titre" => "VARCHAR(10) DEFAULT '' NOT NULL", // perso, pro, vacance...
+		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // perso, pro, vacance...
 		"voie" => "tinytext DEFAULT '' NOT NULL", // p. ex. 21 rue de cotte
 		"complement" => "tinytext DEFAULT '' NOT NULL", // p. ex. 3? ?tage
 		"boite_postale" => "VARCHAR(10) DEFAULT '' NOT NULL", 
@@ -49,7 +49,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 	//-- Table numeros ------------------------------------------
 	$numeros = array(
 		"id_numero" => "bigint(21) NOT NULL auto_increment",
-		"type_numero" => "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre domicile, bureau, portable
+		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // peut etre domicile, bureau, portable
 		"numero" => "tinytext DEFAULT '' NOT NULL",
 		"maj" => "TIMESTAMP"
 		);
@@ -62,7 +62,7 @@ function coordonnees_declarer_tables_principales($tables_principales){
 	//-- Table emails ------------------------------------------
 	$emails = array(
 		"id_email" => "bigint(21) NOT NULL auto_increment",
-		"type_email" => "VARCHAR(10) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
+		"titre" => "VARCHAR(255) DEFAULT '' NOT NULL", // peut etre perso, boulot, etc.
 		"email" => "VARCHAR(40) DEFAULT '' NOT NULL",
 		"maj" => "TIMESTAMP"
 		);

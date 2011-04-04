@@ -11,15 +11,13 @@
 			<input type='hidden' name='objet' value='#ENV{objet}' />
 			<input type='hidden' name='id_objet' value='#ENV{id_objet}' />
 			<ul>
+				[(#SAISIE{input, titre,	label=<:coordonnees:label_titre:>})]
 				[(#SAISIE{input, voie, label=<:coordonnees:label_voie:>})]
 				[(#SAISIE{input, complement, label=<:coordonnees:label_complement:>})]
 				[(#SAISIE{input, boite_postale, label=<:coordonnees:label_boite_postale:>})]
 				[(#SAISIE{input, code_postal, label=<:coordonnees:label_code_postal:>})]
 				[(#SAISIE{input, ville, label=<:coordonnees:label_ville:>})]
 				[(#SAISIE{pays, pays, label=<:coordonnees:label_pays:>,defaut=70})]
-				[(#SAISIE{input, type_adresse,
-					label=<:coordonnees:label_type_adresse:>,
-					explication=<:coordonnees:explication_type_adresse:>})]
 			</ul>
 			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 			<!--extra-->

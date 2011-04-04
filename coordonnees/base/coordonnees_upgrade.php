@@ -23,7 +23,8 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-
+	
+	// On utilise plus le champ "numero" qui sera inclu dans la "voie"
 	if (version_compare($current_version, "1.1", "<")) { 
 		// on ajoute le contenu du champ "numero" au champ "voie"
 		sql_update("spip_adresses",
@@ -33,6 +34,22 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		sql_alter("TABLE spip_adresses DROP COLUMN numero");
 		spip_log('Tables coordonnées correctement passsées en version 1.1','coordonnees');
 		ecrire_meta($nom_meta_base_version, $current_version="1.1");
+	}
+	
+	// On supprime les "type" en les transformant en vrai "titre" libres
+	if (version_compare($current_version, "1.2", "<")) { 
+		$ok = true;
+		
+		// On renomme les champs "type_truc" en "titre" tout simplement + on les allonge
+		$ok &= sql_alter('TABLE spip_adresses CHANGE type_adresse titre varchar(255) not null default ""');
+		$ok &= sql_alter('TABLE spip_numeros CHANGE type_numero titre varchar(255) not null default ""');
+		$ok &= sql_alter('TABLE spip_emails CHANGE type_email titre varchar(255) not null default ""');
+		
+		if ($ok){
+			spip_log('Tables coordonnées correctement passsées en version 1.2','coordonnees');
+			ecrire_meta($nom_meta_base_version, $current_version="1.2");
+		}
+		else return false;
 	}
 
 }

@@ -60,7 +60,7 @@ function revisions_emails($id_email, $c=false) {
 	if ($c === false) {
 		$c = array();
 		foreach (array(
-				'email', 'type_email') as $champ
+				'email', 'titre') as $champ
 		) {
 			if (($a = _request($champ)) !== null) {
 				$c[$champ] = $a;

@@ -60,7 +60,7 @@ function revisions_numeros($id_numero, $c=false) {
 	if ($c === false) {
 		$c = array();
 		foreach (array(
-				'numero', 'type_numero') as $champ
+				'numero', 'titre') as $champ
 		) {
 			if (($a = _request($champ)) !== null) {
 				$c[$champ] = $a;

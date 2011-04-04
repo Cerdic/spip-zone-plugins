@@ -61,7 +61,7 @@ function revisions_adresses($id_adresse, $c=false) {
 		$c = array();
 		foreach (array(
 				'voie', 'complement', 'boite_postale',
-				'code_postal', 'ville', 'pays', 'type_adresse') as $champ
+				'code_postal', 'ville', 'pays', 'titre') as $champ
 		) {
 			if (($a = _request($champ)) !== null) {
 				$c[$champ] = $a;
