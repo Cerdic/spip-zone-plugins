@@ -7,7 +7,7 @@
  * Gestion des CSS pour les évènements
  * 
  * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 25/02/2011
+ * Modifs : 04/04/2011
  * 
  */
 
@@ -21,7 +21,9 @@ function exec_fullcalendar_css(){
              print _T('avis_non_acces_page');
              
              exit;
-         } 
+         }
+
+ $table_prefix = $GLOBALS['table_prefix'] ;
 
  $HTML=$INFO=$LISTE="";
 
@@ -36,7 +38,7 @@ function exec_fullcalendar_css(){
   && strlen($_POST['textcolor'])
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouveau style.</center><br/>";
-	$sql = "INSERT INTO spip_fullcalendar_styles VALUES (
+	$sql = "INSERT INTO ".$table_prefix."_fullcalendar_styles VALUES (
 	NULL,
 	'".mysql_real_escape_string($_POST['StyleName'])."',
 	'".mysql_real_escape_string($_POST['bordercolor'])."',
@@ -58,7 +60,7 @@ function exec_fullcalendar_css(){
   && $_POST['id_style']
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Modification d'un style.</center><br/>";
-	$sql = "UPDATE spip_fullcalendar_styles SET 
+	$sql = "UPDATE ".$table_prefix."_fullcalendar_styles SET 
 	titre='".mysql_real_escape_string($_POST['StyleName'])."',
 	bordercolor='".mysql_real_escape_string($_POST['bordercolor'])."',
 	bgcolor='".mysql_real_escape_string($_POST['bgcolor'])."',
@@ -75,14 +77,14 @@ function exec_fullcalendar_css(){
   ){
 	  
 	$INFO.="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Efface le style ".$_POST['id_style']."</center><br/>";
-	$sql = "DELETE FROM spip_fullcalendar_styles WHERE id_style='".$_POST['id_style']."' LIMIT 1;";
+	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_styles WHERE id_style='".$_POST['id_style']."' LIMIT 1;";
 	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
  }
 
  # Récupère les calendriers
  
- $sql = "SELECT id_fullcalendar, nom FROM spip_fullcalendar_main";
+ $sql = "SELECT id_fullcalendar, nom FROM ".$table_prefix."_fullcalendar_main";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
  if(mysql_num_rows($req)){ 
 	$LISTE='<br/>';
@@ -102,7 +104,7 @@ function exec_fullcalendar_css(){
  
  # Récupère les styles
  
- $sql = "SELECT * FROM spip_fullcalendar_styles";
+ $sql = "SELECT * FROM ".$table_prefix."_fullcalendar_styles";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
  $num_style = mysql_num_rows($req);
  if(!$num_style) $INFO="<b>Vous n'avez pas encore définit de style !</b><br/><br/>Les définition de styles permettent de modifier l'apparence des évènements dans les agendas qui utilisent MySQL comme source de donnée.";
@@ -156,7 +158,7 @@ function exec_fullcalendar_css(){
 			 $BUTTON='<input type="submit" name="enregistrer" value=" Enregistrer " class="fondo" />';
 		}
 		
-		$sq = "SELECT 'id_event' FROM spip_fullcalendar_events WHERE id_style='".$id."'";
+		$sq = "SELECT 'id_event' FROM ".$table_prefix."_fullcalendar_events WHERE id_style='".$id."'";
 		$rq = mysql_query($sq) or die('Erreur SQL !<br>'.$sq.'<br>'.mysql_error()); 
 		$rw = mysql_num_rows($rq);
 		

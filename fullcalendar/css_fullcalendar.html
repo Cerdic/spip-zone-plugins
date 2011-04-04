@@ -1,8 +1,9 @@
 #CACHE{3600*24*30}
 #HTTP_HEADER{Content-Type: text/css;}
 <?php
-	$query = "SELECT * FROM spip_fullcalendar_styles;";
-	$result = mysql_query($query) or die ($query." ".mysql_error());
+	$table_prefix = $GLOBALS['table_prefix'] ;
+	$query = "SELECT * FROM ".$table_prefix."_fullcalendar_styles;";
+	$result = mysql_query($query); /*or die($query." ".mysql_error());*/
 	while ( $row = mysql_fetch_array($result))
 		$CSS.=".f_".$row['0'].", .fc-agenda .f_".$row['0']." .fc-event-time, .f_".$row['0']." a {background-color:".$row['bgcolor'].";border-color:".$row['bordercolor'].";color:".$row['textcolor'].";}\n";
 	print $CSS;

@@ -7,7 +7,7 @@
  * Formulaires d'ajout et modification
  * 
  * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 25/02/2011
+ * Modifs : 04/04/2011
  * 
  */
 
@@ -25,6 +25,8 @@ function exec_fullcalendar_add(){
 
  $HTML=$INFO="";
 
+ $table_prefix = $GLOBALS['table_prefix'] ;
+
  # Ajout d'un calendrier
  
  if(
@@ -33,7 +35,7 @@ function exec_fullcalendar_add(){
   && strlen($_POST['CalName'])
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouveau calendrier.</center><br/>";
-	$sql = "INSERT INTO spip_fullcalendar_main VALUES (NULL, '".$_POST['CalSource']."', '".mysql_real_escape_string($_POST['CalName'])."')";
+	$sql = "INSERT INTO ".$table_prefix."_fullcalendar_main VALUES (NULL, '".$_POST['CalSource']."', '".mysql_real_escape_string($_POST['CalName'])."')";
 	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
  }
  
@@ -45,7 +47,7 @@ function exec_fullcalendar_add(){
   && strlen($_POST['CalName'])
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Modification d'un calendrier.</center><br/>";
-	$sql = "UPDATE spip_fullcalendar_main SET nom='".mysql_real_escape_string($_POST['CalName'])."' WHERE id_fullcalendar='".$_POST['id_calendrier']."'";
+	$sql = "UPDATE ".$table_prefix."_fullcalendar_main SET nom='".mysql_real_escape_string($_POST['CalName'])."' WHERE id_fullcalendar='".$_POST['id_calendrier']."'";
 	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
  }
 
@@ -59,11 +61,11 @@ function exec_fullcalendar_add(){
   ){
 
 	$INFO="Efface les évènements du calendrier ".$_POST['id_calendrier']."<br/><br/>";
-	$sql = "DELETE FROM spip_fullcalendar_events WHERE id_fullcalendar='".$_POST['id_calendrier']."';";
+	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$_POST['id_calendrier']."';";
 	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	    
 	  
 	$INFO.="Efface le calendrier ".$_POST['id_calendrier']."<br/><br/>";
-	$sql = "DELETE FROM spip_fullcalendar_main WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1;";
+	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1;";
 	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
  }
@@ -82,7 +84,7 @@ function exec_fullcalendar_add(){
  
  # Récupère les calendriers
  
- $sql = "SELECT * FROM spip_fullcalendar_main";
+ $sql = "SELECT * FROM ".$table_prefix."_fullcalendar_main";
  $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
  $num_calendar = mysql_num_rows($req);
  if(!$num_calendar) $INFO="
@@ -143,7 +145,7 @@ function exec_fullcalendar_add(){
 		<tr class='".$class."'>
 			<td style='text-align:center'><b>".$nom."</b></td>
 			<td style='text-align:center'>".$type."</td>
-			<td style='text-align:center'>&lt;fullcalendar|id=".$id."&gt;</td>
+			<td style='text-align:center'>&lt;fullcalendar".$id."&gt;</td>
 			<td style='text-align:center;width:44px;'>
 				<a href=\"javascript:ModifierCalendrier('".$id."')\"><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/calendar_edit.png'></a> &nbsp; 
 				<a href=\"javascript:EffacerCalendrier('".$id."')\"><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/calendar_remove.png'></a>

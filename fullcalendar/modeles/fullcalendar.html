@@ -4,10 +4,12 @@
 
 <?php
 
+	$table_prefix = $GLOBALS['table_prefix'] ;
+	
 	$id = '[(#ENV{id_fullcalendar,0}|texte_script)]';
 
 	# Quelle source de donnée ?
-	$sql = "SELECT type FROM spip_fullcalendar_main WHERE id_fullcalendar='".$id."'";
+	$sql = "SELECT type FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$id."'";
 	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
 	$num_calendar = mysql_num_rows($req);
 
@@ -24,7 +26,7 @@
 			case 'article':
 			
 			# Récupère l'id du mot clé de cet agenda ...
-			$query = "SELECT lien FROM spip_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
+			$query = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
 			$result = mysql_query($query) or print ($query." ".mysql_error());
 			$row = mysql_fetch_array($result);
 			if(!strlen($row['lien'])) return;
@@ -39,10 +41,11 @@
 				 A.date,
 				 A.date_redac
 				FROM
-				 spip_articles A,
-				 spip_mots_articles M
+				 ".$table_prefix."_articles A,
+				 ".$table_prefix."_mots_articles M
 				WHERE
 				 M.id_mot='".$row['lien']."' AND
+				 A.statut='publie' AND
 				 A.id_article=M.id_article
 				 ORDER BY A.date ASC";
 			$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
@@ -73,7 +76,7 @@
 			$events='events: [
 			
 			';
-			$query = "SELECT titre, start, end, lien, id_style FROM spip_fullcalendar_events WHERE id_fullcalendar='".$id."' ORDER BY start ASC;" ;
+			$query = "SELECT titre, start, end, lien, id_style FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' ORDER BY start ASC;" ;
 			$result = mysql_query($query) or die ($query." ".mysql_error());
 
 			while ( $row = mysql_fetch_array($result)){
@@ -105,7 +108,7 @@
 			case 'google':
 
 			# Choppe la clé Google dans le seul évènement de cet agenda ...
-			$query = "SELECT lien FROM spip_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
+			$query = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
 			$result = mysql_query($query) or die ($query." ".mysql_error());
 			$row = mysql_fetch_array($result);
 			if(!strlen($row['lien'])) return;
@@ -158,11 +161,13 @@
 		$day_timeFormat_basic 		= "[(#CONFIG{fullcalendar/day_timeFormat_basic, 'H:mm{ - H:mm}'}|texte_script)]";
 		$day_timeFormat_agenda		= "[(#CONFIG{fullcalendar/day_timeFormat_agenda, 'H:mm{ - H:mm}'}|texte_script)]";
 
+		$rand = rand(0,1000);
+
 		# Génère le fullcalendar avec tous ses paramètres ...
 		print "
 		<script type='text/javascript'>
 		$(document).ready(function() {
-			$('#calendar".$id."').fullCalendar({
+			$('#calendar".$rand."').fullCalendar({
 					".$useTheme."
 					firstDay: ".$firstDay.",
 					defaultView: '".$defaultView."',
@@ -194,7 +199,7 @@
 		});
 		</script>
 		
-		<div id='calendar".$id."'></div>
+		<div id='calendar".$rand."'></div>
 		
 		";
 

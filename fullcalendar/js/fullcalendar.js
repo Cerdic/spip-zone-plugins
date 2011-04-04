@@ -59,8 +59,8 @@ var defaults = {
 	},
 	
 	firstDay: 1,
-	monthNames: ['Janvier','F\351vrier','Mars','Avril','Mai','Juin','Juillet','Ao\373t','Septembre','Octobre','Novembre','Decembre'],
-	monthNamesShort: ['Jan','Fev','Mar','Avr','Mai','Jun','Jui','Ao\373','Sep','Oct','Nov','Dec'],
+	monthNames: ['Janvier','F\351vrier','Mars','Avril','Mai','Juin','Juillet','Ao\373t','Septembre','Octobre','Novembre','D\351cembre'],
+	monthNamesShort: ['Jan','F\351v','Mar','Avr','Mai','Jun','Jui','Ao\373','Sep','Oct','Nov','D\351c'],
 	dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
 	dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
 	buttonText: {
