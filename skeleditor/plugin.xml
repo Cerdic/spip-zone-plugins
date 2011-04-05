@@ -89,7 +89,6 @@
       <inclure>spip_210/skeleditor_pipelines.php</inclure>
   </pipeline>
   <pipeline>
-  <pipeline>
       <nom>autoriser</nom>
       <inclure>spip_210/inc/skeleditor_autoriser.php</inclure>
   </pipeline>
