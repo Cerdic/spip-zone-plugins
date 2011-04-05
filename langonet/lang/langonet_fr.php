@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 	'bouton_corriger_definition' => 'Obtenir les corrections',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
-	'bouton_langonet' => 'V&eacute;rifier les langues',
+	'bouton_langonet' => 'LangOnet',
 	'bouton_lister' => 'Afficher',
 	'bouton_rechercher' => 'Rechercher',
 	'bouton_verifier' => 'V&eacute;rifier',
