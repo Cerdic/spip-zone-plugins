@@ -269,8 +269,9 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	// horodatons
 	$horodatage = affdate_heure (date ("Y-m-d H:i:s"));
 	$horodatage = "\n\n"._T('contact:horodatage', array('horodatage'=>$horodatage))."\n\n";
+	$par = _T('contact:par').$posteur['mail']."\n\n";
 
-	$texte = $horodatage.$inforigine.$infos."\n\n".$posteur['texte'];
+	$texte = $horodatage.$par.$inforigine.$infos."\n\n".$posteur['texte'];
 	$nom_site = supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']));
 	$texte .= "\n\n "._T('envoi_via_le_site')." ".$nom_site." ( ".$GLOBALS['meta']['adresse_site']."/ ) \n";
 
