@@ -180,7 +180,7 @@ function verrou_location()
 }
 
 function geoportail_formulaire_show()
-{	var uri = '[(#URL_PAGE{geop,id=[(#ENV{id,0})]&hash=[(#GEOPORTAIL_PROTECT{geoformulaire[(#ENV{id,0})]})]&formulaire=1&toolbox=mini&carto=0.4&ortho=0&height=100pc&zone=[(#GET{zone})]&zoom=[(#GET{zoom})]&infobox=false})]';
+{	var uri = '[(#URL_PAGE{geop,id=[(#ENV{id,0})]&hash=[(#GEOPORTAIL_PROTECT{geoformulaire[(#ENV{id,0})]})]&formulaire=1&toolbox=mini&carto=0.6&ortho=0&height=100pc&zone=[(#GET{zone})]&zoom=[(#GET{zoom})]&infobox=false})]';
 	uri = uri.replace (/amp;/g,'');
 	jqToogleClass('.[(#ENV{class,carto})]', uri);
 }

@@ -125,6 +125,13 @@ function geoportail_departement($d)
 /*========================================
   Filtres du plugin
 ========================================*/
+/**
+*/
+function geoportail_defaut ($mode)
+{	$geoportail_provider = $GLOBALS['meta']['geoportail_provider'];
+	if ($geoportail_provider && !$mode) return $geoportail_provider;
+	return $mode;
+}
 
 /** Transformation degre/minute/seconde
 */

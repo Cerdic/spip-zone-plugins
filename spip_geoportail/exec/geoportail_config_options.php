@@ -42,6 +42,7 @@ function exec_geoportail_config_options()
 		$res = icone_horizontale(_T('geoportail:cles'), generer_url_ecrire("geoportail_config"), "racine-site-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:options'), generer_url_ecrire("geoportail_config_options"), "administration-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:rgc'), generer_url_ecrire("geoportail_config_rgc"), "breve-24.gif","rien.gif", false);
+		$res .= icone_horizontale(_T('geoportail:geoservices'), generer_url_ecrire("geoservice_tous"), "site-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);
 
 		echo debut_droite('',true);
@@ -57,9 +58,24 @@ function exec_geoportail_config_options()
  		$gsyndic = ($GLOBALS['meta']['geoportail_geosyndic'])?"CHECKED":"";
 		$gservice = ($GLOBALS['meta']['geoportail_service'])?"CHECKED":"";
  		$geoportail_sysref = $GLOBALS['meta']['geoportail_sysref'];
+ 		$geoportail_provider = $GLOBALS['meta']['geoportail_provider'];
 
 		/* Type d'objet a georef */
-		$form = debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('geoportail:geoportail_objet'))
+		$form = debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:geoportail_provider'))
+			.debut_cadre_relief("",true)
+			. _T('geoportail:geoprovider_info')
+			.fin_cadre_relief(true)
+			._T('geoportail:geoportail_provider')." : <select name='defaut_provider' class='fondl'>"
+			."<option value='GEOP'".($geoportail_provider=='GEOP'?" selected":"").">G&eacute;oportail</option>"
+			."<option value='OSM'".($geoportail_provider=='OSM'?" selected":"").">OpenStreetMap</option>"
+			."<option value='GMAP'".($geoportail_provider=='GMAP'?" selected":"").">Google Maps</option>"
+			."<option value='YHOO'".($geoportail_provider=='YHOO'?" selected":"").">Yahoo !</option>"
+			."</select>"
+			."<input type='submit' name='provider' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+			.fin_cadre_trait_couleur(true);
+
+		/* Type d'objet a georef */
+		$form .= debut_cadre_trait_couleur("racine-site-24.gif", true, "", _T('geoportail:geoportail_objet'))
 			.debut_cadre_relief("",true)
 			. _T('geoportail:geoobjet_info')
 			.fin_cadre_relief(true)

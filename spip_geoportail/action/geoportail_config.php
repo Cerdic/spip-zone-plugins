@@ -47,6 +47,12 @@ function action_geoportail_config_dist()
  			ecrire_meta('geoportail_service',isset($_POST['service']));
  			ecrire_metas();
  		}
+ 		
+		// Modif le fournisseur par defaut
+ 		if (isset($_POST['provider']))
+ 		{	ecrire_meta('geoportail_provider',$_POST['defaut_provider']);
+ 			ecrire_metas();
+ 		}
 		// Modif des objets a georef
  		if (isset($_POST['objet']))
 		{	ecrire_meta('geoportail_geoarticle',isset($_POST['article']));

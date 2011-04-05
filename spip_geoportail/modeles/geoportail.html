@@ -60,7 +60,7 @@ if (_DIR_RESTREINT!="" || $geoportail_force)
 
 
 [(#REM) Balise d'inclusion du geoportail ]
-<!--_SPIP_GEOPORTAIL_#MODE-->
+<!--_SPIP_GEOPORTAIL_[(#MODE|geoportail_defaut)]-->
 
 <script language=javascript>
 // Ajouter une nouvelle carte
@@ -80,7 +80,7 @@ jQuery.geoportail.addMap(
 			map.getMap().setProxyUrl("?action=geoproxy&hash="+jQuery.geoportail.hash+"&url=");
 			// Afficher de la carte
 			jQuery.geoportail.showMap (map,
-				'#MODE',
+				'[(#MODE|geoportail_defaut)]',
 				{	zone: '#GET{zone}', 
 					lon: Number('#LON'), 
 					lat: Number('#LAT'), 
@@ -150,6 +150,6 @@ FIN gestion de l'espace prive
 ]<?php } ?>
 
 <!-- La carte #[(#ENV{id_geoportail,0})]-->
-<div class='GeoportalMapDiv #MODE' id='GeoportalMapDiv#ENV{id_geoportail,0}' style="[float:(#ALIGN|match{left|right}); ][width:(#ENV{width}|replace{pc,%}); ][height:(#ENV{height}|replace{pc,%}); ]" ><!-- --></div>
+<div class='GeoportalMapDiv [(#MODE|geoportail_defaut)]' id='GeoportalMapDiv#ENV{id_geoportail,0}' style="[float:(#ALIGN|match{left|right}); ][width:(#ENV{width}|replace{pc,%}); ][height:(#ENV{height}|replace{pc,%}); ]" ><!-- --></div>
 [(#REM) Surcharger l'affichage du viewer]
 
