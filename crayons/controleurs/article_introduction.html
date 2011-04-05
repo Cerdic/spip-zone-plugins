@@ -31,6 +31,7 @@
 					style="width:100%;
 					height:#ENV{h_descriptif}px;">[(#DESCRIPTIF**|entites_html)]</textarea>
 			</li>
+			[(#CONFIG{articles_chapeau}|=={oui}|oui)
 			<li class="editer_chapo">
 				<label for="chapo"><:info_chapeau:></label>
 				<textarea class="crayon-active"
@@ -38,7 +39,7 @@
 					id="chapo"
 					style="width:100%;
 					height:#ENV{h_chapo}px;">[(#CHAPO**|entites_html)]</textarea>
-			</li>
+			</li>]
 			<li class="editer_texte">
 				<label for="text_area"><:info_texte:></label>
 				<textarea class="crayon-active"
