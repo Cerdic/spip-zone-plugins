@@ -36,7 +36,7 @@ function exec_fullcalendar_add(){
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouveau calendrier.</center><br/>";
 	$sql = "INSERT INTO ".$table_prefix."_fullcalendar_main VALUES (NULL, '".$_POST['CalSource']."', '".mysql_real_escape_string($_POST['CalName'])."')";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
  }
  
  # Modification d'un calendrier
@@ -48,7 +48,7 @@ function exec_fullcalendar_add(){
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Modification d'un calendrier.</center><br/>";
 	$sql = "UPDATE ".$table_prefix."_fullcalendar_main SET nom='".mysql_real_escape_string($_POST['CalName'])."' WHERE id_fullcalendar='".$_POST['id_calendrier']."'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
  }
 
  # Effacer un calendrier
@@ -62,11 +62,11 @@ function exec_fullcalendar_add(){
 
 	$INFO="Efface les évènements du calendrier ".$_POST['id_calendrier']."<br/><br/>";
 	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$_POST['id_calendrier']."';";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	    
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	    
 	  
 	$INFO.="Efface le calendrier ".$_POST['id_calendrier']."<br/><br/>";
 	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1;";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
 
  }
  
@@ -84,9 +84,11 @@ function exec_fullcalendar_add(){
  
  # Récupère les calendriers
  
+
  $sql = "SELECT * FROM ".$table_prefix."_fullcalendar_main";
- $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
- $num_calendar = mysql_num_rows($req);
+ $req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+ $num_calendar = sql_count($req);
+
  if(!$num_calendar) $INFO="
  <b>Bienvenu dans FullCalendar pour SPIP !</b><br/>
  <br/>Commencez par créer votre premier calendrier en utilisant le formulaire ci-contre.</center><br/>
@@ -122,7 +124,7 @@ function exec_fullcalendar_add(){
 	
 	
 	<table class='spip' style='width:100%'><tr class='row_first'><th>Nom</th><th>Source</th><th>balise</th><th>&nbsp;</th></tr>";
-	while ($row = spip_fetch_array($req)) {
+	while ($row = sql_fetch($req)) {
 		
 		$id   = $row['id_fullcalendar'];
 		$type = $row['type'];

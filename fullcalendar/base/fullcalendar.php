@@ -7,13 +7,11 @@
  * Description des tables à créer dans MySQL
  * 
  * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 04/04/2011
+ * Modifs : 05/04/2011
  * 
  */
 
 global $tables_principales;
-
-$table_prefix = $GLOBALS['table_prefix'] ;
 
 /*
  * spip_fullcalendar_main
@@ -37,7 +35,7 @@ $spip_fullcalendar_key = array(
 	"PRIMARY KEY" => "id_fullcalendar"
 );
 
-$tables_principales[$table_prefix.'_fullcalendar_main'] = array(
+$tables_principales['spip_fullcalendar_main'] = array(
 	'field' => &$spip_fullcalendar_main,
 	'key' => &$spip_fullcalendar_key
 );
@@ -72,7 +70,7 @@ $spip_fullcalendar_events_key = array(
 	"PRIMARY KEY" => "id_event"
 );
 
-$tables_principales[$table_prefix.'_fullcalendar_events'] = array(
+$tables_principales['spip_fullcalendar_events'] = array(
 	'field' => &$spip_fullcalendar_events,
 	'key' => &$spip_fullcalendar_events_key
 );
@@ -104,7 +102,7 @@ $spip_fullcalendar_styles_key = array(
 	"PRIMARY KEY" => "id_style"
 );
 
-$tables_principales[$table_prefix.'_fullcalendar_styles'] = array(
+$tables_principales['spip_fullcalendar_styles'] = array(
 	'field' => &$spip_fullcalendar_styles,
 	'key' => &$spip_fullcalendar_styles_key
 );

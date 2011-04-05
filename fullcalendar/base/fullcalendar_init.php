@@ -7,7 +7,7 @@
  * Création des tables dans la base MySQL
  * 
  * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 04/04/2011
+ * Modifs : 05/04/2011
  * 
  */
 
@@ -34,9 +34,9 @@ function fullcalendar_verifier_base(){
 function fullcalendar_effacer_tables(){
 	$table_prefix = $GLOBALS['table_prefix'] ;
 	include_spip('base/abstract_sql');
-	spip_query("DROP TABLE ".$table_prefix."_fullcalendar_main");
-	spip_query("DROP TABLE ".$table_prefix."_fullcalendar_events");
-	spip_query("DROP TABLE ".$table_prefix."_fullcalendar_styles");
+	sql_drop ("spip_fullcalendar_main");
+	sql_drop ("spip_fullcalendar_events");
+	sql_drop ("spip_fullcalendar_styles");
 	effacer_meta('fullcalendar_base_version');
 	effacer_meta('fullcalendar');
 	ecrire_metas();

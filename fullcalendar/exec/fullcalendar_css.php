@@ -45,7 +45,7 @@ function exec_fullcalendar_css(){
 	'".mysql_real_escape_string($_POST['bgcolor'])."',
 	'".mysql_real_escape_string($_POST['textcolor'])."'
 	)";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
  }
 
  # Modification d'un style
@@ -66,7 +66,7 @@ function exec_fullcalendar_css(){
 	bgcolor='".mysql_real_escape_string($_POST['bgcolor'])."',
 	textcolor='".mysql_real_escape_string($_POST['textcolor'])."'
 	WHERE id_style='".$_POST['id_style']."' LIMIT 1;";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
  }
 
  # Effacer un calendrier
@@ -78,17 +78,17 @@ function exec_fullcalendar_css(){
 	  
 	$INFO.="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Efface le style ".$_POST['id_style']."</center><br/>";
 	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_styles WHERE id_style='".$_POST['id_style']."' LIMIT 1;";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
 
  }
 
  # Récupère les calendriers
  
  $sql = "SELECT id_fullcalendar, nom FROM ".$table_prefix."_fullcalendar_main";
- $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
- if(mysql_num_rows($req)){ 
+ $req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+ if(sql_count($req)){ 
 	$LISTE='<br/>';
-	while ($row = spip_fetch_array($req))	
+	while ($row = sql_fetch($req))	
 		$LISTE .= "<center class='formulaire_spip'><a href=\"?exec=fullcalendar_edit&id=".$row['id_fullcalendar']."\">".$row['nom']."</a></center><br/>";
  }
 
@@ -105,8 +105,8 @@ function exec_fullcalendar_css(){
  # Récupère les styles
  
  $sql = "SELECT * FROM ".$table_prefix."_fullcalendar_styles";
- $req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
- $num_style = mysql_num_rows($req);
+ $req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+ $num_style = sql_count($req);
  if(!$num_style) $INFO="<b>Vous n'avez pas encore définit de style !</b><br/><br/>Les définition de styles permettent de modifier l'apparence des évènements dans les agendas qui utilisent MySQL comme source de donnée.";
  else { 
 
@@ -135,7 +135,7 @@ function exec_fullcalendar_css(){
 	//-->
 	</script>";
 	
-	while ($row = spip_fetch_array($req)) {
+	while ($row = sql_fetch($req)) {
 
 		$id     = $row['id_style'];
 		$nom    = $row['titre'];
@@ -159,8 +159,8 @@ function exec_fullcalendar_css(){
 		}
 		
 		$sq = "SELECT 'id_event' FROM ".$table_prefix."_fullcalendar_events WHERE id_style='".$id."'";
-		$rq = mysql_query($sq) or die('Erreur SQL !<br>'.$sq.'<br>'.mysql_error()); 
-		$rw = mysql_num_rows($rq);
+		$rq = sql_query($sq) or die('Erreur SQL !<br>'.$sq.'<br>'.sql_error()); 
+		$rw = sql_count($rq);
 		
 		if(!$rw) $DELETE="<a href=\"javascript:EffacerStyle('".$id."')\"><img style=\"margin-left:10px;\" src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/css_remove.png' align='right'></a>";
 		else { 

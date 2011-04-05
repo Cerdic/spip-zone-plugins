@@ -2,9 +2,8 @@
 #HTTP_HEADER{Content-Type: text/css;}
 <?php
 	$table_prefix = $GLOBALS['table_prefix'] ;
-	$query = "SELECT * FROM ".$table_prefix."_fullcalendar_styles;";
-	$result = mysql_query($query); /*or die($query." ".mysql_error());*/
-	while ( $row = mysql_fetch_array($result))
+	$result= sql_query("SELECT * FROM ".$table_prefix."_fullcalendar_styles;");
+	while ( $row = sql_fetch($result))
 		$CSS.=".f_".$row['0'].", .fc-agenda .f_".$row['0']." .fc-event-time, .f_".$row['0']." a {background-color:".$row['bgcolor'].";border-color:".$row['bordercolor'].";color:".$row['textcolor'].";}\n";
 	print $CSS;
 ?>
