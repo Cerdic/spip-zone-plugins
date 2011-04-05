@@ -1,13 +1,24 @@
-<div id="calendar" class="divers">
+[(#REM)
+
+	Affiche un calendrier des articles publiés
+	
+	Paramètres :
+	-* self : la page sur laquelle les liens de changement de mois renverront lors du click
+	-* lien_archive : la page sur laquelle les liens vers les archives (click sur une journée) renvoient,
+	sinon on utilise celle passée par self
+	-* date : la date a utiliser
+	-* var_date : le paramètre de date qui sera utilisé dans les urls, par défaut "archives"
+	
+]<div id="calendar" class="divers">
 	<h2 class="h2 menu-titre"><:icone_calendrier:></h2>
 	<table summary="<:icone_calendrier:>">
 		<caption><BOUCLE_mois_precedent(ARTICLES){branche?}{mois_relatif>0}{n-1,1}>[
 			<a
-				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m'})]})"
+				href="(#ENV{self}|parametre_url{#ENV{var_date,archives},[(#DATE|affdate{'Y-m'})]})"
 				title="[(#DATE|affdate_mois_annee)]">&#171;</a>]</BOUCLE_mois_precedent>[
 			(#ENV{date}|affdate_mois_annee)]<BOUCLE_mois_suivant(ARTICLES){branche?}{mois_relatif<0}{0,1}>[
 			<a
-				href="(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m'})]})"
+				href="(#ENV{self}|parametre_url{#ENV{var_date,archives},[(#DATE|affdate{'Y-m'})]})"
 				title="[(#DATE|affdate_mois_annee)]">&#187;</a>]</BOUCLE_mois_suivant>
 		</caption>[
 		(#LANG|thead)
@@ -16,7 +27,7 @@
 			{agenda date, mois, (#ENV{date}|annee), (#ENV{date}|mois)}>[
 			(#DATE|agenda_memo{'',
 				[(#DATE|affdate{'j'})],
-				[(#ENV{self}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m-d'})]})]})
+				[(#ENV{lien_archive}|sinon{#ENV{self}}|parametre_url{#ENV{var_date},[(#DATE|affdate{'Y-m-d'})]})]})
 			]</BOUCLE_calendrier>[
 			(#ENV{date}|agenda_minical)
 			]</tbody>
