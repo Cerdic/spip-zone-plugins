@@ -51,7 +51,7 @@
 	<icon>spip_210/img_pack/skeleditor-32.png</icon>
 	<auteur>[erational->http://www.erational.org], [C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<licence>GNU/GPL v3</licence>
-	<version>2.0.1</version>
+	<version>2.5.1</version>
 	<etat>test</etat>
 	<description><multi>
 	[fr]Editeur de squelettes, css, js, dans l'espace priv&#233;
