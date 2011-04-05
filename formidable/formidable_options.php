@@ -54,12 +54,13 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 		'saisie' => 'selection',
 		'options' => array(
 			'nom' => 'apres',
-			'label' => 'Afficher ensuite',
-			'explication' => 'Apres validation, afficher à la place du formulaire :',
-			'datas' => 
-"formulaire|Le formulaire, à nouveau
-valeurs|Les valeurs saisies
-rien|Rien du tout",
+			'label' => '<:formidable:editer_apres_label:>',
+			'explication' => '<:formidable:editer_apres_explication:>',
+			'datas' => array(
+				'formulaire' => _T('formidable:editer_apres_choix_formulaire'),
+				'valeurs' => _T('formidable:editer_apres_choix_valeurs'),
+				'rien' => _T('formidable:editer_apres_choix_rien')
+			),
 			'defaut' => 'formulaire',
 			'cacher_option_intro' => 'on'
 		)
