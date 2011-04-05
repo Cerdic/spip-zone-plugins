@@ -59,9 +59,10 @@ function exec_geoportail_config_options()
 		$gservice = ($GLOBALS['meta']['geoportail_service'])?"CHECKED":"";
  		$geoportail_sysref = $GLOBALS['meta']['geoportail_sysref'];
  		$geoportail_provider = $GLOBALS['meta']['geoportail_provider'];
+ 		$geoportail_popup = $GLOBALS['meta']['geoportail_popup'];
 
 		/* Type d'objet a georef */
-		$form = debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:geoportail_provider'))
+		$form = debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:options'))
 			.debut_cadre_relief("",true)
 			. _T('geoportail:geoprovider_info')
 			.fin_cadre_relief(true)
@@ -72,6 +73,14 @@ function exec_geoportail_config_options()
 			."<option value='YHOO'".($geoportail_provider=='YHOO'?" selected":"").">Yahoo !</option>"
 			."</select>"
 			."<input type='submit' name='provider' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+			.debut_cadre_relief("",true)
+			. _T('geoportail:geopopup_info')
+			.fin_cadre_relief(true)
+			._T('geoportail:geoportail_popup')." : <select name='popup' class='fondl'>"
+			."<option value='Anchored'".($geoportail_popup=='Anchored'?" selected>":">")._T('geoportail:popup_postit')."</option>"
+			."<option value='FramedCloud'".($geoportail_popup=='FramedCloud'?" selected>":">")._T('geoportail:popup_bulle')."</option>"
+			."</select>"
+			."<input type='submit' name='setpopup' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
 			.fin_cadre_trait_couleur(true);
 
 		/* Type d'objet a georef */

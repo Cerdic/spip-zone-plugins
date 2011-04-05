@@ -1,11 +1,14 @@
 <?php
 
 function geoportail_insert_head($flux)
-{
+{	// Logo des couches SPIP
 	$logo = find_in_path(_DIR_IMG."geoserviceon0.png");
 	if (!$logo) $logo = find_in_path(_DIR_IMG."geoserviceon0.gif");
 	if (!$logo) $logo = find_in_path(_DIR_IMG."geoserviceon0.jpg");
 	if ($logo) $logo = "jQuery.geoportail.setOriginator ('$logo','".$GLOBALS['meta']['adresse_site']."')"; 
+	// Type de popup
+	$popup = $GLOBALS['meta']['geoportail_popup'];
+	$popup = "jQuery.geoportail.spip_popup = '".($popup?$popup:"Anchored")."';";
 
 	$flux .= 
 '
@@ -20,6 +23,7 @@ function geoportail_insert_head($flux)
 ."\n"
 .($GLOBALS['meta']['geoportail_osm_layer'] ? "jQuery.geoportail.osm_layer='".$GLOBALS['meta']['geoportail_osm_layer']."';" : "jQuery.geoportail.osm_mquest='mapnik';")
 ."\n".$logo
+."\n".$popup
 .'
 </script>
 <!--_GEOPORTAIL_HEADER_-->

@@ -53,6 +53,11 @@ function action_geoportail_config_dist()
  		{	ecrire_meta('geoportail_provider',$_POST['defaut_provider']);
  			ecrire_metas();
  		}
+		// Type de popup
+ 		if (isset($_POST['setpopup']))
+ 		{	ecrire_meta('geoportail_popup',$_POST['popup']);
+ 			ecrire_metas();
+ 		}
 		// Modif des objets a georef
  		if (isset($_POST['objet']))
 		{	ecrire_meta('geoportail_geoarticle',isset($_POST['article']));

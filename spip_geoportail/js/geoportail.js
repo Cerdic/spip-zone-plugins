@@ -995,7 +995,8 @@ jQuery.geoportail =
 	popupFeature: function(feature) 
 	{	// OpenLayers.Popup.FramedCloud 
 		// OpenLayers.Popup.AnchoredBubble
-		var spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true });
+		// var spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true });
+		var spip_popup = OpenLayers.Class(OpenLayers.Popup[jQuery.geoportail.spip_popup], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
 		var html = "";
 		var att = feature.attributes;
 		// Fonction popup perso

@@ -51,12 +51,15 @@ img.gpGeocodeMatchCodeMatchType
 }
 
 /** Popup sur la carte **/
-#popup, .gpPopup
+#popup.Anchored, .gpPopup
 {	font-size:1em;
-	/* background: transparent url(popup.png) no-repeat bottom right; */
 	background-color:#FFC!important;
 	border:0!important;
 }
+#popup.FramedCloud
+{	font-size:1em;
+}
+
 #popup p
 {	margin:0;
 	padding:0;
