@@ -41,14 +41,15 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 		array_shift($args);
 		array_shift($args);
 	}
+	
 	$objet = $args[0];
 	$id_objet = $args[1];
 	// pas dans une boucle ? on generera une erreur ?
 	if ($objet == 'balise_hors_boucle') {
-		$objet = '';
-		$id_objet = '';
+		$args[0] = '';
+		$args[1] = '';
 	} else {
-		$objet = table_objet($objet);
+		$args[0] = table_objet($objet);
 	}
 	
 	// ca s'apparenterait presque a une autorisation...
@@ -59,14 +60,13 @@ function balise_FORMULAIRE_NOTATION_stat($args, $filtres) {
 		$accepter_note = $f($id_objet);
 	}
 	
-	spip_log($accepter_note,'notation');
 	if ($accepter_note == 'non') {
 		return false;
 	}
 	
 	// on envoie les arguments a la fonction charger
 	// du formulaire CVT fomulaires/notation.php
-	return array($objet, $id_objet);
+	return $args;
 
 }
 
