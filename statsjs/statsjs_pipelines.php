@@ -46,7 +46,7 @@ function statsjs_mouchard() {
 $(function(){setTimeout(function(){
   $.ajax({url: '${urljs}', dataType: 'script', cache: true,
     success: function() {
-      var obj = $('meta[name=SPIP.identifier]').attr('content')||'';
+      var obj = ($('meta[name=\"SPIP.identifier\"]').attr('content')||'');
       try {
         var piwikTracker = Piwik.getTracker('${urlhit}\\x26obj='+obj);
         piwikTracker.setDocumentTitle(document.title);
