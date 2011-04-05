@@ -13,6 +13,7 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 				'obligatoire' => 'oui',
 				'label' => _T('produits:produit_champ_titre_label'),
 				'defaut' => _T('info_sans_titre'),
+				'class' => 'multilang',
 			)
 		),
 		array(
@@ -68,6 +69,7 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 				'nom' => 'descriptif',
 				'rows' => '3',
 				'label' => _T('produits:produit_champ_descriptif_label'),
+				'class' => 'multilang',
 			)
 		),
 		array(
@@ -75,6 +77,7 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 			'options' => array(
 				'nom' => 'texte',
 				'label' => _T('produits:produit_champ_texte_label'),
+				'class' => 'multilang',
 			)
 		),
 	);
