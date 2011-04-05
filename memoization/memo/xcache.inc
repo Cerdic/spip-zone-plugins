@@ -8,7 +8,7 @@
 class MCacheBackend_xcache extends MCacheBackend {
 
 	function get($key) {
-		$a = xcache_get(_CACHE_NAMESPACE.$key);
+		$a = @xcache_get(_CACHE_NAMESPACE.$key);
 		// maybe_unserialize
 		if (is_array($a))
 			return @unserialize($a[0]);
