@@ -224,109 +224,51 @@ function get_plugin_squelette() {
   return $plugin_squelette;
 }
 
+function determine_mime_type($filename) {
+	if($filename
+	AND $infos = pathinfo($filename)
+	AND $extension = $infos['extension'])
+  $mime_types = array(
+            'txt' => 'text/plain',
+            'htm' => 'text/html',
+            'html' => 'text/html',
+            'php' => 'application/x-httpd-php',
+            'css' => 'text/css',
+            'js' => 'application/javascript',
+            'json' => 'application/json',
+            'xml' => 'application/xml',
+        );		
+		if (array_key_exists($extension, $mime_types)) {
+            return $mime_types[$extension];
+        }
+}
 
 function skeleditor_codemirror($filename,$editable=true){
 	if (!$filename)
 		return "";
 
-	$infos = pathinfo($filename);
-	switch($infos['extension']){
-		case 'sh':
-		case 'txt':
-		case 'nfo':
-		case 'log':
-		case 'csv':
-			$parsers = null;
-			break;
-		case 'as':
-		case 'js':
-			$parsers = array("tokenizejavascript.js", "parsejavascript.js");
-			$css = array("css/jscolors.css");
-			// autoMatchParens: true
-			break;
-		case 'css':
-			$parsers = array("parsecss.js");
-			$css = array("css/csscolors.css");
-			break;
-		case 'xml':
-		case 'svg':
-		case 'rdf':
-			$parsers = array("parsexml.js");
-			$css = array("css/xmlcolors.css");
-			#continuousScanning: 500,
-			break;
-		case 'sql':
-			$parsers = array("../contrib/sql/js/parsesql.js");
-			$css = array("css/sqlcolors.css");
-			#textWrapping: false,
-			break;
-		case 'py':
-			$parsers = array("../contrib/python/js/parsepython.js");
-			$css = array("css/pythoncolors.css");
-      #  lineNumbers: true,
-      #  textWrapping: false,
-      #  indentUnit: 4,
-      #  parserConfig: {'pythonVersion': 2, 'strictErrors': true}
-			break;
-
-		case 'php':
-		case 'html':
-		case 'htm':
-		default:
-			$parsers = array("parsexml.js", "parsecss.js", "tokenizejavascript.js", "parsejavascript.js",
-                     "../contrib/php/js/tokenizephp.js", "../contrib/php/js/parsephp.js",
-                     "../contrib/php/js/parsephphtmlmixed.js");
-			$css = array("css/xmlcolors.css", "css/jscolors.css", "css/csscolors.css", "contrib/php/css/phpcolors.css");
-			break;
-	}
-
-	if (is_null($parsers))
-		return "";
-
-	$readonly = "";
+	$readonly = true;
 	if (!$editable)
 		$readonly = "readonly: true,\n";
-
-	$dir = _DIR_PLUGIN_SKELEDITOR.'spip_210/codemirror/';
-	$dirjs = _DIR_PLUGIN_SKELEDITOR.'spip_210/codemirror/js/';
-
-	$script = '<script src="'._DIR_PLUGIN_SKELEDITOR.'spip_210/codemirror/js/codemirror.js" type="text/javascript"></script>
-<script type="text/javascript">
-var editor;
-function init_code_edit(){
-	if (jQuery("#code").is(":visible")){
-		editor = CodeMirror.fromTextArea(\'code\', {
-			height: "550px",
-			parserfile: ["'.implode('", "',$parsers).'"],
-			stylesheet: ["'.$dir.implode('", "'.$dir,$css).'"],
-			path: "'._DIR_PLUGIN_SKELEDITOR.'spip_210/codemirror/js/",
-			continuousScanning: 500,
-			textWrapping: false,
-			readOnly: jQuery("#code").attr("readonly"),
-			lineNumbers: true
+	$mode= determine_mime_type($filename);
+	
+$script = '<script type="text/javascript">
+var editor = CodeMirror.fromTextArea(document.getElementById(\'code\'), {
+		mode:"'.$mode.'",
+        lineNumbers: true,
+        matchBrackets: true,
+        indentUnit: 6,
+        indentWithTabs: true,
+        enterMode: "keep",
+        tabMode: "shift",
 		});
-	}
-}
-init_code_edit();
 </script>
 <style type="text/css">
 .codewrap {border:1px solid #333;background:#fff;font-size:11px;clear:both;}
-.codewrap.readonly {background:#ddd;}
-.CodeMirror-line-numbers {
-        width: 2.2em;
-        color: #aaa;
-        background-color: #eee;
-        text-align: right;
-        padding-right: .3em;
-        font-size: 10pt;
-        font-family: monospace !important;
-        padding-top: .4em;
-				line-height:15px;
-      }
-.CodeMirror-line-numbers *{
-		font-family: monospace !important;
-}
 
+.CodeMirror {
+  height: auto;
+}
 </style>
 ';
 	return $script;

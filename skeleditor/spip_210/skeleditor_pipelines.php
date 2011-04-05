@@ -7,6 +7,114 @@
  *
  */
 
+function skeleditor_dir($extension, $type) {
+	if (!$extension)
+		return "";
+
+	switch($extension){
+		case 'sh':
+		case 'txt':
+		case 'nfo':
+		case 'log':
+		case 'csv':
+			$mode = null;
+			break;
+		case 'as':
+		case 'js':
+			$mode = array("javascript");
+			// autoMatchParens: true
+			break;
+		case 'css':
+			$mode = array("css");
+			break;
+		case 'xml':
+		case 'svg':
+		case 'rdf':
+			$mode = array("xml");
+			#continuousScanning: 500,
+			break;
+/* 		case 'sql':
+			$parsers = array("../contrib/sql/js/parsesql.js");
+			$css = array("css/sqlcolors.css");
+			#textWrapping: false,
+			break;
+		case 'py':
+			$parsers = array("../contrib/python/js/parsepython.js");
+			$css = array("css/pythoncolors.css");
+      #  lineNumbers: true,
+      #  textWrapping: false,
+      #  indentUnit: 4,
+      #  parserConfig: {'pythonVersion': 2, 'strictErrors': true}
+			break; */
+
+		case 'php':
+		case 'html':
+		case 'htm':
+		default:
+			$mode = array("xml", "css", "javascript",
+                     "clike","php");
+			break;
+	}
+	if(!$type)
+	return false;
+
+	$dir = _DIR_PLUGIN_SKELEDITOR ."spip_210/codemirror/";
+	if ($type == "css")
+	$files .= "<link rel='stylesheet' href='".$dir."lib/codemirror.css' type='text/css' />";	
+	if ($type =="js")
+	$files .= "<script src='".$dir."lib/codemirror.js' type='text/javascript'></script>";
+	foreach($mode as $cle=>$valeur) {
+		
+		$test = $dir."mode/".$valeur."/".$valeur.".".$type;
+ 			if (find_in_path($test)) {
+				if ($type == "css")
+				$files .= "<link rel='stylesheet' href='".$test."' type='text/css' />";
+				if ($type =="js")
+				$files .= "<script src='".$test."' type='text/javascript'></script>";
+ 			}
+	}
+	
+	return $files;
+}
+
+ 
+function test_skeleditor_edition() {
+$exec = _request('exec');
+$filename = _request('f');
+	if ($exec == 'skeleditor'
+	AND $filename
+	AND $infos = pathinfo($filename)
+	AND $extension = $infos['extension']) 
+	return $extension;
+	else
+	return false;
+	
+} 
+
+function skeleditor_insert_head($flux){
+
+	$extension = test_skeleditor_edition();
+		if($extension) {
+		$type = "js";
+		$script = skeleditor_dir($extension, $type);
+		$flux .= skeleditor_insert_head_css($flux); // au cas ou il n'est pas implemente */
+		$flux .= $script;
+		}
+	return $flux;
+}
+function skeleditor_insert_head_css($flux){
+	$extension = test_skeleditor_edition();
+		if($extension) {
+		static $done = false;
+		if (!$done) {
+			$done = true;
+			$type = "css";
+			$css = skeleditor_dir($extension, $type);
+			$flux .= $css; 
+		}
+	}
+return $flux;
+} 
 // pas de compresseur si var_inclure
 if (_request('var_mode')=='inclure')
 	define('_INTERDIRE_COMPACTE_HEAD',true);

@@ -79,6 +79,17 @@
 
   <!-- pipeline -->
   <pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+      <inclure>spip_210/skeleditor_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_css</action>
+      <inclure>spip_210/skeleditor_pipelines.php</inclure>
+  </pipeline>
+  <pipeline>
+  <pipeline>
       <nom>autoriser</nom>
       <inclure>spip_210/inc/skeleditor_autoriser.php</inclure>
   </pipeline>
