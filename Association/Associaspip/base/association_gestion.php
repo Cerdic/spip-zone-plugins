@@ -158,6 +158,7 @@ function association_maj_42024()
 
 $GLOBALS['association_maj'][42024] = array(array('association_maj_42024'));
 
+/* cette mise a jour comporte une erreur: sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'"); le champ doit etre nomme direction et non destination */
 function association_maj_43909()
 {
 	global $association_tables_principales;
@@ -172,5 +173,26 @@ function association_maj_43909()
 }
 
 $GLOBALS['association_maj'][43909] = array(array('association_maj_43909'));
+
+unset($GLOBALS['association_maj'][43909]); /* pour empecher l'execution de code fautif tout en gardant trace */
+
+function association_maj_46392() /* repare l'erreur commise sur la maj 43909 */
+{
+	global $association_tables_principales;
+
+	/* on elimine le champ mal nomme */
+	sql_alter("TABLE spip_asso_plan DROP destination");
+
+	/* et on refait la modif correctement: ca risque d'entrainer des erreurs SQL mais c'est pas grave */
+	sql_alter("TABLE spip_asso_plan ADD direction ENUM('credit','debit') NOT NULL default 'credit'");
+	sql_create('spip_asso_destination', 
+		$association_tables_principales['spip_asso_destination']['field'],
+		$association_tables_principales['spip_asso_destination']['key']);
+	sql_create('spip_asso_destination_op', 
+		$association_tables_principales['spip_asso_destination_op']['field'],
+		$association_tables_principales['spip_asso_destination_op']['key']);
+}
+
+$GLOBALS['association_maj'][46392] = array(array('association_maj_46392'));
 
 ?>
