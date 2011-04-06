@@ -1,0 +1,30 @@
+<plugin>
+	<nom>Flux RSS configurable</nom>
+	<auteur>[Joseph->http://www.spip-contrib.net/Joseph]</auteur>
+	<icon>images/rssconfig-128.png</icon>
+	<licence>GNU/GPL</licence>
+	<version>1.0.1</version>
+	<etat>test</etat>
+	<description>Fournit un formulaire de configuration pour personnaliser le flux RSS des articles du site.</description>
+	<lien>http://www.spip-contrib.net/?article3793</lien>
+	<prefix>rssconfig</prefix>
+		<bouton id='rssconfig' parent='configuration'>
+		<icone>images/rssconfig-24.png</icone>
+		<titre>rssconfig:rssconfig</titre>
+		<url>configurer_rssconfig</url>
+	</bouton>
+	<bouton id='rssconfig21' parent='bando_squelette'>
+		<icone>images/rssconfig-24.png</icone>
+		<titre>rssconfig:rssconfig</titre>
+		<url>configurer_rssconfig</url>
+	</bouton>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>rssconfig_ieconfig_metas.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="Iterateurs" />
+	<utilise id="Z" />
+	<utilise id="Zdist" />
+</plugin>
