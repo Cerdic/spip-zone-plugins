@@ -1,0 +1,60 @@
+<div class="formulaire_spip formulaire_plugonet_generer" id="formulaire_plugonet_generer">
+	<h3 class="titrem"><:plugonet:titre_form_generer:></h3>
+
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	<!-- <br class='bugajaxie' /> -->
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action --> ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<div><input type="hidden" name="encodage" id="encodage_defaut" value="utf8" /></div>
+		<ul>
+			<li class="fieldset">
+				<fieldset>
+					<p class="explication"><:plugonet:info_generer:></p>
+					<ul>
+						<li class="editer_pluginxml obligatoire[(#ENV{erreurs}|table_valeur{pluginxml}|oui) erreur]">
+							<label><:plugonet:label_choix_pluginxml:></label>
+							<p class="explication"><:plugonet:info_choix_pluginxml:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pluginxml})</span>]
+					<B_pluginxml>
+							<p>
+								<small><a id="cocher_tout" href="#liste_pluginxml"><:plugonet:bouton_tout_cocher:></a>
+								&nbsp;|&nbsp;
+								<a id="decocher_tout" href="#liste_pluginxml"><:plugonet:bouton_tout_decocher:></a>
+								</small>
+							</p>
+					<BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}>
+							<div class="choix">
+								<input type="checkbox" name="pluginxml[]" class="checkbox" id="pluginxml_#COMPTEUR_BOUCLE" value="#VALEUR" />
+								<label for="pluginxml_#COMPTEUR_BOUCLE">[(#VALEUR|joli_repertoire)]</label>
+							</div>
+					</BOUCLE_pluginxml>
+						</li>
+					</ul>
+					</B_pluginxml>
+						<:plugonet:message_nok_aucun_pluginxml:>
+					<//B_pluginxml>
+				</fieldset>
+			</li>
+		</ul>
+
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:plugonet:bouton_generer:>' />
+		</p>
+	</div></form>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		jQuery("a#cocher_tout").click(function () {
+			jQuery('#liste_pluginxml input[type=checkbox]').not(':disabled').attr('checked', 'checked');
+	    });
+		jQuery("a#decocher_tout").click(function () {
+			jQuery('#liste_pluginxml input[type=checkbox]').not(':disabled').attr('checked', false);
+	    });
+	});
+//]]>
+</script>

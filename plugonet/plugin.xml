@@ -1,0 +1,49 @@
+<plugin>
+	<nom>PlugOnet</nom>
+	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<licence>GPL 3</licence>
+	<icon>prive/themes/spip/images/plugonet-32.png</icon>
+	<description>
+Passer de plugin.xml &agrave; paquet.xml.
+
+Ce plugin permet de produire le nouveau fichier paquet.xml &agrave; partir du fichier
+plugin.xml. Des options de v&eacute;rification sont disponibles pour nettoyer au pr&eacute;alable
+certaines balises du fichier d'origine.
+	</description>
+	<lien></lien>
+	<prefix>plugonet</prefix>
+
+<!-- 	<fonctions>langonet_fonctions.php</fonctions> -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/plugonet_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>plugonet_pipelines.php</inclure>
+	</pipeline>
+
+	<bouton id="plugonet" parent="configuration">
+		<icone>prive/themes/spip/images/plugonet-24.png</icone>
+		<titre>plugonet:bouton_plugonet</titre>
+		<url>plugonet_generer</url>
+	</bouton>
+	<bouton id="plugonet-21" parent="bando_administration">
+		<icone>images/plugonet-16.png</icone>
+		<titre>plugonet:bouton_plugonet</titre>
+		<url>plugonet_generer</url>
+	</bouton>
+
+	<onglet id="plugonet_generer" parent="plugonet">
+		<icone>prive/themes/spip/images/plugonet-generer.png</icone>
+		<titre>plugonet:onglet_generer</titre>
+		<url>plugonet_generer</url>
+	</onglet>	
+
+	<necessite id="SPIP" version="[2.1.9;]" />
+	<necessite id="langonet" version="[0.6.0;]" />
+	<necessite id="Iterateurs" version="[0.2.5;]" />
+	<categorie>outil</categorie>
+</plugin>
