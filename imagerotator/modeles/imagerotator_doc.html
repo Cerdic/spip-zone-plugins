@@ -1,0 +1,75 @@
+[(#REM) modèle imagerotator de documents : 
+ - Depuis un article : < imagerotator_doc|id=.,.,.. >
+ - Selon le modele CROCHET(# MODELE{imagerotator_doc}{id=.,.,..})CROCHET
+]
+
+[(#SET{width,[(#ENV{width, #CONFIG{imagerotator/width, 500} })]} )]
+[(#SET{height,[(#ENV{height, #CONFIG{imagerotator/height, 500} })]} )]
+[(#SET{effect,[(#ENV{effect, #CONFIG{imagerotator/effect, random} })]} )]
+[(#SET{slices,[(#ENV{slices, #CONFIG{imagerotator/slices,15} })]} )]
+[(#SET{animSpeed,[(#ENV{animSpeed, #CONFIG{imagerotator/animSpeed,500} })]} )]
+[(#SET{pauseTime,[(#ENV{pauseTime, #CONFIG{imagerotator/pauseTime,3000} })]} )]
+[(#SET{directionNav,[(#ENV{directionNav, #CONFIG{imagerotator/directionNav,true} })]} )]
+[(#SET{directionNavHide,[(#ENV{directionNavHide, #CONFIG{imagerotator/directionNavHide,true} })]} )]
+[(#SET{controlNav,[(#ENV{controlNav, #CONFIG{imagerotator/controlNav,true} })]} )]
+[(#SET{keyboardNav,[(#ENV{keyboardNav, #CONFIG{imagerotator/keyboardNav,true} })]} )]
+[(#SET{pauseOnHover,[(#ENV{pauseOnHover, #CONFIG{imagerotator/pauseOnHover,true} })]} )]
+[(#SET{captionOpacity,[(#ENV{captionOpacity, #CONFIG{imagerotator/captionOpacity,0.8} })]} )]
+
+[(#SET{id_rand,	#VAL{1}|rand{1000}})]
+
+<B_doc>
+<br/><br/>
+<div id='slider' style="[width:(#GET{width})px;][height:(#GET{height})px]">
+	<div id="slider_#GET{id_rand}" class="imagerotator" style="[width:(#GET{width})px;][height:(#GET{height})px]">
+	<BOUCLE_doc(DOCUMENTS){extension IN png,jpg,gif}{id_document==^((#ENV{id}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
+		[(#FICHIER|image_recadre{#CONFIG{imagerotator/width,500},#CONFIG{imagerotator/height,300}}|inserer_attribut{title,[(#TITRE|supprimer_numero)]})]
+	</BOUCLE_doc>
+	</div>
+</div>
+<br/><br style="clear:both"/>
+<script type="text/javascript">
+	$(window).load(function() {
+		$('#slider_#GET{id_rand}').imagerotator({
+        [effect:'(#GET{effect})',]
+        [slices:(#GET{slices}),]
+        [animSpeed:(#GET{animSpeed}),]
+        [pauseTime:(#GET{pauseTime}),]
+        [directionNav:(#GET{directionNav}),]
+        [directionNavHide:(#GET{directionNavHide}),]
+        [controlNav:(#GET{controlNav}),]
+        [keyboardNav:(#GET{keyboardNav}),]
+        [pauseOnHover:(#GET{pauseOnHover}),]
+        [captionOpacity:(#GET{captionOpacity})]
+		});
+	});
+</script>
+</B_doc>
+
+
+
+
+
+
+
+
+
+
+
+<B_doc_rub>
+<BOUCLE_doc_rub (DOCUMENTS) {id_rubrique} {mode=document} {extension IN png,jpg,gif} {par titre} {doublons} {vu=non} {0,1}>
+
+</BOUCLE_doc_rub>
+
+		<div id="Rotator"><a href="http://www.macromedia.com/go/getflashplayer">Téléchargez Flash Player pour voir cette animation</a></div>
+		<script type="text/javascript">
+		var s1 = new SWFObject("plugins/imagerotator/swf/imagerotator.swf","rotator","[(#CONFIG{imagerotator/width})]","[(#CONFIG{imagerotator/height})]","7","[(#CONFIG{imagerotator/bgcolor})]");
+		s1.addParam("allowfullscreen","true");
+		s1.addVariable("file","spip.php%3Fpage%3Drotator.xml%26id_rubrique%3D#ENV{id_article}");
+		s1.addVariable("width","[(#CONFIG{imagerotator/width})]");
+		s1.addVariable("height","[(#CONFIG{imagerotator/height})]");
+		s1.addVariable("screencolor","[(#CONFIG{imagerotator/bgcolor}|replace{^\#,0x})]");
+		s1.write("Rotator");
+		</script>
+
+</B_doc_rub>

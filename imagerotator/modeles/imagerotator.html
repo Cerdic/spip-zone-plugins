@@ -1,0 +1,117 @@
+[(#REM) modèle imagerotator des articles : 
+ - Depuis un article : < imagerotatorXX >
+ - Selon le modele CROCHET(# MODELE{imagerotator}{id_imagerotator=.,.,..})CROCHET
+]
+
+<?php
+/*
+* logo (undefined): Set this to an image that can be put as a watermark logo in the top right corner of the display. Transparent PNG files give the best results (example).
+* showicons (true): Set this to false to hide the activity icon and play button in the middle of the display.
+*  (true): Set this to false to hide the fullscreen button and disable fullscreen. 
+ */
+
+?>
+
+[(#SET{id_article,[(#ENV{id_imagerotator, #CONFIG{imagerotator/id_defaut, 0} })]} )]
+
+[(#SET{width,[(#ENV{width, #CONFIG{imagerotator/width, 420} })]} )]
+[(#SET{height,[(#ENV{height, #CONFIG{imagerotator/height, 300} })]} )]
+[(#SET{displaywidth,[(#ENV{width, #CONFIG{imagerotator/displaywidth, 420} })]} )]
+[(#SET{displayheight,[(#ENV{height, #CONFIG{imagerotator/displayheight, 300} })]} )]
+[(#SET{transition,[(#ENV{transition, #CONFIG{imagerotator/transition, random} })]} )]
+[(#SET{overstretch,[(#ENV{overstretch, #CONFIG{imagerotator/overstretch, false} })]} )]
+[(#SET{shownavigation,[(#ENV{shownavigation, #CONFIG{imagerotator/shownavigation, true} })]} )]
+[(#SET{showdownload,[(#ENV{showdownload, #CONFIG{imagerotator/showdownload, false} })]} )]
+[(#SET{showicons,[(#ENV{showicons, #CONFIG{imagerotator/showicons, true} })]} )]
+[(#SET{allowfullscreen,[(#ENV{allowfullscreen, #CONFIG{imagerotator/allowfullscreen, true} })]} )]
+[(#SET{backcolor,[(#ENV{backcolor, #CONFIG{imagerotator/backcolor,"#FFFFFF"} })]} )]
+[(#SET{frontcolor,[(#ENV{frontcolor, #CONFIG{imagerotator/frontcolor,"#000000"} })]} )]
+[(#SET{lightcolor,[(#ENV{lightcolor, #CONFIG{imagerotator/lightcolor,"#CECECE"} })]} )]
+[(#SET{screencolor,[(#ENV{screencolor, #CONFIG{imagerotator/screencolor,"#000000"} })]} )]
+
+<?php
+ 
+ $v = lire_config('imagerotator/swfobject','1.5');
+ $id_article = '[(#GET{id_article,0}|texte_script)]';
+ $xml = urlencode(generer_url_public('xml_rotator',"id_article=$id_article", true, true));
+ $swf = ($v=='1.5') ? find_in_path('imagerotator.swf') : find_in_path('imagerotator/imagerotator.swf') ;
+
+ switch($v){
+
+  case '1.5' : # SWFObject 1.5 (recommended)
+
+/*	$HTML="<script type=\"text/javascript\">
+		var so = new SWFObject('$swf','flashbanner','#GET{width}','#GET{height}','9');
+		so.addParam('allowfullscreen','true');
+		so.addParam('allowscriptaccess','always');
+		so.addParam('bgcolor','#FFFFFF');
+		so.addParam('flashvars','file=$xml&autostart=true');
+		so.write('flashbanner');
+	</script>";*/
+
+	$HTML="<script type=\"text/javascript\">
+var s1 = new SWFObject(\"".$swf."\",\"rotator\",\"[(#GET{width})]\",\"[(#GET{height})]\",\"7\",\"[(#GET{bgcolor})]\");
+s1.addVariable(\"file\",\"".$xml."\");
+[s1.addParam(\"allowfullscreen\",\"(#GET{allowfullscreen})\");]
+[s1.addVariable(\"usefullscreen\",\"(#GET{allowfullscreen})\");]
+[s1.addVariable(\"transition\",\"(#GET{transition})\");]
+[s1.addVariable(\"overstretch\",\"(#GET{overstretch})\");]
+[s1.addVariable(\"shownavigation\",\"(#GET{shownavigation})\");]
+[s1.addVariable(\"showdownload\",\"(#GET{showdownload})\");]
+[s1.addVariable(\"showicons\",\"(#GET{showicons})\");]
+[s1.addVariable(\"width\",\"(#GET{width})\");]
+[s1.addVariable(\"height\",\"(#GET{height})\");]
+[s1.addVariable(\"backcolor\",\"(#GET{backcolor}|replace{^\#,0x})\");]
+[s1.addVariable(\"frontcolor\",\"(#GET{frontcolor}|replace{^\#,0x})\");]
+[s1.addVariable(\"lightcolor\",\"(#GET{lightcolor}|replace{^\#,0x})\");]
+[s1.addVariable(\"screencolor\",\"(#GET{screencolor}|replace{^\#,0x})\");]
+s1.write(\"flashbanner\");
+</script>";
+
+  break;
+
+  case '2.x' : # SWFObject 2.X (from lib/)
+	$HTML="<script type=\"text/javascript\">
+var flashvars = {
+  'file':            '".$xml."',
+  'autostart':       'true'
+};
+var params = {
+'allowscriptaccess': 'always',
+['allowfullscreen':  '(#GET{allowfullscreen})',]
+['usefullscreen':    '(#GET{allowfullscreen})',]
+['transition':       '(#GET{transition})',]
+['bgcolor':          '(#GET{backcolor}|replace{^\#,0x})',]
+['backcolor':        '(#GET{backcolor}|replace{^\#,0x})',]
+['frontcolor':       '(#GET{frontcolor}|replace{^\#,0x})',]
+['lightcolor':       '(#GET{lightcolor}|replace{^\#,0x})',]
+['screencolor':      '(#GET{screencolor}|replace{^\#,0x})',]
+['overstretch':      '(#GET{overstretch})',]
+['shownavigation':   '(#GET{shownavigation})',]
+['showdownload':     '(#GET{showdownload})',]
+['showicons':        '(#GET{showicons})',]
+['width':            '(#GET{width})',]
+['height':           '(#GET{height})',]
+['showicons':        '(#GET{showicons})']
+};
+var attributes = {
+  'id':              'player1',
+  'name':            'player1'
+};
+swfobject.embedSWF('".$swf."', 'flashbanner', '[(#GET{width})]', '[(#GET{height})]', '9', 'false', flashvars, params, attributes);
+</script>";
+
+  default:
+ }
+
+?>
+
+<B_doc>
+<BOUCLE_doc (DOCUMENTS) {id_article=#GET{id_article}} {mode=document} {extension IN png,jpg,gif} {par titre} {doublons} {vu=non} {0,1}>
+
+</BOUCLE_doc>
+<div id="flashbanner"><a href="http://www.macromedia.com/go/getflashplayer"><:imagerotator:aboutflash:></a></div>
+<?php print $HTML ?>
+</B_doc>
+<!-- Image Rotator - Appel #GET{id_article}  incorrect ! -->
+<//B_doc>

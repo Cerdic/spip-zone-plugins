@@ -1,0 +1,163 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- depot=metapack -->
+<!-- nom=imagerotator -->
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_imagerotator">
+
+	<div class="cadre_padding">
+	
+		<form name="formulaire_config_imagerotator" method="post"  action="#SELF"><div>#ACTION_FORMULAIRE{#SELF}
+
+		#FORMULAIRE_CONFIG_IMAGEROTATOR_ARTICLE
+	
+		<fieldset><legend>Apparence générale </legend>
+			<p>
+			<label for="_ir_width"><:imagerotator:width:> :</label>
+			<input type="text" name="width" class="type_txt" id="_ir_width" size="5"
+				value="#ENV{width,420}" /> 
+			</p>
+			<p>
+			<label for="_ir_height"><:imagerotator:height:> :</label>
+			<input type="text" name="height" class="type_txt" id="_ir_height" size="5"
+				value="#ENV{height,300}" /> 
+			</p>
+			<p>
+				<label for="_ir_screencolor"><:imagerotator:screencolor:> :</label>
+				<input type="text" name="screencolor" class="palette" id="_ir_screencolor" size="7"	value="#ENV{screencolor,'#FFFFFF'}" />
+			</p>
+<!--
+			<p>
+				<label for="_ir_align" title="align"><:imagerotator:align:> :</label>
+				<select name="align" id="_ir_align" style="width:70px">
+					<option value="center" [(#CONFIG{imagerotator/align}|=={#VAL{'center'}}|?{selected="selected",''})]><:imagerotator:center:></option>
+					<option value="left" [(#CONFIG{imagerotator/align}|=={#VAL{'left'}}|?{selected="selected",''})]><:imagerotator:left:></option>	
+					<option value="right" [(#CONFIG{imagerotator/align}|=={#VAL{'right'}}|?{selected="selected",''})]><:imagerotator:right:></option>	
+				</select>
+			</p>
+-->
+		</fieldset>
+
+		<fieldset><legend>Contr&ocirc;les</legend>
+			<p>
+				<label for="_ir_shownavigation" title="shownavigation"><:imagerotator:shownavigation:> :</label>
+				<select name="shownavigation" id="_ir_shownavigation" style="width:70px">
+					<option value="false" [(#CONFIG{imagerotator/shownavigation}|=={#VAL{'false'}}|?{selected="selected",''})]><:imagerotator:non:></option>
+					<option value="true" [(#CONFIG{imagerotator/shownavigation}|=={#VAL{'true'}}|?{selected="selected",''})]><:imagerotator:oui:></option>	
+				</select>
+			</p>
+			<p>
+				<label for="_ir_showicons" title="showicons"><:imagerotator:showicons:> :</label>
+				<select name="showicons" id="_ir_showicons" style="width:70px">
+					<option value="true" [(#CONFIG{imagerotator/showicons}|=={#VAL{'true'}}|?{selected="selected",''})]><:imagerotator:oui:></option>
+					<option value="false" [(#CONFIG{imagerotator/showicons}|=={#VAL{'false'}}|?{selected="selected",''})]><:imagerotator:non:></option>
+				</select>
+			</p>
+			<p>
+				<label for="_ir_allowfullscreen" title="allowfullscreen"><:imagerotator:allowfullscreen:> :</label>
+				<select name="allowfullscreen" id="_ir_allowfullscreen" style="width:70px">
+					<option value="true" [(#CONFIG{imagerotator/allowfullscreen}|=={#VAL{'true'}}|?{selected="selected",''})]><:imagerotator:oui:></option>
+					<option value="false" [(#CONFIG{imagerotator/allowfullscreen}|=={#VAL{'false'}}|?{selected="selected",''})]><:imagerotator:non:></option>
+				</select>
+			</p>
+			<p>
+				<label for="_ir_backcolor"><:imagerotator:backcolor:> :</label>
+				<input type="text" name="backcolor" class="palette" id="_ir_backcolor" size="7"	value="#ENV{backcolor,'#FFFFFF'}" />
+			</p>
+			<p>
+				<label for="_ir_frontcolor"><:imagerotator:frontcolor:> :</label>
+				<input type="text" name="frontcolor" class="palette" id="_ir_frontcolor" size="7"	value="#ENV{frontcolor,'#FFFFFF'}" />
+			</p>
+			<p>
+				<label for="_ir_lightcolor"><:imagerotator:lightcolor:> :</label>
+				<input type="text" name="lightcolor" class="palette" id="_ir_lightcolor" size="7"	value="#ENV{lightcolor,'#CECECE'}" />
+			</p>
+			<p>
+				<label for="_ir_showdownload" title="showdownload"><:imagerotator:showdownload:> :</label>
+				<select name="showdownload" id="_ir_showdownload" style="width:70px">
+					<option value="false" [(#CONFIG{imagerotator/showdownload}|=={#VAL{'false'}}|?{selected="selected",''})]><:imagerotator:non:></option>
+					<option value="true" [(#CONFIG{imagerotator/showdownload}|=={#VAL{'true'}}|?{selected="selected",''})]><:imagerotator:oui:></option>	
+				</select>
+			</p>
+		</fieldset>
+		
+		<fieldset><legend>Images</legend>
+			<p>
+			<label for="_ir_displaywidth"><:imagerotator:displaywidth:> :</label>
+			<input type="text" name="displaywidth" class="type_txt" id="_ir_displaywidth" size="5"
+				value="#ENV{displaywidth,420}" /> 
+			</p>
+			<p>
+			<label for="_ir_displayheight"><:imagerotator:displayheight:> :</label>
+			<input type="text" name="displayheight" class="type_txt" id="_ir_displayheight" size="5"
+				value="#ENV{displayheight,300}" /> 
+			</p>
+			<p>
+				<label for="_ir_overstretch" title="overstretch"><:imagerotator:overstretch:> :</label>
+				<select name="overstretch" id="_ir_overstretch" style="width:70px">
+					<option value="false" [(#CONFIG{imagerotator/overstretch}|=={#VAL{'false'}}|?{selected="selected",''})]><:imagerotator:non:></option>
+					<option value="true" [(#CONFIG{imagerotator/overstretch}|=={#VAL{'true'}}|?{selected="selected",''})]><:imagerotator:oui:></option>
+					<option value="fit" [(#CONFIG{imagerotator/overstretch}|=={#VAL{'fit'}}|?{selected="selected",''})]><:imagerotator:fit:></option>
+					<option value="none" [(#CONFIG{imagerotator/overstretch}|=={#VAL{'none'}}|?{selected="selected",''})]><:imagerotator:none:></option>
+				</select>
+			</p>
+		</fieldset>
+		
+		<fieldset><legend>Animations</legend>
+			<p>
+				<label for="_ir_transition" title='transition'><:imagerotator:transition:> :</label>
+				<select name="transition" id="_ir_transition" style="width:142px">	
+					<option value="random" [(#CONFIG{imagerotator/transition}|=={#VAL{'random'}}|?{selected="selected",''})]>random</option>
+					<option value="fade" [(#CONFIG{imagerotator/transition}|=={#VAL{'fade'}}|?{selected="selected",''})]>fade</option>
+					<option value="bgfade" [(#CONFIG{imagerotator/transition}|=={#VAL{'bgfade'}}|?{selected="selected",''})]>bgfade</option>
+					<option value="slowfade" [(#CONFIG{imagerotator/transition}|=={#VAL{'slowfade'}}|?{selected="selected",''})]>slowfade</option>
+					<option value="blocks" [(#CONFIG{imagerotator/transition}|=={#VAL{'blocks'}}|?{selected="selected",''})]>blocks</option>
+					<option value="bubbles" [(#CONFIG{imagerotator/transition}|=={#VAL{'bubbles'}}|?{selected="selected",''})]>bubbles</option>
+					<option value="circles" [(#CONFIG{imagerotator/transition}|=={#VAL{'circles'}}|?{selected="selected",''})]>circles</option>
+					<option value="fluids" [(#CONFIG{imagerotator/transition}|=={#VAL{'fluids'}}|?{selected="selected",''})]>fluids</option>
+					<option value="lines" [(#CONFIG{imagerotator/transition}|=={#VAL{'lines'}}|?{selected="selected",''})]>lines</option>
+				</select>
+			</p>
+			<p>
+			<label for="_ir_rotatetime" title="rotatetime"><:imagerotator:rotatetime:> :</label>
+			<input type="text" name="rotatetime" class="type_txt" id="_ir_rotatetime" size="5"
+				value="#ENV{rotatetime,10}" /> s
+			</p>
+			<p>
+				<label for="_ir_shuffle" title="shuffle"><:imagerotator:shuffle:> :</label>
+				<select name="shuffle" id="_ir_shuffle" style="width:70px">
+					<option value="false" [(#CONFIG{imagerotator/shuffle}|=={#VAL{'false'}}|?{selected="selected",''})]><:imagerotator:non:></option>
+					<option value="true" [(#CONFIG{imagerotator/shuffle}|=={#VAL{'true'}}|?{selected="selected",''})]><:imagerotator:oui:></option>	
+				</select>
+			</p>
+			<p>
+				<label for="_ir_repeat" title="repeat"><:imagerotator:repeat:> :</label>
+				<select name="repeat" id="_ir_repeat" style="width:70px">
+					<option value="false" [(#CONFIG{imagerotator/repeat}|=={#VAL{'false'}}|?{selected="selected",''})]><:imagerotator:non:></option>
+					<option value="true" [(#CONFIG{imagerotator/repeat}|=={#VAL{'true'}}|?{selected="selected",''})]><:imagerotator:oui:></option>	
+				</select>
+			</p>
+			</fieldset>
+			
+			<fieldset><legend>Flash embed</legend>
+			<p>
+				<label for="_ir_swfobject" title="swfobject">Versions :</label>
+				<select name="swfobject" id="_ir_swfobject" style="width:60%">
+					<option value="1.5" [(#CONFIG{imagerotator/swfobject}|=={#VAL{'1.5'}}|?{selected="selected",''})]>SWFObject v1.5 &amp; JW Image rotator 3.17 </option>
+					<option value="2.x" [(#CONFIG{imagerotator/swfobject}|=={#VAL{'2.x'}}|?{selected="selected",''})]>SWFObject v2.1 &amp; JW Image rotator 3.18</option>	
+				</select>
+			</p>
+		</fieldset>
+		</div>
+
+	<div class="boutons">
+		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="fondo" />
+		<input type="submit" name="_cfg_delete" value="<:imagerotator:bouton_effacer:>" class="fondo" />
+	</div>
+
+	</div></form>
+
+</div>

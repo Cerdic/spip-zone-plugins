@@ -1,0 +1,20 @@
+[(#CACHE{1})][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<playlist version="1" xmlns="http://xspf.org/ns/0/">
+	<trackList>
+	<B_images_article><BOUCLE_images_article(DOCUMENTS){id_article=#ENV{id_article}} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>
+	<track>
+		<title>[(#TITRE|attribut_html)]</title>
+		<location>#URL_DOCUMENT</location>
+		<info>[(#DESCRIPTIF|attribut_html)]</info>
+	</track>
+	</BOUCLE_images_article></B_images_article>
+	<B_images_rubrique><BOUCLE_images_rubrique(DOCUMENTS){id_rubrique=#ENV{id_rubrique}} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>
+	<track>
+		<title>[(#TITRE|attribut_html)]</title>
+		<location>[(#URL_DOCUMENT)]</location>
+		<info>[(#DESCRIPTIF|attribut_html)]</info>
+	</track>
+	</BOUCLE_images_rubrique></B_images_rubrique>
+		
+	</trackList>
+</playlist>

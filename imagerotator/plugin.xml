@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Image Rotator</nom>
+	<auteur>[Grégory Pascal->http://www.spip-contrib.net/ngombe], distribu&#233; sous licence GNU/GPL</auteur>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description><multi>
+	[fr] Ajoute un diaporama <a href="http://www.longtailvideo.com/players/jw-image-rotator/" title="imagerotator">"JW Image Rotator" </a> param&#233;trable via <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+	[en] Add a <a href="http://nivo.dev7studios.com/" title="imagerotator">"JW Image Rotator" </a> using <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+	</multi></description>
+	<lien>http://www.spip-contrib.net/Image-rotator-pour-SPIP</lien>
+		<icon>img_pack/imagerotator-32.png</icon>
+	<prefix>imagerotator</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>imagerotator_pipelines.php</inclure>
+	</pipeline>
+	<noisette>modeles/imagerotator.html</noisette>
+	<noisette>modeles/imagerotator_doc.html</noisette>
+	<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id='cfg' version='[1.16.0;]' />
+	<necessite id="lib:swfobject" src="http://swfobject.googlecode.com/files/swfobject_2_1.zip" />
+</plugin>
