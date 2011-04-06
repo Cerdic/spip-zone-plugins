@@ -937,8 +937,19 @@ add_variables( array(
 	'defaut' => 0,
 	'code' => '$GLOBALS["liens_orphelins"]=%s;',
 		// empeche SPIP de convertir les URLs orphelines (URLs brutes)
-	'code:%s<>-2' => defined('_SPIP19300')?"\n\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
+	'code:%s<>-2' => defined('_SPIP19300')?"\n// Pas de traitement automatique des liens orphelins :\n\$GLOBALS['spip_pipeline']['pre_liens']=str_replace('|traiter_raccourci_liens','',\$GLOBALS['spip_pipeline']['pre_liens']);
 @define('_EXTRAIRE_LIENS',',^\$,');":'',
+), array(
+	'nom' => 'long_url',
+	'format' => _format_NOMBRE,
+	'defaut' => 40,
+	'code:%s' => "define('_MAX_LONG_URL', %s);",
+), array(
+	'nom' => 'coupe_url',
+	'format' => _format_NOMBRE,
+	'defaut' => 35,
+	'code:%s' => "define('_MAX_COUPE_URL', %s);",
+), array(
 ));
 // attention : liens_orphelins doit etre place avant mailcrypt ou liens_en_clair
 add_outil( array(
@@ -946,11 +957,12 @@ add_outil( array(
 	'categorie'	 => 'typo-corr',
 	'contrib'	=> 2443,
 	'code:options' => '%%liens_interrogation%%',
-	'code:spip_options' => '%%liens_orphelins%%',
+	'code:spip_options' => '%%liens_orphelins%%%%long_url%%%%coupe_url%%',
 	'pipeline:pre_propre' => 'liens_orphelins_pipeline',
 	'traitement:EMAIL' => 'expanser_liens(liens_orphelins',
  	'pipeline:pre_typo'   => 'interro_pre_typo',
  	'pipeline:post_propre'   => 'interro_post_propre',
+	'description' => defined('_SPIP19300')?'<:liens_orphelins::><liens_orphelins valeur="0/1/-2"><:liens_orphelins:1:></liens_orphelins>':'<:liens_orphelins::>',
 ));
 
 add_outil( array(

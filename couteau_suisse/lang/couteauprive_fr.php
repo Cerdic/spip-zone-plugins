@@ -527,7 +527,9 @@ _ • {Basique} : sont remplacés les liens du type {<html>http://spip.net</html
 _ • {Étendu} : sont remplacés en plus les liens du type {<html>moi@spip.net</html>}, {<html>mailto:monmail</html>} ou {<html>news:mesnews</html>}.
 _ • {Par défaut} : remplacement automatique d\'origine (à partir de la version 2.0 de SPIP).
 [[%liens_orphelins%]]',
+	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].',
 	'liens_orphelins:nom' => 'Belles URLs',
+	'label:long_url' => 'Longueur du libellé cliquable :',
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.',
