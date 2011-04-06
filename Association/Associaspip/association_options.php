@@ -121,7 +121,14 @@ function association_datefr($date) {
 		$mois = $split[1]; 
 		$jour = $split[2]; 
 		return $jour.'/'.$mois.'/'.$annee; 
-	} 
+	}
+
+function association_verifier_date($date) {
+	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date)) return false;
+	list($annee, $mois, $jour) = explode("-",$date);
+	if (!checkdate($mois, $jour, $annee)) return false;
+	return true;
+}
 	
 function association_nbrefr($montant) {
 		$montant = number_format($montant, 2, ',', ' ');
