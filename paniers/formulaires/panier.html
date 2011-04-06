@@ -20,7 +20,7 @@
 			</thead>
 			<tbody>
 				<BOUCLE_contenu_panier(PANIERS_LIENS){id_panier=#ENV{_id_panier}}>
-				#SET{prix_unitaire,#PRIX_HT*{#OBJET,#ID_OBJET}}
+				#SET{prix_unitaire,#PRIX*{#OBJET,#ID_OBJET}}
 				<tr class="emplette[ (#ENV{erreurs}|table_valeur{quantites}|table_valeur{#OBJET}|table_valeur{#ID_OBJET}|?{erreur})]">
 					<td class="description">#INCLURE{fond=formulaires/inc-panier-description-emplette,objet=#OBJET,id_objet=#ID_OBJET}</td>
 					<td class="prix_unitaire">[(#GET{prix_unitaire}|prix_formater)]</td>
@@ -28,20 +28,9 @@
 					<td class="montant">[(#GET{prix_unitaire}|mult{#QUANTITE}|prix_formater)]</td>
 				</tr>
 				</BOUCLE_contenu_panier>
-				#SET{total_ht,#PRIX_HT*{panier,#ENV{_id_panier}}}
-				#SET{total_ttc,#PRIX*{panier,#ENV{_id_panier}}}
-				#SET{taxes,#GET{total_ttc}|moins{#GET{total_ht}}}
-				<tr class="total_ht">
-					<td colspan="3"><:paniers:panier_total_ht:></td>
-					<td class="montant">[(#GET{total_ht}|prix_formater)]</td>
-				</tr>
-				<tr class="taxes">
-					<td colspan="3"><:paniers:panier_taxes:></td>
-					<td class="montant">[(#GET{taxes}|prix_formater)]</td>
-				</tr>
 				<tr class="total_ttc">
 					<td colspan="3"><:paniers:panier_total_ttc:></td>
-					<td class="montant">[(#GET{total_ttc}|prix_formater)]</td>
+					<td class="montant">#PRIX{panier,#ENV{_id_panier}}</td>
 				</tr>
 			</tbody>
 		</table>
