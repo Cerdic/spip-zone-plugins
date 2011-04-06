@@ -1,0 +1,63 @@
+[(#SET{defaut_tri,#ARRAY{
+	date_commande,-1,
+	date_paiement,-1,
+	reference,1
+	id_auteur,1
+	montant,1
+}})
+]<B_liste_commandes>
+#ANCRE_PAGINATION
+<div class="liste-elements commandes">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:commandes:info_toutes_commandes:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id'>[(#TRI{id_panier,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='reference'>[(#TRI{reference,<:info_titre:>,ajax})]</th>
+			<th class='statut'>[(#TRI{statut,<:commandes:statut:>,ajax})]</th>
+			<th class='date_commande'>[(#TRI{date_commande,<:commandes:date_commande:>,ajax})]</th>
+			<th class='date_paiement'>[(#TRI{date_paiement,<:commandes:date_paiement:>,ajax})]</th>
+			<th class='designations'><:commandes:designations:></th>
+			<th class='montant'>[(#TRI{montant,<:commandes:montant:>,ajax})]</th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_commandes(PANIERS)
+		{id_auteur?}{id_panier?}{where?}
+		{statut ?IN commande,paye}{tri #ENV{order,date_commande},#GET{defaut_tri}}
+		{pagination #ENV{nb,30}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='id'>#ID_PANIER</td>
+			<td class='reference'>#REFERENCE</td>
+			<td class='statut'>#STATUT</td>
+			<td class='date_commande'>[(#DATE_COMMANDE|affdate_jourcourt)]</td>
+			<td class='date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)] ]</td>
+			<td class='designations'>
+			<BOUCLE_liste_liens(spip_paniers_liens){id_panier}{par objet, id_objet}>
+				[(#DESIGNATION|typo)]
+			</BOUCLE_liste_liens>
+			</td>
+			<td class='montant'>#MONTANT</td>
+			<td class='action'>
+				[(#AUTORISER{voir,panier,#ID_PANIER})
+					[<a href="(#URL_PAGE{facture}
+						|parametre_url{redirect,#SELF}
+						|parametre_url{id_panier,#ID_PANIER})"><:commandes:facture:></a>]
+				]
+				[(#AUTORISER{supprimer,panier,#ID_PANIER})
+					[(#BOUTON_ACTION{				
+						<:commandes:supprimer:>,
+						[(#URL_ACTION_AUTEUR{supprimer_panier,#ID_PANIER}|parametre_url{redirect,#SELF})],
+						ajax,<:commandes:confirmer_supprimer_commande:>})]
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_commandes>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_commandes>[
+<div class="liste-elements commandes"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_commandes>

@@ -1,0 +1,51 @@
+<plugin>
+	
+	<nom>Commandes</nom>
+	
+	<version>1.0</version>
+	
+	<version_base>1.0</version_base>
+	<install>base/commandes_upgrade.php</install>
+		
+	<etat>dev</etat>
+	
+	<icon>img/commande.png</icon><!-- http://www.iconfinder.com/icondetails/49596/256/ -->
+	
+	<description><multi>
+	[fr]Permet de gerer des commandes.
+	</multi></description>
+	
+	<licence>&copy; 2011 - IDC Institut de Droit de la Concurrence</licence>
+	
+	<auteur>Matthieu Marcillaud - [Magraine->http://magraine.net]</auteur>
+	<auteur>Cyril Marion - [Ateliers CYM->http://www.cym.fr]</auteur>
+	
+	<prefix>commandes</prefix>
+
+	<bouton id='commandes' parent='naviguer'>
+		<url>commandes</url>
+		<icone>img/commande-24.png</icone>
+		<titre>commandes:nom_bouton_plugin</titre>
+	</bouton>
+
+	<bouton id='commandes21' parent='bando_edition'> 
+			<url>commandes</url> 
+			<icone>img/commande-16.png</icone> 
+			<titre>commandes:nom_bouton_plugin</titre> 
+	</bouton> 
+	
+
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/commandes.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/commandes.php</inclure>
+	</pipeline>
+
+	
+	<necessite id="SPIP" version="[2.1;]" />	
+	<necessite id="paniers" version="[0.1;]" />	
+		
+</plugin>
