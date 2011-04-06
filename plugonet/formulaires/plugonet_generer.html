@@ -20,14 +20,14 @@
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pluginxml})</span>]
 					<B_pluginxml>
 							<p>
-								<small><a id="cocher_tout" href="#liste_pluginxml"><:plugonet:bouton_tout_cocher:></a>
+								<small><a id="cocher_tout" href="#"><:plugonet:bouton_tout_cocher:></a>
 								&nbsp;|&nbsp;
-								<a id="decocher_tout" href="#liste_pluginxml"><:plugonet:bouton_tout_decocher:></a>
+								<a id="decocher_tout" href="#"><:plugonet:bouton_tout_decocher:></a>
 								</small>
 							</p>
 					<BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}>
 							<div class="choix">
-								<input type="checkbox" name="pluginxml[]" class="checkbox" id="pluginxml_#COMPTEUR_BOUCLE" value="#VALEUR" />
+								<input type="checkbox" name="pluginxml[]" class="checkbox pluginxml" id="pluginxml_#COMPTEUR_BOUCLE" value="#VALEUR" />
 								<label for="pluginxml_#COMPTEUR_BOUCLE">[(#VALEUR|joli_repertoire)]</label>
 							</div>
 					</BOUCLE_pluginxml>
@@ -50,10 +50,10 @@
 //<![CDATA[
 	jQuery(document).ready(function() {
 		jQuery("a#cocher_tout").click(function () {
-			jQuery('#liste_pluginxml input[type=checkbox]').not(':disabled').attr('checked', 'checked');
+			jQuery('input[type=checkbox].pluginxml').attr('checked', 'checked');
 	    });
 		jQuery("a#decocher_tout").click(function () {
-			jQuery('#liste_pluginxml input[type=checkbox]').not(':disabled').attr('checked', false);
+			jQuery('input[type=checkbox].pluginxml').attr('checked', false);
 	    });
 	});
 //]]>

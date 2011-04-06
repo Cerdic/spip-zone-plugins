@@ -24,8 +24,8 @@ function formulaires_plugonet_generer_traiter(){
 	}
 
 	// Generation du fichier
-// 	$generer = charger_fonction('plugonet_generer_paquetxml','inc');
-// 	$retour = $generer($champs['pluginxml'], $champs['encodage']);
+ 	$generer = charger_fonction('plugonet_generer','inc');
+ 	$retour = $generer($champs['pluginxml'], true);
 	$retour['editable'] = true;
 	return $retour;
 }

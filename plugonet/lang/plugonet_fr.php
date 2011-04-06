@@ -7,6 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_plugonet' => 'PlugOnet',
+	'bouton_tout_cocher' => 'Tout cocher',
+	'bouton_tout_decocher' => 'Tout d&eacute;cocher',
 
 // I
 	'info_generer' => 'Cette option vous permet de g&eacute;n&eacute;rer le nouveau fichier paquet.xml de description d\'un plugin &agrave; partir du fichier plugin.xml existant. Ce formulaire propose la liste des fichiers plugin.xml pr&eacute;sents dans le dossier <code>plugins/</code> de ce site.',
