@@ -224,6 +224,12 @@ function get_plugin_squelette() {
   return $plugin_squelette;
 }
 
+/**
+ * Détermine le mime_type pour le mode de codemirror à afficher, selon l'extension du nom du fichier edité
+ *
+ * @param string $filename
+ * @return string
+ */ 
 function determine_mime_type($filename) {
 	if($filename
 	AND $infos = pathinfo($filename)
@@ -234,15 +240,23 @@ function determine_mime_type($filename) {
             'html' => 'text/html',
             'php' => 'application/x-httpd-php',
             'css' => 'text/css',
-            'js' => 'application/javascript',
+//          'js' => 'application/javascript', codemirror2 ne doit pas avoir de mode définit pour les js
             'json' => 'application/json',
             'xml' => 'application/xml',
         );		
 		if (array_key_exists($extension, $mime_types)) {
-            return $mime_types[$extension];
+			$mode= 'mode:"'.$mime_types[$extension].'",';
+            return $mode;
         }
 }
 
+/**
+ * Génére le script d'appel de codemirror
+ *
+ * @param string $filename
+ * @param bool $editable
+ * @return string
+ */ 
 function skeleditor_codemirror($filename,$editable=true){
 	if (!$filename)
 		return "";
@@ -254,13 +268,13 @@ function skeleditor_codemirror($filename,$editable=true){
 	
 $script = '<script type="text/javascript">
 var editor = CodeMirror.fromTextArea(document.getElementById(\'code\'), {
-		mode:"'.$mode.'",
         lineNumbers: true,
         matchBrackets: true,
         indentUnit: 6,
         indentWithTabs: true,
         enterMode: "keep",
         tabMode: "shift",
+		'.$mode.'
 		});
 </script>
 <style type="text/css">

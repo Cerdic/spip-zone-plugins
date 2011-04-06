@@ -6,7 +6,15 @@
  * Licence GPL-v3
  *
  */
-
+ 
+ 
+/**
+ * Génère les appels js ou les css selon $type, correspondants à l'extension du fichier édité
+ *
+ * @param string $extension
+ * @param string $type
+ * @return string
+ */
 function skeleditor_dir($extension, $type) {
 	if (!$extension)
 		return "";
@@ -77,7 +85,11 @@ function skeleditor_dir($extension, $type) {
 	return $files;
 }
 
- 
+/**
+ * Tester avec _request si on est dans l'edition de skeleditor et si oui, retourne l'extension du nom du fichier
+ *
+ * @return string
+ */ 
 function test_skeleditor_edition() {
 $exec = _request('exec');
 $filename = _request('f');
@@ -91,6 +103,12 @@ $filename = _request('f');
 	
 } 
 
+/**
+ * Produit les js dans le header_prive si nécessaire
+ *
+ * @param string $flux
+ * @return string
+ */ 
 function skeleditor_insert_head($flux){
 
 	$extension = test_skeleditor_edition();
@@ -102,6 +120,13 @@ function skeleditor_insert_head($flux){
 		}
 	return $flux;
 }
+
+/**
+ * Produit les css dans le header_prive si nécessaire
+ *
+ * @param string $flux
+ * @return string
+ */ 
 function skeleditor_insert_head_css($flux){
 	$extension = test_skeleditor_edition();
 		if($extension) {
