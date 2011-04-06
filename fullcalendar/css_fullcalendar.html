@@ -1,9 +1,9 @@
 #CACHE{3600*24*30}
 #HTTP_HEADER{Content-Type: text/css;}
 <?php
-	$table_prefix = $GLOBALS['table_prefix'] ;
-	$result= sql_query("SELECT * FROM ".$table_prefix."_fullcalendar_styles;");
-	while ( $row = sql_fetch($result))
-		$CSS.=".f_".$row['0'].", .fc-agenda .f_".$row['0']." .fc-event-time, .f_".$row['0']." a {background-color:".$row['bgcolor'].";border-color:".$row['bordercolor'].";color:".$row['textcolor'].";}\n";
+	$res = sql_select('*', 'spip_fullcalendar_styles');
+	while ( $row = sql_fetch($res))
+		$CSS.=".f_".$row['id_style'].", .fc-agenda .f_".$row['id_style']." .fc-event-time, .f_".$row['id_style']." a {background-color:".$row['bgcolor'].";border-color:".$row['bordercolor'].";color:".$row['textcolor'].";}\n";
+	sql_free($res);
 	print $CSS;
 ?>

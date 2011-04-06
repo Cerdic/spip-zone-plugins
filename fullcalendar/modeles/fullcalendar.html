@@ -4,13 +4,11 @@
 
 <?php
 
-	$table_prefix = $GLOBALS['table_prefix'] ;
-	
 	$id = '[(#ENV{id_fullcalendar,0}|texte_script)]';
 
 	# Quelle source de donnée ?
-	$sql = "SELECT type FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$id."'";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+
+	$req = sql_select('type', 'spip_fullcalendar_main', 'id_fullcalendar='.intval($id));
 	$num_calendar = sql_count($req);
 
 	if(!$num_calendar) return; # il n'y as pas de gabonnais au numéro demandé...
@@ -24,35 +22,36 @@
 			# AGENDA BASE SUR LES ARTICLES
 
 			case 'article':
-			
+
 			# Récupère l'id du mot clé de cet agenda ...
-			$query = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
-			$result = sql_query($query) or print ($query." ".sql_error());
+			$result = sql_select('lien', 'spip_fullcalendar_events', 'id_fullcalendar='.intval($id));
 			$row = sql_fetch($result);
-			if(!strlen($row['lien'])) return;
-			
+			if(!$row['lien']) return;
+
 			# Récupère les article liés à ce mot clé
 			$events='events: [
-			
+
 			';
-			$sql = "SELECT
-				 A.id_article,
-				 A.titre,
-				 A.date,
-				 A.date_redac
-				FROM
-				 ".$table_prefix."_articles A,
-				 ".$table_prefix."_mots_articles M
-				WHERE
-				 M.id_mot='".$row['lien']."' AND
-				 A.statut='publie' AND
-				 A.id_article=M.id_article
-				 ORDER BY A.date ASC";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+
+			$req = sql_select(
+				array(
+					"A.id_article",
+					"A.titre",
+					"A.date",
+					"A.date_redac" ),
+				array(
+					"spip_articles AS A",
+					"spip_mots_articles AS M" ),
+				array(
+					"M.id_mot='".intval($row['lien'])."'",
+					"A.id_article=M.id_article" ),
+				"",
+				"A.date ASC");
+
 			$num_events = sql_count($req);
 			if($num_events)
 				while ($row = sql_fetch($req)) {
-					
+
 					$date = explode('-',substr($row['date'],0,10));
 					$date_fin = explode('-',substr($row['date_redac'],0,10));
 					$start = explode(':',substr($row['date'],11,5));
@@ -66,19 +65,18 @@
 				}
 			$events=substr($events,0,strlen($events)-1);
 			$events.=']';
-			
+
 			break;
-			
+
 			# AGENDA MySQL
 
-			case 'mysql': 
+			case 'mysql':
 
 			$events='events: [
-			
-			';
-			$query = "SELECT titre, start, end, lien, id_style FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' ORDER BY start ASC;" ;
-			$result = sql_query($query) or die ($query." ".sql_error());
 
+			';
+
+			$result = sql_select(array('titre', 'start', 'end', 'lien', 'id_style'), 'spip_fullcalendar_events', 'id_fullcalendar='.intval($id), '', 'start ASC');
 			while ( $row = sql_fetch($result)){
 
 				$date = explode('-',substr($row['start'],0,10));
@@ -99,6 +97,7 @@
 				$events.="{title: '".texte_script($row['titre'])."',start: new Date(".$date[0].", ".($date[1]-1).", ".$date[2].", ".$start[0].", ".$start[1]."),end: new Date(".$date_fin[0].", ".($date_fin[1]-1).", ".$date_fin[2].", ".$end[0].", ".$end[1]."),$url allDay: false $class},";
 
 			}
+			sql_free($result);
 			$events=substr($events,0,strlen($events)-1);
 			$events.=']';
 			break;
@@ -108,8 +107,7 @@
 			case 'google':
 
 			# Choppe la clé Google dans le seul évènement de cet agenda ...
-			$query = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
-			$result = sql_query($query) or die ($query." ".sql_error());
+			$result = sql_select('lien', 'spip_fullcalendar_events', 'id_fullcalendar='.intval($id));
 			$row = sql_fetch($result);
 			if(!strlen($row['lien'])) return;
 
@@ -135,15 +133,15 @@
 			break;
 			default:
 		}
-		
-		# Récupère les variable Paramètres / CFG 
-		
+
+		# Récupère les variable Paramètres / CFG
+
 		$aspectRatio 				= "[(#ENV{aspectRatio,#CONFIG{fullcalendar/aspectRatio,'1.35'}}|texte_script)]";
 		$useTheme 					= "[(#ENV{useTheme,#CONFIG{fullcalendar/useTheme,true}}|texte_script)]";
 		$useTheme					= ($useTheme=='true')? 'theme: true,' : '' ;
 		$weekends 					= "[(#ENV{weekends,#CONFIG{fullcalendar/weekends,true}}|texte_script)]";
 		$defaultView 				= "[(#ENV{defaultView,#CONFIG{fullcalendar/defaultView,month}}|texte_script)]";
-		
+
 		$headerLeft 				= "[(#CONFIG{fullcalendar/headerLeft, 'prev,next'}|texte_script)]";
 		$headerCenter 				= "[(#CONFIG{fullcalendar/headerCenter, 'title'}|texte_script)]";
 		$headerRight 				= "[(#CONFIG{fullcalendar/headerRight, 'month,agendaWeek,agendaDay'}|texte_script)]";
@@ -198,14 +196,10 @@
 				});
 		});
 		</script>
-		
+
 		<div id='calendar".$rand."'></div>
-		
+
 		";
 
 	}
-
-
-
-
 ?>

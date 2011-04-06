@@ -52,6 +52,8 @@ function fullcalendar_header_prive($flux_){
 ";
 	$flux .= "<script type='text/javascript' src='".url_absolue(find_in_path('js/fullcalendar.js'))."'></script>
 ";
+	$flux .= "<script type='text/javascript' src='".url_absolue(find_in_path('js/gcal.js'))."'></script>
+";
 	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/jquery-ui.css'))."' />
 ";
 	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/jquery-ui-timepicker.css'))."' />
@@ -60,16 +62,14 @@ function fullcalendar_header_prive($flux_){
 ";
 	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/fullcalendar.css'))."' />
 ";
-	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(generer_url_public('css_fullcalendar'))."' media='all' />
-";
 	$flux .= "<!-- FULLCALENDAR HEADER PRIVE FIN -->
 ";
 	return $flux_ . $flux;
 }
 
-/**********
- * JQUERY *
- **********/
+/*************
+ * JQUERY UI *
+ *************/
 
 function fullcalendar_jqueryui_forcer($scripts){
 	$scripts[] = "jquery.ui.core";

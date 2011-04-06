@@ -1,85 +1,50 @@
 <?php
 
 /* * * * * * * * * * * * * * * * * * * *
- * 
+ *
  *     - FullCalendar pour SPIP -
- * 
+ *
  * Formulaires d'ajout et modification des évènements
- * 
+ *
  * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 04/04/2011
- * 
+ * Modifs : 06/04/2011
+ *
  */
 
 function exec_fullcalendar_edit(){
-
-	$table_prefix = $GLOBALS['table_prefix'] ;
-	
-	# vérifie les droit
-	
-	include_spip("inc/presentation");
-	
-	global $connect_statut;
-	global $connect_toutes_rubriques;
-	
-	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {             
-		print _T('avis_non_acces_page');
-		exit;
-	}
+ include_spip("inc/presentation");
+ // vérifier les droits
+ global $connect_statut;
+ global $connect_toutes_rubriques;
+ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	print _T('avis_non_acces_page');
+	exit;
+ }
 
 	# Récupère l'id du calendrier à éditer
-	
-	$id_fullcalendar=($_GET['id'])?$_GET['id']:$_GET['id_calendrier'];
+
+	$id_fullcalendar=($_GET['id'])?intval($_GET['id']):intval($_GET['id_calendrier']);
 	if(!$id_fullcalendar) die("Erreur dans l'appel de cette page!");
 
-	$HTML=$INFO=$INTERFACE=$LISTE='';
+	$HTML=$INFO=$INTERFACE=$LISTE=$LISTE_CALENDRIER='';
 
 	# Récupère les autres calendriers
-	$LISTE_CALENDRIER='';
-	$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar!='".$id_fullcalendar."'";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
-	if(sql_count($req)){
+
+	$res = sql_select('*', 'spip_fullcalendar_main','id_fullcalendar!='.$id_fullcalendar);
+	if(sql_count($res)){
 		$LISTE="<br/>";
-		while ($row = sql_fetch($req)) {
+		while ($row = sql_fetch($res)) {
 			$LISTE .= "<center class='formulaire_spip'><a href=\"?exec=fullcalendar_edit&id=".$row['id_fullcalendar']."\">".$row['nom']."</a></center><br/>";
 			if($row['type']=='mysql')
 			$LISTE_CALENDRIER.="<option value=\"".$row['id_fullcalendar']."\">".$row['nom']."</option>";
 		}
 	}
- 
-	##############################
-	# Ajout d'un évènement MySQL #
-	##############################
-	
-	if(
-		$_POST['action_to_take']=='AddEvent'
-		&& strlen($_POST['Nom_Evenement'])
-		&& $_POST['id_calendrier']
-	){
-		
-		$t = explode('/',$_POST['Date']);
-		$date = $t[2].'-'.$t[1].'-'.$t[0]; 
-		$t = explode('/',$_POST['Date_Fin']);
-		$date_fin = $t[2].'-'.$t[1].'-'.$t[0];
-		unset($t);
-		
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouvel évènement.</center><br/>";
-		$sql = "INSERT INTO ".$table_prefix."_fullcalendar_events VALUES (
-		NULL,
-		'".$_POST['id_calendrier']."',
-		'".$_POST['id_style']."',
-		'".texte_script($_POST['Nom_Evenement'])."',
-		'".texte_script($_POST['Lien_Evenement'])."',
-		'".$date." ".$_POST['HeureDebut'].":00',
-		'".$date_fin." ".$_POST['HeureFin'].":00'
-		)";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
-	}
-	
+	sql_free($res);
+
 	######################
 	# Ajout d'un mot clé #
 	######################
-	
+
 	if(
 		$_POST['action_to_take']=='add_mot'
 		&& $_POST['ajouter']
@@ -87,14 +52,13 @@ function exec_fullcalendar_edit(){
 		&& strlen($_POST['id_mot'])
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'une mot clé pour cet agenda.</center><br/>";
-		$sql = "INSERT INTO ".$table_prefix."_fullcalendar_events VALUES (NULL,'".$_POST['id_calendrier']."','','','".$_POST['id_mot']."','','')";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
+		sql_insert('spip_fullcalendar_events', '(id_fullcalendar, lien)', "(".sql_quote(intval($_POST['id_calendrier'])).", ".sql_quote(intval($_POST['id_mot'])).")");
 	}
 
 	#######################
 	# Modifier le mot clé #
 	#######################
-	
+
 	if(
 		$_POST['action_to_take']=='update_mot'
 		&& $_POST['ajouter']
@@ -102,14 +66,13 @@ function exec_fullcalendar_edit(){
 		&& strlen($_POST['id_mot'])
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Mise à jour du mot clé pour cet agenda.</center><br/>";
-		$sql = "UPDATE ".$table_prefix."_fullcalendar_events SET lien='".$_POST['id_mot']."' WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
+		sql_update('spip_fullcalendar_events', array('lien' => sql_quote(intval($_POST['id_mot'])) ), "id_fullcalendar=".sql_quote(intval($_POST['id_calendrier'])) );
 	}
-	
+
 	##########################
 	# Ajout d'une clé Google #
 	##########################
-	
+
 	if(
 		$_POST['action_to_take']=='add'
 		&& $_POST['ajouter']
@@ -117,14 +80,13 @@ function exec_fullcalendar_edit(){
 		&& strlen($_POST['gcalID'])
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'une clé Google Agenda.</center><br/>";
-		$sql = "INSERT INTO ".$table_prefix."_fullcalendar_events VALUES (NULL,'".$_POST['id_calendrier']."','','','".texte_script($_POST['gcalID'])."','','')";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
+		sql_insert('spip_fullcalendar_events', '(id_fullcalendar, lien)', "(".sql_quote(intval($_POST['id_calendrier'])).", ".sql_quote($_POST['gcalID']).")");
 	}
 
 	##########################
 	# Modifier la clé Google #
 	##########################
-	
+
 	if(
 		$_POST['action_to_take']=='update'
 		&& $_POST['ajouter']
@@ -132,60 +94,91 @@ function exec_fullcalendar_edit(){
 		&& strlen($_POST['gcalID'])
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Mise à jour de la clé pour cet agenda.</center><br/>";
-		$sql = "UPDATE ".$table_prefix."_fullcalendar_events SET lien='".texte_script(trim($_POST['gcalID']))."' WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
+		sql_update('spip_fullcalendar_events', array('lien' => sql_quote(trim($_POST['gcalID'])) ), "id_fullcalendar=".sql_quote(intval($_POST['id_calendrier'])) );
+	}
+
+	##############################
+	# Ajout d'un évènement MySQL #
+	##############################
+
+	if(
+		$_POST['action_to_take']=='AddEvent'
+		&& strlen($_POST['Nom_Evenement'])
+		&& $_POST['id_calendrier']
+	){
+
+		$t = explode('/',$_POST['Date']);
+		$date = $t[2].'-'.$t[1].'-'.$t[0];
+		$t = explode('/',$_POST['Date_Fin']);
+		$date_fin = $t[2].'-'.$t[1].'-'.$t[0];
+		unset($t);
+
+		sql_insert("spip_fullcalendar_events",
+		"(id_fullcalendar, id_style, titre, lien, start, end)",
+		"(
+		 ".sql_quote(intval($_POST['id_calendrier'])).",
+		 ".sql_quote(intval($_POST['id_style'])).",
+		 ".sql_quote($_POST['Nom_Evenement']).",
+		 ".sql_quote($_POST['Lien_Evenement']).",
+		 ".sql_quote($date." ".$_POST['HeureDebut'].":00").",
+		 ".sql_quote($date_fin." ".$_POST['HeureFin'].":00")."
+		 )");
+
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouvel évènement.</center><br/>";
+
 	}
 
 	###############################
 	# Modification d'un évènement #
 	###############################
-	
+
 	if(
 		$_POST['action_to_take']=='EditEvent'
 		&& strlen($_POST['Nom_Evenement'])
 		&& strlen($_POST['id_evenement'])
 		&& $_POST['id_calendrier']
 	){
-		
+
 		$t = explode('/',$_POST['Date']);
-		$date = $t[2].'-'.$t[1].'-'.$t[0]; 
+		$date = $t[2].'-'.$t[1].'-'.$t[0];
 		$t = explode('/',$_POST['Date_Fin']);
 		$date_fin = $t[2].'-'.$t[1].'-'.$t[0];
 		unset($t);
-		
+
+		sql_update('spip_fullcalendar_events',
+			array(
+			'id_fullcalendar' => sql_quote($_POST['id_calendrier']),
+			'id_style' => sql_quote($_POST['id_style']),
+			'titre' => sql_quote($_POST['Nom_Evenement']),
+			'lien' => sql_quote(trim($_POST['Lien_Evenement'])),
+			'start' => sql_quote($date." ".$_POST['HeureDebut'].":00"),
+			'end' => sql_quote($date_fin." ".$_POST['HeureFin'].":00")
+			),
+			"id_event=".sql_quote(intval($_POST['id_evenement']))
+		);
+
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Modification d'un évènement.</center><br/>";
-		$sql = "UPDATE ".$table_prefix."_fullcalendar_events 
-		SET id_fullcalendar='".$_POST['id_calendrier']."',
-		id_style='".$_POST['id_style']."',
-		titre='".texte_script($_POST['Nom_Evenement'])."',
-		lien='".texte_script($_POST['Lien_Evenement'])."',
-		start='".$date." ".$_POST['HeureDebut'].":00',
-		end='".$date_fin." ".$_POST['HeureFin'].":00'
-		WHERE id_event='".$_POST['id_evenement']."'";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
+
 	}
-	
+
 	#######################
 	# Efface un évènement #
 	#######################
-	
+
 	if(
 		$_POST['action_to_take']=='del'
 		&& $_POST['id_calendrier']
 		&& $_POST['id_evenement']
 	){
+		sql_delete("spip_fullcalendar_events", "id_event=".sql_quote(intval($_POST['id_evenement'])) );
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Efface un évènement !</center><br/>";
-		$sql = "DELETE FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$_POST['id_calendrier']."' AND id_event='".$_POST['id_evenement']."' LIMIT 1;";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());	    
-
 	}
-	
+
 	#################################
 	# Calendrier en cours d'édition #
 	#################################
-	
-	$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$id_fullcalendar."'";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+
+	$req = sql_select('*', 'spip_fullcalendar_main', 'id_fullcalendar='.$id_fullcalendar);
 	$num_calendar = sql_count($req);
 	if(!$num_calendar) $INFO="<center style=\"color:red\">Ce calendrier n'existe plus !</center><br/>";
 	else {
@@ -194,11 +187,11 @@ function exec_fullcalendar_edit(){
 		$id   = $row['id_fullcalendar'];
 		$type = $row['type'];
 		$nom  = $row['nom'];
+				sql_free($req);
 
 		# Récupère les styles pour les évènements
-	
-		$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_styles";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+
+		$req = sql_select('*', 'spip_fullcalendar_styles');
 		$num_style = sql_count($req);
 		if(!$num_style) $STYLES="Vous n'avez pas définit de style pour vos évènements, il seront donc affichés avec les couleurs par défaut. Pour créer un nouveau style d'évènement <a href=\"?exec=fullcalendar_css\">cliquez ici</a>.";
 		else {
@@ -206,9 +199,10 @@ function exec_fullcalendar_edit(){
 			while ($rw = sql_fetch($req)) {
 				$STYLES.="<option value=\"".$rw['id_style']."\">".$rw['titre']."</option>";
 			}
+			sql_free($req);
 			$STYLES.="</select></p>";
 		}
-		
+
 		$LISTE_CALENDRIER.='<option SELECTED value="'.$id_fullcalendar.'">'.$nom.'</option>';
 
 		if($type=='mysql'){
@@ -219,24 +213,24 @@ function exec_fullcalendar_edit(){
 			$_POST['action_to_take']=='edit'
 			&& $_POST['id_evenement']
 		){
-			
-			$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id_fullcalendar."' AND id_event='".$_POST['id_evenement']."'";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+
+			$req = sql_select('*', 'spip_fullcalendar_events', array('id_fullcalendar='.$id_fullcalendar, 'id_event='.intval($_POST['id_evenement'])) );
 			$rw = sql_fetch($req);
-			
+			sql_free($req);
+
 			$NOM=$rw['titre'];
 			$LIEN=$rw['lien'];
-			
+
 			$ACTION='EditEvent';
 			$ID_EVENEMENT=$_POST['id_evenement'];
 			$DATE = DateFromMysql(substr($rw['start'],0,10));
 			$DATE_FIN = DateFromMysql(substr($rw['end'],0,10));
 			$START = substr($rw['start'],11,5);
 			$END = substr($rw['end'],11,5);
-			$BUTTON = "<input type=\"submit\" name=\"enregistrer\" value=\" Enregistrer \" class=\"fondo\" />";	
-			
+			$BUTTON = "<input type=\"submit\" name=\"enregistrer\" value=\" Enregistrer \" class=\"fondo\" />";
+
 		} else {
-			
+
 			$ACTION='AddEvent';
 			$ID_EVENEMENT='';
 			$DATE=(strlen($_POST['Date'])==10)?stripslashes($_POST['Date']):Date("d/m/Y");
@@ -244,20 +238,19 @@ function exec_fullcalendar_edit(){
 			$START=(strlen($_POST['HeureDebut'])==5)?stripslashes($_POST['HeureDebut']):Date("H:m");
 			$END=(strlen($_POST['HeureFin'])==5)?stripslashes($_POST['HeureFin']):Date("H:m");
 			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Ajouter \" class=\"fondo\" />";
-			
-		}
 
+		}
 
 			# Récupère les évènements du calendrier MySQL
 
 			$events='';
-			$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id_fullcalendar."' ORDER BY start ASC";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+			$req = sql_select('*', 'spip_fullcalendar_events', 'id_fullcalendar='.$id_fullcalendar, '', 'start ASC');
 			$num_events = sql_count($req);
 			if(!$num_events) $INFO.="Aucun évènement dans ce calendrier!";
 			else {
+
 				$HTML="
-				
+
 				<script type=\"text/javascript\">
 				//<!--
 				function EffacerEvenement(id){
@@ -267,11 +260,11 @@ function exec_fullcalendar_edit(){
 						document.Formulaire.action_to_take.value='del';
 						document.Formulaire.submit();
 						return true;
-					} 
+					}
 				}
-				
+
 				function ModifierEvenement(id){
-					if(!document.getElementById) return false;				
+					if(!document.getElementById) return false;
 					document.Formulaire.id_evenement.value=id;
 					document.Formulaire.action_to_take.value='edit';
 					document.Formulaire.submit();
@@ -279,7 +272,7 @@ function exec_fullcalendar_edit(){
 				}
 				//-->
 				</script>
-			
+
 				<table width=\"100%\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\">
 					<tbody>
 					<tr>
@@ -288,8 +281,9 @@ function exec_fullcalendar_edit(){
 						<th>Fin</th>
 						<th>&nbsp;</th>
 					</tr>";
+
 				while ($row = sql_fetch($req)) {
-					
+
 					$date = substr($row['start'],0,10);
 					$date_fin = substr($row['end'],0,10);
 					$start = substr($row['start'],11,5);
@@ -300,9 +294,9 @@ function exec_fullcalendar_edit(){
 					$fc_date_fin = explode('-',substr($row['end'],0,10));
 					$fc_start = explode(':',substr($row['start'],11,5));
 					$fc_end = explode(':',substr($row['end'],11,5));
-					
+
 					if(strlen($row['id_style']))
-						$class=",className: 'f_".texte_script(trim($row['id_style']))."'";
+						$class=",className: 'f_".$row['id_style']."'";
 
 					if(strlen(trim($row['lien']))){
 							$lien_start="<a href=\"".$row['lien']."\">";
@@ -312,34 +306,42 @@ function exec_fullcalendar_edit(){
 					$url="url:\"javascript:ModifierEvenement('".$row['id_event']."')\",";
 
 					$events.="{title: '".texte_script($row['titre'])."',start: new Date(".$fc_date[0].", ".($fc_date[1]-1).", ".$fc_date[2].", ".$fc_start[0].", ".$fc_start[1]."),end: new Date(".$fc_date_fin[0].", ".($fc_date_fin[1]-1).", ".$fc_date_fin[2].", ".$fc_end[0].", ".$fc_end[1]."),".$url." allDay: false ".$class."},";
-					
+
 					$HTML.= "<tr class=\"tr_liste\">
 								<td class=\"verdana12\">".$lien_start."".$row['titre']."".$lien_end."</td>
 								<td class=\"arial1\">".MyDateEnLettre ($date)."<br/>".$start."</td>
 								<td class=\"arial1\">".MyDateEnLettre ($date_fin)."<br/>".$end."</td>
 								<td>
-									<a href=\"javascript:ModifierEvenement('".$row['id_event']."')\"><img src=\""._DIR_PLUGIN_FULLCALENDAR."img_pack/event_edit.png\"></a> &nbsp; 
+									<a href=\"javascript:ModifierEvenement('".$row['id_event']."')\"><img src=\""._DIR_PLUGIN_FULLCALENDAR."img_pack/event_edit.png\"></a> &nbsp;
 									<a href=\"javascript:EffacerEvenement('".$row['id_event']."')\"><img src=\""._DIR_PLUGIN_FULLCALENDAR."img_pack/event_remove.png\"></a>
 								</td>
 							 </tr>
 							";
 
-
 				}
-				
+				sql_free($req);
 				$HTML.="</table>";
-				
+
 				$events=substr($events,0,strlen($events)-1);
+
+				# Pond la CSS des évènements
+
+				$HTML.="<style type='text/css'>";
+				$res = sql_select('*', 'spip_fullcalendar_styles');
+				while ( $row = sql_fetch($res))
+					$HTML.=".f_".$row['id_style'].", .fc-agenda .f_".$row['id_style']." .fc-event-time, .f_".$row['id_style']." a {background-color:".$row['bgcolor'].";border-color:".$row['bordercolor'].";color:".$row['textcolor'].";}\n";
+				$HTML.="</style>";
+				sql_free($res);
 
 			}
 
 
-		$INTERFACE="	
+		$INTERFACE="
 			<script type='text/javascript'>
 			$(document).ready(function() {
 
 			$('#HeureFin').timepicker();
-			
+
 			$('#HeureDebut').timepicker();
 
 			$.datepicker.regional['fr'] = {
@@ -361,7 +363,7 @@ function exec_fullcalendar_edit(){
                 showMonthAfterYear: false,
                 yearSuffix: ''
             };
-            
+
 			$.datepicker.setDefaults($.datepicker.regional['fr']);
 
 			$('#Date').datepicker($.extend({},
@@ -370,34 +372,34 @@ function exec_fullcalendar_edit(){
 						var day =$('#Date').datepicker('getDate');
 						$('#Date_Fin').datepicker('option','minDate',day);
 						$('#Date_Fin').datepicker('setDate',day);
-					}, 
+					},
 					showStatus: true,
 					showWeeks: true,
-					highlightWeek: true, 
+					highlightWeek: true,
 					showOn: 'both',
 					numberOfMonths: 1,
 					firstDay: 1,
 					buttonImage:'"._DIR_PLUGIN_FULLCALENDAR."css/calendar.png',
 					buttonImageOnly: true,
-					showAnim: 'scale', 
-					showOptions: { 
-						origin: ['top', 'left'] 
+					showAnim: 'scale',
+					showOptions: {
+						origin: ['top', 'left']
 					}
 				}));
 
 			$('#Date_Fin').datepicker($.extend({},
-				$.datepicker.regional['fr'], { 
+				$.datepicker.regional['fr'], {
 					showStatus: true,
 					showWeeks: true,
-					highlightWeek: true, 
+					highlightWeek: true,
 					showOn: 'both',
 					numberOfMonths: 1,
 					firstDay: 1,
 					buttonImage:'"._DIR_PLUGIN_FULLCALENDAR."css/calendar.png',
 					buttonImageOnly: true,
-					showAnim: 'scale', 
-					showOptions: { 
-						origin: ['top', 'left'] 
+					showAnim: 'scale',
+					showOptions: {
+						origin: ['top', 'left']
 					}
 				}));
 
@@ -434,22 +436,22 @@ function exec_fullcalendar_edit(){
 			});
 
 		";
-				
+
 		if($rw['id_style'])	$INTERFACE .= "$(\"select#id_style option[value='".$rw['id_style']."']\").attr(\"selected\", \"selected\");";
-			
+
 		$INTERFACE.="
 			});
 			</script>
 			<div id='calendar_aff'></div><br/>
 			<div class=\"formulaire_spip formulaire_config\">
-				<div class=\"cadre_padding\">		
-					
+				<div class=\"cadre_padding\">
+
 				<form class=\"noajax\" action=\"\" name=\"Formulaire\" method=\"POST\">
 				<input type=\"hidden\" name=\"action_to_take\" value=\"".$ACTION."\">
 				<input type=\"hidden\" name=\"id_evenement\" value=\"".$ID_EVENEMENT."\">
 				<p>Calendrier : <select name=\"id_calendrier\">".$LISTE_CALENDRIER."</select></p>
 
-				<p>Du : 
+				<p>Du :
 				<input type='text' name='Date' id='Date' size='10' value=\"".$DATE."\">
 				<input type='text' name='HeureDebut' id='HeureDebut' size='5' value=\"".$START."\">
 				&nbsp;&nbsp; Au : <input type='text' name='Date_Fin' id='Date_Fin' size='10' value=\"".$DATE_FIN."\">
@@ -460,7 +462,7 @@ function exec_fullcalendar_edit(){
 				<p>Lien : <input type='text' name='Lien_Evenement' class=\"forml\" style=\"width:98%\" value=\"".$LIEN."\"></p>
 
 				".$STYLES."
-		
+
 				</div>
 				<div class=\"boutons\">".$BUTTON."</div>
 				</form>
@@ -468,15 +470,15 @@ function exec_fullcalendar_edit(){
 
 
 		} else if($type=='google') {
-		
+
 		$INFO="<b>Agenda Google</b><br/><br/>Vérifier bien que votre agenda est <u>public</u> puis renseignez l'ID dans le formulaire ci-contre.<br/><br/>".$INFO;
-		
+
 		# Récupère le lien Google dans les évènements
-		
-		$sql = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+
+		$req = sql_select('lien', 'spip_fullcalendar_events', 'id_fullcalendar='.$id);
 		if(sql_count($req)){ # Une clé est déjà renseignée
 			$rw = sql_fetch($req);
+			sql_free($req);
 			$gcalID=$rw['lien'];
 			$URL_AGENDA = "http://www.google.com/calendar/feeds/".$rw['lien']."/public/basic";
 			$ACTION='update';
@@ -484,10 +486,10 @@ function exec_fullcalendar_edit(){
 		} else { # on ajoute la clé
 			$ACTION='add';
 			$gcalID='';
-			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Enregistrer la clé \" class=\"fondo\" />";	
+			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Enregistrer la clé \" class=\"fondo\" />";
 		}
 
-		
+
 		$INTERFACE='
 			<div class="formulaire_spip formulaire_config">
 				<div class="cadre_padding">
@@ -501,84 +503,89 @@ function exec_fullcalendar_edit(){
 				<div class="boutons">'.$BUTTON.'</div>
 				</form>
 			</div>
-		
+
 		 ';
-		
-		} else if($type=='article'){
+
+		} else if($type=='article')	{
 
 			$INFO="<b>Agenda d'articles avec mot clé</b><br/><br/>Sélectionnez le mot clé à lier aux articles qui serviront d'évènements pour ce calendrier.<br/><br/>".$INFO;
-			
+
 			# Récupère le mot clé dans les évènements
-			
-			$sql = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+
+			$req = sql_select('lien', 'spip_fullcalendar_events', 'id_fullcalendar='.$id);
 			if(sql_count($req)){ # Un mot clé est déjà renseigné
 				$rw = sql_fetch($req);
-				$ID_MOT=$rw['lien'];
+				$ID_MOT=intval($rw['lien']);
+				sql_free($req);
 				$ACTION='update_mot';
 				$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Modifier ce mot clé \" class=\"fondo\" />";
 			} else { # on ajoute la clé
 				$ACTION='add_mot';
 				$ID_MOT='';
-				$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Enregistrer \" class=\"fondo\" />";	
+				$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Enregistrer \" class=\"fondo\" />";
 			}
 
-			# Liste des mots clés du site (dans un groupe lié aux articles)
-			
+			# Mots clés du site (des groupes liés aux articles)
+
 			$LISTE_MOTS='';
-			
-			$sql = "SELECT
-			 M.id_mot,
-			 M.titre 
-			FROM
-			 ".$table_prefix."_mots M,
-			 ".$table_prefix."_groupes_mots G
-			WHERE 
-			 M.id_groupe=G.id_groupe AND
-			 G.tables_liees like '%articles%'
-			ORDER BY M.titre ASC";
-			
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
+
+			$req = sql_select(
+				array(
+					"M.id_mot",
+					"M.titre" ),
+				array(
+					"spip_mots AS M",
+					"spip_groupes_mots AS G" ),
+				array(
+					"M.id_groupe=G.id_groupe",
+					"G.tables_liees like '%articles%'" ),
+				"",
+				"M.titre ASC");
+
 			if(sql_count($req)){
+
 				while ($row = sql_fetch($req)) {
 					$LISTE_MOTS.="<option value=\"".$row['id_mot']."\"";
 					$LISTE_MOTS.=($row['id_mot']==$ID_MOT)?' SELECTED':'';
 					$LISTE_MOTS.=">".$row['titre']."</option>";
 				}
+				sql_free($req);
+
 			}
-			
+
 			$INTERFACE="
 			<div class=\"formulaire_spip formulaire_config\">
 				<div class=\"cadre_padding\">
 					<form class=\"noajax\" action=\"\" name=\"Formulaire\" method=\"POST\">
 					<input type=\"hidden\" name=\"action_to_take\" value=\"".$ACTION."\">
 					<input type=\"hidden\" name=\"id_calendrier\" value=\"".$id."\">
-					<p>Mot clé utilisé pour générer les évènements de ce calendrier : <select name=\"id_mot\">".$LISTE_MOTS."</select></p>		
+					<p>Mot clé utilisé pour générer les évènements de ce calendrier : <select name=\"id_mot\">".$LISTE_MOTS."</select></p>
 				</div>
 				<div class=\"boutons\">".$BUTTON."</div>
 			</form>
 			</div>";
-			
+
 			# Récupère les article liés à ce mot clé
 
-			$sql = "SELECT
-				 A.id_article,
-				 A.titre,
-				 A.date,
-				 A.date_redac
-				FROM
-				 spip_articles A,
-				 spip_mots_articles M
-				WHERE
-				 M.id_mot='".$ID_MOT."' AND
-				 A.id_article=M.id_article
-				 ORDER BY A.date ASC";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+			$req = sql_select(
+				array(
+					"A.id_article",
+					"A.titre",
+					"A.date",
+					"A.date_redac" ),
+				array(
+					"spip_articles AS A",
+					"spip_mots_articles AS M" ),
+				array(
+					"M.id_mot='".$ID_MOT."'",
+					"A.id_article=M.id_article" ),
+				"",
+				"A.date ASC");
+
 			$num_events = sql_count($req);
 			if(!$num_events) $INFO.="Aucun évènement dans ce calendrier!";
 			else {
 				$HTML="
-				
 				<table width=\"100%\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\">
 					<tbody>
 					<tr>
@@ -586,34 +593,35 @@ function exec_fullcalendar_edit(){
 						<th>Début</th>
 						<th>Fin</th>
 					</tr>";
+
 				while ($row = sql_fetch($req)) {
-					
+
 					$date = substr($row['date'],0,10);
 					$date_fin = substr($row['date_redac'],0,10);
 					$start = substr($row['date'],11,5);
 					$end = substr($row['date_redac'],11,5);
 					$erreur = ($date_fin=="0000-00-00")?' ortho':'';
 					$HTML.= "<tr class=\"tr_liste\">
-								<td class=\"verdana12\"><a href=\"?exec=articles&id_article=".$row['id_article']."\">".$row['titre']."</a></td>
+								<td class=\"verdana12\"><a href=\"?exec=articles&id_article=".$row['id_article']."\">".supprimer_numero($row['titre'])."</a></td>
 								<td class=\"arial1\">".MyDateEnLettre ($date)."<br/>".$start."</td>
 								<td class=\"arial1".$erreur."\">".MyDateEnLettre ($date_fin)."<br/>".$end."</td>
 							 </tr>
 							";
 				}
+				sql_free($req);
 				$HTML.="</table>";
 			}
-			
+
 		}
 
 	}
-
 
  $commencer_page = charger_fonction('commencer_page', 'inc');
  print $commencer_page(_T('Fullcalendar'), "", "") ;
  print "<br/><br/>";
  print gros_titre(_T('Gestion des évènements'),'',false);
  print debut_gauche ("",true);
- 
+
  print debut_boite_info(true);
  print "<center><b>"._T('FullCalendar')."</b></center>";
  print "<br/><center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/fullcalendar.jpg'></center><br/>";
@@ -646,7 +654,7 @@ function exec_fullcalendar_edit(){
 	print $LISTE;
 	print fin_cadre_enfonce(true);
  }
-  
+
  print creer_colonne_droite('',true);
  print debut_droite("", true);
  print debut_cadre_trait_couleur("", true, "", $titre=$nom,"","");
@@ -660,7 +668,7 @@ function exec_fullcalendar_edit(){
  if(($type=='mysql'||$type=='article')
 	 && strlen($HTML)
 	){
-	print debut_cadre_relief("", false,"", $titre = _T('Tous les évènements de ce calendrier'));      
+	print debut_cadre_relief("", false,"", $titre = _T('Tous les évènements de ce calendrier'));
 	print $HTML;
 	print fin_cadre_relief(false);
  }else if(strlen($URL_AGENDA)){
@@ -668,13 +676,13 @@ function exec_fullcalendar_edit(){
 	print "Votre lien : <a href='".$URL_AGENDA."'>".$URL_AGENDA."</a>";
 	print "<iframe src=\"".$URL_AGENDA."\" style=\"width:98%;height:250px\"></iframe>";
 	print fin_cadre_enfonce(true);
-	
+
  }
 
  print fin_cadre_trait_couleur(true);
  print fin_gauche();
  print fin_page();
-   
+
 }
 
 /* Formate un DATETIME mysql en locale fr */
@@ -691,7 +699,7 @@ function MyDateEnLettre ($MyDate,$digit=5){
  $date=$day.":".$D.":".$M.":".$Y;
  $date_tmp = explode(':', $date);
  $day = $date_tmp[0];
- for ($d=1;$d<=7;$d++) 
+ for ($d=1;$d<=7;$d++)
   if(strstr($day,$day_arr[$d])) $n=$d;
  if($digit>=1) $return  = $jour[$n].' ';
  if($digit>=2) $return .= $date_tmp[1]+0;
