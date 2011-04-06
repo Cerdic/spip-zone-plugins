@@ -1,7 +1,7 @@
 [(#REM) Afficher les étapes de la commande et visualiser l'étape courante ]
 <ul id='infos_etapes' class='infos_etape_#ENV{etape}'>
-	<li class='valides'>
-		<div class='fond [(#ENV{etape}|=={1}|oui)on][(#ENV{etape}|>{1}|oui)valides]'>
+	<li class='[(#ENV{etape}|=={1}|oui)on][(#ENV{etape}|>{1}|oui)valides]'>
+		<div class='fond'>
 			[(#ENV{etape}|>{1}|oui)[(#ENV{etape}|<{5}|oui)<a href="[(#URL_PAGE{panier})]">]]
 			[(#ENV{etape}|=={1}|oui)<strong>]
 			<em><:spipthelia:etape:> </em><span class='numero_etape'>1</span><em>&nbsp;: </em><:spipthelia:etape_panier:>
