@@ -27,8 +27,8 @@ function inc_spipmotion_mediainfo_dist($chemin){
 			}
 			if($track == 'track type="Video"'){
 				$infos['videobitrate'] = $info[0]['Bit_rate'][0];
-				$infos['hauteur'] = $info[0]['Width'][0];
-				$infos['largeur'] = $info[0]['Height'][0];
+				$infos['hauteur'] = $info[0]['Height'][0];
+				$infos['largeur'] = $info[0]['Width'][0];
 				$infos['videocodec'] = $info[0]['Format'][0];
 				$infos['framerate'] = $info[0]['Frame_rate'][0];
 				$infos['framecount'] = $info[0]['Frame_count'][0];
