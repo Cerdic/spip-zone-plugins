@@ -136,7 +136,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'voir_exporter' => 'Exporter le formulaire',
 'voir_numero' => 'Formulaire num&eacute;ro :',
 'voir_reponses' => 'Voir les r&eacute;ponses',
-'voir_traitements' => 'Traitements',
-'message_generique_erreur_saisie' => 'Il y a des erreurs dans votre saisie.'
+'voir_traitements' => 'Traitements'
 );
 ?>

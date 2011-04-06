@@ -113,7 +113,7 @@ function formulaires_formidable_verifier($id_formulaire, $valeurs=array(), $id_f
 	$erreurs = saisies_verifier($saisies);
 	
 	if ($erreurs and !isset($erreurs['message_erreur']))
-		$erreurs['message_erreur'] = _T('formidable:message_generique_erreur_saisie');
+		$erreurs['message_erreur'] = _T('formidable:erreur_generique');
 
 	return $erreurs;
 }
