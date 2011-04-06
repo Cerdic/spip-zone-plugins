@@ -35,8 +35,8 @@ function exec_fullcalendar_add(){
   && strlen($_POST['CalName'])
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouveau calendrier.</center><br/>";
-	$sql = "INSERT INTO ".$table_prefix."_fullcalendar_main VALUES (NULL, '".$_POST['CalSource']."', '".mysql_real_escape_string($_POST['CalName'])."')";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+	$sql = "INSERT INTO ".$table_prefix."_fullcalendar_main VALUES (NULL, '".$_POST['CalSource']."', '".texte_script($_POST['CalName'])."')";
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
  }
  
  # Modification d'un calendrier
@@ -47,8 +47,8 @@ function exec_fullcalendar_add(){
   && strlen($_POST['CalName'])
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Modification d'un calendrier.</center><br/>";
-	$sql = "UPDATE ".$table_prefix."_fullcalendar_main SET nom='".mysql_real_escape_string($_POST['CalName'])."' WHERE id_fullcalendar='".$_POST['id_calendrier']."'";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+	$sql = "UPDATE ".$table_prefix."_fullcalendar_main SET nom='".texte_script($_POST['CalName'])."' WHERE id_fullcalendar='".$_POST['id_calendrier']."'";
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
  }
 
  # Effacer un calendrier
@@ -62,11 +62,11 @@ function exec_fullcalendar_add(){
 
 	$INFO="Efface les évènements du calendrier ".$_POST['id_calendrier']."<br/><br/>";
 	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$_POST['id_calendrier']."';";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	    
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());	    
 	  
 	$INFO.="Efface le calendrier ".$_POST['id_calendrier']."<br/><br/>";
 	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1;";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
 
  }
  
@@ -86,7 +86,7 @@ function exec_fullcalendar_add(){
  
 
  $sql = "SELECT * FROM ".$table_prefix."_fullcalendar_main";
- $req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+ $req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
  $num_calendar = sql_count($req);
 
  if(!$num_calendar) $INFO="

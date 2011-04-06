@@ -10,14 +10,14 @@
 
 	# Quelle source de donnée ?
 	$sql = "SELECT type FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$id."'";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
-	$num_calendar = mysql_num_rows($req);
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+	$num_calendar = sql_count($req);
 
 	if(!$num_calendar) return; # il n'y as pas de gabonnais au numéro demandé...
 
 	else {
 
-		$row=mysql_fetch_array($req);
+		$row=sql_fetch($req);
 
 		switch($row['type']){
 
@@ -27,8 +27,8 @@
 			
 			# Récupère l'id du mot clé de cet agenda ...
 			$query = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
-			$result = mysql_query($query) or print ($query." ".mysql_error());
-			$row = mysql_fetch_array($result);
+			$result = sql_query($query) or print ($query." ".sql_error());
+			$row = sql_fetch($result);
 			if(!strlen($row['lien'])) return;
 			
 			# Récupère les article liés à ce mot clé
@@ -48,10 +48,10 @@
 				 A.statut='publie' AND
 				 A.id_article=M.id_article
 				 ORDER BY A.date ASC";
-			$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
-			$num_events = mysql_num_rows($req);
+			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
+			$num_events = sql_count($req);
 			if($num_events)
-				while ($row = spip_fetch_array($req)) {
+				while ($row = sql_fetch($req)) {
 					
 					$date = explode('-',substr($row['date'],0,10));
 					$date_fin = explode('-',substr($row['date_redac'],0,10));
@@ -61,7 +61,7 @@
 					$url="url:'spip.php?article".$row['id_article']."',";
 					if($date!='0000-00-00'&&$date_fin!='0000-00-00')
 					$events.="
-					{title: '".mysql_real_escape_string(supprimer_numero($row['titre']))."',start: new Date(".$date[0].", ".($date[1]-1).", ".$date[2].", ".$start[0].", ".$start[1]."),end: new Date(".$date_fin[0].", ".($date_fin[1]-1).", ".$date_fin[2].", ".$end[0].", ".$end[1]."),$url allDay: false},";
+					{title: '".texte_script(supprimer_numero($row['titre']))."',start: new Date(".$date[0].", ".($date[1]-1).", ".$date[2].", ".$start[0].", ".$start[1]."),end: new Date(".$date_fin[0].", ".($date_fin[1]-1).", ".$date_fin[2].", ".$end[0].", ".$end[1]."),$url allDay: false},";
 
 				}
 			$events=substr($events,0,strlen($events)-1);
@@ -77,26 +77,26 @@
 			
 			';
 			$query = "SELECT titre, start, end, lien, id_style FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' ORDER BY start ASC;" ;
-			$result = mysql_query($query) or die ($query." ".mysql_error());
+			$result = sql_query($query) or die ($query." ".sql_error());
 
-			while ( $row = mysql_fetch_array($result)){
+			while ( $row = sql_fetch($result)){
 
-				$date = explode('-',substr($row['1'],0,10));
-				$date_fin = explode('-',substr($row['2'],0,10));
-				$start = explode(':',substr($row['1'],11,5));
-				$end = explode(':',substr($row['2'],11,5));
+				$date = explode('-',substr($row['start'],0,10));
+				$date_fin = explode('-',substr($row['end'],0,10));
+				$start = explode(':',substr($row['start'],11,5));
+				$end = explode(':',substr($row['end'],11,5));
 
 				if(strlen(trim($row['lien'])))
-					$url="url:'".mysql_real_escape_string(trim($row['lien']))."',";
+					$url="url:'".trim($row['lien'])."',";
 				else
 					$url='';
 
 				if(strlen($row['id_style']))
-					$class=",className: 'f_".mysql_real_escape_string(trim($row['id_style']))."'";
+					$class=",className: 'f_".texte_script(trim($row['id_style']))."'";
 				else
 					$class='';
 
-				$events.="{title: '".mysql_real_escape_string($row['titre'])."',start: new Date(".$date[0].", ".($date[1]-1).", ".$date[2].", ".$start[0].", ".$start[1]."),end: new Date(".$date_fin[0].", ".($date_fin[1]-1).", ".$date_fin[2].", ".$end[0].", ".$end[1]."),$url allDay: false $class},";
+				$events.="{title: '".texte_script($row['titre'])."',start: new Date(".$date[0].", ".($date[1]-1).", ".$date[2].", ".$start[0].", ".$start[1]."),end: new Date(".$date_fin[0].", ".($date_fin[1]-1).", ".$date_fin[2].", ".$end[0].", ".$end[1]."),$url allDay: false $class},";
 
 			}
 			$events=substr($events,0,strlen($events)-1);
@@ -109,8 +109,8 @@
 
 			# Choppe la clé Google dans le seul évènement de cet agenda ...
 			$query = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1;" ;
-			$result = mysql_query($query) or die ($query." ".mysql_error());
-			$row = mysql_fetch_array($result);
+			$result = sql_query($query) or die ($query." ".sql_error());
+			$row = sql_fetch($result);
 			if(!strlen($row['lien'])) return;
 
 			$URL_AGENDA = "http://www.google.com/calendar/feeds/".$row['lien']."/public/basic";
@@ -204,5 +204,8 @@
 		";
 
 	}
+
+
+
 
 ?>

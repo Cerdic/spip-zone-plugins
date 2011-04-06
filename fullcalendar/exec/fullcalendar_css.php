@@ -40,10 +40,10 @@ function exec_fullcalendar_css(){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouveau style.</center><br/>";
 	$sql = "INSERT INTO ".$table_prefix."_fullcalendar_styles VALUES (
 	NULL,
-	'".mysql_real_escape_string($_POST['StyleName'])."',
-	'".mysql_real_escape_string($_POST['bordercolor'])."',
-	'".mysql_real_escape_string($_POST['bgcolor'])."',
-	'".mysql_real_escape_string($_POST['textcolor'])."'
+	'".texte_script($_POST['StyleName'])."',
+	'".texte_script($_POST['bordercolor'])."',
+	'".texte_script($_POST['bgcolor'])."',
+	'".texte_script($_POST['textcolor'])."'
 	)";
 	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
  }
@@ -61,12 +61,12 @@ function exec_fullcalendar_css(){
   ){
 	$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Modification d'un style.</center><br/>";
 	$sql = "UPDATE ".$table_prefix."_fullcalendar_styles SET 
-	titre='".mysql_real_escape_string($_POST['StyleName'])."',
-	bordercolor='".mysql_real_escape_string($_POST['bordercolor'])."',
-	bgcolor='".mysql_real_escape_string($_POST['bgcolor'])."',
-	textcolor='".mysql_real_escape_string($_POST['textcolor'])."'
+	titre='".texte_script($_POST['StyleName'])."',
+	bordercolor='".texte_script($_POST['bordercolor'])."',
+	bgcolor='".texte_script($_POST['bgcolor'])."',
+	textcolor='".texte_script($_POST['textcolor'])."'
 	WHERE id_style='".$_POST['id_style']."' LIMIT 1;";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
  }
 
  # Effacer un calendrier
@@ -78,7 +78,7 @@ function exec_fullcalendar_css(){
 	  
 	$INFO.="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Efface le style ".$_POST['id_style']."</center><br/>";
 	$sql = "DELETE FROM ".$table_prefix."_fullcalendar_styles WHERE id_style='".$_POST['id_style']."' LIMIT 1;";
-	$req = mysql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
 
  }
 

@@ -37,7 +37,7 @@ function exec_fullcalendar_edit(){
 	# Récupère les autres calendriers
 	$LISTE_CALENDRIER='';
 	$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar!='".$id_fullcalendar."'";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
 	if(sql_count($req)){
 		$LISTE="<br/>";
 		while ($row = sql_fetch($req)) {
@@ -68,12 +68,12 @@ function exec_fullcalendar_edit(){
 		NULL,
 		'".$_POST['id_calendrier']."',
 		'".$_POST['id_style']."',
-		'".mysql_real_escape_string($_POST['Nom_Evenement'])."',
-		'".mysql_real_escape_string($_POST['Lien_Evenement'])."',
+		'".texte_script($_POST['Nom_Evenement'])."',
+		'".texte_script($_POST['Lien_Evenement'])."',
 		'".$date." ".$_POST['HeureDebut'].":00',
 		'".$date_fin." ".$_POST['HeureFin'].":00'
 		)";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
 	}
 	
 	######################
@@ -88,7 +88,7 @@ function exec_fullcalendar_edit(){
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'une mot clé pour cet agenda.</center><br/>";
 		$sql = "INSERT INTO ".$table_prefix."_fullcalendar_events VALUES (NULL,'".$_POST['id_calendrier']."','','','".$_POST['id_mot']."','','')";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
 	}
 
 	#######################
@@ -103,7 +103,7 @@ function exec_fullcalendar_edit(){
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Mise à jour du mot clé pour cet agenda.</center><br/>";
 		$sql = "UPDATE ".$table_prefix."_fullcalendar_events SET lien='".$_POST['id_mot']."' WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
 	}
 	
 	##########################
@@ -117,8 +117,8 @@ function exec_fullcalendar_edit(){
 		&& strlen($_POST['gcalID'])
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'une clé Google Agenda.</center><br/>";
-		$sql = "INSERT INTO ".$table_prefix."_fullcalendar_events VALUES (NULL,'".$_POST['id_calendrier']."','','','".mysql_real_escape_string($_POST['gcalID'])."','','')";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+		$sql = "INSERT INTO ".$table_prefix."_fullcalendar_events VALUES (NULL,'".$_POST['id_calendrier']."','','','".texte_script($_POST['gcalID'])."','','')";
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
 	}
 
 	##########################
@@ -132,8 +132,8 @@ function exec_fullcalendar_edit(){
 		&& strlen($_POST['gcalID'])
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Mise à jour de la clé pour cet agenda.</center><br/>";
-		$sql = "UPDATE ".$table_prefix."_fullcalendar_events SET lien='".mysql_real_escape_string(trim($_POST['gcalID']))."' WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+		$sql = "UPDATE ".$table_prefix."_fullcalendar_events SET lien='".texte_script(trim($_POST['gcalID']))."' WHERE id_fullcalendar='".$_POST['id_calendrier']."' LIMIT 1";
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
 	}
 
 	###############################
@@ -157,12 +157,12 @@ function exec_fullcalendar_edit(){
 		$sql = "UPDATE ".$table_prefix."_fullcalendar_events 
 		SET id_fullcalendar='".$_POST['id_calendrier']."',
 		id_style='".$_POST['id_style']."',
-		titre='".mysql_real_escape_string($_POST['Nom_Evenement'])."',
-		lien='".mysql_real_escape_string($_POST['Lien_Evenement'])."',
+		titre='".texte_script($_POST['Nom_Evenement'])."',
+		lien='".texte_script($_POST['Lien_Evenement'])."',
 		start='".$date." ".$_POST['HeureDebut'].":00',
 		end='".$date_fin." ".$_POST['HeureFin'].":00'
 		WHERE id_event='".$_POST['id_evenement']."'";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());   
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());   
 	}
 	
 	#######################
@@ -176,7 +176,7 @@ function exec_fullcalendar_edit(){
 	){
 		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Efface un évènement !</center><br/>";
 		$sql = "DELETE FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$_POST['id_calendrier']."' AND id_event='".$_POST['id_evenement']."' LIMIT 1;";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());	    
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());	    
 
 	}
 	
@@ -185,7 +185,7 @@ function exec_fullcalendar_edit(){
 	#################################
 	
 	$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_main WHERE id_fullcalendar='".$id_fullcalendar."'";
-	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+	$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
 	$num_calendar = sql_count($req);
 	if(!$num_calendar) $INFO="<center style=\"color:red\">Ce calendrier n'existe plus !</center><br/>";
 	else {
@@ -198,7 +198,7 @@ function exec_fullcalendar_edit(){
 		# Récupère les styles pour les évènements
 	
 		$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_styles";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
 		$num_style = sql_count($req);
 		if(!$num_style) $STYLES="Vous n'avez pas définit de style pour vos évènements, il seront donc affichés avec les couleurs par défaut. Pour créer un nouveau style d'évènement <a href=\"?exec=fullcalendar_css\">cliquez ici</a>.";
 		else {
@@ -221,7 +221,7 @@ function exec_fullcalendar_edit(){
 		){
 			
 			$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id_fullcalendar."' AND id_event='".$_POST['id_evenement']."'";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
 			$rw = sql_fetch($req);
 			
 			$NOM=$rw['titre'];
@@ -252,7 +252,7 @@ function exec_fullcalendar_edit(){
 
 			$events='';
 			$sql = "SELECT * FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id_fullcalendar."' ORDER BY start ASC";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
 			$num_events = sql_count($req);
 			if(!$num_events) $INFO.="Aucun évènement dans ce calendrier!";
 			else {
@@ -302,7 +302,7 @@ function exec_fullcalendar_edit(){
 					$fc_end = explode(':',substr($row['end'],11,5));
 					
 					if(strlen($row['id_style']))
-						$class=",className: 'f_".mysql_real_escape_string(trim($row['id_style']))."'";
+						$class=",className: 'f_".texte_script(trim($row['id_style']))."'";
 
 					if(strlen(trim($row['lien']))){
 							$lien_start="<a href=\"".$row['lien']."\">";
@@ -311,7 +311,7 @@ function exec_fullcalendar_edit(){
 
 					$url="url:\"javascript:ModifierEvenement('".$row['id_event']."')\",";
 
-					$events.="{title: '".mysql_real_escape_string($row['titre'])."',start: new Date(".$fc_date[0].", ".($fc_date[1]-1).", ".$fc_date[2].", ".$fc_start[0].", ".$fc_start[1]."),end: new Date(".$fc_date_fin[0].", ".($fc_date_fin[1]-1).", ".$fc_date_fin[2].", ".$fc_end[0].", ".$fc_end[1]."),".$url." allDay: false ".$class."},";
+					$events.="{title: '".texte_script($row['titre'])."',start: new Date(".$fc_date[0].", ".($fc_date[1]-1).", ".$fc_date[2].", ".$fc_start[0].", ".$fc_start[1]."),end: new Date(".$fc_date_fin[0].", ".($fc_date_fin[1]-1).", ".$fc_date_fin[2].", ".$fc_end[0].", ".$fc_end[1]."),".$url." allDay: false ".$class."},";
 					
 					$HTML.= "<tr class=\"tr_liste\">
 								<td class=\"verdana12\">".$lien_start."".$row['titre']."".$lien_end."</td>
@@ -474,7 +474,7 @@ function exec_fullcalendar_edit(){
 		# Récupère le lien Google dans les évènements
 		
 		$sql = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1";
-		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+		$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
 		if(sql_count($req)){ # Une clé est déjà renseignée
 			$rw = sql_fetch($req);
 			$gcalID=$rw['lien'];
@@ -511,7 +511,7 @@ function exec_fullcalendar_edit(){
 			# Récupère le mot clé dans les évènements
 			
 			$sql = "SELECT lien FROM ".$table_prefix."_fullcalendar_events WHERE id_fullcalendar='".$id."' LIMIT 1";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
 			if(sql_count($req)){ # Un mot clé est déjà renseigné
 				$rw = sql_fetch($req);
 				$ID_MOT=$rw['lien'];
@@ -538,7 +538,7 @@ function exec_fullcalendar_edit(){
 			 G.tables_liees like '%articles%'
 			ORDER BY M.titre ASC";
 			
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error());
+			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error());
 			if(sql_count($req)){
 				while ($row = sql_fetch($req)) {
 					$LISTE_MOTS.="<option value=\"".$row['id_mot']."\"";
@@ -573,7 +573,7 @@ function exec_fullcalendar_edit(){
 				 M.id_mot='".$ID_MOT."' AND
 				 A.id_article=M.id_article
 				 ORDER BY A.date ASC";
-			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.mysql_error()); 
+			$req = sql_query($sql) or die('Erreur SQL !<br>'.$sql.'<br>'.sql_error()); 
 			$num_events = sql_count($req);
 			if(!$num_events) $INFO.="Aucun évènement dans ce calendrier!";
 			else {
