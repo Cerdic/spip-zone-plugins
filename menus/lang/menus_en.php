@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale' => 'Adds a link to a page template using a URL of the form <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Such pages are often used by plugins.',
 	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> This requires a Z type template and the <a href="http://www.spip-contrib.net/MediaBox">médiabox</a> plugin.',
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
+	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.', # NEW
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_texte_libre' => 'Just the text that you would like',
 
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Maximum number of articles (0 by default)',
 	'entree_page' => 'Name of the page',
 	'entree_parametres' => 'List of parameters',
+	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
 	'entree_sur_n_articles' => '@n@ article(s) shown',
 	'entree_sur_n_mots' => '@n@ keyword(s) shown',
 	'entree_sur_n_niveaux' => 'On @n@ level(s)',
@@ -102,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENU NUMBER:',
 	'info_page_speciale' => 'Link to the page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
+	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => 'All keyword groups',
 	'info_traduction_recuperee' => 'The context will determine the selected translation',
 	'info_tri' => 'Sort:',
@@ -125,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale' => 'Link to a page template',
 	'nom_menu_page_speciale_zajax' => 'A block in a Zpip page',
 	'nom_menu_rubriques' => 'List or tree of sections',
+	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles', # NEW
 	'nom_menu_rubriques_evenements' => 'Section-related events',
 	'nom_menu_secteurlangue' => 'Language sectors',
 	'nom_menu_texte_libre' => 'Free text'

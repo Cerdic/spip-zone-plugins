@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale' => 'Afegeix un enllaç cap a un esquelet accessible per un URL del tipus <code>spip.php?page=nom&amp;param1=xx&amp;param2=yyy...</code> Aquestes pàgines sovint són subministrades per connectors.',
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Mostra una llista de seccions i, si es vol, les subseccions a diferents nivells. Per defecte, mostra totes les seccions des de l\'arrel, ordenats per títol (numèricament i després afabèticament).',
+	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.', # NEW
 	'description_menu_secteurlangue' => 'Aquesta entrada és específica pels llocs que utilitzen un sector per llengua. Mostra automàticament un menú que llista les seccions del sector corresponent a la llengua de la pàgina i, si es vol, les subseccions a diferents nivells. Per defecte, mostra totes les seccions des de l\'arrel, ordenades per títol (numèricament i després alfabèticament).',
 	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
 
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Número d\'articles com a màxim (0 per defecte)',
 	'entree_page' => 'Nom de la pàgina',
 	'entree_parametres' => 'Llista dels paràmetres',
+	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
 	'entree_sur_n_articles' => '@n@ articles mostrat(s)',
 	'entree_sur_n_mots' => '@n@ paraules mostrada(es)',
 	'entree_sur_n_niveaux' => 'A @n@ nivell(s)',
@@ -102,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENÚ NÚMERO:',
 	'info_page_speciale' => 'Enllaç cap a la pàgina «@page@»',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
+	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => 'Tots els grups de paraules',
 	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
 	'info_tri' => 'Ordena:',
@@ -125,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale' => 'Enllaç cap a una pàgina esquelet',
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Llista o arborescència de seccions',
+	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles', # NEW
 	'nom_menu_rubriques_evenements' => 'Esdeveniments de les seccions',
 	'nom_menu_secteurlangue' => 'Sectors de llengua',
 	'nom_menu_texte_libre' => 'Texte libre' # NEW

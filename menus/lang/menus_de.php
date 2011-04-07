@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale' => 'Fügt einen URL zu einer Skelettseite im Format  <code>spip.php?page=nom&param1=xx&param2=yyy...</code> hinzu. Diese Skelette werden von Plugins bereitgestellt',
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Zeigt eine Liste der Rubriken und, wen gew&uuml;nscht, der Unterrubriken &uuml;ber mehreer Niveaus an. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
+	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.', # NEW
 	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Men&uuml; mit allen Rubriken des Sektors, die mit der Sprache &uuml;bereinstimmen, wenn erfordelich auf &uuml;ber mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
 	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
 
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Maximale Anzahl Artikel (Standardwert 0)',
 	'entree_page' => 'Name der Seite',
 	'entree_parametres' => 'Parameterliste',
+	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
 	'entree_sur_n_articles' => '@n@ Artikel angezeigt',
 	'entree_sur_n_mots' => '@n@ Worte angezeigt',
 	'entree_sur_n_niveaux' => 'Auf @n@ Niveau(s)',
@@ -102,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => 'MENÜ NUMMER:',
 	'info_page_speciale' => 'Link zu Seite « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
+	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => 'Alle Schlagwortgruppen',
 	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
 	'info_tri' => 'Sortierung:',
@@ -125,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale' => 'Link zu einer HTML-Vorlage',
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => 'Liste oder Baumansicht der Rubriken',
+	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles', # NEW
 	'nom_menu_rubriques_evenements' => 'Ereignisse der Rubriken',
 	'nom_menu_secteurlangue' => 'Hauptrubriken nach Sprache',
 	'nom_menu_texte_libre' => 'Texte libre' # NEW

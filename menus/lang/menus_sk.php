@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_page_speciale' => '<NEW>Pridá odkaz na stránku šablóny pomocou adresy formulára <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Takéto stránky často využívajú zásuvné moduly.',
 	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
+	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.', # NEW
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
 
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => '<NEW>Maximálny počet článkov (štandardne 0)',
 	'entree_page' => '<NEW>Názov stránky',
 	'entree_parametres' => '<NEW>Zoznam parametrov',
+	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
 	'entree_sur_n_articles' => '<NEW>@n@ zobrazených článkov',
 	'entree_sur_n_mots' => '<NEW>@n@ zobrazených kľúčových slov',
 	'entree_sur_n_niveaux' => '<NEW>Na @n@ úrovni (-ňach)',
@@ -102,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_numero_menu' => '<NEW>MENU ČÍSLO:',
 	'info_page_speciale' => '<NEW>Odkaz na stránku @page@',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
+	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => '<NEW>Všetky skupiny kľúčových slov',
 	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
 	'info_tri' => '<NEW>Triedenie:',
@@ -125,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_page_speciale' => '<NEW>Odkaz na stránku šablón',
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
 	'nom_menu_rubriques' => '<NEW>Zoznam alebo strom rubrík',
+	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles', # NEW
 	'nom_menu_rubriques_evenements' => 'Événements de rubriques', # NEW
 	'nom_menu_secteurlangue' => '<NEW>Jazykové sektory',
 	'nom_menu_texte_libre' => 'Texte libre' # NEW
