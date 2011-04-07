@@ -85,14 +85,18 @@ function plugin2paquet($D, $dir)
       $version_base = $D['version_base'];
 
       $compatible = '';
-      foreach($D['necessite'] as $k => $v) {
-	if (isset($v['id']) AND strtoupper($v['id']) == 'SPIP') {
-	  $compatible = $v['version'];
-	  unset($D['necessite'][$k]);
-	  break;
+      if (isset($D['compatible']))
+	$compatible =  $D['compatible'];
+      else {
+	foreach($D['necessite'] as $k => $i) {
+	  $nom = isset($i['id']) ? $i['id'] : $i['nom'];
+	  if ($nom AND strtoupper($nom) == 'SPIP') {
+	    $compatible = $i['version'];
+	    unset($D['necessite'][$k]);
+	    break;
+	  }
 	}
       }
-
       $paquet_att =
 	plugin2paquet_lien($lien) .
 	($categorie ? "\n\tcategorie='$categorie'" : '') .
@@ -187,7 +191,7 @@ function plugin2paquet_necessite($D)
 {
   $nec = $lib = '';
   foreach($D['necessite'] as $i) {
-    $nom = $i['id'];
+    $nom = isset($i['id']) ? $i['id'] : $i['nom'];
     $src = plugin2paquet_lien($i['src']);
     $version = empty($i['version']) ? '' : (" version='" . $i['version'] . "'");
     if (preg_match('/^lib:(.*)$/', $nom, $r))
@@ -201,8 +205,9 @@ function plugin2paquet_utilise($D)
 {
   $res = '';
   foreach($D as $i) {
-    $att = " nom='" . $i['id'] . "'" .
-      (!empty($i['version']) ? (" version='" . $i['version'] . "'") : '') .
+        $nom = isset($i['id']) ? $i['id'] : $i['nom'];
+	$att = " nom='$nom'" .
+	  (!empty($i['version']) ? (" version='" . $i['version'] . "'") : '') .
       plugin2paquet_lien($i['src']);
     $res .="\n\t<utilise$att />";
   }
