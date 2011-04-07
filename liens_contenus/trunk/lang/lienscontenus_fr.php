@@ -6,14 +6,14 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'alerte_publie_contenant' => 'Attention, ce contenu est publiÃ©, mais contient des liens vers des contenus qui ne le sont pas !',
+	'alerte_publie_contenant' => 'Attention, ce contenu est publié, mais contient des liens vers des contenus qui ne le sont pas !',
 	'aucun_objets_avec_lien_depuis_courant' => 'Ce contenu ne contient aucun lien vers un autre contenu.',
 	'aucun_objets_avec_lien_vers_courant' => 'Aucun autre contenu ne contient de lien vers celui-ci.',
 
 	// C
-	'confirmation_depublication' => 'Attention, un contenu publiÃ© pointe vers celui-ci, et sera impactÃ© si vous le dÃ©publiez !\\n\\nVoulez-vous vraiment changer le statut ?',
-	'confirmation_publication' => 'Attention, un contenu vers lequel pointe celui-ci n\'est pas publiÃ© !\\n\\nVoulez-vous vraiment changer le statut ?',
-	'confirmation_suppression' => 'Attention, un contenu publiÃ© pointe vers celui-ci, et sera impactÃ© si vous le supprimez !\\n\\nVoulez-vous vraiment le supprimer ?',
+	'confirmation_depublication' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le dépubliez !\\n\\nVoulez-vous vraiment changer le statut ?',
+	'confirmation_publication' => 'Attention, un contenu vers lequel pointe celui-ci n\'est pas publié !\\n\\nVoulez-vous vraiment changer le statut ?',
+	'confirmation_suppression' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le supprimez !\\n\\nVoulez-vous vraiment le supprimer ?',
 
 	// I
 	'information_element_contenu' => 'Attention, un autre contenu pointe vers celui-ci !',
