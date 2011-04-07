@@ -11,8 +11,6 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-// error_reporting(E_ALL);
-
 function inc_plugonet_generer($files, $write)
 {
   $nb_files = count($files);
@@ -75,68 +73,76 @@ function inc_plugonet_generer($files, $write)
 
 function plugin2paquet($D, $dir)
 {
-      $categorie = $D['categorie'];
-      $etat = $D['etat'];
-      $lien = $D['lien'];
-      $logo = $D['icon'];
-      $meta = $D['meta'];
-      $prefix = $D['prefix'];
-      $version = $D['version'];
-      $version_base = $D['version_base'];
-
-      $compatible = '';
-      if (isset($D['compatible']))
-	$compatible =  $D['compatible'];
-      else {
-	foreach($D['necessite'] as $k => $i) {
-	  $nom = isset($i['id']) ? $i['id'] : $i['nom'];
-	  if ($nom AND strtoupper($nom) == 'SPIP') {
-	    $compatible = $i['version'];
-	    unset($D['necessite'][$k]);
-	    break;
-	  }
+	// Extraction des attributs de la balise paquet
+	$categorie = $D['categorie'];
+	$etat = $D['etat'];
+	$lien = $D['lien'];
+	$logo = $D['icon'];
+	$meta = $D['meta'];
+	$prefix = $D['prefix'];
+	$version = $D['version'];
+	$version_base = $D['version_base'];
+	
+	$compatible = '';
+	// Si le tableau provient de infos_plugin la compatibilite SPIP est directement accessible
+	if (isset($D['compatible']))
+		$compatible =  $D['compatible'];
+	// Si le tableau provient de get_infos la compatibilite SPIP est incluse dans les necessite
+	else {
+		foreach($D['necessite'] as $k => $i) {
+			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
+			if ($nom AND strtoupper($nom) == 'SPIP') {
+				$compatible = $i['version'];
+				unset($D['necessite'][$k]);
+				break;
+			}
+		}
 	}
-      }
+	
+	// Constrution de la balise paquet et de ses attributs
+	$paquet_att =
+		plugin2paquet_lien($lien) .
+		($categorie ? "\n\tcategorie='$categorie'" : '') .
+		($compatible ? "\n\tcompatible='$compatible'" : '') .
+		($etat ? "\n\tetat='$etat'" : '') .
+		($logo ? "\n\tlogo='$logo'" : '') .
+		($meta ? "\n\tmeta='$meta'" : '') .
+		($prefix ? "\n\tprefix='$prefix'" : '') .
+		($version ? "\n\tversion='$version'" : '') .
+		($version_base ? "\n\tversion_base='$version_base'" : '');
 
-      $paquet_att =
-	plugin2paquet_lien($lien) .
-	($categorie ? "\n\tcategorie='$categorie'" : '') .
-	($compatible ? "\n\tcompatible='$compatible'" : '') .
-	($etat ? "\n\tetat='$etat'" : '') .
-	($logo ? "\n\tlogo='$logo'" : '') .
-	($meta ? "\n\tmeta='$meta'" : '') .
-	($prefix ? "\n\tprefix='$prefix'" : '') .
-	($version ? "\n\tversion='$version'" : '') .
-	($version_base ? "\n\tversion_base='$version_base'" : '');
-
-      $nom = preg_replace('@<!--[^-]*-->@', '', $D['nom']);
-      if (strpos($nom, '>')) {
-	$slogan = $nom;
-	$nom = preg_replace('@</?multi>@', '', $nom);
-	$nom = preg_replace('/[[][^]]*[]]/', '', $nom);
-	$nom = preg_replace('/^\s*(\w+).*$/', '\1', $nom);
-      } else {
-	$slogan = $D['description'];
-      }
-
-      plugin2paquet_description($D['description'], $slogan, $prefix, $dir);
-
-      $nom = plugin2paquet_texte('nom', $nom, $dir);
-      $licence = plugin2paquet_texte('licence', $D['licence'], $dir);
-      $auteur = plugin2paquet_texte('auteur', $D['auteur'], $dir);
-
-      $chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
-      $pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
-      $necessite = is_array($D['necessite']) ? plugin2paquet_necessite($D) :'';
-      $utilise = is_array($D['utilise']) ? plugin2paquet_utilise($D['utilise']) :'';
-      $bouton = is_array($D['bouton']) ? plugin2paquet_exec($D, 'bouton') :'';
-      $onglet = is_array($D['onglet']) ? plugin2paquet_exec($D, 'onglet') :'';
-
-      $renommer = plugin2paquet_implicite($D, 'options', 'options')
+	// Extraction des balises nom, slogan et description()
+	// -- le nom n'est plus traduit si il est en multi
+	// -- slogan et description sont transformes en items de langue dans un module a part
+	// --> Bonne solution ??? Meme module que celui existant ?
+	$nom = preg_replace('@<!--[^-]*-->@', '', $D['nom']);
+	if (strpos($nom, '>')) {
+		$slogan = $nom;
+		$nom = preg_replace('@</?multi>@', '', $nom);
+		$nom = preg_replace('/[[][^]]*[]]/', '', $nom);
+		$nom = preg_replace('/^\s*(\w+).*$/', '\1', $nom);
+	} else {
+		$slogan = $D['description'];
+	}
+	
+	plugin2paquet_description($D['description'], $slogan, $prefix, $dir);
+	
+	$nom = plugin2paquet_texte('nom', $nom, $dir);
+	$licence = plugin2paquet_texte('licence', $D['licence'], $dir);
+	$auteur = plugin2paquet_texte('auteur', $D['auteur'], $dir);
+	
+	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
+	$pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
+	$necessite = is_array($D['necessite']) ? plugin2paquet_necessite($D) :'';
+	$utilise = is_array($D['utilise']) ? plugin2paquet_utilise($D['utilise']) :'';
+	$bouton = is_array($D['bouton']) ? plugin2paquet_exec($D, 'bouton') :'';
+	$onglet = is_array($D['onglet']) ? plugin2paquet_exec($D, 'onglet') :'';
+	
+	$renommer = plugin2paquet_implicite($D, 'options', 'options')
 	. plugin2paquet_implicite($D, 'fonctions', 'fonctions')
 	. plugin2paquet_implicite($D, 'install', 'actions');
-
-      return "$renommer<paquet$paquet_att\n>$nom$licence$auteur$pipeline$necessite$utilise$bouton$onglet$chemin\n</paquet>\n";
+	
+	return "$renommer<paquet$paquet_att\n>$nom$licence$auteur$pipeline$necessite$utilise$bouton$onglet$chemin\n</paquet>\n";
 }
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
