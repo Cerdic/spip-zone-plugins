@@ -9,19 +9,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'alerte_effacement' => 'تأكيد حذف معلومات إعداد الاتصال',
-	'aucun_message' => 'لا أية رسالة للعرض',
+	'aucun_message' => 'لا توجد رسائل للعرض',
 
 	// B
 	'bouton_effacer' => 'محو',
 
 	// C
 	'champ_adresse' => 'العنوان',
-	'champ_civi_explication' => 'الإعدادات المتقدمة مجال التهذي',
-	'champ_civi_mademoiselle_ok' => 'تقدمخيارا&amp;#34;انسة&amp;#34;فيمجالالتهذيب',
-	'champ_civilite' => 'الأهلية',
+	'champ_civi_explication' => 'الإعدادات المتقدمة لحقل الصفة',
+	'champ_civi_mademoiselle_ok' => 'اقتراح خيار «آنسة» في حقل الصفة',
+	'champ_civilite' => 'الصفة',
 	'champ_code_postal' => 'الرمز البريدي',
 	'champ_etat' => 'الولاية',
-	'champ_impose' => 'حقل التزامي',
+	'champ_impose' => 'حقل الزامي',
 	'champ_infolettre' => 'النشرة الإخبارية',
 	'champ_mail' => 'البريد الإلكتروني',
 	'champ_nom' => 'اللقب',
@@ -62,7 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_nb_max' => 'الحد الأقصى لعدد المرفقات',
 	'configuration_regle_liste_explication' => 'اختيار طريقة حساب قائمة المستلمين المحتملين وطريقة الاختيار المقترحة للزائر.',
 	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Écrivez le texte associé à la case à cocher infolettre', # NEW
+	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'يتم تسجيل هذه الرسالة على موقعك :',
 	'courriel_de' => 'من',
 	'courriel_pour' => 'لأجل',
@@ -117,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalisé', # NEW
 
 	// P
+	'par' => 'Par : ', # NEW
 	'preselection' => 'قم بإلغاء كافة العناصر الموجودة في قائمة المستلمين',
 
 	// S

@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_nb_max' => 'Número màxim d\'adjuncions',
 	'configuration_regle_liste_explication' => 'Escolliu una regla de càlcul de la llista de destinataris potencials i del mètode de selecció proposat a l\'internauta.',
 	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Écrivez le texte associé à la case à cocher infolettre', # NEW
+	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'Aquest missatge s\'ha enregistrat al vostre lloc:',
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Per',
@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalisé', # NEW
 
 	// P
+	'par' => 'Par : ', # NEW
 	'preselection' => 'Desmarcar tots els ítems de la llista de destinataris',
 
 	// S

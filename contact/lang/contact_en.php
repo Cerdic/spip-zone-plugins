@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_facteur_absent' => 'You have to install the Facteur plugin to use this functionality.',
 	'configuration_pj_nb_max' => 'Maximum number of attachments',
 	'configuration_regle_liste_explication' => 'Select a calculation rule from the list of potential recipients and the selection method proposed to the visitors.',
-	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Écrivez le texte associé à la case à cocher infolettre', # NEW
+	'configuration_texteinfolettre' => 'Infoletter text',
+	'configuration_texteinfolettre_explication' => 'Enter the text associated with the Infoletter checkbox', # MODIF
 	'consulter_memoire' => 'This message is saved on your site:',
 	'courriel_de' => 'From',
 	'courriel_pour' => 'To',
@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Personalised title',
 
 	// P
+	'par' => 'Par : ', # NEW
 	'preselection' => 'Uncheck all the entries in the list of recipients',
 
 	// S

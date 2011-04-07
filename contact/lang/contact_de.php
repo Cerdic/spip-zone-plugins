@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_nb_max' => 'Maximale Anzahl an Dateianhängen',
 	'configuration_regle_liste_explication' => 'Wählen sie die Art, wie die Liste der potentiellen Empfänger zusammengestellt und dem Besucher angezeigt wird.',
 	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Écrivez le texte associé à la case à cocher infolettre', # NEW
+	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'Diese Meldung wird auf Ihrer Website protokolliert:',
 	'courriel_de' => 'Von',
 	'courriel_pour' => 'Für',
@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalisé', # NEW
 
 	// P
+	'par' => 'Par : ', # NEW
 	'preselection' => 'Alle Einträge in der Empfängerliste abwählen',
 
 	// S

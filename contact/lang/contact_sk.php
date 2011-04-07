@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_nb_max' => 'Maximum number of attachments',
 	'configuration_regle_liste_explication' => 'Select a calculation rule from the list of potential recipients and the selection method proposed to the visitors.',
 	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Écrivez le texte associé à la case à cocher infolettre', # NEW
+	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'This message is saved on your site:',
 	'courriel_de' => 'From', # MODIF
 	'courriel_pour' => 'To', # MODIF
@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalisé', # NEW
 
 	// P
+	'par' => 'Par : ', # NEW
 	'preselection' => 'Décocher tous les items de la liste de destinataires', # NEW
 
 	// S

@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_nb_max' => 'Nombre maximal de pièces jointes',
 	'configuration_regle_liste_explication' => 'Choisis une règle de calcul de la liste des destinataires potentiels et de la méthode de sélection proposée à l\'internaute.',
 	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Écrivez le texte associé à la case à cocher infolettre', # NEW
+	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
 	'consulter_memoire' => 'Ce message est enregistré sur ton site :',
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalisé',
 
 	// P
+	'par' => 'Par : ', # NEW
 	'preselection' => 'Décocher tous les éléments de la liste de destinataires',
 
 	// S
