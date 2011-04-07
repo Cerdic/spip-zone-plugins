@@ -99,7 +99,7 @@ function spiplistes_afficher_pile_messages() {
 		$ii = 0;
 		$pile_result .= ''
 			. '<tr ' . ((($couleur_ligne++) % 2) ? 'class="row-even"' : '') . '>' . PHP_EOL
-			 '<td><a href="' . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier").'">'.$patron.'</a>'
+			. '<td><a href="' . generer_url_public('patron_switch',"patron=$patron&date=$date_dernier").'">'.$patron.'</a>'
 			. '<br />'.$periodicite.'</td>' . PHP_EOL
 			. '<td><a href="' . generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, 'id_liste='.$id_liste) . '">'
 				. $titre . '</a>'
