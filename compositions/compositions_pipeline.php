@@ -5,7 +5,7 @@
  * Distribue sous licence GPL
  *
  */
-
+ 
 // lister les exec ou apparait l'interface de composition et le type correspondant
 // peut etre etendu par des plugins
 $GLOBALS['compositions_exec']['naviguer'] = 'rubrique';
@@ -31,6 +31,7 @@ function compositions_autoriser(){}
  * @return <type>
  */
 function autoriser_styliser_dist($faire, $type='', $id=0, $qui = NULL, $opt = NULL){
+	include_spip('compositions_fonctions');
 	if (!autoriser('modifier',$type,$id,$qui,$opt))
 		return false;
 	if (compositions_verrouiller($type, $id) AND !autoriser('webmestre'))
@@ -101,6 +102,7 @@ function compositions_affiche_milieu($flux){
 		if ($id = $flux['args'][$_id]) {
 			$config = unserialize($GLOBALS['meta']['compositions']);
 			$aut = autoriser('styliser',$type,$id);
+			include_spip('compositions_fonctions');
 			if (($config['masquer_formulaire'] != 'oui' OR $aut) 
 				AND (is_array(reset(compositions_lister_disponibles($type))) OR ($type == 'rubrique' AND $config['tout_verrouiller'] != 'oui'))
 				) {
