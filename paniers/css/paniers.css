@@ -25,3 +25,6 @@
 .formulaire_panier .total_ttc{
 	font-weight:bold;
 }
+.formulaire_panier .total_ttc td{
+	padding:1em 0.5em;
+}
