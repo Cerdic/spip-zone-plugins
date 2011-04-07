@@ -26,7 +26,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function action_spipmotion_encoder_dist(){
 	$action = _request('action');
-	spip_log($action,'spipmotion');
 	$actions_autorisees = array(
 		'cron',
 		'super_cron',
@@ -42,8 +41,6 @@ function action_spipmotion_encoder_dist(){
 	    echo minipres();
 	    exit;
 	}
-	include_spip('inc/genie');
-	genie_queue_watch_dist();
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log('Appel de la fonction d encodage','spipmotion');
 	spip_log("Il y a $nb_encodages document(s) à encoder","spipmotion");
