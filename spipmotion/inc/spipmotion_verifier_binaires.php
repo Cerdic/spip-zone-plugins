@@ -92,8 +92,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	 * On ne bloquera pas les encodages
 	 */
 	exec('mediainfo --help',$retour_mediainfo,$retour_mediainfo_int);
-	spip_log($retour_mediainfo,'test');
-	spip_log($retour_mediainfo_int,'test');
 	if(!in_array($retour_mediainfo_int,array(0,255))){
 		ecrire_config('spipmotion_mediainfo_casse', 'oui');
 	}else{
@@ -122,8 +120,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	 */
 	if($valeurs['chemin'] != ''){
 		exec($spipmotion_sh." --p ".$valeurs['chemin']." --info '-version'",$retour_ffmpeg,$retour_int_ffmpeg);
-		spip_log($retour_ffmpeg);
-		spip_log($retour_int_ffmpeg);
 		if($retour_int_ffmpeg != 0){
 			ecrire_config('spipmotion_ffmpeg_casse', 'oui');
 			$erreurs[] = 'ffmpeg';
@@ -132,8 +128,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		}
 	}else{
 		exec($spipmotion_sh." --info -version",$retour_ffmpeg,$retour_int_ffmpeg);
-		spip_log($retour_ffmpeg);
-		spip_log($retour_int_ffmpeg);
 		if($retour_int_ffmpeg != 0){
 			ecrire_config('spipmotion_casse', 'oui');
 			$erreurs[] = 'ffmpeg';
@@ -158,8 +152,6 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 
 	if($notif){
 		if ($notifications = charger_fonction('notifications', 'inc')) {
-			spip_log('notifications verifier_binaires','spipmotion');
-			spip_log($erreurs,'spipmotion');
 			$notifications('spipmotion_verifier_binaires', 1,
 				array(
 					'erreurs' => $erreurs
