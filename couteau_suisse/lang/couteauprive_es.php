@@ -271,6 +271,7 @@ Esta herramienta puede acoplarse con « [.->sommaire] ».', # MODIF
 	'ecran_conflit2' => 'Note : un fichier statique «@file@» a été détecté et activé. Le Couteau Suisse ne pourra le mettre à jour ou le configurer.', # NEW
 	'ecran_ko' => 'Ecran inactif !', # NEW
 	'ecran_maj_ko' => 'La version {{@n@}} de l\'écran de sécurité est disponible. Veuillez actualiser le fichier distant de cet outil.', # NEW
+	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
 	'ecran_maj_ok' => '(semble à jour).', # NEW
 	'ecran_securite:description' => 'L\'écran de sécurité est un fichier PHP directement téléchargé du site officiel de SPIP, qui protège vos sites en bloquant certaines attaques liées à des trous de sécurité. Ce système permet de réagir très rapidement lorsqu\'un problème est découvert, en colmatant le trou sans pour autant devoir mettre à niveau tout son site ni appliquer un « patch » complexe.
 
@@ -455,6 +456,7 @@ Atención, esta herramienta necesita el plugin {jQuery} : {Round Corners} para f
 	'label:liens_orphelins' => 'Enlaces pulsables:',
 	'label:log_couteau_suisse' => 'Activar:',
 	'label:logo_Hmax' => 'Taille maximale des logos :', # NEW
+	'label:long_url' => 'Longueur du libellé cliquable :', # NEW
 	'label:marqueurs_urls_propres' => 'Añadir los marcadores que separan los objetos (SPIP>=2.0) :<br/>(ej. : « - » para -Mi-sección-, « @ » para @Mi-sitio@) ', # MODIF
 	'label:max_auteurs_page' => 'Autores por página:',
 	'label:message_travaux' => 'Tu mensaje de mantenimiento:',
@@ -511,6 +513,7 @@ Puedes elegir el tipo de reemplazo:
 _ • {B&aacute;sico}: se reemplazan los enlaces del tipo {<html>http://spip.net</html>} (todos los protocolos) o {<html>www.spip.net</html>}.
 _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@spip.net</html>}, {<html>mailto:micorreo</html>} o {<html>news:misnews</html>}.
 [[%liens_orphelins%]]', # MODIF
+	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'Buenas URLs',
 
 	// M

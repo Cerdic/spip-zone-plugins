@@ -470,6 +470,7 @@ Attention, cet outil a besoin pour fonctionner du plugin {jQuery} : {Round Corne
 	'label:liens_orphelins' => 'Liens cliquables :',
 	'label:log_couteau_suisse' => 'Activer :',
 	'label:logo_Hmax' => 'Taille maximale des logos :',
+	'label:long_url' => 'Longueur du libellé cliquable :',
 	'label:marqueurs_urls_propres' => 'Ajouter les marqueurs dissociant les objets (SPIP>=2.0) :<br />(ex. : « - » pour -Ma-rubrique-, « @ » pour @Mon-site@) ',
 	'label:max_auteurs_page' => 'Auteurs par page :',
 	'label:message_travaux' => 'Votre message de maintenance :',
@@ -529,7 +530,6 @@ _ • {Par défaut} : remplacement automatique d\'origine (à partir de la versi
 [[%liens_orphelins%]]',
 	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].',
 	'liens_orphelins:nom' => 'Belles URLs',
-	'label:long_url' => 'Longueur du libellé cliquable :',
 
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans vos textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de vos squelettes.',

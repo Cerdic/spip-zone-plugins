@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new external window, i.e. by adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
 
-@puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definitions. By default (or if you leave the checkbox below empty), wikipedia.org is used as the external glossary. You may choose another address if you wish. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definitions. By default (or if you leave the checkbox below empty), wikipedia.org is used as the external glossary. You may choose another address if you wish. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP includes a CSS style for "mailto:" email links: a little envelope should appear just before each "mailto" link. However, not all browsers are able to display it (specifically IE6, IE7 and SAF3, in particular, cannot). It is up to you to decide whether to retain this image insertion feature.
 
 _ Test link:[->test@example.com] (Reload the whole page to test.)[[%enveloppe_mails%]]',
@@ -75,7 +75,7 @@ Examples: <code>#SET{x,1}#SET_PLUS{x,2}</code> or <code>#SET{x,avions}#SET_REPLA
 	'barres_typo_forum' => 'Forum messages',
 	'barres_typo_intro' => 'The «Porte-Plume» plugin is installed. Please choose here the typographical bars on which to insert various buttons.',
 	'basique' => 'Basic',
-	'blocs:aide' => 'Folding blocks: <b><bloc></bloc></b> (alias: <b><invisible></invisible></b>) and <b><visible></visible></b>',
+	'blocs:aide' => 'Folding blocks: <b><bloc></bloc></b> (alias: <b><invisible></invisible></b>) and <b><visible></visible></b>', # MODIF
 	'blocs:description' => 'Allows you to create blocks which show/hide themselves when you click on their titles.
 
 @puce@ {{In SPIP texts}}: authors can use the new <bloc> (or <invisible>) and <visible> tags in their texts as illustrated below: 
@@ -104,7 +104,7 @@ Examples: <code>#SET{x,1}#SET_PLUS{x,2}</code> or <code>#SET{x,avions}#SET_REPLA
 
 @puce@ By default, the Swiss Knife plugin uses the HTML tag <h4> for the titles of the collapsible blocks. You can specify another tag to use instead here <hN>:[[%bloc_h4%]]
 
-@puce@ In order to obtain a smoother transition when you click on the title, your collapsible blocks can be animated with a "sliding" effect".[[%blocs_slide%]][[->%blocs_millisec% milliseconds]]',
+@puce@ In order to obtain a smoother transition when you click on the title, your collapsible blocks can be animated with a "sliding" effect".[[%blocs_slide%]][[->%blocs_millisec% milliseconds]]', # MODIF
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'All of the boxes described below appear either here in the private zone.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Updates to the Swiss Knife tool}}: a frame on this current configuration page indicating the most recent modifications made to the code of the ([Source->@_CS_RSS_SOURCE@]) plugin.
@@ -143,7 +143,7 @@ _ • A search field starting from %select_max_auteurs% author(s).</q1>',
 	'chatons:description' => 'Replace <code>:name</code> style tags with smiley images in the text.
 _ This tool will replace these shortcuts with the images of the same name found in the <code>mon_squelette_toto/img/chatons/</code> directory, or else, by default, those found in <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Smileys',
-	'citations_bb:description' => 'In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup <quote> by the markup <q> when there are no line returns. In fact, quotations must be surrounded by <q> tags and the quotations containing paragraphs must be surrounded by <blockquote> tags.',
+	'citations_bb:description' => 'In order to respect the HTML usages in the SPIP content of your site (articles, sections, etc.), this tool replaces the markup <quote> by the markup <q> when there are no line returns. In fact, quotations must be surrounded by <q> tags and the quotations containing paragraphs must be surrounded by <blockquote> tags.', # MODIF
 	'citations_bb:nom' => 'Well delimited citations',
 	'class_spip:description1' => 'Here you can define some SPIP shortcuts. An empty value is equivalent to using the default.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{SPIP shortcuts}}.
@@ -153,7 +153,7 @@ This is where you can define some SPIP shortcuts. An empty value is equivalent t
 
 {N.B. If the "[.->pucesli]" tool has been activated, then the automatic replacing of "-" hyphens will no longer occur; a regular <ul><li> list will be used instead.}
 
-SPIP normally uses the <h3> tag for subtitles. Here you can choose a different tag to be used instead: [[%racc_h1%]][[->%racc_h2%]]',
+SPIP normally uses the <h3> tag for subtitles. Here you can choose a different tag to be used instead: [[%racc_h1%]][[->%racc_h2%]]', # MODIF
 	'class_spip:description4' => '
 
 
@@ -256,7 +256,7 @@ If the external requests involved do not work from your server, or you wish to l
 	'cs_spip_options_on' => 'SPIP options in "<html@_CS_FILE_OPTIONS@</html"',
 
 	// D
-	'decoration:aide' => 'Décoration: <b>&lt;tag&gt;test&lt;/tag&gt;</b>, with<b>tag</b> = @liste@',
+	'decoration:aide' => 'Décoration: <b>&lt;tag&gt;test&lt;/tag&gt;</b>, with<b>tag</b> = @liste@', # MODIF
 	'decoration:description' => 'New, configurable styles in your text using angle brackets and tags. Example: 
 
 <mytag>texte</mytag> or : <mytag/>.<br />Define below the CSS styles you need. Put each tag on a separate line, using the following syntaxes:
@@ -283,7 +283,7 @@ The parameter {type} above can be one of three values:
 
 [[%decoration_styles%]]', # MODIF
 	'decoration:nom' => 'Decoration',
-	'decoupe:aide' => 'Tabbed block: <b><onglets></onglets></b><br/>Page or tab separator: @sep@',
+	'decoupe:aide' => 'Tabbed block: <b><onglets></onglets></b><br/>Page or tab separator: @sep@', # MODIF
 	'decoupe:aide2' => 'Alias: @sep@',
 	'decoupe:description' => '@puce@ Divides the display of an article into several pages using automatic page numbering. Simply place four consecutive + characters (<code>++++</code>) in your article wherever you wish a page break to occur.
 
@@ -346,6 +346,7 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'ecran_conflit2' => 'Note: a static file named "@file@" has been detected and activated. The Swiss Knife could not update it or configure it.',
 	'ecran_ko' => 'Inactive screen!',
 	'ecran_maj_ko' => 'Version {{@n@}} of the security screen is available. Please update the remote file for this utility.',
+	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
 	'ecran_maj_ok' => '(appears to be up to date).',
 	'ecran_securite:description' => 'The security screen is a PHP file directly downloaded from the official SPIP site which protects your sites by blocking certain attacks aimed at specific security flaws. This system allows you to react very quickly whenever a problem is discovered, by covering up for such flaws without needing to immediately update your site nor apply any complex patches.
 
@@ -467,7 +468,7 @@ Available arguments: {zone}, {format} and/or {id}.', # MODIF
 
 To define this logo, go to the "<:titre_configuration:>" page by clicking on the "<:icone_configuration_site:>" button.', # MODIF
 	'icone_visiter:nom' => '"<:icone_visiter_site:>" button',
-	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between <head> et </head>. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).',
+	'insert_head:description' => 'Activate the tag [#INSERT_HEAD->http://www.spip.net/en_article2421.html] in all templates, whether or not this tag is present between <head> et </head>. This option can be used to allow plugins to insert javascript code (.js) or stylesheets (.css).', # MODIF
 	'insert_head:nom' => '#INSERT_HEAD tag',
 	'insertions:description' => 'N.B.: tool in development!! [[%insertions%]]',
 	'insertions:nom' => 'Auto-correct',
@@ -569,6 +570,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:liens_orphelins' => 'Clickable links:',
 	'label:log_couteau_suisse' => 'Activate:',
 	'label:logo_Hmax' => 'Logo maximum height:',
+	'label:long_url' => 'Longueur du libellé cliquable :', # NEW
 	'label:marqueurs_urls_propres' => 'Add markers to distinguish between objects (SPIP>=2.0:<br />(e.g. " - " pour -My-section-, " @ " for @My-site@) ',
 	'label:max_auteurs_page' => 'Authors per page:',
 	'label:message_travaux' => 'Your maintenance message:',
@@ -640,6 +642,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me
 _ • {By default}: automatic replacement (from SPIP version 2.0).
 
 [[%liens_orphelins%]]', # MODIF
+	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'Fine URLs',
 
 	// M
@@ -735,7 +738,7 @@ If you reset the plugin by clicking on a pack, the Swiss Knife plugin will autom
 	'pack_titre' => 'Current configuration',
 	'pack_variables_defaut' => 'Installation of the default variables',
 	'par_defaut' => 'By default',
-	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags <p> and </p> around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]',
+	'paragrapher2:description' => 'The SPIP function <code>paragrapher()</code> inserts the tags <p> and </p> around all texts which do not have paragraphs. In order to have a finer control over your styles and layout, you can give a uniform look to your texts throughout the site.[[%paragrapher%]]', # MODIF
 	'paragrapher2:nom' => 'Insert paragraphs',
 	'pipelines' => 'Entry points used:',
 	'previsualisation:description' => 'By default, SPIP enables previewing an article in its public and CSS-styled version, but only when it has been "proposed for publication". However, this current tool allows authors to also preview articles while they are still being written. Anyone can therefore preview and modify their own editorial content repeatedly until they are content with its appearance.

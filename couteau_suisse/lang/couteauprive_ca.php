@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : si',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tots els enllaços del lloc s\'obren, per defecte, a la mateixa finestra de navegació en la que esteu. Però pot ser útil obrir els enllaços externs al lloc en una nova finestra -- això es pot aconseguir afegint {target=\\"_blank\\"} a totes les etiquetes &lt;a&gt; dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enllaços de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al màxim aquesta funcionalitat.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '>@puce@ Tots els enllaços del lloc s\'obren, per defecte, a la mateixa finestra de navegació en la que esteu. Però pot ser útil obrir els enllaços externs al lloc en una nova finestra -- això es pot aconseguir afegint {target=\\"_blank\\"} a totes les etiquetes <a> dotades per SPIP del tipus {spip_out}, {spip_url} o {spip_glossaire}. A vegades pot ser necessari afegir una d\'aquestes classes als enllaços de l\'esquelet del lloc (fitxers html) per tal d\'ampliar al màxim aquesta funcionalitat.[[%radio_target_blank3%]]
 
-@puce@ SPIP permet lligar paraules amb la seva definició gràcies a la drecera tipogràfica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de més avall), el glossari extern us envia cap a l\'enciclopèdia lliure wikipedia.org. Us toca a vosaltres escollir quina adreça voleu utilitzar. <br />Enllaç de prova: [?SPIP][[%url_glossaire_externe2%]]',
+@puce@ SPIP permet lligar paraules amb la seva definició gràcies a la drecera tipogràfica <code>[?mot]</code>. Per defecte (o si deixeu buida la casella de més avall), el glossari extern us reenvia cap a l\'enciclopèdia lliure wikipedia.org. Us toca a vosaltres escollir quina adreça voleu utilitzar. <br />Enllaç de prova: [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP ha previst un estil CSS pels enllaços «~mailto:~»: un petit sobre hauria d\'aparèixer al davant de cada enllaç lligat a un correu electrònic; però com que no tots els navegadors el poden mostrar (sobretot IE6, IE7 i SAF3), heu de veure si voleu conservar aquest afegit.
 _ Enllaç de test: [->test@test.com] (recarregueu la pàgina completament).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP i els enllaços externs',
@@ -55,10 +55,10 @@ El valor de 1~000~000 píxels sembla correcte per una configuració amb poca mem
 @puce@ Quins estats d\'autors es poden llistar en aquesta pàgina?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Pàgina d\'autors',
-	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de línia simples per un salt de línia HTML &lt;br />.[[%alinea%]]', # MODIF
+	'autobr:description' => 'Aplica, en alguns continguts SPIP, el filtre {|post_autobr} que substitueix tots els salts de línia simples per un salt de línia HTML <br />.[[%alinea%]][[->%alinea2%]]',
 	'autobr:nom' => 'Retorns de línia automàtics',
-	'autobr_non' => 'Tots els textos del lloc, però només a l\'interior d\'etiquetes &lt;alinea>&lt;/alinea>', # MODIF
-	'autobr_oui' => 'Tots els textos d\'article i missatges públics (etiqueta #TEXTE)', # MODIF
+	'autobr_non' => 'A l\'interior d\'etiquetes <alinea></alinea>',
+	'autobr_oui' => 'Articles i missatges públics (etiquetes @BALISES@)',
 	'autobr_racc' => 'Retorns de línia: <b>&lt;alinea>&lt;/alinea></b>',
 
 	// B
@@ -70,10 +70,10 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 	'barres_typo_forum' => 'Missatges del Fòrum',
 	'barres_typo_intro' => 'S\'ha detectar el connector «Porte-Plume». Vulgueu escollir aquí les barres tipogràfiques on s\'inseriran alguns botons. ',
 	'basique' => 'Bàsic',
-	'blocs:aide' => 'Blocs Desplegables: <b>&lt;bloc&gt;&lt;/bloc&gt;</b> (àlies: <b>&lt;invisible&gt;&lt;/invisible&gt;</b>) i <b>&lt;visible&gt;&lt;/visible&gt;</b>',
+	'blocs:aide' => 'Blocs Desplegables: <b><bloc></bloc></b> (àlies: <b><invisible></invisible></b>) i <b><visible></visible></b>',
 	'blocs:description' => 'Us permet crear blocs que, amb el títol clicable, els pot tornar visibles o invisibles.
 
-@puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes &lt;bloc&gt; (o &lt;invisible&gt;) i &lt;visible&gt; per utilitzar en el seus textos d\'aquesta manera: 
+@puce@ {{En els textos SPIP}}: els redactors tenen disponibles les noves etiquetes <bloc> (o <invisible>) i <visible> per utilitzar en el seus textos d\'aquesta manera:
 
 <quote><code>
 <bloc>
@@ -95,9 +95,9 @@ Exemples: <code>#SET{x,1}#SET_PLUS{x,2}</code> o <code>#SET{x,avions}#SET_REPLAC
 
 @puce@ Marcant amb una creu «si» més avall, l\'obertura d\'un bloc provocarà el tancament de tots els altres blocs de la pàgina, per tal de tenir-ne només un d\'obert a la vegada.[[%bloc_unique%]]
 
-@puce@ Marcant amb una creu «si» més avall, l\'estat dels blocs enumerats serà emmagatzemat a una galeta el temps de la sessió, per tal de conservar l\'aspecte de la pàgina en cas de retorn.[[%blocs_cookie%]]
+@puce@ Marcant amb una creu «si» més avall, l\'estat dels blocs enumerats serà emmagatzemat a una galeta mentre duri la sessió, per tal de conservar l\'aspecte de la pàgina en cas de retorn.[[%blocs_cookie%]]
 
-@puce@ El Ganivet Suís utilitza, per defecte, l\'etiqueta HTML &lt;h4&gt; pel títol dels blocs desplegables. Escolliu aquí una altra etiqueta &lt;hN&gt; :[[%bloc_h4%]]
+@puce@ El Ganivet Suís utilitza, per defecte, l\'etiqueta HTML <h4> pel títol dels blocs desplegables. Escolliu aquí una altra etiqueta <hN> :[[%bloc_h4%]]
 
 @puce@ Per tal d\'obtenir un efecte més agradable al moment del clic, els vostres blocs desplegables es poden animar com si \\"llisquessin\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Desplegables',
@@ -138,7 +138,7 @@ _ • Un camp de cerca a partir de %select_max_auteurs% autor(s).</q1>',
 	'chatons:description' => 'Insereix imatges (o emoticones pels {xats}) en tots els textos on apareix una cadena del tipus <code>:nom</code>.
 _ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom que troba a dins de la vostra carpeta <code>mon_squelette_toto/img/chatons/</code>, o per defecte, la carpeta <code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'Emoticones',
-	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes &lt;quote&gt; per les etiquetes &lt;q&gt; quan no hi ha salt de línia. Efectivament, les citacions curtes han d\'estar envoltades per &lt;q&gt; i les citacions que contenen paràgrafs per &lt;blockquote&gt;.',
+	'citations_bb:description' => 'Per tal de respectar els usos en HTML a dins dels continguts SPIP del vostre lloc (articles, seccions, etc.), aquesta eina substitueix les etiquetes <quote> per etiquetes <q> quan no hi ha salt de línia. Efectivament, les citacions curtes han d\'estar envoltades per <q> i les citacions que contenen paràgrafs per <blockquote>.',
 	'citations_bb:nom' => 'Citacions ben etiquetades',
 	'class_spip:description1' => 'Aquí podeu definir algunes dreceres d\'SPIP. Un valor buit equival a utilitzar el valor per defecte.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{Les dreceres d\'SPIP}}.
@@ -146,28 +146,28 @@ _ Aquesta eina substitueix aquestes dreceres per les imatges amb el mateix nom q
 Aquí podeu definir algunes dreceres d\'SPIP. Un valor buit equival a fer servir el valor per defecte.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
 
-{Atenció: si l\'eina « [.->pucesli] » està activada, la substitució del guionet « - » no es farà; al seu lloc s\'utilitzarà una llista del tipus &lt;ul>&lt;li>.}
+{Atenció: si l\'eina « [.->pucesli] » està activada, la substitució del guionet « - » no es farà; al seu lloc s\'utilitzarà una llista del tipus <ul><li>.}
 
-SPIP utilitza habitualment l\'etiqueta &lt;h3&gt; pels subtítols. Escolliu aquí un altre emplaçament:[[%racc_h1%]][[->%racc_h2%]]',
+SPIP utilitza habitualment l\'etiqueta <h3> pels subtítols. Escolliu aquí un altre emplaçament:[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
 
-SPIP ha escollit utilitzar l\'etiqueta &lt;strong> per transcriure les negretes. Però &lt;b> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu:[[%racc_g1%]][[->%racc_g2%]]
+SPIP ha escollit utilitzar l\'etiqueta <strong> per transcriure les negretes. Però <b> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu:[[%racc_g1%]][[->%racc_g2%]]
 
-SPIP ha escollit utilitzar l\'etiqueta &lt;i> per transcriure les itàliques. Però &lt;em> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu: [[%racc_i1%]][[->%racc_i2%]]
+SPIP ha escollit utilitzar l\'etiqueta <i> per transcriure les itàliques. Però <em> també hauria pogut anar bé, amb o sense estil. Vosaltres decidiu: [[%racc_i1%]][[->%racc_i2%]]
 
- Podeu també definir el codi obrint i tancant per les crides de notas a peu de pàgina (Atenció! Les modificacions només seran visibles a l\'espai públic: [[%ouvre_ref%]][[->%ferme_ref%]]
+ Podeu també definir el codi obrint i tancant per les crides de notes a peu de pàgina (Atenció! Les modificacions només seran visibles a l\'espai públic: [[%ouvre_ref%]][[->%ferme_ref%]]
 
  Podeu definir el codi obrint i tancant per les notes de peu de pàgina: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versió 1.92 d\'SPIP, les dreceres tipogràfiques produeixen etiquetes sistemàticament vestides de l\'estil \\"spip\\". Per exemple: <code><p class=\\"spip\\"></code>. Aquí podeu definir l\'estil d\'aquestes etiquetes en funció dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicarà cap estil en particular.
+@puce@ {{Els estils d\'SPIP per defecte}}. Fins a la versió 1.92 d\'SPIP, les dreceres tipogràfiques produïen sistemàticament etiquetes vestides de l\'estil \\"spip\\". Per exemple: <code><p class=\\"spip\\"></code>. Aquí podeu definir l\'estil d\'aquestes etiquetes en funció dels vostres fulls d\'estil. Una caixa buida significa que no s\'aplicarà cap estil en particular.
 
 {Atenció: si algunes dreceres (línia horitzontal, subtítol, itàlica, negreta) s\'han modificat més amunt, els estils posteriors no s\'aplicaran.}
 
 <q1>
-_ {{1.}} Etiquetes &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
-_ {{2.}} Etiquetes &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; i les llistes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
+_ {{1.}} Etiquetes <p>, <i>, <strong> :[[%style_p%]]
+_ {{2.}} Etiquetes <tables>, <hr>, <h3>, <blockquote> i les llistes (<ol>, <ul>, etc.) :[[%style_h%]]
 
-Anoteu: modificant aquest segon estil, també perdeu els estils estàndards d\'SPIP associats a aquestes etiquetes.</q1>',
+Fixeu-vos-hi bé: modificant aquest segon estil, també perdeu els estils estàndards d\'SPIP associats a aquestes etiquetes.</q1>',
 	'class_spip:nom' => 'SPIP i les seves dreceres…',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funcions',
@@ -219,11 +219,11 @@ Si els requeriments externs del vostre servidor us posen problemes o teniu probl
 	'cs_spip_options_on' => 'Les opcions SPIP a «<html>@_CS_FILE_OPTIONS@</html>»',
 
 	// D
-	'decoration:aide' => 'Decoració: <b>&lt;etiqueta&gt;test&lt;/etiqueta&gt;</b>, amb <b>etiqueta</b> = @liste@',
-	'decoration:description' => 'Nous estils parametrables a dins dels vostres textos i accessibles gràcies a les etiquetes à chevrons. Exemple: 
-&lt;lamevaetiqueta&gt;text&lt;/lamevaetiqueta&gt; o: &lt;lamevaetiqueta/&gt;.<br />Definiu més avall els estils CSS que necessiteu, una etiqueta per línia, segons les següents sintaxis:
+	'decoration:aide' => 'Decoració: <b><balise>test</balise></b>, amb <b>balise</b> = @liste@',
+	'decoration:description' => 'Nous estils parametritzables a dins dels vostres textos i accessibles gràcies a les etiquetes amb parèntesi. Exemple: 
+<lamevaetiqueta>text</lamevaetiqueta> o: <lamevaetiqueta/>.<br />Definiu més avall els estils CSS que necessiteu, una etiqueta per línia, segons les següents sintaxis:
 - {tipus.lamevaetiqueta = el meu estil CSS}
-- {tipus.lamevaetiqueta.class = la meva  classe CSS}
+- {tipus.lamevaetiqueta.class = la meva classe CSS}
 - {tipus.lamevaetiqueta.lang = la meva llengua (ex: ca)}
 - {unalies = lamevaetiqueta}
 
@@ -234,14 +234,14 @@ El paràmetre {tipus} de més amunt pot agafar tres valors:
 
 [[%decoration_styles%]]',
 	'decoration:nom' => 'Decoració',
-	'decoupe:aide' => 'Bloc de pestanyes: <b>&lt;pestanyes>&lt;/pestanyes></b><br />Separador de pàgines o de pestanyes : @sep@',
+	'decoupe:aide' => 'Bloc de pestanyes: <b><pestanyes></pestanyes></b><br />Separador de pàgines o de pestanyes : @sep@',
 	'decoupe:aide2' => 'Àlies: @sep@',
 	'decoupe:description' => '@puce@ Talla la visualització pública d\'un article en diverses pàgines gràcies a una paginació automàtica. Situeu simplement a dins del vostre article quatre signes més consecutius (<code>++++</code>) a l\'indret on s\'hagi de realitzar el tall.
 
 Per defecte, el Ganivet Suís insereix la paginació al capdamunt i al peu de l\'article automàticament. Però teniu la possibilitat de situar aquesta paginació allà on us interessi del vostre esquelet gràcies a una etiqueta #CS_DECOUPE que podeu activar aquí:
 [[%balise_decoupe%]]
 
-@puce@ Si feu servir aquest separador a l\'interior d\'etiquetes &lt;onglets&gt; i &lt;/onglets&gt; obtindreu aleshores un joc de pestanyes.
+@puce@ Si feu servir aquest separador a l\'interior d\'etiquetes <onglets> i </onglets> obtindreu aleshores un joc de pestanyes.
 
 A dins dels esquelets: teniu a la vostra disposició les noves etiquetes #ONGLETS_DEBUT, #ONGLETS_TITRE i #ONGLETS_FIN.
 
@@ -261,7 +261,7 @@ Aquesta eina es pot acompanyar amb « [.->sommaire] ».',
 	'detail_spip_options' => '{{Nota}}: En cas de disfunció d\'aquesta eina, poseu abans les opcions SPIP gràcies a l\'eina «@lien@».',
 	'detail_spip_options2' => 'És recomanable posar més amunt les opcions gràcies a l\'eina «[.->cs_comportement]».',
 	'detail_spip_options_ok' => '{{Nota}}: Aquesta eina posa actualment les opcions SPIP més amunt gràcies a l\'eina «@lien@».',
-	'detail_surcharge' => 'Outil surchargé :', # NEW
+	'detail_surcharge' => 'Eina sobrecarregada:',
 	'detail_traitements' => 'Tractaments :',
 	'devdebug:description' => '{{Aquesta eina us permet veure els errors PHP a la pantalla.}}<br />Podeu escollir el nivell d\'errors d\'execució PHP que es mostrarà si el depurador està actiu, així com l\'espai SPIP sobre el que s\'aplicaran aquests paràmetres.',
 	'devdebug:item_e_all' => 'Tots els missatges d\'error (all)',
@@ -288,6 +288,7 @@ Aquesta eina es pot acompanyar amb « [.->sommaire] ».',
 	'ecran_conflit2' => 'Nota: s\'ha detectat i activat un fitxer estàtic «@file@». El Ganivet Suís no podrà ni actualitzar-lo ni configurar-lo.',
 	'ecran_ko' => 'Pantalla inactiva!',
 	'ecran_maj_ko' => 'Hi ha disponible la versió {{@n@}} de la pantalla de seguretat. Actualitzeu el fitxer distant d\'aquesta eina.',
+	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
 	'ecran_maj_ok' => '(sembla actualitzat).',
 	'ecran_securite:description' => 'La pantalla de seguretat és un fitxer PHP que es pot descarregar directament del lloc oficial d\'SPIP, que protegeix els vostres llocs bloquejant certs atacs lligats a forats de seguretat. Aquest sistema permet reaccionar molt ràpidament quan es descobreix un problema de seguretat, tapant el forat sense necessitat d\'actualitzar tot el lloc ni aplicar un « patch » complexe.
 
@@ -302,9 +303,9 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 - Versió del fitxer local: ',
 	'ecran_securite:nom' => 'Pantalla de seguretat',
 	'effaces' => 'Esborrats',
-	'en_travaux:description' => 'Durant un període de manteniment, permet mostrar un missatge personalitzat a tot el lloc públic, eventualment a la part privada.
+	'en_travaux:description' => 'Durant un període de manteniment, permet mostrar un missatge personalitzat a tot el lloc públic, eventualment la part privada.
 
-[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux% ', # MODIF
+[[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Lloc en manteniment',
 	'erreur:bt' => '<span style=\\"color:red;\\">Atenció:</span> la barra tipogràfica (version @version@) semble ancienne.<br />El Ganivet Suís és compatible amb una versió superior o igual a @mini@.',
 	'erreur:description' => 'id absent en la definició de l\'eina!',
@@ -323,26 +324,18 @@ En cas d\'actualització oficial, actualitzeu el fitxer distant associat (clique
 	// F
 	'f_jQuery:description' => 'Impedeix la instal·lació de {jQuery} a la part pública per tal d\'economitzar una mica de «temps màquina». Aquesta llibreria ([->http://jquery.com/]) aporta nombroses comoditats a la programació de JavaScript i pot ser utilitzada per alguns connectors. SPIP l\'utilitza a la seva part privada.
 
-
-
-Atenció: certes eines del Ganivet Suís necessiten les funcions de {jQuery}. ', # MODIF
+Atenció: certes eines del Ganivet Suís necessiten les funcions de {jQuery}. ',
 	'f_jQuery:nom' => 'Desactiva jQuery',
 	'filets_sep:aide' => 'Línies de Separació: <b>__i__</b> o <b>i</b> és un nombre de <b>0</b> a <b>@max@</b>.<br />Altres línies disponibles: @liste@',
 	'filets_sep:description' => 'Insereix línies de separació, que es poden personalitzar per fulls d\'estil, a tots els textos d\'SPIP.
-
-_ La sintaxi és: "__code__", o "code" representa o bé el número d\'identificació (de 0 a 7) de la línia a inserir en relació directa amb els estils corresponents, o bé el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.', # MODIF
+_ La sintaxi és: "__code__", o "code" representa o bé el número d\'identificació (de 0 a 7) de la línia a inserir en relació directa amb els estils corresponents, o bé el nom d\'una imatge situada a dins de la carpeta plugins/couteau_suisse/img/filets.',
 	'filets_sep:nom' => 'Línies de Separació',
 	'filtrer_javascript:description' => 'Per gestionar la inserció de JavaScript a dins dels articles, podem fer-ho de tres maneres:
-
-- <i>mai</i> : el JavaScript és rebutjat a tot arreu
-
+- <i>mai</i>: el JavaScript és rebutjat a tot arreu
 - <i>defecte</i> : el JavaScript s\'assenyala en vermell a l\'espai privat
-
 - <i>sempre</i> : el JavaScript s\'accepta a tot arreu.
 
-
-
-Atenció: a dins dels fòrums, peticions, flux sindicats, etc., la gestió del JavaScript és <b>sempre</b> segura.[[%radio_filtrer_javascript3%]]', # MODIF
+Atenció: a dins dels fòrums, peticions, flux sindicats, etc., la gestió del JavaScript és <b>sempre</b> segura.[[%radio_filtrer_javascript3%]]',
 	'filtrer_javascript:nom' => 'Gestió del JavaScript',
 	'flock:description' => 'Desactiva el sistema bloqueig de fitxers neutralitzant la funció PHP {flock()}. Alguns hostatjadors posen problemes greus fruit d\'un sistema de fitxers inadaptat o a una manca de sincronització. No activeu aquesta eina si el vostre lloc funciona normalment. ',
 	'flock:nom' => 'Cap bloqueig de fitxers',
@@ -409,7 +402,7 @@ Arguments disponibles: {zona}, {format} i/o {id}.', # MODIF
 
 Per definir aquest logotip, dirigiu-vos a la pàgina «<:titre_configuration:>» fent un clic damunt del botó «<:icone_configuration_site:>».', # MODIF
 	'icone_visiter:nom' => '« <:icone_visiter_site:> »',
-	'insert_head:description' => 'Activa automàticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gràcies a aquesta opció, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).',
+	'insert_head:description' => 'Activa automàticament l\'etiqueta [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] a tots els esquelets, tinguin o no aquesta etiqueta entre &lt;head&gt; i &lt;/head&gt;. Gràcies a aquesta opció, els plugins podran inserir JavaScript (.js) o fulls d\'estil (.css).', # MODIF
 	'insert_head:nom' => 'Etiqueta #INSERT_HEAD',
 	'insertions:description' => 'ATENCIÓ: eina en curs de desenvolupament!! [[%insertions%]]',
 	'insertions:nom' => 'Correccions automàtiques',
@@ -511,6 +504,7 @@ Atenció, aquesta eina necessita per funcionar el plugin {jQuery}: {Round Corner
 	'label:liens_orphelins' => 'Enllaços clicables:',
 	'label:log_couteau_suisse' => 'Activar:',
 	'label:logo_Hmax' => 'Mida màxima dels logos:',
+	'label:long_url' => 'Longueur du libellé cliquable :', # NEW
 	'label:marqueurs_urls_propres' => 'Afegir els marcadors dissociant els objectes (SPIP>=2.0):<br />(ex.: « - » per -La-meva-secció-, « @ » per @Mon-site@) ',
 	'label:max_auteurs_page' => 'Autors per pàgina:',
 	'label:message_travaux' => 'El vostre missatge de manteniment:',
@@ -582,6 +576,7 @@ _ • {Extens}: s&oacute;n substitu&iuml;ts a m&eacute;s els enlla&ccedil;os del
 _ • {Par defecte): substituci&oacute; autom&agrave;tica d\'origen (a partir de la versi&oacute; 2.0 d\'SPIP).
 
 [[%liens_orphelins%]]', # MODIF
+	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
 	'liens_orphelins:nom' => 'URLs bonics',
 
 	// M
@@ -677,7 +672,7 @@ Si torneu a carregar el plugin fent un clic sobre un pack, el Ganivet Suís es t
 	'pack_titre' => 'Configuració Actual',
 	'pack_variables_defaut' => 'Instal·lació de variables per defecte',
 	'par_defaut' => 'Per defecte',
-	'paragrapher2:description' => 'La funció SPIP <code>paragrapher()</code> insereix etiquetes &lt;p&gt; i &lt;/p&gt; a tots els textos que estan desproveïts de paràgrafs. Per tal de gestionar més finament els vostres estils i les vostres compaginacions, teniu la possibilitat d\'uniformitzar l\'aspecte dels textos del vostre lloc.[[%paragrapher%]]',
+	'paragrapher2:description' => 'La funció SPIP <code>paragrapher()</code> insereix etiquetes &lt;p&gt; i &lt;/p&gt; a tots els textos que estan desproveïts de paràgrafs. Per tal de gestionar més finament els vostres estils i les vostres compaginacions, teniu la possibilitat d\'uniformitzar l\'aspecte dels textos del vostre lloc.[[%paragrapher%]]', # MODIF
 	'paragrapher2:nom' => 'Paràgraf',
 	'pipelines' => 'Pipelines utilitzades:',
 	'previsualisation:description' => 'Per defecte, SPIP permet fer una visualitzaci&oacute; pr&egrave;via d\'un article en la seva versi&oacute; p&uacute;blica i amb estil, per&ograve; nom&eacute;s quan aquest ha estat &laquo;proposat per a ser avaluat&raquo;. Aquesta eina tamb&eacute; permet als autors previsualitzar els articles durant la seva redacci&oacute;. Cadasc&uacute; pot, llavors, previsualitzar i modifica el seu text al seu gust.
