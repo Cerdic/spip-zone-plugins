@@ -114,13 +114,13 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 			spip_log('- lien '.$type_objet_contenant.' '.$id_objet_contenant.' vers '.$lien['type'].' '.$lien['id'], 'liens_contenus');
 			include_spip('base/abstract_sql');
 			sql_insertq(
-			  "spip_liens_contenus",
-			array(
-	        "type_objet_contenant" => $type_objet_contenant,
-				  "id_objet_contenant" => $id_objet_contenant,
-				  "type_objet_contenu" => $lien['type'],
-				  "id_objet_contenu" => $lien['id']
-			)
+			    "spip_liens_contenus",
+                array(
+                    "type_objet_contenant" => $type_objet_contenant,
+                    "id_objet_contenant" => $id_objet_contenant,
+                    "type_objet_contenu" => $lien['type'],
+                    "id_objet_contenu" => $lien['id']
+                )
 			);
 		}
 	} else {
@@ -137,11 +137,11 @@ function lienscontenus_initialiser()
 
 	// TODO: decouvrir un moyen automatique en SPIP 2 de récupérer la liste des tables
 	$liste_tables = array(
-    'spip_articles' => 'id_article',
-    'spip_rubriques' => 'id_rubrique',
-    'spip_breves' => 'id_breve',
-    'spip_syndic' => 'id_syndic',
-    'spip_forum' => 'id_forum'
+        'spip_articles' => 'id_article',
+        'spip_rubriques' => 'id_rubrique',
+        'spip_breves' => 'id_breve',
+        'spip_syndic' => 'id_syndic',
+        'spip_forum' => 'id_forum'
     );
     // parcourir les tables et les champs
     foreach ($liste_tables as $table => $col_id) {
@@ -170,13 +170,13 @@ function lienscontenus_boite_liste($type_objet, $id_objet)
 function lienscontenus_verification()
 {
 	$data = '<script language="javascript" type="text/javascript">' .
-                'var messageConfirmationDepublication="'._T('lienscontenus:confirmation_depublication').'";' .
-	              'var messageConfirmationPublication="'._T('lienscontenus:confirmation_publication').'";' .
-                'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
-                'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
-	              'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
-                'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
-                '</script>';
+            'var messageConfirmationDepublication="'._T('lienscontenus:confirmation_depublication').'";' .
+	        'var messageConfirmationPublication="'._T('lienscontenus:confirmation_publication').'";' .
+            'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
+            'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
+	        'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
+            'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
+            '</script>';
 	$data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
 	return $data;
 }
