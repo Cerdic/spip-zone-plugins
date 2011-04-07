@@ -19,5 +19,8 @@
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>
+	<langue code="pt_br">
+		<traducteur nom="rporto" />
+	</langue>
 	<langue code="sk" />
 </traduction>
