@@ -6,11 +6,11 @@ include_spip('base/abstract_sql');
 
 
 	$rub_id = $priveperso['rub_id'];
-	$u = sql_select("rub_id",$table,"rub_id='$rub_id'");
+	$u = sql_select("rub_id",$table,"rub_id=".intval($rub_id));
 	$b = sql_fetch($u);
 	                                
 	if ($b['rub_id']==$rub_id){
-			$res = sql_updateq($table, $priveperso, "rub_id='$rub_id'");
+			$res = sql_updateq($table, $priveperso, "rub_id=".intval($rub_id));
 	}
 	else {
 			$res = sql_insertq($table, $priveperso);                              
@@ -27,7 +27,7 @@ function priveperso_recuperer_valeurs($rub_id) {
       $desc = $trouver_table('priveperso');
 
 		foreach ($desc['field'] as $key => $val){
-			$u = sql_select("$key","spip_priveperso","rub_id='$rub_id'");
+			$u = sql_select($key,"spip_priveperso","rub_id=".intval($rub_id));
 			$b = sql_fetch($u);
 			$priveperso[$key] = $b[$key];
 			
@@ -41,7 +41,7 @@ function priveperso_texte_recuperer_valeurs($rub_id) {
       $desc = $trouver_table('priveperso_texte');
 
 		foreach ($desc['field'] as $key => $val){
-			$u = sql_select("$key","spip_priveperso_texte","rub_id='$rub_id'");
+			$u = sql_select($key,"spip_priveperso_texte","rub_id=".intval($rub_id));
 			$b = sql_fetch($u);
 			$priveperso[$key] = $b[$key];
 		}
@@ -51,7 +51,7 @@ function priveperso_texte_recuperer_valeurs($rub_id) {
 
 function priveperso_rubrique_deja_perso($rub_id) {
 
-	$u = sql_select("rub_id, activer_perso","spip_priveperso","rub_id='$rub_id'");
+	$u = sql_select("rub_id, activer_perso","spip_priveperso","rub_id=".intval($rub_id));
 	$b = sql_fetch($u);
 
 	if ($b['activer_perso']==='oui') {$res = true;}
