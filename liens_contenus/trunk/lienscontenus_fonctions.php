@@ -84,7 +84,7 @@ function lienscontenus_statut($type_objet, $id_objet)
 	include_spip('base/abstract_sql');
 	if ($type_objet == 'document') {
         // TODO: gérer le statut des docs si médiathèque est installé
-        $res = false;
+        return 'publie';
     } elseif (in_array($type_objet, array('syndic', 'forum'))) {
         $res = sql_select("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
 	} else {
