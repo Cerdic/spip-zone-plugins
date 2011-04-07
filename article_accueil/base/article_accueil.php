@@ -26,13 +26,16 @@ function article_accueil_declarer_tables_principales($tables_principales){
  */
 function article_accueil_upgrade($nom_meta_base_version,$version_cible){
 	include_spip('inc/meta');
-	$current_version = 0.0;
+	$current_version = '0.0';
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		if (version_compare($current_version,'0.1','<')){
 			include_spip('base/abstract_sql');
-			sql_alter("TABLE spip_rubriques ADD id_article_accueil bigint(21) DEFAULT '0' NOT NULL");
-			ecrire_meta($nom_meta_base_version,$current_version="0.1",'non');
+			$desc = sql_showtable('spip_rubriques', true);
+			if (!isset($desc['field']['id_article_accueil'])) {
+				sql_alter("TABLE spip_rubriques ADD id_article_accueil bigint(21) DEFAULT '0' NOT NULL");
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.1','non');
 		}
 	}
 }
