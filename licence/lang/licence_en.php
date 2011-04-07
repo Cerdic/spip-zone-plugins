@@ -36,7 +36,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_gpl' => 'http://www.gnu.org/copyleft/gpl.html',
 
 	// N
-	'noisette_cacher_defaut' => 'Cacher lorsque la licence n\'est pas spécifiée ?', # NEW
+	'noisette_cacher_defaut' => 'Hide when the licence is not specified?',
 	'noisette_hauteur_logo' => 'Maximum height of the logo (in pixels):',
 	'noisette_largeur_logo' => 'Maximum width of the logo (in pixels):',
 	'noisette_lien' => 'Display the link to the licence description?',
