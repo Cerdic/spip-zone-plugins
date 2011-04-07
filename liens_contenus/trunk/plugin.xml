@@ -3,7 +3,7 @@
 	<auteur>Nicolas Hoizey</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.20</version>
-	<version_base>0.3</version_base>
+	<version_base>0.4</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>dev</etat>
 	<description>
