@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 // lecture d'un texte ecrit en pseudo-xml issu d'un fichier plugin.xml
 // et conversion approximative en tableau PHP.
-function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS) {
+function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 	include_spip('inc/xml');
 	$arbre = spip_xml_parse($desc);
 
@@ -50,8 +50,14 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS) {
 		$ret['prefix'] = trim(spip_xml_aplatit($arbre['prefix']));
 	if (isset($arbre['install']))
 		$ret['install'] = $arbre['install'];
+	if (isset($arbre['meta']))
+		$ret['meta'] = trim(spip_xml_aplatit($arbre['meta']));
 
-	$ret['necessite'] = info_plugin_normalise_necessite($arbre['necessite']);
+	$necessite = info_plugin_normalise_necessite($arbre['necessite']);
+	if (isset($necessite['compatible']))
+		$ret['compatible'] = $necessite['compatible'];
+	$ret['necessite'] = $necessite['necessite'];
+	$ret['lib'] = $necessite['lib'];
 	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
 
 	$ret['path'] = $arbre['path'];
@@ -65,8 +71,6 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS) {
 		
 	if (isset($arbre['config']))
 		$ret['config'] = spip_xml_aplatit($arbre['config']);
-	if (isset($arbre['meta']))
-		$ret['meta'] = spip_xml_aplatit($arbre['meta']);
 	if (isset($arbre['noisette']))
 		$ret['noisette'] = $arbre['noisette'];
 
@@ -77,24 +81,31 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins = _DIR_PLUGINS) {
 	
 	return $ret;
 }
+// Un attribut de nom "id" a une signification particuliere en XML
+// qui ne correspond pas a l'utilissation qu'en font les plugin.xml
+// Pour eviter de complexifier la lecture de paquet.xml
+// qui n'est pour rien dans cette bevue, on doublonne l'information
+// sous les deux index "nom" et "id" dans l'arbre de syntaxe abstraite
+// pour compatibilite, mais seul le premier est disponible quand on lit
+// un paquet.xml, "id" devant etre considere comme obsolete
 
 function info_plugin_normalise_necessite($necessite) {
 	$res = array('necessite' => array(), 'lib' => array());
 
 	if (is_array($necessite)) {
-		foreach($necessite as $need){
+		foreach($necessite as $need) {
 			$id = $need['id'];
-	
+			$v = $need['version'];
+			
 			// Necessite SPIP version x ?
 			if (strtoupper($id)=='SPIP') {
-				$res['compatible'] = $need['version'];
+				$res['compatible'] = $v;
 			} else if (preg_match(',^lib:\s*([^\s]*),i', $id, $r)) {
-				$res['lib'][] = array('nom' => $r[1], 'lien' => $need['src']);
-			} else 
-				$res['necessite'][] = array('nom' => $id, 'version' => $need['version']);
+				$res['lib'][] = array('nom' => $r[1], 'id' => $r[1], 'lien' => $need['src']);
+			} else $res['necessite'][] = array('id' => $id, 'nom' => $id, 'version' => $v);
 		}
 	}
-
+	
 	return $res;
 }
 
@@ -104,7 +115,7 @@ function info_plugin_normalise_utilise($utilise) {
 	if (is_array($utilise)) {
 		foreach($utilise as $need){
 			$id = $need['id'];
-			$res[]= array('nom' => $id, 'version' => $need['version']);
+		$res[]= array('nom' => $id, 'id' => $id, 'version' => $need['version']);
 		}
 	}
 	return $res;

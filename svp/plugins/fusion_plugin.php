@@ -14,9 +14,9 @@ function plugins_fusion_plugin($plugins) {
 	$cle_min_max = -1;
 	$borne_min_max = _SVP_VERSION_SPIP_MIN;
 	foreach ($plugins as $_cle => $_plugin) {
-		if (!$_plugin['necessite']['compatible'])
+		if (!$_plugin['compatible'])
 			$borne_min = _SVP_VERSION_SPIP_MIN;
-		$bornes_spip = extraire_bornes($_plugin['necessite']['compatible']);
+		$bornes_spip = extraire_bornes($_plugin['compatible']);
 		$borne_min = ($bornes_spip['min']['valeur']) ? $bornes_spip['min']['valeur'] : _SVP_VERSION_SPIP_MIN;
 		if (spip_version_compare($borne_min_max, $borne_min, '<=')) {
 			$cle_min_max = $_cle;
@@ -32,7 +32,7 @@ function plugins_fusion_plugin($plugins) {
 	// -- auteur, licence : *rien*, l'heuristique pour fusionner ces infos est trop compliquee aujourdhui car c'est du texte libre
 	// -- categorie, icon : si la valeur du bloc selectionne est vide on essaye d'en trouver une non vide dans les autres blocs
 	// -- compatible : on constuit l'intervalle global de compatibilite SPIP
-	// -- necessite, utilise : on construit le tableau par intervalle de compatibilite
+	// -- necessite, utilise : on construit le tableau par intervalle de compatibilite SPIP
 	foreach ($plugins as $_cle => $_plugin) {
 		if ($_cle <> $cle_min_max) {
 			// categorie et icon
@@ -41,9 +41,9 @@ function plugins_fusion_plugin($plugins) {
 			if (!$fusion['icon'] AND $_plugin['icon']) 
 				$fusion['icon'] = $_plugin['icon'];
 			// compatible
-			$fusion['necessite']['compatible'] = fusionner_intervalles(
-													$fusion['necessite']['compatible'], 
-													$_plugin['necessite']['compatible']);
+			$fusion['compatible'] = fusionner_intervalles(
+													$fusion['compatible'], 
+													$_plugin['compatible']);
 			// necessite, utilise
 			// --> a faire !!
 		}

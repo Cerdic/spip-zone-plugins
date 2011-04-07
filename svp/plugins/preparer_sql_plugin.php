@@ -67,11 +67,11 @@ function plugins_preparer_sql_plugin($plugin)
 	}
 
 	// Extraction de la compatibilite SPIP
-	$champs['version_spip'] = ($plugin['necessite']['compatible']) ? $plugin['necessite']['compatible'] : '';
+	$champs['version_spip'] = ($plugin['compatible']) ? $plugin['compatible'] : '';
 	
 	// Construction du tableau des dependances necessite, lib et utilise
-	$dependances['necessite'] = $plugin['necessite']['necessite'];
-	$dependances['librairie'] = $plugin['necessite']['lib'];
+	$dependances['necessite'] = $plugin['necessite'];
+	$dependances['librairie'] = $plugin['lib'];
 	$dependances['utilise'] = $plugin['utilise'];
 	$champs['dependances'] = serialize($dependances);
 
