@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_openid_info_manquantes' => 'Votre fournisseur OpenID ne nous a pas envoy&eacute; toutes les informations n&eacute;cessaires',
 	
 	// F
-	'form_login_openid' => 'Vous pouvez aussi utiliser un identifiant OpenID (<a href="http://www.openidfrance.fr/" target="_blank">aide</a>)',
+	'form_login_openid' => 'Vous pouvez aussi utiliser un identifiant OpenID (<a href="http://fr.wikipedia.org/wiki/OpenID" target="_blank">aide</a>)',
 	'form_forum_indiquer_openid' => 'Vous pouvez vous inscrire sur ce site en indiquant un identifiant OpenID.',
 	'form_login_openid_ok' => 'Cet identifiant utilise OpenID.',
 	'form_login_openid_pass' => 'Utiliser un mot de passe',
