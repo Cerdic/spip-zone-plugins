@@ -5,7 +5,7 @@
 	<langue code="ca" />
 	<langue code="de" />
 	<langue code="en">
-		<traducteur nom="filou" />
+		<traducteur nom="paolo2" />
 	</langue>
 	<langue code="es" />
 	<langue code="fa" />
@@ -14,4 +14,7 @@
 	</langue>
 	<langue code="it" />
 	<langue code="pt" />
+	<langue code="pt_br">
+		<traducteur nom="rporto" />
+	</langue>
 </traduction>
