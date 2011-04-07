@@ -13,7 +13,9 @@
 	<langue code="km" />
 	<langue code="lb" />
 	<langue code="nl" />
-	<langue code="pt_br" />
+	<langue code="pt_br">
+		<traducteur nom="rporto" />
+	</langue>
 	<langue code="ro" />
 	<langue code="sk" />
 	<langue code="sv" />
