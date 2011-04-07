@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'No author in the zone',
 	'info_aucune_zone' => 'No zone',
 	'info_auteurs_lies_zone' => 'Authors with access to this area',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'This page allows you to create restricted areas in your site',
 	'info_retirer_auteurs' => 'Remove all authors',
 	'info_retirer_zone' => 'Move out of area',
 	'info_retirer_zones' => 'Move out of all areas',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'Modify the zone',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Title',
 	'titre_ajouter_zone' => 'Add to a restricted area',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Modify a zone',
 	'titre_page_config' => 'Configure the access rights',
 	'titre_table' => 'All restricted areas',

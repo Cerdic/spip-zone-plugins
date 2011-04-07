@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Beschreibung',
 
 	// I
-	'icone_menu_config' => 'Beschränkter Zugang',
+	'icone_menu_config' => 'Zugangskontrolle',
 	'icone_supprimer_zone' => 'Bereich löschen',
 	'info_acces_restreint' => 'Diese Seite ist geschützt. Bitte melden sie sich an, um auf sie zuzugreifen.',
 	'info_ajouter_auteur' => 'Autor hinzufügen',
@@ -37,16 +37,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Kein Autor für diesen Bereich',
 	'info_aucune_zone' => 'Kein Bereich',
 	'info_auteurs_lies_zone' => 'Autoren mit Zugang zu diesem Bereich',
-	'info_page' => 'Hier können Sie die zugangsbeschränkten Bereiche Ihrer Webseite verwalten.',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
+	'info_page' => 'Hier können Sie die Bereiche mit Zugangskontrolle verwalten.',
 	'info_retirer_auteurs' => 'ALle Autoren entfernen',
 	'info_retirer_zone' => 'Bereich löschen',
 	'info_retirer_zones' => 'Alle Bereiche löschen',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'Bereich ändern',
 
 	// P
-	'page_zones_acces' => 'Eingeschränkter Zugang',
+	'page_zones_acces' => 'Zugangskontrolle',
 	'par_titre' => 'Nach Titel',
 	'privee' => 'Privat',
 	'publique' => 'Öffentlich',
@@ -61,10 +64,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'zum Bereich zufügen',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Bereich ändern',
 	'titre_page_config' => 'Zugangskonfiguration',
-	'titre_table' => 'Alle zugangsbeschränkten Bereiche',
-	'titre_zones_acces' => 'Bereiche mit Zugangsbeschränkung',
+	'titre_table' => 'Alle Bereiche mit Zugangskontrolle ',
+	'titre_zones_acces' => 'Bereiche mit Zugangskontrolle ',
 	'toutes' => 'Alle',
 
 	// V
@@ -72,8 +77,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// Z
 	'zone_numero' => 'BEREICH NUMMER:',
-	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich beschränken',
-	'zone_restreinte_publique' => 'Zugang auf der öffentlichen Webseite beschränken'
+	'zone_restreinte_espace_prive' => 'Zugang im Redaktionsbereich konrollieren',
+	'zone_restreinte_publique' => 'Zugang zu diesem Bereich in der öffentlichen Webseite kontrollieren'
 );
 
 ?>

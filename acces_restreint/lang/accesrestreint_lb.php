@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Aucun auteur dans la zone', # NEW
 	'info_aucune_zone' => 'Aucune zone', # NEW
 	'info_auteurs_lies_zone' => 'D\'Auteuren déi Zougang an dës Zone hun',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'Dës Säit erlabt déi limitéiert Zonen vun ärem Site anzestellen',
 	'info_retirer_auteurs' => 'Retirer tous les auteurs', # NEW
 	'info_retirer_zone' => 'Vun der Zone ewech huelen',
 	'info_retirer_zones' => 'Vun allen Zonen ewech huelen',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'Modifier la zone', # NEW
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'Bei d\'Zone derbäi kommen',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Modifier une zone', # NEW
 	'titre_page_config' => 'Configuration des accès', # NEW
 	'titre_table' => 'All Zougangs-Zonen',

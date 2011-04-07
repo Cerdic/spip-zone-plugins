@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Geen enkele auteur in de zone',
 	'info_aucune_zone' => 'Geen enkele zone',
 	'info_auteurs_lies_zone' => 'De auteurs die toegang tot deze zone hebben',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'Deze bladzijde laat u toe om de zones van beperkte toegang van uwsite te beheren',
 	'info_retirer_auteurs' => 'Alle auteurs terugtrekken',
 	'info_retirer_zone' => 'De zone wegnemen',
 	'info_retirer_zones' => 'Alle zones wegnemen',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'De zone wijzigen',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titel',
 	'titre_ajouter_zone' => 'Met de zone overeenkomen',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Een zone wijzigen',
 	'titre_page_config' => 'Configuration des accès', # NEW
 	'titre_table' => 'Alle zones van toegang',

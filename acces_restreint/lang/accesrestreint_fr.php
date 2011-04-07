@@ -62,8 +62,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titre',
 	'titre_ajouter_zone' => 'Rejoindre la zone',
-	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;',
 	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;',
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;',
 	'titre_cadre_modifier_zone' => 'Modifier une zone',
 	'titre_page_config' => 'Configuration des accès',
 	'titre_table' => 'Toutes les zones d\'accès',

@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Nici un autor în această zonă',
 	'info_aucune_zone' => 'Nici o zonă',
 	'info_auteurs_lies_zone' => 'Autorii care au acces la această zonă',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'Această pagină vă permite să gestionaţi zonele de acces restrâns din cadrul site-ului dumneavostră',
 	'info_retirer_auteurs' => 'Retrageţi toţi autorii',
 	'info_retirer_zone' => 'Scoateţi din zonă',
 	'info_retirer_zones' => 'Scoateţi din toate zonele',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'Modificaţi zona',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titlu',
 	'titre_ajouter_zone' => 'Regăsiţi zona',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Modificaţi o zonă',
 	'titre_page_config' => 'Configuration des accès', # NEW
 	'titre_table' => 'Toate zonele de acces',

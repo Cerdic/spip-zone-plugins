@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Bölümde (Zone) hiç yazar yok',
 	'info_aucune_zone' => 'Hiç bölüm (Zone) yok',
 	'info_auteurs_lies_zone' => 'Bu bölgeye erişim hakkı olan yazarlar',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'Bu sayfa, sitenizin kısıtlanmış bölgelerini yönetmenizi sağlar',
 	'info_retirer_auteurs' => 'Tüm yazarları sil',
 	'info_retirer_zone' => 'Bölgeden kaldır',
 	'info_retirer_zones' => 'Tüm bölgelerden kaldır',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'Bölümü (Zone) değiştir',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Başlık',
 	'titre_ajouter_zone' => 'Bölgeye gir',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Bir bölümü (Zone) değiştir',
 	'titre_page_config' => 'إعداد الدخول', # NEW
 	'titre_table' => 'Tüm erişim bölgeleri',

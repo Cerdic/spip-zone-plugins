@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'لا يوجد أي مؤلف في المنطقة',
 	'info_aucune_zone' => 'لا توجد أية منطقة',
 	'info_auteurs_lies_zone' => 'المؤلفون المسموح لهم الدخول الى هذه المنطقة',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'تتيح لك هذه الصفحة إدارة مناطق الدخول المحصور في الموقع',
 	'info_retirer_auteurs' => 'سحب جميع المؤلفين',
 	'info_retirer_zone' => 'سحب من المنطقة',
 	'info_retirer_zones' => 'إلغاء كل المناطق',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'تعديل المنطقة',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'الاسم',
 	'titre_ajouter_zone' => 'الربط بالمنطقة',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'تعديل منطقة',
 	'titre_page_config' => 'إعداد الدخول',
 	'titre_table' => 'كل مناطق الدخول',

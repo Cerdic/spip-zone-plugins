@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Dengún autor na zona',
 	'info_aucune_zone' => 'Denguna zona',
 	'info_auteurs_lies_zone' => 'Los autores con accesu a esta estaya',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'Estae páxina te permite xestionar les estayes con accesu torgáu nel to sitiu',
 	'info_retirer_auteurs' => 'Retirar toos los autores',
 	'info_retirer_zone' => 'Quitar de la estaya',
 	'info_retirer_zones' => 'Quitar de toes les estayes',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'Iguar la zona',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Títulu',
 	'titre_ajouter_zone' => 'Amestar la estaya',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Iguar una zona',
 	'titre_page_config' => 'Configuración de los accesos',
 	'titre_table' => 'Toes les estayes d\'accesu',

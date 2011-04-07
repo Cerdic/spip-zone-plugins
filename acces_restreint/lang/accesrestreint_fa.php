@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'نويسنده‌‌اي در منطقه نيست',
 	'info_aucune_zone' => 'هيچ منطقه',
 	'info_auteurs_lies_zone' => 'نويسندگان داراي دسترسي به اين منطقه',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'اين صفحه به شما اجازه مي‌دهد مناطق محدود سايت خود را اداره كنيد',
 	'info_retirer_auteurs' => 'حذف تمام نويسندگان',
 	'info_retirer_zone' => 'حذف منطقه',
 	'info_retirer_zones' => 'حذف تمام منطقه‌ها',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'اصلاح منطقه',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'تيتر ',
 	'titre_ajouter_zone' => 'افزودن به منطقه‌ي محدود',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'اصلاح يك منطقه',
 	'titre_page_config' => 'پيكربندي دسترسي‌ها',
 	'titre_table' => 'تمام منطقه‌هاي محدود',

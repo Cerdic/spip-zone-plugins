@@ -37,10 +37,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_aucun_auteur' => 'Nenhum autor na zona',
 	'info_aucune_zone' => 'Nenhuma zona',
 	'info_auteurs_lies_zone' => 'Os autores com acesso a esta área',
+	'info_lien_action_proteger' => 'Prot&eacute;ger l\'acc&egrave;s &agrave; cette rubrique.', # NEW
 	'info_page' => 'esta página permite-lhe gerar as áreas de acesso restrito do seu site',
 	'info_retirer_auteurs' => 'Excluir todos os autores',
 	'info_retirer_zone' => 'Retirar da área',
 	'info_retirer_zones' => 'retirar de todas as áreas',
+	'info_rubrique_dans_zone' => 'Cette rubrique fait partie de la zone :', # NEW
+	'info_rubrique_dans_zones' => 'Cette rubrique fait partie des zones :', # NEW
 
 	// M
 	'modifier_zone' => 'Alterar a zona',
@@ -61,6 +64,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Título',
 	'titre_ajouter_zone' => 'Aderir à área',
+	'titre_boite_protegee_non' => 'Acc&egrave;s non prot&eacute;g&eacute;', # NEW
+	'titre_boite_protegee_oui' => 'Acc&egrave;s prot&eacute;g&eacute;', # NEW
 	'titre_cadre_modifier_zone' => 'Alterar uma zona',
 	'titre_page_config' => 'Configuração dos acessos',
 	'titre_table' => 'Todas as áreas de acesso',

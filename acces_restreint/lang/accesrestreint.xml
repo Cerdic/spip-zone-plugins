@@ -7,7 +7,9 @@
 	</langue>
 	<langue code="br" />
 	<langue code="ca" />
-	<langue code="de" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
 	<langue code="en" />
 	<langue code="es">
 		<traducteur nom="boyquotes" />
