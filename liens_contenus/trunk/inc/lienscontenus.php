@@ -1,16 +1,34 @@
 <?php
-function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, $contenu)
+function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, $contenu = false)
 {
 	spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant, 'liens_contenus');
 
-	$liens_trouves = array();
+    $liens_trouves = array();
 
-	// Types et aliases
-	$liens_contenus_types = array('article', 'breve', 'rubrique', 'auteur', 'document', 'mot', 'syndic');
-	$liens_contenus_aliases = array('art' => 'article', 'br' => 'breve', 'brève' => 'breve', 'rub' => 'rubrique', 'aut' => 'auteur', 'doc' => 'document', 'im' => 'document', 'img' => 'document', 'image' => 'document', 'emb' => 'document', 'mot' => 'mot', 'site' => 'syndic');
+    // Types et aliases
+    $liens_contenus_types = array('article', 'breve', 'rubrique', 'auteur', 'document', 'mot', 'syndic');
+    $liens_contenus_aliases = array('art' => 'article', 'br' => 'breve', 'brève' => 'breve', 'rub' => 'rubrique', 'aut' => 'auteur', 'doc' => 'document', 'im' => 'document', 'img' => 'document', 'image' => 'document', 'emb' => 'document', 'mot' => 'mot', 'site' => 'syndic');
 
-	// Effacer les liens connus
-	sql_delete("spip_liens_contenus", "type_objet_contenant="._q($type_objet_contenant)." AND id_objet_contenant="._q($id_objet_contenant));
+    // Effacer les liens connus
+    sql_delete("spip_liens_contenus", "type_objet_contenant="._q($type_objet_contenant)." AND id_objet_contenant="._q($id_objet_contenant));
+
+    if ($contenu === false) {
+        spip_log('- recuperation du contenu en base', 'liens_contenus');
+
+        // Le contenu n'a pas été fourni, il faut le récupérer en base
+        if (in_array($type_objet_contenant, array('syndic', 'forum'))) {
+            $row = sql_fetsel("*", "spip_".$type_objet_contenant, "id_".$type_objet_contenant."="._q($id_objet_contenant));
+        } else {
+            // Marche aussi pour les formulaires (type = "form")
+            $row = sql_fetsel("*", "spip_".$type_objet_contenant."s", "id_".$type_objet_contenant."="._q($id_objet_contenant));
+        }
+        if ($row) {
+            // implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
+            $contenu = implode(' ', $row);
+        } else {
+            $contenu = '';
+        }
+    }
 
 	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
 	include_spip('inc/texte');
@@ -57,6 +75,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 						$nb = sql_countsel("spip_documents_liens", "objet='".$type_objet_contenant."' AND id_document=".$id_objet_contenu." AND id_objet=".$id_objet_contenant);
 						if ($nb == 1) {
 							// Si le doc est rattache a l'article ou la rubrique courant, on ne doit pas le comptabiliser
+                            // TODO: En fait si, non ?
 							$nouveau_lien = false;
 						}
 					}
@@ -131,6 +150,8 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 // (re)initialisation de la table des liens
 function lienscontenus_initialiser()
 {
+    include_spip('base/abstract_sql');
+
 	// vider la table
 	sql_delete("spip_liens_contenus");
 	spip_log('Initialisation des contenus', 'liens_contenus');
@@ -149,8 +170,14 @@ function lienscontenus_initialiser()
     	if ($res = sql_select("*", $table)) {
     		while ($row = sql_fetch($res)) {
     			$id_objet_contenant = $row[$col_id];
-    			// implode() n'est pas forcement le plus propre conceptuellement, mais ca doit convenir et c'est rapide
-    			lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, implode(' ', $row));
+                sql_insertq(
+                    "spip_liens_contenus_todo",
+                    array(
+                        "type_objet_contenant" => $type_objet_contenant,
+                        "id_objet_contenant" => $id_objet_contenant,
+                        "date_added" => time()
+                    )
+                );
     		}
     	}
     }

@@ -8,14 +8,15 @@ function lienscontenus_pre_edition($flux)
 	}
 
 	$id_objet = $flux['args']['id_objet'];
-  $type_objet = $flux['args']['type'];
-  $data = $flux['data'];
+    $type_objet = $flux['args']['type'];
+    $data = $flux['data'];
 
-  // Traitement des redirections
+    // Traitement des redirections
 	if ($type_objet == 'article' && substr($data['chapo'], 0, 1) == '=') {
 		$data['chapo'] = '[->'.substr($data['chapo'], 1).']';
 	}
 
+    // On fait le traitement tout de suite et non pas avec le génie pour que l'utilisateur ait l'interface à jour
 	lienscontenus_referencer_liens($type_objet, $id_objet, implode(' ',$data));
 
 	return $flux;
@@ -55,5 +56,10 @@ function lienscontenus_header_prive($flux)
 	// On ajoute une CSS pour le back-office
 	$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_LIENSCONTENUS.'/css/styles.css" />';
 	return $flux;
+}
+
+function lienscontenus_taches_generales_cron($taches_generales) {
+	$taches_generales['lienscontenus_queue_process'] = 60; // toutes les minutes
+    return $taches_generales;
 }
 ?>

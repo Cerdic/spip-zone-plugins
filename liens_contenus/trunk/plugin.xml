@@ -2,7 +2,7 @@
 	<nom>Liens inter-contenus</nom>
 	<auteur>Nicolas Hoizey</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.20</version>
+	<version>0.21</version>
 	<version_base>0.4</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>dev</etat>
@@ -12,7 +12,6 @@ Ce plugin (pour SPIP 2.1.0+) permet d'identifier les liens d&eacute;finis entre 
 Reste &agrave; faire :
 -* Etendre le contr&ocirc;le de d&eacute;publication aux actions dans les listes
 -* Proposer une option de configuration pour interdire la suppression d'objets li&eacute;s depuis des objets en ligne ou juste alerter
--* Initialisation progressive en cron pour les gros sites
 -* R&eacute;f&eacute;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&eacute;dric ?)
 	</description>
   <chemin dir='' />
@@ -37,6 +36,10 @@ Reste &agrave; faire :
 		<action>header_prive</action>
 		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
+    <pipeline>
+        <nom>taches_generales_cron</nom>
+        <inclure>lienscontenus_pipelines.php</inclure>
+    </pipeline>
 	<categorie>navigation</categorie>
     <necessite id='SPIP' version='[2.1.0;]' />
 	<traduire gestionnaire='salvatore' module='lienscontenus' reference='fr' />
