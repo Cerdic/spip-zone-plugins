@@ -8,7 +8,9 @@
 	<langue code="de">
 		<traducteur nom="filou" />
 	</langue>
-	<langue code="en" />
+	<langue code="en">
+		<traducteur nom="paolo2" />
+	</langue>
 	<langue code="eo" />
 	<langue code="es" />
 	<langue code="eu" />

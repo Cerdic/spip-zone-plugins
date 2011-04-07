@@ -23,11 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_@type@_@id@' => 'Edit the whole @type@ @id@',
 	'editer_tout' => 'Edit as a whole',
 	'effets' => 'Effects',
-	'explication_exec_autorise' => 'Pages which are open for modification
-  (?exec=...) : (, separate the exec).', # MODIF
+	'explication_exec_autorise' => 'Pages which are authorised fro changes
+  (?exec=...) : (, to separate several pages- * for all).',
 	'explication_introduction_article' => 'The introduction for an article displays the description of the article if there is one, otherwise it displays the first 600 characters (of the standfirst and text).',
-	'explication_reduire_logo' => 'Reduce the logo if it exceeds
-  the maximum size (in pixels) Example: 100. (0 = never)', # MODIF
+	'explication_reduire_logo' => 'Reduce the logo size if it exceeds
+  the maximum size (in pixels).Example: 100. (0 = never)',
 
 	// L
 	'label_activer_barre_typo' => 'Activate the typographical bar for "Pencils"?',
