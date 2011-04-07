@@ -20,6 +20,21 @@ function lienscontenus_declarer_tables_principales($tables_principales) {
     'key' => &$spip_liens_contenus_key
   );
 
+  $spip_liens_contenus_todo = array(
+    'type_objet_contenant'  => 'varchar(10)', // article, rubrique, breve, site, mot, auteur, document
+    'id_objet_contenant'  => 'int UNSIGNED NOT NULL',
+    'date_added' => 'int(11) NOT NULL'
+  );
+
+  $spip_liens_contenus_todo_key = array(
+    'PRIMARY KEY' => 'type_objet_contenant, id_objet_contenant',
+  );
+
+  $tables_principales['spip_liens_contenus_todo'] = array(
+    'field' => &$spip_liens_contenus_todo,
+    'key' => &$spip_liens_contenus_todo_key
+  );
+
   return $tables_principales;
 }
 ?>
