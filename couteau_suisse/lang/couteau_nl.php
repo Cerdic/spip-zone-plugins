@@ -91,7 +91,7 @@ Ontdekt in dit plugin uw lievelingswerktuigen: {Typografische Inzenders}, {typog
 Aarzelt niet om de gepubliceerde artikelen van documentatie van plugin over te raadplegen : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Verenigbaarheid: SPIP 1.92x en v2.0.x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
 	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
 	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW

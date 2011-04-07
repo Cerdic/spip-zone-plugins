@@ -91,7 +91,7 @@ Descubra neste módulo as súas ferramentas favoritas : {Suprimir o numéro}, {F
 Non dubide en consultar os artigos de documentación do módulo publicados en  : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilidade : SPIP todas as versións 1.9x, v2.0 e v2.1.x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Inserir un bloque repregado',
 	'pp_blocs_visible' => 'Inserir un bloque despregado',
 	'pp_chatons_inserer' => 'Inserir « @chaton@ »',

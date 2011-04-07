@@ -93,7 +93,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 بنگريد به مقالات استنادي در: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 تطابق: SPIP 1.92xو ورژن 2 .0.ط و ورژن 2.1.x',
-	'pp_autobr' => 'گنجاندن با پيوندهاي خود ارجاع به آن',
+	'pp_autobr' => 'گنجاندن با پيوندهاي خود ارجاع به آن', # MODIF
 	'pp_blocs_bloc' => 'گنجاندن يك بلوك فروريخته',
 	'pp_blocs_visible' => 'گنجاندن يك بلوك گسترش يافته',
 	'pp_chatons_inserer' => 'گنجاندن صورتك « @chaton@ »',

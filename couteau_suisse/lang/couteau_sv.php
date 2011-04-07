@@ -91,7 +91,7 @@ Find your favourite tools in this plugin: {Superscript}, {Curly inverted commas}
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP 1.9x (all versions)', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
 	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
 	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW

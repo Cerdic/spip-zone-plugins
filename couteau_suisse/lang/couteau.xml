@@ -2,7 +2,9 @@
 	<langue code="ar" />
 	<langue code="ast" />
 	<langue code="br" />
-	<langue code="ca" />
+	<langue code="ca">
+		<traducteur nom="merce" />
+	</langue>
 	<langue code="de" />
 	<langue code="en">
 		<traducteur nom="mark_baber" />

@@ -91,7 +91,7 @@ Descubre nesti plugin les tos ferramientes favorites: {Suprime\'l númberu}, {Fo
 Si quies consultar los artículos de la documentación del plugin, tan espublizaos en: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilidá: SPIP v1.9x y v2.0', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
 	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
 	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW

@@ -91,7 +91,7 @@ Some of your already familiar favourite tools are included in this plugin: {Dele
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
-	'pp_autobr' => 'Insert a block with automatic line returns',
+	'pp_autobr' => 'Insert a block with automatic line returns', # MODIF
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',
 	'pp_chatons_inserer' => 'Insert the " @chaton@ " emoticon/smiley',

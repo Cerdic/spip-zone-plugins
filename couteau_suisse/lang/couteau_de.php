@@ -91,7 +91,7 @@ Wählen Sie die für Sie wichtigsten Funktionen: {Ziffern entfernen}, {Typ der U
 Bitte lesen Sie auch die Artikel auf : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.xKompatibel mit: SPIP 1.9x und v2.0', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques', # NEW
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
 	'pp_blocs_bloc' => 'Eingeklappten Block einfügen',
 	'pp_blocs_visible' => 'Geöffneten Block einfügen',
 	'pp_chatons_inserer' => 'Smiley « @chaton@ » einfügen',

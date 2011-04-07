@@ -44,7 +44,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'maj_rev' => 'Rév. @revision@',
 	'maj_rev_ko' => 'La [revisió a distància->@url@] no s\'ha trobat.',
 	'maj_rev_ok' => 'La revisió [@revision@->@url@] està [disponible->@zip@].',
-	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
+	'maj_spip' => 'Després d\'haver actualitzar tots els connectors amb precaució, és recomanable que actualitzeu el propi SPIP clicant a l\'enllaç que hi ha més amunt i seguint les instruccions que s\'hi donen.',
 	'maj_svn' => 'Aquest plugin SVN sembla [al dia->@url@].',
 	'maj_verif' => 'Verifiqueu prèviament l\'arxiu que us convé:',
 	'maj_verif2' => 'Atenció: després de clicar el botó que hi ha més amunt, verifiqueu bé que l\'arxiu descarregat correspongui al plugin que us calia actualitzar. ',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'plug_inactifs' => 'Plugins inactius',
 	'plugin_xml' => 'Reuneix en un únic connector (plugin) una llista de petites noves funcionalitats i eines que milloren la gestió del vostre lloc SPIP.
 
-Cadascuna d\'aquestes eines pot ser activada o no per l\'usuari a [la pàgina d\'administració del plugin->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: feu un clic a {{Configuració}}, després escolliu la pestanya {{El Ganivet Suís}}.
+Cadascuna d\'aquestes eines pot ser activada o no per l\'usuari a [la pàgina d\'administració del connector->./?exec=admin_couteau_suisse] i gestionar un cert nombre de variables: cliqueu damunt de {{Configuració}}, després escolliu la pestanya {{El Ganivet Suís}}.
 
 Les categories disponibles són: Administració, Millores tipogràfiques, Dreceres tipogràfiques, Visualització pública, Etiquetes, filtres, criteris.
 
@@ -90,8 +90,8 @@ Descobriu en aquest connector les vostres eines favorites: {Suprimir el número}
 
 No dubteu a consultar els articles de la documentació del connector publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques', # NEW
+Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x',
+	'pp_autobr' => 'Inserir un bloc allà on els salts de línia són automàtics ', # MODIF
 	'pp_blocs_bloc' => 'Inserir un bloc replegat ',
 	'pp_blocs_visible' => 'Inserir un bloc desplegat',
 	'pp_chatons_inserer' => 'Inserir el xat « @chaton@ »',
