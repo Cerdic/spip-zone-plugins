@@ -62,7 +62,7 @@ function lienscontenus_verifier_si_existe($type_objet, $id_objet)
 				$nb = sql_countsel("spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
 			} else {
 				// Marche aussi pour les formulaires (type = "form")
-        $nb = sql_countsel("spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
+                $nb = sql_countsel("spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
 			}
 			return ($nb == 1 ? 'ok' : 'ko');
 	}
@@ -70,35 +70,26 @@ function lienscontenus_verifier_si_existe($type_objet, $id_objet)
 
 function lienscontenus_icone_statut($type_objet, $id_objet)
 {
-	$listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
-	include_spip('base/abstract_sql');
-	if (in_array($type_objet, array('syndic', 'forum'))) {
-		$res = sql_select("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
-	} else {
-		// Marche aussi pour les formulaires (type = "form")
-    $res = sql_select("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
-	}
-	if ($res) {
-		$row = sql_fetch($res);
-		if (in_array($row['statut'], $listeStatuts)) {
-			return '<img src="'._DIR_PLUGIN_LIENSCONTENUS.'/images/statut-'.$row['statut'].'.gif" align="absmiddle" alt="'._T('lienscontenus:statut_'.$row['statut']).'" />';
-		} else {
-			return '';
-		}
-	} else {
-		return '';
-	}
+	$statut = lienscontenus_statut($type_objet, $id_objet);
+    if ($statut != '') {
+        return '<img src="'._DIR_PLUGIN_LIENSCONTENUS.'/images/statut-'.$statut.'.gif" align="absmiddle" alt="'._T('lienscontenus:statut_'.$statut).'" />';
+    } else {
+        return '';
+    }
 }
 
 function lienscontenus_statut($type_objet, $id_objet)
 {
 	$listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
 	include_spip('base/abstract_sql');
-	if (in_array($type_objet, array('syndic', 'forum'))) {
-    $res = sql_select("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
+	if ($type_objet == 'document') {
+        // TODO: gérer le statut des docs si médiathèque est installé
+        $res = false;
+    } elseif (in_array($type_objet, array('syndic', 'forum'))) {
+        $res = sql_select("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
 	} else {
 		// Marche aussi pour les formulaires (type = "form")
-    $res = sql_select("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
+        $res = sql_select("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
 	}
 	if ($res) {
 		$row = sql_fetch($res);
