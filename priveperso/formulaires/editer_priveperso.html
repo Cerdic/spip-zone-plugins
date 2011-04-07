@@ -106,7 +106,7 @@
    </td></tr>
 </table>
 </fieldset>
-<B_affbreves>
+
 <fieldset>
 <table border='0' cellspacing='1' cellpadding='3' width="100%">
 	<tr><td align='left' class='verdana2'>	
@@ -116,8 +116,7 @@
    </td></tr>
 </table>
 </fieldset>
-<BOUCLE_affbreves(RUBRIQUES){id_secteur=#ENV{rub_id}}{tout}>
-</BOUCLE_affbreves>
+
 <fieldset>
 	<label><:priveperso:les_articles_syndiques:></label>
    <input type="radio" name="activer_sites" value="non" [checked="(#ENV{activer_sites}|=={non}|oui)"] /><label><:priveperso:non:></label>   
@@ -211,9 +210,7 @@
    <input type="text" class="text" name="info_texte_explicatif" value="#ENV{info_texte_explicatif}" size="40" />
    <br>(#ENV{rubriques_texte}|=={oui}|oui)]
 </fieldset>
-(#ENV{textperso}|=={oui}|oui)]
-<B_affbreves_texte>
-[[<fieldset><legend><h4><:priveperso:info_contenu_breves:></h4></legend>
+[<fieldset><legend><h4><:priveperso:info_contenu_breves:></h4></legend>
 	<label><:icone_nouvelle_breve:></label>
 	<input type="text" class="text" name="icone_nouvelle_breve" value="#ENV{icone_nouvelle_breve}" size="40" />
    <br>   
@@ -244,8 +241,7 @@
 </fieldset>
 (#ENV{activer_breves}|=={oui}|oui)]
 (#ENV{textperso}|=={oui}|oui)]
-<BOUCLE_affbreves_texte(RUBRIQUES){id_secteur=#ENV{rub_id}}>
-</BOUCLE_affbreves_texte>
+
 
 
 </BOUCLE_aff>

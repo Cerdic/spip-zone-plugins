@@ -2,12 +2,12 @@
 	<nom>Personnaliser l'espace privé</nom>
 	<auteur>Sébastien Zamith</auteur>
 	<icon>images/priveperso-24.png</icon>
-	<version>0.4</version>
+	<version>0.5</version>
 	<version_base>0.3</version_base>
 	<licence>GNU/GPL v3</licence>
 	<etat>test</etat>
 	<description>Personnalisation de l'espace priv&eacute; par rubriques.</description>
-	<lien>http://www.spip-contrib.net/</lien>
+	<lien>http://www.spip-contrib.net/Plugin-personnaliser-l-espace-prive-par-rubriques</lien>
 	<install>base/install_priveperso.php</install>
 	<prefix>priveperso</prefix>
 	<categorie>edition</categorie>
