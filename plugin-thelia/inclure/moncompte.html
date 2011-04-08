@@ -1,0 +1,30 @@
+<h2 class="h2"><:spipthelia:mon_compte:></h2>
+	<ul class="menu-liste">
+		<THELIA SI NON CONNECTE>
+		[(#SESSION{id_auteur}|non)
+			<li class="menu-entree"><a href="[(#URL_PAGE{connexion})]"><:spipthelia:se_connecter:></a></li>
+			<li class="menu-entree"><a href="#URL_PAGE{mdpoublie}"><:spipthelia:mdp_oublie:></a></li>
+		]
+		[(#SESSION{id_auteur}|oui)
+			<li class="menu-entree"><a href="#URL_LOGOUT{#URL_SITE_SPIP}"><:spipthelia:se_deconnecter:></a></li>
+		]
+		</THELIA SI NON CONNECTE>
+		
+		<THELIA SI CONNECTE>
+			<li class="menu-entree"><a href="#URL_PAGE{moncompte}"><:spipthelia:mon_compte:></a></li>
+			[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|oui)
+			      <li><a href="[(#URL_SITE_SPIP|parametre_url{action,logout}|parametre_url{logout,public}|parametre_url{url,[(#URL_SITE_SPIP|parametre_url{thelia_action,deconnexion})]})]"><:spipthelia:se_deconnecter:></a></li>
+			]
+			[(#CONFIG{spip_thelia/auth_unique_spip_thelia}|=={"oui"}|non)
+			      <li class="menu-entree"><a href="#URL_PAGE{sommaire,thelia_action=deconnexion}"><:spipthelia:se_deconnecter:></a></li>
+			]
+		</THELIA SI CONNECTE>
+		
+		<T_PANIER>
+			<li class="menu-entree"><a href="#URL_PAGE{panier}"><:spipthelia:panier_contient:></a></li>
+		<THELIA_PANIER type="PANIER">
+		</THELIA_PANIER>
+		</T_PANIER>
+			<li class="menu-entree"><a href="#URL_PAGE{panier}"><:spipthelia:panier_vide:></a></li>
+		<//T_PANIER>
+	</ul> 
