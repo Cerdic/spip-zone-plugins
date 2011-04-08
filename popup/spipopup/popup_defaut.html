@@ -44,6 +44,8 @@
 	    <div class="hentry" id="contenu">
 
 <BOUCLE_principale_article(ARTICLES) {id_article=#ENV{id_article}}>
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="javascript:_goto('#URL_SITE_SPIP/',true,true);" title="<:spipopup:retour_fenetre:>"><:accueil_site:></a><BOUCLE_ariane_article(HIERARCHIE){id_article}> &gt; <a href="javascript:_goto('[(#URL_RUBRIQUE|url_absolue)]',true,true);" title="<:spipopup:retour_fenetre:>">[(#TITRE|couper{80})]</a></BOUCLE_ariane_article>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 	[(#LOGO_ARTICLE||image_reduire{100,100})]
 	<h1>#TITRE</h1>
 	<div id="espacetexte">
@@ -57,6 +59,8 @@
 </BOUCLE_principale_article>
 
 <BOUCLE_principale_breve(BREVES) {id_breve=#ENV{id_breve}}>
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="javascript:_goto('#URL_SITE_SPIP/',true,true);" title="<:spipopup:retour_fenetre:>"><:accueil_site:></a><BOUCLE_ariane_breve(RUBRIQUES){id_rubrique}> &gt; <a href="javascript:_goto('[(#URL_RUBRIQUE|url_absolue)]',true,true);" title="<:spipopup:retour_fenetre:>">[(#TITRE|couper{80})]</a></BOUCLE_ariane_breve>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
     [(#LOGO_BREVE||image_reduire{100,100})]
 	<h1>#TITRE</h1>
 	<div id="espacetexte">
@@ -69,6 +73,8 @@
 </BOUCLE_principale_breve>
 
 <BOUCLE_principale_auteur(AUTEURS) {id_auteur=#ENV{id_auteur}}>
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="javascript:_goto('#URL_SITE_SPIP/',true,true);" title="<:spipopup:retour_fenetre:>"><:accueil_site:></a> &gt; <:info_auteurs:>[ &gt; <strong class="on">(#NOM|couper{80})</strong>]</div>
 <div class="vcard">[(#REM) microformat vcard]
 	<div class="cartouche">
 	    [(#LOGO_AUTEUR||image_reduire{100,100})]
@@ -83,22 +89,26 @@
 </BOUCLE_principale_auteur>
 
 <BOUCLE_principale_site(SITES){id_syndic=#ENV{id_syndic}}>
-        <div class="cartouche">
-            <a href="javascript:_goto('#URL_SITE', true);">[(#LOGO_SITE|image_reduire{150,100})]</a>
-            <h1 class="">#NOM_SITE</h1>
-        </div>
-        [<div class="chapo">(#DESCRIPTIF|popup_liens_retour)</div>]
-        [<p class="hyperlien comment"><a href="javascript:_goto('#URL_SITE', true);" class="spip_out">(#URL_SITE|couper{80})</a></p>]
-        [<div class="notes comment"><h2><:info_notes:></h2>(#NOTES|popup_liens_retour)</div>]
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="javascript:_goto('#URL_SITE_SPIP/',true,true);" title="<:spipopup:retour_fenetre:>"><:accueil_site:></a><BOUCLE_ariane_site(HIERARCHIE){id_syndic}> &gt; <a href="javascript:_goto('[(#URL_RUBRIQUE|url_absolue)]',true,true);" title="<:spipopup:retour_fenetre:>">[(#TITRE|couper{80})]</a></BOUCLE_ariane_site>[ &gt; <strong class="on">(#NOM_SITE|couper{80})</strong>]</div>
+    <div class="cartouche">
+        <a href="javascript:_goto('#URL_SITE', true);">[(#LOGO_SITE|image_reduire{150,100})]</a>
+        <h1 class="">#NOM_SITE</h1>
+    </div>
+    [<div class="chapo">(#DESCRIPTIF|popup_liens_retour)</div>]
+    [<p class="hyperlien comment"><a href="javascript:_goto('#URL_SITE', true);" class="spip_out">(#URL_SITE|couper{80})</a></p>]
+    [<div class="notes comment"><h2><:info_notes:></h2>(#NOTES|popup_liens_retour)</div>]
 </BOUCLE_principale_site>
 
 <BOUCLE_principale_mot(MOTS) {id_mot=#ENV{id_mot}}>
-        <div class="cartouche">
-            [(#LOGO_MOT|image_reduire{100,100})]
-            <h1 class="">#TITRE</h1>
-        </div>
-        [<div class="texte">(#TEXTE*|popup_liens_retour|propre|image_reduire{400,400})</div>]
-        [<div class="notes comment"><h2><:info_notes:></h2>(#NOTES|popup_liens_retour)</div>]
+    [(#REM) Fil d'Ariane ]
+    <div id="hierarchie"><a href="javascript:_goto('#URL_SITE_SPIP/',true,true);" title="<:spipopup:retour_fenetre:>"><:accueil_site:></a> &gt; <:mots_clefs:><BOUCLE_ariane_mot(GROUPES_MOTS){id_groupe}> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane_mot>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+    <div class="cartouche">
+        [(#LOGO_MOT|image_reduire{100,100})]
+        <h1 class="">#TITRE</h1>
+    </div>
+    [<div class="texte">(#TEXTE*|popup_liens_retour|propre|image_reduire{400,400})</div>]
+    [<div class="notes comment"><h2><:info_notes:></h2>(#NOTES|popup_liens_retour)</div>]
 </BOUCLE_principale_mot>
 
 [(#REM) Pour les documents ]

@@ -1,0 +1,23 @@
+[(#REM)
+        modele pour les documents SPIP
+        indiquer :
+
+        <popup_img
+                |doc=le numero du document (necessaire)
+                |lien=objet SPIP pour le lien (necessaire)
+                |skel=squelette (option)
+                |width=XX (option)
+                |height=XX (option)
+                |titre=mon titre (option)
+        >
+
+]
+<BOUCLE_popup_img (DOCUMENTS types_documents) {id_document=#ENV{doc}} {tout}>
+[(#ENV{lien}|=={''}|non)[(#ENV{doc}|=={''}|non)
+<a href="#POPUP{#ENV{lien},#ENV{skel,''},#ENV{width,''},#ENV{height,''},#ENV{titre,''}}">
+	<img src='#URL_DOCUMENT'[ width="(#LARGEUR)"][ height="(#HAUTEUR)"][
+        title="(#TITRE|attribut_html)"]
+        alt="[(#TITRE|attribut_html|sinon{document_#ID_DOCUMENT})]" />
+</a>
+]]
+</BOUCLE_popup_img>

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @name 		JavascriptPopup_lang_FR
+ * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ */
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Description
@@ -58,5 +63,6 @@ Choisissez ci-dessous la hauteur par d&eacute;faut de la fen&ecirc;tre, {{en pix
 	'btn_haut_page' => 'Haut de page',
 	'btn_haut_page_ttl' => 'Retour en haut de page',
 	'nouvelle_fenetre' => '[Nouvelle fen&#234;tre]',
+	'retour_fenetre' => '[Retour en fen&#234;tre principale]',
 );
 ?>
