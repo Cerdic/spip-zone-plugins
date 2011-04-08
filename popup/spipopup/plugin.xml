@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Balise &#035;POPUP</nom>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<version>1.01</version>
-	<licence>&#169; 2010 [GPL->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+	<version>1.02</version>
+	<licence>&#169; 2010/2011 [GPL->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
 	<icon>images/popup-128.png</icon>
 	<etat>dev</etat>
 	<lien>[Documentation sur Spip-Contrib->http://www.spip-contrib.net/?article3573]</lien>
