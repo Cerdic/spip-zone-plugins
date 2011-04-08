@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'legende_liens_faux_objets' => 'Les liens en rouge et barrés indiquent des contenus liés qui n\'existent pas.',
-	'liens_inter_contenus' => 'Liens inter-contenus',
+	'liens_entre_contenus' => 'Liens entre contenus',
 
 	// O
 	'objets_avec_liens_depuis_courant' => 'Ce contenu contient des liens vers ceux-ci :',
