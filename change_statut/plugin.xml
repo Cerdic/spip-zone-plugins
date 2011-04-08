@@ -1,0 +1,41 @@
+<plugin>
+	<nom>Change Statut</nom>
+	<auteur>Yffic</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Changer temporairement et d'un clic son statut de webmestre en administrateur ou rédacteur. Puis revenir &agrave; la situation originale</description>
+	<icon>images/changestatut-32.png</icon>
+	<prefix>changestatut</prefix>
+	<install>base/changestatut_install.php</install>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>changestatut_prive_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		 <nom>autoriser</nom>
+		 <inclure>inc/changestatut_autoriser.php</inclure>
+	</pipeline>
+	<bouton id='versredacteur21' parent="outils_rapides">
+		<icone>images/changestatut_versredacteur-16.png</icone>
+		<titre>changestatut:versredacteur</titre>
+		<url>changestatut</url>
+		<args>statut=redacteur</args>
+	</bouton>
+	<bouton id='versadmin21' parent="outils_rapides">
+		<icone>images/changestatut_versadmin-16.png</icone>
+		<titre>changestatut:versadmin</titre>
+		<url>changestatut</url>
+		<args>statut=admin</args>
+	</bouton>
+	<bouton id='verswebmestre21' parent="outils_rapides">
+		<icone>images/changestatut_verswebmestre-16.png</icone>
+		<titre>changestatut:verswebmestre</titre>
+		<url>changestatut</url>
+		<args>statut=webmestre</args>
+	</bouton>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="bando" version="[1.1.;]" />
+	<categorie>outils</categorie>
+</plugin>
