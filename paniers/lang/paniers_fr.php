@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_taxes' => 'Dont taxes',
 	'panier_total_ht' => 'Total hors taxe',
 	'panier_total_ttc' => 'Total',
+	'panier_valider' => 'Valider mon panier',
 	'panier_vide' => 'Le panier est vide.',
 	'paniers' => 'Paniers',
 );
