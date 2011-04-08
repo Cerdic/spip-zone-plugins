@@ -1,4 +1,8 @@
 <?php
+/**
+ * @name 		JavascriptPopup_balise
+ * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_POPUP_dist($p) {

@@ -1,11 +1,10 @@
 <?php
 /**
- * @name 		JavascriptPopup
+ * @name 		JavascriptPopup_options
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  *
- * TODOS
- * - gerer le retour : fermer la popup ou NON (option en +)
- * - plusieurs popups ?
+ * @todo gerer le retour : fermer la popup ou NON (option en +)
+ * @todo plusieurs popups ?
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	

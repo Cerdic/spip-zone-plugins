@@ -1,6 +1,6 @@
 <?php
 /**
- * @name 		JavascriptPopup
+ * @name 		JavascriptPopup_fonctions
  * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
