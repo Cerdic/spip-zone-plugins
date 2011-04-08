@@ -1,0 +1,19 @@
+<plugin>
+	<nom>Clients</nom>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Permet l'inscription facile et configurable pour des clients, en les inscrivant comme utilisateurs et contacts dans le même temps. Ils peuvent ensuite modifier leur profil.</description>
+	<categorie>auteur</categorie>
+	<icon></icon>
+	
+	<prefix>clients</prefix>
+	
+	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="spip_bonux" version="[2.2.17;]" />
+	<necessite id="saisies" version="[1.9.0;]" />
+	<necessite id="contacts" version="[1.4.4;]" />
+	<necessite id="coordonnees" version="[1.3.1;]" />
+</plugin>
