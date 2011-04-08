@@ -17,6 +17,7 @@
 function formulaires_editer_article_accueil_charger($id_rubrique){
 	$valeurs = array();
 	$valeurs['id_rubrique'] = $id_rubrique;
+	include_spip('base/abstract_sql');
 	$valeurs['id_article_accueil'] = sql_getfetsel('id_article_accueil','spip_rubriques','id_rubrique='.intval($id_rubrique));
 	$valeurs['_hide'] = (is_null(_request('id_article_accueil'))?' ':'');
 	return $valeurs;
