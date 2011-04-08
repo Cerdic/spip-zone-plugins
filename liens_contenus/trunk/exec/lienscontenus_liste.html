@@ -3,7 +3,7 @@
 <B_objets_avec_liens_vers_courant>
     <p><:lienscontenus:objets_avec_liens_vers_courant:></p>
     <ul class="liens_contenus" id="liens_contenus_contenants">
-    <BOUCLE_objets_avec_liens_vers_courant(SPIP_LIENS_CONTENUS){type_objet_contenu=#TYPE_OBJET}{id_objet_contenu=#ID_OBJET}{par type_objet_contenant, id_objet_contenant}>
+    <BOUCLE_objets_avec_liens_vers_courant(LIENS_CONTENUS){type_objet_contenu=#TYPE_OBJET}{id_objet_contenu=#ID_OBJET}{par type_objet_contenant, id_objet_contenant}>
         <li class="#TYPE_OBJET_CONTENANT[ (#TYPE_OBJET_CONTENANT|lienscontenus_statut{#ID_OBJET_CONTENANT})]">[(#TYPE_OBJET_CONTENANT|lienscontenus_icone_statut{#ID_OBJET_CONTENANT}) ]<a href="[(#TYPE_OBJET_CONTENANT|lienscontenus_generer_url{#ID_OBJET_CONTENANT})]">[(#TYPE_OBJET_CONTENANT|lienscontenus_titre_contenu{#ID_OBJET_CONTENANT}) ](#TYPE_OBJET_CONTENANT #ID_OBJET_CONTENANT)</a></li>
     </BOUCLE_objets_avec_liens_vers_courant>
     </ul>
@@ -13,7 +13,7 @@
 <B_objets_avec_liens_depuis_courant>
     <p><:lienscontenus:objets_avec_liens_depuis_courant:></p>
     <ul class="liens_contenus" id="liens_contenus_contenus">
-    <BOUCLE_objets_avec_liens_depuis_courant(SPIP_LIENS_CONTENUS){type_objet_contenant=#TYPE_OBJET}{id_objet_contenant=#ID_OBJET}{par type_objet_contenu, id_objet_contenu}>
+    <BOUCLE_objets_avec_liens_depuis_courant(   LIENS_CONTENUS){type_objet_contenant=#TYPE_OBJET}{id_objet_contenant=#ID_OBJET}{par type_objet_contenu, id_objet_contenu}>
         <li class="#TYPE_OBJET_CONTENU[ (#TYPE_OBJET_CONTENU|lienscontenus_statut{#ID_OBJET_CONTENU})] [(#TYPE_OBJET_CONTENU|lienscontenus_verifier_si_existe{#ID_OBJET_CONTENU})]">[(#TYPE_OBJET_CONTENU|lienscontenus_icone_statut{#ID_OBJET_CONTENU}) ]<a href="[(#TYPE_OBJET_CONTENU|lienscontenus_generer_url{#ID_OBJET_CONTENU})]">[(#TYPE_OBJET_CONTENU|lienscontenus_titre_contenu{#ID_OBJET_CONTENU}) ](#TYPE_OBJET_CONTENU #ID_OBJET_CONTENU)</a></li>
     </BOUCLE_objets_avec_liens_depuis_courant>
     </ul>
