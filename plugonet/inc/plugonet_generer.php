@@ -133,9 +133,9 @@ function plugin2paquet($D, $dir, $nom)
 		($version ? "\n\tversion='$version'" : '') .
 		($version_base ? "\n\tversion_base='$version_base'" : '');
 
-	$nom = plugin2paquet_texte('nom', $nom, $dir);
-	$licence = plugin2paquet_texte('licence', $D['licence'], $dir);
-	$auteur = plugin2paquet_auteur($D['auteur'], $dir);
+	$nom = plugin2paquet_texte('nom', $nom);
+	$licence = plugin2paquet_texte('licence', $D['licence']);
+	$auteur = plugin2paquet_auteur($D['auteur']);
 	
 	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
 	$pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
@@ -258,7 +258,7 @@ function plugin2paquet_description($description, $slogan, $plug, $dir)
 // - elimination des multi (exclue dans la nouvelle version)
 // - transformation en attribut des balises A
 // - interpretation des balises BR et LI et de la virgule et du espace+tiret comme separateurs
-function plugin2paquet_auteur($texte, $plug) {
+function plugin2paquet_auteur($texte) {
 
 	// On extrait le multi si besoin et on selectionne la traduction francaise
 	$t = plugin2paquet_traite_mult($texte);
@@ -319,11 +319,9 @@ function plugin2paquet_traite_mult($texte)
 // - transformation en attribut des balises A
 // - interpretation des balises BR et LI comme separateurs
 
-function plugin2paquet_texte($name, $texte, $plug)
+function plugin2paquet_texte($name, $texte)
 {
 	$t = plugin2paquet_traite_mult($texte);
-#	if (count($t) > 1) 
-#	  echo "$plug: multi dans $name: ", str_replace("\n", " ", $texte), "\n";
 	$res = '';
 	foreach(preg_split('@(<br */?>)|<li>@', $t['fr']) as $v) {
 	    if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
