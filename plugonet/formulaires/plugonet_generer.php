@@ -25,9 +25,10 @@ function formulaires_plugonet_generer_traiter(){
 
 	// Generation du fichier
  	$generer = charger_fonction('plugonet_generer','inc');
- 	$retour = $generer($champs['pluginxml'], true);
-	$retour['editable'] = true;
-	return $retour;
+ 	list($msg, $erreurs, $res) = $generer($champs['pluginxml'], true);
+
+	$msg .= join("<br />\n",  $erreurs) . "<br /><br />" . join("<br />\n",  $res);
+	return array('message_ok' => $msg, 'editable' => true);;
 }
 
 ?>

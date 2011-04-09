@@ -1,4 +1,14 @@
 <?php
+
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2011                                                *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
@@ -9,8 +19,7 @@ function exec_plugonet_generer_dist(){
 	if (!autoriser('webmestre')) {
 		include_spip('inc/minipres');
 		echo minipres();
-		die();
-	}
+	} else {
 
 	// pipeline d'initialisation
 	pipeline('exec_init', array('args'=>array('exec'=>'plugonet'),'data'=>''));
@@ -45,6 +54,7 @@ function exec_plugonet_generer_dist(){
 	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'plugonet_generer'),'data'=>''));
 
 	echo fin_gauche(), fin_page();
+	}
 }
 
 ?>

@@ -15,14 +15,13 @@ function inc_plugonet_generer($files, $write)
 {
   $nb_files = count($files);
   $sep = ($nb_files > 1) ? ";" : "\n";
-  $all = array();
-  $res = '';
+  $all = $res = array();
   $total = $ko = $ko = 0;
   $valider_xml = charger_fonction('valider', 'xml');
   // est-on en 2.2 ? 
   $infos_xml = charger_fonction('infos_plugin', 'plugins', true) ?
   'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
-  echo "Fonction de lecture: ", $infos_xml, "\n";
+  spip_log("Plugonet: fonction de lecture: ", $infos_xml, "\n");
 
   foreach($files as $nom)  {
     $old = (basename($nom) == 'plugin.xml');
@@ -55,20 +54,21 @@ function inc_plugonet_generer($files, $write)
 	    $msg2.= join("\n", array_map('array_shift', $e)) . ".";
 	}  else {
 	  $msg2 .= " Correct en nouveau format.";
-	  $res .= "\n$xml";
+	  $res[$nom]= $xml;
 	  if ($write) ecrire_fichier($dir . '/paquet.xml', $xml);
 	  $ok++;
 	}
       }
     }
-    echo date('Y-m-d H:i:s'), ' ', $nom, ": ", $msg2, "\n";
+    spip_log('Plugonet: ', $nom, ": ", $msg2);
   }
-  if ($nb_files > 1)   {
-    echo "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
-    asort($all);
-    foreach ($all as $k => $v) echo sprintf("%4d %s\n", $v, $k);
-  } else { echo $xml;}
-  return $res;
+  if ($nb_files > 1)
+    $msg = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
+  else $msg = '';
+  asort($all);
+  foreach ($all as $k => $v) $all[$k] = sprintf("%4d %s\n", $v, $k);
+
+  return array($msg, $all, $res);
 }
 
 function plugin2paquet($D, $dir)
