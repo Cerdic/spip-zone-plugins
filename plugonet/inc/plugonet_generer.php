@@ -135,7 +135,7 @@ function plugin2paquet($D, $dir, $nom)
 
 	$nom = plugin2paquet_texte('nom', $nom, $dir);
 	$licence = plugin2paquet_texte('licence', $D['licence'], $dir);
-	$auteur = plugin2paquet_texte('auteur', $D['auteur'], $dir);
+	$auteur = plugin2paquet_auteur($D['auteur'], $dir);
 	
 	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
 	$pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
@@ -253,6 +253,51 @@ function plugin2paquet_description($description, $slogan, $plug, $dir)
 	  if ($t) $files[]= substr($t, strlen($dir)+1);
 	}
 	return $files;
+}
+
+// - elimination des multi (exclue dans la nouvelle version)
+// - transformation en attribut des balises A
+// - interpretation des balises BR et LI et de la virgule et du espace+tiret comme separateurs
+function plugin2paquet_auteur($texte, $plug) {
+
+	// On extrait le multi si besoin et on selectionne la traduction francaise
+	$t = plugin2paquet_traite_mult($texte);
+	$res = '';
+
+	foreach(preg_split('@(<br */?>)|<li>|,|\s-@', $t['fr']) as $v) {
+		// On detecte d'abord un lien eventuel
+		// -- soit sous la forme d'une href d'une ancre
+		// -- soit sous la forme d'un raccourci SPIP
+		// Dans les deux cas on garde preferentiellement le contenu de de l'ancre ou du raccourci
+		// si il existe
+		if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
+			$href = " lien='" . $r[2] ."'";
+			$v = str_replace($r[0], $r[3], $v);
+		} elseif (preg_match(_RACCOURCI_LIEN,$v, $r)) {
+			$href = " lien='" . $r[4] ."'";
+			$v = ($r[1]) ? $r[1] : str_replace($r[0], '', $v);
+		} else 
+			$href = '';
+		
+		// On detecte ensuite un mail eventuel
+		if (preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $v, $r)) {
+			$mail = " mail='$r[2]'";
+			$v = str_replace($r[2], '', $v);
+			if (!$v) {
+				// On considere alors que la premiere partie du mail peut faire office de nom d'auteur
+				if (preg_match('/(([\w\d_-]+)[.]([\w\d_-]+))@/', $r[2], $s))
+					$v = ucfirst($s[2]) . ' ' . ucfirst($s[3]);
+				else
+					$v = ucfirst($r[3]);
+			}
+		} else 
+			$mail = '';
+		
+		if ($v = trim(textebrut($v)))
+			$res .= "\n\t<auteur$href$mail>$v</auteur>";
+	}
+
+	return $res;
 }
 
 // Expanse les multi en un tableau de textes complets, un par langue
