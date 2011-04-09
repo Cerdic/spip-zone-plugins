@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Plugin AMAP pour Spip 2</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems </auteur>
-	<version>2.0.1</version>
+	<version>2.0.2</version>
 	<version_base>0.3</version_base>
 
 	<licence>Distribu&eacute; sous licence GNU/GPL</licence>
@@ -50,15 +50,12 @@
 		<nom>config_site</nom>
 		<inclure>base/amap_tables.php</inclure>
 	</pipeline>
-        <pipeline>
-                <nom>declarer_champs_extras</nom>
-                <inclure>base/amap_tables.php</inclure>
-        </pipeline>
-
-
-
+	<pipeline>
+		<nom>declarer_champs_extras</nom>
+		<inclure>base/amap_tables.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version='[2.0.0;]' />
-        <necessite id="cextras" version="[1.9;]" />
+	<necessite id="cextras" version="[1.9;]" />
 	<necessite id="saisies" version='[1.7.7;]' />
 	<necessite id="verifier" version='[0.1;]' />
 	<categorie>divers</categorie>
