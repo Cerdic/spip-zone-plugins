@@ -1,0 +1,13 @@
+<div class="formulaire_spip formulaire_amap formulaire_choix_produit">
+	<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+		<label for="<:amap:choix:>"><:amap:choix:></label>
+			<select name="id_produit" id="champ_id_produit">
+				<option value="0"[ (#ENV{Choix, 0}|=={0}|?{selected="selected"})]>--</option>
+			<BOUCLE_produits(AMAP_PRODUITS){tout}>
+				[<option value="#ID_PRODUIT">(#LABEL_PRODUIT)</option>]
+			</BOUCLE_produits>
+			</select>
+	<input type='submit' class='submit' value='<:amap:choisir:>' />
+	</div></form>
+</div>
