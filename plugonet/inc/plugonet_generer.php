@@ -21,7 +21,7 @@ function inc_plugonet_generer($files, $write)
   // est-on en 2.2 ? 
   $infos_xml = charger_fonction('infos_plugin', 'plugins', true) ?
   'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
-  spip_log("Plugonet: fonction de lecture: ", $infos_xml, "\n");
+  spip_log("Plugonet: fonction de lecture: $infos_xml");
 
   foreach($files as $nom)  {
     $old = (basename($nom) == 'plugin.xml');
@@ -60,13 +60,13 @@ function inc_plugonet_generer($files, $write)
 	}
       }
     }
-    spip_log('Plugonet: ', $nom, ": ", $msg2);
+    spip_log("Plugonet: $nom : $msg2");
   }
   if ($nb_files > 1)
     $msg = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
   else $msg = '';
   asort($all);
-  foreach ($all as $k => $v) $all[$k] = sprintf("%4d %s\n", $v, $k);
+  foreach ($all as $k => $v) $all[$k] = sprintf("%4d %s", $v, $k);
 
   return array($msg, $all, $res);
 }
@@ -101,7 +101,7 @@ function plugin2paquet($D, $dir)
 	
 	// Constrution de la balise paquet et de ses attributs
 	$paquet_att =
-		plugin2paquet_lien($lien) .
+		plugin2paquet_lien($lien, $nom='documentation') .
 		($categorie ? "\n\tcategorie='$categorie'" : '') .
 		($compatible ? "\n\tcompatible='$compatible'" : '') .
 		($etat ? "\n\tetat='$etat'" : '') .
@@ -147,11 +147,11 @@ function plugin2paquet($D, $dir)
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
 // et normaliser l'esperluete pour eviter l'erreur d'entite indefinie
-function plugin2paquet_lien($url)
+function plugin2paquet_lien($url, $nom='lien')
 {
 	if (!preg_match(',https?://[^]\s]+,', $url, $r)) return '';
 	$url = str_replace('&', '&amp;', str_replace('&amp;', '&', $r[0]));
-	return "\n\tlien='$url'";
+	return "\n\t$nom='$url'";
 }
 
 function plugin2paquet_pipeline($D)
@@ -247,7 +247,7 @@ function plugin2paquet_description($description, $slogan, $plug, $dir)
 	  include_spip('inc/langonet_generer_fichier');
 	  if (!ecrire_fichier_langue_php($dir, $lang, $module, $couples,
 				"\n// Fichier produit par plugin2paquet"))
-	    echo "Echec en creant le module de langue $module";
+	    spip_log("Echec en creant le module de langue $module");
 	}
 }
 
@@ -289,7 +289,7 @@ function plugin2paquet_texte($name, $texte, $plug)
 	      $v = str_replace($r[0], $r[3], $v);
 	    } else $mail = '';
 	    if ($v = trim(textebrut($v)))
-	      $res .= "\n<$name$href$mail>$v</$name>";
+	      $res .= "\n\t<$name$href$mail>$v</$name>";
 	}
 
 	return $res;
