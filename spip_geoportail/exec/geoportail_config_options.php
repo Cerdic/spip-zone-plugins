@@ -63,24 +63,32 @@ function exec_geoportail_config_options()
 
 		/* Type d'objet a georef */
 		$form = debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:options'))
-			.debut_cadre_relief("",true)
-			. _T('geoportail:geoprovider_info')
+			.debut_cadre_relief("base-24.gif",true,"", _T('geoportail:geoportail_provider'))
+				. _T('geoportail:geoprovider_info')."<br/>"
+				."<p>"
+				._T('geoportail:geoportail_provider')." : <select name='defaut_provider' class='fondl'>"
+				."<option value='GEOP'".($geoportail_provider=='GEOP'?" selected":"").">G&eacute;oportail</option>"
+				."<option value='OSM'".($geoportail_provider=='OSM'?" selected":"").">OpenStreetMap</option>"
+				."<option value='GMAP'".($geoportail_provider=='GMAP'?" selected":"").">Google Maps</option>"
+				."<option value='YHOO'".($geoportail_provider=='YHOO'?" selected":"").">Yahoo !</option>"
+				."</select>"
+				."<input type='submit' name='provider' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+				."</p>"
 			.fin_cadre_relief(true)
-			._T('geoportail:geoportail_provider')." : <select name='defaut_provider' class='fondl'>"
-			."<option value='GEOP'".($geoportail_provider=='GEOP'?" selected":"").">G&eacute;oportail</option>"
-			."<option value='OSM'".($geoportail_provider=='OSM'?" selected":"").">OpenStreetMap</option>"
-			."<option value='GMAP'".($geoportail_provider=='GMAP'?" selected":"").">Google Maps</option>"
-			."<option value='YHOO'".($geoportail_provider=='YHOO'?" selected":"").">Yahoo !</option>"
-			."</select>"
-			."<input type='submit' name='provider' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
-			.debut_cadre_relief("",true)
-			. _T('geoportail:geopopup_info')
+			.debut_cadre_relief("forum-public-24.gif",true,"", _T('geoportail:geoportail_popup'))
+				. _T('geoportail:geopopup_info')
+				."<p>"
+				."<input type='radio' name='popup' class='fondl'id='Anchored' value='Anchored'".($geoportail_popup=='Anchored'?" checked /><label for='Anchored' style='font-weight:bold'>":"/><label for='Anchored'>")._T('geoportail:popup_anchored')."</label> &nbsp;"
+				."<input type='radio' name='popup' class='fondl' id='FramedCloud' value='FramedCloud'".($geoportail_popup=='FramedCloud'?" checked /><label for='FramedCloud' style='font-weight:bold'>":"/><label for='FramedCloud'>")._T('geoportail:popup_framecloud')."</label> &nbsp;"
+				."<input type='submit' name='setpopup' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+				."</p>"
 			.fin_cadre_relief(true)
-			._T('geoportail:geoportail_popup')." : <select name='popup' class='fondl'>"
-			."<option value='Anchored'".($geoportail_popup=='Anchored'?" selected>":">")._T('geoportail:popup_postit')."</option>"
-			."<option value='FramedCloud'".($geoportail_popup=='FramedCloud'?" selected>":">")._T('geoportail:popup_bulle')."</option>"
-			."</select>"
-			."<input type='submit' name='setpopup' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+		/* Geoservices */
+			.debut_cadre_relief("site-24.gif", true, "", _T('geoportail:geoservices'))
+				. _T('geoportail:info_geoservice')
+				."<p><input type='checkbox' name='service' id='service' $gservice><label for=service>"._T('geoportail:geoportail_services')."</label>"
+				."<input type='submit' name='geoservice' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' /></p>"
+			.fin_cadre_relief(true)
 			.fin_cadre_trait_couleur(true);
 
 		/* Type d'objet a georef */
@@ -110,15 +118,6 @@ function exec_geoportail_config_options()
 			.fin_cadre_trait_couleur(true);
 
 		
-		/* Geoservices */
-		$form .= debut_cadre_trait_couleur("site-24.gif", true, "", _T('geoportail:geoservices'))
-			.debut_cadre_relief("",true)
-			. _T('geoportail:info_geoservice')
-			.fin_cadre_relief(true)
-			."<p><input type='checkbox' name='service' id='service' $gservice><label for=service>"._T('geoportail:geoportail_services')."</label>"
-			."<input type='submit' name='geoservice' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' /></p>"
-			.fin_cadre_trait_couleur(true);
-			
 		/* Systeme de reference */
 		$form .= debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:geoportail_sysref'))
 			.debut_cadre_relief("",true)
