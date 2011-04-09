@@ -4,7 +4,7 @@
 	<form action="#ENV{action}" method="post"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			[(#SAISIE{date_jour_mois_annee, date_evenement, label=<:amap:date:>, obligatoire=oui})]
+			[(#SAISIE{date_jour_mois_annee, date_evenement, label=<:amap:date_evenement:>, obligatoire=oui})]
 			<?php $chaine = substr("#ENV{id_saison}",10); ?>
 			<input type="hidden" name="id_saison" value="<?php echo $chaine; ?>" />
 			<li>
@@ -18,7 +18,7 @@
 			<li>
 				<label for="id_personne1"><:amap:responsable:> 1</label>
 				<select name="id_personne1" id="id_personne1">
-					<option value="0"></option>
+					<option value=""></option>
 					<BOUCLE_responsable_1(AMAP_PERSONNES){par id_personne}>
 						<option value="#PRENOM #NOM">#PRENOM #NOM</option>
 					</BOUCLE_responsable_1>
@@ -27,7 +27,7 @@
 			<li>
 				<label for="id_personne2"><:amap:responsable:> 2</label>
 				<select name="id_personne2" id="id_personne2">
-					<option value="0"></option>
+					<option value=""></option>
 					<BOUCLE_responsable_2(AMAP_PERSONNES){tout}{par id_personne}>
 						<option value="#PRENOM #NOM">#PRENOM #NOM</option>
 					</BOUCLE_responsable_2>
@@ -36,7 +36,7 @@
 			<li>
 				<label for="id_personne3"><:amap:responsable:> 3</label>
 				<select name="id_personne3" id="id_personne3">
-					<option value="0"></option>
+					<option value=""></option>
 					<BOUCLE_responsable_3(AMAP_PERSONNES){tout}{par id_personne}>
 						<option value="#PRENOM #NOM">#PRENOM #NOM</option>
 					</BOUCLE_responsable_3>

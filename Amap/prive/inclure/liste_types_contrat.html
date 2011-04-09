@@ -11,6 +11,9 @@
 	<tr>
 		<td>#ID_TYPE_CONTRAT</td>
 		<td>#LABEL_TYPE_CONTRAT</td>
+		<td><a href='[(#URL_ECRIRE{config_type_contrat}|parametre_url{id_type_contrat,#ID_TYPE_CONTRAT})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_type_contrat,#ID_TYPE_CONTRAT,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
 	</tr>
 	</BOUCLE_types_contrat>
 	</tbody>

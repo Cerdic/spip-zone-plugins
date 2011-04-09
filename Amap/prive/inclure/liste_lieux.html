@@ -16,6 +16,9 @@
 		<td>#LIEUX_CP</td>
 		<td>#LIEUX_VILLE</td>
 		<td>#LIEUX_TELEPHONE</td>
+		<td><a href='[(#URL_ECRIRE{config_lieu}|parametre_url{id_lieu,#ID_LIEU})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_lieu,#ID_LIEU,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
 	</tr>
 	</BOUCLE_lieux>
 </table>

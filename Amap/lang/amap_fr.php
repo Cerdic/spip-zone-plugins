@@ -5,6 +5,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'action_modifier' => 'Modifier',
+	'action_supprimer' => 'Supprimer',
 	'adhesion' => 'Adh&eacute;sion (ex:2008)',
 	'agenda' => 'Agenda',
 	'annuaire'  => 'Annuaire',
@@ -24,7 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cheques_enregistre' => 'Le ch&egrave;ques a &eacute;t&eacute; enregistr&eacute;',
 	'cheques_enregistrement' => 'Enregistrement d\'un ch&egrave;que suppl&eacute;mentaire pour la saison',
 	'cheques_enregistres' => 'Liste des ch&egrave;ques d&eacute;pos&eacute;s pour la saison',
+	'choisir_produit' => 'Choisir un produit',
 	'choisir_saison' => 'Choisir une saison',
+	'choisir' => 'Choisir',
 	'choix' => 'Choix',
 	'choix_distribution' => 'Choix de la distribution',
 	'choix_contrat_distribution'  => ' de la distribution',
@@ -55,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contrat_tarifs' => 'Tarif des contrats',
 
 	// D
-	'date'  => 'Date',
+	'date_evenement' => 'Date de l\'évènement',
 	'distributions'  => 'Distributions',
 	'distri_evenement'  => '&Eacute;v&eacute;nements',
 	'distri_produit'  => 'Produits',
@@ -64,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'enregistrement_contrat_produit_saison' => 'Enregistrement d\'un nouveau contrat pour le produit @label_produit@ de la saison @id_saison@',
 	'enregistrement_evenement_distribution' => 'Enregistrement d\'un nouvel &eacute;v&egrave;nement pour la saison @id_saison@',
-	'enregistrement_vacance' => 'Enrigistr&eacute; une nouvelle vacance pour la saison',
+	'enregistrement_vacance' => 'Enregistrement d\'une nouvelle vacance pour la saison',
 	'enregistrer' => 'Enregistrer',
 	'envoyer' => 'Enregistrer',
 	'evenements' => 'Év&eacute;nement',
@@ -87,14 +91,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'id_type_contrat' => 'ID type contrat',
 
 	// L
-	'label_banque' => 'Label banque',
+	'label_banque' => 'Intitulé de la banque',
 	'label_date' => 'Entrez une date...',
 	'label_famille' => 'Entrez un label de famille...',
-	'label_produit' => 'Label produit',
+	'label_produit' => 'Type de produit',
 	'label_quantite' => 'Entrez une quantit&eacute; ou un poids',
 	'label_tarif' => 'Entrez un tarif...',
 	'label_trip_date' => 'Entrez une date de sortie...',
-	'label_type_contrat' => 'Label type contrat',
+	'label_type_contrat' => 'Durée du contrat',
 	'label_variete' => 'Entrez un label de vari&eacute;t&eacute;',
 	'lieux' => 'Lieux',
 	'lieux_nom' => 'Nom',
@@ -168,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide:
-										<br/>Elle ne contient aucun enregistrement.',
+					<br/>Elle ne contient aucun enregistrement.',
 	'tarifs_enregistrement_saison_produit' => 'Enregistrement d\'un tarif suppl&eacute;mentaire pour la saison @id_saison2@ du produit @label_produit2@',
 	'tarifs_enregistres_saison_produit' => 'Liste des tarifs possibles pour la saison @id_saison1@ du produit @label_produit1@',
 	'tel_fixe' => 'T&eacute;l&eacute;phone fixe',

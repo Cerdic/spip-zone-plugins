@@ -31,7 +31,6 @@ function formulaires_lieu_traiter_dist(){
 	);
 	// Valeurs de retours
 	$message['message_ok'] = _T('amap:lieux_enregistre');
-	$message['message_erreur'] = _T('amap:lieux_non_enregistre');
 	return $message;
 }
 ?>

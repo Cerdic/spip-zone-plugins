@@ -1,16 +1,17 @@
 <?php
-function formulaires_saison_charger_dist() {
+function formulaires_saison_charger_dist($id_saison) {
 	$valeurs = array(
-		"id_agenda" => "",
-		"id_contrat" => "",
-		"id_sortie" => "",
-		"id_responsable" => "",
-		"id_vacance" => "",
-	);
+		"id_saison" => $id_saison,
+		"id_agenda" => $titre,
+                "id_contrat" => $titre,
+                "id_sortie" => $titre,
+                "id_responsable" => $titre,
+                "id_vacance" => $titre,
+        );
 	return $valeurs;
 }
 
-function formulaires_saison_traiter_dist(){
+function formulaires_saison_traiter_dist($id_saison){
 	refuser_traiter_formulaire_ajax();
 
 	$id_agenda = _request('id_agenda');

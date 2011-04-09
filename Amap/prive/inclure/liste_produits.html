@@ -13,6 +13,9 @@
 		<td>#ID_PRODUIT</td>
 		<td>#NOM</td>
 		<td>#LABEL_PRODUIT</td>
+		<td><a href='[(#URL_ECRIRE{config_produit}|parametre_url{id_produit,#ID_PRODUIT})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_produit,#ID_PRODUIT,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
 	</tr>
 	</BOUCLE_produits>
 	</tbody>

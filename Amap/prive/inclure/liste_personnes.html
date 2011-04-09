@@ -2,20 +2,20 @@
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th><:amap:prenom:></th>
-		<th><:amap:nom:></th>
-		<th><:amap:tel_fixe:></th>
-		<th><:amap:tel_portable:></th>
+		<th></th>
+		<th><:nom:></th>
 		<th><:amap:adhesion:></th>
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_personnes(AMAP_PERSONNES) {pagination 20}>
+	<BOUCLE_personnes(AUTEURS) {tous} {pagination 20}>
 	<tr>
-		<td>#PRENOM</td>
-		<td>#NOM</td>
-		<td>#TEL_FIXE</td>
-		<td>#TEL_PORTABLE</td>
+		<td>
+			[(#STATUT|=={'6forum'}|oui)<img src="#CHEMIN{prive/images/visit-12.gif}">]
+			[(#STATUT|=={'1comite'}|oui)<img src="#CHEMIN{prive/images/redac-12.gif}">]
+			[(#STATUT|=={'0minirezo'}|oui)<img src="#CHEMIN{prive/images/admin-12.gif}">]
+		</td>
+		<td><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
 		<td>#ADHESION</td>
 	</tr>
 	</BOUCLE_personnes>

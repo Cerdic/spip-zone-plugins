@@ -8,6 +8,7 @@
 */
 include_spip('inc/meta');
 
+// activés les mots clef pour les articles
 function amap_config_site() {	
 	ecrire_meta('articles_mots', 'oui','non');
 	spip_log("1. (amap_config_site) metas du plugins ecrite", "amap_installation");
@@ -182,6 +183,8 @@ function remplacer_mot($id_mot, $descriptif, $texte, $id_groupe, $groupe) {
 	return true;
 }
 
+
+//tables du plugins amap
 function amap_declarer_tables_interfaces($interface){
 	//-- Alias
 	$interface['table_des_tables']['amap_banques'] = 'amap_banques';
@@ -191,11 +194,10 @@ function amap_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['amap_lieux'] = 'amap_lieux';
 	$interface['table_des_tables']['amap_paniers'] = 'amap_paniers';
 	$interface['table_des_tables']['amap_participation_sorties'] = 'amap_participation_sorties';
-	$interface['table_des_tables']['amap_personnes'] = 'amap_personnes';
 	$interface['table_des_tables']['amap_prix'] = 'amap_prix';
 	$interface['table_des_tables']['amap_produits'] = 'amap_produits';
 	$interface['table_des_tables']['amap_produits_distributions'] = 'amap_produits_distributions';
-	$interface['table_des_tables']['amap_reglements'] = 'amap_reglemenst';
+	$interface['table_des_tables']['amap_reglements'] = 'amap_reglements';
 	$interface['table_des_tables']['amap_saisons'] = 'amap_saisons';
 	$interface['table_des_tables']['amap_sorties'] = 'amap_sorties';
 	$interface['table_des_tables']['amap_types_contrats'] = 'amap_types_contrats';
@@ -243,10 +245,10 @@ function amap_declarer_tables_principales($tables_principales){
 		'id_evenement'  => 'bigint NOT NULL AUTO_INCREMENT',
 		'date_evenement'  => 'datetime DEFAULT "0000-00-00" NOT NULL',
 		'id_saison'  => 'bigint NOT NULL',
-		'id_lieu'  => 'varchar(40) NULL',
-		'id_personne1'  => 'varchar(60) NULL',
-		'id_personne2'  => 'varchar(60) NULL',
-		'id_personne3'  => 'varchar(60) NULL'
+		'id_lieu'  => 'text NULL',
+		'id_personne1'  => 'text NULL',
+		'id_personne2'  => 'text NULL',
+		'id_personne3'  => 'text NULL'
 		);
 	$spip_amap_evenements_key = array(
 		'PRIMARY KEY'   => 'id_evenement'
@@ -322,24 +324,6 @@ function amap_declarer_tables_principales($tables_principales){
 		'join' => array('id_sortie'=>'id_sortie','id_personne'=>'id_personne')
 		);
 
-	//-- Table personnes -------------------
-	$spip_amap_personnes = array(
-		'id_personne'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'id_auteur'  => 'bigint NULL',
-		'prenom'  => 'varchar(20) NULL',
-		'nom'  => 'varchar(30) NOT NULL',
-		'tel_fixe'  => 'varchar(13) NULL',
-		'tel_portable'  => 'varchar(13) NULL',
-		'adhesion'  => 'bigint NULL'
-		);
-	$spip_amap_personnes_key = array(
-		'PRIMARY KEY'   => 'id_personne'
-		);
-	$tables_principales['spip_amap_personnes'] = array(
-		'field' => &$spip_amap_personnes,
-		'key' => &$spip_amap_personnes_key,
-		);
-
 	//-- Table prix -------------------
 	$spip_amap_prix = array(
 		'id_produit'  => 'bigint NOT NULL AUTO_INCREMENT',
@@ -405,11 +389,11 @@ function amap_declarer_tables_principales($tables_principales){
 	//-- Table saisons -------------------
 	$spip_amap_saisons = array(
 		'id_saison'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'id_agenda'  => 'text DEFAULT NULL',
-		'id_contrat'  => 'text DEFAULT NULL',
-		'id_sortie'  => 'text DEFAULT NULL',
-		'id_responsable'  => 'text DEFAULT NULL',
-		'id_vacance'  => 'text DEFAULT NULL'
+		'id_agenda'  => 'bigint NULL',
+		'id_contrat'  => 'bigint NULL',
+		'id_sortie'  => 'bigint NULL',
+		'id_responsable'  => 'bigint NULL',
+		'id_vacance'  => 'bigint NULL'
 		);
 	$spip_amap_saisons_key = array(
 		'PRIMARY KEY'   => 'id_saison'
@@ -482,7 +466,7 @@ function amap_declarer_tables_principales($tables_principales){
     return $tables_principales;
 }
 
-//fonction qui permet de créer le tout
+//creation des mots clef pour le plugins
 function amap_config_motsclefs() {
 	//les groupes puis mots
 	create_groupe("_Amap_config", "Groupe pour configurer le plugin", "C'est mots clef vous servirons a configurer le plugins et créé les saisons.", 'non', 'non', 'oui', 'non', 'non', 'non', 'non', 'oui', 'non', 'non');
@@ -492,5 +476,20 @@ function amap_config_motsclefs() {
 		create_mot("_Amap_config", "amap_responsable", "Mettre ce mot clef à l'article de la responsabilite", "");
 		create_mot("_Amap_config", "amap_vacance", "Mettre ce mot clef à l'article des vacances", "");
 	return true;
+}
+
+//creation de champs extra sur la table auteurs
+function amap_declarer_champs_extras($champs = array()){
+        $champs[] = new ChampExtra(array(
+                'table' => 'auteurs', // sur quelle table ?
+                'champ' => 'adhesion', // nom sql
+                'label' => 'amap:adhesion', // chaine de langue 'prefix:cle'
+                'precisions' => '', // precisions sur le champ
+                'obligatoire' => false, // 'oui' ou '' (ou false)
+                'rechercher' => false, // false, ou true ou directement la valeur de ponderation (de 1 à 8 generalement)
+                'type' => 'input', // type de saisie
+                'sql' => "bigint NULL", // declaration sql
+        ));
+        return $champs;
 }
 ?>

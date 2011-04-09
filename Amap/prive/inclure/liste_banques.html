@@ -11,6 +11,9 @@
 	<tr>
 		<td>#ID_BANQUE</td>
 		<td>#LABEL_BANQUE</td>
+		<td><a href='[(#URL_ECRIRE{config_banque}|parametre_url{id_banque,#ID_BANQUE})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_banque,#ID_BANQUE,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
 	</tr>
 	</BOUCLE_banques>
 	</tbody>

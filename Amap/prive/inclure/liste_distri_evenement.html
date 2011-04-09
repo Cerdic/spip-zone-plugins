@@ -2,7 +2,7 @@
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th><:amap:date_distribution:></th>
+		<th><:amap:date_evenement:></th>
 		<th><:amap:lieux:></th>
 		<th><:amap:responsable:> 1</th>
 		<th><:amap:responsable:> 2</th>
@@ -12,11 +12,14 @@
 	<tbody>
 	<BOUCLE_distri_evenement(AMAP_EVENEMENTS) {id_saison=#ENV{id_saison}} {pagination 20}>
 	<tr>
-		<td>[(#DATE_EVENEMENT|affdate{'d-m-Y'})]</td>
+		<td>[(#DATE_EVENEMENT|affdate{'d/m/Y'})]</td>
 		<td>#ID_LIEU</td>
 		<td>#ID_PERSONNE1</td>
 		<td>#ID_PERSONNE2</td>
 		<td>#ID_PERSONNE3</td>
+		<td><a href='[(#URL_ECRIRE{distri_evenement}|parametre_url{id_evenement,#ID_EVENEMENT})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_evenement,#ID_EVENEMENT,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
 	</tr>
 	</BOUCLE_distri_evenement>
 	</tbody>

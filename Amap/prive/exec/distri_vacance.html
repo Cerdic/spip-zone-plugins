@@ -1,6 +1,10 @@
 <!--#navigation-->
 <div class="cadre-r amap-nav">
-	<INCLURE{fond=prive/navigation/distri}>
+<ul>
+	<li class="subMenu"><a href="#URL_ECRIRE{distri_evenement}" class="page_accueil" title="<:amap:distri_evenement:>"><:amap:distri_evenement:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{distri_produit}" class="options" title="<:amap:distri_produit:>"><:amap:distri_produit:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{distri_vacance}" class="themes on" title="<:amap:distri_vacance:>"><:amap:distri_vacance:></a></li>
+</ul>
 </div>
 <!--/#navigation-->
 
@@ -24,6 +28,7 @@
 		<:amap:choix_produit:>
 	</div>
 	<div class="cadre_padding">
+		#FORMULAIRE_CHOIX_PRODUIT
 	</div>
 </div>
 
@@ -33,8 +38,9 @@
 		<:amap:liste_vacance{id_saison=#ENV{id_saison}}:>
 	</div>
 	<div class="cadre_padding">
-		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]
-		[(#ENV{id_saison}|>={1}|oui)]
+		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:><br />]
+		[(#ENV{id_produit}|<{1}|oui)<:amap:choisir_produit:>]
+		[(#ENV{id_saison}|et{#ENV{id_produit}}|>={1}|oui)Rien &#224; afficher, encore en dev ...]
 	</div>
 </div>
 
@@ -44,7 +50,8 @@
 		<:amap:enregistrement_vacance{id_saison=#ENV{id_saison}}:>
 	</div>
 	<div class="cadre_padding ajax">
-		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]
-		[(#ENV{id_saison}|>={1}|oui)]
+		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:><br />]
+		[(#ENV{id_produit}|<{1}|oui)<:amap:choisir_produit:>]
+		[(#ENV{id_saison}|et{#ENV{id_produit}}|>={1}|oui)Rien &#224; afficher, encore en dev ...]
 	</div>
 </div>

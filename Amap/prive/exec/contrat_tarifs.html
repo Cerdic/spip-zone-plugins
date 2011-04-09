@@ -1,6 +1,12 @@
 <!--#navigation-->
 <div class="cadre-r amap-nav">
-	<INCLURE{fond=prive/navigation/contrat}>
+<ul>
+	<li class="subMenu"><a href="#URL_ECRIRE{contrat_liste}" class="page_accueil" title="<:amap:contrat_liste:>"><:amap:contrat_liste:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{contrat_tarifs}" class="options on" title="<:amap:contrat_tarifs:>"><:amap:contrat_tarifs:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{contrat_reglement}" class="themes" title="<:amap:contrat_reglement:>"><:amap:contrat_reglement:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{contrat_sorties}" class="themes" title="<:amap:contrat_sorties:>"><:amap:contrat_sortie:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{contrat_participation}" class="themes" title="<:amap:contrat_participation:>"><:amap:contrat_participation:></a></li>
+</ul>
 </div>
 <!--/#navigation-->
 
@@ -15,6 +21,7 @@
 		<:amap:choix_saison:>
 	</div>
 	<div class="cadre_padding">
+		#FORMULAIRE_CHOIX_SAISON
 	</div>
 </div>
 
@@ -23,13 +30,14 @@
 		<:amap:choix_produit:>
 	</div>
 	<div class="cadre_padding">
+		#FORMULAIRE_CHOIX_PRODUIT
 	</div>
 </div>
 
 <div class="cadre cadre-trait-couleur">
 	<div class="titrem impliable">
 		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
-		<:amap:tarifs_enregistres_saison_produit{id_saison1=#ENV{id_saison1}}{label_produit1=#ENV{label_produit1}}:>
+		<:amap:tarifs_enregistres_saison_produit{label_produit=#ENV{label_produit}}{id_saison=#ENV{id_saison}}:>
 	</div>
 	<div class="cadre_padding">
 		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]
@@ -40,7 +48,7 @@
 <div class="cadre cadre-trait-couleur">
 	<div class="titrem impliable">
 		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata-add.gif}">
-		<:amap:tarifs_enregistrement_saison_produit{id_saison2=#ENV{id_saison2}}{label_produit2=#ENV{label_produit2}}:>
+		<:amap:tarifs_enregistrement_saison_produit{label_produit=#ENV{label_produit}}{id_saison=#ENV{id_saison}}:>
 	</div>
 	<div class="cadre_padding ajax">
 		[(#ENV{id_saison}|<{1}|oui)<:amap:choisir_saison:>]

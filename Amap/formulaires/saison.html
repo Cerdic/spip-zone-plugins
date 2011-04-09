@@ -1,3 +1,10 @@
+<BOUCLE_saison1(AMAP_SAISONS) {id_saison}>
+#SET{id_agenda,#ID_AGENDA}
+#SET{id_contrat,#ID_CONTRAT}
+#SET{id_sortie,#ID_SORTIE}
+#SET{id_responsable,#ID_RESPONSABLE}
+#SET{id_vacance,#ID_VACANCE}
+</BOUCLE_saison1>
 <div class="formulaire_spip formulaire_amap formulaire_saison">
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
@@ -6,37 +13,42 @@
 		<ul>
 			<i>id_saison</i> <:amap:cle_primaire_de:> <i>spip_amap_saisons</i>
 			<li id="id_agenda"><label><:amap:agenda:></label>
-				<select>
+				<select name="id_agenda">
+				<option label="id_agenda" value="">--</option>
 				<BOUCLE_article1(ARTICLES) {par num titre} {titre_mot=amap_agenda}>
-					<option label="id_agenda" value="#TITRE">#TITRE</option>
+					<option label="id_agenda" value="#ID_ARTICLE" [(#ID_ARTICLE|=={#GET{id_agenda}}|oui)selected="selected"]>#TITRE</option>
 				</BOUCLE_article1>
 				</select>
 			</li>
 			<li id="id_contrat"><label><:amap:contrats:></label>
-				<select>
+				<select name="id_contrat">
+				<option label="id_contrat" value="">--</option>
 				<BOUCLE_article2(ARTICLES) {par num titre} {titre_mot=amap_contrat}>
-					<option label="id_contrat" value="#TITRE">#TITRE</option>
+					<option label="id_contrat" value="#ID_ARTICLE" [(#ID_ARTICLE|=={#GET{id_contrat}}|oui)selected="selected"]>#TITRE</option>
 				</BOUCLE_article2>
 				</select>
 			</li>
 			<li id="id_sortie"><label><:amap:sorties:></label>
-				<select>
+				<select name="id_sortie">
+				<option label="id_sortie" value="">--</option>
 				<BOUCLE_article3(ARTICLES) {par num titre} {titre_mot=amap_sortie}>
-					<option label="id_sortie" value="#TITRE">#TITRE</option>
+					<option label="id_sortie" value="#ID_ARTICLE" [(#ID_ARTICLE|=={#GET{id_sortie}}|oui)selected="selected"]>#TITRE</option>
 				</BOUCLE_article3>
 				</select>
 			</li>
 			<li id="id_responsable"><label><:amap:responsables:></label>
-				<select>
+				<select name="id_responsable">
+				<option label="id_responsable" value="">--</option>
 				<BOUCLE_article4(ARTICLES) {par num titre} {titre_mot=amap_responsable}>
-					<option label="id_responsable" value="#TITRE">#TITRE</option>
+					<option label="id_responsable" value="#ID_ARTICLE" [(#ID_ARTICLE|=={#GET{id_responsable}}|oui)selected="selected"]>#TITRE</option>
 				</BOUCLE_article4>
 				</select>
 			</li>
 			<li id="id_vacance"><label><:amap:vacances:></label>
-				<select>
+				<select name="id_vacance">
+				<option label="id_vacance" value="">--</option>
 				<BOUCLE_article5(ARTICLES) {par num titre} {titre_mot=amap_vacance}>
-					<option label="id_vacance" value="#TITRE">#TITRE</option>
+					<option label="id_vacance" value="#ID_ARTICLE" [(#ID_ARTICLE|=={#GET{id_vacance}}|oui)selected="selected"]>#TITRE</option>
 				</BOUCLE_article5>
 				</select>
 			</li>

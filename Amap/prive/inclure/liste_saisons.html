@@ -14,11 +14,14 @@
 	<BOUCLE_saisons(AMAP_SAISONS) {pagination 20}>
 	<tr>
 		<td><strong>#ID_SAISON</strong></td>
-		<td>#ID_AGENDA</td>
-		<td>#ID_CONTRAT</td>
-		<td>#ID_SORTIE</td>
-		<td>#ID_RESPONSABLE</td>
-		<td>#ID_VACANCE</td>
+		<td>[(#ID_AGENDA|>={1}|oui)<a href="?exec=articles&id_article=#ID_AGENDA">#ID_AGENDA</a>]</td>
+		<td>[(#ID_CONTRAT|>={1}|oui)<a href="?exec=articles&id_article=#ID_CONTRAT">#ID_CONTRAT</a>]</td>
+		<td>[(#ID_SORTIE|>={1}|oui)<a href="?exec=articles&id_article=#ID_SORTIE">#ID_SORTIE</a>]</td>
+		<td>[(#ID_RESPONSABLE|>={1}|oui)<a href="?exec=articles&id_article=#ID_RESPONSABLE">#ID_RESPONSABLE</a>]</td>
+		<td>[(#ID_VACANCE|>={1}|oui)<a href="?exec=articles&id_article=#ID_VACANCE">#ID_VACANCE</a>]</td>
+		<td><a href='[(#URL_ECRIRE{config_saison}|parametre_url{id_saison,#ID_SAISON})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_saison,#ID_SAISON,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
 	</tr>
 	</BOUCLE_saisons>
 	</tbody>
