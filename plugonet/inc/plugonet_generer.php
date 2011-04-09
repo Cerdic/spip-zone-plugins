@@ -85,7 +85,7 @@ function inc_plugonet_generer($files, $write)
     }
     spip_log("Plugonet: $nom : $msg2");
   }
-  if ($nb_files > 1)
+  if ($all AND $nb_files > 1)
     $msg2 = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
   asort($all);
   foreach ($all as $k => $v) $all[$k] = sprintf("%4d %s", $v, $k);
@@ -305,13 +305,17 @@ function plugin2paquet_texte($name, $texte, $plug)
 // install -> $prefix_actions
 function plugin2paquet_implicite($D, $balise, $nom)
 {
-   $contenu = str_replace("\n", ' ', is_array($D[$balise]) 
-	? join(" ", array_map('trim', $D[$balise])) : trim($D[$balise]));
-
+  $files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
+  $contenu = join(' ', array_map('trim', $files));
   $std = $D['prefix'] . "_$nom" . '.php';
   if (!$contenu OR $contenu == $std) return '';
   if (!strpos($contenu, ' ')) return "<!-- svn mv $contenu $std -->\n";
-  return "<!-- echo include($contenu) > $std; svn add $std -->\n";
+  $k = array_search($std, $files);
+  if (!$k)
+    return "<!-- cat $contenu &gt; $std -->\n<!-- svn add $std -->\n";
+  unset($files[$k]);
+  $contenu = join(' ', array_map('trim', $files));
+  return "<!-- cat $contenu &gt;&gt; $std -->\n<!-- svn rm $contenu -->\n";
 }
 
 function plugin2paquet_infos($plug, $bof, $dir)
