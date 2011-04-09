@@ -27,7 +27,7 @@ function formulaires_plugonet_generer_traiter(){
  	$generer = charger_fonction('plugonet_generer','inc');
  	list($msg, $erreurs, $res) = $generer($champs['pluginxml'], true);
 
-	$msg .= join("<br />\n",  $erreurs) . "<br /><br />" . join("<br />\n",  $res);
+	$msg .= join("<br />\n",  $erreurs) . "<br /><br />";
 	return array('message_ok' => $msg, 'editable' => true);;
 }
 

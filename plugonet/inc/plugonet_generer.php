@@ -11,6 +11,8 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+include_spip('inc/langonet_generer_fichier');
+
 function inc_plugonet_generer($files, $write)
 {
   $nb_files = count($files);
@@ -35,17 +37,33 @@ function inc_plugonet_generer($files, $write)
       $msg = preg_replace(',<b>[^>]*</b>,', '* ', $msg);
       @++$all[trim(str_replace("\n", '', textebrut($msg)))];
     }
+    $msg2 = $nom;
     if ($n = count($erreurs)) {
       $total+=$n;
       $ko++;
-      $msg2 = $n . " erreur(s)" . $sep . join($sep, $erreurs);
-    } else $msg2 = '';
+      $msg2 .= ' ' . $n . " erreur(s)" . $sep . join($sep, $erreurs);
+    }
     $dir = dirname($nom);
     if ($old) {
       if (!$infos = $infos_xml(basename($dir), true, dirname($dir) .'/'))
 	$msg2 .= " plugin.xml illisible";
       else {
-	$xml = plugin2paquet($infos, $dir);
+	// Extraction des balises nom, slogan et description()
+	// -- le nom n'est plus traduit si il est en multi
+	// -- slogan et description sont transformes en items de langue dans un module a part
+	// --> Bonne solution ??? Meme module que celui existant ?
+	// Le slogan est vu comme la premiere phrase de la description
+	// (Heuristique reprise de SVP)
+	$nomplug = preg_replace('@<!--[^-]*-->@', '', $infos['nom']);
+	if (strpos($nomplug, '>')) {
+		$slogan = $nomplug;
+		$nomplug = preg_replace('@</?multi>@', '', $nomplug);
+		$nomplug = preg_replace('/[[][^]]*[]]/', '', $nomplug);
+		$nomplug = preg_replace('/^\s*(\w+).*$/', '\1', $nomplug);
+	} else {
+		$slogan = $infos['description'];
+	}
+	$xml = plugin2paquet($infos, $dir, $nomplug);
 	$e = $valider_xml($xml, false, false, 'paquet.dtd');
 	$e = is_array($e) ? $e[1] : $e->err; //2.1 ou 2.2
 	if ($e)  {
@@ -55,7 +73,11 @@ function inc_plugonet_generer($files, $write)
 	}  else {
 	  $msg2 .= " Correct en nouveau format.";
 	  $res[$nom]= $xml;
-	  if ($write) ecrire_fichier($dir . '/paquet.xml', $xml);
+	  if ($write) {
+	    $echecs = plugin2paquet_description($infos['description'], $slogan, $infos['prefix'], $dir);
+	    if (!ecrire_fichier($dir . '/paquet.xml', $xml) OR $echecs)
+	      $msg2 .= " pb de creation des fichiers $echecs";
+	  }
 	  $ok++;
 	}
       }
@@ -63,15 +85,14 @@ function inc_plugonet_generer($files, $write)
     spip_log("Plugonet: $nom : $msg2");
   }
   if ($nb_files > 1)
-    $msg = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
-  else $msg = '';
+    $msg2 = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
   asort($all);
   foreach ($all as $k => $v) $all[$k] = sprintf("%4d %s", $v, $k);
 
-  return array($msg, $all, $res);
+  return array($msg2, $all, $res);
 }
 
-function plugin2paquet($D, $dir)
+function plugin2paquet($D, $dir, $nom)
 {
 	// Extraction des attributs de la balise paquet
 	$categorie = $D['categorie'];
@@ -90,8 +111,8 @@ function plugin2paquet($D, $dir)
 	// Si le tableau provient de get_infos la compatibilite SPIP est incluse dans les necessite
 	else {
 		foreach($D['necessite'] as $k => $i) {
-			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
-			if ($nom AND strtoupper($nom) == 'SPIP') {
+			$id = isset($i['id']) ? $i['id'] : $i['nom'];
+			if ($id AND strtoupper($id) == 'SPIP') {
 				$compatible = $i['version'];
 				unset($D['necessite'][$k]);
 				break;
@@ -101,7 +122,7 @@ function plugin2paquet($D, $dir)
 	
 	// Constrution de la balise paquet et de ses attributs
 	$paquet_att =
-		plugin2paquet_lien($lien, $nom='documentation') .
+		plugin2paquet_lien($lien, 'documentation') .
 		($categorie ? "\n\tcategorie='$categorie'" : '') .
 		($compatible ? "\n\tcompatible='$compatible'" : '') .
 		($etat ? "\n\tetat='$etat'" : '') .
@@ -111,22 +132,6 @@ function plugin2paquet($D, $dir)
 		($version ? "\n\tversion='$version'" : '') .
 		($version_base ? "\n\tversion_base='$version_base'" : '');
 
-	// Extraction des balises nom, slogan et description()
-	// -- le nom n'est plus traduit si il est en multi
-	// -- slogan et description sont transformes en items de langue dans un module a part
-	// --> Bonne solution ??? Meme module que celui existant ?
-	$nom = preg_replace('@<!--[^-]*-->@', '', $D['nom']);
-	if (strpos($nom, '>')) {
-		$slogan = $nom;
-		$nom = preg_replace('@</?multi>@', '', $nom);
-		$nom = preg_replace('/[[][^]]*[]]/', '', $nom);
-		$nom = preg_replace('/^\s*(\w+).*$/', '\1', $nom);
-	} else {
-		$slogan = $D['description'];
-	}
-	
-	plugin2paquet_description($D['description'], $slogan, $prefix, $dir);
-	
 	$nom = plugin2paquet_texte('nom', $nom, $dir);
 	$licence = plugin2paquet_texte('licence', $D['licence'], $dir);
 	$auteur = plugin2paquet_texte('auteur', $D['auteur'], $dir);
@@ -142,7 +147,7 @@ function plugin2paquet($D, $dir)
 	. plugin2paquet_implicite($D, 'fonctions', 'fonctions')
 	. plugin2paquet_implicite($D, 'install', 'actions');
 	
-	return "$renommer<paquet$paquet_att\n>\t$nom\t$licence\t$auteur$pipeline$necessite$utilise$bouton$onglet$chemin\n</paquet>\n";
+	return "$renommer<paquet$paquet_att\n>\t$nom$licence$auteur$pipeline$necessite$utilise$bouton$onglet$chemin\n</paquet>\n";
 }
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
@@ -222,13 +227,11 @@ function plugin2paquet_utilise($D)
   return $res;
 }
 
-// Le slogan est vu comme la premiere phrase de la description
-// (Heuristique reprise de SVP)
-
 // Passer les lettres accentuees en entites XML
 function plugin2paquet_description($description, $slogan, $plug, $dir)
 {
 	$langs = array();
+	$echecs = '';
 	foreach (plugin2paquet_traite_mult($description) as $lang => $_descr) {
 	  if (!$lang) $lang = 'fr';
 	  $langs[$lang]['description'] = trim(htmlentities($_descr));
@@ -245,11 +248,11 @@ function plugin2paquet_description($description, $slogan, $plug, $dir)
 	$dir .= '/';
 	foreach($langs as $lang => $couples) {
 	  $module = strtolower($plug) . "-description";
-	  include_spip('inc/langonet_generer_fichier');
-	  if (!ecrire_fichier_langue_php($dir, $lang, $module, $couples,
-				"\n// Fichier produit par plugin2paquet"))
-	    spip_log("Echec en creant le module de langue $module");
+	  $t = "\n// Fichier produit par plugin2paquet";
+	  if (!ecrire_fichier_langue_php($dir, $lang, $module, $couples, $t))
+	    $echecs .= " $module";
 	}
+	return $echecs;
 }
 
 // Expanse les multi en un tableau de textes complets, un par langue
