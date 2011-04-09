@@ -72,12 +72,13 @@ function inc_plugonet_generer($files, $write)
 	    $msg2.= join("\n", array_map('array_shift', $e)) . ".";
 	}  else {
 	  $msg2 .= " Correct en nouveau format.";
-	  $res[$nom]= $xml;
 	  if ($write) {
-	    $echecs = plugin2paquet_description($infos['description'], $slogan, $infos['prefix'], $dir);
-	    if (!ecrire_fichier($dir . '/paquet.xml', $xml) OR $echecs)
-	      $msg2 .= " pb de creation des fichiers $echecs";
+	    if ($modules = plugin2paquet_description($infos['description'], $slogan, $infos['prefix'], $dir))
+	      $xml = "\n<!-- svn add " . join(' ', $modules) . " -->" . $xml;
+	    if (ecrire_fichier($dir . '/paquet.xml', $xml) OR $echecs)
+	      $xml = "\n<!-- svn add paquet.xml -->" . $xml;
 	  }
+	  $res[$nom]= $xml;
 	  $ok++;
 	}
       }
@@ -103,7 +104,7 @@ function plugin2paquet($D, $dir, $nom)
 	$prefix = $D['prefix'];
 	$version = $D['version'];
 	$version_base = $D['version_base'];
-	
+
 	$compatible = '';
 	// Si le tableau provient de infos_plugin la compatibilite SPIP est directement accessible
 	if (isset($D['compatible']))
@@ -230,8 +231,7 @@ function plugin2paquet_utilise($D)
 // Passer les lettres accentuees en entites XML
 function plugin2paquet_description($description, $slogan, $plug, $dir)
 {
-	$langs = array();
-	$echecs = '';
+	$files = $langs = array();
 	foreach (plugin2paquet_traite_mult($description) as $lang => $_descr) {
 	  if (!$lang) $lang = 'fr';
 	  $langs[$lang]['description'] = trim(htmlentities($_descr));
@@ -243,16 +243,16 @@ function plugin2paquet_description($description, $slogan, $plug, $dir)
 	    $langs[$lang]['slogan'] = $matches[1];
 	  else $langs[$lang]['slogan'] = couper($slogan, 150, '');
 	}
-	$dir .= '/lang';
-	if (!is_dir($dir)) mkdir( $dir);
-	$dir .= '/';
+	$dirl = $dir . '/lang';
+	if (!is_dir($dirl)) mkdir( $dirl);
+	$dirl .= '/';
 	foreach($langs as $lang => $couples) {
 	  $module = strtolower($plug) . "-description";
 	  $t = "\n// Fichier produit par plugin2paquet";
-	  if (!ecrire_fichier_langue_php($dir, $lang, $module, $couples, $t))
-	    $echecs .= " $module";
+	  $t = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $t);
+	  if ($t) $files[]= substr($t, strlen($dir)+1);
 	}
-	return $echecs;
+	return $files;
 }
 
 // Expanse les multi en un tableau de textes complets, un par langue
@@ -305,8 +305,8 @@ function plugin2paquet_texte($name, $texte, $plug)
 // install -> $prefix_actions
 function plugin2paquet_implicite($D, $balise, $nom)
 {
-   $contenu = str_replace("\n", ' ', is_array($D[$nom]) 
-	? join(" ", array_map('trim', $D[$nom])) : trim($D[$nom]));
+   $contenu = str_replace("\n", ' ', is_array($D[$balise]) 
+	? join(" ", array_map('trim', $D[$balise])) : trim($D[$balise]));
 
   $std = $D['prefix'] . "_$nom" . '.php';
   if (!$contenu OR $contenu == $std) return '';
