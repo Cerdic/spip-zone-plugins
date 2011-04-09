@@ -24,6 +24,6 @@
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
-	<option value="#CLE" [(#CLE|=={GET{valeur}}|oui) selected="selected"]>#VALEUR</option>
+	<option value="#CLE"[(#CLE|=={#GET{valeur}}|oui)selected="selected"]>#VALEUR</option>
 </BOUCLE_selection>
 </select>
