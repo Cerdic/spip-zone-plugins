@@ -142,7 +142,7 @@ function plugin2paquet($D, $dir)
 	. plugin2paquet_implicite($D, 'fonctions', 'fonctions')
 	. plugin2paquet_implicite($D, 'install', 'actions');
 	
-	return "$renommer<paquet$paquet_att\n>$nom$licence$auteur$pipeline$necessite$utilise$bouton$onglet$chemin\n</paquet>\n";
+	return "$renommer<paquet$paquet_att\n>\t$nom\t$licence\t$auteur$pipeline$necessite$utilise$bouton$onglet$chemin\n</paquet>\n";
 }
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
@@ -171,6 +171,7 @@ function plugin2paquet_exec($D, $balise)
   $res = '';
   foreach($D[$balise] as $nom => $i) {
     $att = " nom='" . $nom . "'" .
+    	" titre='" . $i['titre'] . "'" .
       (empty($i['parent']) ? '' : (" parent='" . $i['parent'] . "'")) .
       (empty($i['icone']) ? '' : (" icone='" . $i['icone'] . "'")) .
       (empty($i['url']) ? '' : (" action='" . $i['url'] . "'")) .
