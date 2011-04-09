@@ -26,19 +26,24 @@
 <!ENTITY % URI "CDATA"> <!-- lien sur le Web -->
 <!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
 <!ENTITY % INTERVAL "CDATA"> <!-- 2 VNUM entre crochets ou parentheses -->
+<!ENTITY % ITEM "CDATA"> <!-- chaine de langue -->
 
 <!ENTITY % ETAT "(experimental|dev|test|stable)">
 
 <!ENTITY % CATEGORY "(auteur|communication|date|divers|edition|maintenance|multimedia|navigation|outil|performance|squelette|statistique|theme)">
 
-<!ENTITY % CONTENT "(auteur|bouton|chemin|copyright|licence|lib|necessite|onglet|pipeline|traduire|utilise)*" >
+<!ENTITY % CONTENT_COPY "(auteur|copyright|credit|licence)*" >
 
-<!ELEMENT paquet (nom %CONTENT; spip*) >
-<!ATTLIST paquet 
+<!ENTITY % CONTENT_TECH "(bouton|chemin|lib|necessite|onglet|pipeline|traduire|utilise)*" >
+
+<!ELEMENT paquet (nom %CONTENT_COPY; %CONTENT_TECH; spip*) >
+<!ATTLIST paquet
 	  categorie %CATEGORY; #IMPLIED
 	  compatible %INTERVAL; #IMPLIED
 	  etat %ETAT; #REQUIRED
-	  lien %URI;  #IMPLIED
+	  documentation %URI;  #IMPLIED
+	  demonstration %URI;  #IMPLIED
+	  developpement %URI;  #IMPLIED
 	  logo %PATH; #IMPLIED
 	  meta %NAME; #IMPLIED
 	  prefix ID #REQUIRED
@@ -48,20 +53,27 @@
 
 <!ELEMENT nom (#PCDATA)>
 
+<!ELEMENT auteur (#PCDATA)>
+<!ATTLIST auteur 
+	  lien %URI; #IMPLIED
+	  mail %MAIL; #IMPLIED
+>
+
+<!ELEMENT copyright (#PCDATA)>
+
+<!ELEMENT credit (#PCDATA)>
+<!ATTLIST credit
+	  lien %URI; #IMPLIED
+>
+
 <!ELEMENT licence (#PCDATA)>
 <!ATTLIST licence
 	  lien %URI; #IMPLIED
 >
 
-<!ELEMENT spip  %CONTENT; >
+<!ELEMENT spip  %CONTENT_TECH; >
 <!ATTLIST spip
 	  compatible %INTERVAL; #REQUIRED
->
-
-<!ELEMENT auteur (#PCDATA)>
-<!ATTLIST auteur 
-	  lien %URI; #IMPLIED
-	  mail %MAIL; #IMPLIED
 >
 
 <!ELEMENT chemin EMPTY>
@@ -102,6 +114,7 @@
 	  action %NAME;  #IMPLIED
 	  args %QUERY_STRING; #IMPLIED
 	  icone %PATH; #IMPLIED
+	  titre %ITEM; #REQUIRED
 >
 
 <!ELEMENT onglet EMPTY>
@@ -111,6 +124,7 @@
 	  action %NAME;  #IMPLIED
 	  args %QUERY_STRING; #IMPLIED
 	  icone %PATH; #IMPLIED
+	  titre %ITEM; #REQUIRED
 >
 
 <!ELEMENT traduire EMPTY>
