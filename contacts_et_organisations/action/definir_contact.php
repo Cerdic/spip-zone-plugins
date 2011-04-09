@@ -6,9 +6,11 @@
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_definir_contact_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_definir_contact_dist($arg=null) {
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 	$arg = explode('/', $arg);
 
 	// cas suppression d'une adresse et de toutes ses liaisons
