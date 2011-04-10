@@ -100,7 +100,7 @@ function ecrire_fichier_langue_php($dir, $langue, $module, $items, $comm='')
 // Date: ' . date('d-m-Y H:i:s') . '
 // Items: ' . count($items) . '
 
-if (defined(\'_ECRIRE_INC_VERSION\')) {
+if (defined(\'_ECRIRE_INC_VERSION\')) return;
 
 $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 ';
@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 			$contenu .= "\n\t'" . $k . "' => '" . addslashes($v) . "',";
 		else $contenu .= "\n/*\t" . $v[0] ."\n\t'" . $k . "' => '" . addslashes($v[1]) ."',*/\n"; 
 	}
-	$contenu .= "\n);\n}\n?".'>';
+	$contenu .= "\n);\n?".'>';
 
 	$nom = $dir . $module . "_" . $langue   . '.php';
 	return ecrire_fichier($nom, $contenu) ? $nom : false;
