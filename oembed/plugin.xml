@@ -2,7 +2,7 @@
 	<nom>oEmbed</nom>
 	<auteur>b_b</auteur>
 	<version>0.1</version>
-	<version_base>0.1</version_base>
+	<version_base>0.2</version_base>
 	<etat>dev</etat>
 	<prefix>oembed</prefix>
 	<categorie>multimedia</categorie>
@@ -21,6 +21,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>renseigner_document_distant</nom>
+		<inclure>oembed_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
 		<inclure>oembed_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='configurer_oembed' parent='bando_configuration'>

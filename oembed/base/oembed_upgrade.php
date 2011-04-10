@@ -27,6 +27,11 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 			}
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
+		if (version_compare($current_version,"0.2","<")){
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE spip_documents ADD oembed text NOT NULL DEFAULT ''");
+			ecrire_meta($nom_meta_base_version,$current_version=0.2,'non');
+		}
 	}
 }
 

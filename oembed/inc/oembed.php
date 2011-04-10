@@ -1,25 +1,25 @@
 <?php
 
+// Merci WordPress :)
+// http://core.trac.wordpress.org/browser/trunk/wp-includes/class-oembed.php
+
 /**
- * takes a URL and attempts to return ...
+ * Récupérer les données oembed d'une url
  *
- * @param string $url The URL to the content that should be attempted to be embedded.
- * @param array $args Optional arguments. Usually passed from a shortcode.
- * @return bool|array False on failure, otherwise the array of response.
+ * @param string $url url de la page qui contient le document à récupérer avec oembed
+ * @param int $maxwidth largeur max du document
+ * @param int $maxheight hauteur max du document
+ * @param string $format format à utiliser pour la requete oembed (json ou xml)
+ * @param string $detecter_lien tenter la détection automatique de lien oembed dans la page indiquée
+ * @return bool|array false si aucun retour ou erreur ; tableau des éléménents de la réponse oembed
  */
 function oembed_recuperer_data($url, $maxwidth = '', $maxheight = '', $format = 'json', $detecter_lien = 'non') {
 	$provider = false;
-
-	//if (!isset($discover))
-	//	$args['discover'] = true;
 	
 	$provider = oembed_verifier_provider($url);
 
-	//if ((!$provider) AND ($detecter_lien != 'non'))
-	//	$provider = oembed_detecter_lien($url);
-
-	//if ((!$provider) OR (!$data = oembed_fetch($provider, $url, $args)))
-	//	return false;
+	if ((!$provider) AND ($detecter_lien != 'non'))
+		$provider = oembed_detecter_lien($url);
 	
 	$url_json = parametre_url($provider,'url',$url,'&');
 	$url_json = parametre_url($url_json,'maxwidth',$maxwidth,'&');
@@ -39,10 +39,10 @@ function oembed_recuperer_data($url, $maxwidth = '', $maxheight = '', $format = 
 }
 
 /**
- * Verfier qu'une url est dans la liste des providers autorisés
+ * Vérfier qu'une url est dans la liste des providers autorisés
  *
  * @param string $url l'url à tester
- * @return bool|string false si non, endpoint du provider si oui
+ * @return bool|string false si non ; endpoint du provider si oui
  */
 function oembed_verifier_provider($url) {
 	$providers = sql_allfetsel('*', 'spip_oembed_providers');
@@ -56,10 +56,10 @@ function oembed_verifier_provider($url) {
 }
 
 /**
- * Attempts to find oEmbed provider discovery <link> tags at the given URL.
+ * Détecter les liens oembed dans le head d'une page web
  *
- * @param string $url The URL that should be inspected for discovery <link> tags.
- * @return bool|string False on failure, otherwise the oEmbed provider URL.
+ * @param string $url url de la page à analyser
+ * @return bool|string false si pas de lien ; url du contenu oembed
  */
 function oembed_detecter_lien($url) {
 	$providers = array();
@@ -68,17 +68,17 @@ function oembed_detecter_lien($url) {
 	include_spip('inc/distant');
 	if ($html = recuperer_page($url)) {
 		
-		// <link> types that contain oEmbed provider URLs
+		// types de liens oembed à détecter
 		$linktypes = array(
 			'application/json+oembed' => 'json',
 			'text/xml+oembed' => 'xml',
 			'application/xml+oembed' => 'xml', // uniquement pour Vimeo
 		);
 
-		// Strip <body>
+		// on ne garde que le head de la page
 		$head = substr($html,0,stripos($html,'</head>'));
 
-		// Do a quick check
+		// un test rapide...
 		$tagfound = false;
 		foreach ($linktypes as $linktype => $format) {
 			if (stripos($head, $linktype)) {
@@ -93,7 +93,7 @@ function oembed_detecter_lien($url) {
 				$href = extraire_attribut($link,'href');
 				if (!empty($type) AND !empty($linktypes[$type]) AND !empty($href)) {
 					$providers[$linktypes[$type]] = $href;
-					// Stop here if it's JSON (that's all we need)
+					// on a le json, ça nous suffit
 					if ('json' == $linktypes[$type])
 						break;
 				}
@@ -101,7 +101,7 @@ function oembed_detecter_lien($url) {
 		}
 	}
 
-	// JSON is preferred to XML
+	// on préfère le json au xml
 	if (!empty($providers['json']))
 		return $providers['json'];
 	elseif (!empty($providers['xml']))
