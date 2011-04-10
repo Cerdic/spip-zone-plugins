@@ -56,7 +56,7 @@ function inc_plugonet_generer($files, $write)
 	// (Heuristique reprise de SVP)
 	$nomplug = preg_replace('@<!--[^-]*-->@', '', $infos['nom']);
 	if (strpos($nomplug, '>')) {
-		$slogan = $nomplug; var_dump('coucou');
+		$slogan = $nomplug;
 		$nomplug = preg_replace('@</?multi>@', '', $nomplug);
 		$nomplug = preg_replace('/[[][^]]*[]]/', '', $nomplug);
 		$nomplug = preg_replace('/^\s*(\w+).*$/', '\1', $nomplug);
