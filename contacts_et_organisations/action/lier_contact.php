@@ -6,7 +6,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_lier_contact_dist($arg) {
+function action_lier_contact_dist($arg=null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
