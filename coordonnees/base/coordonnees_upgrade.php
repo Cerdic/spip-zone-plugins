@@ -83,6 +83,22 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		}
 		else return false;
 	}
+	
+	// On avait supprimer les types, mais ils reviennent en force mais dans les LIENS
+	if (version_compare($current_version, "1.4", "<")) { 
+		$ok = true;
+		
+		// On ajoute un champ "type" plus petit que l'ancien (car vrai type donc généralement juste un mot)
+		$ok &= sql_alter('TABLE spip_adresses_liens ADD type varchar(25) not null default ""');
+		$ok &= sql_alter('TABLE spip_numeros_liens ADD type varchar(25) not null default ""');
+		$ok &= sql_alter('TABLE spip_emails_liens ADD type varchar(25) not null default ""');
+		
+		if ($ok){
+			spip_log('Tables coordonnées correctement passsées en version 1.4','coordonnees');
+			ecrire_meta($nom_meta_base_version, $current_version="1.4");
+		}
+		else return false;
+	}
 
 }
 

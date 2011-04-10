@@ -86,7 +86,8 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 	$adresses_liens = array(
 		"id_adresse" => "BIGINT(21) NOT NULL",
 		"id_objet" => "BIGINT(21) NOT NULL",
-		"objet" => "varchar(25) NOT NULL" // peut etre un compte ou un contact
+		"objet" => "varchar(25) NOT NULL", // peut etre un compte ou un contact
+		'type' => 'varchar(25) not null default ""'
 	);
 	$adresses_liens_key = array(
 		"PRIMARY KEY" => "id_adresse, id_objet, objet",
@@ -100,8 +101,9 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 	$numeros_liens = array(
 		"id_numero" => "bigint(21) NOT NULL DEFAULT 0",
 		"id_objet" => "bigint(21) NOT NULL DEFAULT 0", 
-		"objet" => "varchar(25) NOT NULL" // peut etre un contact ou un compte
-		);
+		"objet" => "varchar(25) NOT NULL", // peut etre un contact ou un compte
+		'type' => 'varchar(25) not null default ""'
+	);
 	$numeros_liens_key = array(
 		"PRIMARY KEY" => "id_numero, id_objet, objet",
 		"KEY id_numero" => "id_numero"
@@ -114,7 +116,8 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 	$emails_liens = array(
 		"id_email" => "bigint(21) NOT NULL DEFAULT 0",
 		"id_objet" => "bigint(21) NOT NULL DEFAULT 0", 
-		"objet" => "varchar(25) NOT NULL" // peut etre un contact ou un compte
+		"objet" => "varchar(25) NOT NULL", // peut etre un contact ou un compte
+		'type' => 'varchar(25) not null default ""'
 		);
 	$emails_liens_key = array(
 		"PRIMARY KEY" => "id_email, id_objet, objet",
