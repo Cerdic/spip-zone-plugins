@@ -238,9 +238,8 @@ function plugin2paquet_necessite($D) {
 			$lib .= "\n\t<lib nom='$nom'$src />";
 		}
 	}
-var_dump($lib);
-	$res = $nec . $lib;
 
+	$res = $nec . $lib;
 	return $res ? "\n$res" : '';
 }
 
