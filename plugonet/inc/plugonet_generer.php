@@ -154,11 +154,11 @@ function plugin2paquet($D, $dir, $nom)
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
 // et normaliser l'esperluete pour eviter l'erreur d'entite indefinie
-function plugin2paquet_lien($url, $nom='lien')
+function plugin2paquet_lien($url, $nom='lien', $sep="\n\t")
 {
 	if (!preg_match(',https?://[^]\s]+,', $url, $r)) return '';
 	$url = str_replace('&', '&amp;', str_replace('&amp;', '&', $r[0]));
-	return "\n\t$nom='$url'";
+	return "$sep$nom='$url'";
 }
 
 function plugin2paquet_pipeline($D)
@@ -214,18 +214,20 @@ function plugin2paquet_chemin($D)
   return $res ? "\n$res" : '';
 }
 
-function plugin2paquet_necessite($D)
-{
-  $nec = $lib = '';
-  foreach($D['necessite'] as $i) {
-    $nom = isset($i['id']) ? $i['id'] : $i['nom'];
-    $src = plugin2paquet_lien($i['src']);
-    $version = empty($i['version']) ? '' : (" version='" . $i['version'] . "'");
-    if (preg_match('/^lib:(.*)$/', $nom, $r))
-      $lib .= "\n\t<lib nom='$r[1]'$src$version />";
-    else $nec .="\n\t<necessite nom='$nom'$version />";
-  }
-  return $nec . $lib;
+function plugin2paquet_necessite($D) {
+	$nec = $lib = '';
+	foreach($D['necessite'] as $i) {
+		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
+		$src = plugin2paquet_lien($i['src'], 'lien', ' ');
+		$version = empty($i['version']) ? '' : (" version='" . $i['version'] . "'");
+		if (preg_match('/^lib:(.*)$/', $nom, $r))
+			$lib .= "\n\t<lib nom='" . $r[1] . "'$src$version />";
+		else 
+			$nec .="\n\t<necessite nom='$nom'$version />";
+	}
+	$res = $nec . $lib;
+
+	return $res ? "\n$res" : '';
 }
 
 function plugin2paquet_utilise($D)
