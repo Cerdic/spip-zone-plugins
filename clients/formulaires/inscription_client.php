@@ -5,7 +5,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/filtres');
 
-function formulaires_inscription_client_saisies_dist(){
+function formulaires_inscription_client_saisies_dist($retour=''){
 	$mode = tester_config(0);
 	return array(
 		array(
@@ -31,11 +31,51 @@ function formulaires_inscription_client_saisies_dist(){
 				'label' => _T('contacts:label_email'),
 				'obligatoire' => 'oui'
 			)
-		)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'voie',
+				'label' => _T('coordonnees:label_voie'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'complement',
+				'label' => _T('coordonnees:label_complement'),
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'code_postal',
+				'label' => _T('coordonnees:label_code_postal'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'ville',
+				'label' => _T('coordonnees:label_ville'),
+				'obligatoire' => 'oui'
+			)
+		),
+		array(
+			'saisie' => 'pays',
+			'options' => array(
+				'nom' => 'pays',
+				'code_pays' => 'oui',
+				'label' => _T('coordonnees:label_pays'),
+				'obligatoire' => 'oui'
+			)
+		),
 	);
 }
 
-function formulaires_inscription_client_charger_dist(){
+function formulaires_inscription_client_charger_dist($retour=''){
 	// On récupère le formulaire classique d'inscription
 	$mode = tester_config(0);
 	$inscription_dist = charger_fonction('charger', 'formulaires/inscription');
@@ -44,7 +84,7 @@ function formulaires_inscription_client_charger_dist(){
 	return $contexte;
 }
 
-function formulaires_inscription_client_verifier_dist(){
+function formulaires_inscription_client_verifier_dist($retour=''){
 	// On crée un faux positif pour le nom car on le construira nous-même plus tard
 	set_request('nom_inscription', 'glop');
 	
@@ -56,7 +96,7 @@ function formulaires_inscription_client_verifier_dist(){
 	return $erreurs;
 }
 
-function formulaires_inscription_client_traiter_dist(){
+function formulaires_inscription_client_traiter_dist($retour=''){
 	// Le pseudo SPIP est construit
 	set_request('nom_inscription', _request('co__prenom').' '._request('co__nom'));
 	
@@ -67,6 +107,11 @@ function formulaires_inscription_client_traiter_dist(){
 	
 	// On récupère l'auteur qu'on vient de créer avec l'email du form
 	if ($id_auteur = sql_getfetsel('id_auteur', 'spip_auteurs', 'email = '.sql_quote(_request('mail_inscription')))){
+		// On ajoute des infos au contexte
+		set_request('objet', 'auteur');
+		set_request('id_objet', $id_auteur);
+		set_request('type', 'principale');
+		
 		// On crée un contact pour cet utilisateur
 		$definir_contact = charger_fonction('definir_contact', 'action/');
 		$definir_contact("contact/$id_auteur");
@@ -82,7 +127,14 @@ function formulaires_inscription_client_traiter_dist(){
 			}
 		}
 		modifier_contenu('contact', $id_contact, array('invalideur' => "id='id_contact/$id_contact'"), $c);
+		
+		// On crée l'adresse
+		$editer_adresse = charger_fonction('editer_adresse', 'action/');
+		$editer_adresse('oui');
 	}
+	
+	// si redirection demandee, on refuse le traitement en ajax
+	if ($retour) refuser_traiter_formulaire_ajax();
 	
 	return $retours;
 }
