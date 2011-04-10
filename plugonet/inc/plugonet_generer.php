@@ -139,7 +139,7 @@ function plugin2paquet($D, $dir, $nom)
 	
 	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
 	$pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
-	$necessite = is_array($D['necessite']) ? plugin2paquet_necessite($D) :'';
+	$necessite = (is_array($D['necessite']) OR is_array($D['lib'])) ? plugin2paquet_necessite($D) :'';
 	$utilise = is_array($D['utilise']) ? plugin2paquet_utilise($D['utilise']) :'';
 	$bouton = is_array($D['bouton']) ? plugin2paquet_exec($D, 'bouton') :'';
 	$onglet = is_array($D['onglet']) ? plugin2paquet_exec($D, 'onglet') :'';
@@ -216,15 +216,29 @@ function plugin2paquet_chemin($D)
 
 function plugin2paquet_necessite($D) {
 	$nec = $lib = '';
-	foreach($D['necessite'] as $i) {
-		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
-		$src = plugin2paquet_lien($i['src'], 'lien', ' ');
-		$version = empty($i['version']) ? '' : (" version='" . $i['version'] . "'");
-		if (preg_match('/^lib:(.*)$/', $nom, $r))
-			$lib .= "\n\t<lib nom='" . $r[1] . "'$src$version />";
-		else 
-			$nec .="\n\t<necessite nom='$nom'$version />";
+
+	// Si on lit avec get_infos les librairies sont incluses dans l'arbre des necessite
+	if ($D['necessite']) {
+		foreach($D['necessite'] as $i) {
+			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
+			$src = plugin2paquet_lien($i['src'], 'lien', ' ');
+			$version = empty($i['version']) ? '' : (" version='" . $i['version'] . "'");
+			if (preg_match('/^lib:(.*)$/', $nom, $r))
+				$lib .= "\n\t<lib nom='" . $r[1] . "'$src />";
+			else 
+				$nec .="\n\t<necessite nom='$nom'$version />";
+		}
 	}
+
+	// Si on lit avec infos_plugin les librairies sont dans une branche 'lib'
+	if ($D['lib']) {
+		foreach($D['lib'] as $i) {
+			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
+			$src = " lien='" . $i['lien'] . "'";
+			$lib .= "\n\t<lib nom='$nom'$src />";
+		}
+	}
+var_dump($lib);
 	$res = $nec . $lib;
 
 	return $res ? "\n$res" : '';
