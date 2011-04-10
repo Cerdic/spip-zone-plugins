@@ -6,9 +6,11 @@
 **/
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_editer_adresse_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_editer_adresse_dist($arg=null) {
+	if (is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 	// pas d'adresse ? on en cree une nouvelle, mais seulement si 'oui' en argument.
 	if (!$id_adresse = intval($arg)) {
