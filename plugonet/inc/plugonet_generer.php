@@ -134,7 +134,7 @@ function plugin2paquet($D, $dir, $nom)
 		($version_base ? "\n\tversion_base='$version_base'" : '');
 
 	$nom = plugin2paquet_texte('nom', $nom);
-	$licence = plugin2paquet_texte('licence', $D['licence']);
+	$licence = plugin2paquet_licence($D['licence']);
 	$auteur = plugin2paquet_auteur($D['auteur']);
 	
 	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
@@ -143,12 +143,13 @@ function plugin2paquet($D, $dir, $nom)
 	$utilise = is_array($D['utilise']) ? plugin2paquet_utilise($D['utilise']) :'';
 	$bouton = is_array($D['bouton']) ? plugin2paquet_exec($D, 'bouton') :'';
 	$onglet = is_array($D['onglet']) ? plugin2paquet_exec($D, 'onglet') :'';
-	
+	$traduire = is_array($D['traduire']) ? plugin2paquet_traduire($D) :'';
+
 	$renommer = plugin2paquet_implicite($D, 'options', 'options')
 	. plugin2paquet_implicite($D, 'fonctions', 'fonctions')
 	. plugin2paquet_implicite($D, 'install', 'actions');
 	
-	return "$renommer<paquet$paquet_att\n>\t$nom$licence$auteur$pipeline$necessite$utilise$bouton$onglet$chemin\n</paquet>\n";
+	return "$renommer<paquet$paquet_att\n>\t$nom$licence$auteur$pipeline$necessite$utilise$bouton$onglet$chemin$traduire\n</paquet>\n";
 }
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
@@ -187,6 +188,18 @@ function plugin2paquet_exec($D, $balise)
     $res .= "\n\t<$balise$att />";
   }
   return $res ? "\n$res" : '';
+}
+
+function plugin2paquet_traduire($D) {
+	$res = '';
+	foreach($D['traduire'] as $nom => $i) {
+		$att = " module='" . $i['module'] . "'" .
+				" reference='" . $i['reference'] . "'" .
+				(empty($i['gestionnaire']) ? '' : (" gestionnaire='" . $i['gestionnaire'] . "'"));
+		$res .= "\n\t<traduire$att />";
+	}
+
+	return $res ? "\n$res" : '';
 }
 
 function plugin2paquet_chemin($D)
@@ -229,30 +242,66 @@ function plugin2paquet_utilise($D)
 }
 
 // Passer les lettres accentuees en entites XML
-function plugin2paquet_description($description, $slogan, $plug, $dir)
-{
+function plugin2paquet_description($description, $slogan, $prefixe, $dir) {
 	$files = $langs = array();
 	foreach (plugin2paquet_traite_mult($description) as $lang => $_descr) {
-	  if (!$lang) $lang = 'fr';
-	  $langs[$lang]['description'] = trim(htmlentities($_descr));
+		if (!$lang)
+			$lang = 'fr';
+		$langs[$lang][strtolower($prefixe) . '_description'] = trim(htmlentities($_descr));
+	}
+	
+	foreach (plugin2paquet_traite_mult($slogan) as $lang => $slogan) {
+		if (!$lang)
+			$lang = 'fr';
+		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $slogan, $matches))
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = $matches[1];
+		else
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = couper($slogan, 150, '');
 	}
 
-	foreach (plugin2paquet_traite_mult($slogan) as $lang => $slogan) {
-	  if (!$lang) $lang = 'fr';
-	  if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $slogan, $matches))
-	    $langs[$lang]['slogan'] = $matches[1];
-	  else $langs[$lang]['slogan'] = couper($slogan, 150, '');
-	}
 	$dirl = $dir . '/lang';
-	if (!is_dir($dirl)) mkdir( $dirl);
+	if (!is_dir($dirl)) 
+		mkdir( $dirl);
 	$dirl .= '/';
 	foreach($langs as $lang => $couples) {
-	  $module = strtolower($plug) . "-description";
-	  $t = "\n// Fichier produit par plugin2paquet";
-	  $t = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $t);
-	  if ($t) $files[]= substr($t, strlen($dir)+1);
+		$module = strtolower($prefixe) . "-paquet";
+		$t = "\n// Fichier produit par PlugOnet";
+		$t = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $t);
+		if ($t) 
+			$files[]= substr($t, strlen($dir)+1);
 	}
+
 	return $files;
+}
+
+// - elimination des multi (exclue dans la nouvelle version)
+// - transformation en attribut des balises A
+// - interpretation des balises BR et LI comme separateurs
+
+function plugin2paquet_licence($texte)
+{
+
+	// On extrait le multi si besoin et on selectionne la traduction francaise
+	$t = plugin2paquet_traite_mult($texte);
+
+	$res = '';
+	foreach(preg_split('@(<br */?>)|<li>@', $t['fr']) as $v) {
+	    if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
+	      $href = " lien='" . $r[2] ."'";
+	      $v = str_replace($r[0], $r[3], $v);
+	    } elseif (preg_match(_RACCOURCI_LIEN,$v, $r)) {
+	      $href = " lien='" . $r[4] ."'";
+	      $v = str_replace($r[0], '', $v);
+	    } else $href = '';
+	    if (preg_match('/\W([\w\d.-]+@[\w\d.-]+)/', $v, $r)) {
+	      $mail = " mail='$r[1]'";
+	      $v = str_replace($r[0], $r[3], $v);
+	    } else $mail = '';
+	    if ($v = trim(textebrut($v)))
+	      $res .= "\n\t<licence$href$mail>$v</licence>";
+	}
+
+	return $res;
 }
 
 // - elimination des multi (exclue dans la nouvelle version)
@@ -262,8 +311,8 @@ function plugin2paquet_auteur($texte) {
 
 	// On extrait le multi si besoin et on selectionne la traduction francaise
 	$t = plugin2paquet_traite_mult($texte);
-	$res = '';
 
+	$res = '';
 	foreach(preg_split('@(<br */?>)|<li>|,|\s-@', $t['fr']) as $v) {
 		// On detecte d'abord un lien eventuel
 		// -- soit sous la forme d'une href d'une ancre
