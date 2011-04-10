@@ -41,11 +41,14 @@ function insert_adresse() {
 
 	// ajouter la liaison si presente
 	if ($objet = _request('objet')
-	and $id_objet = _request('id_objet')) {
+		and $id_objet = _request('id_objet')
+	) {
+		$type = _request('type') ? _request('type') : '';
 		sql_insertq("spip_adresses_liens", array(
-			'id_adresse' 	=> $id_adresse,
-			'objet' 		=> $objet,
-			'id_objet'		=> $id_objet,
+			'id_adresse' => $id_adresse,
+			'objet' => $objet,
+			'id_objet' => $id_objet,
+			'type' => $type
 		));
 	}
 	
