@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
+	'bouton_verifier' => 'V&eacute;rifier',
 	'bouton_plugonet' => 'PlugOnet',
 	'bouton_tout_cocher' => 'Tout cocher',
 	'bouton_tout_decocher' => 'Tout d&eacute;cocher',
