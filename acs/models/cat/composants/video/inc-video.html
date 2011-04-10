@@ -1,14 +1,19 @@
-#CACHE{7200}
-<B_doc>
-<div align="center">
-#ANCRE_PAGINATION
-<table id="repimgbloc" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td class="repimagespaginationg">#PAGINATION{videoprecedent}</td>
-    <td><div class="planchecontact"><BOUCLE_doc (DOCUMENTS) {extension==flv}{!par date}{pagination #VAR{acsVideoNbImg,3}}>#SET{'TAILLE', #TAILLE|taille_en_octets|texte_backend}#SET{'doctitre', #TITRE}#SET{'doclogo', #LOGO_DOCUMENT||extraire_attribut{src}}<BOUCLE_ART (ARTICLES){id_document}><div class="repimages"><a href="#URL_ARTICLE" title="[(#GET{doctitre}) ](#GET{TAILLE})[ - (#TITRE)]"><img src='#GET{'doclogo'}' [(#GET{'doclogo'}|=={dist/vignettes/flv.png}|?{class="repimagesdef",class="repimages"})] alt=""  /></a></div></BOUCLE_ART></BOUCLE_doc></div></td>
-    <td class="repimagespaginationd">#PAGINATION{videosuivant}</td>
-  </tr>
-</table>
-</div>
-<div class="spacer"></div>
-</B_doc>
+<BOUCLE_doc (DOCUMENTS){id_document ?}{0,1}>[(#SET{w,#ENV{w,#LARGEUR|!={0}|?{#LARGEUR,320}}})][(#SET{h,#ENV{h,#HAUTEUR|!={0}|?{#HAUTEUR,200}}})]
+[(#SET{startimage,[(#LOGO_DOCUMENT|?{#LOGO_DOCUMENT||image_reduire{#GET{w}|moins{8},#GET{h}|moins{8}}||extraire_attribut{src},''})]})]
+  <div class="video-js-box">
+    <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
+    <video id="video#ID_DOCUMENT" class="video-js" width="#GET{w}" height="#GET{h}" controls="controls" preload="auto" poster="[(#GET{startimage})]">
+      <source src="[(#URL_DOCUMENT|url_absolue)]" type='video/#EXTENSION' />
+        <object id="flashvideo#ID_DOCUMENT" class="vjs-flash-fallback" type="application/x-shockwave-flash" data="#CHEMIN{composants/video/swf/player_flv_maxi.swf}" width="#GET{w}" height="#GET{h}">
+        <param name="movie" value="#CHEMIN{composants/video/swf/player_flv_maxi.swf}" />
+        <param name="allowFullScreen" value="true" />
+        <param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=#GET{w}&amp;height=#GET{h}&amp;bgcolor=#VAR{acsOngletsFondColor,ffffff}&amp;videobgcolor=#VAR{acsOngletsFondColor,ffffff}&amp;margin=0&amp;buttoncolor=#VAR{acsVideoIcons,009966}&amp;buttonovercolor=#VAR{acsVideoIconsHover,00ff00}&amp;slidercolor1=#VAR{acsVideoIconsHover,00ff00}&amp;slidercolor2=#VAR{acsVideoIcons,009966}&amp;sliderovercolor=#VAR{acsVideoIconsHover,00df00}&amp;textcolor=dfdfdf[&amp;title=(#TITRE)][&amp;startimage=(#GET{startimage})]&amp;showstop=1&amp;showvolume=1&amp;showtime=1&amp;showfullscreen=1[(#AUTOSTART|?{&amp;autoplay=1,''})]" />
+        <param name="wmode" value="[(#VAR{acsOngletsFondColor,#ffffff})]" />
+        <img src="[(#GET{startimage})]" width="#GET{w}" height="#GET{h}" alt="Poster Image" title="No video playback capabilities." />
+      </object>
+    </video>[(#REM) Download links provided for devices that can't play video in the browser.
+    ]<p class="vjs-no-video"><strong>Download Video:</strong>
+      <a href="[(#ENV{lien}|sinon{#URL_DOCUMENT|url_absolue})]" type="#MIME_TYPE" class="nsize[ (#ENV{lien_class})]" title="#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]"><:acs:video_download:></a>
+    </p>
+  </div>
+</BOUCLE_doc><script type="text/javascript">VideoJS.setupAllWhenReady();</script>

@@ -303,7 +303,7 @@ class AdminComposant {
  */
   function edit($mode=false) {
 		include_spip('public/assembler');
-  	include_spip('inc/composant/controles');
+  	include_spip('inc/composant/classControles');
 		$r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'inc/picker/picker.js"></script>';
 		$r .= "<input type='hidden' name='maj_composant' value='oui' />".
 					'<input type="hidden" name="composant" value="'.$this->class.'" />'.
@@ -364,10 +364,17 @@ class AdminComposant {
 					$$v = $default;
 			}
 			$draw = 'ctl'.ucfirst($var['type']);
+			$ctl = 'ctl'.ucfirst($var['type']);
+			if (class_exists($ctl)) {
+			  $ctl = new $ctl($this->class, $this->nic, $v, $$v, $var, md5($this->fullname));
+  			if (method_exists($ctl, "draw"))
+          $controls[$var['nom']] = $ctl->draw();
+			}/*
 			if (is_callable($draw)) {
 			  $controls[$var['nom']] = $draw($this->class, $this->nic, $v, $$v, $var, md5($this->fullname));
-			}
-			else $controls[$var['nom']] = $draw."() undefined.<br />" ;
+			}*/
+      else
+        $controls[$var['nom']] = $ctl."() undefined.<br />" ;
 		}
 
 		// Recherche une mise en page et y remplace les variables par des contrôles

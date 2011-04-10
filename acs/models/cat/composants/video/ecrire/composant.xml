@@ -4,47 +4,28 @@
 
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
-  <version>0.8.0</version>
+  <version>0.8.1</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
     <nom>preview</nom>
-    <valeur>300</valeur>
+    <valeur>250</valeur>
   </param>
 
   <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+    <valeur>#000</valeur>
+  </variable>
+  <variable>
     <nom>Icons</nom>
     <type>color</type>
-    <valeur>009966</valeur>
+    <valeur>#009966</valeur>
   </variable>
   <variable>
     <nom>IconsHover</nom>
     <type>color</type>
-    <valeur>00ff00</valeur>
+    <valeur>#00ff00</valeur>
   </variable>
 
-  <variable>
-    <nom>flvbgcolor1</nom>
-    <type>color</type>
-    <valeur>dfdfdf</valeur>
-  </variable>
-  <variable>
-    <nom>flvbgcolor2</nom>
-    <type>color</type>
-    <valeur>afafaf</valeur>
-  </variable>
-
-  <variable>
-    <nom>Download</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>oui</valeur>
-  </variable>
-  <variable>
-    <nom>NbImg</nom>
-    <type>nombre</type>
-    <valeur>5</valeur>
-  </variable>
-  
 </composant>

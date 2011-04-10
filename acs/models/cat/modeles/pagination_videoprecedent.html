@@ -4,6 +4,6 @@
 #SET{i,#ENV{page_courante}|moins{1}}
 [(#GET{i}|>{0}|?{' ',''})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
-	][(#INCLURE{fond=modeles/paginationvideog}{num=#GET{i}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}|ancre_url{#ENV{ancre}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+	][(#INCLURE{fond=composants/diapo/pagination-g}{num=#GET{i}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
 	#SET{i,#GET{i}|plus{2}}
 ]

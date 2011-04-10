@@ -1,0 +1,20 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Diapo</nom>
+
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.1</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>150</valeur>
+  </param>
+
+  <variable>
+    <nom>Nb</nom>
+    <type>text</type>
+    <valeur>5</valeur>
+  </variable>  
+</composant>

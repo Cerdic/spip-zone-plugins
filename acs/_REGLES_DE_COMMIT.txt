@@ -7,7 +7,7 @@ Des règles particulières existent pour les créateurs de nouveaux modèles ACS
 ----------------------------------------------------------------------------------------------------------------
 Conventions de presentation du code source :
 
-- tabulations egales à deux espaces
+- deux espaces en guise de tabulation, PAS de caracteres tab
 
 - commentaires multilingues pour Doxygen :
 		\~english

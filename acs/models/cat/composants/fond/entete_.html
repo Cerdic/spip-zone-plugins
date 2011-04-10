@@ -1,4 +1,4 @@
-#CACHE{7200}<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+[(#CACHE{7200})]<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG">[(#REM)
 
              ACS
@@ -23,18 +23,18 @@ Entete de page - page header
   <meta name="robots" content="#ENV{mrobots,#ENV{calendrier_mois}|=={""}|?{all,none}}" />
   [<meta name="expires" content="(#ENV{mexpires,3600})" />]
   [<meta name="description" content="(#ENV{mdescription,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
-  [<meta name="keywords" lang="#LANG" content="(#ENV{mkeywords,<:acs:entete_meta_keywords:>})" />]
-  [<meta name="author" content="(#ENV{mauthor,<:acs:entete_meta_author:>})" />]
-  [<meta name="copyright" content="(#ENV{mcopyright,<:acs:entete_meta_copyright:>})" />]
+  [<meta name="keywords" lang="#LANG" content="(#ENV{mkeywords,<:acs:fond_meta_keywords:>})" />]
+  [<meta name="author" content="(#ENV{mauthor,<:acs:fond_meta_author:>})" />]
+  [<meta name="copyright" content="(#ENV{mcopyright,<:acs:fond_meta_copyright:>})" />]
   [<meta name="abstract" content="(#ENV{mabstract,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
   <meta name="organization" content="#NOM_SITE_SPIP" />
-  [<meta name="location" content="(#ENV{mlocation,<:acs:entete_meta_location:>})" />]
+  [<meta name="location" content="(#ENV{mlocation,<:acs:fond_meta_location:>})" />]
   <meta name="DC.Type" content="Document" />
   <meta name="DC.Format" content="text/html" />
   <meta name="DC.Identifier" content="#URL_SITE_SPIP" />
   <meta name="DC.Language" content="#LANG" />
-  <meta name="DC.Coverage" content="<:acs:entete_meta_dc_coverage:> #NOM_SITE_SPIP" />
-  [<meta name="DC.Creator" content="(#ENV{mauthor,<:acs:entete_meta_author:>})" />]
+  <meta name="DC.Coverage" content="<:acs:fond_meta_dc_coverage:> #NOM_SITE_SPIP" />
+  [<meta name="DC.Creator" content="(#ENV{mauthor,<:acs:fond_meta_author:>})" />]
   [<meta name="DC.Date" content="(#ENV{mdate, #DATE})" />]
   [<meta name="DC.Contributor" content="(#ENV{mcontributor,#NOM_SITE_SPIP})" />]
   [<meta name="DC.Publisher" content="(#ENV{mpublisher,#NOM_SITE_SPIP})" />]
@@ -47,10 +47,13 @@ Entete de page - page header
   ]<link rel="alternate" type="application/rss+xml"[ title="(#ENV{rsstitle,<:syndiquer_site:>})"] href="#ENV{rssurl,#URL_PAGE{backend}}" />
   [(#REM) Feuille de style CSS pour l'agenda Spip, si necessaire
   ][(#ENV{page}|=={agenda}|?{' '})<link rel="stylesheet" href="[(#CHEMIN{agenda.css}|direction_css)]" type="text/css" media="projection, screen, tv" />]
-  [(#REM) Balise permettant aux plugins d'inserer des appels javascript ou css. Avant impression.css pour permettre controle sur impression des plugins
+  [(#REM) 
+  
+  Balise permettant aux composants ACS (et aux autres plugins) d'inserer 
+  des appels javascript ou css.
+  Avant impression.css pour permettre controle sur impression des plugins
+  
   ][(#INSERT_HEAD)]
-  [(#REM) Feuille de style CSS pour l'affichage du site a l'ecran
-  ][<link rel="stylesheet" href="(#URL_PAGE{habillage.css,v=#ACS_DERNIERE_MODIF})" type="text/css" media="projection, screen, tv" />]
   [(#REM) Feuille de style CSS pour l'impression 
   ]<link rel="stylesheet" href="[(#CHEMIN{impression.css}|direction_css)]" type="text/css" media="print" />
   <script type="text/javascript" src="#CHEMIN{javascript/layer.js}"></script>

@@ -3,7 +3,7 @@
   <nom>Articles</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
-  <version>0.8.0</version>
+  <version>0.8.1</version>
 	<necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -27,13 +27,13 @@
   </variable>
   <variable>
     <nom>MargeBas</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>5</valeur>
   </variable>
 
   <variable>
     <nom>Pagination</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>10</valeur>
   </variable>
   <variable>
@@ -73,18 +73,18 @@
   </variable>
   <variable>
     <nom>NbLettres</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>200</valeur>
   </variable>
   <variable>
     <nom>LogoTailleMax</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>100</valeur>
   </variable>
 
   <variable>
     <nom>ListesLogoTailleMax</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>50</valeur>
   </variable>
   

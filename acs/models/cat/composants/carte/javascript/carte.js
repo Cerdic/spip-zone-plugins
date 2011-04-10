@@ -74,7 +74,7 @@ function addPicto(item, markerLayer, map, pins) {
       if (popup == null) {
         popup = new OpenLayers.Popup.FramedCloud("popup" + item.id, point.fromDataToDisplay(),
         		undefined,
-        		html + '<div style="display: block; width: 100%; height: 100%; background: transparent url(plugins/gis/img_pack/attente.gif) center center no-repeat;"></div>',
+        		html + '<div style="display: block; width: 100%; height: 100%; background: transparent url(' + defAttente + ') center center no-repeat;"></div>',
         		undefined,
         		true,
         		function() {

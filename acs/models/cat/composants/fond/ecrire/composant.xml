@@ -3,7 +3,7 @@
   <nom>Fond</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
-  <version>0.8.0</version>
+  <version>0.8.1</version>
   <necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -49,13 +49,13 @@
 
   <variable>
     <nom>Spacer</nom>
-    <type>nombre</type>
+    <type>text</type>
 		<valeur>10px</valeur>
   </variable>
   
   <variable>
     <nom>FontSize</nom>
-    <type>nombre</type>
+    <type>text</type>
 		<valeur>0.88em</valeur>
   </variable>
   <variable>
@@ -70,7 +70,7 @@
 
   <variable>
     <nom>PoesieFontSize</nom>
-    <type>nombre</type>
+    <type>text</type>
 		<valeur>1.09em</valeur>
   </variable>
   <variable>
@@ -85,22 +85,22 @@
 
   <variable>
     <nom>TitleSize</nom>
-    <type>nombre</type>
+    <type>text</type>
 		<valeur>1.15em</valeur>
   </variable>
   <variable>
     <nom>STSize</nom>
-    <type>nombre</type>
+    <type>text</type>
 		<valeur>1.09em</valeur>
   </variable>
   <variable>
     <nom>BlocSize</nom>
-    <type>nombre</type>
+    <type>text</type>
 		<valeur>0.82em</valeur>
   </variable>
   <variable>
     <nom>NavSize</nom>
-    <type>nombre</type>
+    <type>text</type>
 		<valeur>0.65em</valeur>
   </variable>
 

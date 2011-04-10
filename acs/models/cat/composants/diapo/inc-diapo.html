@@ -1,0 +1,13 @@
+[(#CACHE{7200})]
+<B_doc>
+<div align="center">
+<table id="repimgbloc" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="repimagespaginationg">#PAGINATION{videoprecedent}</td>
+    <td><div class="planchecontact"><BOUCLE_doc (DOCUMENTS) {extension==(flv|mp4|ogv|webm)}{!par date}{pagination #VAR{acsDiapoNb,3}}>[(#SET{TAILLE, #TAILLE|taille_en_octets|texte_backend})][(#SET{doctitre, #TITRE})][(#SET{doclogo, #LOGO_DOCUMENT||extraire_attribut{src}})][(#SET{classe_vignette,#ID_VIGNETTE|!={0}|?{repimages,repimagesdef}})]<B_ART><BOUCLE_ART(ARTICLES){id_document}><div class="repimages"><a href="#URL_ARTICLE" title="[(#GET{doctitre}) ](#GET{TAILLE})[ - (#TITRE)]"><img src="#GET{doclogo}" class="#GET{classe_vignette}" alt="[(#GET{doctitre})]" /></a></div></BOUCLE_ART></B_ART><BOUCLE_RUB(RUBRIQUES){id_document}><div class="repimages"><a href="#URL_RUBRIQUE" title="[(#GET{doctitre})] (#GET{TAILLE})[ - (#TITRE)]"><img src="#GET{doclogo}" class="#GET{classe_vignette}" alt="[(#GET{doctitre})]" /></a></div></BOUCLE_RUB><//B_ART></BOUCLE_doc></div></td>
+    <td class="repimagespaginationd">#PAGINATION{videosuivant}</td>
+  </tr>
+</table>
+</div>
+<div class="spacer"></div>
+</B_doc>

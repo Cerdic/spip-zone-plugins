@@ -64,12 +64,12 @@ define('_DIR_COMPOSANTS', find_in_path('composants'));
 // dispatch public / privé
 if ((_DIR_RESTREINT != '') && ($_POST['action'] != 'poster_forum_prive')) {
 	// Sauts de ligne 
-	$GLOBALS['spip_pipeline']['pre_propre'] .= '|post_autobr';
-  include_spip('balise/acs_balises');
+	$GLOBALS['spip_pipeline']['pre_propre'] .= '|post_autobr';  
 }
 else {
   require_once _DIR_ACS.'inc/acs_onload_ecrire.php';
 }
+include_spip('balise/acs_balises');
 
 // Retourne une variable d'un plugin actif
 function acs_get_from_active_plugin($plugin, $variable = false) {

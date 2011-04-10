@@ -33,7 +33,8 @@ Note: les fonds de plan Google ne sont disponibles QUE si la librairie Google Ma
   defPictoHeight = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'Picto'},interrogation.png}}|hauteur)]";
   defPictoHover = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'PictoHover'},interrogation_hover.png}}|url_absolue)]";
   defPictoHoverWidth = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'PictoHover'},interrogation_hover.png}}|largeur)]";
-  defPictoHoverHeight = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'PictoHover'},interrogation_hover.png}}|hauteur)]";  
+  defPictoHoverHeight = "[(#ACS_CHEMIN{pictos/#VAR{#EVAL{'acsCarte'.'#NIC'.'PictoHover'},interrogation_hover.png}}|hauteur)]";
+  defAttente = "[(#CHEMIN{img_pack/attente.gif}|url_absolue)]";
   
   var map[(#GET{id_carte_gis})];
   var markerManager[(#GET{id_carte_gis})];

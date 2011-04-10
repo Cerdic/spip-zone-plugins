@@ -3,7 +3,7 @@
   <nom>Audio</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
-  <version>0.8.0</version>
+  <version>0.8.1</version>
 	<necessite id='acs' version='[0.7.1;]' />
 
   <param>
@@ -69,7 +69,7 @@
 
   <variable>
     <nom>NbMp3</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>10</valeur>
   </variable>
   <variable>
@@ -118,10 +118,10 @@
   </variable>
   <variable>
     <nom>ShadowSize</nom>
-    <type>nombre</type>
+    <type>text</type>
   </variable>
   <variable>
   	<nom>ShadowBlur</nom>
-    <type>nombre</type>
+    <type>text</type>
   </variable>
 </composant>

@@ -45,6 +45,11 @@ function calcule_balise_acs_release() {
 	return acs_release();
 }
 
+function calculer_balise_pinceau($composant, $nic) {
+  $nic = $nic ? $nic : '0';
+  return  'crayon composant-'.$composant.'-'.$nic.' type_pinceau';
+}
+
 function balise_PINCEAU($p) {
   $composant = interprete_argument_balise(1,$p);
   $nic = interprete_argument_balise(2,$p);
@@ -53,11 +58,6 @@ function balise_PINCEAU($p) {
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p;
-}
-
-function calculer_balise_pinceau($composant, $nic) {
-	$nic = $nic ? $nic : '0';
-  return  'crayon composant-'.$composant.'-'.$nic.' type_pinceau';
 }
 
 function balise_ACS_DERNIERE_MODIF($p) {
@@ -114,8 +114,8 @@ function balise_HEADER_COMPOSANTS($p) {
   return $p; 
 }
 
-// Cache de la fonction composants_head. On force le recalcul car de toute façon SPIP (récent) cache habillage.css.html
-// ça ferait double-emploi, avec de sérieux soucis de debug liés a un double cache css sinon.
+// "Cache" de la fonction composants_head. On force le recalcul car de toute façon SPIP met en cache
+// ça ferait donc double-emploi, avec de sérieux soucis de debug liés a un double cache css sinon.
 // TODO : garder la mise en cache pour les "vieux" Spip ?
 function composants_head_cache($type) {
   $r = cache('composants_head', 'head_'.$GLOBALS['meta']['acsModel'].'_'.$type, array("$type"), true);

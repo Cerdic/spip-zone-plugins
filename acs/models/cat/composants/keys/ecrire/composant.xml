@@ -32,7 +32,7 @@
 
   <variable>
     <nom>Nb</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>10</valeur>
   </variable>
 </composant>

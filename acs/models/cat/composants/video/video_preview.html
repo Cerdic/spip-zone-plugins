@@ -1,18 +1,6 @@
-#CACHE{0}
+[(#CACHE{0})]
 <B_doc>
-<BOUCLE_doc (DOCUMENTS) {extension==flv}{0,1}{par hasard}>
-[(#SET{startimage,[(#LOGO_DOCUMENT|?{#LOGO_DOCUMENT||image_reduire{#LARGEUR|moins{8},#HAUTEUR|moins{8}}||extraire_attribut{src},''})]})]
-<table width="100%" style="border-collapse: separate; border-spacing: 5px;">
-  <tr style="vertical-align: bottom; text-align: center;">
-    <td style="padding: 5px;">
-      <INCLURE{fond=composants/video/flv}{autostart=#AUTOSTART}{url_document=#URL_DOCUMENT}{titre=#GET{titre}}{startimage=#GET{startimage}}>
-    </td>
-  </tr>    
-  [<tr style="vertical-align: top; text-align: center;"><td>(#VAR{acsMultimediaDownload,oui}|=={oui}|?{' '})<a href="#URL_DOCUMENT"><:acs:video_download:></a></td></tr>]
-</table>
+<BOUCLE_doc (DOCUMENTS){extension==flv}{0,1}{par hasard}>
+  <div style="height:100%;width:100%;vertical-align:middle;text-align:center"><INCLURE{fond=composants/video/video}{id_document}{w=320}{h=200}></div>
 </BOUCLE_doc>
 </B_doc><h1 class="alert">0 videos</h1><//B_doc>
-<hr />
-<br />
-<INCLURE{fond=composants/video/video}
-<br /><br />

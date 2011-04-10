@@ -5,14 +5,10 @@
 #
 # Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
-
+#
 /**
  * A filepicker
  */
-
-// Seul le créateur du site (auteur n°1) est autorisé à configurer les squelettes, à l'initialisation.
-// Only website creator (author n°) is authorized to configure skeletons at initialization.
-
 if (isset($GLOBALS['meta']['ACS_ADMINS']))
   $ok = in_array($GLOBALS['auteur_session']['id_auteur'], explode(',', $GLOBALS['meta']['ACS_ADMINS']));
 elseif ($GLOBALS['auteur_session']['id_auteur'] == 1)
@@ -85,7 +81,7 @@ $ret.= "<input name='fichier' type='file' class='forml spip_xx-small' size='15' 
 . _T('bouton_telecharger')."' class='fondo' /></div>";
 $ret.= '</form>';
 $ret .= fin_cadre_relief(true);
-echo '<table width="100%" style="position: fixed; background: #dfdfdf"><tr><td width="80%"><div align="center"><img id="selection" src="'.$dir.'/'.$file.'" title="Sélection" class="selection" /></div></td><td><div align="right" style="width:220px; margin-right: 10px;">'.$ret.'</div></td></tr></table><div style="height: 7.18em; min-height: 112px"></div>';
+echo '<table width="100%" style="position: fixed; background: #dfdfdf"><tr><td width="80%"><div align="center"><img id="selection" src="'.$dir.'/'.$file.'" title="Sélection" class="selection" alt="" /></div></td><td><div align="right" style="width:220px; margin-right: 10px;">'.$ret.'</div></td></tr></table><div style="height: 7.18em; min-height: 112px"></div>';
 
 // Show gallery
 if ($d = @opendir($dir)) {
@@ -95,8 +91,8 @@ if ($d = @opendir($dir)) {
       if ($s)
       	$s = $s[0].'x'.$s[1];
       $hash = md5(serialize($action_effacer.$GLOBALS['auteur_session']['hash_env']));
-      $onclick = "aconfirmer('".addslashes(_T('acs:effacer_image'))." (".addslashes($file).")','".url_filepicker($dir, $file, '&del=true')."&hash=$hash"."')";
-			echo '<table class="cadre"><tr><td colspan="2" style="text-align: center"><img src="'.$dir.'/'.$file.'" title="'.$file.'" class="boutonImg" onclick="P.select(\''.$file.'\')" onmouseover="P.preview(\''.$dir.'/'.$file.'\')" /></td></tr><tr><td class="bandeau">'.$s.'</td><td><a onclick="'.$onclick.'" title="'._T('acs:effacer_image').'"><img src="'._DIR_PLUGIN_ACS.'images/supprimer.gif" alt="x" /></a></td></tr></table>';
+      $onclick = "aconfirmer('".addslashes(_T('acs:effacer_image',array("image"=>$dir.'/'.$file)))."','".url_filepicker($dir, $file, '&del=true')."&hash=$hash"."')";
+			echo '<table class="cadre"><tr><td colspan="2" style="text-align: center"><img src="'.$dir.'/'.$file.'" title="'.$file.'" class="boutonImg" onclick="P.select(\''.$file.'\')" onmouseover="P.preview(\''.$dir.'/'.$file.'\')" onmouseout="P.preview(\'\')" /></td></tr><tr><td class="bandeau">'.$s.'</td><td><a onclick="'.$onclick.'" title="'._T('acs:effacer_image').'"><img src="'._DIR_PLUGIN_ACS.'images/supprimer.gif" alt="x" /></a></td></tr></table>';
 		}
 	}
 	closedir($d);

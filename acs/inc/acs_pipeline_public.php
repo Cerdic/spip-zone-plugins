@@ -12,12 +12,13 @@
  * insert_head pipeline for ACS plugin.
  */
 function acs_insert_head($flux) {
-  $js_acs = find_in_path('acs.js.html');
-  if ($js_acs)
-    $r .= '<script type="text/javascript" src="spip.php?page=acs.js"></script>';
-  $js_model = find_in_path($GLOBALS[acsModel].'.js.html');
+  $model =$GLOBALS['meta']['acsModel'];
+  $css_model = find_in_path($model.'.css.html');
+  if ($css_model)
+    $r .= '<link rel="stylesheet" href="spip.php?page='.$model.'.css" type="text/css" media="projection, screen, tv" />';
+  $js_model = find_in_path($model.'.js.html');
   if ($js_model)
-    $r .= '<script type="text/javascript" src="spip.php?page='.$GLOBALS[acsModel].'.js"></script>';
+    $r .= '<script type="text/javascript" src="spip.php?page='.$model.'.js"></script>';
 
   // On ajoute une css et des javascripts rien que pour les administrateurs ACS
   if (acs_autorise()) {

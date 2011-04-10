@@ -1,0 +1,79 @@
+[(#CACHE{0})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+]#repimgbloc {
+  height: 114px;
+  margin-top: 0;
+}
+
+#repimgbloc .planchecontact {
+  height: 114px;
+  overflow:hidden;
+  text-align: center;
+  background: url(#CHEMIN{composants/diapo/images/pellicule.png}) top left repeat-x;
+}
+
+div.repimages, div.film {
+  float: left;
+  width: 105px;
+  height: 114px;
+  margin:0;
+  padding: 0;
+  background: url(#CHEMIN{composants/diapo/images/pellicule.png}) top left no-repeat;
+  text-align: center;
+}
+
+.repimagespaginationg {
+  width: 25px;
+  height: 114px;
+  background: url(#CHEMIN{composants/diapo/images/filmg.gif}) top right no-repeat;
+  text-align: right;
+}
+
+.repimagespaginationd {
+  width: 25px;
+  height: 114px;
+  background: url(#CHEMIN{composants/diapo/images/filmd.gif}) top left no-repeat;
+}
+
+div.repimages {
+  _height: 75px; /* _ is a hack for IE only. fix known IE bugs about max-sizes */
+  _width: 100px;
+  max-height: 75px;
+  max-width: 100px;
+  margin: 3px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+  background: #fff;
+}
+img.repimages {
+  height: 75px;
+  width: 100px;
+}
+
+div.repimagesdef {
+  margin: 3px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  text-align: center;
+}
+img.repimagesdef {
+  margin-top: 12px;
+}
+
+a.repimages {
+  font: normal 10px sans-serif;
+  color: #dfaf00;
+}
+
+a.repimages:hover {
+  color: #ffdf00;
+}

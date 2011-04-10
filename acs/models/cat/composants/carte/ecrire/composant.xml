@@ -26,15 +26,15 @@
   </variable>
   <variable>
     <nom>Lat</nom>
-    <type>nombre</type>
+    <type>text</type>
   </variable>
   <variable>
     <nom>Lon</nom>
-    <type>nombre</type>
+    <type>text</type>
   </variable>
   <variable>
     <nom>Zoom</nom>
-    <type>nombre</type>
+    <type>text</type>
   </variable>
 
   <variable>
@@ -117,7 +117,7 @@
   
   <variable>
     <nom>TitreFontSize</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>1.09em</valeur>
   </variable>
   <variable>
@@ -132,7 +132,7 @@
   
   <variable>
     <nom>TextFontSize</nom>
-    <type>nombre</type>
+    <type>text</type>
     <valeur>0.88em</valeur>
   </variable>
   <variable>

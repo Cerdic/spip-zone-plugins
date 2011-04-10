@@ -1,12 +1,15 @@
-Suivi des principales révisions - Version ACS actuelle : 0.8.0
+Suivi des principales révisions - Version ACS actuelle : 0.8.1
 
 ACS version 0.8
 - nouvelle balise #ACS_AUTORISE{};
-- nouveau parametre de composant : preview_type (inline ou iframe=valeur par defaut);
+- nouveau parametre de composant : preview_type (inline ou iframe=valeur par defaut). Ceci permet de faire interagir un composant avec son interface d'administration et en particulier de récupérer des parametres definis par le composant lui-même pour définir ses variables (exemple : composant Carte);
+- chargement des balises, scripts, et styles publics dans l'espace privé pour permettre aux modèles SPIP d'utiliser des composants d'un modèle ACS dans l'espace privé;
+- les controles sont desormais des objets;
 
 Modele Cat pour ACS vesion 0.8 :
-- nouveaux composants Carte et Keynav;
+- nouveaux composants Carte, Diapo, et Keynav;
 - gestion amelioree des droits d'acces a un article par mot-cle;
+- suppression du modèle doc au profit de celui de la dist;
 
 _______________________________________
 ACS version 0.7

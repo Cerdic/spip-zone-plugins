@@ -16,8 +16,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Icons' => 'Ic&ocirc;nes',
 'IconsHover' => 'Au survol',
 
-'Download' => 'Lien de t&eacute;l&eacute;chargement',
-
-'NbImg' => 'Nombre de vid&eacute;os'
+'Download' => 'Lien de t&eacute;l&eacute;chargement'
 );
 ?>
