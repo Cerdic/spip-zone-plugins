@@ -5,7 +5,7 @@ function oembed_renseigner_document_distant($flux) {
 	include_spip('inc/config');
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
-	if ($data = oembed_recuperer_data($flux['source'],lire_config('oembed/maxwidth'),lire_config('oembed/maxheight'))){
+	if ($data = oembed_recuperer_data($flux['source'],lire_config('oembed/maxwidth','480'),lire_config('oembed/maxheight','295'))){
 		// une image ?
 		if ($data['type']=='photo') {
 			// on recupere les infos du document distant

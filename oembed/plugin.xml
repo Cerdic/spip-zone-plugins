@@ -10,6 +10,7 @@
 	<licence>GNU/GPL</licence>
 	<icon>prive/themes/spip/images/oembed-48.png</icon>
 	<lien></lien>
+	<fonctions>oembed_fonctions.php</fonctions>
 	<install>base/oembed_upgrade.php</install>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
