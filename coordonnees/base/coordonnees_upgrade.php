@@ -90,8 +90,16 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		
 		// On ajoute un champ "type" plus petit que l'ancien (car vrai type donc généralement juste un mot)
 		$ok &= sql_alter('TABLE spip_adresses_liens ADD type varchar(25) not null default ""');
+		$ok &= sql_alter('TABLE spip_adresses_liens DROP PRIMARY KEY');
+		$ok &= sql_alter('TABLE spip_adresses_liens ADD PRIMARY KEY (id_adresse, id_objet, objet, type)');
+		
 		$ok &= sql_alter('TABLE spip_numeros_liens ADD type varchar(25) not null default ""');
+		$ok &= sql_alter('TABLE spip_numeros_liens DROP PRIMARY KEY');
+		$ok &= sql_alter('TABLE spip_numeros_liens ADD PRIMARY KEY (id_numero, id_objet, objet, type)');
+		
 		$ok &= sql_alter('TABLE spip_emails_liens ADD type varchar(25) not null default ""');
+		$ok &= sql_alter('TABLE spip_emails_liens DROP PRIMARY KEY');
+		$ok &= sql_alter('TABLE spip_emails_liens ADD PRIMARY KEY (id_email, id_objet, objet, type)');
 		
 		if ($ok){
 			spip_log('Tables coordonnées correctement passsées en version 1.4','coordonnees');

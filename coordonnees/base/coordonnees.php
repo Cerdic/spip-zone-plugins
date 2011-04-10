@@ -120,7 +120,7 @@ function coordonnees_declarer_tables_auxiliaires($tables_auxiliaires){
 		'type' => 'varchar(25) not null default ""'
 		);
 	$emails_liens_key = array(
-		"PRIMARY KEY" => "id_email, id_objet, objet",
+		"PRIMARY KEY" => "id_email, id_objet, objet, type",
 		"KEY id_email" => "id_email"
 		);
 	$tables_auxiliaires['spip_emails_liens'] =
