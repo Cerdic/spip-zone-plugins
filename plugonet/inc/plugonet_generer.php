@@ -123,19 +123,19 @@ function plugin2paquet($D, $dir, $nom)
 	
 	// Constrution de la balise paquet et de ses attributs
 	$paquet_att =
-		plugin2paquet_lien($lien, 'documentation') .
-		($categorie ? "\n\tcategorie='$categorie'" : '') .
-		($compatible ? "\n\tcompatible='$compatible'" : '') .
-		($etat ? "\n\tetat='$etat'" : '') .
-		($logo ? "\n\tlogo='$logo'" : '') .
-		($meta ? "\n\tmeta='$meta'" : '') .
 		($prefix ? "\n\tprefix='$prefix'" : '') .
+		($categorie ? "\n\tcategorie='$categorie'" : '') .
+		($logo ? "\n\tlogo='$logo'" : '') .
 		($version ? "\n\tversion='$version'" : '') .
-		($version_base ? "\n\tversion_base='$version_base'" : '');
+		($etat ? "\n\tetat='$etat'" : '') .
+		($version_base ? "\n\tversion_base='$version_base'" : '') .
+		($meta ? "\n\tmeta='$meta'" : '') .
+		plugin2paquet_lien($lien, 'documentation') .
+		($compatible ? "\n\tcompatible='$compatible'" : '');
 
 	$nom = plugin2paquet_texte('nom', $nom);
-	$licence = plugin2paquet_licence($D['licence']);
 	$auteur = plugin2paquet_auteur($D['auteur']);
+	$licence = plugin2paquet_licence($D['licence']);
 	
 	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
 	$pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
@@ -149,7 +149,7 @@ function plugin2paquet($D, $dir, $nom)
 	. plugin2paquet_implicite($D, 'fonctions', 'fonctions')
 	. plugin2paquet_implicite($D, 'install', 'actions');
 	
-	return "$renommer<paquet$paquet_att\n>\t$nom$licence$auteur$pipeline$necessite$utilise$bouton$onglet$chemin$traduire\n</paquet>\n";
+	return "$renommer<paquet$paquet_att\n>\t$nom$auteur$licence$pipeline$necessite$utilise$bouton$onglet$chemin$traduire\n</paquet>\n";
 }
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
@@ -211,7 +211,7 @@ function plugin2paquet_chemin($D)
     if (!$t AND (!$p OR $p==='.' OR $p==='./')) continue;
     $res .="\n\t<chemin path='$p'$t />";
   }
-  return $res;
+  return $res ? "\n$res" : '';
 }
 
 function plugin2paquet_necessite($D)
@@ -238,7 +238,7 @@ function plugin2paquet_utilise($D)
       plugin2paquet_lien($i['src']);
     $res .="\n\t<utilise$att />";
   }
-  return $res;
+  return $res ? "\n$res" : '';
 }
 
 // Passer les lettres accentuees en entites XML
@@ -301,7 +301,7 @@ function plugin2paquet_licence($texte)
 	      $res .= "\n\t<licence$href$mail>$v</licence>";
 	}
 
-	return $res;
+	return $res ? "\n$res" : '';
 }
 
 // - elimination des multi (exclue dans la nouvelle version)
@@ -346,7 +346,7 @@ function plugin2paquet_auteur($texte) {
 			$res .= "\n\t<auteur$href$mail>$v</auteur>";
 	}
 
-	return $res;
+	return $res ? "\n$res" : '';
 }
 
 // Expanse les multi en un tableau de textes complets, un par langue
@@ -388,7 +388,7 @@ function plugin2paquet_texte($name, $texte)
 	      $res .= "\n\t<$name$href$mail>$v</$name>";
 	}
 
-	return $res;
+	return $res ? "\n$res" : '';
 }
 
 // verifie que la balise $nom declare une unique fichier $prefix_$nom:
