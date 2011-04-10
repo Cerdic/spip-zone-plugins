@@ -15,15 +15,15 @@ include_spip('inc/langonet_generer_fichier');
 
 function inc_plugonet_generer($files, $write)
 {
-  $nb_files = count($files);
-  $sep = ($nb_files > 1) ? ";" : "\n";
-  $all = $res = array();
-  $total = $ko = $ko = 0;
-  $valider_xml = charger_fonction('valider', 'xml');
-  // est-on en 2.2 ? 
-  $infos_xml = charger_fonction('infos_plugin', 'plugins', true) ?
-  'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
-  spip_log("Plugonet: fonction de lecture: $infos_xml");
+	$nb_files = count($files);
+	$sep = ($nb_files > 1) ? ";" : "\n";
+	$all = $res = array();
+	$total = $ko = 0;
+	$valider_xml = charger_fonction('valider', 'xml');
+	// est-on en 2.2 ? 
+	$informer_xml = charger_fonction('infos_plugin', 'plugins', true) ?
+					'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
+	spip_log("Plugonet: fonction de lecture: $informer_xml");
 
   foreach($files as $nom)  {
     $old = (basename($nom) == 'plugin.xml');
@@ -45,7 +45,7 @@ function inc_plugonet_generer($files, $write)
     }
     $dir = dirname($nom);
     if ($old) {
-      if (!$infos = $infos_xml(basename($dir), true, dirname($dir) .'/'))
+      if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
 	$msg2 .= " plugin.xml illisible";
       else {
 	// Extraction des balises nom, slogan et description()

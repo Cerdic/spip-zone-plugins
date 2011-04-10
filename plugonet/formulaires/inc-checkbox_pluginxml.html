@@ -1,0 +1,29 @@
+<B_pluginxml>
+	<p>
+		<small><a id="cocher_tout" href="#"><:plugonet:bouton_tout_cocher:></a>
+		&nbsp;|&nbsp;
+		<a id="decocher_tout" href="#"><:plugonet:bouton_tout_decocher:></a>
+		</small>
+	</p>
+<BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}>
+	<div class="choix">
+		<input type="checkbox" name="pluginxml[]" class="checkbox pluginxml" id="pluginxml_#COMPTEUR_BOUCLE" value="#VALEUR" />
+		<label for="pluginxml_#COMPTEUR_BOUCLE">[(#VALEUR|joli_repertoire)]</label>
+	</div>
+</BOUCLE_pluginxml>
+</B_pluginxml>
+	<:plugonet:message_nok_aucun_pluginxml:>
+<//B_pluginxml>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(document).ready(function() {
+		jQuery("a#cocher_tout").click(function () {
+			jQuery('input[type=checkbox].pluginxml').attr('checked', 'checked');
+	    });
+		jQuery("a#decocher_tout").click(function () {
+			jQuery('input[type=checkbox].pluginxml').attr('checked', false);
+	    });
+	});
+//]]>
+</script>

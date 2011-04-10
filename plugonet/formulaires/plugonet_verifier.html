@@ -1,5 +1,5 @@
-<div class="formulaire_spip formulaire_plugonet_generer" id="formulaire_plugonet_generer">
-	<h3 class="titrem"><:plugonet:titre_form_generer:></h3>
+<div class="formulaire_spip formulaire_plugonet_verifier" id="formulaire_plugonet_verifier">
+	<h3 class="titrem"><:plugonet:titre_form_verifier:></h3>
 
 	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
@@ -9,17 +9,16 @@
 		[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action --> ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<div><input type="hidden" name="encodage" id="encodage_defaut" value="utf8" /></div>
 		<ul>
 			<li class="fieldset">
 				<fieldset>
-					<p class="explication"><:plugonet:info_generer:></p>
+					<p class="explication"><:plugonet:info_verifier:></p>
 					<ul>
 						<li class="editer_pluginxml obligatoire[(#ENV{erreurs}|table_valeur{pluginxml}|oui) erreur]">
 							<label><:plugonet:label_choix_pluginxml:></label>
 							<p class="explication"><:plugonet:info_verifier_pluginxml:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pluginxml})</span>]
-							[(#INCLURE{fond=formulaires/inc-checkbox_pluginxml, env})]
+							[(#INCLURE{fond=formulaires/inc-select_pluginxml, env})]
 						</li>
 					</ul>
 				</fieldset>
@@ -27,7 +26,7 @@
 		</ul>
 
 		<p class='boutons'>
-			<input type='submit' class='submit' value='<:plugonet:bouton_generer:>' />
+			<input type='submit' class='submit' value='<:plugonet:bouton_verifier:>' />
 		</p>
 	</div></form>
 	]

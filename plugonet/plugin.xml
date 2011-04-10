@@ -41,8 +41,13 @@ certaines balises du fichier d'origine.
 		<titre>plugonet:onglet_generer</titre>
 		<url>plugonet_generer</url>
 	</onglet>	
+	<onglet id="plugonet_verifier" parent="plugonet">
+		<icone>prive/themes/spip/images/plugonet-verifier.png</icone>
+		<titre>plugonet:onglet_verifier</titre>
+		<url>plugonet_verifier</url>
+	</onglet>
 
-	<necessite id="SPIP" version="[2.1.9;]" />
+	<necessite id="SPIP" version="[2.1.10;]" />
 	<necessite id="langonet" version="[0.6.0;]" />
 	<necessite id="Iterateurs" version="[0.2.5;]" />
 	<categorie>outil</categorie>
