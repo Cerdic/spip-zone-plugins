@@ -2,11 +2,15 @@
 [(#SET{niveau_max_txt, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
 [(#SET{niveau_max, #ENV{niveau}|intval|?{#ENV{niveau},1000}})]
 [(#SET{sousrub_cond, #ENV{sousrub_cond}|=={oui}|?{'on',''}})]
+[(#SET{afficher_articles, #ENV{afficher_articles}|=={oui}|?{'on',''}})]
+[(#SET{articles_max, #ENV{articles_max}|intval|?{#ENV{articles_max},10000}})]
+[(#SET{articles_max_plus_un, #GET{articles_max}|plus{1}})]
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
-	<div class="titre">#GET{titre}</div>
+	[(#ENV{secteurlangue}non)<div class="titre">#GET{titre}</div>]
+	[(#ENV{secteurlangue}oui)<div class="titre"><:menus:nom_menu_secteurlangue:></div>]
 	<div class="infos">
 		[(#GET{niveau_max_txt}|=={infini}|non)
 			<:menus:entree_sur_n_niveaux{n=#GET{niveau_max_txt}}:>
@@ -16,6 +20,9 @@
 		]
 		[(#GET{sousrub_cond}|oui)
 			<br /><:menus:info_sousrub_cond:>
+		]
+		[(#GET{afficher_articles}|oui)
+			<br /><:menus:info_afficher_articles:>[(#GET{articles_max}|<{10000}|oui)(<:menus:info_articles_max{max=#GET{articles_max}}:>)]
 		]
 		<br /><:menus:info_tri:> [(#GET{tri_num}) <:menus:info_tri_num:>][(#GET{tri_num}|et{GET{tri_alpha}}), ][(#GET{tri_alpha}) <:menus:info_tri_alpha:>]
 	</div>
@@ -39,8 +46,31 @@
 					</BOUCLE_test_niveau2>
 				</li>
 				</BOUCLE_sous_rubriques>
+				<BOUCLE_test_articles_si_sousrub(CONDITION){si #GET{afficher_articles}}>
+				<BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_plus_un}}>
+				[(#TOTAL_BOUCLE|<{#GET{articles_max_plus_un}}|oui)
+				<li class="menu-entree[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+					<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+				</li>
+				]
+				</BOUCLE_articles_si_sousrub>
+				</BOUCLE_test_articles_si_sousrub>
 			</ul>
 			</B_sous_rubriques>
+			<BOUCLE_test_articles_pas_de_sousrub(CONDITION){si #GET{afficher_articles}}>
+			<B_articles_pas_de_sousrub>
+			[(#TOTAL_BOUCLE|<{#GET{articles_max_plus_un}}|oui)<ul class="menu-liste">]
+				<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_plus_un}}>
+				[(#TOTAL_BOUCLE|<{#GET{articles_max_plus_un}}|oui)
+				<li class="menu-entree[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+					<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+				</li>
+				]
+				</BOUCLE_articles_pas_de_sousrub>
+			[(#TOTAL_BOUCLE|<{#GET{articles_max_plus_un}}|oui)</ul>]
+			</B_articles_pas_de_sousrub>
+			</BOUCLE_test_articles_pas_de_sousrub>
+			<//B_sous_rubriques>
 			</BOUCLE_test_niveau>
 		</li>
 	</BOUCLE_rubriques>

@@ -28,6 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Exporter ce menu',
 	'editer_menus_nouveau' => 'Créer un nouveau menu',
 	'editer_menus_titre' => 'Menus du site',
+	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)',
+	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)',
 	'entree_aucun' => 'Aucun',
 	'entree_bloc' => 'Bloc Zpip',
 	'entree_choisir' => 'Choisissez le type d\'entrée que vous voulez ajouter :',
@@ -97,6 +99,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titre',
 
 	// I
+	'info_afficher_articles' => 'Les articles seront inclus dans le menu.',
+	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles.',
 	'info_connexion_obligatoire' => 'Connexion obligatoire',
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté',
 	'info_numero_menu' => 'MENU NUMÉRO :',
