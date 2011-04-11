@@ -1,8 +1,8 @@
 <div class="formulaire_spip formulaire_plugonet_verifier" id="formulaire_plugonet_verifier">
 	<h3 class="titrem"><:plugonet:titre_form_verifier:></h3>
 
-	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{resume})</p>]
 	<!-- <br class='bugajaxie' /> -->
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
@@ -18,7 +18,7 @@
 							<label for="pluginxml"><:plugonet:label_choix_pluginxml:></label>
 							<p class="explication"><:plugonet:info_verifier_pluginxml:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pluginxml})</span>]
-							[(#INCLURE{fond=formulaires/inc-select_pluginxml, env})]
+							<INCLURE{fond=formulaires/inc-select_pluginxml, env} />
 						</li>
 					</ul>
 				</fieldset>
@@ -30,4 +30,14 @@
 		</p>
 	</div></form>
 	]
+
+	[(#REM) <!-- Affichage des resultats --> ]
+	[<ul>
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:plugonet:legende_resultats:></h3>
+				(#ENV*{message_ok}|table_valeur{erreurs})
+			</fieldset>
+		</li>
+	</ul>]
 </div>

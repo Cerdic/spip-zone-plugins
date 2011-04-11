@@ -87,13 +87,13 @@
 <!ELEMENT bouton (url|args|icone|titre)*>
 <!ATTLIST bouton
           id %NAME; #REQUIRED
-          parent %NAME; #REQUIRED
+          parent %NAME; #IMPLIED
 >
 
 <!ELEMENT onglet (url|args|icone|titre)*>
 <!ATTLIST onglet
           id %NAME; #REQUIRED
-          parent %NAME; #REQUIRED
+          parent %NAME; #IMPLIED
 >
 
 <!ELEMENT traduire EMPTY>

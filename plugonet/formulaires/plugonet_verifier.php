@@ -20,31 +20,51 @@ function formulaires_plugonet_verifier_traiter(){
 	// Recuperation des champs du formulaire
 	$pluginxml = _request('pluginxml');
 
-	// Verification du fichier
+	// Verification du fichier avec le valideur et la pseudo-DTD plugin.dtd
 	$valider_xml = charger_fonction('valider', 'xml');
-	$erreurs = array();
 	if (lire_fichier($pluginxml, $contenu))
 		$resultats = $valider_xml($contenu, false, false, 'plugin.dtd');
+
+	// Construction du tableau des messages d'erreur de pseudo-validation XML
+	// -- aucune des ces erreurs ce ne peut-etre considerees comme fatales pour la production du fichier paquet.xml
+	$erreurs_valxml = array();
 	$erreurs = is_array($resultats) ? $resultats[1] : $resultats->err; //2.1 ou 2.2
 var_dump($erreurs);
+	if (count($erreurs) > 0)
+		$message_valxml = _T('plugonet:message_nok_validation_pluginxml');
 
-	foreach ($erreurs as $_k => $_erreur) {
-		$message = preg_replace('@<br[^>]*>|:|,@', ' ', $_erreur[0]);
-		$message = preg_replace(',<b>[^>]*</b>,', '* ', $message);
-		$message = "Ligne $_erreur[1] - " . $_erreur[0] . "\n";
-	}
-// 	$msg2 = $nom;
-// 	if ($n = count($erreurs)) {
-// 	$total+=$n;
-// 	$ko++;
-// 	$msg2 .= ' ' . $n . " erreur(s)" . $sep . join($sep, $erreurs);
-// 	}
-// 	$dir = dirname($nom);
-// 	if ($old) {
-// 	if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
-// 	$msg2 .= " plugin.xml illisible";
-	
-	return array('message_ok' => $message, 'editable' => true);;
+	// Verification de la lecture du fichier avec la fonction get_infos ou infos_plugin
+	// -- Toute erreur de lecture est consideree comme fatale pour la production du fichier paquet.xml
+    $dir = dirname($pluginxml);
+	$informer_xml = charger_fonction('infos_plugin', 'plugins', true) ?
+					'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
+	if ($informer_xml == 'plugin2paquet_infos')
+		include_spip('inc/plugonet_generer');
+	$message_infxml = '';
+	if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
+		$message_infxml = _T('plugonet:message_nok_information_pluginxml');
+		// $message_infxml = "plugin.xml est illisible avec la fonction standard de SPIP";
+
+	// Formatage des resultats pour affichage
+	$retour = array();
+	if ($message_infxml)
+		$retour['message_erreur'] = $pluginxml . 
+									"<br />$message_valxml" . 
+									($message_infxml ? "<br />$message_infxml" : "");
+	else
+		$retour['message_ok']['resume'] = 
+			$pluginxml . "<br />" .
+			($message_infxml ? $message_infxml : _T('plugonet:message_ok_validation_pluginxml'));
+	$retour['message_ok']['erreurs'] = '';
+	foreach ($erreurs as $_erreur)
+		$retour['message_ok']['erreurs'] .= "Ligne $_erreur[1] - " . $_erreur[0] . '<br />';
+	if ($retour['message_ok']['erreurs'])
+		$retour['message_ok']['erreurs'] = '<div class="notice">' . 
+											"\n\t" . $retour['message_ok']['erreurs'] . 
+											"\n</div>";
+	$retour['editable'] = true;
+
+	return $retour;
 }
 
 ?>

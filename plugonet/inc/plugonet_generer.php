@@ -34,7 +34,7 @@ function inc_plugonet_generer($files, $write)
       $msg = preg_replace('@<br[^>]*>|:|,@', ' ', $v[0]);
       if ($nb_files > 1) $msg = preg_replace(',\s*[(][^)]*[)],', '', $msg);
       $erreurs[$k] = trim(str_replace("\n", ' ', textebrut($msg)));
-      $msg = preg_replace(',<b>[^>]*</b>,', '* ', $msg);
+      // $msg = preg_replace(',<b>[^>]*</b>,', '* ', $msg);
       @++$all[trim(str_replace("\n", '', textebrut($msg)))];
     }
     $msg2 = $nom;
@@ -48,22 +48,7 @@ function inc_plugonet_generer($files, $write)
       if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
 	$msg2 .= " plugin.xml illisible";
       else {
-	// Extraction des balises nom, slogan et description()
-	// -- le nom n'est plus traduit si il est en multi
-	// -- slogan et description sont transformes en items de langue dans un module a part
-	// --> Bonne solution ??? Meme module que celui existant ?
-	// Le slogan est vu comme la premiere phrase de la description
-	// (Heuristique reprise de SVP)
-	$nomplug = preg_replace('@<!--[^-]*-->@', '', $infos['nom']);
-	if (strpos($nomplug, '>')) {
-		$slogan = $nomplug;
-		$nomplug = preg_replace('@</?multi>@', '', $nomplug);
-		$nomplug = preg_replace('/[[][^]]*[]]/', '', $nomplug);
-		$nomplug = preg_replace('/^\s*(\w+).*$/', '\1', $nomplug);
-	} else {
-		$slogan = $infos['description'];
-	}
-	$xml = plugin2paquet($infos, $dir, $nomplug);
+	$xml = plugin2paquet($infos, $dir);
 	$e = $valider_xml($xml, false, false, 'paquet.dtd');
 	$e = is_array($e) ? $e[1] : $e->err; //2.1 ou 2.2
 	if ($e)  {
@@ -93,7 +78,7 @@ function inc_plugonet_generer($files, $write)
   return array($msg2, $all, $res);
 }
 
-function plugin2paquet($D, $dir, $nom)
+function plugin2paquet($D, $dir)
 {
 	// Extraction des attributs de la balise paquet
 	$categorie = $D['categorie'];
@@ -135,8 +120,8 @@ function plugin2paquet($D, $dir, $nom)
 
 	$nom = plugin2paquet_nom($D['nom']);
 
-	$auteur = plugin2paquet_auteur($D['auteur']);
-	$licence = plugin2paquet_licence($D['licence']);
+	$auteur = plugin2paquet_copy($D['auteur'], 'auteur');
+	$licence = plugin2paquet_copy($D['licence'], 'licence');
 	
 	$pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
 	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
@@ -188,14 +173,23 @@ function plugin2paquet_nom($texte) {
 // - elimination des multi (exclue dans la nouvelle version)
 // - transformation en attribut des balises A
 // - interpretation des balises BR et LI et de la virgule et du espace+tiret comme separateurs
-function plugin2paquet_auteur($texte) {
+function plugin2paquet_copy($texte, $balise) {
 
 	// On extrait le multi si besoin et on selectionne la traduction francaise
 	$t = plugin2paquet_traite_mult($texte);
 
-	$res = '';
-	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n@', $t['fr']) as $v) {
-		// On detecte d'abord un lien eventuel
+	$res = $resa = $resl = $resc = '';
+	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n|&amp;@', $t['fr']) as $v) {
+		// On detecte d'abord si le bloc texte en cours contient un eventuel copyright
+		// -- cela generera une balise copyright et non auteur
+		$copy = '';
+		if (preg_match('/(?:\&#169;|©|copyright|\(c\)|&copy;)[\s:]*([\d-]+)/i', $v, $r)) {
+			$copy = trim($r[1]);
+			$v = str_replace($r[0], '', $v);
+			$resc .= "\n\t<copyright>$copy</copyright>";
+		}
+		
+		// On detecte ensuite un lien eventuel d'un auteur
 		// -- soit sous la forme d'une href d'une ancre
 		// -- soit sous la forme d'un raccourci SPIP
 		// Dans les deux cas on garde preferentiellement le contenu de de l'ancre ou du raccourci
@@ -223,38 +217,25 @@ function plugin2paquet_auteur($texte) {
 		} else 
 			$mail = '';
 		
-		if ($v = trim(textebrut($v)))
-			$res .= "\n\t<auteur$href$mail>$v</auteur>";
+		// On detecte aussi si le bloc texte en cours contient une eventuel licence
+		// -- cela generera une balise licence et non auteur
+		//    cette heuristique b'est pas deterministe car la phrase de licence n'est pas connue
+		$licnom = $licurl ='';
+		if (preg_match('/(gpl|lgpl|gnu\/gpl|gpl\s*v3)/i', $v, $r)) {
+			$licnom = strtoupper(trim($r[1]));
+			$licurl = ($licnom=='LGPL') ? 'http://www.gnu.org/licenses/lgpl-3.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
+			$licurl = " lien='$licurl'";
+			$resl .= "\n\t<licence$licurl>$licnom</licence>";
+		}
+		
+		// On finalise la balise auteur ou licence si on a pas trouve de licence prioritaire
+		$v = trim(textebrut($v));
+		if ((strlen($v) > 2) AND !$licnom)
+			$resa .= "\n\t<$balise$href$mail>$v</$balise>";
 	}
+	$res = ($resa ? "\n$resa" : '') . ($resc ? "\n$resc" : '') . ($resl ? "\n$resl" : '');
 
-	return $res ? "\n$res" : '';
-}
-
-// - elimination des multi (exclue dans la nouvelle version)
-// - transformation en attribut des balises A
-// - interpretation des balises BR et LI comme separateurs
-function plugin2paquet_licence($texte) {
-	// On extrait le multi si besoin et on selectionne la traduction francaise
-	$t = plugin2paquet_traite_mult($texte);
-
-	$res = '';
-	foreach(preg_split('@(<br */?>)|<li>@', $t['fr']) as $v) {
-	    if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
-	      $href = " lien='" . $r[2] ."'";
-	      $v = str_replace($r[0], $r[3], $v);
-	    } elseif (preg_match(_RACCOURCI_LIEN,$v, $r)) {
-	      $href = " lien='" . $r[4] ."'";
-	      $v = str_replace($r[0], '', $v);
-	    } else $href = '';
-	    if (preg_match('/\W([\w\d.-]+@[\w\d.-]+)/', $v, $r)) {
-	      $mail = " mail='$r[1]'";
-	      $v = str_replace($r[0], $r[3], $v);
-	    } else $mail = '';
-	    if ($v = trim(textebrut($v)))
-	      $res .= "\n\t<licence$href$mail>$v</licence>";
-	}
-
-	return $res ? "\n$res" : '';
+	return $res ? $res : '';
 }
 
 
