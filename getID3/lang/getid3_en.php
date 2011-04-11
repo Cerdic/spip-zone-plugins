@@ -1,13 +1,17 @@
 <?php
-
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+
 	// B
 	'bouton_appliquer_cover_defaut' => 'Apply the default cover to all sound documents without any logo',
 
 	// E
-	'erreur_formats_ecriture_impossible' => 'Writing tags on the following format(s) is impossible&nbsp;:',
+	'erreur_formats_ecriture_impossible' => 'Writing tags on the following format(s) is impossible :',
 	'erreur_logiciels_indisponibles' => 'You won\'t be able to write tags on all possible formats. On or more software is not usable.',
 	'erreur_necessite' => 'needs @soft@',
 	'explication_cover_defaut' => 'At the upload of audio files, a default thumbnail (see input URL below) is associated to the sound file. If the option to rewrite tags when the logo is changed is activated, the id3 artwork tags will also be updated.',
@@ -16,13 +20,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_modifier_id3' => 'Edit metadatas of :',
 
 	// I
-	'info_artist' => 'Artist',
 	'info_album' => 'Album',
+	'info_artist' => 'Artist',
 	'info_bitrate' => 'Bitrate',
 	'info_bitrate_mode' => 'Mode',
 	'info_bits' => 'Resolution (bits)',
-	'info_channels' => 'Channels number',
 	'info_channel_mode' => 'Mode (channel)',
+	'info_channels' => 'Channels number',
 	'info_codec' => 'Codec',
 	'info_comment' => 'Comment',
 	'info_comments' => 'Comments',
@@ -35,8 +39,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_encoding_time' => 'Encoding date',
 	'info_erreurs' => 'Errors',
 	'info_format' => 'Format',
-	'info_genre' => 'Genre',
 	'info_gauche_numero_document' => 'Document number',
+	'info_genre' => 'Genre',
 	'info_lossless' => 'Lossless',
 	'info_mime' => 'Mime type',
 	'info_original_filename' => 'Original name',
@@ -57,9 +61,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_plusieurs' => '@nb@ uses',
 	'info_utilisation_unique' => 'One sigle use',
 	'info_year' => 'Year',
-	'install_mise_a_jour_base' => 'Update of the getid3 database at @version@',
 	'install_ajout_champs_documents' => 'GetID3 : Adding fields on the spip_documents database table',
- 
+	'install_mise_a_jour_base' => 'Update of the getid3 database at @version@',
+
 	// L
 	'label_album' => 'Album',
 	'label_artist' => 'Artist',
@@ -76,11 +80,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_year' => 'Year',
 	'legende_ecriture_tags' => 'Writing tags',
 	'lien_modifier_id3' => 'Edit the audio tags',
-	
+
 	// M
 	'message_cover_defaut_modifiee' => 'One document has been updated',
 	'message_cover_defaut_modifiees' => '@nb@ documents have been updated',
-	'message_erreur_document_distant_ecriture' => 'This is a &laquo;remote&raquo; document which can not be changed.',
+	'message_erreur_document_distant_ecriture' => 'This is a "remote" document which can not be changed.',
 	'message_extension_invalide_ecriture' => 'The format of this file is not supported.',
 	'message_fichier_maj' => 'The file has been updated.',
 	'message_infos_document_distant' => 'This is a remote document. No information can be retrieved.',
@@ -92,30 +96,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_validation_appliquer_cover' => 'This action is definitive. It won\'t be possible to go back later.',
 	'message_valider_cover_defaut' => 'Submit the form to use the default cover',
 
-	// S
-	'son_infos_techniques' => 'Technical informations',
-	'son_nom_fichier' => 'File name',
-	'son_extension' => 'Extension :',
-	'son_format' => 'Mime-Type :',
-	'son_duree' => 'Duration :',
-	'son_bitrate' => 'Bitrate :',
-	'son_bitratemode' => 'Mode :',
-	'son_bitrate_cbr' => 'Constant bitrate',
-	'son_bitrate_vbr' => 'Variable bitrate',
-	'son_audiosamplerate' => 'Audio Samplerate :',
-	'son_encodeur' => 'Encoder :',
-	'son_bits' => 'Bits :',
-
 	// R
 	'recuperer_infos' => 'Retrieve file informations',
+
+	// S
+	'son_audiosamplerate' => 'Audio Samplerate :',
+	'son_bitrate' => 'Bitrate :',
+	'son_bitrate_cbr' => 'Constant bitrate',
+	'son_bitrate_vbr' => 'Variable bitrate',
+	'son_bitratemode' => 'Mode :',
+	'son_bits' => 'Bits :',
+	'son_duree' => 'Duration :',
+	'son_encodeur' => 'Encoder :',
+	'son_extension' => 'Extension :',
+	'son_format' => 'Mime-Type :',
+	'son_infos_techniques' => 'Technical informations',
+	'son_nom_fichier' => 'File name',
 
 	// T
 	'titre_getid3' => 'GetID3',
 
 	// V
-	'verifier_formulaire' => 'Verify the content of the form',
-
+	'verifier_formulaire' => 'Verify the content of the form'
 );
-
 
 ?>
