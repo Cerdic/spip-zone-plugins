@@ -48,7 +48,6 @@ function tradlang_getmodules_base(){
  */
 function tradlang_testesynchro($idmodule, $langue){
 	$dir_lang = tradlang_dir_lang();
-	spip_log("testesynchro $idmodule - $langue",'tradlang');
 	$module = sql_fetsel('*','spip_tradlang_modules','id_tradlang_module='.intval($idmodule));
 	$nom_module = $module["module"];
 	$nom_mod = $module["nom_mod"];
@@ -58,7 +57,6 @@ function tradlang_testesynchro($idmodule, $langue){
 	
 	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
 	$modules2 = $getmodules_fics($dir_lang,$nom_mod);
-	spip_log($modules2,'tradlang');
 	$modok2 = $modules2[$nom_mod];
 
 	// union entre modok et modok2
@@ -83,12 +81,11 @@ function tradlang_testesynchro($idmodule, $langue){
 	include($fic);
 	$chs = $GLOBALS[$GLOBALS['idx_lang']];
 	$tsf = $chs["zz_timestamp_nepastraduire"];
-	spip_log($tsf,'tradlang');
 	unset($GLOBALS[$GLOBALS['idx_lang']]);
 
 	// lit le timestamp  base
 	$tsb = sql_getfetsel("ts","spip_tradlang","module =".sql_quote($nom_mod)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
-	spip_log($tsb,'tradlang');
+
 	return ($tsb == $tsf);
 }
 
@@ -106,7 +103,6 @@ function tradlang_dir_lang(){
 		$squelettes = $dossier_squelettes ? $dossier_squelettes : _DIR_RACINE.'squelettes/';
 	}
 	if(!is_dir($dir_lang=$squelettes.'lang')){
-		spip_log("pas de squelette $squelettes",'test');
 		return false;
 	}
 	return $dir_lang;
