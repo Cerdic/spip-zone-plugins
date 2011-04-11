@@ -30,6 +30,9 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 				'nom' => 'mail_inscription',
 				'label' => _T('contacts:label_email'),
 				'obligatoire' => 'oui'
+			),
+			'verifier' => array(
+				'type' => 'email'
 			)
 		),
 		array(
@@ -97,6 +100,9 @@ function formulaires_inscription_client_verifier_dist($retour=''){
 }
 
 function formulaires_inscription_client_traiter_dist($retour=''){
+	// Si redirection demandée, on refuse le traitement en ajax
+	if ($retour) refuser_traiter_formulaire_ajax();
+	
 	// Le pseudo SPIP est construit
 	set_request('nom_inscription', _request('co__prenom').' '._request('co__nom'));
 	
@@ -133,8 +139,7 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		$editer_adresse('oui');
 	}
 	
-	// si redirection demandee, on refuse le traitement en ajax
-	if ($retour) refuser_traiter_formulaire_ajax();
+	if ($retour) $retours['redirect'] = $retour;
 	
 	return $retours;
 }
