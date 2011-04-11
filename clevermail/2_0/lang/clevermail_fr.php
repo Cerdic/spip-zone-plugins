@@ -68,6 +68,7 @@ Merci',
 
 	  // Back Office : menu
     'liste_lettres' => 'Liste des lettres d\'information',
+    'liste_lettres_aucune' => 'Vous n\'avez pas encore créé de lettre d\'information.',
     'creer_lettre' => 'Cr&eacute;er une lettre d\'information',
     'liste_abonnes' => 'Liste des abonn&eacute;s',
     'ajouter_abonnes' => 'Ajouter des abonn&eacute;s',
