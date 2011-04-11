@@ -22,60 +22,65 @@ function inc_plugonet_generer($files, $write)
 	$valider_xml = charger_fonction('valider', 'xml');
 	// est-on en 2.2 ? 
 	$informer_xml = charger_fonction('infos_plugin', 'plugins', true) ?
-					'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
+		'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
 	spip_log("Plugonet: fonction de lecture: $informer_xml");
+	
+	foreach($files as $nom)  {
+		$old = (basename($nom) == 'plugin.xml');
+		if (lire_fichier ($nom, $text))
+			$erreurs = $valider_xml($text, false, false, $old ? 'plugin.dtd' : 'paquet.dtd');
+		$erreurs = is_array($erreurs) ? $erreurs[1] : $erreurs->err; //2.1 ou 2.2
+		foreach ($erreurs as $k => $v) {
+			$msg = preg_replace('@<br[^>]*>|:|,@', ' ', $v[0]);
+			if ($nb_files > 1) $msg = preg_replace(',\s*[(][^)]*[)],', '', $msg);
+			$erreurs[$k] = trim(str_replace("\n", ' ', textebrut($msg)));
+			// $msg = preg_replace(',<b>[^>]*</b>,', '* ', $msg);
+			@++$all[trim(str_replace("\n", '', textebrut($msg)))];
+		}
 
-  foreach($files as $nom)  {
-    $old = (basename($nom) == 'plugin.xml');
-    if (lire_fichier ($nom, $text))
-      $erreurs = $valider_xml($text, false, false, $old ? 'plugin.dtd' : 'paquet.dtd');
-    $erreurs = is_array($erreurs) ? $erreurs[1] : $erreurs->err; //2.1 ou 2.2
-    foreach ($erreurs as $k => $v) {
-      $msg = preg_replace('@<br[^>]*>|:|,@', ' ', $v[0]);
-      if ($nb_files > 1) $msg = preg_replace(',\s*[(][^)]*[)],', '', $msg);
-      $erreurs[$k] = trim(str_replace("\n", ' ', textebrut($msg)));
-      // $msg = preg_replace(',<b>[^>]*</b>,', '* ', $msg);
-      @++$all[trim(str_replace("\n", '', textebrut($msg)))];
-    }
-    $msg2 = $nom;
-    if ($n = count($erreurs)) {
-      $total+=$n;
-      $ko++;
-      $msg2 .= ' ' . $n . " erreur(s)" . $sep . join($sep, $erreurs);
-    }
-    $dir = dirname($nom);
-    if ($old) {
-      if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
-	$msg2 .= " plugin.xml illisible";
-      else {
-	$xml = plugin2paquet($infos, $dir);
-	$e = $valider_xml($xml, false, false, 'paquet.dtd');
-	$e = is_array($e) ? $e[1] : $e->err; //2.1 ou 2.2
-	if ($e)  {
-	  $msg2 .=" erreurs en nouveau format: " . count($e) . ". "; 
-	  if ($nb_files ==1)  
-	    $msg2.= join("\n", array_map('array_shift', $e)) . ".";
-	}  else {
-	  $msg2 .= " Correct en nouveau format.";
-	  if ($write) {
-	    if ($modules = plugin2paquet_description($infos['description'], $infos['description'], $infos['prefix'], $dir))
-	      $xml = "\n<!-- svn add " . join(' ', $modules) . " -->" . $xml;
-	    if (ecrire_fichier($dir . '/paquet.xml', $xml) OR $echecs)
-	      $xml = "\n<!-- svn add paquet.xml -->" . $xml;
-	  }
-	  $res[$nom]= $xml;
-	  $ok++;
+		$msg2 = $nom;
+		if ($n = count($erreurs)) {
+			$total+=$n;
+			$ko++;
+			$msg2 .= ' ' . $n . " erreur(s)" . $sep . join($sep, $erreurs);
+		}
+
+		$dir = dirname($nom);
+		if ($old) {
+			if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
+				$msg2 .= " plugin.xml illisible";
+			else {
+				$xml = plugin2paquet($infos, $dir);
+				$e = $valider_xml($xml, false, false, 'paquet.dtd');
+				$e = is_array($e) ? $e[1] : $e->err; //2.1 ou 2.2
+				if ($e)  {
+					$msg2 .=" erreurs en nouveau format: " . count($e) . ". "; 
+					if ($nb_files ==1)  
+						$msg2.= join("\n", array_map('array_shift', $e)) . ".";
+				}  
+				else {
+					$msg2 .= " Correct en nouveau format.";
+					if ($write) {
+						if ($modules = plugin2paquet_description($infos['description'], $infos['prefix'], $dir))
+							$xml = "\n<!-- svn add " . join(' ', $modules) . " -->" . $xml;
+						if (ecrire_fichier($dir . '/paquet.xml', $xml) OR $echecs)
+							$xml = "\n<!-- svn add paquet.xml -->" . $xml;
+					}
+					$res[$nom]= $xml;
+					$ok++;
+				}
+			}
+		}
+		spip_log("Plugonet: $nom : $msg2");
 	}
-      }
-    }
-    spip_log("Plugonet: $nom : $msg2");
-  }
-  if ($all AND $nb_files > 1)
-    $msg2 = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
-  asort($all);
-  foreach ($all as $k => $v) $all[$k] = sprintf("%4d %s", $v, $k);
-
-  return array($msg2, $all, $res);
+	
+	if ($all AND $nb_files > 1)
+		$msg2 = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
+	asort($all);
+	foreach ($all as $k => $v) 
+		$all[$k] = sprintf("%4d %s", $v, $k);
+	
+	return array($msg2, $all, $res);
 }
 
 function plugin2paquet($D, $dir)
@@ -359,35 +364,32 @@ function plugin2paquet_traduire($D) {
 // install -> $prefix_actions
 function plugin2paquet_implicite($D, $balise, $nom)
 {
-  $files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
-  $contenu = join(' ', array_map('trim', $files));
-  $std = $D['prefix'] . "_$nom" . '.php';
-  if (!$contenu OR $contenu == $std) return '';
-  if (!strpos($contenu, ' ')) return "<!-- svn mv $contenu $std -->\n";
-  $k = array_search($std, $files);
-  if (!$k)
-    return "<!-- cat $contenu &gt; $std -->\n<!-- svn add $std -->\n";
-  unset($files[$k]);
-  $contenu = join(' ', array_map('trim', $files));
-  return "<!-- cat $contenu &gt;&gt; $std -->\n<!-- svn rm $contenu -->\n";
+	$files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
+	$contenu = join(' ', array_map('trim', $files));
+	$std = $D['prefix'] . "_$nom" . '.php';
+	if (!$contenu OR $contenu == $std) 
+		return '';
+	if (!strpos($contenu, ' ')) 
+		return "<!-- svn mv $contenu $std -->\n";
+	$k = array_search($std, $files);
+	if (!$k)
+		return "<!-- cat $contenu &gt; $std -->\n<!-- svn add $std -->\n";
+	unset($files[$k]);
+	$contenu = join(' ', array_map('trim', $files));
+	return "<!-- cat $contenu &gt;&gt; $std -->\n<!-- svn rm $contenu -->\n";
 }
 
 // Passer les lettres accentuees en entites XML
-function plugin2paquet_description($description, $slogan, $prefixe, $dir) {
+function plugin2paquet_description($description, $prefixe, $dir) {
 	$files = $langs = array();
 	foreach (plugin2paquet_traite_mult($description) as $lang => $_descr) {
 		if (!$lang)
 			$lang = 'fr';
 		$langs[$lang][strtolower($prefixe) . '_description'] = trim(htmlentities($_descr));
-	}
-	
-	foreach (plugin2paquet_traite_mult($slogan) as $lang => $slogan) {
-		if (!$lang)
-			$lang = 'fr';
-		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $slogan, $matches))
+		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $_descr, $matches))
 			$langs[$lang][strtolower($prefixe) . '_slogan'] = $matches[1];
 		else
-			$langs[$lang][strtolower($prefixe) . '_slogan'] = couper($slogan, 150, '');
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = couper($_descr, 150, '');
 	}
 
 	$dirl = $dir . '/lang';
@@ -429,8 +431,8 @@ function plugin2paquet_traite_mult($texte)
 
 function plugin2paquet_infos($plug, $bof, $dir)
 {
-  $f = charger_fonction('infos_plugin', 'plugins');
-  return $f(file_get_contents("$dir$plug/plugin.xml"), $plug, $dir);
+	$f = charger_fonction('infos_plugin', 'plugins');
+	return $f(file_get_contents("$dir$plug/plugin.xml"), $plug, $dir);
 }
 
 ?>
