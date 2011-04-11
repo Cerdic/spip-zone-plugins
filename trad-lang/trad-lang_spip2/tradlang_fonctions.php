@@ -57,8 +57,8 @@ function tradlang_testesynchro($idmodule, $langue){
 	$modok = $modules[$nom_mod];
 	
 	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
-	$modules2 = $getmodules_fics($dir_lang);
-	
+	$modules2 = $getmodules_fics($dir_lang,$nom_mod);
+	spip_log($modules2,'tradlang');
 	$modok2 = $modules2[$nom_mod];
 
 	// union entre modok et modok2
@@ -87,10 +87,8 @@ function tradlang_testesynchro($idmodule, $langue){
 	unset($GLOBALS[$GLOBALS['idx_lang']]);
 
 	// lit le timestamp  base
-	$res = sql_select("*","spip_tradlang","module =".sql_quote($nom_mod)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
-	$row = sql_fetch($res);
-	$tsb = $row["ts"];
-	spip_log($tsb);
+	$tsb = sql_getfetsel("ts","spip_tradlang","module =".sql_quote($nom_mod)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
+	spip_log($tsb,'tradlang');
 	return ($tsb == $tsf);
 }
 
