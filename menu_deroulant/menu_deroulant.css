@@ -1,7 +1,6 @@
-#nav-container{
-	font-size:76%;
-	}
-#nav, #nav ul {
+.menuder-container{ font-size:76%; }
+.menuder,
+.menuder ul {
 	float: left;
 	width: 100%;
 	list-style: none;
@@ -15,7 +14,7 @@
 	text-align:left;
 }
 
-#nav a {
+.menuder a {
 	display: block;
 	width: 10em;
 	w\idth: 6em;
@@ -24,17 +23,17 @@
 	padding: 0.25em 2em;
 }
 
-#nav a.daddy {
+.menuder a.daddy {
 	background: url(rightarrow2.gif) center right no-repeat;
 }
 
-#nav li {
+.menuder li {
 	float: left;
 	padding: 0;
 	width: 10em;
 }
 
-#nav li ul {
+.menuder li ul {
 	position: absolute;
 	left: -999em;
 	height: auto;
@@ -45,45 +44,50 @@
 	margin: 0;
 }
 
-#nav li li {
+.menuder li li {
 	padding-right: 1em;
 	width: 13em
 }
 
-#nav li ul a {
+.menuder li ul a {
 	width: 13em;
 	w\idth: 9em;
 }
 
-#nav li ul ul {
+.menuder li ul ul {
 	margin: -1.75em 0 0 14em;
 }
 
-#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li:hover ul ul ul ul,
-#nav li.sfhover ul ul, #nav li.sfhover ul ul ul, #nav li.sfhover ul ul ul ul
+.menuder li:hover ul ul,
+.menuder li:hover ul ul ul,
+.menuder li:hover ul ul ul ul,
+.menuder li.sfhover ul ul,
+.menuder li.sfhover ul ul ul,
+.menuder li.sfhover ul ul ul ul
 {
 	left: -999em;
 }
 
 
-#nav li:hover ul, 
-#nav li li:hover ul, 
-#nav li li li:hover ul,
-#nav li li li li:hover ul
+.menuder li:hover ul, 
+.menuder li li:hover ul, 
+.menuder li li li:hover ul,
+.menuder li li li li:hover ul
 {
 	left: auto;
 }
 
-#nav li.sfhover ul{
+.menuder li.sfhover ul{
 	left:auto;
 }
-#nav li li.sfhover ul,
-#nav li li li.sfhover ul,
-#nav li li li li.sfhover ul,
+.menuder li li.sfhover ul,
+.menuder li li li.sfhover ul,
+.menuder li li li li.sfhover ul,
 {
 	left: auto;
 }
 
-#nav li:hover, #nav li.sfhover {
+.menuder li:hover,
+.menuder li.sfhover {
 	background: #eda;
 }

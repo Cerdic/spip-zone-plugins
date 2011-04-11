@@ -7,7 +7,7 @@
  */
 if (jQuery.browser.msie) {
 $(document).ready(function(){
-	$('#nav li').hover(
+	$('.menuder li').hover(
 		function(){$(this).addClass('sfhover')},
 		function(){$(this).removeClass('sfhover')}
 	);
