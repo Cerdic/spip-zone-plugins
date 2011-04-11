@@ -24,9 +24,11 @@ function oembed_renseigner_document_distant($flux) {
 		// une video ?
 		if ($data['type']=='video') {
 			// créer une copie locale du contenu html
-			// cf recuperer_info_distantes()
+			// cf recuperer_infos_distantes()
 			$doc['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($flux['source'], 'html');
 			ecrire_fichier($doc['fichier'], $data['html']);
+			// set_spip_doc() pour récupérer le chemin du fichier relatif a _DIR_IMG
+			$doc['fichier'] = set_spip_doc($doc['fichier']);
 			$doc['extension'] = 'html';
 			$doc['taille'] = strlen($data['html']); # a peu pres
 			$doc['distant'] = 'non';
@@ -58,6 +60,8 @@ function oembed_post_edition($flux) {
 					$id_vignette = reset($ajoute);
 					include_spip('action/editer_document');
 					document_set($id_document,array("id_vignette" => $id_vignette,'mode'=>'document'));
+					// pour ne pas se retrouver avec l'url de la vignette dans l'input du formulaire au retour
+					set_request('url','');
 				}
 			}
 		}
