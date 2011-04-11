@@ -9,7 +9,7 @@ _ &#169; 2007-2009 - Distribu&#233; sous licence GPL
 	stable
 	</etat>
 	<description><multi>
-Gathers together in one plugin many small, useful tools to improve the management of your SPIP site.
+[en]Gathers together in one plugin many small, useful tools to improve the management of your SPIP site.
 
 Each tool can be ativated individually by the the user from the [plugin's admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
 
