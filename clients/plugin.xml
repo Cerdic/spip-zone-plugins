@@ -2,7 +2,7 @@
 	<nom>Clients</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3</version>
+	<version>0.4</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>Permet l'inscription facile et configurable pour des clients, en les inscrivant comme utilisateurs et contacts dans le même temps. Ils peuvent ensuite modifier leur profil.</description>
