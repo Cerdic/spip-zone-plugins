@@ -1,29 +1,15 @@
 <plugin>
-  <nom> <!-- Nom du plugin -->
-  Menus deroulants
-  </nom>
-  <auteur>        <!-- Auteur du plugin -->
-  cedric@notre-ville.net [notre-ville.net->http://www.notre-ville.net]
-  </auteur>
-  <version>
-  0.1
-  </version>
-  <etat>
-  dev
-  </etat>
-  <description>
-  Fonctionalit&#233; menu d&#233;roulant
-  </description>
-	<lien></lien> <!-- URI de documentation -->
-  <fonctions>
-  menuder_fonctions.php
-  </fonctions>
-  <prefix>
-  menuder
-  </prefix>
-  <pipeline>
-  	<nom>insert_head</nom>
-  	<inclure>menuder_fonctions.php</inclure>
-  </pipeline>
+	<nom>Menu d&#233;roulant</nom>
+	<version>0.1</version>
+	<etat>stable</etat>
+	<description>Menu d&#233;roulant dynamique, sans limitation de niveaux de hi&#233;rarchie.</description>
+	<lien>http://www.spip-contrib.net/?article1532</lien>
+	<auteur>[cedric@notre-ville.net->http://www.notre-ville.net]</auteur>
+	<prefix>menuder</prefix>
+	<fonctions>menuder_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>menuder_fonctions.php</inclure>
+	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
