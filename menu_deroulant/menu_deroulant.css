@@ -1,10 +1,9 @@
-.menuder-container{ font-size:76%; }
+.menuder-container{}
 .menuder,
 .menuder ul {
 	float: left;
 	width: 100%;
 	list-style: none;
-	line-height: 1;
 	background: white;
 	font-weight: bold;
 	padding: 0;
