@@ -1,20 +1,14 @@
 <plugin>
- <nom>
-En onglets dans le texte
-</nom>
- <version>
-1.1
-</version>
-<etat>
-stable
-</etat>
-<prefix>
-onglets_texte
-</prefix>
-<pipeline>
+	<nom>Onglets dans le texte</nom>
+	<version>1.1</version>
+	<etat>stable</etat>
+	<icon>icon.png</icon>
+	<description>Afficher du texte en blocs &agrave; onglets.</description>
+	<lien>http://www.spip-contrib.net/?rubrique445</lien>
+	<prefix>onglets_texte</prefix>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-
-
+	<categorie>edition</categorie>
 </plugin>
