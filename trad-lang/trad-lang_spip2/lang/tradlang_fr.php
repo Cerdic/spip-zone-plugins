@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_tradlang_str' => 'Cha&icirc;ne traduite',
 'label_update_langues_cible_mere' => 'Mettre &agrave; jour cette langue dans la base',
 'languesdispo' => 'Langues disponibles',
+'lien_accueil_interface' => 'Accueil de l\'interface de traduction',
 'lien_aide_recherche' => 'Aide &agrave; la recherche',
 'lien_aucun_status' => 'Aucun',
 'lien_bilan' => 'Bilan des traductions courantes.',

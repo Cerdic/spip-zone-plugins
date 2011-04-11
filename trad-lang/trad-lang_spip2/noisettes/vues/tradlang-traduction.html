@@ -1,5 +1,6 @@
 [(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|oui)
 <div id="contenu">
+	<div id="hierarchie"><a href="#URL_PAGE{tradlang}"><:tradlang:lien_accueil_interface:></a></div>
 	<div class="tradlang_entete">
 		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}
 		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
@@ -9,6 +10,7 @@
 </div>]
 [(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|non)
 <div id="contenu">
+	<div id="hierarchie"><a href="#URL_PAGE{tradlang}"><:tradlang:lien_accueil_interface:></a></div>
 	[(#ENV{module}|non)
 	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
 	[(#ENV{lang_orig}|non)
