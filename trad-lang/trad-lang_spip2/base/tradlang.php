@@ -22,12 +22,12 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'field'=> array(
 			"id_tradlang_module" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"module" => "varchar(128) NOT NULL",
-			"nom_mod" => "varchar(16) NOT NULL",
+			"nom_mod" => "varchar(32) NOT NULL",
 			"lang_mere" => "varchar(16) NOT NULL default 'fr'",
 			"type_export" => "varchar(16) NOT NULL default 'spip'",
 			"dir_lang" => "varchar(255) NOT NULL",
 			"texte" => "longtext DEFAULT '' NOT NULL",
-			"lang_prefix" => "varchar(16) NOT NULL"
+			"lang_prefix" => "varchar(32) NOT NULL"
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_tradlang_module",
