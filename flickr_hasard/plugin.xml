@@ -1,0 +1,17 @@
+<plugin>
+    <nom>Flickr hasard</nom>
+    <auteur>[erational->http://www.erational.org]</auteur>
+    <licence>&#169; 2011 GNU/GPL</licence>
+    <version>0.1</version>
+    <etat>test</etat>
+    <categorie>multimedia</categorie>
+    <description>Permet d'afficher au hasard des images issues de Flickr 
+    
+      Ce plugin utilise l'API Flickr mais n’est ni soutenu, ni certifié par Flickr.
+    </description>    
+    <lien>http://www.spip-contrib.net/Flickr-hasard</lien>
+    <prefix>flickr_rand</prefix>
+    <icon>img/logo_flickrnd_48.png</icon>  
+    <options>flickr_rand_options.php</options> 
+  	<necessite id="SPIP" version="[2.1;]" />
+</plugin>

@@ -1,0 +1,44 @@
+#CACHE{30*3600}
+[(#REM)
+    MODE FIXE
+    - id        
+          id photo flickr  ex. 3674639573
+    
+    MODE ALEATOIRE      
+    - tag
+          mot-clé      
+          
+    - license
+          4 http://creativecommons.org/licenses/by/2.0/ 
+          6 http://creativecommons.org/licenses/by-nd/2.0/ 
+          3 http://creativecommons.org/licenses/by-nc-nd/2.0/
+          2 http://creativecommons.org/licenses/by-nc/2.0/ 
+          1 http://creativecommons.org/licenses/by-nc-sa/2.0/
+          5 http://creativecommons.org/licenses/by-sa/2.0/    
+          7 http://flickr.com/commons/usage/           
+         -1 copyright
+          8 tous les creatives commons, alias de 1,2,3,4,5,6
+          9 tous sauf le copyright, alias de 1,2,3,4,5,6,7         (defaut)
+          
+          il est possible de specifier plusieurs licences en les separant par les virgules: ex. 2,1
+          
+             
+    - align:  
+          (rien)       (defaut)
+          left 
+          center 
+          right
+    - size:
+           Square     75x75
+           Thumbnail  largeur/longueur max: 100px
+           Small      largeur/longueur max: 240px   (defaut)
+           Medium     largeur/longueur max: 500px
+           Original   ...x...   --> à eviter
+     - safesearch 
+          1 Safe    (defaut)
+          2 Moderate
+          3 Restricted         
+
+
+
+][(#REM|flickr_rand{#ENV{tag},#ENV{license},#ENV{align},#ENV{size},#ENV{safesearch},#ENV{id}})] 
