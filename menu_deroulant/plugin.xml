@@ -2,7 +2,8 @@
 	<nom>Menu d&#233;roulant</nom>
 	<version>2.1.2</version>
 	<etat>stable</etat>
-	<description>Menu d&#233;roulant dynamique full CSS, sans limitation de niveaux de hi&#233;rarchie.</description>
+	<icon>icon.png</icon>
+	<description>Menu d&#233;roulant dynamique full CSS, qui plonge en profondeur, sans limitation de niveaux de hi&#233;rarchie.</description>
 	<lien>http://www.spip-contrib.net/?article3804</lien>
 	<auteur>[cedric@notre-ville.net->http://www.notre-ville.net]</auteur>
 	<prefix>menuder</prefix>
