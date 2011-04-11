@@ -8,8 +8,8 @@
 if (jQuery.browser.msie) {
 $(document).ready(function(){
 	$('.menuder li').hover(
-		function(){$(this).addClass('sfhover')},
-		function(){$(this).removeClass('sfhover')}
+		function(){$(this).addClass('hover')},
+		function(){$(this).removeClass('hover')}
 	);
 });
 }

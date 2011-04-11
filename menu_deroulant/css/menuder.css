@@ -12,17 +12,17 @@
 .menuder li:hover ul ul,
 .menuder li:hover ul ul ul,
 .menuder li:hover ul ul ul ul,
-.menuder li.sfhover ul ul,
-.menuder li.sfhover ul ul ul,
-.menuder li.sfhover ul ul ul ul { left: -999em; }
+.menuder li.hover ul ul,
+.menuder li.hover ul ul ul,
+.menuder li.hover ul ul ul ul { left: -999em; }
 .menuder li:hover ul, 
 .menuder li li:hover ul, 
 .menuder li li li:hover ul,
 .menuder li li li li:hover ul { left: auto; }
-.menuder li.sfhover ul,
-.menuder li li.sfhover ul,
-.menuder li li li.sfhover ul,
-.menuder li li li li.sfhover ul { left: auto; }
+.menuder li.hover ul,
+.menuder li li.hover ul,
+.menuder li li li.hover ul,
+.menuder li li li li.hover ul { left: auto; }
 .menuder li:hover,
-.menuder li.sfhover { background-color: #666; }
+.menuder li.hover { background-color: #666; }
 /* end */
