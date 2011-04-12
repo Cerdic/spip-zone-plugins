@@ -12,79 +12,137 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/langonet_generer_fichier');
+include_spip('inc/plugin');
 
-function inc_plugonet_generer($files, $write)
-{
-	$nb_files = count($files);
-	$sep = ($nb_files > 1) ? ";" : "\n";
-	$all = $res = array();
-	$total = $ko = 0;
+function inc_plugonet_generer($files, $write) {
+
+	// Chargement des fonctions de validation XML et d'extraction ders informations contenues dans la balise plugin
 	$valider_xml = charger_fonction('valider', 'xml');
-	// est-on en 2.2 ? 
-	$informer_xml = charger_fonction('infos_plugin', 'plugins', true) ?
-		'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
+	$informer_xml = charger_fonction('infos_plugin', 'plugins', true);
+	$informer_xml = ($informer_xml)	? $informer_xml : charger_fonction('get_infos', 'plugins');
 	spip_log("Plugonet: fonction de lecture: $informer_xml");
-	
+
+	$erreurs = array();
 	foreach($files as $nom)  {
-		$old = (basename($nom) == 'plugin.xml');
-		if (lire_fichier ($nom, $text))
-			$erreurs = $valider_xml($text, false, false, $old ? 'plugin.dtd' : 'paquet.dtd');
-		$erreurs = is_array($erreurs) ? $erreurs[1] : $erreurs->err; //2.1 ou 2.2
-		foreach ($erreurs as $k => $v) {
-			$msg = preg_replace('@<br[^>]*>|:|,@', ' ', $v[0]);
-			if ($nb_files > 1) $msg = preg_replace(',\s*[(][^)]*[)],', '', $msg);
-			$erreurs[$k] = trim(str_replace("\n", ' ', textebrut($msg)));
-			// $msg = preg_replace(',<b>[^>]*</b>,', '* ', $msg);
-			@++$all[trim(str_replace("\n", '', textebrut($msg)))];
-		}
+		if (lire_fichier($nom, $contenu)) {
+			$erreurs[$nom]['lecture_pluginxml'] = false;
+			// Validation formelle du fichier plugin.xml (uniquement des avertissements)
+			$resultats = $valider_xml($contenu, false, false, 'plugin.dtd');
+			$erreurs[$nom]['validation_pluginxml'] = is_array($resultats) ? $resultats[1] : $resultats->err; //2.1 ou 2.2
 
-		$msg2 = $nom;
-		if ($n = count($erreurs)) {
-			$total+=$n;
-			$ko++;
-			$msg2 .= ' ' . $n . " erreur(s)" . $sep . join($sep, $erreurs);
-		}
-
-		$dir = dirname($nom);
-		if ($old) {
-			if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
-				$msg2 .= " plugin.xml illisible";
-			else {
-				$xml = plugin2paquet($infos, $dir);
-				$e = $valider_xml($xml, false, false, 'paquet.dtd');
-				$e = is_array($e) ? $e[1] : $e->err; //2.1 ou 2.2
-				if ($e)  {
-					$msg2 .=" erreurs en nouveau format: " . count($e) . ". "; 
-					if ($nb_files ==1)  
-						$msg2.= join("\n", array_map('array_shift', $e)) . ".";
-				}  
-				else {
-					$msg2 .= " Correct en nouveau format.";
-					if ($write) {
-						if ($modules = plugin2paquet_description($infos['description'], $infos['prefix'], $dir))
-							$xml = "\n<!-- svn add " . join(' ', $modules) . " -->" . $xml;
-						if (ecrire_fichier($dir . '/paquet.xml', $xml) OR $echecs)
-							$xml = "\n<!-- svn add paquet.xml -->" . $xml;
+			// Recherche de toutes les balises plugin contenues dans le fichier plugin.xml et extraction de leurs infos
+			$regexp = '#<plugin[^>]*>(.*)</plugin>#Uims';
+			if ($nb_balises = preg_match_all($regexp, $contenu, $matches)) {
+				$plugins = array();
+				// Pour chacune des occurences de la balise on extrait les infos
+				$erreurs[$nom]['information_pluginxml'] = false;
+				foreach ($matches[0] as $_balise_plugin) {
+					// Extraction des informations du plugin suivant le standard SPIP
+					// -- si une balise est illisible on sort de la boucle et on retourne l'erreur sans plus de traitement
+					if (!$infos = $informer_xml($_balise_plugin)) {
+						$erreurs[$nom]['information_pluginxml'] = true;
+						break;
 					}
-					$res[$nom]= $xml;
-					$ok++;
+					$plugins[] = $infos;
+				}
+			}
+			else
+				$erreurs[$nom]['information_pluginxml'] = true;
+
+			if (!$erreurs[$nom]['information_pluginxml']) {
+				// Puisqu'on sait extraire les infos du plugin.xml, .on construit le contenu du fichier paquet.xml
+				// a partir de ces infos
+				list($paquet_xml, $prefixe, $description) = plugin2paquet($plugins);
+				// On valide le contenu obtenu avec la nouvelle DTD paquet
+				$resultats = $valider_xml($paquet_xml, false, false, 'paquet.dtd');
+				$erreurs[$nom]['validation_paquetxml'] = is_array($resultats) ? $resultats[1] : $resultats->err;
+				
+				// Si aucune erreur de validation de paquet.xml, on peut ecrire les fichiers de sortie :
+				// -- paquet.xml dans le repertoire du plugin
+				// -- les ${prefixe}-paquet_${langue}.php pour chaque langue trouvee dans le repertoire lang/ du plugin
+				// -- le fichier des commandes svn
+				if (!$erreurs[$nom]['validation_paquetxml'] AND $write ) {
+					$dir = dirname($nom);
+					if ($modules = plugin2paquet_description($description, $prefixe, $dir))
+						$xml = "\n<!-- svn add " . join(' ', $modules) . " -->" . $xml;
+					if (ecrire_fichier($dir . '/paquet.xml', $xml))
+						$xml = "\n<!-- svn add paquet.xml -->" . $xml;
 				}
 			}
 		}
-		spip_log("Plugonet: $nom : $msg2");
+		else
+			$erreurs[$nom]['lecture_pluginxml'] = true;
 	}
-	
-	if ($all AND $nb_files > 1)
-		$msg2 = "\n---- Statistiques des $total erreurs des $ko fichiers fautifs sur $nb_files ($ok bien reecrits) ----\n";
-	asort($all);
-	foreach ($all as $k => $v) 
-		$all[$k] = sprintf("%4d %s", $v, $k);
-	
-	return array($msg2, $all, $res);
+
+	return array($erreurs);
 }
 
-function plugin2paquet($D, $dir)
-{
+
+// --------------------- CONSTRUCTION DES BALISES PAQUET ET SPIP -----------------
+//
+
+// Boucle sur chaque contenu des balises plugin et creation du contenu de paquet.xml
+function plugin2paquet($plugins) {
+
+	// On determine le bloc dont la borne min de compatibilite SPIP est la plus elevee
+	// et celui dont la borne min est la moins elevee
+	$cle_min_max = $cle_min_min = -1;
+	$borne_min_max = '1.9.0';
+	$borne_min_min = '3.0.0';
+	foreach ($plugins as $_cle => $_plugin) {
+		if (!$_plugin['compatible'])
+			$borne_min = '1.9.0';
+		$bornes_spip = extraire_bornes($_plugin['compatible']);
+		$borne_min = ($bornes_spip['min']['valeur']) ? $bornes_spip['min']['valeur'] : '1.9.0';
+		if (spip_version_compare($borne_min_max, $borne_min, '<=')) {
+			$cle_min_max = $_cle;
+			$borne_min_max = $borne_min;
+		}
+		if (spip_version_compare($borne_min_min, $borne_min, '>=')) {
+			$cle_min_min = $_cle;
+			$borne_min_min = $borne_min;
+		}
+	}
+
+	// On initialise les informations non techniques du bloc de compatibilite la moins elevee avec celles
+	// du bloc dont la borne min de compatibilite SPIP est la plus elevee.
+	$plugins[$cle_min_min]['prefix'] = $plugins[$cle_min_max]['prefix'];
+	$plugins[$cle_min_min]['categorie'] = $plugins[$cle_min_max]['categorie'];
+	$plugins[$cle_min_min]['icon'] = $plugins[$cle_min_max]['icon'];
+	$plugins[$cle_min_min]['version'] = $plugins[$cle_min_max]['version'];
+	$plugins[$cle_min_min]['etat'] = $plugins[$cle_min_max]['etat'];
+	$plugins[$cle_min_min]['version_base'] = $plugins[$cle_min_max]['version_base'];
+	$plugins[$cle_min_min]['meta'] = $plugins[$cle_min_max]['meta'];
+	$plugins[$cle_min_min]['lien'] = $plugins[$cle_min_max]['lien'];
+	$plugins[$cle_min_min]['nom'] = $plugins[$cle_min_max]['nom'];
+	$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'];
+	$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'];
+
+	// On initialise la description pour la creation des fichiers de langue
+	$description = $plugins[$cle_min_max]['description'];
+
+	// Le bloc de compatibilite la moins elevee correspond aux attributs et sous-balises primaires
+	// de la balise paquet. Les autres blocs generent les balises spip contenant uniquement les 
+	// donnees dits techniques
+	// -- On commence avec les balises spip
+	$balises_spip = '';
+	$commandes_spip = '';
+	foreach ($plugins as $_cle => $_plugin) {
+		if ($_cle <> $cle_min_min) {
+			list($spip, $commandes) = plugin2balise($_plugin, 'spip');
+			$balises_spip .= "\n\t$spip";
+			$commandes_spip .= "$spip\n";
+		}
+	}
+	// -- On continue avec la balise paquet
+	list($paquet_xml, $commande_paquet) = plugin2balise($plugins[$cle_min_min], 'paquet', $balises_spip);
+	$paquet_xml = $commande_paquet . $commandes_spip . $paquet_xml;
+
+	return array($paquet_xml, $plugins[0]['prefix'], $description);
+}
+
+// Construction d'une balise paquet ou spip
+function plugin2balise($D, $balise, $balises_spip='') {
 	// Extraction des attributs de la balise paquet
 	$categorie = $D['categorie'];
 	$etat = $D['etat'];
@@ -112,22 +170,33 @@ function plugin2paquet($D, $dir)
 	}
 	
 	// Constrution de la balise paquet et de ses attributs
-	$paquet_att =
-		($prefix ? "\n\tprefix='$prefix'" : '') .
-		($categorie ? "\n\tcategorie='$categorie'" : '') .
-		($logo ? "\n\tlogo='$logo'" : '') .
-		($version ? "\n\tversion='$version'" : '') .
-		($etat ? "\n\tetat='$etat'" : '') .
-		($version_base ? "\n\tversion_base='$version_base'" : '') .
-		($meta ? "\n\tmeta='$meta'" : '') .
-		plugin2paquet_lien($lien, 'documentation') .
-		($compatible ? "\n\tcompatible='$compatible'" : '');
-
-	$nom = plugin2paquet_nom($D['nom']);
-
-	$auteur = plugin2paquet_copy($D['auteur'], 'auteur');
-	$licence = plugin2paquet_copy($D['licence'], 'licence');
+	if ($balise == 'paquet') {
+		$attributs =
+			($prefix ? "\n\tprefix='$prefix'" : '') .
+			($categorie ? "\n\tcategorie='$categorie'" : '') .
+			($logo ? "\n\tlogo='$logo'" : '') .
+			($version ? "\n\tversion='$version'" : '') .
+			($etat ? "\n\tetat='$etat'" : '') .
+			($version_base ? "\n\tversion_base='$version_base'" : '') .
+			($meta ? "\n\tmeta='$meta'" : '') .
+			plugin2paquet_lien($lien, 'documentation') .
+			($compatible ? "\n\tcompatible='$compatible'" : '');
 	
+		// Constrution de toutes les autres balise incluses dans paquet
+		$nom = plugin2paquet_nom($D['nom']);
+	
+		$auteur = plugin2paquet_copy($D['auteur'], 'auteur');
+		$licence = plugin2paquet_copy($D['licence'], 'licence');
+	}
+	else {
+		// Balise spip
+		$attributs =
+			($compatible ? "\n\tcompatible='$compatible'" : '');
+		// raz des balises non utilisees
+		$nom = $auteur = $licence = '';
+	}
+
+	// Toutes les balises techniques sont possibles dans paquet et spip
 	$pipeline = is_array($D['pipeline']) ? plugin2paquet_pipeline($D['pipeline']) :'';
 	$chemin = is_array($D['path']) ? plugin2paquet_chemin($D) :'';
 	$necessite = (is_array($D['necessite']) OR is_array($D['lib'])) ? plugin2paquet_necessite($D) :'';
@@ -136,11 +205,12 @@ function plugin2paquet($D, $dir)
 	$onglet = is_array($D['onglet']) ? plugin2paquet_exec($D, 'onglet') :'';
 	$traduire = is_array($D['traduire']) ? plugin2paquet_traduire($D) :'';
 
+	// Pour l'instant on concatene les commandes de toutes les balises paquet et spip
 	$renommer = plugin2paquet_implicite($D, 'options', 'options')
 	. plugin2paquet_implicite($D, 'fonctions', 'fonctions')
 	. plugin2paquet_implicite($D, 'install', 'actions');
 	
-	return "$renommer<paquet$paquet_att\n>\t$nom$auteur$licence$pipeline$necessite$utilise$bouton$onglet$chemin$traduire\n</paquet>\n";
+	return array("<$balise$attributs\n>\t$nom$auteur$licence$pipeline$necessite$utilise$bouton$onglet$chemin$traduire$balises_spip\n</$balise>\n", $renommer);
 }
 
 
@@ -433,6 +503,25 @@ function plugin2paquet_infos($plug, $bof, $dir)
 {
 	$f = charger_fonction('infos_plugin', 'plugins');
 	return $f(file_get_contents("$dir$plug/plugin.xml"), $plug, $dir);
+}
+
+function extraire_bornes($intervalle) {
+	static $borne_vide = array('valeur' => '', 'incluse' => false);
+	$bornes = array('min' => $borne_vide, 'max' => $borne_vide);
+
+	if ($intervalle
+	AND preg_match(',^[\[\(]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-]*)[\]\)]$,Uis', $intervalle, $matches)) {
+		if ($matches[1]) {
+			$bornes['min']['valeur'] = trim($matches[1]);
+			$bornes['min']['incluse'] = ($intervalle{0} == "[");
+		}
+		if ($matches[2]) {
+			$bornes['max']['valeur'] = trim($matches[2]);
+			$bornes['max']['incluse'] = (substr($intervalle,-1) == "]");
+		}
+	}
+	
+	return $bornes;
 }
 
 ?>
