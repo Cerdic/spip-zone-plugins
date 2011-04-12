@@ -5,7 +5,8 @@
 		'supprimer' => "Supprimer",
 		'ajouter' => "Ajouter",
 		'titre_urledit' => 'Gestion des URLs',
-		'info_urledit' => 'Attribuer une URL'
+		'info_urledit' => 'Attribuer une URL',
+		'erreur_url_edit' => 'Erreur: URL incorrecte ou déjà présente'
 	);
 
 ?>

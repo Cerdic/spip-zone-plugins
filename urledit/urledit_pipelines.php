@@ -16,7 +16,7 @@ function urledit_boite_infos($flux){
 					'objet' => array('type' => $type, 'id_objet' => $id_objet, 'titre'=>$flux['args']['row']['titre'])
 				)
 			);
-			$contexte = array('urlpropre'=>$urlpropre,'args'=>$args,'redirect'=>$redirect,'id_objet' => $id_objet,'type_objet' => $type_objet,'statut' => $statut);
+			$contexte = array('urlpropre'=>$urlpropre,'args'=>$args,'redirect'=>$redirect,'id_objet' => $id_objet,'type_objet' => $type_objet,'statut' => $statut, 'erreur_urledit' => _request('erreur_urledit'));
 			$fond = recuperer_fond("prive/formulaires/urledit", $contexte);
 			
 			$flux['data'].=$fond;

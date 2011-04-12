@@ -1,18 +1,12 @@
 <?php
 
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2009                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// http://doc.spip.org/@action_urledit_ajouter_dist
+
+//
+// créer un nouvelle URL
+//
 function action_urledit_ajouter_dist() {
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
@@ -26,10 +20,28 @@ function action_urledit_ajouter_dist() {
 		);
 		*/
 	$url =  _request('urlpropre');
+
+  // nettoyage URLs
+	if (!defined('_URLS_ARBO_MAX')) define('_URLS_ARBO_MAX', 35);
+	if (!defined('_URLS_ARBO_MIN')) define('_URLS_ARBO_MIN', 3);
+
+	include_spip('action/editer_url');
+	
+  if (!$url = url_nettoyer($url,_URLS_ARBO_MAX,_URLS_ARBO_MIN,'-',''))   // ici possible d'ajouter des arguments l'argument filtre (url en minuscule)
+		return;
+
+	
 	$set = array('url' => $url, 'type' => $type_objet, 'id_objet' => $id_objet, 'date' => 'NOW()');
-	if (!@sql_insertq('spip_urls', $set) > 0) {
-		//retour erreur duplicite
-	}
+  $c = @sql_insertq('spip_urls', $set);  
+
+			//retour erreur duplicite  
+      $redirect = _request('redirect');
+			$redirect = parametre_url($redirect,'erreur_urledit',"1-$c",'&');
+			include_spip('inc/headers');
+			redirige_par_entete($redirect); 
+  
+    		
+	
 }
 
 ?>

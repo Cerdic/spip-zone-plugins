@@ -4,20 +4,25 @@
   <B_url>
   <ul style="list-style:none;padding-left:0">
   <BOUCLE_url(urls){type=#ENV{type_objet}}{id_objet}{!par date}>
-  [<li><a style="float:right;clear:right" href="[(#URL_ACTION_AUTEUR{'urledit_supprimer',#ENV{args},#ENV{redirect}}|parametre_url{urlpropre,#URL})]"><:urledit:supprimer:></a><b>(#URL)</b></li>]
+  [<li>
+      <a style="float:right;clear:right;font-size:x-small;" href="[(#URL_ACTION_AUTEUR{'urledit_supprimer',#ENV{args},#ENV{redirect}}|parametre_url{urlpropre,#URL})]"><:urledit:supprimer:></a>
+      <div style="display:block;padding:2px;margin:2px 0;font-weight:normal;background:#eee;">(#URL)</div>
+      </li>]
   </BOUCLE_url>
   </ul>
   </B_url>
   [(#ENV{urlpropre})<br/>]
   <//B_url>
   <div class="cadre-e bloc_depliable blocdeplie" style="margin-top:20px;padding:5px 10px 25px 5px;">
-   <form method="get">
-	[(#URL_ACTION_AUTEUR{'urledit_ajouter',#ENV{args},#ENV{redirect}}|form_hidden)]
-	<input type="hidden" name="[id_(#ENV{type_objet})]" value="[(#ENV{id_objet})]"/>
-	<label for="urlpropre"><:urledit:info_urledit:></label>
-	<input type="text" name="urlpropre" id="urlpropre" value=""/>
-	<input type="submit" class="submit fondo" value="<:urledit:ajouter:>" style="float:right"/>
-   </form>
-  </div>
+  [(#ENV{erreur_urledit}|=={1-}|oui)<p class="erreur" style="color:#f00"><:urledit:erreur_url_edit:></p>] 
+    <form method="get">
+  	[(#URL_ACTION_AUTEUR{'urledit_ajouter',#ENV{args},#ENV{redirect}}|form_hidden)]
+  	<input type="hidden" name="[id_(#ENV{type_objet})]" value="[(#ENV{id_objet})]"/>
+  	<label for="urlpropre"><:urledit:info_urledit:></label>
+  	<input type="text" name="urlpropre" id="urlpropre" value=""/>
+  	<input type="submit" class="submit fondo" value="<:urledit:ajouter:>" style="float:right"/>
+     </form>
+  </div>  
+  
  </div>
 </div>
