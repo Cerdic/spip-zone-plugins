@@ -11,20 +11,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'aucun_objets_avec_lien_vers_courant' => 'Aucun autre contenu ne contient de lien vers celui-ci.',
 
 	// C
-	'confirmation_depublication' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le dépubliez !\\n\\nVoulez-vous vraiment changer le statut ?',
-	'confirmation_publication' => 'Attention, un contenu vers lequel pointe celui-ci n\'est pas publié !\\n\\nVoulez-vous vraiment changer le statut ?',
-	'confirmation_suppression' => 'Attention, un contenu publié pointe vers celui-ci, et sera impacté si vous le supprimez !\\n\\nVoulez-vous vraiment le supprimer ?',
+	'confirmation_depublication' => 'Attention, des liens internes pointent vers ce contenu !\\n\\nSon changement de statut aurait des répercussions sur le fonctionnement du site.\\n\\nVoulez-vous vraiment changer le statut ?',
+	'confirmation_publication' => 'Attention, ce contenu contient un lien pointant vers un contenu qui n\'est pas publié !\\n\\nSon changement de statut aurait des répercussions sur le fonctionnement du site.\\n\\nVoulez-vous vraiment changer le statut ?',
+	'confirmation_suppression' => 'Attention, des liens internes pointent vers ce contenu !\\n\\nSa suppression aurait des répercussions sur le fonctionnement du site.\\n\\nVoulez-vous vraiment le supprimer ?',
 
 	// I
-	'information_element_contenu' => 'Attention, un autre contenu pointe vers celui-ci !',
+	'information_element_contenu' => 'Attention, des liens internes pointent vers ce contenu !',
 
 	// L
 	'legende_liens_faux_objets' => 'Les liens en rouge et barrés indiquent des contenus liés qui n\'existent pas.',
 	'liens_entre_contenus' => 'Liens entre contenus',
 
 	// O
-	'objets_avec_liens_depuis_courant' => 'Ce contenu contient des liens vers ceux-ci :',
-	'objets_avec_liens_vers_courant' => 'Ces contenus contiennent des liens vers celui-ci :',
+	'objets_avec_liens_depuis_courant' => 'Ce contenu contient des liens vers ces autres :',
+	'objets_avec_liens_vers_courant' => 'Ces autres contenus contiennent des liens vers celui-ci :',
 
 	// S
 	'statut_poubelle' => 'A la poubelle',
