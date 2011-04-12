@@ -28,7 +28,7 @@
 
 
    <necessite id="jqueryui" />
-   <necessite id="menus" version='[0.8.10;]" />
+   <necessite id="menus" version="[0.8.10;]" />
 
 
 
