@@ -65,7 +65,7 @@ function inc_plugonet_generer($files, $write) {
 					$dir = dirname($nom);
 					if ($modules = plugin2paquet_description($description, $prefixe, $dir))
 						$xml = "\n<!-- svn add " . join(' ', $modules) . " -->" . $xml;
-					if (ecrire_fichier($dir . '/paquet.xml', $xml))
+					if (ecrire_fichier($dir . '/paquet.xml', $paquet_xml))
 						$xml = "\n<!-- svn add paquet.xml -->" . $xml;
 				}
 			}
@@ -130,8 +130,8 @@ function plugin2paquet($plugins) {
 	foreach ($plugins as $_cle => $_plugin) {
 		if ($_cle <> $cle_min_min) {
 			list($spip, $commandes) = plugin2balise($_plugin, 'spip');
-			$balises_spip .= "\n\t$spip";
-			$commandes_spip .= "$spip\n";
+			$balises_spip .= "\n\n$spip";
+			$commandes_spip .= "$commandes\n";
 		}
 	}
 	// -- On continue avec la balise paquet

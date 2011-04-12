@@ -28,10 +28,9 @@ function formulaires_plugonet_generer_traiter(){
  	$erreurs = $generer($champs['pluginxml'], true);
 
 	// Traitement et affichage des resultats
-	if ($erreurs)
-		var_dump('erreurs',$erreurs);
+//	if ($erreurs)
 	$msg ="<fieldset style='border: 0.1em solid; margin:1em'><legend>" . 
-			$champs['pluginxml'] . 
+			implode(' ', $champs['pluginxml']) . 
 			"</legend></fieldset>";
 	
 	return array('message_ok' => $msg, 'editable' => true);;
