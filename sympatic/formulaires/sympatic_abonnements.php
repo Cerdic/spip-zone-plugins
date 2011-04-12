@@ -2,6 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/autoriser');
 include_spip('base/abstract_sql');
 
 function formulaires_sympatic_abonnements_charger_dist($id_auteur){
