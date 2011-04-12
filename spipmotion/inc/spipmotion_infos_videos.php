@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/presentation');
 function inc_spipmotion_infos_videos_dist($id, $id_document,$type,$script='',$ignore_flag = false) {
-	spip_log('inc_spipmotion_infos_videos_dist','spipmotion');
 	$corps = recuperer_fond('prive/prive_infos_video', $contexte=array('id_document'=>$id_document));
 
 	// Si on a le droit de modifier les documents, on affiche les icones pour récupérer les infos et le logo
