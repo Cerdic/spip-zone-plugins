@@ -326,7 +326,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // Codigos (plurales)
 	'p_AED' => "dirhames de los Emiratos Árabes Unidos",
-	'p_AFN' => "afganis",
+	'p_AFN' => "afgani",
 	'p_ALL' => "leks",
 	'p_AMD' => "drames armenios",
 	'p_ANG' => "florines de las Antillas Holandesas",
@@ -409,7 +409,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'p_LBP' => "libras libanesas",
 	'p_LKR' => "rupias de Sri Lanka",
 	'p_LRD' => "dólares liberianos",
-	'p_LSL' => "lotis",
+	'p_LSL' => "maloti",
 	'p_LTL' => "litases",
 	'p_LVL' => "lates",
 	'p_LYD' => "dinares libios",
@@ -458,7 +458,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'p_SRD' => "dólares surinameses",
 	'p_STD' => "dobras de Santo Tomé y Príncipe",
 	'p_SYP' => "libras sirias",
-	'p_SZL' => "lilangenis",
+	'p_SZL' => "emalangeni",
 	'p_THB' => "bahtes",
 	'p_TJS' => "somonis",
 	'p_TMT' => "manates",
