@@ -1,18 +1,17 @@
 <plugin>
-	<nom>URLs editables</nom>
+	<nom>URLs &eacute;ditables</nom>
 	<icon>img_pack/urledit-48.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
-	[Stephane LAURENT->stephane@rezo.net]
-	</auteur>
-	<licence>GPL 3 - &#169; 2009</licence>
+	<auteur>[Stephane LAURENT->stephane@rezo.net]</auteur>
+	<licence>GPL 3 - &#169; 2009-2011</licence>
 	<version>0.1</version>
 	<etat>dev</etat>
 	<description>Edition libre des URLs</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/URLs-editables</lien>
 	<prefix>urledit</prefix>
 	<pipeline>
 		<nom>boite_infos</nom>
 		<inclure>urledit_pipelines.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.0.8;]' />
+ 	<necessite id='SPIP' version='[2.1.0;]' />
+ 	<categorie>outil</categorie>
 </plugin>

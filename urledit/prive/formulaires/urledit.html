@@ -3,7 +3,7 @@
  <div>
   <B_url>
   <ul style="list-style:none;padding-left:0">
-  <BOUCLE_url(URLS){type=#ENV{type_objet}}{id_objet}{!par date}>
+  <BOUCLE_url(urls){type=#ENV{type_objet}}{id_objet}{!par date}>
   [<li><a style="float:right;clear:right" href="[(#URL_ACTION_AUTEUR{'urledit_supprimer',#ENV{args},#ENV{redirect}}|parametre_url{urlpropre,#URL})]"><:urledit:supprimer:></a><b>(#URL)</b></li>]
   </BOUCLE_url>
   </ul>
