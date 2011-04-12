@@ -1,3 +1,2 @@
 Rendre tout ca un peu parametrable (autorisations, droit de modif si publie...)
 gérer plusieurs URL pour un meme article (avec redirection 301 pour les anciennes URLs)
-compatibilite URL libres ?
