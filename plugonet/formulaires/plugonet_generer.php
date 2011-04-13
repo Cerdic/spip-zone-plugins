@@ -18,20 +18,16 @@ function formulaires_plugonet_generer_verifier(){
 
 function formulaires_plugonet_generer_traiter(){
 	// Recuperation des champs du formulaire
-	$champs = array('pluginxml', 'encodage');
-	foreach($champs as $_champ){
-		$champs[$_champ] = _request($_champ);
-	}
+	$pluginxml = _request('pluginxml');
+	$forcer = (_request('forcer')) ? true : false;
 
 	// Generation du fichier
  	$generer = charger_fonction('plugonet_generer','inc');
- 	$erreurs = $generer($champs['pluginxml'], true);
+ 	list($erreurs, $commandes) = $generer($pluginxml, $forcer);
 
 	// Traitement et affichage des resultats
-//	if ($erreurs)
-	$msg ="<fieldset style='border: 0.1em solid; margin:1em'><legend>" . 
-			implode(' ', $champs['pluginxml']) . 
-			"</legend></fieldset>";
+	var_dump('erreurs', $erreurs);
+	var_dump('commandes', $commandes);
 	
 	return array('message_ok' => $msg, 'editable' => true);;
 }
