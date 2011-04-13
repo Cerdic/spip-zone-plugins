@@ -14,8 +14,11 @@ function spip_proprio_exporter($what=array()){
 	}
 
 	$code = "// Exportation config SPIP Proprio\n// Site d'origine : ".$GLOBALS['meta']['nom_site']."\n// Cree le : ".date("Y-m-d H:i:s")."\n".$code;
-	$log = ecrire_fichier(_DIR_DUMP.'spiproprio_export_'.date('Ymd').'.php.gz', '<'."?php\n$code\n?".'>', true);
-	return $log;
+	$fichier_dump = 'spiproprio_export_'.date('Ymd').'.php.gz';
+	$log = ecrire_fichier(_DIR_DUMP.$fichier_dump, '<'."?php\n$code\n?".'>', true);
+	if ($log);
+		return $fichier_dump;
+	return false;
 }
 
 function spip_proprio_importer($file=null){
@@ -52,7 +55,7 @@ function liste_proprio_dump() {
 		foreach($liste_dump as $i=>$file) {
 			$filename = substr($file, strrpos($file, '/')+1);
 			$filename_short = str_replace('.php.gz', '', $filename);
-			$str = "<option value='$filename'>$filename_short</option>";
+			$str .= "<option value='$filename'>$filename_short</option>";
 		}
 	return $str;
 }
@@ -73,7 +76,7 @@ function exec_spip_proprio_tech() {
 			'languages' => _request('languages'),
 		);
 		if( $ok = spip_proprio_exporter($datas) )
-			$msg_export = _T('spip_proprio:ok_export', array('fichier'=>_DIR_DUMP.'spip_proprio_export.php'));
+			$msg_export = _T('spip_proprio:ok_export', array('fichier'=>_DIR_DUMP.$ok));
 		else $msg_export = _T('spip_proprio:erreur_export');
 	}
 	elseif ($a = _request('do_proprio_import')) {
@@ -104,6 +107,11 @@ function exec_spip_proprio_tech() {
 	if($liste)
 		$contenu .= debut_cadre_trait_couleur("rien.gif", true, "", _T('spip_proprio:outil_importer'))
 		.( $msg_import ? "<p><strong>".$msg_import."</strong></p>" : '' )
+		. "\n<div class='verdana2' style='margin:1em;text-align: justify'>"
+		. http_img_pack("warning.gif", (_T('avis_attention')),
+			"width='48' height='48' style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'")
+		. _T('spip_proprio:import_avertissement')
+		. "</div><br class=\"nettoyeur\" />"
 		."<form method='get' action='' enctype='multipart/form-data'><div>
 			<input type='hidden' name='exec' value='spip_proprio_tech' />
 			<input type='hidden' name='do_proprio_import' value='oui' />
@@ -114,6 +122,7 @@ function exec_spip_proprio_tech() {
 				</select>
 				</label>
 			</p>
+			<p><small>"._T('spip_proprio:sauvegardes_dans_dump')."</small></p>
 			<span><input type='submit' value='"._T('spip_proprio:bouton_importer')."' class='fondo' style='float: right' /></span>
 		</div></form>"
 		. fin_cadre_trait_couleur(true);
@@ -125,7 +134,7 @@ function exec_spip_proprio_tech() {
 	echo($commencer_page(_T('spip_proprio:spip_proprio')." - ".$titre_page, 'configuration', "configuration")),
 		"<br /><br />", debut_gauche('', true),
 		debut_cadre_relief($icone, true, "", $titre_page), $info_supp, $info_texte, fin_cadre_relief(true), 
-		"<br class='nettoyeur' />", creer_colonne_droite('', true), debut_droite('', true),
+		"<br class='nettoyeur' />", creer_colonne_droite('', true), debut_droite('', true), 
 		gros_titre($titre_page,'', false), $contenu, fin_gauche(), fin_page();
 }
 
