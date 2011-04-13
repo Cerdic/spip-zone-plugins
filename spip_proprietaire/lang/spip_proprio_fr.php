@@ -56,6 +56,16 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'exporter_importer' => 'Exporter/Importer',
 	'exporter_configuration' => 'Exporter la configuration (<i>informations sur le propri&eacute;taire, l\'&eacute;diteur ...</i>)',
 	'exporter_fichiers_langues' => 'Exporter les cha&icirc;nes de langues propres au site',
+	'enregistrement_ou_label' => '(<i>saisie automatique pour la France</i>)',
+	'enregistrement_siren_label' => 'SIREN [<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises - code INSEE unique d&#233;signant la personne juridique de l&#039;entreprise">?</abbr>]',
+	'enregistrement_siren_comment' => 'ex.: 123 456 78 (9: cl&eacute; automatique)',
+	'enregistrement_siren_title' => 'R&#233;f&#233;rence de l&#039;entreprise &#224; neuf chiffres, vous pouvez n&#039;indiquer que les huit premiers chiffres.',
+	'enregistrement_siret_label' => 'SIRET (NIC) [<abbr title="Identifiant d&#039;&#233;tablissement - Num&#233;ro Interne de Classement">?</abbr>]',
+	'enregistrement_siret_comment' => 'ex.: 1234 (5: cl&eacute; automatique)',
+	'enregistrement_siret_title' => 'R&#233;f&#233;rence d&#039;&#233;tablissement &#224; cinq chiffres, vous pouvez ne pas indiquer les z&#233;ros initiaux ni le dernier chiffre.',
+	'enregistrement_tvaintra_label' => 'TVA Intra. [<abbr title="Num&#233;ro de T.V.A. Intracommunautaire">?</abbr>]',
+	'enregistrement_tvaintra_comment' => 'ex.: FR 45 (automatique)',
+	'enregistrement_tvaintra_title' => 'Calcul&#233; automatiquement &#224; partir du SIREN.',
 
 // F //
 	'fonction_administrateur' => 'Administrateur',
@@ -75,7 +85,8 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'infos_idem' => 'M&ecirc;me structure',
 	'idem_label' => 'M&ecirc;me structure que l\'&eacute;diteur',
 	'idem_comment' => 'Cochez cette case si l\'organisme propri&eacute;taire est &eacute;galement @type@ du site.',
-	'importer_dump' => 'Importer une sauvegarde (<i>cela effacera votre configuration courante et vos cha&icirc;nes de langue</i>) ! Importer le fichier : ',
+	'importer_dump' => '<strong>Importer le fichier :</strong> ',
+	'import_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : cela effacera votre configuration courante et vos cha&icirc;nes de langue !<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
 
 // L //
 	'le' => 'le ',
@@ -96,10 +107,12 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'new_window' => 'Nouvelle fen&ecirc;tre',
 	'notes' => 'NOTES',
 	'nom_label' => 'Nom de la structure',
+	'num_invalide' => 'Num. invalide',
+	'numero_maj' => 'N&deg;',
 
 // O //
 	'ok_config' => 'OK - Les valeurs ont &eacute;t&eacute; enregistr&eacute;es _',
-	'ok_export' => 'OK - Votre configuration a &eacute;t&eacute; exportat&eacute;e dans le fichier :<br />"<strong>@fichier@</strong>"',
+	'ok_export' => 'OK - Votre configuration a &eacute;t&eacute; export&eacute;e dans le fichier :<br />"<strong>@fichier@</strong>"',
 	'ok_import' => 'OK - Votre configuration a bien &eacute;t&eacute; restaur&eacute;e',
 	'outils_de_communication' => 'Outils de communication',
 	'outil_importer' => 'Outil de restauration',
@@ -172,9 +185,9 @@ Plus g&eacute;n&eacute;ralement, il y a lieu d’adapter vos mentions l&eacute;g
 ',
 	'presentation_plugin' => '{{{Fonctionnalit&eacute;s du plugin SPIP Propri&eacute;taire}}}
 
-Ce plugin vous propose un ensemble de formulaires et de mod&egrave;les pour faciliter la mise en place des informations pr&eacute;cit&eacute;es. Il vous permet notament de d&eacute;finir les informations concernant l’&eacute;diteur, le cr&eacute;ateur et l’h&eacute;bergeur du site et propose des mod&egrave;les d’affichages de ces informations.
+Ce plugin vous propose un ensemble de formulaires et de mod&egrave;les pour faciliter la mise en place des informations pr&eacute;cit&eacute;es. Il vous permet notament de d&eacute;finir les informations concernant l’&eacute;diteur, le cr&eacute;ateur et l’h&eacute;bergeur du site et propose des mod&egrave;les d’affichages de celles-ci.
 
-Il est conseill&eacute; de prendre un moment pour personnaliser le mod&egrave;le "mentions_legales.html" pr&eacute;sents dans le r&eacute;pertoire "modeles/" du plugin. C’est ici que se construisent les textes l&eacute;gaux. Vous pouvez modifier ou ajouter des textes dans le fichier de langue "textes_legaux_XX.php" ({avec XX la langue concern&eacute;e}) dans le r&eacute;pertoire "lang/" du plugin.
+Il est conseill&eacute; de prendre un moment pour personnaliser le mod&egrave;le "mentions_legales.html" pr&eacute;sent dans le r&eacute;pertoire "modeles/" du plugin. C’est ici que se construisent les textes l&eacute;gaux. Vous pouvez modifier ou ajouter des textes depuis le bouton "Textes de langue propri&eacute;taire" ci-dessous.
 
 Vous pouvez &eacute;galement inclure ces mod&egrave;les dans les objets &eacute;ditoriaux de SPIP en utilisant les raccourcis typographiques "&lt;mentions_legales|&gt;" et "&lt;conditions_utilisation|&gt;".
 
@@ -194,7 +207,7 @@ Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’infor
 	// Import/Export
 	'proprietaire_export_import' => 'SPIP Propri&eacute;taire : maintenance',
 	'proprietaire_retour_plateforme' => 'Retour &agrave; la plateforme',
-	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos cha&icirc;nes personnelles de langues, ou les restaurer depuis une pr&eacute;c&eacute;dente sauvegarde ...<br /><br />',
+	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos cha&icirc;nes personnelles de langues, ou les restaurer depuis une pr&eacute;c&eacute;dente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />',
 	// Pages
 	'proprietaire_titre_page' => 'Plateforme propri&eacute;taire',
 	'proprietaire_titre_page_short' => 'Plateforme',
@@ -243,11 +256,15 @@ Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’infor
 	'serveur_os_web_label' => 'Lien web d\'informations sur ce syst&egrave;me',
 	'sous_le_numero' => ' sous le num&eacute;ro ',
 	'siege' => 'Si&egrave;ge',
+	'siren' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises">SIREN</abbr>',
+	'siret' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ETablissements">SIRET</abbr>',
+	'sauvegardes_dans_dump' => 'Vos sauvegardes sont &agrave; placer dans le r&eacute;pertoire \'tmp/dump/\'.',
 
 // T //
 	'telephone_label' => 'Num&eacute;ro de t&eacute;l&eacute;phone',
 	'telecopie_label' => 'Num&eacute;ro de t&eacute;l&eacute;copie',
 	'tel' => 'T&eacute;l&eacute;phone',
+	'tva_intracommunautaire' => 'T.V.A. Intracommunautaire',
 	// Page de test public
 	'testing_page_public' => 'Page de test',
 	'testing_page_titre' => 'Test de la configuration propri&eacute;taire',
@@ -265,7 +282,7 @@ Nous vous conseillons &eacute;galement de jeter un oeil au squelette [mentions l
 	'testing_page_bloc_complet' => 'Bloc de contact complet',
 	'testing_page_footer' => 'Information de copyright',
 	'testing_page_googlemap' => 'Googlemap',
-	'testing_page_carte_visite' => 'Cartes de visite',
+	'testing_page_carte_visite' => 'Cartes de visite (<i>en d&eacute;veloppement</i>)',
 	'testing_page_carte_visite_normale' => 'Carte de visite "classique" (<i>d&eacute;faut</i>)',
 	'testing_page_carte_visite_chef' => 'Carte de visite du responsable',
 	'testing_page_carte_visite_webmaster' => 'Carte de visite du webmestre',

@@ -12,7 +12,7 @@ $GLOBALS['i18n_textes_legaux_fr'] = array(
 
 // C //
 	'copyright_info' => '&copy; Copyright @date@ @nom_site@ | Tous droits r&eacute;serv&eacute;s.',
-	'mention_cnil' => '&Agrave; ce titre, {{[@nom_site@->@url_site@]}} a fait l\'objet d\'une d&eacute;caration aur&egrave;s de la {{CNIL}} le @date_cnil@, enregistr&eacute;e sous la r&eacute;f&eacute;rence {{@numero_cnil@.}}',
+	'mention_cnil' => '&Agrave; ce titre, {{[@nom_site@->@url_site@]}} a fait l\'objet d\'une d&eacute;caration aupr&egrave;s de la {{<abbr title="Commission Nationale de l&#039;informatique et des Libert&#233;s - www.cnil.fr">CNIL</abbr>}} le @date_cnil@, enregistr&eacute;e sous la r&eacute;f&eacute;rence {{@numero_cnil@.}}',
 	'carte_visite_info' => 'Vous pouvez visualiser ou t&eacute;l&eacute;charger nos {{cartes de visite}} en cliquant sur les liens suivants :
 - {{[carte de visite du site->@classique@]}}
 - {{[carte de visite web compl&egrave;te->@complete@]}}
@@ -40,7 +40,7 @@ En application de la [loi n° 2004-575 du 21 juin 2004 pour la confiance dans l�
 {{Les informations &eacute;ventuellement recueillies par {{[@nom_site@->@url_site@]}} ne sont jamais communiqu&eacute;es &agrave; des tiers.}}
 <br />Sauf cas particulier, ces informations proviennent de l’enregistrement volontaire d’une adresse courriel fournie par l’internaute, lui permettant de recevoir une documentation ou une newsletter, de demander son inscription dans le comit&eacute; r&eacute;dactionnel du site ou de se renseigner sur un point quelconque. 
 
-En application de la [loi n° 78-17 du 6 janvier 1978 relative &agrave; l’informatique, aux fichiers et aux libert&eacute;s|Voir le texte (legifrance.gouv.fr)->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460], {{l’internaute dispose d’un droit d’acc&egrave;s, de rectification et de suppression des informations personnelles le concernant stock&eacute;es par {{[@nom_site@->@url_site@]}}, qu’il peut exercer &agrave; tout moment aupr&egrave;s de l’administrateur de {{[@nom_site@->@url_site@]}}.}} Pour une demande de ce type, veuillez adresser un courrier &agrave; @proprietaire_forme@ @proprietaire_nom@ ({[coordonn&eacute;es->#editeur]}) ou contacter l’adresse courriel : [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
+En application de la [loi n° 78-17 du 6 janvier 1978 relative &agrave; l’informatique, aux fichiers et aux libert&eacute;s|Voir le texte (legifrance.gouv.fr)->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000886460], {{l’internaute dispose d’un droit d’acc&egrave;s, de rectification et de suppression des informations personnelles le concernant stock&eacute;es par {{[@nom_site@->@url_site@]}}, qu’il peut exercer &agrave; tout moment aupr&egrave;s de l’administrateur de {{[@nom_site@->@url_site@]}}.}} Pour une demande de ce type, veuillez adresser un courrier &agrave; @proprietaire_forme@ @proprietaire_nom@ ou contacter l’adresse courriel : [@proprietaire_mail_administratif@->mailto:@proprietaire_mail_administratif@].
 @cnil_texte@
 ',
 	'conditions_utilisation_cookies' => '{{{Cookies}}}
