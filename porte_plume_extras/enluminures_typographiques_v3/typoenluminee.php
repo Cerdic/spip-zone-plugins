@@ -150,20 +150,13 @@ function typoenluminee_pre_propre($texte) {
 }
 
 function typoenluminee_post_propre($texte) {
+	if(!$texte) return $texte;
 	static $cherche1 = NULL;
 	static $remplace1 = NULL;
-
 	if ($cherche1===NULL) {
 		# Le remplacement des intertitres de premier niveau a deja ete effectue dans inc/texte.php
 		$cherche1 = array();
 		$remplace1 = array();
-		global $BarreTypoEnrichieBlocs;
-		if (is_array($BarreTypoEnrichieBlocs))
-			foreach($BarreTypoEnrichieBlocs as $item) {
-				$cherche1[]=$item['chercher'];
-				$remplace1[]=$item['remplacer'];
-			}
-	
 		$cherche1[] = /* 15 */ 	",\[/(.*)/\],Ums";
 		$cherche1[] = /* 16 */ 	",\[!(.*)!\],Ums";
 		$cherche1[] = /* 17 */ 	",\[\|(.*)\|\],Ums";
@@ -183,10 +176,7 @@ function typoenluminee_post_propre($texte) {
 		$remplace1[] = /* 22 */	"</strong>";
 		$remplace1[] = /* 23 */ 	"<sup>";
 		$remplace1[] = /* 24 */	"</sup>";
-		$remplace1[] = /* 25 */ 	"<sub>";
-		$remplace1[] = /* 26 */	"</sub>";
 	}
-	if(!$texte) return $texte;
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	$texte = paragrapher($texte,$GLOBALS['toujours_paragrapher']); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
 	return $texte;
