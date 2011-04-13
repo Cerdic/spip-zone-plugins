@@ -123,6 +123,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 define('_META_SPIP_PROPRIO', 'spip_proprietaire');
 
+// ---------------------------------------
+// FONCTIONS
+// ---------------------------------------
+
 function make_google_map_proprietaire($conf, $who='proprietaire'){
 	$str = $google_str = '';
 	if(strlen($conf[$who.'_adresse_rue'])) 
@@ -270,18 +274,4 @@ function transformer_raccourci($str){
 	return spip_proprio_formater_nom_fichier($str);
 }
 
-/**
- * Info _CDC
- * @access private
- */
-if(isset($GLOBALS['_CDC_PLUGINS'])) {
-	$GLOBALS['_CDC_PLUGINS']['plugins'][] = 'spip_proprio';
-	$GLOBALS['_CDC_PLUGINS']['exec']['spip_proprio'] = 'spip_proprio';
-	$GLOBALS['_CDC_PLUGINS']['comment']['spip_proprio'] = "Configuration propri&eacute;taire, g&eacute;n&eacute;ration de mentions l&eacute;gales, d’infos de copyright ...";
-	$GLOBALS['_CDC_PLUGINS']['set']['spip_proprio'] = array(
-		'texte' => _T('spip_proprio:spip_proprio'),
-		'fond' => find_in_path("images/idisk-dir-24.png"),
-		'lien' => "spip_proprio",
-	);
-}
 ?>
