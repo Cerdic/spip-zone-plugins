@@ -541,43 +541,67 @@ function step_selectionner_maj() {
 
 /* fonction (pas au point pour installer un plugin)
  *
- * @param $prefixe : prefixe du plugin 
+ * @param $prefixe : prefixe du plugin ou tableau de prefixes
  *
  */
 function step_install($prefixe, $redirect='') {
+	if (!$prefixe) {
+		return false;
+	}
+	
 	if (!$redirect) {
 		$redirect = generer_url_ecrire('step');
 	}
 
-	$id = sql_getfetsel('id_plugin', 'spip_plugins', array(
-		'prefixe=' . sql_quote('meta_concurrences'),
+	if (!is_array($prefixe)) {
+		$prefixe = array($prefixe);
+	}
+
+	// mettre a jour la liste des plugins presents
+	step_actualiser_plugins_locaux();
+		
+	// recuperer les ids des plugins souhaites
+	$ids = sql_allfetsel('id_plugin', 'spip_plugins', array(
+		sql_in('prefixe', $prefixe),
 		'obsolete=' . sql_quote('non')
 	));
 
-	if ($id) {
-
-		include_spip('inc/step_decideur');
-		$decideur = new Decideur;
-		$decideur->verifier_dependances(array($id => "on"));
-
-		$_todo = array();
-		foreach ($decideur->todo as $info) {
-			$_todo[$info['i']] = $info['todo'];
-		}
-
-		// todo : erreurs ?
-		
-		include_spip('inc/step_actionneur');
-		$actionneur = new Actionneur();
-		$actionneur->ajouter_actions($_todo);
-		$actionneur->sauver_actions();
-
-		
-		include_spip('inc/headers');
-
-		$url = generer_action_auteur('step_install', '', $redirect);
-		redirige_par_entete(str_replace('&amp;','&', $url));
+	if (!$ids) {
+		 return false;
 	}
+	
+	$todo = array();
+	foreach($ids as $i) {
+		$todo[$i['id_plugin']] = 'on';
+	}
+
+	// que doit on faire en fonction des plugins demandes
+	include_spip('inc/step_decideur');
+	$decideur = new Decideur;
+	#$decideur->log = true;
+	$decideur->verifier_dependances($todo);
+
+	// le decideur renvoie une todo completee des instructions necessaires
+	$_todo = array();
+	foreach ($decideur->todo as $info) {
+		$_todo[$info['i']] = $info['todo'];
+	}
+
+	// todo : erreurs ?
+
+	// on envoie ces instructions a l'actionneur
+	// pour qu'il cree le fichier des actions a realiser
+	include_spip('inc/step_actionneur');
+	$actionneur = new Actionneur();
+	$actionneur->ajouter_actions($_todo);
+	$actionneur->sauver_actions();
+
+	// on redirige vers l'action d'installation qui traitera
+	// une par une les actions a faire.
+	include_spip('inc/headers');
+	$url = generer_action_auteur('step_install', '', $redirect);
+	redirige_par_entete(str_replace('&amp;','&', $url));
+	
 }
  
 ?>
