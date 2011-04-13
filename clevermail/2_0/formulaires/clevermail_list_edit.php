@@ -163,6 +163,6 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
     spip_log('Modification de la liste « '._request('lst_name').' » (id = '._request('lst_id').')', 'clevermail');
   }
 
- 	return array('message_ok' => 'ok', 'redirect' => generer_url_ecrire('clevermail'));
+ 	return array('message_ok' => 'ok', 'redirect' => generer_url_ecrire('clevermail_lists'));
 }
 ?>
