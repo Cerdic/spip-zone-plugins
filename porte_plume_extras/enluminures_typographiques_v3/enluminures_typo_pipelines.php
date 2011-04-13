@@ -2,18 +2,10 @@
 function typoenluminee_porte_plume_barre_pre_charger($barres){
 	$barre = &$barres['edition'];
 	
-	$barre->cacher('header1');
 	$barre->cacher('stroke_through');
 	
-	$barre->ajouterApres('header1', array(
-		// groupe code et bouton <code>
-		"id"          => 'grpavances',
-		"name"        => _T('barre_intertitre'),
-		"className"   => 'outil_intertitre1',
-		"openWith" => "\n{{{",
-		"closeWith" => "}}}\n",
-		"display"     => true,
-		"selectionType" => "line",
+	$barre->set('header1', array(
+		// groupe formatage paragraphe
 		"dropMenu"    => array(
 			// bouton <cadre>
 			array(
@@ -43,56 +35,6 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 				"display"     => true,
 				"selectionType" => "line",
 			),
-			// montrer une suppression
-			array(
-				"id"        => 'stroke_through_et',
-				"name"      => _T('enlumtypo:barre_barre'), // :-)
-				"className" => "outil_stroke_through_et", 
-				"openWith" => "<del>", 
-				"closeWith" => "</del>",
-				"display"   => true,
-				"selectionType" => "word",
-			),
-			// Mise en évidence (gras + couleur)
-			array(
-				"id"          => 'miseenevidence',
-				"name"        => _T('enlumtypo:barre_miseenevidence'),
-				"className"   => "outil_miseenevidence",
-				"openWith"    => "[*", 
-				"closeWith"   => "*]",
-				"display"     => true,
-				"selectionType" => "word",
-			),
-			// Mise en évidence2 (gras + autre couleur)
-			array(
-				"id"          => 'miseenevidence2',
-				"name"        => _T('enlumtypo:barre_miseenevidence2'),
-				"className"   => "outil_miseenevidence2",
-				"openWith"    => "[**", 
-				"closeWith"   => "*]",
-				"display"     => true,
-				"selectionType" => "word",
-			),
-			// Mise en exposant
-			array(
-				"id"          => 'exposant',
-				"name"        => _T('enlumtypo:barre_exposant'),
-				"className"   => "outil_exposant",
-				"openWith"    => "<sup>", 
-				"closeWith"   => "</sup>",
-				"display"     => true,
-				"selectionType" => "word",
-			),
-			// Mise en indice
-			array(
-				"id"          => 'indice',
-				"name"        => _T('enlumtypo:barre_indice'),
-				"className"   => "outil_indice",
-				"openWith"    => "<sub>", 
-				"closeWith"   => "</sub>",
-				"display"     => true,
-				"selectionType" => "word",
-			),
 			array(
 				"id"          => 'alignerdroite',
 				"name"        => _T('enlumtypo:barre_alignerdroite'),
@@ -121,6 +63,82 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 				"display"     => true,
 				"selectionType" => "line",
 			),
+			// code spip
+			array(
+				"id"          => 'barre_cadre',
+				"name"        => _T('barre_outils:barre_cadre'),
+				"className"   => "outil_barre_cadre", 
+				"openWith"    => "\n&lt;cadre&gt;", 
+				"closeWith"   => "&lt;/cadre&gt;\n",
+				"display"     => true,
+				"selectionType" => "line",
+			),
+		),
+	));
+	
+	$barre->set('bold', array(
+		// groupe formatage texte
+		"dropMenu"    => array(
+			// Mise en évidence (gras + couleur)
+			array(
+				"id"          => 'miseenevidence',
+				"name"        => _T('enlumtypo:barre_miseenevidence'),
+				"className"   => "outil_miseenevidence",
+				"openWith"    => "[*", 
+				"closeWith"   => "*]",
+				"display"     => true,
+				"selectionType" => "word",
+			),
+			// Mise en évidence2 (gras + autre couleur)
+			array(
+				"id"          => 'miseenevidence2',
+				"name"        => _T('enlumtypo:barre_miseenevidence2'),
+				"className"   => "outil_miseenevidence2",
+				"openWith"    => "[**", 
+				"closeWith"   => "*]",
+				"display"     => true,
+				"selectionType" => "word",
+			),
+			// montrer une suppression
+			array(
+				"id"        => 'stroke_through_et',
+				"name"      => _T('enlumtypo:barre_barre'), // :-)
+				"className" => "outil_stroke_through_et", 
+				"openWith" => "<del>", 
+				"closeWith" => "</del>",
+				"display"   => true,
+				"selectionType" => "word",
+			),
+			// Mise en exposant
+			array(
+				"id"          => 'exposant',
+				"name"        => _T('enlumtypo:barre_exposant'),
+				"className"   => "outil_exposant",
+				"openWith"    => "<sup>", 
+				"closeWith"   => "</sup>",
+				"display"     => true,
+				"selectionType" => "word",
+			),
+			// Mise en indice
+			array(
+				"id"          => 'indice',
+				"name"        => _T('enlumtypo:barre_indice'),
+				"className"   => "outil_indice",
+				"openWith"    => "<sub>", 
+				"closeWith"   => "</sub>",
+				"display"     => true,
+				"selectionType" => "word",
+			),
+			// cadre spip
+			array(
+				"id"          => 'barre_code',
+				"name"        => _T('barre_outils:barre_code'),
+				"className"   => "outil_barre_code", 
+				"openWith"    => "&lt;code&gt;", 
+				"closeWith"   => "&lt;/code&gt;",
+				"display"     => true,
+				"selectionType" => "word",
+			),
 		),
 	));
 	
@@ -134,36 +152,8 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 		"selectionType" => "line",
 	));
 	
-	$barre->ajouterApres('liste_ul', array(
-		// groupe code et bouton <code>
-		"id"          => 'speciaux',
-		"name"        => _T('enlumtypo:barre_formatages_speciaux'),
-		"className"   => 'outil_speciaux',
-		"openWith" => "",
-		"closeWith" => "",
-		"display"     => true,
-		"selectionType" => "",
+	$barre->set('quote', array(
 		"dropMenu"    => array(
-			// code spip
-			array(
-				"id"          => 'barre_cadre',
-				"name"        => _T('barre_outils:barre_cadre'),
-				"className"   => "outil_barre_cadre", 
-				"openWith"    => "\n&lt;cadre&gt;", 
-				"closeWith"   => "&lt;/cadre&gt;\n",
-				"display"     => true,
-				"selectionType" => "line",
-			),
-			// cadre spip
-			array(
-				"id"          => 'barre_code',
-				"name"        => _T('barre_outils:barre_code'),
-				"className"   => "outil_barre_code", 
-				"openWith"    => "&lt;code&gt;", 
-				"closeWith"   => "&lt;/code&gt;",
-				"display"     => true,
-				"selectionType" => "word",
-			),
 			// poesie spip
 			array(
 				"id"          => 'barre_poesie',
@@ -193,25 +183,25 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 
 function typoenluminee_porte_plume_lien_classe_vers_icone($flux){
 	return array_merge($flux, array(
-		'outil_intertitre1' => 'intertitre.png',
-		'outil_intertitre2' => 'intertitre2.png',
-		'outil_intertitre3' => 'intertitre3.png',
-		'outil_alignerdroite' => 'right.png',
-		'outil_alignergauche' => 'left.png',
-		'outil_stroke_through_et' => 'text_strikethrough.png',
-		'outil_cadretexte' => 'cadretexte.png',
-		'outil_speciaux' => 'tag.png',
-		'outil_barre_code' => 'page_white_code_red.png',
-		'outil_barre_cadre' => 'page_white_code.png',
-		'outil_barre_poesie' => 'poesie.png',
+		'outil_intertitre1' => array('spt-v1.png','-10px -226px'), //'intertitre.png'
+		'outil_intertitre2' => array('intertitre2.png','0'),
+		'outil_intertitre3' => array('intertitre3.png','0'),
+		'outil_alignerdroite' => array('right.png','0'),
+		'outil_alignergauche' => array('left.png','0'),
+		'outil_stroke_through_et' => array('spt-v1.png','-10px -946px'), //'text_strikethrough.png'
+		'outil_cadretexte' => array('cadretexte.png','0'),
+		'outil_speciaux' => array('tag.png','0'),
+		'outil_barre_code' => array('page_white_code_red.png','0'),
+		'outil_barre_cadre' => array('page_white_code.png','0'),
 
-		'outil_miseenevidence' => 'miseenevidence.png',
-		'outil_miseenevidence2' => 'miseenevidence2.png',
-		'outil_exposant' => 'exposant.png',
-		'outil_indice' => 'indice.png',
-		'outil_petitescapitales' => 'petitescapitales.png',
+		'outil_miseenevidence' => array('miseenevidence.png','0'),
+		'outil_miseenevidence2' => array('miseenevidence2.png','0'),
+		'outil_exposant' => array('exposant.png','0'),
+		'outil_indice' => array('indice.png','0'),
+		'outil_petitescapitales' => array('petitescapitales.png','0'),
+		'outil_barre_poesie' => array('poesie.png','0'),
 		
-		'outil_barre_tableau' => 'barre-tableau.png',
+		'outil_barre_tableau' => array('barre-tableau.png','0'),
 	));
 }
 
