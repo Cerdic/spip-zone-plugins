@@ -5,7 +5,7 @@
 	<icon>img/z-core-32.png</icon>
 	<lien>http://www.yterium.net/108</lien>
 	<licence>GNU/GPL</licence>
-	<version>2.0.0-dev</version>
+	<version>2.5.1-dev</version>
 	<etat>dev</etat>
 	<description><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></description>
 	<prefix>Zcore</prefix>
@@ -28,5 +28,5 @@
 		<inclure>zcore_pipelines.php</inclure>
 	</pipeline>
 	<categorie>squelette</categorie>
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.3-dev;]" />
 </plugin>

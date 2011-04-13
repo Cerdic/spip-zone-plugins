@@ -11,27 +11,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // definition des balises et filtres boites
 include_spip('inc/filtres_boites');
 
-// verifier une seule fois que l'on peut utiliser APL si demande
-if (defined('_Z_AJAX_PARALLEL_LOAD')) {
-	// les pages APL contiennent un <noscript>
-	// avec une meta refresh sur self()+var_zapl=non
-	// ainsi, les clients sans javascript rechargent la page,
-	// se voient poser un cookie, et voient ensuite le site sans APL
-	if (_request('var_zapl')=='non') {
-		include_spip('inc/cookie');
-		spip_setcookie('no_zapl',$_COOKIE['no_zapl']='no_zapl');
-	}
-	if (!isset($_COOKIE['no_zapl'])
-	 AND !_IS_BOT
-	 AND !_request('var_zajax')
-	 AND _request('var_mode')!=="debug"
-	 AND $_SERVER['REQUEST_METHOD'] == 'GET'
-	 ) {
-		define('_Z_AJAX_PARALLEL_LOAD_OK',true);
-		$GLOBALS['marqueur'] .= ":Zapl";
-	}
-}
-
 /**
  * Inutilise mais permet le chargement de ce fichier avant le decodage des urls
  * et l'utilisation de _DEFINIR_CONTEXTE_TYPE
@@ -49,17 +28,11 @@ function zcore_declarer_url_objets($flux){
  * @return array
  */
 function zcore_styliser($flux){
-	// dans les futures versions de SPIP on pourra faire simplement un define('_ZPIP',true);
-	if (!test_espace_prive()) {
-		$styliser_par_z = charger_fonction('styliser_par_z','public');
-		$flux = $styliser_par_z($flux);
-	}
+	// En 2.3 on peut faire simplement un define('_ZPIP',true);
+	define('_ZPIP',true);
 	
 	return $flux;
 }
-
-
-
 
 /**
  * Surcharger les intertires avant que le core ne les utilise
@@ -95,24 +68,6 @@ function zcore_insert_head($flux){
 		$flux .= recuperer_fond('inc-insert-head',array());
 	}
 	return $flux;
-}
-
-//
-// fonction standard de calcul de la balise #INTRODUCTION
-// mais retourne toujours dans un <p> comme propre
-//
-// http://doc.spip.org/@filtre_introduction_dist
-if (!function_exists('filtre_introduction')){
-function filtre_introduction($descriptif, $texte, $longueur, $connect) {
-	include_spip('public/composer');
-	$texte = filtre_introduction_dist($descriptif, $texte, $longueur, $connect);
-
-	if ($GLOBALS['toujours_paragrapher'] AND strpos($texte,"</p>")===FALSE)
-		// Fermer les paragraphes ; mais ne pas en creer si un seul
-		$texte = paragrapher($texte, $GLOBALS['toujours_paragrapher']);
-
-	return $texte;
-}
 }
 
 /**
