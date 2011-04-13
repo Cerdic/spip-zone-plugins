@@ -21,8 +21,7 @@ function generer_urls_canoniques(){
 		case 'sommaire':	
 			$flux .= '<link rel="canonical" href="'. url_de_base() .'" />';
 			break;
-		case 'article':
-		case 'rubrique':				
+		default:
 			$flux .= '<link rel="canonical" href="'. url_de_base() . generer_url_entite($id_object, $type_object) .'" />';
 			break;
 	}
@@ -99,26 +98,19 @@ function generer_meta_tags(){
 		case 'sommaire':	
 				$meta_tags = $config['meta_tags']['tag'];
 			break;
-		case 'article':
-		case 'rubrique':				
+		default:
+			$title = couper(sql_getfetsel("titre", "spip_".$type_object."s", "id_$type_object = $id_object"),64);
+			$description = couper(sql_getfetsel("descriptif,texte", "spip_".$type_object."s", "id_$type_object = $id_object"),150);
 			// Get the value set by default
 			foreach ($config['meta_tags']['default'] as $name => $option) {
 				if ($option == 'sommaire') {
 					$meta_tags[$name] = $config['meta_tags']['tag'][$name];
 				} elseif ($option == 'page') {
-					if ($name == 'title')
-						$meta_tags['title'] = sql_getfetsel("titre", "spip_".$type_object."s", "id_$type_object = $id_object");
-					if ($name == 'description')
-						$meta_tags['description'] = sql_getfetsel("descriptif", "spip_".$type_object."s", "id_$type_object = $id_object");
+					if ($name == 'title') $meta_tags['title'] = $title;
+					if ($name == 'description') $meta_tags['description'] = $description;
 				} elseif ($option == 'page_sommaire') {
-					if ($name == 'title') {
-						$meta_tags['title'] = sql_getfetsel("titre", "spip_".$type_object."s", "id_$type_object = $id_object");
-						$meta_tags['title'] .= (($meta_tags['title']!='')?' - ':'') . $config['meta_tags']['tag'][$name];
-					}
-					if ($name == 'description') {
-						$meta_tags['description'] = sql_getfetsel("descriptif", "spip_".$type_object."s", "id_$type_object = $id_object");
-						$meta_tags['description'] .= (($meta_tags['description']!='')?' - ':'') . $config['meta_tags']['tag'][$name];
-					}
+					if ($name == 'title') $meta_tags['title'] = $title . (($title!='')?' - ':'') . $config['meta_tags']['tag'][$name];
+					if ($name == 'description') $meta_tags['description'] = $description . (($description!='')?' - ':'') . $config['meta_tags']['tag'][$name];
 				}
 			}
 			
@@ -139,7 +131,7 @@ function generer_meta_tags(){
 			if ($name=='title')
 				$flux .= '<title>'. htmlspecialchars(supprimer_numero(textebrut(propre($content)))) .'</title>'."\n";
 			else
-				$flux .= '<meta name="'. $name .'" content="'. htmlspecialchars(textebrut(propre($content))) .'"/>'."\n";
+				$flux .= '<meta name="'. $name .'" content="'. htmlspecialchars(textebrut(propre($content))) .'" />'."\n";
 	}
 
 	return $flux;
