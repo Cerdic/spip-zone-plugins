@@ -97,16 +97,6 @@ function typoenluminee_pre_propre($texte) {
 		/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{](.*)[}][}][}]($|[^}])/S";
 		/* 11 */ 	$chercher_raccourcis[]="/\{(ง|ยง)\{/S"; # ยง Pour gerer l'unicode aussi !
 		/* 12 */ 	$chercher_raccourcis[]="/\}(ง|ยง)\}/S"; # ne pas sauvergarder ce fichier en utf8 !
-		/* 13 */ 	$chercher_raccourcis[]="/<-->/S";
-		/* 14 */ 	$chercher_raccourcis[]="/-->/S";
-		/* 15 */ 	$chercher_raccourcis[]="/<--/S";
-		/* 16 */ 	$chercher_raccourcis[]="/<==>/S";
-		/* 17 */ 	$chercher_raccourcis[]="/==>/S";
-		/* 18 */ 	$chercher_raccourcis[]="/<==/S";
-		/* 19 */ 	$chercher_raccourcis[]="/\([cC]\)/S";
-		/* 20 */ 	$chercher_raccourcis[]="/\([rR]\)/S";
-		/* 21 */ 	$chercher_raccourcis[]="/\([tT][mM]\)/S";
-		/* 22 */ 	$chercher_raccourcis[]="/\.\.\./S";
 
 		/* 9b */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_5\$2$fin_intertitre_5\n\n\$3";
 		/*  9 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_4\$2$fin_intertitre_4\n\n\$3";
@@ -114,18 +104,8 @@ function typoenluminee_pre_propre($texte) {
 		/*  5 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre_2\$2$fin_intertitre_2\n\n\$3";
 		/*  3 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre\$2$fin_intertitre\n\n\$3";
 		/*  1 */	$remplacer_raccourcis[]="\$1\n\n$debut_intertitre\$2$fin_intertitre\n\n\$3";
-		/* 11 */	$remplacer_raccourcis[]="<span style=\"font-variant: small-caps\">";
-		/* 12 */	$remplacer_raccourcis[]="</span>";
-		/* 13 */	$remplacer_raccourcis[]="&harr;";
-		/* 14 */	$remplacer_raccourcis[]="&rarr;";
-		/* 15 */	$remplacer_raccourcis[]="&larr;";
-		/* 16 */	$remplacer_raccourcis[]="&hArr;";
-		/* 17 */	$remplacer_raccourcis[]="&rArr;";
-		/* 18 */	$remplacer_raccourcis[]="&lArr;";
-		/* 19 */	$remplacer_raccourcis[]="&copy;";
-		/* 20 */	$remplacer_raccourcis[]="&reg;";
-		/* 21 */	$remplacer_raccourcis[]="&trade;";
-		/* 22 */	$remplacer_raccourcis[]="&hellip;";
+		/* 11 */	$remplacer_raccourcis[]="<sc>";
+		/* 12 */	$remplacer_raccourcis[]="</sc>";
 	}
 
 	// Conversion des intertitres d'enluminures type {฿{titre}฿}
@@ -137,7 +117,17 @@ function typoenluminee_pre_propre($texte) {
 						'return "{{{".str_repeat("*",$matches[2]).$matches[3]."}}}";'
 						),
 					$texte);
-
+	
+	$texte = str_replace('<-->','&harr;',$texte);
+	$texte = str_replace('-->','&rarr;',$texte);
+	$texte = str_replace('<--','&larr;',$texte);
+	$texte = str_replace('<==>','&hArr;',$texte);
+	$texte = str_replace('==>','&rArr;',$texte);
+	$texte = str_replace('<=','&lArr;',$texte);
+	$texte = str_ireplace('(c)','&copy;',$texte);
+	$texte = str_ireplace('(r)','&reg;',$texte);
+	$texte = str_ireplace('(tm)','&trade;',$texte);
+	$texte = str_replace('...','&hellip;',$texte);
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
 	return $texte;
@@ -286,7 +276,7 @@ function typoenluminee_post_typo($texte) {
 	$texte = preg_replace('/@@@amp:([A-Za-z#0-9]*):amp@@@/','&\1;',$texte);
 	// Raccourci typographique <sc></sc>
 	$texte = str_replace("<sc>",
-		"<span class=\"spip\" style=\"font-variant: small-caps\">", $texte);
+		"<span class=\"caps\" style=\"font-variant: small-caps\">", $texte);
 	$texte = str_replace("</sc>", "</span>", $texte);
 	return $texte;
 }
