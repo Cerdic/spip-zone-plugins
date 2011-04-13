@@ -5,7 +5,7 @@
 		<a id="decocher_tout" href="#"><:plugonet:bouton_tout_decocher:></a>
 		</small>
 	</p>
-<BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}>
+<BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}{par valeur}>
 	<div class="choix">
 		<input type="checkbox" name="pluginxml[]" class="checkbox pluginxml" id="pluginxml_#COMPTEUR_BOUCLE" value="#VALEUR" />
 		<label for="pluginxml_#COMPTEUR_BOUCLE">[(#VALEUR|joli_repertoire)]</label>

@@ -1,7 +1,7 @@
 <B_pluginxml>
 	<select name="pluginxml" id="pluginxml">
 		<option value="0"><:plugonet:option_aucun_pluginxml:></option>
-<BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}>
+<BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}{par valeur}>
 		<option[ value="(#VALEUR)"][(#VALEUR|=={#ENV{pluginxml}}|oui) selected="selected"]>[(#VALEUR|joli_repertoire)]</option>
 </BOUCLE_pluginxml>
 	</select>

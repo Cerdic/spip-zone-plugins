@@ -28,8 +28,13 @@ function formulaires_plugonet_generer_traiter(){
 	// Traitement et affichage des resultats
 	var_dump('erreurs', $erreurs);
 	var_dump('commandes', $commandes);
+// 	$retour['message_erreur'] = formater_message_erreurs($erreurs);
+// 	$retour['message_ok']['resume'] = formater_message_ok($erreurs);
+// 	$retour['message_ok']['resultats'] = formater_resultats($erreurs, $commandes);
+
+	$retour['editable'] = true;
 	
-	return array('message_ok' => $msg, 'editable' => true);;
+	return $retour;
 }
 
 ?>
