@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Z-core</nom>
+	<slogan><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></slogan>
+	<auteur>Matthieu Marcillaud, C&#233;dric Morin, Romy Tetue, Collectif SPIP</auteur>
+	<icon>img/z-core-32.png</icon>
+	<lien>http://www.yterium.net/108</lien>
+	<licence>GNU/GPL</licence>
+	<version>2.0.0-dev</version>
+	<etat>dev</etat>
+	<description><multi>[fr]Z Framework pour SPIP (Zpip)[en]Z framework for SPIP (Zpip)</multi></description>
+	<prefix>Zcore</prefix>
+	<fonctions>zcore_pipelines.php</fonctions>
+	<options>zcore_options.php</options>
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>zcore_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>zcore_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>zcore_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>zcore_pipelines.php</inclure>
+	</pipeline>
+	<categorie>squelette</categorie>
+	<necessite id="SPIP" version="[2.1.8;]" />
+</plugin>
