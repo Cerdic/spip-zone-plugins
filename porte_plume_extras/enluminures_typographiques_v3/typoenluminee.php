@@ -118,16 +118,6 @@ function typoenluminee_pre_propre($texte) {
 						),
 					$texte);
 	
-	$texte = str_replace('<-->','&harr;',$texte);
-	$texte = str_replace('-->','&rarr;',$texte);
-	$texte = str_replace('<--','&larr;',$texte);
-	$texte = str_replace('<==>','&hArr;',$texte);
-	$texte = str_replace('==>','&rArr;',$texte);
-	$texte = str_replace('<=','&lArr;',$texte);
-	$texte = str_ireplace('(c)','&copy;',$texte);
-	$texte = str_ireplace('(r)','&reg;',$texte);
-	$texte = str_ireplace('(tm)','&trade;',$texte);
-	$texte = str_replace('...','&hellip;',$texte);
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
 	return $texte;
@@ -168,13 +158,13 @@ function typoenluminee_post_propre($texte) {
 
 
 function typoenluminee_pre_typo($texte) {
+	if(!$texte) return $texte;
 	static $local_barre_typo_pas_de_fausses_puces = null;
 	static $chercher_raccourcis;
 	static $remplacer_raccourcis;
 	global $debut_italique, $fin_italique;
 	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
-	if(!$texte) return $texte;
 
 	if ($local_barre_typo_pas_de_fausses_puces===null){
 		// remplace les fausses listes a puce par de vraies ?
@@ -193,37 +183,27 @@ function typoenluminee_pre_typo($texte) {
 		$chercher_raccourcis = array(
 			/* 9 */ 	"/(?<![{\d])[{](?![{\d])/S", // Expressions complexes car on n'a pas encore traite les titres ici
 			/* 10 */	"/(?<![}\d])[}](?![}\d])/S", // puisque italique utilisent les memes caracteres en nombre inferieur
-			/* 13 */ 	"/<-->/S",
-			/* 14 */ 	"/-->/S",
-			/* 15 */ 	"/<--/S",
-			/* 16 */ 	"/<==>/S",
-			/* 17 */ 	"/==>/S",
-			/* 18 */ 	"/<==/S",
-			/* 19 */ 	"/\(c\)/Si",
-			/* 20 */ 	"/\(r\)/Si",
-			/* 21 */ 	"/\(tm\)/Si",
-			/* 22 */ 	"/\.\.\./S",
 		);
 	
 		$remplacer_raccourcis = array(
 			/* 9 */ 	$debut_italique,
 			/* 10 */	$fin_italique,
-			/* 13 */ 	"&harr;",
-			/* 14 */ 	"&rarr;",
-			/* 15 */ 	"&larr;",
-			/* 16 */ 	"&hArr;",
-			/* 17 */ 	"&rArr;",
-			/* 18 */ 	"&lArr;",
-			/* 19 */ 	"&copy;",
-			/* 20 */ 	"&reg;",
-			/* 21 */ 	"&trade;",
-			/* 22 */ 	"&hellip;",
 		);
 	}
 	if ($local_barre_typo_pas_de_fausses_puces === true) {
 		$texte =  preg_replace('/^-\s+/m','-* ',$texte);
 	}
 
+	$texte = str_replace('<-->','&harr;',$texte);
+	$texte = str_replace('-->','&rarr;',$texte);
+	$texte = str_replace('<--','&larr;',$texte);
+	$texte = str_replace('<==>','&hArr;',$texte);
+	$texte = str_replace('==>','&rArr;',$texte);
+	$texte = str_replace('<==','&lArr;',$texte);
+	$texte = str_ireplace('(c)','&copy;',$texte);
+	$texte = str_ireplace('(r)','&reg;',$texte);
+	$texte = str_ireplace('(tm)','&trade;',$texte);
+	$texte = str_replace('...','&hellip;',$texte);
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 	
 	/*
@@ -245,39 +225,22 @@ function typoenluminee_pre_typo($texte) {
 }
 
 function typoenluminee_post_typo($texte) {
-	static $cherche1;
-	static $remplace1;
+	if(!$texte) return $texte;
 	if (!isset($GLOBALS['barre_typo_pas_de_fork_typo']) OR $GLOBALS['barre_typo_pas_de_fork_typo'] === true)
 		return $texte;
-	if (!$cherche1) {
-		$cherche1 = array(
-			/* 21 */ 	"/\[\*\*/S",
-			/* 21b */ 	"/\[\*/S",
-			/* 22 */	"/\*\]/S",
-			/* 23 */ 	"/\[\^/S",
-			/* 24 */	"/\^\]/S",
-		);
+	$texte = str_replace('[^','<sup>',$texte);
+	$texte = str_replace('^]','</sup>',$texte);
+	$texte = str_replace('[**','<strong class="caractencadre2-spip spip">',$texte);
+	$texte = str_replace('[*','<strong class="caractencadre-spip spip">',$texte);
+	$texte = str_replace('*]','</strong>',$texte);
 	
-		$remplace1 = array(
-			/* 21 */ 	"<strong class=\"caractencadre2-spip spip\">",
-			/* 21b */ 	"<strong class=\"caractencadre-spip spip\">",
-			/* 22 */	"</strong>",
-			/* 23 */ 	"<sup>",
-			/* 24 */	"</sup>",
-			/* 25 */ 	"<sub>",
-			/* 26 */	"</sub>",
-		);
-	}
-	if(!$texte) return $texte;
-	$texte = preg_replace($cherche1, $remplace1, $texte);
 	// Correction des & en &amp;
 	$texte = preg_replace('/&([A-Za-z#0-9]*);/','@@@amp:\1:amp@@@',$texte); // echapement des entites html deja presentes
 	$texte = str_replace('&','&amp;',$texte);
 	$texte = preg_replace('/@@@amp:([A-Za-z#0-9]*):amp@@@/','&\1;',$texte);
 	// Raccourci typographique <sc></sc>
-	$texte = str_replace("<sc>",
-		"<span class=\"caps\" style=\"font-variant: small-caps\">", $texte);
-	$texte = str_replace("</sc>", "</span>", $texte);
+	$texte = str_replace('<sc>', '<span class="caps">', $texte);
+	$texte = str_replace('</sc>', '</span>', $texte);
 	return $texte;
 }
 
