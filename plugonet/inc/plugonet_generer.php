@@ -204,7 +204,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	else {
 		// Balise spip
 		$attributs =
-			($compatible ? "\n\tcompatible='$compatible'" : '');
+			($compatible ? " compatible='$compatible'" : '');
 		// raz des balises non utilisees
 		$nom = $auteur = $licence = '';
 	}
@@ -225,7 +225,12 @@ function plugin2balise($D, $balise, $balises_spip='') {
 					plugin2balise_implicite($D, 'fonctions', 'fonctions'),
 					plugin2balise_implicite($D, 'install', 'actions'));
 	
-	return array("<$balise$attributs\n>\t$nom$auteur$licence$pipeline$necessite$utilise$bouton$onglet$chemin$traduire$balises_spip\n</$balise>\n", $commandes);
+	if ($balise == 'paquet')
+		$paquet = "<$balise$attributs\n>\t$nom$auteur$licence$pipeline$necessite$utilise$bouton$onglet$chemin$traduire$balises_spip\n</$balise>\n";
+	else
+		$paquet = "<$balise$attributs>\t$pipeline$necessite$utilise$bouton$onglet$chemin$traduire\n</$balise>\n";
+	
+	return array($paquet, $commandes);
 }
 
 
@@ -269,7 +274,7 @@ function plugin2balise_copy($texte, $balise) {
 	$t = traite_multi($texte);
 
 	$res = $resa = $resl = $resc = '';
-	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n|&amp;@', $t['fr']) as $v) {
+	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n_*\s*|&amp;@', $t['fr']) as $v) {
 		// On detecte d'abord si le bloc texte en cours contient un eventuel copyright
 		// -- cela generera une balise copyright et non auteur
 		$copy = '';
