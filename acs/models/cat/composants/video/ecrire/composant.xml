@@ -11,7 +11,10 @@
     <nom>preview</nom>
     <valeur>250</valeur>
   </param>
-
+  <param>
+    <nom>instanciable</nom>
+  </param>
+  
   <variable>
     <nom>Fond</nom>
     <type>color</type>
@@ -27,5 +30,45 @@
     <type>color</type>
     <valeur>#00ff00</valeur>
   </variable>
+  <variable>
+    <nom>Titre</nom>
+    <type>color</type>
+    <valeur>#dfdfdf</valeur>
+  </variable>
+  <variable>
+    <nom>Width</nom>
+    <type>text</type>
+    <valeur>320</valeur>
+  </variable>
+  <variable>
+    <nom>Height</nom>
+    <type>text</type>
+    <valeur>200</valeur>
+  </variable>
 
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+  
+  <variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>ShadowBlur</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>Download</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
 </composant>

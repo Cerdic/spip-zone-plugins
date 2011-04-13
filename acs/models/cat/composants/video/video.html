@@ -1,7 +1,9 @@
 [(#CACHE{0})][(#REM)
 
-Lecteur video
+Lecteur video.
 
-]<div class="#PINCEAU{video}">
-  <INCLURE{fond=composants/video/inc-video}{env}>
+Affiche la vignette personnalisee si elle existe et le titre du document sinon.
+
+]<div class="cVideoContainer #PINCEAU{video,#NIC}">
+  <INCLURE{fond=composants/video/inc-video}{nic}{env}>
 </div>

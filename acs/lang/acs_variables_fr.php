@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'top' => 'haut',
   'bottom' => 'bas',
   'height' => 'Hauteur',
+  'width' => 'Largeur',
 
   'font' => 'Fonte(s)',
   'fontsize' => 'Taille',

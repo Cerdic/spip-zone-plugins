@@ -211,7 +211,7 @@ class ctlText extends Controle {
   public function draw() {
     $r = '<table width="100%"><tr>';
     if ($this->param['label'] != 'non')
-      $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
+      $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
     $r .= '<td><input type="text" name="'.$this->var.'_'.$this->wid.'" size="'.$this->param['taille'].'" maxlength="'.$this->param['taille'].'" class="forml" value="'.$this->value.'" /></td></tr></table>';
     return $r;
   }

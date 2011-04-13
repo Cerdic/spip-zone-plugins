@@ -1,19 +1,25 @@
-<BOUCLE_doc (DOCUMENTS){id_document ?}{0,1}>[(#SET{w,#ENV{w,#LARGEUR|!={0}|?{#LARGEUR,320}}})][(#SET{h,#ENV{h,#HAUTEUR|!={0}|?{#HAUTEUR,200}}})]
-[(#SET{startimage,[(#LOGO_DOCUMENT|?{#LOGO_DOCUMENT||image_reduire{#GET{w}|moins{8},#GET{h}|moins{8}}||extraire_attribut{src},''})]})]
-  <div class="video-js-box">
-    <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
-    <video id="video#ID_DOCUMENT" class="video-js" width="#GET{w}" height="#GET{h}" controls="controls" preload="auto" poster="[(#GET{startimage})]">
-      <source src="[(#URL_DOCUMENT|url_absolue)]" type='video/#EXTENSION' />
-        <object id="flashvideo#ID_DOCUMENT" class="vjs-flash-fallback" type="application/x-shockwave-flash" data="#CHEMIN{composants/video/swf/player_flv_maxi.swf}" width="#GET{w}" height="#GET{h}">
-        <param name="movie" value="#CHEMIN{composants/video/swf/player_flv_maxi.swf}" />
-        <param name="allowFullScreen" value="true" />
-        <param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=#GET{w}&amp;height=#GET{h}&amp;bgcolor=#VAR{acsOngletsFondColor,ffffff}&amp;videobgcolor=#VAR{acsOngletsFondColor,ffffff}&amp;margin=0&amp;buttoncolor=#VAR{acsVideoIcons,009966}&amp;buttonovercolor=#VAR{acsVideoIconsHover,00ff00}&amp;slidercolor1=#VAR{acsVideoIconsHover,00ff00}&amp;slidercolor2=#VAR{acsVideoIcons,009966}&amp;sliderovercolor=#VAR{acsVideoIconsHover,00df00}&amp;textcolor=dfdfdf[&amp;title=(#TITRE)][&amp;startimage=(#GET{startimage})]&amp;showstop=1&amp;showvolume=1&amp;showtime=1&amp;showfullscreen=1[(#AUTOSTART|?{&amp;autoplay=1,''})]" />
-        <param name="wmode" value="[(#VAR{acsOngletsFondColor,#ffffff})]" />
-        <img src="[(#GET{startimage})]" width="#GET{w}" height="#GET{h}" alt="Poster Image" title="No video playback capabilities." />
-      </object>
-    </video>[(#REM) Download links provided for devices that can't play video in the browser.
-    ]<p class="vjs-no-video"><strong>Download Video:</strong>
-      <a href="[(#ENV{lien}|sinon{#URL_DOCUMENT|url_absolue})]" type="#MIME_TYPE" class="nsize[ (#ENV{lien_class})]" title="#TYPE_DOCUMENT - [(#TAILLE|taille_en_octets)]"><:acs:video_download:></a>
-    </p>
-  </div>
-</BOUCLE_doc><script type="text/javascript">VideoJS.setupAllWhenReady();</script>
+[(#CACHE{0})][(#REM)
+
+See Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody for requirements and compatibility
+
+]<BOUCLE_doc(DOCUMENTS){id_document ?}{0,1}>[
+(#SET{w,#ENV{w,#LARGEUR|!={0}|?{#LARGEUR,#VAR{acsVideoWidth,320}}}})][
+(#SET{h,#ENV{h,#HAUTEUR|!={0}|?{#HAUTEUR,#VAR{acsVideoHeight,200}}}})][
+(#SET{startimage,[(#LOGO_DOCUMENT|extraire_attribut{src}|match{^prive\/vignettes\/}|?{"",#LOGO_DOCUMENT||image_reduire{#GET{w}|moins{8},#GET{h}|moins{8}}||extraire_attribut{src}})]})][
+(#TYPE_DOCUMENT=={Flash Video}|?{" "})#SET{type,""}][
+(#TYPE_DOCUMENT=={OGV}|?{" "})#SET{type,'video/ogg; codecs="theora, vorbis"'}][
+(#TYPE_DOCUMENT=={MPEG4}|?{" "})#SET{type,'video/mp4; codecs="avc1.42E01E, mp4a"'}][
+(#TYPE_DOCUMENT=={WEBM}|?{" "})#SET{type,'video/webm; codecs="vp8, vorbis"'}
+]<div class="cVideo[(#NIC)]" style="width: #GET{w}px; height: #GET{h}px">
+  <video id="video[(#NIC)]_#ID_DOCUMENT" class="html5video" width="#GET{w}" height="#GET{h}" controls="controls" preload="auto"[ poster="(#GET{startimage})"]>
+    <source src="[(#URL_DOCUMENT|url_absolue)]"[ type='(#GET{type})'] />
+    <object id="flashvideo[(#NIC)]_#ID_DOCUMENT" type="application/x-shockwave-flash" data="[(#CHEMIN{composants/video/swf/player_flv_maxi.swf}|url_absolue)]" width="#GET{w}" height="#GET{h}">
+      <param name="movie" value="[(#CHEMIN{composants/video/swf/player_flv_maxi.swf}|url_absolue)]" />
+      <param name="allowFullScreen" value="true" />
+      <param name="FlashVars" value="flv=[(#URL_DOCUMENT|url_absolue)]&amp;width=#GET{w}&amp;height=#GET{h}[&amp;bgcolor=(#VAR{acsVideoFond,#ffffff}|substr{1})][&amp;videobgcolor=(#VAR{acsVideoFond}|substr{1})]&amp;margin=0[&amp;buttoncolor=(#VAR{acsVideoIcons,009966}|substr{1})][&amp;buttonovercolor=(#VAR{acsVideoIconsHover,#00ff00}|substr{1})][&amp;slidercolor1=(#VAR{acsVideoIconsHover,#00ff00}|substr{1})][&amp;slidercolor2=(#VAR{acsVideoIcons,#009966}|substr{1})][&amp;sliderovercolor=(#VAR{acsVideoIconsHover,#00df00}|substr{1})][&amp;titlecolor=(#VAR{acsVideoTitre,#dfdf00}|substr{1})][&amp;title=(#TITRE)][&amp;startimage=(#GET{startimage})]&amp;showstop=1&amp;showvolume=1&amp;showtime=1&amp;showfullscreen=1[(#AUTOSTART|?{&amp;autoplay=1,''})]" />[
+      <param name="wmode" value="(#VAR{acsVideoFond,#ffffff}|substr{1})" />][
+      <img src="(#GET{startimage})" width="#GET{w}" height="#GET{h}" alt="#TITRE" title="No video player[ for (#TYPE_DOCUMENT)]" />] 
+    </object>
+  </video>
+</div>
+</BOUCLE_doc>

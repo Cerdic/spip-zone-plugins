@@ -15,7 +15,7 @@ function acs_insert_head($flux) {
   $model =$GLOBALS['meta']['acsModel'];
   $css_model = find_in_path($model.'.css.html');
   if ($css_model)
-    $r .= '<link rel="stylesheet" href="spip.php?page='.$model.'.css" type="text/css" media="projection, screen, tv" />';
+    $r .= '<link rel="stylesheet" href="spip.php?page='.$model.'.css&v='.$GLOBALS["meta"]["acsDerniereModif"].'" type="text/css" media="projection, screen, tv" />';
   $js_model = find_in_path($model.'.js.html');
   if ($js_model)
     $r .= '<script type="text/javascript" src="spip.php?page='.$model.'.js"></script>';
