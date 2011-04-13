@@ -14,3 +14,19 @@ h4 {
 	padding: 0;
 	font-size: 12px;
 }
+
+.liste_lettres {
+  border: 1px solid #000000;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.liste_lettres th, .liste_lettres td {
+  padding: 0.3em;
+  border: 1px dotted #ccc;
+  vertical-align: top;
+}
+
+.liste_lettres thead th {
+  background-color: #ccc;
+}
