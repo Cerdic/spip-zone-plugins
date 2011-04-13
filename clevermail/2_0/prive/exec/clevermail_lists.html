@@ -13,21 +13,17 @@
 <BOUCLE_lists(CM_LISTS){par lst_name}>
   #SET{nbPosts,0}
   #SET{posts,#ARRAY}
-  <B_posts>
   <BOUCLE_posts(CM_POSTS){lst_id}>
-      #SET{posts,#GET{posts}|push{#PST_ID}}
+    #SET{posts,#GET{posts}|push{#PST_ID}}
   </BOUCLE_posts>
     #SET{nbPosts,#TOTAL_BOUCLE}
   </B_posts>
-  <//B_posts>
-  <BOUCLE_subscribers(CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}
-  <//B_subscribers>
+  <BOUCLE_subscribers(CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
   <BOUCLE_posts_new(CM_POSTS){lst_id}{pst_date_sent=0} />#SET{nbPostsNew,#TOTAL_BOUCLE}<//B_posts_new>
   <BOUCLE_posts_queued(CM_POSTS_QUEUED){pst_id IN #GET{posts}}{fusion pst_id} />#SET{nbPostsQueued,#TOTAL_BOUCLE}<//B_posts_queued>
   #SET{nbPostsSent,#GET{nbPosts}|moins{#GET{nbPostsNew}}|moins{#GET{nbPostsQueued}}}
   <li class="item">
     <p><strong>#LST_NAME</strong> (<:clevermail:moderation:> : [(#VAL{clevermail:mod_}|concat{#LST_MODERATION}|_T)])</p>
-
     <div>[(#LST_COMMENT|propre)]</div>
     <div>
       [(#GET{nbSubs}|>{0}|oui)
