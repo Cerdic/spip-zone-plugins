@@ -30,3 +30,9 @@ h4 {
 .liste_lettres thead th {
   background-color: #ccc;
 }
+
+.liste_lettres ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
