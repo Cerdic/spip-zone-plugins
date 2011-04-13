@@ -21,6 +21,20 @@
 		(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_organisme}|typo)
 	]
 	[<:spip_proprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_numero}|typo)]
+	[(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|=={''}|non)<:spip_proprio:sous_le_numero:>[
+		(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siret}|=={''}|non)
+			[<:spip_proprio:siret:> [
+				(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|typo)
+			 ](#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siret}|typo)]
+		][
+		(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siret}|=={''}|oui)
+			[<:spip_proprio:siren:> (#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|typo)]
+		][<br /><:spip_proprio:numero_maj:> <:spip_proprio:tva_intracommunautaire:> 
+			(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_tvaintra}|typo)[ 
+				(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|typo)
+			]
+		]
+	]
 ]
 	</i>
 </div>

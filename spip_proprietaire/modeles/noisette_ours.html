@@ -10,6 +10,20 @@
 		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_organisme]}|typo)
 	]
 	[<:spip_proprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_numero]}|typo)]
+	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|=={''}|non)<:spip_proprio:sous_le_numero:>[
+		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|non)
+			[<:spip_proprio:siret:> [
+				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
+			 ](#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|typo)]
+		][
+		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|oui)
+			[<:spip_proprio:siren:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
+		][<br /><:spip_proprio:numero_maj:> <:spip_proprio:tva_intracommunautaire:> 
+			(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tvaintra]}|typo)[ 
+				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
+			]
+		]
+	]
 ]
 [<br />
 	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_fonction_responsable]}|typo) : ]
