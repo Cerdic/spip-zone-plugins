@@ -21,7 +21,7 @@
 		{recherche?}{auteurs.statut == #ENV{statut,.*}}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
+			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR|sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
 			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
             <td class='nb_contacts'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#MODELE{nb_contacts}{id_organisation})]</a></td>
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
