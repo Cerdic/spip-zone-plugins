@@ -135,7 +135,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_erreur' => 'ERREUR',
 'texte_erreur_acces' => '<b>Attention : </b>impossible d\'&eacute;crire dans le fichier <tt>@fichier_lang@</tt>. Controlez les droits d\'acc&egrave;s.',
 'texte_existe_deja' => ' existe d&eacute;j&agrave;.',
-'texte_explication_langue_cible' => 'Pour la langue cible, vous devez choisir si vous travaillez vers une langue d&eacute;j&agrave; existante, ou si vous cr&eacute;ez une nouvelle langue : dans ce cas, un nouveau fichier sera cr&eacute;&eacute;. (Nous pouvons discuter du choix du code langue sur la liste  spip-trad(a)rezo.net, ou bien allez sur <a href=http://www.ethnologue.com/site_search.asp>www.ethnologue.com</a>)<p>Si vous voulez un bilan d&eacute;taill&eacute; des traductions en cours (ou bien r&eacute;cup&eacute;rer les fichiers langues sous forme brute), cliquez <A HREF=\'./trad_lang.php?module=@module@&amp;etape=bilan\'><b>ici</b></a>.',
+'texte_explication_langue_cible' => 'Pour la langue cible, vous devez choisir si vous travaillez vers une langue d&eacute;j&agrave; existante, ou si vous cr&eacute;ez une nouvelle langue.',
 'texte_export_impossible' => 'Impossible d\'exporter le fichier. V&eacute;rifiez les droits en &eacute;criture sur le fichier @cible@',
 'texte_filtre' => 'Filtre (chercher)',
 'texte_interface' => 'Interface de traduction : ',
