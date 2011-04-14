@@ -121,7 +121,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
 'readme' => 'Ce plugin permet de g&eacute;rer les fichiers langues',
-'repertoirelangue' => 'Choix du r&eacute;pertoire langue',
 
 
 // S
@@ -130,8 +129,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
-'texte_creation_langue_impossible' => 'Pr&eacute;l&eacute;minaire : <P>Impossible de cr&eacute;er la nouvelle langue : les fichiers \'@dir_lang@\' et \'@dir_bak@\' doivent &ecirc;tre accessibles en &eacute;criture.<P>Quand vous aurez r&eacute;alis&eacute; cette op&eacute;ration, vous pourrez ',
-'texte_creation_nouvelle_langue_impossible' => 'Impossible de cr&eacute;er la nouvelle langue. Le fichier ',
 'texte_erreur' => 'ERREUR',
 'texte_erreur_acces' => '<b>Attention : </b>impossible d\'&eacute;crire dans le fichier <tt>@fichier_lang@</tt>. Controlez les droits d\'acc&egrave;s.',
 'texte_existe_deja' => ' existe d&eacute;j&agrave;.',
@@ -149,13 +146,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'texte_module' => 'le module &agrave; traduire. ',
 'texte_module_traduire' => 'Le module &agrave; traduire :',
 'texte_non_traduit' => 'non traduit ',
-'texte_operation_desactivee' => 'Cette op&eacute;ration est d&eacute;sactiv&eacute;e. Demandez sur la liste trad-spip pour restaurer le fichier...',
 'texte_operation_impossible' => 'Op&eacute;ration impossible. Lorsque la case \'tout s&eacute;lectionner\' est coch&eacute;e,<br> il faut faire des op&eacute;rations de type \'Consulter\'.',
 'texte_pas_de_reponse' => '... aucune r&eacute;ponse',
-'texte_preleminaire' => 'Pr&eacute;l&eacute;minaire : ',
-'texte_preleminaire2' => 'Pr&eacute;l&eacute;minaire : ',
 'texte_recapitulatif' => 'R&eacute;capitulatif traductions',
-'texte_restauration_fichier_langue' => 'Cette fen&ecirc;tre permet de sauvegarder ou restaurer le fichier de langue sur lequel vous &ecirc;tes en train de travailler.',
 'texte_restauration_impossible' => 'impossible de restaurer le fichier',
 'texte_sauvegarde' => 'Interface de traduction, Sauvegarde/Restauration du fichier',
 'texte_sauvegarde_courant' => 'Copie de sauvegarde du fichier courant :',
