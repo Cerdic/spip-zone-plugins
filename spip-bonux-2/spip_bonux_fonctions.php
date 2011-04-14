@@ -263,15 +263,23 @@ function sinon_interdire_acces($ok=false, $url='', $statut=0){
 		}
 		// Sinon on redirige vers une 404
 		else{
-			http_status(404);
-			echo recuperer_fond('404');
+			$statut = 404;
 		}
 	}
+	
 	// Sinon on suit les directives indiquées dans les deux arguments
-	else{
-		if ($statut) http_status($statut);
-		if ($url) redirige_par_entete($url);
+	
+	// S'il y a un statut
+	if ($statut){
+		// Dans tous les cas on modifie l'entête avec ce qui est demandé
+		http_status($statut);
+		// Si le statut est une erreur 4xx on va chercher le squelette
+		if ($statut >= 400)
+			echo recuperer_fond("$statut");
 	}
+	
+	// S'il y a une URL, on redirige (si pas de statut, la fonction mettra 302)
+	if ($url) redirige_par_entete($url, '', $statut);
 	
 	exit;
 }
