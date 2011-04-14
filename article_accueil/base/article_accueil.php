@@ -30,11 +30,9 @@ function article_accueil_upgrade($nom_meta_base_version,$version_cible){
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		if (version_compare($current_version,'0.1','<')){
+			include_spip('base/create');
 			include_spip('base/abstract_sql');
-			$desc = sql_showtable('spip_rubriques', true);
-			if (!isset($desc['field']['id_article_accueil'])) {
-				sql_alter("TABLE spip_rubriques ADD id_article_accueil bigint(21) DEFAULT '0' NOT NULL");
-			}
+			maj_tables('spip_rubriques');
 			ecrire_meta($nom_meta_base_version,$current_version='0.1','non');
 		}
 	}
