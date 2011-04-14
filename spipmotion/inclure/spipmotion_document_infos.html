@@ -48,13 +48,13 @@
 		<strong>
 			<:spipmotion:info_bitrate:>
 		</strong>
-		(#BITRATE|div{1000}|floor) kb/s.
+		(#BITRATE|<{1000}|?{#BITRATE,[(#BITRATE|div{1000}|floor)]}) kb/s.
 	</p>]
 	[<p>
 		<strong>
 			<:spipmotion:info_videobitrate:>
 		</strong>
-		(#VIDEOBITRATE|div{1000}|floor) kb/s.
+		(#VIDEOBITRATE|div{1000}|round) kb/s.
 	</p>]
 	[<p>
 		<strong>
@@ -73,7 +73,7 @@
 		<strong>
 			<:spipmotion:info_audiobitrate:>
 		</strong>
-		(#AUDIOBITRATE|div{1000}|floor) kb/s.
+		(#AUDIOBITRATE|div{1000}|round) kb/s.
 	</p>]
 	[<p>
 		<strong>
