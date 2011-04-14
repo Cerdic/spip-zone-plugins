@@ -54,20 +54,18 @@ function tourinfrance_vider_tables($nom_meta_base_version) {
     
 
 	//Supprime le groupes de mots "communes", et tous ses mots clés.
-	$req = sql_fetsel("id_groupe", "spip_groupes_mots", "titre='communes'");
-	$id_gp_mot_communes = $req['id_groupe'];
-	sql_delete("spip_mots", "id_groupe=" . $id_gp_mot_communes);
-	sql_delete("spip_groupes_mots", "id_groupe=" . $id_gp_mot_communes);
+	$id_groupe = sql_getfetsel("id_groupe", "spip_groupes_mots", "titre='communes'");
+	sql_delete("spip_mots", "id_groupe=" . $id_groupe);
+	sql_delete("spip_groupes_mots", "id_groupe=" . $id_groupe);
     
     
     //Suppression des RUBRIQUES pour chaque bordereau
 	for($i=0; $i<count($tab_bordereaux_tourinfrance); $i++){
 		$nom_table = "spip_tourinfrance_" . $tab_bordereaux_tourinfrance[$i];
     	
-    	$req = sql_fetsel("id_rubrique", "spip_rubriques", "titre='" . $tab_bordereaux_tourinfrance[$i] . "'");
-    	$id_rub = $req['id_rubrique'];
+    	$id_rubrique = sql_getfetsel("id_rubrique", "spip_rubriques", "titre='" . $tab_bordereaux_tourinfrance[$i] . "'");
     	
-    	if ($req2 = sql_select("id_article", "spip_articles", "id_rubrique=" . $id_rub)) {
+    	if ($req2 = sql_select("id_article", "spip_articles", "id_rubrique=" . $id_rubrique)) {
 		    while ($res2 = sql_fetch($req2)) {
 		        $id_art = $res2['id_article'];
 		        
@@ -77,7 +75,7 @@ function tourinfrance_vider_tables($nom_meta_base_version) {
 		    }
 		}
 		//Supprime tous les articles de la rubrique 
-  		sql_delete("spip_articles", "id_rubrique=" . $id_rub);
+  		sql_delete("spip_articles", "id_rubrique=" . $id_rubrique);
 		
 		//Supprime la rubrique du bordereau
     	sql_delete("spip_rubriques", "titre = '" . $tab_bordereaux_tourinfrance[$i] . "'");

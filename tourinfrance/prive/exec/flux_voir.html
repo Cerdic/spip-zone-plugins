@@ -1,0 +1,32 @@
+<B_nom_flux>
+
+<:tourinfrance:liste_offres:>
+
+<BOUCLE_nom_flux(TOURINFRANCE_FLUX){id_flux=#ID_FLUX}>
+	<div class='bandeau_actions'>
+        [(#URL_ECRIRE{flux_edit}
+                |parametre_url{id_flux,#ID_FLUX}
+                |parametre_url{retour,#SELF}
+                |icone{<:tourinfrance:action_modifier:>, #CHEMIN{img/tourinfrance.gif}, #LANG_RIGHT, edit.gif})]
+    </div>
+	<h1>#NOM_FLUX</h1>
+	[<a href="(#URL_FLUX)">[(#URL_FLUX|couper{50, '...'})]</a>]
+</BOUCLE_nom_flux>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+
+<ul class="liste_items">
+		
+	<h4>ATTENTION : On veut afficher la liste des Offres, du flux en parametre.</h4>
+	<h4>Mais impossible d'utiliser un nom de table dynamique !</h4>
+
+</ul>
+	
+<!--#navigation-->
+<div class='cadre cadre-info'>
+	<INCLURE{fond=prive/infos/flux,env,ajax} />
+	[(#URL_ECRIRE{tourinfrance}|icone{<:retour:>,#CHEMIN{img/tourinfrance.gif},center})]
+</div>
+<!--/#navigation-->
+
+</B_nom_flux>

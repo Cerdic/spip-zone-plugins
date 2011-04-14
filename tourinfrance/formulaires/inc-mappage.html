@@ -1,0 +1,12 @@
+<h3><:tourinfrance:mappage:></h3>
+
+[(#SAISIE{hidden, chps_updates,
+        defaut=#ENV{liste_chps_update}|serialize})] 
+				
+<BOUCLE_mapp(POUR){tableau #ENV{mappage}}>
+		[(#SAISIE{selection, #CLE,
+                label=#CLE,
+                defaut=#VALEUR,
+                obligatoire=oui,
+				datas=#ENV{liste_elements}})] 
+</BOUCLE_mapp>

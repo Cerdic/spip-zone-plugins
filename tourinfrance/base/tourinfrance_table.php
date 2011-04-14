@@ -28,7 +28,9 @@ function tourinfrance_declarer_tables_principales($tables_principales){
 	/*****  TABLE TOURINFRANCE_FLUX  ****************/
 	$tourinfrance_flux = array(
 			"id_flux"	=> "bigint(21) NOT NULL",
+	   	 	"nom_flux"  => "text DEFAULT '' NOT NULL",
 	   	 	"url_flux"  => "text DEFAULT '' NOT NULL",
+	   	 	"type_flux"  => "text DEFAULT '' NOT NULL",
 	  	  	"id_offre"    => "text DEFAULT '' NOT NULL",
 	  	  	"nom_offre"    => "text DEFAULT '' NOT NULL",
 	  	  	"description_offre"    => "text DEFAULT '' NOT NULL",

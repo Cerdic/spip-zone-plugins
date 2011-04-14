@@ -64,7 +64,7 @@ function traiter_donnees_tourinfrance($url_flux, $id_flux, $infos_flux) {
 	    return $exec;
 	}
 	else{
-		return "$url_flux fichier non trouvé";
+		return "$url_flux fichier non trouvé.";
 	}
 	
 }

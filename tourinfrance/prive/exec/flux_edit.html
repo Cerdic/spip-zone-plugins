@@ -1,0 +1,26 @@
+#CACHE{0}
+[(#SET{id_flux,[(#VAL{id_flux}|_request|sinon{nouveau})]})]
+
+[(#SET{retour, #URL_ECRIRE{tourinfrance}})]
+
+<BOUCLE_titre(TOURINFRANCE_FLUX){id_flux=#GET{id_flux}}{tout}>
+        [(#SET{nom_flux, #NOM_FLUX})]
+        [(#SET{url_flux, #URL_FLUX})]
+        [(#SET{retour, [(#URL_ECRIRE{flux_voir}|parametre_url{id_flux,#ID_FLUX})]})]
+</BOUCLE_titre>
+       
+[(#INCLURE{fond=prive/editer/flux,
+        id_flux=#GET{id_flux},
+        icone_retour=[(#ENV{retour,#GET{retour}}
+                |icone{<:icone_retour:>, #CHEMIN{img/tourinfrance.gif}, #LANG_LEFT })],
+        url_flux=#GET{url_flux},
+        nom_flux=#GET{nom_flux}
+})]
+	
+<!--#navigation-->
+<div class='cadre cadre-info'>
+	<INCLURE{fond=prive/infos/flux,env,ajax} />
+	[(#URL_ECRIRE{tourinfrance}|icone{<:retour:>,#CHEMIN{img/tourinfrance.gif},center})]
+</div>
+<!--/#navigation-->
+       

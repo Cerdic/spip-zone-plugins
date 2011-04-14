@@ -1,0 +1,20 @@
+<h1 class="grostitre"><:tourinfrance:titre_tourinfrance:></h1>
+<p><:tourinfrance:soustitre_tourinfrance:></p>
+
+	<div class='ajax'>
+		<INCLURE{fond=inclure/liste_flux,env,ajax} />
+	</div>
+
+	[(#URL_ECRIRE{flux_edit}
+		|icone{<:tourinfrance:editer_flux_nouveau:>,#CHEMIN{img/tourinfrance.gif},#LANG_RIGHT,creer.gif})]
+
+
+<!--#navigation-->
+<div class='cadre cadre-info'>
+	<p><:tourinfrance:description_tourinfrance:></p>
+
+	[(#URL_ECRIRE{flux_edit}
+		|icone{<:tourinfrance:editer_flux_nouveau:>,#CHEMIN{img/tourinfrance.gif},center,creer.gif})]
+	
+</div>
+<!--/#navigation-->

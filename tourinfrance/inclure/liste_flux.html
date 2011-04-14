@@ -1,0 +1,20 @@
+<B_flux>
+<ul class="liste_items">
+<BOUCLE_flux(TOURINFRANCE_FLUX){par type_flux, nom_flux}{pagination 20}>
+	<li class="item">
+		[<b>(#TYPE_FLUX|majuscules)</b> - ]#NOM_FLUX 
+		[<a href="(#URL_FLUX)">[(#URL_FLUX|couper{30, '...'})]</a>]
+		<p class="actions">
+		<a href='[(#URL_ECRIRE{flux_voir}|parametre_url{id_flux,#ID_FLUX})]'><:tourinfrance:action_voir:></a>
+			|
+		<a href='[(#URL_ECRIRE{flux_edit}|parametre_url{id_flux,#ID_FLUX})]'><:tourinfrance:action_modifier:></a>
+			|
+		<a href='[(#URL_ACTION_AUTEUR{flux_supprimer,#ID_FLUX,#SELF})]'><:tourinfrance:action_supprimer:></a>
+		</p>
+	</li>
+</BOUCLE_flux>
+</ul>
+
+[<p class='pagination'>(#PAGINATION)</p>]
+</B_flux>
+

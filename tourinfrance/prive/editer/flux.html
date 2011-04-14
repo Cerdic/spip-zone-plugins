@@ -1,0 +1,11 @@
+<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+        #ENV**{icone_retour}
+		[[(#ENV{id_flux}|=={nouveau}|?{<:tourinfrance:info_ajouter_nouveau:>, <:tourinfrance:info_modifier_flux:>})]
+        <h1>(#ENV{nom_flux,<:tourinfrance:texte_nouveau_flux:>})</h1>
+		[<a href="(#ENV{url_flux})">[(#ENV{url_flux}|couper{60, '...'})]</a>]
+		]
+	    
+	</div>
+	[(#FORMULAIRE_EDITER_FLUX{#ENV{id_flux,nouveau},#ENV{redirect}})]
+</div>
