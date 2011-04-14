@@ -40,6 +40,7 @@ function commandes_declarer_tables_principales($tables_principales){
 			'id_commande' => 'id_commande'
 		)
 	);
+
 	
 	// Table commandes_details
 	$commandes_details = array(
@@ -64,17 +65,20 @@ function commandes_declarer_tables_principales($tables_principales){
 		'field' => &$commandes_details,
 		'key' => &$commandes_details_cles,
 		'join'=> array(
-			'id_commandes_detail' => 'id_commandes_detail'
+			'id_commandes_detail' => 'id_commandes_detail',
+			'id_commande' => 'id_commande'
 		)
 	);
 
 	return $tables_principales;
 }
 
+
 function commandes_rechercher_liste_des_champs($tables){
 	$tables['commande']['numero'] = 8;
 	return $tables;
 }
+
 
 function commandes_rechercher_liste_des_jointures($tables){
 	$tables['commande']['auteur']['nom'] = 1;

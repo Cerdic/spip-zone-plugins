@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
 	
 	// D
-	'designations' => 'Désignations',
+	'descriptif' => 'Descriptif',
 	
 	// I
 	'info_toutes_commandes' => 'Toutes les commandes',
