@@ -91,23 +91,28 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 				'id_objet = '.intval($id_auteur)
 			)
 		)
-		and $adresse = sql_fetsel(
-			'*',
-			'spip_adresses_liens LEFT JOIN spip_adresses USING(id_adresse)',
-			array(
-				'objet = '.sql_quote('auteur'),
-				'id_objet = '.intval($id_auteur)
-			)
-		)
 	){
 		$contexte['email_rien'] = $email;
 		foreach ($contact as $cle=>$valeur) {
 			$contexte['co__'.$cle] = $valeur;
 		}
-		$contexte = array_merge($contexte, $adresse);
+		
+		// S'il y a une adresse principale, on charge les infos
+		if ($adresse = sql_fetsel(
+			'*',
+			'spip_adresses_liens LEFT JOIN spip_adresses USING(id_adresse)',
+			array(
+				'objet = '.sql_quote('auteur'),
+				'id_objet = '.intval($id_auteur),
+				'type = '.sql_quote('principale')
+			)
+		))
+			$contexte = array_merge($contexte, $adresse);
 	}
 	// Sinon rien
-	else return false;
+	else{
+		$contexte['editable'] = false;
+	}
 	
 	return $contexte;
 }
@@ -156,6 +161,13 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 			'type = '.sql_quote('principale')
 		)
 	);
+	// S'il n'y a pas d'adresse principale, on la crée
+	if (!$id_adresse){
+		$id_adresse = 'oui';
+		set_request('objet', 'auteur');
+		set_request('id_objet', $id_auteur);
+	}
+	
 	$editer_adresse = charger_fonction('editer_adresse', 'action/');
 	$editer_adresse($id_adresse);
 	
