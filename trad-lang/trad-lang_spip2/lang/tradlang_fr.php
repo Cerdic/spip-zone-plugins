@@ -94,10 +94,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'lien_telecharger' => '[T&eacute;l&eacute;charger]',
 'lien_traduction_module' => 'Module ',
 'lien_traduction_vers' => ' vers ',
+'lien_voir_toute_chaines_module' => 'Voir toutes les chaines du module.',
 
 
 // M
 'message_aucun_resultat_chaine' => 'Aucun r&eacute;sultat correspondant &agrave; vos crit&egrave;res dans les cha&icirc;nes de langue.',
+'message_aucun_resultat_statut' => 'Aucune chaine ne correspond au statut demand&eacute;.',
 'message_aucune_nouvelle_langue_dispo' => 'Ce module est disponible dans toutes les langues possibles',
 'message_demande_update_langues_cible_mere' => 'Vous pouvez demander &agrave; un administrateur de resynchroniser cette langue avec la langue principale.',
 'message_module_langue_ajoutee' => 'La langue "@langue@" a &eacute;t&eacute; ajout&eacute;e au module "@module@".',

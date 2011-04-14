@@ -28,11 +28,17 @@
 [(#GRAND_TOTAL|>{1}|oui)
 [(#STATUS|!={#ENV{status}}|oui)<a href="[(#SELF|parametre_url{status,#STATUS})]" class="ajax">#STATUS</a>]
 [(#STATUS|!={#ENV{status}}|non)#STATUS]]
+#SET{statut,#STATUS}
 </BOUCLE_status>
 [(#GRAND_TOTAL|>{1}|oui)
 </p>]
+[(#REM) Si un seul statut et pas celui de l'environnement c'est qu'on aura pas de résultats après]
+[(#GRAND_TOTAL|=={1}|et{#GET{status}|!={#ENV{status}}}|oui)
+<p><:tradlang:message_aucun_resultat_statut:></p>
+<p><a href="[(#SELF|parametre_url{status,''})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>
+]
 </B_status>
-</B_status>
+
 <B_revise_cible>
 <table class="liste_traductions">
 	<thead>
