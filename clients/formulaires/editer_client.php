@@ -166,6 +166,7 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 		$id_adresse = 'oui';
 		set_request('objet', 'auteur');
 		set_request('id_objet', $id_auteur);
+		set_request('type', 'principale');
 	}
 	
 	$editer_adresse = charger_fonction('editer_adresse', 'action/');
