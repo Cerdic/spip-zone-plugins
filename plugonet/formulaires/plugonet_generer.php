@@ -26,8 +26,8 @@ function formulaires_plugonet_generer_traiter() {
  	list($erreurs, $commandes) = $generer($pluginxml, $forcer);
 
 	// Formatage et affichage des resultats
-	var_dump('erreurs', $erreurs);
-	var_dump('commandes', $commandes);
+// 	var_dump('erreurs', $erreurs);
+// 	var_dump('commandes', $commandes);
 	// -- Message global sur la generation des fichiers
 	$retour = array();
  	list($ok, $message) = formater_message($erreurs);
