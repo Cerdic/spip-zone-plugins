@@ -339,6 +339,23 @@ function plugin2balise_copy($texte, $balise) {
 }
 
 
+// --------------------- BALISE DE TRADUCTION -----------------------
+//
+// - traduire : déclaratif des modules de langue
+// --> A RAJOUTER EVENTUELLEMENT :  TOUS LES MODULES EXISTANTS + LE MODULE PAQUET
+function plugin2balise_traduire($D) {
+	$res = '';
+	foreach($D['traduire'] as $nom => $i) {
+		$att = " module='" . $i['module'] . "'" .
+				" reference='" . $i['reference'] . "'" .
+				(empty($i['gestionnaire']) ? '' : (" gestionnaire='" . $i['gestionnaire'] . "'"));
+		$res .= "\n\t<traduire$att />";
+	}
+
+	return $res ? "\n$res" : '';
+}
+
+
 // --------------------- BALISES TECHNIQUES (CONTENT_TECH) -----------------------
 //
 // - pipeline
@@ -430,23 +447,6 @@ function plugin2balise_exec($D, $balise) {
 				(empty($i['args']) ? '' :
 				(" args='" . str_replace('&', '&amp;', str_replace('&amp;', '&', $i['args'])) . "'"));
 		$res .= "\n\t<$balise$att />";
-	}
-
-	return $res ? "\n$res" : '';
-}
-
-
-// --------------------- BALISE DE TRADUCTION -----------------------
-//
-// - traduire : déclaratif des modules de langue
-// --> A RAJOUTER EVENTUELLEMENT :  TOUS LES MODULES EXISTANTS + LE MODULE PAQUET
-function plugin2balise_traduire($D) {
-	$res = '';
-	foreach($D['traduire'] as $nom => $i) {
-		$att = " module='" . $i['module'] . "'" .
-				" reference='" . $i['reference'] . "'" .
-				(empty($i['gestionnaire']) ? '' : (" gestionnaire='" . $i['gestionnaire'] . "'"));
-		$res .= "\n\t<traduire$att />";
 	}
 
 	return $res ? "\n$res" : '';
@@ -549,16 +549,20 @@ function plugin2balise_migration($commandes, $plugin_xml, $dir) {
 	// -- Filtrage des commandes pour eliminer les commandes redondantes dues a la presence de balises spip
 	// -- On ajoute ces commandes a celles de la balise paquet et on tri par ordre alphabetique pour eviter que les 
 	//     cat soient apres les svn
-	foreach ($commandes['balise_spip'] as $_compatible => $_commandes) {
-		foreach ($_commandes as $_commande) {
-			if (!in_array($_commande, $commandes['balise_paquet']))
-				$commandes['balise_paquet'][] = $_commande;
-		} 
+	if ($commandes['balise_spip']) {
+		foreach ($commandes['balise_spip'] as $_compatible => $_commandes) {
+			foreach ($_commandes as $_commande) {
+				if (!in_array($_commande, $commandes['balise_paquet']))
+					$commandes['balise_paquet'][] = $_commande;
+			} 
+		}
 	}
-	asort($commandes['balise_paquet']);
-	// -- Ecriture des commandes filtrees et ordonnees
-	foreach ($commandes['balise_paquet'] as $_commande) {
-		$migration .= "# " . $_commande . "\n";
+	if ($commandes['balise_paquet']) {
+		asort($commandes['balise_paquet']);
+		// -- Ecriture des commandes filtrees et ordonnees
+		foreach ($commandes['balise_paquet'] as $_commande) {
+			$migration .= "# " . $_commande . "\n";
+		}
 	}
 
 	return ecrire_fichier($fichier, $migration);
