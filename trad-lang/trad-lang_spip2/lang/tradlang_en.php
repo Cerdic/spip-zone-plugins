@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_statuts_auteurs' => 'Possible statuses',
 	'cfg_lbl_type_autorisation' => 'Authorization method',
 	'cfg_legend_autorisation_configurer' => 'Manage the plugin',
-	'cfg_legende_autorisation_modifier' => 'Modify translations',
+	'cfg_legende_autorisation_modifier' => 'Edit translations',
 	'cfg_legende_autorisation_voir' => 'See translation interface',
 	'codelangue' => 'Language code',
 
