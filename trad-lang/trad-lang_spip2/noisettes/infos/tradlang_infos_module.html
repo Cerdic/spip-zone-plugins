@@ -14,7 +14,7 @@
 	<BOUCLE_total_item_langue_mere_modif(TRADLANG){module}{status=MODIF}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}> </BOUCLE_total_item_langue_mere_modif>
 	<p class="items_modif"><:tradlang:items_modif:> : #GRAND_TOTAL / #GET{total_mere}</p></B_total_item_langue_mere_modif>
 	[(#CONFIG{tradlang/sauvegarde_locale}|=={on}|oui)
-	[(#SET{sync,[(#ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG})]})]
+	[(#SET{sync,[(#ID_TRADLANG_MODULE|tradlang_testesynchro{#LANG_MERE})]})]
 	[(#GET{sync}|oui)
 		<p><img src="#CHEMIN{img_pack/vert.gif}" alt="" />&nbsp;<:tradlang:message_synchro_base_fichier_ok:></p>
 	]
