@@ -101,7 +101,7 @@ function generer_meta_tags(){
 		default:
 			$title = couper(sql_getfetsel("titre", "spip_".$type_object."s", "id_$type_object = $id_object"),64);
 			$requete = sql_allfetsel("descriptif,texte", "spip_".$type_object."s", "id_$type_object = $id_object");
-			$description = couper(implode(" ",$requete[0]),150,'');
+			if($requete) $description = couper(implode(" ",$requete[0]),150,'');
 			// Get the value set by default
 			foreach ($config['meta_tags']['default'] as $name => $option) {
 				if ($option == 'sommaire') {
