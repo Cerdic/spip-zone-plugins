@@ -1,16 +1,19 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aucunmodule' => 'No module.',
-	
+
 	// B
 	'bouton_supprimer_module' => 'Delete this module',
 	'bouton_traduire' => 'Translate >>',
-	
+
 	// C
 	'cfg_form_tradlang_autorisations' => 'Authorizations',
 	'cfg_inf_type_autorisation' => 'If you choose by status or by author, you will be prompted below your selection of statuses or authors.',
@@ -24,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_legende_autorisation_modifier' => 'Modify translations',
 	'cfg_legende_autorisation_voir' => 'See translation interface',
 	'codelangue' => 'Language code',
-	
+
 	// E
 	'entrerlangue' => 'Add a language code',
 	'erreur_aucun_module' => 'There are no modules available in the database.',
@@ -37,11 +40,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_langues_autorisees_insuffisantes' => 'You should at least select two languages',
 	'erreur_module_inconnu' => 'This module is not available',
 	'erreur_pas_langue_cible' => 'Select a language',
-	'erreur_repertoire_local_inexistant' => 'Warning : the directory used to save files localy does not exist : "squelettes/lang"',
+	'erreur_repertoire_local_inexistant' => 'Warning: the directory used to save files localy does not exist: "squelettes/lang"',
 	'explication_langues_autorisees' => 'Users will be able to create a new translation only in the selected languages​​.',
 	'explication_sauvegarde_locale' => 'Will save the files in the "squelettes" folder of the site',
 	'explication_sauvegarde_post_edition' => 'Will save temporary files each time you change a language string',
-	
+
 	// I
 	'importer_module' => 'Importing new language module',
 	'importermodule' => 'Import a module',
@@ -49,14 +52,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_status_ok' => 'OK',
 	'infos_trad_module' => 'Informations on translations',
 	'item_creer_langue_cible' => 'Create a new target language',
-	'item_langue_cible' => 'Target language : ',
-	'item_langue_origine' => 'Source language :',
+	'item_langue_cible' => 'Target language: ',
+	'item_langue_origine' => 'Source language:',
 	'items_en_trop' => '@nb@ items are over in that language (from the parent language)',
 	'items_manquants' => '@nb@ items are missing in that language (from the parent language)',
 	'items_modif' => 'Modified items',
 	'items_new' => 'New items',
 	'items_total_nb' => 'Total number of items',
-	
+
 	// L
 	'label_idmodule' => 'Module ID',
 	'label_langue_mere' => 'Parent language',
@@ -90,9 +93,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_telecharger' => '[Download]',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' to ',
-	
+	'lien_voir_toute_chaines_module' => 'See all the strings of the module.',
+
 	// M
 	'message_aucun_resultat_chaine' => 'No results matching your criteria in the chains of language.',
+	'message_aucun_resultat_statut' => 'No string matches the requested status.',
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
 	'message_demande_update_langues_cible_mere' => 'You can ask an administrator to resynchronize this language with the primary language.
 	',
@@ -106,59 +111,52 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_synchro_base_fichier_pas_ok' => 'Files and database are not sync.',
 	'module_deja_importe' => 'The module "@module@" has already been imported.',
 	'moduletitre' => 'Modules available',
-	
+
 	// N
 	'nb_items_langue_cible' => 'The target language "@langue@" includes @nb@ items defined in the parent language.',
 	'nb_items_langue_en_trop' => '@nb@ items are too much in the language "@langue@".',
 	'nb_items_langue_inexistants' => '@nb@ items does not exists in the language "@langue@".',
 	'nb_items_langue_mere' => 'The main language of this module includes @nb@ items.',
-	
+
 	// R
 	'readme' => 'This plugin allows you to manage the language files',
-	'repertoirelangue' => '<NEW>Choix du r&eacute;pertoire langue',
-	
+
 	// S
 	'str_status_modif' => 'New (MODIF)',
 	'str_status_traduit' => 'Translated',
-	
+
 	// T
-	'texte_creation_langue_impossible' => '<NEW>Pr&eacute;l&eacute;minaire : <P>Impossible de cr&eacute;er la nouvelle langue : les fichiers \'@dir_lang@\' et \'@dir_bak@\' doivent &ecirc;tre accessibles en &eacute;criture.<P>Quand vous aurez r&eacute;alis&eacute; cette op&eacute;ration, vous pourrez ',
-	'texte_creation_nouvelle_langue_impossible' => '<NEW>Impossible de cr&eacute;er la nouvelle langue. Le fichier ',
 	'texte_erreur' => 'ERROR',
-	'texte_erreur_acces' => '<b>Warning : </b>unable to write to the file <tt>@fichier_lang@</tt>. Check access rights.',
+	'texte_erreur_acces' => '<b>Warning: </b>unable to write to the file <tt>@fichier_lang@</tt>. Check access rights.',
 	'texte_existe_deja' => ' already exists.',
 	'texte_explication_langue_cible' => 'For the target language, you must choose if you are working towards a language that already exists, or if you create a new language.',
 	'texte_export_impossible' => 'Unable to export the file. Check write permissions on the file @cible@',
 	'texte_filtre' => 'Filter (search)',
-	'texte_interface' => 'Translation interface :',
+	'texte_interface' => 'Translation interface:',
 	'texte_interface2' => 'Translation interface',
-	'texte_langue' => 'Language :',
+	'texte_langue' => 'Language:',
 	'texte_langue_cible' => '<b>The target language</b> which is the language you are translating.',
 	'texte_langue_origine' => '<b>The parent language</b> which is the language from which you translate to an other one;',
 	'texte_langue_origine2' => 'translate (surely the French).',
 	'texte_langues_differentes' => 'The target and origin language must be different.',
-	'texte_modifier' => 'Modify',
+	'texte_modifier' => 'Edit',
 	'texte_module' => 'the module to translate;',
-	'texte_module_traduire' => 'The module to translate : ',
+	'texte_module_traduire' => 'The module to translate: ',
 	'texte_non_traduit' => 'not translated',
-	'texte_operation_desactivee' => '<NEW>Cette op&eacute;ration est d&eacute;sactiv&eacute;e. Demandez sur la liste trad-spip pour restaurer le fichier...',
-	'texte_operation_impossible' => '<NEW>Op&eacute;ration impossible. Lorsque la case \'tout s&eacute;lectionner\' est coch&eacute;e,<br> il faut faire des op&eacute;rations de type \'Consulter\'.',
+	'texte_operation_impossible' => 'Opération impossible. Lorsque la case \'tout sélectionner\' est cochée,<br> il faut faire des opérations de type \'Consulter\'.', # NEW
 	'texte_pas_de_reponse' => '... no response',
-	'texte_preleminaire' => 'Preliminary :',
-	'texte_preleminaire2' => 'Preliminary :',
 	'texte_recapitulatif' => 'Summary of the translations',
-	'texte_restauration_fichier_langue' => '<NEW>Cette fen&ecirc;tre permet de sauvegarder ou restaurer le fichier de langue sur lequel vous &ecirc;tes en train de travailler.',
 	'texte_restauration_impossible' => 'impossible to restore the file',
 	'texte_sauvegarde' => 'Translation interface, Save / Restore file',
 	'texte_sauvegarde_courant' => 'Backup copy of the current file:',
 	'texte_sauvegarde_impossible' => 'Unable to backup the file',
 	'texte_sauvegarder' => 'Save',
 	'texte_selection_langue' => 'To view a translated language file / currently being translated, please select the language:',
-	'texte_selectionner' => 'You must choose :',
+	'texte_selectionner' => 'You must choose:',
 	'texte_selectionner_version' => 'Choose the version of the file, then click the button below.',
 	'texte_seul_admin' => 'Only an administrator account can access this step.',
-	'texte_total_chaine' => 'Number of strings :',
-	'texte_total_chaine_conflit' => 'Number of unused strings :',
+	'texte_total_chaine' => 'Number of strings:',
+	'texte_total_chaine_conflit' => 'Number of unused strings:',
 	'texte_total_chaine_modifie' => 'Number of strings to submit updates:',
 	'texte_total_chaine_non_traduite' => 'Number of untranslated strings:',
 	'texte_total_chaine_traduite' => 'Number of translated strings:',
@@ -179,10 +177,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tradlang' => 'Trad-Lang',
 	'traduction' => 'Translation @lang@',
 	'traductions' => 'Translations',
-	
+
 	// V
 	'visumodule' => 'Module summary'
-
 );
 
 ?>
