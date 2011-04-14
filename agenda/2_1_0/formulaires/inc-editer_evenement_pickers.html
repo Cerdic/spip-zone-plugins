@@ -20,6 +20,9 @@ $.dpText = {
 $(function()
 {
 	$('input.date').datePicker({startDate:'01/01/1900'}).dpSetPosition($.dpConst.POS_TOP, $.dpConst.POS_RIGHT);
+	$('#date_fin').dpSetStartDate($('#date_debut').val());
+	// Stocker l'écart entre les deux dates
+	var oldDateDiff = ($('#date_fin').dpGetSelected()-$('#date_debut').dpGetSelected())/(24*3600*1000);
 	$('#date_debut').bind(
 		'dpClosed',
 		function(e, selectedDates)
@@ -27,7 +30,9 @@ $(function()
 			var d = selectedDates[0];
 			if (d) {
 				d = new Date(d);
-				$('#date_fin').dpSetStartDate(d.addDays(0).asString());
+				$('#date_fin').dpSetStartDate(d.asString());
+				$('#date_fin').dpSetSelected(d.addDays(oldDateDiff).asString());
+				$('#date_fin').val(d.asString());
 			}
 		}
 	);
@@ -38,7 +43,7 @@ $(function()
 			var d = selectedDates[0];
 			if (d) {
 				d = new Date(d);
-				$('#date_debut').dpSetEndDate(d.addDays(0).asString());
+				oldDateDiff = ($('#date_fin').dpGetSelected()-$('#date_debut').dpGetSelected())/(24*3600*1000);
 			}
 		}
 	);
