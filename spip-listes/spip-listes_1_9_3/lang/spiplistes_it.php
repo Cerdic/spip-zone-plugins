@@ -215,7 +215,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 	Queta lista di abbonati deve essere in formato testo, una riga 
   per abbonato. Ogni riga deve essere cos&igrave; composta:<br />
 	<tt style='display:block;margin:0.75em 0;background-color:#ccc;border:1px solid #999;padding:1ex;'>indirizzo@email<span style='color:#f66'>[separatore]</span>login<span style='color:#f66'>[separatore]</span>nome</tt>
-	<tt style='color:#f66'>[separatore]</tt> $egrave; un carattere di tabulazione o un punto e virgola.<br /><br />
+	<tt style='color:#f66'>[separatore]</tt> &egrave; un carattere di tabulazione o un punto e virgola.<br /><br />
 	L\'indirizzo email deve essere unico, come il login. Se l\'indirizzo email 
    o se il login esiste nel database del sito, la riga sar&agrave; ignorata.<br />
 	Il primo campo indirizzo@email &egrave; obbligatorio. Gli altri due campi possono 
