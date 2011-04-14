@@ -16,7 +16,7 @@
 					<p class="explication"><:plugonet:info_generer:></p>
 					<ul>
 						<li class="editer_forcer [(#ENV{erreurs}|table_valeur{forcer}|oui) erreur]">
-							<label><:plugonet:label_forcer_paquetxml:></label>
+							<label><:plugonet:label_generer_paquetxml:></label>
 							<p class="explication"><:plugonet:info_forcer_paquetxml:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{forcer})</span>]
 							<div class="choix">
@@ -28,8 +28,20 @@
 								<label for="forcer_non"><:plugonet:label_forcer_non:></label>
 							</div>
 						</li>
+						<li class="editer_simuler [(#ENV{erreurs}|table_valeur{simuler}|oui) erreur]">
+							<p class="explication"><:plugonet:info_simuler_paquetxml:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{simuler})</span>]
+							<div class="choix">
+								<input type="radio" value="on" id="simuler_oui" class="radio" name="simuler" [(#ENV{simuler}|oui) checked="checked"] />
+								<label for="simuler_oui"><:plugonet:label_simuler_oui:></label>
+							</div>
+							<div class="choix">
+								<input type="radio" value="" id="simuler_non" class="radio" name="simuler" [(#ENV{simuler}|non) checked="checked"] />
+								<label for="simuler_non"><:plugonet:label_simuler_non:></label>
+							</div>
+						</li>
 						<li class="editer_pluginxml obligatoire[(#ENV{erreurs}|table_valeur{pluginxml}|oui) erreur]">
-							<label><:plugonet:label_choix_pluginxml:></label>
+							<label><:plugonet:label_choisir_pluginxml:></label>
 							<p class="explication"><:plugonet:info_generer_pluginxml:></p>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{pluginxml})</span>]
 							<INCLURE{fond=formulaires/inc-checkbox_pluginxml, env} />

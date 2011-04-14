@@ -20,10 +20,11 @@ function formulaires_plugonet_generer_traiter() {
 	// Recuperation des champs du formulaire
 	$pluginxml = _request('pluginxml');
 	$forcer = (_request('forcer')) ? true : false;
+	$simuler = (_request('simuler')) ? true : false;
 
 	// Generation du fichier
  	$generer = charger_fonction('plugonet_generer','inc');
- 	list($erreurs, $commandes) = $generer($pluginxml, $forcer);
+ 	list($erreurs, $commandes) = $generer($pluginxml, $forcer, $simuler);
 
 	// Formatage et affichage des resultats
 // 	var_dump('erreurs', $erreurs);

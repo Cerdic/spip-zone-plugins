@@ -14,7 +14,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/langonet_generer_fichier');
 include_spip('inc/plugin');
 
-function inc_plugonet_generer($files, $forcer_paquetxml) {
+function inc_plugonet_generer($files, $forcer_paquetxml=false, $simuler=false) {
 
 	// Chargement des fonctions de validation XML et d'extraction des informations contenues 
 	// dans la balise plugin
@@ -66,7 +66,11 @@ function inc_plugonet_generer($files, $forcer_paquetxml) {
 				//    repertoire lang/ du plugin
 				// -- le fichier des commandes svn
 				if (!$erreurs[$nom]['erreur_validation_paquetxml'] OR $forcer_paquetxml ) {
-					$dir = dirname($nom);
+					// Determination du repertoire en fonction du mode choisi
+					if ($simuler)
+						$dir = sous_repertoire(sous_repertoire(_DIR_TMP, "plugonet"), basename(dirname($nom)));
+					else
+						$dir = dirname($nom);
 					if ($modules = plugin2balise_description($description, $prefixe, $dir))
 						$commandes[$nom]['traduction'] = "svn add " . join(' ', $modules);
 					if (ecrire_fichier($dir . '/paquet.xml', $paquet_xml))
@@ -495,7 +499,7 @@ function plugin2balise_description($description, $prefixe, $dir) {
 
 	$dirl = $dir . '/lang';
 	if (!is_dir($dirl)) 
-		mkdir( $dirl);
+		mkdir($dirl);
 	$dirl .= '/';
 	foreach($langs as $lang => $couples) {
 		$module = strtolower($prefixe) . "-paquet";
