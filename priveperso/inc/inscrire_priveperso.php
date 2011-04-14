@@ -85,11 +85,11 @@ function priveperso_trouver_rubrique_parent_perso($rub_id) {
 
 function priveperso_recupere_id_rubrique(){
 	// on récupère le type d'objet sur lequel se fait la navigation
-$id_rub = $_GET['id_rubrique'];
-$id_art = $_GET['id_article'];
-$id_bre = $_GET['id_breve'];
-$id_syn = $_GET['id_syndic'];
-$id_par = $_GET['id_parent'];
+$id_rub = isset($_GET['id_rubrique'])?$_GET['id_rubrique']:"";
+$id_art = isset($_GET['id_article'])?$_GET['id_article']:"";
+$id_bre = isset($_GET['id_breve'])?$_GET['id_breve']:"";
+$id_syn = isset($_GET['id_syndic'])?$_GET['id_syndic']:"";
+$id_par = isset($_GET['id_parent'])?$_GET['id_parent']:"";
 
 if ($id_par) return $id_par;
 
