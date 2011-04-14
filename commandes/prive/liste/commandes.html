@@ -13,11 +13,11 @@
 	<thead>
 		<tr class='first_row'>
 			<th class='id'>[(#TRI{id_panier,<:info_numero_abbreviation:>,ajax})]</th>
-			<th class='reference'>[(#TRI{reference,<:info_titre:>,ajax})]</th>
-			<th class='statut'>[(#TRI{statut,<:commandes:statut:>,ajax})]</th>
+			<th class='reference'>[(#TRI{reference,<:commandes:reference:>,ajax})]</th>
+			<th class='etat'>[(#TRI{statut,<:commandes:etat:>,ajax})]</th>
 			<th class='date'>[(#TRI{date,<:commandes:date_commande:>,ajax})]</th>
 			<th class='date_paiement'>[(#TRI{date_paiement,<:commandes:date_paiement:>,ajax})]</th>
-			<th class='designations'><:commandes:descriptif:></th>
+			<th class='descriptif'><:commandes:contenu:></th>
 			<th class='montant'>[(#TRI{montant,<:commandes:montant:>,ajax})]</th>
 			<th class='action'></th>
 		</tr>
@@ -30,14 +30,14 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='id'>#ID_COMMANDE</td>
 			<td class='reference'>#REFERENCE</td>
-			<td class='statut'>#STATUT</td>
+			<td class='etat'>#STATUT</td>
 			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)] ]</td>
 			<td class='descriptif'>
 			<B_detail_commande>
 				<ul>
 				<BOUCLE_detail_commande(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
-					<li>[(#DESCRIPTIF*|typo)]</li>
+					<li>[(#DESCRIPTIF*|typo) ][(#PRIX)]</li>
 				</BOUCLE_detail_commande>
 				</ul>
 			</B_detail_commande>

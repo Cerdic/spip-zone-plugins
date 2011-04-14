@@ -14,15 +14,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'commande_reference' => 'Référence',
 	'commande_statut' => 'Statut',
 	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
-	
-	// D
-	'descriptif' => 'Descriptif',
+	'contenu' => 'Contenu',
+
+	// E
+	'etat' => 'État',
 	
 	// I
 	'info_toutes_commandes' => 'Toutes les commandes',
+
+	// M
+	'montant' => 'Montant',
 	
 	// N
 	'nom_bouton_plugin' => 'Commandes',
+
+	// R
+	'reference' => 'Référence',
 );
 
 ?>
