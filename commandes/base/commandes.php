@@ -1,27 +1,83 @@
 <?php
-/**
- * Plugin commandes pour Spip 2.1
- * Licence GPL 
- * Cyril MARION - (c) 2010 Ateliers CYM http://www.cym.fr
- *
- */
 
+// Sécurité
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+function commandes_declarer_tables_interfaces($interface){
+	// 'spip_' dans l'index de $tables_principales
+	$interface['table_des_tables']['commandes'] = 'commandes';
+	$interface['table_des_tables']['commandes_details'] = 'commandes_details';
+	
+	$interface['table_date']['commandes'] = 'date';
+	
+	$interface['table_titre']['commandes'] = 'numero as titre, "" as lang';
+	
+	return $interface;
+}
 
 function commandes_declarer_tables_principales($tables_principales){
-	// montant payes ou a payer
-	$tables_principales['spip_paniers']['field']['montant']         = 'float default NULL';
-	$tables_principales['spip_paniers']['field']['reference']       = 'varchar(30) not null default ""';
-	$tables_principales['spip_paniers']['field']['date_commande']   = 'datetime not null default "0000-00-00 00:00:00"';
-	$tables_principales['spip_paniers']['field']['date_paiement']   = 'datetime not null default "0000-00-00 00:00:00"';
+	// Table commandes
+	$commandes = array(
+		'id_commande' => 'bigint(21) not null',
+		'reference' => 'varchar(255) not null default ""',
+		'id_auteur' => 'bigint(21) not null default 0',
+		'statut' => 'varchar(25) not null default "attente"',
+		'date' => 'datetime not null default "0000-00-00 00:00:00"',
+		'date_paiement' => 'datetime not null default "0000-00-00 00:00:00"',
+		'date_envoi' => 'datetime not null default "0000-00-00 00:00:00"',
+		'maj' => 'timestamp'
+	);
+	
+	$commandes_cles = array(
+		'PRIMARY KEY' => 'id_commande',
+		'KEY id_auteur' => 'id_auteur'
+	);
+	
+	$tables_principales['spip_commandes'] = array(
+		'field' => &$commandes,
+		'key' => &$commandes_cles,
+		'join'=> array(
+			'id_commande' => 'id_commande'
+		)
+	);
+	
+	// Table commandes_details
+	$commandes_details = array(
+		'id_commandes_detail' => 'bigint(21) not null',
+		'id_commande' => 'bigint(21) not null default 0',
+		'descriptif' => 'text not null default ""',
+		'quantite' => 'int not null default 0',
+		'prix_unitaire_ht' => 'float not null default 0',
+		'taxe' => 'decimal(4,3) not null default 0',
+		'statut' => 'varchar(25) not null default ""',
+		'maj' => 'timestamp'
+	);
+	
+	$commandes_details_cles = array(
+		'PRIMARY KEY' => 'id_commandes_detail',
+		'KEY id_commande' => 'id_commande'
+	);
+	
+	$tables_principales['spip_commandes_details'] = array(
+		'field' => &$commandes_details,
+		'key' => &$commandes_details_cles,
+		'join'=> array(
+			'id_commandes_detail' => 'id_commandes_detail'
+		)
+	);
+
 	return $tables_principales;
 }
 
-function commandes_declarer_tables_auxiliaires($tables_auxiliaires){
-	// montant payes ou a payer
-	$tables_auxiliaires['spip_paniers_liens']['field']['montant']    	  = 'float default NULL';
-	$tables_auxiliaires['spip_paniers_liens']['field']['montant_taxe']    = 'decimal(4,3) default null';
-	$tables_auxiliaires['spip_paniers_liens']['field']['designation']     = 'text not null default ""';
-	return $tables_auxiliaires;
+function commandes_rechercher_liste_des_champs($tables){
+	$tables['commande']['numero'] = 8;
+	return $tables;
+}
+
+function commandes_rechercher_liste_des_jointures($tables){
+	$tables['commande']['auteur']['nom'] = 1;
+	$tables['commande']['commandes_detail']['descriptif'] = 4;
+	return $tables;
 }
 
 ?>

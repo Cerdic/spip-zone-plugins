@@ -2,30 +2,27 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	// A
+	'action_facture' => 'Facture',
+	'action_supprimer' => 'Supprimer',
 
 	// C
-	'confirmer_supprimer_commande' => "Confirmez-vous la suppression de la commande ?",
+	'commande_client' => 'Client',
+	'commande_date' => 'Date de la commande',
+	'commande_date_paiement' => 'Date du paiement',
+	'commande_montant' => 'Montant',
+	'commande_reference' => 'Référence',
+	'commande_statut' => 'Statut',
+	'confirmer_supprimer_commande' => 'Confirmez-vous la suppression de la commande ?',
 	
 	// D
-	'date_commande' => 'Date de la commande',
-	'date_paiement' => 'Date du paiement',
 	'designations' => 'Désignations',
-
-	// F
-	'facture' => 'Facture',
 	
 	// I
-	'info_toutes_commandes' => "Toutes les commandes",
+	'info_toutes_commandes' => 'Toutes les commandes',
 	
 	// N
-	'nom_bouton_plugin' => "Commandes",
-
-	// M
-	'montant' => 'Montant',
-
-	// S
-	'statut' => 'Statut',
-	'supprimer' => 'Supprimer',
+	'nom_bouton_plugin' => 'Commandes',
 );
 
 ?>
