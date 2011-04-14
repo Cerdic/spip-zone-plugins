@@ -50,7 +50,7 @@ function zcore_declarer_url_objets($flux){
  */
 function zcore_styliser($flux){
 	// dans les futures versions de SPIP on pourra faire simplement un define('_ZPIP',true);
-	if (!test_espace_prive()) {
+	if (!test_espace_prive() AND !defined('_ZCORE_EXCLURE_PATH')) {
 		$styliser_par_z = charger_fonction('styliser_par_z','public');
 		$flux = $styliser_par_z($flux);
 	}

@@ -13,6 +13,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_once _DIR_RESTREINT . 'public/styliser_par_z.php';
+
+if (!function_exists('public_styliser_par_z_dist')){
 /**
  * Fonction Page automatique a partir de contenu/xx
  *
@@ -255,5 +258,5 @@ function zcore_echaffaudable($type){
 	else
 		return $echaffaudable[$type] = false;
 }
-
+}
 ?>
