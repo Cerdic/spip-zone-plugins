@@ -100,7 +100,7 @@ function ecrire_fichier_langue_php($dir, $langue, $module, $items, $comm='')
 // Date: ' . date('d-m-Y H:i:s') . '
 // Items: ' . count($items) . '
 
-if (defined(\'_ECRIRE_INC_VERSION\')) return;
+if (!defined(\'_ECRIRE_INC_VERSION\')) return;
 
 $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 ';
