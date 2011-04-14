@@ -2,18 +2,24 @@
        
     [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	    
-	    [(#REM) Rajouter ici la balise de traitement des données appelant le fichiers "tourinfrance_fonctions.php" ?]
-	    
-	    <BOUCLE_flux(TOURINFRANCE_FLUX){id_flux}>
-			[(#ENV**{message_ok}|oui)
-			
-			<div class="cadre cadre-info">
-				#SET{infos_flux, #ARRAY{id_offre, #ID_OFFRE, nom_offre, #NOM_OFFRE, description_offre, #DESCRIPTION_OFFRE, commune, #COMMUNE, datecrea, #DATECREA, datemaj, #DATEMAJ, id_type, #ID_TYPE, id_cat_cam, #ID_CAT_CAM}|serialize}
-						
-				[(#VAL{'../'}|concat{#URL_FLUX|copie_locale{force}}|traiter_donnees_tourinfrance{#ENV{id_flux}, #GET{infos_flux}})]
-			</div>
-			]
-		</BOUCLE_flux>
+    [(#REM) Rajouter ici la balise de traitement des données appelant le fichiers "tourinfrance_fonctions.php" ?]
+    
+    <BOUCLE_flux(TOURINFRANCE_FLUX){id_flux}>
+		[(#ENV**{message_ok}|oui)
+		
+		<div class="cadre cadre-info">
+			#SET{infos_flux, #ARRAY{id_offre, #ID_OFFRE, nom_offre, #NOM_OFFRE, description_offre, #DESCRIPTION_OFFRE, commune, #COMMUNE, datecrea, #DATECREA, datemaj, #DATEMAJ, id_type, #ID_TYPE, id_cat_cam, #ID_CAT_CAM}|serialize}
+					
+			[(#VAL{'../'}|concat{#URL_FLUX|copie_locale{force}}|traiter_donnees_tourinfrance{#ENV{id_flux}, #GET{infos_flux}, true})]
+		</div>
+		]
+		[(#ENV**{message_ok}|non)
+			[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{nouveau}|=={oui}|oui)
+		    	<:tourinfrance:form_nouveau_derniere_etape:>
+		    </p>]
+		]
+	</BOUCLE_flux>
+    
     
     
     [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -32,9 +38,10 @@
                     obligatoire=oui})] 
                     
             [(#ENV{id_flux}|=={nouveau}|non)
-            	[(#INCLURE{fond=formulaires/inc-mappage}{mappage=#ENV{mappage}}{liste_elements=#ENV{liste_elements}}{liste_chps_update=#ENV{liste_chps_update}})]
+            	[(#INCLURE{fond=formulaires/inc-mappage,env})]
             	
             	<input type='hidden' name='id_flux' value='#ENV{id_flux}' />
+            	<input type='hidden' name='nouveau' value='#ENV{nouveau}' />
 	        ]         
             </ul>
             <p class="boutons">

@@ -1,5 +1,5 @@
 <?php
-function traiter_donnees_tourinfrance($url_flux, $id_flux, $infos_flux) {
+function traiter_donnees_tourinfrance($url_flux, $id_flux, $infos_flux, $update_flux=false) {
 
 	if (file_exists($url_flux)) {
 
@@ -8,22 +8,17 @@ function traiter_donnees_tourinfrance($url_flux, $id_flux, $infos_flux) {
 		$tab_infos_flux = unserialize($infos_flux);
 		
 		
-		/*****  Liste des ELEMENTS déclarés   !!!IMPORTANT!!!   *****/
-		/*
-		$listeElements = $xml->xpath("//*[name()='xs:element']");
-		foreach ($listeElements as $element) {
-			$c .= ' - ' . $element->getName() . ' : ' . $element->attributes() . "<br />";
-		}*/
 		
 		/*****  PARCOURS DES OFFRES : <LISTING>  *****/
 		$offres = $xml->xpath('//child::LISTING');
 		
 		
 		
-		$exec = "<b>Flux proposé à la base de données !</b><br />";
-		$exec .= "URL : <i>$url_flux</i><br /><ul>";
+		$exec = "<b>" . _T('tourinfrance:message_flux_propose') . "</b><br />";
+		$exec .= "URL : <i>$url_flux</i><br /><ul class='liste_maj_base'>";
 		
 		$retour_exec = "";
+		
 		
 		for($i=0; $i<count($offres); $i++){
 			
@@ -50,13 +45,22 @@ function traiter_donnees_tourinfrance($url_flux, $id_flux, $infos_flux) {
 			$extra_srlz = serialize($extra);
 			
 			
+			/*****  MODIFICATION DU FLUX DEPUIS ESPACE PRIVE *****/
+			if($i==0 && $update_flux==true){
+				//On change les DATEMAJ pour forcer la mise à jour.
+				$bordereau = strtolower($commun["id_type"]);
+				$nom_table_tourinfrance = "spip_tourinfrance_" . $bordereau;
+				sql_updateq($nom_table_tourinfrance, array('datemaj'=>'00000000000001'), "id_flux=$id_flux");
+			}
+			
+			
 			/*****  INSERER LES DONNEES  *****/	
    			$retour_exec .= inserer_donnees_tourinfrance($id_flux, $commun_srlz, $extra_srlz);
 			
 		}
 		
 		if($retour_exec == ""){
-			$retour_exec = "Aucune modification apportée.";
+			$retour_exec = _T('tourinfrance:message_flux_maj_aucune');
 		}
 		
 		$exec .= $retour_exec . "</ul><br />";
@@ -64,7 +68,7 @@ function traiter_donnees_tourinfrance($url_flux, $id_flux, $infos_flux) {
 	    return $exec;
 	}
 	else{
-		return "$url_flux fichier non trouvé.";
+		return "$url_flux " . _T('tourinfrance:message_fichier_introuvable');
 	}
 	
 }
@@ -166,7 +170,7 @@ function inserer_donnees_tourinfrance($id_flux, $commun_srlz, $extra_srlz) {
 		//INSERTION TOURINFRANCE
 		$id_tourinfrance = sql_insertq($nom_table_tourinfrance, $champ_tourinfrance_type);
 		
-		$retour = "<li>ADDED : <b>Article n°" . $id_article . "</b> : " . $id_offre . " - " . $nom_offre . "</li>";
+		$retour = "<li>" . _T('tourinfrance:message_ajoute') . " : <b>" . _T('article') . " n°" . $id_article . "</b> : " . $id_offre . " - " . $nom_offre . "</li>";
 
 	}
 	
@@ -184,7 +188,7 @@ function inserer_donnees_tourinfrance($id_flux, $commun_srlz, $extra_srlz) {
 		//MODIFICATION TOURINFRANCE
 		sql_updateq($nom_table_tourinfrance, $champ_tourinfrance_type, "id_offre='" . $id_offre . "'");
 		
-		$retour = "<li>MODIFIED : <b>Article n°" . $id_article . "</b> : " . $id_offre . " - " . $nom_offre . "</li>";
+		$retour = "<li>" . _T('tourinfrance:message_modifie') . " : <b>" . _T('article') . " n°" . $id_article . "</b> : " . $id_offre . " - " . $nom_offre . "</li>";
 
 	}
 

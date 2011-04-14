@@ -20,13 +20,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'editer_flux_nouveau' => 'Ajouter un nouveau flux',
 	
-	// F	
+	// F
+	'form_flux_vide' => 'Le flux propos&eacute; est vide ou ne correspond pas aux crit&egrave;res Tourinfrance.',
+	'form_info_obligatoire' => 'Cette information est obligatoire !',
+	'form_message_traiter_erreur' => 'Une erreur s\'est produite lors de l\'ajout.',
+	'form_message_traiter_ok' => 'Flux modifi&eacute; avec succ&egrave;s.',
+	'form_message_verifier_erreur' => 'Une erreur est pr&eacute;sente dans votre saisie.',
+	'form_nouveau_derniere_etape' => 'Derni&egrave;re &eacute;tape : Veuillez proc&eacute;der au mappage des donn&eacute;es avec pr&eacute;caution, pour terminer l\'ajout de votre Flux.',
 
 	// I
+	'info_ajouter_nouveau' => 'Ajouter un nouveau flux :',
 	'info_gauche_numero_flux' => 'Flux num&eacute;ro :',
 	'info_modifier_flux' => 'Modifier un flux :',
-	'info_ajouter_nouveau' => 'Ajouter un nouveau flux :',
-	//'item_nouveau_flux' => 'Modifier un flux',
 
 	// L
 	'label_actions' => 'Actions',
@@ -36,6 +41,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'mappage' => 'Mappage :',
+	'message_ajoute' => 'AJOUT&Eacute;',
+	'message_fichier_introuvable' => 'fichier non trouv&eacute;.',
+	'message_flux_maj_aucune' => 'Aucune modification apport&eacute;e.',
+	'message_flux_propose' => 'Flux propos&eacute; &agrave; la base de donn&eacute;es !',
+	'message_modifie' => 'MODIFI&Eacute;',
+	
 	// O
 	
 	// P

@@ -11,6 +11,7 @@
        
 [(#INCLURE{fond=prive/editer/flux,
         id_flux=#GET{id_flux},
+        nouveau=#ENV{nouveau,non},
         icone_retour=[(#ENV{retour,#GET{retour}}
                 |icone{<:icone_retour:>, #CHEMIN{img/tourinfrance.gif}, #LANG_LEFT })],
         url_flux=#GET{url_flux},

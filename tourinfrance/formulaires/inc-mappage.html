@@ -6,7 +6,7 @@
 <BOUCLE_mapp(POUR){tableau #ENV{mappage}}>
 		[(#SAISIE{selection, #CLE,
                 label=#CLE,
-                defaut=#VALEUR,
                 obligatoire=oui,
+                defaut=[(#ENV{#CLE}|sinon{#VALEUR})],
 				datas=#ENV{liste_elements}})] 
 </BOUCLE_mapp>

@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/actions');
 include_spip('inc/editer');
-function formulaires_editer_flux_charger_dist($id_flux='nouveau'){
+function formulaires_editer_flux_charger_dist($id_flux='nouveau', $nouveau='non'){
 
         /***  NOUVEAU  ***/
         if($id_flux=='nouveau'){
@@ -25,7 +25,7 @@ function formulaires_editer_flux_charger_dist($id_flux='nouveau'){
 	        $liste_elements_tab = liste_elements($map['url_flux']);
 	        
 	        //Pour chaque colonne de la ligne : on mappe dans un tableau
-	        $i=0;
+	        $i=0;	//Compteur pour EVITER les premiers champs de la table.
 	        foreach( $map as $cle => $valeur ){
 	        	if($i>3){
 		        	$mappage_tab[$cle] = $valeur;
@@ -37,6 +37,7 @@ function formulaires_editer_flux_charger_dist($id_flux='nouveau'){
 		        $valeurs[$cle] = $valeur;
 	        	$i++;
 	        }
+			$valeurs["nouveau"] = $nouveau;
 			$valeurs["mappage"] = $mappage_tab;
 			$valeurs["liste_chps_update"] = $liste_chps_update;
 			$valeurs["liste_elements"] = $liste_elements_tab;
@@ -45,7 +46,7 @@ function formulaires_editer_flux_charger_dist($id_flux='nouveau'){
 	    return $valeurs;
         
 }
-function formulaires_editer_flux_verifier_dist($id_flux='nouveau'){
+function formulaires_editer_flux_verifier_dist($id_flux='nouveau', $nouveau='non'){
         
         $erreurs = array();
         
@@ -53,57 +54,50 @@ function formulaires_editer_flux_verifier_dist($id_flux='nouveau'){
         if($id_flux=='nouveau'){
 	    	foreach(array('url_flux','nom_flux') as $champ) {
 		        if (!$_REQUEST[$champ] || ($champ=='url_flux' && $_REQUEST[$champ]=='http://')) {
-		            $erreurs[$champ] = "Cette information est obligatoire !";
+		            $erreurs[$champ] = _T('tourinfrance:form_info_obligatoire');
 		        }
 		    }
         }
         
         /***  UPDATE  ***/
         else{
-        	foreach(array('nom_flux') as $champ) {
+        
+	    	$liste_chps_update = unserialize($_REQUEST["chps_updates"]);
+	    	
+        	foreach($liste_chps_update as $champ) {
 		        if (!$_REQUEST[$champ]) {
-		            $erreurs[$champ] = "Cette information est obligatoire !";
+		            $erreurs[$champ] =  _T('tourinfrance:form_info_obligatoire');
 		        }
 		    }
 		    
-	    	$type_flux = trouver_type_flux($_REQUEST["id_flux"], $_REQUEST['id_type']);
-	    	if(!$type_flux) $champs['vide'] = $erreurs['message_erreur'] .= "Le flux propos&eacute; est vide ou ne correspond pas aux crit&egrave;res Tourinfrance.<br />";
+	   		if (!count($erreurs)) {
+	    		$type_flux = trouver_type_flux($_REQUEST["id_flux"], $_REQUEST['id_type']);
+	    		if(!$type_flux) $erreurs['message_erreur'] .=  _T('tourinfrance:form_flux_vide') . "<br />";
+	    	}
         }
         
 	    if (count($erreurs)) {
-	        $erreurs['message_erreur'] .= "Une erreur est pr&eacute;sente dans votre saisie.";
-	        //$erreurs['id_flux'] = $id_flux;
+	        $erreurs['message_erreur'] .= _T('tourinfrance:form_message_verifier_erreur');
 	    }
    		return $erreurs;
    		
 }
-function formulaires_editer_flux_traiter_dist($id_flux='nouveau'){
-        //return formulaires_editer_objet_traiter('flux', $id_flux, '', '', $retour, '');
+function formulaires_editer_flux_traiter_dist($id_flux='nouveau', $nouveau='non'){
     
         /***  NOUVEAU  ***/
         if ($id_flux=='nouveau'){
-        	
         
 	        if ($id_flux = sql_insertq('spip_tourinfrance_flux', array(
 	        		'nom_flux'=>$_REQUEST['nom_flux'],
 	        		'url_flux'=>$_REQUEST['url_flux']
 	        	))) {
-				//$retour['liste_elements'] = $liste_elements;
-				//$retour['id_flux'] = $id_flux;
-	   			//$retour['editable'] = true;
 	   			
-		    	$retour['redirect'] = "?exec=flux_edit&id_flux=" . $id_flux;
-	   			//$retour['message_ok'] = "Flux ajout&eacute; avec succ&egrave;s.<br />Proc&eacute;dez au mappage avec pr&eacute;caution et enregistrer.";
-		    } else {
-		    	$retour['message_erreur'] = "Une erreur s'est produite lors de l'ajout.";
+		    	$retour['redirect'] = "?exec=flux_edit&nouveau=oui&id_flux=" . $id_flux;
+		    }
+		    else {
+		    	$retour['message_erreur'] = _T('tourinfrance:form_message_traiter_erreur');
 		    }
 		  
-		    
-		    //$pop = array('nom_flux'=>_request('nom_flux'),'url_flux'=>_request('url_flux'));
-		    
-	   		//$retour['editable'] = true;
-		    //$retour['redirect'] = "?exec=flux_edit&id_flux=" . 1;
-	        //$retour['message_ok'] = "Flux ajout&eacute; avec succ&egrave;s.";
 	    }
 	    
         /***  UPDATE  ***/
@@ -121,16 +115,11 @@ function formulaires_editer_flux_traiter_dist($id_flux='nouveau'){
 	        }
 	        
 	        $champs['type_flux'] = $type_flux;
-	        //$champs['urlll_flux'] = $url_flux;
-	        //$champs['typeid_flux'] = $_REQUEST['id_type'];
 	        
 			//UPDATE : Mise a jour
 			sql_updateq('spip_tourinfrance_flux', $champs, 'id_flux=' . $_REQUEST["id_flux"]);
 
-
-	   		$retour['editable'] = true;
-	   		$retour['message_ok'] = "Flux modifi&eacute; avec succ&egrave;s.";
-	   		//$retour['redirect'] = "?exec=flux_voir&id_flux=" . $_REQUEST["id_flux"];
+	   		$retour['message_ok'] = _T('tourinfrance:form_message_traiter_ok');
 	    }
 	    
 	    return $retour;

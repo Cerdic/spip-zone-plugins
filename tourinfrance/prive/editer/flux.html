@@ -5,7 +5,6 @@
         <h1>(#ENV{nom_flux,<:tourinfrance:texte_nouveau_flux:>})</h1>
 		[<a href="(#ENV{url_flux})">[(#ENV{url_flux}|couper{60, '...'})]</a>]
 		]
-	    
 	</div>
-	[(#FORMULAIRE_EDITER_FLUX{#ENV{id_flux,nouveau},#ENV{redirect}})]
+	[(#FORMULAIRE_EDITER_FLUX{#ENV{id_flux,nouveau},#ENV{nouveau,non},#ENV{redirect}})]
 </div>

@@ -16,6 +16,9 @@
 		<icone>img/tourinfrance.gif</icone>
 		<titre>Tourinfrance</titre>
 	</bouton>
+	
+	<fonctions>tourinfrance_fonctions.php</fonctions>
+	
     <pipeline>
         <nom>declarer_tables_interfaces</nom>
         <inclure>base/tourinfrance_table.php</inclure>
@@ -24,6 +27,15 @@
         <nom>declarer_tables_principales</nom>
         <inclure>base/tourinfrance_table.php</inclure>
 	</pipeline>
-	<fonctions>tourinfrance_fonctions.php</fonctions>
+	
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>tourinfrance_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+  		<nom>header_prive</nom>
+  		<inclure>tourinfrance_pipelines.php</inclure>
+ 	</pipeline>
+ 	
 	<categorie>edition</categorie>
 </plugin>
