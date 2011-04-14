@@ -1,126 +1,31 @@
 #CACHE{0}
-<BOUCLE_facture(PANIERS){id_panier}>
+<BOUCLE_facture(COMMANDES){id_commande}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <INCLURE{fond=inclure/head}>
-<style type="text/css">
-#contenu 		{ height:380px; width:884px; }
-#bas 			{ width:894px; padding-bottom:10px; border-bottom:8px solid #af0c16; }
-#site 			{ border-bottom:20px solid #d1d1d1; }
-
-table#tableau_facture {width:70%;}
-table#tableau_facture td {padding: 5px;}
-table#tableau_facture .gauche {text-align:left; width:80%}
-table#tableau_facture .droite {text-align:right; width:20%}
-table#tableau_facture .pair {background: #FFEAEA}
-#titre_compte {font: bold 25px arial; padding-top: 10px;}
-.gras {font: bold 14px arial; }
-.normal {font-weight: normal; }
-.petit {font: normal 14px arial; }
-</style>
+<link rel="stylesheet" href="#PRODUIRE_CSS_FOND{fond=css/factures.css}" type="text/css" media="projection, screen, tv" />
 <body class="page_facture">
-<div id="site">
-	<div id="bandeau_haut">
-		<div id="le_c_maj">
-			<a href="#URL_SITE_SPIP">
-			<img src="#CHEMIN{images/gif/le_c_maj.gif}" width="88" height="118" alt="logo Concurrences" /></a>
-		</div>
-		
-		<div id="drap_bulletin">
-			<img src="#CHEMIN{images/gif/drapeaux.gif}" width="88" height="118" alt="drapeaux" />
-		</div>
-		
-		<div id="titre_site2">Concurrences<br />
-			<div id="titre02">Revue des droits de la concurrence</div>
-		</div>
-		
-		<div id="titre_gche">
-			e-Competitions<br />
-			<div style="font-size: 16px">National Competition Laws e-bulletin</div>
-		</div>
+<div id="page">
+	<div id="entete">
+		[(#INCLURE{fond=inclure/facture-entete, env})]
 	</div>
+	
 	<div id="contenu">
+		<div id="identifiant">[(#INCLURE{fond=inclure/facture-identifiant, env})]</div>
+		<div id="de">[(#INCLURE{fond=inclure/facture-de, env})]</div>
+		<div id="a">[(#INCLURE{fond=inclure/facture-a, env})]</div>
+		<br class='nettoyeur' />
+		<div id="details">[(#INCLURE{fond=inclure/facture-details, env})]</div>
+		<div id="conditions">[(#INCLURE{fond=inclure/facture-conditions, env})]</div>
+		<div id="reglements">[(#INCLURE{fond=inclure/facture-reglements, env})]</div>
+		<br class='nettoyeur' />
+	</div><!-- #contenu -->
+	
+	<div id="pied">
+		[(#INCLURE{fond=inclure/facture-pied, env})]
+	</div><!-- #pied -->
 
-		<div id="logo_rub"><img src="#CHEMIN{IMG/rubon0.gif}" width="88" height="380" alt="logo revue Concurrence" /></div>
-
-		<div id="int_commande">
-		
-			<div id="titre_compte" style="margin: auto; text-align: center;">Invoice / <span class="normal">Facture</span></div>
-			
-			<div id="client"> 
-				<div class="client_style">
-					<BOUCLE_auteur(AUTEURS){id_auteur}>
-					<BOUCLE_orga(ORGANISATIONS){id_auteur}>
-					#NOM<br />
-					</BOUCLE_orga>
-						<BOUCLE_contact(CONTACTS){id_auteur}>
-						#NOM<br />
-						</BOUCLE_contact>
-					<//B_orga>
-					<BOUCLE_ad(ADRESSES){id_auteur}{0,1}>
-						#VOIE<br />
-						#CODE_POSTAL #VILLE<br />
-						#PAYS<br />
-					</BOUCLE_ad>
-					</BOUCLE_auteur>
-				</div>
-			</div><!-- fin de #client -->
-
-			<div id="pdt">
-				<div class="pdt_style">
-					Ref.&nbsp;#REFERENCE<br />
-					Date:&nbsp;[(#DATE_COMMANDE|affdate)]<br />
-				</div>
-			</div>
-
-		
-			<div> 
-				<table id="tableau_facture">
-					<tr>
-						<th class="impair gauche">Designation /<span class="normal"> Achat</span></th>
-						<th class="impair droite">Amount / <span class="normal">Montant (&euro;)</span></th>
-					</tr>
-					<BOUCLE_itens(spip_paniers_liens){id_panier}>
-					<tr>
-						<td class="pair designation gauche">[(#DESIGNATION|typo)]</td>
-						<td class="pair montant droite">#MONTANT</td>
-						#SET{tva, #MONTANT_TAXE}
-					</tr>
-					</BOUCLE_itens>
-					
-					<tr>
-						<td class="impair designation droite"><span class="gras">Price w/o VAT</span> / <span class="petit">Prix HT</span></td>
-						<td class="impair montant droite">#MONTANT</td>
-					</tr>
-										
-					<BOUCLE_auteur_pays(AUTEURS){id_auteur}>
-						<BOUCLE_adresse(ADRESSES){id_auteur}>
-							[(#PAYS|!={70})
-								#SET{tva, 0}
-							]
-						</BOUCLE_adresse>
-					</BOUCLE_auteur_pays>
-
-					<tr>
-						<td class="pair designation droite"><span class="gras">VAT</span> / <span class="petit">TVA</span></td>
-						<td class="pair montant droite">#GET{tva}</td>
-					</tr> 
-					<tr>
-						<td class="impair designation droite"><span class="gras">Total price incl. VAT </span>/ <span class="petit">Total TTC</span></td>
-						<td class="impair montant droite">[(#MONTANT|mult{#GET{tva}|plus{1}}|round{2})]</td>
-					</tr>
-				</table>
-			</div>	
-		
-		<div id="bas"> 
-			<div id="siren">
-				<b>Institute of Competition Law / Institut de droit de la concurrence - 25, rue Balard - 75015 Paris - FRANCE</b><br />
-				webmasterATconcurrencesDOTcom - http://www.concurrences.com <br />
-				SARL au capital de 1000 &euro; - N&ordm; VAT : FR22 478703507
-			</div>
-		</div><!-- fin de #bas -->
-	</div><!-- fin de #contenu -->
-</div><!-- fin de #site -->
+</div><!-- #page -->
 </body>
 </html>
 </BOUCLE_facture>

@@ -1,0 +1,40 @@
+[(#REM)
+	Tous les details du destinataire de la facture
+	Nom de l'orga, contact, adresse...
+]
+<BOUCLE_commande(COMMANDES){id_commande}>
+<BOUCLE_auteur(AUTEURS){id_auteur}{tout}>
+<div id="bloc-a">
+
+	<B_contact>
+	<p class='adresse'>	
+	<BOUCLE_contact(CONTACTS){id_auteur}>
+		<h4>#NOM #PRENOM</h4>
+	</BOUCLE_contact>
+	</p>
+	</B_contact>
+		<h4>#NOM</h4>
+	<//B_contact>
+	
+	<B_adresse>
+	<p class='adresse'>	
+	<BOUCLE_adresse(ADRESSES){id_auteur}>
+		[(#VOIE)<br />]
+		[(#CODE_POSTAL)][(#VILLE)]<br />
+		<BOUCLE_pays(PAYS){code}>#PAYS</BOUCLE_pays>
+	</BOUCLE_adresse>
+	</p>
+	</B_adresse>
+
+	
+	<B_telephones>
+	<p class='telephone'>
+	<BOUCLE_telephones(NUMEROS){id_auteur}{'<br />'}>
+		#NUMERO
+	</BOUCLE_telephones>
+	</p>
+	</B_telephones>
+	
+</div>
+</BOUCLE_auteur>
+</BOUCLE_commande>

@@ -1,0 +1,41 @@
+[(#REM)
+	Détails de la commande :
+	- listing des postes avec prix
+	- totaux
+]
+<BOUCLE_commande(COMMANDES){id_commande}>
+<div id="bloc-details">
+<table>
+<B_liste>
+	<thead>
+	<tr>
+		<th class="descriptif"><:commandes:designation:></th>
+		<th class="prix_ht"><:prix:label_prix_ht:></th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_liste(COMMANDES_DETAILS){id_commande}>
+	<tr>
+		<td class="descriptif">[(#DESCRIPTIF*|typo)]</td>
+		<td class="prix_ht">[(#PRIX_HT)]</td>
+	</tr>
+</BOUCLE_liste>
+	</tbody>
+</B_liste>
+	<tfoot>
+	<tr>
+		<td class="def"><:prix:label_total_ht:></td>
+		<td class="prix">[(#PRIX_HT)]</td>
+	</tr>		
+	<tr>
+		<td class="def"><:prix:label_taxes:></td>
+		<td class="prix">[(#PRIX|moins{#PRIX_HT})]</td>
+	</tr>		
+	<tr class='total'>
+		<td class="def"><:prix:label_total_ttc:></td>
+		<td class="prix">[(#PRIX)]</td>
+	</tr>		
+	</tfoot>
+</table>
+</div>
+</BOUCLE_commande>

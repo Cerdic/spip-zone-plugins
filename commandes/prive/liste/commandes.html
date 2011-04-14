@@ -15,6 +15,7 @@
 			<th class='id'>[(#TRI{id_panier,<:info_numero_abbreviation:>,ajax})]</th>
 			<th class='reference'>[(#TRI{reference,<:commandes:reference:>,ajax})]</th>
 			<th class='etat'>[(#TRI{statut,<:commandes:etat:>,ajax})]</th>
+			<th class='qui'><:commandes:qui:></th>
 			<th class='date'>[(#TRI{date,<:commandes:date_commande:>,ajax})]</th>
 			<th class='date_paiement'>[(#TRI{date_paiement,<:commandes:date_paiement:>,ajax})]</th>
 			<th class='descriptif'><:commandes:contenu:></th>
@@ -31,6 +32,7 @@
 			<td class='id'>#ID_COMMANDE</td>
 			<td class='reference'>#REFERENCE</td>
 			<td class='etat'>#STATUT</td>
+			<td class='qui'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#INFO_NOM{auteur, #ID_AUTEUR}</a></td>
 			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
 			<td class='date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)] ]</td>
 			<td class='descriptif'>
