@@ -235,4 +235,45 @@ function tri_champ_select($t){
 	return "''";
 }
 
+/**
+ * Rediriger une page suivant une autorisation,
+ * et ce, n'importe où dans un squelette, même dans les inclusions.
+ *
+ * @param bool $ok Indique si l'on doit rediriger ou pas
+ * @param string $url Adresse vers laquelle rediriger
+ * @param int $statut Statut HTML avec lequel on redirigera
+ */
+function sinon_interdire_acces($ok=false, $url='', $statut=0){
+	if ($ok) return '';
+	
+	// vider tous les tampons
+	while (ob_get_level())
+		ob_end_clean();
+	
+	include_spip('inc/headers');
+	$statut = intval($statut);
+	
+	// Si aucun argument on essaye de deviner quoi faire
+	if (!$url and !$statut){
+		// Si on est dans l'espace privé, on génère du 403 Forbidden
+		if (test_espace_prive()){
+			http_status(403);
+			$echec = charger_fonction('403','exec');
+			$echec();
+		}
+		// Sinon on redirige vers une 404
+		else{
+			http_status(404);
+			echo recuperer_fond('404');
+		}
+	}
+	// Sinon on suit les directives indiquées dans les deux arguments
+	else{
+		if ($statut) http_status($statut);
+		if ($url) redirige_par_entete($url);
+	}
+	
+	exit;
+}
+
 ?>
