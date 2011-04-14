@@ -484,9 +484,9 @@ $spiplistes_items = array(
 	$spiplistes_items[_SPIPLISTES_LIST_PUB_MONTHLY]['nav_t'] = _T('spiplistes:Listes_1_du_mois');
 	$spiplistes_items[_SPIPLISTES_LIST_PUB_MONTHLY]['tab_t'] = _T('spiplistes:Liste_diffusee_le_premier_de_chaque_mois');
 	
-	$spiplistes_version = $meta['spiplistes_version'];
+	$spiplistes_version = isset($meta['spiplistes_version'])?$meta['spiplistes_version']:"";
 	$spiplistes_real_version = spiplistes_real_version_get(_SPIPLISTES_PREFIX);
-	$spiplistes_base_version = $meta['spiplistes_base_version'];
+	$spiplistes_base_version = isset($meta['spiplistes_base_version'])?$meta['spiplistes_base_version']:"";
 	$spiplistes_real_base_version = spiplistes_real_version_base_get(_SPIPLISTES_PREFIX);
 	
 	if(
