@@ -47,14 +47,14 @@ function exec_plan(){
 		
 		$classe = _request('classe'); 
 		if (!$classe) $classe = '%';
-		$actif = _request('actif');
-		if (!$actif) $actif = 'oui'; 
+		$active = _request('active');
+		if ($active=='') $active = true; /* si on n'a pas de filtre active dans l'environnement, on affiche par defaut les comptes actifs */
 		
 		echo '<table width="100%">';
 		echo '<tr>';
 		echo '<td>';
 		
-		$query = sql_select('DISTINCT classe, actif', 'spip_asso_plan', "actif=". sql_quote($actif),'', "classe");
+		$query = sql_select('DISTINCT classe, active', 'spip_asso_plan', "active=". sql_quote($active),'', "classe");
 		
 		while ($data = sql_fetch($query)) {
 			if ($data['classe']==$class)	{echo ' <strong>'.$data['classe'].' </strong>';}
@@ -65,16 +65,16 @@ function exec_plan(){
 		echo '</td>';
 		
 		echo '<td style="text-align:right;">';
-		
-		//Filtre actif
+
+		//Filtre active
 		echo '<form method="post" action="'.$url_plan.'"><div>';
 		echo '<input type="hidden" name="classe" value="'.$classe.'" />';
-		echo '<select name ="actif" class="fondl" onchange="form.submit()">';
-		echo '<option value="oui" ';
-		if ($actif=='oui') {echo ' selected="selected"';}
+		echo '<select name ="active" class="fondl" onchange="form.submit()">';
+		echo '<option value="1" ';
+		if ($active) {echo ' selected="selected"';}
 		echo '> '._T('asso:plan_libelle_comptes_actifs').'</option>';
-		echo '<option value="non" ';
-		if ($actif=='non') {echo ' selected="selected"';}
+		echo '<option value="0" ';
+		if (!$active) {echo ' selected="selected"';}
 			echo '> '._T('asso:plan_libelle_comptes_desactives').'</option>';
 		echo '</select>';
 		echo '</div></form>';
@@ -92,7 +92,7 @@ function exec_plan(){
 		echo '<th>' . _T('asso:date') . "</th>\n";
 		echo '<th colspan="2" style="text-align:center;">' . _T('asso:action') . "</th>\n";
 		echo'  </tr>';
-		$query = sql_select('*', 'spip_asso_plan', "classe LIKE " . sql_quote($classe) ." AND actif=" . sql_quote($actif),'', "classe, code" );
+		$query = sql_select('*', 'spip_asso_plan', "classe LIKE " . sql_quote($classe) ." AND active=" . sql_quote($active),'', "classe, code" );
 		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['classe'].'</td>';
@@ -102,7 +102,7 @@ function exec_plan(){
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
 			echo '<td class="arial11 border1">'.association_datefr($data['date_anterieure']).'</td>';
 			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_plan.'&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';
-			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_plan.'&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
+			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_edit_plan.'&id_plan='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'edit-12.gif" title="Modifier"></a></td>';
 			echo'  </tr>';
 		}     
 		echo'</table>';

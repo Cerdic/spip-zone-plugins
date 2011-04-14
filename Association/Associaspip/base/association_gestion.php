@@ -195,4 +195,41 @@ function association_maj_46392() /* repare l'erreur commise sur la maj 43909 */
 
 $GLOBALS['association_maj'][46392] = array(array('association_maj_46392'));
 
+function association_maj_46779()
+{
+	global $association_tables_principales;
+	/* avant d'eliminer reference de la table spip_asso_plan, on recopie sa valeur(si non null) dans le champ commentaires */
+	$rows = sql_select("id_plan, reference, commentaire", 'spip_asso_plan', "reference <> ''");
+	while ($row = sql_fetch($rows)) {
+		$commentaire = $row['commentaire']?$row['commentaire']." - ".$row['reference']:$row['reference'];
+		sql_updateq('spip_asso_plan',
+			array('commentaire' => $commentaire),
+			"id_plan=".$row['id_plan']);
+	}
+	sql_alter("TABLE spip_asso_plan DROP reference");
+
+	/* modification du type de direction, on ajoute une troisieme valeur a l'enumeration, on renomme direction en type_op essentiellement
+	pour des raisons de compatibilite avec les differentes bases de donnees supportees par SPIP (impossible d'utiliser ALTER COLUMN ou MODIFY)*/
+	sql_alter("TABLE spip_asso_plan ADD type_op ENUM('credit','debit','multi') NOT NULL default 'multi'");	
+	sql_update('spip_asso_plan', array('type_op' => 'direction'));
+	sql_alter("TABLE spip_asso_plan DROP direction");
+
+	/* transforme actif en booleen plutot que texte oui/non, et renomme pour la meme raison en active */
+	sql_alter("TABLE spip_asso_plan ADD active BOOLEAN default 1");
+	sql_update('spip_asso_plan', array('active' => 0), "actif='non'");
+	sql_alter("TABLE spip_asso_plan DROP actif");
+
+	/* avant d'eliminer don de la table spip_asso_ventes, on recopie sa valeur(si non null) dans le champ commentaires */
+	$rows = sql_select("id_vente, don, commentaire", 'spip_asso_ventes', "don <> ''");
+	while ($row = sql_fetch($rows)) {
+		$commentaire = $row['commentaire']?$row['commentaire']." - ".$row['don']:$row['don'];
+		sql_updateq('spip_asso_ventes',
+			array('commentaire' => $commentaire),
+			"id_vente=".$row['id_vente']);
+	}
+	sql_alter("TABLE spip_asso_ventes DROP don");
+	
+}
+
+$GLOBALS['association_maj'][46779] = array(array('association_maj_46779'));
 ?>

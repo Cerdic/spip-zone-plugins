@@ -76,7 +76,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 				. '</select></li>';
 				if ($unique==false) {
 					$res .= '<li class="editer_montant_dest['.$idIndex.']"><input name="montant_dest['.$idIndex.']" value="'
-					. association_nbrefr($destMontant)
+					. association_nbrefr(association_recupere_montant($destMontant))
 					. '" type="text" id="montant_dest['.$idIndex.']" /></li>'
 					. "<button class='destButton' type='button' onClick='addFormField(); return false;'>+</button>";
 					if ($idIndex>1)	{
@@ -109,26 +109,10 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 	return $res;
 }
 
-/* callback pour filtrer tout $_POST et ne recuperer que les destinations */
-function destination_post_filter($var)
-{
-	if (preg_match ('/^destination_id/', $var)>0) return TRUE;
-	return FALSE;
-}
-
 /* Ajouter une operation dans spip_asso_comptes ainsi que si necessaire dans spip_asso_destination_op */
 function association_ajouter_operation_comptable($date, $recette, $depense, $justification, $imputation, $journal, $id_journal)
 {
 	include_spip('base/association');		
-
-	/* TODO: enlever ces verif quand dons et ventes seront passes en CVT */
-	/* on verifie les valeurs de recette et depense: positif et pas d'entree recette et depense simultanees */
-	if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0))
-	{
-		include_spip('inc/minipres');
-		echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_recette_depense').'<br/><h1><a href="'.str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']).'">'._T('asso:bouton_retour').'</a><h1>');
-		exit;
-	}
 
 	$id_compte = sql_insertq('spip_asso_comptes', array(
 		    'date' => $date,
@@ -154,15 +138,6 @@ function association_modifier_operation_comptable($date, $recette, $depense, $ju
 {
 	include_spip('base/association');		
 
-	/* TODO: enlever ces verif quand dons et ventes seront passes en CVT */
-	/* on verifie les valeurs de recette et depense: positif et pas d'entree recette et depense simultanees */
-	if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0))
-	{
-		include_spip('inc/minipres');
-		echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_recette_depense').'<br/><h1><a href="'.str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']).'">'._T('asso:bouton_retour').'</a><h1>');
-		exit;
-	}
-	
 	/* Si on doit gerer les destinations */
 	if ($GLOBALS['association_metas']['destinations']=="on")
 	{
@@ -220,7 +195,7 @@ function association_verifier_montant_destinations($montant_attendu)
 				$err = _T('asso:erreur_destination_dupliquee');
 			}
 
-			$total_destination += floatval(preg_replace("/,/",".",$toutesDestinationsMontants[$id])); /* les montants sont dans un autre tableau aux meme cles */
+			$total_destination += association_recupere_montant($toutesDestinationsMontants[$id]); /* les montants sont dans un autre tableau aux meme cles */
 		}
 	
 		/* on verifie que la somme des montants des destinations correspond au montant attendu */
@@ -231,8 +206,8 @@ function association_verifier_montant_destinations($montant_attendu)
 	} else { /* une seule destination, le montant peut ne pas avoir ete precise, dans ce cas pas de verif, c'est le montant attendu qui sera entre dans la base */
 		/* quand on a une seule destination, l'id dans les tableaux est forcement 1 par contruction de l'editeur */
 		if ($toutesDestinationsMontants[1]) {
-			$montant = floatval(preg_replace("/,/",".",$toutesDestinationsMontants[1]));
-			/* on verifie que le montant indique correspond au montant de l'operation($recette+$depense) dont l'un des deux est egal a 0 */
+			$montant = association_recupere_montant($toutesDestinationsMontants[1]);
+			/* on verifie que le montant indique correspond au montant attendu */
 			if ($montant_attendu != $montant) {
 				$err = _T('asso:erreur_montant_destination');
 			}
@@ -259,63 +234,19 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 	$toutesDestinations = _request('id_dest');
 	$toutesDestinationsMontants = _request('montant_dest');
 
-	/* TODO: enlever ces verif quand dons et ventes seront passes en CVT */
-	/* on verifie que le montant des destinations correspond au montant global et qu'il n'y a pas deux fois la meme destination (uniquement si on a plusieurs destinations) */
-	$total_destination = 0;
-	$id_inserted = array();
-
 	if (count($toutesDestinations) > 1) {
-		foreach ($toutesDestinations as $id => $id_destination)
-		{		
-			/* on verifie qu'on n'a pas deja insere une destination avec cette id */
-			if (!array_key_exists($id_destination,$id_inserted)) {
-				$id_inserted[$id_destination]=0;
-			}
-			else {/* on a deja insere cette destination: erreur */
-				include_spip('inc/minipres');
-				echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_destination_dupliquee').'<br/><h1><a href="'.str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']).'">'._T('asso:bouton_retour').'</a><h1>');
-				exit;
-			}
-
-			$total_destination += floatval(preg_replace("/,/",".",$toutesDestinationsMontants[$id])); /* le tableau des montants a des cles indentique a celui des id */
-		}
-	
-		/* on verifie que la somme des montants des destinations correspond au montant de l'operation($recette+$depense) dont l'un des deux est egal a 0 */
-		if ($recette+$depense != $total_destination) {
-			include_spip('inc/minipres');
-			echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_montant_destination').'<br/><h1><a href="'.str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']).'">'._T('asso:bouton_retour').'</a><h1>');
-			exit;
-		}
-
-		/* Pas d'erreur, on insere dans la base */
-		foreach ($toutesDestinations as $id => $id_destination)
-		{
-			$montant = floatval(preg_replace("/,/",".",$toutesDestinationsMontants[$id]));	/* le tableau des montants a des cles indentique a celui des id */
+		foreach ($toutesDestinations as $id => $id_destination)	{
+			$montant = association_recupere_montant($toutesDestinationsMontants[$id]);	/* le tableau des montants a des cles indentique a celui des id */
 			sql_insertq('spip_asso_destination_op', array(
 			    'id_compte' => $id_compte,
 			    'id_destination' => $id_destination,
 			    $attribution_montant => $montant));
 		}
-	} else { /* une seule destination, le montant peut ne pas avoir ete precise, dans ce cas on entre directement le total recette+depense */
-		/* par construction de l'editeur, si il y a une seule destination, l'id dans les tableaux destination_id et montant_destination_id est egal a 1 */
-		if ($toutesDestinationsMontants[1]) {
-			$montant = floatval(preg_replace("/,/",".",$toutesDestinationsMontants[1]));
-			/* TODO: enlever ces verif quand dons et ventes seront passes en CVT */	
-			/* on verifie que le montant indique correspond au montant de l'operation($recette+$depense) dont l'un des deux est egal a 0 */
-			if ($recette+$depense != $montant) {
-			include_spip('inc/minipres');
-			echo minipres(_T('asso:erreur_titre'),_T('asso:erreur_montant_destination').'<br/><h1><a href="'.str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']).'">'._T('asso:bouton_retour').'</a><h1>');
-			exit;
-			}
-		}
-		else { /* pas de montant indique, on recupere directement celui de l'operation */
-			$montant = $depense+$recette;
-		}
-		
+	} else { /* une seule destination, le montant peut ne pas avoir ete precise, on entre directement le total recette+depense */
 		sql_insertq('spip_asso_destination_op', array(
 		    'id_compte' => $id_compte,
 		    'id_destination' => $toutesDestinations[1],
-		    $attribution_montant => $montant));
+		    $attribution_montant => $depense+$recette));
 	}
 }
 ?>

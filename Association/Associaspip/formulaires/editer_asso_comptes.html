@@ -4,57 +4,45 @@
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<h3 class="legend"><:asso:modification_des_comptes:></h3>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{imputation}}
 		<li class="editer_imputation">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="imputation"><strong><:asso:imputation:></strong></label>
 			<B_imputation>
 			<select name="imputation" id="imputation" class="formo" > 
-			<BOUCLE_imputation(ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}>
-			<option value="#CODE" [(#ENV{imputation}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE[(#ENV{montant}|oui)&nbsp;-&nbsp;[(#DIRECTION|=={credit}|?{<:asso:crediteur:>,<:asso:debiteur:>})]]</option>
+			<BOUCLE_imputation(ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}{active=1}>
+			<option value="#CODE" [(#ENV{imputation}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE[(#TYPE_OP|!={multi}|oui)&nbsp;-&nbsp;[(#TYPE_OP|=={credit}|?{<:asso:crediteur:>,<:asso:debiteur:>})]][&nbsp;-&nbsp;(#ENV{classe_banques}|=={#CLASSE}|oui)<:asso:compte_financier:>]</option>
 			</BOUCLE_imputation>
 			</select>
 			</B_imputation>
-			<span class="spip_form_erreur">Aucune classe définie au plan comptable !</span>
+			<span class="erreur_message"><:asso:erreur_pas_de_classe_financiere:></span>
 			<//B_imputation>
 		</li>
 
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{date}}
 		<li class="editer_date">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="date"><strong><:asso:date_aaaa_mm_jj:></strong></label>
 			<input type="text" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date"  class='formo'/>
 		</li>
 
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{montant}}
-		[<!-- si la variable montant est assignee, on est en mode compte stricts -->
-		<li class="editer_montant[ (#GET{erreurs}|oui)erreur]">
-			[<span class='erreur_message'>(#GET{erreurs})</span>]
-			<label for="montant"><strong><:asso:montant:></strong></label>
-			<input type="text" name="montant" value="(#ENV{montant})" id="montant"  class='formo'/>
-		</li>
-		]
-		[<!-- si la variable recette est assignee, on n'est pas en mode compte stricts -->
 		<li class="editer_recette[ (#GET{erreurs}|oui)erreur]">
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="recette"><strong><:asso:recette:></strong></label>
-			<input type="text" name="recette" value="(#ENV{recette})" id="recette"  class='formo'/>
+			<input type="text" name="recette" value="[(#ENV{recette})]" id="recette"  class='formo'/>
 		
 		</li>
 		<li class="editer_depense[ (#GET{erreurs}|oui)erreur]">
 			<label for="depense"><strong><:asso:depense:></strong></label>
 			<input type="text" name="depense" value="[(#ENV{depense})]" id="depense"  class='formo'/>
 		</li>
-		]
 
+		[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->
 		<li class="editer_journal">
-			<label for="journal"><strong><:asso:prets_libelle_mode_paiement:></strong></label>
-			<B_mode_paiement>
-			<select name="journal" id="journal" class="formo" > 
-			<BOUCLE_mode_paiement(ASSO_PLAN){par classe}{par code}{classe==#ENV{classe_banques,.*}}>
-			<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
-			</BOUCLE_mode_paiement>
-			</select>
-			</B_mode_paiement>
-			<span class="spip_form_erreur">Aucune classe de comptes financiers définie au plan comptable !</span>
-			<//B_mode_paiement>
+			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
 		</li>
+		]
 
 		<li class="editer_justification">
 			<label for="justification"><strong><:asso:justification:></strong></label>

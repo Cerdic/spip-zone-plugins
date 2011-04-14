@@ -23,7 +23,7 @@ function exec_ventes(){
 	} else {
 		
 		$url_asso = generer_url_ecrire('association');
-		$url_ajout_vente=generer_url_ecrire('edit_vente','agir=ajoute');
+		$url_ajout_vente=generer_url_ecrire('edit_vente');
 		
 		$annee=intval(_request('annee'));
 		if(!$annee) $annee = date('Y');
@@ -96,7 +96,7 @@ function exec_ventes(){
 			. "\n<td$class style='text-align:right'>"
 			. association_nbrefr($q*$data['prix_vente']).'</td>'
 			. "\n<td$class style='text-align:center;'>"
-			. association_bouton(_T('asso:mettre_a_jour_la_vente'), 'edit-12.gif', 'edit_vente',"agir=modifie&id=$id") . '</td>'
+			. association_bouton(_T('asso:mettre_a_jour_la_vente'), 'edit-12.gif', 'edit_vente',"id=$id") . '</td>'
 			."\n<td$class style='text-align:center;'><input name='delete[]' type='checkbox' value='$id' /></td>"
 			.'</tr>';
 		}     
@@ -117,7 +117,7 @@ function exec_ventes(){
 			. $ventes
 			. "</table>\n";
 
-			echo generer_form_ecrire('agir_ventes', $corps, '', _T('asso:bouton_supprimer'));
+			echo generer_form_ecrire('action_ventes', $corps, '', _T('asso:bouton_supprimer'));
 		}
 		fin_cadre_relief();  
 		echo fin_page_association(); 

@@ -41,7 +41,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_frais_envoi'=> 'frais d\'envoi',
 	'config_libelle_comptes'=> 'Gestion comptable',
 	'config_libelle_destinations'=> 'Gestion des destinations comptables',
-	'config_libelle_comptes_stricts'=> 'Activer le mode strict de comptabilit&eacute; (comptes unidirectionnels dans le plan comptable).',
 	'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
 	'config_libelle_prets'=> 'Gestion des pr&egrave;ts et ressources',
 	'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
@@ -420,16 +419,28 @@ Commentaire: @commentaire@
 			'destination_nav_ajouter' => 'Ajouter une destination comptable',
 		# Bilan
 			'toutes_destination' => 'toutes destinations',
+	# Comptes
+			'compte_financier' => 'Compte financier',
 
 	# Verifications
 			'erreur_titre' => 'Une erreur est pr&eacute;sente dans votre saisie',
-			'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas etre n&eacute;gatives',
-			'erreur_montant' => 'le montant ne peut pas etre n&eacute;gatif',
+			'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas etre n&eacute;gatives ou toutes les deux nulles',
 			'erreur_montant_destination' => 'La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l\'op&eacute;ration',
 			'erreur_destination_dupliquee' => 'Une meme destination a &eacute;t&eacute; s&eacute;lectionn&eacute;e plusieurs fois',
-			'erreur_code_plan' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-etre d&eacute;sactiv&eacute;e)',
-			'erreur_configurer_association_titre' => 'Votre saisie contient des erreurs!',
+			'erreur_configurer_association_titre' => 'Votre saisie contient des erreurs !',
 			'erreur_configurer_association_reference_multiple' => 'Une meme r&eacute;f&eacute;rence comptable ne doit pas etre utilis&eacute;e pour plusieurs fonctions activ&eacute;es(ventes, dons, prets, activit&eacute;s) ou cotisations',
+			'erreur_id_adherent' => 'Ce num&eacute;ro de membre ne correspond &agrave; aucun membre de l\'association',
+			'erreur_pas_de_classe_financiere' => 'Aucune classe de comptes financiers d&eacute;finie au plan comptable !',
+			'erreur_pas_de_plan_comptable' => 'Pas de plan comptable d&eacute;fini !',
+			'erreur_pas_de_destination' => 'Pas de destination d&eacute;finie !',
+			'erreur_gestion_comptable_inactive' => 'Afin de pouvoir g&eacute;rer les cotisations, dons et ventes, la gestion comptable doit etre activ&eacute;e',
+			'erreur_plan_classe' => 'La classe d\'un compte doit etre un entier entre 0 et 9',
+			'erreur_plan_code' => 'Le code d\'un compte est compos&eacute; de caract&egrave;res alphanum&eacute;riques uniquement et doit commencer par 2 chiffres. Le premier chiffre doit etre &eacute;gal &agrave; la classe du compte',
+			'erreur_plan_code_duplique' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-etre d&eacute;sactiv&eacute;e)',
+			'erreur_format_date' => 'La date doit etre au format AAAA-MM-JJ',
+			'erreur_date' =>  'Cette date n\'existe pas',
+			'erreur_operation_non_permise_sur_ce_compte' => 'Ce compte n\'accepte qu\'un seul type d\'op&eacute;rations (recette ou d&eacute;pense) et ne correspond pas a celle que vous avez rentr&eacute;',
+			'erreur_montant' => 'Les valeurs n&eacute;gatives ne sont pas autoris&eacute;es',
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',
@@ -454,6 +465,7 @@ Commentaire: @commentaire@
 'compte_active' => 'Compte activ&eacute; :',
 'compte' => 'Compte',
 'contre_valeur_en_e__' => 'Contre-valeur (en &euro;) :',
+'geste_association' => 'Geste de l\'association :',
 'contrepartie' => 'Contrepartie',
 'crediteur' => 'compte cr&eacute;diteur',
 'debiteur' => 'compte d&eacute;biteur',

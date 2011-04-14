@@ -20,7 +20,7 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 	/* si c'est une nouvelle operation, on charge la date d'aujourd'hui */
 	if (!$id_compte) $contexte['date'] = date('Y-m-d');
 
-	// on ajoute les metas de classe_banques, destinations et comptes stricts
+	// on ajoute les metas de classe_banques, destinations
 	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
 	if ($GLOBALS['association_metas']['destinations']) {
 		include_spip('inc/association_comptabilite');
@@ -37,39 +37,31 @@ function formulaires_editer_asso_comptes_charger_dist($id_compte='new') {
 		$contexte['defaut_dest'] = ''; /* ces variables sont recuperees par la balise dynamique directement dans l'environnement */
 
 	}
-	if  ($GLOBALS['association_metas']['comptes_stricts']) {
-		$contexte['montant'] = association_nbrefr($contexte['depense']+$contexte['recette']);
-		unset($contexte['depense']); /* le test dans le formulaire pour l'affichage de montant ou recette et depense et base sur l'existence de cette variable d'environement */
-		unset($contexte['recette']);
-	} else {
-		$contexte['depense'] = association_nbrefr($contexte['depense']);
-		$contexte['recette'] = association_nbrefr($contexte['recette']);
-	}
+
+	/* meilleure presentation des montants */
+	$contexte['depense'] = association_nbrefr($contexte['depense']);
+	$contexte['recette'] = association_nbrefr($contexte['recette']);
 	
 	return $contexte;
 }
 
 function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
 	$erreurs = array();
-	/* dans le cas de comptes non stricts, on verifie que l'on a bien soit depense soit recette different de 0 et qu'aucun n'est negatif */
-	if  (!$GLOBALS['association_metas']['comptes_stricts']) {
-		if ($recette_req = _request('recette')){
-			$recette = floatval(preg_replace("/,/",".",$recette_req));
-		} else $recette = 0;
-		if ($depense_req = _request('depense')){
-			$depense = floatval(preg_replace("/,/",".",$depense_req));
-		} else $depense = 0;
+	/* on verifie que l'on a bien soit depense soit recette different de 0 et qu'aucun n'est negatif */
+	$recette = association_recupere_montant(_request('recette'));
+	$depense = association_recupere_montant(_request('depense'));
 
-		if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0))	{
+	if (($recette<0) || ($depense<0) || ($recette>0 && $depense>0) || ($recette==0 && $depense==0))	{
 		$erreurs['montant'] = _T('asso:erreur_recette_depense');
-		}
-		$montant = $recette+$depense; /* utilise dans la verification des montants de destinations */
-	} else { /* comptes stricts, on verifie le que le montant soit positif */
-		if ($montant_req = _request('montant')){
-			$montant = floatval(preg_replace("/,/",".",$montant_req));
-			if($montant<0) {
-				$erreurs['montant'] = _T('asso:erreur_montant');
-			}
+	}
+
+	/* on verifie que le type d'operation est bien permise sur ce compte */
+	$code=_request('imputation');
+	if (!array_key_exists("montant",$erreurs)) {
+		$type_op = sql_getfetsel('type_op', 'spip_asso_plan', 'code='.sql_quote($code));
+		
+		if ((($type_op=='credit') && ($depense>0)) || (($type_op=='debit') && ($recette>0))) {
+			$erreurs['imputation'] = _T('asso:erreur_operation_non_permise_sur_ce_compte');
 		}
 	}
 
@@ -77,9 +69,14 @@ function formulaires_editer_asso_comptes_verifier_dist($id_compte) {
 	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists("montant",$erreurs))
 	{
 		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations($montant)) {
+		if ($err_dest = association_verifier_montant_destinations($recette+$depense)) {
 			$erreurs['destinations'] = $err_dest;
 		}
+	}
+
+	/* verifier la validite de la date */
+	if ($erreur_date = association_verifier_date(_request('date'))) {
+		$erreurs['date'] = _request('date')."&nbsp;:&nbsp;".$erreur_date;
 	}
 
 	if (count($erreurs)) {

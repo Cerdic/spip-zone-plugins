@@ -33,7 +33,7 @@ function exec_dons() {
 		echo fin_boite_info(true);
 		
 		
-		echo bloc_des_raccourcis(association_icone(_T('asso:ajouter_un_don'), generer_url_ecrire('edit_don','agir=ajouter'), 'ajout_don.png'));
+		echo bloc_des_raccourcis(association_icone(_T('asso:ajouter_un_don'), generer_url_ecrire('edit_don'), 'ajout_don.png'));
 
 		echo debut_droite("",true);
 		
@@ -87,7 +87,7 @@ function exec_dons() {
 				 . '<td class="arial11 border1">'.propre($data['contrepartie'])."</td>\n"));
 
 			echo '<td  class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:supprimer_le_don'), 'poubelle-12.gif', 'action_dons', "id=$id_don") . "</td>\n";
-			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:mettre_a_jour_le_don'), 'edit-12.gif', 'edit_don', "agir=modifier&id=$id_don") . "</td>\n";;
+			echo '<td class="arial11 border1" style="text-align:center;">' . association_bouton(_T('asso:mettre_a_jour_le_don'), 'edit-12.gif', 'edit_don', "id=$id_don") . "</td>\n";;
 			echo '</tr>';
 		}
 		echo '</table>';

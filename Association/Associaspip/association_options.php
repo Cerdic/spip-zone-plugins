@@ -124,16 +124,26 @@ function association_datefr($date) {
 	}
 
 function association_verifier_date($date) {
-	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date)) return false;
+	if (!preg_match('/^\d{4}\-\d{2}\-\d{2}$/', $date)) return _T('asso:erreur_format_date');
 	list($annee, $mois, $jour) = explode("-",$date);
-	if (!checkdate($mois, $jour, $annee)) return false;
-	return true;
+	if (!checkdate($mois, $jour, $annee)) return _T('asso:erreur_date');
+	return;
 }
 	
 function association_nbrefr($montant) {
 		$montant = number_format($montant, 2, ',', ' ');
 		return $montant;
 	}
+
+/* prend en parametre le nom de l'argument a chercher dans _request et retourne un float */
+function association_recupere_montant ($valeur) {
+	if ($valeur != '') {
+		$valeur = str_replace(" ", "", $valeur); /* suppprime les espaces separateurs de milliers */
+		$valeur = str_replace(",", ".", $valeur); /* convertit les , en . */
+		$valeur = floatval($valeur);
+	} else $valeur = 0.0;
+	return $valeur;
+}
 
 	//Affichage du message indiquant la date 
 function association_date_du_jour($heure=false) {

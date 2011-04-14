@@ -23,31 +23,8 @@ function action_editer_asso_comptes() {
 	$date= _request('date');
 	$imputation= _request('imputation');
 
-	if ($GLOBALS['association_metas']['comptes_stricts']=="on") {
-		if ($montant_req = _request('montant')){
-			$montant = floatval(preg_replace("/,/",".",$montant_req));
-		} else $montant = 0;
-		$r = sql_fetsel('direction', 'spip_asso_plan', "code=$imputation");
-		if ($r['direction'] == "credit")
-		{
-			$recette = $montant;
-			$depense = 0;
-		}
-		else
-		{
-			$recette = 0;
-			$depense = $montant;
-		}
-	}
-	else
-	{
-		if ($recette_req = _request('recette')){
-			$recette = floatval(preg_replace("/,/",".",$recette_req));
-		} else $recette = 0;
-		if ($depense_req = _request('depense')){
-			$depense = floatval(preg_replace("/,/",".",$depense_req));
-		} else $depense = 0;
-	}
+	$recette = association_recupere_montant(_request('recette'));
+	$depense = association_recupere_montant(_request('depense'));
 	$justification= _request('justification');
 	$journal= _request('journal');
 

@@ -164,9 +164,10 @@ function comptes_while($where, $limit, $id_compte)
 		else { $class="impair";}	   
 		$id = $data['id_compte'];
 		
+		/* pour voir au chargement l'id_compte recherche */
 		if($id_compte==$id) {
 			$onload_option .= 'onLoad="document.getElementById(\'id_compte'.$id_compte.'\').scrollIntoView(true);"';
-		}
+		} else $onload_option = '';
 
 		$auteurs .= "\n<tr id='id_compte$id'>"
 		. '<td class="'

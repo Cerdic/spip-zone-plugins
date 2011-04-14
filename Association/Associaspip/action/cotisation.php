@@ -18,10 +18,7 @@ function action_cotisation() {
 	$id_auteur = $securiser_action();
 	$date = _request('date');
 	$journal = _request('journal');
-	if ($montant_req =  _request('montant')) {
-		$montant = floatval(preg_replace("/,/",".",$montant_req));
-	}
-	else $montant = 0;
+	$montant =  association_recupere_montant(_request('montant'));
 
 	$justification = _request('justification');
 	$imputation = $GLOBALS['association_metas']['pc_cotisations'];
