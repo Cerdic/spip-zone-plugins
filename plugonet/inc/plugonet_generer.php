@@ -68,9 +68,10 @@ function inc_plugonet_generer($files, $forcer_paquetxml) {
 				if (!$erreurs[$nom]['erreur_validation_paquetxml'] OR $forcer_paquetxml ) {
 					$dir = dirname($nom);
 					if ($modules = plugin2balise_description($description, $prefixe, $dir))
-						$commandes[$nom]['traduction'] = "<!-- svn add " . join(' ', $modules) . " -->\n";
+						$commandes[$nom]['traduction'] = "svn add " . join(' ', $modules);
 					if (ecrire_fichier($dir . '/paquet.xml', $paquet_xml))
-						$commandes[$nom]['paquet'] = "<!-- svn add paquet.xml -->\n";
+						$commandes[$nom]['paquet'] = "svn add paquet.xml";
+					plugin2balise_migration($commandes[$nom], $nom, $dir);
 				}
 			}
 		}
@@ -144,11 +145,11 @@ function plugin2paquet($plugins) {
 	}
 	
 	// -- On continue avec la balise paquet
-	list($paquet_xml, $commande_paquet) = plugin2balise(
+	list($paquet_xml, $commandes_paquet) = plugin2balise(
 											$plugins[$cle_min_min], 
 											'paquet', 
 											$balises_spip);
-	$commandes['balise_paquet'] = $commande_paquet;
+	$commandes['balise_paquet'] = $commandes_paquet;
 
 	return array(
 			$paquet_xml, 
@@ -199,18 +200,19 @@ function plugin2balise($D, $balise, $balises_spip='') {
 			plugin2balise_lien($lien, 'documentation') .
 			($compatible ? "\n\tcompatible='$compatible'" : '');
 	
-		// Constrution de toutes les autres balises incluses dans paquet
+		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
 	
 		$auteur = plugin2balise_copy($D['auteur'], 'auteur');
 		$licence = plugin2balise_copy($D['licence'], 'licence');
+		$traduire = is_array($D['traduire']) ? plugin2balise_traduire($D) :'';
 	}
 	else {
 		// Balise spip
 		$attributs =
 			($compatible ? " compatible='$compatible'" : '');
 		// raz des balises non utilisees
-		$nom = $auteur = $licence = '';
+		$nom = $auteur = $licence = $traduire = '';
 	}
 
 	// Toutes les balises techniques sont autorisees dans paquet et spip
@@ -220,7 +222,6 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	$utilise = is_array($D['utilise']) ? plugin2balise_utilise($D['utilise']) :'';
 	$bouton = is_array($D['bouton']) ? plugin2balise_exec($D, 'bouton') :'';
 	$onglet = is_array($D['onglet']) ? plugin2balise_exec($D, 'onglet') :'';
-	$traduire = is_array($D['traduire']) ? plugin2balise_traduire($D) :'';
 
 	// On accumule dans un tableau les commandes de toutes les balises paquet et spip
 	$commandes = array();
@@ -229,10 +230,10 @@ function plugin2balise($D, $balise, $balises_spip='') {
 					plugin2balise_implicite($D, 'fonctions', 'fonctions'),
 					plugin2balise_implicite($D, 'install', 'actions'));
 	
-	if ($balise == 'paquet')
-		$paquet = "<$balise$attributs\n>\t$nom$auteur$licence$pipeline$necessite$utilise$bouton$onglet$chemin$traduire$balises_spip\n</$balise>\n";
-	else
-		$paquet = "<$balise$attributs>\t$pipeline$necessite$utilise$bouton$onglet$chemin$traduire\n</$balise>\n";
+	$paquet = 
+		"<$balise$attributs" . ($balise == 'paquet' ? "\n>" : ">") .
+		"\t$nom$auteur$licence$traduire$pipeline$necessite$utilise$bouton$onglet$chemin$balises_spip\n" .
+		"</$balise>\n";
 	
 	return array($paquet, $commandes);
 }
@@ -434,6 +435,11 @@ function plugin2balise_exec($D, $balise) {
 	return $res ? "\n$res" : '';
 }
 
+
+// --------------------- BALISE DE TRADUCTION -----------------------
+//
+// - traduire : déclaratif des modules de langue
+// --> A RAJOUTER EVENTUELLEMENT :  TOUS LES MODULES EXISTANTS + LE MODULE PAQUET
 function plugin2balise_traduire($D) {
 	$res = '';
 	foreach($D['traduire'] as $nom => $i) {
@@ -447,17 +453,17 @@ function plugin2balise_traduire($D) {
 }
 
 
-// --------------------- BALISES DISPARUES ---------------------------------------
+// --------------------- BALISES DISPARUES ET COMMANDES D'AIDE --------
 //
 // - fonctions, options et install : creation des commandes svn de substitution
 // - slogan, description : creation des fichiers de langue ${prefixe}-paquet_${codelangue}.php
+// - creation du fichier d'aide contenant les commandes svn de modification du plugin
 
 // verifie que la balise $nom declare une unique fichier $prefix_$nom:
 // fonctions -> $prefix_fonctions
 // options -> $prefix_options, 
 // install -> $prefix_actions
-function plugin2balise_implicite($D, $balise, $nom)
-{
+function plugin2balise_implicite($D, $balise, $nom) {
 	$files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
 	$contenu = join(' ', array_map('trim', $files));
 	$std = $D['prefix'] . "_$nom" . '.php';
@@ -465,17 +471,13 @@ function plugin2balise_implicite($D, $balise, $nom)
 	if (!$contenu OR $contenu == $std) 
 		return array();
 	if (!strpos($contenu, ' ')) 
-		return array("<!-- svn mv $contenu $std -->\n");
+		return array("svn mv $contenu $std");
 	$k = array_search($std, $files);
 	if (!$k)
-		return array(
-					"<!-- cat $contenu &gt; $std -->\n", 
-					"<!-- svn add $std -->\n");
+		return array("cat $contenu &gt; $std", "svn add $std");
 	unset($files[$k]);
 	$contenu = join(' ', array_map('trim', $files));
-	return array(
-				"<!-- cat $contenu &gt;&gt; $std -->\n", 
-				"<!-- svn rm $contenu -->\n");
+	return array("cat $contenu &gt;&gt; $std", "svn rm $contenu");
 }
 
 // Passer les lettres accentuees en entites XML
@@ -504,6 +506,62 @@ function plugin2balise_description($description, $prefixe, $dir) {
 	}
 
 	return $files;
+}
+
+function plugin2balise_migration($commandes, $plugin_xml, $dir) {
+	$fichier = $dir . "/paquet-migration.sh";
+	$date = date("d-M-Y H:i:s");
+	
+	// En-tete du fichier
+	$migration = 
+"# FICHIER DE DESCRIPTION DE LA MIGRATION VERS PAQUET.XML
+# ------------------------------------------------------
+# - Le : $date
+# - Fichier origine : $plugin_xml
+# - Contient les informations et les commandes svn nécessaires pour
+#   compléter la migration suite à la génération des fichiers.
+#   Pour éviter toute erreur de manipulation les commandes sont
+#   par défaut, en commentaire.
+# ------------------------------------------------------\n\n";
+
+	// Le fichier paquet.xml (existe toujours)
+	$migration .= 
+"# Ajout du fichier paquet.xml au repository.
+# On conserve le fichier plugin.xml tout le temps de la migration !\n";
+	$migration .= "# " . $commandes['paquet'] . "\n\n";
+
+	// Les fichiers de langue (existe toujours au moins en fr)
+	$migration .= 
+"# Ajout au repository des fichiers de langue correspondant au slogan et à la
+# description du plugin. Attention la liste des langues correspond aux traductions
+# (en multi) de la description de plugin.xml et non à celle des modules de langue
+# du plugin !\n";
+	$migration .= "# " . $commandes['traduction'] . "\n\n";
+
+	// Les balises disparues et la standardisation des fichiers options, fonctions et actions
+	// -- Intro
+	$migration .= 
+"# La disparition des balises options, fonctions et install au profit d'un nommage
+# standard des fichiers associés (1 par fonctionnalité uniquement) peut nécessiter de 
+# renommer certains fichiers voire de compiler plusieurs fichiers en un. Dans ce
+# cas, en plus des commandes listées ci-dessous il vous faudra modifier le code du plugin
+# pour rétablir les bons appels à include_spip !\n";
+	// -- Filtrage des commandes pour eliminer les commandes redondantes dues a la presence de balises spip
+	// -- On ajoute ces commandes a celles de la balise paquet et on tri par ordre alphabetique pour eviter que les 
+	//     cat soient apres les svn
+	foreach ($commandes['balise_spip'] as $_compatible => $_commandes) {
+		foreach ($_commandes as $_commande) {
+			if (!in_array($_commande, $commandes['balise_paquet']))
+				$commandes['balise_paquet'][] = $_commande;
+		} 
+	}
+	asort($commandes['balise_paquet']);
+	// -- Ecriture des commandes filtrees et ordonnees
+	foreach ($commandes['balise_paquet'] as $_commande) {
+		$migration .= "# " . $_commande . "\n";
+	}
+
+	return ecrire_fichier($fichier, $migration);
 }
 
 

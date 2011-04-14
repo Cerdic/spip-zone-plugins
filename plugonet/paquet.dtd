@@ -34,9 +34,9 @@
 
 <!ENTITY % CONTENT_COPY "(auteur|copyright|credit|licence)*" >
 
-<!ENTITY % CONTENT_TECH "(bouton|chemin|lib|necessite|onglet|pipeline|traduire|utilise)*" >
+<!ENTITY % CONTENT_TECH "(bouton|chemin|lib|necessite|onglet|pipeline|utilise)*" >
 
-<!ELEMENT paquet (nom %CONTENT_COPY; %CONTENT_TECH; spip*) >
+<!ELEMENT paquet (nom traduire* %CONTENT_COPY; %CONTENT_TECH; spip*) >
 <!ATTLIST paquet
 	  categorie %CATEGORY; #IMPLIED
 	  compatible %INTERVAL; #IMPLIED
@@ -69,6 +69,13 @@
 <!ELEMENT licence (#PCDATA)>
 <!ATTLIST licence
 	  lien %URI; #IMPLIED
+>
+
+<!ELEMENT traduire EMPTY>
+<!ATTLIST traduire
+          module %NAME; #REQUIRED
+          reference %LANG; #REQUIRED
+          gestionnaire %NAME; #IMPLIED
 >
 
 <!ELEMENT spip  %CONTENT_TECH; >
@@ -125,12 +132,5 @@
 	  args %QUERY_STRING; #IMPLIED
 	  icone %PATH; #IMPLIED
 	  titre %ITEM; #REQUIRED
->
-
-<!ELEMENT traduire EMPTY>
-<!ATTLIST traduire
-          module %NAME; #REQUIRED
-          reference %LANG; #REQUIRED
-          gestionnaire %NAME; #IMPLIED
 >
 
