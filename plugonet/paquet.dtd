@@ -36,7 +36,7 @@
 
 <!ENTITY % CONTENT_TECH "(bouton|chemin|lib|necessite|onglet|pipeline|utilise)*" >
 
-<!ELEMENT paquet (nom traduire* %CONTENT_COPY; %CONTENT_TECH; spip*) >
+<!ELEMENT paquet (nom %CONTENT_COPY; traduire* %CONTENT_TECH; spip*) >
 <!ATTLIST paquet
 	  categorie %CATEGORY; #IMPLIED
 	  compatible %INTERVAL; #IMPLIED
