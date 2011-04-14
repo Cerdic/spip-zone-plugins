@@ -15,22 +15,20 @@ function commandes_upgrade($nom_meta_base_version, $version_cible){
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 	
 	if ($current_version=="0.0") {
-		maj_tables('spip_paniers');
-		maj_tables('spip_paniers_liens');
+		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
-
+	// ajout de objet/id_objet sur les details de commande
+	if (version_compare($current_version,"0.2","<")){
+		maj_tables('spip_commandes_details');
+		ecrire_meta($nom_meta_base_version, $current_version="0.2");
+	}
 }
 
 
 function commandes_vider_tables($nom_meta_base_version) {
-	sql_alter("TABLE spip_paniers DROP COLUMN montant");
-	sql_alter("TABLE spip_paniers DROP COLUMN reference");
-	sql_alter("TABLE spip_paniers DROP COLUMN date_commande");
-	sql_alter("TABLE spip_paniers DROP COLUMN date_paiement");
-	sql_alter("TABLE spip_paniers_liens DROP COLUMN montant");
-	sql_alter("TABLE spip_paniers_liens DROP COLUMN montant_taxe");
-	sql_alter("TABLE spip_paniers_liens DROP COLUMN designation");
+	sql_drop_table("spip_commandes");
+	sql_drop_table("spip_commandes_details");
 	effacer_meta($nom_meta_base_version);
 }
 
