@@ -11,13 +11,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_appliquer_cover_defaut' => 'Apply the default cover to all sound documents without any logo',
 
 	// E
-	'erreur_formats_ecriture_impossible' => 'Writing tags on the following format(s) is impossible :',
+	'erreur_formats_ecriture_impossible' => 'Writing tags on the following format(s) is impossible:',
 	'erreur_logiciels_indisponibles' => 'You won\'t be able to write tags on all possible formats. On or more software is not usable.',
 	'erreur_necessite' => 'needs @soft@',
 	'explication_cover_defaut' => 'At the upload of audio files, a default thumbnail (see input URL below) is associated to the sound file. If the option to rewrite tags when the logo is changed is activated, the id3 artwork tags will also be updated.',
 
 	// F
-	'formulaire_modifier_id3' => 'Edit metadatas of :',
+	'formulaire_modifier_id3' => 'Edit metadatas of:',
 
 	// I
 	'info_album' => 'Album',
@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_utilisation_plusieurs' => '@nb@ uses',
 	'info_utilisation_unique' => 'One sigle use',
 	'info_year' => 'Year',
-	'install_ajout_champs_documents' => 'GetID3 : Adding fields on the spip_documents database table',
+	'install_ajout_champs_documents' => 'GetID3: Adding fields on the spip_documents database table',
 	'install_mise_a_jour_base' => 'Update of the getid3 database at @version@',
 
 	// L
@@ -71,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_cover' => 'Cover',
 	'label_cover_defaut' => 'Use a default cover',
 	'label_genre' => 'Genre',
-	'label_reecriture_tags' => 'Rewrite file tags after editing :',
+	'label_reecriture_tags' => 'Rewrite file tags after editing:',
 	'label_reecriture_tags_descriptif' => 'the description of the document',
 	'label_reecriture_tags_logo' => 'the logo of the document',
 	'label_reecriture_tags_titre' => 'the title of the document',
@@ -88,9 +88,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_extension_invalide_ecriture' => 'The format of this file is not supported.',
 	'message_fichier_maj' => 'The file has been updated.',
 	'message_infos_document_distant' => 'This is a remote document. No information can be retrieved.',
-	'message_texte_binaire_manquant' => 'A necessary software is not available on your server :',
+	'message_texte_binaire_manquant' => 'A necessary software is not available on your server:',
 	'message_texte_binaires_informer' => 'Please inform your system administrator.',
-	'message_texte_binaires_manquant' => 'Several software needed are not available on your server :',
+	'message_texte_binaires_manquant' => 'Several software needed are not available on your server:',
 	'message_titre_binaire_manquant' => 'A missing software',
 	'message_titre_binaires_manquant' => 'Plusieurs logiciels manquant',
 	'message_validation_appliquer_cover' => 'This action is definitive. It won\'t be possible to go back later.',
@@ -100,16 +100,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'recuperer_infos' => 'Retrieve file informations',
 
 	// S
-	'son_audiosamplerate' => 'Audio Samplerate :',
-	'son_bitrate' => 'Bitrate :',
+	'son_audiosamplerate' => 'Audio Samplerate:',
+	'son_bitrate' => 'Bitrate:',
 	'son_bitrate_cbr' => 'Constant bitrate',
 	'son_bitrate_vbr' => 'Variable bitrate',
-	'son_bitratemode' => 'Mode :',
-	'son_bits' => 'Bits :',
-	'son_duree' => 'Duration :',
-	'son_encodeur' => 'Encoder :',
-	'son_extension' => 'Extension :',
-	'son_format' => 'Mime-Type :',
+	'son_bitratemode' => 'Mode:',
+	'son_bits' => 'Bits:',
+	'son_duree' => 'Duration:',
+	'son_encodeur' => 'Encoder:',
+	'son_extension' => 'Extension:',
+	'son_format' => 'Mime-Type:',
 	'son_infos_techniques' => 'Technical informations',
 	'son_nom_fichier' => 'File name',
 
