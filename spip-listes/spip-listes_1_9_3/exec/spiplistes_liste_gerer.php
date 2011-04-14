@@ -401,16 +401,22 @@ function exec_spiplistes_liste_gerer () {
 		// CP-20101017: Si trop d'elligibles, ca gele.
 		// @todo: revoir la boite/liste des abonnes/elligibles
 		// En attendant ...
-		if(spiplistes_auteurs_elligibles_compter() < 1000)
-		{
+		//if(spiplistes_auteurs_elligibles_compter() < 1000)
+		//{
 			$boite_liste_abonnes = spiplistes_listes_boite_abonnements(
 				$id_liste, $statut, $tri, $debut, _SPIPLISTES_EXEC_LISTE_GERER
 			);
-		}
-		else
-		{
-			$boite_liste_abonnes = _T('spiplistes:code_en_travaux');
-		}
+		//}
+		//else
+		//{
+		//	$boite_liste_abonnes = _T('spiplistes:code_en_travaux');
+		//}
+		
+		
+		// @see http://www.spip-contrib.net/SPIP-Listes#comment444314
+		
+		
+		
 		$titre_boite = _T('spiplistes:abos_cette_liste');
 		$legend = '<small id="legend-abos1">'
 			. spiplistes_nb_abonnes_liste_str_get($id_liste)
