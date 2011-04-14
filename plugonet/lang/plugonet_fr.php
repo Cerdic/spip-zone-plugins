@@ -26,6 +26,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 	'message_nok_aucun_pluginxml' => 'Aucun fichier plugin.xml trouv&eacute; dans le dossier des plugins de ce site.',
+	'message_paquetxml_generes' => '@nb_fichiers@ plugin.xml trait&eacute;(s) : @details@',
+	'message_nok_lecture_pluginxml' => 'plugin.xml inaccessible(s) en lecture : @nb_fichiers@',
+	'message_nok_information_pluginxml' => 'plugin.xml illisibles au sens XML : @nb_fichiers@',
+	'message_nok_validation_paquetxml' => 'paquet.xml non conforme(s) &agrave; la nouvelle DTD : @nb_fichiers@',
+	'message_ok_generation_paquetxml' => 'paquet.xml g&eacute;n&eacute;r&eacute;(s) correctement : @nb_fichiers@',
 
 // O
 	'onglet_generer' => 'G&eacute;n&eacute;rer paquet.xml',

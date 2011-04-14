@@ -58,14 +58,23 @@ function formater_message($erreurs) {
 		$nb_notval = (count($_erreurs['notice_validation_pluginxml']) > 0) ? $nb_notval + 1 : $nb_notval;
 	}
 	
-	if (($nb_errlec + $nb_errinf + $nb_errval) > 0) {
+	$nb_nok = $nb_errlec + $nb_errinf + $nb_errval;
+	$nb_ok = $nb_fichiers - $nb_nok;
+	if ($nb_nok> 0) {
 		$ok = false;
-		$message = _T('plugonet:message_nok_generation_paquetxml');
+		$message = 
+			'<br />' . 
+			($nb_errlec > 0 ? '-> ' . _T('plugonet:message_nok_lecture_pluginxml', array('nb_fichiers' => $nb_errlec)) : '') .
+			($nb_errinf > 0 ? '-> ' . _T('plugonet:message_nok_information_pluginxml', array('nb_fichiers' => $nb_errinf)) : '') .
+			($nb_errval > 0 ? '-> ' . _T('plugonet:message_nok_validation_paquetxml', array('nb_fichiers' => $nb_errval)) : '') .
+			($nb_ok > 0 ? '<br /><br />-> ' . _T('plugonet:message_ok_generation_paquetxml', array('nb_fichiers' => $nb_ok)) : '');
 	}
 	else {
 		$ok = true;
-		$message = _T('plugonet:message_ok_generation_paquetxml');
+		$message = '<br />-> ' . _T('plugonet:message_ok_generation_paquetxml', array('nb_fichiers' => $nb_fichiers));
 	}
+	$message = _T('plugonet:message_paquetxml_generes', 
+					array('nb_fichiers' => $nb_fichiers, 'details' => $message));
 
 	return array($ok, $message);
 }

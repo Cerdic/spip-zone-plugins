@@ -257,7 +257,7 @@ function plugin2balise_lien($url, $nom='lien', $sep="\n\t") {
 // Pour l'instant on ne normalise pas le nom comme le fait SVP
 // --> A voir plus tard
 function plugin2balise_nom($texte) {
-	$t = traite_multi($texte);
+	$t = traiter_multi($texte);
 	$res = ($t['fr']) ? "\n\t<nom>" . $t['fr'] . "</nom>" : '';
 
 	return $res ? "\n$res" : '';
@@ -276,7 +276,7 @@ function plugin2balise_nom($texte) {
 function plugin2balise_copy($texte, $balise) {
 
 	// On extrait le multi si besoin et on selectionne la traduction francaise
-	$t = traite_multi($texte);
+	$t = traiter_multi($texte);
 
 	$res = $resa = $resl = $resc = '';
 	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n_*\s*|&amp;@', $t['fr']) as $v) {
@@ -483,7 +483,7 @@ function plugin2balise_implicite($D, $balise, $nom) {
 // Passer les lettres accentuees en entites XML
 function plugin2balise_description($description, $prefixe, $dir) {
 	$files = $langs = array();
-	foreach (traite_multi($description) as $lang => $_descr) {
+	foreach (traiter_multi($description) as $lang => $_descr) {
 		if (!$lang)
 			$lang = 'fr';
 		$langs[$lang][strtolower($prefixe) . '_description'] = trim($_descr);
@@ -575,7 +575,7 @@ function plugin2balise_migration($commandes, $plugin_xml, $dir) {
 // - choix de la fonction d'extraction des infos d'un plugin
 
 // Expanse les multi en un tableau de textes complets, un par langue
-function traite_multi($texte)
+function traiter_multi($texte)
 {
 	if (!preg_match_all(_EXTRAIRE_MULTI, $texte, $regs, PREG_SET_ORDER))
 		return array('fr' => $texte);
