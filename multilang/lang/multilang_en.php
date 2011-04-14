@@ -1,13 +1,16 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// extrait automatiquement de http://trad.mediaspip.net/spip.php?page=tradlang
+// ** ne pas modifier le fichier **
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'cfg_activer' => 'Activate Multilang on the edit page :',
+	'cfg_activer' => 'Activate Multilang on the edit page:',
 	'cfg_boite_multilang' => 'Configuration of the Multilang plugin',
-	'cfg_descr_multilang' => 'Multilang : Plugin to manage multi tags',
+	'cfg_descr_multilang' => 'Multilang: plugin to manage multi tags',
 	'cfg_effacer' => 'Re-init',
 	'cfg_explication_crayons' => 'Requires multilang to be activated in the public space of the site.',
 	'cfg_lbl_article' => 'of the articles',
@@ -27,9 +30,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'lien_desactiver' => 'All',
-	'lien_multi_title' => 'Edit multilingual fields in &laquo;@lang@&raquo;',
+	'lien_multi_title' => 'Edit multilingual fields in «@lang@»',
 
 	// M
-	'message_champs_readonly' => 'The multilingual fields are in read only mode, choose a language to modify them',
+	'message_champs_readonly' => 'The multilingual fields are in read only mode, choose a language to edit them'
 );
+
 ?>
