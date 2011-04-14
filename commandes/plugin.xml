@@ -2,7 +2,7 @@
 	<nom>Commandes</nom>
 	<auteur>[Ateliers CYM->http://www.cym.fr], [Les Développements Durables->http://www.ldd.fr], [Matthieu Marcillaud->http://magraine.net]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2</version>
+	<version>0.2.1</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
 	<description><multi>
@@ -34,6 +34,10 @@
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/commandes_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>commandes_pipelines.php</inclure>
 	</pipeline>
 
 	<bouton id='commandes' parent='naviguer'>

@@ -1,0 +1,33 @@
+[(#REM) On peut donner soit un id_commande, soit un tableau contenant la commande ]
+
+<BOUCLE_commande(COMMANDES){tous}{id_commande=#ENV{id_commande}}>
+[(#REM) Si on trouve une commande on prend ça comme base ]
+#SET{commande, #ARRAY}
+</BOUCLE_commande>
+#SET{commande,#ENV{commande}}
+<//B_commande>
+
+<BOUCLE_test(CONDITION){si #GET{commande}|et{#GET{commande}|is_array}}>
+	<table class="commande" cellspacing="0">
+		<thead>
+			<tr>
+				<th class="description"><:commandes:designation:></th>
+				<th class="montant"><:commandes:montant:></th>
+			</tr>
+		</thead>
+		<tbody>
+			<BOUCLE_details(POUR){tableau #GET{commande}|table_valeur{details}}>
+			<tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
+				<td class="description">[(#VALEUR|table_valeur{descriptif})]</td>
+				<td class="montant">[(#VALEUR|table_valeur{prix})]</td>
+			</tr>
+			</BOUCLE_details>
+		</tbody>
+		<tfoot>
+			<tr class="total_ttc">
+				<td class="descriptif"><:prix:label_total_ttc:></td>
+				<td class="montant">[(#GET{commande}|table_valeur{total_ttc})]</td>
+			</tr>
+		</tfoot>
+	</table>
+</BOUCLE_test>
