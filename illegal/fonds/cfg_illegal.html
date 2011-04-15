@@ -1,0 +1,48 @@
+#CACHE{0}
+
+<!-- autoriser=webmestre -->
+<!-- titre=Articles illégaux -->
+<!-- descriptif=Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite d'activer les crayons sur la page exec, et de créer un champ <code>spip_articles.illegal</code> . -->
+<!-- icone=images/illegal-24.png -->
+<!-- logo=images/illegal-24.png -->
+
+
+#SET{id_article,#VAL{id_article}|_request}
+
+<h1>Articles illégaux</h1>
+
+<B_ls>
+[<p class="pagination">(#PAGINATION)</p>]
+<BOUCLE_ls(ARTICLES){statut?}{illegal>''}{!par date}{pagination 10}>
+
+<li><a href="[(#SELF|parametre_url{id_article,#ID_ARTICLE})]">#ID_ARTICLE</a> #TITRE[, par (#LESAUTEURS)]</li>
+
+</BOUCLE_ls>
+
+<p>Pour créer un article illégal, indiquer son id_article :
+<form action="#SELF" method="GET">
+[(#SELF|parametre_url{id_article,''}|form_hidden)]
+<input type="text" length="5" name="id_article" value="#GET{id_article}" />
+<input type="submit" value="ok" />
+</form>
+
+<BOUCLE_i(ARTICLES){statut?}{id_article=#GET{id_article}}>
+<h2>Article n&#176;&#160;#ID_ARTICLE: #TITRE</h2>
+
+<p class="spip_xx-small">- dans le texte, indiquer ce qui sera affiché publiquement  sur le site ; exemple : "Pour des raisons juridiques, cet article n'est pas disponible à la consultation publique."</p>
+
+<h4>texte:</h4>
+<div class="#EDIT{texte}">[(#TEXTE|couper{300}|sinon{texte...})]</div>
+
+<h4>illégal:</h4>
+
+<p class="spip_xx-small">- dans le champ illégal, indiquer le texte d'origine</p>
+
+<div class="#EDIT{illegal}">[(#ILLEGAL|couper{300}|sinon{illegal...})]</div>
+
+</BOUCLE_i>
+[(#ID_ARTICLE|?{Article inexistant})]
+<//B_i>
+
+
+

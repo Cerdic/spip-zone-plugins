@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Ill&#233;gal</nom>
+	<auteur>Fil</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<licence>GPL 3</licence>
+	<description>
+	Ajoute un champ ill&#233;gal aux articles, pour signaler ceux qui ont un probl&#232;me d'ordre juridique.
+	</description>
+	<prefix>illegal</prefix>
+
+	<icone>images/illegal-24.png</icone><!-- by Rachel Fu - http://www.iconfinder.com/icondetails/13487/24/cancel_delete_forbidden_icon -->
+	<necessite id="cfg" />
+	<categorie>outil</categorie>
+</plugin>
