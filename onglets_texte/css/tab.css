@@ -16,14 +16,14 @@
 	float:			left;
 	overflow:		hidden;
 	
-	cursor:			Default;
+	cursor:			default;
 
 	margin:			1px -1px 1px 2px;
 	padding:		2px 0px 0px 0px;
 	border:			0;
 
 	z-index:		1;
-	font:			11px Tahoma;
+	font-size: 11px;
 	white-space:	nowrap;
 	text-align:		center;
 }
@@ -39,18 +39,18 @@
 	padding:		2px 0 0px 0;
 	margin:			1px -3px -3px 0px;
 	top:			-2px;
-	font:				11px Tahoma;
+	font-size: 11px;
 }
 
 .dynamic-tab-pane-control .tab-row .tab a {
-	font:				11px Tahoma;
-	color:				Black;
+	font-size: 11px;
+	color:				#000;
 	text-decoration:	none;
 	cursor:				default;
 }
 
 .dynamic-tab-pane-control .tab-row .tab.hover {
-	font:				11px Tahoma;
+	font-size: 11px;
 	width:				70px;
 	height:				16px;
 	background-image:	url( "tab.hover.png" );
@@ -66,8 +66,8 @@
 	position:		relative;
 	top:			-2px;
 
-	font:				11px Tahoma;
-	color:				Black;
+	font-size: 11px;
+	color: #000;
 
 	filter:			progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#fffcfcfe, EndColorStr=#fff4f3ee, GradientType=0)
 					progid:DXImageTransform.Microsoft.Shadow(Color=#ff919899, Strength=2, Direction=135);
@@ -75,10 +75,9 @@
 	/*244, 243, 238*/
 	/* 145, 155, 156*/
 	
-	padding:		10px;
+	padding: 10px;
 }
 
-.dynamic-tab-pane-control .tab-row {
-	z-index:		1;
-	white-space:	nowrap;
-}
+.dynamic-tab-pane-control .tab-row { z-index: 1; white-space: nowrap; }
+
+/* end */
