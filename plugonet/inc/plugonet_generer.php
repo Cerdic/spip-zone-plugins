@@ -321,11 +321,11 @@ function plugin2balise_copy($texte, $balise) {
 		} else 
 			$mail = '';
 		
-		// On detecte aussi si le bloc texte en cours contient une eventuel licence
+		// On detecte aussi si le bloc texte en cours contient une eventuelle licence
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique b'est pas deterministe car la phrase de licence n'est pas connue
 		$licnom = $licurl ='';
-		if (preg_match('/(gpl|lgpl|gnu\/gpl|gpl\s*v3)/i', $v, $r)) {
+		if (preg_match('/(lgpl|gnu\/gpl|gpl\s*v*\d*)/i', $v, $r)) {
 			$licnom = strtoupper(trim($r[1]));
 			$licurl = ($licnom=='LGPL') ? 'http://www.gnu.org/licenses/lgpl-3.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
 			$licurl = " lien='$licurl'";
@@ -457,7 +457,7 @@ function plugin2balise_exec($D, $balise) {
 }
 
 
-// --------------------- BALISES DISPARUES ET COMMANDES D'AIDE --------
+// --------------------- BALISES DISPARUES ET COMMANDES DE MIGRATION --------
 //
 // - fonctions, options et install : creation des commandes svn de substitution
 // - slogan, description : creation des fichiers de langue ${prefixe}-paquet_${codelangue}.php

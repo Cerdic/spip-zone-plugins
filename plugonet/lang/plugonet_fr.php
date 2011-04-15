@@ -1,51 +1,54 @@
 <?php
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Ceci est un fichier langue de SPIP -- This is a SPIP language file
+// Module: plugonet
+// Langue: fr
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
-	'bouton_generer' => 'G&eacute;n&eacute;rer',
-	'bouton_verifier' => 'V&eacute;rifier',
+	'bouton_generer' => 'Générer',
 	'bouton_plugonet' => 'PlugOnet',
 	'bouton_tout_cocher' => 'Tout cocher',
-	'bouton_tout_decocher' => 'Tout d&eacute;cocher',
+	'bouton_tout_decocher' => 'Tout décocher',
+	'bouton_verifier' => 'Vérifier',
 
 // I
-	'info_forcer_paquetxml' => 'Par d&eacute;faut, le fichier paquet.xml n\'est &eacute;crit que si son contenu est valide selon la nouvelle DTD. Vous pouvez cependant forcer son &eacute;criture quel que soit le r&eacute;sultat de la validation.',
-	'info_simuler_paquetxml' => 'Par d&eacute;faut, les fichiers r&eacute;sultat sont cr&eacute;&eacute;s dans le dossier d\'installation de chaque plugin. Vous pouvez cependant choisir de les cr&eacute;er dans un dossier temporaire du site.',
-	'info_generer' => 'Cette option vous permet de g&eacute;n&eacute;rer le nouveau fichier paquet.xml de description d\'un plugin &agrave; partir du fichier plugin.xml existant.<br />Outre le fichier paquet.xml, les fichiers de langue des items slogan et description du plugin ainsi qu\'un fichier de commandes Unix sont cr&eacute;&eacute;s dans des dossiers propres &agrave; chaque plugin.',
-	'info_generer_pluginxml' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux pr&eacute;sents dans le dossier <code>plugins/</code> de ce site.',
-	'info_verifier' => 'Cette option vous permet de v&eacute;rifier le fichier plugin.xml de description d\'un plugin afin d\'anticiper des probl&egrave;mes lors de g&eacute;n&eacute;ration du fichier paquet.xml. Ce formulaire propose la liste des fichiers plugin.xml pr&eacute;sents dans le dossier <code>plugins/</code> de ce site.',
-	'info_verifier_pluginxml' => 'Choisissez le fichier plugin.xml que vous souhaitez v&eacute;rifier.',
+	'info_choisir_pluginxml' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux présents dans le dossier <code>plugins/</code> de ce site.',
+	'info_forcer_paquetxml' => 'Par défaut, le fichier paquet.xml n\'est écrit que si son contenu est valide selon la nouvelle DTD. Vous pouvez cependant forcer son écriture quel que soit le résultat de la validation.',
+	'info_generer' => 'Cette option vous permet de générer le nouveau fichier paquet.xml de description d\'un plugin à partir du fichier plugin.xml existant.<br />Outre le fichier paquet.xml, les fichiers de langue des items slogan et description du plugin ainsi qu\'un fichier de commandes Unix sont créés dans des dossiers propres à chaque plugin.',
+	'info_simuler_paquetxml' => 'Par défaut, les fichiers résultat sont créés dans le dossier d\'installation de chaque plugin. Vous pouvez cependant choisir de les créer dans un dossier temporaire du site.',
+	'info_verifier_pluginxml' => 'Choisissez le fichier plugin.xml que vous souhaitez vérifier.',
+	'info_verifier' => 'Cette option vous permet de vérifier le fichier plugin.xml de description d\'un plugin afin d\'anticiper des problèmes lors de génération du fichier paquet.xml. Ce formulaire propose la liste des fichiers plugin.xml présents dans le dossier <code>plugins/</code> de ce site.',
 
 // L
 	'label_choisir_pluginxml' => 'plugin.xml disponibles',
-	'label_forcer_oui' => 'Oui, forcer l\'&eacute;criture',
-	'label_forcer_non' => 'Non, respecter les r&eacute;sultats de la validation',
-	'label_generer_paquetxml' => 'Fichiers r&eacute;sultat',
-	'label_simuler_oui' => 'Oui, &eacute;crire dans le dossier temporaire tmp/plugonet/',
-	'label_simuler_non' => 'Non, &eacute;crire dans le dossier plugins/ du site',
+	'label_forcer_non' => 'Non, respecter les résultats de la validation',
+	'label_forcer_oui' => 'Oui, forcer l\'écriture',
+	'label_generer_paquetxml' => 'Fichiers résultat',
+	'label_simuler_non' => 'Non, écrire dans le dossier plugins/ du site',
+	'label_simuler_oui' => 'Oui, écrire dans le dossier temporaire tmp/plugonet/',
 
 // M
-	'message_nok_aucun_pluginxml' => 'Aucun fichier plugin.xml trouv&eacute; dans le dossier des plugins de ce site.',
-	'message_paquetxml_generes' => '@nb_fichiers@ plugin.xml trait&eacute;(s) : @details@',
-	'message_nok_lecture_pluginxml' => 'plugin.xml inaccessible(s) en lecture : @nb_fichiers@',
-	'message_nok_information_pluginxml' => 'plugin.xml illisibles au sens XML : @nb_fichiers@',
-	'message_nok_validation_paquetxml' => 'paquet.xml non conforme(s) &agrave; la nouvelle DTD : @nb_fichiers@',
-	'message_ok_generation_paquetxml' => 'paquet.xml g&eacute;n&eacute;r&eacute;(s) correctement : @nb_fichiers@',
+	'message_generation_paquetxml' => '@nb_fichiers@ plugin.xml traité(s) : @details@',
+	'message_nok_aucun_pluginxml' => 'Aucun fichier plugin.xml trouvé dans le dossier des plugins de ce site.',
+	'message_nok_information_pluginxml' => '@nb_fichiers@ plugin.xml dont le contenu XML est illisible',
+	'message_nok_lecture_pluginxml' => '@nb_fichiers@ plugin.xml inaccessible(s) en lecture',
+	'message_nok_validation_paquetxml' => '@nb_fichiers@ paquet.xml non conforme(s) à la nouvelle DTD',
+	'message_nok_validation_pluginxml' => '@nb_fichiers@ plugin.xml non conforme(s) : vérifiez le(s) paquet.xml correspondant(s) !',
+	'message_ok_generation_paquetxml' => '@nb_fichiers@ paquet.xml correctement généré(s)',
 
 // O
-	'onglet_generer' => 'G&eacute;n&eacute;rer paquet.xml',
-	'onglet_verifier' => 'V&eacute;rifier plugin.xml',
-	'option_aucun_pluginxml' => 'aucun plugin.xml s&eacute;lectionn&eacute;',
+	'onglet_generer' => 'Générer paquet.xml',
+	'onglet_verifier' => 'Vérifier plugin.xml',
+	'option_aucun_pluginxml' => 'aucun plugin.xml sélectionné',
 
 // T
-	'titre_form_generer' => 'G&eacute;n&eacute;ration des fichiers paquet.xml',
-	'titre_form_verifier' => 'V&eacute;rification des fichiers plugin.xml',
+	'titre_form_generer' => 'Génération des fichiers paquet.xml',
+	'titre_form_verifier' => 'Vérification des fichiers plugin.xml',
 	'titre_page_navigateur' => 'PlugOnet',
 	'titre_page' => 'PlugOnet',
-
 );
-
 ?>
