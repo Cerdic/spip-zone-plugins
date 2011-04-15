@@ -145,7 +145,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = sql_select('a.id_auteur AS id_auteur, a.email AS email,id_asso,nom_famille,prenom,statut,validite,statut_interne,categorie',_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = sql_select('a.id_auteur AS id_auteur, a.email AS email,id_asso,nom_famille,prenom,statut,validite,statut_interne,categorie, bio',_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
@@ -164,7 +164,9 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		}
 		if ($data['validite']==""){$valide = '&nbsp;';}else{$valide = association_datefr($data['validite']);}
 
-		switch($data['statut'])	{
+		$statut = $data[($data['statut'] == 'nouveau') ? 'bio' : 'statut'];
+
+		switch($statut)	{
 		case "0minirezo":
 			$icone= "admin-12.gif"; break;
 		case "1comite":
