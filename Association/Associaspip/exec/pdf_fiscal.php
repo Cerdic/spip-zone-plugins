@@ -34,15 +34,17 @@ function exec_pdf_fiscal()
   $id_auteur = intval(_request('id'));
 
   $full = autoriser('associer', 'adherents');
-  if ((!$full AND ($id_auteur != $GLOBALS['visiteur_session']['id_auteur'])) OR !$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur")) {
+  if (!$full AND ($id_auteur != $GLOBALS['visiteur_session']['id_auteur'])) {
 		include_spip('inc/minipres');
 		echo minipres();
-	} else {
-
+  } elseif (!$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur")) {
+		include_spip('inc/minipres');
+		echo minipres(_T('public:aucun_auteur'));
+  } else {
 		if (!preg_match('/^\d{4}$/', $annee)) $annee = date('Y') - 1;
 		$montants = sql_getfetsel('SUM(recette) AS montant', "spip_asso_comptes", "id_journal=$id_auteur AND vu AND date_format( date, '%Y' ) = $annee AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']));
 		if (!$montants)
-		  {echo "Versement en $annee pour l'adherent de mail $mail: $montants";exit;}
+		  {echo "Versement en $annee pour l'adherent de mail $mail: $montants";}
 		else {
 		  $nom=$data['prenom'].' '.$data['nom_famille']; 
 		  $adresse=$data['adresse'];
@@ -52,7 +54,7 @@ function exec_pdf_fiscal()
 		  if (isset($_GET['var_profile']))
 		    erreur_squelette();
 		  else build_pdf($montants, $nom, $adresse, $cp, $annee, $ville, "$annee-$id_auteur");
-  }
+		}
   }
 }
 
