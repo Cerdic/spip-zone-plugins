@@ -24,14 +24,13 @@ function action_spipmotion_ajouter_file_encodage_dist(){
 	if (!preg_match(",^(-?)(\d+)\W(\w+)\W?(\d*)\W?(\w*)$,", $arg, $r)){
 		spip_log("action_spipmotion_ajouter_file_encodage_dist incompris: " . $arg);
 		$redirect = urldecode(_request('redirect'));
-		return;
+		return $redirect;
 	}
 	action_spipmotion_ajouter_file_encodage_post($r);
 	if(_request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
-		redirige_par_entete($redirect);
 	}
-	return;
+	return $redirect;
 }
 
 function action_spipmotion_ajouter_file_encodage_post($r){

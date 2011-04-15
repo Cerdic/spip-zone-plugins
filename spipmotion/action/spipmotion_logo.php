@@ -25,8 +25,9 @@ function action_spipmotion_logo_dist(){
 	
 	if(_request('redirect')){
 		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
-		redirige_par_entete($redirect);
+		//redirige_par_entete($redirect);
 	}
+	return $redirect;
 }
 
 function action_infos_video_post($r){
@@ -36,7 +37,7 @@ function action_infos_video_post($r){
 
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_document/$id_document'");
-
+	spip_log($x,'spipmotion');
 	return $x;
 }
 
