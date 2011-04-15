@@ -33,7 +33,6 @@ function action_tradlang_synchro_base_fichier_dist(){
 				$lg = $langue["lang"];
 				$fichiers[$lg] = $nom_mod."_".$lg.".php";
 				foreach($fichiers as $key => $fichier){
-					spip_log("synchro $key => $fichier",'tradlang');
 					$chemin_fichier = $dir_lang.'/'.$fichier;
 					/**
 					 * On récupère la date de modification du fichier sur le disque
@@ -47,17 +46,14 @@ function action_tradlang_synchro_base_fichier_dist(){
 						 */
 						$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
 						$sauvegarder_module($module,$lg,$dir_lang);
-						spip_log("On regénère le fichier à partir de la base");
 					}
 					else{
 						$ts_base = sql_getfetsel('ts','spip_tradlang','module='.sql_quote($nom_mod).' AND lang='.sql_quote($lg),'','ts DESC','0,1');
-						spip_log("else TIMESTAMP base : $ts_base",'tradlang');
 						
 						include($chemin_fichier);
 						$chs = $GLOBALS[$GLOBALS['idx_lang']];
 						$ts_synchro = $chs["zz_timestamp_nepastraduire"];
 						unset($GLOBALS[$GLOBALS['idx_lang']]);
-						spip_log("TIMESTAMP synchro : $ts_synchro",'tradlang');
 						
 						/**
 						 * Cas où la base est plus récente que le ts incorporé dans le fichier
@@ -71,7 +67,6 @@ function action_tradlang_synchro_base_fichier_dist(){
 							 */
 							$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
 							$sauvegarder_module($module,$lg,$dir_lang);
-							spip_log("On regénère le fichier à partir de la base",'tradlang');
 						}
 					}
 				}

@@ -119,7 +119,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'Ce plugin permet de gérer les fichiers langues',
 
 	// S
-	'str_status_modif' => 'Nouveau (MODIF)',
+	'str_status_modif' => 'Modifi&eacute; (MODIF)',
+	'str_status_new' => 'Nouveau (NEW)',
 	'str_status_traduit' => 'Traduit',
 
 	// T

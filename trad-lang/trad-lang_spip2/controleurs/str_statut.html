@@ -13,6 +13,7 @@
 	<select class="text crayon_active" name="#ENV{name_status}">
 		<option value="OK"[(#STATUS|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
 		<option value="MODIF"[(#STATUS|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+		<option value="NEW"[(#STATUS|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
 	</select>
 </li>
 <li class="editer_str">
