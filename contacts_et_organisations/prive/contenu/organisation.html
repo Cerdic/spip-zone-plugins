@@ -35,12 +35,21 @@
 			data,''})]})]
 })]
 
+[(#ENV{cadre}|oui)
+	[(#GET{contenu}|trim|oui)
+		[(#VAL{e}|debut_cadre{#CHEMIN{images/organisation-24.png},'',
+			<a href="[(#URL_ECRIRE{organisation,id_organisation=#ID_ORGANISATION}
+				|parametre_url{redirect,#SELF})]"><:contacts:titre_organisation:></a>
+		})]
 
-[(#GET{contenu}|trim|oui)
-	[(#VAL{e}|debut_cadre{#CHEMIN{images/organisation-24.png},'',<:contacts:titre_organisation:>})]
-	<div class="presentation_contenu">
+					
+		<div class="presentation_contenu">
+		#GET{contenu}
+		</div>
+		[(#EVAL{true}|fin_cadre)]
+	]
+]
+[(#ENV{cadre}|non)
 	#GET{contenu}
-	</div>
-	[(#EVAL{true}|fin_cadre)]
 ]
 </BOUCLE_organisation>

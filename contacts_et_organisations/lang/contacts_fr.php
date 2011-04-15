@@ -18,12 +18,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_organisation' => "Chercher",
 	'chercher_statut' => "Statut",
 	'contacts' => 'Contacts',
+	'contact_creer' => "Créer un contact",
+	'contact_nouveau' => "Nouveau contact",
+	'contact_modifier' => "Modifier un contact",
+	'contact_editer' => 'Éditer ce contact',
+	
 	'confirmer_supprimer_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
 		les informations relatives &agrave; ce contact ?",
 	'confirmer_supprimer_organisation' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
 		les informations relatives &agrave; cette organisation ?",
 	'confirmer_delier_organisation' => "&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier ce contact de cette organisation ?",
 	'confirmer_delier_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier cette organisation de ce contact ?",
+
+
 	
 	// D
 	'definir_auteur_comme_contact' => "D&eacute;finir comme contact",
@@ -82,12 +89,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_organisation' => "Lier une organisation",
 	'liste_contacts' => 'Liste les contacts',
 	'liste_organisations' => 'Liste les organisations',
+	'label_type_liaison' => 'Liaison',
 	
 	'nb_contact' => '1 contact',
 	'nb_contacts' => '@nb@ contacts',
 
 	// O
 	'organisations' => 'Organisations',
+	'organisation_nouveau' => 'Nouvelle organisation',
+	'organisation_creer' => 'Créer une organisation',
+	'organisation_modifier' => 'Modifier une organisation',
+	'organisation_editer' => 'Éditer cette organisation',
+	'organisation_numero' => 'Organisation numéro',
+	'organisation_voir' => 'Voir',
 
 	// R
 	'rechercher' => "Rechercher",

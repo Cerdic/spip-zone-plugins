@@ -3,7 +3,7 @@
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 	<auteur>Matthieu Marcillaud - [Ma Graine->http://magraine.net]</auteur>
 	
-	<etat>test</etat>
+	<etat>dev</etat>
 	
 	<description>
 		<multi>
@@ -25,9 +25,9 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	
 	<prefix>contacts</prefix>
 	
-	<version>1.4.7</version>
-
-	<version_base>1.3.3</version_base>
+	<version>1.5.0</version>
+	<version_base>1.3.6</version_base>
+	
 	<install>base/contacts_upgrade.php</install>
 
 	<pipeline>
@@ -91,6 +91,11 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	</pipeline>
 	
 	<!-- pour charger les nouvelles balises #PSEUDO et #ORGANISATIONS -->
+	<fonctions>contacts_fonctions.php</fonctions>
+
+	<!-- generer_url (vivement la 3.0) -->
+	<options>contacts_options.php</options>
+
 	<fonctions>contacts_fonctions.php</fonctions>
 	
 	<!-- des boutons pour un acces direct aux contacts / organsations (CRM) --> 

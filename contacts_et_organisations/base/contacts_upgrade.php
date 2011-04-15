@@ -123,7 +123,29 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
     if (version_compare($current_version,"1.3.3","<")){
 		sql_alter("TABLE spip_contacts CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL");
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.3");
-		
+	}
+	
+	// le champ id_auteur sur spip_organisations peut ne pas etre unique si une organisation
+	// n'est pas liee a un auteur (id_auteur=0). Plus tard, il faudra certainement mettre une
+	// table de relation spip_organisations_liens pour cela.
+    if (version_compare($current_version,"1.3.4","<")){
+		// pas de UNIQUE sur l'index auteur
+		sql_alter("TABLE spip_organisations DROP INDEX id_auteur");
+		sql_alter("TABLE spip_organisations CHANGE id_auteur id_auteur bigint(21) DEFAULT 0 NOT NULL");
+		sql_alter("TABLE spip_organisations ADD INDEX (id_auteur)");
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.4");
+	}
+	
+	// le champ id_parent sur spip_organisations pour definir des hierarchies d'organisations.
+    if (version_compare($current_version,"1.3.5","<")){
+		sql_alter("TABLE spip_organisations ADD COLUMN id_parent bigint(21) DEFAULT 0 NOT NULL");
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.5");
+	}
+	
+	// le champ type_liaison sur spip_organisations_contacts pour definir des types de liaisons donc.
+    if (version_compare($current_version,"1.3.6","<")){
+		sql_alter("TABLE spip_organisations_contacts ADD COLUMN type_liaison tinytext NOT NULL DEFAULT ''");
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.6");
 	}
 }
 

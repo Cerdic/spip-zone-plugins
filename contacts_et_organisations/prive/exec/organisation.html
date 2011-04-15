@@ -1,0 +1,73 @@
+<BOUCLE_orga(ORGANISATIONS){id_organisation}{tous}>
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE" class="racine"><:info_racine_site:></a>
+	</span>
+	<span class="bloc">
+		<em> &gt; </em>
+		<a href="[(#URL_ECRIRE{organisations})]"><:contacts:organisations:></a>
+	</span>
+	<BOUCLE_orga_chemin(HIERARCHIE){id_organisation}>
+	<span class="bloc">
+		<em> &gt; </em>
+		<a class="on" href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#TITRE</a>
+	</span>
+	</BOUCLE_orga_chemin>
+	<span class="bloc">
+		<em> &gt; </em>
+		#NOM
+	</span>
+</div>
+<!--/#hierarchie-->
+
+<div class="fiche_objet">
+	[(#AUTORISER{modifier,organisation,#ID_ORGANISATION})
+		[(#URL_ECRIRE{organisation_edit,id_organisation=#ID_ORGANISATION}
+			|parametre_url{redirect,#SELF}
+			|icone{<:contacts:organisation_editer:>,#CHEMIN{images/organisation-24.png},right})]
+	]
+	<h1>#NOM</h1>
+	
+	<div id="wysiwyg">
+	<INCLURE{fond=prive/contenu/organisation,id=#ID_ORGANISATION,ajax=wysiwyg}>
+	</div>
+
+	<INCLURE{fond=prive/liste/linked_contacts,id_organisation=#ID_ORGANISATION,ajax}>
+					
+	#INCLURE{fond=prive/contenu/portfolio_document,objet=organisation,id_objet=#ID_ORGANISATION}
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_PRODUIT},data,'<div class="nettoyeur"></div>'}}
+</div>
+
+<div class='plus'>
+	<h3 class='h3 invisible'><:contacts:supprimer_organisation:></h3>
+	<div class='danger'>
+		[(#BOUTON_ACTION{[(#CHEMIN{images/organisation-delete-24.png}
+			|balise_img{<:contacts:supprimer_organisation:>}
+			|concat{' ',<:contacts:supprimer_organisation:>})],
+			[(#URL_ACTION_AUTEUR{supprimer_contact,organisation/#GET{id_organisation},#SELF})],
+			ajax,<:contacts:confirmer_supprimer_organisation:>\n\n<:contacts:explication_supprimer_organisation:>})]
+	</p>
+	</div>
+</div>
+			
+<!--#navigation-->
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:contacts:organisation_numero:>
+		<p>#ID_ORGANISATION</p>
+	</div>
+</div>
+<!--/#navigation-->
+
+<!--#extra-->
+[(#CHEMIN{images/contact-24.png}
+	|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:contacts:lier_contact:>})],0})]
+#SET{rien,0}#SET{contact,0}
+	<div class='ajax'>
+	[(#FORMULAIRE_LIER_CONTACT{#ID_ORGANISATION, #SELF})]
+	</div>
+[(#EVAL{true}|fin_cadre_relief)]
+<!--/#extra-->
+</BOUCLE_orga>

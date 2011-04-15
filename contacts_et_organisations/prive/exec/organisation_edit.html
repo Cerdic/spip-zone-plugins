@@ -1,0 +1,35 @@
+<BOUCLE_autoriser(CONDITION){si #ENV{id_organisation}|et{#AUTORISER{modifier,organisation,#ENV{id_organisation}}}|ou{#ENV{id_organisation}|non|et{#AUTORISER{creer,organisation}}}}>
+#SET{id_parent,#ENV{id_parent}|sinon{#INFO_ID_PARENT{organisation,#ENV{id_organisation}}}}
+
+<!--#hierarchie-->
+
+<!--/#hierarchie-->
+
+[(#SET{redirect,#ENV{redirect,#URL_ECRIRE{organisations}}})]
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#GET{redirect}|icone{<:icone_retour:>,#CHEMIN{images/organisation-24.png}})]
+		<:contacts:organisation_modifier:>
+		<h1>
+			[(#ENV{id_organisation}|oui)#INFO_TITRE{organisation,#ENV{id_organisation}}]
+			[(#ENV{id_organisation}|non)<:contacts:organisation_nouveau:>]
+		</h1>
+	</div>
+
+	[(#SET{redirect,#ENV{redirect,#ENV{id_organisation}
+		|generer_url_entite{organisation}
+		|sinon{#URL_ECRIRE{organisation}}}})]
+	<div class="">
+		#FORMULAIRE_EDITER_ORGANISATION{#ENV{id_organisation,oui},'',#GET{redirect}}
+	</div>
+</div>
+
+<!--#navigation-->
+
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->
+</BOUCLE_autoriser>

@@ -2,6 +2,7 @@
 [(#REM) Tableau simplifié des contacts, affiché sur la page ?exec=auteurs_info, permettant de visualiser les contacts liés à une organisation ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1
+	type_liaison,1
 }})
 ]<B_liste_orga>
 #ANCRE_PAGINATION
@@ -12,6 +13,9 @@
 		<tr class='first_row'>
 			<th class="logo"></th>
 			<th class="nom">[(#TRI{nom,<:contacts:label_nom:>,ajax})]</th>
+			[(#ENV{court}|non)
+			<th class="type">[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
+			]
 			<th class='action'></th>
 		</tr>
 	</thead>
@@ -20,6 +24,10 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INCLURE{fond=logo/contact, id_contact}</a>
 			<td class='nom'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#PRENOM) ]#NOM</a></td>
+			[(#ENV{court}|non)
+				[(#REM) edition de crayon particuliere ]
+			<td class='type crayon contactliaison-[(#ID_ORGANISATION)]-[(#ID_CONTACT)] type_contactliaison'>[(#TYPE_LIAISON|sinon{-})]</td>
+			]
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_contact:>})],

@@ -8,15 +8,19 @@
 		<a href="[(#URL_ECRIRE{contacts})]" title="<:contacts:info_tous_contacts:>">[(#CHEMIN{images/contact-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
 		<:contacts:est_un_contact:>
 
-		[(#INCLURE{fond=prive/liste/linked_organisations,id_contact,titre=<:contacts:info_organisation_appartenance:>,ajax})]
+		[(#INCLURE{fond=prive/liste/linked_organisations,id_contact,
+			titre=<:contacts:info_organisation_appartenance:>,
+			court=oui,ajax})]
 </BOUCLE_est_un_contact>
 
 	<BOUCLE_est_une_organisation(ORGANISATIONS){id_auteur}>
 		#SET{id_organisation,#ID_ORGANISATION}
-		<a href="[(#URL_ECRIRE{organisations})]" title="<:contacts:info_toutes_organisations:>">[(#CHEMIN{images/organisation-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
+		<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]" title="<:contacts:info_toutes_organisations:>">[(#CHEMIN{images/organisation-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
 		<:contacts:est_une_organisation:>
 
-		[(#INCLURE{fond=prive/liste/linked_contacts,id_organisation,titre=<:contacts:info_contacts_organisation:>,ajax})]
+		[(#INCLURE{fond=prive/liste/linked_contacts,id_organisation,
+			titre=<:contacts:info_contacts_organisation:>,
+			court=oui,ajax})]
 
 	</BOUCLE_est_une_organisation>
 		#SET{rien,1}
@@ -63,18 +67,6 @@
 			<h3 class='h3'><:contacts:lier_contact:></h3>
 			<div class='ajax'>
 			[(#FORMULAIRE_LIER_CONTACT{#GET{id_organisation}})]
-			</div>
-
-			<h3 class='h3'><:contacts:supprimer_organisation:></h3>
-			<div class='danger'>
-			<p class='explication'>
-				<:contacts:explication_supprimer_organisation:>
-				[(#BOUTON_ACTION{[(#CHEMIN{images/organisation-delete-24.png}
-					|balise_img{<:contacts:supprimer_organisation:>}
-					|concat{' ',<:contacts:supprimer_organisation:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_contact,organisation/#GET{id_organisation},#SELF})],
-					ajax,<:contacts:confirmer_supprimer_organisation:>})]
-			</p>
 			</div>
 		]
 	]

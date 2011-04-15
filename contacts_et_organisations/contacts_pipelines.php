@@ -154,8 +154,10 @@ function contacts_formulaire_traiter($flux){
  */
 function contacts_affiche_milieu($flux){
 	if ($flux['args']['exec'] == 'auteur_infos') {
-		$data  = recuperer_fond('prive/contenu/contact', array('id_auteur' => $flux['args']['id_auteur']));
-		$data .= recuperer_fond('prive/contenu/organisation', array('id_auteur' => $flux['args']['id_auteur']));
+		$data  = recuperer_fond('prive/contenu/contact',
+			array('id_auteur' => $flux['args']['id_auteur'], 'cadre'=>'oui'));
+		$data .= recuperer_fond('prive/contenu/organisation',
+			array('id_auteur' => $flux['args']['id_auteur'], 'cadre'=>'oui'));
 		$flux['data'] = $data . $flux['data'];
 		}
 	return $flux;

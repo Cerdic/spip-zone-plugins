@@ -36,7 +36,7 @@ function contacts_declarer_tables_interfaces($interface){
 
 	// titre
 	$interface['table_titre']['contacts'] = "CONCAT(nom,' ',prenom) AS titre, '' AS lang";
-	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang, ";
+	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang";
 	
 	return $interface;
 }
@@ -46,7 +46,8 @@ function contacts_declarer_tables_principales($tables_principales){
 	//-- Table organisations ------------------------------------------
 	$organisations = array(
 		"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
-		"id_auteur"			=> "bigint(21) NOT NULL",
+		"id_auteur"			=> "bigint(21) NOT NULL default 0",
+		"id_parent"			=> "bigint(21) NOT NULL default 0",
 		"nom" 				=> "tinytext DEFAULT '' NOT NULL",
         "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
         "identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
@@ -57,7 +58,7 @@ function contacts_declarer_tables_principales($tables_principales){
 		);
 	$organisations_key = array(
 		"PRIMARY KEY"		=> "id_organisation",
-		"UNIQUE KEY id_auteur" => "id_auteur"
+		"KEY id_auteur"     => "id_auteur"
 		);
 	$organisations_join = array(
 		// sinon (ORGANISATIONS){auteurs.statut = xxx} ne fonctionne pas...
@@ -97,13 +98,14 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
 
     //-- Table organisations_contacts -------------------------------------
     $organisations_contacts = array(
-        "id_organisation"     => "BIGINT(21) NOT NULL",
-        "id_contact"    => "BIGINT(21) NOT NULL"
+        "id_organisation" => "BIGINT(21) NOT NULL",
+        "id_contact"      => "BIGINT(21) NOT NULL",
+        "type_liaison"    => "tinytext NOT NULL DEFAULT ''",
     );
     $organisations_contacts_key = array(
-        "PRIMARY KEY"	=> "id_organisation, id_contact",
-		"KEY id_organisation"	=> "id_organisation",
-		"KEY id_contact"	=> "id_contact"
+        "PRIMARY KEY"	       => "id_organisation, id_contact",
+		"KEY id_organisation"  => "id_organisation",
+		"KEY id_contact"       => "id_contact"
     );
 	$tables_auxiliaires['spip_organisations_contacts'] =
 		array('field' => &$organisations_contacts, 'key' => &$organisations_contacts_key);
@@ -111,13 +113,13 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
 
     //-- Table organisations_contacts -------------------------------------
     $contacts_liens = array(
-        "id_contact"     => "BIGINT(21) NOT NULL",
-        "id_objet"    => "BIGINT(21) NOT NULL",
-        "objet"    => "VARCHAR(25) NOT NULL",
+        "id_contact" => "BIGINT(21) NOT NULL",
+        "id_objet"   => "BIGINT(21) NOT NULL",
+        "objet"      => "VARCHAR(25) NOT NULL",
     );
     $contacts_liens_key = array(
-        "PRIMARY KEY"	=> "id_contact, id_objet, objet",
-		"KEY id_contact"	=> "id_contact"
+        "PRIMARY KEY"    => "id_contact, id_objet, objet",
+		"KEY id_contact" => "id_contact"
     );
 	$tables_auxiliaires['spip_contacts_liens'] =
 		array('field' => &$contacts_liens, 'key' => &$contacts_liens_key);
