@@ -3,19 +3,21 @@
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
 	<version>0.1.0</version>
 	<etat>dev</etat>
-	<licence>GPL 3</licence>
-	<icon>prive/themes/spip/images/plugonet-32.png</icon>
+	<licence>GPL v3</licence>
+	<icon>images/plugonet-32.png</icon>
 	<description>
-Passer de plugin.xml &agrave; paquet.xml.
+Migrer de plugin.xml &agrave; paquet.xml.
 
 Ce plugin permet de produire le nouveau fichier paquet.xml &agrave; partir du fichier
 plugin.xml. Des options de v&eacute;rification sont disponibles pour nettoyer au pr&eacute;alable
 certaines balises du fichier d'origine.
+
+En outre, PlugOnet permet de valider des fichiers paquet.xml &eacute;crits manuellement et fournit
+une aide sur chaque balise de la nouvelle DTD.
 	</description>
 	<lien></lien>
 	<prefix>plugonet</prefix>
 
-<!-- 	<fonctions>langonet_fonctions.php</fonctions> -->
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/plugonet_autoriser.php</inclure>
@@ -26,7 +28,7 @@ certaines balises du fichier d'origine.
 	</pipeline>
 
 	<bouton id="plugonet" parent="configuration">
-		<icone>prive/themes/spip/images/plugonet-24.png</icone>
+		<icone>images/plugonet-24.png</icone>
 		<titre>plugonet:bouton_plugonet</titre>
 		<url>plugonet_generer</url>
 	</bouton>
