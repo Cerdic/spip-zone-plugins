@@ -1,0 +1,14 @@
+		<B_rubriques_sites>
+		<BOUCLE_rubriques_sites(RUBRIQUES) {racine} {pagination 5}>
+		<B_sites_references>
+		<h3>[(#_rubriques_sites:TITRE)]</h3>
+		<ul>
+		<BOUCLE_sites_references(SITES) {par nom_site}><li>
+		<a href="[(#ID_SYNDIC|generer_url_entite{'site'})]" title="[(#NOM_SITE|attribut_html)]">#NOM_SITE</a>
+		</li>
+		</BOUCLE_sites_references>
+		</ul>
+		</B_sites_references>
+		</BOUCLE_rubriques_sites>
+		[<div class="pagination">(#PAGINATION)</div>]
+		</B_rubriques_sites>
