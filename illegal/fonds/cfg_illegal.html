@@ -2,7 +2,7 @@
 
 <!-- autoriser=webmestre -->
 <!-- titre=Articles illégaux -->
-<!-- descriptif=Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite d'activer les crayons sur la page exec, et de créer un champ <code>spip_articles.illegal</code> . -->
+<!-- descriptif=Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite d'activer les crayons sur la page exec, et de créer un champ : <code>alter table spip_articles add illegal longtext default null;</code> -->
 <!-- icone=images/illegal-24.png -->
 <!-- logo=images/illegal-24.png -->
 
@@ -41,7 +41,7 @@
 <div class="#EDIT{illegal}">[(#ILLEGAL|couper{300}|sinon{illegal...})]</div>
 
 </BOUCLE_i>
-[(#ID_ARTICLE|?{Article inexistant})]
+[(#GET{id_article}|?{Article inexistant})]
 <//B_i>
 
 
