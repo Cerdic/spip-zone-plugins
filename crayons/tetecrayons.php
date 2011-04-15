@@ -226,8 +226,9 @@ function balise_EDIT($p) {
 
 	$primary = explode(',',$primary);
 	$id = array();
-	foreach($primary as $key)
+	foreach($primary as $key) {
 		$id[] = champ_sql(trim($key),$p);
+	}
 	$primary = implode(".'-'.",$id);
 
 	$p->code = "classe_boucle_crayon('"
@@ -272,7 +273,13 @@ function classe_boucle_crayon($type, $champ, $id) {
 	$plus = (substr($champ, -1) == '+' AND $champ = substr($champ, 0, -1))
 		? " $type--$id"
 		: '';
-
+	
+	// test rapide pour verifier que l'id est valide (a-zA-Z0-9)
+	if (false !== strpos($id, ' ')) {
+		spip_log("L'identifiant ($id) ne pourra être géré ($type | $champ)", 'crayons');
+		return 'crayon_id_ingerable';
+	}
+	
 	return 'crayon ' . $type . '-' . $champ . '-' . $id . $plus;
 }
 

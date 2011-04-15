@@ -34,7 +34,11 @@ $.prototype.cfgCrayons.prototype.iconclick = function(c, type) {
 	// on recherche une class du type type-champ-id
 	// comme article-texte-10 pour le texte de l'article 10
 	// ou meta-valeur-meta
-	var cray = c.match(/\b\w+-(\w+)-\d+\b/) || c.match(/\b\meta-valeur-(\w+)\b/);
+	var cray =
+			   c.match(/\b\w+-(\w+)-\d(?:-\w+)+\b/)   // numeros_lien-type-2-3-article (table-champ-cles)
+			|| c.match(/\b\w+-(\w+)-\d+\b/)           // article-texte-10 (inclu dans le precedent, mais bon)
+	        || c.match(/\b\meta-valeur-(\w+)\b/)      // meta-valeur-xx
+	        ;
 
 	var boite = !cray ? '' : this.mkimg(type, ' (' + cray[1] + ')');
 
@@ -429,7 +433,7 @@ $.fn.activatecrayon = function(percent) {
 // insere les icones et le type de crayon (optionnel) dans l'element
 $.fn.iconecrayon = function(){
 	return this.each(function() {
-		var ctype = this.className.match(/\btype_(\w+)\b/);
+		var ctype = this.className.match(/\b[^-]type_(\w+)\b/);
 		type = (ctype) ? ctype[1] : 'crayon';
 		if (ctype) this.type = type; // Affecte son type a l'objet crayon
 		$(this).prepend(configCrayons.iconclick(this.className, type))

@@ -98,6 +98,7 @@ function crayons_store($options = array()) {
 					// qu'il n'a pas ete modifie entre-temps
 					$get_valeur = $options['f_get_valeur'];
 					$data = $get_valeur($content, $regs);
+
 					$md5 = md5(serialize($data));
 
 					// est-ce que le champ a ete modifie dans la base entre-temps ?
@@ -306,7 +307,21 @@ function vues_dist($type, $modele, $id, $content, $wid){
 		// dans la base de donnees (meme si a priori la valeur est
 		// ce qu'on vient d'envoyer, il y a nettoyage des caracteres et
 		// eventuellement d'autres filtres de saisie...)
-		$valeur = array_pop(valeur_colonne_table($type, $modele, $id));
+		$bdd = valeur_colonne_table($type, $modele, $id);
+		if (count($bdd)) {
+			$valeur = array_pop($bdd);
+		} else {
+			// les champs n'ont pas ete retrouves dans la base
+			// ce qui signifie a priori que nous sommes en face d'une cle primaire compose
+			// et qu'un crayon a modifie un element de cette cle (c'est pas malin !)
+			// dans ce cas, on reaffiche a minima ce qu'on vient de publier
+			// mais il sera impossible de le reediter dans la foulee avec le meme crayon
+			// (car l'identifiant du crayon se base sur l'id).
+			// Il faudra donc recharger la page pour pouvoir reediter.
+			if (is_scalar($id)) {
+				$valeur = $content[$modele];
+			}
+		}
 
 		// seul spip core sait rendre les donnees
 		if (in_array($modele,
@@ -346,8 +361,18 @@ function crayons_update($id, $colval = array(), $type = '')
 		suivre_invalideur($cond, $modif=true);
 	}
 	else {
-		include_spip('inc/modifier');
-		$a = modifier_contenu($type, $id, array(), $colval);
+		// cle primaire composee : 3-4-rubrique
+		// calculer un where approprie
+		// et modifier sans passer par la fonction destinee aux tables principales
+		// on limite a SPIP 2 mini car sql_updateq n'est pas mappe dans les crayons_compat
+		if (is_scalar($id) and ($GLOBALS['spip_version_code'] >= '1.93')) {
+			list($nom_table, $where) = table_where($type, $id, true); // where sous forme de tableau
+			$a = sql_updateq($nom_table, $colval, $where);
+		} else {
+			// modification d'une table principale
+			include_spip('inc/modifier');
+			$a = modifier_contenu($type, $id, array(), $colval);
+		}
 	}
 
 	return $a;

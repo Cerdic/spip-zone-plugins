@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\w+(?:-\w+)?))\b,');
+define('_PREG_CRAYON', ',crayon\b[^<>\'"]+?\b((\w+)-(\w+)-(\w+(?:-\w+)*))\b,');
 
 // Compatibilite pour 1.92 : on a besoin de sql_fetch et table_objet_sql
 if ($GLOBALS['spip_version_code'] < '1.93' AND $f = charger_fonction('compat_crayons', 'inc'))
@@ -383,7 +383,7 @@ function colonne_table($type, $col) {
 }
 //	var_dump(colonne_table('forum', 'id_syndic')); die();
 
-function table_where($type, $id)
+function table_where($type, $id, $where_en_tableau = false)
 {
 	list($distant,$table) = distant_table($type);
 	$nom_table = '';
@@ -395,10 +395,19 @@ function table_where($type, $id)
 	if (is_scalar($id)) {
 		$id = explode('-', $id);
 	}
-	$where = $and = '';
-	foreach ($id as $idcol => $idval) {
-		$where .= $and . '`' . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '`=' . _q($idval);
-		$and = ' AND ';
+	// sortie tableau pour sql_updateq
+	if ($where_en_tableau) {
+		$where = array();
+		foreach ($id as $idcol => $idval) {
+			$where[] = '`' . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '`=' . sql_quote($idval);
+		}
+	// sinon sortie texte pour sql_query
+	} else {
+		$where = $and = '';
+		foreach ($id as $idcol => $idval) {
+			$where .= $and . '`' . (is_int($idcol) ? trim($tabid[$idcol]) : $idcol) . '`=' . _q($idval);
+			$and = ' AND ';
+		}
 	}
 	return array($nom_table, $where);
 }
@@ -407,6 +416,7 @@ function table_where($type, $id)
 function valeur_colonne_table_dist($type, $col, $id) {
 	list($distant,$table) = distant_table($type);
 	list($nom_table, $where) = table_where($type, $id);
+
 	if (!$nom_table)
 		return false;
 

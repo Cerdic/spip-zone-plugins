@@ -10,7 +10,7 @@ function affiche_controleur($class, $c=null) {
 		$regs[] = $class;
 
 		// A-t-on le droit de crayonner ?
-		spip_log("autoriser('crayonner', $type, $id, NULL, array('modele'=>$modele)","crayons_distant");
+		spip_log("autoriser('crayonner', $type, $id, NULL, array('modele'=>$champ)","crayons_distant");
 		if (!autoriser('crayonner',$type, $id, NULL, array('modele'=>$champ))) {
 			$return['$erreur'] = "$type $id: " . _U('crayons:non_autorise');
 		} else {
@@ -37,6 +37,7 @@ function controleur_dist($regs, $c=null) {
 		'class' => $class
 	);
 	list($distant,$table) = distant_table($type);
+
 	// Si le controleur est un squelette html, on va chercher
 	// les champs qu'il lui faut dans la table demandee
 	// Attention, un controleur multi-tables ne fonctionnera
