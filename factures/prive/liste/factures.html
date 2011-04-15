@@ -1,5 +1,8 @@
-<h1 class="grostitre"><:factures:editer_facturation_titre:></h1>
-<p><:factures:explication_editer_facturation_titre:></p>
+#CACHE{0}
+<!-- factures/prive/liste/factures.html -->
+
+<h1 class="grostitre"><:factures:titre_liste_factures:></h1>
+<p><:factures:explication_liste_factures:></p>
 
 [(#URL_ECRIRE{menus_editer}|parametre_url{nouveau,oui}|icone{<:menus:editer_menus_nouveau:>,#CHEMIN{images/menus-nouveau-24.png},#LANG_RIGHT,creer.gif})]
 
@@ -12,20 +15,20 @@
 	</BOUCLE_t>
 
 
-[(#REM) On construit un tableau avec tous les contacts ; clause "id_client IN" de la boucle ]
-	#SET{contacts,#ARRAY}
-	<BOUCLE_c(contacts ?)>
-	#SET{contacts, #GET{contacts}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_CLIENT}}}
+[(#REM) On construit un tableau avec toutes les organisations; clause "id_organisation IN" de la boucle ]
+	#SET{organisations,#ARRAY}
+	<BOUCLE_c(ORGANISATIONS ?)>
+	#SET{organisations, #GET{organisations}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ORGANISATION}}}
 	</BOUCLE_c>
 
 
-[(#REM) On récupère les valeurs de id_contact et de id_type_facture éventuellement passés dans l'url ]
+[(#REM) On récupère les valeurs de id_organisation et de id_type_facture éventuellement passés dans l'url ]
 	[(#EVAL{_request('id_type_facture')}|?{' ',''})
 		#SET{type, #EVAL{_request('id_type_facture')} }
 	]
 
-	[(#EVAL{_request('id_contact')}|?{' ',''})
-		#SET{contacts, #EVAL{_request('id_client')} }
+	[(#EVAL{_request('id_organisation')}|?{' ',''})
+		#SET{organisations, #EVAL{_request('id_organisation')} }
 	]
 
 
@@ -81,7 +84,7 @@
 	</tr>
 	</thead>
 	<tbody>
-<BOUCLE_factures(FACTURES){id_contact IN #GET{contacts}}{id_type_facture IN #GET{type}}{!par date_facture}{!par num_facture}{pagination 20}>
+<BOUCLE_factures(FACTURES){id_organisation IN #GET{organisations}}{id_type_facture IN #GET{type}}{!par date_facture}{!par num_facture}{pagination 20}>
 	<tr[ id="ligne_(#NUM_FACTURE)"][ class="(#COMPTEUR_BOUCLE|alterner{'row_even','row_odd'})"]><BOUCLE_n(CONTACTS){id_client}>
 		<td class="num #EDIT{nom}"><a href="[(#URL_PAGE{contact}|parametre_url{id_client,#ID_CLIENT})]" title="Fiche client N&deg;#ID_CLIENT, #NOM_CLIENT">#NOM_COURT</a></td></BOUCLE_n>
 		<td class="num #EDIT{num_facture}"><a href="[(#URL_PAGE{fiche_facture}|parametre_url{'id_facture',#ID_FACTURE})]">#NUM_FACTURE</a></td>

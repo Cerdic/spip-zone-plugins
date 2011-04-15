@@ -2,7 +2,7 @@
 	<nom><multi>[en]Invoices &amp; Quotations[fr]Factures &amp; Devis</multi></nom>
 	<icon>images/factures-32.png</icon>
 
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<version_base>1.0.1</version_base>
 	<install>base/factures_upgrade.php</install>
 
@@ -34,7 +34,7 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 	<prefix>factures</prefix>
 	
 	<categorie>edition</categorie>
-	<options>factures_options.php</options>
+	<fonctions>factures_fonctions.php</fonctions>
 
 
 	<pipeline>
@@ -46,22 +46,18 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 		<inclure>base/factures.php</inclure>
 	</pipeline>
 
-	<onglet id="factures" parent="configuration">
-		<icone>images/factures-32.png</icone>
-		<titre>factures:titre_page_dayfill</titre>
-		<url>factures</url>
-	</onglet>
-
-	<bouton id="factures21" parent="bando_configuration">
+	<!-- configurer le plugin -->
+	<bouton id="config_factures" parent="bando_configuration">
+		<titre>factures:bouton_configurer_factures</titre>
 		<icone>images/factures-16.png</icone>
-		<titre>factures:titre_page_factures</titre>
-		<url>factures</url>
+		<url>config_factures</url>
 	</bouton>
 
-	<bouton id='factures' parent='naviguer'> 
-			<icone>images/factures-32.png</icone> 
-			<titre>factures:bouton_factures</titre> 
-			<url>factures</url> 
+	<!-- éditer les factures -->
+	<bouton id='factures' parent='bando_edition'> 
+		<icone>images/factures-16.png</icone> 
+		<titre>factures:bouton_factures</titre> 
+		<url>factures</url> 
 	</bouton>
 
 	<!--pipeline>
