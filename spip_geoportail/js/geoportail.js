@@ -1010,7 +1010,7 @@ jQuery.geoportail =
 			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.showImg('" + att.url + "',"+att.width+","+att.height+",'"+att.name+"')\">";
 			else lien = "<a href='" + att.url + "'>";
 		}
-		if (att.logo) html += att.logo;
+		if (att.logo) html += (lien ? lien : "") + att.logo + (lien ? "</a>" : "");
 		if (att.img) html += (lien ? lien : "") + "<img src='"+att.img+"' class='spip_logos' />" + (lien ? "</a>" : "");
 		if (att.name) html += "<p class=titre>"+ (lien ? lien : "") + att.name + (lien ? "</a>" : "") + "</p>";
 		if (att.description) html += att.description;
