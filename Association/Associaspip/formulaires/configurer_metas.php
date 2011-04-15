@@ -74,7 +74,7 @@ function formulaires_configurer_metas_recense($form, $opt='')
 
 define('_EXTRAIRE_PLUGIN', '@(' .  _DIR_PLUGINS_AUTO . '|' . _DIR_PLUGINS . '|' . _DIR_EXTENSIONS .')(.+)/formulaires/[^/]+$@');
 
-// Recuperer la version compilee de plugin.xml et normaliser
+// Recuperer la description XML du plugin et normaliser
 // Si ce n'est pas un plugin, dire qu'il faut prendre la table std des meta.
 function formulaires_configurer_metas_infos($form){
 
@@ -82,11 +82,11 @@ function formulaires_configurer_metas_infos($form){
 	if (!$path) return ''; // cas traite en amont normalement.
 	if (!preg_match(_EXTRAIRE_PLUGIN, $path, $m))
 		return array('path' => $path, 'meta' => 'meta');
-	$plugin = basename($m[2]);
+	$plugin = $m[2];
 	$get_infos = charger_fonction('get_infos','plugins');
 	$infos = $get_infos($plugin, false, $m[1]);
 	if (!is_array($infos))
-	  return _T('erreur_plugin_nom_manquant') . ' ' . $plugin;
+	  return _T('erreur_plugin_nom_manquant') . ' ' . $plugin . ' ' . $path;
 	if (isset($infos['erreur'])) return $infos['erreur'][0];
 	$prefix = $infos['prefix'];
 	$infos['path'] = $path;
