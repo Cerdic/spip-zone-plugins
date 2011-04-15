@@ -55,7 +55,7 @@
 			<th class="cible">
 				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
 			</th>
-			<th class="statut">
+			<th class="statut" width="50px">
 				[(#TRI{status,<:tradlang:th_status:>,ajax})]
 			</th>
 		</tr>
@@ -71,7 +71,7 @@
 		<td class="origine"><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		<td class="cible #EDIT{str_statut}">[(#STR**|entites_html)]</td>
-		<td class="statut">[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
+		<td class="statut" width="50px">[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
 	</tr>
 	</BOUCLE_revise_cible>
 	</tbody>
