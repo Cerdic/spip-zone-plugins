@@ -8,7 +8,7 @@
 
 	width:				70px;
 	height:				16px;
-	background-image:	url( "tab.png" );
+	background-image:	url(img/tab.png);
 	
 	position:		relative;
 	top:			0;
@@ -31,7 +31,7 @@
 .dynamic-tab-pane-control .tab-row .tab.selected {
 	width:				74px !important;
 	height:				18px !important;
-	background-image:	url( "tab.active.png" ) !important;
+	background-image:	url(img/tab-on.png) !important;
 	background-repaet:	no-repeat;
 
 	border-bottom-width:	0;
@@ -53,7 +53,7 @@
 	font-size: 11px;
 	width:				70px;
 	height:				16px;
-	background-image:	url( "tab.hover.png" );
+	background-image:	url(img/tab-hover.png);
 	background-repaet:	no-repeat;
 }
 
