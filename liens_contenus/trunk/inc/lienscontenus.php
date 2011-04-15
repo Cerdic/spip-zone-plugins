@@ -198,10 +198,11 @@ function lienscontenus_verification()
 {
 	$data = '<script language="javascript" type="text/javascript">' .
             'var messageConfirmationDepublication="'._T('lienscontenus:confirmation_depublication').'";' .
-	        'var messageConfirmationPublication="'._T('lienscontenus:confirmation_publication').'";' .
+  	        'var messageConfirmationPublication="'._T('lienscontenus:confirmation_publication').'";' .
             'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
             'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
-	        'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
+	          'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
+	          'var messageAlertePublieContenantKo="'._T('lienscontenus:alerte_publie_contenant_ko').'";' .
             'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
             '</script>';
 	$data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
@@ -216,9 +217,13 @@ function lienscontenus_verification_articles()
         $(document).ready(function() {
             var estPublie = $('ul.instituer_article.instituer > li > ul > li.publie.selected').size() == 1;
             var estLie = $('#liens_contenus_contenants > li.publie').size() > 0;
-            var estLiant = $('#liens_contenus_contenus > li:not(.publie)').size() > 0;
-            if (estPublie && estLiant) {
+            var estLiantOk = $('#liens_contenus_contenus > li:not(.publie):not(.ko)').size() > 0;
+            var estLiantKo = $('#liens_contenus_contenus > li.ko').size() > 0;
+            if (estPublie && estLiantOk) {
               $('div.fiche_objet').prepend('<div class="alerte">' + messageAlertePublieContenant + '</div>');
+            }
+            if (estPublie && estLiantKo) {
+              $('div.fiche_objet').prepend('<div class="alerte">' + messageAlertePublieContenantKo + '</div>');
             }
             // ETAPE 1 : Alerte en cas de dépublication d'un article vers lequel pointent des contenus publies
             if (estPublie && estLie) {
@@ -236,7 +241,7 @@ function lienscontenus_verification_articles()
               });
             }
             // ETAPE 2 : Alerte en cas de publication d'un article qui pointe vers des contenus non publies
-            if (!estPublie && estLiant) {
+            if (!estPublie && estLiantOk) {
               $('ul.instituer_article.instituer > li > ul > li.publie > a').each(function(){
                 this.onclick = null; // this plutot que $(this), pas tous les jours facile
                 $(this).bind('click', function(event){

@@ -71,11 +71,11 @@ function lienscontenus_verifier_si_existe($type_objet, $id_objet)
 function lienscontenus_icone_statut($type_objet, $id_objet)
 {
 	$statut = lienscontenus_statut($type_objet, $id_objet);
-    if ($statut != '') {
-        return '<img src="'._DIR_PLUGIN_LIENSCONTENUS.'/images/statut-'.$statut.'.gif" align="absmiddle" alt="'._T('lienscontenus:statut_'.$statut).'" />';
-    } else {
-        return '';
-    }
+  if ($statut != '') {
+    return '<img src="'._DIR_PLUGIN_LIENSCONTENUS.'/images/statut-'.$statut.'.gif" align="absmiddle" alt="'._T('lienscontenus:statut_'.$statut).'" />';
+  } else {
+    return '';
+  }
 }
 
 function lienscontenus_statut($type_objet, $id_objet)
@@ -83,13 +83,22 @@ function lienscontenus_statut($type_objet, $id_objet)
 	$listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
 	include_spip('base/abstract_sql');
 	if ($type_objet == 'document') {
-        // TODO: gérer le statut des docs si médiathèque est installé
-        return 'publie';
-    } elseif (in_array($type_objet, array('syndic', 'forum'))) {
-        $res = sql_select("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
+    // TODO: gérer le statut des docs si médiathèque est installé
+    return 'publie';
+  } elseif ($type_objet == 'auteur') {
+    $statut = sql_getfetsel("statut", "spip_auteurs", "id_auteur="._q($id_objet));
+    if ($statut == '') {
+      return '';
+    } elseif ($statut == '5poubelle') {
+      return 'poubelle';
+    } else {
+      return 'publie';
+    }
+  } elseif (in_array($type_objet, array('syndic', 'forum'))) {
+    $res = sql_select("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
 	} else {
 		// Marche aussi pour les formulaires (type = "form")
-        $res = sql_select("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
+    $res = sql_select("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
 	}
 	if ($res) {
 		$row = sql_fetch($res);
@@ -109,6 +118,8 @@ function lienscontenus_titre_contenu($type_objet, $id_objet)
     $titre = sql_getfetsel("nom_site", "spip_syndic", "id_syndic="._q($id_objet));
   } elseif ($type_objet == 'forum') {
     $titre = sql_getfetsel("titre", "spip_forum", "id_forum="._q($id_objet));
+  } elseif ($type_objet == 'auteur') {
+    $titre = sql_getfetsel("nom", "spip_auteurs", "id_auteur="._q($id_objet));
   } else {
     // Marche aussi pour les formulaires (type = "form")
     $titre = sql_getfetsel("titre", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
