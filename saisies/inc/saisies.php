@@ -966,6 +966,12 @@ function saisies_generer_js_afficher_si($saisies,$id_form){
 							else
 								$condition = preg_replace('#@plugin:'.$plug.'@#U', 'false', $condition);
 						}
+						// On gère le cas @config:plugin:meta@ suivi d'un test
+						preg_match_all('#@config:(.+):(.+)@#U', $condition, $matches);
+						foreach ($matches[1] as $plugin) {
+							$config = lire_config($plugin);
+							$condition = preg_replace('#@config:'.$plugin.':'.$matches[2][0].'@#U', '"'.$config[$matches[2][0]].'"', $condition);
+						}
 						// On transforme en une condition valide
 						preg_match_all('#@(.+)@#U', $condition, $matches);
 						foreach ($matches[1] as $nom) {
