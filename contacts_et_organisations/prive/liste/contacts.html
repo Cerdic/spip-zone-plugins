@@ -21,7 +21,7 @@
 	<tbody>
 	<BOUCLE_liste_contacts(CONTACTS contacts_liens){id_organisation?}{recherche ?}{auteurs.statut == #ENV{statut,.*}}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="logo"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#LOGO_{#OBJET}|sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}|image_reduire{20,26})]</a>
+			<td class="logo"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INCLURE{fond=logo/contact, id_contact}
 			<td class='pseudo'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#MODELE{nom_auteur}</a></td>
 			<td class='nom'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
 			<td class='organsiation'>#ORGANISATIONS</td>			
