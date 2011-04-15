@@ -34,8 +34,8 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 
 	$dir = sous_repertoire(_DIR_TMP,"langonet");
 	$dir = sous_repertoire($dir,"generation");
-	$comm = "\n// Produit automatiquement par le plugin LangOnet a partir de la langue source $langue_source\n";
-	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $source, $comm);
+	$producteur = "\n// Produit automatiquement par le plugin LangOnet a partir de la langue source $langue_source";
+	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $source, $producteur);
 
 	if (!$ok) {
 		$resultats['message_erreur'] = _T('langonet:message_nok_ecriture_fichier', array('langue' => $langue_cible, 'module' => $module));
@@ -90,11 +90,11 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 // Produit un fichier de langues a partir d'un tableau (index => trad)
 // Si trad n'est pas une chaine mais un tableau, on le met en commentaire
 
-function ecrire_fichier_langue_php($dir, $langue, $module, $items, $comm='')
+function ecrire_fichier_langue_php($dir, $langue, $module, $items, $producteur='')
 {
 	$contenu = '<'.'?php' . "\n" . '
 // Ceci est un fichier langue de SPIP -- This is a SPIP language file'
-. $comm . '
+. $producteur . '
 // Module: ' . $module . '
 // Langue: ' . $langue . '
 // Date: ' . date('d-m-Y H:i:s') . '
