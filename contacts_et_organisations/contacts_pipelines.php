@@ -28,9 +28,8 @@ function contacts_editer_contenu_objet($flux){
 	and $id_auteur = $flux['args']['contexte']['id_auteur']) {
 
 		$contact = recuperer_fond('formulaires/inc-contact', $flux['args']['contexte']);
-		$organisation = recuperer_fond('formulaires/inc-organisation', $flux['args']['contexte']);
 
-		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$contact.$organisation, $flux['data']);
+		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$contact, $flux['data']);
 	}
 	return $flux;
 }
@@ -44,11 +43,8 @@ function contacts_editer_contenu_objet($flux){
 function contacts_formulaire_charger($flux){
 	if ($flux['args']['form'] == 'editer_auteur') {
 		
-		// test des contacts, sinon des organisations
+		// test des contacts
 		$res = sql_fetsel('*', "spip_contacts_liens LEFT JOIN spip_contacts USING(id_contact)", 'id_objet='.sql_quote($flux['data']['id_auteur'])." AND objet = 'auteur'");
-		if (!$res) {
-			$res =  sql_fetsel('*', 'spip_organisations', 'id_auteur='.sql_quote($flux['data']['id_auteur']));
-		}
 
 		// contact ou organisation, on insère dans l'environnement du formulaire
 		// les valeurs pour les champs de formulaires,
@@ -73,11 +69,9 @@ function contacts_formulaire_verifier($flux){
 	if ($flux['args']['form'] == 'editer_auteur') {
 		$id_auteur = $flux['args']['args'][0];
 		
-		// test des contacts, sinon des organisations
+		// test des contacts
 		if (sql_countsel('spip_contacts_liens', 'id_objet='.sql_quote($id_auteur)." AND objet = 'auteur'")) {
 			$objet = 'contact';
-		} elseif (sql_countsel('spip_organisations', 'id_auteur='.sql_quote($id_auteur))) {
-			$objet = 'organisation';
 		} else {
 			$objet = false;
 		}
@@ -115,11 +109,9 @@ function contacts_formulaire_traiter($flux){
 	if ($flux['args']['form'] == 'editer_auteur') {
 		$id_auteur = intval($flux['data']['id_auteur']);
 		
-		// test des contacts, sinon des organisations
+		// test des contacts
     	if ($res = sql_fetsel('*', "spip_contacts_liens LEFT JOIN spip_contacts USING(id_contact)", 'id_objet='.sql_quote($flux['data']['id_auteur'])." AND objet = 'auteur'")) {
 			$objet = 'contact';
-		} elseif ($res = sql_fetsel('*', 'spip_organisations', 'id_auteur='.sql_quote($id_auteur))) {
-			$objet = 'organisation';
 		} else {
 			$objet = false;
 		}

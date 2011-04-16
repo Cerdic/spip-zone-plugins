@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Contacts & Organisations 
- * Licence GPL (c) 2010 Matthieu Marcillaud
+ * Licence GPL (c) 2010-2011 Matthieu Marcillaud, Cyril Marion
 **/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -13,9 +13,9 @@ function action_lier_contact_dist($arg=null) {
 	}
 	$arg = explode('/', $arg);
 
-	// cas suppression d'une adresse et de toutes ses liaisons
+	// cas liaison id_contact / id_organisation
 	if (intval($arg[0]) and intval($arg[1])) {
-		spip_log("appel à l'action_lier_contact_dist avec $arg[1] comme argument");
+		// spip_log("appel à l'action_lier_contact_dist avec $arg[0] / $arg[1] comme argument");
 		action_lier_contact_post($arg[0], $arg[1]);
 	}
 

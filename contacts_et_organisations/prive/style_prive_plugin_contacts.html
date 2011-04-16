@@ -51,3 +51,19 @@ form.bouton_action_post button.submit {text-align:left;}
 .crayon-changed em.crayon-contactliaison { display: none; }
 em.crayon-contactliaison { display: none; }
 em.crayon-contactliaison { cursor: pointer; border:0; }
+
+/* manque dans spip ? eviter que le formulaire d'ajout de document soit mal place */
+#contenu #wysiwyg {
+	clear: both;
+}
+
+#navigation .numero .delier {
+	margin-top:1em;
+	font-size:80%;
+	position:relative; left:-3000em;
+}
+#navigation .numero:hover .delier,
+#navigation .numero:focus .delier
+ {
+	left:0;
+}

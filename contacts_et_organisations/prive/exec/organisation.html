@@ -30,7 +30,7 @@
 	<h1>#NOM</h1>
 	
 	<div id="wysiwyg">
-	<INCLURE{fond=prive/contenu/organisation,id=#ID_ORGANISATION,ajax=wysiwyg}>
+	<INCLURE{fond=prive/contenu/organisation,id_organisation=#ID_ORGANISATION,ajax=wysiwyg}>
 	</div>
 
 	<INCLURE{fond=prive/liste/linked_contacts,id_organisation=#ID_ORGANISATION,ajax}>
@@ -58,8 +58,39 @@
 		<:contacts:organisation_numero:>
 		<p>#ID_ORGANISATION</p>
 	</div>
+
+	[(#REM) faudra mettre {si #ID_AUTEUR} sur la 3.0 ]
+	<BOUCLE_auteur_lie(AUTEURS){id_auteur}{tout}>
+		
+	<div class="numero">
+		<div class='num'>
+		<:contacts:organisation_associe_a_auteur_numero:>
+		<p><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#ID_AUTEUR</a></p>
+		[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#NOM)</a>]
+		</div>
+		<div class='logo'>
+		[<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">(#LOGO_AUTEUR|image_reduire{40})</a>]
+		</div>
+		[(#AUTORISER{modifier, organisation, #ID_ORGANISATION})
+		<div class='delier'>
+			[(#BOUTON_ACTION{
+				[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_cet_auteur:>}|concat{' ',<:contacts:delier_cet_auteur:>})],
+				[(#URL_ACTION_AUTEUR{lier_organisation_auteur,[(#ENV{id_organisation})/0],[(#ENV{retour,#SELF})]})]})]		</div>
+		]
+	</div>
+	
+	</BOUCLE_auteur_lie>
+	
+	<div class="liaison">
+		<h3><:contacts:organisation_associer_a_auteur:></h3>
+		<div class='ajax'>#FORMULAIRE_LIER_ORGANISATION_AUTEUR{#ID_ORGANISATION, #SELF}</div>
+	</div>
+	
+	<//B_auteur_lie>
 </div>
 <!--/#navigation-->
+
+
 
 <!--#extra-->
 [(#CHEMIN{images/contact-24.png}

@@ -35,7 +35,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'definir_auteur_comme_contact' => "D&eacute;finir comme contact",
 	'definir_auteur_comme_organisation' => "D&eacute;f. comme organisation",
-
+	'delier_cet_auteur' => "Désassocier",
+	
 	// E
 	'est_un_contact' => "Cet auteur est d&eacute;fini comme &eacute;tant un contact.",
 	'est_une_organisation' => "Cet auteur est d&eacute;fini comme &eacute;tant une organisation.",
@@ -81,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_pseudo' => 'Pseudo',
 	'label_recherche_contacts' => "Chercher dans les contacts",
 	'label_recherche_organisations' => "Chercher dans les organisations",
+	'label_recherche_auteurs' => "Chercher dans lse auteurs",
 	'label_statut_juridique' => "Statut juridique",
 	'label_telephone' => 'T&eacute;l.',
 	'lier_ce_contact' => "Lier ce contact",
@@ -90,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_contacts' => 'Liste les contacts',
 	'liste_organisations' => 'Liste les organisations',
 	'label_type_liaison' => 'Liaison',
+	'lier_cet_auteur' => 'Lier',
 	
 	'nb_contact' => '1 contact',
 	'nb_contacts' => '@nb@ contacts',
@@ -102,6 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisation_editer' => 'Éditer cette organisation',
 	'organisation_numero' => 'Organisation numéro',
 	'organisation_voir' => 'Voir',
+	'organisation_associe_a_auteur_numero' => 'Associée à auteur numéro',
+	'organisation_associer_a_auteur' => 'Associéer à un auteur',
 
 	// R
 	'rechercher' => "Rechercher",
