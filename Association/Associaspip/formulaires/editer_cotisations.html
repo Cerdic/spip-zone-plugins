@@ -15,18 +15,11 @@
 			<input type="text" name="montant" value="[(#ENV{montant})]" id="montant"  class='formo'/>
 		</li>
 
+		[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->
 		<li class="editer_journal">
-			<label for="journal"><strong><:asso:prets_libelle_mode_paiement:></strong></label>
-			<B_mode_paiement>
-			<select name="journal" id="journal" class="formo" > 
-			<BOUCLE_mode_paiement(ASSO_PLAN){par classe}{par code}{classe==#ENV{classe_banques}}>
-			<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
-			</BOUCLE_mode_paiement>
-			</select>
-			</B_mode_paiement>
-			<span class="spip_form_erreur">Aucune classe de comptes financiers définie au plan comptable !</span>
-			<//B_mode_paiement>
+			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
 		</li>
+		]
 
 		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
 		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
