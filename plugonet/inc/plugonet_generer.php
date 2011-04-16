@@ -443,19 +443,24 @@ function plugin2balise_utilise($D) {
 function plugin2balise_exec($D, $balise) {
 	$res = '';
 	foreach($D[$balise] as $nom => $i) {
-		$att = " nom='" . $nom . "'" .
-				" titre='" . $i['titre'] . "'" .
-				(empty($i['parent']) ? '' : (" parent='" . $i['parent'] . "'")) .
-				(empty($i['icone']) ? '' : (" icone='" . $i['icone'] . "'")) .
-				(empty($i['url']) ? '' : (" action='" . $i['url'] . "'")) .
-				(empty($i['args']) ? '' :
-				(" args='" . str_replace('&', '&amp;', str_replace('&amp;', '&', $i['args'])) . "'"));
-		$res .= "\n\t<$balise$att />";
+		$res .= "\n\t<$balise" .
+			" nom='" . $nom . "'" .
+			plugin2attribut('titre', @$i['titre']) .
+			plugin2attribut('parent', @$i['parent']) .
+			plugin2attribut('icone', @$i['icone']) .
+			plugin2attribut('action', @$i['url']) .
+			plugin2attribut('args', str_replace('&', '&amp;', str_replace('&amp;', '&', @$i['args']))) .
+			' />';
 	}
 
 	return $res ? "\n$res" : '';
 }
 
+
+function plugin2attribut($nom, $val)
+{
+	return empty($val) ? '' : (" $nom='" . str_replace("'","&#039;",$val) . "'");
+}
 
 // --------------------- BALISES DISPARUES ET COMMANDES DE MIGRATION --------
 //
