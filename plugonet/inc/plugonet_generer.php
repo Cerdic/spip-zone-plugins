@@ -457,11 +457,6 @@ function plugin2balise_exec($D, $balise) {
 }
 
 
-function plugin2attribut($nom, $val)
-{
-	return empty($val) ? '' : (" $nom='" . str_replace("'","&#039;",$val) . "'");
-}
-
 // --------------------- BALISES DISPARUES ET COMMANDES DE MIGRATION --------
 //
 // - fonctions, options et install : creation des commandes svn de substitution
@@ -616,6 +611,11 @@ function extraire_bornes($intervalle) {
 	}
 	
 	return $bornes;
+}
+
+
+function plugin2attribut($nom, $val) {
+	return empty($val) ? '' : (" $nom='" . str_replace("'","&#039;",$val) . "'");
 }
 
 ?>

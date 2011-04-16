@@ -32,13 +32,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_simuler_oui' => 'Oui, écrire dans le dossier temporaire tmp/plugonet/',
 
 // M
-	'message_generation_paquetxml' => '@nb_fichiers@ plugin.xml traité(s) : @details@',
-	'message_nok_aucun_pluginxml' => 'Aucun fichier plugin.xml trouvé dans le dossier des plugins de ce site.',
-	'message_nok_information_pluginxml' => '@nb_fichiers@ plugin.xml dont le contenu XML est illisible',
-	'message_nok_lecture_pluginxml' => '@nb_fichiers@ plugin.xml inaccessible(s) en lecture',
-	'message_nok_validation_paquetxml' => '@nb_fichiers@ paquet.xml non conforme(s) à la nouvelle DTD',
-	'message_nok_validation_pluginxml' => '@nb_fichiers@ plugin.xml non conforme(s) : vérifiez le(s) paquet.xml correspondant(s) !',
-	'message_ok_generation_paquetxml' => '@nb_fichiers@ paquet.xml correctement généré(s)',
+	'message_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités : @details@',
+	'message_generation_paquetxml' => '@nb@ plugin.xml traité : @details@',
+	'message_nok_aucun_pluginxml' => 'Aucun plugin.xml trouvé dans le dossier des plugins de ce site.',
+	'message_nok_information_pluginxml_pluriel' => '@nb@ plugin.xml illisibles',
+	'message_nok_information_pluginxml' => '@nb@ plugin.xml illisible',
+	'message_nok_lecture_pluginxml_pluriel' => '@nb@ plugin.xml inaccessibles en lecture',
+	'message_nok_lecture_pluginxml' => '@nb@ plugin.xml inaccessible en lecture',
+	'message_nok_validation_paquetxml_pluriel' => '@nb@ paquet.xml non conformes à la nouvelle DTD',
+	'message_nok_validation_paquetxml' => '@nb@ paquet.xml non conforme à la nouvelle DTD',
+	'message_nok_validation_pluginxml_pluriel' => '@nb@ plugin.xml non conformes : vérifiez les paquet.xml correspondants !',
+	'message_nok_validation_pluginxml' => '@nb@ plugin.xml non conforme : vérifiez le paquet.xml correspondant !',
+	'message_ok_generation_paquetxml_pluriel' => '@nb@ paquet.xml correctement générés',
+	'message_ok_generation_paquetxml' => '@nb@ paquet.xml correctement généré',
 
 // O
 	'onglet_generer' => 'Générer paquet.xml',
