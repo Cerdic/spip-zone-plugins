@@ -2,7 +2,7 @@
 	<nom>Change Statut</nom>
 	<auteur>Yffic</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>Changer temporairement et d'un clic son statut de webmestre en administrateur ou rédacteur. Puis revenir &agrave; la situation originale</description>

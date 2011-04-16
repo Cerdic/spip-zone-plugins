@@ -32,12 +32,18 @@ function exec_changestatut(){
 	switch($statut_demande){
 		case 'redacteur' :
 			sql_updateq("spip_auteurs", array("statut" => "1comite","webmestre" => "non","statut_orig" => "webmestre"), "id_auteur=$id_auteur");
+			session_set('statut','1comite');
+			session_set('webmestre','non');
 		break;
 		case 'admin' :
 			sql_updateq("spip_auteurs", array("statut" => "0minirezo","webmestre" => "non","statut_orig" => "webmestre"), "id_auteur=$id_auteur");
+			session_set('statut','0minirezo');
+			session_set('webmestre','non');
 		break;
 		case 'webmestre' :
 			sql_updateq("spip_auteurs", array("statut" => "0minirezo","webmestre" => "oui","statut_orig" => ""), "id_auteur=$id_auteur");
+			session_set('statut','0minirezo');
+			session_set('webmestre','oui');
 		break;
 		default :
 			spip_log("Erreur statut_demande : $statut_demande");

@@ -18,18 +18,21 @@ function changestatut_upgrade($nom_meta_base_version,$version_cible){
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		if (version_compare($current_version,'0.1','<')){
 			include_spip('base/abstract_sql');
-			sql_alter("TABLE spip_auteurs ADD statut_orig varchar(255)  DEFAULT '' NOT NULL");
+			if(sql_alter("TABLE spip_auteurs ADD statut_orig varchar(255)  DEFAULT '' NOT NULL")) {
 			
-			$config = lire_config('changestatut');
-			if (!is_array($config)) {
-				$config = array();
+				$config = lire_config('changestatut');
+				if (!is_array($config)) {
+					$config = array();
+				}
+				$config = array_merge(array(
+						'statut' => 'webmestre'
+				), $config);
+				ecrire_meta('changestatut', serialize($config));
+	
+				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+			} else {
+				echo  sql_error()."<br/>";
 			}
-			$config = array_merge(array(
-					'statut' => 'webmestre'
-			), $config);
-			ecrire_meta('changestatut', serialize($config));
-
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 	}
 }
