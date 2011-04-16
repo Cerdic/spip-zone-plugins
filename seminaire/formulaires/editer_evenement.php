@@ -70,7 +70,11 @@ function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_art
 	$horaire = _request('horaire')=='non'?false:true;	
 	$date_debut = agenda_verifier_corriger_date_saisie('debut',$horaire,$erreurs);
 	$date_fin = agenda_verifier_corriger_date_saisie('fin',$horaire,$erreurs);
-	
+
+	// verifier que les champs obligatoires sont bien la :
+	foreach(array('mot') as $obligatoire)
+		if (!_request($obligatoire)) $erreurs[$obligatoire] = 'Ce champ est obligatoire';
+			
 	if ($date_debut AND $date_fin AND $date_fin<$date_debut)
 		$erreurs['date_fin'] = _L('la date de fin doit etre posterieure a la date de debut');
 	
