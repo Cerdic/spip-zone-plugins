@@ -1,5 +1,4 @@
 #CACHE{0}
 #HTTP_HEADER{Content-Type: text/html}
-[(#SET{chemintemplate,[(#CHEMIN{templates/#ENV{template}.html}|noextension)]})]
 
-<INCLURE{fond=#GET{chemintemplate}}{env}>
+<INCLURE{fond=templates/#ENV{template}}{env}>
