@@ -106,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'organisation_numero' => 'Organisation numéro',
 	'organisation_voir' => 'Voir',
 	'organisation_associe_a_auteur_numero' => 'Associée à auteur numéro',
-	'organisation_associer_a_auteur' => 'Associéer à un auteur',
+	'organisation_associer_a_auteur' => 'Associer à un auteur',
 
 	// R
 	'rechercher' => "Rechercher",
