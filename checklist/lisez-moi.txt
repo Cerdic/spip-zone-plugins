@@ -1,3 +1,3 @@
 16/04/2011 
-- utilisation : développement site
+- utilisation : développement site, preprod, recette
 - contenu : onglets pages (maquettes), hommes (intervenants), brief, listes, tickets
