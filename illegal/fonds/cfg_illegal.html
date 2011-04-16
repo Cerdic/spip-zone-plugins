@@ -2,7 +2,7 @@
 
 <!-- autoriser=webmestre -->
 <!-- titre=Articles illégaux -->
-<!-- descriptif=Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite d'activer les crayons sur la page exec, et de créer un champ : <code>alter table spip_articles add illegal longtext default null;</code> -->
+<!-- descriptif=Cette page liste les articles dont le champ "illegal" n'est pas vide, et permet de les modifier; le plugin nécessite de créer un champ : <code>alter table spip_articles add illegal longtext default null;</code> -->
 <!-- icone=images/illegal-24.png -->
 <!-- logo=images/illegal-24.png -->
 
@@ -27,19 +27,25 @@
 </form>
 
 <BOUCLE_i(ARTICLES){statut?}{id_article=#GET{id_article}}>
+<form action="index.php" method="post" enctype="multipart/form-data">
+<input type="hidden" name="action" value="crayons" />
+<input type="hidden" name="redirect" value="#SELF" />
+
 <h2>Article n&#176;&#160;#ID_ARTICLE: #TITRE</h2>
 
 <p class="spip_xx-small">- dans le texte, indiquer ce qui sera affiché publiquement  sur le site ; exemple : "Pour des raisons juridiques, cet article n'est pas disponible à la consultation publique."</p>
 
 <h4>texte:</h4>
-<div class="#EDIT{texte}">[(#TEXTE|couper{300}|sinon{texte...})]</div>
+#CRAYON{texte}
 
 <h4>illégal:</h4>
 
 <p class="spip_xx-small">- dans le champ illégal, indiquer le texte d'origine</p>
 
-<div class="#EDIT{illegal}">[(#ILLEGAL|couper{300}|sinon{illegal...})]</div>
+#CRAYON{illegal}
 
+<input type='submit' name="ok" />
+</form>
 </BOUCLE_i>
 [(#GET{id_article}|?{Article inexistant})]
 <//B_i>
