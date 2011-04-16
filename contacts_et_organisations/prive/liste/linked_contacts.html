@@ -4,7 +4,7 @@
 	nom,1
 	type_liaison,1
 }})
-]<B_liste_orga>
+]<B_contacts>
 #ANCRE_PAGINATION
 <div class="liste-elements contacts">
 <table class='spip liste'>
@@ -20,13 +20,14 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_orga(CONTACTS contacts_liens){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	<BOUCLE_contacts(CONTACTS contacts_liens){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		[(#REM) sur boucle pour le crayon ]
+		<BOUCLE_liaisons(organisations_contacts){id_contact}{id_organisation}>
+		<tr class="[(#_contacts:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INCLURE{fond=logo/contact, id_contact}</a>
-			<td class='nom'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#PRENOM) ]#NOM</a></td>
+			<td class='nom'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#_contacts:PRENOM) ]#_contacts:NOM</a></td>
 			[(#ENV{court}|non)
-				[(#REM) edition de crayon particuliere ]
-			<td class='type crayon contactliaison-[(#ID_ORGANISATION)]-[(#ID_CONTACT)] type_contactliaison'>[(#TYPE_LIAISON|sinon{-})]</td>
+			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 			]
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
@@ -36,11 +37,12 @@
 				#ID_OBJET
 			})]</td>
 		</tr>
-	</BOUCLE_liste_orga>
+		</BOUCLE_liaisons>
+	</BOUCLE_contacts>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_orga>[
+</B_contacts>[
 <div class="liste-elements contacts"><strong class="caption">(#ENV*{sinon,''})</strong></div>
-]<//B_liste_bre>
+]<//B_contacts>
