@@ -272,7 +272,7 @@ function multilang_multi_recover(el,container,target,event){
 				this.value = (count > 1 ? "<multi>"+value+"</multi>":value.replace(/^\[[a-z_]+\]/,''));
 			}
 			// Add the title number to the final value
-			if(multilang_is_title(this.id) && ($('#'+this.id+'_numero').val() != ''))
+			if(multilang_is_title(this) && ($('#'+this.id+'_numero').val() != ''))
 				this.value= $('#'+this.id+'_numero').val().replace(/\.|\s+/,'') + ". " + this.value;
 		});
 		return true;
@@ -284,8 +284,8 @@ function multilang_multi_recover(el,container,target,event){
 *
 * @param id chaine correspondant a l'id du champ
 */
-function multilang_is_title(id) {
-	return (id=='titre' || id.match(/^titre_document[0-9]+/)!=null)
+function multilang_is_title(el) {
+	return (el.id=='titre' || el.id.match(/^titre_document[0-9]+/)!=null || el.name.match(/^content_[a-z0-9_]+_titre/)!=null)
 }
 
 /**
@@ -334,7 +334,7 @@ function multilang_init_field(el,lang,force) {
 			while((langs=multilang_match_multi.exec(m[2]))!=null) {
 				var text = langs[2].match(/^(\d+\.\s+)((?:.|\n|\s)*)/), value;
 				// Suppression du numero uniquement pour les titres
-				if(multilang_is_title(el.id) && text!=null) {
+				if(multilang_is_title(el) && text!=null) {
 					value = text[2];
 					// Suppress point and spaces
 					el.field_pre_lang = text[1].replace(/\.|\s+/,'') || "";
@@ -349,7 +349,7 @@ function multilang_init_field(el,lang,force) {
 		el.totreat=true;
 
 		// Suppression du numero uniquement pour les titres
-		if(multilang_is_title(el.id)) {
+		if(multilang_is_title(el)) {
 			var n = el.value.match(/(\d+\.\s+)?(.*)/);
 			el.field_pre_lang = n[1] || "";
 			el.field_pre_lang = el.field_pre_lang.replace(/\.|\s+/,'') ;
@@ -367,10 +367,20 @@ function multilang_init_field(el,lang,force) {
 	 * de traiter le cas où l'on utilise les numéros pour trier les objets
 	 * Ajout d'Yffic le 30/03/2010
 	 */
-	if(!force && (el.id=='titre' || el.id.match(/^titre_document[0-9]+/))){
+	if(!force && (el.id=='titre' || el.id.match(/^titre_document[0-9]+/) || el.name.match(/^content_[a-z0-9_]+_titre/))){
 		numid=el.id+'_numero';
-		$(el).parent()
-				.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="3" class="text nomulti"></input></li>');
+		if(el.name.match(/^content_[a-z0-9_]+_titre/)){
+			if($(el).parent().is('li')){
+				$(el).parent()
+					.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
+			}else{
+				$(el)
+				.before('<label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /><br /><br />');
+			}
+		}else{
+			$(el).parent()
+				.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
+		}
 		$('#'+numid).totreat = false;
 	}
 }
@@ -537,7 +547,7 @@ function multilang_save_lang(el,lang) {
 	if(!el.totreat) return ;
 
 	// Suppression du numero uniquement pour les titres
-	if(multilang_is_title(el.id)) {
+	if(multilang_is_title(el)) {
 		var m = el.value.match(/^(\d+\.\s+)((?:.|\n|\s)*)/);
 		if(m!=null) {
 			// Suppress point and spaces
