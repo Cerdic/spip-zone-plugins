@@ -192,13 +192,13 @@ function multilang_make_menu_lang(container,target) {
 		if($(this).is('.change_lang') && !$(this).is('.on')){
 			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
 			$(this).parents('form > .menu_lang').find('.message').detach();
-			$(this).parents('form').find('li.editer_titre_numero').show();
+			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').show();
 			$(this).addClass('on');
 			multilang_change_lang(this,container,target);
 		}else if(!$(this).is('.on') && $(this).is('.recover_lang')){
 			$(this).parents('form > .menu_lang').find('a.on').removeClass('on');
 			$(this).parents('form > .menu_lang').append('<div class="message"><p>'+multilang_lang.champs_readonly+'<\/p><\/div>');
-			$(this).parents('form').find('li.editer_titre_numero').hide();
+			$(this).parents('form').find('li.editer_titre_numero,div.editer_titre_numero').hide();
 			$(this).addClass('on');
 			multilang_multi_recover(this,container,target,'submit');
 		}
@@ -369,13 +369,16 @@ function multilang_init_field(el,lang,force) {
 	 */
 	if(!force && (el.id=='titre' || el.id.match(/^titre_document[0-9]+/) || el.name.match(/^content_[a-z0-9_]+_titre/))){
 		numid=el.id+'_numero';
+		/**
+		 * Cas des crayons qui n'ont pas toujours de formalisme en ul > li
+		 */
 		if(el.name.match(/^content_[a-z0-9_]+_titre/)){
 			if($(el).parent().is('li')){
 				$(el).parent()
 					.before('<li class="editer_'+numid+'"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /></li>');
 			}else{
 				$(el)
-				.before('<label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /><br /><br />');
+				.before('<div class="editer_titre_numero"><label for="titre_numero">'+multilang_lang.numero+'</label><input id="'+numid+'" name="titre_numero" type="text" value="'+el.field_pre_lang+'" size="4" class="text nomulti" /><br /><br /></div>');
 			}
 		}else{
 			$(el).parent()
