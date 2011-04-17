@@ -18,7 +18,7 @@ function association_post_edition($flux){
 		if (preg_match_all('/(.+)$/m', $bio, $r)
 		AND preg_match('/^\s*(\d{5})\s+(.*)/', $r[0][4], $m))
 		      $modif = array(
-			'fonction' => $r[0][0],
+			'fonction' => trim($r[0][0]),
 			'telephone' => telephone_std($r[0][1]),
 			'mobile' => telephone_std($r[0][2]),
 			'adresse' => trim($r[0][3]),
@@ -30,11 +30,12 @@ function association_post_edition($flux){
 		$modif['nom_famille'] = $nom;
 		$modif['prenom'] = $prenom;
 		$modif['email'] = $data['email'];
-		$modif['statut_interne'] = 'echu';
+
 
 		if (sql_getfetsel('id_auteur', 'spip_asso_membres', "id_auteur=$id"))
 		  sql_updateq('spip_asso_membres', $modif, "id_auteur=$id");
 		else {
+		  $modif['statut_interne'] = 'echu';
 		  $modif['id_auteur'] = $id;
 		  sql_replace('spip_asso_membres', $modif);
 		}
