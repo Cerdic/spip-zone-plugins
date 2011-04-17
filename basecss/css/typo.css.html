@@ -1,0 +1,89 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>
+]/* --------------------------------------------------------------
+
+   typo.css.html
+   Base typographique
+
+-------------------------------------------------------------- */
+
+/* Valeurs par defaut :
+#SET{font-size,#CONFIG{basecss/typo/font-size,1em}} [ font-size: (#GET{font-size});]
+#SET{line-height,#CONFIG{basecss/typo/line-height,1.5em}} [ line-height: (#GET{line-height});]
+#SET{margin-bottom,#CONFIG{basecss/typo/margin-bottom,1.5em}} [ margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#CONFIG{basecss/typo/text-indent,50px}} [ text-indent: (#GET{text-indent});]
+#SET{font-family,#CONFIG{basecss/typo/font-family,'Helvetica, Arial, sans-serif'}} [ font-family: (#GET{font-family});]
+#SET{background-color,#CONFIG{basecss/typo/background-color,#F8F8F8}} [ background-color : (#GET{background-color});]
+#SET{color,#CONFIG{basecss/typo/color,#222222}} [ color: (#GET{color});]
+*/
+
+html { font-size: 100%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
+
+/* Titraille / Intertitres */
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0;[ margin-bottom: (#GET{margin-bottom});] padding: 0; font-size: 100%; font-weight: bold; }
+hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
+
+/*h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: .5em; }
+h2,.h2 { font-size: 2em; margin-bottom: .75em; }
+h3,.h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4,.h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6,.h6 { font-size: 1em; font-weight: bold; }*/
+
+/* Enrichissements typographiques */
+strong, b { font-weight: bold; }
+em, i { font-style: italic; }
+small, .small { font-size: 80%; }
+big, .big { font-size: 150%; }
+abbr[title], acronym[title] { border-bottom: .1em dotted; cursor: help; }
+dfn { font-weight: bold; font-style: italic; }
+del { text-decoration: line-through; }
+ins { text-decoration: none; background-color: #FFC; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; }
+sub { vertical-align: sub; }
+.caps { font-variant: small-caps; }
+
+/* Listes */
+ul, ol, li, dl, dt, dd {}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
+
+dl dt { font-weight: bold; }
+dl dd {}
+
+/* Tableaux */
+table { margin-bottom: #GET{margin-bottom}; width: 100%; }
+th { font-weight: bold; }
+thead th { background: #c3d9ff; }
+th,td,caption { padding: 4px 10px 4px 5px; }
+tbody tr:nth-child(even) td,
+tbody tr.even td { background: #e5ecf9; }
+tfoot { font-style: italic; }
+caption { background: #eee; }
+
+/* Citations, code et poesie */
+q { font-style: italic; }
+blockquote { padding: 0 #GET{text-indent}; }
+cite { font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,var,tt { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
+pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
+kbd { background-color: #GET{color}; color: #GET{background-color}; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+/* Paragraphes */
+p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: #GET{margin-bottom}; }
+
+/* Liens */
+a {}
+a:hover {}
+.on { font-weight: bold; }
+
+/* end */

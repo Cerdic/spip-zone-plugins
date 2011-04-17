@@ -1,0 +1,62 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>
+]/* --------------------------------------------------------------
+
+   base.css.html
+   Classes pour faciliter la composition
+
+-------------------------------------------------------------- */
+
+/* Valeurs par defaut :
+#SET{line-height,#CONFIG{basecss/typo/line-height,1.5em}} [ line-height: (#GET{line-height});]
+#SET{margin-bottom,#CONFIG{basecss/typo/margin-bottom,1.5em}} [ margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#CONFIG{basecss/typo/text-indent,50px}} [ text-indent: (#GET{text-indent});]
+*/
+
+/* Blocs */
+.bloc { display: block; margin-bottom: #GET{margin-bottom}; }
+.box { display: block; margin-bottom: #GET{margin-bottom}; padding: #GET{line-height}; background: #EEE; }
+
+/* Listes, tableaux et mosaiques */
+.first {}
+.last { margin-right: 0; }
+.odd {}
+.even {}
+.sep {}
+
+/* Alignements */
+.center { text-align: center; margin-right: auto; margin-left: auto; }
+
+/* Espaceur de blocs */
+.clear { clear: both; }
+br.clear,.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+hr.clear { visibility: hidden; }
+
+/* clearfix : http://www.positioniseverything.net/easyclearing.html */
+.clearfix:after {
+    content: "\0020";
+    display: block; 
+    height: 0; 
+    clear: both; 
+    visibility: hidden;
+	overflow: hidden;
+}
+.clearfix { display: inline-table; }
+
+/* Hides from IE-mac \*/
+.clearfix { height: 1%; }
+.clearfix { display: block; }
+/* End hide from IE-mac */
+
+/* Non visible a l'ecran */
+.offscreen,.invisible { position: absolute; left: -999em; height: 1%; }
+.hidden { visibility: hidden; }
+.none { display: none; }
+
+/* debug */
+.todo { opacity: 0.5; }
+.todo:hover { opacity: 1; }
+
+/* end */

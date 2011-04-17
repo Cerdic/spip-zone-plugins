@@ -1,0 +1,25 @@
+<plugin>
+<nom>Base CSS P&eacute;tronille&nbsp;2</nom>
+<version>2.0.1</version>
+<etat>dev</etat>
+<icon>icon.png</icon>
+<description>{{ATTENTION : version de dev !}}
+_ Utilisez plut&ocirc;t la version stable distribu&eacute;e sur SPIP-Contrib !
+
+Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.</description>
+<lien>http://www.spip-contrib.net/?rubrique214</lien>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
+<categorie>outil</categorie>
+<prefix>basecss</prefix>
+<necessite id="SPIP" version="[;]" />
+<necessite id="spip_bonux" version="[2.2.13;]" />
+<bouton id='basecss' parent='bando_squelette'>
+	<icone>icon-16.png</icone>
+	<titre>Base&nbsp;CSS</titre>
+	<url>configurer_basecss</url>
+</bouton>
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>basecss_pipelines.php</inclure>
+</pipeline>
+</plugin>
