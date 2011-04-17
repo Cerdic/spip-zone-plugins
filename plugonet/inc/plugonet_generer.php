@@ -15,7 +15,6 @@ include_spip('inc/langonet_generer_fichier');
 include_spip('inc/plugin');
 
 function inc_plugonet_generer($files, $forcer_paquetxml=false, $simuler=false) {
-
 	// Chargement des fonctions de validation XML et d'extraction des informations contenues 
 	// dans la balise plugin
 	$valider_xml = charger_fonction('valider', 'xml');
@@ -25,7 +24,7 @@ function inc_plugonet_generer($files, $forcer_paquetxml=false, $simuler=false) {
 	// Si on vient d'un GET $files n'est pas un tableau mais un fichier unique
 	$erreurs = array();
 	$commandes = array();
-	foreach (is_array($files) ? $files : array($files)  as $nom)  {
+	foreach ($files  as $nom)  {
 		if (lire_fichier($nom, $contenu)) {
 			$erreurs[$nom]['erreur_lecture_pluginxml'] = false;
 			// Validation formelle du fichier plugin.xml (uniquement des avertissements)
@@ -81,7 +80,7 @@ function inc_plugonet_generer($files, $forcer_paquetxml=false, $simuler=false) {
 			}
 		}
 		else
-			$erreurs[$nom]['lecture_pluginxml'] = true;
+			$erreurs[$nom]['erreur_lecture_pluginxml'] = true;
 	}
 
 	return array($erreurs, $commandes);

@@ -15,6 +15,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_tout_decocher' => 'Tout décocher',
 	'bouton_verifier' => 'Vérifier',
 
+// D
+	'details_generer_erreur' => 'Le paquet.xml du plugin listé ci-dessous n\'a pas été généré car des erreurs se sont produites pendant la génération. Veuillez consuter les informations ci-dessous pour apporter les corrections nécessaires.',
+	'details_generer_erreur_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-dessous n\'ont pas été générés car des erreurs se sont produites pendant la génération. Veuillez consuter les informations ci-dessous pour apporter les corrections nécessaires.',
+	'details_generer_notice' => 'Le paquet.xml du plugin listé ci-après a été correctement généré mais son plugin.xml source contient des erreurs. Veuillez donc vérifier le plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.',
+	'details_generer_notice_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés mais leurs plugin.xml source contiennent des erreurs. Veuillez donc vérifier les plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.',
+	'details_generer_succes' => 'Le paquet.xml du plugin listé ci-après a été correctement généré.',
+	'details_generer_succes_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés.',
+
 // I
 	'info_choisir_pluginxml' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux présents dans le dossier <code>plugins/</code> de ce site.',
 	'info_forcer_paquetxml' => 'Par défaut, le fichier paquet.xml n\'est écrit que si son contenu est valide selon la nouvelle DTD. Vous pouvez cependant forcer son écriture quel que soit le résultat de la validation.',
@@ -30,19 +38,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_generer_paquetxml' => 'Fichiers résultat',
 	'label_simuler_non' => 'Non, écrire dans le dossier plugins/ du site',
 	'label_simuler_oui' => 'Oui, écrire dans le dossier temporaire tmp/plugonet/',
+	'legende_resultats' => 'Résultats détaillés par plugin',
 
 // M
-	'message_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités : @details@',
-	'message_generation_paquetxml' => '@nb@ plugin.xml traité : @details@',
 	'message_nok_aucun_pluginxml' => 'Aucun plugin.xml trouvé dans le dossier des plugins de ce site.',
+
 	'message_nok_information_pluginxml_pluriel' => '@nb@ plugin.xml illisibles',
 	'message_nok_information_pluginxml' => '@nb@ plugin.xml illisible',
+
 	'message_nok_lecture_pluginxml_pluriel' => '@nb@ plugin.xml inaccessibles en lecture',
 	'message_nok_lecture_pluginxml' => '@nb@ plugin.xml inaccessible en lecture',
+
 	'message_nok_validation_paquetxml_pluriel' => '@nb@ paquet.xml non conformes à la nouvelle DTD',
 	'message_nok_validation_paquetxml' => '@nb@ paquet.xml non conforme à la nouvelle DTD',
-	'message_nok_validation_pluginxml_pluriel' => '@nb@ plugin.xml non conformes : vérifiez les paquet.xml correspondants !',
-	'message_nok_validation_pluginxml' => '@nb@ plugin.xml non conforme : vérifiez le paquet.xml correspondant !',
+
+	'message_nok_validation_pluginxml_pluriel' => 'dont @nb@ sont issus de plugin.xml non conformes',
+	'message_nok_validation_pluginxml' => 'dont @nb@ est issu d\'un plugin.xml non conforme',
+
 	'message_ok_generation_paquetxml_pluriel' => '@nb@ paquet.xml correctement générés',
 	'message_ok_generation_paquetxml' => '@nb@ paquet.xml correctement généré',
 
@@ -50,6 +62,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_generer' => 'Générer paquet.xml',
 	'onglet_verifier' => 'Vérifier plugin.xml',
 	'option_aucun_pluginxml' => 'aucun plugin.xml sélectionné',
+
+// R
+	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_generation_paquetxml' => '@nb@ plugin.xml traité : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
 
 // T
 	'titre_form_generer' => 'Génération des fichiers paquet.xml',
