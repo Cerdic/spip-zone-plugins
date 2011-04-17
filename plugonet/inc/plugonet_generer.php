@@ -24,7 +24,7 @@ function inc_plugonet_generer($files, $forcer_paquetxml=false, $simuler=false) {
 
 	$erreurs = array();
 	$commandes = array();
-	foreach ($files as $nom)  {
+	foreach (is_array($files) ? $files : array($files)  as $nom)  {
 		if (lire_fichier($nom, $contenu)) {
 			$erreurs[$nom]['erreur_lecture_pluginxml'] = false;
 			// Validation formelle du fichier plugin.xml (uniquement des avertissements)

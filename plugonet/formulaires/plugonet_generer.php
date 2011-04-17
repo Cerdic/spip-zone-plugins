@@ -1,8 +1,9 @@
 <?php
 
 function formulaires_plugonet_generer_charger() {
-	$valeurs = array();
-	return $valeurs;
+	if (!_request('pluginxml') OR $_SERVER['REQUEST_MODE'] == 'POST')
+		return 	array();
+	else return formulaires_plugonet_generer_traiter();
 }
 
 function formulaires_plugonet_generer_verifier() {

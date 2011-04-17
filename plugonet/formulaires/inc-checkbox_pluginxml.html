@@ -8,7 +8,9 @@
 <BOUCLE_pluginxml(DATA){source glob, ../plugins/*/plugin.xml}{par valeur}>
 	<div class="choix">
 		<input type="checkbox" name="pluginxml[]" class="checkbox pluginxml" id="pluginxml_#COMPTEUR_BOUCLE" value="#VALEUR" />
-		<label for="pluginxml_#COMPTEUR_BOUCLE">[(#VALEUR|joli_repertoire)]</label>
+		<label for="pluginxml_#COMPTEUR_BOUCLE">
+<a href='[(#VAL{plugonet_generer}|generer_url_ecrire{pluginxml=#VALEUR&amp;forcer=on&amp;simuler=on})]'>
+[(#VALEUR|joli_repertoire)]</a></label>
 	</div>
 </BOUCLE_pluginxml>
 </B_pluginxml>
