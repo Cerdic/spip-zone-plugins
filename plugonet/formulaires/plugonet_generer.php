@@ -3,7 +3,8 @@
 function formulaires_plugonet_generer_charger() {
 	if (!_request('pluginxml') OR $_SERVER['REQUEST_MODE'] == 'POST')
 		return 	array();
-	else return formulaires_plugonet_generer_traiter();
+	else 
+		return formulaires_plugonet_generer_traiter();
 }
 
 function formulaires_plugonet_generer_verifier() {

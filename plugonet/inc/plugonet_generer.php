@@ -22,6 +22,7 @@ function inc_plugonet_generer($files, $forcer_paquetxml=false, $simuler=false) {
 	$informer_xml = charger_fonction('infos_plugin', 'plugins', true);
 	$informer_xml = ($informer_xml)	? $informer_xml : charger_fonction('get_infos', 'plugins');
 
+	// Si on vient d'un GET $files n'est pas un tableau mais un fichier unique
 	$erreurs = array();
 	$commandes = array();
 	foreach (is_array($files) ? $files : array($files)  as $nom)  {

@@ -9,8 +9,11 @@
 	<div class="choix">
 		<input type="checkbox" name="pluginxml[]" class="checkbox pluginxml" id="pluginxml_#COMPTEUR_BOUCLE" value="#VALEUR" />
 		<label for="pluginxml_#COMPTEUR_BOUCLE">
-<a href='[(#VAL{plugonet_generer}|generer_url_ecrire{pluginxml=#VALEUR&amp;forcer=on&amp;simuler=on})]'>
-[(#VALEUR|joli_repertoire)]</a></label>
+			[(#REM) <!-- Raccourci qui lance la generation en GET avec forcage et simulation sur le fichier concerne -->]
+			<a href='[(#VAL{plugonet_generer}|generer_url_ecrire{pluginxml=#VALEUR&amp;forcer=on&amp;simuler=on})]'>
+				[(#VALEUR|joli_repertoire)]
+			</a>
+		</label>
 	</div>
 </BOUCLE_pluginxml>
 </B_pluginxml>
