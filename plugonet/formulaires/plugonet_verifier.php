@@ -29,17 +29,17 @@ function formulaires_plugonet_verifier_traiter(){
 	// -- aucune des ces erreurs ce ne peut-etre considerees comme fatales pour la production du fichier paquet.xml
 	$erreurs_valxml = array();
 	$erreurs = is_array($resultats) ? $resultats[1] : $resultats->err; //2.1 ou 2.2
-var_dump($erreurs);
+
 	if (count($erreurs) > 0)
 		$message_valxml = _T('plugonet:message_nok_validation_pluginxml');
 
 	// Verification de la lecture du fichier avec la fonction get_infos ou infos_plugin
 	// -- Toute erreur de lecture est consideree comme fatale pour la production du fichier paquet.xml
-    $dir = dirname($pluginxml);
+	$dir = dirname($pluginxml);
 	$informer_xml = charger_fonction('infos_plugin', 'plugins', true) ?
 					'plugin2paquet_infos' : charger_fonction('get_infos', 'plugins');
-	if ($informer_xml == 'plugin2paquet_infos')
-		include_spip('inc/plugonet_generer');
+#	if ($informer_xml == 'plugin2paquet_infos')
+#		include_spip('inc/plugonet_generer');
 	$message_infxml = '';
 	if (!$infos = $informer_xml(basename($dir), true, dirname($dir) .'/'))
 		$message_infxml = _T('plugonet:message_nok_information_pluginxml');
@@ -67,4 +67,9 @@ var_dump($erreurs);
 	return $retour;
 }
 
+function plugin2paquet_infos($plug, $bof, $dir) 
+{ 
+	$f = charger_fonction('infos_plugin', 'plugins'); 
+	return $f(file_get_contents("$dir$plug/plugin.xml"), $plug, $dir); 
+} 
 ?>
