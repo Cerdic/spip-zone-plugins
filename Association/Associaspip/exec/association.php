@@ -68,7 +68,7 @@ function exec_association() {
 		echo '<th>' . _T('asso:portable') . "</th>\n";
 		echo '<th>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</th>\n";
 		echo '</tr>';
-		$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "fonction !='' AND statut_interne != 'sorti'", '',  "a.nom_famille");
+		$query = sql_select("a.id_auteur, a.mobile, a.telephone, a.statut_interne, a.fonction, b.nom, b.email, a.nom_famille",_ASSOCIATION_AUTEURS_ELARGIS .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "a.fonction !='' AND a.statut_interne != 'sorti'", '',  "a.nom_famille");
 		while ($data = sql_fetch($query))
     {	
 			$id_auteur=$data['id_auteur'];
@@ -97,7 +97,7 @@ function exec_association() {
 				htmlspecialchars($data['fonction']),
 				 "</a></td>\n";
 
-			echo '<td class="arial1 border1">'.$mobile.'</td>';
+			echo '<td class="arial1 border1">'.$mob.'</td>';
 			echo '<td class="arial1 border1" style="text-align:center">'.$tel.'</td>';
 			echo "</tr>\n";
 		}
