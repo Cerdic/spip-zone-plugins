@@ -55,16 +55,27 @@ function formulaires_plugonet_verifier_traiter(){
 		$retour['message_ok']['resume'] = 
 			$pluginxml . "<br />" .
 			($message_infxml ? $message_infxml : _T('plugonet:message_ok_validation_pluginxml'));
-	$retour['message_ok']['erreurs'] = '';
-	foreach ($erreurs as $_erreur)
-		$retour['message_ok']['erreurs'] .= "Ligne $_erreur[1] - " . $_erreur[0] . '<br />';
-	if ($retour['message_ok']['erreurs'])
-		$retour['message_ok']['erreurs'] = '<div class="notice">' . 
-											"\n\t" . $retour['message_ok']['erreurs'] . 
-											"\n</div>";
+	$retour['message_ok']['erreurs'] = plugonet_formate_erreurs($erreurs);
 	$retour['editable'] = true;
 
+	if (!$erreurs) {
+		include_spip('inc/plugonet_generer');
+		list($paquet_xml, , ,) = plugin2paquet(array($infos));
+		// On valide le contenu obtenu avec la nouvelle DTD paquet
+		$resultats = $valider_xml($paquet_xml, false, false, 'paquet.dtd');
+		$erreurs = is_array($resultats) ? $resultats[1] : $resultats->err;
+		if ($erreurs) 
+			$retour['message_ok']['erreurs'] = plugonet_formate_erreurs($erreurs);
+	}
 	return $retour;
+}
+
+function plugonet_formate_erreurs($erreurs)
+{
+	$res = '';
+	foreach ($erreurs as $_erreur)
+		$res .= "Ligne $_erreur[1] - " . $_erreur[0] . '<br />';
+	return !$res ? '' : "<div class='notice'>\n\t$res\n</div>";
 }
 
 function plugin2paquet_infos($plug, $bof, $dir) 
