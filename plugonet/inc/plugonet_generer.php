@@ -283,7 +283,7 @@ function plugin2balise_copy($texte, $balise) {
 	$t = traiter_multi($texte);
 
 	$res = $resa = $resl = $resc = '';
-	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n_*\s*|&amp;@', $t['fr']) as $v) {
+	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n_*\s*|&amp;| & @', $t['fr']) as $v) {
 		// On detecte d'abord si le bloc texte en cours contient un eventuel copyright
 		// -- cela generera une balise copyright et non auteur
 		$copy = '';
