@@ -45,7 +45,6 @@
 		<tr>
 			<th class="code_langue">
 				[(#TRI{id,<:tradlang:codelangue:>,ajax})]
-				
 			</th>
 			<th class="origine">
 				[(#SET{lang_orig,#ENV{lang_orig}})]
@@ -57,6 +56,9 @@
 			</th>
 			<th class="statut" width="50px">
 				[(#TRI{status,<:tradlang:th_status:>,ajax})]
+			</th>
+			<th class="modifier" width="50px">
+				&nbsp;
 			</th>
 		</tr>
 	</thead>
@@ -72,6 +74,7 @@
 		<//B_revise_orig>
 		<td class="cible #EDIT{str_statut}">[(#STR**|entites_html)]</td>
 		<td class="statut" width="50px">[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
+		<td class="modifier" width="50px"><a href="[(#SELF|parametre_url{etape,traduction_chaine}|parametre_url{id,#ID}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>
 	</BOUCLE_revise_cible>
 	</tbody>

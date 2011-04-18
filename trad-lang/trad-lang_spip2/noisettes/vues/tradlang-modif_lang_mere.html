@@ -1,14 +1,4 @@
-
-<div id="contenu">
-	<div class="tradlang_entete">
-		<h1><:tradlang:titre_modif_lang_mere{module=#ENV{module}}:></h1>
-	</div>
-	<INCLURE{fond=noisettes/listes/tradlang_liste_lang_mere}{env}>
+<div class="cartouche">
+	<h1><:tradlang:titre_modif_lang_mere{module=#ENV{module}}:></h1>
 </div>
-
-<div id="navigation">
-	<div class="ajax">
-		[(#FORMULAIRE_TRADLANG_CHOISIR_MODULE{#ENV{module},#ENV{lang_orig},#ENV{lang_cible}})]
-	</div>
-	<INCLURE{fond=noisettes/infos/tradlang_infos_module}{env}>
-</div>
+<INCLURE{fond=noisettes/listes/tradlang_liste_lang_mere}{env}>

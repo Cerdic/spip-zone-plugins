@@ -1,5 +1,11 @@
 #SET{str_cible,#ARRAY}
 #SET{lang,#ENV{lang_string,.*}}
+[(#SET{defaut_tri,#ARRAY{
+	status,#ENV{status_sens,1},
+	id,1,
+	str,1,
+	lang,inverse
+}})]
 <B_recherche_tradlang>
 <div class="liste resultats tradlang">
 #ANCRE_PAGINATION
@@ -9,10 +15,10 @@
 	<thead>
 		<tr>
 			<th>
-				<:tradlang:codelangue:>
+				[(#TRI{id,<:tradlang:codelangue:>,ajax})]
 			</th>
 			<th>
-				<:tradlang:th_module:>
+				[(#TRI{module,<:tradlang:th_module:>,ajax})]
 			</th>
 			<th>
 				<:tradlang:th_langue_origine:>
@@ -20,29 +26,31 @@
 			<th>
 				<:tradlang:th_traduction:>
 			</th>
-			<th>
-				<:tradlang:th_langue:>
+			<th width="50px">
+				[(#TRI{lang,<:tradlang:th_langue:>,ajax})]
 			</th>
-			<th>
-				<:tradlang:th_status:>
+			<th width="50px">
+				[(#TRI{status,<:tradlang:th_status:>,ajax})]
 			</th>
+			<th width="50px">&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{module?}{status?}{lang==#GET{lang}}{module != attic}{par points}{inverse}{pagination 20}>
+	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{module?}{status?}{lang==#GET{lang}}{module != attic}{tri #ENV{par,points},#GET{defaut_tri}}{pagination 20}>
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|strtolower)]">
 		<td>#ID</td>
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
 		<td>#MODULE</td>
-		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}>
+		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}{0,1}>
 		<td class="status[_(#STATUS|strtolower)]">[(#STR**|entites_html)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		</BOUCLE_module>
 		<td class="#EDIT{str_statut}">[(#STR**|entites_html)]</td>
-		<td><abbr title="[(#LANG|traduire_nom_langue)]">#LANG</abbr></td>
-		<td class="status">[(#STATUS)]</td>
+		<td class="lang" width="50px"><abbr title="[(#LANG|traduire_nom_langue)]">#LANG</abbr></td>
+		<td class="status" width="50px">[(#STATUS)]</td>
+		<td class="modifier" width="50px"><a href="[(#URL_PAGE{tradlang}|parametre_url{etape,traduction_chaine}|parametre_url{id,#ID}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>
 	</BOUCLE_recherche_tradlang>
 	</tbody>

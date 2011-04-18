@@ -1,0 +1,13 @@
+[(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|oui)
+	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
+	<div class="cartouche">
+		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}
+		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
+		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#ENV{module},chaine=#ENV{id},lang_orig=#ENV{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
+	</div>
+	le formulaire
+	
+	Les révisions
+	
+	Les forums
+]
