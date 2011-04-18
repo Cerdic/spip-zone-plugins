@@ -27,6 +27,17 @@ label.geoservice
 	margin-bottom:2px;
 }
 
+a.mode
+{	color:White;
+	background-color:#369;
+	padding:0 0.5em;
+	margin:0;
+}
+
+.carto_slide
+{	border:0;
+}
+
 /* Pour faire patienter */
 #query_back
 {	background-position:center center;

@@ -38,13 +38,25 @@ function balise_MAPKEY($p)
 	return $p;
 }
 
-/** Affichage du systeme pour la saisie des coordonnees */
+/** Cle Yahoo */
 // Cle geoportail
+function geoportail_yahoo_key()
+{	return $GLOBALS['meta']['geoportail_yahoo_key'];
+}
+
+// La Cle
+function balise_YAHOO_KEY($p)
+{	// Code...
+	$p->code = "geoportail_yahoo_key()";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+/** Affichage du systeme pour la saisie des coordonnees */
 function geoportail_syscoord()
 {	return $GLOBALS['meta']['geoportail_sysref'];
 }
 
-// La Cle
 function balise_SYSCOORD($p)
 {	// Code...
 	$p->code = "geoportail_syscoord()";

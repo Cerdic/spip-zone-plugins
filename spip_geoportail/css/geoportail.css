@@ -38,6 +38,16 @@
 	font-size:12pt;
 }
 
+div.mode
+{	display:none; /* Pas de modification de service */
+}
+a.mode
+{	color:White;
+	background-color:#369;
+	padding:0 0.5em;
+	margin:0;
+}
+
 div.gpLUSResult, div.gpLUSResultAlternate
 {	overflow:hidden;
 }

@@ -185,6 +185,17 @@ function geoportail_formulaire_show()
 	jqToogleClass('.[(#ENV{class,carto})]', uri);
 }
 
+function geoportail_formulaire_mode(mode)
+{	var uri = '[(#URL_PAGE{geop,id=[(#ENV{id,0})]&hash=[(#GEOPORTAIL_PROTECT{geoformulaire[(#ENV{id,0})]})]&formulaire=1&toolbox=mini&carto=0.6&ortho=0&height=100pc&zone=[(#GET{zone})]&zoom=[(#GET{zoom})]&infobox=false})]';
+	if (mode) uri += "&mode="+mode;
+	uri = uri.replace (/amp;/g,'');
+	var cl = '.[(#ENV{class,carto})]';
+	var slider = jQuery(cl+'_slide');
+	slider[0].src = uri;
+	jQuery(cl+'_patience').show();
+	slider.load ( function() {jQuery(cl+'_patience').hide();} );
+}
+
 jQuery(document).ready(
 	function() 
 	{	jQuery('#commune').keydown( 
@@ -257,6 +268,12 @@ href="javascript:geoportail_formulaire_show()" title='<:spip:info_deplier:>' >
 <span class='verrou_location' title='<:geoportail:verrouiller:>' onclick='javascript:verrou_location();'><span class="com">#GET{nom_com}</span> <span class="dep">[((#GET{id_dep}))]</span></span>
 </span>
 [<form class=zone_geo>(#MODELE{geoportail_geozone}{selected=#GET{zone}}{class=fondl})</form>]
+<div class='mode' style="clear:both; margin-top:2px; ">
+	<a class='mode mode_geop' href="javascript:geoportail_formulaire_mode('GEOP')">Géoportail</a>
+	<a class='mode mode_osm' href="javascript:geoportail_formulaire_mode('OSM')">OSM</a>
+	<a class='mode mode_gmap' href="javascript:geoportail_formulaire_mode('GMAP')">Google</a>
+	[(#YAHOO_KEY|?{' '})<a class='mode mode_yhoo' href="javascript:geoportail_formulaire_mode('YHOO')">Yahoo</a>]
+</div>
 </div>
 
 <iframe frameborder='no' scrolling='no' style='display:none; margin:0; padding:0;' class='GeoportalMapDiv [(#ENV{class,carto})]_slide' ></iframe>
