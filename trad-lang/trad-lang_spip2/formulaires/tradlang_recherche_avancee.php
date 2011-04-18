@@ -17,7 +17,7 @@ function formulaires_tradlang_recherche_avancee_charger_dist($lien = ''){
 
 	return 
 		array(
-			'action' => ($lien ? $lien : generer_url_public('recherche')), # action specifique, ne passe pas par Verifier, ni Traiter
+			'action' => ($lien ? $lien : generer_url_public('traduction_recheche')), # action specifique, ne passe pas par Verifier, ni Traiter
 			'recherche' => _request('recherche'),
 			'status' => _request('status'),
 			'module' => _request('module'),

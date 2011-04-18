@@ -1,0 +1,9 @@
+<div class="contenu-principal">
+<INCLURE{fond=inclure/tradlang_entete,env,form_recherche=non}>
+[(#AUTORISER{voir,tradlang}|oui)
+	<INCLURE{fond=inclure/tradlang_recherche,env,ajax}>
+]
+[(#AUTORISER{voir,tradlang}|non)
+        #LOGIN_PUBLIC
+]
+</div>

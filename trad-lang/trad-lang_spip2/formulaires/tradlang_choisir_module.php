@@ -81,7 +81,7 @@ function formulaires_tradlang_choisir_module_traiter($module="",$lang_orig="",$l
 			$lang_cible = $lang_crea;
 			$res['message_ok'] = _T('tradlang:message_passage_trad_creation_lang',array('lang'=>$lang_crea));
 		}
-		$res['redirect'] = parametre_url(parametre_url(parametre_url(parametre_url(generer_url_public("tradlang","etape=traduction"),"module",$module),"lang_orig",$lang_orig),"lang_cible",$lang_cible),'lang_crea',$lang_crea);
+		$res['redirect'] = parametre_url(parametre_url(parametre_url(parametre_url(generer_url_public("traduction","etape=traduction"),"module",$module),"lang_orig",$lang_orig),"lang_cible",$lang_cible),'lang_crea',$lang_crea);
 	}else{
 		$res['editable'] = true;
 	}

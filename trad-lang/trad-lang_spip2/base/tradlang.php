@@ -18,6 +18,7 @@ function tradlang_declarer_tables_interfaces($interface){
 function tradlang_declarer_tables_objets_sql($tables){
 	$tables['spip_tradlang_modules'] = array(
 		'texte_retour' => 'icone_retour',
+		'texte_objets' => 'tradlang:titre_tradlang_modules',
 		'titre' => 'nom_mod',
 		'field'=> array(
 			"id_tradlang_module" => "bigint(21) NOT NULL AUTO_INCREMENT",
@@ -47,7 +48,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 
 	$tables['spip_tradlang'] = array(
 		'texte_retour' => 'icone_retour',
-		'titre' => 'id, lang',
+		'texte_objets' => 'tradlang:titre_tradlang_chaines',
 		'date' => 'date_modif',
 		'field'=> array(
 			"id_tradlang" => "bigint(21) NOT NULL AUTO_INCREMENT",

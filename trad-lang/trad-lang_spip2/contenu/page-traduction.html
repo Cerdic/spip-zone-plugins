@@ -1,0 +1,17 @@
+<div class="contenu-principal">
+<INCLURE{fond=inclure/tradlang_entete,env}>
+[(#AUTORISER{voir,tradlang}|oui)
+	[(#ENV{etape}|oui)
+		[(#CHEMIN{noisettes/vues/tradlang-#ENV{etape}.html}|oui)
+			#SET{etape,oui}
+			<INCLURE{fond=noisettes/vues/tradlang-#ENV{etape}}{env}>
+		]
+	]
+	[(#GET{etape}|=={oui}|non)
+		<INCLURE{fond=noisettes/vues/tradlang-sommaire}{env}>
+	]
+]
+[(#AUTORISER{voir,tradlang}|non)
+	#LOGIN_PUBLIC
+]
+</div>

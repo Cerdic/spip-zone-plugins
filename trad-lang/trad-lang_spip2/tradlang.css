@@ -1,21 +1,9 @@
-html { font-size: 100%; } /* Cf.: http://pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
-body { font-size: 0.8125em; font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif; color: #333; }
+#entete_tradlang{overflow:auto;}
 
-a {
-	text-decoration : none;
-}
+#entete_tradlang .formulaire_spip{float:left;clear:none;}
 
-.traducteur{
-	width:80%;
-	margin:30px auto;
-	background-color:#f0f0f0;
-}
-.traducteur #entete{overflow:auto;background-color:#ccc;}
-
-.traducteur #entete .formulaire_spip{float:left;clear:none;}
-
-.traducteur #entete .entete_recherche{float:right;}
-.traducteur #entete .entete_recherche p{clear:both}
+#entete_tradlang .entete_recherche{float:right;}
+#entete_tradlang .entete_recherche p{clear:both}
 
 .tradlang_footer{
 	font-size:.8em;
@@ -70,44 +58,4 @@ table.liste_traductions tr.statut_modif td.statut,.traducteur #navigation ul.inf
 	background-repeat:no-repeat;
 	background-position:2px center;
 	padding-left:10px;
-}
-
-.traducteur #contenu{
-	width:70%;
-	float:left;
-}
-
-.traducteur #navigation{
-	width:28%;
-	float:right;
-	font-size: .8em;
-}
-
-.traducteur #navigation ul.infos{
-	padding:0;
-	border-top:1px solid #ccc;
-}
-
-.traducteur #navigation li.odd,.traducteur #navigation li.even{
-	list-style-type:none;
-	border:1px solid #ccc;
-	border-top:none;
-	padding:3px 5px;
-}
-
-.traducteur #navigation li.odd{
-	background-color:#F0F0F6;
-}
-
-.traducteur #navigation li.even{
-	background-color:#FFF;
-}
-
-.traducteur #navigation ul.infos p{
-	padding:3px 0;
-	margin:0;
-}
-
-.traducteur #navigation p.attention{
-	color:#d40000;
 }
