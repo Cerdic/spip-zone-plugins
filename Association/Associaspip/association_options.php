@@ -131,7 +131,7 @@ function association_verifier_date($date) {
 }
 	
 function association_nbrefr($montant) {
-		$montant = number_format($montant, 2, ',', ' ');
+		$montant = number_format(floatval($montant), 2, ',', ' ');
 		return $montant;
 	}
 
