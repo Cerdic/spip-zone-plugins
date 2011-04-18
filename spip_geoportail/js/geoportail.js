@@ -964,6 +964,7 @@ jQuery.geoportail =
 		return false;
 	},
 
+	/** Deselectionne tous les objets de la carte */
 	unselectAll : function(id)
 	{	if (typeof(id)=='undefined')
 		{	var i;
@@ -976,19 +977,29 @@ jQuery.geoportail =
 		}
 	},
 	
-	showImg : function (link, width, height, titre)
+	/** Affichage d'une image dans une fenetre */
+	afficheImage : function (src, titre)
 	{	jQuery.geoportail.unselectAll();
-		jQuery.jqDialog("",
-			{	dialog: "<img src='"+link+"' width='100%'/><div class='legende'>"+titre+"</div>",
-				classe:'viewer',
-				width: width,
-				height: height,
-				clickout:true,
-				clickin:true,
-				undo: false,
-				speed:'fast',
-				ok: false
-			});
+		$.jqDialog ("", { dialog:"Chargement...", classe:"wait", clickout:true, undo:false, ok:false });
+		// Precharger l'image
+		var imgPreloader = new Image();
+		imgPreloader.onload = function()
+		{	// Afficher l'image dans un jqDialog
+			imgPreloader.onload = null;
+			jQuery.jqDialog("",
+				{	dialog: "<img src='"+this.src+"' width='100%'/><div class='legende'>"+this.title+"</div>",
+					classe:'viewer',
+					width: this.width,
+					height: this.height,
+					clickout:true,
+					clickin:true,
+					undo: false,
+					speed:'fast',
+					ok: false
+				});
+		}
+		imgPreloader.title = titre;
+		imgPreloader.src = src;
 	},
 	
 	// Fonction d'affichage d'un popup sur une carte
@@ -1007,7 +1018,7 @@ jQuery.geoportail =
 		var lien = null;
 		if (att.url) 
 		{	// Affichage des images
-			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.showImg('" + att.url + "',"+att.width+","+att.height+",'"+att.name+"')\">";
+			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.afficheImage('" + att.url + "','"+att.name+"')\">";
 			else lien = "<a href='" + att.url + "'>";
 		}
 		if (att.logo) html += (lien ? lien : "") + att.logo + (lien ? "</a>" : "");
