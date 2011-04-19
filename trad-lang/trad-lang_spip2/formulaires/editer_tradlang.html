@@ -1,0 +1,31 @@
+<div class="formulaire_spip formulaire_tradlang_ajout_codelangue" id="formulaire_tradlang_ajout_codelangue">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="editer_status obligatoire[(#ENV{erreurs}|table_valeur{status}|oui)erreur]">
+				<label for="status"><:tradlang:label_tradlang_status:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{status})</span>]
+				<select class="text crayon_active" name="status" id="status">
+					<option value="OK"[(#STATUS|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
+					<option value="MODIF"[(#STATUS|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
+					<option value="NEW"[(#STATUS|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
+				</select>
+			</li>
+			<li class='editer_str[(#ENV{erreurs}|table_valeur{str}|oui)erreur]'>
+				<label for='str'><:tradlang:label_tradlang_str:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{str})</span>]
+				<textarea class="crayon-active" name="#ENV{name_str}" id="str">[(#ENV*{str}|entites_html)]</textarea>
+			</li>
+		</ul>
+		<p class='boutons'>
+			<input type='submit' class='submit' value='<:bouton_valider:>' />
+		</p>
+	</div></form>
+	]
+</div>

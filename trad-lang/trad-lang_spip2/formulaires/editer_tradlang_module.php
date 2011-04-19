@@ -2,7 +2,7 @@
 
 include_spip('tradlang_fonctions');
 
-function formulaires_tradlang_modifier_module_charger($module){
+function formulaires_editer_tradlang_module_charger($module){
 	$valeurs = array();
 	$res = sql_select('*','spip_tradlang_modules','nom_mod='.sql_quote($module));
 	$valeurs = sql_fetch($res);
@@ -19,7 +19,7 @@ function formulaires_tradlang_modifier_module_charger($module){
 	return $valeurs;
 }
 
-function formulaires_tradlang_modifier_module_verifier($module){
+function formulaires_editer_tradlang_module_verifier($module){
 	$erreur = array();
 	
 	$modules = tradlang_getmodules_base();
@@ -46,7 +46,7 @@ function formulaires_tradlang_modifier_module_verifier($module){
 	return $erreur;
 }
 
-function formulaires_tradlang_modifier_module_traiter($module){
+function formulaires_editer_tradlang_module_traiter($module){
 	$ret = array();
 	if(_request('delete_module')){
 		$supprimer_module = charger_fonction('tradlang_supprimer_module','inc');

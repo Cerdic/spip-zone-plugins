@@ -12,7 +12,6 @@ function tradlang_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tradlang'] = 'tradlang';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
 	$interface['table_titre']['tradlang'] = "CONCAT(module,' : ',id,' ','[',lang,']') AS titre";
-	$interface['table_statut']['tradlang'][] = array('champ'=>'statut','publie'=>'OK','exception'=>'statut');
 	return $interface;
 }
 
@@ -20,7 +19,10 @@ function tradlang_declarer_tables_objets_sql($tables){
 	$tables['spip_tradlang_modules'] = array(
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'tradlang:titre_tradlang_modules',
+		'texte_modifier' => 'tradlang:icone_modifier_tradlang_module',
+		'icone_objet' => 'spip_lang',
 		'titre' => 'nom_mod',
+		'principale' => 'oui',
 		'field'=> array(
 			"id_tradlang_module" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"module" => "varchar(128) NOT NULL",
@@ -50,7 +52,10 @@ function tradlang_declarer_tables_objets_sql($tables){
 	$tables['spip_tradlang'] = array(
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'tradlang:titre_tradlang_chaines',
+		'texte_modifier' => 'tradlang:icone_modifier_tradlang',
+		'icone_objet' => 'spip_lang-24',
 		'date' => 'date_modif',
+		'principale' => 'oui',
 		'field'=> array(
 			"id_tradlang" => "bigint(21) NOT NULL AUTO_INCREMENT",
 			"id" => "varchar(128) NOT NULL default ''",
@@ -76,6 +81,19 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'join' => array(
 			"id_tradlang"=>"id_tradlang",
 			"module"=>"module"
+		),
+		'statut' => array(
+			 array('champ'=>'statut','publie'=>'OK','previsu'=>'OK,NEW,MODIF','exception'=>'statut')
+		),
+		'statut_images' => array(
+			'OK' => 'tradlang_statut_ok.png',
+			'NEW' => 'tradlang_statut_new.png',
+			'MODIF' => 'tradlang_statut_modif.png'
+		),
+		'statut_textes_instituer' => 	array(
+			'OK' => 'tradlang:texte_statut_ok',
+			'NEW' => 'tradlang:texte_statut_new',
+			'MODIF' => 'tradlang:texte_statut_modif',
 		),
 		'rechercher_champs' => array(
 			'id' => 8,
