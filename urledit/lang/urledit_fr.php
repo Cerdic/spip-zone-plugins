@@ -2,11 +2,18 @@
 
 
 	$GLOBALS[$GLOBALS['idx_lang']] = array(
-		'supprimer' => "Supprimer",
-		'ajouter' => "Ajouter",
-		'titre_urledit' => 'GESTION DES URLS',
+	  'ajouter' => "Ajouter",
+		'erreur_url_edit' => 'Erreur: URL incorrecte ou déjà présente',
+		'formatage' => 'Format des URLs', 
+		'filtre' => 'Filtre  (fonction php: strtolower, ucfirst,....)',
 		'info_urledit' => 'Attribuer une URL',
-		'erreur_url_edit' => 'Erreur: URL incorrecte ou déjà présente'
+		'longueur_min' => 'Longueur minimum',
+		'longueur_max' => 'Longueur maximum',
+		'separateur' => 'Séparateur', 		
+    'supprimer' => "Supprimer",  		
+		'titre_urledit' => 'GESTION DES URLS'
+		
+		
 	);
 
 ?>

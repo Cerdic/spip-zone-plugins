@@ -21,13 +21,27 @@ function action_urledit_ajouter_dist() {
 		*/
 	$url =  _request('urlpropre');
 
-  // nettoyage URLs
-	if (!defined('_URLS_ARBO_MAX')) define('_URLS_ARBO_MAX', 35);
-	if (!defined('_URLS_ARBO_MIN')) define('_URLS_ARBO_MIN', 3);
+  // nettoyage URLs   (chargement param de cgf)
+  $longueur_min = (int) lire_config('urledit/longueur_min'); 
+  if ($longueur_min<3)    $longueur_min = 3;
+  if ($longueur_min>250)  $longueur_min = 250;    
+  $longueur_max = (int) lire_config('urledit/longueur_max'); 
+  if ($longueur_max<35)    $longueur_max = 35;
+  if ($longueur_max>255)  $longueur_max = 255;
+  if  ($longueur_min>$longueur_max)
+                              $longueur_max = $longueur_min+10;
+  
+  $separateur = "-";
+  if (lire_config('urledit/separateur')!="")
+                          $separateur = lire_config('urledit/separateur');    
+  $filtre = "";                        
+  if (lire_config('urledit/filtre')!=""  AND function_exists(lire_config('urledit/filtre')))
+                          $filtre = lire_config('urledit/filtre');
+  
+  //die("$longueur_min / $longueur_max / $separateur / $filtre *****");
 
 	include_spip('action/editer_url');
-	
-  if (!$url = url_nettoyer($url,_URLS_ARBO_MAX,_URLS_ARBO_MIN,'-',''))   // ici possible d'ajouter des arguments l'argument filtre (url en minuscule)
+	if (!$url = url_nettoyer($url,$longueur_max,$longueur_min,$separateur,$filtre))  
 		return;
 
 	
@@ -39,7 +53,6 @@ function action_urledit_ajouter_dist() {
 			$redirect = parametre_url($redirect,'erreur_urledit',"1-$c",'&');
 			include_spip('inc/headers');
 			redirige_par_entete($redirect); 
-  
     		
 	
 }

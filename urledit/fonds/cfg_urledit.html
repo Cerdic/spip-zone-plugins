@@ -1,0 +1,30 @@
+#CACHE{0}
+[(#REM) descriptif=]
+[(#REM) titre=URLS éditables]
+[(#REM) icone=img_pack/urledit-24.png]
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+ 
+   <fieldset><legend><:urledit:formatage:></legend>
+   <p>  
+    <label><:urledit:longueur_min:>
+    <input type="text" name="longueur_min" class="fondl" size="4" value="[(#ENV{longueur_min}|sinon{3})]" /></label>    
+  </p>
+  <p>  
+    <label><:urledit:longueur_max:>
+    <input type="text" name="longueur_max" class="fondl" size="4" value="[(#ENV{longueur_max}|sinon{35})]" /></label>    
+  </p>
+  <p>  
+    <label><:urledit:separateur:>
+    <input type="text" name="separateur" class="fondl" size="1" value="[(#ENV{separateur}|sinon{-})]" /></label>    
+  </p>
+  <p>  
+    <label><:urledit:filtre:>
+    <input type="text" name="filtre" class="fondl" size="35" value="[(#ENV{filtre})]" /></label>    
+  </p>
+  </fieldset>
+
+ 
+  <input type="submit" name="_cfg_ok" value="<:OK:>" />
+  <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

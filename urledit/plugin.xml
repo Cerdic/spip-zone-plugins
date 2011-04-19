@@ -3,7 +3,7 @@
 	<icon>img_pack/urledit-48.png</icon>
 	<auteur>[Stephane LAURENT->stephane@rezo.net], [erational->http://www.erational.org]</auteur>
 	<licence>GPL 3 - &#169; 2009-2011</licence>
-	<version>0.2</version>
+	<version>0.3</version>
 	<etat>dev</etat>
 	<description>Edition libre des URLs</description>
 	<lien>http://www.spip-contrib.net/URLs-editables</lien>
@@ -12,6 +12,7 @@
 		<nom>affiche_milieu</nom>
 		<inclure>urledit_pipelines.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.1.0;]' /> 	 
+ 	<necessite id='SPIP' version='[2.1.0;]' /> 
+  <necessite id="cfg" version="[1.16;]" />	 
  	<categorie>outil</categorie>
 </plugin>
