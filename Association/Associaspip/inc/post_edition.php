@@ -46,10 +46,10 @@ function update_spip_asso_membre($id_auteur)
 	/* si l'auteur est deja present dans la base: on modifie */
 	$membre = sql_fetsel('id_auteur,statut_interne', 'spip_asso_membres', "id_auteur=$id_auteur");
 	if ($membre['id_auteur']) {
-		if ($membre['statut_interne'] == 'sorti') $modif['statut_interne'] = 'echu'; /* si un auteur est edite mais correspond a un membre sorti, on le repasse en echu */
+		if ($membre['statut_interne'] == 'sorti') $modif['statut_interne'] = 'prospect'; /* si un auteur est edite mais correspond a un membre sorti, on le repasse en prospect */
 		sql_updateq('spip_asso_membres', $modif, "id_auteur=$id_auteur");
 	} else { /* sinon on ajoute avec comme statut par defaut echu */
-	  $modif['statut_interne'] = 'echu';
+	  $modif['statut_interne'] = 'prospect';
 	  $modif['id_auteur'] = $id_auteur;
 	  sql_insertq('spip_asso_membres', $modif);
 	}
