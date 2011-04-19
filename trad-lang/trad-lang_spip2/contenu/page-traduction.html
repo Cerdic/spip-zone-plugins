@@ -4,11 +4,11 @@
 	[(#ENV{etape}|oui)
 		[(#CHEMIN{noisettes/vues/tradlang-#ENV{etape}.html}|oui)
 			#SET{etape,oui}
-			<INCLURE{fond=noisettes/vues/tradlang-#ENV{etape}}{env}>
+			<INCLURE{fond=noisettes/vues/tradlang-#ENV{etape},env,ajax}>
 		]
 	]
 	[(#GET{etape}|=={oui}|non)
-		<INCLURE{fond=noisettes/vues/tradlang-sommaire}{env}>
+		<INCLURE{fond=noisettes/vues/tradlang-sommaire,env,ajax}>
 	]
 ]
 [(#AUTORISER{voir,tradlang}|non)

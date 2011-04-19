@@ -18,3 +18,15 @@
 		<:tradlang:texte_explication_langue_cible:>
 	</p>
 </div>
+
+<div>
+	<h3><:tradlang:titre_revisions_sommaire:></h3>
+	<div class="onglets_simple clearfix">
+		<ul>
+			<li>[(#SELF|parametre_url{id_auteur,''}|parametre_url{debut_liste_rev,''}|lien_ou_expose{<:revisions:voir_toutes_les_revisions:>,[(#ID_AUTEUR|non)],ajax})]</li>
+			<li>[(#SELF|parametre_url{id_auteur,#SESSION{id_auteur}}|parametre_url{debut_liste_rev,''}|lien_ou_expose{<:revisions:voir_mes_revisions:>,[(#ID_AUTEUR|=={#SESSION{id_auteur}}|oui)],ajax})]</li>
+		</ul>
+	</div>
+	#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
+	<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},env,ajax,sinon=<:revisions:info_aucune_revision:>} />
+</div>

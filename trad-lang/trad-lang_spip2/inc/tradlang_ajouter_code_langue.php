@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function inc_tradlang_ajouter_code_langue($module,$lang){
 	/**
 	 * Insertion des chaines de la langue mère avec le statut NEW

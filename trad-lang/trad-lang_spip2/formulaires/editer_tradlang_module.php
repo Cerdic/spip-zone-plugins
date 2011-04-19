@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('tradlang_fonctions');
 
 function formulaires_editer_tradlang_module_charger($module){

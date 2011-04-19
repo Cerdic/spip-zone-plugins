@@ -7,6 +7,8 @@
  * 
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * 
  * Import d'un module de langue dans Trad-lang

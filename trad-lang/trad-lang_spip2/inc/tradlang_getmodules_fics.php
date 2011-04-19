@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * retourne une liste contenant les modules
  * trouves dans le repertoire passe en parametre

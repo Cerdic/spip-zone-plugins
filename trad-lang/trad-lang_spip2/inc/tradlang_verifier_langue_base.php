@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	/**
 	 * Quelle est la langue mère

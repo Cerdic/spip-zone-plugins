@@ -1,13 +1,18 @@
-<BOUCLE_tradlang(TRADLANG){id_tradlang}>
+<BOUCLE_tradlang(TRADLANG){id_tradlang}{tout}>
 	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
 	<div class="cartouche">
-		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}
-		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
-		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#ENV{module},chaine=#ENV{id},lang_orig=#ENV{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
+		<BOUCLE_module(TRADLANG_MODULES){module}>#SET{lang_mere,#LANG_MERE}</BOUCLE_module>
+		[(#ENV{lang_orig}|non)
+		#SET{lang_orig_long,#GET{lang_mere}|traduire_nom_langue}]
+		[(#ENV{lang_orig}|oui)
+		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}]
+		#SET{lang_orig,#ENV{lang_orig,#GET{lang_mere}}}
+		#SET{lang_cible_long,#LANG|traduire_nom_langue}
+		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#MODULE,chaine=#ID,lang_orig=#GET{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#LANG,lang_cible_long=#GET{lang_cible_long}}:></h1>
 	</div>
 	[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|oui)
 	<div class="ajax">
-	#FORMULAIRE_EDITER_TRADLANG{#ID_TRADLANG,#ENV{retour}}
+	#FORMULAIRE_EDITER_TRADLANG{#ID_TRADLANG,#ENV{retour},#GET{lang_orig}}
 	</div>]
 	
 	[(#AUTORISER{modifier,tradlang,#ENV{id_tradlang}}|non)
@@ -17,7 +22,8 @@
 		<h3>
 			<:tradlang:titre_modifications_chaines:>
 		</h3>
-		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
+		#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
+		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
 	</div>
 	
 	<div>
