@@ -63,9 +63,14 @@ function evenements_edit_config(){
 }
 
 function formulaires_editer_evenement_verifier_dist($id_evenement='new', $id_article=0, $retour='', $lier_trad = 0, $config_fonc='evenements_edit_config', $row=array(), $hidden=''){
-	$erreurs = formulaires_editer_objet_verifier('evenement',$id_evenement,array('titre','date_debut','date_fin'));
+	$erreurs = formulaires_editer_objet_verifier('evenement',$id_evenement,array('titre','mots','date_debut','date_fin'));
 
 	include_spip('inc/agenda_gestion');
+
+	// champs obligatoires
+    foreach(array ('mots') as $obligatoire) {
+        if (!_request($obligatoire)) $erreurs[$obligatoire] = 'Ce champ est obligatoire';
+    }
 	
 	$horaire = _request('horaire')=='non'?false:true;	
 	$date_debut = agenda_verifier_corriger_date_saisie('debut',$horaire,$erreurs);
