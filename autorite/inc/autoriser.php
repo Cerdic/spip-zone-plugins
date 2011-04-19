@@ -28,6 +28,8 @@ if ($GLOBALS['autorite']['statut_auteur_creation']) {
 		switch($GLOBALS['autorite']['statut_auteur_creation']) {
 			case 'visiteur':
 				define('_STATUT_AUTEUR_CREATION', '6forum');
+			case 'redacteur':
+				define('_STATUT_AUTEUR_CREATION', '1comite');
 			case 'admin':
 				define('_STATUT_AUTEUR_CREATION', '0minirezo');
 		}

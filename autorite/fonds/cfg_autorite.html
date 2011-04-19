@@ -437,8 +437,8 @@
 <br />
 <select name="statut_auteur_creation">
 	<option value="visiteur"[ selected="(#ENV{statut_auteur_creation}|=={visiteur}|?{selected})"]><:autorite:visiteur:></option>
-	<option value=""[ selected="(#ENV{statut_auteur_creation}|?{'',selected})"]><:autorite:redacteur:></option>
-	<option value="admin"[ selected="(#ENV{statut_auteur_creation}|=={minirezo}|?{selected})"]><:autorite:administrateur:></option>
+	<option value="redacteur"[ selected="(#ENV{statut_auteur_creation}|=={redacteur}|?{selected})"]><:autorite:redacteur:></option>
+	<option value="admin"[ selected="(#ENV{statut_auteur_creation}|=={admin}|?{selected})"]><:autorite:administrateur:></option>
 </select>
 </label>
 </p>
