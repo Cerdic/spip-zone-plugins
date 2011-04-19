@@ -36,7 +36,8 @@ function exec_action_adherents_args()
 	echo fin_boite_info(true);
 	echo bloc_des_raccourcis(association_icone(_T('asso:bouton_retour'),  generer_url_ecrire('adherents'), "retour-24.png"));
 	echo debut_droite("",true);
-	echo debut_cadre_relief("", true, "", propre(_T('asso:supprresion_des_adherents')));
+	echo debut_cadre_relief("", true, "", propre(_T('asso:suppression_des_adherents')));
+	echo '<p>'. _T('asso:adherent_message_detail_suppression').'</p>';
 	echo '<p>'. _T('asso:adherent_message_confirmer_suppression').' : </p>';
 	echo supprimer_adherents($_POST["delete"]);
 	echo fin_cadre_relief(true);

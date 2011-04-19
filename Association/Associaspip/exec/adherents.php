@@ -119,6 +119,7 @@ function exec_adherents() {
 		echo "\n<form method='post' action='".$url_adherents."'><div>\n";
 		echo '<input type="hidden" name="lettre" value="'.$lettre.'" />';
 		echo "\n<select name='statut_interne' class='fondl' onchange='form.submit()'>\n";
+		echo "<option value='defaut'>"._T('asso:adherent_entete_statut_defaut')."</option>";
 		foreach ($GLOBALS['association_liste_des_statuts'] as $statut) {
 			echo "\n<option value='".$statut."'";
 			if ($statut_interne==$statut) {echo ' selected="selected"';}

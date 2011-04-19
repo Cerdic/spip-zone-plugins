@@ -5,42 +5,54 @@ function association_post_edition($flux){
 	if ($id
 	AND $flux['args']['table']=='spip_auteurs'
 	AND !_ASSOCIATION_INSCRIPTION2) {
-		$old_aut = sql_fetsel('*', 'spip_auteurs', "id_auteur=$id");
-		if ($data['statut'] == '5poubelle') return $data;
-		if (! ($nom = $data['nom'])) $nom = $old_aut['nom'];
-
-		if ($nom) 
-			list($nom, $prenom) = preg_split('/\s+/', $nom, 2);
-		else {$nom = _T('asso:activite_entete_adherent'); $prenom = $id;}
-
-		if (! ($bio = $data['bio'])) $bio = $old_aut['bio'];
-
-		if (preg_match_all('/(.+)$/m', $bio, $r)
-		AND preg_match('/^\s*(\d{5})\s+(.*)/', $r[0][4], $m))
-		      $modif = array(
-			'fonction' => trim($r[0][0]),
-			'telephone' => telephone_std($r[0][1]),
-			'mobile' => telephone_std($r[0][2]),
-			'adresse' => trim($r[0][3]),
-			'code_postal' => $m[1],
-			'ville' => trim($m[2])
-				     );
-		else $modif = array();
-
-		$modif['nom_famille'] = $nom;
-		$modif['prenom'] = $prenom;
-		$modif['email'] = $data['email'];
-
-
-		if (sql_getfetsel('id_auteur', 'spip_asso_membres', "id_auteur=$id"))
-		  sql_updateq('spip_asso_membres', $modif, "id_auteur=$id");
-		else {
-		  $modif['statut_interne'] = 'echu';
-		  $modif['id_auteur'] = $id;
-		  sql_replace('spip_asso_membres', $modif);
-		}
+		update_spip_asso_membre($id);
 	}
 	return $data;
+}
+
+function update_spip_asso_membre($id_auteur)
+{
+	$auteur = sql_fetsel('statut, nom, bio', 'spip_auteurs', "id_auteur=$id_auteur");
+
+	if ($auteur['statut'] == '5poubelle') { /* auteur a la poubelle: on le met aussi a la poubelle dans asso_membres si il est present dans la table */
+		if (sql_getfetsel('id_auteur', 'spip_asso_membres', "id_auteur=$id_auteur")) {
+			sql_updateq('spip_asso_membres', array('statut_interne' => 'sorti'), "id_auteur=$id_auteur");
+		}
+		return; 
+	}
+
+	/* on recupere dans la bio les champs fonction, telephone, mobile, adresse, code postal et ville: 1 par ligne (sauf code postal et ville) */	
+	$bio = $auteur['bio'];
+	if (preg_match_all('/(.+)$/m', $bio, $r)
+	AND preg_match('/^\s*(\d{5})\s+(.*)/', $r[0][4], $m))
+	      $modif = array(
+		'fonction' => trim($r[0][0]),
+		'telephone' => telephone_std($r[0][1]),
+		'mobile' => telephone_std($r[0][2]),
+		'adresse' => trim($r[0][3]),
+		'code_postal' => $m[1],
+		'ville' => trim($m[2])
+			     );
+	else $modif = array();
+
+	/* on recupere les noms et prenoms dans le champ nom de l'auteur SPIP */
+	$nom = $auteur['nom'];
+	if ($nom)
+		list($nom, $prenom) = preg_split('/\s+/', $nom, 2);
+	else {$nom = _T('asso:activite_entete_adherent'); $prenom = $id_auteur;} /* si il est vide, le nom sera Adherents XX */
+	$modif['nom_famille'] = $nom;
+	$modif['prenom'] = $prenom;
+
+	/* si l'auteur est deja present dans la base: on modifie */
+	$membre = sql_fetsel('id_auteur,statut_interne', 'spip_asso_membres', "id_auteur=$id_auteur");
+	if ($membre['id_auteur']) {
+		if ($membre['statut_interne'] == 'sorti') $modif['statut_interne'] = 'echu'; /* si un auteur est edite mais correspond a un membre sorti, on le repasse en echu */
+		sql_updateq('spip_asso_membres', $modif, "id_auteur=$id_auteur");
+	} else { /* sinon on ajoute avec comme statut par defaut echu */
+	  $modif['statut_interne'] = 'echu';
+	  $modif['id_auteur'] = $id_auteur;
+	  sql_insertq('spip_asso_membres', $modif);
+	}
 }
 
 function telephone_std($num)

@@ -184,12 +184,14 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_label_voir_operation' => 'Voir l\'op&eacute;ration comptable',
 
 	# Message
+	'suppression_des_adherents' => 'Suppression des adh&eacute;rents',
 	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
 	'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
 	'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
 	'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
 	'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
 	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
+	'adherent_message_detail_suppression' => 'Les adh&eacute;rents supprim&eacute;s le sont uniquement de la liste des membres de l\'association. Si vous souhaitez supprimer aussi l\'auteur spip, il faut passer par la page de gestion des auteurs.',
 	
 	# Liste
 	'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br />En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',
@@ -200,10 +202,18 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_liste_nombre_prospect' => 'Prospects : ',
 	'adherent_liste_nombre_total' => 'TOTAL : ',
 	'adherent_liste_total_cotisations' => 'Total des cotisations : @total@ &euro;',
+
+	# synchro adherents/auteurs
+	'synchroniser_asso_membres' => 'Synchroniser la listes des membres avec les auteurs SPIP',
+	'synchroniser_choix' => 'Cocher le statut des auteurs SPIP a importer dans la liste des membres, vous pouvez cocher plusieurs cases.<br />En cochant "Tous les auteurs" vous prenez aussi les auteurs qui ne se sont encore jamais connect&eacute;s.',
+	'synchroniser_tous' => 'Tous les auteurs',
+	'synchroniser_visiteurs' => 'Les visiteurs',
+	'synchroniser_redacteurs' => 'Les r&eacute;dacteurs',
+	'synchroniser_administrateurs' => 'Les administrateurs',
 	
 	# ACTIVITES
 		
-		# Titres
+	# Titres
 	'activite_titre_action_sur_inscriptions' => 'Action sur les inscriptions',
 	'activite_titre_mise_a_jour_inscriptions' => 'Mise &agrave; jour des inscriptions',
 	'activite_titre_ajouter_inscriptions' => 'Ajouter des inscriptions',
