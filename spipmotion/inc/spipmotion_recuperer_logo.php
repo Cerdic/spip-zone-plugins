@@ -33,7 +33,6 @@ function inc_spipmotion_recuperer_logo($id_document,$frame=50){
 		while(!$vignette && ($frame < $document['framecount'])){
 			$frame1 = $movie->getFrame($frame);
 			if($frame1){
-				spip_log($frame1,'spipmotion');
 				$string_temp = "$id-$type-$id_document";
 				$query = md5($string_temp);
 				$dossier_temp = _DIR_VAR;

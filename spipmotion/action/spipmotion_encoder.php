@@ -35,12 +35,17 @@ function action_spipmotion_encoder_dist(){
 		'spipmotion_ajouter_file_encodage_tout'
 	);
 	
-	if(($_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR']) && (!in_array($action,$actions_autorisees))){
-		spip_log('Echec : Appel de spipmotion_encoder depuis '.$_SERVER['REMOTE_ADDR'],'spipmotion');
-		include_spip('inc/minipres');
-	    echo minipres();
-	    exit;
-	}
+	/**
+	 * Sécurité qui empèche les appels directs d'encodage de l'extérieur ...
+	 * Malheureusement ne peut fonctionner dans le cas d'un firewall qui fait du NAT (chez Infini) ...
+	 * A retravailler
+	 */
+	//if(($_SERVER['REMOTE_ADDR'] != $_SERVER['SERVER_ADDR']) && (!in_array($action,$actions_autorisees))){
+	//	spip_log('Echec : Appel de spipmotion_encoder depuis '.$_SERVER['REMOTE_ADDR'],'spipmotion');
+	//	include_spip('inc/minipres');
+	//   echo minipres();
+	//    exit;
+	//}
 	$nb_encodages = sql_countsel('spip_spipmotion_attentes', "encode='non'");
 	spip_log('Appel de la fonction d encodage','spipmotion');
 	spip_log("Il y a $nb_encodages document(s) à encoder","spipmotion");
