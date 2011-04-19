@@ -205,11 +205,14 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 
 	# synchro adherents/auteurs
 	'synchroniser_asso_membres' => 'Synchroniser la listes des membres avec les auteurs SPIP',
-	'synchroniser_choix' => 'Cocher le statut des auteurs SPIP a importer dans la liste des membres, vous pouvez cocher plusieurs cases.<br />En cochant "Tous les auteurs" vous prenez aussi les auteurs qui ne se sont encore jamais connect&eacute;s.',
+	'synchroniser_choix' => 'Cocher le statut des auteurs SPIP a importer dans la liste des membres, vous pouvez cocher plusieurs cases.',
+	'synchroniser_note' => 'Notes:<p> Les auteurs jamais connect&eacute;s seront aussi import&eacute;s dans la liste des membres de l\'association(en fonction de la s&eacute;l&eacute;ction que vous faites).</p><p>Si trop d\'auteurs sont import&eacute;s, vous pourrez toujours les supprimer de la liste des membres, cela n\'a aucune incidence sur leur statut d\'auteur SPIP.</p><p>Meme si vous cochez "Tous les auteurs", les auteurs &agrave; la poubelle ne seront pas import&eacute;s comme membres.</p>',
 	'synchroniser_tous' => 'Tous les auteurs',
 	'synchroniser_visiteurs' => 'Les visiteurs',
 	'synchroniser_redacteurs' => 'Les r&eacute;dacteurs',
 	'synchroniser_administrateurs' => 'Les administrateurs',
+	'pas_de_categorie' => 'Ne pas renseigner ce champ',
+	'synchronise_asso_membre_lien' => 'Synchroniser la liste des membres depuis la liste des auteurs',
 	
 	# ACTIVITES
 		
