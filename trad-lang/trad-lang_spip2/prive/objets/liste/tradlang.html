@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	statut,#ENV{statut_sens,-1},
+	titre,1,
+	id_tradlang,1
+}})
+]<B_liste_tradlang>
+#ANCRE_PAGINATION
+<div class="liste-objets tradlangs">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{info_1_tradlang,info_nb_tradlangs}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre principale'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur'><:auteur:></th>
+			<th class='date secondaire'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_tradlang,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_tradlang(TRADLANG){id_tradlang?}{module?}{where?}{statut?}{recherche?}{tri #ENV{par,statut},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{tradlang,#ID_TRADLANG})]</td>
+			<td class='titre principale'><a href="[(#ID_TRADLANG|generer_url_entite{tradlang})]"
+				title="<:info_numero_abbreviation|attribut_html:> #ID_TRADLANG">#MODULE : #ID [#LANG]</a></td>
+			<td class='auteur'></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|?{
+				<a href="[(#URL_ECRIRE{tradlang_edit,id_tradlang=#ID_TRADLANG})]">#ID_TRADLANG</a>,
+				#ID_TRADLANG
+			})]</td>
+		</tr>
+	</BOUCLE_liste_tradlang>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_tradlang>[
+<div class="liste-objets tradlangs"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_tradlang>
