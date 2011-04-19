@@ -44,6 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_sauvegarde_post_edition' => 'Sauvegardera les fichiers temporaires à chaque modification de chaine de langue',
 
 	// I
+	'icone_modifier_tradlang' => 'Modifier cette chaine de langue',
+	'icone_modifier_tradlang_module' => 'Modifier ce module de langue',
 	'importer_module' => 'Importation de nouveau module de langue',
 	'importermodule' => 'Importer un module',
 	'info_filtrer_status' => 'Filtrer par statut :',
