@@ -1,17 +1,17 @@
 <plugin>
 	<nom>URLs &eacute;ditables</nom>
 	<icon>img_pack/urledit-48.png</icon>
-	<auteur>[Stephane LAURENT->stephane@rezo.net]</auteur>
+	<auteur>[Stephane LAURENT->stephane@rezo.net], [erational->http://www.erational.org]</auteur>
 	<licence>GPL 3 - &#169; 2009-2011</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>dev</etat>
 	<description>Edition libre des URLs</description>
 	<lien>http://www.spip-contrib.net/URLs-editables</lien>
 	<prefix>urledit</prefix>
 	<pipeline>
-		<nom>boite_infos</nom>
+		<nom>affiche_milieu</nom>
 		<inclure>urledit_pipelines.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.1.0;]' />
+ 	<necessite id='SPIP' version='[2.1.0;]' /> 	 
  	<categorie>outil</categorie>
 </plugin>

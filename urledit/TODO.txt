@@ -1,2 +1,3 @@
 Rendre tout ca un peu parametrable (autorisations, droit de modif si publie...)
 gérer plusieurs URL pour un meme article (avec redirection 301 pour les anciennes URLs)
+// attention bientot obsolete avec SPIP 2.3 et l'extension urls_etendues //
