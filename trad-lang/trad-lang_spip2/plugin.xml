@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Trad-Lang</nom>
 	<version>1.0</version>
-	<version_base>0.3.2</version_base>
+	<version_base>0.3.3</version_base>
 	<prefix>tradlang</prefix>
 	<etat>dev</etat>
 	<description>Un plugin pour g&#233;rer directement les fichiers langues depuis l'interface priv&#233;e.</description>
@@ -40,6 +40,7 @@
 	</pipeline>
 	<bouton id='configurer_tradlang' parent='bando_configuration'>
 		<titre>tradlang:titre_tradlang</titre>
+		<icone>images/spip_lang-16.png</icone>
 	</bouton>
 	<necessite id="SPIP" version="[2.3.0-dev;)" />
 	<necessite id="revisions" version="[1.4.1;]" />

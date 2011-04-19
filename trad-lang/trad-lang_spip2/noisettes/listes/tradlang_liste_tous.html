@@ -1,7 +1,7 @@
 <BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}>
 #SET{str_mere,#ARRAY}
 #SET{str_cible,#ARRAY}
-#SET{str_status,#ARRAY}
+#SET{str_statut,#ARRAY}
 <BOUCLE_revise(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}{par id}>[(#SET{str_mere,[(#GET{str_mere}|push{#ID})]})] </BOUCLE_revise>
 #SET{total_mere,#GRAND_TOTAL}
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
@@ -12,32 +12,32 @@
 #SET{total_cible,#GRAND_TOTAL}
 </B_langue_complete>
 [(#SET{defaut_tri,#ARRAY{
-	status,#ENV{status_sens,1},
+	statut,#ENV{statut_sens,1},
 	id,1,
 	str,1
 }})]
 
 <p><:tradlang:nb_items_langue_cible{nb=#GET{total_cible},langue=#ENV{lang_cible}}:></p>
 
-<B_status>
+<B_statut>
 [(#GRAND_TOTAL|>{1}|oui)
 <p class="filtrer"><:tradlang:info_filtrer_status:>
-[(#ENV{status}|oui)<a href="[(#SELF|parametre_url{status,''})]" class="ajax"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
-[(#ENV{status}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
-<BOUCLE_status(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{fusion status}{'<span class="sep"> | </span>'}>
+[(#ENV{statut}|oui)<a href="[(#SELF|parametre_url{statut,''})]" class="ajax"><:tradlang:lien_aucun_status:></a><span class="sep"> | </span>]
+[(#ENV{statut}|non)<:tradlang:lien_aucun_status:><span class="sep"> | </span>]]
+<BOUCLE_statut(TRADLANG){module}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{fusion statut}{'<span class="sep"> | </span>'}>
 [(#GRAND_TOTAL|>{1}|oui)
-[(#STATUS|!={#ENV{status}}|oui)<a href="[(#SELF|parametre_url{status,#STATUS})]" class="ajax">#STATUS</a>]
-[(#STATUS|!={#ENV{status}}|non)#STATUS]]
-#SET{statut,#STATUS}
-</BOUCLE_status>
+[(#STATUT|!={#ENV{statut}}|oui)<a href="[(#SELF|parametre_url{statut,#STATUT})]" class="ajax">#STATUT</a>]
+[(#STATUT|!={#ENV{statut}}|non)#STATUT]]
+#SET{statut,#STATUT}
+</BOUCLE_statut>
 [(#GRAND_TOTAL|>{1}|oui)
 </p>]
 [(#REM) Si un seul statut et pas celui de l'environnement c'est qu'on aura pas de résultats après]
-[(#GRAND_TOTAL|=={1}|et{#GET{status}|!={#ENV{status}}}|oui)
+[(#GRAND_TOTAL|=={1}|et{#GET{statut}|!={#ENV{statut}}}|oui)
 <p><:tradlang:message_aucun_resultat_statut:></p>
-<p><a href="[(#SELF|parametre_url{status,''})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>
+<p><a href="[(#SELF|parametre_url{statut,''})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>
 ]
-</B_status>
+</B_statut>
 
 <B_revise_cible>
 <table class="liste_traductions">
@@ -55,7 +55,7 @@
 				<:tradlang:traduction{lang=#ENV{lang_cible}}:>
 			</th>
 			<th class="statut" width="50px">
-				[(#TRI{status,<:tradlang:th_status:>,ajax})]
+				[(#TRI{statut,<:tradlang:th_status:>,ajax})]
 			</th>
 			<th class="modifier" width="50px">
 				&nbsp;
@@ -64,17 +64,17 @@
 	</thead>
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
-	<BOUCLE_revise_cible(TRADLANG){module}{status ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{tri #ENV{par,status},#GET{defaut_tri}}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUS|strtolower)]">
+	<BOUCLE_revise_cible(TRADLANG){module}{statut ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{tri #ENV{par,statut},#GET{defaut_tri}}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUT|strtolower)]">
 		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
-		<td class="origine">[&lt;(#STATUS|!={OK}|?{#STATUS})&gt; ][(#STR**|entites_html)]</td>
+		<td class="origine">[&lt;(#STATUT|!={OK}|?{#STATUT})&gt; ][(#STR**|entites_html)]</td>
 		</BOUCLE_revise_orig>
 		<td class="origine"><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		<td class="cible #EDIT{str_statut}">[(#STR**|entites_html)]</td>
-		<td class="statut" width="50px">[(#STATUS|sinon{<:tradlang:info_status_ok:>})]</td>
-		<td class="modifier" width="50px"><a href="[(#SELF|parametre_url{etape,traduction_chaine}|parametre_url{id,#ID}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
+		<td class="statut" width="50px">[(#STATUT|sinon{<:tradlang:info_status_ok:>})]</td>
+		<td class="modifier" width="50px"><a href="[(#SELF|parametre_url{etape,traduction_chaine}|parametre_url{id_tradlang,#ID_TRADLANG}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>
 	</BOUCLE_revise_cible>
 	</tbody>
@@ -109,7 +109,7 @@
 		</BOUCLE_revise_inexistants_orig>
 		<td><:tradlang:str_existe_pas_in_langue:></td>
 		<//B_revise_inexistants_orig>
-		<td>#STATUS</td>
+		<td>#STATUT</td>
 	</tr>
 	</BOUCLE_revise_inexistants>
 	</tbody>
@@ -139,7 +139,7 @@
 	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 		<td>#ID</td>
 		<td>[(#STR**|entites_html)]</td>
-		<td>#STATUS</td>
+		<td>#STATUT</td>
 	</tr>
 	</BOUCLE_revise_en_trop>
 	</tbody>

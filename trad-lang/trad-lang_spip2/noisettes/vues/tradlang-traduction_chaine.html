@@ -1,13 +1,16 @@
-[(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|oui)
+<BOUCLE_tradlang(TRADLANG){id_tradlang}>
 	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
 	<div class="cartouche">
 		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}
 		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
 		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#ENV{module},chaine=#ENV{id},lang_orig=#ENV{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
 	</div>
-	le formulaire
+	<div class="ajax">
+	#FORMULAIRE_TRADLANG_MODIFIER_CHAINE{#ENV{id_tradlang},#ENV{retour}}
+	</div>
 	
-	Les révisions
+	<h3>Les révisions</h3>
+	<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,id_objet=#ID_TRADLANG,env,ajax}>
 	
 	Les forums
-]
+</BOUCLE_tradlang>

@@ -27,6 +27,9 @@ function tradlang_upgrade($nom_meta_base_version,$version_cible){
 		array('sql_alter',"TABLE spip_tradlang_modules CHANGE nom_mod nom_mod VARCHAR(32) NOT NULL"),
 		array('sql_alter',"TABLE spip_tradlang_modules CHANGE lang_prefix lang_prefix VARCHAR(32) NOT NULL")
 	);
+	$maj['0.3.3'] = array(
+		array('sql_alter',"TABLE spip_tradlang CHANGE status statut VARCHAR(16) NOT NULL default 'OK'"),
+	);
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }

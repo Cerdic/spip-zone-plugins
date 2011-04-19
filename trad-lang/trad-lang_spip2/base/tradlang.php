@@ -12,6 +12,7 @@ function tradlang_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['tradlang'] = 'tradlang';
 	$interface['table_des_tables']['tradlang_modules'] = 'tradlang_modules';
 	$interface['table_titre']['tradlang'] = "CONCAT(module,' : ',id,' ','[',lang,']') AS titre";
+	$interface['table_statut']['tradlang'][] = array('champ'=>'statut','publie'=>'OK','exception'=>'statut');
 	return $interface;
 }
 
@@ -58,7 +59,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"str" => "text NOT NULL", 
 			"comm" => "text NOT NULL",
 			"ts" => "timestamp(14) NOT NULL",
-			"status" => "varchar(16) NOT NULL default 'OK'",
+			"statut" => "varchar(16) NOT NULL default 'OK'",
 			"traducteur" => "varchar(32) default NULL",
 			"md5" => "varchar(32) default NULL",
 			"orig" => "tinyint(4) NOT NULL default '0'",
