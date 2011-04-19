@@ -5,12 +5,28 @@
 		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
 		<h1><:tradlang:titre_traduction_chaine_de_vers{module=#ENV{module},chaine=#ENV{id},lang_orig=#ENV{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
 	</div>
+	[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|oui)
 	<div class="ajax">
-	#FORMULAIRE_TRADLANG_MODIFIER_CHAINE{#ENV{id_tradlang},#ENV{retour}}
+	#FORMULAIRE_EDITER_TRADLANG{#ID_TRADLANG,#ENV{retour}}
+	</div>]
+	
+	[(#AUTORISER{modifier,tradlang,#ENV{id_tradlang}}|non)
+	Les infos du truc pour pouvoir le commenter 
+	]
+	<div>
+		<h3>
+			<:tradlang:titre_modifications_chaines:>
+		</h3>
+		[(#INCLURE{fond=prive/objets/liste/versions,objet=tradlang,id_objet=#ID_TRADLANG,env,ajax}|sinon{<p><:tradlang:info_chaine_jamais_modifiee:></p>})]
 	</div>
 	
-	<h3>Les révisions</h3>
-	<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,id_objet=#ID_TRADLANG,env,ajax}>
-	
-	Les forums
+	<div>
+		<h3>
+			<:tradlang:titre_commentaires_chaines:>
+		</h3>
+		[(#REM) Forum de la chaine de langue ]
+		<a href="#forum" name="forum" id="forum"></a>
+		[(#INCLURE{fond=inclure/forum,id_tradlang=#ID_TRADLANG}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
+		#FORMULAIRE_FORUM{#SELF,tradlang,#ID_TRADLANG}
+	</div>
 </BOUCLE_tradlang>

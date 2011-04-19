@@ -24,11 +24,21 @@ function tradlang_declarer_tables_objets_surnoms($flux){
 /**
  * Insertion dans le pipeline revisions_liste_objets du plugin revisions (2.3)
  * Definir la liste des tables possibles
- * @param object $array
+ * @param array $array
  * @return
  */
 function tradlang_revisions_liste_objets($array){
 	$array['tradlang'] = 'tradlang:chaines_langue';
+	return $array;
+}
+
+/**
+ * Insertion dans le pipeline forum_objets_depuis_env (Plugin Forum)
+ * On ajoute la possibilité d'avoir des forums sur les chaines de langue
+ * @param array $array
+ */
+function tradlang_forum_objets_depuis_env($array){
+	$array['tradlang'] = id_table_objet('tradlang');
 	return $array;
 }
 

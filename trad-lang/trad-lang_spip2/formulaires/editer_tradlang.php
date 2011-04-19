@@ -17,9 +17,6 @@ function formulaires_editer_tradlang_charger($id_tradlang='aucun',$retour){
 function formulaires_editer_tradlang_verifier($module){
 	$erreurs = formulaires_editer_objet_verifier('tradlang',0,array('str'));
 	return $erreurs;
-	
-	
-	return $erreur;
 }
 
 function formulaires_editer_tradlang_traiter($module){

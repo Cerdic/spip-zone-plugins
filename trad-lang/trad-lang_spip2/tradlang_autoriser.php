@@ -135,7 +135,14 @@ function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
-	
+
+	if(intval($id) > 0){		
+		$infos_chaine = sql_fetsel('*','spip_tradlang','id_tradlang='.$id);
+		$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($infos_chaine['module']));
+		if($infos_chaine['lang'] == $lang_mere){
+			return false;
+		}
+	}
 	if(autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt)){
 		return autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt);
 	}

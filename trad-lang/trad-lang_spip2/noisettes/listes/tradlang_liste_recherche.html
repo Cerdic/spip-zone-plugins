@@ -42,15 +42,22 @@
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
 		<td>#MODULE</td>
 		<BOUCLE_revise_orig(TRADLANG){lang=#LANG_MERE}{id=#ID}{0,1}>
+		#SET{id_lang_mere,#ID_TRADLANG}
 		<td class="status[_(#STATUT|strtolower)]">[(#STR**|entites_html)]</td>
 		</BOUCLE_revise_orig>
 		<td><:tradlang:str_existe_plus:></td>
 		<//B_revise_orig>
 		</BOUCLE_module>
-		<td class="#EDIT{str_statut}">[(#STR**|entites_html)]</td>
+		<td class="#EDIT{str_statut}">
+			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)[(#STR**|entites_html)]]
+			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|oui)<em><:tradlang:info_chaine_originale:></em>]
+		</td>
 		<td class="lang" width="50px"><abbr title="[(#LANG|traduire_nom_langue)]">#LANG</abbr></td>
 		<td class="status" width="50px">[(#STATUT)]</td>
-		<td class="modifier" width="50px"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction_chaine}|parametre_url{id_tradlang,#ID_TRADLANG}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
+		<td class="modifier" width="50px">
+			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)
+			<a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction_chaine}|parametre_url{id_tradlang,#ID_TRADLANG}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a>]
+		</td>
 	</tr>
 	</BOUCLE_recherche_tradlang>
 	</tbody>

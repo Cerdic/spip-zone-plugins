@@ -38,6 +38,10 @@
 		<nom>autoriser</nom>
 		<inclure>tradlang_autoriser.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>forum_objets_depuis_env</nom>
+		<inclure>tradlang_autoriser.php</inclure>
+	</pipeline>
 	<bouton id='configurer_tradlang' parent='bando_configuration'>
 		<titre>tradlang:titre_tradlang</titre>
 		<icone>images/spip_lang-16.png</icone>
