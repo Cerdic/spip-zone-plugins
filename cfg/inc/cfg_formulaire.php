@@ -181,8 +181,8 @@ class cfg_formulaire{
 	 * @param string $message 
 	 */
 	function ajouter_erreur($champ, $message) {
-		$this->messages['erreurs'][$champs] = isset($this->messages['erreurs'][$champs]) 
-			? $this->messages['erreurs'][$champs] .= '<br />' . $message
+		$this->messages['erreurs'][$champ] = isset($this->messages['erreurs'][$champ]) 
+			? $this->messages['erreurs'][$champ] .= '<br />' . $message
 			: $message;
 	}
 	
