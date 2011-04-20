@@ -3,7 +3,7 @@
 	<auteur>[Joseph->http://www.spip-contrib.net/Joseph]</auteur>
 	<icon>images/rssconfig-128.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>test</etat>
 	<description>Fournit un formulaire de configuration pour personnaliser le flux RSS des articles du site.</description>
 	<lien>http://www.spip-contrib.net/?article3793</lien>
@@ -14,7 +14,7 @@
 		<url>configurer_rssconfig</url>
 	</bouton>
 	<bouton id='rssconfig21' parent='bando_squelette'>
-		<icone>images/rssconfig-24.png</icone>
+		<icone>images/rssconfig-16.png</icone>
 		<titre>rssconfig:rssconfig</titre>
 		<url>configurer_rssconfig</url>
 	</bouton>
