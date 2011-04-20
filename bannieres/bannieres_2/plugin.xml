@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Banni&egrave;res</nom>
-	<auteur>Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud</auteur>
-	<version>0.26</version>
+	<auteur>Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud, [erational->http://www.erational.org]</auteur>
+	<version>0.27</version>
 	<version_base>0.21</version_base>
   <licence>&#169; 2009-2011 GNU/GPL</licence>
   <install>base/bannieres_upgrade.php</install>

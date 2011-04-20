@@ -162,26 +162,33 @@ function afficher_banniere($id_objet='',$id='',$alt='') {
 	$order = "0+D.titre, D.date";
 
 	$document = sql_fetsel($select, $from, $where, '','RAND()', $limit = '1');
+	$url = sql_getfetsel ('site', 'spip_bannieres', 'id_banniere='.$id);
 
-  if ($document){     
+  if ($document){  
+   
+    
   	 
-  	// cas du flash
-  	// TODO :trouver un moyen de creer un lien et comptabiliser le clic...     	 
-  	if ($document['extension'] == 'swf'){      
-  	$logo_banniere = '<object width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
-  	<param name="movie" value="'._DIR_IMG.$document['fichier'].'">
-  	<embed src="'._DIR_IMG.$document['fichier'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
-  	</embed>
-  	</object>';
+  	// cas du flash: 
+    // on passe les donnees ds FlashVars
+    // que le flash peut recuperer ou non  	  	 
+  	if ($document['extension'] == 'swf'){  
+  	    $url_site = rawurlencode($GLOBALS['meta']['adresse_site']);
+        $logo_banniere =
+            "<object type='application/x-shockwave-flash' data='"._DIR_IMG.$document['fichier']."' id='bandeau' width='".$document['largeur']."' height='".$document['hauteur']."'>
+              <param name='movie' value='"._DIR_IMG.$document['fichier']."' />
+              <param name='quality' value='high' />
+              <param name='menu' value='false' />          
+              <param name='wmode' value='transparent' />
+              <param name='FlashVars' value='url_site=$url_site&amp;action=visit_url&amp;banniere=$id&amp;url=".rawurlencode($url)."' />
+            </object>";    
   
   	} else {   
   	   //Todo : s'assurer que c'est une image
       $logo_banniere = '<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
   
-  	}
-  
-  } else {
-
+  	} 
+      
+  } else {    
      // rien dans la base peut etre un logo ? - ancien systeme.   
   	include_spip('inc/iconifier');
   	
@@ -195,7 +202,7 @@ function afficher_banniere($id_objet='',$id='',$alt='') {
   }
 
 	// rechercher l'url de destination
-	if($url = sql_getfetsel ('site', 'spip_bannieres', 'id_banniere='.$id)) {
+	if($url && $document['extension'] != 'swf') {
 		$lien = '<a href="'.generer_url_action('visit_url','banniere='.$id.'&url='.rawurlencode($url)).'" title="'.$document['titre'].'" class="banniere">';
 		$lien .= $logo_banniere.$document['descriptif'].'</a>';
 	} else {

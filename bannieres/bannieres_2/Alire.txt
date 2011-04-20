@@ -1,13 +1,22 @@
 Bannieres pour SPIP 2.0
-version 0.21
+------------------------
 
++ version 0.27
+----------------
+support de flash via FlashVars
+
++ version 0.26
+----------------
+modele <banniereXX> pour inserer les bannieres en mode redacteur
+nouveaux logos
+ 
++ version 0.21
+----------------
 Cette mouture utilise le système de documents de SPIP au lieu du système de logos, cela étend les possibilités d'insertion de types de documents. Les champs ALT et EXT de la table spip_bannieres deviennent inutiles.
 Les anciennes images restent disponibles dans le dossier IMG jusqu'a leur remplacement et continuent à s'afficher si la campagne est active.
 
-Avec les bannières flash, on ne peut pas placer de lien pour compter les clics et rediriger (si quelqu'un a une solution ?).
-
-version 0.2
-
++ version 0.2
+----------------
 Réécriture du plugin bannieres.
 - Les anciennes images ban_xx.ext sont renommées en banniereonxx.ext.
 - Possibilité de placer plusieures balises dans la même page #BANNIERE{position}
