@@ -21,7 +21,7 @@ function tradlang_getmodules_base(){
 	$res = sql_select("*","spip_tradlang_modules");
 	if ($res){
 		while($row=sql_fetch($res)){
-			$nom_mod = $row["nom_mod"];
+			$nom_mod = $row["module"];
 			$ret[$nom_mod] = $row;
 
 			/**

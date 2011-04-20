@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_tradlang_module,1,
+	titre,1
+	lang_mere,1,
+}})plouf
+]<B_liste_tradlang_modules>
+#ANCRE_PAGINATION
+<div class="liste-objets tradlang_modules">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{tradlang:info_1_tradlang_module,tradlang:info_nb_tradlang_module}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre principale'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='auteur'></th>
+			<th class='lang_mere secondaire'>[(#TRI{lang_mere,<:tradlang:label_langue_mere:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_tradlang_module,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_tradlang_modules(TRADLANG_MODULES){id_tradlang_module?}{module?}{nom_mod?}{where?}{recherche?}{tri #ENV{par,id_tradlang_module},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#STATUT|puce_statut{tradlang_module,#ID_TRADLANG_MODULE})]</td>
+			<td class='titre principale'><a href="[(#ID_TRADLANG_MODULE|generer_url_entite{tradlang_module})]"
+				title="<:info_numero_abbreviation|attribut_html:> #ID_TRADLANG_MODULE">[(#NOM_MOD)]</a></td>
+			<td class='auteur'></td>
+			<td class='lang_mere secondaire'>[(#LANG_MERE)]</td>
+			<td class='id'>[(#AUTORISER{modifier,tradlang_module,#ID_TRADLANG_MODULE}|?{
+				<a href="[(#URL_ECRIRE{tradlang_module_edit,id_tradlang_module=#ID_TRADLANG_MODULE})]">#ID_TRADLANG_MODULE</a>,
+				#ID_TRADLANG_MODULE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_tradlang_modules>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_tradlang_modules>[
+<div class="liste-objets tradlang_modules"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_tradlang_modules>

@@ -2,15 +2,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+include_spip('inc/editer');
 include_spip('tradlang_fonctions');
 
-function formulaires_editer_tradlang_module_charger($module){
-	$valeurs = array();
-	$res = sql_select('*','spip_tradlang_modules','nom_mod='.sql_quote($module));
-	$valeurs = sql_fetch($res);
+function formulaires_editer_tradlang_module_charger($id_tradlang_module,$retour=''){
+	$valeurs = formulaires_editer_objet_charger('tradlang_module',$id_tradlang_module,0,'',$retour,$config_fonc,$row,$hidden);
 	
 	$modules = tradlang_getmodules_base();
-	$modok = $modules[$module];
+	spip_log($modules,'tradlang');
+	$modok = $modules[$valeurs['module']];
 	foreach($modok as $cle=>$item){
 		if (strncmp($cle, "langue_", 7) == 0)
 			$lgs .= substr($cle,7)." ";
@@ -21,7 +22,7 @@ function formulaires_editer_tradlang_module_charger($module){
 	return $valeurs;
 }
 
-function formulaires_editer_tradlang_module_verifier($module){
+function formulaires_editer_tradlang_module_verifier($id_tradlang_module,$retour=''){
 	$erreur = array();
 	
 	$modules = tradlang_getmodules_base();
@@ -48,11 +49,12 @@ function formulaires_editer_tradlang_module_verifier($module){
 	return $erreur;
 }
 
-function formulaires_editer_tradlang_module_traiter($module){
+function formulaires_editer_tradlang_module_traiter($id_tradlang_module,$retour=''){
 	$ret = array();
+	$module = sql_getfetsel('nom_mod','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 	if(_request('delete_module')){
 		$supprimer_module = charger_fonction('tradlang_supprimer_module','inc');
-		$suppressions = $supprimer_module($module);
+		$suppressions = $supprimer_module($id_tradlang_module);
 		$editable = false;
 		if(intval($suppressions) && ($suppressions > 1)){
 			$ret['message_ok'] = _T('tradlang:message_suppression_module_trads_ok',array('nb'=>$suppressions,'module'=>$module));
@@ -61,17 +63,17 @@ function formulaires_editer_tradlang_module_traiter($module){
 		}
 	}
 	else{
-		$res = sql_select('*','spip_tradlang_modules','nom_mod='.sql_quote($module));
+		$res = sql_select('*','spip_tradlang_modules','id_tradlang_module='.intval($id_tradlang_module));
 		$modok = sql_fetch($res);
 		$langue = _request('codelangue');
 		
 		$datas = array(
-			'nom_module' => _request('nom_module') ? _request('nom_module') : $module,
+			'nom_mod' => _request('nom_mod') ? _request('nom_mod') : $module,
 			'lang_mere' => _request('lang_mere'),
 			'texte' => _request('texte')
 		);
 		
-		sql_updateq('spip_tradlang_modules',$datas,'nom_mod='.sql_quote($module));
+		sql_updateq('spip_tradlang_modules',$datas,'id_tradlang_module='.intval($id_tradlang_module));
 		$ret['message_ok'] = _T('tradlang:message_module_updated',array('module'=>$module));
 		
 		if($langue){

@@ -258,6 +258,25 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
 	}
 }
 
+/**
+ * Autorisation à créer un module de langue
+ * Renvoit false
+ * @param unknown_type $faire
+ * @param unknown_type $type
+ * @param unknown_type $id
+ * @param unknown_type $qui
+ * @param unknown_type $opt
+ */
+function autoriser_tradlang_module_creer_dist($faire, $type, $id, $qui, $opt){
+	spip_log('on passe là?','tradlang');
+	return false;
+}
+
+function autoriser_tradlang_creer_dist($faire, $type, $id, $qui, $opt){
+	spip_log('on passe là?','tradlang');
+	return false;
+}
+
 function tradlang_verifier_webmestre($qui){
 	$webmestre =  false;
 	$webmestre = in_array($qui['id_auteur'],explode(':', _ID_WEBMESTRES));

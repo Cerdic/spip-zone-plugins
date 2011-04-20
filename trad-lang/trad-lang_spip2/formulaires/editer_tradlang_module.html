@@ -8,23 +8,19 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-		    <li class="editer_nom_module obligatoire[(#ENV{erreurs}|table_valeur{nom_module}|oui)erreur]">
-		    	<label for="nom_module"><:tradlang:label_nommodule:></label>[
-				<span class="erreur_message">(#ENV{erreurs}|table_valeur{nom_module})</span>]
-				<input type="text" class="text" name="nom_module" id="nom_module" value="#ENV{nom_module}" />
+		    <li class="editer_nom_mod obligatoire[(#ENV{erreurs}|table_valeur{nom_mod}|oui)erreur]">
+		    	<label for="nom_mod"><:tradlang:label_nommodule:></label>[
+				<span class="erreur_message">(#ENV{erreurs}|table_valeur{nom_mod})</span>]
+				<input type="text" class="text" name="nom_mod" id="nom_mod" value="#ENV{nom_mod}" />
 		    </li>
 			<li>
-				<label><:tradlang:label_repertoire_module_langue:></label>
-				#ENV{dir_lang}
-			</li>
-			<li>
 				<label><:tradlang:label_idmodule:></label>
-				#ENV{nom_mod}
+				#ENV{module}
 			</li>
 			<li class="editer_lang_mere obligatoire[(#ENV{erreurs}|table_valeur{lang_mere}|oui)erreur]">
 				<label for="lang_mere"><:tradlang:label_langue_mere:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{lang_mere})</span>]
-				<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{name=lang_mere}{module=#ENV{nom_mod}}{lang_select=#ENV{lang_mere}}{env}>
+				<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo}{name=lang_mere}{module=#ENV{module}}{lang_select=#ENV{lang_mere}}{env}>
 			</li>
 			<li>
 				<label><:tradlang:languesdispo:></label>
@@ -43,7 +39,7 @@
 		</ul>
 		<p class='boutons'>
 			<input type='submit' class='submit' value='<:bouton_valider:>' />
-			<input type='submit' class='submit' name="delete_module" value='<:tradlang:bouton_supprimer_module:>' />
+			[(#REM)<input type='submit' class='submit' name="delete_module" value='<:tradlang:bouton_supprimer_module:>' />]
 		</p>
 	</div></form>
 	]
