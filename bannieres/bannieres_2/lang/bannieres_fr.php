@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'alt_ancien' => 'Ancien texte alternatif (utilisez plut&ocirc;t le titre du document - voir doc)',
 	
 	// B
-	'bannieres' => 'bannieres',
+	'bannieres' => 'Banni&egrave;res',
 	'bouton_exporter' => 'Exporter',
 
 	// C

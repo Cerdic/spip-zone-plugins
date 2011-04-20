@@ -5,24 +5,20 @@
 <input type="hidden" name="desc" value="#ENV{desc}" />
 
 
-<B_bannieres>
-<table class='bannieres spip' style="font-size:11px;width:100%;">
-	<thead>
-	<tr>
-		<th>&nbsp;</th>
-		<th>
-			<:bannieres:label_logo:>
-		</th>
+<B_bannieres> 
+<table class='bannieres' style="font-size:11px;width:100%;border-collapse:collapse;line-height:120%;" cellpadding='2' cellspacing='0' border='0'>
+	<tr class='tr_liste'>    
+  	<th class="[(#ENV{ordre}|=={nom}|?{[on (#GET{class_desc})],'both'})]">
+		<a href="[(#SELF|parametre_url{'ordre','nom'}|parametre_url{'desc',#GET{desc}})]" class="ajax" title="<:bannieres:label_nom|attribut_html:>">
+			&nbsp;&nbsp;<:bannieres:label_nom:>
+		</a>
+		</th>	
+    <th><!-- <:bannieres:label_logo:> --></th>	
 		<th class="[(#ENV{ordre}|=={id_banniere}|?{[on (#GET{class_desc})],'both'})]">
 			<a href="[(#SELF|parametre_url{'ordre','id_banniere'}|parametre_url{'desc',#GET{desc}})]" title="<:bannieres:label_id_banniere|attribut_html:>">
 				<:bannieres:label_id_banniere:>
 			</a>
-		</th>
-		<th class="[(#ENV{ordre}|=={nom}|?{[on (#GET{class_desc})],'both'})]">
-		<a href="[(#SELF|parametre_url{'ordre','nom'}|parametre_url{'desc',#GET{desc}})]" class="ajax" title="<:bannieres:label_nom|attribut_html:>">
-			<:bannieres:label_nom:>
-		</a>
-		</th>
+		</th> 		
 		<th class="[(#ENV{ordre}|=={debut}|?{[on (#GET{class_desc})],'both'})]">
 			<a href="[(#SELF|parametre_url{'ordre','debut'}|parametre_url{'desc',#GET{desc}})]" title="<:bannieres:label_debut|attribut_html:>">
 				<:bannieres:label_debut:>
@@ -50,77 +46,51 @@
 			</a>
 		</th>
 	]
-		<th>
-			  <:bannieres:label_actions:>
+		<th><!--  <:bannieres:label_actions:>  -->
 		</th>
 	</tr>
-	</thead>
-	<tbody>
-<BOUCLE_bannieres(BANNIERES){tri #ENV{ordre,id_banniere},#ENV{desc,-1}}{pagination 10}{tout}>
+	
 
+<BOUCLE_bannieres(BANNIERES){tri #ENV{ordre,id_banniere},#ENV{desc,-1}}{pagination 10}{tout}>                                                          
 <tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" >
-		<td>
+    <td>
 		[(#DATE|>={#DEBUT}|et{
-		[(#DATE|<={#FIN})]}|oui)
-		<img src="[(#CHEMIN{images/puce-verte.gif})]" alt="<:bannieres:active:>" width="[(#CHEMIN{images/puce-verte.gif}|largeur)]" height="[(#CHEMIN{images/puce-verte.gif}|hauteur)]" />
-		]
-
-		[(#DATE| > {#FIN}|oui)
-		<img src="[(#CHEMIN{images/puce-rouge.gif})]" alt="<:bannieres:echue:>" alt="<:bannieres:echue:>" width="[(#CHEMIN{images/puce-rouge.gif}|largeur)]" height="[(#CHEMIN{images/puce-rouge.gif}|hauteur)]" />
-		 ]
-
-		[(#DATE| < {#DEBUT}|oui)
-		<img src="[(#CHEMIN{images/puce-blanche.gif})]" alt="<:bannieres:future:>" width="[(#CHEMIN{images/puce-blanche.gif}|largeur)]" height="[(#CHEMIN{images/puce-blanche.gif}|hauteur)]" />
-		 ]
-
+		[(#DATE|<={#FIN})]}|oui)<img src="[(#CHEMIN{images/puce-verte.gif})]" alt="<:bannieres:active:>" width="[(#CHEMIN{images/puce-verte.gif}|largeur)]" height="[(#CHEMIN{images/puce-verte.gif}|hauteur)]" />]
+    [(#DATE| > {#FIN}|oui)<img src="[(#CHEMIN{images/puce-rouge.gif})]" alt="<:bannieres:echue:>" alt="<:bannieres:echue:>" width="[(#CHEMIN{images/puce-rouge.gif}|largeur)]" height="[(#CHEMIN{images/puce-rouge.gif}|hauteur)]" />]
+    [(#DATE| < {#DEBUT}|oui)<img src="[(#CHEMIN{images/puce-blanche.gif})]" alt="<:bannieres:future:>" width="[(#CHEMIN{images/puce-blanche.gif}|largeur)]" height="[(#CHEMIN{images/puce-blanche.gif}|hauteur)]" />]
+     
+     [(#AUTORISER{voir,banniere,#ID_BANNIERE}) <a href='[(#URL_ECRIRE{banniere_voir}|parametre_url{id_banniere,#ID_BANNIERE})]'>#NOM</a>]
+     [(#AUTORISER{voir,banniere,#ID_BANNIERE}|non)#NOM]
 		</td>
 		<td>
 		<BOUCLE_document(spip_documents spip_documents_liens){id_objet=#ID_BANNIERE}{objet=banniere}{0,1}>
 			<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" />
 		</BOUCLE_document>
-			[(#LOGO_BANNIERE||non)
-			<img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" />
-			]
-			[(#LOGO_BANNIERE||oui)
-			<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" />
-			]
-		<//B_document>
-		
+			[(#LOGO_BANNIERE||non)<img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" />]
+			[(#LOGO_BANNIERE||oui)<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> 	]
+		<//B_document>		
 		</td>
-		<td>#ID_BANNIERE</td>
-		<td>#NOM</td>
+
+		<td><small>N° #ID_BANNIERE</small></td>
 		<td>#DEBUT</td>
 		<td>#FIN</td>
 		<td>#POSITION</td>
 	[(#PLUGIN{geographie}|oui)
 		<td>#RAYON</td>
 		<td>
-		[(#RAYON|=={pays}|oui)
-			<INCLURE{fond=prive/contenu/pays}{id_pays=#DIFFUSION}>
-		]
-		[(#RAYON|=={region}|oui)
-			<INCLURE{fond=prive/contenu/region}{id_region=#DIFFUSION}>
-		]
-		[(#RAYON|=={departement}|oui)
-			<INCLURE{fond=prive/contenu/departement}{id_departement=#DIFFUSION}>
-		]
-		[(#RAYON|=={local}|oui)
-			#DIFFUSION
-		]
+		[(#RAYON|=={pays}|oui)<INCLURE{fond=prive/contenu/pays}{id_pays=#DIFFUSION}>		]
+    [(#RAYON|=={region}|oui)<INCLURE{fond=prive/contenu/region}{id_region=#DIFFUSION}>		]
+		[(#RAYON|=={departement}|oui)<INCLURE{fond=prive/contenu/departement}{id_departement=#DIFFUSION}>		]
+		[(#RAYON|=={local}|oui)	#DIFFUSION 		]
 		</td>
 	]
-		<td>
-			[(#AUTORISER{voir,banniere,#ID_BANNIERE})
-				<a href='[(#URL_ECRIRE{banniere_voir}|parametre_url{id_banniere,#ID_BANNIERE})]'>
-					<img src="[(#CHEMIN{images/cal-suivi.png})]" alt="<:bannieres:action_voir:>" width="[(#CHEMIN{images/cal-suivi.png}|largeur)]" height="[(#CHEMIN{images/cal-suivi.png}|hauteur)]" />
-				</a>
-			]
-			[(#AUTORISER{modifier,banniere,#ID_BANNIERE})
-				|
+		<td>			
+			[(#AUTORISER{modifier,banniere,#ID_BANNIERE}) 
+				<!--
 				<a href='[(#URL_ECRIRE{banniere_edit}|parametre_url{id_banniere,#ID_BANNIERE})]'>
 					<img src="[(#CHEMIN{images/edit-12.gif})]" alt="<:bannieres:action_modifier:>" width="[(#CHEMIN{images/edit-12.gif}|largeur)]" height="[(#CHEMIN{images/edit-12.gif}|hauteur)]" />
 				</a>
-				|
+				-->
 				<a href='[(#URL_ACTION_AUTEUR{supprimer_banniere,#ID_BANNIERE,#SELF})]' onclick="return(confirm('<:bannieres:confirm_supprimer:>'));">
 				<img src="[(#CHEMIN{images/poubelle-12.gif})]" alt="<:bannieres:action_supprimer:>" width="[(#CHEMIN{images/poubelle-12.gif}|largeur)]" height="[(#CHEMIN{images/poubelle-12.gif}|hauteur)]">
 				</a>
@@ -128,15 +98,14 @@
 		</td>
 	</tr>
 </BOUCLE_bannieres>
-	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION)</p>]
 
    
-    <img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" /> <:bannieres:logo_absent:> 
+     <p> 
     <img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> <:bannieres:logo_ok:>
-
-
+    <img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" /> <:bannieres:logo_absent:>
+     </p>
 
 </B_bannieres>
 <p><:bannieres:pas_de_banniere:></p>

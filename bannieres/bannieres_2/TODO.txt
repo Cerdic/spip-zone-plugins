@@ -1,4 +1,3 @@
-- Revoir les icones et le logo ?
 - Un sélecteur pour la date façon spip
 - trouver une solution pour le lien flash
 - Voir pour l'utilisation du filtre image_reduire
