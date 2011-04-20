@@ -7,7 +7,7 @@
   <install>base/bannieres_upgrade.php</install>
   <etat>dev</etat>
 	<description>Gestion de banni&egrave;res (SPIP 2.0)</description>
-	<lien>http://www.spip-contrib.net/Plugin-pour-bannieres-2</lien>
+	<lien>http://www.spip-contrib.net/Bannieres-2</lien>
 	<icon>images/bannieres.png</icon>
 	<prefix>bannieres</prefix> 	
 	<fonctions>bannieres_fonctions.php</fonctions>	
