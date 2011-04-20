@@ -79,10 +79,10 @@ function formulaires_importer_config_noizetier_traiter(){
 		if (noizetier_importer_configuration($type_import, $import_compos, $yaml))
 			$retours['message_ok'] = _T('noizetier:formulaire_config_importee');
 		else 
-			$retours['message_erreur'] = "Une erreur technique a eu lieu, l'import a echoue";
+			$retours['message_erreur'] = _T('noizetier:msg_erreur_import');
 	}
 	else 
-		$retours['message_erreur'] = "pas autorise";
+		$retours['message_erreur'] = _T('noizetier:msg_non_autorise_import');
 	
 	$retours['editable'] = true;
 	return $retours;

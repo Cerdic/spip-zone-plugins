@@ -4,25 +4,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'info_page' => 'PAGE :',
-	'info_composition' => 'COMPOSITION :',
-	'installation_tables' => 'Tables du plugin noiZetier installées.<br />',
+
+	// C
 	'choisir_noisette' => 'Choisissez la noisette que vous voulez ajouter :',
-	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :',
-	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
-	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :',
 	'compositions_non_installe' => '<b>Plugin compositions :</b> ce plugin n\'est pas installés sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez déclarer des compositions directement dans le noizetier.',
-	'liste_icones' => 'Liste d\'icônes',
-	'oui' => 'Oui',
-	'non' => 'Non',
-	'page' => 'Page',
-	
+
+	// D
 	'description_bloc_contenu' => 'Contenu principal de chaque page.',
 	'description_bloc_navigation' => 'Informations de navigation propres à chaque page.',
 	'description_bloc_extra' => 'Informations extra contextuelles pour chaque page.',
 	
 	'description_bloctexte' => 'Le titre est optionnel. Pour le texte, vous pouvez utiliser les raccourcis typographiques de SPIP.',
-	
+
+	// E
 	'editer_noizetier_titre' => 'noiZetier',
 	'editer_noizetier_explication' => 'Configurer ici les noisettes à ajouter aux pages de votre site.',
 	'editer_noizetier_compositions_titre' => 'Compositions du noiZetier',
@@ -41,11 +35,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_aucune_noisette' => 'Aucune noisette trouvée.',
 	'erreur_doit_choisir_noisette' => 'Vous devez choisir une noisette.',
 	'erreur_mise_a_jour' => 'Une erreur s\'est produite pendant la mise à jour de la base de donnée.',
-	
+
 	'explications_heritages_comosition' => 'Vous pouvez définir ici les compositions qui seront héritées par les objets de la branche.',
 	'explication_noizetier_css' => 'Vous pouvez ajouter à la noisette d\'éventuelles classes CSS supplémentaires.',
 	'explication_raccourcis_typo' => 'Vous pouvez utiliser les raccourcis typographiques de SPIP.',
-	
+
+	// F
 	'formulaire_ajouter_noisette' => 'Ajouter une noisette',
 	'formulaire_modifier_noisette' => 'Modifier cette noisette',
 	'formulaire_supprimer_noisette' => 'Supprimer cette noisette',
@@ -93,32 +88,50 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_import_remplacer' => 'Remplacer la configuration actuelle',
 	'formulaire_import_compos' => 'Importer les compositions du noizetier',
 	'formulaire_config_importee' => 'La configuration a été importée.',
-	
-	'item_titre_perso' => 'titre personnalisé',
-	
-	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
-	'label_niveau_titre' => 'Niveau du titre :',
-	'label_titre_noisette' => 'Titre de la noisette :',
-	'label_titre_noisette_perso' => 'Titre personnalisé:',
-	
-	'nom_bloc_contenu' => 'Contenu',
-	'nom_bloc_navigation' => 'Navigation',
-	'nom_bloc_extra' => 'Extra',
-	
-	'ne_pas_definir_d_heritage' => 'Ne pas définir d\'héritage',
-	'nom_bloctexte' => 'Bloc de texte libre',
-	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder l\'ordre des noisettes.',
-	
+
+	// I
 	'ieconfig_probleme_import_config' => 'Un problème a été rencontré lors de l\'importation de la configuration du noiZetier.',
 	'ieconfig_ne_pas_importer' => 'Ne pas importer',
 	'ieconfig_noizetier_export_explication' => 'Exportera la configuration des noisettes et les compositions du noiZetier.',
 	'ieconfig_noizetier_export_option' => 'Inclure dans l\'export ?',
-	
-	'label_titre' => 'Titre :',
+	'info_page' => 'PAGE :',
+	'info_composition' => 'COMPOSITION :',
+	'installation_tables' => 'Tables du plugin noiZetier installées.<br />',
+	'item_titre_perso' => 'titre personnalisé',
+
+	// L
+	'label_afficher_titre_noisette' => 'Afficher un titre de noisettes ?',
 	'label_niveau_titre' => 'Niveau du titre :',
 	'label_noizetier_css' => 'Classes CSS :',
 	'label_texte' => 'Texte :',
+	'label_titre' => 'Titre :',
+	'label_titre_noisette' => 'Titre de la noisette :',
+	'label_titre_noisette_perso' => 'Titre personnalisé:',
+	'liste_icones' => 'Liste d\'icônes',
+
+	// M
+	'msg_erreur_import' => 'Une erreur technique a eu lieu, l\'import a &eacute;chou&eacute;',
+	'msg_non_autorise_import' => 'Import non autoris&eacute;',
+
+	// N
+	'nom_bloc_contenu' => 'Contenu',
+	'nom_bloc_navigation' => 'Navigation',
+	'nom_bloc_extra' => 'Extra',
+	'ne_pas_definir_d_heritage' => 'Ne pas définir d\'héritage',
+	'noisettes_page' => 'Noisettes spécifiques à la page <i>@type@</i> :',
+	'noisettes_composition' => 'Noisettes spécifiques à la composition <i>@composition@</i> :',
+	'noisettes_toutes_pages' => 'Noisettes communes à toutes les pages :',
+	'nom_bloctexte' => 'Bloc de texte libre',
+	'non' => 'Non',
+	'notice_enregistrer_rang' => 'Cliquez sur Enregistrer pour sauvegarder l\'ordre des noisettes.',
+
+	// O
+	'oui' => 'Oui',
 	
+	// P
+	'page' => 'Page',
+
+	// W
 	'warning_noisette_plus_disponible' => 'ATTENTION : cette noisette n\'est plus disponible.',
 	'warning_noisette_plus_disponible_details' => 'Le squelette de cette noisette (<i>@squelette@</i>) n\'est plus accessible. Il se peut qu\'il s\'agisse d\'une noisette nécessitant un plugin que vous avez désactivé ou désinstallé.',
 
