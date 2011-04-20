@@ -57,7 +57,7 @@ function geoportail_services($val, $att)
 {	$stat = spip_fetch_array(spip_query("DESCRIBE spip_geoservices $att"));
 	$reg = "^enum\('(.*)'\)$";
 	$stat = ereg_replace($reg,'\1',$stat['Type']);
-	$stat = split("[']?,[']?",$stat);
+	$stat = preg_split("/[']?,[']?/",$stat);
 	$rep = "";
 	foreach ($stat as $s) $rep .= "<option value='$s' ".($val==$s?"SELECTED":"").">$s</option>";
 	return $rep;

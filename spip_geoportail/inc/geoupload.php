@@ -56,7 +56,7 @@ function geoportail_get_coord_kml($dest, &$lon, &$lat)
 {	// Lire une lon et lat dans le fichier
 	if ($TabFich = file($dest)) 
 	{	for($i = 0; $i < count($TabFich); $i++) 
-		{	$p = split ("<coordinates>", $TabFich[$i]);
+		{	$p = explode ("<coordinates>", $TabFich[$i]);
 			if ($p[1]) 
 			{	$p = $p[1];
 				// Si on est sur plusieurs lignes
@@ -65,7 +65,7 @@ function geoportail_get_coord_kml($dest, &$lon, &$lat)
 				}
 				$p = str_replace ("\p","",$p);
 				$p = str_replace ("\r","",$p);
-				$p = split (",", $p);
+				$p = explode (",", $p);
 				if ($p[1])
 				{	$lon = $p[0];
 					$lat = $p[1];
