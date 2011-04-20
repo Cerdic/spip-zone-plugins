@@ -217,13 +217,16 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	# synchro adherents/auteurs
 	'synchroniser_asso_membres' => 'Synchroniser la listes des membres avec les auteurs SPIP',
 	'synchroniser_choix' => 'Cocher le statut des auteurs SPIP a importer dans la liste des membres, vous pouvez cocher plusieurs cases.',
-	'synchroniser_note' => 'Notes:<p> Les auteurs jamais connect&eacute;s seront aussi import&eacute;s dans la liste des membres de l\'association(en fonction de la s&eacute;l&eacute;ction que vous faites).</p><p>Si trop d\'auteurs sont import&eacute;s, vous pourrez toujours les supprimer de la liste des membres, cela n\'a aucune incidence sur leur statut d\'auteur SPIP.</p><p>Meme si vous cochez "Tous les auteurs", les auteurs &agrave; la poubelle ne seront pas import&eacute;s comme membres.</p>',
+	'synchroniser_note' => 'Notes:<p> Les auteurs jamais connect&eacute;s seront aussi import&eacute;s dans la liste des membres de l\'association(en fonction de la s&eacute;l&eacute;ction que vous faites).</p><p>Si trop d\'auteurs sont import&eacute;s, vous pourrez toujours les supprimer de la liste des membres, cela n\'a aucune incidence sur leur statut d\'auteur SPIP.</p><p>Meme si vous cochez "Tous les auteurs", les auteurs &agrave; la poubelle ne seront pas import&eacute;s comme membres.</p>Par d&eacute;faut, seul les auteurs non pr&eacute;sents dans la liste des membres sont import&eacute;s. La derni&egrave;re case vous permet de forcer l\'insertion de tous les auteurs dans la liste des membres. Cela ne modifiera toutefois pas le statut des membres d&eacute;j&agrave; pr&eacute;sents mais permet de repartir du bon pied quand on activ&eacute;/desactiv&eacute; le plugin tout en modifiant les auteurs SPIP.',
 	'synchroniser_tous' => 'Tous les auteurs',
 	'synchroniser_visiteurs' => 'Les visiteurs',
 	'synchroniser_redacteurs' => 'Les r&eacute;dacteurs',
 	'synchroniser_administrateurs' => 'Les administrateurs',
+	'synchroniser_forcer' => 'Forcer l\'insertion des auteurs d&eacute;j&agrave; pr&eacute;sents comme membres',
 	'pas_de_categorie' => 'Ne pas renseigner ce champ',
 	'synchronise_asso_membre_lien' => 'Synchroniser la liste des membres depuis la liste des auteurs',
+	'membres_ajoutes' => ' membres ins&eacute;r&eacute;s dans la liste des membres',
+	'membre_ajoute' => ' membre ins&eacute;r&eacute; dans la liste des membres',
 	
 	# ACTIVITES
 		
