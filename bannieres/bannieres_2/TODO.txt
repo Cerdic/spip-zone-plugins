@@ -1,5 +1,4 @@
 - Un sélecteur pour la date façon spip
 - trouver une solution pour le lien flash
 - Voir pour l'utilisation du filtre image_reduire
-- Utilisation des modèles pour étendre l'utilisation du plugin
 - Config du suivi (table ou log)
