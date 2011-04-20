@@ -11,7 +11,7 @@
 		    <li class="editer_nom_mod obligatoire[(#ENV{erreurs}|table_valeur{nom_mod}|oui)erreur]">
 		    	<label for="nom_mod"><:tradlang:label_nommodule:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{nom_mod})</span>]
-				<input type="text" class="text" name="nom_mod" id="nom_mod" value="#ENV{nom_mod}" />
+				<input type="text" class="text multilang" name="nom_mod" id="nom_mod" value="#ENV{nom_mod}" />
 		    </li>
 			<li>
 				<label><:tradlang:label_idmodule:></label>
@@ -34,7 +34,7 @@
 			<li class='editer_texte[(#ENV{erreurs}|table_valeur{texte}|oui)erreur]'>
 				<label for='texte'><:tradlang:label_texte:></label>[
 				<span class="erreur_message">(#ENV{erreurs}|table_valeur{texte})</span>]
-				<textarea id='texte_module' name='texte' cols='40' rows='15' class='text'>#ENV*{texte}</textarea>
+				<textarea id='texte_module' name='texte' cols='40' rows='15' class='text multilang'>#ENV*{texte}</textarea>
 			</li>
 		</ul>
 		<p class='boutons'>

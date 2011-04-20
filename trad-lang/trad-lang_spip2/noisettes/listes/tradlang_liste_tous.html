@@ -1,4 +1,4 @@
-<BOUCLE_module(TRADLANG_MODULES){nom_mod=#ENV{module}}>
+<BOUCLE_module(TRADLANG_MODULES){module=#ENV{module}}>
 #SET{str_mere,#ARRAY}
 #SET{str_cible,#ARRAY}
 #SET{str_statut,#ARRAY}
@@ -33,7 +33,7 @@
 [(#GRAND_TOTAL|>{1}|oui)
 </p>]
 [(#REM) Si un seul statut et pas celui de l'environnement c'est qu'on aura pas de résultats après]
-[(#GRAND_TOTAL|=={1}|et{#GET{statut}|!={#ENV{statut}}}|oui)
+[(#GRAND_TOTAL|=={1}|et{#ENV{statut}}|et{#GET{statut}|!={#ENV{statut}}}|oui)
 <p><:tradlang:message_aucun_resultat_statut:></p>
 <p><a href="[(#SELF|parametre_url{statut,''})]"><:tradlang:lien_voir_toute_chaines_module:></a></p>
 ]

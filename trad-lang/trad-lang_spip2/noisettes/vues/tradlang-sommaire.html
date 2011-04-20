@@ -18,7 +18,6 @@
 		<:tradlang:texte_explication_langue_cible:>
 	</p>
 </div>
-
 <div>
 	<h3><:tradlang:titre_revisions_sommaire:></h3>
 	<div class="onglets_simple clearfix">
@@ -29,4 +28,10 @@
 	</div>
 	#SET{url_modif,#URL_PAGE{traduction}|parametre_url{etape,revision}}
 	<INCLURE{fond=prive/objets/liste/versions,objet=tradlang,url_modif=#GET{url_modif},env,ajax,sinon=<:revisions:info_aucune_revision:>} />
+</div>
+<div>
+	<h3><:tradlang:titre_bilan:></h3>
+	<div id="bilan_traduction">
+	<INCLURE{fond=inclure/tradlang_bilan,lang}>
+	</div>
 </div>

@@ -17,6 +17,10 @@
 	padding:10px;
 }
 
+#bilan_traduction{
+	width:100%;
+	overflow:auto;
+}
 .page_traduction table.spip{
 	width:100%;
 }

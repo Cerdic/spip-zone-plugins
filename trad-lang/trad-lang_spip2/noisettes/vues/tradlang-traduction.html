@@ -1,18 +1,28 @@
-[(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|oui)
+<BOUCLE_module(TRADLANG_MODULES){module}>
+[(#ENV{lang_cible}|et{#ENV{module}}|oui)
+	[(#SET{lang_orig,[(#ENV{lang_orig,#LANG_MERE})]})]
 	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
 	<div class="cartouche">
-		#SET{lang_orig_long,#ENV{lang_orig}|traduire_nom_langue}
+		[(#SET{lang_orig_long,[(#GET{lang_orig}|traduire_nom_langue)]})]
 		#SET{lang_cible_long,#ENV{lang_cible}|traduire_nom_langue}
-		<h1><:tradlang:titre_traduction_module_de_vers{module=#ENV{module},lang_orig=#ENV{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
+		<h1><:tradlang:titre_traduction_module_de_vers{module=#NOM_MOD,lang_orig=#GET{lang_orig},lang_orig_long=#GET{lang_orig_long},lang_cible=#ENV{lang_cible},lang_cible_long=#GET{lang_cible_long}}:></h1>
 	</div>
-	<INCLURE{fond=noisettes/listes/tradlang_liste_tous,env,self=#SELF,ajax}>
+	
+	<INCLURE{fond=noisettes/listes/tradlang_liste_tous,lang_orig=#GET{lang_orig},env,self=#SELF,ajax}>
 ]
-[(#ENV{lang_orig}|et{#ENV{lang_cible}}|et{#ENV{module}}|non)
+[(#ENV{lang_cible}|et{#ENV{module}}|non)
 	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
 	[(#ENV{module}|non)
 	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
-	[(#ENV{lang_orig}|non)
-	<p class="erreur_message"><:tradlang:erreur_choisir_lang_orig:></p>]
 	[(#ENV{lang_cible}|non)
 	<p class="erreur_message"><:tradlang:erreur_choisir_lang_cible:></p>]
 ]
+</BOUCLE_module>
+[(#ENV{lang_cible}|et{#ENV{module}}|non)
+	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
+	[(#ENV{module}|non)
+	<p class="erreur_message"><:tradlang:erreur_choisir_module:></p>]
+	[(#ENV{lang_cible}|non)
+	<p class="erreur_message"><:tradlang:erreur_choisir_lang_cible:></p>]
+]
+<//B_module>

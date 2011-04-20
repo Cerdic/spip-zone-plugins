@@ -1,4 +1,4 @@
-<BOUCLE_tradlang(TRADLANG){id_tradlang}{tout}>
+<BOUCLE_tradlang(TRADLANG){id_tradlang}>
 	<div id="hierarchie"><a href="#URL_PAGE{traduction}"><:tradlang:lien_accueil_interface:></a></div>
 	<div class="cartouche">
 		<BOUCLE_module(TRADLANG_MODULES){module}>#SET{lang_mere,#LANG_MERE}</BOUCLE_module>
@@ -12,7 +12,7 @@
 	</div>
 	[(#AUTORISER{modifier,tradlang,#ID_TRADLANG}|oui)
 	<div class="ajax">
-	#FORMULAIRE_EDITER_TRADLANG{#ID_TRADLANG,#ENV{retour},#GET{lang_orig}}
+	#FORMULAIRE_EDITER_TRADLANG{#ENV{id_tradlang},#ENV{retour},#GET{lang_orig}}
 	</div>]
 	
 	[(#AUTORISER{modifier,tradlang,#ENV{id_tradlang}}|non)

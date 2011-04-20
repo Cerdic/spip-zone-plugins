@@ -90,7 +90,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 			"module"=>"module"
 		),
 		'statut' => array(
-			 array('champ'=>'statut','publie'=>'OK','previsu'=>'OK,NEW,MODIF','exception'=>'statut')
+			 array('champ'=>'statut','publie'=>'OK,NEW,MODIF','previsu'=>'OK,NEW,MODIF','exception'=>'statut')
 		),
 		'statut_images' => array(
 			'OK' => 'tradlang_statut_ok.png',

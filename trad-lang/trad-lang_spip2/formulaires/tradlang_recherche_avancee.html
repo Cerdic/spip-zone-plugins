@@ -12,12 +12,12 @@
 			<INCLURE{fond=noisettes/formulaires/tradlang_selecteur_langue_module_dispo,env,name=lang_string,option_vide=oui}>
 		</li>
 		<li>
-			<label for="status"><:tradlang:label_recherche_status:></label>
-			<select name="status" id="status">
-				<option value=""[(#ENV{status}|=={''}|oui)selected="selected"]>--</option>
-				<option value="NEW"[(#ENV{status}|=={NEW}|oui)selected="selected"]>NEW</option>
-				<option value="MODIF"[(#ENV{status}|=={MODIF}|oui)selected="selected"]>MODIF</option>
-				<option value="OK"[(#ENV{status}|=={OK}|oui)selected="selected"]>OK</option>
+			<label for="statut"><:tradlang:label_recherche_status:></label>
+			<select name="statut" id="statut">
+				<option value=""[(#ENV{statut}|=={''}|oui)selected="selected"]>--</option>
+				<option value="NEW"[(#ENV{statut}|=={NEW}|oui)selected="selected"]>NEW</option>
+				<option value="MODIF"[(#ENV{statut}|=={MODIF}|oui)selected="selected"]>MODIF</option>
+				<option value="OK"[(#ENV{statut}|=={OK}|oui)selected="selected"]>OK</option>
 			</select>
 		</li>
 		<li>

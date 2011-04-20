@@ -5,7 +5,9 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 function formulaires_editer_tradlang_charger($id_tradlang='aucun',$retour='',$lang_orig=''){
+	spip_log('on charge','test');
 	$valeurs = formulaires_editer_objet_charger('tradlang',$id_tradlang,0,'',$retour,$config_fonc,$row,$hidden);
+	spip_log($valeurs,'test');
 	if (!intval($id_tradlang)) {
 		$valeurs['editable'] = false;
 		$valeurs['message_erreur'] = _T('tradlang:erreur_id_tradlang_numerique');
@@ -28,6 +30,7 @@ function formulaires_editer_tradlang_verifier($id_tradlang='aucun',$retour='',$l
 }
 
 function formulaires_editer_tradlang_traiter($id_tradlang='aucun',$retour='',$lang_orig=''){
+	spip_log('on envoit','test');
 	$ret = formulaires_editer_objet_traiter('tradlang',$id_tradlang,$id_rubrique,$lier_trad,$retour,$config_fonc,$row,$hidden);
 	spip_log($ret,'test');
 	return $ret;

@@ -46,7 +46,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 		foreach($diff1_array as $key => $array){
 			$array['orig'] = 0;
 			$array['lang'] = $langue;
-			$array['status'] = 'NEW';
+			$array['statut'] = 'NEW';
 			unset($array['ts']);
 			unset($array['id_tradlang']);
 			

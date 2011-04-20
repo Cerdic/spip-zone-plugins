@@ -36,6 +36,8 @@ function tradlang_set($id_tradlang,$set=null){
 		$set
 	);
 	
+	spip_log("REVISION SUR $id_tradlang ",'test');
+	spip_log($c);
 	revision_tradlang($id_tradlang, $c);
 
 	$c = collecter_requests(array('statut'),array(),$set);
@@ -69,12 +71,12 @@ function instituer_tradlang($id_tradlang, $c) {
 			spip_log("editer_tradlang $id_tradlang refus " . join(' ', $c));
 	}
 
-	
 	// Envoyer aux plugins
 	$champs = pipeline('pre_edition',
 		array(
 			'args' => array(
 				'table' => 'spip_tradlang',
+				'objet' => 'tradlang',
 				'id_objet' => $id_tradlang,
 				'action'=>'instituer',
 				'statut_ancien' => $statut_ancien,
@@ -86,7 +88,7 @@ function instituer_tradlang($id_tradlang, $c) {
 	if (!count($champs)) return;
 
 	// Envoyer les modifs.
-	sql_updateq('spip_tradlang', $champs, "id_tradlang=$id_tradlang");
+	sql_updateq('spip_tradlang',$champs,"id_tradlang=$id_tradlang");
 
 	// Invalider les caches
 	include_spip('inc/invalideur');
@@ -97,6 +99,7 @@ function instituer_tradlang($id_tradlang, $c) {
 		array(
 			'args' => array(
 				'table' => 'spip_tradlang',
+				'objet' => 'tradlang',
 				'id_objet' => $id_tradlang,
 				'action'=>'instituer',
 				'statut_ancien' => $statut_ancien,

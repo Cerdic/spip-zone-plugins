@@ -75,14 +75,14 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		reset($chs);
 		
 		// nettoyer le contenu de ses <MODIF>
-		$status = array();
+		$statut = array();
 		foreach($chs as $id=>$v) {
 			if (preg_match(',^<(MODIF|NEW|PLUS_UTILISE)>,US', $v, $r)) {
 				$chs[$id] = preg_replace(',^(<(MODIF|NEW|PLUS_UTILISE)>)+,US', '', $v);
-				$status[$id] = $r[1];
+				$statut[$id] = $r[1];
 			}
 			else
-				$status[$id] = '';
+				$statut[$id] = '';
 		}
 		
 		$res = sql_select("id, str, md5","spip_tradlang","module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue));
@@ -125,7 +125,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 						'lang' => $langue,
 						'orig' => $orig,
 						'md5' => $md5,
-						'status' => $status[$id]
+						'statut' => $statut[$id]
 					));
 					$ajoutees++;
 				}
@@ -146,12 +146,12 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 					sql_updateq("spip_tradlang",array(
 						'str' => $str,
 						'md5' => $md5_new,
-						'status' => '',
+						'statut' => '',
 						), "module=".sql_quote($nom_mod)." AND lang=".sql_quote($langue)." AND id=".sql_quote($id));
 					
-					// signaler le status MODIF de ses traductions
+					// signaler le statut MODIF de ses traductions
 					if ($orig){
-						sql_updateq("spip_tradlang",array('status'=>'MODIF'),"module=".sql_quote($nom_mod)." AND id=".sql_quote($id)." AND md5 !=".sql_quote($md5));
+						sql_updateq("spip_tradlang",array('statut'=>'MODIF'),"module=".sql_quote($nom_mod)." AND id=".sql_quote($id)." AND md5 !=".sql_quote($md5));
 					}
 					
 					$modifiees++;

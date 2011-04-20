@@ -585,13 +585,13 @@ function lire_lang($lang_orig, $lang_str, $type="")
     }
   else
     {
-      $quer = "SELECT id,str,status FROM trad_lang ".
+      $quer = "SELECT id,str,statut FROM trad_lang ".
 	"WHERE module = '".$nom_mod."' AND lang='".$lang_orig."' ORDER BY id";
       $res = mysql_query($quer);
       while($row = mysql_fetch_assoc($res))
 	{
-	  if ($row["status"] != "")
-	    $statut = "<".$row["status"].">";
+	  if ($row["statut"] != "")
+	    $statut = "<".$row["statut"].">";
 	  else
 	    $statut = "";
 	  $lang_str[$row["id"]] = $statut.$row["str"];
@@ -700,23 +700,23 @@ function ecrire_item($codelg, $id, $chaine, $type="")
     {
       if ($type == "debut")  // pas de remise a jour de date_modif ou md5
 	$quer = "UPDATE trad_lang SET str='".$chaine."'".
-	  ",status='".$statut."' WHERE id='".$id."' AND lang='".$codelg."' AND ".
+	  ",statut='".$statut."' WHERE id='".$id."' AND lang='".$codelg."' AND ".
 	  " module='".$nom_mod."'";
 
       else
 	$quer = "UPDATE trad_lang SET str='".$chaine."'".
-	  ",status='".$statut."', date_modif=NOW()".$dummy." WHERE ".
+	  ",statut='".$statut."', date_modif=NOW()".$dummy." WHERE ".
 	  "id='".$id."' AND lang='".$codelg."' AND ".
 	  " module='".$nom_mod."'";
     }
   else
     {
       if ($dummy != "")
-	$quer = "INSERT INTO trad_lang (id,module,lang,status,str,orig,md5) ".
+	$quer = "INSERT INTO trad_lang (id,module,lang,statut,str,orig,md5) ".
 	  "VALUES ('".$id."','".$nom_mod."','".$codelg."','".$statut."','".
 	  $chaine."',".$orig.",'".$md5."')";
       else
-	$quer = "INSERT INTO trad_lang (id,module,lang,status,str,orig) ".
+	$quer = "INSERT INTO trad_lang (id,module,lang,statut,str,orig) ".
 	  "VALUES ('".$id."','".$nom_mod."','".$codelg."','".$statut."','".
 	  $chaine."',".$orig.")";
     }

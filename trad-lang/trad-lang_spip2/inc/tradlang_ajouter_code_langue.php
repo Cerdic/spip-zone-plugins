@@ -14,7 +14,7 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 				'module' => $module["nom_mod"],
 				'str' => $chaine['str'],
 				'lang' => $lang,
-				'status' => 'NEW',
+				'statut' => 'NEW',
 				'md5' => md5($chaine['str']),
 				'orig' => 0
 			));
@@ -33,11 +33,13 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 	if (!is_array($config))
 		return;
 	if(($config['sauvegarde_locale'] == 'on') && ($config['sauvegarde_post_edition'] == 'on')){
+		spip_log('sauvegarde du fichier','test');
 		include_spip('tradlang_fonctions');
 		if($dir_lang = tradlang_dir_lang()){
 			$sauvegarder_module = charger_fonction('tradlang_sauvegarde_module','inc');
 			$sauvegarder_module($module,$lang,$dir_lang);
 		}
 	}
+	return true;
 }
 ?>

@@ -88,11 +88,11 @@ function tradlang_lirelang($module, $langue, $type=""){
 	else{
 		spip_log('type != md5','tradlang');
 		$nom_mod = $module["nom_mod"];
-		$res = sql_select("id,str,status","spip_tradlang","module = '$nom_mod' AND lang='$langue'","","id ASC");
+		$res = sql_select("id,str,statut","spip_tradlang","module = '$nom_mod' AND lang='$langue'","","id ASC");
 		
 		while($row = sql_fetch($res)){
-			if (($row["status"] != "") && ($row["status"] != "OK"))
-				$statut = "<".$row["status"].">";
+			if (($row["statut"] != "") && ($row["statut"] != "OK"))
+				$statut = "<".$row["statut"].">";
 			else
 				$statut = "";
 			$ret[$row["id"]] = $statut.$row["str"];
