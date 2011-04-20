@@ -56,7 +56,7 @@
 		<td class="status" width="50px">[(#STATUT)]</td>
 		<td class="modifier" width="50px">
 			[(#GET{id_lang_mere}|=={#ID_TRADLANG}|non)
-			<a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction_chaine}|parametre_url{id_tradlang,#ID_TRADLANG}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a>]
+			<a href="[(#URL_TRADLANG|parametre_url{id_tradlang,#ID_TRADLANG}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a>]
 		</td>
 	</tr>
 	</BOUCLE_recherche_tradlang>

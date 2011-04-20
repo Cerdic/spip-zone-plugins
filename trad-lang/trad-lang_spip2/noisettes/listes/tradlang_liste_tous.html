@@ -74,7 +74,7 @@
 		<//B_revise_orig>
 		<td class="cible #EDIT{str_statut}">[(#STR**|entites_html)]</td>
 		<td class="statut" width="50px">[(#STATUT|sinon{<:tradlang:info_status_ok:>})]</td>
-		<td class="modifier" width="50px"><a href="[(#SELF|parametre_url{etape,traduction_chaine}|parametre_url{id_tradlang,#ID_TRADLANG}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
+		<td class="modifier" width="50px"><a href="[(#URL_TRADLANG|parametre_url{lang_orig,#ENV{lang_orig}}|parametre_url{retour,#SELF})]"><:tradlang:lien_editer_chaine:></a></td>
 	</tr>
 	</BOUCLE_revise_cible>
 	</tbody>
