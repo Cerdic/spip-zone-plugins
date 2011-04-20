@@ -4,17 +4,12 @@
 <input type="hidden" name="ordre" value="#ENV{ordre}" />
 <input type="hidden" name="desc" value="#ENV{desc}" />
 
-<p><:bannieres:legende:></p>
-<ul>
-<li><img src="[(#CHEMIN{images/puce-verte.gif})]" alt="<:bannieres:active:>" width="[(#CHEMIN{images/puce-verte.gif}|largeur)]" height="[(#CHEMIN{images/puce-verte.gif}|hauteur)]" /> <:bannieres:active:> - <img src="[(#CHEMIN{images/puce-rouge.gif})]" alt="<:bannieres:echue:>" width="[(#CHEMIN{images/puce-rouge.gif}|largeur)]" height="[(#CHEMIN{images/puce-rouge.gif}|hauteur)]" /> <:bannieres:echue:> - <img src="[(#CHEMIN{images/puce-blanche.gif})]" alt="<:bannieres:future:>" width="[(#CHEMIN{images/puce-blanche.gif}|largeur)]" height="[(#CHEMIN{images/puce-blanche.gif}|hauteur)]" /> <:bannieres:future:></li>
-<li><img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" /> <:bannieres:logo_absent:> - <img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> <:bannieres:logo_ok:></li>
-</ul>
+
 <B_bannieres>
-<table class='bannieres spip'>
+<table class='bannieres spip' style="font-size:11px;width:100%;">
 	<thead>
 	<tr>
-		<th>&nbsp;
-		</th>
+		<th>&nbsp;</th>
 		<th>
 			<:bannieres:label_logo:>
 		</th>
@@ -136,6 +131,13 @@
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION)</p>]
+
+   
+    <img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" /> <:bannieres:logo_absent:> 
+    <img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> <:bannieres:logo_ok:>
+
+
+
 </B_bannieres>
 <p><:bannieres:pas_de_banniere:></p>
 <//B_bannieres>

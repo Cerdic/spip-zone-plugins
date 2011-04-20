@@ -1,30 +1,21 @@
 <plugin>
 	<nom>bannieres</nom>
-	<auteur>
-		Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud
-	</auteur>
+	<auteur>Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud</auteur>
 	<version>0.25</version>
 	<version_base>0.21</version_base>
-
-    <licence>&#169; 2009 GNU/GPL</licence>
-
-	<install>base/bannieres_upgrade.php</install>
-
-	<etat>dev</etat>
-	<description>
-		Gestion de banni&egrave;res (spip 2.0)
-	</description>
+  <licence>&#169; 2009 GNU/GPL</licence>
+  <install>base/bannieres_upgrade.php</install>
+  <etat>dev</etat>
+	<description>Gestion de banni&egrave;res (spip 2.0)</description>
 	<lien>http://www.spip-contrib.net/Plugin-pour-bannieres-2</lien>
 	<icon>images/bannieres.png</icon>
-	<prefix>bannieres</prefix>
-	
-	<fonctions>bannieres_fonctions.php</fonctions>
-	
+	<prefix>bannieres</prefix> 	
+	<fonctions>bannieres_fonctions.php</fonctions>	
 	<bouton id='bannieres' parent='naviguer'>
 		<icone>images/bannieres.png</icone>
 		<titre>bannieres:bannieres</titre>
 	</bouton>
-
+	<!-- pipeline -->
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/bannieres.php</inclure>
@@ -32,8 +23,7 @@
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/bannieres.php</inclure>
-	</pipeline>
-	
+	</pipeline> 	
 	<pipeline>
 		<nom>encart</nom>
 		<inclure>bannieres_pipelines.php</inclure>
@@ -46,8 +36,7 @@
 	<pipeline>
 		<nom>objets_extensibles</nom>
 		<inclure>bannieres_pipelines.php</inclure>
-	</pipeline>
-	
+	</pipeline> 	
 	<necessite id="SPIP" version="[2.0.9;]" />
 	<!-- facilitons les champs de formulaires -->
 	<necessite id="saisies" version="[1.5.1;]" />
@@ -55,5 +44,5 @@
 	<necessite id="spip_bonux" version="[1.9.3;]" />
 	<categorie>divers</categorie>
 	<!-- Pour la geolocalisation -->
-	<!--<necessite id="geographie" version="[0.2;]" />-->
+	<!-- <necessite id="geographie" version="[0.2;]" /> -->
 </plugin>

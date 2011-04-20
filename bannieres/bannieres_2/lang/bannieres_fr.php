@@ -71,11 +71,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_alt_campagne' => 'Texte alternatif',
 	'label_commentaires' => 'Commentaires',
 	'label_debut' => 'D&eacute;but',
+	'label_debut2' => 'D&eacute;but <small>(aaaa-mm-jj)</small>',
 	'liste_des_bannieres' => 'Liste des banni&egrave;res',
 	'label_diffusion' => 'Diffusion',
 	'label_email' => 'Email',
 	'label_export_campagne' => 'Liste des campagnes',
 	'label_fin' => 'Fin',
+	'label_fin2' => 'Fin <small>(aaaa-mm-jj)</small>',
 	'label_id' => 'Id',
 	'label_id_banniere' => 'ID',
 	'label_logo' => 'Logo',
@@ -114,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'regional' => 'R&eacute;gional',
 
 	// S
+	'statistiques' => 'Statistiques',
 	'statistiques_campagne' => 'Statistiques des clics sur la banni&egrave;re num&eacute;ro @num@',
 	'statistiques_des_campagnes' => 'Statistiques campagnes',
 	'statistiques_annee' => 'Campagne num&eacute;ro&nbsp;: @ban@ - Ann&eacute;e&nbsp;: @annee@',

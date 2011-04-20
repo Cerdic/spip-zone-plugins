@@ -5,24 +5,25 @@
 	<INCLURE{fond=inclure/liste_bannieres,env,ajax} />
 	</div>
 
-	<!--#navigation-->
-	<div class='cadre cadre-info'>
-		<p><:bannieres:description_bannieres:></p>
-	</div>
-
+	<!--#navigation--> 
 	[(#AUTORISER{modifier,banniere})
-		[(#PLUGIN{geographie}|oui)
+		
 		<div class='cadre cadre-info'>
-			<INCLURE{fond=inclure/liste_crea,env,ajax} />
-		</div>
-		]
-		[(#PLUGIN{geographie}|non)
-		<div class='cadre cadre-info'>
-			<h2><:bannieres:action_ajouter:></h2>
-			<p><a href="[(#URL_ECRIRE{banniere_edit}|parametre_url{new,oui}|parametre_url{rayon,int})]" title="<:bannieres:action_ajouter|attribut_html:>"><:bannieres:action_ajouter:></a></p>
-		</div>
-		]
+		            <p><:bannieres:description_bannieres:></p>
+			          [(#PLUGIN{geographie}|oui) <INCLURE{fond=inclure/liste_crea,env,ajax} />]
+			          [(#PLUGIN{geographie}|non) <p><a href="[(#URL_ECRIRE{banniere_edit}|parametre_url{new,oui}|parametre_url{rayon,int})]" title="<:bannieres:action_ajouter|attribut_html:>"><:bannieres:action_ajouter:></a></p>]
+	              
+		            <ul style="padding:0;margin:1em 0;list-style:none;line-height:150%;">
+                    <li><img src="[(#CHEMIN{images/puce-verte.gif})]" alt="<:bannieres:active:>" width="[(#CHEMIN{images/puce-verte.gif}|largeur)]" height="[(#CHEMIN{images/puce-verte.gif}|hauteur)]" /> <:bannieres:active:></li>
+                    <li><img src="[(#CHEMIN{images/puce-rouge.gif})]" alt="<:bannieres:echue:>" width="[(#CHEMIN{images/puce-rouge.gif}|largeur)]" height="[(#CHEMIN{images/puce-rouge.gif}|hauteur)]" /> <:bannieres:echue:></li>
+                    <li><img src="[(#CHEMIN{images/puce-blanche.gif})]" alt="<:bannieres:future:>" width="[(#CHEMIN{images/puce-blanche.gif}|largeur)]" height="[(#CHEMIN{images/puce-blanche.gif}|hauteur)]" /> <:bannieres:future:></li>
+                </ul>
+        
+                <p><a href="[(#URL_ECRIRE{bannieres_stats})]"><:bannieres:statistiques:></a></p>
+    
+    
+    </div>		
 	]
-		<p><a href="[(#URL_ECRIRE{bannieres_stats})]"><:bannieres:statistiques:></a></p>
+	
 	<!--/#navigation-->
 ]

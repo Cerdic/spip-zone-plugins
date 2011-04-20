@@ -149,12 +149,13 @@ return $data;
 }
 
 
+//
 // afficher le document associe a la banniere
+//
 function afficher_banniere($id_objet='',$id='',$alt='') {
 
 	// Chercher dans la base le document associe à la banniere
-	$type = "banniere";
-
+	$type = "banniere"; 
 	$select = "D.id_document, D.extension, D.titre,  D.descriptif,  D.fichier, D.largeur, D.hauteur";
 	$from = "spip_documents AS D LEFT JOIN spip_documents_liens AS L ON  L.id_document=D.id_document"; 
 	$where = "L.id_objet=$id AND L.objet='$type' AND D.extension $img IN ('gif', 'jpg', 'png', 'swf')";
@@ -162,55 +163,46 @@ function afficher_banniere($id_objet='',$id='',$alt='') {
 
 	$document = sql_fetsel($select, $from, $where, '','RAND()', $limit = '1');
 
-if ($document){
+  if ($document){     
+  	 
+  	// cas du flash
+  	// TODO :trouver un moyen de creer un lien et comptabiliser le clic...     	 
+  	if ($document['extension'] == 'swf'){      
+  	$logo_banniere = '<object width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
+  	<param name="movie" value="'._DIR_IMG.$document['fichier'].'">
+  	<embed src="'._DIR_IMG.$document['fichier'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
+  	</embed>
+  	</object>';
+  
+  	} else {   
+  	   //Todo : s'assurer que c'est une image
+      $logo_banniere = '<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
+  
+  	}
+  
+  } else {
 
-	// on a trouve quelque chose dans la base alors on l'affiche
-
-	// cas du flash
-	// TODO :trouver un moyen de creer un lien et comptabiliser le clic...
-	 
-	if ($document['extension'] == 'swf'){
-
-	$logo_banniere = '<object width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
-	<param name="movie" value="'._DIR_IMG.$document['fichier'].'">
-	<embed src="'._DIR_IMG.$document['fichier'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'">
-	</embed>
-	</object>
-	';
-
-	} else {
-
-	//Todo : s'assurer que c'est une image
-
-	// c'est une image
-	$logo_banniere = '<img src="'._DIR_IMG.$document['fichier'].'" alt="'.$alt.'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
-
-		}
-
-} else {
-
-// rien dans la base peut etre un logo ? - ancien systeme.
-
-	include_spip('inc/iconifier');
-	
-	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$logo = $chercher_logo($id, $id_objet, 'on');
-	
-	list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
-
-	// si on a trouve on l'affiche
-	$logo_banniere = '<img src="'.$logo['0'].'" alt="'.$document['titre'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
-}
+     // rien dans la base peut etre un logo ? - ancien systeme.   
+  	include_spip('inc/iconifier');
+  	
+  	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+  	$logo = $chercher_logo($id, $id_objet, 'on');
+  	
+  	list($img, $clic) = decrire_logo($id_objet,'on',$id, 170, 170, $logo, $texteon, $script, $flag_modif AND !$logo_s);
+  
+  	// si on a trouve on l'affiche
+  	$logo_banniere = '<img src="'.$logo['0'].'" alt="'.$document['titre'].'" width="'.$document['largeur'].'" height="'.$document['hauteur'].'" border="0" />';
+  }
 
 	// rechercher l'url de destination
 	if($url = sql_getfetsel ('site', 'spip_bannieres', 'id_banniere='.$id)) {
-		$lien = '<a href="'.generer_url_action('visit_url','banniere='.$id.'&url='.rawurlencode($url)).'" title="'.$document['titre'].'">';
+		$lien = '<a href="'.generer_url_action('visit_url','banniere='.$id.'&url='.rawurlencode($url)).'" title="'.$document['titre'].'" class="banniere">';
 		$lien .= $logo_banniere.$document['descriptif'].'</a>';
 	} else {
 		$lien = $logo_banniere;
 	}
 
-return $lien;
+  return $lien;
 
 }
 ?>
