@@ -3,6 +3,7 @@
   <auteur>Cedric&amp;Fil</auteur>
   <version>0.6.5</version>
   <version_base>0.3.4</version_base>
+  <necessite id='spip' version='[2.1.0;2.3.0-dev)' />
   <etat>test</etat>
   <description>
   	<multi>
