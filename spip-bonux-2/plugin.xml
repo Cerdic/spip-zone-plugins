@@ -12,7 +12,7 @@
   <fonctions>spip_bonux_fonctions.php</fonctions>
   <options>spip_bonux_options.php</options>
   <prefix>spip_bonux</prefix>
-  <necessite id='SPIP' version='[2.0.0;]' />
+  <necessite id='SPIP' version='[2.0.0;2.3.0-dev)' />
 	<chemin dir='' />
 	<chemin dir='spip20/' />
 	<pipeline>
