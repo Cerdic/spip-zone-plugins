@@ -1,24 +1,26 @@
 <plugin>
 	<nom>Varnish</nom>
 	<auteur>Fil</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<etat>
 	test
 	</etat>
 	<description>
-	Modifications de SPIP pour une meilleure compatibilité avec Varnish.
+	Modifications de SPIP pour une meilleure compatibilit&#233; avec Varnish.
 	</description>
 	<prefix>
 	VARNISH
 	</prefix>
 	<icon>varnish.png</icon><!-- by Everaldo Coelho http://www.iconfinder.com/icondetails/15691/128/proxy_icon -->
 	<options>varnish_pipelines.php</options>
+	<lien>http://zzz.rezo.net/Varnish</lien>
 	<pipeline>
 		<nom>affichage_entetes_final</nom>
 	</pipeline>
+	<install>varnish_install.php</install>
 	<categorie>outil</categorie>
 
-	<necessite id="statsjs" />
+	<utilise id="statsjs" />
 
 	<chemin dir='' />
 </plugin>
