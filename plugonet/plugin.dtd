@@ -79,7 +79,7 @@
 <!ELEMENT utilise EMPTY>
 <!ATTLIST utilise
           id %NAME; #REQUIRED
-          version %VNUM; #REQUIRED
+          version %VNUM; #IMPLIED
 >
 
 <!ELEMENT pipeline (action|nom|inclure)*>
