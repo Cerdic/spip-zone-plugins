@@ -135,7 +135,7 @@ function autoriser_tradlang_configurer_dist($faire, $type, $id, $qui, $opt){
 function autoriser_tradlang_modifier_dist($faire, $type, $id, $qui, $opt){
 	$autorise = false;
 	$utiliser_defaut = true;
-
+	spip_log($opt,'test');
 	if(intval($id) > 0){		
 		$infos_chaine = sql_fetsel('*','spip_tradlang','id_tradlang='.$id);
 		$lang_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($infos_chaine['module']));
@@ -267,13 +267,20 @@ function autoriser_tradlang_voir_dist($faire, $type, $id, $qui, $opt){
  * @param unknown_type $qui
  * @param unknown_type $opt
  */
-function autoriser_tradlang_module_creer_dist($faire, $type, $id, $qui, $opt){
-	spip_log('on passe là?','tradlang');
+function autoriser_tradlangmodule_creer_dist($faire, $type, $id, $qui, $opt){
 	return false;
 }
 
+/**
+ * Autorisation à créer une chaine de langue
+ * Renvoit false
+ * @param unknown_type $faire
+ * @param unknown_type $type
+ * @param unknown_type $id
+ * @param unknown_type $qui
+ * @param unknown_type $opt
+ */
 function autoriser_tradlang_creer_dist($faire, $type, $id, $qui, $opt){
-	spip_log('on passe là?','tradlang');
 	return false;
 }
 
