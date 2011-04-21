@@ -67,8 +67,14 @@ function inc_plugonet_generer($files, $forcer_paquetxml=false, $simuler=false) {
 				// -- le fichier des commandes svn
 				if (!$erreurs[$nom]['erreur_validation_paquetxml'] OR $forcer_paquetxml ) {
 					// Determination du repertoire en fonction du mode choisi
-					if ($simuler)
-						$dir = sous_repertoire(sous_repertoire(_DIR_TMP, "plugonet"), basename(dirname($nom)));
+					if ($simuler) {
+						$dirs = explode('/', dirname($nom));
+						$dir = sous_repertoire(_DIR_TMP, "plugonet");
+						foreach ($dirs as $_dir) {
+							if ($_dir !== '..' AND $_dir !== 'plugins' AND $_dir !== 'auto') 
+								$dir = sous_repertoire($dir, $_dir);
+						}
+					}
 					else
 						$dir = dirname($nom);
 					if ($modules = plugin2balise_description($description, $prefixe, $dir))
