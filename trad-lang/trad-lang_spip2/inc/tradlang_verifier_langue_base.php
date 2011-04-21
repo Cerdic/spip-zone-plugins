@@ -52,7 +52,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 			
 			$id_tradlang = sql_insertq('spip_tradlang');
 			tradlang_set($id_tradlang,$array);
-			instituer_tradlang($id_tradlang, $array)
+			instituer_tradlang($id_tradlang, $array);
 			$inserees++;
 		}
 		spip_log("$inserees insertions");
