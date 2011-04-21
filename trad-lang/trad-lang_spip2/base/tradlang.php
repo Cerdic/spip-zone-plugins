@@ -53,7 +53,6 @@ function tradlang_declarer_tables_objets_sql($tables){
 	);
 
 	$tables['spip_tradlang'] = array(
-		'table_objet_surnoms'=>array('tradlang'),
 		'texte_retour' => 'icone_retour',
 		'texte_objets' => 'tradlang:titre_tradlang_chaines',
 		'texte_modifier' => 'tradlang:icone_modifier_tradlang',
@@ -65,6 +64,7 @@ function tradlang_declarer_tables_objets_sql($tables){
 		'principale' => 'oui',
 		'field'=> array(
 			"id_tradlang" => "bigint(21) NOT NULL AUTO_INCREMENT",
+			"id_tradlang_module" => "bigint(21) NOT NULL DEFAULT '0'",
 			"id" => "varchar(128) NOT NULL default ''",
 			"module" => "varchar(32) NOT NULL default 0",
 			"lang" => "varchar(16) NOT NULL default ''",
