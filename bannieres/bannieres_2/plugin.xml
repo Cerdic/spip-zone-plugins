@@ -15,6 +15,11 @@
 		<icone>images/bannieres.png</icone>
 		<titre>bannieres:bannieres</titre>
 	</bouton>
+	<bouton id='bannieres21' parent='bando_edition'>
+        <icone>images/bannieres.png</icone>
+        <titre>bannieres:bannieres</titre>
+        <url>bannieres</url>
+	</bouton>
 	<!-- pipeline -->
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
