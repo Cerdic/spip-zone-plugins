@@ -38,8 +38,8 @@ function tradlang_declarer_tables_objets_sql($tables){
 		),
 		'key' => array(
 			"PRIMARY KEY" => "id_tradlang_module",
-			"KEY" => "module",
-			"UNIQUE" => "nom_mod"
+			"KEY" => "nom_mod",
+			"UNIQUE" => "module"
 		),
 		'join' => array(
 			"id_tradlang_module"=>"id_tradlang_module",
@@ -47,9 +47,10 @@ function tradlang_declarer_tables_objets_sql($tables){
 		),
 		'rechercher_champs' => array(
 			'module' => 8,
-			'nom_mod' => 8
+			'nom_mod' => 8,
+			'texte' => 8
 		),
-		'champs_versionnes' => array('module','nom_mod', 'lang_mere')
+		'champs_versionnes' => array('module','nom_mod','texte','lang_mere')
 	);
 
 	$tables['spip_tradlang'] = array(

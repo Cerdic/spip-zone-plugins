@@ -6,7 +6,7 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 	/**
 	 * Quelle est la langue mère
 	 */
-	$langue_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','nom_mod='.sql_quote($module));
+	$langue_mere = sql_getfetsel('lang_mere','spip_tradlang_modules','module='.sql_quote($module));
 	
 	if(sql_count($trad_langue_mere) != sql_count($trad_langue_cible)){
 		spip_log("compte de locutions different entre $langue_mere et $langue");
@@ -51,8 +51,8 @@ function inc_tradlang_verifier_langue_base_dist($module,$langue){
 			unset($array['id_tradlang']);
 			
 			$id_tradlang = sql_insertq('spip_tradlang');
-			spip_log($array);
 			tradlang_set($id_tradlang,$array);
+			instituer_tradlang($id_tradlang, $array)
 			$inserees++;
 		}
 		spip_log("$inserees insertions");

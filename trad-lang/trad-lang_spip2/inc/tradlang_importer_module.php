@@ -31,7 +31,7 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 		$langues_module = explode(',',$module_choisi['langues']);
 	}
 	
-	if(!($res = sql_getfetsel('idmodule','spip_tradlang_modules','nom_mod='.sql_quote($module['nom_mod'])))){
+	if(!($res = sql_getfetsel('id_tradlang_module','spip_tradlang_modules','nom_mod='.sql_quote($module['nom_mod'])))){
 		/**
 		 * Insertion du module dans la base
 		 */
@@ -120,7 +120,8 @@ function inc_tradlang_importer_module($module,$dir_lang=false,$new_only=false){
 				if (isset($md5) && ($id != 'zz_timestamp_nepastraduire')){
 					sql_insertq('spip_tradlang',array(
 						'id' => $id,
-						'module' => $module["nom_mod"],
+						'id_tradlang_module' => $module['id_tradlang_module'],
+						'module' => $module["module"],
 						'str' => $chs[$id],
 						'lang' => $langue,
 						'orig' => $orig,

@@ -26,7 +26,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 			return false;
 			
 		$nom_mod = $r[1];
-		$module = sql_fetsel('*','spip_tradlang_modules','nom_mod='.sql_quote($nom_mod));
+		$module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($nom_mod));
 		if(is_array($module)){
 			$langues = sql_select("DISTINCT lang","spip_tradlang","module='$nom_mod'");
 			while($langue=sql_fetch($langues)){

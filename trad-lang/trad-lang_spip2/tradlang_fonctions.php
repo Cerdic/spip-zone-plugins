@@ -21,17 +21,17 @@ function tradlang_getmodules_base(){
 	$res = sql_select("*","spip_tradlang_modules");
 	if ($res){
 		while($row=sql_fetch($res)){
-			$nom_mod = $row["module"];
-			$ret[$nom_mod] = $row;
+			$module = $row["module"];
+			$ret[$module] = $row;
 
 			/**
 			 * Récupération des différentes langues et calcul du nom des 
 			 * fichiers de langue
 			 */
-			$res2 = sql_select("DISTINCT lang","spip_tradlang","module='$nom_mod'");
+			$res2 = sql_select("DISTINCT lang","spip_tradlang","module='$module'");
 			while($row2=sql_fetch($res2)){
 				$lg = $row2["lang"];
-				$ret[$nom_mod]["langue_".$lg] = $row["lang_prefix"]."_".$lg.".php";
+				$ret[$module]["langue_".$lg] = $row["lang_prefix"]."_".$lg.".php";
 			}
 		}
 	}
@@ -48,17 +48,17 @@ function tradlang_getmodules_base(){
  */
 function tradlang_testesynchro($idmodule, $langue){
 	$dir_lang = tradlang_dir_lang();
-	$module = sql_fetsel('*','spip_tradlang_modules','id_tradlang_module='.intval($idmodule));
-	$nom_module = $module["module"];
-	$nom_mod = $module["nom_mod"];
+
+	$module = sql_getfetsel('module','spip_tradlang_modules','id_tradlang_module='.intval($idmodule));
 
 	$modules = tradlang_getmodules_base();
-	$modok = $modules[$nom_mod];
-	
-	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
-	$modules2 = $getmodules_fics($dir_lang,$nom_mod);
-	$modok2 = $modules2[$nom_mod];
+	$modok = $modules[$module];
 
+	$getmodules_fics = charger_fonction('tradlang_getmodules_fics','inc');
+	$modules2 = $getmodules_fics($dir_lang,$module);
+	$modok2 = $modules2[$module];
+	
+	spip_log($modok2,'tradlang');
 	// union entre modok et modok2
 	if(is_array($modok2)){
 		foreach($modok2 as $cle=>$item){
@@ -66,25 +66,26 @@ function tradlang_testesynchro($idmodule, $langue){
 				$sel = "";
 				$lang = substr($cle,7);
 				if (!array_key_exists($lang, $modok)){
-					$module["langue_".$lang] = $item;
+					$module_final["langue_".$lang] = $item;
 				}
 			}
 		}
 	}
 	// Le fichier n'existe pas
-	if(!$module["langue_".$langue]){
+	if(!$module_final["langue_".$langue]){
 		return false;
 	}
 	
 	// lit le timestamp fichier
-	$fic = $dir_lang."/".$module["langue_".$langue];
+	$fic = $dir_lang."/".$module_final["langue_".$langue];
 	include($fic);
 	$chs = $GLOBALS[$GLOBALS['idx_lang']];
 	$tsf = $chs["zz_timestamp_nepastraduire"];
 	unset($GLOBALS[$GLOBALS['idx_lang']]);
 
+	
 	// lit le timestamp  base
-	$tsb = sql_getfetsel("ts","spip_tradlang","module =".sql_quote($nom_mod)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
+	$tsb = sql_getfetsel("ts","spip_tradlang","module =".sql_quote($module)." AND lang=".sql_quote($langue),"","ts DESC","0,1");
 
 	return ($tsb == $tsf);
 }
