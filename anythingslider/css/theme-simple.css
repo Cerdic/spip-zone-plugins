@@ -119,4 +119,5 @@ div.anythingSlider-simple {
 	box-shadow: 0 0 6px #888;
 	-moz-box-shadow: 0 0 6px #888;  
 	-webkit-box-shadow: 0 0 6px #888;
+	border: solid 1px #ccc;
 }
