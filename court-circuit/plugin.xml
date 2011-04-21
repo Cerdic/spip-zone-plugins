@@ -8,6 +8,6 @@
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2011</auteur>
 <prefix>courtcircuit</prefix>
 <necessite id='SPIP' version='[2.0.0;]' />
-<utilise id="Z">
+<utilise id="Z" />
 <categorie>outil</categorie>
 </plugin>

@@ -37,5 +37,5 @@
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;]" />
 	<necessite id="bando" version="[1.1.;]" />
-	<categorie>outils</categorie>
+	<categorie>outil</categorie>
 </plugin>
