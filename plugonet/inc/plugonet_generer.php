@@ -503,7 +503,7 @@ function plugin2balise_description($description, $prefixe, $dir) {
 		mkdir($dirl);
 	$dirl .= '/';
 	foreach($langs as $lang => $couples) {
-		$module = strtolower($prefixe) . "-paquet";
+		$module = "paquet-" . strtolower($prefixe);
 		$t = "\n// Fichier produit par PlugOnet";
 		$t = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $t);
 		if ($t) 
