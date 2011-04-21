@@ -195,15 +195,15 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$version_base = $D['version_base'];
 
 		$attributs =
-			($prefix ? "\n\tprefix='$prefix'" : '') .
-			($categorie ? "\n\tcategorie='$categorie'" : '') .
-			($logo ? "\n\tlogo='$logo'" : '') .
-			($version ? "\n\tversion='$version'" : '') .
-			($etat ? "\n\tetat='$etat'" : '') .
-			($version_base ? "\n\tversion_base='$version_base'" : '') .
-			($meta ? "\n\tmeta='$meta'" : '') .
+			($prefix ? "\n\tprefix=\"$prefix\"" : '') .
+			($categorie ? "\n\tcategorie=\"$categorie\"" : '') .
+			($logo ? "\n\tlogo=\"$logo\"" : '') .
+			($version ? "\n\tversion=\"$version\"" : '') .
+			($etat ? "\n\tetat=\"$etat\"" : '') .
+			($version_base ? "\n\tversion_base=\"$version_base\"" : '') .
+			($meta ? "\n\tmeta=\"$meta\"" : '') .
 			plugin2balise_lien($lien, 'documentation') .
-			($compatible ? "\n\tcompatible='$compatible'" : '');
+			($compatible ? "\n\tcompatible=\"$compatible\"" : '');
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
@@ -215,7 +215,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	else {
 		// Balise spip
 		$attributs =
-			($compatible ? " compatible='$compatible'" : '');
+			($compatible ? " compatible=\"$compatible\"" : '');
 		// raz des balises non utilisees
 		$nom = $auteur = $licence = $traduire = '';
 	}
@@ -255,7 +255,7 @@ function plugin2balise_lien($url, $nom='lien', $sep="\n\t") {
 	if (!preg_match(',https?://[^]\s]+,', $url, $r))
 		return '';
 	$url = str_replace('&', '&amp;', str_replace('&amp;', '&', $r[0]));
-	return "$sep$nom='$url'";
+	return "$sep$nom=\"$url\"";
 }
 
 // Extrait la tradution francaise uniquement
@@ -300,17 +300,17 @@ function plugin2balise_copy($texte, $balise) {
 		// Dans les deux cas on garde preferentiellement le contenu de de l'ancre ou du raccourci
 		// si il existe
 		if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
-			$href = " lien='" . $r[2] ."'";
+			$href = " lien=\"" . $r[2] ."\"";
 			$v = str_replace($r[0], $r[3], $v);
 		} elseif (preg_match(_RACCOURCI_LIEN,$v, $r)) {
-			$href = " lien='" . $r[4] ."'";
+			$href = " lien=\"" . $r[4] ."\"";
 			$v = ($r[1]) ? $r[1] : str_replace($r[0], '', $v);
 		} else 
 			$href = '';
 		
 		// On detecte ensuite un mail eventuel
 		if (preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $v, $r)) {
-			$mail = " mail='$r[2]'";
+			$mail = " mail=\"$r[2]\"";
 			$v = str_replace($r[2], '', $v);
 			if (!$v) {
 				// On considere alors que la premiere partie du mail peut faire office de nom d'auteur
@@ -329,7 +329,7 @@ function plugin2balise_copy($texte, $balise) {
 		if (preg_match('/(lgpl|gnu\/gpl|gpl\s*v*\d*)/i', $v, $r)) {
 			$licnom = strtoupper(trim($r[1]));
 			$licurl = ($licnom=='LGPL') ? 'http://www.gnu.org/licenses/lgpl-3.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
-			$licurl = " lien='$licurl'";
+			$licurl = " lien=\"$licurl\"";
 			$resl .= "\n\t<licence$licurl>$licnom</licence>";
 		}
 		
@@ -351,9 +351,9 @@ function plugin2balise_copy($texte, $balise) {
 function plugin2balise_traduire($D) {
 	$res = '';
 	foreach($D['traduire'] as $nom => $i) {
-		$att = " module='" . $i['module'] . "'" .
-				" reference='" . $i['reference'] . "'" .
-				(empty($i['gestionnaire']) ? '' : (" gestionnaire='" . $i['gestionnaire'] . "'"));
+		$att = " module=\"" . $i['module'] . "\"" .
+				" reference=\"" . $i['reference'] . "\"" .
+				(empty($i['gestionnaire']) ? '' : (" gestionnaire=\"" . $i['gestionnaire'] . "\""));
 		$res .= "\n\t<traduire$att />";
 	}
 
@@ -375,9 +375,9 @@ function plugin2balise_traduire($D) {
 function plugin2balise_pipeline($D) {
 	$res = '';
 	foreach($D as $i) {
-		$att = " nom='" . $i['nom'] . "'" .
-				(!empty($i['action']) ? (" action='" . $i['action'] . "'") : '') .
-				(!empty($i['inclure']) ? (" inclure='" . $i['inclure'] . "'") : '');
+		$att = " nom=\"" . $i['nom'] . "\"" .
+				(!empty($i['action']) ? (" action=\"" . $i['action'] . "\"") : '') .
+				(!empty($i['inclure']) ? (" inclure=\"" . $i['inclure'] . "\"") : '');
 		$res .= "\n\t<pipeline$att />";
 	}
 	
@@ -387,11 +387,11 @@ function plugin2balise_pipeline($D) {
 function plugin2balise_chemin($D) {
 	$res = '';
 	foreach($D['path'] as $i) {
-		$t = empty($i['type']) ? '' : (" type='" . $i['type'] . "'");
+		$t = empty($i['type']) ? '' : (" type=\"" . $i['type'] . "\"");
 		$p = $i['dir'];
 		if (!$t AND (!$p OR $p==='.' OR $p==='./')) 
 			continue;
-		$res .="\n\t<chemin path='$p'$t />";
+		$res .="\n\t<chemin path=\"$p\"$t />";
 	}
 
 	return $res ? "\n$res" : '';
@@ -406,11 +406,11 @@ function plugin2balise_necessite($D) {
 		foreach($D['necessite'] as $i) {
 			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 			$src = plugin2balise_lien($i['src'], 'lien', ' ');
-			$version = empty($i['version']) ? '' : (" version='" . $i['version'] . "'");
+			$version = empty($i['version']) ? '' : (" version=\"" . $i['version'] . "\"");
 			if (preg_match('/^lib:(.*)$/', $nom, $r))
-				$lib .= "\n\t<lib nom='" . $r[1] . "'$src />";
+				$lib .= "\n\t<lib nom=\"" . $r[1] . "\"$src />";
 			else 
-				$nec .="\n\t<necessite nom='$nom'$version />";
+				$nec .="\n\t<necessite nom=\"$nom\"$version />";
 		}
 	}
 
@@ -418,8 +418,8 @@ function plugin2balise_necessite($D) {
 	if ($D['lib']) {
 		foreach($D['lib'] as $i) {
 			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
-			$src = " lien='" . $i['lien'] . "'";
-			$lib .= "\n\t<lib nom='$nom'$src />";
+			$src = " lien=\"" . $i['lien'] . "\"";
+			$lib .= "\n\t<lib nom=\"$nom\"$src />";
 		}
 	}
 
@@ -431,8 +431,8 @@ function plugin2balise_utilise($D) {
 	$res = '';
 	foreach($D as $i) {
 		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
-		$att = " nom='$nom'" .
-				(!empty($i['version']) ? (" version='" . $i['version'] . "'") : '') .
+		$att = " nom=\"$nom\"" .
+				(!empty($i['version']) ? (" version=\"" . $i['version'] . "\"") : '') .
 				plugin2balise_lien($i['src']);
 		$res .="\n\t<utilise$att />";
 	}
@@ -445,7 +445,7 @@ function plugin2balise_exec($D, $balise) {
 	$res = '';
 	foreach($D[$balise] as $nom => $i) {
 		$res .= "\n\t<$balise" .
-			" nom='" . $nom . "'" .
+			" nom=\"" . $nom . "\"" .
 			plugin2attribut('titre', @$i['titre']) .
 			plugin2attribut('parent', @$i['parent']) .
 			plugin2attribut('icone', @$i['icone']) .
@@ -615,7 +615,7 @@ function extraire_bornes($intervalle) {
 
 
 function plugin2attribut($nom, $val) {
-	return empty($val) ? '' : (" $nom='" . str_replace("'","&#039;",$val) . "'");
+	return empty($val) ? '' : (" $nom=\"" . str_replace("'","&#039;",$val) . "\"");
 }
 
 ?>
