@@ -2,7 +2,7 @@
 	<nom>PlugOnet</nom>
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
 	<version>0.1.0</version>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<licence>GPL v3</licence>
 	<icon>prive/themes/spip/images/plugonet-32.png</icon>
 	<description>
@@ -15,7 +15,7 @@ certaines balises du fichier d'origine.
 En outre, PlugOnet permet de valider des fichiers paquet.xml &eacute;crits manuellement et fournit
 une aide sur chaque balise de la nouvelle DTD.
 	</description>
-	<lien></lien>
+	<lien>http://spip21.smellup.net/spip.php?article7</lien>
 	<prefix>plugonet</prefix>
 
 	<pipeline>
