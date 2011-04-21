@@ -94,7 +94,7 @@ function exec_edit_relances(){
 function relances_while($indexation, $statut_interne)
 {
   $_id = ($indexation=="id_asso") ? "id_asso" : "a.id_auteur";
-  $query = sql_select("$_id as id, a.id_auteur, a.email, nom_famille, a.prenom, telephone, mobile,  statut_interne, validite",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " b.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
+  $query = sql_select("$_id as id, a.id_auteur, b.email, a.nom_famille, a.prenom, a.telephone, a.mobile,  a.statut_interne, a.validite",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " b.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 
 	$res = '';
 	while ($data = sql_fetch($query)) {

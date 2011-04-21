@@ -34,7 +34,7 @@ function exec_action_relances(){
 		$message=$_POST['message'] ;
 		$email_tab=(isset($_POST["email"])) ? $_POST["email"]:array();
 		$id_tab=(isset($_POST["id"])) ? $_POST["id"]:array();
-		$count=count ($email_tab);
+		$count=count ($id_tab);
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
