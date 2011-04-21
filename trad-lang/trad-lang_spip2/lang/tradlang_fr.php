@@ -110,6 +110,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_voir_toute_chaines_module' => 'Voir toutes les chaines du module.',
 
 	// M
+	'menu_info_interface' => 'Affiche un lien menant vers l\'interface de traduction',
+	'menu_titre_interface' => 'Interface de traduction',
 	'message_aucun_resultat_chaine' => 'Aucun résultat correspondant à vos critères dans les chaînes de langue.',
 	'message_aucun_resultat_statut' => 'Aucune chaine ne correspond au statut demandé.',
 	'message_aucune_nouvelle_langue_dispo' => 'Ce module est disponible dans toutes les langues possibles',

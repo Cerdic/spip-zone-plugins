@@ -1,0 +1,16 @@
+#CACHE{0}
+[(#SET{titre, [(#ENV*{titre,<:tradlang:menu_titre_interface:>}|typo)]})]
+
+[(#ENV{appel_formulaire}|oui)
+	<div class="titre">#GET{titre}</div>
+	<div class="infos"><:tradlang:menu_info_interface:></div>
+]
+<BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
+	[(#SESSION{id_auteur}|et{#AUTORISER{voir,tradlang}}|oui)
+		<li class="menu-entree[ (#ENV{css})]">
+			<a href="[(#URL_PAGE{#ENV{page,traduction}})]">
+				#GET{titre}
+			</a>
+		</li>
+	]
+</BOUCLE_appel>

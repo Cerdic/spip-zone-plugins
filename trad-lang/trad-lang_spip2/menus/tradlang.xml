@@ -1,0 +1,9 @@
+<entree>
+	<nom><:tradlang:menu_titre_interface:></nom>
+	<rang>12</rang>
+	<description><:tradlang:menu_info_interface:></description>
+	<icone>images/spip_lang-24.png</icone>
+	<parametre nom="titre" label="menus:entree_titre" />
+	<parametre nom="css" label="menus:entree_css" />
+	<refuser_sous_menu/>
+</entree>
