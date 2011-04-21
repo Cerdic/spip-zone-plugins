@@ -41,4 +41,20 @@ function varnish_affichage_entetes_final($entetes) {
 	return $entetes;
 }
 
+/* verifier le besoin d'installer statjs et le signaler */
+function varnish_alertes_auteur($flux) {
+	if (autoriser('webmestre', $flux['args']['id_auteur'])
+	AND $GLOBALS['meta']['activer_statistiques'] == 'oui') {
+		$plugins = unserialize($GLOBALS['meta']['plugin']);
+
+		if (!isset($plugins['STATSJS'])) {
+			$flux['data'][] = _T('avis_attention'). ' '
+				. _L("Pour utiliser les statistiques de SPIP avec Varnish, il est recommandé d'installer le plugin <a href='http://www.spip-contrib.net/3753'>StatsJS</a>.");
+		}
+	}
+#var_dump($flux);
+
+	return $flux;
+}
+
 ?>

@@ -17,7 +17,9 @@
 	<pipeline>
 		<nom>affichage_entetes_final</nom>
 	</pipeline>
-	<install>varnish_install.php</install>
+	<pipeline>
+		<nom>alertes_auteur</nom>
+	</pipeline>
 	<categorie>outil</categorie>
 
 	<utilise id="statsjs" />
