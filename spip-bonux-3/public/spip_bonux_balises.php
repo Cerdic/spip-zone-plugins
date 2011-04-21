@@ -130,47 +130,6 @@ function calculer_balise_criteres($nom, $p, $motif="") {
   return $p;
 }
 
-/**
- * Produire un fichier statique a partir d'un squelette dynamique
- * Permet ensuite a apache de le servir en statique sans repasser
- * par spip.php a chaque hit sur le fichier
- * le format css ou js doit etre passe dans options['format']
- *
- * @param string $fond
- * @param array $contexte
- * @param array $options
- * @param string $connect
- * @return string
- */
-function produire_fond_statique($fond, $contexte=array(), $options = array(), $connect=''){
-	// recuperer le code CSS produit par le squelette
-	$options['raw'] = true;
-	$cache = recuperer_fond($fond,$contexte,$options,$connect);
-  $extension = $options['format'];
-
-  // calculer le nom de la css
-	$dir_var = sous_repertoire (_DIR_VAR, 'cache-'.$extension);
-	$filename = $dir_var . $extension."dyn-".md5($fond.serialize($contexte).$connect) .".$extension";
-
-  if (!file_exists($filename)
-	  OR filemtime($filename)<$cache['lastmodified']){
-
-	  $contenu = $cache['texte'];
-	  // passer les urls en absolu si c'est une css
-	  if ($extension=="css")
-	    $contenu = urls_absolues_css($contenu, generer_url_public($fond));
-
-    $comment = "/*\n * #PRODUIRE_".strtoupper($extension)."_FOND{fond=$fond";
-    foreach($contexte as $k=>$v)
-	    $comment .= ",$k=$v";
-    $comment .="}\n * le ".date("Y-m-d H:i:s")."\n */\n";
-	  // et ecrire le fichier
-    ecrire_fichier($filename,$comment.$contenu);
-  }
-
-  return $filename;
-}
-
 function produire_css_fond($fond, $contexte=array(), $options = array(), $connect=''){
 	$options['format'] = "css";
   return produire_fond_statique($fond, $contexte, $options, $connect);
