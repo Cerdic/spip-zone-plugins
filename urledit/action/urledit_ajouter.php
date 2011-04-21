@@ -39,7 +39,8 @@ function action_urledit_ajouter_dist() {
                           $filtre = lire_config('urledit/filtre');
   
   //die("$longueur_min / $longueur_max / $separateur / $filtre *****");
-
+  
+  include_spip('inc/filtres'); // pour fournir à url_nettoyer le filtre supprimer_tags
 	include_spip('action/editer_url');
 	if (!$url = url_nettoyer($url,$longueur_max,$longueur_min,$separateur,$filtre))  
 		return;
