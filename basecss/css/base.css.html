@@ -20,8 +20,10 @@
 .box { display: block; margin-bottom: #GET{margin-bottom}; padding: #GET{line-height}; background: #EEE; }
 
 /* Listes, tableaux et mosaiques */
-.first {}
-.last { margin-right: 0; }
+.first { margin-left: 0; padding-left: 0; }
+.last { margin-right: 0; padding-right: 0; }
+.top { margin-top: 0; padding-top: 0; }
+.bottom { margin-bottom: 0; padding-bottom: 0; }
 .odd {}
 .even {}
 .sep {}
@@ -33,7 +35,7 @@
 
 /* Espaceur de blocs */
 .clear { clear: both; }
-br.clear,.nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
+br.clear, .nettoyeur { clear: both; margin: 0; padding: 0; border: 0; height: 0; line-height: 1px; font-size: 1px; }
 hr.clear { visibility: hidden; }
 
 /* clearfix : http://www.positioniseverything.net/easyclearing.html */
@@ -43,7 +45,7 @@ hr.clear { visibility: hidden; }
     height: 0; 
     clear: both; 
     visibility: hidden;
-	overflow: hidden;
+    overflow: hidden;
 }
 .clearfix { display: inline-table; }
 
