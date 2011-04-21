@@ -36,8 +36,6 @@ function tradlang_set($id_tradlang,$set=null){
 		$set
 	);
 	
-	spip_log("REVISION SUR $id_tradlang ",'test');
-	spip_log($c);
 	revision_tradlang($id_tradlang, $c);
 
 	$c = collecter_requests(array('statut'),array(),$set);
