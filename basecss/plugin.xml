@@ -1,6 +1,6 @@
 <plugin spip="[2.1.0;2.3.0-dev)" >
 	<nom>Base CSS P&eacute;tronille&nbsp;2</nom>
-	<version>2.0.1</version>
+	<version>2.0.2</version>
 	<etat>dev</etat>
 	<icon>icon.png</icon>
 	<description>{{ATTENTION : version de dev !}}
@@ -26,7 +26,7 @@
 </plugin>
 <plugin spip="[2.3.0-dev;]" >
 	<nom>Base CSS P&eacute;tronille&nbsp;2</nom>
-	<version>2.0.1</version>
+	<version>2.0.2</version>
 	<etat>dev</etat>
 	<icon>icon.png</icon>
 	<description>{{ATTENTION : version de dev !}}
