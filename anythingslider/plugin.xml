@@ -3,7 +3,7 @@
 	<auteur>[Chris Coyier, Remy Sharp, Doug Neiner, ProLoser->https://github.com/ProLoser/AnythingSlider/wiki/Credits] pour le script AnythingSlider, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin SPIP</auteur>
 	<icon>images/anythingslider.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.2</version>
+	<version>0.1.3</version>
 	<etat>test</etat>
 	<description>Permets d'utiliser le plugin jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] dans les squelettes.</description>
 	<lien>http://www.spip-contrib.net/?article3783</lien>
