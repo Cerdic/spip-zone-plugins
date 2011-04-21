@@ -32,7 +32,7 @@
 		</h3>
 		[(#REM) Forum de la chaine de langue ]
 		<a href="#forum" name="forum" id="forum"></a>
-		[(#INCLURE{fond=inclure/forum,id_tradlang=#ID_TRADLANG}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
+		[(#INCLURE{fond=inclure/forum_tradlang,objet=tradlang,id_tradlang=#ID_TRADLANG}|trim|sinon{<p><:tradlang:info_aucun_commentaire_chaine:></p>})]
 		#FORMULAIRE_FORUM{#SELF,tradlang,#ID_TRADLANG}
 	</div>
 </BOUCLE_tradlang>
