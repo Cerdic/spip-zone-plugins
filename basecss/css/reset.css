@@ -47,4 +47,7 @@ table {
 	border-spacing: 0;
 }
 
+/* Lissage des images IE */
+.ie img { -ms-interpolation-mode: bicubic; }
+
 /* end */

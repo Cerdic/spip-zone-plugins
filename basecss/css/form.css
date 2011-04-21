@@ -13,6 +13,12 @@ input[type="button"],input.button,
 input[type="image"],input.image,
 button { cursor: pointer; }
 
+.ie fieldset { padding-top: 0; }
+.ie textarea { overflow: auto; }
+.ie button,
+.ie input.submit,
+.ie input.button { position:relative; }
+
 /* Success, notice and error boxes */
 
 .error,
