@@ -14,7 +14,7 @@ function action_editer_adresse_dist($arg=null) {
 
 	// pas d'adresse ? on en cree une nouvelle, mais seulement si 'oui' en argument.
 	if (!$id_adresse = intval($arg)) {
-		if ($arg != 'oui') {
+		if (!in_array($arg, array('oui', 'new'))) {
 			include_spip('inc/headers');
 			redirige_url_ecrire();
 		}
