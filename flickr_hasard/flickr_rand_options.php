@@ -97,18 +97,18 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
             $_photo_rand_licence = @$rsp_obj['photo']['license'];  
             $_photo_rand_url_page = @$rsp_obj['photo']['urls']['url'][0]['_content'];             
             
+            // doc licence: http://www.flickr.com/services/api/flickr.photos.licenses.getInfo.html            
             switch ($_photo_rand_licence)  {
-                case 4:   $license_name = "Creative Commons BY";          break;
-                case 6:   $license_name = "Creative Commons BY-ND";       break;
-                case 3:   $license_name = "Creative Commons BY-NC-ND";    break;
-                case 2:   $license_name = "Creative Commons BY-NC";       break;
-                case 1:   $license_name = "Creative Commons BY-NC-SA";    break;
-                case 5:   $license_name = "Creative Commons BY-SA";       break;
-                case 7:   $license_name = "No known copyright restrictions";       break;
-                case 0:   $license_name = "Copyright";       break;
-                default:  $license_name = "Unknown License,";         
+                case 4:   $license_name = "Creative Commons BY";          $licence_url = "http://creativecommons.org/licenses/by/2.0/";   break;
+                case 6:   $license_name = "Creative Commons BY-ND";       $licence_url = "http://creativecommons.org/licenses/by-nd/2.0/";   break;
+                case 3:   $license_name = "Creative Commons BY-NC-ND";    $licence_url = "http://creativecommons.org/licenses/by-nc-nd/2.0/";   break;
+                case 2:   $license_name = "Creative Commons BY-NC";       $licence_url = "http://creativecommons.org/licenses/by-nc/2.0/";   break;
+                case 1:   $license_name = "Creative Commons BY-NC-SA";    $licence_url = "http://creativecommons.org/licenses/by-nc-sa/2.0/";   break;
+                case 5:   $license_name = "Creative Commons BY-SA";       $licence_url = "http://creativecommons.org/licenses/by-sa/2.0/";   break;
+                case 7:   $license_name = "No known copyright restrictions";    $licence_url = "http://flickr.com/commons/usage/";   break;
+                case 0:   $license_name = "Copyright";                    $licence_url = "http://www.flickr.com/help/general/#147";   break;
+                default:  $license_name = "Unknown License";              $licence_url = "http://www.flickr.com/help/general/#147";   break;                          
             } 
-            
             
             //echo "Title is $_photo_rand_title - $_photo_rand_owner - :::: $_photo_rand_licence :::  !";
             
@@ -133,7 +133,7 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
                                   <dt><a href='$_photo_rand_url_page'><img src='$_photo_rand_url' alt='flickr' /></a></dt>
                                   <dt class='spip_doc_titre'><strong>$_photo_rand_title</strong><dt>
                                   <dt class='spip_doc_descriptif'>par $_photo_rand_owner<dt>
-                                  <dt class='spip_doc_licence'><small>$license_name</small><dt>
+                                  <dt class='spip_doc_licence'><a href='$licence_url' rel='license'>$license_name</a><dt>
                             </dl>";                             
             }
     
