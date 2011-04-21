@@ -1,0 +1,36 @@
+<BOUCLE_afficher_contenu(TRADLANG tradlang_modules){id_tradlang=#ENV{id}}>
+<div class="champ contenu_module[ (#MODULE*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_nommodule:></div>
+<div dir='#LANG_DIR' class='module'>#NOM_MOD[(#MODULE|=={#NOM_MOD}|non)([(#MODULE)])]</div>
+</div>
+<div class="champ contenu_lang[ (#LANG*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_lang:></div>
+<div dir='#LANG_DIR' class='lang'>[(#LANG|traduire_nom_langue)]</div>
+</div>
+<div class="champ contenu_lang_mere[ (#LANG_MERE*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_langue_mere:></div>
+<div dir='#LANG_DIR' class='lang_mere'>[(#LANG_MERE|traduire_nom_langue)]</div>
+</div>
+<div class="champ contenu_id[ (#ID*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_id_tradlang:></div>
+<div dir='#LANG_DIR' class='id'>#ID</div>
+</div>
+<div class="champ contenu_statut[ (#STATUT*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_tradlang_status:></div>
+<div dir='#LANG_DIR' class='statut'>#STATUT</div>
+</div>
+<div class="champ contenu_str[ (#STR*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_tradlang_str:></div>
+<div dir='#LANG_DIR' class='str'>[(#STR**|entites_html)]</div>
+</div>
+<BOUCLE_chaine_orig(TRADLANG){id}{module}{lang=#LANG_MERE}>
+<div class="champ contenu_str_orig[ (#STR*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_version_originale{lang=#LANG}:></div>
+<div dir='#LANG_DIR' class='str_orig'>[(#STR**|entites_html)]</div>
+</div>
+</BOUCLE_chaine_orig>
+<div class="champ contenu_comm[ (#COMM*|strlen|?{'',vide})]">
+<div class='label'><:tradlang:label_tradlang_comm:></div>
+<div dir='#LANG_DIR' class='comm'>#COMM</div>
+</div>
+</BOUCLE_afficher_contenu>
