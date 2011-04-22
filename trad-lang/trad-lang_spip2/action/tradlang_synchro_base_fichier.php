@@ -16,6 +16,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 	}
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
+	spip_log($arg,'test');
 	if (!preg_match(",^(\w+)$,", $arg, $r)) {
 		spip_log("action_tradlang_synchro_base_fichier $arg pas compris");
 	}
@@ -25,13 +26,13 @@ function action_tradlang_synchro_base_fichier_dist(){
 		if(!$dir_lang)
 			return false;
 			
-		$nom_mod = $r[1];
-		$module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($nom_mod));
+		$module_nom = $r[1];
+		$module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module_nom));
 		if(is_array($module)){
-			$langues = sql_select("DISTINCT lang","spip_tradlang","module='$nom_mod'");
+			$langues = sql_select("DISTINCT lang","spip_tradlang","module='$module_nom'");
 			while($langue=sql_fetch($langues)){
 				$lg = $langue["lang"];
-				$fichiers[$lg] = $nom_mod."_".$lg.".php";
+				$fichiers[$lg] = $module_nom."_".$lg.".php";
 				foreach($fichiers as $key => $fichier){
 					$chemin_fichier = $dir_lang.'/'.$fichier;
 					/**
@@ -48,7 +49,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 						$sauvegarder_module($module,$lg,$dir_lang);
 					}
 					else{
-						$ts_base = sql_getfetsel('ts','spip_tradlang','module='.sql_quote($nom_mod).' AND lang='.sql_quote($lg),'','ts DESC','0,1');
+						$ts_base = sql_getfetsel('ts','spip_tradlang','module='.sql_quote($module_nom).' AND lang='.sql_quote($lg),'','ts DESC','0,1');
 						
 						include($chemin_fichier);
 						$chs = $GLOBALS[$GLOBALS['idx_lang']];
@@ -78,7 +79,7 @@ function action_tradlang_synchro_base_fichier_dist(){
 			include_spip('inc/invalideur');
 			suivre_invalideur("id='id_tradlang/$id_tradlang'");
 		}else{
-			spip_log("action_tradlang_synchro_base_fichier : Module $nom_mod inexistant");
+			spip_log("action_tradlang_synchro_base_fichier : Module $module_nom inexistant","tradlang");
 		}
 	}
 	

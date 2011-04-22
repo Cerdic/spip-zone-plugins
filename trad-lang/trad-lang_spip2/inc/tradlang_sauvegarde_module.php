@@ -17,7 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * @return 
  */
 function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang){
-	spip_log('sauvegarde','tradlang');
 	// Debut du fichier de langue
 	$lang_prolog = "<"."?php\n// This is a SPIP language file  --  Ceci est un fichier langue de SPIP\nif (!defined('_ECRIRE_INC_VERSION')) return;\n\n";
 	// Fin du fichier de langue
@@ -26,10 +25,10 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang){
 	if(!is_dir($dir_lang)){
 		return false;
 	}
-	$fic_exp = $dir_lang."/".$module["nom_mod"]."_".$langue.".php";
+	$fic_exp = $dir_lang."/".$module["module"]."_".$langue.".php";
 	$tab = array();
 	$conflit = array();  
-	$tab = tradlang_lirelang($module, $langue);
+	$tab = tradlang_lirelang($module["module"], $langue);
 
 	ksort($tab);
 	reset($tab);
@@ -77,18 +76,15 @@ function inc_tradlang_sauvegarde_module_dist($module,$langue,$dir_lang){
  * @return 
  */
 function tradlang_lirelang($module, $langue, $type=""){
-	spip_log('lire_lang','tradlang');
 	$ret = array();
 
 	if ($type=="md5"){
-		$res = sql_select("id,md5","spip_tradlang","module='$nom_mod' AND lang='$lang_orig' AND !ISNULL(md5)","","id ASC");
+		$res = sql_select("id,md5","spip_tradlang","module='$module' AND lang='$langue' AND !ISNULL(md5)","","id ASC");
 		while($row = sql_fetch($res))
 		$ret[$row["id"]] = $row["md5"];
 	}
 	else{
-		spip_log('type != md5','tradlang');
-		$nom_mod = $module["nom_mod"];
-		$res = sql_select("id,str,statut","spip_tradlang","module = '$nom_mod' AND lang='$langue'","","id ASC");
+		$res = sql_select("id,str,statut","spip_tradlang","module = '$module' AND lang='$langue'","","id ASC");
 		
 		while($row = sql_fetch($res)){
 			if (($row["statut"] != "") && ($row["statut"] != "OK"))
@@ -100,11 +96,10 @@ function tradlang_lirelang($module, $langue, $type=""){
 
 		// initialise la chaine de tag timestamp sauvegarde
 		$quer = "SELECT MAX(ts) as ts FROM spip_tradlang ".
-			"WHERE module = '".$nom_mod."' AND lang='".$langue."'";
+			"WHERE module = '".$module."' AND lang='".$langue."'";
 		$res = sql_query($quer);
 		$row = sql_fetch($res);
 		$ts = $row["ts"];
-		spip_log($ts,'tradlang');
 
 		$ret["zz_timestamp_nepastraduire"] = $ts;
 	}
