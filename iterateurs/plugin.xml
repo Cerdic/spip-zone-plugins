@@ -4,7 +4,7 @@
 	</nom>
 	<auteur>Fil &amp; Marcimat</auteur>
 	<licence>&#169; 2010-2011 - GNU/GPL</licence>
-	<version>0.2.6</version>
+	<version>0.3.0</version>
 	<etat>dev</etat>
 	<description>
 	backport pour SPIP 2.1 des it&#233;rateurs de la branche dev
