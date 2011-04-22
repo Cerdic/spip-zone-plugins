@@ -1,7 +1,19 @@
 <?php
-
-// inc/spiplistes_meleuse.php
-
+/**
+ * spiplistes_meleuse.php
+ * 
+ * La meleuse s'occupe des envois de courriers dont les etiquettes ont
+ * ete preparees par la trieuse, ou dont les courriers ont ete prepares
+ * via le back-office (cas des envois de test).
+ *
+ * Pour en savoir plus,
+ * voir la documentation sur la fonction {@link spiplistes_meleuse()}.
+ * @version 20110422
+ * $LastChangedRevision$
+ * $LastChangedBy$
+ * $LastChangedDate$
+ * @package spiplistes
+ */
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
@@ -21,45 +33,47 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-/*
-	Prend dans le panier des courriers a envoyer (spip_courriers) les encours
-	- formate le titre, texte pour l'envoi
-	
-	les etiquettes sont dans la queue d'envois (spip_auteurs_courriers)
-	- id_auteur (pour reprendre l'adresse mail de id_auteur)
-	- id_courrier (le courrier a dupliquer/envoyer)
-	
-	la queue (spip_auteurs_courriers) a ete remplie par cron_spiplistes_cron()
-	se sert de la queue pour ventiler les envois par lots
+/**
+ * Envoie le courrier pret au depart
+ *
+ * Prend dans le panier des courriers a envoyer (spip_courriers) les encours
+ * - formate le titre, texte pour l'envoi
+ *
+ * 
+ * les etiquettes sont dans la queue d'envois (spip_auteurs_courriers)
+ * - id_auteur (pour reprendre l'adresse mail de id_auteur)
+ * - id_courrier (le courrier a dupliquer/envoyer)
+ * 
+ * la queue (spip_auteurs_courriers) a ete remplie par cron_spiplistes_cron()
+ * se sert de la queue pour ventiler les envois par lots
 
-	le courrier (spip_courriers) doit avoir date <= time() et statut 'encour'
-	si email_test, la meleuse envoie le courrier a email_test, 
-		supprime email_test du courrier 
-		et repositionne le statut du courrier en 'redac'
-	si pas email_test mais id_liste, 
-		regarde la queue d'envois (spip_auteurs_courriers) 
-		et passe le statut du courrier (spip_courriers) a :
-			'publie' si type == 'nl' (newsletter)
-			'auto' si type == 'auto' (liste programmee)
-		et envoie les courriers precises aux abonnes de cette liste
-		et supprime l'identifiant du courrier dans la queue d'envois (spip_auteurs_courriers)
+ * le courrier (spip_courriers) doit avoir date <= time() et statut 'encour'
+ * si email_test, la meleuse envoie le courrier a email_test, 
+ *  supprime email_test du courrier 
+ *  et repositionne le statut du courrier en 'redac'
+ * si pas email_test mais id_liste, 
+ *  regarde la queue d'envois (spip_auteurs_courriers) 
+ *  et passe le statut du courrier (spip_courriers) a :
+ *		'publie' si type == 'nl' (newsletter)
+ *		'auto' si type == 'auto' (liste programmee)
+ * 	et envoie les courriers precises aux abonnes de cette liste
+ * 	et supprime l'identifiant du courrier dans la queue d'envois (spip_auteurs_courriers)
 
-	renvoie:
-	- nul, si la tache n'a pas a etre effectuee
-	- positif, si la tache a ete effectuee
-	- negatif, si la tache doit etre poursuivie ou recommencee
-
-*/
-	
-function spiplistes_meleuse ($last_time) { 
+ * renvoie:
+ * - nul, si la tache n'a pas a etre effectuee
+ * - positif, si la tache a ete effectuee
+ * - negatif, si la tache doit etre poursuivie ou recommencee
+ *
+ * @package spiplistes
+ * @param int $last_time
+ * @return int
+ */
+function spiplistes_meleuse ($last_time) {
 
 	//spiplistes_debug_log('spiplistes_meleuse()');
 	
@@ -633,12 +647,16 @@ function spiplistes_meleuse ($last_time) {
 
 
 
-/*
- * CP-20090426
- * Petite fonction pour remplacer les url_site
+/**
+ * Remplacer les url_site
+ *
  * Ex., pour url_site = "foo.bar" :
  * _HREF_AUTEUR_URL_SITE_ = "href='http://foo.bar'"
  * _AUTEUR_URL_SITE_ = "foo.bar"
+ *
+ * @author CP
+ * @version 20090426
+ * @return string
  */
 function spiplistes_personnaliser_courrier_urls ($txt, $url) {
 
@@ -654,9 +672,16 @@ function spiplistes_personnaliser_courrier_urls ($txt, $url) {
 }
 
 /**
- * CP-20080608 :: personnalisation du courrier
- * recherche/remplace les tags _AUTEUR_CLE_ en masse dans le corps du message.
+ * Personnalisation du courrier
+ * 
+ * Recherche/remplace les tags _AUTEUR_CLE_ dans le corps du message.
  * (toutes les cles presentes dans la table *_auteur sont utilisables)
+ * @author CP
+ * @version 20080608
+ * @param string $page_html
+ * @param string $page_texte
+ * @param int $id_auteur
+ * @param string $format_abo
  * @return array
  */
 function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur, $format_abo) {
@@ -696,8 +721,10 @@ function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur,
 
 /**
  * Repasse un courrier en mode redac (en general, un test d'envoi)
- * @return 
- * @param $id_courrier int
+ *
+ * Change le statut d'un courrier pour <em>en cours</em>.
+ * @param int $id_courrier
+ * @return boolean
  */
 function spiplistes_courriers_statut_redac ($id_courrier) {
 	spiplistes_courrier_modifier(
@@ -713,7 +740,19 @@ function spiplistes_courriers_statut_redac ($id_courrier) {
 }
 
 /**
- * petite ligne pour trace dans le log
+ * Renvoie une ligne pour tracer les envois dans le log
+ *
+ * Permet de completer le log par les compteurs d'envoi
+ * (nb mails envoyes, dans quel format, ...)
+ * @author CP
+ * @version 20110421
+ * @param int $id identificateur du courrier
+ * @param int $sent nombre de mails envoyes
+ * @param int $html au format html
+ * @param int $text 
+ * @param int $none sans format
+ * @param int $echec nombre d'echecs
+ * @param string $type
  * @return string
 */
 function spiplistes_trace_compteur ($id, $sent, $html, $text, $none, $echec, $type='TOTAL')
@@ -730,23 +769,3 @@ function spiplistes_trace_compteur ($id, $sent, $html, $text, $none, $echec, $ty
 		.')';
 	return($str);
 }
-
-/******************************************************************************************/
-/* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
-/* par email pour SPIP. http://bloog.net/spip-listes              					      */
-/* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net                               */
-/*                                                     								      */
-/* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
-/* (version 2).                                                                           */
-/*                                                                                        */
-/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
-/* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
-/* pour plus de details.                                                                  */
-/*                                                                                        */
-/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
-/* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
-/* Free Software Foundation,                                                              */
-/* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
-/******************************************************************************************/
