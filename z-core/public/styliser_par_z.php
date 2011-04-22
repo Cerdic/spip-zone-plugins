@@ -13,7 +13,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_once _DIR_RESTREINT . 'public/styliser_par_z.php';
+if (file_exists($f=_DIR_RESTREINT . 'public/styliser_par_z.php')){
+	include_once $f;
+}
 
 if (!function_exists('public_styliser_par_z_dist')){
 /**
