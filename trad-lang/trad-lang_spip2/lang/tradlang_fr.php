@@ -140,7 +140,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'readme' => 'Ce plugin permet de gérer les fichiers langues',
 
 	// S
-	'str_status_modif' => 'Modifi&eacute; (MODIF)',
+	'str_status_modif' => 'Modifié (MODIF)',
 	'str_status_new' => 'Nouveau (NEW)',
 	'str_status_traduit' => 'Traduit',
 
@@ -189,7 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'th_traduction' => 'Traduction',
 	'titre_bilan' => 'Bilan des traductions',
 	'titre_commentaires_chaines' => 'Commentaires au sujet de cette chaine',
-	'titre_modifications_chaines' => 'Les derni&egrave;res modifications de cette chaine',
+	'titre_modifications_chaines' => 'Les dernières modifications de cette chaine',
 	'titre_page_configurer_tradlang' => 'Configuration du plugin Trad-lang',
 	'titre_recherche_tradlang' => 'Chaines de langue',
 	'titre_revisions_sommaire' => 'Dernières modifications',
@@ -197,7 +197,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_tradlang_chaines' => 'Chaines de langue de Trad-lang',
 	'titre_tradlang_modules' => 'Modules de langue de Trad-lang',
 	'titre_traduction' => 'Traductions',
-	'titre_traduction_chaine_de_vers' => 'Traduction de la chaine &laquo;@chaine@&raquo; du module &laquo;@module@&raquo; de <abbr title="@lang_orig_long@">@lang_orig@</abbr> vers <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
+	'titre_traduction_chaine_de_vers' => 'Traduction de la chaine «@chaine@» du module «@module@» de <abbr title="@lang_orig_long@">@lang_orig@</abbr> vers <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'titre_traduction_de' => 'Traduction de ',
 	'titre_traduction_module_de_vers' => 'Traduction du module "@module@" de <abbr title="@lang_orig_long@">@lang_orig@</abbr> vers <abbr title="@lang_cible_long@">@lang_cible@</abbr>',
 	'tradlang' => 'Trad-Lang',

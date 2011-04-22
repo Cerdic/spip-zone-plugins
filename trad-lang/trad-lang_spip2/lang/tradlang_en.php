@@ -71,10 +71,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'items_total_nb' => 'Total number of items',
 
 	// L
+	'label_id_tradlang' => 'String id',
 	'label_idmodule' => 'Module ID',
+	'label_lang' => 'Language',
 	'label_langue_mere' => 'Parent language',
 	'label_langues_autorisees' => 'Allow only selected languages',
-	'label_nommodule' => 'Customize the module name',
+	'label_nommodule' => 'Module name',
 	'label_recherche_module' => 'In the module:',
 	'label_recherche_status' => 'With the status:',
 	'label_repertoire_module_langue' => 'Folder of the module',
@@ -112,6 +114,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_voir_toute_chaines_module' => 'See all the strings of the module.',
 
 	// M
+	'menu_info_interface' => 'Displays a link to the translation interface',
+	'menu_titre_interface' => 'Translation interface',
 	'message_aucun_resultat_chaine' => 'No results matching your criteria in the language strings.',
 	'message_aucun_resultat_statut' => 'No string matches the requested status.',
 	'message_aucune_nouvelle_langue_dispo' => 'This module is available in all languages',
@@ -192,8 +196,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_recherche_tradlang' => 'Language strings
 	',
 	'titre_revisions_sommaire' => 'Recent changes',
-	'titre_tradlang' => 'Trad-lang language strings',
-	'titre_tradlang_chaines' => 'Trad-lang language strings',
+	'titre_tradlang' => 'Trad-lang',
+	'titre_tradlang_chaines' => 'Trad-lang language string',
 	'titre_tradlang_modules' => 'Trad-lang language modules
 ',
 	'titre_traduction' => 'Translations',
