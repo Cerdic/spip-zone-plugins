@@ -211,6 +211,7 @@ function spipmotion_post_edition($flux){
 			 */
 			$fichier = basename(get_spip_doc($document['fichier']));
 			$racine = preg_replace('/-encoded-(\d+)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
+			$racine = preg_replace('/-encoded/','',substr($fichier,0,-(strlen($document['extension'])+1)));
 			$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
 			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
 				include_spip('action/spipmotion_ajouter_file_encodage');
