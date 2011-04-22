@@ -11,7 +11,7 @@
  * @param array $oublis_inutiles [optional]
  * @return 
  */
-function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='html', $oublis_inutiles=array()) {
+function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
 
 	include_spip('inc/traduire');
 	$var_source = "i18n_".$module."_".$langue_source;
