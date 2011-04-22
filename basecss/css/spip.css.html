@@ -51,15 +51,13 @@ blockquote.spip {}
 dl.spip_documents,
 .spip_documents dt,
 .spip_documents dd { margin: 0 auto; padding: 0; background: none; }
-.spip_documents { text-align: center; }
+.spip_documents { text-align: center; margin-bottom: #GET{margin-bottom}; }
 .spip_documents_center,
 .spip_doc_titre,
 .spip_doc_descriptif { margin-right: auto; margin-left: auto; }
 .spip_documents.spip_documents_center { clear: both; display: block; width: 100%; }
-.spip_documents.spip_documents_left { float: left; margin-right: 1.5em; }
-.spip_documents.spip_documents_right { float: right; margin-left: 1.5em; }
-.spip_documents.spip_documents_left img,
-.spip_documents.spip_documents_right img { vertical-align: text-top; }
+.spip_documents.spip_documents_left { float: left; margin-right: #GET{margin-bottom}; }
+.spip_documents.spip_documents_right { float: right; margin-left: #GET{margin-bottom}; }
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 

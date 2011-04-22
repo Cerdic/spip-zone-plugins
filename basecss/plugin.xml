@@ -1,6 +1,6 @@
 <plugin spip="[2.1.0;2.3.0-dev)" >
 <nom>Base CSS P&eacute;tronille&nbsp;2</nom>
-<version>2.0.2</version>
+<version>2.0.3</version>
 <etat>dev</etat>
 <icon>icon.png</icon>
 <description>{{ATTENTION : version de dev !}}
@@ -26,7 +26,7 @@ de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;gl
 </plugin>
 <plugin spip="[2.3.0-dev;]" >
 <nom>Base CSS P&eacute;tronille&nbsp;2</nom>
-<version>2.0.2</version>
+<version>2.0.3</version>
 <etat>dev</etat>
 <icon>icon.png</icon>
 <description>{{ATTENTION : version de dev !}}
