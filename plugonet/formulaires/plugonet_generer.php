@@ -1,7 +1,7 @@
 <?php
 
 function formulaires_plugonet_generer_charger() {
-	if (!_request('un_pluginxml'))
+	if (!_request('un_xml'))
 		return 	array();
 	else 
 		return formulaires_plugonet_generer_traiter();
@@ -9,7 +9,7 @@ function formulaires_plugonet_generer_charger() {
 
 function formulaires_plugonet_generer_verifier() {
 	$erreurs = array();
-	$obligatoires = array('pluginxml');
+	$obligatoires = array('xml');
 	foreach ($obligatoires as $_obligatoire){
 		if(!_request($_obligatoire)){
 			$erreurs[$_obligatoire] = _T('langonet:message_nok_champ_obligatoire');
@@ -20,14 +20,15 @@ function formulaires_plugonet_generer_verifier() {
 
 function formulaires_plugonet_generer_traiter() {
 	// Recuperation des champs du formulaire
-	if (!$pluginxml = _request('pluginxml'))
-		$pluginxml = array(_request('un_pluginxml'));
+	if (!$pluginxml = _request('xml'))
+		$pluginxml = array(_request('un_xml'));
 	$forcer = (_request('forcer')) ? true : false;
 	$simuler = (_request('simuler')) ? true : false;
 
 	// Generation du fichier
- 	$generer = charger_fonction('plugonet_generer','inc');
- 	list($erreurs, $commandes) = $generer($pluginxml, $forcer, $simuler);
+	$traitement = 'generer_paquetxml';
+ 	$generer = charger_fonction('plugonet_traiter_pluginxml','inc');
+ 	list($erreurs, $commandes) = $generer($traitement, $pluginxml, $forcer, $simuler);
 
 	// Formatage et affichage des resultats
 	// -- Message global sur la generation des fichiers : toujours ok aujourd'hui
