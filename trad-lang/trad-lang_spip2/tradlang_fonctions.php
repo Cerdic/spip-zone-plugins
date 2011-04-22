@@ -108,4 +108,17 @@ function tradlang_dir_lang(){
 	}
 	return $dir_lang;
 }
+
+/**
+ * Filtre spip pour utiliser arsort sur un array
+ * 
+ * @param array $array
+ */
+function langues_sort($array){
+	if(is_array($array)){
+		arsort($array);
+		return $array;
+	}
+	return false;
+}
 ?>

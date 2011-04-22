@@ -1,3 +1,12 @@
+#SET{langues,#ARRAY}
+<BOUCLE_langues_sort(TRADLANG){fusion lang}>
+<BOUCLE_strings_ok(TRADLANG){lang=#LANG}{statut = 'OK'}> </BOUCLE_strings_ok>
+#SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#COMPTEUR_BOUCLE}}}
+</B_strings_ok>
+#SET{langues,#GET{langues}|array_merge{#ARRAY{#LANG,#COMPTEUR_BOUCLE}}}
+<//B_strings_ok>
+</BOUCLE_langues_sort>
+#SET{langues,#GET{langues}|langues_sort}
 <B_modules>
 <table class="bilan spip liste">
 	<thead>
@@ -12,15 +21,15 @@
 	</thead>
 	<B_langues>
 	<tbody>
-	<BOUCLE_langues(TRADLANG){fusion lang}>
-	<tr class="#LANG[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" title="#LANG">
-		<td>[(#LANG|traduire_nom_langue)]</td>
+	<BOUCLE_langues(POUR){tableau #GET{langues}}>
+	<tr class="#CLE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" title="#CLE">
+		<td>[(#CLE|traduire_nom_langue)]</td>
 		<BOUCLE_modules_langue(TRADLANG_MODULES){par id_tradlang_module}>
 			#SET{full,''}
 			<BOUCLE_compte_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_mere>
 			#SET{full,#TOTAL_BOUCLE}
 			</B_compte_mere>
-			<BOUCLE_compte(TRADLANG){module}{lang=#_langues:LANG}{statut=OK}> </BOUCLE_compte>
+			<BOUCLE_compte(TRADLANG){module}{lang=#_langues:CLE}{statut=OK}> </BOUCLE_compte>
 			#SET{class,'non_traduit'}
 			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)#SET{class,traduit_full}]
 			[(#TOTAL_BOUCLE|=={#GET{full}}|non)
