@@ -29,7 +29,8 @@ function lienscontenus_affiche_droite($flux)
 	}
 
 	$exec = $flux['args']['exec'];
-  	// TODO : Ajouter les autres
+
+ 	// TODO : Ajouter les autres
 	$liste_pages_unitaires = array(
     'naviguer' => array('rubrique', 'id_rubrique'),
     'articles' => array('article', 'id_article'),

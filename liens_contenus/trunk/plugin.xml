@@ -2,7 +2,7 @@
 	<nom>Liens entre contenus</nom>
 	<auteur>Nicolas Hoizey</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.26</version>
+	<version>0.27</version>
 	<version_base>0.4</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>test</etat>

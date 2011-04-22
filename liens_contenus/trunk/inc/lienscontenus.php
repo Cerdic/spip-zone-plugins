@@ -1,7 +1,6 @@
 <?php
-function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, $contenu = false)
-{
-	spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant, 'liens_contenus');
+function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contenant, $contenu = false) {
+  spip_log('Referencer liens contenus dans '.$type_objet_contenant.' '.$id_objet_contenant, 'liens_contenus');
 
   $liens_trouves = array();
 
@@ -17,7 +16,7 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
 
     // Le contenu n'a pas été fourni, il faut le récupérer en base
     if (in_array($type_objet_contenant, array('syndic', 'forum'))) {
-        $row = sql_fetsel("*", "spip_".$type_objet_contenant, "id_".$type_objet_contenant."="._q($id_objet_contenant));
+      $row = sql_fetsel("*", "spip_".$type_objet_contenant, "id_".$type_objet_contenant."="._q($id_objet_contenant));
     } else {
       // Marche aussi pour les formulaires (type = "form")
       $row = sql_fetsel("*", "spip_".$type_objet_contenant."s", "id_".$type_objet_contenant."="._q($id_objet_contenant));
@@ -30,62 +29,62 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
     }
   }
 
-	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
-	include_spip('inc/texte');
-	$contenu = echappe_html($contenu);
+  // Echapper les <a href>, <html>...< /html>, <code>...< /code>
+  include_spip('inc/texte');
+  $contenu = echappe_html($contenu);
 
-	// Raccourcis de liens [xxx->url]
-	$regexp = ',\[([^][]*)->(>?)([^]]*)\],msS';
-	if (preg_match_all($regexp, $contenu, $matches, PREG_SET_ORDER)) {
-		foreach ($matches as $match) {
-			$lien = trim($match[3]);
-			if (preg_match(',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S', $lien, $match)) {
-				list(, $type_objet_contenu, $id_objet_contenu, $params, $ancre) = $match;
-				// article par defaut
-				if (!$type_objet_contenu) $type_objet_contenu = 'article';
-				$type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
-				if (in_array($type_objet_contenu, $liens_contenus_types)) {
-					$liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
-				}
-			}
-		}
-	}
+  // Raccourcis de liens [xxx->url]
+  $regexp = ',\[([^][]*)->(>?)([^]]*)\],msS';
+  if (preg_match_all($regexp, $contenu, $matches, PREG_SET_ORDER)) {
+    foreach ($matches as $match) {
+      $lien = trim($match[3]);
+      if (preg_match(',^(\S*?)\s*(\d+)(\?.*?)?(#[^\s]*)?$,S', $lien, $match)) {
+        list(, $type_objet_contenu, $id_objet_contenu, $params, $ancre) = $match;
+        // article par defaut
+        if (!$type_objet_contenu) $type_objet_contenu = 'article';
+        $type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
+        if (in_array($type_objet_contenu, $liens_contenus_types)) {
+          $liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
+        }
+      }
+    }
+  }
 
-	// Raccourcis d'insertion de modeles
-	$regexp = '/<([a-z_-]{3,})\s*([0-9]+)?([|][^>]*)*>/iS';
-	// La regex de inc/texte n'est pas exploitable directement
-	// $regexp = '/'._RACCOURCI_MODELE.'/iS';
-	if (preg_match_all($regexp, $contenu, $matches, PREG_SET_ORDER)) {
-		foreach ($matches as $match) {
-			list($chaine_modele ,$type_objet_contenu, $id_objet_contenu, $params) = $match;
-			$type_objet_contenu = strtolower($type_objet_contenu); // Pour tranformer les vieux <IMG...> en <img...>
-			$type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
-			$nouveau_lien = true;
-			switch ($type_objet_contenu) {
-				case 'article':
-				case 'rubrique':
-				case 'breve':
-				case 'syndic':
-				case 'auteur':
-				case 'mot':
-					// Les elements de base de SPIP ont des pseudo modeles automatiques
-					break;
-				case 'document':
-					if ($type_objet_contenant == 'article' || $type_objet_contenant == 'rubrique') {
-						$nb = sql_countsel("spip_documents_liens", "objet='".$type_objet_contenant."' AND id_document=".$id_objet_contenu." AND id_objet=".$id_objet_contenant);
-						if ($nb == 1) {
-							// Si le doc est rattache a l'article ou la rubrique courant, on ne doit pas le comptabiliser
+  // Raccourcis d'insertion de modeles
+  $regexp = '/<([a-z_-]{3,})\s*([0-9]+)?([|][^>]*)*>/iS';
+  // La regex de inc/texte n'est pas exploitable directement
+  // $regexp = '/'._RACCOURCI_MODELE.'/iS';
+  if (preg_match_all($regexp, $contenu, $matches, PREG_SET_ORDER)) {
+    foreach ($matches as $match) {
+      list($chaine_modele ,$type_objet_contenu, $id_objet_contenu, $params) = $match;
+      $type_objet_contenu = strtolower($type_objet_contenu); // Pour tranformer les vieux <IMG...> en <img...>
+      $type_objet_contenu = isset($liens_contenus_aliases[$type_objet_contenu]) ? $liens_contenus_aliases[$type_objet_contenu] : $type_objet_contenu;
+      $nouveau_lien = true;
+      switch ($type_objet_contenu) {
+        case 'article':
+        case 'rubrique':
+        case 'breve':
+        case 'syndic':
+        case 'auteur':
+        case 'mot':
+          // Les elements de base de SPIP ont des pseudo modeles automatiques
+          break;
+        case 'document':
+          if ($type_objet_contenant == 'article' || $type_objet_contenant == 'rubrique') {
+            $nb = sql_countsel("spip_documents_liens", "objet='".$type_objet_contenant."' AND id_document=".$id_objet_contenu." AND id_objet=".$id_objet_contenant);
+            if ($nb == 1) {
+              // Si le doc est rattache a l'article ou la rubrique courant, on ne doit pas le comptabiliser
               // TODO: En fait si, non ?
-							$nouveau_lien = false;
-						}
-					}
-					break;
-				case 'form':
-					// Soyons gentil avec le plugin Forms s'il est actif
-					if (defined('_DIR_PLUGIN_FORMS')) {
-						break;
-					}
-				default:
+              $nouveau_lien = false;
+            }
+          }
+          break;
+        case 'form':
+          // Soyons gentil avec le plugin Forms s'il est actif
+          if (defined('_DIR_PLUGIN_FORMS')) {
+            break;
+          }
+        default:
           // C'est a priori un modele
           $params = array_filter(explode('|', strtolower($params)));
           if ($params) {
@@ -116,29 +115,29 @@ function lienscontenus_referencer_liens($type_objet_contenant, $id_objet_contena
             // Ce n'est pas un modele connu, sans doute un de <quote>, <poesie>, <html>, <code>, <cadre>, etc.
             $nouveau_lien = false;
           }
-			}
-			if ($nouveau_lien && $type_objet_contenu != '' && $id_objet_contenu != '') {
-				$liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
-			}
-		}
-	}
-	if (count($liens_trouves) > 0) {
-		foreach ($liens_trouves as $lien) {
-			spip_log('- lien '.$type_objet_contenant.' '.$id_objet_contenant.' vers '.$lien['type'].' '.$lien['id'], 'liens_contenus');
-			include_spip('base/abstract_sql');
-			sql_insertq(
-			    "spip_liens_contenus",
+      }
+      if ($nouveau_lien && $type_objet_contenu != '' && $id_objet_contenu != '') {
+        $liens_trouves[$type_objet_contenu.' '.$id_objet_contenu] = array('type' => $type_objet_contenu, 'id' =>$id_objet_contenu);
+      }
+    }
+  }
+  if (count($liens_trouves) > 0) {
+    foreach ($liens_trouves as $lien) {
+      spip_log('- lien '.$type_objet_contenant.' '.$id_objet_contenant.' vers '.$lien['type'].' '.$lien['id'], 'liens_contenus');
+      include_spip('base/abstract_sql');
+      sql_insertq(
+          "spip_liens_contenus",
                 array(
                     "type_objet_contenant" => $type_objet_contenant,
                     "id_objet_contenant" => $id_objet_contenant,
                     "type_objet_contenu" => $lien['type'],
                     "id_objet_contenu" => $lien['id']
                 )
-			);
-		}
-	} else {
-		spip_log('- aucun lien', 'liens_contenus');
-	}
+      );
+    }
+  } else {
+    spip_log('- aucun lien', 'liens_contenus');
+  }
 }
 
 // (re)initialisation de la table des liens
@@ -146,12 +145,12 @@ function lienscontenus_initialiser()
 {
     include_spip('base/abstract_sql');
 
-	// vider la table
-	sql_delete("spip_liens_contenus");
-	spip_log('Initialisation des contenus', 'liens_contenus');
+  // vider la table
+  sql_delete("spip_liens_contenus");
+  spip_log('Initialisation des contenus', 'liens_contenus');
 
-	// TODO: decouvrir un moyen automatique en SPIP 2 de récupérer la liste des tables
-	$liste_tables = array(
+  // TODO: decouvrir un moyen automatique en SPIP 2 de récupérer la liste des tables
+  $liste_tables = array(
         'spip_articles' => 'id_article',
         'spip_rubriques' => 'id_rubrique',
         'spip_breves' => 'id_breve',
@@ -160,10 +159,10 @@ function lienscontenus_initialiser()
     );
     // parcourir les tables et les champs
     foreach ($liste_tables as $table => $col_id) {
-    	$type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
-    	if ($res = sql_select("*", $table)) {
-    		while ($row = sql_fetch($res)) {
-    			$id_objet_contenant = $row[$col_id];
+      $type_objet_contenant = ereg_replace("^spip_(.*[^s])s?$", "\\1", $table);
+      if ($res = sql_select("*", $table)) {
+        while ($row = sql_fetch($res)) {
+          $id_objet_contenant = $row[$col_id];
                 sql_insertq(
                     "spip_liens_contenus_todo",
                     array(
@@ -172,41 +171,41 @@ function lienscontenus_initialiser()
                         "date_added" => time()
                     )
                 );
-    		}
-    	}
+        }
+      }
     }
 }
 
 function lienscontenus_boite_liste($type_objet, $id_objet)
 {
-	$data = "\n";
-	$data .= debut_cadre_relief('../'._DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', true);
-	include_spip('public/assembler');
-	$contexte = array('type_objet' => $type_objet, 'id_objet' => $id_objet);
-	$data .= recuperer_fond('exec/lienscontenus_liste', $contexte);
-	$data .= fin_cadre_relief(true);
-	return $data;
+  $data = "\n";
+  $data .= debut_cadre_relief('../'._DIR_PLUGIN_LIENSCONTENUS.'/images/liens_contenus-24.gif', true);
+  include_spip('public/assembler');
+  $contexte = array('type_objet' => $type_objet, 'id_objet' => $id_objet);
+  $data .= recuperer_fond('exec/lienscontenus_liste', $contexte);
+  $data .= fin_cadre_relief(true);
+  return $data;
 }
 
 function lienscontenus_verification()
 {
-	$data = '<script language="javascript" type="text/javascript">' .
+  $data = '<script language="javascript" type="text/javascript">' .
             'var messageConfirmationDepublication="'._T('lienscontenus:confirmation_depublication').'";' .
-  	        'var messageConfirmationPublication="'._T('lienscontenus:confirmation_publication').'";' .
+            'var messageConfirmationPublication="'._T('lienscontenus:confirmation_publication').'";' .
             'var messageConfirmationSuppression="'._T('lienscontenus:confirmation_suppression').'";' .
             'var messageInformationElementContenu="'._T('lienscontenus:information_element_contenu').'";' .
-	          'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
-	          'var messageAlertePublieContenantKo="'._T('lienscontenus:alerte_publie_contenant_ko').'";' .
+            'var messageAlertePublieContenant="'._T('lienscontenus:alerte_publie_contenant').'";' .
+            'var messageAlertePublieContenantKo="'._T('lienscontenus:alerte_publie_contenant_ko').'";' .
             'var baseUrlPlugin="../'._DIR_PLUGIN_LIENSCONTENUS.'";' .
             '</script>';
-	$data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
-	return $data;
+  $data .= '<style>a.lienscontenus_oui { color: red; text-decoration: line-through; }</style>';
+  return $data;
 }
 
 function lienscontenus_verification_articles()
 {
-	$data = lienscontenus_verification();
-	$script = <<<EOS
+  $data = lienscontenus_verification();
+  $script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             var estPublie = $('ul.instituer_article.instituer > li > ul > li.publie.selected').size() == 1;
@@ -224,11 +223,11 @@ function lienscontenus_verification_articles()
               $('ul.instituer_article.instituer > li > ul > li:not(.selected) > a').each(function(){
                 this.onclick = null; // this plutot que $(this), pas tous les jours facile
                 $(this).bind('click', function(event){
-	                if (confirm(messageConfirmationDepublication)) {
-	                  // changement confirme
-	                  $(this).unbind('click');
-	                  $(this).trigger('click');
-	                } else {
+                  if (confirm(messageConfirmationDepublication)) {
+                    // changement confirme
+                    $(this).unbind('click');
+                    $(this).trigger('click');
+                  } else {
                     return false;
                   }
                 });
@@ -290,16 +289,16 @@ function lienscontenus_verification_articles()
         });
         </script>
 EOS;
-	$data .= $script;
-	return $data;
+  $data .= $script;
+  return $data;
 }
 
 function lienscontenus_verification_articles_edit()
 {
-	// TODO : Quand on met a jour le doc, comment relancer cela ?
-	// TODO : Y a t'il parfois de l'AjaxSqueeze pour la suppression de doc ?
-	$data = lienscontenus_verification();
-	$script = <<<EOS
+  // TODO : Quand on met a jour le doc, comment relancer cela ?
+  // TODO : Y a t'il parfois de l'AjaxSqueeze pour la suppression de doc ?
+  $data = lienscontenus_verification();
+  $script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on ajoute une classe specifique aux liens de suppression des docs
@@ -342,14 +341,14 @@ function lienscontenus_verification_articles_edit()
         });
         </script>
 EOS;
-	$data .= $script;
-	return $data;
+  $data .= $script;
+  return $data;
 }
 
 function lienscontenus_verification_breves_edit()
 {
-	$data = lienscontenus_verification();
-	$script = <<<EOS
+  $data = lienscontenus_verification();
+  $script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
@@ -377,14 +376,14 @@ function lienscontenus_verification_breves_edit()
                 });
                 </script>
 EOS;
-	$data .= $script;
-	return $data;
+  $data .= $script;
+  return $data;
 }
 
 function lienscontenus_verification_sites()
 {
-	$data = lienscontenus_verification();
-	$script = <<<EOS
+  $data = lienscontenus_verification();
+  $script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
@@ -412,14 +411,14 @@ function lienscontenus_verification_sites()
         });
         </script>
 EOS;
-	$data .= $script;
-	return $data;
+  $data .= $script;
+  return $data;
 }
 
 function lienscontenus_verification_auteur_infos()
 {
-	$data = lienscontenus_verification();
-	$script = <<<EOS
+  $data = lienscontenus_verification();
+  $script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
@@ -446,15 +445,15 @@ function lienscontenus_verification_auteur_infos()
         });
         </script>
 EOS;
-	$data .= $script;
-	return $data;
+  $data .= $script;
+  return $data;
 }
 
 function lienscontenus_verification_mots_tous()
 {
-	// TODO : A finir...
-	$data = lienscontenus_verification();
-	$script = <<<EOS
+  // TODO : A finir...
+  $data = lienscontenus_verification();
+  $script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             function gestionDesSuppressionsDeMots() {
@@ -510,15 +509,15 @@ function lienscontenus_verification_mots_tous()
         });
         </script>
 EOS;
-	$data .= $script;
-	return $data;
+  $data .= $script;
+  return $data;
 }
 
 function lienscontenus_verification_articles_page()
 {
-	// TODO : A finir...
-	$data = lienscontenus_verification();
-	$script = <<<EOS
+  // TODO : A finir...
+  $data = lienscontenus_verification();
+  $script = <<<EOS
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on ajoute une classe specifique
@@ -543,12 +542,12 @@ function lienscontenus_verification_articles_page()
         });
         </script>
 EOS;
-	$data .= $script;
-	return $data;
+  $data .= $script;
+  return $data;
 }
 
 function lienscontenus_verification_naviguer()
 {
-	lienscontenus_verification_articles_page();
+  lienscontenus_verification_articles_page();
 }
 ?>

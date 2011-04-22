@@ -84,46 +84,49 @@ function lienscontenus_statut($type_objet, $id_objet)
 	include_spip('base/abstract_sql');
 	if ($type_objet == 'document') {
     // TODO: gérer le statut des docs si médiathèque est installé
-    return 'publie';
+    $statut = 'publie';
+  } elseif ($type_objet == 'modele') {
+    $statut = find_in_path('modeles/'.$id_objet.'.html') ? 'publie' : 'poubelle';
   } elseif ($type_objet == 'auteur') {
     $statut = sql_getfetsel("statut", "spip_auteurs", "id_auteur="._q($id_objet));
-    if ($statut == '') {
-      return '';
-    } elseif ($statut == '5poubelle') {
-      return 'poubelle';
-    } else {
-      return 'publie';
+    if ($statut != '') {
+      if ($statut == '5poubelle') {
+        $statut = 'poubelle';
+      } else {
+        $statut = 'publie';
+      }
     }
   } elseif (in_array($type_objet, array('syndic', 'forum'))) {
-    $res = sql_select("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
+    $statut = sql_getfetsel("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
 	} else {
 		// Marche aussi pour les formulaires (type = "form")
-    $res = sql_select("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
+    $statut = sql_getfetsel("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
 	}
-	if ($res) {
-		$row = sql_fetch($res);
-		if (in_array($row['statut'], $listeStatuts)) {
-			return $row['statut'];
-		} else {
-			return '';
-		}
-	} else {
-		return '';
-	}
+  return $statut;
 }
 
 function lienscontenus_titre_contenu($type_objet, $id_objet)
 {
-  if ($type_objet == 'syndic') {
-    $titre = sql_getfetsel("nom_site", "spip_syndic", "id_syndic="._q($id_objet));
-  } elseif ($type_objet == 'forum') {
-    $titre = sql_getfetsel("titre", "spip_forum", "id_forum="._q($id_objet));
-  } elseif ($type_objet == 'auteur') {
-    $titre = sql_getfetsel("nom", "spip_auteurs", "id_auteur="._q($id_objet));
-  } else {
-    // Marche aussi pour les formulaires (type = "form")
-    $titre = sql_getfetsel("titre", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
+  switch ($type_objet) {
+  	case 'syndic':
+	    if (!$nom_site = sql_getfetsel("nom_site", "spip_syndic", "id_syndic="._q($id_objet))) {
+        $nom_site = _T('lienscontenus:inexistant');
+      }
+	    return _T('lienscontenus:type_syndic', array('nom_site' => $nom_site, 'id_objet' => $id_objet));
+	    break;
+  	case 'forum':
+	    $titre_message = sql_getfetsel("titre", "spip_forum", "id_forum="._q($id_objet));
+	    return _T('lienscontenus:type_forum', array('titre_message' => $titre_message, 'id_objet' => $id_objet));
+	    break;
+    case 'auteur':
+      $nom = sql_getfetsel("nom", "spip_auteurs", "id_auteur="._q($id_objet));
+      return _T('lienscontenus:type_auteur', array('nom' => $nom));
+  	case 'modele':
+	    return _T('lienscontenus:type_modele', array('type_objet' => $type_objet, 'id_objet' => $id_objet));
+	    break;
+  	default:
+	    // Marche aussi pour les formulaires (type = "form")
+	    return sql_getfetsel("titre", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
   }
-  return $titre;
 }
 ?>

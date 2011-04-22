@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_suppression' => 'Attention, des liens internes pointent vers ce contenu !\\n\\nSa suppression aurait des répercussions sur le fonctionnement du site.\\n\\nVoulez-vous vraiment le supprimer ?',
 
 	// I
+	'inexistant' => 'inexistant',
 	'information_element_contenu' => 'Attention, des liens internes pointent vers ce contenu !',
 
 	// L
@@ -32,7 +33,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_prepa' => 'En préparation',
 	'statut_prop' => 'Proposé',
 	'statut_publie' => 'Publié',
-	'statut_refuse' => 'Refusé'
+	'statut_refuse' => 'Refusé',
+
+  // T
+  'type_auteur' => '@nom@',
+  'type_modele' => 'Modèle "@id_objet@"',
+  'type_syndic' => 'Site "@nom_site@" (@id_objet@)'
 );
 
 ?>
