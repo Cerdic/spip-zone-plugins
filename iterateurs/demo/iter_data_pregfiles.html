@@ -1,0 +1,12 @@
+#CACHE{0}
+
+<h2>pregfiles : 10 plugin.xml parmi ceux du site</h2>
+
+<ul>
+
+<BOUCLE_xml(DATA){source pregfiles, #EVAL{_DIR_RACINE}, plugin.xml$, 10}>
+<li>[(#VAL{Y-m-d H:i:s}|date{#VALEUR|filemtime})] / #VALEUR</li>
+</BOUCLE_xml>
+
+
+</ul>
