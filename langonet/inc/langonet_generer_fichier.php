@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 	foreach($items as $k => $v) {
 		if ($initiale != strtoupper($k[0])) {
 			$initiale = strtoupper($k[0]);
-			$contenu .= "\n// $initiale\n";
+			$contenu .= "\n// $initiale";
 		}
 		if (is_string($v))
 			$contenu .= "\n\t'" . $k . "' => '" . addslashes($v) . "',";
