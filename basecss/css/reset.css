@@ -47,15 +47,16 @@ table {
 	border-spacing: 0;
 }
 
-/* Lissage des images IE */
-.ie img { -ms-interpolation-mode: bicubic; }
+/* Bicubic resizing for non-native sized IMG:
+   code.flickr.com/blog/2008/11/12/on-ui-quality-the-little-things-client-side-image-resizing/ */
+.ie7 img { -ms-interpolation-mode: bicubic; }
 
 /**
 * Print styles from HTML5 Boilerplate
 * Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
 */
 @media print {
-* { background: transparent !important; color: black !important; text-shadow: none !important; filter: none !important;
+* { background: transparent !important;  text-shadow: none !important; filter: none !important;
 -ms-filter: none !important; } /* Black prints faster: sanbeiji.com/archives/953 */
 a, a:visited { color: #444 !important; text-decoration: underline; }
 a[href]:after { content: " (" attr(href) ")"; }
