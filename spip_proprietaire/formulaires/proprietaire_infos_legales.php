@@ -64,7 +64,7 @@ function formulaires_proprietaire_infos_legales_traiter_dist($who='proprietaire'
 		);
 		$datas[$who.'_enregistrement_numero'] = '';
 	    $redirect = generer_url_ecrire('spip_proprio', 'page='.$who);
-		$messages['redirect'] = $redirect;
+//		$messages['redirect'] = $redirect;
 	}
 	if( $ok = spip_proprio_enregistrer_config($datas) ) {
 		$messages['message_ok'] = _T('spip_proprio:ok_config');
