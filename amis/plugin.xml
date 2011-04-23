@@ -8,6 +8,8 @@ _ &#169; 2008 - Licence GPL
 	<version_base>0.10</version_base>
 	<etat>stable</etat>
 	<description>Gestion des amis</description>
+	<icon>amis.png</icon>
+	<categorie>communication</categorie>
 	<lien></lien> <!-- URI de documentation -->
 	<install>base/amis_upgrade.php</install>
 	<fonctions>amis_fonctions.php</fonctions>
