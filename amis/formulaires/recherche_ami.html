@@ -1,35 +1,24 @@
-<div class='ajax'>
-<div class="formulaire formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
+<div class="ajax">
+<div class="formulaire_spip formulaire_#ENV{form}" id="formulaire_#ENV{form}#ENV{id}">
 [<p class="formulaire_message">(#ENV*{message_ok})</p>]
-[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
-[(#ENV**{editable}|?{' '})
-<form method='post' action='#ENV{action}#formulaire_#ENV{form}#ENV{id}' enctype='multipart/form-data' class='ajax'>
-
-[(#REM) declarer les hidden qui declencheront le service du formulaire 
-parametre : url d'action ]
-#ACTION_FORMULAIRE{#ENV{action}}
-
-[(#REM) les champs de saisie]
-<fieldset><legend></legend><ol>
-
-#SET{name,recherche_ami}#SET{obli,obligatoire}
-#SET{erreur,#ENV**{erreurs}|table_valeur{#GET{name}}}
-<li class="text [champ_(#GET{name})] [(#GET{obli}|sinon{facultatif})] [ (#GET{erreur}|?{'erreur'})]">
-<label for='#GET{name}' class='nocmx'>[(#VAL{amis}|concat{':label_',#GET{name}}|_T)]
-</label>
-<input type="text" name='#GET{name}' id='#GET{name}' value="#ENV*{#GET{name}}" class='text' size='30' />
-[<span class='erreur'>(#GET{erreur})</span>]
-</li>
-
-[(#REM) Piege a robots spammeurs ]
-<li class='antispam' style='display:none;'><label for="nobotnobot-#ID"><:antispam_champ_vide:></label>
-<input type="text" name="nobotnobot" id="nobotnobot-#ID" value="#ENV{nobotnobot}" size="10" />
-</li>
-</ol></fieldset>
-
-<div class='bouton'><input type="submit" name='rechercher' value="[(#VAL{amis}|concat{':label_rechercher'}|_T)]" /></div>
-</form>
+[<p class="formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}" enctype="multipart/form-data"><div>
+	[(#REM) declarer les hidden qui declencheront le service du formulaire 
+	parametre : url d'action ]
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+	    <li class="recherche_ami obligatoire[ (#ENV**{erreurs}|table_valeur{recherche_ami}|oui)erreur]">
+	    	<label for="recherche_ami"><:amis:label_recherche_ami:></label>
+	    	[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{recherche_ami})</span>]
+	    	<input type="text" class="text" name="recherche_ami" id="recherche_ami" value="#ENV**{recherche_ami}" />
+	    </li>
+	</ul>
+	[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	<!--extra-->
+	<p class="boutons"><input type="submit" name="rechercher" class="submit" value="<:amis:label_rechercher:>" /></p>
+</div></form>]
 </div>
-<div class='spacer'></div>[(#ENV{recherche_ami}|is_null|?{'',' '})
+<div class="spacer"></div>[(#ENV{recherche_ami}|is_null|?{'',' '})
 <INCLURE{fond=#ENV{_liste,liste/auteurs}}{recherche=#ENV{recherche_ami,''}}{env}{ajax}>]
 </div>
