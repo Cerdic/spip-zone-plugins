@@ -218,7 +218,7 @@ Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’infor
 	'pconfig_texte' => 'Vous pouvez ici d&eacute;finir les coordonn&eacute;es de l\'organisme @type@ ainsi que ses informations l&eacute;gales.',
 	'pconfig_texte_ajouts' => '<br />Le syst&egrave;me pr&eacute;sentera les informations qui sont pr&eacute;cis&eacute;es.<br />Notez cependant que certaines fonctionnalit&eacute;s du plugin, notamment la construction automatique d\'informations l&eacute;gales et de conditions d\'utilisation du site, n&eacute;cessitent qu\'un maximum d\'informations soient saisies.',
 	'pconfig_texte_lien_doc' => '<br /><br />Le bouton ci-dessous pr&eacute;sente le r&eacute;sultat des diff&eacute;rentes fonctionnalit&eacute;s pour v&eacute;rifications&nbsp;:',
-	'pconfig_texte_notes' => '<small>Les champs marqu&eacute;s d\'une ast&eacute;risque rouge peuvent comporter un bloc \'multi\'.<br /></small>',
+	'pconfig_texte_notes' => '<span style="color: red;">*</span><small>Les champs marqu&eacute;s d\'une ast&eacute;risque rouge peuvent comporter un bloc \'multi\'.<br /></small>',
 	'pconfig_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : ces valeurs sont valables sur l\'ensemble du site.<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
 	'pconfig_divers_legend' => 'Informations compl&eacute;mentaires',
 	'ptexte_titre_page' => 'Textes de langue propri&eacute;taire',
