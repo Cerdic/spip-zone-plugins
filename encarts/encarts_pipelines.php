@@ -24,8 +24,13 @@ function encarts_afficher_fiche_objet($flux) {
 	return $flux;
 }
 
+if (!defined('_TYPES_ENCARTS')) {
+	define('_TYPES_ENCARTS', 'encart|marge');
+}
+
 /**
  * Traiter les textes contenant des <encart> .... </encart>
+ * ou des <marge>...</marge>
  * en les remplaçant par un span...
  *
  * @param string $texte à analyser 
@@ -33,9 +38,13 @@ function encarts_afficher_fiche_objet($flux) {
 **/
 function encarts_pre_propre($texte) {
 	if (false !== strpos($texte, '<')) {
-		if (preg_match_all(',<encart>(.*?)</encart>,is', $texte, $regs, PREG_SET_ORDER)) {
+		if (preg_match_all(',<(' . _TYPES_ENCARTS . ')>(.*?)</\1>,is', $texte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $reg) {
-				$texte = str_replace($reg[0], "<span class='encart'>".$reg[1]."</span>", $texte);
+				$css = 'encart';
+				if ($reg[1] != 'encart') {
+					$css .= " " . $reg[1];
+				}
+				$texte = str_replace($reg[0], "<span class='$css'>".$reg[2]."</span>", $texte);
 			}
 		}
 	}
