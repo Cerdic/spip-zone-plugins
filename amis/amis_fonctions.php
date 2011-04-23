@@ -29,8 +29,8 @@ function critere_AUTEURS_amis_dist($idb, &$boucles, $crit){
 	\$liste = array_map('intval',array_keys(\$liste));
 	\$liste[] = 0;
 	" . $boucle->hash;
-	$boucle->select[]="id_auteur as ami";
-	$boucle->where[]= "'id_auteur IN ('.implode(',',\$liste).')'";
+	$boucle->select[]="auteurs.id_auteur as ami";
+	$boucle->where[]= "'auteurs.id_auteur IN ('.implode(',',\$liste).')'";
 }
 
 /**
