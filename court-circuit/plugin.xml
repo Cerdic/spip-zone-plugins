@@ -1,13 +1,32 @@
 <plugin>
 <nom>Court-circuit</nom>
-<icon>icon.png</icon>
-<description>Acc&eacute;s direct aux articles et reset des squelettes par d&eacute;faut pour &eacute;viter les diffusions intempestives.</description>
-<lien>http://www.spip-contrib.net/court-circuit</lien>
-<version>1.2</version>
-<etat>stable</etat>
-<auteur>[romy.tetue.net->http://romy.tetue.net] - 2011</auteur>
-<prefix>courtcircuit</prefix>
-<necessite id='SPIP' version='[2.0.0;]' />
-<utilise id="Z" />
-<categorie>outil</categorie>
+	<icon>images/courtcircuit-128.png</icon>
+	<description>Acc&eacute;s direct aux articles.</description>
+	<lien>http://www.spip-contrib.net/court-circuit</lien>
+	<version>2.0.0-dev</version>
+	<etat>dev</etat>
+	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph] - 2011</auteur>
+	<prefix>courtcircuit</prefix>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>courtcircuit_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='courtcircuit' parent='configuration'>
+		<icone>images/courtcircuit-24.png</icone>
+		<titre>courtcircuit:courtcircuit</titre>
+		<url>configurer_courtcircuit</url>
+	</bouton>
+	<bouton id='courtcircuit21' parent='bando_squelette'>
+		<icone>images/courtcircuit-16.png</icone>
+		<titre>courtcircuit:courtcircuit</titre>
+		<url>configurer_courtcircuit</url>
+	</bouton>
+	<pipeline>
+		<nom>ieconfig_metas</nom>
+		<inclure>courtcircuit_ieconfig_metas.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1.0;]' />
+	<utilise id="Z" />
+	<utilise id="compositions" />
+	<categorie>outil</categorie>
 </plugin>

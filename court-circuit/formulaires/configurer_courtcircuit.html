@@ -1,0 +1,82 @@
+<!-- presentation=non -->
+<!-- nom=courtcircuit -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+		<li class="explication"><:courtcircuit:explication_configurer:></li>
+		#SET{ordre,1}
+		<li class="editer_un_article[ (#ENV**{erreurs}|table_valeur{un_article}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_un_article:></label>
+			<p class="explication"><:courtcircuit:explication_un_article:></p>
+			<div class="choix">
+				<input type="radio" name="un_article" class="radio" id="un_article_oui" value="oui" [(#ENV{un_article,oui}|=={oui}|oui) checked="checked"] />
+				<label for='un_article_oui'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="un_article" class="radio" id="un_article_non" value="non" [(#ENV{un_article,oui}|=={non}|oui) checked="checked"] />
+				<label for='un_article_non'><:item_non:></label>
+			</div>
+			#SET{ordre,#GET{ordre}|plus{1}}
+		</li>
+		[(#PLUGIN{article_accueil}|oui)
+		<li class="editer_article_accueil[ (#ENV**{erreurs}|table_valeur{article_accueil}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_article_accueil:></label>
+			<p class="explication"><:courtcircuit:explication_article_accueil:></p>
+			<div class="choix">
+				<input type="radio" name="article_accueil" class="radio" id="article_accueil_oui" value="oui" [(#ENV{article_accueil,oui}|=={oui}|oui) checked="checked"] />
+				<label for='article_accueil_oui'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="article_accueil" class="radio" id="article_accueil_non" value="non" [(#ENV{article_accueil,oui}|=={non}|oui) checked="checked"] />
+				<label for='article_accueil_non'><:item_non:></label>
+			</div>
+			#SET{ordre,#GET{ordre}|plus{1}}
+		</li>]
+		<li class="editer_rang_un[ (#ENV**{erreurs}|table_valeur{rang_un}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_rang_un:></label>
+			<p class="explication"><:courtcircuit:explication_rang_un:></p>
+			<div class="choix">
+				<input type="radio" name="rang_un" class="radio" id="rang_un_oui" value="oui" [(#ENV{rang_un,oui}|=={oui}|oui) checked="checked"] />
+				<label for='rang_un_oui'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="rang_un" class="radio" id="rang_un_non" value="non" [(#ENV{rang_un,oui}|=={non}|oui) checked="checked"] />
+				<label for='rang_un_non'><:item_non:></label>
+			</div>
+			#SET{ordre,#GET{ordre}|plus{1}}
+		</li>
+		<li class="editer_plus_recent[ (#ENV**{erreurs}|table_valeur{plus_recent}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_plus_recent:></label>
+			<p class="explication"><:courtcircuit:explication_plus_recent:></p>
+			<div class="choix">
+				<input type="radio" name="plus_recent" class="radio" id="plus_recent_oui" value="oui" [(#ENV{plus_recent,oui}|=={oui}|oui) checked="checked"] />
+				<label for='plus_recent_oui'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="plus_recent" class="radio" id="plus_recent_non" value="non" [(#ENV{plus_recent,oui}|=={non}|oui) checked="checked"] />
+				<label for='plus_recent_non'><:item_non:></label>
+			</div>
+			#SET{ordre,#GET{ordre}|plus{1}}
+		</li>
+		<li class="editer_plus_recent_branche[ (#ENV**{erreurs}|table_valeur{plus_recent_branche}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_plus_recent_branche:></label>
+			<p class="explication"><:courtcircuit:explication_plus_recent_branche:></p>
+			<div class="choix">
+				<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_oui" value="oui" [(#ENV{plus_recent_branche,oui}|=={oui}|oui) checked="checked"] />
+				<label for='plus_recent_branche_oui'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_non" value="non" [(#ENV{plus_recent_branche,oui}|=={non}|oui) checked="checked"] />
+				<label for='plus_recent_branche_non'><:item_non:></label>
+			</div>
+		</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+		</p>
+	</div></form>
+</div>
