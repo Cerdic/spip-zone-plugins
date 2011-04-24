@@ -16,11 +16,11 @@
 		</h1>
 	</div>
 
-	[(#SET{redirect,#ENV{redirect,#ENV{id_contact}
+	[(#SET{redirect,#ENV{retour,#ENV{id_contact}
 		|generer_url_entite{contact}
 		|sinon{#URL_ECRIRE{contact}}}})]
 	<div class="">
-		#FORMULAIRE_EDITER_CONTACT{#ENV{id_contact, oui},'',#GET{redirect}}
+		#FORMULAIRE_EDITER_CONTACT{#ENV{id_contact, oui},#ENV{id_organisation},#GET{redirect}}
 	</div>
 </div>
 

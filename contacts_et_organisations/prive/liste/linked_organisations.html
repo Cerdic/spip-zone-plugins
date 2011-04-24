@@ -27,13 +27,12 @@
 			[(#ENV{court}|non)
 			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 			]
-			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
+			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_organisation:>})],
 					[(#URL_ACTION_AUTEUR{delier_contact,[(#ID_CONTACT)/#ID_ORGANISATION],[(#ENV{retour,#SELF})]})],
-					ajax,<:contacts:confirmer_delier_organisation:>})],
-				#ID_AUTEUR
-			})]</td>
+					ajax,<:contacts:confirmer_delier_organisation:>})]
+			]</td>
 		</tr>
 		</BOUCLE_liaisons>
 	</BOUCLE_organisations>

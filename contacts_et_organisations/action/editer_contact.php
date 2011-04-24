@@ -17,6 +17,11 @@ function action_editer_contact_dist($arg=null) {
 	// si id_contact n'est pas un nombre, c'est une creation
 	if (!$id_contact = intval($arg)) {
 		$id_contact = insert_contact();
+		// si parent d'organisation transmis, on le sauve
+		if ($id_organisation = intval(_request('id_parent'))) {
+			$lier_contact = charger_fonction('lier_contact', 'action');
+			$lier_contact("$id_contact/$id_organisation");
+		}
 	}
 
 	// Enregistre l'envoi dans la BD

@@ -7,6 +7,10 @@
 		<form method='post' action='[(#ENV{action})]'><div>
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<input type='hidden' name='id_contact' value='#ENV{id_contact}' />
+			[(#REM) sur la creation, on passe l'id_parent (id_organisation) si donnee ]
+			[(#ENV{id_contact}|=={oui}|oui)
+				[<input type='hidden' name='id_parent' value='(#ENV{id_parent})' />]
+			]
 			<ul>
 			[(#SAISIE{input, civilite,
 				label=<:contacts:label_civilite:>})]

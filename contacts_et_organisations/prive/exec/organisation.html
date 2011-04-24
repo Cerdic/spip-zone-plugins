@@ -37,10 +37,10 @@
 
 </div>
 
-	<INCLURE{fond=prive/liste/organisations,
-		id_parent=#ID_ORGANISATION,
-		titre=<:contacts:info_organisations_filles:>,
-		ajax}>
+<INCLURE{fond=prive/liste/organisations,
+	id_parent=#ID_ORGANISATION,
+	titre=<:contacts:info_organisations_filles:>,
+	ajax}>
 
 [(#AUTORISER{creer, organisation}|oui)
 	[(#URL_ECRIRE{organisation_edit}
@@ -50,12 +50,25 @@
 		|icone{<:contacts:organisation_creer_fille:>,#CHEMIN{images/organisation-24.png},right,creer.gif})]
 ]
 <br class='nettoyeur' />
-		
-	<INCLURE{fond=prive/liste/linked_contacts,id_organisation=#ID_ORGANISATION,ajax}>
-					
-	#INCLURE{fond=prive/contenu/portfolio_document,objet=organisation,id_objet=#ID_ORGANISATION}
+	
+<INCLURE{fond=prive/liste/linked_contacts,
+	id_organisation=#ID_ORGANISATION,
+	titre=<:contacts:info_contacts_organisation:>,
+	ajax}>
+	
+[(#AUTORISER{creer, contact}|oui)
+	[(#URL_ECRIRE{contact_edit}
+		|parametre_url{new,oui}
+		|parametre_url{id_organisation,#ID_ORGANISATION}
+		|parametre_url{retour,[(#ENV{retour,#SELF})]}
+		|icone{<:contacts:contact_creer:>,#CHEMIN{images/contact-24.png},right,creer.gif})]
+]
+<br class='nettoyeur' />
+				
+#INCLURE{fond=prive/contenu/portfolio_document,objet=organisation,id_objet=#ID_ORGANISATION}
 
-	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
+
 
 
 <div class='plus'>

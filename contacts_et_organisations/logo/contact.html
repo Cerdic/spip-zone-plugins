@@ -1,14 +1,14 @@
-<BOUCLE_logo_contact(CONTACTS contacts_liens){id_contact}>
-<BOUCLE_si_auteur(CONDITION){si (#OBJET|=={auteur})}>
+<BOUCLE_logo_contact(CONTACTS){id_contact}>
+<BOUCLE_liens(contacts_liens){id_contact}{objet=auteur}>
 <BOUCLE_auteur(AUTEURS){id_contact}>
 	[(#LOGO_AUTEUR
+		|sinon{#_logo_contact:LOGO_CONTACT}
 		|sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}
 		|image_reduire{20,26})]
-
 </BOUCLE_auteur>
-</BOUCLE_si_auteur>
+</BOUCLE_liens>
 	[(#LOGO_CONTACT
 		|sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}
 		|image_reduire{20,26})]
-<//B_si_auteur>
+<//B_liens>
 </BOUCLE_logo_contact>

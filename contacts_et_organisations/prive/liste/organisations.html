@@ -26,13 +26,12 @@
 			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR|sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
             <td class='nb_contacts'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">[(#MODELE{nb_contacts}{id_organisation})]</a></td>
-			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
+			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_organisation:>})],
 					[(#URL_ACTION_AUTEUR{supprimer_contact,[organisation/(#ID_ORGANISATION)],[(#ENV{retour,#SELF})]})],
-					ajax,<:contacts:confirmer_supprimer_organisation:>})],
-				#ID_AUTEUR
-			})]</td>
+					ajax,<:contacts:confirmer_supprimer_organisation:>})]
+			]</td>
 		</tr>
 	</BOUCLE_liste_orga>
 	</tbody>
