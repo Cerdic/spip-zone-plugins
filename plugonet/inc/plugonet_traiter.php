@@ -220,6 +220,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
+		$commentaire = plugin2balise_commentaire($D['description'], $D['prefix']);
 	
 		$auteur = plugin2balise_copy($D['auteur'], 'auteur');
 		$licence = plugin2balise_copy($D['licence'], 'licence');
@@ -230,7 +231,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$attributs =
 			($compatible ? " compatible=\"$compatible\"" : '');
 		// raz des balises non utilisees
-		$nom = $auteur = $licence = $traduire = '';
+		$nom = $commentaire = $auteur = $licence = $traduire = '';
 	}
 
 	// Toutes les balises techniques sont autorisees dans paquet et spip
@@ -250,7 +251,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	
 	$paquet = 
 		"<$balise$attributs" . ($balise == 'paquet' ? "\n>" : ">") .
-		"\t$nom$auteur$licence$traduire$pipeline$necessite$utilise$bouton$onglet$chemin$balises_spip\n" .
+		"\t$nom$commentaire$auteur$licence$traduire$pipeline$necessite$utilise$bouton$onglet$chemin$balises_spip\n" .
 		"</$balise>\n";
 	
 	return array($paquet, $commandes);
@@ -261,6 +262,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 //
 // - attribut documentation
 // - balise nom
+// - slogan extrait de la description en commentaire (langue française)
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
 // et normaliser l'esperluete pour eviter l'erreur d'entite indefinie
@@ -277,6 +279,14 @@ function plugin2balise_lien($url, $nom='lien', $sep="\n\t") {
 function plugin2balise_nom($texte) {
 	$t = traiter_multi($texte);
 	$res = ($t['fr']) ? "\n\t<nom>" . $t['fr'] . "</nom>" : '';
+
+	return $res ? "\n$res" : '';
+}
+
+// Extrait la tradution francaise uniquement
+function plugin2balise_commentaire($description, $prefixe) {
+	$langs = extraire_descriptions($description, $prefixe);
+	$res = "\t<!-- ". $langs['fr'][strtolower($prefixe) . '_slogan'] . " -->";
 
 	return $res ? "\n$res" : '';
 }
@@ -501,23 +511,14 @@ function plugin2balise_implicite($D, $balise, $nom) {
 // Passer les lettres accentuees en entites XML
 function plugin2balise_description($description, $prefixe, $dir) {
 	include_spip('inc/langonet_generer_fichier');
-	include_spip('inc/langonet_utils');
 
-	$files = $langs = array();
-	foreach (traiter_multi($description) as $lang => $_descr) {
-		if (!$lang)
-			$lang = 'fr';
-		$langs[$lang][strtolower($prefixe) . '_description'] = trim($_descr);
-		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $_descr, $matches))
-			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim($matches[1]);
-		else
-			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim(couper($_descr, 150, ''));
-	}
+	$langs = extraire_descriptions($description, $prefixe);
 
 	$dirl = $dir . '/lang';
 	if (!is_dir($dirl)) 
 		mkdir($dirl);
 	$dirl .= '/';
+	$files = array();
 	foreach($langs as $lang => $couples) {
 		$module = "paquet-" . strtolower($prefixe);
 		$t = "\n// Fichier produit par PlugOnet";
@@ -592,6 +593,7 @@ function plugin2balise_migration($commandes, $plugin_xml) {
 // --------------------- FONCTIONS UTILITAIRES -----------------------------------
 //
 // - extraction des multi d'une balise
+// - extraction des tableaux description et slogan a partir de la balise description
 // - extraction des bornes d'un intervalle de compatibilite
 // - formatage d'un attribut de balise
 
@@ -609,6 +611,21 @@ function traiter_multi($texte)
 		}
 	}
 	return $trads;
+}
+
+function extraire_descriptions($description, $prefixe) {
+	$langs = array();
+	foreach (traiter_multi($description) as $lang => $_descr) {
+		if (!$lang)
+			$lang = 'fr';
+		$langs[$lang][strtolower($prefixe) . '_description'] = trim($_descr);
+		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $_descr, $matches))
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim($matches[1]);
+		else
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim(couper($_descr, 150, ''));
+	}
+	
+	return $langs;
 }
 
 function extraire_bornes($intervalle) {
