@@ -26,6 +26,7 @@
 		<td>[(#CLE|traduire_nom_langue)]</td>
 		<BOUCLE_modules_langue(TRADLANG_MODULES){par id_tradlang_module}>
 			#SET{full,''}
+			#SET{langue_mere,#LANG_MERE}
 			<BOUCLE_compte_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_mere>
 			#SET{full,#TOTAL_BOUCLE}
 			</B_compte_mere>
@@ -34,10 +35,10 @@
 			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)#SET{class,traduit_full}]
 			[(#TOTAL_BOUCLE|=={#GET{full}}|non)
 			[(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{60}}|oui)#SET{class,traduit}]]
-			[(#LANG|!={#_modules_langue:LANG_MERE}|oui)<td class="#GET{class}"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#LANG})]">#TOTAL_BOUCLE</a></td>]
-			[(#LANG|=={#_modules_langue:LANG_MERE}|oui)<td class="[(#GET{class})] lang_mere">#TOTAL_BOUCLE</td>]
+			[(#_langues:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#_langues:CLE})]">#TOTAL_BOUCLE</a></td>]
+			[(#_langues:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#TOTAL_BOUCLE</td>]
 			</B_compte>
-			<td class="non_traduit"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#LANG})]"> - </a></td>
+			<td class="non_traduit"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#_langues:CLE})]"> - </a></td>
 			<//B_compte>
 		</BOUCLE_modules_langue>
 	</tr>
