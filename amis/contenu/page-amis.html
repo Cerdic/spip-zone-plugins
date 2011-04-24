@@ -1,0 +1,27 @@
+<BOUCLE_contenu_auteur(AUTEURS){id_auteur}>
+    
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><span><:amis:titre_amis:></span>[<span class="sep"> &gt; </span><strong class="on">(#NOM|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+	<div class="vcard">[(#REM) microformat vcard]
+	<div class="cartouche">
+		[(#LOGO_AUTEUR||image_reduire{200,200})]
+		<h1 class="h1 fn">#NOM</h1>
+	</div>
+	</div>[(#REM) / vcard]
+
+	[(#REM) Amis de l'auteur ]
+	<h2 class="h2"><:amis:titre_amis_auteur{nom=#NOM}:></h2>
+	<INCLURE{fond=listes/amis,id_auteur,env,ajax}>
+	
+	[(#SESSION{id_auteur}|=={#ID_AUTEUR}|oui)
+	[(#REM) invitations de l'auteur ]
+	<INCLURE{fond=listes/amis_invitations,id_auteur,env,ajax}>
+		
+	[(#REM) sollicitations de l'auteur ]
+	<INCLURE{fond=listes/amis_sollicitations,id_auteur,env,ajax}>]
+
+</div>
+
+</BOUCLE_contenu_auteur>

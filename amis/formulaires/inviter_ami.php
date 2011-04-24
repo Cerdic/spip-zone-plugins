@@ -59,14 +59,15 @@ function formulaires_inviter_ami_traiter_dist(){
 		$qui = $GLOBALS['visiteur_session']['id_auteur'];
 		$profil_decrire = charger_fonction('profil_decrire','inc');
 		$row = $profil_decrire($qui,true);
+		$row['nom_site']=$GLOBALS['meta']['nom_site'];
 		$row['url_site']=$GLOBALS['meta']['adresse_site'];
-		$texte = _T('inviter_ami:mail_rejoignez_message',$row);
+		$texte = _T('amis:mail_rejoignez_message',$row);
 		if ($m = _request('message'))
 			$texte = trim($m) . "\n----\n\n$texte";
-		$subject = _T('inviter_ami:mail_rejoignez_sujet',$row);
+		$subject = _T('amis:mail_rejoignez_sujet',$row);
 		
 		$envoyer_mail($e,$subject,$texte,''/*$GLOBALS['meta']['email_webmestre']*/,"Reply-To: ".$row['email']."\n");
-		$message = _T('inviter_ami:votre_ami_a_ete_invite',array('email'=>$e));
+		$message = _T('amis:votre_ami_a_ete_invite',array('email'=>$e));
 		
 		// on vide la saisie pour le tour suivant
 		set_request('email',NULL);

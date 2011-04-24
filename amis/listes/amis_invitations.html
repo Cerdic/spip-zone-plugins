@@ -1,7 +1,7 @@
 <B_amis2>
-<h2><:amis:invitations:></h2>
+<h2 class="h2"><:amis:invitations:></h2>
 [<p class='pagination'>(#PAGINATION)</p>]
-<ul class='liste_items'>
+<ul class='liste-items'>
 <BOUCLE_amis2(AMIS){id_auteur=#ENV{id_auteur}}{statut=prop}{pagination 5}>
 <li class='item'>#MODELE{auteur_desc,lien=1,id_auteur=#ID_AMI,qui=#ID_AUTEUR}</li>
 </BOUCLE_amis2></ul></B_amis2>

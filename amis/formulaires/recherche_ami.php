@@ -30,10 +30,8 @@ function formulaires_recherche_ami_charger_dist(){
  */
 function formulaires_recherche_ami_traiter_dist(){
 	
-	$editable = false;
-	if (test_espace_prive()) {
-		$editable = true;
-	}
+	$editable = true;
+
 	return array($editable,'');
 }
 

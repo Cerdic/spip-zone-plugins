@@ -1,0 +1,16 @@
+<BOUCLE_auteur(AUTEURS){id_auteur}>
+<div class='auteur_desc'>
+	<div class='logo'>[(#LOGO_AUTEUR|image_passe_partout{40,40}|image_recadre{40,40,center}|inserer_attribut{'alt',[(#NOM|attribut_html)]})]</div>
+	[(#ENV{qui,0}|amis_peut_inviter{#ID_AUTEUR}|oui)<div class='actions'>
+		<a href='#URL_ACTION_AUTEUR{ajouterami,#ID_AUTEUR,#SELF}' title='<:amis:ajouter_a_mes_amis|attribut_html:>'>
+			<img src='#CHEMIN{images/ajouter_ami.png}' width='32' height='32' alt='<:amis:ajouter_a_mes_amis|attribut_html:>' />
+		</a>
+	</div>]
+	<h1>[(#ENV{lien,''}|oui)<a href='#URL_AUTEUR{#ID_AUTEUR}'>][ <span class='nom'>(#NOM)</span>][</a>(#ENV{lien,''}|oui)]</h1>
+	<div class='stats'>
+		<BOUCLE_amis(AUTEURS){tout}{amis #ID_AUTEUR}></BOUCLE_amis>[<a href='[(#URL_PAGE{amis,id_auteur=#ID_AUTEUR})]'>(#TOTAL_BOUCLE|oui)
+		[(#TOTAL_BOUCLE|singulier_ou_pluriel{<:amis:nb_amis_un:>,<:amis:nb_amis:>})]
+		</a>]<//B_amis>
+	</div>
+</div>
+</BOUCLE_auteur>

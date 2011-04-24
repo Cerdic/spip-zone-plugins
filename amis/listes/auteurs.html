@@ -1,7 +1,7 @@
 <B_auteurs>
 [<p class='pagination'>(#PAGINATION)</p>]
-<ul class='liste_items'>
-<BOUCLE_auteurs(AUTEURS spip_profils){recherche?}{tout}{par nom}{profils.id_auteur>0}{pagination 5}>[
+<ul class='liste-items'>
+<BOUCLE_auteurs(AUTEURS){recherche?}{tout}{par nom}{pagination 5}>[
 <li class='item'>(#MODELE{auteur_desc,lien=1,id_auteur=#AMI,qui=#SESSION{id_auteur}})</li>]</BOUCLE_auteurs></ul></B_auteurs>
 [(#ENV{recherche}|?{' '})
 	<p class='resume'> <:local:aucun_resultat:> [<:local:pour:> <span class='recherche_quoi'>&#171;&nbsp;(#ENV{recherche})&nbsp;&#187;</span>]</p>

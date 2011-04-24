@@ -19,6 +19,6 @@
 	<p class="boutons"><input type="submit" name="rechercher" class="submit" value="<:amis:label_rechercher:>" /></p>
 </div></form>]
 </div>
-<div class="spacer"></div>[(#ENV{recherche_ami}|is_null|?{'',' '})
-<INCLURE{fond=#ENV{_liste,liste/auteurs}}{recherche=#ENV{recherche_ami,''}}{env}{ajax}>]
+<div class="spacer"></div>[(#ENV{recherche_ami}|is_null|non)
+<INCLURE{fond=#ENV{_liste,listes/auteurs},recherche=#ENV{recherche_ami,''},env,ajax}>]
 </div>

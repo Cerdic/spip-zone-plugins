@@ -3,7 +3,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'ajouter_a_mes_amis' => 'ajouter &agrave; mes amis',
+'ajouter_a_mes_amis' => 'ajouter à mes amis',
 
 'des_invitations_amis' => '@nb@ invitations d\'ami',
 
@@ -18,16 +18,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_recherche_ami' => 'Rechercher',
 'label_rechercher' => 'Rechercher',
 
-'mail_rejoignez_sujet' => '@prenom@ @nom@ vous invite sur XXX',
-'mail_rejoignez_message' => 'Inscrivez vous vite sur XXX (@url_site@) et rejoignez @prenom@ @nom@ dans la communaut&eacute; YYY',
+'mail_rejoignez_sujet' => '@nom@ vous invite sur @nom_site@',
+'mail_rejoignez_message' => 'Inscrivez vous vite sur @nom_site@ (@url_site@) et rejoignez @nom@ dans la communauté des contributeurs.',
+
+'nb_amis_un' => 'un ami',
+'nb_amis' => '@nb@ amis',
 
 'rechercher_ami' => 'Rechercher un ami',
 
 'sollicitations' => 'Sollicitations',
 
+'titre_amis' => 'Amis',
+'titre_amis_auteur' => 'Amis de @nom@',
+
 'une_invitation_amis' => '1 invitation d\'ami',
 
-'votre_ami_a_ete_invite' => '@email@ a &eacute;t&eacute; invit&eacute; &agrave; rejoindre XXX !'
+'votre_ami_a_ete_invite' => 'Votre demande a été envoyée à @email@'
 
 );
 ?>
