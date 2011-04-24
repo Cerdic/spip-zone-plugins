@@ -7,9 +7,7 @@
 function plugonet_affiche_gauche($flux) {
 
 	$exec = $flux["args"]["exec"];
-	if ($exec == "plugonet_verifier") {
-	}
-	if ($exec == "plugonet_generer") {
+	if ($exec == "plugonet_aider") {
 	}
 
 	return $flux;

@@ -12,7 +12,7 @@ function formulaires_plugonet_generer_verifier() {
 	$obligatoires = array('xml');
 	foreach ($obligatoires as $_obligatoire){
 		if(!_request($_obligatoire)){
-			$erreurs[$_obligatoire] = _T('langonet:message_nok_champ_obligatoire');
+			$erreurs[$_obligatoire] = _T('info_obligatoire');
 		}
 	}
 	return $erreurs;

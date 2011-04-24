@@ -128,7 +128,6 @@ function formater_bloc($classe, $texte, $titre, $nb) {
 
 /**
  * Gestion du singulier et du pluriel pour une chaine de langue
- * Prend aussi en compte les langues supportant le duel
  *
  * @param int				$nb
  * @param string			$chaine_un
@@ -138,12 +137,11 @@ function formater_bloc($classe, $texte, $titre, $nb) {
 
 // $nb					=> le compteur !
 // $chaine_un			=> item de langue pour le singulier (format php)
-// $extras				=> parametres additionnels valables pour le singulier et le pluriel
+// $options				=> parametres additionnels valables pour le singulier et le pluriel
 //						   la cle 'nb' n'est pas consideree comme un parametre mais comme un 
 //						   renommage de parametre valeur par defaut fixe a @nb@
 //						   Si on veut juste renommer 'nb' on peut passer la chaine directe
 function un_ou_plusieurs($nb, $chaine_un, $options=array()) {
-	static $spip_lang_duel = array('ar');
 	global $spip_lang;
 
 	if (!$nb=intval($nb)) 
@@ -162,19 +160,6 @@ function un_ou_plusieurs($nb, $chaine_un, $options=array()) {
 	}
 	else if ($options)
 		$params = array($options => $nb);
-
-	// Traitement des langues qui supportent le duel : on verifie que la chaine existe
-	$texte = '';
-	if (in_array($spip_lang, $spip_lang_duel) AND ($nb == 2)) {
-		$item = $chaine_un . '_duel';
-		$texte = _T($item, $params);
-		// On verifie que l'item duel existe bien et que le texte retourne est donc le bon
-		// Sinon on essayera d'utiliser l'item pluriel comme pour les autres langues
-		// -- Le test n'est pas terrible mais c'est la seule solution aujourd'hui !!!
-		$item_non_trouve = str_replace('_', ' ', (($n = strpos($item,':')) === false ? $item : substr($item, $n+1)));
-		if (!$texte OR ($texte == $item_non_trouve))
-			$texte = '';
-	}
 	
 	// Traitement des autres cas incluant aussi l'absence de chaine duel pour une langue le supportant
 	if (!$texte)

@@ -19,74 +19,82 @@ function inc_plugonet_traiter_pluginxml($traitement, $files, $forcer_paquetxml=f
 	$valider_xml = charger_fonction('valider', 'xml');
 	$informer_xml = charger_fonction('infos_plugin', 'plugins', true);
 	$informer_xml = ($informer_xml)	? $informer_xml : charger_fonction('get_infos', 'plugins');
+	
+	// Suivant le traitement les fichiers traites sont plugin.xml ou paquet.xml
+	// On definit donc la DTD associee
+	$dtd = ($traitement == 'validation_paquetxml') ? 'paquet' : 'plugin';
 
 	$erreurs = array();
 	$commandes = array();
 	foreach ($files  as $nom)  {
 		if (lire_fichier($nom, $contenu)) {
-			$erreurs[$nom]['lecture_pluginxml'] = false;
-			// Validation formelle du fichier plugin.xml (avertissements en generation, erreurs sinon)
-			$resultats = $valider_xml($contenu, false, false, 'plugin.dtd');
-			$erreurs[$nom]['validation_pluginxml'] = is_array($resultats) ? $resultats[1] : $resultats->err; //2.1 ou 2.2
-
-			// Recherche de toutes les balises plugin contenues dans le fichier plugin.xml et 
-			// extraction de leurs infos
-			$regexp = '#<plugin[^>]*>(.*)</plugin>#Uims';
-			if ($nb_balises = preg_match_all($regexp, $contenu, $matches)) {
-				$plugins = array();
-				// Pour chacune des occurences de la balise on extrait les infos
-				$erreurs[$nom]['information_pluginxml'] = false;
-				foreach ($matches[0] as $_balise_plugin) {
-					// Extraction des informations du plugin suivant le standard SPIP
-					// -- si une balise est illisible on sort de la boucle et on retourne 
-					//    l'erreur sans plus de traitement
-					if (!$infos = $informer_xml($_balise_plugin)) {
-						$erreurs[$nom]['information_pluginxml'] = true;
-						break;
-					}
-					$plugins[] = $infos;
-				}
-			}
-			else
-				$erreurs[$nom]['information_pluginxml'] = true;
-
-			if (($traitement == 'generation_paquetxml') 
-			AND !$erreurs[$nom]['information_pluginxml']) {
-				// Puisqu'on sait extraire les infos du plugin.xml, .on construit le contenu 
-				// du fichier paquet.xml a partir de ces infos
-				list($paquet_xml, $commandes[$nom], $prefixe, $description) = plugin2paquet($plugins);
-				// On valide le contenu obtenu avec la nouvelle DTD paquet
-				$resultats = $valider_xml($paquet_xml, false, false, 'paquet.dtd');
-				$erreurs[$nom]['validation_paquetxml'] = is_array($resultats) ? $resultats[1] : $resultats->err;
-				
-				// Si aucune erreur de validation de paquet.xml, on peut ecrire les fichiers de sortie :
-				// -- paquet.xml dans le repertoire du plugin
-				// -- les ${prefixe}-paquet_${langue}.php pour chaque langue trouvee dans le 
-				//    repertoire lang/ du plugin
-				// -- le fichier des commandes svn
-				if (!$erreurs[$nom]['validation_paquetxml'] OR $forcer_paquetxml ) {
-					// Determination du repertoire en fonction du mode choisi
-					if ($simuler) {
-						$dirs = explode('/', dirname($nom));
-						$dir = sous_repertoire(_DIR_TMP, "plugonet");
-						foreach ($dirs as $_dir) {
-							if ($_dir !== '..' AND $_dir !== 'plugins' AND $_dir !== 'auto') 
-								$dir = sous_repertoire($dir, $_dir);
+			$erreurs[$nom]['lecture_' . $dtd . 'xml'] = false;
+			// Validation formelle du fichier plugin.xml ou paquet.xml suivant le traitement
+			$resultats = $valider_xml($contenu, false, false, $dtd . '.dtd');
+			$erreurs[$nom]['validation_' . $dtd . 'xml'] = is_array($resultats) ? $resultats[1] : $resultats->err; //2.1 ou 2.2
+			
+			// Si le traitement en cours est la validation d'un paquet.xml, on a termine ici
+			// Sinon on continue
+			if ($traitement != 'validation_paquetxml') {
+				// Recherche de toutes les balises plugin contenues dans le fichier plugin.xml et 
+				// extraction de leurs infos
+				$regexp = '#<plugin[^>]*>(.*)</plugin>#Uims';
+				if ($nb_balises = preg_match_all($regexp, $contenu, $matches)) {
+					$plugins = array();
+					// Pour chacune des occurences de la balise on extrait les infos
+					$erreurs[$nom]['information_pluginxml'] = false;
+					foreach ($matches[0] as $_balise_plugin) {
+						// Extraction des informations du plugin suivant le standard SPIP
+						// -- si une balise est illisible on sort de la boucle et on retourne 
+						//    l'erreur sans plus de traitement
+						if (!$infos = $informer_xml($_balise_plugin)) {
+							$erreurs[$nom]['information_pluginxml'] = true;
+							break;
 						}
+						$plugins[] = $infos;
 					}
-					else
-						$dir = dirname($nom);
-					if ($modules = plugin2balise_description($description, $prefixe, $dir))
-						$commandes[$nom]['traduction'] = "svn add " . join(' ', $modules);
-					if (ecrire_fichier($dir . '/paquet.xml', $paquet_xml))
-						$commandes[$nom]['paquet'] = "svn add paquet.xml";
-					$sh = plugin2balise_migration($commandes[$nom], $nom);
-					ecrire_fichier($dir . "/paquet-migration.sh", $sh);
+				}
+				else
+					$erreurs[$nom]['information_pluginxml'] = true;
+	
+				if (($traitement == 'generation_paquetxml') 
+				AND !$erreurs[$nom]['information_pluginxml']) {
+					// Puisqu'on sait extraire les infos du plugin.xml, .on construit le contenu 
+					// du fichier paquet.xml a partir de ces infos
+					list($paquet_xml, $commandes[$nom], $prefixe, $description) = plugin2paquet($plugins);
+					// On valide le contenu obtenu avec la nouvelle DTD paquet
+					$resultats = $valider_xml($paquet_xml, false, false, 'paquet.dtd');
+					$erreurs[$nom]['validation_paquetxml'] = is_array($resultats) ? $resultats[1] : $resultats->err;
+					
+					// Si aucune erreur de validation de paquet.xml, on peut ecrire les fichiers de sortie :
+					// -- paquet.xml dans le repertoire du plugin
+					// -- les ${prefixe}-paquet_${langue}.php pour chaque langue trouvee dans le 
+					//    repertoire lang/ du plugin
+					// -- le fichier des commandes svn
+					if (!$erreurs[$nom]['validation_paquetxml'] OR $forcer_paquetxml ) {
+						// Determination du repertoire en fonction du mode choisi
+						if ($simuler) {
+							$dirs = explode('/', dirname($nom));
+							$dir = sous_repertoire(_DIR_TMP, "plugonet");
+							foreach ($dirs as $_dir) {
+								if ($_dir !== '..' AND $_dir !== 'plugins' AND $_dir !== 'auto') 
+									$dir = sous_repertoire($dir, $_dir);
+							}
+						}
+						else
+							$dir = dirname($nom);
+						if ($modules = plugin2balise_description($description, $prefixe, $dir))
+							$commandes[$nom]['traduction'] = "svn add " . join(' ', $modules);
+						if (ecrire_fichier($dir . '/paquet.xml', $paquet_xml))
+							$commandes[$nom]['paquet'] = "svn add paquet.xml";
+						$sh = plugin2balise_migration($commandes[$nom], $nom);
+						ecrire_fichier($dir . "/paquet-migration.sh", $sh);
+					}
 				}
 			}
 		}
 		else
-			$erreurs[$nom]['lecture_pluginxml'] = true;
+			$erreurs[$nom]['lecture_' . $dtd . 'xml'] = true;
 	}
 
 	return array($erreurs, $commandes);

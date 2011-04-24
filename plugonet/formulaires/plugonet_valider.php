@@ -1,13 +1,13 @@
 <?php
 
-function formulaires_plugonet_verifier_charger(){
+function formulaires_plugonet_valider_charger(){
 	if (!_request('un_xml'))
 		return 	array();
 	else 
-		return formulaires_plugonet_verifier_traiter();
+		return formulaires_plugonet_valider_traiter();
 }
 
-function formulaires_plugonet_verifier_verifier(){
+function formulaires_plugonet_valider_verifier(){
 	$erreurs = array();
 	$obligatoires = array('xml');
 	foreach($obligatoires as $_obligatoire){
@@ -18,15 +18,15 @@ function formulaires_plugonet_verifier_verifier(){
 	return $erreurs;
 }
 
-function formulaires_plugonet_verifier_traiter(){
+function formulaires_plugonet_valider_traiter(){
 	// Recuperation des champs du formulaire
 	if (!$pluginxml = _request('xml'))
 		$pluginxml = array(_request('un_xml'));
 
 	// Generation du fichier
-	$traitement = 'verification_pluginxml';
- 	$verifier = charger_fonction('plugonet_traiter_pluginxml','inc');
- 	list($erreurs, ) = $verifier($traitement, $pluginxml);
+	$traitement = 'validation_paquetxml';
+ 	$valider = charger_fonction('plugonet_traiter_pluginxml','inc');
+ 	list($erreurs, ) = $valider($traitement, $pluginxml);
 
 	// Formatage et affichage des resultats
 	// -- Message global sur la generation des fichiers : toujours ok aujourd'hui

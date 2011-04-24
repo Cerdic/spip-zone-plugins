@@ -1,0 +1,10 @@
+<div class="infos">
+	[<div class="numero">(#ENV{infos}|table_valeur{nom})</div>]
+	[<p>(#ENV{infos}|table_valeur{description})</p>]
+	[<a href="(#ENV{infos}|table_valeur{lien})"><:en_savoir_plus:></a>]
+	<ul style="margin: 10px 0px; padding-left: 10px;">
+		[<li><:version:>&nbsp;(#ENV{infos}|table_valeur{version})[&nbsp;-&nbsp;(#ENV{infos}|table_valeur{etat})]</li>]
+		[<li><:intitule_licence:>&nbsp;:&nbsp;(#ENV{infos}|table_valeur{licence})</li>]
+		[<li><:icone_auteurs:>&nbsp;:&nbsp;(#ENV{infos}|table_valeur{auteur})</li>]
+	</ul>
+</div>

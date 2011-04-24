@@ -13,7 +13,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 
-function exec_plugonet_verifier_dist(){
+function exec_plugonet_valider_dist(){
 	global $spip_lang_right;
 	// si pas autorise : message d'erreur
 	if (!autoriser('webmestre')) {
@@ -34,27 +34,27 @@ function exec_plugonet_verifier_dist(){
 	echo gros_titre(_T('plugonet:titre_page'),'', false);
 	
 	// barre d'onglets
-	echo barre_onglets("plugonet", "plugonet_verifier");
+	echo barre_onglets("plugonet", "plugonet_valider");
 	
 	// colonne gauche
 	echo debut_gauche('', true);
 	// -- Boite d'infos
 	$boiter = charger_fonction('boite_infos', 'plugins');
 	echo debut_boite_info(true). $boiter() . fin_boite_info(true);
-	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'plugonet_verifier'),'data'=>''));
+	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'plugonet_valider'),'data'=>''));
 	
 	// colonne droite
 	echo creer_colonne_droite('', true);
-	echo pipeline('affiche_droite', array('args'=>array('exec'=>'plugonet_verifier'),'data'=>''));
+	echo pipeline('affiche_droite', array('args'=>array('exec'=>'plugonet_valider'),'data'=>''));
 	
 	// centre
 	echo debut_droite('', true);
 
 	// contenu
- 	echo recuperer_fond('prive/contenu/plugonet_verifier',  array());
+ 	echo recuperer_fond('prive/contenu/plugonet_valider',  array());
 
 	// fin contenu
-	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'plugonet_verifier'),'data'=>''));
+	echo pipeline('affiche_milieu', array('args'=>array('exec'=>'plugonet_valider'),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 	}
