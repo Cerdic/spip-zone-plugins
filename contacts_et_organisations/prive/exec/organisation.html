@@ -8,11 +8,13 @@
 		<em> &gt; </em>
 		<a href="[(#URL_ECRIRE{organisations})]"><:contacts:organisations:></a>
 	</span>
-	<BOUCLE_orga_chemin(HIERARCHIE){id_organisation}>
-	<span class="bloc">
-		<em> &gt; </em>
-		<a class="on" href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#TITRE</a>
-	</span>
+	<BOUCLE_orga_chemin(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
+		<BOUCLE_orga_chemin_recursif(BOUCLE_orga_chemin) />
+		[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
+		<span class="bloc">
+			<em> &gt; </em>
+			<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
+		</span>
 	</BOUCLE_orga_chemin>
 	<span class="bloc">
 		<em> &gt; </em>
@@ -33,12 +35,28 @@
 	<INCLURE{fond=prive/contenu/organisation,id_organisation=#ID_ORGANISATION,ajax=wysiwyg}>
 	</div>
 
+</div>
+
+	<INCLURE{fond=prive/liste/organisations,
+		id_parent=#ID_ORGANISATION,
+		titre=<:contacts:info_organisations_filles:>,
+		ajax}>
+
+[(#AUTORISER{creer, organisation}|oui)
+	[(#URL_ECRIRE{organisation_edit}
+		|parametre_url{new,oui}
+		|parametre_url{id_parent,#ID_ORGANISATION}
+		|parametre_url{retour,[(#ENV{retour,#SELF})]}
+		|icone{<:contacts:organisation_creer_fille:>,#CHEMIN{images/organisation-24.png},right,creer.gif})]
+]
+<br class='nettoyeur' />
+		
 	<INCLURE{fond=prive/liste/linked_contacts,id_organisation=#ID_ORGANISATION,ajax}>
 					
 	#INCLURE{fond=prive/contenu/portfolio_document,objet=organisation,id_objet=#ID_ORGANISATION}
 
 	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,organisation,id,#ID_ORGANISATION},data,'<div class="nettoyeur"></div>'}}
-</div>
+
 
 <div class='plus'>
 	<h3 class='h3 invisible'><:contacts:supprimer_organisation:></h3>

@@ -122,7 +122,7 @@ function revision_organisation($id_organisation, $c=false) {
  * @param array $c
  * @return
  */
-function instituer_organisation($id_produit, $c, $calcul_rub=true){
+function instituer_organisation($id_organisation, $c, $calcul_rub=true){
 	include_spip('inc/autoriser');
 	include_spip('inc/rubriques');
 	include_spip('inc/modifier');
@@ -134,7 +134,11 @@ function instituer_organisation($id_produit, $c, $calcul_rub=true){
 	
 	// Verifier que le parent demandee existe et est different
 	// du parent actuel
-	if ($id_parent != $id_parent_actuel){
+	if (isset($c['id_parent'])
+		AND $id_parent = intval($c['id_parent'])
+		AND $id_parent != $id_parent_actuel
+		AND sql_getfetsel('1', 'spip_organisations', 'id_organisation='.$id_parent))
+	{
 		$champs['id_parent'] = intval($id_parent);
 	}
 	
@@ -152,6 +156,9 @@ function instituer_organisation($id_produit, $c, $calcul_rub=true){
 	);
 
 	if (!count($champs)) return;
+
+	// sauver les changements
+	sql_updateq('spip_organisations', $champs, "id_organisation=$id_organisation");
 	
 	// Invalider les caches
 	include_spip('inc/invalideur');

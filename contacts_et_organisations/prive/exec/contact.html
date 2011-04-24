@@ -27,7 +27,10 @@
 	<INCLURE{fond=prive/contenu/contact,id_contact=#ID_CONTACT,ajax=wysiwyg}>
 	</div>
 
-	<INCLURE{fond=prive/liste/linked_organisations,id_contact=#ID_CONTACT, ajax}>
+	<INCLURE{fond=prive/liste/linked_organisations,
+		id_contact=#ID_CONTACT,
+		titre=<:contacts:info_organisations_appartenance:>,
+		ajax}>
 					
 	#INCLURE{fond=prive/contenu/portfolio_document,objet=contact,id_objet=#ID_CONTACT}
 

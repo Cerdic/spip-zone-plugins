@@ -17,11 +17,14 @@ function formulaires_editer_organisation_verifier_dist($id_organisation='new', $
 
 function formulaires_editer_organisation_traiter_dist($id_organisation='new', $id_parent=0, $retour=''){
 	if ($retour) refuser_traiter_formulaire_ajax();
-	$retours = formulaires_editer_objet_traiter('organisation',$id_organisation,$id_parent,0,$retour);
+	$res = formulaires_editer_objet_traiter('organisation',$id_organisation,$id_parent,0,$retour);
 	if ($retour) {
-		$res['redirect'] = parametre_url($retour, 'id_organisation', $retours['id_organisation']);
+		if (!parametre_url($retour, 'id_organisation')) {
+			$retour = parametre_url($retour, 'id_organisation', $res['id_organisation']);
+		}
+		$res['redirect'] = $retour;
 	}
-	return $retours;
+	return $res;
 }
 
 ?>

@@ -17,11 +17,14 @@ function formulaires_editer_contact_verifier_dist($id_contact='new', $id_parent=
 
 function formulaires_editer_contact_traiter_dist($id_contact='new', $id_parent=0, $retour=''){
 	if ($retour) refuser_traiter_formulaire_ajax();
-	$retours = formulaires_editer_objet_traiter('contact', $id_contact, $id_parent, 0, $retour);
+	$res = formulaires_editer_objet_traiter('contact', $id_contact, $id_parent, 0, $retour);
 	if ($retour) {
-		$res['redirect'] = parametre_url($retour, 'id_contact', $retours['id_contact']);
+		if (!parametre_url($retour, 'id_contact')) {
+			$retour = parametre_url($retour, 'id_contact', $res['id_contact']);
+		}
+		$res['redirect'] = $retour;
 	}
-	return $retours;
+	return $res;
 }
 
 ?>

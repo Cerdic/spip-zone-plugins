@@ -5,7 +5,7 @@
 
 <!--/#hierarchie-->
 
-[(#SET{redirect,#ENV{redirect,#URL_ECRIRE{organisations}}})]
+[(#SET{redirect,#ENV{retour,#URL_ECRIRE{organisations}}})]
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
@@ -17,11 +17,11 @@
 		</h1>
 	</div>
 
-	[(#SET{redirect,#ENV{redirect,#ENV{id_organisation}
+	[(#SET{redirect,#ENV{retour,#ENV{id_organisation}
 		|generer_url_entite{organisation}
 		|sinon{#URL_ECRIRE{organisation}}}})]
 	<div class="">
-		#FORMULAIRE_EDITER_ORGANISATION{#ENV{id_organisation,oui},'',#GET{redirect}}
+		#FORMULAIRE_EDITER_ORGANISATION{#ENV{id_organisation,oui}, #GET{id_parent}, #GET{redirect}}
 	</div>
 </div>
 
