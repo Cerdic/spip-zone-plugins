@@ -71,3 +71,14 @@
 	padding:0.8em;
 }
 
+/** Attente */
+#jqDialog.waiting
+{	border:0;
+	background:url("waiting.gif") no-repeat center center transparent;
+	background-color:transparent !important;
+	height:150px;
+}
+
+#jqDialog.waiting .jqCloseButton
+{	display:none;
+}

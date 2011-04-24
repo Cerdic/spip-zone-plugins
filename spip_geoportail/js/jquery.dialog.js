@@ -39,7 +39,7 @@
 		var scrollY = (typeof( window.pageYOffset ) == 'number') ? window.pageYOffset : (document.body && document.body.scrollTop) ? document.body.scrollTop : (document.documentElement) ? document.documentElement.scrollTop : 0;
 		// Creer ce dont on a besoins :
 		if (jQuery('#jqDialog_back').length != 0) jQuery('#jqDialog_back').remove();
-		var back = $("<div class=jqDialog_back id=jqDialog_back "
+		var back = $("<div class='jqDialog_back "+param.classe+"' id=jqDialog_back "
 			+"style='position:absolute; background-color:black; z-index:2000; display:block; ' >"
 			+"</div>").width(wt).height(ht).css("left",0).css("top",0).css("opacity",param.bgopacity).appendTo("body");
 		
@@ -130,6 +130,11 @@
 		jQuery('#jqDialogShadow').fadeIn(speed);
 	};
 	
+	// Fermer le dialog
+	$.jqDialog.close = function()
+	{	$.jqDialog.action("undo");
+	}
+	
 	// On a fini (ne pas detruire ici si on veut rejouer)
 	$.jqDialog.action = function(action)
 	{	jQuery('#jqDialog_back').hide();
@@ -137,6 +142,12 @@
 		jQuery('#jqDialogShadow').hide();
 		$.jqDialog.param.callback (action);
 	};
+	
+	// Attente (sans dialogue)
+	$.jqDialog.wait = function(noclick)
+	{	$.jqDialog ("", { dialog:"", classe:"waiting", clickout:(noclick?false:true), clickin:(noclick?false:true), undo:false, ok:false });
+		$("#jqDialog").css("opacity",0.8)
+	}
 	
 	// Options
 	$.jqDialog.defaults = {

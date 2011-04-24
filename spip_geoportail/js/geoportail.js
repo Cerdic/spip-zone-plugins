@@ -980,7 +980,7 @@ jQuery.geoportail =
 	/** Affichage d'une image dans une fenetre */
 	afficheImage : function (src, titre)
 	{	jQuery.geoportail.unselectAll();
-		$.jqDialog ("", { dialog:"Chargement...", classe:"wait", clickout:true, undo:false, ok:false });
+		$.jqDialog.wait();
 		// Precharger l'image
 		var imgPreloader = new Image();
 		imgPreloader.onload = function()
