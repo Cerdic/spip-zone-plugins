@@ -1,6 +1,6 @@
 <composant>
   <!-- Nom du composant -->
-  <nom>Keynav</nom>
+  <nom>NavKeys</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
   <version>0.8.1</version>
@@ -10,7 +10,10 @@
     <nom>preview</nom>
     <valeur>160</valeur>
   </param>
-  
+  <param>
+    <nom>instanciable</nom>
+  </param>
+
   <variable>
     <nom>Nom</nom>
     <type>text</type>
@@ -19,33 +22,79 @@
   <variable>
     <nom>1</nom>
     <type>key</type>
+  </variable>
+  <variable>
+    <nom>p1</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
   </variable>  
+
   <variable>
     <nom>2</nom>
     <type>key</type>
   </variable>
   <variable>
+    <nom>p2</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
+  </variable>
+
+  <variable>
     <nom>3</nom>
     <type>key</type>
   </variable>
+  <variable>
+    <nom>p3</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
+  </variable>
+
   <variable>
     <nom>4</nom>
     <type>key</type>
   </variable>
   <variable>
+    <nom>p4</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
+  </variable>
+  
+  <variable>
     <nom>5</nom>
     <type>key</type>
   </variable>
+  <variable>
+    <nom>p5</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
+  </variable>
+
   <variable>
     <nom>6</nom>
     <type>key</type>
   </variable>
   <variable>
+    <nom>p6</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
+  </variable>
+
+  <variable>
     <nom>7</nom>
     <type>key</type>
   </variable>
   <variable>
+    <nom>p7</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
+  </variable>
+
+  <variable>
     <nom>8</nom>
     <type>key</type>
+  </variable>
+    <nom>p8</nom>
+    <type>img</type>
+    <chemin>pictos</chemin>
   </variable>
 </composant>

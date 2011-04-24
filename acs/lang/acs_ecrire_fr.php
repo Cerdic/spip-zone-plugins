@@ -56,7 +56,26 @@ Pour personnaliser votre site, configurez ses <a href="?exec=acs&onglet=composan
 
   'onglet_adm_description' => 'Configuration d\'ACS',
   'onglet_adm_info' => 'Choix du mod&egrave;le, gestion des droits, sauvegarder / restaurer.',
-  'onglet_adm_help' => '<b>Mod&egrave;le</b>:<br>Le mod&egrave;le est un jeu de squelettes Spip basés sur des composants ACS. Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br /><br /><b>Administrateurs ACS</b>:<br />Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.<br /><br /><b>Administration avec ACS</b>:<br />ACS permet &eacute;galement de verrouiller séparément l\'acc&egrave;s à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le param&egrave;tre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez leurs administrateurs.<br /><br /><b>Afficher l\'onglet variables</b>:<br /> La liste des variables affiche toutes les variables de tous les composants instanciés du mod&egrave;le ACS actif, utilis&eacute;s ou non.<br /><br /><b>Afficher les pages des composants</b>:<br />Affiche les pages des composants dans l\'onglet "Pages".',
+  'onglet_adm_help' => '<b>Mod&egrave;le</b>:
+<br>
+Le mod&egrave;le est un jeu de squelettes Spip basés sur des composants ACS. Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br />
+Pour utiliser des composants ACS dans d\'autres squelettes que ceux du modèles ACS actif, vous devez y indiquer le dossier de vos squelettes pour qu\'ils surchargent ceux du modèle actif 
+<br />
+<br />
+<b>Administrateurs ACS</b>:
+<br />
+Seuls les administrateurs ACS sont autoris&eacute;s à configurer le site. Les pages de configuration du site et de certains plugins ne sont plus accessibles aux autres administrateurs.
+<br />
+<br />
+<b>Administration avec ACS</b>:<br />ACS permet &eacute;galement de verrouiller séparément l\'acc&egrave;s à d\'autres pages de l\'espace "ecrire" de spip: Pour celà, créer un nouveau groupe, rep&eacute;rez dans l\'url de la page à contrôler le param&egrave;tre exec=truc, ajoutez "truc" aux pages protégées du groupe (s&eacute;par&eacute;es par des virgules), puis choisssez leurs administrateurs.
+<br />
+<br />
+<b>Afficher l\'onglet variables</b>:
+<br />
+La liste des variables affiche toutes les variables de tous les composants instanciés du mod&egrave;le ACS actif, utilis&eacute;s ou non.
+<br />
+<br />
+<b>Afficher les pages des composants</b>:<br />Affiche les pages des composants dans l\'onglet "Pages".',
 
   'admins' => 'Administrateurs',
   'groupes' => 'Groupes',

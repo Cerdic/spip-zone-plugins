@@ -11,15 +11,12 @@
  *
  * Utilise le cache ACS
  */
-
-include_spip('inc/composant/composants_liste');
-
 function composants_variables() {
   static $cv=array();
-
   if (count($cv) > 0)
     return $cv;
-
+  
+  include_spip('inc/composant/composants_liste');
   include_spip('inc/acs_cache');
   $model = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
   $cv = cache('lecture_composants_variables', 'a_'.$model.'_cv');

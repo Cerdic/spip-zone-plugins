@@ -1,5 +1,15 @@
-[(#REM)
+[(#CACHE{86400})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Tous les mots-cles
 
-]
+]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">[(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{title,<:acs:fond_meta_page_mots:>[ (#NOM_SITE_SPIP|textebrut)]})]
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2050}{mrobots=none}{mexpires=86400}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}>

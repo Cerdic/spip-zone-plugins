@@ -1,0 +1,6 @@
+.cNavGroup .groups#NIC {
+  [background: (#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Fond'}});][
+  border: #VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bord/Width'},thin}[ (#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bord/Style'},solid}) ](#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bord/Color'}});][
+  (#MODELE{c_css_border-radius}{c=Navgroup}{var=BordRond})][
+  (#MODELE{c_css_shadow}{c=Navgroup}{nic=#NIC})]
+}

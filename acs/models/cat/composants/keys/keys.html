@@ -3,6 +3,8 @@
 Affiche les mots-clés :
 bloc de mots-clés d'un article ou d'une rubrique, ou tous les mots-clés si id_article n'est pas défini
 
+Les mots-cles qui commencent par un "_" ou dont le groupe commence par un "_" ne sont pas affichés.
+
 ]<div class="#PINCEAU{keys}">
 [(#ENV{page}|!={recherche}|?{' '})
   [(#ID_MOT|=={''}|?{' '})

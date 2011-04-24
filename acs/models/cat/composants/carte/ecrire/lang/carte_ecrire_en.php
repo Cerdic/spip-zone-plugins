@@ -7,7 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Categories map',
 'help' => 'Require GIS plugin and its dependancies.<br />
 Display last updated geolocated categories on the map. If these have keywords from group marker_icon, 
-these categories are displayed with their keyword icon as marker on the map.',
+these categories are displayed with their keyword icon as marker on the map.<br /><br />
+Map size is 100% of its container.',
 
 'ShowLayerSwitcher' => 'Show layer switcher',
 'tooltip' => 'Tooltip',
@@ -20,6 +21,8 @@ these categories are displayed with their keyword icon as marker on the map.',
 
 'PictosPins' => 'Pins markers',
 'Picto' => 'Default marker',
-'PictoHover' => 'Hover'
+'PictoHover' => 'Hover',
+
+'ListArticles' => 'Articles of sections and keywords'
 );
 ?>

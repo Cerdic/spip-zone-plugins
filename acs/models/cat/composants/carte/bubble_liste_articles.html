@@ -1,0 +1,17 @@
+[(#CACHE{0})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Affiche les derniers articles de la rubrique ou ayant le mot-clé passé en paramètre.
+Le style des listes d'articles d'une rubrique est defini par le composant Articles.
+
+]<B_articles><ul>
+<BOUCLE_articles(ARTICLES){id_rubrique ?}{id_mot ?}{par date}{inverse}{0, #ENV{limit,10}}{lang}>
+  <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{masquer_rubrique=oui}>
+</BOUCLE_articles>
+</ul></B_articles>

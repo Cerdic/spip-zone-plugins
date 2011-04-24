@@ -7,9 +7,10 @@ ACS version 0.8
 - les controles sont desormais des objets;
 
 Modele Cat pour ACS vesion 0.8 :
-- nouveaux composants Carte, Diapo, et Keynav;
+- nouveaux composants Carte, Diapo, NavGroup et NavKeys;
 - gestion amelioree des droits d'acces a un article par mot-cle;
 - suppression du modèle doc au profit de celui de la dist;
+- un modèle spécifique, "c", permet désormais d'utiliser n'importe quel composant comme un modèle SPIP (donc dans un article, par exemple);
 
 _______________________________________
 ACS version 0.7

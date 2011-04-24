@@ -1,15 +1,15 @@
 [(#REM)
 
-Mots-cles de la rubrique, ou tous les mots-cles si aucune rubrique 
+Mots-cles de la rubrique, ou tous les mots-cles si aucune rubrique. 
 
 ]<B_mots>
 <div class="cKeys">#ANCRE_PAGINATION
   <div class="bloc-title">
-    <div class="bsize"><:mots_clefs:></div>
+    <div class="bsize"><a href="#URL_PAGE{mots}"><:mots_clefs:></a></div>
     [<div class="pagination">(#PAGINATION)</div>]
   </div>
   <ul class="bsize">
-    <BOUCLE_mots(MOTS) {id_rubrique ?} {titre!==(_.*)} {pagination #VAR{acsKeysNb,10}}>
+    <BOUCLE_mots(MOTS) {id_rubrique ?}{type!==(_.*)}{titre!==(_.*)} {pagination #VAR{acsKeysNb,10}}>
     <li class="menu-item"><a href="#URL_MOT"><span class="motcle">#TITRE</span></a></li>
     </BOUCLE_mots>
   </ul>

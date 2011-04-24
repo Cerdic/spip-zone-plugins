@@ -5,8 +5,8 @@
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
   <version>0.8.1</version>
   <necessite id='acs' version='[0.7.1;]' />
-  <necessite id='gis' version='[0.7.1;]' />
-  <necessite id='openlayers' version='[0.7.1;]' />
+  <necessite id='gis' version='[0.2;]' />
+  <necessite id='openlayers' version='[0.0.1;]' />
 
   <param>
     <nom>preview</nom>
@@ -143,6 +143,14 @@
   <variable>
     <nom>TextFont</nom>
     <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>ListArticles</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
   </variable>
 
 </composant>
