@@ -77,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_langue_mere' => 'Parent language',
 	'label_langues_autorisees' => 'Allow only selected languages',
 	'label_nommodule' => 'Module name',
+	'label_proposition_google_translate' => 'Google Translate proposal',
 	'label_recherche_module' => 'In the module:',
 	'label_recherche_status' => 'With the status:',
 	'label_repertoire_module_langue' => 'Folder of the module',
