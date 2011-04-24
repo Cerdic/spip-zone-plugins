@@ -7,7 +7,7 @@
 <B_a>
 <fieldset style="#ENV{style}">
 <ul>
-<BOUCLE_a(TRADLANG){id_tradlang}>
+<BOUCLE_a(TRADLANG tradlang_modules){id_tradlang}>
 <li class="editer_statut">
 	<label><:tradlang:label_tradlang_status:></label>
 	<select class="text crayon_active" name="#ENV{name_statut}">
@@ -16,6 +16,23 @@
 		<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
 	</select>
 </li>
+<BOUCLE_orig(TRADLANG){id=#ID}{lang=#LANG_MERE}>
+<li class="original">
+	<div>
+	<label><:tradlang:label_version_originale{lang=#LANG}:></label>
+	<textarea readonly="readonly" class="crayon-active readonly" style="width:#ENV{largeur}px;">[(#STR**|entites_html)]</textarea>
+	</div>
+	#SET{url_google_translate,https://ajax.googleapis.com/ajax/services/language/translate?v=1.0}
+	[(#SET{url_google_translate,[(#GET{url_google_translate}|parametre_url{q,[(#STR**|entites_html)],&}|parametre_url{langpair,[(#LANG)]|[(#_a:LANG)],&})]})]
+	<BOUCLE_google_translate(DATA){source json,#GET{url_google_translate}}>
+	[(#CLE|=={responseData}|oui)
+	<div>
+	<label><:tradlang:label_proposition_google_translate:></label>
+	<textarea readonly="readonly" class="crayon-active" style="width:#ENV{largeur}px;">[(#VALEUR|table_valeur{translatedText})]</textarea>
+	</div>]
+	</BOUCLE_google_translate>
+</li>
+</BOUCLE_orig>
 <li class="editer_str">
 	<label><:tradlang:label_tradlang_str:></label>
 	<textarea class="crayon-active" name="#ENV{name_str}"
