@@ -25,17 +25,24 @@ textarea { overflow: auto; } /* www.sitepoint.com/blogs/2010/08/20/ie-remove-tex
 
 button {  width: auto; overflow: visible; } /* Make buttons play nice in IE: www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
 
-/* Success, notice and error boxes */
+/* Success, info, notice and error/alert boxes (from BluePrint) */
 
 .error,
+.alert, 
 .notice,
-.success    { padding: .8em; margin-bottom: 1em; border: 2px solid #ddd; }
+.success, 
+.info			{ padding: 0.8em; margin-bottom: 1.5em; border: 2px solid #ddd; }
 
-.error      { background: #FBE3E4; color: #8a1f11; border-color: #FBC2C4; }
-.notice     { background: #FFF6BF; color: #514721; border-color: #FFD324; }
-.success    { background: #E6EFC2; color: #264409; border-color: #C6D880; }
-.error a    { color: #8a1f11; }
-.notice a   { color: #514721; }
-.success a  { color: #264409; }
+.error,
+.alert			{ background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.notice			{ background: #fff6bf; color: #514721; border-color: #ffd324; }
+.success		{ background: #e6efc2; color: #264409; border-color: #c6d880; }
+.info			{ background: #d5edf8; color: #205791; border-color: #92cae4; }
+
+.error a,
+.alert a		{ color: #8a1f11; }
+.notice a		{ color: #514721; }
+.success a		{ color: #264409; }
+.info a			{ color: #205791; }
 
 /* end */

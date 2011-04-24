@@ -71,10 +71,13 @@ sc { font-variant: small-caps; }
 .previsu {}
 
 /* Reponses */
-.reponse_formulaire { font-size: 120%; }
-.reponse_formulaire_erreur,
+.reponse_formulaire { margin-bottom: #GET{margin-bottom}; padding: .8em; border: 2px solid #ddd; }
+.reponse_formulaire_erreur { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+.reponse_formulaire_ok { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.reponse_formulaire_erreur a { color: #8a1f11; }
+.reponse_formulaire_ok a { color: #264409; }
+
 .erreur_message { color: red; }
-.reponse_formulaire_ok { color: green; }
 
 li.erreur input[type="text"], li.erreur input.text,
 li.erreur input[type="password"], li.erreur input.password,
