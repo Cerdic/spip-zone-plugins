@@ -1,5 +1,3 @@
-#CACHE{0}
-[(#REM) Tableau simplifié des contacts, affiché sur la page ?exec=auteurs_info, permettant de visualiser les contacts liés à une organisation ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1
 	type_liaison,1
@@ -25,7 +23,7 @@
 		<BOUCLE_liaisons(organisations_contacts){id_contact}{id_organisation}>
 		<tr class="[(#_contacts:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INCLURE{fond=logo/contact, id_contact}</a>
-			<td class='nom'><a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">[(#_contacts:PRENOM) ]#_contacts:NOM</a></td>
+			<td class='nom'><a href="[(#ID_CONTACT|generer_url_entite{contact})]">[(#_contacts:PRENOM) ]#_contacts:NOM</a></td>
 			[(#ENV{court}|non)
 			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
 			]

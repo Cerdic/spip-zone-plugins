@@ -1,0 +1,55 @@
+<div class='formulaire_spip formulaire_#FORM'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<ul>
+				[(#SAISIE{input, recherche_auteur, label=<:contacts:label_recherche_auteurs:>})]
+			</ul>
+			<p class='boutons'>
+				<input type='submit' name='rechercher' value='<:contacts:bouton_rechercher:>' />
+			</p>
+		</div></form>
+	]
+	
+	<B_resultats>
+	#ANCRE_PAGINATION
+	<div class="liste-elements resultats auteurs">
+	<table class='spip liste'>
+		<tbody>
+	<BOUCLE_resultats(AUTEURS){recherche #ENV{recherche_auteur}}{par points}{tout}{pagination 10}>
+		#SET{co,''}
+		<BOUCLE_o(ORGANISATIONS){id_auteur}>#SET{co,images/organisation-24.png}</BOUCLE_o>
+		<BOUCLE_c(CONTACTS){id_auteur}>#SET{co,images/contact-24.png}</BOUCLE_c>
+		<//B_o>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR
+				|sinon{[<img src="(#CHEMIN{images/auteur-24.gif})" alt="picto contact" class="spip_logos" />]}
+				|image_reduire{20,26})]</a>
+			<td class="nom"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
+			<td class="action">
+			[(#GET{co}|non)
+			[(#AUTORISER{modifier, contact, #ENV{id_contact}}|?{
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/ajouter-16.png}|balise_img{<:contacts:lier_cet_auteur:>})],
+					[(#URL_ACTION_AUTEUR{lier_contact_auteur,[(#ENV{id_contact})/#ID_AUTEUR],[(#ENV{retour,#SELF})]})]})],
+				auteur/#ID_AUTEUR
+			})]
+			]
+			[(#GET{co}|oui) [(#CHEMIN{#GET{co}}|image_reduire{24})] ]
+			</td>
+		</tr>
+	</BOUCLE_resultats>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+	</B_resultats>[
+<div class="liste-elements resultats auteurs"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_resultats>
+
+	
+</div>

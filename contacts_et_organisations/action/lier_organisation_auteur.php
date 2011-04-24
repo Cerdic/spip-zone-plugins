@@ -14,7 +14,6 @@ function action_lier_organisation_auteur_dist($arg=null) {
 	$arg = explode('/', $arg);
 
 	// cas liaison id_organisation / id_auteur
-	spip_log($arg, 'c');
 	if (intval($arg[0]) and is_numeric($arg[1])) {
 		// spip_log("appel à l'action_lier_organisation_auteur_dist avec $arg[0] $arg[1] comme argument");
 		action_lier_organisation_auteur_post($arg[0], $arg[1]);
@@ -31,7 +30,7 @@ function action_lier_organisation_auteur_post($id_organisation, $id_auteur) {
 	$id_organisation = intval($id_organisation);
 	if ($id_organisation) {
 		sql_updateq("spip_organisations", array(
-			"id_auteur" => sql_quote($id_auteur)
+			"id_auteur" => $id_auteur
 		), "id_organisation=" . sql_quote($id_organisation));
 		
 		include_spip('inc/invalideur');

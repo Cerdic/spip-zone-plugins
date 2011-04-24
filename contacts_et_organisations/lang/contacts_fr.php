@@ -22,6 +22,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_nouveau' => "Nouveau contact",
 	'contact_modifier' => "Modifier un contact",
 	'contact_editer' => 'Éditer ce contact',
+	'contact_numero' => 'Contact numéro',
+	'contact_voir' => 'Voir',
+	'contact_associe_a_auteur_numero' => 'Associée à auteur numéro',
+	'contact_associer_a_auteur' => 'Associer à un auteur',
+
 	
 	'confirmer_supprimer_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
 		les informations relatives &agrave; ce contact ?",
@@ -34,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// D
 	'definir_auteur_comme_contact' => "D&eacute;finir comme contact",
-	'definir_auteur_comme_organisation' => "D&eacute;f. comme organisation",
+	'definir_auteur_comme_organisation' => "D&eacute;finir comme organisation",
 	'delier_cet_auteur' => "Désassocier",
 	
 	// E

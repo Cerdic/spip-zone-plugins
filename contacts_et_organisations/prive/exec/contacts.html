@@ -8,6 +8,16 @@
 <div class="logo_navigation">
 <img src="#CHEMIN{images/contact-128.png}" width="128" height="128" alt="Logo plugin" />
 </div>
+
+
+<div class="cadre cadre-infos">
+[(#AUTORISER{creer, contact}|oui)
+	[(#URL_ECRIRE{contact_edit}
+		|parametre_url{new,oui}
+		|parametre_url{retour,[(#ENV{retour,#SELF})]}
+		|icone{<:contacts:contact_creer:>,#CHEMIN{images/contact-24.png},center,creer.gif})]
+]
+</div>
 <!--/#navigation-->
  
 

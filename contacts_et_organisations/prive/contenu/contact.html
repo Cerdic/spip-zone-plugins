@@ -1,4 +1,4 @@
-<BOUCLE_contact(CONTACTS){id_auteur}>
+<BOUCLE_contact(CONTACTS){id_contact}>
 [(#SET{contenu,
 [<div class="champ contenu_civilite[ (#CIVILITE*|strlen|?{'',vide})]">
 	<div class='label'><:contacts:label_civilite:></div>
@@ -36,12 +36,22 @@
 })]
 
 
-[(#GET{contenu}|trim|oui)
-	[(#VAL{e}|debut_cadre{#CHEMIN{images/contact-24.png},'',<:contacts:titre_contact:>})]
-	<div class="presentation_contenu">
-	#GET{contenu}
-	</div>
-	[(#EVAL{true}|fin_cadre)]
+[(#ENV{cadre}|oui)
+	[(#GET{contenu}|trim|oui)
+		[(#VAL{e}|debut_cadre{#CHEMIN{images/contact-24.png},'',
+			<a href="[(#URL_ECRIRE{contact,id_contact=#ID_CONTACT})]"><:contacts:titre_contact:></a>
+		})]
+
+					
+		<div class="presentation_contenu">
+		#GET{contenu}
+		</div>
+		[(#EVAL{true}|fin_cadre)]
+	]
 ]
+[(#ENV{cadre}|non)
+	#GET{contenu}
+]
+
 
 </BOUCLE_contact>

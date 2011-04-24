@@ -1,8 +1,8 @@
-[(#REM) Tableau simplifié des organisations, affiché sur la page ?exec=auteurs_info, permettant de visualiser les organisations auxquelles sont liéss le contact ]
 [(#SET{defaut_tri,#ARRAY{
-	nom,1
+	nom,1,
+	type_liaison,1
 }})
-]<B_liste_orga>
+]<B_organisations>
 #ANCRE_PAGINATION
 <div class="liste-elements organisations">
 <table class='spip liste'>
@@ -11,14 +11,22 @@
 		<tr class='first_row'>
 			<th class="logo"></th>
 			<th class='nom'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+			[(#ENV{court}|non)
+			<th class="type">[(#TRI{type_liaison,<:contacts:label_type_liaison:>,ajax})]</th>
+			]
 			<th class='action'></th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_orga(ORGANISATIONS){id_contact?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
-			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></td>
+	<BOUCLE_organisations(ORGANISATIONS){id_contact?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		[(#REM) sur boucle pour le crayon ]
+		<BOUCLE_liaisons(organisations_contacts){id_contact}{id_organisation}>
+		<tr class="[(#_organisations:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR|sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a>
+			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#_organisations:NOM</a></td>
+			[(#ENV{court}|non)
+			<td class='type #EDIT{type_liaison}'>[(#TYPE_LIAISON|sinon{-})]</td>
+			]
 			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_organisation:>})],
@@ -27,11 +35,12 @@
 				#ID_AUTEUR
 			})]</td>
 		</tr>
-	</BOUCLE_liste_orga>
+		</BOUCLE_liaisons>
+	</BOUCLE_organisations>
 	</tbody>
 </table>
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_liste_orga>[
+</B_organisations>[
 <div class="liste-elements organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
-]<//B_liste_orga>
+]<//B_organisations>

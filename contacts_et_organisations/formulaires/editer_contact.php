@@ -1,0 +1,27 @@
+<?php
+
+include_spip('inc/editer');
+
+
+function formulaires_editer_contact_charger_dist($id_contact='new', $id_parent=0, $retour=''){
+	$contexte = formulaires_editer_objet_charger('contact', $id_contact, $id_parent, 0, $retour, '');
+	return $contexte;
+}
+
+
+function formulaires_editer_contact_verifier_dist($id_contact='new', $id_parent=0, $retour=''){
+	$erreurs = formulaires_editer_objet_verifier('contact', $id_contact);
+	return $erreurs;
+}
+
+
+function formulaires_editer_contact_traiter_dist($id_contact='new', $id_parent=0, $retour=''){
+	if ($retour) refuser_traiter_formulaire_ajax();
+	$retours = formulaires_editer_objet_traiter('contact', $id_contact, $id_parent, 0, $retour);
+	if ($retour) {
+		$res['redirect'] = parametre_url($retour, 'id_contact', $retours['id_contact']);
+	}
+	return $retours;
+}
+
+?>

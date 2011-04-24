@@ -3,7 +3,7 @@
 	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 	<auteur>Matthieu Marcillaud - [Ma Graine->http://magraine.net]</auteur>
 	
-	<etat>dev</etat>
+	<etat>test</etat>
 	
 	<description>
 		<multi>
@@ -25,7 +25,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	
 	<prefix>contacts</prefix>
 	
-	<version>1.5.1</version>
+	<version>1.6.0</version>
 	<version_base>1.3.6</version_base>
 	
 	<install>base/contacts_upgrade.php</install>
@@ -48,10 +48,6 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
 	
-	<pipeline>
-		<nom>editer_contenu_objet</nom>
-		<inclure>contacts_pipelines.php</inclure>
-	</pipeline>
 
 	<pipeline>
 		<nom>insert_head</nom>
@@ -59,18 +55,6 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
 	
-	<pipeline>
-		<nom>formulaire_charger</nom>
-		<inclure>contacts_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>formulaire_verifier</nom>
-		<inclure>contacts_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>formulaire_traiter</nom>
-		<inclure>contacts_pipelines.php</inclure>
-	</pipeline>
 
 		
 	<pipeline>

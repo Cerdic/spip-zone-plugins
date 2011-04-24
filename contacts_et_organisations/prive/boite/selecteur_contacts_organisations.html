@@ -5,7 +5,7 @@
 #SET{rien,0}#SET{contact,0}
 <BOUCLE_est_un_contact(CONTACTS){id_auteur}>
 		#SET{id_contact,#ID_CONTACT}
-		<a href="[(#URL_ECRIRE{contacts})]" title="<:contacts:info_tous_contacts:>">[(#CHEMIN{images/contact-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
+		<a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir:>">[(#CHEMIN{images/contact-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
 		<:contacts:est_un_contact:>
 
 		[(#INCLURE{fond=prive/liste/linked_organisations,id_contact,
@@ -15,7 +15,7 @@
 
 	<BOUCLE_est_une_organisation(ORGANISATIONS){id_auteur}>
 		#SET{id_organisation,#ID_ORGANISATION}
-		<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]" title="<:contacts:info_toutes_organisations:>">[(#CHEMIN{images/organisation-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
+		<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]" title="<:contacts:organisation_voir:>">[(#CHEMIN{images/organisation-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
 		<:contacts:est_une_organisation:>
 
 		[(#INCLURE{fond=prive/liste/linked_contacts,id_organisation,
