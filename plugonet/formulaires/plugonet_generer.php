@@ -26,7 +26,7 @@ function formulaires_plugonet_generer_traiter() {
 	$simuler = (_request('simuler')) ? true : false;
 
 	// Generation du fichier
-	$traitement = 'generer_paquetxml';
+	$traitement = 'generation_paquetxml';
  	$generer = charger_fonction('plugonet_traiter_pluginxml','inc');
  	list($erreurs, $commandes) = $generer($traitement, $pluginxml, $forcer, $simuler);
 
@@ -35,7 +35,7 @@ function formulaires_plugonet_generer_traiter() {
 	// -- Texte des resultats par fichier traite
  	$formater = charger_fonction('plugonet_formater','inc');
 	$retour = array();
- 	list($resume, $analyse) = $formater($erreurs);
+ 	list($resume, $analyse) = $formater($traitement, $erreurs);
  	$retour['message_ok']['resume'] = $resume;
  	$retour['message_ok']['analyse'] = $analyse;
 	$retour['editable'] = true;

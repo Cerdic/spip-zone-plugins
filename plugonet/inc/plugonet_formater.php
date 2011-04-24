@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function inc_plugonet_formater($erreurs) {
+function inc_plugonet_formater($traitement, $erreurs) {
 	// Nombre de fichiers traites
 	$nb_fichiers = count($erreurs);	
 
@@ -11,67 +11,82 @@ function inc_plugonet_formater($erreurs) {
 	//    le nombre de fichiers traites et les compteurs d'erreurs et de notices
 	// -- une detaillee, affichee en bas du formulaire avec le resultat global de chaque fichier
 	//    et la liste des erreurs eventuelles
-	$nb_errlec = $nb_errinf = $nb_errval = $nb_notval = 0;
+	$nb_erreurs = array(
+					'lecture_pluginxml' => 0,
+					'lecture_paquetxml' => 0,
+					'information_pluginxml' => 0,
+					'validation_pluginxml' => 0,
+					'validation_paquetxml' => 0);
+	$nb_notices = array('validation_pluginxml' => 0);
 	$resume = $analyse = '';
 	$texte = array('erreur' => '', 'notice' => '', 'succes' => '');
 	foreach ($erreurs as $_pluginxml => $_erreurs) {
-		// Chaque type d'erreur est exclusif
-		if ($_erreurs['erreur_lecture_pluginxml']) {
-			$texte['erreur'] .= formater_un_plugin('plugonet:message_nok_lecture_pluginxml', $_pluginxml);
-			$nb_errlec += 1;
-		}
-		else if ($_erreurs['erreur_information_pluginxml']) {
-			$texte['erreur'] .= formater_un_plugin('plugonet:message_nok_information_pluginxml',$_pluginxml);
-			$nb_errinf += 1;
-		}
-		else if ($_erreurs['erreur_validation_paquetxml']){
-			$texte['erreur'] .= formater_un_plugin(
-									'plugonet:message_nok_validation_paquetxml', 
-									$_pluginxml,
-									$_erreurs['erreur_validation_paquetxml']);
-			$nb_errval += 1;
-		}
-		else {
-			if ($_erreurs['notice_validation_pluginxml']) {
-				$texte['notice'] .= formater_un_plugin(
-										'', 
-										$_pluginxml,
-										$_erreurs['notice_validation_pluginxml']);
-				$nb_notval += 1;
+		$erreur_trouvee = false;
+		foreach ($_erreurs as $_type => $_valeur) {
+			if ($_valeur) {
+				// On determine le type d'erreur et le message
+				if ($_type !== 'validation_pluginxml') {
+					// Ce sont toujours des cas d'erreur
+					$message = 'plugonet:message_nok_' . $_type;
+					$bloc = 'erreur';
+				}
+				else {
+					// Le cas validation plugin.xml est :
+					// - une notice pour la generation du paquet.xml
+					// - une erreur pour la verification du plugin.xml
+					$message = ($traitement == 'verification_pluginxml') ? 'plugonet:message_nok_' . $_type : '';
+					$bloc = ($traitement == 'generation_paquetxml') ? 'notice' : 'erreur';
+				}
+				
+				// On formate le texte d'erreur ou de notice
+				$texte[$bloc] .= formater_un_plugin(
+										$message, 
+										$_pluginxml, 
+										($_valeur !== true ? $_valeur : null));
+					
+				// On a bien trouve une erreur pour ce fichier xml
+				if ($bloc == 'erreur')
+					$nb_erreurs[$_type] += 1;
+				else
+					$nb_notices[$_type] += 1;
+				$erreur_trouvee = true;
 			}
-			else
-				$texte['succes'] .= formater_un_plugin('', $_pluginxml);
 		}
+		// Si on a pas trouve d'erreur on affiche un message de succes pour le plugin
+		if (!$erreur_trouvee)
+				$texte['succes'] .= formater_un_plugin('', $_pluginxml);
 	}
 
-	// Construction du message global	
-	$nb_nok = $nb_errlec + $nb_errinf + $nb_errval;
+	// Construction du message de synthese
+	// -- on determine les compteurs globaux
+	$nb_nok = array_sum($nb_erreurs);
 	$nb_ok = $nb_fichiers - $nb_nok;
-	$details = 
-		($nb_errlec > 0 
-			? '<br />-> ' . un_ou_plusieurs($nb_errlec, 'plugonet:message_nok_lecture_pluginxml')
-			: '') .
-		($nb_errinf > 0 
-			? '<br />-> ' . un_ou_plusieurs($nb_errinf, 'plugonet:message_nok_information_pluginxml')
-			: '') .
-		($nb_errval > 0 
-			? '<br />-> ' . un_ou_plusieurs($nb_errval, 'plugonet:message_nok_validation_paquetxml')
-			: '') .
+	// -- construction du detail sur chaque compteur d'erreurs
+	$details = '';
+	foreach ($nb_erreurs as $_type => $_compteur) {
+		if ($_compteur > 0)
+			$details .= '<br />-> ' . un_ou_plusieurs(
+										$_compteur, 
+										'plugonet:message_nok_' . $_type);
+	}
+	// -- construction du detail sur les traitements ok et les notices
+	$details .=
 		($nb_ok > 0 
-			? '<br />-> ' . un_ou_plusieurs($nb_ok, 'plugonet:message_ok_generation_paquetxml') .
-			($nb_notval > 0 
-				? ' (' . un_ou_plusieurs($nb_notval, 'plugonet:message_nok_validation_pluginxml') . ')'
+			? '<br />-> ' . un_ou_plusieurs($nb_ok, 'plugonet:message_ok_' . $traitement) .
+			($nb_notices['validation_pluginxml'] > 0 
+				? ' (' . un_ou_plusieurs($nb_notices['validation_pluginxml'], 'plugonet:message_notice_validation_pluginxml') . ')'
 				: '')
 			: '');
+	// -- consolidation de la synthese finale
 	$resume = un_ou_plusieurs(
 					$nb_fichiers,
-					'plugonet:resume_generation_paquetxml',
+					'plugonet:resume_' . $traitement,
 					array('details' => $details));
 
 	// Construction de l'analyse detaillee
-	$analyse = formater_bloc('error', $texte['erreur'], 'plugonet:details_generer_erreur', $nb_nok) .
-				formater_bloc('notice', $texte['notice'], 'plugonet:details_generer_notice', $nb_notval) .
-				formater_bloc('success', $texte['succes'], 'plugonet:details_generer_succes', $nb_ok - $nb_notval);
+	$analyse = formater_bloc('error', $texte['erreur'], 'plugonet:details_' . $traitement . '_erreur', $nb_nok) .
+				formater_bloc('notice', $texte['notice'], 'plugonet:details_' . $traitement . '_notice', $nb_notices['validation_pluginxml']) .
+				formater_bloc('success', $texte['succes'], 'plugonet:details_' . $traitement . '_succes', $nb_ok);
 
 	return array($resume, $analyse);
 }

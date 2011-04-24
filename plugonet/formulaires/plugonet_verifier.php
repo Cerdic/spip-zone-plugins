@@ -24,7 +24,7 @@ function formulaires_plugonet_verifier_traiter(){
 		$pluginxml = array(_request('un_xml'));
 
 	// Generation du fichier
-	$traitement = 'verifier_pluginxml';
+	$traitement = 'verification_pluginxml';
  	$verifier = charger_fonction('plugonet_traiter_pluginxml','inc');
  	list($erreurs, ) = $verifier($traitement, $pluginxml);
 
@@ -33,7 +33,7 @@ function formulaires_plugonet_verifier_traiter(){
 	// -- Texte des resultats par fichier traite
  	$formater = charger_fonction('plugonet_formater','inc');
 	$retour = array();
- 	list($resume, $analyse) = $formater($erreurs);
+ 	list($resume, $analyse) = $formater($traitement, $erreurs);
  	$retour['message_ok']['resume'] = $resume;
  	$retour['message_ok']['analyse'] = $analyse;
 	$retour['editable'] = true;

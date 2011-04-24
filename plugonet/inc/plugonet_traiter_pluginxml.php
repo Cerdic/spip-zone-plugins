@@ -24,10 +24,10 @@ function inc_plugonet_traiter_pluginxml($traitement, $files, $forcer_paquetxml=f
 	$commandes = array();
 	foreach ($files  as $nom)  {
 		if (lire_fichier($nom, $contenu)) {
-			$erreurs[$nom]['erreur_lecture_pluginxml'] = false;
-			// Validation formelle du fichier plugin.xml (uniquement des avertissements)
+			$erreurs[$nom]['lecture_pluginxml'] = false;
+			// Validation formelle du fichier plugin.xml (avertissements en generation, erreurs sinon)
 			$resultats = $valider_xml($contenu, false, false, 'plugin.dtd');
-			$erreurs[$nom]['notice_validation_pluginxml'] = is_array($resultats) ? $resultats[1] : $resultats->err; //2.1 ou 2.2
+			$erreurs[$nom]['validation_pluginxml'] = is_array($resultats) ? $resultats[1] : $resultats->err; //2.1 ou 2.2
 
 			// Recherche de toutes les balises plugin contenues dans le fichier plugin.xml et 
 			// extraction de leurs infos
@@ -35,36 +35,36 @@ function inc_plugonet_traiter_pluginxml($traitement, $files, $forcer_paquetxml=f
 			if ($nb_balises = preg_match_all($regexp, $contenu, $matches)) {
 				$plugins = array();
 				// Pour chacune des occurences de la balise on extrait les infos
-				$erreurs[$nom]['erreur_information_pluginxml'] = false;
+				$erreurs[$nom]['information_pluginxml'] = false;
 				foreach ($matches[0] as $_balise_plugin) {
 					// Extraction des informations du plugin suivant le standard SPIP
 					// -- si une balise est illisible on sort de la boucle et on retourne 
 					//    l'erreur sans plus de traitement
 					if (!$infos = $informer_xml($_balise_plugin)) {
-						$erreurs[$nom]['erreur_information_pluginxml'] = true;
+						$erreurs[$nom]['information_pluginxml'] = true;
 						break;
 					}
 					$plugins[] = $infos;
 				}
 			}
 			else
-				$erreurs[$nom]['erreur_information_pluginxml'] = true;
+				$erreurs[$nom]['information_pluginxml'] = true;
 
-			if (($traitement == 'generer_paquetxml') 
-			AND !$erreurs[$nom]['erreur_information_pluginxml']) {
+			if (($traitement == 'generation_paquetxml') 
+			AND !$erreurs[$nom]['information_pluginxml']) {
 				// Puisqu'on sait extraire les infos du plugin.xml, .on construit le contenu 
 				// du fichier paquet.xml a partir de ces infos
 				list($paquet_xml, $commandes[$nom], $prefixe, $description) = plugin2paquet($plugins);
 				// On valide le contenu obtenu avec la nouvelle DTD paquet
 				$resultats = $valider_xml($paquet_xml, false, false, 'paquet.dtd');
-				$erreurs[$nom]['erreur_validation_paquetxml'] = is_array($resultats) ? $resultats[1] : $resultats->err;
+				$erreurs[$nom]['validation_paquetxml'] = is_array($resultats) ? $resultats[1] : $resultats->err;
 				
 				// Si aucune erreur de validation de paquet.xml, on peut ecrire les fichiers de sortie :
 				// -- paquet.xml dans le repertoire du plugin
 				// -- les ${prefixe}-paquet_${langue}.php pour chaque langue trouvee dans le 
 				//    repertoire lang/ du plugin
 				// -- le fichier des commandes svn
-				if (!$erreurs[$nom]['erreur_validation_paquetxml'] OR $forcer_paquetxml ) {
+				if (!$erreurs[$nom]['validation_paquetxml'] OR $forcer_paquetxml ) {
 					// Determination du repertoire en fonction du mode choisi
 					if ($simuler) {
 						$dirs = explode('/', dirname($nom));
@@ -86,7 +86,7 @@ function inc_plugonet_traiter_pluginxml($traitement, $files, $forcer_paquetxml=f
 			}
 		}
 		else
-			$erreurs[$nom]['erreur_lecture_pluginxml'] = true;
+			$erreurs[$nom]['lecture_pluginxml'] = true;
 	}
 
 	return array($erreurs, $commandes);

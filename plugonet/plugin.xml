@@ -1,12 +1,12 @@
 <plugin>
 	<nom>PlugOnet</nom>
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<etat>test</etat>
 	<licence>GPL v3</licence>
 	<icon>prive/themes/spip/images/plugonet-32.png</icon>
 	<description>
-Migrer de plugin.xml &agrave; paquet.xml.
+Migrer de la DTD plugin &agrave; celle de paquet.
 
 Ce plugin permet de produire le nouveau fichier paquet.xml &agrave; partir du fichier
 plugin.xml. Des options de v&eacute;rification sont disponibles pour nettoyer au pr&eacute;alable
@@ -38,16 +38,16 @@ une aide sur chaque balise de la nouvelle DTD.
 		<url>plugonet_generer</url>
 	</bouton>
 
-	<onglet id="plugonet_generer" parent="plugonet">
-		<icone>prive/themes/spip/images/plugonet-generer.png</icone>
-		<titre>plugonet:onglet_generer</titre>
-		<url>plugonet_generer</url>
-	</onglet>	
 	<onglet id="plugonet_verifier" parent="plugonet">
 		<icone>prive/themes/spip/images/plugonet-verifier.png</icone>
 		<titre>plugonet:onglet_verifier</titre>
 		<url>plugonet_verifier</url>
 	</onglet>
+	<onglet id="plugonet_generer" parent="plugonet">
+		<icone>prive/themes/spip/images/plugonet-generer.png</icone>
+		<titre>plugonet:onglet_generer</titre>
+		<url>plugonet_generer</url>
+	</onglet>	
 
 	<necessite id="SPIP" version="[2.1.10;]" />
 	<necessite id="langonet" version="[0.6.0;]" />

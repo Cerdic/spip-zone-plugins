@@ -9,27 +9,31 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
-	'bouton_generer' => 'Générer',
+	'bouton_lancer' => 'Lancer',
 	'bouton_plugonet' => 'PlugOnet',
 	'bouton_tout_cocher' => 'Tout cocher',
 	'bouton_tout_decocher' => 'Tout décocher',
-	'bouton_verifier' => 'Vérifier',
 
 // D
-	'details_generer_erreur' => 'Le paquet.xml du plugin listé ci-dessous n\'a pas été généré car des erreurs se sont produites pendant la génération. Veuillez consuter les informations ci-dessous pour apporter les corrections nécessaires.',
-	'details_generer_erreur_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-dessous n\'ont pas été générés car des erreurs se sont produites pendant la génération. Veuillez consuter les informations ci-dessous pour apporter les corrections nécessaires.',
-	'details_generer_notice' => 'Le paquet.xml du plugin listé ci-après a été correctement généré mais son plugin.xml source contient des erreurs. Veuillez donc vérifier le plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.',
-	'details_generer_notice_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés mais leurs plugin.xml source contiennent des erreurs. Veuillez donc vérifier les plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.',
-	'details_generer_succes' => 'Le paquet.xml du plugin listé ci-après a été correctement généré.',
-	'details_generer_succes_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés.',
+	'details_generation_paquetxml_erreur' => 'Le paquet.xml du plugin listé ci-dessous n\'a pas été généré car des erreurs se sont produites pendant la génération. Veuillez consulter les informations ci-dessous pour apporter les corrections nécessaires.',
+	'details_generation_paquetxml_erreur_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-dessous n\'ont pas été générés car des erreurs se sont produites pendant la génération. Veuillez consulter les informations ci-dessous pour apporter les corrections nécessaires.',
+	'details_generation_paquetxml_notice' => 'Le paquet.xml du plugin listé ci-après a été correctement généré mais son plugin.xml source contient des erreurs. Veuillez donc vérifier le plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.',
+	'details_generation_paquetxml_notice_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés mais leurs plugin.xml source contiennent des erreurs. Veuillez donc vérifier les plugin.xml et les fichiers résultant (paquet.xml, fichiers de langue) pour déterminer si des corrections doivent être apportées.',
+	'details_generation_paquetxml_succes' => 'Le paquet.xml du plugin listé ci-après a été correctement généré.',
+	'details_generation_paquetxml_succes_pluriel' => 'Les paquet.xml des @nb@ plugins listés ci-après ont été correctement générés.',
+
+	'details_verification_pluginxml_erreur' => 'La vérification du plugin.xml listé ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).',
+	'details_verification_pluginxml_erreur_pluriel' => 'La vérification des @nb@ plugin.xml listés ci-dessous a révélé des erreurs. Veuillez consulter les informations ci-dessous pour apporter des corrections si besoin (toutes les erreurs liées à l\'utilisation de balise a, code, br... dans la description ne sont pas à considérer).',
+	'details_verification_pluginxml_succes' => 'La vérification du plugin.xml listé ci-après n\'a révélé aucune erreur.',
+	'details_verification_pluginxml_succes_pluriel' => 'La vérification des @nb@ plugin.xml listés ci-après n\'a révélé aucune erreur.',
 
 // I
-	'info_choisir_pluginxml' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux présents dans le dossier <code>plugins/</code> de ce site. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement la génération forcée de son paquet.xml dans le dossier temporaire du site.',
+	'info_choisir_pluginxml_generer' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux présents dans le dossier <code>plugins/</code> de ce site. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement la génération forcée de son paquet.xml dans le dossier temporaire du site.',
 	'info_forcer_paquetxml' => 'Par défaut, le fichier paquet.xml n\'est écrit que si son contenu est valide selon la nouvelle DTD. Vous pouvez cependant forcer son écriture quel que soit le résultat de la validation.',
 	'info_generer' => 'Cette option vous permet de générer le nouveau fichier paquet.xml de description d\'un plugin à partir du fichier plugin.xml existant.<br />Outre le fichier paquet.xml, les fichiers de langue des items slogan et description du plugin ainsi qu\'un fichier de commandes Unix sont créés dans des dossiers propres à chaque plugin.',
 	'info_simuler_paquetxml' => 'Par défaut, les fichiers résultat sont créés dans le dossier d\'installation de chaque plugin. Vous pouvez cependant choisir de les créer dans un dossier temporaire du site.',
-	'info_verifier_pluginxml' => 'Choisissez le fichier plugin.xml que vous souhaitez vérifier.',
-	'info_verifier' => 'Cette option vous permet de vérifier le fichier plugin.xml de description d\'un plugin afin d\'anticiper des problèmes lors de génération du fichier paquet.xml. Ce formulaire propose la liste des fichiers plugin.xml présents dans le dossier <code>plugins/</code> de ce site.',
+	'info_choisir_pluginxml_verifier' => 'Choisissez les fichiers plugin.xml que vous souhaitez vérifier. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement sa vérification.',
+	'info_verifier' => 'Cette option vous permet de vérifier le fichier plugin.xml de description d\'un plugin afin d\'anticiper des problèmes lors de génération du fichier paquet.xml. Ce formulaire propose la liste des fichiers plugin.xml présents dans tous les dossiers de ce site.',
 
 // L
 	'label_choisir_pluginxml' => 'plugin.xml disponibles',
@@ -49,14 +53,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_lecture_pluginxml_pluriel' => '@nb@ plugin.xml inaccessibles en lecture',
 	'message_nok_lecture_pluginxml' => '@nb@ plugin.xml inaccessible en lecture',
 
-	'message_nok_validation_paquetxml_pluriel' => '@nb@ paquet.xml non conformes à la nouvelle DTD',
-	'message_nok_validation_paquetxml' => '@nb@ paquet.xml non conforme à la nouvelle DTD',
+	'message_nok_validation_paquetxml_pluriel' => '@nb@ paquet.xml non conformes à la DTD',
+	'message_nok_validation_paquetxml' => '@nb@ paquet.xml non conforme à la DTD',
 
-	'message_nok_validation_pluginxml_pluriel' => 'dont @nb@ sont issus de plugin.xml non conformes',
-	'message_nok_validation_pluginxml' => 'dont @nb@ est issu d\'un plugin.xml non conforme',
+	'message_nok_validation_pluginxml_pluriel' => '@nb@ plugin.xml non conformes à la DTD',
+	'message_nok_validation_pluginxml' => '@nb@ plugin.xml non conforme à la DTD',
+
+	'message_notice_validation_pluginxml_pluriel' => 'dont @nb@ sont issus de plugin.xml non conformes',
+	'message_notice_validation_pluginxml' => 'dont @nb@ est issu d\'un plugin.xml non conforme',
 
 	'message_ok_generation_paquetxml_pluriel' => '@nb@ paquet.xml correctement générés',
 	'message_ok_generation_paquetxml' => '@nb@ paquet.xml correctement généré',
+
+	'message_ok_verification_pluginxml_pluriel' => '@nb@ plugin.xml corrects',
+	'message_ok_verification_pluginxml' => '@nb@ plugin.xml correct',
 
 // O
 	'onglet_generer' => 'Générer paquet.xml',
@@ -66,6 +76,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
 	'resume_generation_paquetxml' => '@nb@ plugin.xml traité : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_verification_pluginxml_pluriel' => '@nb@ plugin.xml vérifiés : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_verification_pluginxml' => '@nb@ plugin.xml vérifié : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
 
 // T
 	'titre_form_generer' => 'Génération des fichiers paquet.xml',
