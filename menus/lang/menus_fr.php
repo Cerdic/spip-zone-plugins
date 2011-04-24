@@ -29,7 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_nouveau' => 'Créer un nouveau menu',
 	'editer_menus_titre' => 'Menus du site',
 	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)',
-	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)',
+	'entree_articles_max' => 'Si oui, limiter l\'affichage des articles &agrave; xx articles maximum? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)',
 	'entree_aucun' => 'Aucun',
 	'entree_bloc' => 'Bloc Zpip',
 	'entree_choisir' => 'Choisissez le type d\'entrée que vous voulez ajouter :',
@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_rubrique' => 'Numéro de la rubrique parente',
 	'entree_infini' => 'À l\'infini',
 	'entree_mapage' => 'Ma page perso',
+	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)',
 	'entree_niveau' => 'Niveau des sous-rubriques',
 	'entree_nombre_articles' => 'Nombre d\'articles au maximum (0 par défaut)',
 	'entree_page' => 'Nom de la page',
@@ -100,9 +101,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.',
-	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles.',
+	'info_articles_max' => 'Affichage limit&eacute; &agrave; @max@ articles',
 	'info_connexion_obligatoire' => 'Connexion obligatoire',
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté',
+	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s',
 	'info_numero_menu' => 'MENU NUMÉRO :',
 	'info_page_speciale' => 'Lien vers la page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187',
@@ -133,7 +135,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles',
 	'nom_menu_rubriques_evenements' => 'Événements de rubriques',
 	'nom_menu_secteurlangue' => 'Secteurs de langue',
-	'nom_menu_texte_libre' => 'Texte libre'
+	'nom_menu_texte_libre' => 'Texte libre',
+	
+	// T
+	'tous_les_articles' => '... Tous les articles'
 );
 
 ?>
