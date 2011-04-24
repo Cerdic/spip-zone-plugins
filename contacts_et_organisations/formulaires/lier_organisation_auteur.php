@@ -7,7 +7,7 @@ function formulaires_lier_organisation_auteur_charger_dist($id_organisation, $re
 	$valeurs = array(
 		'recherche_auteur' => '',
 		'id_organisation' => intval($id_organisation),
-		'retour' => $redirect
+		'redirect' => $redirect
 	);
 	return $valeurs;
 }

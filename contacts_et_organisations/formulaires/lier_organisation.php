@@ -7,7 +7,7 @@ function formulaires_lier_organisation_charger_dist($id_contact, $redirect=''){
 	$valeurs = array(
 		'recherche_organisation' => '',
 		'id_contact' => intval($id_contact),
-		'retour' => $redirect
+		'redirect' => $redirect
 	);
 	return $valeurs;
 }

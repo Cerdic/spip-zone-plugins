@@ -4,7 +4,7 @@
 
 <!--/#hierarchie-->
 
-[(#SET{redirect,#ENV{retour,#URL_ECRIRE{contacts}}})]
+[(#SET{redirect,#ENV{redirect,#URL_ECRIRE{contacts}}})]
 
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
@@ -16,7 +16,7 @@
 		</h1>
 	</div>
 
-	[(#SET{redirect,#ENV{retour,#ENV{id_contact}
+	[(#SET{redirect,#ENV{redirect,#ENV{id_contact}
 		|generer_url_entite{contact}
 		|sinon{#URL_ECRIRE{contact}}}})]
 	<div class="">

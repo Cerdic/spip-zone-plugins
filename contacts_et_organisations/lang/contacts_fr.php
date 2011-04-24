@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_organisations' => 'Organisations',
 	
 	// C
+	'changer' => "Changer",
 	'chercher_contact' => "Chercher",
 	'chercher_organisation' => "Chercher",
 	'chercher_statut' => "Statut",

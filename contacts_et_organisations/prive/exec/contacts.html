@@ -14,7 +14,7 @@
 [(#AUTORISER{creer, contact}|oui)
 	[(#URL_ECRIRE{contact_edit}
 		|parametre_url{new,oui}
-		|parametre_url{retour,[(#ENV{retour,#SELF})]}
+		|parametre_url{redirect,[(#ENV{redirect,#SELF})]}
 		|icone{<:contacts:contact_creer:>,#CHEMIN{images/contact-24.png},center,creer.gif})]
 ]
 </div>

@@ -7,7 +7,7 @@ function formulaires_lier_contact_auteur_charger_dist($id_contact, $redirect='')
 	$valeurs = array(
 		'recherche_auteur' => '',
 		'id_contact' => intval($id_contact),
-		'retour' => $redirect
+		'redirect' => $redirect
 	);
 	return $valeurs;
 }

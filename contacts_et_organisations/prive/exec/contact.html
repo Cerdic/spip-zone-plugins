@@ -72,7 +72,7 @@
 		<div class='delier'>
 			[(#BOUTON_ACTION{
 				[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_cet_auteur:>}|concat{' ',<:contacts:delier_cet_auteur:>})],
-				[(#URL_ACTION_AUTEUR{lier_contact_auteur,[(#ENV{id_contact})/0],[(#ENV{retour,#SELF})]})]})]		</div>
+				[(#URL_ACTION_AUTEUR{lier_contact_auteur,[(#ENV{id_contact})/0],[(#ENV{redirect,#SELF})]})]})]		</div>
 		]
 	</div>
 	</BOUCLE_auteur_lie>

@@ -46,7 +46,7 @@
 	[(#URL_ECRIRE{organisation_edit}
 		|parametre_url{new,oui}
 		|parametre_url{id_parent,#ID_ORGANISATION}
-		|parametre_url{retour,[(#ENV{retour,#SELF})]}
+		|parametre_url{redirect,[(#ENV{redirect,#SELF})]}
 		|icone{<:contacts:organisation_creer_fille:>,#CHEMIN{images/organisation-24.png},right,creer.gif})]
 ]
 <br class='nettoyeur' />
@@ -60,7 +60,7 @@
 	[(#URL_ECRIRE{contact_edit}
 		|parametre_url{new,oui}
 		|parametre_url{id_organisation,#ID_ORGANISATION}
-		|parametre_url{retour,[(#ENV{retour,#SELF})]}
+		|parametre_url{redirect,[(#ENV{redirect,#SELF})]}
 		|icone{<:contacts:contact_creer:>,#CHEMIN{images/contact-24.png},right,creer.gif})]
 ]
 <br class='nettoyeur' />
@@ -106,7 +106,7 @@
 		<div class='delier'>
 			[(#BOUTON_ACTION{
 				[(#CHEMIN{images/delier-16.png}|balise_img{<:contacts:delier_cet_auteur:>}|concat{' ',<:contacts:delier_cet_auteur:>})],
-				[(#URL_ACTION_AUTEUR{lier_organisation_auteur,[(#ENV{id_organisation})/0],[(#ENV{retour,#SELF})]})]})]		</div>
+				[(#URL_ACTION_AUTEUR{lier_organisation_auteur,[(#ENV{id_organisation})/0],[(#ENV{redirect,#SELF})]})]})]		</div>
 		]
 	</div>
 	
