@@ -27,7 +27,7 @@ function formulaires_plugonet_generer_traiter() {
 
 	// Generation du fichier
 	$traitement = 'generation_paquetxml';
- 	$generer = charger_fonction('plugonet_traiter_pluginxml','inc');
+ 	$generer = charger_fonction('plugonet_traiter','inc');
  	list($erreurs, $commandes) = $generer($traitement, $pluginxml, $forcer, $simuler);
 
 	// Formatage et affichage des resultats

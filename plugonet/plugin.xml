@@ -1,7 +1,7 @@
 <plugin>
 	<nom>PlugOnet</nom>
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
-	<version>0.3.0</version>
+	<version>0.3.1</version>
 	<etat>test</etat>
 	<licence>GPL v3</licence>
 	<icon>prive/themes/spip/images/plugonet-32.png</icon>
@@ -21,10 +21,6 @@ une aide sur chaque balise de la nouvelle DTD.
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/plugonet_autoriser.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_gauche</nom>
-		<inclure>plugonet_pipelines.php</inclure>
 	</pipeline>
 
 	<bouton id="plugonet" parent="configuration">

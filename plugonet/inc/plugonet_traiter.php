@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/plugin');
 
-function inc_plugonet_traiter_pluginxml($traitement, $files, $forcer_paquetxml=false, $simuler=false) {
+function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $simuler=false) {
 	// Chargement des fonctions de validation XML et d'extraction des informations contenues 
 	// dans la balise plugin
 	$valider_xml = charger_fonction('valider', 'xml');

@@ -25,7 +25,7 @@ function formulaires_plugonet_valider_traiter(){
 
 	// Generation du fichier
 	$traitement = 'validation_paquetxml';
- 	$valider = charger_fonction('plugonet_traiter_pluginxml','inc');
+ 	$valider = charger_fonction('plugonet_traiter','inc');
  	list($erreurs, ) = $valider($traitement, $pluginxml);
 
 	// Formatage et affichage des resultats

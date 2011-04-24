@@ -25,7 +25,7 @@ function formulaires_plugonet_verifier_traiter(){
 
 	// Generation du fichier
 	$traitement = 'verification_pluginxml';
- 	$verifier = charger_fonction('plugonet_traiter_pluginxml','inc');
+ 	$verifier = charger_fonction('plugonet_traiter','inc');
  	list($erreurs, ) = $verifier($traitement, $pluginxml);
 
 	// Formatage et affichage des resultats
