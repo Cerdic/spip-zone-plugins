@@ -31,13 +31,13 @@ function action_ajouterami_dist(){
 		if ($row=sql_fetsel('*','spip_amis',array('id_auteur='.intval($id_ami),'id_ami='.intval($id_auteur),"statut='prop'"))){
 			sql_updateq('spip_amis',array('statut'=>'publie','date'=>'NOW()'),array('id_auteur='.intval($id_ami),'id_ami='.intval($id_auteur)));
 			$notification = charger_fonction('notifications','inc');
-			$notification('ajouterami',$id_ami);
+			$notification('ajouterami',$id_ami,array('id_auteur' => $id_auteur));
 		}
 		else {
 			// sinon lancer une invitation
 			sql_insertq('spip_amis',array('id_auteur'=>$id_auteur,'id_ami'=>$id_ami,'statut'=>'prop'));
 			$notification = charger_fonction('notifications','inc');
-			$notification('inviterami',$id_ami);
+			$notification('inviterami',$id_ami,array('id_auteur' => $id_auteur));
 		}
 		spip_log("invitation de $id_ami par $id_auteur",'amis');
 		include_spip('inc/invalideur');

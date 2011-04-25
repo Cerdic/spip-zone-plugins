@@ -18,6 +18,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_recherche_ami' => 'Rechercher',
 'label_rechercher' => 'Rechercher',
 
+'mail_ajouterami_texte' => 'Bonjour @nom@ ! @ami@ a accepté votre invitation sur @nom_site@.',
+'mail_ajouterami_titre' => 'Invitation acceptée sur le site @nom_site@.',
+'mail_inviterami_texte' => 'Bonjour @nom@ ! @ami@ souhaite vous ajouter à sa liste d\'amis sur @nom_site@.',
+'mail_inviterami_titre' => 'Invitation sur le site @nom_site@.',
+'mail_inviterami_explication' => 'Gérer votre liste d\'amis :',
 'mail_rejoignez_sujet' => '@nom@ vous invite sur @nom_site@',
 'mail_rejoignez_message' => 'Inscrivez vous vite sur @nom_site@ (@url_site@) et rejoignez @nom@ dans la communauté des contributeurs.',
 
