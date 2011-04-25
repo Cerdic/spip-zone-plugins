@@ -1,8 +1,11 @@
 <?php
-
-// exec/spiplistes_courrier_previsu.php
-
-// utilise par _SPIPLISTES_EXEC_COURRIER_EDIT
+/**
+ * @version Original From SPIP-Listes-V :: Id: spiplistes_listes_forcer_abonnement.php paladin@quesaco.org
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
@@ -22,9 +25,6 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

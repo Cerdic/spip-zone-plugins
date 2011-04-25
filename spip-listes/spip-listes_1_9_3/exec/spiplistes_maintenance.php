@@ -1,12 +1,10 @@
 <?php
-
-// exec/spiplistes_maintenance.php
-// _SPIPLISTES_EXEC_MAINTENANCE
-
-// From: paladin@quesaco.org
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

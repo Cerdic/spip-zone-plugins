@@ -1,6 +1,10 @@
 <?php
-
-// exec/spiplistes_courriers_casier.php
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /******************************************************************************************/
 /* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
@@ -20,10 +24,6 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 // _SPIPLISTES_EXEC_COURRIERS_LISTE
 

@@ -1,10 +1,11 @@
 <?php
-// _SPIPLISTES_EXEC_AUTOCRON
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
+/**
+ * @version Original From SPIP-Listes-V :: Id: spiplistes_listes_forcer_abonnement.php paladin@quesaco.org
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

@@ -1,10 +1,11 @@
 <?php
-// spiplistes_menu_navigation.php
-// Original From SPIP-Listes-V :: $Id: spiplistes_menu_navigation.php paladin@quesaco.org $
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @version Original From SPIP-Listes-V :: $Id: spiplistes_menu_navigation.php paladin@quesaco.org $
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 //	Ajout des gadgets
 

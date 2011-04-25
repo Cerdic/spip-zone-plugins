@@ -1,5 +1,12 @@
 <?php
-// Orginal From SPIP-Listes-V :: $Id: aide_spiplistes.php paladin@quesaco.org $
+/**
+ * @version Orginal From SPIP-Listes-V :: $Id: aide_spiplistes.php paladin@quesaco.org $
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
+ 
 /******************************************************************************************/
 /* SPIP-Listes-v est une adaptation de SPIP-Listes.                                       */
 /* Copyright (C) 2007 Christian PAULUS  cpaulus@quesaco.org , http://quesaco.org          */
@@ -23,9 +30,6 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

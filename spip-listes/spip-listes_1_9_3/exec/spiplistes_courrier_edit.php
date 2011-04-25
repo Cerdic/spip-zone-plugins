@@ -1,9 +1,11 @@
 <?php
-
-// exec/spiplistes_courrier_edit.php
-
-// _SPIPLISTES_EXEC_COURRIER_EDIT
-
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
+ 
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
@@ -22,9 +24,6 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.                   */
 /******************************************************************************************/
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 /*
 	Formulaire de creation de courrier
