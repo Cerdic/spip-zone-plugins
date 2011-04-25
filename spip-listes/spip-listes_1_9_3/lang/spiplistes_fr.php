@@ -1,11 +1,13 @@
 <?php
-
-// This is a SPIP module file  --  Ceci est un fichier module de SPIP
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
+/**
+ * Pack langue francais
+ * 
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
+ 
 $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // CP-20081126: classement par scripts

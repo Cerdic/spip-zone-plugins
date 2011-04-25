@@ -1,5 +1,4 @@
 <?php
-
 // Este es un archivo para SPIP -- This is a SPIP module file  --  Ceci est un fichier module de SPIP
 // Traducci&oacute;n ao galego por Berio Molina (berio@alg-a.org | http://www.berio.alg-a.org)
 

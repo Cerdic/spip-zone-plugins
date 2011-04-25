@@ -1,7 +1,13 @@
 <?php
-
-// This is a SPIP module file  --  Ceci est un fichier module de SPIP
-
+/**
+ * Pack langue allemand
+ * 
+ * @package spiplistes
+ */
+ // $LastChangedRevision: 47066 $
+ // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedDate: 2011-04-25 19:54:15 +0200 (Lun 25 avr 2011) $
+ 
 $GLOBALS['i18n_spiplistes_de'] = array(
 
 
