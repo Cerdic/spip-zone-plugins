@@ -1,28 +1,34 @@
 <?php 
+/**
+ * Installation du plugin. Initialisaiton des tables et preferences generiques.
+ *
+ * @version Original From SPIP-Listes-V :: Id: spiplistes_init.php paladin@quesaco.org
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
-// base/spiplistes_init.php
-
-// Original From SPIP-Listes-V :: Id: spiplistes_init.php paladin@quesaco.org
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-///////////////////////////////////////
-// A chaque appel de exec/admin_plugin, si le plugin est active, 
-// spip detecte spiplistes_install() et l'appelle 3 fois :
-// 1/ $action = 'test'
-// 2/ $action = 'install'
-// 3/ $action = 'test'
-// 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
 
+/**
+ * Installation du plugin
+ *
+ * A chaque appel de exec/admin_plugin, si le plugin est active,
+ * spip detecte spiplistes_install() et l'appelle 3 fois :
+ * 1/ $action = 'test'
+ * 2/ $action = 'install'
+ * 3/ $action = 'test'
+ * @global string $GLOBALS['meta']['spiplistes_version']
+ * @return boolean
+ */
 function spiplistes_install ($action) {
 
-include_spip('inc/spipliste_api_globales');
-spiplistes_debug_log('spiplistes_install()');
+	include_spip('inc/spipliste_api_globales');
+	spiplistes_debug_log('spiplistes_install()');
 
 	switch($action) {
 		case 'test':
@@ -77,9 +83,12 @@ spiplistes_debug_log('spiplistes_install()');
 		default:
 			break;
 	}
+	return (FALSE);
 }
 
-
+/**
+ * @return string
+ */
 function spiplistes_base_creer () {
 
 	//spiplistes_debug_log("spiplistes_base_creer()");
@@ -107,7 +116,10 @@ function spiplistes_base_creer () {
 	return($spiplistes_base_version);
 }
 
-
+/**
+ * @global string $GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES]
+ * @return boolean
+ */
 function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 
 	if(!isset($GLOBALS['meta'][_SPIPLISTES_META_PREFERENCES])) {
@@ -141,6 +153,10 @@ function spiplistes_initialise_spip_metas_spiplistes ($reinstall = false) {
 	return(true);
 }
 
+/**
+ * @global string $GLOBALS['meta']['accepter_visiteurs']
+ * @return boolean
+ */
 function spiplistes_activer_inscription_visiteurs () {
 	$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
 	if($accepter_visiteurs != 'oui') {
@@ -151,8 +167,11 @@ function spiplistes_activer_inscription_visiteurs () {
 		spiplistes_log("ACTIVER accepter visiteur");
 	}
 	return(true);
-}
+} // spiplistes_activer_inscription_visiteurs ()
 
+/**
+ * @return boolean
+ */
 function spiplistes_vider_tables () {
 
 	include_spip('base/abstract_sql');
@@ -179,6 +198,6 @@ function spiplistes_vider_tables () {
 	spiplistes_ecrire_metas();
 	
 	return(true);
-} //
+} // spiplistes_vider_tables ()
 
 

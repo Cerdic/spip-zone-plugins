@@ -1,6 +1,17 @@
 <?php
-
-// base/spiplistes_upgrade.php
+/**
+ * Fonctions de mise a jour du plugin
+ *
+ * Script appele par mes_options.php si le numero de version
+ * ou version_base a ete modifie'.
+ * Le numero de version actualise' est ensuite enregistre"
+ * dans les metas.
+ *
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
@@ -14,30 +25,25 @@
 /* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
 /* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
-/* pour plus de d�tails.                                                                  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir re�u une copie de la Licence Publique Generale GNU                    */
+/* Vous devez avoir recu une copie de la Licence Publique Generale GNU                    */
 /* en meme temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
-
-/*
-	Script appele a chaque appel par mes_options
-	
-	spiplistes_upgrade() : si mise a jour de spiplistes
-	
-	spiplistes_upgrade_base() : si mise a jour de la base spiplistes
-*/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_api_abstract_sql');
 
+/**
+ * Pour mise à jour de PSIP-Listes
+ *
+ * @return string
+ */
 function spiplistes_upgrade () {
 
 	$spiplistes_name = _SPIPLISTES_PREFIX;
@@ -93,6 +99,11 @@ function spiplistes_upgrade () {
 	return($spiplistes_current_version);
 }
 
+/**
+ * Mise à jour de la base de données (tables SPIP-Listes uniquement)
+ *
+ * @return string
+ */
 function spiplistes_upgrade_base (
 	$spiplistes_name
 	, $spiplistes_current_version

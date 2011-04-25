@@ -1,19 +1,21 @@
 <?php
-// base/spiplistes_tables.php
+/**
+ * Description et creation des tables.
+ *
+ * Appele
+ * - pour l'init de la base
+ * - par les exec en charge d'interpreter un patron (ex.: spiplistes_courrier_gerer)
+ * - par l'espace public
+ *
+ * Ne pas oublier de faire l'include dans {PLUGIN}_mes_fonctions.php
+ * 
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-/*
-	Appele 
-	- pour l'init de la base
-	- par les exec en charge d'interpreter un patron (ex.: spiplistes_courrier_gerer)
-	- par l'espace public
-	
-	Ne pas oublier de faire l'include dans {PLUGIN}_mes_fonctions.php
-	
-*/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
@@ -161,4 +163,3 @@ include_spip('inc/spiplistes_api_globales');
 	$tables_jointures['spip_auteurs'][]= 'courriers';
 	$tables_jointures['spip_auteurs']['id_liste']= 'auteurs_listes';
 	
-?>
