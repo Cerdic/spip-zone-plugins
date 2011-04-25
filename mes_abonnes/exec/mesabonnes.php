@@ -21,12 +21,14 @@ function exec_mesabonnes(){
     // inspi ecrire/inc/stastiques.php		
 		include_spip('inc/acces');		
 		$args = array();
+		$args['id_article']='-mesabonnes-'.date('Y-m-d');
 		$fond = "mesabonnes";
 	  $args = param_low_sec($fond, $args, '', 'transmettre');
 	  $url = generer_url_public('transmettre', $args);
 	  echo "<ul><li><a href='$url'>"._T('mesabonnes:export_abonnes_csv')."</a></li>";
 	  
 	  $args = array();
+	  $args['id_article']='-mesabonnes-bulk-'.date('Y-m-d');
 	  $fond = "mesabonnes_maxbulk";
 	  $args = param_low_sec($fond, $args, '', 'transmettre');
 	  $url = generer_url_public('transmettre', $args);
