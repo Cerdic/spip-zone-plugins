@@ -13,10 +13,10 @@ if($GLOBALS['auteur_session'][statut] == '6forum') return;
 // Quelques definitions de variables
 $img_montrer =	'<img name="montrer1" src="'.
 		find_in_path('montrer.png').
-		'" style="vertical-align:middle" alt="<:basupp:montrer_barre:>" />';
+		'" width="16" height="16" style="vertical-align:middle" alt="<:basupp:montrer_barre:>" />';
 $img_cacher = '<img name="montrer2" src="'.
 		find_in_path('cacher.png').
-		'" style="vertical-align:middle" alt="<:basupp:cacher_barre:>" />';
+		'" width="16" height="16" style="vertical-align:middle" alt="<:basupp:cacher_barre:>" />';
 $img_reload = find_in_path('reload_page.png');
 $img_reload_new = find_in_path('reload_page_new.png');
 $page_modifie = "#ENV{use_cache}";
@@ -186,7 +186,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 
 	[(#REM) Calcul et recalcul de la page en cours ]
 	<a href='[(#SELF|parametre_url{var_mode,#ENV{calcul}})]'<?php echo $cacher_le_bouton['calculer'];?> title="<:admin_recalculer:> [(#ENV{use_cache}|?{(<:basupp:calcul_necessaire:>),''})]">
-		&nbsp;<img style="vertical-align:middle" src="<?php echo($img_reload); ?>" alt="<:admin_recalculer:>" />
+		&nbsp;<img style="vertical-align:middle" src="<?php echo($img_reload); ?>" width="16" height="16" alt="<:admin_recalculer:>" />
 	</a>
 
 	[(#REM) Debogueur de squelettes ]
@@ -196,7 +196,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 
 	[(#REM) Deconnexion ]
 	<a href="javascript:quitter('#URL_LOGOUT')"<?php echo $cacher_le_bouton['deconnexion'];?> title="<:icone_deconnecter:>">
-		<img style="vertical-align:middle" src="<?php echo($img_logout); ?>" alt="<:icone_deconnecter:>" />
+		<img style="vertical-align:middle" src="<?php echo($img_logout); ?>" width="16" height="16" alt="<:icone_deconnecter:>" />
 	</a>
 
 	[(#REM) Bouton pour masquer/afficher la barre de boutons ]
