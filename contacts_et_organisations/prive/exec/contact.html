@@ -26,16 +26,21 @@
 	<div id="wysiwyg">
 	<INCLURE{fond=prive/contenu/contact,id_contact=#ID_CONTACT,ajax=wysiwyg}>
 	</div>
-
-	<INCLURE{fond=prive/liste/linked_organisations,
-		id_contact=#ID_CONTACT,
-		titre=<:contacts:info_organisations_appartenance:>,
-		ajax}>
-					
-	#INCLURE{fond=prive/contenu/portfolio_document,objet=contact,id_objet=#ID_CONTACT}
-
-	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,contact,id,#ID_CONTACT},data,'<div class="nettoyeur"></div>'}}
 </div>
+
+
+<INCLURE{fond=prive/liste/linked_organisations,
+	id_contact=#ID_CONTACT,
+	titre=<:contacts:info_organisations_appartenance:>,
+	ajax}>
+
+<br class='nettoyeur' />
+		
+#INCLURE{fond=prive/contenu/portfolio_document,objet=contact,id_objet=#ID_CONTACT}
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,contact,id,#ID_CONTACT},data,'<div class="nettoyeur"></div>'}}
+
+
 
 <div class='plus'>
 	<h3 class='h3 invisible'><:contacts:supprimer_contact:></h3>
