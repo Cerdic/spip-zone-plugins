@@ -1,9 +1,11 @@
 <?php
-
-// From SPIP-Listes-V :: import_export.php,v 1.19 paladin@quesaco.org  http://www.quesaco.org/
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @version From SPIP-Listes-V :: import_export.php,v 1.19 paladin@quesaco.org  http://www.quesaco.org/
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 

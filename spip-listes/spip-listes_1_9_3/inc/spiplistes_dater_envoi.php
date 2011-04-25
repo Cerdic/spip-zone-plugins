@@ -1,8 +1,10 @@
 <?php
-// Orginal From SPIP-Listes-V :: Id: spiplistes_dater_envoi.php paladin@quesaco.org
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
