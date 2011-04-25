@@ -1,26 +1,25 @@
-<!--#hierarchie-->
-<!--/#hierarchie-->
- 
-
-
 
 
 <!--#navigation-->
 <div class="logo_navigation">
 <img src="#CHEMIN{images/contacts-128.png}" width="128" height="128" alt="Logo plugin" />
 </div>
+
+<div class="cadre cadre-r cadre_padding">
+<BOUCLE_nb_organisations(ORGANISATIONS){tout}> </BOUCLE_nb_organisations>[(#GRAND_TOTAL|singulier_ou_pluriel{'contacts:organisation', 'contacts:organisations_nb'})<br />]</B_nb_organisations>
+<BOUCLE_nb_contacts(CONTACTS){tout}> </BOUCLE_nb_contacts>[(#GRAND_TOTAL|singulier_ou_pluriel{'contacts:contact', 'contacts:contacts_nb'})<br />]</B_nb_contacts>
+</div>
 <!--/#navigation-->
  
 
 
 <!--#extra-->
-
 <!--/#extra-->
 
 
+[(#VAL{contacts}|barre_onglets{repertoire})]
 
 <h1><:contacts:titre_page_repertoire:></h1>
 
-<div><:contacts:explications_page_repertoire:>
 
-[(#INCLURE{fond=prive/liste/repertoire}{env})]
+[(#INCLURE{fond=prive/liste/repertoire, env, ajax})]

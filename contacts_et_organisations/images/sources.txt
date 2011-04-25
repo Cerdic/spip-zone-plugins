@@ -1,6 +1,7 @@
 Icones contacts
-	by Prax_08  | iSuite Revoked :
-	http://www.iconfinder.com/icondetails/19510/128/address_contacts_folder_icon
+	Artist: RAD.E8
+	Iconset: Minium2 Icons
+	http://www.iconarchive.com/show/minium-2-icons-by-rade8/Folder-Group-White-icon.html
 
 Icone organisation
 	by WebIconSet.com  | Mobile Icons

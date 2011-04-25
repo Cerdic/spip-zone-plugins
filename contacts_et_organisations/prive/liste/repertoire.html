@@ -1,37 +1,31 @@
-#CACHE{0}
-[(#REM) Tableau complet des contacts, affiché sur la page ?exec=contacts ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_auteur,1
 }})
 ]<B_liste_orga>
 #ANCRE_PAGINATION
-<div class="liste-elements contacts">
+<div class="liste-elements organisations repertoire">
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 <table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,<:contacts:info_tous_contacts:>})</strong></caption>]
-	<thead>
-		<tr class='first_row'>
-			<th class="logo"></th>
-			<th class="pseudo">[(#TRI{pseudo,<:contacts:label_pseudo:>,ajax})]</th>
-			<th class="nom">[(#TRI{nom,<:contacts:label_nom:>,ajax})]</th>
-			<th class="organsiation">[(#TRI{organsiation,<:contacts:label_organisation:>,ajax})]</th>
-			<th class='action'></th>
-		</tr>
-	</thead>
+[<caption><strong class="caption">(#ENV*{titre,<:contacts:info_organisations_meres:>})</strong></caption>]
 	<tbody>
-	<BOUCLE_liste_orga(CONTACTS){id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,100}}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR||sinon{[<img src="(#CHEMIN{images/contact-24.png})" alt="picto contact" class="spip_logos" />]}|image_reduire{20,26})]</a>
-			<td class='pseudo'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#MODELE{nom_auteur}</a></td>
-			<td class='nom'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></td>
-			<td class='organsiation'>#ORGANISATIONS</td>			
-			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|?{
-				[(#BOUTON_ACTION{
-					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_contact:>})],
-					[(#URL_ACTION_AUTEUR{supprimer_contact,[(#ID_CONTACT)/#ID_ORGANISATION],[(#ENV{redirect,#SELF})]})],
-					ajax,<:contacts:confirmer_supprimer_organisation:>})],
-				#ID_AUTEUR
-			})]</td>
+	<BOUCLE_liste_orga(ORGANISATIONS){id_parent=#ENV{id_parent,0}}
+		{recherche?}
+		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
+		[(#ENV{id_parent}|non)<tr class="vide"><td colspan="2" class='vide'></td></tr>]
+		<tr class="[(#ENV{id_parent}|non)racine ][(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR|sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
+			<td class='nom'>
+				<a [ (#ENV{id_parent}|non)class="racine" ] href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
+				[(#INCLURE{fond=prive/liste/repertoire_contacts,
+					id_organisation=#ID_ORGANISATION,
+					titre=<:contacts:contacts:>,
+					env, ajax})]
+				[(#INCLURE{fond=prive/liste/repertoire,
+					id_parent=#ID_ORGANISATION,
+					titre=<:contacts:organisations:>,
+					env, ajax})]
+			</td>
 		</tr>
 	</BOUCLE_liste_orga>
 	</tbody>
@@ -39,5 +33,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_orga>[
-<div class="liste-elements contacts"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-elements organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_orga>
