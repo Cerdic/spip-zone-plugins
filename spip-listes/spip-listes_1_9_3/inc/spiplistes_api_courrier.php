@@ -1,6 +1,17 @@
 <?php
-
-// inc/spiplistes_api_courrier.php
+/**
+ * Fonctions consacrees au traitement du contenu du courrier et tampon :
+ * 	- filtres, convertisseurs texte, charset, etc.
+ *
+ * Toutes les fonctions ici ont un nom commencant pas 'spiplistes_courrier'
+ * Voir {@link spiplistes_upgrade_base()} base/spiplistes_upgrade.php pour
+ *  definitions et descriptions des tables
+ * 
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
@@ -22,21 +33,7 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-/*
-	Fonctions consacrees au traitement du contenu du courrier et tampon :
-	- filtres, convertisseurs texte, charset, etc.
-	
-	Toutes les fonctions ici ont un nom commencant pas 'spiplistes_courrier'
-	
-	Voir base/spiplistes_upgrade.php pour definitions et descriptions des tables
-	
-	
-*/
-
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * passe propre() sur un texte puis nettoye les trucs rajoutes par spip sur du html

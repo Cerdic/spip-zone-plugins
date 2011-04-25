@@ -1,19 +1,17 @@
 <?php
 /**
- * spiplistes_meleuse.php
- * 
  * La meleuse s'occupe des envois de courriers dont les etiquettes ont
  * ete preparees par la trieuse, ou dont les courriers ont ete prepares
  * via le back-office (cas des envois de test).
  *
  * Pour en savoir plus,
  * voir la documentation sur la fonction {@link spiplistes_meleuse()}.
- * @version 20110422
- * $LastChangedRevision$
- * $LastChangedBy$
- * $LastChangedDate$
  * @package spiplistes
  */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
+
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
 /* par email pour SPIP. http://bloog.net/spip-listes                                      */
