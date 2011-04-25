@@ -187,12 +187,10 @@ function remplacer_mot($id_mot, $descriptif, $texte, $id_groupe, $groupe) {
 //tables du plugins amap
 function amap_declarer_tables_interfaces($interface){
 	//-- Alias
-	$interface['table_des_tables']['amap_banques'] = 'amap_banques';
 	$interface['table_des_tables']['amap_contrats'] = 'amap_contrats';
 	$interface['table_des_tables']['amap_evenements'] = 'amap_evenements';
 	$interface['table_des_tables']['amap_famille_varietes'] = 'amap_famille_varietes';
 	$interface['table_des_tables']['amap_lieux'] = 'amap_lieux';
-	$interface['table_des_tables']['amap_paniers'] = 'amap_paniers';
 	$interface['table_des_tables']['amap_participation_sorties'] = 'amap_participation_sorties';
 	$interface['table_des_tables']['amap_prix'] = 'amap_prix';
 	$interface['table_des_tables']['amap_produits'] = 'amap_produits';
@@ -203,22 +201,11 @@ function amap_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['amap_types_contrats'] = 'amap_types_contrats';
 	$interface['table_des_tables']['amap_vacances'] = 'amap_vacances';
 	$interface['table_des_tables']['amap_varietes'] = 'amap_varietes';
+	$interface['table_des_tables']['paniers'] = 'paniers';
 	return $interface;
 }
 
 function amap_declarer_tables_principales($tables_principales){
- 	//-- Table banques -------------------
-	$spip_amap_banques = array(
-		'id_banque'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'label_banque'  => 'varchar(50) NOT NULL'
-		);
-	$spip_amap_banques_key = array(
-		'PRIMARY KEY'   => 'id_banque'
-		);
-	$tables_principales['spip_amap_banques'] = array(
-		'field' => &$spip_amap_banques,
-		'key' => &$spip_amap_banques_key,
-		);
 
 	//-- Table contrats -------------------
 	$spip_amap_contrats = array(
@@ -292,22 +279,20 @@ function amap_declarer_tables_principales($tables_principales){
 		);
 
 	//-- Table paniers -------------------
-	$spip_amap_paniers = array(
-		'id_produit'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'id_evenement'  => 'bigint NOT NULL',
-		'id_element'  => 'bigint NOT NULL',
-		'id_famille'  => 'bigint NOT NULL',
-		'id_variete'  => 'bigint NULL',
-		'quantite'  => 'bigint NULL',
-		'poids'  => 'varchar(6) NULL'
+	$spip_paniers = array(
+		'id_panier'  => 'bigint NOT NULL AUTO_INCREMENT',
+		'nom'  => 'bigint NOT NULL',
+		'prenom'  => 'bigint NOT NULL',
+		'email'  => 'bigint NOT NULL',
+		'date_distribution'  => 'bigint NULL',
+		'type_panier'  => 'bigint NULL',
 		);
-	$spip_amap_paniers_key = array(
-		'PRIMARY KEY'   => 'id_produit, id_evenement, id_element'
+	$spip_paniers_key = array(
+		'PRIMARY KEY'   => 'id_panier'
 		);
-	$tables_principales['spip_amap_paniers'] = array(
-		'field' => &$spip_amap_paniers,
-		'key' => &$spip_amap_paniers_key,
-		'join' => array('id_produit'=>'id_produit','id_evenement'=>'id_evenement','id_famille'=>'id_famille','id_variete'=>'id_variete')
+	$tables_principales['spip_paniers'] = array(
+		'field' => &$spip_paniers,
+		'key' => &$spip_paniers_key,
 		);
 
 	//-- Table participation_sorties -------------------

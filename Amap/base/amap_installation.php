@@ -30,7 +30,8 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 		if (version_compare($current_version,'0.4','<')){
 			// On supprime la table personne
 			sql_drop_table("spip_amap_banques");
-			spip_log("Suppression de la table spip_amap_banques V0.4", "amap_installation");
+			sql_drop_table("spip_amap_paniers");
+			spip_log("Suppression des table banques et paniers V0.4", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
 		}
@@ -43,7 +44,6 @@ function amap_vider_tables($nom_meta_version_base){
 	sql_drop_table('spip_amap_evenements');
 	sql_drop_table('spip_amap_famille_varietes');
 	sql_drop_table('spip_amap_lieux');
-	sql_drop_table('spip_amap_paniers');
 	sql_drop_table('spip_amap_participation_sorties');
 	sql_drop_table('spip_amap_prix');
 	sql_drop_table('spip_amap_produits');

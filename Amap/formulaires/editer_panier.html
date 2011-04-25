@@ -1,0 +1,26 @@
+<div class='formulaire_spip formulaire_amap formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_panier,nouveau}'>
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_panier' value='#ENV{id_panier}' />
+		<ul>
+		[(#SAISIE{input, nom, label=<:amap:nom:>,obligatoire=oui})]
+		[(#SAISIE{input, prenom, label=<:amap:prenom:>,obligatoire=oui})]
+		[(#SAISIE{input, email, label=<:amap:adresse_email:>,obligatoire=oui})]
+		<B_datedistribution>
+			<label><:amap:date_distribution:></label>
+			<select name="date_distribution" id="champ_date_distribution">
+			<option value="#DATE_DEBUT"> </option>
+			<BOUCLE_datedistribution(EVENEMENTS)>
+				<option value="#DATE_DEBUT"[(#DATE_DEBUT|=={#DATE_DEBUT}|oui) selected="selected"]>[(#DATE_DEBUT|affdate{'d/m/Y'})]</option>
+			</BOUCLE_datedistribution>
+			</select>
+		</B_datedistribution>
+		[(#SAISIE{input, type_panier, label=<:amap:type_panier:>,obligatoire=oui})]			
+		</ul>
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>
