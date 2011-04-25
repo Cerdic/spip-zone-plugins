@@ -110,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_telecharger' => '[Télécharger]',
 	'lien_traduction_module' => 'Module ',
 	'lien_traduction_vers' => ' vers ',
+	'lien_utiliser_google_translate' => 'Utiliser cette version',
 	'lien_voir_toute_chaines_module' => 'Voir toutes les chaines du module.',
 
 	// M

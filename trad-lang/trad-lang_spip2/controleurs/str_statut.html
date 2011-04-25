@@ -28,14 +28,15 @@
 	[(#CLE|=={responseData}|oui)
 	<div>
 	<label><:tradlang:label_proposition_google_translate:></label>
-	<textarea readonly="readonly" class="crayon-active" style="width:#ENV{largeur}px;">[(#VALEUR|table_valeur{translatedText})]</textarea>
-	</div>]
+	<textarea readonly="readonly" id="google_translate" class="crayon-active" style="width:#ENV{largeur}px;">[(#VALEUR|table_valeur{translatedText})]</textarea>
+	</div>
+	<p><a href="#" onclick="cQuery('#str').val(cQuery('#google_translate').val());return false;"><:tradlang:lien_utiliser_google_translate:></a></p>]
 	</BOUCLE_google_translate>
 </li>
 </BOUCLE_orig>
 <li class="editer_str">
 	<label><:tradlang:label_tradlang_str:></label>
-	<textarea class="crayon-active" name="#ENV{name_str}"
+	<textarea class="crayon-active" name="#ENV{name_str}" id="str"
 	 style="width:#ENV{largeur}px; height:#ENV{hauteur}px;#ENV{style}">[(#STR**|entites_html)]</textarea>
 </li>
 </BOUCLE_a>
