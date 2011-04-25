@@ -14,10 +14,10 @@ if($GLOBALS['auteur_session'][statut] == '6forum') return;
 // Quelques definitions de variables
 $img_montrer =	'<img id="montrer1" src="'.
 		find_in_path('montrer.png').
-		'" style="vertical-align:middle;border:0;" alt="<:basupp:montrer_barre:>" />';
+		'" style="vertical-align:middle;border:0;" alt="<:basupp:montrer_barre:>" height="16" width="16" />';
 $img_cacher = '<img id="montrer2" src="'.
 		find_in_path('cacher.png').
-		'" style="vertical-align:middle;border:0;" alt="<:basupp:cacher_barre:>" />';
+		'" style="vertical-align:middle;border:0;" alt="<:basupp:cacher_barre:>" height="16" width="16" />';
 $img_reload = find_in_path('reload_page.png');
 $img_reload_new = find_in_path('reload_page_new.png');
 $page_modifie = "#ENV{use_cache}";
@@ -45,11 +45,11 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 
 [(#REM) Div globale de la barre de boutons ]
 
-<div id="boutons_admin_supp" [class="(#ENV{divclass,spip-admin-bloc})" ]dir='#LANG_DIR' style="<?php echo($afficher_boutons);?>visibility:hidden">
+<div id="boutons_admin_supp" [class="(#ENV{divclass,spip-admin-bloc})" ]dir='#LANG_DIR' style="<?php echo($afficher_boutons);?>visibility:hidden;right:20px">
 
 	[(#REM) Bouton pour fixer ou non la barre de boutons ]
 	<a href="javascript:swap_fixer_barre()"<?php echo $cacher_le_bouton['garder_au_premier_plan'];?>>
-		<img id="statut_fixation" alt="." src="rien.gif"  style="border:0;"/>
+		<img id="statut_fixation" alt="." src="rien.gif"  style="border:0;" height="16" width="16" />
 	</a>
 
 	[(#REM) Bouton avec le nom de l'auteur connecte et un lien vers sa page ]
@@ -220,7 +220,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 
 	[(#REM) Calcul et recalcul de la page en cours ]
 	<a href='[(#SELF|parametre_url{var_mode,#ENV{calcul}})]'<?php echo $cacher_le_bouton['calculer'];?> title="<:admin_recalculer:> [(#ENV{use_cache}|?{(<:basupp:calcul_necessaire:>),''})]">
-		&nbsp;<img style="vertical-align:middle;border:0;" src="<?php echo($img_reload); ?>" alt="<:admin_recalculer:>" />
+		&nbsp;<img style="vertical-align:middle;border:0;" src="<?php echo($img_reload); ?>" alt="<:admin_recalculer:>" height="16" width="16" />
 	</a>
 
 	[(#REM) Debogueur de squelettes ]
@@ -230,7 +230,7 @@ $cacher_le_bouton = $GLOBALS['cacher_le_bouton'];
 
 	[(#REM) Deconnexion ]
 	<a href="javascript:quitter('#URL_LOGOUT')"<?php echo $cacher_le_bouton['deconnexion'];?> title="<:icone_deconnecter:>">
-		<img style="vertical-align:middle;border:0;" src="<?php echo($img_logout); ?>" alt="<:icone_deconnecter:>" />
+		<img style="vertical-align:middle;border:0;" src="<?php echo($img_logout); ?>" alt="<:icone_deconnecter:>" height="16" width="16" />
 	</a>
 
 	[(#REM) Bouton pour masquer/afficher la barre de boutons ]
