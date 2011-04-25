@@ -66,8 +66,8 @@
 		<BOUCLE_document(spip_documents spip_documents_liens){id_objet=#ID_BANNIERE}{objet=banniere}{0,1}>
 			<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" />
 		</BOUCLE_document>
-			[(#LOGO_BANNIERE||non)<img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" />]
-			[(#LOGO_BANNIERE||oui)<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> 	]
+			[(#LOGO_BANNIERE|non)<img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" />]
+			[(#LOGO_BANNIERE|oui)<img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> 	]
 		<//B_document>		
 		</td>
 
@@ -100,13 +100,10 @@
 </BOUCLE_bannieres>
 </table>
 [<p class='pagination'>(#PAGINATION)</p>]
-
-   
      <p> 
-    <img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> <:bannieres:logo_ok:>
-    <img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" /> <:bannieres:logo_absent:>
+         <img src="[(#CHEMIN{images/banniere_ok.gif})]" alt="<:bannieres:logo_ok:>" width="[(#CHEMIN{images/banniere_ok.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ok.gif}|hauteur)]" /> <:bannieres:logo_ok:>
+         <img src="[(#CHEMIN{images/banniere_ko.gif})]" alt="<:bannieres:logo_absent:>" width="[(#CHEMIN{images/banniere_ko.gif}|largeur)]" height="[(#CHEMIN{images/banniere_ko.gif}|hauteur)]" /> <:bannieres:logo_absent:>
      </p>
-
 </B_bannieres>
 <p><:bannieres:pas_de_banniere:></p>
-<//B_bannieres>
+<//B_bannieres> 
