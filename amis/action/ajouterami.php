@@ -29,7 +29,7 @@ function action_ajouterami_dist(){
 			return;
 		// si deja une invitation dans l'autre sens, alors on valide
 		if ($row=sql_fetsel('*','spip_amis',array('id_auteur='.intval($id_ami),'id_ami='.intval($id_auteur),"statut='prop'"))){
-			sql_updateq('spip_amis',array('statut'=>'publie'),array('id_auteur='.intval($id_ami),'id_ami='.intval($id_auteur)));
+			sql_updateq('spip_amis',array('statut'=>'publie','date'=>'NOW()'),array('id_auteur='.intval($id_ami),'id_ami='.intval($id_auteur)));
 			$notification = charger_fonction('notifications','inc');
 			$notification('ajouterami',$id_ami);
 		}
