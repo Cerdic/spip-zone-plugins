@@ -21,6 +21,7 @@
 (function($){
 $(document).ready(function(){
 $("#changer_selection_organisation").click(function(){
+	$(this).animeajax();
 	$.get("[(#URL_PAGE{saisie_organisations})]",  {
 		id_organisation: "#ENV{valeur,#ENV{defaut}}",
 		id_source: "#ENV{id_organisation}",
