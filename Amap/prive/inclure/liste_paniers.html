@@ -1,0 +1,30 @@
+<B_paniers>
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th><:amap:id_panier:></th>
+		<th><:amap:nom:></th>
+		<th><:amap:prenom:></th>
+		<th><:amap:date_distribution:></th>
+		<th><:amap:type_panier:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_paniers(PANIERS) {pagination 20}>
+	<tr>
+		<td><strong>#ID_PANIER</strong></td>
+		<td>#NOM</td>
+		<td>#PRENOM</td>
+		<td>#DATE_DISTRIBUTION</td>
+		<td>#TYPE_PANIER</td>
+		<td><a href='[(#URL_ECRIRE{config_saison}|parametre_url{id_saison,#ID_SAISON})]'><:amap:action_modifier:></a>
+		|	<a href='[(#URL_ACTION_AUTEUR{supprimer_saison,#ID_SAISON,#SELF})]'><:amap:action_supprimer:></a>
+		</td>
+	</tr>
+	</BOUCLE_paniers>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_paniers>
+<:amap:table_vide_aucun_enregistrement:>
+<//B_paniers>

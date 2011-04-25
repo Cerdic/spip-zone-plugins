@@ -1,0 +1,15 @@
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:amap:panier_dispo:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:amap:panier_dispo:></h1>
+</div>
+<B_panierdispo>
+	<BOUCLE_panierdispo(AMAP_PANIER_DISPOS) {id_panier_dispo}>
+		#PRENOM #NOM a mis à disposition son panier. <a href="[(#URL_PAGE{panier}|parametre_url{id_panier,#ID_PANIER_DISPO})]">Je le prends</a>
+	</BOUCLE_panierdispo>
+</B_panierdispo>
+Ce panier n'est plus disponible, il a déjà été récupéré par un autre amapien.
+<//B_panierdispo>
+</div>
