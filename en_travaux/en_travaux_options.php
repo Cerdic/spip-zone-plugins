@@ -78,7 +78,8 @@ function entravaux_styliser($flux){
  */
 function entravaux_affichage_final($flux){
 	$image = find_in_path("en_travaux.png");
-	if ($GLOBALS['html']){
+	if ($GLOBALS['html']
+	AND !_AJAX){
 		include_spip('inc/minipres'); // pour http_img_pack
 		$x = '<div id="icone_travaux" style="
 		padding-right: 5px;
