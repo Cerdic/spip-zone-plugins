@@ -1,15 +1,13 @@
 <?php
-// inc/spiplistes_pipeline_ajouter_boutons.php
-/*
-	SPIP-Listes pipeline
-	
-	Nota: plugin.xml en cache.
+/**
+ * Nota: plugin.xml en cache.
 		si modif plugin.xml, il faut parfois réactiver le plugin (config/plugin: désactiver/activer)
-	
-*/
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+ * @version Original From SPIP-Listes-V :: Id: spiplistes_listes_forcer_abonnement.php paladin@quesaco.org
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if(!defined('_ECRIRE_INC_VERSION')) return;
 
@@ -33,5 +31,3 @@ function spiplistes_ajouterBoutons($boutons_admin) {
 	}
 	return ($boutons_admin);
 }
-
-?>

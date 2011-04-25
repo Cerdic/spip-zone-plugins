@@ -1,11 +1,14 @@
 <?php
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 // CP-20080324
 // Script issu de :
 //   http://zone.spip.org/trac/spip-zone/browser/_plugins_/_stable_/cfg/inc/compat_cfg.php
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 // CP-20080508: ajout de sql_countsel()
 // CP-20080508: correction sql_insert()

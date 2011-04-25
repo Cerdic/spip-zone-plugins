@@ -1,21 +1,15 @@
 <?php
-	
-	// inc/spiplistes_api_journal.php
-	
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-	
-	// fonctions utilises en espace privé
-	// presentation
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 	/*****************************************************
 	Copyright (C) 2008 Christian PAULUS
 	cpaulus@quesaco.org - http://www.quesaco.org/
 	/*****************************************************
-	
-	This file is part of Fmp3.
-	http://files.spip.org/spip-zone/fond_mp3.zip
 	
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

@@ -1,6 +1,10 @@
 <?php
-
-// inc/spiplistes_api.php
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
@@ -21,10 +25,6 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
 
 if(!defined('_ECRIRE_INC_VERSION')) return;
 

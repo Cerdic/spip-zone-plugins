@@ -1,6 +1,11 @@
 <?php 
-
-// inc/spiplistes_listes_selectionner_auteur.php
+/**
+ * @version Original From SPIP-Listes-V :: Id: spiplistes_listes_forcer_abonnement.php paladin@quesaco.org
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
@@ -22,11 +27,7 @@
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, Etats-Unis.                   */
 /******************************************************************************************/
 
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 //CP-20081116
 // utilise par 
@@ -39,8 +40,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // selectionne les auteurs elligibles a un abonnement
 // - adresse email obligatoire
 
-define("_SPIPLISTES_LIGNES_PAR_PAGE", 10);
-define("_SPIPLISTES_SELECT_MIN_AUTEURS", 50); // nb auteurs dans le <select>
+define('_SPIPLISTES_LIGNES_PAR_PAGE', 10);
+define('_SPIPLISTES_SELECT_MIN_AUTEURS', 50); // nb auteurs dans le <select>
 
 /*CP-2200081116
  * pour l'ajout abonne', il y a trois ajax boites imbriquées
@@ -51,9 +52,9 @@ define("_SPIPLISTES_SELECT_MIN_AUTEURS", 50); // nb auteurs dans le <select>
  * Lorsqu'on change un format, B seul est mis à jour
  * Lorsqu'on cherche un elligible, seul C est mis à jour
  */
-define("_SPIPLISTES_ID_GROSSE_BOITE", "grosse_boite_abonnements");
-define("_SPIPLISTES_ID_PETITE_BOITE", "petite_boite_abonnements");
-define("_SPIPLISTES_ID_FROM_ELLIGIBL", "form-recherche-abo-elligibles");
+define('_SPIPLISTES_ID_GROSSE_BOITE', 'grosse_boite_abonnements');
+define('_SPIPLISTES_ID_PETITE_BOITE', 'petite_boite_abonnements');
+define('_SPIPLISTES_ID_FROM_ELLIGIBL', 'form-recherche-abo-elligibles');
 
 //CP-20080603
 // renvoie un tableau d'auteurs, du style
@@ -73,7 +74,7 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 		// recupere la liste des moderateurs
 		$ids_already = spiplistes_mod_listes_get_id_auteur($id_liste);
 		$ids_already = (isset($ids_already[$id_liste]) ? $ids_already[$id_liste] : array());
-		$sql_where[] = "statut=".sql_quote('0minirezo');
+		$sql_where[] = 'statut='.sql_quote('0minirezo');
 	}
 	else {
 		// recupere la liste des abonnes
@@ -104,8 +105,8 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 	return(array($auteurs_array, $nb_auteurs));
 }
 
-/*
- * CP-20080603
+/**
+ * @versin CP-20080603
  * @return la boite en liste des abonnes a une liste
  * 	si $id_liste == 0, liste tous les abonnements
  * @param $id_liste entier

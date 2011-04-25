@@ -1,10 +1,10 @@
 <?php 
-
-// inc/spiplistes_pipeline_header_prive.php
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /*
 	

@@ -1,10 +1,11 @@
 <?php 
-	// inc/spiplistes_agenda.php
-	// CP-20080621
-	
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @version Original From SPIP-Listes-V :: Id: spiplistes_listes_forcer_abonnement.php paladin@quesaco.org
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 define('_SPIPLISTES_AGENDA_PERIODE_HEBDO', 10);
 define('_SPIPLISTES_AGENDA_PERIODE_MOIS', 45);

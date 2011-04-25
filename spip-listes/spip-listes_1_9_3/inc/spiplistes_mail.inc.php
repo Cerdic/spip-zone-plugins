@@ -1,16 +1,18 @@
 <?php
-
-// inc/spiplistes_mail.inc.php
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$s
 
 if(!defined('_ECRIRE_INC_VERSION')) return;
 
-
 include_spip('inc/spiplistes_api_globales');
 
+/**
+ * @return boolean
+ */
 function spiplistes_utiliser_facteur()
 {
 	static $utiliser;

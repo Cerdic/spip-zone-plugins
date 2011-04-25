@@ -1,10 +1,10 @@
 <?php 
-
-// inc/spiplistes_pipeline_ajouter_onglets.php
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /*
 	SPIP-Listes

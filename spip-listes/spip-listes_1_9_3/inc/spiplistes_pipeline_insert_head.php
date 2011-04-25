@@ -1,10 +1,10 @@
 <?php 
-
-// inc/spiplistes_pipeline_insert_head.php (CP-20071019)
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 /*
 	SPIP-Listes pipeline
