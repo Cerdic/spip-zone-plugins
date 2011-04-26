@@ -1,6 +1,28 @@
 <?php
-
-// genie/spiplistes_cron.php
+/**
+ * Creation des etiquettes d'envoi via le cron SPIP (genie).
+ *
+ * Appele' en tache de fond (CRON SPIP)
+ *
+ * La trieuse 
+ * - verifie toutes les listes auto==oui publiques et privees
+ *   dont la date d'envoi est passee
+ * - cree le courrier pour la meleuse dans la table spip_courriers
+ * - determine les dates prochain envoi si periode > 0
+ * - si periode < 0, repasse la liste en dormeuse
+ * 
+ * Precision sur la table spip_listes:
+ * 'date': date d'envoi souhaitee (prochain envoi)
+ * 'maj': date d'envoi du courrier mis a' jour par cron.
+ * 'type' : type de liste attribuee soit en direct, via liste_gerer, 
+ *          soit par la trieuse, en cron
+ * type = 'nl' : (newsletter) liste envoyee en direct
+ * type = 'auto' : liste traitee par la trieuse, en cron
+ * @package spiplistes
+ */
+ // $LastChangedRevision: 47062 $
+ // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedDate: 2011-04-25 18:42:56 +0200 (Lun 25 avr 2011) $
 
 /******************************************************************************************/
 /* SPIP-listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */
@@ -21,39 +43,16 @@
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, etats-Unis.                   */
 /******************************************************************************************/
-// $LastChangedRevision: 15426 $
-// $LastChangedBy: paladin@quesaco.org $
-// $LastChangedDate: 2007-09-22 18:27:40 +0200 (sam., 22 sept. 2007) $
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
-
-
-	// Appele' en tache de fond (CRON SPIP)
 	
-	// Trieuse 
-	
-	// - Verifie toutes les listes auto==oui publiques et privees
-	//   dont la date d'envoi est passee
-	// - cree le courrier pour la meleuse dans la table spip_courriers
-	// - determine les dates prochain envoi si periode > 0
-	// - si periode < 0, repasse la liste en dormeuse
-
-	// Precision sur la table spip_listes:
-	// 'date': date d'envoi souhaitee (prochain envoi)
-	// 'maj': date d'envoi du courrier mis a' jour par cron.
-	// 'type' : type de liste attribuee soit en direct, via liste_gerer, 
-	//          soit par la trieuse, en cron
-	// type = 'nl' : (newsletter) liste envoyee en direct
-	// type = 'auto' : liste traitee par la trieuse, en cron
-	
-/*
-	cron_spiplistes_cron() renvoie:
-	- nul, si la tache n'a pas a etre effectuee
-	- positif, si la tache a ete effectuee
-	- negatif, si la tache doit etre poursuivie ou recommencee
-
-*/
-
+/**
+ * cron_spiplistes_cron() renvoie:
+ * - nul, si la tache n'a pas a etre effectuee
+ * - positif, si la tache a ete effectuee
+ * - negatif, si la tache doit etre poursuivie ou recommencee
+ * @return null|int
+ */
 function cron_spiplistes_cron ($last_time) { 
 
 	include_spip('inc/utils');
