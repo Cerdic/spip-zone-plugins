@@ -97,9 +97,13 @@ function exec_geodocuments_edit_dist()
 			if ($distant != 'oui' && geoportail_get_coord(_DIR_IMG.$fichier,$extension,$lon,$lat))
 				$contexte['pos_fichier'] = "$lon,$lat,12";
 			
-			// Recuperer l'article
+			// Recuperer la position de la rubrique ou de l'article pere
 			if ($id_article)
 			{   $a = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_article AND objet='article'"));
+			    if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
+			}
+			else if ($id_rubrique)
+			{   $a = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_rubrique AND objet='rubrique'"));
 			    if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
 			}
 				

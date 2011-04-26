@@ -110,17 +110,31 @@ function geoportail_affiche_milieu($flux)
 					'zone'			=> _request('zone')
 				);
 	if ($exec == 'articles' && $GLOBALS['meta']['geoportail_geoarticle']) 
-	{	$contexte['id_objet'] = $flux['args']['id_article'];
+	{	$id_article = $contexte['id_objet'] = $flux['args']['id_article'];
 		if ($GLOBALS['meta']['geoportail_geodocument']) $contexte['id_article'] = $flux['args']['id_article'];
 		$contexte['objet'] = 'article';
+		// position de la rubrique mere
+		$r = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article"));
+		if ($r)
+		{	$id_rubrique = $r['id_rubrique'];
+			$a = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_rubrique AND objet='rubrique'"));
+			if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
+		}
 	}
 	else if ($exec == 'auteur_infos' && $GLOBALS['meta']['geoportail_geoauteur']) 
 	{	$contexte['id_objet'] = $flux['args']['id_auteur'];
 		$contexte['objet'] = 'auteur';
 	}
 	else if ($exec == 'naviguer' && $GLOBALS['meta']['geoportail_georubrique']) 
-	{	$contexte['id_objet'] = $flux['args']['id_rubrique'];
+	{	$id_rubrique = $contexte['id_objet'] = $flux['args']['id_rubrique'];
 		$contexte['objet'] = 'rubrique';
+		// position de la rubrique mere
+		$r = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		if ($r)
+		{	$id_rubrique = $r['id_parent'];
+			$a = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_rubrique AND objet='rubrique'"));
+			if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
+		}
 	}
 	else if ($exec == 'mots_edit' && $GLOBALS['meta']['geoportail_geomot']) 
 	{	$contexte['id_objet'] = $flux['args']['id_mot'];

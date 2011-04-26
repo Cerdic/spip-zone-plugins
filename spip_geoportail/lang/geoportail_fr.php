@@ -134,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_geocode'	=> 'Rechercher une adresse',
 'verrouiller'		=> 'Verrouiller la destination',
 'centrer_doc'	=> 'Utiliser le g&eacute;opositionnement du document',
-'centrer_art'	=> 'Utiliser le g&eacute;opositionnement de l&acute;article',
+'centrer_art'	=> 'Utiliser le g&eacute;opositionnement du parent',
 'lon'			=> 'Longitude',
 'lat'			=> 'Latitude',
 
