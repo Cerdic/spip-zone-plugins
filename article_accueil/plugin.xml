@@ -1,8 +1,8 @@
 <plugin>
-	<nom>Article d'accueil</nom>
+	<nom>Articles d'accueil</nom>
 	<icon>images/article_accueil-48.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
- 	[Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, Joseph pour la mise en plugin autonome
+ 	[Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin autonome
 	</auteur>
 	<licence>GPL</licence>
 	<version>1.0.4</version>
@@ -10,7 +10,7 @@
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Ce plugin vous permet de d'attribuer un article d'accueil aux rubriques. Le champ id_article_accueil peut ensuite &eacirc;tre utilis&#233; par les squelettes.
+			[fr]Ce plugin vous permet de d'attribuer un article d'accueil aux rubriques. Le champ id_article_accueil peut ensuite &ecirc;tre utilis&eacute; par les squelettes.
 			[en]This plugin allows you to assign an article as home of a section. Field "id_article_accueil" can then be used by the skeletons.
 		</multi>
 	</description>
