@@ -22,7 +22,7 @@
 <!ENTITY % NAME "CDATA"> <!-- identificateur (notamment nom de fonction) -->
 <!ENTITY % NUMBER "CDATA"> <!-- nombre entier naturel -->
 <!ENTITY % PATH "CDATA"> <!-- chemin d'acces a un fichier ou repertoire -->
-<!ENTITY % QUERY_STRING "CDATA"> <!-- couples x=y separes par esperluete -->
+<!ENTITY % ENV "CDATA"> <!-- couples x=y separes par esperluete -->
 <!ENTITY % URI "CDATA"> <!-- lien sur le Web -->
 <!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
 <!ENTITY % INTERVAL "CDATA"> <!-- 2 VNUM entre crochets ou parentheses -->
@@ -32,11 +32,11 @@
 
 <!ENTITY % CATEGORY "(auteur|communication|date|divers|edition|maintenance|multimedia|navigation|outil|performance|squelette|statistique|theme)">
 
-<!ENTITY % CONTENT_COPY "(auteur|copyright|credit|licence)*" >
+<!ENTITY % CREDITS "(auteur|copyright|credit|licence)*" >
 
-<!ENTITY % CONTENT_TECH "(bouton|chemin|lib|necessite|onglet|pipeline|utilise)*" >
+<!ENTITY % CONTENT "(bouton|chemin|lib|necessite|onglet|pipeline|utilise)*" >
 
-<!ELEMENT paquet (nom %CONTENT_COPY; traduire* %CONTENT_TECH; spip*) >
+<!ELEMENT paquet (nom, %CREDITS;, traduire*, %CONTENT;, spip*) >
 <!ATTLIST paquet
 	  categorie %CATEGORY; #IMPLIED
 	  compatible %INTERVAL; #IMPLIED
@@ -48,7 +48,7 @@
 	  meta %NAME; #IMPLIED
 	  prefix ID #REQUIRED
 	  version %VNUM; #REQUIRED
-	  version_base %NUMBER; #IMPLIED
+	  schema %NUMBER; #IMPLIED
 >
 
 <!ELEMENT nom (#PCDATA)>
@@ -78,7 +78,7 @@
           gestionnaire %NAME; #IMPLIED
 >
 
-<!ELEMENT spip  %CONTENT_TECH; >
+<!ELEMENT spip  %CONTENT; >
 <!ATTLIST spip
 	  compatible %INTERVAL; #REQUIRED
 >
@@ -119,7 +119,7 @@
 	  nom %NAME; #REQUIRED
 	  parent %NAME; #IMPLIED
 	  action %NAME;  #IMPLIED
-	  args %QUERY_STRING; #IMPLIED
+	  args %ENV; #IMPLIED
 	  icone %PATH; #IMPLIED
 	  titre %ITEM; #REQUIRED
 >
@@ -129,7 +129,7 @@
 	  nom %NAME; #REQUIRED
 	  parent %NAME; #IMPLIED
 	  action %NAME;  #IMPLIED
-	  args %QUERY_STRING; #IMPLIED
+	  args %ENV; #IMPLIED
 	  icone %PATH; #IMPLIED
 	  titre %ITEM; #REQUIRED
 >

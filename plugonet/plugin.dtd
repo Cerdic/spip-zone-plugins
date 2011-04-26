@@ -38,7 +38,7 @@
 
 <!-- Ceci garantit PRESQUE que les balises ci-dessus ne sont la qu'une fois -->
 
-<!ELEMENT plugin %CONTENT1; %CONTENT1; %CONTENT1; %CONTENT1; %CONTENT1; %CONTENT1; %CONTENT1; %CONTENT1; %CONTENT1; %CONTENT; >
+<!ELEMENT plugin (%CONTENT1;, %CONTENT1;, %CONTENT1;, %CONTENT1;, %CONTENT1;, %CONTENT1;, %CONTENT1;, %CONTENT1;, %CONTENT1;, %CONTENT;) >
 <!ATTLIST plugin 
           spip %INTERVAL; #IMPLIED
 >

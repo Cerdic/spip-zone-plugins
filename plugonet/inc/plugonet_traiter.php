@@ -78,7 +78,7 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 							$dir = sous_repertoire(_DIR_TMP, "plugonet");
 							foreach ($dirs as $_dir) {
 								if ($_dir !== '..' AND $_dir !== 'plugins' AND $_dir !== 'auto') 
-									$dir = sous_repertoire($dir, $_dir);
+								  $dir = sous_repertoire($dir, rtrim($_dir,'_'));
 							}
 						}
 						else
@@ -213,7 +213,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 			($logo ? "\n\tlogo=\"$logo\"" : '') .
 			($version ? "\n\tversion=\"$version\"" : '') .
 			($etat ? "\n\tetat=\"$etat\"" : '') .
-			($version_base ? "\n\tversion_base=\"$version_base\"" : '') .
+			($version_base ? "\n\tschema=\"$version_base\"" : '') .
 			($meta ? "\n\tmeta=\"$meta\"" : '') .
 			plugin2balise_lien($lien, 'documentation') .
 			($compatible ? "\n\tcompatible=\"$compatible\"" : '');
