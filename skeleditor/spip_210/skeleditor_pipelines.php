@@ -66,14 +66,17 @@ function skeleditor_dir($extension, $type) {
 	if(!$type)
 	return false;
 
-	$dir = _DIR_PLUGIN_SKELEDITOR ."spip_210/codemirror/";
-	if ($type == "css")
-	$files .= "<link rel='stylesheet' href='".$dir."lib/codemirror.css' type='text/css' />";	
+	$dir = _DIR_PLUGIN_SKELEDITOR ."spip_210/";
+	if ($type == "css") {
+	$files .= "
+	<link rel='stylesheet' href='".$dir."codemirror/lib/codemirror.css' type='text/css' />
+	<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />";	
+	}
 	if ($type =="js")
-	$files .= "<script src='".$dir."lib/codemirror.js' type='text/javascript'></script>";
+	$files .= "<script src='".$dir."codemirror/lib/codemirror.js' type='text/javascript'></script>";
 	foreach($mode as $cle=>$valeur) {
 		
-		$test = $dir."mode/".$valeur."/".$valeur.".".$type;
+		$test = $dir."codemirror/mode/".$valeur."/".$valeur.".".$type;
  			if (find_in_path($test)) {
 				if ($type == "css")
 				$files .= "<link rel='stylesheet' href='".$test."' type='text/css' />";
