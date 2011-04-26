@@ -6,6 +6,9 @@
 [(#SET{masquer_articles_uniques, #ENV{masquer_articles_uniques}|=={oui}|?{'on',''}})]
 [(#SET{articles_max, #ENV{articles_max}|intval|?{#ENV{articles_max},10000}})]
 [(#SET{articles_max_plus_un, #GET{articles_max}|plus{1}})]
+
+[(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
+
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
 [(#ENV{appel_formulaire}|oui)
@@ -25,6 +28,7 @@
 		[(#GET{afficher_articles}|oui)
 			<br /><:menus:info_afficher_articles:>
             [(#GET{articles_max}|<{10000}|oui) / <:menus:info_articles_max{max=#GET{articles_max}}:>]
+            [(#GET{articles_max_affiches}|<{10000}|oui) / <:menus:info_articles_max_affiches{max=#GET{articles_max_affiches}}:>]
             [(#GET{masquer_articles_uniques}|oui) / <:menus:info_masquer_articles_uniques:>]
 		]
 		<br /><:menus:info_tri:> [(#GET{tri_num}) <:menus:info_tri_num:>][(#GET{tri_num}|et{GET{tri_alpha}}), ][(#GET{tri_alpha}) <:menus:info_tri_alpha:>]
@@ -62,19 +66,21 @@
                         <BOUCLE_cpt_si_sousrub(ARTICLES){id_rubrique}> </BOUCLE_cpt_si_sousrub>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_si_sousrub>
                 
                     	[(#REM) On affiche les articles :
-                                 - si on n'a pas demandé de masquage des articles uniques
-                                 - si le masquage des articles uniques est demandé et qu'il y en a plus d'un ]
+                                 - S'il y en a moins que le max demandé 
+                                 - ET - si on n'a pas demandé de masquage des articles uniques
+                                 	  - OU si le masquage des articles uniques est demandé et qu'il y en a plus d'un ]
                         #SET{afficher,non}
-                        [(#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}) #SET{afficher,oui}]
+                        [(#GET{cpt}|<={#GET{articles_max}}|oui|et{#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}) 		
+                        	#SET{afficher,oui}]
 
                         <BOUCLE_test_afficher_si_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
                             <B_articles_si_sousrub>
-                            <BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max}}>
+                            <BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
                                 <li class="menu-entree[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
                                     <a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
                                 </li>
                             </BOUCLE_articles_si_sousrub>
-                            [(#GET{cpt}|>{#GET{articles_max}}|oui)
+                            [(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
                             	<li><a class="suite" href="#URL_RUBRIQUE"><:menus:tous_les_articles:></a></li>	
                             ]
                             </B_articles_si_sousrub>
@@ -91,20 +97,22 @@
                         <BOUCLE_cpt_pas_de_sousrub(ARTICLES){id_rubrique}> </BOUCLE_cpt_pas_de_sousrub>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_pas_de_sousrub>
                 
                     	[(#REM) On affiche les articles :
-                                 - si on n'a pas demandé de masquage des articles uniques
-                                 - si le masquage des articles uniques est demandé et qu'il y en a plus d'un ]
+                                 - S'il y en a moins que le max demandé 
+                                 - ET - si on n'a pas demandé de masquage des articles uniques
+                                 	  - OU si le masquage des articles uniques est demandé et qu'il y en a plus d'un ]
                         #SET{afficher,non}
-                        [(#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}) #SET{afficher,oui}]
+                        [(#GET{cpt}|<={#GET{articles_max}}|oui|et{#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}) 		
+                        	#SET{afficher,oui}]
 
                         <BOUCLE_test_afficher_pas_de_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
                             <B_articles_pas_de_sousrub>
                             <ul class="menu-liste">
-                            <BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max}}>
+                            <BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
                                 <li class="menu-entree[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
                                     <a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
                                 </li>
                             </BOUCLE_articles_pas_de_sousrub>
-                            [(#GET{cpt}|>{#GET{articles_max}}|oui)
+                            [(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
                             	<li><a class="suite" href="#URL_RUBRIQUE"><:menus:tous_les_articles:></a></li>	
                             ]
                             </ul>
