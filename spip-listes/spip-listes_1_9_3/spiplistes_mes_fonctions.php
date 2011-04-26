@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
+ 
 if(!defined('_ECRIRE_INC_VERSION')) return;
 
 

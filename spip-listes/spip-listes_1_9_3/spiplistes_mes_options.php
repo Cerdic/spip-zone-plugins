@@ -1,11 +1,10 @@
 <?php
-
-
-// spiplistes_mes_options.php
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
