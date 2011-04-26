@@ -41,6 +41,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  
   
   // R 
+  'rechercher' => 'Search',
+  'rechercher_ou_remplacer' => 'or',
+  'remplacer' => 'replace',
+  'remplacer_par' => 'it by',  
   'repertoire'=>'directory',
   
   // S
