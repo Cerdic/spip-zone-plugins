@@ -104,24 +104,6 @@ $filename = _request('f');
 } 
 
 /**
- * Produit les js dans le header_prive si nécessaire
- *
- * @param string $flux
- * @return string
- */ 
-function skeleditor_insert_head($flux){
-
-	$extension = test_skeleditor_edition();
-		if($extension) {
-		$type = "js";
-		$script = skeleditor_dir($extension, $type);
-		$flux .= skeleditor_insert_head_css($flux); // au cas ou il n'est pas implemente */
-		$flux .= $script;
-		}
-	return $flux;
-}
-
-/**
  * Produit les css dans le header_prive si nécessaire
  *
  * @param string $flux
@@ -139,7 +121,26 @@ function skeleditor_insert_head_css($flux){
 		}
 	}
 return $flux;
-} 
+}
+ 
+/**
+ * Produit les js dans le header_prive si nécessaire
+ *
+ * @param string $flux
+ * @return string
+ */ 
+function skeleditor_insert_head($flux){
+
+	$extension = test_skeleditor_edition();
+		if($extension) {
+		$type = "js";
+		$script = skeleditor_dir($extension, $type);
+		$flux = skeleditor_insert_head_css($flux); // au cas ou il n'est pas implemente */
+		$flux .= $script;
+		}
+	return $flux;
+}
+
 // pas de compresseur si var_inclure
 if (_request('var_mode')=='inclure')
 	define('_INTERDIRE_COMPACTE_HEAD',true);
