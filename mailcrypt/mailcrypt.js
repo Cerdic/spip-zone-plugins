@@ -5,4 +5,7 @@ function mc_lancerlien(a,b){
 $(document).ready(function(){
 	$('.spancrypt').empty();
 	$('.spancrypt').append('@');
+	$('a.spip_mail').attr('title',function(i, val) {
+		return val.replace(/\.\..t\.\./,'@');
+	});
 });
