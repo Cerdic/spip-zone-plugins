@@ -278,11 +278,8 @@ var editor = CodeMirror.fromTextArea(document.getElementById(\'code\'), {
 		});
 </script>
 <style type="text/css">
-.codewrap {border:1px solid #333;background:#fff;font-size:11px;clear:both;}
-
-.CodeMirror {
-  height: auto;
-}
+.codewrap { border: 1px solid #333; background: #fff; font-size: 11px; clear: both; position: relative }
+.CodeMirror { height: auto; max-height: 550px; }
 </style>
 ';
 	return $script;
