@@ -5,6 +5,7 @@
 	<version>0.1</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
+	<icon>images/jquerysuperfish-32.png</icon>
 	<description>
 		Le plugin Menu jQuery Superfish est une adaptation pour spip du plugin jQuery : http://users.tpg.com.au/j_birch/plugins/superfish/
 	</description>
