@@ -3,9 +3,9 @@
 	<auteur>Alexis Roussel, Paolo, Patrice Vanneufville, Joseph</auteur>
 	<version>2.0.0</version>
 	<icon>images/mailcrypt-256.png</icon>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>Remplace les liens de courriels par un lien javascript. Ce plugin vise à emp&ecirc;cher des robots spammeurs de collecter les adresses emails.</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/?article3828</lien> <!-- URI de documentation -->
 	<prefix>mailcrypt</prefix>
 	<fonctions>mailcrypt_fonctions.php</fonctions>
 	<pipeline>
