@@ -23,13 +23,13 @@ On liste les langues utilisees dans le site
 		  sinon, revenir sur la page en cours
 		]
 		[(#LANG|=={#ENV{lang}}|non)
-			[<a href="[(#URL_ACTION_AUTEUR{'converser', '', #GET{ListeTraductions}|table_valeur{#LANG}|sinon{#SELF}}|parametre_url{var_lang,#LANG})]" rel="alternate" title="[(#LANG|traduire_nom_langue|ucfirst|attribut_html)]" class="langue_#LANG">(#LANG{langues}|ucfirst)</a>]
+			[<a href="[(#URL_ACTION_AUTEUR{'converser', '', #GET{ListeTraductions}|table_valeur{#LANG}|sinon{#SELF}}|parametre_url{var_lang,#LANG})]" rel="alternate" lang="#LANG" title="[(#LANG|traduire_nom_langue|ucfirst|attribut_html)]" class="langue_#LANG">(#LANG{langues}|ucfirst)</a>]
 		]
 		[(#REM)
 		Si la langue est celle en cours, afficher celle-ci en gras, sans lien
 		]
 		[(#LANG|=={#ENV{lang}}|oui)
-			[<strong class="langue_#LANG" title="[(#LANG|traduire_nom_langue|ucfirst|attribut_html)]">(#LANG|ucfirst)</strong>]
+			[<strong class="langue_#LANG" lang="#LANG" title="[(#LANG|traduire_nom_langue|ucfirst|attribut_html)]">(#LANG|ucfirst)</strong>]
 		]
 	</BOUCLE_ListeLangues>
 </div>
