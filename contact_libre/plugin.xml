@@ -8,7 +8,7 @@
 	<description>
 	Formulaire de contact libre auquel on peut passer directement une adresse mail et une url de r&eacute;f&eacute;rence (incone de http://www.androidicons.com/).
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Formulaire-de-contact-libre</lien>
 	<licence>GPL</licence>
 	<categorie>communication</categorie>
 	<options>contact_libre_options.php</options>
