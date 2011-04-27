@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cle_primaire_de'  => 'est la clé primaire de',
 	'configuration'  => 'Configuration',
 	'configuration_annuaire'  => 'Configuration de l\'annuaire',
-	'configuration_distri_evenement' => 'Configuration des évènements',
+	'configuration_distri_evenement' => 'Configuration des événements',
 	'configuration_distri_produit' => 'Configuration des produits',
 	'configuration_distri_vacance' => 'Configuration des vacances',
 	'configuration_lieu'  => 'Configuration des lieux',
@@ -50,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_distribution' => 'Date de la distribution',
 	'date_evenement' => 'Date de l\'évènement',
 	'distributions'  => 'Distributions',
-	'distri_evenement'  => 'évènements',
+	'distri_evenement'  => 'Événements',
 	'distri_produit'  => 'Produits',
 	'distri_vacance'  => 'Vacances',
 
@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lieux_enregistres' => 'Liste des lieux possibles',
 	'liste_distribution_enregistres' => 'Liste des produits présents aux distributions de la saison',
 	'liste_distribution_enregistrement' => 'Enregistrement d\'un produit supplémentaire pour la saison',
-	'liste_evenement_distribution' => 'Liste des différents évènements de distributions de la saison @id_saison@',
+	'liste_evenement_distribution' => 'Liste des différents événements de distributions de la saison @id_saison@',
 	'liste_vacance' => 'Liste des vacances de la saison',
 
 	// M
