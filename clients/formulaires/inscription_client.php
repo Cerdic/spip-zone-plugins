@@ -11,7 +11,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'co__prenom',
+				'nom' => 'prenom',
 				'label' => _T('contacts:label_prenom'),
 				'obligatoire' => 'oui'
 			)
@@ -19,7 +19,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'co__nom',
+				'nom' => 'nom',
 				'label' => _T('contacts:label_nom'),
 				'obligatoire' => 'oui'
 			)
@@ -104,7 +104,7 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 	if ($retour) refuser_traiter_formulaire_ajax();
 	
 	// Le pseudo SPIP est construit
-	set_request('nom_inscription', _request('co__prenom').' '._request('co__nom'));
+	set_request('nom_inscription', _request('prenom').' '._request('nom'));
 	
 	// On active le traitement du formulaire d'inscription classique, donc on crée un nouvel utilisateur
 	$mode = tester_config(0);
@@ -119,20 +119,10 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		set_request('type', 'principale');
 		
 		// On crée un contact pour cet utilisateur
-		$definir_contact = charger_fonction('definir_contact', 'action/');
-		$definir_contact("contact/$id_auteur");
-		
-		// On récupère tous les champs d'un contact
-		$champs = sql_fetsel('*', "spip_contacts_liens LEFT JOIN spip_contacts USING(id_contact)", 'id_objet='.$id_auteur." AND objet = 'auteur'");
-		$id_contact = $champs['id_contact'];
-		
-		// Pour chaque champ, on regarde si on l'a modifié dans ce formulaire-là
-		foreach ($champs as $cle=>$null){
-			if (isset($_REQUEST['co__'.$cle])) {
-				$c[$cle] = _request('co__' . $cle);
-			}
-		}
-		modifier_contenu('contact', $id_contact, array('invalideur' => "id='id_contact/$id_contact'"), $c);
+		$editer_contact = charger_fonction('editer_contact', 'action/');
+		list($id_contact, $err) = $editer_contact('nouveau');
+		//On lie le contact à l'auteur
+		sql_insertq('spip_contacts_liens',array('id_objet' => $id_auteur,'objet' => 'auteur',"id_contact"=>$id_contact));
 		
 		// On crée l'adresse
 		$editer_adresse = charger_fonction('editer_adresse', 'action/');

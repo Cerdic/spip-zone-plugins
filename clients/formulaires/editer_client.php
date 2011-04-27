@@ -8,7 +8,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'co__prenom',
+				'nom' => 'prenom',
 				'label' => _T('contacts:label_prenom'),
 				'obligatoire' => 'oui'
 			)
@@ -16,7 +16,7 @@ function formulaires_editer_client_saisies_dist($id_auteur, $retour=''){
 		array(
 			'saisie' => 'input',
 			'options' => array(
-				'nom' => 'co__nom',
+				'nom' => 'nom',
 				'label' => _T('contacts:label_nom'),
 				'obligatoire' => 'oui'
 			)
@@ -94,7 +94,7 @@ function formulaires_editer_client_charger_dist($id_auteur, $retour=''){
 	){
 		$contexte['email_rien'] = $email;
 		foreach ($contact as $cle=>$valeur) {
-			$contexte['co__'.$cle] = $valeur;
+			$contexte[$cle] = $valeur;
 		}
 		
 		// S'il y a une adresse principale, on charge les infos
@@ -129,27 +129,21 @@ function formulaires_editer_client_traiter_dist($id_auteur, $retour=''){
 	
 	$retours = array();
 	
+	// On modifie le contact
+	$id_contact = sql_getfetsel(
+		'id_contact',
+		'spip_contacts_liens',
+		'objet = '.sql_quote('auteur').' and id_objet = '.$id_auteur
+	);
+	$editer_contact = charger_fonction('editer_contact', 'action/');
+	$editer_contact($id_contact);
+	
 	// Le pseudo SPIP est construit
-	set_request('nom', _request('co__prenom').' '._request('co__nom'));
+	set_request('nom', _request('prenom').' '._request('nom'));
 	
 	// On modifie l'auteur
 	$editer_auteur = charger_fonction('editer_auteur', 'action/');
 	$editer_auteur($id_auteur);
-	
-	// Ce point suivant est vraiment nul car copié-collé plusieurs fois partout.
-	// Il faudrait faire une vraie action "editer_contact" commune.
-	
-	// On récupère tous les champs d'un contact
-	$contact = sql_fetsel('*', "spip_contacts_liens LEFT JOIN spip_contacts USING(id_contact)", 'id_objet='.$id_auteur." AND objet = 'auteur'");
-	$id_contact = $contact['id_contact'];
-	
-	// Pour chaque champ, on regarde si on l'a modifié dans ce formulaire-là
-	foreach ($contact as $cle=>$null){
-		if (isset($_REQUEST['co__'.$cle])) {
-			$c[$cle] = _request('co__' . $cle);
-		}
-	}
-	modifier_contenu('contact', $id_contact, array('invalideur' => "id='id_contact/$id_contact'"), $c);
 	
 	// On modifie l'adresse
 	$id_adresse = sql_getfetsel(
