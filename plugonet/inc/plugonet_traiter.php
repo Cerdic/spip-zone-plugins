@@ -23,9 +23,9 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 	// Suivant le traitement les fichiers traites sont plugin.xml ou paquet.xml
 	// On definit donc la DTD associee
 	$dtd = ($traitement == 'validation_paquetxml') ? 'paquet' : 'plugin';
-
 	$erreurs = array();
 	$commandes = array();
+	$t0 = time();
 	foreach ($files  as $nom)  {
 		if (lire_fichier($nom, $contenu)) {
 			$erreurs[$nom]['lecture_' . $dtd . 'xml'] = false;
@@ -61,7 +61,7 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 				AND !$erreurs[$nom]['information_pluginxml']) {
 					// Puisqu'on sait extraire les infos du plugin.xml, .on construit le contenu 
 					// du fichier paquet.xml a partir de ces infos
-					list($paquet_xml, $commandes[$nom], $prefixe, $description) = plugin2paquet($plugins);
+					list($paquet_xml, $commandes[$nom], $prefixe, $descriptions) = plugin2paquet($plugins);
 					// On valide le contenu obtenu avec la nouvelle DTD paquet
 					$resultats = $valider_xml($paquet_xml, false, false, 'paquet.dtd');
 					$erreurs[$nom]['validation_paquetxml'] = is_array($resultats) ? $resultats[1] : $resultats->err;
@@ -83,7 +83,7 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 						}
 						else
 							$dir = dirname($nom);
-						if ($modules = plugin2balise_description($description, $prefixe, $dir))
+						if ($modules = plugin2balise_description($descriptions, $prefixe, $dir))
 							$commandes[$nom]['traduction'] = "svn add " . join(' ', $modules);
 						if (ecrire_fichier($dir . '/paquet.xml', $paquet_xml))
 							$commandes[$nom]['paquet'] = "svn add paquet.xml";
@@ -97,7 +97,7 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 			$erreurs[$nom]['lecture_' . $dtd . 'xml'] = true;
 	}
 
-	return array($erreurs, $commandes);
+	return array($erreurs, time()-$t0, $commandes);
 }
 
 
@@ -155,7 +155,7 @@ function plugin2paquet($plugins) {
 		// -- On commence avec les balises spip
 		foreach ($plugins as $_cle => $_plugin) {
 			if ($_cle <> $cle_min_min) {
-				list($spip, $commandes_spip) = plugin2balise($_plugin, 'spip');
+				list($spip, $commandes_spip,) = plugin2balise($_plugin, 'spip');
 				$balises_spip .= "\n\n$spip";
 				$commandes['balise_spip'][$_plugin['compatible']] = $commandes_spip;
 			}
@@ -163,7 +163,7 @@ function plugin2paquet($plugins) {
 	}
 	
 	// -- On continue avec la balise paquet
-	list($paquet_xml, $commandes_paquet) = plugin2balise(
+	list($paquet_xml, $commandes_paquet, $descriptions) = plugin2balise(
 											$plugins[$cle_min_min], 
 											'paquet', 
 											$balises_spip);
@@ -173,7 +173,7 @@ function plugin2paquet($plugins) {
 			$paquet_xml, 
 			$commandes, 
 			$plugins[$cle_min_min]['prefix'], 
-			$plugins[$cle_min_max]['description']);
+			$descriptions);
 }
 
 // Construction d'une balise paquet ou spip
@@ -220,7 +220,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
-		$commentaire = plugin2balise_commentaire($D['description'], $D['prefix']);
+		list($commentaire, $descriptions) = plugin2balise_commentaire($D['description'], $D['prefix']);
 	
 		$auteur = plugin2balise_copy($D['auteur'], 'auteur');
 		$licence = plugin2balise_copy($D['licence'], 'licence');
@@ -232,6 +232,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 			($compatible ? " compatible=\"$compatible\"" : '');
 		// raz des balises non utilisees
 		$nom = $commentaire = $auteur = $licence = $traduire = '';
+		$descriptions =array();
 	}
 
 	// Toutes les balises techniques sont autorisees dans paquet et spip
@@ -254,7 +255,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		"\t$nom$commentaire$auteur$licence$traduire$pipeline$necessite$utilise$bouton$onglet$chemin$balises_spip\n" .
 		"</$balise>\n";
 	
-	return array($paquet, $commandes);
+	return array($paquet, $commandes, $descriptions);
 }
 
 
@@ -283,12 +284,14 @@ function plugin2balise_nom($texte) {
 	return $res ? "\n$res" : '';
 }
 
-// Extrait la tradution francaise uniquement
+// Extrait la traduction francaise uniquement
+// -- on renvoie aussi le tableau des descriptions et slogans par langue pour eviter de le 
+//    recalculer ensuite
 function plugin2balise_commentaire($description, $prefixe) {
-	$langs = extraire_descriptions($description, $prefixe);
-	$res = "\t<!-- ". $langs['fr'][strtolower($prefixe) . '_slogan'] . " -->";
+	$descriptions = extraire_descriptions($description, $prefixe);
+	$res = "\t<!-- ". $descriptions['fr'][strtolower($prefixe) . '_slogan'] . " -->";
 
-	return $res ? "\n$res" : '';
+	return array($res ? "\n$res" : '', $descriptions);
 }
 
 
@@ -509,17 +512,15 @@ function plugin2balise_implicite($D, $balise, $nom) {
 }
 
 // Passer les lettres accentuees en entites XML
-function plugin2balise_description($description, $prefixe, $dir) {
+function plugin2balise_description($descriptions, $prefixe, $dir) {
 	include_spip('inc/langonet_generer_fichier');
-
-	$langs = extraire_descriptions($description, $prefixe);
 
 	$dirl = $dir . '/lang';
 	if (!is_dir($dirl)) 
 		mkdir($dirl);
 	$dirl .= '/';
 	$files = array();
-	foreach($langs as $lang => $couples) {
+	foreach($descriptions as $lang => $couples) {
 		$module = "paquet-" . strtolower($prefixe);
 		$t = "\n// Fichier produit par PlugOnet";
 		$t = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $t);

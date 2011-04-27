@@ -2,7 +2,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function inc_plugonet_formater($traitement, $erreurs) {
+function inc_plugonet_formater($traitement, $erreurs, $duree) {
 	// Nombre de fichiers traites
 	$nb_fichiers = count($erreurs);	
 
@@ -78,10 +78,11 @@ function inc_plugonet_formater($traitement, $erreurs) {
 				: '')
 			: '');
 	// -- consolidation de la synthese finale
+	$duree = $duree > 0 ? $duree : '<1';
 	$resume = un_ou_plusieurs(
 					$nb_fichiers,
 					'plugonet:resume_' . $traitement,
-					array('details' => $details));
+					array('details' => $details, 'duree' => $duree));
 
 	// Construction de l'analyse detaillee
 	$analyse = formater_bloc('error', $texte['erreur'], 'plugonet:details_' . $traitement . '_erreur', $nb_nok) .

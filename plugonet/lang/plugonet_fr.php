@@ -76,12 +76,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'onglet_verifier' => 'Vérifier plugin.xml',
 
 // R
-	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
-	'resume_generation_paquetxml' => '@nb@ plugin.xml traité : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
-	'resume_validation_paquetxml_pluriel' => '@nb@ paquet.xml validés : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
-	'resume_validation_paquetxml' => '@nb@ paquet.xml validé : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
-	'resume_verification_pluginxml_pluriel' => '@nb@ plugin.xml vérifiés : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
-	'resume_verification_pluginxml' => '@nb@ plugin.xml vérifié : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_generation_paquetxml_pluriel' => '@nb@ plugin.xml traités (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_generation_paquetxml' => '@nb@ plugin.xml traité (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_validation_paquetxml_pluriel' => '@nb@ paquet.xml validés (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_validation_paquetxml' => '@nb@ paquet.xml validé (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_verification_pluginxml_pluriel' => '@nb@ plugin.xml vérifiés (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
+	'resume_verification_pluginxml' => '@nb@ plugin.xml vérifié (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
 
 // T
 	'titre_form_generer' => 'Génération des fichiers paquet.xml',
