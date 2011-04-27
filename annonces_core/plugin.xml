@@ -13,5 +13,5 @@
 		<nom>affiche_gauche</nom>
 		<inclure>spipann_pipelines.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.1;]' />
+	<necessite id='SPIP' version='[2.3.0-dev;]' />
 </plugin>
