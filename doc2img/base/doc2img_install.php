@@ -44,6 +44,14 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
 	            );
 				ecrire_meta('doc2img',serialize($cfg));
             }
+            
+			if (class_exists('Imagick')) {
+				if(!is_array($formats = lire_config('doc2img_imagick_extensions'))){
+					$imagick = new Imagick();
+					$formats = $imagick->queryFormats();
+					ecrire_meta('doc2img_imagick_extensions',serialize($formats));
+				}
+			}
 
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
@@ -89,6 +97,16 @@ function doc2img_upgrade($nom_meta_base_version,$version_cible){
                     ADD taille INT"
             );
 			ecrire_meta($nom_meta_base_version,$current_version='0.92','non');
+		}
+		if (version_compare($current_version,'0.93','<')){
+			if (class_exists('Imagick')) {
+				if(!is_array($formats = lire_config('doc2img_imagick_extensions'))){
+					$imagick = new Imagick();
+					$formats = $imagick->queryFormats();
+					ecrire_meta('doc2img_imagick_extensions',serialize($formats));
+				}
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.93','non');
 		}
 	}
 }

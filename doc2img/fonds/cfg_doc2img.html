@@ -1,5 +1,12 @@
 <!-- titre=Doc2Img -->
 <!-- logo=images/doc2img-128.png -->
+#SET{ext_spip,#ARRAY}
+<BOUCLE_videos(TYPES_DOCUMENTS){!mime_type LIKE video/%}>#SET{ext_spip,#GET{ext_spip}|push{#EXTENSION}}</BOUCLE_videos>
+#SET{ext_a_virer,#ARRAY{0,mp4,1,mpc,2,gif,3,png,4,jpg}}
+[(#CONFIG{doc2img_imagick_extensions}|unserialize|is_array|oui)
+#SET{liste_fichier,oui}
+[(#SET{formats_possibles,[(#GET{ext_spip}|array_diff{#GET{ext_a_virer}}|array_intersect{#VAL{strtolower}|array_map{#CONFIG{doc2img_imagick_extensions}|unserialize}}|implode{', '})]})]]
+<!-- descriptif=<p><:doc2img:explication_doc2img:></p>[(#GET{liste_fichier}|=={oui}|oui)<p><:doc2img:explication_formats_possibles{formats=#GET{formats_possibles}}:></p>]-->
 <div class="ajax">
     #FORMULAIRE_CONFIG_DOC2IMG
 </div>

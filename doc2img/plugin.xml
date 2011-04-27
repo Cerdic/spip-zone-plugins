@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Documents en Images[en]Documents to images</multi></nom>
 	<auteur>Camille Lafitte</auteur>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>stable</etat>
     <description><multi>
     	[fr]Ce plugin permet de convertir &#224; la vol&#232;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle.
@@ -12,8 +12,7 @@
     <prefix>doc2img</prefix>
 	<install>base/doc2img_install.php</install>
     <fonctions>doc2img_fonctions.php</fonctions>
-	<version_base>0.92</version_base>
-
+	<version_base>0.93</version_base>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/doc2img.php</inclure>

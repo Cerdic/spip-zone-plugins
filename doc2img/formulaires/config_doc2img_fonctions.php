@@ -13,7 +13,7 @@ function cfg_config_doc2img_verifier(&$cfg){
 			include_spip('inc/metas');
 			$imagick = new Imagick();
 			$formats = $imagick->queryFormats();
-			ecrire_metas('doc2img_imagick_extensions',serialize($formats));
+			ecrire_meta('doc2img_imagick_extensions',serialize($formats));
 		}
 		$valeurs = $cfg->val;
 		if($valeurs['format_document']){
