@@ -31,6 +31,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'details_verification_pluginxml_succes' => 'La vérification du plugin.xml listé ci-après n\'a révélé aucune erreur.',
 
 // I
+	'index_aide_paqxmlstd' => 'Un nouveau standard de description',
+	'index_aide_paqxmlgen' => 'Structure générale de <code>paquet.xml</code>',
+	'index_aide_paqxmlpaquet' => 'La balise <code><paquet></code>',
+	'index_aide_paqxmlnom' => 'La balise <code><nom></code> et les autres descriptions',
+	'index_aide_paqxmlcopy' => 'Les balises de «copyright»',
+	'index_aide_paqxmltrad' => 'La balise <code><traduire></code>',
+	'index_aide_paqxmltech' => 'Les balises techniques',
+	'index_aide_paqxmldtd' => 'Expression formelle de la DTD',
 	'info_choisir_paquetxml_valider' => 'Choisissez les fichiers paquet.xml que vous souhaitez valider. Vous pouvez aussi cliquer sur le nom d\'un paquet.xml pour lancer directement sa validation formelle.',
 	'info_choisir_pluginxml_generer' => 'Choisissez les fichiers que vous souhaitez convertir parmi ceux présents dans le dossier <code>plugins/</code> de ce site. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement la génération forcée de son paquet.xml dans le dossier temporaire du site.',
 	'info_choisir_pluginxml_verifier' => 'Choisissez les fichiers plugin.xml que vous souhaitez vérifier. Vous pouvez aussi cliquer sur le nom d\'un plugin.xml pour lancer directement sa vérification.',
@@ -84,6 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_verification_pluginxml' => '@nb@ plugin.xml vérifié (@duree@s) : @details@.<br />Veuillez consulter les résultats détaillés ci-après.',
 
 // T
+	'titre_boite_aide_paquetxml' => 'Aide sur paquet.xml',
 	'titre_form_generer' => 'Génération des fichiers paquet.xml',
 	'titre_form_valider' => 'Validation formelle des fichiers paquet.xml',
 	'titre_form_verifier' => 'Vérification des fichiers plugin.xml',

@@ -1,7 +1,7 @@
 <plugin>
 	<nom>PlugOnet</nom>
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
-	<version>0.3.2</version>
+	<version>0.4.0</version>
 	<etat>test</etat>
 	<licence>GPL v3</licence>
 	<icon>prive/themes/spip/images/plugonet-32.png</icon>
@@ -18,9 +18,15 @@ une aide sur chaque balise de la nouvelle DTD.
 	<lien>http://blog.smellup.net/spip.php?article7</lien>
 	<prefix>plugonet</prefix>
 
+	<options>plugonet_options.php</options>
+
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/plugonet_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>inc/plugonet_afficher.php</inclure>
 	</pipeline>
 
 	<bouton id="plugonet" parent="configuration">
