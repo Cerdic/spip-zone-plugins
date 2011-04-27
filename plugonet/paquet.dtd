@@ -34,7 +34,7 @@
 
 <!ENTITY % CREDITS "(auteur|copyright|credit|licence)*" >
 
-<!ENTITY % CONTENT "(bouton|chemin|lib|necessite|onglet|pipeline|utilise)*" >
+<!ENTITY % CONTENT "(bouton|chemin|lib|necessite|onglet|procure|pipeline|utilise)*" >
 
 <!ELEMENT paquet (nom, %CREDITS;, traduire*, %CONTENT;, spip*) >
 <!ATTLIST paquet
@@ -103,6 +103,12 @@
 
 <!ELEMENT utilise EMPTY>
 <!ATTLIST utilise
+	  nom %NAME; #REQUIRED
+	  version %VNUM; #IMPLIED
+>
+
+<!ELEMENT procure EMPTY>
+<!ATTLIST procure
 	  nom %NAME; #REQUIRED
 	  version %VNUM; #IMPLIED
 >
