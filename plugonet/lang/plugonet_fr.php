@@ -33,10 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // I
 	'index_aide_paqxmlstd' => 'Un nouveau standard de description',
 	'index_aide_paqxmlgen' => 'Structure générale de <code>paquet.xml</code>',
-	'index_aide_paqxmlpaquet' => 'La balise <code><paquet></code>',
-	'index_aide_paqxmlnom' => 'La balise <code><nom></code> et les autres descriptions',
+	'index_aide_paqxmlpaquet' => 'La balise <code>paquet</code>',
+	'index_aide_paqxmlnom' => 'La balise <code>nom</code> et les autres descriptions',
 	'index_aide_paqxmlcopy' => 'Les balises de «copyright»',
-	'index_aide_paqxmltrad' => 'La balise <code><traduire></code>',
+	'index_aide_paqxmltrad' => 'La balise <code>traduire</code>',
 	'index_aide_paqxmltech' => 'Les balises techniques',
 	'index_aide_paqxmldtd' => 'Expression formelle de la DTD',
 	'info_choisir_paquetxml_valider' => 'Choisissez les fichiers paquet.xml que vous souhaitez valider. Vous pouvez aussi cliquer sur le nom d\'un paquet.xml pour lancer directement sa validation formelle.',
