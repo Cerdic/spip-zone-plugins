@@ -25,7 +25,6 @@ function exec_adherents() {
 		$url_association = generer_url_ecrire('association');
 		$url_adherents = generer_url_ecrire('adherents');
 		$url_edit_relances=generer_url_ecrire('edit_relances');
-		$indexation = $GLOBALS['association_metas']['indexation'];
 		
 		//debut_page(_T('asso:titre_gestion_pour_association'), "", "");
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -104,9 +103,9 @@ function exec_adherents() {
 		//Filtre ID
 		$id = intval(_request('id'));
 		if (!$id) {
-			$id = ($indexation=='id_asso') ? _T('asso:adherent_libelle_id_asso') : _T('asso:adherent_libelle_id_auteur');
+			$id = _T('asso:adherent_libelle_id_auteur');
 		} else {
-			$critere = ($indexation=="id_asso") ? $critere="id_asso=$id" : "a.id_auteur=$id";
+			$critere = "a.id_auteur=$id";
 		}
 		
 		echo "\n<form method='post' action='".$url_adherents."'><div>";
@@ -132,13 +131,13 @@ function exec_adherents() {
 		echo '</table>';
 		
 		//Affichage de la liste
-		echo adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne, $indexation);
+		echo adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne);
 		echo fin_cadre_relief(true);  
 		echo fin_page_association();
 	}
 }
 
-function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation)
+function adherents_liste($debut, $lettre, $critere, $statut_interne)
 {
 
 	$max_par_page=30;
@@ -146,7 +145,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = sql_select('a.id_auteur AS id_auteur, a.email AS email,id_asso,nom_famille,prenom,statut,validite,statut_interne,categorie, bio',_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = sql_select('a.id_auteur AS id_auteur, a.email AS email, nom_famille,prenom,statut,validite,statut_interne,categorie, bio',_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
@@ -182,7 +181,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 
 		$auteurs .= "\n<tr>"
 		. '<td style="text-align:right;" class="'.$class. '">'
-		. (($indexation=="id_asso") ? $data["id_asso"] : $id_auteur)
+		. $id_auteur
 		. '</td>'
 		. '<td class="'.$class. '">'
 		. "<img src=$logo" . ' alt="&nbsp;"  title="'
@@ -214,12 +213,9 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne, $indexation
 		. "</tr>\n";
 	}
 	
-	if ($indexation=="id_asso") { $t = _T('asso:adherent_libelle_id_asso');}
-	else { $t = _T('asso:adherent_libelle_id_auteur');} 
-
 	$res = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 	. "<tr style='background-color: #DBE1C5;'>\n"
-	. "<td><strong>$t</strong></td>\n"
+	. "<td><strong>"._T('asso:adherent_libelle_id_auteur')."</strong></td>\n"
 	. "<th>"._T('asso:adherent_libelle_photo')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_nom_famille')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_prenom')."</th>\n"
@@ -267,15 +263,12 @@ function affiche_categorie($c)
 
 function adherents_table()
 {
-  $index = ($GLOBALS['association_metas']['indexation'] == 'id_asso');
   $champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
   $res = '';
   foreach ($champs as $k => $v) {
     $libelle = 'adherent_libelle_' . $k;
     $trad = _T('asso:' . $libelle);
     if ($libelle != str_replace(' ', '_', $trad)) {
-      if (($k == 'id_asso' AND !$index) OR ($k == 'id_auteur' AND $index))
-	continue;
       $res .= "<input type='checkbox' name='champs[$k]' />$trad<br />";
     }
   }

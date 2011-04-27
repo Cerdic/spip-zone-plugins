@@ -21,8 +21,7 @@ function exec_edit_relances(){
 	echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 
 	$url_edit_labels = generer_url_ecrire('edit_labels');
-	$url_retour = $_SERVER["HTTP_REFERER"];
-	$indexation = $GLOBALS['association_metas']['indexation'];		
+	$url_retour = $_SERVER["HTTP_REFERER"];		
 
 	association_onglets();
 		
@@ -56,7 +55,7 @@ function exec_edit_relances(){
 		echo generer_form_ecrire('edit_relances', $corps, 'method="get"', '');
 	}
 		
-	$corps = relances_while($indexation, $statut_interne);
+	$corps = relances_while($statut_interne);
 
 	if ($corps) {
 
@@ -72,7 +71,7 @@ function exec_edit_relances(){
 			. "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 			. "<tr style='background-color: #DBE1C5;'>\n"
 			. '<td><strong>'
-			. (($indexation=="id_asso") ? _T('asso:adherent_libelle_id_asso') : _T('asso:adherent_libelle_id_auteur'))
+			. _T('asso:adherent_libelle_id_auteur')
 			. "</strong></td>\n"
 			. '<th>' . _T('asso:nom') . "</th>\n"
 			. '<th>' . _T('asso:telephone') . "</th>\n"
@@ -91,10 +90,12 @@ function exec_edit_relances(){
 	echo fin_page_association(); 
 }
 
-function relances_while($indexation, $statut_interne)
+function relances_while($statut_interne)
 {
-  $_id = ($indexation=="id_asso") ? "id_asso" : "a.id_auteur";
-  $query = sql_select("$_id as id, a.id_auteur, b.email, a.nom_famille, a.prenom, a.telephone, a.mobile,  a.statut_interne, a.validite",_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " b.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
+	/* Cette requete recupere tous les membres qui ont un email dans la table spip_auteurs, a reprendre lors de l'interfacage avec Coordonnees car les emails peuvent alors etre uniquement dans spip_emails
+ et ils peuvent etre plusieurs, il faudrait peut etre laisser la possibilite de choisir ou prendre la/les adresses email qui sont de toute facon recuperes dans action/modifier_relances.php, le JOIN sur la
+table spip_auteurs permet d'afficher uniquement les membres qui ont un email dans cette table */
+   $query = sql_select("a.id_auteur, a.nom_famille, a.prenom, a.telephone, a.mobile, a.statut_interne, a.validite", "spip_asso_membres a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " b.email <> ''  AND a.statut_interne like '$statut_interne' AND a.statut_interne <> 'sorti'", '', "a.nom_famille" );
 
 	$res = '';
 	while ($data = sql_fetch($query)) {
@@ -111,8 +112,7 @@ function relances_while($indexation, $statut_interne)
 		.'<td class="$class">'.association_datefr($data['validite'])."</td>\n"
 		.'<td class="$class" style="text-align:center;">'
 		.'<input name="id[]" type="checkbox" value="'.$id_auteur.'" checked="checked" />'
-		.'<input name="statut[]" type="hidden" value="'.$statut_interne.'" />'
-		.'<input name="email[]" type="hidden" value="'.$email.'" />'
+		.'<input name="statut['.$id_auteur.']" type="hidden" value="'.$statut_interne.'" />'
 		."</td>\n"
 		.'</tr>';
 	}

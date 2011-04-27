@@ -60,8 +60,7 @@ function exec_prets(){
 		echo '<th>'._T('asso:prets_entete_date_retour').'</th>';
 		echo '<th colspan="2" style="text-align:center;">'._T('asso:entete_action').'</th>';
 		echo'  </tr>';
-		$index = $GLOBALS['association_metas']['indexation'];
-		if (!$index) $index = "id_auteur";
+
 		$query = sql_select("*", "spip_asso_prets", "id_ressource=$id_ressource", '', "date_sortie DESC" ) ;
 		while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';	
@@ -78,7 +77,7 @@ function exec_prets(){
 			echo '<td class="arial11 border1" style="text-align:right">'.association_datefr($data['date_sortie']).'</td>';
 			$id_emprunteur=intval($data['id_emprunteur']);
 
-			$auteur=sql_fetsel("*", "spip_asso_adherents", "$index=$id_emprunteur");
+			$auteur=sql_fetsel("*", "spip_asso_adherents", "id_auteur=$id_emprunteur");
 			echo '<td class="arial11 border1">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['duree'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right">';

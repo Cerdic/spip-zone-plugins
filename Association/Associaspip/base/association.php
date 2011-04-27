@@ -223,7 +223,6 @@ $association_tables_principales['spip_asso_activites'] = array(
 // 
 $spip_asso_membres= array(
   "id_auteur" => "bigint(21) NOT NULL auto_increment",
-  "id_asso" => "text NOT NULL",
   "nom_famille" => "text NOT NULL",
   "prenom" => "text NOT NULL",
   "sexe" => "tinytext NOT NULL",

@@ -43,9 +43,9 @@ function exec_pdf_adherents()
 		'color2'=>array(255,255,255),
 		'padding'=>2
 	);
-	$order = $GLOBALS['association_metas']['indexation'];
+	$order = 'id_auteur';
 	if ($sent['nom_famille']=='on')
-	  $order = 'nom_famille' . ($order ? (",$order") : '');
+	  $order = 'nom_famille' . ",$order";
 	$pdf->Query(sql_select('*',_ASSOCIATION_AUTEURS_ELARGIS, request_statut_interne(), '', $order), $prop);
 	$pdf->Output();
 	}

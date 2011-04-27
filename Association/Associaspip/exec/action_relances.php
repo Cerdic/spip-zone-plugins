@@ -32,8 +32,8 @@ function exec_action_relances(){
 
 		$sujet=$_POST['sujet'];
 		$message=$_POST['message'] ;
-		$email_tab=(isset($_POST["email"])) ? $_POST["email"]:array();
 		$id_tab=(isset($_POST["id"])) ? $_POST["id"]:array();
+		$statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array();
 		$count=count ($id_tab);
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -47,6 +47,7 @@ function exec_action_relances(){
 		echo debut_droite("",true);
 			
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:relance_de_cotisations'));
+
 		echo '<p><strong>', _T('asso:vous_vous_appretez_a_envoyer') . " $count ";
 		if ($count==1)
 			  { echo _T('asso:relance');}
@@ -60,13 +61,13 @@ function exec_action_relances(){
 		
 		$res = '';
 
-		for ( $i=0 ; $i < $count ; $i++ ) {
-			$res .= '<input name="id[]" type="hidden" value="'.intval($id_tab[$i]).'" />';
-			$res .= '<input name="statut[]" type="hidden" value="'.$statut_tab[$i].'" />';
-			$res .= '<input name="email[]" type="hidden" value="'.$email_tab[$i].'">';
+		/* on fait passer en hidden un tableau id_auteur => statut_interne contenant uniquement les auteurs selectionnes */
+		foreach ($id_tab as $id_auteur) {
+			$res .= '<input name="statut['.$id_auteur.']" type="hidden" value="'.$statut_tab[$id_auteur].'" />';
 		}
+
 		$res .= '<input name="sujet" type="hidden" value="'.$sujet.'" />';
-		$res .= '<input name="message" type="hidden" value="'.$message.'" />';
+		$res .= '<input name="message" type="hidden" value="'.htmlentities($message, ENT_QUOTES, 'UTF-8').'" />';
 		$res .= '<div style="float:right;"><input type="submit" value="'._T('asso:bouton_envoyer').'" class="fondo" /></div>';
 
 		echo redirige_action_post('modifier_relances', $count, 'adherents', '', "\n<div>$res</div>\n");

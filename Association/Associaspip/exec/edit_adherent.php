@@ -33,10 +33,6 @@ function exec_edit_adherent_args($id_auteur)
 		include_spip('inc/minipres');
 		echo minipres(_T('zxml_inconnu_id') . $id_auteur);
 	} else {
-
-		$indexation = $GLOBALS['association_metas']['indexation'];
-
-		$id_asso=$data['id_asso'];
 		$nom_famille=$data['nom_famille'];
 		$prenom=$data['prenom'];
 		$statut_interne=$data['statut_interne'];
@@ -56,7 +52,7 @@ function exec_edit_adherent_args($id_auteur)
 		echo debut_boite_info(true);
 		echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
 		echo '<span class="spip_xx-large">';
-		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
+		echo $id_auteur;
 		echo '</span></div>';
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">',
 			"<a href='$adh' title=\"",
@@ -72,20 +68,16 @@ function exec_edit_adherent_args($id_auteur)
 		echo debut_droite("",true);
 		
 		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
-		echo edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_interne, $commentaire);
+		echo edit_adherent($id_auteur, $categorie, $validite, $statut_interne, $commentaire);
 		fin_cadre_relief();
 		echo fin_page_association(); 
 	}
 }
 
-function edit_adherent($id_auteur, $id_asso, $categorie, $validite, $statut_interne, $commentaire)
+function edit_adherent($id_auteur, $categorie, $validite, $statut_interne, $commentaire)
 {
 	$res = '';
-	if ($GLOBALS['association_metas']['indexation']=="id_asso"){
-	  $res .= '<label for="id_asso"><strong>' . _T('asso:nd_d_adherent') . '&nbsp;:</strong></label>';
-			$res .= '<input name="id_asso" value="'.$id_asso.'" type="text" id="id_asso" class="formo" />';
-	}
-
+	
 	$sel = '';
 	$sql = sql_select('*', 'spip_asso_categories', '','', "id_categorie") ;
 	while ($var = sql_fetch($sql)) {

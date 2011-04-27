@@ -232,4 +232,20 @@ function association_maj_46779()
 }
 
 $GLOBALS['association_maj'][46779] = array(array('association_maj_46779'));
+
+function association_maj_47144()
+{
+	global $association_tables_principales;
+	/* avant d'eliminer id_asso de la table spip_asso_membres, on recopie sa valeur(si non null et non egal a 0) dans le champ commentaires */
+	$rows = sql_select("id_auteur, id_asso, commentaire", 'spip_asso_membres', "id_asso <> '' AND id_asso <> 0");
+	while ($row = sql_fetch($rows)) {
+		$commentaire = $row['commentaire']?$row['commentaire']." - Ref. Int. ".$row['id_asso']:"Ref. Int. ".$row['id_asso'];
+		sql_updateq('spip_asso_membres',
+			array('commentaire' => $commentaire),
+			"id_auteur=".$row['id_auteur']);
+	}
+	sql_alter("TABLE spip_asso_membres DROP id_asso");
+}
+
+$GLOBALS['association_maj'][47144] = array(array('association_maj_47144'));
 ?>

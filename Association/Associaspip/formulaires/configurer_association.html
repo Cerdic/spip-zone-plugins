@@ -150,11 +150,6 @@
 		<span class="spip_form_erreur">Aucun plan comptable défini !</span>
 		<//B_pc_prets>
 		</p>
-		<p>
-		<label><strong><:asso:config_libelle_indexation:></strong></label>
-		<input type="radio" name="indexation" value="id_auteur" [(#ENV{indexation}|=={id_auteur}|?{checked="checked"})] /><:asso:config_libelle_id_adherent:> (id_auteur)
-		<input type="radio" name="indexation" value="id_asso" [(#ENV{indexation}|=={id_asso}|?{checked="checkted"})] /><:asso:config_libelle_id_asso:> (id_asso)<br />
-		</p>
 	</fieldset>
 
 <div><input style="float:#LANG_RIGHT;" type="submit" value="<:OK:>" class="fondo" /></div>

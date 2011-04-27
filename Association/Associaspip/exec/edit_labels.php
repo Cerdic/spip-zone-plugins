@@ -25,7 +25,6 @@ function exec_edit_labels(){
 		
 		$url_asso = generer_url_ecrire('association');
 		$url_edit_relances = generer_url_ecrire('edit_relances');		
-		$indexation = $GLOBALS['association_metas']['indexation'];
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
@@ -62,15 +61,13 @@ function exec_edit_labels(){
 			echo generer_form_ecrire('edit_labels', $corps, 'method="get"', '');
 		}
 
-		$corps = labels_adherents($indexation, $statut_interne);
+		$corps = labels_adherents($statut_interne);
 
 		if ($corps) {
 			$corps = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n"
 			."<tr style='background-color: #DBE1C5;'>\n"
 			.'<td><strong>'
-			. (($indexation=="id_asso")
-			 ? _T('asso:adherent_libelle_id_asso')
-			 : _T('asso:adherent_libelle_id_auteur'))
+			. _T('asso:adherent_libelle_id_auteur')
 			.'</strong></td>'
 			.'<th>' . _T('asso:nom') . '</th>'
 			.'<th>' . _T('asso:adresse') . '</th>'
@@ -86,17 +83,17 @@ function exec_edit_labels(){
 	}
 }
 
-function labels_adherents($indexation, $statut_interne)
+function labels_adherents($statut_interne)
 {
 	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
 	// originale semblait contenir une vieillerie:
 	//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
 
 	$res = '';
-	if ($indexation !=="id_asso") $indexation = 'id_auteur'; // superflu ?
+
 	while ($data = sql_fetch($query))  {
 		$sexe=$data['sexe'];
-		$id = $data[$indexation];
+		$id = $data['id_auteur'];
 		switch($data['statut_interne']) {
 			case "echu": $class= "impair"; break;
 			case "ok": $class="valide"; break;

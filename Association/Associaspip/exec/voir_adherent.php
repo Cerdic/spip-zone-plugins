@@ -25,8 +25,6 @@ function exec_voir_adherent(){
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$indexation = $GLOBALS['association_metas']['indexation'];
-		$id_asso=$data['id_asso'];
 		$nom_famille=$data['nom_famille'];
 		$prenom=$data['prenom'];
 		$validite=$data['validite'];
@@ -45,7 +43,7 @@ function exec_voir_adherent(){
 		echo debut_boite_info(true);
 		echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
 		echo '<span class="spip_xx-large">';
-		if($indexation=="id_asso"){echo $id_asso;} else {echo $id_auteur;}
+		echo $id_auteur;
 		echo '</span></div>';
 
 		$nom = htmlspecialchars($nom_famille.' '.$prenom);
@@ -93,7 +91,6 @@ function exec_voir_adherent(){
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
 			$critere='id_adherent='.$id_auteur;
-			if($indexation=='id_asso'){$critere='id_adherent='._q($id_asso);} 
 			$query = sql_select("*", "spip_asso_activites", $critere, '', "date DESC" );			
 			while ($data = sql_fetch($query)) {
 				$id_evenement=$data['id_evenement'];
@@ -117,7 +114,7 @@ function exec_voir_adherent(){
 		
 		// FICHE HISTORIQUE VENTES
 		if ($GLOBALS['association_metas']['ventes']=="on"){
-			$critere='id_acheteur='. (($indexation !=='id_asso') ? $id_auteur : sql_quote($id_asso));
+			$critere='id_acheteur='. $id_auteur;
 
 			if ($r = voir_adherent_ventes($critere))
 			  echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>', $r, '</fieldset>';
@@ -139,7 +136,7 @@ function exec_voir_adherent(){
 			echo '<th style="text-align:right;">'._T('asso:prets_entete_date_retour')."</th>\n";
 			echo '<td><strong>&nbsp;</strong></td>';
 			echo '</tr>';
-			if($indexation=='id_asso'){$critere='id_emprunteur='._q($id_asso);} else {$critere='id_emprunteur='._q($id_auteur);}
+			$critere='id_emprunteur='._q($id_auteur);
 			$query = sql_select("*", "spip_asso_prets AS P LEFT JOIN spip_asso_ressources AS R ON P.id_ressource=R.id_ressource", $critere, '', "id_pret DESC" );			
 			while ($data = sql_fetch($query)) {
 				switch($data['statut']){
