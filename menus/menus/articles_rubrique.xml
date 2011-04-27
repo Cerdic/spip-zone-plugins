@@ -6,5 +6,7 @@
 	<parametre nom="id_rubrique" label="menus:entree_id_rubrique" />
 	<parametre nom="tri_num" label="menus:entree_tri_num" />
 	<parametre nom="tri_alpha" label="menus:entree_tri_alpha" />
+	<parametre nom="articles_max_affiches" label="menus:entree_articles_max_affiches" />
+	<parametre nom="trad" label="menus:entree_traduction_articles_rubriques" />
 	<refuser_sous_menu/>
 </entree>
