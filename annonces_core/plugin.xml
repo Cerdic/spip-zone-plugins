@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Annonces Core</nom>
+	<icon></icon>
+	<auteur>[b_b->http://www.spip-contrib.net/b_b]</auteur>
+	<licence>GPL 3</licence>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>Afficher les annonces officielles de SPIP dans l'espace privé.</description>
+	<lien></lien>
+	<categorie>divers</categorie>
+	<prefix>spipann</prefix>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>spipann_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.1;]' />
+</plugin>

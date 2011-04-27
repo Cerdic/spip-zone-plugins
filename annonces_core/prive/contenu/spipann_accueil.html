@@ -1,0 +1,14 @@
+[(#BOITE_OUVRIR{
+	[(#CHEMIN_IMAGE{warning-24.png}|balise_img{'','cadre-icone'})]
+	<:spipann:dernieres_nouvelles:>,
+	'simple etat_base'})
+]
+<B_rss>
+<ul class="liste-items">
+<BOUCLE_rss(DATA){source rss, http://archives.rezo.net/archives/spip-ann.mbox/feed}{0,5}>
+	[<li class="item"><a href="(#URL)">#TITRE</a></li>]
+</BOUCLE_rss>
+</ul>
+</B_rss>
+
+#BOITE_FERMER
