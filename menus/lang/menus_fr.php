@@ -57,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Titre',
 	'entree_titre_connecter' => 'Titre pour l\'accès au formulaire d\'identification',
 	'entree_titre_prive' => 'Titre pour accéder à l\'espace privé',
+	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)',
 	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)',
 	'entree_tri_alpha' => 'Critère de tri (alphabétique)',
 	'entree_tri_num' => 'Critère de tri (numérique)',
