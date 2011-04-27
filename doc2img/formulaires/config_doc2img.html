@@ -23,7 +23,7 @@
 			                <label for="resolution"><:doc2img:cfg_label_resolution:></label>
 							<p class="explication"><:doc2img:cfg_explication_resolution:></p>
 							[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{resolution})</span>]
-			                <input type="text" name="resolution" id="resolution" value="#ENV{resolution}" class="text" style="width:5em;"/> dpi
+			                <input type="text" name="resolution" id="resolution" value="#ENV{resolution,150}" class="text" style="width:5em;"/> dpi
 		                </li>
 					</ul>
                 </fieldset>

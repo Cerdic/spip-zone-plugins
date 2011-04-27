@@ -80,15 +80,15 @@ function inc_doc2img_convertir($id_document) {
 	    // par son numéro de page
 	    do {
 	        //charge la premiere image
-
+			$resolution = $config['resolution'] ? $config['resolution'] : 150;
 	        //on accede à la page $frame
 	        if ($version == '0.9') {
 	            imagick_goto($handle, $frame);
 	            $handle_frame = @imagick_getimagefromlist($handle);
 	        } else {
 	        	$image_frame = new Imagick();
-	        	if(is_numeric($config['resolution']) && ($config['resolution'] <= '600') && ($config['resolution'] > $identify['resolution']['x'])){
-		        	$image_frame->setResolution($config['resolution'],$config['resolution']);
+	        	if(is_numeric($resolution) && ($resolution <= '600') && ($resolution > $identify['resolution']['x'])){
+		        	$image_frame->setResolution($resolution,$resolution);
 	        	}
 				$image_frame->readImage($document['source_url']['absolute'].$document['fullname'].'['.$frame.']');
 				$image_frame->setImageFormat($config['format_cible']);
