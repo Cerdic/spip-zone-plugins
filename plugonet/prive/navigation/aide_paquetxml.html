@@ -3,13 +3,14 @@
 	[(#VAL{<:plugonet:titre_boite_aide_paquetxml:>}|bouton_block_depliable{#EVAL{true}})]
 	[(#EVAL{true}|debut_block_depliable)]
 	<div class="cadre_padding">
-<BOUCLE_aides(DATA){liste paqxmlstd, paqxmlgen, paqxmlpaquet, paqxmlnom, paqxmlcopy, paqxmltrad, paqxmltech, paqxmldtd}>
+	#SET{index_aide,#EVAL{$GLOBALS['index_aide_plugonet']}}
+<BOUCLE_index_aide(DATA){tableau #GET{index_aide}}>
 		<div style="border-bottom: 1px dotted #ddd;">
 			<span>[(#VAL{plugonet:index_aide_#VALEUR}|_T)]</span>
 			<div style="float: right;">#AIDER{#VALEUR}</div>
 			<div style="clear: both; height: 5px;"></div>
 		</div>
-</BOUCLE_aides>
+</BOUCLE_index_aide>
 		<div class="nettoyeur"></div>
 	</div>
 	[(#VAL|fin_block)]
