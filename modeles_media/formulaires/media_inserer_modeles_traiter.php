@@ -22,6 +22,9 @@ function formulaires_media_inserer_modeles_traiter_dist($champs){
 				$code .= '';
 			elseif (_request('taille')!='personnalisee' && in_array($champ,array('hauteur','largeur')))
 				$code .= '';
+			// Cas de titre_lien
+			elseif ($champ == 'titre_lien' && _request('lien')=='')
+				$code .= '';
 			// Cas général
 			elseif($champ == _request($champ))
 				$code .= "|$champ";
