@@ -58,7 +58,9 @@
                             Premier cas de gestion de l'affichage des articles 
                     		Ce code est dupliqué dans le 2e cas, voir ci dessous (a un ul pres)
                             Il n'est pas possible en spip 2 d'utiliser inclure pour eviter la duplication
-                            Cf http://comments.gmane.org/gmane.comp.web.spip.devel/60475 ]
+                            Cf http://comments.gmane.org/gmane.comp.web.spip.devel/60475
+                            Ce doit etre le meme soucis qui fait que #URL_RUBRIQUE est trasnforme en
+                            spip.php?page=rubrique&id_rubrique=2&connect=condition qu'on enleve avec le filtre parametre_url ]
 
                     <BOUCLE_test_articles_si_sousrub(CONDITION){si #GET{afficher_articles}}>
                     	[(#REM) On commence par compter le nombre d'articles de la rubrique]
@@ -81,7 +83,7 @@
                                 </li>
                             </BOUCLE_articles_si_sousrub>
                             [(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-                            	<li><a class="suite" href="#URL_RUBRIQUE"><:menus:tous_les_articles:></a></li>	
+                            	<li><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>	
                             ]
                             </B_articles_si_sousrub>
                         </BOUCLE_test_afficher_si_sousrub>
@@ -113,7 +115,7 @@
                                 </li>
                             </BOUCLE_articles_pas_de_sousrub>
                             [(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-                            	<li><a class="suite" href="#URL_RUBRIQUE"><:menus:tous_les_articles:></a></li>	
+                            	<li><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>	
                             ]
                             </ul>
                             </B_articles_pas_de_sousrub>
