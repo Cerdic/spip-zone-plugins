@@ -1184,11 +1184,12 @@ function geoportail_loadData (formatType, sel, proj, options)
 	{	jQuery("<div><form id='geoportailExport' name='export' action='?page=download&hash="+jQuery.geoportail.hash+"' method='POST' style='display:none'>"
 			+"<textarea id='geoportailExportData' name='data'></textarea>"
 			+"<input type=hidden value='txt' name='format' id='geoportailExportFormat' />"
-			+"<input type=hidden value='"+fic+"' name='name' />"
+			+"<input type=hidden value='"+fic+"' id='name' name='name' />"
 			+"</form></div>").appendTo('body');
 	}
 	document.getElementById('geoportailExportFormat').value = formatType;
 	document.getElementById('geoportailExportData').value = str;
+	document.getElementById('name').value = fic;
 	document.getElementById('geoportailExport').submit();
 	
 	return true;
