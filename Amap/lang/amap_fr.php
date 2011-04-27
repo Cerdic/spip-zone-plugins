@@ -7,19 +7,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
-	'adhesion' => 'Adh&eacute;sion (ex:2008)',
+	'adhesion' => 'Adhésion (ex:2008)',
 	'adresse_email' => 'Adresse email',
 	'agenda' => 'Agenda',
 	'annuaire'  => 'Annuaire',
-	'annuaire_enregistre'  => 'La personne a bien &eacute;t&eacute; enregistr&eacute;e',
-	'annuaire_enregistres'  => 'Liste des personnes enregistr&eacute;es',
+	'annuaire_enregistre'  => 'La personne a bien été enregistrée',
+	'annuaire_enregistres'  => 'Liste des personnes enregistrées',
 	'attention' => 'ATTENTION !',
-	'attention_modifications' => 'Les modifications effectu&eacute;es dans ces pages influent notablement sur le fonctionnement du module AMAP.',
+	'attention_modifications' => 'Les modifications effectuées dans ces pages influent notablement sur le fonctionnement du module AMAP.',
     	
 	// B
 	'banques' => 'Banques',
-	'banques_enregistrement' => 'Enregistrement d\'une banque suppl&eacute;mentaire',
-	'banques_enregistres' => 'Liste des banques enregistr&eacute;es',
+	'banques_enregistrement' => 'Enregistrement d\'une banque supplémentaire',
+	'banques_enregistres' => 'Liste des banques enregistrées',
 
 	// C
 	'choisir_produit' => 'Choisir un produit',
@@ -28,11 +28,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix' => 'Choix',
 	'choix_produit' => 'Choix du produit',
 	'choix_saison' => 'Choix de la saison',
-	'cle_primaire_de'  => 'est la cl&eacute; primaire de',
+	'cle_primaire_de'  => 'est la clé primaire de',
 	'configuration'  => 'Configuration',
 	'configuration_annuaire'  => 'Configuration de l\'annuaire',
-	'configuration_banque'  => 'Configuration des banques',
-	'configuration_distri_evenement' => 'Configuration des &eacute;v&eacute;nements',
+	'configuration_distri_evenement' => 'Configuration des évènements',
 	'configuration_distri_produit' => 'Configuration des produits',
 	'configuration_distri_vacance' => 'Configuration des vacances',
 	'configuration_lieu'  => 'Configuration des lieux',
@@ -43,23 +42,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contrat_liste' => 'Liste des contrats',
 	'contrat_liste_produit_saison' => 'Liste des contrats pour le produit @label_produit@ de la saison @id_saison@',
 	'contrat_participation' => 'Participation aux sorties',
-	'contrat_reglement' => 'R&egrave;glement',
-	'contrat_sortie' => 'Sorties &agrave; la ferme',
+	'contrat_reglement' => 'Règlement',
+	'contrat_sortie' => 'Sorties à la ferme',
 	'contrat_tarifs' => 'Tarif des contrats',
 
 	// D
 	'date_distribution' => 'Date de la distribution',
 	'date_evenement' => 'Date de l\'évènement',
 	'distributions'  => 'Distributions',
-	'distri_evenement'  => '&Eacute;v&eacute;nements',
+	'distri_evenement'  => 'évènements',
 	'distri_produit'  => 'Produits',
 	'distri_vacance'  => 'Vacances',
 
 	// E
 	'enregistrement_contrat_produit_saison' => 'Enregistrement d\'un nouveau contrat pour le produit @label_produit@ de la saison @id_saison@',
-	'enregistrement_evenement_distribution' => 'Enregistrement d\'un nouvel &eacute;v&egrave;nement pour la saison @id_saison@',
+	'enregistrement_evenement_distribution' => 'Enregistrement d\'un nouvel évènement pour la saison @id_saison@',
 	'enregistrement_vacance' => 'Enregistrement d\'une nouvelle vacance pour la saison',
-	'evenements_enregistre' => 'L\'&eacute;v&egrave;nement a &eacute;t&eacute; enregistr&eacute;',
+	'evenements_enregistre' => 'L\'évènement a été enregistré',
 
 	// F
 
@@ -82,13 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lieux_rue' => 'Rue',
 	'lieux_cp' => 'Code postal',
 	'lieux_ville' => 'Ville',
-	'lieux_telephone' => 'T&eacute;l&eacute;phone',
-	'lieux_enregistre' => 'Le lieu a &eacute;t&eacute; enregistr&eacute;',
+	'lieux_telephone' => 'Téléphone',
+	'lieux_enregistre' => 'Le lieu a été enregistré',
 	'lieux_enregistrement' => 'Enregistrement d\'un nouveau lieu de distribution',
 	'lieux_enregistres' => 'Liste des lieux possibles',
-	'liste_distribution_enregistres' => 'Liste des produits pr&eacute;sents aux distributions de la saison',
-	'liste_distribution_enregistrement' => 'Enregistrement d\'un produit suppl&eacute;mentaire pour la saison',
-	'liste_evenement_distribution' => 'Liste des diff&eacute;rents &eacute;v&egrave;nements de distributions de la saison @id_saison@',
+	'liste_distribution_enregistres' => 'Liste des produits présents aux distributions de la saison',
+	'liste_distribution_enregistrement' => 'Enregistrement d\'un produit supplémentaire pour la saison',
+	'liste_evenement_distribution' => 'Liste des différents évènements de distributions de la saison @id_saison@',
 	'liste_vacance' => 'Liste des vacances de la saison',
 
 	// M
@@ -102,11 +101,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_livraison' => 'Contenu d\'un panier',
 	'paniers'  => 'Paniers',
 	'paysan' => 'Paysan',
-	'prenom' => 'Pr&eacute;nom',
+	'prenom' => 'Prénom',
 	'produits' => 'Produits',
-	'produits_enregistrement' => 'Enregistrement d\'un produit suppl&eacute;mentaire',
-	'produits_enregistre' => 'Le produit a &eacute;t&eacute; enregistr&eacute;',
-	'produits_enregistres' => 'Liste des produits enregistr&eacute;s',
+	'produits_enregistrement' => 'Enregistrement d\'un produit supplémentaire',
+	'produits_enregistre' => 'Le produit a été enregistré',
+	'produits_enregistres' => 'Liste des produits enregistrés',
 
 	// R
 	'responsable' => 'Responsable',
@@ -114,22 +113,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'saisons' => 'Saisons',
-	'saisons_enregistrement' => 'Enregistrement d\'une saison suppl&eacute;mentaire',
-	'saisons_enregistre' => 'La saison a &eacute;t&eacute; enregistr&eacute;e',
-	'saisons_enregistres' => 'Liste des saisons enregistr&eacute;es',
+	'saisons_enregistrement' => 'Enregistrement d\'une saison supplémentaire',
+	'saisons_enregistre' => 'La saison a été enregistrée',
+	'saisons_enregistres' => 'Liste des saisons enregistrées',
 	'sorties' => 'Sorties',
 
 	// T
 	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide:
 					<br/>Elle ne contient aucun enregistrement.',
-	'tarifs_enregistrement_saison_produit' => 'Enregistrement d\'un tarif suppl&eacute;mentaire pour la saison @id_saison2@ du produit @label_produit2@',
+	'tarifs_enregistrement_saison_produit' => 'Enregistrement d\'un tarif supplémentaire pour la saison @id_saison2@ du produit @label_produit2@',
 	'tarifs_enregistres_saison_produit' => 'Liste des tarifs possibles pour la saison @id_saison1@ du produit @label_produit1@',
-	'tel_fixe' => 'T&eacute;l&eacute;phone fixe',
-	'tel_portable' => 'T&eacute;l&eacute;phone portable',
+	'tel_fixe' => 'Téléphone fixe',
+	'tel_portable' => 'Téléphone portable',
 	'type_panier' => 'Type de panier',
-	'types_contrats_enregistre' => 'Le type de contrat a &eacute;t&eacute; enregistr&eacute;',
+	'types_contrats_enregistre' => 'Le type de contrat a été enregistré',
 	'types_contrats_enregistres' => 'Liste des types de contrats possibles',
-	'types_contrats_enregistrement' => 'Enregistrement d\'un type de contrat suppl&eacute;mentaire',
+	'types_contrats_enregistrement' => 'Enregistrement d\'un type de contrat supplémentaire',
 	'types_de_contrat' => 'Types de contrat',
 
 	// V
