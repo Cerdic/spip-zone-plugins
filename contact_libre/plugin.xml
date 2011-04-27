@@ -4,7 +4,7 @@
 	<version>0.1</version>
 	<etat>stable</etat>
 	<prefix>contact_libre</prefix>
-	<icon>contact_libre-48.png</icon>
+	<icon>images/contact_libre-48.png</icon>
 	<description>
 	Formulaire de contact libre auquel on peut passer directement une adresse mail et une url de r&eacute;f&eacute;rence (incone de http://www.androidicons.com/).
 	</description>
