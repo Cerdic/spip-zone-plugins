@@ -16,17 +16,19 @@
 			</tr>
 		</thead>
 		<tbody>
+			#SET{total,0}
 			<BOUCLE_details(POUR){tableau #GET{commande}|table_valeur{details}}>
 			<tr class="detail [(#VALEUR|table_valeur{quantite}|>{0}|?{avec_quantite,sans_quantite})]">
 				<td class="description">[(#VALEUR|table_valeur{descriptif})]</td>
-				<td class="montant">[(#VALEUR|table_valeur{prix})]</td>
+				<td class="montant">[(#VALEUR|table_valeur{prix}|prix_formater)]</td>
 			</tr>
+			[(#SET{total,[(#GET{total}|plus{[(#VALEUR|table_valeur{prix})]})]})]
 			</BOUCLE_details>
 		</tbody>
 		<tfoot>
 			<tr class="total_ttc">
 				<td class="descriptif"><:prix:label_total_ttc:></td>
-				<td class="montant">[(#GET{commande}|table_valeur{total_ttc})]</td>
+				<td class="montant">[(#GET{total}|prix_formater)]</td>
 			</tr>
 		</tfoot>
 	</table>
