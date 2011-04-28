@@ -73,6 +73,19 @@
 				<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_non" value="non" [(#ENV{plus_recent_branche,oui}|=={non}|oui) checked="checked"] />
 				<label for='plus_recent_branche_non'><:item_non:></label>
 			</div>
+			#SET{ordre,#GET{ordre}|plus{1}}
+		</li>
+		<li class="editer_sousrubrique_titre[ (#ENV**{erreurs}|table_valeur{sousrubrique_titre}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_sousrubrique_titre:></label>
+			<p class="explication"><:courtcircuit:explication_sousrubrique_titre:></p>
+			<div class="choix">
+				<input type="radio" name="sousrubrique_titre" class="radio" id="sousrubrique_titre_oui" value="oui" [(#ENV{sousrubrique_titre,non}|=={oui}|oui) checked="checked"] />
+				<label for='sousrubrique_titre_oui'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="sousrubrique_titre" class="radio" id="sousrubrique_titre_non" value="non" [(#ENV{sousrubrique_titre,non}|=={non}|oui) checked="checked"] />
+				<label for='sousrubrique_titre_non'><:item_non:></label>
+			</div>
 		</li>
 		</ul>
 		<p class="boutons">

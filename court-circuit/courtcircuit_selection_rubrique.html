@@ -1,0 +1,6 @@
+[(#REM)
+	Ce squelette doit renvoyer l'identifiant de la rubrique vers laquelle la rubrique doit être redirigée .
+	La configuration de court-circuit lui est transmise en tant que variables d'environnement.
+]
+<BOUCLE_sousrubrique_titre(RUBRIQUES){id_parent}{par num titre, titre}{0,1}>[(#ENV{sousrubrique_titre,non}|=={oui}|?{#ID_RUBRIQUE,''})]</BOUCLE_sousrubrique_titre>
+<//B_sousrubrique_titre>

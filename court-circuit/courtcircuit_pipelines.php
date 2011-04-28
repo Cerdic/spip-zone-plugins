@@ -23,6 +23,17 @@ function courtcircuit_styliser($flux){
 			include_spip('inc/headers');
 			$url = generer_url_entite(intval($redirect_article), 'article', '', '', true);
 			redirige_par_entete($url,'','301');
+		} else {
+			$redirect_rubrique = recuperer_fond(
+				'courtcircuit_selection_rubrique', 
+				array_merge(array('id_rubrique' => $id_rubrique),$config)
+				);
+			if (intval($redirect_rubrique)) {
+				include_spip('inc/utils');
+				include_spip('inc/headers');
+				$url = generer_url_entite(intval($redirect_rubrique), 'rubrique', '', '', true);
+				redirige_par_entete($url,'','301');
+			}
 		}
 	}
 	return $flux;

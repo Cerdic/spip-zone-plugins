@@ -3,8 +3,8 @@
 	<icon>images/courtcircuit-128.png</icon>
 	<description>Acc&eacute;s direct aux articles.</description>
 	<lien>http://www.spip-contrib.net/court-circuit</lien>
-	<version>2.0.0-dev</version>
-	<etat>dev</etat>
+	<version>2.0.0</version>
+	<etat>test</etat>
 	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph] - 2011</auteur>
 	<prefix>courtcircuit</prefix>
 	<pipeline>
