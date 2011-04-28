@@ -14,6 +14,6 @@
 	<necessite id="SPIP" version="[2.1.10;]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<necessite id="saisies" version="[1.9.0;]" />
-	<necessite id="contacts" version="[1.4.6;]" />
+	<necessite id="contacts" version="[1.8.0;]" />
 	<necessite id="coordonnees" version="[1.4.2;]" />
 </plugin>
