@@ -3,7 +3,9 @@
 		<traducteur nom="kandalaft" />
 	</langue>
 	<langue code="ca" />
-	<langue code="de" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
 	<langue code="en">
 		<traducteur nom="paolo2" />
 		<traducteur nom="mark_baber" />

@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_nb_max' => 'Maximum number of attachments',
 	'configuration_regle_liste_explication' => 'Select a calculation rule from the list of potential recipients and the selection method proposed to the visitors.',
 	'configuration_texteinfolettre' => 'Infoletter text',
-	'configuration_texteinfolettre_explication' => 'Enter the text associated with the Infoletter checkbox', # MODIF
+	'configuration_texteinfolettre_explication' => 'Modify the text for the Infoletter checkbox',
 	'consulter_memoire' => 'This message is saved on your site:',
 	'courriel_de' => 'From',
 	'courriel_pour' => 'To',
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'madame' => 'Madam',
 	'mademoiselle' => 'Miss',
 	'modele_label_auteur' => 'Pre-select an author (optional)?',
-	'modele_nom_formulaire' => 'a contact form',
+	'modele_nom_formulaire' => 'a contact form', # MODIF
 	'monsieur' => 'Mister',
 	'msg_accueil' => 'Here are messages from contacts you have received.',
 	'msg_contact' => 'Message from contact',
@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Personalised title',
 
 	// P
-	'par' => 'Par : ', # NEW
+	'par' => 'By:',
 	'preselection' => 'Uncheck all the entries in the list of recipients',
 
 	// S

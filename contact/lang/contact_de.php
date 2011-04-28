@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'Téléphone',
 	'champ_texte' => 'Text',
 	'champ_ville' => 'Stadt',
-	'configuration_barre_forum' => 'Afficher la barre typo des forums.', # NEW
+	'configuration_barre_forum' => 'Formatierungsleiste der Foren anzeigen',
 	'configuration_barre_impossible' => 'Ein anderes Plugin verhindert die Benutzung des Federhalters im öffentlichen Bereich. Die unten stehenden Einstellungen haben keine Auswirkungen.',
 	'configuration_barre_oui' => 'Vollständige Funktionsleiste anzeigen.',
 	'configuration_champs_message' => 'Einstellungen des Federhalters.',
@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_facteur_absent' => 'Um diese Funktion zu nutzen, müssen Sie das Plugin-Faktor.',
 	'configuration_pj_nb_max' => 'Maximale Anzahl an Dateianhängen',
 	'configuration_regle_liste_explication' => 'Wählen sie die Art, wie die Liste der potentiellen Empfänger zusammengestellt und dem Besucher angezeigt wird.',
-	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
+	'configuration_texteinfolettre' => 'Text für Newsletter',
+	'configuration_texteinfolettre_explication' => 'Falls erforderlich Text der Newsletter Checkbox ändern',
 	'consulter_memoire' => 'Diese Meldung wird auf Ihrer Website protokolliert:',
 	'courriel_de' => 'Von',
 	'courriel_pour' => 'Für',
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'deplacement_possible' => 'Vertikale Verschiebung per Drag and Drop',
 	'description_menu_contact' => 'Eintrag im Menü zum Kontaktformular',
-	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez à ajouter un lien dans vos menus).', # NEW
+	'description_page-contact' => 'Diese Seite ist ereichbat über <i>spip.php?page=contact</i> und enthält ein Kontaktformular (Vergessen sie nicht, den Link in ihre Menüs einzutragen).',
 
 	// F
 	'form_destinataire' => 'Wählen Sie ein Reiseziel',
@@ -96,8 +96,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Frau',
 	'mademoiselle' => 'Fräulein',
-	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
-	'modele_nom_formulaire' => 'un formulaire de contact', # NEW
+	'modele_label_auteur' => 'Vorauswahl eines Autors (fakultativ)',
+	'modele_nom_formulaire' => 'Kontaktformular', # MODIF
 	'monsieur' => 'Herr',
 	'msg_accueil' => 'Hier finden Sie die Kontaktdaten Nachrichten, die Sie erhalten haben.',
 	'msg_contact' => 'Kontakt Botschaft',
@@ -110,13 +110,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_supprimer_message' => 'Löschen Sie die Nachricht',
 
 	// N
-	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
-	'noisette_label_titre_noisette' => 'Titre :', # NEW
-	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :', # NEW
-	'noisette_titre_perso' => 'Titre personnalisé', # NEW
+	'noisette_label_afficher_titre_noisette' => 'Titel anzeigen?',
+	'noisette_label_titre_noisette' => 'Titel:',
+	'noisette_label_titre_noisette_perso' => 'Falls Titel personalisiert:',
+	'noisette_titre_perso' => 'Personalisierter Titel',
 
 	// P
-	'par' => 'Par : ', # NEW
+	'par' => 'Von:',
 	'preselection' => 'Alle Einträge in der Empfängerliste abwählen',
 
 	// S
