@@ -3,7 +3,7 @@
 	<icon>img_pack/urledit-48.png</icon>
 	<auteur>[Stephane LAURENT->stephane@rezo.net], [erational->http://www.erational.org]</auteur>
 	<licence>GPL 3 - &#169; 2009-2011</licence>
-	<version>0.3</version>
+	<version>0.4.0</version>
 	<etat>dev</etat>
 	<description>Edition libre des URLs</description>
 	<lien>http://www.spip-contrib.net/URLs-editables</lien>

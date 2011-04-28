@@ -15,8 +15,20 @@ function urledit_affiche_milieu($flux){
 		$type_objet = 'breve';
 		$id_objet = $flux["args"]["id_breve"];
 	}
+	if ($flux["args"]["id_auteur"] and $exec=='auteur_infos') {
+		$type_objet = 'auteur';
+		$id_objet = $flux["args"]["id_auteur"];
+	}
+	if ($flux["args"]["id_mot"] and $exec=='mots_edit') {
+		$type_objet = 'mot';
+		$id_objet = $flux["args"]["id_mot"];
+	}
+	if ($flux["args"]["id_syndic"] and $exec=='sites') {
+		$type_objet = 'syndic';
+		$id_objet = $flux["args"]["id_syndic"];
+	}
   // --------------
-	if (in_array($type_objet,array('article','rubrique','breve'))) {
+	if (in_array($type_objet,array('article','rubrique','breve','auteur','mot','syndic'))) {
 		include_spip('inc/urledit');
 		include_spip('urls/propres');
 		include_spip('inc/autoriser');  
