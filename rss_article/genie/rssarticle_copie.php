@@ -16,8 +16,8 @@ include_spip('inc/chercher_logo');
 function genie_rssarticle_copie_dist($t){  
   
   // si cfg dispo, on charge les valeurs
-  if (function_exists(lire_config))  {         
-        if (lire_config('rssarticle/import_statut')=='publie')  $import_statut = "publie"; else  $import_statut = "prop";  
+  if (function_exists(lire_config))  {          
+        if (lire_config('rssarticle/import_statut')=="publie")       $import_statut="publie"; else  $import_statut="prop";     
         if (lire_config('rssarticle/mode')=="auto")       $mode_auto=true; else  $mode_auto=false;  
         if (lire_config('rssarticle/email_alerte')=="on") $email_alerte=true; else  $email_alerte=false;
         if (lire_config('rssarticle/copie_logo')=="on")   $copie_logo=true; else  $copie_logo=false;        
@@ -83,7 +83,6 @@ function genie_rssarticle_copie_dist($t){
                                 'date'=> $lsDate, 'accepter_forum'=>$accepter_forum, 'lang'=>$lang, 'url_site'=>$url));
                                 
             // lier article et site
-            spip_log("**debug liaison $id_article / $id_syndic **********");
             sql_insertq( 'spip_articles_syndic', array('id_article'=>$id_article, 'id_syndic'=>$id_syndic));
                                 
             // gestion auteur            

@@ -15,7 +15,14 @@
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/rssarticle.php</inclure>
 	</pipeline>
-  <options>rssarticle_options.php</options> 
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/rssarticle.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/rssarticle.php</inclure>
+	</pipeline> 
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>rssarticle_pipelines.php</inclure>
@@ -23,5 +30,5 @@
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>rssarticle_pipelines.php</inclure>
-	</pipeline> 
+	</pipeline>  
 </plugin>
