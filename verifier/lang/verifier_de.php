@@ -8,11 +8,11 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'erreur_code_postal' => 'Ce code postal est incorrect.', # NEW
+	'erreur_code_postal' => 'Ungültige Postleitzahl',
 	'erreur_date' => 'Fromat des Datums ungültig',
-	'erreur_date_format' => 'Le format de la date n\'est pas accepté.', # NEW
-	'erreur_decimal' => 'La valeur doit être un nombre décimal.', # NEW
-	'erreur_decimal_nb_decimales' => 'Le nombre ne doit pas avoir plus de @nb_decimales@ chiffres après la virgule.', # NEW
+	'erreur_date_format' => 'Dieses Datumsformat wird nicht akzeptiert',
+	'erreur_decimal' => 'Der Wert muß einen Dezimalzahl sein',
+	'erreur_decimal_nb_decimales' => 'Die Zahl darf nicht mehr als @nb_decimales@ Nachkommastellen haben.',
 	'erreur_email' => 'Die Mailadresse  <em>@email@</em> hat einen Syntaxfehler.',
 	'erreur_email_nondispo' => 'Die Mailadresse <em>@email@</em>  wird bereits verwendet.',
 	'erreur_entier' => 'Der Wert muß eine ganze Zahl sein.',
@@ -29,12 +29,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_max' => 'Der Wert darf maximal @max@ Zeichen haben.',
 	'erreur_taille_min' => 'Der Wert muß mindestens @min@ Zeichen haben.',
 	'erreur_telephone' => 'Zahl ungültig',
-	'erreur_url' => 'Adresse ungültig', # MODIF
-	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@', # NEW
-	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)', # NEW
+	'erreur_url' => 'Die Adresse <em>@url@</em> ist ungültig.',
+	'erreur_url_protocole' => 'Die eingegebene Adresse <em>(@url@)</em> muß mit @protocole@ beginnen.',
+	'erreur_url_protocole_exact' => 'Die eingegebene Adresse <em>(@url@)</em> beginnt nicht mit einem gültigen Protokoll (zum Beispiel http:// ).',
 
 	// O
-	'option_decimal_nb_decimales_label' => 'Nombre de décimales après la virgule', # NEW
+	'option_decimal_nb_decimales_label' => 'Dezimalstellen nach dem Komma',
 	'option_email_disponible_label' => 'Adresse verfügbar',
 	'option_email_disponible_label_case' => 'Überprüfen, ob die Adresse bereits verwendet wird.',
 	'option_email_mode_5322' => 'Streng standardgemäße Überprüfung',
@@ -49,28 +49,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_siren_siret_mode_siret' => 'SIRET (frz. geographische Unternehmens ID)',
 	'option_taille_max_label' => 'Maximalgröße',
 	'option_taille_min_label' => 'Minimalgröße',
-	'option_url_mode_complet' => 'Vérification complète de l\'url', # NEW
-	'option_url_mode_label' => 'Mode de vérification des urls', # NEW
-	'option_url_mode_php_filter' => 'Vérification complète de l\'url via le filtre FILTER_VALIDATE_URL de php', # NEW
-	'option_url_mode_protocole_seul' => 'V&eacute;rification uniquement de la présence d\'un protocole', # NEW
-	'option_url_protocole_label' => 'Nom du protocole à vérifier', # NEW
-	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous :', # NEW
-	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp', # NEW
-	'option_url_type_protocole_label' => 'Type de protocole à vérifier', # NEW
-	'option_url_type_protocole_mail' => 'Protocoles mail : imap, pop3 ou smtp', # NEW
-	'option_url_type_protocole_tous' => 'Tous protocoles acceptés', # NEW
-	'option_url_type_protocole_web' => 'Protocoles web : http ou https', # NEW
+	'option_url_mode_complet' => 'Vollständige Prüfung des URL',
+	'option_url_mode_label' => 'Art der URL-Prüfung',
+	'option_url_mode_php_filter' => 'Vollständige Prüfung des URL mit dem PHP-Filter FILTER_VALIDATE_URL',
+	'option_url_mode_protocole_seul' => 'Nur die Angabe eines Protokolls prüfen',
+	'option_url_protocole_label' => 'Names des überprüften Protokolls',
+	'option_url_type_protocole_exact' => 'Geben Sie hier ein Protokoll an:',
+	'option_url_type_protocole_ftp' => 'FTP-Protokolle: ftp oder sftp',
+	'option_url_type_protocole_label' => 'Typ des erforderlichen Protokolls',
+	'option_url_type_protocole_mail' => 'Mail-Protokolle: imap, pop3 oder smtp',
+	'option_url_type_protocole_tous' => 'Alle Protokolle werden akzeptiert',
+	'option_url_type_protocole_web' => 'Web-Protokolle: http oder https',
 
 	// T
 	'type_date' => 'Datum',
 	'type_date_description' => 'Überprüft den Wert auf das Datumsformat  JJ/MM/AAAA. Verschiedene Trenner sind möglich (".", "/", etc).',
-	'type_decimal' => 'Nombre décimal', # NEW
-	'type_decimal_description' => 'Vérifie que la valeur est un nombre décimal, avec la possibilité de restreindre entre deux valeurs et de préciser le nombre de décimales après la virgule.', # NEW
+	'type_decimal' => 'Dezimalzahl',
+	'type_decimal_description' => 'Prüft ob der Wert eine Dezimalzahl ist und ermöglicht, einen Wertebereich und die Anzahl der Nachkommastellen festzulegen.',
 	'type_email' => 'Mailadresse',
 	'type_email_description' => 'Überprüft das Format der Mailadresse',
 	'type_email_disponible' => 'Verfügbarkeit einer Mailadresse',
 	'type_email_disponible_description' => 'Überprüft ob die Mailadresse bereits von einem anderen Nutzer des System verwendet wird.',
-	'type_entier' => 'Ganzzahl', # MODIF
+	'type_entier' => 'Ganzzahl',
 	'type_entier_description' => 'Überprüft ob der Wert eine Ganzzahl ist; bietet die Möglichkeit, einen Bereich zwischen zwei Zahlen anzugeben.',
 	'type_regex' => 'Regulärer Ausdruck',
 	'type_regex_description' => 'Prüft ob der Wert mit der vorgegebenen Maske übereinstimmt. Zur Verwendung der Masken <a href="http://www.php.net/manual/de/reference.pcre.pattern.syntax.php">lesen sie bitte die PHP Dokumentation</a>.',
@@ -80,8 +80,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_taille_description' => 'Überprüft ob der Wert zum geforderten Minimal- oder Maximalwert paßt.',
 	'type_telephone' => 'Telefonnummer',
 	'type_telephone_description' => 'Prüft ob die Telefonnummer einem bekannten Schema entspricht.',
-	'type_url' => 'URL', # NEW
-	'type_url_description' => 'Vérifie que l\'url correspond à un schéma reconnu.' # NEW
+	'type_url' => 'URL',
+	'type_url_description' => 'Prüft ob der URL einem anerkannten Schema entspricht.'
 );
 
 ?>

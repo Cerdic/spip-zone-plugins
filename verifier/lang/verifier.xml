@@ -1,12 +1,17 @@
 <traduction module="verifier" gestionnaire="salvatore" reference="fr">
 	<langue code="ca" />
-	<langue code="de" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
 	<langue code="en">
 		<traducteur nom="mark_baber" />
 	</langue>
 	<langue code="es" />
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
+	</langue>
+	<langue code="it">
+		<traducteur nom="renatoformato" />
 	</langue>
 	<langue code="pt_br">
 		<traducteur nom="rporto" />
