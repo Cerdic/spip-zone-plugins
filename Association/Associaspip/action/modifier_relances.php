@@ -38,7 +38,7 @@ function action_modifier_relances() {
 		if (!$envoyer_mail($email, $sujet, $message, $exp)) {
 			spip_log("non envoi du mail a ".$email);
 		} elseif ($statut_tab[$id_auteur]=="echu") {
-				sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
+				sql_updateq('spip_asso_membres', 
 					array("statut_interne"=> 'relance'),
 					    "id_auteur=$id_auteur");
 			}

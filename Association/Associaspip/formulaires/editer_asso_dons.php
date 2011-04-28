@@ -78,7 +78,7 @@ function formulaires_editer_asso_dons_verifier_dist($id_don) {
 	$id_adherent = _request('id_adherent');
 	if ($id_adherent != '') {
 		$id_adherent = intval($id_adherent);
-		if (sql_countsel(_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_adherent")==0) {
+		if (sql_countsel('spip_asso_membres', "id_auteur=$id_adherent")==0) {
 			$erreurs['id_adherent'] = _T('asso:erreur_id_adherent');
 		}
 		

@@ -49,7 +49,7 @@ function exec_edit_labels(){
 
 
 		$corps = '';
-		foreach ($GLOBALS['association_liste_des_statuts2'] as $var) {
+		foreach ($GLOBALS['association_liste_des_statuts'] as $var) {
 			$corps .= '<option value="'.$var.'"';
 			if ($statut_interne==$var) {$corps .= ' selected="selected"';}
 			$corps .= '> '._T('asso:adherent_entete_statut_'.$var)
@@ -85,7 +85,7 @@ function exec_edit_labels(){
 
 function labels_adherents($statut_interne)
 {
-	$query = sql_select("*",_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
+	$query = sql_select("*",'spip_asso_membres', "statut_interne like '$statut_interne'", '', "nom_famille, sexe DESC" );
 	// originale semblait contenir une vieillerie:
 	//  spip_auteurs_elargis INNER JOIN spip_asso_adherents ON spip_auteurs_elargis.id_auteur=spip_asso_adherents.id_auteur 
 

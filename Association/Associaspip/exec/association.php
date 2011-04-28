@@ -68,7 +68,7 @@ function exec_association() {
 		echo '<th>' . _T('asso:portable') . "</th>\n";
 		echo '<th>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</th>\n";
 		echo '</tr>';
-		$query = sql_select("a.id_auteur, a.mobile, a.telephone, a.statut_interne, a.fonction, b.nom, b.email, a.nom_famille",_ASSOCIATION_AUTEURS_ELARGIS .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "a.fonction !='' AND a.statut_interne != 'sorti'", '',  "a.nom_famille");
+		$query = sql_select("a.id_auteur, a.mobile, a.telephone, a.statut_interne, a.fonction, b.nom, b.email, a.nom_famille",'spip_asso_membres' .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "a.fonction !='' AND a.statut_interne != 'sorti'", '',  "a.nom_famille");
 		while ($data = sql_fetch($query))
     {	
 			$id_auteur=$data['id_auteur'];
@@ -107,7 +107,7 @@ function exec_association() {
 		echo fin_page_association();
 		
 		//Petite routine pour mettre à jour les statuts de cotisation "échu"
-		sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
+		sql_updateq('spip_asso_membres', 
 			array("statut_interne"=> 'echu'),
 			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 	}

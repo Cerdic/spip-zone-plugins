@@ -21,7 +21,7 @@ function exec_voir_adherent(){
 	$id_auteur= intval($_GET['id']);
 	$full = autoriser('associer', 'adherents');
 	
-	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur")) {
+	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data = sql_fetsel("*",'spip_asso_membres', "id_auteur=$id_auteur")) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {

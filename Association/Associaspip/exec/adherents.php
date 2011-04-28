@@ -48,7 +48,7 @@ function exec_adherents() {
 		$membres = $GLOBALS['association_liste_des_statuts'];
 		array_shift($membres); // ancien membre
 		foreach ($membres as $statut) {
-			$nombre=sql_countsel(_ASSOCIATION_AUTEURS_ELARGIS, "statut_interne='$statut'");
+			$nombre=sql_countsel('spip_asso_membres', "statut_interne='$statut'");
 			echo '<div style="float:right;text_align:right">'.$nombre.'</div>';
 			echo '<div>'._T('asso:adherent_liste_nombre_'.$statut).'</div>';
 			$nombre_total += $nombre;
@@ -80,7 +80,7 @@ function exec_adherents() {
 		$lettre= _request('lettre');
 		if (!$lettre) { $lettre = "%"; }
 		
-		$query = sql_select("upper( substring( nom_famille, 1, 1 ) )  AS init", _ASSOCIATION_AUTEURS_ELARGIS, '',  'init', 'nom_famille, id_auteur');
+		$query = sql_select("upper( substring( nom_famille, 1, 1 ) )  AS init", 'spip_asso_membres', '',  'init', 'nom_famille, id_auteur');
 		
 		while ($data = sql_fetch($query)) {
 			$i = $data['init'];
@@ -145,7 +145,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = sql_select('a.id_auteur AS id_auteur, a.email AS email, nom_famille,prenom,statut,validite,statut_interne,categorie, bio',_ASSOCIATION_AUTEURS_ELARGIS .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = sql_select('a.id_auteur AS id_auteur, a.email AS email, nom_famille,prenom,statut,validite,statut_interne,categorie, bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
@@ -229,7 +229,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	
 	//SOUS-PAGINATION
 
-	$nombre_selection=sql_countsel(_ASSOCIATION_AUTEURS_ELARGIS, $critere);
+	$nombre_selection=sql_countsel('spip_asso_membres', $critere);
 
 	$pages=intval($nombre_selection/$max_par_page) + 1;
 	

@@ -80,7 +80,7 @@ function formulaires_editer_asso_ventes_verifier_dist($id_vente) {
 	$id_acheteur = _request('id_acheteur');
 	if ($id_acheteur != '') {
 		$id_acheteur = intval($id_acheteur);
-		if (sql_countsel(_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_acheteur")==0) {
+		if (sql_countsel('spip_asso_membres', "id_auteur=$id_acheteur")==0) {
 			$erreurs['id_acheteur'] = _T('asso:erreur_id_adherent');
 		}
 		

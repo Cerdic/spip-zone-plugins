@@ -46,7 +46,7 @@ function exec_pdf_adherents()
 	$order = 'id_auteur';
 	if ($sent['nom_famille']=='on')
 	  $order = 'nom_famille' . ",$order";
-	$pdf->Query(sql_select('*',_ASSOCIATION_AUTEURS_ELARGIS, request_statut_interne(), '', $order), $prop);
+	$pdf->Query(sql_select('*','spip_asso_membres', request_statut_interne(), '', $order), $prop);
 	$pdf->Output();
 	}
 }

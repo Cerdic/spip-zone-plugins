@@ -27,7 +27,7 @@ function action_editer_asso_dons() {
 	$id_adherent = intval(_request('id_adherent'));
 
 	if (!$bienfaiteur AND $id_adherent) {
-		$nom_prenom = sql_fetsel('nom_famille, prenom', _ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_adherent");
+		$nom_prenom = sql_fetsel('nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_adherent");
 		$bienfaiteur = $nom_prenom['prenom'].' '.$nom_prenom['nom_famille'];
 	}
 

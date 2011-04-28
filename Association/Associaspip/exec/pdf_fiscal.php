@@ -37,7 +37,7 @@ function exec_pdf_fiscal()
   if (!$full AND ($id_auteur != $GLOBALS['visiteur_session']['id_auteur'])) {
 		include_spip('inc/minipres');
 		echo minipres();
-  } elseif (!$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur")) {
+  } elseif (!$data = sql_fetsel("*",'spip_asso_membres', "id_auteur=$id_auteur")) {
 		include_spip('inc/minipres');
 		echo minipres(_T('public:aucun_auteur'));
   } else {

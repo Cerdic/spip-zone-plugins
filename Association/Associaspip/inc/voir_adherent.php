@@ -19,6 +19,7 @@ function voir_adherent_paiements($data, $lien, $type)
 		$j = $lien ? $row['justification']
 		  : nettoyer_raccourcis_typo($row['justification']);
 		$id = $row['id'];
+		$id_compte = ($row['id_compte'])?$row['id_compte']:$id; // l'id_compte est soit explicitement present dans la ligne(pour les dons), sinon c'est qu'il est le meme qu'id (pour les cotisations)
 		$data[$k] = "<tr id='$type$id' style='background-color: #EEEEEE;'>"
 		. "<td class='arial11 border1' style='text-align:right;'>$id</td>\n"
 		. '<td class="arial11 border1">'.$row['journal']."</td>\n"
@@ -29,7 +30,7 @@ function voir_adherent_paiements($data, $lien, $type)
 		. ($row['vu'] ? _T('asso:adherent_libelle_oui') : _T('asso:adherent_libelle_non'))
 		. '</td>'
 		. '<td style="text-align:right;">'
-			. association_bouton(_T('asso:adherent_label_voir_operation'), 'voir-12.png', 'comptes','id_compte='.$id)
+			. association_bouton(_T('asso:adherent_label_voir_operation'), 'voir-12.png', 'comptes','id_compte='.$id_compte)
 		. "</td>"
 		. '</tr>';
 	}
@@ -58,7 +59,7 @@ function voir_adherent_cotisations($id_auteur, $full=false)
 
 function voir_adherent_dons($id_auteur, $full=false)
 {
-	$row = sql_allfetsel('D.id_don AS id, D.argent AS montant, D.date_don AS date, justification, journal',
+	$row = sql_allfetsel('D.id_don AS id, D.argent AS montant, D.date_don AS date, justification, journal, id_compte',
 			     "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don",
 			     'C.imputation=' . sql_quote($GLOBALS['association_metas']['pc_dons']) . ' AND '. 'id_adherent='.$id_auteur, 
 			     '',

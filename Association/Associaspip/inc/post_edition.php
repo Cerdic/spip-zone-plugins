@@ -14,11 +14,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function association_post_edition($flux){
 	$id = $flux['args']['id_objet'];
 	if ($id
-	AND $flux['args']['table']=='spip_auteurs'
-	AND !_ASSOCIATION_INSCRIPTION2) {
+	AND $flux['args']['table']=='spip_auteurs') {
 		update_spip_asso_membre($id);
 	}
-	return $data;
 }
 
 function update_spip_asso_membre($id_auteur)

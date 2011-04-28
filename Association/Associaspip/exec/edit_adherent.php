@@ -28,7 +28,7 @@ function exec_edit_adherent() {
 		
 function exec_edit_adherent_args($id_auteur)
 {
-	$data = sql_fetsel("*",_ASSOCIATION_AUTEURS_ELARGIS, "id_auteur=$id_auteur");
+	$data = sql_fetsel("*",'spip_asso_membres', "id_auteur=$id_auteur");
 	if (!$data) {
 		include_spip('inc/minipres');
 		echo minipres(_T('zxml_inconnu_id') . $id_auteur);
@@ -102,7 +102,7 @@ function edit_adherent($id_auteur, $categorie, $validite, $statut_interne, $comm
 	. '" type="text" id="validite" class="formo" />';
 
 	$sel = '';
-	foreach ($GLOBALS['association_liste_des_statuts2'] as $var) {
+	foreach ($GLOBALS['association_liste_des_statuts'] as $var) {
 		$sel .= '<option value="'.$var.'"';
 		if ($statut_interne==$var) {$sel .= ' selected="selected"';}
 		$sel .= '>'._T('asso:adherent_entete_statut_'.$var)."</option>\n";

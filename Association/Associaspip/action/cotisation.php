@@ -37,7 +37,7 @@ function cotisation_insert($id_auteur, $montant, $journal, $justification, $impu
 		association_ajouter_operation_comptable($date, $montant, 0, $justification, $imputation, $journal, $id_auteur);	
 	}
 
-	sql_updateq(_ASSOCIATION_AUTEURS_ELARGIS, 
+	sql_updateq('spip_asso_membres', 
 				   array(
 					 "validite" => $validite,
 					 "statut_interne" => 'ok'),
