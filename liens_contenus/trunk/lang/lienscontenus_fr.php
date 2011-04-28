@@ -35,10 +35,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_publie' => 'Publié',
 	'statut_refuse' => 'Refusé',
 
-  // T
-  'type_auteur' => '@nom@',
-  'type_modele' => 'Modèle "@id_objet@"',
-  'type_syndic' => 'Site "@nom_site@" (@id_objet@)'
+	// T
+	'type_auteur' => '@nom@',
+	'type_modele' => 'Modèle "@id_objet@"',
+	'type_syndic' => 'Site "@nom_site@" (@id_objet@)'
 );
 
 ?>
