@@ -2,9 +2,9 @@
 	<select name="#ENV{name,langues}" id="#ENV{name,langues}">
 		[(#ENV{option_vide}|oui)
 			<option value="">--</option>]
-	<BOUCLE_module_langue_dispo(TRADLANG){module?}{fusion lang}{statut IN 'OK','NEW','MODIF'}>
+	<BOUCLE_module_langue_dispo(TRADLANG tradlang_modules){module?}{fusion lang}{statut IN 'OK','NEW','MODIF'}>
 		[(#LANG|=={#ENV{lang_exclue}}|non)
-			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"]>[(#LANG|traduire_nom_langue)]</option>]
+			<option value="#LANG"[(#LANG|=={#ENV{#ENV{name,langues}}}|oui)selected="selected"]>[(#LANG|traduire_nom_langue)][(#LANG|=={#LANG_MERE}|oui)<:tradlang:info_langue_mere:>]</option>]
 	</BOUCLE_module_langue_dispo>
 	</select>
 </B_module_langue_dispo>

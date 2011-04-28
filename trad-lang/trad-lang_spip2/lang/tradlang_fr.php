@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_chaine_jamais_modifiee' => 'Cette chaîne n\'a jamais été modifiée.',
 	'info_chaine_originale' => 'Cette chaîne est la chaine originale',
 	'info_filtrer_status' => 'Filtrer par statut :',
+	'info_langue_mere' => '(langue mère)',
 	'info_nb_tradlang' => '@nb@ chaînes de langue',
 	'info_nb_tradlang_module' => '@nb@ modules de langue',
 	'info_status_ok' => 'OK',
