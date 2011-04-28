@@ -10,7 +10,9 @@
 	<langue code="de">
 		<traducteur nom="klaus" />
 	</langue>
-	<langue code="en" />
+	<langue code="en">
+		<traducteur nom="squonk" />
+	</langue>
 	<langue code="es">
 		<traducteur nom="boyquotes" />
 	</langue>
