@@ -5,6 +5,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
+	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?' ,
+
 	// D
 	'description_menu_accueil' => 'Lien vers la page d\'accueil du site.',
 	'description_menu_articles_rubrique' => 'Affiche la liste des articles d\'une rubrique.',

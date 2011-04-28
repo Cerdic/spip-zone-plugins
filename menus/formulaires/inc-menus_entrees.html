@@ -21,7 +21,8 @@
 				<button name="modifier_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_modifier_entree:>">
 					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_modifier.png})" alt="" />]
 				</button>
-				<button name="supprimer_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_supprimer_entree:>">
+				<button name="supprimer_entree" value="#ID_MENUS_ENTREE" title="<:menus:formulaire_supprimer_entree:>"
+                		onclick="return confirm('<:menus:confirmer_supprimer_entree:>')">
 					[<img height="24" width="24" src="(#CHEMIN{images/menus_action_supprimer.png})" alt="" />]
 				</button>
 				<button name="deplacer_entree" value="#ID_MENUS_ENTREE-bas" title="<:menus:formulaire_deplacer_bas:>">
