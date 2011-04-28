@@ -250,7 +250,7 @@ function lienscontenus_verification_articles()
             }
             // ETAPE 3 : Gestion des changements de statut de l'article
             // on ajoute une classe specifique aux liens de suppression des docs
-            $('div[@id^=legender-]').each(function() {
+            $('div[id^=legender-]').each(function() {
                 var idDoc = $(this).attr('id').replace(/^legender-([0-9]+)$/g, '$1');
                 // on recupere "oui" si un autre contenu pointe vers le doc, "non" sinon 
                 var docContenu = $.ajax({
@@ -302,7 +302,7 @@ function lienscontenus_verification_articles_edit()
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on ajoute une classe specifique aux liens de suppression des docs
-            $('div[@id^=legender-]').each(function() {
+            $('div[id^=legender-]').each(function() {
                 var idDoc = $(this).attr('id').replace(/^legender-([0-9]+)$/g, '$1');
                 // on recupere "oui" si un autre contenu pointe vers le doc, "non" sinon 
                 var docContenu = $.ajax({
@@ -352,23 +352,23 @@ function lienscontenus_verification_breves_edit()
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
-            if ($('select[@name=statut]')) {
-                var initialStatut = $('select[@name=statut] > option[@selected]').attr('value');
+            if ($('select[name=statut]')) {
+                var initialStatut = $('select[name=statut] > option:selected').attr('value');
                 var currentStatut = initialStatut;
             
                 // on gere un onchange specifique
-                $('select[@name=statut]').bind('change', function(event) {
+                $('select[name=statut]').bind('change', function(event) {
                     // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
                         if (confirm(messageConfirmationDepublication)) {
-                            var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                            var newStatut = $('select[name=statut] > option:selected').attr('value');
                             currentStatut = newStatut; 
                         } else {
-                            $('select[@name=statut] > option[@selected]').removeAttr('selected');
-                            $('select[@name=statut] > option[@value=publie]').attr('selected', 'selected');
+                            $('select[name=statut] > option:selected').removeAttr('selected');
+                            $('select[name=statut] > option[value=publie]').attr('selected', 'selected');
                         }
                     } else {
-                        var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                        var newStatut = $('select[name=statut] > option:selected').attr('value');
                                 currentStatut = newStatut;
                             }
                         });
@@ -387,23 +387,23 @@ function lienscontenus_verification_sites()
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
-            if ($('select[@name=nouveau_statut]')) {
-                var initialStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
+            if ($('select[name=nouveau_statut]')) {
+                var initialStatut = $('select[name=nouveau_statut] > option:selected').attr('value');
                 var currentStatut = initialStatut;
             
                 // on gere un onchange specifique
-                $('select[@name=nouveau_statut]').bind('change', function(event) {
+                $('select[name=nouveau_statut]').bind('change', function(event) {
                     // Si le statut initial etait "publie" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
                     if ((initialStatut == 'publie') && (currentStatut == 'publie') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
                         if (confirm(messageConfirmationDepublication)) {
-                            var newStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
+                            var newStatut = $('select[name=nouveau_statut] > option:selected').attr('value');
                             currentStatut = newStatut; 
                         } else {
-                            $('select[@name=nouveau_statut] > option[@selected]').removeAttr('selected');
-                            $('select[@name=nouveau_statut] > option[@value=publie]').attr('selected', 'selected');
+                            $('select[name=nouveau_statut] > option:selected').removeAttr('selected');
+                            $('select[name=nouveau_statut] > option[value=publie]').attr('selected', 'selected');
                         }
                     } else {
-                        var newStatut = $('select[@name=nouveau_statut] > option[@selected]').attr('value');
+                        var newStatut = $('select[name=nouveau_statut] > option:selected').attr('value');
                         currentStatut = newStatut;
                     }
                 });
@@ -422,20 +422,20 @@ function lienscontenus_verification_auteur_infos()
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on recupere le statut actuel
-            if ($('select[@name=statut]')) {
-                var initialStatut = $('select[@name=statut] > option[@selected]').attr('value');
+            if ($('select[name=statut]')) {
+                var initialStatut = $('select[name=statut] > option:selected').attr('value');
                 var currentStatut = initialStatut;
             
                 // on gere un onchange specifique
-                $('select[@name=statut]').bind('change', function(event) {
+                $('select[name=statut]').bind('change', function(event) {
                     // Si le statut initial n'etait pas "5poubelle" et s'il y a au moins un contenu publie qui pointe vers lui, on demande confirmation
-                    var newStatut = $('select[@name=statut] > option[@selected]').attr('value');
+                    var newStatut = $('select[name=statut] > option:selected').attr('value');
                     if ((initialStatut != '5poubelle') && (newStatut == '5poubelle') && ($('#liens_contenus_contenants > li.publie').size() > 0)) {
                         if (confirm(messageConfirmationDepublication)) {
                             currentStatut = newStatut; 
                         } else {
-                            $('select[@name=statut] > option[@selected]').removeAttr('selected');
-                            $('select[@name=statut] > option[@value='+currentStatut+']').attr('selected', 'selected');
+                            $('select[name=statut] > option:selected').removeAttr('selected');
+                            $('select[name=statut] > option[value='+currentStatut+']').attr('selected', 'selected');
                         }
                     } else {
                         currentStatut = newStatut;
@@ -497,7 +497,7 @@ function lienscontenus_verification_mots_tous()
             }
             // TODO : comment intercepter la modification de ces divs par AjaxSqueeze ?
             /*
-            $('div[@id^=editer_mot-]').ajaxSuccess(gestionDesSuppressionsDeMotsApresMaj);
+            $('div[id^=editer_mot-]').ajaxSuccess(gestionDesSuppressionsDeMotsApresMaj);
             function gestionDesSuppressionsDeMotsApresMaj()
             {
                 $(this).unbind('ajaxSuccess');
@@ -521,10 +521,10 @@ function lienscontenus_verification_articles_page()
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             // on ajoute une classe specifique
-            $('span[@id^=puce_statut_article]').each(function() {
+            $('span[id^=puce_statut_article]').each(function() {
                 var idArticle = $(this).attr('id').replace(/^puce_statut_article([0-9]+)$/g, '$1');
                 // on ne s'interesse qu'aux articles publies
-                $(this).find('img[@src$=/puce-verte.gif]').each(function() {
+                $(this).find('img[src$=/puce-verte.gif]').each(function() {
                     // on recupere "oui" si un autre contenu pointe vers l'article, "non" sinon 
                     var articleContenu = $.ajax({
                         url: '?exec=lienscontenus_ajax_article_contenu',
