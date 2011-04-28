@@ -4,6 +4,7 @@
 	<description><:menus:description_menu_rubriques:></description>
 	<icone>images/menus_rubriques.png</icone>
 	<parametre nom="id_rubrique" label="menus:entree_id_rubrique" />
+	<parametre nom="id_secteur_exclus" label="menus:entree_id_secteur_exclus" />
 	<parametre nom="niveau" label="menus:entree_niveau" />
 	<parametre nom="sousrub_cond" label="menus:entree_sousrub_cond" />
 	<parametre nom="afficher_articles" label="menus:entree_afficher_articles" />

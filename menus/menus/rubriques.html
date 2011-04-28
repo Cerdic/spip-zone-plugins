@@ -1,4 +1,5 @@
 [(#SET{id_rubrique, #ENV{id_rubrique}|intval})]
+[(#SET{id_secteur_exclus, #ENV{id_secteur_exclus,0}|intval})]
 [(#SET{niveau_max_txt, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
 [(#SET{niveau_max, #ENV{niveau}|intval|?{#ENV{niveau},1000}})]
 [(#SET{sousrub_cond, #ENV{sousrub_cond}|=={oui}|?{'on',''}})]
@@ -22,6 +23,9 @@
 		[(#GET{niveau_max_txt}|=={infini}|oui)
 			<:menus:entree_infini:>
 		]
+		[(#GET{id_secteur_exclus}|=={0}|non)
+			<:menus:info_secteur_exclus{id_secteur=#GET{id_secteur_exclus}}:>
+		]
 		[(#GET{sousrub_cond}|oui)
 			<br /><:menus:info_sousrub_cond:>
 		]
@@ -35,7 +39,7 @@
 	</div>
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
-	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
+	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
