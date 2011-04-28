@@ -1,19 +1,26 @@
 #CACHE{0}
 <div class="tradlang_explications">
-	<p>
-		<:tradlang:texte_selectionner:>
-		<ul>
-			<li>
-				<:tradlang:texte_module:>
-			</li>
-			<li>
-				<:tradlang:texte_langue_origine:>
-			</li>
-			<li>
-				<:tradlang:texte_langue_cible:>
-			</li>
-		</ul>
-	</p>
+	[(#SESSION{statut}|non)
+		<p><:tradlang:texte_inscription_ou_login:></p>
+	]
+	[(#SESSION{statut}|oui)
+		[(#AUTORISER{modifier,tradlang}|non)
+			<p><:tradlang:texte_pas_autoriser_traduire:></p>
+			<p><:tradlang:texte_contacter_admin:></p>
+		]
+	]
+	<p><:tradlang:texte_selectionner:></p>
+	<ul>
+		<li>
+			<:tradlang:texte_module:>
+		</li>
+		<li>
+			<:tradlang:texte_langue_origine:>
+		</li>
+		<li>
+			<:tradlang:texte_langue_cible:>
+		</li>
+	</ul>
 	<p>
 		<:tradlang:texte_explication_langue_cible:>
 	</p>
