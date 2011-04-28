@@ -148,7 +148,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'str_status_traduit' => 'Traduit',
 
 	// T
-	'texte_pas_autoriser_traduire' => 'Vous n\'avez pas les droits nécessaires pour accéder aux traductions.',
 	'texte_contacter_admin' => 'Contactez un administrateur si vous souhaitez y participer.',
 	'texte_erreur' => 'ERREUR',
 	'texte_erreur_acces' => '<b>Attention : </b>impossible d\'écrire dans le fichier <tt>@fichier_lang@</tt>. Controlez les droits d\'accès.',
@@ -168,6 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'texte_module_traduire' => 'Le module à traduire :',
 	'texte_non_traduit' => 'non traduit ',
 	'texte_operation_impossible' => 'Opération impossible. Lorsque la case \'tout sélectionner\' est cochée,<br> il faut faire des opérations de type \'Consulter\'.',
+	'texte_pas_autoriser_traduire' => 'Vous n\'avez pas les droits nécessaires pour accéder aux traductions.',
 	'texte_pas_de_reponse' => '... aucune réponse',
 	'texte_recapitulatif' => 'Récapitulatif traductions',
 	'texte_restauration_impossible' => 'impossible de restaurer le fichier',
