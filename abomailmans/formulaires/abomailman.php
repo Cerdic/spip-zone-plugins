@@ -99,7 +99,10 @@ function formulaires_abomailman_traiter_dist($id_abomailman = ""){
 		$proprio_email=$traiter[1];
 		$liste_email=$traiter[2];
 		$sujet=$traiter[3];
-		$body="$nom - $email ".$traiter[4];
+		$body= array( 
+			'texte' => $traiter[4], 
+			'nom_envoyeur' => $nom 
+		); 
 		$headers=$traiter[5];
 
 		// si on veut ajouter un mail de notification ou de test
