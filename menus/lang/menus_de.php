@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
+	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?', # NEW
+
 	// D
 	'description_menu_accueil' => 'Link zur Startseite.',
 	'description_menu_articles_rubrique' => 'Artikelliste einer Rubrik anzeigen',
@@ -18,11 +21,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_mots' => 'Zeigt automatisch ein Menü, das die Artikel zum Schlagwort anzeigt.',
 	'description_menu_objet' => 'Link zu einem SPIP-Objekt anlegen: Artikel, Rubrik, usw. In der Grundeinstellung trägt der Eintrag den Namen des Objekts.',
 	'description_menu_page_speciale' => 'Fügt einen URL zu einer Skelettseite im Format  <code>spip.php?page=nom&param1=xx&param2=yyy...</code> hinzu. Diese Skelette werden von Plugins bereitgestellt',
-	'description_menu_page_speciale_zajax' => 'Ajoute un lien vers un bloc d\'une page accessible par une url du type <code>spip.php?page=nom&param1=xx&param2=yyy...</code> Ceci nécéssite une squelette de type Z et le plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a>.', # NEW
+	'description_menu_page_speciale_zajax' => 'Fügt einen Link zu einem Block auf einer Seite hinzu, die über einen URL mit der Syntax <code>spip.php?page=nom¶m1=xx¶m2=yyy...</code> erreichbar ist. Dazu sind ein Skelett des Typs Z und das Plugin <a href="http://www.spip-contrib.net/MediaBox">médiabox</a> Voraussetzung.',
 	'description_menu_rubriques' => 'Zeigt eine Liste der Rubriken und, wen gew&uuml;nscht, der Unterrubriken &uuml;ber mehreer Niveaus an. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
-	'description_menu_rubriques_articles' => 'Affiche une liste de rubriques et, si on veut, les sous-rubriques et les articles sur plusieurs niveaux. Par défaut, affiche toutes les rubriques depuis la racine, triées par titre (numériquement puis alphabétiquement). Les articles sont placés systématiquement après les rubriques.', # NEW
+	'description_menu_rubriques_articles' => 'Zeigt einen Liste der Rubriken und auf Wunsch der Unterrubriken und Artikel als Hierarchie an. In der Grundeinstellung werden alle Rubriken von der obersten Ebene an dargestellt. Sie werden nach Titeln (zuerst numerisch und dann alphabetisch) sortiert. Artikel werden immer hinter den Rubriken angezeigt.',
 	'description_menu_secteurlangue' => 'Dieser Eintrag bezieht sich aud die Sites, welche pro Sprache ein Hauptrubrik verwenden. Er zeigt ein Men&uuml; mit allen Rubriken des Sektors, die mit der Sprache &uuml;bereinstimmen, wenn erfordelich auf &uuml;ber mehrere Niveaus. In der Grundeinstelung werden alle Rubriken ab der obersten Ebene nach Titel (numerisch und anschließend alphanumerisch) sortiert angezeigt.',
-	'description_menu_texte_libre' => 'Simplement le texte que vous souhaitez', # NEW
+	'description_menu_texte_libre' => 'Freitext',
 
 	// E
 	'editer_menus_editer' => 'Menü bearbeiten',
@@ -30,36 +33,43 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Menü exportieren',
 	'editer_menus_nouveau' => 'Neues Menü anlegen',
 	'editer_menus_titre' => 'Menüs der Website',
+	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
+	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles list&eacute;s &agrave; xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_aucun' => 'Keiner',
-	'entree_bloc' => 'Bloc Zpip', # NEW
+	'entree_bloc' => 'ZPIP Block',
 	'entree_choisir' => 'Wählen sie die Art EIntrag, die sie hinzufügen wollen:',
-	'entree_connexion_objet' => 'Obliger à être connecté (mettre "session") ou déconnecté (mettre "nosession") pour voir l\'objet', # NEW
-	'entree_contenu' => 'Contenu', # NEW
-	'entree_css' => 'CSS-Klassen des Eintrags', # MODIF
-	'entree_css_lien' => 'Classes CSS du lien', # NEW
+	'entree_connexion_objet' => 'Objekt wird nur angezeigt, wenn man entweder eingelogt ("session" eintragen) oder nicht eingelogt ist ("nosession" eintragen)',
+	'entree_contenu' => 'Inhalt',
+	'entree_css' => 'CSS-Klassen des Eintrags (des Containers)',
+	'entree_css_lien' => 'CSS-Klassen des Links',
 	'entree_id_groupe' => 'Nummer der Schlagwortgruppe',
 	'entree_id_mot' => 'Nummer des Schlagworts',
 	'entree_id_objet' => 'Nummer',
 	'entree_id_rubrique' => 'Nummer der übergeordeneten Rubrik',
+	'entree_id_secteur_exclus' => 'Numéro du secteur à exclure', # NEW
 	'entree_infini' => 'Unendlich',
 	'entree_mapage' => 'Meine eigene Seite',
+	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)', # NEW
 	'entree_niveau' => 'Tiefe der Unterrubriken',
 	'entree_nombre_articles' => 'Maximale Anzahl Artikel (Standardwert 0)',
 	'entree_page' => 'Name der Seite',
 	'entree_parametres' => 'Parameterliste',
-	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
+	'entree_sousrub_cond' => 'Nur Unterrubriken der aktuellen Rubrik anzeigen ("oui" eintragen, falls nicht gewünscht leer lassen)',
 	'entree_sur_n_articles' => '@n@ Artikel angezeigt',
 	'entree_sur_n_mots' => '@n@ Worte angezeigt',
 	'entree_sur_n_niveaux' => 'Auf @n@ Niveau(s)',
 	'entree_titre' => 'Titel',
 	'entree_titre_connecter' => 'Titel für den Zugang zum Anmeldeformular',
 	'entree_titre_prive' => 'Titel für den Redaktionszugang',
-	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
+	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)', # NEW
+	'entree_traduction_objet' => 'Übersetzung von Artikeln in Abhängigkeit vom Sprachkontext auswählen (für diese EInstellung "trad" eintragen)',
 	'entree_tri_alpha' => 'Sortierkriterium (alphanumerisch)',
 	'entree_tri_num' => 'Sortierkriterium (numerisch)',
 	'entree_type_objet' => 'Objekttyp',
 	'entree_url' => 'Adresse',
-	'entree_url_public' => 'Adresse de retour après la connexion', # NEW
+	'entree_url_public' => 'Zieladresse nach der Anmeldung',
 	'erreur_aucun_type' => 'Kein Eintragstyp gefunden.',
 	'erreur_autorisation' => 'Sie dürfen Menüs nicht ändern.',
 	'erreur_identifiant_deja' => 'Deise Bezeichnung wird bereits von einem Menü verwendet.',
@@ -79,13 +89,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_facultatif' => 'Fakultatif',
 	'formulaire_identifiant' => 'Bezeichnung',
 	'formulaire_identifiant_explication' => 'Vergeben sie ein Schlagwort, mit dem sie das Menü leicht aufrufen können..',
-	'formulaire_ieconfig_choisir_menus_a_importer' => 'Choisissez quel(s) menu(s) vous souhaitez importer.', # NEW
-	'formulaire_ieconfig_importer' => 'Importer', # NEW
-	'formulaire_ieconfig_menu_meme_identifiant' => 'ATTENTION : un menu avec le même identifiant existe déjà sur votre votre site !', # NEW
-	'formulaire_ieconfig_menus_a_exporter' => 'Menus à exporter :', # NEW
-	'formulaire_ieconfig_ne_pas_importer' => 'Ne pas importer', # NEW
-	'formulaire_ieconfig_remplacer' => 'Remplacer le menu actuel par le menu importé', # NEW
-	'formulaire_ieconfig_renommer' => 'Renommer ce menu avant import', # NEW
+	'formulaire_ieconfig_choisir_menus_a_importer' => 'Wählen Sie die die zu importierenden Menüs',
+	'formulaire_ieconfig_importer' => 'Importieren',
+	'formulaire_ieconfig_menu_meme_identifiant' => 'ACHTUNG: Ihre Website enthält bereits ein Menü mit der selben ID!',
+	'formulaire_ieconfig_menus_a_exporter' => 'Zu exportierende Menüs:',
+	'formulaire_ieconfig_ne_pas_importer' => 'Nicht importieren',
+	'formulaire_ieconfig_remplacer' => 'Aktuelles Menü durch das zu importierende ersetzen',
+	'formulaire_ieconfig_renommer' => 'Menü vor Import umbenennen',
 	'formulaire_importer' => 'Menü importieren',
 	'formulaire_importer_explication' => 'Wenn sie ein Men&uuml; in eine Datei exportiert haben, können sie es jetzt importieren.',
 	'formulaire_modifier_entree' => 'Eintrag bearbeiten',
@@ -99,23 +109,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titel',
 
 	// I
-	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
-	'info_deconnexion_obligatoire' => 'Uniquement déconnecté', # NEW
+	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
+	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
+	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
+	'info_connexion_obligatoire' => 'Login obligatorisch',
+	'info_deconnexion_obligatoire' => 'Nur wenn nicht eingelogt',
+	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
 	'info_numero_menu' => 'MENÜ NUMMER:',
 	'info_page_speciale' => 'Link zu Seite « @page@ »',
-	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
-	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
+	'info_page_speciale_zajax' => 'Modale Box der Seite « @page@ » für den Block « @bloc@ »',
+	'info_secteur_exclus' => ' (sauf le secteur @id_secteur@)', # NEW
+	'info_sousrub_cond' => 'Nur die Unterrubriken der aktuellen Rubrik werden angezeigt',
 	'info_tous_groupes_mots' => 'Alle Schlagwortgruppen',
-	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
+	'info_traduction_recuperee' => 'Die angezeigte Übersetzung wird je nach Sprachkontext gewählt.',
 	'info_tri' => 'Sortierung:',
 	'info_tri_alpha' => '(alphabetisch)',
 	'info_tri_num' => '(numerische)',
 
 	// N
-	'noisette_description' => 'Insère un menu défini avec le plugin Menus.', # NEW
-	'noisette_label_afficher_titre_menu' => 'Afficher le titre du menu ?', # NEW
-	'noisette_label_identifiant' => 'Menu à afficher :', # NEW
-	'noisette_nom_noisette' => 'Menu', # NEW
+	'noisette_description' => 'Fügt ein mit dem Plugin "Menus" generiertes Menü ein',
+	'noisette_label_afficher_titre_menu' => 'Titel des Menüs anzeigen?',
+	'noisette_label_identifiant' => 'Dieses Menü anzeigen:',
+	'noisette_nom_noisette' => 'Menü',
 	'nom_menu_accueil' => 'Startseite',
 	'nom_menu_articles_rubrique' => 'Artikel einer Rubrik',
 	'nom_menu_deconnecter' => 'Abmelden',
@@ -126,12 +141,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_mots' => 'Artikel eines Schlagworts',
 	'nom_menu_objet' => 'Artikel, Rubrik oder anderes SPIP-Objekt',
 	'nom_menu_page_speciale' => 'Link zu einer HTML-Vorlage',
-	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
-	'nom_menu_rubriques' => 'Liste oder Baumansicht der Rubriken',
-	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles', # NEW
+	'nom_menu_page_speciale_zajax' => 'Block einer ZPIP-Seite',
+	'nom_menu_rubriques' => 'Liste oder Baumansicht der Rubriken', # MODIF
 	'nom_menu_rubriques_evenements' => 'Ereignisse der Rubriken',
 	'nom_menu_secteurlangue' => 'Hauptrubriken nach Sprache',
-	'nom_menu_texte_libre' => 'Texte libre' # NEW
+	'nom_menu_texte_libre' => 'Freitext',
+
+	// T
+	'tous_les_articles' => '... Tous les articles' # NEW
 );
 
 ?>

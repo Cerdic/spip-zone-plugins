@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
+	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?', # NEW
+
 	// D
 	'description_menu_accueil' => 'Enllaç cap a la pàgina d\'inici del lloc.',
 	'description_menu_articles_rubrique' => 'Mostra la llista d\'articles d\'una secció.',
@@ -30,6 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Exportar aquest menú',
 	'editer_menus_nouveau' => 'Creeu un nou menú',
 	'editer_menus_titre' => 'Menús del lloc',
+	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
+	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles list&eacute;s &agrave; xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_aucun' => 'Cap',
 	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Escolliu el tipus d\'entrada que voleu afegir:',
@@ -41,8 +48,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Número de la paraula clau',
 	'entree_id_objet' => 'Número',
 	'entree_id_rubrique' => 'Número de la secció pare',
+	'entree_id_secteur_exclus' => 'Numéro du secteur à exclure', # NEW
 	'entree_infini' => 'Fins l\'infinit',
 	'entree_mapage' => 'La meva pàgina personal',
+	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)', # NEW
 	'entree_niveau' => 'Nivell de les subseccions',
 	'entree_nombre_articles' => 'Número d\'articles com a màxim (0 per defecte)',
 	'entree_page' => 'Nom de la pàgina',
@@ -54,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Títol',
 	'entree_titre_connecter' => 'Títol per l\'accés al formulari d\'identificació',
 	'entree_titre_prive' => 'Títol per accedir a l\'espai privat',
+	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)', # NEW
 	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
 	'entree_tri_alpha' => 'Criteri d\'ordenació (alfabètic)',
 	'entree_tri_num' => 'Criteri d\'ordenació (numèric)',
@@ -99,11 +109,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Títol',
 
 	// I
+	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
+	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
+	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
 	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté', # NEW
+	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
 	'info_numero_menu' => 'MENÚ NÚMERO:',
 	'info_page_speciale' => 'Enllaç cap a la pàgina «@page@»',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
+	'info_secteur_exclus' => ' (sauf le secteur @id_secteur@)', # NEW
 	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => 'Tots els grups de paraules',
 	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
@@ -127,11 +142,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Article, secció o un altre objecte SPIP',
 	'nom_menu_page_speciale' => 'Enllaç cap a una pàgina esquelet',
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
-	'nom_menu_rubriques' => 'Llista o arborescència de seccions',
-	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles', # NEW
+	'nom_menu_rubriques' => 'Llista o arborescència de seccions', # MODIF
 	'nom_menu_rubriques_evenements' => 'Esdeveniments de les seccions',
 	'nom_menu_secteurlangue' => 'Sectors de llengua',
-	'nom_menu_texte_libre' => 'Texte libre' # NEW
+	'nom_menu_texte_libre' => 'Texte libre', # NEW
+
+	// T
+	'tous_les_articles' => '... Tous les articles' # NEW
 );
 
 ?>

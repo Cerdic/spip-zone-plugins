@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// C
+	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?', # NEW
+
 	// D
 	'description_menu_accueil' => 'Link verso il pannello di controllo del sito.',
 	'description_menu_articles_rubrique' => 'Mostra la lista degli articoli di una rubrica.',
@@ -30,6 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Esporta questo menù',
 	'editer_menus_nouveau' => 'Crea un nuovo menù',
 	'editer_menus_titre' => 'Menù del sito',
+	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
+	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
+	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles list&eacute;s &agrave; xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
 	'entree_aucun' => 'Nessun',
 	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Scegli il tipo di voce che vuoi aggiungere:',
@@ -41,8 +48,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Numero della parola chiave',
 	'entree_id_objet' => 'Numero',
 	'entree_id_rubrique' => 'Numero della rubrica padre',
+	'entree_id_secteur_exclus' => 'Numéro du secteur à exclure', # NEW
 	'entree_infini' => 'All\'infinito',
 	'entree_mapage' => 'La mia pagina personale',
+	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)', # NEW
 	'entree_niveau' => 'Livelli di sotto rubriche',
 	'entree_nombre_articles' => 'Numero massimo di articoli (0 predefinito)',
 	'entree_page' => 'Nome della pagina',
@@ -54,6 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Titolo',
 	'entree_titre_connecter' => 'Titolo per l\'accesso al form di login',
 	'entree_titre_prive' => 'Titolo per accedere alla redazione',
+	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)', # NEW
 	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
 	'entree_tri_alpha' => 'Criterio di ordinamento (alfabetico)',
 	'entree_tri_num' => 'Criterio di ordinamento (numerico)',
@@ -99,11 +109,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titolo',
 
 	// I
+	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
+	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
+	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
 	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté', # NEW
+	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
 	'info_numero_menu' => 'MENU NUMERO:',
 	'info_page_speciale' => 'Link verso la pagina "@page@"',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
+	'info_secteur_exclus' => ' (sauf le secteur @id_secteur@)', # NEW
 	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => 'Tutti i gruppi di parole chiave',
 	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
@@ -127,11 +142,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Articolo, rubrica o altro oggetto SPIP',
 	'nom_menu_page_speciale' => 'Link verso una pagina di modello',
 	'nom_menu_page_speciale_zajax' => 'Un bloc d\'une page Zpip', # NEW
-	'nom_menu_rubriques' => 'Lista o gerarchia di rubriche',
-	'nom_menu_rubriques_articles' => 'Liste ou arborescence de rubriques et d\'articles', # NEW
+	'nom_menu_rubriques' => 'Lista o gerarchia di rubriche', # MODIF
 	'nom_menu_rubriques_evenements' => 'Eventi delle rubriche',
 	'nom_menu_secteurlangue' => 'Settore di lingua',
-	'nom_menu_texte_libre' => 'Texte libre' # NEW
+	'nom_menu_texte_libre' => 'Texte libre', # NEW
+
+	// T
+	'tous_les_articles' => '... Tous les articles' # NEW
 );
 
 ?>

@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?' ,
+	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?',
 
 	// D
 	'description_menu_accueil' => 'Lien vers la page d\'accueil du site.',
@@ -144,7 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_rubriques_evenements' => 'Événements de rubriques',
 	'nom_menu_secteurlangue' => 'Secteurs de langue',
 	'nom_menu_texte_libre' => 'Texte libre',
-	
+
 	// T
 	'tous_les_articles' => '... Tous les articles'
 );

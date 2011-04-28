@@ -1,6 +1,8 @@
 <traduction module="menus" gestionnaire="salvatore" reference="fr">
 	<langue code="ca" />
-	<langue code="de" />
+	<langue code="de">
+		<traducteur nom="klaus" />
+	</langue>
 	<langue code="en">
 		<traducteur nom="mark_baber" />
 	</langue>
