@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	'label_email' => 'Adresse email',
 	
-	'modele_nom_formulaire' => 'Formulaire de contact libre',
+	'modele_nom_formulaire' => 'un formulaire de contact libre',
 	
 );
 
