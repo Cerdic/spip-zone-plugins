@@ -10,6 +10,7 @@
 	 Il ne doit &ecirc;tre utilis&eacute; que ponctuellement, pour 
 	 r&eacute;aliser par exemple des pages de Une (l&agrave; o&ugrave;, 
 	 auparavant, on utilisait des mots-cl&eacute;s du type Une1, Une2...).</description>
+	<icon>imgs/emblem-favorite-32.png</icon>
 	<lien>http://plugins.spip.net/selection-d-articles</lien> <!-- URI de documentation -->
 	<licence>GPL 3</licence>
 	<prefix>pb_selection</prefix>
