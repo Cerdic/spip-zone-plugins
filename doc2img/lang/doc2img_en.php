@@ -37,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_autorisation' => 'You are not allowed to convert this document',
 	'erreur_format_document' => 'A document format can not be used: @type@',
 	'erreur_formats_documents' => 'Several document formats can not be used: @types@',
+	'explication_doc2img' => 'This plugin allows you to convert certain types of documents in a single or a serie of images to view them.',
+	'explication_formats_possibles' => 'The extensions accepted by your configuration: @format@',
 
 	// F
 	'formulaire_erreur_pas_doc' => 'No available document for this article',
