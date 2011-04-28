@@ -248,7 +248,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	$commandes = array_merge(
 					plugin2balise_implicite($D, 'options', 'options'),
 					plugin2balise_implicite($D, 'fonctions', 'fonctions'),
-					plugin2balise_implicite($D, 'install', 'gestions'));
+					plugin2balise_implicite($D, 'install', 'initialisations'));
 	
 	$paquet = 
 		"<$balise$attributs" . ($balise == 'paquet' ? "\n>" : ">") .
@@ -493,7 +493,7 @@ function plugin2balise_exec($D, $balise) {
 // verifie que la balise $nom declare une unique fichier $prefix_$nom:
 // fonctions -> $prefix_fonctions
 // options -> $prefix_options, 
-// install -> $prefix_gestions
+// install -> $prefix_initialisations
 function plugin2balise_implicite($D, $balise, $nom) {
 	$files = is_array($D[$balise]) ? $D[$balise] : array($D[$balise]);
 	$contenu = join(' ', array_map('trim', $files));
@@ -560,7 +560,7 @@ function plugin2balise_migration($commandes, $plugin_xml) {
 ### de la description dans plugin.xml et non des modules de langue du plugin !\n";
 	$migration .= "# " . $commandes['traduction'] . "\n";
 
-	// Les balises disparues et la standardisation des fichiers options, fonctions et gestions
+	// Les balises disparues et la standardisation des fichiers options, fonctions et initialisations
 	// -- Intro
 	$migration .= "
 ### La disparition des balises options, fonctions et install au profit 
