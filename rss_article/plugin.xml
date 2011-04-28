@@ -2,13 +2,12 @@
 	<nom>Flux RSS en articles</nom>
 	<auteur>[erational->http://www.erational.org]</auteur>
 	<icon>img/logo_rss_article.png</icon>
-	<version>0.3</version>
+	<version>0.4</version>
 	<licence>GNU/GPL v3</licence>
 	<etat>test</etat>
 	<description>Recopie les flux RSS en articles</description>
 	<lien>http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles</lien>
 	<install>base/rssarticle_upgrade.php</install>
-  <options>rssarticle_options.php</options>
 	<prefix>rssarticle</prefix>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0;]" />
@@ -23,5 +22,13 @@
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>rssarticle_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/rssarticle.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/rssarticle.php</inclure>
 	</pipeline>
 </plugin>
