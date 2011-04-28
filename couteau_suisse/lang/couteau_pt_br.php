@@ -90,12 +90,12 @@ Descobra neste plugin as suas ferramentas favoritas: {Suprime o número}, {Forma
 
 Não deixe de consultar os artigos de documentação do plugin, publicados em: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidade: SPIP v1.9x e v2.0', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+Compatibilidade: SPIP v1.9x, v2.0 e v2.1.x',
+	'pp_autobr' => 'Inserir um bloco onde as quebras de linha são automáticas',
 	'pp_blocs_bloc' => 'Inserir um bloco comprimido',
 	'pp_blocs_visible' => 'Inserir um bloco expandido',
-	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
-	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
+	'pp_chatons_inserer' => 'Inserir o emoticon « @chaton@ »',
+	'pp_chatons_inserer_drop' => 'Inserir um emoticon no seu texto',
 	'pp_couleur_fond' => 'Fundo @couleur@',
 	'pp_couleur_icone_fond' => 'F',
 	'pp_couleur_icone_texte' => 'T',
