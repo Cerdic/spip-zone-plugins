@@ -1,2 +1,5 @@
 <traduction module="tipafriend" gestionnaire="salvatore" reference="fr">
+	<langue code="en">
+		<traducteur nom="mark_baber" />
+	</langue>
 </traduction>
