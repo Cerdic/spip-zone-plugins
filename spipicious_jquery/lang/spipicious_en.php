@@ -19,15 +19,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_description' => 'This plugin enables visitors to add easily tags to articles.',
 
 	// E
-	'explication_ajout_tag' => 'To add several tags at a the same time, use the separator : "@separateur@".',
+	'explication_ajout_tag' => 'To add several tags at a the same time, use the separator: "@separateur@".',
 	'explication_suppression_tag' => 'Select your tags in the list below and submit the form to delete them.',
 
 	// I
 	'identifier' => 'To add tags to this article, you should be identified.',
 
 	// L
-	'label_tags' => 'Tags :',
-	'liste_auteurs_tag' => 'This tag is used by :',
+	'label_tags' => 'Tags:',
+	'liste_auteurs_tag' => 'This tag is used by:',
 
 	// M
 	'message_aucun_tags' => 'No tag associated',
@@ -42,10 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'spipicious' => 'Spip.icio.us',
 
 	// T
-	'tag_ajoute' => 'You added the tag :<br />@name@',
+	'tag_ajoute' => 'You added the tag:<br />@name@',
 	'tag_deja_present' => 'You ever added this tag.',
 	'tag_supprime' => 'You deleted the tag:<br />@name@',
-	'tags' => 'Tags :',
+	'tags' => 'Tags:',
 	'tags_ajoutes' => 'You added several tags:<br />@name@',
 	'tags_supprimes' => 'You deleted several tags:<br />@name@',
 	'title_tag_utilise_nb' => 'This tag has been associated by @nb@ people.',
