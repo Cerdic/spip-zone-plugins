@@ -12,7 +12,6 @@ function inc_tradlang_ajouter_code_langue($module,$lang){
 				'id' => $chaine['id'],
 				'id_tradlang_module' => $chaine['id_tradlang_module'],
 				'module' => $module["module"],
-				'nom_mod' => $module["nom_mod"],
 				'str' => $chaine['str'],
 				'lang' => $lang,
 				'statut' => 'NEW',

@@ -73,12 +73,12 @@ function formulaires_tradlang_choisir_module_traiter($module="",$lang_orig="",$l
 	if($traduire = _request('traduire')){
 		include_spip('inc/autoriser');
 		$res['message_ok'] = _T('tradlang:message_passage_trad');
-		if($lang_crea && autoriser('tradlang','configurer')){
+		include_spip('inc/autoriser');
+		if($lang_crea && autoriser('modifier','tradlang')){
 			// Import de la langue mere
-			$infos_module = sql_fetsel('*','spip_tradlang_modules','nom_mod='.sql_quote($module));
+			$infos_module = sql_fetsel('*','spip_tradlang_modules','module='.sql_quote($module));
 			$ajouter_code_langue = charger_fonction('tradlang_ajouter_code_langue','inc');
 			$ajouter_code_langue($infos_module,$lang_crea);
-			spip_log("on a ajouté $lang_crea","test");
 			$lang_cible = $lang_crea;
 			$res['message_ok'] = _T('tradlang:message_passage_trad_creation_lang',array('lang'=>$lang_crea));
 		}
