@@ -35,7 +35,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tout_verrouiller' => 'Tout verrouiller',
 	'label_toutes_verrouilles' => 'Toutes les compositions sont verrouill&eacute;es.',
 	'label_verrouiller_toutes_compositions' => 'Verrouiller toutes les compositions (seuls les webmasters pourront les modifier).',
-	'label_utiliser_article_accueil' => 'Ne pas utiliser les articles d\'accueil de rubrique',
 
 	// U
 	'une_utilisation' => '1 utilisation',
