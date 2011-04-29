@@ -7,6 +7,7 @@
 	<description>Remplace les liens de courriels par un lien javascript. Ce plugin vise à emp&ecirc;cher des robots spammeurs de collecter les adresses emails.</description>
 	<lien>http://www.spip-contrib.net/?article3828</lien> <!-- URI de documentation -->
 	<prefix>mailcrypt</prefix>
+	<categorie>edition</categorie>
 	<fonctions>mailcrypt_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>

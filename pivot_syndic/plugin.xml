@@ -13,4 +13,5 @@
     <nom>pre_syndication</nom>
     <inclure>pivotsyndic_pipelines.php</inclure>
   </pipeline>
+	<categorie>communication</categorie>
 </plugin>

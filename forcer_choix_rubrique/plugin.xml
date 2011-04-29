@@ -20,4 +20,5 @@
 		<inclure>forcer_choix_rubrique.php</inclure>
 	</pipeline>
 	<options>forcer_choix_rubrique_options.php</options>
+	<categorie>edition</categorie>
 </plugin>
