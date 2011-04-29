@@ -34,19 +34,22 @@ function zippeur_zipper($chemin,$array,$cmd){
 	if($cmd=='PclZip')
 	{
 		$zip = new PclZip($chemin);
+		$i = 0;
 		foreach ($array as $fichier){
+			
 			if (test_espace_prive()){
-				$fichier = '../'.$fichier;
+				$array[$i] = '../'.$fichier;
 			}
-			$erreur = $zip->add($fichier,PCLZIP_OPT_REMOVE_ALL_PATH);
-			if ($erreur == 0){
+			$i++;
+			
+			
+			
+		}
+		$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_ALL_PATH);
+		if ($erreur == 0){
 				spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur");
 				
 			}
-			else{
-				$fichiers++;	
-			}
-		}
 	}elseif($cmd=='7zip')
 	{
 		foreach ($array as $fichier){
