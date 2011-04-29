@@ -1,0 +1,34 @@
+<plugin>
+	<nom>Tags Cloud</nom>
+	<version>1.0.0</version>
+	<auteur>&#169; 2011 Nicolas Hoizey</auteur>
+	<licence>GNU/GPL</licence>
+	<etat>stable</etat>
+	<description>
+Nuage de mots clefs ({tags cloud} en anglais) utilisant uniquement des noisettes.
+
+Exemple d'utilisation :
+
+<code class="spip"><INCLURE{fond=noisettes/tagscloud}{type=Nom du groupe de mots clefs}{id_rubrique=42}{nbMots=25}{minFontSize=0.8}{maxFontSize=1.2}{minWeight=200}{maxWeight=800}{minColor=#000000}{maxColor=#FF3333}{nbSteps=10}></code>
+
+Tous les crit&egrave;res sont optionnels, les usages et valeurs par défaut étant les suivants :
+
+|{{crit&egrave;re}}|{{usage}}|{{valeur par d&eacute;faut}}|
+|type|nom du groupe de mots clefs &agrave; utiliser|tags|
+|id_rubrique|racine de la branche &agrave; prendre en compte|0 (racine du site)|
+|nbMots|nombre de mots &agrave; afficher au maximum|0 (pas de limite)|
+|minFontSize|taille minimale de la police, en <code>em</code>|0.8|
+|maxFontSize|taille maximale de la police, en <code>em</code>|2|
+|minWeight|graisse minimale de la police|400|
+|maxWeight|graisse maximale de la police|800|
+|minColor|couleur extr&ecirc;me du dégrad&eacute; pour les tags les moins importants|#000000|
+|maxColor|couleur extr&ecirc;me du dégrad&eacute; pour les tags les plus importants|#000000|
+|nbSteps|nombre de "pas" dans le d&eacute;grad&eacute; de tailles, graisses et couleurs|10|
+|css|g&eacute;n&eacute;ration des styles CSS en ligne ? (valeurs possibles : non, oui, seulement)|oui|
+
+    </description>
+	<prefix>tagscloud</prefix>
+	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<categorie>divers</categorie>
+</plugin>

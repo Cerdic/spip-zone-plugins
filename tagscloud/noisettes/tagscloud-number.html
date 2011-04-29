@@ -1,0 +1,24 @@
+#SET{number,0}
+<BOUCLE_filtre(CONDITION){si #ENV{id_rubrique,0}|!={0}}>
+    <BOUCLE_rubrique_filtre(RUBRIQUES){id_rubrique}>
+        <BOUCLE_articles_filtre(ARTICLES){branche}{id_mot}>
+        </BOUCLE_articles_filtre>
+            #SET{number,#GET{number}|plus{#TOTAL_BOUCLE}}
+        </B_articles_filtre>
+        <BOUCLE_rubriques_filtre(RUBRIQUES){branche}{id_mot}>
+        </BOUCLE_rubriques_filtre>
+            #SET{number,#GET{number}|plus{#TOTAL_BOUCLE}}
+        </B_rubriques_filtre>
+    </BOUCLE_rubrique_filtre>
+</BOUCLE_filtre>
+</B_filtre>
+    <BOUCLE_articles_sans_filtre(ARTICLES){id_mot}>
+    </BOUCLE_articles_sans_filtre>
+        #SET{number,#GET{number}|plus{#TOTAL_BOUCLE}}
+    </B_articles_sans_filtre>
+    <BOUCLE_rubriques_sans_filtre(RUBRIQUES){id_mot}>
+    </BOUCLE_rubriques_sans_filtre>
+        #SET{number,#GET{number}|plus{#TOTAL_BOUCLE}}
+    </B_rubriques_sans_filtre>
+<//B_filtre>
+#GET{number}

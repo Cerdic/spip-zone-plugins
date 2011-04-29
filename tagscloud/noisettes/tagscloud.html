@@ -1,0 +1,217 @@
+[(#REM) -----------------------------------------------------------------------
+        Récupération des valeurs passées en paramètres
+        -----------------------------------------------------------------------]
+
+[(#REM) Nom du groupe de mots clefs ]
+#SET{type,#ENV{type,tags}}
+
+[(#REM) Identifiant de la rubrique mère de la branche considérée. 0 si pas de restriction ]
+#SET{id_rubrique,#ENV{id_rubrique,0}}
+
+[(#REM) Nombre minimum de contenus auquels un mot clef doit être affecté pour apparaître ]
+#SET{nbMin,#ENV{nbMin,1}}
+
+[(#REM) Nombre maximum de mots clefs à afficher ]
+#SET{nbMots,#ENV{nbMots,0}}
+
+[(#REM) Tailles min et max ]
+#SET{minFontSize,#ENV{minFontSize,0.8}}
+#SET{maxFontSize,#ENV{maxFontSize,2}}
+
+[(#REM) Graisses min et max ]
+#SET{minWeight,#ENV{minWeight,400}}
+#SET{maxWeight,#ENV{maxWeight,800}}
+
+[(#REM) Couleurs min et max (dégradé du moins important au plus important ]
+#SET{minColor,#ENV{minColor,#000000}}
+#SET{maxColor,#ENV{maxColor,#000000}}
+
+[(#REM) Nombre de "pas" dans le dégradé de couleurs ]
+#SET{nbSteps,#ENV{nbSteps,10}}
+
+[(#REM) Génération de la CSS en ligne ? Valeurs possibles : non, oui, seulement ]
+#SET{css,#ENV{css,oui}}
+
+[(#REM) -----------------------------------------------------------------------
+        Code applicatif
+        -----------------------------------------------------------------------]
+
+[(#REM) Génération d'une classe unique (md5 de la concaténation des paramètres)
+        pour éviter les conflits entre plusieurs nuages dans la même page ]
+#SET{nuageClass,#GET{type}|concat{#GET{id_rubrique}}|concat{#GET{nbMin}}|concat{#GET{nbMots}}|concat{#GET{minFontSize}}|concat{#GET{maxFontSize}}|concat{#GET{minWeight}}|concat{#GET{maxWeight}}|concat{#GET{minColor}}|concat{#GET{maxColor}}|concat{#GET{nbSteps}}|md5}
+
+#SET{fontSizeDiff,#GET{maxFontSize}|moins{#GET{minFontSize}}}
+#SET{weightDiff,#GET{maxWeight}|moins{#GET{minWeight}}}
+
+[(#GET{css}|!={non}|oui)
+    <style type="text/css" media="all">
+    #nuage[(#GET{nuageClass})] {
+      line-height: [(#GET{maxFontSize}|mult{1.2})]em;
+    }
+
+    #nuage[(#GET{nuageClass})] li {
+      list-style: none;
+      display: inline;
+      margin: 0;
+      padding: 0;
+    }
+
+    #nuage[(#GET{nuageClass})] li a {
+      margin-right: 0.2em;
+      padding: 0;
+      font-style: normal;
+    }
+
+    #nuage[(#GET{nuageClass})] li a span {
+      display: none;
+    }
+
+    [(#GET{nbSteps}|plus{1}|tagscloud_css{#GET{minColor},#GET{maxColor},#GET{nuageClass}})]
+    </style>
+]
+
+<BOUCLE_pas_seulement_css(CONDITION){si #GET{css}|!={seulement}}>
+    #SET{filtreRubrique,all}
+    <BOUCLE_filtre_rub_cond1(CONDITION){si #GET{id_rubrique}|!={0}}>
+
+        [(#REM) On ne prend en compte que les contenus d'une rubrique particulière ]
+        #SET{liste_articles,#ARRAY}
+        #SET{liste_rubriques,#ARRAY}
+        <BOUCLE_filtre_rub_secteur(RUBRIQUES){id_rubrique=#GET{id_rubrique}}{id_parent=0}>
+
+            [(#REM) Le filtre prend en compte tout un secteur ]
+            #SET{filtreRubrique,secteur}
+            <BOUCLE_filtre_rub_secteur_articles(ARTICLES){id_secteur=#GET{id_rubrique}}>
+                #SET{liste_articles,#GET{liste_articles}|push{#ID_ARTICLE}}
+            </BOUCLE_filtre_rub_secteur_articles>
+            <BOUCLE_filtre_rub_secteur_rubriques(ARTICLES){id_secteur=#GET{id_rubrique}}>
+                #SET{liste_rubriques,#GET{liste_rubriques}|push{#ID_RUBRIQUE}}
+            </BOUCLE_filtre_rub_secteur_rubriques>
+
+        </BOUCLE_filtre_rub_secteur>
+        </B_filtre_rub_secteur>
+
+            [(#REM) Le filtre ne prend en compte qu'une rubrique et sa branche ]
+            #SET{filtreRubrique,rubrique}
+            <BOUCLE_filtre_rub1_rub(RUBRIQUES){id_rubrique=#GET{id_rubrique}}>
+                <BOUCLE_filtre_rub1_articles(ARTICLES){branche}>
+                    #SET{liste_articles,#GET{liste_articles}|push{#ID_ARTICLE}}
+                </BOUCLE_filtre_rub1_articles>
+                <BOUCLE_filtre_rub1_rubriques(ARTICLES){branche}>
+                    #SET{liste_rubriques,#GET{liste_rubriques}|push{#ID_RUBRIQUE}}
+                </BOUCLE_filtre_rub1_rubriques>
+            </BOUCLE_filtre_rub1_rub>
+
+        <//B_filtre_rub_secteur>
+    </BOUCLE_filtre_rub_cond1>
+
+    #SET{minNbContenus,0}
+    #SET{maxNbContenus,0}
+    #SET{compteur,0}
+    #SET{liste_mots,#ARRAY}
+    #SET{liste_nombres,#ARRAY}
+    #SET{liste_incomplete,non}
+
+    <BOUCLE_filtre_rub_cond2(CONDITION){si #GET{filtreRubrique}|!={all}}>
+
+        [(#REM) Cas où les contenus sont restreints à un secteur ou une rubrique ]
+        <BOUCLE_minmax_filtre_art(MOTS){type=#GET{type}}{id_article IN #GET{liste_articles}}{doublons minmax1}></BOUCLE_minmax_filtre_art>
+        <BOUCLE_minmax_filtre_rub(MOTS){type=#GET{type}}{id_rubrique IN #GET{liste_rubriques}}{doublons minmax1}></BOUCLE_minmax_filtre_rub>
+        <BOUCLE_minmax_filtre(MOTS){!doublons minmax1}>
+            #SET{compteur_contenus,#INCLURE{fond=noisettes/tagscloud-number,id_mot,id_rubrique=#GET{id_rubrique}}}
+            [(#GET{compteur_contenus}|>={#GET{nbMin}}|oui)
+                #SET{liste_mots,#GET{liste_mots}|push{#ID_MOT}}
+                #SET{liste_nombres,#GET{liste_nombres}|array_merge{#ARRAY{mot#ID_MOT,#GET{compteur_contenus}}}}
+                #SET{maxNbContenus,#GET{maxNbContenus}|max{#GET{compteur_contenus}}}
+                [(#GET{minNbContenus}|=={0}|non)
+                    #SET{minNbContenus,#GET{minNbContenus}|min{#GET{compteur_contenus}}}
+                ]
+                [(#GET{minNbContenus}|=={0}|oui)
+                    #SET{minNbContenus,#GET{compteur_contenus}}
+                ]
+                [(#GET{nbMots}|>{0}|oui)
+                    #SET{compteur,#GET{compteur}|plus{1}}
+                ]
+            ]
+            [(#GET{compteur_contenus}|>={#GET{nbMin}}|non)
+                #SET{liste_incomplete,oui}
+            ]
+        </BOUCLE_minmax_filtre>
+
+    </BOUCLE_filtre_rub_cond2>
+    </B_filtre_rub_cond2>
+
+        [(#REM) Cas où on prend en compte tous les contenus ]
+        <BOUCLE_minmax_sans_filtre(MOTS){type=#GET{type}}>
+            #SET{compteur_contenus,#INCLURE{fond=noisettes/tagscloud-number,id_mot}}
+            [(#GET{compteur_contenus}|>={#GET{nbMin}}|oui)
+                #SET{liste_mots,#GET{liste_mots}|push{#ID_MOT}}
+                #SET{liste_nombres,#GET{liste_nombres}|array_merge{#ARRAY{mot#ID_MOT,#GET{compteur_contenus}}}}
+                #SET{maxNbContenus,#GET{maxNbContenus}|max{#GET{compteur_contenus}}}
+                [(#GET{minNbContenus}|=={0}|non)
+                    #SET{minNbContenus,#GET{minNbContenus}|min{#GET{compteur_contenus}}}
+                ]
+                [(#GET{minNbContenus}|=={0}|oui)
+                    #SET{minNbContenus,#GET{compteur_contenus}}
+                ]
+                [(#GET{nbMots}|>{0}|oui)
+                    #SET{compteur,#GET{compteur}|plus{1}}
+                ]
+            ]
+            [(#GET{compteur_contenus}|>={#GET{nbMin}}|non)
+                #SET{liste_incomplete,oui}
+            ]
+        </BOUCLE_minmax_sans_filtre>
+
+    <//B_filtre_rub_cond2>
+
+    #SET{liste_nombres,#GET{liste_nombres}|spip_arsort}
+    <BOUCLE_nbmots_restreint(CONDITION){si #GET{nbMots}|>{0}}>
+        <BOUCLE_trop_de_mots(CONDITION){si #GET{compteur}|>{#GET{nbMots}}}>
+
+            [(#REM) Trop de mots, on ne garde que les plus courants ]
+            #SET{liste_incomplete,oui}
+            #SET{compteur,0}
+            #SET{liste_mots,#ARRAY}
+            <BOUCLE_menage(POUR){tableau #GET{liste_nombres}}>
+                #SET{compteur,#GET{compteur}|plus{1}}
+                [(#GET{compteur}|>{#GET{nbMots}}|non)
+                    #SET{liste_mots,#GET{liste_mots}|push{#CLE|substr{3}}}
+                    #SET{minNbContenus,#VALEUR}
+                ]
+            </BOUCLE_menage>
+
+        </BOUCLE_trop_de_mots>
+
+    </BOUCLE_nbmots_restreint>
+
+    #SET{min,#GET{minNbContenus}}
+    #SET{max,#GET{maxNbContenus}}
+    #SET{minLog,#GET{min}|log}
+    #SET{maxLog,#GET{max}|log}
+    #SET{logRange,#GET{maxLog}|moins{#GET{minLog}}}
+    [(#GET{minLog}|=={#GET{maxLog}}|oui)
+        #SET{logRange,1}
+    ]
+
+    <B_mots>
+        <ol id="nuage#GET{nuageClass}" class="nuage[(#GET{liste_incomplete}|=={oui}|oui) partiel]">
+        #SET{nbMotsTrouve,0}
+    <BOUCLE_mots(MOTS){id_mot IN #GET{liste_mots}}{par titre}>
+        #SET{compteur_contenus,#INCLURE{fond=noisettes/tagscloud-number,id_mot,id_rubrique=#GET{id_rubrique}}}
+        #SET{coef,#GET{compteur_contenus}|log|moins{#GET{minLog}}|div{#GET{logRange}}}
+        #SET{fontSize,#GET{fontSizeDiff}|mult{#GET{coef}}|plus{#GET{minFontSize}}}
+        #SET{weight,#GET{weightDiff}|mult{#GET{coef}}|plus{#GET{minWeight}}|round}
+        #SET{indice,#GET{coef}|mult{#GET{nbSteps}}|floor}
+        #SET{url,#URL_MOT}
+        [(#GET{filtreRubrique}|=={all}|non)
+            #SET{url,#GET{url}|parametre_url{id_rubrique,#GET{id_rubrique}}}
+        ]
+        <li><a href="#GET{url}" rel="tag" class="tag#GET{indice}" style="font-size: #GET{fontSize}em; font-weight: #GET{weight};" title="#TITRE ([(#GET{compteur_contenus})] contenu[(#GET{compteur_contenus}|>{1}|?{'s'})])">#TITRE</a></li>
+        #SET{nbMotsTrouve,#GET{nbMotsTrouve}|plus{1}}
+    </BOUCLE_mots>
+    </ol>
+    </B_mots>
+        <p><:tagscloud:aucun_mot_cle:></p>
+    <//B_mots>
+</BOUCLE_pas_seulement_css>
