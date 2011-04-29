@@ -1,7 +1,7 @@
 <div class="formulaire_spip formulaire_editer [formulaire_(#ENV{form})][ formulaire_(#ENV{form})-#ENV{id}]">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	<div class="explication"><:noizetier:explications_heritages_comosition:></div>
+	<div class="explication"><:noizetier:explication_heritages_composition:></div>
 	<BOUCLE_editable(CONDITION){si #ENV{editable}}>
 		<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 			[(#REM) declarer les hidden qui declencheront le service du formulaire
