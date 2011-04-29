@@ -32,6 +32,8 @@ function exec_geoportail_config_rgc()
 		$res .= icone_horizontale(_T('geoportail:rgc'), generer_url_ecrire("geoportail_config_rgc"), "breve-24.gif","rien.gif", false);
 		$res .= icone_horizontale(_T('geoportail:geoservices'), generer_url_ecrire("geoservice_tous"), "site-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);
+		
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'geoportail_config','what'=>'rgc'),'data'=>''));
 
 		echo debut_droite('',true);
 		

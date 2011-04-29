@@ -45,6 +45,8 @@ function exec_geoportail_config()
 		$res .= icone_horizontale(_T('geoportail:geoservices'), generer_url_ecrire("geoservice_tous"), "site-24.gif","rien.gif", false);
 		echo bloc_des_raccourcis($res);
 
+		echo pipeline('affiche_droite',array('args'=>array('exec'=>'geoportail_config','what'=>'config'),'data'=>''));
+
 		echo debut_droite('',true);
 	 	
 		$geoportail_key = $GLOBALS['meta']['geoportail_key'];
