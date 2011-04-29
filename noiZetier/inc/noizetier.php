@@ -512,41 +512,6 @@ function noizetier_lister_icones(){
 	return $liste_icones;
 }
 
-/**
- * Liste des configurations du noizetier disponibles
- * Fichiers YAML situés dans un sous-répertoire config_noizetier
- *
- * @staticvar array $liste_config
- * @return array
- */
-function noizetier_lister_config(){
-	static $liste_config = null;
-	include_spip('inc/yaml');
-	
-	if (is_null($liste_config)){
-		$liste_config = array();
-		$match = ".+[.]yaml$";
-		foreach (find_all_in_path('config_noizetier/', $match) as $fichier => $chemin) {
-			// On lit le fichier, on vérifie les plugins demandé on vérifie s'il y a un champs nom
-			$config = yaml_decode_file($chemin);
-			$ok = true;
-			if (isset($config['necessite']))
-				foreach($config['necessite'] as $plugin)
-					if (!defined('_DIR_PLUGIN_'.strtoupper($plugin)))
-						$ok = false;
-			//on vérifie s'il y a un champs nom
-			if ($ok) {
-				if (isset($config['nom']))
-					$liste_config[$chemin] = _T_ou_typo($config['nom']);
-				else
-					$liste_config[$chemin] = $fichier;
-			}
-		}
-	}
-	return $liste_config;
-}
-
-
 
 /**
  * Retourne les elements du contexte uniquement
