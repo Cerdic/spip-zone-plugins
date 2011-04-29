@@ -400,6 +400,8 @@ function revision_meta($a, $c = false) {
 	if (isset($c['valeur'])) {
 		spip_log("meta '$a' = '$c[valeur]'", 'crayons');
 		ecrire_meta($a, $c['valeur']);
+		include_spip('inc/invalideur');
+		suivre_invalideur('meta');
 	}
 }
 
