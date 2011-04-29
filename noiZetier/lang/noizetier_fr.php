@@ -94,6 +94,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ieconfig_ne_pas_importer' => 'Ne pas importer',
 	'ieconfig_noizetier_export_explication' => 'Exportera la configuration des noisettes et les compositions du noiZetier.',
 	'ieconfig_noizetier_export_option' => 'Inclure dans l\'export ?',
+	'ieconfig_non_installe' => '<b>Plugin Importeur/Exporteur de configurations :</b> ce plugin n\'est pas installés sur votre site. Il n\'est pas nécessaire au fonctionnement du noizetier. Cependant, s\'il est activé, vous pourrez exportez et importers des configurations de noisettes dans le noizetier.',
 	'info_page' => 'PAGE :',
 	'info_composition' => 'COMPOSITION :',
 	'installation_tables' => 'Tables du plugin noiZetier installées.<br />',

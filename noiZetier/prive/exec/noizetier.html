@@ -32,22 +32,25 @@
 		</a>
 	</div>
 	]
+	[(#PLUGIN{ieconfig}|oui)
 	<div>
-		<a href="#URL_ACTION_AUTEUR{exporter_config_noizetier}" class="cellule-h">
+		<a href="#URL_ECRIRE{ieconfig_export}" class="cellule-h">
 			[<img src="(#CHEMIN{img/export.png})" style="vertical-align:middle;" alt="<:noizetier:editer_exporter_configuration:>" />]
 			<span style="vertical-align:middle;"><:noizetier:editer_exporter_configuration:></span>
 		</a>
 	</div>
 	<div>
-		<a href="#URL_ECRIRE{importer_config_noizetier}" class="cellule-h">
+		<a href="#URL_ECRIRE{ieconfig_import}" class="cellule-h">
 			[<img src="(#CHEMIN{img/import.png})" style="vertical-align:middle;" alt="<:noizetier:editer_importer_configuration:>" />]
 			<span style="vertical-align:middle;"><:noizetier:editer_importer_configuration:></span>
 		</a>
 	</div>
+	]
 </div>
 
 <!--/#navigation-->
 
 <!--#extra-->
 [(#PLUGIN{compositions}|non)<:noizetier:compositions_non_installe:><p />]
+[(#PLUGIN{ieconfig}|non)<:noizetier:ieconfig_non_installe:><p />]
 <!--/#extra-->
