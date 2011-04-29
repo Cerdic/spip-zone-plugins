@@ -9,7 +9,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'courtcircuit' => 'Court-circuit',
 	'explication_article_accueil' => 'Si un article d\'accueil a été défini pour la rubrique, rediriger vers cet article ?',
 	'explication_configurer' => 'Les différentes règles ci-dessous sont testées dans cet ordre. Si aucune règle ne définit une redirection, alors la rubrique sera affichée normalement.',
-	'explication_configurer' => 'Les différentes règles ci-dessous sont testées dans cet ordre. Si aucune règle ne définit une redirection, alors la rubrique sera affichée normaleme,y.',
 	'explication_plus_recent' => 'Rediriger la rubrique vers l\'article le plus récent de la rubrique ? (Sans effet si la rubrique ne contient pas d\'article.)',
 	'explication_plus_recent_branche' => 'Rediriger la rubrique vers l\'article le plus récent de la branche (soit parmi les articles de la rubrique et de ses sous-rubriques) ?',
 	'explication_sousrubrique_titre' => 'Rediriger la rubrique vers la première sous-rubrique (tri par rang et par titre) ?',
