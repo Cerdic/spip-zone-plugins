@@ -2,6 +2,8 @@
 
 //  ajout du plugin urledit
 $GLOBALS['var_urls'] = false;
+define('_MARQUEUR_URL', false);
+
 
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
@@ -63,7 +65,9 @@ define ('_url_propres_sep_id',',');
 // Elles peuvent a present etre definies a "" pour avoir des URL plus jolies.
 // Les preg_match restent necessaires pour gerer les anciens signets.
 
-define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
+// define('_MARQUEUR_URL', serialize(array('rubrique1' => '-', 'rubrique2' => '-', 'breve1' => '+', 'breve2' => '+', 'site1' => '@', 'site2' => '@', 'auteur1' => '_', 'auteur2' => '_', 'mot1' => '+-', 'mot2' => '-+')));
+// commenter par plugin urledit
+
 
 // Retire les marqueurs de type dans une URL propre ancienne maniere
 
