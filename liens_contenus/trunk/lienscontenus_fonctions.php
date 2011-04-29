@@ -46,87 +46,59 @@ function lienscontenus_generer_url_modele_non_reconnu($id_objet)
 	return '#';
 }
 
-function lienscontenus_verifier_si_existe($type_objet, $id_objet)
+function lienscontenus_presentation_lien($type_objet, $id_objet)
 {
-	switch ($type_objet) {
-		case 'modele':
-			if(find_in_path('modeles/'.$id_objet.'.html')) {
-				return 'ok';
-			} else {
-				return 'ko';
-			}
-			break;
-		default:
-			include_spip('base/abstract_sql');
-			if (in_array($type_objet, array('syndic', 'forum'))) {
-				$nb = sql_countsel("spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
-			} else {
-				// Marche aussi pour les formulaires (type = "form")
-                $nb = sql_countsel("spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
-			}
-			return ($nb == 1 ? 'ok' : 'ko');
-	}
-}
+  include_spip('base/abstract_sql');
+  
+  $listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
+  $infos = array('type_objet' => $type_objet, 'id_objet' => $id_objet);
+  $existe = false;
 
-function lienscontenus_icone_statut($type_objet, $id_objet)
-{
-	$statut = lienscontenus_statut($type_objet, $id_objet);
-  if ($statut != '') {
-    return '<img src="'._DIR_PLUGIN_LIENSCONTENUS.'/images/statut-'.$statut.'.gif" align="absmiddle" alt="'._T('lienscontenus:statut_'.$statut).'" />';
+  if ($type_objet == 'modele') {
+    if (find_in_path('modeles/'.$id_objet.'.html')) {
+      $existe = true;
+      $infos['statut'] = 'publie';
+    }
   } else {
-    return '';
-  }
-}
-
-function lienscontenus_statut($type_objet, $id_objet)
-{
-	$listeStatuts = array('prepa', 'prop', 'publie', 'refuse', 'poubelle');
-	include_spip('base/abstract_sql');
-	if ($type_objet == 'document') {
-    // TODO: gérer le statut des docs si médiathèque est installé
-    $statut = 'publie';
-  } elseif ($type_objet == 'modele') {
-    $statut = find_in_path('modeles/'.$id_objet.'.html') ? 'publie' : 'poubelle';
-  } elseif ($type_objet == 'auteur') {
-    $statut = sql_getfetsel("statut", "spip_auteurs", "id_auteur="._q($id_objet));
-    if ($statut != '') {
-      if ($statut == '5poubelle') {
-        $statut = 'poubelle';
-      } else {
-        $statut = 'publie';
+    $requetes = array(
+      'syndic' => array('champs' => 'nom_site AS titre, statut', 'table' => 'spip_syndic', 'id' => 'id_syndic'),
+      'forum' => array('champs' => 'titre, statut', 'table' => 'spip_forum', 'id' => 'id_forum'),
+      'mot' => array('champs' => 'titre', 'table' => 'spip_mots', 'id' => 'id_mot'),
+      'auteur' => array('champs' => 'nom AS titre', 'table' => 'spip_auteurs', 'id' => 'id_auteur'),
+      'article' => array('champs' => 'titre, statut', 'table' => 'spip_articles', 'id' => 'id_article'),
+      'rubrique' => array('champs' => 'titre, statut', 'table' => 'spip_rubriques', 'id' => 'id_rubrique'),
+      'document' => array('champs' => 'titre, statut', 'table' => 'spip_documents', 'id' => 'id_document'),
+      'breve' => array('champs' => 'titre, statut', 'table' => 'spip_breves', 'id' => 'id_breve')
+      );
+      
+    if (!isset($requetes[$type_objet])) {
+      spip_log('Affichage du type '.$type_objet.' non géré', 'lienscontenus');
+      return 'non gere : '.$type_objet;
+    }
+  
+    if ($row = sql_fetsel($requetes[$type_objet]['champs'], $requetes[$type_objet]['table'], $requetes[$type_objet]['id'].'='._q($id_objet))) {
+      $existe = true;
+      $infos = array_merge($infos, $row);
+      if (!isset($infos['statut'])) {
+        $infos['statut'] = 'publie';
+      }
+      switch ($type_objet) {
+        case 'auteur':
+          if ($infos['statut'] == '5poubelle') {
+            $infos['statut'] == 'poubelle';
+          } else {
+            $infos['statut'] == 'publie';
+          }
+          break;
       }
     }
-  } elseif (in_array($type_objet, array('syndic', 'forum'))) {
-    $statut = sql_getfetsel("statut", "spip_".$type_objet, "id_".$type_objet."="._q($id_objet));
-	} else {
-		// Marche aussi pour les formulaires (type = "form")
-    $statut = sql_getfetsel("statut", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
-	}
-  return $statut;
-}
-
-function lienscontenus_titre_contenu($type_objet, $id_objet)
-{
-  switch ($type_objet) {
-  	case 'syndic':
-	    if (!$nom_site = sql_getfetsel("nom_site", "spip_syndic", "id_syndic="._q($id_objet))) {
-        $nom_site = _T('lienscontenus:inexistant');
-      }
-	    return _T('lienscontenus:type_syndic', array('nom_site' => $nom_site, 'id_objet' => $id_objet));
-	    break;
-  	case 'forum':
-	    $titre_message = sql_getfetsel("titre", "spip_forum", "id_forum="._q($id_objet));
-	    return _T('lienscontenus:type_forum', array('titre_message' => $titre_message, 'id_objet' => $id_objet));
-	    break;
-    case 'auteur':
-      $nom = sql_getfetsel("nom", "spip_auteurs", "id_auteur="._q($id_objet));
-      return _T('lienscontenus:type_auteur', array('nom' => $nom));
-  	case 'modele':
-	    return _T('lienscontenus:type_modele', array('type_objet' => $type_objet, 'id_objet' => $id_objet));
-	    break;
-  	default:
-	    // Marche aussi pour les formulaires (type = "form")
-	    return sql_getfetsel("titre", "spip_".$type_objet."s", "id_".$type_objet."="._q($id_objet));
   }
+
+  if ($existe) {
+    return '<a href="'.lienscontenus_generer_url($type_objet, $id_objet).'" class="ok '.$infos['statut'].'">'._T('lienscontenus:type_'.$type_objet, $infos).'</a>';
+  } else {
+    return '<span class="ko">'._T('lienscontenus:type_'.$type_objet.'_inexistant', $infos).'</span>';
+  }
+      
 }
 ?>

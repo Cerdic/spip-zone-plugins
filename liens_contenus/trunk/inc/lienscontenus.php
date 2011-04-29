@@ -209,10 +209,11 @@ function lienscontenus_verification_articles()
         <script language="javascript" type="text/javascript">
         $(document).ready(function() {
             var estPublie = $('ul.instituer_article.instituer > li > ul > li.publie.selected').size() == 1;
-            var estLie = $('#liens_contenus_contenants > li.publie').size() > 0;
-            var estLiantOk = $('#liens_contenus_contenus > li:not(.publie):not(.ko)').size() > 0;
-            var estLiantKo = $('#liens_contenus_contenus > li.ko').size() > 0;
-            if (estPublie && estLiantOk) {
+            var estLie = $('#liens_contenus_contenants > li > a.publie').size() > 0;
+            var estLiantOk = $('#liens_contenus_contenus > li > a.ok.publie').size() > 0;
+            var estLiantOkNonPublie = $('#liens_contenus_contenus > li > a.ok:not(.publie)').size() > 0;
+            var estLiantKo = $('#liens_contenus_contenus > li > span.ko').size() > 0;
+            if (estPublie && estLiantOkNonPublie) {
               $('div.fiche_objet').prepend('<div class="alerte">' + messageAlertePublieContenant + '</div>');
             }
             if (estPublie && estLiantKo) {

@@ -2,7 +2,7 @@
 	<nom>Liens entre contenus</nom>
 	<auteur>Nicolas Hoizey</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.28</version>
+	<version>0.29</version>
 	<version_base>0.4</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>test</etat>
@@ -11,6 +11,7 @@ Ce plugin (pour SPIP 2.1.0+) permet d'identifier les liens existants entre les c
 
 Reste &agrave; faire :
 -* Etendre le contr&ocirc;le de d&eacute;publication aux actions dans les listes
+-* Proposer une option de configuration pour ne pas mettre d'alertes
 -* Proposer une option de configuration pour interdire la suppression d'objets li&eacute;s depuis des objets en ligne ou juste alerter
 -* R&eacute;f&eacute;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&eacute;dric ?)
 
