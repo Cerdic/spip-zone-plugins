@@ -135,7 +135,12 @@ function exec_spiplistes_import_export(){
 			}
 			// envoie le fichier
 			header('Content-type: text/plain');
-			header('Content-Disposition: attachment; filename="export_liste_$export_id-'.date("Y-m-d").'.txt"');
+			header('Content-Disposition: attachment; filename="export_liste_'
+				   . $export
+				   . '_id-'
+				   . date("Y-m-d")
+				   . '.txt"'
+				   );
 			echo ($str_export);
 			exit;
 		}
