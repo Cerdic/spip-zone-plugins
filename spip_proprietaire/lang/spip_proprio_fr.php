@@ -73,6 +73,8 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'forme' => 'Forme juridique',
 	'forme_label' => 'Forme juridique',
 	'forme_comment' => 'Soci&eacute;t&eacute; (<i>pr&eacute;cisez le statut ...</i>), association ...',
+	'fax' => 'T&eacute;l&eacute;copie',
+	'fax_abbrev' => 'Fax',
 
 // H //
 	'home_page' => 'Page d’accueil',
@@ -258,13 +260,20 @@ Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’infor
 	'siege' => 'Si&egrave;ge',
 	'siren' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises">SIREN</abbr>',
 	'siret' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ETablissements">SIRET</abbr>',
+	'siren_abbrev' => 'Siren',
+	'siret_abbrev' => 'Siret',
 	'sauvegardes_dans_dump' => 'Vos sauvegardes sont &agrave; placer dans le r&eacute;pertoire \'tmp/dump/\'.',
 
 // T //
 	'telephone_label' => 'Num&eacute;ro de t&eacute;l&eacute;phone',
 	'telecopie_label' => 'Num&eacute;ro de t&eacute;l&eacute;copie',
+	'tva_nonapplicable_label' => 'TVA non-applicable',
+	'tva_nonapplicable_comment' => 'Non soumis &agrave; la TVA selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr> ; r&eacute;gime micro-social.',
 	'tel' => 'T&eacute;l&eacute;phone',
+	'tel_abbrev' => 'T&eacute;l',
 	'tva_intracommunautaire' => 'T.V.A. Intracommunautaire',
+	'tva_intracommunautaire_abbrev' => 'TVA intr.',
+	'tva_non_applicable' => 'TVA non-applicable selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr>',
 	// Page de test public
 	'testing_page_public' => 'Page de test',
 	'testing_page_titre' => 'Test de la configuration propri&eacute;taire',

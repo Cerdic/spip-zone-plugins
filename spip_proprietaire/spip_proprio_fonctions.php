@@ -332,7 +332,7 @@ exit;
  * @param numeric $num_siret Le numéro SIRET (1 à 5 chiffres)
  * @return array( SIREN , SIRET , TVA )
  */
-function completer_insee($num_siren=null, $num_siret=null, $forcer_siret=false) {
+function completer_insee($num_siren=null, $num_siret=null, $notva=false, $forcer_siret=false) {
 	if (is_null($num_siren)) return false;	
 	$num_siren = preg_replace('/[^0-9]/', '', $num_siren);
 	if (is_null($num_siret)) {
@@ -347,7 +347,7 @@ function completer_insee($num_siren=null, $num_siret=null, $forcer_siret=false) 
 	}
 	$siren_ok = calculer_siren($num_siren);
 	$siret_ok = $num_siret ? calculer_siret($siren_ok, $num_siret) : '';
-	$tva_intracom_ok = calculer_tva_intracom($siren_ok);
+	$tva_intracom_ok = $notva===true ? '' : calculer_tva_intracom($siren_ok);
 	return array($siren_ok, str_replace($siren_ok, '', $siret_ok), $tva_intracom_ok);
 }
 

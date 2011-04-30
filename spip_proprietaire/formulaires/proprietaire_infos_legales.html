@@ -74,6 +74,15 @@
 				</label>
 				<span class='explication'><:spip_proprio:enregistrement_siret_comment:></span>
 			</td>
+			</tr><tr>
+			
+			<td colspan="3">
+			    <label style="float:none;margin:0;padding:0;width:100%">
+			    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_tva_nonapplicable})</span>
+				]<input type='checkbox' class='checkbox' name='enregistrement_tva_nonapplicable' id='enregistrement_tva_nonapplicable' value="oui"[(#ENV**{enregistrement_tva_nonapplicable}|=={oui}|oui) checked="checked"] />
+				&nbsp;<:spip_proprio:tva_nonapplicable_label:></label>
+				<span class='explication'><:spip_proprio:tva_nonapplicable_comment:></span>
+			</td>
 
 			</tr></table>
 		</li>

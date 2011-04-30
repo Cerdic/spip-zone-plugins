@@ -15,6 +15,8 @@ function formulaires_proprietaire_infos_legales_charger_dist($who='proprietaire'
 		'enregistrement_siren' => $conf[$who.'_enregistrement_siren'],
 		'enregistrement_siret' => $conf[$who.'_enregistrement_siret'],
 		'enregistrement_tvaintra' => $conf[$who.'_enregistrement_tvaintra'],
+		'enregistrement_tva_nonapplicable' => 
+			$conf[$who.'_enregistrement_tva_nonapplicable']==true ? 'oui' : 'non',
 		'capital_social' => $conf[$who.'_capital_social'],
 	);
 	return $valeurs;
@@ -51,6 +53,8 @@ function formulaires_proprietaire_infos_legales_traiter_dist($who='proprietaire'
 		$who.'_enregistrement_siren' => _request('enregistrement_siren'),
 		$who.'_enregistrement_siret' => _request('enregistrement_siret'),
 		$who.'_enregistrement_tvaintra' => _request('enregistrement_tvaintra'),
+		$who.'_enregistrement_tva_nonapplicable' => 
+			(_request('enregistrement_tva_nonapplicable') && _request('enregistrement_tva_nonapplicable')=='oui') ? true : false,
 		$who.'_capital_social' => _request('capital_social'),
 	);
 	if (strlen($datas[$who.'_enregistrement_siren'])) {
@@ -60,7 +64,8 @@ function formulaires_proprietaire_infos_legales_traiter_dist($who='proprietaire'
 			$datas[$who.'_enregistrement_tvaintra']
 		) = completer_insee(
 			$datas[$who.'_enregistrement_siren'], 
-			$datas[$who.'_enregistrement_siret']
+			$datas[$who.'_enregistrement_siret'],
+			$datas[$who.'_enregistrement_tva_nonapplicable']
 		);
 		$datas[$who.'_enregistrement_numero'] = '';
 	    $redirect = generer_url_ecrire('spip_proprio', 'page='.$who);
