@@ -25,7 +25,9 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 	$ret = '';
 	// Doit-on afficher une légende ?
 	if ($env_legende || $env_titre || $env_descriptif || $env_credits || $env_poids || $env_type) {
-		$width = is_numeric($width) ? min($GLOBALS['meta']['media_largeur_max_legende'],max($GLOBALS['meta']['media_largeur_min_legende'],intval($width))) : (isset($GLOBALS['meta']['media_largeur_max_legende']) ? $GLOBALS['meta']['media_largeur_max_legende'] : 350);
+		$media_largeur_max_legende = isset($GLOBALS['meta']['media_largeur_max_legende']) ? $GLOBALS['meta']['media_largeur_max_legende'] : 120;
+		$media_largeur_min_legende = isset($GLOBALS['meta']['media_largeur_min_legende']) ? $GLOBALS['meta']['media_largeur_min_legende'] : 350;
+		$width = is_numeric($width) ? min($media_largeur_max_legende,max($media_largeur_min_legende,intval($width))) : $media_largeur_max_legende;
 		// Y a-t-il un modèle légende à utiliser ?
 		if ($env_legende && find_in_path('modeles/legende_'.$env_legende.'.html')) {
 			$ret = recuperer_fond('modeles/legende_'.$env_legende,array(
@@ -39,7 +41,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				'conteneur' => $conteneur
 			));
 		} else {
-			$width = 'width: '.$width.'px;';
+			$width = is_numeric($width) ? 'width: '.intval($width).'px;' : '';
 			$dt = $conteneur=='dl' ? 'dt' : 'div';
 			$dd = $conteneur=='dl' ? 'dd' : 'div';
 			// Titre
