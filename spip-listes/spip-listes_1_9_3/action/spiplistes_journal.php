@@ -1,10 +1,10 @@
 <?php 
-
-	// action/spiplistes_journal.php
-	
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

@@ -1,14 +1,14 @@
 <?php
-// action/spiplistes_envoi_lot.php
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-include_spip('inc/spiplistes_api_globales');
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/spiplistes_api_globales');
 include_spip('inc/actions');
 include_spip('inc/spiplistes_api');
 
@@ -35,4 +35,3 @@ function action_spiplistes_envoi_lot_dist ()
 	ajax_retour($nb_etiquettes);
 }
 
-?>

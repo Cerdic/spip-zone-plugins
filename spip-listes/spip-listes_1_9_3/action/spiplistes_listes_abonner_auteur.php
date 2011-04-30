@@ -1,6 +1,10 @@
 <?php
-
-// action/spiplistes_listes_abonner_auteur.php
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 

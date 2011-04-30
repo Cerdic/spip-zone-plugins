@@ -1,7 +1,11 @@
 <?php
-
-// action/spiplistes_liste_des_abonnes.php
-// _SPIPLISTES_ACTION_LISTE_ABONNES
+/**
+ * _SPIPLISTES_ACTION_LISTE_ABONNES
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -38,4 +42,3 @@ function action_spiplistes_liste_des_abonnes_dist () {
 	exit(0);
 
 } //
-?>

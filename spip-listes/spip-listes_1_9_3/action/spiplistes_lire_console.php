@@ -1,10 +1,10 @@
 <?php 
-
-	// action/spiplistes_lire_console.php
-	
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 	/*****************************************************
 	Copyright (C) 2008 Christian PAULUS

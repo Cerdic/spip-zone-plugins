@@ -1,22 +1,23 @@
 <?php
+/**
+ * Supprime l'auteur (visiteur) demande
+ *
+ * _SPIPLISTES_ACTION_SUPPRIMER_ABONNER
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
-// action/spiplistes_supprimer_abonne.php
-
-// _SPIPLISTES_ACTION_SUPPRIMER_ABONNER
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-/*
-	Supprime l'auteur (visiteur) demande
-	retourne sur redirect si precise
-*/
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
+/**
+ * Supprime l'auteur (visiteur) demande
+ * retourne sur redirect si precise
+ * @global int $GLOBALS['auteur_session']['id_auteur']
+ */
 function action_spiplistes_supprimer_abonne_dist () {
 
 	include_spip('inc/autoriser');
@@ -69,6 +70,5 @@ function action_spiplistes_supprimer_abonne_dist () {
 	if($redirect) {
 		redirige_par_entete(str_replace("&amp;", "&", $redirect));
 	}
-}
+} // action_spiplistes_supprimer_abonne_dist()
 
-?>

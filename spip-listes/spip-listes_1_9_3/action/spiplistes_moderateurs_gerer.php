@@ -1,6 +1,10 @@
 <?php
-
-// action/spiplistes_moderateurs_gerer.php
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
@@ -60,4 +64,3 @@ function action_spiplistes_moderateurs_gerer_dist ()
 	exit(0);
 
 } //
-?>

@@ -1,11 +1,12 @@
 <?php
-
-// action/spiplistes_liste_des_abonnes.php
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
+/**
+ * Retourne le bloc agenda des envois
+ * @package spiplistes
+ */
+ // $LastChangedRevision$
+ // $LastChangedBy$
+ // $LastChangedDate$
+ 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/actions');
@@ -13,8 +14,10 @@ include_spip('inc/texte');
 include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_agenda');
 
-//CP-20080622
-// retourne le bloc agenda des envois
+/**
+ * Retourne le bloc agenda des envois
+ * @version CP-20080622
+ */
 function action_spiplistes_agenda_dist () {
 
 	include_spip('inc/autoriser');
@@ -30,4 +33,3 @@ function action_spiplistes_agenda_dist () {
 	exit(0);
 
 } //
-?>
