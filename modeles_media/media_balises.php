@@ -25,7 +25,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 	$ret = '';
 	// Doit-on afficher une légende ?
 	if ($env_legende || $env_titre || $env_descriptif || $env_credits || $env_poids || $env_type) {
-		$width = is_numeric($width) ? min($GLOBALS['meta']['media_largeur_max_legende'],max($GLOBALS['meta']['media_largeur_min_legende'],intval($width))) : $GLOBALS['meta']['media_largeur_max_legende'];
+		$width = is_numeric($width) ? min($GLOBALS['meta']['media_largeur_max_legende'],max($GLOBALS['meta']['media_largeur_min_legende'],intval($width))) : (isset($GLOBALS['meta']['media_largeur_max_legende']) ? $GLOBALS['meta']['media_largeur_max_legende'] : 350);
 		// Y a-t-il un modèle légende à utiliser ?
 		if ($env_legende && find_in_path('modeles/legende_'.$env_legende.'.html')) {
 			$ret = recuperer_fond('modeles/legende_'.$env_legende,array(
@@ -47,7 +47,7 @@ function calculer_balise_MEDIA_LEGENDE($conteneur,$width,$sql_id_document,$sql_t
 				$titre = typo($env_titre);
 				$crayons_titre = '';
 			} elseif ($env_titre=='titre' || $env_legende) {
-				$titre = typo($sql_titre);
+				$titre = typo(supprimer_numero($sql_titre));
 				$crayons_titre = defined('_DIR_PLUGIN_CRAYONS') ? ' crayon document-titre-'.$sql_id_document : '';
 			} else {
 				$titre = '';
@@ -202,7 +202,7 @@ function calculer_balise_MEDIA_LIEN($objet,$id_document,$lien,$titre_lien,$titre
 		return $object;
 	$a = '<a href="'.$l['url'].'"';
 	$a .= $l['class'] ? ' class="'.$l['class'].'"' : '';
-	$a .= $l['titre'] ? ' title="'.$l['titre'].'"' : '';
+	$a .= $l['titre'] ? ' title="'.attribut_html($l['titre']).'"' : '';
 	$a .= $l['lang'] ? ' hreflang="'.$l['lang'].'"' : '';
 	$a .= $l['mime'] ? ' type="'.$l['mime'].'"' : '';
 	$a .= '>';
@@ -223,16 +223,30 @@ function balise_MEDIA_TAILLE_dist($p) {
 }
 
 function calculer_balise_MEDIA_TAILLE($dim,$taille,$hauteur,$largeur,$sql_largeur,$sql_hauteur){
+	$hauteur_defaut = array(
+		'icone' => 52,
+		'petit' => 90,
+		'moyen' => 240,
+		'grand' => 480
+	);
+	$largeur_defaut = array(
+		'icone' => 52,
+		'petit' => 120,
+		'moyen' => 320,
+		'grand' => 640
+	);
 	// Une taille par défaut si le document n'en n'a pas
 	if (!is_numeric($sql_hauteur) || intval($sql_hauteur)<=0)
-		$sql_hauteur = $GLOBALS['meta']['media_taille_grand_hauteur'];
+		$sql_hauteur = isset($GLOBALS['meta']['media_taille_grand_hauteur']) ? $GLOBALS['meta']['media_taille_grand_hauteur'] : 480;
 	if (!is_numeric($sql_largeur) || intval($sql_largeur)<=0)
-		$sql_largeur = $GLOBALS['meta']['media_taille_grand_largeur'];
+		$sql_largeur = isset($GLOBALS['meta']['media_taille_grand_largeur']) ? $GLOBALS['meta']['media_taille_grand_largeur'] : 640;
 	// Hauteur visée
 	if (is_numeric($hauteur) && intval($hauteur)>0)
 		$hauteur = intval($hauteur);
-	elseif (in_array($taille,array('icone','petit','moyen','grand')))
+	elseif (in_array($taille,array('icone','petit','moyen','grand')) && isset($GLOBALS['meta']['media_taille_'.$taille.'_hauteur']))
 		$hauteur = $GLOBALS['meta']['media_taille_'.$taille.'_hauteur'];
+	elseif (in_array($taille,array('icone','petit','moyen','grand')))
+		$hauteur = $hauteur_defaut[$taille];
 	elseif (is_numeric($taille) && intval($taille)>0)
 		$hauteur = intval($taille);
 	else
@@ -240,8 +254,10 @@ function calculer_balise_MEDIA_TAILLE($dim,$taille,$hauteur,$largeur,$sql_largeu
 	// Largeur visée
 	if (is_numeric($largeur) && intval($largeur)>0)
 		$largeur = intval($largeur);
-	elseif (in_array($taille,array('icone','petit','moyen','grand')))
+	elseif (in_array($taille,array('icone','petit','moyen','grand')) && isset($GLOBALS['meta']['media_taille_'.$taille.'_largeur']))
 		$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
+	elseif (in_array($taille,array('icone','petit','moyen','grand')))
+		$largeur = $largeur_defaut[$taille];
 	elseif (is_numeric($taille) && intval($taille)>0)
 		$largeur = intval($taille);
 	else
