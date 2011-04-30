@@ -33,8 +33,15 @@ function courtcircuit_url_redirection($id_rubrique) {
 			'courtcircuit_selection_rubrique', 
 			array_merge(array('id_rubrique' => $id_rubrique),$config)
 			);
-		if (intval($redirect_rubrique))
-			$url = generer_url_entite(intval($redirect_rubrique), 'rubrique', '', '', true);
+		if (intval($redirect_rubrique)) {
+			// On applique à nouveau les règles de sélection à la sous-rubrique
+			// Si pas de redirectio on pointe sur la sous-rubrique
+			$redirection_sous_rubrique = courtcircuit_url_redirection(intval($redirect_rubrique));
+			if ($redirection_sous_rubrique != '')
+				$url = $redirection_sous_rubrique;
+			else
+				$url = generer_url_entite(intval($redirect_rubrique), 'rubrique', '', '', true);
+		}
 	}
 	return $url;
 }
