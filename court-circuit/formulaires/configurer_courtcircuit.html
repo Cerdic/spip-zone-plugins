@@ -9,6 +9,19 @@
 		<ul>
 		<li class="explication"><:courtcircuit:explication_configurer:></li>
 		#SET{ordre,1}
+		<li class="editer_variantes_squelettes[ (#ENV**{erreurs}|table_valeur{variantes_squelettes}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_variantes_squelettes:></label>
+			<p class="explication"><:courtcircuit:explication_variantes_squelettes:></p>
+			<div class="choix">
+				<input type="radio" name="variantes_squelettes" class="radio" id="variantes_squelettes_oui" value="oui" [(#ENV{variantes_squelettes,non}|=={oui}|oui) checked="checked"] />
+				<label for='variantes_squelettes_oui'><:item_oui:></label>
+			</div>
+			<div class="choix">
+				<input type="radio" name="variantes_squelettes" class="radio" id="variantes_squelettes_non" value="non" [(#ENV{variantes_squelettes,non}|=={non}|oui) checked="checked"] />
+				<label for='variantes_squelettes_non'><:item_non:></label>
+			</div>
+			#SET{ordre,#GET{ordre}|plus{1}}
+		</li>
 		<li class="editer_un_article[ (#ENV**{erreurs}|table_valeur{un_article}|oui)erreur]">
 			<label>#GET{ordre}) <:courtcircuit:label_un_article:></label>
 			<p class="explication"><:courtcircuit:explication_un_article:></p>
@@ -66,25 +79,25 @@
 			<label>#GET{ordre}) <:courtcircuit:label_plus_recent_branche:></label>
 			<p class="explication"><:courtcircuit:explication_plus_recent_branche:></p>
 			<div class="choix">
-				<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_oui" value="oui" [(#ENV{plus_recent_branche,oui}|=={oui}|oui) checked="checked"] />
+				<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_oui" value="oui" [(#ENV{plus_recent_branche,non}|=={oui}|oui) checked="checked"] />
 				<label for='plus_recent_branche_oui'><:item_oui:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_non" value="non" [(#ENV{plus_recent_branche,oui}|=={non}|oui) checked="checked"] />
+				<input type="radio" name="plus_recent_branche" class="radio" id="plus_recent_branche_non" value="non" [(#ENV{plus_recent_branche,non}|=={non}|oui) checked="checked"] />
 				<label for='plus_recent_branche_non'><:item_non:></label>
 			</div>
 			#SET{ordre,#GET{ordre}|plus{1}}
 		</li>
-		<li class="editer_sousrubrique_titre[ (#ENV**{erreurs}|table_valeur{sousrubrique_titre}|oui)erreur]">
-			<label>#GET{ordre}) <:courtcircuit:label_sousrubrique_titre:></label>
-			<p class="explication"><:courtcircuit:explication_sousrubrique_titre:></p>
+		<li class="editer_sousrubrique[ (#ENV**{erreurs}|table_valeur{sousrubrique}|oui)erreur]">
+			<label>#GET{ordre}) <:courtcircuit:label_sousrubrique:></label>
+			<p class="explication"><:courtcircuit:explication_sousrubrique:></p>
 			<div class="choix">
-				<input type="radio" name="sousrubrique_titre" class="radio" id="sousrubrique_titre_oui" value="oui" [(#ENV{sousrubrique_titre,non}|=={oui}|oui) checked="checked"] />
-				<label for='sousrubrique_titre_oui'><:item_oui:></label>
+				<input type="radio" name="sousrubrique" class="radio" id="sousrubrique_oui" value="oui" [(#ENV{sousrubrique,oui}|=={oui}|oui) checked="checked"] />
+				<label for='sousrubrique_oui'><:item_oui:></label>
 			</div>
 			<div class="choix">
-				<input type="radio" name="sousrubrique_titre" class="radio" id="sousrubrique_titre_non" value="non" [(#ENV{sousrubrique_titre,non}|=={non}|oui) checked="checked"] />
-				<label for='sousrubrique_titre_non'><:item_non:></label>
+				<input type="radio" name="sousrubrique" class="radio" id="sousrubrique_non" value="non" [(#ENV{sousrubrique,oui}|=={non}|oui) checked="checked"] />
+				<label for='sousrubrique_non'><:item_non:></label>
 			</div>
 		</li>
 		</ul>

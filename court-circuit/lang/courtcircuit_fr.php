@@ -11,15 +11,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_configurer' => 'Les différentes règles ci-dessous sont testées dans cet ordre. Si aucune règle ne définit une redirection, alors la rubrique sera affichée normalement.',
 	'explication_plus_recent' => 'Rediriger la rubrique vers l\'article le plus récent de la rubrique ? (Sans effet si la rubrique ne contient pas d\'article.)',
 	'explication_plus_recent_branche' => 'Rediriger la rubrique vers l\'article le plus récent de la branche (soit parmi les articles de la rubrique et de ses sous-rubriques) ?',
-	'explication_sousrubrique_titre' => 'Rediriger la rubrique vers la première sous-rubrique (tri par rang et par titre) ?',
+	'explication_sousrubrique' => 'Parcourir la première sous-rubrique (tri par numéro du titre et date) ? Les règles de redirection seront testées à nouveau dans cette sous-rubrique.',
 	'explication_rang_un'=> 'Si les articles de la rubrique sont numérotés, rediriger vers l\'article ayant le plus petit rang ?',
 	'explication_un_article' => 'Si la rubrique ne contient qu\'un seul article publié, rediriger vers cet article ?',
+	'explication_variantes_squelettes' => 'Si vous utilisez des <a href="http://www.spip.net/fr_article3445.html">variantes de squelette</a> (exemples : <i>rubrique&#8209;2.html</i>, <i>rubrique=3.html</i>), ne pas rediriger les rubriques pour lesquelles une variante de squelette s\'applique ?',
 	'label_article_accueil' => 'Article d\'accueil',
 	'label_plus_recent' => 'Article le plus récent',
 	'label_plus_recent_branche' => 'Article de la branche le plus récent',
 	'label_rang_un' => 'Article numéroté',
 	'label_un_article' => 'Seul article de la rubrique',
-	'label_sousrubrique_titre' => 'Sous-rubrique (par titre)',
+	'label_sousrubrique' => 'Sous-rubriques',
+	'label_variantes_squelettes' => 'Variantes de squelettes',
 );
 
 ?>

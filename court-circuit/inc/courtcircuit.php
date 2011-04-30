@@ -7,6 +7,21 @@ function courtcircuit_url_redirection($id_rubrique) {
 	if (isset($GLOBALS['meta']['courtcircuit']))
 		$config = unserialize($GLOBALS['meta']['courtcircuit']);
 	else $config = array();
+	// Tester d'abord les variantes de squelettes
+	if (isset($config['variantes_squelettes']) && $config['variantes_squelettes']=='oui') {
+		$squelette_rubrique = substr(find_in_path('rubrique.html'),0,-5);
+		$flux = array(
+			'data' => $squelette_rubrique,
+			'args' => array(
+				'ext' => 'html',
+				'id_rubrique' => $id_rubrique
+			)
+		);
+		include_spip('public/styliser');
+		$flux = styliser_par_rubrique($flux);
+		if ($flux['data'] != $squelette_rubrique)
+			return '';
+	}
 	$redirect_article = recuperer_fond(
 		'courtcircuit_selection_article', 
 		array_merge(array('id_rubrique' => $id_rubrique),$config)
