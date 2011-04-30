@@ -3,10 +3,11 @@
 	<icon>images/courtcircuit-128.png</icon>
 	<description>Acc&eacute;s direct aux articles.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3831</lien>
-	<version>2.0.1</version>
+	<version>2.1.0</version>
 	<etat>test</etat>
 	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph] - 2011</auteur>
 	<prefix>courtcircuit</prefix>
+	<fonctions>courtcircuit_fonctions.php</fonctions>
 	<pipeline>
 		<nom>styliser</nom>
 		<inclure>courtcircuit_pipelines.php</inclure>
