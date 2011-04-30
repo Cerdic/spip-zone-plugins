@@ -18,11 +18,13 @@
 		][
 		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|oui)
 			[<:spip_proprio:siren:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
-		][<br /><:spip_proprio:numero_maj:> <:spip_proprio:tva_intracommunautaire:> 
+		][(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tva_nonapplicable]}|=={oui}|non)
+		<br /><:spip_proprio:numero_maj:> <:spip_proprio:tva_intracommunautaire:> 
 			(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tvaintra]}|typo)[ 
 				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
 			]
-		]
+		][(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tva_nonapplicable]}|=={oui}|oui)
+			<br /><:spip_proprio:tva_non_applicable:>]
 	]
 ]
 [<br />
@@ -37,5 +39,6 @@
 	[ - (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_pays]})]
 ]
 [<br /><:spip_proprio:tel:> : (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telephone]}|spip_proprio_formater_telephone)]
+[<br /><:spip_proprio:fax:> : (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telecopie]}|spip_proprio_formater_telephone)]
 [<br /><:spip_proprio:mel:> : <a href='mailto:[(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})]' title="<:spip_proprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})</a>]
 </small>
