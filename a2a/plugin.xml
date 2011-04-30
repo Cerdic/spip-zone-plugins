@@ -1,7 +1,7 @@
 <plugin>
     <nom>A2A</nom>
     <auteur>Collectif SPIP</auteur>
-    <version>0.4</version>
+    <version>0.4.1</version>
     <version_base>0.3</version_base>
     <etat>stable</etat>
     <icon>images/a2a-64.png</icon>
