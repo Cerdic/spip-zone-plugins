@@ -87,6 +87,7 @@ p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: #GET{m
 /* Liens */
 a {}
 a:hover {}
+a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
 .on { font-weight: bold; }
 
 /* end */
