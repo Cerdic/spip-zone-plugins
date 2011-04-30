@@ -32,9 +32,9 @@
 include_spip('inc/presentation');
 include_spip('inc/spiplistes_api_journal');
 
-
 /**
- * retourne la puce qui va bien
+ * Retourne la puce qui va bien
+ * @return string|null
  */
 function spiplistes_bullet_titre_liste ($type, $statut, $id=false, $return=false) {
 	$result = $img = $taille = "";
@@ -55,7 +55,7 @@ function spiplistes_bullet_titre_liste ($type, $statut, $id=false, $return=false
 /**
  * Renvoie un element de definition courriers/listes
  * (icone, puce, alternate text, etc.)
- * voir spsiplites_mes_options, tableau $spiplistes_items
+ * voir spiplistes_mes_options, tableau $spiplistes_items
  * @global array $spiplistes_items
  * @return string|null
  */
@@ -72,6 +72,9 @@ function spiplistes_items_get_item($item, $statut) {
 	}
 }
 
+/**
+ * @return string
+ */
 function spiplistes_gros_titre ($titre, $ze_logo='', $return = false) {
 	if(!spiplistes_spip_est_inferieur_193()) {
 		$ze_logo = ""; // semble ne plus etre utilise dans exec/
@@ -81,7 +84,11 @@ function spiplistes_gros_titre ($titre, $ze_logo='', $return = false) {
 	if($return) return($r);
 }
 
-// CP:20080322 :
+/**
+ * @version CP:20080322
+ * @param string $statut
+ * @return string
+ */
 function spiplistes_get_icone_auteur ($statut) {
 	switch($statut) {
 		case "0minirezo":
@@ -97,7 +104,17 @@ function spiplistes_get_icone_auteur ($statut) {
 	return($logo);
 }
 
-// CP-20080323
+/**
+ * Bouton Valider pour les formulaires en /exec/
+ * @version CP-20080323
+ * @param string $name
+ * @param string $value
+ * @param bool $reset
+ * @global string $spip_lang_right
+ * @staticvar string $submit_value Titre du bouton
+ * @staticvar string $reset_value Titre lien reset
+ * @return string
+ */
 function spiplistes_form_bouton_valider ($name, $value = "", $reset = false) {
 	global $spip_lang_right;
 	static $submit_value, $reset_value;
@@ -122,21 +139,39 @@ function spiplistes_form_bouton_valider ($name, $value = "", $reset = false) {
 	return($result);
 }
 
-// CP-20080323
+/**
+ * Debut de formulaire HTML
+ * @version CP-20080323
+ * @param string $action
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @param string $post
+ * @return string|null
+ */
 function spiplistes_form_debut ($action = '#', $return = false, $method = 'post') {
 	$result = "<form action='".$action."' method='$method'>\n";
 	if($return) return($result);
 	else echo($result);
 }
 
-// CP-20080323
+/**
+ * Fin de formulaire HTML
+ * @version CP-20080323
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @return string|null
+ */
 function spiplistes_form_fin ($return = false) {
 	$result = "</form>\n";
 	if($return) return($result);
 	else echo($result);
 }
 
-// CP-20080323
+/**
+ * Debut de fieldset de formulaire HTML
+ * @version CP-20080323
+ * @param string $legend
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @return string|null
+ */
 function spiplistes_form_fieldset_debut ($legend = "", $return = false) {
 	if(!empty($legend)) {
 		$legend = "<legend style='padding:0 1ex;'>".$legend."</legend>\n";
@@ -146,14 +181,24 @@ function spiplistes_form_fieldset_debut ($legend = "", $return = false) {
 	else echo($result);
 }
 
-// CP-20080323
+/**
+ * Fin de fieldset de formulaire HTML
+ * @version CP-20080323
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @return string|null
+ */
 function spiplistes_form_fieldset_fin ($return = false) {
 	$result = "</fieldset>\n";
 	if($return) return($result);
 	else echo($result);
 }
 
-// CP-20080323
+/**
+ * @version CP-20080323
+ * @param string $texte
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @return string|null
+ */
 function spiplistes_fieldset_legend_detail ($texte = '', $return = false) {
 	$result = "";
 	if(!empty($texte)) {
@@ -163,20 +208,36 @@ function spiplistes_fieldset_legend_detail ($texte = '', $return = false) {
 	else echo($result);
 }
 
-// CP-20080323
+/**
+ * @version CP-20080323
+ * @param string $description
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @return string|null
+ */
 function spiplistes_form_description ($description, $return = false) {
 	$result = spiplistes_form_message($description, $return);
 	if($return) return($result);
 }
 
-// CP-20080323
+/**
+ * @version CP-20080323
+ * @param string $description
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @return string|null
+ */
 function spiplistes_form_description_alert ($description, $return = false) {
 	$result = spiplistes_form_message($description, $return, "message-alerte");
 	if($return) return($result);
 }
 
-// CP-20080323
-function spiplistes_form_message ($message, $return = false, $class = "") {
+/**
+ * @version CP-20080323
+ * @param string $message
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @param string $class
+ * @return string|null
+ */
+function spiplistes_form_message ($message, $return = false, $class = '') {
 	$result = "";
 	if(!empty($message)) {
 		$result = "<p class='verdana2 $class'>".$message."</p>\n";
@@ -185,7 +246,18 @@ function spiplistes_form_message ($message, $return = false, $class = "") {
 	else echo($result);
 }
 
-// CP-20080502
+/**
+ * Retourne un element HTML
+ * 
+ * @param string $name
+ * @param string $value
+ * @param string $label
+ * @param bool $checked si case a cocher cochee
+ * @param bool $return Imprimer si TRUE (utilise echo())
+ * @param bool $div Envelopper le resultat si TRUE 
+ * @version CP-20080502
+ * @return string|null
+*/
 function spiplistes_form_input_item ($type, $name, $value, $label, $checked, $return = false, $div = true, $id = false) {
 	$result = ""
 		. "<label class='verdana2'>"
@@ -200,13 +272,34 @@ function spiplistes_form_input_item ($type, $name, $value, $label, $checked, $re
 	else echo($result);
 }
 
-// CP-20080323
+/**
+ * Retourne un element HTML case a cocher
+ *
+ * {@link spiplistes_form_input_item()}
+ * @param string $name
+ * @param string $value
+ * @param string $label
+ * @param bool $checked case a cocher cochee
+ * @param bool $return Imprimer si TRUE (utilise echo())
+ * @param bool $div Envelopper le resultat si TRUE 
+ * @version CP-20080323
+ * @return string|null
+*/
 function spiplistes_form_input_checkbox ($name, $value, $label, $checked, $return = false, $div = true) {
 	$result = spiplistes_form_input_item('checkbox', $name, $value, $label, $checked, $return, $div);
 	if($return) return($result);
 }
 
-// CP-20080502
+/**
+ * @version CP-20080502
+ * @param string $name
+ * @param string $value
+ * @param string $label
+ * @param bool $checked
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @param bool $div
+ * @return string|null
+ */
 function spiplistes_form_input_radio ($name, $value, $label, $checked, $return = false, $div = true) {
 	static $id;
 	$id++;
@@ -214,11 +307,17 @@ function spiplistes_form_input_radio ($name, $value, $label, $checked, $return =
 	if($return) return($result);
 }
 
-// From SPIP-Listes-V: CP:20070923
-function spiplistes_debut_raccourcis ($titre = "", $raccourcis = true, $return = false) {
+/**
+ * @version CP-20070923
+ * @param string $titre
+ * @param bool $raccourcis
+ * @param bool $return Retourne value si FALSE, sinon echo ()
+ * @return string|null
+ */
+function spiplistes_debut_raccourcis ($titre = '', $raccourcis = true, $return = false) {
   
-  $result = ""
-		. ($raccourcis ? creer_colonne_droite('', true) : "")
+  $result = ''
+		. ($raccourcis ? creer_colonne_droite('', true) : '')
 		. debut_cadre_enfonce('', true)
 		. "<span class='verdana2' style='font-size:80%;text-transform: uppercase;font-weight:bold;'>$titre</span>"
 		. "<br />"
@@ -704,10 +803,11 @@ function spiplistes_nb_abonnes_liste_str_get ($id_liste, $nb_abos = false, $html
 	return ($result);
 }
 
-/* 
- * CP-20081126
- * @return Nombre de destinataires d'une liste, chaine html
- * @param $nb 
+/** 
+ * Nombre de destinataires d'une liste, chaine html
+ * @version CP-20081126
+ * @param int $nb
+ * @return string
  */
 function spiplistes_nb_destinataire_str_get ($nb) {
 	$result = ($nb > 0)
@@ -721,10 +821,11 @@ function spiplistes_nb_destinataire_str_get ($nb) {
 	return($result);
 }
 
-/*
- * CP-20081126
- * @return Nombre de listes, chaine html
+/**
+ * Nombre de listes, chaine html
+ * @version CP-20081126
  * @param $nb Object
+ * @return string
  */
 function spiplistes_nb_listes_str_get ($nb) {
 	if(!$nb) return ("");
@@ -736,10 +837,11 @@ function spiplistes_nb_listes_str_get ($nb) {
 	return($result);
 }
 
-/*
- * CP-20080610
- * @return Nombre de moderateurs d'une liste, chaine html
- * @param $nb
+/**
+ * Nombre de moderateurs d'une liste, chaine html
+ * @version CP-20080610
+ * @param int|bool $nb
+ * @return string
  */
 function spiplistes_nb_moderateurs_liste_str_get ($nb) {
 	$result = ""
@@ -756,7 +858,11 @@ function spiplistes_nb_moderateurs_liste_str_get ($nb) {
 	return ($result);
 }
 
-// CP-20080510
+/**
+ * @version CP-20080510
+ * @param string $titre
+ * @return string
+ */
 function spiplistes_titre_boite_info ($titre = "") {
 	global $spip_display, $spip_lang_left;
 	$result =
@@ -770,24 +876,39 @@ function spiplistes_titre_boite_info ($titre = "") {
 	return($result);
 }
 
-// termine page si la donnee n'existe pas dans la base
+/**
+ * termine page si la donnee n'existe pas dans la base
+ * @param bool $return
+ * @return string
+ */
 function spiplistes_terminer_page_donnee_manquante ($return = true) {
 	spiplistes_terminer_page_message (_T('spiplistes:Pas_de_donnees'), $return);
 }
 
-
-// termine la page (en affichant message ou retour)
+/**
+ * termine la page (en affichant message ou retour)
+ * @param string $message
+ * @return string
+ */
 function spiplistes_terminer_page_message ($message) {
-	$result = "<p>$message</p>";
+	$result = '<p>'.$message.'</p>'.PHP_EOL;
 	if($return) return($result);
 	else echo($result);
 }
 
-// termine la page (a employer qd droits insuffisants)
+/**
+ * termine la page (a employer qd droits insuffisants)
+ * @param bool $return
+ * @return string
+ */
 function spiplistes_terminer_page_non_autorisee ($return = true) {
 	spiplistes_terminer_page_message (_T('avis_non_acces_page'), $return);
 }
 
+/**
+ * @param string $id
+ * @return string
+ */
 function spiplistes_debut_block_visible ($id="") {
 	if(!function_exists('debut_block_visible')) {
 		include_spip('inc/layer');
@@ -796,6 +917,10 @@ function spiplistes_debut_block_visible ($id="") {
 	return(debut_block_visible($id));
 }
 
+/**
+ * @param string $id
+ * @return string
+ */
 function spiplistes_debut_block_invisible ($id="") {
 	if(!function_exists('debut_block_invisible')) {
 		include_spip('inc/layer');
@@ -804,16 +929,20 @@ function spiplistes_debut_block_invisible ($id="") {
 	return(debut_block_invisible($id));
 }
 
-// CP-20080430: renvoie tableau de listes valides avec nb abonnes
-// du style :
-//   array(
-//     array(
-//       $id_liste
-//       , $titre // titre de la liste
-//       , $nb_abos
-//     )
-//   , ...
-//   )
+/**
+ * Renvoie tableau de listes valides avec nb abonnes
+ * du style :
+ *   array(
+ *     array(
+ *       $id_liste
+ *       , $titre  // titre de la liste
+ *       , $nb_abos
+ *     )
+ *   , ...
+ *   )
+ * @version CP-20080430
+ * @return array|null
+ */
 function spiplistes_listes_lister_abos () {
 	$sql_select = array('l.id_liste', 'l.titre', 'COUNT(a.id_auteur) AS nb_abos');
 	$sql_from = "spip_listes as l LEFT JOIN spip_auteurs_listes AS a ON l.id_liste=a.id_liste";
@@ -829,7 +958,7 @@ function spiplistes_listes_lister_abos () {
 	return(NULL);
 }
 
-/*
+/**
  * CP-20081112
  * deux fonctions issues de fmp3
  * - fmp3_envelopper_script()
@@ -859,7 +988,7 @@ function spiplistes_envelopper_script ($source, $format) {
 } // end spiplistes_envelopper_script()
 
 /**
- * Complément des deux 'compacte'. supprimer les espaces en trop.
+ * Complement des deux 'compacte'. supprimer les espaces en trop.
  * 
  * @return string
  */ 
@@ -868,11 +997,16 @@ function spiplistes_compacter_script ($source, $format) {
 	if(!empty($source)) {
 		$source = compacte($source, $format);
 		$source = preg_replace(",/\*.*\*/,Ums","",$source); // pas de commentaires
-		$source = preg_replace('=[[:space:]]+=', ' ', $source); // réduire les espaces
+		$source = preg_replace('=[[:space:]]+=', ' ', $source); // reduire les espaces
 	}
 	return($source);
 } // end spiplistes_compacter_script()
 
+/**
+ * Donne les infos systemes du plugin.
+ * 
+ * @return string
+ */ 
 function spiplistes_plugin_get_infos($plug) {
 	if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
 		$get_infos = charger_fonction('get_infos','plugins');
@@ -887,7 +1021,7 @@ function spiplistes_plugin_get_infos($plug) {
 /**
  * Petite signature du plugin
  *
- * Signature affichée en bas de formualire en espace privé.
+ * Signature affichee en bas de formulaire en espace prive.
  * @param $prefix string prefix du plugin
  * @param $html bool si true, renvoyer le resultat au format html
  * @param $verifier_svn si true
@@ -930,10 +1064,11 @@ function spiplistes_html_signature ($prefix, $html = true, $verifier_svn = false
 	return($result);
 } // end spiplistes_html_signature()
 
-/*
- * @return le numero de revision svn
+/**
+ * Le numero de revision svn
  * @param $prefix prefix du plugin
  * @param $s si true, va chercher le numero dans le repertoire du plugin
+ * @return string
  */
 function spiplistes_current_svnrevision_get ($prefix, $verifier_svn) {
 	static $svn_revision = false;
@@ -980,7 +1115,7 @@ function spiplistes_current_svnrevision_get ($prefix, $verifier_svn) {
 	return(false);
 } // end spiplistes_current_svnrevision_get()
 
-/*
+/**
  * lire le fichier, en esperant trouver le mot cle svn dans les $buf_size premiers caracteres
  * @return le numero de revision svn
  * @param $filename
@@ -1000,7 +1135,7 @@ function spiplistes_svn_revision_read ($filename, $buf_size = 2048) {
 	return (false);
 } // end spiplistes_svn_revision_read()
 
-/*
+/**
  * @return Renvoie ou affiche une boite d'alerte
  */
 function spiplistes_boite_alerte ($message, $return = false) {
@@ -1016,9 +1151,10 @@ function spiplistes_boite_alerte ($message, $return = false) {
 	else echo($result);
 }
 
- /*
-  * @return un petit bloc info sur le plugin
+ /**
+  * Un petit bloc info sur le plugin
   * @param $prefix Object
+  * @return string
   */
 function spiplistes_boite_meta_info ($prefix) {
 	include_spip('inc/meta');
@@ -1067,15 +1203,18 @@ function spiplistes_boite_meta_info ($prefix) {
 	return($result);
 } // spiplistes_boite_meta_info()
 
-/*
- * 
- * @return 
+/**
+ * Petite boite info pour la page de configuration du plugin
+ *
+ * Apparait sur la gauche de la page. Affiche infos de configuration.
  * @param $array Object
  * @param $recursive Object[optional]
+ * @global string $spip_lang_left
+ * @return string
  */
 function spiplistes_boite_meta_info_liste($array, $recursive = false) {
 	global $spip_lang_left;
-	$result = "";
+	$result = '';
 	if(is_array($array)) {
 		
 		$eviter = array(
@@ -1088,7 +1227,7 @@ function spiplistes_boite_meta_info_liste($array, $recursive = false) {
 		
 		foreach($array as $key => $value) { 
 			if(!in_array($key, $eviter)) {
-				$sub_result = "";
+				$sub_result = '';
 				if(is_array($value)) {
 					if($recursive) {
 						$sub_result = spiplistes_boite_meta_info_liste($value);
@@ -1109,12 +1248,12 @@ function spiplistes_boite_meta_info_liste($array, $recursive = false) {
 	return($result);
 }
 
-/*
- * petit bouton aide a placer a droite du titre de bloc
- * @return 
+/**
+ * Petit bouton aide a placer a droite du titre de bloc
  * @param $fichier_exec_aide Object
  * @param $aide Object[optional]
  * @param $return Object[optional]
+ * @return string|null
  */
 function spiplistes_plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
 	include_spip('inc/minipres');
@@ -1148,9 +1287,9 @@ function spiplistes_plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
 	else echo($result);
 } // spiplistes_plugin_aide()
 
-/*
- * @return date, chaine html
- * @param $date 
+/**
+ * @param string $date 
+ * @return string date, chaine html
  */
 function spiplistes_affdate ($date) {
 	$result = "";
@@ -1168,4 +1307,3 @@ function spiplistes_affdate ($date) {
 	return($result);
 }
 
-?>
