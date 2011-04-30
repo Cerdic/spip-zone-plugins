@@ -37,20 +37,20 @@
   font-weight: bold;
   border: 0;
   [border-bottom: 1px solid (#VAR{acsRubnavSep});][
-  (#MODELE{c_css_border-radius}{c=Recherche}{var=BordRond}{v=sauf_bas})]
+  (#MODELE{c_css_border-radius}{c=Recherche}{var=BordRond}{sauf=bottom})]
 }
 
 [(#REM) submit]
 .cRecherche .formulaire_recherche input.submit {
   margin:3px;
   padding: 2px;
-  border: thin solid #VAR{acsRechercheFond};
+  border: thin solid #VAR{acsRechercheFond, transparent};
   border-radius: 4px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -khtml-border-radius: 4px;
 }
 .cRecherche .formulaire_recherche input.submit:hover {
-  [background: (#VAR{acsRechercheTitreFond});
-  border: thin outset #VAR{acsRechercheTitreFond};]
+  [background: (#VAR{acsRechercheTitreFond});][
+  border: thin outset (#VAR{acsRechercheTitreFond});]
 }

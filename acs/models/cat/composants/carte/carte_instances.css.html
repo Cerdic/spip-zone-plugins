@@ -1,11 +1,4 @@
 [(#CACHE{0})]
-/*
-.cCarte#NIC, .cCarte#NIC .olMapViewport {
-  min-height: 150px;
-  min-width: 150px;
-  height:100%;
-}
-*/
 .cCarte#NIC .olFramedCloudPopupContent p {
   margin: 0;[
   text-align: justify;
@@ -21,4 +14,10 @@
 }
 .cCarte#NIC .olFramedCloudPopupContent div.date {
   text-align: #LANG_RIGHT;
+}
+.cCarte .olPopupCloseBox {
+  background: url("[(#ACS_CHEMIN{[mapui/(#VAR{acsCarte[(#NIC)]Close,close.gif})]}|url_absolue)]") no-repeat;
+}
+.cCarte .olPopupCloseBox:hover {
+  background: url("[(#ACS_CHEMIN{[mapui/(#VAR{acsCarte[(#NIC)]CloseOver,close_over.gif})]}|url_absolue)]") no-repeat;
 }

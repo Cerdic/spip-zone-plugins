@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'meta_page_auteurs' => 'Tous les auteurs',
 'meta_page_auteur' => 'Tous les textes de',
 'meta_page_mot' => 'Mot-clé',
+'meta_page_mots' => 'Mots-clés',
 'meta_page_forums' => 'Forums',
 'meta_page_agenda' => 'Agenda',
 

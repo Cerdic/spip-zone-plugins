@@ -1,6 +1,6 @@
 <composant>
   <!-- Nom du composant -->
-  <nom>NavGroup</nom>
+  <nom>Navgroup</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
   <version>0.8.1</version>
@@ -20,6 +20,14 @@
   </variable>
 
   <variable>
+    <nom>Style</nom>
+    <type>choix</type>
+    <option>accordion</option>
+    <option>menu</option>
+    <valeur>accordion</valeur>
+  </variable>
+  
+  <variable>
     <nom>Titre</nom>
     <type>choix</type>
     <option>oui</option>
@@ -37,11 +45,23 @@
     <label>non</label>
   </variable>
   <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>  
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
   <variable>
     <nom>BordRond</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>Sep</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Bottom</nom>
     <type>text</type>
   </variable>
 

@@ -1,15 +1,10 @@
-[(#REM)
+[(#CACHE{7*24*3600,cache-client})][(#HTTP_HEADER{'Content-Type: text/javascript'})][(#REM)
 
   Charger la librairie ACS, ses dependances, et les javascripts des composants
   
   Ne PAS compacter les js inclus dans ce fichier : c'est lui qu'on doit compacter
 
-]#CACHE{7*24*3600,cache-client}
-#HTTP_HEADER{'Content-Type: text/javascript'}
-
-[(#HEADER_COMPOSANTS{javascript})]
-
-[(#REM)
+][(#HEADER_COMPOSANTS{javascript})][(#REM)
 /**
  * @fn wrapUrl(url, c)
  * @brief Transforme une url spip pour "wrapper" un composant (requis pour Ajax)

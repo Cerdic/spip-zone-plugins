@@ -1,6 +1,6 @@
 <composant>
   <!-- Nom du composant -->
-  <nom>NavKeys</nom>
+  <nom>Navkeys</nom>
   <!-- Auteur du composant -->
   <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
   <version>0.8.1</version>
@@ -93,6 +93,7 @@
     <nom>8</nom>
     <type>key</type>
   </variable>
+  <variable>
     <nom>p8</nom>
     <type>img</type>
     <chemin>pictos</chemin>

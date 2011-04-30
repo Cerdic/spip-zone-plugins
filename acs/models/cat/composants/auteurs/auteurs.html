@@ -1,4 +1,4 @@
-<div class="#PINCEAU{auteurs}">
+[(#CACHE{0})]<div class="#PINCEAU{auteurs}">
 [(#ENV{page}|=={auteurs}|?{' '})<INCLURE{fond=composants/auteurs/boucle-auteurs}{env}{self}{debut_auteurs}{ajax}]
 [(#ENV{page}|!={auteurs}|?{' '})<INCLURE{fond=composants/auteurs/bloc-auteurs}{env}{debut_auteurs}{id_auteur}>]
 </div>

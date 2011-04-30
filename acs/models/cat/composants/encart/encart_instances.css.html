@@ -10,12 +10,12 @@
 .cEncart#NIC .entete {
   [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}})[ url("[(#ACS_CHEMIN{trame/})](#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}})") repeat top left];]
   [border-bottom: 1px solid (#VAR{#EVAL{'acsEncart'.'#NIC'.'Bord/Color'}});]
-  [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|!={rubriques}|?{' '})[(#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{v=sauf_bas})]]
+  [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|!={rubriques}|?{' '})[(#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{sauf=bottom})]]
 }
 [(#VAR{#EVAL{'acsEncart'.'#NIC'.'Type'}}|=={rubriques}|?{' '})
 .cEncart#NIC .entete_rub {
   [background: (#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFond'}})[ url("[(#ACS_CHEMIN{trame/})](#VAR{#EVAL{'acsEncart'.'#NIC'.'TitreFondImage'}})") repeat top left];][
-  (#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{v=sauf_bas})]
+  (#MODELE{c_css_border-radius}{c=Encart}{nic=#NIC}{sauf=bottom})]
  }
 [.cEncartClass .entete_rub .soulignement {
   height: (#VAR{#EVAL{'acsEncart'.'#NIC'.'SouligneRubHeight'}});

@@ -31,7 +31,7 @@ function composants($c) {
 	// Affichage de la box de gestion du composant
 	$r .= acs_box(
 				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td>'.$instances.'<td>'.$over.'</td></tr></table>',
-				'<form id="acs" name="acs" action="?exec=acs&onglet=composants" method="post">'.
+				'<form id="acs" name="acs" action="?exec=acs&onglet=composants&composant='.$c->class.'" method="post">'.
 				$c->edit().
 				'<table width="100%"><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.
 				'<input type="submit" class="fondo" name="'._T('bouton_valider').'" value="'._T('bouton_valider').'">'.

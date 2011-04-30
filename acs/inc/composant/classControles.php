@@ -76,7 +76,7 @@ class ctlImg extends Controle {
     $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
     if ($this->param['label'] != 'non')
       $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
-    $r .= '<td><input type="text" id="'.$this->var.'_'.$this->wid.'" name="'.$this->var.'_'.$this->wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$image.'" size="40" class="forml" /></td>';
+    $r .= '<td><input type="text" id="'.$this->var.'_'.$this->wid.'" name="'.$this->var.'_'.$this->wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$this->value.'" size="40" class="forml" /></td>';
     $r .= '<td>&nbsp;</td><td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$this->var.'_'.$this->wid.'\'], document.forms[\'acs\'].elements[\''.$this->var.'_'.$this->wid.'\'].value, \''.$path.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a>'.$err.'</td></tr></table></div>';
     return $r;
   }
@@ -212,7 +212,7 @@ class ctlText extends Controle {
     $r = '<table width="100%"><tr>';
     if ($this->param['label'] != 'non')
       $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
-    $r .= '<td><input type="text" name="'.$this->var.'_'.$this->wid.'" size="'.$this->param['taille'].'" maxlength="'.$this->param['taille'].'" class="forml" value="'.$this->value.'" /></td></tr></table>';
+    $r .= '<td><input type="text" name="'.$this->var.'_'.$this->wid.'" size="'.$this->param['taille'].'" maxlength="'.$this->param['taille'].'" class="forml" value="'.htmlspecialchars($this->value).'" /></td></tr></table>';
     return $r;
   }
 }
@@ -241,7 +241,9 @@ class ctlChoix extends Controle {
   public function draw() {
     if (!is_array($this->param['option']))
       return 'Pas d\'options pour '.$this->nom;
-    $r = '<table><tr valign="middle"><td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label></td>';
+    $r = '<table><tr valign="middle">';
+    if ($this->param['label'] != 'non')    
+      $r .= '<td align="'.$GLOBALS['spip_lang_right'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label></td>';
     foreach($this->param['option'] as $option) {
       switch($option) {
         case 'oui':
@@ -292,8 +294,7 @@ class ctlUse extends Controle {
  */
 class ctlKey extends Controle {
   public function draw() {
-    global $spip_lang, $spip_lang_left, $spip_lang_right;
-    
+
     // Requis pour fonction typo()
     include_spip('inc/texte');
   
@@ -319,6 +320,36 @@ class ctlKey extends Controle {
         $titre_mot = typo($row_keys['titre']);
         $r .= '<option value="'.$titre_mot.'"'.($titre_mot == $vmot ? ' selected' : '').'>'.$titre_mot.'</option>';
       }   
+    }
+    $r .= '</select></td></tr></table></div>';
+    return $r;
+  }
+}
+
+/**
+ * \~french
+ * Classe ctlKeyGroup : Choix d'un groupe de mots-clefs
+ *
+ * \~english
+ * ctlKeyGroup class : keywords group choice
+ */
+class ctlKeyGroup extends Controle {
+  public function draw() {
+    
+    // Requis pour fonction typo()
+    include_spip('inc/texte');
+  
+    $vid_group = $this->value;
+    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
+    if ($this->param['label'] != 'non')
+      $r .= '<td><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
+    $r .= '<td><select id="select_'.$this->var.'_'.$this->wid.'" name="'.$this->var.'_'.$this->wid.'" class="forml" title="'.$this->var.' = '.$vid_group.'">';
+    $r .= '<option value=""'.($vid_group =='' ? ' selected' : '').'></option>'; 
+    $groups_query = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");  
+    while ($row_groupes = sql_fetch($groups_query)) {
+      $id_groupe = $row_groupes['id_groupe'];
+      $titre_groupe = typo($row_groupes['titre']);
+      $r .= '<option value="'.$id_groupe.'"'.($id_groupe == $vid_group ? ' selected' : '').'>'.$titre_groupe.'</option>';
     }
     $r .= '</select></td></tr></table></div>';
     return $r;
@@ -370,6 +401,7 @@ class ctlHidden extends Controle {
 }
 
 /**
+ * \~french
  * Retourne la traduction spécifique au composant,
  * une traduction par défaut, ou le texte 
  */

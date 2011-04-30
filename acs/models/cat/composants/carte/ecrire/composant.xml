@@ -10,12 +10,12 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>400</valeur>
+    <valeur>300</valeur>
   </param>
   <param>
     <nom>preview_type</nom>
     <valeur>inline</valeur>
-  </param>  
+  </param>
   <param>
     <nom>instanciable</nom>
   </param>
@@ -114,6 +114,53 @@
     <option>non</option>
     <valeur>non</valeur>
   </variable>
+  <variable>
+    <nom>PictosArticles</nom>
+    <type>KeyGroup</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>PictosRubriques</nom>
+    <type>KeyGroup</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Mots</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Rubriques</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Articles</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+    <label>non</label>
+  </variable>
+    
+  <variable>
+    <nom>Close</nom>
+    <type>img</type>
+    <chemin>mapui</chemin>
+    <valeur>close.gif</valeur>
+  </variable>
+  <variable>
+    <nom>CloseOver</nom>
+    <type>img</type>
+    <chemin>mapui</chemin>
+    <valeur>close_over.gif</valeur>
+  </variable>
   
   <variable>
     <nom>TitreFontSize</nom>
@@ -152,5 +199,17 @@
     <option>non</option>
     <valeur>oui</valeur>
   </variable>
-
+  <variable>
+    <nom>LastUpdate</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>LogoMax</nom>
+    <type>text</type>
+    <value>100</value>
+  </variable>
+  
 </composant>

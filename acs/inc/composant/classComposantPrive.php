@@ -59,8 +59,11 @@ class AdminComposant {
 		$this->optionnel = 'oui';
 		$this->enable = true;
 
-		// Lit les paramètres de configuration du composant
-		$config = spip_xml_load($this->rootDir.'/ecrire/composant.xml');
+		// Lit les paramètres de configuration du composant, en tenant compte d'un overide eventuel
+		if (is_readable($this->rootDir.'/ecrire/composant.xml'))
+		  $config = spip_xml_load($this->rootDir.'/ecrire/composant.xml');
+		else
+		  $config = spip_xml_load(find_in_path('composants/'.$class.'/ecrire/composant.xml'));
 		// Affecte ses paramètres de configuration à l'objet Composant
 		$c = $config['composant'][0];
 		$this->nom = $c['nom'][0];
@@ -306,7 +309,6 @@ class AdminComposant {
   	include_spip('inc/composant/classControles');
 		$r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'inc/picker/picker.js"></script>';
 		$r .= "<input type='hidden' name='maj_composant' value='oui' />".
-					'<input type="hidden" name="composant" value="'.$this->class.'" />'.
 					'<input type="hidden" name="nic" value="'.$this->nic.'" />';
 
 		$varconf = $this->fullname.'Config';		
@@ -369,17 +371,14 @@ class AdminComposant {
 			  $ctl = new $ctl($this->class, $this->nic, $v, $$v, $var, md5($this->fullname));
   			if (method_exists($ctl, "draw"))
           $controls[$var['nom']] = $ctl->draw();
-			}/*
-			if (is_callable($draw)) {
-			  $controls[$var['nom']] = $draw($this->class, $this->nic, $v, $$v, $var, md5($this->fullname));
-			}*/
+			}
       else
         $controls[$var['nom']] = $ctl."() undefined.<br />" ;
 		}
 
 		// Recherche une mise en page et y remplace les variables par des contrôles
 		$mis_en_page = array();
-		if (is_readable($this->rootDir.'/ecrire/'.$this->class.'_mep.html')) {
+		if (find_in_path('composants/'.$this->class.'/ecrire/'.$this->class.'_mep.html')) {
 			$mep .= recuperer_fond('composants/'.$this->class.'/ecrire/'.$this->class.'_mep', array('lang' => $GLOBALS['spip_lang'], 'nic' => $this->nic));
 			foreach ($controls as $nom=>$html) {
 			  $tag = '&'.$nom.'&';

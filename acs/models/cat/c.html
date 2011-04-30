@@ -1,1 +1,20 @@
-[(#CACHE{0})][(#HTTP_HEADER{[Content-type: (#ENV{type,text/xml})][; charset=(#CHARSET)]})][(#INCLURE{fond=composants/#ENV{c}/#ENV{p}}{env}{self})]
+[(#CACHE{0})][(#HTTP_HEADER{[Content-type: (#ENV{type,text/xml})][; charset=(#CHARSET)]})][(#INCLURE{fond=composants/#ENV{c}/#ENV{p}}{env}{self})][(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Cette page spéciale permet d'appeller n'importe quel composant et de retourner
+le résultat avec un type MIME précis. Très utile pour le retour d'un appel JSON,
+par exemple. 
+
+Paramètres:
+type: type MIME de retour
+c: composant
+p: page du composant
+
+]

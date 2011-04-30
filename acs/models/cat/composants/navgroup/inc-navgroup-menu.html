@@ -1,0 +1,21 @@
+[(#CACHE{0})][(#REM)
+
+Affichage de style identique à celui de la navigation par rubriques 
+
+]<B_groupes>
+<div class="cNavGroup bsize">[(#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Titre'}}|!={non}|?{' '})
+  <div class="bloc-title"><:mots_clefs:></div>
+  ]<ul><BOUCLE_groupes(GROUPES_MOTS) {par titre}{titre!==(_.*)}>
+  <B_mots>
+  <li class="menu-item"><a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]" class="menu-item-haschilds"><span class="motcle">[(#TITRE|supprimer_numero|couper{80})]</span></a>
+  <ul class="hidden">
+  <BOUCLE_mots(MOTS) {id_groupe} {par titre}>
+    <li class="menu-item"><a href="#URL_MOT"[ title="(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)"]><span class="motcle">[(#TITRE|supprimer_numero|couper{80})]</span></a></li>
+  </BOUCLE_mots>
+  </ul>
+  </li>
+  </B_mots>
+  </BOUCLE_groupes></ul>
+</div>
+[(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]
+</B_groupes>

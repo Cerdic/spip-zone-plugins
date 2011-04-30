@@ -1,4 +1,4 @@
-[(#CACHE{7200})][(#HTTP_HEADER{'Content-Type: text/javascript'})][(#REM)
+[(#CACHE{7200})][(#REM)
              ACS
          (Plugin Spip)
          Squelette Cat
@@ -7,48 +7,43 @@
 Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-Recupere les rubriques, sous-rubriques, et articles georeference a afficher, avec leurs pictogrammes, au format json.
+Recupere les mot-clés, rubriques, sous-rubriques, et/ou articles géoreférencés à afficher, avec leurs pictogrammes, au format json.
 
-Retrieve pictograms to display in json format
 
-]{
-  "pictos": [
-  <BOUCLE_mots(MOTS gis_mots){tout}{id_groupe ?}{recherche ?}{gis.lat >= #ENV{minlat}}{gis.lat <= #ENV{maxlat}}{gis.lonx >= #ENV{minlon}}{gis.lonx <= #ENV{maxlon}}{0, #ENV{limit}}{", "}>{
-    ["id": "mot(#ID_MOT)",]
-    ["lat": "(#LAT)",]
-    ["lon": "(#LONX)",]
-    ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
-    ["url": "(#URL_MOT)",]
-    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_mot=#ID_MOT"],
-    ["icon": {"image": "(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)"[, "width": "(#LOGO_MOT_NORMAL|largeur)"][, "height": "(#LOGO_MOT_NORMAL|hauteur)"]}][,
-    "over": {"image": "(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)"][, "width": "(#LOGO_MOT_SURVOL|largeur)"][, "height": "(#LOGO_MOT_SURVOL|hauteur)"}]
-  }[(#SET{hasMots,", "})]</BOUCLE_mots><BOUCLE_rubriques(RUBRIQUES gis){tous}{id_rubrique ?}{id_secteur ?}{id_mot ?}{recherche ?}{gis.lat >= #ENV{minlat}}{gis.lat <= #ENV{maxlat}}{gis.lonx >= #ENV{minlon}}{gis.lonx <= #ENV{maxlon}}{par date}{inverse}{0, #ENV{limit}}{", "}>[(#GET{hasMots})][(#SET{hasMots,""})]{
-    ["id": "rub(#ID_RUBRIQUE)",]
-    ["lat": "(#LAT)",]
-    ["lon": "(#LONX)",]
-    ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
-    ["url": "(#URL_RUBRIQUE)",]
-    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_rubrique=#ID_RUBRIQUE"]<BOUCLE_pictor(MOTS){id_rubrique}{type=marker_icon}{0,1}>,
-    ["icon": {"image": "(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)"[, "width": "(#LOGO_MOT_NORMAL|largeur)"][, "height": "(#LOGO_MOT_NORMAL|hauteur)"]}][,
-    "over": {"image": "(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)"][, "width": "(#LOGO_MOT_SURVOL|largeur)"][, "height": "(#LOGO_MOT_SURVOL|hauteur)"}]</BOUCLE_pictor>
-  }[(#SET{hasRubs,", "})]</BOUCLE_rubriques><BOUCLE_rubs2(RUBRIQUES gis){tous}{id_parent}{gis.lat >= #ENV{minlat}}{gis.lat <= #ENV{maxlat}}{gis.lonx >= #ENV{minlon}}{gis.lonx <= #ENV{maxlon}}{par date}{inverse}{0, #ENV{limit}}{", "}>{
-    ["id": "rub(#ID_RUBRIQUE)",]
-    ["lat": "(#LAT)",]
-    ["lon": "(#LONX)",]
-    ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
-    ["url": "(#URL_RUBRIQUE)",]
-    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_rubrique=#ID_RUBRIQUE"]<BOUCLE_pictor2(MOTS){id_rubrique}{type=marker_icon}{0,1}>,
-    ["icon": {"image": "(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)"[, "width": "(#LOGO_MOT_NORMAL|largeur)"][, "height": "(#LOGO_MOT_NORMAL|hauteur)"]}][,
-    "over": {"image": "(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)"][, "width": "(#LOGO_MOT_SURVOL|largeur)"][, "height": "(#LOGO_MOT_SURVOL|hauteur)"}]</BOUCLE_pictor2>
-  }[(#SET{hasRubs,", "})]<BOUCLE_rec(BOUCLE_rubs2)></BOUCLE_rec></BOUCLE_rubs2><BOUCLE_articles(ARTICLES gis){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{gis.lat >= #ENV{minlat}}{gis.lat <= #ENV{maxlat}}{gis.lonx >= #ENV{minlon}}{gis.lonx <= #ENV{maxlon}}{par date}{inverse}{0, #ENV{limit}}{", "}>[(#GET{hasRubs})][(#SET{hasRubs,""})]{
-    ["id": "art(#ID_ARTICLE)",]
-    ["lat": "(#LAT)",]
-    ["lon": "(#LONX)",]
-    ["title": "(#TITRE|supprimer_numero|supprimer_tags|texte_backend|html_entity_decode|utf8_encode)",]
-    ["url": "(#URL_ARTICLE)",]
-    ["urlajax": "(#URL_PAGE{c})&type=text/html&c=carte&p=bubble&id_article=#ID_ARTICLE"]<BOUCLE_pictoa(MOTS){id_article}{type=marker_icon}{0,1}>,
-    ["icon": {"image": "(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)"[, "width": "(#LOGO_MOT_NORMAL|largeur)"][, "height": "(#LOGO_MOT_NORMAL|hauteur)"]}][,
-    "over": {"image": "(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)"][, "width": "(#LOGO_MOT_SURVOL|largeur)"][, "height": "(#LOGO_MOT_SURVOL|hauteur)"}]</BOUCLE_pictoa>
-  }</BOUCLE_articles>
-  ]
+Retrieve keywords, sections, and/or pages to display with pictograms in json format
+
+Parameters:
+- limit : limits results to n lasts.
+- minlat, maxlat, minlon, maxlon : define the bounding box of results
+
+][(#SET{limit_mots,[(#VAR{#EVAL{'acsCarte'.'#NIC'.'Mots'}}|=={non}|?{0,#ENV{limit,10}})]})][(#SET{limit_rubs,[(#VAR{#EVAL{'acsCarte'.'#NIC'.'Rubriques'}}=={non}|?{0,#ENV{limit,10}})]})][(#SET{limit_arts,[(#VAR{#EVAL{'acsCarte'.'#NIC'.'Articles'}}=={non}|?{0,#ENV{limit,10}})]})]{"pictos": [<BOUCLE_mots(MOTS gis_mots){tout}{id_groupe ?}{id_mot ?}{recherche ?}{lat >= #ENV{minlat}}{lat <= #ENV{maxlat}}{lonx >= #ENV{minlon}}{lonx <= #ENV{maxlon}}{0,#GET{limit_mots}}{","}>[
+  (#SET{icon,[(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{over,[(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{iw,[(#LOGO_MOT_NORMAL|largeur)]})][(#SET{ih,[(#LOGO_MOT_NORMAL|hauteur)]})][
+  (#SET{ow,[(#LOGO_MOT_SURVOL|largeur)]})][(#SET{oh,[(#LOGO_MOT_SURVOL|hauteur)]})
+]<INCLURE{fond=composants/carte/inc-symbols_json-pictos}{nic}{id_name=mot}{id=#ID_MOT}{lat=#LAT}{lon=#LONX}{titre=#TITRE}{url=#URL_MOT}{icon=#GET{icon}}{over=#GET{over}}{iw=#GET{iw}}{ih=#GET{ih}}{ow=#GET{ow}}{oh=#GET{oh}}>[
+(#SET{hasMots,","})
+]</BOUCLE_mots><BOUCLE_rubriques(RUBRIQUES gis){tous}{id_rubrique ?}{id_secteur ?}{id_mot ?}{recherche ?}{lat >= #ENV{minlat}}{lat <= #ENV{maxlat}}{lonx >= #ENV{minlon}}{lonx <= #ENV{maxlon}}{par date}{inverse}{0,#GET{limit_rubs}}{","}>[
+(#GET{hasMots})][
+(#SET{hasMots,""})]<BOUCLE_pictor(MOTS){id_rubrique}{id_groupe=#VAR{#EVAL{'acsCarte'.'#NIC'.'PictosRubriques'}}}{0,1}>[
+  (#SET{icon,[(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{over,[(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{iw,[(#LOGO_MOT_NORMAL|largeur)]})][(#SET{ih,[(#LOGO_MOT_NORMAL|hauteur)]})][
+  (#SET{ow,[(#LOGO_MOT_SURVOL|largeur)]})][(#SET{oh,[(#LOGO_MOT_SURVOL|hauteur)]})
+]</BOUCLE_pictor><INCLURE{fond=composants/carte/inc-symbols_json-pictos}{nic}{id_name=rubrique}{id=#ID_RUBRIQUE}{lat=#LAT}{lon=#LONX}{titre=#TITRE}{url=#URL_RUBRIQUE}{icon=#GET{icon}}{over=#GET{over}}{iw=#GET{iw}}{ih=#GET{ih}}{ow=#GET{ow}}{oh=#GET{oh}}>[(#SET{hasRubs,", "})]</BOUCLE_rubriques><BOUCLE_rubs2(RUBRIQUES gis){tous}{id_parent}{lat >= #ENV{minlat}}{lat <= #ENV{maxlat}}{lonx >= #ENV{minlon}}{lonx <= #ENV{maxlon}}{par date}{inverse}{0,#GET{limit_rubs}}{","}>[
+(#GET{hasRubs})][
+(#SET{hasRubs,""})]<BOUCLE_pictor2(MOTS){id_rubrique}{id_groupe=#VAR{#EVAL{'acsCarte'.'#NIC'.'PictosRubriques'}}}{0,1}>[
+  (#SET{icon,[(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{over,[(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{iw,[(#LOGO_MOT_NORMAL|largeur)]})][(#SET{ih,[(#LOGO_MOT_NORMAL|hauteur)]})][
+  (#SET{ow,[(#LOGO_MOT_SURVOL|largeur)]})][(#SET{oh,[(#LOGO_MOT_SURVOL|hauteur)]})
+]</BOUCLE_pictor2><INCLURE{fond=composants/carte/inc-symbols_json-pictos}{nic}{id_name=rubrique}{id=#ID_RUBRIQUE}{lat=#LAT}{lon=#LONX}{titre=#TITRE}{url=#URL_RUBRIQUE}{icon=#GET{icon}}{over=#GET{over}}{iw=#GET{iw}}{ih=#GET{ih}}{ow=#GET{ow}}{oh=#GET{oh}}>[(#SET{hasRubs,","})]<BOUCLE_rec(BOUCLE_rubs2)></BOUCLE_rec></BOUCLE_rubs2><BOUCLE_articles(ARTICLES gis){id_rubrique ?}{id_mot ?}{id_auteur ?}{recherche ?}{id_article ?}{lat >= #ENV{minlat}}{lat <= #ENV{maxlat}}{lonx >= #ENV{minlon}}{lonx <= #ENV{maxlon}}{par date}{inverse}{0,#GET{limit_arts}}{","}>[
+(#GET{hasRubs})][
+(#SET{hasRubs,""})]<BOUCLE_pictora(MOTS){id_article}{type=id_groupe=#VAR{#EVAL{'acsCarte'.'#NIC'.'PictosArticles'}}}{0,1}>[
+  (#SET{icon,[(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{over,[(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)]})][
+  (#SET{iw,[(#LOGO_MOT_NORMAL|largeur)]})][(#SET{ih,[(#LOGO_MOT_NORMAL|hauteur)]})][
+  (#SET{ow,[(#LOGO_MOT_SURVOL|largeur)]})][(#SET{oh,[(#LOGO_MOT_SURVOL|hauteur)]})
+]</BOUCLE_pictora><INCLURE{fond=composants/carte/inc-symbols_json-pictos}{nic}{id_name=article}{id=#ID_ARTICLE}{lat=#LAT}{lon=#LONX}{titre=#TITRE}{url=#URL_ARTICLE}{icon=#GET{icon}}{over=#GET{over}}{iw=#GET{iw}}{ih=#GET{ih}}{ow=#GET{ow}}{oh=#GET{oh}}>
+</BOUCLE_articles>]
 }

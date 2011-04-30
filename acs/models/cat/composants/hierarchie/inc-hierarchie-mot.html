@@ -1,0 +1,1 @@
+#SET{show_type,^[^_]}<BOUCLE_mot(MOTS){id_mot}>[&gt; <a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]">(#TYPE|match{#GET{show_type}}|supprimer_numero|couper{80})</a>][ &gt; (#TITRE|supprimer_numero|couper{80})]</BOUCLE_mot>

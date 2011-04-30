@@ -219,14 +219,11 @@ function addPicto(item, markerLayer, map, pins) {
         jQuery.ajax({
         	url: item.urlajax,
         	success: function(data) {
-        		popup.setContentHTML(html + data);
+        		popup.setContentHTML(data);
         	},
         	complete: function() {
-        		var h = jQuery("#popup" + item.id).height();
-        		h -= jQuery(".titre", "#popup" + item.id).height();
-        		h -= jQuery(".date", "#popup" + item.id).height();
-        		h -= 65;
-        		jQuery(".bulle", "#popup" + item.id).height(h);        		
+        		var h = jQuery("#popup" + item.id+ 'contentDiv').height();
+        		jQuery(".bulle", "#popup" + item.id).height(h);
         		popup.updateSize();
         		popup.panIntoView();
         	}

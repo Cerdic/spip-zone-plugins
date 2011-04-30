@@ -1,6 +1,17 @@
-.cNavGroup .groups#NIC {
-  [background: (#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Fond'}});][
+[(#CACHE{0})]
+.cNavGroup[(#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Style'}}|=={accordion}|?{" "}) .groups#NIC] {[
+  margin-bottom: (#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bottom'}});
+  padding-bottom: #VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bottom'}};][
+  background: (#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Fond'}});][
   border: #VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bord/Width'},thin}[ (#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bord/Style'},solid}) ](#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Bord/Color'}});][
   (#MODELE{c_css_border-radius}{c=Navgroup}{var=BordRond})][
   (#MODELE{c_css_shadow}{c=Navgroup}{nic=#NIC})]
+}
+.cNavGroup .bloc-title {
+  [background: (#VAR{#EVAL{'acsNavgroup'.'#NIC'.'TitreFond'}})[ url("(#ACS_CHEMIN{trame/#VAR{#EVAL{'acsNavgroup'.'#NIC'.'TitreFondImage'}}})") repeat top left];][
+  (#MODELE{c_css_border-radius}{c=Navgroup}{var=BordRond}{sauf=bottom})]
+}
+.cNavGroup .menu-item {
+  [background: (#VAR{acsNavgroupFond});][
+  border-top: 1px solid (#VAR{acsRubnavSep});]
 }

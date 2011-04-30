@@ -9,7 +9,11 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Tous les mots-cles
 
-]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">[(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{title,<:acs:fond_meta_page_mots:>[ (#NOM_SITE_SPIP|textebrut)]})]
-<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
-<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2050}{mrobots=none}{mexpires=86400}>
+]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">[
+  (#CONFIG{langues_utilisees}|detecte_langue{#SELF})
+]<BOUCLE_groupes(GROUPES_MOTS){id_groupe}>[
+  (#SET{title,[(#TITRE|supprimer_numero|couper{80})]})
+]</BOUCLE_groupes>[(#SET{title,[(#GET{title}) ][(#NOM_SITE_SPIP|textebrut)]})]
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{title}}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2050}{mrobots=none}{mexpires=86400}{page=mots}>
 <INCLURE{fond=composants/fond/pied}{self=#SELF}>

@@ -221,7 +221,7 @@ function spGUI(player,sp) {
 
 	var ctl = player.find(".btn");
 	ctl.find(".b_play").get(0).onclick = function() { sp.play(sp.track); };
-	ctl.find(".b_stop").get(0).onclick = function() { sp.stop(); };
+	ctl.find(".b_play").get(0).ondblclick = function() { sp.stop(); };
 	ctl.find(".b_prev").get(0).onclick = function() { sp.prev(); };
 	ctl.find(".b_next").get(0).onclick = function() { sp.next(); };
 	ctl.find("li img").each(function(i) {
@@ -241,11 +241,13 @@ function spGUI(player,sp) {
 	if (sp.nbtracks > 1) {
 		player.find(".track_control").removeClass('track_control');
 	}
-	self.progressBarBorder.get(0).onclick = function(e) {
-		var ev=e?e:event;
-		var pos = (ev.clientX - self.getOffX(self.progressBarBorder.get(0)) ) / self.bw;
-		self.lastPos = 0;
-		sp.setPosition(pos);
+	if (self.progressBarBorder.length) {
+		self.progressBarBorder.get(0).onclick = function(e) {
+			var ev=e?e:event;
+			var pos = (ev.clientX - self.getOffX(self.progressBarBorder.get(0)) ) / self.bw;
+			self.lastPos = 0;
+			sp.setPosition(pos);
+		}
 	}
 	player.find(".track_index").html("1");
 	self.position.html("000:000");

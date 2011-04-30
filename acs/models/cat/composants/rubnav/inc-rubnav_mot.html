@@ -1,10 +1,8 @@
-<B_rubriques_mot>
+[(#CACHE{0})]<B_rubriques_mot>
   <div class="cRubnav bsize">
-    <div class="bloc-title">
-      [(#VAR{acsRubnavTitre}|=={oui}|?{' '})<a href="?page=plan" title="<:acs:onglets__plan:>"><:rubriques:></a><br />]
-    </div>
+    <BOUCLE_mot(MOTS){id_mot}{0,1}>[<div class="bloc-title">(#TITRE|couper{80})</div>]</BOUCLE_mot>
     <ul>
-      <BOUCLE_rubriques_mot(RUBRIQUES){id_mot}{par titre}{pagination 5}>
+      <BOUCLE_rubriques_mot(RUBRIQUES){id_mot}{par date}{inverse}{pagination 5}>
       <li class="menu-item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
       </BOUCLE_rubriques_mot>
     </ul>

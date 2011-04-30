@@ -1,17 +1,15 @@
-#CACHE{24 * 3600}[(#REM)
+[(#CACHE{0})][(#REM)
 
 Affiche un lecteur audio - Display an audio player
 Les fichiers audio sont les mp3 définis par les liens <a href="*.mp3" rel="enclosure"> contenus dans le parent du composant.
 Audio files are mp3 defined by <a href="*.mp3" rel="enclosure"> links contained in component's parent.
 
-]<div class="mp3player">
-  [(#AUTOSTART|?{' '}) <div class="autostart" style="display:none"></div>]
+]<div class="mp3player">[(#AUTOSTART|?{' '})
+  <div class="autostart" style="display:none"></div>][(#SMALL|?{'',' '})
   <div class="track_id3 nsize">[(#MP3ID3)]</div>
   <span class="track_info nsize"><span class="position"></span></span>
-  <span class="track_info track_control nsize"><span class="track_index"></span></span>
-  <ul class="btn">[(#REM) L'image des boutons de classe btn est remplacée au survol par l'image avec src = img.id + "_over.png" - Ne pas laisser d'espaces entre les li]
-    <li><img class="b_stop" id="b_stop" src="#CHEMIN{composants/audio/images/b_stop.png}" title="<:acs:audio_stop:>" alt="[]" /></li><li><img class="b_play" id="b_play" src="#CHEMIN{composants/audio/images/b_play.png}" title="<:acs:audio_play:>" alt="|&gt;" /></li><li><img class="b_prev track_control" id="b_prev" src="#CHEMIN{composants/audio/images/b_prev.png}" title="<:acs:audio_prev:>" alt="&lt;&lt;" /></li><li><img class="b_next track_control" id="b_next" src="#CHEMIN{composants/audio/images/b_next.png}" title="<:acs:audio_next:>" alt="&gt;&gt;" /></li>
-  </ul>
-  <div class="progressBarBorder" style="width: #LPpx;"><div class="loadBar"><div class="progressBar"><a href="#" title="" class="slider"></a></div></div></div>
+  <span class="track_info track_control nsize"><span class="track_index"></span></span>]
+  <ul class="btn">[(#REM) L'image des boutons de classe btn est remplacée au survol par l'image avec src = img.id + "_over.png" - Ne pas laisser d'espaces entre les li]<li><img class="b_play" id="b_play" src="#CHEMIN{composants/audio/images/b_play.png}" title="<:acs:audio_play:>" alt="|&gt;" /></li><li><img class="b_prev track_control" id="b_prev" src="#CHEMIN{composants/audio/images/b_prev.png}" title="<:acs:audio_prev:>" alt="&lt;&lt;" /></li><li><img class="b_next track_control" id="b_next" src="#CHEMIN{composants/audio/images/b_next.png}" title="<:acs:audio_next:>" alt="&gt;&gt;" /></li></ul>
+  [(#ENV{small}|?{'',' '})<div class="progressBarBorder" style="width: #LPpx;"><div class="loadBar"><div class="progressBar"><a href="#" title="" class="slider"></a></div></div></div>]
   <img class="b_pause" src="#CHEMIN{composants/audio/images/b_pause.png}" title="Pause" alt="||" />
 </div>

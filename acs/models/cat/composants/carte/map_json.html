@@ -11,12 +11,17 @@ Insere une carte interactive utilisant JSON. Requiert les plugins gis_escoitar e
 
 Note: les fonds de plan Google ne sont disponibles QUE si la librairie Google Map API a été chargée par le plugin eponyme
 
-][(#SET{id_carte_gis,#ENV{id_carte_gis,1}})][(#REM)
-  
-  Centrer sur les coordonnees de l'article passe en parametre, sinon sur celles de la rubrique
-  
-  ]<BOUCLE_centrer_article(GIS){id_rubrique=0}{id_article}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_article>
-<BOUCLE_centrer_rubrique(GIS){id_rubrique}{id_article=0}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_rubrique>[(#REM)
+Centrage et zoom de la carte selon les paramètres (latit, lonxit, zoom) reçus,
+sinon sur celles du mot-clé id_mot passé en parametre, 
+sinon sur celles de l'article id_article,
+sinon sur celles de la rubrique id_rubrique,
+sinon sur les coordonnées et le zoom par défaut du composant (variables ACS),
+ou à défaut sur celles par défaut du plugin GIS Escoitar.
+
+][(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]<BOUCLE_centrer_article(GIS){id_rubrique=0}{id_article}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_article>
+<BOUCLE_centrer_rubrique(GIS){id_rubrique}{id_article=0}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_rubrique>
+<BOUCLE_centrer_mot(gis_mots){id_mot}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_mot>
+[(#REM)
   
   Sinon centrer sur les coordonnes passees en parametre ou sur celles par defaut
   
@@ -52,7 +57,7 @@ Note: les fonds de plan Google ne sont disponibles QUE si la librairie Google Ma
       eventListeners: {
         "zoomend": function() {
         if (map[(#GET{id_carte_gis})].initialized)
-          loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/javascript&c=carte&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>', [(#VAR{acsCartePictosPins}|=={oui}|?{true,false})]);
+          loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/javascript&c=carte[&nic=(#NIC)]&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_groupe=(#ID_GROUPE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>', [(#VAR{acsCartePictosPins}|=={oui}|?{true,false})]);
         }
       },
       theme: null,
@@ -112,7 +117,7 @@ Note: les fonds de plan Google ne sont disponibles QUE si la librairie Google Ma
     ]
     </BOUCLE_kml_rub>
     <//B_kml_art>
-    loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/javascript&c=carte&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>', [(#VAR{acsCartePictosPins}|=={oui}|?{true,false})]);
+    loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/javascript&c=carte[&nic=(#NIC)]&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_groupe=(#ID_GROUPE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>', [(#VAR{acsCartePictosPins}|=={oui}|?{true,false})]);
     map[(#GET{id_carte_gis})].initialized = true;
   }
   [(#ENV{load_map}|!={'non'}|oui)

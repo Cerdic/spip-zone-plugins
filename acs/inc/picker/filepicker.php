@@ -91,8 +91,9 @@ if ($d = @opendir($dir)) {
       if ($s)
       	$s = $s[0].'x'.$s[1];
       $hash = md5(serialize($action_effacer.$GLOBALS['auteur_session']['hash_env']));
-      $onclick = "aconfirmer('".addslashes(_T('acs:effacer_image',array("image"=>$dir.'/'.$file)))."','".url_filepicker($dir, $file, '&del=true')."&hash=$hash"."')";
-			echo '<table class="cadre"><tr><td colspan="2" style="text-align: center"><img src="'.$dir.'/'.$file.'" title="'.$file.'" class="boutonImg" onclick="P.select(\''.$file.'\')" onmouseover="P.preview(\''.$dir.'/'.$file.'\')" onmouseout="P.preview(\'\')" /></td></tr><tr><td class="bandeau">'.$s.'</td><td><a onclick="'.$onclick.'" title="'._T('acs:effacer_image').'"><img src="'._DIR_PLUGIN_ACS.'images/supprimer.gif" alt="x" /></a></td></tr></table>';
+      $txt_effacer = _T('acs:effacer_image', array("image" => $dir.'/'.$file));
+      $onclick = "aconfirmer('".$txt_effacer."','".url_filepicker($dir, $file, '&del=true')."&hash=$hash"."')";
+			echo '<table class="cadre"><tr><td colspan="2" style="text-align: center"><img src="'.$dir.'/'.$file.'" title="'.$file.'" class="boutonImg" onclick="P.select(\''.$file.'\')" onmouseover="P.preview(\''.$dir.'/'.$file.'\')" onmouseout="P.preview(\'\')" /></td></tr><tr><td class="bandeau">'.$s.'</td><td><a onclick="'.$onclick.'" title="'.$txt_effacer.'"><img src="'._DIR_PLUGIN_ACS.'images/supprimer.gif" alt="x" /></a></td></tr></table>';
 		}
 	}
 	closedir($d);

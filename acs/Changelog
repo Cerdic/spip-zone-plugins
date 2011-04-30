@@ -5,13 +5,18 @@ ACS version 0.8
 - nouveau parametre de composant : preview_type (inline ou iframe=valeur par defaut). Ceci permet de faire interagir un composant avec son interface d'administration et en particulier de récupérer des parametres definis par le composant lui-même pour définir ses variables (exemple : composant Carte);
 - chargement des balises, scripts, et styles publics dans l'espace privé pour permettre aux modèles SPIP d'utiliser des composants d'un modèle ACS dans l'espace privé;
 - les controles sont desormais des objets;
-
+- échappe les guillemets dans l'affichage des contrôles de type text
+- modification de l'éditeur de composants pour gérer l'overide éventuel avec la souplesse maximale : fichier par fichier.
+- nouveau type de contrôle : KeyGgroup (choix d'un groupe de mots-clefs)
+ 
 Modele Cat pour ACS vesion 0.8 :
 - nouveaux composants Carte, Diapo, NavGroup et NavKeys;
 - gestion amelioree des droits d'acces a un article par mot-cle;
 - suppression du modèle doc au profit de celui de la dist;
 - un modèle spécifique, "c", permet désormais d'utiliser n'importe quel composant comme un modèle SPIP (donc dans un article, par exemple);
-
+- Audio: suppression du bouton STOP,  remplacé par un double-clic sur le bouton play/pause. Création d'un modèle minimaliste de lecteur audio (bouton play/pause).
+- Hierarchie : hiérarchies des mot-clés, avec masquage des groupes de mots-clés commençant par "_".
+- Rubnav : affichage du titre du mot-clé pour les rubriques dépendant d'un mot-clé affichées sur les pages où id_mot est défini.
 _______________________________________
 ACS version 0.7
  - amelioration du schema de page
