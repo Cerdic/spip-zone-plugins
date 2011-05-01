@@ -537,27 +537,27 @@ function amap_config_motsclefs() {
 
 //creation de champs extra sur la table auteurs
 function amap_declarer_champs_extras($champs = array()){
-        $champs[] = new ChampExtra(array(
-                'table' => 'auteurs', // sur quelle table ?
-                'champ' => 'adhesion', // nom sql
-                'label' => 'amap:adhesion', // chaine de langue 'prefix:cle'
-                'precisions' => '', // precisions sur le champ
-                'obligatoire' => false, // 'oui' ou '' (ou false)
-                'rechercher' => false, // false, ou true ou directement la valeur de ponderation (de 1 à 8 generalement)
-                'type' => 'input', // type de saisie
-                'sql' => "bigint NULL", // declaration sql
-        ));
-		$champs[] = new ChampExtra(array(
-				'table' => 'auteurs', // sur quelle table ?
-				'champ' => 'type_panier', // nom sql
-				'label' => 'amap:type_panier', // chaine de langue 'prefix:cle'
-				'type' => 'menu-radio', // type de saisie
-				'enum' => array(
-					"petit" => "Petit",
-					"grand" => "Grand",
-				),
-				'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-		));
-        return $champs;
+	$champs[] = new ChampExtra(array(
+		'table' => 'auteurs', // sur quelle table ?
+		'champ' => 'adhesion', // nom sql
+		'label' => 'amap:adhesion', // chaine de langue 'prefix:cle'
+		'precisions' => '', // precisions sur le champ
+		'obligatoire' => false, // 'oui' ou '' (ou false)
+		'rechercher' => false, // false, ou true ou directement la valeur de ponderation (de 1 à 8 generalement)
+		'type' => 'input', // type de saisie
+		'sql' => "bigint NULL", // declaration sql
+	));
+	$champs[] = new ChampExtra(array(
+		'table' => 'auteurs', // sur quelle table ?
+		'champ' => 'type_panier', // nom sql
+		'label' => 'amap:type_panier', // chaine de langue 'prefix:cle'
+		'type' => 'menu-radio', // type de saisie
+		'enum' => array(
+			"petit" => "Petit",
+			"grand" => "Grand",
+		),
+		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
+	));
+	return $champs;
 }
 ?>

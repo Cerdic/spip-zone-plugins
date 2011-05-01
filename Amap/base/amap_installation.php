@@ -24,6 +24,13 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 			// Creation des champs extras
 			amap_declarer_champs_extras();
 			sql_alter("TABLE spip_auteurs ADD adhesion text NULL");
+			sql_alter("TABLE spip_auteurs ADD type_panier text NULL");
+			create_rubrique("000. Agenda de la saison", "0");
+			$id_rubrique = id_rubrique("000. Agenda de la saison");
+			if ($id_rubrique >0) {
+				create_rubrique("001. Distribution", $id_rubrique);
+				create_rubrique("002. Événements", $id_rubrique);
+			}
 			spip_log("Amap s'installe V0.3", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}

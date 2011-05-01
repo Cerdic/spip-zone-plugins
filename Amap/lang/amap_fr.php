@@ -63,7 +63,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// F
 
 	// G
-	'gestion_amap' => 'Gestion Amap',
+	'gestion_amap' => 'Gestion AMAP',
+	'grand' => 'Grand',
 
 	// I
 	'id_banque' => 'ID banque',
@@ -101,6 +102,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_livraison' => 'Contenu d\'un panier',
 	'paniers'  => 'Paniers',
 	'paysan' => 'Paysan',
+	'petit' => 'Petit',
 	'prenom' => 'Prénom',
 	'produits' => 'Produits',
 	'produits_enregistrement' => 'Enregistrement d\'un produit supplémentaire',

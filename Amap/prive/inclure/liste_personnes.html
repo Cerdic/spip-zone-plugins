@@ -5,6 +5,7 @@
 		<th></th>
 		<th><:nom:></th>
 		<th><:amap:adhesion:></th>
+		<th><:amap:type_panier:></th>
 	</tr>
 	</thead>
 	<tbody>
@@ -17,6 +18,10 @@
 		</td>
 		<td><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
 		<td>#ADHESION</td>
+		<td>
+			[(#TYPE_PANIER|=={'petit'}|oui)<:amap:petit:>]
+			[(#TYPE_PANIER|=={'grand'}|oui)<:amap:grand:>]
+		</td>
 	</tr>
 	</BOUCLE_personnes>
 	</tbody>
