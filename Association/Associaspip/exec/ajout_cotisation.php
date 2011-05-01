@@ -35,13 +35,13 @@ function exec_ajout_cotisation(){
 		$categorie = $row['categorie'];
 		$validite = $row['validite'];
 
-		$categorie = sql_fetsel("libelle", "spip_asso_categories", "id_categorie=" . intval($categorie));
+		$categorie_libelle = sql_fetsel("libelle", "spip_asso_categories", "id_categorie=" . intval($categorie));
 
 		$h = generer_url_ecrire('voir_adherent', "id=$id_auteur");
 
 		echo debut_boite_info(true);
 		echo "<h3><a href='$h'>", $nom_famille.' '.$prenom.'</a></h3>';
-		echo $categorie ? ('<strong>'.$categorie['libelle'].'</strong>') :'';
+		echo $categorie_libelle ? ('<strong>'.$categorie_libelle['libelle'].'</strong>') :'';
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
 
