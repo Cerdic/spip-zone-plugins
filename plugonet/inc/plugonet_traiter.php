@@ -181,7 +181,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	// Si le tableau provient de infos_plugin la compatibilite SPIP est directement accessible
 	$compatible = '';
 	if (isset($D['compatible']))
-		$compatible =  $D['compatible'];
+		$compatible =  plugin2intervalle(extraire_bornes($D['compatible']));
 	// Si le tableau provient de get_infos la compatibilite SPIP est incluse dans les necessite
 	else {
 		foreach($D['necessite'] as $k => $i) {
@@ -432,7 +432,7 @@ function plugin2balise_necessite($D) {
 		foreach($D['necessite'] as $i) {
 			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 			$src = plugin2balise_lien($i['src'], 'lien', ' ');
-			$version = empty($i['version']) ? '' : (" version=\"" . $i['version'] . "\"");
+			$version = empty($i['version']) ? '' : (" version=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"");
 			if (preg_match('/^lib:(.*)$/', $nom, $r))
 				$lib .= "\n\t<lib nom=\"" . $r[1] . "\"$src />";
 			else 
@@ -458,7 +458,7 @@ function plugin2balise_utilise($D) {
 	foreach($D as $i) {
 		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 		$att = " nom=\"$nom\"" .
-				(!empty($i['version']) ? (" version=\"" . $i['version'] . "\"") : '') .
+				(!empty($i['version']) ? (" version=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"") : '') .
 				plugin2balise_lien($i['src']);
 		$res .="\n\t<utilise$att />";
 	}
@@ -646,6 +646,13 @@ function extraire_bornes($intervalle) {
 	}
 	
 	return $bornes;
+}
+
+
+function plugin2intervalle($bornes) {
+	return ($bornes['min']['incluse'] ? '[' : ']')
+			. $bornes['min']['valeur'] . ';' . $bornes['max']['valeur']
+			. ($bornes['max']['incluse'] ? ']' : '[');
 }
 
 
