@@ -20,20 +20,29 @@
 #SET{color,#CONFIG{basecss/typo/color,#222222}} [ color: (#GET{color});]
 */
 
-html { font-size: 100%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+html { font-size: 100.01%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
 body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
 
 /* Titraille / Intertitres */
 h1,h2,h3,h4,h5,h6,
-.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0;[ margin-bottom: (#GET{margin-bottom});] padding: 0; font-size: 100%; font-weight: bold; }
+.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
 hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
 
-/*h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: .5em; }
-h2,.h2 { font-size: 2em; margin-bottom: .75em; }
-h3,.h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
-h4,.h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+/* Titraille Blueprint
+Cf. : http://www.blueprintcss.org/tests/parts/elements.html
+h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }*/
+
+h1,.h1 {[ font-size: (#GET{line-height}|mult{2})em;] line-height: 1; margin-bottom: 0.5em; }
+h2,.h2 {[ font-size: (#GET{line-height}|mult{1.5})em;][ margin-bottom: (#GET{font-size}|mult{0.75}|div{.75})em;] }
+h3,.h3 {[ font-size: (#GET{line-height})em;] line-height: 1; margin-bottom: 1em; }
+h4,.h4 {[ font-size: (#GET{line-height})em;] line-height: 1; margin-bottom: 1em; }
 h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
-h6,.h6 { font-size: 1em; font-weight: bold; }*/
+h6,.h6 { font-size: 1em; font-weight: bold; }
 
 /* Enrichissements typographiques */
 strong, b { font-weight: bold; }
