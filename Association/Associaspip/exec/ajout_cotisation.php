@@ -50,7 +50,7 @@ function exec_ajout_cotisation(){
 		echo debut_cadre_relief(  "", false, "", _T('asso:nouvelle_cotisation'));
 		echo recuperer_fond("prive/editer/editer_cotisations", array (
 			'id_auteur' => $id_auteur,
-			'nom_prenom' => $nom_famille.' '.$prenom,
+			'nom_prenom' => $prenom.' '.$nom_famille,
 			'categorie' => $categorie,
 			'validite' => $validite
 		));
