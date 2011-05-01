@@ -9,6 +9,7 @@
 include_spip('inc/meta');
 include_spip('base/create');
 include_spip('base/amap_tables');
+include_spip('inc/cextras_gerer');
 
 function amap_upgrade($nom_meta_version_base, $version_cible){
 	$current_version = 0.0;
@@ -74,6 +75,7 @@ function amap_vider_tables($nom_meta_version_base){
 	sql_drop_table('spip_paniers');
 	//suppression des champs supplementaire
 	$champs = amap_declarer_champs_extras();
+	desinstaller_champs_extras($champs, $nom_meta_base_version);
 	//supprimer les mots clef
 	vider_groupe("_Amap_config");
 	effacer_meta($nom_meta_version_base);
