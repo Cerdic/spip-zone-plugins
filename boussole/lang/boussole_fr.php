@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_site_boussole' => 'Ce site fait partie de la boussole &#171; @boussole@ &#187;',
 
 // L
-	'label_1_site' => 'site',
+	'label_1_site' => '@nb@ site',
 	'label_a_class' => 'Classe de l\'ancre englobant le logo',
 	'label_actualise_le' => 'Actualis&eacute; le',
 	'label_affiche' => 'Affich&eacute; ?',
@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_mode_url_perso' => 'Boussole personnelle',
 	'label_mode' => 'Choisissez une boussole',
 	'label_modele' => 'Mod&egrave;le d\'affichage',
-	'label_n_sites' => 'sites',
+	'label_n_sites' => '@nb@ sites',
 	'label_nom' => 'Nom',
 	'label_p_class' => 'Classe du paragraphe englobant le descriptif',
 	'label_sepia' => 'Code de la couleur de s&eacute;pia (sans #)',

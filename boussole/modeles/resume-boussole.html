@@ -5,7 +5,7 @@
 	</td>
 	<td class="arial11">&nbsp;</td>
 	<td class="arial11">[(#ENV{version})]</td>
-	<td class="arial11">[(#ENV{nbr_sites}) [(#ENV{nbr_sites}|singulier_ou_pluriel{<:boussole:label_1_site:>, <:boussole:label_n_sites:>})]]</td>
+	<td class="arial11">[(#ENV{nbr_sites}|singulier_ou_pluriel{boussole:label_1_site, boussole:label_n_sites})]</td>
 	<td class="arial11"><a[ href="(#URL_ECRIRE{boussoles}|parametre_url{alias, #ENV{alias}})"] title="<:boussole:bulle_configurer_boussole:>"><:boussole:bouton_configurer:></a></td>
 	<td class="arial11">[(#VAL{<:boussole:bouton_supprimer:>}|bouton_action{#URL_ACTION_AUTEUR{supprimer_boussole, #ENV{alias}, #SELF}, '', '', <:boussole:bulle_supprimer_boussole:>})]</td>
 </tr>
