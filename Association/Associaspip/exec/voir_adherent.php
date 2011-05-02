@@ -20,8 +20,8 @@ function exec_voir_adherent(){
 		
 	$id_auteur= intval($_GET['id']);
 	$full = autoriser('associer', 'adherents');
-	
-	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data = sql_fetsel("*",'spip_asso_membres', "id_auteur=$id_auteur")) {
+	$data = sql_fetsel("m.nom_famille, m.prenom, m.validite, m.adresse, m.code_postal, m.ville, m.telephone, m.mobile, c.libelle",'spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
+	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -33,6 +33,7 @@ function exec_voir_adherent(){
 		$ville = $data['ville'];
 		$telephone = $data["telephone"];
   		$mobile = $data["mobile"];
+		$categorie = $data['libelle']?$data['libelle']:_T('asso:pas_de_categorie_attribuee');
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
@@ -55,9 +56,10 @@ function exec_voir_adherent(){
 			  $nom .
 			  "</a>";
 
-			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresse . '<br />' . $cp . ' ' . $ville . '<br/>' . $telephone . '<br />' . $mobile .  "</div>\n";
+			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresse . '<br />' . $cp . ' ' . $ville . '<br/>' . $telephone . '<br />' . $mobile .  "<p>".$categorie."</p></div>\n";
 
 		} else $coord = '';
+		$coord .= "<div style='font-weight: bold; text-align:center' class='verdana1 spip_xx-small'><p>"._T('asso:adherent_libelle_date_validite')."<br/>".$validite."</p></div>";
 
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', $nom, "</div>\n", $coord;
 

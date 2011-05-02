@@ -177,6 +177,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_entete_statut_prospect' => 'Prospects',
 	'adherent_entete_statut_tous' => 'Tous',
 
+	# Categories
+	'pas_de_categorie_attribuee' => 'Pas de cat&eacute;gorie attribu&eacute;e',
 	# Bouton
 	'adherent_bouton_confirmer' => 'Confirmer',
 	'adherent_bouton_modifier' => 'Modifier',
