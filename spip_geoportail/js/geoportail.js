@@ -873,8 +873,8 @@ jQuery.geoportail =
 	},
 
 	// Ajout des outils de mesure
-	addMeasureTools: function(map) {
-		var tbx = map.getMap().getControlsByClass('Geoportal.Control.ToolBox')[0];
+	addMeasureTools: function(map) 
+	{	var tbx = map.getMap().getControlsByClass('Geoportal.Control.ToolBox')[0];
 		var measurebar = new Geoportal.Control.MeasureToolbar(
 		{ div: OpenLayers.Util.getElement(tbx.id + '_measure'),
 			displaySystem:
@@ -888,9 +888,14 @@ jQuery.geoportail =
 	},
 
 	// On a selectionne une adresse avec l'outil
-	selectAdresse: function(f) {	// Ne pas afficher le calque (risque d'interception d'evenements)
-		if (f.layer) {
-			var l = f.layer.map.getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
+	selectAdresse: function(f) 
+	{	// Ne pas afficher le calque (risque d'interception d'evenements)
+		if (f.layer) 
+		{	var l = f.layer.map.getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
+			if (l.length > 0) l[0].setVisibility(false);
+		}
+		else if (this.layer) 
+		{	var l = this.layer.map.getLayersByName("ADDRESSES.CROSSINGS:OPENLS");
 			if (l.length > 0) l[0].setVisibility(false);
 		}
 		// pour les autres cartes
