@@ -30,5 +30,6 @@ Tous les crit&egrave;res sont optionnels, les usages et valeurs par défaut éta
 	<prefix>tagscloud</prefix>
 	<necessite id="SPIP" version="[2.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
+	<traduire gestionnaire="salvatore" module="tagscloud" reference="fr" />
 	<categorie>divers</categorie>
 </plugin>
