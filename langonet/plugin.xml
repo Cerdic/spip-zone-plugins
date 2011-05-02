@@ -60,7 +60,7 @@ et d'effectuer des recherches d'items dans les fichiers de langue de SPIP.
 <plugin spip='[2.3.0-dev;]'>
 	<nom>LangOnet</nom>
 	<auteur>Eric Lupinacci, denisb avec le support d&eacute;vou&eacute; de Kent1</auteur>
-	<version>0.6.1</version>
+	<version>0.6.2</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
 	<icon>prive/themes/spip/images/langonet-64.png</icon>
