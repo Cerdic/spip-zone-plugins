@@ -1,7 +1,7 @@
 <plugin>
 	<nom>S&eacute;ances</nom>
 	<auteur>Dominique Wojylac</auteur>
-	<version>1.2.1</version>
+	<version>1.2.2</version>
 	<etat>stable</etat>
 	<icon>images/seances-48.png</icon>
 	<licence>GPL 3 - &#169; 2010</licence>

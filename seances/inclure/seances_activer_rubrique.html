@@ -6,11 +6,9 @@
 [(#AUTORISER{modifier,seances})
 	<img src="#CHEMIN{images/seances-32.png}" height="32" width="32" style="height: 32px; width: 32px; margin-right: 10px; float: left;" alt="seances" />
 	[(#SEANCE|=={0}|oui)
-		<p><:seances:explications_activer_rubrique_seances:></p>
 		[<a class="seances_action" href="(#URL_ACTION_AUTEUR{seances_activer_rubrique,#ENV{id_rubrique},#SELF})"><:seances:action_activer_seances_rubrique:></a>]
 	]
 	[(#SEANCE|=={1}|oui)
-		<p><:seances:explications_desactiver_rubrique_seances:></p>
 		[<a class="seances_action" href="(#URL_ACTION_AUTEUR{seances_activer_rubrique,-#ENV{id_rubrique},#SELF})"  onclick="return confirm('<:seances:confirmer_desactiver_seances_rubrique:>')"><:seances:action_desactiver_seances_rubrique:></a>]
 	]
 ]

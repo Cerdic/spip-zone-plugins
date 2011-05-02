@@ -5,7 +5,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'action_activer_seances_rubrique' => 'Activer les séances pour cette rubrique',
-'action_desactiver_seances_rubrique' => 'Desactiver les séances pour cette rubrique',
+'action_desactiver_seances_rubrique' => 'Désactiver les séances pour cette rubrique',
 'action_dupliquer' => 'Dupliquer',
 'action_dupliquer_court' => 'Dupli',
 'action_enregistrer' => 'Enregistrer',
@@ -20,8 +20,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'confirmer_action_supprimer_seance' => 'Supprimer cette séance ?',
-'confirmer_action_supprimer_toutes_seances' => 'Supprimer toutes les séances liées à cet article ?',
-'confirmer_desactiver_seances_rubrique' => 'Cela supprime toutes les séances enregistrées pour tous les articles de cette rubrique !',
+'confirmer_action_supprimer_toutes_seances' => 'Supprimer vraiment toutes les séances liées à cet article ?',
+'confirmer_desactiver_seances_rubrique' => 'Désactiver les séances pour cette rubrique ? Attention : cela supprime toutes les séances enregistrées pour tous les articles de cette rubrique !',
 'confirmer_reinitialiser_seances' => 'Voulez-vous vriment supprimer toutes les séances enregistrées ? Cette action est irréversible.',
 
 // D
@@ -33,9 +33,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'endroits_seances' => 'LIEUX DES SÉANCES',
 'erreur_nom_endroit_vide' => 'Erreur ! Le nom ne peut être vide.',
-'explications_activer_rubrique_seances' => 'Activer la gestion des séances pour les articles de cette rubrique.',
-'explications_desactiver_rubrique_seances' => 'Désactiver la gestion des séances pour les articles de cette rubrique.',
-
 // I
 'info_modifier_seances_endroit' => 'Renseignements sur l\'endroit, le lieu. (Titre seul obligatoire).',
 'info_reinitialiser_seances' => 'Réinitialiser les séances supprime toutes celles enregistrées. (Cela ne supprime pas les lieux ni ne réinitialise les rubriques). <strong>Attention cette action est irréversible !</strong>',
