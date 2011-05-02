@@ -33,10 +33,16 @@ background: transparent;
 font-size:x-small;
 }
 
-sup {
-	vertical-align:20%;
-	font-variant: small-caps;
-	font-size: .5em;
+sup, sup.typo_exposants {
+	font-size: 78%;
+	font-variant: normal;
+	vertical-align: 24%;
+}
+
+sub {
+	font-size: 60%;
+	font-variant: normal;
+	vertical-align: -20%;
 }
 
 .caps {

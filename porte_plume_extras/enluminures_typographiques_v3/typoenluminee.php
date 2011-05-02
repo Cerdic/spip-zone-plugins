@@ -111,7 +111,7 @@ function typoenluminee_pre_propre($texte) {
 	// Conversion des intertitres d'enluminures type {ß{titre}ß}
 	// ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
 	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
-	if (strpos($texte, '{1{')) { // Ne faire la recherche que s'il y a au moin un titre de premier niveau
+	if (strpos($texte, '{2{')) { // Ne faire la recherche que s'il y a au moins un titre de 2e niveau
 		$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\d\})/",
 						create_function (
 							'$matches',
@@ -140,8 +140,6 @@ function typoenluminee_post_propre($texte) {
 		$cherche1[] = /* 21 */ 	"/\[\*\*/S";
 		$cherche1[] = /* 21b */ 	"/\[\*/S";
 		$cherche1[] = /* 22 */	"/\*\]/S";
-		$cherche1[] = /* 23 */ 	"/\[\^/S";
-		$cherche1[] = /* 24 */	"/\^\]/S";
 	
 		$remplace1[] = /* 15 */ 	"<div class=\"spip\" style=\"text-align:right;\">$1</div>";
 		$remplace1[] = /* 16 */ 	"<div class=\"spip\" style=\"text-align:left;\">$1</div>";
@@ -150,8 +148,6 @@ function typoenluminee_post_propre($texte) {
 		$remplace1[] = /* 21 */ 	"<strong class=\"caractencadre2-spip spip\">";
 		$remplace1[] = /* 21b */ 	"<strong class=\"caractencadre-spip spip\">";
 		$remplace1[] = /* 22 */	"</strong>";
-		$remplace1[] = /* 23 */ 	"<sup>";
-		$remplace1[] = /* 24 */	"</sup>";
 	}
 	$texte = preg_replace($cherche1, $remplace1, $texte);
 	$texte = paragrapher($texte,$GLOBALS['toujours_paragrapher']); // il faut reparagrapher a cause des raccourcis typo que l'on a ajoute (block div)
