@@ -1097,7 +1097,8 @@ function geoportail_moveSynchro (e)
 @param l : le layer
 */
 function geoportail_selectionnable (l)
-{	// Controle pour la selection
+{	if (!(l instanceof Array)) l = [l];
+	// Controle pour la selection
 	options = {
 		clickout: true, toggle: false,
 		multiple: false, hover: false,
@@ -1111,7 +1112,7 @@ function geoportail_selectionnable (l)
 		if (!layers) layers = [ this.selectControl.layer ];
 	}
 	else layers = new Array();
-	layers[layers.length] = l;
+	layers = layers.concat(l);
 	var selectControl = new OpenLayers.Control.SelectFeature(layers, options);
 	this.getMap().addControl(selectControl);
 	this.selectControl = selectControl;
