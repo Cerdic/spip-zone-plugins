@@ -47,11 +47,18 @@ function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $c
 function formulaires_editer_cotisations_verifier_dist($id_auteur, $nom_prenom, $categorie, $validite) {
 	$erreurs = array();
 
-	if ($montant_req = _request('montant')){
-		$montant = floatval(preg_replace("/,/",".",$montant_req));
-		if($montant<0) {
-			$erreurs['montant'] = _T('asso:erreur_montant');
-		}
+	/* verifier que le montant est bien positif ou nul */
+	$montant = association_recupere_montant(_request('montant'));
+	if($montant<0) {
+		$erreurs['montant'] = _T('asso:erreur_montant');
+	}
+
+	/* verifier validite et date */
+	if ($erreur_date = association_verifier_date(_request('date'))) {
+		$erreurs['date'] = _request('date')."&nbsp;:&nbsp;".$erreur_date;
+	}
+	if ($erreur_validite = association_verifier_date(_request('validite'))) {
+		$erreurs['validite'] = _request('validite')."&nbsp;:&nbsp;".$erreur_validite;
 	}
 
 	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant */

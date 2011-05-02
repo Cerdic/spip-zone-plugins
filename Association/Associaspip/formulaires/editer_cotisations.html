@@ -3,7 +3,9 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{date}}
 		<li class="editer_date">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="date"><strong><:asso:date_du_paiement_aaaa_mm_jj:></strong></label>
 			<input type="text" name="date" [value="(#ENV{date}|affdate{Y-m-d})"] id="date"  class='formo'/>
 		</li>
@@ -28,7 +30,9 @@
 			(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
 		</li>]
 
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{validite}}
 		<li class="editer_validite">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="validite"><strong><:asso:Validite:></strong></label>
 			<input type="text" name="validite" [value="(#ENV{validite})"] id="validite"  class='formo'/>
 		</li>

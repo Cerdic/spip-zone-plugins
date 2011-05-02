@@ -40,7 +40,7 @@ function cotisation_insert($id_auteur, $montant, $journal, $justification, $impu
 	sql_updateq('spip_asso_membres', 
 				   array(
 					 "validite" => $validite,
-					 "statut_interne" => 'ok'),
+					 "statut_interne" => strtotime($validite)>strtotime("-1 day")?'ok':'echu'), // on verifie que la date entree soit aujourd'hui ou dans le futur pour attribuer le statut ok
 				   "id_auteur=$id_auteur");
 
 }
