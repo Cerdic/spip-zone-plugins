@@ -160,8 +160,8 @@ function comptes_while($where, $limit, $id_compte)
 	$auteurs = '';
 
 	while ($data = sql_fetch($query)) {
-		if ($data['recette'] >0) { $class= "pair";}
-		else { $class="impair";}	   
+		if ($data['depense'] >0) { $class= "impair";}
+		else { $class="pair";}	   
 		$id = $data['id_compte'];
 		
 		/* pour voir au chargement l'id_compte recherche */
