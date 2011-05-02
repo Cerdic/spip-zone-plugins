@@ -1,0 +1,35 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 Amap
+  Distribue sous licence GPL
+
+]
+    <B_agenda>
+    <h3><:agenda:></h3>
+    <dl>
+    <BOUCLE_agenda(EVENEMENTS){jour_relatif=0}{par date}{statut=publie}>
+    <dt>#TITRE</dt>
+    <dd>[(#DATE_DEBUT|jour|=={[(#DATE_FIN|jour)]}|?{
+		le [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+		[(#HORAIRE|=={oui}|?{
+		[(#REM) memes heures ?]
+		[(#DATE_DEBUT|=={#DATE_FIN}|?{&agrave
+		[(#DATE_DEBUT|heures)]h[(#DATE_DEBUT|minutes)],''})]
+		[(#REM) pas memes heures ?]
+		[(#DATE_DEBUT|!={#DATE_FIN}|?{de
+		[(#DATE_DEBUT|heures)]:[(#DATE_DEBUT|minutes)] &agrave;
+		[(#DATE_FIN|heures)]:[(#DATE_FIN|minutes)],''})]
+		,''})]
+		,
+		 du [(#DATE_DEBUT|nom_jour)] [(#DATE_DEBUT|affdate)]
+		[(#HORAIRE|=={oui}|?{&agrave; partir de
+		 [(#DATE_DEBUT|heures)]H[(#DATE_DEBUT|minutes)],''})] au
+		[(#DATE_FIN|nom_jour)]
+		 [(#DATE_FIN|affdate)] [(#HORAIRE|=={oui}|?{jusqu'&agrave;
+		 [(#DATE_FIN|heures)]H[(#DATE_FIN|minutes)],''})]  })]</dd>
+    <dd>#LIEU</dd>
+    <dd>#DESCRIPTIF</dd>
+    </BOUCLE_agenda>
+    </dl>
+    </B_agenda>
