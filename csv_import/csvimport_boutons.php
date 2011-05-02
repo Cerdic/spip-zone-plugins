@@ -22,7 +22,7 @@ function csvimport_ajouterBoutons($boutons_admin) {
 	 */
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"] AND 
 	(!isset($GLOBALS['meta']["activer_csvimport"]) OR $GLOBALS['meta']["activer_csvimport"]!="non") AND
-	(!test_plugin_actif('bando'))) {
+	(function_exists('test_plugin_actif') AND !test_plugin_actif('bando'))) {
 
 		// on voit le bouton dans la barre "naviguer"
 		$boutons_admin['naviguer']->sousmenu["csvimport_tous"]= new Bouton(
