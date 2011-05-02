@@ -124,4 +124,62 @@ spip_log("thelia0");
       
 }
 
+/*
+	$auteur = array(login,pass,client)
+*/
+function creer_auteur_thelia($auteur) {
+
+	//Empecher un doublon
+	if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['login']) . " AND source='thelia'")) {
+	      spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien",'theliaob');
+	      return $result;
+	}
+	
+	//charger le support thelia	
+	ob_start();
+		include_once('fonctions/moteur.php');
+	ob_end_clean();	
+
+	//Empecher un doublon
+	if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($auteur['client']->email) . " AND source='thelia'")) {
+	      spip_log("l'utilisateur $login est déjà enregistré dans spip tout va bien",'theliaob');
+	      return $result;
+	}
+
+	//Tester la présence dans thelia
+	$client = $auteur['client'];
+	if (!$auteur['client']) {
+		$client = New Client();
+		if (!$client->charger($auteur['login'], $auteur['pass']))
+			return array();	
+	}
+
+	//Valeur par défaut
+	if (!$statut = $GLOBALS['thelia_statut_nouvel_auteur']) { 
+		spip_log('erreur pas de statut defini par defaut','theliaob');
+		return array();	
+	}
+
+	spip_log("enregistrement auteur",'theliaob');
+	// Recuperer les donnees de l'auteur
+	// Convertir depuis UTF-8 (jeu de caracteres par defaut)
+	include_spip('inc/charsets');
+	$nom = $client->nom.' '.$client->prenom;
+	$login = $email = $client->email;
+	$bio = '';
+	$n = sql_insertq(
+		'spip_auteurs', 
+		array(
+			'source' => 'thelia',
+			'nom' => $nom,
+			'login' => $login,
+			'email' => $email,
+			'bio' => $bio,
+			'statut' => $statut,
+			'pass' => '')
+		);
+	spip_log('Auteur depuis thelia d\'id '.$n,'theliaob');
+
+	return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
+}
 ?>

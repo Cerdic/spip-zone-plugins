@@ -148,6 +148,23 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	
 	//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de Th�lia
 	include_once("fonctions/moteur.php");
+
+	//Connexion à SPIP à la création du compte Thelia
+	if ($_GET['page'] == 'nouveau' || $_GET['page_thelia'] == 'nouveau') {
+		if ($_SESSION['navig']->connecte == 1 && lire_config("spip_thelia/auth_unique_spip_thelia","non")=="oui") ) {
+			include_spip('auth/thelia');
+			$auteur = creer_auteur_thelia(
+				array(
+					'login'=>'',
+					'pass'=>'',
+					'client'=>$_SESSION['navig']->client
+				)
+			);
+			$session = charger_fonction('session','inc');
+			$session($auteur);
+		}
+	}
+
 	
 	$texte = ob_get_contents();
 	ob_end_clean();
