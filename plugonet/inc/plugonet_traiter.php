@@ -216,7 +216,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 			($version_base ? "\n\tschema=\"$version_base\"" : '') .
 			($meta ? "\n\tmeta=\"$meta\"" : '') .
 			plugin2balise_lien($lien, 'documentation') .
-			($compatible ? "\n\tcompatible=\"$compatible\"" : '');
+			($compatible ? "\n\tcompatibilite=\"$compatible\"" : '');
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
@@ -229,7 +229,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	else {
 		// Balise spip
 		$attributs =
-			($compatible ? " compatible=\"$compatible\"" : '');
+			($compatible ? " compatibilite=\"$compatible\"" : '');
 		// raz des balises non utilisees
 		$nom = $commentaire = $auteur = $licence = $traduire = '';
 		$descriptions =array();
@@ -432,7 +432,7 @@ function plugin2balise_necessite($D) {
 		foreach($D['necessite'] as $i) {
 			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 			$src = plugin2balise_lien($i['src'], 'lien', ' ');
-			$version = empty($i['version']) ? '' : (" version=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"");
+			$version = empty($i['version']) ? '' : (" compatibilite=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"");
 			if (preg_match('/^lib:(.*)$/', $nom, $r))
 				$lib .= "\n\t<lib nom=\"" . $r[1] . "\"$src />";
 			else 
@@ -458,7 +458,7 @@ function plugin2balise_utilise($D) {
 	foreach($D as $i) {
 		$nom = isset($i['id']) ? $i['id'] : $i['nom'];
 		$att = " nom=\"$nom\"" .
-				(!empty($i['version']) ? (" version=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"") : '') .
+				(!empty($i['version']) ? (" compatibilite=\"" . plugin2intervalle(extraire_bornes($i['version'])) . "\"") : '') .
 				plugin2balise_lien($i['src']);
 		$res .="\n\t<utilise$att />";
 	}
@@ -476,7 +476,7 @@ function plugin2balise_exec($D, $balise) {
 			plugin2attribut('parent', @$i['parent']) .
 			plugin2attribut('icone', @$i['icone']) .
 			plugin2attribut('action', @$i['url']) .
-			plugin2attribut('args', str_replace('&', '&amp;', str_replace('&amp;', '&', @$i['args']))) .
+			plugin2attribut('parametres', str_replace('&', '&amp;', str_replace('&amp;', '&', @$i['args']))) .
 			' />';
 	}
 
