@@ -1,17 +1,5 @@
-<fieldset class="protection">
-    <legend><:inscription2:protection_contre_les_robots:></legend>
-    <ul>
-	<li>
-	    <?php
-		$a=rand(10,20);
-		$b=rand(1,9);
-		$op="$a - $b = ?";
-	    ?>
-	    <label for="protection"><:inscription2:question:>&nbsp;:&nbsp;<?php echo $op; ?></label>
-	    <input type="text" class="text" name="protection" id="protection" value="#ENV{protection}" />
-	    <input type="hidden" name="a" value="<?php echo $a; ?>" />
-	    <input type="hidden" name="b" value="<?php echo $b; ?>" />
-	    [<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{protection})</p>]
-	</li>
-    </ul>  
-</fieldset>
+[(#REM) Piege a robots spammeurs ]
+<p style="display: none;">
+    <label for="nobot"><:antispam_champ_vide:></label>
+    <input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+</p>

@@ -170,7 +170,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_renvoye' => 'This email address was already recorded. Please activate your account following the instructions contained in the email.',
 	'mars' => 'March',
 	'masculin' => 'Mr.',
-	'mauvaise_reponse' => 'Wrong answer.',
 	'message_auto' => '(this is an automatic message)',
 	'mobile' => 'Mobile',
 	'mobile_pro' => 'Work mobile',
@@ -219,12 +218,7 @@ You will receive and email telling you how to change your login.',
 	'profession' => 'Profession',
 	'profil_droits_insuffisants' => 'Sorry! You are not allowed to modify this author<br />',
 	'profil_modifie_ok' => 'The changes to your profile have been saved.',
-	'protection_contre_les_robots' => 'Anti-bot protection',
 	'publication' => 'Publication',
-	
-	// Q
-	'question' => 'Question',
-
 
 	// R
 	'raccourcis' => 'Shortcuts',
