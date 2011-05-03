@@ -184,7 +184,7 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$taille,$hauteur,$largeur,
 function balise_MEDIA_LIEN_dist($p) {
 	$objet = interprete_argument_balise(1,$p);
 	$forcer_lien = interprete_argument_balise(2,$p);
-	$forcer_lien = is_null($forcer_lien) ? '' : $forcer_lien;
+	$forcer_lien = is_null($forcer_lien) ? "''" : $forcer_lien;
 	$id_document = champ_sql('id_document', $p);
 	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,\$Pile[0]['lien'],\$Pile[0]['titre_lien'],\$Pile[0]['titre'])";
 	return $p;
