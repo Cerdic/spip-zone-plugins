@@ -18,11 +18,11 @@
 		][
 		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|oui)
 			[<:spip_proprio:siren:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
-		][(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tva_nonapplicable]}|=={oui}|non)
+		][(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tva_nonapplicable]}|=={oui}|non)[
 		<br /><:spip_proprio:numero_maj:> <:spip_proprio:tva_intracommunautaire:> 
 			(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tvaintra]}|typo)[ 
 				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
-			]
+			]]
 		][(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tva_nonapplicable]}|=={oui}|oui)
 			<br /><:spip_proprio:tva_non_applicable:>]
 	]
