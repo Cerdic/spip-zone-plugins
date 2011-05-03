@@ -14,7 +14,7 @@
 			<label for="champ_date_distribution"><:amap:date_distribution:><span class="obligatoire"> [Obligatoire]</span></label>
 			<select name="date_distribution" id="champ_date_distribution">
 			<option value=""> </option>
-			<BOUCLE_datedistribution(EVENEMENTS)>
+			<BOUCLE_datedistribution(EVENEMENTS){par date}>
 				<option value="#DATE_DEBUT"[(#DATE_DEBUT|=={#DATE_DISTRIBUTION}|oui) selected="selected"]>[(#DATE_DEBUT|affdate{'d/m/Y'})]</option>
 			</BOUCLE_datedistribution>
 			</select>
