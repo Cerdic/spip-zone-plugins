@@ -16,24 +16,29 @@ function action_editer_asso_membres() {
 		
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$id_auteur = $securiser_action();
+
+	include_spip('base/association');
+
 	$categorie = _request('categorie');
 	$validite = _request('validite');
 	$commentaire = _request('commentaire');
 	$statut_interne = _request('statut_interne');
+	$sexe = _request('sexe');
+	$nom_famille = _request('nom_famille');
+	$prenom = _request('prenom');
+	$fonction = _request('fonction');
 
-	adherent_update($id_auteur, $commentaire, $categorie, $statut_interne, $validite);
-
-	return (array($id_auteur,''));
-}
-
-function adherent_update($id_auteur, $commentaire, $categorie, $statut_interne, $validite)
-{
-	include_spip('base/association');
 	sql_updateq('spip_asso_membres', 
 				   array("commentaire"=> $commentaire,
 					 "validite"=> $validite,
 					 "categorie"=> $categorie,
-					 "statut_interne"=> $statut_interne),
+					 "statut_interne"=> $statut_interne,
+					 "sexe" => $sexe,
+					 "nom_famille" => $nom_famille,
+					 "prenom" => $prenom,
+					 "fonction" => $fonction),
 				   "id_auteur=$id_auteur");
+
+	return (array($id_auteur,''));
 }
 ?>

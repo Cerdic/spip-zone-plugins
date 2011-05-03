@@ -139,7 +139,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_email' => "Mail",
 
 	'adherent_libelle_statut_ok' => '&Agrave; jour',
-	'adherent_libelle_statut_echu' => '&Agrave &eacute;ch&eacute;ance',
+	'adherent_libelle_statut_echu' => '&Eacute;chu',
 	'adherent_libelle_statut_relance' => 'Relanc&eacute;',
 	'adherent_libelle_statut_sorti' => 'D&eacute;sactiv&eacute;',
 	'adherent_libelle_statut_prospect' => 'Prospect',
@@ -170,7 +170,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_entete_statut' => 'Statut',
 	'adherent_entete_statut_defaut' => 'Actifs',
 	'adherent_entete_statut_ok' => '&Agrave; jour',
-	'adherent_entete_statut_echu' => '&Agrave; relancer',
+	'adherent_entete_statut_echu' => '&Eacute;chu',
 	'adherent_entete_statut_relance' => 'Relanc&eacute;s',
 	'adherent_entete_statut_sorti' => 'D&eacute;sactiv&eacute;s',
 	'adherent_entete_statut_erreur_bank' => 'Paiement refus&eacute;',
