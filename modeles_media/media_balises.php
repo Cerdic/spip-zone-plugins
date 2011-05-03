@@ -183,17 +183,19 @@ function calculer_balise_MEDIA_IMAGE_RETAILLEE($image,$taille,$hauteur,$largeur,
 // #MEDIA_LIEN{#LOGO_DOCUMENT} ou #MEDIA_LIEN{#MEDIA_IMAGE_RETAILLEE{#LOGO_DOCUMENT}}
 function balise_MEDIA_LIEN_dist($p) {
 	$objet = interprete_argument_balise(1,$p);
+	$forcer_lien = interprete_argument_balise(2,$p);
+	$forcer_lien = is_null($forcer_lien) ? '' : $forcer_lien;
 	$id_document = champ_sql('id_document', $p);
-	$p->code = "calculer_balise_MEDIA_LIEN($objet,$id_document,\$Pile[0]['lien'],\$Pile[0]['titre_lien'],\$Pile[0]['titre'])";
+	$p->code = "calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,\$Pile[0]['lien'],\$Pile[0]['titre_lien'],\$Pile[0]['titre'])";
 	return $p;
 }
 
-function calculer_balise_MEDIA_LIEN($objet,$id_document,$lien,$titre_lien,$titre) {
+function calculer_balise_MEDIA_LIEN($objet,$forcer_lien,$id_document,$lien,$titre_lien,$titre) {
 	// A-t-on demandé un lien
-	if (!$lien)
+	if (!$lien && !$forcer_lien)
 		return $objet;
 	// Si lien non spécifique, on pointe sur le document
-	if ($lien=='lien') {
+	if ($lien=='lien' || !$lien) {
 		$lien = 'doc'.$id_document;
 		// Si on pointe sur le document, que titre_lien n'est pas spécifié mais qu'on a spécifié un titre au document, on prend le titre spécifique
 		if (!$titre_lien && $titre && $titre!='titre')

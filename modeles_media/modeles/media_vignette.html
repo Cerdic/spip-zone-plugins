@@ -12,9 +12,9 @@
 [(#SET{width,[(#GET{img}|extraire_attribut{width})]})]
 [(#MEDIA_AFFICHER_LEGENDE|oui)
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_vignette[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-<dt>#MEDIA_LIEN{#GET{img}}</dt>
+<dt>#MEDIA_LIEN{#GET{img},'oui'}</dt>
 #MEDIA_LEGENDE{'dl',#GET{width}}
 </dl>]
 [(#MEDIA_AFFICHER_LEGENDE|non)
-<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_vignette[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#MEDIA_LIEN{#GET{img}}</span>]
+<span class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})] media media_vignette[ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>#MEDIA_LIEN{#GET{img},'oui'}</span>]
 </BOUCLE_doc>
