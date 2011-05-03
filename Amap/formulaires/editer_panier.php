@@ -11,7 +11,7 @@ function formulaires_editer_panier_charger_dist($id_panier='new', $retour=''){
 }
 
 function formulaires_editer_panier_verifier_dist($id_panier='new', $retour=''){
-	$erreurs = formulaires_editer_objet_verifier('panier', $id_panier, array('nom'));
+	$erreurs = formulaires_editer_objet_verifier('panier', $id_panier, array('nom', 'prenom', 'date_distribution'));
 	return $erreurs;
 }
 

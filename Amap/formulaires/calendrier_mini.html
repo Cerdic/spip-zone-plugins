@@ -47,7 +47,7 @@
 			{id_article?}{id_mot?}
 			{date_debut < #GET{'borne_fin_mois'}} 
 			{date_fin >= #GET{'borne_debut_mois'}}>
-			 [(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],#DESCRIPTIF,#LIEU,#URL_PAGE{jour},”,#ENV{var_date}})]
+			 [(#DATE_DEBUT|Agenda_memo_full{#DATE_FIN,[(#TITRE|addslashes)],#DESCRIPTIF,#LIEU,#URL_PAGE{agenda},”,#ENV{var_date}})]
 			</BOUCLE_calendrier>
 			[(#REM) le "courante" ci-dessus peut etre remplace par "debut" pour retrouver l'ancien comportement]
 			

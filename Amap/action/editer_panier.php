@@ -41,7 +41,7 @@ function revisions_paniers($id_panier, $c=false) {
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {
 		$c = array();
-		foreach (array('nom', 'prenom', 'email', 'date_distribution', 'type_panier') as $champ) {
+		foreach (array('nom', 'prenom', 'date_distribution') as $champ) {
 			if (($a = _request($champ)) !== null) {
 				$c[$champ] = $a;
 			}

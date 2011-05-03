@@ -1,0 +1,13 @@
+[(#REM)
+
+  Squelette
+  (c) 2011 Amap
+  Distribue sous licence GPL
+
+]
+<link rel="stylesheet" href="#CHEMIN{agenda.css}" type="text/css" media="screen" title="no title" charset="utf-8">
+
+
+#SET{tt,#EVAL{$_GET['type']}}
+
+[(#INCLURE{fond=inclure/agenda_#GET{tt,"mois"}} {ajax}{annee=#ENV{annee,#DATE|annee}} {mois=#ENV{mois,#DATE|mois}}{type=#GET{tt}}{env})]

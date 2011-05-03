@@ -353,11 +353,9 @@ function amap_declarer_tables_principales($tables_principales){
 	//-- Table paniers -------------------
 	$spip_paniers = array(
 		'id_panier'  => 'bigint NOT NULL AUTO_INCREMENT',
-		'nom'  => 'bigint NOT NULL',
-		'prenom'  => 'bigint NOT NULL',
-		'email'  => 'bigint NOT NULL',
-		'date_distribution'  => 'bigint NULL',
-		'type_panier'  => 'bigint NULL',
+		'nom'  => 'text NOT NULL',
+		'prenom'  => 'text NOT NULL',
+		'date_distribution'  => 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL',
 		);
 	$spip_paniers_key = array(
 		'PRIMARY KEY'   => 'id_panier'

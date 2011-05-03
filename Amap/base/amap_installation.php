@@ -52,6 +52,15 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 			spip_log("Création de rubrique et champ extra type_panier V0.5", "amap_installation");                
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
+		if (version_compare($current_version,'0.6','<')) {
+			sql_alter("TABLE spip_paniers DROP type_panier");
+			sql_alter("TABLE spip_paniers DROP email");
+			sql_alter("TABLE spip_paniers CHANGE date_distribution date_distribution datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+			sql_alter("TABLE spip_paniers CHANGE nom nom text NOT NULL");
+			sql_alter("TABLE spip_paniers CHANGE prenom prenom text NOT NULL");
+			spip_log("Modification de la colonne date_distribution V0.6", "amap_installation");                
+			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
+			}
 		}
 }
 function amap_vider_tables($nom_meta_version_base){

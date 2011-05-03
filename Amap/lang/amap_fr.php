@@ -101,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_liste' => 'Liste des paniers',
 	'panier_livraison' => 'Contenu d\'un panier',
 	'paniers'  => 'Paniers',
+	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connectés ou on ne vous a pas reconnu.',
 	'paysan' => 'Paysan',
 	'petit' => 'Petit',
 	'prenom' => 'Prénom',
@@ -135,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'vacances' => 'Vacances',
+	'vos_paniers' => 'Vos paniers',
 
 	// Z
 );

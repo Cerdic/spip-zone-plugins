@@ -9,7 +9,6 @@
 		<ul>
 		[(#SAISIE{input, nom, label=<:amap:nom:>,obligatoire=oui})]
 		[(#SAISIE{input, prenom, label=<:amap:prenom:>,obligatoire=oui})]
-		[(#SAISIE{input, email, label=<:amap:adresse_email:>,obligatoire=oui})]
 		<li class="editer editer_date_distribution obligatoire saisie_selection">
 		<B_datedistribution>
 			<label for="champ_date_distribution"><:amap:date_distribution:><span class="obligatoire"> [Obligatoire]</span></label>
@@ -21,10 +20,6 @@
 			</select>
 		</B_datedistribution>
 		</li>
-		[(#SAISIE{selection, type_panier, label=<:amap:type_panier:>, obligatoire=oui,
-			datas=#ARRAY{
-				petit,<:amap:petit:>,
-				grand,<:amap:grand:>,}})] 		
 		</ul>
 		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
