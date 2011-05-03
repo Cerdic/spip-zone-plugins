@@ -70,7 +70,7 @@ function zcore_styliser($flux){
  * @return string
  */
 function zcore_pre_propre($flux){
-	static $init = false;
+/*	static $init = false;
 	if (!$init){
 		$intertitre = $GLOBALS['debut_intertitre'];
 		$class = extraire_attribut($GLOBALS['debut_intertitre'],'class');
@@ -80,7 +80,7 @@ function zcore_pre_propre($flux){
 			$GLOBALS['spip_raccourcis_typo'][$k] = str_replace($intertitre,$GLOBALS['debut_intertitre'],$GLOBALS['spip_raccourcis_typo'][$k]);
 		}
 		$init = true;
-	}
+	}*/
 	return $flux;
 }
 
@@ -94,6 +94,18 @@ function zcore_insert_head($flux){
 	if (find_in_path('inc-insert-head.html')){
 		$flux .= recuperer_fond('inc-insert-head',array());
 	}
+	return $flux;
+}
+
+/**
+ * Ajouter la definition du bloc contenu pour var_zajax
+ * @param string $flux
+ * @return string
+ */
+function zcore_insert_head_css($flux){
+	include_spip('public/styliser_par_z');
+	$contenu = reset(z_blocs(false));
+	$flux = "<script type='text/javascript'>var var_zajax_content='$contenu';</script>" . $flux;
 	return $flux;
 }
 

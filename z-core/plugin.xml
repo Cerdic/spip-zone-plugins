@@ -24,9 +24,13 @@
 		<inclure>zcore_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>zcore_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>pre_propre</nom>
 		<inclure>zcore_pipelines.php</inclure>
 	</pipeline>
 	<categorie>squelette</categorie>
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.3.0-dev;]" />
 </plugin>
