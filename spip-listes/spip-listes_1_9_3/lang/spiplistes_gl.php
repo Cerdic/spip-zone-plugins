@@ -1,4 +1,13 @@
 <?php
+/**
+ * Pack langue Greenland
+ * 
+ * @package spiplistes
+ */
+ // $LastChangedRevision: 47069 $
+ // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
+ 
 // Este es un archivo para SPIP -- This is a SPIP module file  --  Ceci est un fichier module de SPIP
 // Traducci&oacute;n ao galego por Berio Molina (berio@alg-a.org | http://www.berio.alg-a.org)
 

@@ -624,6 +624,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'pas_abonne_liste' => 'Vous n&#8217;&#234;tes pas, ou plus, abonn&#233; &#224; cette liste de diffusion.'
 , 'action_interdite' => 'Cette action n&#8217;est pas autoris&#233;e.'
 , 'vous_etes_desinscrit' => 'Vous &#234;tes maintenant d&#233;sinscrit de cette liste de diffusion.'
+, 'difficile_lire_msg' => 'Si vous rencontrez des difficult&eacute;s &agrave; lire ce courrier ici, '
+, 'vous_consultez_ori' => 'vous pouvez consulter l&#8217;original sur le site'
 
 // tableau items *_options
 , 'Liste_de_destination' => 'Liste de destination'
