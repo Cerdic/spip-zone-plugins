@@ -50,14 +50,15 @@
 			</ul>	        
         </fieldset>]
 
-		[(#ENV{id_auteur}|non)
-			[(#CONFIG{inscription2/reglement}|=={on}|oui)
-			<INCLURE{fond=formulaires/inscription2_reglement}{env}>
-			]
-		]
-	    <p class="boutons">
-		    <input type="submit" class="submit" value="<:bouton_valider:>" />
-	    </p>
+	[(#ENV{id_auteur}|non)
+	    [(#CONFIG{inscription2/reglement}|=={on}|oui)
+	    <INCLURE{fond=formulaires/inscription2_reglement}{env}>
+	    ]
+	    <INCLURE{fond=formulaires/inscription2_protection}{env}>
+	]
+	<p class="boutons">
+		<input type="submit" class="submit" value="<:bouton_valider:>" />
+	</p>
     </form>
 ]
 ]

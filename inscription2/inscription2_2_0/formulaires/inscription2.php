@@ -207,6 +207,10 @@ function formulaires_inscription2_verifier_dist($id_auteur = null,$redirect = nu
 		}
 	}
 
+      if (! is_numeric($_POST["a"]) || ! is_numeric($_POST["b"]) || ! is_numeric($_POST["protection"]) || $_POST["protection"] != ($_POST["a"] - $_POST["b"])){
+	  $erreurs['protection'] = _T('inscription2:mauvaise_reponse');
+      }
+
 	//Offrir aux autres plugins la possibilite de verifier les donnees
 	$erreurs = pipeline('i2_verifier_formulaire',
 		array(

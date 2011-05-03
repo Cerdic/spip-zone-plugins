@@ -168,6 +168,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_renvoye' => 'Cette adresse email a déjà été enregistrée, veuillez activer votre compte en suivant les instructions contenues dans le mail.',
 	'mars' => 'mars',
 	'masculin' => 'Monsieur',
+	'mauvaise_reponse' => 'La réponse fournie n\'est pas correcte.',
 	'message_auto' => '(ceci est un message automatique)',
 	'mobile' => 'Mobile',
 	'mobile_pro' => 'Mobile professionnel',
@@ -218,7 +219,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'profession' => 'Profession',
 	'profil_droits_insuffisants' => 'Desolé vous n\'avez pas le droit de modifier cet auteur<br />',
 	'profil_modifie_ok' => 'Les modifications de votre profil ont bien été prises en compte.',
+	'protection' => 'Protection',
+	'protection_contre_les_robots' => 'Protection contre les robots',
 	'publication' => 'Publication',
+	
+	// Q
+	'question' => 'Question',
 
 	// R
 	'raccourcis' => 'Raccourcis',

@@ -200,6 +200,7 @@ function inscription2_i2_verifications_specifiques($array){
 	
 	// Verifie que la case du reglement est cochée
 	$array['reglement'] = 'valide_reglement';
+	
 
 	return $array;
 }
