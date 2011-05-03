@@ -179,6 +179,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 
 	# Categories
 	'pas_de_categorie_attribuee' => 'Pas de cat&eacute;gorie attribu&eacute;e',
+	'erreur_pas_de_categorie' => 'Aucune cat&eacute;gorie de cotisation d&eacute;finie',
+
 	# Bouton
 	'adherent_bouton_confirmer' => 'Confirmer',
 	'adherent_bouton_modifier' => 'Modifier',

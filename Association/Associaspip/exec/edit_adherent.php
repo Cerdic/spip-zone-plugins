@@ -60,74 +60,18 @@ function exec_edit_adherent_args($id_auteur)
 			"\">",
 			htmlspecialchars($nom_famille.' '.$prenom),
 			 "</a></td></div>\n";
-		echo '<br /><div>'.association_date_du_jour().'</div>';	
+		echo '<br /><div>'.association_date_du_jour().'</div>';
+
 		echo fin_boite_info(true);
 		
 		echo association_retour();
 	
 		echo debut_droite("",true);
-		
-		echo debut_cadre_relief(  "", false, "", $titre = _T('asso:adherent_titre_modifier_membre'));
-		echo edit_adherent($id_auteur, $categorie, $validite, $statut_interne, $commentaire);
-		fin_cadre_relief();
+
+		echo recuperer_fond("prive/editer/editer_asso_membres", array (
+			'id_auteur' => $id_auteur,
+		));
 		echo fin_page_association(); 
 	}
-}
-
-function edit_adherent($id_auteur, $categorie, $validite, $statut_interne, $commentaire)
-{
-	$res = '';
-	
-	$sel = '';
-	$sql = sql_select('*', 'spip_asso_categories', '','', "id_categorie") ;
-	while ($var = sql_fetch($sql)) {
-			$sel .= '<option value="'.$var['id_categorie'].'"';
-			if($categorie== $var['id_categorie']){$sel .= ' selected="selected"';}
-			$sel .= '> '.$var['libelle']."</option>\n";
-	}
-
-	if ($sel) {
-		$res .= '<label for="categorie"><strong>'
-		. _T('asso:adherent_libelle_categorie').' :</strong></label>'
-		. '<select name="categorie" id="categorie" class="formo">'
-		. $sel
-		. "</select>\n";
-	}
-
-	$res .= '<label for="validite"><strong>'
-	. _T('asso:adherent_libelle_validite')
-	. ' :</strong></label>'
-	. '<input name="validite" value="'
-	. $validite
-	. '" type="text" id="validite" class="formo" />';
-
-	$sel = '';
-	foreach ($GLOBALS['association_liste_des_statuts'] as $var) {
-		$sel .= '<option value="'.$var.'"';
-		if ($statut_interne==$var) {$sel .= ' selected="selected"';}
-		$sel .= '>'._T('asso:adherent_entete_statut_'.$var)."</option>\n";
-	}
-
-	if ($sel) {
-
-		$res .= '<label for="statut_interne"><strong>'
-		  . _T('asso:adherent_libelle_statut')
-		  . ' :</strong></label>'
-		  . '<select name ="statut_interne" id="statut_interne" class="formo">'
-		  . $sel
-		  . '</select>';
-	}
-
-	$res .= '<label for="commentaire"><strong>'
-	. _T('asso:adherent_libelle_commentaires').' :</strong></label>'
-	. '<textarea name="commentaire" id="commentaire" class="formo" rows="3" cols="80" >'
-	. $commentaire
-	. '</textarea>'
-	. "\n<div style='float:right;'>"
-	. '<input type="submit" value="'
-	.  _T('asso:bouton_modifie')
-	. '" class="fondo" /></div>';
-
-	return redirige_action_post('adherent' , $id_auteur, 'voir_adherent', "id=$id_auteur", $res);
 }
 ?>

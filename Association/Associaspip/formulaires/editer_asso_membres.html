@@ -1,0 +1,51 @@
+<div class="formulaire_spip formulaire_demo">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<h3 class="legend"><:asso:adherent_titre_modifier_membre:></h3>
+
+		<li class="editer_categorie">
+			<label for="categorie"><strong><:asso:adherent_libelle_categorie:></strong></label>
+			<B_categorie>
+			<select name="categorie" id="categorie" class="formo" > 
+			<BOUCLE_categorie(ASSO_CATEGORIES){par libelle}>
+			<option value="#ID_CATEGORIE" [(#ENV{categorie}|=={#ID_CATEGORIE}|?{selected="selected"})]>#LIBELLE</option>
+			</BOUCLE_categorie>
+			</select>
+			</B_categorie>
+			<span class="erreur_message"><:asso:erreur_pas_de_categorie:></span>
+			<//B_categorie>
+		</li>
+
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{validite}}
+		<li class="editer_validite">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="validite"><strong><:asso:adherent_libelle_validite:></strong></label>
+			<input type="text" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite"  class='formo'/>
+		</li>
+
+		<!-- impossible de recuperer les valeurs des statuts dans le tableau global association_liste_des_statuts, re-entres a la main, il y apeut-etre moyen de faire mieux -->
+		<li class="editer_statut_interne">
+			<label for="statu_interne"><strong><:asso:adherent_libelle_statut:></strong></label>
+			<select name="statut_interne" id="statut_interne" class="formo" > 
+				<option [(#ENV{statut_interne}|=={sorti}|?{selected="selected"})] value="sorti"><:asso:adherent_entete_statut_sorti:></option>
+				<option [(#ENV{statut_interne}|=={prospect}|?{selected="selected"})]  value="prospect"><:asso:adherent_entete_statut_prospect:></option>
+				<option  [(#ENV{statut_interne}|=={ok}|?{selected="selected"})] value="ok"><:asso:adherent_entete_statut_ok:></option>
+				<option  [(#ENV{statut_interne}|=={echu}|?{selected="selected"})] value="echu"><:asso:adherent_entete_statut_echu:></option>
+				<option  [(#ENV{statut_interne}|=={relance}|?{selected="selected"})] value="relance"><:asso:adherent_entete_statut_relance:></option>
+			</select>
+		</li>
+
+		<li class="editer_commentaire">
+			<label for="commentaire"><strong><:asso:adherent_libelle_commentaires:></strong></label>
+			<textarea name="commentaire" id="commentaire"  class='formo' rows="3" cols="80">[(#ENV{commentaire})]</textarea>
+		</li>
+
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>
