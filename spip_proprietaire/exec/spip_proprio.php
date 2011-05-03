@@ -23,7 +23,8 @@ function exec_spip_proprio() {
 		. "\n<div class='verdana2' style='text-align: justify'>"
 		. cadre_depliable('rien.gif', _T('spip_proprio:pourquoi_ce_plugin'), false, propre(_T('spip_proprio:presentation')), "bloc_presentation", '')
 		. cadre_depliable('rien.gif', _T('spip_proprio:utiliser_ce_plugin'), false, propre(_T('spip_proprio:presentation_plugin')), "bloc_presentation_plugin", '')
-		. cadre_depliable('rien.gif', _T('spip_proprio:outils_de_communication'), false, propre(_T('spip_proprio:presentation_outils_de_communication')).$lien_page_test, "bloc_presentation_outils", '')
+		. cadre_depliable('rien.gif', _T('spip_proprio:outils_de_communication'), false, propre(_T('spip_proprio:presentation_outils_de_communication')), "bloc_presentation_outils", '')
+		. $lien_page_test
 		. "</div>"
 		. fin_boite_info(true)
 		. boutons_proprietaire(false);

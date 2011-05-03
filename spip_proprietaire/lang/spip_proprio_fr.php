@@ -56,7 +56,7 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'exporter_importer' => 'Exporter/Importer',
 	'exporter_configuration' => 'Exporter la configuration (<i>informations sur le propri&eacute;taire, l\'&eacute;diteur ...</i>)',
 	'exporter_fichiers_langues' => 'Exporter les cha&icirc;nes de langues propres au site',
-	'enregistrement_ou_label' => '(<i>saisie automatique pour la France</i>)',
+	'enregistrement_ou_label' => 'Saisie automatique pour la France (<i>option rempla&ccedil;ant le champ ci-dessus</i>)',
 	'enregistrement_siren_label' => 'SIREN [<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises - code INSEE unique d&#233;signant la personne juridique de l&#039;entreprise">?</abbr>]',
 	'enregistrement_siren_comment' => 'ex.: 123 456 78 (9: cl&eacute; automatique)',
 	'enregistrement_siren_title' => 'R&#233;f&#233;rence de l&#039;entreprise &#224; neuf chiffres, vous pouvez n&#039;indiquer que les huit premiers chiffres.',
@@ -185,35 +185,40 @@ Afin de vous prot&eacute;ger au mieux, il est tr&egrave;s fortement conseill&eac
 
 Plus g&eacute;n&eacute;ralement, il y a lieu d’adapter vos mentions l&eacute;gales &agrave; votre activit&eacute; ({professions r&eacute;glement&eacute;es, site de commerce ...}).
 ',
-	'presentation_plugin' => '{{{Fonctionnalit&eacute;s du plugin SPIP Propri&eacute;taire}}}
+//	'presentation_plugin' => '{{{Fonctionnalit&eacute;s du plugin SPIP Propri&eacute;taire}}}
+	'presentation_plugin' => '{{{Fonctionnalit&eacute;s du plugin Mentions L&eacute;gales}}}
 
-Ce plugin vous propose un ensemble de formulaires et de mod&egrave;les pour faciliter la mise en place des informations pr&eacute;cit&eacute;es. Il vous permet notament de d&eacute;finir les informations concernant l’&eacute;diteur, le cr&eacute;ateur et l’h&eacute;bergeur du site et propose des mod&egrave;les d’affichages de celles-ci.
+Ce plugin vous propose un ensemble de formulaires et de mod&egrave;les pour faciliter la mise en place des informations pr&eacute;cit&eacute;es. Il vous permet notamment de d&eacute;finir les informations concernant l’&eacute;diteur, le cr&eacute;ateur et l’h&eacute;bergeur du site et propose des mod&egrave;les d’affichages de celles-ci.
 
 Il est conseill&eacute; de prendre un moment pour personnaliser le mod&egrave;le "mentions_legales.html" pr&eacute;sent dans le r&eacute;pertoire "modeles/" du plugin. C’est ici que se construisent les textes l&eacute;gaux. Vous pouvez modifier ou ajouter des textes depuis le bouton "Textes de langue propri&eacute;taire" ci-dessous.
 
 Vous pouvez &eacute;galement inclure ces mod&egrave;les dans les objets &eacute;ditoriaux de SPIP en utilisant les raccourcis typographiques "&lt;mentions_legales|&gt;" et "&lt;conditions_utilisation|&gt;".
 
-Pour finir, des mod&egrave;les de squelettes d’en-t&ecirc;te et de pieds de page sont propos&eacute;s, construits &agrave; l’image de ceux de la distribution de SPIP, ajoutant les informations de copyright et un acc&egrave;s aux mentions l&eacute;gales du site. Vous pouvez bien entendu les personnaliser : il s’agit des fichiers "inc-head.html" et "inc-pied.html" pr&eacute;sents dans le r&eacute;pertoire "public/inc/" du plugin. Pour les utiliser, placez les directement dans le r&eacute;pertoire "public/".
+Pour finir, des mod&egrave;les de squelettes d’en-t&ecirc;te et de pieds de page sont propos&eacute;s, construits &agrave; l’image de ceux de la distribution de SPIP, ajoutant les informations de copyright et un acc&egrave;s aux mentions l&eacute;gales du site. Vous pouvez bien entendu les personnaliser : il s’agit des fichiers "inc-head.html" et "inc-pied.html" pr&eacute;sents dans le r&eacute;pertoire "public/inc/" du plugin. Pour les utiliser, placez les directement dans le r&eacute;pertoire "public/" ou &agrave; la racine de votre r&eacute;pertoire de squelettes.
 
 {{{Note pour les utilisateurs de squelettes Zpip}}}
 
 Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelettes cit&eacute;s plus haut. Pour les visualiser, ajoutez simplement "_zpip" aux noms de squelettes ci-dessus. Le contenu de ces squelettes est disponible dans le r&eacute;pertoire "public/contenu/".
 ',
+//Le plugin {{SPIP Propri&eacute;taire}} propose &eacute;galement un ensemble d’outils de pr&eacute;sentation d’informations pour valoriser et mettre en avant vos atouts.
 	'presentation_outils_de_communication' => '{{{Valoriser son site web}}}
 
-Le plugin {{SPIP Propri&eacute;taire}} propose &eacute;galement un ensemble d’outils de pr&eacute;sentation d’informations pour valoriser et mettre en avant vos atouts.
+Le plugin {{Mentions L&eacute;gales}} propose &eacute;galement un ensemble d’outils de pr&eacute;sentation d’informations pour valoriser et mettre en avant vos atouts.
 
 Il propose par exemple un mod&egrave;le de "carte de visite" du site ainsi qu’une "v-Card" ({Virtual Card permettant de charger automatiquement vos informations de contact dans un gestionnaire de mails ou un carnet d’adresse}).
 
 Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’information ({cette page prend en compte les informations saisies dans les diff&eacute;rents formulaires du plugin, il est donc n&eacute;cessaire d’en remplir au minimum quelques uns pour visualisation ...}).',
 	// Import/Export
-	'proprietaire_export_import' => 'SPIP Propri&eacute;taire : maintenance',
+	'proprietaire_export_import' => 'Mentions L&eacute;gales : maintenance',
+//	'proprietaire_export_import' => 'SPIP Propri&eacute;taire : maintenance',
 	'proprietaire_retour_plateforme' => 'Retour &agrave; la plateforme',
 	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos cha&icirc;nes personnelles de langues, ou les restaurer depuis une pr&eacute;c&eacute;dente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />',
 	// Pages
-	'proprietaire_titre_page' => 'Plateforme propri&eacute;taire',
+	'proprietaire_titre_page' => 'Plateforme Mentions L&eacute;gales',
+//	'proprietaire_titre_page' => 'Plateforme propri&eacute;taire',
 	'proprietaire_titre_page_short' => 'Plateforme',
-	'proprietaire_texte' => 'Vous pouvez ici d&eacute;finir les options g&eacute;n&eacute;rales du site utilis&eacute;es par le plugin <b>SPIP Propri&eacute;taire</b>.<br /><br />Vous pouvez &eacute;galement d&eacute;finir des cha&icirc;nes de langues particuli&egrave;res dont l\'utilisation est rappel&eacute;e sur la page concern&eacute;e.<br />',
+	'proprietaire_texte' => 'Vous pouvez ici d&eacute;finir les options g&eacute;n&eacute;rales du site utilis&eacute;es par le plugin <b>Mentions L&eacute;gales</b>.<br /><br />Vous pouvez &eacute;galement d&eacute;finir des cha&icirc;nes de langues particuli&egrave;res dont l\'utilisation est rappel&eacute;e sur la page concern&eacute;e.<br />',
+//	'proprietaire_texte' => 'Vous pouvez ici d&eacute;finir les options g&eacute;n&eacute;rales du site utilis&eacute;es par le plugin <b>SPIP Propri&eacute;taire</b>.<br /><br />Vous pouvez &eacute;galement d&eacute;finir des cha&icirc;nes de langues particuli&egrave;res dont l\'utilisation est rappel&eacute;e sur la page concern&eacute;e.<br />',
 	'proprietaire_texte_supp' => 'Ce plugin vous propose de centraliser et automatiser la gestion d\'un site \'institutionnel\' ou \'professionnel\' fonctionnant sous SPIP.<br /><br />Il vous permet notamment de saisir un ensemble d\'informations sur le <b>propri&eacute;taire</b> du site, organisme, soci&eacute;t&eacute;, institution ou particulier, afin de les pr&eacute;senter de divers mani&egrave;res et, &eacute;ventuellement, de g&eacute;n&eacute;rer automatiquement des informations de Copyright, des \'Mentions l&eacute;gales\' et des \'Conditions d\'utilisation\' propres au site.',
 	'pconfig_titre_page' => 'Configuration propri&eacute;taire',
 	'pconfig_titre_page_short' => 'Configuration',
@@ -248,7 +253,8 @@ Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’infor
 	'rue_label' => 'N&deg; et Rue',
 
 // S //
-	'spip_proprio' => 'Propri&eacute;taire',
+//	'spip_proprio' => 'Propri&eacute;taire',
+	'spip_proprio' => 'Mentions L&eacute;gales',
 	'site_web_label' => 'Adresse de site web',
 	'serveur_legend' => 'Informations sur le serveur h&eacute;bergeant le site',
 	'serveur_type_label' => 'Type du serveur',
