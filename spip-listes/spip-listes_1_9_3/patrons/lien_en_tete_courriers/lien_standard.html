@@ -1,7 +1,7 @@
 #CACHE{1}
 #HTTP_HEADER{Content-Type: text/html}
-[(#REM)
-<!--
+[<!--(#REM)
+
 * Squelette pour spip-listes    
 * lien_standard.html (CP-20071012 paladin@quesaco.org)
 // $LastChangedRevision$
@@ -16,10 +16,10 @@
 * - les urls et liens images seront automatiquement converties en absolues
 *  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
 *
--->
-]
+
+-->]
 [<div style="font-family:sans-serif;font-size:80%;line-height:1.3em;padding:0.25em 1ex;background-color:#333366;color:#ffffff;margin:0;text-align:center;">
 	<p style='margin:0;'>L'original de ce courrier est au format HTML.<br />
-	Si vous rencontrez des difficult&eacute;s &agrave; lire ce courrier ici, <br />
-	<a href="(#TEST|trim|generer_url_public{page=courrier&id_courrier=#ID_COURRIER})">vous pouvez consulter l'original sur le site [(#NOM_SITE_SPIP|textebrut)]</a>.</p>
+	<:spiplistes:difficile_lire_msg:> <br />
+	<a href="(#TEST|trim|generer_url_public{page=courrier&id_courrier=#ID_COURRIER})"><:spiplistes:vous_consultez_ori:> [(#NOM_SITE_SPIP|textebrut)]</a>.</p>
 	</div>]
