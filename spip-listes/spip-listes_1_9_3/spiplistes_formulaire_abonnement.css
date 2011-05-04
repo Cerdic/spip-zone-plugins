@@ -1,0 +1,42 @@
+/**
+ * spiplistes_formulaire_abonnement.css
+ * @see formulaire_abonnement.html
+*/
+
+#sl-for-abo-inscript, #sl-for-abo-inscript * {
+	background: transparent;
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+#sl-for-abo-inscript {
+	font-family: "Trebuchet MS","Myriad Web Pro","Myriad Web", Verdana, Tahoma, Arial, sans-serif;
+	font-size:0.9em;
+	text-align:center;
+	background-color:#ffffa9;
+	border:3px solid blue;
+	width:160px;
+	margin:0 auto;
+}
+#sl-for-abo-inscript h3 {
+	font-size:1em;
+	color:#030;
+	background-color:blue;
+	width:auto;
+}
+#sl-for-abo-inscript form {
+	margin:0 auto;
+	width:100px;
+	text-align:left;
+	border:1px solid red;
+}
+#sl-for-abo-inscript form fieldset {
+	border:1px solid #ccc;
+	padding:1ex;
+	/* width:100%; */
+}
+#sl-for-abo-inscript form ul {
+	display:block;
+	background-color: #fcc;
+	width:100px;
+}

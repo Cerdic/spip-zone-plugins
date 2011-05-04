@@ -1,14 +1,13 @@
 <?php
-
-// $LastChangedRevision: 45629 $
-// $LastChangedBy: paladin@quesaco.org $
-// $LastChangedDate: 2011-03-21 16:36:52 +0100 (Lun 21 mar 2011) $
-
 /**
  * @since SPIP 2.0
  * @see http://www.spip.net/fr_article3800.html (les formulaires CVT)
  * @see http://www.spip.net/fr_article3796.html (CVT par l'exemple)
+ * @package spiplistes
  */
+ // $LastChangedRevision: 47063 $
+ // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 

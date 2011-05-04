@@ -8,20 +8,20 @@
  // $LastChangedDate$
 
 /******************************************************************************************/
-/* SPIP-listes est un système de gestion de listes d'information par email pour SPIP      */
+/* SPIP-listes est un systeme de gestion de listes d'information par email pour SPIP      */
 /* Copyright (C) 2004 Vincent CARON  v.caron<at>laposte.net , http://bloog.net            */
 /*                                                                                        */
 /* Ce programme est libre, vous pouvez le redistribuer et/ou le modifier selon les termes */
-/* de la Licence Publique Générale GNU publiée par la Free Software Foundation            */
+/* de la Licence Publique Generale GNU publiee par la Free Software Foundation            */
 /* (version 2).                                                                           */
 /*                                                                                        */
-/* Ce programme est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
+/* Ce programme est distribue car potentiellement utile, mais SANS AUCUNE GARANTIE,       */
 /* ni explicite ni implicite, y compris les garanties de commercialisation ou             */
-/* d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU  */
-/* pour plus de détails.                                                                  */
+/* d'adaptation dans un but specifique. Reportez-vous a la Licence Publique Generale GNU  */
+/* pour plus de details.                                                                  */
 /*                                                                                        */
-/* Vous devez avoir reçu une copie de la Licence Publique Générale GNU                    */
-/* en même temps que ce programme ; si ce n'est pas le cas, écrivez à la                  */
+/* Vous devez avoir reçu une copie de la Licence Publique Generale GNU                    */
+/* en même temps que ce programme ; si ce n'est pas le cas, ecrivez a la                  */
 /* Free Software Foundation,                                                              */
 /* Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.                   */
 /******************************************************************************************/
@@ -30,7 +30,10 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-function exec_spiplistes_import_export(){
+/**
+ * Page import export
+*/
+function exec_spiplistes_import_export() {
 
 	include_spip('inc/presentation');
 	include_spip('inc/acces');
@@ -43,7 +46,7 @@ function exec_spiplistes_import_export(){
 		;
 	static $eol = PHP_EOL;
 	
-	// initialise les variables postées par le formulaire
+	// initialise les variables postees par le formulaire
 	foreach(array(
 		'btn_valider_import', 'abos_liste', 'format_abo', 'forcer_abo'	// retour import
 		, 'btn_valider_export', 'export_id' // retour export
@@ -159,7 +162,7 @@ function exec_spiplistes_import_export(){
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo($commencer_page(_T('spiplistes:spiplistes') . " - " . _T('spiplistes:import_export'), $rubrique, $sous_rubrique));
 
-	// la gestion du courrier est réservée aux admins 
+	// la gestion du courrier est reservee aux admins 
 	if (!$flag_autorise) {
 		die (spiplistes_terminer_page_non_autorisee() . fin_page());
 	}       
@@ -253,8 +256,8 @@ function exec_spiplistes_import_export(){
 		$listes_sans_patron = array();
 
 		if(count($listes_array) > 0) {
-			// une liste sans patron ne peut pas contenir d'abonnés.
-			// récupère la liste des listes qui n'ont pas de patron.
+			// une liste sans patron ne peut pas contenir d'abonnes.
+			// recupere la liste des listes qui n'ont pas de patron.
 			$sql_result = sql_select('id_liste', 'spip_listes'
 				, array("patron=''"
 					, "(statut=".implode(" OR statut=", array_map("sql_quote", explode(";", _SPIPLISTES_LISTES_STATUTS_OK))).")"
@@ -291,7 +294,7 @@ function exec_spiplistes_import_export(){
 			. "</ul>"
 			. fin_cadre_relief(true)
 			//
-			// Sélection du format de réception
+			// Selection du format de reception
 			. debut_cadre_relief("", true, "", _T('spiplistes:format_de_reception_'))
 			. "<ul class='liste-listes verdana2'>\n"
 			. "<li>"
@@ -390,10 +393,18 @@ function exec_spiplistes_import_export(){
 	echo pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		, spiplistes_html_signature(_SPIPLISTES_PREFIX)
 		, fin_gauche(), fin_page();
-}
+} // exec_spiplistes_import_export()
 
-function spiplistes_fieldset_separateur ($sep)  {
-	$checked = ($sep=="\t");
+/**
+ * Element HTML fieldset pour selection separateur
+ *
+ * Petite boite (fieldset) pour definir le
+ * separateur de champ du fichier exporte/importe
+ * @param string $sep
+ * @return string
+ */
+function spiplistes_fieldset_separateur ($sep) {
+	$checked = ($sep == "\t");
 	return(""
 		. "<fieldset class='verdana2'><legend>"._T('spiplistes:separateur_de_champ_').":</legend>"
 		. spiplistes_form_input_radio('separateur', 'tab'
@@ -404,14 +415,26 @@ function spiplistes_fieldset_separateur ($sep)  {
 		);
 }
 
+/**
+ * Bouton checkbox dans un fieldset de formulaire
+ *
+ * Renvoie l'element HTML fieldset contenant
+ * un case a cocher et sa legende
+ * {@link spiplistes_form_input_checkbox()}
+ * @param string $legend
+ * @param string $name
+ * @param string $value
+ * @param string $label
+ * @param boolean $checked case a cocher cochee
+ * @return string
+ */
 function spiplistes_fieldset_option ($legend, $name, $value, $label, $checked = false)  {
 	
-	$result = "<fieldset class='verdana2'>"
-		. "<legend>" . $legend . " : </legend>"
+	$result = '<fieldset class="verdana2">'
+		. '<legend>' . $legend . ' : </legend>'
 		. spiplistes_form_input_checkbox ($name, $value, $label, $checked, true, false)
-		. "</fieldset>\n"
+		. '</fieldset>' . PHP_EOL
 		;
 	
 	return($result);
 }
-?>

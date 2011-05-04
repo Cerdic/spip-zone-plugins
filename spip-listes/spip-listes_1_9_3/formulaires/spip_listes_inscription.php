@@ -1,16 +1,16 @@
 <?php
-
-	// formulaires/spip_listes_inscriptions.php
+/**
+ * Formulaire d'inscription
+ * 
+ * @since SPIP 2.0
+ * @package spiplistes
+ */
+ // $LastChangedRevision: 47063 $
+ // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
 	
-	// $LastChangedRevision: 26478 $
-	// $LastChangedBy: paladin@quesaco.org $
-	// $LastChangedDate: 2009-02-09 11:25:06 +0100 (Lun 09 fév 2009) $
-	
-	// formulaire d'inscription
-	// necessite SPIP >= 2
-	
-	include_spip('inc/acces');
-	include_spip('inc/spiplistes_api');
+include_spip('inc/acces');
+include_spip('inc/spiplistes_api');
 
 function formulaires_spip_listes_inscription_charger_dist ($id_liste='')
 {

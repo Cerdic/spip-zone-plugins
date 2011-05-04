@@ -1,10 +1,10 @@
 <?php
-
-// formulaires/modif_abonnement2.php
-
-// $LastChangedRevision: 27807 $
-// $LastChangedBy: paladin@quesaco.org $
-// $LastChangedDate: 2009-04-12 08:24:13 +0200 (dim., 12 avr. 2009) $
+/**
+ * @package spiplistes
+ */
+ // $LastChangedRevision: 47063 $
+ // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 

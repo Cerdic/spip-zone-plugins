@@ -1,3 +1,4 @@
+<div id="sl-for-abo-inscript">
 [<!--(#REM)
 
 // formulaires/formulaire_abonnement.html
@@ -23,7 +24,7 @@
 	[(#ENV{erreur}|?{'',' '})
 	<:pass_indiquez_cidessous:>
 	
-	<form action="#SELF#spiplistes_formabo" method="post">
+	<form id="sl-for-abo-pass" action="#SELF#spiplistes_formabo" method="post">
 		<div style="text-align:right">
 			<input type="text" class="spip_formulaires" name="email_oubli" value="" />
 			<input type="hidden" name="oubli_pass" value="oui" />
@@ -40,7 +41,6 @@
 	===============
 
 -->]
-
 
 <div class="formulaire_spip formulaire_inscription">
 [(#ENV{mode_login}|?{' ',''})
@@ -61,7 +61,7 @@
 
 -->][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
 	<legend><:spiplistes:devenir_redac:></legend>
-	<p><strong><:spiplistes:devenir_redac:></strong></p>
+	<h3><:spiplistes:devenir_redac:></h3>
 	<p><:spiplistes:inscription_redacteurs:></p>
 		<p><:form_forum_indiquer_nom_email:></p>
 		<div class="coord">
@@ -74,7 +74,7 @@
 
 -->][(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
 	<legend><:spiplistes:devenir_membre:></legend>
-	<p><strong><:spiplistes:devenir_abonne:></strong></p>
+	<h3><:spiplistes:devenir_abonne:></h3>
 	[<!--(#REM)
 	
 		si mode d'acces 'membre' au lieu de 'simple' demande le pseudo pour completer la fiche.
@@ -91,7 +91,7 @@
 	]
 ]
 	<div class="coord">
-	<label for="mail_inscription_"><:form_pet_votre_email:> :</label>
+	<label for="mail_inscription_"><:spiplistes:votre_email_:></label>
 	<input type="text" class="text forml" id="mail_inscription_" name="mail_inscription_" value="" size="40" />
 	</div>
 [(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
@@ -230,4 +230,6 @@
 		<input type="submit" class="submit" name="Valider" value="<:bouton_valider:>" />
 	</p>
 	</form>][<!--(#REM) fin mode_login -->]
+</div>
+
 </div>
