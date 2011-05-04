@@ -13,7 +13,11 @@
 
 function association_onglets(){
 	
-	$res = association_onglet1(_T('asso:menu2_titre_gestion_membres'), 'adherents', 'Membres', 'annonce.gif');  
+	/* onglet de retour a la page d'accueil */
+	$res = association_onglet1(_T('asso:menu2_titre_association'), 'association', 'Association', 'annonce.gif');
+
+	/* onglet de gestion des membres */
+	$res .= association_onglet1(_T('asso:menu2_titre_gestion_membres'), 'adherents', 'Membres', 'annonce.gif');  
 
 	if ($GLOBALS['association_metas']['dons']) {
 		$res .= association_onglet1(_T('asso:menu2_titre_gestion_dons'), 'dons', 'Dons', 'dons.gif'); 

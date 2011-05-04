@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_page_config' => 'Configuration du plugin',
 		
 # Navigation
+	'menu2_titre_association' => 'L\'association',
 	'menu2_titre_gestion_membres' => 'Gestion des membres',
 	'menu2_titre_relances_cotisations' => 'Relances des cotisations',
 	'menu2_titre_gestion_dons' => 'Gestion des dons',
