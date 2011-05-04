@@ -1,4 +1,2 @@
-[(#CACHE{0})][(#HTTP_HEADER{Content-type: [(#ENV{format,json}|=={json}|?{application/json,text/xml})][; charset=(#CHARSET)]})
-][(#SET{id_article,#ENV**{url}|urls_decoder_url|table_valeur{1}|table_valeur{id_article}})
-][(#SET{type,#ENV**{url}|urls_decoder_url|table_valeur{1}|table_valeur{type}})
-][(#INCLURE{fond=inclure/oembed_#GET{type}.#ENV{format,json},id_article=#GET{id_article}})]
+[(#CACHE{0})][(#HTTP_HEADER{Content-type: [(#ENV{format,json}|=={json}|?{application/json,text/xml})][; charset=(#CHARSET)]})][(#SET{id_article,#ENV**{url}|urls_decoder_url|table_valeur{1}|table_valeur{id_article}})][(#SET{type,#ENV**{url}|urls_decoder_url|table_valeur{1}|table_valeur{type}})
+][(#INCLURE{fond=inclure/oembed_#GET{type}-photo.#ENV{format,json},id_article=#GET{id_article},maxwidth,maxheight})]

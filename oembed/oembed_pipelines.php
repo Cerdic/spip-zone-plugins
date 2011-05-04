@@ -6,7 +6,8 @@ function oembed_affichage_final($page) {
 
 	if ($url_oembed = url_absolue(parametre_url(generer_url_public('oembed'),'url',url_absolue(self())))) {
 		$page = preg_replace(',</head>,i',
-			"\n".'<link rel="alternate" type="application/json+oembed" href="'.$url_oembed.'" />'."\n".'\0',
+			"\n".'<link rel="alternate" type="application/json+oembed" href="'.$url_oembed.'&format=json" />'.
+			"\n".'<link rel="alternate" type="text/xml+oembed" href="'.$url_oembed.'&format=xml" />'."\n".'\0',
 			$page, 1);
 	}
 	return $page;

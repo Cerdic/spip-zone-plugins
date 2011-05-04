@@ -5,8 +5,8 @@
 	"provider_url":[(#URL_SITE_SPIP|json_encode)],
 	"title":[(#TITRE|json_encode)],
 	"author_name":[(#LESAUTEURS|supprimer_tags|json_encode)],
-	"width":[(#CONFIG{oembed/maxwidth,480}|json_encode)],
-	"height":[(#CONFIG{oembed/maxheight,295}|json_encode)],
+	"width":[(#ENV{maxwidth,#CONFIG{oembed/maxwidth,480}}|json_encode)],
+	"height":[(#ENV{maxheight,#CONFIG{oembed/maxheight,295}}|json_encode)],
 	"url":[(#URL_ARTICLE|url_absolue|json_encode)],
 	"html":[(#INTRODUCTION|json_encode)]
 }</BOUCLE_art>
