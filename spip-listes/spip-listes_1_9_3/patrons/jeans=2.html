@@ -1,0 +1,163 @@
+[<!-- (#REM)
+*
+* Squelette pour spip-listes
+*
+* CP-20110502
+
+Exemple pour envoyer un article précis. Ici, id_article 2
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+Precautions:
+- ne pas envoyer des gabarits de plus de 10Ko
+- ne pas placer de balises html <html><body> ni de fermeture </body></html>
+    ils seront ajoutes automatiquement a l'envoi du mail 
+- mettre les style  CSS directement dans les balises pour etre sur qu'ils
+    seront interpretes (meme par les webmails).
+	A noter (03/05/2011) :
+	- gmail n'affiche pas background-image 
+	- gmail n'affiche pas les images incrustees (in-line, style data:image/png)
+	- blackberry accepte data:image/png 
+	- yahoo mail surprime src de img si data:image/png 
+	- Thunderbird: OK
+	- Mail.app (mac): Ok
+	- E-mail (android 2.3): Ok
+
+Pour la composition d'un mail au format HTML, consulter :
+- http://www.email-standards.org/
+
+-->]
+<BOUCLE_article_principal(ARTICLES) {id_article=2}{0,1}>
+[<!-- (#REM)
+
+	Tableau du fond de courrier
+
+-->]
+<table cellspacing="0"
+		border="0"
+		cellpadding="0"
+		bgcolor="#070BFF"
+		[style="background-image:url(#URL_SITE_SPIP/(#CHEMIN{patrons/images/jeans_pattern_bg.png}|ltrim{./}));
+		background-position:left bottom;"
+		]width="100%">
+	<tr>
+		<td>
+		[<!-- (#REM)
+		
+			Tableau des bandeaux
+			- tete
+			- titre
+			- info
+			- texte
+			
+		-->]
+		<table cellspacing="0" border="0" align="center" cellpadding="0" width="80%">
+			[<!-- (#REM)
+			
+				Bandeau de tete
+			
+			-->]
+			<tr>
+				<td valign="middle"
+					align="left"
+					style="height:2em;
+						background-color:#A2C2D9;;
+						font-family: Arial, Helvetica, sans-serif;
+						font-size: 0.9em;
+						font-weight: normal;
+						padding:0 1ex;
+						">
+					<p style="margin: 0;"><:spiplistes:difficile_lire_msg:>
+					[<!-- (#REM)
+					
+						Construit l'URL
+						- si propre, prendre la dernière déclarée
+						- sinon, URL standard
+						
+					-->]<a href="<B_url>#URL_SITE_SPIP/<BOUCLE_url(spip_urls)
+        {id_objet=#ID_ARTICLE}
+        {type=article}
+        {par date}
+        {inverse}
+        {0,1}>#URL</BOUCLE_url></B_url>[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE})]<//B_url>"
+					   style="color: #AC382F;
+						text-decoration: underline;"><:spiplistes:vous_consultez_ori:>.</a>
+					</p>
+				</td>
+			</tr>
+			[<!-- (#REM)
+			
+				Bandeau de titre
+
+			-->]
+			<tr style="border: solid 1px #e3e3e3;">
+				<td>
+					[<!-- (#REM)
+					
+						Un tableau pour le titre est le logo de l'article
+					
+					-->]
+					<table cellspacing="0" border="0" cellpadding="10" width="100%">
+						<tr>
+							<td valign="middle"
+								align="center">
+								<h1 style="font-size: 2.5em;
+										font-family: Georgia, 'Times New Roman', Times, serif;
+										color: #FFEFE2;
+										margin: 0;">#TITRE</h1>
+							</td>
+							<td align="center"
+								width="180">
+									[(#LOGO_ARTICLE_RUBRIQUE||image_reduire{150,150})]
+							</td>
+						</tr>
+					</table>
+
+				</td>
+			</tr>
+		 
+			[<!-- (#REM)
+			
+				Bandeau intro de l'article
+				
+			-->]
+			<tr>
+				<td style="background-color: #A2C2D9;
+						[background-image: url(#URL_SITE_SPIP/(#CHEMIN{patrons/images/jeans_pattern.png}|ltrim{./}));
+						background-position:top left;
+						background-repeat: repeat;]padding:1em 2ex;"
+					bgcolor="#A2C2D9">
+					<h2>
+						#SOUSTITRE
+					</h2>
+					<p style="font-size:120%;">[(#CHAPO|supprimer_tags)]</p>
+				</td>
+			</tr>
+			
+			[<!-- (#REM)
+			
+				Bandeau du texte de l'article
+			
+				Nota: si images dans l'article, ne pas oublier
+				de completer le titre de l'image. Il s'affichera
+				dans les lecteurs qui n'affichent pas les
+				images automatiquement (pas tous, certains MUA
+				ne respectent pas cette regle).
+			
+			-->]
+			<tr>
+				<td style="background-color: #BED2FF;
+						[background-image: url(#URL_SITE_SPIP/(#CHEMIN{patrons/images/jeans_pattern_12.png}|ltrim{./}));
+						 background-position:top left;
+						 background-repeat: repeat-x;]padding:1em 2ex;"
+						bgcolor="#A2C2D9">#TEXTE
+				</td>
+			</tr>
+
+		</table>
+		</td>
+	</tr>
+</table>
+</BOUCLE_article_principal>
