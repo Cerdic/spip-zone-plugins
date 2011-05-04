@@ -1,5 +1,17 @@
 <?php
 
+// ajouter le lien oembed dans le head des pages publiques
+function oembed_affichage_final($page) {
+	if (!$GLOBALS['html']) return $page;
+
+	if ($url_oembed = url_absolue(parametre_url(generer_url_public('oembed'),'url',url_absolue(self())))) {
+		$page = preg_replace(',</head>,i',
+			"\n".'<link rel="alternate" type="application/json+oembed" href="'.$url_oembed.'" />'."\n".'\0',
+			$page, 1);
+	}
+	return $page;
+}
+
 // insertion des traitements oembed dans l'ajout des documents distants
 function oembed_renseigner_document_distant($flux) {
 	include_spip('inc/config');

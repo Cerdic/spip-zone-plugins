@@ -28,6 +28,10 @@
 		<nom>post_edition</nom>
 		<inclure>oembed_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>oembed_pipelines.php</inclure>
+	</pipeline>
 	<bouton id='configurer_oembed' parent='bando_configuration'>
 		<icone>images/oembed-16.png</icone>
 		<titre>oembed:titre_oembed</titre>

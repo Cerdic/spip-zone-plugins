@@ -17,15 +17,17 @@ function oembed_recuperer_data($url, $maxwidth = '', $maxheight = '', $format = 
 	$provider = false;
 	
 	$provider = oembed_verifier_provider($url);
-
-	if ((!$provider) AND ($detecter_lien != 'non'))
-		$provider = oembed_detecter_lien($url);
-	
 	$url_json = parametre_url($provider,'url',$url,'&');
+	
+	if ((!$provider) AND ($detecter_lien != 'non')) {
+		$provider = oembed_detecter_lien($url);
+		$url_json = $provider;
+	}
+	
 	$url_json = parametre_url($url_json,'maxwidth',$maxwidth,'&');
 	$url_json = parametre_url($url_json,'maxheight',$maxheight,'&');
 	$url_json = parametre_url($url_json,'format',$format,'&');
-
+	
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
 	if ($data = recuperer_page($url_json)) {
