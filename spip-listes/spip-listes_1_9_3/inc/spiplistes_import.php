@@ -13,6 +13,26 @@ include_spip('inc/presentation');
 include_spip('inc/acces');
 include_spip('inc/spiplistes_api_globales');
 
+/**
+ * Import d'un fichier texte, liste d'abonnes
+ *
+ * Le fichier doit etre de type CVS.
+ * Les enregistrements sont separes par une tabulation
+ * ou un point-virgule ';'
+ * Exemple:
+ * me@example.com;mylogin;My Name;0minirezo
+ * 
+ * @param string $filename
+ * @param string $realname
+ * @param array|int $abos_liste
+ * @param string $format_abo
+ * @param string $separateur
+ * @param bool $flag_admin pas utilise'!
+ * @param bool $listes_autorisees pas utilise'!
+ * @param bool $forcer_abo
+ * @return string
+ * @todo code a nettoyer
+ */
 function spiplistes_import(
 	$filename
 	, $realname
@@ -301,4 +321,4 @@ function spiplistes_import(
 			;
 	}
 	return($result_affiche);
-}
+} // spiplistes_import()
