@@ -9,15 +9,22 @@
 		<ul>
 		[(#SAISIE{input, nom, label=<:amap:nom:>,obligatoire=oui})]
 		[(#SAISIE{input, prenom, label=<:amap:prenom:>,obligatoire=oui})]
-		<li class="editer editer_date_distribution obligatoire saisie_selection">
+		<li class="editer editer_date_distribution obligatoire saisie_checkbox">
 		<B_datedistribution>
 			<label for="champ_date_distribution"><:amap:date_distribution:><span class="obligatoire"> [Obligatoire]</span></label>
-			<select name="date_distribution" id="champ_date_distribution">
-			<option value=""> </option>
-			<BOUCLE_datedistribution(EVENEMENTS){par date}>
-				<option value="#DATE_DEBUT"[(#DATE_DEBUT|=={#DATE_DISTRIBUTION}|oui) selected="selected"]>[(#DATE_DEBUT|affdate{'d/m/Y'})]</option>
-			</BOUCLE_datedistribution>
-			</select>
+				<div class="choix">
+				<table border="0" width="100%">
+					<BOUCLE_datedistribution(EVENEMENTS){par date}>
+						[(#COMPTEUR_BOUCLE|alterner{'<tr>',''})]
+							<td>
+								<input type="checkbox" name="date_distribution[]" class="checkbox" id="champ_date_distribution_#COMPTEUR_BOUCLE"[ (#DATE_DEBUT|in_array{#DATE_DISTRIBUTION}|oui)checked="checked"] value="#DATE_DEBUT"[(#DATE_DEBUT|in_array{#DATE_DISTRIBUTION}|oui) disabled="disabled"] />
+								<label for="champ_date_distribution_#COMPTEUR_BOUCLE">[(#DATE_DEBUT|affdate{'d/m/Y'})]</label>
+							</td>
+						[(#COMPTEUR_BOUCLE|alterner{'','</tr>'})]
+						</BOUCLE_datedistribution>
+					[(#TOTAL_BOUCLE|alterner{'<td></td></tr>','</tr>', ''})]
+				</table>
+				</div>
 		</B_datedistribution>
 		</li>
 		</ul>

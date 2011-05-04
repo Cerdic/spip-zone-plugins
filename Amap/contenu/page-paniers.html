@@ -4,7 +4,8 @@
 <div class="contenu-principal">
 <div class="cartouche">
 	<h1 class="h1"><:amap:vos_paniers:></h1>
-</div>
-[(#SESSION{id_auteur}|oui)<INCLURE{fond=prive/inclure/liste_panier_adherent}{id_auteur}>]
+</div>#ENV{id_auteur}
+<BOUCLE_aut(AUTEURS){id_auteur=#ENV{id_auteur}}>#ID_AUTEUR</BOUCLE_aut>
+[(#SESSION{id_auteur}|oui)<INCLURE{fond=prive/inclure/liste_panier_adherent}{id_auteur}>#ID_AUTEUR]
 [(#SESSION{id_auteur}|non)<:amap:pas_connecte_ou_reconnu:>]
 </div>
