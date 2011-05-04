@@ -23,7 +23,7 @@ function exec_edit_relances(){
 	$url_edit_labels = generer_url_ecrire('edit_labels');
 	$url_retour = $_SERVER["HTTP_REFERER"];		
 
-	association_onglets();
+	association_onglets(_T('asso:titre_onglet_membres'));
 		
 	echo debut_gauche("",true);
 		

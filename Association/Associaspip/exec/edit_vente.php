@@ -27,7 +27,7 @@ function exec_edit_vente() {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page() ;
 		
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_ventes'));
 		
 		echo debut_gauche("",true);
 		

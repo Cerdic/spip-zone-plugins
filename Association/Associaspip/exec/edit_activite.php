@@ -56,7 +56,7 @@ function exec_edit_activite_args($id_activite, $id_evenement)
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:activite_titre_mise_a_jour_inscriptions')) ;
 		
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_activites'));
 		echo debut_gauche("",true);
 		echo debut_boite_info(true);
 		echo '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">', _T('asso:activite_nd') . '<br />';

@@ -26,7 +26,7 @@ function exec_prets(){
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:prets_titre_liste_reservations')) ;
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_prets'));
 		
 		echo debut_gauche("",true);
 		echo debut_boite_info(true);

@@ -10,6 +10,8 @@ td.prospect { background:#FFF8DC; }
 
 border1 {border-top: 1px solid #CCCCCC;}
 
+h1.asso_titre { text-align:center; }
+
 /* Formulaires*/
 .spip_forms form label {
 	float:none;

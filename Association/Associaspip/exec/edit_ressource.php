@@ -27,7 +27,7 @@ function exec_edit_ressource(){
 		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:ressources_titre_edition_ressources')) ;
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_prets'));
 		
 		echo debut_gauche("",true);
 		

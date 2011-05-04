@@ -30,7 +30,7 @@ function exec_edit_don(){
 
 		echo $commencer_page(_T('asso:dons_titre_mise_a_jour'));
 		
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_dons'));
 		
 		echo debut_gauche("",true);
 		

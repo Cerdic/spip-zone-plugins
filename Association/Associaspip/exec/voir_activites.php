@@ -33,7 +33,7 @@ function exec_voir_activites(){
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_activites'));
 		
 		echo debut_gauche("",true);
 		

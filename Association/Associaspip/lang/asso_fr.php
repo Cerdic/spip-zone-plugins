@@ -23,13 +23,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		
 # Navigation
 	'menu2_titre_association' => 'L\'association',
-	'menu2_titre_gestion_membres' => 'Gestion des membres',
+	'menu2_titre_gestion_membres' => 'Membres',
 	'menu2_titre_relances_cotisations' => 'Relances des cotisations',
-	'menu2_titre_gestion_dons' => 'Gestion des dons',
-	'menu2_titre_ventes_asso' => 'Ventes associatives',
-	'menu2_titre_gestion_activites' => 'Gestion des activit&eacute;s',
-	'menu2_titre_livres_comptes' => 'Livres de comptes',
-	'menu2_titre_gestion_prets' => 'Gestion des pr&ecirc;ts',
+	'menu2_titre_gestion_dons' => 'Dons',
+	'menu2_titre_ventes_asso' => 'Ventes',
+	'menu2_titre_gestion_activites' => 'Activit&eacute;s',
+	'menu2_titre_livres_comptes' => 'Comptes',
+	'menu2_titre_gestion_prets' => 'Pr&ecirc;ts',
+
+# Titres onglets
+	'titre_onglet_activite' => 'Gestion des activit&eacute;s',
+	'titre_onglet_membres' => 'Gestion des membres',
+	'titre_onglet_dons' => 'Gestion des dons',
+	'titre_onglet_ventes' => 'Gestion des ventes',
+	'titre_onglet_comptes' => 'Gestion comptable',
+	'titre_onglet_prets' => 'Gestion des pr&ecirc;ts',
 			
 #Configuration
 	# Libellé
@@ -46,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
 	'config_info_asso' => 'Donn&eacute;es de l\'association',
 	'config_info_plugin' => 'Options du plugin',
+	'config_info_membres' => 'Options de gestion des membres',
 	'config_libelle_classe_banques' => 'Classe des comptes financiers',
 	'config_libelle_dons'=> 'Gestion des dons et colis',
 	'config_libelle_cotisations'=> 'Gestion des cotisations',

@@ -45,7 +45,7 @@ function exec_edit_adherent_args($id_auteur)
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		include_spip ('inc/navigation');
 		
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_membres'));
 		
 		echo debut_gauche("",true);
 		

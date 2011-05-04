@@ -11,7 +11,7 @@
 
 
 
-function association_onglets(){
+function association_onglets($titre=''){
 	
 	/* onglet de retour a la page d'accueil */
 	$res = association_onglet1(_T('asso:menu2_titre_association'), 'association', 'Association', 'annonce.gif');
@@ -34,19 +34,23 @@ function association_onglets(){
 	if ($GLOBALS['association_metas']['comptes']) {
 		$res .= association_onglet1(_T('asso:menu2_titre_livres_comptes'), 'comptes', 'Comptes', 'comptes.gif'); 
 	}
-	
-	echo gros_titre(
-		_T('asso:gestion_de_lassoc') .
-		' ' .
-		$GLOBALS['association_metas']['nom'], '', false);
+
+	echo '<div class="table_page">';
+	echo '<h1 class="asso_titre">';
+	echo $titre?$titre:_T('asso:gestion_de_lassoc').' '.$GLOBALS['association_metas']['nom'];
+	echo '</h1>';
 
 	if ($res) echo "<div class='bandeau_actions'>", debut_onglet(), $res, fin_onglet(), '</div>';
+
+	echo "</div>";
 }
 
 function association_onglet1($texte, $objet, $libelle, $image)
 {
-	if (autoriser('associer', $objet))
+	if (autoriser('associer', $objet)) {
+		include_spip('inc/presentation');
 		return onglet($texte, generer_url_ecrire($objet), '', $libelle, _DIR_PLUGIN_ASSOCIATION_ICONES . $image, 'rien.gif');
+	}
 	else return '';
 }
 

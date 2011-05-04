@@ -27,7 +27,7 @@ function exec_ajout_cotisation(){
 	} else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:ajout_de_cotisation')) ;
-		association_onglets();
+		association_onglets(_T('asso:titre_onglet_membres'));
 		echo debut_gauche("",true);
 
 		$nom_famille = $row['nom_famille'];
