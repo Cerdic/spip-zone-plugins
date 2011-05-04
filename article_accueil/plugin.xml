@@ -1,8 +1,16 @@
 <plugin>
-	<nom>Articles d'accueil</nom>
+	<nom>
+		<multi>
+			[fr]Articles d'accueil
+			[en]Home article
+		</multi>
+	</nom>
 	<icon>images/article_accueil-48.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
- 	[Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin autonome
+	<auteur>
+		<multi>
+			[fr][Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin autonome.
+			[en][Cedric Morin->http://www.yterium.com] for the original contribution in the plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] to create the standalone plugin.
+		</multi>
 	</auteur>
 	<licence>GPL</licence>
 	<version>1.0.4</version>
