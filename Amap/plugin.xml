@@ -17,6 +17,7 @@
 	<lien>[Documentation->http://www.spip-contrib.net/Plugin-AMAP-Version-2]</lien>
 
 	<install>base/amap_installation.php</install>
+	<options>amap_options.php</options>
 	
 	<bouton id='amap' parent='configuration'>
 		<icone>img_pack/amapconfig-24.gif</icone>
