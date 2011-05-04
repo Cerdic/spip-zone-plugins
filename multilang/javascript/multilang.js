@@ -285,7 +285,7 @@ function multilang_multi_recover(el,container,target,event){
 * @param id chaine correspondant a l'id du champ
 */
 function multilang_is_title(el) {
-	return (el.id=='titre' || el.id.match(/^titre_document[0-9]+/)!=null || el.name.match(/^content_[a-z0-9_]+_titre/)!=null)
+	return (el.id=='titre' || el.id=='nom_site' || el.id.match(/^titre_document[0-9]+/)!=null || el.name.match(/^content_[a-z0-9_]+_titre/)!=null || el.name.match(/^content_[a-z0-9_-]+nom_/)!=null)
 }
 
 /**
@@ -367,7 +367,7 @@ function multilang_init_field(el,lang,force) {
 	 * de traiter le cas où l'on utilise les numéros pour trier les objets
 	 * Ajout d'Yffic le 30/03/2010
 	 */
-	if(!force && (el.id=='titre' || el.id.match(/^titre_document[0-9]+/) || el.name.match(/^content_[a-z0-9_]+_titre/))){
+	if(!force && multilang_is_title(el)){
 		numid=el.id+'_numero';
 		/**
 		 * Cas des crayons qui n'ont pas toujours de formalisme en ul > li
