@@ -269,10 +269,20 @@ ModeImages= <xsl:value-of select="$ModeImages" />
 
 
 <!-- les paragraphes y compris les vides utilises pour saut de ligne -->
-<xsl:template match="text:p">
-		<xsl:apply-templates/>
-    <xsl:if test="count(node())=0"><xsl:text >&#xA;&#xA;</xsl:text></xsl:if>
+<xsl:template match="table:table-cell//text:p">
+	<xsl:apply-templates/>
+    <xsl:if test="count(node())=0">
+		<xsl:text> >&#xA;&#xA;</xsl:text>
+	</xsl:if>
 </xsl:template>
+<xsl:template match="text:p">
+	<xsl:apply-templates/>
+	<xsl:text >&#xA;&#xA;</xsl:text>
+    <xsl:if test="count(node())=0">
+		<xsl:text> >&#xA;&#xA;</xsl:text>
+	</xsl:if>
+</xsl:template>
+
 
 
 <!-- bidouiller pour ne pas afficher le titre du document dans le texte (part 1) -->
