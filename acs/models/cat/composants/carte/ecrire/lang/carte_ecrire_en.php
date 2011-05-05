@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'help' => 'Require GIS plugin and its dependancies.<br />
 Display last updated geolocated keywords, sections, and articles on the map. If these have keywords from choosen group, 
 these are displayed with their keyword icon as markers on the map.<br /><br />
-Map size is 100% of its container.',
+Map size is 100% of its container. Tooltip size is computed according to its content and a max size balanced with the map size',
 
 'ShowLayerSwitcher' => 'Show layer switcher',
 'tooltip' => 'Tooltip',

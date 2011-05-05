@@ -1,0 +1,16 @@
+[(#CACHE{0})][(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Page rubrique de style défini par un mot-clef
+Section page styled according to a keyword
+
+][(#SET{id_groupe_style_rubrique,#VAR{acsRubriqueStylePage}})]<BOUCLE_rubrique(RUBRIQUES){tous}{id_rubrique}><BOUCLE_style_rubrique(MOTS){id_rubrique}{id_groupe=#GET{id_groupe_style_rubrique}}{0,1}>[(#SET{nic,[(#DESCRIPTIF|textebrut)]})]</BOUCLE_style_rubrique>
+<INCLURE{fond=composants/rubrique/page_rubrique}{self}{env}{id_rubrique}{title=#TITRE}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{nic=#GET{nic,2060}}>
+</BOUCLE_rubrique>

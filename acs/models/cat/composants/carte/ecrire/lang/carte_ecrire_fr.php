@@ -5,13 +5,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Carte',
 'description' => 'Carte des rubriques',
-'help' => 'Nécessite le plugin GIS et ses d&eacute;pendances.<br />
-Affiche sur une carte les derniers mot-clés, rubriques, et articles g&eacute;or&eacute;f&eacute;renc&eacute;s mise à jour. Les rubriques et articles qui ont des mots-cl&eacute;s du groupe choisi ici sont affich&eacute;s avec leurs logos de mot-cl&eacute; comme pictogrammes personnalis&eacute;es.
+'help' => 'Affiche sur une carte les derniers mot-clés, rubriques, et articles g&eacute;or&eacute;f&eacute;renc&eacute;s mise à jour. Les rubriques et articles qui ont des mots-cl&eacute;s du groupe choisi ici sont affich&eacute;s avec leurs logos de mot-cl&eacute; comme pictogrammes personnalis&eacute;es.
 <br /><br />
 Le centrage et le zoom sont ceux pass&eacute;s en param&egrave;tres, ou ceux du mot-clé, de l\'article, ou de la rubrique, ou les valeurs par defaut du compossant carte.<br /><br />
 Pictogrammes punaises: si oui, les pictogrammes ne sont pas centr&eacute;s mais positionn&eacute;s comme une punaise au dessus du point de r&eacute;f&eacute;rence.
 <br /><br />
-La dimension de la carte est de 100% de l\'&eacute;l&eacute;ment qui la contient.',
+La dimension de la carte est de 100% de l\'&eacute;l&eacute;ment qui la contient. Celle des info-bulle est calculée automatiquement en fonction de leur contenu et d\'une taille maximale proportionnelle à la taille de la carte.
+<br /><br />
+Nécessite le plugin GIS et ses d&eacute;pendances.<br />',
 
 'ShowLayerSwitcher' => 'Afficher le s&eacute;lecteur de cartes',
 'tooltip' => 'Info-Bulle',

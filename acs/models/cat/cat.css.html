@@ -12,6 +12,13 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
  *  Feuille de style pour modèles ACS   *
 ---------------------------------------------
 
-Agrège les CSS de tous les composants utilisés.
+Défrinit certaines propriétés par défaut
+puis agrège les CSS de tous les composants utilisés.
 
-][(#HEADER_COMPOSANTS{css})]
+]
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em;}
+ul, ol, li { margin: 0; padding: 0; }
+ul { list-style: none; }
+div, img, table, form { margin: 0; padding: 0; border-width: 0; border-style: none; }
+table {border-collapse: collapse;}
+[(#HEADER_COMPOSANTS{css})]

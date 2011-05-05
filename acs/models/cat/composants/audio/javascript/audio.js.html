@@ -1,10 +1,8 @@
-[(#REM)
+[(#CACHE{0})][(#REM)
 
   Charger la librairie audio
 
-]#CACHE{7*24*3600,cache-client}
-#HTTP_HEADER{'Content-Type: text/javascript'}
-var acsAudio_images = "#EVAL{_DIR_ACS}models/#VAR{acsModel,cat}/composants/audio/images/";
+]var acsAudio_images = "#EVAL{_DIR_ACS}models/#VAR{acsModel,cat}/composants/audio/images/";
 
 [(#REM) Debug with soundmanager2.js instead of soundmanager2-nodebug-jsmin.js ]
 [(#INCLURE{composants/audio/javascript/soundmanager2-nodebug-jsmin.js})]

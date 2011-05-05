@@ -10,7 +10,7 @@
  * Retourne les pages du squelette qui utilisent l'instance $nic du composant $c
  */
 function composant_infos($c, $nic) {
-  include (_DIR_PLUGIN_ACS.'inc/composant/composant_get_infos.php');
+  include_spip('inc/composant/composant_get_infos');
   include_spip('inc/composant/composants_liste');
   $r ='<br />';
   
@@ -39,22 +39,23 @@ function composant_infos($c, $nic) {
     include_spip('inc/composant/composants_variables');
     $lv = liste_variables();
     if (is_array($lv)) {
-      $r .= '<span class="onlinehelp">'._T('acs:used_in').'</span> ';
+      $r .= '<span class="onlinehelp">'._T('acs:used_in').'</span><br />';
       foreach ($ca as $var) {
         if (isset($lv[$var]['c'])) {
         	$pc = $lv[$var]['c'];
         	$pnic = $lv[$var]['nic'];
-        	$title = _T('acs:variable').' '.$var;
         	if (isset($GLOBALS['meta']['acs'.ucfirst($pc).$pnic.'Nom']))
-        		$title = $GLOBALS['meta']['acs'.ucfirst($pc).$pnic.'Nom'].' ('.$title.')';
-          $r .= '<a class="nompage" href="?exec=acs&onglet=composants&composant='.$pc.($pnic ? '&nic='.$pnic : '').'" title="'.$title.'">'.ucfirst($pc).(isset($pnic) ? $pnic : '').'</a> ';
+        		$pnom = $GLOBALS['meta']['acs'.ucfirst($pc).$pnic.'Nom'];
+        	else
+        	  $pnom = ucfirst($pc).(isset($pnic) ? $pnic : '');
+          $r .= '&nbsp;&nbsp;&nbsp;<a class="nompage" href="?exec=acs&onglet=composants&composant='.$pc.($pnic ? '&nic='.$pnic : '').'" title="'._T('acs:variable').' '.$var.'">'.$pnom.'</a><br />';
         }
       }
-      $r .= '<hr />';
     }
   }
 
   // On cherche toutes les pages qui contiennent ce composant
+  $l = '<hr />';
   $l = liste_pages_composant(cGetPages($c, $nic), _T('acs:page'), _T('acs:pages'));
   $l .= liste_pages_composant(cGetPages($c, $nic, 'modeles'), _T('acs:modele'), _T('acs:modeles'));
   $l .= liste_pages_composant(cGetPages($c, $nic, 'formulaires'), _T('acs:formulaire'), _T('acs:formulaires'));

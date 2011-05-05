@@ -1,4 +1,4 @@
-#CACHE{0}[(#REM) 
+[(#CACHE{0})][(#REM) 
 
 Paramètres communs à toutes les pages - valeurs par défaut heritees par les composants
 
@@ -30,12 +30,6 @@ body {
   [background: (#VAR{acsFondColor})[ url('[(#ACS_CHEMIN)]trame/(#VAR{acsFondImage})') repeat];]
   [color: (#VAR{acsFondText});]
 }
-
-h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em;}
-ul, ol, li { margin: 0; padding: 0; }
-ul { list-style: none; }
-div, img, table, form { margin: 0; padding: 0; border-width: 0; border-style: none; }
-table {border-collapse: collapse;}
 
 [a:link, a:visited {text-decoration: none; color: (#VAR{acsFondLink});}]
 [a:hover {color: (#VAR{acsFondLinkHover});}]

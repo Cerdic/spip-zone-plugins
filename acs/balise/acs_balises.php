@@ -6,7 +6,7 @@
 # Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
-require_once _DIR_ACS.'inc/composant/composants_liste.php';
+include_spip('inc/composant/composants_liste');
 
 /**
  * Inclut les balises spip définies par les composants actifs
@@ -124,7 +124,6 @@ function composants_head_cache($type) {
 
 // Retourne les css ou javascripts des composants, concaténés
 function composants_head($type) {
-  require_once _DIR_ACS.'inc/composant/composants_liste.php';
   if (is_array(composants_liste())) {
     // composants_liste() est statique,  mise en cache,
     // et tient compte de l'override éventuel

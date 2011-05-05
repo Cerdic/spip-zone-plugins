@@ -25,7 +25,8 @@ function loadPictos(map, urlPictos, idmap, msg, pins) {
 		},
 		error: function(r) {
 			jQuery("#attente" + idmap).hide();
-			window.status = "Ajax request failed in carte.js: " + r.status + ' ' + r.statusText;
+			if (r.status != 200)
+				window.status = "Ajax request failed in carte.js: " + r.status + ' ' + r.statusText;
 		},
 		complete: function() {
 			jQuery("#attente" + idmap).hide();

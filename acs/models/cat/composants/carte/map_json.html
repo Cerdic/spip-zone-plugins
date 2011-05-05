@@ -64,13 +64,13 @@ ou à défaut sur celles par défaut du plugin GIS Escoitar.
       pictos: new Array
     });
     map[(#GET{id_carte_gis})].initialized = false;
-    if (jQuery("#acsCarteLat").length && jQuery("#acsCarteLon").length && jQuery("#acsCarteZoom").length) {
+    if (jQuery("#acsCarte[(#NIC)]Lat").length && jQuery("#acsCarte[(#NIC)]Lon").length && jQuery("#acsCarte[(#NIC)]Zoom").length) {
       map[(#GET{id_carte_gis})].events.register("mousemove", map[(#GET{id_carte_gis})], function(e) { 
         var position = map[(#GET{id_carte_gis})].getCenter();
         position = position.transform(map[(#GET{id_carte_gis})].projection,map[(#GET{id_carte_gis})].displayProjection);
-        jQuery("#acsCarteLat").attr('value', position.lat);
-        jQuery("#acsCarteLon").attr('value', position.lon);
-        jQuery("#acsCarteZoom").attr('value', map[(#GET{id_carte_gis})].getZoom());
+        jQuery("#acsCarte[(#NIC)]Lat").attr('value', position.lat);
+        jQuery("#acsCarte[(#NIC)]Lon").attr('value', position.lon);
+        jQuery("#acsCarte[(#NIC)]Zoom").attr('value', map[(#GET{id_carte_gis})].getZoom());
       });
     }      
     [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ShowLayerSwitcher'}}|!={non}|?{" "})map[(#GET{id_carte_gis})].addControl(new OpenLayers.Control.LayerSwitcher());]

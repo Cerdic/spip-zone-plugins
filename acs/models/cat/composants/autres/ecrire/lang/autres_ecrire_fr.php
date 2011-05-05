@@ -3,9 +3,9 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'nom' => 'Rubriques',
+'nom' => 'Autres',
 'description' => 'Affiche d\'autres articles de la m&ecirc;me rubrique.',
-'help' => 'Si le composant ne reçoit pas de numéro de rubrique, il affiche d\'autres articles au hasard.',
+'help' => 'Si le composant ne reçoit pas de num&eacute;ro de rubrique, il affiche d\'autres articles au hasard.',
 
 'TitreFond' => 'Titre',
 

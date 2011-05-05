@@ -309,6 +309,7 @@ class AdminComposant {
   	include_spip('inc/composant/classControles');
 		$r = '<script type="text/javascript" src="'._DIR_PLUGIN_ACS.'inc/picker/picker.js"></script>';
 		$r .= "<input type='hidden' name='maj_composant' value='oui' />".
+		      '<input type="hidden" name="composant" value="'.$this->class.'" />'.
 					'<input type="hidden" name="nic" value="'.$this->nic.'" />';
 
 		$varconf = $this->fullname.'Config';		
