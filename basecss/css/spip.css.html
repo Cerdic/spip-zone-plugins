@@ -46,6 +46,12 @@ blockquote.spip {}
 
 .spip_code,.spip_cadre {}
 
+/* Enluminures typo V3 / Cf.: http://www.spip-contrib.net/3118 */
+sc { font-variant: small-caps; }
+.caractencadre-spip { background-color: #FFFFCC; color: purple; }
+.caractencadre2-spip { background-color: #FFFFCC; color: orange; }
+.texteencadre-spip { display: block; margin:[ (#GET{margin-bottom})][ (#GET{text-indent})]; padding: #GET{line-height}; background: #EEE; }
+
 /* Logos, documents et images */
 .spip_logos { float: left; margin: 0 10px .1em 0; padding: 0; border: none; }
 
@@ -64,12 +70,6 @@ dl.spip_documents,
 
 /* Modeles par defaut */
 .spip_modele { float: right; display: block; width: 25%; border: 1px dotted #666; }
-
-/* Barre typo */
-sc { font-variant: small-caps; }
-.caractencadre-spip { background-color: #FFFFCC; color: purple; }
-.caractencadre2-spip { background-color: #FFFFCC; color: orange; }
-.texteencadre-spip { display: block; margin:[ (#GET{margin-bottom})][ (#GET{text-indent})]; padding: #GET{line-height}; background: #EEE; }
 
 /* Formulaires */
 .formulaire_spip {}
