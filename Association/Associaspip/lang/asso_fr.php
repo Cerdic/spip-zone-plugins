@@ -71,6 +71,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_num_dc'=>'Dest. comptable',
 	'config_libelle_secteurs'=>'Secteurs (s&eacute;par&eacute;s par des virgules)',	
 	'config_libelle_spip_listes'=> 'Liste de diffusion par d&eacute;faut (n&eacute;cessite le plugin Spip_listes)',
+	'config_libelle_import_nom_auteur' => 'Lors de l\'import/cr&eacute;ation d\'un membre depuis la liste des auteurs SPIP, le nom de l\'auteur a le format suivant:',
+	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title="Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d\'avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin">(&agrave; caract&egrave;re informatif)</abbr>',
+	'config_libelle_gerer_champs_membres' => 'La fiche des membres contient les champs :',
+
+	# Options
+	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
+	'import_nom_auteur_prenom_nom' => 'Pr&eacute;nom Nom',
+	'import_nom_auteur_nom' => 'Nom',
 		
 	# Entetes globales
 	'entete_id' => 'ID',

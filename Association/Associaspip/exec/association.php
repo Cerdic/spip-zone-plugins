@@ -68,10 +68,10 @@ function exec_association() {
 		echo '<th>' . _T('asso:portable') . "</th>\n";
 		echo '<th>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</th>\n";
 		echo '</tr>';
-		$query = sql_select("a.id_auteur, a.mobile, a.telephone, a.statut_interne, a.fonction, b.nom, b.email, a.nom_famille",'spip_asso_membres' .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "a.fonction !='' AND a.statut_interne != 'sorti'", '',  "a.nom_famille");
-		while ($data = sql_fetch($query))
-    {	
+		$query = sql_select("a.id_auteur, a.mobile, a.telephone, a.statut_interne, a.fonction, b.email, a.nom_famille, a.prenom, a.sexe",'spip_asso_membres' .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "a.fonction !='' AND a.statut_interne != 'sorti'", '',  "a.nom_famille");
+		while ($data = sql_fetch($query)) {	
 			$id_auteur=$data['id_auteur'];
+			$nom_affiche = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 			$mob = print_tel($data['mobile']);
 			$tel = print_tel($data['telephone']);
 			if ($email = $data['email'])
@@ -87,7 +87,7 @@ function exec_association() {
 				"<a href='$auteur' title=\"",
 				_T('lien_voir_auteur'),
 				'">',
-				htmlspecialchars($data['nom']),
+				htmlspecialchars($nom_affiche),
 				 "</a></td>\n";
 
 			echo "<td class='arial11 border1'>",

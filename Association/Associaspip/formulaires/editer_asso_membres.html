@@ -5,20 +5,24 @@
 	<ul>
 		<h3 class="legend"><:asso:adherent_titre_modifier_membre:></h3>
 
+		[(#ENV{meta_civilite}|oui)
 		<li class="editer_sexe">
 			<label for="sexe"><strong><:asso:adherent_libelle_sexe:></strong></label>
 			<input type="text" name="sexe" value="[(#ENV{sexe})]" id="sexe"  class='formo'/>
 		</li>
+		]
 
 		<li class="editer_nom_famille">
 			<label for="nom_famille"><strong><:asso:adherent_libelle_nom_famille:></strong></label>
 			<input type="text" name="nom_famille" value="[(#ENV{nom_famille})]" id="nom_famille"  class='formo'/>
 		</li>
 
+		[(#ENV{meta_prenom}|oui)
 		<li class="editer_prenom">
 			<label for="prenom"><strong><:asso:adherent_libelle_prenom:></strong></label>
 			<input type="text" name="prenom" value="[(#ENV{prenom})]" id="prenom"  class='formo'/>
 		</li>
+		]
 
 		<li class="editer_fonction">
 			<label for="fonction"><strong><:asso:adherent_libelle_fonction:></strong></label>

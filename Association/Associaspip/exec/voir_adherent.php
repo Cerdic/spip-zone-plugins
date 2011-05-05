@@ -20,13 +20,12 @@ function exec_voir_adherent(){
 		
 	$id_auteur= intval($_GET['id']);
 	$full = autoriser('associer', 'adherents');
-	$data = sql_fetsel("m.nom_famille, m.prenom, m.validite, m.adresse, m.code_postal, m.ville, m.telephone, m.mobile, c.libelle",'spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
+	$data = sql_fetsel("m.sexe, m.nom_famille, m.prenom, m.validite, m.adresse, m.code_postal, m.ville, m.telephone, m.mobile, c.libelle",'spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
 	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
-		$nom_famille=$data['nom_famille'];
-		$prenom=$data['prenom'];
+		$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$validite=$data['validite'];
 		$adresse = $data['adresse'];
 		$cp = $data['code_postal'];
@@ -47,7 +46,7 @@ function exec_voir_adherent(){
 		echo $id_auteur;
 		echo '</span></div>';
 
-		$nom = htmlspecialchars($nom_famille.' '.$prenom);
+		$nom = htmlspecialchars($nom_membre);
 		if ($full) {
 			$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
 			$nom = "<a href='$adh' title=\"" .
@@ -70,7 +69,7 @@ function exec_voir_adherent(){
 
 		 echo debut_droite("",true);
 		
-		 debut_cadre_relief(  "", false, "", $titre = $nom_famille.' '.$prenom);
+		 debut_cadre_relief(  "", false, "", $titre = $nom_membre);
 
 		 echo _L('Liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
 

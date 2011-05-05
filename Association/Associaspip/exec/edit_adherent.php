@@ -33,8 +33,7 @@ function exec_edit_adherent_args($id_auteur)
 		include_spip('inc/minipres');
 		echo minipres(_T('zxml_inconnu_id') . $id_auteur);
 	} else {
-		$nom_famille=$data['nom_famille'];
-		$prenom=$data['prenom'];
+		$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$statut_interne=$data['statut_interne'];
 		$categorie=$data['categorie'];
 		$validite=$data['validite'];
@@ -58,7 +57,7 @@ function exec_edit_adherent_args($id_auteur)
 			"<a href='$adh' title=\"",
 			_T('asso:adherent_label_voir_membre'),
 			"\">",
-			htmlspecialchars($nom_famille.' '.$prenom),
+			htmlspecialchars($nom_membre),
 			 "</a></td></div>\n";
 		echo '<br /><div>'.association_date_du_jour().'</div>';
 

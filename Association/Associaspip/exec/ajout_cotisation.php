@@ -20,7 +20,7 @@ include_spip ('inc/navigation_modules');
 function exec_ajout_cotisation(){
 		
 	$id_auteur = intval(_request('id'));
-	$row = sql_fetsel("nom_famille,prenom,categorie,validite",'spip_asso_membres', "id_auteur=$id_auteur");
+	$row = sql_fetsel("sexe, nom_famille,prenom,categorie,validite",'spip_asso_membres', "id_auteur=$id_auteur");
 	if (!autoriser('associer', 'adherents', $id_auteur) OR !$row) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -30,8 +30,8 @@ function exec_ajout_cotisation(){
 		association_onglets(_T('asso:titre_onglet_membres'));
 		echo debut_gauche("",true);
 
-		$nom_famille = $row['nom_famille'];
-		$prenom = $row['prenom'];
+		$nom_membre = association_calculer_nom_membre($row['sexe'], $row['prenom'], $row['nom_famille']);
+
 		$categorie = $row['categorie'];
 		$validite = $row['validite'];
 
@@ -40,7 +40,7 @@ function exec_ajout_cotisation(){
 		$h = generer_url_ecrire('voir_adherent', "id=$id_auteur");
 
 		echo debut_boite_info(true);
-		echo "<h3><a href='$h'>", $nom_famille.' '.$prenom.'</a></h3>';
+		echo "<h3><a href='$h'>".$nom_membre.'</a></h3>';
 		echo $categorie_libelle ? ('<strong>'.$categorie_libelle['libelle'].'</strong>') :'';
 		echo association_date_du_jour();	
 		echo fin_boite_info(true);
@@ -50,7 +50,7 @@ function exec_ajout_cotisation(){
 		echo debut_cadre_relief(  "", false, "", _T('asso:nouvelle_cotisation'));
 		echo recuperer_fond("prive/editer/editer_cotisations", array (
 			'id_auteur' => $id_auteur,
-			'nom_prenom' => $prenom.' '.$nom_famille,
+			'nom_prenom' => $nom_membre,
 			'categorie' => $categorie,
 			'validite' => $validite
 		));

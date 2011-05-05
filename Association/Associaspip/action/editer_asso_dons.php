@@ -27,8 +27,8 @@ function action_editer_asso_dons() {
 	$id_adherent = intval(_request('id_adherent'));
 
 	if (!$bienfaiteur AND $id_adherent) {
-		$nom_prenom = sql_fetsel('nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_adherent");
-		$bienfaiteur = $nom_prenom['prenom'].' '.$nom_prenom['nom_famille'];
+		$data =  sql_fetsel('sexe, nom_famille, prenom', 'spip_asso_membres', "id_auteur=$id_adherent");
+		$bienfaiteur = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 	}
 
 	if ($id_adherent) {

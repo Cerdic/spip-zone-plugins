@@ -23,6 +23,18 @@
 		<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet"  class='formo'/>
 	</fieldset>
 
+	<!-- Options de gestion des membres -->
+	<fieldset>
+		<legend><:asso:config_info_membres:></legend>
+		<p>
+		<label for="nom"><strong><:asso:config_libelle_gerer_champs_membres:></strong></label><br/>
+		<input type="checkbox" name="civilite" [(#ENV{civilite}|?{checked="checked"})] id="civilite" />
+		<label for="nom"><strong><:asso:adherent_libelle_sexe:></strong></label><br/>
+		<input type="checkbox" name="prenom" [(#ENV{prenom}|?{checked="checked"})] id="prenom" />
+		<label for="nom"><strong><:asso:adherent_libelle_prenom:></strong></label><br/>
+		</p>
+	</fieldset>
+
 	<!-- Options du plugin -->
 	<fieldset>
 	<legend><:asso:config_info_plugin:></legend>

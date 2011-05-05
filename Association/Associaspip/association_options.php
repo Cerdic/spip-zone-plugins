@@ -97,6 +97,13 @@ function association_mode_de_paiement($journal, $label)
 	      : "<select name='journal' id='journal' class='formo'>$sel</select>\n");
 }
 
+// affichage du nom des membres
+function association_calculer_nom_membre($civilite, $prenom, $nom) {
+	$res = ($GLOBALS['association_metas']['civilite']=="on")?$civilite.' ':'';
+	$res .= ($GLOBALS['association_metas']['prenom']=="on")?$prenom.' ':'';
+	$res .= $nom;
+	return $res;
+}
 
 //Conversion de date
 function association_datefr($date) { 
