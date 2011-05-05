@@ -106,7 +106,7 @@
 [(#REM)
 /** Traiter les vidéos H264/WebM/Ogg en HTML5 **/
 ]
-	[(#MIME_TYPE|match{m4v|webm|ogg}|oui)
+	[(#EXTENSION|match{m4v|mp4|webm|ogv|mkv}|oui)
 	<div class="playerVideo">
 		<section>
 		<figure>
