@@ -1,25 +1,27 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Menu de langues sous forme de liens
+	<nom>
+		<multi>
+			[fr]Menu de langues sous forme de liens
+			[en]Language menu as links
+		</multi>
 	</nom>
-	<auteur><!-- Auteur du plugin -->
-[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]
-
-&#169; 2009 - Distribu&#233; sous licence GNU/GPL
+	<auteur>
+		[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]
 	</auteur>
+	<licence>&#169; 2009 - GNU/GPL</licence>
 	<lien>http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens</lien>
-	<version>1.0.1</version>
+	<version>1.0.2</version>
 	<etat>test</etat>
 	<description>
-Remplace le menu d&eacute;roulant de langues de SPIP par un menu clicable.
+		<multi>
+			[fr]Remplace le menu d&#233;roulant de langues par un menu clicable.
 
-Ce menu n'est affich&eacute; {{que}} s'il y a au moins 2 langues vraiment utilis&eacute;es dans le site.
+Ce menu n'est affich&#233; que s'il y a au moins 2 langues vraiment utilis&#233;es dans le site.
+			[en]Replace the original language menu by a clickable menu.
+			
+This menu is displayed only if at least two languages are ​​actually used on the site.
+		</multi>
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
 	<prefix>mll</prefix>
 	<icon>img_pack/menu_langues_liens.png</icon>
 	<options>mll_options.php</options>

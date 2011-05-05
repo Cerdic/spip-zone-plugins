@@ -1,21 +1,24 @@
 [(#REM) 
 Stocker les traductions eventuelles de l'article en cours
 ]
+<BOUCLE_article(ARTICLES){id_article}>
 #SET{ListeTraductions, #ARRAY{}}
-<BOUCLE_TraductionArticleCourant(ARTICLES){traduction}>
+<BOUCLE_TraductionArticleCourant(ARTICLES){traduction}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
 	#SET_MERGE{ListeTraductions,#GET{ListeTraductions},#ARRAY{#LANG,#URL_ARTICLE}}
 </BOUCLE_TraductionArticleCourant>
+</BOUCLE_article>
 [(#REM) 
 Y-a-t'il plusieurs langues reellement utilisees dans le site ?
 Si oui, on affiche le menu de langue
 Si non, rien
 ]
-<BOUCLE_PlusieursLanguesUtilisees(ARTICLES){par lang}{fusion lang}{1,1}>
+<BOUCLE_PlusieursLanguesUtilisees(ARTICLES){par lang}{fusion lang}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}{1,1}>
 <div id="menu_lang">
 [(#REM)
 On liste les langues utilisees dans le site
 ]
-	<BOUCLE_ListeLangues(ARTICLES){par lang}{fusion lang}{lang!=}>
+
+	<BOUCLE_ListeLangues(ARTICLES){par lang}{fusion lang}{lang!=}{lang !IN #CONFIG{menu_lang_liens/langues_invisibles,#ARRAY}}>
 		[(#REM)
 		Si la langue n'est pas celle en cours, on fait un lien qui fait 2 actions :
 		- fixer le cookie de langue sur la langue demandee

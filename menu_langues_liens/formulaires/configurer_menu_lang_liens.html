@@ -1,0 +1,25 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=mll -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_mll">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_mll_langues_supprimer[ (#ENV**{erreurs}|table_valeur{licence_defaut}|oui)erreur]">
+			<label for="langues_invisibles"><:mll:label_langues_invisibles:></label>
+			<p class="explication"><:mll:explication_langues_invisibles:></p>
+			<select name="langues_invisibles[]" id="langues_invisibles" multiple="oui">
+				<BOUCLE_langues(POUR){tableau #CONFIG{langues_multilingue}|explode{','}}>
+				<option value="#VALEUR"[(#VALEUR|in_array{#ENV{langues_invisibles,#ARRAY}}|oui)selected="selected"]>[(#VALEUR|traduire_nom_langue)]</option>
+				</BOUCLE_langues>
+			</select>
+		</li>
+	</ul>
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+</div>
