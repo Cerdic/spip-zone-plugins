@@ -105,6 +105,7 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 
 // Boucle sur chaque contenu des balises plugin et creation du contenu de paquet.xml
 function plugin2paquet($plugins) {
+
 	// Pour accelerer on simplifie le cas majaritaire ou le tableau ne contient qu'un seul element
 	$balises_spip = '';
 	$commandes = array();
@@ -133,21 +134,36 @@ function plugin2paquet($plugins) {
 			}
 		}
 
-	}
+		// On initialise les informations non techniques du bloc de compatibilite la moins elevee avec celles
+		// du bloc dont la borne min de compatibilite SPIP est la plus elevee.
+		$plugins[$cle_min_min]['prefix'] = $plugins[$cle_min_max]['prefix'];
+		$plugins[$cle_min_min]['categorie'] = $plugins[$cle_min_max]['categorie'];
+		$plugins[$cle_min_min]['icon'] = $plugins[$cle_min_max]['icon'];
+		$plugins[$cle_min_min]['version'] = $plugins[$cle_min_max]['version'];
+		$plugins[$cle_min_min]['etat'] = $plugins[$cle_min_max]['etat'];
+		$plugins[$cle_min_min]['version_base'] = $plugins[$cle_min_max]['version_base'];
+		$plugins[$cle_min_min]['meta'] = $plugins[$cle_min_max]['meta'];
+		$plugins[$cle_min_min]['lien'] = $plugins[$cle_min_max]['lien'];
+		$plugins[$cle_min_min]['nom'] = $plugins[$cle_min_max]['nom'];
+		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'];
+		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'];
 
-	// Balises techniques doivent etre incluses systematiquement dans une balise spip.
-	// On extrait donc ces balises de chaque bloc plugin et on concatene les balises spip
-	// ainsi construites.
-	foreach ($plugins as $_cle => $_plugin) {
-		list($spip, $commandes_spip,) = plugin2balise($_plugin, 'spip');
-		$balises_spip .= $spip ? "\n\n$spip" : '';
-		$commandes['balise_spip'][$_plugin['compatible']] = $commandes_spip;
+		// Le bloc de compatibilite la moins elevee correspond aux attributs et sous-balises primaires
+		// de la balise paquet. Les autres blocs generent les balises spip contenant uniquement les 
+		// donnees dits techniques
+		// -- On commence avec les balises spip
+		foreach ($plugins as $_cle => $_plugin) {
+			if ($_cle <> $cle_min_min) {
+				list($spip, $commandes_spip,) = plugin2balise($_plugin, 'spip');
+				$balises_spip .= "\n\n$spip";
+				$commandes['balise_spip'][$_plugin['compatible']] = $commandes_spip;
+			}
+		}
 	}
-
-	// Ensuite on cree la balise paquet englobante a partir des infos les communes
-	// de la balise plugin de compatibilite spip la plus recente
+	
+	// -- On continue avec la balise paquet
 	list($paquet_xml, $commandes_paquet, $descriptions) = plugin2balise(
-											$plugins[$cle_min_max], 
+											$plugins[$cle_min_min], 
 											'paquet', 
 											$balises_spip);
 	$commandes['balise_paquet'] = $commandes_paquet;
@@ -155,7 +171,7 @@ function plugin2paquet($plugins) {
 	return array(
 			$paquet_xml, 
 			$commandes, 
-			$plugins[$cle_min_max]['prefix'], 
+			$plugins[$cle_min_min]['prefix'], 
 			$descriptions);
 }
 
@@ -187,7 +203,8 @@ function plugin2balise($D, $balise, $balises_spip='') {
 			($etat ? "\n\tetat=\"$etat\"" : '') .
 			($version_base ? "\n\tschema=\"$version_base\"" : '') .
 			($meta ? "\n\tmeta=\"$meta\"" : '') .
-			plugin2balise_lien($lien, 'documentation');
+			plugin2balise_lien($lien, 'documentation') .
+			($compatible ? "\n\tcompatibilite=\"$compatible\"" : '');
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
@@ -196,42 +213,35 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$auteur = plugin2balise_copy($D['auteur'], 'auteur');
 		$licence = plugin2balise_copy($D['licence'], 'licence');
 		$traduire = is_array($D['traduire']) ? plugin2balise_traduire($D) :'';
-
-		// Raz des balises non utilisees
-		$pipeline = $chemin = $necessite = $utilise = $bouton = $onglet = '';
-		$commandes = array();
 	}
 	else {
 		// Balise spip
 		$attributs =
 			($compatible ? " compatibilite=\"$compatible\"" : '');
-
-		// Toutes les balises techniques ne sont autorisees que dans spip
-		$pipeline = is_array($D['pipeline']) ? plugin2balise_pipeline($D['pipeline']) :'';
-		$chemin = is_array($D['path']) ? plugin2balise_chemin($D) :'';
-		$necessite = (is_array($D['necessite']) OR is_array($D['lib'])) ? plugin2balise_necessite($D) :'';
-		$utilise = is_array($D['utilise']) ? plugin2balise_utilise($D['utilise']) :'';
-		$bouton = is_array($D['bouton']) ? plugin2balise_exec($D, 'bouton') :'';
-		$onglet = is_array($D['onglet']) ? plugin2balise_exec($D, 'onglet') :'';
-
-		// Raz des balises non utilisees
+		// raz des balises non utilisees
 		$nom = $commentaire = $auteur = $licence = $traduire = '';
 		$descriptions =array();
-
-		// On accumule dans un tableau les commandes de toutes les balises spip
-		$commandes = array_merge(
-						plugin2balise_implicite($D, 'options', 'options'),
-						plugin2balise_implicite($D, 'fonctions', 'fonctions'),
-						plugin2balise_implicite($D, 'install', 'initialisations'));
 	}
+
+	// Toutes les balises techniques sont autorisees dans paquet et spip
+	$pipeline = is_array($D['pipeline']) ? plugin2balise_pipeline($D['pipeline']) :'';
+	$chemin = is_array($D['path']) ? plugin2balise_chemin($D) :'';
+	$necessite = (is_array($D['necessite']) OR is_array($D['lib'])) ? plugin2balise_necessite($D) :'';
+	$utilise = is_array($D['utilise']) ? plugin2balise_utilise($D['utilise']) :'';
+	$bouton = is_array($D['bouton']) ? plugin2balise_exec($D, 'bouton') :'';
+	$onglet = is_array($D['onglet']) ? plugin2balise_exec($D, 'onglet') :'';
+
+	// On accumule dans un tableau les commandes de toutes les balises paquet et spip
+	$commandes = array();
+	$commandes = array_merge(
+					plugin2balise_implicite($D, 'options', 'options'),
+					plugin2balise_implicite($D, 'fonctions', 'fonctions'),
+					plugin2balise_implicite($D, 'install', 'initialisations'));
 	
-	$contenu = "$nom$commentaire$auteur$licence$traduire$pipeline$necessite$utilise$bouton$onglet$chemin$balises_spip";
 	$paquet = 
-		($contenu OR $attributs)
-		?	"<$balise$attributs" . ($balise == 'paquet' ? "\n>" : ">") .
-			"\t$contenu\n" .
-			"</$balise>\n"
-		:	'';
+		"<$balise$attributs" . ($balise == 'paquet' ? "\n>" : ">") .
+		"\t$nom$commentaire$auteur$licence$traduire$pipeline$necessite$utilise$bouton$onglet$chemin$balises_spip\n" .
+		"</$balise>\n";
 	
 	return array($paquet, $commandes, $descriptions);
 }
