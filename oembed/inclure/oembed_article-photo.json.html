@@ -5,7 +5,7 @@
 	"provider_url":[(#URL_SITE_SPIP|json_encode)],
 	"title":[(#TITRE|json_encode)],
 	"author_name":[(#CREDITS|json_encode)],
-	"width":"#LARGEUR",
-	"height":"#HAUTEUR",
-	"url":[(#URL_DOCUMENT|url_absolue|json_encode)]
+	"width":[(#ENV{maxwidth,#LARGEUR}|json_encode)],
+	"height":[(#ENV{maxheight,#HAUTEUR}|json_encode)],
+	"url":[(#URL_DOCUMENT|image_reduire{#ENV{maxwidth,0},#ENV{maxheight,0}}|extraire_attribut{src}|sinon{#URL_DOCUMENT}|url_absolue|json_encode)]
 }</BOUCLE_doc>

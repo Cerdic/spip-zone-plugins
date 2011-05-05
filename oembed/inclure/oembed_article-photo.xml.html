@@ -1,0 +1,14 @@
+<BOUCLE_doc(DOCUMENTS){id_article}{extension IN png,jpg,gif}{0,1}><?xml 
+version="1.0"[ encoding="(#CHARSET)"] standalone="yes"?>
+<oembed>
+	<version>1.0</version>
+	<type>photo</type>
+	[<provider_name>(#NOM_SITE_SPIP|textebrut|texte_backend)</provider_name>]
+	[<provider_url>(#URL_SITE_SPIP)</provider_url>]
+	[<title>(#TITRE|texte_backend)</title>]
+	[<author_name>(#CREDITS|texte_backend)</author_name>]
+	[<width>(#ENV{maxwidth,#LARGEUR})</width>]
+	[<height>(#ENV{maxheight,#HAUTEUR})</height>]
+	[<url>(#URL_DOCUMENT|image_reduire{#ENV{maxwidth,0},#ENV{maxheight,0}}|extraire_attribut{src}|sinon{#URL_DOCUMENT}|url_absolue)</url>]
+</oembed>
+</BOUCLE_doc>
