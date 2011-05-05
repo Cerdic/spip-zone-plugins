@@ -46,9 +46,21 @@ function update_spip_asso_membre($id_auteur)
 
 	/* on recupere les noms et prenoms dans le champ nom de l'auteur SPIP */
 	$nom = $auteur['nom'];
-	if ($nom)
-		list($nom, $prenom) = preg_split('/\s+/', $nom, 2);
-	else {$nom = _T('asso:activite_entete_adherent'); $prenom = $id_auteur;} /* si il est vide, le nom sera Adherents XX */
+	if ($nom) {
+		/* selection du format d'import du champ non */
+		if ($GLOBALS['association_metas']['import_nom_auteur'] == "prenom_nom") {
+			list($prenom, $nom) = preg_split('/\s+/', $nom, 2);
+			if (!$nom) {/* il n'y avait qu'une seule chaine -> on la met dans le nom et le prenom reste vide */
+				$nom = $prenom;
+				$prenom = '';
+			}
+		} elseif ($GLOBALS['association_metas']['import_nom_auteur'] == "nom") {
+			$prenom = '';
+		} else { // defaut: format nom prenom
+			list($nom, $prenom) = preg_split('/\s+/', $nom, 2); /* il faudrait aussi gerer le cas ou le nom de famille contient un espace */
+		}
+	}
+	else {$nom = _T('asso:activite_entete_adherent').' '.$id_auteur; $prenom = '';} /* si il est vide, le nom sera Adherents XX */
 	$modif['nom_famille'] = $nom;
 	$modif['prenom'] = $prenom;
 
@@ -60,7 +72,7 @@ function update_spip_asso_membre($id_auteur)
 		unset($modif['prenom']);
 		if ($membre['statut_interne'] == 'sorti') $modif['statut_interne'] = 'prospect'; /* si un auteur est edite mais correspond a un membre sorti, on le repasse en prospect */
 		sql_updateq('spip_asso_membres', $modif, "id_auteur=$id_auteur");
-	} else { /* sinon on ajoute avec comme statut par defaut echu */
+	} else { /* sinon on ajoute avec comme statut par defaut prospect */
 	  $modif['statut_interne'] = 'prospect';
 	  $modif['id_auteur'] = $id_auteur;
 	  sql_insertq('spip_asso_membres', $modif);

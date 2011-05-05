@@ -33,6 +33,14 @@
 		<input type="checkbox" name="prenom" [(#ENV{prenom}|?{checked="checked"})] id="prenom" />
 		<label for="nom"><strong><:asso:adherent_libelle_prenom:></strong></label><br/>
 		</p>
+		<p>
+		<label><strong><:asso:config_libelle_import_nom_auteur:></strong> </label>	
+		<select name="import_nom_auteur" id="import_nom_auteur">
+			<option value=""><:asso:import_nom_auteur_nom_prenom:></option> <!-- c'est l'option par defaut, elle n'a donc pas de valeur et est donc selectionne meme si on n'a pas touche a ce reglage -->
+			<option value="prenom_nom"><:asso:import_nom_auteur_prenom_nom:></option> 
+			<option value="nom"><:asso:import_nom_auteur_nom:></option> 
+		</select>
+		</p>
 	</fieldset>
 
 	<!-- Options du plugin -->
