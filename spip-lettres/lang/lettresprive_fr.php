@@ -179,6 +179,7 @@
 		'spip_lettres_utiliser_descriptif' => "Utiliser le descriptif ?",
 		'spip_lettres_utiliser_chapo' => "Utiliser le chapeau ?",
 		'spip_lettres_utiliser_ps' => "Utiliser le PS ?",
+		'log_utiliser_email' => "Utiliser l'adresse mail des destinataires dans les logs ?",
 		'ps' => "P.S.",
 		'exporter_tous_desabonnes' => "Exporter tous les désabonnés",
 		'item_mots_cles_association_lettres' => "aux lettres d'information",

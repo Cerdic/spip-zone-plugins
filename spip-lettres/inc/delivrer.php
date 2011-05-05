@@ -52,7 +52,10 @@ function lettres_envoyer_une_lettre($id_lettre,$id_abonne,$try=1){
 	if ($resultat) {
 		// Succes
 		$result = $abonne->enregistrer_envoi($id_lettre, $resultat);
-		spip_log("OK Envoi lettre $id_lettre -> $id_abonne / Restant:".lettres_envois_restants($id_lettre),'lettres_delivrer_ok');
+		if ($GLOBALS['meta']['spip_lettres_log_utiliser_email']=='oui') 
+			$dest = $id_abonne."(".sql_getfetsel("email", "spip_abonnes", "id_abonne= ".intval($id_abonne)).")";
+		else $dest = $id_abonne;
+		spip_log("bidule OK Envoi lettre $id_lettre -> $dest / Restant:".lettres_envois_restants($id_lettre),'lettres_delivrer_ok');
 		// si plus de job concernant cette lettre, changer son statut
 		// attention, il reste encore le job en cours dans la table
 		if (lettres_envois_restants($id_lettre)<=1){

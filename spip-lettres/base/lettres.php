@@ -356,6 +356,7 @@
 			if (version_compare($current_version,'4.1','<'))
 				ecrire_meta('spip_lettres_cliquer_anonyme', 'oui');
 				ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', 'non');
+				ecrire_meta('spip_lettres_log_utiliser_email', 'non');
 				ecrire_meta($nom_meta_base_version,$current_version='4.1','non');
 		}
 	}
