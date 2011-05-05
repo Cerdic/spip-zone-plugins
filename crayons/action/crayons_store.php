@@ -27,6 +27,10 @@ function post_crayons() {
             		$content[$field] = false;
             		# cf. valeur passee dans crayon->md5() : false ou filemtime() du logo
             } else {
+            	/*
+            		le changement de charset n'est plus necessaire
+            		depuis jquery 1.5 (feature non documentee de jquery!)
+            	*/
             	$content[$field] = is_array($_POST['content_'.$crayon.'_'.$field])?implode(',',$_POST['content_'.$crayon.'_'.$field]):$_POST['content_'.$crayon.'_'.$field];
             }
           }

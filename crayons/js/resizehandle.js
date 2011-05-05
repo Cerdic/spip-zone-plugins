@@ -1,6 +1,6 @@
 (function($){
 /*
- * resizehandle.js (c) Fil 2007, plugin pour jQuery
+ * resizehandle.js (c) Fil 2007-2011, plugin pour jQuery
  * @ http://www.jquery.info/spip.php?article44
  * Distribue sous licence GNU/LGPL et MIT
  */

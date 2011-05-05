@@ -1,6 +1,6 @@
 (function($){
 /*
- *	crayons.js (c) Fil, toggg, 2006-2010-- licence GPL
+ *	crayons.js (c) Fil, toggg, 2006-2011-- licence GPL
  */
 
 // le prototype configuration de Crayons
@@ -232,6 +232,22 @@ $.fn.activatecrayon = function(percent) {
 			)
 			.ajaxForm({
 			"dataType":"json",
+			"error": function(d) {
+				uniAlert('erreur de communication');
+				crayon
+				.empty()
+				.append(
+					$('<div class="error">')
+					.html(d.responseText || d.error || 'erreur inconnue')
+				)
+				.css({
+					background: 'white',
+					color: 'black',
+					width: '480px',
+					border: 'red solid 2px',
+					padding: '10px'}
+				);
+			},
 			"success": function(d) {
 				me
 				.find("em.crayon-searching")
@@ -335,6 +351,8 @@ $.fn.activatecrayon = function(percent) {
 			.keypress(function(e){
 				e.cancelBubble = true;
 			})
+			// focus par defaut (crayons sans textarea/text, mais uniquement menus ou fichiers)
+			.find('input:visible:first').focus().end()
 			.find("textarea.crayon-active,input.crayon-active[type=text]")
 				.each(function(n){
 					// focus pour commencer a taper son texte directement dans le champ
@@ -348,41 +366,44 @@ $.fn.activatecrayon = function(percent) {
 						this.selectionEnd=position;
 					}
 				})
-				.keydown(function(e){
-					if(!e.charCode && e.keyCode == 119 /* F8, windows */) {
-							crayon
-							.find("form.formulaire_crayon")
-							.submit();
-					}
-					if (e.keyCode == 27) {
-						me
-						.cancelcrayon();
-					}
-				})
-				.keypress(function(e){
-					// Clavier pour sauver
-					if (
-					(e.ctrlKey && (
-						/* ctrl-s ou ctrl-maj-S, firefox */
-						((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
-						/* ctrl-s, safari */
-						|| (e.charCode==19 && e.keyCode==19)
-					)
-					) {
+			.end()
+			.keydown(function(e){
+				if(!e.charCode && e.keyCode == 119 /* F8, windows */) {
 						crayon
 						.find("form.formulaire_crayon")
 						.submit();
+				}
+				if (e.keyCode == 27) { /* esc */
+					me
+					.cancelcrayon();
+				}
+			})
+			.keypress(function(e){
+				// Clavier pour sauver
+				if (
+				(e.ctrlKey && (
+					/* ctrl-s ou ctrl-maj-S, firefox */
+					((e.charCode||e.keyCode) == 115) || ((e.charCode||e.keyCode) == 83))
+					/* ctrl-s, safari */
+					|| (e.charCode==19 && e.keyCode==19)
+				) ||
+				(
+					e.shiftKey && (e.keyCode == 13) /* shift-return */
+				)
+				) {
+					crayon
+					.find("form.formulaire_crayon")
+					.submit();
+				}
+				var maxh = this.className.match(/\bmaxheight(\d+)?\b/);
+				if (maxh) {
+					maxh = maxh[1] ? parseInt(maxh[1]) : 200;
+					maxh = this.scrollHeight < maxh ? this.scrollHeight : maxh;
+					if (maxh > this.clientHeight) {
+						$(this).css('height', maxh + 'px');
 					}
-					var maxh = this.className.match(/\bmaxheight(\d+)?\b/);
-					if (maxh) {
-						maxh = maxh[1] ? parseInt(maxh[1]) : 200;
-						maxh = this.scrollHeight < maxh ? this.scrollHeight : maxh;
-						if (maxh > this.clientHeight) {
-							$(this).css('height', maxh + 'px');
-						}
-					}
-				})
-			.end()
+				}
+			})
 			.find(".crayon-submit")
 				.click(function(e){
 					e.stopPropagation();
