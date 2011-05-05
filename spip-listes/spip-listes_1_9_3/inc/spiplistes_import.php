@@ -44,7 +44,7 @@ function spiplistes_import(
 	, $forcer_abo = false
 ) {
 	$result_affiche = '';
-	
+
 	if(is_readable($filename))
 	{
 		// abonner les adresses importees
@@ -147,12 +147,16 @@ function spiplistes_import(
 			
 			if(!empty($nouvelle_entree)
 			   // ni une ligne de commentaire
-			   && !ereg("^[/#]", $nouvelle_entree))
-			{
+			   && (
+				   ($char = substr($nouvelle_entree, 0, 1))
+				   && ($char != '#')
+				   && ($char != '/')
+				)
+			) {
 				list($email, $login, $nom) = explode($separateur, $nouvelle_entree);
 				
 				$email = strtolower(trim($email));
-				
+
 				$mail_exist = false;
 				
 				if(($email = email_valide($email))
