@@ -283,7 +283,7 @@ function plugin2balise_commentaire($description, $prefixe) {
 }
 
 
-// --------------------- BALISES COPYRIGHT (CONTENT_COPY) ------------------------
+// --------------------- BALISES COPYRIGHT (CREDITS) ------------------------
 //
 // - auteur
 // - licence
@@ -375,7 +375,7 @@ function plugin2balise_traduire($D) {
 }
 
 
-// --------------------- BALISES TECHNIQUES (CONTENT_TECH) -----------------------
+// --------------------- BALISES TECHNIQUES (IMPLEMENTATION) -----------------------
 //
 // - pipeline
 // - chemin
@@ -384,7 +384,6 @@ function plugin2balise_traduire($D) {
 // - utilise
 // - bouton
 // - onglet
-// - traduire
 
 function plugin2balise_pipeline($D) {
 	$res = '';
@@ -462,6 +461,7 @@ function plugin2balise_exec($D, $balise) {
 			" nom=\"" . $nom . "\"" .
 			plugin2attribut('titre', @$i['titre']) .
 			plugin2attribut('parent', @$i['parent']) .
+			plugin2attribut('position', @$i['position']) .
 			plugin2attribut('icone', @$i['icone']) .
 			plugin2attribut('action', @$i['url']) .
 			plugin2attribut('parametres', str_replace('&', '&amp;', str_replace('&amp;', '&', @$i['args']))) .

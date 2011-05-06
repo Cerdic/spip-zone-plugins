@@ -85,16 +85,18 @@
 
 <!ELEMENT pipeline (action|nom|inclure)*>
 
-<!ELEMENT bouton (url|args|icone|titre|position)*>
+<!ELEMENT bouton (url|args|icone|titre)*>
 <!ATTLIST bouton
           id %NAME; #REQUIRED
           parent %NAME; #IMPLIED
+          position %NUMBER; #IMPLIED
 >
 
-<!ELEMENT onglet (url|args|icone|titre|position)*>
+<!ELEMENT onglet (url|args|icone|titre)*>
 <!ATTLIST onglet
           id %NAME; #REQUIRED
           parent %NAME; #IMPLIED
+          position %NUMBER; #IMPLIED
 >
 
 <!ELEMENT traduire EMPTY>
@@ -111,5 +113,4 @@
 <!ELEMENT args (#PCDATA)>
 <!ELEMENT icone (#PCDATA)>
 <!ELEMENT titre (#PCDATA)>
-<!ELEMENT position (#PCDATA)>
 <!ELEMENT multi (#PCDATA)>
