@@ -1,2 +1,34 @@
+[<!--(#REM)
+	
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	Permet d'afficher un formulaire d'abonnement.
+	
+	Appel de la page par :
+		http://<foo.bar>/?page=abonnement
+	Ou en intégrant les deux ligns ci-dessous dans
+	votre squelette.
+	
+	Scenario :
+	1/ un champ pour entrer l'adresse mail
+	2/ bouton radio pour selectionner la ou les listes
+	   souhaitees. Seule les listes 'publiques' sont
+	   proposees.
+	3/ le formulaire envoie un message de confirmation
+	   une ligne de texte, laconique, qui ne rappelle
+	   pas la ou les listes choisies, ni ne donne un
+	   lien pour la gestion de ses abonnements.
+	   A noter qu'en pied des courriers recus
+	   par la suite, ce lien de gestion est disponible.
+	
+	@todo completer cette documentation (plugin Z ?)
+	@todo ajouter la possibilité de sélectionner le format
+	   de reception
+	@todo proposer un lien de gestion d'abonnement
+	   en signature du courrier de confirmation
+ 
+-->]
 [(#PLUGIN{Z}|oui) <INCLURE{fond=structure}{env}{type=page}{composition=abonnement} />]
 [(#PLUGIN{Z}|non) <INCLURE{fond=abonnement-defaut}{env}>]
