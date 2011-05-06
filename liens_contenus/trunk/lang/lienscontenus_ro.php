@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmation_suppression' => 'Atenţie, un conţinut publicat este legat de acesta şi va fi impactat dacă îl ştergeţi. Doriţi cu adevărat să îl ştergeţi ?', # MODIF
 
 	// I
-	'inexistant' => 'inexistant', # NEW
+	'inexistant' => 'inexistant (@id_objet@)', # NEW
 	'information_element_contenu' => 'Atenţie, un alt conţinut indică către acesta !', # MODIF
 
 	// L
@@ -38,9 +38,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_refuse' => 'Refuzat',
 
 	// T
-	'type_auteur' => '@nom@', # NEW
+	'type_article' => '@titre@ (@id_objet@)', # NEW
+	'type_article_inexistant' => 'Article inexistant (@id_objet@)', # NEW
+	'type_auteur' => '@titre@', # NEW
+	'type_auteur_inexistant' => 'Auteur inexistant (@id_objet@)', # NEW
+	'type_breve' => '@titre@ (@id_objet@)', # NEW
+	'type_breve_inexistant' => 'Brève inexistante (@id_objet@)', # NEW
+	'type_document' => '@titre@ (@id_objet@)', # NEW
+	'type_document_inexistant' => 'Document inexistant (@id_objet@)', # NEW
+	'type_forum' => '@titre@ (@id_objet@)', # NEW
+	'type_forum_inexistant' => 'Message inexistant (@id_objet@)', # NEW
 	'type_modele' => 'Modèle "@id_objet@"', # NEW
-	'type_syndic' => 'Site "@nom_site@" (@id_objet@)' # NEW
+	'type_modele_inexistant' => 'Modèle inexistant (@id_objet@)', # NEW
+	'type_rubrique' => '@titre@ (@id_objet@)', # NEW
+	'type_rubrique_inexistant' => 'Rubrique inexistante (@id_objet@)', # NEW
+	'type_syndic' => '@titre@ (@id_objet@)', # NEW
+	'type_syndic_inexistant' => 'Site inexistant (@id_objet@)' # NEW
 );
 
 ?>

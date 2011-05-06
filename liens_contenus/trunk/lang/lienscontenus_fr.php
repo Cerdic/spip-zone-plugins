@@ -35,23 +35,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_publie' => 'Publié',
 	'statut_refuse' => 'Refusé',
 
-  // T
-  'type_article' => '@titre@ (@id_objet@)',
-  'type_article_inexistant' => 'Article inexistant (@id_objet@)',
-  'type_auteur' => '@titre@',
-  'type_auteur_inexistant' => 'Auteur inexistant (@id_objet@)',
-  'type_breve' => '@titre@ (@id_objet@)',
-  'type_breve_inexistant' => 'Brève inexistante (@id_objet@)',
-  'type_document' => '@titre@ (@id_objet@)',
-  'type_document_inexistant' => 'Document inexistant (@id_objet@)',
-  'type_forum' => '@titre@ (@id_objet@)',
-  'type_forum_inexistant' => 'Message inexistant (@id_objet@)',
-  'type_modele' => 'Modèle "@id_objet@"',
-  'type_modele_inexistant' => 'Modèle inexistant (@id_objet@)',
-  'type_rubrique' => '@titre@ (@id_objet@)',
-  'type_rubrique_inexistant' => 'Rubrique inexistante (@id_objet@)',
-  'type_syndic' => '@titre@ (@id_objet@)',
-  'type_syndic_inexistant' => 'Site inexistant (@id_objet@)'
+	// T
+	'type_article' => '@titre@ (@id_objet@)',
+	'type_article_inexistant' => 'Article inexistant (@id_objet@)',
+	'type_auteur' => '@titre@',
+	'type_auteur_inexistant' => 'Auteur inexistant (@id_objet@)',
+	'type_breve' => '@titre@ (@id_objet@)',
+	'type_breve_inexistant' => 'Brève inexistante (@id_objet@)',
+	'type_document' => '@titre@ (@id_objet@)',
+	'type_document_inexistant' => 'Document inexistant (@id_objet@)',
+	'type_forum' => '@titre@ (@id_objet@)',
+	'type_forum_inexistant' => 'Message inexistant (@id_objet@)',
+	'type_modele' => 'Modèle "@id_objet@"',
+	'type_modele_inexistant' => 'Modèle inexistant (@id_objet@)',
+	'type_rubrique' => '@titre@ (@id_objet@)',
+	'type_rubrique_inexistant' => 'Rubrique inexistante (@id_objet@)',
+	'type_syndic' => '@titre@ (@id_objet@)',
+	'type_syndic_inexistant' => 'Site inexistant (@id_objet@)'
 );
 
 ?>
