@@ -180,6 +180,7 @@
 		'spip_lettres_utiliser_chapo' => "Utiliser le chapeau ?",
 		'spip_lettres_utiliser_ps' => "Utiliser le PS ?",
 		'log_utiliser_email' => "Utiliser l'adresse mail des destinataires dans les logs ?",
+		'signe_par_auteurs' => "Les lettres sont signées de leur(s) auteur(s) ?",
 		'ps' => "P.S.",
 		'exporter_tous_desabonnes' => "Exporter tous les désabonnés",
 		'item_mots_cles_association_lettres' => "aux lettres d'information",

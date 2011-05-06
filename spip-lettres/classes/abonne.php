@@ -363,7 +363,27 @@
 			}
 
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
-			return $envoyer_mail($this->email, $objet, $corps);
+
+			// si signe_par_auteurs = oui
+			if ($GLOBALS['meta']['spip_lettres_signe_par_auteurs'] == 'oui') {
+				
+				// on récupère le 1er auteur; pas traité si plusieurs auteurs
+				$envoyeur = sql_fetsel(
+					"nom, email", 
+					"spip_auteurs LEFT JOIN spip_auteurs_lettres USING(id_auteur)",
+					"id_lettre=".$id_lettre
+					);
+				spip_log('envoyeur :'.$envoyeur['nom'],'spip_lettres');
+				$nom_envoyeur = $envoyeur['nom'];
+				$email_envoyeur = $envoyeur['email'];
+				$corps = array( 
+					'html' => $message_html, 
+					'texte' => $message_texte,
+					'nom_envoyeur' =>  $nom_envoyeur
+				);
+				$expediteur = $email_envoyeur;
+			}
+			return $envoyer_mail($this->email, $objet, $corps, $expediteur);
 		}
 		
 		

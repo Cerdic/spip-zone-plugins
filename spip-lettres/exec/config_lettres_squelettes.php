@@ -74,6 +74,10 @@
 			
 			$spip_lettres_log_utiliser_email = $_POST['spip_lettres_log_utiliser_email'];
 			ecrire_meta('spip_lettres_log_utiliser_email', $spip_lettres_log_utiliser_email);
+			
+			$spip_lettres_signe_par_auteurs = $_POST['spip_lettres_signe_par_auteurs'];
+			ecrire_meta('spip_lettres_signe_par_auteurs', $spip_lettres_signe_par_auteurs);
+
 
 			ecrire_metas();
 
@@ -94,6 +98,7 @@
 		$spip_lettres_cliquer_anonyme				= $GLOBALS['meta']['spip_lettres_cliquer_anonyme'];
 		$spip_lettres_admin_abo_toutes_rubriques	= $GLOBALS['meta']['spip_lettres_admin_abo_toutes_rubriques'];
 		$spip_lettres_log_utiliser_email			= $GLOBALS['meta']['spip_lettres_log_utiliser_email'];
+		$spip_lettres_signe_par_auteurs				= $GLOBALS['meta']['spip_lettres_signe_par_auteurs'];
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_configuration'), "configuration", "configuration");
@@ -221,6 +226,14 @@
 		echo '</td>';
 		echo '</tr>';
 
+	    echo '<tr>';
+		echo '<td><label>'._T("lettresprive:signe_par_auteurs").'</label></td>';
+		echo '<td>';
+		echo '<input type="radio" class="radio" name="spip_lettres_signe_par_auteurs" value="oui" id="spip_lettres_signe_par_auteurs_oui" '.($spip_lettres_signe_par_auteurs == 'oui' ? 'checked="checked" ' : '').'/><label for="spip_lettres_signe_par_auteurs_oui">'._T('lettresprive:oui').'</label>';
+		echo '&nbsp;';
+		echo '<input type="radio" class="radio" name="spip_lettres_signe_par_auteurs" value="non" id="spip_lettres_signe_par_auteurs_non" '.($spip_lettres_signe_par_auteurs == 'non' ? 'checked="checked" ' : '').'/><label for="spip_lettres_signe_par_auteurs_non">'._T('lettresprive:non').'</label>';
+		echo '</td>';
+		echo '</tr>';
 
 		echo '</table>';
 		
