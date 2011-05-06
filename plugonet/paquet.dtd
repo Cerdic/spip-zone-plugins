@@ -25,30 +25,30 @@
 <!ENTITY % CONTEXT "CDATA"> <!-- couples x=y separes par esperluete -->
 <!ENTITY % URI "CDATA"> <!-- lien sur le Web -->
 <!ENTITY % VNUM "CDATA"> <!-- 3 entiers naturels separes par un point: x.y.z -->
-<!ENTITY % INTERVAL "CDATA"> <!-- 2 VNUM entre crochets -->
+<!ENTITY % INTERVAL "CDATA"> <!-- 2 VNUM entre crochets separes par un point-virgule -->
 <!ENTITY % ITEM "CDATA"> <!-- chaine de langue -->
 
-<!ENTITY % ETAT "(experimental|dev|test|stable)">
+<!ENTITY % ETAT "(experimental|dev|test|stable)" >
 
-<!ENTITY % CATEGORY "(auteur|communication|date|divers|edition|maintenance|multimedia|navigation|outil|performance|squelette|statistique|theme)">
+<!ENTITY % CATEGORY "(auteur|communication|date|divers|edition|maintenance|multimedia|navigation|outil|performance|squelette|statistique|theme)" >
 
 <!ENTITY % CREDITS "(auteur|copyright|credit|licence)*" >
 
-<!ENTITY % CONTENT "(bouton|chemin|lib|necessite|onglet|procure|pipeline|utilise)*" >
+<!ENTITY % IMPLEMENTATION "(bouton|chemin|lib|necessite|onglet|procure|pipeline|utilise)*" >
 
-<!ELEMENT paquet (nom, %CREDITS;, traduire*, %CONTENT;, spip*) >
+<!ELEMENT paquet (nom, %CREDITS;, traduire*, %IMPLEMENTATION;, spip*) >
 <!ATTLIST paquet
-	  categorie %CATEGORY; #IMPLIED
-	  compatibilite %INTERVAL; #IMPLIED
-	  etat %ETAT; #REQUIRED
-	  documentation %URI;  #IMPLIED
-	  demonstration %URI;  #IMPLIED
-	  developpement %URI;  #IMPLIED
-	  logo %PATH; #IMPLIED
-	  meta %NAME; #IMPLIED
 	  prefix ID #REQUIRED
+	  categorie %CATEGORY; #REQUIRED
 	  version %VNUM; #REQUIRED
+	  etat %ETAT; #REQUIRED
+	  logo %PATH; #IMPLIED
 	  schema %NUMBER; #IMPLIED
+	  meta %NAME; #IMPLIED
+	  documentation %URI; #IMPLIED
+	  demonstration %URI; #IMPLIED
+	  developpement %URI; #IMPLIED
+	  compatibilite %INTERVAL; #IMPLIED
 >
 
 <!ELEMENT nom (#PCDATA)>
@@ -78,7 +78,7 @@
           gestionnaire %NAME; #IMPLIED
 >
 
-<!ELEMENT spip  %CONTENT; >
+<!ELEMENT spip %IMPLEMENTATION; >
 <!ATTLIST spip
 	  compatibilite %INTERVAL; #REQUIRED
 >
@@ -123,20 +123,22 @@
 <!ELEMENT bouton EMPTY>
 <!ATTLIST bouton 
 	  nom %NAME; #REQUIRED
+	  titre %ITEM; #REQUIRED
 	  parent %NAME; #IMPLIED
-	  action %NAME;  #IMPLIED
+	  position %NUMBER; #IMPLIED
+	  action %NAME; #IMPLIED
 	  parametres %CONTEXT; #IMPLIED
 	  icone %PATH; #IMPLIED
-	  titre %ITEM; #REQUIRED
 >
 
 <!ELEMENT onglet EMPTY>
 <!ATTLIST onglet 
 	  nom %NAME; #REQUIRED
+	  titre %ITEM; #REQUIRED
 	  parent %NAME; #IMPLIED
-	  action %NAME;  #IMPLIED
+	  position %NUMBER; #IMPLIED
+	  action %NAME; #IMPLIED
 	  parametres %CONTEXT; #IMPLIED
 	  icone %PATH; #IMPLIED
-	  titre %ITEM; #REQUIRED
 >
 
