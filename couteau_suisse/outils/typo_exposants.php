@@ -23,7 +23,7 @@ function typo_exposants_installe() {
 		'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
 		'/(?<=\b[DP])(r)(?=[\s\.-])/',	// Dr, Pr suivis d'un espace d'un point ou d'un tiret
 
-		"/\bm$carre\b/", '/(?<=\bm)([23])\b/',	 // m2, m3, m²
+		"/m$carre\b/", '/(?<=\bm)([23])\b/',	 // m2, m3, m²
 		'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
 		'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
 		"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
