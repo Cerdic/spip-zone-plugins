@@ -249,6 +249,15 @@ $.fn.activatecrayon = function(percent) {
 				);
 			},
 			"success": function(d) {
+				// parfois le JSON n'est pas renvoye sous forme d'objet
+				// mais d'une chaine encadree de <pre>...</pre>
+				if (typeof d == "string") {
+					try {
+						d = $.parseJSON(d.replace(/^<pre>/,'').replace(/<[/]pre>$/,''));
+					} catch(e) {
+						d = {'$erreur': 'erreur de communication :' + '  ' + e.message, '$html':''};
+					}
+				}
 				me
 				.find("em.crayon-searching")
 					.remove();
