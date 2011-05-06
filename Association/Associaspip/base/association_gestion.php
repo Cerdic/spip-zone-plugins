@@ -248,4 +248,30 @@ function association_maj_47144()
 }
 
 $GLOBALS['association_maj'][47144] = array(array('association_maj_47144'));
+
+unset($GLOBALS['association_maj'][47144]); /* finalement on garde le champ id_asso, on n'effectue donc pas la maj_47144 */
+
+function association_maj_47501() /* revert de la 47144 pour ceux qui l'aurait effectue avant qu'elle ne soit supprimee */
+{
+	global $association_tables_principales;
+	/* on verifie si le champ id_asso existe dans la table spip_asso_membre, si oui, rien a faire, la 47144 n'a pas ete effectuee */
+	$trouver_table = charger_fonction('trouver_table', 'base');
+	$table_membres = $trouver_table('spip_asso_membres');
+	if (!$table_membres['field']['id_asso']) { /* pas de champ id_asso, il faut le restaurer */
+		sql_alter("TABLE spip_asso_membres ADD id_asso TEXT NOT NULL AFTER id_auteur");
+
+		/* on va voir dans commentaire si on trouve un champ qui ressemble a ce que la 47144 a sauvegarde */
+		$rows = sql_select("id_auteur, commentaire", 'spip_asso_membres', "commentaire LIKE '% - Ref. Int. %' OR commentaire LIKE 'Ref. Int. %'");
+		while ($row = sql_fetch($rows)) {
+			if (preg_match('/^(.*?)( - )?Ref\. Int\. (.*)$/', $row['commentaire'], $matches)) {
+				$commentaire = $matches[1];
+				$id_asso = $matches[3];
+				sql_updateq('spip_asso_membres',
+					array('commentaire' => $commentaire, 'id_asso' => $id_asso),
+					"id_auteur=".$row['id_auteur']);
+			}
+		}		
+	}
+}
+$GLOBALS['association_maj'][47501] = array(array('association_maj_47501'));
 ?>

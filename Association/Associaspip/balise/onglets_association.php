@@ -18,7 +18,6 @@ function balise_ONGLETS_ASSOCIATION_dist ($p) {
 }
 
 function balise_ONGLETS_ASSOCIATION_stat ($args) {
-	spip_log("ARGS:".print_r($args,true));
 	return $args; /* on se contente de faire suivre l'argument statique de la balise */
 }
 function balise_ONGLETS_ASSOCIATION_dyn ($titre) {

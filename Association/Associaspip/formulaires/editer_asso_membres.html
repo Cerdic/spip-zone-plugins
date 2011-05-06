@@ -61,6 +61,13 @@
 			</select>
 		</li>
 
+		[(#ENV{meta_id_asso}|oui)
+		<li class="editer_id_asso">
+			<label for="id_asso"><strong><:asso:adherent_libelle_reference_interne:></strong></label>
+			<input type="text" name="id_asso" value="[(#ENV{id_asso})]" id="id_asso"  class='formo'/>
+		</li>
+		]
+
 		<li class="editer_commentaire">
 			<label for="commentaire"><strong><:asso:adherent_libelle_commentaires:></strong></label>
 			<textarea name="commentaire" id="commentaire"  class='formo' rows="3" cols="80">[(#ENV{commentaire})]</textarea>

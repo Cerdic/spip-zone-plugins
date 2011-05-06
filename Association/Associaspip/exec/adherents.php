@@ -145,7 +145,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, b.statut, a.validite, a.statut_interne, a.categorie, b.bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut, a.validite, a.statut_interne, a.categorie, b.bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
@@ -191,6 +191,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 		$auteurs .= '<td class="'.$class. '">'
 		. $mail . "</td>\n";
 		if ($GLOBALS['association_metas']['prenom']=="on") $auteurs .= '<td class="'.$class. '">'.$data["prenom"]."</td>\n";
+		if ($GLOBALS['association_metas']['id_asso']=="on") $auteurs .= '<td class="'.$class. '">'.$data["id_asso"]."</td>\n";
 		$auteurs .= '<td class="'.$class. '">'
 		. affiche_categorie($data["categorie"])
 		. "</td>\n"
@@ -221,6 +222,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	if ($GLOBALS['association_metas']['civilite']=="on") $res .= "<th>"._T('asso:adherent_libelle_sexe')."</th>\n";
 	$res .= "<th>"._T('asso:adherent_libelle_nom_famille')."</th>\n";
 	if ($GLOBALS['association_metas']['prenom']=="on") $res .= "<th>"._T('asso:adherent_libelle_prenom')."</th>\n";
+	if ($GLOBALS['association_metas']['id_asso']=="on") $res .= "<th>"._T('asso:adherent_libelle_id_asso')."</th>\n";
 	$res .= "<th>"._T('asso:adherent_libelle_categorie')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_validite')."</th>\n"
 	. '<th colspan="4" style="text-align:center;">'._T('asso:adherent_entete_action')."</th>\n"

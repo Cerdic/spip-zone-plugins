@@ -199,6 +199,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'pas_de_categorie_attribuee' => 'Pas de cat&eacute;gorie attribu&eacute;e',
 	'erreur_pas_de_categorie' => 'Aucune cat&eacute;gorie de cotisation d&eacute;finie',
 
+	# Ref. Int.
+	'pas_de_reference_interne_attribuee' => 'Pas de r&eacute;f&eacute;rence interne attribu&eacute;e',
 	# Bouton
 	'adherent_bouton_confirmer' => 'Confirmer',
 	'adherent_bouton_modifier' => 'Modifier',

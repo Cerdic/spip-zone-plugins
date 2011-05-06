@@ -1,11 +1,11 @@
 <plugin>
 	<nom>Associaspip</nom>
 	<auteur>
-	Bernard Blazin - Fran&ccedil;ois de Montlivault (V1)
+	Bernard Blazin - Fran&#231;ois de Montlivault (V1)
 	Emmanuel Saint-James - Jeannolapin (V2)
 	</auteur>
 	<version>2.1.0</version>
-	<version_base>47144</version_base>
+	<version_base>47501</version_base>
 	<meta>association_metas</meta>
 	<etat>dev</etat>
 	<description>Gestion d'associations</description>

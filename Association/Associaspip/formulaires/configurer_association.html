@@ -32,13 +32,15 @@
 		<label for="nom"><strong><:asso:adherent_libelle_sexe:></strong></label><br/>
 		<input type="checkbox" name="prenom" [(#ENV{prenom}|?{checked="checked"})] id="prenom" />
 		<label for="nom"><strong><:asso:adherent_libelle_prenom:></strong></label><br/>
+		<input type="checkbox" name="id_asso" [(#ENV{id_asso}|?{checked="checked"})] id="id_asso" />
+		<label for="nom"><strong><:asso:config_libelle_utiliser_champ_id_asso:></strong></label>
 		</p>
 		<p>
 		<label><strong><:asso:config_libelle_import_nom_auteur:></strong> </label>	
 		<select name="import_nom_auteur" id="import_nom_auteur">
 			<option value=""><:asso:import_nom_auteur_nom_prenom:></option> <!-- c'est l'option par defaut, elle n'a donc pas de valeur et est donc selectionne meme si on n'a pas touche a ce reglage -->
-			<option value="prenom_nom"><:asso:import_nom_auteur_prenom_nom:></option> 
-			<option value="nom"><:asso:import_nom_auteur_nom:></option> 
+			<option value="prenom_nom" [(#ENV{import_nom_auteur}|=={prenom_nom}|?{selected="selected"})]><:asso:import_nom_auteur_prenom_nom:></option> 
+			<option value="nom" [(#ENV{import_nom_auteur}|=={nom}|?{selected="selected"})]><:asso:import_nom_auteur_nom:></option> 
 		</select>
 		</p>
 	</fieldset>
