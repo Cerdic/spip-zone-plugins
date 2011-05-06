@@ -1,4 +1,5 @@
-#HTTP_HEADER{Content-Type: text/javascript}
+#CACHE{7*24*3600}
+#HTTP_HEADER{Content-Type: text/javascript; charset=#CHARSET}
 #SET{langues,#EVAL{$GLOBALS["meta"]["langues_multilingue"]}}
 var multilang_lang = {
 	champs_readonly : '<:multilang:message_champs_readonly|html2unicode|unicode2charset:>',
