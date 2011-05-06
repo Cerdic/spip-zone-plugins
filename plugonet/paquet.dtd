@@ -42,13 +42,13 @@
 	  categorie %CATEGORY; #REQUIRED
 	  version %VNUM; #REQUIRED
 	  etat %ETAT; #REQUIRED
+	  compatibilite %INTERVAL; #REQUIRED
 	  logo %PATH; #IMPLIED
 	  schema %NUMBER; #IMPLIED
 	  meta %NAME; #IMPLIED
 	  documentation %URI; #IMPLIED
 	  demonstration %URI; #IMPLIED
 	  developpement %URI; #IMPLIED
-	  compatibilite %INTERVAL; #IMPLIED
 >
 
 <!ELEMENT nom (#PCDATA)>
