@@ -40,6 +40,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'confirmer_delier_organisation' => "&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier ce contact de cette organisation ?",
 	'confirmer_delier_contact' => "&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier cette organisation de ce contact ?",
 
+	'creer_auteur_contact' => 'Cr&eacute;er un nouvel auteur et le lier &agrave; ce contact',
+	'creer_auteur_organisation' => 'Cr&eacute;er un nouvel auteur et le lier &agrave; cette organisation',
 
 	
 	// D
@@ -96,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_pseudo' => 'Pseudo',
 	'label_recherche_contacts' => "Chercher dans les contacts",
 	'label_recherche_organisations' => "Chercher dans les organisations",
-	'label_recherche_auteurs' => "Chercher dans lse auteurs",
+	'label_recherche_auteurs' => "Chercher dans les auteurs",
 	'label_statut_juridique' => "Statut juridique",
 	'label_telephone' => 'T&eacute;l.',
 	'lier_ce_contact' => "Lier ce contact",
