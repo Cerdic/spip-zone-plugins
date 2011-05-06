@@ -76,7 +76,7 @@
 				[(#TOTAL_BOUCLE|!={1}|oui)
 					<li>
 						<label lang='#LANG'>
-							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ''''''''''''',''})checked="checked"] value="#ID_LISTE" />
+							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
 							<span class='liste-titre'>#TITRE</span>
 							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 						</label>
