@@ -151,7 +151,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 
 	//Connexion à SPIP à la création du compte Thelia
 	if ($_GET['page'] == 'nouveau' || $_GET['page_thelia'] == 'nouveau') {
-		if ($_SESSION['navig']->connecte == 1 && lire_config("spip_thelia/auth_unique_spip_thelia","non")=="oui") ) {
+		if ($_SESSION['navig']->connecte == 1 && lire_config("spip_thelia/auth_unique_spip_thelia","non")=="oui")  {
 			include_spip('auth/thelia');
 			$auteur = creer_auteur_thelia(
 				array(
