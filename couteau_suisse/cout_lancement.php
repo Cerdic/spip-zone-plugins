@@ -237,7 +237,7 @@ function cs_lire_meta_outil($outil, $meta='', $unserialize=true) {
 // renvoie les donnees precompilees d'un outil
 function cs_lire_data_outil($outil, $casier_=false) {
 	static $datas = array();
-	$casier = ($casier_ && $casier!==$outil)?$outil.'_'.$casier_:$outil;
+	$casier = ($casier_ && $casier_!==$outil)?$outil.'_'.$casier_:$outil;
 	if(isset($datas[$casier])) 
 		return $datas[$casier];
 	// recherche dans le fichier cache
