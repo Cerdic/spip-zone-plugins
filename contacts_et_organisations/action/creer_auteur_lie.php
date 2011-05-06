@@ -51,7 +51,7 @@ function action_creer_auteur_lie_dist($arg=null) {
 				break;
 				*/
 				
-				// Code pour le cas ou le id_auteur est dans la table organisations...
+				// Code pour le cas present ou le id_auteur est dans la table organisations...
 				$organisation = sql_getfetsel("nom", "spip_organisations", "id_organisation=$arg[1]"); 
 				$nom = ltrim($organisation);
 				$id_auteur = sql_insertq("spip_auteurs", array (
@@ -69,7 +69,7 @@ function action_creer_auteur_lie_dist($arg=null) {
 
 	} else {
 		
-		spip_log("erreur creation auteur lie au contact ".$arg[0],"contacts");
+		spip_log("erreur creation auteur lie a l objet ".$arg[0],"contacts");
 
 	}
 }
