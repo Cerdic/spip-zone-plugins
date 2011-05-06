@@ -373,7 +373,6 @@
 					"spip_auteurs LEFT JOIN spip_auteurs_lettres USING(id_auteur)",
 					"id_lettre=".$id_lettre
 					);
-				spip_log('envoyeur :'.$envoyeur['nom'],'spip_lettres');
 				$nom_envoyeur = $envoyeur['nom'];
 				$email_envoyeur = $envoyeur['email'];
 				$corps = array( 
