@@ -74,13 +74,13 @@ cs_log("smileys_installe() : $path");
 		for ($i=0; $i<$max; $i++)
 			$smileys2[4]['smiley_'.str_replace('.png','',$sm[2][$i])] = $sm[2][$i];
 	}
-	return array('smileys'=>$smileys2, 'smileys_racc'=>$aide);
+	return array($smileys2, 'racc'=>$aide);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function smileys_raccourcis() {
-	$racc = cs_lire_data_outil('smileys', 'smileys_racc');
+	$racc = cs_lire_data_outil('smileys', 'racc');
 	return _T('couteauprive:smileys:aide', array('liste' => '<b>'.join('</b>, <b>', $racc).'</b>'));
 }
 

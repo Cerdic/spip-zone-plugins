@@ -689,8 +689,10 @@ function cs_installe_outils() {
 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) {
 		include_spip('outils/'.$nom);
 		if(function_exists($f = $nom.'_installe')) {
-			if(($tmp=$f())!==NULL) foreach($tmp as $i=>$v)
-				$datas[$i] = "function cs_data_$i() { return " . var_export($v, true) . ";\n}";
+			if(($tmp=$f())!==NULL) foreach($tmp as $i=>$v) {
+				$j=($i && $i!==$nom)?$nom.'_'.$i:$nom;
+				$datas[$j] = "function cs_data_$j() { return " . var_export($v, true) . ";\n}";
+			}
 if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 		}
 	}

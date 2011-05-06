@@ -69,7 +69,7 @@ cs_log("couleurs_installe()");
 			}
 		}
 	}
-	return array('couleurs'=>$couleurs, 'couleurs_racc'=>$aide);
+	return array($couleurs, 'racc'=>$aide);
 }
 
 // creation d'icone pour le plugin porte-plume
@@ -85,7 +85,7 @@ function couleurs_creer_icone_barre($texte, $color) {
 // liste des nouveaux raccourcis ajoutes par l'outil
 // si cette fonction n'existe pas, le plugin cherche alors  _T('couteauprive:un_outil:aide');
 function couleurs_raccourcis() {
-	$racc = cs_lire_data_outil('couleurs', 'couleurs_racc');
+	$racc = cs_lire_data_outil('couleurs', 'racc');
 	return _T('couteauprive:couleurs:aide', array(
 		'liste' => '<b>'.join('</b>, <b>', $racc).'</b>',
 		'fond' => _COULEURS_FONDS==1?_T('couteauprive:couleurs_fonds'):'',
