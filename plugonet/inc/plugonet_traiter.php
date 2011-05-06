@@ -111,14 +111,18 @@ function plugin2paquet($plugins) {
 	$commandes = array();
 	if (count($plugins) == 1 ) {
 		$cle_min_min = $cle_min_max = 0;
+		if (!$plugins[$cle_min_min]['compatible'])
+			$plugins[$cle_min_min]['compatible'] = '[1.9.0;)';
 	}
 	else {
 		// Cas de plusieurs balises plugin
 		// -- On determine le bloc dont la borne min de compatibilite SPIP est la plus elevee
 		//     et celui dont la borne min est la moins elevee
+		// -- On construit l'intervalle de compatibilite maximal
 		$cle_min_max = $cle_min_min = -1;
 		$borne_min_max = '1.9.0';
 		$borne_min_min = '4.0.0';
+		$compatibilite_paquet = '';
 		foreach ($plugins as $_cle => $_plugin) {
 			if (!$_plugin['compatible'])
 				$borne_min = '1.9.0';
@@ -132,6 +136,9 @@ function plugin2paquet($plugins) {
 				$cle_min_min = $_cle;
 				$borne_min_min = $borne_min;
 			}
+			$compatibilite_paquet = (!$compatibilite_paquet) 
+				? $_plugin['compatible']
+				: fusionner_intervalles($compatibilite_paquet, $_plugin['compatible']);
 		}
 
 		// On initialise les informations non techniques du bloc de compatibilite la moins elevee avec celles
@@ -147,6 +154,8 @@ function plugin2paquet($plugins) {
 		$plugins[$cle_min_min]['nom'] = $plugins[$cle_min_max]['nom'];
 		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'];
 		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'];
+		// On initialise la compatibilite avec la fusion des intervalles de compatibilite SPIP
+		$plugins[$cle_min_min]['compatible'] = $compatibilite_paquet;
 
 		// Le bloc de compatibilite la moins elevee correspond aux attributs et sous-balises primaires
 		// de la balise paquet. Les autres blocs generent les balises spip contenant uniquement les 
@@ -198,13 +207,13 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$attributs =
 			($prefix ? "\n\tprefix=\"$prefix\"" : '') .
 			($categorie ? "\n\tcategorie=\"$categorie\"" : '') .
-			($logo ? "\n\tlogo=\"$logo\"" : '') .
 			($version ? "\n\tversion=\"$version\"" : '') .
 			($etat ? "\n\tetat=\"$etat\"" : '') .
+			($compatible ? "\n\tcompatibilite=\"$compatible\"" : '') .
+			($logo ? "\n\tlogo=\"$logo\"" : '') .
 			($version_base ? "\n\tschema=\"$version_base\"" : '') .
 			($meta ? "\n\tmeta=\"$meta\"" : '') .
-			plugin2balise_lien($lien, 'documentation') .
-			($compatible ? "\n\tcompatibilite=\"$compatible\"" : '');
+			plugin2balise_lien($lien, 'documentation') ;
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
@@ -637,10 +646,39 @@ function extraire_bornes($intervalle) {
 }
 
 
-function plugin2intervalle($bornes) {
-	return ($bornes['min']['incluse'] ? '[' : ']')
+function plugin2intervalle($bornes, $dtd='paquet') {
+	return ($bornes['min']['incluse'] ? '[' : ($dtd=='paquet' ? ']' : '('))
 			. $bornes['min']['valeur'] . ';' . $bornes['max']['valeur']
-			. ($bornes['max']['incluse'] ? ']' : '[');
+			. ($bornes['max']['incluse'] ? ']' : ($dtd=='paquet' ? '[' : ')'));
+}
+
+
+function fusionner_intervalles($intervalle_a, $intervalle_b) {
+
+	// On recupere les bornes de chaque intervalle
+	$borne_a = extraire_bornes($intervalle_a);
+	$borne_b = extraire_bornes($intervalle_b);
+
+	// On initialise la borne min de chaque intervalle a 1.9.0 si vide
+	if (!$borne_a['min']['valeur'])
+		$borne_a['min']['valeur'] = '1.9.0';
+	if (!$borne_b['min']['valeur'])
+		$borne_b['min']['valeur'] = '1.9.0';
+
+	// On calcul maintenant :
+	// -- la borne min de l'intervalle fusionne = min(min_a, min_b)
+	// -- suivant l'intervalle retenu la borne max est forcement dans l'autre intervalle = max(autre intervalle)
+	//    On presuppose evidemment que les intervalles ne sont pas disjoints et coherents entre eux
+	if (spip_version_compare($borne_a['min']['valeur'], $borne_b['min']['valeur'], '<=')) {
+		$bornes_fusionnees['min'] = $borne_a['min'];
+		$bornes_fusionnees['max'] = $borne_b['max'];
+	}
+	else {
+		$bornes_fusionnees['min'] = $borne_b['min'];
+		$bornes_fusionnees['max'] = $borne_a['max'];
+	}
+
+	return plugin2intervalle($bornes_fusionnees, 'plugin');
 }
 
 
