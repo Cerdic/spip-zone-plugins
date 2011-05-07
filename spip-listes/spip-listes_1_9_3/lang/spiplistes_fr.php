@@ -112,6 +112,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // exec/spiplistes_aide.php
 // exec/spiplistes_autocron.php
 // exec/spiplistes_config.php
+, 'format_courrier_defaut' => 'Format d&#8217;envoi des courriers'
+, 'format_courrier_defaut_desc' => 'Ce format est appliqu&#233; aux nouvelles inscriptions.'
 , 'personnaliser_le_courrier' => 'Personnaliser le courrier'
 , 'personnaliser_le_courrier_desc' => 
 	'Vous pouvez personnaliser le courrier pour chaque abonn&#233; en ins&#233;rant 
@@ -194,6 +196,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	de confirmation apr&egrave;s leur abonnement</em>'
 , 'abonnement_code_acces' => '<strong>Abonnement avec codes d&#8217;acc&egrave;s : </strong><br /><i>Les abonn&#233;s 
 	re&ccedil;oivent en plus un login et un mot de passe qui leur permettront de s&#8217;identifier sur le site. </i>'
+, 'inscription' => 'Inscription'
 , 'mode_inscription' => 'Param&#233;trer le mode d&#8217;inscription des visiteurs'
 
 // exec/spiplistes_courrier_edit.php

@@ -108,7 +108,9 @@ function exec_spiplistes_config () {
 		// initialise les variables postées par le formulaire
 		foreach(array_merge(
 			array(
-				'abonnement_valider', 'abonnement_config', 'param_reinitialise'
+				'abonnement_valider', 'abonnement_config'
+				, 'opt_format_courrier_defaut'
+				, 'param_reinitialise'
 				, 'btn_formabo_valider'
 				, 'btn_complement_courrier'
 				, 'btn_param_valider'
@@ -145,8 +147,14 @@ function exec_spiplistes_config () {
 		
 		if($abonnement_valider && $abonnement_config) {
 			ecrire_meta('abonnement_config', $abonnement_config);
+			spiplistes_ecrire_key_in_serialized_meta(
+					'opt_format_courrier_defaut'
+					, $opt_format_courrier_defaut
+					, _SPIPLISTES_META_PREFERENCES
+					);
 			$doit_ecrire_metas = true;
-			$str_log .= "abonnement_config = $abonnement_config, ";
+			$str_log .= "abonnement_config = $abonnement_config, "
+				. "opt_format_courrier_defaut = $opt_format_courrier_defaut, ";
 		}
 	
 		if($btn_formabo_valider) {
@@ -294,22 +302,56 @@ function exec_spiplistes_config () {
 	// Boite Mode d'inscription des visiteurs
 	$checked1 = $checked2 = '';
 	
-	($GLOBALS['meta']['abonnement_config'] == 'simple') ? $checked1 = "checked='checked'"  : $checked2 = "checked='checked'" ;
+	$is_checked = 'checked="checked"';
 	
+	($GLOBALS['meta']['abonnement_config'] == 'simple') ? $checked1 = $is_checked  : $checked2 = $is_checked;
+	
+	$opt_format_courrier_defaut = spiplistes_pref_lire('opt_format_courrier_defaut');
+	if (
+		($opt_format_courrier_defaut != 'html')
+		&& ($opt_format_courrier_defaut != 'texte')
+	) {
+		$opt_format_courrier_defaut = _SPIPLISTES_FORMAT_DEFAULT;
+	}
 	$page_result .= ''
-		. debut_cadre_trait_couleur("redacteurs-24.gif", true, '', _T('spiplistes:mode_inscription'))
+		. '<!-- options inscription -->' . $eol
+		. debut_cadre_trait_couleur('redacteurs-24.gif', true, '', _T('spiplistes:inscription'))
 		. '<form action="' . generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE) . '" method="post">' . $eol
-		. "<p class='verdana2'>" . $eol
-		. "<input type='radio' name='abonnement_config' value='simple' $checked1 id='statut_simple' />" . $eol
-		. "<label for='statut_simple'>"._T('spiplistes:abonnement_simple').'</label>' . $eol
-		. "</p>" . $eol
-		. "<p class='verdana2'>" . $eol
-		. "<input type='radio' name='abonnement_config' value='membre' $checked2 id='statut_membre' />" . $eol
-		. "<label for='statut_membre'>"._T('spiplistes:abonnement_code_acces').'</label>' . $eol
-		. "</p>" . $eol
+		. debut_cadre_relief('', true, '', _T('spiplistes:mode_inscription'))
+		. '<p class="verdana2">' . $eol
+		. '<input type="radio" name="abonnement_config" value="simple"'
+		. $checked1
+		. ' id="statut_simple" />' . $eol
+		. '<label for="statut_simple">'._T('spiplistes:abonnement_simple').'</label>' . $eol
+		. '</p>' . $eol
+		. '<p class="verdana2">' . $eol
+		. '<input type="radio" name="abonnement_config" value="membre"'
+		. $checked2
+		. ' id="statut_membre" />' . $eol
+		. '<label for="statut_membre">'._T('spiplistes:abonnement_code_acces').'</label>' . $eol
+		. '</p>' . $eol
+		. fin_cadre_relief(true)
+		
+		. '<!-- format de courrier par defaut -->' . $eol
+		. debut_cadre_relief('', true, '', _T('spiplistes:format_courrier_defaut'))
+		. '<legend>'._T('spiplistes:format_courrier_defaut_desc').'</legend>'
+		. '<p class="verdana2">' . $eol
+		. '<input type="radio" name="opt_format_courrier_defaut" value="html"'
+		. ($opt_format_courrier_defaut == 'html' ? $is_checked : '')
+		. ' id="c_format_html" />' . $eol
+		. '<label for="c_format_html">'._T('spiplistes:html_description').'</label>' . $eol
+		. '</p>' . $eol
+		. '<p class="verdana2">' . $eol
+		. '<input type="radio" name="opt_format_courrier_defaut" value="texte"'
+		. ($opt_format_courrier_defaut == 'texte' ? $is_checked : '')
+		. ' id="c_format_texte" />' . $eol
+		. '<label for="c_format_texte">'._T('spiplistes:texte_brut').'</label>' . $eol
+		. '</p>' . $eol
+		. fin_cadre_relief(true)
+		
 		// bouton de validation
-		. "<div style='text-align:right;'><input type='submit' name='abonnement_valider' class='fondo' value='"._T('bouton_valider')."' /></div>" . $eol
-		. "</form>" . $eol
+		. '<div style="text-align:right;"><input type="submit" name="abonnement_valider" class="fondo" value="'._T('bouton_valider').'" /></div>' . $eol
+		. '</form>' . $eol
 		. fin_cadre_trait_couleur(true)
 		;
 
