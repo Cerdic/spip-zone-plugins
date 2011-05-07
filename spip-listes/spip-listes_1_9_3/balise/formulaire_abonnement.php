@@ -1,5 +1,18 @@
 <?php
 /**
+ *
+ * Si inscriptions pas autorisees, retourner une chaine d'avertissement
+ * Sinon inclusion du squelette
+ * Si pas de nom ou pas de mail valide, premier appel rien d'autre a faire
+ * Autrement 2e appel, envoyer un mail et le squelette ne produira pas de
+ * formulaire.
+ * @see formulaire_abonnement.html
+ * 		qui est un formulaire d'exemple d'utilisation
+ * 		de la balise.
+ * @see formulaires/formulaire_abonnement.html
+ * 		qui est le formulaire utilisé par cette balise
+ * 		pour calculer le contenu du formulaire
+ * 		d'abonnement ou de gestion, à l'aide du contexte.
  * @package spiplistes
  */
  // $LastChangedRevision$
@@ -23,13 +36,17 @@ function balise_FORMULAIRE_ABONNEMENT ($p) {
 	return(calculer_balise_dynamique($p, 'FORMULAIRE_ABONNEMENT', array('id_liste')));
 }
 
-// args[0] indique une liste
-// args[1] indique un eventuel squelette alternatif
-// [(#FORMULAIRE_ABONNEMENT{mon_squelette})]
-// un cas particulier est :
-// [(#FORMULAIRE_ABONNEMENT{listeX})]
-// qui permet d'afficher le formulaire d'abonnement a la liste numero X
-
+/**
+ * args[0] indique une liste
+ * args[1] indique un eventuel squelette alternatif
+ * [(#FORMULAIRE_ABONNEMENT{mon_squelette})]
+ * un cas particulier est :
+ * [(#FORMULAIRE_ABONNEMENT{listeX})]
+ * qui permet d'afficher le formulaire d'abonnement a la liste numero X
+ * @param array $args
+ * @param $filtres
+ * @return array
+ */
 function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 
 	preg_match_all('/liste([0-9]+)/x', $args[1], $matches);
@@ -40,12 +57,6 @@ function balise_FORMULAIRE_ABONNEMENT_stat($args, $filtres) {
 	
 	return(array($args[0],$args[1]));
 }
-
-// Si inscriptions pas autorisees, retourner une chaine d'avertissement
-// Sinon inclusion du squelette
-// Si pas de nom ou pas de mail valide, premier appel rien d'autre a faire
-// Autrement 2e appel, envoyer un mail et le squelette ne produira pas de
-// formulaire.
 
 
 function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
@@ -233,18 +244,18 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 } // end balise_FORMULAIRE_ABONNEMENT_dyn()
 
 
-/*
+/**
  * Abonnement d'un visiteur ou d'un auteur
  * Si authentifie', modifie l'abonnement, sinon envoie mail avec cookie_oubli pour confirmer.
  * Si adresse_mail absent de la base, cree un login a partir de l'email et renvoie un mail de confirmation.
  *
+ * @param string $type
+ * @param string $acces_membres
+ * @param string $formulaire
+ * @param string $nom_site_spip
+ * @param string $inscription_redacteur
+ * @param string $inscription_visiteur
  * @return array()
- * @param $type string
- * @param $acces_membres string
- * @param $formulaire string
- * @param $nom_site_spip string
- * @param $inscription_redacteur string
- * @param $inscription_visiteur string
  */
 function spiplistes_formulaire_abonnement (
 											$type
@@ -267,8 +278,14 @@ function spiplistes_formulaire_abonnement (
 	$email_a_envoyer = $mode_modifier = $sql_where = false;
 	$abonne = array();
 	
-	// traiter d'abord si retour de mail lien cookie
+	/**
+	 * La variable d est transmise via URL proposé en pied de mail
+	 * du courrier envoyé.
+	 * Elle n'est pas utilisée dans le squelette
+	 * d'abonnement.
+	 */
 	$d = _request('d');
+	
 	if(!empty($d)) {
 		$sql_where = array(
 				'cookie_oubli='.sql_quote($d)
@@ -568,7 +585,7 @@ function spiplistes_texte_inventaire_abos ($id_abonne, $type_abo, $nom_site_spip
 	return($texte);
 }
 
-/*
+/**
  * renvoie le nom du patron pour la composition des messages de gestion
  * (confirmation d'abonnement, modification, etc.)
  * @return string
