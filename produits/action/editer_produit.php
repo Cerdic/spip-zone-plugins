@@ -37,7 +37,7 @@ function insert_produit($champs=array()) {
 	// On insère seulement s'il y a une rubrique correcte
 	if (isset($champs['id_rubrique']) and $champs['id_rubrique'] = intval($champs['id_rubrique'])){
 		// Si id_rubrique vaut 0 ou n'est pas definie, creer le produit dans la premiere rubrique racine
-		if (!$id_rubrique = intval($id_rubrique)) {
+		if (!$id_rubrique = intval($champs['id_rubrique'])) {
 			$row = sql_fetsel('id_rubrique, id_secteur, lang', 'spip_rubriques', 'id_parent=0','', '0+titre,titre', "1");
 			$id_rubrique = $row['id_rubrique'];
 		} else $row = sql_fetsel('lang, id_secteur', 'spip_rubriques', "id_rubrique=$id_rubrique");
