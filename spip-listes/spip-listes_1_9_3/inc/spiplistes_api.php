@@ -161,10 +161,12 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
 
 
 /**
- * CP-20080324 : abonner un id_auteur a une id_liste
-// CP-20080508 : ou une liste de listes ($id_liste est un tableau de (id)listes)
-// CP-20090111: ajouter la date d'inscription
-/*
+ * Abonner un id_auteur a une id_liste
+ * ou une liste de listes ($id_liste est un tableau de (id)listes)
+ * avec la date d'inscription
+ * @version CP-20110505
+ * @param int $id_auteur
+ * @param int|array $id_liste
  * @return array id_listes ajoutees
  */
 function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
@@ -172,8 +174,8 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 	$r_id_listes = false;
 	
 	if(($id_auteur = intval($id_auteur)) > 0) {
-		$sql_table = "spip_auteurs_listes";
-		$sql_noms = "(id_auteur,id_liste,date_inscription)";
+		$sql_table = 'spip_auteurs_listes';
+		$sql_noms = '(id_auteur,id_liste,date_inscription)';
 		
 		$curr_abos_auteur = spiplistes_abonnements_listes_auteur($id_auteur);
 		$r_id_listes = array();
@@ -218,7 +220,7 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 		}
 	}
 	return($r_id_listes);
-}
+} // spiplistes_abonnements_ajouter()
 
 // desabonner des listes (CP-20071016)
 // $listes_statuts : array (statuts des listes,..)
@@ -351,7 +353,7 @@ function spiplistes_abonnements_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_auteurs_listes", $sql_whereq));
 }
 
-/*
+/**
  * Compter les abonnements qui n'ont plus d'abonnes
  * @return array id_auteur
  */
@@ -741,14 +743,14 @@ function spiplistes_format_abo_demande ($id_auteur) {
 	return($result);
 }
 
-/*
- * CP-20090111
+/**
  * liste des formats autorises
- * @return 
  * 	($idx == 'array') array (index et sa valeur identique) 
  * 	($idx == 'quoted') la valeur est sql_quote'
  * 	($idx == 'sql_where') string ligne sql_where formatee avec OR
+ * @version CP-20090111
  * @param $idx string[optional]
+ * @return string
  */
 function spiplistes_formats_autorises ($idx = 'array') {
 	static $formats;
