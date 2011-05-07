@@ -230,7 +230,7 @@ function spiplistes_ecrire_key_in_serialized_meta ($key, $value, $meta_name) {
 }
 
 
-/*
+/**
  * @return la version du fichier plugin.xml 
  */
 function spiplistes_real_version_get ($prefix) {
@@ -241,7 +241,7 @@ function spiplistes_real_version_get ($prefix) {
 	return ($r);
 }
 
-/*
+/**
  * renvoie la version_base du fichier plugin.xml
  */
 function spiplistes_real_version_base_get ($prefix) {
@@ -266,7 +266,7 @@ function spiplistes_real_tag_get ($prefix, $s) {
 	return(!empty($r) ? $r : false);
 }
 
-/*
+/**
  * renvoie les infos du plugin contenues dans les metas
  * qui contient 'dir' et 'version'
  */
@@ -281,7 +281,7 @@ function spiplistes_get_meta_infos ($prefix) {
 	return(false);
 }
 
-/*
+/**
  * renvoie le dir du plugin present dans les metas
  */
 function spiplistes_get_meta_dir($prefix) {
@@ -293,7 +293,7 @@ function spiplistes_get_meta_dir($prefix) {
 	return($result);
 }
 
-/*
+/**
  * @return la version_base en cours
  * doc: voir inc/plugin.php sur version_base (plugin.xml)
  * qui s'appelle base_version en spip_meta %-}
@@ -306,9 +306,13 @@ function spiplistes_current_version_base_get ($prefix) {
 	return($vb);
 }
 
+/**
+ * Message erreur sql sur le journal du plugin
+ * @return bool TRUE
+ */
 function spiplistes_sqlerror_log ($trace = '') {
 	if($trace) $trace = " ($trace) ";
-	spiplistes_log('DB ERROR'.$trace.": [" . sql_errno() . "] " . sql_error());
+	spiplistes_log('DB ERROR'.$trace.': [' . sql_errno() . '] ' . sql_error());
 	return(true);
 }
 
@@ -377,12 +381,12 @@ if(!function_exists('html_entity_decode')) {
 
 /**
  * complete caracteres manquants dans HTML -> ISO
- * @return la chaine transcrite
  * @param $texte le texte a transcrire
  * @param $charset le charset souhaite'. Normalement 'iso-8859-1' (voir page de config)
  * @param $is_html flag. Pour ne pas transcrire completement la version html
  * @see http://fr.wikipedia.org/wiki/ISO_8859-1
  * @see http://www.w3.org/TR/html401/sgml/entities.html
+ * @return string la chaine transcrite
  */
 function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = false)
 {
