@@ -134,6 +134,8 @@ Compatibilité : SPIP v1.92x, v2.0.x et v2.1.x',
 	'urls_propres_lien' => 'Lien public d\'accès',
 	'urls_propres_objet' => 'Sont listées ici les URLs propres stockées en base grâce auxquelles les visiteurs pourront naviguer sur votre site.',
 	'urls_propres_titre' => 'URLS PROPRES',
+	'url_verrouillee' => 'URL verrouillée',
+
 
 	// V
 	'variable_vide' => '(Vide)',
