@@ -34,7 +34,7 @@ function prix_commande_dist($id_commande, $prix_ht){
 		$fonction_ttc = charger_fonction('prix', 'inc/');
 		$details = array_map('reset', $details);
 		
-		// Pour chaque objet on va chercher son prix HT x sa quantité
+		// Pour chaque objet on va chercher son prix TTC x sa quantité
 		foreach($details as $id_commandes_detail){
 			$prix += $fonction_ttc('commandes_detail', $id_commandes_detail);
 		}
