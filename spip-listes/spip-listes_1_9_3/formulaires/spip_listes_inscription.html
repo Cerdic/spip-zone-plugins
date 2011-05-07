@@ -1,4 +1,13 @@
-<div class="formulaire_spip formulaire_spip_listes_inscription" id="sl-inscription">
+[<!--(#REM)
+
+	Formulaire construit par la balise
+		FORMULAIRE_SPIP_LISTES_INSCRIPTION
+	
+	@since SPIP 2.0
+	@see formulaires/spip_listes_inscription.php
+	@see http://www.spip.net/fr_article3796.html
+
+-->]<div class="formulaire_spip formulaire_spip_listes_inscription" id="sl-inscription">
 <!-- <br class='bugajaxie' /> -->
 [<p class="formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -26,6 +35,7 @@
 			<label for="email"><:spiplistes:votre_email_:></label>
 			<input type="text" name="email" id="email" value="#ENV{email}"
 				   [<!--(#REM)
+				   
 					Si erreur rencontree sur le champ mail,
 					ajoute la classe 'erreur' a input.
 					
