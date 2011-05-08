@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Commandes de Paniers</nom>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1.0</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Permet de remplir une commande avec le contenu d'un panier.</description>
+	<categorie>divers</categorie>
+	<icon></icon>
+	
+	<prefix>panier2commande</prefix>
+	
+	<pipeline>
+		<nom>post_insertion</nom>
+		<inclure>panier2commande_pipelines.php</inclure>
+	</pipeline>
+	
+	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="commandes" version="[0.3.0;]" />
+	<necessite id="paniers" version="[0.1;]" />
+	<necessite id="spip_bonux" version="[2.2.20;]" />
+</plugin>
