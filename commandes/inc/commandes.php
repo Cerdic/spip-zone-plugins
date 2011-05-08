@@ -9,11 +9,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return int $id_commande Retourne l'identifiant SQL de la commande
  */
 function creer_commande_encours(){
-	if (is_null($arg)){
-		$securiser_action = charger_fonction('securiser_action', 'inc');
-		$arg = $securiser_action();
-	}
-	
 	include_spip('inc/session');
 	
 	// S'il y a une commande en cours dans la session, on la supprime
