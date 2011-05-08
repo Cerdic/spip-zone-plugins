@@ -52,6 +52,7 @@ function creer_commande_encours(){
 		array(
 			'args' => array(
 				'table' => 'spip_commandes',
+				'id_objet' => $id_commande
 			),
 			'data' => $champs
 		)
