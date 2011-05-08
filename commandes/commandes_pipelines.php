@@ -20,9 +20,9 @@ function commandes_optimiser_base_disparus($flux){
 	$commandes = sql_allfetsel(
 		'id_commande',
 		'spip_commandes',
-		'statut = '.sql_quote('encours').' and date<'.sql_quote($depuis).')'
+		'statut = '.sql_quote('encours').' and date<'.sql_quote($depuis)
 	);
-	if (is_array($commande))
+	if (is_array($commandes))
 		$commandes = array_map('reset', $commandes);
 	
 	// S'il y a bien des commandes à supprimer
@@ -42,7 +42,7 @@ function commandes_optimiser_base_disparus($flux){
 			'spip_adresses_liens', 
 			array(
 				'objet = '.sql_quote('commande'), 
-				$in
+				sql_in('id_objet', $commandes)
 			)
 		)){
 			$adresses_commande = array_map('reset', $adresses_commande);

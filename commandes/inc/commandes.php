@@ -12,7 +12,7 @@ function creer_commande_encours(){
 	include_spip('inc/session');
 	
 	// S'il y a une commande en cours dans la session, on la supprime
-	if ($id_commande = intval(session_get('id_commande')) > 0){
+	if (($id_commande = intval(session_get('id_commande'))) > 0){
 		// On supprime son contenu
 		sql_delete('spip_commandes_details', 'id_commande = '.$id_commande);
 		
