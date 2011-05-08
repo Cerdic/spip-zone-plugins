@@ -276,23 +276,47 @@ jQuery.geoportail =
 	},
 
 	// Affichage du lien direct (codage de lon, lat et zoom dans l'adresse)
-	lien: function(id_map) {
-		var carte = this.getCarte(id_map);
-		if (carte) {
-			var map = carte.map.getMap();
+	lien: function(id_map) 
+	{	var carte = this.getCarte(id_map);
+		if (carte) 
+		{	var map = carte.map.getMap();
 			var pos = map.getCenter();
 			var zoom = map.getZoom();
-			var ortho, carto;
-			for (i = 0; i < map.layers.length; i++) {
-				var lyr = map.layers[i];
-				if (!lyr.displayInLayerSwitcher) continue;
-				if (lyr.name == 'geoportal.catalogue.maps.theme.name' || lyr.name == "GEOGRAPHICALGRIDSYSTEMS.MAPS") {
-					if (!lyr.visibility) carto = 0;
-					else carto = Math.round(lyr.opacity * 10) / 10;
-				}
-				if (lyr.name == 'geoportal.catalogue.orthophotos.theme.name' || lyr.name == 'ORTHOIMAGERY.ORTHOPHOTOS') {
-					if (!lyr.visibility) ortho = 0;
-					else ortho = Math.round(lyr.opacity * 10) / 10;
+			var ortho=0, carto=0;
+			for (i = 0; i < map.layers.length; i++) 
+			{	var lyr = map.layers[i];
+				if (!lyr.displayInLayerSwitcher || !lyr.visibility) continue;
+				switch (lyr.name)
+				{	case 'geoportal.catalogue.maps.theme.name':
+					case "GEOGRAPHICALGRIDSYSTEMS.MAPS":
+					case "OSM (MapQuest)":
+					case "OSM (Tiles&#064;Home)":
+					case "OSM (Mapnik)":
+					{	carto = Number(lyr.opacity) ? Math.round(lyr.opacity * 10) / 10 : 1;
+						break;
+					}
+					case "geoportal.catalogue.orthophotos.theme.name":
+					case "ORTHOIMAGERY.ORTHOPHOTOS":
+					{	ortho = Number(lyr.opacity) ? Math.round(lyr.opacity * 10) / 10 : 1;
+						break;
+					}
+					case "Google Map":
+					case "Yahoo Map":
+					{	carto = 1;
+						break;
+					}
+					case "Google Satellite":
+					case "Yahoo Satelitte":
+					{	ortho = 1;
+						break;
+					}
+					case "Google Hybrid":
+					case "Yahoo Hybrid":
+					{	ortho=1;
+						carto=1;
+						break;
+					}
+					break;
 				}
 			}
 			var a = pos.transform(map.getProjection(), new OpenLayers.Projection('IGNF:RGF93G'));

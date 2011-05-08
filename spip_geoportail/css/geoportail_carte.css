@@ -50,6 +50,9 @@ img.gpGeocodeMatchCodeMatchType
 {	background-image: url("picto_options_on.png") !important;
 }
 
+.gpControlInformationMinimized {
+  height: 18px;
+}
 /** Popup sur la carte **/
 #popup.Anchored, .gpPopup
 {	font-size:1em;
