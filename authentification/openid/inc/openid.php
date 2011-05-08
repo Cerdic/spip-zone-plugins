@@ -35,7 +35,7 @@ function openid_login_form($texte,$contexte){
 		$message = _T('openid:form_login_openid');
 
 	$texte .= "<style type='text/css'><!--"
-	."input#var_login {width:10em;background-image : url(".find_in_path('images/openid-16.png').");background-repeat:no-repeat;background-position:center left;padding-left:18px;}\n"
+	."input#var_login {width:10em;background-image : url(".find_in_path('images/openid-16.png').");background-repeat:no-repeat;background-position:center left;padding-left:18px !important;}\n"
 	."input#password {width:10em;padding-right:18px;}\n"
 	.".explication {margin:5px 0;}"
 	."//--></style>"
