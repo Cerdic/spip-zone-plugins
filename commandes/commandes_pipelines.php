@@ -25,7 +25,7 @@ function commandes_optimiser_base_disparus($flux){
 	if (is_array($commande))
 		$commandes = array_map('reset', $commandes);
 	
-	// S'il y a bien des paniers à supprimer
+	// S'il y a bien des commandes à supprimer
 	if ($commandes){
 		// Le in
 		$in = sql_in('id_commande', $commandes);
@@ -59,6 +59,7 @@ function commandes_optimiser_base_disparus($flux){
 	}
 	
 	$flux['data'] += $nombre;
+	return $flux;
 }
 
 ?>
