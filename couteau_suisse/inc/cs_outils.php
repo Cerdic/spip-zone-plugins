@@ -33,7 +33,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 		if(!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
 		if(strpos($outil['nom'], '<:')!==false)
 			$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
-		if(isset($outil['surcharge'])) $outil['nom'] = $outil['nom'].' *';
+		if(isset($outil['surcharge']) || function_exists($outil_.'_installe')) $outil['nom'] = $outil['nom'].' *';
 		if(isset($outil['perso'])) $outil['nom'] = '<i>'.$outil['nom'].'</i>';
 		if(isset($outil['code:jq'])) $outil['jquery']='oui';
 		$outil['actif'] = isset($metas_outils[$outil['id']])?@$metas_outils[$outil['id']]['actif']:0;

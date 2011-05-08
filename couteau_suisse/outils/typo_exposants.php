@@ -13,17 +13,17 @@ include_spip('inc/charsets');
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
 function typo_exposants_installe_dist() {
 	// en principe, pas besoin de : caractere_utf_8(232)
-	$carre = unicode2charset('&#178;').'|&#178;|&sup2;';
-	$egrave = unicode2charset('&#232;').'|&#232;|&egrave;';
-	$eaigu1 = unicode2charset('&#233;').'|&#233;|&eacute;';
-	$eaigu2 = unicode2charset('&#201;').'|&#201;|&Eacute;';
+	$carre = unicode2charset('&#178;').'|&(?:#178|sup2);';
+	$egrave = unicode2charset('&#232;').'|&(?:#232|egrave);';
+	$eaigu1 = unicode2charset('&#233;').'|&(?:#233|eacute);';
+	$eaigu2 = unicode2charset('&#201;').'|&(?:#201|Eacute);';
 	$accents = unicode2charset('&#224;&#225;&#226;&#228;&#229;&#230;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#242;&#243;&#244;&#246;&#249;&#250;&#251;&#252;');
 	$typo = array( array(
 		'/(?<=\bM)e?(lles?)\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
 		'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
 		'/(?<=\b[DP])(r)(?=[\s\.-])/',	// Dr, Pr suivis d'un espace d'un point ou d'un tiret
 
-		"/m$carre\b/", '/(?<=\bm)([23])\b/',	 // m2, m3, m²
+		"/m(?:$carre)/", '/(?<=\bm)([23])\b/',	 // m2, m3, m²
 		'/(?<=\b[Mm])([nd]s?)\b/',	// millions, milliards
 		'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
 		"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
