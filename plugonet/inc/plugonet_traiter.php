@@ -113,6 +113,7 @@ function plugin2paquet($plugins) {
 		$cle_min_min = $cle_min_max = 0;
 		if (!$plugins[$cle_min_min]['compatible'])
 			$plugins[$cle_min_min]['compatible'] = '[1.9.0;)';
+		$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatible'];
 	}
 	else {
 		// Cas de plusieurs balises plugin
@@ -155,7 +156,7 @@ function plugin2paquet($plugins) {
 		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'];
 		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'];
 		// On initialise la compatibilite avec la fusion des intervalles de compatibilite SPIP
-		$plugins[$cle_min_min]['compatible'] = $compatibilite_paquet;
+		$plugins[$cle_min_min]['compatibilite_paquet'] = $compatibilite_paquet;
 
 		// Le bloc de compatibilite la moins elevee correspond aux attributs et sous-balises primaires
 		// de la balise paquet. Les autres blocs generent les balises spip contenant uniquement les 
@@ -186,11 +187,7 @@ function plugin2paquet($plugins) {
 
 // Construction d'une balise paquet ou spip
 function plugin2balise($D, $balise, $balises_spip='') {
-	// Si le tableau provient de infos_plugin la compatibilite SPIP est directement accessible
-	$compatible = '';
-	if (isset($D['compatible']))
-		$compatible =  plugin2intervalle(extraire_bornes($D['compatible']));
-	
+
 	// Constrution des balises englobantes
 	if ($balise == 'paquet') {
 		// Balise paquet
@@ -203,6 +200,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		$prefix = $D['prefix'];
 		$version = $D['version'];
 		$version_base = $D['version_base'];
+		$compatible =  plugin2intervalle(extraire_bornes($D['compatibilite_paquet']));
 
 		$attributs =
 			($prefix ? "\n\tprefix=\"$prefix\"" : '') .
@@ -225,6 +223,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	}
 	else {
 		// Balise spip
+		$compatible =  plugin2intervalle(extraire_bornes($D['compatible']));
 		$attributs =
 			($compatible ? " compatibilite=\"$compatible\"" : '');
 		// raz des balises non utilisees
@@ -307,7 +306,7 @@ function plugin2balise_copy($texte, $balise) {
 	$t = traiter_multi($texte);
 
 	$res = $resa = $resl = $resc = '';
-	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n_*\s*|&amp;| & @', $t['fr']) as $v) {
+	foreach(preg_split('@(<br */?>)|<li>|,|\s-|\n_*\s*|&amp;| & | et @', $t['fr']) as $v) {
 		// On detecte d'abord si le bloc texte en cours contient un eventuel copyright
 		// -- cela generera une balise copyright et non auteur
 		$copy = '';
@@ -320,7 +319,7 @@ function plugin2balise_copy($texte, $balise) {
 		// On detecte ensuite un lien eventuel d'un auteur
 		// -- soit sous la forme d'une href d'une ancre
 		// -- soit sous la forme d'un raccourci SPIP
-		// Dans les deux cas on garde preferentiellement le contenu de de l'ancre ou du raccourci
+		// Dans les deux cas on garde preferentiellement le contenu de l'ancre ou du raccourci
 		// si il existe
 		if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
 			$href = " lien=\"" . $r[2] ."\"";
@@ -347,11 +346,16 @@ function plugin2balise_copy($texte, $balise) {
 		
 		// On detecte aussi si le bloc texte en cours contient une eventuelle licence
 		// -- cela generera une balise licence et non auteur
-		//    cette heuristique b'est pas deterministe car la phrase de licence n'est pas connue
+		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
 		$licnom = $licurl ='';
-		if (preg_match('/(lgpl|gnu\/gpl|gpl\s*v*\d*)/i', $v, $r)) {
+		if (preg_match('/(apache|lgpl|gnu\/gpl|gpl\s*v*\d*)/i', $v, $r)) {
 			$licnom = strtoupper(trim($r[1]));
-			$licurl = ($licnom=='LGPL') ? 'http://www.gnu.org/licenses/lgpl-3.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
+			if (strtolower($licnom) == 'apache') {
+				$licnom = 'Apache Licence, Version 2.0';
+				$licurl = 'http://www.apache.org/licenses/LICENSE-2.0';
+			}
+			else
+				$licurl = ($licnom=='LGPL') ? 'http://www.gnu.org/licenses/lgpl-3.0.html' : 'http://www.gnu.org/licenses/gpl-3.0.html';
 			$licurl = " lien=\"$licurl\"";
 			$resl .= "\n\t<licence$licurl>$licnom</licence>";
 		}
@@ -408,15 +412,18 @@ function plugin2balise_pipeline($D) {
 
 function plugin2balise_chemin($D) {
 	$res = '';
+	$chemin_vide_trouve = false;
 	foreach($D['path'] as $i) {
 		$t = empty($i['type']) ? '' : (" type=\"" . $i['type'] . "\"");
 		$p = $i['dir'];
-		if (!$t AND (!$p OR $p==='.' OR $p==='./')) 
+		if (!$t AND (!$p OR $p==='.' OR $p==='./')) {
+			if (!$p) $chemin_vide_trouve = true;
 			continue;
+		}
 		$res .="\n\t<chemin path=\"$p\"$t />";
 	}
 
-	return $res ? "\n$res" : '';
+	return $res ? "\n$res" . ($chemin_vide_trouve ? "\n\t<chemin path=\"\" />" : '') : '';
 }
 
 //Extraction des necessite des plugins et des librairies
