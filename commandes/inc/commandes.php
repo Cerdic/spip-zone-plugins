@@ -15,6 +15,15 @@ function creer_commande_encours(){
 	if ($id_commande = intval(session_get('id_commande')) > 0){
 		// On supprime son contenu
 		sql_delete('spip_commandes_details', 'id_commande = '.$id_commande);
+		
+		// S'il y a des adresses attachées à la commande, on les supprime
+		if ($adresses_commande = sql_allfetsel('id_adresse', 'spip_adresses_liens', array('objet = '.sql_quote('commande'), 'id_objet = '.$id_commande))){
+			$adresses_commande = array_map('reset', $adresses_commande);
+			$in = sql_in('id_adresse', $adresses_commande);
+			sql_delete('spip_adresses_liens', $in);
+			sql_delete('spip_adresses', $in);
+		}
+		
 		// On supprime la commande
 		sql_delete('spip_commandes', 'id_commande = '.$id_commande);
 	}
@@ -25,7 +34,7 @@ function creer_commande_encours(){
 	// La référence
 	$fonction_reference = charger_fonction('commandes_reference', 'inc/');
 	
-	$champ = array(
+	$champs = array(
 		'reference' => $fonction_reference(),
 		'id_auteur' => $id_auteur,
 		'date' => date('Y-m-d H:i:s'),
