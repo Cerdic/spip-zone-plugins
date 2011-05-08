@@ -54,13 +54,13 @@
 
 -->][(#ENV*{reponse_formulaire}|?{'',' '})[(#ENV{accepter_nouveau}|=={oui}|?{' ',''})
 <fieldset>
+	<legend class='titre-bloc'><:spiplistes:devenir_membre:></legend>
 [<!--(#REM) ===============	texte d'inscription	===============
 
 	Si la maison accepte l'inscription en tant que redacteur,
 	le proposer !
 
 -->][(#ENV{inscription_redacteur}|=={oui}|?{' ',''})
-	<legend><:spiplistes:devenir_redac:></legend>
 	<h3><:spiplistes:devenir_redac:></h3>
 	<p><:spiplistes:inscription_redacteurs:></p>
 		<p><:form_forum_indiquer_nom_email:></p>
@@ -73,7 +73,6 @@
 	Sinon, proposer en tant que visiteur
 
 -->][(#ENV{inscription_redacteur}|=={oui}|?{'',' '})
-	<legend><:spiplistes:devenir_membre:></legend>
 	<h3><:spiplistes:devenir_abonne:></h3>
 	[<!--(#REM)
 	
