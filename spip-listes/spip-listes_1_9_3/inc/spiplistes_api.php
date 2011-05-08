@@ -668,10 +668,11 @@ function spiplistes_format_abo_supprimer ($id_auteur) {
 	return($result);
 }
 
-
-// modifier le format abonne
-// si id_auteur, celui-ci uniquement
-// sinon, 'tous' pour modifier globalement (uniquement ceux ayant deja un format)
+/**
+ * modifier le format abonne
+ * si id_auteur, celui-ci uniquement
+ * sinon, 'tous' pour modifier globalement (uniquement ceux ayant deja un format)
+ */
 function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 
 	if($format = spiplistes_format_valide($format)) {
@@ -712,7 +713,11 @@ function spiplistes_format_abo_modifier ($id_auteur, $format = 'non') {
 	return($sql_result);
 }
 
-// renvoie le format d'abonnement d'un auteur
+/**
+ * renvoie le format d'abonnement d'un auteur
+ * @param int $id_auteur
+ * @return string
+ */
 function spiplistes_format_abo_demande ($id_auteur) {
 	$id_auteur = intval($id_auteur);
 	$result = false;
@@ -761,6 +766,25 @@ function spiplistes_formats_autorises ($idx = 'array') {
 		$formats['sql_where'] = "(`spip_listes_format`=" . implode(" OR `spip_listes_format`=", $formats['quoted']).")";
 	}
 	return($formats[$idx]);
+}
+
+/**
+ * Donne le format de reception par defaut
+ *
+ * Le format de réception de courrier est définissable
+ * par la page de configuration du plugin.
+ * @version CP-20110508
+ * @return string
+ */
+function spiplistes_formats_abo_default () {
+	$defaut = spiplistes_pref_lire('opt_format_courrier_defaut');
+	if (
+		($defaut != 'html')
+		&& ($defaut != 'texte')
+	) {
+		$defaut = _SPIPLISTES_FORMAT_DEFAULT;
+	}
+	return ($defaut);
 }
 
 /**

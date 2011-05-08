@@ -306,13 +306,8 @@ function exec_spiplistes_config () {
 	
 	($GLOBALS['meta']['abonnement_config'] == 'simple') ? $checked1 = $is_checked  : $checked2 = $is_checked;
 	
-	$opt_format_courrier_defaut = spiplistes_pref_lire('opt_format_courrier_defaut');
-	if (
-		($opt_format_courrier_defaut != 'html')
-		&& ($opt_format_courrier_defaut != 'texte')
-	) {
-		$opt_format_courrier_defaut = _SPIPLISTES_FORMAT_DEFAULT;
-	}
+	$opt_format_courrier_defaut = spiplistes_formats_abo_default();
+
 	$page_result .= ''
 		. '<!-- options inscription -->' . $eol
 		. debut_cadre_trait_couleur('redacteurs-24.gif', true, '', _T('spiplistes:inscription'))
