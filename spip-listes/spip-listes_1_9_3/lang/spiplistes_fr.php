@@ -51,7 +51,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'abonnement_presentation' => '
 	Entrez votre adresse email dans le champ ci-dessous.
 	Vous recevrez &#224; cette adresse un courrier de confirmation d&#8217;inscription et un lien.
-	Ce lien vous permettra de s&#233;lectionner les listes de diffusion publi&#233;es ici.
+	Ce lien vous permettra de s&#233;lectionner les listes de diffusion.
 	'
 , 'confirmation_inscription' => 'Confirmation de votre inscription'
 , 'suspendre_abonnement_' => 'Suspendre mon abonnement '
@@ -668,7 +668,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'Courriers_sans_liste' => 'Courriers sans abonn&#233;s (liste manquante)'
 , 'devenir_redac' => 'Devenir r&#233;dacteur pour ce site'
 , 'devenir_membre' => 'Devenir membre du site'
-, 'devenir_abonne' => 'Vous inscrire sur ce site'
+, 'devenir_abonne' => 'Vous inscrire' //'Vous inscrire sur ce site'
 , 'desabonnement_valid' => 'L&#8217;adresse suivante n&#8217;est plus abonn&#233;e &#224; la lettre d&#8217;information' 
 , 'pass_recevoir_mail' => 'Vous allez recevoir un email vous indiquant comment modifier votre abonnement. '
 , 'discussion_intro' => 'Bonjour, <br />Voici les discussions d&#233;marr&#233;es sur le site'
