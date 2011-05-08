@@ -1,7 +1,7 @@
 /**
  * spiplistes_formulaire_abonnement.css
  * @see formulaire_abonnement.html
-*/
+ */
 
 #sl-for-abo-inscript, #sl-for-abo-inscript * {
 	background: transparent;
@@ -13,30 +13,69 @@
 	font-family: "Trebuchet MS","Myriad Web Pro","Myriad Web", Verdana, Tahoma, Arial, sans-serif;
 	font-size:0.9em;
 	text-align:center;
-	background-color:#ffffa9;
-	border:3px solid blue;
+	background-color:blue;
 	width:160px;
 	margin:0 auto;
-}
-#sl-for-abo-inscript h3 {
-	font-size:1em;
-	color:#030;
-	background-color:blue;
-	width:auto;
+	padding:3px;
 }
 #sl-for-abo-inscript form {
-	margin:0 auto;
-	width:100px;
+	display:block;
 	text-align:left;
-	border:1px solid red;
+	background-color:#ffffa9;
+	overflow:hidden; /* */
+}
+#sl-for-abo-inscript h3 {
+	font-size:1.2em;
+	color:#030;
+	text-align:center;
+	line-height:1.2em;
+	margin:0.5em 0;
 }
 #sl-for-abo-inscript form fieldset {
-	border:1px solid #ccc;
-	padding:1ex;
-	/* width:100%; */
+	border:0;
+}
+#sl-for-abo-inscript form legend {
+	line-height:1.2em;
+	padding-bottom:0.5em;
+}
+#sl-for-abo-inscript form legend.titre-bloc {
+	display:none;
+}
+#sl-for-abo-inscript form p
+, #sl-for-abo-inscript form legend
+, #sl-for-abo-inscript form div.coord {
+	padding:0 1ex;
+	margin:0 0 0.5em;
 }
 #sl-for-abo-inscript form ul {
+	list-style:square;
+	list-style-position:inside;
+}
+#sl-for-abo-inscript form li {
+	padding:0 0 0 2ex;
+}
+#sl-for-abo-inscript form li span.liste-titre {
+	color:#333;
+	font-weight:700;
+}
+#sl-for-abo-inscript form li span.liste-descriptif {
 	display:block;
-	background-color: #fcc;
-	width:100px;
+	margin:0 0 0.5em 2.5ex;
+	font-size:90%;
+}
+#sl-for-abo-inscript form input {
+	background-color: #fff;
+	line-height: 1.2em;
+	font-size:1.2em;
+	color:red;
+	height:1.4em;
+	width:146px;
+	margin:0.5em 0;
+	border:1px solid blue;
+}
+#sl-for-abo-inscript form p.spip_bouton input {
+	border: inset 2px white;
+	background-color:#0c0;
+	height:auto;
+	padding:0.25em;
 }
