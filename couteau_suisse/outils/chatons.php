@@ -16,8 +16,8 @@ function chatons_pre_typo($texte) {
 	return cs_echappe_balises('html|code|cadre|frame|script|acronym|cite', 'cs_rempl_chatons', $texte);
 }
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function chatons_installe() {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function chatons_installe_dist() {
 	$chatons = array();
 	$path = find_in_path('img/chatons');
 	$dossier = opendir($path);
@@ -30,7 +30,7 @@ function chatons_installe() {
 			if($bt)	$chatons[4]['chaton_'.$reg[1]] = $reg[1].'.'.$reg[2];
 		}
 	}
-	return array('chatons' => $chatons);
+	return array($chatons);
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil

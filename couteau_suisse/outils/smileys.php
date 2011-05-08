@@ -5,10 +5,10 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function smileys_installe() {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function smileys_installe_dist() {
 	$path = find_in_path('img/smileys');
-cs_log("smileys_installe() : $path");
+cs_log("smileys_installe_dist() : $path");
 	$path2 = url_absolue($path);
 
 	// l'ordre des smileys ici est important :

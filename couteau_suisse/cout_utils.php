@@ -688,10 +688,10 @@ function cs_installe_outils() {
 	$datas = array();
 	foreach($metas_outils as $nom=>$o) if(isset($o['actif']) && $o['actif']) {
 		include_spip('outils/'.$nom);
-		if(function_exists($f = $nom.'_installe')) {
-			if(($tmp=$f())!==NULL) foreach($tmp as $i=>$v) {
+		if(function_exists($f = $nom.'_installe') || function_exists($f = $f.'_dist')) {
+			if(is_array($tmp=$f())) foreach($tmp as $i=>$v) {
 				$j=($i && $i!==$nom)?$nom.'_'.$i:$nom;
-				$datas[$j] = "function cs_data_$j() { return " . var_export($v, true) . ";\n}";
+				$datas[$j] = "function cs_data_$j() { return " . var_export($v, true) . ';}';
 			}
 if(defined('_LOG_CS')) cs_log(" -- $f() : OK !");
 		}

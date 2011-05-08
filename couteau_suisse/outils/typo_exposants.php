@@ -10,8 +10,8 @@ include_spip('inc/charsets');
 @define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
 @define('_TYPO_sup2', '\\1<sup class="typo_exposants">\\2</sup>');
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function typo_exposants_installe() {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function typo_exposants_installe_dist() {
 	// en principe, pas besoin de : caractere_utf_8(232)
 	$carre = unicode2charset('&#178;').'|&#178;|&sup2;';
 	$egrave = unicode2charset('&#232;').'|&#232;|&egrave;';

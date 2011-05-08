@@ -6,10 +6,10 @@
 	Doc : http://www.spip-contrib.net/?article2427
 */
 
-// cette fonction est appelee automatiquement a chaque affichage de la page privee du Couteau Suisse
-function decoration_installe() {
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function decoration_installe_dist() {
 	if(!defined('_decoration_BALISES')) return NULL;
-cs_log("decoration_installe()");
+cs_log("decoration_installe_dist()");
 	// on decode les balises entrees dans la config
 	$deco_balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
 	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = $BT = array();

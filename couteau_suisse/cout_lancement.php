@@ -246,7 +246,7 @@ function cs_lire_data_outil($outil, $casier_=false) {
 		return $datas[$casier] = $f();
 	// installation de l'outil
 	include_spip('outils/'.$outil);
-	if(function_exists($f=$outil.'_installe') 
+	if( (function_exists($f = $outil.'_installe') || function_exists($f = $f.'_dist'))
 		&& ($tmp=$f())
 		&& (isset($tmp[$ok=$casier]) || (!$casier_ && (isset($tmp[$ok=0]) || isset($tmp[$ok=$outil])))))
 			return $datas[$ok] = $tmp[$ok];
