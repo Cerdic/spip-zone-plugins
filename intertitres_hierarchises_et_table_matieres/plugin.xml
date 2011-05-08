@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
  <plugin>
  <nom>Intertitres hi&eacute;rarchis&eacute;s et Table des mati&egrave;res</nom>
- <version>0.6</version>
+ <version>0.7</version>
  <prefix>IntertitresTdm</prefix>
  <etat>dev</etat>
  <auteur>Mortimer, Chtitux (et Beurt pour la mise en plugin)</auteur>
@@ -11,7 +11,7 @@
  les intertitres des enluminures typographiques). 
  Il permet aussi d&#39;ajouter dans l&#39;article, 
  une table des mati&egrave;res qui liste les 
- intertitres contenus dans l&#39;article grâce 
+ intertitres contenus dans l&#39;article gr&acirc;ce 
  &agrave; un mod&egrave;le. D&#39;autres mod&egrave;les 
  permettent de se r&eacute;f&eacute;rer &agrave; une sous 
  partie d&#39;un article dans un autre article (en citant le titre, extrait ou rien).

@@ -172,7 +172,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		
 		//on se rappelle du raccourcis
 		$cite[$ref] = $numeros;
-		$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave;  	&laquo;&nbsp;".textebrut($titre)."&nbsp;&raquo;\">$titre</a>";
+		$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave;  	&laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
 		
 		//on mémorise le niveau de ce titre
 		$lastlevel = strlen($level);
