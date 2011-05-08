@@ -9,6 +9,8 @@ function edition_directe_header_prive($flux){
  function edition_directe_afficher_fiche_objet($flux){
     $type = $flux['args']['type'];
 
+    
+	// objet article
    if ($type=='article'AND lire_config('edition_directe/article')){
 	$id_article= _request('id_article');
 	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
@@ -32,19 +34,46 @@ function edition_directe_header_prive($flux){
 	$flux['data'] =preg_replace('/<div id=\'props\' class=\'tabs-container\'>/',$formulaire.'<div id="props" class="tabs-container">',$flux['data']);
 	
 	}
+
+	
 return $flux;
 }
 
+function edition_directe_afficher_contenu_objet($flux){
+
+    $type = $flux['args']['type'];
+	// objet rubrique
+	if ($type=='rubrique'AND lire_config('edition_directe/rubrique')){
+	$id_rubrique= _request('id_rubrique');
+	$row = sql_fetsel("*", "spip_rubriques", "id_rubrique=$id_rubrique");
+
+	$contexte = array(
+		'new'=>$id_rubrique,
+		'titre'=>$row['titre'],
+		'id_rubrique'=>$row['id_parent'], // pour permettre la specialisation par la rubrique appelante
+		'config_fonc'=>'rubriques_edit_config',
+		);
+
+	 
+	 $flux['data']=recuperer_fond("prive/editer/rubrique_mod", $contexte);
+	
+	}
+	return $flux;
+}
+
 // affichage du formulaire de téléchargement des docs
-function edition_directes_affiche_gauche($flux){
+function edition_directe_affiche_gauche($flux){
 	$exec= $flux['args']['exec'];
-	$id = $flux['args']['id_article'];
 	
 	if(test_plugin_actif('medias') or test_plugin_actif('gest_doc')) $mediatheque='ok';
 	
-	if($exec=='articles' AND $mediatheque AND autoriser('joindredocument','article',$id) AND lire_config('edition_directe/article')){
-		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'article','id_objet'=>$id));
+	if($exec=='articles' AND $mediatheque AND autoriser('joindredocument','article',_request('id_article')) AND lire_config('edition_directe/article')){
+		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'article','id_objet'=>_request('id_article')));
 		}
+	if($exec=='naviguer' AND autoriser('joindredocument','rubrique',_request('id_rubrique')) AND lire_config('edition_directe/rubrique')){
+		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'rubrique','id_objet'=>_request('id_rubrique')));
+		}		
+		
 
 return $flux;
 }

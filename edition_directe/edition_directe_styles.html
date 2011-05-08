@@ -3,5 +3,10 @@
 #HTTP_HEADER{Content-Type: text/css;}
 
 [(#CONFIG{edition_directe/article}|oui)
-	.articles #wysiwyg,.articles .bandeau_actions .icone36,.articles  .tabs-container #portfolios ,.articles  .tabs-container .icone36{display:none;}
+	.articles #wysiwyg,.articles .bandeau_actions .icone36{display:none;}
+	]	
+	
+[(#CONFIG{edition_directe/rubrique}|oui)
+	.rubriques .bandeau_actions .icone36 {display:none;}
+	.rubriques .bandeau_actions .danger {display:block;}
 	]
