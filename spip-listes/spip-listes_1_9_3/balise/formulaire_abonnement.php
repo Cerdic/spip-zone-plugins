@@ -448,7 +448,7 @@ function spiplistes_formulaire_abonnement (
 				$abonne['statut'] = ($inscription_redacteur == 'oui') ? 'nouveau' : '6forum';
 	
 				// format d'envoi par defaut pour le premier envoi de confirmation
-				$abonne['format'] = 'texte'; 
+				$abonne['format'] = spiplistes_formats_abo_default();
 				
 				// creation du compte ...
 				if($id_abonne = spiplistes_auteurs_auteur_insertq(
