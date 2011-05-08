@@ -166,7 +166,7 @@ function generer_info_entite($id_objet, $type_objet, $info, $etoile=''){
 	$traitement = $table_des_traitements[$maj];
 	$table_objet = table_objet($type_objet);
 	
-	if (!$etoile is_array($traitement)){
+	if (!$etoile and is_array($traitement)){
 		$traitement = $traitement[isset($traitement[$table_objet]) ? $table_objet : 0];
 		$traitement = str_replace('%s', '"'.str_replace('"', '\\"', $info_generee).'"', $traitement);
 		eval("\$info_generee = $traitement;");
