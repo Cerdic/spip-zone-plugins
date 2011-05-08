@@ -38,6 +38,7 @@ function paniers_optimiser_base_disparus($flux){
 	}
 	
 	$flux['data'] += $nombre;
+	return $flux;
 }
 
 // La CSS pour le panier
