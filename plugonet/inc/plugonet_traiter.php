@@ -526,9 +526,9 @@ function plugin2balise_description($descriptions, $prefixe, $dir) {
 	$files = array();
 	foreach($descriptions as $lang => $couples) {
 		$module = "paquet-" . strtolower($prefixe);
-		$t = "\n// Fichier produit par PlugOnet";
-		$t = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $t);
-		if ($t) 
+		$producteur = "\n// Fichier produit par PlugOnet";
+		$ok = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $producteur);
+		if ($ok) 
 			$files[]= substr($t, strlen($dir)+1);
 	}
 
@@ -619,15 +619,18 @@ function traiter_multi($texte)
 }
 
 function extraire_descriptions($description, $prefixe) {
+	include_spip('inc/langonet_utils');
+
 	$langs = array();
 	foreach (traiter_multi($description) as $lang => $_descr) {
 		if (!$lang)
 			$lang = 'fr';
-		$langs[$lang][strtolower($prefixe) . '_description'] = trim($_descr);
-		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $_descr, $matches))
+		$description = entite2utf(trim($_descr));
+		$langs[$lang][strtolower($prefixe) . '_description'] = $description;
+		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $description, $matches))
 			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim($matches[1]);
 		else
-			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim(couper($_descr, 150, ''));
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim(couper($description, 150, ''));
 	}
 	
 	return $langs;
