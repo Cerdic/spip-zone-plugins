@@ -38,6 +38,7 @@ function action_paypal_ipn_dist() {
 			// on pourrait imaginer creer une table speciale pour les transactions
 			// mais bon...
 			
+			spip_log('Retour de Paypal vérifié, on peut passer aux traitements','paypal');
 			// c'est tout bon, on envoie ca au pipeline pour traitements
 			pipeline('traitement_paypal', array(
 				'args'=>array(
