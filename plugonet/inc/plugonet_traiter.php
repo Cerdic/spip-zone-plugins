@@ -524,12 +524,12 @@ function plugin2balise_description($descriptions, $prefixe, $dir) {
 		mkdir($dirl);
 	$dirl .= '/';
 	$files = array();
-	foreach($descriptions as $lang => $couples) {
+	foreach($descriptions as $_lang => $_couples) {
 		$module = "paquet-" . strtolower($prefixe);
 		$producteur = "\n// Fichier produit par PlugOnet";
-		$ok = ecrire_fichier_langue_php($dirl, $lang, $module, $couples, $producteur);
-		if ($ok) 
-			$files[]= substr($t, strlen($dir)+1);
+		$fichier_lang = ecrire_fichier_langue_php($dirl, $_lang, $module, $_couples, $producteur);
+		if ($fichier_lang) 
+			$files[]= substr($fichier_lang, strlen($dir)+1);
 	}
 
 	return $files;
