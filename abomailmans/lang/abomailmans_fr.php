@@ -47,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'envoyer_courier_liste' => 'Envoyer ce courrier &agrave; cette liste de diffusion :',
 	'envoyer_mailmans' => 'S&eacute;l&eacute;ctionner le mod&egrave;le et son contenu',
 	'erreur_email_liste_oublie' => 'L\'adresse email de la liste est obligatoire',
-	'explication_email_sympa' => 'Si ce champ est renseign&eacute;, la liste est consid&eacute;r&eacute;e comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman".',
+	'explication_email_sympa' => 'Si ce champ est renseign&eacute;, la liste est consid&eacute;r&eacute;e comme une liste de serveur "Sympa", dans le cas contraire comme une liste "Mailman" ou "ezmlm".',
 	'explication_email_subscribe' => 'Email d\'abonnement, de style <code>suffixe+subscribe@exemple.org</code>',
 	'explication_email_unsubscribe' => 'Email de d&eacute;sabonnement',
 	
@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// L
 	'label_etat_liste' => '&Eacute;tat de la liste',
 	'langue_liste' => 'Langue de la liste',
-	'les_listes_mailmans' => 'Les listes mailmans ou sympas renseign&eacute;es',
+	'les_listes_mailmans' => 'Les listes mailmans, sympa ou ezmlm renseign&eacute;es',
 	'lire_article' => 'Lire l\'article',
 	'liste_creee' => 'La liste num&eacute;ro @id@ (@titre@) a &eacute;t&eacute; cr&eacute;&eacute;e.',
 	'liste_non_existante' => 'La liste demand&eacute;e n\'existe pas ou a &eacute;t&eacute; supprim&eacute;e',
