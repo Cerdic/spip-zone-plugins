@@ -1,0 +1,35 @@
+<!-- autoriser=webmestre -->
+<!-- refus=refus_configuration_webmestre -->
+<!-- nom=paypal -->
+<!-- casier=api/prod -->
+
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer_paypal_api">
+	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	[(#SAISIE{input,account,
+		obligatoire=oui,
+		label=<:paypal:label_account:>,
+		explication=<:paypal:explication_account:>})]
+		
+	[(#SAISIE{input,username,
+		label=<:paypal:label_username:>})]
+		
+	[(#SAISIE{input,password,
+		label=<:paypal:label_password:>})]
+		
+	[(#SAISIE{input,signature,
+		label=<:paypal:label_signature:>})]
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="submit" />
+</p>
+</div>
+</form>
+</div>

@@ -1,0 +1,10 @@
+
+C'est compliqué Paypal !
+------------------------
+
+Alors on simplifie un peu pour le moment :
+- pas de cryptage (todo : permettre cette option)
+
+- on utilise IPN pour verifier les transactions. Il faut donc activer cette option
+  dans le compte du vendeur.
+- il faut définir la TVA dans les préférences du compte paypal

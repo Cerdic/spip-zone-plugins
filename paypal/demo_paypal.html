@@ -1,0 +1,28 @@
+<html>
+<head>
+<title>Demo de paypal</title>
+#INSERT_HEAD
+</head>
+<body>
+<div id="page">
+	<div id="entete"></div>
+	<div id="conteneur">
+		<div id="contenu">
+		<h1>Formulaire paypal : </h1>
+		[(#FORMULAIRE_PAYPAL{#ARRAY{
+			prix,30,
+			duree,12,
+			periode,M,
+			libelle,Ceci n'est pas une pipe,
+			identifiant,[abonnement-1-(#SESSION{id_auteur})],
+			type,abonnement,
+			redirect_ok,[(#URL_PAGE{paiement_ok})],
+		}})]
+		</div>
+	</div>
+	<div id="extra"></div>
+	<div id="navigation"></div>
+	<div id="pied"></div>
+</div>
+</body>
+</html>

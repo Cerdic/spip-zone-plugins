@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Paypal</nom>
+	<auteur>
+	[Matthieu Marcillaud->http://magraine.net/], [Les Développements Durables->http://www.ldd.fr]
+	</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1.0</version>
+	<icon>img/paypal_logo.gif</icon>
+	<options>paypal_options.php</options>
+	<description>
+	Pouvoir utiliser Paypal sur SPIP
+	Peut/pourra aussi fonctionner avec le plugin "abonnement"
+	</description>
+	<etat>dev</etat>
+	<prefix>paypal</prefix>
+	<categorie>divers</categorie>
+</plugin>

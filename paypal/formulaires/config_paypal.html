@@ -1,0 +1,64 @@
+<!-- autoriser=webmestre -->
+<!-- refus=refus_configuration_webmestre -->
+<!-- nom=paypal -->
+
+#CACHE{0}
+<div class="formulaire_spip formulaire_configurer_paypal">
+	
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	[(#SAISIE{input,soumission,
+		obligatoire=oui,
+		label=<:paypal:label_soumission:>,
+		explication=<:paypal:explication_soumission:>,
+		defaut=https://www.sandbox.paypal.com/cgi-bin/webscr
+	})]
+		
+[(#REM) Pas la peine ... 	
+
+]
+	<input type="hidden" name="soumission" value="https://www.sandbox.paypal.com/cgi-bin/webscr" />
+
+			
+	<li class="editer_environnement obligatoire">
+		<label for='champ_environnement'><:paypal:label_environnement:></label>
+		<p class="explication"><:paypal:explication_environnement:></p>
+		<div class="choix">
+			<input type="radio" name="environnement" id="champ_environnement_test" value="test"[ (#ENV{environnement}|=={prod}|non)checked="checked"] />
+			<label for="champ_environnement_test"><:paypal:label_environnement_test:></label>
+		</div>
+		<div class="choix">
+			<input type="radio" name="environnement" id="champ_environnement_prod" value="prod"[ (#ENV{environnement}|=={prod}|oui)checked="checked"] />
+			<label for="champ_environnement_prod"><:paypal:label_environnement_prod:></label>
+		</div>
+	</li>
+
+	<li class="editer_currency_code">
+		<label for='champ_currency_code'><:paypal:label_currency_code:></label>
+		<div class="choix">
+			<input type="radio" name="currency_code" id="champ_currency_code_eur" value="EUR"[ (#ENV{environnement}|=={USD}|non)checked="checked"] />
+			<label for="champ_currency_code_eur"><:paypal:label_currency_code_eur:></label>
+		</div>
+		<div class="choix">
+			<input type="radio" name="currency_code" id="champ_currency_code_usd" value="USD"[ (#ENV{environnement}|=={USD}|oui)checked="checked"] />
+			<label for="champ_currency_code_usd"><:paypal:label_currency_code_usd:></label>
+		</div>
+	</li>
+
+	[(#SAISIE{input,tax,
+		label=<:paypal:label_tax:>,
+		explication=<:paypal:explication_tax:>,
+		defaut=0.00})]		
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:oK:>" class="submit" />
+	<input type="submit" name="_cfg_delete" value="<:supprimer:>" class="submit" />
+</p>
+</div>
+</form>
+</div>
