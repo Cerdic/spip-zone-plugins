@@ -10,14 +10,26 @@ include_spip('inc/charsets');
 @define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
 @define('_TYPO_sup2', '\\1<sup class="typo_exposants">\\2</sup>');
 
+// fonction simplifiee, equivalent numerique de unicode2charset($texte)
+function caractere_charset($num) {
+	if($GLOBALS['meta']['charset']=='utf-8')
+		return caractere_utf_8($num);
+	$charset = load_charset($GLOBALS['meta']['charset']);
+	static $CHARSET_REVERSE;
+	if(!is_array($CHARSET_REVERSE))
+		$CHARSET_REVERSE = array_flip($GLOBALS['CHARSET'][$charset]);
+	return isset($CHARSET_REVERSE[$num])?chr($CHARSET_REVERSE[$num]):chr($num);
+}
+
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
 function typo_exposants_installe_dist() {
 	// en principe, pas besoin de : caractere_utf_8(232)
-	$carre = unicode2charset('&#178;').'|&(?:#178|sup2);';
-	$egrave = unicode2charset('&#232;').'|&(?:#232|egrave);';
-	$eaigu1 = unicode2charset('&#233;').'|&(?:#233|eacute);';
-	$eaigu2 = unicode2charset('&#201;').'|&(?:#201|Eacute);';
-	$accents = unicode2charset('&#224;&#225;&#226;&#228;&#229;&#230;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#242;&#243;&#244;&#246;&#249;&#250;&#251;&#252;');
+	$carre = caractere_charset(178).'|&(?:#178|sup2);';
+	$egrave = caractere_charset(232).'|&(?:#232|egrave);';
+	$eaigu1 = caractere_charset(233).'|&(?:#233|eacute);';
+	$eaigu2 = caractere_charset(201).'|&(?:#201|Eacute);';
+	// $accents = unicode2charset('&#224;&#225;&#226;&#228;&#229;&#230;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#242;&#243;&#244;&#246;&#249;&#250;&#251;&#252;');
+	$accents = join('', array_map('caractere_charset', array(224,225,226,228,229,230,232,233,234,235,236,237,238,239,242,243,244,246,249,250,251,252)));
 	$typo = array( array(
 		'/(?<=\bM)e?(lles?)\b/',		// Mlle(s), Mme(s) et erreurs Melle(s)
 		'/(?<=\bM)(gr|mes?)\b/',	// Mme(s) et Mgr
