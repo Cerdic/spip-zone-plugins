@@ -2,7 +2,7 @@
 	<nom>API Prix</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1</version>
+	<version>0.1.1</version>
 	<etat>dev</etat>
 	<description>Interface de programmation pour connaitre le prix d'un objet SPIP. Ce plugin est un outil pour développeur.</description>
 	<icon>images/prix-128.png</icon>
