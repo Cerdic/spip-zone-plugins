@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_traitement_paypal_dist() {
+function action_paypal_ipn_dist() {
 	
 	spip_log('traitement paypal','paypal');
 
