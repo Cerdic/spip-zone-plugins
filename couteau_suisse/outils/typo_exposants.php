@@ -28,7 +28,7 @@ function typo_exposants_installe_dist() {
 		'/(?<=\bV)(ve)\b/', '/(?<=\bC)(ies?)\b/',	// Vve et Cie(s)
 		"/(?<=\bS)(t(?:$eaigu1)s?)(?=\W)/", "/(?<=\W)(?:E|$eaigu2)ts\b/",	 // Societes(s), Etablissements
 
-		'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1ier(s), 1ier(s)
+		'/(?<=\b[1I])i?(ers?)\b/',	// 1er(s), Erreurs 1(i)er(s), I(i)er(s)
 		"/(?<=\b[1I])i?(?:e|$egrave)(res?)\b/",	// Erreurs 1(i)ere(s) + accents
 		'/(?<=\b1)(r?es?)\b/', // 1e(s), 1re(s)
 		'/(?<=\b2)(nde?s?)\b/',	// 2nd(e)(s)
