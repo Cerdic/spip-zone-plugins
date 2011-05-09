@@ -19,7 +19,6 @@ function oembed_renseigner_document_distant($flux) {
 	include_spip('inc/oembed');
 	// on tente de récupérer les données oembed
 	if ($data = oembed_recuperer_data($flux['source'],lire_config('oembed/maxwidth','480'),lire_config('oembed/maxheight','295'))){
-		// une image ?
 		if ($data['type']=='photo') {
 			// on recupere les infos du document distant
 			if ($doc = recuperer_infos_distantes($data['url'])) {
@@ -34,8 +33,9 @@ function oembed_renseigner_document_distant($flux) {
 				return $doc;
 			}
 		}
-		// une video ?
-		if ($data['type']=='video') {
+		if (($data['type']=='video') OR ($data['type']=='rich') OR ($data['type']=='link')) {
+			if ($data['type']=='link')
+				$data['html'] = '<a href="' . $flux['source'] . '">' . sinon($data['title'],$flux['source']) . '</a>';
 			// créer une copie locale du contenu html
 			// cf recuperer_infos_distantes()
 			$doc['fichier'] = _DIR_RACINE . nom_fichier_copie_locale($flux['source'], 'html');
