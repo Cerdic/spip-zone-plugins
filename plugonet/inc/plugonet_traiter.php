@@ -631,7 +631,7 @@ function extraire_descriptions($description, $prefixe) {
 			$lang = 'fr';
 		$description = entite2utf(trim($_descr));
 		$langs[$lang][strtolower($prefixe) . '_description'] = $description;
-		if (preg_match(',^\s*(.+)[.!?\r\n\f],Um', $description, $matches))
+		if (preg_match(',^\s*(.+)[.!?:\r\n\f],Um', $description, $matches))
 			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim($matches[1]);
 		else
 			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim(couper($description, 150, ''));
