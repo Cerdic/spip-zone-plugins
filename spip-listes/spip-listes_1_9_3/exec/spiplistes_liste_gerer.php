@@ -219,9 +219,9 @@ function exec_spiplistes_liste_gerer () {
 					$date_depuis = $envoyer_quand;
 					$envoyer_quand = false;
 				}
-				// spiplistes_debug_log("nb vrais abos : ".spiplistes_listes_vrais_abos_compter($id_liste));
+				// spiplistes_debug_log("nb vrais abos : ".spiplistes_abonnements_vrais_compter($id_liste));
 				if($envoyer_maintenant && ($message_auto != 'non')) {
-					if(!spiplistes_listes_vrais_abos_compter($id_liste)) {
+					if(!spiplistes_abonnements_vrais_compter($id_liste)) {
 						$boite_pour_confirmer_envoi_maintenant .= 
 							spiplistes_boite_alerte(_T('spiplistes:boite_alerte_manque_vrais_abos'), true);
 					}
