@@ -445,6 +445,42 @@ function spiplistes_abonnements_vrais_compter ($id_liste) {
 }
 
 /**
+ * Inventaire des abonnements.
+ * Tableau dont l'index est l'ID de la liste
+ * et la valeur un tableau des ID abonnés
+ * @param string|array $sql_where
+ * @version CP-20110510
+ * @return array|bool
+ */
+function spiplistes_abonnements_lister ($sql_where = '') {
+	
+	if(($sql_result = sql_select('id_auteur,id_liste'
+								, 'spip_auteurs_listes'
+								, $sql_where
+								)
+		) !== FALSE)
+	{
+		$listes = array();
+		
+		while($row = sql_fetch($sql_result))
+		{
+			$ii = $row['id_liste'];
+			
+			if(!isset($listes[$ii]))
+			{
+				$listes[$ii] = array();
+			}
+			$listes[$ii][] = $row['id_auteur'];
+		}
+		return ($listes);
+	}
+	else {
+		spiplistes_sqlerror_log('spiplistes_abonnements_lister ()');
+	}
+	return (FALSE);
+}
+
+/**
  ******************************************************************************
 	Les fonctions spiplistes_listes_*() concernent les listes
 	
@@ -850,6 +886,38 @@ function spiplistes_formats_abo_default () {
 		$defaut = _SPIPLISTES_FORMAT_DEFAULT;
 	}
 	return ($defaut);
+}
+
+/**
+ * Inventaire des formats de réception par défaut.
+ * 
+ * Tableau dont l'index est l'ID de l'auteur
+ * et la valeur le format de réception par défaut.
+ * 
+ * @param string|array $sql_where
+ * @version CP-20110510
+ * @return array|bool
+ */
+function spiplistes_formats_defaut_lister ($sql_where = '') {
+	
+	if(
+		($sql_result = sql_select('id_auteur,`spip_listes_format` AS format'
+									, 'spip_auteurs_elargis'
+							, $sql_where
+									)
+	) !== FALSE )
+	{
+		$auteurs = array();
+	
+		while($row = sql_fetch($sql_result)) {
+			$auteurs[$row['id_auteur']] = $row['format'];
+		}
+		return ($auteurs);
+	}
+	else {
+		spiplistes_sqlerror_log('spiplistes_formats_defaut_lister ()');
+	}
+	return (FALSE);
 }
 
 /**

@@ -33,7 +33,7 @@ include_spip('inc/spiplistes_api_globales');
  * @return string
  * @todo code a nettoyer
  */
-function spiplistes_import(
+function spiplistes_import (
 	$filename
 	, $realname
 	, $abos_liste
@@ -43,46 +43,74 @@ function spiplistes_import(
 	, $listes_autorisees
 	, $forcer_abo = false
 ) {
+		
 	$result_affiche = '';
 
-	if(is_readable($filename))
+	if (is_readable($filename)
+	   && ($abos_liste = (spiplistes_ids_valides ($abos_liste))))
 	{
-		// abonner les adresses importees
-		// aux listes...
-		if(!is_array($abos_liste))
-		{
-			if(($ii = intval($abos_liste)) <= 0)
-			{
-				return(false);
-			}
-			$abos_liste = array($ii);
-		}
-		else
-		{
-			$abos_liste = array_map('intval', $abos_liste);
-		}
 		
 		// recupere les logins et mails existants dans la base
 		// pour eviter les doublons
 		
-		$current_entries = array();
-		$sql_result = sql_select(array('id_auteur', 'login', 'email', 'nom'), 'spip_auteurs');
+		$current_auteurs = array();
 		
-		while($row = spip_fetch_array($sql_result))
-		{
-			// ne prendre que les comptes qui ont un email
-			if($m = $row['email']) {
-				$m = strtolower($m);
-				$current_entries[$m] = array('login' => strtolower($row['login'])
+		$compteur = array(
+			'creer' => 0
+			, 'abonner' => 0
+			, 'existe' => 0
+			, 'format' => 0
+		);
+		
+		/**
+		 * Noter les comptes qui ont un email
+		 */
+		if ($sql_result = sql_select(
+								 array('id_auteur'
+									   , 'login'
+									   , 'email'
+									   , 'nom'
+									   )
+								 , array('spip_auteurs')
+								 , array('email<>'.sql_quote(''))
+								 )
+		) {
+			while($row = spip_fetch_array($sql_result))
+			{
+				$mail = strtolower($row['email']);
+				$current_auteurs[$mail] = array('login' => strtolower($row['login'])
 										   , 'id_auteur' => $row['id_auteur']
 										   , 'nom' => $row['nom']
+										   , 'format' => $row['format']
 										   );
 			}
 		}
-		//syslog(LOG_NOTICE, 'memory_get_usage[2]: ' . memory_get_usage());
 		
-		//
-		spiplistes_log('import fichier '.$filename);
+		if ($forcer_abo)
+		{
+			/**
+			 * Noter le format de réception par défaut
+			 * pour chaque auteur
+			 */
+			$a_formats = spiplistes_formats_defaut_lister();
+			foreach ($current_auteurs as $mail => $value)
+			{
+				$id_auteur = $value['id_auteur'];
+				/**
+				 * Reprendre le format désiré par l'abonné.
+				 */
+				if (isset($a_formats[$id_auteur])) {
+					$current_auteurs[$mail]['format'] = $a_formats[$id_auteur];
+				}
+			}
+		}
+		
+		// charger la table des abonnements en ram afin d'eviter les petites requettes
+		$abonnements = spiplistes_abonnements_lister ();
+		
+		// import du fichier transmis
+		spiplistes_log('import: filename '.$realname);
+
 		$new_entries = file($filename);
 		
 		//syslog(LOG_NOTICE, 'memory_get_usage[3]: ' . memory_get_usage());
@@ -92,51 +120,22 @@ function spiplistes_import(
 		$bad_dupli = $bad_email = 0;
 		$statuts_auteurs = array('6forum', '1comite', '0minirezo');
 		
-		// charger la table des abonnements en ram afin d'eviter les petites requettes
-		$abonnements = array();
-		if(($sql_result = sql_select('id_auteur,id_liste'
-									, 'spip_auteurs_listes')
-			) !== false)
-		{
-			while($row = sql_fetch($sql_result)) {
-				if(!isset($abonnements[$row['id_liste']])) {
-					$abonnements[$row['id_liste']] = array();
-				}
-				$abonnements[$row['id_liste']][] = $row['id_auteur'];
-			}
-		}
-		else {
-			spiplistes_sqlerror_log('module import (abonnements)');
-		}
+		/**
+		 * Tableau des nouveaux comptes
+		 * Le compte est créé ici avec son format de réception
+		 */
+		$stack_new_auteurs = array();
 		
-		if($forcer_abo)
-		{
-			$auteurs_format = array();
-			// charger la table des formats afin d'eviter les petites requettes
-			if(($sql_result = sql_select("id_auteur,`spip_listes_format` AS format"
-										, 'spip_auteurs_elargis')) !== false)
-			{
-				while($row = sql_fetch($sql_result)) {
-					$auteurs_format[$row['id_auteur']] = $row['format'];
-				}
-			}
-			else
-			{
-				spiplistes_sqlerror_log("module import (format)");
-			}
-		}
-		
-		// les formats
-		$modifier_format = array();
-		
-		$err_import = _T('spiplistes:erreur_import_base');
+		/**
+		 * Tableau des auteurs (comptes déjà existants)
+		 * qu'il faut abonner aux listes souhaitées
+		 */
+		$stack_new_abonnes = array();
 		
 		//syslog(LOG_NOTICE, 'memory_get_usage[2]: ' . memory_get_usage());
 		//syslog(LOG_NOTICE, 'memory_get_peak_usage[2]: ' . memory_get_peak_usage());
 		
 		$start_time = microtime(1);
-		
-		$stack_new_auteurs = array();
 		
 		// statut temporaire
 		$tmp_statut = '6abo'.date('YmdGis');
@@ -157,19 +156,20 @@ function spiplistes_import(
 				
 				$email = strtolower(trim($email));
 
-				$mail_exist = false;
+				$mail_exist = FALSE;
 				
-				if(($email = email_valide($email))
+				$email = email_valide($email);
+				
+				if ($email
 				   &&	(
-						!($mail_exist = array_key_exists($email, $current_entries))
+						!($mail_exist = array_key_exists($email, $current_auteurs))
 						|| $forcer_abo
 						)
 				)
 				{
+					// si le compte n'existe pas, le creer
 					if(!$mail_exist)
 					{
-						// si le compte n'existe pas, le creer
-						
 						// commencer par calculer le login
 						$login = trim($login);
 						if(empty($login))
@@ -180,6 +180,7 @@ function spiplistes_import(
 						{
 							$login = strtolower($login);
 						}
+						
 						// puis le nom
 						$nom = trim($nom);
 						if(empty($nom))
@@ -205,113 +206,133 @@ function spiplistes_import(
 					// si on passe par ici, c'est sous-entendu $forcer_abo (abonne' un compte existant)
 					else
 					{
-						$id_auteur = intval($current_entries[$email]['id_auteur']);
-						
-						// forcer le format dans la foulee
-						if(!isset($auteurs_format[$id_auteur]))
-						{
-							$modifier_format[] = '(' . sql_quote($id_auteur) . ',' . sql_quote($format_abo) . ')';
-						}
-					}
-					// est-ce vraiment utile (voir plus bas)
-				}
-				else
-				{
-					if($mail_exist) {
-						$bad_dupli++;
-						spiplistes_log('import dupli: '.$mail);
-					}
-					else {
-						$bad_email++;
-						spiplistes_log('import bad: '.$mail);
+						$stack_new_abonnes[] = intval($current_auteurs[$email]['id_auteur']);
 					}
 				}
 			}
-		} // end for($jj = 0; $jj < $nb_new_entries; $jj++)
+		} // end for
 				
-		// importer les nouveaux abonnés
-		if(count($stack_new_auteurs))
+		$creer_comptes = count($stack_new_auteurs);
+		$inscrire_abos = count($stack_new_abonnes);
+
+		/**
+		 * Appliquer le statut temporaire aux comptes
+		 * existants qui n'ont pas de format.
+		 * Le format sera appliqué dans la requete plus bas.
+		 */
+		if($inscrire_abos)
 		{
-			$sql_col_names = '('.implode(',', array_keys($stack_new_auteurs[0])).')';
-			$sql_col_values = '';
-			
-			//syslog(LOG_NOTICE, 'memory_get_usage[5]: ' . memory_get_usage());
-			
-			foreach($stack_new_auteurs as $auteur)
+			$forcer_statuts = array();
+			foreach ($current_auteurs as $mail => $value)
 			{
-				$values = array_map('sql_quote', $auteur);
-				$sql_col_values .= '('.implode(',', $values).'),';
+				if (!$value['format']) {
+					$forcer_statuts[] = $value['id_auteur'];
+				}
 			}
-			$sql_col_values = rtrim($sql_col_values,',');
+			if (count($forcer_statuts))
+			{
+				if (sql_update(array('spip_auteurs')
+					   , array('statut' => sql_quote($tmp_statut))
+					   , array('id_auteur IN ('.implode(',', $forcer_statuts).')')
+					   ) === FALSE
+				)
+				{
+					spiplistes_sqlerror_log('stack_format_abo');
+				}
+			}
+		}
+		
+		if ($creer_comptes || $inscrire_abos)
+		{
+			/**
+			 * Tableau des comptes créés
+			 */
+			$stack_comptes_crees = array();
 			
-			$r = sql_insert('spip_auteurs', $sql_col_names, $sql_col_values);
-			
-			spiplistes_debug_log ('size of imported values: ' . strlen($sql_col_values));
+			if ($creer_comptes)
+			{
+				$sql_col_names = '('.implode(',', array_keys($stack_new_auteurs[0])).')';
+				$sql_col_values = '';
+				
+				//syslog(LOG_NOTICE, 'memory_get_usage[5]: ' . memory_get_usage());
+				
+				foreach($stack_new_auteurs as $auteur)
+				{
+					$values = array_map('sql_quote', $auteur);
+					$sql_col_values .= '('.implode(',', $values).'),';
+				}
+				$sql_col_values = rtrim($sql_col_values,',');
+				
+				$r = sql_insert('spip_auteurs', $sql_col_names, $sql_col_values);
+				$stack_comptes_crees[] = $r;
+			}
 			
 			//syslog(LOG_NOTICE, 'memory_get_usage[6]: ' . memory_get_usage());
 			
-			// nouveaux abonnements
-			foreach($abos_liste as $id_liste)
-			{
-				// un INSERT sans VALUES
-				// @todo: vérifier compatibilite sqlite et pg
-				if(sql_query(
-					'INSERT INTO spip_auteurs_listes
-								(id_auteur,id_liste) SELECT a.id_auteur,'.$id_liste
-									.' FROM spip_auteurs AS a WHERE a.statut='.sql_quote($tmp_statut))
-				   === false
-				)
+			/**
+			 * Inscrire les abonnements
+			 * des comptes existants
+			 */
+			if ($inscrire_abos) {
+				foreach($abos_liste as $id_liste)
 				{
-					spiplistes_sqlerror_log('import nouveaux abos dans spip_auteurs_listes');
-				}
-			}
-			
-			// format pour les nouveaux auteurs
-				// un INSERT sans VALUES
-				// @todo: vérifier compatibilite sqlite et pg
+					/**
+					 * Pour les membres déjà inscrits,
+					 * abonner à la liste si pas déjà abonné
+					 */
+					foreach (array_merge(
+								$stack_comptes_crees
+								, $stack_new_abonnes) as $id_auteur)
+					{
+						if ((!isset($abonnements[$id_liste]))
+							|| (!in_array($id_auteur, $abonnements[$id_liste]))
+						) {
+							spiplistes_abonnements_ajouter ($id_auteur, $id_liste);
+						}
+					} // foreach
+				} // foreach
+			} // if
+		
+			/**
+			 * Appliquer le format de réception
+			 * @todo A remplacer par la fonction en API
+			 */
 			if(sql_query(
 				'INSERT INTO spip_auteurs_elargis
 						(id_auteur,`spip_listes_format`) SELECT a.id_auteur,'.sql_quote($format_abo)
 								.' FROM spip_auteurs AS a WHERE a.statut='.sql_quote($tmp_statut))
-			   === false
+			   === FALSE
 			)
 			{
-				spiplistes_sqlerror_log('import nouveauxformats dans spip_auteurs_elargis');
+				spiplistes_sqlerror_log('import: nouveauxformats dans spip_auteurs_elargis');
 			}
-		
 		}
 		
-		// Comptes deja existants, inclus dans le fichier import
-		// - changer son format de réception ?
-		// - l'ajouter aux listes sélectionnées ?
-		// - ou ignorer ?
-		if(count($modifier_format))
-		{
-			// pour l'instant: ignorer !
-			// 
-		}
 		
 		// redonner le bon statut visiteur aux nouveaux
-		sql_update(array('spip_auteurs'), array('statut' => sql_quote('6forum')), array('statut='.sql_quote($tmp_statut)));
+		sql_update(array('spip_auteurs')
+				   , array('statut' => sql_quote('6forum'))
+				   , array('statut='.sql_quote($tmp_statut))
+				   );
 
 		// fin des req
 
 		$result_affiche .=
-			($tt = ($ii = count($stack_new_auteurs)) + ($jj = count($modifier_format)))
+			($tt = ($ii = count($stack_new_auteurs)) + ($jj = count($stack_new_abonnes)))
 			?	'<ul>'.PHP_EOL
 				. '<li class="verdana2">'._T('spiplistes:nb_comptes_importees_en_ms_dont_'
 										 , array('nb' => $tt, 'ms' => (microtime(1) - $start_time)))
 				. '<ul>'.PHP_EOL
 					. '<li>'._T('spiplistes:nb_fiches_crees', array('nb' => $ii)).'</li>'.PHP_EOL
 					//. '<li>'._T('spiplistes:nb_comptes_modifies', array('nb' => $jj)).'</li>'.PHP_EOL
-					. '<li>'._T('spiplistes:nb_comptes_ignores', array('nb' => $jj)).'</li>'.PHP_EOL
+					. '<li>'._T('spiplistes:nb_comptes_abonnes', array('nb' => $jj)).'</li>'.PHP_EOL
+					//. '<li>'._T('spiplistes:nb_comptes_ignores', array('nb' => $jj)).'</li>'.PHP_EOL
 				. '</ul>'.PHP_EOL
 				. '</li>'.PHP_EOL
 				. '</ul>'.PHP_EOL
 			: '<br />'._T('spiplistes:pas_dimport').PHP_EOL
 			;
 
-		
 		if($bad_dupli) {
 			$result_affiche .= '<br />'._T('pass_erreur').' email: '._T('spiplistes:n_duplicata_mail', array('n' => $bad_dupli)).PHP_EOL;
 		}
@@ -326,3 +347,29 @@ function spiplistes_import(
 	}
 	return($result_affiche);
 } // spiplistes_import()
+
+/**
+ * Controler les id donnes
+ *
+ * L'argument est soit un int positif, soit
+ * un tableau d'int positifs.
+ * @param int|array liste à controler
+ * @return array|bool
+ */
+function spiplistes_ids_valides ($ids) {
+	
+	if (!is_array($ids)) {
+		$ids = array ($ids);
+	}
+	if (is_array($ids)) {
+		$array = array();
+		foreach ($ids as $id) {
+			$ii = intval ($id);
+			if ($id > 0) {
+				$array[] = $id;
+			}
+		}
+		return ($array);
+	}
+	return (FALSE);
+}

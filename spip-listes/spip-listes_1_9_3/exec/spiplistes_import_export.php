@@ -29,16 +29,15 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
+include_spip('inc/presentation');
+include_spip('inc/acces');
+include_spip('inc/spiplistes_api');
+include_spip('inc/spiplistes_api_presentation');
 
 /**
  * Page import export
 */
 function exec_spiplistes_import_export() {
-
-	include_spip('inc/presentation');
-	include_spip('inc/acces');
-	include_spip('inc/spiplistes_api');
-	include_spip('inc/spiplistes_api_presentation');
 
 	global $connect_statut
 		, $connect_toutes_rubriques
