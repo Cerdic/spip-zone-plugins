@@ -697,8 +697,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 // raccourcis des paniers
 , 'aller_au_panier_' => 'Aller au panier '
 , 'aller_aux_listes_' => 'Aller aux listes '
-, 'Nouveau_courrier' => 'Cr&#233;er un nouveau courrier'
-, 'Nouvelle_liste_de_diffusion' => 'Cr&#233;er une nouvelle liste de diffusion'
+, 'Nouveau_courrier' => 'Cr&#233;er un courrier'
+, 'Nouvelle_liste_de_diffusion' => 'Cr&#233;er une liste de diffusion'
 , 'trieuse_suspendue' => 'Trieuse suspendue'
 , 'trieuse_suspendue_info' => 'Le traitement des listes de diffusion programm&#233;es est suspendu.'
 , 'Trieuse_reactivee' => 'Trieuse r&#233;activ&#233;e'
