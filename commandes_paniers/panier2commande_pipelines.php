@@ -32,7 +32,6 @@ function panier2commande_post_insertion($flux){
 					'spip_commandes_details',
 					array(
 						'id_commande' => $id_commande,
-						'statut' => 'encours',
 						'objet' => $emplette['objet'],
 						'id_objet' => $emplette['id_objet'],
 						'descriptif' => generer_info_entite($emplette['id_objet'], $emplette['objet'], 'titre', '*'),
