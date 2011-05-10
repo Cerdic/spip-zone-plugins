@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Vu !</nom>
 	<auteur>archi02</auteur>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<version_base>0.2</version_base>
 
 	<icon>img_pack/vu_logo_64.png</icon>
