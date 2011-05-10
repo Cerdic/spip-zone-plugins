@@ -3,8 +3,7 @@
 // ajouter le lien oembed dans le head des pages publiques
 function oembed_affichage_final($page) {
 	if (!$GLOBALS['html']) return $page;
-
-	if ($url_oembed = url_absolue(parametre_url(generer_url_public('oembed'),'url',url_absolue(self())))) {
+	if ($url_oembed = url_absolue(parametre_url($GLOBALS['meta']['adresse_site'] . '/services/oembed/','url',url_absolue(self())))) {
 		$page = preg_replace(',</head>,i',
 			"\n".'<link rel="alternate" type="application/json+oembed" href="'.$url_oembed.'&format=json" />'.
 			"\n".'<link rel="alternate" type="text/xml+oembed" href="'.$url_oembed.'&format=xml" />'."\n".'\0',
