@@ -1130,6 +1130,27 @@ function spiplistes_patron_find_in_path ($path_patron, $lang, $chercher_texte = 
 	return(false);
 }
 
+/**
+ * Incruster les styles inline
+ * 
+ * @version CP-20110510
+ * @param string $texte_html
+ * @return string
+ */
+function spiplistes_html_styles_inline ($texte_html) {
+	
+	if (strpos($texte_html, 'spip_documents_center') !== FALSE)
+	{
+		$pattern = array(
+			"{<span class='spip_document_\d* spip_documents spip_documents_center'>}m"
+		);
+		$replacement = array(
+			'<span style="display:block;text-align:center">'
+		);
+		$texte_html = preg_replace ($pattern, $replacement, $texte_html);
+	}
+	return ($texte_html);
+}
 
 /**
  * Assembler/calculer un patron

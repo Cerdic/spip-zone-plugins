@@ -441,4 +441,3 @@ function spiplistes_listes_select ($sql_select, $sql_where = "") {
 }
 
 //
-?>

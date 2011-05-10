@@ -305,6 +305,21 @@ function spiplistes_meleuse ($last_time) {
 					$$key = spiplistes_liens_absolus ($$key);
 				}
 			}
+
+			/**
+			 * Adapter le CSS
+			 */
+			foreach(array(
+				  'objet_html'
+				, 'page_html'
+				, 'pied_html'
+				//, 'pied_rappel_html', 'pied_rappel_texte'
+				, 'tampon_html') as $key) 
+			{
+				if(!empty($$key)) {
+					$$key = spiplistes_html_styles_inline ($$key);
+				}
+			}
 			
 			$email_a_envoyer = array();
 			$email_a_envoyer['texte'] = new phpMail('', $objet_texte, ''
