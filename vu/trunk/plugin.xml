@@ -121,6 +121,13 @@
 		<!-- action a effectuer lors du clic : ici, execution de exec/veille_tous.php -->
 		<url>veille_tous</url>	
 	</bouton>
+
+	<!-- Ajouter bouton de navigation compatible plugin bandeau -->
+	<bouton id="vu_tous21" parent="bando_edition">
+     	   <icone>img_pack/vu_logo_16.png</icone>
+     	   <titre>Veille</titre>       
+     	   <url>veille_tous</url>       
+	</bouton>
 	
 	<categorie>divers</categorie>
 

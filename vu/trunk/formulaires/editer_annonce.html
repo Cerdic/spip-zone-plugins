@@ -66,9 +66,8 @@
 		[(#CONFIG{vu/descriptif_annonce}|!={off}|oui)
 		<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
 	      		<label for="text_area"><:vu:info_descriptif:></label>
-			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
-			][(#ENV**{_texte_trop_long,''})
-			][(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANG}})]
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+
 			<textarea name='descriptif' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
 			(#ENV**{_browser_caret,''})]>[(#ENV**{descriptif})]</textarea>
 		</li> ]
