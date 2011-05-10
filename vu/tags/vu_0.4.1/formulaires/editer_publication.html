@@ -1,0 +1,134 @@
+[(#REM)
+
+	Fichier HTML du formulaire CVT : editer_publication. Etroitement 	
+	lie aux fonctions PHP dans le fichier du meme nom. Pour plus d'infos
+	sur les formulaires CVT : http://www.spip.net/fr_article3800.html.	
+	Ces deux sont conjointement appeles par la balise #FORMULAIRE_EDITER_PUBLICATION
+	dans le fond 'prive/editer/publication.html'.					
+
+]
+
+<div class='formulaire_spip formulaire_editer formulaire_editer_breve formulaire_editer_breve-#ENV{id_publication,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_publication' value='#ENV{id_publication}' />
+	  <ul>
+
+	[(#REM) 'Titre' est un champ commun - et obligatoire]
+	   	<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+		    	<label for="titre"><:vu:info_titre:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+			]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,#REM|concat{vu:titre_nouvelle_publication}|_T})]"
+			[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+		</li>
+
+	[(#REM) 'Lien' est un champ commun]
+	 	<li class="editer_lien[ (#ENV**{erreurs}|table_valeur{lien}|oui)erreur]">
+			<label for="lien"><:vu:info_lien:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien})</span>]
+			<input type='text' class='text' name='lien' id='lien' value="[(#ENV**{lien})]" />
+		</li>
+
+	[(#REM) 'Auteur' est un champ specifique]
+	 	<li class="editer_auteur[ (#ENV**{erreurs}|table_valeur{auteur}|oui)erreur]">
+			<label for="auteur"><:vu:info_auteur:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{auteur})</span>]
+			<input type='text' class='text' name='auteur' id='auteur' value="[(#ENV**{auteur})]" />
+		</li>
+
+	[(#REM) 'Editeur' est un champ specifique]
+	 	<li class="editer_editeur[ (#ENV**{erreurs}|table_valeur{editeur}|oui)erreur]">
+			<label for="editeur"><:vu:info_editeur:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{editeur})</span>]
+			<input type='text' class='text' name='editeur' id='editeur' value="[(#ENV**{editeur})]" />
+		</li>
+
+
+	[(#REM) 'Date-publication' est un champ specifique]
+		<li class="editer_date_publication[ (#ENV**{erreurs}|table_valeur{date_publication}|oui)erreur]">
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_publication})</span>]
+			<label for="date_debut"><:vu:info_date:></label>
+			<p class="explication"><:vu:explication_date:></p>
+			<input type='text' class='text date' name='date_publication' id='date_publication' value="[(#ENV{date_publication})]" />
+		</li>
+
+[(#REM) Les champs optionnels ont leur affichage conditionnés par le plugin CFG. Si le champ n'est pas explicitement désactivé (valeur=off),
+	il s'affiche. Ce qui est donc le cas en l'absence de CFG, et avec CFG mais non configuré. ]
+
+	[(#REM) 'Type' est un champ optionnel]
+		[(#CONFIG{vu/type_publication}|!={off}|oui)
+	 	<li class="editer_type[ (#ENV**{erreurs}|table_valeur{type}|oui)erreur]">
+			<label for="type"><:vu:info_type:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{type})</span>]
+			<input type='text' class='text' name='type' id='type' value="[(#ENV**{type})]" />
+		</li> ]
+
+	[(#REM) 'Langue' est un champ optionnel]
+		[(#CONFIG{vu/langue_publication}|!={off}|oui)
+	 	<li class="editer_langpub[ (#ENV**{erreurs}|table_valeur{langpub}|oui)erreur]">
+			<label for="langpub"><:vu:info_langpub:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{langpub})</span>]
+			<input type='text' class='text' name='langpub' id='langpub' value="[(#ENV**{langpub})]" />
+		</li> ]
+
+	[(#REM) 'Descriptif' est un champ optionnel]
+		[(#CONFIG{vu/descriptif_publication}|!={off}|oui)
+		<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+	      		<label for="text_area"><:vu:info_descriptif:></label>
+			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+			<textarea name='descriptif' id='text_area' class='barre_inserer' rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+			(#ENV**{_browser_caret,''})]>[(#ENV**{descriptif})]</textarea>
+		</li> ]
+
+	[(#REM) 'Sources' sont des champs optionnels]
+		[(#CONFIG{vu/source_publication}|!={off}|oui)
+	  	<li class="editer_source fieldset">
+			<fieldset>
+			<h3 class="legend"><:vu:info_legend_source:></h3>
+			<ul>
+				<li class="editer_source_nom[ (#ENV**{erreurs}|table_valeur{source_nom}|oui)erreur]">
+						<label for="source_nom"><:vu:info_source_nom:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{source_nom})</span>
+						]<input type='text' class='text' name='source_nom' id='source_nom' value="[(#ENV**{source_nom})]" />
+				</li>
+				<li class="editer_source_lien[ (#ENV**{erreurs}|table_valeur{source_lien}|oui)erreur]">
+						<label for="source_lien"><:vu:info_source_lien:></label>[
+						<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{source_lien})</span>
+						]<input type='text' class='text' name='source_lien' id='source_lien' value="[(#ENV**{source_lien})]" />
+				</li>
+			</ul>
+	    	</fieldset>
+	    </li> ]
+
+	    
+	    [(#SESSION{statut}|=={0minirezo}|oui)
+	 	<li class="fieldset">
+			<fieldset>
+			<h3 class="legend"><:vu:info_legend_statut:></h3>
+			<ul>
+			<li class="editer_statut obligatoire">
+				<label for='statut'><:vu:info_publication_publiee:></label>
+				<select name='statut' id='statut' size='1'>
+					<option value='prop'[(#ENV**{statut}|=={prop}|?{' selected="selected"'})] style='background-color: white'><:vu:item_publication_proposee:></option>
+					<option value='refuse'[(#ENV**{statut}|=={refuse}|?{' selected="selected"'})] class='danger'><:vu:item_publication_refusee:></option>
+					<option value='publie'[(#ENV**{statut}|=={publie}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:vu:item_publication_validee:></option>
+				</select>
+			</li>
+			</ul>
+			</fieldset>
+		</li>
+			]
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

@@ -1,0 +1,10 @@
+<BOUCLE_afficher_contenu(VU_ANNONCES){id_annonce=#ENV{id}}>
+        [<div class='type_objet'>(#TYPE)</div>]
+	<div class='titre_objet'>#TITRE</div>
+	<div>
+		[<span><:vu:apercu_lien_annonce:><a href='#LIEN' title='#LIEN'>(#ANNONCEUR|choixsivide{#LIEN,#ANNONCEUR})</a></span>]
+		[<span class='source_objet'> (<:vu:apercu_source:><a href='#SOURCE_LIEN' title='#SOURCE_LIEN'>(#SOURCE_NOM)</a>)</span>]
+		[<span><:vu:apercu_peremption:>(#PEREMPTION|affdate_jourcourt).</span>]
+	</div>
+	[<div>(#DESCRIPTIF)</div>]
+</BOUCLE_afficher_contenu>

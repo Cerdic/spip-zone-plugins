@@ -1,0 +1,19 @@
+[(#REM)
+	Boite infos pour la page privee 'exec/veille_voir.php'
+	Corresponds a l'encart qui affiche l'id de l'objet et
+	le formulaire de changement de statut a la volee.
+]
+
+<BOUCLE_infos(VU_ANNONCES){id_annonce=#ENV{id}}{statut?}{!lang_select}>
+	<div class='infos'>
+		<div class='numero'><:vu:info_gauche_numero_annonce:><p>#ID_ANNONCE</p></div>
+		
+		[(#REM)	
+			Bloc de changement de statut : fait appel a 
+			la fonction instituer_objet (prive/infos/*_fonctions.php) 
+		]
+
+		[(#ID_ANNONCE|instituer_annonce{#STATUT})]
+		
+	</div>
+</BOUCLE_infos>

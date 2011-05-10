@@ -1,0 +1,134 @@
+<plugin>
+	<nom>Vu !</nom>
+	<auteur>archi02</auteur>
+	<version>0.4</version>
+	<version_base>0.2</version_base>
+
+	<icon>img_pack/vu_logo_64.png</icon>
+	<description>
+		<i>&laquo; Relayez l'information, plut&ocirc;t que de la (re)publier ! &raquo;</i>
+
+		Ce plugin propose plusieurs nouveaux objets pour pallier à l'impossibilit&eacute; sur SPIP de <i>relayer</i> simplement de l'information, c'est &agrave; dire publier sans contenu. Typiquement (mais ce n'est qu'un exemple) ceci est très utile pour une activit&eacute; de veille th&eacute;matique.
+
+		[Configuration possible par CFG->?exec=cfg&amp;cfg=vu]
+	</description>
+	<lien>[Pour une pr&eacute;sentation d&eacute;taill&eacute;e du plugin->http://www.spip-contrib.net/article3066]</lien>
+	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
+
+	<etat>stable</etat>
+
+	<prefix>vu</prefix>
+	<options>vu_options.php</options>
+
+	<!-- Installation, mise a jour ou desinstallation des tables supplementaire sur le serveur -->
+	<install>base/vu_upgrade.php</install>
+	
+	<!-- Pipeline : les autorisations specifiques au plugin -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>vu_autoriser.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : declarer a SPIP les tables principales -->
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/vu_base.php</inclure>
+	<!--        <action>init_tables_principales</action> -->
+	</pipeline>
+
+	<!-- Pipeline : declarer a SPIP les tables auxiliaires -->
+	<pipeline>
+	        <nom>declarer_tables_auxiliaires</nom>
+ 	       <inclure>base/vu_base.php</inclure>
+	</pipeline> 
+
+	<!-- Pipeline : declarer a SPIP les interfaces -->
+	<pipeline>
+  	      <nom>declarer_tables_interfaces</nom>
+  	      <inclure>base/vu_base.php</inclure>
+	</pipeline> 
+
+	<!-- Pipeline : declarer a SPIP les surnoms -->
+	<pipeline>
+  	      <nom>declarer_tables_objets_surnoms</nom>
+  	      <inclure>base/vu_base.php</inclure>
+	</pipeline> 
+	
+	<!-- Pipeline : declarer a SPIP les champs de recherche des nouveaux objets -->
+	<pipeline>
+  	      <nom>rechercher_liste_des_champs</nom>
+  	      <inclure>vu_pipelines.php</inclure>
+	</pipeline> 
+
+
+	<pipeline>
+                <nom>insert_head</nom>
+                <inclure>vu_pipelines.php</inclure>
+        </pipeline>
+
+	<!-- Pipeline : entete des pages de l'espace prive -->
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : boites d'infos des objets dans 'exec/veille_voir' -->
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : permettre la selection des nouveaux objets dans les groupes de mots -->
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : permet d'associer un libelle aux types d'objets, notamment dans 'exec/mots_tous' -->
+	<pipeline>
+		<nom>libelle_association_mots</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>   
+
+	<!-- Pipeline : compatibilite avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : integration dans la page d'accueil : le cartouche d'info -->
+	<pipeline>
+		<nom>accueil_informations</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<!-- Pipeline : integration dans la page d'accueil : en attente de validation -->
+	<pipeline>
+		<nom>accueil_encours</nom>
+		<inclure>vu_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="spip" version="[2.0.0;]" />
+	<utilise id='CFG' version='[1.0;]' /> 
+
+	<!-- Ajouter bouton de navigation dans l'interface privee -->
+	<bouton id="vu_tous" parent="naviguer">
+		<!-- icone du nouveau bouton -->
+		<icone>img_pack/vu_logo_24.png</icone>
+		<!-- texte du nouveau bouton -->
+		<titre>Veille</titre>	
+		<!-- action a effectuer lors du clic : ici, execution de exec/veille_tous.php -->
+		<url>veille_tous</url>	
+	</bouton>
+
+	<!-- Ajouter bouton de navigation compatible plugin bandeau -->
+	<bouton id="vu_tous21" parent="bando_edition">
+     	   <icone>img_pack/vu_logo_16.png</icone>
+     	   <titre>Veille</titre>       
+     	   <url>veille_tous</url>       
+	</bouton>
+	
+	<categorie>divers</categorie>
+
+</plugin>

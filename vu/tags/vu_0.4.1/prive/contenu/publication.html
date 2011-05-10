@@ -1,0 +1,11 @@
+<BOUCLE_afficher_contenu(VU_PUBLICATIONS){id_publication=#ENV{id}}>
+        [<div class='type_objet'>(#TYPE)</div>]
+	<div class='titre_objet'>#TITRE</div>
+	<div>
+		<span>
+			[<:vu:apercu_de:>(#AUTEUR). ]<:vu:apercu_publie:>[<:vu:apercu_chez:><a href='#LIEN' title='#LIEN'>(#EDITEUR)</a>, ][<:vu:apercu_le:>(#DATE_PUBLICATION|affdate_jourcourt)].
+		</span>
+		[<span class='source_objet'> (<:vu:apercu_source:><a href='#SOURCE_LIEN' title='#SOURCE_LIEN'>(#SOURCE_NOM)</a>)</span>]
+	</div>
+	[<div>(#DESCRIPTIF)</a></div>]
+</BOUCLE_afficher_contenu>
