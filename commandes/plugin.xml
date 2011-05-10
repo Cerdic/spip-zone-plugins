@@ -50,7 +50,7 @@
 		<titre>commandes:nom_bouton_plugin</titre>
 	</bouton>
 
-	<bouton id='commandes21' parent='bando_edition'> 
+	<bouton id='commandes21' parent='bando_reactions'> 
 			<url>commandes</url> 
 			<icone>images/commande-16.png</icone> 
 			<titre>commandes:nom_bouton_plugin</titre> 
