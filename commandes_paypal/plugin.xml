@@ -4,7 +4,7 @@
 	<licence>GPL v3</licence>
 	<version>0.2.0</version>
 	<etat>dev</etat>
-	<description>Ce plugin permet de gérer les retours d'un payement Paypal pour savoir quel commande a été payé, et donc changé son statut.</description>
+	<description>Ce plugin permet de gérer les retours d'un payement Paypal pour savoir quel commande a été payée, et donc changer son statut.</description>
 	<categorie>divers</categorie>
 	<icon></icon>
 	
