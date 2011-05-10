@@ -156,15 +156,14 @@ function spiplistes_courrier_propre_bloog($texte) {
 
 
 
-/****
+/**
  * titre : spiplistes_courrier_version_texte
  * d'apres Clever Mail (-> NHoizey), mais en mieux.
-****/
-
+ */
 /**
- * @param $in string, contenu html du courrier a envoyer
+ * @param string $in, contenu html du courrier a envoyer
  * @return string, version texte seul (ascii) du courrier
- **/
+ */
 function spiplistes_courrier_version_texte($in) {
 
 	$eol = PHP_EOL;
@@ -264,7 +263,7 @@ function spiplistes_courrier_version_texte($in) {
 
 } // end spiplistes_courrier_version_texte()
 
-/*
+/**
  * Ajouter les abonnes d'une liste a un envoi
  * @param : $id_courrier : reference d'un envoi
  * @param $id_liste : reference d'une liste
@@ -341,8 +340,7 @@ function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste, $id_
 	return (false);
 }
 
-//CP-20080509: upadte sql sur un courrier
-/*
+/**
  * Modifier un courrier
  * @return true ou false
  * @param $id_courrier 
@@ -442,13 +440,13 @@ function spiplistes_courriers_total_abonnes ($id_courrier = 0) {
 	);
 }
 
-/*
- * CP-20081124
+/**
  * Assembler/calculer un patron
+ * @version CP-20081124
+ * @param $string patron  nom du patron
+ * @param array $contexte 
+ * @param bool $ignorer 
  * @return array le resultat html et texte seul dans un tableau
- * @param $patron string nom du patron
- * @param $contexte array
- * @param $ignorer bool
  */
 function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignorer = false) {
 
@@ -463,16 +461,13 @@ function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignore
 }
 
 
-/*
- * CP-20081130
+/**
  * Calculer une balise a-la-SPIP pour le titre d'un courrier.
  * Pour le moment, uniquement #DATE et 2 filtres sont autorises 
- * @return le titre calcule'
+ * @version CP-20110203 Reecriture.
+ *   Possibilites plusieurs #DATE, avec ou sans parametres
  * @param $titre string
- *
- * CP-20110203
- * Reecriture
- * Possibilites plusieurs #DATE, avec ou sans parametres
+ * @return le titre calcule'
  */
 function spiplistes_calculer_balise_titre ($titre) {
 
