@@ -7,8 +7,9 @@
 // exemple : http://zone.spip.org/trac/spip-zone/wiki/WikiFormatting
 
 include_spip('inc/charsets');
-@define('_TYPO_sup', '<sup class="typo_exposants">\\1</sup>');
-@define('_TYPO_sup2', '\\1<sup class="typo_exposants">\\2</sup>');
+@define('_TYPO_class', '<sup class="typo_exposants">');
+define('_TYPO_sup', _TYPO_class.'\\1</sup>');
+define('_TYPO_sup2', '\\1'._TYPO_class.'\\2</sup>');
 
 // fonction simplifiee, equivalent numerique de unicode2charset($texte)
 function caractere_charset($num) {
@@ -53,18 +54,19 @@ function typo_exposants_installe_dist() {
 		_TYPO_sup, _TYPO_sup,		// Mlle(s), Mme(s), Mgr
 		_TYPO_sup,		// Dr, Pr, 
 
-		'm<sup class="typo_exposants">2</sup>',	_TYPO_sup,	// m2, m3, m²
+		'm'._TYPO_class.'2</sup>',	_TYPO_sup,	// m2, m3, m²
 		_TYPO_sup, _TYPO_sup, _TYPO_sup,	// Vve, Mn(s), Md(s), Bd(s), Cie(s)
-		_TYPO_sup, '&#201;<sup class="typo_exposants">ts</sup>',	// Sté(s), Ets
+		_TYPO_sup, '&#201;'._TYPO_class.'ts</sup>',	// Sté(s), Ets
 
 		_TYPO_sup, _TYPO_sup, _TYPO_sup, // 1er et Cie
 		_TYPO_sup,	// 2nd(e)(s)
 
-		'$1<sup class="typo_exposants">e$2</sup>', // Erreurs me, eme, ème, ième + pluriels
+		'$1'._TYPO_class.'e$2</sup>', // Erreurs me, eme, ème, ième + pluriels
 		_TYPO_sup2, // 2e(s), IIIe(s)...
-		'$1<sup class="typo_exposants">o</sup>', // ro, vo, 1o, 2o, etc.
+		'$1'._TYPO_class.'o</sup>', // ro, vo, 1o, 2o, etc.
 		_TYPO_sup,	// Me
-	));
+	// remplacements en str_replace()
+	), array('<sup>'), array(_TYPO_class));
 
 	if(defined('_CS_EXPO_BOFBOF')) {
 		$typo[0] = array_merge($typo[0], array(
@@ -87,7 +89,7 @@ function typo_exposants_installe_dist() {
 			',(?<=\d)(th)\b,',
 		), array(
 			_TYPO_sup, _TYPO_sup, _TYPO_sup, _TYPO_sup,
-		)), 
+		), array('<sup>'), array(_TYPO_class)), 
 		// francais
 		'fr' => $typo,
 	);
@@ -108,6 +110,7 @@ function typo_exposants_rempl($texte){
 	// suite du texte
 	$typo = cs_lire_data_outil('typo_exposants', $lang);
 	if($typo===NULL) return $texte;
+	$texte = str_replace($typo[2], $typo[3], $texte);
 	return preg_replace($typo[0], $typo[1], $texte);
 }
 
