@@ -131,6 +131,7 @@ Kompatibil mit SPIP v1.92x, v2.0.x und v2.1.x',
 	'tri_monter' => 'Autor nach oben',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Dieses Format berücksichtigt die angepassten URLs weiter unten nicht.',
 	'urls_propres_format' => 'Das Format der URLs ist: {{« @format@ »}}. [<span>[Konfiguration->@url@]</span>]',
 	'urls_propres_lien' => 'Öffentlicher Zugangslink',

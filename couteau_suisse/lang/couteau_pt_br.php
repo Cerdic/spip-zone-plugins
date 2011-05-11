@@ -131,6 +131,7 @@ Compatibilidade: SPIP v1.9x, v2.0 e v2.1.x',
 	'tri_monter' => 'Subir este autor',
 
 	// U
+	'url_verrouillee' => 'URL verrouillée', # NEW
 	'urls_propres_erreur' => 'Este formato não leva em conta os URLs limpos listados acima.',
 	'urls_propres_format' => 'O formato atual dos URLs é: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Link público de acesso',
