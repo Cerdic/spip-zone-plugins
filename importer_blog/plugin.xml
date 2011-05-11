@@ -1,0 +1,26 @@
+<plugin>
+	<nom>Importer un blog
+	</nom>
+	<auteur>
+	Fil
+	</auteur>
+	<licence>
+		&#169; 2011 - GNU/GPL
+	</licence>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Importer une sauvegarde d'un systeme de blog comme blogspot
+
+	:: ouvrir la page ecrire/?exec=importer_blog
+	</description>
+	<prefix>
+	Importerblog
+	</prefix>
+	<categorie>outils</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+</plugin>
