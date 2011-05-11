@@ -12,5 +12,5 @@ Page rubrique
 Section page
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
-(#VAR{acsRubriqueStylePage}|=={""}|?{' ',''})<INCLURE{fond=composants/rubrique/boucle-page_rubrique}{self}{env}{id_rubrique}>][
-(#VAR{acsRubriqueStylePage}|=={""}|?{'',' '})<INCLURE{fond=composants/rubrique/boucle-page_rubrique-style}{self}{env}{id_rubrique}>]
+(#VAR{acsRubriqueStylePage}|=={""}|?{' ',''})<INCLURE{fond=composants/rubrique/boucle-page_rubrique}{self}{env}>][
+(#VAR{acsRubriqueStylePage}|=={""}|?{'',' '})<INCLURE{fond=composants/rubrique/boucle-page_rubrique-style}{self}{env}>]

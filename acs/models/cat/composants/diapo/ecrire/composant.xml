@@ -16,5 +16,17 @@
     <nom>Nb</nom>
     <type>text</type>
     <valeur>5</valeur>
-  </variable>  
+  </variable>
+
+  <variable>
+    <nom>Link</nom>
+    <type>color</type>
+    <valeur>#dfff00</valeur>
+  </variable>
+  <variable>
+    <nom>LinkHover</nom>
+    <type>color</type>
+    <valeur>#afff00</valeur>
+  </variable>
+
 </composant>

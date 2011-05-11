@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'description' => 'Rubrique du site',
 'help' => 'Affiche logos, titre, description, contenu, et documents joints d\'une rubrique.
 <br /><br />
-Le style de page rubrique peut dépendre d\'un mot-clé : dans ce cas, la page contiendra l\'instance de composant Cadre de numéro d\'instance égal au champ description du mot clé choisi pour cette rubrique dans le groupe des mots-clefs de styles de pages rubrique.
+Le style de page rubrique peut dépendre d\'un mot-clé : dans ce cas, la page rubrique contiendra l\'instance de composant Cadre de numéro égal au champ description du mot clé choisi pour cette rubrique dans le groupe des mots-clefs de styles de pages rubrique, ou à défaut le cadre n° 2060 si aucun mot-clé n\'est choisi dans ce groupe.
 <br />
 <br />
 Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site public, il suffit que son titre commence par un "_".',

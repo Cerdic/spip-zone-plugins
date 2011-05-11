@@ -1,0 +1,6 @@
+[(#CACHE{7200})][(#REM)
+
+Contenu de Mediabox.
+Appellé en Ajax par l'API mediabox/colorbox.
+
+][(#SET{is2embed,(gif|jpg|jpeg|png|swf)})][(#SET{is4player,(mp3|flv|mp4|ogv|webm)})]<B_doc><BOUCLE_doc(DOCUMENTS){mode=document}{id_document}>[(#EXTENSION|match{#GET{is2embed}}|?{" "})#MODELE{emb}][(#EXTENSION|match{#GET{is4player}}|?{" "})[(#MODELE{doc_player}{titre=non}{center})]]</BOUCLE_doc></B_doc>

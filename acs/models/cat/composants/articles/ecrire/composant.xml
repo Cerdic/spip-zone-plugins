@@ -81,6 +81,10 @@
     <type>text</type>
     <valeur>100</valeur>
   </variable>
+  <variable>
+    <nom>StylePage</nom>
+    <type>KeyGroup</type>
+  </variable>
 
   <variable>
     <nom>ListesLogoTailleMax</nom>

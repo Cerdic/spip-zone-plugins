@@ -9,8 +9,14 @@ Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Page rubrique
+
+Les mots-clés des tags meta de la page sont extraits du titre de la rubrique.
+
+
 Section page
 
-]<INCLURE{fond=composants/fond/entete}{title=#TITRE}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}>
-<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=#NIC}{id_rubrique}>
+Keywords meta-tags come from section title.
+
+][(#SET{title,#TITRE[ - (#NOM_SITE_SPIP)]})][(#SET{mkeywords,[(#TITRE|askeywords)]})]<INCLURE{fond=composants/fond/entete}{title=#GET{title}}{mkeywords=#GET{mkeywords}}{mdescription}>
+<INCLURE{fond=composants/cadre/cadre}{self}{env}{nic}>
 <INCLURE{fond=composants/fond/pied}>

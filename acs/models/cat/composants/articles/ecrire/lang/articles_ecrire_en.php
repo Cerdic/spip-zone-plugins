@@ -8,8 +8,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info' => 'Appearance and behaviour depends on the page in which Articles component is inserted.
 <br /><br />
 Colors 2 to 6 are for rubrics level 2 to 6 in sitemap
- <br /><br />
-Access control limit access to articles tagged with keyword _ide, _aut, _adm, or _acs to registered members, authors, administrators, and ACS administrors.',
+<br /><br />
+Access control limit access to articles tagged with keyword _ide, _aut, _adm, or _acs to registered members, authors, administrators, and ACS administrors.
+<br /><br />
+The content of the article page can depend on a keyword from a keyword group choosed here.',
+
+'StylePage' => 'Page style',
 
 'Bord' => 'Border top',
 'MargeBas' => 'Margin bottom',

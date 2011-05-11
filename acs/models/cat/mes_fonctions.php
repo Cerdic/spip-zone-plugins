@@ -32,16 +32,16 @@ function coupe($texte, $taille=50, $suite) {
 // exemple d'usage: [<meta name="keywords" content="(#TITRE|askeywords)" />]
 function askeywords($texte) {
 	$texte = sans_guillemets($texte);
-	 $notkeys = _T('acs:meta_not_keywords');
+	 $notkeys = _T('acs:fond_meta_not_keywords');
 
 	 $notkeys = explode(',', $notkeys);
 	 // Transforme tous les mots inutilisables comme keywords en expression régulière "mot entier", insensible à la casse
 	 foreach ($notkeys as $key=>$notkey ) {
-			$notkeys[$key] = '/\b('.$notkey.')\b/';
+			$notkeys[$key] = '/\b'.$notkey.'\b/u';
 	 }
 	 $texte = strtolower(textebrut($texte));
-	 // Suppression des mots qui ne conviennent pas comme keywords (liste meta_not_keywords du fichier de langue acs_xx.lang)
-	 $texte = preg_replace($notkeys, '*', $texte);
+	 // Suppression des mots qui ne conviennent pas comme keywords (liste meta_not_keywords du fichier de langue fond_xx.php)
+	 $texte = preg_replace($notkeys, '', $texte);
 	 // Suppression de la ponctuation et des espaces de début et de fin
 	 $texte = preg_replace(array('/[;:,.?!\']/', '/(\s+$)/', '/(^\s+)/'), '', $texte);
 	 // remplacement des espaces restants par des virgules
