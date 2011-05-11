@@ -39,11 +39,17 @@ function commandes_paypal_traitement_paypal($flux){
 		}
 		
 		// On change le statut de la commande
+		$changements = array(
+			'statut' => $statut_nouveau
+		);
+		
+		// Si le statut est "paye" alors on ajoute la date de paiement
+		$changements['date_paiement'] = date('Y-m-d H:i:s');
+		
+		// On fait la mise à jour
 		$ok = sql_updateq(
 			'spip_commandes',
-			array(
-				'statut' => $statut_nouveau
-			),
+			$changements,
 			'id_commande = '.$id_commande
 		);
 		
