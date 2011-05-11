@@ -831,6 +831,7 @@ Escolla aquí se quere poñer en superíndice certos atallos suplementarios, mal
 	'url_propres2' => 'propias2@_CS_ASTER@',
 	'url_propres_qs' => 'propias_qs',
 	'url_standard' => 'estándar',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Impoñer un mínimo de 3 cifras',
 	'urls_avec_id' => 'Poñelo en sufixo',
 	'urls_avec_id2' => 'Poñer o Id en prefixo',
@@ -841,7 +842,7 @@ Escolla aquí se quere poñer en superíndice certos atallos suplementarios, mal
 	'urls_enregistrer' => 'Rexistrar esta URL na base',
 	'urls_id_sauf_rubriques' => 'Excluír as seccións', # MODIF
 	'urls_minuscules' => 'Letras minúsculas',
-	'urls_nouvelle' => 'Editar o URL « propias » :',
+	'urls_nouvelle' => 'Editar o URL « propias » :', # MODIF
 	'urls_num_objet' => 'Número :',
 	'urls_purger' => 'Baleirar todo',
 	'urls_purger_tables' => 'Baleirar as táboas seleccionadas',
@@ -850,8 +851,9 @@ Escolla aquí se quere poñer en superíndice certos atallos suplementarios, mal
 	'urls_titre_objet' => 'Título rexistrado :',
 	'urls_type_objet' => 'Obxecto :',
 	'urls_url_calculee' => 'URL público « @type@ » :',
-	'urls_url_objet' => 'URL « propias » rexistrado :',
-	'urls_valeur_vide' => '(Un valor baleiro provoca o recálculo do URL)',
+	'urls_url_objet' => 'URL « propias » rexistrado :', # MODIF
+	'urls_valeur_vide' => '(Un valor baleiro provoca o recálculo do URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Para acceder ás modificacións :',

@@ -826,6 +826,7 @@ Aquí puedes escoger escribir como superíndices otras abreviaturas suplementari
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres', # NEW
 	'urls_avec_id' => 'Id sistematicamente como sufijo', # MODIF
 	'urls_avec_id2' => 'Id sistemáticamente como prefijo', # MODIF
@@ -836,7 +837,7 @@ Aquí puedes escoger escribir como superíndices otras abreviaturas suplementari
 	'urls_enregistrer' => 'Grabar esta URL en la base',
 	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (séparés par « : ») :', # NEW
 	'urls_minuscules' => 'Letras minúsculas',
-	'urls_nouvelle' => 'Editar la URL «propres» (propia):',
+	'urls_nouvelle' => 'Editar la URL «propres» (propia):', # MODIF
 	'urls_num_objet' => 'Número:',
 	'urls_purger' => 'Vaciar todo',
 	'urls_purger_tables' => 'Vaciar las tablas seleccionadas',
@@ -845,8 +846,9 @@ Aquí puedes escoger escribir como superíndices otras abreviaturas suplementari
 	'urls_titre_objet' => 'Título grabado:',
 	'urls_type_objet' => 'Objeto:',
 	'urls_url_calculee' => 'URL pública « @type@ »:',
-	'urls_url_objet' => 'URL «propres» (propia) grabada:',
-	'urls_valeur_vide' => '(Un valor vacío implica recalcular la URL)',
+	'urls_url_objet' => 'URL «propres» (propia) grabada:', # MODIF
+	'urls_valeur_vide' => '(Un valor vacío implica recalcular la URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Para acceder a las modificaciones:',

@@ -1112,6 +1112,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Require a minum of 3 digits',
 	'urls_avec_id' => 'Place as a suffix',
 	'urls_avec_id2' => 'Place as a prefix',
@@ -1122,7 +1123,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_enregistrer' => 'Write this URL to the database',
 	'urls_id_sauf_rubriques' => 'Exclude the following objects (separated by " : "):',
 	'urls_minuscules' => 'Lower-case letters',
-	'urls_nouvelle' => 'Edit the "clean" URL',
+	'urls_nouvelle' => 'Edit the "clean" URL', # MODIF
 	'urls_num_objet' => 'Number:',
 	'urls_purger' => 'Empty all',
 	'urls_purger_tables' => 'empty tables selected',
@@ -1131,8 +1132,9 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_titre_objet' => 'Saved title:',
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  « @type@ »:',
-	'urls_url_objet' => 'Saved "clean" URL:',
-	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)',
+	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
+	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'To access modifications:',

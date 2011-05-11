@@ -813,6 +813,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'url_propres2' => 'proper2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standaard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => '3 cijfers minimum eisen',
 	'urls_avec_id' => 'Le placer en suffixe', # NEW
 	'urls_avec_id2' => 'Le placer en préfixe', # NEW
@@ -823,7 +824,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_enregistrer' => 'Dit URL in de database opslaan',
 	'urls_id_sauf_rubriques' => 'Exclure les rubriques', # MODIF
 	'urls_minuscules' => 'Lettres minuscules', # NEW
-	'urls_nouvelle' => '<MODIF>Éditer l\'URL « propres » :',
+	'urls_nouvelle' => '<MODIF>Éditer l\'URL « propres » :', # MODIF
 	'urls_num_objet' => 'Nummer :',
 	'urls_purger' => 'Alles legen',
 	'urls_purger_tables' => 'De geselecteerde tafels legen',
@@ -832,8 +833,9 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_titre_objet' => 'Titre enregistré  :', # NEW
 	'urls_type_objet' => 'Objet :', # NEW
 	'urls_url_calculee' => 'Publiek URL « @type@ » :',
-	'urls_url_objet' => '<MODIF>URL « propres » enregistrée :',
+	'urls_url_objet' => '<MODIF>URL « propres » enregistrée :', # MODIF
 	'urls_valeur_vide' => '(Une valeur vide entraine la suppression de l\'URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Om de wijzigingen te bereiken :',

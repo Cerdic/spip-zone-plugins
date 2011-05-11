@@ -1054,6 +1054,7 @@ Podeu escollir aquí de posar en exponent algunes dreceres suplementàries, malg
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'estàndard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Imposar un mínim de 3 xifres',
 	'urls_avec_id' => 'Posar-la en sufix ',
 	'urls_avec_id2' => 'Posar-la en prefix',
@@ -1064,7 +1065,7 @@ Podeu escollir aquí de posar en exponent algunes dreceres suplementàries, malg
 	'urls_enregistrer' => 'Enregistrar aquest URL a la base',
 	'urls_id_sauf_rubriques' => 'Excloure els següents objectes (separats per « : »):',
 	'urls_minuscules' => 'Lletres minúscules',
-	'urls_nouvelle' => 'Editar el URL «propis»:',
+	'urls_nouvelle' => 'Editar el URL «propis»:', # MODIF
 	'urls_num_objet' => 'Número:',
 	'urls_purger' => 'Buidar-ho tot',
 	'urls_purger_tables' => 'Buidar les taules seleccionades',
@@ -1073,8 +1074,9 @@ Podeu escollir aquí de posar en exponent algunes dreceres suplementàries, malg
 	'urls_titre_objet' => 'Títol enregistrat:',
 	'urls_type_objet' => 'Objecte:',
 	'urls_url_calculee' => 'URL pública « @type@ » :',
-	'urls_url_objet' => 'URL «propis» enregistrat:',
-	'urls_valeur_vide' => '(Un valor buit provoca que es torni a calcular l\'URL)',
+	'urls_url_objet' => 'URL «propis» enregistrat:', # MODIF
+	'urls_valeur_vide' => '(Un valor buit provoca que es torni a calcular l\'URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Per accedir a les modificacions:',

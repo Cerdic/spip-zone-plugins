@@ -862,6 +862,7 @@ Choisis ici de mettre en exposant certains raccourcis supplémentaires, malgré 
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres',
 	'urls_avec_id' => 'Le placer en suffixe',
 	'urls_avec_id2' => 'Le placer en préfixe',
@@ -872,7 +873,7 @@ Choisis ici de mettre en exposant certains raccourcis supplémentaires, malgré 
 	'urls_enregistrer' => 'Enregistrer cette URL en base',
 	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (séparés par « : ») :',
 	'urls_minuscules' => 'Lettres minuscules',
-	'urls_nouvelle' => 'Éditer l\'URL « propres » :',
+	'urls_nouvelle' => 'Éditer l\'URL « propres » :', # MODIF
 	'urls_num_objet' => 'Numéro :',
 	'urls_purger' => 'Tout vider',
 	'urls_purger_tables' => 'Vider les tables sélectionnées',
@@ -881,8 +882,9 @@ Choisis ici de mettre en exposant certains raccourcis supplémentaires, malgré 
 	'urls_titre_objet' => 'Titre enregistré :',
 	'urls_type_objet' => 'Objet :',
 	'urls_url_calculee' => 'URL publique « @type@ » :',
-	'urls_url_objet' => 'URL « propres » enregistrée :',
-	'urls_valeur_vide' => '(Une valeur vide entraîne le recalcul de l\'URL)',
+	'urls_url_objet' => 'URL « propres » enregistrée :', # MODIF
+	'urls_valeur_vide' => '(Une valeur vide entraîne le recalcul de l\'URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Pour accéder aux modifications :',

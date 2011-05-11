@@ -831,6 +831,7 @@ Escueye equí escribir como esponentes dellos atayos suplementarios, magar que l
 	'url_propres2' => 'propies2@_CS_ASTER@',
 	'url_propres_qs' => 'propies_qs',
 	'url_standard' => 'estándar',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Imponer un mínimu de 3 cifres',
 	'urls_avec_id' => 'Ponela como sufixu',
 	'urls_avec_id2' => 'Ponela como prefixu',
@@ -841,7 +842,7 @@ Escueye equí escribir como esponentes dellos atayos suplementarios, magar que l
 	'urls_enregistrer' => 'Grabar esta URL na base',
 	'urls_id_sauf_rubriques' => 'Encaboxar les estayes', # MODIF
 	'urls_minuscules' => 'Letres minúscules',
-	'urls_nouvelle' => 'Editar la URL «propia»:',
+	'urls_nouvelle' => 'Editar la URL «propia»:', # MODIF
 	'urls_num_objet' => 'Númberu:',
 	'urls_purger' => 'Vacialo ensembre',
 	'urls_purger_tables' => 'Vaciar les tables seleicionáes',
@@ -850,8 +851,9 @@ Escueye equí escribir como esponentes dellos atayos suplementarios, magar que l
 	'urls_titre_objet' => 'Títulu grabáu:',
 	'urls_type_objet' => 'Oxetu:',
 	'urls_url_calculee' => 'URL pública « @type@ »:',
-	'urls_url_objet' => 'URL «propia» grabada:',
-	'urls_valeur_vide' => '(Un valor vacíu produz el recálculu de la URL)',
+	'urls_url_objet' => 'URL «propia» grabada:', # MODIF
+	'urls_valeur_vide' => '(Un valor vacíu produz el recálculu de la URL)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Pa acceder a les modificaciones:',

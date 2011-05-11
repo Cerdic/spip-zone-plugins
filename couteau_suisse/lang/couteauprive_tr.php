@@ -794,6 +794,7 @@ Böylece Fransızca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, 
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standart',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'Minimum 3 rakam iste',
 	'urls_avec_id' => 'Son ek olarak ekle',
 	'urls_avec_id2' => 'Ön ek olarak ekle',
@@ -804,7 +805,7 @@ Böylece Fransızca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, 
 	'urls_enregistrer' => 'Bu URL\'yi veritabanına ekle',
 	'urls_id_sauf_rubriques' => 'Başlıkları çıkart', # MODIF
 	'urls_minuscules' => 'Küçük harfler',
-	'urls_nouvelle' => 'URL « propre »\'u düzenle :',
+	'urls_nouvelle' => 'URL « propre »\'u düzenle :', # MODIF
 	'urls_num_objet' => 'Numara :',
 	'urls_purger' => 'Hepsini boşalt',
 	'urls_purger_tables' => 'Seçilen tabloları boşalt',
@@ -813,8 +814,9 @@ Böylece Fransızca\'da: <html>Dr, Pr, Mgr, St, Bx, m2, m3, Mn, Md, Sté, Éts, 
 	'urls_titre_objet' => 'Kayıtlı başlık  :',
 	'urls_type_objet' => 'Nesne :',
 	'urls_url_calculee' => 'Kamusal URL « @type@ » :',
-	'urls_url_objet' => 'Kaydedilmiş « kişisel » URLler :',
-	'urls_valeur_vide' => '(Boş bir değer URL\'nin yeniden hesaplanmasına yol açar)',
+	'urls_url_objet' => 'Kaydedilmiş « kişisel » URLler :', # MODIF
+	'urls_valeur_vide' => '(Boş bir değer URL\'nin yeniden hesaplanmasına yol açar)', # MODIF
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Değişikliklere erişmek için :',

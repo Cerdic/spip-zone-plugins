@@ -4,7 +4,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.',
 
 	// 2
 	'2pts_non' => ' : non',
@@ -861,6 +860,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
+	'url_verouillee' => 'URL verrouillée',
 	'urls_3_chiffres' => 'Imposer un minimum de 3 chiffres',
 	'urls_avec_id' => 'Le placer en suffixe',
 	'urls_avec_id2' => 'Le placer en préfixe',
@@ -882,7 +882,7 @@ Choisissez ici de mettre en exposant certains raccourcis supplémentaires, malgr
 	'urls_url_calculee' => 'URL publique « @type@ » :',
 	'urls_url_objet' => 'URL(s) « propres » enregistrée(s) :',
 	'urls_valeur_vide' => 'Note : Une valeur vide entraine la suppression des URL(s) « propres » enregistrée(s) puis un nouveau calcul de l\'URL principale sans verrouillage.',
-	'url_verouillee' => 'URL verrouillée',
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.',
 
 	// V
 	'validez_page' => 'Pour accéder aux modifications :',

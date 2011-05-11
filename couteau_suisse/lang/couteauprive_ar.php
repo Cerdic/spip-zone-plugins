@@ -809,6 +809,7 @@ _ Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale
 	'url_propres2' => 'propres2@_CS_ASTER@', # NEW
 	'url_propres_qs' => 'نظيفة_qs',
 	'url_standard' => 'قياسية',
+	'url_verouillee' => 'URL verrouillée', # NEW
 	'urls_3_chiffres' => 'فرض ثلاثة أرقام كحد أدنى',
 	'urls_avec_id' => 'وضعه في اللاحقة',
 	'urls_avec_id2' => 'وضعه في السابقة',
@@ -819,7 +820,7 @@ _ Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale
 	'urls_enregistrer' => 'Enregistrer cette URL en base', # NEW
 	'urls_id_sauf_rubriques' => 'Exclure les objets suivants (séparés par « : ») :', # NEW
 	'urls_minuscules' => 'Lettres minuscules', # NEW
-	'urls_nouvelle' => 'Éditer l\'URL « propres » :', # NEW
+	'urls_nouvelle' => 'Éditer l\'URL « propres » principale :', # NEW
 	'urls_num_objet' => 'Numéro :', # NEW
 	'urls_purger' => 'Tout vider', # NEW
 	'urls_purger_tables' => 'Vider les tables sélectionnées', # NEW
@@ -828,8 +829,9 @@ _ Les abréviations obtenues sont conformes à celles de l\'Imprimerie nationale
 	'urls_titre_objet' => 'Titre enregistré  :', # NEW
 	'urls_type_objet' => 'Objet :', # NEW
 	'urls_url_calculee' => 'URL publique « @type@ » :', # NEW
-	'urls_url_objet' => 'URL « propres » enregistrée :', # NEW
-	'urls_valeur_vide' => '(Une valeur vide entraine le recalcul de l\'URL)', # NEW
+	'urls_url_objet' => 'URL(s) « propres » enregistrée(s) :', # NEW
+	'urls_valeur_vide' => 'Note : Une valeur vide entraine la suppression des URL(s) « propres » enregistrée(s) puis un nouveau calcul de l\'URL principale sans verrouillage.', # NEW
+	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
 
 	// V
 	'validez_page' => 'Pour accéder aux modifications :', # NEW
