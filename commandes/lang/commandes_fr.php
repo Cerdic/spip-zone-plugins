@@ -5,6 +5,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'action_facture' => 'Facture',
 	'action_supprimer' => 'Supprimer',
+	'adresse_facturation' => 'Adresse de facturation',
+	'adresse_livraison' => 'Adresse de livraison',
 
 	// C
 	'commande_client' => 'Client',

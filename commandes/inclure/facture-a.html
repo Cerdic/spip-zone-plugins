@@ -16,15 +16,26 @@
 		<h4>#NOM</h4>
 	<//B_contact>
 	
-	<B_adresse>
-	<p class='adresse'>	
-	<BOUCLE_adresse(ADRESSES){id_auteur}>
-		[(#VOIE)<br />]
-		[(#CODE_POSTAL)][(#VILLE)]<br />
-		<BOUCLE_pays(PAYS){code}>#PAYS</BOUCLE_pays>
-	</BOUCLE_adresse>
-	</p>
-	</B_adresse>
+	[(#REM) On cherche en priorité des adresses pour la commande, et sinon pour l'auteur ]
+	<B_adresses_comande>
+	
+	<BOUCLE_adresses_comande(ADRESSES adresses_liens){id_commande}>
+		[(#TYPE|=={facturation}|oui)<h5><:commandes:adresse_facturation:></h5>]
+		[(#TYPE|=={livraison}|oui)<h5><:commandes:adresse_livraison:></h5>]
+		<p class='adresse'>	
+			[(#VOIE)<br />]
+			[(#CODE_POSTAL) ][ (#VILLE)]<br />
+			<BOUCLE_pays(PAYS){code=#PAYS}>#NOM</BOUCLE_pays>
+		</p>
+	</BOUCLE_adresses_comande>
+		<BOUCLE_adresses_client(ADRESSES){id_auteur}>
+			<p class='adresse'>	
+				[(#VOIE)<br />]
+				[(#CODE_POSTAL) ][ (#VILLE)]<br />
+				<BOUCLE_pays_client(PAYS){code=#PAYS}>#NOM</BOUCLE_pays_client>
+			</p>
+		</BOUCLE_adresses_client>
+	<//B_adresses_comande>
 
 	
 	<B_telephones>
