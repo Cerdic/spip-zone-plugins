@@ -109,7 +109,7 @@ function spiplistes_import (
 		$abonnements = spiplistes_abonnements_lister ();
 		
 		// import du fichier transmis
-		spiplistes_log('import: filename '.$realname);
+		spiplistes_log('IMPORT FILE: '.$realname);
 
 		$new_entries = file($filename);
 		
@@ -208,6 +208,14 @@ function spiplistes_import (
 					{
 						$stack_new_abonnes[] = intval($current_auteurs[$email]['id_auteur']);
 					}
+				}
+				
+				/**
+				 * Signale (en mode debug) si la
+				 * ligne est erronée.
+				 */
+				if (!$email) {
+					spiplistes_log ('BAD ENTRY @ LINE #'.$jj.': '.$nouvelle_entree);
 				}
 			}
 		} // end for
