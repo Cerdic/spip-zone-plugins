@@ -5,23 +5,15 @@
 	[en]LATP
 	</multi>
 </nom>
-<auteur>Amaury Adon avec beaucoup d'aide sur la zone (merci à tous !)</auteur>
+<auteur>Amaury Adon</auteur>
 <licence>GNU/GPL</licence>
-<version>1.2.2</version>
+<version>1.3.0</version>
 <etat>test</etat>
 <version_base>0.1</version_base>
 <description>
 	<multi>
 [fr]
-Ajout au plugin Agenda2  pour  gérer les séminaires et autres événements d'un laboratoire de recherche. Idéalement complété par le plugin Documents et Logos sur les événements de Guy Césaro.
-
-Ce plugin gère les événements en installant des champs supplémentaires dans la table evenements et des mots clés associés. Pour cette raison, elle n'est compatible qu'avec {{Spip 2}}. Vous devez de plus installer et activer les plugins suivants :
-
--* Agenda 2 
--* Champs extras 2
-
-Vous pouvez également installer le plugin Crayons avec lequel ce plugin est entièrement compatible et qui facilitera la vie de vos rédacteurs.
-
+Surcouche au plugin Agenda2  pour  gérer les séminaires et autres événements d'un laboratoire de recherche. 
 [en]
 </multi>
 </description>
