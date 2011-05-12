@@ -10,6 +10,7 @@
 	</multi></description>
 	<icon>images/commande.png</icon><!-- http://www.iconfinder.com/icondetails/49596/256/ -->
 	<categorie>divers</categorie>
+	<traduire gestionnaire="salvatore" module="commandes" reference="fr" />
 	
 	<prefix>commandes</prefix>
 	
