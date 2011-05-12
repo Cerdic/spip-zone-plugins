@@ -27,10 +27,6 @@
 		<inclure>base/produits_tables.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>rechercher_liste_des_jointures</nom>
-		<inclure>base/produits_tables.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/produits_tables.php</inclure>
 	</pipeline>
