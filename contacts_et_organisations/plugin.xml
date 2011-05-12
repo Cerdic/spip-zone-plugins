@@ -22,6 +22,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	
 	<lien>http://www.spip-contrib.net/Plugin-Contacts-Organisations</lien>
 	<icon>images/contacts-128.png</icon>
+	<traduire gestionnaire="salvatore" module="contacts" reference="fr" />
 	
 	<prefix>contacts</prefix>
 	

@@ -13,17 +13,15 @@ function action_definir_contact_dist($arg=null) {
 	}
 	$arg = explode('/', $arg);
 
-	// cas suppression d'une adresse et de toutes ses liaisons
+	// Si on défini un contact
 	if ($arg[0] == 'contact' and intval($arg[1])) {
-		action_definir_contact_post($arg[1]);
+		return action_definir_contact_post($arg[1]);
 	}
-
-	// cas de suppression d'un lien donne
-	// (et de l'adresse avec s'il n'existe plus de liaison ensuite)
+	// Si on défini une organisation
 	elseif ($arg[0] == 'organisation' and intval($arg[1])) {
-		action_definir_organisation_post($arg[1]);
+		return action_definir_organisation_post($arg[1]);
 	}	
-
+	// Sinon ça veut rien dire
 	else {
 		spip_log("action_definir_contact_dist $arg pas compris");
 	}
@@ -31,12 +29,12 @@ function action_definir_contact_dist($arg=null) {
 
 function action_definir_contact_post($id_auteur) {
 	$id_auteur = intval($id_auteur);
-	insert_contact($id_auteur);
+	return insert_contact($id_auteur);
 }
 
 function action_definir_organisation_post($id_auteur) {
 	$id_auteur = intval($id_auteur);
-	insert_organisation($id_auteur);
+	return insert_organisation($id_auteur);
 }
 
 
