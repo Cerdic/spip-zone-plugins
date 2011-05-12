@@ -4,7 +4,7 @@
 	[Matthieu Marcillaud->http://magraine.net/], [Les Développements Durables->http://www.ldd.fr]
 	</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<icon>img/paypal_logo.gif</icon>
 	<options>paypal_options.php</options>
 	<description>
