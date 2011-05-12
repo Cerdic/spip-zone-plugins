@@ -14,7 +14,7 @@
 	</tr>
 	</thead>
 	<tbody>
-<BOUCLE_liste(COMMANDES_DETAILS){id_commande}>
+<BOUCLE_liste(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
 	<tr>
 		<td class="descriptif">[(#QUANTITE|>{1}|oui)<strong>#QUANTITE &times; </strong>][(#DESCRIPTIF*|typo|supprimer_numero)]</td>
 		<td class="prix_ht">[(#PRIX_HT)]</td>
