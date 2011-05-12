@@ -41,7 +41,7 @@ function creer_commande_encours(){
 	$fonction_reference = charger_fonction('commandes_reference', 'inc/');
 	
 	$champs = array(
-		'reference' => $fonction_reference(),
+		'reference' => $fonction_reference($id_auteur),
 		'id_auteur' => $id_auteur,
 		'date' => date('Y-m-d H:i:s'),
 		'statut' => 'encours'
