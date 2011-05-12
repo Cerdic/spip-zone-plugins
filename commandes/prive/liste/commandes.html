@@ -33,8 +33,8 @@
 			<td class='reference'>#REFERENCE</td>
 			<td class='etat'>#STATUT</td>
 			<td class='qui'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#INFO_NOM{auteur, #ID_AUTEUR}</a></td>
-			<td class='date'>[(#DATE|affdate_jourcourt)]</td>
-			<td class='date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)] ]</td>
+			<td class='date'>[(#DATE|affdate_jourcourt)][ (#DATE|affdate{H:i})]</td>
+			<td class='date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)][ (#DATE|affdate{H:i})] ]</td>
 			<td class='descriptif'>
 			<B_detail_commande>
 				<ul>
