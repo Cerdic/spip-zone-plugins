@@ -15,9 +15,9 @@
 			<th class='id'>[(#TRI{id_panier,<:info_numero_abbreviation:>,ajax})]</th>
 			<th class='reference'>[(#TRI{reference,<:commandes:reference:>,ajax})]</th>
 			<th class='etat'>[(#TRI{statut,<:commandes:etat:>,ajax})]</th>
-			<th class='qui'><:commandes:qui:></th>
-			<th class='date'>[(#TRI{date,<:commandes:date_commande:>,ajax})]</th>
-			<th class='date_paiement'>[(#TRI{date_paiement,<:commandes:date_paiement:>,ajax})]</th>
+			<th class='qui'><:commandes:commande_client:></th>
+			<th class='date'>[(#TRI{date,<:commandes:commande_date:>,ajax})]</th>
+			<th class='date_paiement'>[(#TRI{date_paiement,<:commandes:commande_date_paiement:>,ajax})]</th>
 			<th class='descriptif'><:commandes:contenu:></th>
 			<th class='montant'>[(#TRI{montant,<:commandes:montant:>,ajax})]</th>
 			<th class='action'></th>
@@ -31,7 +31,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='id'>#ID_COMMANDE</td>
 			<td class='reference'>#REFERENCE</td>
-			<td class='etat'>#STATUT</td>
+			<td class='etat'>[(#STATUT|commandes_lister_statuts)]</td>
 			<td class='qui'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#INFO_NOM{auteur, #ID_AUTEUR}</a></td>
 			<td class='date'>[(#DATE|affdate_jourcourt)][ (#DATE|affdate{H:i})]</td>
 			<td class='date date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)][ (#DATE|affdate{H:i})] ]</td>

@@ -19,8 +19,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contenu' => 'Contenu',
 
 	// D
-	'date_commande' => 'Date de commande',
-	'date_paiement' => 'Date de paiement',
 	'designation' => 'Désignation',
 	
 	// E
@@ -41,6 +39,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reference' => 'Référence',
+	
+	// S
+	'statut_attente' => 'En attente de validation',
+	'statut_encours' => 'En cours',
+	'statut_envoye' => 'Envoyée',
+	'statut_partiel' => 'Partiellement payée',
+	'statut_paye' => 'Payée',
+	'statut_retour' => 'Retournée',
+	'statut_retour_partiel' => 'Retour partiel',
 );
 
 ?>
