@@ -81,4 +81,15 @@ function oembed_post_edition($flux) {
 	return $flux;
 }
 
+function oembed_pre_propre($texte) {
+	include_spip('inc/oembed');
+	foreach (extraire_balises($texte, 'a') as $lien) {
+		if ($url = extraire_attribut($lien, 'href') AND oembed_verifier_provider($url)) {
+			$fond = recuperer_fond('modeles/oembed',array('url'=>$url));
+			$texte = str_replace($lien, $fond, $texte);
+		}
+	}
+	return $texte;
+}
+
 ?>

@@ -1,0 +1,4 @@
+[(#SET{data,#ENV**{url}|oembed_recuperer_data{#ENV{largeur,#CONFIG{oembed/maxwidth,480}},#ENV{hauteur,#CONFIG{oembed/maxheight,295}}}})
+][(#GET{data}|oui)
+	[(#INCLURE{fond=modeles/oembed_[(#GET{data}|table_valeur{type})],data=#GET{data},url})]
+]

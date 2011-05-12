@@ -30,6 +30,10 @@
 		<inclure>oembed_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>pre_propre</nom>
+		<inclure>oembed_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>oembed_pipelines.php</inclure>
 	</pipeline>
