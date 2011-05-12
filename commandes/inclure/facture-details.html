@@ -29,7 +29,7 @@
 	</tr>		
 	<tr>
 		<td class="def"><:prix:label_taxes:></td>
-		<td class="prix">[(#PRIX|moins{#PRIX_HT})]</td>
+		<td class="prix">[(#PRIX*|moins{#PRIX_HT*}|prix_formater)]</td>
 	</tr>		
 	<tr class='total'>
 		<td class="def"><:prix:label_total_ttc:></td>

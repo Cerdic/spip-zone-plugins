@@ -34,12 +34,12 @@
 			<td class='etat'>#STATUT</td>
 			<td class='qui'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#INFO_NOM{auteur, #ID_AUTEUR}</a></td>
 			<td class='date'>[(#DATE|affdate_jourcourt)][ (#DATE|affdate{H:i})]</td>
-			<td class='date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)][ (#DATE|affdate{H:i})] ]</td>
+			<td class='date date_paiement'>[(#DATE_PAIEMENT|intval|oui) [(#DATE_PAIEMENT|affdate_jourcourt)][ (#DATE|affdate{H:i})] ]</td>
 			<td class='descriptif'>
 			<B_detail_commande>
 				<ul>
 				<BOUCLE_detail_commande(COMMANDES_DETAILS){id_commande}{par id_commandes_detail}>
-					<li>[(#DESCRIPTIF*|typo) ][(#PRIX)]</li>
+					<li>[(#DESCRIPTIF*|typo|supprimer_numero) ][(#PRIX)]</li>
 				</BOUCLE_detail_commande>
 				</ul>
 			</B_detail_commande>
