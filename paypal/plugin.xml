@@ -14,4 +14,5 @@
 	<etat>dev</etat>
 	<prefix>paypal</prefix>
 	<categorie>outil</categorie>
+	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
 </plugin>
