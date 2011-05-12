@@ -12,33 +12,39 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_ajouter_ressources() {
+function action_editer_asso_ressources() {
 		
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_achat = $securiser_action();
+	$id_ressource=$securiser_action();
 
-	$pu = _request('pu');
 	$code= _request('code');
-	$statut = _request('statut');
-	$intitule = _request('intitule');
 	$date = _request('date_acquisition');
+	$intitule = _request('intitule');
+	$pu = association_recupere_montant(_request('pu'));
+	$statut = _request('statut');
 	$commentaire = _request('commentaire');
 
-	ressource_insert($id_achat, $code, $intitule, $pu, $date, $statut, $commentaire);
-}
+	include_spip('base/association');
 
+	if ($id_ressource) {/* c'est une modification */
+		sql_updateq('spip_asso_ressources', array(
+			'date_acquisition' => $date,
+			'code' => $code,
+			'intitule' => $intitule,
+			'pu' => $pu,
+			'statut' => $statut,
+			'commentaire' => $commentaire),
+		    "id_ressource=$id_ressource");
+	} else { /* c'est un ajout */
+		$id_ressource = sql_insertq('spip_asso_ressources', array(
+		    'date_acquisition' => $date,
+		    'code' => $code,
+		    'statut' => $statut,
+		    'intitule' => $intitule,
+		    'pu' => $pu,
+		    'commentaire' => $commentaire));
+	}
 
-function ressource_insert($id_achat, $code, $intitule, $pu, $date, $statut='', $commentaire='')
-{
-	include_spip('base/association');		
-	sql_insertq('spip_asso_ressources', array(
-					    'date_acquisition' => $date,
-					    'id_achat' => $id_achat,
-					    'code' => $code,
-					    'statut' => $statut,
-					    'intitule' => $intitule,
-					    'pu' => $pu,
-					    'commentaire' => $commentaire));
-
+	return array($id_ressource, '');
 }
 ?>

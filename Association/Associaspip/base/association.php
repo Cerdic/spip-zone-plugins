@@ -157,7 +157,6 @@ $spip_asso_ressources = array(
 	"code" 				=> "text NOT NULL",
 	"intitule" 			=> "text NOT NULL",
 	"date_acquisition"	=> "date NOT NULL default '0000-00-00'",
-	"id_achat" 			=> "tinyint(4) NOT NULL default '0'",
 	"pu" 				=> "float NOT NULL default '0'",
 	"statut"			=> "text NOT NULL",
 	"commentaire" 		=> "text NOT NULL",

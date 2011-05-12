@@ -274,4 +274,12 @@ function association_maj_47501() /* revert de la 47144 pour ceux qui l'aurait ef
 	}
 }
 $GLOBALS['association_maj'][47501] = array(array('association_maj_47501'));
+
+function association_maj_47731() /* eliminer le champ id_achat de la table ressources car il est inutile et non utilise, rien a sauvegarder */
+{
+	global $association_tables_principales;
+	sql_alter("TABLE spip_asso_ressources DROP id_achat");
+}
+
+$GLOBALS['association_maj'][47731] = array(array('association_maj_47731'));
 ?>
