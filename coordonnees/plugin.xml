@@ -15,6 +15,7 @@
 	
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>GNU/GPL</licence>
+	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 	
 	<prefix>coordonnees</prefix>
 	<fonctions>coordonnees_fonctions.php</fonctions>
