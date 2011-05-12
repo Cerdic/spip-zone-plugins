@@ -7,13 +7,17 @@
 Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-][(#SET{h,114px})].cDiapo table {
+][(#SET{h,[(#CHEMIN{composants/diapo/images/pellicule.png}|hauteur)px]})]
+.cDiapo table {
   border:0;
   cell-spacing:0;
   cell-padding:0;
 }
+.cDiapo td {
+  padding: 0;
+}
 .cDiapo td.diapo {
-  width: 105px;
+  width: [(#CHEMIN{composants/diapo/images/pellicule.png}|largeur)px];
   height: #GET{h};
   overflow:hidden;
   text-align: center;
@@ -21,22 +25,24 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   background: url(#CHEMIN{composants/diapo/images/pellicule.png}) top left repeat-x;
 
 }
-.cDiapo td.diapo a:link {
+.cDiapo td.diapo a.diapo:link {
   overflow:hidden;
   display: inline-block;
-  height: 75px;
-  width: 100px;
+  height: [(#VAR{acsDiapoHeight,75px})];
+  width: [(#VAR{acsDiapoHeight,100px})];
   outline: none;[
-  color: (#VAR{acsDiapoLink});]
+  color: (#VAR{acsDiapoLink});][
+  background-color: (#VAR{acsDiapoFond});][
+  border: #VAR{acsDiapoBord/Width}[ (#VAR{acsDiapoBord/Style})](#VAR{acsDiapoBord/Color});]
 }
-[.cDiapo td.diapo a:hover {
+[.cDiapo td.diapo a.diapo:hover {
   color: (#VAR{acsDiapoLinkHover});
   outline: none;
 }]
 .cDiapo td.diapo img { 
   border: 0;
-  max-height: 75px;
-  max-width: 100px;
+  max-height: [(#VAR{acsDiapoHeight,75px})];
+  max-width: [(#VAR{acsDiapoHeight,100px})];
 }
 .cDiapo td.diapog {
   width: 25px;

@@ -1,8 +1,10 @@
-[(#REM)
+[(#CACHE{0})][(#REM)
 
-Listes d'articles (sommaire, resume, plan, rubrique, recherche)
+Listes d'articles (pour sommaire, resume, plan, rubrique, recherche)
 
-]<div class="#PINCEAU{articles}">
+On transmet id_article dans la classe du pinceau.
+
+]<div class="[id_article-(#ID_ARTICLE) ]#PINCEAU{articles}">
 [(#ID_ARTICLE|?{' '})<INCLURE{fond=composants/articles/article}{env}{self}{id_article}>#SET{ok,oui}]
 [(#ID_MOT|?{' '})<INCLURE{fond=composants/articles/boucle-articles_mot}{env}{self}>#SET{ok,oui}]
 [(#ENV{page}|=={sommaire}|?{' '})<INCLURE{fond=composants/articles/boucle-une}{env}{self}{debut_articles}>#SET{ok,oui}][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ]
@@ -10,6 +12,6 @@ Listes d'articles (sommaire, resume, plan, rubrique, recherche)
 [(#ENV{page}|=={recherche}|?{' '})<INCLURE{fond=composants/articles/boucle-articles_recherche}{env}{self}>#SET{ok,oui}]
 [(#ENV{page}|=={plan}|?{' '})<INCLURE{fond=composants/articles/boucle-plan}{env}{self}>#SET{ok,oui}]
 [(#ENV{page}|=={forums}|?{' '})<INCLURE{fond=composants/articles/boucle-plan}{env}{self}{mode=forums}>#SET{ok,oui}]
-[(#REM) Affiche l'article 1 lorsque l'on modifie le composant avec son pinceau
-][(#GET{ok}|!={oui}|?{' '})<INCLURE{fond=composants/articles/article}{env}{self}{id_article=1}>]
+[(#REM) PROVISOIRE : affiche ??? si aucune boucle ne convient - TODO : renvoyer vers 404 ?
+][(#GET{ok}|!={oui}|?{' '})???]
 </div>

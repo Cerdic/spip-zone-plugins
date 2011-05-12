@@ -4,7 +4,7 @@ Rubrique #ID_RUBRIQUE
 
 Affiche l'article unique si la rubrique n'en contient qu'un seul
 
-][(#SET{id_rubrique,#ENV{id_rubrique,1}})]<div id="rubrique" class="#PINCEAU{rubrique}">
-[(#VAR{acsRubriqueArticle}|!={non}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rub_ou_art}{lang}{self}{env}{id_rubrique=#GET{id_rubrique}}>]
-[(#VAR{acsRubriqueArticle}|=={non}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rubrique}{lang}{self}{env}{id_rubrique=#GET{id_rubrique}}>]
+]<div id="rubrique" class="[id_rubrique-(#ID_RUBRIQUE) ]#PINCEAU{rubrique}">
+[(#VAR{acsRubriqueArticle}|!={non}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rub_ou_art}{lang}{self}{env}{id_rubrique}>]
+[(#VAR{acsRubriqueArticle}|=={non}|?{' ',''})<INCLURE{fond=composants/rubrique/inc-rubrique}{lang}{self}{env}{id_rubrique}>]
 </div>

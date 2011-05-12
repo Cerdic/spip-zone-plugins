@@ -343,7 +343,7 @@ class ctlKeyGroup extends Controle {
     $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr>';
     if ($this->param['label'] != 'non')
       $r .= '<td><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
-    $r .= '<td><select id="select_'.$this->var.'_'.$this->wid.'" name="'.$this->var.'_'.$this->wid.'" class="forml" title="'.$this->var.' = '.$vid_group.'">';
+    $r .= '<td><select id="select_'.$this->var.'_'.$this->wid.'" name="'.$this->var.'_'.$this->wid.'" class="forml" title="'.$this->var.($vid_group ? ' = '.$vid_group : '').'">';
     $r .= '<option value=""'.($vid_group =='' ? ' selected' : '').'></option>'; 
     $groups_query = sql_select("*, ".sql_multi ("titre", "$spip_lang"), "spip_groupes_mots", "", "", "multi");  
     while ($row_groupes = sql_fetch($groups_query)) {

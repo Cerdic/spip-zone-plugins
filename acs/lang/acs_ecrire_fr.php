@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <br /><br />
 <b>Source</b> affiche le code source coloris&eacute; de la page.
 <br /><br />
-Pour personnaliser votre site, configurez ses <a href="?exec=acs&onglet=composants">composants</a>.
+Cette page personnaliser votre site, configurez ses <a href="?exec=acs&onglet=composants">composants</a>.
 ',
 
   'page' => 'Page',

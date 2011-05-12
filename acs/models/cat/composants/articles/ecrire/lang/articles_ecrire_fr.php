@@ -5,18 +5,31 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Articles',
 'description' => 'Articles et listes d\'articles, pour rubriques, une, r&eacute;sum&eacute;, plan ...',
-'info' => 'L\'apprence et le comportement de ce composant dépendent de la page où il est utilisé.
-<br /><br />
-Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans le plan du site:
- elles d&eacute;finissent l\'&eacute;claircissement ou l\'assombrissement du fond selon la profondeur.
- <br /><br />
- La fonction contrôle d\'accès limite l\'accès aux articles avec mot-clé 
+'info' => 'Apparence des articles et des listes d\'articles d\'une rubrique, de la Une, du r&eacute;sum&eacute, du plan, associés à un mot-clé,...',
+'help' => 'L\'apparence et le comportement de ce composant dépendent de la page où il est utilisé.
+<br />
+<br />
+<u>Article</u> :
+<br />
+Apparence d\'un article.
+<br />
+<br />
+La fonction contrôle d\'accès limite l\'accès aux articles avec mot-clé 
 _ide, _aut, _adm ou _acs aux visiteurs enregistrés, aux rédacteurs, aux administrateurs, ou aux administrateurs ACS.
 <br /><br />
-Le style de page article peut dépendre d\'un mot-clé : dans ce cas, la page article contiendra l\'instance de composant Cadre de numéro égal au champ description du mot clé choisi pour cet article dans le groupe des mots-clefs de styles de pages article, ou à défaut le cadre n° 2100 si aucun mot-clé n\'est choisi dans ce groupe.
+Le style de page article peut dépendre d\'un mot-clé: 
+dans ce cas, la page article contiendra l\'instance de composant Cadre de numéro égal au champ description du mot clé choisi pour cet article dans le groupe des mots-clefs de styles de pages article, ou à défaut le cadre n° 2100 si aucun mot-clé n\'est choisi dans ce groupe.
 <br />
 <br />
-Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site public, il suffit que son titre commence par un "_".',
+Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site public, il suffit que son titre commence par un "_".
+<br /><br />
+<u>Articles</u> :<br />
+Apparence des listes d\'articles (d\'une rubrique, associés à un mot-clé, ...).
+<br /><br />
+<u>Plan</u> :<br />
+Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans le plan du site:
+ elles d&eacute;finissent l\'&eacute;claircissement ou l\'assombrissement du fond selon la profondeur.
+',
 
 'StylePage' => 'Style de page',
 

@@ -48,7 +48,7 @@ function composant_infos($c, $nic) {
         		$pnom = $GLOBALS['meta']['acs'.ucfirst($pc).$pnic.'Nom'];
         	else
         	  $pnom = ucfirst($pc).(isset($pnic) ? $pnic : '');
-          $r .= '&nbsp;&nbsp;&nbsp;<a class="nompage" href="?exec=acs&onglet=composants&composant='.$pc.($pnic ? '&nic='.$pnic : '').'" title="'._T('acs:variable').' '.$var.'">'.$pnom.'</a><br />';
+          $r .= '&nbsp;&nbsp;&nbsp;<a class="nompage" href="?exec=acs&onglet=composants&composant='.$pc.($pnic ? '&nic='.$pnic : '').'" title="acs'.$var.'">'.$pnom.'</a><br />';
         }
       }
     }
@@ -56,14 +56,14 @@ function composant_infos($c, $nic) {
 
   // On cherche toutes les pages qui contiennent ce composant
   $l = '<hr />';
-  $l = liste_pages_composant(cGetPages($c, $nic), _T('acs:page'), _T('acs:pages'));
-  $l .= liste_pages_composant(cGetPages($c, $nic, 'modeles'), _T('acs:modele'), _T('acs:modeles'));
-  $l .= liste_pages_composant(cGetPages($c, $nic, 'formulaires'), _T('acs:formulaire'), _T('acs:formulaires'));
+  $l = liste_pages_composant($c, $nic,'', _T('acs:page'), _T('acs:pages'));
+  $l .= liste_pages_composant($c, $nic, 'modeles', _T('acs:modele'), _T('acs:modeles'));
+  $l .= liste_pages_composant($c, $nic, 'formulaires', _T('acs:formulaire'), _T('acs:formulaires'));
   foreach (composants_liste() as $class=>$composant) {
-  	$l .= liste_pages_composant(cGetPages($c, $nic, 'composants/'.$class), _T('acs:composant'), _T('acs:composants'));
+  	$l .= liste_pages_composant($c, $nic, 'composants/'.$class, _T('acs:composant'), _T('acs:composants'));
   }
   if ($l)
-  	$r.= $l;
+  	$r.= '<br />'.$l;
 
 	$traductions = cGetTraductions($c,'composants/'.$c.'/lang',';.*[.]php$;iS');
   $r .= '<hr /><table width="100%"><tr><td colspan="2" class="onlinehelp centre">'.ucfirst(_T('spip:afficher_trad')).'</td></tr>';
@@ -81,7 +81,8 @@ function liens_traductions($c, $langs, $cadre='') {
   return $r;
 }
 
-function liste_pages_composant($p, $singulier, $pluriel) {
+function liste_pages_composant($c, $nic, $dir, $singulier, $pluriel) {
+  $p = cGetPages($c, $nic, $dir);
   if (count($p['composant']) > 0) {
     $r = '<span class="onlinehelp">'.(count($p['composant']) > 1 ? $pluriel : $singulier).'</span> ';  
     foreach($p['composant'] as $page) {
@@ -90,11 +91,12 @@ function liste_pages_composant($p, $singulier, $pluriel) {
     $r .= '<br />';
   }
   if (count($p['variables']) > 0) {
+    $len = strlen('acs'.$c.$nic);
     $r .= '<i>';
     foreach($p['variables'] as $page=>$var) {
       $r .= show_override($p['chemin'], $page).' (';
       foreach($var as $v) {
-        $r .= '<a title="'.htmlentities($GLOBALS['meta'][$v]).'">'.$v.'</a> ';
+        $r .= '<a title="'.$v.($GLOBALS['meta'][$v] ? ' = '.htmlentities($GLOBALS['meta'][$v]) : '').'">'.substr($v,$len).'</a> ';
       }
       $r = rtrim($r);
       $r .= ')<br />';
@@ -111,7 +113,7 @@ function show_override($chemin, $page) {
     $r = '<u>'.$page.'</u>';
   else
     $r = $page;
-  $r = '<a class="nompage" href="?exec=acs&onglet=pages&pg='.$chemin.$page.'">'.$r.'</a>';
+  $r = '&nbsp;&nbsp;&nbsp;<a class="nompage" href="?exec=acs&onglet=pages&pg='.$chemin.$page.'" title="'.$chemin.$page.'">'.$r.'</a>';
   return $r;
 }
 

@@ -1,8 +1,41 @@
-[(#CACHE{7200})][(#REM)
+[(#CACHE{86400})][(#REM)
 
-Affiche les documents d'un article (dans une page article), d'une rubrique (dans
-une page rubrique), ou du site (dans toute autre page), sous forme de diapos.
-
+Affiche les documents d'un article, d'une rubrique, ou du site, sous forme de diapos.
 Utilise le plugin Mediabox.
 
-][(#SET{types_diapos,flv|mp4|ogv|webm|swf|jpg|png|gif})][(#SET{nom_diaporama,diaporama[_art(#ID_ARTICLE)[_rub(#ID_RUBRIQUE)]]})]<B_doc><div class="cDiapo" align="center"><table><tr><td class="diapog">[(#PAGINATION{videoprecedent})]</td><BOUCLE_doc(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}{pagination #VAR{acsDiapoNb,3}}><td class="diapo"><a[(#PLUGIN{mediabox}|?{" "}) class="diapo nsize" rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] href="#URL_DOCUMENT" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"><img src="[(#LOGO_DOCUMENT|image_reduire{100,75}|extraire_attribut{src})]" alt="[(#TITRE)]" />[<br />(#TITRE|couper{20})]</a></td></BOUCLE_doc><td class="diapod">[(#PAGINATION{videosuivant})]</td></tr></table></div><div class="spacer"></div></B_doc><BOUCLE_doc2(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}><a style="display:none" [(#PLUGIN{mediabox}|?{" "}) class="diapo" rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] href="#URL_DOCUMENT" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"></a></BOUCLE_doc2>
+Paramètres :
+c : chemin du composant. Défini si le composant Diapo est appellé depuis le modèle composant, et nul sinon. Utilisé dans le nom du diaporama.
+id_article : documents de l'article.
+id_rubrique : documents de la rubrique.
+recherche : documents résultats d'une recherche.
+
+][(#SET{types_diapos,flv|mp4|ogv|webm|swf|jpg|png|gif})][(#SET{nom_diaporama,dp[(#ENV{c}|?{c})][_art(#ID_ARTICLE)[_rub(#ID_RUBRIQUE)]]})]<B_doc>
+<div class="cDiapo" align="center">
+  <table>
+    <tr>
+    <td class="diapog">[(#PAGINATION{videoprecedent})]</td>
+<BOUCLE_doc(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}{pagination #VAR{acsDiapoNb,3}}><td class="diapo"><a class="diapo nsize"[(#PLUGIN{mediabox}|?{" "}) rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] type="#MIME_TYPE" href="#URL_DOCUMENT" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"><img src="[(#LOGO_DOCUMENT|image_reduire{100,75}|extraire_attribut{src})]" alt="[(#TITRE)]" />[<br />(#TITRE|couper{20})]</a></td>[(#COMPTEUR_BOUCLE|modulo{#VAR{acsDiapoNbCol}}|=={0}|?{" "})[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|?{" "})<td class="diapod"></td></tr><tr><td class="diapog"></td>]]</BOUCLE_doc>
+    <td class="diapod">[(#PAGINATION{videosuivant})]</td>
+    </tr>
+  </table>
+</div><BOUCLE_doc2(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}><a style="display:none" [(#PLUGIN{mediabox}|?{" "}) class="diapo" rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] href="#URL_DOCUMENT" type="#MIME_TYPE" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"></a></BOUCLE_doc2></B_doc>[(#REM)
+
+  Liste des autres documents joints (d'après squelettes-dist/inc-documents.html)
+  Indispensable car sinon ces documents ne sont jamais listés.
+  
+]<B_documents_joints>
+<div class="spacer"></div>
+  <div class="bsize" id="documents_joints">
+  <h2><:titre_documents_joints:></h2>
+  <ul>
+    <BOUCLE_documents_joints(DOCUMENTS){id_article ?}{id_rubrique ?}{recherche ?}{vu=non}{doublons diapos}{par num titre, date}>[
+    <li>
+      <strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+      <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+      #DESCRIPTIF
+    ]</li>
+    </BOUCLE_documents_joints>
+  </ul>
+  </div>
+</B_documents_joints>
+<div class="spacer"></div>

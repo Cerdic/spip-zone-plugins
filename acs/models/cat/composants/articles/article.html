@@ -9,4 +9,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Pas de mise en cache ici pour gerer le controle d'acces 
 
-][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/inc-article_acces}{id_article}{self}{env}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>][(#VAR{acsArticlesLock}|!={oui}|?{' '})<INCLUDE{fond=composants/articles/inc-article}{id_article}{self}{env}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]
+][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/test-acces-article}{id_article}{self}{env}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>][(#VAR{acsArticlesLock}|!={oui}|?{' '})<INCLUDE{fond=composants/articles/inc-article}{id_article}{self}{env}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]

@@ -99,6 +99,7 @@ function balise_VAR($p) {
 		else
 			$p->code = '('.$p->code.')';
 	}
+	$p->interdire_scripts = false;
 	return $p;
 }
 
@@ -179,7 +180,7 @@ function composants_head($type) {
   }
   return $libs.$r;
 }
-/* inutilisee pour l'instant : à elargir pour usage avec les groupes acs voire pour droits sur le public*/
+/* usage avec les groupes acs ou pour droits sur le site public */
 function balise_ACS_AUTORISE($p) {
   $rs = interprete_argument_balise(1,$p);
   $p->code = 'acs_autorise('.$rs.')';

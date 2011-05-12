@@ -15,7 +15,32 @@
   <variable>
     <nom>Nb</nom>
     <type>text</type>
-    <valeur>5</valeur>
+    <valeur>3</valeur>
+  </variable>
+  <variable>
+    <nom>NbCol</nom>
+    <type>text</type>
+    <valeur>8</valeur>
+  </variable>
+
+
+  <variable>
+    <nom>Width</nom>
+    <type>text</type>
+    <valeur>100px</valeur>
+  </variable>
+  <variable>
+    <nom>Height</nom>
+    <type>text</type>
+    <valeur>75px</valeur>
+  </variable>
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
   </variable>
 
   <variable>

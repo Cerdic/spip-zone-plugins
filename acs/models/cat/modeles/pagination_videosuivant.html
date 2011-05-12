@@ -5,5 +5,5 @@
 #SET{i,#ENV{page_courante}|plus{1}}
 [(#GET{i}|<={#ENV{nombre_pages}}|?{' ',''})[
 	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
-	][(#INCLURE{fond=composants/diapo/pagination-d}{num=#GET{i}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}})]
+	][(#INCLURE{fond=composants/diapo/pagination-d}{num=#GET{i}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}}{nombre_pages=#ENV{nombre_pages}})]
 ]

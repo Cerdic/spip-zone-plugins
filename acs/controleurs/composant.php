@@ -1,11 +1,13 @@
 <?php
 /**
  * Réaffiche le composant à crayonner, avec son éditeur
+ * Le crayon peut passer un id d'article, de rubrique, de mot-clé, ou de groupe 
+ * de mot-clefs sous la forme: id_article-45 dans la classe du pinceau d'un 
+ * composant dépendant de l'article ou de la rubrique.
  *
  * @param array $regs
  * @return array (html, status)
  */
-
 function controleurs_composant_dist($regs) {
   global $spip_lang;
   
@@ -30,9 +32,20 @@ function controleurs_composant_dist($regs) {
     'nic' => $id,
     'lang' => $GLOBALS['spip_lang']
   );
-  $css_class = _request('class');
+  
+  $css_class = _request('class'); /* classe du crayon */
+  $matches = array();
+  if (preg_match('/\bid_article-(\d)+\b/', $css_class, $matches) > 0)
+    $contexte['id_article'] = $matches[1];
+  if (preg_match('/\bid_rubrique-(\d)+\b/', $css_class, $matches) > 0)
+    $contexte['id_rubrique'] = $matches[1];
+  if (preg_match('/\bid_mot-(\d)+\b/', $css_class, $matches) > 0)
+    $contexte['id_mot'] = $matches[1];
+  if (preg_match('/\bid_groupe-(\d)+\b/', $css_class, $matches) > 0)
+    $contexte['id_groupe'] = $matches[1];
+    
   $html = '<div style="width:'.$crayon->w.'px; height:'.$crayon->h.'px">'.
-    '<div id="'."composant-$class-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.98; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'"'.($css_class ? ' class="'.$css_class.'"' : '').'>'.
+    '<div id="'."composant-$class-$id".'" style="position: absolute; border: 2px outset #fddf00; top: -1px;left: -1px;opacity: 0.98; width:'.$crayon->w.'px; height:'.$crayon->h.'px; font-size:'._request('em').'">'.
       recuperer_fond('vues/composant', $contexte).
     '</div>'.
     '<div style="position: relative; opacity: 1;">'.

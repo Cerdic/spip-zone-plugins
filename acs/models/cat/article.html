@@ -12,4 +12,4 @@ Click <u><a href="?exec=acs&onglet=pages&pg=composants/articles/page-article">he
 
 Pas de mise en cache ici pour gerer le controle d'acces 
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/test-acces}{{env}id_article}{self}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>][(#VAR{acsArticlesLock}|!={oui}|?{' '})<INCLUDE{fond=composants/articles/test}{id_article}{self}{env}{ouvrir}{debut_doc}{debut_breves}{debut_forums}>]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/test-acces-page}{env}{self}>][(#VAR{acsArticlesLock}|!={oui}|?{' '})<INCLUDE{fond=composants/articles/test}{id_article}{env}{self}>]

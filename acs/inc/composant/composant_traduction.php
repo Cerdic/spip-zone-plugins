@@ -25,10 +25,10 @@ function affiche_composant_traduction($c, $l, $cadre) {
   $r = '<div class="acs_box">';
   $r .= '<img src="'._DIR_PLUGIN_ACS.'lang/flags/'.$l.'.gif" alt="'.$l.'" align="right" style="margin: 5px;" title="'.traduire_nom_langue($l).'" />';
   if ($cadre != 'ecrire')
-  	$r .= "<div class='arial2 onlinehelp' style='padding-left: 2px'>"._T('acs:si_composant_actif').' : '._T('cadre_texte_explicatif')."</div>";
+  	$r .= "<div class='arial2 onlinehelp' style='padding-left: 2px'>"._T('acs:si_composant_actif').' : '._T('module_texte_explicatif')."</div>";
   $r .= "\n<table cellpadding='0' cellspacing='3px' border='0' style='width: 100%; border:0;'>";
   $r .= "\n<tr style='background: ".$GLOBALS['couleur_foncee']."'>".
-  	"<th class='verdana1'>"._T('cadre_raccourci')."</th>\n<th class='verdana1'>"._T('cadre_texte_affiche')." ($nb)</th>\n".
+  	"<th class='verdana1'>"._T('module_raccourci')."</th>\n<th class='verdana1'>"._T('module_texte_affiche')." ($nb)</th>\n".
   	"</tr>\n";
 
   $aff_nom_cadre = 'acs:'.$c.'_';
@@ -62,6 +62,7 @@ function lecture_composant_traduction($c, $l, $cadre) {
   include($f);
   $tableau = $GLOBALS['i18n_acs_'.$c.$cadre.'_'.$l];
   $GLOBALS['idx_lang'] = $idx;
-  if (!is_array($tableau)) $tableau = array();
+  if (!is_array($tableau))
+    $tableau = array();
   return $tableau;
 }
