@@ -8,6 +8,7 @@
 	<description>Ce plugin permet la création de produits commerciaux dans l'arborescence du site, c'est-à-dire rangés dans les rubriques comme les articles. Un produit est un objet matériel ou un service ayant un prix. La vente en ligne n'est pas le but de ce plugin, il ne s'occupe que de l'ajout de ce nouvel objet éditorial.</description>
 	<icon>images/produits-128.png</icon>
 	<categorie>divers</categorie>
+	<traduire gestionnaire="salvatore" module="produits" reference="fr" />
 	
 	<prefix>produits</prefix>
 	
