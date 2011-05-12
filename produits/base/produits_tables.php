@@ -60,4 +60,10 @@ function produits_rechercher_liste_des_champs($tables){
 	return $tables;
 }
 
+function produits_rechercher_liste_des_jointures($tables){
+	$tables['produit']['rubrique']['titre'] = 2;
+	$tables['produit']['rubrique']['texte'] = 1;
+	return $tables;
+}
+
 ?>
