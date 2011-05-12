@@ -8,6 +8,7 @@
 	<description>Permet de créer des sélections d'objets ayant un prix.</description>
 	<icon>images/paniers-48.png</icon>
 	<categorie>divers</categorie>
+	<traduire gestionnaire="salvatore" module="paniers" reference="fr" />
 	
 	<prefix>paniers</prefix>
 	
