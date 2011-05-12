@@ -86,7 +86,8 @@ function oembed_pre_propre($texte) {
 	foreach (extraire_balises($texte, 'a') as $lien) {
 		if ($url = extraire_attribut($lien, 'href') AND oembed_verifier_provider($url)) {
 			$fond = recuperer_fond('modeles/oembed',array('url'=>$url));
-			$texte = str_replace($lien, $fond, $texte);
+			if ($fond = trim($fond))
+				$texte = str_replace($lien, $fond, $texte);
 		}
 	}
 	return $texte;
