@@ -1,6 +1,6 @@
 <?php
 //
-// Auteur : Didier, www.ouhpla.net
+// Auteur : Didier, JLuc, www.ouhpla.net
 // 
 // Licence GPL 
 //
@@ -106,8 +106,6 @@ function breve2art($id_breve, $id_rubrique, $id_auteur) {
 	// correspondance id_breve <-> id_article
 	sql_insertq(TABLE_BREVES_ARTICLES, array('id_breve' => $id_breve, 'id_article' => $id_article));
 
-//	echo $message;
-	
 	return $message;
 }
 
@@ -168,15 +166,10 @@ function modif_liens() {
 	// echo "Début de fonction modif_liens<br>";
 
 	traite_table_champ('spip_articles', 'id_article', array("surtitre","titre","soustitre","texte","chapo","ps"));
-
 	traite_table_champ('spip_rubriques', 'id_rubrique', array("titre","descriptif","texte"));
-	
 	traite_table_champ('spip_auteurs', 'id_auteur', array("bio"));
-
 	traite_table_champ('spip_forum', 'id_forum', array("texte"));
-
 	traite_table_champ('spip_syndic', 'id_syndic', array("descriptif"));
-
 }
 
 ?>
