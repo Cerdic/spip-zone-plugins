@@ -5,6 +5,7 @@
 	<description>
 	Transforme les brèves d'un site en articles, les range dans une rubrique, leur attribue un auteur, fait suivre les logos et les forums, et convertit tous les liens raccourcis.
 	</description>
+	<lien>http://www.spip-contrib.net/3835</lien>
 	<etat>test</etat>
 	<icon>prive/themes/spip/images/br2art.png</icon>
 	<prefix>breves2art</prefix>
