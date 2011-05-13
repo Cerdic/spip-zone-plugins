@@ -1,151 +1,149 @@
 <!-- nom=contact -->
 <div class="formulaire_spip formulaire_editer formulaire_#FORM">
 
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-<form method="post" action="#ENV{action}">
-<div>
-	#ACTION_FORMULAIRE{#ENV{action}}
-	<fieldset>
-		<legend><:contact:configuration_destinataires:></legend>
-		<ul class="decaler">
-			<li class="editer_texte">
-				<p class="explication"><:contact:configuration_destinataires_explication:></p>
-					<B_auteurs>
-					<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="[(#GRAND_TOTAL|<{26}|?{#GRAND_TOTAL,25})]">
-					<BOUCLE_auteurs(AUTEURS){tous}{email!=''}{par nom}>
-						<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
-							[(#NOM)] (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle,contact,contact:titre}|table_valeur{#STATUT}|_T)[ (#NOM|non)#EMAIL]])
-						</option>
-					</BOUCLE_auteurs>
-				</select>
-				</B_auteurs>
-			</li>
-			<li class="choix baisser"><p class="explication"><:contact:configuration_regle_liste_explication:></p>
-				<div class="bord bottom">
-				<div class="non par">
-					<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
-					<label for="tous"><:contact:configuration_destinataires_tous:></label>
-				</div>
-				<div class="non enf">
-					<input type="radio" name="type_choix" id="tous_ou" class="radio" value="tous_ou"[ checked="checked"(#ENV{type_choix}|=={tous_ou}|oui)] />
-					<label for="tous_ou"><:contact:configuration_destinataires_tous_ou:></label>
-				</div>
-				<div class="non enf">
-					<input type="radio" name="type_choix" id="tous_et" class="radio" value="tous_et"[ checked="checked"(#ENV{type_choix}|=={tous_et}|oui)] />
-					<label for="tous_et"><:contact:configuration_destinataires_tous_et:></label>
-				</div>
-				</div>
+	<form method="post" action="#ENV{action}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<fieldset>
+			<legend><:contact:configuration_destinataires:></legend>
+			<ul class="decaler">
+				<li class="editer_choix_destinataires haut pleine_largeur">
+					<label><:contact:configuration_destinataires_explication:></label>
+						<B_auteurs>
+						<select name="choix_destinataires[]" id="choix_destinataires" multiple="multiple" size="[(#GRAND_TOTAL|<{26}|?{#GRAND_TOTAL,25})]">
+						<BOUCLE_auteurs(AUTEURS){tous}{email!=''}{par nom}>
+							<option value="#ID_AUTEUR" [(#ID_AUTEUR|in_array{#ENV{choix_destinataires,#ARRAY}}|oui)selected="selected"]>
+								[(#NOM)] (##ID_AUTEUR - [(#ARRAY{0minirezo,info_administrateurs,1comite,info_redacteurs,6forum,info_visiteurs,5poubelle,texte_statut_poubelle,contact,contact:titre}|table_valeur{#STATUT}|_T)[ (#NOM|non)#EMAIL]])
+							</option>
+						</BOUCLE_auteurs>
+					</select>
+					</B_auteurs>
+				</li>
+				<li class="editer_type_choix haut pleine_largeur">
+					<label><:contact:configuration_regle_liste_explication:></label>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="tous" class="radio" value="tous"[ checked="checked"(#ENV{type_choix}|=={tous}|ou{#ENV{type_choix}|non}|oui)] />
+						<label for="tous"><:contact:configuration_destinataires_tous:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="tous_ou" class="radio" value="tous_ou"[ checked="checked"(#ENV{type_choix}|=={tous_ou}|oui)] />
+						<label for="tous_ou"><:contact:configuration_destinataires_tous_ou:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="tous_et" class="radio" value="tous_et"[ checked="checked"(#ENV{type_choix}|=={tous_et}|oui)] />
+						<label for="tous_et"><:contact:configuration_destinataires_tous_et:></label>
+					</div>
+				</li>
+				<li class="editer_type_choix haut pleine_largeur">
+					<div class="choix">
+						<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
+						<label for="un"><:contact:configuration_destinataires_un:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="un_ou" class="radio" value="un_ou"[ checked="checked"(#ENV{type_choix}|=={un_ou}|oui)] />
+						<label for="un_ou"><:contact:configuration_destinataires_un_ou:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="un_et" class="radio" value="un_et"[ checked="checked"(#ENV{type_choix}|=={un_et}|oui)] />
+						<label for="un_et"><:contact:configuration_destinataires_un_et:></label>
+					</div>
+				</li>
+				<li class="editer_type_choix haut pleine_largeur">
+					<div class="choix">
+						<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
+						<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="plusieurs_ou" class="radio" value="plusieurs_ou"[ checked="checked"(#ENV{type_choix}|=={plusieurs_ou}|oui)] />
+						<label for="plusieurs_ou"><:contact:configuration_destinataires_plusieurs_ou:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="type_choix" id="plusieurs_et" class="radio" value="plusieurs_et"[ checked="checked"(#ENV{type_choix}|=={plusieurs_et}|oui)] />
+						<label for="plusieurs_et"><:contact:configuration_destinataires_plusieurs_et:></label>
+					</div>
+					<div class="choix">
+						<input type="checkbox" name="c" id="c" class="checkbox" value="c"[ (#ENV{c}|=={c}|oui)checked="checked"] />
+						<label for="c"><:contact:preselection:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
 
-				<div class="bord">
-				<div class="non par">
-					<input type="radio" name="type_choix" id="un" class="radio" value="un"[ checked="checked"(#ENV{type_choix}|=={un}|oui)] />
-					<label for="un"><:contact:configuration_destinataires_un:></label>
-				</div>
-				<div class="non enf">
-					<input type="radio" name="type_choix" id="un_ou" class="radio" value="un_ou"[ checked="checked"(#ENV{type_choix}|=={un_ou}|oui)] />
-					<label for="un_ou"><:contact:configuration_destinataires_un_ou:></label>
-				</div>
-				<div class="non enf">
-					<input type="radio" name="type_choix" id="un_et" class="radio" value="un_et"[ checked="checked"(#ENV{type_choix}|=={un_et}|oui)] />
-					<label for="un_et"><:contact:configuration_destinataires_un_et:></label>
-				</div>
-				</div>
-
-				<div class="bord top">
-				<div class="plus par">
-					<input type="radio" name="type_choix" id="plusieurs" class="radio" value="plusieurs"[ checked="checked"(#ENV{type_choix}|=={plusieurs}|oui)] />
-					<label for="plusieurs"><:contact:configuration_destinataires_plusieurs:></label>
-				</div>
-				<div class="plus enf">
-					<input type="radio" name="type_choix" id="plusieurs_ou" class="radio" value="plusieurs_ou"[ checked="checked"(#ENV{type_choix}|=={plusieurs_ou}|oui)] />
-					<label for="plusieurs_ou"><:contact:configuration_destinataires_plusieurs_ou:></label>
-				</div>
-				<div class="plus enf">
-					<input type="radio" name="type_choix" id="plusieurs_et" class="radio" value="plusieurs_et"[ checked="checked"(#ENV{type_choix}|=={plusieurs_et}|oui)] />
-					<label for="plusieurs_et"><:contact:configuration_destinataires_plusieurs_et:></label>
-				</div>
-				<div class="aerer2 selection">
-					<input type="checkbox" name="c" id="c" class="checkbox" value="c"[ (#ENV{c}|=={c}|oui)checked="checked"] />
-					<label for="c"><:contact:preselection:></label>
-				<br class="nettoyeur" />
-				</div>
-				</div>
-			</li>
-		</ul>
-	</fieldset>
-
-	[(#REM)
-		On récupère les champs possibles
-		Mais on divise en deux :
-			- d'abord les champs choisis
-			- puis les champs qui restent
+		[(#REM)
+			On récupère les champs possibles
+			Mais on divise en deux :
+				- d'abord les champs choisis
+				- puis les champs qui restent
+		]
+		#SET{champs_possibles, #VAL{rien}|contact_infos_supplementaires}
+		#SET{champs_choisis, #CONFIG{contact/champs,#ARRAY}|array_flip}
+		#SET{champs,#GET{champs_choisis}|array_merge{#GET{champs_possibles}}}
+		<fieldset>
+			<legend><:contact:infos_collecte:></legend>
+			<ol id="editer_champs" class="numeroter">
+				<BOUCLE_champs(POUR){tableau #GET{champs}}>
+				<li class="editer_champ pleine_largeur agrondir" title="<:contact:deplacement_possible:>" style="overflow:visible;">
+					[(#CLE|match{mail|sujet|texte}|oui)
+					<div class="choix">
+						<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
+						<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
+						<label for="champ_#CLE">#VALEUR</label>
+						<label for="obli_#CLE"><em><:contact:champ_impose:></em></label>
+					</div>
+					][(#CLE|match{mail|sujet|texte}|non)
+					<div class="choix">
+						<input type="checkbox" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
+						<label for="champ_#CLE">#VALEUR</label>
+					</div>
+					<div class="choix">
+						<input type="checkbox" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)checked="checked"] />
+						<label for="obli_#CLE"><:contact:champ_obligatoire:></label>
+					</div>
+					]
+				</li>
+				</BOUCLE_champs>
+			</ol>
+		</fieldset>
+	[(#PLUGIN{porte_plume,version}|>={1.5}|oui)
+		<fieldset>
+			<legend><:contact:configuration_champs_message:></legend>
+			[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]
+			<ul>
+				<li class="editer_barre">
+					<label><:contact:configuration_champs_message_explication:></label>
+					<div class="choix">
+						<input type="radio" name="barre" id="no_b" class="radio" value="no_barre"[ checked="checked"(#ENV{barre}|=={no_barre}|ou{[(#CONFIG{contact/barre}|non)]}|oui)] />
+						<label for="no_b"><:contact:configuration_no_barre:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="barre" id="bf" class="radio" value="inserer_barre_forum"[ checked="checked"(#ENV{barre}|=={inserer_barre_forum}|oui)] />
+						<label for="bf"><:contact:configuration_barre_forum:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="barre" id="no_p" class="radio" value="no_previsualisation"[ checked="checked"(#ENV{barre}|=={no_previsualisation}|oui)] />
+						<label for="no_p"><:contact:configuration_no_previsualisation:></label>
+					</div>
+					<div class="choix">
+						<input type="radio" name="barre" id="b" class="radio" value=""[ checked="checked"(#ENV{barre}|non|et{[(#VAL{mail}|in_array{#CONFIG{contact/obligatoires,#ARRAY}}|oui)]})] />
+						<label for="b"><:contact:configuration_barre_oui:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
 	]
-	#SET{champs_possibles, #VAL{rien}|contact_infos_supplementaires}
-	#SET{champs_choisis, #CONFIG{contact/champs,#ARRAY}|array_flip}
-	#SET_MERGE{champs, #GET{champs_choisis}, #GET{champs_possibles}}
-	<fieldset>
-		<legend><:contact:infos_collecte:></legend>
-		<ol id="editer_champs" class="decaler baisser10">
-			<BOUCLE_champs(POUR){tableau #GET{champs}}>
-			<li class="choix editer_champ agrondir img#COMPTEUR_BOUCLE" title="<:contact:deplacement_possible:>" style="overflow:visible;">
-				[(#CLE|match{mail|sujet|texte}|oui)
-				<input type="text" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
-				<input type="text" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="text" style="display:none;" value="#CLE" readonly='readonly' />
-				<label for="champ_#CLE">#VALEUR</label>
-				<label for="obli_#CLE"><em><:contact:champ_impose:></em></label>
-				<br class="nettoyeur" />
-				][(#CLE|match{mail|sujet|texte}|non)
-				<input type="checkbox" name="champs[(#VAL{&#91;&#93;}|html_entity_decode)]" id="champ_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{champs,#ARRAY}}|oui)checked="checked"] />
-				<label for="champ_#CLE">#VALEUR</label>
-				<div class="aerer2">
-					<input type="checkbox" name="obligatoires[(#VAL{&#91;&#93;}|html_entity_decode)]" id="obli_#CLE" class="checkbox" value="#CLE"[ (#CLE|in_array{#ENV{obligatoires,#ARRAY}}|oui)checked="checked"] />
-					<label for="obli_#CLE"><:contact:champ_obligatoire:></label>
-				<br class="nettoyeur" />
-				</div>
-				]
-			</li>
-			</BOUCLE_champs>
-		</ol>
-	</fieldset>
-[(#PLUGIN{porte_plume,version}|>={1.5}|oui)
-	<fieldset>
-		<legend><:contact:configuration_champs_message:></legend>
-		[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]
-		<ul>
-			<li class="choix baisser">
-				<p class="explication"><:contact:configuration_champs_message_explication:></p>
-				<div>
-					<input type="radio" name="barre" id="no_b" class="radio" value="no_barre"[ checked="checked"(#ENV{barre}|=={no_barre}|ou{[(#CONFIG{contact/barre}|non)]}|oui)] />
-					<label for="no_b"><:contact:configuration_no_barre:></label>
-				</div>
-				<div>
-					<input type="radio" name="barre" id="bf" class="radio" value="inserer_barre_forum"[ checked="checked"(#ENV{barre}|=={inserer_barre_forum}|oui)] />
-					<label for="bf"><:contact:configuration_barre_forum:></label>
-				</div>
-				<div>
-					<input type="radio" name="barre" id="no_p" class="radio" value="no_previsualisation"[ checked="checked"(#ENV{barre}|=={no_previsualisation}|oui)] />
-					<label for="no_p"><:contact:configuration_no_previsualisation:></label>
-				</div>
-				<div>
-					<input type="radio" name="barre" id="b" class="radio" value=""[ checked="checked"(#ENV{barre}|non|et{[(#VAL{mail}|in_array{#CONFIG{contact/obligatoires,#ARRAY}}|oui)]})] />
-					<label for="b"><:contact:configuration_barre_oui:></label>
-				</div>
-			</li>
-		</ul>
-	</fieldset>
-]
-	<fieldset>
-		<legend><:contact:configuration_pj:></legend>
-		<ul class="decaler baisser10">
-			<li class="choix editer_champ">
-				[(#REM) : On teste si le plugin facteur est présent pour pourvoir envoyer les pièces jointes ]
-				[(#PLUGIN{facteur}|oui)
-				<input type="checkbox" name="autoriser_pj" id="autoriser_pj" class="checkbox" value="true" [checked="checked"(#ENV{autoriser_pj}|=={true}|oui)] />
-				<label for="autoriser_pj"><:contact:configuration_pj_autoriser:></label>
-
-				<div>
+		<fieldset>
+			<legend><:contact:configuration_pj:></legend>
+			<ul>
+				<li class="editer_autoriser_pj">
+					[(#REM) : On teste si le plugin facteur est présent pour pourvoir envoyer les pièces jointes ]
+					[(#PLUGIN{facteur}|oui)
+					<div class="choix">
+						<input type="checkbox" name="autoriser_pj" id="autoriser_pj" class="checkbox" value="true" [checked="checked"(#ENV{autoriser_pj}|=={true}|oui)] />
+						<label for="autoriser_pj"><:contact:configuration_pj_autoriser:></label>
+					</div>
 					<label for="nb_max_pj"><:contact:configuration_pj_nb_max:></label>
 					<select name="nb_max_pj" id="nb_max_pj">
 						<option value="1" [selected="selected" (#ENV{nb_max_pj}|=={1}|oui)]>1</option>
@@ -154,64 +152,67 @@
 						<option value="4" [selected="selected" (#ENV{nb_max_pj}|=={4}|oui)]>4</option>
 						<option value="5" [selected="selected" (#ENV{nb_max_pj}|=={5}|oui)]>5</option>
 					</select>
-				</div>
-				]
+					]
 
-				[(#PLUGIN{facteur}|non)
-				<p class="explication"><:contact:configuration_pj_facteur_absent:></p>
-				]
-			</li>
-		</ul>
-	</fieldset>
+					[(#PLUGIN{facteur}|non)
+					<p class="explication"><:contact:configuration_pj_facteur_absent:></p>
+					]
+				</li>
+			</ul>
+		</fieldset>
 
-    <fieldset>
-		<legend><:contact:champ_civilite:></legend>
-		<ul class="decaler10 baisser10">
-			<li class="choix editer_champ">
-				<p class="explication"><:contact:champ_civi_explication:></p>
-				<input type="checkbox" name="champ_civi_mademoiselle" id="champ_civi_mademoiselle" class="checkbox" value="true" [checked="checked"(#ENV{champ_civi_mademoiselle}|=={true}|oui)] />
-				<label for="champ_civi_mademoiselle"><:contact:champ_civi_mademoiselle_ok:></label>
-			</li>
-		</ul>
-	</fieldset>
+		<fieldset>
+			<legend><:contact:champ_civilite:></legend>
+			<ul>
+				<li class="editer_champ_civi_mademoiselle">
+					<p class="explication"><:contact:champ_civi_explication:></p>
+					<div class="choix">
+						<input type="checkbox" name="champ_civi_mademoiselle" id="champ_civi_mademoiselle" class="checkbox" value="true" [checked="checked"(#ENV{champ_civi_mademoiselle}|=={true}|oui)] />
+						<label for="champ_civi_mademoiselle"><:contact:champ_civi_mademoiselle_ok:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
 
-	<fieldset>
-		<legend><:contact:sauv_message:></legend>
-		<ul class="decaler10 baisser10">
-			<li class="choix editer_champ">
-				<p class="explication"><:contact:sauv_message_explication:></p>
-				<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
-				<label for="sauvegarder_contacts"><:contact:sauv_message_ok:></label>
-			</li>
-		</ul>
-	</fieldset>
+		<fieldset>
+			<legend><:contact:sauv_message:></legend>
+			<ul>
+				<li class="editer_sauvegarder_contacts">
+					<p class="explication"><:contact:sauv_message_explication:></p>
+					<div class="choix">
+						<input type="checkbox" name="sauvegarder_contacts" id="sauvegarder_contacts" class="checkbox" value="true" [checked="checked"(#ENV{sauvegarder_contacts}|=={true}|oui)] />
+						<label for="sauvegarder_contacts"><:contact:sauv_message_ok:></label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
 
 
-	<fieldset>
-		<legend><:contact:configuration_intro:></legend>
-		<ul>
-			<li class="editer_texte">
-				<p class="explication"><:contact:configuration_intro_explication:></p>
-				<textarea name="texte" id="texte" rows="10" cols="40">#ENV{texte}</textarea>
-			</li>
-		</ul>
-	</fieldset>
+		<fieldset>
+			<legend><:contact:configuration_intro:></legend>
+			<ul>
+				<li class="editer_texte pleine_largeur">
+					<p class="explication"><:contact:configuration_intro_explication:></p>
+					<textarea name="texte" id="texte" rows="10" cols="40">#ENV{texte}</textarea>
+				</li>
+			</ul>
+		</fieldset>
 
-	<fieldset>
-		<legend><:contact:configuration_texteinfolettre:></legend>
-		<ul>
-			<li class="editer_texte">
-				<p class="explication"><:contact:configuration_texteinfolettre_explication:></p>
-				<textarea name="texteinfolettre" id="texteinfolettre" rows="2" cols="40">[(#ENV{texteinfolettre})]</textarea>
-			</li>
-		</ul>
-	</fieldset>
+		<fieldset>
+			<legend><:contact:configuration_texteinfolettre:></legend>
+			<ul>
+				<li class="editer_texteinfolettre pleine_largeur">
+					<p class="explication"><:contact:configuration_texteinfolettre_explication:></p>
+					<textarea name="texteinfolettre" id="texteinfolettre" rows="2" cols="40">[(#ENV{texteinfolettre})]</textarea>
+				</li>
+			</ul>
+		</fieldset>
 
-	<div class="boutons">
-		<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
-	</div>
-</div></form>
-[ (#BOUTON_ACTION{<:contact:bouton_effacer:>,#URL_ACTION_AUTEUR{effacer_configuration,'contact',#SELF},ajax,<:contact:alerte_effacement:>})]
+		<div class="boutons">
+			<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+		</div>
+	</div></form>
+	[ (#BOUTON_ACTION{<:contact:bouton_effacer:>,#URL_ACTION_AUTEUR{effacer_configuration,'contact',#SELF},ajax,<:contact:alerte_effacement:>})]
 </div>
 
 <script type="text/javascript">
@@ -230,6 +231,7 @@
 			});
 	}
 	$(function(){
+		/*
 		$('div.selection').each(function(){
 			if ($('div.non input.radio').is(':checked'))
 				$(this).hide();
@@ -269,8 +271,9 @@
 					$('div.selection')
 						.slideUp();
 			});
+			*/
 
-		$('li.editer_champ div').each(function(){
+		/*$('li.editer_champ div').each(function(){
 			if (!$(this).siblings(':checkbox').is(':checked'))
 				$(this).hide();
 		});
@@ -284,7 +287,7 @@
 					$(this).siblings('div')
 						.slideUp();
 			});
-
+*/
 		if(typeof($.fn.sortable) == 'undefined'){
 			$.getScript('#CHEMIN{javascript/contact_sortable.js}',function(){
 				contact_sortable();
