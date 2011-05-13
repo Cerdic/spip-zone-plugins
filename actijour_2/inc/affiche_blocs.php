@@ -163,7 +163,7 @@ function tous_auteurs_date_passage() {
 				);
 				
     // recup nombre total d'entrees
-	$nl= sql_select("SELECT FOUND_ROWS()");
+	$nl= sql_select("sFOUND_ROWS()");
 	$found = @sql_fetch($nl);
 	$nb_auteurs = $found['FOUND_ROWS()'];
 	
