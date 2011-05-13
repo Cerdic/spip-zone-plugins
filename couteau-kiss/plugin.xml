@@ -15,15 +15,15 @@ une unique page de configuration pour les r&eacute;glages cach&eacute;s de SPIP.
 	<onglet id="ck" parent="configuration">
 		<icone>images/pocket-knife-24.png</icone>
 		<titre>ck:titre_page_couteau</titre>
-		<url>couteau</url>
+		<url>configurer_ck</url>
 	</onglet>
 
 	<bouton id="ck21" parent="bando_configuration">
 		<icone>images/pocket-knife-16.png</icone>
 		<titre>ck:titre_page_couteau</titre>
-		<url>couteau</url>
+		<url>configurer_ck</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.0)" />
 	<categorie>maintenance</categorie>
 </plugin>
