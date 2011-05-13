@@ -85,7 +85,17 @@ cite { font-style: italic; }
 address { font-style: italic; }
 
 pre,code,kbd,samp,var,tt { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
-pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
+pre { margin:[ (#GET{margin-bottom}) ]0;
+	/* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ /
+	white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
+	white-space: pre-line;      /* CSS 3.0 */
+	white-space: -pre-wrap;     /* Opera 4-6 */
+	white-space: -o-pre-wrap;   /* Opera 7 */
+	white-space: -moz-pre-wrap; /* Mozilla */
+	white-space: -hp-pre-wrap;  /* HP Printers */
+	word-wrap: break-word;      /* IE 5+ */
+}
 kbd { background-color: #GET{color}; color: #GET{background-color}; }
 samp { font-weight: bold; }
 var { font-style: italic; }
