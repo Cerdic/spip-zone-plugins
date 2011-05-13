@@ -97,5 +97,7 @@ $GLOBALS['i18n_'._PLAYER_PREFIX.'_fr'] = array(
 
 , 'pas_de_lecteur_video' => 'Pas de lecteur vid&eacute;o disponible.'
 
+, 'blogo_vous_ecoutez' => 'En ce moment vous &eacute;coutez :'
+
 ); //
 
