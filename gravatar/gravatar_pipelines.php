@@ -13,9 +13,11 @@
  * @version     $Id$
  **/
 
+
 /**
  * Utilisation du pipeline "affiche_gauche" :
  * on affiche un bloc identique a celui du logo de l'auteur avec son gravatar
+ * n'a d'effet que dans SPIP < 3 car la page exec a ensuite ete renommee
  *
  * @param  Array $flux  Structure permettant de generer la page
  * @return Array        La structure retournee apres traitement
@@ -53,4 +55,30 @@ function gravatar_affiche_gauche($flux) {
 	return $flux;
 }
 
+
+/**
+ * Inserer le gravatar de l'auteur qui sera utilise comme #LOGO_AUTEUR par defaut
+ * tant que l'auteur n'a pas upload son propre logo
+ * Utilise dans SPIP >=3.0.0-dev
+ * @param array $flux
+ * @return array
+ */
+function gravatar_recuperer_fond($flux){
+	if (test_espace_prive()
+	  AND $flux['args']['fond'] == 'formulaires/editer_logo'
+	  AND $flux['args']['contexte']['objet']=='auteur'
+		AND $id_auteur = $flux['args']['contexte']['id_objet']
+		AND strpos($flux['data']['texte'],'spip_logos')==false
+	  AND $email = sql_getfetsel('email', 'spip_auteurs', 'id_auteur='.intval($id_auteur))){
+
+		include_spip('inc/gravatar');
+		if ($gravatar = gravatar_img($email)) {
+			$gravatar = extraire_attribut($gravatar,'src');
+			$logo = recuperer_fond('formulaires/inc-apercu-logo',array('logo'=>$gravatar,'quoi'=>'logo_on','editable'=>'','titre'=>_T('gravatar:titre_gravatar_auteur')));
+			$p = strpos($flux['data']['texte'],'<label');
+			$flux['data']['texte'] = substr_replace($flux['data']['texte'],$logo,$p,0);
+		}
+	}
+	return $flux;
+}
 ?>

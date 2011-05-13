@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'gravatar_info' => 'Um Ihren Avatar hier anzeigen zu lassen, registrieren Sie sich erst hier <a href="http://www.gravatar.com/" rel="external nofollow" class="spip_out">gravatar.com</a> (kostenlos und einfach).',
 'gravatar_info_forum' => 'Um Ihren Avatar hier anzeigen zu lassen, registrieren Sie sich erst hier <a href="http://www.gravatar.com/" rel="external nofollow" hreflang="en" class="spip_out">gravatar.com</a> (kostenlos und einfach). Vergessen Sie nicht, hier Ihre E-Mail-Adresse einzutragen.',
-'titre_gravatar_auteur' => 'GRAVATAR DES AUTORS',
+'titre_gravatar_auteur' => 'Gravatar',
 
 'cfg_titre_gravatar' => 'Gravatars',
 'cfg_descr_gravatar' => 'Benutzen Sie das Gravatar-Rendering',

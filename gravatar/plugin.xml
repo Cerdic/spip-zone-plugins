@@ -11,7 +11,7 @@
 		</multi>
 	</auteur>
 	<icon>images/gravatar-64.png</icon>
-	<version>1.1.0</version>
+	<version>1.2.0</version>
 	<etat>stable</etat>
 	<description>
 		<multi>
@@ -38,7 +38,10 @@ _ Configures a default image, and image size.
 	<fonctions>inc/gravatar.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>
-		<action>affiche_gauche</action>
+		<inclure>gravatar_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
 		<inclure>gravatar_pipelines.php</inclure>
 	</pipeline>
 
@@ -54,6 +57,6 @@ _ Configures a default image, and image size.
 		<url>configurer_gravatar</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;3.1.0)" />
 	<categorie>communication</categorie>
 </plugin>
