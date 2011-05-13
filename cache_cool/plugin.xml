@@ -9,6 +9,6 @@
 	<lien>http://www.spip-contrib.net/Cache-Cool</lien> <!-- URI de documentation -->
 	<prefix>cache_cool</prefix>
 	<categorie>performance</categorie>
-	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="SPIP" version="[2.1;3.1.0)" />
 	<necessite id="queue" version="[0.2.1;]" />
 </plugin>
