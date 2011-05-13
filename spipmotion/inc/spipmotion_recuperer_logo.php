@@ -46,10 +46,8 @@ function inc_spipmotion_recuperer_logo($id_document,$frame=50){
 				if(defined('_DIR_PLUGIN_FONCTIONS_IMAGES')){
 					include_spip('fonctions_images_fonctions');
 					if($retour>10){
-						spip_log('retour > 10','spipmotion');
-						spip_log($document['id_orig'],'spipmotion');
 						if($document['id_orig'] == '0'){
-							$versions = sql_select('id_document,id_vignette','spip_documents','id_orig='.intval($document['id_document']));
+							$versions = sql_select('id_document,id_vignette','spip_documents','id_orig='.intval($document['id_document']),'','taille DESC');
 						}
 						else{
 							$versions = sql_select('id_document,id_vignette','spip_documents','id_orig='.intval($document['id_orig']));
