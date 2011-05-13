@@ -45,26 +45,32 @@ function inc_spipmotion_recuperer_logo($id_document,$frame=50){
 				
 				if(defined('_DIR_PLUGIN_FONCTIONS_IMAGES')){
 					include_spip('fonctions_images_fonctions');
-					if(!filtrer('image_monochrome',$fichier_temp)){
+					if($retour>10){
+						return false;
+					}else if(!filtrer('image_monochrome',$fichier_temp)){
 						imagedestroy($img_temp);
 						unlink($img_finale);
 						$frame = $frame+50;
 						$retour++;
-					}else{
+					}else if(file_exists($img_finale)){
 						$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
 						$x = $ajouter_documents($img_finale, $img_finale,
-								    $type, $id, $mode, $id_document, $actifs);
+							    $type, $id, $mode, $id_document, $actifs);
+						imagedestroy($img_temp);
+						unlink($img_finale);
+						$vignette = true;
+					}else{
+						return false;
+					}
+				}else{
+					if(file_exists($img_finale)){
+						$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+						$x = $ajouter_documents($img_finale, $img_finale,
+							    $type, $id, $mode, $id_document, $actifs);
 						imagedestroy($img_temp);
 						unlink($img_finale);
 						$vignette = true;
 					}
-				}else{
-					$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
-					$x = $ajouter_documents($img_finale, $img_finale,
-							    $type, $id, $mode, $id_document, $actifs);
-					imagedestroy($img_temp);
-					unlink($img_finale);
-					$vignette = true;
 				}
 			}
 			else{
