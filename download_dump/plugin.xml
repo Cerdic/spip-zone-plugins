@@ -1,27 +1,27 @@
 <plugin>
 	<nom>Dump Download</nom>
 	<auteur>phil</auteur>
-	<version>0.2</version>
+	<version>0.2.1</version>
 	<etat>dev</etat>
 	<description>
-	Ce plugin ajoute une fonctionnalit&eacute; dans la zone de configuration du site permettant de t&eacute;l&eacute;charger le dump de la base de donn&eacute;es du site sur son ordinateur sans acc&egrave;s FTP.
-<h4>[T&eacute;l&eacute;charger la sauvergardre de la base de donn&eacute;e->.?exec=dd]</h4>
+		Ce plugin ajoute une fonctionnalit&eacute; dans la zone de configuration du site permettant de t&eacute;l&eacute;charger le dump de la base de donn&eacute;es du site sur son ordinateur sans acc&egrave;s FTP.
 	</description>
-	<lien>
-	[Documentation->http://www.spip-contrib.net/Plugin-Download-Dump]
-	</lien>
-	<icon>
-	dd.png
-	</icon>
+	<lien>[Documentation->http://www.spip-contrib.net/Plugin-Download-Dump]</lien>
+	<icon>dd.png</icon>
 	<prefix>dd</prefix>
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<inclure>dd_pipeline.php</inclure>
 	</pipeline>
-		<pipeline>
+	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>dd_pipeline.php</inclure>
 	</pipeline>
+	<bouton id='dd' parent="bando_administration">
+		<icone>dd-22.png</icone>
+		<titre>Dump Download</titre>
+		<url>.?exec=dd</url>
+	</bouton>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>maintenance</categorie>
 </plugin>
