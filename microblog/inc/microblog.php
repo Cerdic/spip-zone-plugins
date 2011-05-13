@@ -146,17 +146,34 @@ function microblog($status, $user=null, $pass=null, $service=null, $api=null, $t
  */
 function microblog_affiche_milieu($flux){
 	if ($exec = $flux['args']['exec']
-	  AND $exec='articles'
-		AND $id_article = $flux['args']['id_article']
-		AND $cfg = @unserialize($GLOBALS['meta']['microblog'])
-		AND ($cfg['evt_publierarticles'] OR $cfg['evt_proposerarticles'])){
+		AND // SPIP 3
+				((include_spip('base/objets')
+				AND function_exists('trouver_objet_exec')
+				AND $e = trouver_objet_exec($exec)
+				AND $e['type']=='article'
+				AND $e['edition']!==true
+				AND $id_article = $flux['args']['id_article']
+				AND include_spip('inc/config')
+				AND $cfg = lire_config('microblog')
+		    )
+			OR // SPIP 2.x
+				($exec=='articles'
+				AND $id_article = $flux['args']['id_article']
+				AND $cfg = @unserialize($GLOBALS['meta']['microblog'])
+				)
+			)
+		AND
+			($cfg['evt_publierarticles'] OR $cfg['evt_proposerarticles'])){
 		$deplie = false;
 		$ids = 'formulaire_editer_microblog-article-' . $id_article;
 		$bouton = bouton_block_depliable(strtoupper(_T('microblog:titre_microblog')), $deplie, $ids);
-		$flux['data'] .= debut_cadre('e', chemin('microblog-24.gif','themes/spip/images/'),'',$bouton, '', '', true);
-		$flux['data'] .= recuperer_fond('prive/editer/microblog', array_merge($_GET, array('objet'=>'article','id_objet'=>$id_article)));
-		$flux['data'] .= fin_cadre();
-
+		$out = debut_cadre('e', find_in_path('microblog-24.gif','themes/spip/images/'),'',$bouton, '', '', true);
+		$out .= recuperer_fond('prive/editer/microblog', array_merge($_GET, array('objet'=>'article','id_objet'=>$id_article)));
+		$out .= fin_cadre();
+		if ($p = strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$out,$p,0);
+		else
+			$flux['data'] .= $out;
 	}
 
 	return $flux;
