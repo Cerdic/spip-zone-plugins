@@ -43,8 +43,8 @@ table.spip tr.row_even td {}
 blockquote.spip {}
 .spip_poesie {}
 .spip_poesie div { margin-left: #GET{text-indent}; text-indent: -#GET{text-indent}; }
-
-.spip_code,.spip_cadre {}
+.spip_code,
+.spip_cadre {}
 
 /* Enluminures typo V3 / Cf.: http://www.spip-contrib.net/3118 */
 sc { font-variant: small-caps; }
@@ -53,12 +53,9 @@ sc { font-variant: small-caps; }
 .texteencadre-spip { display: block; margin:[ (#GET{margin-bottom})][ (#GET{text-indent})]; padding: #GET{line-height}; background: #EEE; }
 
 /* Logos, documents et images */
-.spip_logos { float: left; margin: 0 10px .1em 0; padding: 0; border: none; }
+.spip_logos { float: left; margin: 0 [ (#GET{margin-bottom})][ (#GET{margin-bottom})] 0; padding: 0; border: none; }
 
-dl.spip_documents,
-.spip_documents dt,
-.spip_documents dd { margin: 0 auto; padding: 0; background: none; }
-.spip_documents { text-align: center; margin-bottom: #GET{margin-bottom}; }
+.spip_documents { margin: 0 auto; margin-bottom: #GET{margin-bottom}; padding: 0; background: none; text-align: center; }
 .spip_documents_center,
 .spip_doc_titre,
 .spip_doc_descriptif { margin-right: auto; margin-left: auto; }
