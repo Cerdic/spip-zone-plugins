@@ -18,9 +18,9 @@
 		<inclure>dd_pipeline.php</inclure>
 	</pipeline>
 	<bouton id='dd' parent="bando_administration">
-		<icone>dd-22.png</icone>
+		<icone>dd-16.png</icone>
 		<titre>Dump Download</titre>
-		<url>.?exec=dd</url>
+		<url>dd</url>
 	</bouton>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<categorie>maintenance</categorie>
