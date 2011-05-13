@@ -77,7 +77,7 @@
 		<icone>images/noizetier-16.png</icone>
 	</bouton>
 	<categorie>maintenance</categorie>
-	<necessite id="SPIP" version="[2.1.0;3.0.0)]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.0-dev)]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="YAML" version="[1.4.1;]" />
 	<necessite id="saisies" version="[1.8.5;]" />
