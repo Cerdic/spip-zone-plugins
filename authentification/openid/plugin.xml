@@ -1,10 +1,5 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	 <multi>
-		 [fr]Authentification OpenID
-		 [en]OpenID Authentication
-	 </multi>
-	</nom>
+	<nom>OpenID</nom>
 	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, Cedric Morin [->yterium.net], Fil</auteur>
 	<licence>
 		<multi>
@@ -67,13 +62,8 @@
 </plugin>
 
 
-<plugin spip="[2.1.0 dev;]">
-	<nom> <!-- Nom du plugin -->
-		<multi>
-		 [fr]Authentification OpenID pour SPIP 2.1
-		 [en]OpenID Authentication
-		</multi>
-	</nom>
+<plugin spip="[2.1.0-dev;3.1.0)">
+	<nom>OpenID</nom>
 	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, Cedric Morin [->yterium.net], Fil</auteur>
 	<licence>
 		<multi>
