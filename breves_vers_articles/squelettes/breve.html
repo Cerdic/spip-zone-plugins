@@ -1,0 +1,17 @@
+<?php
+
+include_spip("#CHEMIN{breves2art_options.php}");
+include_spip('inc/headers');
+
+// Si on a deja fait le process sur la breve, en phase de test par exemple, alors on saute.
+$id_article = sql_getfetsel("id_article", TABLE_BREVES_ARTICLES, "id_breve=#ENV{id_breve}");
+if($id_article) {
+	redirige_par_entete("spip.php?article$id_article");
+}
+
+else {
+	echo "Brève pas encore convertit en article";
+}
+
+?>
+
