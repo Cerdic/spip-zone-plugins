@@ -19,7 +19,7 @@ function inc_spipmotion_recuperer_infos($id_document){
 		return false;
 
 	include_spip('inc/documents');
-	$document = sql_fetsel("docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+	$document = sql_fetsel("docs.titre,docs.descriptif,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
 	$chemin = $document['fichier'];
 	$movie_chemin = get_spip_doc($chemin);
 
@@ -37,10 +37,7 @@ function inc_spipmotion_recuperer_infos($id_document){
 		}
 	}
 
-	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
-		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
-		$infos = $mediainfo($movie_chemin);
-	}else{
+	if(class_exists('ffmpeg_movie')){
 		$movie = new ffmpeg_movie($movie_chemin, 0);
 	
 		$infos['bitrate'] = $movie->getBitRate();
@@ -89,6 +86,19 @@ function inc_spipmotion_recuperer_infos($id_document){
 		}
 	}
 	
+	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
+		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
+		$mediainfos = $mediainfo($movie_chemin);
+	}
+
+	$infos = array_merge($mediainfos,$infos);
+	
+	if(strlen($document['titre']) > 0){
+		unset($infos['titre']);
+	}
+	if(strlen($document['descriptif']) > 0){
+		unset($infos['descriptif']);
+	}
 	foreach($infos as $key => $val){
 		if(!$val){
 			unset($infos[$key]);

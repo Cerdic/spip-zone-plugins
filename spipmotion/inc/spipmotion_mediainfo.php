@@ -21,7 +21,12 @@ function inc_spipmotion_mediainfo_dist($chemin){
 		$arbre = spip_xml_parse($metadatas);
 		spip_xml_match_nodes(",^track type,",$arbre, $tracks);
 		foreach($tracks as $track => $info){
+			$metas[$track] = $info;
+			spip_log($info,'spipmotion');
 			if($track == 'track type="General"'){
+				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : $info[0]['Movie_name'][0];
+				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
+				$infos['credits'] = $info[0]['Copyright'][0];
 				$infos['duree'] = $info[0]['Duration'][0] / 1000;
 				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
 			}
@@ -44,6 +49,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 			}
 		}
 	}
+	$infos['metas'] = serialize($metas);
 	return $infos;
 }
 ?>
