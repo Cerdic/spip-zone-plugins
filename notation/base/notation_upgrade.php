@@ -94,6 +94,11 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			$config();
 			ecrire_meta($nom_meta_base_version,$current_version="0.6.2");
 		}
+		if (version_compare($current_version,"0.6.3","<")){
+			// Pour ceux qui ont installé une 0.6.2 directement avant la correction creant 'accepter_note'
+			maj_tables(array('spip_articles'));
+			ecrire_meta($nom_meta_base_version,$current_version="0.6.3");
+		}
 	}
 }
 
