@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'supprimer_provider'=>'Supprimer',
 
 'titre_oembed'=>'oEmbed',
-'titre_configurer_oembed'=>'Providers oEmbed',
+'titre_configurer_providers'=>'Providers oEmbed',
 'titre_ajouter_provider'=>'Ajouter un provider',
 
 );

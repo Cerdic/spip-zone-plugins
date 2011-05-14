@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_configurer_oembed_charger_dist(){
+function formulaires_configurer_providers_charger_dist(){
 	$valeurs = array(
 		'scheme' => '',
 		'endpoint' => ''
@@ -8,7 +8,7 @@ function formulaires_configurer_oembed_charger_dist(){
 	return $valeurs;
 }
 
-function formulaires_configurer_oembed_verifier_dist(){
+function formulaires_configurer_providers_verifier_dist(){
 	$erreurs = array();
 	
 	if (!_request('scheme'))
@@ -23,7 +23,7 @@ function formulaires_configurer_oembed_verifier_dist(){
 	return $erreurs;
 }
 
-function formulaires_configurer_oembed_traiter_dist(){
+function formulaires_configurer_providers_traiter_dist(){
 	$messages = array();
 	
 	if (sql_insertq('spip_oembed_providers',array('scheme'=>_request('scheme'), 'endpoint'=>_request('endpoint'))))
