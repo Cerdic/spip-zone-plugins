@@ -75,13 +75,10 @@ function encodage($source,$doc_attente){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
 		return;
 
-	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
+	
 	$ffmpeg_version = lire_config('spipmotion_compiler/ffmpeg_version','0.6');
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 	
-	if($source['rotation'] == '90'){
-		$encodeur = 'ffmpeg';
-	}
 	/**
 	 * On change le statut d'encodage à en_cours pour
 	 * - changer les messages sur le site (ce media est en cours d'encodage par exemple)
@@ -95,6 +92,11 @@ function encodage($source,$doc_attente){
 	$type_doc = $attente['objet'];
 	$id_objet = $attente['id_objet'];
 
+	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
+	if($source['rotation'] == '90'){
+		$encodeur = 'ffmpeg';
+	}
+	
 	include_spip('inc/documents');
 	$chemin = get_spip_doc($source['fichier']);
 	spip_log("encodage de $chemin","spipmotion");
