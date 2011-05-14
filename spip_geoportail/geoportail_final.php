@@ -16,7 +16,7 @@ function geoportail_affichage_final($page)
 
 <!-- API Geoportail -->'
 .($GLOBALS['meta']['geoportail_debug']?
-'<script type="text/javascript" src="http://depot.ign.fr/geoportail/api/js/1.2/lib/geoportal/lib/GeoportalStandard.js" charset=utf-8>// <![CDATA['
+'<script type="text/javascript" src="http://depot.ign.fr/geoportail/api/js/1.2/lib/geoportal/lib/Geoportal.js" charset=utf-8>// <![CDATA['
 :
 '<script type="text/javascript" src="http://api.ign.fr/geoportail/api/js/1.2/GeoportalExtended.js" charset=utf-8>// <![CDATA['
 )
