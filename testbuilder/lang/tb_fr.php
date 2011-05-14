@@ -28,6 +28,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'un_essai' => '1 jeu de test',
 	'nb_essais' => '@nb@ jeux de tests',
 
+	'modifier' => 'Modifier le test',
+
 	'texte_presentation' => 'Selectionner le script PHP pour lequel vous souhaitez construire des jeux de tests.
 
 Les fichiers tests seront cr&eacute;&eacute;s dans le repertoire <tt>tests/</tt> si le script fait partie de SPIP.
