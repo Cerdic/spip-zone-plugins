@@ -33,16 +33,27 @@
 						<input type="text" name="hauteur" value="[(#ENV{hauteur,#GET{hauteur_defaut}})]" id="hauteur" class="text" />
 					</li>
 					<li>
-						<label for="hauteur"><:videos:cfg_label_titre_descriptif:></label>
+						<label for="wmode"><:videos:cfg_label_wmode:></label>
+						<div class='explication'><:videos:cfg_explication_wmode:></div>
+						[(#SET{wmode,[(#ENV{wmode}|sinon{opaque})]})]
+						<select name="wmode" id="wmode" size="1">
+							<option value="opaque"[(#ENV{wmode}|=={opaque}|oui) selected='selected']>Opaque</option>
+							<option value="transparent"[(#ENV{wmode}|=={transparent}|oui) selected='selected']>Transparent</option>
+							<option value="window"[(#ENV{wmode}|=={window}|oui) selected='selected']>Window</option>
+
+						</select>
+					</li>
+					<li>
+						<label for="titre_descriptif"><:videos:cfg_label_titre_descriptif:></label>
 						<p class='explication'><:videos:cfg_explication_titre_descriptif:></p>
-                  <div class="choix">
-                     <input type="radio" name="titre_descriptif" class="radio" id="titre_descriptif_on" value="oui" [(#ENV{titre_descriptif,#GET{titre_descriptif_defaut}}|=={oui}|oui) checked="checked"] />
-                     <label for='titre_descriptif_on'><:item_oui:></label>
-                  </div>
-                  <div class="choix">
-                     <input type="radio" name="titre_descriptif" class="radio" id="titre_descriptif_off" value="non" [(#ENV{titre_descriptif,#GET{titre_descriptif_defaut}}|=={non}|oui) checked="checked"] />
-                     <label for='titre_descriptif_off'><:item_non:></label>
-                  </div>
+						<div class="choix">
+							<input type="radio" name="titre_descriptif" class="radio" id="titre_descriptif_on" value="oui" [(#ENV{titre_descriptif,#GET{titre_descriptif_defaut}}|=={oui}|oui) checked="checked"] />
+							<label for='titre_descriptif_on'><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="titre_descriptif" class="radio" id="titre_descriptif_off" value="non" [(#ENV{titre_descriptif,#GET{titre_descriptif_defaut}}|=={non}|oui) checked="checked"] />
+							<label for='titre_descriptif_off'><:item_non:></label>
+						</div>
 					</li>
 				</ul>
 			</li>

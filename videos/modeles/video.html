@@ -1,8 +1,9 @@
 [(#REM) 
 /** Valeurs communes surchargeables **/
 ]
-#SET{document,#ID|sinon{#ENV{document}}}
+#SET{document,#ENV{document}|sinon{#ID}}
 #SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{videos/titre_descriptif,'non'}}}
+#SET{wmode,#ENV{wmode,#CONFIG{videos/wmode,'opaque'}}}
 
 [(#REM) "Extensions" gérées ou rajoutées par le plugin
 <!--
@@ -16,20 +17,29 @@
 			4,dist_cubox
 	}
 })]
-
+[(#SET{lesExtensionsHtml5,
+	#ARRAY{ 1,m4v,
+			2,mp4,
+			3,webm,
+			4,ogv,
+			5,mkv
+	}
+})]
 <BOUCLE_LaVideo(DOCUMENTS){id_document=#GET{document}}>
-	[(#REM) Si une dimension est fournie avec le modele on la prend,
-   			sinon celle du document si elle n'est pas nulle,
-            sinon celle de la config,
-            sinon une valeur en dur]
-	[(#LARGEUR|>{0}|oui) #SET{larg,#LARGEUR} ]
-   #SET{largeur,#ENV{largeur,#GET{larg,#CONFIG{videos/largeur,'560'}}}}
-	[(#HAUTEUR|>{0}|oui) #SET{haut,#HAUTEUR} ]
-   #SET{hauteur,#ENV{hauteur,#GET{haut,#CONFIG{videos/hauteur,'315'}}}}
+[(#REM)
+	Si une dimension est fournie avec le modele on la prend,
+	sinon celle du document si elle n'est pas nulle,
+	sinon celle de la config,
+	sinon une valeur en dur
+]
+[(#LARGEUR|>{0}|oui) #SET{larg,#LARGEUR} ]
+#SET{largeur,#ENV{largeur,#GET{larg,#CONFIG{videos/largeur,'560'}}}}
+[(#HAUTEUR|>{0}|oui) #SET{haut,#HAUTEUR} ]
+#SET{hauteur,#ENV{hauteur,#GET{haut,#CONFIG{videos/hauteur,'315'}}}}
 
-	[(#SET{fichier,#FICHIER*})]
-   <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
-   <dt class='spip_doc_titre'>
+[(#SET{fichier,#FICHIER*})]
+<dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
+<dt class='spip_doc_titre'>
 
 [(#REM)
 /** Traiter DailyMotion **/
@@ -53,7 +63,7 @@
 	[(#EXTENSION|=={dist_daily}|oui)
 		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
 	
-		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&theme=none&foreground=%23F7FFFD&highlight=%23FFC300&background=%23171D1B&start=[&animatedTitle=(#TITRE)]&iframe=1&additionalInfos=0&autoPlay=0&hideInfos=0"></iframe>
+		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
 	]
 [(#REM)
 /** Traiter Viméo **/
@@ -89,7 +99,7 @@
 	- iv_load_policy	|| Values: 1 or 3. Default is 1. Setting to 1 will cause video annotations to be shown by default, whereas setting to 3 will cause video annotation to not be shown by default.
 	- cc_load_policy	|| Values: 1. Default is based on user preference. Setting to 1 will cause closed captions to be shown by default, even if the user has turned captions off.]
 	[(#EXTENSION|=={dist_youtu}|oui)
-	<iframe title="YouTube video player" class="youtube-player" type="text/html" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1" frameborder="0"></iframe>
+	<iframe title="YouTube video player" class="youtube-player" type="text/html" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.youtube.com/embed/#GET{fichier}?hd=1&amp;wmode=#GET{wmode}" frameborder="0"></iframe>
 	]
 	
 [(#REM)
@@ -98,23 +108,24 @@
 ]
 
 	[(#EXTENSION|=={dist_cubox}|oui)
-	<iframe src="http://culturebox.france3.fr/player.swf?video=#GET{fichier}" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
+	<iframe src="http://culturebox.france3.fr/player.swf?video=#GET{fichier}&amp;wmode=#GET{wmode}" width="#GET{largeur}" height="#GET{hauteur}" frameborder="0"></iframe>
 	]
 	
 
 
 [(#REM)
-/** Traiter les vidéos H264/WebM/Ogg en HTML5 **/
+/** Traiter les vidéos H264/WebM/Ogg/Mkv en HTML5 **/
 ]
-	[(#EXTENSION|match{m4v|mp4|webm|ogv|mkv}|oui)
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|oui)
 	<div class="playerVideo">
 		<section>
 		<figure>
 			[(#SET{nomVideo,[(#FICHIER|basename|pathinfo|table_valeur{filename})]})]
 			<INCLURE{fond=noisettes/balise_video_html5,nomVideo=#GET{nomVideo},largeur=#GET{largeur},hauteur=#GET{hauteur},env} />
-			[(#REM)
+			[(#GET{titre_descriptif}|=={oui}|oui)
 			<figcaption>
-				Commentaire au besoin, ou titre ou descriptif ou what else 
+				<p><strong>#TITRE</strong></p> 
+				#DESCRIPTIF
 			</figcaption>
 			]
 		</figure>
@@ -126,7 +137,7 @@
 [(#REM)
 /** CAS GENERAL == MODELE VIDEO DE DIST DE SPIP **/
 ]
-	[(#MIME_TYPE|match{m4v|webm|ogg}|non)
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
 	[(#EXTENSION|match{dist_}|non)
 		[(#INCLURE{fond=prive/modeles/video,id=#GET{document},env,emb=' '})]
 	]]
@@ -135,13 +146,14 @@
 /** Titre et Descriptif **/
 ]
 	[(#GET{titre_descriptif}|=={oui}|oui)
-      [<br /><strong>(#TITRE)</strong>]
-   ]
-   </dt>
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
+	[<br /><strong>(#TITRE)</strong>]
+	]]
+</dt>
 	[(#GET{titre_descriptif}|=={oui}|oui)
-      [<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)</dd>]
-   ]
-	</dl>
-
+	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
+	[<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)</dd>]
+	]]
+</dl>
 
 </BOUCLE_LaVideo>

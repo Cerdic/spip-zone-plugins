@@ -8,7 +8,7 @@
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
 	
-	<version>0.7.2</version>
+	<version>0.8</version>
 	<version_base>0.3</version_base>
 	<!-- <version_html5media>1.1.3</version_html5media> -->
 	<!-- <necessite id="lib:html5media" src="https://github.com/downloads/etianen/html5media/html5media-1.1.3.zip" /> -->
@@ -18,13 +18,13 @@
 	<description>
 		<multi>
 			[fr]Interface de gestion et modèles d'insertion de(s) vidéo(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
-			-* Fichiers H264/OGG
+			-* Fichiers MP4/H264/WebM/OGG/MKV
 			-* Dailymotion
 			-* Vimeo
 			-* Youtube
 			-* CultureBox
 			[en]Management interface and integration models of video(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
-			-* H264/OGG files
+			-* MP4/H264/WebM/OGG/MKV files
 			-* Dailymotion
 			-* Vimeo
 			-* Youtube
@@ -35,6 +35,10 @@
 	<!-- Base de données -->
 	<install>base/videos_sql.php</install>
 	
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>pipelines/videos_insert_head.php</inclure>
+	</pipeline>
 	<pipeline>
 		<nom>jquery_plugins</nom>
 		<inclure>pipelines/videos_jquery_plugins.php</inclure>
@@ -50,8 +54,14 @@
 		<titre>videos:titre_admin</titre>
 		<url>configurer_videos</url>
 	</bouton>
+	<bouton id='videos2' parent='bando_squelette'>
+		<icone>theme/img/videos-16.png</icone>
+		<titre>videos:titre_admin</titre>
+		<url>configurer_videos</url>
+	</bouton>
 	
 	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="medias" version="[1.6.0;]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	
 	<categorie>multimedia</categorie>
