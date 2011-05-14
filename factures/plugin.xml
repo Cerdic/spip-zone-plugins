@@ -59,6 +59,18 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 		<titre>factures:bouton_factures</titre> 
 		<url>factures</url> 
 	</bouton>
+	<!-- si le bandeau n'est pas présent -->
+	<bouton id='factures' parent='naviguer'> 
+		<icone>images/factures-16.png</icone> 
+		<titre>factures:bouton_factures</titre> 
+		<url>factures</url> 
+	</bouton>
+	<bouton id="config_factures" parent="naviguer">
+		<titre>factures:bouton_configurer_factures</titre>
+		<icone>images/factures-16.png</icone>
+		<url>config_factures</url>
+	</bouton>
+
 
 	<!--pipeline>
 		<nom>insert_head</nom>
