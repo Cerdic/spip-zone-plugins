@@ -62,6 +62,7 @@ function exec_geoportail_config_options()
  		$geoportail_sysref = $GLOBALS['meta']['geoportail_sysref'];
  		$geoportail_provider = $GLOBALS['meta']['geoportail_provider'];
  		$geoportail_popup = $GLOBALS['meta']['geoportail_popup'];
+		$ghover = ($GLOBALS['meta']['geoportail_hover'])?"CHECKED":"";
 
 		/* Type d'objet a georef */
 		$form = debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:options'))
@@ -82,7 +83,9 @@ function exec_geoportail_config_options()
 				."<p>"
 				."<input type='radio' name='popup' class='fondl'id='Anchored' value='Anchored'".($geoportail_popup=='Anchored'?" checked /><label for='Anchored' style='font-weight:bold'>":"/><label for='Anchored'>")._T('geoportail:popup_anchored')."</label> &nbsp;"
 				."<input type='radio' name='popup' class='fondl' id='FramedCloud' value='FramedCloud'".($geoportail_popup=='FramedCloud'?" checked /><label for='FramedCloud' style='font-weight:bold'>":"/><label for='FramedCloud'>")._T('geoportail:popup_framecloud')."</label> &nbsp;"
-				."<input type='submit' name='setpopup' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
+				."</p><p>"
+				."<input type='checkbox' name='hover' id='hover' $ghover><label for=hover>"._T('geoportail:geoportail_hover')."</label>"
+				."<input type='submit' name='setpopup' class='fondo' style='margin-left:3em;' value='"._T('bouton_valider')."' />"
 				."</p>"
 			.fin_cadre_relief(true)
 		/* Geoservices */

@@ -53,7 +53,7 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 		feature.attributes.logo = "[(#LOGO_ARTICLE||image_reduire{60}|replace{'"',"'"})]";
 		feature.attributes.name = "[(#TITRE|attribut_html)]";
 		feature.attributes.url = "[(#URL_ARTICLE|url_absolue)]";
-		feature.attributes.description = "[(#INTRODUCTION|addslashes|replace{\n,''}|replace{\r,''}|couper{100})]";
+		feature.attributes.description = "[(#INTRODUCTION|couper{100}|addslashes|replace{\n,''}|replace{\r,''})]";
 		map.rlayer.addFeatures(feature);
 	}
 	</BOUCLE_geo_article>

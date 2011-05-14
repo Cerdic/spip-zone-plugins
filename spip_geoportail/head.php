@@ -8,7 +8,8 @@ function geoportail_insert_head($flux)
 	if ($logo) $logo = "jQuery.geoportail.setOriginator ('$logo','".$GLOBALS['meta']['adresse_site']."')"; 
 	// Type de popup
 	$popup = $GLOBALS['meta']['geoportail_popup'];
-	$popup = "jQuery.geoportail.spip_popup = '".($popup?$popup:"Anchored")."';";
+	$popup = "jQuery.geoportail.spip_popup = '".($popup?$popup:"Anchored")."';"
+		." jQuery.geoportail.hover = ".($GLOBALS['meta']['geoportail_hover'] ?"true;":"false;");
 
 	$flux .= 
 '

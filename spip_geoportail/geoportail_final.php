@@ -15,7 +15,7 @@ function geoportail_affichage_final($page)
 <script language=javascript>jQuery(document).ready(	function() { jQuery.geoportail.initMap("'._DIR_PLUGIN_GEOPORTAIL.'"); });</script>
 
 <!-- API Geoportail -->'
-.($GLOBALS['meta']['geoportail_debug']?
+.($GLOBALS['geoportail_debug']?
 '<script type="text/javascript" src="http://depot.ign.fr/geoportail/api/js/1.2/lib/geoportal/lib/Geoportal.js" charset=utf-8>// <![CDATA['
 :
 '<script type="text/javascript" src="http://api.ign.fr/geoportail/api/js/1.2/GeoportalExtended.js" charset=utf-8>// <![CDATA['

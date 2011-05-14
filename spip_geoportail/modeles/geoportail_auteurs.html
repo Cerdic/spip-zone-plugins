@@ -24,18 +24,8 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	var l = new OpenLayers.Layer.Vector("<:spip:icone_auteurs:>",{ styleMap: styleMap, opacity:1, visibility:1, originators: jQuery.geoportail.originators });
 	map.rlayer = l;
 	map.getMap().addLayer(l);
-	
-	// Controle pour la selection
-	options = {
-		clickout: true, toggle: false, 
-		multiple: false, hover: false, 
-		onSelect: $.geoportail.popupFeature,
-		onUnselect: $.geoportail.unpopupFeature
-		}
-	var selectControl = new OpenLayers.Control.SelectFeature(map.rlayer, options);
-	map.getMap().addControl(selectControl);
-	map.rlayer.selectControl = selectControl;
-	selectControl.activate();
+	// Couche selectable
+	map.selectionnable(l);
 	
 	// Ajouter les auteurs
 	<BOUCLE_a(AUTEURS){geoposition}{tout}{id_auteur?}{statut?}{0,#ENV{max,200}}>

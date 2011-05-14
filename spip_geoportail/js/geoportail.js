@@ -376,7 +376,9 @@ jQuery.geoportail =
 		for (i=map.getMap().layers.length-1; i>=0; i--)
 		{	for(j=0; j<couches.length; j++)
 			{	if (map.getMap().layers[i].name == couches[j]) 
-				{	map.getMap().removeLayer(map.getMap().layers[i]);
+				{	// map.getMap().removeLayer(map.getMap().layers[i]);
+					map.getMap().layers[i].displayInLayerSwitcher = false;
+					map.getMap().layers[i].setVisibility (false);
 					break;
 				}
 			}
@@ -1031,50 +1033,60 @@ jQuery.geoportail =
 		imgPreloader.src = src;
 	},
 	
-	// Fonction d'affichage d'un popup sur une carte
-	popupFeature: function(feature) 
-	{	// OpenLayers.Popup.FramedCloud 
-		// OpenLayers.Popup.AnchoredBubble
-		// var spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true });
-		var spip_popup = OpenLayers.Class(OpenLayers.Popup[jQuery.geoportail.spip_popup], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
-		var html = "";
-		var att = feature.attributes;
+	/** Fonction d'affichage d'un popup sur une carte
+	* - feature : l'objet
+	* - pos : position du curseur
+	* - hover : survol
+	*/
+	popupFeature: function(feature, pos, hover) 
+	{	var att = feature.attributes;
 		// Fonction popup perso
 		if (typeof (att.popup) == 'function')
-		{	att.popup(feature);
+		{	att.popup(feature, pos, hover);
 			return;
 		}
+		// Popup par defaut
+		var spip_popup;
+		if (hover) spip_popup = OpenLayers.Class(OpenLayers.Popup.Anchored, { 'autoSize': true, 'displayClass':"Anchored Anchored_hover" });
+		else spip_popup = OpenLayers.Class(OpenLayers.Popup[jQuery.geoportail.spip_popup], { 'autoSize': true, 'displayClass':jQuery.geoportail.spip_popup });
+		var html = "";
 		var lien = null;
 		if (att.url) 
 		{	// Affichage des images
-			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.afficheImage('" + att.url + "','"+att.name+"')\">";
+			if (att.extension in {'jpg':'','gif':'','png':''}) lien = "<a href=\"javascript:jQuery.geoportail.afficheImage('" + att.url + "','"+att.name.replace(/"/g,'\\\'')+"')\">";
 			else lien = "<a href='" + att.url + "'>";
 		}
 		if (att.logo) html += (lien ? lien : "") + att.logo + (lien ? "</a>" : "");
-		if (att.img) html += (lien ? lien : "") + "<img src='"+att.img+"' class='spip_logos' />" + (lien ? "</a>" : "");
+		else if (att.img) html += (lien ? lien : "") + "<img src='"+att.img+"' class='spip_logos' />" + (lien ? "</a>" : "");
 		if (att.name) html += "<p class=titre>"+ (lien ? lien : "") + att.name + (lien ? "</a>" : "") + "</p>";
-		if (att.description) html += att.description;
+		if (!hover && att.description) html += att.description;
 		if (!html) return;
 		html = "<div class='"+(att.classe ? att.classe : "")+"'>"+html+"</div>";
-		popup = new spip_popup("popup",
-							feature.geometry.getBounds().getCenterLonLat(),
-							new OpenLayers.Size(400,400),
+		var popup = new spip_popup("popup",
+							pos ? pos:feature.geometry.getBounds().getCenterLonLat(),
+							new OpenLayers.Size(200,200),
 							html,
-							null, true,
-							function(evt) {
-								if (this.feature) $.geoportail.unpopupFeature(this.feature);
-						});
-
-		popup.maxSize = new OpenLayers.Size(400, 200);
+							pos ? {size:new OpenLayers.Size(5,5), offset: new OpenLayers.Pixel(-3,-3) } : null,
+							(hover?false:true),
+							function(evt) { if (this.feature) $.geoportail.unpopupFeature(this.feature); }
+						);
+		// Hauteur max 
+		var h = 200;
+		if (hover)
+		{	// Pour le survol : hauteur calculee sur le logo
+			h = Number(att.logo.replace (/(.*height=.)([0-9]+)(.*)/,"$2"));
+			h = (h?h+10:40);
+		}
+		popup.maxSize = new OpenLayers.Size(400, h);
 		popup.minSize = new OpenLayers.Size(220, 0);
 		popup.feature = feature; //mimic Geoportal.Popup (See closeFeatureInfo)
+		popup.hover = hover;
 		feature.popup = popup;
-		//popup.setBackgroundColor("#ffffcc");
 		feature.layer.map.addPopup(popup);
 	},
 
-	unpopupFeature: function(feature) {
-		Geoportal.Control.unselectFeature(feature);
+	unpopupFeature: function(feature) 
+	{	Geoportal.Control.unselectFeature(feature);
 		feature.layer.drawFeature(feature, 'default');
 		feature.popup = null;
 	},
@@ -1125,14 +1137,37 @@ function geoportail_moveSynchro (e)
 /** Ajoute un layer selectionnable a une carte
 @param l : le layer
 */
-function geoportail_selectionnable (l)
+function geoportail_selectionnable (l, hover)
 {	if (!(l instanceof Array)) l = [l];
+	if (typeof(hover) == 'undefined') hover = $.geoportail.hover;
 	// Controle pour la selection
 	options = {
-		clickout: true, toggle: false,
-		multiple: false, hover: false,
-		onSelect: $.geoportail.popupFeature,
-		onUnselect: $.geoportail.unpopupFeature
+			clickout: true, toggle: false,
+			multiple: false, hover: (hover ? true : false),
+			/*
+			onSelect: $.geoportail.popupFeature,
+			*/
+			onUnselect: $.geoportail.unpopupFeature,
+			callbacks:
+			{	click: function (feature) 
+				{	// Position du curseur
+					var pos = this.layer.map.getLonLatFromPixel(this.handlers.feature.evt.xy);
+					// Selectionner
+					this.unselectAll(); 
+					this.select(feature); 
+					$.geoportail.popupFeature(feature, pos, false); 
+				},
+				clickout: $.geoportail.unpopupFeature,
+				over:  hover ? function (feature, e) 
+				{	// Position du curseur
+					var pos = this.layer.map.getLonLatFromPixel(this.handlers.feature.evt.xy);
+					// Selectionner
+					this.unselectAll(); 
+					this.select(feature);
+					$.geoportail.popupFeature(feature, pos, true); 
+				}: null, 
+				out: function (feature) { if (feature.popup && feature.popup.hover) this.unselectAll(); }
+			}
 		}
 	var layers;
 	if (this.selectControl) 

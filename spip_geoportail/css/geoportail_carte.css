@@ -73,7 +73,9 @@ img.gpGeocodeMatchCodeMatchType
 	margin:0;
 	background:transparent;
 }
-#popup .spip_logos
+
+#popup .spip_logos,
+#popup.Anchored_hover .document .spip_logos
 {	margin:0 0.5em 0 0;
 	float:left;
 }
@@ -91,6 +93,10 @@ img.gpGeocodeMatchCodeMatchType
 #popup .document .spip_logos
 {	margin:auto;
 	float:none;
+}
+
+#popup.Anchored_hover .olPopupContent
+{	overflow:hidden;
 }
 
 #popup .olPopupCloseBox, .gpPopupCloseBox

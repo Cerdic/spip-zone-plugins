@@ -56,6 +56,7 @@ function action_geoportail_config_dist()
 		// Type de popup
  		if (isset($_POST['setpopup']))
  		{	ecrire_meta('geoportail_popup',$_POST['popup']);
+ 			ecrire_meta('geoportail_hover',$_POST['hover']);
  			ecrire_metas();
  		}
 		// Modif des objets a georef
