@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
     <nom>Top bandeau</nom>
-    <auteur>cy_altern
-_ &#169; 2010 - Distribu&#233; sous licence GPL
-    </auteur>
+    <auteur>cy_altern</auteur>
+    <licence>GNU/GPL v3</licence>
     <lien></lien>
-    <icon></icon>
-    <version>0.1</version>
+    <icon>images/topbando.png</icon>
+    <version>0.2.0</version>
     <etat>dev</etat>
     <description>
 Ce plugin permet de g&#233;rer le bandeau de sommet des pages: hauteur et images.
@@ -20,18 +19,29 @@ selon les param&#232;tres d&#233;finis dans [l'interface de configuration->?exec
     </description>
     <prefix>top_bando</prefix>
     <pipeline>
-   	<nom>header_prive</nom>
-        <action>header_prive</action>
+		<nom>jqueryui_forcer</nom>
+        <action>jqueryui_forcer</action>
         <inclure>top_bando_pipelines.php</inclure>
     </pipeline>
+
+	<!-- bouton prive spip sans bando -->
+	<bouton id="top_bando" parent="naviguer">
+		<icone>images/topbando-24.png</icone>
+		<titre>topbando:titre_top_bando</titre>
+		<url>top_bando</url>
+	</bouton>
+	<!-- bouton prive spip avec bando -->
+	<bouton id="top_bando21" parent="bando_squelette" position="0">
+		<icone>images/topbando-24.png</icone>
+		<titre>topbando:titre_top_bando</titre>
+		<url>top_bando</url>
+	</bouton>
+
     <fonctions>top_bando_fonctions.php</fonctions>
-    <necessite id="SPIP" version="[2.0.1;]" />
+    
     <necessite id="cfg" version="[1.10.2;]" />
     <necessite id='spip_bonux' version='[1.8;]' />
-    <!-- pour utiliser ce plugin en SPIP version 2.0.*   -->
-    <necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
-    <!-- pour utiliser ce plugin en SPIP version 2.1 -->
-    <necessite id="lib:jquery-ui-1.7.2" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.7.2.zip" />
+    <necessite id="jqueryui" version="[1.6;]" />
 
     <utilise id="palette" version="[1.0;]" />
     <utilise id="choix_police" version="[0.1;]" />

@@ -79,7 +79,7 @@ modifier ces param&#232;tres.  -->
         
     }
     
-  // retourne 3 objets donnant param�tres du bando (les dimensions sont *reduites � l'�chelle*) 
+  // retourne 3 objets donnant parametres du bando (les dimensions sont *reduites a l'echelle*) 
   // this.hBando = hauteur en px  
   // this.H = calage horizontal pour background-image (left/center/right) 
   // this.V = valeur de top en px pour background-image 
@@ -94,7 +94,7 @@ modifier ces param&#232;tres.  -->
         this.hBando = hbando;
     }
     
-  // g�re l'affichage des bordures selon la config
+  // gere l'affichage des bordures selon la config
     function gerer_bordures(){
         if (jQuery("input[name='toutes_bordures_identiques']:checked").val() == 'oui') {
         	jQuery("#voir_bordure_unique").show();
@@ -379,6 +379,7 @@ modifier ces param&#232;tres.  -->
         [<img id="hauteur_bando_oeil" src="(#CHEMIN{images/oeil_o.gif})" alt="<:topbando:visualiser:>" class="oeil_voir"/>]
         <br/><small><:topbando:utilisez_le_cadre_rouge_pour_redimensionner:></small>
     </p>
+
     <div id="bando" style="background: [(#ENV{utiliser_bando}|=={oui}|oui) url([(#LOGO_SITE_SPIP_SURVOL||image_reduire{500,0}|extraire_attribut{src})]) ]
                           no-repeat center [(#ENV{fond_transparent}|=={oui}|?{'transparent',[(#ENV{couleur_principale,#FFFFFF})]})]; 
                           width: 500px; 
@@ -626,7 +627,7 @@ modifier ces param&#232;tres.  -->
                          [(#ENV{redimensionner_logo}|=={oui}|oui) [margin-top: (#ENV{marge_sup_logo}|mult{[(#GET{fact_reduc})]})px;]]
                          [(#ENV{utiliser_logo}|=={non}|oui)display: none;]" 
                   id="img_logo_titre"/>]
-          
+
             [(#PLUGIN{choix_police}|?{ 
             	[(#ENV{utiliser_image_typo}|=={oui}|?{
                     [<strong id="nom_site_spip" style="margin-right: auto;
@@ -636,13 +637,15 @@ modifier ces param&#232;tres.  -->
                                                        [width: (#GET{largeur_titre_reduite})px;]
                                                        [padding-top: (#GET{marge_sup_titre_reduite})px;]
                                                        ">(#MODELE{typo}{texte=[(#GET{titre})],
-                                                                        [(#ENV{fond_transparent}|=={oui}|non)[couleur=(#ENV{couleur_principale}),]})]
+                                                                        couleur=[(#ENV{couleur_principale_texte,#000000})],
                                                                         taille=[(#GET{taille_police_reduite})],
-                                                                        largeur=[(#GET{largeur_titre_reduite})]})</strong>]
+                                                                        largeur=[(#GET{largeur_titre_reduite})]
+                                                                        })</strong>]
                     ,
                     [<strong id="nom_site_spip" style="margin-right: auto;
                                                        margin-left:auto;
                                                        display: block;
+                                                       [color: (#ENV{couleur_principale_texte});]
                                                        [float: (#ENV{emplacement_titre});]
                                                        [width: (#GET{largeur_titre_reduite})px;]
                                                        [padding-top: (#GET{marge_sup_titre_reduite})px;]

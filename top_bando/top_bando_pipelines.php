@@ -10,39 +10,27 @@
  * @version    $Id$
  */
 
-
 /**
- * ajouter js et css necessaires pour utiliser jQuery UI dans l'interface de config CFG
+ * fonction top_bando_jqueryui_forcer() 
+ * utiliser l'API du plugin jqueryUI pour charger js et css des UI
+ * inseres dans le head des pages privees et publiques par le pipeline jqueryui_forcer
  *
- * @param string $flux le code HTML a modifier
- * @return string
+ * @param string $scripts la liste des UI a charger
+ * @return $scripts
  */
-function top_bando_header_prive($flux){
-	// Initialisation des valeurs de config
-	$config = @unserialize($GLOBALS['meta']['top_bando']);
- 
-	// si on veut pouvoir manipuler la zone de recadrage en drag/resize dans la page CFG il faut les jQuery UI
-	if (_request('exec') == 'cfg' AND _request('cfg') == 'top_bando'){
-
-		// Insertion des librairies js en fonction de la version de jQuery donc de celle de SPIP...
-		// en SPIP 2.1.* jQuery est en version 1.3.+ donc ui en version 1.7.2
-		if (strpos('2.1', $GLOBALS['spip_version_affichee'])) {
-			$flux .='<link type="text/css" href="'.url_absolue(find_in_path('lib/jquery-ui-themes-1.7.2/themes/base/jquery-ui.css')).'" rel="Stylesheet"/>'."\r\n";
-			$flux .='<script src="'.url_absolue(find_in_path('lib/jquery-ui-1.7.2/ui/jquery-ui.js')).'"></script>'."\r\n";
-			$flux .='<script src="'.find_in_path('lib/jquery-ui-1.7.2/ui/ui.resizable.js').'"></script>'."\r\n";
-			$flux .='<script src="'.find_in_path('lib/jquery-ui-1.7.2/ui/ui.draggable.js').'"></script>'."\r\n";
-		}
-		// en SPIP 2.0.* jQuery est en version 1.2.6 donc ui en version 1.6
-		else {
-			$flux .='<link type="text/css" href="'.find_in_path('lib/jquery.ui-1.6/themes/default/ui.all.css').'" rel="Stylesheet"/>'."\r\n";
-			$flux .='<script src="'.find_in_path('lib/jquery.ui-1.6/ui/ui.core.js').'"></script>'."\r\n";
-			$flux .='<script src="'.find_in_path('lib/jquery.ui-1.6/ui/ui.resizable.js').'"></script>'."\r\n";
-			$flux .='<script src="'.find_in_path('lib/jquery.ui-1.6/ui/ui.draggable.js').'"></script>'."\r\n";
-		}
-      
+function top_bando_jqueryui_forcer($scripts) {
+	$version = substr($GLOBALS['spip_version_affichee'], 0, 3);
+	if ( $version == '2.1') {
+		$scripts[] = "jquery.ui.resizable";
+		$scripts[] = "jquery.ui.draggable";
 	}
-
-	return $flux;
+	elseif ($version == '2.0') {
+		$scripts[] = "ui.resizable";
+		$scripts[] = "ui.draggable";
+	}
+		
+	return $scripts;
 }
+	
 
 ?>
