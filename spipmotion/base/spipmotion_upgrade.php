@@ -185,6 +185,10 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('spip_documents');
 			ecrire_meta($nom_meta_base_version,$current_version='0.7.6');
 		}
+		if (version_compare($current_version,'0.7.7','<')){
+			maj_tables('spip_documents');
+			ecrire_meta($nom_meta_base_version,$current_version='0.7.7');
+		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/
 		 * TODO : insérer une préconfiguration par défaut

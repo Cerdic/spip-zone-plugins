@@ -37,6 +37,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 				$infos['videocodec'] = $info[0]['Format'][0];
 				$infos['framerate'] = $info[0]['Frame_rate'][0];
 				$infos['framecount'] = $info[0]['Frame_count'][0];
+				$infos['rotation'] = intval($info[0]['Rotation'][0]);
 				$infos['hasvideo'] = 'oui';
 			}
 			if($track == 'track type="Audio"'){

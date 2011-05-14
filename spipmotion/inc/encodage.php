@@ -75,9 +75,13 @@ function encodage($source,$doc_attente){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
 		return;
 
+	$encodeur = lire_config("spipmotion/encodeur_$extension_attente",'');
 	$ffmpeg_version = lire_config('spipmotion_compiler/ffmpeg_version','0.6');
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 	
+	if($source['rotation'] == '90'){
+		$encodeur = 'ffmpeg';
+	}
 	/**
 	 * On change le statut d'encodage à en_cours pour
 	 * - changer les messages sur le site (ce media est en cours d'encodage par exemple)
@@ -145,9 +149,10 @@ function encodage($source,$doc_attente){
 	 * -* nombre de canaux
 	 */
 	if($source['hasaudio'] == 'oui'){
-		$texte .= lire_config("spipmotion/acodec_$extension_attente") ? "acodec=".lire_config("spipmotion/acodec_$extension_attente")."\n":'';
 		$acodec = lire_config("spipmotion/acodec_$extension_attente") ? "--acodec ".lire_config("spipmotion/acodec_$extension_attente") :'';
-
+		if(($encodeur == "ffmpeg") && ($acodec == "--acodec vorbis")){
+			$acodec = '--acodec libvorbis';
+		}
 		if(in_array(lire_config("spipmotion/acodec_$extension_attente",''),array('vorbis','libvorbis'))){
 			$qualite = lire_config("spipmotion/qualite_audio_$extension_attente",'4');
 			$audiobitrate_ffmpeg2theora = "--audioquality $qualite";
@@ -200,7 +205,7 @@ function encodage($source,$doc_attente){
 			 * ffmpeg ne peut resampler
 			 * On force le codec audio à aac s'il était à libmp3lame
 			 */
-			if(($source['audiochannels'] > 2) && (lire_config("spipmotion/encodeur_$extension_attente",'') != 'ffmpeg2theora')){
+			if(($source['audiochannels'] > 2) && ($encodeur != 'ffmpeg2theora')){
 				$samplerate = $source['audiosamplerate'];
 				spip_log($acodec,'spipmotion');
 				if($acodec == '--acodec libmp3lame'){
@@ -219,7 +224,7 @@ function encodage($source,$doc_attente){
 				$samplerate = $source['audiosamplerate'];
 			}
 		}else{
-			if(($source['audiochannels'] > 2) && (lire_config("spipmotion/encodeur_$extension_attente",'') != 'ffmpeg2theora')){
+			if(($source['audiochannels'] > 2) && ($encodeur != 'ffmpeg2theora')){
 				$samplerate = $source['audiosamplerate'];
 				if($acodec == '--acodec libmp3lame'){
 					$acodec = '--acodec libfaac';
@@ -238,7 +243,7 @@ function encodage($source,$doc_attente){
 		 */
 		if(in_array($extension_attente,array('ogg','ogv','oga')
 				&& ($source['audiochannels'] < 2)
-				&& (lire_config("spipmotion/encodeur_$extension_attente",'') != 'ffmpeg2theora'))){
+				&& ($encodeur != 'ffmpeg2theora'))){
 			spip_log('on passe en deux canaux','spipmotion');
 			$audiochannels = 2;
 		}else{
@@ -337,7 +342,7 @@ function encodage($source,$doc_attente){
 		 * ffmpeg2theora lui a besoin d'une estimation de bitrate
 		 */
 		if(intval($source['videobitrate']) && (intval($source['videobitrate']) < (lire_config("spipmotion/bitrate_$extension_attente","448"))*1000)){
-			if(lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora'){
+			if($encodeur == 'ffmpeg2theora'){
 				$vbitrate = $source['videobitrate'];
 			}else{
 				$vbitrate = null;
@@ -393,7 +398,7 @@ function encodage($source,$doc_attente){
 		spip_log("on est en $passes passe(s)","spipmotion");
 		$pass_log_file = $dossier.$query.'-pass';
 		
-		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
+		if(($encodeur == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
 			$encodage = $spipmotion_sh." --force true $video_size --e $chemin --videoquality ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $fps $bitrate $audiofreq $audiobitrate_ffmpeg2theora $audiochannels_ffmpeg2theora --s $fichier_temp $deux_passes --log $fichier_log --encodeur ffmpeg2theora";
@@ -401,7 +406,7 @@ function encodage($source,$doc_attente){
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
 			spip_log($retour_int,'spipmotion');
 		}else{
-			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($extension_attente == 'webm'))){
+			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($vcodec == '--vcodec libtheora') OR ($extension_attente == 'webm'))){
 				spip_log('on encode en 2 passes','spipmotion');
 				spip_log('Premiere passe','spipmotion');
 				if ($ffmpeg_version < '0.7'){
@@ -409,7 +414,10 @@ function encodage($source,$doc_attente){
 				}else{
 					$preset_1 = $preset_quality ? '-preset '.$preset_quality : '';
 				}
-				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal\"";
+				if($source['rotation'] == '90'){
+					$rotation = "-vf transpose=1";
+				}
+				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal $rotation\"";
 				$encodage_1 = $spipmotion_sh." --force true --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
 				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
@@ -426,7 +434,7 @@ function encodage($source,$doc_attente){
 						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					}
 					$metadatas = "-map_metadata $fichier_temp:$chemin";
-					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $infos_sup_normal $metadatas\"";
+					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $infos_sup_normal $rotation $metadatas\"";
 					$fichier_log = "$fichier_log-pass2.log";
 					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
 					spip_log($encodage,'spipmotion');
@@ -442,7 +450,10 @@ function encodage($source,$doc_attente){
 				}else{
 					$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal":'';
 				}
-				$infos_sup_normal .= " -map_metadata $fichier_temp:$chemin";
+				if($source['rotation'] == '90'){
+					$rotation = "-vf transpose=1";
+				}
+				$infos_sup_normal .= " -map_metadata $fichier_temp:$chemin $rotation";
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
