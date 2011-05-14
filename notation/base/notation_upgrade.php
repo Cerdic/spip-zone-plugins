@@ -17,8 +17,7 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 		if ($current_version==0.0){
 			include_spip('base/notation');
 			creer_base();
-			# creer_base ne marche pas : SPIP ne fait pas le alter sur spip_articles
-			sql_alter("TABLE spip_articles ADD COLUMN accepter_note CHAR(3) DEFAULT '' NOT NULL");
+			maj_tables(array('spip_articles'));
 			// mettre les metas par defaut
 			$config = charger_fonction('config','inc');
 			$config();
