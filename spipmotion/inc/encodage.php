@@ -75,6 +75,7 @@ function encodage($source,$doc_attente){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
 		return;
 
+	$ffmpeg_version = lire_config('spipmotion_compiler/ffmpeg_version','0.6');
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 	
 	/**
@@ -195,7 +196,18 @@ function encodage($source,$doc_attente){
 				unset($audiosamplerates[2]);
 				unset($audiosamplerates[3]);
 			}
-			if(!in_array($source['audiosamplerate'],$audiosamplerates)){
+			/**
+			 * ffmpeg ne peut resampler
+			 * On force le codec audio à aac s'il était à libmp3lame
+			 */
+			if(($source['audiochannels'] > 2) && (lire_config("spipmotion/encodeur_$extension_attente",'') != 'ffmpeg2theora')){
+				$samplerate = $source['audiosamplerate'];
+				spip_log($acodec,'spipmotion');
+				if($acodec == '--acodec libmp3lame'){
+					$acodec = '--acodec libfaac';
+					$audiobitrate_ffmpeg = $audiobitrate_ffmpeg2theora = "--audiobitrate 128";
+				}
+			}else if(!in_array($source['audiosamplerate'],$audiosamplerates)){
 				$audiosamplerate_final = min($audiosamplerates);
 				foreach($audiosamplerates as $samplerate){
 					if($source['audiosamplerate'] >= $samplerate){
@@ -207,7 +219,15 @@ function encodage($source,$doc_attente){
 				$samplerate = $source['audiosamplerate'];
 			}
 		}else{
-			$samplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
+			if(($source['audiochannels'] > 2) && (lire_config("spipmotion/encodeur_$extension_attente",'') != 'ffmpeg2theora')){
+				$samplerate = $source['audiosamplerate'];
+				if($acodec == '--acodec libmp3lame'){
+					$acodec = '--acodec libfaac';
+					$audiobitrate_ffmpeg = $audiobitrate_ffmpeg2theora = "--audiobitrate 128";
+				}
+			}else{
+				$samplerate = lire_config("spipmotion/frequence_audio_$extension_attente","22050");
+			}
 		}
 		$audiofreq = "--audiofreq ".$samplerate;
 		$texte .= "ar=$samplerate\n";
@@ -216,8 +236,7 @@ function encodage($source,$doc_attente){
 		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
 		 * le format choisi est vorbis (l'encodeur vorbis de ffmpeg ne gère pas le mono)
 		 */
-		if(($source['audiochannels'] > 2)
-			OR (in_array($extension_attente,array('ogg','ogv','oga'))
+		if(in_array($extension_attente,array('ogg','ogv','oga')
 				&& ($source['audiochannels'] < 2)
 				&& (lire_config("spipmotion/encodeur_$extension_attente",'') != 'ffmpeg2theora'))){
 			spip_log('on passe en deux canaux','spipmotion');
@@ -337,7 +356,7 @@ function encodage($source,$doc_attente){
 		 * Paramètres supplémentaires pour encoder en h264
 		 */
 		if($vcodec == '--vcodec libx264'){
-			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'hq');
+			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
 			if(in_array('--enable-pthreads',lire_config('spipmotion_compiler/configuration'))){
 				$infos_sup_normal .= "-threads 0";
 			}
@@ -377,7 +396,6 @@ function encodage($source,$doc_attente){
 		if((lire_config("spipmotion/encodeur_$extension_attente",'') == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
-			//$encodage = "ffmpeg2theora $chemin -v  $bitrate_ffmpeg2theora --soft-target $audiobitrate_ffmpeg2theora -H $samplerate -c $audiochannels --max_size ".$width_finale."x".$height_finale." $deux_passes -F $fps_num --optimize --nice 9 -o $fichier_temp &> $fichier_log";
 			$encodage = $spipmotion_sh." --force true $video_size --e $chemin --videoquality ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $fps $bitrate $audiofreq $audiobitrate_ffmpeg2theora $audiochannels_ffmpeg2theora --s $fichier_temp $deux_passes --log $fichier_log --encodeur ffmpeg2theora";
 			spip_log($encodage,'spipmotion');
 			$lancement_encodage = exec($encodage,$retour,$retour_int);
@@ -386,7 +404,11 @@ function encodage($source,$doc_attente){
 			if(($passes == "2") && ((($vcodec == '--vcodec libx264') && ($preset_quality != 'hq')) OR ($vcodec == '--vcodec flv') OR ($extension_attente == 'webm'))){
 				spip_log('on encode en 2 passes','spipmotion');
 				spip_log('Premiere passe','spipmotion');
-				$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
+				if ($ffmpeg_version < '0.7'){
+					$preset_1 = $preset_quality ? '-vpre '.$preset_quality.'_firstpass' : '';
+				}else{
+					$preset_1 = $preset_quality ? '-preset '.$preset_quality : '';
+				}
 				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal\"";
 				$encodage_1 = $spipmotion_sh." --force true --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
 				spip_log($encodage_1,'spipmotion');
@@ -398,9 +420,15 @@ function encodage($source,$doc_attente){
 				 */
 				if($retour_int_1 == 0){
 					spip_log('Seconde passe','spipmotion');
-					$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal" : $infos_sup_normal;
-					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $infos_sup_normal \"";
-					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log-pass2.log";
+					if ($ffmpeg_version < '0.7'){
+						$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal" : $infos_sup_normal;
+					}else{
+						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
+					}
+					$metadatas = "-map_metadata $fichier_temp:$chemin";
+					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $infos_sup_normal $metadatas\"";
+					$fichier_log = "$fichier_log-pass2.log";
+					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
 					spip_log($retour_int,'spipmotion');
@@ -409,7 +437,12 @@ function encodage($source,$doc_attente){
 				}
 			}else{
 				spip_log('on encode en 1 passe','spipmotion');
-				$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
+				if ($ffmpeg_version < '0.7'){
+					$infos_sup_normal = $preset_quality ? "-vpre $preset_quality $infos_sup_normal":'';
+				}else{
+					$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal":'';
+				}
+				$infos_sup_normal .= " -map_metadata $fichier_temp:$chemin";
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}

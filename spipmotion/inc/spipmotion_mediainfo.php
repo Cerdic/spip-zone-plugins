@@ -26,7 +26,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 			if($track == 'track type="General"'){
 				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : $info[0]['Movie_name'][0];
 				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
-				$infos['credits'] = $info[0]['Copyright'][0];
+				$infos['credits'] .= $info[0]['Performer'][0]? $info[0]['Performer'][0].($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
 				$infos['duree'] = $info[0]['Duration'][0] / 1000;
 				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
 			}

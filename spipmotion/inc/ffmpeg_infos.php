@@ -60,7 +60,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		if (lire_fichier($chemin_fichier, $contenu)){
 			$data = array();
 			$look_ups = array(
-				'version' => 'FFmpeg version',
+				'version' => 'ffmpeg version',
 				'configuration'=>' configuration: ',
 				'formats'=>'File formats:',
 				'codecs'=>'Codecs:',
