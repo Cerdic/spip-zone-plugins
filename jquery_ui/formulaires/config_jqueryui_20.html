@@ -1,0 +1,62 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=jqueryui -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_jqueryui">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+
+	<ul>
+	[(#SAISIE{checkbox,plugins,
+		label=<:jqueryui:cfg_lbl_plugins:>,
+		explication=<:jqueryui:cfg_explication_plugins:>,
+		disable=#ENV{plugins_disable},
+		datas=#ARRAY{
+			jquery.ui.all,<:jqueryui:cfg_val_complete:>,
+			ui.core,<:jqueryui:cfg_val_ui_core:>,
+			ui.draggable,<:jqueryui:cfg_val_ui_draggable:>,
+			ui.droppable,<:jqueryui:cfg_val_ui_droppable:>,	
+			ui.resizable,<:jqueryui:cfg_val_ui_resizable:>,
+			ui.selectable,<:jqueryui:cfg_val_ui_selectable:>,			
+			ui.sortable,<:jqueryui:cfg_val_ui_sortable:>,
+			ui.accordion,<:jqueryui:cfg_val_ui_accordion:>,
+			ui.dialog,<:jqueryui:cfg_val_ui_dialog:>,
+			ui.slider,<:jqueryui:cfg_val_ui_slider:>,
+			ui.tabs,<:jqueryui:cfg_val_ui_tabs:>,
+			ui.datepicker,<:jqueryui:cfg_val_ui_datepicker:>,
+			effects.core,<:jqueryui:cfg_val_effects_core:>,
+			effects.blind,<:jqueryui:cfg_val_effects_blind:>,
+			effects.bounce,<:jqueryui:cfg_val_effects_bounce:>,
+			effects.clip,<:jqueryui:cfg_val_effects_clip:>,
+			effects.drop,<:jqueryui:cfg_val_effects_drop:>,
+			effects.explode,<:jqueryui:cfg_val_effects_explode:>,
+			effects.fold,<:jqueryui:cfg_val_effects_fold:>,
+			effects.highlight,<:jqueryui:cfg_val_effects_highlight:>,
+			effects.pulsate,<:jqueryui:cfg_val_effects_pulsate:>,
+			effects.scale,<:jqueryui:cfg_val_effects_scale:>,
+			effects.shake,<:jqueryui:cfg_val_effects_shake:>,
+			effects.slide,<:jqueryui:cfg_val_effects_slide:>,
+			effects.transfer,<:jqueryui:cfg_val_effects_transfer:>}
+	})]
+			
+	</ul>
+
+	[(#SET{liste_themes, [(#NOOP|jqueryui_array_themes)]})]
+	<ul>
+	[(#SAISIE{radio,theme,
+		label=<:jqueryui:cfg_lbl_themes:>,
+		explication=<:jqueryui:cfg_explication_themes:>,
+		datas=#GET{liste_themes}
+	})]
+	</ul>
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+	</p>
+</div></form>
+#CFG_ARBO{jqueryui}
+</div>

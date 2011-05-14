@@ -5,5 +5,9 @@
 
 #CACHE{0}
 <div class="ajax">
-#FORMULAIRE_CONFIG_JQUERYUI
+[(#SPIP_VERSION|substr{0,3}|=={2.1}|?{
+	#FORMULAIRE_CONFIG_JQUERYUI
+	,
+	#FORMULAIRE_CONFIG_JQUERYUI_20
+})]
 </div>

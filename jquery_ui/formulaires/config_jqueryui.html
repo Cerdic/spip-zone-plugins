@@ -16,7 +16,7 @@
 		explication=<:jqueryui:cfg_explication_plugins:>,
 		disable=#ENV{plugins_disable},
 		datas=#ARRAY{
-			jquery-ui-1.8.2.custom,<:jqueryui:cfg_val_complete:>,
+			jquery-ui,<:jqueryui:cfg_val_complete:>,
 			jquery.ui.core,<:jqueryui:cfg_val_ui_core:>,
 			jquery.ui.widget,<:jqueryui:cfg_val_ui_widget:>,
 			jquery.ui.mouse,<:jqueryui:cfg_val_ui_mouse:>,
@@ -49,6 +49,15 @@
 			jquery.effects.transfer,<:jqueryui:cfg_val_effects_transfer:>}
 	})]
 			
+	</ul>
+
+	[(#SET{liste_themes, [(#NOOP|jqueryui_array_themes)]})]
+	<ul>
+	[(#SAISIE{radio,theme,
+		label=<:jqueryui:cfg_lbl_themes:>,
+		explication=<:jqueryui:cfg_explication_themes:>,
+		datas=#GET{liste_themes}
+	})]
 	</ul>
 
 

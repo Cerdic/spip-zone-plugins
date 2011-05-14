@@ -14,56 +14,40 @@ function jqueryui_jquery_plugins($plugins){
 	 * Gestion des dépendances inter plugins
 	 */
 	$dependance_core = array(
-							'jquery.ui.mouse',
-							'jquery.ui.widget',
-							'jquery.ui.datepicker'
+							'ui.accordion',
+							'ui.datepicker',
+							'ui.dialog',
+							'ui.draggable',
+							'ui.droppable',
+							'ui.resizable',
+							'ui.selectable',
+							'ui.slider',
+							'ui.sortable',
+							'ui.tabs'
 	);
 
-	/**
-	 * Dépendances à widget
-	 * Si un autre plugin est dépendant d'un de ceux là, on ne les ajoute pas
-	 */
-	$dependance_widget = array(
-							'jquery.ui.mouse',
-							'jquery.ui.accordion',
-							'jquery.ui.autocomplete',
-							'jquery.ui.button',
-							'jquery.ui.dialog',
-							'jquery.ui.tabs',
-							'jquery.ui.progressbar'						
-							);
-	
-	$dependance_mouse = array(
-							'jquery.ui.draggable',
-							'jquery.ui.droppable',
-							'jquery.ui.resizable',
-							'jquery.ui.selectable',
-							'jquery.ui.sortable',
-							'jquery.ui.slider'
-						);
-	
-	$dependance_position = array(
-							'jquery.ui.autocomplete',
-							'jquery.ui.dialog',
-							);
-	
 	$dependance_draggable = array(
-							'jquery.ui.droppable'
+							'ui.droppable',
+							'ui.dialog'
+							);
+
+	$dependance_resizable = array(
+							'ui.dialog'
 							);
 	
 	$dependance_effects = array(
-							'jquery.effects.blind',
-							'jquery.effects.bounce',
-							'jquery.effects.clip',
-							'jquery.effects.drop',
-							'jquery.effects.explode',
-							'jquery.effects.fold',
-							'jquery.effects.highlight',
-							'jquery.effects.pulsate',
-							'jquery.effects.scale',
-							'jquery.effects.shake',
-							'jquery.effects.slide',
-							'jquery.effects.transfer'
+							'effects.blind',
+							'effects.bounce',
+							'effects.clip',
+							'effects.drop',
+							'effects.explode',
+							'effects.fold',
+							'effects.highlight',
+							'effects.pulsate',
+							'effects.scale',
+							'effects.shake',
+							'effects.slide',
+							'effects.transfer'
 						);
 	
 	/**
@@ -73,39 +57,25 @@ function jqueryui_jquery_plugins($plugins){
 	 * 
 	 * On commence par le bas de l'échelle :
 	 * - draggable
-	 * - position
-	 * - mouse
-	 * - widget
+	 * - resizable
 	 * - core
 	 * - effects
 	 */
 	if(count($intersect = array_intersect($config['plugins'],$dependance_draggable)) > 0){
 		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.ui.draggable");
+		array_splice($config['plugins'],$keys[0], 0, "ui.draggable");
 	}
-	if(count($intersect = array_intersect($config['plugins'],$dependance_position)) > 0){
+	if(count($intersect = array_intersect($config['plugins'],$dependance_resizable)) > 0){
 		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.ui.position");
-	}
-	if(count($intersect = array_intersect($config['plugins'],$dependance_mouse)) > 0){
-		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.ui.mouse");
-	}
-	if(count($intersect = array_intersect($config['plugins'],$dependance_widget)) > 0){
-		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.ui.widget");
-	}
+		array_splice($config['plugins'],$keys[0], 0, "ui.resizable");
+	}	
 	if(count($intersect = array_intersect($config['plugins'],$dependance_core)) > 0){
 		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.ui.core");
+		array_splice($config['plugins'],$keys[0], 0, "ui.core");
 	}
 	if(count($intersect = array_intersect($config['plugins'],$dependance_effects)) > 0){
 		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.effects.core");
-	}
-	if(count($intersect = array_intersect($config['plugins'],$dependance_effects)) > 0){
-		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.effects.core");
+		array_splice($config['plugins'],$keys[0], 0, "effects.core");
 	}
 	$config['plugins'] = array_unique($config['plugins']);
 	foreach ($config['plugins'] as $val) {
@@ -132,7 +102,7 @@ function jqueryui_insert_head($flux) {
 	$config = @unserialize($GLOBALS['meta']['jqueryui']);
 
 	// recuperer le repertoire du theme
-	$theme = 'base/';
+	$theme = 'default/';
 	if (isset($config['theme']) AND $config['theme'] != '')
 		$theme = $config['theme'].'/';
 	if ($theme == 'no_css/')
@@ -141,26 +111,14 @@ function jqueryui_insert_head($flux) {
 	// recuperer la liste des plugins jquery actives ou issus du pipeline jqueryui_forcer
 	$config['plugins'] = array_unique(array_merge(sinon(pipeline('jqueryui_forcer'),array()),$config['plugins']));
 
-	// ajouter core et theme si necessaire
-	if (!in_array('jquery.ui.core', $config['plugins']))
-		$config['plugins'][] = 'jquery.ui.core';
-	if (!in_array('jquery.ui.theme', $config['plugins']))
-		$config['plugins'][] = 'jquery.ui.theme';
+	// en 1.6 pas de CSS par plugin: ui.all.css comprend tout sauf datepicker
+	if (!in_array('ui.all', $config['plugins']))
+		$config['plugins'][] = 'ui.all';
 		
 	// les CSS correspondantes aux plugins
 	$Tjquery_css = array(
-						'jquery.ui.accordion',
-						'jquery.ui.autocomplete',
-						'jquery.ui.button',
-						'jquery.ui.core',
-						'jquery.ui.datepicker',
-						'jquery.ui.dialog',
-						'jquery.ui.progressbar',
-						'jquery.ui.resizable',
-						'jquery.ui.selectable',
-						'jquery.ui.slider',
-						'jquery.ui.tabs',
-						'jquery.ui.theme'
+						'ui.all',
+						'ui.datepicker'
 						);
 
 	// appeler les CSS necessaires

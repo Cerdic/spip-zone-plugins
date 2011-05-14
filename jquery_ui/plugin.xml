@@ -1,20 +1,48 @@
 <plugin>
 	<nom>jQuery UI</nom>
 	<auteur>jQuery Team</auteur>
-	<version>1.8.9</version>
+	<version>1.6</version>
 	<etat>stable</etat>
 	<description><multi>
-		[fr]jQuery UI pour SPIP.
-		[en]jQuery UI for SPIP.
+		[fr]jQuery UI pour SPIP 2.0.
+		[en]jQuery UI for SPIP 2.0.
 	</multi></description>
 	<lien>http://www.spip-contrib.net/spip.php?article3612</lien>
 	<prefix>jqueryui</prefix>
 	<icon>images/jqueryui.png</icon>
+	<options>jqueryui_options_20.php</options>
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>jqueryui_pipelines_20.php</inclure>
+	</pipeline>
+	<pipeline><nom>jqueryui_forcer</nom></pipeline>
+	<pipeline><nom>insert_head</nom></pipeline>
+	<pipeline><nom>header_prive</nom></pipeline>
+	<necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
+	<necessite id="saisies" />
+	<categorie>outil</categorie>
+</plugin>
+<plugin spip="[2.1.0;]">
+	<nom>jQuery UI</nom>
+	<auteur>jQuery Team</auteur>
+	<version>1.8.9</version>
+	<etat>stable</etat>
+	<description><multi>
+		[fr]jQuery UI pour SPIP 2.1.
+		[en]jQuery UI for SPIP 2.1.
+	</multi></description>
+	<lien>http://www.spip-contrib.net/spip.php?article3612</lien>
+	<prefix>jqueryui</prefix>
+	<icon>images/jqueryui.png</icon>
+	<options>jqueryui_options.php</options>
 	<pipeline>
 		<nom>jquery_plugins</nom>
 		<inclure>jqueryui_pipelines.php</inclure>
 	</pipeline>
 	<pipeline><nom>jqueryui_forcer</nom></pipeline>
+	<pipeline><nom>insert_head</nom></pipeline>
+	<pipeline><nom>header_prive</nom></pipeline>
 	<necessite id="lib:jquery-ui-1.8.9" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.8.9.zip" />
+	<necessite id="saisies" />
 	<categorie>outil</categorie>
 </plugin>

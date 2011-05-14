@@ -7,6 +7,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//C
 	'cfg_boite_jqueryui' => 'Configuration de jQuery UI',
 	'cfg_explication_plugins' => 'Choisissez les plugins &agrave; ins&eacute;rer dans l\'ent&ecirc;te des pages publiques.',
+	'cfg_explication_themes' => 'Choisissez le th&egrave;mes pour l\'habillage de jQuery-UI.',
+	'cfg_no_css' => 'ne pas charger les CSS de jQuery-UI',
+	'cfg_lbl_plugins' => 'Plugins',
+	'cfg_lbl_themes' => 'Th&egrave;me',
+	'cfg_titre_jqueryui' => 'jQuery UI',
 
 	'cfg_val_complete' => 'jQuery UI complet',
 	'cfg_val_effects_blind' => 'Effet blind',
@@ -38,10 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_val_ui_slider' => 'UI slider',
 	'cfg_val_ui_sortable' => 'UI sortable',
 	'cfg_val_ui_tabs' => 'UI tabs',
-	'cfg_val_ui_widget' => 'UI widget',
-	
-	'cfg_lbl_plugins' => 'Plugins',
-	'cfg_titre_jqueryui' => 'jQuery UI'
+	'cfg_val_ui_widget' => 'UI widget'
 	
 );
 ?>

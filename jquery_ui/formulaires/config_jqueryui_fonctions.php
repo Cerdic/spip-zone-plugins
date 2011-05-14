@@ -123,5 +123,4 @@ function cfg_config_jqueryui_pre_traiter(&$cfg){
 	$cfg->val['plugins'] = $valeurs;
 }
 
-
 ?>
