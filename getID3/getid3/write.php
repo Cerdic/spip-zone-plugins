@@ -581,7 +581,7 @@ class getid3_writetags
 		foreach ($tag_data_vorbiscomment as $tag_key => $valuearray) {
 			foreach ($valuearray as $key => $value) {
 				str_replace("\r", "\n", $value);
-				if (strstr($value, "\n")) {
+				if (is_string($value) && strstr($value, "\n")) {
 					unset($tag_data_vorbiscomment[$tag_key][$key]);
 					$multilineexploded = explode("\n", $value);
 					foreach ($multilineexploded as $newcomment) {
