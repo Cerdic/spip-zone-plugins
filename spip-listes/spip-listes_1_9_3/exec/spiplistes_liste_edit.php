@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/spiplistes_api_globales');
 
 function exec_spiplistes_liste_edit(){
-
+	
 	include_spip('inc/barre');
 	include_spip('inc/spiplistes_api');
 	include_spip('inc/spiplistes_api_presentation');
@@ -95,7 +95,7 @@ function exec_spiplistes_liste_edit(){
 		$flag_editable = ($connect_statut == "0minirezo");
 	}
 
-	$gros_bouton_retour = icone(
+	$gros_bouton_retour = spiplistes_icone (
 		_T('spiplistes:retour_link')
 		, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER,"id_liste=" . ($lier_trad ? $lier_trad : $id_liste) )
 		, "article-24.gif"
