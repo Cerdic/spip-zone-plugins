@@ -143,19 +143,54 @@ function spiplistes_server_rezo_local () {
 	return ($islan);
 }
 
-// CP-20080324
-// SPIP 1.9.2e: $spip_version_branche = null; $spip_version_affichee = '1.9.2e'; $spip_version_code = 1.9208;
-// SPIP 1.9.2f: $spip_version_branche = null; $spip_version_affichee = '1.9.2f'; $spip_version_code = 1.9208;
-// SPIP 1.9.2g: $spip_version_branche = null; $spip_version_affichee = '1.9.2g'; $spip_version_code = 1.9208;
-// SPIP 2.0.0: $spip_version_branche = "2.0.0"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
-// SPIP 2.0.1: $spip_version_branche = "2.0.1"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
-// SPIP 2.0.2: $spip_version_branche = "2.0.2"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
+/**
+ * SPIP 1.9.2e: $spip_version_branche = null; $spip_version_affichee = '1.9.2e'; $spip_version_code = 1.9208;
+ * SPIP 1.9.2f: $spip_version_branche = null; $spip_version_affichee = '1.9.2f'; $spip_version_code = 1.9208;
+ * SPIP 1.9.2g: $spip_version_branche = null; $spip_version_affichee = '1.9.2g'; $spip_version_code = 1.9208;
+ * SPIP 2.0.0: $spip_version_branche = "2.0.0"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
+ * SPIP 2.0.1: $spip_version_branche = "2.0.1"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
+ * SPIP 2.0.2: $spip_version_branche = "2.0.2"; $spip_version_affichee = "$spip_version_branche"; $spip_version_code = 12691;
+ * @version CP-20080324
+ * @staticvar $is_inf
+ * @global $GLOBALS['spip_version_code']
+ * @see http://www.spip.net/fr_article4449.html
+ * @return bool
+ */
 function spiplistes_spip_est_inferieur_193 () {
 	static $is_inf;
 	if($is_inf===NULL) {
 		$is_inf = version_compare($GLOBALS['spip_version_code'],'1.9300','<');
 	}
 	return($is_inf);
+}
+
+/**
+ * La composition de la globale spip_version_code est
+ *  différente en SPIP 3
+ * La fonction spip_version_compare() apparaît en SPIP 2.
+ * S'en servir pour détecter la version 3.
+ * @version CP-20110515
+ * @staticvar $is_inf
+ * @global $GLOBALS['spip_version_branche']
+ * @return bool
+ */
+function spiplistes_spip_est_inferieur_3 ()
+{
+	static $is_inf;
+	if ($is_inf === NULL)
+	{
+		include_spip('inc/plugin');
+		$is_inf = (
+			function_exists('spip_version_compare')
+			&& isset($GLOBALS['spip_version_branche'])
+			&& spip_version_compare(
+				$GLOBALS['spip_version_branche']
+				, '3.0.0-dev'
+				, '<'
+				)
+		);
+	}
+	return ($is_inf);
 }
 
 
