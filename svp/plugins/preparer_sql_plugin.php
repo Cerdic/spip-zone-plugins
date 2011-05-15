@@ -19,14 +19,14 @@ function plugins_preparer_sql_plugin($plugin)
 		return $champs;
 
 	// On initialise les champs ne necessitant aucune transformation
-	$champs['categorie'] = $plugin['categorie'];
-	$champs['etat'] = $plugin['etat'];
-	$champs['version'] = $plugin['version'];
-	$champs['version_base'] = $plugin['version_base'];
-	$champs['lien'] = $plugin['lien'];
+	$champs['categorie'] = $plugin['categorie'] ? $plugin['categorie'] : '';
+	$champs['etat'] = $plugin['etat'] ? $plugin['etat'] : '';
+	$champs['version'] = $plugin['version'] ? $plugin['version'] : '';
+	$champs['version_base'] = $plugin['version_base'] ? $plugin['version_base'] : '';
+	$champs['lien'] = $plugin['lien'] ? $plugin['lien'] : '';
 
 	// Renommage de certains champs
-	$champs['logo'] = $plugin['icon'];
+	$champs['logo'] = $plugin['icon'] ? $plugin['icon'] : '';
 	// On passe le prefixe en lettres majuscules comme ce qui est fait dans SPIP
 	// Ainsi les valeurs dans la table spip_plugins coincideront avec celles de la meta plugin
 	$champs['prefixe'] = strtoupper($plugin['prefix']);
