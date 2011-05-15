@@ -52,6 +52,15 @@ function exec_geoportail_config()
 		$geoportail_key = $GLOBALS['meta']['geoportail_key'];
  		$yahoo_key = $GLOBALS['meta']['geoportail_yahoo_key'];
 
+		/* Recherche si GeoportalExtended utilisateur */
+		if (find_in_path ("js/GeoportalExtended.js"))
+		{	$geoportail_js = "<input type='checkbox' name='js' id='js' ".($GLOBALS['meta']['geoportail_js'] ? "CHECKED":"")."><label for=js>"._T('geoportail:local_js')."</label>";
+		}
+		else if ($GLOBALS['meta']['geoportail_js'])
+		{	effacer_meta ('geoportail_js');
+			ecrire_metas();
+		}
+		
 		/* Cle Geoportail */
 		$form = debut_cadre_trait_couleur(_DIR_PLUGIN_GEOPORTAIL."img/geo.png", true, "", _T('geoportail:cle'))
 			.debut_cadre_relief("",true)
@@ -65,7 +74,8 @@ function exec_geoportail_config()
 
 			.debut_cadre_trait_couleur("warning-24.gif", true, "", "")
 			._T('geoportail:geoportail_print')
-			.fin_cadre_trait_couleur(true)
+			. fin_cadre_trait_couleur(true)
+			. ($geoportail_js ? $geoportail_js : "")
 			. fin_cadre_trait_couleur(true);
 			
 		/* Cle Yahoo */

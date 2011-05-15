@@ -9,18 +9,20 @@ function geoportail_affichage_final($page)
 	// Inclure le hash code de maniere dynamique
 	charger_fonction('securiser_action','inc');
 	$action = calculer_action_auteur('geoportail');
+
+	// Version debug de l'API
+	if ($GLOBALS['geoportail_debug']) $api = "http://depot.ign.fr/geoportail/api/js/1.2/lib/geoportal/lib/Geoportal.js";
+	// Version locale de l'API
+	else if ($GLOBALS['meta']['geoportail_js']) $api = find_in_path ("js/GeoportalExtended.js");
+	// ...ou sur le site de l'API
+	else $api = "http://api.ign.fr/geoportail/api/js/1.2/GeoportalExtended.js";
 	
 	$engine=
 '<script>jQuery.geoportail.hash = "'.$action.'";</script>
 <script language=javascript>jQuery(document).ready(	function() { jQuery.geoportail.initMap("'._DIR_PLUGIN_GEOPORTAIL.'"); });</script>
 
-<!-- API Geoportail -->'
-.($GLOBALS['geoportail_debug']?
-'<script type="text/javascript" src="http://depot.ign.fr/geoportail/api/js/1.2/lib/geoportal/lib/Geoportal.js" charset=utf-8>// <![CDATA['
-:
-'<script type="text/javascript" src="http://api.ign.fr/geoportail/api/js/1.2/GeoportalExtended.js" charset=utf-8>// <![CDATA['
-)
-.'
+<!-- API Geoportail -->
+<script type="text/javascript" src="'.$api.'">// <![CDATA[
     // ]]></script>
 <script type="text/javascript" src="'._DIR_PLUGIN_GEOPORTAIL.'js/Layer/Locator.js">// <![CDATA[
     // ]]></script>

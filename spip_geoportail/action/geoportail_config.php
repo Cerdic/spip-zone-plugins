@@ -40,6 +40,9 @@ function action_geoportail_config_dist()
 		{	// Cles d'utilisation
 			ecrire_meta('geoportail_key',$_POST['geoportail_key']);
 			ecrire_meta('geoportail_yahoo_key',$_POST['yahoo_key']);
+			if (isset($_POST['js'])) ecrire_meta('geoportail_js', true);
+			else effacer_meta ('geoportail_js');
+ 			ecrire_metas();
  		}
  		// Autoriser les services
  		if (isset($_POST['geoservice']))
@@ -56,7 +59,7 @@ function action_geoportail_config_dist()
 		// Type de popup
  		if (isset($_POST['setpopup']))
  		{	ecrire_meta('geoportail_popup',$_POST['popup']);
- 			ecrire_meta('geoportail_hover',$_POST['hover']);
+ 			ecrire_meta('geoportail_hover',isset($_POST['hover']));
  			ecrire_metas();
  		}
 		// Modif des objets a georef
