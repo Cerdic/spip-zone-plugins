@@ -2,6 +2,10 @@
 
 Liste des articles ayant le mot-clef id_mot, pour la langue en cours
 
+Paramètres:
+classement : popularité ou date (par défaut). Classement des articles.
+lang: langue des articles et rubriques listés.
+
 ]<B_articles>
 #ANCRE_PAGINATION
 <div class="liste-articles">
@@ -15,3 +19,5 @@ Liste des articles ayant le mot-clef id_mot, pour la langue en cours
   </ul>
 </div>
 </B_articles>
+  <INCLURE{fond=composants/articles/boucle-plan}{id_mot}>
+<//B_articles>

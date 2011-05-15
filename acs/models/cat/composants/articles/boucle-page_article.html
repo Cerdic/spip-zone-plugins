@@ -11,4 +11,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Page article.
 Article page
 
-]<BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}><INCLURE{fond=composants/articles/page-article}{self}{env}{id_article}{titre=#TITRE}{surtitre=#SURTITRE}{soustitre=#SOUSTITRE}{descriptif=#DESCRIPTIF}{nic=2100}></BOUCLE_article>
+]<BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}>[(#INCLURE{fond=composants/articles/page-article}{self}{env}{id_article}{titre=#TITRE}{surtitre=#SURTITRE}{soustitre=#SOUSTITRE}{descriptif=#DESCRIPTIF}{nic=2100})]</BOUCLE_article>

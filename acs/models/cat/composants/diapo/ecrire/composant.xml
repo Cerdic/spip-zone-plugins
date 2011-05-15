@@ -54,4 +54,11 @@
     <valeur>#afff00</valeur>
   </variable>
 
+  <variable>
+    <nom>UseG</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
 </composant>

@@ -142,7 +142,7 @@ function composants_head($type) {
               $r .= file_get_contents($file);
           }
           else {
-            $r .= recuperer_fond($filepath)."\r";
+            $r .= recuperer_fond($filepath, array('X-Spip-Cache' => 0))."\r";
           }
           $done[] = $class; 
     		}
@@ -151,7 +151,7 @@ function composants_head($type) {
         	$filepath = 'composants/'.$class.'/'.$class.'_instances.css';
         	$file = find_in_path($filepath.'.html');
         	if ($file)
-       			$r .= recuperer_fond($filepath, array('nic' => $nic))."\r";
+       			$r .= recuperer_fond($filepath, array('nic' => $nic, 'X-Spip-Cache' => 0))."\r";
         }
       }
       // on fait la liste des librairies javascripts a inclure (declarees dans chaque composant, dans moncomposant_balises.php,
@@ -174,7 +174,7 @@ function composants_head($type) {
           $libs .= file_get_contents($file)."\r";
       }
       else {
-        $libs .= recuperer_fond($jslib)."\r";
+        $libs .= recuperer_fond($jslib, array('X-Spip-Cache' => 0))."\r";
       }
     }
   }
@@ -187,4 +187,18 @@ function balise_ACS_AUTORISE($p) {
   $p->statut = 'php';
   $p->interdire_scripts = false;
   return $p;
+}
+
+/* Overide de la balise CACHE : permet de passer un paramètre à la balise SPIP
+ * Les 2 paramètres de la balise #CACHE sont interprétés et passés à la balise
+ * #CACHE de la dist.
+ */
+function balise_CACHE($p) {
+  if ($GLOBALS['contexte']['cache']) {
+    $cache = explode(',', $GLOBALS['contexte']['cache']);
+    $p->param[0][1][0]->texte = $cache[0];
+    if (isset($cache[1]))
+      $p->param[0][1][1]->texte = $cache[1];
+  }
+  return balise_CACHE_dist($p);
 }

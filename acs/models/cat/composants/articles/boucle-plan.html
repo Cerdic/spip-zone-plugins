@@ -1,8 +1,8 @@
 [(#CACHE{0})][(#REM)
 
-Boucle plan du site ou plan d'une rubrique
+Boucle plan du site, ou d'une rubrique, ou des rubriques associées à un mot-clé.
 
-]<BOUCLE_secteurs(RUBRIQUES) {id_rubrique ?} {par num titre, titre}>
+]<BOUCLE_secteurs(RUBRIQUES){id_rubrique ?}{id_mot ?}{par num titre, titre}>
 <div class="plan-secteur">
   [(#ENV{masquer_titre_rubrique}!={oui}|?{' '})
   <h1>

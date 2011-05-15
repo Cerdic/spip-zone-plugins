@@ -9,7 +9,9 @@ id_article : documents de l'article.
 id_rubrique : documents de la rubrique.
 recherche : documents résultats d'une recherche.
 
-][(#SET{types_diapos,flv|mp4|ogv|webm|swf|jpg|png|gif})][(#SET{nom_diaporama,dp[(#ENV{c}|?{c})][_art(#ID_ARTICLE)[_rub(#ID_RUBRIQUE)]]})]<B_doc>
+][(#SET{docs,pdf|odt|ods|doc,xls,wmf})][
+(#SET{types_diapos,flv|mp4|ogv|webm|swf|jpg|png|gif[|(#GET{docs})]})][
+(#SET{nom_diaporama,dp[(#ENV{c}|?{c})][_art(#ID_ARTICLE)[_rub(#ID_RUBRIQUE)]]})]<B_doc>
 <div class="cDiapo" align="center">
   <table>
     <tr>

@@ -18,15 +18,22 @@ sinon sur celles de la rubrique id_rubrique,
 sinon sur les coordonnées et le zoom par défaut du composant (variables ACS),
 ou à défaut sur celles par défaut du plugin GIS Escoitar.
 
-][(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]<BOUCLE_centrer_article(GIS){id_rubrique=0}{id_article}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_article>
-<BOUCLE_centrer_rubrique(GIS){id_rubrique}{id_article=0}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_rubrique>
-<BOUCLE_centrer_mot(gis_mots){id_mot}{0,1}>[(#ENV{latit}|non)#SET{latitude,#LAT}][(#ENV{lonxit}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_mot>
+Paramètres:
+- id_carte_gis: id de l'élément div de la carte (pour Openlayers)
+- lat, lon, zoom: latitude, longitude, et zoom initiaux.
+- maxmots: nb max de pictos de mots-clés géoréférencés.
+- maxrubs: nb max de pictos de rubriques géoréférencés.
+- maxarts: nb max de pictos d'articles géoréférencés.
+
+][(#SET{id_carte_gis,#ENV{id_carte_gis,1}})]<BOUCLE_centrer_article(GIS){id_rubrique=0}{id_article}{0,1}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_article>
+<BOUCLE_centrer_rubrique(GIS){id_rubrique}{id_article=0}{0,1}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_rubrique>
+<BOUCLE_centrer_mot(gis_mots){id_mot}{0,1}>[(#ENV{lat}|non)#SET{latitude,#LAT}][(#ENV{lon}|non)#SET{lonxitude,#LONX}][(#ENV{zoom}|non)#SET{zoommapa,#ZOOM}]</BOUCLE_centrer_mot>
 [(#REM)
   
   Sinon centrer sur les coordonnes passees en parametre ou sur celles par defaut
   
-  ][(#GET{latitude}|non)#SET{latitude,#ENV{latit,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lat'},#CONFIG**{geomap/latitude,0}}}}]
-  [(#GET{lonxitude}|non)#SET{lonxitude,#ENV{lonxit,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lon'},#CONFIG**{geomap/longitude,0}}}}]
+  ][(#GET{latitude}|non)#SET{latitude,#ENV{lat,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lat'},#CONFIG**{geomap/latitude,0}}}}]
+  [(#GET{lonxitude}|non)#SET{lonxitude,#ENV{lon,#VAR{#EVAL{'acsCarte'.'#NIC'.'Lon'},#CONFIG**{geomap/longitude,0}}}}]
   [(#GET{zoommapa}|non)#SET{zoommapa, #ENV{zoom,#VAR{#EVAL{'acsCarte'.'#NIC'.'Zoom'},#CONFIG**{geomap/zoom,0}}}]
   <script type="text/javascript">
   if (document.namespaces) { // only needed in IE
@@ -44,7 +51,11 @@ ou à défaut sur celles par défaut du plugin GIS Escoitar.
   var map[(#GET{id_carte_gis})];
   var markerManager[(#GET{id_carte_gis})];
 
-  function load[(#GET{id_carte_gis})]() {
+  function getPictos[(#GET{id_carte_gis})]() {
+    loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/javascript&c=carte[&nic=(#NIC)]&p=symbols_json&cache=3600,cache-client][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_groupe=(#ID_GROUPE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{limit,50})][&maxmots=(#ENV{maxmots,[(#VAR{#EVAL{'acsCarte'.'#NIC'.'Mots'}}|=={non}|?{0})]})][&maxrubs=(#ENV{maxrubs,[(#VAR{#EVAL{'acsCarte'.'#NIC'.'Rubriques'}}|=={non}|?{0})]})][&maxarts=(#ENV{maxarts,[(#VAR{#EVAL{'acsCarte'.'#NIC'.'Articles'}}|=={non}|?{0})]})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>', [(#VAR{acsCartePictosPins}|=={oui}|?{true,false})]);
+  }
+
+  function loadCarte[(#GET{id_carte_gis})]() {
   	jQuery("[#(#GET{id_carte_gis})]").css("overflow", "hidden");
   	OpenLayers.ImgPath = '[(#ACS_CHEMIN{mapui}|url_absolue)/]';
     map[(#GET{id_carte_gis})] = new OpenLayers.Map("map[(#GET{id_carte_gis})]",{
@@ -57,7 +68,7 @@ ou à défaut sur celles par défaut du plugin GIS Escoitar.
       eventListeners: {
         "zoomend": function() {
         if (map[(#GET{id_carte_gis})].initialized)
-          loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/javascript&c=carte[&nic=(#NIC)]&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_groupe=(#ID_GROUPE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>', [(#VAR{acsCartePictosPins}|=={oui}|?{true,false})]);
+        	getPictos[(#GET{id_carte_gis})]();
         }
       },
       theme: null,
@@ -117,12 +128,12 @@ ou à défaut sur celles par défaut du plugin GIS Escoitar.
     ]
     </BOUCLE_kml_rub>
     <//B_kml_art>
-    loadPictos(map[(#GET{id_carte_gis})], '[(#URL_PAGE{c})&type=text/javascript&c=carte[&nic=(#NIC)]&p=symbols_json][&recherche=(#RECHERCHE)][&id_rubrique=(#ID_RUBRIQUE)][&id_groupe=(#ID_GROUPE)][&id_mot=(#ID_MOT)][&id_auteur=(#ID_AUTEUR)][&limit=(#ENV{num, 50})]', '[(#GET{id_carte_gis})]', '<:gis:loading_msg:>', [(#VAR{acsCartePictosPins}|=={oui}|?{true,false})]);
+    getPictos[(#GET{id_carte_gis})]();
     map[(#GET{id_carte_gis})].initialized = true;
   }
   [(#ENV{load_map}|!={'non'}|oui)
   jQuery(document).ready(function(){
-    load[(#GET{id_carte_gis})]();
+  	loadCarte[(#GET{id_carte_gis})]();
     [(#ENV{attente}|=={1}|oui) jQuery("#map[(#GET{id_carte_gis})]").append('<div id="attente[(#GET{id_carte_gis})]" style="position: absolute; z-index: 1000; top: 0; left: 0; background-color: #FFFFFF; filter:alpha(opacity=70); -moz-opacity: 0.7; opacity: 0.7;[ width: (#ENV{largeur,100%});][ height: (#ENV{hauteur,100%});]"><span style="display: block; width: 100%; height: 100%; background: transparent url([(#CHEMIN{img_pack/attente.gif})]) center center no-repeat;"></span></div>'); ]    
   });
   /*

@@ -1,6 +1,16 @@
-[(#CACHE{7200})][(#REM)
+[(#REM)
 
 Contenu de Mediabox.
 Appellé en Ajax par l'API mediabox/colorbox.
 
-][(#SET{is2embed,(gif|jpg|jpeg|png|swf)})][(#SET{is4player,(mp3|flv|mp4|ogv|webm)})]<B_doc><BOUCLE_doc(DOCUMENTS){mode=document}{id_document}>[(#EXTENSION|match{#GET{is2embed}}|?{" "})#MODELE{emb}][(#EXTENSION|match{#GET{is4player}}|?{" "})[(#MODELE{doc_player}{titre=non}{center})]]</BOUCLE_doc></B_doc>
+Selon leur type, les documents sont affichés soit avec le modèle EMB de SPIP,
+soit avec le lecteur vidéo du composant Audio, soit avec Google Docs.
+
+][(#SET{isdoc,pdf|odt|ods|doc,xls,wmf})][
+(#SET{is2embed,(gif|jpg|jpeg|png|swf)})][
+(#SET{is4player,(mp3|flv|mp4|ogv|webm)})
+]<BOUCLE_doc(DOCUMENTS){id_document}>[
+(#EXTENSION|match{#GET{is2embed}}|?{" "})#MODELE{emb}][
+(#EXTENSION|match{#GET{is4player}}|?{" "})[(#MODELE{doc_player}{titre=non}{center})]][
+(#EXTENSION|match{#GET{isdoc}}|?{" "})<iframe src='[(#VAR{acsDiapoUseG}|=={oui}|?{" "})http://docs.google.com/viewer?embedded=true&url=][(#FICHIER|url_absolue|urlencode)]' width="800px" height="600px" frameborder="0"></iframe>
+]</BOUCLE_doc><div class="alert"><:spip:info_document_indisponible:></div><//B_doc>

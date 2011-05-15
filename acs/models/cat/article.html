@@ -1,4 +1,4 @@
-[(#CACHE{0})][(#REM)
+[(#CACHE{86400})][(#REM)
              ACS
          (Plugin Spip)
          Squelette Cat
@@ -10,6 +10,4 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Cliquez <u><a href="?exec=acs&onglet=pages&pg=composants/articles/page-article">ici</a></u> pour d&eacute;finir le contenu de la page.
 Click <u><a href="?exec=acs&onglet=pages&pg=composants/articles/page-article">here</a></u> to define page content.
 
-Pas de mise en cache ici pour gerer le controle d'acces 
-
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})<INCLUDE{fond=composants/articles/test-acces-page}{env}{self}>][(#VAR{acsArticlesLock}|!={oui}|?{' '})<INCLUDE{fond=composants/articles/test}{id_article}{env}{self}>]
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})[(#INCLURE{fond=composants/articles/test-acces-page}{env}{self})]][(#VAR{acsArticlesLock}|!={oui}|?{' '})[(#INCLURE{fond=composants/articles/test-page}{id_article}{env}{self})]]

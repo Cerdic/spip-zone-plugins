@@ -1,1 +1,1 @@
-[(#CACHE{0})]#SET{show_type,^[^_].*}<BOUCLE_mot(MOTS){id_mot}>[&gt; <a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]">(#TYPE|supprimer_numero|match{#GET{show_type},i,0}|couper{80})</a>][ &gt; (#TITRE|supprimer_numero|couper{80})]</BOUCLE_mot>
+#SET{show_type,^[^_].*}<BOUCLE_mot(MOTS){id_mot}>[&gt; <a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]">(#TYPE|supprimer_numero|match{#GET{show_type},i,0}|couper{80})</a>][ &gt; (#TITRE|supprimer_numero|couper{80})]</BOUCLE_mot>

@@ -7,7 +7,7 @@
   [<div class="#EDIT{texte} texte">(#TEXTE)</div>
   ][<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
-  [(#REM) Articles de la rubrique ]
+  [(#REM) Articles de la rubrique, avec pagination et navigation en Ajax ]
   <INCLURE{fond=composants/articles/boucle-articles_rubrique}{env}{id_rubrique}{classement}{debut_articles=#ENV{debut_articles}}{rubrique=#TITRE}{ajax}>
 
   [(#REM) Documents joints a la rubrique ]

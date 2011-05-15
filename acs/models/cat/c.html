@@ -1,4 +1,4 @@
-[(#CACHE{0})][(#HTTP_HEADER{[Content-type: (#ENV{type,text/xml})][; charset=(#CHARSET)]})][(#INCLURE{fond=composants/#ENV{c}/#ENV{p}}{env}{self})][(#REM)
+[(#CACHE{[(#ENV{cache,0})]})][(#HTTP_HEADER{[Content-type: (#ENV{type,text/xml})][; charset=(#CHARSET)]})][(#INCLURE{fond=composants/#ENV{c}/#ENV{p}}{env}{self})][(#REM)
 
              ACS
          (Plugin Spip)
@@ -13,8 +13,10 @@ le résultat avec un type MIME précis. Très utile pour le retour d'un appel JS
 par exemple. 
 
 Paramètres:
-type: type MIME de retour
-c: composant
-p: page du composant
+cache: paramètre de cache SPIP de la page c.
+type: type MIME de retour.
+charset: jeu de caractères de la page.
+c: composant.
+p: page du composant.
 
 ]

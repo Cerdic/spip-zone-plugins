@@ -17,8 +17,7 @@ Apparence d\'un article.
 La fonction contrôle d\'accès limite l\'accès aux articles avec mot-clé 
 _ide, _aut, _adm ou _acs aux visiteurs enregistrés, aux rédacteurs, aux administrateurs, ou aux administrateurs ACS.
 <br /><br />
-Le style de page article peut dépendre d\'un mot-clé: 
-dans ce cas, la page article contiendra l\'instance de composant Cadre de numéro égal au champ description du mot clé choisi pour cet article dans le groupe des mots-clefs de styles de pages article, ou à défaut le cadre n° 2100 si aucun mot-clé n\'est choisi dans ce groupe.
+Le style de page article peut dépendre d\'un mot-clé: dans ce cas, la page article contiendra l\'instance de composant Cadre de numéro égal au champ description du mot clé choisi pour cet article dans le groupe des mots-clefs de styles de pages article, ou à défaut le cadre n° 2100 si aucun mot-clé n\'est choisi dans ce groupe.
 <br />
 <br />
 Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site public, il suffit que son titre commence par un "_".

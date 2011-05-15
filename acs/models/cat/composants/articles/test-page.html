@@ -12,5 +12,5 @@ Test pages articles personnalisées
 Test customized articles pages
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
-(#VAR{acsArticlesStylePage}|=={""}|?{' ',''})<INCLURE{fond=composants/articles/boucle-page_article}{self}{env}>][
-(#VAR{acsArticlesStylePage}|=={""}|?{'',' '})<INCLURE{fond=composants/articles/boucle-page_article-style}{self}{env}>]
+(#VAR{acsArticlesStylePage}|=={""}|?{' ',''})[(#INCLURE{fond=composants/articles/boucle-page_article}{self}{env})]][
+(#VAR{acsArticlesStylePage}|=={""}|?{'',' '})[(#INCLURE{fond=composants/articles/boucle-page_article-style}{self}{env})]]
