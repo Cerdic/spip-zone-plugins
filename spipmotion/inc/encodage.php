@@ -243,9 +243,9 @@ function encodage($source,$doc_attente){
 		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
 		 * le format choisi est vorbis (l'encodeur vorbis de ffmpeg ne gère pas le mono)
 		 */
-		if(in_array($extension_attente,array('ogg','ogv','oga')
+		if(in_array($extension_attente,array('ogg','ogv','oga'))
 				&& ($source['audiochannels'] < 2)
-				&& ($encodeur != 'ffmpeg2theora'))){
+				&& ($encodeur != 'ffmpeg2theora')){
 			spip_log('on passe en deux canaux','spipmotion');
 			$audiochannels = 2;
 		}else{
@@ -511,7 +511,7 @@ function encodage($source,$doc_attente){
 			if((sql_getfetsel('id_vignette','spip_documents','id_document = '.intval($x)) == 0) && ($source['id_vignette'] > 0)){
 				$vignette = sql_fetsel('fichier,extension','spip_documents','id_document='.intval($source['id_vignette']));
 				$fichier_vignette = get_spip_doc($vignette['fichier']);
-				$string_tmp = basename(get_spip_doc($vignette['fichier'])).'-'.date();
+				$string_tmp = basename(get_spip_doc($vignette['fichier'])).'-'.mktime();
 				$nom_vignette = md5($string_tmp).'.'.$vignette['extension'];
 				$x2 = $ajouter_documents($fichier_vignette, $nom_vignette, '', '', 'vignette', $x, $actif,'','','');
 			}
