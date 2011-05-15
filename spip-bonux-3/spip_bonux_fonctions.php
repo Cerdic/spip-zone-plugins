@@ -9,22 +9,6 @@
 
 
 /**
- * une fonction pour generer des menus avec liens
- * ou un span lorsque l'item est selectionne
- *
- * @param string $url
- * @param string $libelle
- * @param bool $on
- * @param string $class
- * @param string $title
- * @return string
- */
-function aoustrong($url,$libelle,$on=false,$class="",$title="",$rel=""){
-	return lien_ou_expose($url,$libelle,$on,$class,$title,$rel);
-}
-
-
-/**
  * une fonction pour generer une balise img a partir d'un nom de fichier
  *
  * @param string $img
