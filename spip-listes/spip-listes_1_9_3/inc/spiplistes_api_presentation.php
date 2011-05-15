@@ -1307,3 +1307,26 @@ function spiplistes_affdate ($date) {
 	return($result);
 }
 
+/**
+ * icone()
+ * @todo icone() devient quoi en SPIP 3 ? Pas de veille_def ?
+ *  A corriger/adapter.
+ */
+function spiplistes_icone ($texte, $lien, $fond, $fonction='', $align='', $echo=false)
+{
+	$result = '';
+	
+	if (spiplistes_spip_est_inferieur_193())
+	{
+		include_spip('inc/presentation');
+		$result = icone (
+			$texte
+			, $lien
+			, $fond
+			, $fonction
+			, $align
+			, $echo
+		);
+	}
+	return ($result);
+}
