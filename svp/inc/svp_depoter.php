@@ -34,8 +34,14 @@ function svp_ajouter_depot($url, &$erreur=''){
 					'url_serveur' => $infos['depot']['url_serveur'],
 					'url_archives' => $infos['depot']['url_archives'],
 					'xml_paquets'=> $url,
-					'sha_paquets'=> sha1_file($url));
-	$id_depot = sql_insertq('spip_depots', $champs);
+					'sha_paquets'=> sha1_file($url),
+					'nbr_paquets' => 0,
+					'nbr_plugins' => 0,
+					'nbr_autres' => 0);
+	if (!$id_depot = sql_insertq('spip_depots', $champs)) {
+		$erreur = _T('svp:message_nok_sql_insert_depot', array('objet' => $titre));
+		return false;
+	}
 		
 	// Ajout des paquets dans spip_paquets et actualisation des plugins dans spip_plugins
 	$ok = svp_actualiser_paquets($id_depot, $infos['paquets'], $nb_paquets, $nb_plugins, $nb_autres);
@@ -156,7 +162,7 @@ function svp_actualiser_depot($id){
 	if ($depot['sha_paquets'] == $sha) {
 		// Le fichier n'a pas change (meme sha1) alors on ne fait qu'actualiser la date 
 		// de mise a jour du depot en mettant a jour *inutilement* le sha1
-		spip_log('>> AVERTISSEMENT : aucune modification du fichier XML, actualisation non declenchee - id_depot = ' . $depot['id_depot'], 'svp');
+		spip_log('Aucune modification du fichier XML, actualisation non declenchee - id_depot = ' . $depot['id_depot'], 'svp.' . _LOG_INFO);
 		sql_replace('spip_depots', array_diff_key($depot, array('maj' => '')));
 	}
 	else {
@@ -268,14 +274,14 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			// Provisoire tant que la DTD n'est pas en fonction
 			if (!$insert_plugin['categorie']) {
 				spip_log("Categorie absente dans le paquet issu de <". $insert_paquet['src_archive'] . 
-						"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets');
+						"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets.' . _LOG_INFO_IMPORTANTE);
 				$insert_plugin['categorie'] = 'aucune';
 			}
 			else {
 				$svp_categories = unserialize($GLOBALS['meta']['svp_categories']);
 				if (!in_array($insert_plugin['categorie'], $svp_categories)) {
 					spip_log("Categorie &#107;" . $insert_plugin['categorie'] . "&#108; incorrecte dans le paquet issu de <". $insert_paquet['src_archive'] . 
-							"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets');
+							"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets.' . _LOG_INFO_IMPORTANTE);
 					$insert_plugin['categorie'] = 'aucune';
 				}
 			}
@@ -320,8 +326,9 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					// l'id si il existe deja et on le met a jour si la version du paquet est plus elevee
 					if (!$plugin = sql_fetsel('id_plugin, vmax', 'spip_plugins',
 						array('prefixe=' . sql_quote($insert_plugin['prefixe'])))) {
-						$id_plugin = sql_insertq('spip_plugins', 
-												array_merge($insert_plugin, array('vmax' => $insert_paquet['version'])));
+						if (!$id_plugin = sql_insertq('spip_plugins', 
+											array_merge($insert_plugin, array('vmax' => $insert_paquet['version']))))
+							spip_log("insertion dans la base du plugin de prefixe " . $insert_plugin['prefixe'] . " archive (". $insert_paquet['nom_archive'] . ") a echoue\n", 'svp_paquets.' . _LOG_ERREUR);
 					}
 					else {
 						$id_plugin = $plugin['id_plugin'];
@@ -332,15 +339,19 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					}
 	
 					// On traite maintenant le paquet connaissant l'id du plugin
-					$insert_paquet['id_plugin'] = $id_plugin;
-					sql_insertq('spip_paquets', $insert_paquet);
-	
-					// On rajoute le plugin comme heberge par le depot si celui-ci n'est pas encore
-					// enregistre comme tel
-					if (!sql_countsel('spip_depots_plugins',
-						array('id_plugin=' . sql_quote($id_plugin),
-							'id_depot=' . sql_quote($id_depot)))) {
-						sql_insertq('spip_depots_plugins', array('id_depot' => $id_depot, 'id_plugin' => $id_plugin));
+					if ($id_plugin) {
+						$insert_paquet['id_plugin'] = $id_plugin;
+						if (!$id_paquet = sql_insertq('spip_paquets', $insert_paquet))
+							spip_log("insertion dans la base du paquet provenant de l'archive " . $insert_paquet['nom_archive'] . " a echoue (prefixe : " . $insert_plugin['prefixe'] . ")\n", 'svp_paquets.' . _LOG_ERREUR);
+						else {
+							// On rajoute le plugin comme heberge par le depot si celui-ci n'est pas encore
+							// enregistre comme tel
+							if (!sql_countsel('spip_depots_plugins',
+								array('id_plugin=' . sql_quote($id_plugin),
+									'id_depot=' . sql_quote($id_depot)))) {
+								sql_insertq('spip_depots_plugins', array('id_depot' => $id_depot, 'id_plugin' => $id_plugin));
+							}
+						}
 					}
 				}
 				else
@@ -355,16 +366,17 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 				if (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1', $where)) {
 					// Ce n'est pas un plugin, donc id_plugin=0 et toutes les infos plugin sont nulles 
 					$insert_paquet['id_plugin'] = 0;
-					sql_insertq('spip_paquets', $insert_paquet);
+					if (!$id_paquet = sql_insertq('spip_paquets', $insert_paquet))
+						spip_log("insertion dans la base du paquet provenant de l'archive " . $insert_paquet['nom_archive'] . " a echoue (contribution non plugin)\n", 'svp_paquets.' . _LOG_ERREUR);
 				}
 				else
 					$collision = true;
 			}
 			// On loge le paquet ayant ete refuse dans un fichier a part afin de les verifier
 			// apres coup
-			if ($collision AND _SVP_LOG_PAQUETS) {
+			if ($collision) {
 				spip_log("Collision avec le paquet <". $insert_paquet['nom_archive'] . 
-						" / " . $insert_paquet['src_archive'] . "> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets');
+						" / " . $insert_paquet['src_archive'] . "> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets.' . _LOG_INFO_IMPORTANTE);
 			}
 		}
 		else {

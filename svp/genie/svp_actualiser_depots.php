@@ -10,8 +10,7 @@ function genie_svp_actualiser_depots_dist ($last) {
 		// On boucle sur chaque depot en appelant la fonction d'actualisation 
 		while ($depot = sql_fetch($resultats)) {
 			svp_actualiser_depot($depot['id_depot']);
-			if (_SVP_LOG_ACTIONS)
-				spip_log("ACTION ACTUALISER DEPOT (automatique) : id_depot = ". $depot['id_depot'], 'svp');
+			spip_log("ACTION ACTUALISER DEPOT (automatique) : id_depot = ". $depot['id_depot'], 'svp_actions.' . _LOG_INFO);
 		}
 	}
 

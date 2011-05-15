@@ -45,8 +45,7 @@ function formulaires_ajouter_depot_traiter_dist(){
 		$retour['message_erreur'] = $erreur;
 	else {
 		$retour['message_ok'] = _T('svp:message_ok_depot_ajoute', array('url' => $xml));
-		if (_SVP_LOG_ACTIONS)
-				spip_log("ACTION AJOUTER DEPOT (manuel) : url = ". $xml, 'svp');
+		spip_log("ACTION AJOUTER DEPOT (manuel) : url = ". $xml, 'svp_actions.' . _LOG_INFO);
 	}
 	$retour['editable'] = true;
 

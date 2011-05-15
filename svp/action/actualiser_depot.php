@@ -24,8 +24,7 @@ function action_actualiser_depot_dist(){
 		include_spip('inc/svp_depoter');
 		svp_actualiser_depot($id_depot);
 		// On consigne l'action si la configuration le demande
-		if (_SVP_LOG_ACTIONS)
-				spip_log("ACTION ACTUALISER DEPOT (manuel) : id_depot = ". $id_depot, 'svp');
+		spip_log("ACTION ACTUALISER DEPOT (manuel) : id_depot = ". $id_depot, 'svp_actions.' . _LOG_INFO);
 	}
 }
 

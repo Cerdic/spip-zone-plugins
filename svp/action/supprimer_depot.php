@@ -20,8 +20,7 @@ function action_supprimer_depot_dist(){
 	if ($id_depot = intval($arg)) {
 		include_spip('inc/svp_depoter');
 		svp_supprimer_depot($id_depot);
-		if (_SVP_LOG_ACTIONS)
-			spip_log("ACTION SUPPRIMER DEPOT (manuel) : id_depot = ". $id_depot, 'svp');
+		spip_log("ACTION SUPPRIMER DEPOT (manuel) : id_depot = ". $id_depot, 'svp_actions.' . _LOG_INFO);
 	}
 }
 

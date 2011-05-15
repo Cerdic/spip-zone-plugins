@@ -45,8 +45,8 @@ function action_editer_depot_dist() {
 			// Dans le cas du depot rien n'est fait actuellement, on garde cette fonction
 			// par souci de coherence avec les autres editions d'objet et pour usage futur
 			$err = depots_set($id_depot);
-			if (!$err AND _SVP_LOG_ACTIONS)
-				spip_log("ACTION MODIFIER DEPOT (manuel) : id_depot = ". $id_depot, 'svp');
+			if (!$err)
+				spip_log("ACTION MODIFIER DEPOT (manuel) : id_depot = ". $id_depot, 'svp_actions.' . _LOG_INFO);
 	}
 
 	return array($id_depot, $err);

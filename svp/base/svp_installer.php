@@ -15,7 +15,7 @@ function svp_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta('svp_categories', 
 					serialize(array('auteur', 'communication', 'date', 'divers', 'edition', 'maintenance', 'multimedia', 'navigation', 'outil', 'performance', 'statistique', 'squelette', 'theme', 'aucune')));
 
-		spip_log('INSTALLATION BDD','svp');
+		spip_log('INSTALLATION BDD', 'svp_actions.' . _LOG_INFO);
 	}
 }
 
@@ -27,7 +27,7 @@ function svp_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 	effacer_meta('svp_categories');
 
-	spip_log('DESINSTALLATION BDD','svp');
+	spip_log('DESINSTALLATION BDD', 'svp_actions.' . _LOG_INFO);
 }
 
 ?>
