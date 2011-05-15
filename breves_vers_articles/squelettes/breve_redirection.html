@@ -1,5 +1,10 @@
 <?php
 
+// Une fois toutes les breves converties en articles,
+// ce fichier exemple peut être recopié dans votre dossier squelette 
+// avec le nom 'breve.html', pour assurer la redirection des anciens liens
+// présents sur d'autres sites, vers les articles correspondants.
+
 include_spip("#CHEMIN{breves2art_options.php}");
 include_spip('inc/headers');
 
@@ -8,10 +13,8 @@ $id_article = sql_getfetsel("id_article", TABLE_BREVES_ARTICLES, "id_breve=#ENV{
 if($id_article) {
 	redirige_par_entete("spip.php?article$id_article");
 }
-
-else {
-	echo "Brève pas encore convertit en article";
-}
+else 
+	echo "Brève pas encore convertie en article";
 
 ?>
 
