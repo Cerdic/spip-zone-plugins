@@ -28,6 +28,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre_plugin' => 'Edition directe',
 	
+	// V
+	'vider_cache' => 'Veuillez vider le cache',
+	
 
 );
 

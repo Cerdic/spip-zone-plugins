@@ -58,6 +58,21 @@ function edition_directe_afficher_contenu_objet($flux){
 	 $flux['data']=recuperer_fond("prive/editer/rubrique_mod", $contexte);
 	
 	}
+	if ($type=='breve'AND lire_config('edition_directe/breve')){
+	$id_breve= _request('id_breve');
+
+	$contexte = array(
+	'redirect'=>generer_url_ecrire("breves_voir"),
+	'new'=>$id_breve,
+	'id_rubrique'=>$id_rubrique,
+	'config_fonc'=>'breves_edit_config'
+	);
+
+
+	 
+	 $flux['data']=recuperer_fond("prive/editer/breve", $contexte);
+	
+	}	
 	return $flux;
 }
 
@@ -73,7 +88,9 @@ function edition_directe_affiche_gauche($flux){
 	if($exec=='naviguer' AND autoriser('joindredocument','rubrique',_request('id_rubrique')) AND lire_config('edition_directe/rubrique')){
 		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'rubrique','id_objet'=>_request('id_rubrique')));
 		}		
-		
+	if($exec=='breves_voir' AND autoriser('joindredocument','breve',_request('id_breve')) AND lire_config('edition_directe/breve')){
+		$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'breve','id_objet'=>_request('id_breve')));
+		}			
 
 return $flux;
 }

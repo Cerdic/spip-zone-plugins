@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Edition directe[en]Edition mode[es]Editar directamente[de]Redaktion Modus</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.0.1</version>
+	<version>0.0.3</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -38,7 +38,6 @@
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.14;]" />
 	<necessite id="medias" version='[1.6.1;]'/>	
-	<necessite id="saisies" version='[1.9.8;]'/>
-	<necessite id="spip_bonux" version='[2.2.17;]'/>	
+	<necessite id="cfg" version='[1.16.0 ;]'/>
 </plugin>
 
