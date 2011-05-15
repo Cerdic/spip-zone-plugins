@@ -546,7 +546,7 @@ function exec_spiplistes_config () {
 		. spiplistes_boite_select_de_formulaire (
 			spiplistes_array_values_in_keys(explode(";", _SPIPLISTES_CHARSETS_ALLOWED)), $GLOBALS['meta']['spiplistes_charset_envoi']
 				, 'spiplistes_charset_envoi', 'spiplistes_charset_envoi'
-				, 1, '', 'fondo', _T('spiplistes:Jeu_de_caracteres')." : ", '', 'verdana2')
+				, 1, '', 'fondo', _T('spiplistes:jeu_de_caracteres')." : ", '', 'verdana2')
 		. fin_cadre_relief(true)
 		;
 		//

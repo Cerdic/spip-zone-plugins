@@ -198,6 +198,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	re&ccedil;oivent en plus un login et un mot de passe qui leur permettront de s&#8217;identifier sur le site. </i>'
 , 'inscription' => 'Inscription'
 , 'mode_inscription' => 'Param&#233;trer le mode d&#8217;inscription des visiteurs'
+, 'jeu_de_caracteres' => 'Jeu de caract&#232;res'
 
 // exec/spiplistes_courrier_edit.php
 , 'Generer_le_contenu' => 'G&#233;n&#233;rer le contenu'
