@@ -648,7 +648,7 @@ function spiplistes_boite_autocron () {
 		}
 		else {
 			$result .= spiplistes_boite_autocron_info(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_envoyer-24.png", true
-				, _T('spiplistes:Mode_simulation'), _T('bouton_annuler')
+				, _T('spiplistes:mode_simulation'), _T('bouton_annuler')
 				, _T('spiplistes:mode_simulation_info'), 'opt_simuler_envoi', _DIR_IMG_PACK."warning-24.gif"
 				);
 		}
