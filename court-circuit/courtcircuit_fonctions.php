@@ -1,7 +1,8 @@
 <?php
 
 function balise_URL_RUBRIQUE_dist($p) {
-	$id_rubrique = champ_sql('id_rubrique', $p);
+	$id_rubrique = interprete_argument_balise(1,$p);
+	if (!$id_rubrique) $id_rubrique = champ_sql('id_rubrique', $p);
 	$code = "courtcircuit_calculer_balise_URL_RUBRIQUE ($id_rubrique)";
 	$p->code = $code;
 	$p->interdire_scripts = false;
