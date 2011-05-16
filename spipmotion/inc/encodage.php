@@ -482,7 +482,7 @@ function encodage($source,$doc_attente){
 		}
 	}
 
-	if($encodage_ok){
+	if($encodage_ok && file_exists(get_spip_doc($source['fichier']))){
 		spip_log('on ajoute le document dans la base','spipmotion');
 		/**
 		 * Ajout du nouveau document dans la base de donnée de SPIP
@@ -543,6 +543,11 @@ function encodage($source,$doc_attente){
 			spip_log('Il y a une erreur, le fichier n est pas copié','spipmotion');
 			$reussite = 'non';
 		}
+	}else if(!file_exists(get_spip_doc($source['fichier']))){
+		spip_log('Le document original a été supprimé entre temps','spipmotion');
+		spip_unlink($fichier_temp);
+		$reussite = 'non';
+		sql_delete("spip_spipmotion_attentes","id_spipmotion_attente=".intval($doc_attente));
 	}
 	/**
 	 * Si l'encodage n'est pas ok ...
