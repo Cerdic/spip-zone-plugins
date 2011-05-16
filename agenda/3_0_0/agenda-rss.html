@@ -1,0 +1,55 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0"[ encoding="(#CHARSET)"]?>
+<rss version="2.0" [(#REM) rss 2.0.9)]
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel[ xml:lang="(#LANG)"]>
+	[<title>Agenda (#NOM_SITE_SPIP|texte_backend)</title>]
+	<link>#URL_SITE_SPIP/</link>
+	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
+	<language>#LANG</language>
+	<generator>SPIP - www.spip.net</generator>
+	
+[	<image>
+		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
+		<url>(#LOGO_SITE_SPIP||image_reduire{150,150}|extraire_attribut{src}|url_absolue|texte_backend)</url>
+		<link>#URL_SITE_SPIP/</link>
+		[<height>(#LOGO_SITE_SPIP||image_reduire{150,150}|extraire_attribut{height})</height>]
+		[<width>(#LOGO_SITE_SPIP||image_reduire{150,150}|extraire_attribut{width})</width>]
+	</image>
+]
+	
+	<BOUCLE_evenement(EVENEMENTS) {branche ?}{id_article ?} {statut=publie}{par date_fin}{age<7} {0,60}>
+	<item>
+		[<title>(#TITRE|texte_backend)</title>]
+		<link>[(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_ARTICLE|parametre_url{id_evenement,#ID_EVENEMENT}|url_absolue)</guid>]
+		<date>#DATE_DEBUT</date>
+		[<dc:date>(#DATE_DEBUT|date_iso)</dc:date>]
+		<dc:format>text/html</dc:format>
+		[<dc:language>(#LANG)</dc:language>]
+		
+		[(#REM) Le bloc qui suit diffuse l'evenement a la mode RSS ]
+		<description>
+			[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}|texte_backend)][ - (#LIEU|PtoBR|texte_backend)]
+			[(#DESCRIPTIF|texte_backend)]
+		</description>
+		
+		[(#REM) Le bloc qui suit diffuse aussi le texte integral de l'evenement,
+		ce qui permet une syndication plus riche (mais plus "lourde").
+		Fonction desactivable depuis les reglages du site.]
+		[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>
+		[(#LOGO_ARTICLE|right||texte_backend)]
+		&lt;div class='rss_texte'&gt;
+			[(#DATE_DEBUT|Agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE}|texte_backend)][ - (#LIEU|PtoBR|texte_backend)]
+			[(#DESCRIPTIF|texte_backend)]
+		&lt;/div&gt;
+		</content:encoded>]
+	</item>
+	</BOUCLE_evenement>
+
+</channel>
+
+</rss>
