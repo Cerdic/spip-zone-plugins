@@ -67,7 +67,7 @@ function association_upgrade($meta, $courante, $table='meta')
 			$n = maj_while($installee, $courante, $GLOBALS['association_maj'], $meta, $table);
 			$n = $n ? $n[0] : $GLOBALS['association_maj_erreur'];
 			// signaler que les dernieres MAJ sont a refaire
-			if ($n) ecrire_meta($meta, $n-1, $table);
+			if ($n) ecrire_meta($meta, $n-1, '', $table);
 		}
 		return $GLOBALS['association_maj_erreur'];
 	}
