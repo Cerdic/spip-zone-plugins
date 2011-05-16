@@ -26,7 +26,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
               [Documentation pour la r&#233;daction de l'article->http://www.spip-contrib.net/Presentation-mode-Powerpoint-pour]
               et [Documentation du plugin squelette_par_mot_clef->http://www.spip-contrib.net/Choix-des-squelettes-par-mot-clef]
 		    </lien>
-        <icon>plugin-24.gif</icon>
+        <icon>article_s5.png</icon>
         <prefix>
           s5
         </prefix>
