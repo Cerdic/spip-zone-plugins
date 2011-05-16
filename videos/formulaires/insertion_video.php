@@ -60,12 +60,12 @@ function formulaires_insertion_video_traiter_dist($id_objet,$objet){
 
 		include_spip('lib/Videopian'); // http://www.upian.com/upiansource/videopian/
 		$Videopian = new Videopian();
-		try {
+		if($Videopian) {
 			$infosVideo = $Videopian->get($url);
 			$titre = $infosVideo->title;
 			$descriptif = $infosVideo->description;
 			$logoDocument = $infosVideo->thumbnails[0]->url;
-		} catch (Exception $e) {
+		} else {
 			//echo 'Exception reçue : ',  $e->getMessage(), "\n";
 			spip_log("L'ajout automatique du titre et de la description a echoué","Plugin Vidéo(s)");
 		}
