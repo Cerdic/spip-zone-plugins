@@ -6,7 +6,7 @@
  *
  */
 
-function exec_couteau_dist() {
+function exec_configurer_ck_dist() {
 
 	if (!autoriser('configurer', 'ck')) {
 		include_spip('inc/minipres');
