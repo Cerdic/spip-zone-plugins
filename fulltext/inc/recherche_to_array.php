@@ -137,7 +137,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 		foreach(array_keys($jointures[$table]) as $jtable) {
 			$i++;
 			if ($mkeys = fulltext_keys($jtable, 'obj'.$i, $serveur)) {
-				$score[] = "SUM(MATCH(".array_shift($mkeys).") AGAINST ($p".($boolean ?' IN BOOLEAN MODE':'')."))";
+				$score[] = "SUM(MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ?' IN BOOLEAN MODE':'')."))";
 				$_id_join = id_table_objet($jtable);
 				$table_join = table_objet($jtable);
 
