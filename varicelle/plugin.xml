@@ -11,7 +11,7 @@
 	<nom>insert_head_css</nom>
 	<inclure>varicelle_pipelines.php</inclure>
 </pipeline>
-<necessite id="SPIP" version="[;]" />
+<necessite id="SPIP" version="[1.9.1;3.0.*]" />
 <utilise id="Z" version="[;]" />
 <categorie>outil</categorie>
 </plugin>
