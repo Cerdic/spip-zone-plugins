@@ -1,7 +1,7 @@
 #SET{stats,#ARRAY}
 <BOUCLE_reponses(POUR){tableau #ENV{valeurs}}>
 	<BOUCLE_choix(POUR){tableau #VALEUR}>
-	#SET_MERGE{stats, #ARRAY{choix-#VALEUR, #GET{stats}|table_valeur{choix-#VALEUR}|sinon{0}|plus{1}}}
+	#SET{stats,#GET{stats}|array_merge{#ARRAY{choix-#VALEUR, #GET{stats}|table_valeur{choix-#VALEUR}|sinon{0}|plus{1}}}}
 	--#CLE=>#VALEUR--
 	</BOUCLE_choix>
 </BOUCLE_reponses>
