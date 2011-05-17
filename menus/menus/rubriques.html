@@ -41,15 +41,15 @@
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
-		<li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
+		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
 			[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
 			<BOUCLE_test_niveau(CONDITION){si #GET{cond}}>
                 <B_sous_rubriques>
-                <ul class="menu-liste">
+                <ul class="menu-liste menu-items">
                     <BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
                         #SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
-                        <li class="menu-entree[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
+                        <li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
                             <a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
                             [(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
                             <BOUCLE_test_niveau2(CONDITION){si #GET{cond}}>
@@ -82,7 +82,7 @@
                         <BOUCLE_test_afficher_si_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
                             <B_articles_si_sousrub>
                             <BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
-                                <li class="menu-entree[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+                                <li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
                                     <a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
                                 </li>
                             </BOUCLE_articles_si_sousrub>
@@ -112,9 +112,9 @@
 
                         <BOUCLE_test_afficher_pas_de_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
                             <B_articles_pas_de_sousrub>
-                            <ul class="menu-liste">
+                            <ul class="menu-liste menu-items">
                             <BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
-                                <li class="menu-entree[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+                                <li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
                                     <a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
                                 </li>
                             </BOUCLE_articles_pas_de_sousrub>
