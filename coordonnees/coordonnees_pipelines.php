@@ -13,7 +13,8 @@
 function coordonnees_affiche_milieu($flux) {
 	if (
 		(($flux['args']['exec'] == 'auteur_infos') AND $id_auteur = $flux['args']['id_auteur'])
-		OR ($exec = trouver_objet_exec(_request('exec'))
+		OR (function_exists('trouver_objet_exec')
+				AND $exec = trouver_objet_exec(_request('exec'))
 		    AND $exec['type']=='auteur'
 				AND !$exec['edition']
 		    AND $id_auteur = $flux['args']['id_auteur'])
