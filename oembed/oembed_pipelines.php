@@ -82,15 +82,17 @@ function oembed_post_edition($flux) {
 }
 
 function oembed_pre_propre($texte) {
-	include_spip('inc/oembed');
-	foreach (extraire_balises($texte, 'a') as $lien) {
-		if ($url = extraire_attribut($lien, 'href')
-		# seuls les autoliens beneficient de la detection oembed
-		AND preg_match(',\bauto\b,', extraire_attribut($lien, 'class'))
-		AND oembed_verifier_provider($url)) {
-			$fond = recuperer_fond('modeles/oembed',array('url'=>$url));
-			if ($fond = trim($fond))
-				$texte = str_replace($lien, $fond, $texte);
+	if (lire_config('oembed/embed_auto','oui')!='non') {
+		include_spip('inc/oembed');
+		foreach (extraire_balises($texte, 'a') as $lien) {
+			if ($url = extraire_attribut($lien, 'href')
+			# seuls les autoliens beneficient de la detection oembed
+			AND preg_match(',\bauto\b,', extraire_attribut($lien, 'class'))
+			AND oembed_verifier_provider($url)) {
+				$fond = recuperer_fond('modeles/oembed',array('url'=>$url));
+				if ($fond = trim($fond))
+					$texte = str_replace($lien, $fond, $texte);
+			}
 		}
 	}
 	return $texte;

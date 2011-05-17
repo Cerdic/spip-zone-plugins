@@ -17,20 +17,20 @@ function oembed_recuperer_data($url, $maxwidth = '', $maxheight = '', $format = 
 	$provider = false;
 	
 	$provider = oembed_verifier_provider($url);
-	$url_json = parametre_url($provider,'url',$url,'&');
+	$data_url = parametre_url($provider,'url',$url,'&');
 	
-	if ((!$provider) AND ($detecter_lien != 'non')) {
+	if ((!$provider) AND (($detecter_lien != 'non') OR lire_config('oembed/detecter_lien','non')=='oui')) {
 		$provider = oembed_detecter_lien($url);
-		$url_json = $provider;
+		$data_url = $provider;
 	}
 	
-	$url_json = parametre_url($url_json,'maxwidth',$maxwidth,'&');
-	$url_json = parametre_url($url_json,'maxheight',$maxheight,'&');
-	$url_json = parametre_url($url_json,'format',$format,'&');
+	$data_url = parametre_url($data_url,'maxwidth',$maxwidth,'&');
+	$data_url = parametre_url($data_url,'maxheight',$maxheight,'&');
+	$data_url = parametre_url($data_url,'format',$format,'&');
 	
 	// on recupere le contenu de la page
 	include_spip('inc/distant');
-	if ($data = recuperer_page($url_json)) {
+	if ($data = recuperer_page($data_url)) {
 		if ($format == 'json')
 			return json_decode($data,true);
 		if ($format == 'xml')

@@ -15,12 +15,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'ok_ajout_provider'=>'Provider ajouté',
 
+'label_detecter_lien'=>'Détecter automatiquement les providers (ignorer la liste blanche) ?',
+'label_embed_auto'=>'Transformer automatiquement les URLs insérées dans le texte ?',
 'label_endpoint'=>'Endpoint',
 'label_scheme'=>'Scheme',
 
 'supprimer_provider'=>'Supprimer',
 
 'titre_oembed'=>'oEmbed',
+'titre_configurer_oembed'=>'Configurer oEmbed',
 'titre_configurer_providers'=>'Providers oEmbed',
 'titre_ajouter_provider'=>'Ajouter un provider',
 
