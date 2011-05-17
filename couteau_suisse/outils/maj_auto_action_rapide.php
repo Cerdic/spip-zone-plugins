@@ -87,7 +87,8 @@ function maj_auto_action_rapide() {
 	// verification des plugins
 	include_spip('inc/plugin');
 	$plugins_actifs = array_values(liste_chemin_plugin_actifs());
-	$plugins_extensions = defined('_DIR_EXTENSIONS')?array_values(liste_chemin_plugin_actifs(_DIR_EXTENSIONS)):array();
+	// liste des extensions dispo sous SPIP 2.1
+	$plugins_extensions = defined('_SPIP20100')?array_values(liste_chemin_plugin_actifs(_DIR_EXTENSIONS)):array();
 	// tous, mais les actifs d'abord...
 	$plugins = array_unique(array_merge($plugins_actifs, $plugins_extensions, liste_plugin_files()));
 	$html_actifs = $html_inactifs = $html_extensions = array();
