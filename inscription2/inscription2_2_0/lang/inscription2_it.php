@@ -272,7 +272,7 @@ Grazie per la fiducia.
 Il team di @nom_site@.
 @url_site@
 
-Si non hai richiesto questa iscrizione o se non vuoi più iscriverti al nostro sito, clicca il link qui sotto.
+Se non hai richiesto questa iscrizione o se non vuoi più iscriverti al nostro sito, clicca il link qui sotto.
 @link_suppresion@
 
 
