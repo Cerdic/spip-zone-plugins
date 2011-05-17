@@ -49,4 +49,10 @@ function media_ieconfig_metas($table){
 	return $table;
 }
 
+// Utilisation du pipeline pre_liens pour traiter les raccourcis ->media12
+function media_pre_liens($texte) {
+	$texte = preg_replace('/->media([0-9]+)\]/Ui','->doc$1]', $texte);
+	return $texte;
+}
+
 ?>

@@ -244,30 +244,40 @@ function calculer_balise_MEDIA_TAILLE($dim,$taille,$hauteur,$largeur,$sql_largeu
 		$sql_hauteur = isset($GLOBALS['meta']['media_taille_grand_hauteur']) ? $GLOBALS['meta']['media_taille_grand_hauteur'] : 480;
 	if (!is_numeric($sql_largeur) || intval($sql_largeur)<=0)
 		$sql_largeur = isset($GLOBALS['meta']['media_taille_grand_largeur']) ? $GLOBALS['meta']['media_taille_grand_largeur'] : 640;
-	// Hauteur visée
-	if (is_numeric($hauteur) && intval($hauteur)>0)
+	// Hauteur visée (on peut avoir passé une hauteur en %)
+	if (substr(trim($hauteur),-1)=='%')
+		$hauteur = trim($hauteur);
+	elseif (is_numeric($hauteur) && intval($hauteur)>0)
 		$hauteur = intval($hauteur);
 	elseif (in_array($taille,array('icone','petit','moyen','grand')) && isset($GLOBALS['meta']['media_taille_'.$taille.'_hauteur']))
 		$hauteur = $GLOBALS['meta']['media_taille_'.$taille.'_hauteur'];
 	elseif (in_array($taille,array('icone','petit','moyen','grand')))
 		$hauteur = $hauteur_defaut[$taille];
+	elseif (substr(trim($taille),-1)=='%')
+		$hauteur = trim($taille);
 	elseif (is_numeric($taille) && intval($taille)>0)
 		$hauteur = intval($taille);
 	else
-		$hauteur = 100000;
-	// Largeur visée
-	if (is_numeric($largeur) && intval($largeur)>0)
+		$hauteur = $sql_hauteur;
+	// Largeur visée (on peut avoir passé une largeur en %)
+	if (substr(trim($largeur),-1)=='%')
+		$largeur = trim($largeur);
+	elseif (is_numeric($largeur) && intval($largeur)>0)
 		$largeur = intval($largeur);
 	elseif (in_array($taille,array('icone','petit','moyen','grand')) && isset($GLOBALS['meta']['media_taille_'.$taille.'_largeur']))
 		$largeur = $GLOBALS['meta']['media_taille_'.$taille.'_largeur'];
 	elseif (in_array($taille,array('icone','petit','moyen','grand')))
 		$largeur = $largeur_defaut[$taille];
+	elseif (substr(trim($taille),-1)=='%')
+		$hauteur = trim($taille);
 	elseif (is_numeric($taille) && intval($taille)>0)
 		$largeur = intval($taille);
 	else
-		$largeur = 100000;
-	// Doit-on redimensionner ?
-	if ($sql_hauteur > $hauteur || $sql_largeur > $largeur) {
+		$largeur = $sql_largeur;
+	// Doit-on redimensionner ? Si une deux dimensions est exprimée en %, on ne redimensionne pas.
+	if (substr($hauteur,-1)=='%' || substr($largeur,-1)=='%')
+		$t = array('largeur' => $largeur, 'hauteur' => $hauteur);
+	elseif ($sql_hauteur > $hauteur || $sql_largeur > $largeur) {
 		$ratio = max ($sql_hauteur/$hauteur,$sql_largeur/$largeur);
 		$t = array('largeur' => round($sql_largeur/$ratio), 'hauteur' => round($sql_hauteur/$ratio));
 	} else 

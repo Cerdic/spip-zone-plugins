@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Mod&egrave;les &lt;media&gt;</nom>
 	<auteur>Joseph</auteur>
-	<version>0.3.7</version>
+	<version>0.4.0</version>
 	<etat>test</etat>
 	<description>Mod&egrave;les alternatifs pour l'insertion des documents.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3593</lien>
@@ -27,6 +27,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
+		<inclure>media_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_liens</nom>
 		<inclure>media_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
