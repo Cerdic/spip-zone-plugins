@@ -82,6 +82,7 @@ function oembed_post_edition($flux) {
 }
 
 function oembed_pre_propre($texte) {
+	include_spip('inc/config');
 	if (lire_config('oembed/embed_auto','oui')!='non') {
 		include_spip('inc/oembed');
 		foreach (extraire_balises($texte, 'a') as $lien) {
