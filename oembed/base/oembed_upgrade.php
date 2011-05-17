@@ -25,7 +25,7 @@ function oembed_upgrade($nom_meta_base_version,$version_cible){
 			foreach ($providers as $scheme => $endpoint) {
 				sql_insertq('spip_oembed_providers',array('scheme'=>$scheme,'endpoint'=>$endpoint));
 			}
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+			ecrire_meta($nom_meta_base_version,$current_version=0.1,'non');
 		}
 		if (version_compare($current_version,"0.2","<")){
 			include_spip('base/abstract_sql');
