@@ -54,6 +54,7 @@ em, i { font-style: italic; }
 small, .small { font-size: 80%; }
 big, .big { font-size: 150%; }
 abbr[title], acronym[title] { border-bottom: .1em dotted; cursor: help; }
+@media print { abbr[title]:after { content: " (" attr(title) ")"; } }
 dfn { font-weight: bold; font-style: italic; }
 del { text-decoration: line-through; }
 ins { text-decoration: none; background-color: #FFC; }
@@ -111,6 +112,24 @@ p, .p, dl, dd, blockquote, address, pre, table, fieldset { margin-bottom: #GET{m
 a {}
 a:hover {}
 a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
+@media print {
+	a, a:visited { color: #GET{color} !important; text-decoration: underline; }
+	.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; } /* Don't show links for images, or javascript/internal links */
+}
+
 .on { font-weight: bold; }
+
+/**
+* Print styles from HTML5 Boilerplate
+* Inlined to avoid required HTTP connection: www.phpied.com/delay-loading-your-print-css/
+*/
+@media print {
+	pre, blockquote { page-break-inside: avoid; }
+	thead { display: table-header-group; } /* css-discuss.incutio.com/wiki/Printing_Tables */
+	tr, img { page-break-inside: avoid; }
+	@page { margin: 0.5cm; }
+	p, h2, h3 { orphans: 3; widows: 3; }
+	h2, h3 { page-break-after: avoid; }
+}
 
 /* end */

@@ -31,6 +31,8 @@ body { text-align: center; background-image: url(img/baseline.png); }
 	.nav,
 	.aside,
 	.footer { display: none; }
+	.page,
+	.content { width: auto; }
 }
 
 /* end */
