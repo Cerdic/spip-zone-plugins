@@ -74,6 +74,9 @@ sc { font-variant: small-caps; }
 .formulaire_spip .boutons { clear: both; margin: 0; padding: 0; text-align: right; }
 .formulaire_spip .boutons input,
 .formulaire_spip .boutons button {[ margin-left: (#GET{margin-bottom}|div{2})em;] }
+@media print {
+	.formulaire_spip { display: none; }
+}
 
 /* Previsu */
 .previsu { margin-bottom: #GET{margin-bottom};[ padding: (#GET{margin-bottom}|div{2})em;] border: 2px dashed #F57900; }

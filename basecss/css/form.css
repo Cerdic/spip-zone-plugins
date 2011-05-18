@@ -48,4 +48,9 @@ button { width: auto; overflow: visible; } /* Make buttons play nice in IE: www.
 .success a		{ color: #264409; }
 .info a			{ color: #205791; }
 
+/* print */
+@media print {
+	form { display: none; }
+}
+
 /* end */
