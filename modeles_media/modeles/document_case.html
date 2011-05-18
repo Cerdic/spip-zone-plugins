@@ -22,10 +22,10 @@
 			</div>]
 			[(#LOGO_DOCUMENT{#URL_DOCUMENT}|image_reduire{150,150})]
 			<BOUCLE_type_doc(TYPES_DOCUMENTS){extension}>
-			[(#MODE|=={document}|oui)<div class="type">
+			<div class="type">
 			[(#TITRE|sinon{#VAL{<:info_document:>}|concat{' ',#EXTENSION|majuscules}})]
 				</div>
-			]
+			
 			[(#ID_DOCUMENT|media_raccourcis_media)]
 			</BOUCLE_type_doc>
 				[<div class="mode">(#INCLUS|=={image}|et{#EVAL{_BOUTON_MODE_IMAGE}}|oui)
