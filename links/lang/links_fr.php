@@ -6,6 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'lien_externe' => 'Lien externe',
 'lien_ouvrant' => 'Lien ouvrant une nouvelle fen&ecirc;tre',
+'titre_menu_liens' => 'Liens explicites',
 
 );
 
