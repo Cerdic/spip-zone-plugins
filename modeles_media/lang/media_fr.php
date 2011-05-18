@@ -14,6 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_lien' => 'Vous pouvez saisie une URL de la forme http://monsite.net, une adresse mail ou un raccourci SPIP (rub1, art3, breve4...).',
 	'explication_titre_lien' => 'Vous pouvez personnaliser l\'attribut <i>title</i> du lien. Laissez vide pour que l\'attribut <i>title</i> soit généré automatiquement.',
 	'info_configurer_media_titre' => 'Modèles &lt;media&gt; : configurer les tailles par défaut',
+	'info_inclusion_icone' => 'Inclusion de l\'ic&ocirc;ne&nbsp;:',
 	'item_afficher' => 'afficher',
 	'item_embed' => 'incruster le document',
 	'item_icone' => 'afficher l\'icône',
