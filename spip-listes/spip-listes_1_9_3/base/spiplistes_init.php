@@ -177,11 +177,16 @@ function spiplistes_vider_tables () {
 	include_spip('base/abstract_sql');
 	
 	// ne supprime pas la table spip_auteurs_elargis (utilisee par inscription2, echoppe, ... ? )
-	$sql_tables = "spip_listes, spip_courriers, spip_auteurs_courriers, spip_auteurs_listes, spip_auteurs_mod_listes";
-	
-	spiplistes_log("DROPT TABLES ".$sql_tables);
-	sql_drop_table($sql_tables, true);
-	
+	foreach(array('spip_listes'
+				  , 'spip_courriers'
+				  , 'spip_auteurs_courriers'
+				  , 'spip_auteurs_listes'
+				  , 'spip_auteurs_mod_listes'
+				 ) as $table) {
+		spiplistes_log('DROP TABLE '.$table);
+		sql_drop_table($table, true);
+	}
+		
 	// effacer les metas (prefs, etc.)
 	$sql_spiplistes_metas = array(
 		'spiplistes_version'
