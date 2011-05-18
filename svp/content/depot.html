@@ -43,12 +43,12 @@
 [(#REM) La liste des paquets du depot correspondant a des plugins ]
 <h3 class="h3"><:svp:intertitre_depot_plugins:></h3>
 <p>[(#ID_DEPOT|svp_compter_depots{plugin})]</p>
-<INCLURE{fond=inclure/liste-plugins}{env} />
+<INCLURE{fond=listes/plugins}{env} />
 
 [(#REM) La liste des paquets du depot correspondant a d'autres contributions ]
 [(#SET{url, [(#URL_ARCHIVES|concat{/})]})]
 <h3 class="h3"><:svp:intertitre_depot_autres_contributions:></h3>
 <p>[(#ID_DEPOT|svp_compter_depots{autre})]</p>
-<INCLURE{fond=inclure/liste-autres-contributions}{env}{url_depot=#GET{url}} />
+<INCLURE{fond=listes/autres-contributions}{env}{url_depot=#GET{url}} />
 
 </BOUCLE_contenu_depot>

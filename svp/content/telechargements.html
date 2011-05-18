@@ -32,11 +32,11 @@
 [(#SET{url, [(#URL_ARCHIVES|concat{/})]})]
 [(#REM) -- Les plugins ]
 <h3 class="h3"><:svp:intertitre_paquets_plugin:></h3>
-<INCLURE{fond=inclure/liste-paquets-plugin}{env}{id_depot}{categorie}{url_depot=#GET{url}} />
+<INCLURE{fond=listes/paquets-plugin}{env}{id_depot}{categorie}{url_depot=#GET{url}} />
 [(#REM) -- Les autres contributions, si le filtre categorie n'est pas actif ]
 [(#ENV{categorie}|non)
 <h3 class="h3"><:svp:intertitre_paquets_contribution:></h3>
-<INCLURE{fond=inclure/liste-paquets-contribution}{env}{id_depot}{url_depot=#GET{url}} />
+<INCLURE{fond=listes/paquets-contribution}{env}{id_depot}{url_depot=#GET{url}} />
 ]
 </BOUCLE_depots>
 </B_depots>
