@@ -5,9 +5,10 @@
 <lien>http://www.spip-contrib.net/liens-sortants-ouvrants</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin</auteur>
 <licence>(c) GPL 2011</licence>
-<version>2.0.1</version>
-<etat>dev</etat>
+<version>2.1.0</version>
+<etat>test</etat>
 <prefix>links</prefix>
+<fonctions>links_fonctions.php</fonctions>
 <necessite id='SPIP' version='[2.0.0;]' />
 <necessite id="spip_bonux" version="[2.2.13;]" />
 <bouton id='links' parent='bando_squelette'>
