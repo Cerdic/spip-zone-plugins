@@ -26,4 +26,4 @@ parametres:
       obligatoire: 'oui'
       inserer_barre: 'edition'
       previsualisation: 'oui'
-contexte: aucun
+contexte: 'aucun'

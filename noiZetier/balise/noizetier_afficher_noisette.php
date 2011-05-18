@@ -22,12 +22,23 @@ function balise_NOIZETIER_AFFICHER_NOISETTE_dist($p) {
 	// si 'env' => tout le contexte recu.
 	$environnement = '$Pile[0]';
 	
-	$p->code =  "(!$id_noisette) ? _T('zbug_champ_hors_motif', array('champ'=>'ID_NOISETTE', 'motif'=>'NOISETTES')) : recuperer_fond(
+	$inclusion_dynamique = "\"<?php echo recuperer_fond(
+		'noisettes/\".$noisette.\"',
+		\".var_export(array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement)),true).\",
+		\".var_export(array('ajax'=>($_ajax && noizetier_ajaxifier_noisette($noisette))),true).\"
+	);?>\"";
+
+	$inclusion_statique =  "recuperer_fond(
 		'noisettes/'.$noisette,
 		array_merge(unserialize($parametres), noizetier_choisir_contexte($noisette, $environnement)),
 		array('ajax'=>($_ajax && noizetier_ajaxifier_noisette($noisette)))
 	)";
-		
+	
+	$code = "((noizetier_inclusion_dynamique($noisette)) ? $inclusion_dynamique : $inclusion_statique)";
+	
+	$p->code =  "(!$id_noisette) ? _T('zbug_champ_hors_motif', array('champ'=>'ID_NOISETTE', 'motif'=>'NOISETTES')) : ".$code;
+	$p->interdire_scripts = false;
+	
 	return $p;
     
 }
