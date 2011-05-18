@@ -5,7 +5,7 @@
 
 -------------------------------------------------------------- */
 
-body { text-align: center; background-image: url(img/baseline.png); }
+body { text-align: center; }
 .page { position: relative; width: 940px; margin: 0 auto; text-align: left; }
 
 .header {}
