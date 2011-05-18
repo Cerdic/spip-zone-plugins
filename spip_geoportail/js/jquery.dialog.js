@@ -85,8 +85,8 @@
 		else if (d.height() > 0.8*h) $("#jqDialog .jqDialogInner").height(Math.round(0.8*h));
 		
 		// Fermer si clickout
-		if (param.clickout) back.click(jQuery.jqDialog.action);
-		if (param.clickin) d.click(jQuery.jqDialog.action);
+		if (param.clickout) back.click(jQuery.jqDialog.cout);
+		if (param.clickin) d.click(jQuery.jqDialog.cin);
 
 		// Verifier la coherence
 		if (!$('#jqDialog .jqDialogBlock').css('padding')
@@ -133,6 +133,14 @@
 	// Fermer le dialog
 	$.jqDialog.close = function()
 	{	$.jqDialog.action("undo");
+	}
+	// Clic dans le dialogue
+	$.jqDialog.cin = function()
+	{	$.jqDialog.action("in");
+	}
+	// Clic hors du dialogue
+	$.jqDialog.cout = function()
+	{	$.jqDialog.action("out");
 	}
 	
 	// On a fini (ne pas detruire ici si on veut rejouer)

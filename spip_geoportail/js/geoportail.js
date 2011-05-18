@@ -1174,6 +1174,7 @@ function geoportail_selectionnable (l, hover)
 	{	this.selectControl.deactivate();
 		layers = this.selectControl.layers;
 		if (!layers) layers = [ this.selectControl.layer ];
+		this.getMap().removeControl(this.selectControl);
 	}
 	else layers = new Array();
 	layers = layers.concat(l);

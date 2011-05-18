@@ -98,6 +98,9 @@ img.gpGeocodeMatchCodeMatchType
 #popup.Anchored_hover .olPopupContent
 {	overflow:hidden;
 }
+#popup.Anchored_hover .document
+{	text-align:left;
+}
 
 #popup .olPopupCloseBox, .gpPopupCloseBox
 {	background:transparent url(close.png) no-repeat scroll 0 0;
