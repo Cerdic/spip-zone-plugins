@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Breves vers articles</nom>
+	<auteur>Didier, JLuc, [http://www.ouhpla.net]</auteur>
+	<licence>GNU/GLP</licence>
+	<description>
+	Transforme les brèves d'un site en articles, les range dans une rubrique, leur attribue un auteur, fait suivre les logos et les forums, et convertit tous les liens raccourcis.
+	</description>
+	<lien>http://www.spip-contrib.net/3835</lien>
+	<categorie>maintenance</categorie>
+	<etat>test</etat>
+	<icon>prive/themes/spip/images/br2art.png</icon>
+	<prefix>breves_vers_articles</prefix>
+	<version>1.1</version>
+	<install>base/breves_vers_articles_upgrade.php</install>
+	<options>breves_vers_articles_options.php</options>
+	<fonctions>breves_vers_articles_fonctions.php</fonctions>	
+	<bouton id='breves_vers_articles' parent='bando_administration'> 
+        <icone>prive/themes/spip/images/br2art.png</icone>
+        <titre>Breves vers articles</titre>   
+	</bouton>
+</plugin>
+
