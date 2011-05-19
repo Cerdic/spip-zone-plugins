@@ -2,7 +2,7 @@
 <nom>Base CSS P&eacute;tronille&nbsp;2</nom>
 <version>2.1.2</version>
 <etat>dev</etat>
-<icon>icon.png</icon>
+<icon>prive/img/petronille.png</icon>
 <description>{{ATTENTION : version de dev !}}
 _ Utilisez plut&ocirc;t la version stable distribu&eacute;e sur SPIP-Contrib !
 
@@ -15,7 +15,7 @@ de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;gl
 <prefix>basecss</prefix>
 <necessite id="spip_bonux" version="[2.2.19;]"/>
 <bouton id='basecss' parent='bando_squelette'>
-	<icone>icon-16.png</icone>
+	<icone>prive/img/petronille-16.png</icone>
 	<titre>Base&nbsp;CSS</titre>
 	<url>configurer_basecss</url>
 </bouton>
@@ -29,7 +29,7 @@ de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;gl
 <nom>Base CSS P&eacute;tronille&nbsp;2</nom>
 <version>2.1.2</version>
 <etat>dev</etat>
-<icon>icon.png</icon>
+<icon>prive/img/petronille.png</icon>
 <description>{{ATTENTION : version de dev !}}
 _ Utilisez plut&ocirc;t la version stable distribu&eacute;e sur SPIP-Contrib !
 
@@ -41,7 +41,7 @@ de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;gl
 <categorie>outil</categorie>
 <prefix>basecss</prefix>
 <bouton id='basecss' parent='bando_squelette'>
-	<icone>icon-16.png</icone>
+	<icone>prive/img/petronille-16.png</icone>
 	<titre>Base&nbsp;CSS</titre>
 	<url>configurer_basecss</url>
 </bouton>
