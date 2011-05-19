@@ -60,7 +60,7 @@ function formulaires_configurer_mailchimp_verifier_dist()
  */
 
 
-function formulaires_configurer_mailchimp_traiter_dist($chaine)
+function formulaires_configurer_mailchimp_traiter_dist()
 {
 	$res = array();
 	#Ecriture des parametres dans META 
