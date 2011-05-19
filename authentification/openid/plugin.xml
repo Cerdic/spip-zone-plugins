@@ -62,7 +62,7 @@
 </plugin>
 
 
-<plugin spip="[2.1.0-dev;3.1.0)">
+<plugin spip="[2.1.0-dev;3.0.0]">
 	<nom>OpenID</nom>
 	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, Cedric Morin [->yterium.net], Fil</auteur>
 	<licence>
