@@ -1,9 +1,9 @@
 <plugin>
-	<icon>icon.png</icon>
+	<icon>themes/spip/images/faq-32.png</icon>
 	<nom>D&eacute;finitions et FAQ</nom>
 	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
 	<licence>GPL</licence>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<etat>stable</etat>
 	<necessite id="SPIP" version="[2.0;3.1.0)" />
 	<description>Ce petit plugin valorise les termes d&eacute;finis (<code>dfn</code>) et les listes de d&eacute;finitions (<code>dl</code>, <code>dt</code>, <code>dd</code>). Il&nbsp;transforme les listes de d&eacute;finitions marqu&eacute;es &laquo;&nbsp;<code>faq</code>&nbsp;&raquo; en <abbr title="Foire Aux Questions">FAQ</abbr> d&eacute;pliable.</description>
