@@ -1,8 +1,8 @@
 <plugin>
 <nom>Liens explicites</nom>
-<icon>icon.png</icon>
+<icon>themes/spip/images/links.png</icon>
 <description>Styles et pictos explicitant les liens du site : documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc.</description>
-<lien>http://www.spip-contrib.net/liens-sortants-ouvrants</lien>
+<lien>http://www.spip-contrib.net/?rubrique1252</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin</auteur>
 <licence>(c) GPL 2011</licence>
 <version>2.2.0</version>
@@ -24,9 +24,9 @@
 </plugin>
 <plugin spip="[3.0.0-dev;3.0.*]">
 <nom>Liens explicites</nom>
-<icon>icon.png</icon>
+<icon>themes/spip/images/links.png</icon>
 <description>Styles et pictos explicitant les liens du site : documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc.</description>
-<lien>http://www.spip-contrib.net/liens-sortants-ouvrants</lien>
+<lien>http://www.spip-contrib.net/?rubrique1252</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin</auteur>
 <licence>(c) GPL 2011</licence>
 <version>2.2.0</version>
