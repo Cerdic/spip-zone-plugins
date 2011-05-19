@@ -5,7 +5,7 @@
 	<licence>GPL</licence>
 	<version>1.0.1</version>
 	<etat>stable</etat>
-	<necessite id="SPIP" version="[2.0;3.1.0)" />
+	<necessite id="SPIP" version="[2.0;3.0.0]" />
 	<description>Ce petit plugin valorise les termes d&eacute;finis (<code>dfn</code>) et les listes de d&eacute;finitions (<code>dl</code>, <code>dt</code>, <code>dd</code>). Il&nbsp;transforme les listes de d&eacute;finitions marqu&eacute;es &laquo;&nbsp;<code>faq</code>&nbsp;&raquo; en <abbr title="Foire Aux Questions">FAQ</abbr> d&eacute;pliable.</description>
 	<lien>http://www.spip-contrib.net/?rubrique891</lien>
 	<prefix>faq</prefix>
