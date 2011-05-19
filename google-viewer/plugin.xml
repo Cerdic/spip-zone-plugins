@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Google Viewer</nom>
 	<auteur>Joseph</auteur>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<etat>test</etat>
-	<description>Mod&egrave;le pour utiliser le lecteur de documents en ligne de Google. Ce plugin &eacute;tend le mod&egrave;ve media_embed pour les documents de type doc, docx, xls, xlsx, ppt, pptx, pdf, ai, psd, eps, ps, et ttf.</description>
+	<description>Mod&egrave;le pour utiliser le lecteur de documents en ligne de Google. Ce plugin &eacute;tend le mod&egrave;ve &lt;mediaXX|embed&gt; pour les documents de type doc, docx, xls, xlsx, ppt, pptx, pdf, ai, psd, eps, ps, et ttf. En l'absence des mod&egrave;les media, il est possible d'utiliser &lt;embXX|google&gt;.</description>
 	<lien></lien>
 	<icon>images/gviewer.png</icon>
 	<prefix>gviewer</prefix>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
-	<necessite id="media" />
+	<utilise id="media" />
 </plugin>

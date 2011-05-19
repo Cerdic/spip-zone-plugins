@@ -1,0 +1,6 @@
+<BOUCLE_doc (DOCUMENTS) {id_document=#ENV{id}} {tout}>
+	<div class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})]'[
+style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>
+	<iframe src="http://docs.google.com/viewer?url=[(#FICHIER|url_absolue|urlencode)]&embedded=true" width="#ENV{largeur,'100%'}" height="#ENV{hauteur,480}" style="border: none;"></iframe>
+	</div>
+</BOUCLE_doc>
