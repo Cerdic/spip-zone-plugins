@@ -105,6 +105,9 @@ div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_docu
 
 /* Pagination */
 .pagination { clear: both; text-align: center; }
+@media print {
+	.pagination { display: none; }
+}
 
 /* Liens de SPIP */
 a.spip_note { font-weight: bold; } /* liens vers notes de bas de page */
