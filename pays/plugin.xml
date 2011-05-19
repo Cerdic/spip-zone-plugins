@@ -38,7 +38,7 @@
 		<inclure>base/pays_tables.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.0.9;3.0.*]" />
+	<necessite id="SPIP" version="[2.0.9;3.0.0]" />
 	<utilise id="saisies" />
 
 	<categorie>outil</categorie>
