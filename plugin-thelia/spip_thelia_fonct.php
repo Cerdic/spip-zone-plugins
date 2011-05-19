@@ -212,16 +212,6 @@ function remplacement_sortie_thelia($in_thelia) {
 	return $in_thelia;
 }
 
-function spip_thelia_ajouter_boutons($boutons_admin) {
-	// si on est admin
-	if ($GLOBALS['connect_statut'] == "0minirezo") {
-	  	// on voit le bouton dans la barre "naviguer"
-	  	$boutons_admin['naviguer']->sousmenu['spip_thelia_catalogue']= new Bouton(
-		_DIR_PLUGIN_SPIP_THELIA.'img_pack/logo_thelia_petit.png', 'Catalogue Th&eacute;lia');
-	}
-	return $boutons_admin;
-}
-
 function spip_thelia_affiche_milieu($flux) {
 	$exec =  $flux['args']['exec'];
 	$id_article= $_REQUEST['id_article'];

@@ -30,11 +30,15 @@
 		<action>insert_head</action>
 		<inclure>spip_thelia_fonct.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouter_boutons</action>
-		<inclure>spip_thelia_fonct.php</inclure>
-	</pipeline>
+	<onglet id="thelia" parent="configuration">
+		<icone>img_pack/logo_thelia_petit.png</icone>
+		<titre>spipthelia:catalogue_thelia</titre>
+	</onglet>
+	<bouton id='config_thelia' parent="bando_configuration">
+		<icone>img_pack/logo_thelia_petit.png</icone>
+		<titre>spipthelia:catalogue_thelia</titre>		
+		<url>spip_thelia_catalogue</url>
+	</bouton>
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
