@@ -44,7 +44,7 @@ Uses the library [twitteroauth->http://github.com/abraham/twitteroauth] of Abrah
 		<titre>microblog:titre_microblog</titre>
 		<icone>images/microblog-16.png</icone>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;3.1.0)" />
+	<necessite id="SPIP" version="[2.1.0;3.0.0]" />
 
 	<categorie>communication</categorie>
 </plugin>
