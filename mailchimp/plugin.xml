@@ -1,21 +1,17 @@
-<plugin>
+<plugin spip="[3.0.0-dev;]" >
 	<nom>MailChimp</nom>
 	<auteur>[Ben->http://www.nursit.net]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>test</etat>
-	<description>Gerer une mailing liste à l'aide de [mailchimp->http://www.mailchimp.com]. Utilisation du plugin mes_abonnes pour garder les abonnés en local, mais inscription également des emails chez mailchimp ( pour l'envoi ultérieur de mailing par l'interface mailchimp)</description>
+	<description>Gérer une mailing liste à l'aide de [mailchimp->http://www.mailchimp.com]. Utilisation du plugin mes_abonnes pour garder les abonnés en local, mais inscription également des emails chez mailchimp ( pour l'envoi ultérieur de mailing par l'interface mailchimp)</description>
 	<lien>http://www.spip-contrib.net/mailchimp</lien>
 	<prefix>mailchimp</prefix>
 	<icon>images/light_freddie.png</icon>
-	<necessite id="SPIP" version="[2.1;]" />	
 	<necessite id="mesabonnes" version="[0.2;]" />
-	<necessite id="spip_bonux" version="[2.2.17;]" />
-
 	<pipeline>
 		<nom>formulaire_traiter</nom>		
 		<inclure>mailchimp_pipelines.php</inclure>
 	</pipeline>
-		
 	<categorie>communication</categorie>
 </plugin>
