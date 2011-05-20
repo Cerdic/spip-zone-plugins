@@ -40,7 +40,7 @@ Quand vous aurez termin&eacute; la configuration de votre site, vous pourrez, si
 	'explication_dossier_squelettes' => 'Vous pouvez indiquer plusieurs r&eacute;pertoires s&eacute;par&eacute;s par \':\', qui seront pris dans l\'ordre. Le r&eacute;pertoire intitulé "<tt>squelettes</tt>" est toujours pris en dernier si il existe.',
 	'label_options_typo' => 'Traitements des textes',
 	'label_supprimer_numero' => 'Supprimer automatiquement les num&eacute;ros des titres',
-	'label_toujours_paragrapher' => 'Encapsuler tous les paragraphes dans un <tt>&lt;p&gt;</tt> (m&ecirc;me les texte constitu&eacute;s d\'un seul parapgraphe)',
+	'label_toujours_paragrapher' => 'Encapsuler tous les paragraphes dans un <tt>&lt;p&gt;</tt> (m&ecirc;me les texte constitu&eacute;s d\'un seul paragraphe)',
 	'label_options_skel' => 'Calcul des pages',
 	'label_forcer_lang' => 'Forcer la langue de l\'url ou du visiteur (<tt>$forcer_lang</tt>)',
 	'label_no_set_html_base' => 'Pas d\'ajout automatique de <tt>&lt;base href="..."&gt;</tt>',
