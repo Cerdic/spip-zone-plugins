@@ -1,7 +1,7 @@
 
 titre: '<:pays:titre_page_test:>'
 description: '<:pays:titre_page_test:>'
-icone: 'img/pays_25x25_nb.png
+icone: 'img/pays_32x32.png'
 options:
   -
     saisie: 'fieldset'
