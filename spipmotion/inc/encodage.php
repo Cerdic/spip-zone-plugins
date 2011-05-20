@@ -435,7 +435,7 @@ function encodage($source,$doc_attente){
 					}else{
 						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					}
-					$metadatas = "-map_metadata $fichier_temp:$chemin";
+					$metadatas = "-map_meta_data $fichier_temp:$chemin";
 					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $infos_sup_normal $rotation $metadatas\"";
 					$fichier_log = "$fichier_log-pass2.log";
 					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
@@ -455,7 +455,7 @@ function encodage($source,$doc_attente){
 				if($source['rotation'] == '90'){
 					$rotation = "-vf transpose=1";
 				}
-				$infos_sup_normal .= " -map_metadata $fichier_temp:$chemin $rotation";
+				$infos_sup_normal .= " -map_meta_data $fichier_temp:$chemin $rotation";
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
