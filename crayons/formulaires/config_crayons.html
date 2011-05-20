@@ -90,6 +90,23 @@
 		</li>
 	</ul>
 </li>
+
+
+<li class="fieldset fieldset_crayons_upload experimental">
+	<h3 class="legend">UPLOAD de documents</h3>
+	<ul>
+		<li class="editer_reduire_logo[ (#GET{erreurs}|oui)erreur]">
+			<label>exp&#233;rimental</label>
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<div class="choix">
+				<input type="checkbox" name="upload" class="checkbox"  value='on' id='upload'[ (#ENV{upload}|oui)checked="checked"] />
+				<label for='upload'>Autoriser l'ajout de documents par glisser/d&#233;poser sur le crayon article.texte</label>
+			</div>
+		</li>
+	</ul>
+</li>
+
+
 </ul>
 <p class="boutons">
 	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
