@@ -1,7 +1,7 @@
 <plugin spip="[2.1.0;2.3.0-dev)" >
 <nom>Base CSS P&eacute;tronille&nbsp;2</nom>
-<version>2.1.2</version>
-<etat>dev</etat>
+<version>2.1.3</version>
+<etat>test</etat>
 <icon>prive/img/petronille.png</icon>
 <description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
 de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
@@ -24,8 +24,8 @@ de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;gl
 </plugin>
 <plugin spip="[2.3.0-dev;]" >
 <nom>Base CSS P&eacute;tronille&nbsp;2</nom>
-<version>2.1.2</version>
-<etat>dev</etat>
+<version>2.1.3</version>
+<etat>test</etat>
 <icon>prive/img/petronille.png</icon>
 <description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
 de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
