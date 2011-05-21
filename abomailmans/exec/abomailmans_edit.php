@@ -15,7 +15,7 @@ include_spip('inc/abomailmans');
 
 function exec_abomailmans_edit(){
 
-	$id_abomailman = intval(_request('id_abomailman'));
+	$id_abomailman = intval(_request('id_abo'));
 	$retour = _request('retour');
 
 	if ($retour)
