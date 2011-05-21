@@ -290,7 +290,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => '<MODIF>Makes it possible to display a customised message on the public site and also in the editing area during maintenance work.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Site in maintenance mode', # MODIF
-	'erreur:bt' => '<span style=\\"color:red;\\">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.',
+	'erreur:bt' => '<span style="color:red;">Warning:</span> the typographical bar appears to be an old version (@version@).<br />The Penknife is compatible only with version @mini@ or newer.',
 	'erreur:description' => 'missing id in the tool\'s definition!',
 	'erreur:distant' => 'The distant server', # MODIF
 	'erreur:jquery' => '{{N.B.}} : {jQuery} does not appear to be active for this page. Please consult the paragraph about the plugin\'s required libraries [in this article->http://www.spip-contrib.net/?article2166] or reload this page.',
@@ -673,9 +673,9 @@ The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
 <q1>• Expressions containing spaces should be placed within inverted commas.
 _ • To specify a whole word, place it in brackets. For example: {(asses)}.
 _ • To use a regular expression, first check the syntax, then place it between slashes and inverted commas.
-_ Example:~{<html>\\"/@test.(com|en)/\\"</html>}.
+_ Example:~{<html>"/@test.(com|en)/"</html>}.
 _ • Pour une expression régulière devant agir sur des caractères HTML, placez le test entre «&#» et «;».
-_ Example:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Example:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 @puce@ Certaines adresses IP peuvent également être bloquées à la source. Sachez toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
 <q1>• Utilisez le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>', # MODIF

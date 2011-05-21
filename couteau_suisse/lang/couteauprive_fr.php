@@ -97,7 +97,7 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisissez ici une autre balise &lt;hN&gt; :[[%bloc_h4%]]
 
-@puce@ Afin d\'obtenir un effet plus doux au moment du clic, vos blocs dépliables peuvent s\'animer à la manière d\'un \\"glissement\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
+@puce@ Afin d\'obtenir un effet plus doux au moment du clic, vos blocs dépliables peuvent s\'animer à la manière d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Dépliables',
 	'boites_privees:description' => 'Toutes les boîtes décrites ci-dessous apparaissent ici ou là dans la partie privée.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les révisions du Couteau Suisse}} : un cadre sur la présente page de configuration, indiquant les dernières modifications apportées au code du plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -157,7 +157,7 @@ SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &
 
 	Vous pouvez définir le code ouvrant et fermant pour les notes de bas de pages : [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Les styles de SPIP par défaut}}. Jusqu\'à la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises systématiquement affublés du style &quot;spip&quot;. Par exemple : <code><p class=\\"spip\\"></code>. Vous pouvez ici définir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqué.
+@puce@ {{Les styles de SPIP par défaut}}. Jusqu\'à la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises systématiquement affublés du style &quot;spip&quot;. Par exemple : <code><p class="spip"></code>. Vous pouvez ici définir le style de ces balises en fonction de vos feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqué.
 
 {Attention : si certains raccourcis (ligne horizontale, intertitre, italique, gras) ont été modifiés ci-dessus, alors les styles ci-dessous ne seront pas appliqués.}
 
@@ -304,7 +304,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personalisable sur tout le site public, éventuellement la partie privée.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Site en travaux',
-	'erreur:bt' => '<span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.',
+	'erreur:bt' => '<span style="color:red;">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.',
 	'erreur:description' => 'id manquant dans la définition de l\'outil !',
 	'erreur:distant' => 'le serveur distant',
 	'erreur:jquery' => '{{Note}} : la librairie {jQuery} semble inactive sur cette page. Veuillez consulter [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les dépendances du plugin ou recharger cette page.',
@@ -694,9 +694,9 @@ Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] »
 <q1>• Pour une expression avec des espaces, placez-la entre guillemets.
 _ • Pour spécifier un mot entier, mettez-le entre parenthèses. Exemple~:~{(asses)}.
 _ • Pour une expression régulière, vérifiez bien la syntaxe et placez-la entre slashes puis entre guillemets.
-_ Exemple~:~{<html>\\"/@test\\.(com|fr)/\\"</html>}.
+_ Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.
 _ • Pour une expression régulière devant agir sur des caractères HTML, placez le test entre «&#» et «;».
-_ Exemple~:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
 @puce@ Certaines adresses IP peuvent également être bloquées à la source. Sachez toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
 <q1>• Utilisez le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>',
