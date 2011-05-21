@@ -226,6 +226,8 @@ function spipmotion_post_edition($flux){
 				suivre_invalideur("id='id_$type/$id'");
 			}
 		}
+	}else if($flux['args']['operation'] == 'supprimer_documents'){
+		sql_delete('spip_spipmotion_attentes','id_document = '.$flux['args']['id_objet'].' AND encode!='.sql_quote('oui'));
 	}
 	return $flux;
 }
