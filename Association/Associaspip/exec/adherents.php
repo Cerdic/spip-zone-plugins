@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
-
 include_spip('inc/navigation_modules');
+include_spip ('inc/voir_adherent'); // pour voir_adherent_infos
 	
 function exec_adherents() {
 		
@@ -145,7 +145,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = voir_adherent_infos("*", '', $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		

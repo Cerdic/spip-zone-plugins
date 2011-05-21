@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
+include_spip ('inc/voir_adherent'); // pour voir_adherent_infos
 	
 function exec_association() {
 		
@@ -68,7 +69,8 @@ function exec_association() {
 		echo '<th>' . _T('asso:portable') . "</th>\n";
 		echo '<th>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</th>\n";
 		echo '</tr>';
-		$query = sql_select("a.id_auteur, a.mobile, a.telephone, a.statut_interne, a.fonction, b.email, a.nom_famille, a.prenom, a.sexe",'spip_asso_membres' .  " a INNER JOIN spip_auteurs AS b ON a.id_auteur=b.id_auteur", "a.fonction !='' AND a.statut_interne != 'sorti'", '',  "a.nom_famille");
+		$query = voir_adherent_infos("*", '',  "fonction !='' AND statut_interne != 'sorti'", '',  "nom_famille");
+
 		while ($data = sql_fetch($query)) {	
 			$id_auteur=$data['id_auteur'];
 			$nom_affiche = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);

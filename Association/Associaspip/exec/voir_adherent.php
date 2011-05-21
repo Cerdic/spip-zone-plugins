@@ -20,7 +20,8 @@ function exec_voir_adherent(){
 		
 	$id_auteur= intval($_GET['id']);
 	$full = autoriser('associer', 'adherents');
-	$data = sql_fetsel("m.sexe, m.nom_famille, m.prenom, m.validite, m.adresse, m.code_postal, m.ville, m.telephone, m.mobile, m.email, m.id_asso, c.libelle",'spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
+	$query = voir_adherent_infos("*", 'LEFT JOIN spip_asso_categories as C ON A.categorie=C.id_categorie', "A.id_auteur=$id_auteur");
+	$data = sql_fetch($query);
 	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data) {
 		include_spip('inc/minipres');
 		echo minipres();
@@ -30,9 +31,9 @@ function exec_voir_adherent(){
 		$adresse = $data['adresse'];
 		$cp = $data['code_postal'];
 		$ville = $data['ville'];
-		$email = $data['email'];
 		$telephone = $data["telephone"];
   		$mobile = $data["mobile"];
+		$email = $data['email'];
 		$categorie = $data['libelle']?$data['libelle']:_T('asso:pas_de_categorie_attribuee');
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -56,7 +57,7 @@ function exec_voir_adherent(){
 			  $nom .
 			  "</a>";
 
-			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresse . '<br />' . $cp . ' ' . $ville . '<br/>' . $email . '<br/>' . $telephone . '<br />' . $mobile .  "<p>".$categorie."</p></div>\n";
+			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresse . '<br />' . $cp . ' ' . $ville . '<br/>' . $telephone . '<br />' . $mobile .  '<br />' .$email . '<br />' .$categorie."</div>\n";
 
 		} else $coord = '';
 		$coord .= "<div style='font-weight: bold; text-align:center' class='verdana1 spip_xx-small'><p>"._T('asso:adherent_libelle_date_validite')."<br/>".$validite."</p></div>";
@@ -69,15 +70,15 @@ function exec_voir_adherent(){
 		}
 
 		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
-		 echo fin_boite_info(true);
+		echo fin_boite_info(true);
 		
-		 echo association_retour();
+		echo association_retour();
 
-		 echo debut_droite("",true);
+		echo debut_droite("",true);
 		
-		 debut_cadre_relief(  "", false, "", $titre = $nom_membre);
+		debut_cadre_relief(  "", false, "", $titre = $nom_membre);
 
-		 echo _L('Liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
+		echo _L('Liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
 
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';

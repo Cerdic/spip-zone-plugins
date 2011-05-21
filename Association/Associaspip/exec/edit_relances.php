@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
+include_spip ('inc/voir_adherent'); // pour voir_adherent_infos
 	
 function exec_edit_relances(){
 		
@@ -92,10 +93,7 @@ function exec_edit_relances(){
 
 function relances_while($statut_interne)
 {
-	/* Cette requete recupere tous les membres qui ont un email dans la table spip_auteurs, a reprendre lors de l'interfacage avec Coordonnees car les emails peuvent alors etre uniquement dans spip_emails
- et ils peuvent etre plusieurs, il faudrait peut etre laisser la possibilite de choisir ou prendre la/les adresses email qui sont de toute facon recuperes dans action/modifier_relances.php, le JOIN sur la
-table spip_auteurs permet d'afficher uniquement les membres qui ont un email dans cette table */
-   $query = sql_select("a.id_auteur, a.nom_famille, a.prenom, a.telephone, a.mobile, a.statut_interne, a.validite", "spip_asso_membres a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", " b.email <> ''  AND a.statut_interne like '$statut_interne' AND a.statut_interne <> 'sorti'", '', "a.nom_famille" );
+	$query = voir_adherent_infos("*", '',  " B.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 
 	$res = '';
 	while ($data = sql_fetch($query)) {
