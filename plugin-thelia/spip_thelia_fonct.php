@@ -1,4 +1,5 @@
 <?php
+
 include_spip("inc/charsets") ;
 function spip_thelia_supprimer_balises_thelia($texte) {
 	//suppression des boucles th�lia
@@ -19,7 +20,7 @@ function spip_thelia_demarrer_session_thelia () {
 	$page = new stdclass;
 	$page = "";
 
-	include_once("../classes/Navigation.class.php");
+	include_once("../"._RACINE_THELIA."/classes/Navigation.class.php");
 	
 	ini_set('arg_separator.output', '&amp;');
 	ini_set("url_rewriter.tags","a=href,area=href,frame=src,iframe=src,input=src");
@@ -50,7 +51,7 @@ function spip_thelia_header_prive($flux) {
 	if (function_exists('chemin')&&($_REQUEST['exec']!="articles")&&($_REQUEST['exec']!="naviguer")) {
 		echo ("erreur : la fonction chemin() dans ecrire/inc/utils.php doit &ecirc;tre mise en commentaire !");
 	}
-	if (!file_exists("../fonctions/moteur.php")&&($_REQUEST['exec']!="")) 
+	if (!file_exists("../"._RACINE_THELIA."fonctions/moteur.php")&&($_REQUEST['exec']!="")) 
 		echo ("erreur : th&eacute;lia introuvable, v&eacute;rifiez que les sous-r&eacute;pertoires de th&eacute;lia et spip sont dans le m&ecirc;me r&eacute;pertoire.");
 	if (!function_exists('lire_config'))
 		echo ("erreur : le plugin CFG est n'est pas install&eacute;.");
@@ -106,8 +107,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	$page = new stdclass;
 	$page = "";
 
-	
-	include_once("classes/Navigation.class.php");
+	include_once(_RACINE_THELIA."classes/Navigation.class.php");
 	
 	ini_set('arg_separator.output', '&amp;');
 	ini_set("url_rewriter.tags","a=href,area=href,frame=src,iframe=src,input=src");
@@ -147,7 +147,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 	ob_start();
 	
 	//si version >= 1.3.4 : plus de surcharge dans le plugin, on appelle directement le moteur de Th�lia
-	include_once("fonctions/moteur.php");
+	include_once(_RACINE_THELIA."fonctions/moteur.php");
 
 	//Connexion à SPIP à la création du compte Thelia
 	if ($_GET['page'] == 'nouveau' || $_GET['page_thelia'] == 'nouveau') {
@@ -303,7 +303,7 @@ function spip_thelia_formulaire_article($id_article, $flag_editable, $script) {
 	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
 	ob_start();
 	chdir('..');
-	include_once("fonctions/moteur.php");
+	include_once(_RACINE_THELIA."fonctions/moteur.php");
 	chdir('ecrire');
 	$texte = ob_get_contents();
 	ob_end_clean();
@@ -390,7 +390,7 @@ function spip_thelia_formulaire_rubrique($id_rubrique, $flag_editable, $script) 
 	$res = unicode2charset(charset2unicode($res, 'utf-8'),'iso-8859-1');
 	ob_start();
 	chdir('..');
-	include_once("fonctions/moteur.php");
+	include_once(_RACINE_THELIA."fonctions/moteur.php");
 	chdir('ecrire');
 	$texte = ob_get_contents();
 	ob_end_clean();

@@ -23,7 +23,7 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 	if (lire_config("spip_thelia/auth_unique_spip_thelia","non")=="oui") {
 
 		  spip_log("thelia2 $login " . ($pass ? "mdp fourni" : "mdp absent"). ($md5pass ? "md5mdp fourni" : "md5mdp absent"));
-		  if (!file_exists("fonctions/moteur.php") ) {
+		  if (!file_exists(_RACINE_THELIA."fonctions/moteur.php") ) {
 		      spip_log("fichier thelia trouve");
 			return array();
 		  }
@@ -35,7 +35,7 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 		  spip_log("test1, db courante=".$spip_db);
 		    $res =" foo ";
 		  ob_start();
-		    include_once('fonctions/moteur.php');
+		    include_once(_RACINE_THELIA.'fonctions/moteur.php');
 		    ob_end_clean();
 		    //include_once('classes/Client.class.php');
 		  spip_log("test2");
