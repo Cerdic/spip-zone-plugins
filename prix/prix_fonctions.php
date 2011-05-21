@@ -55,7 +55,7 @@ function prix_formater($prix){
 	$prix = money_format('%i', $prix);
 	
 	// Ensuite on ajoute la devise
-	$prix .= ' €';
+	$prix .= '&nbsp;€';
 	
 	// Fini
 	return $prix;
