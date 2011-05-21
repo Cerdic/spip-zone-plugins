@@ -35,7 +35,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_date']['organisations'] = 'date_creation';
 
 	// titre
-	$interface['table_titre']['contacts'] = "CONCAT(nom,' ',prenom) AS titre, '' AS lang";
+	$interface['table_titre']['contacts'] = "nom AS titre, '' AS lang"; // pour avoir une #URL_CONTACT...
 	$interface['table_titre']['organisations'] = "nom AS titre, '' AS lang";
 	
 	return $interface;
