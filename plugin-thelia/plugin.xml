@@ -33,6 +33,7 @@
 	<onglet id="thelia" parent="configuration">
 		<icone>img_pack/logo_thelia_petit.png</icone>
 		<titre>spipthelia:catalogue_thelia</titre>
+		<url>spip_thelia_catalogue</url>
 	</onglet>
 	<bouton id='config_thelia' parent="bando_configuration">
 		<icone>img_pack/logo_thelia_petit.png</icone>
