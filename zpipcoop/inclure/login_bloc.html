@@ -1,10 +1,14 @@
+[(#REM)
+  Copie du 2011-05-19 16:37:54 par Pierre KUHN
+  Fichier original plugins/zpipcoop/inclure/login_bloc.html
+]
 	<div id="login" class="liste">
 	<h2 class="h2"><:bonjour:>[, (#SESSION{nom})].</h2>
 		<ul class="liste-items">
 			<li class="item"><BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}><a[ href="(#URL_AUTEUR)"] title="<:zpipcoop:voir_votre_profil|attribut_html:>"><:zpipcoop:votre_profil:></a></BOUCLE_auteur></li>
 			<BOUCLE_vos_messages(ARTICLES){id_auteur=#SESSION{id_auteur}}> </BOUCLE_vos_messages>[(#AUTORISER{ecrire})<li class="item"><a href="[(#URL_PAGE{articles_page})]" title="<:zpipcoop:tous_vos_messages|attribut_html:>"><:zpipcoop:tous_vos_messages:></a></li>]</B_vos_messages>
-			[(#AUTORISER{activer_breves})<li class="item"><a href="[(#URL_PAGE{breves_page})]" title="<:zpipcoop:toutes_les_breves|attribut_html:>"><:zpipcoop:toutes_les_breves:></a></li>]
-			[(#AUTORISER{activer_sites})<li class="item"><a href="[(#URL_PAGE{sites_page})]" title="<:zpipcoop:tous_les_sites|attribut_html:>"><:zpipcoop:tous_les_sites:></a></li>]
+			[(#CONFIG{activer_breves}|oui)<li class="item"><a href="[(#URL_PAGE{breves_page})]" title="<:zpipcoop:toutes_les_breves|attribut_html:>"><:zpipcoop:toutes_les_breves:></a></li>]
+			[(#CONFIG{activer_sites}|oui)<li class="item"><a href="[(#URL_PAGE{sites_page})]" title="<:zpipcoop:tous_les_sites|attribut_html:>"><:zpipcoop:tous_les_sites:></a></li>]
 			[(#PLUGIN{spiplistes}|ou{#PLUGIN{clevermail}}|oui)<li class="item"><a href="#URL_PAGE{abonnement}" title="<:zpipcoop:abonnement|attribut_html:>"><:zpipcoop:abonnement:></a></li>]
 			[(#PLUGIN{tickets}|oui)<li class="item"><a href="#URL_PAGE{tickets_page}" title="<:zpipcoop:tous_les_tickets|attribut_html:>"><:zpipcoop:tous_les_tickets:></a></li>]
 			[(#AUTORISER{webmestre})<li class="item"><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
