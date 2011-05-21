@@ -162,6 +162,7 @@ function spip_thelia_appeler_moteur_thelia($texte) {
 			);
 			$session = charger_fonction('session','inc');
 			$session($auteur);
+			$data = pipeline('thelia_authentifie',array("auteur" => $result,"statut"=>"nouveau"));
 		}
 	}
 

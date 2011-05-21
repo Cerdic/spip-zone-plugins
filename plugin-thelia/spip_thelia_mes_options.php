@@ -14,6 +14,9 @@ if (!defined('_RACINE_THELIA')){
 	define('_RACINE_THELIA','./');
 }
 
+/* Un pipeline post authenfication thelia */
+$GLOBALS['spip_pipeline']['thelia_authentifie'] .= '';
+
 $thelia_path = ini_get("include_path").":"._RACINE_THELIA;
 ini_set('include_path', $thelia_path);
 
