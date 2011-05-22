@@ -6,8 +6,9 @@
 	[<:spip_proprio:au_capital_de:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_capital_social]}|typo)]
 	[
 		[(#GET*{proprietaire}|table_valeur{[(#GET{who})_legal_genre]}|=={fem}|?{<:spip_proprio:enregistree_pres:>,<:spip_proprio:enregistre_pres:>})]
-		[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_genre]}|=={fem}|?{<:spip_proprio:de_la:>,<:spip_proprio:du:>})]
-		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_organisme]}|typo)
+		[(#LANG|=={fr}|oui)
+			[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_genre]}|=={fem}|?{<:spip_proprio:de_la:>,<:spip_proprio:du:>})]
+		](#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_organisme]}|typo)
 	]
 	[<:spip_proprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_numero]}|typo)]
 	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|=={''}|non)<:spip_proprio:sous_le_numero:>[

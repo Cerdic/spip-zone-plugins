@@ -17,8 +17,9 @@
 	[<:spip_proprio:au_capital_de:>(#GET*{proprietaire}|table_valeur{proprietaire_capital_social}|typo)]
 	[
 		[(#GET*{proprietaire}|table_valeur{proprietaire_legal_genre}|=={fem}|?{<:spip_proprio:enregistree_pres:>,<:spip_proprio:enregistre_pres:>})]
-		[(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_genre}|=={fem}|?{<:spip_proprio:de_la:>,<:spip_proprio:du:>})]
-		(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_organisme}|typo)
+		[(#LANG|=={fr}|oui)
+			[(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_genre}|=={fem}|?{<:spip_proprio:de_la:>,<:spip_proprio:du:>})]
+		](#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_organisme}|typo)
 	]
 	[<:spip_proprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_numero}|typo)]
 	[(#GET*{proprietaire}|table_valeur{proprietaire_enregistrement_siren}|=={''}|non)<:spip_proprio:sous_le_numero:>[
