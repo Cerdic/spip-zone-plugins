@@ -9,12 +9,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abbreviation_genre_label' => 'Abbrev. / Gender',
 	'admin_legend' => 'About site\'s administration',
 	'administrateur_aussi_label' => 'Body site administrator',
-	'administrateur_aussi_comment' => 'Cochez cette case si la structure dont il s\'agit est &eacute;galement <b>administrateur</b> du site.',
+	'administrateur_aussi_comment' => 'Check this box if this structure is also <b>administrator</b> of the site.',
 	'au_capital_de' => ' with a capital of ',
 
 // B //
 	'bouton_importer' => 'Launch import',
 	'bouton_exporter' => 'Launch export',
+	'bouton_saisie_libre' => 'Free entry',
+	'bouton_auto_fr' => 'Automatic fields for France',
 
 // C //
 	'createur' => 'creator',
@@ -76,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forme_comment' => 'Enterprise (<i>precise status ...</i>), association ...',
 	'fax' => 'Fax',
 	'fax_abbrev' => 'Fax',
+	'feminin' => 'feminine',
 
 // H //
 	'home_page' => 'Home page',
@@ -87,8 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'infos_hebergeur' => 'Hosting Informations',
 	'infos_createur' => 'Creator Informations',
 	'infos_idem' => 'Same structure',
-	'idem_label' => 'Same structure as ',
-//	'idem_comment' => 'Renseignez cette valeur cette valeur si l\'organisme propri&eacute;taire est &eacute;galement @type@ du site.',
+	'idem_label' => 'Same structure as',
 	'importer_dump' => '<strong>Import file :</strong> ',
 	'import_avertissement' => 'Do not change these values ​​until you are sure you: this will erase your current configuration and your language channels!<br /><br /><b>It is strongly advised to leave the burden of this page to main webmaster of your site.</b>',
 
@@ -105,6 +107,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_label' => 'Email contact',
 	'mel' => 'Email',
 	'mail_to' => 'Contact this adress',
+	'masculin' => 'masculine',
 
 // N //
 	'news' => 'News',
@@ -125,6 +128,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P //
 	'pays_label' => 'Country',
 	'proprietaire' => 'owner',
+	'pourquoi_ce_plugin' => 'Why this plugin ? (<i>legal recalls</i>)',
 	// Import/Export
 	'proprietaire_export_import' => 'Mentions L&eacute;gales : maintenance',
 	'proprietaire_retour_plateforme' => 'Back to the platform',
@@ -133,29 +137,30 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'proprietaire_titre_page' => 'Plateform Mentions L&eacute;gales',
 	'proprietaire_titre_page_short' => 'Plateform',
 	'proprietaire_texte' => 'Here you can set global options for the site used by the plugin <b>Mentions L&eacute;gales</b>.<br /><br />You can also set strings specific languages ​​whose usage is recalled on the specific page.<br />',
+	'proprietaire_texte_supp' => 'This plugin offers you to automate and centralize the management of an \'institutional\' or \'professional\' website running SPIP.<br /><br />It allows you to enter a set of information about <b>the owner</b> of the site, organization, company, institution or individual in order to present various ways and eventually generate automatically copyright information, some \'Legal Statement\' and \'Terms of Use\'.',
 	'pconfig_titre_page' => 'Configuration',
 	'pconfig_titre_page_short' => 'Configuration',
-	'pconfig_texte' => 'Vous pouvez ici d&eacute;finir les coordonn&eacute;es de l\'organisme @type@ ainsi que ses informations l&eacute;gales.',
-	'pconfig_texte_ajouts' => '<br />Le syst&egrave;me pr&eacute;sentera les informations qui sont pr&eacute;cis&eacute;es.<br />Notez cependant que certaines fonctionnalit&eacute;s du plugin, notamment la construction automatique d\'informations l&eacute;gales et de conditions d\'utilisation du site, n&eacute;cessitent qu\'un maximum d\'informations soient saisies.',
-	'pconfig_texte_lien_doc' => '<br /><br />Le bouton ci-dessous pr&eacute;sente le r&eacute;sultat des diff&eacute;rentes fonctionnalit&eacute;s pour v&eacute;rifications&nbsp;:',
-	'pconfig_texte_notes' => '<span style="color: red;">*</span><small>Les champs marqu&eacute;s d\'une ast&eacute;risque rouge peuvent comporter un bloc \'multi\'.<br /></small>',
-	'pconfig_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : ces valeurs sont valables sur l\'ensemble du site.<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
-	'pconfig_divers_legend' => 'Informations compl&eacute;mentaires',
-	'ptexte_titre_page' => 'Textes de langue propri&eacute;taire',
-	'ptexte_titre_page_short' => 'Textes de langue',
-	'ptexte_supprimer' => 'Supprimer l\'entr&eacute;e',
-	'ptexte_editable_ttl' => 'Cliquez sur la ligne pour la modifier ...',
-	'ptexte_cliquez_pour_editer' => 'Cliquez ici pour &eacute;diter l&prime;entr&eacute;e avec les raccourcis de mise en page',
-	'ptexte_info_titre' => 'Aide / Rappels ...',
-	'ptexte_form_titre' => '&Eacute;dition compl&egrave;te / Nouvelle entr&eacute;e',
-	'ptexte_texte' => 'Cette page vous permet de g&eacute;rer certains textes n&eacute;cessaires au site sans passer par le mode d\'&eacute;dition habituel (<i>modification du fichier de langue sur le serveur</i>).<br /><br />Les entr&eacute;es \'Texte affich&eacute;\' du tableau sont &eacute;ditables par un simple clic sur la ligne \'raccourci\' correspondante. Vous pouvez &eacute;galement ajouter des entr&eacute;es en utilisant le formulaire \'&Eacute;dition compl&egrave;te\'.',
-	'ptexte_info_texte' => '<ul><li><b>Les fichiers de langue</b><br />Les entr&eacute;es des fichiers de langue se d&eacute;finissent en indiquant une cha&icirc;ne d\'appel (<i>les entr&eacute;es \'raccourci\' du tableau</i>) &agrave; laquelle correspond un texte complet (<i>les entr&eacute;es \'texte affich&eacute;\' du tableau</i>), qui peut contenir une mise en forme et &ecirc;tre aussi long que souhait&eacute;.<br /></li><li><b>Nomenclature des raccourcis</b><br />Les raccourcis doivent &ecirc;tre des cha&icirc;nes de texte <u>sans espace et sans caract&egrave;res sp&eacute;ciaux</u> (<i>vous pouvez ici saisir vos raccourcis avec des espaces, qui seront remplac&eacute;s par des underscore</i>).</li><li><b>Mise en forme des textes</b><br />Vous pouvez r&eacute;diger vos textes de la m&ecirc;me mani&egrave;re que vos articles SPIP ...</li></ul>',
-	'ptexte_info_supp' => '<br /><b>Utilisation des cha&icirc;nes de cette page</b><br /><br />Les cha&icirc;nes de cette page sont enregistr&eacute;es dans un fichier de langue nomm&eacute; \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette fa&ccedil;on :<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />o&ugrave; "arguments" correspond &agrave; un array des arguments &agrave; passer &agrave; la cha&icirc;ne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par d&eacute;faut</i>).',
-	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent &ecirc;tre indiqu&eacute;s comme &eacute;crit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags pr&eacute;sents dans les textes ne sont pas list&eacute;s ici, conservez-les ...',
-	'pskels_titre_page' => 'Configuration des squelettes',
-	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de d&eacute;finir les informations concernant les <b>Cr&eacute;teur</b> et <b>H&eacute;bergeur</b> du site afin de mettre en place automatiquement des <b>Mentions L&eacute;gales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes repr&eacute;sentent <u>le minimum l&eacute;gal pour tout site web</u> et sont tr&egrave;s g&eacute;n&eacute;riques ... Ils doivent &ecirc;tre consid&eacute;r&eacute;s comme une base de travail pour cr&eacute;er vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propri&eacute;taire\' si vous activez l\'option ci-dessous.',
-	'pskels_legal_legend_createur' => 'Informations sur le cr&eacute;ateur du site',
-	'pskels_legal_legend_hebergeur' => 'Informations sur l\'h&eacute;bergeur du site',
+	'pconfig_texte' => 'You can here define the coordinates of the body @type@ and its legal informations.',
+	'pconfig_texte_ajouts' => '<br />The system will present information that is specified.<br />Note that some features of the plugin, including the automatic construction of "legal information" and "terms of use", require that up information is entered.',
+	'pconfig_texte_lien_doc' => '<br /><br />The button below shows	the result of different features for verification:',
+	'pconfig_texte_notes' => '<span style="color: red;">*</span><small>Fields marked with a red asterisk may include \'multi\' block.<br /></small>',
+	'pconfig_avertissement' => 'Do not change these values ​​until you are sure: these values ​​are valid for the entire site.<br /><br /><b>It is strongly advised to leave the burden of this page to the main webmaster of your site.</b>',
+	'pconfig_divers_legend' => 'Additional information',
+	'ptexte_titre_page' => 'Language owner texts',
+	'ptexte_titre_page_short' => 'Language texts',
+	'ptexte_supprimer' => 'Delete entry',
+	'ptexte_editable_ttl' => 'Click the line to edit ...',
+	'ptexte_cliquez_pour_editer' => 'Click here to edit the entry with shortcuts formatting',
+	'ptexte_info_titre' => 'Help / Reminders ...',
+	'ptexte_form_titre' => 'Complete edition / New entry',
+	'ptexte_texte' => 'This page allows you to manage certain owner texts necessary for the site without the regular edition mode (<i>modified language file on the server</i>).<br /><br />Entries \'Text displayed\' in the table are editable by clicking on the \'shortcut\' correspondent. You can also add entries using the form \'Complete Edition\'.',
+	'ptexte_info_texte' => '<ul><li><b>Languages files</b><br />The language file entries are defined by specifying a string\'s call (<i>entries \'shortcut\' of the table</i>) which corresponds to a full text (<i>entries \'displayed text\' of the table</i>), that can contain formatting and be as long as desired.<br /></li><li><b>Shortcuts Nomenclature</b><br />Shortcuts must be strings of text <u>without spaces or special characters</u> (<i>here you can enter your shortcuts with spaces, which will be replaced by underscore</i>).</li><li><b>Texts formatting</b><br />You can write your text in the same way that your SPIP articles ...</li></ul>',
+	'ptexte_info_supp' => '<br /><b>Usage of strings on this page</b><br /><br />Strings on this page are saved in a language file called \'<b>proprietaire</b>\', so you can call them in your templates using the formula:<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />Note that if you use shortcuts in typing your text, you must add to the call above the filter \'<b>|propre</b>\'. This would give a call to the example above, the shape:<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />You can more simply use the tag <b>TEXTES_PROPRIETAIRE</b> this way:<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />shortcut,<br />arguments,<br />treatement}</code></center><br />where "arguments" corresponds to an array of arguments passed to the string and "treatement" to the name of the function of text processing (<i>"propre" by default</i>).',
+	'ptexte_info_tags' => '<br /><b>You can use the tags below into your texts (<i>they should be reported as written here: ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>This list is <b>not exhaustive</b> tag if present in the texts are not listed here, keep them ...',
+	'pskels_titre_page' => 'Configuration ok skeletons',
+	'pskels_info_mentions_legales' => 'The blocks below provide information about defining the <b>creator</b> and <b>hosting</b> of the site to establish automatically some <b>Legal Statement</b> and <b>Terms of Use</b>.<br /><br /><u>These texts represent the statutory minimum for any website</u> and are very generic ... The should be considered as a working basis for creating your own texts.<br /><br />You can edit them on page \'Owner language texts\' if you enable the option below.',
+	'pskels_legal_legend_createur' => 'Information on site creator',
+	'pskels_legal_legend_hebergeur' => 'Information on site hosting',
 	
 
 // R //
@@ -166,7 +171,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'rue_label' => 'N&deg; and Street',
 
 // S //
-//	'spip_proprio' => 'Propri&eacute;taire',
 	'spip_proprio' => 'Mentions L&eacute;gales',
 	'site_web_label' => 'Web site URL',
 	'serveur_legend' => 'Information about the server hosting the site',

@@ -80,6 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forme_comment' => 'Soci&eacute;t&eacute; (<i>pr&eacute;cisez le statut ...</i>), association ...',
 	'fax' => 'T&eacute;l&eacute;copie',
 	'fax_abbrev' => 'Fax',
+	'feminin' => 'f&#233;minin',
 
 // H //
 	'home_page' => 'Page d’accueil',
@@ -109,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'mail_label' => 'Adresse mail de contact',
 	'mel' => 'Courriel',
 	'mail_to' => 'Contacter cette adresse',
+	'masculin' => 'masculin',
 
 // N //
 	'news' => 'Br&#232;ves',
@@ -247,7 +249,7 @@ Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’infor
 	'ptexte_info_supp' => '<br /><b>Utilisation des cha&icirc;nes de cette page</b><br /><br />Les cha&icirc;nes de cette page sont enregistr&eacute;es dans un fichier de langue nomm&eacute; \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette fa&ccedil;on :<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />o&ugrave; "arguments" correspond &agrave; un array des arguments &agrave; passer &agrave; la cha&icirc;ne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par d&eacute;faut</i>).',
 	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent &ecirc;tre indiqu&eacute;s comme &eacute;crit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags pr&eacute;sents dans les textes ne sont pas list&eacute;s ici, conservez-les ...',
 	'pskels_titre_page' => 'Configuration des squelettes',
-	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de d&eacute;finir les informations concernant les <b>Cr&eacute;teur</b> et <b>H&eacute;bergeur</b> du site afin de mettre en place automatiquement des <b>Mentions L&eacute;gales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes repr&eacute;sentent <u>le minimum l&eacute;gal pour tout site web</u> et sont tr&egrave;s g&eacute;n&eacute;riques ... Ils doivent &ecirc;tre consid&eacute;r&eacute;s comme une base de travail pour cr&eacute;er vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propri&eacute;taire\' si vous activez l\'option ci-dessous.',
+	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de d&eacute;finir les informations concernant les <b>Cr&eacute;ateur</b> et <b>H&eacute;bergeur</b> du site afin de mettre en place automatiquement des <b>Mentions L&eacute;gales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes repr&eacute;sentent <u>le minimum l&eacute;gal pour tout site web</u> et sont tr&egrave;s g&eacute;n&eacute;riques ... Ils doivent &ecirc;tre consid&eacute;r&eacute;s comme une base de travail pour cr&eacute;er vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propri&eacute;taire\' si vous activez l\'option ci-dessous.',
 	'pskels_legal_legend_createur' => 'Informations sur le cr&eacute;ateur du site',
 	'pskels_legal_legend_hebergeur' => 'Informations sur l\'h&eacute;bergeur du site',
 	
