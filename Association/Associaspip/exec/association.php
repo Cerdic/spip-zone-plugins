@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-include_spip ('inc/voir_adherent'); // pour voir_adherent_infos
 	
 function exec_association() {
 		
@@ -54,10 +53,21 @@ function exec_association() {
 		echo $GLOBALS['association_metas']['prefet']."<br />\n";
 		echo fin_cadre_formulaire(true);
 		
-		/* Provisoirement supprimé en attendant 1.9.3*/
-		
+		$coordonnees_actif = plugin_actif('COORDONNEES');
+		include_spip('inc/association_coordonnees');
+
+		/* on recupere tout dans un tableau php pour pouvoir extraire le tableau des id_auteur a envoyer en parametre aux fonction de recuperation d'emails et telephone */
+		$all = sql_allfetsel("id_auteur, statut_interne, fonction, nom_famille, prenom, sexe", 'spip_asso_membres', "fonction <> '' AND statut_interne <> 'sorti'", '',  "nom_famille");
+		$tr_class = "pair";
+		$id_auteurs = array();
+		foreach ($all as $data) {
+			$id_auteurs[] = $data['id_auteur'];
+		}
+
+		$emails = association_recuperer_emails_string($id_auteurs);
+
 		echo '<br />';
-		echo gros_titre(_T('asso:votre_equipe'),'',false);		
+		echo gros_titre(_T('asso:le_bureau'),'',false);		
 		echo '<br />';	
 		
 		echo debut_cadre_relief('', true);
@@ -66,24 +76,22 @@ function exec_association() {
 		echo "<tr style='background-color: #DBE1C5;'>\n";
 		echo '<th>' . _T('asso:nom') . "</th>\n";
 		echo '<th>' . _T('asso:fonction') . "</th>\n";
-		echo '<th>' . _T('asso:portable') . "</th>\n";
-		echo '<th>' . _T('asso:telephone') . ' / ' . _T('asso:email') .  "</th>\n";
-		echo '</tr>';
-		$query = voir_adherent_infos("*", '',  "fonction !='' AND statut_interne != 'sorti'", '',  "nom_famille");
+		if ($coordonnees_actif) {
+			$telephones = association_recuperer_telephones_string($id_auteurs);
+			echo '<th>' . _T('asso:telephone') . "</th>\n";
+		}
+		echo '<th>' . _T('asso:email') .  "</th>\n";
 
-		while ($data = sql_fetch($query)) {	
+		echo '</tr>';
+
+		foreach ($all as $data) {
 			$id_auteur=$data['id_auteur'];
 			$nom_affiche = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
-			$mob = print_tel($data['mobile']);
-			$tel = print_tel($data['telephone']);
-			if ($email = $data['email'])
-			  $tel = "<a href='mailto:$email' title='"
-			    . _L('Ecrire &agrave;') . ' ' . $email . "'>"
-			    . ($tel ? $tel : 'mail')
-			    . '</a>';
+			 
 			$auteur = generer_url_ecrire('auteur_infos',"id_auteur=$id_auteur");
 			$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
-			echo "\n<tr style='background-color: #EEEEEE;'>\n";
+			echo "\n<tr class='".$tr_class."'>\n";
+			$tr_class = ($tr_class == "pair")?"impair":"pair";
 
 			echo "<td class='arial11 border1'>",
 				"<a href='$auteur' title=\"",
@@ -98,9 +106,10 @@ function exec_association() {
 				"\">",
 				htmlspecialchars($data['fonction']),
 				 "</a></td>\n";
-
-			echo '<td class="arial1 border1">'.$mob.'</td>';
-			echo '<td class="arial1 border1" style="text-align:center">'.$tel.'</td>';
+			if ($coordonnees_actif) {
+				echo '<td class="arial1 border1">'.$telephones[$id_auteur].'</td>';
+			}
+			echo '<td class="arial1 border1" style="text-align:center">'.$emails[$id_auteur].'</td>';
 			echo "</tr>\n";
 		}
 		echo '</table>';
@@ -114,12 +123,4 @@ function exec_association() {
 			"statut_interne = 'ok' AND validite < CURRENT_DATE() ");
 	}
 }
-
-function print_tel($n)
-{
-	$n = preg_replace('/\D/', '', $n);
-	if (!intval($n)) return '';
-	return preg_replace('/(\d\d)/', '\1&nbsp;', $n);
-}
-
 ?>

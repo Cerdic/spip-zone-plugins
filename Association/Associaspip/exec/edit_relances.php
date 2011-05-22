@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
-include_spip ('inc/voir_adherent'); // pour voir_adherent_infos
 	
 function exec_edit_relances(){
 		
@@ -60,7 +59,7 @@ function exec_edit_relances(){
 
 	if ($corps) {
 
-		$corps = '<fieldset>'
+		$res = '<fieldset>'
 			. '<legend>Message de relance</legend>'
 			. '<label for="sujet"><strong>'._T('asso:Sujet')
 			. " :</strong></label>\n"
@@ -75,8 +74,6 @@ function exec_edit_relances(){
 			. _T('asso:adherent_libelle_id_auteur')
 			. "</strong></td>\n"
 			. '<th>' . _T('asso:nom') . "</th>\n"
-			. '<th>' . _T('asso:telephone') . "</th>\n"
-			. '<th>' . _T('asso:portable') . "</th>\n"
 			. '<th>' . _T('asso:validite') . "</th>\n"
 			. '<th>' . _T('asso:envoi') . "</th>\n"
 			. '</tr>'
@@ -85,7 +82,7 @@ function exec_edit_relances(){
 
 		$bouton = isset($action) ? _T('asso:bouton_'.$action) : _T('asso:bouton_envoyer');
 
-		echo generer_form_ecrire('action_relances', $corps, '', $bouton);
+		echo generer_form_ecrire('action_relances', $res, '', $bouton);
 	}
 	fin_cadre_relief();  
 	echo fin_page_association(); 
@@ -93,26 +90,27 @@ function exec_edit_relances(){
 
 function relances_while($statut_interne)
 {
-	$query = voir_adherent_infos("*", '',  " B.email <> ''  AND statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
+	include_spip('inc/association_coordonnees');
+	$query = sql_select("id_auteur, sexe, nom_famille, prenom, statut_interne, validite", "spip_asso_membres", " statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 
 	$res = '';
+	$tr_class = 'pair';
 	while ($data = sql_fetch($query)) {
 		$id_auteur=$data['id_auteur'];
-		$email=$data["email"];
+		$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$class = $GLOBALS['association_styles_des_statuts'][$data['statut_interne']] . " border1";
-		$res .= "\n<tr>"
-		.'<td class="$class" style="text-align:right">'
-		. $data['id']
+		$res .= '<tr class="'.$tr_class.'">'
+		.'<td class="$class" style="text-align:center">'
+		. $data['id_auteur']
 		."</td>\n"
-		.'<td class="$class">'.$data["nom_famille"].' '.$data['prenom']."</td>\n"
-		.'<td class="$class">'.$data['telephone']."</td>\n"
-		.'<td class="$class">'.$data['mobile']."</td>\n"
+		.'<td class="$class">'.$nom_membre."</td>\n"
 		.'<td class="$class">'.association_datefr($data['validite'])."</td>\n"
 		.'<td class="$class" style="text-align:center;">'
 		.'<input name="id[]" type="checkbox" value="'.$id_auteur.'" checked="checked" />'
 		.'<input name="statut['.$id_auteur.']" type="hidden" value="'.$statut_interne.'" />'
 		."</td>\n"
 		.'</tr>';
+		$tr_class = ($tr_class == "pair")?"impair":"pair";
 	}
 	return $res;
 }
