@@ -98,7 +98,7 @@ function association_recuperer_emails($id_auteurs)
 
 	/* on commence par recuperer les emails de la table spip_auteurs */
 	$id_auteurs_list = sql_in('id_auteur', $id_auteurs);
-	$auteurs_info = sql_select('id_auteur, email', 'spip_auteurs', $id_auteurs_list);
+	$auteurs_info = sql_select('id_auteur, email', 'spip_auteurs', $id_auteurs_list." AND email <> ''");
 	
 	while ($auteur_info = sql_fetch($auteurs_info)) {
 		$emails_auteurs[$auteur_info['id_auteur']][] = $auteur_info['email'];
