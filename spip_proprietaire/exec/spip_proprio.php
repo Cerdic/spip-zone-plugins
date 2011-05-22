@@ -35,8 +35,8 @@ function exec_spip_proprio() {
 			.icone_horizontale(_T('spip_proprio:exporter_importer'), generer_url_ecrire('spip_proprio_tech'), find_in_path('images/stock_export.png'), 'rien.gif', false)
 			."</div>". fin_boite_info(true);
 
-	// on force le chargement de proprietaire_fr si present
-	spip_proprio_proprietaire_texte();
+	// on force le chargement de proprietaire_XX si present
+	spip_proprio_charger_toutes_les_langues();
 	if( $save = _request('save') AND $save == 'oui' ){
 		$raccourci = _request('raccourci') ? _request('raccourci') : false;
 		if($raccourci) if($ok = traiter_textes_proprietaire($raccourci)) { print $ok; exit; }

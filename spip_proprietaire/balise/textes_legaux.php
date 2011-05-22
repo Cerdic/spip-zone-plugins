@@ -2,13 +2,27 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_TEXTES_LEGAUX($p) {
-   return calculer_balise_dynamique($p,TEXTES_LEGAUX,array());
+	spip_proprio_charger_toutes_les_langues();
+	return calculer_balise_dynamique($p,TEXTES_LEGAUX,array());
 }
 
 function balise_TEXTES_LEGAUX_dyn($chaine='', $who='', $separator='<br />') {
 	include_spip('inc/presentation');
 	include_spip('spip_proprio_fonctions');
 	$conf = spip_proprio_recuperer_config();
+	static $spip_proprio_no_config = false;
+	if (is_null($conf)) {
+		include_spip('inc/autoriser');
+		if ($spip_proprio_no_config===false && autoriser('ecrire')) {
+			$div = propre( _T('proprietaire:pas_config', array(
+				'url_config' => generer_url_ecrire('spip_proprio')
+			)) );
+			echo $div;
+			$spip_proprio_no_config = true;
+		}
+		return;
+	}
+
 	$conf['nom_site'] = $GLOBALS['meta']['nom_site'];
 	$conf['url_site'] = $GLOBALS['meta']['adresse_site'];
 	$conf['descriptif_site'] = textebrut($GLOBALS['meta']['descriptif_site']);

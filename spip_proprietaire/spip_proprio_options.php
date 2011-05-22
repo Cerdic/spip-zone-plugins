@@ -129,16 +129,16 @@ define('_META_SPIP_PROPRIO', 'spip_proprietaire');
 
 function make_google_map_proprietaire($conf, $who='proprietaire'){
 	$str = $google_str = '';
-	if(strlen($conf[$who.'_adresse_rue'])) 
+	if (strlen($conf[$who.'_adresse_rue'])) 
 		$str .= str_replace(array(',', ';', '.', ':', '/'), '', strip_tags($conf[$who.'_adresse_rue']));
-	if(strlen($conf[$who.'_adresse_code_postal'])) 
+	if (strlen($conf[$who.'_adresse_code_postal'])) 
 		$str .= ' '.str_replace(array(',', ';', '.', ':', '/'), '', strip_tags($conf[$who.'_adresse_code_postal']));
-	if(strlen($conf[$who.'_adresse_ville'])) 
+	if (strlen($conf[$who.'_adresse_ville'])) 
 		$str .= ' '.str_replace(array(',', ';', '.', ':', '/'), '', strip_tags($conf[$who.'_adresse_ville']));
-	if(strlen($str)) {
+	if (strlen($str)) {
 		$entries = explode(' ', $str);
 		foreach($entries as $entry)
-			if(strlen($entry)) $google_str .= urlencode($entry).'+';
+			if (strlen($entry)) $google_str .= urlencode($entry).'+';
 		$google_str = trim($google_str, '+');
 		return $google_str;
 	}
@@ -150,7 +150,7 @@ function make_google_map_proprietaire($conf, $who='proprietaire'){
 // ---------------------------------------
 
 function spip_proprio_enregistrer_config($args){
-	if(!is_array($args)) return;
+	if (!is_array($args)) return;
 	$mess = array();
 	$_conf = spip_proprio_recuperer_config();
 	$conf = $_conf ? array_merge($_conf, $args) : $args;
@@ -161,9 +161,10 @@ function spip_proprio_enregistrer_config($args){
 }
 
 function spip_proprio_recuperer_config($str=''){
+	if (!isset($GLOBALS['meta'][_META_SPIP_PROPRIO])) return NULL;
 	$_conf = unserialize($GLOBALS['meta'][_META_SPIP_PROPRIO]);
-	if(strlen($str)) {
-		if(isset($_conf[$str])) return $_conf[$str];
+	if (strlen($str)) {
+		if (isset($_conf[$str])) return $_conf[$str];
 		return false;
 	}
 	return $_conf;
@@ -190,28 +191,60 @@ function spip_proprio_form_config() {
 /**
  * Fonction de gestion des textes proprietaire
  */
-function spip_proprio_proprietaire_texte($str='', $args=array()){
+function spip_proprio_proprietaire_texte($str='', $args=array(), $langdef='fr'){
 	$souvenir = $GLOBALS['spip_lang'];
-	$GLOBALS['spip_lang'] = 'fr';
-	$test = _T('proprietaire:exemple');
-	if(!isset($GLOBALS['i18n_proprietaire_fr'])){
+	$GLOBALS['spip_lang'] = $langdef;
+	
+	// Verification que la langue existe
+//	$test = _T('proprietaire:exemple');
+	// Ne fonctionne pas correctement avec '_T', on reprend la traduction pure de SPIP
+	static $traduire=false ;
+ 	if (!$traduire) {
+		$traduire = charger_fonction('traduire', 'inc');
+		include_spip('inc/lang');
+	}
+	$text = $traduire('proprietaire:test_fichier_langue',$GLOBALS['spip_lang']);
+
+	if (!isset($GLOBALS['i18n_proprietaire_'.$langdef])){
 		$test = _T('textes_legaux:exemple');
-		creer_fichier_textes_proprietaire( $GLOBALS['i18n_textes_legaux_fr'] );
-		$GLOBALS['i18n_proprietaire_fr'] = $GLOBALS['i18n_textes_legaux_fr'];
+		creer_fichier_textes_proprietaire( $GLOBALS['i18n_textes_legaux_'.$langdef], $langdef );
+		$GLOBALS['i18n_proprietaire_'.$langdef] = $GLOBALS['i18n_textes_legaux_'.$langdef];
 	}
 	$GLOBALS['spip_lang'] = $souvenir;
 	return _T('proprietaire:'.$str, $args);
 }
 
-function textes_proprietaire( $array=false ){
-	$globale = 'i18n_proprietaire_'.$GLOBALS['spip_lang'];
+/**
+ * Creation de tous les fichiers de langue 'proprietaire_XX'
+ * pour toutes les langues utilisees en partie publique
+ */
+function spip_proprio_charger_toutes_les_langues(){
+	// on force le chargement de proprietaire_XX si present
+	// pour toutes les langues utilisees en partie publique
+	$langues_du_site = array('fr');
+	foreach(array('langues_utilisees', 'langues_multilingue', 'langue_site') as $ln_meta) {
+		if (isset($GLOBALS['meta'][$ln_meta]))
+			$langues_du_site = array_merge($langues_du_site, explode(',',$GLOBALS['meta'][$ln_meta]));
+	}
+	$langues_du_site = array_unique($langues_du_site);
+	foreach($langues_du_site as $ln) {
+		spip_proprio_proprietaire_texte('', '', $ln);
+	}
+	return;
+}
 
-	$ok = spip_proprio_proprietaire_texte();
-	if(isset($GLOBALS["$globale"]))
+function textes_proprietaire( $array=false, $lang=null ){
+	if (is_null($lang)) $lang = $GLOBALS['spip_lang'];
+	$globale = 'i18n_proprietaire_'.$lang;
+
+	$ok1 = spip_proprio_proprietaire_texte();
+	if ($lang != 'fr') 
+		$ok2 = spip_proprio_proprietaire_texte('', '', $lang);
+	if (isset($GLOBALS["$globale"]))
 		$GLOBALS["$globale"] = array_merge($GLOBALS['i18n_proprietaire_fr'], $GLOBALS["$globale"]);
 	else 
 		$GLOBALS["$globale"] = $GLOBALS['i18n_proprietaire_fr'];
-	if($array)
+	if ($array)
 		return $GLOBALS["$globale"];
 	return false;
 }
@@ -223,7 +256,7 @@ function charger_textes_proprietaire($bloc=true){
 
 	$valeurs = array();
 	$tableau = textes_proprietaire(true);
-	if(isset($tableau) AND is_array($tableau)) {
+	if (isset($tableau) AND is_array($tableau)) {
 		ksort($tableau);
 		if($bloc) $div .= debut_cadre_relief('',true,'','','raccourcis');
 		$div .= "\n<table class='spip' style='border:0;'>";
@@ -236,28 +269,27 @@ function charger_textes_proprietaire($bloc=true){
 				."<td id='$raccourci' class='arial2 editable' style='min-width:300px;'>".propre( $val )."</td></tr>";
 		}
 		$div .= "</table>";
-		if($bloc) $div .= fin_cadre_relief(true);
+		if ($bloc) $div .= fin_cadre_relief(true);
 	}
 	return $div;
 }
 
-function traiter_textes_proprietaire($raccourci){
+function traiter_textes_proprietaire($raccourci, $lang='fr'){
 	include_spip('inc/texte');
 	$valeur = _request('value');
 	$array_langue = textes_proprietaire(true);
 //	$valeur = propre( $valeur );
-	if(strlen($valeur)) $array_langue[$raccourci] = $valeur;
-	elseif(isset($array_langue[$raccourci])) unset($array_langue[$raccourci]);
-	if($ok = creer_fichier_textes_proprietaire($array_langue))
+	if (strlen($valeur)) $array_langue[$raccourci] = $valeur;
+	elseif (isset($array_langue[$raccourci])) unset($array_langue[$raccourci]);
+	if ($ok = creer_fichier_textes_proprietaire($array_langue, $lang))
 		return $valeur;
 	return false;
 }
 
-function creer_fichier_textes_proprietaire($array_langue){
-	global $spip_lang;
-	$file = 'proprietaire_'.$spip_lang;
-	$globale = 'i18n_proprietaire_'.$spip_lang;
-	if( !file_exists( find_in_path('lang/'.$file) ) ){
+function creer_fichier_textes_proprietaire($array_langue, $lang='fr'){
+	$file = 'proprietaire_'.$lang;
+	$globale = 'i18n_proprietaire_'.$lang;
+	if ( !file_exists( find_in_path('lang/'.$file) ) ){
 		include_spip('inc/flock');
 		$contenu = var_export($array_langue, true);
 		$contenu_final = '<'."?php\n\$GLOBALS['$globale'] = $contenu;\n?".'>';

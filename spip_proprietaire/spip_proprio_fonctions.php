@@ -15,7 +15,7 @@ function spip_proprio_usual_delimiters($str){
 	global $spip_proprio_usual_delimiters;
 	$delim = false;
 	foreach($spip_proprio_usual_delimiters as $delimiter) {
-		if(strpos($str, $delimiter)) $delim = $delimiter;
+		if (strpos($str, $delimiter)) $delim = $delimiter;
 	}
 	return $delim;
 }
@@ -37,7 +37,7 @@ function spip_proprio_formater_nom_fichier($string, $spacer='_') {
 }
 
 function spip_proprio_recuperer_extension($str){
-	return( substr(strrchr($str, '.'), 1) );
+	return substr(strrchr($str, '.'), 1);
 }
 
 /**
@@ -106,19 +106,22 @@ exit;
  * Cette fonction ne traite pas les cas particuliers (nombreux ...) ni les 'h' muet
  */
 function apostrophe($str='', $article='', $exception=false){
+	// On retourne direct si non FR
+	if ($GLOBALS['spip_ang']!='fr') return $article.' '.$str;
+
 	$voyelles = array('a', 'e', 'i', 'o', 'u');
 	$article = trim($article);
 
 	$str_deb = substr(spip_proprio_formater_nom_fichier($str), 0, 1);
 	$article_fin = substr($article, -1, 1);
 
-	if(in_array($str_deb, $voyelles) OR $exception)
-		return( substr($article, 0, strlen($article)-1)."'".$str );
+	if (in_array($str_deb, $voyelles) OR $exception)
+		return substr($article, 0, strlen($article)-1)."'".$str;
 	return $article.' '.$str;
 }
 
 function modifier_guillemets($str){
-	return( str_replace("'", '"', $str) );
+	return str_replace("'", '"', $str);
 }
 
 // ----------------------
@@ -357,13 +360,13 @@ function completer_insee($num_siren=null, $num_siret=null, $notva=false, $forcer
 
 // Avec l'aide inestimable de Paris-Bayrouth (http://www.paris-beyrouth.org/)
 function spip_proprio_image_alpha($img, $alpha='', $src=false){
-	if(!$alpha OR !strlen($alpha) OR $alpha == '0') return $img;
+	if (!$alpha OR !strlen($alpha) OR $alpha == '0') return $img;
 	include_spip("inc/filtres_images");
 	$image = _image_valeurs_trans($img, "one", "png");
 //var_export($image);
 	$img = image_alpha($img, $alpha);
-	if($src) return( extraire_attribut($img, 'src') );
-	return($img);
+	if ($src) return( extraire_attribut($img, 'src') );
+	return $img;
 }
 
 ?>
