@@ -40,7 +40,6 @@ function association_upgrade($meta, $courante, $table='meta')
 {
   // Compatibilite: le nom de la meta donnant le numero de version
   // n'etait pas std puis est parti dans une autre table puis encore une autre
-
 	if (!isset($GLOBALS['association_metas']['base_version'])) {
 		lire_metas('asso_metas');
 		if (isset($GLOBALS['asso_metas']['base_version'])) {
@@ -282,4 +281,96 @@ function association_maj_47731() /* eliminer le champ id_achat de la table resso
 }
 
 $GLOBALS['association_maj'][47731] = array(array('association_maj_47731'));
+
+/* mise a jour integrant l'utilisation du plugin Coordonnees */
+function association_maj_48001() 
+{
+	global $association_tables_principales;
+
+	$effectuer_maj = false;
+
+	/* cette partie du code s'execute au premier chargement, on n'a pas encore interroge l'utilisateur sur ce qu'il veut faire de ses donnees si il en a  ou il n'a pas voulu faire la maj */
+	if (!_request('valider_association_maj_coordonnees')) {
+		/* on commence par verifier si des informations de la table spip_asso_membres sont potentiellement transferable vers les tables de coordonnees */
+		$presence_donnees = sql_countsel('spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
+
+		/* si on n'a pas de donnees a sauvegarder, on fait la mise a jour sans poser de question */
+		if (!$presence_donnees) {
+			$effectuer_maj = true;
+		} else { /* on a des donnees, demander a l'utilisateur ce qu'il veut en faire */
+			echo '<fieldset><p>'._T('asso:maj_coordonnees_intro').'</p>';
+			echo '<form method="post">';
+			/* on commence par determiner si le plugin Coordonnees est installe */
+			include_spip('inc/plugin');
+			$liste_plugins = liste_plugin_actifs();
+			$plugin_coordonnees_actif = isset($liste_plugins['COORDONNEES']);
+
+			if (!$plugin_coordonnees_actif) {/* Le plugin coordonnees n'est pas actif */
+				echo '<p>'._T('asso:maj_coordonnees_plugin_inactif').'</p>';
+			} else { /* le plugin coordonnees est actif */
+				echo '<input type="radio" name="association_maj_coordonnees_traitement_data" value="ignorer">'._T('asso:maj_coordonnees_ignorer').'</input><br/>';
+				echo '<input type="radio" name="association_maj_coordonnees_traitement_data" value="merge" checked="checked">'._T('asso:maj_coordonnees_merge').'</input>';
+			}
+			echo '<p><input type="submit" name="valider_association_maj_coordonnees" value="'._T('asso:effectuer_la_maj').'"/></p>';
+			echo '</form>';
+			echo '<p>'._T('asso:maj_coordonnees_notes').'</p></fieldset>';
+		}
+	} else { /* l'utilisateur veut effectuer la maj, on controlle si il y a des precision quand a l'ecrasement de donnees existentes */
+			$choix_donnees = _request('association_maj_coordonnees_traitement_data');
+			if ($choix_donnees == "merge") { /* on integre les donnees d'association dans Coordonnees */
+				include_spip('action/editer_numero');
+				include_spip('action/editer_adresse');
+				$nbr_adresses = 0;
+				$nbr_numeros = 0;
+
+				set_request("objet", "auteur"); /* parceque les fonction insert_numero et insert_adresse de Coordonnees recupere par un request cette valeur pour l'insertion dans la table de liens */
+				
+				/* On recupere toutes les coordonnees */
+				$coordonnees_membres = sql_select('id_auteur, adresse, code_postal, ville, telephone, mobile', 'spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
+				while ($data = sql_fetch($coordonnees_membres)) {
+					set_request("id_objet", $data['id_auteur']); /* parceque les fonction insert_numero et insert_adresse de Coordonnees recupere par un request cette valeur pour l'insertion dans la table de liens */
+
+					/* si on a une adresse, meme partielle */
+					if (($data['adresse'] != '') or ($data['code_postal'] != '') or ($data['ville'] != '')) {
+						$id_adresse = insert_adresse();
+						if ($id_adresse) revisions_adresses($id_adresse, array("voie" => $data['adresse'], "code_postal" => $data['code_postal'], "ville" => $data['ville']));
+						$nbr_adresses++;
+						
+					}
+
+					/* si on a un numero de telephone */
+					if ($data['telephone'] != '') {
+						$id_numero = insert_numero();
+						if ($id_numero) revisions_numeros($id_numero, array("titre" => "telephone", "numero" => $data['telephone']));
+						$nbr_numeros++;
+					}
+
+					/* si on a un numero de mobile */
+					if ($data['mobile'] != '') {
+						$id_numero = insert_numero();
+						if ($id_numero) revisions_numeros($id_numero, array("titre" => "mobile", "numero" => $data['mobile']));
+						$nbr_numeros++;
+					}
+				}
+				echo "<fieldset><p>".$nbr_adresses._T('asso:maj_coordonnees_adresses_inserees').'<br/>'.$nbr_numeros._T('asso:maj_coordonnees_numeros_inseres')."</p></fieldset>";
+			}
+
+			$effectuer_maj = true;
+	}
+
+	/* on effectue si besoin la mise a jour */
+	if ($effectuer_maj) {
+		/* on supprime les champs de la table spip_asso_membres, ils ont deja ete sauvegarde dans les tables de Coordonnees si besoin */
+		sql_alter("TABLE spip_asso_membres DROP telephone");
+		sql_alter("TABLE spip_asso_membres DROP mobile");
+		sql_alter("TABLE spip_asso_membres DROP adresse");
+		sql_alter("TABLE spip_asso_membres DROP code_postal");
+		sql_alter("TABLE spip_asso_membres DROP ville");
+		sql_alter("TABLE spip_asso_membres DROP email");
+	} else { /* la mise a jour n'est pas effectuee : on le signale dans les maj_erreur pour y revenir au prochain chargement de la page de gestion des plugins */
+		if (!$GLOBALS['association_maj_erreur']) $GLOBALS['association_maj_erreur'] = 48001; 
+	}
+}
+
+$GLOBALS['association_maj'][48001] = array(array('association_maj_48001'));
 ?>

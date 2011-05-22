@@ -37,16 +37,22 @@ function exec_pdf_adherents()
 	    $pdf->AddCol($k,$n,_T('asso:adherent_libelle_' . $k), $p);
 	  }
 	}
+	// ainsi que les colonnes pour les champs hors table spip_asso_membres
+	if ($sent['email']=='on') $pdf->AddCol('email',45 ,_T('asso:adherent_libelle_email'), 'C');
+//	if ($sent['adresse']=='on') $pdf->AddCol('adresse',45 ,_T('asso:adherent_libelle_adresse'), 'L');
+//	if ($sent['telephone']=='on') $pdf->AddCol('telephone',20 ,_T('asso:adherent_libelle_telephone'), 'C');
+
 	$prop=array(
 		'HeaderColor'=>array(255,150,100),
 		'color1'=>array(224,235,255),
 		'color2'=>array(255,255,255),
 		'padding'=>2
 	);
-	$order = 'id_auteur';
+	$order = 'm.id_auteur';
 	if ($sent['nom_famille']=='on')
-	  $order = 'nom_famille' . ",$order";
-	$pdf->Query(sql_select('*','spip_asso_membres', request_statut_interne(), '', $order), $prop);
+	  $order = 'm.nom_famille' . ",$order";
+//* A FAIRE : AJOUTER LE MAIL, ADRESSE, TELEPHONE DANS LA QUERY ou trouver un autre moyen 
+	$pdf->Query(sql_select('*','spip_asso_membres as m INNER JOIN spip_auteurs as a ON m.id_auteur=a.id_auteur', request_statut_interne(), '', $order), $prop);
 	$pdf->Output();
 	}
 }

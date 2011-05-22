@@ -28,10 +28,10 @@ function exec_action_relances(){
 		
 		$url_retour=$_POST['url_retour'];
 		
-		//On récupère les données globales
+		//On recupere les donnees globales
 
-		$sujet=$_POST['sujet'];
-		$message=$_POST['message'] ;
+		$sujet = _request('sujet');
+		$message = _request('message') ;
 		$id_tab=(isset($_POST["id"])) ? $_POST["id"]:array();
 		$statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array();
 		$count=count ($id_tab);

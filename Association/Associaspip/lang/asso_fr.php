@@ -492,6 +492,16 @@ Commentaire: @commentaire@
 			'erreur_date' =>  'Cette date n\'existe pas',
 			'erreur_operation_non_permise_sur_ce_compte' => 'Ce compte n\'accepte qu\'un seul type d\'op&eacute;rations (recette ou d&eacute;pense) et ne correspond pas a celle que vous avez rentr&eacute;',
 			'erreur_montant' => 'Les valeurs n&eacute;gatives ne sont pas autoris&eacute;es',
+
+	# MaJ integration de coodonnees
+			'effectuer_la_maj' => 'Effectuer la mise &agrave; jour maintenant',
+			'maj_coordonnees_notes' => 'Notes&nbsp;:<ul><li>Si vous choissisez de ne pas effectuer la mise &agrave; jour, ce choix vous sera propos&eacute; &agrave; chaque chargement de la page de gestion des plugins.</li><li>Ne pas tenir compte du message Echec au bas de ce cadre.</li><li>Vous pouvez ignorer ce message et g&eacute;rer les autres plugins normalement, la mise &agrave; jour ne sera alors pas effectu&eacute;e(et ce message continuera donc &agrave; apparaitre).</li><li>Le champ email de la table spip_asso_membres est normalement vide - cette information &eacute;tant contenue dans la table spip_auteurs - il sera &eacute;limin&eacute; sans sauvegarde.</li>',
+			'maj_coordonnees_intro' => 'Vous vous appretez &agrave; effectuer une mise &agrave; jour du plugin Association basculant la gestion des adresses et t&eacute;l&eacute;phones vers le plugin Coordonn&eacute;es. A l\'issu de cette M&agrave;j, les champs correspondants &agrave; ces donn&eacute;es seront supprim&eacute;s des tables du plugin Association.<br/><strong>Ca pourrait etre une bonne id&eacute;e de faire une sauvegarde de votre base de donn&eacute;es avant de continuer (au minimum des tables spip_asso_membres ainsi que spip_adresses, spip_adresses_liens, spip_numeros et spip_numeros_liens si elles sont pr&eacute;sentes)</strong>',
+			'maj_coordonnees_plugin_inactif' => 'Le plugin Coordonn&eacute;es n\'est pas actif sur votre installation, les donn&eacute;es d\'adresses et t&eacute;l&eacute;phones pr&eacute;sentes dans les tables du plugin Association seront perdues si vous effectuez la mise &agrave; jour maintenant. Pour les conserver, veuillez installer et activer le plugin Coordonn&eacute;es.',
+			'maj_coordonnees_ignorer' => 'Ignorer les donn&eacute;es contenues dans les tables du plugin Association',
+			'maj_coordonnees_merge' => 'Combiner les donn&eacute;es d\'Association et Coordonn&eacute;es. Les donn&eacute;es pr&eacute;sentes dans Association sont ajout&eacute;es aux tables de Coordonn&eacute;es(ce qui peut provoquer des doublons ! )',
+			'maj_coordonnees_adresses_inserees' => ' adresse(s) ins&eacute;r&eacute;e(s) dans la base de Coordonn&eacute;es.',
+			'maj_coordonnees_numeros_inseres' => ' num&eacute;ro(s) ins&eacute;r&eacute;(s) dans la base de Coordonn&eacute;es.',
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',

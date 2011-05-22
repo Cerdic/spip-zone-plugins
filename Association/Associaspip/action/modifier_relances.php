@@ -27,21 +27,20 @@ function action_modifier_relances() {
 	$exp=$GLOBALS['association_metas']['nom'].'<'.$adresse.'>'; 
 	$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 	
-	/* on recupere les adresses emails de tous les auteurs selectionnes, a reprendre quand on pourra interfacer avec Coordonnees */
-	$id_auteurs_list = sql_in('id_auteur', array_keys($statut_tab));
-	$auteurs_info = sql_select('id_auteur, email', 'spip_auteurs', $id_auteurs_list);
-	
-	/* boucle sur tous les auteurs selectionnés */
-	while ($auteur_info = sql_fetch($auteurs_info)) {
-		$id_auteur = $auteur_info['id_auteur'];
-		$email = $auteur_info['email'];
-		if (!$envoyer_mail($email, $sujet, $message, $exp)) {
-			spip_log("non envoi du mail a ".$email);
-		} elseif ($statut_tab[$id_auteur]=="echu") {
+	/* on recupere les adresses emails de tous les auteurs selectionnes */
+	include_spip('inc/association_coordonnees');
+	$emails_auteurs = association_recuperer_emails(array_keys($statut_tab)); /* cette fonction renvoie un tableau auteur_id => array(emails) */
+
+	foreach ($emails_auteurs as $id_auteur => $emails) {
+		foreach ($emails as $email) {
+			if (!$envoyer_mail($email, $sujet, $message, $exp)) {
+				spip_log("non envoi du mail a ".$email);
+			} elseif ($statut_tab[$id]=="echu") {
 				sql_updateq('spip_asso_membres', 
 					array("statut_interne"=> 'relance'),
-					    "id_auteur=$id_auteur");
+					"id_auteur=$id_auteur");
 			}
+		}
 	}
 }
 ?>

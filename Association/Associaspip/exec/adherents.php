@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 	
+
 include_spip('inc/navigation_modules');
-include_spip ('inc/voir_adherent'); // pour voir_adherent_infos
 	
 function exec_adherents() {
 		
@@ -145,7 +145,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
-	$query = voir_adherent_infos("*", '', $critere, '', "nom_famille ", "$debut,$max_par_page" );
+	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	while ($data = sql_fetch($query)) {	
 		$id_auteur=$data['id_auteur'];		
@@ -269,16 +269,29 @@ function affiche_categorie($c)
 
 function adherents_table()
 {
-  $champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
-  $res = '';
-  foreach ($champs as $k => $v) {
-    $libelle = 'adherent_libelle_' . $k;
-    $trad = _T('asso:' . $libelle);
-    if ($libelle != str_replace(' ', '_', $trad)) {
-      $res .= "<input type='checkbox' name='champs[$k]' />$trad<br />";
-    }
-  }
-  return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
-}
+	$champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
+	$res = '';
+	foreach ($champs as $k => $v) {
+		if (!(($GLOBALS['association_metas']['civilite']!="on" && $k == 'sexe') OR ($GLOBALS['association_metas']['prenom']!="on" && $k == 'prenom') OR ($GLOBALS['association_metas']['id_asso']!="on" && $k == 'id_asso'))) {
+			$libelle = 'adherent_libelle_' . $k;
+			$trad = _T('asso:' . $libelle);
+			if ($libelle != str_replace(' ', '_', $trad)) {
+				$res .= "<input type='checkbox' name='champs[$k]' />$trad<br />";
+			}
+		}
+	}
+	/* on ajoute aussi le mail */
+	$res .= "<input type='checkbox' name='champs[email]' />"._T('asso:email')."<br />";
 
+	/* si le plugin coordonnees est actif, on ajoute l'adresse et le telephone */
+/*	if (plugin_actif('COORDONNEES')) {
+		$res .= "<input type='checkbox' name='champs[adresse]' />"._T('asso:adresse')."<br />";
+		$res .= "<input type='checkbox' name='champs[telephone]' />"._T('asso:telephone')."<br />";
+	}
+*/
+	/* on fait suivre le statut interne */
+	$res .= "<input type='hidden' name='statut_interne' value='"._request('statut_interne')."'/>";
+
+	return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
+}
 ?>

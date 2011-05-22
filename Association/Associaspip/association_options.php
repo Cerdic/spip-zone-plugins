@@ -11,6 +11,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/* tester si un plugin est actif, utilise pour l'interface optionnelle avec Coordonnees */
+function plugin_actif($prefixe) {
+	include_spip('inc/plugin');
+	$liste_plugins = liste_plugin_actifs();
+	return isset($liste_plugins[$prefixe]);
+}
+
 // Le premier element indique un ancien membre
 $GLOBALS['association_liste_des_statuts'] =
   array('sorti','prospect','ok','echu','relance');
