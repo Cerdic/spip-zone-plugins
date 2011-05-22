@@ -313,14 +313,12 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 				// - le prefixe
 				// - la version du paquet et de la base
 				// - l'etat
-				// - et on exclu les themes car leur prefixe est toujours = a "theme"
 				$where = array('t1.id_plugin=t2.id_plugin',
 						't1.version=' . sql_quote($insert_paquet['version']),
 						't1.version_base=' . sql_quote($insert_paquet['version_base']),
 						't1.etatnum=' . sql_quote($insert_paquet['etatnum']),
 						't2.prefixe=' . sql_quote($insert_plugin['prefixe']));
-				if (($insert_plugin['prefixe'] == _SVP_PREFIXE_PLUGIN_THEME)
-				OR (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1, spip_plugins AS t2', $where))) {
+				if (!$id_paquet = sql_getfetsel('t1.id_paquet', 'spip_paquets AS t1, spip_plugins AS t2', $where)) {
 					// On traite d'abord le plugin du paquet pour recuperer l'id_plugin
 					// On rajoute le plugin dans la table spip_plugins si celui-ci n'y est pas encore ou on recupere
 					// l'id si il existe deja et on le met a jour si la version du paquet est plus elevee
@@ -510,6 +508,40 @@ function eclater_plugin_paquet($champs_aplat) {
 			'lien' => $champs_aplat['lien'],
 			'dependances' => $champs_aplat['dependances'])
 	);
+}
+
+
+
+// ----------------------- Traitements des stats ---------------------------------
+
+/**
+ * Actualisation des statistiques des plugins presents dans la base.
+ * @return boolean
+ */
+
+function svp_actualiser_stats() {
+	include_spip('inc/distant');
+
+	$page = recuperer_page(_SVP_SOURCE_STATS);
+	$infos = json_decode($page);
+	if (!$stats = $infos->plugins) {
+		// On ne fait que loger l'erreur car celle-ci n'a pas d'incidence sur le comportement
+		// de SVP
+		spip_log('Réponse du serveur incorrecte ou mal formée. Les statistiques ne seront pas mises à jour', 'svp.' . _LOG_ERREUR);
+		return false;
+	}
+
+	foreach ($stats as $_stat) {
+		$prefixe = strtoupper($_stat->nom);
+		if ($id_plugin = sql_fetsel('id_plugin', 'spip_plugins', array('prefixe='. sql_quote($prefixe)))) {
+			// Si le plugin est bien dans la base on peut lui mettre a jour ses statistiques
+			sql_updateq('spip_plugins', 
+						array('nbr_sites'=> $_stat->sites, 'popularite'=> floatval(trim($_stat->pourcentage, '%'))),
+						'id_plugin=' . sql_quote($id_plugin));
+		}
+	}
+	
+	return true;
 }
 
 ?>

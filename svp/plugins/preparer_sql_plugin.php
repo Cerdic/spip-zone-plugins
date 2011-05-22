@@ -44,27 +44,17 @@ function plugins_preparer_sql_plugin($plugin)
 	$champs['licence'] = unicode2charset(html2unicode($plugin['licence']));
 	
 	// Extrait d'un nom et un slogan normalises
-	// -- Pour le cas particulier du prefixe des themes qui est toujours egal a "theme", il faut
-	// forcer malheureusement un nom et un slogan stanfard
-	if ($champs['prefixe'] == _SVP_PREFIXE_PLUGIN_THEME) {
-		// Traitement specifique des themes qui aujourd'hui sont consideres comme des paquets
-		// d'un plugin unique de prefixe "theme"
-		$champs['nom'] = _SVP_NOM_PLUGIN_THEME;
-		$champs['slogan'] = _SVP_SLOGAN_PLUGIN_THEME;
-	}
-	else {
-		$plugin['slogan'] = unicode2charset(html2unicode($plugin['slogan']));
-		$plugin['nom'] = unicode2charset(html2unicode($plugin['nom']));
-		// Calcul *temporaire* de la nouvelles balise slogan si celle-ci n'est
-		// pas renseignee et de la balise nom. Ceci devrait etre temporaire jusqu'a la nouvelle ere
-		// glaciaire des plugins
-		// - Slogan	:	si vide alors on prend la premiere phrase de la description limitee a 255
-		$champs['slogan'] = (!$plugin['slogan']) ? normaliser_slogan($champs['description']) : $plugin['slogan'];
-		// - Nom :	on repere dans le nom du plugin un chiffre en fin de nom
-		//			et on l'ampute de ce numero pour le normaliser
-		//			et on passe tout en unicode avec le charset du site
-		$champs['nom'] = normaliser_nom($plugin['nom']);
-	}
+	$plugin['slogan'] = unicode2charset(html2unicode($plugin['slogan']));
+	$plugin['nom'] = unicode2charset(html2unicode($plugin['nom']));
+	// Calcul *temporaire* de la nouvelles balise slogan si celle-ci n'est
+	// pas renseignee et de la balise nom. Ceci devrait etre temporaire jusqu'a la nouvelle ere
+	// glaciaire des plugins
+	// - Slogan	:	si vide alors on prend la premiere phrase de la description limitee a 255
+	$champs['slogan'] = (!$plugin['slogan']) ? normaliser_slogan($champs['description']) : $plugin['slogan'];
+	// - Nom :	on repere dans le nom du plugin un chiffre en fin de nom
+	//			et on l'ampute de ce numero pour le normaliser
+	//			et on passe tout en unicode avec le charset du site
+	$champs['nom'] = normaliser_nom($plugin['nom']);
 
 	// Extraction de la compatibilite SPIP
 	$champs['version_spip'] = ($plugin['compatible']) ? $plugin['compatible'] : '';

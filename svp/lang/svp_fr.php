@@ -6,10 +6,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 	'bouton_actualiser' => 'Actualiser',
+	'bouton_actualiser_stats' => 'Actualiser les statistiques',
 	'bouton_modifier_depot' => 'Modifier ce d&eacute;p&ocirc;t',
 	'bouton_supprimer' => 'Supprimer',
 	'bouton_svp' => 'Serveur d\'information sur les plugins',
 	'bulle_actualiser_depot' => 'Actualiser les paquets du d&eacute;p&ocirc;t',
+	'bulle_actualiser_stats' => 'Actualiser les statistiques des plugins',
 	'bulle_afficher_depot' => 'Afficher les informations du d&eacute;p&ocirc;t',
 	'bulle_ajouter_spipzone' => 'Ajouter le d&eacute;p&ocirc;t SPIP-Zone',
 	'bulle_aller_categorie' => 'Se rendre sur la page des plugins de cette cat&eacute;gorie',
@@ -75,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type_depot_svn' => 'D&eacute;p&ocirc;t g&eacute;r&eacute; sous SVN',
 	'info_stats_categories' => '@nb_categories@ cat&eacute;gorie(s) disponible(s) sur 13 possibles.',
 	'info_stats_plugins' => 'Le tableau ci-dessous affiche le nombre de plugins h&eacute;berg&eacute;s pour chacune des cat&eacute;gories disponibles.',
+	'info_statistiques' => 'Les statistiques d\'utilisation des plugins peuvent &ecirc;tre collect&eacute;es et tenues &agrave; jour r&eacute;guli&egrave;rement. N&eacute;anmoins, vous pouvez lancer une msie &agrave; jour manuelle.',
 	'info_tri_nom' => 'class&eacute;(s) par ordre alphab&eacute;tique',
 	'info_tri_score' => 'class&eacute;(s) selon leur pertinence d&eacute;croissante',
 	'intertitre_depot_generalites' => 'Informations g&eacute;n&eacute;rales',

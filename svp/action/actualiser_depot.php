@@ -23,7 +23,7 @@ function action_actualiser_depot_dist(){
 	if ($id_depot = intval($arg)) {
 		include_spip('inc/svp_depoter');
 		svp_actualiser_depot($id_depot);
-		// On consigne l'action si la configuration le demande
+		// On consigne l'action
 		spip_log("ACTION ACTUALISER DEPOT (manuel) : id_depot = ". $id_depot, 'svp_actions.' . _LOG_INFO);
 	}
 }
