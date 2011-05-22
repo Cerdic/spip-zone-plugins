@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_proprietaire_infos_necessaires_charger_dist($who='proprietaire'){
 	$conf = spip_proprio_recuperer_config();
 	$valeurs = array(
+		'who' => $who,
 		'nom' => $conf[$who.'_nom'] ? $conf[$who.'_nom'] : $GLOBALS['meta']['nom_site'],
 		'libelle' => $conf[$who.'_libelle'],
 		'mail' => $conf[$who.'_mail'] ? $conf[$who.'_mail'] : $GLOBALS['meta']['email_webmaster'],
@@ -12,7 +13,6 @@ function formulaires_proprietaire_infos_necessaires_charger_dist($who='proprieta
 		'mail_responsable' => $conf[$who.'_mail_responsable'],
 		'mail_administratif' => $conf[$who.'_mail_administratif'] ? $conf[$who.'_mail_administratif'] : $GLOBALS['meta']['email_webmaster'],
 		'site_web' => $conf[$who.'_site_web'] ? $conf[$who.'_site_web'] : 'http://',
-		'who' => $who,
 	);
 	return $valeurs;
 }

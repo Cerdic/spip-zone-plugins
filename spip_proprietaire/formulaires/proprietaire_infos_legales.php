@@ -2,9 +2,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('spip_proprio_fonctions');
 
-function formulaires_proprietaire_infos_legales_charger_dist($who='proprietaire'){
+
+function formulaires_proprietaire_infos_legales_charger_dist($who='proprietaire', $mode=false){
 	$conf = spip_proprio_recuperer_config();
 	$valeurs = array(
+		'who' => $who,
 		'legal_forme' => $conf[$who.'_legal_forme'],
 		'legal_abbrev' => $conf[$who.'_legal_abbrev'],
 		'legal_genre' => $conf[$who.'_legal_genre'] ? $conf[$who.'_legal_genre'] : 'fem',
@@ -18,7 +20,12 @@ function formulaires_proprietaire_infos_legales_charger_dist($who='proprietaire'
 		'enregistrement_tva_nonapplicable' => 
 			$conf[$who.'_enregistrement_tva_nonapplicable']==true ? 'oui' : 'non',
 		'capital_social' => $conf[$who.'_capital_social'],
+		'proposer_enregistrement' => 'libre',
 	);
+	// Cas particulier si numero FR
+	if (($mode && $mode=='auto_fr') || $conf[$who.'_enregistrement_siren']!='') {
+		$valeurs['proposer_enregistrement'] = 'auto_fr';
+	}
 	return $valeurs;
 }
 
@@ -42,6 +49,8 @@ function formulaires_proprietaire_infos_legales_verifier_dist($who='proprietaire
 
 function formulaires_proprietaire_infos_legales_traiter_dist($who='proprietaire'){
 	$messages = array();
+
+	// Recuperation des valeurs
 	$datas = array(
 		$who.'_legal_forme' => _request('legal_forme'),
 		$who.'_legal_abbrev' => _request('legal_abbrev'),
@@ -57,7 +66,10 @@ function formulaires_proprietaire_infos_legales_traiter_dist($who='proprietaire'
 			(_request('enregistrement_tva_nonapplicable') && _request('enregistrement_tva_nonapplicable')=='oui') ? true : false,
 		$who.'_capital_social' => _request('capital_social'),
 	);
-	if (strlen($datas[$who.'_enregistrement_siren'])) {
+
+	// Traitements
+	$num_mode = _request('num_mode_hidden');
+	if (strlen($datas[$who.'_enregistrement_siren'])>0 && $num_mode=='auto_fr') {
 		list(
 			$datas[$who.'_enregistrement_siren'],
 			$datas[$who.'_enregistrement_siret'],
@@ -70,7 +82,13 @@ function formulaires_proprietaire_infos_legales_traiter_dist($who='proprietaire'
 		$datas[$who.'_enregistrement_numero'] = '';
 	    $redirect = generer_url_ecrire('spip_proprio', 'page='.$who);
 //		$messages['redirect'] = $redirect;
+	} else {
+		$datas[$who.'_enregistrement_siren']='';
+		$datas[$who.'_enregistrement_siret']='';
+		$datas[$who.'_enregistrement_tvaintra']='';
 	}
+
+	// Enregistrement et retour
 	if( $ok = spip_proprio_enregistrer_config($datas) ) {
 		$messages['message_ok'] = _T('spip_proprio:ok_config');
 	} else {

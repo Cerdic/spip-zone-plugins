@@ -5,7 +5,7 @@
 	#FORMULAIRE_PROPRIETAIRE_ADRESSE{#ENV{who}}
 ]
 [(#ENV{form}|=={infos_legales}|oui)
-	#FORMULAIRE_PROPRIETAIRE_INFOS_LEGALES{#ENV{who}}
+	#FORMULAIRE_PROPRIETAIRE_INFOS_LEGALES{#ENV{who},#ENV{proposer_enregistrement}}
 ]
 [(#ENV{form}|=={createur}|oui)
 	#FORMULAIRE_PROPRIETAIRE_INFOS_CREATEUR

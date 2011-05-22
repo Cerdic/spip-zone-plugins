@@ -5,7 +5,7 @@ function formulaires_proprietaire_copyright_charger_dist(){
 	$valeurs = array(
 		'copyright_annee' => '',
 		'copyright_complement' => '',
-		'copyright_comment' => _T('spip_proprio:copyright_default_comment'),
+		'copyright_comment' => _T('spip_proprio:copyright_default_comment_multi'),
 	);
 	$datas = spip_proprio_recuperer_config();
 	if($datas AND count($datas)) $valeurs = array_merge($valeurs, $datas);

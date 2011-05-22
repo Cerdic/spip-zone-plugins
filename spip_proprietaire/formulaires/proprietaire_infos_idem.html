@@ -2,14 +2,43 @@
 	<br class='bugajaxie' />
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<script type='text/javascript'>/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+setTimeout(function(){
+if (window.jQuery){
+jQuery(document).ready(function(){
+[(#ENV**{idem}|=={non}|non)
+	if (jQuery('.[(#ENV**{who})]').is(':visible')) {
+		jQuery('.[(#ENV**{who})]').slideUp('fast');
+		jQuery('.[(#ENV**{who})]').hide();
+	}
+][(#ENV**{idem}|=={non}|oui)
+	if (jQuery('.[(#ENV**{who})]').is(':hidden')) {
+		jQuery('.[(#ENV**{who})]').show().slideDown('fast');
+	}
+]
+});
+}
+},10);
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{idem}|oui)erreur]">
 		    <label for="idem"><:spip_proprio:idem_label:>&nbsp;:</label>[
 		    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{idem})</span>
-			]<input type='checkbox' class='checkbox' name='idem' id='idem' value="oui"[(#ENV**{idem}|=={oui}|oui) checked="checked"] />
-			<span class='explication'><:spip_proprio:idem_comment{type=#ENV{who}}:></span>
+			]
+			<select class='forml' name='idem' id='idem'>
+				<option value="non"[(#ENV**{idem}|=={non}|oui) selected="selected"]>...</option>
+				[(#ENV{who}|=={proprietaire}|non)
+				<option value="proprietaire"[(#ENV**{idem}|=={proprietaire}|oui) selected="selected"]><:spip_proprio:proprietaire:></option>
+				][(#ENV{who}|=={hebergeur}|non)
+				<option value="hebergeur"[(#ENV**{idem}|=={hebergeur}|oui) selected="selected"]><:spip_proprio:hebergeur:></option>
+				][(#ENV{who}|=={createur}|non)
+				<option value="createur"[(#ENV**{idem}|=={createur}|oui) selected="selected"]><:spip_proprio:createur:></option>
+				]
+			</select>
 		</li>
 	</ul>
 	<span><input type='submit' value='<:bouton_enregistrer:>' class='fondo' style='float: right' /></span>

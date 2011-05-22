@@ -4,6 +4,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_proprietaire_adresse_charger_dist($who='proprietaire'){
 	$conf = spip_proprio_recuperer_config();
 	$valeurs = array(
+		'who' => $who,
 		'adresse_rue' => $conf[$who.'_adresse_rue'],
 		'adresse_code_postal' => $conf[$who.'_adresse_code_postal'],
 		'adresse_ville' => $conf[$who.'_adresse_ville'],
