@@ -9,8 +9,17 @@ function spip_proprio_exporter($what=array()){
 		$code .= "\n".'$proprio_config = '.var_export($conf, true).";\n";
 	}
 	if(isset($what['languages']) && $what['languages']=='oui') {
-		spip_proprio_proprietaire_texte();
-		$code .= "\n".'$proprio_i18n_proprietaire_fr = '.var_export($GLOBALS['i18n_proprietaire_fr'], true).";\n";
+		$langues_du_site = array('fr');
+		foreach(array('langues_utilisees', 'langues_multilingue', 'langue_site') as $ln_meta) {
+			if (isset($GLOBALS['meta'][$ln_meta]))
+				$langues_du_site = array_merge($langues_du_site, explode(',',$GLOBALS['meta'][$ln_meta]));
+		}
+		$langues_du_site = array_unique($langues_du_site);
+		foreach($langues_du_site as $ln) {
+			spip_proprio_proprietaire_texte('', '', $ln);
+//			spip_proprio_proprietaire_texte();
+			$code .= "\n".'$proprio_i18n_proprietaire_'.$ln.' = '.var_export($GLOBALS['i18n_proprietaire_'.$ln], true).";\n";
+		}
 	}
 
 	$code = "// Exportation config SPIP Proprio\n// Site d'origine : ".$GLOBALS['meta']['nom_site']."\n// Cree le : ".date("Y-m-d H:i:s")."\n".$code;
@@ -41,8 +50,11 @@ function spip_proprio_importer($file=null){
 			ecrire_metas();
 			
 		}
-		if (isset($proprio_i18n_proprietaire_fr)) {
-			$ok = creer_fichier_textes_proprietaire($proprio_i18n_proprietaire_fr);
+		foreach(explode(',', $GLOBALS['meta']['langues_proposees']) as $ln_spip) {
+			$ln_glb = "proprio_i18n_proprietaire_$ln_spip";
+			if (isset($$ln_glb)) {
+				$ok = creer_fichier_textes_proprietaire($ln_glb, $ln_spip);
+			}
 		}
 	}
 	return $ok;
