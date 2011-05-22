@@ -1,5 +1,5 @@
 <?php
-$GLOBALS['i18n_spip_proprio_fr'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A //
 	'all_site' => 'Tout le site',
@@ -15,17 +15,21 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 // B //
 	'bouton_importer' => 'Lancer l&#039;importation',
 	'bouton_exporter' => 'Lancer l&#039;exportation',
+	'bouton_saisie_libre' => 'Saisie libre',
+	'bouton_auto_fr' => 'Champs automatiques pour la France',
 
 // C //
+	'createur' => 'cr&#233;ateur',
 	'conditions_utilisation' => 'Conditions d\'utilisation',
 	'code_postal_label' => 'Code postal',
 	'capital_social_label' => 'Capital social',
+	'capital_social_comment' => 'Pr&eacute;cisez la monnaie le cas &eacute;ch&eacute;ant (<i>&euro; &dollar;</i>).',
 	'cnil_legend' => 'Informations CNIL',
 	'cnil_comment' => 'Si vous avez effectu&eacute; une d&eacute;claration aupr&egrave;s de la CNIL, pr&eacute;cisez ici &agrave; quelle date et sous quel r&eacute;c&eacute;piss&eacute;.',
 	'cnil_date_label' => 'Date du d&eacute;p&ocirc;t',
 	'cnil_numero_label' => 'N&deg; de r&eacute;c&eacute;piss&eacute;',
 	'copyright_legend' => 'Informations de copyright',
-	'copyright_comment' => 'Pour rappel, en France, il n\'est pas n&eacute;cessaire d\'avoir d&eacute;poser votre copyright aupr&egrave;s d\'un organisme pour qu\'une protection soit effective. Les informations de copyright peuvent donc &ecirc;tre mentionn&eacute;es par d&eacute;faut.',
+	'copyright_comment' => 'Pour rappel, en France, il n\'est pas n&eacute;cessaire d\'avoir d&eacute;pos&eacute; votre copyright aupr&egrave;s d\'un organisme pour qu\'une protection soit effective. Les informations de copyright peuvent donc &ecirc;tre mentionn&eacute;es par d&eacute;faut.',
 	'copyright_annee_label' => 'Ann&eacute;e de c&eacute;ation',
 	'copyright_complement_label' => 'Compl&eacute;ment',
 	'copyright_comment_label' => 'Mention de protection',
@@ -39,6 +43,7 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'capital' => ' au capital de ',
 	// copyright
 	'copyright_default_comment' => 'La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.',
+	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited.[fr]La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.</multi>',
 
 // D //
 	'de_la' => ' de la ',
@@ -78,6 +83,7 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 
 // H //
 	'home_page' => 'Page d’accueil',
+	'hebergeur' => 'h&#233;bergeur',
 
 // I //
 	'infos_legend' => 'Informations g&eacute;n&eacute;rales',
@@ -85,8 +91,8 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 	'infos_hebergeur' => 'Informations h&eacute;bergeur',
 	'infos_createur' => 'Informations cr&eacute;ateur',
 	'infos_idem' => 'M&ecirc;me structure',
-	'idem_label' => 'M&ecirc;me structure que l\'&eacute;diteur',
-	'idem_comment' => 'Cochez cette case si l\'organisme propri&eacute;taire est &eacute;galement @type@ du site.',
+	'idem_label' => 'M&ecirc;me structure que',
+//	'idem_comment' => 'Renseignez cette valeur cette valeur si l\'organisme propri&eacute;taire est &eacute;galement @type@ du site.',
 	'importer_dump' => '<strong>Importer le fichier :</strong> ',
 	'import_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : cela effacera votre configuration courante et vos cha&icirc;nes de langue !<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
 
@@ -123,6 +129,7 @@ $GLOBALS['i18n_spip_proprio_fr'] = array(
 // P //
 	'pays_label' => 'Pays',
 	'pourquoi_ce_plugin' => 'Pourquoi ce plugin ? (<i>rappels l&eacute;gaux</i>)',
+	'proprietaire' => 'propri&#233;taire',
 	'presentation' => '{{{Obligations l&eacute;gales fran&ccedil;aises concernant tout site internet}}}
 
 Tout site Internet, qu’il soit professionnel ou "de loisirs", doit respecter un ensemble d’obligations l&eacute;gales dict&eacute;es par la [LCEN|Voir le texte sur legifrance.fr->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164] ({Loi pour la confiance dans l’&eacute;conomie num&eacute;rique}) de juin 2004. Ces informations doivent &ecirc;tre clairement accessibles &agrave; tout internaute utilisant le site et l’&eacute;diteur du site, son propri&eacute;taire, a le devoir de contr&ocirc;ler son contenu, autant en terme r&eacute;dactionnel que concernant les commentaires laiss&eacute;s par les internautes.

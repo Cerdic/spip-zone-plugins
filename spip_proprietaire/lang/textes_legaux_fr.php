@@ -4,7 +4,7 @@
 // !! - Les accents doivent etre code en HTML : é => &eacute;
 // !! - Les apostrophes doivents etre echappees : ' => \'
 
-$GLOBALS['i18n_textes_legaux_fr'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B //
 	'business_cards' => '{{{Business Cards}}}',
@@ -12,7 +12,7 @@ $GLOBALS['i18n_textes_legaux_fr'] = array(
 
 // C //
 	'copyright_info' => '&copy; Copyright @date@ @nom_site@ | Tous droits r&eacute;serv&eacute;s.',
-	'mention_cnil' => '&Agrave; ce titre, {{[@nom_site@->@url_site@]}} a fait l\'objet d\'une d&eacute;caration aupr&egrave;s de la {{<abbr title="Commission Nationale de l&#039;informatique et des Libert&#233;s - www.cnil.fr">CNIL</abbr>}} le @date_cnil@, enregistr&eacute;e sous la r&eacute;f&eacute;rence {{@numero_cnil@.}}',
+	'mention_cnil' => '&Agrave; ce titre, {{[@nom_site@->@url_site@]}} a fait l\'objet d\'une d&eacute;claration aupr&egrave;s de la {{<abbr title="Commission Nationale de l&#039;Informatique et des Libert&#233;s - www.cnil.fr">CNIL</abbr>}} le @date_cnil@, enregistr&eacute;e sous la r&eacute;f&eacute;rence {{@numero_cnil@.}}',
 	'carte_visite_info' => 'Vous pouvez visualiser ou t&eacute;l&eacute;charger nos {{cartes de visite}} en cliquant sur les liens suivants :
 - {{[carte de visite du site->@classique@]}}
 - {{[carte de visite web compl&egrave;te->@complete@]}}
@@ -104,6 +104,7 @@ Les pages et le contenu de ce site sont g&eacute;n&eacute;r&eacute;s par le logi
 	'os_du_serveur' => ' fonctionnant sur un syst&egrave;me {{@os_serveur@}}',
 
 // P //
+	'pas_config' => 'Il n\'y a pas assez d\'information pour g&eacute;n&eacute;rer cette page ... Veuillez renseigner ces informations sur [l\'espace de configuration du plugin "Mentions L&eacute;gales"->@url_config@].',
 	'proprietaire_mentions_legales' => '[editeur<-]{{{Propri&eacute;taire / &Eacute;diteur}}}
 
 {{[@nom_site@->@url_site@]}} est un site web &eacute;dit&eacute; par @proprietaire_forme@ {{@proprietaire_nom@}} et publi&eacute; sous la direction de {{@proprietaire_nom_responsable@}}{@proprietaire_fonction_responsable_texte@}. L’ensemble du site {{[@nom_site@->@url_site@]}}, pages et contenus, est la propri&eacute;t&eacute; de @proprietaire_forme@ {{@proprietaire_nom@}}. @proprietaire_web@
@@ -117,6 +118,10 @@ Les pages et le contenu de ce site sont g&eacute;n&eacute;r&eacute;s par le logi
 // S //
 	'sous_le_numero' => 'sous le num&eacute;ro',
 	'sur_un_serveur' => ', sur un serveur {{@serveur@}}',
+
+// T //
+	// a conserver !!
+	'test_fichier_langue' => 'TEST',
 
 // V //
 	// Texte v_cards
