@@ -29,32 +29,17 @@ table.tablesorter thead tr .header {
 table.tablesorter thead tr th.none {
 	background-image: none;
 	cursor: auto;
-	/*
-	background-color: #da0000; 
-	*/
 }
 
 table.tablesorter tbody td {
 	padding: 4px;
-	/*
-	background-color: #fff;
-	*/
 	vertical-align: top;
-}
-table.tablesorter tbody tr.odd td {
-	/*
-	background-color:#f0f0f6;
-	*/
 }
 
 table.tablesorter thead tr .headerSortDown, 
 table.tablesorter thead tr .headerSortUp {
 	background-repeat: no-repeat;
 	background-position: center right;
-	/*
-	background-color: #666; 
-	color: #fff;
-	*/
 }
 table.tablesorter thead tr .headerSortUp {
 	background-image: url("../images/asc.gif");
