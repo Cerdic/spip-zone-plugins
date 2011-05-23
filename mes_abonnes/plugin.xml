@@ -2,7 +2,7 @@
 	<nom>Mes abonnes</nom>
 	<auteur>[erational->http://www.erational.org]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.2</version>
+	<version>0.3.0</version>
 	<etat>test</etat>
 	<description>module d'abonnement pour logiciels de publipostages de type MaxBulker Mailer</description>
 	<lien>http://www.spip-contrib.net/Mes-abonnes</lien>
@@ -10,9 +10,15 @@
 	<icon>images/logo_mesabonnes_48.png</icon>
 	<install>base/mesabonnes_upgrade.php</install>
 	<necessite id="SPIP" version="[2.1;]" />	
-	<pipeline>
-		<nom>ajouter_boutons</nom>		
-		<inclure>mesabonnes_fonctions.php</inclure>
-	</pipeline>
+	<bouton id='mesabonnes1' parent='naviguer'>
+		<titre>mesabonnes:mes_abonnes</titre>
+		<icone>images/logo_mesabonnes_24.png</icone>
+		<url>mesabonnes</url>
+	</bouton>
+	<bouton id='mesabonnes2' parent='bando_activite'>
+		<titre>mesabonnes:mes_abonnes</titre>
+		<icone>images/mesabonnes-16.png</icone>
+		<url>mesabonnes</url>
+	</bouton>
 	<categorie>communication</categorie>
 </plugin>
