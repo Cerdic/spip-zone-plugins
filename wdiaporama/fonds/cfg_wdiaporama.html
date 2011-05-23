@@ -1,0 +1,34 @@
+<div class="formulaire_spip formulaire_spip_wdiaporama">
+<form method="post" action="#SELF">
+<div>[(#ENV{_cfg_}|form_hidden)]
+<p class="explication"><:wdiapo:explications_largeur_hauteur:></p>
+<ul>
+<li><label for="largeur"><:wdiapo:largeur:></label><input type="text" name="largeur" id="largeur" value="#ENV{largeur}" /></li>
+<li><label for="hauteur"><:wdiapo:hauteur:></label><input type="text" name="hauteur" id="hauteur" value="#ENV{hauteur}" /></li>
+<li><label for="delai"><:wdiapo:delai_affichage:></label><input type="text" name="delai" id="delai" value="#ENV{delai,3000}" /></li>
+<li><label for="animation"><:wdiapo:type_animation:></label>
+	<select name="animation" size="1">
+				<option value="fade"[(#ENV{animation,fade}|=={fade}|oui) selected="selected"]><:wdiapo:fondu_enchaine:></option>
+				<option value="slide"[(#ENV{animation}|=={slide}|oui) selected="selected"]><:wdiapo:glissement:></option>
+	</select>
+</li>
+<li><label for="vitesse"><:wdiapo:vitesse_transitions:></label>
+	<select name="vitesse" size="1">
+				<option value="slow"[(#ENV{vitesse}|=={slow}|oui) selected="selected"]><:wdiapo:vitesse_lente:></option>
+				<option value="normal"[(#ENV{vitesse,normal}|=={normal}|oui) selected="selected"]><:wdiapo:vitesse_normale:></option>
+				<option value="fast"[(#ENV{vitesse}|=={fast}|oui) selected="selected"]><:wdiapo:vitesse_rapide:></option>
+	</select>
+</li>
+<li><label for="type"><:wdiapo:ordre_de_projection:></label>
+	<select name="type" size="1">
+				<option value="sequence"[(#ENV{type,sequence}|=={sequence}|oui) selected="selected"]><:wdiapo:ordre_des_images:></option>
+				<option value="random"[(#ENV{type}|=={random}|oui) selected="selected"]><:wdiapo:ordre_aleatoire:></option>
+	</select>
+</li>
+<li><label for="class"><:wdiapo:class_css_par_defaut:></label><input type="text" name="class" id="class" value="#ENV{class}" /></li>
+
+</ul>
+<p class="boutons"><input type="submit" name="_cfg_ok" value="<:wdiapo:enregistrer:>" />
+<input type="submit" name="_cfg_delete" value="<:wdiapo:supprimer_valeurs:>" /></p>
+</div></form>
+</div>

@@ -1,0 +1,68 @@
+[<!-- (#REM) on traite la liste d'id des images pour en faire un tableau -->]
+#SET{les_images, (#ENV**{images}|wdiaporama_vers_tableau)}
+#SET{retouche,non}
+[<!-- (#REM) dimensions maxi des images -->]
+<BOUCLE_param (DOCUMENTS) {id_document IN #GET{les_images}} {extension IN png,jpg,gif} {tous}>
+	[(#SET{hauteur,[(#HAUTEUR|max{#GET{hauteur}})]})]
+	[(#SET{largeur,[(#LARGEUR|max{#GET{largeur}})]})]
+</BOUCLE_param>
+
+[<!-- (#REM) si le paramétre taille est passé au modèle -->]
+[(#ENV{taille}|oui)
+	[(#SET{les_tailles,[(#ENV**{taille}|wdiaporama_vers_tableau)]})]
+	[(#SET{largeur,[(#GET{les_tailles}|table_valeur{0})]})]
+	[(#SET{hauteur,[(#GET{les_tailles}|table_valeur{1})]})]
+	[(#GET{hauteur}|non)[(#SET{hauteur,[(#GET{largeur})]})]]
+	[(#SET{retouche,oui})]
+]
+
+[<!-- (#REM) si le paramétre taille n'a pas été passé et que les dimensions maxi ont été définies par cfg -->]
+[(#GET{retouche}|=={non}|et{#CONFIG{wdiaporama/largeur}}|et{#CONFIG{wdiaporama/hauteur}}|oui)
+	[(#GET{largeur}|>{#CONFIG{wdiaporama/largeur}}|oui)
+		[(#SET{largeur,[(#CONFIG{wdiaporama/largeur})]})]
+	]
+	[(#GET{hauteur}|>{#CONFIG{wdiaporama/hauteur}}|oui)
+		#SET{hauteur,#CONFIG{wdiaporama/hauteur}}
+	]
+	[(#SET{retouche,oui})]
+]
+
+[<!-- (#REM) on assigne une id calculée ou celle donnée par le paramétre nom -->]
+[(#SET{id_div,[(#VAL{wdiaporama}|uniqid)]})]
+[(#ENV{nom}|oui) [(#SET{id_div,#ENV{nom}})]]
+
+<B_diaporama>
+<div id="#GET{id_div}" class="wdiaporama spip_documents[ spip_documents_(#ENV{align,center})][ (#ENV{class,#CONFIG{wdiaporama/class}})]"
+style="[width:(#GET{largeur})px]">
+
+<BOUCLE_diaporama (DOCUMENTS) {id_document IN #GET{les_images}} {extension IN png,jpg,gif} {tous}>
+	<dl class="wdiapo">
+	<dt class="wdiapo_img"[ style="height:(#GET{hauteur})px;"]>
+	[(#GET{retouche}|=={oui}|oui)[(#URL_DOCUMENT
+		|image_passe_partout{#GET{largeur},#GET{hauteur}}
+		|image_recadre{#GET{largeur},#GET{hauteur},center}
+		|inserer_attribut{alt,[(#TITRE|supprimer_numero|entites_html|sinon{#FICHIER})]})]
+	]
+	[(#GET{retouche}|!={oui}|oui)
+		<img src="#URL_DOCUMENT"[ alt="(#TITRE|supprimer_numero|entites_html|sinon{#FICHIER})"] />
+	]
+	</dt>
+	[(#ENV{affiche_titre,oui}|!={non}|oui)
+		[<dt class="spip_doc_titre">(#TITRE|supprimer_numero)</dt>]
+		[<dd class="spip_doc_descriptif">(#DESCRIPTIF|PtoBR)</dd>]
+	]
+	</dl>
+</BOUCLE_diaporama>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('##GET{id_div}').innerfade({
+		animationtype: '#ENV{animation,#CONFIG{wdiaporama/animation,fade}}',
+		speed: '#ENV{vitesse,#CONFIG{wdiaporama/vitesse,normal}}',
+		timeout: #ENV{delai,#CONFIG{wdiaporama/delai,3000}},
+		type: '#ENV{type,#CONFIG{wdiaporama/type,sequence}}',
+		containerheight: '[(#ENV{hauteur,[(#GET{hauteur}|plus{30})px]})]'
+	}); 
+});
+</script>
+</B_diaporama>
