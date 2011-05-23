@@ -1,0 +1,15 @@
+<div class="formulaire_spip formulaire_spip_wgalerie">
+<form method="post" action="#SELF">
+<div>[(#ENV{_cfg_}|form_hidden)]
+<p class="explication"><:wgalerie:explications:></p>
+
+<ul>
+<li><label for="img_maxi"><:wgalerie:dimension_maxi:></label><input type="text" name="img_maxi" id="img_maxi" value="#ENV{img_maxi,640}" /></li>
+<li><label for="vignette"><:wgalerie:taille_vignettes:></label><input type="text" name="vignette" id="vignette" value="#ENV{vignette,60}" /></li>
+<li><label for="class"><:wgalerie:class_css_par_defaut:></label><input type="text" name="class" id="class" value="#ENV{class}" /></li>
+</ul>
+
+<p class="boutons"><input type="submit" name="_cfg_ok" value="<:wgalerie:enregistrer:>" />
+<input type="submit" name="_cfg_delete" value="<:wgalerie:supprimer_valeurs:>" /></p>
+</div></form>
+</div>

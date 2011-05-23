@@ -1,0 +1,22 @@
+<plugin>
+<nom>WGalerie</nom>
+<etat>stable</etat>
+<version>4.0</version>
+<auteur>Dominique Wojylac</auteur>
+<description>Pour permettre la pr&eacute;sentation de galeries d'images dans un article</description>
+<prefix>wgalerie</prefix>
+<fonctions>wgalerie_fonctions.php</fonctions>
+<pipeline>
+	<nom>header_prive</nom>
+	<action>inclurejs_css</action>
+	<inclure>wgalerie.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head</nom>
+	<action>inclurejs_css</action>
+	<inclure>wgalerie.php</inclure>
+</pipeline>
+<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<utilise id="cfg" />
+</plugin>

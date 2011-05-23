@@ -1,0 +1,11 @@
+#SET{les_images,(#ENV**{images}|wgalerie_vers_tableau)}
+#SET{rel,(#VAL{wgalerie}|uniqid)}
+<B_galerie>
+	<div class="wgalerie spip_documents spip_documents_#ENV{align,center}[ (#ENV{class,#CONFIG{wgalerie/class}})]"[ style="width:(#ENV{largeur})px"]>
+	<div class="wgalerie_images">
+<BOUCLE_galerie(DOCUMENTS) {id_document IN #GET{les_images}} {extension IN jpg,png,gif}{tous}>[(#SET{vignette,[(#URL_DOCUMENT|image_reduire{0,#ENV{taillevignette,#CONFIG{wgalerie/vignette,60}}}|inserer_attribut{title,[(#TITRE|entites_html)]}|inserer_attribut{alt,[(#TITRE|entites_html|sinon{#FICHIER})]})]})][(#SET{image,[(#URL_DOCUMENT|image_reduire{#ENV{tailleimage,#CONFIG{wgalerie/img_maxi,640}}}|extraire_attribut{src})]})]<a href="#GET{image}"[ title="(#DESCRIPTIF|PtoBR|entites_html|sinon{[(#TITRE|entites_html)]}|sinon{&nbsp;})"] class="wgalerie_img" rel="#GET{rel}">#GET{vignette}</a></BOUCLE_galerie>
+	</div>
+	[<div class="spip_doc_titre">(#ENV{titre})</div>]
+	[<div class="spip_doc_descriptif">(#ENV{descriptif})</div>]
+	</div><!-- /wgalerie -->
+</B_galerie>
