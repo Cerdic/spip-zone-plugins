@@ -10,6 +10,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api');
+include_spip('inc/presentation');
+include_spip('inc/texte');
+include_spip('inc/actions');
+include_spip('inc/date');
 
 /**
  * Formulaire de selection destinataire
@@ -18,24 +22,37 @@ include_spip('inc/spiplistes_api');
  * sinon, ne fait qu'afficher l'etat
  * 
  * Renvoie :
- * $$nom_bouton_validation: si bouton de validation presse
+ * $nom_bouton_validation: si bouton de validation presse
  * $radio_destination: determine le choix
  * -> soit 'email_test' si adresse mail choisie
  * -> soit 'id_liste' si c'est une liste qui est choisie
  * $email_test: adresse email de test
  * $id_liste: id de la liste choisie
+ * @param int $id_courrier
+ * @param int $id_liste
+ * @param bool $flag_admin
+ * @param bool $flag_moderateur
+ * @param string $nom_bouton_validation
+ * @param array $listes_moderees
+ * @param string $statut
+ * @param $type deprecated
+ * @param string $nom_bouton_validation
+ * @param string $email_test
+ * @global $spip_lang_left
+ * @global $spip_lang_right
+ * @global $options
+ * @return string
  */
 function spiplistes_destiner_envoi (
-	$id_courrier, $id_liste
+	$id_courrier
+	, $id_liste
 	, $flag_admin
 	, $flag_moderateur
 	, $listes_moderees
-	, $statut, $type, $nom_bouton_validation, $email_test = "") {
-
-	include_spip('inc/presentation');
-	include_spip('inc/texte');
-	include_spip('inc/actions');
-	include_spip('inc/date');
+	, $statut
+	, $type
+	, $nom_bouton_validation
+	, $email_test = '') {
 
 	global $spip_lang_left
 		, $spip_lang_right
