@@ -456,7 +456,7 @@ function saisies_verifier($formulaire){
 		if ($obligatoire
 			and $obligatoire != 'non'
 			and (
-				($file and !$_FILES[$nom]['name'])
+				($file and !$_FILES[$champ]['name'])
 				or (!$file and (
 					is_null($valeur)
 					or (is_string($valeur) and trim($valeur) == '')
