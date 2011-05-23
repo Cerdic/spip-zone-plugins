@@ -1,3 +1,10 @@
+<style type="text/css">
+.choix {
+	margin-left:60px;
+}
+</style>
+
+
 #CACHE{0}
 <div class="formulaire_spip formulaire_editer formulaire_breves_vers_article">
 
@@ -10,7 +17,7 @@
 	
 	<br><br>
 	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lance_conv})</span><br>]
-	<label>La conversion concerne:</label>
+	<p>La conversion concerne :
 	<div class="choix">
 			[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_test})</span><br>]
 			<input type='radio' name="lance_conv" [ (#ENV{lance_conv}|=={test}|oui)checked="checked"] value="test">
@@ -19,21 +26,46 @@
 	<div class="choix">
 			<input type='radio' name="lance_conv" [ (#ENV{lance_conv}|=={toutes}|oui)checked="checked"] value="toutes">Toutes les brèves
 	</div>
-
-	<p>
-	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{rubrique_br})</span><br>]
-	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{auteur_br})</span><br>]
-	Créer les articles dans la rubrique <input type="text" name="rubrique_br" size="5px" value="#ENV{rubrique_br}" />
-	avec l'auteur <input type="text" name="auteur_br" size="5px" value="#ENV{auteur_br}" />
 	</p>
 
+	<p>
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{comment_rub})</span><br>]
+	Créer les articles :
+	<div class="choix">
+		[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{rubrique_br})</span><br>]
+		<input type='radio' name="comment_rub" [ (#ENV{comment_rub}|=={unique}|oui)checked="checked"] value="unique">dans une même et unique rubrique n° <input type="text" name="rubrique_br" size="5px" value="#ENV{rubrique_br}" /><br>
+	</div>
+	<div class="choix">
+		<input type='radio' name="comment_rub" [ (#ENV{comment_rub}|=={origine}|oui)checked="checked"] value="origine">dans la rubrique de la brève d'origine<br>
+	</div>
+	</p>
+	<p class="choix">
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{auteur_br})</span><br>]
+	avec l'auteur <input type="text" name="auteur_br" size="5px" value="#ENV{auteur_br}" />
+	</p>
+	
+	<p>
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{statut_br})</span><br>]
+	Le statut des bréves aprés la conversion :
+	<div class="choix">
+		<input type='radio' name="statut_br" [ (#ENV{statut_br}|=={idem}|oui)checked="idem"] value="idem">laisser inchangé
+	</div>
+	<div class="choix">
+		<input type='radio' name="statut_br" [ (#ENV{statut_br}|=={prop}|oui)checked="prop"] value="prop">passer à 'proposée'
+	</div>
+	<div class="choix">
+		<input type='radio' name="statut_br" [ (#ENV{statut_br}|=={refus}|oui)checked="refus"] value="refus">passer à 'refusée' (puis effacées automatiquement aprés 24 ou 48 heures)
+	</div>
+	</p>
+	
 	<p>
 	<input type='checkbox' name='modif_liens' [ (#ENV{modif_liens}|=={oui}|oui)checked="checked"] value="oui"/> Modifier les liens raccourcis [...->br...] vers les brèves dans articles, forums, bio auteurs ...
 	</p>
-
+	
 	<p class="boutons">
 	<input type='submit' name='ok' value='Lancer la conversion et/ou modification des liens raccourcis' />
 	</p>
+
 </form>
 
 

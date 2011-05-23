@@ -9,11 +9,10 @@
 // les met dans une même rubrique
 // et leur attribue optionnellement un même auteur
 
-
 include_spip('base/breves_vers_articles_base');
 
 
-function breves_vers_articles($id_breve, $id_rubrique, $id_auteur) {
+function breves_vers_articles($id_breve, $id_rubrique, $id_auteur, $statut_br) {
 	$nouvel_article = array();
 	$message = "";
 	
@@ -52,9 +51,16 @@ function breves_vers_articles($id_breve, $id_rubrique, $id_auteur) {
 
 	$nouvel_article['statut'] = $res['statut'];
 
+	if($id_rubrique==false) {
+		// Le nouvel article est créé dans la rubrique d'origine de la bréve
+		$id_rubrique = $res['id_rubrique'];
+	}
+	// Sinon, tous les nouveux articles sont créés dans une rubrique unique ; rien à faire dans ce cas
+	
 	$nouvel_article['id_rubrique'] = $id_rubrique;
 	$secteur = sql_getfetsel('id_secteur', 'spip_rubriques', 'id_rubrique='.intval($id_rubrique));
 	$nouvel_article['id_secteur'] = $secteur;
+	
 
 	// recherche du titre du secteur de la breve
 	$secteur = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique='.$res['id_rubrique']);
@@ -112,13 +118,19 @@ function breves_vers_articles($id_breve, $id_rubrique, $id_auteur) {
 	}
 	else
 		$message .= "<br>Impossible de determiner quelle gestion est utilisée sur les forums (id_breve ou id_objet)";
-
-	// suppresion de la breve ?? et son association avec mots cles et forum
-	// on met le statut à 'refuse'
-	// actuellement, aucunes breves n'a ce statut
-	// 12 breves ont le statut 'prop'
-	// attention ; le satut refuse est détruit
-	// sql_updateq('spip_breves', array('statut' => 'refuse'), 'id_breve='.$id_breve);
+	
+	// Gestion du statut de la bréve
+	switch($statut_br) {
+		case 'idem':
+			// Rien à faire
+			break;
+		case 'prop':
+			sql_updateq('spip_breves', array('statut' => 'prop'), 'id_breve='.$id_breve);
+			break;
+		case 'refus':
+			sql_updateq('spip_breves', array('statut' => 'refuse'), 'id_breve='.$id_breve);
+			break;
+	}
 
 	// correspondance id_breve <-> id_article
 	sql_insertq(TABLE_BREVES_ARTICLES, array('id_breve' => $id_breve, 'id_article' => $id_article));
