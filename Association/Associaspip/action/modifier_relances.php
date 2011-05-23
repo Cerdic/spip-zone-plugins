@@ -31,16 +31,34 @@ function action_modifier_relances() {
 	include_spip('inc/association_coordonnees');
 	$emails_auteurs = association_recuperer_emails(array_keys($statut_tab)); /* cette fonction renvoie un tableau auteur_id => array(emails) */
 
+	/* initialise les valeurs retournees */
+	$emails_envoyes_ok = 0;
+	$emails_envoyes_echec = 0;
+	$nb_membres_avec_email = 0;
+	$membres_sans_email = array();
+
 	foreach ($emails_auteurs as $id_auteur => $emails) {
+		/* identification des membres avec ou sans email */
+		if (count($emails)) {
+			$nb_membres_avec_email++;
+		} else {
+			$membres_sans_email[]=$id_auteur;
+		}
+
+		/* envoi des mails */
 		foreach ($emails as $email) {
 			if (!$envoyer_mail($email, $sujet, $message, $exp)) {
+				$emails_envoyes_echec++;
 				spip_log("non envoi du mail a ".$email);
 			} elseif ($statut_tab[$id]=="echu") {
+				$emails_envoyes_ok++;
 				sql_updateq('spip_asso_membres', 
 					array("statut_interne"=> 'relance'),
 					"id_auteur=$id_auteur");
 			}
 		}
 	}
+
+	return array($emails_envoyes_ok, $emails_envoyes_echec, $nb_membres_avec_email, $membres_sans_email);
 }
 ?>

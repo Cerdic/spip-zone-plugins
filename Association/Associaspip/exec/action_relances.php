@@ -45,34 +45,7 @@ function exec_action_relances(){
 		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite("",true);
-			
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:relance_de_cotisations'));
-
-		echo '<p><strong>', _T('asso:vous_vous_appretez_a_envoyer') . " $count ";
-		if ($count==1)
-			  { echo _T('asso:relance');}
-		else
-			  { echo _T('asso:relances');}
-		echo '</strong></p>';
-		echo '<p>'.$sujet.'</p>';
-		echo '<fieldset>';
-		echo nl2br($message);
-		echo '</fieldset>';
-		
-		$res = '';
-
-		/* on fait passer en hidden un tableau id_auteur => statut_interne contenant uniquement les auteurs selectionnes */
-		foreach ($id_tab as $id_auteur) {
-			$res .= '<input name="statut['.$id_auteur.']" type="hidden" value="'.$statut_tab[$id_auteur].'" />';
-		}
-
-		$res .= '<input name="sujet" type="hidden" value="'.$sujet.'" />';
-		$res .= '<input name="message" type="hidden" value="'.htmlentities($message, ENT_QUOTES, 'UTF-8').'" />';
-		$res .= '<div style="float:right;"><input type="submit" value="'._T('asso:bouton_envoyer').'" class="fondo" /></div>';
-
-		echo redirige_action_post('modifier_relances', $count, 'adherents', '', "\n<div>$res</div>\n");
-
-		fin_cadre_relief();  
+		echo recuperer_fond("prive/editer/relance_adherents");
 		echo fin_page_association(); 
 	}
 } 

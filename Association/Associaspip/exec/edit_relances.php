@@ -90,7 +90,6 @@ function exec_edit_relances(){
 
 function relances_while($statut_interne)
 {
-	include_spip('inc/association_coordonnees');
 	$query = sql_select("id_auteur, sexe, nom_famille, prenom, statut_interne, validite", "spip_asso_membres", " statut_interne like '$statut_interne' AND statut_interne <> 'sorti'", '', "nom_famille" );
 
 	$res = '';

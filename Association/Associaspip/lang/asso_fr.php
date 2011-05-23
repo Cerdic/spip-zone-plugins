@@ -252,6 +252,13 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'membres_ajoutes' => ' membres ins&eacute;r&eacute;s dans la liste des membres',
 	'membre_ajoute' => ' membre ins&eacute;r&eacute; dans la liste des membres',
 	
+	# relances
+	'emails_envoyes' => ' emails envoy&eacute;s',
+	'email_envoye' => ' email envoy&eacute;',
+	'echec' => '&eacute;chec',
+	'echecs' => '&eacute;checs',
+	'aucune_adresse_trouvee_pour_les_membres' => 'Aucune adresse trouv&eacute;e pour les membres : ',
+
 	# ACTIVITES
 		
 	# Titres
@@ -559,6 +566,7 @@ Commentaire: @commentaire@
 'justification' => 'Justification',
 'libelle_complet' => 'Libell&eacute; complet',
 'membre' => 'Membre',
+'membres' => 'Membres',
 'mettre_a_jour_la_vente' => 'Mettre &agrave; jour la vente',
 'mettre_a_jour_le_don' => 'Mettre &agrave; jour le don',
 'mettre_a_jour' => 'Mettre &agrave; jour',
