@@ -436,6 +436,7 @@ function saisies_verifier($formulaire){
 	foreach ($saisies as $saisie){
 		$obligatoire = $saisie['options']['obligatoire'];
 		$champ = $saisie['options']['nom'];
+		$file = ($saisie['saisie'] == 'input' and $saisie['options']['type'] == 'file');
 		$verifier = $saisie['verifier'];
 
 		// Si le nom du champ est un tableau indexé, il faut parser !
@@ -452,7 +453,17 @@ function saisies_verifier($formulaire){
 			$valeur = _request($champ);
 		
 		// On regarde d'abord si le champ est obligatoire
-		if ($obligatoire and $obligatoire != 'non' and (is_null($valeur) or (is_string($valeur) and trim($valeur) == '') or (is_array($valeur) and count($valeur) == 0)))
+		if ($obligatoire
+			and $obligatoire != 'non'
+			and (
+				($file and !$_FILES[$nom]['name'])
+				or (!$file and (
+					is_null($valeur)
+					or (is_string($valeur) and trim($valeur) == '')
+					or (is_array($valeur) and count($valeur) == 0)
+				))
+			)
+		)
 			$erreurs[$champ] = _T('info_obligatoire');
 		
 		// On continue seulement si ya pas d'erreur d'obligation et qu'il y a une demande de verif
