@@ -1,0 +1,18 @@
+<plugin>
+	<nom><multi>[fr]Redirections HTTPS[es]Redireciones HTTPS</multi></nom>
+	<auteur>Severo</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<prefix>redirhttps</prefix>
+	<description>
+		<multi>
+			[fr]Redirection vers HTTPS quand le contenu le nécessite (espace privé, login, pages publiques avec utilisateur connecté)
+			[es]Redirecci&oacute;n hac&iacute;a HTTPS cuando el contendio le necesita (espacio privado, login, p&aacute;ginas p&uacute;blicas con el usuario conectado)
+		</multi>
+	</description>
+
+	<options>redirhttps_options.php</options>
+
+	<necessite id="SPIP" version="[2.1.10;]" />
+</plugin>
