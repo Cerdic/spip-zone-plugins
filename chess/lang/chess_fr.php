@@ -3,6 +3,7 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+'info_documents'=>'Documents',
 'titre' => 'Echec et Mat',
 'liste_details' => 'D&eacute;tails',
 'liste_parties' => 'Parties',

@@ -257,6 +257,7 @@ clear:left;
 }
  table,tr,td{
 	vertical-align:top;
+	line-height:1.4em;
 }  
 #pgnList{
 	display:none;
@@ -295,7 +296,7 @@ clear:left;
 }
 
 #gameDetails td{
-	font-size:12px;
+	font-size:.8em;
 	width:120px;
 }
   td.tableWidget_headerCell{
@@ -328,7 +329,7 @@ div.ChessBoardInner[(#CONFIG{chess/taille,30})]{
 }
 .tableWidget{
 	font-family:arial;
-	font-size:12px;	
+	font-size:.8em;
 }
 /* End layout CSS */	
 .widget_tableDiv {
@@ -339,7 +340,7 @@ div.ChessBoardInner[(#CONFIG{chess/taille,30})]{
 	height:[(#EVAL{20 + 8 * [(#CONFIG{chess/taille,30})]})]px;
 }
 html>body div.widget_tableDiv {
-	overflow: hidden;
+	overflow-y: scroll;
 }
 .tableWidget thead{
   font-weight:bold;

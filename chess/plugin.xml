@@ -5,6 +5,9 @@
 	[fr]Echecs
 	</multi>
 	</nom>
+	<icon>
+  logo_chess.gif 
+  </icon>
 	<auteur>
 	S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville<br />
   original script Alf Magne Kalleland owner of DHTMLGoodies

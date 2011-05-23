@@ -3,13 +3,14 @@
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-'titre' => 'Echec et Mat',
-'liste_details' => 'D&eacute;tails',
+'info_documents'=>'Documentos',
+'titre' => 'Jaque Mate',
+'liste_details' => 'Detalles',
 'liste_parties' => 'Partidas',
 'liste_fichiers_pgn' => 'Fichiers PGN',
-'voir_parties' => 'Voir les parties contenues dans ce document',
-'voir_details' => 'Voir les d&eacute;tails de cette partie',
-'pgn_dispo' => 'Fichiers PGN disponibles:',
+'voir_parties' => 'Ver las partidos de esto documento',
+'voir_details' => 'Ver los detalles de este partida',
+'pgn_dispo' => 'ficheros PGN disponibles:',
 'parties_voir' => 'Ver',
 'parties_blanc' => 'Blanco',
 'parties_noir' => 'Negro',
@@ -18,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'details_stop' => 'Stop',
 'details_info' => 'Informaciones',
 'details_options' => 'Contr&ocirc;les...',
-'details_options_inverser' => 'Retourner',
+'details_options_inverser' => 'Devolver',
 'details_options_lecture' => 'Lors de la lecture automatique, s&apos;il y a un commentaire:',
 'details_options_lecture_arret' => ' arr&ecirc;ter la lecture.',
 'details_options_lecture_continuer' => ' continuer la lecture au bout de ',
