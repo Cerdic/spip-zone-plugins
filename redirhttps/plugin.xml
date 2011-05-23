@@ -11,6 +11,7 @@
 			[es]Redirecci&oacute;n hac&iacute;a HTTPS cuando el contendio le necesita (espacio privado, login, p&aacute;ginas p&uacute;blicas con el usuario conectado)
 		</multi>
 	</description>
+	<icon>images/redirhttps-128.png</icon> <!-- http://www.iconfinder.com/icondetails/25388/128/high_security_thick_icon -->
 
 	<options>redirhttps_options.php</options>
 
