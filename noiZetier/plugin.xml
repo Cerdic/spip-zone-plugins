@@ -1,11 +1,11 @@
 <plugin>
-	<nom>noiZetier</nom>
+	<nom><multi>[fr]noiZetier[de]Nussbaum</multi></nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
 	<version>0.12.0</version>
 	<version_base>0.4</version_base>
 	<etat>stable</etat>
-	<description>Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.</description>
+	<description><multi>[fr]Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.[de]Verwaltung der Code-Nüsse, als Ergänzung der Z-Squelette oder als eigenständiges Modul.</multi></description>
 	<lien>http://www.spip-contrib.net/noiZetier</lien>
 	<icon>img/noizetier-128.png</icon>
 	<prefix>noizetier</prefix>
