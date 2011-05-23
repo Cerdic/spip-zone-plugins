@@ -134,7 +134,7 @@ function cache_cool_global_context($push){
 	if ($push===false AND count($pile)) {
 		$pull = array_shift($pile);
 		lang_select();
-		cache_cool_set_global_contexte();
+		cache_cool_set_global_contexte($pull);
 	}
 	// definir un nouveau contexte
 	else {
