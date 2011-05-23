@@ -1,0 +1,109 @@
+[<!-- (#REM)
+*
+* Squelette pour spip-listes
+*
+* CP-20110523
+
+Exemple pour envoyer un article précis. Ici, id_article 38
+Accompagné d'une image (le logo de l'article, ou de la rubrique)
+en incrustation HTML.
+
+Voir http://en.wikipedia.org/wiki/Data_URI_scheme
+sur DATA URL sheme
+
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+Precautions:
+- ne pas envoyer des gabarits de plus de 10Ko
+- ne pas placer de balises html <html><body> ni de fermeture </body></html>
+    ils seront ajoutes automatiquement a l'envoi du mail 
+- mettre les style  CSS directement dans les balises pour etre sur qu'ils
+    seront interpretes (meme par les webmails).
+
+Pour la composition d'un mail au format HTML, consulter :
+- http://www.email-standards.org/
+
+-->]
+<BOUCLE_article(ARTICLES){id_article=38}{0,1}>
+<center style="text-align:center;
+        background-color:#B90101;
+        padding:10px;
+        width:100%">
+    <table cellpadding="0"
+           cellspacing="0"
+           border="0"
+           width="90%"
+           style="margin:0 auto;
+                font-family: Arial, Helvetica, sans-serif;
+                background-color: #FFFFFF;
+                border-spacing:0;
+                border:0;">
+        <tr>
+            <td style="padding:20px 40px 0;">
+                <h1 style="background: #0033FF;
+                        color: #FFFFFF;
+                        font-weight: 700;
+                        padding: 4pt 8pt;
+                        margin:0;
+                        vertical-align: middle;
+                        font-size: 16pt;
+                        text-align: left;">
+                    #TITRE
+                </h1>
+            </td>
+        </tr>
+        [<tr>
+            <td style="padding:0 40px;
+                    font-size:90%;
+                    line-height:1.5em;
+                    height:1em;">(#DATE_MODIF|affdate)
+            </td>
+        </tr>]
+        <tr>
+            <td style="padding: 15pt;"
+                valign="top">
+                <table cellpadding="0"
+                        cellspacing="8"
+                        border="0"
+                        width="100%">
+                    <tr>
+                        <td valign="top"
+                            width="100"
+                            style="padding:8px;
+                                width:100px;
+                                height:100px;">
+                            [<img src="data:image/png;base64,
+                            (#LOGO_ARTICLE_RUBRIQUE||image_reduire{100,100}
+                                |extraire_attribut{src}
+                                |file_get_contents
+                                |base64_encode
+                                |chunk_split)"
+                                width="100"
+                                height="100"
+                                alt=""
+                                border="0"
+                                style="width:100px; height:100px; border:0"
+                                />]
+                        </td>
+                        <td style="font-size: 12pt;
+                                line-height:1.4em;"
+                            valign="top"
+                            align="left">
+                            #TEXTE
+                        </td>
+                    </tr>
+                    [<tr>
+                        <td></td>
+                        <td>
+                        (#NOTES)
+                    </td>
+                    </tr>]
+                </table>
+            </td>
+        </tr>
+    </table>
+</center>
+</BOUCLE_article>
