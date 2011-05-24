@@ -67,7 +67,7 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 			
 				if ($result = sql_fetsel("*", "spip_auteurs", "login=" . sql_quote($login) . " AND source='thelia'")) {
 	  				  $data = pipeline('thelia_authentifie',array("auteur" => $result,"statut"=>"existant"));
-				      return $result;
+				      return $data['auteur'];
 				}
 				
 				spip_log("thelia2");
@@ -101,8 +101,9 @@ function auth_thelia_dist ($login, $pass, $md5pass="", $md5next="") {
 				}
 				spip_log("test6");
 				if ($n)	{
-					$data = pipeline('thelia_authentifie',array("auteur" => $n,"statut"=>"nouveau"));
-				    return sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
+					$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$n");
+					$data = pipeline('thelia_authentifie',array("auteur" => $auteur,"statut"=>"nouveau"));
+				    return $data['auteur'];
 				}
 
 				spip_log("Creation de l'auteur '$nom' depuis thelia impossible");
