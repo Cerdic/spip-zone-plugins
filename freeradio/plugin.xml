@@ -3,6 +3,7 @@
 	<icon>img_pack/freeRadioLogo.png</icon>
 	<version>1.0</version>
 	<etat>stable</etat>
+	<categorie>multimedia</categorie>
 	<description>
 {{Un lecteur de radio Web}}
 
@@ -41,7 +42,7 @@ Tous ces param&#232;tres sont optionnels et peuvent &ecirc;tre utilis&#233;s con
 [Frank RUZZIN->mailto:franck@lededansdubocal.net], mai 2011
 	</auteur>
 	<lien>
--* Plus d'infos ? - [Le dedans du bocal->http://lededansdubocal.net]
+Plus d'infos ? - [Le dedans du bocal->http://lededansdubocal.net]
 	</lien>
 	<prefix>freeradio</prefix>	
     <fonctions> <!-- fichier charge au calcul des squelettes (espace public) -->
