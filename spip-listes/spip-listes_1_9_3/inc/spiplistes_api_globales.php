@@ -438,6 +438,11 @@ function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = fal
 	return($texte);
 }
 
+/**
+ * @todo A réécrire pour donner ce qui est demandé
+ * 	en page de config (ISO ou UTF)
+ * @return string
+ */
 function spiplistes_iso2ascii ($texte, $is_html = false) {
 	$remplacements = array(
 		'&#8217;' => "'"	// quote
@@ -503,8 +508,12 @@ function spiplistes_html_entity_decode ($texte, $charset = _SPIPLISTES_CHARSET_E
 	return ($texte);
 }
 
-// http://fr.php.net/html_entity_decode
-	// thank to: laurynas dot butkus at gmail dot com
+/**
+ * @see http://fr.php.net/html_entity_decode
+ *	thank to: laurynas dot butkus at gmail dot com
+ * @return string
+ */
+ 
 function spiplistes_html_entity_decode_utf8 ($string)
 {
 	 static $trans_tbl;
@@ -526,9 +535,14 @@ function spiplistes_html_entity_decode_utf8 ($string)
 } // spiplistes_html_entity_decode_utf8()
 
 
-// Returns the utf string corresponding to the unicode value (from php.net, courtesy - romans@void.lv)
-// thank to: akniep at rayo dot info
-function spiplistes_code2utf($number)  {
+/**
+ * Returns the utf string corresponding to the unicode value
+ * 	(from php.net, courtesy - romans@void.lv)
+ * 	thank to: akniep at rayo dot info
+ * @staticvar array $windows_illegals_chars
+ */
+function spiplistes_code2utf($number)
+{
 	static $windows_illegals_chars;
 	if($windows_illegals_chars === null) {
 		$windows_illegals_chars = array(

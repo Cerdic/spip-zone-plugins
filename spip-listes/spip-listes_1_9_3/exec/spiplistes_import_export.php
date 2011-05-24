@@ -36,7 +36,9 @@ include_spip('inc/spiplistes_api_presentation');
 
 /**
  * Page import export
-*/
+ * @todo Permettre au modérateur l'import/export pour sa liste.
+ * 
+ */
 function exec_spiplistes_import_export() {
 
 	global $connect_statut
