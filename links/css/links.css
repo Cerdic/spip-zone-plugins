@@ -1,6 +1,6 @@
 /* --------------------------------------------------------------
 
-	link.css
+	links.css
 	Style des liens du site
 	romy.tetue.net - GPL - 2011
 
@@ -75,6 +75,7 @@ a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) 
 a { text-decoration: underline; }
 a.external,
 a[href ^="mailto:"] { padding-right: 0; background: none; }
+.ie6 a { padding-right: 0; background: none; } /*ie6*/
 a.external:after,
 a[href ^="mailto:"]:after { content: "\0000a0("attr(href)")"; }
 }
