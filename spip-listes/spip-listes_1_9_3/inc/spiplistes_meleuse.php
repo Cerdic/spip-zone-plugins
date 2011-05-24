@@ -281,7 +281,10 @@ function spiplistes_meleuse ($last_time) {
 			//$pied_rappel_texte = _T('spiplistes:modif_abonnement_text');
 			
 			// transcrire le contenu
-			if($charset_dest != $charset_spip){
+			if ($charset_dest != $charset_spip)
+			{
+				spiplistes_debug_log ('TRANSLATION '.$charset_spip.' TO '.$charset_dest);
+				
 				include_spip('inc/charsets');
 				foreach(array(
 					  'objet_html', 'objet_texte'
