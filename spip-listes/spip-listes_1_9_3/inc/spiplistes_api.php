@@ -1184,16 +1184,22 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 	$contexte['patron_texte'] = $patron_texte;
 	$result_texte = '';
 	$texte_ok = false;
-	if ($patron_texte && ($patron_texte != $patron_html)) {
+	if ($patron_texte && ($patron_texte != $patron_html))
+	{
+		spiplistes_debug_log('CREATE text version USING '.$patron_texte);
+	
 		if (find_in_path('patron_switch.html')) {
-			$result_texte= recuperer_fond('patron_switch', $contexte);
-			$texte_ok= true;
+			if($result_texte = recuperer_fond('patron_switch', $contexte))
+			{
+				$result_texte = spiplistes_courrier_version_texte($result_texte);
+			}
+			$texte_ok = true;
 		}
 	}
 	// si version texte manque, la calculer
 	// a partir de la version html
 	if (!$texte_ok) {
-		$result_texte= spiplistes_courrier_version_texte($result_html) . PHP_EOL ;
+		$result_texte = spiplistes_courrier_version_texte($result_html);
 	}
 	// eliminer les espaces pour un vrai calcul de poids
 	$result_html = trim($result_html);
