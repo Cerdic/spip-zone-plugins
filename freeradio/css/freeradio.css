@@ -1,0 +1,15 @@
+/* ------------------------------------------ */
+/* Franck Ruzzin : 10 mai 2011
+/* ------------------------------------------ */
+
+.frleft {
+	float:left;
+}
+.frright {
+	float:right;
+}
+.frcenter {
+	clear: both;
+	width: 100%;
+	margin: auto;
+}

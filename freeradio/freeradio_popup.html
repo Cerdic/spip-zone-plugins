@@ -1,0 +1,87 @@
+#CACHE{3600}
+[(#REM)
+		le 09/05/2011
+        Page contenant un lecteur FreeRadio
+]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+	<title>FreeRadio</title>
+	#INSERT_HEAD
+	
+	<style type="text/css">
+	<!--
+	body {
+		margin:0;
+		border:0;
+		background-image: url(#CHEMIN{img_pack/backgroundPopupImage.png});
+		text-align:center;
+	}
+	#freeradio1 {
+		position:absolute;
+		top: 50%;
+		left: 50%;
+		height:70px;
+		width:118px;
+		margin-top: -35px; /* moitié de la hauteur */ 
+		margin-left: -59px; /* moitié de la largeur */ 
+	}
+	-->
+	</style>
+</head>
+<body>
+	#SET{monURL,(#SELF|htmlspecialchars_decode|urldecode)}
+	#SET{radioURL,(#GET{monURL}|get_param{radioURL})}
+	#SET{autoStart,(#GET{monURL}|get_param{autoStart})}
+	#SET{volume,(#GET{monURL}|get_param{volume})}
+	#SET{pan,(#GET{monURL}|get_param{pan})}
+	
+	<script type="text/javascript">
+		// Ecouteurs
+		function onVolumeChange(objID,newVol) {
+			// Placer ici le code à exécuter lors de l'évènement onVolumeChange
+		}
+		function onPanChange(objID,newPan) {
+			// Placer ici le code à exécuter lors de l'évènement onPanChange
+		}
+		function onStop(objID) {
+			// Placer ici le code à exécuter lors de l'évènement onStop
+		}
+		function onPlay(objID) {
+			// Placer ici le code à exécuter lors de l'évènement onPlay
+		}
+	</script>
+	
+	<div id="freeradio1">
+	<h1>freeradio1</h1>
+	<p>Alternative content</p>
+	<p><a href="http://www.adobe.com/go/getflashplayer"><img 
+		src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" 
+		alt="Get Adobe Flash player" />
+		</a>
+	</p>
+	</div>
+	
+	
+	<script type="text/javascript">	
+	$(function(){
+		var flashvars = {
+			[radioURL:"(#GET{radioURL})",]
+			[autoStart:"(#GET{autoStart})",]
+			[volume:(#GET{volume}),]
+			[pan:(#GET{pan}),]
+			author: "http://lededansdubocal.net"
+		};
+		var params = {
+			wmode: "transparent"
+		};
+		var attributes = {
+			altContentId: "freeradio1"
+		};
+		freeRadio.embedRadio(flashvars, params, attributes);
+	});	
+</script>
+	
+	
+</body>
+</html>

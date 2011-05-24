@@ -1,0 +1,44 @@
+[(#REM)
+		le 09/05/2011
+        Insère un lecteur FreeRadio (lecture de flux audio ou de fichier mp3) dans une fenêtre popup
+        L'id du lecteur suit le nom du modèle
+]
+[(#REM)
+		radioURL (URL à ouvrir (radio, son). Défaut : http://tai-02.egihosting.com/bombayb-256k-mp3.pls)
+		autoStart (Démarrage automatique au chargement de l'URL radio. true ou false. Défaut : true)
+		volume (Décimal de 0 à 1. Défaut : 0.7)
+		pan (Décimal de -1 (gauche) à 1(droite). Défaut : 0)
+		onVolumeChange (Méthode à exécuter lorsque le volume change. Défaut : exécute la méthode "onVolumeChange")
+		onPanChange (Méthode à exécuter lorsque la balance change. Défaut : exécute la méthode "onPanChange")
+		onStop (Méthode à exécuter lorsque la lecture s'arrête. Défaut : exécute la méthode "onStop")
+		onPlay (Méthode à exécuter lorsque la lecture démarre. Défaut : exécute la méthode "onPlay").
+		<mod_freeradiopopup2
+		|radioURL=http://live.campusgrenoble.org:9000/rcg112.m3u
+		|autoStart=false
+		|volume=0.3
+		|pan=0.5>
+		Insère un lecteur FreeRadio : id=2, url de radio=http://live.campusgrenoble.org:9000/rcg112.m3u, démarrage manuel, volume=0.3, balance=0.5 (moitié droite).
+]
+
+#SET{radioURL,(#ENV{radioURL}|trim)}
+#SET{autoStart,(#ENV{autoStart}|trim)}
+#SET{volume,(#ENV{volume}|trim)}
+#SET{pan,(#ENV{pan}|trim)}
+
+
+#SET{monURL,(#URL_PAGE{freeradio_popup}|parametre_url{radioURL,#GET{radioURL}}|parametre_url{autoStart,#GET{autoStart}}|parametre_url{volume,#GET{volume}}|parametre_url{pan,#GET{pan}})}
+
+<script type="text/javascript">
+	function openRadio()
+		{
+			// Arrêter les lectures en cours
+			$('.freeRadio').each(function(index) {
+				freeRadio.stop($(this).attr("name"));
+			});
+			// Lancer un lecteur dans une nouvelle fenêtre
+			var strWindowFeatures = "directories = no,location = no,menubar = no,resizable = no,scrollbars = no,status = no,toolbar = no,top=50,left=100,width =300,height=150";
+			window.open("#GET{monURL}","FreeRadio_Popup",strWindowFeatures);
+		}
+</script>
+
+<h2 class="FRTitle"><a href="javascript:openRadio()"><:freeradio:open_freeradio_in_popup:></a></h2>

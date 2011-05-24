@@ -1,0 +1,77 @@
+[(#REM)
+		le 09/05/2011
+        Insère un lecteur FreeRadio (lecture de flux audio ou de fichier mp3)
+        L'id du lecteur suit le nom du modèle
+]
+[(#REM)
+		radioURL (URL à ouvrir (radio, son). Défaut : http://tai-02.egihosting.com/bombayb-256k-mp3.pls)
+		autoStart (Démarrage automatique au chargement de l'URL radio. true ou false. Défaut : true)
+		volume (Décimal de 0 à 1. Défaut : 0.7)
+		pan (Décimal de -1 (gauche) à 1(droite). Défaut : 0)
+		onVolumeChange (Méthode à exécuter lorsque le volume change. Défaut : exécute la méthode "onVolumeChange")
+		onPanChange (Méthode à exécuter lorsque la balance change. Défaut : exécute la méthode "onPanChange")
+		onStop (Méthode à exécuter lorsque la lecture s'arrête. Défaut : exécute la méthode "onStop")
+		onPlay (Méthode à exécuter lorsque la lecture démarre. Défaut : exécute la méthode "onPlay")
+		right ou left ou center pour positionner le lecteur.
+		Exemple :
+		<mod_freeradio10
+		|radioURL=http://www.afrikmedia.com/afrikmedia.ram
+		|autoStart=false
+		|volume=0.6
+		|pan=0.5
+		|onVolumeChange=whenVolumeChange
+		|onPanChange=whenPanChange
+		|onStop=whenStop
+		|onPlay=whenPlay
+		|right>
+		Insère un lecteur FreeRadio : id=10, url de radio=http://www.afrikmedia.com/afrikmedia.ram, démarrage manuel, volume=0.6, balance=0.5 (moitié droite), flottant à droite et qui exécute les méthodes javascript :
+		- whenVolumeChange lorsque le volume change
+		- whenPanChange lorsque la balance change
+		- whenStop lorsque la lecture s'arrête
+		- whenPlay lorsque la lecture débute
+]
+
+#SET{align,(#ENV{radioURL}|trim)}
+#SET{radioURL,(#ENV{radioURL}|trim)}
+#SET{autoStart,(#ENV{autoStart}|trim)}
+#SET{volume,(#ENV{volume}|trim)}
+#SET{pan,(#ENV{pan}|trim)}
+#SET{onVolumeChange,(#ENV{onVolumeChange}|trim)}
+#SET{onPanChange,(#ENV{onPanChange}|trim)}
+#SET{onStop,(#ENV{onStop}|trim)}
+#SET{onPlay,(#ENV{onPlay}|trim)}
+
+<div id="freeradio#ID">
+	<h1>freeradio#ID</h1>
+	<p>Alternative content</p>
+	<p><a href="http://www.adobe.com/go/getflashplayer"><img 
+		src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" 
+		alt="Get Adobe Flash player" />
+		</a>
+	</p>
+</div>
+	
+	
+<script type="text/javascript">	
+	$(function(){
+		var flashvars = {
+			[radioURL:"(#GET{radioURL})",]
+			[autoStart:"(#GET{autoStart})",]
+			[volume:(#GET{volume}),]
+			[pan:(#GET{pan}),]
+			[onVolumeChange:(#GET{onVolumeChange}),]
+			[onPanChange:(#GET{onPanChange}),]
+			[onStop:(#GET{onStop}),]
+			[onPlay:(#GET{onPlay}),]
+			author: "http://lededansdubocal.net"
+		};
+		var params = {
+			wmode: "transparent"
+		};
+		var attributes = {
+			[style:"fr(#ENV{align})",]
+			altContentId: "freeradio#ID"
+		};
+		freeRadio.embedRadio(flashvars, params, attributes);
+	});	
+</script>

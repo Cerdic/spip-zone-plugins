@@ -1,0 +1,54 @@
+<plugin>
+	<nom>FreeRadio</nom>
+	<icon>img_pack/freeRadioLogo.png</icon>
+	<version>1.0</version>
+	<etat>stable</etat>
+	<description>
+{{Un lecteur de radio Web}}
+
+<u>Caract&#233;ristiques :</u>
+-* Le lecteur FreeRadio est &#233;crit en actionscript 3. Il est ins&#233;r&#233; dans la page et ex&#233;cut&#233; gr&#226;ce au plugin Flash Player.
+-* Il permet de lire des flux audios (comme les radios) ou des sons mp3.
+-* Il est ins&#233;r&#233; dans le texte d'un article par un mod&#232;le
+
+
+<u>Mod&#232;le pour ins&#233;rer un lecteur FreeRadio</u>
+<code><mod_freeradioxxx -> ou xxx est l'id que l'on souhaite donner au lecteur
+|radioURL=URL &#224; ouvrir (radio, son) -> par d&#233;faut http://tai-02.egihosting.com/bombayb-256k-mp3.pls
+|autoStart=D&#233;marrage automatique au chargement de l'URL radio. true ou false -> par d&#233;faut true
+|volume=D&#233;cimal de 0 &#224; 1 -> par d&#233;faut 0.7
+|pan=D&#233;cimal de -1 (gauche) &#224; 1(droite) -> par d&#233;faut 0
+|onVolumeChange=M&#233;thode &#224; ex&#233;cuter lorsque le volume change. par d&#233;faut : ex&#233;cute la m&#233;thode "onVolumeChange"
+|onPanChange=M&#233;thode &#224; ex&#233;cuter lorsque la balance change. par d&#233;faut : ex&#233;cute la m&#233;thode "onPanChange"
+|onStop=M&#233;thode &#224; ex&#233;cuter lorsque la lecture s'arr&#234;te. par d&#233;faut : ex&#233;cute la m&#233;thode "onStop"
+|onPlay=M&#233;thode &#224; ex&#233;cuter lorsque la lecture d&#233;marre. par d&#233;faut : ex&#233;cute la m&#233;thode "onPlay"
+|right ou left ou center>
+</code>
+
+<u>Mod&#232;le pour ins&#233;rer un lecteur FreeRadio dans une fen&#234;tre surgissante</u>
+<code><mod_freeradiopopupxxx -> ou xxx est l'id que l'on souhaite donner au lecteur
+|radioURL=URL &#224; ouvrir (radio, son) -> par d&#233;faut http://tai-02.egihosting.com/bombayb-256k-mp3.pls
+|autoStart=D&#233;marrage automatique au chargement de l'URL radio. true ou false -> par d&#233;faut true
+|volume=D&#233;cimal de 0 &#224; 1 -> par d&#233;faut 0.7
+|pan=D&#233;cimal de -1 (gauche) &#224; 1(droite) -> par d&#233;faut 0
+>
+</code>
+
+Tous ces param&#232;tres sont optionnels et peuvent &ecirc;tre utilis&#233;s conjointement (tout ou partie) lors de l'implantation du lecteur dans l'article. 
+
+	</description>
+	<auteur>	<!-- Auteur du plugin -->
+[Frank RUZZIN->mailto:franck@lededansdubocal.net], mai 2011
+	</auteur>
+	<lien>
+-* Plus d'infos ? - [Le dedans du bocal->http://lededansdubocal.net]
+	</lien>
+	<prefix>freeradio</prefix>	
+    <fonctions> <!-- fichier charge au calcul des squelettes (espace public) -->
+		freeradio_mes_fonctions.php
+	</fonctions>
+	<pipeline>	<!-- Définitions des fonctions qui s'insèrent dans les pipelines -->
+		<nom>insert_head</nom>
+		<inclure>freeradio_pipeline.php</inclure>
+	</pipeline>
+</plugin>
