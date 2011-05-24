@@ -1163,6 +1163,12 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 
 	include_spip('inc/distant');
 	
+	// Pour recuperer_fond()
+	// qui est passé en inc/utils en SPIP 2
+	if (spiplistes_spip_est_inferieur_193()) {
+		include_spip('public/assembler');
+	}
+	
 	$patron_html = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], false);
 	$contexte['patron_html'] = $patron_html;
 	

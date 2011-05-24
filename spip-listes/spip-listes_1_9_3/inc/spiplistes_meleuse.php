@@ -471,7 +471,7 @@ function spiplistes_meleuse ($last_time) {
 									_SPIPLISTES_PATRONS_LIEN_DIR . $lien_rappel
 									, array('id_courrier' => $id_courrier
 											, 'id_liste' => $id_liste
-											, '_url' => generer_url_public()
+											, '_url' => generer_url_public('')
 											, 'lang' => $lang
 											, 'd' => $cookie
 											, 'lien_desabo' => ($opt_ajout_lien_desabo == 'oui')
