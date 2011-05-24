@@ -443,6 +443,9 @@ function spiplistes_iso2ascii ($texte, $is_html = false) {
 		'&#8217;' => "'"	// quote
 		, '&#8220;' => '"' // guillemets
 		, '&#8221;' => '"' // guillemets
+		, 'a&#768;' => 'a'
+		, 'e&#769;' => 'e'
+		, 'e&#768;' => 'e'
 		)
 		;
 	if(!$is_html) {

@@ -1,0 +1,45 @@
+[<!-- (#REM)
+*
+* Squelette pour spip-listes
+*
+* CP-20110523
+
+Exemple pour envoyer un article précis. Ici, id_article 38
+Accompagné d'une image (le logo de l'article, ou de la rubrique)
+en incrustation HTML.
+
+Attention: l'exemple est donné pour un fichier PNG
+
+Attention: SPIP >= 2
+
+Voir http://en.wikipedia.org/wiki/Data_URI_scheme
+sur DATA URL sheme
+
+
+// $LastChangedRevision$
+// $LastChangedBy$
+// $LastChangedDate$
+
+Precautions:
+- ne pas envoyer des gabarits de plus de 10Ko
+- ne pas placer de balises html <html><body> ni de fermeture </body></html>
+    ils seront ajoutes automatiquement a l'envoi du mail 
+- mettre les style  CSS directement dans les balises pour etre sur qu'ils
+    seront interpretes (meme par les webmails).
+
+Pour la composition d'un mail au format HTML, consulter :
+- http://www.email-standards.org/
+
+-->]
+<BOUCLE_article(ARTICLES){id_article=1}{0,1}>
+
+#TITRE
+               
+[(#DATE_MODIF|affdate)]
+
+#TEXTE
+
+[----------
+(#NOTES)]
+
+</BOUCLE_article>
