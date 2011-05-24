@@ -20,8 +20,9 @@ function boussole_upgrade($nom_meta_base_version, $version_cible){
 		include_spip('inc/deboussoler');
 		// On ajoute la boussole SPIP par defaut.
 		// Cependant on ne teste ni la validite du fichier xml fourni ni la bonne insertion en bdd
-		$url = boussole_localiser_xml('', 'standard');
-		boussole_ajouter($url, $erreur);
+		$xml = 'http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml';
+		$url = boussole_localiser_xml($xml);
+		list($ok, $message) = boussole_ajouter($url);
 	}
 }
 

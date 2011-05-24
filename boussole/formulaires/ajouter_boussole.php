@@ -31,8 +31,12 @@ function formulaires_ajouter_boussole_traiter_dist(){
 	$mode = _request('mode');
 	$xml = _request('url_boussole');
 
+	// Cas de la boussole SPIP
+	if ($mode == 'standard')
+		$xml = url_absolue('http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml');
+
 	// On fait des verifications dans traiter pour renvoyer les resultats dans le message d'erreur global
-	if (!$url = boussole_localiser_xml($xml, $mode)) {
+	if (!$url = boussole_localiser_xml($xml)) {
 		// Le fichier est introuvable
 		$retour['message_erreur'] = _T('boussole:message_nok_xml_introuvable', array('fichier' => $xml));
 	}
@@ -46,7 +50,7 @@ function formulaires_ajouter_boussole_traiter_dist(){
 			// On insere la boussole dans la base
 			// et on traite le cas d'erreur fichier ($retour['message_erreur']) non conforme
 			// si c'est encore possible apres avoir valide le fichier avec la dtd
-			$ok = boussole_ajouter($url, $message);
+			list($ok, $message) = boussole_ajouter($url);
 		
 			// Determination des messages de retour
 			if (!$ok) {

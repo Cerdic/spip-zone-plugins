@@ -15,13 +15,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // $url	=> url ou path du fichier xml de description de la boussole
 // $erreur	=> message d'erreur deja traduit
-function boussole_ajouter($url, &$message='') {
+function boussole_ajouter($url) {
 
+	// On initialise le message de sortie
+	$message = '';
+	
 	// On recupere les infos du fichier xml de description de la balise
 	$infos = boussole_parser_xml($url);
 	if (!infos OR !$infos['boussole']['alias']){
 		$message = _T('boussole:message_nok_xml_invalide', array('fichier' => $url));
-		return false;
+		return array(false, $message);
 	}
 
 	// On complete les infos de chaque site 
@@ -57,7 +60,7 @@ function boussole_ajouter($url, &$message='') {
 	// -- insertion de la nouvelle liste de sites pour cette boussole
 	if (!$ids = sql_insertq_multi('spip_boussoles', $infos['sites'])) {
 		$message = _T('boussole:message_nok_ecriture_bdd');
-		return false;
+		return array(false, $message);
 	}
 	// -- consignation des informations de mise a jour de cette boussole dans la table spip_meta
 	$infos['boussole']['nbr_sites'] = count($infos['sites']);
@@ -70,7 +73,7 @@ function boussole_ajouter($url, &$message='') {
 	else
 		$message = _T('boussole:message_ok_boussole_ajoutee', array('fichier' => $url));
 	
-	return true;
+	return array(true, $message);
 }
 
 
@@ -104,14 +107,10 @@ function boussole_supprimer($aka_boussole) {
  * @param string $xml
  * @return string
  */
-function boussole_localiser_xml(&$xml, $mode) {
+function boussole_localiser_xml($xml) {
 
 	include_spip('inc/distant');
 	$retour = '';
-
-	// La boussole SPIP
-	if ($mode == 'standard')
-		$xml = url_absolue('http://zone.spip.org/trac/spip-zone/export/HEAD/_galaxie_/boussole.spip.org/boussole_spip.xml');
 
 	// On calcul une url absolue dans tous les cas
 	if (preg_match(",^(http|ftp)://,",$xml))
