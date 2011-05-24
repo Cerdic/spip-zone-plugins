@@ -12,9 +12,9 @@ function exec_spip_thelia_catalogue_dist()
 	}
 
 	if (function_exists('lire_config')) {
-	    $thelia_url = '../'.lire_config('spip_thelia/repadmin_spip_thelia','admin').'/';
+	    $thelia_url = '../'._RACINE_THELIA.lire_config('spip_thelia/repadmin_spip_thelia','admin').'/';
 	} else {
-	    $thelia_url = '../'._THELIA_ADMIN.'/';
+	    $thelia_url = '../'._RACINE_THELIA._THELIA_ADMIN.'/';
 	}
 
 	if (find_in_path($thelia_url)) {
