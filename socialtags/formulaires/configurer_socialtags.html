@@ -39,9 +39,7 @@
 				<legend><:socialtags:cfg_insertion:></legend>
 				<ul>
 					<li>
-						<label for="jsselector">
-							<:socialtags:cfg_selector:>
-						</label>
+						<label for="jsselector"><:socialtags:cfg_selector:></label>
 						<p class="explication"><:socialtags:cfg_inserer:></p>
 						<input type="text" name="jsselector" class="text" id="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" />
 						<div class="explication">
@@ -64,14 +62,10 @@
 				<legend><:socialtags:cfg_badge_fb:></legend>
 				<ul>
 					<li>
-						<p class="explication">
-							<:socialtags:cfg_badge_fb_existe:>
-						</p>
+						<p class="explication"><:socialtags:cfg_badge_fb_existe:></p>
 					</li>
 					<li class="editer_badge">
-						<label for="badge">
-							<:socialtags:cfg_badge_html:>
-						</label>
+						<label for="badge"><:socialtags:cfg_badge_html:></label>
 						<p class="explication"><:socialtags:cfg_badge_html_ajouter_1:>
 							<code>&#35;MODELE{socialtags_badge}</code><:socialtags:cfg_badge_html_ajouter_2:>
 							<code>&lt;socialtags|badge&gt;)</code></p>
@@ -86,8 +80,10 @@
 			</fieldset>
 		</li>
 		<li>
-			<label for="ifreferer"><:socialtags:cfg_referer:></label>
-			<input type="checkbox" name="ifreferer"  class="checkbox" id="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />
+			<div class="choix">
+				<input type="checkbox" name="ifreferer"  class="checkbox" id="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />
+				<label for="ifreferer"><:socialtags:cfg_referer:></label>
+			</div>
 		</li>
 	</ul>
 
