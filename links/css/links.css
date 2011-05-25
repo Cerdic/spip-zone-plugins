@@ -67,6 +67,9 @@ a[href $=".mpeg"], a[href $=".MPEG"],
 a[href $=".mpg"], a[href $=".MPG"],
 a.video { padding-right: 13px; background-image: url(img/video.gif); }
 
+/* Exception previsibles */
+.spip_documents dt a { padding-right: 0; background-image: none; }
+
 /* hreflang */
 a[hreflang]:after { background: transparent; content: "\0000a0(" attr(hreflang) ")"; }
 

@@ -5,7 +5,7 @@
 <lien>http://www.spip-contrib.net/?rubrique1252</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin</auteur>
 <licence>(c) GPL 2011</licence>
-<version>2.2.0</version>
+<version>2.2.1</version>
 <etat>test</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
@@ -24,7 +24,7 @@
 <lien>http://www.spip-contrib.net/?rubrique1252</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin</auteur>
 <licence>(c) GPL 2011</licence>
-<version>2.2.0</version>
+<version>2.2.1</version>
 <etat>test</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
