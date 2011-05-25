@@ -32,10 +32,12 @@ function svp_declarer_tables_principales($tables_principales) {
 		"slogan"		=> "text DEFAULT '' NOT NULL",
 		"categorie"		=> "varchar(100) DEFAULT '' NOT NULL",
 		"tags"			=> "text DEFAULT '' NOT NULL",
-		"version_spip"	=> "varchar(24) DEFAULT '' NOT NULL",
-		"vmax"			=> "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
 		"nbr_sites" 	=> "integer DEFAULT 0 NOT NULL",
-		"popularite"	=> "double DEFAULT '0' NOT NULL"
+		"popularite"	=> "double DEFAULT '0' NOT NULL",
+		"vmax"			=> "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
+		"date_crea"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus ancienne des paquets du plugin
+		"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus recente des paquets du plugin
+		"version_spip"	=> "varchar(24) DEFAULT '' NOT NULL", // union des intervalles des paquets du plugin
 	);
 	
 	$plugins_key = array(

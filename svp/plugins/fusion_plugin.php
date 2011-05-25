@@ -85,7 +85,7 @@ function extraire_bornes($intervalle) {
 	$bornes = array('min' => $borne_vide, 'max' => $borne_vide);
 
 	if ($intervalle
-	AND preg_match(',^[\[\(]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-]*)[\]\)]$,Uis', $intervalle, $matches)) {
+	AND preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,Uis', $intervalle, $matches)) {
 		if ($matches[1]) {
 			$bornes['min']['valeur'] = trim($matches[1]);
 			$bornes['min']['incluse'] = ($intervalle{0} == "[");
@@ -99,9 +99,9 @@ function extraire_bornes($intervalle) {
 	return $bornes;
 }
 
-function contruire_intervalle($bornes) {
-	return ($bornes['min']['incluse'] ? '[' : '(')
+function contruire_intervalle($bornes, $dtd='paquet') {
+	return ($bornes['min']['incluse'] ? '[' : ($dtd=='paquet' ? ']' : '('))
 			. $bornes['min']['valeur'] . ';' . $bornes['max']['valeur']
-			. ($bornes['max']['incluse'] ? ']' : ')');
+			. ($bornes['max']['incluse'] ? ']' : ($dtd=='paquet' ? '[' : ')'));
 }
 ?>

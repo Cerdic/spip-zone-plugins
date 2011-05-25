@@ -253,8 +253,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		// Formatage des informations extraites du plugin pour insertion dans la base SVP
 		$formater = charger_fonction('preparer_sql_' . $_infos['dtd'], 'plugins');
 		if ($champs_aplat = $formater($_infos['plugin'])) {
-			// Eclater les champs recuperer en deux sous tableaux, un par table (plugin, paquet)
-			// Cette fonction disparaitra quand les deux tables seront fusionnees
+			// Eclater les champs recuperes en deux sous tableaux, un par table (plugin, paquet)
 			$champs = eclater_plugin_paquet($champs_aplat);
 
 			$paquet_plugin = true;
@@ -408,6 +407,10 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// Il faut maintenant nettoyer la liste des paquets et plugins qui ont disparus du depot
 	if (count($ids_a_supprimer) > 0)
 		svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions_a_supprimer);
+
+	// On compile maintenant certaines informations des paquets mis a jour dans les plugins
+	// (date de creation, date de modif, version spip...)
+	svp_raffiner_plugins($id_depot);
 	
 	// Calcul des compteurs de paquets, plugins et contributions
 	$nb_paquets = sql_countsel('spip_paquets', 'id_depot=' . sql_quote($id_depot));
@@ -486,6 +489,53 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 	
 	return true;
 }
+
+
+function svp_raffiner_plugins($id_depot) {
+	include_spip('plugins/fusion_plugin');
+
+	// On limite la revue des paquets a ceux des plugins heberges par le depot en cours d'acutalisation
+	if ($ids_plugin = sql_allfetsel('id_plugin', 'spip_depots_plugins', array('id_depot=' . sql_quote($id_depot)))) {
+		// -- on commence donc par recuperer les id des plugins du depot
+		$ids_plugin = array_map('reset', $ids_plugin);
+	
+		// -- on recupere tous les paquets associes aux plugins du depot et on compile les infos
+		$plugin_en_cours = 0;
+		if ($resultats = sql_select('id_plugin, version_spip, date_crea, date_modif', 
+									'spip_paquets', 
+									array(sql_in('id_plugin', $ids_plugin)), array(), 
+									array('id_plugin'))) {
+			while ($paquet = sql_fetch($resultats)) {
+				// On finalise le plugin en cours et on passe au suivant 
+				if ($plugin_en_cours != $paquet['id_plugin']) {
+					// On met a jour le plugin en cours
+					if ($plugin_en_cours != 0)
+						sql_updateq('spip_plugins',
+									$complements,
+									'id_plugin=' . sql_quote($plugin_en_cours));
+					// On passe au plugin suivant
+					$plugin_en_cours = $paquet['id_plugin'];
+					$complements = array('version_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
+				}
+				
+				// On compile les compléments du plugin avec le paquet courant
+				if ($paquet['date_modif'] > $complements['date_modif'])
+					$complements['date_modif'] = $paquet['date_modif'];
+				if (($complements['date_crea'] === 0)
+				OR ($paquet['date_crea'] < $complements['date_crea']))
+					$complements['date_crea'] = $paquet['date_crea'];
+				if ($paquet['version_spip'])
+					if (!$complements['version_spip'])
+						$complements['version_spip'] = $paquet['version_spip'];
+					else
+						fusionner_intervalles($paquet['version_spip'], $complements['version_spip']);
+			}
+		}
+		
+	}
+	return true;
+}
+
 
 function eclater_plugin_paquet($champs_aplat) {
 	return array(
