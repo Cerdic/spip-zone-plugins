@@ -292,14 +292,15 @@ function association_maj_48001()
 	/* cette partie du code s'execute au premier chargement, on n'a pas encore interroge l'utilisateur sur ce qu'il veut faire de ses donnees si il en a  ou il n'a pas voulu faire la maj */
 	if (!_request('valider_association_maj_coordonnees')) {
 		/* on commence par verifier si des informations de la table spip_asso_membres sont potentiellement transferable vers les tables de coordonnees */
-		$presence_donnees = sql_countsel('spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
+		$adresse = sql_countsel('spip_asso_membres', "adresse <> '' OR code_postal <> '' OR ville <> ''");
+		$telephone = sql_countsel('spip_asso_membres', "telephone <> '' OR mobile <> ''");
 
 		/* si on n'a pas de donnees a sauvegarder, on fait la mise a jour sans poser de question */
-		if (!$presence_donnees) {
+		if (! ($adresse AND $telephone)) {
 			$effectuer_maj = true;
 		} else { /* on a des donnees, demander a l'utilisateur ce qu'il veut en faire */
+			echo '<form method="post" action="">';
 			echo '<fieldset><p>'._T('asso:maj_coordonnees_intro').'</p>';
-			echo '<form method="post">';
 			/* on commence par determiner si le plugin Coordonnees est installe */
 			include_spip('inc/plugin');
 			$liste_plugins = liste_plugin_actifs();
@@ -310,49 +311,49 @@ function association_maj_48001()
 			} else { /* le plugin coordonnees est actif */
 				echo '<input type="radio" name="association_maj_coordonnees_traitement_data" value="ignorer">'._T('asso:maj_coordonnees_ignorer').'</input><br/>';
 				echo '<input type="radio" name="association_maj_coordonnees_traitement_data" value="merge" checked="checked">'._T('asso:maj_coordonnees_merge').'</input>';
+				echo "\n<input type='hidden' name='association_maj_adresses' value='$adresse' />";
+				echo "\n<input type='hidden' name='association_maj_telephones' value='$telephone' />";
 			}
 			echo '<p><input type="submit" name="valider_association_maj_coordonnees" value="'._T('asso:effectuer_la_maj').'"/></p>';
-			echo '</form>';
 			echo '<p>'._T('asso:maj_coordonnees_notes').'</p></fieldset>';
+			echo '</form>';
 		}
-	} else { /* l'utilisateur veut effectuer la maj, on controlle si il y a des precision quand a l'ecrasement de donnees existentes */
+	} else { /* l'utilisateur veut effectuer la maj, on controle si il y a des precision quand a l'ecrasement de donnees existentes */
 			$choix_donnees = _request('association_maj_coordonnees_traitement_data');
 			if ($choix_donnees == "merge") { /* on integre les donnees d'association dans Coordonnees */
 				include_spip('action/editer_numero');
 				include_spip('action/editer_adresse');
-				$nbr_adresses = 0;
-				$nbr_numeros = 0;
 
-				set_request("objet", "auteur"); /* parceque les fonction insert_numero et insert_adresse de Coordonnees recupere par un request cette valeur pour l'insertion dans la table de liens */
-				
-				/* On recupere toutes les coordonnees */
-				$coordonnees_membres = sql_select('id_auteur, adresse, code_postal, ville, telephone, mobile', 'spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
+				/* pre-remplissage pour les fonctions insert_numero et insert_adresse de Coordonnees */
+				$liens = array('objet' => 'auteur'); 
+				$telephone = array('titre' => 'telephone');
+				$mobile = array('titre' => 'mobile');
+
+				/* On recupere les coordonnees utiles */
+				$coordonnees_membres = sql_select('id_auteur, adresse AS voie, code_postal, ville, telephone, mobile', 'spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
 				while ($data = sql_fetch($coordonnees_membres)) {
-					set_request("id_objet", $data['id_auteur']); /* parceque les fonction insert_numero et insert_adresse de Coordonnees recupere par un request cette valeur pour l'insertion dans la table de liens */
-
-					/* si on a une adresse, meme partielle */
-					if (($data['adresse'] != '') or ($data['code_postal'] != '') or ($data['ville'] != '')) {
-						$id_adresse = insert_adresse();
-						if ($id_adresse) revisions_adresses($id_adresse, array("voie" => $data['adresse'], "code_postal" => $data['code_postal'], "ville" => $data['ville']));
-						$nbr_adresses++;
-						
-					}
+					$liens['id_objet'] = $data['id_auteur']; 
+					unset($data['id_auteur']); 
 
 					/* si on a un numero de telephone */
-					if ($data['telephone'] != '') {
-						$id_numero = insert_numero();
-						if ($id_numero) revisions_numeros($id_numero, array("titre" => "telephone", "numero" => $data['telephone']));
-						$nbr_numeros++;
+					if ($telephone['numero'] = $data['telephone']) {
+						if ($id_numero =  insert_numero($liens)) revisions_numeros($id_numero, $telephone);
 					}
+					unset($data['telephone']); 
 
 					/* si on a un numero de mobile */
-					if ($data['mobile'] != '') {
-						$id_numero = insert_numero();
-						if ($id_numero) revisions_numeros($id_numero, array("titre" => "mobile", "numero" => $data['mobile']));
-						$nbr_numeros++;
+					if ($mobile['numero'] = $data['mobile']) {
+						if ($id_numero = insert_numero($liens)) revisions_numeros($id_numero, $mobile);
+					}
+					unset($data['mobile']); 
+
+					/* si on a une adresse, meme partielle */
+					if ($data['voie'] OR $data['code_postal'] OR $data['ville']) {
+						if ($id_adresse = insert_adresse($liens)) revisions_adresses($id_adresse, $data);
 					}
 				}
-				echo "<fieldset><p>".$nbr_adresses._T('asso:maj_coordonnees_adresses_inserees').'<br/>'.$nbr_numeros._T('asso:maj_coordonnees_numeros_inseres')."</p></fieldset>";
+				echo "\n<fieldset>", intval(_request('association_maj_adresses')), _T('asso:maj_coordonnees_adresses_inserees'),
+				  '<br/>', intval(_request('association_maj_telephones')), _T('asso:maj_coordonnees_numeros_inseres'), "\n</fieldset>";
 			}
 
 			$effectuer_maj = true;
