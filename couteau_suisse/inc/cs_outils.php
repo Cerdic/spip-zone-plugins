@@ -33,7 +33,9 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 		if(!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
 		if(strpos($outil['nom'], '<:')!==false)
 			$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
-		if(isset($outil['surcharge']) || function_exists($outil_.'_installe')) $outil['nom'] = $outil['nom'].' *';
+		// $outil['surcharge'] n'est pas encore renseigne si la fonction d'installation est surchargee
+		if(isset($outil['surcharge']) || (function_exists($outil_.'_installe') && $outil['surcharge']=1))
+			$outil['nom'] = $outil['nom'].' *';
 		if(isset($outil['perso'])) $outil['nom'] = '<i>'.$outil['nom'].'</i>';
 		if(isset($outil['code:jq'])) $outil['jquery']='oui';
 		$outil['actif'] = isset($metas_outils[$outil['id']])?@$metas_outils[$outil['id']]['actif']:0;
@@ -204,12 +206,12 @@ function detail_outil($outil_id) {
 	if(preg_match_all(',(pipeline|pipelinecode):([a-z_]+),', $serkeys, $regs, PREG_PATTERN_ORDER))
 		$details[] = _T('couteauprive:detail_pipelines') . ' ' . join(', ', array_unique($regs[2]));
 	if($outil['nb_disabled']) $details[] = _T('couteauprive:detail_disabled') . ' ' . $outil['nb_disabled'];
-	if($outil['surcharge']) $details[] = _T('couteauprive:detail_surcharge') . ' ' . _T('item_oui');
 	if(isset($outil['fichiers_distants'])) {
 		$a = array();
 		foreach($outil['fichiers_distants'] as $i) $a[] = basename($outil[$i]);
 		$details[] = _T('couteauprive:detail_fichiers_distant') . ' ' . join(', ', $a);
 	}
+	if($outil['surcharge']) $details[] = '* ' . _T('couteauprive:detail_surcharge') . ' ' . _T('item_oui');
 	if(count($details)) return $div . join('<br />', $details) . '</div>';
 	return '';
 }
