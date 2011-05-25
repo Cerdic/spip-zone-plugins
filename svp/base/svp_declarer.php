@@ -32,6 +32,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"slogan"		=> "text DEFAULT '' NOT NULL",
 		"categorie"		=> "varchar(100) DEFAULT '' NOT NULL",
 		"tags"			=> "text DEFAULT '' NOT NULL",
+		"version_spip"	=> "varchar(24) DEFAULT '' NOT NULL",
 		"vmax"			=> "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
 		"nbr_sites" 	=> "integer DEFAULT 0 NOT NULL",
 		"popularite"	=> "double DEFAULT '0' NOT NULL"
@@ -132,6 +133,7 @@ function svp_declarer_tables_interfaces($interface) {
 function svp_rechercher_liste_des_champs($tables) {
 	// On déclare les champs de recherche dans les tables plugins et paquets
 	// -- Table spip_plugins
+	$tables['plugin']['prefixe'] = 8;
 	$tables['plugin']['nom'] = 8;
 	$tables['plugin']['slogan'] = 4;
 	// -- Table spip_paquets
