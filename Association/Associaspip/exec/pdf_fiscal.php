@@ -43,6 +43,11 @@ function exec_pdf_fiscal()
   } else {
 		if (!preg_match('/^\d{4}$/', $annee)) $annee = date('Y') - 1;
 		$montants = sql_getfetsel('SUM(recette) AS montant', "spip_asso_comptes", "id_journal=$id_auteur AND vu AND date_format( date, '%Y' ) = $annee AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']));
+
+		$montants += sql_getfetsel('sum(D.argent) AS montant',
+				      "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don",
+				      'C.imputation=' . sql_quote($GLOBALS['association_metas']['pc_dons']) . " AND C.vu AND date_format( D.date_don, '%Y' ) = $annee AND id_adherent=$id_auteur");
+
 		if (!$montants)
 		  {echo "Versement en $annee pour l'adherent de mail $mail: $montants";}
 		else {
