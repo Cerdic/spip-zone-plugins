@@ -26,7 +26,7 @@ function action_editer_numero_dist($arg=null) {
 }
 
 
-function insert_numero() {
+function insert_numero($c = '') {
 	$champs = array(
 		'numero' => _T('coordonnees:item_nouvel_email')
 	);
@@ -41,17 +41,16 @@ function insert_numero() {
 	
 	$id_numero = sql_insertq("spip_numeros", $champs);
 
+	if (!$c) 
+		$c = array('objet' => _request('objet'),
+			'id_objet' => _request('id_objet'),
+			'type' => _request('type'));
+
 	// ajouter la liaison si presente
-	if ($objet = _request('objet')
-		and $id_objet = _request('id_objet')
-	) {
-		$type = _request('type') ? _request('type') : '';
-		sql_insertq("spip_numeros_liens", array(
-			'id_numero' => $id_numero,
-			'objet' => $objet,
-			'id_objet' => $id_objet,
-			'type' => $type
-		));
+	if (!empty($c['objet']) AND !empty($c['id_objet'])) {
+		if (empty($c['type'])) $c['type'] = '';
+		$c['id_numero'] = $id_numero;
+		sql_insertq("spip_numeros_liens", $c);
 	}
 	
 	return $id_numero;
