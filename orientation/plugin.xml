@@ -1,33 +1,15 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Orientation des images: portrait ou paysage
-</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) &#38; IZO</auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	test
-	</etat>
-	<description>
-Le plugin orientation ajoute les crit&#232;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos.
+	<nom>Orientation</nom>
+	<auteur>Pierre Andrews (Mortimer) &#38; IZO</auteur>
+	<version>0.2.0</version>
+	<icon>orientation-32.png</icon>
+	<etat>stable</etat>
+	<description>Orientation des images: portrait ou paysage
+_ Le plugin orientation ajoute les crit&#232;res <code>{portrait}</code>, <code>{carre}</code> et <code>{paysage}</code> pour le classement des photos.
 	</description>
-	<lien>http://www.spip-contrib.net/Portrait-ou-Paysage</lien> <!-- URI de documentation -->
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<fonctions>
-	orientation.php
-	</fonctions>
-	<prefix> 
-	orientation
-	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
-
+	<lien>http://www.spip-contrib.net/Portrait-ou-Paysage</lien>
+	<fonctions>orientation.php</fonctions>
+	<prefix>orientation</prefix>
 	<necessite id="SPIP" version="[1.9.0;]" />
-	<categorie>multimedia</categorie>
+	<categorie>outils</categorie>
 </plugin>
