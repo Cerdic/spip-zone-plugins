@@ -1169,7 +1169,9 @@ add_outil( array(
 	'code:options' => "%%insertions%%",
 	// sans oublier les articles, les breves, les forums et les rubriques !
 	// SPIP ne considere pas que la premiere definition est un tronc commun :
-	'traitement:TEXTE:pre_propre,
+	'traitement:CHAPO:pre_propre,
+	 traitement:PS:pre_propre,
+	 traitement:TEXTE:pre_propre,
 	 traitement:TEXTE/articles:pre_propre,
 	 traitement:TEXTE/breves:pre_propre,
 	 traitement:TEXTE/forums:post_propre,
