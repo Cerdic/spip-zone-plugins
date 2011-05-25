@@ -323,11 +323,13 @@ function association_maj_48001()
 			if ($choix_donnees == "merge") { /* on integre les donnees d'association dans Coordonnees */
 				include_spip('action/editer_numero');
 				include_spip('action/editer_adresse');
+				include_spip('inc/modifier');
 
 				/* pre-remplissage pour les fonctions insert_numero et insert_adresse de Coordonnees */
 				$liens = array('objet' => 'auteur'); 
 				$telephone = array('titre' => 'telephone');
 				$mobile = array('titre' => 'mobile');
+				$invalideur = array('invalideur' => 0);
 
 				/* On recupere les coordonnees utiles */
 				$coordonnees_membres = sql_select('id_auteur, adresse AS voie, code_postal, ville, telephone, mobile', 'spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
@@ -337,19 +339,28 @@ function association_maj_48001()
 
 					/* si on a un numero de telephone */
 					if ($telephone['numero'] = $data['telephone']) {
-						if ($id_numero =  insert_numero($liens)) revisions_numeros($id_numero, $telephone);
+						if ($id_numero =  insert_numero($liens)) {
+							$invalideur['invalideur'] = "id='id_numero/$id_numero'";
+							modifier_contenu('numero', $id_numero, $invalideur, $telephone);
+						}
 					}
 					unset($data['telephone']); 
 
 					/* si on a un numero de mobile */
 					if ($mobile['numero'] = $data['mobile']) {
-						if ($id_numero = insert_numero($liens)) revisions_numeros($id_numero, $mobile);
+						if ($id_numero = insert_numero($liens)) {
+							$invalideur['invalideur'] = "id='id_numero/$id_numero'";
+							modifier_contenu('numero', $id_numero, $invalideur, $mobile);
+						}
 					}
 					unset($data['mobile']); 
 
 					/* si on a une adresse, meme partielle */
 					if ($data['voie'] OR $data['code_postal'] OR $data['ville']) {
-						if ($id_adresse = insert_adresse($liens)) revisions_adresses($id_adresse, $data);
+						if ($id_adresse = insert_adresse($liens)) {
+							$invalideur['invalideur'] = "id='id_adresse/$id_adresse'";
+							modifier_contenu('adresse', $id_adresse, $invalideur, $data);
+						}
 					}
 				}
 				echo "\n<fieldset>", intval(_request('association_maj_adresses')), _T('asso:maj_coordonnees_adresses_inserees'),
