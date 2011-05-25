@@ -296,7 +296,7 @@ function association_maj_48001()
 		$telephone = sql_countsel('spip_asso_membres', "telephone <> '' OR mobile <> ''");
 
 		/* si on n'a pas de donnees a sauvegarder, on fait la mise a jour sans poser de question */
-		if (! ($adresse AND $telephone)) {
+		if (! ($adresse OR $telephone)) {
 			$effectuer_maj = true;
 		} else { /* on a des donnees, demander a l'utilisateur ce qu'il veut en faire */
 			echo '<form method="post" action="">';
@@ -334,7 +334,7 @@ function association_maj_48001()
 				/* On recupere les coordonnees utiles */
 				$coordonnees_membres = sql_select('id_auteur, adresse AS voie, code_postal, ville, telephone, mobile', 'spip_asso_membres', "adresse <> '' OR mobile <> '' OR code_postal <> '' OR ville <> '' OR telephone <> ''");
 				while ($data = sql_fetch($coordonnees_membres)) {
-					$liens['id_objet'] = $data['id_auteur']; 
+					$liens['id_objet'] = $data['id_auteur'];
 					unset($data['id_auteur']); 
 
 					/* si on a un numero de telephone */
