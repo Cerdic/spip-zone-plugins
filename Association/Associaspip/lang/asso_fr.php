@@ -460,6 +460,7 @@ Commentaire: @commentaire@
 		# Navigation
 			'plan_nav_ajouter' => 'Ajouter une r&eacute;f&eacute;rence comptable',
 			'operations_comptables' => 'Op&eacute;rations comptables',
+			'liens_vers_les_justificatifs' => 'Liens vers les justificatifs',
 		
 		#Libelle
 			'plan_libelle_comptes_actifs' => 'Comptes actifs',

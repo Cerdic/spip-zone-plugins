@@ -76,7 +76,7 @@ function exec_voir_adherent(){
 		
 		 debut_cadre_relief(  "", false, "", $titre = $nom_membre);
 
-		 echo _L('Liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
+		 echo _T('asso:liens_vers_les_justificatifs'), ' ', voir_adherent_recus($id_auteur), '<br /><br />';
 
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
