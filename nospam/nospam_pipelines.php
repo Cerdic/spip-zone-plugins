@@ -1,16 +1,23 @@
 <?php
 /**
  * Plugin No-SPAM
- * (c) 2008 Cedric Morin Yterium.net
+ * (c) 2008-2011 Cedric Morin Yterium.net
  * Licence GPL
  *
  */
 
-// pour verifier le nobot et le jeton sur un formulaire, l'ajouter a cette globale
-$GLOBALS['formulaires_no_spam'][] = 'forum';
-$GLOBALS['formulaires_no_spam'][] = 'ecrire_auteur';
-$GLOBALS['formulaires_no_spam'][] = 'signature';
-
+/**
+ * Lister les formulaires a prendre en charge contre le SPAM
+ * pour verifier le nobot et le jeton sur un formulaire, l'ajouter a cette liste
+ * par le pipeline nospam_lister_formulaires
+ * @return void
+ */
+function nospam_lister_formulaires(){
+	if (!isset($GLOBALS['formulaires_no_spam']))
+		$GLOBALS['formulaires_no_spam'] = array();
+	$formulaires = array_merge($GLOBALS['formulaires_no_spam'],array('forum','ecrire_auteur','signature'));
+	return pipeline('nospam_lister_formulaires',$formulaires);
+}
 
 /**
  * Ajouter le champ de formulaire 'nobot' au besoin
@@ -23,7 +30,7 @@ function nospam_recuperer_fond($flux){
 	$fond = strval($flux['args']['fond']);
 	if (false !== $pos = strpos($fond, 'formulaires/')) {
 		$form = substr($fond, $pos + 12);
-		if (in_array($form, $GLOBALS['formulaires_no_spam'])){
+		if (in_array($form, nospam_lister_formulaires())){
 			// on ajoute le champ 'nobot' si pas present dans le formulaire
 			$texte = &$flux['data']['texte'];
 			if ((false === strpos($texte, 'name="nobot"'))
@@ -44,7 +51,7 @@ function nospam_recuperer_fond($flux){
  */
 function nospam_formulaire_charger($flux){
 	$form = $flux['args']['form'];
-	if (in_array($form, $GLOBALS['formulaires_no_spam'])){
+	if (in_array($form, nospam_lister_formulaires())){
 		include_spip("inc/nospam");
 		$jeton = creer_jeton($form);
 		$flux['data']['_hidden'] .= "<input type='hidden' name='_jeton' value='$jeton' />";
@@ -60,7 +67,7 @@ function nospam_formulaire_charger($flux){
  */
 function nospam_formulaire_verifier($flux){
 	$form = $flux['args']['form'];
-	if (in_array($form, $GLOBALS['formulaires_no_spam'])){
+	if (in_array($form, nospam_lister_formulaires())){
 		include_spip("inc/nospam");
 		$jeton = _request('_jeton');
 		// le jeton prend en compte l'heure et l'ip de l'internaute
