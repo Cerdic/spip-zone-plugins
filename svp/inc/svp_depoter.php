@@ -528,7 +528,7 @@ function svp_raffiner_plugins($id_depot) {
 					if (!$complements['version_spip'])
 						$complements['version_spip'] = $paquet['version_spip'];
 					else
-						fusionner_intervalles($paquet['version_spip'], $complements['version_spip']);
+						$complements['version_spip'] = fusionner_intervalles($paquet['version_spip'], $complements['version_spip']);
 			}
 		}
 		
