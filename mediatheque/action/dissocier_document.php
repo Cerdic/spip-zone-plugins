@@ -13,9 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-function action_dissocier_document_dist(){
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_dissocier_document_dist($arg=null){
+	if(is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 	$arg = explode('-',$arg);
 

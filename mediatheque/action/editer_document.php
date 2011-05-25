@@ -12,10 +12,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *
  * @return unknown
  */
-function action_editer_document_dist() {
+function action_editer_document_dist($arg=null) {
 
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+	if(is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 	// Envoi depuis le formulaire de creation d'un document
 	if (!$id_document = intval($arg)) {

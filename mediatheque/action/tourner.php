@@ -13,9 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@action_tourner_dist
-function action_tourner_dist() {
-	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$arg = $securiser_action();
+function action_tourner_dist($arg=null) {
+	if(is_null($arg)){
+		$securiser_action = charger_fonction('securiser_action', 'inc');
+		$arg = $securiser_action();
+	}
 
 	if (!preg_match(",^\W*(\d+)\W?(-?\d+)$,", $arg, $r)) {
 		spip_log("action_tourner_dist $arg pas compris");
