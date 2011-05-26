@@ -2,6 +2,7 @@
 <nom>WDiaporama</nom>
 <etat>stable</etat>
 <version>3.0</version>
+<lien>http://www.spip-contrib.net/spip.php?article3850</lien>
 <description>Gestion de diaporama innerfade &agrave; partir d'images jointes</description>
 <prefix>wdiaporama</prefix>
 <fonctions>wdiaporama_fonctions.php</fonctions>
