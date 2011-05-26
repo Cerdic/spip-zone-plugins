@@ -1,0 +1,29 @@
+<style>
+ul.menu-zcommerce{margin:0;padding:0;list-style-type:none;text-transform:lowercase;}
+.menu-zcommerce li{display: inline; margin-right:1.2em;}
+#contenu_zcommerce{margin-top:2em;}
+</style>
+
+<INCLURE{fond=inclure/menuzcommerce}{env}>
+
+<div id="contenu_zcommerce">
+
+	[(#ENV{appel}|=={"sinscrire"}|oui)
+		<h1><:vos_coordonnees:></h1>
+		<div class="ajax">#FORMULAIRE_INSCRIPTION_CLIENT</div>
+	]
+	
+	[(#ENV{appel}|=={"monpanier"}|oui)
+		<h1><:paniers:mon_panier:></h1>
+		<div class="ajax">#FORMULAIRE_PANIER</div>
+	]
+	
+	[(#ENV{appel}|=={"moncompte"}|oui)
+		<INCLURE{fond=inclure/editer_client}{env}>
+	]
+	
+	[(#ENV{appel}|=={"laboutique"}|oui)
+		<INCLURE{fond=inclure/les_produits}{env}>
+	]
+
+</div>

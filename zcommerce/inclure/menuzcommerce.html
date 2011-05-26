@@ -1,0 +1,30 @@
+<div>
+
+<ul class="menu-zcommerce">
+	<li> 
+		<a href="[(#SELF|parametre_url{appel,laboutique})]">la boutique</a>
+	</li>
+	<li> 
+		<a href="[(#SELF|parametre_url{appel,monpanier})]">mon panier</a>
+	</li>
+
+[(#SESSION{id_auteur}|oui)
+	<li> 
+		<a href="[(#SELF|parametre_url{appel,moncompte}|parametre_url{id_auteur,#SESSION{id_auteur}})]">mon compte</a> 
+	</li>
+	<li> 
+		<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>
+	</li>
+]
+
+[(#SESSION{id_auteur}|non)
+	<li> 
+		<a href="[(#SELF|parametre_url{appel,moncompte})]"><:lien_connecter:></a>
+	</li> 
+	<li> 
+		<a href="[(#SELF|parametre_url{appel,sinscrire})]">s'inscrire</a> 
+	<li> 
+]
+</ul>
+
+</div>

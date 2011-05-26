@@ -1,0 +1,8 @@
+[(#SESSION{id_auteur}|oui)
+<h1><:modifiez_vos_coordonnees:></h1>
+#FORMULAIRE_EDITER_CLIENT{#SESSION{id_auteur}}
+]
+
+[(#SESSION{id_auteur}|non)
+[(#FORMULAIRE_LOGIN{[(#SELF|parametre_url{id_auteur,#SESSION{id_auteur}})]})]
+]
