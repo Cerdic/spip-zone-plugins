@@ -265,11 +265,13 @@ function spiplistes_courrier_version_texte($in) {
 
 /**
  * Ajouter les abonnes d'une liste a un envoi
- * @param : $id_courrier : reference d'un envoi
- * @param $id_liste : reference d'une liste
+ * @param int $id_courrier reference d'un envoi
+ * @param int $id_liste reference d'une liste
+ * @param int $id_auteur
  * @return bool
  */
 function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste, $id_auteur = 0) {
+	
 	$id_courrier = intval($id_courrier);
 	$id_liste = intval($id_liste);
 	
@@ -284,7 +286,8 @@ function spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste, $id_
 		if($id_liste > 0) {
 			// prendre la liste des abonnes a cette liste
 			$ids_abos = spiplistes_listes_liste_abo_ids($id_liste);
-			if(count($ids_abos)) {
+			if(count($ids_abos))
+			{
 				$sql_where_q = "(".implode(",", array_map("sql_quote", $ids_abos)).")";
 				$sql_result = sql_select('id_auteur', 'spip_auteurs', "id_auteur IN $sql_where_q", ''
 					, array('id_auteur'));

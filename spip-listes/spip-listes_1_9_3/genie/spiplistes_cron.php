@@ -191,10 +191,11 @@ function cron_spiplistes_cron ($last_time) {
 					);
 			}
 	
-			/////////////////////////////
-			// preparation du courrier a placer dans le panier (spip_courriers)
-			// en cas de periode, la date est dans le passe'
-			// pour avoir les elements publies depuis cette date
+			/**
+			 * preparation du courrier a placer dans le panier (spip_courriers)
+			 * en cas de periode, la date est dans le passe'
+			 * pour avoir les elements publies depuis cette date
+			 */
 			if (
 				empty($titre_message)
 				&& (spiplistes_pref_lire_defaut('opt_completer_titre_nom_site', 'oui') == 'oui')
@@ -208,16 +209,24 @@ function cron_spiplistes_cron ($last_time) {
 			
 			spiplistes_debug_log ($prefix_log.'utiliser patron '._SPIPLISTES_PATRONS_DIR.$patron);
 			
+			/**
+			 * Assemble le patron
+			 * Obtient en retour le contenu en version html et texte
+			 */
 			list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
 				_SPIPLISTES_PATRONS_DIR . $patron
 				, array('date' => $dernier_envoi, 'patron'=>$patron, 'lang'=>$lang));
 			
-			//$taille_courrier_ok = (($n = spiplistes_strlen(spiplistes_courrier_version_texte($courrier_html))) > 10);
 			$taille_courrier_ok = (($n = strlen($courrier_texte)) > 10);
 			
 			spiplistes_debug_log($prefix_log.'taille courrier pour la liste #'.$id_liste.' : '.$n);
 
-			if($taille_courrier_ok) {
+			/**
+			 * Si la taille du courrier est OK
+			 * corriger les URLs
+			 * Sinon, passer le courrier en statut 'vide'
+			 */
+			if ($taille_courrier_ok) {
 				include_spip('inc/filtres');
 				$courrier_html = spiplistes_liens_absolus ($courrier_html);
 				$date_debut_envoi = $date_fin_envoi = "''";
@@ -229,7 +238,9 @@ function cron_spiplistes_cron ($last_time) {
 				spiplistes_debug_log($prefix_log.'courrier vide');
 			}
 
-			// Place le courrier dans le casier
+			/**
+			 * Place le courrier dans le casier
+			 */
 			$id_courrier = sql_insert(
 				'spip_courriers'
 				,	'('
@@ -261,7 +272,7 @@ function cron_spiplistes_cron ($last_time) {
 			if($taille_courrier_ok) {
 				// place les etiquettes
 				// (ajout des abonnes dans la queue (spip_auteurs_courriers))
-				spiplistes_courrier_remplir_queue_envois($id_courrier, $id_liste);
+				spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste);
 			} 
 		} // end while // fin traitement des listes
 	}	

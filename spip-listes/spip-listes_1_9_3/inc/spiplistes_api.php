@@ -1178,7 +1178,10 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 		: ''
 		;
 	
-	// chercher si un patron version texte existe
+	/**
+	 * Calculer le contenu texte à partir
+	 * du {patron}_texte s'il existe
+	 */
 	$patron_texte = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], true);
 	unset($contexte['patron_html']);
 	$contexte['patron_texte'] = $patron_texte;
@@ -1196,8 +1199,10 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 			$texte_ok = true;
 		}
 	}
-	// si version texte manque, la calculer
-	// a partir de la version html
+	/**
+	 * si {patron}_texte manque, ou vide,
+	 * calculer a partir de la version html
+	 */
 	if (!$texte_ok) {
 		$result_texte = spiplistes_courrier_version_texte($result_html);
 	}

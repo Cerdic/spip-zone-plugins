@@ -259,8 +259,11 @@ function spiplistes_meleuse ($last_time) {
 				: spiplistes_courrier_version_texte($page_html)
 				;
 			
-			////////////////////////////////////
-			// Ajoute lien tete de courrier
+			/**
+			 * Ajouter le lien de courrier
+			 * en tête du courrier
+			 * si demandé en page de configuration
+			 */
 			if(
 				($opt_lien_en_tete_courrier == 'oui') 
 				&& !empty($lien_patron)
@@ -274,12 +277,11 @@ function spiplistes_meleuse ($last_time) {
 				$page_texte = $lien_texte . $page_texte;
 			}
 
-			////////////////////////////////////
-			// La petite ligne du renvoi du cookie pour modifier son abonnement
-			//$pied_rappel_html = _T('spiplistes:modif_abonnement_html');
-			//$pied_rappel_texte = _T('spiplistes:modif_abonnement_text');
-			
-			// transcrire le contenu
+			/**
+			 * transcrire le contenu
+			 * dans le charset souhaité
+			 * indiqué en page de configuration
+			 */
 			if ($charset_dest != $charset_spip)
 			{
 				spiplistes_debug_log ('TRANSLATION '.$charset_spip.' TO '.$charset_dest);
@@ -302,7 +304,10 @@ function spiplistes_meleuse ($last_time) {
 				}
 			}
 			
-			// corrige les liens relatifs (celui de texte a deja ete corrige par la trieuse (cron)
+			/**
+			 * corrige les liens relatifs
+			 * (celui de texte a deja ete corrige par la trieuse (cron)
+			 */
 			foreach(array('pied_html', 'pied_texte'
 				//, 'pied_rappel_html', 'pied_rappel_texte'
 				, 'tampon_html', 'tampon_texte') as $key) {
@@ -312,7 +317,9 @@ function spiplistes_meleuse ($last_time) {
 			}
 
 			/**
-			 * Adapter le CSS
+			 * Adapter le CSS produit par SPIP
+			 * (les class spip-center, etc.
+			 * sont remplacées par style en inline)
 			 */
 			foreach(array(
 				  'objet_html'
