@@ -9,7 +9,7 @@ function urledit_affiche_milieu($flux){
 	}
 	if ($flux["args"]["id_article"] and $exec=='articles') {
 		$type_objet = 'article';
-		$id_objet = $flux["args"]["id_article"];				
+		$id_objet = $flux["args"]["id_article"];
 	}
 	if ($flux["args"]["id_breve"] and $exec=='breves_voir') {
 		$type_objet = 'breve';
@@ -27,8 +27,12 @@ function urledit_affiche_milieu($flux){
 		$type_objet = 'syndic';
 		$id_objet = $flux["args"]["id_syndic"];
 	}
+	if ($flux["args"]["id_evenement"] and $exec=='evenements_edit') {
+		$type_objet = 'evenement';
+		$id_objet = $flux["args"]["id_evenement"];
+	}
   // --------------
-	if (in_array($type_objet,array('article','rubrique','breve','auteur','mot','syndic'))) {
+	if (in_array($type_objet,array('article','rubrique','breve','auteur','mot','syndic','evenement'))) {
 		include_spip('inc/urledit');
 		include_spip('urls/propres');
 		include_spip('inc/autoriser');  
