@@ -295,7 +295,7 @@ function spiplistes_meleuse ($last_time) {
 					, 'tampon_html', 'tampon_texte') as $key) 
 				{
 					if(!empty($$key)) {
-						$$key = spiplistes_translate_2_charset(
+						$$key = spiplistes_translate_2_charset (
 							$$key
 							, $charset_dest
 							, (strpos($key, 'texte') === false)
@@ -458,13 +458,15 @@ function spiplistes_meleuse ($last_time) {
 							if($from_valide) {
 								//$_url = generer_url_public('abonnement','d='.$cookie);
 								
-								if($opt_personnaliser_courrier == 'oui') {
-									list($ventre_html, $ventre_texte) = spiplistes_personnaliser_courrier(
-																			$page_html
-																			, $page_texte
-																			, $id_auteur
-																			, $format_abo
-																		);
+								if($opt_personnaliser_courrier == 'oui')
+								{
+									list($ventre_html, $ventre_texte) =
+										spiplistes_personnaliser_courrier (
+																$page_html
+																, $page_texte
+																, $id_auteur
+																, $format_abo
+															);
 								}
 								else {
 									$ventre_html = $page_html;
@@ -481,10 +483,10 @@ function spiplistes_meleuse ($last_time) {
 								 * Rajoute le lien si la pseudo
 								 * balise _COOKIE_ABONNE_ est absente du courrier
 								 */
-								$new_html = spiplistes_personnaliser_cookie (
+								$new_ventre = spiplistes_personnaliser_cookie (
 										$ventre_html
 										, $cookie);
-								if ($new_html === FALSE)
+								if ($new_ventre === FALSE)
 								{
 									/**
 									 * Pour le moment (27/03/2011), un seul patron connu
@@ -506,10 +508,23 @@ function spiplistes_meleuse ($last_time) {
 																						 , true);
 								}
 								else {
-									$ventre_html = $new_html;
-									$ventre_texte = spiplistes_personnaliser_cookie (
+									$ventre_html = $new_ventre;
+									/**
+									 * Calculer la version texte
+									 * Si pas de {patron}_texte, le _COOKIE_ABONNE_
+									 * n'existe plus, car strip_tags a enlevé
+									 * le lien <a> de la version html.
+									 * Solution: créer le {patron}_texte
+									 */
+									$new_ventre = spiplistes_personnaliser_cookie (
 										$ventre_texte
 										, $cookie);
+									if ($new_ventre === FALSE) {
+										spiplistes_log('main patron text version MISSING');
+									}
+									else {
+										$ventre_texte = $new_ventre;
+									}
 								}
 							
 								switch($format_abo) {
