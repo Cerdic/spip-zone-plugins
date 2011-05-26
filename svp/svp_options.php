@@ -36,7 +36,7 @@ define('_SVP_REGEXP_BALISE_PAQUET', '#<paquet[^>]*>(.*)</paquet>#Uims');
 // Version SPIP minimale quand un plugin ne le precise pas
 define('_SVP_VERSION_SPIP_MIN', '1.9.0');
 // Intervalles de compatibilite SPIP
-define('_SVP_COMPATIBILITE_SPIP_TOUT', '[1.9.0;)');
-define('_SVP_COMPATIBILITE_SPIP_NA', '(;)');
+define('_SVP_COMPATIBILITE_SPIP_TOUT', '[1.9.0;[');
+define('_SVP_COMPATIBILITE_SPIP_NA', '];[');
 
 ?>

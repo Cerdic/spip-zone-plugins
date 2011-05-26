@@ -501,7 +501,7 @@ function svp_completer_plugins($id_depot) {
 	
 		// -- on recupere tous les paquets associes aux plugins du depot et on compile les infos
 		$plugin_en_cours = 0;
-		if ($resultats = sql_select('id_plugin, version_spip, date_crea, date_modif', 
+		if ($resultats = sql_select('id_plugin, compatibilite_spip, date_crea, date_modif', 
 									'spip_paquets', 
 									array(sql_in('id_plugin', $ids_plugin)), array(), 
 									array('id_plugin'))) {
@@ -515,7 +515,7 @@ function svp_completer_plugins($id_depot) {
 									'id_plugin=' . sql_quote($plugin_en_cours));
 					// On passe au plugin suivant
 					$plugin_en_cours = $paquet['id_plugin'];
-					$complements = array('version_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
+					$complements = array('compatibilite_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
 				}
 				
 				// On compile les compléments du plugin avec le paquet courant
@@ -524,11 +524,11 @@ function svp_completer_plugins($id_depot) {
 				if (($complements['date_crea'] === 0)
 				OR ($paquet['date_crea'] < $complements['date_crea']))
 					$complements['date_crea'] = $paquet['date_crea'];
-				if ($paquet['version_spip'])
-					if (!$complements['version_spip'])
-						$complements['version_spip'] = $paquet['version_spip'];
+				if ($paquet['compatibilite_spip'])
+					if (!$complements['compatibilite_spip'])
+						$complements['compatibilite_spip'] = $paquet['compatibilite_spip'];
 					else
-						$complements['version_spip'] = fusionner_intervalles($paquet['version_spip'], $complements['version_spip']);
+						$complements['compatibilite_spip'] = fusionner_intervalles($paquet['compatibilite_spip'], $complements['compatibilite_spip']);
 			}
 		}
 		
@@ -551,7 +551,7 @@ function eclater_plugin_paquet($champs_aplat) {
 			'auteur' => $champs_aplat['auteur'],
 			'version' => $champs_aplat['version'],
 			'version_base' => $champs_aplat['version_base'],
-			'version_spip' => $champs_aplat['version_spip'],
+			'compatibilite_spip' => $champs_aplat['compatibilite_spip'],
 			'etat' => $champs_aplat['etat'],
 			'etatnum' => $champs_aplat['etatnum'],
 			'licence' => $champs_aplat['licence'],

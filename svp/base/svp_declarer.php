@@ -37,7 +37,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"vmax"			=> "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
 		"date_crea"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus ancienne des paquets du plugin
 		"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus recente des paquets du plugin
-		"version_spip"	=> "varchar(24) DEFAULT '' NOT NULL", // union des intervalles des paquets du plugin
+		"compatibilite_spip"	=> "varchar(24) DEFAULT '' NOT NULL", // union des intervalles des paquets du plugin
 	);
 	
 	$plugins_key = array(
@@ -55,7 +55,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"logo"			=> "varchar(255) DEFAULT '' NOT NULL", // chemin du logo depuis la racine du plugin
 		"version"		=> "varchar(24) DEFAULT '' NOT NULL",
 		"version_base"	=> "varchar(24) DEFAULT '' NOT NULL",
-		"version_spip"	=> "varchar(24) DEFAULT '' NOT NULL",
+		"compatibilite_spip"	=> "varchar(24) DEFAULT '' NOT NULL",
 		"description"	=> "text DEFAULT '' NOT NULL",
 		"auteur"		=> "text DEFAULT '' NOT NULL",
 		"licence"		=> "text DEFAULT '' NOT NULL",

@@ -65,7 +65,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 	if (!$phrase OR $resultats) {
 		$from = array('spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3');
 		$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 't1.id_plugin AS id_plugin', 
-						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.version_spip AS version_spip',
+						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.compatibilite_spip AS compatibilite_spip',
 						't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
 						't2.logo AS logo', 't2.version AS version', 't2.nom_archive AS nom_archive',
 						't3.url_archives AS url_archives', );
@@ -88,7 +88,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 				$nom = extraire_multi($paquets['nom']);
 				$slogan = extraire_multi($paquets['slogan']);
 				$description = extraire_multi($paquets['description']);
-				if (svp_verifier_compatibilite_spip($paquets['version_spip'], $version_spip)) {
+				if (svp_verifier_compatibilite_spip($paquets['compatibilite_spip'], $version_spip)) {
 					// Le paquet remplit tous les criteres, on peut le selectionner
 					// -- on utilise uniquement la langue du site
 					$paquets['nom'] = $nom;
@@ -166,10 +166,10 @@ function svp_lister_plugins_installes(){
  *
  * @return boolean
  */
-function svp_verifier_compatibilite_spip($version, $version_spip) {
+function svp_verifier_compatibilite_spip($intervalle, $version_spip) {
 	if (!$version_spip)
 		$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	return plugin_version_compatible($version, $version_spip);
+	return plugin_version_compatible($intervalle, $version_spip);
 }
 
 

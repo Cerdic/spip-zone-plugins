@@ -1,8 +1,8 @@
 <?php
 
-function svp_afficher_version($intervalle, $logiciel){
+function svp_afficher_intervalle($intervalle, $logiciel){
 	if (!strlen($intervalle)) return '';
-	if (!preg_match(',^[\[\(]([0-9.]*[\s-]*[a-zRC\s]*)[;]([0-9.]*[\s-]*[a-zRC\s]*)[\]\)]$,',$intervalle,$regs)) return false;
+	if (!preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,Uis',$intervalle,$regs)) return false;
 	$mineure = $regs[1];
 	$majeure = $regs[2];
 	$mineure_inc = $intervalle{0}=="[";
@@ -40,7 +40,7 @@ function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $
 				// Cas ou le plugin n'est pas encore dans la base SVP. 
 				// On affiche son préfixe, cependant ce n'est pas un affichage devant perdurer
 				$logiciel = $_dependance['nom'];
-			$texte .= svp_afficher_version($_dependance['version'], $logiciel);
+			$texte .= svp_afficher_intervalle($_dependance['version'], $logiciel);
 		}
 		else 
 			// On demande l'affichage des librairies

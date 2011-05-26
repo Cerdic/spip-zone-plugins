@@ -57,7 +57,7 @@ function plugins_preparer_sql_plugin($plugin)
 	$champs['nom'] = normaliser_nom($plugin['nom']);
 
 	// Extraction de la compatibilite SPIP
-	$champs['version_spip'] = ($plugin['compatible']) ? $plugin['compatible'] : '';
+	$champs['compatibilite_spip'] = ($plugin['compatible']) ? $plugin['compatible'] : '';
 	
 	// Construction du tableau des dependances necessite, lib et utilise
 	$dependances['necessite'] = $plugin['necessite'];
