@@ -24,18 +24,7 @@ function exec_action_relances(){
 	if (!autoriser('associer', 'comptes')) {
 			include_spip('inc/minipres');
 			echo minipres();
-	} else {
-		
-		$url_retour=$_POST['url_retour'];
-		
-		//On recupere les donnees globales
-
-		$sujet = _request('sujet');
-		$message = _request('message') ;
-		$id_tab=(isset($_POST["id"])) ? $_POST["id"]:array();
-		$statut_tab=(isset($_POST["statut"])) ? $_POST["statut"]:array();
-		$count=count ($id_tab);
-
+	} else {	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets();
