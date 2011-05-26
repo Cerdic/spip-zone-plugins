@@ -67,7 +67,6 @@ include_spip('inc/spiplistes_api_globales');
  * - positif, si la tache a ete effectuee
  * - negatif, si la tache doit etre poursuivie ou recommencee
  *
- * @package spiplistes
  * @param int $last_time
  * @return int
  */
@@ -467,23 +466,45 @@ function spiplistes_meleuse ($last_time) {
 								// le &amp; semble poser probleme sur certains MUA. A suivre...
 								//$_url = preg_replace(',(&amp;),','&', $_url);
 								
-								// Pour le moment (27/03/2011), un seul patron connu
-								$lien_rappel = 'lien_standard';
 								
-								list($pied_rappel_html, $pied_rappel_texte) = spiplistes_courriers_assembler_patron (
-									_SPIPLISTES_PATRONS_LIEN_DIR . $lien_rappel
-									, array('id_courrier' => $id_courrier
-											, 'id_liste' => $id_liste
-											, '_url' => generer_url_public('')
-											, 'lang' => $lang
-											, 'd' => $cookie
-											, 'lien_desabo' => ($opt_ajout_lien_desabo == 'oui')
-											)
-								);
-								$pied_rappel_texte = spiplistes_translate_2_charset ($pied_rappel_texte
-																					 , $charset_dest
-																					 , true);
-								
+								/**
+								 * Insérer le pied de rappel
+								 * qui permet de gérer l'abonnement
+								 * 
+								 * Rajoute le lien si la pseudo
+								 * balise _COOKIE_ABONNE_ est absente du courrier
+								 */
+								$new_html = spiplistes_personnaliser_cookie (
+										$ventre_html
+										, $cookie);
+								if ($new_html === FALSE)
+								{
+									/**
+									 * Pour le moment (27/03/2011), un seul patron connu
+									 */
+									$lien_rappel = 'lien_standard';
+									
+									list($pied_rappel_html, $pied_rappel_texte) = spiplistes_courriers_assembler_patron (
+										_SPIPLISTES_PATRONS_LIEN_DIR . $lien_rappel
+										, array('id_courrier' => $id_courrier
+												, 'id_liste' => $id_liste
+												, '_url' => generer_url_public('')
+												, 'lang' => $lang
+												, 'd' => $cookie
+												, 'lien_desabo' => ($opt_ajout_lien_desabo == 'oui')
+												)
+									);
+									$pied_rappel_texte = spiplistes_translate_2_charset ($pied_rappel_texte
+																						 , $charset_dest
+																						 , true);
+								}
+								else {
+									$ventre_html = $new_html;
+									$ventre_texte = spiplistes_personnaliser_cookie (
+										$ventre_texte
+										, $cookie);
+								}
+							
 								switch($format_abo) {
 									case 'html':
 										// Si on ne trouve pas les tags HTML alors on les ajoutes
@@ -737,6 +758,27 @@ function spiplistes_personnaliser_courrier ($page_html, $page_texte, $id_auteur,
 	return(array($result_html, $result_texte));
 }
 
+/**
+ * Si la pseudo balise _COOKIE_ABONNE_ est détectée
+ * dans le courrier, remplace par le cookie
+ * et confirme la modification pour éviter
+ * l'insertion du pied de rappel
+ *
+ * @param string $texte
+ * @param string $cookie
+ * @staticvar string $tag
+ * @return bool|string
+ */
+function spiplistes_personnaliser_cookie ($texte, $cookie) {
+	
+	static $tag = '_COOKIE_ABONNE_';
+	
+	if (($r = strpos($texte, $tag)) !== FALSE)
+	{
+		$r = str_replace ($tag, $cookie, $texte);
+	}
+	return ($r);
+}
 
 /**
  * Repasse un courrier en mode redac (en general, un test d'envoi)
