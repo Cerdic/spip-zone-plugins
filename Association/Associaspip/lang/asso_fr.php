@@ -155,6 +155,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_telephone' => "T&eacute;l&eacute;phone",
 	'adherent_libelle_mobile' => "Mobile",
 	'adherent_libelle_email' => "Mail",
+	'adherent_libelle_adresse' => "Adresse",
 
 	'adherent_libelle_statut_ok' => '&Agrave; jour',
 	'adherent_libelle_statut_echu' => '&Eacute;chu',

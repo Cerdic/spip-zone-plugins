@@ -28,7 +28,7 @@ function exec_voir_adherent(){
 		include_spip('inc/association_coordonnees');
 		$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$validite=$data['validite'];
-		$adresses = association_recuperer_adresses_string($id_auteur);
+		$adresses = association_recuperer_adresses_string(array($id_auteur));
 		$emails = association_recuperer_emails_string(array($id_auteur));
 		$telephones = association_recuperer_telephones_string(array($id_auteur));
 
@@ -55,7 +55,7 @@ function exec_voir_adherent(){
 			  $nom .
 			  "</a>";
 
-			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresses . '<br />' . $emails[$id_auteur] . '<br/>' . $telephones[$id_auteur] . "<p>".$categorie."</p></div>\n";
+			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresses[$id_auteur] . '<br />' . $emails[$id_auteur] . '<br/>' . $telephones[$id_auteur] . "<p>".$categorie."</p></div>\n";
 
 		} else $coord = '';
 		$coord .= "<div style='font-weight: bold; text-align:center' class='verdana1 spip_xx-small'><p>"._T('asso:adherent_libelle_date_validite')."<br/>".$validite."</p></div>";

@@ -52,38 +52,50 @@ function association_recuperer_telephones_string($id_auteurs)
 	return $telephones_strings;
 }
 
-/* prend en argument un id_auteur et retourne un tableau d'adresses */
+/* Cette fonction prend en argument un tableau d'id_auteurs et renvoie un tableau
+id_auteur => array(adresses). Les adresses sont constituees d'une chaine, les caracteres de retour a la ligne et espace peuvent etre passe en parametre */
 /* TODO: l'affichage du pays devrait etre optionnel */
-function association_recuperer_adresses($id_auteur)
+function association_recuperer_adresses($id_auteurs, $newline="<br/>", $espace="&nbsp;")
 {
-		$tab_result=array();
-		if (plugin_actif('COORDONNEES')) {
-			$query = sql_select('a.titre as titre, a.voie as voie, a.complement as complement, a.boite_postale as boite_postale, a.code_postal as code_postal, a.ville as ville, a.pays as pays', 'spip_adresses as a INNER JOIN spip_adresses_liens AS al ON al.id_adresse=a.id_adresse','al.id_objet='.$id_auteur.' and al.objet=\'auteur\'');
-			while ($data = sql_fetch($query)) {
-				$voie = ($data['voie'])?$data['voie'].'<br/>':'';
-				$complement = ($data['complement'])?$data['complement'].'<br/>':'';
-				$boite_postale = ($data['boite_postale'])?$data['boite_postale'].'<br/>':'';
-				$code_postal = ($data['code_postal'])?$data['code_postal'].'&nbsp;':'';
-				$ville = ($data['ville'])?$data['ville'].'<br/>':'';
-				$pays = ($data['pays'])?$data['pays'].'<br/>':'';
+	/* prepare la structure du tableau renvoye */
+	$adresses_auteurs = array();
+	foreach ($id_auteurs as $id_auteur) {
+		$adresses_auteurs[$id_auteur] = array();
+	}
 	
-				$tab_result[] = $voie.$complement.$boite_postale.$code_postal.$ville.$pays;
-			}
-		}
-		return $tab_result;
-}
+	if (plugin_actif('COORDONNEES')) {
+		$id_auteurs_list = sql_in('al.id_objet', $id_auteurs);
+		$query = sql_select('al.id_objet as id_auteur, a.titre as titre, a.voie as voie, a.complement as complement, a.boite_postale as boite_postale, a.code_postal as code_postal, a.ville as ville, a.pays as pays', 'spip_adresses as a INNER JOIN spip_adresses_liens AS al ON al.id_adresse=a.id_adresse',$id_auteurs_list.' AND al.objet=\'auteur\'');
+		while ($data = sql_fetch($query)) {
+			$voie = ($data['voie'])?$data['voie'].$newline:'';
+			$complement = ($data['complement'])?$data['complement'].$newline:'';
+			$boite_postale = ($data['boite_postale'])?$data['boite_postale'].$newline:'';
+			$code_postal = ($data['code_postal'])?$data['code_postal'].$espace:'';
+			$ville = ($data['ville'])?$data['ville'].$newline:'';
+			$pays = ($data['pays'])?$data['pays']:'';
 
-/* prend en argument 1 id auteur et renvoie un string html listant toutes ses adresses */
-function association_recuperer_adresses_string($id_auteur)
-{
-	$adresses = association_recuperer_adresses($id_auteur);
-	$adresses_string = '';
-	if (count($adresses)) {
-		foreach ($adresses as $adresse) {
-			$adresses_string .= $adresse.'<br/>';
+			$adresses_auteurs[$data['id_auteur']][] = $voie.$complement.$boite_postale.$code_postal.$ville.$pays;
 		}
 	}
-	return $adresses_string;
+	return $adresses_auteurs;
+}
+
+/* prend en argument un tableau d'id_auteurs et retourne un tableau id_auteur => code html listant toutes les adresses de l'auteur */
+function association_recuperer_adresses_string($id_auteur)
+{
+	$adresses_auteurs = association_recuperer_adresses($id_auteur);
+
+	$adresses_string = array();
+
+	/* on le transforme en tableau de strings html */
+	foreach ($adresses_auteurs as $id_auteur => $adresses) {
+		$adresses_strings[$id_auteur] = '';
+		if (count($adresses)) {
+			$adresses_strings[$id_auteur] = implode("<br/><br/>",$adresses);
+		}
+	}
+
+	return $adresses_strings;
 }
 
 /* Cette fonction prend en argument un tableau d'id_auteurs et renvoie un tableau
@@ -140,10 +152,10 @@ function association_recuperer_emails_string($id_auteurs)
 	return $emails_strings;
 }
 
-function print_tel($n)
+function print_tel($n, $separateur="&nbsp;")
 {
 	$n = preg_replace('/\D/', '', $n);
 	if (!intval($n)) return '';
-	return preg_replace('/(\d\d)/', '\1&nbsp;', $n);
+	return preg_replace('/(\d\d)/', '\1'.$separateur, $n);
 }
 ?>

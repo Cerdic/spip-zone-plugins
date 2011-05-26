@@ -37,10 +37,23 @@ function exec_pdf_adherents()
 	    $pdf->AddCol($k,$n,_T('asso:adherent_libelle_' . $k), $p);
 	  }
 	}
+
 	// ainsi que les colonnes pour les champs hors table spip_asso_membres
-	if ($sent['email']=='on') $pdf->AddCol('email',45 ,_T('asso:adherent_libelle_email'), 'C');
-//	if ($sent['adresse']=='on') $pdf->AddCol('adresse',45 ,_T('asso:adherent_libelle_adresse'), 'L');
-//	if ($sent['telephone']=='on') $pdf->AddCol('telephone',20 ,_T('asso:adherent_libelle_telephone'), 'C');
+	include_spip('inc/association_coordonnees');
+	$liste_id_auteurs = unserialize(_request('liste_id_auteurs'));
+	if ($sent['email']=='on') {
+		$pdf->AddCol('email',45 ,_T('asso:adherent_libelle_email'), 'C');
+		$emails =  association_recuperer_emails($liste_id_auteurs);
+	}
+
+	if ($sent['adresse']=='on') {
+		$pdf->AddCol('adresse',45 ,_T('asso:adherent_libelle_adresse'), 'L');
+		$adresses =  association_recuperer_adresses($liste_id_auteurs,"\n"," ");
+	}
+	if ($sent['telephone']=='on') {
+		$pdf->AddCol('telephone',30 ,_T('asso:adherent_libelle_telephone'), 'C');
+		$telephones = association_recuperer_telephones($liste_id_auteurs);
+	}
 
 	$prop=array(
 		'HeaderColor'=>array(255,150,100),
@@ -48,11 +61,27 @@ function exec_pdf_adherents()
 		'color2'=>array(255,255,255),
 		'padding'=>2
 	);
-	$order = 'm.id_auteur';
+	$order = 'id_auteur';
 	if ($sent['nom_famille']=='on')
-	  $order = 'm.nom_famille' . ",$order";
-//* A FAIRE : AJOUTER LE MAIL, ADRESSE, TELEPHONE DANS LA QUERY ou trouver un autre moyen 
-	$pdf->Query(sql_select('*','spip_asso_membres as m INNER JOIN spip_auteurs as a ON m.id_auteur=a.id_auteur', request_statut_interne(), '', $order), $prop);
+	  $order = 'nom_famille' . ",$order"; 
+
+	$adresses_tels = array();
+	foreach($liste_id_auteurs as $id_auteur) {
+		$adresses_tels[$id_auteur] = array();
+		if ($sent['email']=='on') $adresses_tels[$id_auteur]['email'] = implode("\n", $emails[$id_auteur]);
+		if ($sent['adresse']=='on') $adresses_tels[$id_auteur]['adresse'] = implode("\n\n", $adresses[$id_auteur]);
+		if ($sent['telephone']=='on') {
+			$first_tel = true;
+			$telephones_string = '';
+			foreach ($telephones[$id_auteur] as $telephone) {
+				if (!$first_tel) {$telephones_string .= "\n";} else $first_tel = false;
+				$telephones_string .=  print_tel($telephone," ");
+			}
+			$adresses_tels[$id_auteur]['telephone'] = $telephones_string;
+		}
+	}
+
+	$pdf->Query_extended(sql_select('*','spip_asso_membres', sql_in('id_auteur', $liste_id_auteurs), '', $order), $prop, $adresses_tels, 'id_auteur');
 	$pdf->Output();
 	}
 }

@@ -33,8 +33,10 @@ function exec_adherents() {
 		
 		echo debut_gauche("",true);
 		
+		/* recuperation des variables */
 		$critere = request_statut_interne(); // peut appeler set_request
 		$statut_interne = _request('statut_interne');
+		$lettre= _request('lettre');
 
 		echo debut_boite_info(true);
 
@@ -60,10 +62,13 @@ function exec_adherents() {
 
 		echo fin_boite_info(true);	
 
+		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
+		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne);
+	
 		echo debut_cadre_enfonce('',true),
 		  '<h3 style="text-align:center;">',
 		  _T('plugins_vue_liste'), '</h3>',
-		  adherents_table(),
+		  adherents_table($liste_id_auteurs),
 		  fin_cadre_enfonce(true);
 
 
@@ -77,7 +82,7 @@ function exec_adherents() {
 		// PAGINATION ALPHABETIQUE
 		echo '<td>';
 		
-		$lettre= _request('lettre');
+		
 		if (!$lettre) { $lettre = "%"; }
 		
 		$query = sql_select("upper( substring( nom_famille, 1, 1 ) )  AS init", 'spip_asso_membres', '',  'init', 'nom_famille, id_auteur');
@@ -131,12 +136,13 @@ function exec_adherents() {
 		echo '</table>';
 		
 		//Affichage de la liste
-		echo adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne);
+		echo $code_liste_membres;
 		echo fin_cadre_relief(true);  
 		echo fin_page_association();
 	}
 }
 
+/* adherent liste renvoie un tableau des id des auteurs affiches et le code html */
 function adherents_liste($debut, $lettre, $critere, $statut_interne)
 {
 
@@ -147,8 +153,10 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
 	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
+	$liste_id_auteurs = array();
 	while ($data = sql_fetch($query)) {	
-		$id_auteur=$data['id_auteur'];		
+		$id_auteur=$data['id_auteur'];
+		$liste_id_auteurs[] = $id_auteur;		
 		$class = $GLOBALS['association_styles_des_statuts'][$data['statut_interne']] . " border1";
 		
 		$logo = $chercher_logo($id_auteur, 'id_auteur');
@@ -256,8 +264,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	.  (!$auteurs ? '' : ('<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" />'))
 	.  '</div>';
 
-	return 	generer_form_ecrire('action_adherents', $res);
-
+	return 	array($liste_id_auteurs, generer_form_ecrire('action_adherents', $res));
 }
 
 function affiche_categorie($c)
@@ -267,7 +274,7 @@ function affiche_categorie($c)
     : $c;
 }
 
-function adherents_table()
+function adherents_table($liste_id_auteurs)
 {
 	$champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
 	$res = '';
@@ -284,13 +291,13 @@ function adherents_table()
 	$res .= "<input type='checkbox' name='champs[email]' />"._T('asso:email')."<br />";
 
 	/* si le plugin coordonnees est actif, on ajoute l'adresse et le telephone */
-/*	if (plugin_actif('COORDONNEES')) {
+	if (plugin_actif('COORDONNEES')) {
 		$res .= "<input type='checkbox' name='champs[adresse]' />"._T('asso:adresse')."<br />";
 		$res .= "<input type='checkbox' name='champs[telephone]' />"._T('asso:telephone')."<br />";
 	}
-*/
-	/* on fait suivre le statut interne */
-	$res .= "<input type='hidden' name='statut_interne' value='"._request('statut_interne')."'/>";
+
+	/* on fait suivre la liste des auteurs a afficher */
+	$res .= "<input type='hidden' name='liste_id_auteurs' value='".serialize($liste_id_auteurs)."'/>";
 
 	return  generer_form_ecrire('pdf_adherents', $res, '', _T('asso:bouton_impression'));
 }
