@@ -37,14 +37,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'crayons' => 'Crayons',
 //D
 'descriptif_1' => 'Cette page de configuration est r&#233;serv&#233;e aux webmestres du site :',
-'descriptif_2' => "<hr />
-<p><small>Si vous souhaitez modifier cette liste, veuillez &#233;diter le fichier <tt>config/mes_options.php</tt> (le cr&#233;er le cas &#233;ch&#233;ant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante :</small></p>
+'descriptif_2' => "
+<p>Si vous souhaitez modifier cette liste, veuillez &#233;diter le fichier <tt>config/mes_options.php</tt> (le cr&#233;er le cas &#233;ch&#233;ant) et y indiquer la liste des identifiants des auteurs webmestres, sous la forme suivante :</p>
 <pre>&lt;?php
-  define ('_ID_WEBMESTRES',
+  define (
+  '_ID_WEBMESTRES',
   '1:5:8');
 ?&gt;</pre>
-<p><small>A partir de SPIP 2.1, il est aussi possible de donner les droits de webmestre &agrave; un administrateur via la page d'&eacute;dition de l'auteur.</small></p>
-<p><small>A noter : les webmestres d&#233;finis de cette mani&#232;re n&#39;ont plus besoin de proc&#233;der &#224; l&#39;authentification par FTP pour les op&#233;rations d&#233;licates (mise &#224; niveau de la base de donn&#233;es, par exemple).</small></p>
+<p>A partir de SPIP 2.1, il est aussi possible de donner les droits de webmestre &agrave; un administrateur via la page d'&eacute;dition de l'auteur.</p>
+<p>A noter : les webmestres d&#233;finis de cette mani&#232;re n&#39;ont plus besoin de proc&#233;der &#224; l&#39;authentification par FTP pour les op&#233;rations d&#233;licates (mise &#224; niveau de la base de donn&#233;es, par exemple).</p>
 
 <a href='http://www.spip-contrib.net/-Autorite-' class='spip_out'>Cf. documentation</a>
 ",
@@ -97,7 +98,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 //N
 'non_webmestres' => 'Ce r&#233;glage ne s&#39;applique pas aux webmestres.',
-'note_rubriques' => '<small><br />(Notez que seuls les administrateurs peuvent cr&eacute;er des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)</small>',
+'note_rubriques' => '(Notez que seuls les administrateurs peuvent cr&eacute;er des rubriques, et, pour les administrateurs restreints, cela ne peut se faire que dans leurs rubriques.)',
 'nouvelles_rubriques' => 'de nouvelles rubriques &#224; la racine du site',
 'nouvelles_sous_rubriques' => 'de nouvelles sous-rubriques dans l&#39;arborescence.',
 

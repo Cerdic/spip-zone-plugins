@@ -17,40 +17,69 @@
 	[ar]&#169; Fil &#1608; James &#1608; Superyms - &#1608;&#1586;&#1593;&#1578;&#32;&#1576;&#1605;&#1608;&#1580;&#1576;&#32;&#1578;&#1585;&#1582;&#1610;&#1589; GNU/LGPL 
     </multi>
 	</auteur>
-	<version>
-		0.9.8
-	</version>
-	<etat>
-		test
-	</etat>
+	<version>0.9.9</version>
+	<etat>test</etat>
 	<description>
 	<multi>
     [fr]
 	Quelques r&#233;glages d'autorisations (ajoutez les v&#244;tres !)
-	<h4><a href="?exec=cfg&amp;cfg=autorite">Configuration</a></h4>
 	[it]
 	Qualche esempio di impostazioni d'autorizzazione (aggiungete le vostre!)
-	<h4><a href="?exec=cfg&amp;cfg=autorite">Configurazione</a></h4>
     [en]
 	Some tweaks permissions (add yours!)
-	<h4><a href="?exec=cfg&amp;cfg=autorite">Configuration</a></h4>
 	[de]
 	Feineinstellungen der Benutzerrechte (f&uuml;ge eigene hinzu!)
-	<h4><a href="?exec=cfg&amp;cfg=autorite">Konfiguration</a></h4>
     [ar]
 	&#1576;&#1593;&#1590; &#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1571;&#1584;&#1608;&#1606;&#1575;&#1578;
-	<h4><a href="?exec=cfg&amp;cfg=autorite">&#1575;&#1604;&#1573;&#1593;&#1583;&#1575;&#1583;</a></h4>
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Le-plugin-Autorite</lien>
-	<icon>illuminati-128.png</icon>
-	<prefix>
-		  Autorite
-	</prefix>
-	<options>
-	    illuminati_options.php
-	</options>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<icon>illuminati-32.png</icon>
+	<prefix>autorite</prefix>
+	<options>autorite_options.php</options>
+	<necessite id="SPIP" version="[1.9.2;3.0.0-dev)" />
 	<necessite id='cfg' version='[1.5.0;]' />
+	<categorie>auteur</categorie>
+</plugin>
+<plugin spip="[3.0.0-dev;3.0.*]" >
+	<nom>
+		<multi>
+		[fr]Autorit&#233;
+		[it]Autorit&#224;
+		[en]Authority
+		[de]Autorit&auml;t
+		[ar]&#1575;&#1604;&#1587;&#1604;&#1591;&#1577;
+    </multi>
+	</nom>
+	<auteur>
+		<multi>
+    [fr]&#169; Fil &#38; James &#38; Superyms - Distribu&#233; sous licence GNU/LGPL
+    [it]&#169; Fil &#38; James &#38; Superyms - Distribuito sotto licenza GNU/LGPL
+	[en]&#169; Fil &#38; James &#38; Superyms - Distributed under GNU/LGPL licence
+	[de]&#169;  Fil &#38; James &#38; Superyms - Ver&ouml;ffentlicht unter der GNU/LGPL Lizenz
+	[ar]&#169; Fil &#1608; James &#1608; Superyms - &#1608;&#1586;&#1593;&#1578;&#32;&#1576;&#1605;&#1608;&#1580;&#1576;&#32;&#1578;&#1585;&#1582;&#1610;&#1589; GNU/LGPL
+    </multi>
+	</auteur>
+	<version>0.9.9</version>
+	<etat>test</etat>
+	<description>
+	<multi>
+    [fr]
+	Quelques r&#233;glages d'autorisations (ajoutez les v&#244;tres !)
+	[it]
+	Qualche esempio di impostazioni d'autorizzazione (aggiungete le vostre!)
+    [en]
+	Some tweaks permissions (add yours!)
+	[de]
+	Feineinstellungen der Benutzerrechte (f&uuml;ge eigene hinzu!)
+    [ar]
+	&#1576;&#1593;&#1590; &#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1571;&#1584;&#1608;&#1606;&#1575;&#1578;
+	</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Le-plugin-Autorite</lien>
+	<icon>illuminati-32.png</icon>
+	<prefix>autorite</prefix>
+	<options>autorite_options.php</options>
+	<necessite id="SPIP" version="[1.9.2;3.1.0)" />
 	<categorie>auteur</categorie>
 </plugin>
