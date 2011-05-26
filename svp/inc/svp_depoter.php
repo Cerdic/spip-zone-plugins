@@ -410,7 +410,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 
 	// On compile maintenant certaines informations des paquets mis a jour dans les plugins
 	// (date de creation, date de modif, version spip...)
-	svp_raffiner_plugins($id_depot);
+	svp_completer_plugins($id_depot);
 	
 	// Calcul des compteurs de paquets, plugins et contributions
 	$nb_paquets = sql_countsel('spip_paquets', 'id_depot=' . sql_quote($id_depot));
@@ -491,8 +491,8 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 }
 
 
-function svp_raffiner_plugins($id_depot) {
-	include_spip('plugins/fusion_plugin');
+function svp_completer_plugins($id_depot) {
+	include_spip('inc/intervaller');
 
 	// On limite la revue des paquets a ceux des plugins heberges par le depot en cours d'acutalisation
 	if ($ids_plugin = sql_allfetsel('id_plugin', 'spip_depots_plugins', array('id_depot=' . sql_quote($id_depot)))) {
