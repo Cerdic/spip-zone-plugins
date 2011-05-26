@@ -45,7 +45,8 @@ div.non_traduit{background-color: #EEEEEE;font-style:italic;}
 
 .delier{height:100px;float:left,margin :0 5px;float:left}
 
-.danger, a.cellule-h-texte {background: repeat scroll 0 0 white;}
+.danger,.onglets_traduction a.cellule-h-texte {background: repeat scroll 0 0 white;}
+
 
 .lang{ margin-right:5px;}
 
