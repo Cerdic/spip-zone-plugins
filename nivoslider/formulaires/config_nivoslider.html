@@ -11,16 +11,16 @@
 	<div class="cadre_padding">
 	
 		<form name="formulaire_config_nivoslider" method="post"  action="#SELF"><div>#ACTION_FORMULAIRE{#SELF}
-		#FORMULAIRE_CONFIG_NIVOSLIDER_ARTICLE
+		<fieldset><legend><:nivoslider:general:> &nbsp;</legend>
 		<p>
 		<label for="_ir_width"><:nivoslider:width:> :</label>
-		<input type="text" name="width" class="type_txt" id="_ir_width" size="5"
+		<input type="text" name="width" class="type_txt" id="_ir_width" size="3"
 			value="#ENV{width,500}" /> px
 		</p>
 		<p>
 		<label for="_ir_height"><:nivoslider:height:> :</label>
-		<input type="text" name="height" class="type_txt" id="_ir_height" size="5"
-			value="#ENV{height,300}" /> px
+		<input type="text" name="height" class="type_txt" id="_ir_height" size="3"
+			value="#ENV{height,240}" /> px
 		</p>
 		<p>
 			<label for="_ir_effect" title='effect'><:nivoslider:effect:> :</label>
@@ -36,23 +36,49 @@
 				<option value="fade" [(#CONFIG{nivoslider/effect}|=={#VAL{'fade'}}|?{selected="selected",''})]>fade</option>
 				<option value="slideInRight" [(#CONFIG{nivoslider/effect}|=={#VAL{'slideInRight'}}|?{selected="selected",''})]>slideInRight</option>
 				<option value="slideInLeft" [(#CONFIG{nivoslider/effect}|=={#VAL{'slideInLeft'}}|?{selected="selected",''})]>slideInLeft</option>
+				<option value="boxRandom" [(#CONFIG{nivoslider/effect}|=={#VAL{'boxRandom'}}|?{selected="selected",''})]>boxRandom</option>
+				<option value="boxRain" [(#CONFIG{nivoslider/effect}|=={#VAL{'boxRain'}}|?{selected="selected",''})]>boxRain</option>
+				<option value="boxRainReverse" [(#CONFIG{nivoslider/effect}|=={#VAL{'boxRainReverse'}}|?{selected="selected",''})]>boxRainReverse</option>
+				<option value="boxRainGrow" [(#CONFIG{nivoslider/effect}|=={#VAL{'boxRainGrow'}}|?{selected="selected",''})]>boxRainGrow</option>
+				<option value="boxRainGrowReverse" [(#CONFIG{nivoslider/effect}|=={#VAL{'boxRainGrowReverse'}}|?{selected="selected",''})]>boxRainGrowReverse</option>
 			</select>
 		</p>
 		<p>
 		<label for="_ir_slices" title="slices"><:nivoslider:slices:> :</label>
-		<input type="text" name="slices" class="type_txt" id="_ir_slices" size="5"
+		<input type="text" name="slices" class="type_txt" id="_ir_slices" size="3"
 			value="#ENV{slices,15}" />
 		</p>
 		<p>
 		<label for="_ir_animSpeed" title="animSpeed"><:nivoslider:animspeed:> :</label>
-		<input type="text" name="animSpeed" class="type_txt" id="_ir_animSpeed" size="5"
+		<input type="text" name="animSpeed" class="type_txt" id="_ir_animSpeed" size="3"
 			value="#ENV{animSpeed,500}" /> ms
 		</p>
 		<p>
 		<label for="_ir_pauseTime" title="pauseTime"><:nivoslider:pausetime:> :</label>
-		<input type="text" name="pauseTime" class="type_txt" id="_ir_pauseTime" size="5"
+		<input type="text" name="pauseTime" class="type_txt" id="_ir_pauseTime" size="3"
 			value="#ENV{pauseTime,3000}" /> ms
 		</p>
+		<p>
+		<label for="_ir_imageAlign" title='imageAlign'><:nivoslider:image_align:> :</label>
+		<select name="imageAlign" id="_ir_imageAlign" style="width:142px">
+			<option value="left top" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'left top'}}|?{selected="selected",''})]>left top</option>
+			<option value="left center" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'left center'}}|?{selected="selected",''})]>left center</option>
+			<option value="left bottom" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'left bottom'}}|?{selected="selected",''})]>left bottom</option>
+			<option value="center top" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'center top'}}|?{selected="selected",''})]>center top</option>
+			<option value="center center" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'center center'}}|?{selected="selected",''})]>center center</option>
+			<option value="center bottom" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'center bottom'}}|?{selected="selected",''})]>center bottom</option>
+			<option value="right top" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'right top'}}|?{selected="selected",''})]>right top</option>
+			<option value="right center" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'right center'}}|?{selected="selected",''})]>right center</option>
+			<option value="right bottom" [(#CONFIG{nivoslider/imageAlign}|=={#VAL{'right bottom'}}|?{selected="selected",''})]>right bottom</option>
+		</select>
+		</p>
+		<p>
+		<label for="_ir_imageBackcolor"><:nivoslider:image_backcolor:> :</label>
+		<input type="text" name="imageBackcolor" class="palette" id="_ir_imageBackcolor" size="7" value="#ENV{imageBackcolor,'transparent'}" />
+		</p>
+		</fieldset>
+
+		<fieldset><legend><:nivoslider:controls:> &nbsp;</legend>
 		<p>
 			<label for="_ir_directionNav" title="directionNav"><:nivoslider:directionnav:> :</label>
 			<select name="directionNav" id="_ir_directionNav" style="width:70px">
@@ -60,7 +86,7 @@
 				<option value="false" [(#CONFIG{nivoslider/directionNav}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
 			</select> 
 		</p>
-		<p>
+		<p id="_ir_directionNavHide_container">
 			<label for="_ir_directionNavHide" title="directionNavHide"><:nivoslider:directionnavhide:> :</label>
 			<select name="directionNavHide" id="_ir_directionNavHide" style="width:70px">
 				<option value="true" [(#CONFIG{nivoslider/directionNavHide}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
@@ -68,17 +94,10 @@
 			</select>
 		</p>
 		<p>
-			<label for="_ir_controlNav" title="controlNav"><:nivoslider:controlnav:> :</label>
-			<select name="controlNav" id="_ir_controlNav" style="width:70px">
-				<option value="true" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
-				<option value="false" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
-			</select>
-		</p>
-		<p>
 			<label for="_ir_keyboardNav" title="keyboardNav"><:nivoslider:keyboardnav:> :</label>
 			<select name="keyboardNav" id="_ir_keyboardNav" style="width:70px">
-				<option value="true" [(#CONFIG{nivoslider/keyboardNav}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
 				<option value="false" [(#CONFIG{nivoslider/keyboardNav}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+				<option value="true" [(#CONFIG{nivoslider/keyboardNav}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
 			</select>
 		</p>
 		<p>
@@ -89,11 +108,52 @@
 			</select>
 		</p>
 		<p>
+			<label for="_ir_controlNavThumbs" title="controlNavThumbs"><:nivoslider:usethumbs:> :</label>
+			<select name="controlNavThumbs" id="_ir_controlNavThumbs" style="width:70px">
+				<option value="false" [(#CONFIG{nivoslider/controlNavThumbs}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+				<option value="true" [(#CONFIG{nivoslider/controlNavThumbs}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
+			</select> 
+		</p>
+		<p id="_ir_controlNav_container">
+			<label for="_ir_controlNav" title="controlNav"><:nivoslider:controlnav:> :</label>
+			<select name="controlNav" id="_ir_controlNav" style="width:70px">
+				<option value="true" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'true'}}|?{selected="selected",''})]><:nivoslider:oui:></option>
+				<option value="false" [(#CONFIG{nivoslider/controlNav}|=={#VAL{'false'}}|?{selected="selected",''})]><:nivoslider:non:></option>
+			</select>
+		</p>
+		<p id="_ir_controlNavThumbsWidth_container">
+		<label for="_ir_controlNavThumbsWidth"><:nivoslider:width:> :</label>
+		<input type="text" name="controlNavThumbsWidth" class="type_txt" id="_ir_controlNavThumbsWidth" size="3"
+			value="#ENV{controlNavThumbsWidth,50}" /> px
+		</p>
+		<p id="_ir_controlNavThumbsHeight_container">
+		<label for="_ir_controlNavThumbsHeight"><:nivoslider:height:> :</label>
+		<input type="text" name="controlNavThumbsHeight" class="type_txt" id="_ir_controlNavThumbsHeight" size="3"
+			value="#ENV{controlNavThumbsHeight,50}" /> px
+		</p>
+		<p>
+		<label for="_ir_bottomMargin" title="bottomMargin"><:nivoslider:bottommargin:> :</label>
+		<input type="text" name="bottomMargin" class="type_txt" id="_ir_bottomMargin" size="3"
+			value="#ENV{bottomMargin,0}" /> px
+		</p>
+		</fieldset>
+
+		<fieldset><legend><:nivoslider:legend:> &nbsp;</legend>
+		<p>
+		<label for="_ir_captionBackcolor"><:nivoslider:caption_backcolor:> :</label>
+		<input type="text" name="captionBackcolor" class="palette" id="_ir_captionBackcolor" size="7" value="#ENV{captionBackcolor,'#000000'}" />
+		</p>
+		<p>
+		<label for="_ir_captionFrontcolor"><:nivoslider:caption_frontcolor:> :</label>
+		<input type="text" name="captionFrontcolor" class="palette" id="_ir_captionFrontcolor" size="7"	value="#ENV{captionFrontcolor,'#FFFFFF'}" />
+		</p>
+		<p>
 		<label for="_ir_captionOpacity"><:nivoslider:caption_opacity:></label>
-		<input type="text" name="captionOpacity" class="type_txt" id="_ir_captionOpacity" size="5"
+		<input type="text" name="captionOpacity" class="type_txt" id="_ir_captionOpacity" size="3"
 			value="#ENV{captionOpacity,0.8}" />
 		</p>
-
+		</fieldset>
+		#FORMULAIRE_CONFIG_NIVOSLIDER_ARTICLE
 		</div>
 
 	<div class="boutons">
@@ -104,3 +164,37 @@
 	</div></form>
 
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+	CheckThumb($("SELECT#\_ir\_controlNavThumbs option:selected").val());
+	CheckNav($("SELECT#\_ir\_directionNav option:selected").val());
+
+	$('SELECT#\_ir\_controlNavThumbs').change(function() { CheckThumb($("SELECT#\_ir\_controlNavThumbs option:selected").val()); });
+	$('SELECT#\_ir\_directionNav').change(function() { CheckNav($("SELECT#\_ir\_directionNav option:selected").val()); });
+
+	function CheckThumb(t){
+		if(t=='true'){
+			$("SELECT#\_ir\_controlNav").val('false');
+			$("P#\_ir\_controlNav\_container").hide('slow');
+			$("P#\_ir\_controlNavThumbsWidth\_container").show('slow');
+			$("P#\_ir\_controlNavThumbsHeight\_container").show('slow');
+		}else{
+			$("P#\_ir\_controlNav\_container").show('slow');
+			$("P#\_ir\_controlNavThumbsWidth\_container").hide('slow');
+			$("P#\_ir\_controlNavThumbsHeight\_container").hide('slow');
+		}
+		return false;
+	}
+
+	function CheckNav(t){
+		if(t=='false')
+			$("P#\_ir\_directionNavHide\_container").hide('slow');
+		else
+			$("P#\_ir\_directionNavHide\_container").show('slow');
+		return false;
+	}
+
+});
+</script>

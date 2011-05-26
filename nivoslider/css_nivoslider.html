@@ -2,17 +2,16 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 /*
- * jQuery Nivo Slider v2.3
+ * jQuery Nivo Slider v2.5.2
  * http://nivo.dev7studios.com
  *
- * Copyright 2010, Gilbert Pellegrom
+ * Copyright 2011, Gilbert Pellegrom
  * Free to use and abuse under the MIT license.
  * http://www.opensource.org/licenses/mit-license.php
  * 
  * March 2010
  */
- 
- 
+
 #slider {
 	position:relative;
 	width:#CONFIG{nivoslider/width,500}px;
@@ -57,17 +56,23 @@
 	height:100%;
 }
 
+.nivo-box {
+	display:block;
+	position:absolute;
+	z-index:50;
+}
+
 /* Caption styles */
 
 .nivo-caption {
 	position:absolute;
 	left:0px;
 	bottom:0px;
-	background:#000;
-	color:#fff;
+	background:#CONFIG{nivoslider/captionBackcolor,'#000'};
+	color:#CONFIG{nivoslider/captionFrontcolor,'#FFF'};
 	opacity:0.8; /* Overridden by captionOpacity setting */
 	width:100%;
-	z-index:89;
+	z-index:80;
 }
 
 .nivo-caption p {
@@ -88,7 +93,7 @@
 .nivo-directionNav a {
 	position:absolute;
 	top:45%;
-	z-index:99;
+	z-index:90;
 	cursor:pointer;
 }
 
@@ -100,13 +105,16 @@
 	right:0px;
 }
 
+[(#CONFIG{nivoslider/controlNavThumbs}|=={'false'}|?{' ',''})
+
+/* Control nav styles (e.g. 1,2,3...) */
 .nivo-controlNav a {
 	position:relative;
 	z-index:99;
 	cursor:pointer;
 	width:22px;
 	height:22px;
-	background:url(#CHEMIN{css/bullets.png}) no-repeat;
+	background:url( #CHEMIN{css/bullets.png} ) no-repeat;
 	text-indent:-9999px;
 	border:0;
 	margin-right:3px;
@@ -117,6 +125,7 @@
 	font-weight:bold;
 	background-position:0 -22px;
 }
+]
 
 .nivo-directionNav a {
 	display:block;
@@ -140,3 +149,31 @@ a.nivo-prevNav {
     text-shadow:none;
     font-family: Helvetica, Arial, sans-serif;
 }
+
+[(#CONFIG{nivoslider/controlNavThumbs}|=={'true'}|?{' ',''})
+
+#slider {
+	margin-bottom:#CONFIG{nivoslider/bottomMargin,0}px;
+}
+#slider .nivo-controlNav {
+	position:absolute;
+	width:100%;
+	text-align:center;
+	top:#EVAL{#CONFIG{nivoslider/height,240}+10}px;
+}
+#slider .nivo-controlNav a {
+	display:inline;
+}
+#slider .nivo-controlNav img {
+	display:inline;
+	position:relative;
+	margin-right:10px;
+	-moz-box-shadow:0px 0px 5px #333;
+	-webkit-box-shadow:0px 0px 5px #333;
+	box-shadow:0px 0px 5px #333;
+}
+#slider .nivo-controlNav a.active img {
+    border:1px solid #666;
+}
+
+]

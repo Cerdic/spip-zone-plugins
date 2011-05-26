@@ -7,27 +7,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'animspeed' => 'Vitesse de l\'animation',
 	// B
+	'bottommargin' => 'Marge sous le slider',
 	'bouton_effacer' => 'Effacer',
 	// C
-	'caption_opacity' => 'Transparence du message',
+	'caption_backcolor' => 'Couleur du fond',
+	'caption_frontcolor' => 'Couleur du texte',
+	'caption_opacity' => 'Transparence',
+	'controls' => 'Contrôles',
 	'controlnav' => 'Afficher les puces',
 	'cfg_title_nivoslider' => 'Nivo Slider',
 	'cfg_boite_nivoslider' => 'Configuration du plugin Nivo Slider.<br /><br />[Documentation->http://www.spip-contrib.net/Nivo-Slider-pour-SPIP]',
 	// D
 	'default' => 'Diaporama par défaut',
-	'directionnav' => 'Utiliser les flèches',
+	'default_info' => 'Article utilisé comme réservoir d\'images lors de l\'inclusion du modèle [(#MODELE{nivoslider})] sans paramètre <i>id_article</i> à partir d\'un squelette :',
+	'directionnav' => 'Activer les flèches de navigation',
 	'directionnavhide' => 'Cacher les fl&egrave;ches (afficher au survol)',
 	// E
 	'effect' => 'Effet de transition',
 	// F
 	// G
+	'general' => 'Apparence générale',
 	// H
 	'height' => 'Hauteur',
 	// I 
+	'image_align' => 'Recadrer',
+	'image_backcolor' => 'Couleur de fond',
 	// J
 	// K
 	'keyboardnav' => 'Utiliser les fl&eacute;ches droite &amp; gauche du clavier',
 	// L
+	'legend' => 'Légendes',
 	// M
 	// N
 	'non' => 'non',
@@ -42,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'slices' => 'Nombre de tranches',
 	// T
 	// U
+	'usethumbs' => 'Activer les miniatures',
 	// V
 	// W
 	'width' => 'Largeur',
