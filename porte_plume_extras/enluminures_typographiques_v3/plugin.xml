@@ -8,7 +8,7 @@
 &#169; 2009 - Distribu&#233; sous licence GNU/GPL
 	</auteur>
 	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
-	<version>3.2.1</version>
+	<version>3.2.2</version>
 	<etat>
 	test
 	</etat>
@@ -110,6 +110,6 @@ Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=
 		<inclure>enluminures_typo_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="SPIP" version="[2.0.3;3.1.0)" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>

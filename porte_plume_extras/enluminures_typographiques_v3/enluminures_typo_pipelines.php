@@ -3,6 +3,10 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 	$barre = &$barres['edition'];
 	
 	$barre->cacher('stroke_through');
+
+	$module_barre = "barre_outils";
+	if (intval($GLOBALS['spip_version_branche'])>2)
+		$module_barre = "barreoutils";
 	
 	$barre->set('header1', array(
 		// groupe formatage paragraphe
@@ -66,7 +70,7 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 			// code spip
 			array(
 				"id"          => 'barre_cadre',
-				"name"        => _T('barre_outils:barre_cadre'),
+				"name"        => _T($module_barre.':barre_cadre'),
 				"className"   => "outil_barre_cadre", 
 				"openWith"    => "\n&lt;cadre&gt;", 
 				"closeWith"   => "&lt;/cadre&gt;\n",
@@ -132,7 +136,7 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 			// cadre spip
 			array(
 				"id"          => 'barre_code',
-				"name"        => _T('barre_outils:barre_code'),
+				"name"        => _T($module_barre.':barre_code'),
 				"className"   => "outil_barre_code", 
 				"openWith"    => "&lt;code&gt;", 
 				"closeWith"   => "&lt;/code&gt;",
@@ -157,7 +161,7 @@ function typoenluminee_porte_plume_barre_pre_charger($barres){
 			// poesie spip
 			array(
 				"id"          => 'barre_poesie',
-				"name"        => _T('barre_outils:barre_poesie'),
+				"name"        => _T($module_barre.':barre_poesie'),
 				"className"   => "outil_barre_poesie", 
 				"openWith"    => "\n&lt;poesie&gt;", 
 				"closeWith"   => "&lt;/poesie&gt;\n",
