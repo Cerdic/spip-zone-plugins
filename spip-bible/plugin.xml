@@ -1,32 +1,24 @@
 <plugin>
     <nom>Spip-Bible</nom>
     <auteur>
-    Auteur originel : Ma&iuml;eul Rouquette 
-    Auteur associ&eacute; : Teddy Payet
-    Id&eacute;e du presse-papier : Cerdic
-    Licence : GPL3
+		Auteur originel : Ma&iuml;eul Rouquette 
+		Auteur associ&eacute; : Teddy Payet
+		Id&eacute;e du presse-papier : Cerdic
     </auteur>
-    <version>
-    2.0.2
-    </version>
-    <etat>
-    stable
-    </etat>
+    <licence>GPL3</licence>
+    <version>2.0.3</version>
+    <etat>stable</etat>
     <install>base/bible_install.php</install>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0;]" />
     <necessite id='CFG' version="[1.0;]" />
     <necessite id="spip_bonux" />
-    <icon>
-    bible.jpg
-    </icon>
-    <description>
-    
-    Permet de faire rapidment des citation de la Bible		
+    <icon>bible.jpg</icon>
+
+    <description>Permet de faire rapidement des citations de la Bible.	
     
     Sous SPIP 2.0 avec SPIP-Bonux, propose une "presse-papier" biblique &agrave; c&ocirc;t&eacute; des formulaires d'&eacute;ditions.
     
     Vous pouvez aussi utilisez un mod&eacute;le, mais cette m&eacute;thode est d&eacute;su&eacute;te et d&eacute;conseill&eacute;e.
-    
 
 Ex : &lt;bible|passage=Gn1,2-2,1&gt; citera la Gen&egrave;se du chapitre 1, verset 2 au chapitre 2, verset 1 inclu.
 		
@@ -38,17 +30,11 @@ Ces options sont :
 -* "ref"		=> Pour afficher les r&eacute;f&eacute;rences &agrave; la suite du passage
 -* "traduction"	=> Pour choisir la traduction.
 	La liste des traductions disponibles est sur [Spip-Contrib->http://www.spip-contrib.net/Spip-Bible-traductions-disponibles]
-	
 
 	En l'absence des ces param&eacute;tres, les valeurs seront celle d&eacute;finies [sur la page de configuration->?exec=cfg&amp;cfg=bible].
-	
-	
-		 
 	</description>
 
-    <prefix>
-    bible
-    </prefix>
+    <prefix>bible</prefix>
     <pipeline>
         <nom>insert_head</nom>
         <action>insert_head</action>
@@ -64,5 +50,4 @@ Ces options sont :
 	
 	<categorie>divers</categorie>
    <lien>http://www.spip-contrib.net/Spip-Bible,1125</lien>
- 
 </plugin>
