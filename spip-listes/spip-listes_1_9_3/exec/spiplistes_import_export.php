@@ -187,7 +187,7 @@ function exec_spiplistes_import_export() {
 	if($btn_valider_import && $flag_import_fichier_ok) {
 		if(!($abos_liste && is_array($abos_liste) && count($abos_liste))) {
 		// A oublie' de selectionner une liste de destination
-			$page_result .= spiplistes_boite_alerte(_T('spiplistes:Selectionnez_une_liste_pour_import'), true);
+			$page_result .= spiplistes_boite_alerte(_T('spiplistes:selectionnez_une_liste_pour_import'), true);
 		}
 	}
 		
@@ -210,7 +210,7 @@ function exec_spiplistes_import_export() {
 			include_spip('inc/spiplistes_import');
 			$page_result .= ''
 				. debut_boite_info(true)
-				. spiplistes_titre_boite_info(_T('spiplistes:Resultat_import'))
+				. spiplistes_titre_boite_info(_T('spiplistes:resultat_import'))
 				. spiplistes_import(
 					$fichier_import['tmp_name']
 					, $fichier_import['name']
@@ -259,7 +259,7 @@ function exec_spiplistes_import_export() {
 		$page_result .= ""
 			. "<form action='" . generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT) . "' method='post' enctype='multipart/form-data'name='importform'>\n"
 			. debut_cadre_relief("", true, "", _T('spiplistes:Liste_de_destination'))
-			. "<p class='verdana2'>"._T('spiplistes:Selectionnez_une_liste_de_destination')."</p>\n"
+			. "<p class='verdana2'>"._T('spiplistes:selectionnez_une_liste_de_destination')."</p>\n"
 			. "<ul class='liste-listes verdana2'>\n"
 			;
 

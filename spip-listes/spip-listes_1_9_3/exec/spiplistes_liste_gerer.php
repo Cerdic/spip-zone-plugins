@@ -807,7 +807,7 @@ function exec_spiplistes_liste_gerer () {
 			// chrono hebdo
 			. "<li>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_hebdo'
-					, _T('spiplistes:Toutes_les_semaines')
+					, _T('spiplistes:toutes_les_semaines')
 					, (($statut == _SPIPLISTES_LIST_PUB_HEBDO) || ($statut == _SPIPLISTES_LIST_PUB_WEEKLY))
 					, true, false)
 				. spiplistes_form_input_checkbox('auto_weekly', 'oui'
@@ -816,7 +816,7 @@ function exec_spiplistes_liste_gerer () {
 			// chrono mois
 			. "<li>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_mensuel'
-					, _T('spiplistes:Tous_les_mois')
+					, _T('spiplistes:tous_les_mois')
 					, (($statut == _SPIPLISTES_LIST_PUB_MENSUEL) || ($statut == _SPIPLISTES_LIST_PUB_MONTHLY))
 					, true, false)
 				. spiplistes_form_input_checkbox('auto_mois', 'oui'
@@ -825,7 +825,7 @@ function exec_spiplistes_liste_gerer () {
 			// chrono annee
 			. "<li>"
 				. spiplistes_form_input_radio ('auto_chrono', 'auto_an'
-					, _T('spiplistes:Tous_les_ans')
+					, _T('spiplistes:tous_les_ans')
 					, ($statut == _SPIPLISTES_LIST_PUB_YEARLY)
 					, true, false)
 				. "</li>\n"

@@ -1,4 +1,4 @@
-<?php
+s<?php
 /**
  * Pack langue Greenland
  * 
@@ -321,7 +321,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'confirmation_listes_multiples_1' => 'Est&aacute;s inscri@ nas listas deste sitio ',
 'confirmation_listes_multiples_2' => 'Seleccionaches recibir as mensaxes das seguintes listas:',
 
-'Erreur_Adresse_email_invalide' => 'Erro, a direcci&oacute;n que escribiches no &eacute; v&aacute;lida',
+'erreur_adresse_email_invalide' => 'Erro, a direcci&oacute;n que escribiches no &eacute; v&aacute;lida',
 
 'infos_liste' => 'Informaci&oacute;n sobre esta lista',
 

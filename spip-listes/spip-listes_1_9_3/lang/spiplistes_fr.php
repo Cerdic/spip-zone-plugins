@@ -79,8 +79,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'abonne_sans_format' => 'Ce compte est actuellement d&#233;sabonn&#233;. Aucun format de courrier n&#8217;est 
 	d&#233;fini. Il ne peut pas recevoir de courrier. D&#233;finissez un format 
 	de r&#233;ception pour ce compte afin de valider son abonnement.'
-, 'Desabonner_temporaire' => 'D&#233;sabonner temporairement ce compte.'
-, 'Desabonner_definitif' => 'D&#233;sabonner ce compte de toutes les listes de diffusion.'
+, 'desabonner_temporaire' => 'D&#233;sabonner temporairement ce compte.'
+, 'desabonner_definitif' => 'D&#233;sabonner ce compte de toutes les listes de diffusion.'
 , 'export_etendu_' => 'Export &#233;tendu '
 , 'exporter_statut' => 'Exporter le statut (invit&#233;, r&#233;dacteur, etc.)'
 , 'editer_fiche_abonne' => 'Editer la fiche de l&#8217;abonn&#233;'
@@ -94,7 +94,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
    ne lui seront pas envoy&#233;s tant que vous ne lui aurez pas d&#233;fini un format de r&#233;ception de courriers.'
 , 'mettre_a_jour' => '<h3>SPIP-listes va mettre &#224; jour</h3>'
 , 'regulariser' => 'regulariser les desabonnes avec listes...<br />'
-, 'Supprimer_ce_contact' => 'Supprimer ce contact'
+, 'supprimer_ce_contact' => 'Supprimer ce contact'
 , 'abonne_listes' => 'Ce contact est abonn&#233; aux listes suivantes'
 , 'n_duplicata_mail' => '@n@ duplicata(s)'
 , 'n_incorrect_mail' => '@n@ incorrect(s)'
@@ -135,10 +135,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'adresse_email_reply_to' => 'Adresse de retour (reply-to)'
 , 'adresse_on_error_defaut' => 'Adresse de retour par d&#233;faut pour les erreurs (return-path)'
 , 'pas_sur' => '<p>Si vous n&#8217;&ecirc;tes pas s&ucirc;r, choisissez la fonction mail de PHP.</p>'
-, 'Complement_des_courriers' => 'Compl&#233;ment des courriers'
-, 'Complement_lien_en_tete' => 'Lien sur le courrier'
-, 'Complement_ajouter_lien_en_tete' => 'Ajouter un lien en en-t&ecirc;te du courrier'
-, 'Complement_lien_en_tete_desc' => 'Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&#233; le lien 
+, 'complement_des_courriers' => 'Compl&#233;ment des courriers'
+, 'complement_lien_en_tete' => 'Lien sur le courrier'
+, 'complement_ajouter_lien_en_tete' => 'Ajouter un lien en en-t&ecirc;te du courrier'
+, 'complement_lien_en_tete_desc' => 'Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&#233; le lien 
    du courrier original pr&#233;sent sur votre site.'
 , 'completer_titre_courrier_nom_site' => 'Compl&#233;ter le titre du courrier'
 , 'completer_titre_courrier_nom_site_desc' => 'Le titre des listes est
@@ -201,8 +201,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'jeu_de_caracteres' => 'Jeu de caract&#232;res'
 
 // exec/spiplistes_courrier_edit.php
-, 'Generer_le_contenu' => 'G&#233;n&#233;rer le contenu'
-, 'Langue_du_courrier_' => 'Langue du courrier :'
+, 'generer_le_contenu' => 'G&#233;n&#233;rer le contenu'
+, 'langue_du_courrier_' => 'Langue du courrier :'
 , 'generer_Apercu' => 'G&#233;n&#233;rer et Aper&ccedil;u'
 , 'a_partir_de_patron' => 'A partir d&#8217;un patron'
 , 'avec_introduction' => 'Avec texte d&#8217;introduction'
@@ -214,7 +214,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'choisir_un_patron_' => 'Choisir un patron '
 , 'Courrier_edit_desc' => 'Vous pouvez choisir de g&#233;n&#233;rer automatiquement le contenu du courrier
 	ou r&#233;diger simplement votre courrier dans la bo&icirc;te <strong>texte du courrier</strong>.'
-, 'Contenu_a_partir_de_date_' => 'Contenu &#224; partir de cette date '
+, 'contenu_a_partir_de_date_' => 'Contenu &#224; partir de cette date '
 , 'Cliquez_Generer_desc' => 'Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&#233;sultat 
 	dans la bo&icirc;te @titre_champ_texte@.'
 , 'Lister_articles_de_rubrique' => 'Et lister les articles de la rubrique '
@@ -289,14 +289,14 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	, ou &#234;tre mod&#233;rateur d&#39;une liste,
 	afin de pouvoir importer 
 	vos abonn&#233;s.'
-, 'Resultat_import' => 'R&#233;sultat import'
-, 'Selectionnez_une_liste_pour_import' => 'Vous devez s&#233;lectionner au moins une liste de diffusion pour pouvoir importer 
+, 'resultat_import' => 'R&#233;sultat import'
+, 'selectionnez_une_liste_pour_import' => 'Vous devez s&#233;lectionner au moins une liste de diffusion pour pouvoir importer 
 	les abonn&#233;s.'
-, 'Selectionnez_une_liste_de_destination' => 'S&#233;lectionnez une ou plusieurs listes de destination pour vos abonn&#233;s.'
-, 'Tous_les_s' => 'Tous les @s@'
-, 'Toutes_les_semaines' => 'Toutes les semaines'
-, 'Tous_les_mois' => 'Tous les mois, '
-, 'Tous_les_ans' => 'Tous les ans'
+, 'selectionnez_une_liste_de_destination' => 'S&#233;lectionnez une ou plusieurs listes de destination pour vos abonn&#233;s.'
+, 'tous_les_s' => 'Tous les @s@'
+, 'toutes_les_semaines' => 'Toutes les semaines'
+, 'tous_les_mois' => 'Tous les mois, '
+, 'tous_les_ans' => 'Tous les ans'
 , 'version_html' => '<strong>Version HTML</strong>'
 , 'version_texte' => '<strong>Version texte</strong>'
 , 'erreur_import' => 'Le fichier d&#8217;import pr&#233;sente une erreur &#224; la ligne '

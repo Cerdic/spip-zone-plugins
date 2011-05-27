@@ -380,7 +380,7 @@ function exec_spiplistes_config () {
 		$$key = spiplistes_pref_lire($key);
 	}
 	$page_result .= ''
-		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, '', _T('spiplistes:Complement_des_courriers'))
+		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_complement-24.png", true, '', _T('spiplistes:complement_des_courriers'))
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// personnaliser le courrier (reprend les données de *_auteur)
@@ -395,12 +395,12 @@ function exec_spiplistes_config () {
 		. fin_cadre_relief(true)
 		//
 		// ajout du renvoi de tete, lien courrier
-		. debut_cadre_relief('', true, '', _T('spiplistes:Complement_lien_en_tete'))
-		. "<p class='verdana2'>"._T('spiplistes:Complement_lien_en_tete_desc')."</p>"
+		. debut_cadre_relief('', true, '', _T('spiplistes:complement_lien_en_tete'))
+		. "<p class='verdana2'>"._T('spiplistes:complement_lien_en_tete_desc')."</p>"
 		. '<input type="checkbox" name="opt_lien_en_tete_courrier" value="oui" id="opt-lien-en-tete-courrier" '
 			. (($opt_lien_en_tete_courrier) ? 'checked="checked"' : '')
 			. ' />' . $eol
-		. "<label class='verdana2' for='opt-lien-en-tete-courrier'>"._T('spiplistes:Complement_ajouter_lien_en_tete').'</label>' . $eol
+		. "<label class='verdana2' for='opt-lien-en-tete-courrier'>"._T('spiplistes:complement_ajouter_lien_en_tete').'</label>' . $eol
 		//
 		// lien courrier: boite de selection
 		. "<div id='div-lien-en-tete-courrier' style='".(!$opt_lien_en_tete_courrier ? "display:none;" : '')."margin-top:1em;'>"

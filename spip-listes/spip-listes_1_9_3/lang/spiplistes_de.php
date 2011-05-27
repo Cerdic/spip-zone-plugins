@@ -302,7 +302,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'confirmation_listes_multiples_1' => 'Sie haben die Newsletter der Website abonniert ',
 'confirmation_listes_multiples_2' => 'Sie haben folgende Listen abonniert:',
 
-'Erreur_Adresse_email_invalide' => 'Fehler: Sie haben eine ung&uuml;ltige E-Mail Adresse angegeben',
+'erreur_adresse_email_invalide' => 'Fehler: Sie haben eine ung&uuml;ltige E-Mail Adresse angegeben',
 
 'infos_liste' => 'Informationen &uuml;ber diese Liste',
 

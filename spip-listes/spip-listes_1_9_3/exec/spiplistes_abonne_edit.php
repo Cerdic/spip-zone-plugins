@@ -119,7 +119,7 @@ function exec_spiplistes_abonne_edit () {
 	$gros_bouton_supprimer = 
 		($id_auteur && $flag_editable && ($statut=='6forum'))
 		? icone (
-				_T('spiplistes:Supprimer_ce_contact')
+				_T('spiplistes:supprimer_ce_contact')
 				, generer_action_auteur(_SPIPLISTES_ACTION_SUPPRIMER_ABONNER, $id_auteur, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE))
 				, 'redacteurs-24.gif'
 				, "supprimer.gif"
@@ -216,12 +216,12 @@ function exec_spiplistes_abonne_edit () {
 			. fin_cadre_relief(true)
 			// suspendre les abonnements
 			. debut_cadre_relief('', true)
-			. spiplistes_form_input_radio ('modif_abo', 'suspend', _T('spiplistes:Desabonner_temporaire')
+			. spiplistes_form_input_radio ('modif_abo', 'suspend', _T('spiplistes:desabonner_temporaire')
 				, ($modif_abo == 'suspend'), true, false)
 			. fin_cadre_relief(true)
 			// resilier les abonnements
 			. debut_cadre_relief('', true)
-			. spiplistes_form_input_radio ('modif_abo', 'non', _T('spiplistes:Desabonner_definitif')
+			. spiplistes_form_input_radio ('modif_abo', 'non', _T('spiplistes:desabonner_definitif')
 				, (($format_abo == 'non') && ($modif_abo != 'suspend')), true, false)
 			. fin_cadre_relief(true)
 			. "<input type='hidden' name='id_auteur' value=$id_auteur >\n"

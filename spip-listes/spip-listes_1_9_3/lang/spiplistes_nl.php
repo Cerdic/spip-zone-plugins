@@ -73,8 +73,8 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'abonne_sans_format' => "Ce compte est actuellement d&eacute;sabonn&eacute;. Aucun format de courrier n'est 
 	d&eacute;fini. Il ne peut pas recevoir de courrier. D&eacute;finissez un format 
 	de r&eacute;ception pour ce compte afin de valider son abonnement."
-, 'Desabonner_temporaire' => "tijdelijke uitschrijving van dit account."
-, 'Desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion."
+, 'desabonner_temporaire' => "tijdelijke uitschrijving van dit account."
+, 'desabonner_definitif' => "D&eacute;sabonner ce compte de toutes les listes de diffusion."
 , 'export_etendu_' => "Export &eacute;tendu "
 , 'exporter_statut' => "Exporter le statut (invit&eacute;, r&eacute;dacteur, etc.)"
 , 'editer_fiche_abonne' => "Editer la fiche de l'abonn&eacute;"
@@ -88,7 +88,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
    ne lui seront pas envoy&eacute;s tant que vous ne lui aurez pas d&eacute;fini un format de r&eacute;ception de courriers."
 , 'mettre_a_jour' => '<h3>SPIP-listes va mettre &agrave; jour</h3>'
 , 'regulariser' => 'regulariser les desabonnes avec listes...<br />'
-, 'Supprimer_ce_contact' => "Supprimer ce contact"
+, 'supprimer_ce_contact' => "Supprimer ce contact"
 , 'abonne_listes' => "Ce contact est abonn&eacute; aux listes suivantes"
 , 'n_duplicata_mail' => "@n@ duplicata(s)"
 , 'n_incorrect_mail' => "@n@ incorrect(s)"
@@ -124,10 +124,10 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'adresse_envoi_defaut' => "Standaard email adres"
 , 'adresse_on_error_defaut' => "Adresse de retour par d&eacute;faut pour les erreurs"
 , 'pas_sur' => '<p>Indien u niet zeker bent, kies de mail functie van PHP.</p>'
-, 'Complement_des_courriers' => "Compl&eacute;ment des courriers"
-, 'Complement_lien_en_tete' => "Lien sur le courrier"
-, 'Complement_ajouter_lien_en_tete' => "Ajouter un lien en en-t&ecirc;te du courrier"
-, 'Complement_lien_en_tete_desc' => "Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&eacute; le lien 
+, 'complement_des_courriers' => "Compl&eacute;ment des courriers"
+, 'complement_lien_en_tete' => "Lien sur le courrier"
+, 'complement_ajouter_lien_en_tete' => "Ajouter un lien en en-t&ecirc;te du courrier"
+, 'complement_lien_en_tete_desc' => "Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&eacute; le lien 
    du courrier original pr&eacute;sent sur votre site."
 , 'Complement_tampon_editeur' => "Ajouter le tampon Editeur"
 , 'Complement_tampon_editeur_desc' => "Cette option vous permet de rajouter le tampon de l'&eacute;diteur en fin de courrier. "
@@ -169,8 +169,8 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'mode_inscription' => 'Param&eacute;trer le mode d\'inscription des visiteurs'
 
 // exec/spiplistes_courrier_edit.php
-, 'Generer_le_contenu' => "G&eacute;n&eacute;rer le contenu"
-, 'Langue_du_courrier_' => "Langue du courrier :"
+, 'generer_le_contenu' => "G&eacute;n&eacute;rer le contenu"
+, 'langue_du_courrier_' => "Langue du courrier :"
 , 'generer_Apercu' => "G&eacute;n&eacute;rer et Aper&ccedil;u"
 , 'a_partir_de_patron' => "A partir d'un patron"
 , 'avec_introduction' => "Avec texte d'introduction"
@@ -182,7 +182,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'choisir_un_patron_' => "Choisir un patron "
 , 'Courrier_edit_desc' => 'Vous pouvez choisir de g&eacute;n&eacute;rer automatiquement le contenu du courrier
 	ou r&eacute;diger simplement votre courrier dans la bo&icirc;te <strong>texte du courrier</strong>.'
-, 'Contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date "
+, 'contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date "
 , 'Cliquez_Generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
 	dans la bo&icirc;te @titre_champ_texte@."
 , 'Lister_articles_de_rubrique' => "Et lister les articles de la rubrique "
@@ -200,7 +200,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'avec_patron_pied__' => "Avec le patron de pied : "
 
 // exec/spiplistes_courrier_gerer.php
-, 'Erreur_Adresse_email_invalide' => 'Error, het email-adres dat u opgaf, is  ongeldig'
+, 'erreur_adresse_email_invalide' => 'Error, het email-adres dat u opgaf, is  ongeldig'
 , 'langue_' => '<strong>Taal:</strong>&nbsp;'
 , 'calcul_patron' => 'Indruk met het patroon tekstversie'
 , 'calcul_html' => 'Indruk met HTML versie'
@@ -255,14 +255,14 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'Messages_automatiques' => 'Courriers automatiques programm&eacute;s'
 , 'pas_de_liste_pour_import' => "Vous devez cr&eacute;er au moins une liste de destination afin de pouvoir importer 
 	vos abonn&eacute;s."
-, 'Resultat_import' => "R&eacute;sultat import"
-, 'Selectionnez_une_liste_pour_import' => "Vous devez s&eacute;lectionner au moins une liste de diffusion pour pouvoir importer 
+, 'resultat_import' => "R&eacute;sultat import"
+, 'selectionnez_une_liste_pour_import' => "Vous devez s&eacute;lectionner au moins une liste de diffusion pour pouvoir importer 
 	les abonn&eacute;s."
-, 'Selectionnez_une_liste_de_destination' => "S&eacute;lectionnez une ou plusieurs listes de destination pour vos abonn&eacute;s."
-, 'Tous_les_s' => "Alle @s@"
-, 'Toutes_les_semaines' => "Elke week"
-, 'Tous_les_mois' => "Elke maand, "
-, 'Tous_les_ans' => "Elk jaar"
+, 'selectionnez_une_liste_de_destination' => "S&eacute;lectionnez une ou plusieurs listes de destination pour vos abonn&eacute;s."
+, 'tous_les_s' => "Alle @s@"
+, 'toutes_les_semaines' => "Elke week"
+, 'tous_les_mois' => "Elke maand, "
+, 'tous_les_ans' => "Elk jaar"
 , 'version_html' => '<strong>HTML versie</strong>'
 , 'version_texte' => '<strong>Tekstversie</strong>'
 , 'erreur_import' => 'Het document voor de import vertoont een fout op lijn '

@@ -175,7 +175,7 @@ function exec_spiplistes_courrier_gerer () {
 						}
 					}
 					else {
-						$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_Adresse_email_invalide'), true);
+						$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:erreur_adresse_email_invalide'), true);
 					}
 				} // end if($radio_destination == 'email_test')
 				

@@ -74,8 +74,8 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 // exec/spiplistes_abonne_edit.php
 , 'adresse_mail_obligatoire' => "Falta el email. No se puede hacer la inscripci&oacute;n."
 , 'abonne_sans_format' => "<b>Esta cuenta est&aacute; inactiva</b>. No hay formatos de email seleccionados. No puedes recibir emails hasta que no selecciones un formato para recibirlos."
-, 'Desabonner_temporaire' => "Suprimir temporalmente esta cuenta."
-, 'Desabonner_definitif' => "Suprimir esta cuenta de todos los boletines."
+, 'desabonner_temporaire' => "Suprimir temporalmente esta cuenta."
+, 'desabonner_definitif' => "Suprimir esta cuenta de todos los boletines."
 , 'export_etendu_' => "Exportaci&oacute;n ampliada"
 , 'exporter_statut' => "Exportar el estado (invitad@, redactora, etc.)"
 , 'editer_fiche_abonne' => "Modificar la inscripci&oacute;n;"
@@ -88,7 +88,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
    hasta que no selecciones un formato para recibirlos."
 , 'mettre_a_jour' => '<h3>SPIP-listes va a actualizarse</h3>'
 , 'regulariser' => 'poner al d&iacute;a las cuentas suprimidas...<br />'
-, 'Supprimer_ce_contact' => "Suprimir esta cuenta"
+, 'supprimer_ce_contact' => "Suprimir esta cuenta"
 , 'abonne_listes' => "Esta cuenta esta asociada a las siguientes listas"
 , 'n_duplicata_mail' => "@n@ duplicado(s)"
 , 'n_incorrect_mail' => "@n@ incorrecto(s)"
@@ -122,10 +122,10 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'adresse_envoi_defaut' => "Direcci&oacute;n de email enviada por defecto"
 , 'adresse_on_error_defaut' => "Direcci&oacute;n de retorno para los errores"
 , 'pas_sur' => '<p>Si no sabes que elegir, selecciona la funci&oacute;n de mail de PHP.</p>'
-, 'Complement_des_courriers' => "Complemento de los emails"
-, 'Complement_lien_en_tete' => "Enlace en el email"
-, 'Complement_ajouter_lien_en_tete' => "A&ntilde;adir un enlace en el encabezado del email"
-, 'Complement_lien_en_tete_desc' => "Enviar en el encabezado del email HTML el enlace
+, 'complement_des_courriers' => "Complemento de los emails"
+, 'complement_lien_en_tete' => "Enlace en el email"
+, 'complement_ajouter_lien_en_tete' => "A&ntilde;adir un enlace en el encabezado del email"
+, 'complement_lien_en_tete_desc' => "Enviar en el encabezado del email HTML el enlace
    al email original guardado en el sitio."
 , 'Complement_tampon_editeur' => "Est&aacute; opci&oacute;n permite a&ntilde;adir el sello Editor o Editora"
 , 'Complement_tampon_editeur_desc' => "Est&aacute; opci&oacute;n permite a&ntilde;adir el sello Editor o Editora al final del email. "
@@ -166,8 +166,8 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'mode_inscription' => 'Configurar el modo de inscripci&oacute;n'
 
 // exec/spiplistes_courrier_edit.php
-, 'Generer_le_contenu' => "Crear el contenido autom&aacute;ticamente"
-, 'Langue_du_courrier_' => "Idioma del email:"
+, 'generer_le_contenu' => "Crear el contenido autom&aacute;ticamente"
+, 'langue_du_courrier_' => "Idioma del email:"
 , 'generer_Apercu' => "crear y previsualizar"
 , 'a_partir_de_patron' => "Desde una plantilla"
 , 'avec_introduction' => "Con texto de introducci&oacute;n"
@@ -179,7 +179,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'choisir_un_patron_' => "Seleccionar una plantilla"
 , 'Courrier_edit_desc' => 'Puedes elegir que se cree autom&aacute;ticamente el contenido del correo
 	o escribirlo directamente en el <strong>texto del correo</strong>.'
-, 'Contenu_a_partir_de_date_' => "Contenido desde "
+, 'contenu_a_partir_de_date_' => "Contenido desde "
 , 'Cliquez_Generer_desc' => "Cliquea aqu&iacute; para <strong>@titre_bouton@</strong> el correo insertando el resultado 
 	en el @titre_champ_texte@."
 , 'Lister_articles_de_rubrique' => "Con los art&iacute;culos de la secci&oacute;n"
@@ -197,7 +197,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'avec_patron_pied__' => "Con la plantilla para el pie: "
 
 // exec/spiplistes_courrier_gerer.php
-, 'Erreur_Adresse_email_invalide' => 'Error: la direcci&oacute;n del email no es v&aacute;lida'
+, 'erreur_adresse_email_invalide' => 'Error: la direcci&oacute;n del email no es v&aacute;lida'
 , 'langue_' => '<strong>Idioma:</strong>&nbsp;'
 , 'calcul_patron' => 'Calculado con la plantilla para texto'
 , 'calcul_html' => 'Calculado desde la versi&oacuten HTML del mensaje'
@@ -251,13 +251,13 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'membres_liste' => 'Lista de inscripciones'
 , 'Messages_automatiques' => 'Env&iacute;os programados'
 , 'pas_de_liste_pour_import' => "Tienes que seleccionar al menos una lista de detinatari@s para poder importar las inscripciones."
-, 'Resultat_import' => "Resultado de la importaci&oacute;n"
-, 'Selectionnez_une_liste_pour_import' => "Tienes que seleccionar al menos una lista de destinatari@s para poder importar las inscripciones."
-, 'Selectionnez_une_liste_de_destination' => "Selecciona una o varias listas de destinatari@s para las inscripciones."
-, 'Tous_les_s' => "Cada @s@"
-, 'Toutes_les_semaines' => "Semanal"
-, 'Tous_les_mois' => "Mensual, "
-, 'Tous_les_ans' => 'Anual'
+, 'resultat_import' => "Resultado de la importaci&oacute;n"
+, 'selectionnez_une_liste_pour_import' => "Tienes que seleccionar al menos una lista de destinatari@s para poder importar las inscripciones."
+, 'selectionnez_une_liste_de_destination' => "Selecciona una o varias listas de destinatari@s para las inscripciones."
+, 'tous_les_s' => "Cada @s@"
+, 'toutes_les_semaines' => "Semanal"
+, 'tous_les_mois' => "Mensual, "
+, 'tous_les_ans' => 'Anual'
 , 'version_html' => '<strong>Versi&oacute;n HTML</strong>'
 , 'version_texte' => '<strong>Versi&oacute;n texte</strong>'
 , 'erreur_import' => 'El archivo de importaci&oacute;n tiene un error en la l&iacute;nea '

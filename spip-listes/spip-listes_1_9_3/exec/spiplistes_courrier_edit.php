@@ -189,7 +189,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:Courrier_edit_desc')."</p>\n"
 		;
 		
-	$titre_block_depliable = _T('spiplistes:Generer_le_contenu');
+	$titre_block_depliable = _T('spiplistes:generer_le_contenu');
 	$page_result .= ''
 		//
 		// generer le contenu
@@ -218,7 +218,7 @@ function exec_spiplistes_courrier_edit(){
 		$page_result .= "" 
 			// selecteur de langues
 			. "<div class='boite-generer-option'>\n"
-			. "<label class='verdana2'>"._T('spiplistes:Langue_du_courrier_')
+			. "<label class='verdana2'>"._T('spiplistes:langue_du_courrier_')
 			. "<select name='lang' class='fondo'>\n"
 			. liste_options_langues('changer_lang')
 			. "</select></label>\n"
@@ -231,7 +231,7 @@ function exec_spiplistes_courrier_edit(){
 		. spiplistes_dater_envoi(
 			'courrier', $id_courrier, $statut
 			, $flag_editable
-			, _T('spiplistes:Contenu_a_partir_de_date_')
+			, _T('spiplistes:contenu_a_partir_de_date_')
 			, normaliser_date(time()), 'btn_changer_date'
 			, false
 			)

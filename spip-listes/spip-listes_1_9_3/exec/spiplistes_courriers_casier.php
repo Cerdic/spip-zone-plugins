@@ -85,7 +85,7 @@ function spiplistes_afficher_pile_messages() {
 			case _SPIPLISTES_LIST_PRIV_DAILY:
 			case _SPIPLISTES_LIST_PUB_DAILY:
 				if($periode) {
-					$periodicite = _T('spiplistes:Tous_les_s'
+					$periodicite = _T('spiplistes:tous_les_s'
 					, array('s' => spiplistes_singulier_pluriel_str_get($periode, _T('spiplistes:jour'), _T('spiplistes:jours')))
 					);
 				} else {
