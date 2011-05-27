@@ -15,21 +15,17 @@
 #HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 
-#SET{claire,##ENV{couleur_claire,edf3fe}}
-#SET{foncee,##ENV{couleur_foncee,3874b0}}
-#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
-#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
-
 .formulaire_editer_corbeille {background:none;border:none;}
-.formulaire_editer_corbeille ul.checkables li {padding-#GET{left}:30px;}
+.formulaire_editer_corbeille ul.checkables h4 {margin-bottom:0;}
+.formulaire_editer_corbeille ul.checkables li {padding-#ENV{left}:30px;}
 .formulaire_editer_corbeille ul.checkables li label {position:absolute;top:-10000px;left:-2000px;float:none;margin:0;padding:0;}
-.formulaire_editer_corbeille ul.checkables li input {margin-#GET{left}:-30px;float:#GET{left};position:relative;display:inline;}
+.formulaire_editer_corbeille ul.checkables li input {margin-#ENV{left}:-30px;float:#ENV{left};position:relative;display:inline;}
 
-#liste-articles .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{article-24.gif}}) no-repeat center left;}
-#liste-auteurs .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{auteur-24.gif}}) no-repeat center left;}
-#liste-breves .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{breve-24.gif}}) no-repeat center left;}
-#liste-messages .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{messagerie-24.gif}}) no-repeat center left;}
-#liste-forums_publics .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{forum-public-24.gif}}) no-repeat center left;}
-#liste-forums_prives .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{forum-interne-24.gif}}) no-repeat center left;}
-#liste-sites .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{site-24.gif}}) no-repeat center left;}
-#liste-signatures .formulaire_editer_corbeille h2 {padding:5px;padding-#GET{left}:30px;background:url(#CHEMIN{#EVAL{_DIR_IMG_PACK}|concat{suivi-petition-24.gif}}) no-repeat center left;}
+.liste.corbeille-articles >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{article-16}) no-repeat center left;}
+.liste.corbeille-auteurs >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{auteur-16}) no-repeat center left;}
+.liste.corbeille-breves >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{breve-16}) no-repeat center left;}
+.liste.corbeille-messages >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{message-16}) no-repeat center left;}
+.liste.corbeille-forum >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{forum-16}) no-repeat center left;}
+.liste.corbeille-forum >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{forum-16}) no-repeat center left;}
+.liste.corbeille-sites >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{site-16}) no-repeat center left;}
+.liste.corbeille-signatures >h3 {padding-#ENV{left}:30px;background:url(#CHEMIN_IMAGE{signature-16}) no-repeat center left;}

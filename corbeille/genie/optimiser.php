@@ -1,10 +1,12 @@
 <?php
 /**
- * Plugin Corbeille 2.0
- * La corbeille pour Spip 2.0
+ * Plugin Corbeille 3.0
+ * La corbeille pour Spip 3.0
  * Collectif
  * Licence GPL
  */
+
+include_once _DIR_RESTREINT."genie/optimiser.php";
 
 /**
  * Pas d'optimisation auto avec le plugin corbeille !
@@ -13,7 +15,6 @@
  * @return unknown
  */
 function genie_optimiser($t){
-	include_spip('optimiser','genie');
 
 	optimiser_base_une_table();
 
@@ -24,7 +25,5 @@ function genie_optimiser($t){
 	return -(mktime(2,0,0) + rand(0, 3600*4));
 }
 
-// Déclaration du pipeline pour ajouter de nouveaux objets
-$GLOBALS['spip_pipeline']['corbeille_table_infos'] = '';
 
 ?>

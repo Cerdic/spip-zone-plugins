@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Corbeille 2.0
- * La corbeille pour Spip 2.0
+ * Plugin Corbeille 3.0
+ * La corbeille pour Spip 3.0
  * Collectif
  * Licence GPL
  */
