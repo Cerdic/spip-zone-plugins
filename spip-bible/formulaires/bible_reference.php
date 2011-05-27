@@ -1,6 +1,6 @@
 <?php
 
-function formulaires_bible_reference_charger_dist($lang='fr',$cadre=true){
+function formulaires_bible_reference_charger_dist($lang='fr',$cadre=1){
     
 	$valeurs = array(
 		'cadre'=>$cadre,
