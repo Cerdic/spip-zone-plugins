@@ -336,11 +336,23 @@ function spiplistes_fin_raccourcis ($return = false) {
 	else echo($result);
 }
 
-// From SPIP-Listes-V: CP:20070923
+/**
+ * @version SPIP-Listes-V: CP:20070923
+ */
 function spiplistes_boite_raccourcis ($return = false) {
+	
 	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
+	$connect_statut = intval($GLOBALS['connect_statut']);
 	
 	$flag_webmestre = autoriser('webmestre','','',$connect_id_auteur);
+	$flag_administrateur = ($connect_statut == "0minirezo");
+	
+	$id_liste = intval(_request('id_liste'));
+	$flag_moderateur =
+		($id_liste > 0)
+		? autoriser('moderer', 'liste', $id_liste, $connect_id_auteur)
+		: FALSE
+		;
 	
 	$result = ""
 		. (($flag_webmestre) ? spiplistes_raccourci_journal_jquery() : "")
@@ -368,7 +380,9 @@ function spiplistes_boite_raccourcis ($return = false) {
 			)
 		. "</li>\n"
 		;
-	if($flag_webmestre) {
+		
+	if($flag_webmestre
+	   || $flag_administrateur ) {
 		$result .= ""
 			. "<li>"
 			. icone_horizontale(

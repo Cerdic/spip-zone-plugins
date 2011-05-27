@@ -285,7 +285,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'incorrect_ou_dupli' => ' (incorrect ou dupli)'
 , 'membres_liste' => 'Liste des Membres'
 , 'Messages_automatiques' => 'Courriers automatiques programm&#233;s'
-, 'Pas_de_liste_pour_import' => 'Vous devez cr&#233;er au moins une liste de destination afin de pouvoir importer 
+, 'pas_de_liste_pour_import' => 'Vous devez cr&#233;er au moins une liste de destination
+	, ou &#234;tre mod&#233;rateur d&#39;une liste,
+	afin de pouvoir importer 
 	vos abonn&#233;s.'
 , 'Resultat_import' => 'R&#233;sultat import'
 , 'Selectionnez_une_liste_pour_import' => 'Vous devez s&#233;lectionner au moins une liste de diffusion pour pouvoir importer 

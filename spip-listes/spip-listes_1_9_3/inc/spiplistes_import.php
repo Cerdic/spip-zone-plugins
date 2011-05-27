@@ -203,7 +203,8 @@ function spiplistes_import (
 					} // end if(!$mail_exist)
 					
 					// adresse mail existe dans la base
-					// si on passe par ici, c'est sous-entendu $forcer_abo (abonne' un compte existant)
+					// si on passe par ici, c'est sous-entendu $forcer_abo
+					// (abonne' un compte existant)
 					else
 					{
 						$stack_new_abonnes[] = intval($current_auteurs[$email]['id_auteur']);
@@ -221,14 +222,14 @@ function spiplistes_import (
 		} // end for
 				
 		$creer_comptes = count($stack_new_auteurs);
-		$inscrire_abos = count($stack_new_abonnes);
-
+		spiplistes_debug_log ('CREATE '.$creer_comptes.' new accounts');
+		
 		/**
 		 * Appliquer le statut temporaire aux comptes
 		 * existants qui n'ont pas de format.
 		 * Le format sera appliqué dans la requete plus bas.
 		 */
-		if($inscrire_abos)
+		if ($inscrire_abos)
 		{
 			$forcer_statuts = array();
 			foreach ($current_auteurs as $mail => $value)
@@ -271,9 +272,25 @@ function spiplistes_import (
 				}
 				$sql_col_values = rtrim($sql_col_values,',');
 				
-				$r = sql_insert('spip_auteurs', $sql_col_names, $sql_col_values);
-				$stack_comptes_crees[] = $r;
+				if (sql_insert('spip_auteurs', $sql_col_names, $sql_col_values))
+				{
+					$sql_select = array('id_auteur');
+					$sql_from = array('spip_auteurs');
+					$sql_where[] = 'statut='.sql_quote($tmp_statut);
+					
+					if ($sql_result = sql_select (
+						$sql_select
+						, $sql_from
+						, $sql_where
+						)) {
+						while ($row = sql_fetch($sql_result)) {
+							$stack_new_abonnes[] = $row['id_auteur'];
+						}
+					}
+				}
 			}
+			$inscrire_abos = count($stack_new_abonnes);
+			spiplistes_debug_log ('SUBCRIBE '.$inscrire_abos.' accounts');
 			
 			//syslog(LOG_NOTICE, 'memory_get_usage[6]: ' . memory_get_usage());
 			

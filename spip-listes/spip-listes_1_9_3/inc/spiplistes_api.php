@@ -182,6 +182,8 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
  */
 function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
 	
+	spiplistes_debug_log('SUBSCRIBE auteur #'.$id_auteur.' TO liste #'.$id_liste);
+	
 	$r_id_listes = false;
 	
 	if(($id_auteur = intval($id_auteur)) > 0) {
@@ -1014,6 +1016,7 @@ function spiplistes_mod_listes_compter ($id_liste) {
 /**
  * renvoie tableau id_liste des listes moderees par l'auteur
  * @version CP-20080620
+ * @return bool|array
  */
 function spiplistes_mod_listes_id_auteur ($id_auteur) {
 	$result = false;

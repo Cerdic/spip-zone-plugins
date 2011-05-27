@@ -58,26 +58,24 @@ function exec_spiplistes_import_export() {
 
 	$separateur = (($separateur == 'tab') ? "\t" : ';');
 	
-	$flag_admin = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
-	$flag_moderateur = false;
+	$flag_webmestre = ($connect_statut == "0minirezo") && $connect_toutes_rubriques;
+	$flag_administrateur = ($connect_statut == "0minirezo");
+	$flag_moderateur = FALSE;
 	
-	$flag_autorise = 
-		$flag_admin
+	$flag_autorise =
+		$flag_webmestre
+		|| $flag_administrateur
 		|| (
 				$flag_moderateur = ($listes_moderees = spiplistes_mod_listes_id_auteur($connect_id_auteur))
 			)
 		;
 
-	// exportation de liste. Retour formulaire local.
-	// les admins tt rubriques peuvent tt exporter
-	// le moderateur ne peut exporter que sa liste
-	if(
-		$flag_autorise
-		&& 
-			(	$flag_admin
-				|| in_array($export_id, $listes_moderees)
-			)
-	) {
+	/**
+	 * exportation de liste. Retour formulaire local.
+	 * les admins tt rubriques peuvent tt exporter
+	 * le moderateur ne peut exporter que sa liste
+	 */
+	if ($flag_autorise) {
 	
 		// generation du fichier export ?
 		if($btn_valider_export && $export_id) {
@@ -219,7 +217,7 @@ function exec_spiplistes_import_export() {
 					, $abos_liste
 					, $format_abo
 					, $separateur
-					, $flag_admin
+					, $flag_administrateur
 					, $listes_moderees
 					, $forcer_abo
 					)
@@ -236,15 +234,26 @@ function exec_spiplistes_import_export() {
 
 	$nb_listes = sql_count($list);
 	
-	if($nb_listes) {
+	/**
+	 * L'import n'est permis que pour le
+	 * webmestre ou le modérateur de la liste.
+	 */
+	if ($nb_listes) {
 		$listes_array = array();
-		while($row = sql_fetch($list)) {
-			$listes_array[] = $row;
+		while ($row = sql_fetch($list))
+		{
+			if ($flag_webmestre
+				|| autoriser('moderer', 'liste', $row['id_liste'], $connect_id_auteur)
+				)
+			{
+				$listes_array[] = $row;
+			}
 		}
 	}
-	
+	$nb_listes = count($listes_array);
+
 	if(!$nb_listes) {
-		$page_result .= spiplistes_boite_alerte(_T('spiplistes:Pas_de_liste_pour_import'), true);
+		$page_result .= spiplistes_boite_alerte(_T('spiplistes:pas_de_liste_pour_import'), true);
 	} 
 	else {
 		$page_result .= ""
@@ -276,7 +285,7 @@ function exec_spiplistes_import_export() {
 			if(
 				!in_array($id_liste, $listes_sans_patron)
 				&&
-				($flag_admin || in_array($id_liste, $listes_moderees))
+				($flag_administrateur || in_array($id_liste, $listes_moderees))
 			) {
 				$titre = couper($row['titre'], 30, '...');
 				$texte = couper($row['texte'], 30, '...');
@@ -347,7 +356,7 @@ function exec_spiplistes_import_export() {
 		$couleur_ligne = 0;
 		foreach($listes_array as $row) {
 			$id_liste = intval($row['id_liste']);
-			if($flag_admin || in_array($id_liste, $listes_moderees)) {
+			if($flag_administrateur || in_array($id_liste, $listes_moderees)) {
 				$titre = couper($row['titre'], 30, '...');
 				$class = ($couleur_ligne++ % 2) ? "class='row-even'" : "";
 				list($nb_abos, $html, $texte) = spiplistes_listes_nb_abonnes_compter($id_liste, true);

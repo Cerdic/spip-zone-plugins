@@ -230,7 +230,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'incorrect_ou_dupli' => " (non corretto o duplicato)"
 , 'membres_liste' => 'Lista degli abbonati'
 , 'Messages_automatiques' => 'Email automatiche programmate'
-, 'Pas_de_liste_pour_import' => "Devi creare almeno una newsletter per poter importare 
+, 'pas_de_liste_pour_import' => "Devi creare almeno una newsletter per poter importare 
 	i tuoi abbonati."
 , 'Resultat_import' => "Risultato dell'importazione"
 , 'Selectionnez_une_liste_pour_import' => "Devi selezionare almeno una newsletter per poter importare 

@@ -29,15 +29,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
+include_spip('inc/presentation');
+include_spip('inc/spiplistes_api');
+include_spip('inc/spiplistes_api_presentation');
+include_spip('inc/spiplistes_lister_courriers_listes');
+include_spip('inc/spiplistes_naviguer_paniers');
+include_spip('inc/spiplistes_agenda');
+
 
 function exec_spiplistes_listes_toutes(){
-	
-	include_spip('inc/presentation');
-	include_spip('inc/spiplistes_api');
-	include_spip('inc/spiplistes_api_presentation');
-	include_spip('inc/spiplistes_lister_courriers_listes');
-	include_spip('inc/spiplistes_naviguer_paniers');
-	include_spip('inc/spiplistes_agenda');
 	
 	global $connect_statut
 		, $connect_id_auteur
