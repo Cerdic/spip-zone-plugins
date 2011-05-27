@@ -6,7 +6,7 @@
 	</auteur>
 	<licence>GPL 3 - &#169; 2006-2010</licence>
 	<version>3.1.3</version>
-	<version_base>0.23</version_base>
+	<version_base>0.24</version_base>
 	<etat>dev</etat>
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://www.spip-contrib.net/article2858</lien> <!-- URI de documentation -->
@@ -30,6 +30,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/agenda_evenements.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_sql</nom>
 		<inclure>base/agenda_evenements.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -89,10 +93,9 @@
 	</bouton>
 	<chemin dir="" />
 	<chemin dir="inclure" />
-	<necessite id="SPIP" version="[3.0.0-dev;)" /> 
+	<necessite id="SPIP" version="[3.0.0-dev;]" /> 
 
 <!-- si le plugin fulltext est actif, il faut qu'agenda soit pris en compte avant lui pour le pipeline rechercher_liste_des_champs -->
 	<utilise id='Fulltext' version='[0.2;]' />
-	<utilise id='bando' version='[1.0.0;]' />
 	<categorie>date</categorie>
 </plugin>
