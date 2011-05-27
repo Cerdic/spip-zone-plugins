@@ -21,7 +21,7 @@ function association_recuperer_telephones($id_auteurs)
 		$telephones_auteurs[$id_auteur] = array();
 	}
 
-	if (plugin_actif('COORDONNEES')) {
+	if (test_plugin_actif('COORDONNEES')) {
 		$id_auteurs_list = sql_in('nl.id_objet', $id_auteurs);
 		$query = sql_select('nl.id_objet as id_auteur, n.numero as numero','spip_numeros as n INNER JOIN spip_numeros_liens AS nl ON nl.id_numero=n.id_numero', $id_auteurs_list.' AND nl.objet=\'auteur\'');
 		while ($data = sql_fetch($query))
@@ -63,7 +63,7 @@ function association_recuperer_adresses($id_auteurs, $newline="<br/>", $espace="
 		$adresses_auteurs[$id_auteur] = array();
 	}
 	
-	if (plugin_actif('COORDONNEES')) {
+	if (test_plugin_actif('COORDONNEES')) {
 		$id_auteurs_list = sql_in('al.id_objet', $id_auteurs);
 		$query = sql_select('al.id_objet as id_auteur, a.titre as titre, a.voie as voie, a.complement as complement, a.boite_postale as boite_postale, a.code_postal as code_postal, a.ville as ville, a.pays as pays', 'spip_adresses as a INNER JOIN spip_adresses_liens AS al ON al.id_adresse=a.id_adresse',$id_auteurs_list.' AND al.objet=\'auteur\'');
 		while ($data = sql_fetch($query)) {
@@ -117,7 +117,7 @@ function association_recuperer_emails($id_auteurs)
 	}
 
 	/* si le plugin coordonnees est actif, on recupere les emails contenus dans coordonnees */
-	if (plugin_actif('COORDONNEES')) {
+	if (test_plugin_actif('COORDONNEES')) {
 		$id_auteurs_list = sql_in('el.id_objet', $id_auteurs);
 		$query = sql_select('el.id_objet as id_auteur, e.email as email','spip_emails as e INNER JOIN spip_emails_liens AS el ON el.id_email=e.id_email', $id_auteurs_list.' AND el.objet=\'auteur\'');
 		while ($data = sql_fetch($query)) {

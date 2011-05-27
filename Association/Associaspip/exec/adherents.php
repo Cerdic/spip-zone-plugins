@@ -291,7 +291,7 @@ function adherents_table($liste_id_auteurs)
 	$res .= "<input type='checkbox' name='champs[email]' />"._T('asso:email')."<br />";
 
 	/* si le plugin coordonnees est actif, on ajoute l'adresse et le telephone */
-	if (plugin_actif('COORDONNEES')) {
+	if (test_plugin_actif('COORDONNEES')) {
 		$res .= "<input type='checkbox' name='champs[adresse]' />"._T('asso:adresse')."<br />";
 		$res .= "<input type='checkbox' name='champs[telephone]' />"._T('asso:telephone')."<br />";
 	}

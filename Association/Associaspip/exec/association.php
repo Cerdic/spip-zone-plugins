@@ -53,7 +53,7 @@ function exec_association() {
 		echo $GLOBALS['association_metas']['prefet']."<br />\n";
 		echo fin_cadre_formulaire(true);
 		
-		$coordonnees_actif = plugin_actif('COORDONNEES');
+		$coordonnees_actif = test_plugin_actif('COORDONNEES');
 		include_spip('inc/association_coordonnees');
 
 		/* on recupere tout dans un tableau php pour pouvoir extraire le tableau des id_auteur a envoyer en parametre aux fonction de recuperation d'emails et telephone */
