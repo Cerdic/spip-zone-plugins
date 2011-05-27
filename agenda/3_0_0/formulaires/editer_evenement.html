@@ -79,11 +79,7 @@
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>
 			]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
 	    </li>
-	    [<li class="editer_mots[ (#ENV**{erreurs}|table_valeur{mots}|oui)erreur]">
-	    <label for="mots"><:titre_page_mots_tous:></label>[
-	    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{mots})</span>
-	    ](#INCLURE{fond=formulaires/inc-mots_evenements}{name=mots}{id_evenement}{selected=#ENV{mots}}|trim)
-	    </li>]
+
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
