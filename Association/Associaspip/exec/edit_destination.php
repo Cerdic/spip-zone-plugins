@@ -38,7 +38,7 @@ function exec_edit_destination(){
 		echo association_retour();
 		echo debut_droite("",true);
 		
-		debut_cadre_relief(  "", false, "", $titre = _T('asso:edition_destination'));
+		debut_cadre_relief(  "", false, "", $titre = _T('asso:destination_nav_ajouter'));
 		
 		$data = !$id_destination ? '' : sql_fetsel("*", "spip_asso_destination", "id_destination=$id_destination");
 		if ($data) {
@@ -50,7 +50,7 @@ function exec_edit_destination(){
 			$action = 'ajouter';
 		}
 
-		$res = '<label for="intitule"><strong>' . _T('asso:intitule') . '&nbsp;;</strong></label>'
+		$res = '<label for="intitule"><strong>' . _T('asso:intitule') . '&nbsp;</strong></label>'
 		. '<input name="intitule" type="text" value="'
 		. $intitule
 		. '" id="intitule" class="formo" />'
