@@ -6,7 +6,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Cette fonction est appelee par le critere compatibilite_spip
  * @return 
  */
-function svp_lister_compatibles($version, $table, $pkey) {
+function inc_svp_lister_compatibles($version, $table, $pkey) {
 
 	include_spip("inc/plugin");
 
