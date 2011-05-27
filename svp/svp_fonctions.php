@@ -261,4 +261,22 @@ function filtre_iterer_modele($balise_deserializee, $modele ='foreach') {
 	return $texte;
 }
 
+// Critere de compatibilite avec une version de SPIP : {compatibilite_spip version}
+// Fonctionne sur les tables spip_paquets et spip_plugins
+// Les criteres not et conditionnel fonctionne aussi
+function critere_compatibilite_spip_dist($idb, &$boucles, $crit) {
+
+	$boucle = &$boucles[$idb];
+	$not = ($crit->not == '!') ? ' NOT' : '';
+	$version = $crit->param[0][0]->texte;
+
+	$boucle->hash .= '
+	// COMPATIBILITE SPIP
+	$liste_compat = charger_fonction(\'svp_lister_compatibles\', \'inc\');
+	$where = \''.$boucle->primary.$not.' IN (\'.$liste_compat(\''.$version.'\',\''.$boucle->id_table.'\',\''.$boucle->primary.'\').\')\';
+	';
+
+	$boucle->where[] = (!$crit->cond) ? '$where' : '\'1=1\'';
+}
+
 ?>
