@@ -425,32 +425,48 @@ if(!function_exists('html_entity_decode')) {
  */
 function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = false)
 {
-	$texte = charset2unicode($texte);
+	/**
+	 * En entités unicode
+	 */
+	$texte = charset2unicode ($texte);
 	
-	$texte = unicode2charset($texte, $charset);
+	/**
+	 * Convertir dans le charset demandé
+	 * (mais ne traite pas les entités)
+	 */
+	$texte = unicode2charset ($texte, $charset);
+	
+	/**
+	 * Complète pour les attributs utf-8 étendus
+	 */
+	if (
+		($GLOBALS['meta']['charset'] == 'utf-8')
+		&& ($charset != 'utf-8')
+	)
+	{
+		$texte = spiplistes_utf2iso ($texte, $is_html);
+	}
 	
 	if ($is_html) {
 		$texte = spiplistes_html_entity_decode ($texte, $charset);
 	}
-	if($charset != 'utf-8') {
-		$texte = spiplistes_iso2ascii ($texte, $is_html);		
-	}
+	
 	return($texte);
 }
 
 /**
- * @todo A réécrire pour donner ce qui est demandé
- * 	en page de config (ISO ou UTF)
  * @return string
  */
-function spiplistes_iso2ascii ($texte, $is_html = false) {
+function spiplistes_utf2iso ($texte, $is_html = false) {
 	$remplacements = array(
 		'&#8217;' => "'"	// quote
 		, '&#8220;' => '"' // guillemets
 		, '&#8221;' => '"' // guillemets
-		, 'a&#768;' => 'a'
-		, 'e&#769;' => 'e'
-		, 'e&#768;' => 'e'
+		// versions diacritiques rencontrées parfois
+		// voir http://fr.wikipedia.org/wiki/Table_des_caract%C3%A8res_Unicode_%280000-0FFF%29#Sous-ensembles
+		, 'a&#768;' => chr(224) // à
+		, 'e&#768;' => chr(233) // é
+		, 'e&#769;' => chr(233) // è
 		)
 		;
 	if(!$is_html) {
@@ -498,7 +514,7 @@ function spiplistes_iso2ascii ($texte, $is_html = false) {
 
 /**
  * Extension de html_entity_decode()
- * pour transposer les entites HTML étendues (UTF)
+ * pour transposer les entites HTML étendues
  * @return string
  */
 function spiplistes_html_entity_decode ($texte, $charset = _SPIPLISTES_CHARSET_ENVOI)
