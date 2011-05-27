@@ -12,27 +12,21 @@ function nivoslider_insert_head_css($flux_ = '', $prive = false){
 	return $flux_ . $flux;
 }
 
-function nivoslider_insert_head($flux_){
+function nivoslider_insert_head($flux_ = ''){
 	$flux='<script src="'.url_absolue(find_in_path('js/jquery.nivo.slider.pack.js')).'" type="text/javascript"></script>';
-	return $flux_ 
-		. nivoslider_insert_head_css() // en cas d'absence de balise #INSERT_HEAD_CSS
-		. $flux;
+	return nivoslider_insert_head_css( $flux_) . $flux;
 }
 
 /*********
  * PRIVE *
  *********/
 
-function nivoslider_header_prive($flux_){
-	$flux = nivoslider_insert_head_prive($flux);
-	return $flux_ . $flux;
+function nivoslider_header_prive($flux_ = ''){
+	return nivoslider_insert_head_prive($flux_);
 }
 
-function nivoslider_insert_head_prive($flux_){
-	return $flux_ 
-		. nivoslider_insert_head()
-		. $flux;
+function nivoslider_insert_head_prive($flux_ = ''){
+	return nivoslider_insert_head($flux_);
 }
-
 
 ?>
