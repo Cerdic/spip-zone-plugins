@@ -1,122 +1,115 @@
 <?php
 
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Ceci est un fichier langue de SPIP -- This is a SPIP language file
+// Produit automatiquement par le plugin LangOnet a partir de la langue source fr
+// Module: agenda
+// Langue: fr
+// Date: 27-05-2011 12:07:19
+// Items: 84
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	// A
-	'absence_prise_en_compte' => 'Votre absence est enregistr&eacute;e',
-	'activite_editoriale' => 'Activit&eacute; &Eacute;ditoriale',
+
+// A
+	'absence_prise_en_compte' => 'Votre absence est enregistrée',
+	'activite_editoriale' => 'Activité Éditoriale',
 	'afficher_calendrier' => 'Afficher le calendrier',
 	'agenda' => 'Agenda',
-	'ajouter_un_evenement' => 'ajouter un &eacute;v&eacute;nement &agrave; cet article',
-	'ajouter_repetition' => 'Ajouter des r&eacute;p&eacute;titions',
-	'ajouter_mots_cles' => 'Ajouter des mots-cl&eacute;s',
-	'annee_precedente' => 'an&eacute;e pr&eacute;c&eacute;dente',
-	'annee_suivante' => 'ann&eacute;e suivante',
-	'aucun_evenement' => 'aucun &eacute;v&eacute;nement',
-	'aucune_rubrique_mode_agenda' => 'Par d&eacute;faut, toutes les rubriques permettent d\'utiliser les &eacute;v&eacute;nements. Si vous activez le mode agenda sur une ou plusieurs rubriques, la gestion des &eacute;v&eacute;nements sera limit&eacute;e a sa branche.',
-
-	// B
+	'ajouter_mots_cles' => 'Ajouter des mots-clés',
+	'ajouter_repetition' => 'Ajouter des répétitions',
+	'ajouter_un_evenement' => 'ajouter un événement à cet article',
+	'annee_precedente' => 'anée précédente',
+	'annee_suivante' => 'année suivante',
+	'aucun_evenement' => 'aucun événement',
+	'aucune_rubrique_mode_agenda' => 'Par défaut, toutes les rubriques permettent d\'utiliser les événements. Si vous activez le mode agenda sur une ou plusieurs rubriques, la gestion des événements sera limitée a sa branche.',
+// B
 	'bouton_annuler' => 'Annuler',
-	'bouton_supprimer' => "Supprimer",
-	
-	// C
-	'confirm_suppression_inscription' => "Voulez-vous vraiment supprimer cette inscription ?",
-	'creer_evenement' => "Cr&eacute;er un &eacute;v&eacute;nement",
-
-	// E
+	'bouton_supprimer' => 'Supprimer',
+// C
+	'confirm_suppression_inscription' => 'Voulez-vous vraiment supprimer cette inscription ?',
+	'creer_evenement' => 'Créer un événement',
+// E
+	'erreur_article_interdit' => 'Vous n\'avez pas le droit d\'associer cet événement à cet article',
 	'erreur_article_manquant' => 'Vous devez indiquer un article',
-	'erreur_article_interdit' => 'Vous n\'avez pas le droit d\'associer cet &eacute;v&eacute;nement &agrave; cet article',
 	'erreur_date' => 'Cette date est incorrecte',
+	'erreur_date_avant_apres' => 'Indiquez une date de fin après la date de début !',
+	'erreur_date_corrigee' => 'La date a été corrigée',
 	'erreur_heure' => 'Cette heure est incorrecte',
-	'erreur_date_corrigee' => 'La date a &eacute;t&eacute; corrig&eacute;e',
-	'erreur_heure_corrigee' => 'L\'heure a &eacute;t&eacute; corrig&eacute;e',
-	'erreur_date_avant_apres' => 'Indiquez une date de fin apr&egrave;s la date de d&eacute;but !',
+	'erreur_heure_corrigee' => 'L\'heure a été corrigée',
 	'evenement_adresse' => 'Adresse',
-	'evenement_article' => 'Associ&eacute; &agrave; l\'article',
-	'evenement_autres_occurences' => "Autres occurences :",
+	'evenement_article' => 'Associé à l\'article',
+	'evenement_autres_occurences' => 'Autres occurences :',
 	'evenement_date' => 'Date',
-	'evenement_date_a' => '&agrave; ',
-	'evenement_date_a_immediat' => '&agrave; ',
+	'evenement_date_a' => 'à ',
+	'evenement_date_a_immediat' => 'à ',
 	'evenement_date_au' => 'Au ',
 	'evenement_date_de' => 'De ',
-	'evenement_date_debut' => 'Date de d&eacute;but',
+	'evenement_date_debut' => 'Date de début',
 	'evenement_date_du' => 'Du ',
 	'evenement_date_fin' => 'Date de fin',
 	'evenement_descriptif' => 'Descriptif',
-	'evenement_horaire' => 'Toute la journ&eacute;e',
+	'evenement_horaire' => 'Toute la journée',
 	'evenement_lieu' => 'Lieu',
+	'evenement_repetitions' => 'Répétitions',
 	'evenement_titre' => 'Titre',
-	'evenement_repetitions' => 'R&eacute;p&eacute;titions',
-	'evenements' => '&Eacute;v&eacute;nements',
-	'evenements_a_venir'=>'&Agrave; venir',
-	'evenements_depuis_debut'=>'Tous',
-
-	// F
+	'evenements' => 'Événements',
+	'evenements_a_venir' => 'À venir',
+	'evenements_depuis_debut' => 'Tous',
+// F
 	'fermer' => 'fermer',
-	
-	// G
-	'groupes_mots'=>'Groupes de mots-cl&eacute;',
-	
-	// I
-	'icone_creer_evenement' => 'Cr&eacute;er un nouvel &eacute;v&eacute;nement',
-	'item_mots_cles_association_evenements' => 'aux &eacute;v&eacute;nements',
+// G
+	'groupes_mots' => 'Groupes de mots-clé',
+// I
+	'icone_creer_evenement' => 'Créer un nouvel événement',
 	'indiquez_votre_choix' => 'Indiquez votre choix',
-	'info_aucun_evenement' => 'Aucun &eacute;v&eacute;nement',
-	'info_evenements' => '&Eacute;v&eacute;nements',
-	'info_nombre_evenements' => '@nb@ &eacute;v&eacute;nements',
-	'info_un_evenement' => '1 &eacute;v&eacute;nement',
+	'info_aucun_evenement' => 'Aucun événement',
+	'info_evenements' => 'Événements',
+	'info_nombre_evenements' => '@nb@ événements',
+	'info_un_evenement' => '1 événement',
 	'inscrits' => 'Inscriptions',
-
-	// L
+	'item_mots_cles_association_evenements' => 'aux événements',
+// L
 	'label_inscription' => 'Inscription en ligne',
 	'label_places' => 'Limiter le nombre de places',
 	'label_reponse_jyparticipe' => 'J\'y serai',
-	'label_reponse_jyparticipe_peutetre' => 'J\'y serai peut-&ecirc;tre',
 	'label_reponse_jyparticipe_pas' => 'Je n\'y vais pas',
+	'label_reponse_jyparticipe_peutetre' => 'J\'y serai peut-être',
 	'label_vous_inscrire' => 'Votre participation',
-	'lien_retirer_evenement' => 'Supprimer',
 	'lien_desinscrire' => 'Supprimer',
+	'lien_retirer_evenement' => 'Supprimer',
 	'liste_inscrits' => 'Liste des inscriptions',
-
-	// M
-	'mois_precedent' => 'mois pr&eacute;c&eacute;dent',
+// M
+	'mois_precedent' => 'mois précédent',
 	'mois_suivant' => 'mois suivant',
-
-	// N
-	'nb_mots_clefs' => '@nb@&nbsp;mots-cl&eacute;s',
-	'nb_repetitions' => '@nb@&nbsp;r&eacute;p&eacute;titions',
-
-	// P
-	'participation_prise_en_compte' => 'Votre participation est enregistr&eacute;e',
-	'participation_incertaine_prise_en_compte' => 'Votre participation &eacute;ventuelle est enregistr&eacute;e',
-	'probleme_technique' => 'Un probl&egrave;me technique est survenu. Reessayez plus tard.',
-
-	// R
-	'repetition_de' => "R&eacute;p&eacute;tition de",
-	'rubriques' => 'Rubriques Agenda',
+// N
+	'nb_mots_clefs' => '@nb@ mots-clés',
+	'nb_repetitions' => '@nb@ répétitions',
+// P
+	'participation_incertaine_prise_en_compte' => 'Votre participation éventuelle est enregistrée',
+	'participation_prise_en_compte' => 'Votre participation est enregistrée',
+	'probleme_technique' => 'Un problème technique est survenu. Reessayez plus tard.',
+// R
+	'repetition_de' => 'Répétition de',
 	'rubrique_activer_agenda' => 'Activer le mode agenda pour cette rubrique',
-	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les &eacute;v&eacute;nements car elle est dans une rubrique dont le mode agenda a &eacute;t&eacute; activ&eacute;',
-	'rubrique_desactiver_agenda' => 'D&eacute;sactiver le mode agenda pour cette rubrique',
-	'rubrique_sans_gestion_evenement' => 'Le mode agenda n\'est pas activ&eacute; pour cette rubrique',
-	'rubrique_mode_agenda' => 'Le mode agenda est activ&eacute; pour cette rubrique et sa branche',
-	
-	// S
-	'sans_titre' => "(sans titre)",
-
-	// T
-	'telecharger' => 'T&eacute;l&eacute;charger',
+	'rubrique_dans_une_rubrique_mode_agenda' => 'Cette rubrique permet d\'utiliser les événements car elle est dans une rubrique dont le mode agenda a été activé',
+	'rubrique_desactiver_agenda' => 'Désactiver le mode agenda pour cette rubrique',
+	'rubrique_mode_agenda' => 'Le mode agenda est activé pour cette rubrique et sa branche',
+	'rubrique_sans_gestion_evenement' => 'Le mode agenda n\'est pas activé pour cette rubrique',
+	'rubriques' => 'Rubriques Agenda',
+// S
+	'sans_titre' => '(sans titre)',
+// T
+	'telecharger' => 'Télécharger',
 	'texte_agenda' => 'AGENDA',
-	'titre_cadre_ajouter_evenement' => 'Ajouter un &eacute;v&eacute;nement',
-	'titre_cadre_modifier_evenement' => 'Modifier un &eacute;v&eacute;nement',
-	'titre_sur_l_agenda' => "Sur l'agenda",
+	'titre_cadre_ajouter_evenement' => 'Ajouter un événement',
+	'titre_cadre_modifier_evenement' => 'Modifier un événement',
+	'titre_sur_l_agenda' => 'Sur l\'agenda',
 	'toutes_rubriques' => 'Toutes',
-	
-	// U
-	'un_mot_clef' => '1&nbsp;mot-cl&eacute;',
-	'une_repetition' => '1&nbsp;r&eacute;p&eacute;tition',
-
-	// V
-	'voir_evenements_rubrique' => 'Voir les &eacute;v&eacute;nements de la rubrique',
+// U
+	'un_mot_clef' => '1 mot-clé',
+	'une_repetition' => '1 répétition',
+// V
+	'voir_evenements_rubrique' => 'Voir les événements de la rubrique',
 );
 ?>
