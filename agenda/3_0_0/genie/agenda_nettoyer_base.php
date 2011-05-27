@@ -24,7 +24,7 @@ function genie_agenda_nettoyer_base_dist($t){
 
 	while ($row = sql_fetch($res))
 		sql_delete("spip_mots_liens","id_mot=".$row['id_mot']
-		." objet='evenement' AND id_objet=".$row['id_evenement']);
+		." AND objet='evenement' AND id_objet=".$row['id_evenement']);
 
 	return 1;
 }
