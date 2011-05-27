@@ -51,3 +51,55 @@ Ces options sont :
 	<categorie>divers</categorie>
    <lien>http://www.spip-contrib.net/Spip-Bible,1125</lien>
 </plugin>
+<plugin spip='[3.0.0-dev;]'>
+    <nom>Spip-Bible</nom>
+    <auteur>
+		Auteur originel : Ma&iuml;eul Rouquette 
+		Auteur associ&eacute; : Teddy Payet
+		Id&eacute;e du presse-papier : Cerdic
+    </auteur>
+    <licence>GPL3</licence>
+    <version>2.0.3</version>
+    <etat>stable</etat>
+    <install>base/bible_install.php</install>
+    <necessite id='CFG' version="[1.0;]" />
+    
+    <icon>bible.jpg</icon>
+
+    <description>Permet de faire rapidement des citations de la Bible.	
+    
+    Sous SPIP 2.0 avec SPIP-Bonux, propose une "presse-papier" biblique &agrave; c&ocirc;t&eacute; des formulaires d'&eacute;ditions.
+    
+    Vous pouvez aussi utilisez un mod&eacute;le, mais cette m&eacute;thode est d&eacute;su&eacute;te et d&eacute;conseill&eacute;e.
+
+Ex : &lt;bible|passage=Gn1,2-2,1&gt; citera la Gen&egrave;se du chapitre 1, verset 2 au chapitre 2, verset 1 inclu.
+		
+On peut passer des options au mod&eacute;le. La valeur des options est "non" ou "oui", sauf pour traduction.
+	
+Ces options sont :
+-* ”numeros" 	=> Pour afficher les num&eacute;ros de versets et de chapitre dans le corps de texte.
+-* "bible"		=> Pour faire des retours chariots entre les versets
+-* "ref"		=> Pour afficher les r&eacute;f&eacute;rences &agrave; la suite du passage
+-* "traduction"	=> Pour choisir la traduction.
+	La liste des traductions disponibles est sur [Spip-Contrib->http://www.spip-contrib.net/Spip-Bible-traductions-disponibles]
+
+	En l'absence des ces param&eacute;tres, les valeurs seront celle d&eacute;finies [sur la page de configuration->?exec=cfg&amp;cfg=bible].
+	</description>
+
+    <prefix>bible</prefix>
+    <pipeline>
+        <nom>insert_head</nom>
+        <action>insert_head</action>
+        <inclure>bible_pipelines.php</inclure>
+    </pipeline>
+    <pipeline>
+        <nom>affiche_droite</nom>
+        <action>affiche_droite</action>
+        <inclure>bible_pipelines.php</inclure>
+    </pipeline>
+	<options>bibles_options.php</options>
+	<fonctions>bible_fonctions.php</fonctions>
+	
+	<categorie>divers</categorie>
+   <lien>http://www.spip-contrib.net/Spip-Bible,1125</lien>
+</plugin>
