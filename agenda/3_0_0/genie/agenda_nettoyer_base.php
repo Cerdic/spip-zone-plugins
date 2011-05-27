@@ -16,15 +16,15 @@ function genie_agenda_nettoyer_base_dist($t){
 		." AND id_article=".$row['id_article']);
 
 	# les liens de mots affectes a des evenements effaces
-	$res = sql_select("mots_evenements.id_mot,mots_evenements.id_evenement",
-			"spip_mots_evenements AS mots_evenements
+	$res = sql_select("mots_evenements.id_mot,mots_evenements.id_objet,mots_evenements.objet",
+			"spip_mots_liens AS mots_evenements
 			LEFT JOIN spip_evenements AS evenements
-			ON mots_evenements.id_evenement=evenements.id_evenement",
+			ON mots_evenements.id_objet=evenements.id_evenement AND mots_evenements.objet=evenement",
 			"evenements.id_evenement IS NULL");
 
 	while ($row = sql_fetch($res))
-		sql_delete("spip_mots_evenements","id_mot=".$row['id_mot']
-		." AND id_evenement=".$row['id_evenement']);
+		sql_delete("spip_mots_liens","id_mot=".$row['id_mot']
+		." objet=evenement AND id_objet=".$row['id_evenement']);
 
 	return 1;
 }

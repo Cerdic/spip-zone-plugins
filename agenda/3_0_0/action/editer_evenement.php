@@ -131,7 +131,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 			}
 			else {
 				// il est supprime
-				sql_delete("spip_mots_evenements","id_evenement=".$row['id_evenement']);
+				sql_delete("spip_mots_lienss","objet='evenement' AND id_objet=".$row['id_evenement']);
 				sql_delete("spip_evenements","id_evenement=".$row['id_evenement']);
 			}
 
@@ -177,11 +177,12 @@ function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){
 		$cond_not_in = sql_in('id_mot', join(',',$liste_mots), 'NOT');
 		$cond_in = sql_in('id_mot', join(',',$liste_mots));
 	}
-	sql_delete("spip_mots_evenements", "id_evenement=".intval($id_evenement) . ($cond_in?" AND ".$cond_not_in:""));
+	sql_delete("spip_mots_liens","objet='evenement' AND id_objet=".intval($id_evenement) . ($cond_in?" AND ".$cond_not_in:""));
+
 
 	$liste_deja = array();
 	if ($cond_in)
-		$liste_deja = sql_allfetsel("id_mot", "spip_mots_evenements", "id_evenement=".intval($id_evenement) . " AND $cond_in");
+		$liste_deja = sql_allfetsel("id_mot", "spip_mots_liens", "objet='evenement' AND id_objet=".intval($id_evenement) . " AND $cond_in");
 	if (count($liste_deja)) {
 		$cond_not_in = sql_in('id_mot', join(',',array_map('reset',$liste_deja)), 'NOT');
 		$liste_mots = sql_allfetsel('id_mot','spip_mots',"$cond_in AND $cond_not_in");
@@ -190,8 +191,8 @@ function agenda_action_revision_evenement_mots($id_evenement,$liste_mots){
 	if (count($liste_mots)) {
 		$ins = array();
 		foreach($liste_mots as $k=>$id_mot)
-			$ins[] = array('id_evenement'=>$id_evenement,'id_mot'=>$id_mot);
-		sql_insertq_multi("spip_mots_evenements", $ins);
+			$ins[] = array('id_objet'=>$id_evenement,'id_mot'=>$id_mot,'objet'=>'evenement');
+		sql_insertq_multi("spip_mots_liens", $ins);
 	}
 }
 

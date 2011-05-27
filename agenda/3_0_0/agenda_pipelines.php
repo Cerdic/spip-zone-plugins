@@ -106,21 +106,13 @@ function agenda_afficher_nombre_objets_associes_a($flux){
 	if ($flux['args']['objet']=='mot'
 	  AND $id_mot=$flux['args']['id_objet']){
 		$aff_articles = sql_in('A.statut',  ($GLOBALS['connect_statut'] =="0minirezo")  ? array('prepa','prop','publie') : array('prop','publie'));
-		$nb = sql_countsel("spip_mots_evenements AS L LEFT JOIN spip_evenements AS E ON E.id_evenement=L.id_evenement LEFT JOIN spip_articles AS A ON E.id_article=A.id_article", "L.id_mot=".intval($id_mot)." AND $aff_articles");
+		$nb = sql_countsel("spip_mots_liens AS L LEFT JOIN spip_evenements AS E ON E.id_evenement=L.id_objet AND L.objet=evenement LEFT JOIN spip_articles AS A ON E.id_article=A.id_article", "L.id_mot=".intval($id_mot)." AND $aff_articles");
 		if ($nb)
 			$flux['data'][] = singulier_ou_pluriel($nb, "agenda:info_un_evenement", "agenda:info_nombre_evenements");
 	}
 	return $flux;
 }
-function agenda_rechercher_liste_des_champs($tables){
-	$tables['evenement'] = array(
-				'titre' => 8, 
-				'descriptif' => 5,
-				'lieu' => 5,
-				'adresse' => 3			
-			);
-	return $tables;
-}
+
 /**
  * Declarer evenement comme un objet interpretable dans les url
  * ?evenement12
