@@ -131,7 +131,7 @@ function agenda_action_update_repetitions($id_evenement,$repetitions,$liste_mots
 			}
 			else {
 				// il est supprime
-				sql_delete("spip_mots_lienss","objet='evenement' AND id_objet=".$row['id_evenement']);
+				sql_delete("spip_mots_liens","objet='evenement' AND id_objet=".$row['id_evenement']);
 				sql_delete("spip_evenements","id_evenement=".$row['id_evenement']);
 			}
 
