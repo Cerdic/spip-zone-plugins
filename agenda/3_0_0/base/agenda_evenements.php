@@ -39,21 +39,7 @@ function agenda_declarer_tables_principales($tables_principales){
 }
 
 function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
-/* 	
-	//-- Table de relations MOTS_EVENEMENTS----------------------
-	$spip_mots_evenements = array(
-			"id_mot"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-			"id_evenement"	=> "BIGINT (21) DEFAULT '0' NOT NULL");
-	
-	$spip_mots_evenements_key = array(
-			"PRIMARY KEY"	=> "id_mot, id_evenement",
-			"KEY id_evenement"	=> "id_evenement");
-	
-	$tables_auxiliaires['spip_mots_evenements'] = array(
-		'field' => &$spip_mots_evenements,
-		'key' => &$spip_mots_evenements_key);
 
-	 */
 	//-- Table des participants ----------------------
 	$spip_evenements_participants = array(
 			"id_evenement"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
@@ -75,15 +61,14 @@ function agenda_declarer_tables_auxiliaires($tables_auxiliaires){
 function agenda_declarer_tables_objets_sql($tables){
 	$tables['spip_evenements'] = array(
 		'page'=>'evenement',
-		'texte_retour' => 'evenements:icone_retour_evenement',
-		'texte_objets' => 'evenements:evenements',
+		'texte_retour' => 'icone_retour',
+		'texte_objets' => 'evenements:info_evenements',
 		'texte_objet' => 'evenements:evenement',
-		'texte_modifier' => 'evenements:icone_modifier_evenement',
-		'texte_creer' => 'evenements:icone_nouvel_evenement',
+		'texte_modifier' => 'evenements:titre_cadre_modifier_evenement',
+		'texte_creer' => 'evenements:titre_cadre_ajouter_evenement',
 		'info_aucun_objet'=> 'evenements:info_aucun_evenement',
-		'info_1_objet' => 'evenements:info_1_evenement',
-		'info_nb_objets' => 'evenements:info_nb_evenements',
-		'texte_logo_objet' => 'evenements:logo_evenement',
+		'info_1_objet' => 'evenements:info_un_evenement',
+		'info_nb_objets' => 'evenements:info_nombre_evenements',
 		'titre' => 'titre',
 		'date' => 'date_heure',
 		'principale' => 'oui',
