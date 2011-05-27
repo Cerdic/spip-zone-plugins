@@ -1,7 +1,8 @@
 <?php
 /**
  * Plugin Contacts & Organisations pour Spip 2.0
- * Licence GPL (c) 2009 - 2010- Ateliers CYM
+ * Auteurs : Cyril Marion, Matthieu Marcillaud
+ * Licence GPL (c) 2009 - 2011- Ateliers CYM
  */
 
 function contacts_declarer_tables_interfaces($interface){	
@@ -9,7 +10,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['contacts'] = 'contacts';
 	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
 	
-	// -- Liaisons comptes/auteurs, contacts/auteurs et comptes/contacts
+	// -- Liaisons organisations/auteurs, contacts/auteurs et organisations/contacts
 	$interface['tables_jointures']['spip_contacts'][]= 'contacts_liens';
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts_liens';
 	$interface['tables_jointures']['spip_organisations'][] = 'auteurs';
@@ -111,7 +112,21 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
 		array('field' => &$organisations_contacts, 'key' => &$organisations_contacts_key);
 
 
-    //-- Table organisations_contacts -------------------------------------
+    //-- Table organisations_liens -------------------------------------
+    $organisations_liens = array(
+        "id_organisation" => "BIGINT(21) NOT NULL",
+        "id_objet"   	=> "BIGINT(21) NOT NULL",
+        "objet"      	=> "VARCHAR(25) NOT NULL",
+    );
+    $organisations_liens_key = array(
+        "PRIMARY KEY"    => "id_organisation, id_objet, objet",
+		"KEY id_contact" => "id_organisation"
+    );
+	$tables_auxiliaires['spip_organisations_liens'] =
+		array('field' => &$organisations_liens, 'key' => &$organisations_liens_key);
+
+
+    //-- Table contacts_liens -------------------------------------
     $contacts_liens = array(
         "id_contact" => "BIGINT(21) NOT NULL",
         "id_objet"   => "BIGINT(21) NOT NULL",
@@ -123,7 +138,6 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
     );
 	$tables_auxiliaires['spip_contacts_liens'] =
 		array('field' => &$contacts_liens, 'key' => &$contacts_liens_key);
-
 	
 	return $tables_auxiliaires;
 }

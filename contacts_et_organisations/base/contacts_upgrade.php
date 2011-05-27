@@ -147,6 +147,13 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		sql_alter("TABLE spip_organisations_contacts ADD COLUMN type_liaison tinytext NOT NULL DEFAULT ''");
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.6");
 	}
+
+	// on cree la table spip_organisations_liens
+    if (version_compare($current_version,"1.3.7","<")){
+		maj_tables('spip_organisations_liens');
+		ecrire_meta($nom_meta_base_version, $current_version="1.3.7");
+	}
+
 }
 
 
