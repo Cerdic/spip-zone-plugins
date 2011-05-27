@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -51,14 +51,14 @@ function exec_forms_reponses(){
 		{
 			echo icone_horizontale(_T('icone_retour'), $retour, _DIR_PLUGIN_FORMS."img_pack/form-24.png", "rien.gif",false);
 		}
-		echo icone_horizontale(_T("forms:Formulaire"), "?exec=forms_edit&id_form=$id_form", "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif",false);
+		echo icone_horizontale(_T("forms:Formulaire"), "?exec=forms_edit&id_form=$id_form", _DIR_PLUGIN_FORMS. "img_pack/form-24.png", "rien.gif",false);
 		$nretour = urlencode(self());
-		echo icone_horizontale(_T("forms:Tableau_des_reponses"), "?exec=donnees_tous&id_form=$id_form&retour=$nretour", "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-24.png", "rien.gif",false);
+		echo icone_horizontale(_T("forms:Tableau_des_reponses"), "?exec=donnees_tous&id_form=$id_form&retour=$nretour", _DIR_PLUGIN_FORMS. "img_pack/donnees-24.png", "rien.gif",false);
 		
 		if (autoriser('administrer','form',$id_form)) {
 			$retour = urlencode(self());
 			echo icone_horizontale(_T("forms:telecharger_reponses"),
-				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), "../"._DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
+				generer_url_ecrire("forms_telecharger","id_form=$id_form&retour=$retour"), _DIR_PLUGIN_FORMS. "img_pack/donnees-exporter-24.png", "rien.gif",false);
 		}
 
 		/*fin_boite_info();*/

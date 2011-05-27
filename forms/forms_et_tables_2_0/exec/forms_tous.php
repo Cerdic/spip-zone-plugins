@@ -7,7 +7,7 @@
  * Antoine Pitrou
  * Cedric Morin
  * Renato
- * © 2005,2006 - Distribue sous licence GNU/GPL
+ * ï¿½ 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
 
@@ -64,7 +64,7 @@ function exec_forms_tous(){
 		echo "<div style='text-align:right'>";
 		$link=generer_url_ecrire('forms_edit', 'new=oui');
 		$link=parametre_url($link,'retour',str_replace('&amp;', '&', self()));
-		echo icone(_T("forms:icone_creer_formulaire"), $link, "../"._DIR_PLUGIN_FORMS. "img_pack/form-24.png", "creer.gif");
+		echo icone(_T("forms:icone_creer_formulaire"), $link, _DIR_PLUGIN_FORMS. "img_pack/form-24.png", "creer.gif");
 		echo "</div>";
 	}
 	
