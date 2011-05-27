@@ -276,7 +276,6 @@ $GLOBALS['association_maj'][47501] = array(array('association_maj_47501'));
 
 function association_maj_47731() /* eliminer le champ id_achat de la table ressources car il est inutile et non utilise, rien a sauvegarder */
 {
-	global $association_tables_principales;
 	sql_alter("TABLE spip_asso_ressources DROP id_achat");
 }
 
@@ -285,8 +284,6 @@ $GLOBALS['association_maj'][47731] = array(array('association_maj_47731'));
 /* mise a jour integrant l'utilisation du plugin Coordonnees */
 function association_maj_48001() 
 {
-	global $association_tables_principales;
-
 	$effectuer_maj = false;
 
 	/* cette partie du code s'execute au premier chargement, on n'a pas encore interroge l'utilisateur sur ce qu'il veut faire de ses donnees si il en a  ou il n'a pas voulu faire la maj */
@@ -385,4 +382,16 @@ function association_maj_48001()
 }
 
 $GLOBALS['association_maj'][48001] = array(array('association_maj_48001'));
+
+$GLOBALS['association_maj'][48225] = array(
+
+	array ('sql_alter', "TABLE spip_asso_categories change maj maj timestamp"),
+	array ('sql_alter', "TABLE spip_asso_dons change maj maj timestamp"),
+	array ('sql_alter', "TABLE spip_asso_ventes change maj maj timestamp"),
+	array ('sql_alter', "TABLE spip_asso_comptes change maj maj timestamp"),
+	array ('sql_alter', "TABLE spip_asso_plan change maj maj timestamp"),
+	array ('sql_alter', "TABLE spip_asso_ressources change maj maj timestamp"),
+	array ('sql_alter', "TABLE spip_asso_prets change maj maj timestamp"),
+	array ('sql_alter', "TABLE spip_asso_activites change maj maj timestamp"),
+					   );
 ?>

@@ -25,7 +25,7 @@ $spip_asso_categories = array(
 	"duree" 			=> "text NOT NULL",
 	"cotisation" 		=> "float NOT NULL default '0'",
 	"commentaires" 	=> "text NOT NULL",
-	"maj" 				=> "timestamp(14) NOT NULL"
+	"maj" 				=> "timestamp NOT NULL"
 );
 
 $spip_asso_categories_key = array(
@@ -48,7 +48,7 @@ $spip_asso_dons = array(
 	"valeur" 			=> "text NOT NULL",
 	"contrepartie" 	=> "tinytext",
 	"commentaire" 	=> "text",
-	"maj" 				=> "timestamp(14) NOT NULL"
+	"maj" 				=> "timestamp NOT NULL"
 );
 $spip_asso_dons_key = array(
 	"PRIMARY KEY" => "id_don"
@@ -71,7 +71,7 @@ $spip_asso_ventes = array(
 	"prix_vente" 	=> "TINYTEXT",
 	"frais_envoi" 	=> "float NOT NULL default '0'",
 	"commentaire" 	=> "TEXT",
-	"maj" 			=> "timestamp(14) NOT NULL"
+	"maj" 			=> "timestamp NOT NULL"
 );
 $spip_asso_ventes_key = array(
 	"PRIMARY KEY" => "id_vente"
@@ -92,7 +92,7 @@ $spip_asso_comptes = array(
 	"journal" 	=> "tinytext",
 	"id_journal" 	=> "int(11) NOT NULL default '0'",
 	"vu"		=> "boolean default 0",
-	"maj" 		=> "timestamp(14) NOT NULL"
+	"maj" 		=> "timestamp NOT NULL"
 );						
 $spip_asso_comptes_key = array(
 	"PRIMARY KEY" => "id_compte"
@@ -113,7 +113,7 @@ $spip_asso_plan = array(
 	"date_anterieure"	=> "date NOT NULL default '0000-00-00'",
 	"commentaire" 		=> "text NOT NULL",
 	"active"		=> "boolean default 1",
-	"maj" 				=> "timestamp(14) NOT NULL"
+	"maj" 				=> "timestamp NOT NULL"
 );						
 $spip_asso_plan_key = array(
 	"PRIMARY KEY" => "id_plan"
@@ -160,7 +160,7 @@ $spip_asso_ressources = array(
 	"pu" 				=> "float NOT NULL default '0'",
 	"statut"			=> "text NOT NULL",
 	"commentaire" 		=> "text NOT NULL",
-	"maj" 				=> "timestamp(14) NOT NULL"
+	"maj" 				=> "timestamp NOT NULL"
 );		
 $spip_asso_ressources_key = array(
 	"PRIMARY KEY" => "id_ressource"
@@ -181,7 +181,7 @@ $spip_asso_prets = array(
 	"statut"				=> "text NOT NULL",
 	"commentaire_sortie" 	=> "text NOT NULL",
 	"commentaire_retour" 	=> "text NOT NULL",
-	"maj" 					=> "timestamp(14) NOT NULL"
+	"maj" 					=> "timestamp NOT NULL"
 );		
 $spip_asso_prets_key = array(
 	"PRIMARY KEY" => "id_pret"
@@ -208,7 +208,7 @@ $spip_asso_activites = array(
 	"montant"		=> "float NOT NULL default '0'",
 	"date_paiement"	=> "date NOT NULL default '0000-00-00'",
 	"statut"		=> "text NOT NULL",
-	"maj"			=> "timestamp(14) NOT NULL"
+	"maj"			=> "timestamp NOT NULL"
 
 );						
 $spip_asso_activites_key = array(
