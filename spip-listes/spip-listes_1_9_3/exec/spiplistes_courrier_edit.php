@@ -139,7 +139,7 @@ function exec_spiplistes_courrier_edit(){
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
+		. spiplistes_boite_info_id(_T('spiplistes:courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		. $boite_documents
 		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
@@ -166,7 +166,7 @@ function exec_spiplistes_courrier_edit(){
 		. "</td>"
 		. "<td><img src='"._DIR_IMG_PACK."/rien.gif' width='10'></td>\n"
 		. "<td width='100%'>"
-		. ($id_courrier ? _T('spiplistes:Modifier_un_courrier__') : _T('spiplistes:Creer_un_courrier_') )."<br />\n"
+		. ($id_courrier ? _T('spiplistes:modifier_un_courrier__') : _T('spiplistes:creer_un_courrier_') )."<br />\n"
 		. spiplistes_gros_titre($titre, '', true)
 		. "</td>\n"
 		. "</tr></table>\n"
@@ -285,7 +285,7 @@ function exec_spiplistes_courrier_edit(){
 	$page_result .= ""
 		//
 		// selecteur de rubriques
-		. "<label class='verdana2' for='ajouter_rubrique'>"._T('spiplistes:Lister_articles_de_rubrique').":</label>\n"
+		. "<label class='verdana2' for='ajouter_rubrique'>"._T('spiplistes:lister_articles_de_rubrique').":</label>\n"
 		. "<select name='id_rubrique' id='ajouter_rubrique' class='formo'>\n"
 		. "<option value=''></option>\n"
 		. spiplistes_arbo_rubriques()
@@ -293,7 +293,7 @@ function exec_spiplistes_courrier_edit(){
 		. "<br />\n"
 		//
 		// selecteur des mots-cles
-		. "<label class='verdana2' for='ajouter_motcle'>"._T('spiplistes:Lister_articles_mot_cle').":</label>\n"
+		. "<label class='verdana2' for='ajouter_motcle'>"._T('spiplistes:lister_articles_mot_cle').":</label>\n"
 		. "<select name='id_mot' id='ajouter_motcle' class='formo'>\n"
 		. "<option value=''></option>\n"
 		;
@@ -337,7 +337,7 @@ function exec_spiplistes_courrier_edit(){
 		
 	$page_result .= ""
 		. "<p class='verdana2'>\n"
-			. _T('spiplistes:Cliquez_Generer_desc'
+			. _T('spiplistes:cliquez_generer_desc'
 				, array('titre_bouton'=>_T('spiplistes:generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier'))
 				)
 			. "</p>\n"

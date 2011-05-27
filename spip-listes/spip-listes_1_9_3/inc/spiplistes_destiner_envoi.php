@@ -62,7 +62,7 @@ function spiplistes_destiner_envoi (
 	$id_liste = intval($id_liste);
 	
 	$result = 
-		$destinataire = "";
+		$destinataire = '';
 	
 	if($id_liste) {
 		if($row = sql_fetsel("titre", "spip_listes", "id_liste=".sql_quote($id_liste))) {
@@ -74,11 +74,11 @@ function spiplistes_destiner_envoi (
 	}
 
 	if(empty($destinataire)) {
-		$destinataire = "<span style='color:gray;font-size:90%;'>"._T('spiplistes:Choix_non_defini')."</span>";
+		$destinataire = "<span style='color:gray;font-size:90%;'>"._T('spiplistes:choix_non_defini')."</span>";
 	}
 
 	$invite =  "<strong><span class='verdana1' style='text-transform: uppercase;'>"
-		. _T('spiplistes:Destination')
+		. _T('spiplistes:destination')
 		. ' : </span> '
 		.  $destinataire
 		.  "</strong>"

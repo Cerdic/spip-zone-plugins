@@ -158,7 +158,7 @@ function exec_spiplistes_liste_edit(){
 		. "<td width='100%'>"
 		.	(
 				(!$id_liste)
-				? _T('spiplistes:Creer_une_liste_')
+				? _T('spiplistes:creer_une_liste_')
 				: _T('spiplistes:modifier_liste')
 			) . ":"
 		. spiplistes_gros_titre($titre, '', true)

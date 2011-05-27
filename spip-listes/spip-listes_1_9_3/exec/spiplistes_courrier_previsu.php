@@ -181,7 +181,7 @@ function exec_spiplistes_courrier_previsu () {
 			//} // end if plein_ecran
 		}
 		else {
-			echo(_T('spiplistes:Erreur_courrier_introuvable'));
+			echo(_T('spiplistes:erreur_courrier_introuvable'));
 		}
 	}
 	

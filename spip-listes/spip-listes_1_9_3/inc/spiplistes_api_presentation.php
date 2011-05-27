@@ -640,7 +640,7 @@ function spiplistes_boite_autocron () {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				spiplistes_ecrire_key_in_serialized_meta ('opt_suspendre_meleuse', $opt_suspendre_meleuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
-				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Meleuse_reactivee')."</p>\n";
+				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:meleuse_reactivee')."</p>\n";
 			}
 		}
 		else {
@@ -896,7 +896,7 @@ function spiplistes_titre_boite_info ($titre = "") {
  * @return string
  */
 function spiplistes_terminer_page_donnee_manquante ($return = true) {
-	spiplistes_terminer_page_message (_T('spiplistes:Pas_de_donnees'), $return);
+	spiplistes_terminer_page_message (_T('spiplistes:pas_de_donnees'), $return);
 }
 
 /**

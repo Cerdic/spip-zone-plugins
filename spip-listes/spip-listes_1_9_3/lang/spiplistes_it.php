@@ -107,10 +107,10 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'complement_ajouter_lien_en_tete' => "Aggiungi un link in testa alla email"
 , 'complement_lien_en_tete_desc' => "Questa opzione ti permette di aggiungere all'inzio dell'email HTML inviata il link 
    alla mail originale presente sul tuo sito."
-, 'Complement_tampon_editeur' => "Aggiungere la sezione Editore"
-, 'Complement_tampon_editeur_desc' => "Questa opzione ti permette di aggiungere la sezione dell'editore in calce all'email. "
-, 'Complement_tampon_editeur_label' => "Angigungi la sezione Editore alla fine dell'email"
-, 'Envoi_des_courriers' => "Invio delle email"
+, 'complement_tampon_editeur' => "Aggiungere la sezione Editore"
+, 'complement_tampon_editeur_desc' => "Questa opzione ti permette di aggiungere la sezione dell'editore in calce all'email. "
+, 'complement_tampon_editeur_label' => "Angigungi la sezione Editore alla fine dell'email"
+, 'envoi_des_courriers' => "Invio delle email"
 , 'log_console' => "Console"
 , 'log_details_console' => "Dettagli della console"
 , 'log_voir_destinataire' => "Elenca gli indirizzi email dei destinatari nella console al momento dell'invio."
@@ -122,7 +122,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'fermer_journal' => "Ferma il log"
 , 'methode_envoi' => 'Metodo d\'invio'
 , 'mode_suspendre_trieuse' => "Sospendi la procedura di invio delle newsletter"
-, 'Suspendre_le_tri_des_listes' => "Questa opzione ti consente - in caso di sovraccarico - di sospendere la procedura di invio delle 
+, 'suspendre_le_tri_des_listes' => "Questa opzione ti consente - in caso di sovraccarico - di sospendere la procedura di invio delle 
 	newsletter programmate e di ridefinire i parametri 
 	di invio. Disattiva in seguito questa opzione per riprendere la procedura di invio delle 
 	newsletter programmate."
@@ -133,7 +133,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'nombre_lot' => 'Numero di invii per lotto'
 , 'php_mail' => 'Utilizza la funzione mail() di PHP'
 , 'patron_du_tampon_' => "Modello della sezione : "
-, 'Patron_de_pied_' => "Modello del piede "
+, 'patron_de_pied_' => "Modello del piede "
 , 'personnaliser_le_courrier_label' => "Attiva la personalizzazione delle email"
 , 'parametrer_la_meleuse' => "Parametri dell'invio"
 , 'smtp_hote' => 'Host'
@@ -155,24 +155,24 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'calcul_patron_attention' => "Certi modelli inseriscono nel loro cotenuto il testo qui di seguito (Testo della email). 
 	Se aggiorni la tua email, ricorda di cancellare questo testo prima di generare il contenuto."
 , 'charger_patron' => 'Scegli un modello per le email'
-, 'Courrier_numero_' => "Email numero:" // + _gerer
-, 'Creer_un_courrier_' => "Nuova email :"
+, 'courrier_numero_' => "Email numero:" // + _gerer
+, 'creer_un_courrier_' => "Nuova email :"
 , 'choisir_un_patron_' => "Scegli un modello "
-, 'Courrier_edit_desc' => 'Puoi scegliere di generare automaticamente il contenuti dell\'email
+, 'courrier_edit_desc' => 'Puoi scegliere di generare automaticamente il contenuti dell\'email
 	o di scrivere semplicemente la tua email nella casella <strong>testo dell\'email</strong>.'
 , 'contenu_a_partir_de_date_' => "Contenuto a partire da questa data "
-, 'Cliquez_Generer_desc' => "Clicca su <strong>@titre_bouton@</strong> per aggiungere il risultato 
+, 'cliquez_generer_desc' => "Clicca su <strong>@titre_bouton@</strong> per aggiungere il risultato 
 	nella casella @titre_champ_texte@."
-, 'Lister_articles_de_rubrique' => "Ed elenca gli articoli della rubrica "
-, 'Lister_articles_mot_cle' => "ed elenca gli articoli con parola chiave "
+, 'lister_articles_de_rubrique' => "Ed elenca gli articoli della rubrica "
+, 'lister_articles_mot_cle' => "ed elenca gli articoli con parola chiave "
 , 'edition_du_courrier' => "Modifica dell'email" // + gerer
 , 'generer_un_sommaire' => "Genera un sommario"
 , 'generer_patron_' => "Genera il modello "
 , 'generer_patron_avant' => "prima del sommario"
 , 'generer_patron_apres' => "dopo il somamrio."
 , 'introduction_du_courrier_' => "Introduzione della tua email, prima del contenuto prelevato dal sito "
-, 'Modifier_un_courrier__' => "Modifica una email:"
-, 'Modifier_ce_courrier' => "Modifica questa email"
+, 'modifier_un_courrier__' => "Modifica una email:"
+, 'modifier_ce_courrier' => "Modifica questa email"
 , 'sujet_courrier' => '<strong>Oggetto dell\'email</strong> [obbligatorio]'
 , 'texte_courrier' => '<strong>Testo dell\'email</strong> (HTML consentito)'
 , 'avec_patron_pied__' => "Con il modello di pi&egrave; pagina: "
@@ -189,23 +189,23 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'envoi_debut' => 'Inizio dell\'invio: '
 , 'envoi_fin' => 'Fine dell\'invio: '
 , 'erreur_envoi' => 'Numero di invii in errore: '
-, 'Erreur_liste_vide' => "Errore: questa newsletter non ha abbonati."
-, 'Erreur_courrier_introuvable' => "Errore: questa email non esiste." // + previsu
-, 'Envoyer_ce_courrier' => "Invia questa email"
+, 'erreur_liste_vide' => "Errore: questa newsletter non ha abbonati."
+, 'erreur_courrier_introuvable' => "Errore: questa email non esiste." // + previsu
+, 'envoyer_ce_courrier' => "Invia questa email"
 , 'format_html__n' => "Formato html: @n@"
 , 'format_texte__n' => "Formato testo: @n@"
 , 'message_arch' => 'Email archiviata'
 , 'message_en_cours' => 'Email in corso di invio'
 , 'message_type' => 'Email'
 , 'sur_liste' => 'Sulla lista' // + casier
-, 'Supprimer_ce_courrier' => "Elimina questa email"
+, 'supprimer_ce_courrier' => "Elimina questa email"
 , 'email_adresse' => 'Indirizzo email di test' // + liste
 , 'email_test' => 'Invia una email di test'
-, 'Erreur_courrier_titre_vide' => "Errore: la tua email non ha il titolo."
+, 'erreur_courrier_titre_vide' => "Errore: la tua email non ha il titolo."
 , 'message_en_cours' => 'Queta email &egrave; in corso di redazione'
 , 'modif_envoi' => 'Puoi modificarla o richiederne l\'invio'
 , 'message_presque_envoye' =>'Questa email sta per essere inviata'
-, 'Erreur_Adresse_email_inconnue' => 'Attenzione, l\indirizzo email di test che hai fornito non corrisponde a 
+, 'erreur_adresse_email_inconnue' => 'Attenzione, l\indirizzo email di test che hai fornito non corrisponde a 
 	nessun abbonato, <br />l\'invio non pu&ograve; essere effettuato, ripeti la procedura<br /><br />'
 
 // exec/spiplistes_courrier_previsu.php
@@ -213,8 +213,8 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 
 // exec/spiplistes_courriers_casier.php
 // exec/spiplistes_import_export.php
-, 'Exporter_une_liste_d_abonnes' => "Esporta una lista di abbonati"
-, 'Exporter_une_liste_de_non_abonnes' => "Esporta un a lista di non abbonati"
+, 'exporter_une_liste_d_abonnes' => "Esporta una lista di abbonati"
+, 'exporter_une_liste_de_non_abonnes' => "Esporta un a lista di non abbonati"
 , '_aide_import' => "Puoi importare qui una lista di abbonati direttamente dal tuo computer.<br />
 	Queta lista di abbonati deve essere in formato testo, una riga 
   per abbonato. Ogni riga deve essere cos&igrave; composta:<br />
@@ -229,7 +229,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'import_export' => 'Importa / Esporta'
 , 'incorrect_ou_dupli' => " (non corretto o duplicato)"
 , 'membres_liste' => 'Lista degli abbonati'
-, 'Messages_automatiques' => 'Email automatiche programmate'
+, 'messages_automatiques' => 'Email automatiche programmate'
 , 'pas_de_liste_pour_import' => "Devi creare almeno una newsletter per poter importare 
 	i tuoi abbonati."
 , 'resultat_import' => "Risultato dell'importazione"
@@ -254,7 +254,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 
 // exec/spiplistes_liste_edit.php
 , 'texte_dinsctription_' => "testo di iscrizione: "
-, 'Creer_une_liste_' => "Nuova newsletter"
+, 'creer_une_liste_' => "Nuova newsletter"
 , 'en_debut_de_semaine' => "all'inizio della settimana"
 , 'en_debut_de_mois' => "all'inizio del mese"
 , 'envoi_non_programme' => "Invio non programmato"
@@ -273,23 +273,23 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'statut_publique' => "Pubblica"
 , 'adresse' => "Indica qui l&#39;indirizzo da utilizzare per le risposte alle email 
 	(in maniera predefinta sar&agrave; utilizzato l&#39;indirizzo del webmaster come indirizzo di risposta) :"
-, 'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Questa email sar&agrave; inviata solo una volta."
+, 'ce_courrier_ne_sera_envoye_qu_une_fois' => "Questa email sar&agrave; inviata solo una volta."
 , 'adresse_de_reponse' => "Indirizzo di risposta"
 , 'adresse_mail_retour' => 'Indirizzo email del gestore nella newsletter (reply-to)'
-, 'Attention_action_retire_invites' => "Attenzione: questa azione elimina gli invitati dalla lista degli abbonati."
-, 'A_partir_de' => "A partire da"
-, 'Apercu_plein_ecran' => "Anteprima a pieno schermo in una nuova finestra"
-, 'Attention_suppression_liste' => "Attenzione! Hai richiesto la cancellazione di una newsletter. 
+, 'attention_action_retire_invites' => "Attenzione: questa azione elimina gli invitati dalla lista degli abbonati."
+, 'a_partir_de' => "A partire da"
+, 'apercu_plein_ecran' => "Anteprima a pieno schermo in una nuova finestra"
+, 'attention_suppression_liste' => "Attenzione! Hai richiesto la cancellazione di una newsletter. 
 	Gli abbonati saranno eliminati automaticamente dalla newsletter. "
-, 'Abonner_tous_les_invites_public' => "Abbona tutti i membri invitati a questa newsletter pubblica."
-, 'Abonner_tous_les_inscrits_prives' => "Abbona tutti i membri a questa lista privata, tranne gli invitati."
+, 'abonner_tous_les_invites_public' => "Abbona tutti i membri invitati a questa newsletter pubblica."
+, 'abonner_tous_les_inscrits_prives' => "Abbona tutti i membri a questa lista privata, tranne gli invitati."
 , 'boite_confirmez_envoi_liste' => "Hai richiesto l'invio immediato di questa newsletter <br />
 	Per favore, conferma la richiesta."
 , 'cette_liste_est_' => "Questa newsletter &egrave; : @s@"
-, 'Confirmer_la_suppression_de_la_liste' => "Conferma la cancellazione della newsletter "
-, 'Confirmez_requete' => "Conferma la richiesta."
+, 'confirmer_la_suppression_de_la_liste' => "Conferma la cancellazione della newsletter "
+, 'confirmez_requete' => "Conferma la richiesta."
 , 'date_expedition_' => "data di invio "
-, 'Dernier_envoi_le_' => "Ultimo invio il:"
+, 'dernier_envoi_le_' => "Ultimo invio il:"
 , 'forcer_abonnement_desc' => "Puoi forzare qui gli abbonamenti a questa newsletter, sia per tutti 
    i membri iscritti (visitatori, autori e amministratori), sia per tutti i visitatori."
 , 'forcer_abonnement_aide' => "<strong>Attenzione</strong>: un membro abbonato non riceve necessariamente 
@@ -298,7 +298,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'forcer_abonnements_nouveaux' => "Selezionando l'opzione <strong>Forza gl iabbonamenti nel formato...</strong>, 
 	confermi il formato di ricezione dei nuovi abbonati.
 	I vecchi abbonati conservano la loro preferenza di ricezione."
-, 'Forcer_desabonner_tous_les_inscrits' => "Cancella tutti i membri iscritti per questa newsletter."
+, 'forcer_desabonner_tous_les_inscrits' => "Cancella tutti i membri iscritti per questa newsletter."
 , 'gestion_dune_liste' => "gestione della newsletter"
 , 'message_sujet' => 'Oggetto '
 , 'mods_cette_liste' => "I moderatori della newsletter"
@@ -307,7 +307,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'patron_manquant_message' => "Devi selezionare un modello prima di parametrizzare l'invio di questa 
 	newsletter."
 , 'liste_sans_patron' => "newsletter senza modello." // courriers_listes
-, 'Patron_grand_' => "Modello "
+, 'patron_grand_' => "Modello "
 , 'sommaire_date_debut' => "A partire dalla data definita di seguito"
 , 'abos_cette_liste' => "Gli abbonati a questa newsletter"
 , 'confirme_envoi' => 'Conferma l\'invio'
@@ -316,7 +316,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'date_act' => 'Dati aggiornati'
 , 'forcer_les_abonnements_au_format_' => "Forza gli abboanamenti al formato: "
 , 'pas_denvoi_auto_programme' => "Non esiste alcun invio automatico pianificato per questa newsletter."
-, 'Pas_de_periodicite' => "Nessuna periodicit&agrave;."
+, 'pas_de_periodicite' => "Nessuna periodicit&agrave;."
 , 'prog_env' => 'Programma un invio automatico'
 , 'prog_env_non' => 'Non programmare l\'invio'
 , 'conseil_regenerer_pied' => "<br />Questo modello proviene da una vecchia versione diSPIP-Listes.<br />
@@ -342,14 +342,14 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'pas_de_liste' => "Nessuna newsletter del tipo 'invio non programmato'."
 , 'pas_de_format' => "Nessun formato di ricezione definito per gli abbonati."
 , 'pas_de_liste_en_auto' => "Nessuna newsletter del tipo 'invio programmato' (chrono)."
-, 'Suppression_de__s' => "Cancellazione di : @s@"
+, 'suppression_de__s' => "Cancellazione di : @s@"
 , 'suppression_' => "Cancella @objet@"
 , 'suppression_chronos_' => "Cancella gli invii programmati (chrono) "
 , 'suppression_chronos_desc' => "Se elimini il chrono, la newsletter non sar&agrave; eliminata. La sua periodicit&agrave; 
 	sar&agrve; conservata ma l'invio sar&agrave; sospeso. Per riattivare il chrono, bisogna ridefinre la data del primo invio. "
-, 'Supprimer_les_listes' => "Cancella le newsletter"
-, 'Supprimer_la_liste' => "Cancella la newsletter..."
-, 'Suspendre_abonnements' => "Sospende gli abbonamenti per questo account"
+, 'supprimer_les_listes' => "Cancella le newsletter"
+, 'supprimer_la_liste' => "Cancella la newsletter..."
+, 'suspendre_abonnements' => "Sospende gli abbonamenti per questo account"
 , 'separateur_de_champ_' => "Separatore di campo "
 , 'separateur_tabulation' => "tabulazione (<code>\\t</code>)"
 , 'separateur_semicolon' => "punto e virgola (<code>;</code>)"
@@ -390,13 +390,13 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'texte_boite_en_cours' => 'SPIP-Listes sta inviando una email.<p>Questo box scomparir&agrave; una volta che l\'invio sar&agrave; completo.</p>'
 , 'meleuse_suspendue_info' => "L'invio delle email in attesa di spedizione &egrave; sospeso."
 , 'casier_a_courriers' => "Gestione email" // + courriers_casier
-, 'Pas_de_donnees' => "Spiacente, ma il dato richiesto non esiste nella base dati."
+, 'pas_de_donnees' => "Spiacente, ma il dato richiesto non esiste nella base dati."
 , '_dont_n_sans_format_reception' => ", di cui @n@ senza formato di ricezione"
 , 'mode_simulation' => "Modalit&agrave: simulazione"
 , 'mode_simulation_info' => "La modalit&agrave; simulazione &egrave; attiva. La procedura di invio simula l'invio delle email. 
 	In realt&agrave; nessuna email sar&agrave; spedita."
 , 'meleuse_suspendue' => "Invio sopseso"
-, 'Meleuse_reactivee' => "Invio riattivato"
+, 'meleuse_reactivee' => "Invio riattivato"
 , 'nb_abonnes_sing' => " abbonato;"
 , 'nb_abonnes_plur' => " abbonati"
 , 'nb_moderateur_sing' => " moderatore"
@@ -410,22 +410,22 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 
 // inc/spiplistes_destiner_envoi.php
 , 'email_tester' => 'Testa l\'email'
-, 'Choix_non_defini' => 'Nessuna scelta definita.'
-, 'Destination' => "Destinatario"
+, 'choix_non_defini' => 'Nessuna scelta definita.'
+, 'destination' => "Destinatario"
 , 'aucune_liste_dispo' => "Nessuna newsletter disponibile."
 
 // inc/spiplistes_import.php
 // inc/spiplistes_lister_courriers_listes.php
-, 'Prochain_envoi_' => "Prossimo invio "
+, 'prochain_envoi_' => "Prossimo invio "
 
 // inc/spiplistes_listes_forcer_abonnement.php
 // inc/spiplistes_listes_selectionner_auteur.php
 , 'lien_trier_nombre' => "Ordina per numero di abbonati"
-, 'Abonner_format_html' => "Abbonati nel formato HTML"
-, 'Abonner_format_texte' => "Abbonati nel formato testo"
+, 'abonner_format_html' => "Abbonati nel formato HTML"
+, 'abonner_format_texte' => "Abbonati nel formato testo"
 , 'ajouter_un_moderateur' => "Aggiungi un moderatore "
-, 'Desabonner' => "Cancella"
-, 'Pas_adresse_email' => "Nessun indirizzo email"
+, 'desabonner' => "Cancella"
+, 'pas_adresse_email' => "Nessun indirizzo email"
 , 'sup_mod' => "Cancella questo moderatore"
 , 'supprimer_un_abo' => "Cancella un abbonato a questa newsletter"
 , 'supprimer_cet_abo' => "Cancella questo abbonato a questa newsletter" // + pipeline
@@ -444,17 +444,17 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php
 // inc/spiplistes_pipeline_affiche_milieu.php
-, 'Adresse_email_obligatoire' => "L'indirizzo email &egrave; obbligatorio per potersi abbonare alle newsletter. 
+, 'adresse_email_obligatoire' => "L'indirizzo email &egrave; obbligatorio per potersi abbonare alle newsletter. 
 	Se desideri utilizzare questo servizio, per favore inserisci l'indirizzo email. "
-, 'Alert_abonnement_sans_format' => "Il tuo abbonamento &egrave; sospeso. Non riceverai pi&ugrave; le email delle newsletter 
+, 'alert_abonnement_sans_format' => "Il tuo abbonamento &egrave; sospeso. Non riceverai pi&ugrave; le email delle newsletter 
 	di seguito elencate. Per ricevere nuovamente le email delle tue newsletter preferite, scegli un formato di ricezione 
 	ed invia il form. "
 , 'abonnements_aux_courriers' => "Abbonamenti alle email"
-, 'Forcer_abonnement_erreur' => "Errore tecnico segnalato durante la modifica degli abbonati di una newsletter. 
+, 'forcer_abonnement_erreur' => "Errore tecnico segnalato durante la modifica degli abbonati di una newsletter. 
 	Verifica questa newsletter prima di proseguire."
-, 'Format_obligatoire_pour_diffusion' => "Per confermare l'abbonamento di questo account, devi selezionare un formato di 
+, 'format_obligatoire_pour_diffusion' => "Per confermare l'abbonamento di questo account, devi selezionare un formato di 
 	ricezione."
-, 'Valider_abonnement' => "Convalida questo abbonamento"
+, 'valider_abonnement' => "Convalida questo abbonamento"
 , 'vous_etes_abonne_aux_listes_selectionnees_' => "Sei abbonato alle newsletter selezionate "
 
 // inc/spiplistes_pipeline_ajouter_boutons.php
@@ -508,27 +508,27 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'vous_etes_abonne_a_la_liste_' => "Sei abbonato alla newsletter:"
 
 // tableau items *_options
-, 'Liste_de_destination' => "Lista di destinazione"
-, 'Listes_1_du_mois' => "Pubbliche, 1<sup><small>°</small></sup> del mese."
-, 'Liste_diffusee_le_premier_de_chaque_mois' => "Newsletter inviata il primo di ogni mese. "
-, 'Listes_autre' => "Altra periodicit&agrave;"
-, 'Listes_autre_periode' => "Newsletter pubbliche altra periodicit&agrave;"
-, 'Listes_diffusion_prive' => "Newsletter private"
-, 'Liste_hebdo' => "Newsletter settimanale"
-, 'Publiques_hebdos' => "Pubbliche, settimanali"
-, 'Listes_diffusion_hebdo' => "Newsletter pubbliche settimanali"
-, 'Liste_mensuelle' => "Newsletter mensile"
-, 'Publiques_mensuelles' => "Pubbliche, mensili"
-, 'Listes_diffusion_mensuelle' => "Newsletter pubbliche mensili"
-, 'Listes_diffusion_publiques_desc' => "L'abbonamento a questa newsletter &egrave; proposto sul sito pubblico."
-, 'Liste_annuelle' => "Newsletter annuale"
-, 'Publiques_annuelles' => "Pubbliche annuali"
-, 'Listes_diffusion_annuelle' => "Newsletter pubbliche annuali"
-, 'Listes_diffusion_publique' => 'Newsletter pubbliche'
-, 'Listes_diffusion_privees' => 'Newsletter private'
-, 'Listes_diffusion_privees_desc' => "L'abbonamento a queste liste &egrave; riservato agli amministratori ed agli autori del sito."
-, 'Listes_diffusion_suspendue' => 'Newlstter spospese'
-, 'Listes_diffusion_suspendue_desc' => " "
+, 'liste_de_destination' => "Lista di destinazione"
+, 'listes_1_du_mois' => "Pubbliche, 1<sup><small>°</small></sup> del mese."
+, 'liste_diffusee_le_premier_de_chaque_mois' => "Newsletter inviata il primo di ogni mese. "
+, 'listes_autre' => "Altra periodicit&agrave;"
+, 'listes_autre_periode' => "Newsletter pubbliche altra periodicit&agrave;"
+, 'listes_diffusion_prive' => "Newsletter private"
+, 'liste_hebdo' => "Newsletter settimanale"
+, 'publiques_hebdos' => "Pubbliche, settimanali"
+, 'listes_diffusion_hebdo' => "Newsletter pubbliche settimanali"
+, 'liste_mensuelle' => "Newsletter mensile"
+, 'publiques_mensuelles' => "Pubbliche, mensili"
+, 'listes_diffusion_mensuelle' => "Newsletter pubbliche mensili"
+, 'listes_diffusion_publiques_desc' => "L'abbonamento a questa newsletter &egrave; proposto sul sito pubblico."
+, 'liste_annuelle' => "Newsletter annuale"
+, 'publiques_annuelles' => "Pubbliche annuali"
+, 'listes_diffusion_annuelle' => "Newsletter pubbliche annuali"
+, 'listes_diffusion_publique' => 'Newsletter pubbliche'
+, 'listes_diffusion_privees' => 'Newsletter private'
+, 'listes_diffusion_privees_desc' => "L'abbonamento a queste liste &egrave; riservato agli amministratori ed agli autori del sito."
+, 'listes_diffusion_suspendue' => 'Newlstter spospese'
+, 'listes_diffusion_suspendue_desc' => " "
 , 'Courriers_en_cours_de_redaction' => 'Email in corso di redazione'
 , 'Courriers_en_cours_denvoi' => 'Email in corso di invio'
 , 'Courriers_prets_a_etre_envoye' => "Email pronte per essere inviate"
@@ -552,8 +552,8 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'editeur_url' => "URL dels sito dell'editore "
 , 'editeur_logo' => "URL del logo dell'editore "
 , 'Envoi_abandonne' => "Invio abbandonato"
-, 'Liste_prive' => "Newsletter privata"
-, 'Liste_publique' => "Newsletter pubblica"
+, 'liste_prive' => "Newsletter privata"
+, 'liste_publique' => "Newsletter pubblica"
 , 'message_redac' => 'In corso di redazione e pronta all\'invio'
 , 'Prets_a_envoi' => "Pronta all'invio"
 , 'Publies' => "Pubblicate"
@@ -637,7 +637,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'liste_diff_publiques' => 'Listes de diffusion publiques<br /><i>La page du site public propose l\'inscription &agrave; ces listes.</i>'
 , 'messages_non_lus_grand' => 'Pas de nouveaux messages'
 , 'messages_repondre' => 'Nouvelle R&eacute;ponse'
-, 'Liste_abandonnee' => "Liste abandonn&eacute;e"
+, 'liste_abandonnee' => "Liste abandonn&eacute;e"
 , 'par_date' => 'Par date d\'inscription'
 , 'info_auto' => 'SPIP-Listes pour spip peut envoyer r&eacute;guli&egrave;rement aux inscrits, l\'annonce des derni&egrave;res nouveaut&eacute;s du site (articles et br&egrave;ves r&eacute;cemment publi&eacute;s).'
 , 'format2' => 'Format :'
@@ -755,7 +755,7 @@ $GLOBALS['i18n_spiplistes_it'] = array(
 , 'envoyer' => 'envoyer le mail'
 , 'envoyer_a' => 'Envoi vers '
 , 'listes_poubelle' => 'Vos listes de diffusion &agrave; la poubelle'
-, 'Liste_numero_:' => 'Liste num&eacute;ro :'
+, 'liste_numero_:' => 'Liste num&eacute;ro :'
 , 'mail_tache_courante' => 'Mails envoy&eacute;s pour la t&acirc;che courante : '
 , 'messages_auto_envoye' => 'Courriers automatiques envoy&eacute;s'
 , 'nb_abonnes' => 'Dans les listes : '

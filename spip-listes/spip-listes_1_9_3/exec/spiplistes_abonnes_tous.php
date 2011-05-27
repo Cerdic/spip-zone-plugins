@@ -145,11 +145,11 @@ function exec_spiplistes_abonnes_tous () {
 		. '<ul style="margin:0;padding:0 1ex;list-style:none">' . PHP_EOL
 
 		// Total des abonnés listes privées (internes)
-		. '<li>- '._T('spiplistes:Listes_diffusion_prive') . ': '
+		. '<li>- '._T('spiplistes:listes_diffusion_prive') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIVATE])
 			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (hebdomadaires)
-	 	. '<li>- '. _T('spiplistes:Listes_diffusion_hebdo') . ': '
+	 	. '<li>- '. _T('spiplistes:listes_diffusion_hebdo') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_HEBDO] 
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_WEEKLY])
 			. '</li>' . PHP_EOL
@@ -159,7 +159,7 @@ function exec_spiplistes_abonnes_tous () {
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_WEEKLY])
 			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (mensuels)
-	 	. '<li>- '. _T('spiplistes:Listes_diffusion_mensuelle') . ': '
+	 	. '<li>- '. _T('spiplistes:listes_diffusion_mensuelle') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_MENSUEL] 
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_MONTHLY])
 			. '</li>' . PHP_EOL
@@ -169,7 +169,7 @@ function exec_spiplistes_abonnes_tous () {
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_MONTHLY])
 			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (annuelles)
-	 	. '<li>- '. _T('spiplistes:Listes_diffusion_annuelle') . ': '
+	 	. '<li>- '. _T('spiplistes:listes_diffusion_annuelle') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_YEARLY])
 			. '</li>' . PHP_EOL
 		// privees annuelles
@@ -177,7 +177,7 @@ function exec_spiplistes_abonnes_tous () {
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PRIV_YEARLY])
 			. '</li>' . PHP_EOL
 		// Total des abonnés listes périodiques (periode ou envoi manuel)
-	 	. '<li>- '. _T('spiplistes:Listes_autre_periode') . ': '
+	 	. '<li>- '. _T('spiplistes:listes_autre_periode') . ': '
 			. (0 + $nb_abonnes_listes[_SPIPLISTES_LIST_PUBLIC] 
 				+ $nb_abonnes_listes[_SPIPLISTES_LIST_PUB_DAILY])
 			. '</li>' . PHP_EOL

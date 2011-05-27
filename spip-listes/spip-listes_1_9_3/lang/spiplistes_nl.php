@@ -129,10 +129,10 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'complement_ajouter_lien_en_tete' => "Ajouter un lien en en-t&ecirc;te du courrier"
 , 'complement_lien_en_tete_desc' => "Cette option vous permet de rajouter en t&ecirc;te du courrier HTML envoy&eacute; le lien 
    du courrier original pr&eacute;sent sur votre site."
-, 'Complement_tampon_editeur' => "Ajouter le tampon Editeur"
-, 'Complement_tampon_editeur_desc' => "Cette option vous permet de rajouter le tampon de l'&eacute;diteur en fin de courrier. "
-, 'Complement_tampon_editeur_label' => "Ajouter le tampon Editeur en fin de courrier"
-, 'Envoi_des_courriers' => "Envoi des courriers"
+, 'complement_tampon_editeur' => "Ajouter le tampon Editeur"
+, 'complement_tampon_editeur_desc' => "Cette option vous permet de rajouter le tampon de l'&eacute;diteur en fin de courrier. "
+, 'complement_tampon_editeur_label' => "Ajouter le tampon Editeur en fin de courrier"
+, 'envoi_des_courriers' => "Envoi des courriers"
 , 'log_console' => "Console"
 , 'log_details_console' => "D&eacute;tails de la console"
 , 'log_voir_destinataire' => "Lister les adresses email des destinataires dans la console lors de l'envoi."
@@ -144,7 +144,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'fermer_journal' => "Fermer le journal"
 , 'methode_envoi' => 'M&eacute;thode d\'envoi'
 , 'mode_suspendre_trieuse' => "Suspendre le traitement des envois des listes de diffusion"
-, 'Suspendre_le_tri_des_listes' => "Cette option vous permet - en cas d'engorgement - de suspendre le traitement des 
+, 'suspendre_le_tri_des_listes' => "Cette option vous permet - en cas d'engorgement - de suspendre le traitement des 
 	listes de diffusion programm&eacute;es et de red&eacute;finir les param&egrave;tres 
 	d'envoi. D&eacute;sactivez ensuite cette option pour reprendre le traitement des 
 	listes de diffusion programm&eacute;es."
@@ -155,7 +155,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'nombre_lot' => 'Nombre d\'envois par lot'
 , 'php_mail' => 'Utiliser la fonction mail() de PHP'
 , 'patron_du_tampon_' => "Patron du tampon : "
-, 'Patron_de_pied_' => "Patron de pied "
+, 'patron_de_pied_' => "Patron de pied "
 , 'personnaliser_le_courrier_label' => "Activer la personnalisation du courrier"
 , 'parametrer_la_meleuse' => "Param&eacute;trer la meleuse"
 , 'smtp_hote' => 'H&ocirc;te'
@@ -177,24 +177,24 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'calcul_patron_attention' => "Certains patrons ins&egrave;rent dans leur r&eacute;sultat le texte ci-dessous (Texte du courrier). 
 	Si vous faites une mise &agrave; jour de votre courrier, pensez &agrave; vider cette boîte avant de g&eacute;n&eacute;rer le contenu."
 , 'charger_patron' => 'Choisir un patron pour le courrier'
-, 'Courrier_numero_' => "Courrier num&eacute;ro :" // + _gerer
-, 'Creer_un_courrier_' => "Cr&eacute;er un courrier :"
+, 'courrier_numero_' => "Courrier num&eacute;ro :" // + _gerer
+, 'creer_un_courrier_' => "Cr&eacute;er un courrier :"
 , 'choisir_un_patron_' => "Choisir un patron "
-, 'Courrier_edit_desc' => 'Vous pouvez choisir de g&eacute;n&eacute;rer automatiquement le contenu du courrier
+, 'courrier_edit_desc' => 'Vous pouvez choisir de g&eacute;n&eacute;rer automatiquement le contenu du courrier
 	ou r&eacute;diger simplement votre courrier dans la bo&icirc;te <strong>texte du courrier</strong>.'
 , 'contenu_a_partir_de_date_' => "Contenu &agrave; partir de cette date "
-, 'Cliquez_Generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
+, 'cliquez_generer_desc' => "Cliquez sur <strong>@titre_bouton@</strong> pour injecter le r&eacute;sultat 
 	dans la bo&icirc;te @titre_champ_texte@."
-, 'Lister_articles_de_rubrique' => "Et lister les articles de la rubrique "
-, 'Lister_articles_mot_cle' => "Et lister les articles du mot-cl&eacute; "
+, 'lister_articles_de_rubrique' => "Et lister les articles de la rubrique "
+, 'lister_articles_mot_cle' => "Et lister les articles du mot-cl&eacute; "
 , 'edition_du_courrier' => "Edition du courrier" // + gerer
 , 'generer_un_sommaire' => "G&eacute;n&eacute;rer un sommaire"
 , 'generer_patron_' => "G&eacute;n&eacute;rer le patron "
 , 'generer_patron_avant' => "avant le sommaire"
 , 'generer_patron_apres' => "apr&egrave;s le sommaire."
 , 'introduction_du_courrier_' => "Introduction &agrave; votre courrier, avant le contenu issu du site "
-, 'Modifier_un_courrier__' => "Modifier un courrier :"
-, 'Modifier_ce_courrier' => "Modifier ce courrier"
+, 'modifier_un_courrier__' => "Modifier un courrier :"
+, 'modifier_ce_courrier' => "Modifier ce courrier"
 , 'sujet_courrier' => '<strong>Onderwerp van bericht</strong> [verplicht]'
 , 'texte_courrier' => '<strong>berichttekst</strong> (HTML toegestaan)'
 , 'avec_patron_pied__' => "Avec le patron de pied : "
@@ -211,23 +211,23 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'envoi_debut' => 'Begin van het versturen: '
 , 'envoi_fin' => 'Einde van het versturen: '
 , 'erreur_envoi' => 'Aantal foutieve verzendingen: '
-, 'Erreur_liste_vide' => "Erreur: cette liste n'a pas d'abonn&eacute;s."
-, 'Erreur_courrier_introuvable' => "Erreur: ce courrier n'existe pas." // + previsu
-, 'Envoyer_ce_courrier' => "Envoyer ce courrier"
+, 'erreur_liste_vide' => "Erreur: cette liste n'a pas d'abonn&eacute;s."
+, 'erreur_courrier_introuvable' => "Erreur: ce courrier n'existe pas." // + previsu
+, 'envoyer_ce_courrier' => "Envoyer ce courrier"
 , 'format_html__n' => "html vorm: @n@"
 , 'format_texte__n' => "tekst vorm: @n@"
 , 'message_arch' => 'Opgeslagen berichten'
 , 'message_en_cours' => 'Berichten worden verstuurd'
 , 'message_type' => 'Electronische post'
 , 'sur_liste' => 'op de lijst' 
-, 'Supprimer_ce_courrier' => "Supprimer ce courrier"
+, 'supprimer_ce_courrier' => "Supprimer ce courrier"
 , 'email_adresse' => 'een test emailadres' // + liste
 , 'email_test' => 'Een testemail verzenden'
-, 'Erreur_courrier_titre_vide' => "Erreur: votre courrier n'a pas de titre."
+, 'erreur_courrier_titre_vide' => "Erreur: votre courrier n'a pas de titre."
 , 'message_en_cours' => 'Het bericht wordt momenteel geschreven'
 , 'modif_envoi' => 'U kan het wijzigen of de verzending vragen'
 , 'message_presque_envoye' =>'Het bericht staat op het punt verzonden te worden'
-, 'Erreur_Adresse_email_inconnue' => 'Opgelet, het test-emailadres dat u heeft opgegeven komt met geen enkele geabonneerde overeen. 
+, 'erreur_adresse_email_inconnue' => 'Opgelet, het test-emailadres dat u heeft opgegeven komt met geen enkele geabonneerde overeen. 
 	<br />De verzending werd onderbroken. Gelieve de procedure opnieuw te starten.<br /><br />'
 
 // exec/spiplistes_courrier_previsu.php
@@ -235,8 +235,8 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 
 // exec/spiplistes_courriers_casier.php
 // exec/spiplistes_import_export.php
-, 'Exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s"
-, 'Exporter_une_liste_de_non_abonnes' => "Exporter une liste de non abonn&eacute;s"
+, 'exporter_une_liste_d_abonnes' => "Exporter une liste d'abonn&eacute;s"
+, 'exporter_une_liste_de_non_abonnes' => "Exporter une liste de non abonn&eacute;s"
 , '_aide_import' => "Vous pouvez importer ici une liste d'abonn&eacute;s &agrave; partir de votre 
    ordinateur.<br />
 	Cette liste d'abonn&eacute;s doit &ecirc;tre au format texte seul, une ligne 
@@ -252,7 +252,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'import_export' => 'Import / Export'
 , 'incorrect_ou_dupli' => " (incorrect ou dupli)"
 , 'membres_liste' => 'Liste des Membres'
-, 'Messages_automatiques' => 'Courriers automatiques programm&eacute;s'
+, 'messages_automatiques' => 'Courriers automatiques programm&eacute;s'
 , 'pas_de_liste_pour_import' => "Vous devez cr&eacute;er au moins une liste de destination afin de pouvoir importer 
 	vos abonn&eacute;s."
 , 'resultat_import' => "R&eacute;sultat import"
@@ -278,13 +278,13 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 	pour la s&#233;lection, pour cet abonn&#233;)."
 , 'erreur_import_base' => "Erreur importation. Data incorrect ou erreur base SQL."
 , 'erreur_n_fois' => "(erreur rencontree @n@ fois)"
-, 'Liste_de_destination_s' => "Liste de destination : @s@"
-, 'Listes_de_destination_s' => "Listes de destination : @s@"
+, 'liste_de_destination_s' => "Liste de destination : @s@"
+, 'listes_de_destination_s' => "Listes de destination : @s@"
 , 'pas_dimport' => "Pas d&#39;import. Soit le fichier est vide, soit toutes les adresses sont d&#233;j&#224; abonn&#233;es."
 
 // exec/spiplistes_liste_edit.php
 , 'texte_dinsctription_' => "Inschrijvingstekst: "
-, 'Creer_une_liste_' => "Cr&eacute;er une liste "
+, 'creer_une_liste_' => "Cr&eacute;er une liste "
 , 'en_debut_de_semaine' => "en d&eacute;but de semaine"
 , 'en_debut_de_mois' => "en d&eacute;but de mois"
 , 'envoi_non_programme' => "Envoi non programm&eacute;"
@@ -302,24 +302,24 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'statut_publique' => "Publiek"
 , 'adresse' => "Indiquez ici l&#39;adresse &agrave; utiliser pour les r&eacute;ponses de mails 
 	(&agrave; d&eacute;faut, l&#39;adresse du webmestre sera utilis&eacute;e comme adresse de r&eacute;ponse) :"
-, 'Ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois."
+, 'ce_courrier_ne_sera_envoye_qu_une_fois' => "Ce courrier ne sera envoy&eacute; qu'une fois."
 , 'adresse_de_reponse' => "Adresse de r&eacute;ponse"
 , 'adresse_mail_retour' => 'Adresse email du gestionnaire de la liste (reply-to)'
-, 'Attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s."
-, 'A_partir_de' => "&Agrave; partir de"
-, 'Apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran dans une nouvelle fen&ecirc;tre"
-, 'Attention_suppression_liste' => "Attention ! Vous demandez la suppression d'une liste de diffusion. 
+, 'attention_action_retire_invites' => "Attention: cette action retire les invit&eacute;s de la liste des abonn&eacute;s."
+, 'a_partir_de' => "&Agrave; partir de"
+, 'apercu_plein_ecran' => "Aper&ccedil;u plein &eacute;cran dans une nouvelle fen&ecirc;tre"
+, 'attention_suppression_liste' => "Attention ! Vous demandez la suppression d'une liste de diffusion. 
 	Les abonn&eacute;s seront retir&eacute;s de cette liste de diffusion automatiquement. "
-, 'Abonner_tous_les_invites_public' => "Abonner tous les membres invit&eacute;s &agrave; cette liste publique."
-, 'Abonner_tous_les_inscrits_prives' => "Abonner tous les membres &agrave; cette liste priv&eacute;e, sauf les visiteurs."
+, 'abonner_tous_les_invites_public' => "Abonner tous les membres invit&eacute;s &agrave; cette liste publique."
+, 'abonner_tous_les_inscrits_prives' => "Abonner tous les membres &agrave; cette liste priv&eacute;e, sauf les visiteurs."
 , 'boite_confirmez_envoi_liste' => "Vous avez demand&eacute; l'envoi imm&eacute;diat de cette liste 
 	de diffusion.<br />
 	Svp, veuillez confirmer votre demande."
 , 'cette_liste_est_' => "Deze lijst is: @s@"
-, 'Confirmer_la_suppression_de_la_liste' => "Confirmer la suppression de la liste "
-, 'Confirmez_requete' => "Veuillez confirmer la requ&ecirc;te."
+, 'confirmer_la_suppression_de_la_liste' => "Confirmer la suppression de la liste "
+, 'confirmez_requete' => "Veuillez confirmer la requ&ecirc;te."
 , 'date_expedition_' => "Date d'exp&eacute;dition "
-, 'Dernier_envoi_le_' => "Dernier envoi le :"
+, 'dernier_envoi_le_' => "Dernier envoi le :"
 , 'forcer_abonnement_desc' => "Vous pouvez forcer ici les abonnements &agrave; cette liste, soit pour tous 
    les membres inscrits (visiteurs, auteurs et administrateurs), soit pour tous 
    les visiteurs."
@@ -330,7 +330,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'forcer_abonnements_nouveaux' => "En s&eacute;lectionnant l'option <strong>Forcer les abonnements au format...</strong>, 
 	vous confirmez le format de r&eacute;ception des nouveaux abonn&eacute;s.
 	Les anciens abonn&eacute;s conservent leur pr&eacute;f&eacute;rence de r&eacute;ception."
-, 'Forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste."
+, 'forcer_desabonner_tous_les_inscrits' => "D&eacute;sabonner tous les membres inscrits pour cette liste."
 , 'gestion_dune_liste' => "Gestion d'une liste"
 , 'message_sujet' => 'Onderwerp '
 , 'mods_cette_liste' => "Les mod&eacute;rateurs de cette liste"
@@ -339,7 +339,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'patron_manquant_message' => "Vous devez appliquer un grand patron avant de param&eacute;trer l'envoi de cette 
 	liste."
 , 'liste_sans_patron' => "Liste sans patron." // courriers_listes
-, 'Patron_grand_' => "Grand patron "
+, 'patron_grand_' => "Grand patron "
 , 'sommaire_date_debut' => "A partir de la date définie ci-dessus"
 , 'abos_cette_liste' => "Les abonn&eacute;s &agrave; cette liste"
 , 'confirme_envoi' => 'Veuillez confirmer l\'envoi'
@@ -348,7 +348,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'date_act' => 'Bijgewerkte gegevens'
 , 'forcer_les_abonnements_au_format_' => "Forcer les abonnements au format : "
 , 'pas_denvoi_auto_programme' => "Er werd geen automitische verzending voor deze lijst geprogrammeerd."
-, 'Pas_de_periodicite' => "Pas de p&eacute;riodicit&eacute;."
+, 'pas_de_periodicite' => "Pas de p&eacute;riodicit&eacute;."
 , 'prog_env' => 'Een automatische verzending programmeren'
 , 'prog_env_non' => 'Geen verzendingen programmeren'
 , 'conseil_regenerer_pied' => "<br />Ce patron est issu d'une ancienne version de SPIP-Listes.<br />
@@ -378,15 +378,15 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'forcer_formats_' => "Forcer le format de r&#233;ception "
 , 'forcer_formats_desc' => "Forcer le format de r&#233;ception pour tous les abonn&#233;s..."
 , 'modification_objet' => "Modification @objet@"
-, 'Suppression_de__s' => "Suppression de : @s@"
+, 'suppression_de__s' => "Suppression de : @s@"
 , 'suppression_' => "Suppression @objet@"
 , 'suppression_chronos_' => "Supprimer les envois programm&eacute;s (chrono) "
 , 'suppression_chronos_desc' => "Si vous supprimez son chrono, la liste n'est pas supprim&eacute;e. Sa p&eacute;riodicit&eacute; 
 	est conserv&eacute;e mais l'envoi est suspendu. Pour r&eacute;activer le chrono, il faut lui red&eacute;finir une date de premier 
 	envoi. "
-, 'Supprimer_les_listes' => "Supprimer les listes"
-, 'Supprimer_la_liste' => "Supprimer la liste..."
-, 'Suspendre_abonnements' => "Suspendre les abonnements pour ce compte"
+, 'supprimer_les_listes' => "Supprimer les listes"
+, 'supprimer_la_liste' => "Supprimer la liste..."
+, 'suspendre_abonnements' => "Suspendre les abonnements pour ce compte"
 , 'separateur_de_champ_' => "S&eacute;parateur de champ "
 , 'separateur_tabulation' => "tabulation (<code>\\t</code>)"
 , 'separateur_semicolon' => "point-virgule (<code>;</code>)"
@@ -435,13 +435,13 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'texte_boite_en_cours' => 'SPIP-Listes envoie un courrier.<p>Cette boite disparaitra une fois l\'envoi achev&eacute;.</p>'
 , 'meleuse_suspendue_info' => "L'envoi des courriers en attente d'exp&eacute;dition est suspendu."
 , 'casier_a_courriers' => "Casier &agrave; courriers" // + courriers_casier
-, 'Pas_de_donnees' => "D&eacute;sol&eacute;, mais l'enregistrement demand&eacute; n'existe pas dans la base de donn&eacute;es."
+, 'pas_de_donnees' => "D&eacute;sol&eacute;, mais l'enregistrement demand&eacute; n'existe pas dans la base de donn&eacute;es."
 , '_dont_n_sans_format_reception' => ", dont @n@ sans format de r&eacute;ception"
 , 'mode_simulation' => "Mode simulation"
 , 'mode_simulation_info' => "Le mode simulation est activ&eacute;. La m&eacute;leuse fait semblant d'envoyer le courrier. 
 	En r&eacute;alit&eacute;, aucun courrier n'est exp&eacute;di&eacute;."
 , 'meleuse_suspendue' => "Meleuse suspendue"
-, 'Meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e"
+, 'meleuse_reactivee' => "M&egrave;leuse r&eacute;activ&eacute;e"
 , 'nb_abonnes_sing' => " abonn&eacute;"
 , 'nb_abonnes_plur' => " abonn&eacute;s"
 , 'nb_moderateur_sing' => " mod&eacute;rateur"
@@ -455,22 +455,22 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 
 // inc/spiplistes_destiner_envoi.php
 , 'email_tester' => 'Testen per email'
-, 'Choix_non_defini' => 'Pas de choix d&eacute;fini.'
-, 'Destination' => "Destination"
+, 'choix_non_defini' => 'Pas de choix d&eacute;fini.'
+, 'destination' => "Destination"
 , 'aucune_liste_dispo' => "Aucune liste disponible."
 
 // inc/spiplistes_import.php
 // inc/spiplistes_lister_courriers_listes.php
-, 'Prochain_envoi_' => "Prochain envoi "
+, 'prochain_envoi_' => "Prochain envoi "
 
 // inc/spiplistes_listes_forcer_abonnement.php
 // inc/spiplistes_listes_selectionner_auteur.php
 , 'lien_trier_nombre' => "Trier par nombre d&#039;abonnements"
-, 'Abonner_format_html' => "Abonner au format HTML"
-, 'Abonner_format_texte' => "Abonner au format texte"
+, 'abonner_format_html' => "Abonner au format HTML"
+, 'abonner_format_texte' => "Abonner au format texte"
 , 'ajouter_un_moderateur' => "Ajouter un mod&eacute;rateur "
-, 'Desabonner' => "D&eacute;sabonner"
-, 'Pas_adresse_email' => "Pas d&#039;adresse email"
+, 'desabonner' => "D&eacute;sabonner"
+, 'pas_adresse_email' => "Pas d&#039;adresse email"
 , 'sup_mod' => "Supprimer ce mod&eacute;rateur"
 , 'supprimer_un_abo' => "Supprimer un abonné de cette liste"
 , 'supprimer_cet_abo' => "Supprimer cet abonné de cette liste" // + pipeline
@@ -489,18 +489,18 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php
 // inc/spiplistes_pipeline_affiche_milieu.php
-, 'Adresse_email_obligatoire' => "Une adresse email est obligatoire pour pouvoir vous abonner aux listes de diffusion. 
+, 'adresse_email_obligatoire' => "Une adresse email est obligatoire pour pouvoir vous abonner aux listes de diffusion. 
 	Si vous d&eacute;sirez profiter de ce service, merci de modifier votre fiche en compl&eacute;tant ce champ. "
-, 'Alert_abonnement_sans_format' => "Votre abonnement est suspendu. Vous ne recevrez pas les courriers des listes de 
+, 'alert_abonnement_sans_format' => "Votre abonnement est suspendu. Vous ne recevrez pas les courriers des listes de 
 	diffusion list&eacute;es ci-dessous. Pour recevoir &agrave; nouveau le courrier 
 	de vos listes pr&eacute;f&eacute;r&eacute;es, choisissez un format de r&eacute;ception 
 	et validez ce formulaire. "
 , 'abonnements_aux_courriers' => "Abonnements aux courriers"
-, 'Forcer_abonnement_erreur' => "Erreur technique signal&eacute;e lors de la modification d'une liste abonn&eacute;e. 
+, 'forcer_abonnement_erreur' => "Erreur technique signal&eacute;e lors de la modification d'une liste abonn&eacute;e. 
 	V&eacute;rifiez cette liste avant de poursuivre votre op&eacute;ration."
-, 'Format_obligatoire_pour_diffusion' => "Pour confirmer l'abonnement de ce compte, vous devez s&eacute;lectionner un format 
+, 'format_obligatoire_pour_diffusion' => "Pour confirmer l'abonnement de ce compte, vous devez s&eacute;lectionner un format 
 	de r&eacute;ception."
-, 'Valider_abonnement' => "Valider cet abonnement"
+, 'valider_abonnement' => "Valider cet abonnement"
 , 'vous_etes_abonne_aux_listes_selectionnees_' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es "
 
 // inc/spiplistes_pipeline_ajouter_boutons.php
@@ -568,27 +568,27 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'vous_etes_abonne_a_la_liste_' => "Vous &ecirc;tes abonn&eacute; &agrave; la liste de diffusion :"
 
 // tableau items *_options
-, 'Liste_de_destination' => "Liste de destination"
-, 'Listes_1_du_mois' => "Publiques, 1<sup><small>er</small></sup> du mois."
-, 'Liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. "
-, 'Listes_autre' => "Autre pr&eacute;riodicit&eacute;"
-, 'Listes_autre_periode' => "Listes publiques autre pr&eacute;riodicit&eacute;"
-, 'Listes_diffusion_prive' => "Listes priv&eacute;es"
-, 'Liste_hebdo' => "Liste hebdomadaire"
-, 'Publiques_hebdos' => "Publiques, hebdomadaires"
-, 'Listes_diffusion_hebdo' => "Listes publiques hebdomadaires"
-, 'Liste_mensuelle' => "Liste mensuelle"
-, 'Publiques_mensuelles' => "Publiques, mensuelles"
-, 'Listes_diffusion_mensuelle' => "Listes publiques mensuelles"
-, 'Listes_diffusion_publiques_desc' => "L'abonnement &agrave; ces listes est propos&eacute; sur le site public."
-, 'Liste_annuelle' => "Liste annuelle"
-, 'Publiques_annuelles' => "Publiques, annuelles"
-, 'Listes_diffusion_annuelle' => "Listes publiques annuelles"
-, 'Listes_diffusion_publique' => 'Listes de diffusion publiques'
-, 'Listes_diffusion_privees' => 'Listes de diffusion priv&eacute;es'
-, 'Listes_diffusion_privees_desc' => "L'abonnement &agrave; ces listes est réserv&eacute;e aux administrateurs et auteurs du site."
-, 'Listes_diffusion_suspendue' => 'Listes de diffusion suspendues'
-, 'Listes_diffusion_suspendue_desc' => " "
+, 'liste_de_destination' => "Liste de destination"
+, 'listes_1_du_mois' => "Publiques, 1<sup><small>er</small></sup> du mois."
+, 'liste_diffusee_le_premier_de_chaque_mois' => "Liste diffus&eacute;e le premier de chaque mois. "
+, 'listes_autre' => "Autre pr&eacute;riodicit&eacute;"
+, 'listes_autre_periode' => "Listes publiques autre pr&eacute;riodicit&eacute;"
+, 'listes_diffusion_prive' => "Listes priv&eacute;es"
+, 'liste_hebdo' => "Liste hebdomadaire"
+, 'publiques_hebdos' => "Publiques, hebdomadaires"
+, 'listes_diffusion_hebdo' => "Listes publiques hebdomadaires"
+, 'liste_mensuelle' => "Liste mensuelle"
+, 'publiques_mensuelles' => "Publiques, mensuelles"
+, 'listes_diffusion_mensuelle' => "Listes publiques mensuelles"
+, 'listes_diffusion_publiques_desc' => "L'abonnement &agrave; ces listes est propos&eacute; sur le site public."
+, 'liste_annuelle' => "Liste annuelle"
+, 'publiques_annuelles' => "Publiques, annuelles"
+, 'listes_diffusion_annuelle' => "Listes publiques annuelles"
+, 'listes_diffusion_publique' => 'Listes de diffusion publiques'
+, 'listes_diffusion_privees' => 'Listes de diffusion priv&eacute;es'
+, 'listes_diffusion_privees_desc' => "L'abonnement &agrave; ces listes est réserv&eacute;e aux administrateurs et auteurs du site."
+, 'listes_diffusion_suspendue' => 'Listes de diffusion suspendues'
+, 'listes_diffusion_suspendue_desc' => " "
 , 'Courriers_en_cours_de_redaction' => 'Courriers en cours de r&eacute;daction'
 , 'Courriers_en_cours_denvoi' => 'Courriers en cours d\'envoi'
 , 'Courriers_prets_a_etre_envoye' => "Courriers pr&ecirc;ts &agrave; &ecirc;tre envoy&eacute;s"
@@ -613,8 +613,8 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'editeur_url' => "URL du site de l'&eacute;diteur "
 , 'editeur_logo' => 'URL (ou DATA URL sheme) du logotype de l&#8217;&#233;diteur '
 , 'Envoi_abandonne' => "Envoi abandonn&eacute;"
-, 'Liste_prive' => "Liste priv&eacute;e"
-, 'Liste_publique' => "Liste publique"
+, 'liste_prive' => "Liste priv&eacute;e"
+, 'liste_publique' => "Liste publique"
 , 'message_redac' => 'In staat van redactie en klaar voor verzending'
 , 'Prets_a_envoi' => "Pr&ecirc;ts &agrave; l'envoi"
 , 'Publies' => "Publi&eacute;s"
@@ -702,7 +702,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'liste_diff_publiques' => 'Publieke verzendingslijsten<br /><i>De pagina van de publieke site stelt de inschrijving voor de volgende lijsten voor</i>'
 , 'messages_non_lus_grand' => 'Geen nieuwe berichten'
 , 'messages_repondre' => 'Nieuw antwoord'
-, 'Liste_abandonnee' => "Liste abandonn&eacute;e"
+, 'liste_abandonnee' => "Liste abandonn&eacute;e"
 , 'par_date' => 'Volgens datum van inschrijving'
 , 'info_auto' => 'SPIP-lijsten voor spip kunnen aan de geabonneerden regelmatig een bericht sturen met daarin de nieuwigheden van de site (recent gepubliceerde artikels en korte beschrijvingen).'
 , 'format2' => 'Format :'
@@ -817,7 +817,7 @@ $GLOBALS['i18n_spiplistes_nl'] = array(
 , 'envoyer' => 'de email verzendenl'
 , 'envoyer_a' => 'Verzending naar '
 , 'listes_poubelle' => 'Uw verzendingslijst in de prullenbak'
-, 'Liste_numero_:' => 'Liste num&eacute;ro :'
+, 'liste_numero_:' => 'Liste num&eacute;ro :'
 , 'mail_tache_courante' => 'Berichten verzonden voor de lopende taak: '
 , 'messages_auto_envoye' => 'Automatisch verzonden berichten'
 , 'nb_abonnes' => 'In de lijsten: '

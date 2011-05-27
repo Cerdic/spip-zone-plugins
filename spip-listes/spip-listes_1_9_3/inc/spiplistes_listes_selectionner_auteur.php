@@ -457,9 +457,9 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 	}
 
 	$a_title_abo = array(
-		'html' =>  " title=\""._T('spiplistes:Abonner_format_html')."\""
-		, 'texte' =>  " title=\""._T('spiplistes:Abonner_format_texte')."\""
-		, 'desabo' =>  " title=\""._T('spiplistes:Desabonner')."\""
+		'html' =>  " title=\""._T('spiplistes:abonner_format_html')."\""
+		, 'texte' =>  " title=\""._T('spiplistes:abonner_format_texte')."\""
+		, 'desabo' =>  " title=\""._T('spiplistes:desabonner')."\""
 	);
 
 	$ii = 1;
@@ -496,7 +496,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 				(strlen($row['email'])>3)
 				? "<a href='mailto:".$row['email']."'>"
 					. spiplistes_corrige_img_pack("<img src='"._DIR_IMG_PACK."m_envoi_rtl.gif' alt='' /></a>")
-				: "<span title='"._T('spiplistes:Pas_adresse_email')."'>&bull;</span>"
+				: "<span title='"._T('spiplistes:pas_adresse_email')."'>&bull;</span>"
 				)
 			. "</td>\n"
 			//

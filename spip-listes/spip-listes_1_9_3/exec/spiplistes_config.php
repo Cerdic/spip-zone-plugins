@@ -432,12 +432,12 @@ function exec_spiplistes_config () {
 		. fin_cadre_relief(true)
 		//
 		// ajout tampon editeur
-		. debut_cadre_relief('', true, '', _T('spiplistes:Complement_tampon_editeur'))
-		. "<p class='verdana2'>"._T('spiplistes:Complement_tampon_editeur_desc')."</p>"
+		. debut_cadre_relief('', true, '', _T('spiplistes:complement_tampon_editeur'))
+		. "<p class='verdana2'>"._T('spiplistes:complement_tampon_editeur_desc')."</p>"
 		. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt-ajout-tampon-editeur' "
 			. ($opt_ajout_tampon_editeur ? "checked='checked'" : '')
 			. " />" . $eol
-		. "<label class='verdana2' for='opt-ajout-tampon-editeur'>"._T('spiplistes:Complement_tampon_editeur_label').'</label>' . $eol
+		. "<label class='verdana2' for='opt-ajout-tampon-editeur'>"._T('spiplistes:complement_tampon_editeur_label').'</label>' . $eol
 		//
 		// coordonnées editeur: bloc coordonnes_editeur
 		. "<div id='div-ajout-tampon-editeur' style='".(!$opt_ajout_tampon_editeur ? "display:none;" : '')."margin-top:1em;'>"
@@ -480,7 +480,7 @@ function exec_spiplistes_config () {
 	//////////////////////////////////////////////////////
 	// Boite parametrage envoi du courrier
 	$page_result .= ''
-		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_envoyer-24.png', true, '', _T('spiplistes:Envoi_des_courriers'))
+		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_envoyer-24.png', true, '', _T('spiplistes:envoi_des_courriers'))
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
 		//
 		// adresse email de retour (reply-to)
@@ -555,7 +555,7 @@ function exec_spiplistes_config () {
 		. debut_cadre_relief('', true, '', _T('spiplistes:mode_suspendre_trieuse'))
 		. spiplistes_form_input_checkbox (
 			'opt_suspendre_trieuse'
-			, 'oui', _T('spiplistes:Suspendre_le_tri_des_listes')
+			, 'oui', _T('spiplistes:suspendre_le_tri_des_listes')
 			, (spiplistes_pref_lire('opt_suspendre_trieuse') == 'oui'), true, false)
 		. fin_cadre_relief(true)
 		//

@@ -150,7 +150,7 @@ Un sa&uacute;do
 'messages_auto_envoye' => 'Novidades enviadas',
 'message_en_cours' => 'Mensaxe para enviar',
 'messages' => 'Mensaxes',
-'Messages_automatiques' => 'Programaci&oacute;n de env&iacute;os &aacute;s listas',
+'messages_automatiques' => 'Programaci&oacute;n de env&iacute;os &aacute;s listas',
 'messages_derniers' => '&uacute;ltimos mensaxes',
 'messages_forum_clos' => 'Foro desactivado',
 'messages_non_lus_grand' => 'Non hai mensaxes novas',
@@ -290,7 +290,7 @@ As isncripci&oacute;ns a importar deben estar nun ficheiro de texto que s&oacute
 'repartition' => 'Distribuci&oacute;n',
 'retour_link' => 'Volver',
 
-'Erreur_Adresse_email_inconnue' => 'La direcci&oacute;n de correo que escribiches non corresponde con ningunha inscripci&oacute;n, <br />Non pode facerse o env&iacute;o, int&eacute;ntao otra vez<br /><br />',
+'erreur_adresse_email_inconnue' => 'La direcci&oacute;n de correo que escribiches non corresponde con ningunha inscripci&oacute;n, <br />Non pode facerse o env&iacute;o, int&eacute;ntao otra vez<br /><br />',
 'squel' => 'gu&iacute;a: &nbsp;',
 'statut_interne' => 'Interna',
 'statut_publique' => 'P&uacute;blica',

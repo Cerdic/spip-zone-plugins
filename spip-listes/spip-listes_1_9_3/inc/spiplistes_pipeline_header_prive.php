@@ -74,7 +74,7 @@ function spiplistes_header_prive ($flux) {
 				$flux .= "<script type=\"text/javascript\" src=\"" . $js_dir . "spiplistes_config.js\"></script>\n";
 				break;
 			case _SPIPLISTES_EXEC_LISTE_GERER:
-				$js_alert = spiplistes_texte_html_2_iso(_T('spiplistes:Attention_action_retire_invites'), $GLOBALS['meta']['charset'], true);
+				$js_alert = spiplistes_texte_html_2_iso(_T('spiplistes:attention_action_retire_invites'), $GLOBALS['meta']['charset'], true);
 				$flux .= ""
 					. "<meta id='x-spiplistes-alert' content='" . $js_alert . "' />\n"
 					. "<meta id='x-spiplistes-pri' name='" . _SPIPLISTES_LIST_PRIVATE . "' content='" . spiplistes_items_get_item("puce", _SPIPLISTES_LIST_PRIVATE) . "' />\n"

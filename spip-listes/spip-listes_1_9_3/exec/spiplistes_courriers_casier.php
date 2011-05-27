@@ -48,7 +48,7 @@ function spiplistes_afficher_pile_messages() {
 	
 	$pile_result = ""
 		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_timer.gif', true, ''
-			, _T('spiplistes:Messages_automatiques').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
+			, _T('spiplistes:messages_automatiques').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
 		. "\n"
 		. "<table class='spiplistes-tab' width='100%'  border='0' cellspacing='1' cellpadding='0'>\n" 
 		. "<tr>\n"
@@ -70,17 +70,17 @@ function spiplistes_afficher_pile_messages() {
 			case _SPIPLISTES_LIST_PRIV_WEEKLY:
 			case _SPIPLISTES_LIST_PUB_HEBDO:
 			case _SPIPLISTES_LIST_PUB_WEEKLY:
-				$periodicite = _T('spiplistes:Liste_hebdo');
+				$periodicite = _T('spiplistes:liste_hebdo');
 				break;
 			case _SPIPLISTES_LIST_PRIV_MENSUEL:
 			case _SPIPLISTES_LIST_PRIV_MONTHLY:
 			case _SPIPLISTES_LIST_PUB_MENSUEL:
 			case _SPIPLISTES_LIST_PUB_MONTHLY:
-				$periodicite = _T('spiplistes:Liste_mensuelle');
+				$periodicite = _T('spiplistes:liste_mensuelle');
 				break;
 			case _SPIPLISTES_LIST_PRIV_YEARLY:
 			case _SPIPLISTES_LIST_PUB_YEARLY:
-				$periodicite = _T('spiplistes:Liste_annuelle');
+				$periodicite = _T('spiplistes:liste_annuelle');
 				break;
 			case _SPIPLISTES_LIST_PRIV_DAILY:
 			case _SPIPLISTES_LIST_PUB_DAILY:
@@ -89,7 +89,7 @@ function spiplistes_afficher_pile_messages() {
 					, array('s' => spiplistes_singulier_pluriel_str_get($periode, _T('spiplistes:jour'), _T('spiplistes:jours')))
 					);
 				} else {
-					$periodicite = _T('spiplistes:Listes_autre');
+					$periodicite = _T('spiplistes:listes_autre');
 				}
 				break;
 			default:

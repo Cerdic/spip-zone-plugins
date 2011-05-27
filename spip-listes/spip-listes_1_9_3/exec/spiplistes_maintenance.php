@@ -79,7 +79,7 @@ function exec_spiplistes_maintenance () {
 						? $msg_ok 
 						: $msg_bad
 						;
-					$msg_maintenance[] = _T('spiplistes:Suppression_de__s',
+					$msg_maintenance[] = _T('spiplistes:suppression_de__s',
 						array('s' => spiplistes_items_get_item('tab_t', $statut)."... : ".$msg.$msg_end)
 						);
 					spiplistes_log("DELETE courrier ID_COURRIER #$id_courrier by ID_AUTEUR #$connect_id_auteur");
@@ -306,7 +306,7 @@ function exec_spiplistes_maintenance () {
 		/////////////////////////////////////////
 		// supprimer les listes
 	$page_result .= ""
-		. debut_cadre_relief("", true, "", _T('spiplistes:Supprimer_les_listes'))
+		. debut_cadre_relief("", true, "", _T('spiplistes:supprimer_les_listes'))
 		;
 	if($nb_listes) {
 		$page_result .= ""

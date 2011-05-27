@@ -58,7 +58,7 @@ function spiplistes_auteur_abonnement () {
 											 , _T('spiplistes:abonnements_aux_courriers')
 											 )
 						. '<p class="verdana2">'
-						. _T('spiplistes:Adresse_email_obligatoire')
+						. _T('spiplistes:adresse_email_obligatoire')
 						. '</p>'
 						. fin_cadre_relief(true)
 						;
@@ -210,7 +210,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				. "\n<p class='verdana2' style='margin-top:0;margin-bottom:0;'>"
 				.	(
 						($abo_format!='html' && $abo_format!='texte')
-						? _T('spiplistes:Alert_abonnement_sans_format')
+						? _T('spiplistes:alert_abonnement_sans_format')
 						: _T('spiplistes:vous_etes_abonne_aux_listes_selectionnees_').":"
 					)
 				. "</p>\n"
@@ -226,7 +226,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				$label = _T("spiplistes:".$label)." ".$value['titre'];
 				$prochain_envoi = 
 					($value['date'] > 0)
-					? _T('spiplistes:Prochain_envoi_').": <span style='font-weight:bold;'>".affdate_heure($value['date'])."</span>"
+					? _T('spiplistes:prochain_envoi_').": <span style='font-weight:bold;'>".affdate_heure($value['date'])."</span>"
 					: _T('spiplistes:envoi_non_programme')
 					;
 				$result .= ""
@@ -250,7 +250,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 				// selection du format de reception
 				. debut_cadre_formulaire("margin-top:1ex", true)
 				. ((empty($abo_format) || ($abo_format=="non")) 
-					? "<p>"._T('spiplistes:Format_obligatoire_pour_diffusion')."</p>" : "" )
+					? "<p>"._T('spiplistes:format_obligatoire_pour_diffusion')."</p>" : "" )
 				. _T('spiplistes:format_de_reception')
 				. "<ul class='liste-format'>\n"
 				;
@@ -273,7 +273,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 					. debut_cadre_formulaire("margin-top:1ex", true)
 					. "<ul class='liste-format-desabo'>\n"
 					. "<li>\n"
-					. spiplistes_form_input_radio('abo_format', 'non', _T('spiplistes:Suspendre_abonnements')
+					. spiplistes_form_input_radio('abo_format', 'non', _T('spiplistes:suspendre_abonnements')
 						, false, true, false)
 					. "</li>\n"
 					. "</ul>\n"
@@ -283,7 +283,7 @@ function spiplistes_auteur_abonnement_details ($id_auteur, $auteur_statut, $emai
 			$result .= ""
 				//
 				. "<div style='text-align:right;margin-top:1ex;'><input type='submit' name='btn_abonnements_valider' "
-					. " value='"._T('spiplistes:Valider_abonnement')."' class='fondo' /></div>\n"
+					. " value='"._T('spiplistes:valider_abonnement')."' class='fondo' /></div>\n"
 				. "</form>\n"
 				. fin_block()
 				. fin_cadre_enfonce(true)

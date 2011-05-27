@@ -333,7 +333,7 @@ function exec_spiplistes_liste_gerer () {
 				include_spip('inc/spiplistes_listes_forcer_abonnement');
 				
 				if(spiplistes_listes_forcer_abonnement ($id_liste, $forcer_abo, $forcer_format_reception) ===  false) {
-					$message_erreur .= spiplistes_boite_alerte(_T('spiplistes:Forcer_abonnement_erreur'), true);
+					$message_erreur .= spiplistes_boite_alerte(_T('spiplistes:forcer_abonnement_erreur'), true);
 				}
 			}
 			
@@ -493,11 +493,11 @@ function exec_spiplistes_liste_gerer () {
 		. spiplistes_boite_info_id(_T('spiplistes:liste_numero'), $id_liste, true)
 		. spiplistes_naviguer_paniers_listes(_T('spiplistes:aller_aux_listes_'), true)
 		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_grand_patron'
-			, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:Patron_grand_')
+			, _SPIPLISTES_PATRONS_DIR, _T('spiplistes:patron_grand_')
 			, ($patron ? $patron : '')
 			, $patron)
 		. spiplistes_boite_patron($flag_editable, $id_liste, _SPIPLISTES_EXEC_LISTE_GERER, 'btn_patron_pied'
-			, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:Patron_de_pied_')
+			, _SPIPLISTES_PATRONS_PIED_DIR, _T('spiplistes:patron_de_pied_')
 			, ((($ii = strlen($pied_page)) > _SPIPLISTES_PATRON_FILENAMEMAX) 
 				? _T('taille_octets',array('taille'=>$ii)) . _T('spiplistes:conseil_regenerer_pied')
 				: $pied_page)
@@ -516,12 +516,12 @@ function exec_spiplistes_liste_gerer () {
 	// message alerte et demande de confirmation si supprimer liste
 	if(($btn_supprimer_liste > 0) && ($btn_supprimer_liste == $id_liste)) {
 		$page_result .= ''
-			. spiplistes_boite_alerte (_T('spiplistes:Attention_suppression_liste').'<br />'._T('spiplistes:Confirmez_requete'), true)
+			. spiplistes_boite_alerte (_T('spiplistes:attention_suppression_liste').'<br />'._T('spiplistes:confirmez_requete'), true)
 			. '<form name="form_suppr_liste" id="form_suppr_liste" method="post"
 				action="'.generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE, '').'">' . PHP_EOL
 			. "<div class='verdana2' style='text-align:right;'>\n"
 			. "<input type='hidden' name='id_liste' value='$id_liste' />\n"
-   		. "<label>"._T('spiplistes:Confirmer_la_suppression_de_la_liste')."# $id_liste : \n"
+   		. "<label>"._T('spiplistes:confirmer_la_suppression_de_la_liste')."# $id_liste : \n"
    		. "<input class='fondo' type='submit' name='btn_supprimer_liste_confirme' value='"._T('bouton_valider')."' /></label>\n"
 			. "</div>\n"
 			. "</form>\n"
@@ -733,14 +733,14 @@ function exec_spiplistes_liste_gerer () {
 				)
 			.	(
 					(!in_array($statut, explode(";", _SPIPLISTES_LISTES_STATUTS_PERIODIQUES)))
-					? " <strong>"._T('spiplistes:Pas_de_periodicite')."</strong><br />"
-						._T('spiplistes:Ce_courrier_ne_sera_envoye_qu_une_fois')
+					? " <strong>"._T('spiplistes:pas_de_periodicite')."</strong><br />"
+						._T('spiplistes:ce_courrier_ne_sera_envoye_qu_une_fois')
 					: ""
 				)
 			.	"<br />"
 			.	(
 				(intval($maj))
-				? _T('spiplistes:Dernier_envoi_le_') . " <strong>" . affdate_heure($maj) . "</strong>"
+				? _T('spiplistes:dernier_envoi_le_') . " <strong>" . affdate_heure($maj) . "</strong>"
 					.	(
 						($last =  round((time() - strtotime($maj)) / _SPIPLISTES_TIME_1_DAY))
 							? " (".spiplistes_singulier_pluriel_str_get($last, _T('spiplistes:jour'), _T('spiplistes:jours')).")"
@@ -829,7 +829,7 @@ function exec_spiplistes_liste_gerer () {
 					, ($statut == _SPIPLISTES_LIST_PUB_YEARLY)
 					, true, false)
 				. "</li>\n"
-			. "<li style='margin-top:0.5em'>"._T('spiplistes:A_partir_de')." : <br />\n"
+			. "<li style='margin-top:0.5em'>"._T('spiplistes:a_partir_de')." : <br />\n"
 			//
 			. spiplistes_dater_envoi(
 				'liste', $id_liste, $statut
@@ -911,7 +911,7 @@ function exec_spiplistes_liste_gerer () {
 			.	(
 					($statut==_SPIPLISTES_LIST_PRIVATE)
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='auteurs' id='forcer_abo_tous' />\n"
-						. "<label for='forcer_abo_tous'>"._T('spiplistes:Abonner_tous_les_inscrits_prives')."</label>"
+						. "<label for='forcer_abo_tous'>"._T('spiplistes:abonner_tous_les_inscrits_prives')."</label>"
 						. "</div>\n"
 						. spiplistes_boutons_forcer_format('forcer_format', _T('spiplistes:forcer_abonnements_nouveaux'))
 					: ""
@@ -921,7 +921,7 @@ function exec_spiplistes_liste_gerer () {
 			.	(
 					(($statut!=_SPIPLISTES_LIST_PRIVATE) && ($statut!=_SPIPLISTES_TRASH_LIST))
 					? "<div class='verdana2'><input type='radio' name='forcer_abo' value='6forum' id='forcer_abo_6forum' />\n"
-						. "<label for='forcer_abo_6forum'>"._T('spiplistes:Abonner_tous_les_invites_public')."</label></div>\n"
+						. "<label for='forcer_abo_6forum'>"._T('spiplistes:abonner_tous_les_invites_public')."</label></div>\n"
 						. spiplistes_boutons_forcer_format('forcer_format', _T('spiplistes:forcer_abonnements_nouveaux'))
 					: ""
 				)
@@ -929,7 +929,7 @@ function exec_spiplistes_liste_gerer () {
 				($nb_abonnes)
 				? "<hr />\n"
 					. "<div class='verdana2'><input type='radio' name='forcer_abo' value='aucun' id='forcer_desabo' />\n"
-					. "<label for='forcer_desabo'>"._T('spiplistes:Forcer_desabonner_tous_les_inscrits')."</label></div>\n"
+					. "<label for='forcer_desabo'>"._T('spiplistes:forcer_desabonner_tous_les_inscrits')."</label></div>\n"
 				: ""
 				)
 			. fin_cadre_relief(true)."\n"

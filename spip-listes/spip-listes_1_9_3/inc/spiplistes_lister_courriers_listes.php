@@ -216,7 +216,7 @@ function spiplistes_lister_courriers_listes (
 						}
 						$en_liste .= ""
 							. ""
-							. "<br />" . _T('spiplistes:Prochain_envoi_')
+							. "<br />" . _T('spiplistes:prochain_envoi_')
 							. " : <strong>".affdate_heure($date)."</strong>"
 							;
 					}

@@ -127,10 +127,10 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'complement_ajouter_lien_en_tete' => "A&ntilde;adir un enlace en el encabezado del email"
 , 'complement_lien_en_tete_desc' => "Enviar en el encabezado del email HTML el enlace
    al email original guardado en el sitio."
-, 'Complement_tampon_editeur' => "Est&aacute; opci&oacute;n permite a&ntilde;adir el sello Editor o Editora"
-, 'Complement_tampon_editeur_desc' => "Est&aacute; opci&oacute;n permite a&ntilde;adir el sello Editor o Editora al final del email. "
-, 'Complement_tampon_editeur_label' => "A&ntilde;adir el sello Editor o Editora al final del email"
-, 'Envoi_des_courriers' => "Env&iacute;o de emails"
+, 'complement_tampon_editeur' => "Est&aacute; opci&oacute;n permite a&ntilde;adir el sello Editor o Editora"
+, 'complement_tampon_editeur_desc' => "Est&aacute; opci&oacute;n permite a&ntilde;adir el sello Editor o Editora al final del email. "
+, 'complement_tampon_editeur_label' => "A&ntilde;adir el sello Editor o Editora al final del email"
+, 'envoi_des_courriers' => "Env&iacute;o de emails"
 , 'log_console' => "Consola"
 , 'log_details_console' => "Opciones de la consola"
 , 'log_voir_destinataire' => "Listar las direcciones de email enviados en la consola cuando termine el env&iacute;o."
@@ -142,7 +142,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'fermer_journal' => "Cerrar la informaci&oacute;n"
 , 'methode_envoi' => 'Forma de env&iacute;o'
 , 'mode_suspendre_trieuse' => "Cancelar los env&iacute;os de boletines"
-, 'Suspendre_le_tri_des_listes' => "Con esta opci&oacute;n puedes - en caso de bloqueo - cancelar el env&iacute;o 
+, 'suspendre_le_tri_des_listes' => "Con esta opci&oacute;n puedes - en caso de bloqueo - cancelar el env&iacute;o 
 	de boletines y modificar su configuraci&oacute;n. Cambia est&aacute; opci&oacute;n para volver a activar 
 	el env&iacute;o de boletines programados."
 , 'mode_suspendre_meleuse' => "Cancelar el env&iacute;o de correos"
@@ -152,7 +152,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'nombre_lot' => 'N&uacute;mero de env&iacute;os por lote'
 , 'php_mail' => 'Utilizar la funci&oacute;n mail() de PHP'
 , 'patron_du_tampon_' => "Plantilla del sello : "
-, 'Patron_de_pied_' => "Plantilla del pie "
+, 'patron_de_pied_' => "Plantilla del pie "
 , 'personnaliser_le_courrier_label' => "Activar la personnalizaci&oacute;n de los emails"
 , 'parametrer_la_meleuse' => "Configurar el env&iacute;o"
 , 'smtp_hote' => 'Servidor'
@@ -174,24 +174,24 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'calcul_patron_attention' => "Algunas plantillas insertan el texto al final (Texto del email). 
 	Si actualizas los emails, recuerda desmarcar esta opci&oacute;n antes de generar el contenido."
 , 'charger_patron' => 'Seleccionar una plantilla para el correo'
-, 'Courrier_numero_' => "Correo n&uacute;mero:" // + _gerer
-, 'Creer_un_courrier_' => "Escribir un correo:"
+, 'courrier_numero_' => "Correo n&uacute;mero:" // + _gerer
+, 'creer_un_courrier_' => "Escribir un correo:"
 , 'choisir_un_patron_' => "Seleccionar una plantilla"
-, 'Courrier_edit_desc' => 'Puedes elegir que se cree autom&aacute;ticamente el contenido del correo
+, 'courrier_edit_desc' => 'Puedes elegir que se cree autom&aacute;ticamente el contenido del correo
 	o escribirlo directamente en el <strong>texto del correo</strong>.'
 , 'contenu_a_partir_de_date_' => "Contenido desde "
-, 'Cliquez_Generer_desc' => "Cliquea aqu&iacute; para <strong>@titre_bouton@</strong> el correo insertando el resultado 
+, 'cliquez_generer_desc' => "Cliquea aqu&iacute; para <strong>@titre_bouton@</strong> el correo insertando el resultado 
 	en el @titre_champ_texte@."
-, 'Lister_articles_de_rubrique' => "Con los art&iacute;culos de la secci&oacute;n"
-, 'Lister_articles_mot_cle' => "Con los art&iacute;culos de la palabra clave"
+, 'lister_articles_de_rubrique' => "Con los art&iacute;culos de la secci&oacute;n"
+, 'lister_articles_mot_cle' => "Con los art&iacute;culos de la palabra clave"
 , 'edition_du_courrier' => "Edici&oacute;n del correo" // + gerer
 , 'generer_un_sommaire' => "Crear un &iacute;ndice"
 , 'generer_patron_' => "Crear la plantilla "
 , 'generer_patron_avant' => "antes del &iacute;ndice"
 , 'generer_patron_apres' => "despu&eacute;s del &iacute;ndice."
 , 'introduction_du_courrier_' => "Presentaci&oacute;n del correo antes del contenido"
-, 'Modifier_un_courrier__' => "Modificar un correo:"
-, 'Modifier_ce_courrier' => "Modificar este correo"
+, 'modifier_un_courrier__' => "Modificar un correo:"
+, 'modifier_ce_courrier' => "Modificar este correo"
 , 'sujet_courrier' => '<strong>T&iacute;tulo del correo</strong> [obligatorio]'
 , 'texte_courrier' => '<strong>Texto del correo</strong> (HTML permitido)'
 , 'avec_patron_pied__' => "Con la plantilla para el pie: "
@@ -208,23 +208,23 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'envoi_debut' => 'Comienzo del env&iacute;o: '
 , 'envoi_fin' => 'Final del env&iacute;o: '
 , 'erreur_envoi' => 'N&uacute;mero de env&iacute;os err&oacute;neos: '
-, 'Erreur_liste_vide' => "Error: esta lista no tiene inscripciones."
-, 'Erreur_courrier_introuvable' => "Error: este correo no existe." // + previsu
-, 'Envoyer_ce_courrier' => "Enviar este email"
+, 'erreur_liste_vide' => "Error: esta lista no tiene inscripciones."
+, 'erreur_courrier_introuvable' => "Error: este correo no existe." // + previsu
+, 'envoyer_ce_courrier' => "Enviar este email"
 , 'format_html__n' => "Formato html: @n@"
 , 'format_texte__n' => "Format texte: @n@"
 , 'message_arch' => 'Correo archivado'
 , 'message_en_cours' => 'Correo envi&acute;ndose...'
 , 'message_type' => 'Correo'
 , 'sur_liste' => 'A la lista' // + casier
-, 'Supprimer_ce_courrier' => "Suprimir este correo"
+, 'supprimer_ce_courrier' => "Suprimir este correo"
 , 'email_adresse' => 'Direcci&oacute;n email para probarlo' // + liste
 , 'email_test' => 'Enviar un correo de prueba'
-, 'Erreur_courrier_titre_vide' => "Error: el correo no tiene t&iacute;tulo."
+, 'erreur_courrier_titre_vide' => "Error: el correo no tiene t&iacute;tulo."
 , 'message_en_cours' => 'Este correo est&aacute; en curso de redacci&oacute;n'
 , 'modif_envoi' => 'Puedes modificarlo o realizar el env&iacute;o'
 , 'message_presque_envoye' =>'Este correo va a ser enviado'
-, 'Erreur_Adresse_email_inconnue' => 'Atenci&oacute;n, la direcci&oacute;n email de prueba no corresponde
+, 'erreur_adresse_email_inconnue' => 'Atenci&oacute;n, la direcci&oacute;n email de prueba no corresponde
 	con ninguna inscripci&oacute;n, <br />el env&iacute;o no puede hacerse, puedes repetir el proceso<br /><br />'
 
 // exec/spiplistes_courrier_previsu.php
@@ -232,8 +232,8 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 
 // exec/spiplistes_courriers_casier.php
 // exec/spiplistes_import_export.php
-, 'Exporter_une_liste_d_abonnes' => "Exportar una lista de inscripciones"
-, 'Exporter_une_liste_de_non_abonnes' => "Exportar una lista de no inscrit@s"
+, 'exporter_une_liste_d_abonnes' => "Exportar una lista de inscripciones"
+, 'exporter_une_liste_de_non_abonnes' => "Exportar una lista de no inscrit@s"
 , '_aide_import' => "Puedes importar una lista de inscripciones desde un archivo de texto.<br />
 	Esta lista debe estar en formato s&oacute;lo de texto, y con una l&iacute;a
    para cada inscripci&oacute;n. Cada l&iacute;nea debe estar as&iacute;:<br />
@@ -249,7 +249,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'import_export' => 'Importar / Exportar'
 , 'incorrect_ou_dupli' => " (incorrecto o duplicado)"
 , 'membres_liste' => 'Lista de inscripciones'
-, 'Messages_automatiques' => 'Env&iacute;os programados'
+, 'messages_automatiques' => 'Env&iacute;os programados'
 , 'pas_de_liste_pour_import' => "Tienes que seleccionar al menos una lista de detinatari@s para poder importar las inscripciones."
 , 'resultat_import' => "Resultado de la importaci&oacute;n"
 , 'selectionnez_une_liste_pour_import' => "Tienes que seleccionar al menos una lista de destinatari@s para poder importar las inscripciones."
@@ -274,13 +274,13 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 	para seleccionarla)."
 , 'erreur_import_base' => "Error de importaci&oacute;n. Datos incorrectos o error en la base SQL."
 , 'erreur_n_fois' => '(error encontrado @n@ veces)'
-, 'Liste_de_destination_s' => "Lista de destinatari@s: @s@"
-, 'Listes_de_destination_s' => "Listas de destinatari@s: @s@"
+, 'liste_de_destination_s' => "Lista de destinatari@s: @s@"
+, 'listes_de_destination_s' => "Listas de destinatari@s: @s@"
 , 'pas_dimport' => "Sin importaci&oacute;n. El archivo est&aacute; vac&iacute;o o todas las direcciones ya existen en la base."
 
 // exec/spiplistes_liste_edit.php
 , 'texte_dinsctription_' => "Texto de inscripci&oacute;n: "
-, 'Creer_une_liste_' => "Crear una lista "
+, 'creer_une_liste_' => "Crear una lista "
 , 'en_debut_de_semaine' => "al comienzo de la semana"
 , 'en_debut_de_mois' => "al comienzo del mes"
 , 'envoi_non_programme' => "Env&iacute;o no programado"
@@ -298,23 +298,23 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'statut_publique' => 'P&uacute;blica'
 , 'adresse' => 'Escribe la direcci&oacute;n email para las respuestas de los correos
 	(por defecto, la direcci&oacute;n email de admin del sitio ser&aacute; utilizada como direcci&oacute;n de respuesta):'
-, 'Ce_courrier_ne_sera_envoye_qu_une_fois' => 'Este correo s&oacute;lo se enviar&aacute; una vez'
+, 'ce_courrier_ne_sera_envoye_qu_une_fois' => 'Este correo s&oacute;lo se enviar&aacute; una vez'
 , 'adresse_de_reponse' => 'Direcci&oacute;n de respuesta'
 , 'adresse_mail_retour' => 'Direcci&oacute;n email de gesti&oacute;n de la lista (reply-to)'
-, 'Attention_action_retire_invites' => 'Cuidado: esta acci&oacute;n suprime a l@s invitad@s de la lista de inscripciones'
-, 'A_partir_de' => 'Desde'
-, 'Apercu_plein_ecran' => 'Abrirse en una nueva ventana'
-, 'Attention_suppression_liste' => 'Cuidado: quieres suprimir un bolet&iacute;n informativo.
+, 'attention_action_retire_invites' => 'Cuidado: esta acci&oacute;n suprime a l@s invitad@s de la lista de inscripciones'
+, 'a_partir_de' => 'Desde'
+, 'apercu_plein_ecran' => 'Abrirse en una nueva ventana'
+, 'attention_suppression_liste' => 'Cuidado: quieres suprimir un bolet&iacute;n informativo.
 	Las inscripciones ser&aacute;n borradas de este bolet&iacute;n informativo automaticamente.' 
-, 'Abonner_tous_les_invites_public' => "Inscribir todas las cuentas de invitadas a esta lista p&uacute;blica."
-, 'Abonner_tous_les_inscrits_prives' => "Inscribir todas las cuentas a esta lista privada, menos las de visitantes."
+, 'abonner_tous_les_invites_public' => "Inscribir todas las cuentas de invitadas a esta lista p&uacute;blica."
+, 'abonner_tous_les_inscrits_prives' => "Inscribir todas las cuentas a esta lista privada, menos las de visitantes."
 , 'boite_confirmez_envoi_liste' => "Quieres enviar autom&aacute;ticamente este bolet&iacute;n informativo.<br />
 	Necesitas confirmarlo."
 , 'cette_liste_est_' => "Esta lista es: @s@"
-, 'Confirmer_la_suppression_de_la_liste' => "Confirmar la suppresi&oacute;n de la lista "
-, 'Confirmez_requete' => "Confirmar la petici&oacute;n."
+, 'confirmer_la_suppression_de_la_liste' => "Confirmar la suppresi&oacute;n de la lista "
+, 'confirmez_requete' => "Confirmar la petici&oacute;n."
 , 'date_expedition_' => "Fecha de salida "
-, 'Dernier_envoi_le_' => "&Uacute;ltimo env&iacute;o:"
+, 'dernier_envoi_le_' => "&Uacute;ltimo env&iacute;o:"
 , 'forcer_abonnement_desc' => "Puedes modificar las inscripciones a esta lista, sea para todas 
 	las cuentas (visitantes, redactores y redactoras o administradoras), sea s&oacute;lo para todas
 	las de visitantes."
@@ -323,7 +323,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'forcer_abonnements_nouveaux' => "Si seleccionas la opci&oacute;n <strong>Cambiar las inscripciones al formato...</strong>, 
 	cambiar&aacute;s el formato de recepci&oacute;n de las nuevas inscripciones.
 	Las inscripciones anteriores conservar&aacute;n sus preferencias."
-, 'Forcer_desabonner_tous_les_inscrits' => "Borrar todas las inscripciones de esta lista."
+, 'forcer_desabonner_tous_les_inscrits' => "Borrar todas las inscripciones de esta lista."
 , 'gestion_dune_liste' => "Gesti&oacute;n de una lista"
 , 'message_sujet' => 'T&iacute;tulo '
 , 'mods_cette_liste' => "Moderan esta lista"
@@ -332,7 +332,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'patron_manquant_message' => "Tienes que seleccionar un plantilla principal antes de modificar las opciones para 
 	el env&iacute;o de esta lista."
 , 'liste_sans_patron' => "Lista sin plantilla." // courriers_listes
-, 'Patron_grand_' => "Plantilla principal "
+, 'patron_grand_' => "Plantilla principal "
 , 'sommaire_date_debut' => "Para hoy"
 , 'abos_cette_liste' => "Inscripciones en esta lista"
 , 'confirme_envoi' => 'Confirmar el env&iacute;o'
@@ -341,7 +341,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'date_act' => 'Datos actualizados'
 , 'forcer_les_abonnements_au_format_' => "Cambiar las inscripciones al formato: "
 , 'pas_denvoi_auto_programme' => "No hay env&iacute;os programados para este bolet&iacute;n informativo."
-, 'Pas_de_periodicite' => "Sin periodicidad."
+, 'pas_de_periodicite' => "Sin periodicidad."
 , 'prog_env' => 'Programar el env&iacute;o'
 , 'prog_env_non' => 'No programar el env&iacute;o'
 , 'conseil_regenerer_pied' => "<br />Esta plantilla pertenece a una versi&oacute;n anterior de SPIP-Listes.<br />
@@ -371,15 +371,15 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'forcer_formats_' => "Cambiar el formato para recibir emails "
 , 'forcer_formats_desc' => "Cambiar el formato para recibir emails de todas las inscripciones..."
 , 'modification_objet' => "Modificar @objet@"
-, 'Suppression_de__s' => "Suprimir: @s@"
+, 'suppression_de__s' => "Suprimir: @s@"
 , 'suppression_' => "Suprimir @objet@"
 , 'suppression_chronos_' => "Suprimir los env&iacute;os programados (chrono) "
 , 'suppression_chronos_desc' => "Si suprimes la temporalizaci&oacute;n (chrono), la lista no ser&aacute; suprimida. Su periodicidad
 	se conservar&aacute;, pero el env&iacute;o ser&aacute; suspendido. Para reactivar la temporalizaci&oacute;n (chrono) 
 	necesitas se&ntilde;alar una nueva fecha para el primer env&iacute;o. "
-, 'Supprimer_les_listes' => "Suprimir las listas"
-, 'Supprimer_la_liste' => "Suprimir la lista..."
-, 'Suspendre_abonnements' => "Cancelar las inscripciones para esta cuenta"
+, 'supprimer_les_listes' => "Suprimir las listas"
+, 'supprimer_la_liste' => "Suprimir la lista..."
+, 'suspendre_abonnements' => "Cancelar las inscripciones para esta cuenta"
 , 'separateur_de_champ_' => "Separador del campo "
 , 'separateur_tabulation' => "tabulaci&oacute;n (<code>\\t</code>)"
 , 'separateur_semicolon' => "punto y coma (<code>;</code>)"
@@ -421,13 +421,13 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'texte_boite_en_cours' => 'SPIP-Listes esta enviando emails.<p>Esta nota desaparecer&aacute; cuando el env&iacute;o termine.</p>'
 , 'meleuse_suspendue_info' => "Los env&iacute;os pendientes se han detenido."
 , 'casier_a_courriers' => "Todos los env&iacute;os" // + courriers_casier
-, 'Pas_de_donnees' => "Lo siento, el registro solicitado no existe en la base de datos."
+, 'pas_de_donnees' => "Lo siento, el registro solicitado no existe en la base de datos."
 , '_dont_n_sans_format_reception' => ", hay @n@ sin formato de recepci&oacute;n de emails"
 , 'mode_simulation' => "Modo simulaci&oacute;n"
 , 'mode_simulation_info' => "El modo simulaci&oacute;n est&aacute; activado. Se simula el env&iacute;o de emails. 
 	No se env&iacute;a ning&uacute;n email en este modo."
 , 'meleuse_suspendue' => "Env&iacute;o suspendido"
-, 'Meleuse_reactivee' => "Env&iacute;o reactivado"
+, 'meleuse_reactivee' => "Env&iacute;o reactivado"
 , 'nb_abonnes_sing' => " inscripci&oacute;n"
 , 'nb_abonnes_plur' => " inscripciones"
 , 'nb_moderateur_sing' => " moderador(a)"
@@ -441,22 +441,22 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 
 // inc/spiplistes_destiner_envoi.php
 , 'email_tester' => 'Email de prueba'
-, 'Choix_non_defini' => 'No hay nada seleccionado.'
-, 'Destination' => "Destino"
+, 'choix_non_defini' => 'No hay nada seleccionado.'
+, 'destination' => "Destino"
 , 'aucune_liste_dispo' => "No hay listas disponibles."
 
 // inc/spiplistes_import.php
 // inc/spiplistes_lister_courriers_listes.php
-, 'Prochain_envoi_' => "Pr&oacute;ximo env&iacute;o "
+, 'prochain_envoi_' => "Pr&oacute;ximo env&iacute;o "
 
 // inc/spiplistes_listes_forcer_abonnement.php
 // inc/spiplistes_listes_selectionner_auteur.php
 , 'lien_trier_nombre' => "Ordenar por n&uacute;mero de inscripciones"
-, 'Abonner_format_html' => "Formato HTML"
-, 'Abonner_format_texte' => "Formato texto"
+, 'abonner_format_html' => "Formato HTML"
+, 'abonner_format_texte' => "Formato texto"
 , 'ajouter_un_moderateur' => "A&ntilde;adir moderador o moderadora "
-, 'Desabonner' => "Darse de baja"
-, 'Pas_adresse_email' => "Sin direcci&oacute;n email"
+, 'desabonner' => "Darse de baja"
+, 'pas_adresse_email' => "Sin direcci&oacute;n email"
 , 'sup_mod' => "Suprimir este moderador/a"
 , 'supprimer_un_abo' => "Suprimir una inscripci&oacute;n de esta lista"
 , 'supprimer_cet_abo' => "Suprimir esta inscripci&oacute;n de la lista" // + pipeline
@@ -475,14 +475,14 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 // inc/spiplistes_naviguer_paniers.php
 // inc/spiplistes_pipeline_I2_cfg_form.php
 // inc/spiplistes_pipeline_affiche_milieu.php
-, 'Adresse_email_obligatoire' => "Se necesita una direcci&oacute;n de email para inscribirse en los boletines informativos. "
-, 'Alert_abonnement_sans_format' => "Tu inscripci&oacute;n se ha suspendido. No recibir&aacute;s los emails de estos boletines
+, 'adresse_email_obligatoire' => "Se necesita una direcci&oacute;n de email para inscribirse en los boletines informativos. "
+, 'alert_abonnement_sans_format' => "Tu inscripci&oacute;n se ha suspendido. No recibir&aacute;s los emails de estos boletines
 	informativos. Para recibirlos de nuevo tienes que seleccionar un formato de recepci&oacute;n y validar el formulario. "
 , 'abonnements_aux_courriers' => "Inscripciones en los correos"
-, 'Forcer_abonnement_erreur' => "Se ha encontrado un error t&eacute;cnico tras la modificaci&oacute;n de una lista de inscripciones. 
+, 'forcer_abonnement_erreur' => "Se ha encontrado un error t&eacute;cnico tras la modificaci&oacute;n de una lista de inscripciones. 
 	Comprueba esta lista antes de continuar."
-, 'Format_obligatoire_pour_diffusion' => "Para confirmar la inscripci&oacute;n, necesitas seleccionar un formato para los emails."
-, 'Valider_abonnement' => "Validar est&aacute; inscripci&oacute;n"
+, 'format_obligatoire_pour_diffusion' => "Para confirmar la inscripci&oacute;n, necesitas seleccionar un formato para los emails."
+, 'valider_abonnement' => "Validar est&aacute; inscripci&oacute;n"
 , 'vous_etes_abonne_aux_listes_selectionnees_' => "Vous &ecirc;tes abonn&eacute; aux listes s&eacute;lectionn&eacute;es "
 
 // inc/spiplistes_pipeline_ajouter_boutons.php
@@ -547,27 +547,27 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'vous_etes_abonne_a_la_liste_' => "Est&aacute;s inscrit@ en el bolet&iacute;n informativo:"
 
 // tableau items *_options
-, 'Liste_de_destination' => "Listas de destinatari@s"
-, 'Listes_1_du_mois' => "P&uacute;blicas, 1<sup><small>o</small></sup> del mes."
-, 'Liste_diffusee_le_premier_de_chaque_mois' => "Primer bolet&iacute;n informativo de cada mes. "
-, 'Listes_autre' => "Otra periodicidad"
-, 'Listes_autre_periode' => "Listas p&uacute;blicas con otra periodicidad"
-, 'Listes_diffusion_prive' => "Listas privadas"
-, 'Liste_hebdo' => "Lista semanal"
-, 'Publiques_hebdos' => "P&uacute;blicas, semanales"
-, 'Listes_diffusion_hebdo' => "Listas p&uacute;blicas semanales"
-, 'Liste_mensuelle' => "Lista mensual"
-, 'Publiques_mensuelles' => "P&uacute;blicas, mensuales"
-, 'Listes_diffusion_mensuelle' => "Listas p&uacute;blicas mensuales"
-, 'Listes_diffusion_publiques_desc' => "La inscripci&oacute;n a esta lista aparecer&aacute; en la parte p&uacute;blica del sitio."
-, 'Liste_annuelle' => "Lista anual"
-, 'Publiques_annuelles' => "P&uacute;blicas, anuales"
-, 'Listes_diffusion_annuelle' => "Listas p&uacute;blicas anuales"
-, 'Listes_diffusion_publique' => 'Boletines informativos p&uacute;blicos'
-, 'Listes_diffusion_privees' => 'Boletines informativos privados'
-, 'Listes_diffusion_privees_desc' => "La inscripci&oacute;n a estas listas esta reservada a administradoras y redactoras."
-, 'Listes_diffusion_suspendue' => 'Boletines informativos suspendidos'
-, 'Listes_diffusion_suspendue_desc' => " "
+, 'liste_de_destination' => "Listas de destinatari@s"
+, 'listes_1_du_mois' => "P&uacute;blicas, 1<sup><small>o</small></sup> del mes."
+, 'liste_diffusee_le_premier_de_chaque_mois' => "Primer bolet&iacute;n informativo de cada mes. "
+, 'listes_autre' => "Otra periodicidad"
+, 'listes_autre_periode' => "Listas p&uacute;blicas con otra periodicidad"
+, 'listes_diffusion_prive' => "Listas privadas"
+, 'liste_hebdo' => "Lista semanal"
+, 'publiques_hebdos' => "P&uacute;blicas, semanales"
+, 'listes_diffusion_hebdo' => "Listas p&uacute;blicas semanales"
+, 'liste_mensuelle' => "Lista mensual"
+, 'publiques_mensuelles' => "P&uacute;blicas, mensuales"
+, 'listes_diffusion_mensuelle' => "Listas p&uacute;blicas mensuales"
+, 'listes_diffusion_publiques_desc' => "La inscripci&oacute;n a esta lista aparecer&aacute; en la parte p&uacute;blica del sitio."
+, 'liste_annuelle' => "Lista anual"
+, 'publiques_annuelles' => "P&uacute;blicas, anuales"
+, 'listes_diffusion_annuelle' => "Listas p&uacute;blicas anuales"
+, 'listes_diffusion_publique' => 'Boletines informativos p&uacute;blicos'
+, 'listes_diffusion_privees' => 'Boletines informativos privados'
+, 'listes_diffusion_privees_desc' => "La inscripci&oacute;n a estas listas esta reservada a administradoras y redactoras."
+, 'listes_diffusion_suspendue' => 'Boletines informativos suspendidos'
+, 'listes_diffusion_suspendue_desc' => " "
 , 'Courriers_en_cours_de_redaction' => 'Correos en curso de redacci&oacute;n'
 , 'Courriers_en_cours_denvoi' => 'Env&iacute;os activos'
 , 'Courriers_prets_a_etre_envoye' => "Env&iacute;os preparados"
@@ -592,8 +592,8 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'editeur_url' => "URL del sitio "
 , 'editeur_logo' => "URL del logotipo "
 , 'Envoi_abandonne' => "Env&iacute;o suspendido"
-, 'Liste_prive' => "Lista privada"
-, 'Liste_publique' => "Lista p&uacute;blica"
+, 'liste_prive' => "Lista privada"
+, 'liste_publique' => "Lista p&uacute;blica"
 , 'message_redac' => 'En curso de redacci&oacute;n y preparado para el env&iacute;o'
 , 'Prets_a_envoi' => "Preparados para el env&iacute;o"
 , 'Publies' => "Env&iacute;os programados"
@@ -682,7 +682,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 	propondr&aacute; la inscripci&oacute;n en estas listas.</i>'
 , 'messages_non_lus_grand' => 'No hay nuevos mensajes'
 , 'messages_repondre' => 'Responder'
-, 'Liste_abandonnee' => "Lista abandonada"
+, 'liste_abandonnee' => "Lista abandonada"
 , 'par_date' => 'Por fecha de inscripci&oacute;n'
 , 'info_auto' => 'SPIP-Listes para SPIP puede enviar regularmente las novedades del sitio recientemente publicadas (art&iacute;culos, breves, foros,...).'
 , 'format2' => 'Formato:'
@@ -792,7 +792,7 @@ $GLOBALS['i18n_spiplistes_es'] = array(
 , 'envoyer' => 'enviar el email'
 , 'envoyer_a' => 'Enviar a '
 , 'listes_poubelle' => 'Boletines informativos en la papelera'
-, 'Liste_numero_:' => 'Lista n&uacute;mero:'
+, 'liste_numero_:' => 'Lista n&uacute;mero:'
 , 'mail_tache_courante' => 'Emails enviados ahora: '
 , 'messages_auto_envoye' => 'Correos directos enviados'
 , 'nb_abonnes' => 'En las listas: '

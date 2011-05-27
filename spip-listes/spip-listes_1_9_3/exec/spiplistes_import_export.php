@@ -258,7 +258,7 @@ function exec_spiplistes_import_export() {
 	else {
 		$page_result .= ""
 			. "<form action='" . generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT) . "' method='post' enctype='multipart/form-data'name='importform'>\n"
-			. debut_cadre_relief("", true, "", _T('spiplistes:Liste_de_destination'))
+			. debut_cadre_relief("", true, "", _T('spiplistes:liste_de_destination'))
 			. "<p class='verdana2'>"._T('spiplistes:selectionnez_une_liste_de_destination')."</p>\n"
 			. "<ul class='liste-listes verdana2'>\n"
 			;
@@ -289,7 +289,7 @@ function exec_spiplistes_import_export() {
 			) {
 				$titre = couper($row['titre'], 30, '...');
 				$texte = couper($row['texte'], 30, '...');
-				$label = _T('spiplistes:Liste_de_destination').": $titre";
+				$label = _T('spiplistes:liste_de_destination').": $titre";
 				$checked = ($nb_listes == 1) ? "checked='checked'" : "";
 				$class = ($couleur_ligne++ % 2) ? "class='row-even'" : "";
 				$page_result .= ""
@@ -350,7 +350,7 @@ function exec_spiplistes_import_export() {
 			. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'listes_out-24.png', true, "", _T('spiplistes:Exporter'))
 			// exportation par listes
 			. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_IMPORT_EXPORT), true)
-			. debut_cadre_relief("", true, "", _T('spiplistes:Exporter_une_liste_d_abonnes'))
+			. debut_cadre_relief("", true, "", _T('spiplistes:exporter_une_liste_d_abonnes'))
 			. "<ul class='liste-listes verdana2'>\n"
 			;
 		$couleur_ligne = 0;
@@ -379,7 +379,7 @@ function exec_spiplistes_import_export() {
 			. "<!-- fin de liste export -->\n"
 			//
 			// exportation autres
-			. debut_cadre_relief("", true, "", _T('spiplistes:Exporter_une_liste_de_non_abonnes'))
+			. debut_cadre_relief("", true, "", _T('spiplistes:exporter_une_liste_de_non_abonnes'))
 			. "<div class='verdana2'>\n"
 			. spiplistes_form_input_radio('export_id', 'sans_abonnement', _T('spiplistes:abonne_aucune_liste'), false, true, false)
 			. spiplistes_form_input_radio('export_id', 'desabo', _T('spiplistes:desabonnes'), false, true, false)

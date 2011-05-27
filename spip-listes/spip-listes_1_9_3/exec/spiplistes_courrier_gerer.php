@@ -142,7 +142,7 @@ function exec_spiplistes_courrier_gerer () {
 						if(!($id_auteur_test = spiplistes_idauteur_depuis_email($email_test))) {
 							// verifie si l'adresse est dans la table des auteurs
 							// si inconnue, refuse d'envoyer
-							$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_Adresse_email_inconnue'), true);
+							$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:erreur_adresse_email_inconnue'), true);
 						}
 						else {
 							
@@ -203,7 +203,7 @@ function exec_spiplistes_courrier_gerer () {
 							);
 						}
 						else {
-							$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_liste_vide'), true);
+							$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:erreur_liste_vide'), true);
 						}
 					}
 				} // end if($radio_destination
@@ -221,7 +221,7 @@ function exec_spiplistes_courrier_gerer () {
 					spiplistes_courrier_attacher_documents($id_courrier, $id_temp);
 				}
 				else {
-					$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
+					$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:erreur_courrier_titre_vide'), true);
 				}
 			}
 			// FIN DES MODIFICATIONS
@@ -254,7 +254,7 @@ function exec_spiplistes_courrier_gerer () {
 			spiplistes_courrier_attacher_documents($id_courrier, $id_temp);
 		}
 		else {
-			$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_titre_vide'), true);
+			$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:erreur_courrier_titre_vide'), true);
 		}
 	}
 
@@ -371,7 +371,7 @@ function exec_spiplistes_courrier_gerer () {
 			$gros_bouton_supprimer = 
 				'<div style="margin-top:1ex">'
 				. icone (
-					_T('spiplistes:Supprimer_ce_courrier')
+					_T('spiplistes:supprimer_ce_courrier')
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, 'btn_supprimer_courrier='.$id_courrier)
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
 					, ''
@@ -445,7 +445,7 @@ function exec_spiplistes_courrier_gerer () {
 						. _T('spiplistes:annuler_envoi').'" class="fondo" style="float:left" />'.$eol
 					. '<div style="text-align:right;width:100%">'.$eol
 					. '<input type="submit" name="btn_confirmer_envoi" value="'
-						. _T('spiplistes:Envoyer_ce_courrier').'" class="fondo" />'.$eol
+						. _T('spiplistes:envoyer_ce_courrier').'" class="fondo" />'.$eol
 					. '</div>'.$eol
 					. '</div>'.$eol
 					. '</form>'
@@ -467,7 +467,7 @@ function exec_spiplistes_courrier_gerer () {
 			else {
 				if($row = sql_fetsel('titre', 'spip_listes', "id_liste=".sql_quote($id_liste), '', '', 1)) {
 					$str_destinataire = ""
-						. _T('spiplistes:Liste_de_destination') 
+						. _T('spiplistes:liste_de_destination') 
 						. " : <a href='".generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "id_liste=$id_liste")."'>"
 							. typo($row['titre']) . "</a>"
 						. " " . spiplistes_nb_abonnes_liste_str_get($id_liste)
@@ -552,7 +552,7 @@ function exec_spiplistes_courrier_gerer () {
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_info_id(_T('spiplistes:Courrier_numero_'), $id_courrier, true)
+		. spiplistes_boite_info_id(_T('spiplistes:courrier_numero_'), $id_courrier, true)
 		. spiplistes_naviguer_paniers_courriers(_T('spiplistes:aller_au_panier_'), true)
 		//. $boite_documents
 		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
@@ -595,7 +595,7 @@ function exec_spiplistes_courrier_gerer () {
 			return(
 				"&nbsp;<a href='"
 				. generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_PREVUE, $params)
-				. "' title='"._T('spiplistes:Apercu_plein_ecran')."' target='_blank'>\n"
+				. "' title='"._T('spiplistes:apercu_plein_ecran')."' target='_blank'>\n"
 				. spiplistes_icone_oeil() . "</a>"
 			);
 		}
@@ -644,7 +644,7 @@ function exec_spiplistes_courrier_gerer () {
 	else {
 		$page_result .= 
 			(empty($message_erreur))
-			? spiplistes_boite_alerte (_T('spiplistes:Erreur_courrier_introuvable'), true)
+			? spiplistes_boite_alerte (_T('spiplistes:erreur_courrier_introuvable'), true)
 			: $message_erreur
 			;
 	}
