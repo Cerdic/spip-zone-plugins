@@ -111,15 +111,18 @@ function typoenluminee_pre_propre($texte) {
 	// Conversion des intertitres d'enluminures type {n{titre}n}
 	// ou n est un nombre en intertitres avec des etoiles type {{{* (avec n etoiles)
 	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
-	if (strpos($texte, '{2{')) { // Ne faire la recherche que s'il y a au moins un titre de 2e niveau
-		$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\d\})/",
-						create_function (
-							'$matches',
-							'return "{{{".str_repeat("*",$matches[2]).$matches[3]."}}}";'
+	// Ne faire la recherche que s'il y a au moins un titre ancienne mode a convertir
+	if (strpos($texte, '{2{')!==false
+		OR strpos($texte, '{3{')!==false
+		OR strpos($texte, '{4{')!==false
+		OR strpos($texte, '{5{')!==false) {
+			$texte=preg_replace_callback ("/\{(\d)\{(.*)\}(\\1)\}/Ums",
+							create_function (
+								'$matches',
+								'return "{{{".str_repeat("*",$matches[1]).trim($matches[2])."}}}";'
 							),
-						$texte);
+							$texte);
 	}
-	
 	$texte = preg_replace($chercher_raccourcis, $remplacer_raccourcis, $texte);
 
 	return $texte;
