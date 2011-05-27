@@ -24,6 +24,9 @@ function exec_categories(){
 	} else {
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:categories_de_cotisations')) ;
+		
+		association_onglets();
+		
 		echo debut_gauche("",true);
 		echo debut_boite_info(true);
 		echo association_date_du_jour();	
