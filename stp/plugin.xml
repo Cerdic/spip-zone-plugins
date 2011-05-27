@@ -1,0 +1,45 @@
+<plugin>
+	<prefix>stp</prefix>
+	<nom>STP</nom>
+	<categorie>maintenance</categorie>
+	<icon>images/step-128.png</icon>
+	<version>0.1.0</version>
+	<etat>dev</etat>
+	<version_base>0.1</version_base>
+
+	<auteur>Matthieu Marcillaud, Eric Lupinacci
+_ &#169; 2008 2010
+	</auteur>
+	<licence>GPL</licence>
+
+    <description>
+    	<multi>
+    		[fr]Syst&#232;me de t&#233;l&#233;chargement de plugins.
+    		
+    		Ce plugin permet de de g&#233;rer les plugins de SPIP ainsi que leur
+			d&#233;pendances et t&#233;l&#233;chargements
+			[en]Plugins download system.
+			
+			This plugin allows you to manage SPIP plugins, their 
+			dependencies and downloads
+			[de]Plugin-Manager.
+			
+			Dieses Plugin verwaltet SPIP-Plugins, ihre Abh&#228;ngigkeiten und Downloads.
+		</multi>
+	</description>
+
+<!-- 
+    <options>stp_options.php</options>
+    <fonctions>stp_fonctions.php</fonctions>
+ -->
+	<install>base/stp_installer.php</install>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/stp_declarer.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[3.0.0-dev;[" />
+	<necessite id="svp" version="[0.6.0;[" />
+
+</plugin>
