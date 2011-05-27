@@ -89,12 +89,12 @@ function typoenluminee_pre_propre($texte) {
 		$chercher_raccourcis=array();
 		$remplacer_raccourcis=array();
 	
-		/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*\*\*(.*)[}][}][}]($|[^}])/S";
-		/* 9 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*\*(.*)[}][}][}]($|[^}])/S";
-		/* 7 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*(.*)[}][}][}]($|[^}])/S";
-		/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*(.*)[}][}][}]($|[^}])/S";
-		/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*(.*)[}][}][}]($|[^}])/S";
-		/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{](.*)[}][}][}]($|[^}])/S";
+		/* 9b */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*\*\*(.*)[}][}][}]($|[^}])/SUms";
+		/* 9 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*\*(.*)[}][}][}]($|[^}])/SUms";
+		/* 7 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*\*(.*)[}][}][}]($|[^}])/SUms";
+		/* 5 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*\*(.*)[}][}][}]($|[^}])/SUms";
+		/* 3 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{]\*(.*)[}][}][}]($|[^}])/SUms";
+		/* 1 */ 	$chercher_raccourcis[]="/(^|[^{])[{][{][{](.*)[}][}][}]($|[^}])/SUms";
 		/* 11 */ 	$chercher_raccourcis[]="/\{(ง|ยง)\{/S"; # ยง Pour gerer l'unicode aussi !
 		/* 12 */ 	$chercher_raccourcis[]="/\}(ง|ยง)\}/S"; # ne pas sauvergarder ce fichier en utf8 !
 
