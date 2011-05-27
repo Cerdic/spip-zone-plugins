@@ -108,8 +108,8 @@ function typoenluminee_pre_propre($texte) {
 		/* 12 */	$remplacer_raccourcis[]="</sc>";
 	}
 
-	// Conversion des intertitres d'enluminures type {ß{titre}ß}
-	// ou ß est un nombre en intertitres avec des étoiles type {{{* (avec ß étoiles)
+	// Conversion des intertitres d'enluminures type {n{titre}n}
+	// ou n est un nombre en intertitres avec des etoiles type {{{* (avec n etoiles)
 	// {1{ sera converti en {{{* ; {2{ sera converti en {{{** ; etc.
 	if (strpos($texte, '{2{')) { // Ne faire la recherche que s'il y a au moins un titre de 2e niveau
 		$texte=preg_replace_callback ("/(\{(\d)\{)(.*?)(\}\d\})/",
