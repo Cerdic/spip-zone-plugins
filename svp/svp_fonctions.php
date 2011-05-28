@@ -261,22 +261,50 @@ function filtre_iterer_modele($balise_deserializee, $modele ='foreach') {
 	return $texte;
 }
 
-// Critere de compatibilite avec une version de SPIP : {compatibilite_spip version}
-// Fonctionne sur les tables spip_paquets et spip_plugins
-// Les criteres not et conditionnel fonctionne aussi
-function critere_compatibilite_spip_dist($idb, &$boucles, $crit) {
+/**
+ * Critere de compatibilite avec une version de SPIP :
+ * Fonctionne sur les tables spip_paquets et spip_plugins
+ *
+ *   {compatible_spip}
+ *       le ! (NOT) ne peut pas s'appliquer
+ *       si 'compatible_spip' pas dans #ENV => tout
+ *   {compatible_spip 2.0}
+ *       le ! (NOT) est appliquable
+ *   {compatible_spip #ENV{vers}} ou {compatible_spip #ENV{vers, 1.9.2}}
+ *       le ! (NOT) est appliquable
+ *       si 'vers' pas dans #ENV => $GLOBALS['spip_version_branche']
+ *   {compatible_spip #GET{vers}} ou {compatible_spip #GET{vers, 1.9.2}}
+ *       le ! (NOT) est appliquable
+ *       si 'vers' pas dans #GET => $GLOBALS['spip_version_branche']
+ */
+function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
-	$not = ($crit->not == '!') ? ' NOT' : '';
-	$version = $crit->param[0][0]->texte;
+	$not = ($crit->not == '!') ? 'NOT' : '';
 
 	$boucle->hash .= '
 	// COMPATIBILITE SPIP
-	$liste_compat = charger_fonction(\'svp_lister_compatibles\', \'inc\');
-	$where = \''.$boucle->primary.$not.' IN (\'.$liste_compat(\''.$version.'\',\''.$boucle->id_table.'\',\''.$boucle->primary.'\').\')\';
-	';
+	$liste_compat = charger_fonction(\'svp_lister_compatibles\', \'inc\');';
 
-	$boucle->where[] = (!$crit->cond) ? '$where' : '\'1=1\'';
+	// version explicite dans l'appel du critere
+	if (isset($crit->param[0][0])) {
+		$version = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
+		$boucle->hash .= '
+		$where = sql_in(\''.$boucle->primary.'\', $liste_compat('.$version.', \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\');
+		';
+	}
+	// pas de version explicite dans l'appel du critere
+	// on regarde si elle est dans le contexte
+	else {
+		$boucle->hash .= '
+		$where = isset($Pile[0][\'compatible_spip\']) ?
+			sql_in(\''.$boucle->primary.'\', $liste_compat($Pile[0][\'compatible_spip\'], \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\')
+			:
+			\'1=1\';
+		';
+	}
+
+	$boucle->where[] = '$where';
 }
 
 ?>
