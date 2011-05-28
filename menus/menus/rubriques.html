@@ -10,6 +10,8 @@
 
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
 
+[(#SET{id_rubriques_exclues, #ENV{id_rubriques_exclues}|explode{','}|sinon{#ARRAY}})]
+
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
 [(#ENV{appel_formulaire}|oui)
@@ -39,7 +41,7 @@
 	</div>
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
-	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
+	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>

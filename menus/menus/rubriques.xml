@@ -6,6 +6,7 @@
 	<parametre nom="id_rubrique" label="menus:entree_id_rubrique" />
 	<parametre nom="id_secteur_exclus" label="menus:entree_id_secteur_exclus" />
 	<parametre nom="niveau" label="menus:entree_niveau" />
+	<parametre nom="id_rubriques_exclues" label="menus:entree_id_rubriques_exclues" />
 	<parametre nom="sousrub_cond" label="menus:entree_sousrub_cond" />
 	<parametre nom="afficher_articles" label="menus:entree_afficher_articles" />
 	<parametre nom="masquer_articles_uniques" label="menus:entree_masquer_articles_uniques" />

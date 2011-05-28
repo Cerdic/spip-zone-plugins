@@ -47,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_objet' => 'Numéro',
 	'entree_id_rubrique' => 'Numéro de la rubrique parente',
 	'entree_id_secteur_exclus' => 'Numéro du secteur à exclure',
+	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules',
 	'entree_infini' => 'À l\'infini',
 	'entree_mapage' => 'Ma page perso',
 	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)',
