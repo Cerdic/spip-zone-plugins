@@ -111,9 +111,8 @@ function plugin2paquet($plugins) {
 	$commandes = array();
 	if (count($plugins) == 1 ) {
 		$cle_min_min = $cle_min_max = 0;
-		if (!$plugins[$cle_min_min]['compatible'])
-			$plugins[$cle_min_min]['compatible'] = '[1.9.0;)';
-		$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatible'];
+		if ($plugins[$cle_min_min]['compatible'])
+			$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatible'];
 	}
 	else {
 		// Cas de plusieurs balises plugin
