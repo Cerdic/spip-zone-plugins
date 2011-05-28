@@ -1,5 +1,6 @@
 <plugin>
-	<nom>Traductions entre rubriques</nom>
+	<nom>TradRub</nom>
+	<slogan>Traductions entre rubriques</slogan>
 	<auteur>Matthieu Marcillaud</auteur>
 
 	<categorie>edition</categorie>
@@ -16,7 +17,7 @@
 	</description>
 	<prefix>tradrub</prefix>
 	
-	<necessite id="SPIP" version="[2.3-dev;]" />
+	<necessite id="SPIP" version="[3.0.0-dev;]" />
 
 	<install>base/tradrub_install.php</install>
 		
