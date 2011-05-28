@@ -123,6 +123,13 @@ function association_ajouter_operation_comptable($date, $recette, $depense, $jus
 		    'id_journal' => $id_journal,
 		    'justification' => $justification));
 
+	// on laisse passer ce qui est peut-etre une erreur,
+	// pour ceux qui ne definisse pas de plan comptable.
+	// Mais ce serait bien d'envoyer un message d'erreur au navigateur
+	// plutot que de le signaler seulement dans les log
+	if (!$imputation) {
+		spip_log("imputation manquante dans $id_compte, $date, $recette, $depense, $justification, $journal, $id_journal");
+	}
 	/* Si on doit gerer les destinations */
 	if ($GLOBALS['association_metas']['destinations']=="on")
 	{
