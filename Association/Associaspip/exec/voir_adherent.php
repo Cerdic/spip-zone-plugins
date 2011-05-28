@@ -120,9 +120,8 @@ function exec_voir_adherent(){
 		
 		// FICHE HISTORIQUE VENTES
 		if ($GLOBALS['association_metas']['ventes']=="on"){
-			$critere='id_acheteur='. $id_auteur;
 
-			if ($r = voir_adherent_ventes($critere))
+			if ($r = voir_adherent_ventes($id_auteur))
 			  echo '<fieldset><legend>'._T('asso:adherent_titre_historique_ventes').'</legend>', $r, '</fieldset>';
 		}
 		// FICHE HISTORIQUE DONS

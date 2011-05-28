@@ -27,12 +27,11 @@ function action_ajouter_prets() {
 	$statut=$_POST['statut'];
 	$montant=$_POST['montant'];
 	$journal=$_POST['journal'];
-	$imputation=$GLOBALS['association_metas']['pc_prets'];
 
-	prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour);
+	prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour);
 }
 
-function prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $imputation, $commentaire_sortie,$commentaire_retour)
+function prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date_retour, $journal, $montant, $commentaire_sortie,$commentaire_retour)
 {
 	$id_pret = sql_insertq('spip_asso_prets', array(
 		'id_ressource' => $id_ressource,
@@ -49,7 +48,7 @@ function prets_insert($id_ressource, $id_emprunteur, $date_sortie, $duree, $date
 			'journal' => $journal,
 			'recette' => $montant,
 			'justification' => _T('asso:pret_nd').$id_ressource.'/'.$id_pret,
-			'imputation' => $imputation,
+			'imputation' => $GLOBALS['association_metas']['pc_prets'],
 			'id_journal' => $id_pret));
 
 	if ($id_pret)

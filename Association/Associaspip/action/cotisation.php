@@ -21,21 +21,18 @@ function action_cotisation() {
 	$montant =  association_recupere_montant(_request('montant'));
 
 	$justification = _request('justification');
-	$imputation = $GLOBALS['association_metas']['pc_cotisations'];
 	$validite = _request('validite');
 
-	cotisation_insert($id_auteur, $montant, $journal, $justification, $imputation, $date, $validite);
+	cotisation_insert($id_auteur, $montant, $journal, $justification, $date, $validite);
 
 	return array($id_auteur, '');
 }
 
-function cotisation_insert($id_auteur, $montant, $journal, $justification, $imputation, $date, $validite)
+function cotisation_insert($id_auteur, $montant, $journal, $justification, $date, $validite)
 {
 	include_spip('base/association');
-	if ($imputation != '') { /* si on a une imputation valide, on insere dans le livre de compte */
-		include_spip('inc/association_comptabilite');
-		association_ajouter_operation_comptable($date, $montant, 0, $justification, $imputation, $journal, $id_auteur);	
-	}
+	include_spip('inc/association_comptabilite');
+	association_ajouter_operation_comptable($date, $montant, 0, $justification, $GLOBALS['association_metas']['pc_cotisations'], $journal, $id_auteur);	
 
 	sql_updateq('spip_asso_membres', 
 				   array(

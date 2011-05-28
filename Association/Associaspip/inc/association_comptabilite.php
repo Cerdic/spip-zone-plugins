@@ -249,4 +249,11 @@ function association_ajouter_destinations_comptables($id_compte, $recette, $depe
 		    $attribution_montant => $depense+$recette));
 	}
 }
+
+function inc_association_imputation_dist($nom, $table='')
+{
+	$champ = ($table ? ($table . '.') : '') . 'imputation';
+	return $champ . '=' . sql_quote($GLOBALS['association_metas'][$nom]);
+}
+
 ?>

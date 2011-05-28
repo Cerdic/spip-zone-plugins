@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
+include_spip('inc/association_comptabilite');
 
 function exec_dons() {
 		
@@ -70,7 +71,10 @@ function exec_dons() {
 		echo '<th>' . _T('asso:contrepartie') . "</th>\n";
 		echo '<th colspan="2">' . _T('asso:action') . "</th>\n";
 		echo '</tr>';
-		$query = sql_select('*', "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don", 'C.imputation=' . sql_quote($GLOBALS['association_metas']['pc_dons']) . " AND date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
+		$association_imputation = charger_fonction('association_imputation', 'inc');
+		$critere = $association_imputation('pc_dons', 'C');
+		if ($critere) $critere .= ' AND ';
+		$query = sql_select('*', "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don", $critere . "date_format( date_don, '%Y' ) = '$annee'", '',  "id_don" ) ;
 		$exec_dons = generer_url_ecrire('dons');
 		while ($data = sql_fetch($query)) {
 			$id_don = $data['id_don'];

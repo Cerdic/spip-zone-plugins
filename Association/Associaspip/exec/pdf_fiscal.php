@@ -17,8 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Nouvelle version a prendre en compte:
 //http://www.impots.gouv.fr/portal/deploiement/p1/fichedescriptiveformulaire_5184/fichedescriptiveformulaire_5184.pdf
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
 define('RECU_FISCAL', find_in_path('recu_fiscal.pdf'));
 if (!defined('SIGNATURE_PRES')) define('SIGNATURE_PRES', '');
 
@@ -27,6 +25,7 @@ include_spip('pdf/fpdf');
 include_spip('pdf/fpdf_tpl');
 include_spip('pdf/fpdi');
 include_spip('pdf/chiffreEnLettre');
+include_spip('inc/association_comptabilite');
 
 function exec_pdf_fiscal()
 {
@@ -41,12 +40,18 @@ function exec_pdf_fiscal()
 		include_spip('inc/minipres');
 		echo minipres(_T('public:aucun_auteur'));
   } else {
-		if (!preg_match('/^\d{4}$/', $annee)) $annee = date('Y') - 1;
-		$montants = sql_getfetsel('SUM(recette) AS montant', "spip_asso_comptes", "id_journal=$id_auteur AND vu AND date_format( date, '%Y' ) = $annee AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']));
+		$association_imputation = charger_fonction('association_imputation', 'inc');
 
+		$critere = $association_imputation('pc_cotisations');
+		if ($critere) $critere .= ' AND ';
+		if (!preg_match('/^\d{4}$/', $annee)) $annee = date('Y') - 1;
+		$montants = sql_getfetsel('SUM(recette) AS montant', "spip_asso_comptes", $critere . "id_journal=$id_auteur AND vu AND date_format( date, '%Y' ) = $annee");
+
+		$critere = $association_imputation('pc_dons', 'C');
+		if ($critere) $critere .= ' AND ';		
 		$montants += sql_getfetsel('sum(D.argent) AS montant',
 				      "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don",
-				      'C.imputation=' . sql_quote($GLOBALS['association_metas']['pc_dons']) . " AND C.vu AND date_format( D.date_don, '%Y' ) = $annee AND id_adherent=$id_auteur");
+				      $critere . "C.vu AND date_format( D.date_don, '%Y' ) = $annee AND id_adherent=$id_auteur");
 
 		if (!$montants)
 		  {echo "Versement en $annee pour l'adherent de mail $mail: $montants";}

@@ -13,6 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip ('inc/navigation_modules');
+include_spip('inc/association_comptabilite');
 
 function exec_ventes(){
 		
@@ -40,9 +41,10 @@ function exec_ventes(){
 		echo '<p>', _T('asso:en_rose_vente_enregistree_en_bleu_vente_expediee') . '</p>'; 
 		
 		// TOTAUX
-		$critere = $GLOBALS['association_metas']['pc_ventes'];
-		if ($critere) $critere = " AND imputation=". sql_quote($critere);
-		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', "date_format( date, '%Y' ) =$annee$critere", "imputation");
+		$association_imputation = charger_fonction('association_imputation', 'inc');
+		$critere = $association_imputation('pc_ventes');
+		if ($critere) $critere .= ' AND ';
+		$query = sql_select('imputation, sum(recette) AS somme_recettes, sum(depense) AS somme_depenses', 'spip_asso_comptes', $critere . "date_format( date, '%Y' ) =$annee", "imputation");
 		while ($data = sql_fetch($query)) {
 			$solde= $data['somme_depenses'] + $data['somme_recettes'];
 			$imputation = $data['imputation'];

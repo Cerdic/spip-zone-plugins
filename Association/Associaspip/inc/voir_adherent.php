@@ -12,6 +12,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/texte'); // pour nettoyer_raccourci_typo
+include_spip('inc/association_comptabilite');
 
 function voir_adherent_paiements($data, $lien, $type)
 {
@@ -36,7 +37,10 @@ function voir_adherent_paiements($data, $lien, $type)
 
 function voir_adherent_cotisations($id_auteur, $full=false)
 {
-	$row = sql_allfetsel('id_compte AS id, recette AS montant, date, justification, journal', "spip_asso_comptes", "id_journal=$id_auteur AND imputation=" . sql_quote($GLOBALS['association_metas']['pc_cotisations']), '', "date DESC, id_compte DESC" );
+	$association_imputation = charger_fonction('association_imputation', 'inc');
+	$critere = $association_imputation('pc_cotisations');
+	if ($critere) $critere .= ' AND ';
+	$row = sql_allfetsel('id_compte AS id, recette AS montant, date, justification, journal', "spip_asso_comptes", $critere . "id_journal=$id_auteur", '', "date DESC, id_compte DESC" );
 
 	if (!$row) return '';
 
@@ -55,9 +59,12 @@ function voir_adherent_cotisations($id_auteur, $full=false)
 
 function voir_adherent_dons($id_auteur, $full=false)
 {
+	$association_imputation = charger_fonction('association_imputation', 'inc');
+	$critere = $association_imputation('pc_dons');
+	if ($critere) $critere .= ' AND ';
 	$row = sql_allfetsel('D.id_don AS id, D.argent AS montant, D.date_don AS date, justification, journal, id_compte',
 			     "spip_asso_dons AS D LEFT JOIN spip_asso_comptes AS C ON C.id_journal=D.id_don",
-			     'C.imputation=' . sql_quote($GLOBALS['association_metas']['pc_dons']) . ' AND '. 'id_adherent='.$id_auteur, 
+			     $critere . "id_adherent=$id_auteur", 
 			     '',
 			     "D.date_don DESC" );			
 
@@ -76,9 +83,9 @@ function voir_adherent_dons($id_auteur, $full=false)
 	  .  '</table>';
 }
 
-function voir_adherent_ventes($critere)
+function voir_adherent_ventes($id_auteur)
 {
-	$row = sql_allfetsel('id_vente AS id ,article, quantite, date_vente, date_envoi', "spip_asso_ventes", $critere, '', "date_vente DESC" );			
+	$row = sql_allfetsel('id_vente AS id ,article, quantite, date_vente, date_envoi', "spip_asso_ventes", 'id_acheteur='. $id_auteur, '', "date_vente DESC" );			
 	if (!$row) return '';
 
 	foreach($row as $k => $v) { 
