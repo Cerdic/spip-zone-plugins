@@ -492,7 +492,7 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 
 
 function svp_completer_plugins($id_depot) {
-	include_spip('inc/intervaller');
+	include_spip('inc/svp_intervaller');
 
 	// On limite la revue des paquets a ceux des plugins heberges par le depot en cours d'acutalisation
 	if ($ids_plugin = sql_allfetsel('id_plugin', 'spip_depots_plugins', array('id_depot=' . sql_quote($id_depot)))) {

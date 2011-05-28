@@ -86,26 +86,39 @@ function svp_phraser_archives($archives) {
 				// -- Pour SPIP < 2.2, seule la DTD de plugin.xml est utilisee. 
 				// -- De plus, la fonction infos_plugins() n'existant pas dans SPIP 2.1, son backport 
 				// est inclus dans SVP
-				$paquets[$zip[file]]['plugin'] = array();
-				$regexp = ($paquets[$zip[file]]['dtd'] == 'plugin') ? _SVP_REGEXP_BALISE_PLUGIN : _SVP_REGEXP_BALISE_PAQUET;
-				if ($nb_balises = preg_match_all($regexp, $_archive, $matches)) {
-					$plugins = array();
-					// Pour chacune des occurences de la balise on extrait les infos
-					foreach ($matches[0] as $_balise_plugin) {
-						// Extraction des informations du plugin suivant le standard SPIP
-						$informer = charger_fonction('infos_' . $paquets[$zip[file]]['dtd'], 'plugins');
-						$plugins[] = $informer($_balise_plugin);
-					}
-					// Si le nombre de balises est superieur a 1, on est forcement en presence d'une DTD plugin
-					// -- On fusionne donc les informations recoltees sinon on renvoie la balise unique
-					if ($paquets[$zip[file]]['dtd'] == 'plugin')
-						$fusionner = charger_fonction('fusion_' . $paquets[$zip[file]]['dtd'], 'plugins');
-					$paquets[$zip[file]]['plugin'] = ($nb_balises > 1) ? $fusionner($plugins) : $plugins[0];
-				}
+				$paquets[$zip[file]]['plugin'] = svp_phraser_plugin($paquets[$zip[file]]['dtd'], $_archive);
 			}
 		}
 	}
 	return $paquets;
+}
+
+
+// Phrase le contenu du xml, soit la ou les balises <plugin> ou <paquet> suivant la DTD
+// (peut etre appelee via archives.xml ou via un xml de plugin)
+function svp_phraser_plugin($dtd, $contenu) {
+	$plugin = array();
+	
+	$regexp = ($dtd == 'plugin') ? _SVP_REGEXP_BALISE_PLUGIN : _SVP_REGEXP_BALISE_PAQUET;
+	if ($nb_balises = preg_match_all($regexp, $contenu, $matches)) {
+		$plugins = array();
+		// Pour chacune des occurences de la balise on extrait les infos
+		foreach ($matches[0] as $_balise_plugin) {
+			// Extraction des informations du plugin suivant le standard SPIP
+			$informer = charger_fonction('infos_' . $dtd, 'plugins');
+			$plugins[] = $informer($_balise_plugin);
+		}
+		// Si le nombre de balises est superieur a 1, on est forcement en presence d'une DTD plugin
+		// -- On fusionne donc les informations recoltees sinon on renvoie la balise unique
+		if ($nb_balises > 1) {
+			$fusionner = charger_fonction('fusion_' . $dtd, 'plugins');
+			$plugin = $fusionner($plugins);
+		}
+		else
+			$plugin = $plugins[0];
+	}
+	
+	return $plugin;
 }
 
 
