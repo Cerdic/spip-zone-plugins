@@ -3,16 +3,16 @@
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
  *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
- *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
+ *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)      *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-	include_spip('inc/presentation');
-	include_spip ('inc/navigation_modules');
+include_spip('inc/presentation');
+include_spip ('inc/navigation_modules');
+include_spip('inc/association_comptabilite');
 
 function action_editer_asso_ventes(){
 	
@@ -20,7 +20,6 @@ function action_editer_asso_ventes(){
 	$id_vente=$securiser_action();
 
 	include_spip('base/association');
-	include_spip('inc/association_comptabilite');
 		
 	$id_compte=intval(_request('id_compte'));
 	
@@ -53,7 +52,6 @@ function action_editer_asso_ventes(){
 
 function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $id_vente, $journal, $justification, $recette, $id_compte)
 {
-	include_spip('inc/association_comptabilite');
 	sql_updateq('spip_asso_ventes', array(
 		"date_vente" => $date_vente,
 		"article" => $article,
@@ -72,13 +70,16 @@ function ventes_modifier($date_vente, $article, $code, $acheteur, $id_acheteur, 
 		association_modifier_operation_comptable($date_vente, $recette+$frais_envoi, 0, $justification, $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
 	} else { /* sinon on en modifie deux */
 		association_modifier_operation_comptable($date_vente, $recette, 0, $justification, $GLOBALS['association_metas']['pc_ventes'], $journal, $id_vente, $id_compte);
-		association_modifier_operation_comptable($date_vente, $frais_envoi, 0, $justification.' - frais d\'envoi', $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel("id_compte", "spip_asso_comptes", "imputation=".$GLOBALS['association_metas']['pc_frais_envoi']." AND id_journal=$id_vente"));
+		$association_imputation = charger_fonction('association_imputation', 'inc');
+		$critere = $association_imputation('pc_frais_envoi');
+		$critere .= ($critere ? ' AND ' : '') . "id_journal=$id_vente";
+
+		association_modifier_operation_comptable($date_vente, $frais_envoi, 0, $justification.' - frais d\'envoi', $GLOBALS['association_metas']['pc_frais_envoi'], $journal, $id_vente, sql_getfetsel("id_compte", "spip_asso_comptes", $critere));
 	}
 }
 
 function ventes_insert($date_vente, $article, $code, $acheteur, $id_acheteur, $quantite, $date_envoi, $frais_envoi, $don, $prix_vente, $commentaire, $journal, $recette)
 {
-	include_spip('inc/association_comptabilite');
 	$id_vente = sql_insertq('spip_asso_ventes', array(
 		'date_vente' => $date_vente,
 		'article' => $article,
