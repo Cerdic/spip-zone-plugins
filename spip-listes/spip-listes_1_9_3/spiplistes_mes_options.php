@@ -321,8 +321,8 @@ $spiplistes_items = array(
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_en_cours')
-		, 'nav_t' => _T('spiplistes:En_redaction') // nav_t = titre dans naviguer rapide (boite gauche)
-		, 'tab_t' => _T('spiplistes:Courriers_en_cours_de_redaction') // tab_t = titre du tableau dans spip_listes
+		, 'nav_t' => _T('spiplistes:en_redaction') // nav_t = titre dans naviguer rapide (boite gauche)
+		, 'tab_t' => _T('spiplistes:courriers_en_cours_de_redaction') // tab_t = titre du tableau dans spip_listes
 		, 'desc' => null // description, sous-titre
 	)
 	, _SPIPLISTES_COURRIER_STATUT_READY => array(
@@ -330,8 +330,8 @@ $spiplistes_items = array(
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_brouillon-24.png'
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_redac')
-		, 'nav_t' => _T('spiplistes:Prets_a_envoi')
-		, 'tab_t' => _T('spiplistes:Courriers_prets_a_etre_envoye')
+		, 'nav_t' => _T('spiplistes:prets_a_envoi')
+		, 'tab_t' => _T('spiplistes:courriers_prets_a_etre_envoye')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_ENCOURS => array(
@@ -339,8 +339,8 @@ $spiplistes_items = array(
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_encour-24.png'
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_en_cours')
-		, 'nav_t' => _T('spiplistes:En_cours')
-		, 'tab_t' => _T('spiplistes:Courriers_en_cours_denvoi')
+		, 'nav_t' => _T('spiplistes:en_cours')
+		, 'tab_t' => _T('spiplistes:courriers_en_cours_denvoi')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_AUTO => array(
@@ -349,7 +349,7 @@ $spiplistes_items = array(
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_arch')
 		, 'nav_t' => _T('spiplistes:publies_auto')
-		, 'tab_t' => _T('spiplistes:Courriers_auto_publies')
+		, 'tab_t' => _T('spiplistes:courriers_auto_publies')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_PUBLIE => array(
@@ -357,8 +357,8 @@ $spiplistes_items = array(
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_publie-24.png'
 		, 'icon_color' => '9dba00'
 		, 'alt' => _T('spiplistes:message_arch')
-		, 'nav_t' => _T('spiplistes:Publies')
-		, 'tab_t' => _T('spiplistes:Courriers_publies')
+		, 'nav_t' => _T('spiplistes:publies')
+		, 'tab_t' => _T('spiplistes:courriers_publies')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_STOPE => array(
@@ -366,9 +366,9 @@ $spiplistes_items = array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'puce-stop.png'
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_stop-24.png'
 		, 'icon_color' => 'f00'
-		, 'alt' => _T('spiplistes:Envoi_abandonne')
-		, 'nav_t' => _T('spiplistes:Stoppes')
-		, 'tab_t' => _T('spiplistes:Courriers_stope')
+		, 'alt' => _T('spiplistes:envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:stoppes')
+		, 'tab_t' => _T('spiplistes:courriers_stope')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_VIDE => array(
@@ -376,9 +376,9 @@ $spiplistes_items = array(
 		'puce' => _DIR_IMG_PACK.'puce-rouge.gif'
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_vide-24.png'
 		, 'icon_color' => '000'
-		, 'alt' => _T('spiplistes:Envoi_abandonne')
-		, 'nav_t' => _T('spiplistes:Vides')
-		, 'tab_t' => _T('spiplistes:Courriers_vides')
+		, 'alt' => _T('spiplistes:envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:vides')
+		, 'tab_t' => _T('spiplistes:courriers_vides')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_IGNORE => array(
@@ -386,9 +386,9 @@ $spiplistes_items = array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'puce-inconnu.gif'
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
 		, 'icon_color' => '000'
-		, 'alt' => _T('spiplistes:Envoi_abandonne')
-		, 'nav_t' => _T('spiplistes:Sans_destinataire')
-		, 'tab_t' => _T('spiplistes:Courriers_sans_destinataire')
+		, 'alt' => _T('spiplistes:envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:sans_destinataire')
+		, 'tab_t' => _T('spiplistes:courriers_sans_destinataire')
 		, 'desc' => null
 		)
 	, _SPIPLISTES_COURRIER_STATUT_ERREUR => array(
@@ -396,9 +396,9 @@ $spiplistes_items = array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'puce-inconnu.gif'
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
 		, 'icon_color' => '000'
-		, 'alt' => _T('spiplistes:Envoi_abandonne')
-		, 'nav_t' => _T('spiplistes:Sans_destinataire')
-		, 'tab_t' => _T('spiplistes:Courriers_sans_liste')
+		, 'alt' => _T('spiplistes:envoi_abandonne')
+		, 'nav_t' => _T('spiplistes:sans_destinataire')
+		, 'tab_t' => _T('spiplistes:courriers_sans_liste')
 		, 'desc' => null
 		)
 	// les listes

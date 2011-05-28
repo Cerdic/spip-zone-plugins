@@ -514,7 +514,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 			.	(
 				(($abo = $row['format']) && (!empty($abo)) && ($abo != 'non'))
 				? $trad_map[$abo]
-				: "<span title='"._T('spiplistes:Sans_abonnement')."'> - </span>"
+				: "<span title='"._T('spiplistes:sans_abonnement')."'> - </span>"
 				)
 			. "</td>\n";
 

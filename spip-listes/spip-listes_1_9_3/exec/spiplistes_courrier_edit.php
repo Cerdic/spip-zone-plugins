@@ -94,7 +94,7 @@ function exec_spiplistes_courrier_edit(){
 			$statut = _SPIPLISTES_COURRIER_STATUT_REDAC; 
 			$type = _SPIPLISTES_COURRIER_TYPE_NEWSLETTER;
 			$new = 'oui';
-			$titre = _T('spiplistes:Nouveau_courrier');
+			$titre = _T('spiplistes:nouveau_courrier');
 			$clearonfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		}
 		else {
@@ -338,11 +338,11 @@ function exec_spiplistes_courrier_edit(){
 	$page_result .= ""
 		. "<p class='verdana2'>\n"
 			. _T('spiplistes:cliquez_generer_desc'
-				, array('titre_bouton'=>_T('spiplistes:generer_Apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier'))
+				, array('titre_bouton'=>_T('spiplistes:generer_apercu'), 'titre_champ_texte'=>_T('spiplistes:texte_courrier'))
 				)
 			. "</p>\n"
 		. "<p class='verdana2'>\n" ._T('spiplistes:calcul_patron_attention') .  "</p>\n"
-		. spiplistes_form_bouton_valider ('Valider', _T('spiplistes:generer_Apercu'))
+		. spiplistes_form_bouton_valider ('Valider', _T('spiplistes:generer_apercu'))
 		. fin_block() // fin_block_invisible
 		. fin_cadre_relief(true)
 		. "<br />\n"

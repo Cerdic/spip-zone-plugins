@@ -474,7 +474,7 @@ function exec_spiplistes_courrier_gerer () {
 						;
 				}
 				else {
-					$str_destinataire = _T('spiplistes:Courriers_sans_liste');
+					$str_destinataire = _T('spiplistes:courriers_sans_liste');
 				}
 			}
 		} //

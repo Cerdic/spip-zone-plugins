@@ -154,7 +154,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 // exec/spiplistes_courrier_edit.php
 , 'generer_le_contenu' => "Generate content"
 , 'langue_du_courrier_' => "Language of email:"
-, 'generer_Apercu' => "Generate and Preview"
+, 'generer_apercu' => "Generate and Preview"
 , 'a_partir_de_patron' => "From a template"
 , 'avec_introduction' => "With introduction text"
 , 'calcul_patron_attention' => "Some template include in their results the following text (text mail). If you are upgrading your mail, remember to empty the box before generating the content."
@@ -516,50 +516,50 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 , 'listes_diffusion_privees_desc' => "Subscription to these lists is restricted to administrators and autors of the site."
 , 'listes_diffusion_suspendue' => 'Mailing Lists suspended'
 , 'listes_diffusion_suspendue_desc' => " "
-, 'Courriers_en_cours_de_redaction' => 'Editing in progress'
-, 'Courriers_en_cours_denvoi' => 'Sending in progress'
-, 'Courriers_prets_a_etre_envoye' => "Letters ready to be sent"
-, 'Courriers_publies' => "Letters published"
-, 'Courriers_auto_publies' => "Automatic letters published"
-, 'Courriers_stope' => "Letters stopped being sent"
-, 'Courriers_vides' => "Letters canceled (empty)"
-, 'Courriers_sans_destinataire' => "Letters without reciever (empty list)"
-, 'Courriers_sans_liste' => "Letters without subscribers (list missing)"
+, 'courriers_en_cours_de_redaction' => 'Editing in progress'
+, 'courriers_en_cours_denvoi' => 'Sending in progress'
+, 'courriers_prets_a_etre_envoye' => "Letters ready to be sent"
+, 'courriers_publies' => "Letters published"
+, 'courriers_auto_publies' => "Automatic letters published"
+, 'courriers_stope' => "Letters stopped being sent"
+, 'courriers_vides' => "Letters canceled (empty)"
+, 'courriers_sans_destinataire' => "Letters without reciever (empty list)"
+, 'courriers_sans_liste' => "Letters without subscribers (list missing)"
 , 'devenir_redac'=>'Become an editor of this website'
 , 'devenir_membre'=>'Become a member of this website'
 , 'devenir_abonne' => "Subscribe to this website"
 , 'desabonnement_valid'=>'The following e-mail address is not subscribed anymore' 
 , 'pass_recevoir_mail'=>'You will receive a confirmation e-mail specifying how to change your subscription. '
 , 'discussion_intro' => 'Hello, <br />Here are the discussions started on the site'
-, 'En_redaction' => "Editing in progress"
-, 'En_cours' => "In progress"
+, 'en_redaction' => "Editing in progress"
+, 'en_cours' => "In progress"
 , 'editeur_nom' => "Editor name "
 , 'editeur_adresse' => "Address "
 , 'editeur_rcs' => "N&deg; RCS "
 , 'editeur_siret' => "N&deg; SIRET "
 , 'editeur_url' => "Editor website URL "
 , 'editeur_logo' => "Editor logotype URL or DATA URL sheme"
-, 'Envoi_abandonne' => "Sending abandoned"
+, 'envoi_abandonne' => "Sending abandoned"
 , 'liste_prive' => "List private"
 , 'liste_publique' => "List public"
 , 'message_redac' => 'Editing in progress and ready to send'
-, 'Prets_a_envoi' => "Ready to send"
-, 'Publies' => "Published"
+, 'prets_a_envoi' => "Ready to send"
+, 'publies' => "Published"
 , 'publies_auto' => "Published (auto)"
-, 'Stoppes' => "Stopped"
-, 'Sans_destinataire' => "Without reciever"
-, 'Sans_abonnement' => "Wihtout subscription"
+, 'stoppes' => "Stopped"
+, 'sans_destinataire' => "Without reciever"
+, 'sans_abonnement' => "Wihtout subscription"
 , 'sans_abonne' => "without subscriber"
 , 'sans_moderateur' => "without moderator"
 
 // raccourcis des paniers
 , 'aller_au_panier_' => "Go to basket "
 , 'aller_aux_listes_' => "Go to the lists "
-, 'Nouveau_courrier' => 'Create a new mail'
-, 'Nouvelle_liste_de_diffusion' => 'Create a new mailing list'
+, 'nouveau_courrier' => 'Create a new mail'
+, 'nouvelle_liste_de_diffusion' => 'Create a new mailing list'
 , 'trieuse_suspendue' => "Sorter suspended"
 , 'trieuse_suspendue_info' => "The processing of programmed mailing lists is suspended."
-, 'Trieuse_reactivee' => "Sorter reactivated"
+, 'trieuse_reactivee' => "Sorter reactivated"
 
 // mots
 , 'ajout' => "Add"
@@ -572,7 +572,6 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 , 'format' => 'Format'
 , 'modifier' => 'Edit'
 , 'max_' => "Max "
-, 'Patrons' => 'Templates'
 , 'patron_' => "template : "
 , 'spiplistes' => "SPIP-Lists"
 , 'recherche' => 'Research'
@@ -582,7 +581,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 , 'sup_' => "Sup."
 , 'total' => "Total "
 , 'voir' => 'see'
-, 'Vides' => "Empty"
+, 'vides' => "Empty"
 , 'choisir' => 'Choose'
 , 'desabo' => 'unsubscribe'
 , 'desabonnement' => 'Unsubscribe'
@@ -602,4 +601,4 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 
 // English translation: Pierre ROUSSET : p.rousset@gmail.com from the transalation by Simon simon@okko.org
 
-?>
+

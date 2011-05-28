@@ -39,8 +39,8 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'actualiser' => 'Aktualisieren',
 'adresse' => 'Geben Sie hier die Adresse f&uuml;r Antworten (reply-to) ein (Wenn Sie keine Angabe machen, wird die Adresse des Webmasters verwendet): ',
 'adresses_importees' => 'Adressen importiert',
-'Courriers_en_cours_de_redaction' => 'Nachricht in Bearbeitung',
-'Courriers_en_cours_denvoi' => 'Nachricht wird gesendet',
+'courriers_en_cours_de_redaction' => 'Nachricht in Bearbeitung',
+'courriers_en_cours_denvoi' => 'Nachricht wird gesendet',
 'aff_envoye' => 'Gesendete Nachrichten',
 'aff_lettre_auto' => 'Gesendete Newsletter',
 'aff_envoye' => 'Gesendete Nachrichten',
@@ -54,7 +54,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'Cette_liste_est' => 'Diese Liste ist',
 'charger_patron' => 'Vorlage f&uuml;r die Nachricht w&auml;hlen',
 'charger_le_patron' => 'Nachricht erzeugen',
-'Configuration' => 'Konfiguration',
+'configuration' => 'Konfiguration',
 'courriers' => 'Nachrichten',
 
 //D
@@ -89,7 +89,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'format' => 'Format',
 
 //H
-'Historique_des_envois' => 'Verlauf der Sendungen',
+'historique_des_envois' => 'Verlauf der Sendungen',
 
 //I
 'info_auto' => 'SPIP-Listes kann Ihren Abonnenten regelm&auml;&szlig;ig Informationen &uuml;ber die neuesten Inhalte (k&uuml;rzlich ver&ouml;ffentlichte Artikel und Meldungen) Ihrer Website senden.',
@@ -146,14 +146,13 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 
 //N
 'nom' => 'Benutzername',
-'Nouveau_courrier' => 'Neue Nachricht',
+'nouveau_courrier' => 'Neue Nachricht',
 'nouveaux_messages' => 'Neue Nachrichten',
-'Nouvelle_liste_de_diffusion' => 'Neuer Newsletter',
+'nouvelle_liste_de_diffusion' => 'Neuer Newsletter',
 
 //P
 'par_date' => 'Nach Anmeldedatum',
 'patron_disponibles' => 'Verf&uuml;gbare Vorlagen',
-'Patrons' => 'Vorlagen',
 'poster' => 'Nachricht senden',
 
 //R
@@ -164,7 +163,7 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 
 //S
 'suivi' => 'Abonnements verwalten',
-'Suivi_des_abonnements' => 'Abonnements verwalten',
+'suivi_des_abonnements' => 'Abonnements verwalten',
 'sujet_nouveau' => 'Neues Thema',
 'sujet_auteur' => 'Autor',
 'sujet_visites' => 'Besuche',
@@ -175,7 +174,9 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'sujet_clos_texte' => 'Dieses Thema ist geschlossen, Sie k&ouml;nnen keinen Beitrag dazu schreiben.',
  
  //T
-'texte_boite_en_cours' => 'SPIP-Listes verschickt gerade eine Nachricht. <p> Sie k&ouml;nnen den Versand beschleunigen, indem Sie auf den Link klicken.</p> <p>Dieser Kasten wird nicht mehr angezeigt, wenn die Nachricht vollst&auml;ndig gesendet wurde.</p>',
+'texte_boite_en_cours' => 'SPIP-Listes verschickt gerade eine Nachricht.
+	<p> Sie k&ouml;nnen den Versand beschleunigen, indem Sie auf den Link klicken.</p>
+	<p>Dieser Kasten wird nicht mehr angezeigt, wenn die Nachricht vollst&auml;ndig gesendet wurde.</p>',
 'texte_lettre_information' => 'Hier ist der Newsletter von ',
 'Tous les @s@' => 'Alle @s@',
 
@@ -190,15 +191,19 @@ Sie k&ouml;nnen dann die &auml;nderung Ihres Abonnements best&auml;tigen.',
 'abonees' => 'alle Abonnenten',
 'abonne_listes' => 'Diese Adresse hat folgende Listen abonniert',
 'abonne_aucune_liste' => 'Keine Liste abonniert',
-'abonnement_simple' => '<b>Einfaches Abonnieren: </b><br /><i>Die Abonnenten erhalten eine Best&auml;tigungsmail nach dem Abonnieren.</i>',
-'abonnement_code_acces' => '<b>Abonnement mit Zugangsdaten: </b><br /><i>Die Abonnenten erhalten au&szlig;erdem einen Benutzernamen und ein Pa&szlig;wort, mit denen sie sich bei der Website anmelden k&ouml;nnen. </i>',
+'abonnement_simple' => '<b>Einfaches Abonnieren: </b><br />
+	<i>Die Abonnenten erhalten eine Best&auml;tigungsmail nach dem Abonnieren.</i>',
+'abonnement_code_acces' => '<b>Abonnement mit Zugangsdaten: </b><br />
+	<i>Die Abonnenten erhalten au&szlig;erdem einen Benutzernamen und ein Pa&szlig;wort,
+	mit denen sie sich bei der Website anmelden k&ouml;nnen. </i>',
 'abonnement_newsletter' => '<b>Abonnement des Newsletters</b>',
 'acces_a_la_page' => 'Sie k&ouml;nnen diese Seite nicht &ouml;ffnen.',
 'adresse_deja_inclus' => 'Die Adresse ist bereits bekannt',
-'autorisation_inscription' => 'SPIP-Listes hat die Anmeldefunktion f&uuml;r Besucher der Website aktiviert.',
+'autorisation_inscription' => 'SPIP-Listes hat die Anmeldefunktion
+	f&uuml;r Besucher der Website aktiviert.',
 
 'choisir' => 'Ausw&auml;hlen',
-'Choisir_cette_liste' => 'Diese Liste ausw&auml;hlen',
+'choisir_cette_liste' => 'Diese Liste ausw&auml;hlen',
 'confirme_envoi' => 'Bitte best&auml;tigen Sie den Versand',
 
 'date_act' => 'Daten aktualisiert',

@@ -88,7 +88,7 @@ function exec_spiplistes_liste_edit(){
 	///////////////////////////////
 	// Creation de la liste
 	//
-		$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
+		$titre = filtrer_entites(_T('spiplistes:nouvelle_liste_de_diffusion'));
 		$texte = "";
 		$clearonfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		// les admins ont droit de creer une liste

@@ -29,13 +29,13 @@ function exec_spiplistes_menu_navigation () {
 				'href' => generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'new=oui&type=nl')
 				, 'img_src' => _DIR_IMG_PACK."creer.gif"
 				, 'img_bg' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_brouillon-24.png"
-				, 'alt' => _T('spiplistes:Nouveau_courrier')
+				, 'alt' => _T('spiplistes:nouveau_courrier')
 			)
 			, array(
 				'href' => generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'new=oui')
 				, 'img_src' => _DIR_IMG_PACK."creer.gif"
 				, 'img_bg' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif"
-				, 'alt' => _T('spiplistes:Nouvelle_liste_de_diffusion')
+				, 'alt' => _T('spiplistes:nouvelle_liste_de_diffusion')
 			)
 		);
 		

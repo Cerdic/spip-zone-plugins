@@ -363,7 +363,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 		. "<ul class='verdana2' style='list-style: none;padding:1ex;margin:0;'>\n"
 		. "<li>"
 		. icone_horizontale(
-			_T('spiplistes:Nouveau_courrier')
+			_T('spiplistes:nouveau_courrier')
 			, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'new=oui&type=nl')
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_brouillon-24.png"
 			,"creer.gif"
@@ -372,7 +372,7 @@ function spiplistes_boite_raccourcis ($return = false) {
 		. "</li>\n"
 		. "<li>"
 		. icone_horizontale(
-			_T('spiplistes:Nouvelle_liste_de_diffusion')
+			_T('spiplistes:nouvelle_liste_de_diffusion')
 			, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'new=oui')
 			, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif"
 			,"creer.gif"
@@ -623,7 +623,7 @@ function spiplistes_boite_autocron () {
 			if(autoriser('webmestre','','',$connect_id_auteur)) {
 				spiplistes_ecrire_key_in_serialized_meta ('opt_suspendre_trieuse', $opt_suspendre_trieuse = 'non', _SPIPLISTES_META_PREFERENCES);
 				spiplistes_ecrire_metas();
-				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:Trieuse_reactivee')."</p>\n";
+				$result .= "<p class='verdana2' style='margin-bottom:1em;'>"._T('spiplistes:trieuse_reactivee')."</p>\n";
 			}
 		}
 		else {

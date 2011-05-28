@@ -147,7 +147,7 @@ function exec_spiplistes_liste_gerer () {
 				$titre = corriger_caracteres($titre);
 				$texte = corriger_caracteres($texte);
 				if(empty($titre)) {
-					$titre = filtrer_entites(_T('spiplistes:Nouvelle_liste_de_diffusion'));
+					$titre = filtrer_entites(_T('spiplistes:nouvelle_liste_de_diffusion'));
 				}
 				$sql_champs['titre'] = $titre;
 				$sql_champs['texte'] = $texte;

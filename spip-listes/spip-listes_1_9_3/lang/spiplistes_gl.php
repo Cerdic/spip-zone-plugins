@@ -53,10 +53,10 @@ Un sa&uacute;do
 'actualiser' => 'Actualizar esta p&aacute;xina',
 'adresse' => 'Enderezo de correo electr&oacute;nico para responder &aacute; mensaxe (por defecto, o enderezo do/a webmestre/webmistress ser&aacute; empregada como enderezo de resposta) :',
 'adresses_importees' => 'Enderezos importados ***FIXME ***',
-'Courriers_en_cours_denvoi' => 'Mensaxes a enviar',
+'courriers_en_cours_denvoi' => 'Mensaxes a enviar',
 'aff_envoye' => 'Mensaxes enviadas "manualmente"',
 'aff_lettre_auto' => 'Mensaxes enviadas &aacute;s listas de forma programada',
-'Courriers_en_cours_de_redaction' => 'Mensaxes en curso de redacci&oacute;n',
+'courriers_en_cours_de_redaction' => 'Mensaxes en curso de redacci&oacute;n',
 'alerte_edit' => 'Atenci&oacute;n: esta mensaxe pode ser modificada pol@s administradore(a)s, sendo recibida por todas as persoas inscritas na lista (podes seleccionala no seguinte paso).<br />Non empregues as mensaxes colectivas nada m&aacute;s que para acontecementos importantes da vida do sitio.',
 'alerte_modif' => '<b>Despois de \'visualizar a mensaje\',<br />poder&aacute;s modificar o seu contenido</b>',
 'annuler_envoi' => 'Cancelar o env&iacute;o',
@@ -68,7 +68,7 @@ Un sa&uacute;do
 'Cette_liste_est' => 'Lista ',
 'charger_le_patron' => 'Visualizar a mensaxe',
 'charger_patron' => 'Elexir unha gu&iacute;a',
-'Configuration' => 'Configuraci&oacute;n',
+'configuration' => 'Configuraci&oacute;n',
 'courriers' => 'Mensaxes',
 
 //D
@@ -103,7 +103,7 @@ Un sa&uacute;do
 'format' => 'Formato',
 
 //H
-'Historique_des_envois' => 'Env&iacute;os',
+'historique_des_envois' => 'Env&iacute;os',
 
 //I
 'info_auto' => 'SPIP-Listes para SPIP pode enviar peri&oacute;dicamente @s inscrit@s, a \'informaci&oacute;n das &uacute;ltimas novidades do sitio (art&iacute;gos, breves, mensaxes nos foros, sitios sindicados,... recentemente publicados).',
@@ -165,12 +165,11 @@ Un sa&uacute;do
 //N
 'nom' => 'Nome de usuari@',
 'nouveaux_messages' => 'Novas mensaxes',
-'Nouveau_courrier' => 'Nova mensaxe',
-'Nouvelle_liste_de_diffusion' => 'Nova lista',
+'nouveau_courrier' => 'Nova mensaxe',
+'nouvelle_liste_de_diffusion' => 'Nova lista',
 
 //P
 'par_date' => 'Por data de inscripci&oacute;n',
-'Patrons' => 'gu&iacute;as',
 'patron_disponibles' => 'gu&iacute;as disponibles',
 'poster' => 'Env&iacute;ar unha mensaxe',
 'prochain_envoi_prevu' => 'Pr&oacute;ximo env&iacute;o hoxe',
@@ -185,7 +184,7 @@ Un sa&uacute;do
 
 //S
 'suivi' => 'Seguimento de inscrit@s',
-'Suivi_des_abonnements' => 'Inscripci&oacute;ns',
+'suivi_des_abonnements' => 'Inscripci&oacute;ns',
 'sujet_nouveau' => 'Nova mensaxe',
 'sujet_auteur' => 'Autor(a)',
 'sujet_visites' => 'Visitas',
@@ -220,7 +219,7 @@ As persoas inscritas recibir&aacute;n un login e un contrasinal que lles permiti
 
 
 'choisir' => 'Seleccionar',
-'Choisir_cette_liste' => 'Envialo a esta lista',
+'choisir_cette_liste' => 'Envialo a esta lista',
 'confirme_envoi' => 'Para confirmar o seu env&iacute;o vai ata o final.',
 
 'date_act' => 'Datos actualizados',
