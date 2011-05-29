@@ -24,7 +24,9 @@ if (!defined('_DIR_PLUGIN_SPIPLISTES')) {
 
 
 //nombre de processus d'envoi simultanes
-@define('_SPIP_LISTE_SEND_THREADS',1);
+if (!defined('_SPIP_LISTE_SEND_THREADS')) {
+	define('_SPIP_LISTE_SEND_THREADS', 1);
+}
 
 // virer les echo, a reprendre plus tard correctement
 // avis aux specialistes !!
@@ -184,10 +186,17 @@ define('_SPIPLISTES_TIME_1_DAY', (3600 * 24));
 //	ne pas modifier, hors dev. N'est pas operationnel.
 define('_SPIPLISTES_UTILISER_FACTEUR', 'non');
 
-if(spiplistes_spip_est_inferieur_193()) { 
-	@define('SPIP_BOTH', MYSQL_BOTH);
-	@define('SPIP_ASSOC', MYSQL_ASSOC);
-	@define('SPIP_NUM', MYSQL_NUM);
+if(spiplistes_spip_est_inferieur_193()) {
+	
+	foreach(array('SPIP_BOTH' => MYSQL_BOTH
+				  ,'SPIP_ASSOC' => MYSQL_ASSOC
+				  ,'SPIP_NUM' => MYSQL_NUM
+				  ) as $key => $value)
+	{
+		if (!defined($key)) {
+			define ($key, $value);
+		}
+	}
 }
 
 //Balises Spip-listes

@@ -587,7 +587,11 @@ function spiplistes_boite_autocron_info ($icone = "", $return = false, $titre_bo
  * @return la boite autocron, chaine html
  */
 function spiplistes_boite_autocron () { 
-	@define('_SPIP_LISTE_SEND_THREADS',1);
+
+	//nombre de processus d'envoi simultanes
+	if (!defined('_SPIP_LISTE_SEND_THREADS')) {
+		define('_SPIP_LISTE_SEND_THREADS', 1);
+	}
 	
 	$connect_id_auteur = intval($GLOBALS['connect_id_auteur']);
 	
