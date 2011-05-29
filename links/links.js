@@ -2,7 +2,7 @@ function targetLinks() {
 	var where;
 	where="_blank";
 
-	$("a[href*='://']:not([href^="+liens_sortants_site+"])")
+	$("a[href*='://']:not([href^="+links_site+"])")
 	  .attr('target',where)
 		.attr('rel','external')
 		.addClass('external')
