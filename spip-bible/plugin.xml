@@ -59,7 +59,7 @@ Ces options sont :
 		Id&eacute;e du presse-papier : Cerdic
     </auteur>
     <licence>GPL3</licence>
-    <version>2.0.3</version>
+    <version>2.1.0</version>
     <etat>stable</etat>
     <install>base/bible_install.php</install>
     <necessite id='CFG' version="[1.0;]" />
