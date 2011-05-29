@@ -470,9 +470,9 @@ $spiplistes_items = array(
 		'puce' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'puce-inconnu.gif'
 		, 'icon' => _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_ignore-24.png'
 		, 'icon_color' => '9cc'
-		, 'alt' => _T('spiplistes:Inconnu')
-		, 'nav_t' => _T('spiplistes:Inconnu')
-		, 'tab_t' => _T('spiplistes:Inconnu')
+		, 'alt' => _T('spiplistes:inconnu')
+		, 'nav_t' => _T('spiplistes:inconnu')
+		, 'tab_t' => _T('spiplistes:inconnu')
 		, 'desc' => null
 		)
 	);

@@ -87,7 +87,6 @@ function exec_spiplistes_voir_journal () {
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX)
 		. $message_gauche
 		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe

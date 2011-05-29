@@ -374,7 +374,7 @@ function exec_spiplistes_liste_gerer () {
 		// Propose de modifier la liste 
 		$gros_bouton_modifier = 
 			icone (
-				_T('spiplistes:Modifier_cette_liste') // legende bouton
+				_T('spiplistes:modifier_cette_liste') // legende bouton
 				, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_EDIT,'id_liste='.$id_liste) // lien
 				, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif" // image du fond
 				, "edit.gif" // image de la fonction. Ici, le crayon
@@ -385,7 +385,7 @@ function exec_spiplistes_liste_gerer () {
 		// Propose de supprimer la liste 
 		$gros_bouton_supprimer = 
 			icone (
-					_T('spiplistes:Supprimer_cette_liste')
+					_T('spiplistes:supprimer_cette_liste')
 					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTE_GERER, "btn_supprimer_liste=$id_liste&id_liste=$id_liste")
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK.'poubelle_msg.gif'
 					, ""
@@ -552,20 +552,25 @@ function exec_spiplistes_liste_gerer () {
 	
 	//////////////////////////////////////////////////////
 	// Modifier le statut de la liste
-	//$email_defaut = entites_html($meta['email_webmaster']);
-	$email_defaut = ($m = email_valide($GLOBALS['meta']['email_defaut']))
+	$m = email_valide($GLOBALS['meta']['email_defaut']);
+	$email_defaut = ($m)
 		? $m
 		: $GLOBALS['meta']['email_webmaster']
 		;
-	$email_envoi = ($m = email_valide($email_envoi))
+		
+	$m = email_valide($email_envoi);
+	$email_envoi = ($m)
 		? $email_envoi
 		: $email_defaut
 		;
 
-	$page_result .= ""
-		//. debut_cadre_relief("racine-site-24.gif", true)
-		. debut_cadre_relief("racine-site-24.gif", true, '', _T('spiplistes:Diffusion').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "diffusion"))
-		//
+	$page_result .= debut_cadre_relief('racine-site-24.gif'
+							 , true
+							 , ''
+							 , _T('spiplistes:diffusion')
+								. spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE
+														 , 'diffusion'))
+		
 		////////////////////////////
 		// Formulaire diffusion
 		.	(
@@ -800,7 +805,7 @@ function exec_spiplistes_liste_gerer () {
 					, ($statut == _SPIPLISTES_LIST_PUB_DAILY)
 					, true, false
 					)
-				. _T('spiplistes:Tous_les')
+				. _T('spiplistes:tous_les_')
 				. " <input type='text' name='periode' value='".$ii."' size='4' maxlength='4' class='fondl' /> "
 				. _T('info_jours')
 				. "</li>\n"

@@ -186,7 +186,7 @@ function exec_spiplistes_courrier_edit(){
 		// bloc sujet du courrier
 		. "<label for='sujet_courrier'>"._T('spiplistes:sujet_courrier').":</label>\n"
 		. "<input id='sujet_courrier' type='text' class='formo' name='titre' value=\"$titre\" size='40' $clearonfocus />\n"
-		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:Courrier_edit_desc')."</p>\n"
+		. "<p style='margin-bottom:1.75em;'>"._T('spiplistes:courrier_edit_desc')."</p>\n"
 		;
 		
 	$titre_block_depliable = _T('spiplistes:generer_le_contenu');

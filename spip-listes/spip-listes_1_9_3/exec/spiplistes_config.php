@@ -405,7 +405,7 @@ function exec_spiplistes_config () {
 		// lien courrier: boite de selection
 		. "<div id='div-lien-en-tete-courrier' style='".(!$opt_lien_en_tete_courrier ? "display:none;" : '')."margin-top:1em;'>"
 		. '<label class="verdana2" style="padding-left:2ex;">'
-		. _T('spiplistes:Patron_du_lien').'.' . $eol
+		. _T('spiplistes:patron_du_lien').'.' . $eol
 		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_TETE_DIR, "lien_patron", 1)
 		. '</label>' . $eol
 		. "</div>" . $eol // fin bloc div-lien-en-tete-courrier

@@ -158,6 +158,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 	Ce bloc est un petit patron modifiable, configurable, compos&#233;
 	du nom de l&#39;&#233;diteur, de ses coordonn&#233;es, voire de son logotype.
 	'
+, 'patron_du_lien' => 'Patron du lien'
 , 'complement_tampon_editeur_label' => 'Ajouter le tampon Editeur en fin de courrier'
 , 'envoi_des_courriers' => 'Envoi des courriers'
 , 'log_console' => 'Console'
@@ -261,6 +262,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'message_presque_envoye' =>'Ce courrier est sur le point d&#8217;&ecirc;tre envoy&#233;'
 , 'erreur_adresse_email_inconnue' => 'Attention, l&#8217;adresse email de test que vous avez fournie ne correspond &#224; 
 	aucun abonn&#233;, <br />l&#8217;envoi ne peut se faire, veuillez reprendre la proc&#233;dure<br /><br />'
+, 'arreter_envoi' => 'Arr&#234;ter l&#39;envoi de ce courrier'
+, 'modifier_cette_liste' => 'Modifier cette liste'
+, 'supprimer_cette_liste' => 'Supprimer cette liste'
 
 // exec/spiplistes_courrier_previsu.php
 , 'lettre_info' => 'La lettre d&#8217;information du site'
@@ -302,7 +306,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'erreur_import' => 'Le fichier d&#8217;import pr&#233;sente une erreur &#224; la ligne '
 , 'envoi_manuel' => 'Envoi manuel'
 , 'format_date' => 'Y/m/d'
-, 'importer' => 'Importer une liste d&#8217;abonn&#233;s'
+, 'importer_liste_abonnes' => 'Importer une liste d&#8217;abonn&#233;s'
 , 'importer_fichier' => 'Importer un fichier'
 , 'importer_fichier_txt' => '<p><strong>Votre liste d&#8217;abonn&#233;s doit &ecirc;tre un fichier simple (texte) 
 	qui ne comporte qu&#8217;une adresse e-mail par ligne</strong></p>'
@@ -405,7 +409,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'boite_alerte_manque_vrais_abos' => 'Il n&#8217;y a pas d&#8217;abonn&#233;s pour cette liste de diffusion,
 	ou les abonn&#233;s n&#8217;ont pas de format de r&#233;ception.
 	<br />
-	Corrigez le format de r&#233;ception pour au moins un abonn&#233; avant de valider l&#8217;envoi.'	
+	Corrigez le format de r&#233;ception pour au moins un abonn&#233; avant de valider l&#8217;envoi.'
+, 'diffusion' => 'Diffusion'
+, 'tous_les_' => 'tous les '
 
 // exec/spiplistes_listes_toutes.php
 // exec/spiplistes_maintenance.php
@@ -448,7 +454,11 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , '_n_abonnes_' => ' @n@ abonn&#233;s '
 , '1_abonne' => '1 abonn&#233;'
 , 'aucun_abo' => 'aucun abonn&#233;.'
-
+, 'supprimer_les_chronos' => 'Supprimer les chronos'
+, 'casier_vide' => 'Casier vide'
+, 'suppression_de_titre_result' => 'Suppression00 de : @titre@ @result@'
+, 'total_1_abonne' => 'Total: 1 abonn&#233;'
+, 'total_n_abonnes' => 'Total: @n@ abonn&#233;s'
 
 // exec/spiplistes_menu_navigation.php
 // exec/spiplistes_voir_journal.php
@@ -696,6 +706,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'sans_abonnement' => 'Sans abonnement'
 , 'sans_abonne' => 'sans abonn&#233;'
 , 'sans_moderateur' => 'sans mod&#233;rateur'
+, 'inconnu' => 'Inconnu'
 
 // raccourcis des paniers
 , 'aller_au_panier_' => 'Aller au panier '
@@ -844,7 +855,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'envoi' => 'Envoi :'
 , 'erreur_install' => '<h3>erreur: spip-listes est mal install&#233;!</h3>'
 , 'erreur_install2' => '<p>V&#233;rifier les &#233;tapes d&#8217;installation, notamment si vous avez bien renomm&#233;<i>mes_options.txt</i> en <i>mes_options.php</i>.</p>'
-, 'exporter' => 'Exporter la liste d&#8217;abonn&#233;s'
+, 'exporter_liste_abonnes' => 'Exporter la liste d&#8217;abonn&#233;s'
 , 'erreur_appel_courrier' => 'Erreur lors de l&#8217;appel du courrier'
 , 'faq' => 'FAQ'
 , 'forum' => 'Forum'

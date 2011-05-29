@@ -123,7 +123,11 @@ function exec_spiplistes_maintenance () {
 						?	$msg_ok
 						:	$msg_bad
 						;
-					$msg_maintenance[] = _T('spiplistes:Suppression_de')." : ".$titre."... : ".$msg.$msg_end;
+					$msg_maintenance[] = _T('spiplistes:suppression_de_titre_result'
+											, array(
+													'titre' => $titre
+													, 'result' => $msg.$msg_end
+												   ));
 					spiplistes_log("DELETE liste ID_LISTE #$id_liste by ID_AUTEUR #$connect_id_auteur");
 				}
 			}
@@ -189,13 +193,7 @@ function exec_spiplistes_maintenance () {
 		}
 		
 		// compter les formats (les abonnes ayant de'fini un format)
-		$nb_abonnes_formats = sql_fetsel("COUNT(id_auteur) as n", "spip_auteurs_elargis", $sql_formats_where);
-		$nb_abonnes_formats = $nb_abonnes_formats['n'];
-		$nb_abonnes_formats_desc = 
-						($nb_abonnes_formats==1)
-						? _T('spiplistes:1_abonne')
-						: "$nb_abonnes_formats "._T('spiplistes:abonnes')
-						;
+		$nb_abonnes_formats = spiplistes_formats_compter ($sql_formats_where);
 	
 		$maintenance_url_action = generer_url_ecrire(_SPIPLISTES_EXEC_MAINTENANCE);
 		
@@ -222,7 +220,6 @@ function exec_spiplistes_maintenance () {
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
-		. spiplistes_boite_meta_info(_SPIPLISTES_PREFIX)
 		. pipeline('affiche_gauche', array('args'=>array('exec'=>$sous_rubrique),'data'=>''))
 		//. creer_colonne_droite($rubrique, true)  // spiplistes_boite_raccourcis() s'en occupe
 		. spiplistes_boite_raccourcis(true)
@@ -259,7 +256,7 @@ function exec_spiplistes_maintenance () {
 		$page_result .= spiplistes_form_fieldset_fin(true);
 	}
 	else {
-		$page_result .= spiplistes_form_message(_T('spiplistes:Casier_vide'), true);
+		$page_result .= spiplistes_form_message(_T('spiplistes:casier_vide'), true);
 	}
 	$page_result .= ""
 		. spiplistes_form_bouton_valider ('btn_supprimer_courriers')
@@ -272,7 +269,7 @@ function exec_spiplistes_maintenance () {
 	$objet = array('objet' => _T('spiplistes:des_listes'));
 	$page_result .= ""
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
-		. debut_cadre_relief("", true, "", _T('spiplistes:Supprimer_les_chronos'))
+		. debut_cadre_relief("", true, "", _T('spiplistes:supprimer_les_chronos'))
 		;
 	if($nb_listes_auto) {
 		$page_result .= ""
@@ -280,7 +277,8 @@ function exec_spiplistes_maintenance () {
 			. "<p class='verdana2'>"._T('spiplistes:suppression_chronos_desc')."</p>\n"
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
-				_T('spiplistes:suppression_chronos_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_auto / $nb_listes_desc", true)
+				_T('spiplistes:suppression_chronos_', $objet)
+					. spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_auto / $nb_listes_desc")
 				, true)
 		;
 		foreach($listes_array as $row) {
@@ -313,7 +311,8 @@ function exec_spiplistes_maintenance () {
 			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
-				_T('spiplistes:suppression_', $objet).spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_desc", true)
+				_T('spiplistes:suppression_', $objet)
+					. spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_listes_desc")
 				, true)
 			;
 		foreach($listes_array as $row) {
@@ -339,17 +338,23 @@ function exec_spiplistes_maintenance () {
 	//////////////////////////////////////////////////////
 	// Boite maintenance des formats
 	$objet = array('objet' => _T('spiplistes:des_formats'));
-	$page_result .= ""
+	$page_result .= ''
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
 		;
-	if($nb_abonnes_formats > 0) {
+	if($nb_abonnes_formats > 0)
+	{
+		$nb_abonnes_formats_desc = 
+						($nb_abonnes_formats == 1)
+						? _T('spiplistes:total_1_abonne')
+						: _T('spiplistes:total_n_abonnes', array('n' => $nb_abonnes_formats))
+						;
 		$page_result .= ""
 			// forcer les formats de reception
 			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
 				_T('spiplistes:forcer_formats_', $objet)
-					. spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abonnes_formats_desc", true)
+					. spiplistes_fieldset_legend_detail($nb_abonnes_formats_desc)
 				, true) 
 			. spiplistes_form_input_checkbox ('confirmer_modifier_formats', 'oui'
 											  , _T('spiplistes:forcer_formats_desc'), false, true)
@@ -368,7 +373,7 @@ function exec_spiplistes_maintenance () {
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut (
 				_T('spiplistes:suppression_', $objet)
-					. spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abonnes_formats_desc", true)
+					. spiplistes_fieldset_legend_detail($nb_abonnes_formats_desc)
 				, true) 
 			. spiplistes_form_input_checkbox ('confirmer_supprimer_formats', 'oui', _T('spiplistes:confirmer_supprimer_formats'), false, true)
 			. spiplistes_form_fieldset_fin(true)
@@ -400,7 +405,7 @@ function exec_spiplistes_maintenance () {
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut(
 								_T('spiplistes:nettoyage_', $objet)
-								 . spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abos, $nb_auteurs", true)
+								 . spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abos, $nb_auteurs")
 							   , true)
 			. spiplistes_form_input_checkbox ('confirmer_nettoyer_abos', 'oui'
 											  , _T('spiplistes:confirmer_nettoyer_abos'), false, true)
@@ -440,4 +445,16 @@ function spiplistes_listes_select ($sql_select, $sql_where = "") {
 	return($result);
 }
 
-//
+/**
+ * @version CP-20080323
+ * @param string $texte
+ * @return string
+ */
+function spiplistes_fieldset_legend_detail ($texte = '') {
+	$result = '';
+	if(!empty($texte)) {
+		$result = ' <span class="spiplistes-legend-stitre">('.$texte.')</span>'
+			. PHP_EOL;
+	}
+	return ($result);
+}

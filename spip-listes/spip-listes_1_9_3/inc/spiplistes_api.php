@@ -118,6 +118,7 @@ function spiplistes_singulier_pluriel_str_get ($var, $str_sing, $str_plur, $retu
 
 /**
  * @version CP-20080508
+ * @return int
  */
 function spiplistes_sql_compter ($table, $sql_whereq) {
 	$sql_result = intval(sql_countsel($table, $sql_whereq));
@@ -375,6 +376,7 @@ function spiplistes_abonnements_supprimer ($sql_whereq) {
 /**
  * dans la table des abonnements
  * @version CP-20080508
+ * @return int
  */
 function spiplistes_abonnements_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_auteurs_listes", $sql_whereq));
@@ -746,6 +748,20 @@ function spiplistes_format_abo_suspendre ($id_auteur) {
 }
 
 /**
+ * compter les formats (les abonnes ayant de'fini un format)
+ * @version CP-20110529
+ * @return int
+ */
+function spiplistes_formats_compter ($sql_where) {
+	
+	$result = sql_fetsel('COUNT(id_auteur) as n', 'spip_auteurs_elargis', $sql_where);
+	if ($result) {
+		$result = $result['n'];
+	}
+	return ($result);
+}
+
+/**
  * supprimer le format d'un id_auteur
  * si $id_auteur == 'tous', supprimer tous les formats
  * @version CP-20090111
@@ -858,7 +874,7 @@ function spiplistes_format_abo_demande ($id_auteur) {
  * 	($idx == 'sql_where') string ligne sql_where formatee avec OR
  * @version CP-20090111
  * @param $idx string[optional]
- * @return string
+ * @return string|array
  */
 function spiplistes_formats_autorises ($idx = 'array') {
 	static $formats;

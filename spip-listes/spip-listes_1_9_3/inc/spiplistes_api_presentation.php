@@ -195,21 +195,6 @@ function spiplistes_form_fieldset_fin ($return = false) {
 
 /**
  * @version CP-20080323
- * @param string $texte
- * @param bool $return Retourne value si FALSE, sinon echo ()
- * @return string|null
- */
-function spiplistes_fieldset_legend_detail ($texte = '', $return = false) {
-	$result = "";
-	if(!empty($texte)) {
-		$result = " <span class='spiplistes-legend-stitre'>(".$texte.")</span>";
-	}
-	if($return) return($result);
-	else echo($result);
-}
-
-/**
- * @version CP-20080323
  * @param string $description
  * @param bool $return Retourne value si FALSE, sinon echo ()
  * @return string|null

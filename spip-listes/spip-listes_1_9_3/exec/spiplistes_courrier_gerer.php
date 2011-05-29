@@ -347,7 +347,7 @@ function exec_spiplistes_courrier_gerer () {
 		// Le courrier peut-etre modifie si en preparation 
 			$gros_bouton_modifier = "<!-- bouton modifier -->\n" .
 				icone (
-					_T('spiplistes:Modifier_ce_courrier') // legende bouton
+					_T('spiplistes:modifier_ce_courrier') // legende bouton
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIER_EDIT,'id_courrier='.$id_courrier) // lien
 					, spiplistes_items_get_item('icon', $statut) // image du fond
 					, "edit.gif" // image de la fonction. Ici, le crayon
@@ -405,9 +405,9 @@ function exec_spiplistes_courrier_gerer () {
 		// L'envoi d'un courrier en cours peut etre stoppe
 			$gros_bouton_arreter_envoi = 
 				icone (
-					_T('spiplistes:Arreter_envoi')
+					_T('spiplistes:arreter_envoi')
 					// si arreter envoi, passe la main a exec/spiplistes_courriers_casier
-					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, "btn_arreter_envoi=$id_courrier")
+					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE, 'btn_arreter_envoi='.$id_courrier)
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_redac-24.png"
 					, _DIR_PLUGIN_SPIPLISTES_IMG_PACK."stop-top-right-24.png"
 					, "right"
