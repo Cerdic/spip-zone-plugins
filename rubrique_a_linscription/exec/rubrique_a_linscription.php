@@ -10,6 +10,7 @@ function exec_rubrique_a_linscription_dist(){
 	echo $commencer_page(_T('rubrique_a_linscription:rubrique_a_linscription'),'configuration','configuration');
 	//echo barre_onglets('configuration','rubrique_a_linscription');
 	echo "<br /> <br />";
+	include_spip('inc/presentation');
 	echo gros_titre(_T('rubrique_a_linscription:rubrique_a_linscription'),'', false);
 	echo barre_onglets("configuration", "rubriquelinscription");
 
