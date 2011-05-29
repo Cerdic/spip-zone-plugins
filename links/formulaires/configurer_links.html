@@ -19,7 +19,7 @@
 			<legend>Apparence</legend>
 			<ul class="choix todo">
 				<li class="links_style_yes[ (#ENV**{erreurs}|table_valeur{style_yes}|oui)erreur]">
-					<label for="style_yes">Style par défaut</label>[
+					<label for="style_yes">Style par d&eacute;faut</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{style_yes})</span>
 					]<input type="radio" class="radio" name="style" id="style_yes"[(#ENV{links,style}|=={style_yes}|oui) checked="checked"] />
 					<p class="explication">Pour voir, affichez la page de test <code>?page=demo/links</code> ou mieux, ins&eacute;rez le mod&egrave;le <code>&lt;charte|links&gt;</code> dans un de vos articles. Pour toute personnalisation, compl&eacute;tez en CSS, dans votre feuille de style.</p>
@@ -51,7 +51,7 @@
 							<span class='erreur'>(#ENV**{erreurs}|table_valeur{download})</span>]
 							<ul>
 								<li class="links_doc_list[ (#ENV**{erreurs}|table_valeur{doc_list}|oui)erreur]">
-									<label for="download">Indiquer les extensions, séparées d'une virgule</label>[
+									<label for="download">Indiquer les extensions, s&eacute;par&eacute;es d'une virgule</label>[
 									<span class='erreur'>(#ENV**{erreurs}|table_valeur{doc_list})</span>
 									]<input type="text" class="text" name="doc_list" id="doc_list" value=".pdf,.doc,.xls" />
 								</li>
