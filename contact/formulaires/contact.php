@@ -276,6 +276,9 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 	$texte .= "\n\n "._T('envoi_via_le_site')." ".$nom_site." ( ".$GLOBALS['meta']['adresse_site']."/ ) \n";
 
 	// Texte a envoyer par mail, sans raccourcis SPIP
+	// On évite de couper les urls 
+	define('_MAX_LONG_URL',100000);
+	define('_MAX_COUPE_URL',100000);
 	$texte_final = propre($texte);
 	// Eviter que le facteur machouille les apostrophes
 	if ($GLOBALS['meta']['facteur_filtre_iso_8859']){
