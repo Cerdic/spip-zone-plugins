@@ -32,8 +32,8 @@ xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
 		<geo_long>#LONX</geo_long>
 		</BOUCLE_gis>
 		<BOUCLE_mp3(DOCUMENTS){id_article}{mode=document}{extension=mp3}{0,1}><enclosure url="[(#URL_DOCUMENT|url_absolue)]" length="#TAILLE" type="audio/mpeg" /></BOUCLE_mp3>
-		<BOUCLE_tags1(MOTS){id_article}{type=marker_icon}><geo_icon width="[(#LOGO_MOT_NORMAL||largeur)]" height="[(#LOGO_MOT_NORMAL||hauteur)]">[(#LOGO_MOT_NORMAL||extraire_attribut{src}|url_absolue)]</geo_icon></BOUCLE_tags1>
-		<BOUCLE_shadow(MOTS){id_article}{type=marker_icon}><geo_icon_shadow width="[(#LOGO_MOT_SURVOL||largeur)]" height="[(#LOGO_MOT_SURVOL||hauteur)]">[(#LOGO_MOT_SURVOL||extraire_attribut{src}|url_absolue)]</geo_icon_shadow></BOUCLE_shadow>
+		<BOUCLE_tags1(MOTS){id_article}{type=#ENV{marker_icon_name,marker_icon}}><geo_icon width="[(#LOGO_MOT_NORMAL||largeur)]" height="[(#LOGO_MOT_NORMAL||hauteur)]">[(#LOGO_MOT_NORMAL||extraire_attribut{src}|url_absolue)]</geo_icon></BOUCLE_tags1>
+		<BOUCLE_shadow(MOTS){id_article}{type=#ENV{marker_icon_name,marker_icon}}><geo_icon_shadow width="[(#LOGO_MOT_SURVOL||largeur)]" height="[(#LOGO_MOT_SURVOL||hauteur)]">[(#LOGO_MOT_SURVOL||extraire_attribut{src}|url_absolue)]</geo_icon_shadow></BOUCLE_shadow>
 		<B_tags><dc:subject><BOUCLE_tags(MOTS){id_article}>[(#TITRE|texte_backend)]</BOUCLE_tags></dc:subject></B_tags>
 		[<itunes:author>(#LESAUTEURS|supprimer_tags|texte_backend)</itunes:author>]
 		[<itunes:summary>(#DESCRIPTIF|supprimer_tags|texte_backend)</itunes:summary>]

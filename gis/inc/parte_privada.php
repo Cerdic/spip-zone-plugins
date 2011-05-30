@@ -75,8 +75,12 @@ function gis_cambiar_coord($id,$table,$exec) {
 	}
 	if ($glat!==NULL){
 		$resultMots = spip_query("SELECT * FROM spip_mots_{$table}s WHERE $pkey = ".intval($id));
+		$marker_icon_name = 'marker_icon';
+		if (isset($_GET['marker_icon_name'])) {
+			$marker_icon_name = $_GET['marker_icon_name'];
+		}
 		while ($rowMot = spip_fetch_array($resultMots)) {
-			$resultMotIcon = spip_query("SELECT * FROM spip_mots WHERE type ='marker_icon' AND id_mot=".$rowMot['id_mot']);
+			$resultMotIcon = spip_query("SELECT * FROM spip_mots WHERE type ='"._q($marker_icon_name)."' AND id_mot=".$rowMot['id_mot']);
 			if ($rowMotIcon = spip_fetch_array($resultMotIcon)){
 				if (file_exists("../IMG/"."moton".$rowMot['id_mot'].".png")) {
   				  	$gicon = "moton".$rowMot['id_mot'].".png";
