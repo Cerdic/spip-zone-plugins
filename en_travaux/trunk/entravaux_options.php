@@ -38,12 +38,11 @@ if (is_entravaux()){
 		}
 	}
 	else {
-		if (_request('exec')!='admin_plugin'
-		//		OR _request('action')!='activer_plugins'
+		if (!in_array(_request('action'),array('logout'))
 		){
 			if (!autoriser('travaux')){
 				spip_initialisation_suite();
-				$travaux = recuperer_fond("entravaux",array());
+				$travaux = recuperer_fond("inclure/entravaux",array());
 				// fallback : le fond renvoie parfois du vide ...
 				if (!strlen($travaux)){
 					@define('_SPIP_SCRIPT','spip.php');
@@ -78,7 +77,7 @@ function entravaux_styliser($flux){
 			      'spip_pass','formulaires/oubli','formulaires/mot_de_passe',
 			      )
 			    )){
-			$fond = trouver_fond('entravaux','',true);
+			$fond = trouver_fond('inclure/entravaux','',true);
 			$flux['data'] = $fond['fond'];
 		}
 	}
@@ -111,6 +110,25 @@ function entravaux_affichage_final($flux){
 		if (!$pos = strpos($flux, '</body>'))
 			$pos = strlen($flux);
 		$flux = substr_replace($flux, $x, $pos, 0);
+	}
+	return $flux;
+}
+
+/**
+ * Afficher une notice sur l'accueil de ecrire
+ * @param array $flux
+ * @return array
+ */
+function entravaux_affiche_milieu($flux){
+	if (is_entravaux()){
+		if ($flux['args']['exec']=='accueil'){
+			$notice = recuperer_fond('inclure/entravaux_notice_ecrire',array());
+			if (strlen(trim($notice)))
+				$flux['data'] =  $notice . $flux['data'];
+		}
+	}
+	if ($flux['args']['exec']=='configurer_identite'){
+		$flux['data'] .= recuperer_fond('prive/squelettes/contenu/configurer_entravaux',array());
 	}
 	return $flux;
 }

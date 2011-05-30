@@ -28,6 +28,9 @@
 	<pipeline>
 		<nom>affichage_final</nom>
 	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+	</pipeline>
 	<necessite id="SPIP" version="[3.0.0-dev;3.0.*]" />
 	<categorie>maintenance</categorie>
 </plugin>

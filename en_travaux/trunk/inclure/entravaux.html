@@ -15,7 +15,12 @@ body { background: #fff url(#CHEMIN{entravaux-bg.gif}); text-align: left; font: 
 	<div id="minipres">
 		<h1><:info_travaux_titre:></h1>
 		[(#CONFIG{entravaux_message,<:entravaux:info_travaux_texte:>}|propre)]
+		[(#SESSION{id_auteur}|non)
 		<p class="retour">&#91;<a href="#URL_PAGE{login_sos}"><:lien_connecter:></a>&#93;</p>
+		]
+		[(#SESSION{id_auteur}|oui)
+		<p class="retour">&#91;<a href="#URL_ECRIRE{accueil}"><:espace_prive:></a>&#93; &#91;<a href="#URL_LOGOUT"><:icone_deconnecter:></a>&#93;</p>
+		]
 	</div>
 </body>
 </html>
