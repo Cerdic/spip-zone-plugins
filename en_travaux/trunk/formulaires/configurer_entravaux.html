@@ -14,7 +14,7 @@
 			<li class="editer_id_auteur pleine_largeur">
 				<div class="choix">
 					<input type="checkbox" name="id_auteur"[ (#ENV{id_auteur}|?{checked="checked"})] id="id_auteur" value="#SESSION{id_auteur}"
-					onchange="if ($(this).attr('checked')) $(this).closest('li').next().show('fast'); else $(this).closest('li').next().hide('fast');" />
+					onchange="if ($(this).attr('checked')) $(this).closest('li').next().show('fast').next().hide('fast'); else $(this).closest('li').next().hide('fast').next().show('fast');" />
 					<label for="id_auteur"><:entravaux:activer_message:></label>
 				</div>
 			</li>
@@ -22,6 +22,12 @@
 				<label for='message'><:entravaux:message_temporaire:></label>
 				<textarea name='message' id='message'>[(#ENV{message,<:entravaux:info_travaux_texte:>})]
 </textarea>
+			</li>
+			<li class="editer_disallow_robots pleine_largeur[(#ENV{id_auteur}|oui)none]">
+				<div class="choix">
+					<input type="checkbox" name="disallow_robots"[ (#ENV{disallow_robots}|?{checked="checked"})] id="disallow_robots" />
+					<label for="disallow_robots"><:entravaux:label_disallow_robots:></label>
+				</div>
 			</li>
 		</ul>
 		<p class="boutons">

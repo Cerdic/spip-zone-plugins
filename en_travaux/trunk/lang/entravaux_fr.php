@@ -5,7 +5,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_message' => 'Activer la maintenance',
 
-'erreur_droit' => 'Vous devez &ecirc;tre Webmestre pour utiliser le plugin En Travaux !',
+'erreur_droit' => 'Vous devez être Webmestre pour utiliser le plugin En Travaux !',
 
 'en_travaux' => 'En travaux',
 'info_travaux_texte' => 'Ce site est actuellement en travaux.
@@ -13,7 +13,8 @@ _ Revenez plus tard.',
 'info_message' => 'Cette page permet de mettre un message temporaire sur toute les pages du site pendant une phase de maintenance.',
 
 'message_temporaire' => 'Votre message temporaire :',
-'parametrage_page_travaux' => 'Param&eacute;trage de la page temporaire',
-'info_maintenance_en_cours' => 'Maintenance en cours !'
+'parametrage_page_travaux' => 'Paramétrage de la page temporaire',
+'info_maintenance_en_cours' => 'Maintenance en cours !',
+'label_disallow_robots' => 'Protéger le site contre les robots et moteur de recherche',
 );
 ?>

@@ -74,6 +74,7 @@ function entravaux_styliser($flux){
 				    $flux['args']['fond'],
 						// les exceptions
 			      array('login_sos','formulaires/login','formulaires/menu_lang','formulaires/inc-logo_auteur','formulaires/administration',
+				    'robots.txt',
 			      'spip_pass','formulaires/oubli','formulaires/mot_de_passe',
 			      )
 			    )){
