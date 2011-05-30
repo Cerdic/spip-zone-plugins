@@ -8,7 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_droit' => 'Nur Webmaster k&oum;nen das Plugin Wartung benutzen!',
 
 'en_travaux' => 'Wartung',
-'info_travaux_texte' => 'Diese Website wird gerade gewartet.<br /> Bitte schauen sie sp&auml;ter wieder vorbei.',
+'info_travaux_texte' => 'Diese Website wird gerade gewartet.
+_ Bitte schauen sie sp&auml;ter wieder vorbei.',
 'info_message' => 'Diese Seite erm&ouml;glicht einen Wartungshinweis anstelle der Website anzuzeigen.',
 
 'message_temporaire' => 'Der Text ihrer Wartungsmeldung:',

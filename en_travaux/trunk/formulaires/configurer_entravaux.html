@@ -1,0 +1,31 @@
+[(#ENV{id_auteur}|oui)
+<p class="notice"><:entravaux:info_maintenance_en_cours:></p>
+]
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		<input type="hidden" name="_meta_casier" value="" />
+		<input type="hidden" name="_meta_prefixe" value="entravaux" />
+		#ACTION_FORMULAIRE{SELF}
+		<ul>
+			<li class="editer_id_auteur pleine_largeur">
+				<div class="choix">
+					<input type="checkbox" name="id_auteur"[ (#ENV{id_auteur}|?{checked="checked"})] id="id_auteur" value="#SESSION{id_auteur}"
+					onchange="if ($(this).attr('checked')) $(this).closest('li').next().show('fast'); else $(this).closest('li').next().hide('fast');" />
+					<label for="id_auteur"><:entravaux:activer_message:></label>
+				</div>
+			</li>
+			<li class="editer_message pleine_largeur[(#ENV{id_auteur}|non)none]">
+				<label for='message'><:entravaux:message_temporaire:></label>
+				<textarea name='message' id='message'>[(#ENV{message,<:entravaux:info_travaux_texte:>})]
+</textarea>
+			</li>
+		</ul>
+		<p class="boutons">
+			<input type="submit" value="<:bouton_enregistrer:>" class="submit" />
+		</p>
+	</div></form>
+</div>

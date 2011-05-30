@@ -8,7 +8,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_droit' => 'Debe ser Webmaster para usar el plugin En Obras!',
 
 'en_travaux' => 'En obras',
-'info_travaux_texte' => 'Este sitio se encuentra actualmente en obras.<br /> Por favor regrese m&aacute;s tarde.',
+'info_travaux_texte' => 'Este sitio se encuentra actualmente en obras.
+_ Por favor regrese m&aacute;s tarde.',
 'info_message' => 'Esta p&aacute;gina permite dejar un mensaje temporal en todas las p&aacute;ginas del sitio durante una fase de mantenimiento.',
 
 'message_temporaire' => 'Su mensaje temporal:',

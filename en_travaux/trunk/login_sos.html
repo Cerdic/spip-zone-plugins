@@ -19,7 +19,7 @@ body { background: #fff url(#CHEMIN{en_travaux-bg.gif}); text-align: left; font:
 #minipres { width: 30em; margin: 26px; margin-left: 100px; }
 #minipres h1 { font-size: 1.1em; color: #970038; font-weight: bold; }
 </style>
-[(#REM|f_jQuery)]
+#INSERT_HEAD
 <script type='text/javascript'><!--
 jQuery(function(){ jQuery('input#var_login').focus();
 jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=330'); return false;});
@@ -28,20 +28,21 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 </head>
 <body class="page_login" >
 <div id="minipres">
+	<h1>#NOM_SITE_SPIP</h1>
 	[(#REM)
 		Est-ce qu'on se connecte a l'espace prive ou pas ?
+	][
+	(#ENV**{url}|non
+	|ou{[(#ENV**{url}|match{^(/.*/)?#EVAL{_DIR_RESTREINT_ABS}})]})
+	<h1><:login_acces_prive:></h1>
 	]
-	[(#ENV{url}|=={''}|?{#SET{prive,' '}})]
-	[(#ENV{url}|match{^#EVAL{_DIR_RESTREINT_ABS}}|?{#SET{prive,' '}})]
-	[(#GET{prive}) <h1><:login_acces_prive:></h1>]
-	
 	#MENU_LANG_ECRIRE
 
 	[(#SESSION{statut}|oui)
 		<a href="#ENV{url,./}"><:login_par_ici:></a>
 	]
 	[(#SESSION{statut}|non)
-	[(#FORMULAIRE_LOGIN{#ENV{url,.*}|sinon{#URL_ECRIRE{accueil}}})]
+		[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
 	]
 	<p class="retour">
 		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]

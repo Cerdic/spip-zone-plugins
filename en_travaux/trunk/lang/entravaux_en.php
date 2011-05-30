@@ -5,7 +5,8 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'activer_message' => 'Activate maintenance mode',
 'en_travaux' => 'Under construction',
-'info_travaux_texte' => 'This site now under construction.<br /> Please come back later...',
+'info_travaux_texte' => 'This site now under construction.
+_ Please come back later...',
 'parametrage_page_travaux' => 'Settings for your maintenance page',
 'info_message' => 'This page lets you set up a temporary message which will be displayed on all the pages of your site during a maintenance period.',
 'message_temporaire' => 'Your temporary message:',
