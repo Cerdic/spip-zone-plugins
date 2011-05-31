@@ -271,7 +271,8 @@ function spiplistes_meleuse ($last_time) {
 				list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
 					_SPIPLISTES_PATRONS_TETE_DIR . $lien_patron
 					, array('id_courrier' => $id_courrier
-							, 'lang' => $lang)
+							, 'lang' => $lang
+							, 'titre' => $objet_html)
 					);
 				$page_html = $lien_html . $page_html;
 				$page_texte = $lien_texte . $page_texte;
