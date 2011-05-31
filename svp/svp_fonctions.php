@@ -20,10 +20,12 @@ function svp_afficher_intervalle($intervalle, $logiciel){
 	return $version;
 }
 
+
 function svp_afficher_etat($etat) {
 	include_spip('plugins/afficher_plugin');
 	return plugin_etat_en_clair($etat);
 }
+
 
 function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $sep='<br />'){
 	$texte = '';
@@ -50,14 +52,37 @@ function svp_afficher_dependances($balise_serialisee, $dependance='necessite', $
 	return $texte;
 }
 
+
+function svp_afficher_credits($balise_serialisee, $sep=', ') {
+	$texte = '';
+	
+	$credits = unserialize($balise_serialisee);
+	if ($credits) {
+		foreach ($credits as $_credit) {
+			if ($texte) 
+				$texte .= $sep;
+			// Si le credit en cour n'est pas un array c'est donc un copyright
+			$texte .= 
+				(!is_array($_credit)) 
+				? $_credit 
+				: ($_credit['url'] ? '<a href="' . $_credit['url'] . '">' : '') . 
+				  $_credit['nom'] .
+				  ($_credit['url'] ? '</a>' : '');
+		}
+	}
+
+	return $texte;
+}
+
+
 function svp_afficher_langues($langues, $sep=', '){
 	$texte = '';
 	
 	if ($langues) {
-	foreach ($langues as $_code => $_traducteurs) {
-		if ($texte) 
-			$texte .= $sep;
-		$texte .= $_code . (count($_traducteurs) > 0 ? ' (' . implode(', ', $_traducteurs) . ')' : '');
+		foreach ($langues as $_code => $_traducteurs) {
+			if ($texte) 
+				$texte .= $sep;
+			$texte .= $_code . (count($_traducteurs) > 0 ? ' (' . implode(', ', $_traducteurs) . ')' : '');
 		}
 	}
 
@@ -70,14 +95,14 @@ function svp_afficher_voirenligne($id_depot) {
 }
 
 
-function svp_extraire_url($lien) {
-
-	if (!preg_match(_RACCOURCI_LIEN, $lien, $matches))
-		return trim($lien);
-	else
-		return trim($matches[4]);
-}
-
+// function svp_extraire_url($lien) {
+// 
+// 	if (!preg_match(_RACCOURCI_LIEN, $lien, $matches))
+// 		return trim($lien);
+// 	else
+// 		return trim($matches[4]);
+// }
+// 
 function svp_afficher_statistiques_globales($id_depot){
 	$info = '';
 

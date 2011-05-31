@@ -549,17 +549,20 @@ function eclater_plugin_paquet($champs_aplat) {
 			'logo' => $champs_aplat['logo'],
 			'description' => $champs_aplat['description'],
 			'auteur' => $champs_aplat['auteur'],
+			'credit' => $champs_aplat['credit'],
 			'version' => $champs_aplat['version'],
 			'version_base' => $champs_aplat['version_base'],
 			'compatibilite_spip' => $champs_aplat['compatibilite_spip'],
 			'etat' => $champs_aplat['etat'],
 			'etatnum' => $champs_aplat['etatnum'],
 			'licence' => $champs_aplat['licence'],
-			'lien' => $champs_aplat['lien'],
+			'copyright' => $champs_aplat['copyright'],
+			'lien_doc' => $champs_aplat['lien_doc'],
+			'lien_demo' => $champs_aplat['lien_demo'],
+			'lien_dev' => $champs_aplat['lien_dev'],
 			'dependances' => $champs_aplat['dependances'])
 	);
 }
-
 
 
 // ----------------------- Traitements des stats ---------------------------------

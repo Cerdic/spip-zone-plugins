@@ -16,8 +16,8 @@
 		<div class="unit size10">#VERSION</div>
 		<div class="unit size25">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{&nbsp;})]</div>
 		<div class="unit size5 lastUnit">
-		[(#LIEN*|svp_extraire_url|?{
-			<a[ href="(#LIEN*|svp_extraire_url)"] title="<:svp:bulle_aller_documentation:>">
+		[(#LIEN_DOC|?{
+			<a[ href="(#LIEN_DOC)"] title="<:svp:bulle_aller_documentation:>">
 				<strong>?</strong>
 			</a>,
 			&nbsp;})]

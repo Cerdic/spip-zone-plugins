@@ -58,8 +58,12 @@ function svp_declarer_tables_principales($tables_principales) {
 		"compatibilite_spip"	=> "varchar(24) DEFAULT '' NOT NULL",
 		"description"	=> "text DEFAULT '' NOT NULL",
 		"auteur"		=> "text DEFAULT '' NOT NULL",
+		"credit"		=> "text DEFAULT '' NOT NULL",
 		"licence"		=> "text DEFAULT '' NOT NULL",
-		"lien"			=> "text DEFAULT '' NOT NULL", // lien vers la documentation
+		"copyright"		=> "text DEFAULT '' NOT NULL",
+		"lien_doc"		=> "text DEFAULT '' NOT NULL", // lien vers la documentation
+		"lien_demo"		=> "text DEFAULT '' NOT NULL", // lien vers le site de demo
+		"lien_dev"		=> "text DEFAULT '' NOT NULL", // lien vers le site de dev
 		"etat"			=> "varchar(16) DEFAULT '' NOT NULL",
 		"etatnum"		=> "int(1) DEFAULT 0 NOT NULL", // 0 aucune indication - 1 exp - 2 dev - 3 test - 4 stable
 		"dependances"	=> "text DEFAULT '' NOT NULL",
@@ -114,7 +118,6 @@ function svp_declarer_tables_interfaces($interface) {
 	$interface['table_des_traitements']['SLOGAN']['plugins'] = _TRAITEMENT_RACCOURCIS;	
 	// - table spip_paquets
 	$interface['table_des_traitements']['DESCRIPTION']['paquets'] = _TRAITEMENT_RACCOURCIS;	
-	$interface['table_des_traitements']['LIEN']['paquets'] = _TRAITEMENT_RACCOURCIS;	
 	
 	// Les jointures
 	// -- Entre spip_depots et spip_plugins
