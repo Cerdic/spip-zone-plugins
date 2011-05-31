@@ -47,8 +47,22 @@ function formulaires_formidable_charger($id_formulaire, $valeurs=array(), $id_fo
 			$contexte['_hidden'] = '<input type="hidden" name="id_formulaire" value="'.$contexte['id'].'"/>';
 			
 			// S'il y a des valeurs par défaut dans l'appel, alors on pré-remplit
-			if ($valeurs and is_array($valeurs)){
-				$contexte = array_merge($contexte, $valeurs);
+			if ($valeurs){
+				// Si c'est une chaine on essaye de la parser
+				if (is_string($valeurs)){
+					$liste = explode(',', $valeurs);
+					$liste = array_map('trim', $liste);
+					$valeurs = array();
+					foreach ($liste as $i=>$cle_ou_valeur){
+						if ($i % 2 == 0)
+							$valeurs[$liste[$i]] = $liste[$i+1];
+					}
+				}
+				
+				// On regarde si maintenant on a un tableau
+				if ($valeurs and is_array($valeurs)){
+					$contexte = array_merge($contexte, $valeurs);
+				}
 			}
 
 			// Si on passe un identifiant de reponse, on edite cette reponse si elle existe
