@@ -14,7 +14,7 @@
 ]<B_doc>
 <select id=geodoc onchange="location.href = '[(#SELF|parametre_url{exec,geodocuments_edit}|parametre_url{id_document,''})]&id_document='+this.value;" NAME="geodoc">(this.value)" style="margin:0 1em; ">
 	<option value=0 ><:geoportail:geo_document:></option>
-	<BOUCLE_doc(DOCUMENTS){id_article=#ID_ARTICLE}>
+	<BOUCLE_doc(DOCUMENTS){id_article=#ID_ARTICLE}{tout}>
 	<option value="#ID_DOCUMENT" >[(#TITRE|couper{20}|sinon{<:spip:info_document:> #ID_DOCUMENT}) ]
 	[((#EXTENSION|sinon{[(#FICHIER|substr{-3})]}))]
 	</option>

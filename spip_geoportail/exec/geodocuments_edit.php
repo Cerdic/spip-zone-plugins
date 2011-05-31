@@ -43,6 +43,7 @@ function exec_geodocuments_edit_dist()
 
 	echo $commencer_page(_T('spip:info_document', array('titre' => $titre)), "naviguer", "documents", $id_document);
 	
+	// Colonne de gauche
 	echo debut_gauche("",true);
 	echo debut_boite_info(true)
 		."\n<div style='font-weight: bold; text-align: center' class='verdana1 spip_xx-small'>"
@@ -52,13 +53,12 @@ function exec_geodocuments_edit_dist()
 		.'</span></div>'
 		.fin_boite_info(true);
 
-	// Ne pas afficher les liens
-	$GLOBALS['doublons_documents_inclus'][]=$id_document;
+	// Document en cours d'edition
+	$GLOBALS['doublons_documents_inclus'][]=$id_document;	// Ne pas afficher les liens
 	echo afficher_case_document ($id_document, $id_article?$id_article:$id_rubrique, 'geodocuments_edit', $id_article?'article':'rubrique', false);
-/*	$doc[]=$document;
-	echo documenter_boucle ($doc, $id_article?$id_article:$id_rubrique, '', $aut, $id_article?'article':'rubrique', false);
-*/
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'geodocuments_edit','id_document'=>$id_document),'data'=>''));
+	
+	// Colonne de droite (bloc de raccourcis)
 	if ($id_article) 
 	{	$rac = icone_horizontale(_T('ecrire:icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article#access-l"), "article-24.gif", "rien.gif",false);
 		$rac .= recuperer_fond ('fonds/geoportail_article_docs', array('id_article' => $id_article) );
