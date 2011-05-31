@@ -107,7 +107,7 @@ function entravaux_affichage_final($flux){
 		left: 26px;
 		top: 26px;
 		">'
-		. http_img_pack(chemin_image('entravaux-64.png'), _T('entravaux:en_travaux'), '')
+		. http_img_pack(chemin_image('entravaux-64.png'), _T('entravaux:en_travaux'), _T('entravaux:en_travaux'))
 		. '</div>';
 		if (!$pos = strpos($flux, '</body>'))
 			$pos = strlen($flux);
