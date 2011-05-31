@@ -50,11 +50,14 @@ function action_modifier_relances() {
 			if (!$envoyer_mail($email, $sujet, $message, $exp)) {
 				$emails_envoyes_echec++;
 				spip_log("non envoi du mail a ".$email);
-			} elseif ($statut_tab[$id]=="echu") {
+			} else {
 				$emails_envoyes_ok++;
-				sql_updateq('spip_asso_membres', 
-					array("statut_interne"=> 'relance'),
-					"id_auteur=$id_auteur");
+				if ($statut_tab[$id_auteur]=="echu")
+					{
+					sql_updateq('spip_asso_membres', 
+						array("statut_interne"=> 'relance'),
+						"id_auteur=$id_auteur");
+					}
 			}
 		}
 	}
