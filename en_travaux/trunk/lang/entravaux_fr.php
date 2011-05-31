@@ -17,5 +17,6 @@ _ Revenez plus tard.',
 'info_maintenance_en_cours' => 'Le site est en maintenance ! Seuls les webmestres du site peuvent voir le site public et accèder à l\'espace privé.',
 'texte_lien_publier' => 'Rendre le site public',
 'label_disallow_robots' => 'Protéger le site contre les robots et moteur de recherche',
+'info_disallow_robot' => 'Votre site est protégé contre les robots et moteur de recherche pendant la maintenance.',
 );
 ?>

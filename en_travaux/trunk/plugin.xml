@@ -11,7 +11,7 @@
 	<licence>GPL</licence>
 	<version>3.0.0</version>
 	<version_base>0.1.0</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description><multi>
 	[fr] &Agrave; activer avant une phase de maintenance, ce plugin affiche aussit&ocirc;t une page d'avertissement, <strong>&agrave; la place</strong> du site public.
 	_ Attention : seul le webmestre acc&eacute;de encore &agrave; l'espace priv&eacute; et au site public.
