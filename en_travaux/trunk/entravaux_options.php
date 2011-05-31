@@ -71,12 +71,14 @@ function entravaux_styliser($flux){
 		if (!autoriser('travaux')
 			AND !in_array(
 				    $flux['args']['fond'],
-						// les exceptions
-			      array('login_sos','formulaires/login','formulaires/menu_lang','formulaires/inc-logo_auteur','formulaires/administration',
-				    'robots.txt',
-			      'spip_pass','formulaires/oubli','formulaires/mot_de_passe',
+						// les pages exceptions
+			      array('login_sos','robots.txt','spip_pass',
 			      )
-			    )){
+			    )
+			// et on laisse passer modeles et formulaires,
+			// qui ne peuvent etre inclus ou appeles que legitimement
+		  AND strncmp($flux['args']['fond'],'modeles/',8)!=0
+		  AND strncmp($flux['args']['fond'],'formulaires/',12)!=0){
 			$fond = trouver_fond('inclure/entravaux','',true);
 			$flux['data'] = $fond['fond'];
 		}
