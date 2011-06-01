@@ -44,7 +44,7 @@ function edition_directe_afficher_contenu_objet($flux){
 
     $type = $flux['args']['type'];
 	// objet rubrique
-	if ($type=='rubrique'AND lire_config('edition_directe/rubrique')){
+	if ($type=='rubrique' AND lire_config('edition_directe/rubrique')){
 	
 	$id_rubrique= _request('id_rubrique');
 	if($id_rubrique){
@@ -57,12 +57,11 @@ function edition_directe_afficher_contenu_objet($flux){
 			'config_fonc'=>'rubriques_edit_config',
 			);
 	
-		 
 		 $flux['data']=recuperer_fond("prive/editer/rubrique_mod", $contexte);
 		 }
 	
 	}
-	if ($type=='breve'AND lire_config('edition_directe/breve')){
+	if ($type=='breve' AND lire_config('edition_directe/breve')){
 	$id_breve= _request('id_breve');
 		if($id_breve){
 			$contexte = array(
@@ -71,13 +70,28 @@ function edition_directe_afficher_contenu_objet($flux){
 			'id_rubrique'=>$id_rubrique,
 			'config_fonc'=>'breves_edit_config'
 			);
-		
-		
-			 
+ 
 			 $flux['data']=recuperer_fond("prive/editer/breve", $contexte);
 			 }
 	
-	}	
+	}
+		
+	if ($type=='site' AND lire_config('edition_directe/site')){
+	
+	$id_syndic= _request('id_syndic');
+		if($id_syndic){
+			$contexte = array(
+			'redirect'=>generer_url_ecrire("sites"),
+			'new'=>$id_syndic,
+			'id_rubrique'=>$id_rubrique,
+			'config_fonc'=>'sites_edit_config'
+			);
+		
+			$flux['data']=recuperer_fond("prive/editer/site_mod", $contexte);
+			 }
+	
+	}		
+		
 	return $flux;
 }
 
