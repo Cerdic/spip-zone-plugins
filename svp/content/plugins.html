@@ -1,6 +1,6 @@
 [(#REM)
 	Partie contenu de la page affichant :
-	- la liste simplifiee de tous les depots (pas d'id_depot)
+	- la liste simplifiee de tous les plugins ou d'un sous-ensemble filtre
 ]
 
 [(#REM) Fil d'Ariane ]
@@ -14,7 +14,7 @@
 <div class="cartouche">
 	<h1 class="h1"><:svp:titre_page_plugins:></h1>
 	[<p class="info-publi">
-		<small>(#ENV{id_depot}|svp_compter_plugins{#ENV{categorie}})</small>
+		<small>(#ENV{id_depot}|svp_compter_plugins{#ENV{categorie}, #ENV{compatible_spip}})</small>
 	</p>]
 </div>
 <br class="nettoyeur" />

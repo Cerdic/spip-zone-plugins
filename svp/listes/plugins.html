@@ -1,9 +1,32 @@
-[(#ENV{categorie}|non)
-	[(#SVP_CATEGORIES|iterer_modele{
-		liste-plugins-categorie, 
-		id_depot=#ENV{id_depot}})]
-]
-
+#SET{filtre_categorie, #ARRAY}
 [(#ENV{categorie}|oui)
-	<INCLURE{fond=modeles/liste-plugins-categorie}{env}{id_depot}{categorie} />
+	#SET{filtre_categorie, #GET{filtre_categorie}|push{#ENV{categorie}}}
 ]
+<BOUCLE_branches(DATA){source table, #GET{filtre_categorie}|sinon{#CONFIG*{svp_categories}}}>
+	<B_plugins>
+	<table class="spip" summary="" style="width: 100%;">
+		<thead>
+			<tr id="categorie[-(#VALEUR|sinon{aucune})]">
+				<th>
+					<strong>[(#VALEUR|sinon{aucune}|svp_traduire_categorie)]</strong>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+	<BOUCLE_plugins(PLUGINS){categorie=#VALEUR}{id_depot?}{compatible_spip?}{par multi nom}>
+			<tr id="plugin[-(#ID_DEPOT)]-#PREFIXE" class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+				<td>
+					<a[ href="(#URL_PLUGIN)"] title="<:svp:bulle_aller_plugin:>">[(#NOM)]</a>
+					[<br /> (#SLOGAN|supprimer_tags|PtoBR)]
+				</td>
+			</tr>
+	</BOUCLE_plugins>
+		</tbody>
+	</table>
+	<br class="nettoyeur" />
+	</B_plugins>
+	[(#ENV{categorie}|oui)
+	<p><:svp:info_aucun_plugin_disponible:></p>
+	]
+	<//B_plugins>
+</BOUCLE_branches>
