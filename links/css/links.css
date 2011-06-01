@@ -46,6 +46,7 @@ a.feed { padding-right: 13px; background-image: url(img/feed.gif); }
 a.spip_glossaire { padding-right: 13px; background-image: url(img/glossaire.gif); }
 
 /* Documents a telecharger */
+a.spip_doc { padding-right: 13px; background-image: url(img/spip_doc.gif); }
 a.download { padding-right: 13px; background-image: url(img/download.gif); }
 
 a[href$=".pdf"], a[href$=".PDF"],
