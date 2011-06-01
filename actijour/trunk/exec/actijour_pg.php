@@ -261,7 +261,7 @@ Visites et Nbr articles /j. sur les 8 derniers jours + moyenne.
 /*---------------------------------------------------------------------------*\
 Affichage des referers du jour (orig. spip inc/statistiques)
 \*---------------------------------------------------------------------------*/
-	$m[4] = liste_referers_jour('jour');
+	$m[4] = liste_referers_jour($date_auj);
 
 	#
 	# affichage des blocs ordonnes $m

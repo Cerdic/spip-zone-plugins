@@ -164,7 +164,7 @@ Visites du jour par secteur/rubrique
 /*---------------------------------------------------------------------------*\
 Affichage des referers du jour (orig. spip inc/statistiques)
 \*---------------------------------------------------------------------------*/
-	echo liste_referers_jour('veille');
+	echo liste_referers_jour($date_jour);
 
 
 # retour haut de page
