@@ -531,7 +531,7 @@ function liste_referers_jour($jour) {
 	
 	$q = sql_select("referer, visites_jour AS vis 
 					FROM spip_referers 
-					WHERE visites_jour>0 
+					WHERE date = \"$jour\"
 					ORDER BY visites_jour 
 					DESC 
 					LIMIT $limit");
