@@ -208,6 +208,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	static $memo;
 	if (!isset($memo)) {
+		include_spip('inc/memoization');
 		$cfg = @unserialize($GLOBALS['meta']['memoization']);
 		$memo = new MCache($cfg['pages'] ? $cfg['pages'] : $cfg['methode']);
 	}
