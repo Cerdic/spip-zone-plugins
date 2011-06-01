@@ -7,7 +7,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Cette fonction est appelee par le critere {compatible_spip}
  * @return 
  */
-function inc_svp_lister_compatibles($version, $table, $pkey) {
+function inc_svp_lister_compatibles($version, $table, $pkey, $type_retour='liste') {
 
 	// version explicite dans l'appel du critere
 	// mais inexistante (#GET{vers} non declare par exemple)
@@ -25,7 +25,7 @@ function inc_svp_lister_compatibles($version, $table, $pkey) {
 		}
 	}
 
-	return implode($result, ',');
+	return ($type_retour=='liste') ? implode($result, ',') : $result;
 }
 
 ?>
