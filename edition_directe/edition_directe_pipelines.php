@@ -8,7 +8,7 @@ function edition_directe_header_prive($flux){
 /*Modifie l'affichage de l'article dans l'espace interne*/
  function edition_directe_afficher_fiche_objet($flux){
     $type = $flux['args']['type'];
-
+echo 'type'.$type;
     
 	// objet article
    if ($type=='article'AND lire_config('edition_directe/article')){
@@ -61,6 +61,8 @@ function edition_directe_afficher_contenu_objet($flux){
 		 }
 	
 	}
+	
+	// objet breve
 	if ($type=='breve' AND lire_config('edition_directe/breve')){
 	$id_breve= _request('id_breve');
 		if($id_breve){
@@ -76,6 +78,7 @@ function edition_directe_afficher_contenu_objet($flux){
 	
 	}
 		
+	//objet site	
 	if ($type=='site' AND lire_config('edition_directe/site')){
 	
 	$id_syndic= _request('id_syndic');
@@ -114,4 +117,12 @@ function edition_directe_affiche_gauche($flux){
 return $flux;
 }
 
+// affichage du formulaire de téléchargement des docs
+function edition_directe_exec_init($flux){
+	$exec= $flux['args']['exec'];
+	
+echo serialize($flux);		
+
+return $flux;
+}
 ?>
