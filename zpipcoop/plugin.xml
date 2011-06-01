@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Zpipcoop</nom>
-	<auteur>Pierre KUHN, Valéry-Xavier Lentz, Teddy Payet
-	&copy; 2010</auteur>
+	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Valéry-Xavier Lentz, Teddy Payet
+	&copy; 2010 - 2011</auteur>
 	<icon></icon>
 	<licence>GPL</licence>
 	<version>0.5</version>
