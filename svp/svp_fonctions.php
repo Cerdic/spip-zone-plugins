@@ -315,7 +315,7 @@ function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 	if (isset($crit->param[0][0])) {
 		$version = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
 		$boucle->hash .= '
-		$where = sql_in(\''.$boucle->primary.'\', $liste_compat('.$version.', \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\');
+		$where = sql_in(\''.$boucle->id_table.'.'.$boucle->primary.'\', $liste_compat('.$version.', \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\');
 		';
 	}
 	// pas de version explicite dans l'appel du critere
@@ -323,7 +323,7 @@ function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 	else {
 		$boucle->hash .= '
 		$where = isset($Pile[0][\'compatible_spip\']) ?
-			sql_in(\''.$boucle->primary.'\', $liste_compat($Pile[0][\'compatible_spip\'], \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\')
+			sql_in(\''.$boucle->id_table.'.'.$boucle->primary.'\', $liste_compat($Pile[0][\'compatible_spip\'], \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\')
 			:
 			\'1=1\';
 		';
