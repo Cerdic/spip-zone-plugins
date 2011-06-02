@@ -1,0 +1,20 @@
+<plugin>
+<nom>FancyBox</nom>
+<etat>stable</etat>
+<version>1.3.4</version>
+<auteur>Dominique Wojylac</auteur>
+<description>FancyBox pour jquery http://fancybox.net/</description>
+<prefix>jq_fancybox</prefix>
+<pipeline>
+	<nom>header_prive</nom>
+	<action>inclurejs_css</action>
+	<inclure>jq_fancybox.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head</nom>
+	<action>inclurejs_css</action>
+	<inclure>jq_fancybox.php</inclure>
+</pipeline>
+<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+</plugin>
