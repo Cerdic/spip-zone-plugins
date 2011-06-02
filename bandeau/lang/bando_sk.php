@@ -22,10 +22,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_visiter_site' => 'Visit', # MODIF
 
 	// L
-	'label_adresses_secondaires' => 'Adresses ALIAS du site public', # NEW
-	'label_bando_outils' => 'Barre d\'outils', # NEW
-	'label_bando_outils_afficher' => 'Afficher les outils', # NEW
-	'label_bando_outils_masquer' => 'Masquer les outils', # NEW
+	'label_adresses_secondaires' => 'Adresy ALIASOV na verejnú stránku',
+	'label_bando_outils' => 'Panel s nástrojmi',
+	'label_bando_outils_afficher' => 'Zobraziť nástroje',
+	'label_bando_outils_masquer' => 'Schovať nástroje',
 	'label_choix_langue' => 'Manage your language ', # MODIF
 	'label_slogan_site' => 'Slogan', # MODIF
 	'label_taille_ecran' => 'Display', # MODIF
@@ -33,12 +33,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_texte_et_icones_page' => 'Page display', # MODIF
 
 	// T
-	'texte_redirection_adresses_secondaires' => 'Les Alias sont des URL alternatives qui permettent aussi d\'acc&egrave;der à votre site.
-		Ces adresses seront redirig&eacute;es automatiquement vers l\'adresse principale. Indiquez une adresse par ligne', # NEW
+	'texte_redirection_adresses_secondaires' => 'Adresy ALIASOV sú alternatívne adresy, ktoré môžete použiť na prístup na svoju stránku.
+  Tieto adresy budú automaticky presmerované na vašu hlavnú adresu. Na každý riadok zadajte jednu adresu ',
 	'titre_config_langage' => 'Configurer la langue', # MODIF
 	'titre_configurer_preferences' => 'Configure your preferences',
 	'titre_identite_site' => 'Site\'s identity',
-	'titre_infos_perso' => 'Mes informations personnelles' # NEW
+	'titre_infos_perso' => 'Moje osobné údaje'
 );
 
 ?>
