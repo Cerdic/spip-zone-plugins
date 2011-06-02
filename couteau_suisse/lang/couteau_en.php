@@ -21,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'colorer_fond' => 'Colour the background',
 	'colorer_texte' => 'Colour the text',
-	'configurer' => 'Configure the Suiss Army Knife',
+	'configurer' => 'Suiss Army Knife configuration',
 	'connections' => 'Connections',
 
 	// D
@@ -131,7 +131,7 @@ Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
 	'tri_monter' => 'Move this author up',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
+	'url_verrouillee' => 'URL locked',
 	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
 	'urls_propres_format' => 'Thecurrent format of URLs is: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Public access link',

@@ -91,7 +91,7 @@ Découvre dans ce plugin tes outils favoris : {Supprime le numéro}, {Format des
 N\'hésite pas à consulter les articles de documentation du plugin publiés sur : [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
 Compatibilité : SPIP v1.92x et v2.0.x et v2.1.x',
-	'pp_autobr' => 'Insérer un bloc où les retours á la ligne sont automatiques', # MODIF
+	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques',
 	'pp_blocs_bloc' => 'Insérer un bloc replié',
 	'pp_blocs_visible' => 'Insérer un bloc déplié',
 	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »',
@@ -131,7 +131,7 @@ Compatibilité : SPIP v1.92x et v2.0.x et v2.1.x',
 	'tri_monter' => 'Monter cet auteur',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
+	'url_verrouillee' => 'URL verrouillée',
 	'urls_propres_erreur' => 'Ce format ne prend pas compte les URLs propres listées ci-dessous.',
 	'urls_propres_format' => 'Le format actuel des URLs est : {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Lien public d\'accès',

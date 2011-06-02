@@ -37,14 +37,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lutte_spam' => 'Fight against SPAM', # MODIF
 
 	// M
-	'maj_actu' => '<MODIF>Force update', # MODIF
+	'maj_actu' => 'Nanútiť aktualizáciu na diaľku',
 	'maj_liste' => 'List of detected plugins:',
 	'maj_maj' => 'Update the selected plugin',
 	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].',
 	'maj_rev' => 'Ver. @revision@',
 	'maj_rev_ko' => 'The [remote version->@url@] could not be found.',
 	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].',
-	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
+	'maj_spip' => 'Potom, čo ste starostlivo aktualizovali všetky zásuvné moduly, sa veľmi odporúča aktualizovať aj SPIP tak, že kliknete na odkaz vyššie a dodržíte odporúčané pokyny.',
 	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
 	'maj_verif' => 'First check which file is right for you:',
 	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.',
@@ -80,18 +80,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Next page', # MODIF
 	'plug_actifs' => 'Active plugins', # MODIF
 	'plug_inactifs' => 'Inactive plugins', # MODIF
-	'plugin_xml' => '<MODIF>Gathers together in one plugin a list of small, useful tools to improve the management of your SPIP site.
+	'plugin_xml' => 'Je kolekciou malých užitočných nástrojov na uľahčenie riadenia SPIP-stránky v jednom zásuvnom module.
 
-Each tool can be ativated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set some options, click on {{Configuration}}, then choose the {{Swiss Knife}} tab.
+Každý nástroj sa dá osobitne (de)aktivovať individually na [administračnej stránke zásuvného modulu->./?exec=admin_couteau_suisse]. Ak chcete nastaviť nejaké možnosti, kliknite na{{Konfiguráciu}}, potom vyberte kartu{{Vreckový nožík}}.
 
 Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria.
 
-Find your favourite tools in this plugin: {Delete the number}, {URL formats},{Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Fine URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
+Nájdite si svoje obľúbené nástroje v tomto zásuvnom module: {Vymazať číslo}, {Formáty URL},{Horný index}, {Okrúhle obrátené bodky}, {Krásne obrázky}, {Boj proti SPAMU}, {Mailcrypt}, {Pekné adresy URL}, {SPIP a externé odkazy}, {Smajlíky}, {Súhrn vašich článkov}, {Rozdelenie na stránky a karty}, atď., atď.
 
-See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
+Prečítajte si dokumentáciu na: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x and v2.0.x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
+Kompatibilita: SPIP 1.92x and v2.0.x',
+	'pp_autobr' => 'Vložte blok textu s automatickým dopĺňaním',
 	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
 	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
 	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
@@ -131,7 +131,7 @@ Compatibility: SPIP 1.92x and v2.0.x', # MODIF
 	'tri_monter' => 'Move this author up', # MODIF
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
+	'url_verrouillee' => 'Adresa je zamknutá',
 	'urls_propres_erreur' => 'This format does not take into account the URLs listed below own',
 	'urls_propres_format' => 'Thecurrent format of URLs is: {{« @format@ »}}. [<span>[Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'Public access link',

@@ -14,15 +14,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attente_confirmation' => 'قيد المصادقة',
 
 	// B
-	'base_donnees' => 'Base de données', # NEW
-	'bloc_deplier' => 'Déplier', # NEW
-	'bloc_replier' => 'Replier', # NEW
+	'base_donnees' => 'قاعدة البيانات',
+	'bloc_deplier' => 'كشف',
+	'bloc_replier' => 'طوي',
 
 	// C
-	'colorer_fond' => 'Colorer le fond', # NEW
-	'colorer_texte' => 'Colorer le texte', # NEW
+	'colorer_fond' => 'تلوين الخلفية',
+	'colorer_texte' => 'تلوين النص',
 	'configurer' => 'إعداد سكين الجيب',
-	'connections' => 'الاتصالات', # MODIF
+	'connections' => 'الاتصالات',
 
 	// D
 	'date_court' => '@jour@\\@mois@\\@annee@',
@@ -33,23 +33,23 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explique_spam' => 'تحذير: لقد استخدمت علامات او حروف او كلمات  ممنوعة. <br /><br /> الرجاء العودة!',
 
 	// L
-	'lancer_test' => 'Lancer le test !', # NEW
+	'lancer_test' => 'إطلاق التجربة!',
 	'lutte_spam' => 'مكافحة الخنزرة',
 
 	// M
-	'maj_actu' => 'Forcer l\'actualisation distante', # NEW
-	'maj_liste' => 'Liste des plugins détectés :', # NEW
-	'maj_maj' => 'Mettre à jour le plugin sélectionné', # NEW
-	'maj_ok' => 'Ce [plugin->@zip@] semble [à jour->@url@].', # NEW
-	'maj_rev' => 'Rév. @revision@', # NEW
-	'maj_rev_ko' => 'La [révision distante->@url@] n\'a pas pu être trouvée.', # NEW
-	'maj_rev_ok' => 'La révision [@revision@->@url@] est [disponible->@zip@].', # NEW
+	'maj_actu' => 'فرض التحديث البعيد',
+	'maj_liste' => 'لائحة الملحقات التي تم العثور عليها:',
+	'maj_maj' => 'تحديث الملحق المحدد',
+	'maj_ok' => 'هذا [الملحق->@zip@] يبدو [حديثاً->@url@].',
+	'maj_rev' => 'الإصدار @revision@',
+	'maj_rev_ko' => 'لم يتم العثور على [التحديث البعيد->@url@]. ',
+	'maj_rev_ok' => 'الإصدار [@revision@->@url@] [متوافر->@zip@].',
 	'maj_spip' => 'Après avoir mis à jour tous vos plugins avec précaution, il est vivement conseillé de mettre à jour SPIP lui-même en cliquant sur le lien ci-dessus et en suivant les instructions proposées.', # NEW
 	'maj_svn' => 'Ce plugin SVN semble [à jour->@url@].', # NEW
 	'maj_verif' => 'Vérifiez préalablement l\'archive qui vous convient :', # NEW
 	'maj_verif2' => 'Attention : après avoir cliqué sur le bouton ci-dessus, vérifiez bien que l\'archive téléchargée correspond au plugin qu\'il vous faut mettre à jour.', # NEW
 	'maj_zip_ko' => 'Le fichier .zip distant n\'a pu être identifié.', # NEW
-	'msg_publies' => 'Uniquement les messages publiés', # NEW
+	'msg_publies' => 'الرشائل المنشورة فقط',
 
 	// N
 	'nom_email_forum' => 'الرجاء إدخال الاسم او البريد الالكتروني!',
@@ -78,8 +78,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_lien' => 'صفحة @page@: @title@',
 	'page_precedente' => 'الصفحة السابقة',
 	'page_suivante' => 'الصفحة التالية',
-	'plug_actifs' => 'Plugins actifs', # NEW
-	'plug_inactifs' => 'Plugins inactifs', # NEW
+	'plug_actifs' => 'الملحقات النشطة',
+	'plug_inactifs' => 'الملحقات غير النشطة',
 	'plugin_xml' => 'يجمع في ملحق واحد وظائف جديدة ومفيدة تهدف الى تحسين ادارة الموقع.
 
 ويمكن تفعيل اي من هذه الوظائف او ايقافها في [صفحة ادارة الملحق ->  ./?exec=admin_couteau_suisse] والتحكم بعدد من المتغيرات: انقر على {{إعداد الموقع}} ثم اختر رابط {{سكين الجيب}}.
@@ -90,17 +90,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 لا تتردد في قراءة مقالات توثيق هذا الملحق على العنوان:[spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-يتوافق مع SPIP في اصداري 1.92x و2.0x', # MODIF
-	'pp_autobr' => 'Insérer un bloc où les retours à la ligne sont automatiques', # NEW
-	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
-	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW
+يتوافق مع SPIP في اصداري 1.92x و2.0x و2.1x',
+	'pp_autobr' => 'إدراج كتلة حيث العودة الى السطر آلية',
+	'pp_blocs_bloc' => 'إدراج كتلة مطوية',
+	'pp_blocs_visible' => 'إدراج كتلة مكشوفة',
 	'pp_chatons_inserer' => 'Insérer le chaton « @chaton@ »', # NEW
 	'pp_chatons_inserer_drop' => 'Insérer un chaton dans votre texte', # NEW
-	'pp_couleur_fond' => 'Fond @couleur@', # NEW
-	'pp_couleur_icone_fond' => 'F', # NEW
-	'pp_couleur_icone_texte' => 'T', # NEW
-	'pp_couleur_texte' => 'Texte @couleur@', # NEW
-	'pp_couteau_suisse_drop' => 'Utiliser un outil du Couteau Suisse', # NEW
+	'pp_couleur_fond' => 'الخلفية @couleur@',
+	'pp_couleur_icone_fond' => 'خلفية',
+	'pp_couleur_icone_texte' => 'نص',
+	'pp_couleur_texte' => 'النص @couleur@',
+	'pp_couteau_suisse_drop' => 'استخدام أداة من سكين الجيب',
 	'pp_decoration_inserer' => 'Décoration « @balise@.@racc@ »', # NEW
 	'pp_decoration_inserer_drop' => 'Appliquer au texte une « décoration » personnalisée', # NEW
 	'pp_decoupe_onglets' => 'Insérer un système d\'onglet', # NEW

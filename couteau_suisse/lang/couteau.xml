@@ -1,5 +1,7 @@
 <traduction module="couteau" gestionnaire="salvatore" reference="fr">
-	<langue code="ar" />
+	<langue code="ar">
+		<traducteur nom="kandalaft" />
+	</langue>
 	<langue code="ast" />
 	<langue code="br" />
 	<langue code="ca">
@@ -27,7 +29,9 @@
 		<traducteur nom="rporto" />
 	</langue>
 	<langue code="ro" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
 </traduction>
