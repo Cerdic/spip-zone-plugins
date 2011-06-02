@@ -1,0 +1,19 @@
+<plugin>
+<nom>Innerfade</nom>
+<etat>stable</etat>
+<version>1.0</version>
+<description>Biblioth&egrave;que jquery innerfade pour diaporama voir http://medienfreunde.com/lab/innerfade/</description>
+<prefix>jq_innerfade</prefix>
+<pipeline>
+	<nom>header_prive</nom>
+	<action>inclure_headers</action>
+	<inclure>jq_innerfade.php</inclure>
+</pipeline>
+<pipeline>
+	<nom>insert_head</nom>
+	<action>inclure_headers</action>
+	<inclure>jq_innerfade.php</inclure>
+</pipeline>
+<categorie>multimedia</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+</plugin>
