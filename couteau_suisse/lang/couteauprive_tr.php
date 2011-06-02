@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : evet',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Sitedeki tüm bağlar aktüel sayfada açılır. Ama dış bağları yeni pencerede açmak kullanışlı olabilir -- cela revient à ajouter {target="_blank"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Sitedeki tüm bağlar aktüel sayfada açılır. Ama dış bağları yeni pencerede açmak kullanışlı olabilir -- cela revient à ajouter {target=\\"_blank\\"} à toutes les balises &lt;a&gt; dotées par SPIP des classes {spip_out}, {spip_url} ou {spip_glossaire}. Il est parfois nécessaire d\'ajouter l\'une de ces classes aux liens du squelette du site (fichiers html) afin d\'étendre au maximum cette fonctionnalité.[[%radio_target_blank3%]]
 
 @puce@ SPIP permet de relier des mots à leur définition grâce au raccourci typographique <code>[?mot]</code>. Par défaut (ou si vous laissez vide la case ci-dessous), le glossaire externe renvoie vers l’encyclopédie libre wikipedia.org. À vous de choisir l\'adresse à utiliser. <br />Lien de test : [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP «~mailto:~» bağlantıları için bir CSS stil öngördü : e-posta bağlantılarının önünde küçük bir zarf görünecek; ama tüm gezginler bunu görüntüleyemeyeceği için (bjğllşmlğ IE6, IE7 et SAF3) bunu kullanıp kullanmamak size kalmış.
@@ -136,7 +136,7 @@ SPIP italik için &lt;i> komutunu kullanmayı tercih etmiştir. Ama &lt;em> komu
 
  Dipnotlar için komut açan ve kapatan kodları da siz belirleyebilirsiniz. (Dikkat ! Değişiklikler yalnız kamusal alanda görünür.) : [[%ouvre_ref%]][[->%ferme_ref%]]
  
-@puce@ {{Varsayılan SPIP stilleri}}. 1.92 sürümüne kadar, tipografik kısayollar hep "spip" tipinde komutlar üretiyordu. Örneğin: <code><p class="spip"></code>. Burada komut stillerini stil sayfalarınıza göre tanımlayabilirsiniz. Boş bir kutu hiçbir stil uygulanmayacağını gösterir.
+@puce@ {{Varsayılan SPIP stilleri}}. 1.92 sürümüne kadar, tipografik kısayollar hep \\"spip\\" tipinde komutlar üretiyordu. Örneğin: <code><p class=\\"spip\\"></code>. Burada komut stillerini stil sayfalarınıza göre tanımlayabilirsiniz. Boş bir kutu hiçbir stil uygulanmayacağını gösterir.
 
 {Dikkat : eğer yukarıda (yatay çizgi, ara başlık, italik, koyu) gibi kısayollar değiştirilirse aşağıda stiller uygulanmayacaktır.}
 
@@ -274,7 +274,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'Tüm kamusal sitede bakım yapılırken kişiselleştirilebilir bir mesaj yayınlanmasını sağlar.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Sitede çalışma var',
-	'erreur:bt' => '<span style="color:red;">Dikkat :</span> tipografik çizgi (sürüm @version@) artık eskidi.<br />İsviçre Çakısı @mini@ veya daha yeni bi rsürüm ile uyumludur.',
+	'erreur:bt' => '<span style="color:red;">Dikkat :</span> tipografik çizgi (sürüm @version@) artık eskidi.<br />İsviçre Çakısı @mini@ veya daha yeni bi rsürüm ile uyumludur.', # MODIF
 	'erreur:description' => 'Alet tanımında id eksik !',
 	'erreur:distant' => 'uzak sunucu',
 	'erreur:jquery' => '{{Not}} : {jQuery} kütüphanesi bu sayfada pasif durumda görülüyor. Eklentinin bağımlılıkları paragrafına bakınız [->http://www.spip-contrib.net/?article2166].',
@@ -498,7 +498,7 @@ _ • {Yayg&#305;n} : &#351;u tipteki ba&#287;lar da de&#287;i&#351;tirilir {<ht
 	'mailcrypt:nom' => 'MailCrypt',
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
-La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
+La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
 
 Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # NEW
 	'maj_auto:nom' => 'Mises à jour automatiques', # NEW

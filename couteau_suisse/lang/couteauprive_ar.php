@@ -14,9 +14,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'SPIP_liens:description' => '@puce@ كل روابط الموقع تفتح افتراضياً في النافذة الحالية. ولكن قد نحتاج الى فتح الروابط الخارجية في نافذة جديدة مما يتطلب اضافة {target="_blank"} الى كل علامات &lt;a&gt; المزودة بخصائص {spip_out} او {spip_url} او {spip_glossaire}. من الضروري احياناً اضافة احدى تلك الخصائص الى روابط صفحات الموقع النموذجية (اي ملفات html) للاستفادة الى اقصى حد من هذه الوظيفة.[[%radio_target_blank3%]]
 
-@puce@ يتيح SPIP ربط كلمات بتفسيراتها بفضل اختصار <code>[?كلمة]</code>. افتراضياً (او اذا ابقيت على الخانة ادناه فارغة)، يأخذ الفهرس الخارجي الى موسوعة ويكيبيديا. ويعود اليك اختيار عنوان آخر.<br />رابط للاختبار:[?SPIP][[%url_glossaire_externe2%]]', # MODIF
+@puce@ يتيح SPIP ربط كلمات بتفسيراتها بفضل اختصار <code>[?كلمة]</code>. افتراضياً (او اذا ابقيت على الخانة ادناه فارغة)، يأخذ الفهرس الخارجي الى موسوعة ويكيبيديا. ويعود اليك اختيار عنوان آخر.<br />رابط للاختبار:[?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ يوفر SPIP نمط في اوراق الأنماط للتعامل مع روابط من نوع «:mailto»: يظهر ظرف صغير أمام أي رابط يدل على عنوان بريد الكتروني. ولكن بما ان بعض برامج التصفح لا تتمكن من عرضه (خاصة انترنت اكسبلورر ٦ وانترنت اكسبلورر ٧ وسافاري ٣)، يعود الأمر اليك لتقرر اذا كنت تريد هذه الإضافة أم لا.
-_ رابط للاختبار: [->test@test.com] (إعادة تحديث الصفحة بالكامل).[[%enveloppe_mails%]]', # MODIF
+_ رابط للاختبار: [->test@test.com] (إعادة تحديث الصفحة بالكامل).[[%enveloppe_mails%]]',
 	'SPIP_liens:nom' => 'SPIP والروابط... الخارجية',
 	'SPIP_tailles:description' => '@puce@ Afin d\'alléger la mémoire de votre serveur, SPIP vous permet de limiter les dimensions (hauteur et largeur) et la taille du fichier des images, logos ou documents joints aux divers contenus de votre site. Si un fichier dépasse la taille indiquée, le formulaire enverra bien les données mais elles seront détruites et SPIP n\'en tiendra pas compte, ni dans le répertoire IMG/, ni en base de données. Un message d\'avertissement sera alors envoyé à l\'utilisateur.
 
@@ -42,8 +42,8 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 	'action_rapide_non' => 'إجراء سريع، يتوافر لدى تفعيل هذه الأداة:',
 	'admins_seuls' => 'المدراء فقط',
 	'attente' => 'انتظار...',
-	'auteur_forum:description' => 'يحفز جميع مؤلفي الرسائل العمومية لإدخال (ولو بحرف واحد) اسم و/اوعنوان بريد لتفادي المشاركات المغفلة. لاحظ ان هذه الأداة تقوم بتدقيق معين بواسطة جافاسكريبت في جهاز الزائر.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
-{{ننبيه: يؤدي تحديد الخيار الثالث الى الغاء الخيارين الاولينز من المهم التأكد من ان استمارات الصفحات النموذجية تتوافق مع هذه الأداة.}}', # MODIF
+	'auteur_forum:description' => 'يحفز جميع مؤلفي الرسائل العمومية لإدخال (ولو بحرف واحد) اسم و/اوعنوان بريد لتفادي المشاركات المجهولة. لاحظ ان هذه الأداة تقوم بتدقيق معين بواسطة جافاسكريبت في جهاز الزائر.[[%auteur_forum_nom%]][[->%auteur_forum_email%]][[->%auteur_forum_deux%]]
+{{ننبيه: يؤدي تحديد الخيار الثالث الى الغاء الخيارين الاولين. من المهم التأكد من ان استمارات الصفحات النموذجية تتوافق مع هذه الأداة.}}',
 	'auteur_forum:nom' => 'المنتديات المغفلة غير مقبولة',
 	'auteur_forum_deux' => 'او احد الحقلين السابقين على الاقل',
 	'auteur_forum_email' => 'الحقل «@_CS_FORUM_EMAIL@»',
@@ -53,7 +53,7 @@ La valeur de 1~000~000 pixels semble correcte pour une configuration avec peu de
 @puce@ حدد هنا الحد الاقصى لعدد المؤلفين الذي ترغب في عرضه في الاطار الاوسط في صفحة المؤلفين. في حال تخطي هذا العدد يظهر نظام تصفح.[[%max_auteurs_page%]]
 
 @puce@ اي فئة من المؤلفين يجب ان تظهر في هذه الصفحة؟
-[[%auteurs_tout_voir%]][[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]', # MODIF
+[[%auteurs_tout_voir%]][[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'صفحة المؤلفين',
 	'autobr:description' => 'Applique sur certains contenus SPIP le filtre {|post_autobr} qui remplace tous les sauts de ligne simples par un saut de ligne HTML <br />.[[%alinea%]][[->%alinea2%]]', # NEW
 	'autobr:nom' => 'Retours de ligne automatiques', # NEW
@@ -97,7 +97,7 @@ BLOC_FIN#</code></quote>
 @puce@ اذا اخترت «نعم» أدناه، سيتم تخزين وضعية الكتل المرقمة في كعكة مدتها تساوي مدة الزيارة وذلك للحفاظ على شكل الصفحة لدى العودة اليها.[[%blocs_cookie%]]
 
 @puce@ يستخدم سكين الجيب افتراضياً علامة HTML للعناوين &lt;h4&gt; لعناوين الكتل التي يمكن بسطها. اختر من هنا علامة اخرى &lt;hN&gt;:[[%bloc_h4%]]
-@puce@ للحصول على مؤثر ناعم عند النقر، يمكن للكتل التي تطوى ان تتحرك على شكل "انزلاق".[[%blocs_slide%]][[->%blocs_millisec% الف من الثانية]]', # MODIF
+@puce@ للحصول على مؤثر ناعم عند النقر، يمكن للكتل التي تطوى ان تتحرك على شكل \\"انزلاق\\".[[%blocs_slide%]][[->%blocs_millisec% الف من الثانية]]', # MODIF
 	'blocs:nom' => 'كتل قابلة للبسط',
 	'boites_privees:description' => 'كل المربعات المذكورة ادناه تظهر في المجال الخاص.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{تعديلات سكين الجيب}}: اطار في الصفحة الحالية من الاعدادات، يعرض آخر التعديلات التي دخلت على برمجة الملحق ([المصدر->@_CS_RSS_SOURCE@]).
@@ -105,7 +105,7 @@ BLOC_FIN#</code></quote>
 - {{احصاءات المؤلفين}}: اطار اضافي في [صفحة المؤلفين->./?exec=auteurs] يعرض آخر عشرة متصلين والتسجيلات التي لم يتم تصديقها بعد. لا يرى هذه المعلومات الا المدراء.
 - {{مسؤولو الموقع حسب SPIP}}: اطار يطوى اضافي في [صفحة المؤلفين -> ./?exec=auteurs] ويحدد المدراء الذين تمت ترقيتهم الى مرتبة مسؤولي الموقع. لا يرى هذه المعلومات الا المدراء. اذا كنت انت احد مسؤولي الموقع، يمكنك التعرف على الأداة «[.->webmestres]».
 - {{عناوين URL النظيفة}}: اطار يطوى اضافي لكل عنصر محتوى (مقال او قسم او مؤلف...) يظهر عنوان URL النظيف المناسب وتنوعاته اذا وجدت. وتتيح لك الأداة «[.->type_urls]» دقة أكبر في إعداد عناوين URL العائدة لموقعك.
-- {{فرز المؤلفين}}: اطار يطوى اضافي للمقالات العائدة لأكثر من مؤلف واحد يتيح ترتيب عرض هؤلاء المؤلفين.', # MODIF
+- {{فرز المؤلفين}}: اطار يطوى اضافي للمقالات العائدة لأكثر من مؤلف واحد يتيح ترتيب عرض هؤلاء المؤلفين.',
 	'boites_privees:nom' => 'مربعات خاصة',
 	'bp_tri_auteurs' => 'فرز المؤلفين',
 	'bp_urls_propres' => 'عناوين URL النظيفة',
@@ -134,19 +134,19 @@ _ • Un champ de recherche à partir de %select_max_auteurs% auteurs(s).</q1>',
 	'certaines_couleurs' => 'العلامات المحددة ادناه فقط@_CS_ASTER@:',
 	'chatons:aide' => 'الوجوه الضاحكة: @liste@',
 	'chatons:description' => 'يدرج صوراً (او وجوه ضاحكة حسب مدمني الدردشة) في كل النصوص حيث تظهر سلسلة اسم من نوع <code>:nom</code>.
-_ تستبدل هذه الاداة الاختصارات بالصور التي تحمل الاسم نفسه اذا وجدت في المجلد <code>my_template/img/chatons/</code>، او في المجلدplugins/couteau_suisse/img/chatons.', # MODIF
+_ تستبدل هذه الاداة الاختصارات بالصور التي تحمل الاسم نفسه اذا وجدت في المجلد <code>my_template/img/chatons/</code>، او في المجلد<code>couteau_suisse/img/chatons/</code>.',
 	'chatons:nom' => 'الوجوه الضاحكة',
 	'citations_bb:description' => 'Afin de respecter les usages en HTML dans les contenus SPIP de votre site (articles, rubriques, etc.), cet outil remplace les balises &lt;quote&gt; par des balises &lt;q&gt; quand il n\'y a pas de retour à la ligne. En effet, les citations courtes doivent être entourées par &lt;q&gt; et les citations contenant des paragraphes par &lt;blockquote&gt;.', # NEW
 	'citations_bb:nom' => 'اقتباسات مرقمة جيداً',
 	'class_spip:description1' => 'هنا يمكنك تحديد بعض اختصارات SPIP. ادا تركت قيمة فارغة يتم استخدام القيمة الافراضية المناسبة.[[%racc_hr%]]',
 	'class_spip:description2' => '@puce@ {{اختصارات SPIP}}.
 
-يمكنك هنا تحديد بعض اختصارات SPIP. اذا تركت قيمة فارغة سيتم استخدام القيمة الافتراضية.[[%racc_hr%]][[%puce%]]', # MODIF
+يمكنك هنا تحديد بعض اختصارات SPIP. اذا تركت قيمة فارغة سيتم استخدام القيمة الافتراضية.[[%racc_hr%]][[%puce%]]',
 	'class_spip:description3' => '
 
 {{تنبيه: اذا كانت الأداة «[.->pucesli]» نشطة، لا يتم استبدال الخط «-». وسيتم استخدام لائحة &lt;ul>&lt;li> بدلاً منه.}}
 
-يستخدم SPIP عادة علامة &lt;h3&gt; لعناوين الفقرات.اختر هنا بديلاً لها:[[%racc_h1%]][[->%racc_h2%]]', # MODIF
+يستخدم SPIP عادة علامة &lt;h3&gt; لعناوين الفقرات.اختر هنا بديلاً لها:[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
 
 اختار SPIP استخدام علامة &lt;strong> لتحويل النص الى الأسود.لكن استخدام &lt;b> سليم ايضاً. الخيار لك: [[%racc_g1%]][[->%racc_g2%]]
@@ -157,7 +157,7 @@ _ تستبدل هذه الاداة الاختصارات بالصور التي ت
  
 يمكن تحديد علامتي الفتح والاقفال للحواشي: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{أنماط SPIP الافتراضية}}. حتى الاصدار 1.9.2 من SPIP، كانت اختصارات الكتابة تنتج علامات تخضع دائماً لنمط "spip". مثلاً: <code><p class="spip"></code>. يمكنك هنا تحديد نمط هذه العلامات بالاعتماد على اوراق انماطك. وترك خانة فارغة يعني انه لن يتم استخدام اي نمط معين.
+@puce@ {{أنماط SPIP الافتراضية}}. حتى الاصدار 1.9.2 من SPIP، كانت اختصارات الكتابة تنتج علامات تخضع دائماً لنمط \\"spip\\". مثلاً: <code><p class=\\"spip\\"></code>. يمكنك هنا تحديد نمط هذه العلامات بالاعتماد على اوراق انماطك. وترك خانة فارغة يعني انه لن يتم استخدام اي نمط معين.
 
 {{تنبيه: اذا تم تعديل بعض العلامات (الخط الأفقي او عنوان الفقرة او المائل او الأسود) أعلاه، لن يتم تطبيق الأنماط أدناه.}}
 <q1>
@@ -302,7 +302,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'خلال فترة الصيانة، تتيح عرض رسالة يمكن تخصيصها في كل صفحات الموقع واذا اقتضت الحاجة في المجال الخاص.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'موقع قيد التصميم',
-	'erreur:bt' => '<span style="color:red;">تنبيه:</span> يبدو ان شريط ادوات الكتابة (الإصدار @version@) قديم.<br />يتوافق سكين الجيب مع الإصدار @mini@ أو أحدث. ',
+	'erreur:bt' => '<span style=\\"color:red;\\">تنبيه:</span> يبدو ان شريط ادوات الكتابة (الإصدار @version@) قديم.<br />يتوافق سكين الجيب مع الإصدار @mini@ أو أحدث. ', # MODIF
 	'erreur:description' => 'رقم متسلسل غير موجود في تعريف الاداة!',
 	'erreur:distant' => 'الخادم البعيد',
 	'erreur:jquery' => '{{ملاحظة}}: يبدو ان مكتبة {jQuery} غير نشطة في هذه الصفحة. الرجاء مراجعة الفقرة حول علاقات الملحق [هنا->http://www.spip-contrib.net/?article2166] او اعادة تحديث الصفحة.',
@@ -533,7 +533,7 @@ _ • {Étendu} : sont remplacés en plus les liens du type {<html>moi@spip.net<
 	'mailcrypt:nom' => 'MailCrypt', # NEW
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
-La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
+La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
 
 Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # NEW
 	'maj_auto:nom' => 'Mises à jour automatiques', # NEW

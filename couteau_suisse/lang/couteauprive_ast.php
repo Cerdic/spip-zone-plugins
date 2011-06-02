@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ': sí',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Tolos enllaces del sitiu abrense por omisión nel ventanu de ñavegación actual. Pero pue ser amañoso abrir los enllaces esternos al sitiu nun ventanu esterior nuevu -- lo que lleva a amesta-yos {target="_blank"} a toles balices &lt;a&gt; a les que SPIP conseña les clases {spip_out}, {spip_url} o {spip_glossaire}. Pue ser necesario amesta-yos una d\'estes clases a los enllaces de la cadarma del sitiu (archivos html) pa estender al másimu esta carauterística.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Tolos enllaces del sitiu abrense por omisión nel ventanu de ñavegación actual. Pero pue ser amañoso abrir los enllaces esternos al sitiu nun ventanu esterior nuevu -- lo que lleva a amesta-yos {target=\\"_blank\\"} a toles balices &lt;a&gt; a les que SPIP conseña les clases {spip_out}, {spip_url} o {spip_glossaire}. Pue ser necesario amesta-yos una d\'estes clases a los enllaces de la cadarma del sitiu (archivos html) pa estender al másimu esta carauterística.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enllazar les pallabres cola so definición gracies a l\'atayu tipográficu <code>[?pallabra]</code>. Por omisión (o si dexes vacía la caxina d\'embaxo), el glosariu esternu empobina pa la enciclopedia llibre wikipedia.org. A to eleición l\'enllaz a utilizar. <br />Enllaz de preba: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP tien previstu un estilu CSS pa los enllaces «~mailto:»: un sobre pequeñu tendría que apaecer delantre de cada enllaz lligau a un corréu; pero como hai ñavegadores que nun puen amosalo (notablemente IE6, IE7 y SAF3), tú decides si quies mantener esta carauterística.
@@ -149,7 +149,7 @@ SPIP escueye utilizar la marca &lt;i> pa trescribir les itáliques. Pero &lt;em>
  
  Puedes definir el códigu d\'apertura y zarre pa les notes de pie de páxina: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atayos tipográficos producíen balices col estilu "spip" conseñáu por sistema. Por exemplu: <code><p class="spip"></code>. Equí pues definir l\'estilu d\'estes balices en función de les tos fueyes d\'estilu. Una caxa vacía significa que nun va aplicase dengún estilu en particular.
+@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atayos tipográficos producíen balices col estilu \\"spip\\" conseñáu por sistema. Por exemplu: <code><p class=\\"spip\\"></code>. Equí pues definir l\'estilu d\'estes balices en función de les tos fueyes d\'estilu. Una caxa vacía significa que nun va aplicase dengún estilu en particular.
 
 {Atención: si se cambearon más enriba dellos atayos (llinia horizontal, intertítulu, itálica, negrina), los estilos d\'embaxo nun s\'aplicarán.}
 
@@ -293,7 +293,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'Permite amosar un mensaxe personalizable, demientres una fase de mantenimientu, en tou el sitiu públicu y, eventualmente na parte privada.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Sitiu n\'obres',
-	'erreur:bt' => '<span style="color:red;">Atención :</span> la barra tipográfica (versión @version@) paez antigua.<br />La Navaya Suiza ye compatible con una versión mayor o igual a @mini@.',
+	'erreur:bt' => '<span style=\\"color:red;\\">Atención :</span> la barra tipográfica (versión @version@) paez antigua.<br />La Navaya Suiza ye compatible con una versión mayor o igual a @mini@.', # MODIF
 	'erreur:description' => '¡falta la id na definición de la ferramienta!',
 	'erreur:distant' => 'el sirvidor remotu',
 	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} paez inactiva nesta páxina. Has de consultar [equí->http://www.spip-contrib.net/?article2166] el párrafu so les dependencies del plugin o recargar esta páxina.',
@@ -524,7 +524,7 @@ _ • {Predetermin&aacute;u}: reemplazu autom&aacute;ticu d\'orixe (a partir de 
 	'mailcrypt:nom' => 'MailCrypt',
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
-La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
+La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
 
 Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # NEW
 	'maj_auto:nom' => 'Mises à jour automatiques', # NEW
@@ -673,7 +673,7 @@ Esti sumariu pue acoplase con: « [.->decoupe] ».', # MODIF
 Llista equí les secuencies torgáes separtandoles con espacios. [[%spam_mots%]]
 • Pa una espresión con espacios, ponla ente comines.
 _ • Pa especificar una pallabra entera, métela ente paréntesis. Exemplu:~{(premiu)}.
-_ • Pa una espresión regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{<html>"/@test\\.(com|org|ast)/"</html>}.', # MODIF
+_ • Pa una espresión regular, verifica bien la sintaxis y ponla dientro de barres y comines. Exemplu:~{<html>\\"/@test\\.(com|org|ast)/\\"</html>}.', # MODIF
 	'spam:nom' => 'Llucha escontra la puxarra',
 	'spam_ip' => 'Blocage IP de @ip@ :', # NEW
 	'spam_test_ko' => '¡Esti mensaxe bloquiarase pol filtru anti-SPAM!',
@@ -732,7 +732,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 
 Consulta [equí ->http://www.spip.net/fr_article2128.html] la documentación de SPIP pa esti asuntu.
 
-Esta ferramienta acepta igualmente los argumentos que apaecieron con SPIP 2.0. Por exemplu, l\'atayu <code><:mio_cadena{nome=Charles Martin, eda=37}:></code> permite pasa-y dos parámetros a la siguiente cadena: <code>\'mio_cadena\'=>"Bones, soi @nome@ y tengo @eda@ años"</code>.
+Esta ferramienta acepta igualmente los argumentos que apaecieron con SPIP 2.0. Por exemplu, l\'atayu <code><:mio_cadena{nome=Charles Martin, eda=37}:></code> permite pasa-y dos parámetros a la siguiente cadena: <code>\'mio_cadena\'=>"Bones, soi @nome@ y tengo @eda@ años\\"</code>.
 
 La función SPIP usada en PHP ye <code>_T(\'cadena\')</code> ensin argumentu, y <code>_T(\'cadena\', array(\'arg1\'=>\'un testu\', \'arg2\'=>\'otru testu\'))</code> con argumentos.
 

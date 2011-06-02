@@ -1,5 +1,7 @@
 <traduction module="couteauprive" gestionnaire="salvatore" reference="fr">
-	<langue code="ar" />
+	<langue code="ar">
+		<traducteur nom="kandalaft" />
+	</langue>
 	<langue code="ast" />
 	<langue code="ca">
 		<traducteur nom="merce" />

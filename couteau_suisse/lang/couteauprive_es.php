@@ -12,7 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ' : sí',
 
 	// S
-	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación -- esto se reduce a añadir {target="_blank"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ Todos los enlaces del sitio se abren, por omisión, en la ventana actual del navegador. Pero puede ser útil abrir los enlaces externos en una nueva ventana de navegación -- esto se reduce a añadir {target=\\"_blank\\"} en todas las balizas &lt;a&gt; a las que SPIP asigna las clases {spip_out}, {spip_url} o {spip_glossaire}. A veces hace falta añadir una de estas clases a los enlaces del esqueleto del sitio (archivos html) para extender al máximo esta característica.[[%radio_target_blank3%]]
 
 @puce@ SPIP permite enlazar palabras con su definición gracias al atajo tipográfico <code>[?palabra]</code>. Por omisión (o si dejas en blanco este cuadro), el glosario externo reenvía hacia la enciclopedia libre wikipedia.org. Aquí puedes elegir la dirección que se utilizará. <br />Enlace de prueba: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
 	'SPIP_liens:description1' => '@puce@ SPIP a prévu un style CSS pour les liens «~mailto:~» : une petite enveloppe devrait apparaître devant chaque lien lié à un courriel; mais puisque tous les navigateurs ne peuvent pas l\'afficher (notamment IE6, IE7 et SAF3), à vous de voir s\'il faut conserver cet ajout.
@@ -146,7 +146,7 @@ SPIP ha elegido usar la baliza &lt;strong> para transcribir las negritas. Pero &
 
 SPIP ha elegido usar la baliza &lt;i> para transcribir las itálicas. Pero &lt;em> también podría ser conveniente, con o sin estilo. A tu elección:[[%racc_i1%]][[->%racc_i2%]]
 
-@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atajos tipográficos producían balizas con el estilo "spip" asignado siempre. Por ejemplo: <code><p class="spip"></code>. Aquí puedes definir el estilo de estas balizas en función de tus hojas de estilo. Un cuadro vacío significa que no se aplica ningún estilo en particular.
+@puce@ {{Los estilos por omisión de SPIP}}. Hasta la versión 1.92 de SPIP, los atajos tipográficos producían balizas con el estilo \\"spip\\" asignado siempre. Por ejemplo: <code><p class=\\"spip\\"></code>. Aquí puedes definir el estilo de estas balizas en función de tus hojas de estilo. Un cuadro vacío significa que no se aplica ningún estilo en particular.
 {Atención: si ciertos atajos (linea horizontal, intertítulo, itálica, negrita) se han modificado más abajo, los estilos siguientes no se aplicarán.}
 
 <q1>
@@ -289,7 +289,7 @@ En cas de mise à jour officielle, actualisez le fichier distant associé (cliqu
 	'en_travaux:description' => 'Permite mostrar un mensaje personalizable durante una fase de mantenimiento en todas las páginas públicas y, eventualmente, en el espacio privado.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[%prive_travaux%]]', # MODIF
 	'en_travaux:nom' => 'Sitio en mantenimiento',
-	'erreur:bt' => '<span style="color:red;">Atención:</span> la barra de tipografías (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versión superior o igual a @mini@.',
+	'erreur:bt' => '<span style=\\"color:red;\\">Atención:</span> la barra de tipografías (version @version@) parece antigua.<br />La Navaja Suiza es compatible con una versión superior o igual a @mini@.', # MODIF
 	'erreur:description' => '¡falta la id en la definición de la herramienta!',
 	'erreur:distant' => 'el servidor externo',
 	'erreur:jquery' => '{{Nota}}: la biblioteca {jQuery} parece estar inactiva para esta página. Consulta [aquí->http://www.spip-contrib.net//La-navaja-suiza] el párrafo sobre las dependencias del plugin, o recarga esta página.',
@@ -521,7 +521,7 @@ _ • {Extendido}: se reemplazan adem&aacute;s los enlaces del tipo {<html>yo@sp
 	'mailcrypt:nom' => 'MailCrypt',
 	'maj_auto:description' => 'Cet outil vous permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
-La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
+La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
 
 Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que vous soyez obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # NEW
 	'maj_auto:nom' => 'Mises à jour automatiques', # NEW
@@ -727,7 +727,7 @@ Cet outil est compatible avec : « [.->sommaire] ».', # NEW
 
 Consulta [aquí ->http://www.spip.net/es_article2247.html] la documentación de SPIP sobre el tema.
 
-Esta herramienta también acepta argumentos introducidos por SPIP 2.0. Por ejemplo, el atajo <code><:cadena{nombre=José García, edad=37}:></code> permite pasar dos parámetros en la cadena siguiente: <code>\'cadena\'=>"Hola, soy @nombre@ y tengo @edad@ años"</code>.
+Esta herramienta también acepta argumentos introducidos por SPIP 2.0. Por ejemplo, el atajo <code><:cadena{nombre=José García, edad=37}:></code> permite pasar dos parámetros en la cadena siguiente: <code>\'cadena\'=>"Hola, soy @nombre@ y tengo @edad@ años\\"</code>.
 
 La función de SPIP utilizada en PHP es  <code>_T(\'cadena\')</code> sin argumentos, y <code>_T(\'cadena, array(\'arg1\'=>\'un texto\', \'arg2\'=>\'otro texto\'))</code> con argumentos.
 
