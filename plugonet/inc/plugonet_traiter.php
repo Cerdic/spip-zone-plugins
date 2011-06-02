@@ -154,6 +154,8 @@ function plugin2paquet($plugins) {
 		$plugins[$cle_min_min]['nom'] = $plugins[$cle_min_max]['nom'];
 		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'];
 		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'];
+		$plugins[$cle_min_min]['slogan'] = $plugins[$cle_min_max]['slogan'];
+		$plugins[$cle_min_min]['description'] = $plugins[$cle_min_max]['description'];
 		// On initialise la compatibilite avec la fusion des intervalles de compatibilite SPIP
 		$plugins[$cle_min_min]['compatibilite_paquet'] = $compatibilite_paquet;
 
@@ -214,7 +216,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
-		list($commentaire, $descriptions) = plugin2balise_commentaire($D['description'], $D['prefix']);
+		list($commentaire, $descriptions) = plugin2balise_commentaire($D['description'], $D['slogan'], $D['prefix']);
 	
 		$auteur = plugin2balise_copy($D['auteur'], 'auteur');
 		$licence = plugin2balise_copy($D['licence'], 'licence');
@@ -282,8 +284,8 @@ function plugin2balise_nom($texte) {
 // Extrait la traduction francaise uniquement
 // -- on renvoie aussi le tableau des descriptions et slogans par langue pour eviter de le 
 //    recalculer ensuite
-function plugin2balise_commentaire($description, $prefixe) {
-	$descriptions = extraire_descriptions($description, $prefixe);
+function plugin2balise_commentaire($description, $slogan, $prefixe) {
+	$descriptions = extraire_descriptions($description, $slogan, $prefixe);
 	$res = "\t<!-- ". $descriptions['fr'][strtolower($prefixe) . '_slogan'] . " -->";
 
 	return array($res ? "\n$res" : '', $descriptions);
@@ -621,19 +623,32 @@ function traiter_multi($texte)
 	return $trads;
 }
 
-function extraire_descriptions($description, $prefixe) {
+function extraire_descriptions($description, $slogan, $prefixe) {
 	include_spip('inc/langonet_utils');
 
 	$langs = array();
+	
+	// Traitement de la balise slogan si elle existe
+	if ($slogan) {
+		foreach (traiter_multi($slogan) as $lang => $_descr) {
+			if (!$lang)
+				$lang = 'fr';
+			$langs[$lang][strtolower($prefixe) . '_slogan'] = entite2utf(trim($_descr));
+		}
+	}
+	
+	// Traitement de la balise description.
+	// Si pas de balise slogan passee en argument, on extrait un slogan de la description
 	foreach (traiter_multi($description) as $lang => $_descr) {
 		if (!$lang)
 			$lang = 'fr';
-		$description = entite2utf(trim($_descr));
-		$langs[$lang][strtolower($prefixe) . '_description'] = $description;
-		if (preg_match(',^\s*(.+)[.!?:\r\n\f],Um', $description, $matches))
-			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim($matches[1]);
-		else
-			$langs[$lang][strtolower($prefixe) . '_slogan'] = trim(couper($description, 150, ''));
+		$texte = entite2utf(trim($_descr));
+		$langs[$lang][strtolower($prefixe) . '_description'] = $texte;
+		if (!slogan)
+			if (preg_match(',^\s*(.+)[.!?:\r\n\f],Um', $texte, $matches))
+				$langs[$lang][strtolower($prefixe) . '_slogan'] = trim($matches[1]);
+			else
+				$langs[$lang][strtolower($prefixe) . '_slogan'] = trim(couper($texte, 150, ''));
 	}
 	
 	return $langs;

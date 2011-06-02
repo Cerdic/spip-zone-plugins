@@ -34,7 +34,7 @@
 
 <!-- balise ne devant figurer qu'une seule fois sous la balise plugin -->
 
-<!ENTITY % CONTENT1 "nom|categorie|version|version_base|meta|etat|description|prefix|icon" >
+<!ENTITY % CONTENT1 "nom|categorie|version|version_base|meta|etat|slogan|description|prefix|icon" >
 
 <!-- Pour que les CONTENT1 ne figurent qu'une fois
  il faudrait une ecriture trop complexe. Tant pis -->
@@ -44,6 +44,7 @@
           spip %INTERVAL; #IMPLIED
 >
 
+<!ELEMENT slogan (multi|#PCDATA)*>
 <!ELEMENT description (multi|#PCDATA)*>
 <!ELEMENT nom (multi|#PCDATA)*>
 <!ELEMENT version_base (#PCDATA)>
