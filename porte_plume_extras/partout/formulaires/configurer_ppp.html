@@ -2,6 +2,9 @@
 <!-- nom=ppp -->
 
 <div class="formulaire_spip formulaire_configurer_ppp">
+
+<h3 class='titrem'>[(#CHEMIN{images/configure_toolbars-22.png}|image_reduire{24}|inserer_attribut{class,cadre-icone}|inserer_attribut{alt,''})]<:ppp:cfg_titre:></h3>
+
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method="post" action="#ENV{action}">
@@ -32,7 +35,7 @@
 						<h3 class="legend"><:ecrire:titre_config_fonctions:></h3>
 						<ul>
 							[(#SAISIE{oui_non,configuration_description_ppp,
-								label=<:ecrire:entree_description_site:>,
+								label=<:ecrire:texte_descriptif_rapide:>,
 								defaut=on}
 							)]
 						</ul>
@@ -62,8 +65,8 @@
 				</li>	
 			</ul>
 			<p class="boutons">
-				<input type="submit" name="_cfg_ok" value="<:cfg:bouton_mettre_a_jour:>" />
-				<input type="submit" name="_cfg_delete" value="<:cfg:supprimer:>" />
+				<input type="submit" name="_cfg_ok" value="<:ppp:bouton_mettre_a_jour:>" />
+				<input type="submit" name="_cfg_delete" value="<:ppp:supprimer:>" />
 			</p>
 		</div>
 	</form>

@@ -30,3 +30,33 @@
 	<necessite id="saisies" version="[1.1;]" />
 	<categorie>edition</categorie>
 </plugin>
+<plugin spip='[2.3.0-dev;3.0.0]'>
+	<nom>
+		<multi>
+			[fr]Porte Plume Partout
+			[en]Quill everywhere
+		</multi>
+	</nom>
+	<auteur>Pascal M&#233;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
+	<licence>GPLv3</licence>
+	<version>1.0.4</version>
+	<icon>images/configure_toolbars-48.png</icon>
+	<lien>http://www.spip-contrib.net/Plugin-Porte-plume-partout</lien>
+
+	<description>
+		<multi>
+			[fr]Porte Plume Partout sert &#224; ajouter la barre d'&#233;dition aux champs DESCRIPTIF, CHAPO et PS
+			[en]Quill everywhere enables the editing toolbar on other text fields (standfirst, description,ps)
+		</multi>
+	</description>
+	<etat>test</etat>
+	<prefix>ppp</prefix> <!--important, sert de lien au fichier de pipeline et aussi dans la définition de la fonction incluse-->
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>ppp_pipelines.php</inclure>
+	</pipeline>
+	<necessite id='porte_plume' version='[1.6.4;]' />
+	<necessite id="saisies" version="[1.1;]" />
+	<categorie>edition</categorie>
+</plugin>
