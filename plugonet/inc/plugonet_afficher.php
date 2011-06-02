@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pipeline d'affichage des blocs de navigation
+ * Pipeline d'affichage des blocs de navigation droite
  *
  */
 function plugonet_affiche_droite($flux) {
@@ -14,6 +14,26 @@ function plugonet_affiche_droite($flux) {
 	OR ($exec == "plugonet_generer")) {
 		$flux['data'] .= recuperer_fond("prive/navigation/aide_paquetxml");
 	}
+
+	return $flux;
+}
+
+
+/**
+ * Pipeline d'affichage des blocs de navigation gauche
+ *
+ */
+function plugonet_affiche_gauche($flux) {
+
+	$exec = $flux["args"]["exec"];
+
+	// On affiche le bloc d'infos du plugin quelque soit la page
+	// -- extraction des informations a fournir au bloc
+	$informer = chercher_filtre('info_plugin');
+	$infos = $informer('plugonet', 'tout');
+	$infos['description'] = propre($infos['description']);
+
+	$flux['data'] .= recuperer_fond("prive/navigation/info_plugin", array('infos' => $infos));
 
 	return $flux;
 }

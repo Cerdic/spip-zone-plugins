@@ -38,9 +38,7 @@ function exec_plugonet_generer_dist(){
 	
 	// colonne gauche
 	echo debut_gauche('', true);
-	// -- Boite d'infos
-	$boiter = charger_fonction('boite_infos', 'plugins');
-	echo debut_boite_info(true). $boiter() . fin_boite_info(true);
+	// -- Boite d'infos : aucune
 	echo pipeline('affiche_gauche', array('args'=>array('exec'=>'plugonet_generer'),'data'=>''));
 	
 	// colonne droite
