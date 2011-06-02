@@ -25,7 +25,9 @@
 	</langue>
 	<langue code="ro" />
 	<langue code="ru" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
 </traduction>

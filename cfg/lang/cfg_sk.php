@@ -8,57 +8,57 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bouton_effacer' => 'Effacer', # NEW
-	'bouton_mettre_a_jour' => 'Update', # MODIF
-	'bouton_reset' => 'Reset', # NEW
+	'bouton_effacer' => 'Odstrániť',
+	'bouton_mettre_a_jour' => 'Aktualizovať',
+	'bouton_reset' => 'Obnoviť',
 
 	// C
-	'cfg' => 'CFG', # MODIF
-	'choisir_module_a_configurer' => 'Choose the module to configure.', # MODIF
-	'config_enregistree' => '<b>@nom@</b> has been saved', # MODIF
-	'config_supprimee' => '<b>@nom@</b> has been deleted', # MODIF
-	'configuration_modules' => 'Module configuration', # MODIF
+	'cfg' => 'CFG',
+	'choisir_module_a_configurer' => 'Vyberte modul, ktorý chcete nastaviť.',
+	'config_enregistree' => '<b>@nom@</b> bol uložený',
+	'config_supprimee' => '<b>@nom@</b> bol odstránený',
+	'configuration_modules' => 'Nastavenie modulu',
 
 	// E
-	'erreur_copie_fichier' => 'It is impossible to copythe file @fichier@ to its final destination', # MODIF
-	'erreur_enregistrement' => 'An error occurred while saving <b>@nom@</b>', # MODIF
-	'erreur_lecture' => 'Impossible to read @nom@', # MODIF
-	'erreur_open_w_fichier' => 'Impossible to open @fichier@ for modification', # MODIF
-	'erreur_suppression' => 'An error occurred while deleting <b>@nom@</b>', # MODIF
-	'erreur_suppression_fichier' => 'The file @fichier@ cannot be deleted.', # MODIF
-	'erreur_type_id' => 'The field @champ@ must begin with a letter or an underscore', # MODIF
-	'erreur_type_idnum' => 'The field @champ@ must be numeric', # MODIF
-	'erreur_type_pwd' => 'The field @champ@ must comprise more than 5 characters', # MODIF
+	'erreur_copie_fichier' => 'Súbor @fichier@ na nedá skopírovať do cieľového priečinka',
+	'erreur_enregistrement' => 'Pri ukladaní <b>@nom@</b> nastala chyba',
+	'erreur_lecture' => '@nom@ sa nedá čítať',
+	'erreur_open_w_fichier' => '@fichier@ sa nedá otvoriť na upravovanie',
+	'erreur_suppression' => 'Pri odstraňovaní <b>@nom@</b> nastala chyba',
+	'erreur_suppression_fichier' => 'Súbor @fichier@ sa nedá odstrániť.',
+	'erreur_type_id' => 'Pole @champ@ sa musí začínať na písmeno alebo podčiarkovník',
+	'erreur_type_idnum' => 'Pole @champ@ musí byť číselné',
+	'erreur_type_pwd' => 'Pole @champ@ musí mať viac ako 5 znakov',
 
 	// I
-	'id_manquant' => 'Missing identifier', # MODIF
-	'installation_librairies' => 'Download libraries', # MODIF
-	'installation_liste_libs' => 'List of libraries', # MODIF
-	'installer_dossier_lib' => 'You must create a directory named @dir@ with write permissions at the root of your SPIP site.', # MODIF
-	'installer_lib_192' => 'To install a library, unzip the zip file manually and copy its contents to the @dir@ directory.', # MODIF
+	'id_manquant' => 'Chýba identifikátor',
+	'installation_librairies' => 'Stiahnuť knižnice',
+	'installation_liste_libs' => 'Zoznam knižníc',
+	'installer_dossier_lib' => 'Treba vytvoriť priečinok @dir@ s povolením zapisovať v koreňovom adresári vašej SPIP-stránky.',
+	'installer_lib_192' => 'Ak chcete nainštalovať knižnicu, manuálne rozbaľte súbor zip a jeho obsah skopírujte do priečinka @dir@.',
 
 	// L
-	'label_activer' => 'Activate', # MODIF
-	'label_obligatoire' => 'Required entry', # MODIF
+	'label_activer' => 'Aktivovať',
+	'label_obligatoire' => 'Povinný údaj',
 
 	// N
-	'nom_table_manquant' => 'Missing SQL table name', # MODIF
-	'nouveau' => 'New', # MODIF
+	'nom_table_manquant' => 'Chýba názov tabuľky SQL',
+	'nouveau' => 'Nový',
 
 	// O
-	'ok' => 'OK', # MODIF
+	'ok' => 'OK',
 
 	// P
-	'pas_de_champs_dans' => '<MODIF>No field found in @nom@', # MODIF
-	'pas_de_changement' => 'No change found in <b>@nom@</b>', # MODIF
+	'pas_de_champs_dans' => 'V @nom@ sa nenašli žiadne polia',
+	'pas_de_changement' => 'V <b>@nom@</b> sa nenašla žiadna zmena',
 
 	// R
-	'refus_configuration_administrateur' => 'Only the site administrators are authorised to change these parameters.', # MODIF
-	'refus_configuration_webmestre' => 'Only the site webmasters are authorised to modify these parameters.', # MODIF
-	'reset' => 'Delete', # MODIF
+	'refus_configuration_administrateur' => 'Zmeniť tieto parametre sú oprávnení iba administrátori stránky.',
+	'refus_configuration_webmestre' => 'Upravovať tieto parametre sú oprávnení iba webmasteri stránky.',
+	'reset' => 'Odstrániť',
 
 	// S
-	'supprimer' => '<MODIF>Odstrániť'
+	'supprimer' => 'Obnoviť na predvolené hodnoty'
 );
 
 ?>
