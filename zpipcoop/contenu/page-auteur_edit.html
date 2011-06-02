@@ -1,0 +1,14 @@
+<div class="contenu-principal">
+	<div class="cartouche">
+		#ENV**{icone_retour}
+		<B_titre><:zpipcoop:texte_modifier_auteur:>
+			<BOUCLE_titre(AUTEURS) {id_auteur}>
+				<h2>#NOM</h2>
+			</BOUCLE_titre>
+		</B_titre>
+	</div><!--#cartouche-->
+	<div class="cadre-formulaire-editer">
+	[(#AUTORISER{ecrire}|oui)#FORMULAIRE_EDITER_AUTEUR{#ID_AUTEUR, #ENV{retour}}]
+	[(#AUTORISER{ecrire}|non)<:zpipcoop:pas_le_droit_ecrire:>]
+	</div><!--#cadre-formulaire-editer-->
+</div><!--#contenu-principale-->

@@ -11,17 +11,17 @@
 	[(#ENV{type}|=={breve}|oui)[(#ENV{id_breve}|oui)[(#ENV{id_breve}|=={oui}|non)[(#AUTORISER{modifier, breve, #ID_BREVE})
 	<li class="item"><a href="[(#URL_PAGE{breves_edit,id_breve=#ID_BREVE,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_BREVE})]" class="edit" title="<:zpipcoop:editer_breve|attribut_html:>"><:zpipcoop:editer_breve:></a></li>]]]]
 	[(#CONFIG{activer_breves}|oui)<li class="item"><a href="[(#URL_PAGE{breves_edit,id_breve=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#SELF})]" class="add" title="<:zpipcoop:nouvelle_breve|attribut_html:>"><:zpipcoop:nouvelle_breve:></a></li>]
-      
+
 	[(#REM) Consernant les sites]
 	[(#ENV{type}|=={site}|oui)[(#ENV{id_syndic}|oui)[(#ENV{id_syndic}|=={oui}|non)[(#AUTORISER{modifier, site, #ID_SYNDIC})
 	<li class="item"><a href="[(#URL_PAGE{sites_edit,id_syndic=#ID_SYNDIC,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_SYNDIC})]" class="edit" title="<:zpipcoop:editer_site|attribut_html:>"><:zpipcoop:editer_site:></a></li>]]]]
 	[(#CONFIG{activer_sites}|oui)<li class="item"><a href="[(#URL_PAGE{sites_edit,id_syndic=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#SELF})]" class="add" title="<:zpipcoop:nouveau_site|attribut_html:>"><:zpipcoop:nouveau_site:></a></li>]
-      
+
 	[(#REM) Consernant les rubriques]
 	[(#ENV{type}|=={rubrique}|oui)[(#ENV{id_rubrique}|oui)[(#ENV{id_rubrique}|=={oui}|non)[(#AUTORISER{modifier, rubrique, #ID_RUBRIQUE})
 	<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=#ID_RUBRIQUE,id_parent=[(#ID_PARENT|sinon{'0'})]}|parametre_url{retour,[(#URL_RUBRIQUE|url_absolue)]})]" class="edit" title="<:zpipcoop:editer_groupe|attribut_html:>"><:zpipcoop:editer_groupe:></a></li>]]]]
 	[(#AUTORISER{creerrubriquedans, rubrique, #ID_RUBRIQUE})<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_RUBRIQUE})]" class="add" title="<:zpipcoop:nouveau_groupe|attribut_html:>"><:zpipcoop:nouveau_groupe:></a></li>]
-      
+
 	[(#REM) Cree un ticket]
 	[(#PLUGIN{tickets}|oui)
 	<li class="item"><a href="[(#URL_PAGE{tickets_edit,id_ticket=news}|parametre_url{retour,tickets_edit})]" class="add" title="<:zpipcoop:nouveau_ticket|attribut_html:>"><:zpipcoop:nouveau_ticket:></a></li>]

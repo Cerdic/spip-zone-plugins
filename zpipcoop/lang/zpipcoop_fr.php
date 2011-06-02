@@ -1,112 +1,113 @@
 <?php
-// Fichier de langue sp�cifique au squelette
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-//0
-'0_ticket' => 'aucun ticket',
+	//0
+	'0_ticket' => 'aucun ticket',
 
-// 1
-'1_ticket' => 'ticket',
+	// 1
+	'1_ticket' => 'ticket',
 
-//A
-'abonnement' => 'Abonnement',
-'accueil_site' => 'Accueil',
-'afaire_aller_jalon' => 'Aller au jalon',
-'afaire_colonne_assigne' => 'Trait&eacute; par',
-'afaire_colonne_date' => 'Date',
-'afaire_colonne_id' => 'Num&eacute;ro',
-'afaire_colonne_importance' => 'Importance',
-'afaire_colonne_jalon' => 'Jalon',
-'afaire_colonne_titre' => 'R&eacute;sum&eacute;',
-'afaire_colonne_type' => 'Type',
-'afaire_msg_0_ticket_jalon' => 'Aucun ticket planifi&eacute; pour ce jalon',
-'afaire_non_planifies' => 'Non planifi&eacute;s',
-'afaire_page_sommaire' => 'Les jalons actuellement pr&eacute;vus sont :',
-'afaire_tickets_en_analyse' => 'Tickets en cours d\'analyse',
-'afaire_tickets_en_traitement' => 'Tickets en cours de traitement',
-'afaire_tickets_termines' => 'Tickets termin&eacute;s',
-'agenda' => 'Agenda',
-'annuaire' => 'Annuaire',
-'aucune_breve' => 'Aucune br&egrave;ve',
-'aucun_document' => 'Aucun document',
-'aucun_message' => 'Aucun message',
+	//A
+	'abonnement' => 'Abonnement',
+	'accueil_site' => 'Accueil',
+	'afaire_aller_jalon' => 'Aller au jalon',
+	'afaire_colonne_assigne' => 'Traité par',
+	'afaire_colonne_date' => 'Date',
+	'afaire_colonne_id' => 'Numéro',
+	'afaire_colonne_importance' => 'Importance',
+	'afaire_colonne_jalon' => 'Jalon',
+	'afaire_colonne_titre' => 'Résumé',
+	'afaire_colonne_type' => 'Type',
+	'afaire_msg_0_ticket_jalon' => 'Aucun ticket planifié pour ce jalon',
+	'afaire_non_planifies' => 'Non planifiés',
+	'afaire_page_sommaire' => 'Les jalons actuellement prévus sont :',
+	'afaire_tickets_en_analyse' => 'Tickets en cours d\'analyse',
+	'afaire_tickets_en_traitement' => 'Tickets en cours de traitement',
+	'afaire_tickets_termines' => 'Tickets terminés',
+	'agenda' => 'Agenda',
+	'annuaire' => 'Annuaire',
+	'aucune_breve' => 'Aucune brève',
+	'aucun_document' => 'Aucun document',
+	'aucun_message' => 'Aucun message',
 
-//B
-'bouton_telecharger' => 'T&ecute;l&ecute;charger',
-'breves' => 'Br&egrave;ves',
+	//B
+	'bouton_telecharger' => 'Télécharger',
+	'breves' => 'Brèves',
 
-//C
-'categories' => 'Cat&ecute;gories',
-'commentaires' => 'Commentaires',
+	//C
+	'categories' => 'Catégories',
+	'commentaires' => 'Commentaires',
 
-//D
-'derniers_visiteurs' => 'Derniers visiteurs',
-'documents' => 'Documents',
+	//D
+	'derniers_visiteurs' => 'Derniers visiteurs',
+	'documents' => 'Documents',
 
-//E
-'editer_breve' => '&Eacute;diter la br&egrave;ve',
-'editer_groupe' => '&Eacute;diter le groupe',
-'editer_message' => '&Eacute;diter le message',
-'editer_site' => '&Eacute;diter le site',
+	//E
+	'editer_breve' => 'Éditer la brève',
+	'editer_groupe' => 'Éditer le groupe',
+	'editer_message' => 'Éditer le message',
+	'editer_profil' => 'Éditer mon profil',
+	'editer_site' => 'Éditer le site',
 
-//F
+	//F
 
-//G
-'groupes_travail' => 'Vos groupes de travail',
+	//G
+	'groupes_travail' => 'Vos groupes de travail',
 
-//H
+	//H
 
-//I
-'info_breves' => 'Les br&egrave;ves',
-'info_breves_prop' => 'Les br&egrave;ves propos&eacute;s &agrave la publication',
-'info_breves_publies' => 'Vos br&egrave;ves publi&eacute;s',
-'info_messages' => 'Vos messages',
-'info_messages_edition' => 'Vos messages en cours de r&eacute;daction',
-'info_messages_prop' => 'Vos messages propos&eacute;s &agrave la publication',
-'info_messages_publies' => 'Vos messages publi&eacute;s',
+	//I
+	'info_breves' => 'Les brèves',
+	'info_breves_prop' => 'Les brèves proposés à la publication',
+	'info_breves_publies' => 'Vos brèves publiés',
+	'info_messages' => 'Vos messages',
+	'info_messages_edition' => 'Vos messages en cours de rédaction',
+	'info_messages_prop' => 'Vos messages proposés à la publication',
+	'info_messages_publies' => 'Vos messages publiés',
 
-//L
-'laissez_commentaire' => 'Laissez un commentaire',
-'lire_la_suite' => 'Lire la suite',
-'lire_la_suite_de' => ' de ',
-	
-//M
-'messages' => 'Messages',
-'modifier_ticket' => 'Modifier ce ticket',
+	//L
+	'laissez_commentaire' => 'Laissez un commentaire',
+	'lire_la_suite' => 'Lire la suite',
+	'lire_la_suite_de' => ' de ',
+		
+	//M
+	'messages' => 'Messages',
+	'modifier_ticket' => 'Modifier ce ticket',
+	'mon_profil' => 'Mon profil',
 
-//N
-'n_tickets' => 'tickets',
-'nouveau_groupe' => 'Nouveau groupe',
-'nouveau_message' => 'Nouveau message',
-'nouveau_site' => 'Nouveau site',
-'nouveau_ticket' => 'Nouveau ticket',
-'nouvelle_breve' => 'Nouvelle br&egrave;ve',
+	//N
+	'n_tickets' => 'tickets',
+	'nouveau_groupe' => 'Nouveau groupe',
+	'nouveau_message' => 'Nouveau message',
+	'nouveau_site' => 'Nouveau site',
+	'nouveau_ticket' => 'Nouveau ticket',
+	'nouvelle_breve' => 'Nouvelle brève',
 
-//P
-'pas_le_droit_ecrire' => 'Vous n\'avez pas d\'autorisation en &eacute;crire',
+	//P
+	'pas_le_droit_ecrire' => 'Vous n\'avez pas d\'autorisation en écriture',
 
-//R
-'redaction' => 'R&eacute;daction',
-'repondre_site' => 'R&eacute;pondre &agrave; ce site',
-'retour' => 'Retour',
+	//R
+	'redaction' => 'Rédaction',
+	'repondre_site' => 'Répondre à ce site',
+	'retour' => 'Retour',
 
-//S
-'sites' => 'Sites',
-'suivis_public_info_email' => 'Adresse de suivis des notifications',
+	//S
+	'sites' => 'Sites',
+	'suivis_public_info_email' => 'Adresse de suivis des notifications',
 
-//T
-'texte_modifier_breve' => 'Modifier la br&egrave;ve :',
-'toutes_les_breves' => 'Toutes les br&egrave;ves',
-'tous_les_sites' => 'Tous les sites',
-'tous_les_tickets' => 'Tous les tickets',
-'tous_vos_messages' => 'Tous vos messages',
+	//T
+	'texte_modifier_auteur' => 'Modifier l\'auteur :',
+	'texte_modifier_breve' => 'Modifier la brève :',
+	'toutes_les_breves' => 'Toutes les brèves',
+	'tous_les_sites' => 'Tous les sites',
+	'tous_les_tickets' => 'Tous les tickets',
+	'tous_mes_messages' => 'Tous mes messages',
 
-//V
-'voir_votre_profil' => 'Voir votre profil',
-'votre_profil' => 'Votre profil',
+	//V
+	'voir_mon_profil' => 'Voir mon profil',
 
 );
 

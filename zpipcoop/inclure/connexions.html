@@ -1,10 +1,10 @@
-	<B_connexions>
-	<div class="liste visiteurs">
-	<h2 class="h2"><:zpipcoop:derniers_visiteurs:></h2>
-	<ul class="liste-items">
-		<BOUCLE_connexions(AUTEURS){tous}{!par en_ligne}{0,10}>
-			<li class="item"><a href="#URL_AUTEUR">#NOM</a>[ (#EN_LIGNE|affdate{d/m/Y H:i:s})]</li>
-		</BOUCLE_connexions>
-	</ul>
-	</div>
-	</B_connexions>
+<B_connexions>
+<div class="liste visiteurs">
+<h2 class="h2"><:zpipcoop:derniers_visiteurs:></h2>
+<ul class="liste-items">
+	<BOUCLE_connexions(AUTEURS){tous}{!par en_ligne}{0,10}>
+		<li class="item"><a href="#URL_AUTEUR">#NOM</a>[ (#EN_LIGNE|affdate{d/m/Y H:i:s})]</li>
+	</BOUCLE_connexions>
+</ul>
+</div>
+</B_connexions>
