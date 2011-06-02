@@ -1,4 +1,6 @@
 <traduction module="textes_legaux" gestionnaire="salvatore" reference="fr">
 	<langue code="legaux_en" />
 	<langue code="legaux_fr" />
+	<langue code="legaux_legaux_en" />
+	<langue code="legaux_legaux_fr" />
 </traduction>
