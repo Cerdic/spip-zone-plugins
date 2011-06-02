@@ -67,7 +67,7 @@ function plugins_preparer_sql_plugin($plugin)
 	// - Nom :	on repere dans le nom du plugin un chiffre en fin de nom
 	//			et on l'ampute de ce numero pour le normaliser
 	//			et on passe tout en unicode avec le charset du site
-	$champs['nom'] = normaliser_nom($plugin['nom']);
+	$champs['nom'] = normaliser_nom($plugin['nom'], 'fr', false);
 
 	// Extraction de la compatibilite SPIP
 	$champs['compatibilite_spip'] = ($plugin['compatible']) ? $plugin['compatible'] : '';
@@ -115,22 +115,26 @@ function normaliser_slogan($description) {
 }
 
 
-function normaliser_nom($nom) {
+function normaliser_nom($nom, $langue='', $supprimer_numero=true) {
 	include_spip('inc/texte');
 
 	// On extrait les traductions de l'eventuel multi
 	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
 	$noms = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $nom, $nbr_replace));
-	$multi = ($nbr_replace > 0) ? true : false;
-	
+	$multi = ($nbr_replace > 0 AND !langue) ? true : false;
+
 	$nouveau_nom = '';
 	foreach ($noms as $_lang => $_nom) {
 		$_nom = trim($_nom);
 		if (!$_lang)
 			$_lang = 'fr';
-		$nbr_matches = preg_match(',(.+)(\s+[\d._]*)$,Um', $_nom, $matches);
-		$nouveau_nom .= (($multi) ? '[' . $_lang . ']' : '') . 
-						(($nbr_matches > 0) ? trim($matches[1]) : $_nom);
+		if ($supprimer_numero)
+			$nbr_matches = preg_match(',(.+)(\s+[\d._]*)$,Um', $_nom, $matches);
+		else
+			$nbr_matches = 0;
+		if (!$langue OR $langue == $_lang OR count($noms) == 1)
+			$nouveau_nom .= (($multi) ? '[' . $_lang . ']' : '') . 
+							(($nbr_matches > 0) ? trim($matches[1]) : $_nom);
 	}
 	
 	if ($nouveau_nom)

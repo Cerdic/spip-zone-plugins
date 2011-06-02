@@ -95,14 +95,6 @@ function svp_afficher_voirenligne($id_depot) {
 }
 
 
-// function svp_extraire_url($lien) {
-// 
-// 	if (!preg_match(_RACCOURCI_LIEN, $lien, $matches))
-// 		return trim($lien);
-// 	else
-// 		return trim($matches[4]);
-// }
-// 
 function svp_afficher_statistiques_globales($id_depot=0){
 	$info = '';
 
