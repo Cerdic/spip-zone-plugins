@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_facteur_absent' => 'Pour utiliser cette fonction, tu dois installer le plugin Facteur.',
 	'configuration_pj_nb_max' => 'Nombre maximal de pièces jointes',
 	'configuration_regle_liste_explication' => 'Choisis une règle de calcul de la liste des destinataires potentiels et de la méthode de sélection proposée à l\'internaute.',
-	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
+	'configuration_texteinfolettre' => 'Texte infolettre',
+	'configuration_texteinfolettre_explication' => 'Change éventuellement le texte associé à la case à cocher infolettre.',
 	'consulter_memoire' => 'Ce message est enregistré sur ton site :',
 	'courriel_de' => 'De',
 	'courriel_pour' => 'Pour',
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'madame' => 'Madame',
 	'mademoiselle' => 'Mademoiselle',
 	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?',
-	'modele_nom_formulaire' => 'un formulaire de contact', # MODIF
+	'modele_nom_formulaire' => 'le formulaire de contact avancé',
 	'monsieur' => 'Monsieur',
 	'msg_accueil' => 'Tu trouveras ici les messages de contact que tu as reçu.',
 	'msg_contact' => 'Message de contact',
@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalisé',
 
 	// P
-	'par' => 'Par : ', # NEW
+	'par' => 'Par : ',
 	'preselection' => 'Décocher tous les éléments de la liste de destinataires',
 
 	// S
