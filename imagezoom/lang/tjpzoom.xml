@@ -8,7 +8,9 @@
 	</langue>
 	<langue code="es" />
 	<langue code="fa" />
-	<langue code="fr_tu" />
+	<langue code="fr_tu">
+		<traducteur nom="beatnick" />
+	</langue>
 	<langue code="gl" />
 	<langue code="km" />
 	<langue code="lb" />
