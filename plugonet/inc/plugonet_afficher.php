@@ -27,13 +27,17 @@ function plugonet_affiche_gauche($flux) {
 
 	$exec = $flux["args"]["exec"];
 
-	// On affiche le bloc d'infos du plugin quelque soit la page
+	// On affiche le bloc d'infos du plugin quelque soit la page de plugonet
 	// -- extraction des informations a fournir au bloc
-	$informer = chercher_filtre('info_plugin');
-	$infos = $informer('plugonet', 'tout');
-	$infos['description'] = propre($infos['description']);
-
-	$flux['data'] .= recuperer_fond("prive/navigation/info_plugin", array('infos' => $infos));
+	if (($exec == "plugonet_valider") 
+	OR ($exec == "plugonet_generer")
+	OR ($exec == "plugonet_verifier")) {
+		$informer = chercher_filtre('info_plugin');
+		$infos = $informer('plugonet', 'tout');
+		$infos['description'] = propre($infos['description']);
+	
+		$flux['data'] .= recuperer_fond("prive/navigation/info_plugin", array('infos' => $infos));
+	}
 
 	return $flux;
 }
