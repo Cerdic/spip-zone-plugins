@@ -9,6 +9,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_code_postal' => 'Il CAP non è corretto.',
+	'erreur_comparaison_egal' => 'La valeur doit être égale au champ "@nom_champ@"', # NEW
+	'erreur_comparaison_egal_type' => 'La valeur doit être égale et de même type que le champ "@nom_champ@"', # NEW
+	'erreur_comparaison_grand' => 'La valeur doit être supérieure au champ "@nom_champ@"', # NEW
+	'erreur_comparaison_grand_egal' => 'La valeur doit être supérieure ou égale au champ "@nom_champ@"', # NEW
+	'erreur_comparaison_petit' => 'La valeur doit être inférieure au champ "@nom_champ@"', # NEW
+	'erreur_comparaison_petit_egal' => 'La valeur doit être inférieure ou égale au champ "@nom_champ@"', # NEW
 	'erreur_date' => 'La data non è valida.',
 	'erreur_date_format' => 'Il formato della data non è corretto.',
 	'erreur_decimal' => 'Il valore deve essere un numero decimale.',
