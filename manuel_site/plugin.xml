@@ -2,11 +2,14 @@
 	<nom>Manuel de r&eacute;daction du site</nom>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.1</version>
+	<version>0.5</version>
 	<version_base>0.2</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
-	<multi>[fr]Ce plugin installe une ic&ocirc;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&eacute; le manuel de r&eacute;daction du site. Ce manuel est un article du site</multi>
+	<multi>
+		[fr]Ce plugin installe une ic&ocirc;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&eacute; le manuel de r&eacute;daction du site. Ce manuel est un article du site.
+		[en]This plugin installs an help icon making it possible to post since any page of private space the Website Editor Manual. This manual is an article of the website.
+	</multi>
 	</description>
 	<icon>images/manuelsite-32.png</icon>
 	<lien></lien>
