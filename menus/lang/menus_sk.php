@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => '<NEW>Číslo kľúčového slova',
 	'entree_id_objet' => '<NEW>Číslo',
 	'entree_id_rubrique' => '<NEW>Číslo nadradenej rubriky',
+	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
 	'entree_id_secteur_exclus' => 'Numéro du secteur à exclure', # NEW
 	'entree_infini' => '<NEW>Donekonečna',
 	'entree_mapage' => '<NEW>Moja stránka',

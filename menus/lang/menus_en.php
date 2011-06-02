@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Number of the keyword',
 	'entree_id_objet' => 'Number',
 	'entree_id_rubrique' => 'Number of the parent section',
+	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
 	'entree_id_secteur_exclus' => 'Numéro du secteur à exclure', # NEW
 	'entree_infini' => 'To infinity',
 	'entree_mapage' => 'My page',
