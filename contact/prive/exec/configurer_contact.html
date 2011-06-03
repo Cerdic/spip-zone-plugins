@@ -1,8 +1,9 @@
 <!-- titre=<:contact:titre:> -->
 <!-- icone=images/contact-24.png -->
 <!-- logo=images/contact-128.png -->
-
 #CACHE{0}
+[(#AUTORISER{configurer,contact}|oui)
 <div class="ajax">
 #FORMULAIRE_CONFIGURER_CONTACT
 </div>
+]
