@@ -18,7 +18,7 @@ global $connect_statut,$connect_toutes_rubriques;
 
 $id_article=intval(_request('id_article'));
 
-if (_request('exec') == 'articles' AND ($GLOBALS['connect_statut'] == "0minirezo" || $GLOBALS["connect_toutes_rubriques"])) {
+if ((_request('exec') == 'articles' || _request('exec') == 'swfupload_admin')  AND ($GLOBALS['connect_statut'] == "0minirezo" || $GLOBALS["connect_toutes_rubriques"])) {
 $session = session_id();
 
 // si cfg dispo, on charge les valeurs
