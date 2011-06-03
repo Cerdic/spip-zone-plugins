@@ -1,0 +1,93 @@
+#CACHE{0}
+<?php
+
+include_spip('inc/svp_intervaller');
+echo '<strong>TESTS FONCTION compiler_branches_spip()</strong><br /><br /><br />';
+
+echo '<br />Utilises, mais non valides -> a supprimer<br />';
+echo '[2.0.0;2.3.0-dev) : ' . compiler_branches_spip('[2.0.0;2.3.0-dev)') . '<br />';
+echo '[2.0.0;3.1.0) : ' . compiler_branches_spip('[2.0.0;3.1.0)') . '<br />';
+echo '[2.0.0;3.1.0[ : ' . compiler_branches_spip('[2.0.0;3.1.0[') . '<br />';
+echo '[2.0.3;2.2.0-dev] : ' . compiler_branches_spip('[2.0.3;2.2.0-dev]') . '<br />';
+echo '[2.0.3;3.1.0) : ' . compiler_branches_spip('[2.0.3;3.1.0)') . '<br />';
+echo '[2.1;3.1.0) : ' . compiler_branches_spip('[2.1;3.1.0)') . '<br />';
+echo '[2.1.0;2.2) : ' . compiler_branches_spip('[2.1.0;2.2)') . '<br />';
+echo '[2.1.0;2.3.0-dev) : ' . compiler_branches_spip('[2.1.0;2.3.0-dev)') . '<br />';
+echo '[2.0.9;3.1.0) : ' . compiler_branches_spip('[2.0.9;3.1.0)') . '<br />';
+echo '[2.2.0-dev;] : ' . compiler_branches_spip('[2.2.0-dev;]') . '<br />';
+echo '[1.9207;] : ' . compiler_branches_spip('[1.9207;]') . '<br />';
+echo '[;1.925) : ' . compiler_branches_spip('[;1.925)') . '<br />';
+
+echo '<br />Utilises, resultats corrects mais non valides -> a supprimer<br />';
+echo '[1.9.2x;) : ' . compiler_branches_spip('[1.9.2x;)') . '<br />';
+echo '[1.9.3;] : ' . compiler_branches_spip('[1.9.3;]') . '<br />';
+echo '[2.1 dev;] : ' . compiler_branches_spip('[2.1 dev;]') . '<br />';
+echo '[2.1.0 dev;) : ' . compiler_branches_spip('[2.1.0 dev;)') . '<br />';
+echo '[1.9.0;2.0.99] : ' . compiler_branches_spip('[1.9.0;2.0.99]') . '<br />';
+echo '[1.9.2;1.9.3] : ' . compiler_branches_spip('[1.9.2;1.9.3]') . '<br />';
+
+echo '<br />Non utilises et valides<br />';
+echo '(1.9.0;1.9.2] : ' . compiler_branches_spip('(1.9.0;1.9.2]') . '<br />';
+echo '(1.9.0;2.1.9] : ' . compiler_branches_spip('(1.9.0;2.1.9]') . '<br />';
+echo '(1.9.0;2.1.9) : ' . compiler_branches_spip('(1.9.0;2.1.9)') . '<br />';
+echo '(1.9.0;2.1) : ' . compiler_branches_spip('(1.9.0;2.1)') . '<br />';
+echo '(1.9.0;) : ' . compiler_branches_spip('(1.9.0;)') . '<br />';
+
+echo '<br />Utilises et valides<br />';
+echo '[;] : ' . compiler_branches_spip('[;]') . '<br />';
+echo '[1.9.0;1.9.1) : ' . compiler_branches_spip('[1.9.0;1.9.1)') . '<br />';
+echo '[1.9.0;[ : ' . compiler_branches_spip('[1.9.0;[') . '<br />';
+echo '[1.9.2;3.0.0-dev[ : ' . compiler_branches_spip('[1.9.2;3.0.0-dev[') . '<br />';
+echo '[1.9.0;1.9.2] : ' . compiler_branches_spip('[1.9.0;1.9.2]') . '<br />';
+echo '[1.9.0;2.0.0) : ' . compiler_branches_spip('[1.9.0;2.0.0)') . '<br />';
+echo '[1.9.0;2.0.0] : ' . compiler_branches_spip('[1.9.0;2.0.0]') . '<br />';
+echo '[1.9.0;3.0.0] : ' . compiler_branches_spip('[1.9.0;3.0.0]') . '<br />';
+echo '[1.9.0;] : ' . compiler_branches_spip('[1.9.0;]') . '<br />';
+echo '[1.9.1;1.9.2] : ' . compiler_branches_spip('[1.9.1;1.9.2]') . '<br />';
+echo '[1.9.1;3.0.0] : ' . compiler_branches_spip('[1.9.1;3.0.0]') . '<br />';
+echo '[1.9.1;] : ' . compiler_branches_spip('[1.9.1;]') . '<br />';
+echo '[1.9.2;1.9.2] : ' . compiler_branches_spip('[1.9.2;1.9.2]') . '<br />';
+echo '[1.9.2;2.0.0) : ' . compiler_branches_spip('[1.9.2;2.0.0)') . '<br />';
+echo '[1.9.2;3.0.0-dev[ : ' . compiler_branches_spip('[1.9.2;3.0.0-dev[') . '<br />';
+echo '[1.9.2;] : ' . compiler_branches_spip('[1.9.2;]') . '<br />';
+echo '[2.0.0;3.0.0] : ' . compiler_branches_spip('[2.0.0;3.0.0]') . '<br />';
+echo '[2.0.0;[ : ' . compiler_branches_spip('[2.0.0;[') . '<br />';
+echo '[2.0.0;] : ' . compiler_branches_spip('[2.0.0;]') . '<br />';
+echo '[2.0.10;2.1) : ' . compiler_branches_spip('[2.0.10;2.1)') . '<br />';
+echo '[2.0.10;3.0.*] : ' . compiler_branches_spip('[2.0.10;3.0.*]') . '<br />';
+echo '[2.0.10;3.0.0-dev) : ' . compiler_branches_spip('[2.0.10;3.0.0-dev)') . '<br />';
+echo '[2.0.10;[ : ' . compiler_branches_spip('[2.0.10;[') . '<br />';
+echo '[2.0.10;] : ' . compiler_branches_spip('[2.0.10;]') . '<br />';
+echo '[2.0.12;] : ' . compiler_branches_spip('[2.0.12;]') . '<br />';
+echo '[2.0.14;] : ' . compiler_branches_spip('[2.0.14;]') . '<br />';
+echo '[2.0.2;] : ' . compiler_branches_spip('[2.0.2;]') . '<br />';
+echo '[2.0.3;[ : ' . compiler_branches_spip('[2.0.3;[') . '<br />';
+echo '[2.0.3;] : ' . compiler_branches_spip('[2.0.3;]') . '<br />';
+echo '[2.0.6;] : ' . compiler_branches_spip('[2.0.6;]') . '<br />';
+echo '[2.0.8;[ : ' . compiler_branches_spip('[2.0.8;[') . '<br />';
+echo '[2.0.8;] : ' . compiler_branches_spip('[2.0.8;]') . '<br />';
+echo '[2.0.9;3.0.0] : ' . compiler_branches_spip('[2.0.9;3.0.0]') . '<br />';
+echo '[2.0.9;] : ' . compiler_branches_spip('[2.0.9;]') . '<br />';
+echo '[2.0;) : ' . compiler_branches_spip('[2.0;)') . '<br />';
+echo '[2.0;3.0.0] : ' . compiler_branches_spip('[2.0;3.0.0]') . '<br />';
+echo '[2.0;[ : ' . compiler_branches_spip('[2.0;[') . '<br />';
+echo '[2.0;] : ' . compiler_branches_spip('[2.0;]') . '<br />';
+echo '[2.1.0-beta;] : ' . compiler_branches_spip('[2.1.0-beta;]') . '<br />';
+echo '[2.1.0-dev;) : ' . compiler_branches_spip('[2.1.0-dev;)') . '<br />';
+echo '[2.1.0;3.0.0-dev) : ' . compiler_branches_spip('[2.1.0;3.0.0-dev)') . '<br />';
+echo '[2.1.0;3.0.0] : ' . compiler_branches_spip('[2.1.0;3.0.0]') . '<br />';
+echo '[2.1.0;] : ' . compiler_branches_spip('[2.1.0;]') . '<br />';
+echo '[2.1.10;) : ' . compiler_branches_spip('[2.1.10;)') . '<br />';
+echo '[2.1.10;] : ' . compiler_branches_spip('[2.1.10;]') . '<br />';
+echo '[2.1.1;] : ' . compiler_branches_spip('[2.1.1;]') . '<br />';
+echo '[2.1.2;] : ' . compiler_branches_spip('[2.1.2;]') . '<br />';
+echo '[2.1.6;] : ' . compiler_branches_spip('[2.1.6;]') . '<br />';
+echo '[2.1.8;] : ' . compiler_branches_spip('[2.1.8;]') . '<br />';
+echo '[2.1;) : ' . compiler_branches_spip('[2.1;)') . '<br />';
+echo '[2.1;3.0.0-dev) : ' . compiler_branches_spip('[2.1;3.0.0-dev)') . '<br />';
+echo '[2.1;] : ' . compiler_branches_spip('[2.1;]') . '<br />';
+echo '[3.0.0-dev;] : ' . compiler_branches_spip('[3.0.0-dev;]') . '<br />';
+echo 'vide : ' . compiler_branches_spip('') . '<br />';
+
+
+?>

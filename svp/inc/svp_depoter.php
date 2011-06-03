@@ -508,6 +508,8 @@ function svp_completer_plugins($id_depot) {
 			while ($paquet = sql_fetch($resultats)) {
 				// On finalise le plugin en cours et on passe au suivant 
 				if ($plugin_en_cours != $paquet['id_plugin']) {
+					// On deduit maintenant les branches de la compatibilite globale
+					$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
 					// On met a jour le plugin en cours
 					if ($plugin_en_cours != 0)
 						sql_updateq('spip_plugins',
@@ -515,10 +517,11 @@ function svp_completer_plugins($id_depot) {
 									'id_plugin=' . sql_quote($plugin_en_cours));
 					// On passe au plugin suivant
 					$plugin_en_cours = $paquet['id_plugin'];
-					$complements = array('compatibilite_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
+					$complements = array('compatibilite_spip' => '', 'branches_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
 				}
 				
-				// On compile les compléments du plugin avec le paquet courant
+				// On compile les compléments du plugin avec le paquet courant sauf les branches
+				// qui sont deduites en fin de compilation de la compatibilite
 				if ($paquet['date_modif'] > $complements['date_modif'])
 					$complements['date_modif'] = $paquet['date_modif'];
 				if (($complements['date_crea'] === 0)
@@ -553,6 +556,7 @@ function eclater_plugin_paquet($champs_aplat) {
 			'version' => $champs_aplat['version'],
 			'version_base' => $champs_aplat['version_base'],
 			'compatibilite_spip' => $champs_aplat['compatibilite_spip'],
+			'branches_spip' => $champs_aplat['branches_spip'],
 			'etat' => $champs_aplat['etat'],
 			'etatnum' => $champs_aplat['etatnum'],
 			'licence' => $champs_aplat['licence'],

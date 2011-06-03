@@ -38,6 +38,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"date_crea"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus ancienne des paquets du plugin
 		"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus recente des paquets du plugin
 		"compatibilite_spip"	=> "varchar(24) DEFAULT '' NOT NULL", // union des intervalles des paquets du plugin
+		"branches_spip"	=> "varchar(255) DEFAULT '' NOT NULL", // union des branches spip supportees par les paquets du plugin
 	);
 	
 	$plugins_key = array(
@@ -56,6 +57,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"version"		=> "varchar(24) DEFAULT '' NOT NULL",
 		"version_base"	=> "varchar(24) DEFAULT '' NOT NULL",
 		"compatibilite_spip"	=> "varchar(24) DEFAULT '' NOT NULL",
+		"branches_spip"	=> "varchar(255) DEFAULT '' NOT NULL", // branches spip supportees (cf meta)
 		"description"	=> "text DEFAULT '' NOT NULL",
 		"auteur"		=> "text DEFAULT '' NOT NULL",
 		"credit"		=> "text DEFAULT '' NOT NULL",

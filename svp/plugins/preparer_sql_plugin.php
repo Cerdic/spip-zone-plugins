@@ -14,6 +14,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function plugins_preparer_sql_plugin($plugin)
 {
+	include_spip('inc/svp_intervaller');
+	
 	$champs = array();
 	if (!$plugin)
 		return $champs;
@@ -69,8 +71,9 @@ function plugins_preparer_sql_plugin($plugin)
 	//			et on passe tout en unicode avec le charset du site
 	$champs['nom'] = normaliser_nom($plugin['nom'], 'fr', false);
 
-	// Extraction de la compatibilite SPIP
+	// Extraction de la compatibilite SPIP et construction de la liste des branches spip supportees
 	$champs['compatibilite_spip'] = ($plugin['compatible']) ? $plugin['compatible'] : '';
+	$champs['branches_spip'] = ($plugin['compatible']) ? compiler_branches_spip($plugin['compatible']) : '';
 	
 	// Construction du tableau des dependances necessite, lib et utilise
 	$dependances['necessite'] = $plugin['necessite'];
