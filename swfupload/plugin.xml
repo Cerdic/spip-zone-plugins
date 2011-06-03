@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SWFupload</nom>
 	<auteur>Phil 2008, [erational->http://www.erational.org]</auteur>
-	<version>0.6</version>
+	<version>0.6.1</version>
 	<etat>dev</etat>
 	<description>Permet de t&eacute;l&eacute;charger des images par lot dans le dossier upload sans acc&egrave;s FTP
 _ Permet de t&eacute;l&eacute;charger des images par dans un article.
