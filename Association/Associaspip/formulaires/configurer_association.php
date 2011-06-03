@@ -18,13 +18,40 @@ function formulaires_configurer_association_verifier_dist() {
 	$ventes = _request('ventes');
 	$prets = _request('prets');
 	$activites = _request('activites');
+	$comptes = _request('comptes');
+	/* ignorer les changements fait dans un module non active. Le mieux serait de traiter ca dans la fonction traiter. A faire */
+	if (!$comptes) {
+		set_request('pc_cotisations', $GLOBALS['association_metas']['pc_cotisations']);
+		set_request('dc_cotisations', $GLOBALS['association_metas']['dc_cotisations']);
+		set_request('destinations', '');
+	}
+
+	if (!$dons) {
+		set_request('pc_dons', $GLOBALS['association_metas']['pc_dons']);
+		set_request('dc_dons', $GLOBALS['association_metas']['dc_dons']);
+	}
+	
+	if (!$ventes) {
+		set_request('pc_ventes', $GLOBALS['association_metas']['pc_ventes']);
+		set_request('pc_frais_envoi', $GLOBALS['association_metas']['pc_frais_envoi']);
+		set_request('dc_ventes', $GLOBALS['association_metas']['dc_ventes']);
+	}
+
+	if (!$prets) {
+		set_request('pc_prets', $GLOBALS['association_metas']['pc_prets']);
+	}
+
+	if (!$activites) {
+		set_request('pc_activites', $GLOBALS['association_metas']['pc_activites']);
+	}
+
 	$pc_cotisations = _request('pc_cotisations');
 	$pc_dons = _request('pc_dons');
 	$pc_ventes = _request('pc_ventes');
 	$pc_frais_envoi = _request('pc_frais_envoi');
 	$pc_prets = _request('pc_prets');
 	$pc_activites = _request('pc_activites');
-	$comptes = _request('comptes');
+
 
 	// si la gestion comptable est activee, on valide le plan comptable
 	if ($comptes) {
@@ -122,6 +149,27 @@ function formulaires_configurer_association_verifier_dist() {
 		if ($GLOBALS['association_metas']['pc_cotisations'] && ($pc_cotisations != $GLOBALS['association_metas']['pc_cotisations'])) {
 			sql_updateq('spip_asso_comptes', array('imputation' => $pc_cotisations), "imputation=".$GLOBALS['association_metas']['pc_cotisations']);
 		}
+
+		if ($GLOBALS['association_metas']['dons'] && $GLOBALS['association_metas']['pc_dons'] && ($pc_dons != $GLOBALS['association_metas']['pc_dons'])) {
+			sql_updateq('spip_asso_comptes', array('imputation' => $pc_dons), "imputation=".$GLOBALS['association_metas']['pc_dons']);
+		}
+
+		if ($GLOBALS['association_metas']['ventes'] && $GLOBALS['association_metas']['pc_ventes'] && ($pc_ventes != $GLOBALS['association_metas']['pc_ventes'])) {
+			sql_updateq('spip_asso_comptes', array('imputation' => $pc_ventes), "imputation=".$GLOBALS['association_metas']['pc_ventes']);
+		}
+
+		if ($GLOBALS['association_metas']['ventes'] && $GLOBALS['association_metas']['pc_frais_envoi'] && ($pc_frais_envoi != $GLOBALS['association_metas']['pc_frais_envoi'])) {
+			sql_updateq('spip_asso_comptes', array('imputation' => $pc_frais_envoi), "imputation=".$GLOBALS['association_metas']['pc_frais_envoi']);
+		}
+
+		if ($GLOBALS['association_metas']['prets'] && $GLOBALS['association_metas']['pc_prets'] && ($pc_prets != $GLOBALS['association_metas']['pc_prets'])) {
+			sql_updateq('spip_asso_comptes', array('imputation' => $pc_prets), "imputation=".$GLOBALS['association_metas']['pc_prets']);
+		}
+
+		if ($GLOBALS['association_metas']['activites'] && $GLOBALS['association_metas']['pc_activites'] && ($pc_ != $GLOBALS['association_metas']['pc_activites'])) {
+			sql_updateq('spip_asso_comptes', array('imputation' => $pc_activites), "imputation=".$GLOBALS['association_metas']['pc_activites']);
+		}
+		/* fin du vilain hack, le mieux serait encore de faire une fonction traiter pour y mettre ce code mais il faudrait alors reprendre les fonction de traiter depuis configurer_metas */
 		return array(); 
 	}
 
