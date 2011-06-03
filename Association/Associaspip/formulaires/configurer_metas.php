@@ -20,7 +20,7 @@ function formulaires_configurer_metas_charger_dist($form)
 	else {
 		$infos = formulaires_configurer_metas_infos($form);
 		if (!is_array($infos)) return $infos;
-		if (isset($infos['meta']) AND isset($GLOBALS[$infos['meta']]))
+		if (isset($infos['meta']) AND isset($GLOBALS[$infos['meta']])) 
 		    return $GLOBALS[$infos['meta']];
 		spip_log("configurer_meta, charger: table des meta pour $form inconnue" . $infos['meta']);
 		return array();
@@ -45,7 +45,7 @@ function formulaires_configurer_metas_traiter_dist($form)
 		$meta = $infos['meta'];
 		foreach (array_unique($vars[2]) as $k) {
 			$v = _request($k);
-			ecrire_meta($k, is_array($v) ? serialise($v) : $v, 'oui', $meta);
+			ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $meta);
 		}
 		return !isset($infos['prefix']) ? array()
 		: array('redirect' => generer_url_ecrire($infos['prefix']));
