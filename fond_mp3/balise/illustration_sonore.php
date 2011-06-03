@@ -53,7 +53,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/fmp3_api_globales');
 
-/*
+/**
  * Balise ILLUSTRATION_SONORE
  * Conseillé: dans inc-pied.html, juste avant SPIP_CRON
  *   (exemple: inc-pied.html dans le répertoire du plugin)

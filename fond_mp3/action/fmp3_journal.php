@@ -12,9 +12,10 @@ include_spip('inc/fmp3_api_globales');
 include_spip('inc/fmp3_api_prive');
 include_spip('inc/fmp3_api_journal');
 
-/*
-/* Ajax, renvoie le contenu du log
-/**/
+/**
+ * Ajax, renvoie le contenu du log
+ * @return string
+ */
 function action_fmp3_journal () {
 	
 	fmp3_log("Appel action journal", null, _FMP3_DEBUG);

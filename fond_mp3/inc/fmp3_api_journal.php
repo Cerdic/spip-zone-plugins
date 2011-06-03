@@ -57,14 +57,14 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/texte');
 
-/*
+/**
  * Afficher le journal (log) en espace privé. Voir:
  * - exec/*_voir_journal.php
  * - action/*_voir_journal.php
  * Ajouter dans la page exec/* fmp3_raccourci_journal()
  */
 
-/*
+/**
  * Boite raccourci, Afficher le journal du plugin
  */
 function fmp3_raccourci_journal () {

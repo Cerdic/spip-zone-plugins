@@ -54,11 +54,11 @@ include_spip('inc/fmp3_api_globales');
 include_spip('inc/fmp3_api_prive');
 include_spip('inc/fmp3_api_journal');
 
-/*
+/**
  *  si javascript non activé, appel de cet exec
  */
 
-/*
+/**
  * Voir le journal du plugin
  */
 function exec_fmp3_voir_journal () {

@@ -53,7 +53,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/fmp3_api_globales');
 include_spip('inc/fmp3_api_prive');
 
-/*
+/**
  * Boite d'édition mp3 pour les articles, rubriques et site de l'espace privé
  * @author Christian Paulus (paladin@quesaco.org)
  * @return AJAX content
@@ -350,4 +350,3 @@ function fmp3_mime_content_type($f)
 		: ""
 	);
 }
-?>

@@ -41,7 +41,7 @@ function fmp3_gros_titre ($titre, $ze_logo='', $return = false) {
 /**
  * infos du plugin
  * @see: http://plugins.spip.net/Fond-MP3#forum1094
- * */
+ */
 function fmp3_plugin_get_infos($dir)
 {
 	static $info;

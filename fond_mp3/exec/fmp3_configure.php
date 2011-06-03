@@ -54,7 +54,7 @@ include_spip('inc/fmp3_api_globales');
 include_spip('inc/fmp3_api_prive');
 include_spip('inc/fmp3_api_journal');
 
-/*
+/**
  * Page de configuration du plugin
  */
 function exec_fmp3_configure () {

@@ -52,7 +52,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/utils');
 
-/*
+/**
  * si reseau local, activer le log de dev
  * Vous pouvez forcer l'option en placant define("_FMP3_DEBUG", true) dans *_options.php
  */
@@ -68,7 +68,7 @@ function fmp3_spip_est_inferieur_193 () {
 	return($is_inf);
 }
 
-/*
+/**
  * Journal de bord.
  */
 function fmp3_log ($message, $flag = null, $force = true) {
@@ -82,7 +82,7 @@ function fmp3_log ($message, $flag = null, $force = true) {
 	}
 }
 
-/*
+/**
  * renvoie les infos du plugin contenues dans les metas
  * qui contient 'dir' et 'version'
  */
@@ -97,7 +97,7 @@ function fmp3_get_plugin_meta_infos ($prefix) {
 	return(false);
 }
 
-/*
+/**
  * retourne le num de version du plugin lors de la dernière installation
  * présent dans les metas
  */
@@ -110,7 +110,7 @@ function fmp3_get_meta_version ($prefix) {
 	return($result);
 }
 
-/*
+/**
  * retourne le dir du plugin
  * présent dans les metas
  */
@@ -123,7 +123,7 @@ function fmp3_get_plugin_meta_dir($prefix) {
 	return($result);
 }
 
-/*
+/**
  * ecriture des préférences dans les metas, format sérialisé
  */
 function fmp3_set_preference ($key, $value) {
@@ -135,7 +135,7 @@ function fmp3_set_preference ($key, $value) {
 	return(false);
 }
 
-/* 
+/**
  * ecriture dans les metas, format sérialisé
  * $preferences Array 
  */
@@ -149,7 +149,7 @@ function fmp3_set_all_preferences ($preferences = false) {
 	return(fmp3_ecrire_metas());
 }
 
-/*
+/**
  * lecture dans les metas
  * retour: array ou false si inconnue
  */
@@ -169,7 +169,7 @@ function fmp3_ecrire_metas () {
 	return(true);
 }
 
-/*
+/**
  * dirname du fichier mp3 
  */
 function fmp3_chemin_son ($objet, $id_objet) {
@@ -178,7 +178,7 @@ function fmp3_chemin_son ($objet, $id_objet) {
 	return ($chemin);
 }
 
-/*
+/**
  * Donne le contenu javascript pour afficher le bouton play
  * @author Christian Paulus
  * @param $mp3path Chemin (URL) du fichier mp3
@@ -246,8 +246,8 @@ $(document).ready(function(){
 	return($bouton_play);
 }
 
-/*
- * 
+/**
+ * Enveloppe le script du tag HTML
  */
 function fmp3_envelopper_script ($source, $format) {
 	$source = trim($source);
@@ -270,7 +270,7 @@ function fmp3_envelopper_script ($source, $format) {
 	return($source);
 } // end fmp3_envelopper_script()
 
-/*
+/**
  * complément des deux 'compacte'. supprimer les espaces en trop.
  */ 
 function fmp3_compacter_script ($source, $format) {
