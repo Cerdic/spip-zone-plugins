@@ -528,6 +528,7 @@ Commentaire: @commentaire@
 			'maj_coordonnees_numeros_inseres' => ' num&eacute;ro(s) ins&eacute;r&eacute;(s) dans la base de Coordonn&eacute;es.',
 
 	# MaJ activation des modules seulement si la gestion comptable est active
+			'maj_desactive_gestion_comptable' => 'Gestion d\'association: &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer la gestion comptable si le plan comptable n\'est pas valide. Votre plan comptable n\'est pas valide, la gestion comptable a donc &eacute;t&eacute; desactiv&eacute;e. Pour la reactiver, rendez vous sur la d\'&eacute;dition du plan comptable puis celle de configuration du plugin',
 			'maj_desactive_modules' => 'Gestion d\'association : &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer les modules de gestion de dons, ventes, prets ou activit&eacute;s si la gestion comptable n\'est pas activ&eacute;e. Votre configuration actuelle du plugin n\'&eacute;tant plus autoris&eacute;e, les modules de gestions activ&eacute;s ont &eacute;t&eacute; d&eacute;sactiv&eacute;s(aucune donn&eacute; n\'a  &eacute;t&eacute; &eacute;ffac&eacute;e). Rendez vous sur la page de configuration du plugin pour les r&eacute;activer.',
 
 			// chaines collectee automatiquement

@@ -394,4 +394,34 @@ $GLOBALS['association_maj'][48225] = array(
 	array ('sql_alter', "TABLE spip_asso_prets change maj maj timestamp"),
 	array ('sql_alter', "TABLE spip_asso_activites change maj maj timestamp"),
 					   );
+
+/* cette mise a jour introduit un controle sur l'activation des modules de gestions des dons, */
+/* ventes, prets, activités subordonnes a l'activation de la gestion comptable.               */
+/* la fonction de mise a jour desactive donc d'eventuels modules actives si la gestion        */
+/* comptable n'est pas activee                                                               */
+function association_maj_48466()
+{
+	include_spip('inc/association_comptabilite');
+	/* on verifie la validite du plan comptable existant */
+	if ($GLOBALS['association_metas']['comptes'] && !association_valider_plan_comptable()) {
+		ecrire_meta('comptes', '', 'oui', 'association_metas');
+		echo '<p>'._T('asso:maj_desactive_gestion_comptable').'</p>';
+	}
+
+	$desactivation = false;
+	if (!$GLOBALS['association_metas']['comptes']) {
+		if ($GLOBALS['association_metas']['dons']) { ecrire_meta('dons', '', 'oui', 'association_metas'); $desactivation = true; }
+		if ($GLOBALS['association_metas']['ventes']) { ecrire_meta('ventes', '', 'oui', 'association_metas'); $desactivation = true; }
+		if ($GLOBALS['association_metas']['prets']) { ecrire_meta('prets', '', 'oui', 'association_metas'); $desactivation = true; }
+		if ($GLOBALS['association_metas']['activites']) { ecrire_meta('activites', '', 'oui', 'association_metas'); $desactivation = true; }
+	}
+
+	/* si on a desactive des modules, on le signale par un message */
+	if ($desactivation) echo '<p>'._T('asso:maj_desactive_modules').'</p>';
+
+	/* on en profite pour effacer des metas qui ne servent plus */
+	effacer_meta('comptes_stricts', 'association_metas');
+	effacer_meta('indexation', 'association_metas');
+}
+$GLOBALS['association_maj'][48466] = array(array('association_maj_48466'));
 ?>
