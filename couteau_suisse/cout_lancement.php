@@ -265,4 +265,12 @@ function define_IMG_GD_MAX_PIXELS() {
 		define('_IMG_GD_MAX_PIXELS', (isset($GLOBALS['meta']['max_taille_vignettes'])&&$GLOBALS['meta']['max_taille_vignettes']<5500000)?$GLOBALS['meta']['max_taille_vignettes']:0);
 }
 
+// renvoie _T('couteauprive:'.$texte) puis detruit la chaine du module concerne
+function couteauprive_T($texte, $args=array()) {
+	$res = _T('couteauprive:'.$texte, $arg);
+	if(isset($GLOBALS[$tmp='i18n_couteauprive_'.$GLOBALS['spip_lang']][$texte]))
+			unset($GLOBALS[$tmp][$texte]);
+	return $res;
+}
+
 ?>

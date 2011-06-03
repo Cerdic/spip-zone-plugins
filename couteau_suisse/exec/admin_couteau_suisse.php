@@ -187,7 +187,7 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 	echo debut_gauche('', true);
 	// pour la liste des docs sur spip-contrib
 	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
-	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace_callback('/@@(.*?)@@/', 'cs_couper_25', $v);
+	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace_callback('/@@couteauprive:(.*?)@@/', 'cs_couper_25', $v);
 	sort($contribs);
 	$aide = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
@@ -255,6 +255,6 @@ cs_log(" FIN : exec_admin_couteau_suisse()");
 }
 
 // callback pour les contribs
-function cs_couper_25($matches) { return couper(_T($matches[1]), 25); }
+function cs_couper_25($matches) { return couper(couteauprive_T($matches[1]), 25); }
 
 ?>

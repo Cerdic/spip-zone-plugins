@@ -30,7 +30,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	if(!isset($outil['init_ok'])) {
 		$outil['init_ok'] = 1;
 		if(!isset($outil['categorie'])) $outil['categorie'] = 'divers';
-		if(!isset($outil['nom'])) $outil['nom'] = _T('couteauprive:'.$outil['id'].':nom');
+		if(!isset($outil['nom'])) $outil['nom'] = couteauprive_T($outil['id'].':nom');
 		if(strpos($outil['nom'], '<:')!==false)
 			$outil['nom'] = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $outil['nom']);
 		// $outil['surcharge'] n'est pas encore renseigne si la fonction d'installation est surchargee

@@ -124,7 +124,7 @@ function description_outil_input2_callback($matches) {
 
 function description_outil_liens_callback($matches) {
 	global $outils;
-	$nom = isset($outils[$matches[1]]['nom'])?$outils[$matches[1]]['nom']:_T("couteauprive:$matches[1]:nom");
+	$nom = isset($outils[$matches[1]]['nom'])?$outils[$matches[1]]['nom']:couteauprive_T($matches[1].':nom');
 	if(strpos($nom, '<:')!==false) $nom = preg_replace(',<:([:a-z0-9_-]+):>,ie', '_T("$1")', $nom);
 	return '<a href="'.generer_url_ecrire('admin_couteau_suisse', 'cmd=descrip&outil='.$matches[1])
 		."\" id=\"href_$matches[1]\" onclick=\"javascript:return cs_href_click(this);\">$nom</a>";
@@ -155,7 +155,7 @@ function inc_description_outil_dist($outil_, $url_self, $modif=false) {
 	$index = $outil['index'];
 //cs_log("inc_description_outil_dist() - Parse la description de '$outil_'");
 	// la description de base est a priori dans le fichier de langue
-	$descrip = isset($outil['description'])?$outil['description']:_T('couteauprive:'.$outil['id'].':description');
+	$descrip = isset($outil['description'])?$outil['description']:couteauprive_T($outil['id'].':description');
 	// ajout des variables liees a la barre typo
 	if(defined('_DIR_PLUGIN_PORTE_PLUME') 
 	 && ( isset($outil['pipeline:porte_plume_barre_pre_charger']) || isset($outil['pipeline:porte_plume_cs_pre_charger']))
