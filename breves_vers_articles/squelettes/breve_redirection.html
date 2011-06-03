@@ -4,5 +4,5 @@
 // avec le nom 'breve.html', pour assurer la redirection des anciens liens
 // présents sur d'autres sites, vers les articles correspondants.
 
-]<BOUCLE_redir (BREVES_ARTICLES){id_breve}>#HTTP_HEADER{location: #URL_ARTICLE{#ID_ARTICLE}}
+]<BOUCLE_redir (BREVES_ARTICLES){id_breve}>#HTTP_HEADER{location: #URL_ARTICLE{#ID_ARTICLE}}#HTTP_HEADER{HTTP/1.1 301 Moved Permanently}#HTTP_HEADER{Status: 301 Moved Permanently}
 </BOUCLE_redir>
