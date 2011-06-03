@@ -119,9 +119,7 @@ function formulaires_configurer_association_verifier_dist() {
 	if (count($erreurs)==1) { /* si on n'a qu'un entree dans la table des erreurs, c'est le titre qu'on a mis au debut, on n'a pas d'erreur, on renvoie un tableau vide */
 		/* vilain hack pour conserver la fonction traiter des metas : on fait potentiellement ici des modifs dans la table */
 		/* A-t-on modifie les metas pc_XXX si oui il faut faire suivre dans la table des comptes la modif, sinon on perd toutes les operations deja enregistrees */
-		if ($pc_cotisations != $GLOBALS['association_metas']['pc_cotisations']) {
-			$erreurs['pc_cotisations']="PC COTI: ".$pc_cotisations." GLOB: ".$GLOBALS['association_metas']['pc_cotisations']." lignes a modifier :".print_r(sql_allfetsel("id_compte, imputation", 'spip_asso_comptes', "imputation=".$GLOBALS['association_metas']['pc_cotisations']),true);
-			//return $erreurs;
+		if ($GLOBALS['association_metas']['pc_cotisations'] && ($pc_cotisations != $GLOBALS['association_metas']['pc_cotisations'])) {
 			sql_updateq('spip_asso_comptes', array('imputation' => $pc_cotisations), "imputation=".$GLOBALS['association_metas']['pc_cotisations']);
 		}
 		return array(); 
