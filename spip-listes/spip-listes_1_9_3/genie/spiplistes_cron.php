@@ -231,24 +231,8 @@ function cron_spiplistes_cron ($last_time) {
 				$courrier_html = spiplistes_liens_absolus ($courrier_html);
 				$date_debut_envoi = $date_fin_envoi = "''";
 				$statut = _SPIPLISTES_COURRIER_STATUT_ENCOURS;
-				/**
-				 * Compacter le code HTML
-				 */
-				$avant = strlen($courrier_html);
-				$replace = array(	// supprimer
-					'@^[ \t]+@' => ''	//  les espaces debut de ligne
-					, '@[ \t]+$@' => ''	//  en fin de ligne
-					, '@[ \t]+@' => ' '	//  en double				
-					, '/\n\s*\n/' => "\n" // les lignes vides
-				);
-				$courrier_html = preg_replace (array_keys($replace)
-											   , array_values ($replace)
-											   , $courrier_html);
-				spiplistes_debug_log($prefix_log.'COMPRESS HTML '
-									 . round((strlen($courrier_html)/$avant) * 100)
-									 . '%'
-									 );
-
+				
+				$courrier_html = spiplistes_html_compacte ($courrier_html);
 			}
 			else {
 				$date_debut_envoi = $date_fin_envoi = 'NOW()';

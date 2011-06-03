@@ -155,6 +155,36 @@ function spiplistes_courrier_propre_bloog($texte) {
 } 
 
 
+/**
+ * Compacter le code HTML du courrier
+ * @version CP-20110603
+ * @param string $texte
+ * @staticvar array $pattern
+ * @staticvar array $replace
+ * @return string
+ */
+function spiplistes_html_compacte ($texte) {
+	
+	static $pattern, $replace;
+	
+	if (!$pattern)
+	{
+		$array = array(	// supprimer
+			'@^[ \t]+@m' => ''	//  les espaces debut de ligne
+			, '@[ \t]+$@m' => ''	//  en fin de ligne
+			, '@[ \t]+@' => ' '	//  en double				
+			, '/\n\s*\n/' => "\n" // les lignes vides
+		);
+		$pattern = array_keys ($array);
+		$replace = array_values ($array);
+	}
+	
+	$texte = trim ($texte);
+	
+	$texte = preg_replace ($pattern, $replace, $texte);
+	
+	return ($texte);
+}
 
 /**
  * titre : spiplistes_courrier_version_texte

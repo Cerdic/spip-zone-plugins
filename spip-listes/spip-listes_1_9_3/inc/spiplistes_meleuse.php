@@ -274,6 +274,7 @@ function spiplistes_meleuse ($last_time) {
 							, 'lang' => $lang
 							, 'titre' => $objet_html)
 					);
+				$lien_html = spiplistes_html_compacte ($lien_html);
 				$page_html = $lien_html . $page_html;
 				$page_texte = $lien_texte . $page_texte;
 			}
