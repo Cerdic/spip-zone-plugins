@@ -457,6 +457,11 @@ function formulaires_inscription2_traiter_dist($id_auteur = NULL,$redirect = nul
 		if($traiter_plugin['message_ok'])
 			$message = $traiter_plugin['message_ok'];
 			$editable = false;
+		//Exploiter le plugin notification si disponible
+		$notifier = charger_fonction("notifications",'inc',true);
+		if (function_exists($notifier)) {
+			$notifier('inscription',$id_auteur);	
+		}
     }
 
 	// Invalider les caches
