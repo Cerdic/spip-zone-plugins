@@ -114,10 +114,10 @@ function spiplistes_meleuse ($last_time) {
 		$eol = "\n";
 		$eol2 =$eol.$eol;
 		$body_html_debut = '<html>'
-			. $eol2
+			. $eol
 			. '<body TOPMARGIN=0 LEFTMARGIN=0 MARGINHEIGHT=0 MARGINWIDTH=0 style="margin:0;padding:0;">'
-			. $eol2;
-		$body_html_fin = $eol2.'</body></html>';
+			. $eol;
+		$body_html_fin = $eol.'</body></html>';
 		$charset_spip = $GLOBALS['meta']['charset'];
 		$charset_dest = $GLOBALS['meta']['spiplistes_charset_envoi'];
 
@@ -410,25 +410,6 @@ function spiplistes_meleuse ($last_time) {
 
 					spiplistes_debug_log($prefix_log.'total_abos: '.$total_abonnes.', en cours: '.$nb_destinataires.', limit: '.$limit);
 
-/*
-// CP:20100215: inutile de compter AVANT
-// si process en //, le chiffre est faux
-					// replacer les compteurs
-					if($row = sql_fetch(sql_select(
-						"nb_emails_envoyes,nb_emails_echec,nb_emails_non_envoyes,nb_emails_texte,nb_emails_html"
-						, 'spip_courriers'
-						, 'id_courrier='.sql_quote($id_courrier)
-						, '', '', 1
-						))
-					) {
-						$nb_emails_envoyes = intval($row['nb_emails_envoyes']);
-						$nb_emails_echec = intval($row['nb_emails_echec']);
-						$nb_emails_non_envoyes = intval($row['nb_emails_non_envoyes']);
-						$nb_emails['texte'] = intval($row['nb_emails_texte']);
-						$nb_emails['html'] = intval($row['nb_emails_html']);
-					}
-*/
-
 					//envoyer le lot d'emails selectionne' (la liasse)
 					while($adresse = sql_fetch($sql_adresses_dest)) {
 
@@ -531,7 +512,10 @@ function spiplistes_meleuse ($last_time) {
 							
 								switch($format_abo) {
 									case 'html':
-										// Si on ne trouve pas les tags HTML alors on les ajoutes
+										/**
+										 * Si on ne trouve pas les tags HTML
+										 * alors on les ajoutes
+										 */
 										if (FALSE === strpos($ventre_html, '</html>')) {
 											$email_a_envoyer[$format_abo]->Body =
 												  $body_html_debut . $eol
@@ -542,9 +526,12 @@ function spiplistes_meleuse ($last_time) {
 												. $body_html_fin
 												;										
 										} else {
-											// Si on trouve les tags HTML cela veut dire que l'auteur
-											// veut pouvoir gerer lui meme la partie <head> ainsi que le lien de desabonnement
-											// donc on ne prend en compte que la partie ventre_html.
+											/**
+											 * Si on trouve les tags HTML cela veut
+											 * dire que l'auteur veut pouvoir gerer lui meme
+											 * la partie <head> ainsi que le lien de desabonnement
+											 * donc on ne prend en compte que la partie ventre_html.
+											 */
 											$tags_perso = array('http://%URL_ABONNEMENT%' => generer_url_public('abonnement','d='.$cookie),);
 											$email_a_envoyer[$format_abo]->Body = str_replace(array_keys($tags_perso), array_values($tags_perso), $ventre_html);
 										}
