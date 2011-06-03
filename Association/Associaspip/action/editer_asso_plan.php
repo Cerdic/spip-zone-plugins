@@ -55,6 +55,52 @@ function action_editer_asso_plan() {
 			'commentaire' => $commentaire,
 			'type_op' => $type_op),
 		    "id_plan=$id_plan");
+
+		$code_initial = _request('code_initial'); /* la fonction charger insere aussi le code initial dans une variable, on le recupere pour verifier si le code a ete modifie */
+			
+		if (($code_initial != '') && ($code_initial != $code)) {/* le code a ete modifie, il faut repercuter la modification dans la table des comptes */
+			if ($code_initial[0]==$GLOBALS['association_metas']['classe_banques']) {
+				$colonne = 'journal'; /* pour les comptes financiers, le code du compte est stocke dans la colonne journal */
+			} else {
+				$colonne = 'imputation'; /* sinon le code du compte est stocke dans la colonne imputation */
+			}
+			sql_updateq('spip_asso_comptes', array($colonne => $code), $colonne."=".$code_initial);
+			/* il faut aussi verifier si ce code initial est utilise par un pc_XXX de la configuration afin de modifier la meta si besoin */
+			switch ($code_initial) {
+				case $GLOBALS['association_metas']['pc_cotisations']:
+					ecrire_meta('pc_cotisations', $code, 'oui', 'association_metas');
+					break;
+
+				case $GLOBALS['association_metas']['pc_dons']:
+					ecrire_meta('pc_dons', $code, 'oui', 'association_metas');
+					break;
+
+				case $GLOBALS['association_metas']['pc_ventes']:
+					ecrire_meta('pc_ventes', $code, 'oui', 'association_metas');
+					break;
+
+				case $GLOBALS['association_metas']['pc_prets']:
+					ecrire_meta('pc_prets', $code, 'oui', 'association_metas');
+					break;
+
+				case $GLOBALS['association_metas']['pc_activites']:
+					ecrire_meta('pc_activites', $code, 'oui', 'association_metas');
+					break;
+			}
+		}
+	}
+
+	/* si la gestion comptable est activee, on verifie que le plan comptable modifie est valide. Si il ne l'est pas, on desactive la gestion comptable */
+	if ($GLOBALS['association_metas']['comptes']) {
+		include_spip('inc/association_comptabilite');
+		if (!association_valider_plan_comptable()) {
+			ecrire_meta('comptes', '', 'oui', 'association_metas');
+			/* on desactive les autres modules si ils sont actives */
+			if ($GLOBALS['association_metas']['dons']) ecrire_meta('dons', '', 'oui', 'association_metas');
+			if ($GLOBALS['association_metas']['ventes']) ecrire_meta('ventes', '', 'oui', 'association_metas');
+			if ($GLOBALS['association_metas']['prets']) ecrire_meta('prets', '', 'oui', 'association_metas');
+			if ($GLOBALS['association_metas']['activites']) ecrire_meta('activites', '', 'oui', 'association_metas');
+		}
 	}
 	
 	return array($id_plan, '');

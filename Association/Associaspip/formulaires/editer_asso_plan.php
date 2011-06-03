@@ -21,6 +21,8 @@ function formulaires_editer_asso_plan_charger_dist($id_plan='') {
 
 		$contexte['classe'] = $plans['classe'];
 		$contexte['code'] = $plans['code'];
+		/* on passe aussi le code originellement present pour detecter sans avoir a refaire de requete un changement de code qu'il faut repercuter dans la table des comptes */
+		$contexte['_hidden'] = "<input type='hidden' name='code_initial' value='".$plans['code']."' />";
 		$contexte['intitule'] = $plans['intitule'];
 		$contexte['reference'] = $plans['reference']; // ce champ la est appele a disparaitre
 		$contexte['solde_anterieur'] = $plans['solde_anterieur'];
@@ -59,10 +61,35 @@ function formulaires_editer_asso_plan_verifier_dist($id_plan='') {
 
 	
 	if (!array_key_exists("code",$erreurs)) { /* si le code est valide */
-		/* verifier que le code n'est pas deja attribue a une ligne du plan ou si il l'est que c'est a celle qu'on edite */
-		if ($r = sql_fetsel('code,id_plan', 'spip_asso_plan', "code=$code")) {
-			if ($r['id_plan']!=$id_plan) {
-				$erreurs['code'] = _T('asso:erreur_plan_code_duplique');
+		$code_initial = _request('code_initial'); /* on recupere le code initial pour verifier si on l'a modifie ou pas  */
+		/* verifier que le code n'est pas deja attribue a une autre ligne du plan */
+		if ($r = sql_fetsel('code,id_plan', 'spip_asso_plan', "code=$code AND id_plan<>$id_plan")) {
+			$erreurs['code'] = _T('asso:erreur_plan_code_duplique');
+		} elseif ($code_initial && $code_initial[0] != $classe && $GLOBALS['association_metas']['comptes']) { /* on verifie que si on a change le code on n'a pas modifie la classe pour passer de la classe financiere a une autre classe quand des operations existent dans la base */
+			$colonne = '';
+			if ($code_initial[0] == $GLOBALS['association_metas']['classe_banques']) { /* le code original faisait partie de la classe financiere et par consequent le nouveau qui est different non */
+				$colonne = "journal"; /* si des operations avec ce compte existent, on trouve sa reference dans la colonne journal */
+			} else if ($classe == $GLOBALS['association_metas']['classe_banques']) { /* le nouveau code fait partie de la classe financiere et par consequent l'ancien qui est different non*/
+				$colonne = "imputation"; /* si des operations avec ce compte existent, on trouve sa reference dans la colonne imputation */
+			}
+			if ($colonne) {
+				if (sql_countsel('spip_asso_comptes', $colonne."=".$code_initial)) {
+					/* on a bien des operations avec les codes incrimines, on ne peut donc pas changer la classe du compte */
+					$erreurs['code'] = _T('asso:erreur_plan_changement_classe_impossible');
+				}
+			}
+		}
+
+		/* verifier si on modifie un code existant qu'on n'attribue pas a un pc_XX des metas un code de la classe financiere */
+		if(!array_key_exists("code",$erreurs) && $code_initial && $GLOBALS['association_metas']['comptes'] && ($classe == $GLOBALS['association_metas']['classe_banques'])) { /* on n'effectue ce controle que si la gestion comptable est activee, la classe est celle des comptes financiers, le code initial non null(on modifie un compte existant et qu'il n'y a pas d'erreur precedente) */
+			if ($code_initial != $code) {
+				if (($GLOBALS['association_metas']['pc_cotisations'] == $code_initial) ||
+					(($GLOBALS['association_metas']['pc_dons'] == $code_initial) && ($GLOBALS['association_metas']['dons'] == 'on')) ||
+					(($GLOBALS['association_metas']['pc_ventes'] == $code_initial) && ($GLOBALS['association_metas']['ventes'] == 'on')) ||
+					(($GLOBALS['association_metas']['pc_prets'] == $code_initial) && ($GLOBALS['association_metas']['prets'] == 'on')) ||
+					(($GLOBALS['association_metas']['pc_activites'] == $code_initial) && ($GLOBALS['association_metas']['activites'] == 'on'))) {
+						$erreurs['code'] =  _T('asso:erreur_plan_code_modifie_utilise_classe_financiere');
+					}
 			}
 		}
 	}

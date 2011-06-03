@@ -263,4 +263,29 @@ function inc_association_imputation_dist($nom, $table='')
 	return $champ . '=' . sql_quote($GLOBALS['association_metas'][$nom]);
 }
 
+/* valide le plan comptable: on doit avoir au moins deux classes de comptes differentes */
+/* le code du compte doit etre unique */
+/* le code du compte doit commencer par un chiffre egal a sa classe */
+function association_valider_plan_comptable()
+{
+	$classes = array();
+	$codes = array();
+	/* recupere le code et la classe de tous les comptes du plan comptable */
+	$query = sql_select("code, classe", "spip_asso_plan");
+	while ($data = sql_fetch($query)) {
+		$classe = $data['classe'];
+		$code = $data['code'];
+		$classes[$classe] = 0; /* on comptes les classes differentes */
+		if(array_key_exists($code, $codes)) {
+			return false; /* on a deux fois le meme code */
+		} else {
+			$codes[$code] = 0;
+		}
+		/* on verifie que le code est bien de la forme chiffre-chiffre-caracteres alphanumeriques et que le premier digit correspond a la classe */
+		if ((!preg_match("/^[0-9]{2}\w*$/", $code)) || ($code[0] != $classe)) return false;
+	}
+	if (count($classes)<2) return false; /* on doit avoir au moins deux classes differentes */
+
+	return true;
+}
 ?>
