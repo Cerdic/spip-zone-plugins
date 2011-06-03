@@ -19,31 +19,6 @@ function formulaires_configurer_association_verifier_dist() {
 	$prets = _request('prets');
 	$activites = _request('activites');
 	$comptes = _request('comptes');
-	/* ignorer les changements fait dans un module non active. Le mieux serait de traiter ca dans la fonction traiter. A faire */
-	if (!$comptes) {
-		set_request('pc_cotisations', $GLOBALS['association_metas']['pc_cotisations']);
-		set_request('dc_cotisations', $GLOBALS['association_metas']['dc_cotisations']);
-		set_request('destinations', '');
-	}
-
-	if (!$dons) {
-		set_request('pc_dons', $GLOBALS['association_metas']['pc_dons']);
-		set_request('dc_dons', $GLOBALS['association_metas']['dc_dons']);
-	}
-	
-	if (!$ventes) {
-		set_request('pc_ventes', $GLOBALS['association_metas']['pc_ventes']);
-		set_request('pc_frais_envoi', $GLOBALS['association_metas']['pc_frais_envoi']);
-		set_request('dc_ventes', $GLOBALS['association_metas']['dc_ventes']);
-	}
-
-	if (!$prets) {
-		set_request('pc_prets', $GLOBALS['association_metas']['pc_prets']);
-	}
-
-	if (!$activites) {
-		set_request('pc_activites', $GLOBALS['association_metas']['pc_activites']);
-	}
 
 	$pc_cotisations = _request('pc_cotisations');
 	$pc_dons = _request('pc_dons');
@@ -54,6 +29,7 @@ function formulaires_configurer_association_verifier_dist() {
 
 
 	// si la gestion comptable est activee, on valide le plan comptable
+	$ref_attribuee = array();
 	if ($comptes) {
 		include_spip('inc/association_comptabilite');
 		if (!association_valider_plan_comptable()) {	
@@ -62,7 +38,6 @@ function formulaires_configurer_association_verifier_dist() {
 		}
 
 		// on verifie qu'il n'a pas deux fois la meme reference comptable en incluant celle des cotisations ou qu'on n'a pas attribue aux cotisations ou modules de gestion une reference comptable de la classe des comptes financiers
-		$ref_attribuee = array();
 		$classe_financier = _request('classe_banques');
 		$ref_attribuee[$pc_cotisations]='pc_cotisations';
 	
@@ -144,36 +119,10 @@ function formulaires_configurer_association_verifier_dist() {
 	}
 
 	if (count($erreurs)==1) { /* si on n'a qu'un entree dans la table des erreurs, c'est le titre qu'on a mis au debut, on n'a pas d'erreur, on renvoie un tableau vide */
-		/* vilain hack pour conserver la fonction traiter des metas : on fait potentiellement ici des modifs dans la table */
-		/* A-t-on modifie les metas pc_XXX si oui il faut faire suivre dans la table des comptes la modif, sinon on perd toutes les operations deja enregistrees */
-		if ($GLOBALS['association_metas']['pc_cotisations'] && ($pc_cotisations != $GLOBALS['association_metas']['pc_cotisations'])) {
-			sql_updateq('spip_asso_comptes', array('imputation' => $pc_cotisations), "imputation=".$GLOBALS['association_metas']['pc_cotisations']);
-		}
-
-		if ($GLOBALS['association_metas']['dons'] && $GLOBALS['association_metas']['pc_dons'] && ($pc_dons != $GLOBALS['association_metas']['pc_dons'])) {
-			sql_updateq('spip_asso_comptes', array('imputation' => $pc_dons), "imputation=".$GLOBALS['association_metas']['pc_dons']);
-		}
-
-		if ($GLOBALS['association_metas']['ventes'] && $GLOBALS['association_metas']['pc_ventes'] && ($pc_ventes != $GLOBALS['association_metas']['pc_ventes'])) {
-			sql_updateq('spip_asso_comptes', array('imputation' => $pc_ventes), "imputation=".$GLOBALS['association_metas']['pc_ventes']);
-		}
-
-		if ($GLOBALS['association_metas']['ventes'] && $GLOBALS['association_metas']['pc_frais_envoi'] && ($pc_frais_envoi != $GLOBALS['association_metas']['pc_frais_envoi'])) {
-			sql_updateq('spip_asso_comptes', array('imputation' => $pc_frais_envoi), "imputation=".$GLOBALS['association_metas']['pc_frais_envoi']);
-		}
-
-		if ($GLOBALS['association_metas']['prets'] && $GLOBALS['association_metas']['pc_prets'] && ($pc_prets != $GLOBALS['association_metas']['pc_prets'])) {
-			sql_updateq('spip_asso_comptes', array('imputation' => $pc_prets), "imputation=".$GLOBALS['association_metas']['pc_prets']);
-		}
-
-		if ($GLOBALS['association_metas']['activites'] && $GLOBALS['association_metas']['pc_activites'] && ($pc_ != $GLOBALS['association_metas']['pc_activites'])) {
-			sql_updateq('spip_asso_comptes', array('imputation' => $pc_activites), "imputation=".$GLOBALS['association_metas']['pc_activites']);
-		}
-		/* fin du vilain hack, le mieux serait encore de faire une fonction traiter pour y mettre ce code mais il faudrait alors reprendre les fonction de traiter depuis configurer_metas */
 		return array(); 
 	}
 
-	/* on a des erreurs, pour conserver l'etat des checkbox vides, il faut faire un set_request en mettant une valeur differente de on sinon le retour de verif mange les eventuelles modifs */
+	/* on a des erreurs, pour conserver l'etat des checkbox vides, il faut faire un set_request en mettant une valeur differente de 'on' sinon le retour de verif mange les eventuelles modifs */
 	if (!$comptes) set_request('comptes', 'off');
 	if (!$dons) set_request('dons', 'off');
 	if (!$ventes) set_request ('ventes', 'off');
@@ -186,5 +135,96 @@ function formulaires_configurer_association_verifier_dist() {
 	if (!_request('id_asso')) set_request ('id_asso', 'off');
 
 	return $erreurs;
+}
+
+/* reprise en grande partie du code de la fonction traiter de configurer_metas */
+function formulaires_configurer_association_traiter_dist($form) {
+	include_spip('formulaires/configurer_metas');
+	/* code directement copie depuis formulaires_configurer_metas_traiter_dist */
+	$infos = formulaires_configurer_metas_infos($form);
+	if (!is_array($infos)) return $infos;
+	$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
+	$meta = $infos['meta'];
+	/* fin du code directement copie depuis formulaires_configurer_metas_traiter_dist */
+	$metas_list = array_flip(array_unique($vars[2])); /* on recupere tous les noms des metas comme cles d'un tableau */
+
+	/* ignorer les changements fait dans un module non active */
+	$dons = _request('dons');
+	$ventes = _request('ventes');
+	$prets = _request('prets');
+	$activites = _request('activites');
+	$comptes = _request('comptes');
+
+	if (!$comptes) {
+		unset($metas_list['pc_cotisations']);
+		unset($metas_list['dc_cotisations']);
+		unset($metas_list['destinations']);
+	}
+
+	if (!$dons) {
+		unset($metas_list['pc_dons']);
+		unset($metas_list['dc_dons']);
+	}
+	
+	if (!$ventes) {
+		unset($metas_list['pc_ventes']);
+		unset($metas_list['pc_frais_envoi']);
+		unset($metas_list['dc_ventes']);
+	}
+
+	if (!$prets) {
+		unset($metas_list['pc_prets']);
+	}
+
+	if (!$activites) {
+		unset($metas_list['pc_activites']);
+	}
+
+	/* A-t-on modifie les metas pc_XXX si oui il faut faire suivre dans la table des comptes la modif, sinon on perd toutes les operations deja enregistrees */
+	$pc_cotisations = _request('pc_cotisations');
+	$pc_dons = _request('pc_dons');
+	$pc_ventes = _request('pc_ventes');
+	$pc_frais_envoi = _request('pc_frais_envoi');
+	$pc_prets = _request('pc_prets');
+	$pc_activites = _request('pc_activites');
+
+	/* condition pour modifier dans la table des comptes: module actif(peut-etre aussi juste active par cet envoi) ET meta pre existente ET meta modifiee */ 
+	if ($comptes && $GLOBALS['association_metas']['pc_cotisations'] && ($pc_cotisations != $GLOBALS['association_metas']['pc_cotisations'])) {
+		sql_updateq('spip_asso_comptes', array('imputation' => $pc_cotisations), "imputation=".$GLOBALS['association_metas']['pc_cotisations']);
+	}
+
+	if ($dons && $GLOBALS['association_metas']['pc_dons'] && ($pc_dons != $GLOBALS['association_metas']['pc_dons'])) {
+		sql_updateq('spip_asso_comptes', array('imputation' => $pc_dons), "imputation=".$GLOBALS['association_metas']['pc_dons']);
+	}
+
+	if ($ventes && $GLOBALS['association_metas']['pc_ventes'] && ($pc_ventes != $GLOBALS['association_metas']['pc_ventes'])) {
+		sql_updateq('spip_asso_comptes', array('imputation' => $pc_ventes), "imputation=".$GLOBALS['association_metas']['pc_ventes']);
+	}
+
+	if ($ventes && 
+		$GLOBALS['association_metas']['pc_frais_envoi'] &&
+		($pc_frais_envoi != $GLOBALS['association_metas']['pc_frais_envoi']) &&
+		($GLOBALS['association_metas']['pc_frais_envoi'] != $GLOBALS['association_metas']['pc_ventes']) &&
+		$pc_ventes != $pc_frais_envoi) { /* pour celui la on controle aussi que le pc_vente et pc_frais_envoi etaient differents avant et apres la modif */
+			/* si ils etaient egaux, on ne peux pas faire migrer les frais d'envoi vu qu'ils etaient inseres dans la meme operation comptable */
+			/* si ils sont maintenant egaux mais ne l'etaient pas avant, toutes les ventes vont apparaitre en double: la vente elle meme et les frais d'envoi. */
+			sql_updateq('spip_asso_comptes', array('imputation' => $pc_frais_envoi), "imputation=".$GLOBALS['association_metas']['pc_frais_envoi']);
+	}
+
+	if ($prets && $GLOBALS['association_metas']['pc_prets'] && ($pc_prets != $GLOBALS['association_metas']['pc_prets'])) {
+		sql_updateq('spip_asso_comptes', array('imputation' => $pc_prets), "imputation=".$GLOBALS['association_metas']['pc_prets']);
+	}
+
+	if ($activites && $GLOBALS['association_metas']['pc_activites'] && ($pc_ != $GLOBALS['association_metas']['pc_activites'])) {
+		sql_updateq('spip_asso_comptes', array('imputation' => $pc_activites), "imputation=".$GLOBALS['association_metas']['pc_activites']);
+	}
+
+	/* code repris sur formulaires_configurer_metas_traiter_dist */
+	foreach (array_keys($metas_list) as $k) {
+			$v = _request($k);
+			ecrire_meta($k, is_array($v) ? serialize($v) : $v, 'oui', $meta);
+	}
+	return !isset($infos['prefix']) ? array()
+		: array('redirect' => generer_url_ecrire($infos['prefix']));
 }
 ?>
