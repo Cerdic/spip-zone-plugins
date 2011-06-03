@@ -3,6 +3,7 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
+		[(#ENV{classe_banques}|et{#ENV{comptes}}|oui) <!-- si il n'a pas de classe banques definie ou si la gestion comptable est desactivee, on ne propose pas les champs correspondants mais uniquement la validite qui la seule a pouvoir etre geree sans gestion comptable -->
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{date}}
 		<li class="editer_date">
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
@@ -17,11 +18,9 @@
 			<input type="text" name="montant" value="[(#ENV{montant})]" id="montant"  class='formo'/>
 		</li>
 
-		[(#ENV{classe_banques}|oui) <!-- si il n'a pas de classe banques definie, on ne propose pas de mode de paiement -->
 		<li class="editer_journal">
 			<INCLURE{fond=inc/mode_de_paiement, journal, classe_banques}>
 		</li>
-		]
 
 		<!-- si la variable destinations est assignee, on insere l'editeur de destinations -->
 		[#SET{erreurs,#ENV**{erreurs}|table_valeur{destinations}}
@@ -30,19 +29,23 @@
 			(#ENV{destinations_on}|oui)#EDITEUR_DESTINATIONS
 		</li>]
 
+		<li class="editer_justification">
+			<label for="justification"><strong><:asso:justification:></strong></label>
+			<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class='formo'/>
+		</li>
+
+		]
+	
+		[(#ENV{classe_banques}|et{#ENV{comptes}}|non)
+			<span class='erreur'><:asso:gestion_cotisations_limitee:></span>
+		]
+
 		#SET{erreurs,#ENV**{erreurs}|table_valeur{validite}}
 		<li class="editer_validite">
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
 			<label for="validite"><strong><:asso:Validite:></strong></label>
 			<input type="text" name="validite" [value="(#ENV{validite})"] id="validite"  class='formo'/>
 		</li>
-
-		<li class="editer_justification">
-			<label for="justification"><strong><:asso:justification:></strong></label>
-			<input type="text" name="justification" [value="(#ENV{justification})"] id="justification"  class='formo'/>
-		</li>
-
-		
 	</ul>
 
 <p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>

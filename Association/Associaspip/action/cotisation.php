@@ -32,7 +32,9 @@ function cotisation_insert($id_auteur, $montant, $journal, $justification, $date
 {
 	include_spip('base/association');
 	include_spip('inc/association_comptabilite');
-	association_ajouter_operation_comptable($date, $montant, 0, $justification, $GLOBALS['association_metas']['pc_cotisations'], $journal, $id_auteur);	
+	/* on verifie que la gestion comptable est activee et que le pc_cotisation n'est pas vide pour inserer l'operation */
+	if ($GLOBALS['association_metas']['comptes'] && $GLOBALS['association_metas']['pc_cotisations'])
+		association_ajouter_operation_comptable($date, $montant, 0, $justification, $GLOBALS['association_metas']['pc_cotisations'], $journal, $id_auteur);	
 
 	sql_updateq('spip_asso_membres', 
 				   array(

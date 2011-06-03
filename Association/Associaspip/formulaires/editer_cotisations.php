@@ -14,9 +14,12 @@ include_spip('inc/autoriser');
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $categorie, $validite) {
-	/* on ajoute la classe_banques dans le contexte */
-	$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
-
+	/* on ajoute la classe_banques dans le contexte et la meta d'activation de la gestion comptable */
+	if ($GLOBALS['association_metas']['comptes']) {
+		$contexte['classe_banques'] = $GLOBALS['association_metas']['classe_banques'];
+		$contexte['comptes'] = true;
+	}
+	
 	/* la validite et le montant de la cotisation */
 	$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));
 	list($annee, $mois, $jour) = explode("-",$validite);
@@ -47,27 +50,30 @@ function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $c
 function formulaires_editer_cotisations_verifier_dist($id_auteur, $nom_prenom, $categorie, $validite) {
 	$erreurs = array();
 
-	/* verifier que le montant est bien positif ou nul */
-	$montant = association_recupere_montant(_request('montant'));
-	if($montant<0) {
-		$erreurs['montant'] = _T('asso:erreur_montant');
+	if ($GLOBALS['association_metas']['comptes']) {
+		/* verifier que le montant est bien positif ou nul */
+		$montant = association_recupere_montant(_request('montant'));
+		if($montant<0) {
+			$erreurs['montant'] = _T('asso:erreur_montant');
+		}
+
+		/* verifier validite et date */
+		if ($erreur_date = association_verifier_date(_request('date'))) {
+			$erreurs['date'] = _request('date')."&nbsp;:&nbsp;".$erreur_date;
+		}
+
+		/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant */
+		if (($GLOBALS['association_metas']['destinations']) && !array_key_exists("montant",$erreurs))
+		{
+			include_spip('inc/association_comptabilite');
+			if ($err_dest = association_verifier_montant_destinations($montant)) {
+				$erreurs['destinations'] = $err_dest;
+			}
+		}
 	}
 
-	/* verifier validite et date */
-	if ($erreur_date = association_verifier_date(_request('date'))) {
-		$erreurs['date'] = _request('date')."&nbsp;:&nbsp;".$erreur_date;
-	}
 	if ($erreur_validite = association_verifier_date(_request('validite'))) {
 		$erreurs['validite'] = _request('validite')."&nbsp;:&nbsp;".$erreur_validite;
-	}
-
-	/* verifier si besoin que le montant des destinations correspond bien au montant de l'opération, sauf si on a deja une erreur de montant */
-	if (($GLOBALS['association_metas']['destinations']) && !array_key_exists("montant",$erreurs))
-	{
-		include_spip('inc/association_comptabilite');
-		if ($err_dest = association_verifier_montant_destinations($montant)) {
-			$erreurs['destinations'] = $err_dest;
-		}
 	}
 
 	if (count($erreurs)) {

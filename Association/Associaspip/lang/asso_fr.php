@@ -57,13 +57,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_info_membres' => 'Options de gestion des membres',
 	'config_libelle_classe_banques' => 'Classe des comptes financiers',
 	'config_libelle_dons'=> 'Gestion des dons et colis',
+	'config_libelle_activer_dons'=> 'Activer la gestion des dons et colis',
 	'config_libelle_cotisations'=> 'Gestion des cotisations',
 	'config_libelle_ventes'=> 'Gestion des ventes associatives',
+	'config_libelle_activer_ventes'=> 'Activer la gestion des ventes associatives',
 	'config_libelle_frais_envoi'=> 'frais d\'envoi',
 	'config_libelle_comptes'=> 'Gestion comptable',
+	'config_libelle_activer_comptes'=> 'Activer la gestion comptable',
 	'config_libelle_destinations'=> 'Gestion des destinations comptables',
 	'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
+	'config_libelle_activer_activites'=> 'Activer la gestion des inscriptions aux activit&eacute;s',
 	'config_libelle_prets'=> 'Gestion des pr&egrave;ts et ressources',
+	'config_libelle_activer_prets'=> 'Activer la gestion des pr&egrave;ts et ressources',
 	'config_libelle_indexation'=> 'Num&eacute;rotation des membres',
 	'config_libelle_id_adherent'=>'Automatis&eacute;e',
 	'config_libelle_id_asso'=>'Libre',
@@ -74,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_import_nom_auteur' => 'Lors de l\'import/cr&eacute;ation d\'un membre depuis la liste des auteurs SPIP, le nom de l\'auteur a le format suivant:',
 	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title="Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d\'avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin">(&agrave; caract&egrave;re informatif)</abbr>',
 	'config_libelle_gerer_champs_membres' => 'La fiche des membres contient les champs :',
+	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
 
 	# Options
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
@@ -259,6 +265,9 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'echec' => '&eacute;chec',
 	'echecs' => '&eacute;checs',
 	'aucune_adresse_trouvee_pour_les_membres' => 'Aucune adresse trouv&eacute;e pour les membres : ',
+
+	# cotisation
+	'gestion_cotisations_limitee' => 'La gestion comptable &eacute;tant desactiv&eacute;e, seule la date de validit&eacute; est prise en charge par la gestion des cotisations.',
 
 	# ACTIVITES
 		
@@ -489,18 +498,24 @@ Commentaire: @commentaire@
 			'erreur_destination_dupliquee' => 'Une meme destination a &eacute;t&eacute; s&eacute;lectionn&eacute;e plusieurs fois',
 			'erreur_configurer_association_titre' => 'Votre saisie contient des erreurs !',
 			'erreur_configurer_association_reference_multiple' => 'Une meme r&eacute;f&eacute;rence comptable ne doit pas etre utilis&eacute;e pour plusieurs fonctions activ&eacute;es(ventes, dons, prets, activit&eacute;s) ou cotisations',
+			'erreur_configurer_association_gestion_comptable_non_activee' => 'Il n\'est pas possible d\'activer un module(gestion des prets, ventes, dons ou activit&eacute;s) si la gestion comptable n\'est pas activ&eacute;e.',
 			'erreur_id_adherent' => 'Ce num&eacute;ro de membre ne correspond &agrave; aucun membre de l\'association',
 			'erreur_pas_de_classe_financiere' => 'Aucune classe de comptes financiers d&eacute;finie au plan comptable !',
-			'erreur_pas_de_plan_comptable' => 'Pas de plan comptable d&eacute;fini !',
-			'erreur_pas_de_destination' => 'Pas de destination d&eacute;finie !',
+			'erreur_creer_un_plan_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable pour pouvoir activer ce module.',
+			'erreur_creer_un_plan_et_activer_gestion_comptable_pour_activer_ce_module' => 'Vous devez d&eacute;finir un plan comptable et activer le module de gestion comptable pour pouvoir activer ce module.',
+			'erreur_pas_de_destination' => 'Pas de destination comptable d&eacute;finie !',
 			'erreur_gestion_comptable_inactive' => 'Afin de pouvoir g&eacute;rer les cotisations, dons et ventes, la gestion comptable doit etre activ&eacute;e',
 			'erreur_plan_classe' => 'La classe d\'un compte doit etre un entier entre 0 et 9',
 			'erreur_plan_code' => 'Le code d\'un compte est compos&eacute; de caract&egrave;res alphanum&eacute;riques uniquement et doit commencer par 2 chiffres. Le premier chiffre doit etre &eacute;gal &agrave; la classe du compte',
 			'erreur_plan_code_duplique' => 'Ce code est d&eacute;j&agrave; utilis&eacute; pour une autre r&eacute;f&eacute;rence comptable(peut-etre d&eacute;sactiv&eacute;e)',
+			'erreur_plan_code_modifie_utilise_classe_financiere' => 'Cette r&eacute;f&eacute;rence comptable est utilis&eacute;e par un module de gestion (ventes/dons/prets/activit&eacute;s) activ&eacute; ou pour la gestion des cotisations. Vous ne pouvez donc pas modifier le code/la classe pour lui attribuer la classe des comptes financiers.',
+			'erreur_plan_changement_classe_impossible' => 'Vous ne pouvez pas modifier la classe de ce compte pour la changer vers ou depuis la classe d&eacute;finie comme &eacute;tant celle des comptes financiers car des op&eacute;rations sur ce compte existent dans le livre de comptes.',
 			'erreur_format_date' => 'La date doit etre au format AAAA-MM-JJ',
 			'erreur_date' =>  'Cette date n\'existe pas',
 			'erreur_operation_non_permise_sur_ce_compte' => 'Ce compte n\'accepte qu\'un seul type d\'op&eacute;rations (recette ou d&eacute;pense) et ne correspond pas a celle que vous avez rentr&eacute;',
 			'erreur_montant' => 'Les valeurs n&eacute;gatives ne sont pas autoris&eacute;es',
+			'erreur_configurer_association_plan_comptable_non_valide' => 'Vous ne pouvez pas activer le module de gestion comptable car votre plan comptable n\'est pas valide.<br/>Pour etre valide, un plan comptable doit suivre les r&egrave;gles suivantes :<ul><li>Contenir des comptes d\'au moins deux classes diff&eacute;rentes.<li><li>Les classes sont un chiffre entre 0 et 9.</li><li>Les codes des comptes doivent etre unique.</li><li>Les codes doivent commencer par un chiffre &eacute;gal &agrave; la classe du compte.</li><li>Les codes sont au format : 2 chiffres suivis de caract&egrave;res alphanum&eacute;riques</li></ul>',
+			'erreur_configurer_association_reference_financier' => 'La r&eacute;f&eacute;rence comptable associ&eacute;e a un type d\'op&eacute;ration ne peut pas etre de la classe des comptes financiers',
 
 	# MaJ integration de coodonnees
 			'effectuer_la_maj' => 'Effectuer la mise &agrave; jour maintenant',
@@ -511,6 +526,10 @@ Commentaire: @commentaire@
 			'maj_coordonnees_merge' => 'Combiner les donn&eacute;es d\'Association et Coordonn&eacute;es. Les donn&eacute;es pr&eacute;sentes dans Association sont ajout&eacute;es aux tables de Coordonn&eacute;es(ce qui peut provoquer des doublons ! )',
 			'maj_coordonnees_adresses_inserees' => ' adresse(s) ins&eacute;r&eacute;e(s) dans la base de Coordonn&eacute;es.',
 			'maj_coordonnees_numeros_inseres' => ' num&eacute;ro(s) ins&eacute;r&eacute;(s) dans la base de Coordonn&eacute;es.',
+
+	# MaJ activation des modules seulement si la gestion comptable est active
+			'maj_desactive_modules' => 'Gestion d\'association : &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer les modules de gestion de dons, ventes, prets ou activit&eacute;s si la gestion comptable n\'est pas activ&eacute;e. Votre configuration actuelle du plugin n\'&eacute;tant plus autoris&eacute;e, les modules de gestions activ&eacute;s ont &eacute;t&eacute; d&eacute;sactiv&eacute;s(aucune donn&eacute; n\'a  &eacute;t&eacute; &eacute;ffac&eacute;e). Rendez vous sur la page de configuration du plugin pour les r&eacute;activer.',
+
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',
