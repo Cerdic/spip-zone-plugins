@@ -3,8 +3,8 @@
 	<ul class="liste-items">
 		<BOUCLE_auteur(AUTEURS){id_auteur=#SESSION{id_auteur}}>
 			[(#ENV{id_auteur}|non)<li class="item"><a[ href="(#URL_AUTEUR)"] title="<:zpipcoop:voir_mon_profil|attribut_html:>"><:zpipcoop:mon_profil:></a></li>]
+			[(#ENV{id_auteur}|oui)<li class="item"><a href="[(#URL_PAGE{auteur_edit,id_auteur=#ID_AUTEUR}|parametre_url{retour,#URL_AUTEUR})]" class="edit" title="<:zpipcoop:editer_profil|attribut_html:>"><:zpipcoop:editer_profil:></a></li>]
 		</BOUCLE_auteur>
-		[(#ENV{id_auteur}|oui)<li class="item"><a href="[(#URL_PAGE{auteur_edit,id_auteur=#ID_AUTEUR}|parametre_url{retour,#URL_AUTEUR})]" class="edit" title="<:zpipcoop:editer_profil|attribut_html:>"><:zpipcoop:editer_profil:></a></li>]
 		<BOUCLE_vos_messages(ARTICLES){id_auteur=#SESSION{id_auteur}}> </BOUCLE_vos_messages>[(#AUTORISER{ecrire})<li class="item"><a href="[(#URL_PAGE{articles_page})]" title="<:zpipcoop:tous_mes_messages|attribut_html:>"><:zpipcoop:tous_mes_messages:></a></li>]</B_vos_messages>
 		[(#CONFIG{activer_breves}|oui)<li class="item"><a href="[(#URL_PAGE{breves_page})]" title="<:zpipcoop:toutes_les_breves|attribut_html:>"><:zpipcoop:toutes_les_breves:></a></li>]
 		[(#CONFIG{activer_sites}|oui)<li class="item"><a href="[(#URL_PAGE{sites_page})]" title="<:zpipcoop:tous_les_sites|attribut_html:>"><:zpipcoop:tous_les_sites:></a></li>]
