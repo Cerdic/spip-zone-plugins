@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_aller_gerer_depots' => 'Retourner à la page de gestion des dépôts',
 	'bulle_aller_plugin' => 'Se rendre sur la page du plugin',
 	'bulle_aller_plugins' => 'Se rendre sur la page d\'accueil des plugins',
+	'bulle_aller_prefixes' => 'Se rendre sur la page des préfixes',
 	'bulle_aller_statistiques' => 'Se rendre sur la page des statistiques',
 	'bulle_aller_telechargements' => 'Se rendre sur la page des téléchargements',
 	'bulle_filtrer_par_categorie' => 'Filtrer sur la catégorie',

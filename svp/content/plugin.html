@@ -20,17 +20,22 @@
 		<h1 class="h1">#NOM</h1>
 		[<p class="info-publi">
 			<abbr class="published"><small>
-				<a[ href="(#URL_PAGE{plugins}|parametre_url{categorie,#CATEGORIE})"] title="<:svp:bulle_aller_categorie:>">
+				[<a[ href="(#URL_PAGE{plugins}|parametre_url{categorie,#CATEGORIE})"] title="<:svp:bulle_aller_categorie:>">
 					(#CATEGORIE|svp_traduire_categorie)
-				</a>
-				[, (#TAGS)]
+				</a>]
+				[ - (#TAGS)]
+				<br /><em>(#PREFIXE|strtolower)</em>
 			</small></abbr>
 		</p>]
 	</div>
 
-	<div class="meta-publi">
-		[(#SLOGAN)]
-	</div>
+	[<div class="meta-publi">
+		(#SLOGAN)
+	</div>]
+	
+	[<div class="meta-publi">
+		(#BRANCHES_SPIP)
+	</div>]
 </div>
 <br class="nettoyeur" />
 

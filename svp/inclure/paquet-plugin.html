@@ -9,7 +9,7 @@
 		[(#SET{url_archives, #URL_ARCHIVES})]
 		[(#SET{titre_depot, #TITRE})]
 		</BOUCLE_depot>
-		<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_archives}|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ - (#NBO_ARCHIVE|taille_en_octets)]" class="telecharger">
+		<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_archives}|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ (#NOM_ARCHIVE)][ - (#NBO_ARCHIVE|taille_en_octets)]" class="telecharger">
 		<:bouton_telecharger:>
 		</a>
 	</h3>
