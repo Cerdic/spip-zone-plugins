@@ -1,12 +1,23 @@
 #CACHE{0}
 
 
-<h1>Critere compatible_branche {compatible_spip 1.9} sur PAQUETS</h1>
+<h1>Critere {compatible_spip 1.9} sur PAQUETS</h1>
 <B_paquets>
 <p>Nombre de resultats : #TOTAL_BOUCLE</p>
-<ul>
+<table>
+	<thead>
+		<tr>
+			<th>Archive</th>
+			<th>Branches SPIP</th>
+		</tr>
+	</thead>
+	<tbody>
 <BOUCLE_paquets(PAQUETS) {compatible_spip 1.9}>
-	<li>#NOM_ARCHIVE : #BRANCHES_SPIP</li>
+	<tr>
+		<td>#NOM_ARCHIVE</td>
+		<td>#BRANCHES_SPIP</td>
+	</tr>
 </BOUCLE_paquets>
-</ul>
+	</tbody>
+</table>
 </B_paquets>
