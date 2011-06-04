@@ -1,1 +1,3 @@
-[(#INCLURE{fond=modeles/nuage_popularite,id_article,id_groupe=#ENV{id_groupe,#ENV{id}}})]
+env= #ENV
+
+[(#INCLURE{fond=modeles/nuage_popularite,id_article,id_groupe=#ENV{id_groupe,#ENV{id}},notid=#ENV{notid}})]
