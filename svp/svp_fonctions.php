@@ -295,39 +295,45 @@ function filtre_iterer_modele($balise_deserializee, $modele ='foreach') {
 }
 
 /**
- * Critere de compatibilite avec une branche de SPIP :
+ * Critere de compatibilite avec une VERSION precise ou une BRANCHE de SPIP :
  * Fonctionne sur les tables spip_paquets et spip_plugins
- * en utilisant la fonction SQL LOCATE sur le champ branches_spip
  *
- *   {branche_spip}
- *   {branche_spip 2.0}
- *   {branche_spip #ENV{vers}} ou {branche_spip #ENV{vers, 1.9}}
- *   {branche_spip #GET{vers}} ou {branche_spip #GET{vers, 1.9}}
+ *   {compatible_spip}
+ *   {compatible_spip 2.0.8} ou {compatible_spip 1.9}
+ *   {compatible_spip #ENV{vers}} ou {compatible_spip #ENV{vers, 1.9.2}}
+ *   {compatible_spip #GET{vers}} ou {compatible_spip #GET{vers, 2.1}}
  *
- *   si aucune valeur explicite (dans le critère, par #ENV, par #SET)
+ *   Si aucune valeur explicite (dans le critère, par #ENV, par #SET)
  *   tous les enregistrements sont retournés.
+ *
+ *   Le ! (NOT) fonctionne sur le critère BRANCHE
  */
 function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
-	
+	$table = $boucle->id_table;
+
 	// Si on utilise ! la fonction LOCATE doit retourner 0.
+	// -> utilise uniquement avec le critere BRANCHE
 	$op = ($crit->not == '!') ? '=' : '>';
 
-	// version explicite dans l'appel du critere.
+	$boucle->hash .= '
+	// COMPATIBILITE SPIP
+	$creer_where = charger_fonction(\'where_compatible_spip\', \'inc\');';
+
+	// version/branche explicite dans l'appel du critere
 	if (isset($crit->param[0][0])) {
 		$version = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
 		$boucle->hash .= '
-		$where = \'LOCATE(\\\'\'.'.$version.'.\'\\\', '.$boucle->id_table.'.branches_spip) '.$op.' 0\';
+		$where = $creer_where('.$version.', \''.$table.'\', \''.$op.'\');
 		';
 	}
-	// pas de version explicite dans l'appel du critere
-	// on regarde si elle est dans le contexte.
-	// (derogatoire du ?)
+	// pas de version/branche explicite dans l'appel du critere
+	// on regarde si elle est dans le contexte
 	else {
 		$boucle->hash .= '
-		$where = isset($Pile[0][\'branche_spip\']) ?
-		\'LOCATE(\\\'\'.$Pile[0][\'branche_spip\'].\'\\\', '.$boucle->id_table.'.branches_spip) '.$op.' 0\' : \'1=1\';
+		$version = isset($Pile[0][\'compatible_spip\']) ? $Pile[0][\'compatible_spip\'] : \'\';
+		$where = $creer_where($version, \''.$table.'\', \''.$op.'\');
 		';
 	}
 
