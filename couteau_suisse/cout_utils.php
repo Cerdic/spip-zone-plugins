@@ -157,8 +157,9 @@ function cs_get_defaut($variable) {
 	}
 	$variable = &$cs_variables[$variable];
 	if(isset($variable['externe'])) $variable['defaut'] = $variable['externe'];
-	$defaut = function_exists($f='initialiser_variable_'.$variable['nom'])?$f()
-		:(!isset($variable['defaut'])?'':$variable['defaut']);
+	$defaut = !isset($variable['defaut'])?'':$variable['defaut'];
+	if(function_exists($f='initialiser_variable_'.$variable['nom']))
+		$defaut = $f($defaut);
 	if(!strlen($defaut)) $defaut = "''";
 	if(@$variable['format']==_format_NOMBRE) $defaut = "intval($defaut)";
 		elseif(@$variable['format']==_format_CHAINE) $defaut = "strval($defaut)";
@@ -477,7 +478,8 @@ jQuery.fn.cs_todo=function(){return this.not('.cs_done').addClass('cs_done');};\
 	foreach($traitements_utilises as $bal=>$balise) {
 		foreach($balise as $obj=>$type_objet) {
 			// ici, on fait attention de ne pas melanger propre et typo
-			if(array_key_exists('typo', $type_objet) && array_key_exists('propre', $type_objet)) die(_T('couteauprive:erreur:traitements'));
+			if(array_key_exists('typo', $type_objet) && array_key_exists('propre', $type_objet)) 
+				die(var_dump($type_objet) . "<br/>>> <b>#$bal/$obj</b><br/>" . _T('couteauprive:erreur:traitements'));
 			$traitements_type_objet = &$traitements_utilises[$bal][$obj];
 			foreach($type_objet as $f=>$fonction)  {
 				// pas d'objet precis
