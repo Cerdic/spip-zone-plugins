@@ -19,7 +19,7 @@ function inc_where_compatible_spip($version='', $table, $op) {
 	THEN \'1.9.0\' <= \''.$version.'\'
 	ELSE TRIM(LEADING \'[\' FROM '.$min.') <= \''.$version.'\'
 	END
-	AND
+AND
 	CASE WHEN '.$max.' = \'\'
 	OR '.$max.' = \']\'
 	THEN \'99.99.99\' >= \''.$version.'\'
@@ -34,11 +34,11 @@ function inc_where_compatible_spip($version='', $table, $op) {
 	}
 	// le critere s'applique a une BRANCHE (1.9, 2.0, ...)
 	elseif (count(explode('.', $version)) == 2) {
-		$where = 'LOCATE(\''.$version.'\', '.$table.'.branches_spip) '.$op.' 0;';
+		$where = 'LOCATE(\''.$version.'\', '.$table.'.branches_spip) '.$op.' 0';
 	}
 	// le critere est vide ou mal specifie
 	else {
-		$where = '\'1=1\';';
+		$where = '1=1';
 	}
 
 	return $where;
