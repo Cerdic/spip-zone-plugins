@@ -295,45 +295,39 @@ function filtre_iterer_modele($balise_deserializee, $modele ='foreach') {
 }
 
 /**
- * Critere de compatibilite avec une version de SPIP :
+ * Critere de compatibilite avec une branche de SPIP :
  * Fonctionne sur les tables spip_paquets et spip_plugins
+ * en utilisant la fonction SQL LOCATE sur le champ branches_spip
  *
- *   {compatible_spip}
- *       le ! (NOT) ne peut pas s'appliquer
- *       si 'compatible_spip' pas dans #ENV => tout
- *   {compatible_spip 2.0}
- *       le ! (NOT) est appliquable
- *   {compatible_spip #ENV{vers}} ou {compatible_spip #ENV{vers, 1.9.2}}
- *       le ! (NOT) est appliquable
- *       si 'vers' pas dans #ENV => $GLOBALS['spip_version_branche']
- *   {compatible_spip #GET{vers}} ou {compatible_spip #GET{vers, 1.9.2}}
- *       le ! (NOT) est appliquable
- *       si 'vers' pas dans #GET => $GLOBALS['spip_version_branche']
+ *   {branche_spip}
+ *   {branche_spip 2.0}
+ *   {branche_spip #ENV{vers}} ou {branche_spip #ENV{vers, 1.9}}
+ *   {branche_spip #GET{vers}} ou {branche_spip #GET{vers, 1.9}}
+ *
+ *   si aucune valeur explicite (dans le critère, par #ENV, par #SET)
+ *   tous les enregistrements sont retournés.
  */
 function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
-	$not = ($crit->not == '!') ? 'NOT' : '';
+	
+	// Si on utilise ! la fonction LOCATE doit retourner 0.
+	$op = ($crit->not == '!') ? '=' : '>';
 
-	$boucle->hash .= '
-	// COMPATIBILITE SPIP
-	$liste_compat = charger_fonction(\'svp_lister_compatibles\', \'inc\');';
-
-	// version explicite dans l'appel du critere
+	// version explicite dans l'appel du critere.
 	if (isset($crit->param[0][0])) {
 		$version = calculer_liste(array($crit->param[0][0]), array(), $boucles, $boucle->id_parent);
 		$boucle->hash .= '
-		$where = sql_in(\''.$boucle->id_table.'.'.$boucle->primary.'\', $liste_compat('.$version.', \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\');
+		$where = \'LOCATE(\\\'\'.'.$version.'.\'\\\', '.$boucle->id_table.'.branches_spip) '.$op.' 0\';
 		';
 	}
 	// pas de version explicite dans l'appel du critere
-	// on regarde si elle est dans le contexte
+	// on regarde si elle est dans le contexte.
+	// (derogatoire du ?)
 	else {
 		$boucle->hash .= '
-		$where = isset($Pile[0][\'compatible_spip\']) ?
-			sql_in(\''.$boucle->id_table.'.'.$boucle->primary.'\', $liste_compat($Pile[0][\'compatible_spip\'], \''.$boucle->id_table.'\', \''.$boucle->primary.'\'), \''.$not.'\')
-			:
-			\'1=1\';
+		$where = isset($Pile[0][\'branche_spip\']) ?
+		\'LOCATE(\\\'\'.$Pile[0][\'branche_spip\'].\'\\\', '.$boucle->id_table.'.branches_spip) '.$op.' 0\' : \'1=1\';
 		';
 	}
 
