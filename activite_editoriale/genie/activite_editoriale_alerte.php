@@ -83,7 +83,6 @@ function activite_editoriale_envoyer_mail($list){
         }
     }
 	$to = '';
-	$verifier = charger_fonction('verifier','inc');
     foreach (explode(',',activite_editoriale_emails($list['extras_identifiants'])) as $to){
     	
     	if ($to!=''){
