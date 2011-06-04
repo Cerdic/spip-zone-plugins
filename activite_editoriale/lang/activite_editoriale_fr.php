@@ -40,6 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_art_branche' 						=> 'Nb d\'articles publiés dans la branche',
 	'nb_art_total' 						=> 'Nb d\'articles publiés total',
 	'nb_total_notag'					=> 'Nb d\'articles publiés sans mot-clé',
+	'nb_articles'						=> 'Nombre d\'articles',
+	'nb_rubriques'						=> 'Nombre de rubriques',
+	'nb_total_articles'					=> 'Nombre total d\'article',
+	'nb_total_rubriques'				=> 'Nombre total de rubriques',
 	
 	//P
 	'periode'							=> 'Période',
