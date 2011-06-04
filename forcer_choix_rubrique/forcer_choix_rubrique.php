@@ -1,9 +1,9 @@
 <?php
 
-function forcer_choix_rubrique_boite(){
+function forcer_choix_rubrique_boite($ret){
 	if($GLOBALS['afficher_boite_rubrique']=="oui"){
-	$ret = "
-<script type='text/javascript'>
+	$ret .= 
+"<script type='text/javascript'>
 	function masquer_boite(){
 		ma_Boite=document.getElementById('maBoite');
 		if (document.all) { // Rustine pour IE6 -- la peste soit de ce navigateur
@@ -44,7 +44,8 @@ function forcer_choix_rubrique_boite(){
 	</div>
 </div>
 	";
-	return $ret;
+	
 	}
+	return $ret;
 }
 ?>
