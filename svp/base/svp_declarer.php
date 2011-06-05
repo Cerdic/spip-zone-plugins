@@ -80,9 +80,10 @@ function svp_declarer_tables_principales($tables_principales) {
 	);
 	
 	$paquets_key = array(
-		"PRIMARY KEY"	=> "id_paquet"
+		"PRIMARY KEY"	=> "id_paquet",
+		"KEY id_plugin"	=> "id_plugin"
 	);
-
+	
 	$tables_principales['spip_paquets'] =
 		array('field' => &$paquets, 'key' => &$paquets_key);
 
