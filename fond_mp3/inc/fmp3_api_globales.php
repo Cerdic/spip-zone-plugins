@@ -208,6 +208,9 @@ function fmp3_bouton_play (
 	// recherche le player
 	$playerPath = url_absolue(find_in_path('swf/singlemp3player.swf'));
 	
+	/**
+	 * @todo autoStart ne fonctionne plus en SPIP 2 (jquery ?)
+	 */
 	$bouton_play = ""
 		. "<!-- "._FMP3_PREFIX." -->\n"
 		. "<span id=\"fmp3-sound\" class=\"mp3\">\n"
