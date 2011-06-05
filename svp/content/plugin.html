@@ -16,28 +16,37 @@
 
 [(#REM) Cartouche avec le titre de la page et les informations generales ]
 <div class="contenu-principal">
-	<div class="cartouche">
-		<h1 class="h1">#NOM</h1>
-		[<p class="info-publi">
-			<abbr class="published"><small>
-				[<a[ href="(#URL_PAGE{plugins}|parametre_url{categorie,#CATEGORIE})"] title="<:svp:bulle_aller_categorie:>">
-					(#CATEGORIE|svp_traduire_categorie)
-				</a>]
-				[ - (#TAGS)]
-				<br /><em>(#PREFIXE|strtolower)</em>
-			</small></abbr>
-		</p>]
-	</div>
-
-	[<div class="meta-publi">
-		(#SLOGAN)
-	</div>]
+	<div style="width:80%; float:left; padding-right:10px;">
+		<div class="cartouche">
+			<h1 class="h1">#NOM</h1>
+			[<p class="info-publi">
+				<abbr class="published"><small>
+					[<a[ href="(#URL_PAGE{plugins}|parametre_url{categorie,#CATEGORIE})"] title="<:svp:bulle_aller_categorie:>">
+						(#CATEGORIE|svp_traduire_categorie)
+					</a>]
+					[ - (#TAGS)]
+					<br /><em>(#PREFIXE|strtolower)</em>
+				</small></abbr>
+			</p>]
+		</div>
 	
-	[<div class="meta-publi">
-		(#BRANCHES_SPIP)
-	</div>]
+		[<div class="meta-publi">
+			(#SLOGAN)
+		</div>]
+	</div>
+	
+<B_branches>
+	<div style="width:20%; float:left;">
+		<ul style="list-style:none outside none; margin:0; padding:0;">
+<BOUCLE_branches(DATA){source table, #BRANCHES_SPIP|explode{','}}>
+			<li style="padding-left:25px; background: url(#CHEMIN{prive/themes/spip/images/ok-16.png}) no-repeat";>#VALEUR</li>
+</BOUCLE_branches>
+		</ul>
+	</div>
+</B_branches>
 </div>
-<br class="nettoyeur" />
+<br class="nettoyeur"/>
+
 
 [(#REM) Details des paquets du plugin ]
 <BOUCLE_paquets(PAQUETS){id_plugin}{!par version}>
