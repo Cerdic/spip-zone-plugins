@@ -18,9 +18,11 @@
 			jQuery('#formulaire_forum').find('form.preview,.reponse_formulaire').remove();
 			jQuery(me).find('.comment').last().find('p').last().positionner(true);
 			var connect = jQuery('#formulaire_forum .saisie_session_nom a,#formulaire_forum .session_qui .details a').eq(0);
-			var url = connect.attr('href').match(/url=([^&"']*)/);
-			url = escape(unescape(url[1]).replace(/#.*/, "")+"#reply"+id_thread);
-			connect.attr('href',connect.attr('href').replace(/url=([^&"']*)/,"url="+url));
+			if(connect.length!=0){
+				var url = connect.attr('href').match(/url=([^&"']*)/);
+				url = escape(unescape(url[1]).replace(/#.*/, "")+"#reply"+id_thread);
+				connect.attr('href',connect.attr('href').replace(/url=([^&"']*)/,"url="+url));
+			}
 		}
 	}
 	function hash_reply(){
