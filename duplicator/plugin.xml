@@ -5,12 +5,12 @@
 	<icon>images/apsulis.png</icon>
 	<auteur>[Apsulis->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
-	<version>0.1</version>
-	<version_base>0.1</version_base>
+	<version>0.2</version>
+
 	<etat>test</etat>
 	<description>
 	<multi>
-	[fr] Duplication des rubriques
+	[fr] Duplication des rubriques et des articles
 _ Avec sous-rubriques
 _ Avec ou sans articles
 	</multi>

@@ -15,6 +15,7 @@
 function dupliquer_article($article,$rubrique){
 	include_spip('action/editer_article');
 	include_spip('inc/modifier_article');
+	include_spip('inc/modifier');
 
 	// On lit l'article qui va etre dupliqué
 	$champs = array('*');
