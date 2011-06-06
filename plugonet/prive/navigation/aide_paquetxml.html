@@ -3,7 +3,8 @@
 	[(#VAL{<:plugonet:titre_boite_aide_paquetxml:>}|bouton_block_depliable{#EVAL{true}})]
 	[(#EVAL{true}|debut_block_depliable)]
 	<div class="cadre_padding">
-<BOUCLE_index_aide(DATA){liste paqxmlgen,paqxmlpaquet,paqxmlnom,paqxmldesc,paqxmlaut,paqxmlcred,paqxmlcopy,paqxmllic,paqxmltrad,paqxmlbout,paqxmlpipe,paqxmlnec,paqxmllib,paqxmlproc,paqxmlpath,paqxmlspip,paqxmlfoi,paqxmldtd}>
+	#SET{index_aide,#EVAL{$GLOBALS['index_aide_plugonet']}} 
+<BOUCLE_index_aide(DATA){source table, #GET{index_aide}}>
 		<div style="border-bottom: 1px dotted #ddd;">
 			<span>[(#VAL{plugonet:index_aide_#VALEUR}|_T)]</span>
 			<div style="float: right;">#AIDER{#VALEUR}</div>
