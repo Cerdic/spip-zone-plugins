@@ -62,6 +62,18 @@ function exec_adherents() {
 
 		echo fin_boite_info(true);	
 
+	
+
+		
+		echo 	debut_cadre_enfonce('',true),
+				recuperer_fond('prive/inc_cadre_etiquette'),
+				fin_cadre_enfonce(true);
+		
+		
+	
+	
+	
+
 		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
 		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne);
 	

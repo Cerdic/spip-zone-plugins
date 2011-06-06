@@ -1,0 +1,20 @@
+<div class="formulaire_spip formulaire_asso_etiquette">
+<form action="#ENV{action}" method="post">
+#ACTION_FORMULAIRE{#ENV{action}}
+<p><:asso:info_etiquette:></p>
+<ul>
+	<li class="editer_statut_interne[ (#ENV**{erreurs}|table_valeur{statut_interne}|oui)erreur]">
+	<label for="statut_interne"><:asso:adherent_libelle_statut:></label>[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
+	[(#ENV{statut_interne}|instituer_statut_interne_ici)]
+	</li>
+	<li>
+		<ul class="choix">
+			<li><input type="checkbox" name="filtre_email" id="filtre_email" value="oui" [(#ENV{filtre_email}|oui) checked="checked"]/>
+			<label for="filtre_email"><:asso:membre_sans_email:></label>
+			</li>
+		</ul>
+	</li>
+</ul>
+<p class="boutons"><input type="submit" class="submit" name="valide" value="<:imprimer:>" /></p>
+</form>
+</div>

@@ -531,6 +531,36 @@ Commentaire: @commentaire@
 			'maj_desactive_gestion_comptable' => 'Gestion d\'association: &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer la gestion comptable si le plan comptable n\'est pas valide. Votre plan comptable n\'est pas valide, la gestion comptable a donc &eacute;t&eacute; desactiv&eacute;e. Pour la reactiver, rendez vous sur la d\'&eacute;dition du plan comptable puis celle de configuration du plugin',
 			'maj_desactive_modules' => 'Gestion d\'association : &agrave; partir de cette mise &agrave; jour, il n\'est plus possible d\'activer les modules de gestion de dons, ventes, prets ou activit&eacute;s si la gestion comptable n\'est pas activ&eacute;e. Votre configuration actuelle du plugin n\'&eacute;tant plus autoris&eacute;e, les modules de gestions activ&eacute;s ont &eacute;t&eacute; d&eacute;sactiv&eacute;s(aucune donn&eacute; n\'a  &eacute;t&eacute; &eacute;ffac&eacute;e). Rendez vous sur la page de configuration du plugin pour les r&eacute;activer.',
 
+		
+	# MaJ Generation des etiquette	
+		
+			'eti_avec_civilite' => 'Avec la civilit&eacute;',
+			'eti_nb_colonne' => 'Nb &eacute;tiquettes en largeur',
+			'eti_nb_ligne' => 'Nb &eacute;tiquettes en hauteur',
+			'eti_largeur_page' => 'largeur page',
+			'eti_hauteur_page' => 'Hauteur page',
+			'eti_marge_haut_page' => 'Marge haut de page',
+			'eti_marge_bas_page' => 'Marge bas de page',
+			'eti_marge_gauche_page' => 'marge gauche de page',
+			'eti_marge_droite_page' => 'Marge droite de page',
+			'eti_marge_haut_etiquette' => 'Marge haut &eacute;tiquette',
+			'eti_marge_gauche_etiquette' => 'Marge gauche &eacute;tiquette',
+			'eti_marge_droite_etiquette' => 'Marge droite &eacute;tiquette',
+			'eti_espace_etiquettesl' => 'Espace entre &eacute;tiquettes largeur',
+			'eti_espace_etiquettesh' => 'Espace entre &eacute;tiquettes hauteur',
+
+
+'info_doc_etiquette'=>'Cette page permet le parametrage du g&eacute;n&eacute;rateur d\'&eacute;tiquettes, il permet ainsi de renseigner le g&eacute;n&eacute;rateur sur le format du papier sur lesquels seront imprimer les &eacute;tiquettes, la taille des &eacute;tiquettes ...',
+'disposition_des_etiquettes' => 'Espace entre &eacute;tiquettes hauteur',
+'contenu_des_etiquettes' => 'Contenu des etiquettes',
+'parametrage_des_etiquettes' => 'Param&egrave;trage des &eacute;tiquettes',
+'enregistrer' => 'Enregistrer',
+'imprimer' => 'Imprimer',
+'info_etiquette'=>'Imprimer les &eacute;tiquettes de vos cartes de membres, de vos courriers papiers...',
+'etiquettes'=>'&Eacute;tiquettes',
+'titre_page_config_etiquette'=>'Param&egrave;trage des &eacute;tiquettes',
+'membre_sans_email'=>'Uniquement les menbres sans email',
+
 			// chaines collectee automatiquement
 
 'a_developper' => 'A d&eacute;velopper',

@@ -9,18 +9,25 @@ include_spip('inc/charsets');
 
 class PDF extends PDF_Table {
 
-	function PDF(){
-		$this->FPDF('L', 'mm', 'A4');
+
+var $ajoute;
+
+	function PDF($orientation='L',$unite='mm',$format='A4',$ajoute_titre=true){
+		$this->ajoute_titre=$ajoute_titre;
+		$this->FPDF($orientation, $unite, $format);
 	}
 	
 	function Header(){
 		//Titre
+		if($this->ajoute_titre)
+		{
 		$this->SetFont('Arial','',10);
 		$this->Cell(0,6,$GLOBALS['association_metas']['nom'],0,1,'L');
 		$this->SetFont('Arial','B',14);
 		$this->Cell(0,6,unicode2charset(html2unicode($this->titre)),0,1,'C');
 		$this->Ln(10);
 		//Imprime l'en-tête du tableau si nécessaire
+		}
 		parent::Header();
 	}
 

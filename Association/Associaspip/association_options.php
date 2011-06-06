@@ -218,6 +218,11 @@ function instituer_adherent_ici($auteur=array()){
 	$instituer_adherent = charger_fonction('instituer_adherent', 'inc');
 	return $instituer_adherent($auteur);
 }
+function instituer_statut_interne_ici($auteur=array()){
+	$instituer_statut_interne = charger_fonction('instituer_statut_interne', 'inc');
+	return $instituer_statut_interne($auteur);
+}
+
 
 // pour executer les squelettes comportant la balise Meta
 include_spip('balise/meta');
