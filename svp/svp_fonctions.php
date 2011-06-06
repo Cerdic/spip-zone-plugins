@@ -168,7 +168,8 @@ function svp_compter($entite, $id_depot=0, $categorie='', $compatible_spip=''){
 		if ($categorie)
 			$where[] = "t2.categorie=" . sql_quote($categorie);
 		if ($compatible_spip) {
-			$where[] = "LOCATE($compatible_spip, t2.branches_spip)>0";
+			$creer_where = charger_fonction('where_compatible_spip', 'inc');
+			$where[] =  $creer_where($compatible_spip, 't2', '>');
 		}
 		$compteurs['plugin'] = sql_count(sql_select('t2.id_plugin', $from, $where));
 	}
@@ -179,7 +180,8 @@ function svp_compter($entite, $id_depot=0, $categorie='', $compatible_spip=''){
 			$where[] = sql_in('t1.id_plugin', $ids);
 		}
 		if ($compatible_spip) {
-			$where[] = "LOCATE($compatible_spip, t1.branches_spip)>0";
+			$creer_where = charger_fonction('where_compatible_spip', 'inc');
+			$where[] =  $creer_where($compatible_spip, 't1', '>'); var_dump($where);
 		}
 		$compteurs['paquet'] = sql_countsel('spip_paquets AS t1', $where);
 	}
@@ -198,7 +200,8 @@ function svp_compter($entite, $id_depot=0, $categorie='', $compatible_spip=''){
 			$where[] = sql_in('t2.id_plugin', $ids);
 		}
 		if ($compatible_spip) {
-			$where[] = "LOCATE($compatible_spip, t2.branches_spip)>0";
+			$creer_where = charger_fonction('where_compatible_spip', 'inc');
+			$where[] =  $creer_where($compatible_spip, 't2', '>');
 		}
 		if ($categorie)
 			$where[] = "t2.categorie=" . sql_quote($categorie);
