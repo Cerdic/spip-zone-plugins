@@ -12,6 +12,7 @@ include_spip("inc/mail");
 include_spip('inc/filtres'); 
 include_spip('inc/distant');
 include_spip('inc/chercher_logo');
+include_spip('inc/rubriques');
 
 function genie_rssarticle_copie_dist($t){  
   
@@ -131,7 +132,17 @@ function genie_rssarticle_copie_dist($t){
         		$log .= "\n - $titre";  
             
              // on "depublie" l'article syndique qui vient d'etre copie
-            sql_update("spip_syndic_articles", array('statut' => '"refuse"'), "id_syndic_article=$id_syndic_article");                 
+            sql_update("spip_syndic_articles", array('statut' => '"refuse"'), "id_syndic_article=$id_syndic_article");
+
+            // Mise à jour des dates de rubriques après création d'un article dedans
+           if ($id_article) {
+               if (function_exists('calculer_rubriques'))
+                   calculer_rubriques();
+               if (function_exists('calculer_langues_rubriques'))
+                   calculer_langues_rubriques();
+               if (function_exists('propager_les_secteurs'))
+                   propager_les_secteurs();
+           }
                   
           }  // test doublons
        }  
