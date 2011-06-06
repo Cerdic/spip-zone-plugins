@@ -120,8 +120,8 @@ function svp_afficher_statistiques_globales($id_depot=0){
 	return $info;
 }
 
-function svp_compter_telechargements($id_depot=0, $categorie='', $branche_spip=''){
-	$total = svp_compter('paquet', $id_depot, $categorie, $branche_spip);
+function svp_compter_telechargements($id_depot=0, $categorie='', $compatible_spip=''){
+	$total = svp_compter('paquet', $id_depot, $categorie, $compatible_spip);
 	$info = _T('svp:info_paquets_disponibles', array('total_paquets'=>$total['paquet']));
 	return $info;
 }
@@ -147,13 +147,14 @@ function svp_compter_depots($id_depot, $contrib='plugin'){
 	return $info;
 }
 
-function svp_compter_plugins($id_depot=0, $categorie='', $branche_spip='') {
-	$total = svp_compter('plugin', $id_depot, $categorie, $branche_spip);
+function svp_compter_plugins($id_depot=0, $categorie='', $compatible_spip='') {
+	$total = svp_compter('plugin', $id_depot, $categorie, $compatible_spip);
 	$info = _T('svp:info_plugins_disponibles', array('total_plugins'=>$total['plugin']));
 	return $info;
 }
 
-function svp_compter($entite, $id_depot=0, $categorie='', $branche_spip=''){
+// Attention le criter de compatibilite spip pris en compte est uniquement celui d'une branche SPIP
+function svp_compter($entite, $id_depot=0, $categorie='', $compatible_spip=''){
 	$compteurs = array();
 
 	$group_by = array();
@@ -166,9 +167,8 @@ function svp_compter($entite, $id_depot=0, $categorie='', $branche_spip=''){
 		$where[] = "t1.id_plugin=t2.id_plugin";
 		if ($categorie)
 			$where[] = "t2.categorie=" . sql_quote($categorie);
-		if ($branche_spip) {
-			$lister_compatibles = charger_fonction('svp_lister_compatibles', 'inc');
-			$where[] = sql_in('t2.id_plugin', $lister_compatibles($branche_spip, 'plugins', 'id_plugin', 'tableau'));
+		if ($compatible_spip) {
+			$where[] = "LOCATE($compatible_spip, t2.branches_spip)>0";
 		}
 		$compteurs['plugin'] = sql_count(sql_select('t2.id_plugin', $from, $where));
 	}
@@ -178,10 +178,8 @@ function svp_compter($entite, $id_depot=0, $categorie='', $branche_spip=''){
 			$ids = array_map('reset', $ids);
 			$where[] = sql_in('t1.id_plugin', $ids);
 		}
-		if ($branche_spip) {
-			$lister_compatibles = charger_fonction('svp_lister_compatibles', 'inc');
-			$ids = $lister_compatibles($branche_spip, 'paquets', 'id_paquet', 'tableau');
-			$where[] = sql_in('t1.id_paquet', $ids);
+		if ($compatible_spip) {
+			$where[] = "LOCATE($compatible_spip, t1.branches_spip)>0";
 		}
 		$compteurs['paquet'] = sql_countsel('spip_paquets AS t1', $where);
 	}
@@ -197,15 +195,11 @@ function svp_compter($entite, $id_depot=0, $categorie='', $branche_spip=''){
 		if ($id_depot) {
 			$ids = sql_allfetsel('id_plugin', 'spip_depots_plugins AS t1', $where);
 			$ids = array_map('reset', $ids);
-		}
-		if ($branche_spip) {
-			$lister_compatibles = charger_fonction('svp_lister_compatibles', 'inc');
-			$ids_compat = $lister_compatibles($branche_spip, 'plugins', 'id_plugin', 'tableau');
-			$ids = $ids ? array_intersect($ids, $ids_compat) : $ids_compat;
-		}
-		if ($id_depot OR $branche_spip)
 			$where[] = sql_in('t2.id_plugin', $ids);
-
+		}
+		if ($compatible_spip) {
+			$where[] = "LOCATE($compatible_spip, t2.branches_spip)>0";
+		}
 		if ($categorie)
 			$where[] = "t2.categorie=" . sql_quote($categorie);
 		else
