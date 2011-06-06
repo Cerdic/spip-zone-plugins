@@ -181,7 +181,7 @@ function svp_compter($entite, $id_depot=0, $categorie='', $compatible_spip=''){
 		}
 		if ($compatible_spip) {
 			$creer_where = charger_fonction('where_compatible_spip', 'inc');
-			$where[] =  $creer_where($compatible_spip, 't1', '>'); var_dump($where);
+			$where[] =  $creer_where($compatible_spip, 't1', '>');
 		}
 		$compteurs['paquet'] = sql_countsel('spip_paquets AS t1', $where);
 	}
