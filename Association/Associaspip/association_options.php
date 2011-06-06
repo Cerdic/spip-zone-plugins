@@ -214,6 +214,10 @@ function generer_url_vente($id, $param='', $ancre='') {
 	return  array('asso_vente', $id);
 }
 
+function instituer_adherent_ici($auteur=array()){
+	$instituer_adherent = charger_fonction('instituer_adherent', 'inc');
+	return $instituer_adherent($auteur);
+}
 
 // pour executer les squelettes comportant la balise Meta
 include_spip('balise/meta');

@@ -49,16 +49,9 @@
 			<input type="text" name="validite" value="[(#ENV{validite}|affdate{Y-m-d})]" id="validite"  class='formo'/>
 		</li>
 
-		<!-- impossible de recuperer les valeurs des statuts dans le tableau global association_liste_des_statuts, re-entres a la main, il y apeut-etre moyen de faire mieux -->
-		<li class="editer_statut_interne">
-			<label for="statu_interne"><strong><:asso:adherent_libelle_statut:></strong></label>
-			<select name="statut_interne" id="statut_interne" class="formo" > 
-				<option [(#ENV{statut_interne}|=={sorti}|?{selected="selected"})] value="sorti"><:asso:adherent_entete_statut_sorti:></option>
-				<option [(#ENV{statut_interne}|=={prospect}|?{selected="selected"})]  value="prospect"><:asso:adherent_entete_statut_prospect:></option>
-				<option  [(#ENV{statut_interne}|=={ok}|?{selected="selected"})] value="ok"><:asso:adherent_entete_statut_ok:></option>
-				<option  [(#ENV{statut_interne}|=={echu}|?{selected="selected"})] value="echu"><:asso:adherent_entete_statut_echu:></option>
-				<option  [(#ENV{statut_interne}|=={relance}|?{selected="selected"})] value="relance"><:asso:adherent_entete_statut_relance:></option>
-			</select>
+		<li class="editer_statut_interne[ (#ENV**{erreurs}|table_valeur{statut_interne}|oui)erreur]">
+			<label for="statut_interne"><strong><:asso:adherent_libelle_statut:></strong></label>[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{statut_interne})</span>]
+			[(#STATUT_INTERNE|instituer_adherent_ici)]
 		</li>
 
 		[(#ENV{meta_id_asso}|oui)
