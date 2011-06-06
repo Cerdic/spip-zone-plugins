@@ -1,0 +1,16 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+
+jQuery(function($) {
+    var bodyClasses = $("body").attr("class");
+    var bcArray = bodyClasses.split(" ");
+    var pageType = "n&eacute;ant";
+    var pageSommaire = "n&eacute;ant";
+    pageType = bcArray[0].replace(/page_/,"");
+    if (2==bcArray.length)
+    {
+        var aSommaire = bcArray[1].split("_");
+        pageSommaire = aSommaire[1];
+    }
+    $("#page").before( "<div id=\'preprod\' class=\'jour\'></div>" );
+    $("#preprod").html("Type de page : "+pageType+"<br />Composition : "+pageSommaire);
+});
