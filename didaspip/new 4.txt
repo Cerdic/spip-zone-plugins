@@ -1,0 +1,48 @@
+<script language="JavaScript" src="librairie_controles.js" type="text/javascript"></script>
+
+<script language="JavaScript">
+<!--
+	function check()
+	{
+		/*	Ajouter dans cette fonction l'ensemble des controles à faires sur les champs de formulaires avant soumission du formulaire.	*/
+
+		var test=true;
+		var message='';
+		
+		// Exemple d'un contrôle sur un champ au format adresse IP
+		// nb: vous pouvez copier-coller cet exempl autant de fois qu'un contrôle sera nécessaire sur un champ
+		
+		//Remplacer "test" par la valeur de l'attribut "name" de votre formulaire à controler.
+		//Remplacer "item1" par la valeur de l'attribut "name" de votre champ à controler.
+		
+		if (isNotEmpty(document.test.item1.value) && isNotIpAdress(document.test.item1.value))
+		{
+			message+='\nItem1 doit etre une adresse ip !';
+			test=false;
+		}
+		
+		//Fin de l'exemple
+		
+		// Exemple d'un contrôle sur un champ au format email
+		// nb: vous pouvez copier-coller cet exempl autant de fois qu'un contrôle sera nécessaire sur un champ
+		
+		//Remplacer "test" par la valeur de l'attribut "name" de votre formulaire à controler.
+		//Remplacer "item1" par la valeur de l'attribut "name" de votre champ à controler.
+		
+		if (isEmpty(document.test.item2.value))
+		{
+			message+='\nItem2 est un champ obligatoire !';
+			test=false;
+		} else if (isNotEmailAdress(document.test.item2.value))
+		{
+			message+='\nItem2 doit etre une adresse email valide !';
+			test=false;
+		}
+		
+		//Fin de l'exemple
+		
+		if (message!='') alert(message);
+		return test;
+	}
+//-->
+</script>

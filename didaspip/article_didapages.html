@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG">
+<head>
+	<title>#NOM_SITE_SPIP [(#TITRE|textebrut)]</title>
+	
+	<!-- Balises META pour les moteurs de recherche -->
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<meta name="Description" content="#DESCRIPTIF" />
+	<meta name="Keywords" content="<BOUCLE_keywords(MOTS){id_article}{","}> #TITRE </BOUCLE_keywords>" />
+	<meta name="Author" content="<BOUCLE_author(AUTEURS){id_article}{","}> #NOM </BOUCLE_author>" />
+	<INCLURE{fond=inc_head}>
+</head>
+
+<body id="articles">
+
+<div id="page">
+	<INCLURE {fond=inc_entete}>
+	<INCLURE {fond=inc_menu}>	
+	
+	<div id="barre_laterale">
+		<INCLURE {fond=inc_rubriques}>
+		<INCLURE {fond=inc_derniers_articles}>
+	</div><!-- fin barre_laterale -->
+	    <INCLURE {fond=inc_feuille_bas}>
+	
+	<div id="contenu_principal">
+
+		<B_hierarchie>
+			L'article appartient à cette rubrique :<br />
+		<BOUCLE_hierarchie(HIERARCHIE) {id_secteur} {" / "}>
+			[<a href="#URL_RUBRIQUE" title="#DESCRIPTIF">(#TITRE)</a>]
+		</BOUCLE_hierarchie>
+		<br/><br/>
+		</B_hierarchie>
+
+		<div class="article">
+
+			<h1><a href="#URL_ARTICLE">[<img src="IMG/(#LOGO_ARTICLE|fichier)" alt="logo" />] #TITRE</a></h1>
+			[<h2>(#SOUSTITRE)</h2>]
+			<h4>[(#DATE|nom_jour)] [(#DATE|affdate)] par <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[<a href="spip.php?id_auteur=#ID_AUTEUR">(#NOM)</a>]</BOUCLE_auteurs></h4>
+			[<div class="chapo">(#CHAPO)</div>]
+			[<div class="texte">(#TEXTE)</div>]
+			
+			<a class="thickbox" title="#SOUSTITRE" href="#URL_SITE_SPIP/IMG/didapages/#SOUSTITRE/index.html?keepThis=true&amp;TB_iframe=true&amp;height=500&amp;width=500">  Notre projet didapages </a>
+			
+			<BOUCLE_documents_joints(DOCUMENTS) {id_article} {doublons}>
+			<div class="documents_joints">
+				<a href="#URL_DOCUMENT" target="_blank">[(#LOGO_DOCUMENT)]<br/>[(#TITRE)][ ((#TAILLE|taille_en_octets))]</a>
+			</div><!-- fin documents_joints -->
+			</BOUCLE_documents_joints>
+			</B_documents_joints>
+				
+			[<div class="lien">
+				<a href="(#URL_SITE)">#NOM_SITE</a>
+			</div><!-- fin lien -->]
+
+			<BOUCLE_auteurs_articles(AUTEURS) {id_article}>
+			<div class="biographie">
+	 			[<div class="image"><img src="IMG/(#LOGO_AUTEUR|fichier)" alt="logo" /></div>]
+				<h4><a href="spip.php?auteur#ID_AUTEUR">#NOM</a></h4>
+				[<p>(#BIO)</p>]
+			</div><!-- fin biographie -->
+			</BOUCLE_auteurs_articles>
+
+			[<div class="ps">(#PS)</div>]
+			[<div class="notes">(#NOTES)</div>]
+
+		</div><!-- fin article -->
+		
+		<div class="forum">	
+			[<a name="forum" href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_article:></a>]
+			<B_forums>
+			<ul>
+				<BOUCLE_forums(FORUMS){id_article}{par date}{inverse}>
+				<li>
+					<h3><a name="forum#ID_FORUM"></a>#TITRE</h3>
+					<h4 class="date">[(#DATE|affdate)][, <:par_auteur:> <a href="forum.php3?(#PARAMETRES_FORUM)">(#NOM)</a>]</h4>
+					[<p>(#TEXTE)</p>]
+					[<div class="lien"><a href="(#URL_SITE)">#NOM_SITE</a></div>]
+					[<p><a href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a></p>]
+				</li>
+				<B_forums_fils>
+				<ul>
+					<BOUCLE_forums_fils(FORUMS){id_parent}{par date}>
+					<li>
+						<h3><a name="forum#ID_FORUM"></a>#TITRE</h3>
+						<h4 class="date">[(#DATE|affdate)][, <:par_auteur:> <a href="forum.php3?(#PARAMETRES_FORUM)">(#NOM)</a>]</h4>
+						<p>[(#TEXTE)]</p>
+						[<div class="lien"><a href="(#URL_SITE)">#NOM_SITE</a></div>]
+						[<p><a href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a><p>]
+					</li>
+					<BOUCLE_Forums_Boucle(boucle_forums_fils)></BOUCLE_Forums_Boucle>
+					</BOUCLE_forums_fils>
+				</ul>
+				</B_forums_fils>
+				</BOUCLE_forums>
+			</ul>
+			</B_forums>
+		</div><!-- fin forum -->
+
+	</div><!-- fin contenu_principal -->
+
+	<INCLURE {fond=inc_pied_de_page}>
+
+</div><!-- fin page -->
+
+</body>
+</html>
+</BOUCLE_article_principal>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="#LANG">
+<head>
+	<title>[#NOM_SITE_SPIP] <:derniers_articles:></title>
+	
+	<INCLURE {fond=inc_balises_meta}>
+	<INCLURE {fond=inc_head}>
+</head>
+
+<body id="articles">
+
+<div id="page">
+
+	<INCLURE {fond=inc_entete}>
+	<INCLURE {fond=inc_menu}>	
+	
+	<div id="barre_laterale">
+		<INCLURE {fond=inc_rubriques}>
+		<INCLURE {fond=inc_derniers_articles}>
+		</div><!-- fin barre_laterale -->
+		<INCLURE {fond=inc_feuille_bas}>
+	
+	<div id="contenu_principal">
+
+		<BOUCLE_articles_vide(ARTICLES) {par date} {inverse}>
+		<div class="article">
+			<h1>[<img src="IMG/(#LOGO_ARTICLE|fichier)" alt="logo" />]<a href="#URL_ARTICLE">#TITRE</a></h1>
+			<!--
+			[<h2>(#SOUSTITRE)</h2>]
+			<h4>[(#DATE|nom_jour)] [(#DATE|affdate)] par <BOUCLE_auteurs_articles_vide(AUTEURS) {id_article} {", "}><a href="auteur.php3?id_auteur=#ID_AUTEUR">#NOM</a></BOUCLE_auteurs_articles_vide></h4>
+			-->
+			[<p>(#INTRODUCTION)</p>]
+			<BOUCLE_forums_decompte_vide(FORUMS){id_article}{plat}></BOUCLE_forums_decompte_vide>[<div class="reactions"><a href="#URL_ARTICLE#forum">(#TOTAL_BOUCLE) r&eacute;action(s)</a></div>]<//B_forums_decompte_vide>
+		</div><!-- fin article -->
+		</BOUCLE_articles_vide>
+
+	</div><!-- fin contenu_principal -->
+
+	<INCLURE {fond=inc_pied_de_page}>
+
+</div><!-- fin page -->
+
+</body>
+</html>
+
+<//B_article_principal>
+

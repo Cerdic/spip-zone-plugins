@@ -1,0 +1,44 @@
+#CACHE{0}
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+[(#REM) descriptif=
+Ici vous pouvez configurer les param&egrave;tres pour utiliser le plugin sur votre site.] 
+[(#REM)titre=Configuration de didaspip] 
+
+<fieldset><legend>URL du site</legend>
+  <label>Racine du site spip &agrave; utiliser :</label>
+  <input type="text" name="url" size="40"value="#URL_SITE_SPIP">  
+</fieldset>
+<fieldset><legend>Param&egrave;tres d'affichage</legend>
+  <label>Mode d'affichage :</label>
+<select name="box">
+    <option value="Blank" [(#ENV{box}|=={"Blank"}|?{selected="selected",''})]>Nouvelle page</option>
+    <option value="Iframe" [(#ENV{box}|=={"Iframe"}|?{selected="selected",''})]>Iframe</option>
+    <option value="Thickbox" [(#ENV{box}|=={"Thickbox"}|?{selected="selected",''})]>Thickbox</option> 
+</select><br>
+<b>Attention</b> l'option Thickbox n&eacute;cessite la pr&eacute;sence du plugin  !
+</fieldset>
+
+<fieldset><legend>Taille de la fen&ecirc;tre d'affichage</legend>
+<label>Largeur :</label>
+ <input type="text" name="didawidth" size="4" value="#ENV{didawidth}"> pixels<br>
+<label>Hauteur :</label>
+<input type="text" name="didaheight" size="4" value="#ENV{didaheight}"> pixels
+</fieldset>
+<fieldset><legend>Acc&egrave;s &agrave; la fen&ecirc;tre de gestion Didapages</legend>
+  <label>Les r&eacute;dacteurs peuvent-ils avoir acc&egrave;s &agrave; la page de gestion des projets Didapage :</label>
+<select name="accesdida">
+    <option value="oui" [(#ENV{accesdida}|=={"oui"}|?{selected="selected",''})]>Oui</option>
+    <option value="non" [(#ENV{accesdida}|=={"non"}|?{selected="selected",''})]>Non</option>
+</select>
+</fieldset>
+<fieldset><legend>Suppression des projets Didapages</legend>
+  <label>Les r&eacute;dacteurs peuvent supprimer les projets en ligne :</label>
+<select name="accessuppr">
+    <option value="oui" [(#ENV{accessuppr}|=={"oui"}|?{selected="selected",''})]>Oui</option>
+    <option value="non" [(#ENV{accessuppr}|=={"non"}|?{selected="selected",''})]>Non</option>
+</select>
+</fieldset>
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>
