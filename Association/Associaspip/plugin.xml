@@ -22,6 +22,20 @@
 	<pipeline><nom>delete_tables</nom></pipeline>
 
 	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/association.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/association.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_interfaces</nom>
+        <inclure>base/association.php</inclure>
+	</pipeline>
+
+
+	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 	</pipeline>

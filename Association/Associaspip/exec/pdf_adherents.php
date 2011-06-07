@@ -26,8 +26,10 @@ function exec_pdf_adherents()
 	$pdf->Open();
 	$pdf->AddPage();
 
+
 	//On définit les colonnes (champs,largeur,intitulé,alignement)
-	$champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
+		$champs = $GLOBALS['tables_principales']['spip_asso_membres']['field'];
+
 	$sent = _request('champs');
 	foreach ($champs as $k => $v) {
 	  if ($sent[$k]=='on') {
@@ -37,7 +39,6 @@ function exec_pdf_adherents()
 	    $pdf->AddCol($k,$n,_T('asso:adherent_libelle_' . $k), $p);
 	  }
 	}
-
 	// ainsi que les colonnes pour les champs hors table spip_asso_membres
 	include_spip('inc/association_coordonnees');
 	$liste_id_auteurs = unserialize(_request('liste_id_auteurs'));

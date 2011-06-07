@@ -288,7 +288,7 @@ function affiche_categorie($c)
 
 function adherents_table($liste_id_auteurs)
 {
-	$champs = $GLOBALS['association_tables_principales']['spip_asso_membres']['field'];
+	$champs = $GLOBALS['tables_principales']['spip_asso_membres']['field'];
 	$res = '';
 	foreach ($champs as $k => $v) {
 		if (!(($GLOBALS['association_metas']['civilite']!="on" && $k == 'sexe') OR ($GLOBALS['association_metas']['prenom']!="on" && $k == 'prenom') OR ($GLOBALS['association_metas']['id_asso']!="on" && $k == 'id_asso'))) {

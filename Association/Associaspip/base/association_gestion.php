@@ -11,7 +11,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-global $association_tables_principales, $association_tables_auxiliaires;
+
 include_spip('base/association');
 include_spip('base/abstract_sql');
 
@@ -24,12 +24,26 @@ include_spip('base/abstract_sql');
 // desinstatllation
 
 function association_vider_tables($nom_meta, $table){
-	global $association_tables_principales, $association_tables_auxiliaires;
-	effacer_meta($nom_meta, $table);
-	foreach($association_tables_principales as $nom => $desc)
-		sql_drop_table($nom);
-	foreach($association_tables_auxiliaires as $nom => $desc)
-		sql_drop_table($nom);
+
+$tables_a_supprimer=array(	
+		'spip_asso_activites',
+		'spip_asso_categories',
+		'spip_asso_comptes',
+		'spip_asso_destination',
+		'spip_asso_destination_op',
+		'spip_asso_dons',
+		'spip_asso_plan',
+		'spip_asso_prets',
+		'spip_asso_ressources',
+		'spip_asso_ventes',
+		'spip_association_metas');
+	
+	foreach($tables_a_supprimer as $table);
+		{
+		sql_drop_table($table);
+		spip_log("$table $nom_meta desinstalle");
+		}
+	effacer_meta($nom_meta_base_version);
 	spip_log("$table $nom_meta desinstalle");
 }
 
@@ -53,8 +67,8 @@ function association_upgrade($meta, $courante, $table='meta')
 	spip_log("association upgrade: $table $meta = $n =>> $courante");
 	if (!$n) {
 		include_spip('base/create');
-		alterer_base($GLOBALS['association_tables_principales'],
-			     $GLOBALS['association_tables_auxiliaires']);
+		alterer_base($GLOBALS['tables_principales'],
+			     $GLOBALS['tables_auxiliaires']);
 		ecrire_meta($meta, $courante, NULL, $table);
 		return 0; // Reussite (supposee !)
 	} else {
@@ -120,11 +134,11 @@ $GLOBALS['association_maj'][64] = array(array('association_maj_64'));
 
 function association_maj_38192()
 {
-	global $association_tables_auxiliaires;
+
 
 	if (sql_create('spip_asso_metas', 
-		$association_tables_auxiliaires['spip_asso_metas']['field'],
-		$association_tables_auxiliaires['spip_asso_metas']['key'],
+		$GLOBALS['tables_auxiliaires']['spip_asso_metas']['field'],
+		$GLOBALS['tables_auxiliaires']['spip_asso_metas']['key'],
 		false, false)) {
 		include _DIR_PLUGINS . 'cfg/inc/cfg.php';
 		if (is_array($c = lire_config('association'))) {
@@ -142,8 +156,8 @@ function association_maj_38192()
 $GLOBALS['association_maj'][38192] = array(array('association_maj_38192'));
 
 $GLOBALS['association_maj'][38258] = array(array('sql_create','spip_asso_membres',
-		$association_tables_principales['spip_asso_membres']['field'],
-	      $association_tables_principales['spip_asso_membres']['key'])
+		$GLOBALS['tables_principales']['spip_asso_membres']['field'],
+	      $GLOBALS['tables_principales']['spip_asso_membres']['key'])
 					);
 $GLOBALS['association_maj'][38578] = array(
 	array('spip_query', 'rename table spip_asso_metas TO spip_association_metas'));
@@ -160,15 +174,15 @@ $GLOBALS['association_maj'][42024] = array(array('association_maj_42024'));
 /* cette mise a jour comporte une erreur: sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'"); le champ doit etre nomme direction et non destination */
 function association_maj_43909()
 {
-	global $association_tables_principales;
+	
 
 	sql_alter("TABLE spip_asso_plan ADD destination ENUM('credit','debit') NOT NULL default 'credit'");
 	sql_create('spip_asso_destination', 
-		$association_tables_principales['spip_asso_destination']['field'],
-		$association_tables_principales['spip_asso_destination']['key']);
+		$GLOBALS['tables_principales']['spip_asso_destination']['field'],
+		$GLOBALS['tables_principales']['spip_asso_destination']['key']);
 	sql_create('spip_asso_destination_op', 
-		$association_tables_principales['spip_asso_destination_op']['field'],
-		$association_tables_principales['spip_asso_destination_op']['key']);
+		$GLOBALS['tables_principales']['spip_asso_destination_op']['field'],
+		$GLOBALS['tables_principales']['spip_asso_destination_op']['key']);
 }
 
 $GLOBALS['association_maj'][43909] = array(array('association_maj_43909'));
@@ -177,7 +191,7 @@ unset($GLOBALS['association_maj'][43909]); /* pour empecher l'execution de code 
 
 function association_maj_46392() /* repare l'erreur commise sur la maj 43909 */
 {
-	global $association_tables_principales;
+
 
 	/* on elimine le champ mal nomme */
 	sql_alter("TABLE spip_asso_plan DROP destination");
@@ -185,18 +199,17 @@ function association_maj_46392() /* repare l'erreur commise sur la maj 43909 */
 	/* et on refait la modif correctement: ca risque d'entrainer des erreurs SQL mais c'est pas grave */
 	sql_alter("TABLE spip_asso_plan ADD direction ENUM('credit','debit') NOT NULL default 'credit'");
 	sql_create('spip_asso_destination', 
-		$association_tables_principales['spip_asso_destination']['field'],
-		$association_tables_principales['spip_asso_destination']['key']);
+		$GLOBALS['tables_principales']['spip_asso_destination']['field'],
+		$GLOBALS['tables_principales']['spip_asso_destination']['key']);
 	sql_create('spip_asso_destination_op', 
-		$association_tables_principales['spip_asso_destination_op']['field'],
-		$association_tables_principales['spip_asso_destination_op']['key']);
+		$GLOBALS['tables_principales']['spip_asso_destination_op']['field'],
+		$GLOBALS['tables_principales']['spip_asso_destination_op']['key']);
 }
 
 $GLOBALS['association_maj'][46392] = array(array('association_maj_46392'));
 
 function association_maj_46779()
 {
-	global $association_tables_principales;
 	/* avant d'eliminer reference de la table spip_asso_plan, on recopie sa valeur(si non null) dans le champ commentaires */
 	$rows = sql_select("id_plan, reference, commentaire", 'spip_asso_plan', "reference <> ''");
 	while ($row = sql_fetch($rows)) {
@@ -234,7 +247,6 @@ $GLOBALS['association_maj'][46779] = array(array('association_maj_46779'));
 
 function association_maj_47144()
 {
-	global $association_tables_principales;
 	/* avant d'eliminer id_asso de la table spip_asso_membres, on recopie sa valeur(si non null et non egal a 0) dans le champ commentaires */
 	$rows = sql_select("id_auteur, id_asso, commentaire", 'spip_asso_membres', "id_asso <> '' AND id_asso <> 0");
 	while ($row = sql_fetch($rows)) {
@@ -252,7 +264,6 @@ unset($GLOBALS['association_maj'][47144]); /* finalement on garde le champ id_as
 
 function association_maj_47501() /* revert de la 47144 pour ceux qui l'aurait effectue avant qu'elle ne soit supprimee */
 {
-	global $association_tables_principales;
 	/* on verifie si le champ id_asso existe dans la table spip_asso_membre, si oui, rien a faire, la 47144 n'a pas ete effectuee */
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$table_membres = $trouver_table('spip_asso_membres');

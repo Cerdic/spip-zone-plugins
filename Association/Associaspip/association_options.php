@@ -161,30 +161,6 @@ function association_delete_tables($flux){
 }
 
 
-// Pour ne pas avoir a ecrire le prefixe "spip_" dans les squelettes etc
-// (cf trouver_table)
-global $table_des_tables;
-$table_des_tables['asso_dons'] = 'asso_dons';
-$table_des_tables['asso_ventes'] = 'asso_ventes';
-$table_des_tables['asso_comptes'] = 'asso_comptes';
-$table_des_tables['comptes'] = 'asso_comptes';
-$table_des_tables['asso_categories'] = 'asso_categories';
-$table_des_tables['asso_plan'] = 'asso_plan';
-$table_des_tables['asso_ressources'] = 'asso_ressources';
-$table_des_tables['asso_prets'] = 'asso_prets';
-$table_des_tables['asso_activites'] = 'asso_activites';
-$table_des_tables['asso_membres'] = 'asso_membres';
-$table_des_tables['association_metas'] = 'association_metas';
-$table_des_tables['asso_destination'] = 'asso_destination';
-$table_des_tables['asso_destination_op'] = 'asso_destination_op';
-
-// Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
-global $table_titre;
-$table_titre['asso_membres']= "nom_famille AS titre, '' AS lang";
-$table_titre['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
-
-// Toujours charger la description des tables (a ameliorer)
-include _DIR_PLUGIN_ASSOCIATION . 'base/association.php';
 
 // Raccourcis
 // Les tables ayant 2 prefixes ("spip_asso_")

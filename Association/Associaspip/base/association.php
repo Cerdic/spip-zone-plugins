@@ -14,8 +14,9 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Declaration des tables
+function association_declarer_tables_principales($tables_principales){
 
-global $association_tables_principales;
+
 
 //-- Table CATEGORIES COTISATION ------------------------------------------
 $spip_asso_categories = array(
@@ -32,7 +33,7 @@ $spip_asso_categories_key = array(
 	"PRIMARY KEY" => "id_categorie"
 );	
 
-$association_tables_principales['spip_asso_categories'] = array(
+$tables_principales['spip_asso_categories'] = array(
 	'field' => &$spip_asso_categories, 
 	'key' => &$spip_asso_categories_key
 );
@@ -53,7 +54,7 @@ $spip_asso_dons = array(
 $spip_asso_dons_key = array(
 	"PRIMARY KEY" => "id_don"
 );
-$association_tables_principales['spip_asso_dons'] = array(
+$tables_principales['spip_asso_dons'] = array(
 	'field' => &$spip_asso_dons, 
 	'key' => &$spip_asso_dons_key
 );	
@@ -76,7 +77,7 @@ $spip_asso_ventes = array(
 $spip_asso_ventes_key = array(
 	"PRIMARY KEY" => "id_vente"
 );
-$association_tables_principales['spip_asso_ventes'] = array(
+$tables_principales['spip_asso_ventes'] = array(
 	'field' => &$spip_asso_ventes, 
 	'key' => &$spip_asso_ventes_key
 );
@@ -97,7 +98,7 @@ $spip_asso_comptes = array(
 $spip_asso_comptes_key = array(
 	"PRIMARY KEY" => "id_compte"
 );
-$association_tables_principales['spip_asso_comptes'] = array(
+$tables_principales['spip_asso_comptes'] = array(
 	'field' => &$spip_asso_comptes, 
 	'key' => &$spip_asso_comptes_key
 );
@@ -118,7 +119,7 @@ $spip_asso_plan = array(
 $spip_asso_plan_key = array(
 	"PRIMARY KEY" => "id_plan"
 );
-$association_tables_principales['spip_asso_plan'] = array(
+$tables_principales['spip_asso_plan'] = array(
 	'field' => &$spip_asso_plan, 
 	'key' => &$spip_asso_plan_key
 );
@@ -132,7 +133,7 @@ $spip_asso_destination = array(
 $spip_asso_destination_key = array(
 	"PRIMARY KEY" => "id_destination"
 );
-$association_tables_principales['spip_asso_destination'] = array(
+$tables_principales['spip_asso_destination'] = array(
 	'field' => &$spip_asso_destination, 
 	'key' => &$spip_asso_destination_key
 );
@@ -147,7 +148,7 @@ $spip_asso_destination_op = array(
 $spip_asso_destination_op_key = array(
 	"PRIMARY KEY" => "id_dest_op"
 );
-$association_tables_principales['spip_asso_destination_op'] = array(
+$tables_principales['spip_asso_destination_op'] = array(
 	'field' => &$spip_asso_destination_op, 
 	'key' => &$spip_asso_destination_op_key
 );
@@ -165,7 +166,7 @@ $spip_asso_ressources = array(
 $spip_asso_ressources_key = array(
 	"PRIMARY KEY" => "id_ressource"
 );
-$association_tables_principales['spip_asso_ressources'] = array(
+$tables_principales['spip_asso_ressources'] = array(
 	'field' => &$spip_asso_ressources, 
 	'key' => &$spip_asso_ressources_key
 );
@@ -186,7 +187,7 @@ $spip_asso_prets = array(
 $spip_asso_prets_key = array(
 	"PRIMARY KEY" => "id_pret"
 );
-$association_tables_principales['spip_asso_prets'] = array(
+$tables_principales['spip_asso_prets'] = array(
 	'field' => &$spip_asso_prets, 
 	'key' => &$spip_asso_prets_key
 );
@@ -214,12 +215,12 @@ $spip_asso_activites = array(
 $spip_asso_activites_key = array(
 	"PRIMARY KEY" => "id_activite"
 );
-$association_tables_principales['spip_asso_activites'] = array(
+$tables_principales['spip_asso_activites'] = array(
 	'field' => &$spip_asso_activites, 
 	'key' => &$spip_asso_activites_key
 );
 
-// 
+
 $spip_asso_membres= array(
   "id_auteur" => "bigint(21) NOT NULL auto_increment",
   "id_asso" => "text NOT NULL",
@@ -235,12 +236,17 @@ $spip_asso_membres= array(
 $spip_asso_membres_key= array(
 	"PRIMARY KEY" => "id_auteur"
 				);
-$association_tables_principales['spip_asso_membres'] = array(
+$tables_principales['spip_asso_membres'] = array(
 	'field' => &$spip_asso_membres, 
-	'key' => &$spip_asso_membres_key
-);
+	'key' => &$spip_asso_membres_key);
 
-global $association_tables_auxiliaires;
+	return $tables_principales;
+	
+}
+
+
+function association_declarer_tables_auxiliaires($tables_auxiliaires)
+{
 
 $spip_asso_metas = array(
 		"nom"	=> "VARCHAR (255) NOT NULL",
@@ -251,15 +257,38 @@ $spip_asso_metas = array(
 $spip_asso_metas_key = array(
 		"PRIMARY KEY"	=> "nom");
 
-$association_tables_auxiliaires['spip_association_metas'] = array(
+$tables_auxiliaires['spip_association_metas'] = array(
 	'field' => &$spip_asso_metas, 
 	'key' => &$spip_asso_metas_key
 );
-global $tables_principales;
-include_spip('base/serial');
-$tables_principales = array_merge($tables_principales,  $association_tables_principales);
+return $tables_auxiliaires;
+}
 
-global $tables_auxiliaires;
-include_spip('base/auxiliaires');
-$tables_auxiliaires = array_merge($tables_auxiliaires,  $association_tables_auxiliaires);
+
+function association_declarer_tables_interfaces($tables_interfaces)
+{
+	
+$tables_interfaces['table_des_tables']['asso_dons'] = 'asso_dons';
+$tables_interfaces['table_des_tables']['asso_ventes'] = 'asso_ventes';
+$tables_interfaces['table_des_tables']['asso_comptes'] = 'asso_comptes';
+$tables_interfaces['table_des_tables']['comptes'] = 'asso_comptes';
+$tables_interfaces['table_des_tables']['asso_categories'] = 'asso_categories';
+$tables_interfaces['table_des_tables']['asso_plan'] = 'asso_plan';
+$tables_interfaces['table_des_tables']['asso_ressources'] = 'asso_ressources';
+$tables_interfaces['table_des_tables']['asso_prets'] = 'asso_prets';
+$tables_interfaces['table_des_tables']['asso_activites'] = 'asso_activites';
+$tables_interfaces['table_des_tables']['asso_membres'] = 'asso_membres';
+$tables_interfaces['table_des_tables']['association_metas'] = 'association_metas';
+$tables_interfaces['table_des_tables']['asso_destination'] = 'asso_destination';
+$tables_interfaces['table_des_tables']['asso_destination_op'] = 'asso_destination_op';	
+
+// Pour que les raccourcis ci-dessous heritent d'une zone de clic pertinente
+//$tables_interfaces['table_titre']['asso_membres']= "nom_famille AS titre, '' AS lang";
+$tables_interfaces['table_titre']['asso_dons']= "CONCAT('don ', id_don) AS titre, '' AS lang";
+
+ return  $tables_interfaces;
+	
+}
+
+
 ?>
