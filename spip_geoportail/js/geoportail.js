@@ -501,9 +501,9 @@ jQuery.geoportail =
 
 			// Faire quelque chose quand le calque est charge
 			if (!nozoom && !carte.fixe) {	// Calcul et zoom sur l'extension (une fois charge)
-				l.events.register("loadend", l, function(e) {
-					if (this.features.length) {
-						this.extent = new OpenLayers.Bounds();
+				l.events.register("loadend", l, function(e) 
+				{	if (this.features.length) 
+					{	this.extent = new OpenLayers.Bounds();
 						// this.extent.extend (map.getMap().center);
 						for (var i = 0; i < this.features.length; i++) this.extent.extend(this.features[i].geometry.getBounds());
 						map.getMap().zoomToExtent(this.extent);
@@ -513,8 +513,8 @@ jQuery.geoportail =
 					try { fdoc = eval(fdoc); } catch (error) { }
 					if (typeof (fdoc) == 'function') fdoc(this.id_document, this);
 					// Fonction utilisateur onLoadSpipDoc (id_document, layer)
-					else if (typeof (onLoadSpipDoc) == 'function') {
-						onLoadSpipDoc(this.id_document, this);
+					else if (typeof (onLoadSpipDoc) == 'function') 
+					{	onLoadSpipDoc(this.id_document, this);
 					}
 				});
 			}
