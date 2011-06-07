@@ -57,6 +57,7 @@ function cache_signature(&$page) {
 function cache_valide(&$page, $date) {
 	$now = $_SERVER['REQUEST_TIME'];
 
+	if (defined('_VAR_NOCACHE') AND _VAR_NOCACHE) return -1;
 	if (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) return -1;
 	if (defined('_NO_CACHE')) return (_NO_CACHE==0 AND !isset($page['texte']))?1:_NO_CACHE;
 	if (!$page OR !isset($page['texte']) OR !isset($page['entetes']['X-Spip-Cache'])) return 1;
@@ -111,7 +112,8 @@ function creer_cache(&$page, &$chemin_cache, &$memo) {
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
 	// le cas var_nocache ne devrait jamais arriver ici (securite)
 	// le cas spip_interdire_cache correspond a une ereur SQL grave non anticipable
-	if ((isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache'])
+	if ((defined('_VAR_NOCACHE') AND _VAR_NOCACHE)
+		OR (isset($GLOBALS['var_nocache']) AND $GLOBALS['var_nocache']) // compat SPIP 2.x
 		OR defined('spip_interdire_cache'))
 		return;
 
