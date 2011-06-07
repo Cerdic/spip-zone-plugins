@@ -3,33 +3,28 @@
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
- *  Copyright (c) 2001-2009                                                *
+ *  Copyright (c) 2001-2011                                                *
  *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+include_once _DIR_PLUGIN_FORUM.'urls/generer_url_forum.php';
+
 /**
- * Duplicata de la fonction disponible dans _core_/forum/urls
- * pour permettre l'utilisation du plugin urls_etendues avec spip 2.0
- * A retirer a la release 2.1
+ * Modifier l'ancre des urls de forum
  *
- * @param <type> $id_forum
- * @param <type> $args
- * @param <type> $ancre
- * @return <type>
+ * @param int $id_forum
+ * @param string $args
+ * @param string $ancre
+ * @return string
  */
-function urls_generer_url_forum_dist($id_forum, $args='', $ancre='') {
-	if ($id_forum = intval($id_forum)) {
-		include_spip('inc/forum');
-		list($type, $id,) = racine_forum($id_forum);
-		if ($type) {
-			if (!$ancre) $ancre = "comment$id_forum";
-			return generer_url_entite($id, $type, $args, $ancre, true);
-		}
-	}
-	return '';
+function urls_generer_url_forum($id_forum, $args='', $ancre='') {
+	$url = urls_generer_url_forum_dist($id_forum, $args, $ancre);
+	if ($url AND !$ancre)
+		$url = ancre_url($url,"comment$id_forum");
+	return $url;
 }
 
 ?>

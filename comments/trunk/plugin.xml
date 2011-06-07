@@ -1,9 +1,10 @@
 <plugin>
 <nom>Comments</nom>
-<icon>icon.png</icon>
-<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009 - Licence GPL</auteur>
-<version>2.1.9</version>
-<etat>stable</etat>
+<icon>prive/themes/spip/comment-32.png</icon>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
+<licence>Licence GPL</licence>
+<version>3.0.0-dev</version>
+<etat>dev</etat>
 <description>Affichage des messages en liste, fa&ccedil;on commentaires de blog, avec formulaire simplifi&eacute;. Commentaires microformat&eacute;s, nomenclature homog&eacute;ne.</description>
 <lien>[Comments&nbsp;2.0 pour SPIP&nbsp;2.0->http://www.spip-contrib.net/?article3448]</lien>
 <prefix>comments</prefix>
@@ -26,16 +27,11 @@
 	<nom>formulaire_traiter</nom>
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>
-<necessite id="SPIP" version="[2.0.9;]" />
-<utilise id='Z' version="[;]" />
+<necessite id="SPIP" version="[3.0.0-dev;]" />
+<utilise id='Zdist' version="[;]" />
 <categorie>communication</categorie>
-<bouton id='comments_old' parent='configuration'>
-	<icone>prive/themes/spip/images/comments-20.png</icone>
-	<titre>comments:titre_comments</titre>
-	<url>configurer_comments</url>
-</bouton>
 <bouton id='comments' parent='bando_squelette'>
-	<icone>images/comments-16.png</icone>
+	<icone>images/comment-16.png</icone>
 	<titre>comments:titre_comments</titre>
 	<url>configurer_comments</url>
 </bouton>
