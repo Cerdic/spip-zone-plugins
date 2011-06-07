@@ -274,7 +274,7 @@ function public_cacher($contexte, &$use_cache, &$chemin_cache, &$page, &$lastmod
 
 	// Si un calcul, recalcul [ou preview, mais c'est recalcul] est demande,
 	// on supprime le cache
-	if ($GLOBALS['var_mode'] &&
+	if (($GLOBALS['var_mode'] OR (defined('_VAR_MODE') && _VAR_MODE)) &&
 		(isset($_COOKIE['spip_session'])
 		|| isset($_COOKIE['spip_admin'])
 		|| @file_exists(_ACCESS_FILE_NAME))
