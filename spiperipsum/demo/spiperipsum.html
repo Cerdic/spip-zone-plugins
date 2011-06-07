@@ -16,7 +16,7 @@
 	<br /><br />
 	
 	<div id="evangile">
-		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>spiperipsum</strong></p>
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>spiperipsum</strong> pour l'&eacute;vangile</p>
 		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=evangile})]
 		<br /><br />
 		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=premiere})]
@@ -26,7 +26,11 @@
 		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=psaume})]
 		<br /><br />
 		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=commentaire})]
-		<br /><br />
+		<br /><hr /><br />
+
+		<p style="font-size: 12px">&gt;&gt;&nbsp;Utilisation du mod&eacute;le <strong>spiperipsum</strong> pour le saint</p>
+		[(#MODELE{spiperipsum, jour=aujourdhui, lecture=saint})]
+		<br /><hr /><br />
 	
 		<p style="font-size: 12px;">&gt;&gt;&nbsp;Utilisation de la balise <strong>SPIPERIPSUM</strong></p>
 		<ul>
@@ -34,8 +38,11 @@
 			<li>Texte de l'Evangile du 24 D&eacute;cembre 2009 en anglais:&nbsp;#SPIPERIPSUM{en, 2009-12-24, evangile, texte}</li>
 			<li>Texte du saint du jour en br&eacute;silien (la langue sera automatiquement chang&eacute;e en portugais):&nbsp;#SPIPERIPSUM{pt_br, aujourdhui, saint, texte}</li>
 		</ul>
+		<br /><hr /><br />
+
 		<p>Et l'inclusion du lien du saint du jour dans la langue du contexte</p>
 		[(#INCLURE{fond=inclure/saint_lien, langue=#LANG})]
+		<br /><hr /><br />
 	</div>
 </body>
 </html>

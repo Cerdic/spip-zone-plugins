@@ -1,0 +1,22 @@
+[(#REM)
+	Partie contenu de la page evangile affichant toutes les lectures disponibles dans la langue
+	du contexte et pour le jour specifie
+	Parametres:
+		- jour : le jour courant si vide ou aaaa-mm-jj
+]
+
+[(#REM) Fil d'Ariane ]
+#SET{jour_evangile, #ENV{jour, #DATE}}
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:spiperipsum:saint_quotidien|ucfirst:></strong></p>
+
+[(#REM) Cartouche avec la date du jour ]
+<div class="cartouche">
+	<h1 class="h1"><:spiperipsum:saint_quotidien|ucfirst:></h1>
+	<p class="info-publi">
+		<small>[(#GET{jour_evangile}|nom_jour)][&nbsp;(#GET{jour_evangile}|affdate)]</small>
+	</p>
+</div>
+<br class="nettoyeur"/>
+
+[(#REM) La vie du saint ]
+[(#MODELE{spiperipsum, langue=#ENV{langue, #LANG}, jour=#ENV{jour}, lecture=saint, mode=page})]

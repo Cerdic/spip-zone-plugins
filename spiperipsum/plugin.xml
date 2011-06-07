@@ -1,21 +1,22 @@
 <plugin>
 	<nom>SPIPer Ipsum</nom>
-	<auteur>Eric Lupinacci, sur une id&eacute;e et un ic&ocirc;ne de Gwen</auteur>
-	<version>1.2</version>
+	<auteur>Eric Lupinacci, Gwen (id&eacute;e et ic&ocirc;ne du plugin)</auteur>
+	<version>1.3.0</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
+	<slogan>Saint et &eacute;vangile au quotidien</slogan>
 	<description>
 Ce plugin permet d'afficher les diff&eacute;rentes lectures de l'&eacute;vangile ou le saint du jour ou d'un jour donn&eacute; selon le calendrier fix&eacute; par l'Eglise catholique.
 Ce service est propos&eacute; par le site de &#171; [L'Evangile au Quotidien->http://www.levangileauquotidien.org] &#187; dans plusieurs langues.
 
 L'affichage des lectures se fait, d'une part, via l'utilisation d'un mod&egrave;le {{spiperipsum}} dans les squelettes utilisateur ou dans les articles, et d'autre part,
-via des pages sp&eacute;ciales &#171; Evangile &#187; et &#171; Saint &#187; compatibles ZPIP. 
+via des pages pr&ecirc;tes &agrave; l'emploi, &#171; Evangile &#187; et &#171; Saint &#187;, compatibles Z. 
 	</description>
-	<lien>http://www.spip-contrib.net/SPIPer-Ipsum-l-evangile-au</lien>
+	<lien>http://www.spip-contrib.net/article3346</lien>
 	<prefix>spiperipsum</prefix>
 	<icon>spiperipsum-64.png</icon>
 	<fonctions>spiperipsum_fonctions.php</fonctions>
 	<options>spiperipsum_options.php</options>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.0]" />
 </plugin>
