@@ -12,7 +12,7 @@ Dans l'interface de gestion le menu &eacute;dition vous permettra d'acc&eacute;d
 Le plugin ["thickbox"->http://www.spip-contrib.net/Plugin-Thickbox] n'est pas obligatoire mais peut-&ecirc;tre utilis&eacute; selon l'affichage choisi.<br><br>
 </description>
  <necessite id='CFG' version='[1.0;]' />
- <lien>[Configuration du plugin->.?exec=cfg&cfg=didaspip] (n&eacute;cessite le plugin cfg)</lien>
+ <lien>http://www.spip-contrib.net/Didaspip</lien>
  <auteur>Mo&iuml;se Maindron [contact->mailto:moise.maindron@ac-nantes.fr]. Mis à jour pour SPIP 2.1 par [Olivier Gautier->mailto:olivier.gautier@ac-rouen.fr]</auteur>
 	<bouton id='gestdidaspip' parent='naviguer'>
 		<icone>img_pack/dida_ico.png</icone>
