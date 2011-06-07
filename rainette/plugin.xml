@@ -1,22 +1,23 @@
 <plugin>
 	<nom>Rainette</nom>
-	<auteur>Cedric Morin et Eric Lupinacci, d'apr&egrave;s une id&eacute;e originale de Art&eacute;go et touti (plugin Grenouille)</auteur>
-	<version>1.3</version>
+	<auteur>Cedric Morin, Eric Lupinacci</auteur>
+	<version>1.4.0</version>
 	<etat>stable</etat>
-	<licence>GPL 3</licence>
+	<licence>GNU/GPL</licence>
+	<slogan>La m&eacute;t&eacute;o au quotidien</slogan>
 	<description>
 Ce plugin permet d'afficher les conditions et les pr&eacute;visions m&eacute;t&eacute;orologiques d'une ville donn&eacute;e &agrave; partir du flux xml fourni par le site weather.com&reg;.
-Il s'inspire dans son principe du plugin Grenouille mais ne stocke aucune information en base de donn&eacute;es ni ne g&egrave;re le choix des villes.
+Il ne stocke aucune information en base de donn&eacute;es ni ne g&egrave;re le choix des villes.
 
-L'affichage des donn&eacute;es m&eacute;t&eacute;orologiques se fait principalement via l'utilisation de mod&egrave;les dans les squelettes utilisateur. Le plugin propose des 
+L'affichage des donn&eacute;es m&eacute;t&eacute;orologiques se fait principalement via l'utilisation de mod&egrave;les dans les squelettes. Le plugin propose des 
 mod&egrave;les par d&eacute;faut comme {{rainette_previsions}} et {{rainette_conditions}}. Il est possible aussi d'afficher les informations sur la ville choisie soit via le mod&egrave;le {{rainette_infos}},
 soit via la balise {{RAINETTE_INFOS}}. Tous les affichages propos&eacute;s par Rainette sont personnalisables (ic&ocirc;nes, libell&eacute;s, unit&eacute;s, pr&eacute;sentation...).
 
-Une page &#171; Meteo &#187; compatible avec le squelette ZPIP est disponible et propose les conditions et pr&eacute;visions &agrave; 10 jours d'une ville donn&eacute;ee.
+Une page &#171; Meteo &#187; compatible avec les squelettes Z est disponible : elle propose les conditions et pr&eacute;visions &agrave; 10 jours d'une ville donn&eacute;ee.
 
-Essayez le fichier {rainette_demo.html} pour des exemples d'utilisation et consultez le site SPIP-Contrib pour une documentation compl&egrave;te des fonctions de Rainette.
+Essayez la page de d&eacute;mo {demo/rainette.html} pour des exemples d'utilisation.
 	</description>
-	<lien>http://www.spip-contrib.net/Rainette</lien>
+	<lien>http://www.spip-contrib.net/article3133</lien>
 	<prefix>rainette</prefix>
 	<icon>rainette-64.png</icon>
 	<fonctions>rainette_fonctions.php</fonctions>
@@ -31,6 +32,6 @@ Essayez le fichier {rainette_demo.html} pour des exemples d'utilisation et consu
 		<inclure>rainette_pipelines.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.0]" />
 	<traduire gestionnaire="salvatore" module="rainette" reference="fr" />
 </plugin>

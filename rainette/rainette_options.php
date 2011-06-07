@@ -1,7 +1,7 @@
 <?php
 // Parametrage du plugin rainette: 
 //	- repertoire des icones personnalises, 
-//	- récurrence de mise a jour des donnees meteo, (en secondes)
+//	- recurrence de mise a jour des donnees meteo, (en secondes)
 //	- nombre de jour de previsions (maximum 10)
 //	- systeme de mesure metrique (m) ou standard (s)
 define ('_RAINETTE_ICONES_PATH','rainette/');
