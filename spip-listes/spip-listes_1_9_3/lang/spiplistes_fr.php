@@ -643,6 +643,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'vous_etes_desinscrit' => 'Vous &#234;tes maintenant d&#233;sinscrit de cette liste de diffusion.'
 , 'difficile_lire_msg' => 'Si vous rencontrez des difficult&eacute;s &agrave; lire ce courrier ici, '
 , 'vous_consultez_ori' => 'vous pouvez consulter l&#8217;original sur le site'
+, 'vous_recevez_ce_courrier' => 'Vous recevez cet courrier suite &#224; votre inscription en ligne'
 
 // tableau items *_options
 , 'liste_de_destination' => 'Liste de destination'
