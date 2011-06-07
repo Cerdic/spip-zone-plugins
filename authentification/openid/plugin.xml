@@ -7,7 +7,7 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>1.0.7</version>
+	<version>1.0.8</version>
 	<version_base>0.3</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
@@ -71,7 +71,7 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>1.1.7</version>
+	<version>1.1.8</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
