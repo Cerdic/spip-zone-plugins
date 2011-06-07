@@ -3,7 +3,7 @@
 	<auteur>Eric Lupinacci, Gwen (id&eacute;e et ic&ocirc;ne du plugin)</auteur>
 	<version>1.3.0</version>
 	<etat>stable</etat>
-	<licence>GPL 3</licence>
+	<licence>GNU/GPL</licence>
 	<slogan>Saint et &eacute;vangile au quotidien</slogan>
 	<description>
 Ce plugin permet d'afficher les diff&eacute;rentes lectures de l'&eacute;vangile ou le saint du jour ou d'un jour donn&eacute; selon le calendrier fix&eacute; par l'Eglise catholique.
@@ -11,6 +11,8 @@ Ce service est propos&eacute; par le site de &#171; [L'Evangile au Quotidien->ht
 
 L'affichage des lectures se fait, d'une part, via l'utilisation d'un mod&egrave;le {{spiperipsum}} dans les squelettes utilisateur ou dans les articles, et d'autre part,
 via des pages pr&ecirc;tes &agrave; l'emploi, &#171; Evangile &#187; et &#171; Saint &#187;, compatibles Z. 
+
+Essayez la page de d&eacute;mo {demo/spiperipsum.html} pour des exemples d'utilisation.
 	</description>
 	<lien>http://www.spip-contrib.net/article3346</lien>
 	<prefix>spiperipsum</prefix>

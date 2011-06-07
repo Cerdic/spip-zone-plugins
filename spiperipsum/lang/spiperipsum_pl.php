@@ -8,10 +8,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
-	'evangile_quotidien' => 'Evangile du jour',
+	'evangile_quotidien' => 'Ewangelia na co dzień',
 
 	// S
-	'saint_quotidien' => 'Saint du jour',
+	'saint_quotidien' => 'Wspominamy',
 );
 
 ?>
