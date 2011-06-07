@@ -28,10 +28,10 @@ function exec_pdf_adherents()
 
 
 	//On définit les colonnes (champs,largeur,intitulé,alignement)
-		$champs = $GLOBALS['tables_principales']['spip_asso_membres']['field'];
+		$champs = description_table('spip_asso_membres');
 
 	$sent = _request('champs');
-	foreach ($champs as $k => $v) {
+		foreach ($champs['field'] as $k => $v) {
 	  if ($sent[$k]=='on') {
 	    $type = strpos($v, 'text');
 	    $p = ($type===false) ? 'R' : (($type==0) ? 'L' : 'C');
