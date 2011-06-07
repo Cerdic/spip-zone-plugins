@@ -1,6 +1,6 @@
 <plugin>
 <nom>Comments</nom>
-<icon>prive/themes/spip/comment-32.png</icon>
+<icon>prive/themes/spip/images/comment-32.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
 <licence>Licence GPL</licence>
 <version>3.0.0-dev</version>
