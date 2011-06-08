@@ -12,7 +12,7 @@
 	<fieldset>
 		<legend>Liste ou thread ?</legend>
 		<ul>
-			<li class="comments_fil[ (#ENV**{erreurs}|table_valeur{comments_fil}|oui)erreur]">
+			<li class="editer comments_fil[ (#ENV**{erreurs}|table_valeur{comments_fil}|oui)erreur]">
 				<label for="comments_fil">Pr&eacute;sentation du&nbsp;fil de discussion</label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="comments_fil" id="comments_fil">
@@ -26,7 +26,7 @@
 	<fieldset>
 		<legend>Permalien</legend>
 		<ul>
-			<li class="comments_permalink[ (#ENV**{erreurs}|table_valeur{comments_permalink}|oui)erreur]">
+			<li class="editer comments_permalink[ (#ENV**{erreurs}|table_valeur{comments_permalink}|oui)erreur]">
 				<label for="permalink">Apparence du lien permanent vers le commentaire</label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="permalink" id="permalink" style="width: 12em;">
@@ -41,13 +41,13 @@
 	<fieldset class="todo">
 		<legend><:comments:cfg_forum_longueur:></legend>
 		<ul>
-			<li class="comments_forum_longueur_mini[ (#ENV**{erreurs}|table_valeur{forum_longueur_mini}|oui)erreur]">
+			<li class="editer comments_forum_longueur_mini[ (#ENV**{erreurs}|table_valeur{forum_longueur_mini}|oui)erreur]">
 				<label for="forum_longueur_mini"><:comments:cfg_forum_longueur_mini:><br /><b class='erreur'>SANS EFFET&nbsp;!</b></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_mini})</span>
 				]<input type="text" class="text" name="forum_longueur_mini"[ value="(#ENV{forum_longueur_mini}|sinon{10})"] id="forum_longueur_mini" style="width: 4em;" disabled="disabled" />
 				<p class="explication">La longueur minimale des messages n'est pas encore param&egrave;trable dans SPIP qui n&eacute;cessite des messages d'au moins 10&nbsp;caract&egrave;res.</p>
 			</li>
-			<li class="comments_forum_longueur_maxi[ (#ENV**{erreurs}|table_valeur{forum_longueur_maxi}|oui)erreur]">
+			<li class="editer comments_forum_longueur_maxi[ (#ENV**{erreurs}|table_valeur{forum_longueur_maxi}|oui)erreur]">
 				<label for="forum_longueur_maxi"><:comments:cfg_forum_longueur_maxi:><br /><b>SANS EFFET&nbsp;!</b></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{forum_longueur_maxi})</span>
 				]<input type="text" class="text" name="forum_longueur_maxi"[ value="(#ENV{forum_longueur_maxi}|sinon{1500})"] id="forum_longueur_maxi" style="width: 4em;" disabled="disabled" />
@@ -57,7 +57,7 @@
 	<fieldset class="todo none">
 		<legend>Style</legend>
 		<ul>
-			<li class="comments_style[ (#ENV**{erreurs}|table_valeur{comments_style}|oui)erreur]">
+			<li class="editer comments_style[ (#ENV**{erreurs}|table_valeur{comments_style}|oui)erreur]">
 				<label for="style">Style des commentaires<br /><b>SANS EFFET&nbsp;!</b></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="style" id="style" style="width: 12em;" disabled="disabled">
@@ -70,7 +70,7 @@
 		</ul>
 	</fieldset>
 	<p class="boutons">
-		<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_enregistrer:>" />
 	</p>
 </div></form>
 </div>
