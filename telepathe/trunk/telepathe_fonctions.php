@@ -45,7 +45,7 @@ function telepathe_formater($html) {
 
 	switch (_request('format')) {
 		case 'json':
-			return pretty_json_encode($r);
+			return pretty_json_encode($r, _request('callback'));
 		case 'yaml':
 			if (include_spip('inc/yaml'))
 				return yaml_encode($r);
@@ -60,9 +60,16 @@ function telepathe_formater($html) {
 
 ## essai (ratŽ) de faire du joli json affichable dans le nav ; mais
 ## avec yaml c'est plus propre
-function pretty_json_encode($x) {
-	return json_encode($x);
+function pretty_json_encode($x, $callback=null) {
+	$x = json_encode($x);
 
+	if ($callback)
+		$x = htmlspecialchars($callback)."(\n"
+			. $x . "\n);\n";
+
+	return $x;
+
+/*
 	if (is_array($x)) {
 		$a = array();
 		foreach ($x as $k=>$v)
@@ -71,5 +78,5 @@ function pretty_json_encode($x) {
 	}
 
 	return json_encode($x);
-
+*/
 }
