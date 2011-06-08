@@ -24,7 +24,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$nom_envoyeur = $corps['nom_envoyeur'];
 		$cc = $corps['cc'];
 		$bcc = $corps['bcc'];
-		$return_path = $corps['return_path'];
+		$adresse_erreur = $corps['adresse_erreur'];
 	} 
 	// si $corps est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
@@ -86,8 +86,8 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	}
 
 	// Si une adresse email a été spécifiée pour les retours en erreur, on l'ajoute
-	if (!empty($return_path))
-		$facteur->Sender = $return_path;
+	if (!empty($adresse_erreur))
+		$facteur->Sender = $adresse_erreur;
 	
 	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
 	$facteur = pipeline('facteur_pre_envoi', $facteur);
