@@ -1,13 +1,14 @@
 <!--#hierarchie-->
 <!--/#hierarchie-->
  
-
-
-
-
 <!--#navigation-->
-<div class="logo_navigation">
-<img src="#CHEMIN{images/factures-32.png}" width="32" height="32" alt="Logo plugin" />
+<div class="cadre infos cadre-info">
+    <div class="numero">
+        Factures 
+    </div>
+    <div class="hover">
+       <a href="[(#URL_ECRIRE{facture}|parametre_url{nouveau,oui})]" class="cellule-h">Rédiger une nouvelle facture</a>
+    </div>
 </div>
 <!--/#navigation-->
  
@@ -22,5 +23,7 @@
 <h1><:factures:titre_page_factures:></h1>
 
 <div><:factures:explications_page_factures:>
-
+[(#URL_ECRIRE{facture}|parametre_url{nouveau,oui}|icone{<:menus:editer_facture_nouveau:>,#CHEMIN{images/factures-24.png},#LANG_RIGHT,creer.gif})]
+<br class="nettoyeur" />
 [(#INCLURE{fond=prive/liste/factures}{env})]
+<br class="nettoyeur" />
