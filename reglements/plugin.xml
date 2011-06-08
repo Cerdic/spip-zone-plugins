@@ -1,0 +1,35 @@
+<plugin>
+	<nom><multi>[fr]Réglements</multi></nom>
+
+	<version>0.0.1</version>
+	<version_base>0.0.1</version_base>
+	<install>base/reglements_upgrade.php</install>
+
+	<auteur>Camille Lafitte, [Webelys->http://www.webelys.com] et Cyril Marion, [Ateliers CYM->http://www.cym.fr]</auteur>	
+	<licence>GPL</licence>
+	<etat>experimental</etat>
+	
+	<shortdesc><multi>
+	[fr]Affecter des reglements à des objets tels que les factures.
+	</multi></shortdesc>
+
+	<description><multi>
+	[fr]Le plugin Réglements à pour objectif de saisir les réglements réalisés pour tout objet, dans un premier lieu les factures mais aussi les dépenses.
+	</multi></description>
+	
+	<prefix>reglements</prefix>
+	
+	<categorie>edition</categorie>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/reglements.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/reglements.php</inclure>
+	</pipeline>
+
+	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="factures" version="[0.0.2;]" />
+</plugin>
