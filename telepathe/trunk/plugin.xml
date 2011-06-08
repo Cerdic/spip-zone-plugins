@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin>
+	<nom>Télépathe</nom>
+	<auteur>
+	Fil
+	</auteur>
+	<licence>
+		&#169; 2011 - GNU/GPL
+	</licence>
+	<version>
+	0.1
+	</version>
+	<etat>
+	dev
+	</etat>
+	<description>
+	Transmission de pensées d'un site à l'autre
+	</description>
+	<prefix>
+	Telepathe
+	</prefix>
+	<fonctions>telepathe_fonctions.php</fonctions>
+	<pipeline><nom>telepathe</nom><action></action></pipeline>
+	<chemin dir='' />
+	<categorie>squelette</categorie>
+	<!-- by Web Design Creative http://www.iconfinder.com/icondetails/35147/128/network_recycle_icon -->
+</plugin>

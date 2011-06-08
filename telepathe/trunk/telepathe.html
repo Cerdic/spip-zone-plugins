@@ -1,0 +1,10 @@
+[(#FORMAT|match{json|yaml}|oui)
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
+]
+[(#FORMAT|match{xml}|oui)
+#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
+]
+
+[(#INCLURE{fond=idees/#IDEE,env})]
+
+#FILTRE{telepathe_formater}

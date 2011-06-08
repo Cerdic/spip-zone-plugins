@@ -1,0 +1,63 @@
+Télépathe
+
+
+Ce plugin est destiné à faciliter l'écriture d'interfaces de programmation (API). Chaque appel (en lecture) se fait sur une «idée», que le télépathe se charge de calculer à partir d'un squelette, et d'envoyer au format désiré (JSON, HTML ou YAML).
+
+Exemple :
+
+* squelette idee/article.html
+
+<cadre>
+<BOUCLE_a(ARTICLES){id_article}>
+
+[(#REM)
+	Declaration obligatoire pour demarrer la transmission
+]
+[(#VAL{article}|concat{#ID_ARTICLE}|telepathe{id})]
+
+
+[(#SURTITRE|telepathe{surtitre})]
+
+[(#TITRE|telepathe{titre})]
+
+[(#SOUSTITRE|telepathe{soustitre})]
+
+[(#CHAPO|telepathe{chapo})]
+
+[(#LESAUTEURS|telepathe{lesauteurs})]
+
+[(#TEXTE|telepathe{texte})]
+
+[(#NOTES|telepathe{notes})]
+
+[(#PS|telepathe{ps})]
+
+[(#DATE_REDAC|sinon{#DATE}|telepathe{date})]
+[(#DATE|telepathe{published})]
+[(#DATE_MODIF|telepathe{updated})]
+
+[(#INTRODUCTION{150}|telepathe{description})]
+
+
+[(#REM)
+	Les mots-clés sont envoyés sous forme de tableau
+]
+<BOUCLE_tags(MOTS){id_article}>
+[(#VAL{<a href="#URL_MOT" rel="tag">#TITRE</a>}|telepathe{mots*})]
+</BOUCLE_tags>
+
+
+[(#REM) Gestion du portfolio et des documents]
+[(#INCLURE{fond=inc-documents,id_article}|telepathe{portfolio})]
+
+
+</BOUCLE_a>
+</cadre>
+
+
+* on appelle
+<code>?page=telepathe&idee=article&id_article=1&format=json</code>
+
+* on reçoit les données définies dans le squelette, au format json.
+
+

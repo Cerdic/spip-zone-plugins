@@ -1,0 +1,44 @@
+<BOUCLE_a(ARTICLES){id_article}>
+
+[(#REM)
+	Declaration obligatoire pour demarrer la transmission
+]
+[(#VAL{article}|concat{#ID_ARTICLE}|telepathe{id})]
+
+
+[(#SURTITRE|telepathe{surtitre})]
+
+[(#TITRE|telepathe{titre})]
+
+[(#SOUSTITRE|telepathe{soustitre})]
+
+[(#CHAPO|telepathe{chapo})]
+
+[(#LESAUTEURS|telepathe{lesauteurs})]
+
+[(#TEXTE|telepathe{texte})]
+
+[(#NOTES|telepathe{notes})]
+
+[(#PS|telepathe{ps})]
+
+[(#DATE_REDAC|sinon{#DATE}|telepathe{date})]
+[(#DATE|telepathe{published})]
+[(#DATE_MODIF|telepathe{updated})]
+
+[(#INTRODUCTION{150}|telepathe{description})]
+
+
+[(#REM)
+	Les mots-clés sont envoyés sous forme de tableau
+]
+<BOUCLE_tags(MOTS){id_article}>
+[(#VAL{<a href="#URL_MOT" rel="tag">#TITRE</a>}|telepathe{mots*})]
+</BOUCLE_tags>
+
+
+[(#REM) Gestion du portfolio et des documents]
+[(#INCLURE{fond=inc-documents,id_article}|telepathe{portfolio})]
+
+
+</BOUCLE_a>
