@@ -42,8 +42,8 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 		AND autoriser(\'moderer\',\'forum\',\$id)) {
 			include_spip(\'inc/actions\');
 			echo \"<div class=\'boutons spip-admin actions modererforum\'>\"
-			. bouton_action(_T(\'icone_supprimer_message\'),generer_action_auteur(\'instituer_forum\',\$id.\'-off\',ancre_url(self(),\'forum\')))
-			. bouton_action(_T(\'SPAM\'),generer_action_auteur(\'instituer_forum\',\$id.\'-spam\',ancre_url(self(),\'forum\')))
+			. bouton_action(_T(\'forum:icone_supprimer_message\'),generer_action_auteur(\'instituer_forum\',\$id.\'-off\',ancre_url(self(),\'forum\')))
+			. bouton_action(_T(\'forum:icone_bruler_message\'),generer_action_auteur(\'instituer_forum\',\$id.\'-spam\',ancre_url(self(),\'forum\')))
 			. \"</div>\";
 		}
 ?'.'>'";
@@ -51,25 +51,6 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 	$p->interdire_scripts = false;
 	return $p;
 }
-
-
-/**
- * Moderer le forum ?
- * = modifier l'objet correspondant (si forum attache a un objet)
- * = droits par defaut sinon (admin complet pour moderation complete)
- *
- * @param string $faire
- * @param string $type
- * @param int $id
- * @param array $qui
- * @param array $opt
- * @return bool
- */
-function autoriser_forum_moderer_dist($faire, $type, $id, $qui, $opt) {
-	$row = sql_fetsel("objet,id_objet", "spip_forum", "id_forum=".intval($id));
-	return autoriser('modererforum', $row['objet'], $row['id_objet'], $qui, $opt);
-}
-
 
 /**
  * Traiter le formulaire de forum :
