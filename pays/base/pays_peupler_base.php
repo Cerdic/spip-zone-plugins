@@ -157,7 +157,7 @@ function peupler_base_pays() {
 		array('id_pays'=>'144','code'=>'MU','nom'=>'<multi>[fr]Maurice[en]Mauritius[de]Mauritius[es]Mauricio[it]Maurizio[nl]Mauritius[pt]Maurícia</multi>'),
 		array('id_pays'=>'145','code'=>'MR','nom'=>'<multi>[fr]Mauritanie[en]Mauritania[de]Mauretanien[es]Mauritania[it]Mauritania[nl]Mauritanië[pt]Mauritânia</multi>'),
 		array('id_pays'=>'146','code'=>'YT','nom'=>'<multi>[fr]Mayotte[en]Mayotte[de]Mayotte[es]Mayotte[it]Mayotte[nl]Mayotte[pt]Mayotte</multi>'),
-		array('id_pays'=>'147','code'=>'MX','nom'=>'<multi>[fr]Mexique[en]Mexico[de]Mexiko[es]Mexico[it]Messico[nl]Mexico[pt]México</multi>'),
+		array('id_pays'=>'147','code'=>'MX','nom'=>'<multi>[fr]Mexique[en]Mexico[de]Mexiko[es]México[it]Messico[nl]Mexico[pt]México</multi>'),
 		array('id_pays'=>'148','code'=>'FM','nom'=>'<multi>[fr]Micronésie[en]Micronesia[de]Mikronesien[es]Micronesia[it]Micronesia[nl]Micronesia[pt]Micronésia</multi>'),
 		array('id_pays'=>'149','code'=>'MD','nom'=>'<multi>[fr]Moldavie[en]Moldova[de]Moldawien[es]Moldavia[it]Moldavia[nl]Moldavië[pt]Moldávia</multi>'),
 		array('id_pays'=>'150','code'=>'MC','nom'=>'<multi>[fr]Monaco[en]Monaco[de]Monaco[es]Mónaco[it]Monaco[nl]Monaco[pt]Monaco</multi>'),
