@@ -23,5 +23,6 @@
 	<pipeline><nom>telepathe</nom><action></action></pipeline>
 	<chemin dir='' />
 	<categorie>squelette</categorie>
+	<icon>telepathe.png</icon>
 	<!-- by Web Design Creative http://www.iconfinder.com/icondetails/35147/128/network_recycle_icon -->
 </plugin>
