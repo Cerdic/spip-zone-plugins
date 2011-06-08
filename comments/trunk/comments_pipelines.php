@@ -72,7 +72,7 @@ function comments_formulaire_traiter($flux){
 		// $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour
 		// si pas d'url de retour explicite
 		$redirect = $flux['data']['redirect'];
-		if (!isset($flux['args']['args'][12]) OR !$flux['args']['args'][12]){
+		if (!isset($flux['args']['args'][11]) OR !$flux['args']['args'][11]){
 			// si on est pas sur la page forum, on ne redirige pas
 			// mais il faudra traiter l'ancre
 			if (!($p=_request('page')) OR $p!=='forum'){
@@ -95,13 +95,17 @@ function comments_formulaire_traiter($flux){
 		if ($statut=='publie'){
 			// le message est OK, il suffit de mettre une ancre !
 			$flux['data']['message_ok'] = 
-			  _T('comments:reponse_comment_ok')
-				. "<script type='text/javascript'>jQuery(function(){
-			jQuery('#formulaire_forum .reponse_formulaire').detach().appendTo(jQuery('#forum$id_forum').parent()).addClass('success');
-			jQuery('#forum$id_forum').parent().positionner();
-			//window.location.hash='forum$id_forum';
-			});</script>";
-			;
+			  _T('comments:reponse_comment_ok');
+			if (!isset($flux['data']['redirect'])){
+				$flux['data']['message_ok'] .=
+						"<script type='text/javascript'>function move_comment$id_forum(){
+jQuery('#formulaire_forum .reponse_formulaire').detach().appendTo(jQuery('#forum$id_forum').parent()).addClass('success');
+jQuery('#forum$id_forum').parent().positionner();
+//window.location.hash='forum$id_forum';
+}
+jQuery(function(){jQuery('.comments').ajaxReload({callback:move_comment$id_forum})});</script>";
+
+			}
 		}
 		else {
 			// dire que le message a ete modere

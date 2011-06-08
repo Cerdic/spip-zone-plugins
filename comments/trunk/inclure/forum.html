@@ -1,1 +1,5 @@
-<INCLURE{fond=comments-#CONFIG{comments/comments_fil,list}}{env}>
+<a href="#forum" name="forum" id="forum"></a>
+<a href="#comments" name="comments" id="comments"></a>
+<INCLURE{fond=comments-#CONFIG{comments/comments_fil,list},env,ajax} />
+[<h3>(#ENV{repondre_titre})</h3>]
+#FORMULAIRE_FORUM
