@@ -23,9 +23,6 @@
 <h1><:factures:titre_page_factures:></h1>
 
 <div>
-	<:factures:explications_page_factures:>
-	[(#URL_ECRIRE{facture}|parametre_url{nouveau,oui}|icone{<:menus:editer_facture_nouveau:>,#CHEMIN{images/factures-24.png},#LANG_RIGHT,creer.gif})]
-	<br class="nettoyeur" />
 	[(#INCLURE{fond=prive/liste/factures}{env})]
 	<br class="nettoyeur" />
 </div>

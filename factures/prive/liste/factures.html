@@ -1,10 +1,38 @@
-#CACHE{0}
-<!-- factures/prive/liste/factures.html -->
+[(#SET{defaut_tri,#ARRAY{
+	date_facture,#ENV{date_facture_sens,-1}
+}})
+]<B_liste_factures>
+#ANCRE_PAGINATION
+<div class="liste-elements factures">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_factures_presents:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='num_facture'>[(#TRI{num_facture,<:factures:num_facture:>,ajax})]</th>
+			<th class='date_facture'>[(#TRI{date_facture,<:factures:date_facture:>,ajax})]</th>
+			<th class='libelle_facture'>[(#TRI{libelle_facture,<:factures:libelle_facture:>,ajax})]</th>
+			<th class='montant'>[(#TRI{montant,<:factures:montant:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_factures(factures){id_organisation?}{tri #ENV{order,num_facture},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="num_facture"><a href="[(#URL_ECRIRE{facture}|parametre_url{'id_facture',#ID_FACTURE})]">#NUM_FACTURE</a></td>
+			<td class="date_facture">[(#DATE_FACTURE|affdate{'d/m/Y'})]</td>
+			<td class="libelle_facture">[(#LIBELLE_FACTURE|couper{55})]</td>
+			<td class="montant"><a href="#" class="aide" title="[(#TOTAL_HT|monetaire)&nbsp;HT][ | (#TOTAL_HT|ttc|monetaire)&nbsp;TTC]">[?]</a>[(#MONTANT|monetaire)]</td>
+		</tr>
+	</BOUCLE_liste_factures>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_factures>[
+<div class="liste-elements factures"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_factures>
 
-<h1 class="grostitre"><:factures:titre_liste_factures:></h1>
-<p><:factures:explication_liste_factures:></p>
 
-<div class="nettoyeur" />
+<!-- Debut de l'ancien tableau -->
 
 [(#REM) On construit un tableau avec tous les types de documents; clause "id_type_facture IN" de la boucle ]
 	#SET{type,#ARRAY}
