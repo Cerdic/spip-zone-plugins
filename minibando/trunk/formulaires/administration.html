@@ -1,8 +1,44 @@
-<div[ class="(#ENV{divclass,spip-admin-bloc})"] id='spip-admin' dir="#LANG_DIR"><ul id='minibando'><!--minibando--><li class="minibando_sep">&nbsp;</li>
+[(#SET{contexte,#ENV**|definir_barre_contexte})][(#SET{boutons,#GET{contexte}|definir_barre_boutons{0}})
+]<div[ class="(#ENV{divclass,spip-admin-bloc})"] id='spip-admin' dir="#LANG_DIR"><ul id='minibando'>
+	<BOUCLE_accueil(POUR)
+		{tableau #GET{boutons}}
+		{cle=bando_accueil}><li [class="(#VAL{first}|unique)"]><a 
+			href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span></span>
+	<ul><li><p><:espace_prive:></p></li></ul>
+	</li></BOUCLE_accueil>
+	<li class="minibando_sep">&nbsp;</li>
+	<B_creer>
+	<li id="minibando_outils_rapides">
+		<a href="#"><:minibando:titre_outils_rapides:></a><span></span>
+		<ul>
+			<li><p><:minibando:titre_outils_rapides:></p></li>
+			<BOUCLE_creer(POUR)
+				{tableau #GET{boutons}}
+				{cle=outils_rapides}><BOUCLE_creersous(POUR){tableau #VALEUR{sousmenu}}>[<li><a
+				href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+				title="[(#VALEUR{libelle}|_T|attribut_html)]"
+				class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_creersous></BOUCLE_creer>
+		</ul>
+	</li>
+	</B_creer>
+	<li class="minibando_sep">&nbsp;</li>
+	<BOUCLE_boutons(POUR)
+		{tableau #GET{boutons}}
+		{cle!=bando_accueil}
+		{cle!=outils_rapides}
+		{cle!=outils_collaboratifs}>[<li (#CLE|=={bando_accueil}|ou{#VALEUR{sousmenu}}|?{' ',#SET{li,''}}) #SET{li,'</li>'}
+			[class="(#VAL{first}|unique)"]><a
+			href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+			id="bando1_#CLE">[(#VALEUR{libelle}|_T)]</a><span></span>]<B_sous><ul><li><p>[(#VALEUR{libelle}|_T)]</p></li><BOUCLE_sous(POUR)
+			{tableau #VALEUR{sousmenu}}>[<li><a
+					href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
+					class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous>#GET{li}</BOUCLE_boutons>
+	<li class="minibando_sep">&nbsp;</li>
 	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_article})]" id="voir_article">
 		<:article:>((#ENV{id_article}))</a><span></span><ul><li><p><:bouton_modifier:> (<:article:> [(#ENV{id_article})])</p></li></ul></li>]
 	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_breve})]" id="voir_breve">
-		<:breve:>((#ENV{id_breve}))</a><span></span><ul><li><p><:bouton_modifier:> (<:breve:> [(#ENV{id_breve})])</p></li></ul></li>]
+		<:breves:breve:>((#ENV{id_breve}))</a><span></span><ul><li><p><:bouton_modifier:> (<:breve:> [(#ENV{id_breve})])</p></li></ul></li>]
 	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_rubrique})]" id="voir_rubrique">
 		<:rubrique:>((#ENV{id_rubrique}))</a><span></span><ul><li><p><:bouton_modifier:> (<:rubrique:> [(#ENV{id_rubrique})])</p></li></ul></li>]
 	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_mot})]" id="voir_mot">
