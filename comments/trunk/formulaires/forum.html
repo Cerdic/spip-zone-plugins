@@ -52,10 +52,10 @@
 		<input type="hidden" name="titre" id="titre"[ value="(#ENV{titre})"] />
         <ul>
         [(#CONFIG{forums_texte}|!={non}|?{
-            <li class='editer saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]'>
+            <li class='editer saisie_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur] obligatoire'>
                 <label for='texte'><:forum:forum_texte|typo:></label>
                 [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
-                <textarea name="texte" id="texte" rows="12" cols="60"[(#CONFIG{forums_afficher_barre}|=={non}|oui) class="no_barre"]>[(#ENV{texte})]</textarea>
+                <textarea name="texte" id="texte" rows="12" cols="60"[(#HTML5|oui) required="required"][(#CONFIG{forums_afficher_barre}|=={non}|oui) class="no_barre"]>[(#ENV{texte})]</textarea>
                 <p class="explication saisie_texte_info"><:comments:saisie_texte_info:></p>
             </li>
         })]
