@@ -189,15 +189,15 @@ $.fn.jclock = function(options) {
   $.fn.jclock.getTime = function(el) {
     var now = new Date();
 	if(!el.format) {
-		now = new Date(now.getTime() - el.serveur_offset*1000);
+		now = new Date(now.getTime() + el.serveur_offset*1000);
 		el.format = 'H:i:s';
 	} else if(el.zone=='serveur') {
 		// ici on veut l'horloge du serveur
-		now = new Date(now.getTime() - el.serveur_offset*1000);
+		now = new Date(now.getTime() + el.serveur_offset*1000);
 	} else if(el.utc_offset!==false) {
-		now = new Date(now.utcTime() + el.utc_offset - el.serveur_offset*1000);
+		now = new Date(now.utcTime() + el.utc_offset + el.serveur_offset*1000);
     } else if(el.zone.length) {
-		var utc = now.utcTime() - el.serveur_offset*1000
+		var utc = now.utcTime() + el.serveur_offset*1000
 		now = new Date(utc + dstOffset(Math.floor(utc/1000), dstDataBase[el.zone])*3600000 );
 	}
  	return now.dateFormat(el.format);
