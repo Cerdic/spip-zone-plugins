@@ -90,7 +90,7 @@ Some of your already familiar favourite tools are included in this plugin: {Dele
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
+Compatibility: SPIP 1.92x, v2.0.x and v2.1.x', # MODIF
 	'pp_autobr' => 'Insert a text block with automatic line returns',
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',

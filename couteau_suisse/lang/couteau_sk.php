@@ -90,7 +90,7 @@ Nájdite si svoje obľúbené nástroje v tomto zásuvnom module: {Vymazať čí
 
 Prečítajte si dokumentáciu na: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibilita: SPIP 1.92x and v2.0.x',
+Kompatibilita: SPIP 1.92x and v2.0.x', # MODIF
 	'pp_autobr' => 'Vložte blok textu s automatickým dopĺňaním',
 	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
 	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW

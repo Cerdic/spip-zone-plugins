@@ -90,7 +90,7 @@ Descobra neste plugin as suas ferramentas favoritas: {Suprime o número}, {Forma
 
 Não deixe de consultar os artigos de documentação do plugin, publicados em: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilidade: SPIP v1.9x, v2.0 e v2.1.x',
+Compatibilidade: SPIP v1.9x, v2.0 e v2.1.x', # MODIF
 	'pp_autobr' => 'Inserir um bloco onde as quebras de linha são automáticas',
 	'pp_blocs_bloc' => 'Inserir um bloco comprimido',
 	'pp_blocs_visible' => 'Inserir um bloco expandido',

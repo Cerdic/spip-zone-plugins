@@ -90,7 +90,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 لا تتردد في قراءة مقالات توثيق هذا الملحق على العنوان:[spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-يتوافق مع SPIP في اصداري 1.92x و2.0x و2.1x',
+يتوافق مع SPIP في اصداري 1.92x و2.0x و2.1x', # MODIF
 	'pp_autobr' => 'إدراج كتلة حيث العودة الى السطر آلية',
 	'pp_blocs_bloc' => 'إدراج كتلة مطوية',
 	'pp_blocs_visible' => 'إدراج كتلة مكشوفة',

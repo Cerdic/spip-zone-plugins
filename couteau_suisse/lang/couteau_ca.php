@@ -90,7 +90,7 @@ Descobriu en aquest connector les vostres eines favorites: {Suprimir el número}
 
 No dubteu a consultar els articles de la documentació del connector publicats a: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x',
+Compatibilitat: SPIP v1.92x i v2.0.x i v2.1.x', # MODIF
 	'pp_autobr' => 'Inserir un bloc allà on els salts de línia són automàtics ', # MODIF
 	'pp_blocs_bloc' => 'Inserir un bloc replegat ',
 	'pp_blocs_visible' => 'Inserir un bloc desplegat',
