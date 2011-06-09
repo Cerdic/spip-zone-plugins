@@ -1,21 +1,20 @@
 <B_plugins>
-<br class="nettoyeur" />
 <ul class="liste-items">
 <BOUCLE_plugins(PLUGINS){id_depot?}{categorie?}{par nom}>
 	<B_paquets>
 	<li id="plugin-#ID_DEPOT-#PREFIXE" class="item">
-		<div class="unit size100">[<strong>(#NOM)</strong>]</div>
+		<div class="unit">[<strong>(#NOM)</strong>]</div>
 	</li>
 	<BOUCLE_paquets(PAQUETS){compatible_spip?}{id_depot}{id_plugin}{!par version}>
 	<li id="paquet-#ID_PAQUET" class="item">
-		<div class="unit size40">
+		<div class="unit size2of5">
 			<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#ENV{url_depot}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" >
 				[(#NOM_ARCHIVE|basename{.zip})]
 			</a>
 		</div>
-		<div class="unit size20">[(#MAJ_ARCHIVE|affdate{d-m H:i})]</div>
-		<div class="unit size10">#VERSION</div>
-		<div class="unit size30">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{&nbsp;})]</div>
+		<div class="unit size1of5">[(#MAJ_ARCHIVE|affdate{d-m H:i})]</div>
+		<div class="unit size1of5">#VERSION</div>
+		<div class="unit size1of5 lastunit">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{&nbsp;})]</div>
 	</li>
 	</BOUCLE_paquets>
 	</B_paquets>

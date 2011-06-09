@@ -162,7 +162,7 @@ function svp_actualiser_depot($id){
 	if ($depot['sha_paquets'] == $sha) {
 		// Le fichier n'a pas change (meme sha1) alors on ne fait qu'actualiser la date 
 		// de mise a jour du depot en mettant a jour *inutilement* le sha1
-		spip_log('Aucune modification du fichier XML, actualisation non declenchee - id_depot = ' . $depot['id_depot'], 'svp.' . _LOG_INFO);
+		spip_log('Aucune modification du fichier XML, actualisation non declenchee - id_depot = ' . $depot['id_depot'], 'svp_actions.' . _LOG_INFO);
 		sql_replace('spip_depots', array_diff_key($depot, array('maj' => '')));
 	}
 	else {
@@ -584,7 +584,7 @@ function svp_actualiser_stats() {
 	if (!$stats = $infos->plugins) {
 		// On ne fait que loger l'erreur car celle-ci n'a pas d'incidence sur le comportement
 		// de SVP
-		spip_log('Réponse du serveur incorrecte ou mal formée. Les statistiques ne seront pas mises à jour', 'svp.' . _LOG_ERREUR);
+		spip_log('Réponse du serveur incorrecte ou mal formée. Les statistiques ne seront pas mises à jour', 'svp_actions.' . _LOG_ERREUR);
 		return false;
 	}
 

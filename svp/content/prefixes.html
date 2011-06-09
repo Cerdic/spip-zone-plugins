@@ -12,25 +12,27 @@
 </p>
 
 [(#REM) Cartouche avec le titre de la page et les informations generales ]
-<div class="cartouche">
-	<h1 class="h1">
-		<:svp:titre_page_prefixes:>
-		<BOUCLE_depot(DEPOTS){id_depot}>[ : (#TITRE)]</BOUCLE_depot>
-	</h1>
+<div class="content-principal">
+	<div class="cartouche">
+		<h1 class="h1">
+			<:svp:titre_page_prefixes:>
+			<BOUCLE_depot(DEPOTS){id_depot}>[ : (#TITRE)]</BOUCLE_depot>
+		</h1>
+	</div>
 </div>
-<br class="nettoyeur" />
 
 [(#REM) Statistiques globales ]
 
 <B_prefixes>
-<ul>
+<div class="liste" id="prefixes">
+	<ul class="liste-items">
 <BOUCLE_prefixes(PLUGINS){id_depot?}{par prefixe}>
-	[<li id="prefixe-#PREFIXE" class="liste-items">
-		<div class="unit size50">(#PREFIXE|strtolower)</div>
-		<div class="unit size50 lastUnit">[(#NOM)]</div>
-	</li>]
+		[<li id="prefixe-#PREFIXE" class="item">
+			<div class="unit size1of2">(#PREFIXE|strtolower)</div>
+			<div class="unit size1of2 lastUnit">[(#NOM)]</div>
+		</li>]
 </BOUCLE_prefixes>
-</ul>
+	</ul>
+</div>
 </B_prefixes>
-<br class="nettoyeur" />
 

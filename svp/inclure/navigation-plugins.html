@@ -8,10 +8,10 @@
 
 ]
 <B_plugins>
-<div class="liste plugins">
+<div class="menu plugins">
 	#ANCRE_PAGINATION
 	[<h2 class="h2">(#ENV{titre})</h2>]
-	<ul class="liste-items">
+	<ul class="menu-items">
 <BOUCLE_plugins(PLUGINS) {categorie}{pagination 10}{par nom}>
 		<li class="item">
 			[<(#EXPOSE{span, a[ href="(#URL_PLUGIN)"]})][ class="(#EXPOSE)"] title="<:svp:bulle_aller_plugin:>">

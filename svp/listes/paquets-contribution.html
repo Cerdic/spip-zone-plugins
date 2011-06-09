@@ -1,17 +1,13 @@
 <B_paquets>
-<br class="nettoyeur" />
-<ul>
+<ul class="liste-items">
 <BOUCLE_paquets(PAQUETS){id_depot?}{id_plugin=0}{par nom_archive}>
-	<li id="paquet-#ID_PAQUET" class="liste-items">
-		<div class="unit size40">
+	<li id="paquet-#ID_PAQUET" class="item">
+		<div class="unit size4of5">
 			<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#ENV{url_depot}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ -	(#NBO_ARCHIVE|taille_en_octets)]" >
 				[(#NOM_ARCHIVE|basename{.zip})]
 			</a>
 		</div>
-		<div class="unit size20">[(#MAJ_ARCHIVE|affdate{d-m H:i})]</div>
-		<div class="unit size10">#VERSION</div>
-		<div class="unit size25">&nbsp;</div>
-		<div class="unit size5 lastUnit">&nbsp;</div>
+		<div class="unit size1of5 lastunit">[(#MAJ_ARCHIVE|affdate{d-m H:i})]</div>
 	</li>
 </BOUCLE_paquets>
 </ul>
