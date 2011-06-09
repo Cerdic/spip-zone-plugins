@@ -135,7 +135,7 @@ function filtre_introduction($descriptif, $texte, $longueur, $connect) {
 if (!function_exists('balise_SI_PAGE_dist')){
 function balise_SI_PAGE_dist($p) {
 	$_page = interprete_argument_balise(1,$p);
-	$p->code = "(((\$Pile[0][_SPIP_PAGE]==(\$zp=$_page)) OR (\$Pile[0]['composition']==\$zp AND \$Pile[0]['type']=='page'))?' ':'')";
+	$p->code = "(((\$Pile[0][_SPIP_PAGE]==(\$zp=$_page)) OR (\$Pile[0]['type']==\$zp) OR (\$Pile[0]['composition']==\$zp AND \$Pile[0]['type']=='page'))?' ':'')";
 	$p->interdire_scripts = false;
 	return $p;
 }
