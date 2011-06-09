@@ -19,7 +19,6 @@ function boucle_JEUX($id_boucle, &$boucles) {
 	return calculer_boucle($id_boucle, $boucles);
 }
 
-
 // filtre retournant un lien cliquable si $nb!=0, sinon un simple tiret
 function jeux_lien_jeu($nb='0', $exec='', $id_jeu=0) {
 	$lien = generer_url_ecrire($exec,'id_jeu='.$id_jeu);
@@ -91,6 +90,12 @@ function balise_TYPE_RESULTAT_LONG_dist($p) {
 function balise_TYPE_RESULTAT_COURT_dist($p) {
 	$type = champ_sql('type_resultat', $p);
 	$p->code = "_T('jeux:resultat_'.$type)";
+	return $p;
+}
+
+function balise_NETTOYER_URI_dist($p) {
+	$p->code = 'nettoyer_uri()';
+	$p->interdire_scripts = false;
 	return $p;
 }
 

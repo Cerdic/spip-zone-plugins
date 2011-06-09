@@ -17,12 +17,8 @@ Insere un test de closure dans vos articles !
 
 separateurs obligatoires : [texte], [trou]
 separateurs optionnels   : [titre], [config], [score]
-parametres de configurations par defaut :
-	taille=auto	// taille des trous
-	indices=oui	// afficher les indices ?
-	couleurs=oui // appliquer des couleurs sur les corrections ?
-	solution=non // donne la(les) bonne(s) reponse(s) lors de la correction
-
+parametres de configuration par defaut :
+	voir la fonction jeux_trous_init() ci-dessous
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -67,6 +63,18 @@ Pour l'affichage des indices, veillez a ce que la premiere
 expression ne soit pas une expression reguliere
 
 */
+
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_trous_init() {
+	return "
+		taille=auto	// taille des trous
+		indices=oui	// afficher les indices ?
+		couleurs=oui	// afficher les indices ?
+		solution=non // donne la(les) bonne(s) reponse(s) lors de la correction
+		bouton_corriger=corriger // fond utilise pour le bouton 'Corriger'
+		bouton_refaire=recommencer // fond utilise pour le bouton 'Reset'
+	";
+}
 
 function trous_inserer_le_trou($indexJeux, $indexTrou, $size, $corriger) {
 	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
@@ -135,16 +143,6 @@ function trous_liste_reponses($mots) {
 	return join(' / ', $reponses) . $etc;
 }
 
-// configuration par defaut : jeu_{mon_jeu}_init()
-function jeux_trous_init() {
-	return "
-		taille=auto	// taille des trous
-		indices=oui	// afficher les indices ?
-		couleurs=oui	// afficher les indices ?
-		solution=non // donne la(les) bonne(s) réponse(s) lors de la correction
-	";
-}
-
 // traitement du jeu : jeu_{mon_jeu}()
 function jeux_trous($texte, $indexJeux, $form=true) {
 	global $propositionsTROUS, $scoreTROUS, $score_detailTROUS;
@@ -170,20 +168,25 @@ function jeux_trous($texte, $indexJeux, $form=true) {
 	// correction ?
 	$correction = isset($_POST["var_correction_".$indexJeux]);
 	if($correction) sort($score_detailTROUS);
+	$id_jeu = _request('id_jeu');
 	// recuperation du fond 'jeux/trous.html'
 	include_spip('public/assembler');
 	$fond = recuperer_fond('jeux/trous', 
-		array('id_jeu' => _request('id_jeu'), 'titre' => $titre,
+		array('id_jeu' => $id_jeu, 'titre' => $titre,
 			'texte' => $texte, 'correction' => $correction,
 			'indices' => jeux_config('indices')?trous_afficher_indices($indexJeux):'',
 			'fond_score' => !$correction?''
-				:jeux_afficher_score($scoreTROUS, $indexTrou, _request('id_jeu'), join(', ', $score_detailTROUS), $categ_score),
+				:jeux_afficher_score($scoreTROUS, $indexTrou, $id_jeu, join(', ', $score_detailTROUS), $categ_score),
 		)
 	);
 	// mise en place du formulaire
 	$fond = str_replace(
 		array('@@FORM_JEUX_DEBUT@@', '@@FORM_JEUX_FIN@@', '@@FORM_CORRIGER@@', '@@RECOMMENCER@@'), 
-		$form?array(jeux_form_debut('trous', $indexJeux), jeux_form_fin(), jeux_bouton_corriger(), jeux_bouton_recommencer()):'', 
+		$form?array(
+			jeux_form_debut('trous', $indexJeux),
+			jeux_form_fin(),
+			jeux_bouton(jeux_config('bouton_corriger'), $id_jeu),
+			jeux_bouton(jeux_config('bouton_refaire'), $id_jeu)):'', 
 		$fond
 	);
 	// nettoyage

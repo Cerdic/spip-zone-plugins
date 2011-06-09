@@ -166,18 +166,15 @@ function jeux_commentaire_score($categ, $score, $total) {
 	return $res===false?'':$categ[$res];
 }
 
-// fonctions qui retournent des boutons
-function jeux_bouton_reinitialiser($item='jeux:reinitialiser') {
-	$self = nettoyer_uri(); // self(); 
-	return '<div class="jeux_bouton_reset">&#091; <a href="'
-	 . parametre_url($self, 'var_mode', 'recalcul').'">' . _T($item) . '</a> &#093;</div>';
+// fonction qui retourne un bouton, faisant appel au fond fonds/bouton_{$item}.html
+function jeux_bouton($item, $id_jeu = 0) {
+	return recuperer_fond('fonds/bouton_'.$item, array('id_jeu' => $id_jeu));
 }
-function jeux_bouton_recommencer() {
-	return jeux_bouton_reinitialiser('jeux:recommencer');
-}
-function jeux_bouton_corriger() {
-	return '<div style="text-align:center;"><input type="submit" value="'._T('jeux:corriger').'" class="jeux_bouton" /></div>';
-}
+// fonctions obsoletes
+function jeux_bouton_reinitialiser() { return jeux_bouton('reinitialiser'); }
+function jeux_bouton_recommencer() { return jeux_bouton('recommencer'); }
+function jeux_bouton_corriger() { return jeux_bouton('corriger'); }
+function jeux_bouton_rejouer() { return jeux_bouton('rejouer'); }
 
 // liste les jeux trouves, si le module jeux/lejeu.php est present
 function jeux_liste_les_jeux(&$texte) {

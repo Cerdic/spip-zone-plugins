@@ -18,11 +18,7 @@ Insere un "multi jeux" dans vos articles !
 separateurs obligatoires : [jeu]
 separateurs optionnels (a placer AVANT le premier [jeu])  : [texte], [titre], [config], [score]
 parametres de configurations par defaut :
-	bouton_corriger=oui	// bouton 'Corriger' ?
-	bouton_recommencer=oui	// bouton 'Recommencer' ?
-	bouton_reinitialiser=non	// bouton 'Reinitialiser' ?
-	scores_intermediaires=oui	// scores intermediaires ?
-
+	voir la fonction jeux_multi_jeux_init() ci-dessous
 
 Exemple de syntaxe dans l'article :
 -----------------------------------
@@ -31,8 +27,7 @@ Exemple de syntaxe dans l'article :
 	[titre]
 		Un ensemble de 3 jeux
 	[config]
-		bouton_recommencer=non
-		bouton_reinitialiser=oui
+		bouton_refaire=rejouer
 	[jeu]
 	Tout ce qu'il faut pour le 1er jeu
 	[jeu]
@@ -45,9 +40,8 @@ Exemple de syntaxe dans l'article :
 // configuration par defaut : jeu_{mon_jeu}_init()
 function jeux_multi_jeux_init() {
 	return "
-		bouton_corriger=oui	// bouton 'Corriger' ?
-		bouton_recommencer=oui	// bouton 'Recommencer' ?
-		bouton_reinitialiser=non	// bouton 'Reinitialiser' ?
+		bouton_corriger=corriger // fond utilise pour le bouton 'Corriger' (non ou 0 : pas de bouton)
+		bouton_refaire=recommencer // fond utilise pour le bouton 'Reset' (non ou 0 : pas de bouton)
 		scores_intermediaires=non	// scores intermediaires ?
 	";
 }
@@ -84,14 +78,18 @@ function jeux_multi_jeux($texte, $indexJeux) {
 	$texte = join("\n", $textes);
 	$tete = '<div class="jeux_cadre multi_jeux_cadre">'.($titre?'<div class="jeux_titre multi_jeux_titre">'.$titre.'<hr /></div>':'');
 	$pied = '';
+	$id_jeu = _request('id_jeu');
 
 	if(!isset($_POST["var_correction_".$indexJeux])) {
-		if(jeux_config('bouton_corriger', $scores['config'])) $texte .= jeux_bouton_corriger();
+		if($b = jeux_config('bouton_corriger', $scores['config'])) $texte .= jeux_bouton(strlen($b)?$b:'corriger', $id_jeu);
 		$texte = jeux_form_debut('multi_jeux', $indexJeux).$texte.jeux_form_fin();
 	} else {
-		if(jeux_config('bouton_reinitialiser', $scores['config'])) $texte .= jeux_bouton_reinitialiser();
-		if(jeux_config('bouton_recommencer', $scores['config'])) $texte .= jeux_bouton_recommencer();
-		$pied = jeux_afficher_score(array_sum($scores['score']), array_sum($scores['total']), _request('id_jeu'), join('<br />',$scores['details']), $categ_score);
+		// obsolete, ici par compatibilite
+		if(jeux_config('bouton_reinitialiser', $scores['config'])) $texte .= jeux_bouton('reinitialiser', $id_jeu);
+		elseif(jeux_config('bouton_recommencer', $scores['config'])) $texte .= jeux_bouton('recommencer', $id_jeu);
+		// affichage du bouton 'Reset'
+		elseif($b = jeux_config('bouton_refaire', $scores['config'])) $texte .= jeux_bouton($b, $id_jeu);
+		$pied = jeux_afficher_score(array_sum($scores['score']), array_sum($scores['total']), $id_jeu, join('<br />',$scores['details']), $categ_score);
 	}
 	
 	return $tete.$html.$texte.$pied.'</div>';

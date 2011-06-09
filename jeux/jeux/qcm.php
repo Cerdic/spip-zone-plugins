@@ -16,14 +16,8 @@
 
 separateurs obligatoires : [qcm], [qrm] ou [quiz]
 separateurs optionnels   : [titre], [texte], [config], [score]
-parametres de configurations par defaut :
-	trou=auto // taille du trou affiche en cas de proposition unique
-	une_par_une=non // affiche les questions une par une
-	corrections=oui // corrige chaque reponse (juste ou fausse) et affiche les precisions eventuelles
-	solution=non // donne la(les) bonne(s) reponse(s) lors de la correction
-	points=oui // affiche eventuellement les points dans les questions
-	max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
-	colonnes=1 // nombre de boutons (type radio ou a cocher) par ligne
+parametres de configuration par defaut :
+	voir la fonction jeux_qcm_init() ci-dessous
 
 Exemple de syntaxe dans l'article :
 ------------------------------------
@@ -66,6 +60,21 @@ La gestion des points et des precisions est toujours possible :
 
 */
 
+
+// configuration par defaut : jeu_{mon_jeu}_init()
+function jeux_qcm_init() {
+	return "
+		trou=auto	// taille du trou affiche en cas de proposition unique
+		une_par_une=non // affiche les questions une par une
+		corrections=oui // corrige chaque reponse (juste ou fausse) et affiche les precisions eventuelles
+		solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
+		points=oui // affiche eventuellement les points dans les questions
+		max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
+		colonnes=1 // nombre de boutons par ligne
+		bouton_corriger=corriger // fond utilise pour le bouton 'Corriger'
+		bouton_refaire=reinitialiser // fond utilise pour le bouton 'Reset'
+	";
+}
 
 // cette fonction remplit le tableau $qcms sur la question $indexQCM
 function qcm_analyse_le_qcm($qcm, $indexQCM, $isQRM) {
@@ -321,19 +330,6 @@ function qcm_inserer_les_qcm(&$chaine, $indexJeux, $gestionPoints) {
   return $chaine;
 }
 
-// configuration par defaut : jeu_{mon_jeu}_init()
-function jeux_qcm_init() {
-	return "
-		trou=auto	// taille du trou affiche en cas de proposition unique
-		une_par_une=non // affiche les questions une par une
-		corrections=oui // corrige chaque reponse (juste ou fausse) et affiche les precisions eventuelles
-		solution=non	// donne la(les) bonne(s) reponse(s) lors de la correction
-		points=oui // affiche eventuellement les points dans les questions
-		max_radios=5 // nombre maximal de boutons radios affiches avant le choix d'une liste deroulante
-		colonnes=1 // nombre de boutons par ligne
-	";
-}
-
 // traitement du jeu : jeu_{mon_jeu}()
 function jeux_qcm($texte, $indexJeux, $form=true) {
   // initialisation  
@@ -343,6 +339,7 @@ function jeux_qcm($texte, $indexJeux, $form=true) {
   $qcm_score_detaille = array();
   $qcms['nbquestions'] = $qcms['totalscore'] = $qcms['totalpropositions'] = 0;
   $titre = $horizontal = $vertical = $solution = $html = $categ_score = false;
+  $id_jeu = _request('id_jeu');
 
   // parcourir tous les #SEPARATEURS
   $tableau = jeux_split_texte('qcm', $texte);
@@ -372,12 +369,12 @@ function jeux_qcm($texte, $indexJeux, $form=true) {
   $pied = '';
   if (!isset($_POST["var_correction_".$indexJeux])) {
 	if($form) {
-		$pied = '<br />'.jeux_bouton_corriger().jeux_form_fin();
+		$pied = '<br />'.jeux_bouton(jeux_config('bouton_corriger'), $id_jeu).jeux_form_fin();
 		$tete .= jeux_form_debut('qcm', $indexJeux, '', 'post', self());
 	}
   } else {
-	$pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], _request('id_jeu'), join(', ', $qcm_score_detaille), $categ_score);
-	if($form) $pied .= jeux_bouton_reinitialiser();
+	$pied = jeux_afficher_score($qcm_score, $qcms['totalscore'], $id_jeu, join(', ', $qcm_score_detaille), $categ_score);
+	if($form) $pied .= jeux_bouton(jeux_config('bouton_refaire'), $id_jeu);
   }
   // ajout du javascript si on doit afficher une par une
   if (jeux_config('une_par_une'))
