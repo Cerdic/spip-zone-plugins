@@ -225,6 +225,8 @@ function normaliser_auteur_licence($texte, $balise) {
 		}
 		
 		// On finalise la balise auteur ou licence si on a pas trouve de licence prioritaire
+		if (!preg_match(',https?://,', $href, $matches))
+			$href = "http://" . $href;
 		$v = trim(textebrut($v));
 		if ((strlen($v) > 2) AND !$licnom)
 			if ($balise == 'auteur')
