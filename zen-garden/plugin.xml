@@ -45,6 +45,7 @@
 		[en]A Zen garden for Zpip
 	</multi>
   </description>
+	<lien>http://www.spip-contrib.net/SPIP-Zen-Garden</lien>
   <options>zengarden_options.php</options>
   <prefix>zengarden</prefix>
   <categorie>maintenance</categorie>
