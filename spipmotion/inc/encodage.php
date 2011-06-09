@@ -495,7 +495,7 @@ function encodage($source,$doc_attente){
 		$x = $ajouter_documents($fichier_temp, $fichier_final, $type_doc, $id_objet, $mode, '', $actif,'','','');
 
 		if(intval($x) > 1){
-			spip_unlink($fichier_temp);
+			supprimer_fichier($fichier_temp);
 			
 			/**
 			 * Modification de la file d'attente
@@ -545,7 +545,7 @@ function encodage($source,$doc_attente){
 		}
 	}else if(!file_exists(get_spip_doc($source['fichier']))){
 		spip_log('Le document original a été supprimé entre temps','spipmotion');
-		spip_unlink($fichier_temp);
+		supprimer_fichier($fichier_temp);
 		$reussite = 'non';
 		sql_delete("spip_spipmotion_attentes","id_spipmotion_attente=".intval($doc_attente));
 	}
@@ -563,7 +563,15 @@ function encodage($source,$doc_attente){
 	if(file_exists(_DIR_RACINE.$query.'-0.log')){
 		supprimer_fichier(_DIR_RACINE.$query.'-0.log');
 	}
-	
+	if(file_exists(_DIR_RACINE.$query.'.mbtree')){
+		supprimer_fichier(_DIR_RACINE.$query.'.mbtree');
+	}
+	if(file_exists($fichier_temp)){
+		supprimer_fichier($fichier_temp);
+	}
+	if(file_exists(_DIR_RACINE.$query.'-pass')){
+		supprimer_fichier(_DIR_RACINE.$query.'-pass');
+	}
 	pipeline('post_spipmotion_encodage',
 				array(
 					'args' => array(
