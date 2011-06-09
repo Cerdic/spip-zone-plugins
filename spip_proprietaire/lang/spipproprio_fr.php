@@ -1,137 +1,145 @@
 <?php
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/spip_proprietaire/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A //
-	'all_site' => 'Tout le site',
-	'administrateur_mail_label' => 'Adresse mail de contact administratif du site',
-	'adresse_legend' => 'Adresse de la structure',
-	'adresse_comment' => 'Remplissez ces champs de mani&egrave;re la plus pr&eacute;cise et simple possible. Si vos entr&eacute;es le permettent, un lien vers une carte GoogleMap sera g&eacute;n&eacute;r&eacute;.',
+	// A
 	'abbreviation_genre_label' => 'Abbrev. / Genre',
 	'admin_legend' => 'Concernant l\'administration du site',
-	'administrateur_aussi_label' => 'Organisme administrateur du site',
 	'administrateur_aussi_comment' => 'Cochez cette case si la structure dont il s\'agit est &eacute;galement <b>administrateur</b> du site.',
+	'administrateur_aussi_label' => 'Organisme administrateur du site',
+	'administrateur_mail_label' => 'Adresse mail de contact administratif du site',
+	'adresse_comment' => 'Remplissez ces champs de mani&egrave;re la plus pr&eacute;cise et simple possible. Si vos entr&eacute;es le permettent, un lien vers une carte GoogleMap sera g&eacute;n&eacute;r&eacute;.',
+	'adresse_legend' => 'Adresse de la structure',
+	'all_site' => 'Tout le site',
 	'au_capital_de' => ' au capital de ',
 
-// B //
-	'bouton_importer' => 'Lancer l&#039;importation',
-	'bouton_exporter' => 'Lancer l&#039;exportation',
-	'bouton_saisie_libre' => 'Saisie libre',
+	// B
 	'bouton_auto_fr' => 'Champs automatiques pour la France',
+	'bouton_exporter' => 'Lancer l&#039;exportation',
+	'bouton_importer' => 'Lancer l&#039;importation',
+	'bouton_saisie_libre' => 'Saisie libre',
 
-// C //
-	'createur' => 'cr&#233;ateur',
-	'conditions_utilisation' => 'Conditions d\'utilisation',
-	'code_postal_label' => 'Code postal',
-	'capital_social_label' => 'Capital social',
+	// C
+	'capital' => ' au capital de ',
 	'capital_social_comment' => 'Pr&eacute;cisez la monnaie le cas &eacute;ch&eacute;ant (<i>&euro; &dollar;</i>).',
-	'cnil_legend' => 'Informations CNIL',
+	'capital_social_label' => 'Capital social',
 	'cnil_comment' => 'Si vous avez effectu&eacute; une d&eacute;claration aupr&egrave;s de la CNIL, pr&eacute;cisez ici &agrave; quelle date et sous quel r&eacute;c&eacute;piss&eacute;.',
 	'cnil_date_label' => 'Date du d&eacute;p&ocirc;t',
+	'cnil_legend' => 'Informations CNIL',
 	'cnil_numero_label' => 'N&deg; de r&eacute;c&eacute;piss&eacute;',
-	'copyright_legend' => 'Informations de copyright',
-	'copyright_comment' => 'Pour rappel, en France, il n\'est pas n&eacute;cessaire d\'avoir d&eacute;pos&eacute; votre copyright aupr&egrave;s d\'un organisme pour qu\'une protection soit effective. Les informations de copyright peuvent donc &ecirc;tre mentionn&eacute;es par d&eacute;faut.',
-	'copyright_annee_label' => 'Ann&eacute;e de c&eacute;ation',
-	'copyright_complement_label' => 'Compl&eacute;ment',
-	'copyright_comment_label' => 'Mention de protection',
-	// coordonnees site
-	'coordonnees_tel' => 'T&eacute;l.',
-	'coordonnees_mail' => 'Courriel',
+	'code_postal_label' => 'Code postal',
+	'conditions_utilisation' => 'Conditions d\'utilisation',
 	'coordonnees_adresse' => 'Adr.',
-	'coordonnees_fax' => 'Fax',
 	'coordonnees_capital' => ' au capital de ',
+	'coordonnees_fax' => 'Fax',
+	'coordonnees_mail' => 'Courriel',
 	'coordonnees_mailto_ttl' => 'Nous contacter par email',
-	'capital' => ' au capital de ',
-	// copyright
+	'coordonnees_tel' => 'T&eacute;l.',
+	'copyright_annee_label' => 'Ann&eacute;e de c&eacute;ation',
+	'copyright_comment' => 'Pour rappel, en France, il n\'est pas n&eacute;cessaire d\'avoir d&eacute;pos&eacute; votre copyright aupr&egrave;s d\'un organisme pour qu\'une protection soit effective. Les informations de copyright peuvent donc &ecirc;tre mentionn&eacute;es par d&eacute;faut.',
+	'copyright_comment_label' => 'Mention de protection',
+	'copyright_complement_label' => 'Compl&eacute;ment',
 	'copyright_default_comment' => 'La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.',
 	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited.[fr]La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.</multi>',
+	'copyright_legend' => 'Informations de copyright',
+	'createur' => 'cr&#233;ateur',
 
-// D //
+	// D
 	'de_la' => ' de la ',
 	'du' => ' du ',
 
-// E //
+	// E
+	'enregistre_pres' => ' enregistr&eacute; aupr&egrave;s ',
+	'enregistree_pres' => ' enregistr&eacute;e aupr&egrave;s ',
+	'enregistrement_numero_label' => 'Sous le N&deg;',
+	'enregistrement_organisme_comment' => 'Registre du Commerce et des Soci&eacute;t&eacute;s, Maison des artistes ...',
+	'enregistrement_organisme_label' => 'Enregistr&eacute; aupr&egrave;s de',
+	'enregistrement_ou_label' => 'Saisie automatique pour la France (<i>option rempla&ccedil;ant le champ ci-dessus</i>)',
+	'enregistrement_siren_comment' => 'ex.: 123 456 78 (9: cl&eacute; automatique)',
+	'enregistrement_siren_label' => 'SIREN [<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises - code INSEE unique d&#233;signant la personne juridique de l&#039;entreprise">?</abbr>]',
+	'enregistrement_siren_title' => 'R&#233;f&#233;rence de l&#039;entreprise &#224; neuf chiffres, vous pouvez n&#039;indiquer que les huit premiers chiffres.',
+	'enregistrement_siret_comment' => 'ex.: 1234 (5: cl&eacute; automatique)',
+	'enregistrement_siret_label' => 'SIRET (NIC) [<abbr title="Identifiant d&#039;&#233;tablissement - Num&#233;ro Interne de Classement">?</abbr>]',
+	'enregistrement_siret_title' => 'R&#233;f&#233;rence d&#039;&#233;tablissement &#224; cinq chiffres, vous pouvez ne pas indiquer les z&#233;ros initiaux ni le dernier chiffre.',
+	'enregistrement_tvaintra_comment' => 'ex.: FR 45 (automatique)',
+	'enregistrement_tvaintra_label' => 'TVA Intra. [<abbr title="Num&#233;ro de T.V.A. Intracommunautaire">?</abbr>]',
+	'enregistrement_tvaintra_title' => 'Calcul&#233; automatiquement &#224; partir du SIREN.',
 	'erreur_config' => '!! - Une erreur inconnue est survenue _',
 	'erreur_export' => '!! - Une erreur inconnue est survenue _',
 	'erreur_import' => '!! - Une erreur inconnue est survenue _',
-	'enregistrement_organisme_label' => 'Enregistr&eacute; aupr&egrave;s de',
-	'enregistrement_organisme_comment' => 'Registre du Commerce et des Soci&eacute;t&eacute;s, Maison des artistes ...',
-	'enregistrement_numero_label' => 'Sous le N&deg;',
-	'enregistree_pres' => ' enregistr&eacute;e aupr&egrave;s ',
-	'enregistre_pres' => ' enregistr&eacute; aupr&egrave;s ',
-	'exporter_importer' => 'Exporter/Importer',
 	'exporter_configuration' => 'Exporter la configuration (<i>informations sur le propri&eacute;taire, l\'&eacute;diteur ...</i>)',
 	'exporter_fichiers_langues' => 'Exporter les cha&icirc;nes de langues propres au site',
-	'enregistrement_ou_label' => 'Saisie automatique pour la France (<i>option rempla&ccedil;ant le champ ci-dessus</i>)',
-	'enregistrement_siren_label' => 'SIREN [<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises - code INSEE unique d&#233;signant la personne juridique de l&#039;entreprise">?</abbr>]',
-	'enregistrement_siren_comment' => 'ex.: 123 456 78 (9: cl&eacute; automatique)',
-	'enregistrement_siren_title' => 'R&#233;f&#233;rence de l&#039;entreprise &#224; neuf chiffres, vous pouvez n&#039;indiquer que les huit premiers chiffres.',
-	'enregistrement_siret_label' => 'SIRET (NIC) [<abbr title="Identifiant d&#039;&#233;tablissement - Num&#233;ro Interne de Classement">?</abbr>]',
-	'enregistrement_siret_comment' => 'ex.: 1234 (5: cl&eacute; automatique)',
-	'enregistrement_siret_title' => 'R&#233;f&#233;rence d&#039;&#233;tablissement &#224; cinq chiffres, vous pouvez ne pas indiquer les z&#233;ros initiaux ni le dernier chiffre.',
-	'enregistrement_tvaintra_label' => 'TVA Intra. [<abbr title="Num&#233;ro de T.V.A. Intracommunautaire">?</abbr>]',
-	'enregistrement_tvaintra_comment' => 'ex.: FR 45 (automatique)',
-	'enregistrement_tvaintra_title' => 'Calcul&#233; automatiquement &#224; partir du SIREN.',
+	'exporter_importer' => 'Exporter/Importer',
 
-// F //
-	'fonction_administrateur' => 'Administrateur',
-	'fonction_webmaster' => 'Webmestre',
-	'forme' => 'Forme juridique',
-	'forme_label' => 'Forme juridique',
-	'forme_comment' => 'Soci&eacute;t&eacute; (<i>pr&eacute;cisez le statut ...</i>), association ...',
+	// F
 	'fax' => 'T&eacute;l&eacute;copie',
 	'fax_abbrev' => 'Fax',
 	'feminin' => 'f&#233;minin',
+	'fonction_administrateur' => 'Administrateur',
+	'fonction_webmaster' => 'Webmestre',
+	'forme' => 'Forme juridique',
+	'forme_comment' => 'Soci&eacute;t&eacute; (<i>pr&eacute;cisez le statut ...</i>), association ...',
+	'forme_label' => 'Forme juridique',
 
-// H //
-	'home_page' => 'Page d’accueil',
+	// H
 	'hebergeur' => 'h&#233;bergeur',
+	'home_page' => 'Page d’accueil',
 
-// I //
+	// I
+	'idem_label' => 'M&ecirc;me structure que',
+	'import_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : cela effacera votre configuration courante et vos cha&icirc;nes de langue !<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
+	'importer_dump' => '<strong>Importer le fichier :</strong> ',
+	'infos_createur' => 'Informations cr&eacute;ateur',
+	'infos_hebergeur' => 'Informations h&eacute;bergeur',
+	'infos_idem' => 'M&ecirc;me structure',
 	'infos_legend' => 'Informations g&eacute;n&eacute;rales',
 	'infos_proprietaire' => 'Informations propri&eacute;taire',
-	'infos_hebergeur' => 'Informations h&eacute;bergeur',
-	'infos_createur' => 'Informations cr&eacute;ateur',
-	'infos_idem' => 'M&ecirc;me structure',
-	'idem_label' => 'M&ecirc;me structure que',
-//	'idem_comment' => 'Renseignez cette valeur cette valeur si l\'organisme propri&eacute;taire est &eacute;galement @type@ du site.',
-	'importer_dump' => '<strong>Importer le fichier :</strong> ',
-	'import_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : cela effacera votre configuration courante et vos cha&icirc;nes de langue !<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
 
-// L //
-	'le' => 'le ',
+	// L
 	'la' => 'la ',
-	'libelle_label' => 'Libell&eacute;',
-	'libelle_comment' => 'Compl&eacute;ment associ&eacute; au nom de structure.',
-	'legal_legend' => 'Informations l&eacute;gales de la structure',
+	'le' => 'le ',
 	'legal_comment' => 'Ces informations sont optionnelles. Si elles sont saisies, elles seront mentionn&eacute;es dans le bloc d\'information g&eacute;n&eacute;r&eacute;.',
+	'legal_legend' => 'Informations l&eacute;gales de la structure',
+	'libelle_comment' => 'Compl&eacute;ment associ&eacute; au nom de structure.',
+	'libelle_label' => 'Libell&eacute;',
 
-// M //
-	'mentions_legales' => 'Mentions l&eacute;gales',
+	// M
 	'mail_label' => 'Adresse mail de contact',
-	'mel' => 'Courriel',
 	'mail_to' => 'Contacter cette adresse',
 	'masculin' => 'masculin',
+	'mel' => 'Courriel',
+	'mentions_legales' => 'Mentions l&eacute;gales',
 
-// N //
-	'news' => 'Br&#232;ves',
+	// N
 	'new_window' => 'Nouvelle fen&ecirc;tre',
-	'notes' => 'NOTES',
+	'news' => 'Br&#232;ves',
 	'nom_label' => 'Nom de la structure',
+	'notes' => 'NOTES',
 	'num_invalide' => 'Num. invalide',
 	'numero_maj' => 'N&deg;',
 
-// O //
+	// O
 	'ok_config' => 'OK - Les valeurs ont &eacute;t&eacute; enregistr&eacute;es _',
 	'ok_export' => 'OK - Votre configuration a &eacute;t&eacute; export&eacute;e dans le fichier :<br />"<strong>@fichier@</strong>"',
 	'ok_import' => 'OK - Votre configuration a bien &eacute;t&eacute; restaur&eacute;e',
-	'outils_de_communication' => 'Outils de communication',
-	'outil_importer' => 'Outil de restauration',
 	'outil_exporter' => 'Outil de sauvegarde',
+	'outil_importer' => 'Outil de restauration',
+	'outils_de_communication' => 'Outils de communication',
 
-// P //
+	// P
 	'pays_label' => 'Pays',
+	'pconfig_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : ces valeurs sont valables sur l\'ensemble du site.<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
+	'pconfig_divers_legend' => 'Informations compl&eacute;mentaires',
+	'pconfig_texte' => 'Vous pouvez ici d&eacute;finir les coordonn&eacute;es de l\'organisme @type@ ainsi que ses informations l&eacute;gales.',
+	'pconfig_texte_ajouts' => '<br />Le syst&egrave;me pr&eacute;sentera les informations qui sont pr&eacute;cis&eacute;es.<br />Notez cependant que certaines fonctionnalit&eacute;s du plugin, notamment la construction automatique d\'informations l&eacute;gales et de conditions d\'utilisation du site, n&eacute;cessitent qu\'un maximum d\'informations soient saisies.',
+	'pconfig_texte_lien_doc' => '<br /><br />Le bouton ci-dessous pr&eacute;sente le r&eacute;sultat des diff&eacute;rentes fonctionnalit&eacute;s pour v&eacute;rifications&nbsp;:',
+	'pconfig_texte_notes' => '<span style="color: red;">*</span><small>Les champs marqu&eacute;s d\'une ast&eacute;risque rouge peuvent comporter un bloc \'multi\'.<br /></small>',
+	'pconfig_titre_page' => 'Configuration propri&eacute;taire',
+	'pconfig_titre_page_short' => 'Configuration',
 	'pourquoi_ce_plugin' => 'Pourquoi ce plugin ? (<i>rappels l&eacute;gaux</i>)',
-	'proprietaire' => 'propri&#233;taire',
 	'presentation' => '{{{Obligations l&eacute;gales fran&ccedil;aises concernant tout site internet}}}
 
 Tout site Internet, qu’il soit professionnel ou "de loisirs", doit respecter un ensemble d’obligations l&eacute;gales dict&eacute;es par la [LCEN|Voir le texte sur legifrance.fr->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164] ({Loi pour la confiance dans l’&eacute;conomie num&eacute;rique}) de juin 2004. Ces informations doivent &ecirc;tre clairement accessibles &agrave; tout internaute utilisant le site et l’&eacute;diteur du site, son propri&eacute;taire, a le devoir de contr&ocirc;ler son contenu, autant en terme r&eacute;dactionnel que concernant les commentaires laiss&eacute;s par les internautes.
@@ -194,7 +202,13 @@ Afin de vous prot&eacute;ger au mieux, il est tr&egrave;s fortement conseill&eac
 
 Plus g&eacute;n&eacute;ralement, il y a lieu d’adapter vos mentions l&eacute;gales &agrave; votre activit&eacute; ({professions r&eacute;glement&eacute;es, site de commerce ...}).
 ',
-//	'presentation_plugin' => '{{{Fonctionnalit&eacute;s du plugin SPIP Propri&eacute;taire}}}
+	'presentation_outils_de_communication' => '{{{Valoriser son site web}}}
+
+Le plugin {{Mentions L&eacute;gales}} propose &eacute;galement un ensemble d’outils de pr&eacute;sentation d’informations pour valoriser et mettre en avant vos atouts.
+
+Il propose par exemple un mod&egrave;le de "carte de visite" du site ainsi qu’une "v-Card" ({Virtual Card permettant de charger automatiquement vos informations de contact dans un gestionnaire de mails ou un carnet d’adresse}).
+
+Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’information ({cette page prend en compte les informations saisies dans les diff&eacute;rents formulaires du plugin, il est donc n&eacute;cessaire d’en remplir au minimum quelques uns pour visualisation ...}).',
 	'presentation_plugin' => '{{{Fonctionnalit&eacute;s du plugin Mentions L&eacute;gales}}}
 
 Ce plugin vous propose un ensemble de formulaires et de mod&egrave;les pour faciliter la mise en place des informations pr&eacute;cit&eacute;es. Il vous permet notamment de d&eacute;finir les informations concernant l’&eacute;diteur, le cr&eacute;ateur et l’h&eacute;bergeur du site et propose des mod&egrave;les d’affichages de celles-ci.
@@ -209,121 +223,93 @@ Pour finir, des mod&egrave;les de squelettes d’en-t&ecirc;te et de pieds de pa
 
 Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelettes cit&eacute;s plus haut. Pour les visualiser, ajoutez simplement "_zpip" aux noms de squelettes ci-dessus. Le contenu de ces squelettes est disponible dans le r&eacute;pertoire "public/contenu/".
 ',
-//Le plugin {{SPIP Propri&eacute;taire}} propose &eacute;galement un ensemble d’outils de pr&eacute;sentation d’informations pour valoriser et mettre en avant vos atouts.
-	'presentation_outils_de_communication' => '{{{Valoriser son site web}}}
-
-Le plugin {{Mentions L&eacute;gales}} propose &eacute;galement un ensemble d’outils de pr&eacute;sentation d’informations pour valoriser et mettre en avant vos atouts.
-
-Il propose par exemple un mod&egrave;le de "carte de visite" du site ainsi qu’une "v-Card" ({Virtual Card permettant de charger automatiquement vos informations de contact dans un gestionnaire de mails ou un carnet d’adresse}).
-
-Nous vous renvoyons &agrave; la page d’exemples ci-dessous pour plus d’information ({cette page prend en compte les informations saisies dans les diff&eacute;rents formulaires du plugin, il est donc n&eacute;cessaire d’en remplir au minimum quelques uns pour visualisation ...}).',
-	// Import/Export
+	'proprietaire' => 'propri&#233;taire',
 	'proprietaire_export_import' => 'Mentions L&eacute;gales : maintenance',
-//	'proprietaire_export_import' => 'SPIP Propri&eacute;taire : maintenance',
-	'proprietaire_retour_plateforme' => 'Retour &agrave; la plateforme',
 	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos cha&icirc;nes personnelles de langues, ou les restaurer depuis une pr&eacute;c&eacute;dente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />',
-	// Pages
-	'proprietaire_titre_page' => 'Plateforme Mentions L&eacute;gales',
-//	'proprietaire_titre_page' => 'Plateforme propri&eacute;taire',
-	'proprietaire_titre_page_short' => 'Plateforme',
+	'proprietaire_retour_plateforme' => 'Retour &agrave; la plateforme',
 	'proprietaire_texte' => 'Vous pouvez ici d&eacute;finir les options g&eacute;n&eacute;rales du site utilis&eacute;es par le plugin <b>Mentions L&eacute;gales</b>.<br /><br />Vous pouvez &eacute;galement d&eacute;finir des cha&icirc;nes de langues particuli&egrave;res dont l\'utilisation est rappel&eacute;e sur la page concern&eacute;e.<br />',
-//	'proprietaire_texte' => 'Vous pouvez ici d&eacute;finir les options g&eacute;n&eacute;rales du site utilis&eacute;es par le plugin <b>SPIP Propri&eacute;taire</b>.<br /><br />Vous pouvez &eacute;galement d&eacute;finir des cha&icirc;nes de langues particuli&egrave;res dont l\'utilisation est rappel&eacute;e sur la page concern&eacute;e.<br />',
 	'proprietaire_texte_supp' => 'Ce plugin vous propose de centraliser et automatiser la gestion d\'un site \'institutionnel\' ou \'professionnel\' fonctionnant sous SPIP.<br /><br />Il vous permet notamment de saisir un ensemble d\'informations sur le <b>propri&eacute;taire</b> du site, organisme, soci&eacute;t&eacute;, institution ou particulier, afin de les pr&eacute;senter de divers mani&egrave;res et, &eacute;ventuellement, de g&eacute;n&eacute;rer automatiquement des informations de Copyright, des \'Mentions l&eacute;gales\' et des \'Conditions d\'utilisation\' propres au site.',
-	'pconfig_titre_page' => 'Configuration propri&eacute;taire',
-	'pconfig_titre_page_short' => 'Configuration',
-	'pconfig_texte' => 'Vous pouvez ici d&eacute;finir les coordonn&eacute;es de l\'organisme @type@ ainsi que ses informations l&eacute;gales.',
-	'pconfig_texte_ajouts' => '<br />Le syst&egrave;me pr&eacute;sentera les informations qui sont pr&eacute;cis&eacute;es.<br />Notez cependant que certaines fonctionnalit&eacute;s du plugin, notamment la construction automatique d\'informations l&eacute;gales et de conditions d\'utilisation du site, n&eacute;cessitent qu\'un maximum d\'informations soient saisies.',
-	'pconfig_texte_lien_doc' => '<br /><br />Le bouton ci-dessous pr&eacute;sente le r&eacute;sultat des diff&eacute;rentes fonctionnalit&eacute;s pour v&eacute;rifications&nbsp;:',
-	'pconfig_texte_notes' => '<span style="color: red;">*</span><small>Les champs marqu&eacute;s d\'une ast&eacute;risque rouge peuvent comporter un bloc \'multi\'.<br /></small>',
-	'pconfig_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : ces valeurs sont valables sur l\'ensemble du site.<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>',
-	'pconfig_divers_legend' => 'Informations compl&eacute;mentaires',
-	'ptexte_titre_page' => 'Textes de langue propri&eacute;taire',
-	'ptexte_titre_page_short' => 'Textes de langue',
-	'ptexte_supprimer' => 'Supprimer l\'entr&eacute;e',
-	'ptexte_editable_ttl' => 'Cliquez sur la ligne pour la modifier ...',
-	'ptexte_cliquez_pour_editer' => 'Cliquez ici pour &eacute;diter l&prime;entr&eacute;e avec les raccourcis de mise en page',
-	'ptexte_info_titre' => 'Aide / Rappels ...',
-	'ptexte_form_titre' => '&Eacute;dition compl&egrave;te / Nouvelle entr&eacute;e',
-	'ptexte_texte' => 'Cette page vous permet de g&eacute;rer certains textes n&eacute;cessaires au site sans passer par le mode d\'&eacute;dition habituel (<i>modification du fichier de langue sur le serveur</i>).<br /><br />Les entr&eacute;es \'Texte affich&eacute;\' du tableau sont &eacute;ditables par un simple clic sur la ligne \'raccourci\' correspondante. Vous pouvez &eacute;galement ajouter des entr&eacute;es en utilisant le formulaire \'&Eacute;dition compl&egrave;te\'.',
-	'ptexte_info_texte' => '<ul><li><b>Les fichiers de langue</b><br />Les entr&eacute;es des fichiers de langue se d&eacute;finissent en indiquant une cha&icirc;ne d\'appel (<i>les entr&eacute;es \'raccourci\' du tableau</i>) &agrave; laquelle correspond un texte complet (<i>les entr&eacute;es \'texte affich&eacute;\' du tableau</i>), qui peut contenir une mise en forme et &ecirc;tre aussi long que souhait&eacute;.<br /></li><li><b>Nomenclature des raccourcis</b><br />Les raccourcis doivent &ecirc;tre des cha&icirc;nes de texte <u>sans espace et sans caract&egrave;res sp&eacute;ciaux</u> (<i>vous pouvez ici saisir vos raccourcis avec des espaces, qui seront remplac&eacute;s par des underscore</i>).</li><li><b>Mise en forme des textes</b><br />Vous pouvez r&eacute;diger vos textes de la m&ecirc;me mani&egrave;re que vos articles SPIP ...</li></ul>',
-	'ptexte_info_supp' => '<br /><b>Utilisation des cha&icirc;nes de cette page</b><br /><br />Les cha&icirc;nes de cette page sont enregistr&eacute;es dans un fichier de langue nomm&eacute; \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette fa&ccedil;on :<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />o&ugrave; "arguments" correspond &agrave; un array des arguments &agrave; passer &agrave; la cha&icirc;ne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par d&eacute;faut</i>).',
-	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent &ecirc;tre indiqu&eacute;s comme &eacute;crit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags pr&eacute;sents dans les textes ne sont pas list&eacute;s ici, conservez-les ...',
-	'pskels_titre_page' => 'Configuration des squelettes',
+	'proprietaire_titre_page' => 'Plateforme Mentions L&eacute;gales',
+	'proprietaire_titre_page_short' => 'Plateforme',
 	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de d&eacute;finir les informations concernant les <b>Cr&eacute;ateur</b> et <b>H&eacute;bergeur</b> du site afin de mettre en place automatiquement des <b>Mentions L&eacute;gales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes repr&eacute;sentent <u>le minimum l&eacute;gal pour tout site web</u> et sont tr&egrave;s g&eacute;n&eacute;riques ... Ils doivent &ecirc;tre consid&eacute;r&eacute;s comme une base de travail pour cr&eacute;er vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propri&eacute;taire\' si vous activez l\'option ci-dessous.',
 	'pskels_legal_legend_createur' => 'Informations sur le cr&eacute;ateur du site',
 	'pskels_legal_legend_hebergeur' => 'Informations sur l\'h&eacute;bergeur du site',
-	
+	'pskels_titre_page' => 'Configuration des squelettes',
+	'ptexte_cliquez_pour_editer' => 'Cliquez ici pour &eacute;diter l&prime;entr&eacute;e avec les raccourcis de mise en page',
+	'ptexte_editable_ttl' => 'Cliquez sur la ligne pour la modifier ...',
+	'ptexte_form_titre' => '&Eacute;dition compl&egrave;te / Nouvelle entr&eacute;e',
+	'ptexte_info_supp' => '<br /><b>Utilisation des cha&icirc;nes de cette page</b><br /><br />Les cha&icirc;nes de cette page sont enregistr&eacute;es dans un fichier de langue nomm&eacute; \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette fa&ccedil;on :<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />o&ugrave; "arguments" correspond &agrave; un array des arguments &agrave; passer &agrave; la cha&icirc;ne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par d&eacute;faut</i>).',
+	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent &ecirc;tre indiqu&eacute;s comme &eacute;crit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags pr&eacute;sents dans les textes ne sont pas list&eacute;s ici, conservez-les ...',
+	'ptexte_info_texte' => '<ul><li><b>Les fichiers de langue</b><br />Les entr&eacute;es des fichiers de langue se d&eacute;finissent en indiquant une cha&icirc;ne d\'appel (<i>les entr&eacute;es \'raccourci\' du tableau</i>) &agrave; laquelle correspond un texte complet (<i>les entr&eacute;es \'texte affich&eacute;\' du tableau</i>), qui peut contenir une mise en forme et &ecirc;tre aussi long que souhait&eacute;.<br /></li><li><b>Nomenclature des raccourcis</b><br />Les raccourcis doivent &ecirc;tre des cha&icirc;nes de texte <u>sans espace et sans caract&egrave;res sp&eacute;ciaux</u> (<i>vous pouvez ici saisir vos raccourcis avec des espaces, qui seront remplac&eacute;s par des underscore</i>).</li><li><b>Mise en forme des textes</b><br />Vous pouvez r&eacute;diger vos textes de la m&ecirc;me mani&egrave;re que vos articles SPIP ...</li></ul>',
+	'ptexte_info_titre' => 'Aide / Rappels ...',
+	'ptexte_supprimer' => 'Supprimer l\'entr&eacute;e',
+	'ptexte_texte' => 'Cette page vous permet de g&eacute;rer certains textes n&eacute;cessaires au site sans passer par le mode d\'&eacute;dition habituel (<i>modification du fichier de langue sur le serveur</i>).<br /><br />Les entr&eacute;es \'Texte affich&eacute;\' du tableau sont &eacute;ditables par un simple clic sur la ligne \'raccourci\' correspondante. Vous pouvez &eacute;galement ajouter des entr&eacute;es en utilisant le formulaire \'&Eacute;dition compl&egrave;te\'.',
+	'ptexte_titre_page' => 'Textes de langue propri&eacute;taire',
+	'ptexte_titre_page_short' => 'Textes de langue',
 
-// R //
-	'retour' => 'Retour',
-	'responsable_nom_label' => 'Nom du responsable',
+	// R
 	'responsable_fonction_label' => 'Fonction du responsable',
 	'responsable_mail_label' => 'Adresse mail du responsable',
+	'responsable_nom_label' => 'Nom du responsable',
+	'retour' => 'Retour',
 	'rue_label' => 'N&deg; et Rue',
 
-// S //
-//	'spip_proprio' => 'Propri&eacute;taire',
-	'spip_proprio' => 'Mentions L&eacute;gales',
-	'site_web_label' => 'Adresse de site web',
+	// S
+	'sauvegardes_dans_dump' => 'Vos sauvegardes sont &agrave; placer dans le r&eacute;pertoire \'tmp/dump/\'.',
 	'serveur_legend' => 'Informations sur le serveur h&eacute;bergeant le site',
-	'serveur_type_label' => 'Type du serveur',
-	'serveur_type_comment' => 'Caract&eacute;ristiques techniques du serveur qui h&eacute;berge le site.',
-	'serveur_os_label' => 'Fonctionnant sur un syst&egrave;me',
 	'serveur_os_comment' => 'OS install&eacute; sur ce serveur.',
+	'serveur_os_label' => 'Fonctionnant sur un syst&egrave;me',
 	'serveur_os_web_label' => 'Lien web d\'informations sur ce syst&egrave;me',
-	'sous_le_numero' => ' sous le num&eacute;ro ',
+	'serveur_type_comment' => 'Caract&eacute;ristiques techniques du serveur qui h&eacute;berge le site.',
+	'serveur_type_label' => 'Type du serveur',
 	'siege' => 'Si&egrave;ge',
 	'siren' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises">SIREN</abbr>',
-	'siret' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ETablissements">SIRET</abbr>',
 	'siren_abbrev' => 'Siren',
+	'siret' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ETablissements">SIRET</abbr>',
 	'siret_abbrev' => 'Siret',
-	'sauvegardes_dans_dump' => 'Vos sauvegardes sont &agrave; placer dans le r&eacute;pertoire \'tmp/dump/\'.',
+	'site_web_label' => 'Adresse de site web',
+	'sous_le_numero' => ' sous le num&eacute;ro ',
+	'spip_proprio' => 'Mentions L&eacute;gales',
 
-// T //
-	'telephone_label' => 'Num&eacute;ro de t&eacute;l&eacute;phone',
-	'telecopie_label' => 'Num&eacute;ro de t&eacute;l&eacute;copie',
-	'tva_nonapplicable_label' => 'TVA non-applicable',
-	'tva_nonapplicable_comment' => 'Non soumis &agrave; la TVA selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr> ; r&eacute;gime micro-social.',
+	// T
 	'tel' => 'T&eacute;l&eacute;phone',
 	'tel_abbrev' => 'T&eacute;l',
-	'tva_intracommunautaire' => 'T.V.A. Intracommunautaire',
-	'tva_intracommunautaire_abbrev' => 'TVA intr.',
-	'tva_non_applicable' => 'TVA non-applicable selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr>',
-	// Page de test public
-	'testing_page_public' => 'Page de test',
-	'testing_page_titre' => 'Test de la configuration propri&eacute;taire',
+	'telecopie_label' => 'Num&eacute;ro de t&eacute;l&eacute;copie',
+	'telephone_label' => 'Num&eacute;ro de t&eacute;l&eacute;phone',
+	'testing_page_bloc' => 'Bloc d\'informations',
+	'testing_page_bloc_complet' => 'Bloc de contact complet',
+	'testing_page_business_cards' => 'Business Cards (<i>v-card et cartes de visite</i>)',
+	'testing_page_business_cards_complet' => 'Textes "business cards" complet',
+	'testing_page_carte_visite' => 'Cartes de visite (<i>en d&eacute;veloppement</i>)',
+	'testing_page_carte_visite_administrateur' => 'Carte de visite adminitrateur',
+	'testing_page_carte_visite_chef' => 'Carte de visite du responsable',
+	'testing_page_carte_visite_normale' => 'Carte de visite "classique" (<i>d&eacute;faut</i>)',
+	'testing_page_carte_visite_site' => 'Carte de visite compl&egrave;te du site (<i>liens web</i>)',
+	'testing_page_carte_visite_webmaster' => 'Carte de visite du webmestre',
+	'testing_page_code' => 'Code : ',
+	'testing_page_copyright' => 'Informations de copyright',
+	'testing_page_footer' => 'Information de copyright',
+	'testing_page_googlemap' => 'Googlemap',
 	'testing_page_intro' => 'Cette page vous permet de visualiser les diff&eacute;rents agencements d’informations propos&eacute;s par le plugin. Pour chaque entr&eacute;e est indiqu&eacute; le code d’appel ({balise ou mod&egrave;les}) &agrave; indiquer dans vos squelettes.
 	
 Nous vous conseillons &eacute;galement de jeter un oeil au squelette [mentions l&eacute;gales->@mentions_legales@].',
-	'testing_page_code' => 'Code : ',
-	'testing_page_modele' => 'Mod&egrave;le : ',
-	'testing_page_bloc' => 'Bloc d\'informations',
-	'testing_page_bloc_complet' => 'Bloc de contact complet',
-	'testing_page_footer' => 'Information de copyright',
-	'testing_page_public' => 'Page de test',
-	'testing_page_titre' => 'Test de la configuration propri&eacute;taire',
-	'testing_page_bloc' => 'Bloc d\'informations',
-	'testing_page_bloc_complet' => 'Bloc de contact complet',
-	'testing_page_footer' => 'Information de copyright',
-	'testing_page_googlemap' => 'Googlemap',
-	'testing_page_carte_visite' => 'Cartes de visite (<i>en d&eacute;veloppement</i>)',
-	'testing_page_carte_visite_normale' => 'Carte de visite "classique" (<i>d&eacute;faut</i>)',
-	'testing_page_carte_visite_chef' => 'Carte de visite du responsable',
-	'testing_page_carte_visite_webmaster' => 'Carte de visite du webmestre',
-	'testing_page_carte_visite_administrateur' => 'Carte de visite adminitrateur',
-	'testing_page_carte_visite_site' => 'Carte de visite compl&egrave;te du site (<i>liens web</i>)',
-	'testing_page_business_cards' => 'Business Cards (<i>v-card et cartes de visite</i>)',
 	'testing_page_liens_cartes_visite' => 'Information et lien vers les cartes de visite',
-	'testing_page_vcard' => 'Information et lien vers la "vCard"',
-	'testing_page_business_cards_complet' => 'Textes "business cards" complet',
-	'testing_page_copyright' => 'Informations de copyright',
+	'testing_page_modele' => 'Mod&egrave;le : ',
+	'testing_page_public' => 'Page de test',
 	'testing_page_textes_proprietaire' => 'Utilisation des textes propri&eacute;taires',
+	'testing_page_titre' => 'Test de la configuration propri&eacute;taire',
+	'testing_page_vcard' => 'Information et lien vers la "vCard"',
+	'tva_intracommunautaire' => 'T.V.A. Intracommunautaire',
+	'tva_intracommunautaire_abbrev' => 'TVA intr.',
+	'tva_non_applicable' => 'TVA non-applicable selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr>',
+	'tva_nonapplicable_comment' => 'Non soumis &agrave; la TVA selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr> ; r&eacute;gime micro-social.',
+	'tva_nonapplicable_label' => 'TVA non-applicable',
 
-// U //
+	// U
 	'utiliser_ce_plugin' => 'Utiliser ce plugin ...',
 
-// V //
-	'ville_label' => 'Ville',
-
+	// V
+	'ville_label' => 'Ville'
 );
+
 ?>

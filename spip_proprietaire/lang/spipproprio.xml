@@ -1,5 +1,3 @@
-<traduction module="spip_proprio" gestionnaire="salvatore" reference="fr">
-	<langue code="proprio_en" />
-	<langue code="proprio_fr" />
-	<langue code="proprio_proprio_" />
+<traduction module="spipproprio" gestionnaire="salvatore" reference="fr">
+	<langue code="en" />
 </traduction>
