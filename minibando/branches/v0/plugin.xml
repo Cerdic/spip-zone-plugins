@@ -14,7 +14,7 @@
 		<nom>formulaire_admin</nom>
 		<inclure>minibando_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.3;2.2.0-dev]" />
+	<necessite id="SPIP" version="[2.0.3;3.0.0]" />
 	<necessite id="bando" version="[1.1.5;]" />
 	<categorie>navigation</categorie>
 </plugin>
