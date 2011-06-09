@@ -28,7 +28,7 @@
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>
 <necessite id="SPIP" version="[3.0.0-dev;]" />
-<utilise id='Zdist' version="[;]" />
+<utilise id='Zpip' version="[;]" />
 <categorie>communication</categorie>
 <bouton id='comments' parent='bando_squelette'>
 	<icone>images/comment-16.png</icone>
