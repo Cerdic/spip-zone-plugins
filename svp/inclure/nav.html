@@ -1,18 +1,18 @@
-<div class="menu">
-	<ul class="menu-items menu-liste">
-		<li class="item menu-entree">
+<div class="menu menu-container">
+	<ul class="menu-items">
+		<li class="item[(#ENV{type}|=={plugins}|oui) on]">
 			<a title="<:svp:bulle_aller_plugins:>" href="#URL_PAGE{plugins}"><:svp:titre_page_plugins:></a>
 		</li>
-		<li class="item menu-entree">
+		<li class="item[(#ENV{type}|=={telechargements}|oui) on]">
 			<a title="<:svp:bulle_aller_telechargements:>" href="#URL_PAGE{telechargements}"><:svp:titre_page_telechargements:></a>
 		</li>
-		<li class="item menu-entree">
+		<li class="item[(#ENV{type}|=={depots}|oui) on]">
 			<a title="<:svp:bulle_aller_depots:>" href="#URL_PAGE{depots}"><:svp:titre_page_depots:></a>
 		</li>
-		<li class="item menu-entree">
+		<li class="item[(#ENV{type}|=={statistiques}|oui) on]">
 			<a title="<:svp:bulle_aller_statistiques:>" href="#URL_PAGE{statistiques}"><:svp:titre_page_statistiques:></a>
 		</li>
-		<li class="item menu-entree">
+		<li class="item[(#ENV{type}|=={prefixes}|oui) on]">
 			<a title="<:svp:bulle_aller_prefixes:>" href="#URL_PAGE{prefixes}"><:svp:titre_page_prefixes:></a>
 		</li>
 	</ul>

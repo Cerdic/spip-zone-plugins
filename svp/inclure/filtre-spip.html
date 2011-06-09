@@ -11,9 +11,9 @@
 
 ]
 <B_branches>
-[<h2 class="h2">(#ENV{titre})</h2>]
-<div class="liste branches-spip">
-	<ul class="liste-items">
+<div class="menu branches-spip">
+	[<h2 class="h2">(#ENV{titre})</h2>]
+	<ul class="menu-items">
 <BOUCLE_branches(DATA){source table, #CONFIG*{svp_branches_spip}}{!par valeur}>
 		<li class="item">
 		[(#ENV{compatible_spip}|=={#VALEUR}|oui)
@@ -27,7 +27,7 @@
 			]
 		]
 		[(#ENV{compatible_spip}|=={#VALEUR}|non) 
-			<a class="on"[ href="(#SELF|parametre_url{compatible_spip, #VALEUR})"][ title="(#ENV{bulle_lien})"]>
+			<a [ href="(#SELF|parametre_url{compatible_spip, #VALEUR})"][ title="(#ENV{bulle_lien})"]>
 				SPIP #VALEUR
 			</a>
 		]

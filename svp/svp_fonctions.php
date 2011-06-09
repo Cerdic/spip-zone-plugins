@@ -101,20 +101,20 @@ function svp_afficher_statistiques_globales($id_depot=0){
 	$total = svp_compter('depot', $id_depot);
 	if (!$id_depot) {
 		// Si on filtre pas sur un depot alors on affiche le nombre de depots
-		$info = '<li id="stats-depot" class="liste-items">
-					<div class="unit size80">' . ucfirst(trim(_T('svp:info_depots_disponibles', array('total_depots'=>'')))) . '</div>
-					<div class="unit size20 lastUnit">' . $total['depot'] . '</div>
+		$info = '<li id="stats-depot" class="item">
+					<div class="unit size4of5">' . ucfirst(trim(_T('svp:info_depots_disponibles', array('total_depots'=>'')))) . '</div>
+					<div class="unit size1of5 lastUnit">' . $total['depot'] . '</div>
 				</li>';
 	}
 	// Compteur des plugins filtre ou pas par depot
-	$info .= '<li id="stats-plugin" class="liste-items">
-				<div class="unit size80">' . ucfirst(trim(_T('svp:info_plugins_heberges',  array('total_plugins'=>'')))) . '</div>
-				<div class="unit size20 lastUnit">' . $total['plugin'] . '</div>
+	$info .= '<li id="stats-plugin" class="item">
+				<div class="unit size4of5">' . ucfirst(trim(_T('svp:info_plugins_heberges',  array('total_plugins'=>'')))) . '</div>
+				<div class="unit size1of5 lastUnit">' . $total['plugin'] . '</div>
 			</li>';
 	// Compteur des paquets filtre ou pas par depot
-	$info .= '<li id="stats-paquet" class="liste-items">
-				<div class="unit size80">' . ucfirst(trim(_T('svp:info_paquets_disponibles', array('total_paquets'=>'')))) . '</div>
-				<div class="unit size20 lastUnit">' . $total['paquet'] . '</div>
+	$info .= '<li id="stats-paquet" class="item">
+				<div class="unit size4of5">' . ucfirst(trim(_T('svp:info_paquets_disponibles', array('total_paquets'=>'')))) . '</div>
+				<div class="unit size1of5 lastUnit">' . $total['paquet'] . '</div>
 			</li>';
 
 	return $info;

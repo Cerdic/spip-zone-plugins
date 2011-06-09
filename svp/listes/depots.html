@@ -1,26 +1,31 @@
+<div id="depots">
 <B_depots>
-<table summary="<:svp:resume_table_depots:>" class="spip">
-	<tbody>
+	<table class="spip" summary="<:svp:resume_table_depots:>">
+		<tbody>
 <BOUCLE_depots(DEPOTS){par titre}>
-		<tr class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
-			<td>
-				<a[ href="(#URL_DEPOT)"] title="<:svp:bulle_afficher_depot:>">
-					[(#TITRE)]
-				</a>
-			</td>
-			<td>[(#LOGO_DEPOT|image_reduire{16})]</td>
-			<td>
-				[(#NBR_PLUGINS) [(#NBR_PLUGINS|singulier_ou_pluriel{svp:label_1_plugin, svp:label_n_plugins})]]
-				[, (#NBR_PAQUETS) [(#NBR_PAQUETS|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]
-			</td>
-			<td>[<:svp:label_actualise_le:> (#MAJ|affdate{d-m H:i})]</td>
-		</tr>
+			<tr class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+				<td>
+					<a[ href="(#URL_DEPOT)"] title="<:svp:bulle_afficher_depot:>">
+						[(#TITRE)]
+					</a>
+				</td>
+				<td>[(#LOGO_DEPOT|image_reduire{16})]</td>
+				<td>
+					[(#NBR_PLUGINS) [(#NBR_PLUGINS|singulier_ou_pluriel{svp:label_1_plugin, svp:label_n_plugins})]]
+					[, (#NBR_PAQUETS) [(#NBR_PAQUETS|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]
+				</td>
+				<td>[<:svp:label_actualise_le:> (#MAJ|affdate{d-m H:i})]</td>
+			</tr>
 </BOUCLE_depots>
-	</tbody>
-</table>
-[(#EVAL{_SVP_CRON_ACTUALISATION_DEPOTS}|oui)
-<p><:svp:info_actualisation_cron{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_DEPOTS}}:></p>
-]
+		</tbody>
+	</table>
+	[(#EVAL{_SVP_CRON_ACTUALISATION_DEPOTS}|oui)
+	<p><:svp:info_actualisation_depot_cron{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_DEPOTS}}:></p>
+	]
+	[(#EVAL{_SVP_CRON_ACTUALISATION_STATS}|oui)
+	<p><:svp:info_actualisation_stats_cron{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_STATS}}:></p>
+	]
 </B_depots>
 	<p><:svp:info_liste_aucun_depot:></p>
 <//B_depots>
+</div>

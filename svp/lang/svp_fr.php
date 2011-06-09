@@ -54,7 +54,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categorie_theme' => 'Thème',
 	'categorie_toute' => 'Toutes les catégories',
 // I
-	'info_actualisation_cron' => 'Les dépôts sont actualisés automatiquement toutes les @periode@ heure(s).',
+	'info_actualisation_depot_cron' => 'Les plugins des dépôts sont actualisés automatiquement toutes les @periode@ heure(s).',
+	'info_actualisation_stats_cron' => 'Les statistiques d\'utilisation des plugins sont actualisées automatiquement tous les @periode@ jour(s).',
 	'info_adresse_spipzone' => 'SPIP-Zone',
 	'info_ajouter_depot' => 'En ajoutant des dépôts à votre base, vous aurez la possiblité d\'obtenir des informations et d\'effectuer des recherches sur tous les paquets hébergés par les dépôts ajoutés.<br />Un dépôt est décrit par un fichier XML contenant les informations sur le dépôt et sur tous ses paquets.',
 	'info_aucun_depot_disponible' => 'Aucun dépôt disponible.',
@@ -156,6 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_etat_tout' => 'Tous les états',
 // R
 	'resume_table_depots' => 'Liste des dépôts ajoutés',
+	'resume_table_plugins' => 'Liste des plugins de la catégorie @categorie@',
 // T
 	'titre_bloc_depots' => 'DÉPÔTS',
 	'titre_boite_autres_depots' => 'Autres dépôts',
@@ -165,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_boite_paquets_plugin_depot' => 'Paquets du dépôt correspondant à des plugins',
 	'titre_filtre_categorie' => 'Filtrer par catégorie',
 	'titre_filtre_depot' => 'Filtrer par dépôt',
-	'titre_filtre_spip' => 'Filtrer par branche SPIP',
+	'titre_filtre_spip' => 'Filtrer par branche',
 	'titre_form_ajouter_depot' => 'Ajouter un dépôt',
 	'titre_head_modifier_depot' => 'Modifier : @depot@',
 	'titre_head_svp' => 'SVP',

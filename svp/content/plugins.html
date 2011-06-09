@@ -11,13 +11,14 @@
 </p>
 
 [(#REM) Cartouche avec le titre de la page et les informations generales ]
-<div class="cartouche">
-	<h1 class="h1"><:svp:titre_page_plugins:></h1>
-	[<p class="info-publi">
-		<small>(#ENV{id_depot}|svp_compter_plugins{#ENV{categorie}, #ENV{compatible_spip}})</small>
-	</p>]
+<div class="content-principal">
+	<div class="cartouche">
+		<h1 class="h1"><:svp:titre_page_plugins:></h1>
+		[<p class="info-publi">
+			<small>(#ENV{id_depot}|svp_compter_plugins{#ENV{categorie}, #ENV{compatible_spip}})</small>
+		</p>]
+	</div>
 </div>
-<br class="nettoyeur" />
 
 [(#REM) Tableau des infos de synthese des plugins ]
 <INCLURE{fond=listes/plugins}{env} />

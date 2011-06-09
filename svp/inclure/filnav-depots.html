@@ -14,9 +14,9 @@
 
 ]
 <B_depots>
-[<h2 class="h2">(#ENV{titre})</h2>]
-<div class="liste depots">
-	<ul class="liste-items">
+<div class="menu depots">
+	[<h2 class="h2">(#ENV{titre})</h2>]
+	<ul class="menu-items">
 <BOUCLE_depots(DEPOTS) {par titre}>
 		<li class="item">
 			[<(#EXPOSE{span, a[ href="(#ENV{url_lien}|non|?{#URL_DEPOT, #ENV{url_lien}|parametre_url{id_depot, #ID_DEPOT}})"]})][ class="(#EXPOSE)"][ title="(#ENV{bulle_lien})"]>

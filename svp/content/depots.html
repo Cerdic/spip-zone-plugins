@@ -11,13 +11,14 @@
 </p>
 
 [(#REM) Cartouche avec le titre de la page et les informations generales ]
-<div class="cartouche">
-	<h1 class="h1"><:svp:titre_page_depots:></h1>
-	[<p class="info-publi">
-		<small>(#VAL{0}|svp_compter_depots)</small>
-	</p>]
+<div class="content-principal">
+	<div class="cartouche">
+		<h1 class="h1"><:svp:titre_page_depots:></h1>
+		[<p class="info-publi">
+			<small>(#VAL{0}|svp_compter_depots)</small>
+		</p>]
+	</div>
 </div>
-<br class="nettoyeur" />
 
 [(#REM) Tableau des infos de synthese des depots ]
 <INCLURE{fond=listes/depots}{env} />
