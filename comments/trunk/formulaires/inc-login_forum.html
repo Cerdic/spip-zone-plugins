@@ -8,10 +8,10 @@
 ]
 <fieldset class="qui[ (#SESSION{auth}|?{session_qui,saisie_qui})]">
 	<legend><:comments:forum_qui_etes_vous:></legend>
-[(#SESSION{auth}|oui)
+[(#SESSION{statut}|oui)
 	[<p><:comments:label_nom:> <strong>(#SESSION{nom}|typo)</strong> <span class="details">&#91;<a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>&#93;</span></p>]
 ]
-[(#SESSION{auth}|non)
+[(#SESSION{statut}|non)
 	<ul>
 		<li class='editer saisie_session_nom'>
 			<label for="session_nom"><:comments:label_nom:></label>
