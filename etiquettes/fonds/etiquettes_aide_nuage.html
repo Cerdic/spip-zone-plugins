@@ -60,7 +60,7 @@
 		[(#SET{score,[(#GET{score}|plus{0.900001})]})]
 		[(#SET{unite,[(#GET{score}|floor)]})]
 		[(#SET{decimale,[(#GET{score}|moins{#GET{unite}}|mult{10}|floor)]})]
-		<li><span style="font-size: #GET{unite}[.(#GET{decimale})]em;">#TITRE*</span></li>
+		<li><span style="font-size: #GET{unite}[.(#GET{decimale})]em;">[(#TITRE*|extraire_multi)]</span></li>
 	]</BOUCLE_mots>
 </ul>
 </B_mots>
