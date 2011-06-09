@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'adapte_de' => 'adapt&eacute; de',
+	'accueil' => 'Accueil',
 	// B
 
 	// C
