@@ -21,9 +21,9 @@
 			<div class='squelette'>
 				<:zengarden:intitule_compatiblite_squelette:>
 				<ul>
-				<BOUCLE_squelettes(POUR){tableau #VALEUR|table_valeur{utilise}}>[(#VALEUR|table_valeur{id}|=={Z}|non)[
+				<BOUCLE_squelettes(POUR){tableau #VALEUR|table_valeur{utilise}}>[(#VALEUR|table_valeur{id}|in_any{#ARRAY{0,Z,1,Zpip}}|non)[
 							<li>
-								(#VALEUR|table_valeur{name}|propre|PtoBR)
+								(#VALEUR|table_valeur{name}|sinon{#VALEUR|table_valeur{id}}|propre|PtoBR)
 								[: (#VALEUR|table_valeur{version}|zengarden_affiche_version_compatible|propre|PtoBR)]
 							</li>
 				]]</BOUCLE_squelettes>
@@ -44,6 +44,6 @@
 <br class="nettoyeur" />
 [<p class='pagination'>(#PAGINATION)</p>]
 
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.qtip-1.0.0-rc3.js}" ></script>
-<script type="text/javascript" src="#CHEMIN{javascript/jquery.qtip.activate.js}" ></script>
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.qtip-1.0.0-rc3.js})" ></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.qtip.activate.js})" ></script>]
 </B_themes>
