@@ -11,11 +11,11 @@ La version {Kiss} ({Keep it simple, stupid!}) est moins param&eacute;trable que 
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.6</version>
+	<version>1.7</version>
 	<version_base>0.6</version_base>
 	<etat>stable</etat>
 
-	<prefix>tickets</prefix>
+	<prefix>ticketskiss</prefix>
 
 	<options>tickets_options.php</options>
 	<fonctions>tickets_fonctions.php</fonctions>
