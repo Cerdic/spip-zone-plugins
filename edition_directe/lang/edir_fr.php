@@ -6,32 +6,30 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activer_edition_directe'=>'Activer l\'édition directe pour :',
-	'article'=>'Articles',
-	'auteur'=>'Auteurs',	
-		
+	'activer_edition_directe' => 'Activer l\'édition directe pour :',
+	'article' => 'Articles',
+	'auteur' => 'Auteurs',
+
 	// B
-	'breve'=>'Brèves',	
-			
+	'breve' => 'Brèves',
+
 	// G
-	'groupe_mots'=>'Groupes Mots',
-					
+	'groupe_mots' => 'Groupes Mots',
+
 	// M
-	'mot'=>'Mots',					
-		
+	'mot' => 'Mots',
+
 	// R
-	'rubrique'=>'Rubriques',
-	
+	'rubrique' => 'Rubriques',
+
 	// S
-	'site'=>'Sites',			
-			
+	'site' => 'Sites',
+
 	// T
 	'titre_plugin' => 'Edition directe',
-	
-	// V
-	'vider_cache' => 'Veuillez vider le cache',
-	
 
+	// V
+	'vider_cache' => 'Veuillez vider le cache'
 );
 
 ?>

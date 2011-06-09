@@ -1,37 +1,37 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/edition_directe/lang/
+// extrait automatiquement de http://www.spip.net/trad-lang/
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activer_edition_directe'=>'Activate direct edition for :',
-	'article'=>'Articles',
-	'auteur'=>'Authors',	
-		
+	'activer_edition_directe' => 'Activate direct edition for :',
+	'article' => 'Articles',
+	'auteur' => 'Authors',
+
 	// B
-	'breve'=>'News item',	
-			
+	'breve' => 'News item',
+
 	// G
-	'groupe_mots'=>'Keyword Groups',
-					
+	'groupe_mots' => 'Keyword Groups',
+
 	// M
-	'mot'=>'Key word',					
-		
+	'mot' => 'Key word',
+
 	// R
-	'rubrique'=>'Sections',
-	
+	'rubrique' => 'Sections',
+
 	// S
-	'site'=>'Sites',			
-			
+	'site' => 'Sites',
+
 	// T
 	'titre_plugin' => 'Direct Edition',
-	
-	// V
-	'vider_cache' => 'Please empty the cache',
-	
 
+	// V
+	'vider_cache' => 'Please empty the cache'
 );
 
 ?>
