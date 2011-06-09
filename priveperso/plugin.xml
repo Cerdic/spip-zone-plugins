@@ -1,17 +1,22 @@
 <plugin>
-	<nom>Personnaliser l'espace privé</nom>
-	<auteur>Sébastien Zamith</auteur>
+	<nom>Personnaliser l'espace priv&eacute;</nom>
+	<auteur>S&eacute;bastien Zamith</auteur>
 	<icon>images/priveperso-24.png</icon>
 	<version>0.5</version>
 	<version_base>0.3</version_base>
 	<licence>GNU/GPL v3</licence>
 	<etat>test</etat>
-	<description>Personnalisation de l'espace priv&eacute; par rubriques.</description>
+	<description>
+	Ce plugin permet de reprendre une partie des options de configurations du site 
+	(activer les br&egrave;ves, la syndication, les mots cl&eacute;s, etc.)
+	et de les adapter en fonction des rubriques. De m&ecirc;me il est possible de personnaliser
+	les champs de saisie de l’espace priv&eacute; pour les objets &eacute;ditoriaux.
+	</description>
 	<lien>http://www.spip-contrib.net/Plugin-personnaliser-l-espace-prive-par-rubriques</lien>
 	<install>base/install_priveperso.php</install>
 	<prefix>priveperso</prefix>
-	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0;]" />
+	<categorie>maintenance</categorie>
+	<necessite id="SPIP" version="[2.0.0;3.0.0)" />
 	<onglet id='priveperso' parent='configuration'>
 		<url>priveperso</url>
    	<icone>images/priveperso-24.png</icone>
