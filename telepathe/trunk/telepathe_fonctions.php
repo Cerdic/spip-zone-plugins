@@ -80,3 +80,23 @@ function pretty_json_encode($x, $callback=null) {
 	return json_encode($x);
 */
 }
+
+function telepathe_http_header($format, $callback=null) {
+	switch($format) {
+		case 'json':
+			if ($callback)
+				$f = 'text/javascript'; # JSONP
+			else
+				$f = 'text/plain';
+			break;
+		case 'yaml':
+			$f = 'text/plain';
+			break;
+		case 'xml':
+			$f = 'text/xml';
+			break;
+	}
+
+	if (isset($f))
+		return '<'.'?php header("Content-Type: '.$f.'; charset='.$GLOBALS['meta']['charset'].'"); ?'.'>';
+}

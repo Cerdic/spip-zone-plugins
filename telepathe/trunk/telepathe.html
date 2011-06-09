@@ -1,9 +1,4 @@
-[(#FORMAT|match{json|yaml}|oui)
-#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}
-]
-[(#FORMAT|match{xml}|oui)
-#HTTP_HEADER{Content-Type: text/xml; charset=#CHARSET}
-]
+[(#FORMAT**|telepathe_http_header{#CALLBACK})]
 
 [(#INCLURE{fond=idees/#IDEE,env})]
 
