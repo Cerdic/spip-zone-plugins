@@ -8,66 +8,66 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aucun_contact' => 'Il n\'y a aucun contact !', # NEW
-	'aucune_organisation' => 'Il n\'y a aucune organisation !', # NEW
+	'aucun_contact' => 'There is no contact !',
+	'aucune_organisation' => 'There is no organization',
 
 	// B
 	'bouton_contacts' => 'Contacts',
-	'bouton_contacts_organisations' => 'Contacts & Organisations', # NEW
+	'bouton_contacts_organisations' => 'Contacts & Organizations',
 	'bouton_organisations' => 'Organisations',
 	'bouton_rechercher' => 'Search',
-	'bouton_repertoire' => 'Répertoire', # NEW
+	'bouton_repertoire' => 'Directory',
 
 	// C
-	'changer' => 'Changer', # NEW
-	'chercher_contact' => 'Chercher', # NEW
-	'chercher_organisation' => 'Chercher', # NEW
-	'chercher_statut' => 'Statut', # NEW
-	'confirmer_delier_contact' => 'Are you sure you want to unlink this organisation from this contact ?',
-	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organisation ?',
-	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact ?',
-	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation ?',
-	'contact' => 'Un contact', # NEW
-	'contact_associe_a_auteur_numero' => 'Associée à auteur numéro', # NEW
-	'contact_associer_a_auteur' => 'Associer à un auteur', # NEW
-	'contact_creer' => 'Créer un contact', # NEW
-	'contact_editer' => 'Éditer ce contact', # NEW
-	'contact_modifier' => 'Modifier un contact', # NEW
-	'contact_nouveau' => 'Nouveau contact', # NEW
-	'contact_numero' => 'Contact numéro', # NEW
-	'contact_voir' => 'Voir', # NEW
+	'changer' => 'Change',
+	'chercher_contact' => 'Search',
+	'chercher_organisation' => 'Search',
+	'chercher_statut' => 'Status',
+	'confirmer_delier_contact' => 'Are you sure you want to unlink this organisation from this contact?',
+	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organisation?',
+	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?',
+	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
+	'contact' => 'One contact',
+	'contact_associe_a_auteur_numero' => 'Link to author number',
+	'contact_associer_a_auteur' => 'Link to an author',
+	'contact_creer' => 'Create a contact',
+	'contact_editer' => 'Edit this contact',
+	'contact_modifier' => 'Modify a contact',
+	'contact_nouveau' => 'New contact',
+	'contact_numero' => 'Contact number',
+	'contact_voir' => 'See',
 	'contacts' => 'Contacts',
-	'contacts_nb' => '@nb@ contacts', # NEW
-	'creer_auteur_contact' => 'Cr&eacute;er un nouvel auteur et le lier &agrave; ce contact', # NEW
-	'creer_auteur_organisation' => 'Cr&eacute;er un nouvel auteur et le lier &agrave; cette organisation', # NEW
+	'contacts_nb' => '@nb@ contacts',
+	'creer_auteur_contact' => 'Create a new author and link it to this contact',
+	'creer_auteur_organisation' => 'Create a new author and link it to this organization',
 
 	// D
 	'definir_auteur_comme_contact' => 'Set as contact',
 	'definir_auteur_comme_organisation' => 'Set as organisation',
-	'delier_cet_auteur' => 'Désassocier', # NEW
+	'delier_cet_auteur' => 'Unlink',
 
 	// E
 	'est_un_contact' => 'This author is set as a contact.',
-	'est_une_organisation' => 'This author is set as an organisation.',
-	'explication_activite' => 'Activiity of the organisation : NGO, education, edition...',
-	'explication_contacts_ou_organisations' => 'You can set this author as a contact or as an organisation.Vous pouvez définir cet auteur
-		Additional fields can be then lieeed from the author modification page.',
+	'est_une_organisation' => 'This author is set as an organization.',
+	'explication_activite' => 'Activity of the organization : NGO, education, edition...',
+	'explication_contacts_ou_organisations' => 'You can set this author as a contact or as an organization.Vous pouvez définir cet auteur
+  Additional fields can be then filled from the author modification page.',
 	'explication_identification' => 'Organisation identification : VAT, etc.',
 	'explication_statut_juridique' => 'company, organisation, ...',
-	'explication_supprimer_contact' => 'Deleting this contact will suppress all the additional information which has been filed on the author page.',
-	'explication_supprimer_organisation' => 'Deleting this organisation will suppress all the additional information which has been filed on the author page.',
-	'explications_page_contacts' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
-	<li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
-	'explications_page_organisations' => 'Page en cours de d&eacute;veloppement. <br /><br />Actions envisag&eacute;es :<ul>
-	<li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explication_supprimer_contact' => 'Deleting this contact will remove all the additional informations which have been filled on the author page.',
+	'explication_supprimer_organisation' => 'Deleting this organization will remove all the additional informations which have been filled on the author page.',
+	'explications_page_contacts' => '<MODIF>Page en cours de développement. <br /><br />Actions envisagées :<ul>
+ <li>voir tous les contacts</li><li>transformer les auteurs en contacts</li><li>importer des contacts</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
+	'explications_page_organisations' => '<MODIF>Page en cours de développement. <br /><br />Actions envisagées :<ul>
+ <li>voir toutes les organisations</li><li>transformer des auteurs en organisations</li><li>importer des organsations</li><li>...</li></ul><br />Merci pour vos suggestions sur <a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations#pagination_comments-list">le forum</a> ;-)',
 
 	// I
 	'info_contacts_organisation' => 'Organisation\'s contacts',
 	'info_nb_contacts' => 'Linked contacts',
 	'info_organisation_appartenance' => 'Belonging Organisation',
-	'info_organisations_appartenance' => 'Organisations d\'appartenance', # NEW
-	'info_organisations_filles' => 'Organisations filles', # NEW
-	'info_organisations_meres' => 'Organisations mères', # NEW
+	'info_organisations_appartenance' => 'Membership organizations',
+	'info_organisations_filles' => 'Children organizations',
+	'info_organisations_meres' => 'Parents organizations',
 	'info_tous_contacts' => 'All the contacts',
 	'info_toutes_organisations' => 'All the organisations',
 	'infos_contacts_ou_organisations' => 'Contacts & Organisations',
@@ -84,18 +84,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_nom' => 'Name',
 	'label_nom_organisation' => 'Organisation',
 	'label_organisation' => 'Linked organisation',
-	'label_organisation_parente' => 'Organisation parente', # NEW
+	'label_organisation_parente' => 'Parent organization',
 	'label_prenom' => 'First name',
 	'label_prenom_nom' => 'First + last name',
 	'label_pseudo' => 'Pseudo',
-	'label_recherche_auteurs' => 'Chercher dans les auteurs', # NEW
+	'label_recherche_auteurs' => 'Search in authors',
 	'label_recherche_contacts' => 'Search in contacts',
 	'label_recherche_organisations' => 'Search in organisations',
 	'label_statut_juridique' => 'Status',
 	'label_telephone' => 'Phone',
-	'label_type_liaison' => 'Liaison', # NEW
+	'label_type_liaison' => 'Link',
 	'lier_ce_contact' => 'Attach this contact',
-	'lier_cet_auteur' => 'Lier', # NEW
+	'lier_cet_auteur' => 'Link',
 	'lier_cette_organisation' => 'Attach to this organisation',
 	'lier_contact' => 'Attach a contact',
 	'lier_organisation' => 'Attach to an organisation',
@@ -103,26 +103,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_organisations' => 'List of all organisations in the database',
 
 	// N
-	'nb_contact' => '1 contact', # NEW
-	'nb_contacts' => '@nb@ contacts', # NEW
+	'nb_contact' => '1 contact',
+	'nb_contacts' => '@nb@ contacts',
 
 	// O
-	'organisation_associe_a_auteur_numero' => 'Associée à auteur numéro', # NEW
-	'organisation_associer_a_auteur' => 'Associer à un auteur', # NEW
-	'organisation_creer' => 'Créer une organisation', # NEW
-	'organisation_creer_fille' => 'Créer une organisation fille', # NEW
-	'organisation_editer' => 'Éditer cette organisation', # NEW
-	'organisation_modifier' => 'Modifier une organisation', # NEW
-	'organisation_nouveau' => 'Nouvelle organisation', # NEW
-	'organisation_numero' => 'Organisation numéro', # NEW
-	'organisation_un' => 'Une organisation', # NEW
-	'organisation_voir' => 'Voir', # NEW
+	'organisation_associe_a_auteur_numero' => 'Linked to author number',
+	'organisation_associer_a_auteur' => 'Link to an author',
+	'organisation_creer' => 'Create an organization',
+	'organisation_creer_fille' => 'Create a child organization',
+	'organisation_editer' => 'Edit this organizatino',
+	'organisation_modifier' => 'Modify an organization',
+	'organisation_nouveau' => 'New organization',
+	'organisation_numero' => 'Organization number',
+	'organisation_un' => 'One organization',
+	'organisation_voir' => 'See',
 	'organisations' => 'Organisations',
-	'organisations_nb' => '@nb@ organisations', # NEW
+	'organisations_nb' => '@nb@ organizations',
 
 	// R
-	'recherche_de' => 'Recherche de «@recherche@»', # NEW
-	'rechercher' => 'Rechercher', # NEW
+	'recherche_de' => 'Search for "@recherche@"',
+	'rechercher' => 'Search',
 
 	// S
 	'supprimer_contact' => 'Delete this contact',
@@ -130,10 +130,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_contact' => 'Contact details',
-	'titre_organisation' => 'Organisation details',
+	'titre_organisation' => 'Organization details',
 	'titre_page_contacts' => 'Contacts management',
 	'titre_page_organisations' => 'Organisations management',
-	'titre_page_repertoire' => 'Répertoire' # NEW
+	'titre_page_repertoire' => 'Directory'
 );
 
 ?>
