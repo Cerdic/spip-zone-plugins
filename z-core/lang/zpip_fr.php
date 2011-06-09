@@ -26,6 +26,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 
 	// P
+	'pagination_next' => 'Suivant &raquo;',
+	'pagination_pages' => 'Pages',
+	'pagination_prev' => '&laquo; Pr&eacute;c&eacute;dent',
 	'personaliser_nav' => 'Personnaliser ce menu',
 
 	// R
