@@ -26,7 +26,7 @@
 	[ ref="(#ENV{ref}|?{#ENV{ref},''})"]
 	[ rubrique="(#ENV{rubrique}|?{#ENV{rubrique},''})"]
 	[ id="(#ENV{id}|?{#ENV{id},''})"]>
-<div class="produits_thelia" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>	
+<div class="produits_thelia THELIA-NOUVEAU[produit_nouveau][] THELIA-PROMO[produit_promotion][]" [style='[(#ENV{align}|match{^(left|right)$}|?{' '})float:#ENV{align};] (#ENV{align,center}|=={center}|?{'',' '})']>	
 <form class="formulaire_spip formulaire_produit" action="#URL_PAGE{panier,lang=#LANG}" method="post" id="formAjouterTHELIA-ID">
     <fieldset>
 	<input type="hidden" name="thelia_action" value="ajouter" />
