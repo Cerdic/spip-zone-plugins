@@ -9,7 +9,10 @@ jQuery(function($) {
     if (2==bcArray.length)
     {
         var sClasse2 = bcArray[1];
-        pageSommaire = sClasse2.substring(5, sClasse2.length) ;
+        if (0== sClasse2.search(/page_/))
+        	pageSommaire = sClasse2.substring(5, sClasse2.length);
+        else
+        	pageSommaire = sClasse2;
     }
     $("#page").before( "<div id=\'preprod\' class=\'jour\'></div>" );
     $("#preprod").html("Type de page : "+pageType+"<br />Composition : "+pageSommaire);
