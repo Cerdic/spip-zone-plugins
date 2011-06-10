@@ -73,4 +73,5 @@ _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] unde
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="lib:h2fe2d58a-mxn-2.0.16" src="https://github.com/downloads/mapstraction/mxn/mxn-2.0.16.zip" />
 	<categorie>divers</categorie>
+	<traduire gestionnaire="salvatore" module="gis" reference="fr" />
 </plugin>

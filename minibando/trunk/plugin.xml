@@ -13,4 +13,5 @@
 	<icon>images/minibando-64.png</icon>
 	<necessite id="SPIP" version="[3.0.0-dev;]" />
 	<categorie>navigation</categorie>
+	<traduire gestionnaire="salvatore" module="minibando" reference="fr" />
 </plugin>
