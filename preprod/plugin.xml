@@ -21,10 +21,5 @@
 		<nom>affichage_final</nom>
 		<inclure>preprod_pipelines.php</inclure>
 	</pipeline>
-	
-	<pipeline>
-		<nom>styliser</nom>
-		<inclure>preprod_pipelines.php</inclure>
-	</pipeline>
-	
+
 </plugin>
