@@ -5,7 +5,7 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
 
   function html(stream, state) {
     var style = htmlMode.token(stream, state.htmlState);
-    if (style == "xml-tag" && stream.current() == ">" && state.htmlState.context) {
+    if (style == "tag" && stream.current() == ">" && state.htmlState.context) {
       if (/^script$/i.test(state.htmlState.context.tagName)) {
         state.token = javascript;
         state.localState = jsMode.startState(htmlMode.indent(state.htmlState, ""));
@@ -17,13 +17,20 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
     }
     return style;
   }
+  function maybeBackup(stream, pat, style) {
+    var cur = stream.current();
+    var close = cur.search(pat);
+    if (close > -1) stream.backUp(cur.length - close);
+    return style;
+  }
   function javascript(stream, state) {
     if (stream.match(/^<\/\s*script\s*>/i, false)) {
       state.token = html;
       state.curState = null;
       return html(stream, state);
     }
-    return jsMode.token(stream, state.localState);
+    return maybeBackup(stream, /<\/\s*script\s*>/,
+                       jsMode.token(stream, state.localState));
   }
   function css(stream, state) {
     if (stream.match(/^<\/\s*style\s*>/i, false)) {
@@ -31,7 +38,8 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
       state.localState = null;
       return html(stream, state);
     }
-    return cssMode.token(stream, state.localState);
+    return maybeBackup(stream, /<\/\s*style\s*>/,
+                       cssMode.token(stream, state.localState));
   }
 
   return {

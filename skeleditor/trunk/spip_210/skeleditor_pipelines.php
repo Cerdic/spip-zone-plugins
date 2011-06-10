@@ -70,6 +70,7 @@ function skeleditor_dir($extension, $type) {
 	if ($type == "css") {
 	$files .= "
 	<link rel='stylesheet' href='".$dir."codemirror/lib/codemirror.css' type='text/css' />
+	<link rel='stylesheet' href='".$dir."codemirror/theme/default.css' type='text/css' />
 	<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />";	
 	}
 	if ($type =="js")
