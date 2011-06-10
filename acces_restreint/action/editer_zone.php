@@ -69,6 +69,7 @@ function action_zone_set($id_zone){
  * @param string $type
  */
 function accesrestreint_revision_zone_objets_lies($zones,$ids,$type,$operation = 'add'){
+	include_spip('inc/autoriser');
 	$in = "";
 	if ($zones){
 		$in = sql_in('id_zone',$zones);
@@ -89,7 +90,7 @@ function accesrestreint_revision_zone_objets_lies($zones,$ids,$type,$operation =
 			$deja = array_map('reset',sql_allfetsel("id_$type","spip_zones_{$type}s","id_zone=".intval($row['id_zone'])));
 			$add = array_diff($ids,$deja);
 			foreach ($add as $id) {
-				if (autoriser('affecterzone',$type,$id,null,array('id_zone'=>$row['id_zone'])))
+				if (autoriser('affecterzones',$type,$id,null,array('id_zone'=>$row['id_zone'])))
 					sql_insertq("spip_zones_{$type}s",array('id_zone'=>$row['id_zone'],"id_$type"=>intval($id)));
 			}
 		}
