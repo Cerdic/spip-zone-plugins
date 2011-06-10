@@ -24,27 +24,26 @@
 		</p>]
 	</div>
 
-	<h2 class="h2"><:svp:intertitre_depot_generalites:></h2>
 	<div class="surlignable">
 		[<div class="#EDIT{descriptif} texte">(#DESCRIPTIF)</div>]
+		[<div class="#EDIT{type} texte">(#TYPE|svp_traduire_type_depot)</div>]
+		<p class="hyperlien">
+			<:svp:label_fichier_depot:>&nbsp;:
+			<a href="#XML_PAQUETS" title="<:svp:bulle_telecharger_fichier_depot:>">(#XML_PAQUETS)</a>
+		</p>
 	</div>
-
-	<p class="hyperlien">
-		<:svp:label_fichier_depot:>&nbsp;:
-		<a href="#XML_PAQUETS" title="<:svp:bulle_telecharger_fichier_depot:>">(#XML_PAQUETS)</a>
-		[<div class="#EDIT{type} surlignable">(#TYPE|svp_traduire_type_depot)</div>]
-	</p>
 </div>
 
-[(#REM) La liste des paquets du depot correspondant a des plugins ]
-<h2 class="h2"><:svp:intertitre_depot_plugins:></h2>
-<p>[(#ID_DEPOT|svp_compter_depots{plugin})]</p>
-<INCLURE{fond=listes/plugins}{env} />
-
-[(#REM) La liste des paquets du depot correspondant a d'autres contributions ]
-[(#SET{url, [(#URL_ARCHIVES|concat{/})]})]
-<h2 class="h2"><:svp:intertitre_depot_autres_contributions:></h2>
-<p>[(#ID_DEPOT|svp_compter_depots{autre})]</p>
-<INCLURE{fond=listes/autres-contributions}{env}{url_depot=#GET{url}} />
-
+<div id="depot">
+	[(#REM) La liste des paquets du depot correspondant a des plugins ]
+	<h2 class="h2"><:svp:intertitre_depot_plugins:></h2>
+	<p>[(#ID_DEPOT|svp_compter_depots{plugin})]</p>
+	<INCLURE{fond=listes/plugins}{env} />
+	
+	[(#REM) La liste des paquets du depot correspondant a d'autres contributions ]
+	[(#SET{url, [(#URL_ARCHIVES|concat{/})]})]
+	<h2 class="h2"><:svp:intertitre_depot_autres_contributions:></h2>
+	<p>[(#ID_DEPOT|svp_compter_depots{autre})]</p>
+	<INCLURE{fond=listes/autres-contributions}{env}{url_depot=#GET{url}} />
+</div>
 </BOUCLE_contenu_depot>

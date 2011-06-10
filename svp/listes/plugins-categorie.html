@@ -1,5 +1,5 @@
 <B_plugins>
-<table class="spip" summary="<:svp:resume_table_plugins{categorie=#ENV{selection}}:>">
+<table class="spip[ (#ENV{selection}|sinon{aucune})]" summary="<:svp:resume_table_plugins{categorie=#ENV{selection}}:>">
 	<thead>
 		<tr id="categorie[-(#ENV{selection}|sinon{aucune})]">
 			<th>
@@ -18,7 +18,6 @@
 </BOUCLE_plugins>
 	</tbody>
 </table>
-<br class="nettoyeur" />
 </B_plugins>
 [(#ENV{categorie}|oui)
 <p><:svp:info_aucun_plugin_disponible:></p>

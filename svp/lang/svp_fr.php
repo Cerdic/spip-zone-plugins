@@ -87,7 +87,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_type_depot_manuel' => 'Dépôt géré manuellement',
 	'info_type_depot_svn' => 'Dépôt géré sous SVN',
 	'intertitre_depot_autres_contributions' => 'Liste des autres contributions',
-	'intertitre_depot_generalites' => 'Informations générales',
 	'intertitre_depot_paquets' => 'Liste des paquets hébergés',
 	'intertitre_depot_plugins' => 'Liste des plugins hébergés',
 	'intertitre_paquets_contribution' => 'Les autres contributions',
@@ -158,6 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 	'resume_table_depots' => 'Liste des dépôts ajoutés',
 	'resume_table_plugins' => 'Liste des plugins de la catégorie @categorie@',
+	'resume_table_autres_contributions' => 'Liste des autres contributions',
 // T
 	'titre_bloc_depots' => 'DÉPÔTS',
 	'titre_boite_autres_depots' => 'Autres dépôts',
