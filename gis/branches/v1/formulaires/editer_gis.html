@@ -1,0 +1,163 @@
+#CACHE{0}
+<div id="formMap" name="formMap" style="width: 100%; height: 350px"></div>
+<script type="text/javascript">
+//<![CDATA[
+(function($){
+
+	var initMap = function() {
+		if (GBrowserIsCompatible()) {
+			// creer la carte
+			var map = new GMap2(document.getElementById("formMap"));
+			map.addControl(new GLargeMapControl());
+			map.addControl(new GMapTypeControl());
+			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]), [(#ENV**{zoom})], G_NORMAL_MAP);
+			[(#CONFIG{gis/geocoding}|oui)
+			// reverse geocoding
+			var geocode = function(lat,lonx) {
+				var geocoder;
+				geocoder = new GClientGeocoder();
+				function showAddress(response) {
+					if (!response || response.Status.code != 200) {
+						return false;
+					} else {
+						$("#pays,#code_pays,#region,#ville,#code_postal").val("");
+						CountryName = '';
+						CountryNameCode = '';
+						AdministrativeAreaName = '';
+						LocalityName = '';
+						PostalCodeNumber = '';
+						place = response.Placemark[(#VAL{91}|chr)]0[(#VAL{93}|chr)];
+						$("#map_adresse").val(place.address);
+						if (Country = place.AddressDetails.Country){
+							if (CountryName = Country.CountryName)
+								$("#pays").val(CountryName);
+							if (CountryNameCode = Country.CountryNameCode)
+								$("#code_pays").val(CountryNameCode);
+							if (AdministrativeArea = Country.AdministrativeArea){
+								if (AdministrativeAreaName = AdministrativeArea.AdministrativeAreaName)
+									$("#region").val(AdministrativeAreaName);
+								if ((SubAdministrativeArea = AdministrativeArea.SubAdministrativeArea) && (Locality = SubAdministrativeArea.Locality)){
+									if (LocalityName = Locality.LocalityName)
+										$("#ville").val(LocalityName);
+									if ((PostalCode = Locality.PostalCode) && (PostalCodeNumber = PostalCode.PostalCodeNumber))
+										$("#code_postal").val(PostalCodeNumber);
+								}
+							}
+						}
+					}
+				}
+				geocoder.getLocations(new GLatLng(lat,lonx), showAddress);
+			};]
+			// mettre a jour les coordonnees quand on clique la carte
+			GEvent.addListener(map, "click", function(overlay, point){
+				map.clearOverlays();
+				if (point) {
+					map.addOverlay(new GMarker(point));
+					map.panTo(point);
+					jQuery("#formulaire_editer_gis #lat").val(point.y);
+					jQuery("#formulaire_editer_gis #lonx").val(point.x);
+					[(#CONFIG{gis/geocoding}|oui)
+					geocode(point.y,point.x);]
+				}
+			});
+			// mettre à jour le zoom quand on le modifie
+			GEvent.addListener(map, "zoomend", function(oldlevel, newlevel){
+				jQuery("#formulaire_editer_gis #zoom").val(newlevel);
+			});
+			[(#ENV**{lat}|oui)
+			map.addOverlay(new GMarker(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})])));
+			map.setCenter(new GLatLng([(#ENV**{lat})],[(#ENV**{lonx})]));
+			[(#CONFIG{gis/geocoding}|oui)
+			geocode([(#ENV**{lat})],[(#ENV**{lonx})]);]
+			]
+			[(#ENV**{recherche}|oui)
+			jQuery("#map_adresse").focus(function(){jQuery(this).val("");});
+			$(".rechercher_adresse #rechercher").css("cursor","pointer").click(function(){
+				var adresse = $("#map_adresse").attr("value");
+				var geocoder = new GClientGeocoder();
+				if (geocoder) {
+					geocoder.getLatLng(adresse, function(point) {
+						if (!point) {
+							alert(adresse + " not found");
+						} else {
+							map.setCenter(point);
+							map.clearOverlays();
+							marker = new GMarker(point,{draggable:true});
+							map.addOverlay(marker);
+							marker.openInfoWindowHtml(adresse);
+							[(#CONFIG{gis/geocoding}|oui)
+							geocode(point.lat(),point.lng());]
+							jQuery("#formulaire_editer_gis #lat").val(point.lat());
+							jQuery("#formulaire_editer_gis #lonx").val(point.lng());
+							jQuery("#formulaire_editer_gis #zoom").val(map.getZoom());
+							GEvent.addListener(marker, 'dragend', function(){
+								var center = marker.getPoint();
+								jQuery("#formulaire_editer_gis #lat").val(center.lat());
+								jQuery("#formulaire_editer_gis #lonx").val(center.lng());
+								[(#CONFIG{gis/geocoding}|oui)
+								geocode(center.lat(),center.lng());]
+							});
+						}
+					});
+				}
+				return false;
+			});
+			// ne pas soumettre le formulaire si on presse Entree depuis le champ de recherche
+			$('#map_adresse').keypress(function(e){
+				if (e.which == 13) {
+					$('a#rechercher').trigger("click");
+					return false;
+				}
+			});]
+		} else {
+			alert("Sorry, the Google Maps API is not compatible with this browser");
+		}
+	};
+
+	$(function(){
+		initMap();
+		onAjaxLoad(initMap);
+	});
+	
+})(jQuery);
+//]]>
+</script>
+
+<div class="formulaire_spip formulaire_editer formulaire_editer_gis">
+	<!-- br class='spacer' / -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data' name='formulaire_editer_gis' id='formulaire_editer_gis'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='pays' id='pays' value='' />
+		<input type='hidden' name='code_pays' id='code_pays' value='' />
+		<input type='hidden' name='region' id='region' value='' />
+		<input type='hidden' name='ville' id='ville' value='' />
+		<input type='hidden' name='code_postal' id='code_postal' value='' />
+		<ul>[(#ENV{recherche}|oui)
+			<li class="rechercher_adresse">
+				<input type="text" class="text" name="map_adresse" id="map_adresse" value="<:gis:address:>" />
+				<a id="rechercher"><:gis:label_address:></a>
+			</li>]
+			<li class="editer_lat obligatoire[ (#ENV**{erreurs}|table_valeur{lat}|oui)erreur]">
+				<label for="lat">Latitude</label>
+				<input type="text" name="lat" id="lat" class="text" value="[(#ENV**{lat})]" />
+			</li>
+			<li class="editer_lonx obligatoire[ (#ENV**{erreurs}|table_valeur{lonx}|oui)erreur]">
+				<label for="lonx">Longitude</label>
+				<input type="text" name="lonx" id="lonx" class="text" value="[(#ENV**{lonx})]" />
+			</li>
+			<li class="editer_zoom obligatoire[ (#ENV**{erreurs}|table_valeur{zoom}|oui)erreur]">
+				<label for="zoom">Zoom</label>
+				<input type="text" name="zoom" id="zoom" class="text" value="[(#ENV**{zoom})]" />
+			</li>
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input class='submit' type='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>
