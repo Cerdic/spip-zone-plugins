@@ -21,18 +21,18 @@
 	</div>
 </div>
 
-[(#REM) Statistiques globales ]
-
+[(#REM) Liste des prefixes de plugin ]
+<div id="prefixes">
 <B_prefixes>
-<div class="liste" id="prefixes">
-	<ul class="liste-items">
+	<div class="liste">
+		<ul class="liste-items">
 <BOUCLE_prefixes(PLUGINS){id_depot?}{par prefixe}>
-		[<li id="prefixe-#PREFIXE" class="item">
-			<div class="unit size1of2">(#PREFIXE|strtolower)</div>
-			<div class="unit size1of2 lastUnit">[(#NOM)]</div>
-		</li>]
+			[<li id="prefixe-#PREFIXE" class="item">
+				<div class="unit size1of2">(#PREFIXE|strtolower)</div>
+				<div class="unit size1of2 lastUnit">[(#NOM)]</div>
+			</li>]
 </BOUCLE_prefixes>
-	</ul>
-</div>
+		</ul>
+	</div>
 </B_prefixes>
-
+</div>

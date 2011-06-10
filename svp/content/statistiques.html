@@ -21,26 +21,28 @@
 	</div>
 </div>
 
-[(#REM) Statistiques globales ]
-<div class="liste" id="stats-globales">
-	<h2 class="h2"><:svp:intertitre_stats_globales:></h3>
-	[<ul class="liste-items">(#ENV{id_depot}|svp_afficher_statistiques_globales)</ul><br />]
-</div>
+<div id="statistiques">
+	[(#REM) Statistiques globales ]
+	<div class="liste">
+		<h2 class="h2"><:svp:intertitre_stats_globales:></h3>
+		[<ul class="liste-items">(#ENV{id_depot}|svp_afficher_statistiques_globales)</ul><br />]
+	</div>
 
 [(#REM) Statistiques des plugins par categorie ]
-<div class="liste" id="stats-categories">
-	<h2 class="h2"><:svp:intertitre_stats_categories:></h2>
-	
-	#SET{compteur, #VAL{categorie}|svp_compter{#ENV{id_depot}}|table_valeur{categorie}}
-	#SET{aucune, #VAL{categorie}|svp_compter{#ENV{id_depot}, aucune}|table_valeur{categorie}}
-	[(#GET{aucune}|>{0}|oui)
-		#SET{compteur, #VAL{categorie}|svp_compter{#ENV{id_depot}}|table_valeur{categorie}|moins{1}}
-	]
-	<p><:svp:info_stats_categories{nb_categories=#GET{compteur}}:></p>
-	<p><:svp:info_stats_plugins:></p>
-	[<ul class="liste-items">
-	(#SVP_CATEGORIES|iterer_modele{
-		statistiques-categorie, 
-		id_depot=#ENV{id_depot}})
-	</ul>]
+	<div class="liste">
+		<h2 class="h2"><:svp:intertitre_stats_categories:></h2>
+		
+		#SET{compteur, #VAL{categorie}|svp_compter{#ENV{id_depot}}|table_valeur{categorie}}
+		#SET{aucune, #VAL{categorie}|svp_compter{#ENV{id_depot}, aucune}|table_valeur{categorie}}
+		[(#GET{aucune}|>{0}|oui)
+			#SET{compteur, #VAL{categorie}|svp_compter{#ENV{id_depot}}|table_valeur{categorie}|moins{1}}
+		]
+		<p><:svp:info_stats_categories{nb_categories=#GET{compteur}}:></p>
+		<p><:svp:info_stats_plugins:></p>
+		[<ul class="liste-items">
+		(#SVP_CATEGORIES|iterer_modele{
+			statistiques-categorie, 
+			id_depot=#ENV{id_depot}})
+		</ul>]
+	</div>
 </div>
