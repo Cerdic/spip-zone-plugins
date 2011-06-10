@@ -16,7 +16,7 @@
 
 [(#REM) Cartouche avec le titre de la page et les informations generales ]
 <div class="contenu-principal">
-	<div style="width:79%; float:left; padding-right:10px;">
+	<div class="unit size4of5">
 		<div class="cartouche">
 			<h1 class="h1">#NOM</h1>
 			[<p class="info-publi">
@@ -35,18 +35,18 @@
 		</div>]
 	</div>
 	
-<B_branches>
-	<div style="width:19%; float:left;">
-		<ul style="list-style:none outside none; margin:0; padding:0;">
-<BOUCLE_branches(DATA){source table, #BRANCHES_SPIP|explode{','}}>
-			<li style="padding-left:25px; background: url(#CHEMIN{prive/themes/spip/images/ok-16.png}) no-repeat";><strong> SPIP #VALEUR</strong></li>
-</BOUCLE_branches>
-		</ul>
+	<B_branches>
+	<div class="unit size1of5 lastunit">
+		<div class="liste branches">
+			<ul class="liste-items">
+	<BOUCLE_branches(DATA){liste #BRANCHES_SPIP}>
+				<li class="item">SPIP #VALEUR</li>
+	</BOUCLE_branches>
+			</ul>
+		</div>
 	</div>
-</B_branches>
+	</B_branches>
 </div>
-<br class="nettoyeur"/>
-
 
 [(#REM) Details des paquets du plugin ]
 <BOUCLE_paquets(PAQUETS){id_plugin}{!par version}>

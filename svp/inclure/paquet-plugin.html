@@ -1,115 +1,127 @@
 <B_paquet>
 <div class="paquet">
 <BOUCLE_paquet(PAQUETS){id_paquet}>
-	<h3 class="h3">
-		[(#LOGO|image_reduire{48}|inserer_attribut{class, spip_logos}|inserer_attribut{alt, #NOM_ARCHIVE})]
-		[(#ENV{nom_plugin})][ - (#VERSION)]
-		<BOUCLE_depot(DEPOTS){id_depot}>
-		[(#SET{url_depot, #URL_DEPOT})]
-		[(#SET{url_archives, #URL_ARCHIVES})]
-		[(#SET{titre_depot, #TITRE})]
-		</BOUCLE_depot>
-		<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_archives}|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ (#NOM_ARCHIVE)][ - (#NBO_ARCHIVE|taille_en_octets)]" class="submit" style="float:right;">
-		<:bouton_telecharger:>
-		</a>
-	</h3>
+	<div class="unit size3of4">
+		<h3 class="h3">
+			[(#LOGO|image_reduire{48}|inserer_attribut{class, spip_logos}|inserer_attribut{alt, #NOM_ARCHIVE})]
+			[(#ENV{nom_plugin})][ - (#VERSION)]
+			<BOUCLE_depot(DEPOTS){id_depot}>
+			[(#SET{url_depot, #URL_DEPOT})]
+			[(#SET{url_archives, #URL_ARCHIVES})]
+			[(#SET{titre_depot, #TITRE})]
+			</BOUCLE_depot>
+		</h3>
+		<br class="nettoyeur" />
+		<div class="texte">[(#DESCRIPTION)]</div>
+	</div>
+
+	<div class="unit size1of4 lastunit">
+		<div class="liste">
+			<ul class="liste-items">
+			<li class="item">
+				<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_archives}|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ (#NOM_ARCHIVE)][ - (#NBO_ARCHIVE|taille_en_octets)]">
+					<:bouton_telecharger:>
+				</a>
+			</li>
+		[(#LIEN_DOC|oui)
+			<li class="item">
+				<div class="meta-publi">
+				<a[ href="(#LIEN_DOC)"] title="<:svp:bulle_aller_documentation:>">
+					<:en_savoir_plus:>...
+				</a>
+				</div>
+			</li>]
+			<li class="item">
+				source
+			</li>
+			</ul>
+		</div>
+	</div>
 	<br class="nettoyeur" />
-
-	<div class="texte">[(#DESCRIPTION)]</div>
-
-	[(#LIEN_DOC|oui)
-	<div class="meta-publi">
-		<a[ href="(#LIEN_DOC)"] title="<:svp:bulle_aller_documentation:>">
-			<:en_savoir_plus:>...
-		</a>
-	</div>]
-
-	<ul class="bloc_infos">
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_version:></strong></div>
-			<div class="unit size2of3 lastUnit">#VERSION</div>
-		</li>
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_compatibilite_spip:></strong></div>
-			<div class="unit size2of3 lastUnit">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{<:svp:info_aucune_compatibilite_spip:>})]</div>
-		</li>
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_etat:></strong></div>
-			<div class="unit size2of3 lastUnit">[(#ETAT|svp_afficher_etat)]</div>
-		</li>
-	</ul>
-	<br class="nettoyeur" />
-
-	<ul class="bloc_infos">
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_auteur:></strong></div>
-			<div class="unit size2of3 lastUnit">[(#AUTEUR*|svp_afficher_credits)]</div>
-		</li>
-		[<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_credit:></strong></div>
-			<div class="unit size2of3 lastUnit">(#CREDIT*|svp_afficher_credits)</div>
-		</li>]
-		[<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_copyright:></strong></div>
-			<div class="unit size2of3 lastUnit">(#COPYRIGHT|svp_afficher_credits{<br />})</div>
-		</li>]
-		[<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_licence:></strong></div>
-			<div class="unit size2of3 lastUnit">(#LICENCE|svp_afficher_credits{<br />})</div>
-		</li>]
-	</ul>
-	<br class="nettoyeur" />
-
-	<ul class="bloc_infos">
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_archive:></strong></div>
-			<div class="unit size2of3 lastUnit">[(#NOM_ARCHIVE|basename)]</div>
-		</li>
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_taille:></strong></div>
-			<div class="unit size2of3 lastUnit">[(#NBO_ARCHIVE|taille_en_octets)]</div>
-		</li>
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_maj:></strong></div>
-			<div class="unit size2of3 lastUnit">[(#MAJ_ARCHIVE|affdate{d-m-Y H:i})]</div>
-		</li>
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_depot:></strong></div>
-			<div class="unit size2of3 lastUnit"><a[ href="(#GET{url_depot})"] title="<:svp:bulle_afficher_depot:>">[(#GET{titre_depot})]</a></div>
-		</li>
-	</ul>
-	<br class="nettoyeur" />
-
-[(#DEPENDANCES|unserialize|table_valeur{necessite}|count|>{0}|?{
-	<ul class="bloc_infos">
-		[<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_necessite_plugins:></strong></div>
-			<div class="unit size2of3 lastUnit">(#DEPENDANCES|svp_afficher_dependances{necessite})</div>
-		</li>]
-		[<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_necessite_librairies:></strong></div>
-			<div class="unit size2of3 lastUnit">(#DEPENDANCES|svp_afficher_dependances{librairie})</div>
-		</li>]
-		[<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_utilise_plugins:></strong></div>
-			<div class="unit size2of3 lastUnit">(#DEPENDANCES|svp_afficher_dependances{utilise})</div>
-		</li>]
-	</ul>
-	<br class="nettoyeur" />}
-)]
 	
+	<div id="infos-paquet">
+		<ul class="liste">
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_version:></strong></div>
+				<div class="unit size2of3 lastUnit">#VERSION</div>
+			</li>
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_compatibilite_spip:></strong></div>
+				<div class="unit size2of3 lastUnit">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{<:svp:info_aucune_compatibilite_spip:>})]</div>
+			</li>
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_etat:></strong></div>
+				<div class="unit size2of3 lastUnit">[(#ETAT|svp_afficher_etat)]</div>
+			</li>
+		</ul>
+	
+		<ul class="liste">
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_auteur:></strong></div>
+				<div class="unit size2of3 lastUnit">[(#AUTEUR*|svp_afficher_credits)]</div>
+			</li>
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_credit:></strong></div>
+				<div class="unit size2of3 lastUnit">(#CREDIT*|svp_afficher_credits)</div>
+			</li>]
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_copyright:></strong></div>
+				<div class="unit size2of3 lastUnit">(#COPYRIGHT|svp_afficher_credits{<br />})</div>
+			</li>]
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_licence:></strong></div>
+				<div class="unit size2of3 lastUnit">(#LICENCE|svp_afficher_credits{<br />})</div>
+			</li>]
+		</ul>
+	
+		<ul class="liste">
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_archive:></strong></div>
+				<div class="unit size2of3 lastUnit">[(#NOM_ARCHIVE|basename)]</div>
+			</li>
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_taille:></strong></div>
+				<div class="unit size2of3 lastUnit">[(#NBO_ARCHIVE|taille_en_octets)]</div>
+			</li>
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_maj:></strong></div>
+				<div class="unit size2of3 lastUnit">[(#MAJ_ARCHIVE|affdate{d-m-Y H:i})]</div>
+			</li>
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_depot:></strong></div>
+				<div class="unit size2of3 lastUnit"><a[ href="(#GET{url_depot})"] title="<:svp:bulle_afficher_depot:>">[(#GET{titre_depot})]</a></div>
+			</li>
+		</ul>
+	
+	[(#DEPENDANCES|unserialize|table_valeur{necessite}|count|>{0}|?{
+		<ul class="liste">
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_necessite_plugins:></strong></div>
+				<div class="unit size2of3 lastUnit">(#DEPENDANCES|svp_afficher_dependances{necessite})</div>
+			</li>]
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_necessite_librairies:></strong></div>
+				<div class="unit size2of3 lastUnit">(#DEPENDANCES|svp_afficher_dependances{librairie})</div>
+			</li>]
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_utilise_plugins:></strong></div>
+				<div class="unit size2of3 lastUnit">(#DEPENDANCES|svp_afficher_dependances{utilise})</div>
+			</li>]
+		</ul>}
+	)]
+		
+	
+	[(#TRADUCTIONS|unserialize|count|>{0}|?{
+		[(#TRADUCTIONS|unserialize|iterer_modele{paquet-traductions})],
+		<ul class="liste">
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_module:></strong></div>
+				<div class="unit size2of3 lastUnit"><:svp:info_aucun_module:></div>
+			</li>
+		</ul>}
+	)]
+	</div>
 
-[(#TRADUCTIONS|unserialize|count|>{0}|?{
-	[(#TRADUCTIONS|unserialize|iterer_modele{paquet-traductions})],
-	<ul class="bloc_infos">
-		<li class="liste-items">
-			<div class="unit size1of3"><strong><:svp:label_module:></strong></div>
-			<div class="unit size2of3 lastUnit"><:svp:info_aucun_module:></div>
-		</li>
-	</ul>
-	<br class="nettoyeur" />}
-)]
 </BOUCLE_paquet>
-	<br class="nettoyeur" />
 </div>
 </B_paquet>
