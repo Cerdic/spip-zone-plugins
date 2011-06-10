@@ -1,0 +1,39 @@
+[(#REM)
+
+  Squelette
+  (c) 2009 xxx
+  Distribue sous licence GPL
+
+]
+[(#REM|skeleditor_dossier|non) <:skeleditor:exlications_creer_dossier_squelettes:>]
+[(#AUTORISER{skeleditor}|oui)
+	#SET{file,#ENV{f},''}
+	[(#GET{file}|strlen|et{#GET{file}|strncmp{#EVAL{_DIR_RACINE},#EVAL{_DIR_RACINE}|strlen}|=={0}|non})
+	#SET{file,#EVAL{_DIR_RACINE}|concat{#GET{file}}}
+	]
+	#SET{path,#REM|skeleditor_dossier}
+
+	[(#ENV{upload}|non)
+		<h1><:skeleditor:fichier:>[ (#GET{file}|basename|sinon{<:info_sans_titre:>})]</h1>
+		<div class="noajax">
+		#FORMULAIRE_EDITER_SQUELETTE{#GET{path},#GET{file}}
+		</div>
+		[(#GET{file}|skeleditor_codemirror)]
+	]
+	[(#ENV{upload}|oui)
+		<h1><:skeleditor:action_upload:></h1>
+		#FORMULAIRE_UPLOAD_SQUELETTE{#GET{path}}
+	]
+
+	<!--#navigation-->
+	[(#ENV{retour}|=={'./'}|?{[(#SET{retour,../})],[(#SET{retour,[(#VAL{../}|concat{#ENV{retour,''}})]})]})]
+	[<a class="retour" href="[(#GET{retour,''})]"><:retour:> <span>(#ENV{retour})</span></a>]
+	[<a class="retour" href="(#GET{retour,''}|parametre_url{var_mode,inclure})"><:retour:> <span>var_mode=inclure</span></a>]	
+	<div class="cadre cadre-info">
+	<:skeleditor:skeleditor_description:>
+	<p><strong>[(#GET{path}|joli_repertoire)]</strong></p>
+	[(#GET{path}|skeleditor_afficher_dir_skel{#GET{file}})]
+	</div>
+
+	<!--/#navigation-->
+]
