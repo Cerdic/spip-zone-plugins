@@ -1,0 +1,31 @@
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		<a href="#ENV{retour,#URL_ECRIRE{gis_tous}}" class="icone36" style="float:left;">
+			<img width="24" height="24" src="#CHEMIN{images/gis-24.png}" />
+			<span><:retour:></span>
+		</a>
+		[(#VAL{id_gis}|_request|?{<:gis:formulaire_modifier_gis:>,<:gis:formulaire_creer_gis:>})]
+		<h1>
+			<BOUCLE_gis(GIS){id_gis=#VAL{id_gis}|_request}>
+			#TITRE
+			</BOUCLE_gis>
+			[(#ENV{nouveau}|=={oui}|?{<:info_sans_titre:>,#VAL{id_gis}|_request})]
+			<//B_gis>
+		</h1>
+	</div>
+	#FORMULAIRE_EDITER_GIS{#ENV{id_gis,0}, #ENV{objet}, #ENV{id_objet}, #ENV{retour,#URL_ECRIRE{gis_tous}}}
+</div>
+
+<!--#navigation-->
+[(#ENV{id_gis,0}|intval|oui)
+<div class="cadre infos cadre-info">
+	<div class="numero">
+		<:gis:info_numero_gis:>
+		<p>[(#ENV{id_gis})]</p>
+	</div>
+</div>
+]
+<!--/#navigation-->
+
+<!--#extra-->
+<!--/#extra-->

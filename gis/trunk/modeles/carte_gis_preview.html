@@ -1,0 +1,42 @@
+<BOUCLE_gis(GIS){objet}{id_objet}{0,1}>
+<div id="map_preview" class="carte_gis" style="width: 100%; height: 150px;"></div>
+
+<script type="text/javascript">
+<!--
+[(#CONFIG{gis/api}|=={cloudmade}|oui)
+var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
+
+(function($){
+
+	var init_map_preview = function() {
+		var map_preview;
+		var map_preview_container = 'map_preview';
+		map_preview = new mxn.Mapstraction(map_preview_container,'#CONFIG{gis/api,openlayers}');
+		
+		map_preview.addControls({
+			pan: true,
+			zoom: '[(#ENV{control,large})]',
+		});
+		
+		map_preview.setCenterAndZoom(new mxn.LatLonPoint([(#LAT)],[(#LON)]),[(#ZOOM|sinon{#CONFIG{gis/zoom,0}})]);
+
+		<BOUCLE_points(GIS){id_objet}{objet}>
+		point_#ID_GIS = new mxn.LatLonPoint([(#LAT)],[(#LON)]);
+		marker_#ID_GIS = new mxn.Marker(point_#ID_GIS);
+		map_preview.addMarker(marker_#ID_GIS);
+		</BOUCLE_points>
+		[(#TOTAL_BOUCLE|>{1}|oui)
+			map_preview.autoCenterAndZoom();
+		]
+		</B_points>
+	}
+
+	$(function(){
+		init_map_preview();
+		onAjaxLoad(init_map_preview);
+	});
+
+})(jQuery);
+-->
+</script>
+</BOUCLE_gis>

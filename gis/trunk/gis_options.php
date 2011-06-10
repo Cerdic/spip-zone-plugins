@@ -1,14 +1,8 @@
 <?php
-/*
- * Spip Gis plugin
- * Insetar google maps en SPIP
- *
- * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
- *
- */
 
-include_spip('base/gis');
+define('_DIR_LIB_GIS',_DIR_RACINE.'lib/h2fe2d58a-mxn-2.0.16/');
+
+$table_des_traitements['VILLE'][]= 'typo(extraire_multi(%s))';
+$table_des_traitements['PAYS'][]= 'typo(extraire_multi(%s))';
 
 ?>

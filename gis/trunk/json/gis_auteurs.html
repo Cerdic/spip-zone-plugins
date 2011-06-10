@@ -1,0 +1,6 @@
+		<BOUCLE_auteurs(AUTEURS){id_article ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}><BOUCLE_gis(GIS){id_auteur}>
+		{"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+		"id":"#ID_GIS",
+		"title":[(#TITRE|sinon{#_auteurs:NOM}|supprimer_numero|json_encode)],
+		"description":[(#DESCRIPTIF|json_encode)]}</BOUCLE_gis></BOUCLE_auteurs>

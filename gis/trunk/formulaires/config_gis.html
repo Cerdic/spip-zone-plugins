@@ -1,0 +1,176 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=gis -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_gis">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<div id="map_config" class="carte_gis" style="width: 100%; height: 370px"></div>
+
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		[(#SAISIE{input,lat,
+			label=<:gis:lat:>,
+			size=40})]
+		[(#SAISIE{input,lon,
+			label=<:gis:lon:>,
+			size=40})]
+		[(#SAISIE{input,zoom,
+			label=<:gis:zoom:>,
+			size=2,
+			maxlength=2})]
+		
+		[(#SET{apis,[(#ARRAY{
+				cloudmade,<:gis:cfg_lbl_api_cloudmade:>,
+				google,<:gis:cfg_lbl_api_google:>,
+				googlev3,<:gis:cfg_lbl_api_googlev3:>,
+				mapquest,<:gis:cfg_lbl_api_mapquest:>,
+				microsoft,<:gis:cfg_lbl_api_microsoft:>,
+				multimap,<:gis:cfg_lbl_api_multimap:>,
+				openlayers,<:gis:cfg_lbl_api_openlayers:>,
+				openspace,<:gis:cfg_lbl_api_openspace:>,
+				yahoo,<:gis:cfg_lbl_api_yahoo:>})]})]
+		
+		[(#VAL{_GIS_APIS}|defined|oui)
+			[(#EVAL{_GIS_APIS}|unserialize|is_array|oui)#SET{apis,#EVAL{_GIS_APIS}|unserialize}]
+		]
+		
+		#SET{api_defaut,openlayers}
+		[(#VAL{_GIS_APIS_DEFAUT}|defined|oui)
+			#SET{api_defaut,#EVAL{_GIS_APIS_DEFAUT}}
+		]
+		[(#SAISIE{selection,api,
+			label=<:gis:cfg_lbl_api:>,
+			cacher_option_intro=oui,
+			defaut=#GET{api_defaut},
+			datas=#GET{apis}})]
+
+		[(#SAISIE{oui_non,geocoder,
+			defaut='',
+			label=<:gis:cfg_lbl_geocoder:>,
+			explication=<:gis:cfg_inf_geocoder:>})]
+		
+		[(#SAISIE{oui_non,adresse,
+			defaut='',
+			label=<:gis:cfg_lbl_adresse:>,
+			explication=<:gis:cfg_inf_adresse:>})]
+		
+		[(#SAISIE{oui_non,geolocaliser_user_html5,
+			defaut='',
+			label=<:gis:cfg_lbl_geolocaliser_user_html5:>,
+			explication=<:gis:cfg_inf_geolocaliser_user_html5:>})]
+			
+		[(#SAISIE{input,api_key_cloudmade,
+			label=<:gis:cfg_lbl_api_key_cloudmade:>,
+			explication=<:gis:cfg_inf_cloudmade{url=http://cloudmade.com/register}:>,
+			size=40})]
+		[(#SAISIE{input,api_key_google,
+			label=<:gis:cfg_lbl_api_key_google:>,
+			explication=<:gis:cfg_inf_google{url=http://www.google.com/apis/maps/signup.html}:>,
+			size=40})]
+	</ul>
+
+
+	<p class="boutons">
+		<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+		<input type="submit" name="_cfg_delete" class="submit" value="<:cfg:bouton_effacer:>" />
+	</p>
+</div></form>
+
+<script type="text/javascript">
+<!---
+
+[var cloudmade_key = '(#ENV{api_key_cloudmade})';]
+
+(function($){
+	
+	var maj_inputs = function(map,pos) {
+		var zoom = map.getZoom();
+		$("#champ_lat").val(pos.lat);
+		$("#champ_lon").val(pos.lon);
+		$("#champ_zoom").val(zoom);
+	}
+	
+	var init_config = function() {
+		var map;
+		var map_container = 'map_config';
+		map = new mxn.Mapstraction(map_container,'#CONFIG{gis/api,openlayers}');
+		map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
+		
+		map.addControls({
+			pan: true,
+			zoom: '#ENV{control,small}',
+			map_type: true
+		});
+
+		[(#ENV{lat}|oui)
+		point = new mxn.LatLonPoint([(#ENV{lat})],[(#ENV{lon})]);
+		marker = new mxn.Marker(point);
+		map.addMarker(marker);]
+		
+		// mettre a jour les coordonnees quand on clique la carte
+		map.click.addHandler(function(name, source, args) {
+			var pos = args.location;
+			map.removeAllMarkers();
+			marker = new mxn.Marker(pos);
+			map.addMarker(marker);
+			map.setCenter(pos,{pan:true});
+			maj_inputs(map,pos);
+		});
+		
+		// mettre à jour le zoom quand on le modifie
+		map.changeZoom.addHandler(function(name, source, args) {
+			var zoom = source.getZoom();
+			$("#champ_zoom").val(zoom);
+		});
+
+	}
+	
+	var geocoders = ['cartociudad','google','googlev3','yandex'];
+	
+	var show_geocoder = function(){
+		if(($.inArray($('#champ_api').val(),geocoders) >= 0) && $('li.editer_geocoder').is(':hidden')){
+			$('li.editer_geocoder').slideDown()
+		}else if(($.inArray($('#champ_api').val(),geocoders) < 0) && $('li.editer_geocoder').is(':visible')){
+			$('li.editer_geocoder').slideUp()
+		}
+	}
+	
+	var show_apis_keys = function(){
+		if(($('#champ_api').val() == "google") && $('.editer_api_key_google').is(':hidden')){
+			$('.editer_api_key_google').slideDown();
+		}else if(($('#champ_api').val() != "google") && $('.editer_api_key_google').is(':visible')) {
+			$('.editer_api_key_google').slideUp();
+		}
+		if(($('#champ_api').val() == "cloudmade") && $('.editer_api_key_cloudmade').is(':hidden')){
+			$('.editer_api_key_cloudmade').slideDown();
+		}else if(($('#champ_api').val() != "cloudmade") && $('.editer_api_key_cloudmade').is(':visible')) {
+			$('.editer_api_key_cloudmade').slideUp();
+		}
+	}
+	
+	var show_config = function(){
+		show_geocoder();
+		show_apis_keys();
+		$('#champ_api').unbind('change').change(function(){
+			show_geocoder();
+			show_apis_keys();
+		});
+	}
+	
+	$(function(){
+		init_config();
+		show_config();
+		onAjaxLoad(init_config);
+		onAjaxLoad(show_config);
+	});
+
+})(jQuery);
+-->
+</script>
+
+#CFG_ARBO{gis}
+</div>

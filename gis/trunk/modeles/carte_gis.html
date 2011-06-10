@@ -1,15 +1,148 @@
+[(#REM)
+
+	Modele carte_gis
+
+	Parametres :
+
+	- id_carte_gis = 1				id de la carte
+	- lat = 48.3					latitude du centre de la carte
+	- lon = -4.7					longitude du centre de la carte
+	- zoom = 5						zoom de la carte
+	- width = 100%					largeur de la carte, 100% par defaut
+	- height = 400px				hauteur de la carte, 400px par defaut
+	- style = non					ne pas styler la carte
+	- zoom_molette = non			désactiver le zoom avec la molette de la souris, actif par defaut
+	- type = carte					type de la carte : carte, satellite, relief ou hybride
+	- control_zoom = large			type de controles pour le zoom : large, small
+	- control_pan = non				ne pas afficher les controles de déplacement dans la carte
+	- control_type = non			ne pas afficher les controles de changement de type
+	- no_control = oui				ne pas afficher les controles de la carte
+	- overview = oui				afficher un mini carte de situation
+	- scale = oui					afficher l'échelle de la carte
+	- limit = 500					nombre max de marqueurs à afficher, 500 par defaut
+	- objets = gis					type d'objets à afficher (fichier json/gis_xx qui génère la source de donnees)
+	- autocenterandzoom = oui		centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
+	- kml = 12						kml à superposer à la carte (id_document ou url)
+	- localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
+
+]
+
 [(#SET{width,#ENV{width,100%}})]
 [(#SET{height,#ENV{height,400px}})]
-[(#SET{id_article,#ENV{id_article}})]
-<BOUCLE_rub(ARTICLES){id_article=#ENV{id_article}}>
-[(#SET{rub2,#ID_RUBRIQUE})]
-</BOUCLE_rub>
-[(#ENV{id_secteur}|non)
-	[(#SET{id_rubrique,#ENV{id_rubrique,#GET{rub2}}})]
+[(#SET{id,#ENV{id_carte_gis,1}})]
+[(#REM) -- compat gis v1 -- ]
+[(#SET{lat,#ENV{lat,#ENV{latit,#CONFIG{gis/lat,0}}}})]
+[(#SET{lon,#ENV{lon,#ENV{lonxit,#CONFIG{gis/lon,0}}}})]
+
+[(#REM)  
+	// todo
+	{id_groupe}
+	{recursive=#ENV{recursive}}
+	{attente=#ENV{attente}}{ombre=#ENV{ombre}}{load_map=#ENV{load_map}}
+	{id_a_ouvrir=#ENV{id_a_ouvrir}}{swfobject=#CONFIG{gis/swfobject,oui}}
+	
+	// pas documentes
+	{control_move=#ENV{control_move}}{control_zoom=#ENV{control_zoom}}
+	
+	// done
+	
+	{latit}{lonxit}{zoom}{hauteur=#GET{height}}{largeur=#GET{width}}{id_carte_gis}{zoom_molette=#ENV{zoom_molette}}
+	{control}{control_type=#ENV{control_type}}{type}{limit=#ENV{limit}}
+	{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_article}{id_auteur}{recherche}
 ]
-[(#INCLURE{fond=inc_public_map}{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_groupe}{id_article}{id_auteur}{recherche}
-{latit}{lonxit}{zoom}{type}{id_carte_gis}{recursive=#ENV{recursive}}{limit=#ENV{limit}}{attente=#ENV{attente}}{ombre=#ENV{ombre}}{hauteur=#GET{height}}{largeur=#GET{width}}{load_map=#ENV{load_map}}
-{control}{control_type=#ENV{control_type}}{control_move=#ENV{control_move}}{control_zoom=#ENV{control_zoom}}{zoom_molette=#ENV{zoom_molette}}{id_a_ouvrir=#ENV{id_a_ouvrir}}{swfobject=#CONFIG{gis/swfobject,oui}})]
 
-<div id="map[(#ENV{id_carte_gis}|?{[(#ENV{id_carte_gis})],1})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[(#ENV{attente}|=={1}|oui)z-index: 0; ][width:(#GET{width});][ height:(#GET{height});]"]></div>
+<div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>
 
+<script type="text/javascript">
+<!--
+[(#CONFIG{gis/api}|=={cloudmade}|oui)
+var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
+
+var map[(#GET{id})];
+
+(function($){
+	
+	var init_map[(#GET{id})] = function() {
+		var map_container = 'map[(#GET{id})]';
+		map[(#GET{id})] = new mxn.Mapstraction(map_container,'#CONFIG{gis/api,openlayers}');
+		
+		[(#ENV{zoom_molette}|!={non}|oui)
+		map[(#GET{id})].enableScrollWheelZoom();]
+		
+		map[(#GET{id})].setCenterAndZoom(new mxn.LatLonPoint(#GET{lat},#GET{lon}),#ENV{zoom,#CONFIG{gis/zoom,0}});
+
+		[(#ENV{type}|oui)
+		#SET{type,ROAD}
+		[(#ENV{type}|=={'carte'}|oui) #SET{type,ROAD} ]
+		[(#ENV{type}|=={'satellite'}|oui) #SET{type,SATELLITE} ]
+		[(#ENV{type}|=={'hybride'}|oui) #SET{type,HYBRID} ]
+		[(#ENV{type}|=={'relief'}|oui) #SET{type,PHYSICAL} ]
+		map[(#GET{id})].setMapType([mxn.Mapstraction.(#GET{type})]);
+		]
+
+		[(#ENV{no_control}|!={oui}|oui)
+		map[(#GET{id})].addControls({zoom: '[(#ENV{control_zoom,large})]'});]
+	
+		[(#ENV{overview}|oui)
+		map[(#GET{id})].addControls({overview: true});]
+	
+		[(#ENV{scale}|oui)
+		map[(#GET{id})].addControls({scale: true});]
+	
+		[(#ENV{control_type}|!={non}|oui)
+		map[(#GET{id})].addControls({map_type: true});]
+		
+		[(#ENV{control_pan}|!={non}|oui)
+		map[(#GET{id})].addControls({pan: true});]
+
+		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
+			{[
+				(#ENV{objet}|id_table_objet) : #ENV{id_objet},][
+				objets : "(#ENV{objets})",][
+				id_rubrique : (#ENV{id_rubrique}),][
+				id_secteur : (#ENV{id_secteur}),][
+				id_article : (#ENV{id_article}),][
+				id_breve : (#ENV{id_breve}),][
+				id_document : (#ENV{id_document}),][
+				id_mot : (#ENV{id_mot}),][
+				id_groupe : (#ENV{id_groupe}),][
+				id_auteur : (#ENV{id_auteur}),][
+				id_syndic : (#ENV{id_syndic}),][
+				id_forum : (#ENV{id_forum}),][
+				recherche : "(#ENV{recherche})",][
+				limit : (#ENV{limit,500})]
+			},
+			function(data) {
+				if (data){
+					map[(#GET{id})].addJSON(data);
+					[(#ENV{autocenterandzoom}|oui)
+					var markers = map[(#GET{id})].markers;
+					if (markers.length == 1){
+						map[(#GET{id})].setCenterAndZoom(new mxn.LatLonPoint(markers[(#VAL{91}|chr)]0[(#VAL{93}|chr)].location.lat,markers[(#VAL{91}|chr)]0[(#VAL{93}|chr)].location.lon),#ENV{zoom,#CONFIG{gis/zoom,0}});
+					} else {
+						map[(#GET{id})].autoCenterAndZoom();
+					}]
+				}
+			}
+		);
+		
+		[(#ENV{kml}|oui)
+		[(#ENV{kml}|intval|oui)
+		map[(#GET{id})].addOverlay(['(#ENV{kml}|generer_url_entite{document}|url_absolue)']);]
+		[(#ENV{kml}|intval|non)
+		map[(#GET{id})].addOverlay(['(#ENV{kml})']);]
+		]
+		
+		[(#ENV{localiser_visiteur}|oui)
+		gis_get_navigator_location(map[(#GET{id})],#ENV{zoom,#CONFIG{gis/zoom,0}});]
+		
+	}
+
+	$(function(){
+		init_map[(#GET{id})]();
+		onAjaxLoad(init_map[(#GET{id})]);
+	});
+
+})(jQuery);
+-->
+</script>

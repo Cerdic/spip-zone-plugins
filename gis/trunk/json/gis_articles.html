@@ -1,0 +1,6 @@
+		<BOUCLE_art(ARTICLES){id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}><BOUCLE_gis(GIS){id_article}{","}>
+		{"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+		"id":"#ID_GIS",
+		"title":[(#TITRE|sinon{#_art:TITRE}|supprimer_numero|json_encode)],
+		"description":[(#DESCRIPTIF|json_encode)]}</BOUCLE_gis></BOUCLE_art>

@@ -1,104 +1,12 @@
+<!-- titre=<:gis:cfg_titre_gis:> -->
+<!-- logo=images/gis.png-->
+<!-- icone=images/gis-24.png-->
+<!-- descriptif=<:gis:cfg_descr_gis:> -->
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- presentation=non -->
+
 #CACHE{0}
-
-[(#REM) titre=GIS]
-[(#REM) descriptif=
-<h4>Configuration du plugin GIS</h4>
-Choisissez dans quelles rubriques activer le plugin.
-]
-
-<div class="formulaire_spip formulaire_editer formulaire_cfg">
-<form method="post"><div>
-	[(#ENV{_cfg_}|form_hidden)]
-	<ul>
-	#SET{wichrub,#CONFIG{gis/rubriques_gis,#ARRAY{0,-1}}}
-		<li class="editer_api_carte_gis">
-			<label><:gis:api_carte:></label>
-			<div class="choix">
-				<input type="radio" name="api_carte" class="radio" value="geomap" id="api_carte_geomap"[ (#ENV{api_carte}|=={geomap}|?{'checked="checked"'})] />
-				<label for="api_carte_geomap"><:gis:api_carte_geomap:></label>
-			</div>
-			<div class="choix">
-				<input type="radio" name="api_carte" class="radio" value="openlayer" id="api_carte_openlayer"[ (#ENV{api_carte}|=={openlayer}|?{'checked="checked"'})] />
-				<label for="api_carte_openlayer"><:gis:api_carte_openlayer:></label>
-			</div>
-		</li>
-		<li class="editer_rubriques_gis">
-			<label for="rubriques_gis"><:gis:pages_prive:></label>
-			<p class="explications"><:gis:explication_pages_prive:></p>
-			<select name="rubriques_gis[]" multiple="multiple" size="9">
-				<option value="-1"[ (#EVAL{-1}|in_array{#GET{wichrub}}|?{' selected="selected"'})]>Toutes</option>
-				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}{tout}>
-				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
-				Secteur #ID_RUBRIQUE : #TITRE
-				</option>
-				<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}{tout}>
-				<option value="#ID_RUBRIQUE"[ (#ID_RUBRIQUE|in_array{#GET{wichrub}}|?{' selected="selected"'})]>
-				&rarr; Rubrique #ID_RUBRIQUE : #TITRE
-				</option>
-				<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
-				</BOUCLE_rubriques>
-				</BOUCLE_secteurs>
-			</select>
-		</li>
-		<li class="editer_swfobject_gis">
-			<label><:gis:pages_public:></label>
-			<p class="explications"><:gis:explication_swfobject:></p>
-			<div class="choix">
-				<input type="checkbox" name="swfobject" class="checkbox" value="non" id="swfobject_non"[ (#ENV{swfobject}|=={non}|?{'checked="checked"'})] />
-				<label for="swfobject_non"><:gis:desactiver_swfobject:></label>
-			</div>
-		</li>
-		<li class="editer_geocoding_gis">
-			<label><:gis:geocoding:></label>
-			<p class="explications"><:gis:explication_geocoding:></p>
-			<div class="choix">
-				<input type="checkbox" name="geocoding" class="checkbox" value="oui" id="geocoding"[ (#ENV{geocoding}|=={oui}|?{'checked="checked"'})] />
-				<label for="geocoding"><:gis:activer_geocoding:></label>
-			</div>
-		</li>
-	</ul>
-	<fieldset>
-		<legend><:gis:parametres_formulaire:></legend>
-		<ul>
-			<li class="editer_rubrique_formulaire_gis">
-				<label for="rubrique_cible"><:gis:rubrique_cible:></label>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{rubrique_cible})</span>]
-				<select name="rubrique_cible">
-					<BOUCLE_r1(RUBRIQUES){racine}{par num titre}>
-					<option value=''></option>
-					<optgroup label="<:gis:secteur:> [(#TITRE|couper{40})]">
-						<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})] (<:gis:racine:>)</option>
-						<B_r2>
-						<option value="" class='mysteric_hr' disabled='disabled'><:gis:ou_choisir:></option>
-						<BOUCLE_r2(RUBRIQUES){id_parent}{par num titre}>
-							<option value="#ID_RUBRIQUE"[(#ENV{rubrique_cible}|=={#ID_RUBRIQUE}|?{' selected="selected"'})]>[(#TITRE|couper{40})]</option>
-						</BOUCLE_r2>
-					</optgroup>
-					</BOUCLE_r1>
-				</select>
-			</li>
-			<li class="editer_statut_formulaire_gis">
-				<label for="statut"><:gis:statut_articles:></label>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{statut})</span>]
-				<select name="statut">
-					<option value='prepa'[(#ENV{statut}|=={prepa}|?{' selected="selected"'})]>En cours de rédaction</option>
-					<option value='prop'[(#ENV{statut}|=={prop}|?{' selected="selected"'})]>Proposé</option>
-					<option value='publie'[(#ENV{statut}|=={publie}|?{' selected="selected"'})]>Publié</option>
-				</select>
-			</li>
-			<li class="editer_formats_documents[ (#ENV**{erreurs}|table_valeur{formats_documents}|?{'erreur'})]">
-				<label for="formats_documents"><:gis:formats_documents:></label>
-				[<span class='erreur'>(#ENV**{erreurs}|table_valeur{formats_documents})</span>]
-				<p class="explications"><:gis:texte_formats_documents:></p>
-				<input type="text" name="formats_documents" class="text" value="#ENV{formats_documents,'jpg,png,gif'}"  />
-			</li>
-		</ul>
-	</fieldset>
-
-	<p class="boutons">
-		<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
-		<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
-	</p>
-</div></form>
+<div class="ajax">
+#FORMULAIRE_CONFIG_GIS
 </div>
-#CFG_ARBO{gis}

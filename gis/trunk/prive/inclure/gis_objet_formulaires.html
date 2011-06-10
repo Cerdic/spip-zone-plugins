@@ -1,0 +1,48 @@
+<div class="ajax">
+<BOUCLE_test(GIS){objet}{id_objet}{0,1}> </BOUCLE_test>
+#SET{gis_defaut,nouveau}
+<//B_test>
+
+[(#GET{gis_defaut}|=={nouveau}|?{#SET{bloc_gis,editer},#SET{bloc_gis,lier}})]
+
+<p>
+	<a href="[(#SELF|parametre_url{bloc_gis,lier}|parametre_url{id_gis,''})]" 
+		class="ajax[(#ENV{bloc_gis,#GET{bloc_gis}}|=={lier}|oui)on]">
+		<:gis:titre_bloc_points_lies:>
+	</a> | 
+	<a href="[(#SELF|parametre_url{bloc_gis,rechercher}|parametre_url{id_gis,''})]" 
+		class="ajax[(#ENV{bloc_gis,#GET{bloc_gis}}|=={rechercher}|oui)on]">
+		<:gis:titre_bloc_rechercher_point:>
+	</a> | 
+	<a href="[(#SELF|parametre_url{bloc_gis,editer}|parametre_url{id_gis,nouveau})]" 
+		class="ajax[(#ENV{id_gis,#GET{gis_defaut}}|=={nouveau}|oui|et{#ENV{bloc_gis,#GET{bloc_gis}}|=={editer}|oui})on]">
+		<:gis:titre_bloc_creer_point:>
+	</a>
+</p>
+
+[(#ENV{bloc_gis,#GET{bloc_gis}}|=={editer}|oui)
+	#FORMULAIRE_EDITER_GIS{#ENV{id_gis,#GET{gis_defaut}},#ENV{objet},#ENV{id_objet},#SELF,'non'}
+	<script type="text/javascript">
+		(function($){
+			$(function(){
+				// resize + recenter de la map si bloc deplie
+				$('#pave_gis_depliable').bind('deplie', function(e){
+					var container = $('#map_[(#ENV{objet})]_[(#ENV{id_objet})]');
+					form_map.resizeTo(container.width(),container.height());
+					var lat = $("#champ_lat").val();
+					var lon = $("#champ_lon").val();
+					form_map.setCenter(new mxn.LatLonPoint(lat,lon));
+				});
+			});
+		})(jQuery);
+	</script>
+]
+
+[(#ENV{bloc_gis,#GET{bloc_gis}}|=={lier}|oui)
+[(#INCLURE{fond=prive/liste/gis_objet,sinon=<:gis:aucun_gis:>,env})]
+]
+
+<BOUCLE_gis(GIS){0,1}> </BOUCLE_gis>[(#ENV{bloc_gis,#GET{bloc_gis}}|=={rechercher}|oui)
+	#FORMULAIRE_RECHERCHER_GIS{#ENV{objet},#ENV{id_objet},#SELF}
+]</B_gis>
+</div>
