@@ -8,8 +8,8 @@ jQuery(function($) {
     pageType = bcArray[0].replace(/page_/,"");
     if (2==bcArray.length)
     {
-        var aSommaire = bcArray[1].split("_");
-        pageSommaire = aSommaire[1];
+        var sClasse2 = bcArray[1];
+        pageSommaire = sClasse2.substring(5, sClasse2.length) ;
     }
     $("#page").before( "<div id=\'preprod\' class=\'jour\'></div>" );
     $("#preprod").html("Type de page : "+pageType+"<br />Composition : "+pageSommaire);
