@@ -11,57 +11,59 @@ La version {Kiss} ({Keep it simple, stupid!}) est moins param&eacute;trable que 
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.7</version>
+
+	<version>1.8</version>
+
 	<version_base>0.6</version_base>
 	<etat>stable</etat>
 
 	<prefix>ticketskiss</prefix>
 
-	<options>tickets_options.php</options>
-	<fonctions>tickets_fonctions.php</fonctions>
-	<install>base/tickets_upgrade.php</install>
+	<options>ticketskiss_options.php</options>
+	<fonctions>ticketskiss_fonctions.php</fonctions>
+	<install>base/ticketskiss_upgrade.php</install>
 
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/tickets_install.php</inclure>
+		<inclure>base/ticketskiss_install.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/tickets_install.php</inclure>
+		<inclure>base/ticketskiss_install.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
-		<inclure>tickets_pipelines.php</inclure>
+		<inclure>ticketskiss_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<action>droite</action>
-		<inclure>tickets_pipelines.php</inclure>
+		<inclure>ticketskiss_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<action>gauche</action>
-		<inclure>tickets_pipelines.php</inclure>
+		<inclure>ticketskiss_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>autoriser</nom>
-		<inclure>inc/tickets_autoriser.php</inclure>
+		<inclure>inc/ticketskiss_autoriser.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>notifications</nom>
-		<inclure>tickets_notifications.php</inclure>
+		<inclure>ticketskiss_notifications.php</inclure>
 	</pipeline>
 	<!-- avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
-		<inclure>tickets_pipelines.php</inclure>
+		<inclure>ticketskiss_pipelines.php</inclure>
 	</pipeline>
 
-	<bouton id='tickets' parent='bando_publication'>
+	<bouton id='ticketskiss' parent='bando_publication'>
 		<icone>imgs/bugs.png</icone>
-		<titre>tickets:titre</titre>
-		<url>tickets</url>
+		<titre>ticketskiss:titre</titre>
+		<url>ticketskiss</url>
 	</bouton>
 
 	<necessite id="SPIP" version="[2.0.0;]" />

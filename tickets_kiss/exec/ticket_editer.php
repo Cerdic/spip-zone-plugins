@@ -14,13 +14,13 @@ function exec_ticket_editer() {
 	if(intval($id_ticket)){
 		$contexte['titre'] = sql_getfetsel("titre","spip_tickets","id_ticket=$id_ticket");
 	}else{
-		$contexte['titre'] = _T('tickets:creer_ticket');
+		$contexte['titre'] = _T('ticketskiss:creer_ticket');
 	}
 
-	$titre_page = _T('tickets:page_titre');
+	$titre_page = _T('ticketskiss:page_titre');
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = "forum";
-	$sous_rubrique = "tickets";
+	$sous_rubrique = "ticketskiss";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo($commencer_page($titre_page.' - '.$contexte['titre'], $rubrique, $sous_rubrique));

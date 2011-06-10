@@ -29,7 +29,7 @@ function action_editer_ticket() {
 	}
 
 	// Enregistre l'envoi dans la BD
-	if ($id_ticket > 0) $err = tickets_set($id_ticket);
+	if ($id_ticket > 0) $err = ticketskiss_set($id_ticket);
 
 	return array($id_ticket,$err);
 }
@@ -42,7 +42,7 @@ function action_editer_ticket() {
  * @param int $id_ticket
  *
  */
-function tickets_set($id_ticket) {
+function ticketskiss_set($id_ticket) {
 	spip_log('ticket_set');
 	$err = '';
 

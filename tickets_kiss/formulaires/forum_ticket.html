@@ -6,11 +6,11 @@
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
-			<div class="titrem"><:tickets:commenter_ticket:></div>
+			<div class="titrem"><:ticketskiss:commenter_ticket:></div>
 			<ul>
 				<li class="editer_forum_ticket haut obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
-					<label for="text_area"><:tickets:forum_message:></label>
-					<p class="explication"><:tickets:forum_sans_previsu:></p>
+					<label for="text_area"><:ticketskiss:forum_message:></label>
+					<p class="explication"><:ticketskiss:forum_sans_previsu:></p>
 					[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</p>]
 					<textarea name='texte' id='text_area' class='barre_inserer' rows='20' cols='50'[(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 				</li>

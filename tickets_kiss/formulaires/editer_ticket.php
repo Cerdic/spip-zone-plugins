@@ -4,7 +4,7 @@
  * Plugin Tickets pour Spip 2.0
  * Licence GPL (c) 2008-2009
  *
- * Formulaire d'édition de tickets
+ * Formulaire d'édition de ticketskiss
  *
  */
 
@@ -17,7 +17,7 @@ include_spip('inc/editer');
 /**
  * Fonction de chargement des valeurs
  */
-function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config_fonc='ticketskiss_edit_config', $row=array(), $hidden=''){
 	// mettre une valeur new pour formulaires_editer_objet_charger()
 	if (!$id_ticket) $id_ticket='new';
 
@@ -46,14 +46,14 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
  * @param object $config_fonc[optional]
  * @param object $row[optional]
  */
-function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $config_fonc='ticketskiss_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('ticket',$id_ticket,array('titre','texte'));
 
 	return $erreurs;
 }
 
-function tickets_edit_config(){
+function ticketskiss_edit_config(){
 	return array();
 }
 
@@ -67,12 +67,12 @@ function tickets_edit_config(){
  * @param object $config_fonc[optional]
  * @param object $row[optional]
  */
-function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
+function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_fonc='ticketskiss_edit_config', $row=array(), $hidden=''){
 	return formulaires_editer_objet_traiter('ticket',$id_ticket,0,0,$retour,$config_fonc,$row,$hidden);
 	$action_editer = charger_fonction("editer_ticket",'action');
 	list($id,$err) = $action_editer();
 
-	$message['message_ok'] = _T('tickets:ticket_enregistre');
+	$message['message_ok'] = _T('ticketskiss:ticket_enregistre');
 	if ($retour) {
 		include_spip('inc/headers');
 		$retour = parametre_url($retour,'id_ticket',$id);

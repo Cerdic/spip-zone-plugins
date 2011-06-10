@@ -2,17 +2,17 @@
 include_spip('inc/meta');
 include_spip('base/create');
 
-function tickets_upgrade($nom_meta_base_version,$version_cible){
+function ticketskiss_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = "0.0";
 	// On traite le cas de la premiere version de Tickets sans version_base
-	if ((!isset($GLOBALS['meta'][$nom_meta_base_version])) && tickets_existe())
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version])) && ticketskiss_existe())
 		$current_version = "0.1";
 		
 	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 		
 	if ($current_version=="0.0") {
-		include_spip('base/tickets_install');
+		include_spip('base/ticketskiss_install');
 		creer_base();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
@@ -36,14 +36,14 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		ecrire_metas();
 }
 
-function tickets_vider_tables($nom_meta_base_version) {
+function ticketskiss_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_tickets");
 	sql_drop_table("spip_tickets_forum");
 	effacer_meta($nom_meta_base_version);
 	ecrire_metas();
 }
 
-function tickets_existe() {
+function ticketskiss_existe() {
 	$desc = sql_showtable('spip_tickets', true);
 	if (!$desc['field']) 
 		return false;

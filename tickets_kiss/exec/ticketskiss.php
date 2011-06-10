@@ -1,19 +1,19 @@
 <?php
-// Traitement de la page recapitulative des tickets
-function exec_tickets () {
+// Traitement de la page recapitulative des ticketskiss
+function exec_ticketskiss () {
 
 	include_spip('inc/presentation');
 	include_spip('inc/mots');
 
-	$titre_page = _T('tickets:titre_liste');
+	$titre_page = _T('ticketskiss:titre_liste');
 
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = "forum";
-	$sous_rubrique = "tickets";
+	$sous_rubrique = "ticketskiss";
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(
-		_T('tickets:titre_liste').' - '._T('tickets:titre'),
+		_T('ticketskiss:titre_liste').' - '._T('ticketskiss:titre'),
 		$rubrique,
 		$sous_rubrique
 	);
@@ -23,7 +23,7 @@ function exec_tickets () {
 	// On écrase par l'environnement
 	$contexte = array_merge($contexte, $_GET, $_POST);
 	// On appelle la noisette de presentation
-	echo recuperer_fond('prive/contenu/tickets', $contexte);
+	echo recuperer_fond('prive/contenu/ticketskiss', $contexte);
 	
 	echo fin_page();
 }

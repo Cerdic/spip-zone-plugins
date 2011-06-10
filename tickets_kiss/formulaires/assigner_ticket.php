@@ -50,7 +50,7 @@ function formulaires_assigner_ticket_verifier($id_ticket='', $retour='', $config
 	$id_assigne_ancien = sql_getfetsel("id_assigne","spip_tickets","id_ticket=".intval($id_ticket));
 	$id_assigne = _request('id_assigne');
 	if($id_assigne == $id_assigne_ancien){
-		$erreurs['message_erreur'] = _T('tickets:assignation_non_modifiee');	
+		$erreurs['message_erreur'] = _T('ticketskiss:assignation_non_modifiee');	
 	}
 	return $erreurs;
 }
@@ -73,7 +73,7 @@ function formulaires_assigner_ticket_traiter($id_ticket='',$retour='', $config_f
 	$message = "";
 	$id_assigne = _request('id_assigne');
 	sql_updateq("spip_tickets",array('id_assigne' => $id_assigne),"id_ticket=$id_ticket");
-	$message['message_ok'] = _T('tickets:assignation_modifiee');
+	$message['message_ok'] = _T('ticketskiss:assignation_modifiee');
 	if($retour){
 		$message['redirect'] = $retour;
 	}

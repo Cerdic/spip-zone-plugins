@@ -44,13 +44,13 @@ function formulaires_forum_ticket_charger($id_ticket=''){
 function formulaires_forum_ticket_verifier($id_ticket=''){
 	$texte = _request("texte");
 	if(strlen($texte)<20){
-		$erreurs['texte'] = _T('tickets:erreur_texte_longueur_mini',array('nb'=> 20));
+		$erreurs['texte'] = _T('ticketskiss:erreur_texte_longueur_mini',array('nb'=> 20));
 	}
 	if(_request(nobot_forum)){
 		$erreurs['nobot'] = true;
 	}
 	if(count($erreurs)>0){
-		$erreurs['message_erreur'] = _T('tickets:erreur_verifier_formulaire');
+		$erreurs['message_erreur'] = _T('ticketskiss:erreur_verifier_formulaire');
 	}
 	return $erreurs;
 }
@@ -82,7 +82,7 @@ function formulaires_forum_ticket_traiter($id_ticket=''){
 				);
 			}
 		include_spip('inc/headers');
-		$message['message_ok'] = _T('tickets:message_publie');
+		$message['message_ok'] = _T('ticketskiss:message_publie');
 		$message['redirect'] = ancre_url (parametre_url(self(),'id_forum',$id_forum_ticket,'&'),'tf'.$id_forum_ticket);
 	}
 		

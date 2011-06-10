@@ -2,7 +2,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function tickets_declarer_tables_principales($tables_principales){	
+function ticketskiss_declarer_tables_principales($tables_principales){	
 
 	//-- Table tickets ------------------------------------------
 	$spip_tickets = array(
@@ -57,7 +57,7 @@ function tickets_declarer_tables_principales($tables_principales){
 	return $tables_principales;
 }
 
-function tickets_declarer_tables_interfaces($interface){
+function ticketskiss_declarer_tables_interfaces($interface){
 
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['tickets']='tickets';

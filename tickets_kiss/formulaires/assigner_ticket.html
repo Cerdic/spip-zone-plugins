@@ -7,10 +7,10 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
 			<li class="editer_assigner">
-				<label for="id_assigne"><:tickets:champ_assigner:> :</label>
+				<label for="id_assigne"><:ticketskiss:champ_assigner:> :</label>
 				<select name="id_assigne" id="id_assigne" class="text" onchange="jQuery('#validation_bouton_assigner').slideDown();">
-					<option value="0" [(#ENV{id_assigne}|=={0}|?{" selected='selected'",""})]><:tickets:no_assignation:></option>
-					[(#ENV{id_assigne}|tickets_select_assignation)]
+					<option value="0" [(#ENV{id_assigne}|=={0}|?{" selected='selected'",""})]><:ticketskiss:no_assignation:></option>
+					[(#ENV{id_assigne}|ticketskiss_select_assignation)]
 				</select>
 			</li>
 		</ul>

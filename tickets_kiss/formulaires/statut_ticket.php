@@ -17,7 +17,7 @@ include_spip('inc/editer');
 /**
  * Fonction de chargement des valeurs
  */
-function formulaires_statut_ticket_charger($id_ticket='', $retour='', $config_fonc='tickets_statut_config', $row=array(), $hidden=''){
+function formulaires_statut_ticket_charger($id_ticket='', $retour='', $config_fonc='ticketskiss_statut_config', $row=array(), $hidden=''){
 	
 	if(is_numeric($id_ticket)){
 		if (!autoriser('ecrire', 'ticket', $id_ticket)) {
@@ -44,16 +44,16 @@ function formulaires_statut_ticket_charger($id_ticket='', $retour='', $config_fo
  * @param object $config_fonc[optional]
  * @param object $row[optional]
  */
-function formulaires_statut_ticket_verifier($id_ticket='', $retour='', $config_fonc='tickets_statut_config', $row=array(), $hidden=''){
+function formulaires_statut_ticket_verifier($id_ticket='', $retour='', $config_fonc='ticketskiss_statut_config', $row=array(), $hidden=''){
 	$ancien_statut = sql_getfetsel("statut","spip_tickets","id_ticket=".intval($id_ticket));
 	$nouveau_statut = _request('statut');
 	if($ancien_statut == $nouveau_statut){
-		$erreurs['message_erreur'] = _T('tickets:statut_inchange');
+		$erreurs['message_erreur'] = _T('ticketskiss:statut_inchange');
 	}
 	return $erreurs;
 }
 
-function tickets_statut_config(){
+function ticketskiss_statut_config(){
 	return array();
 }
 
@@ -67,12 +67,12 @@ function tickets_statut_config(){
  * @param object $config_fonc[optional]
  * @param object $row[optional]
  */
-function formulaires_statut_ticket_traiter($id_ticket='',$retour='', $config_fonc='tickets_statut_config', $row=array(), $hidden=''){
+function formulaires_statut_ticket_traiter($id_ticket='',$retour='', $config_fonc='ticketskiss_statut_config', $row=array(), $hidden=''){
 	$message = "";
 	include_spip('action/editer_ticket');
 	$c = array('statut'=>_request('statut'));
 	instituer_ticket($id_ticket, $c);
-	$message['message_ok'] = _T('tickets:statut_mis_a_jour');
+	$message['message_ok'] = _T('ticketskiss:statut_mis_a_jour');
 	if($retour){
 		$message['redirect'] = $retour;
 	}

@@ -1,43 +1,43 @@
-[(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
+[(#REM) Noisette d'affichage d'une liste detaillee des ticketskiss suivant des criteres passes en arguments]
 #CACHE{0}
 #SET{visible,true}
 
 <B_detaillee>
 <div class="cadre cadre-liste">
-[(#ENV{titre}|tickets_bouton_block_depliable{#GET{visible}|=={true}})]
-[(#GET{visible}|=={true}|tickets_debut_block_depliable)]
+[(#ENV{titre}|ticketskiss_bouton_block_depliable{#GET{visible}|=={true}})]
+[(#GET{visible}|=={true}|ticketskiss_debut_block_depliable)]
 [<div class="arial1 tranches pagination">(#PAGINATION)</div>]
 <table width="100%" cellpadding="2" cellspacing="0" border="0">
 	<thead>
 		<tr style="color:#999;">
-			<th colspan="3" style="text-align:center;"><:tickets:champ_titre:></th>
+			<th colspan="3" style="text-align:center;"><:ticketskiss:champ_titre:></th>
 			[(#ENV{type}|non)
-			<th><:tickets:champ_type:></th>
+			<th><:ticketskiss:champ_type:></th>
 			]
-			<th><:tickets:champ_importance:></th>
-			<th><:tickets:champ_date:></th>
+			<th><:ticketskiss:champ_importance:></th>
+			<th><:ticketskiss:champ_date:></th>
 		</tr>
 	</thead>
 	<tbody>
 <BOUCLE_detaillee(TICKETS){par severite}{par type}{!par date}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}{type?}{jalon?}>
 		<tr class="tr_liste">
-			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
+			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|ticketskiss_icone_statut)]})"][ alt="(#STATUT|ticketskiss_texte_statut)"] /></td>
 			<td class="arial1"><b>##ID_TICKET</b></td>
 			<td class="arial2"><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a></td>
 			[(#REM) Si le type est explicite, on ne l'affiche pas ]
 			[(#ENV{type}|non)
-			<td class="arial0">[(#TYPE|tickets_texte_type)]</td>
+			<td class="arial0">[(#TYPE|ticketskiss_texte_type)]</td>
 			]
 			<td class="arial0">
-				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] />
-				[&nbsp;(#SEVERITE|tickets_texte_severite)]
+				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|ticketskiss_icone_severite)]})"][ alt="(#SEVERITE|ticketskiss_texte_severite)"] />
+				[&nbsp;(#SEVERITE|ticketskiss_texte_severite)]
 			</td>
 			<td class="arial0">[(#DATE|affdate_court)]</td>
 		</tr>
 </BOUCLE_detaillee>
 	</tbody>
 </table>
-[(#VAL|tickets_fin_block)]
+[(#VAL|ticketskiss_fin_block)]
 </div>
 </B_detaillee>
 <br />

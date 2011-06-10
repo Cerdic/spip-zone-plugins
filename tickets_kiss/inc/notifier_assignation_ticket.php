@@ -7,7 +7,7 @@
 		
 		$nom_auteur = sql_getfetsel("nom","spip_auteurs","id_auteur=".intval($datas['id_assigne']));
 		
-		//include_spip('inc/tickets_filtres');
+		//include_spip('inc/ticketskiss_filtres');
 		$envoyer_mail = charger_fonction('envoyer_mail','inc');
 		
 		$nom_site = $GLOBALS["meta"]["nom_site"];
@@ -16,26 +16,26 @@
 		
 		
 		$titre = trim($datas['titre']);
-		$titre_message = "[Ticket - $nom_site] $titre - "._T('tickets:assignation_mail_titre');
+		$titre_message = "[Ticket - $nom_site] $titre - "._T('ticketskiss:assignation_mail_titre');
 		$titre_message = nettoyer_titre_email($titre_message);
 		 
 		$message = "$titre_message\n
 		------------------------------------------\n"
-		._T('tickets:mail_texte_message_auto')."\n\n";
+		._T('ticketskiss:mail_texte_message_auto')."\n\n";
 		
 		if($nom_auteur){
-			$message .= _T('tickets:assignation_attribuee_a',array('nom'=>$nom_auteur))."\n\n";	
+			$message .= _T('ticketskiss:assignation_attribuee_a',array('nom'=>$nom_auteur))."\n\n";	
 		}else{
-			$message .= _T('tickets:assignation_supprimee')."\n\n";
+			$message .= _T('ticketskiss:assignation_supprimee')."\n\n";
 		}
 		
 		$message .= $url_ticket;
 		
 		// Determiner la liste des auteurs a notifier
-		include_spip('inc/tickets_autoriser');
+		include_spip('inc/ticketskiss_autoriser');
 		$select = array('email');
 		$from = array('spip_auteurs AS t1');
-		$autorises = definir_autorisations_tickets('notifier');
+		$autorises = definir_autorisations_ticketskiss('notifier');
 		if ($autorises['statut']) 
 			$where = array(sql_in('t1.statut', $autorises['statut']), 't1.email LIKE '.sql_quote('%@%'));
 		else

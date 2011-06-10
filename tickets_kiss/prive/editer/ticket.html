@@ -1,8 +1,8 @@
 [(#REM) Squelette du formulaire de la page d'edition d'un ticket (exec=ticket_editer)]
 <div class="entete-formulaire">
 [(#ENV{id_ticket}|intval|oui)
-	[(#ENV{id_ticket}|tickets_bouton_retour{#CHEMIN{imgs/bugs.png}, #LANG_LEFT})]
-	<span class="arial1 spip_small"><strong><:tickets:ticket:> ##ENV{id_ticket}</strong></span>
+	[(#ENV{id_ticket}|ticketskiss_bouton_retour{#CHEMIN{imgs/bugs.png}, #LANG_LEFT})]
+	<span class="arial1 spip_small"><strong><:ticketskiss:ticket:> ##ENV{id_ticket}</strong></span>
 ]
 	<h1>[(#ENV{titre}|typo)]</h1>
 </div>

@@ -7,11 +7,11 @@ function exec_ticket_afficher () {
 	
 	include_spip('inc/presentation');
 	
-	$titre_page = _T('tickets:page_titre');
+	$titre_page = _T('ticketskiss:page_titre');
 	
 	// Permet entre autres d'ajouter les classes à la page : <body class='$rubrique $sous_rubrique'>
 	$rubrique = "forum";
-	$sous_rubrique = "tickets";
+	$sous_rubrique = "ticketskiss";
 	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page($titre_page, $rubrique, $sous_rubrique);

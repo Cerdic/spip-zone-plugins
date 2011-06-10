@@ -1,6 +1,6 @@
 <?php
 // pour le pipeline
-function tickets_notifications() {}
+function ticketskiss_notifications() {}
 
 /**
  * 

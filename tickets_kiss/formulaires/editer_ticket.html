@@ -9,61 +9,61 @@
 		<input type='hidden' name='id_ticket' value='#ID_TICKET' />
 		<ul>
 			<li class="editer_titre obligatoire">
-				<label for="titre"><:tickets:champ_titre_ticket:></label>
-				<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,<:tickets:nouveau_ticket:>})]" />
+				<label for="titre"><:ticketskiss:champ_titre_ticket:></label>
+				<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre,<:ticketskiss:nouveau_ticket:>})]" />
 			</li>
 			<li class="editer_statut">
-				<label for="statut"><:tickets:champ_statut:></label>
+				<label for="statut"><:ticketskiss:champ_statut:></label>
 				<select name="statut" id="statut" onchange="$('#validation_bouton').slideDown();">
-					[(#SESSION{id_auteur}|oui)<option value="redac" [(#ENV{statut}|=={redac}|?{" selected='selected'",""})]>[(#VAL{redac}|tickets_texte_statut)]</option>]
-					<option value="ouvert" [(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
-					<option value="resolu" [(#ENV{statut}|=={resolu}|?{" selected='selected'",""})]>[(#VAL{resolu}|tickets_texte_statut)]</option>
-					<option value="ferme" [(#ENV{statut}|=={ferme}|?{" selected='selected'",""})]>[(#VAL{ferme}|tickets_texte_statut)]</option>
+					[(#SESSION{id_auteur}|oui)<option value="redac" [(#ENV{statut}|=={redac}|?{" selected='selected'",""})]>[(#VAL{redac}|ticketskiss_texte_statut)]</option>]
+					<option value="ouvert" [(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|ticketskiss_texte_statut)]</option>
+					<option value="resolu" [(#ENV{statut}|=={resolu}|?{" selected='selected'",""})]>[(#VAL{resolu}|ticketskiss_texte_statut)]</option>
+					<option value="ferme" [(#ENV{statut}|=={ferme}|?{" selected='selected'",""})]>[(#VAL{ferme}|ticketskiss_texte_statut)]</option>
 				</select>
 			</li>
 			<li class="editer_type">
-				<label for="type"><:tickets:champ_type:></label><select name="type" id="type">
-					<option value="1" [(#ENV**{type}|=={1}|?{" selected='selected'",""})]>[(#VAL{1}|tickets_texte_type)]</option>
-					<option value="2" [(#ENV**{type}|=={2}|?{" selected='selected'",""})]>[(#VAL{2}|tickets_texte_type)]</option>
-					<option value="3" [(#ENV**{type}|=={3}|?{" selected='selected'",""})]>[(#VAL{3}|tickets_texte_type)]</option>
+				<label for="type"><:ticketskiss:champ_type:></label><select name="type" id="type">
+					<option value="1" [(#ENV**{type}|=={1}|?{" selected='selected'",""})]>[(#VAL{1}|ticketskiss_texte_type)]</option>
+					<option value="2" [(#ENV**{type}|=={2}|?{" selected='selected'",""})]>[(#VAL{2}|ticketskiss_texte_type)]</option>
+					<option value="3" [(#ENV**{type}|=={3}|?{" selected='selected'",""})]>[(#VAL{3}|ticketskiss_texte_type)]</option>
 				</select>
 			</li>
 			<li class="editer_severite">
-				<label for="severite"><:tickets:champ_severite:></label><select name="severite" id="severite">
-					<option value="1" [(#ENV**{severite}|=={1}|?{" selected='selected'",""})]>[(#VAL{1}|tickets_texte_severite)]</option>
-					<option value="2" [(#ENV**{severite}|=={2}|?{" selected='selected'",""})]>[(#VAL{2}|tickets_texte_severite)]</option>
-					<option value="3" [(#ENV**{severite}|=={3}|?{" selected='selected'",""})]>[(#VAL{3}|tickets_texte_severite)]</option>
-					<option value="4" [(#ENV**{severite}|=={4}|?{" selected='selected'",""})]>[(#VAL{4}|tickets_texte_severite)]</option>
+				<label for="severite"><:ticketskiss:champ_severite:></label><select name="severite" id="severite">
+					<option value="1" [(#ENV**{severite}|=={1}|?{" selected='selected'",""})]>[(#VAL{1}|ticketskiss_texte_severite)]</option>
+					<option value="2" [(#ENV**{severite}|=={2}|?{" selected='selected'",""})]>[(#VAL{2}|ticketskiss_texte_severite)]</option>
+					<option value="3" [(#ENV**{severite}|=={3}|?{" selected='selected'",""})]>[(#VAL{3}|ticketskiss_texte_severite)]</option>
+					<option value="4" [(#ENV**{severite}|=={4}|?{" selected='selected'",""})]>[(#VAL{4}|ticketskiss_texte_severite)]</option>
 				</select>
 			</li>
 
 			[<li>
-				<label for="projet"><:tickets:champ_projet:></label>
-				<select name="projet" id="projet">(#VAL{projet}|tickets_select_champ_optionnel{#ENV**{projet}})</select>
+				<label for="projet"><:ticketskiss:champ_projet:></label>
+				<select name="projet" id="projet">(#VAL{projet}|ticketskiss_select_champ_optionnel{#ENV**{projet}})</select>
 			</li>]
 			[<li class="editer_composant">
-				<label for="composant"><:tickets:champ_composant:></label>
-				<select name="composant" id="composant">(#VAL{composant}|tickets_select_champ_optionnel{#ENV**{composant}})</select>
+				<label for="composant"><:ticketskiss:champ_composant:></label>
+				<select name="composant" id="composant">(#VAL{composant}|ticketskiss_select_champ_optionnel{#ENV**{composant}})</select>
 			</li>]
 			[<li class="editer_version">
-				<label for="version"><:tickets:champ_version:></label>
-				<select name="version" id="version">(#VAL{version}|tickets_select_champ_optionnel{#ENV**{version}})</select>
+				<label for="version"><:ticketskiss:champ_version:></label>
+				<select name="version" id="version">(#VAL{version}|ticketskiss_select_champ_optionnel{#ENV**{version}})</select>
 			</li>]
 			[<li class="editer_jalon">
-				<label for="jalon"><:tickets:champ_jalon:></label>
-				<select name="jalon" id="jalon">(#VAL{jalon}|tickets_select_champ_optionnel{#ENV**{jalon}})</select>
+				<label for="jalon"><:ticketskiss:champ_jalon:></label>
+				<select name="jalon" id="jalon">(#VAL{jalon}|ticketskiss_select_champ_optionnel{#ENV**{jalon}})</select>
 			</li>]
 
 			<li class="editer_texte editer_parent">
-				<label for="text_area"><:tickets:champ_description:></label>
+				<label for="text_area"><:ticketskiss:champ_description:></label>
 				<div class="explication">
-					<:tickets:explication_description_ticket:>
+					<:ticketskiss:explication_description_ticket:>
 				</div>
 				<textarea name='texte' id='text_area' class='barre_inserer' rows='20' cols='50'[(#ENV**{browser_caret,''})]>[(#ENV**{texte})]</textarea>
 			</li>
 			<li class="editer_exemple">
-				<label for="exemple"><:tickets:champ_url_exemple:></label>
-				<div class="explication"><:tickets:explication_url_exemple:></div>
+				<label for="exemple"><:ticketskiss:champ_url_exemple:></label>
+				<div class="explication"><:ticketskiss:explication_url_exemple:></div>
 				<input type='text' class='text' name='exemple' id='exemple' value="[(#ENV**{exemple})]" />
 			</li>
 		</ul>
