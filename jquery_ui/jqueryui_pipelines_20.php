@@ -131,18 +131,4 @@ function jqueryui_insert_head($flux) {
 	return $flux;
 }
 
-/**
- * jqueryui_header_prive : ajout des CSS de jQuery-UI pour les pages privees
- * avec gestion du theme et des UI utilises
- * 
- * @param: $flux 
- * @return: $flux
- */
-function jqueryui_header_prive($flux) {
-	$flux = str_replace('lib/', '../lib/', jqueryui_insert_head($flux));
-
-	return $flux;
-}
-
-
 ?>

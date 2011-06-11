@@ -15,9 +15,12 @@
 		<nom>jquery_plugins</nom>
 		<inclure>jqueryui_pipelines_20.php</inclure>
 	</pipeline>
-	<pipeline><nom>jqueryui_forcer</nom></pipeline>
 	<pipeline><nom>insert_head</nom></pipeline>
-	<pipeline><nom>header_prive</nom></pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head</action>
+	</pipeline>
+	<pipeline><nom>jqueryui_forcer</nom></pipeline>
 	<necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
 	<necessite id="saisies" />
 	<categorie>outil</categorie>
