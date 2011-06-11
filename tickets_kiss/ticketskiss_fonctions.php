@@ -9,20 +9,20 @@ function ticketskiss_select_champ_optionnel($champ='', $en_cours){
 	switch(strtolower($champ))
 	{
 		case 'jalon':
-			if (defined('_TICKETSKISS_LISTE_JALONS'))
-				$define = _TICKETSKISS_LISTE_JALONS;
+			if (defined('_TICKETS_LISTE_JALONS'))
+				$define = _TICKETS_LISTE_JALONS;
 			break;
 		case 'version':
-			if (defined('_TICKETSKISS_LISTE_VERSIONS'))
-				$define = _TICKETSKISS_LISTE_VERSIONS;
+			if (defined('_TICKETS_LISTE_VERSIONS'))
+				$define = _TICKETS_LISTE_VERSIONS;
 			break;
 		case 'projet':
-			if (defined('_TICKETSKISS_LISTE_PROJETS'))
-				$define = _TICKETSKISS_LISTE_PROJETS;
+			if (defined('_TICKETS_LISTE_PROJETS'))
+				$define = _TICKETS_LISTE_PROJETS;
 			break;
 		case 'composant':
-			if (defined('_TICKETSKISS_LISTE_COMPOSANTS'))
-				$define = _TICKETSKISS_LISTE_COMPOSANTS;
+			if (defined('_TICKETS_LISTE_COMPOSANTS'))
+				$define = _TICKETS_LISTE_COMPOSANTS;
 			break;
 		default:
 			$define = '';
@@ -67,8 +67,8 @@ function ticketskiss_select_assignation($en_cours){
 // Affichage de la page des ticketskiss classes par jalon
 function ticketskiss_classer_par_jalon($bidon) {
 	$page = NULL;
-	if (defined('_TICKETSKISS_LISTE_JALONS')) {
-		$liste = explode(":", _TICKETSKISS_LISTE_JALONS);
+	if (defined('_TICKETS_LISTE_JALONS')) {
+		$liste = explode(":", _TICKETS_LISTE_JALONS);
 		$i = 0;
 		foreach($liste as $_jalon) {
 			$i += 1;

@@ -23,7 +23,7 @@
 	<li class="[(#ENV{classement}|=={termine}|?{fondgrison,fondgris})]">
 		<a href="[(#SELF|parametre_url{classement,termine})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:ticketskiss:classement_termine:>})] <:ticketskiss:classement_termine:></a>
 	</li>
-[(#EVAL{_TICKETSKISS_LISTE_JALONS}|!={_TICKETSKISS_LISTE_JALONS}|oui)
+[(#EVAL{_TICKETS_LISTE_JALONS}|!={_TICKETS_LISTE_JALONS}|oui)
 	<li class="[(#ENV{classement}|=={jalon}|?{fondgrison,fondgris})]">
 		<a href="[(#SELF|parametre_url{classement,jalon})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:ticketskiss:classement_jalon:>})] <:ticketskiss:classement_jalon:></a>
 	</li>

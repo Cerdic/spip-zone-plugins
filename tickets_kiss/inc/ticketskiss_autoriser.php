@@ -6,16 +6,16 @@ function definir_autorisations_ticketskiss($action){
 	switch(strtolower($action))
 	{
 		case 'ecrire':
-			$define = (defined('_TICKETSKISS_AUTORISATION_ECRIRE')) ? _TICKETSKISS_AUTORISATION_ECRIRE : '0minirezo';
+			$define = (defined('_TICKETS_AUTORISATION_ECRIRE')) ? _TICKETS_AUTORISATION_ECRIRE : '0minirezo';
 			break;
 		case 'notifier':
-			$define = (defined('_TICKETSKISS_AUTORISATION_NOTIFIER')) ? _TICKETSKISS_AUTORISATION_NOTIFIER : '1comite';
+			$define = (defined('_TICKETS_AUTORISATION_NOTIFIER')) ? _TICKETS_AUTORISATION_NOTIFIER : '1comite';
 			break;
 		case 'assigner':
-			$define = (defined('_TICKETSKISS_AUTORISATION_ASSIGNER')) ? _TICKETSKISS_AUTORISATION_ASSIGNER : '0minirezo';
+			$define = (defined('_TICKETS_AUTORISATION_ASSIGNER')) ? _TICKETS_AUTORISATION_ASSIGNER : '0minirezo';
 			break;
 		case 'commenter':
-			$define = (defined('_TICKETSKISS_AUTORISATION_COMMENTER')) ? _TICKETSKISS_AUTORISATION_COMMENTER : '1comite';
+			$define = (defined('_TICKETS_AUTORISATION_COMMENTER')) ? _TICKETS_AUTORISATION_COMMENTER : '1comite';
 			break;
 		default:
 			$define = '0minirezo';
