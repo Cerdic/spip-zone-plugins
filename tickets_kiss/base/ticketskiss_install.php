@@ -7,15 +7,15 @@ function ticketskiss_declarer_tables_principales($tables_principales){
 	//-- Table tickets ------------------------------------------
 	$spip_tickets = array(
 			"id_ticket"	=> "bigint(21) NOT NULL",
-			"titre"	=> "text NOT NULL",
+			"titre"	=> "text DEFAULT '' NOT NULL",
 			"texte"	=> "longtext DEFAULT '' NOT NULL",
 			"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"severite"	=> "integer DEFAULT '0' NOT NULL",
 			"type"	=> "integer DEFAULT '0' NOT NULL",
 			"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
-			"id_auteur"	=> "bigint(21) NOT NULL",
-			"id_assigne"	=> "bigint(21) NOT NULL",
+			"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
+			"id_assigne"	=> "bigint(21) DEFAULT '0' NOT NULL",
 			"exemple"	=> "varchar(255) DEFAULT '' NOT NULL",
 			"projet"	=> "varchar(60) DEFAULT '' NOT NULL",
 			"composant"	=> "varchar(40) DEFAULT '' NOT NULL",
@@ -39,10 +39,10 @@ function ticketskiss_declarer_tables_principales($tables_principales){
 
 	$spip_tickets_forum = array(
 			"id_ticket_forum"	=> "bigint(21) NOT NULL",
-			"id_ticket"	=> "bigint(21) NOT NULL",
+			"id_ticket"	=> "bigint(21) DEFAULT '0' NOT NULL",
 			"texte"	=> "longtext DEFAULT '' NOT NULL",
 			"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
-			"id_auteur"	=> "bigint(21) NOT NULL",
+			"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
 			"maj"	=> "TIMESTAMP"
 	);
 	$spip_tickets_forum_key = array(
