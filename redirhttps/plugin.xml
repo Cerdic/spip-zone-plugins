@@ -5,6 +5,8 @@
 	<version>0.1.0</version>
 	<etat>dev</etat>
 	<prefix>redirhttps</prefix>
+ 	<categorie>performance</categorie>
+	<slogan>S&eacute;curiser l'acc&egrave;s &agrave; certaines pages du site</slogan>
 	<description>
 		<multi>
 			[fr]Redirection vers HTTPS quand le contenu le nécessite (espace privé, login, pages publiques avec utilisateur connecté)

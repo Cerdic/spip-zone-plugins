@@ -4,7 +4,11 @@
  	<version>1.1.1</version>
 
  	<prefix>preprod</prefix>
+ 	<categorie>outil</categorie>
 
+	<slogan>
+		Faciliter la mise en prod.
+	</slogan>
 	<description>
 		Ajoute des indications utiles lors de la mise en prod.
 	</description>
@@ -14,7 +18,7 @@
 	<etat>dev</etat>
 
  	<auteur>
-	Cyril Marion, Nadine Pavot [Ateliers CYM->http://www.cym.fr]
+	Cyril Marion, Nadine Pavot, [Ateliers CYM->http://www.cym.fr]
  	</auteur>
 
 	<pipeline>
