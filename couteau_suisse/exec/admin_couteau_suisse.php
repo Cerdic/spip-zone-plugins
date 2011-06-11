@@ -151,9 +151,18 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		$t = $get_infos($dir);
 	}
 	$cs_version_base = $t['version_base']; $cs_version = $t['version'];
-	// mises a jour eventuelles de la base
-	installe_un_plugin($dir, $t, $dir_type);
-	unset($t);
+	if(!function_exists('installe_un_plugin')) {
+		// ici SPIP >= 3.0
+		// TODO: redondances probables a revoir
+		// mises a jour eventuelles de la base
+		$installer_plugins = charger_fonction('installer', 'plugins');
+		/*$infos = */$installer_plugins($plugin, 'install');
+	} else {
+		// compatibilite SPIP < 3.0
+		// mises a jour eventuelles de la base
+		installe_un_plugin($dir, $t, $dir_type);
+		unset($t);
+	}
 	if(!strlen($bt_version)) { $bt_version = $get_infos($bt_dir); $bt_version = $bt_version['version']; }
 	
 	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t,$r)))
@@ -168,6 +177,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	gros_titre(_T('couteauprive:titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
 	echo '<div style="font-size:85%">';
+
 // verification d'une base venant de SPIP 1.8
 $res = spip_query("DESCRIBE spip_meta valeur");
 $resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
@@ -175,6 +185,7 @@ if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre ba
 // verification de la barre typo V2
 $mini = '2.5.3';
 if(strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) echo "<p>"._T('couteauprive:erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
+// test sur jQuery
 echo "<script type=\"text/javascript\"><!-- 
 if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>')))."');
 //--></script>";
