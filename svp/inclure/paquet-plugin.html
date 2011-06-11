@@ -1,6 +1,7 @@
 <B_paquet>
 <div class="paquet">
 <BOUCLE_paquet(PAQUETS){id_paquet}>
+	[(#REM) Nom, logo, description ]
 	<div class="unit size3of4">
 		<h3 class="h3">
 			[(#LOGO|image_reduire{48}|inserer_attribut{class, spip_logos}|inserer_attribut{alt, #NOM_ARCHIVE})]
@@ -15,31 +16,40 @@
 		<div class="texte">[(#DESCRIPTION)]</div>
 	</div>
 
+	[(#REM) Liens vers l'archive, la doc, la demo et les sources ]
 	<div class="unit size1of4 lastunit">
-		<div class="liste">
+		<div class="liste actions">
 			<ul class="liste-items">
-			<li class="item">
-				<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_archives}|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ (#NOM_ARCHIVE)][ - (#NBO_ARCHIVE|taille_en_octets)]">
-					<:bouton_telecharger:>
-				</a>
-			</li>
-		[(#LIEN_DOC|oui)
-			<li class="item">
-				<div class="meta-publi">
-				<a[ href="(#LIEN_DOC)"] title="<:svp:bulle_aller_documentation:>">
-					<:en_savoir_plus:>...
-				</a>
-				</div>
-			</li>]
-			<li class="item">
-				source
-			</li>
+				<li class="item">
+					<a[ id="(#NOM_ARCHIVE|basename{.zip})"][ href="(#GET{url_archives}|concat{/}|concat{#NOM_ARCHIVE})"] title="<:svp:bulle_telecharger_archive:>[ (#NOM_ARCHIVE)][ - (#NBO_ARCHIVE|taille_en_octets)]">
+						<:svp:lien_telecharger:>
+					</a>
+				</li>
+				[(#LIEN_DOC|oui)
+				<li class="item">
+					<a[ href="(#LIEN_DOC)"] title="<:svp:bulle_aller_documentation:>">
+						<:svp:lien_documenter:>
+					</a>
+				</li>]
+				[(#LIEN_DEMO|oui)
+				<li class="item">
+					<a[ href="(#LIEN_DEMO)"] title="<:svp:bulle_aller_documentation:>">
+						<:svp:lien_demontrer:>
+					</a>
+				</li>]
+				[(#LIEN_DEV|oui)
+				<li class="item">
+					<a[ href="(#LIEN_DEV)"] title="<:svp:bulle_aller_documentation:>">
+						<:svp:lien_developper:>
+					</a>
+				</li>]
 			</ul>
 		</div>
 	</div>
 	<br class="nettoyeur" />
 	
 	<div id="infos-paquet">
+		[(#REM) La version ]
 		<ul class="liste">
 			<li class="liste-items">
 				<div class="unit size1of3"><strong><:svp:label_version:></strong></div>
@@ -55,6 +65,7 @@
 			</li>
 		</ul>
 	
+		[(#REM) Les credits ]
 		<ul class="liste">
 			<li class="liste-items">
 				<div class="unit size1of3"><strong><:svp:label_auteur:></strong></div>
@@ -74,6 +85,7 @@
 			</li>]
 		</ul>
 	
+		[(#REM) Les informations sur l'archive ]
 		<ul class="liste">
 			<li class="liste-items">
 				<div class="unit size1of3"><strong><:svp:label_archive:></strong></div>
@@ -92,8 +104,9 @@
 				<div class="unit size2of3 lastUnit"><a[ href="(#GET{url_depot})"] title="<:svp:bulle_afficher_depot:>">[(#GET{titre_depot})]</a></div>
 			</li>
 		</ul>
-	
-	[(#DEPENDANCES|unserialize|table_valeur{necessite}|count|>{0}|?{
+
+		[(#REM) Les dependances ]
+		[(#DEPENDANCES|unserialize|table_valeur{necessite}|count|>{0}|?{
 		<ul class="liste">
 			[<li class="liste-items">
 				<div class="unit size1of3"><strong><:svp:label_necessite_plugins:></strong></div>
@@ -108,10 +121,11 @@
 				<div class="unit size2of3 lastUnit">(#DEPENDANCES|svp_afficher_dependances{utilise})</div>
 			</li>]
 		</ul>}
-	)]
+		)]
 		
 	
-	[(#TRADUCTIONS|unserialize|count|>{0}|?{
+		[(#REM) Les traductions ]
+		[(#TRADUCTIONS|unserialize|count|>{0}|?{
 		[(#TRADUCTIONS|unserialize|iterer_modele{paquet-traductions})],
 		<ul class="liste">
 			<li class="liste-items">
@@ -119,7 +133,7 @@
 				<div class="unit size2of3 lastUnit"><:svp:info_aucun_module:></div>
 			</li>
 		</ul>}
-	)]
+		)]
 	</div>
 
 </BOUCLE_paquet>

@@ -9,6 +9,7 @@ function svp_declarer_tables_principales($tables_principales) {
 		"descriptif"	=> "text DEFAULT '' NOT NULL",
 		"type" 			=> "varchar(10) DEFAULT '' NOT NULL",
 		"url_serveur"	=> "varchar(255) DEFAULT '' NOT NULL", // url du serveur svn ou git
+		"url_brouteur"	=> "varchar(255) DEFAULT '' NOT NULL", // url de l'interface de gestion du repository (trac, redmine...)
 		"url_archives"	=> "varchar(255) DEFAULT '' NOT NULL", // url de base des zips
 		"xml_paquets"	=> "varchar(255) DEFAULT '' NOT NULL", // chemin complet du fichier xml du depot
 		"sha_paquets"	=> "varchar(40) DEFAULT '' NOT NULL",

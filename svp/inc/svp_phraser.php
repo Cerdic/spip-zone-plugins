@@ -26,7 +26,7 @@ function svp_phraser_depot($url) {
 
 	// Extraction et phrasage du bloc depot si il existe
 	// -- Si le bloc <depot> n'est pas renseigne on ne considere pas cela comme une erreur
-	$balises_depot = array('titre', 'descriptif', 'type', 'url_serveur', 'url_archives');
+	$balises_depot = array('titre', 'descriptif', 'type', 'url_serveur', 'url_brouteur', 'url_archives');
 	if (preg_match(_SVP_REGEXP_BALISE_DEPOT, $xml, $matches)) {
 		if (is_array($arbre_depot = spip_xml_parse($matches[1]))) {
 			$infos['depot'] = svp_aplatir_balises($balises_depot, $arbre_depot, 'nonvide', $infos['depot']);

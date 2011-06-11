@@ -1,14 +1,13 @@
 <plugin>
 	<nom>SVP</nom>
 	<auteur>Eric Lupinacci</auteur>
-	<licence>GPL</licence>
-	<version>0.6.1</version>
+	<licence>GNU/GPL</licence>
+	<version>0.6.2</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/svp-64.png</icon>
 	<etat>dev</etat>
+    <slogan>SerVeur d'information sur les Plugins</slogan>
     <description>
-    SerVeur d'information sur les Plugins.
-	
 	Ce plugin fournit une API permettant de collecter, d'effectuer des recherches multi-crit&egrave;res et de pr&eacute;senter les informations 
 	sur les plugins SPIP - modules fonctionnels, th&egrave;mes et squelettes. Cette API sert aussi de base au plugin STEP.
 	</description>

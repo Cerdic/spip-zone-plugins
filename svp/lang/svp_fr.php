@@ -137,6 +137,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_utilise_plugins' => 'Fonctions supplémentaires avec les plugins',
 	'label_version' => 'Version',
 	'lien_gerer_depots' => 'Tous les dépôts',
+	'lien_telecharger' => 'L\'archive',
+	'lien_documenter' => 'La documentation',
+	'lien_demontrer' => 'La démo',
+	'lien_developper' => 'Les sources',
 // M
 	'message_nok_aucun_paquet_ajoute' => 'Le dépôt « @url@ » ne fournit aucun nouveau paquet par rapport à la base déjà enregistrée. Il n\'a donc pas ét&eacute ajouté',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',

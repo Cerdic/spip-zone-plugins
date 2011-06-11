@@ -32,6 +32,7 @@ function svp_ajouter_depot($url, &$erreur=''){
 					'descriptif' => filtrer_entites($infos['depot']['descriptif']),
 					'type' => $infos['depot']['type'],
 					'url_serveur' => $infos['depot']['url_serveur'],
+					'url_brouteur' => $infos['depot']['url_brouteur'],
 					'url_archives' => $infos['depot']['url_archives'],
 					'xml_paquets'=> $url,
 					'sha_paquets'=> sha1_file($url),
@@ -221,7 +222,8 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 		return false;
 		
 	// On initialise l'url de base des logos du depot et son type afin de calculer l'url complete de chaque logo
-	$depot = sql_fetsel('url_archives, type', 'spip_depots', 'id_depot=' . sql_quote($id_depot));
+	$select = array('url_brouteur', 'url_archives', 'type');
+	$depot = sql_fetsel($select, 'spip_depots', 'id_depot=' . sql_quote($id_depot));
 	
 	// Initialisation du tableau des id de paquets crees ou mis a jour pour le depot concerne
 	$ids_a_supprimer = array();
@@ -267,6 +269,10 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 				$insert_paquet['logo'] = $depot['url_archives'] . '/'
 									   . basename($insert_paquet['nom_archive'], '.zip') . '.'
 									   . pathinfo($insert_paquet['logo'], PATHINFO_EXTENSION);
+			// On construit l'url complete des sources en considérant que l'on a un trac sur du svn.
+			// Cette url est stocke dans lien_dev en attendant que la nouvelle DTD procure ce lien explicitement
+			if ($depot['url_brouteur'] AND !$insert_paquet['lien_dev'])
+				$insert_paquet['lien_dev'] = $depot['url_brouteur'] . '/' . $insert_paquet['src_archive'];
 
 			// On loge l'absence de categorie ou une categorie erronee et on positionne la categorie
 			// par defaut "aucune"
