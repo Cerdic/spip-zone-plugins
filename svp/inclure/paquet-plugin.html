@@ -9,6 +9,7 @@
 			<BOUCLE_depot(DEPOTS){id_depot}>
 			[(#SET{url_depot, #URL_DEPOT})]
 			[(#SET{url_archives, #URL_ARCHIVES})]
+			[(#SET{url_brouteur, #URL_BROUTEUR})]
 			[(#SET{titre_depot, #TITRE})]
 			</BOUCLE_depot>
 		</h3>
@@ -33,14 +34,20 @@
 				</li>]
 				[(#LIEN_DEMO|oui)
 				<li class="item">
-					<a[ href="(#LIEN_DEMO)"] title="<:svp:bulle_aller_documentation:>">
+					<a[ href="(#LIEN_DEMO)"] title="<:svp:bulle_aller_demonstration:>">
 						<:svp:lien_demontrer:>
 					</a>
 				</li>]
 				[(#LIEN_DEV|oui)
 				<li class="item">
-					<a[ href="(#LIEN_DEV)"] title="<:svp:bulle_aller_documentation:>">
+					<a[ href="(#LIEN_DEV)"] title="<:svp:bulle_aller_developpement:>">
 						<:svp:lien_developper:>
+					</a>
+				</li>]
+				[(#GET{url_brouteur}|oui)
+				<li class="item">
+					<a[ href="(#GET{url_brouteur}|concat{'/', #SRC_ARCHIVE})"] title="<:svp:bulle_aller_sources:>">
+						<:svp:lien_sourcer:>
 					</a>
 				</li>]
 			</ul>

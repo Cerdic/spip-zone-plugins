@@ -269,10 +269,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 				$insert_paquet['logo'] = $depot['url_archives'] . '/'
 									   . basename($insert_paquet['nom_archive'], '.zip') . '.'
 									   . pathinfo($insert_paquet['logo'], PATHINFO_EXTENSION);
-			// On construit l'url complete des sources en considérant que l'on a un trac sur du svn.
-			// Cette url est stocke dans lien_dev en attendant que la nouvelle DTD procure ce lien explicitement
-			if ($depot['url_brouteur'] AND !$insert_paquet['lien_dev'])
-				$insert_paquet['lien_dev'] = $depot['url_brouteur'] . '/' . $insert_paquet['src_archive'];
 
 			// On loge l'absence de categorie ou une categorie erronee et on positionne la categorie
 			// par defaut "aucune"
