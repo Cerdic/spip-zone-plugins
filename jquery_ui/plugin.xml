@@ -39,9 +39,16 @@
 		<nom>jquery_plugins</nom>
 		<inclure>jqueryui_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>jqueryui_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>jqueryui_pipelines.php</inclure>
+		<action>insert_head</action>
+	</pipeline>
 	<pipeline><nom>jqueryui_forcer</nom></pipeline>
-	<pipeline><nom>insert_head</nom></pipeline>
-	<pipeline><nom>header_prive</nom></pipeline>
 	<necessite id="lib:jquery-ui-1.8.9" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.8.9.zip" />
 	<necessite id="saisies" />
 	<categorie>outil</categorie>

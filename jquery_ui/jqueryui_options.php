@@ -1,4 +1,5 @@
 <?php
+
 define('_DIR_JQUERYUI_JS','lib/jquery-ui-1.8.9/ui/');
 define('_DIR_JQUERYUI_CSS','lib/jquery-ui-1.8.9/themes/');
 
