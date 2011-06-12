@@ -20,7 +20,7 @@ function couteau_suisse_ajouter_onglets($flux){
 	$arg = $flux['args']=='configuration' || $flux['args']=='plugins';
 	// si on est admin...
 	if($arg && autoriser('configurer', 'cs'))
-		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), _T('couteau:titre'), generer_url_ecrire('admin_couteau_suisse'));
+		$flux['data']['couteau_suisse']= new Bouton(find_in_path('img/couteau-24.gif'), 'couteau:titre', generer_url_ecrire('admin_couteau_suisse'));
 	return $flux;
 }
 

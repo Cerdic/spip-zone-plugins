@@ -310,7 +310,7 @@ add_variables( array(
 	'defaut' => 0,
 ));
 // chaine de langue en extension sous SPIP>=3.0
-$cs_temp=defined('_SPIP30000')?'forum:':'';
+$cs_temp = defined('_SPIP30000')?'forum:':'';
 add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'securite',
@@ -1188,7 +1188,9 @@ add_outil( array(
 	'categorie' => 'admin',
 	'version-min' => '1.9300',
 	'code:options' => '%%moderation_admin%%%%moderation_redac%%%%moderation_visit%%',
-	'code:jq_init' => 'if(window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''.addslashes(unicode2charset(html2unicode(_T('bouton_radio_modere_priori')))).'\')", this).next().html(\''.addslashes(_T('couteauprive:moderation_message')).'\');',
+	'code:jq_init' => 'if(window.location.search.match(/page=forum/)!=null) jQuery("legend:contains(\''
+		.addslashes(unicode2charset(html2unicode(_T((defined('_SPIP30000')?'forum:':'').'bouton_radio_modere_priori')))).'\')", this).next().html(\''
+		.addslashes(_T('couteauprive:moderation_message')).'\');',
 	'pipeline:pre_edition' => 'moderation_vip',
 ));
 add_variables( array(
