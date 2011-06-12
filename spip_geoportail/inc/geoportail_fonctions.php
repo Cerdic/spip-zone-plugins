@@ -109,6 +109,7 @@ function geoportail_affiche_milieu($flux)
 					'zoom'			=> _request('zoom'),
 					'zone'			=> _request('zone')
 				);
+	// Articles
 	if ($exec == 'articles' && $GLOBALS['meta']['geoportail_geoarticle']) 
 	{	$id_article = $contexte['id_objet'] = $flux['args']['id_article'];
 		if ($GLOBALS['meta']['geoportail_geodocument']) $contexte['id_article'] = $flux['args']['id_article'];
@@ -121,10 +122,12 @@ function geoportail_affiche_milieu($flux)
 			if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
 		}
 	}
+	// Auteurs
 	else if ($exec == 'auteur_infos' && $GLOBALS['meta']['geoportail_geoauteur']) 
 	{	$contexte['id_objet'] = $flux['args']['id_auteur'];
 		$contexte['objet'] = 'auteur';
 	}
+	// Rubriques
 	else if ($exec == 'naviguer' && $GLOBALS['meta']['geoportail_georubrique']) 
 	{	$id_rubrique = $contexte['id_objet'] = $flux['args']['id_rubrique'];
 		$contexte['objet'] = 'rubrique';
@@ -136,18 +139,31 @@ function geoportail_affiche_milieu($flux)
 			if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
 		}
 	}
+	// Mots
 	else if ($exec == 'mots_edit' && $GLOBALS['meta']['geoportail_geomot']) 
 	{	$contexte['id_objet'] = $flux['args']['id_mot'];
 		$contexte['objet'] = 'mot';
 	}
+	// Breves
 	else if ($exec == 'breves_voir' && $GLOBALS['meta']['geoportail_geobreve']) 
 	{	$contexte['id_objet'] = $flux['args']['id_breve'];
 		$contexte['objet'] = 'breve';
 	}
+	// Sites
 	else if ($exec == 'sites' && $GLOBALS['meta']['geoportail_geosyndic']) 
 	{	$contexte['id_objet'] = $flux['args']['id_syndic'];
 		$contexte['objet'] = 'syndic';
 	}
+	// Si plugin Agenda
+	else if ($exec == 'evenements_edit') 
+	{	$contexte['id_objet'] = $flux['args']['id_evenement'];
+		$contexte['objet'] = 'evenement';
+		// Position de l'article parent
+		$id_article = $flux['args']['id_article'];
+		$a = spip_fetch_array(spip_query("SELECT * FROM spip_geopositions WHERE id_objet=$id_article AND objet='article'"));
+		if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
+	}
+	// Afficher le formulaire
 	if ($contexte['id_objet'])
 	{	$flux['data'] .= 
 		debut_cadre_enfonce(_DIR_PLUGIN_GEOPORTAIL."img/punaise.png", true, "", 
