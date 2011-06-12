@@ -54,7 +54,7 @@
 		<inclure>svp_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>header_prive</nom>
+		<nom>header_prive_css</nom>
 		<inclure>svp_pipelines.php</inclure>
 	</pipeline>
 
