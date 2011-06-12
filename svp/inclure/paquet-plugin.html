@@ -132,15 +132,33 @@
 		
 	
 		[(#REM) Les traductions ]
-		[(#TRADUCTIONS|unserialize|count|>{0}|?{
-		[(#TRADUCTIONS|unserialize|iterer_modele{paquet-traductions})],
+   		<BOUCLE_traductions(DATA){source table, #TRADUCTIONS|unserialize}>
+		[<ul class="liste">
+			<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_module:></strong></div>
+				<div class="unit size2of3 lastUnit">(#CLE)</div>
+			</li>
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_langue_reference:></strong></div>
+				<div class="unit size2of3 lastUnit">(#VALEUR{reference})</div>
+			</li>]
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_gestionnaire:></strong></div>
+				<div class="unit size2of3 lastUnit">(#VALEUR{gestionnaire})</div>
+			</li>]
+			[<li class="liste-items">
+				<div class="unit size1of3"><strong><:svp:label_traductions:></strong></div>
+				<div class="unit size2of3 lastUnit">(#VALEUR{langues}|svp_afficher_langues)</div>
+			</li>]
+		</ul>]
+   		</BOUCLE_traductions>
 		<ul class="liste">
 			<li class="liste-items">
 				<div class="unit size1of3"><strong><:svp:label_module:></strong></div>
 				<div class="unit size2of3 lastUnit"><:svp:info_aucun_module:></div>
 			</li>
-		</ul>}
-		)]
+		</ul>
+   		<//B_traductions>
 	</div>
 
 </BOUCLE_paquet>
