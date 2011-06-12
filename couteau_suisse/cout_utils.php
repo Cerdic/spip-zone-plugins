@@ -246,7 +246,7 @@ function cs_aide_raccourci($id) {
 	if($outils[$id]['actif']) {
 		include_spip('outils/'.$id);	
 		if(function_exists($f = $id.'_raccourcis')) return $f();
-		if(!preg_match(',:aide$,', _T("couteauprive:$id:aide") )) return _T("couteauprive:$id:aide");
+		if(!preg_match(',:aide(?:<|$),', $x = _T("couteauprive:$id:aide") )) return $x;
 	}
 	return '';
 }
@@ -537,7 +537,7 @@ define('_CS_SPIP_OPTIONS_B', "// Fin du code. Ne pas modifier ces lignes, merci"
 function cs_verif_FILE_OPTIONS($activer=false, $ecriture = false) {
 	$include = str_replace('\\','/',realpath(_DIR_CS_TMP.'mes_spip_options.php'));
 	$include = "@include_once \"$include\";\nif(\$GLOBALS['cs_spip_options']) define('_CS_SPIP_OPTIONS_OK',1);";
-	$inclusion = _CS_SPIP_OPTIONS_A."\n// Please don’t modify; this code is auto-generated\n$include\n"._CS_SPIP_OPTIONS_B;
+	$inclusion = _CS_SPIP_OPTIONS_A."\n// Please don't modify; this code is auto-generated\n$include\n"._CS_SPIP_OPTIONS_B;
 cs_log("cs_verif_FILE_OPTIONS($activer, $ecriture) : le code d'appel est $include");
 	if($fo = cs_spip_file_options(1)) {
 		if(lire_fichier($fo, $t)) {

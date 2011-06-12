@@ -309,6 +309,8 @@ add_variables( array(
 	'check' => 'couteauprive:auteur_forum_deux',
 	'defaut' => 0,
 ));
+// chaine de langue en extension sous SPIP>=3.0
+$cs_temp=defined('_SPIP30000')?'forum:':'';
 add_outil( array(
 	'id' => 'auteur_forum',
 	'categorie'	 => 'securite',
@@ -316,7 +318,7 @@ add_outil( array(
 	'code:jq_init' => 'cs_auteur_forum.apply(this);',
 	'code:js' => "var cs_verif_email = %%auteur_forum_email%%;\nvar cs_verif_nom = %%auteur_forum_nom%%;\nvar cs_verif_deux = %%auteur_forum_deux%%;",
 	'pipelinecode:pre_description_outil' => 'if($id=="auteur_forum") $texte=str_replace(array("@_CS_FORUM_NOM@","@_CS_FORUM_EMAIL@"),
-	array(preg_replace(\',:$,\',"",_T("forum_votre_nom")),preg_replace(\',:$,\',"",_T("forum_votre_email"))),$texte);',
+	array(preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_nom")),preg_replace(\',:$,\',"",_T("'.$cs_temp.'forum_votre_email"))),$texte);',
 ));
 
 // ici on a besoin de trois boutons radio : _T('couteauprive:par_defaut'), _T('couteauprive:sf_amont') et _T('couteauprive:sf_tous')

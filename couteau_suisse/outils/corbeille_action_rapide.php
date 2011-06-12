@@ -42,7 +42,7 @@ function cs_corbeille_table_infos($table=false) {
 				"libelle" => 'icone_auteurs',
 			),					
 			"breves" => array( "statut" => "refuse", 
-				"libelle" => 'icone_breves',
+				"libelle" => defined('_SPIP30000')?'breves:icone_breves':'icone_breves',
 			),
 			"signatures" => array( "statut" => "poubelle", 
 				"libelle" => 'couteau:objet_petitions',
