@@ -39,7 +39,7 @@
 							<li class="editer_depot obligatoire[(#ENV{erreurs}|table_valeur{depot}|oui) erreur]">
 								<label for="depot"><:svp:label_critere_depot:></label>
 								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{depot})</span>]
-								#INCLURE{fond=formulaires/inc-charger_depots, env}
+								<INCLURE{fond=formulaires/inc-charger_depots, env} />
 							</li>
 							<li class="editer_doublon obligatoire[(#ENV{erreurs}|table_valeur{doublon}|oui) erreur]">
 								<label for="doublon"><:svp:label_critere_doublon:></label>

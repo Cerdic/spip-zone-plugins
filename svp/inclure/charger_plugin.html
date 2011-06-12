@@ -7,7 +7,7 @@
 			<div class="download">
 			[(#VALEUR{installe}|non)
 				<a[ href="(#URL_ACTION_AUTEUR{charger_plugin, charger_zip,./}|parametre_url{url_zip_plugin, #VALEUR{url_archive}})"] title="<:plugin_charger:>">
-					[(#CHEMIN{prive/themes/spip/images/telecharger-16.png}|balise_img{<:plugin_charger:>})]
+					[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:plugin_charger:>})]
 				</a>
 			]
 			</div>
