@@ -130,10 +130,10 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 //	else
 //		verif_outils();
 
-	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('couteauprive:titre'), "configuration", 'couteau_suisse');
+	$t = charger_fonction('commencer_page', 'inc');
+	echo $t(couteauprive_T('titre'), 'configuration', 'couteau_suisse');
 
-	// pour la  version du plugin
+	// versions du Couteau Suisse et de la barre typo
 	include_spip('inc/plugin');
 	if(isset($GLOBALS['meta']['plugin'])) {
 		$t = unserialize($GLOBALS['meta']['plugin']);
@@ -145,28 +145,23 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	if(!strlen($dir)) $dir = 'couteau_suisse';
 	if(!strlen($bt_dir)) $bt_dir = 'barre_typo_v2';
 	$get_infos = defined('_SPIP20100')?charger_fonction('get_infos','plugins'):'plugin_get_infos';
-	if (isset($dir_type)) {
-		$t = $get_infos($dir, false, constant($dir_type));
-	} else {
-		$t = $get_infos($dir);
-	}
+	$t = isset($dir_type)?$get_infos($dir, false, constant($dir_type)):$get_infos($dir);
 	$cs_version_base = $t['version_base']; $cs_version = $t['version'];
 	if(!function_exists('installe_un_plugin')) {
 		// ici SPIP >= 3.0
 		// TODO: redondances probables a revoir
 		// mises a jour eventuelles de la base
 		$installer_plugins = charger_fonction('installer', 'plugins');
-		/*$infos = */$installer_plugins($plugin, 'install');
+		/*$infos = */$installer_plugins('couteau_suisse', 'install');
 	} else {
 		// compatibilite SPIP < 3.0
 		// mises a jour eventuelles de la base
 		installe_un_plugin($dir, $t, $dir_type);
-		unset($t);
 	}
 	if(!strlen($bt_version)) { $bt_version = $get_infos($bt_dir); $bt_version = $bt_version['version']; }
-	
-	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t,$r)))
-		?'<br/>'._T('couteauprive:version_revision', array('revision'=>$r[1])):"";
+
+	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t, $r)))
+		?'<br/>'.couteauprive_T('version_revision', array('revision'=>$r[1])):"";
 	include_spip('public/assembler');
 	echo recuperer_fond('exec/admin_couteau_suisse_head', array(
 		'force' => in_array(_request('var_mode'), array('calcul', 'recalcul'))?'oui':null,
@@ -174,74 +169,49 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		'exec' => _request('exec'),
 	));
 	echo "<br /><br /><br />";
-	gros_titre(_T('couteauprive:titre'), '', false);
+	gros_titre(couteauprive_T('titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
-	echo '<div style="font-size:85%">';
 
-// verification d'une base venant de SPIP 1.8
-$res = spip_query("DESCRIBE spip_meta valeur");
-$resultat = function_exists('spip_fetch_array')?spip_fetch_array($res):sql_fetch($res);
-if($resultat['Type']!='text') echo "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$resultat[Type]' au lieu de 'text'.</p>";
-// verification de la barre typo V2
-$mini = '2.5.3';
-if(strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) echo "<p>"._T('couteauprive:erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
-// test sur jQuery
-echo "<script type=\"text/javascript\"><!-- 
-if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>'._T('couteauprive:erreur:jquery').'</p>')))."');
-//--></script>";
-	echo '</div>';
+	echo quelques_verifications($bt_version);
 
 	// chargement des outils
 	include_spip('inc/cs_outils'); 
 	list($outils_affiches_actifs, $liste_outils) = liste_outils();
+
 	// cadre de gauche
 	echo debut_gauche('', true);
-	// pour la liste des docs sur spip-contrib
-	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
-	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace_callback('/@@couteauprive:(.*?)@@/', 'cs_couper_25', $v);
-	sort($contribs);
-	$aide = '';
+	$t = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
-		$aide .= "\n_ " . _T('couteauprive:pack_du', array('pack'=>"{[{$pack}|"._T('couteauprive:pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
-	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP >= 2.0)
-	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
-	$form_update = preg_match(',plugins/auto/couteau_suisse/$,',_DIR_PLUGIN_COUTEAU_SUISSE)?
-		"<input type='hidden' name='$arg_chargeur' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
-		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(_T('couteauprive:version_update')) . "' class='cs_sobre' title='" . attribut_html(_T('couteauprive:version_update_title')) . "' /></div>"
-		:"";
-	// un lien si le plugin plugin "Telechargeur" est present (SPIP < 2.0)
-	if(!strlen($form_update) && defined('_DIR_PLUGIN_CHARGEUR'))
-		$form_update = "<br/>&bull; <a title='" . attribut_html(_T('couteauprive:version_update_chargeur_title')) . "' href='../spip.php?action=charger&plugin=couteau_suisse&url_retour=".urlencode(generer_url_ecrire('admin_couteau_suisse'))."'>"._T('couteauprive:version_update_chargeur').'</a>';
-	// compilation du bandeau gauche
-	$aide =	_T('couteauprive:help2', array(
+		$t .= "\n_ " . couteauprive_T('pack_du', array('pack'=>"{[{$pack}|"._couteauprive_T('pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+	$t = couteauprive_T('help2', array(
 			'version' => $cs_version.$cs_revision.'<br/>'.
-				(defined('_CS_PAS_DE_DISTANT')?'('._T('couteauprive:version_distante_off').')':'<span class="cs_version">'._T('couteauprive:version_distante').'</span>')
+				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
 				))
-		. $form_update
-		. '<br/>&bull;&nbsp;['._T('couteauprive:pack_titre') . '|' . _T('couteauprive:pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos') . "]\n\n"
-		. _T('couteauprive:help3', array(
-
+		. chargement_automatique()
+		. '<br/>&bull;&nbsp;['.couteauprive_T('pack_titre') . '|' . couteauprive_T('pack_alt') . '->' . generer_url_ecrire($exec,'cmd=pack#cs_infos') . "]\n\n"
+		. couteauprive_T('help3', array(
 			'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 			'hide' => generer_url_ecrire($exec,'cmd=showall'),
-			'contribs' => join('', $contribs),
-			'install' => $aide
+			'contribs' => liste_des_contribs(),
+			'install' => $t
 	));
-	if(function_exists('redirige_action_post')) $aide = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', $aide); // SPIP >= 2.0
-	$aide = '<div class="cs_aide">'._T('couteauprive:help')."\n\n$aide</div>";
-	echo debut_boite_info(true), propre($aide), fin_boite_info(true);
-	$aide = cs_aide_raccourcis();
-	if(strlen($aide))
-		echo debut_boite_info(true), $aide, fin_boite_info(true);
-	$aide = cs_aide_pipelines($outils_affiches_actifs);
-	if(strlen($aide))
-		echo debut_boite_info(true), $aide, fin_boite_info(true);
+	if(function_exists('redirige_action_post')) $t = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', $t); // SPIP >= 2.0
+	$t = '<div class="cs_aide">'.couteauprive_T('help')."\n\n$t</div>";
+	echo debut_boite_info(true), propre($t), fin_boite_info(true);
+	$t = cs_aide_raccourcis();
+	if(strlen($t))
+		echo debut_boite_info(true), $t, fin_boite_info(true);
+	$t = cs_aide_pipelines($outils_affiches_actifs);
+	if(strlen($t))
+		echo debut_boite_info(true), $t, fin_boite_info(true);
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>$exec),'data'=>''));
 
+	// cadre de droite
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>'')),
 		debut_droite('', true),
-		debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'._T('couteauprive:outils_liste')),
-		_T('couteauprive:outil_intro'),
+		debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'.couteauprive_T('outils_liste')),
+		couteauprive_T('outil_intro'),
 		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
 	$_GET['source'] = $exec;
@@ -253,9 +223,9 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 		'</div><script type="text/javascript"><!--
 var cs_descripted = "', $afficher_outil, '";
 document.write("<style type=\'text/css\'>#csjs{display:none;}<\/style>");
-//--></script><div id="csjs" style="color:red;"><br/>', _T('couteauprive:erreur:js'),'</div>
-<noscript><style type="text/css">#csjs{display:none;}</style><div style="color:red;"><br/>', _T('couteauprive:erreur:nojs'),
-$_GET['modif']=='oui'?'<br/>'._T('couteauprive:vars_modifiees').'.':'','</div></noscript>',
+//--></script><div id="csjs" style="color:red;"><br/>', couteauprive_T('erreur:js'),'</div>
+<noscript><style type="text/css">#csjs{display:none;}</style><div style="color:red;"><br/>', couteauprive_T('erreur:nojs'),
+$_GET['modif']=='oui'?'<br/>'.couteauprive_T('vars_modifiees').'.':'','</div></noscript>',
 		'</div></td></tr></table>',
 		'<style type="text/css">.cs_patience{display:none;}</style>',
 		fin_cadre_trait_couleur(true),
@@ -263,6 +233,49 @@ $_GET['modif']=='oui'?'<br/>'._T('couteauprive:vars_modifiees').'.':'','</div></
 		pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>'')),
 		fin_gauche(), fin_page();
 cs_log(" FIN : exec_admin_couteau_suisse()");
+}
+
+
+function liste_des_contribs() {
+	// pour la liste des docs sur spip-contrib
+	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
+	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace_callback('/@@couteauprive:(.*?)@@/', 'cs_couper_25', $v);
+	sort($contribs);
+	return join('', $contribs);
+}
+
+// messages d'avertissments eventuels
+function quelques_verifications($bt_version) {
+	// test sur jQuery
+	$res = "<script type=\"text/javascript\"><!-- 
+if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>'.couteauprive_T('erreur:jquery').'</p>')))."');
+//--></script>";
+	// verification d'une base venant de SPIP 1.8
+	$tmp = spip_query('DESCRIBE spip_meta valeur');
+	$tmp = function_exists('spip_fetch_array')?spip_fetch_array($tmp):sql_fetch($tmp);
+	if($tmp['Type']!='text')
+		$res .= "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$tmp[Type]' au lieu de 'text'.</p>";
+	// verification de la barre typo V2
+	$mini = '2.5.3';
+	if(strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) 
+		$res .= "<p>".couteauprive_T('erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
+	return "<div style='font-size:85%'>$res</div>";
+}
+
+// clic pour la mise a jour du Couteau Suisse
+function chargement_automatique() {
+	// si le plugin est installe par procedure automatique, on permet la mise a jour directe (SPIP >= 2.0)
+	$arg_chargeur = $GLOBALS['spip_version_base']>=15828?'url_zip_plugin2':'url_zip_plugin'; // eq. SPIP >= 2.1.2
+	$res = preg_match(',plugins/auto/couteau_suisse/$,',_DIR_PLUGIN_COUTEAU_SUISSE)?
+		"<input type='hidden' name='$arg_chargeur' value='http://files.spip.org/spip-zone/couteau_suisse.zip' />"
+		. "<br/><div class='cs_sobre'><input type='submit' value='&bull; " . attribut_html(couteauprive_T('version_update')) . "' class='cs_sobre' title='"
+		. attribut_html(couteauprive_T('version_update_title')) . "' /></div>"
+		:"";
+	// un lien si le plugin plugin "Telechargeur" est present (SPIP < 2.0)
+	if(!strlen($res) && defined('_DIR_PLUGIN_CHARGEUR'))
+		$res = "<br/>&bull; <a title='" . attribut_html(couteauprive_T('version_update_chargeur_title')) 
+		. "' href='../spip.php?action=charger&plugin=couteau_suisse&url_retour=".urlencode(generer_url_ecrire('admin_couteau_suisse'))."'>".couteauprive_T('version_update_chargeur').'</a>';
+	return $res;
 }
 
 // callback pour les contribs
