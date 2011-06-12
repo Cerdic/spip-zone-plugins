@@ -53,6 +53,10 @@
 		<nom>insert_head_css</nom>
 		<inclure>svp_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>svp_pipelines.php</inclure>
+	</pipeline>
 
 	<onglet id='svp_depots' parent='plugins'>
 		<icone>prive/themes/spip/images/svp-24.png</icone>

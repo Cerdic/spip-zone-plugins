@@ -1,0 +1,28 @@
+<B_plugins_trouves>
+<div class="liste plugins distants">
+	<ul class="liste-items">
+<BOUCLE_plugins_trouves(DATA) {source table, #ENV{plugins}}>
+		<li class="item[(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
+			[(#REM) <!-- Icone de telechargement -->]
+			<div class="download">
+			[(#VALEUR{installe}|non)
+				<a[ href="(#URL_ACTION_AUTEUR{charger_plugin, charger_zip,./}|parametre_url{url_zip_plugin, #VALEUR{url_archive}})"] title="<:plugin_charger:>">
+					[(#CHEMIN{images/telecharger-16.png}|balise_img{<:plugin_charger:>})]
+				</a>
+			]
+			</div>
+		
+			[(#REM) <!-- Resume du plugin -->]
+			<div class="resume">
+				<h3 class="nom">[(#VALEUR{nom})]</h3>
+				<span class="version">[(#VALEUR{version})]</span>
+				<span class="etat">[ - (#VALEUR{etat})]</span>
+				[<span class="installe"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
+				<div class="short">[(#VALEUR{slogan})]</div>
+				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
+			</div>
+		</li>
+</BOUCLE_plugins_trouves>
+	</ul>
+</div>
+<B_plugins_trouves>

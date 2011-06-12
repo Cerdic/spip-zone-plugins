@@ -22,6 +22,19 @@ function svp_affiche_enfants($flux){
 }
 
 /**
+ * Insertion dans le pipeline header_prive
+ * Inclure les css prive de la svp (formulaire d'ajout de plugin)
+ *
+ * @param object $flux
+ * @return $flux
+ */
+function svp_header_prive($flux){
+	$css = find_in_path('css/svp_prive.css');
+	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' />\n";
+	return $flux;
+}
+
+/**
  * Insertion dans le pipeline insert_head_css
  * Permet d'inserer les css necessaires aux page publiques de SVP
  *
@@ -29,7 +42,7 @@ function svp_affiche_enfants($flux){
  * @return $flux
  */
 function svp_insert_head_css($flux) {
-	if ($f = find_in_path('svp_habillage.css')) {
+	if ($f = find_in_path('css/svp_habillage.css')) {
 		$flux .= '<link rel="stylesheet" href="'.direction_css($f).'" type="text/css" media="all" />';
 	}
 	return $flux;
