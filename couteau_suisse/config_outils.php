@@ -1037,8 +1037,8 @@ add_outil( array(
 	 traitement:TEXTE/forums:post_propre,
 	 traitement:TEXTE/rubriques:post_propre,
 	 traitement:CHAPO:post_propre' => 'cs_glossaire',
-	// Precaution pour les articles virtuels
-	'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
+	// Precaution pour les articles virtuels (SPIP < 3.0)
+	defined('_SPIP30000')?'foo':'traitement:CHAPO:pre_propre' => 'nettoyer_chapo',
 	// Mise en forme des titres
 	'traitement:TITRE/mots:post_typo' => 'cs_glossaire_titres',
 	'code:css' =>  'a.cs_glossaire:after {display:none;}',
