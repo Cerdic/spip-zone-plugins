@@ -359,7 +359,7 @@ Os bloques multi móstranse entón sempre na lingua demandada polo visitante.', 
 	// H
 	'help' => '{{Esta páxina só é accesible para o responsable do web.}}<p>Dá acceso ás diferentes funcións suplementarias achegadas polo módulo «{{Le Couteau Suisse}}».',
 	'help2' => 'Versión local: @version@',
-	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:<br/>• [A&nbsp;Navalla&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reinicios:
+	'help3' => '<p>Ligaz&oacute;ns de documentaci&oacute;n:@contribs@</p><p>Reinicios:
 _ • [Ferramentas cacheadas|Volver &aacute; apariencia inicial desta p&aacute;xina->@hide@]
 _ • [De todo o m&oacute;dulo|Volver ao estado inicial do m&oacute;dulo->@reset@]@install@
 </p>', # MODIF

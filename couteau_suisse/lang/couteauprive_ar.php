@@ -360,12 +360,9 @@ Attention : dans les forums, pétitions, flux syndiqués, etc., la gestion du ja
 	'guillemets:nom' => 'علامات الاقتباس',
 
 	// H
-	'help' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne accès aux différentes  fonctions supplémentaires apportées par le plugin «{{Le Couteau Suisse}}».</p><p>Version locale : @version@@distant@<br/>@pack@</p><p>Liens de documentation :<br/>• [Le Couteau Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Réinitialisations :
-_ • [Des outils cachés|Revenir à l\'apparence initiale de cette page->@hide@]
-_ • [De tout le plugin|Revenir à l\'état initial du plugin->@reset@]@install@
-</p>', # MODIF
+	'help' => '{{Cette page est uniquement accessible aux responsables du site.}}<p>Elle donne accès aux différentes  fonctions supplémentaires apportées par le plugin «{{Le Couteau Suisse}}».', # MODIF
 	'help2' => 'Version locale : @version@', # NEW
-	'help3' => '<p>Liens de documentation :<br />• [{{Le Couteau Suisse}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Réinitialisations :
+	'help3' => '<p>Liens de documentation :@contribs@</p><p>Réinitialisations :
 _ • [Des outils cachés|Revenir à l\'apparence initiale de cette page->@hide@]
 _ • [De tout le plugin|Revenir à l\'état initial du plugin->@reset@]@install@
 </p>', # NEW

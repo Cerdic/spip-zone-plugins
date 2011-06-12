@@ -381,7 +381,7 @@ Aleshores, els blocs multi es mostren sempre en la llengua demanada pel visitant
 	// H
 	'help' => '{{Aquesta pàgina només és accessible pels responsables del lloc.}}<p>Permet la configuració de les diferents funcions suplementàries aportades pel plugin «{{Le Couteau Suisse}}».',
 	'help2' => 'Versió local: @version@',
-	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:<br />•[Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reiniciacions:
+	'help3' => '<p>Enlla&ccedil;os de documentaci&oacute;:@contribs@</p><p>Reiniciacions:
 
 _ • [Eines amagades|Tornar a l\'aparen&ccedil;a inicial d\'aquesta p&agrave;gina->@hide@]
 

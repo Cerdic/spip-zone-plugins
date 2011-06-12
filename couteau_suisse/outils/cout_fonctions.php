@@ -98,6 +98,16 @@ function cs_traitements($texte, $nom_champ='NULL', $type_objet='NULL', $exclusio
 }
 function cs_noop($t='',$a=NULL,$b=NULL,$c=NULL) { return $t; }
 
+// liste des docs sur spip-contrib (outils actifs)
+function cs_liste_contribs($coupe = 999, $join = "</li><li>") {
+	global $metas_outils;
+	$contribs = array();
+	foreach($metas_outils as $o=>$v) if(isset($v['contrib']) && isset($v['actif']) && $v['actif'])
+		$contribs[] =  '[' . couper(couteauprive_T($o.':nom'), $coupe) . '->' . (is_numeric($v['contrib']) ?_URL_CONTRIB.$v['contrib']:$v['contrib']) . ']';
+	sort($contribs);
+	return '[{{' . _T('couteau:titre') . '}}->' . _URL_CONTRIB . '2166]' . $join . join($join, $contribs);
+}
+
 // renvoie un champ d'un objet en base
 function cs_champ_sql($id, $champ='texte', $objet='article') {
 	// Utiliser la bonne requete en fonction de la version de SPIP

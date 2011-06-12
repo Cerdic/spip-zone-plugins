@@ -447,7 +447,7 @@ This means that multi blocks will always displayed in the language requested by 
 	// H
 	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Penknife}}.',
 	'help2' => 'Local version: @version@',
-	'help3' => '<p>Documentation links:<br/>• [{{The&nbsp;Swiss&nbsp;Knife}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets:
+	'help3' => '<p>Documentation links:@contribs@</p><p>Resets:
 
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
 

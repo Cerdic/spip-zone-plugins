@@ -332,7 +332,7 @@ Dikkat : forumlarda, dilekçelerde, paylaşılan akılarda ve benzerlerinde java
 	// H
 	'help' => '{{Bu sayfa yalnız site sorumlularının erişimine açıktır.}} «{{İsviçre Çakısı}}» eklentisinin getirdiği farklı bir çok ek işlevin düzenlenmesine izin verir .',
 	'help2' => 'Yerel sürüm : @version@',
-	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :<br/>• [&#304;svi&ccedil;re&nbsp;&Ccedil;ak&#305;s&#305;->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
+	'help3' => 'Belgelendirme ba&#287;lant&#305;lar&#305; :@contribs@</p><p>Yeniden ba&#351;lat&#305;lmas&#305; :
 _ • [Gizli gere&ccedil;lerin|Bu sayfan&#305;n ilk g&ouml;r&uuml;n&uuml;m&uuml;ne d&ouml;n&uuml;lmesi->@hide@]
 _ • [T&uuml;m eklentinin|Eklentini ilk durumuna d&ouml;n&uuml;lmesi->@reset@]@install@
 </p>', # MODIF

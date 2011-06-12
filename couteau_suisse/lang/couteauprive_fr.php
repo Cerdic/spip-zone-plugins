@@ -368,7 +368,7 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 	// H
 	'help' => '{{Cette page est uniquement accessible aux responsables du site.}} Elle permet la configuration des différentes  fonctions supplémentaires apportées par le plugin «{{Le Couteau Suisse}}».',
 	'help2' => 'Version locale : @version@',
-	'help3' => '<p>Liens de documentation :<br />• [{{Le Couteau Suisse}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Réinitialisations :
+	'help3' => '<p>Liens de documentation :@contribs@</p><p>Réinitialisations :
 _ • [Des outils cachés|Revenir à l\'apparence initiale de cette page->@hide@]
 _ • [De tout le plugin|Revenir à l\'état initial du plugin->@reset@]@install@
 </p>',

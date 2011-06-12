@@ -95,14 +95,10 @@ if($log) cs_log($rand.($forcer?"\$forcer = true":"cs_initialisation($forcer) : S
 	// completer les variables manquantes et incorporer l'activite lue dans les metas
 if($log) cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 
-	// initialiser chaque outil et construire la liste des contribs
-	$contribs = array();
+	// initialiser chaque outil
 	include_spip('inc/cs_outils');
-	foreach($outils as $outil) {
+	foreach($outils as $outil)
 		cs_initialisation_d_un_outil($id = $outil['id'], $description_outil, false);
-		if(isset($outil['contrib']) && isset($metas_outils[$id]['actif']) && $metas_outils[$id]['actif'])
-			$contribs[] = '<br/> &bull; [@@couteauprive:'.$outil['id'].':nom@@->http://www.spip-contrib.net/?article'.$outil['contrib'].']';
-	}
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
 if($log) cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera peut-etre inclus.");
@@ -120,8 +116,6 @@ if($log) cs_log("$rand -- ecriture metas");
 	ecrire_meta('tweaks_variables', serialize($metas_vars));
 	// en metas : code inline pour les pipelines, mes_options et mes_fonctions;
 	ecrire_meta('tweaks_pipelines', serialize($cs_metas_pipelines));
-	// en metas : les liens sur spip-contrib
-	ecrire_meta('tweaks_contribs', serialize($contribs));
 	ecrire_metas();
 	$GLOBALS['cs_init'] = 0;
 if($log) cs_log("{$rand}cs_initialisation($forcer) : Sortie");
@@ -268,7 +262,7 @@ function define_IMG_GD_MAX_PIXELS() {
 // renvoie _T('couteauprive:'.$texte) puis detruit la chaine du module concerne
 function couteauprive_T($texte, $args=array()) {
 	$res = _T('couteauprive:'.$texte, $args);
-	if(isset($GLOBALS[$tmp='i18n_couteauprive_'.$GLOBALS['spip_lang']][$texte]))
+	if(defined('_SPIP19300') && isset($GLOBALS[$tmp='i18n_couteauprive_'.$GLOBALS['spip_lang']][$texte]))
 			unset($GLOBALS[$tmp][$texte]);
 	return $res;
 }

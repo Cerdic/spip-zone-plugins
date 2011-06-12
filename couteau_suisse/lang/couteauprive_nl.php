@@ -345,7 +345,7 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	// H
 	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de site verantwoordelijken.}} Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht«{{Le Couteau Suisse}}».',
 	'help2' => 'Plaatselijke versie : @version@',
-	'help3' => '<p>Band van documentatie :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisatie :
+	'help3' => '<p>Band van documentatie :@contribs@</p><p>R&eacute;initialisatie :
 _ • [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
 _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install@
 </p>', # MODIF

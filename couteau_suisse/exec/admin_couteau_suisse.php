@@ -192,7 +192,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		. couteauprive_T('help3', array(
 			'reset' => generer_url_ecrire($exec,'cmd=resetall'),
 			'hide' => generer_url_ecrire($exec,'cmd=showall'),
-			'contribs' => liste_des_contribs(),
+			'contribs' => "\n_ &bull; " . cs_liste_contribs(25, "\n_ &bull; "),
 			'install' => $t
 	));
 	if(function_exists('redirige_action_post')) $t = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', $t); // SPIP >= 2.0
@@ -233,15 +233,6 @@ $_GET['modif']=='oui'?'<br/>'.couteauprive_T('vars_modifiees').'.':'','</div></n
 		pipeline('affiche_milieu',array('args'=>array('exec'=>$exec),'data'=>'')),
 		fin_gauche(), fin_page();
 cs_log(" FIN : exec_admin_couteau_suisse()");
-}
-
-
-function liste_des_contribs() {
-	// pour la liste des docs sur spip-contrib
-	$contribs = isset($GLOBALS['meta']['tweaks_contribs'])?unserialize($GLOBALS['meta']['tweaks_contribs']):array();
-	foreach($contribs as $i=>$v) $contribs[$i] = preg_replace_callback('/@@couteauprive:(.*?)@@/', 'cs_couper_25', $v);
-	sort($contribs);
-	return join('', $contribs);
 }
 
 // messages d'avertissments eventuels

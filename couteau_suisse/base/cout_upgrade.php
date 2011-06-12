@@ -91,6 +91,9 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_upgrade($nom_meta_base_version,$ve
 				effacer_meta($meta);
 			ecrire_meta($nom_meta_base_version,$current_version=$tmp);
 		}
+		if (version_compare($current_version,$tmp='1.1','<')){
+			effacer_meta('tweaks_contribs');
+		}
 		ecrire_metas();
 	}
 }
