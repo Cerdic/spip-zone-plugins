@@ -23,9 +23,7 @@
 							<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
 								<label for="categorie"><:svp:label_critere_categorie:></label>
 								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
-								[<select name="categorie" id="categorie">
-									(#SVP_CATEGORIES|iterer_modele{select_option_categorie, categorie=#ENV{categorie}})
-								</select>]
+								<INCLURE{fond=inclure/select_option_categorie, categorie=#ENV{categorie}, env} />
 							</li>
 							<li class="editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
 								<label for="etat"><:svp:label_critere_etat:></label>
