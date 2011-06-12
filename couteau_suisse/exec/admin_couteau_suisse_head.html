@@ -11,13 +11,21 @@ div.cadre_padding form { padding:0; margin:0; }
 	#contenu .cadre_padding .titrem { background-color:#EEEEEE !important; color:#000000 !important; padding:2px !important; }
 	#contenu .cadre_padding { padding:6px !important; }
 ]
+[(#EVAL{defined('_SPIP30000')}|oui)
+	#SET{claire,##ENV{couleur_claire,edf3fe}}
+	#SET{foncee,##ENV{couleur_foncee,3874b0}}
+	div.cs_outils fieldset { border:2px solid #GET{claire}; background:#fcfcfc;}
+	div.cs_infos fieldset { border: 1px threedface groove; padding: 0.3em; }
+]
+
+
 .cs_hidden { display:none; }
 
 div.cs-cadre{ padding:0.5em; margin:1px; width=100%; border:1px solid #666666; }
 div.cs-cadre h3 { margin:0.2em 0; border-bottom:1px solid #666666; }
 div.cs_infos { overflow:hidden; }
 div.cs_infos p { margin:0.3em 1em 0.3em 0; padding:0; }
-div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; }
+div.cs_infos h3.titrem { border-bottom:solid 1px; font-weight:bold; display:block; background-color: #EEE;}
 div.cs_infos legend { font-weight:bold; }
 div.cs_infos fieldset {	margin:.8em 4em .5em 4em; }
 div.cs_infos fieldset fieldset { border:0; margin:0 0 0 4em; padding:0.3em; }
@@ -82,6 +90,7 @@ div.categorie {
 	font-weight:bold;
 	display:block;
 	cursor:pointer;
+	background-color:#EEE;
 }
 div.categorie span {
 	font-size:85%;

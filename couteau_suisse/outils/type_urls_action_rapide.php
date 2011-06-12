@@ -107,7 +107,10 @@ function type_urls_liste_urls_exec() {
 	include_spip('inc/texte');
 	include_spip('inc/presentation');
 	include_spip('public/assembler');
-	echo '<html><head>'.f_jQuery(envoi_link(_T('couteau:urls_propres_titre')))
+	include_spip('inc/pipelines');
+	include_spip('inc/commencer_page');
+	$f = defined('_SPIP30000')?'init_head':'envoi_link';
+	echo '<html><head>'.f_jQuery($f(_T('couteau:urls_propres_titre')))
 		.'<meta http-equiv="Content-Type" content="text/html; charset='.$GLOBALS['meta']['charset'].'" /></head><body style="text-align:center">'
 		.propre(recuperer_fond('fonds/type_urls_liste', array('type'=>_request('type'))))
 		.'</body></html>';

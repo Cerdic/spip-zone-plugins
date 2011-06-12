@@ -153,21 +153,25 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		// mises a jour eventuelles de la base
 		$installer_plugins = charger_fonction('installer', 'plugins');
 		/*$infos = */$installer_plugins('couteau_suisse', 'install');
+		parse_str(parametres_css_prive(), $paramcss);
 	} else {
 		// compatibilite SPIP < 3.0
 		// mises a jour eventuelles de la base
 		installe_un_plugin($dir, $t, $dir_type);
+		$paramcss = array();
 	}
 	if(!strlen($bt_version)) { $bt_version = $get_infos($bt_dir); $bt_version = $bt_version['version']; }
 
 	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t, $r)))
 		?'<br/>'.couteauprive_T('version_revision', array('revision'=>$r[1])):"";
 	include_spip('public/assembler');
-	echo recuperer_fond('exec/admin_couteau_suisse_head', array(
+	echo recuperer_fond('exec/admin_couteau_suisse_head', array_merge(
+	 $paramcss,
+	 array(
 		'force' => in_array(_request('var_mode'), array('calcul', 'recalcul'))?'oui':null,
 		'cs_version' => $cs_version,
 		'exec' => _request('exec'),
-	));
+	)));
 	echo "<br /><br /><br />";
 	gros_titre(couteauprive_T('titre'), '', false);
 	echo barre_onglets("configuration", 'couteau_suisse');
