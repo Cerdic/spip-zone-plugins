@@ -182,7 +182,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	echo debut_gauche('', true);
 	$t = '';
 	if(isset($GLOBALS['cs_installer'])) foreach(array_keys($GLOBALS['cs_installer']) as $pack)
-		$t .= "\n_ " . couteauprive_T('pack_du', array('pack'=>"{[{$pack}|"._couteauprive_T('pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
+		$t .= "\n_ " . couteauprive_T('pack_du', array('pack'=>"{[{$pack}|".couteauprive_T('pack_installe').'->' . generer_url_ecrire($exec,'cmd=install&pack='.urlencode($pack)) . ']}'));
 	$t = couteauprive_T('help2', array(
 			'version' => $cs_version.$cs_revision.'<br/>'.
 				(defined('_CS_PAS_DE_DISTANT')?'('.couteauprive_T('version_distante_off').')':'<span class="cs_version">'.couteauprive_T('version_distante').'</span>')
