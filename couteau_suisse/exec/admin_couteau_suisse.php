@@ -157,6 +157,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	} else {
 		// compatibilite SPIP < 3.0
 		// mises a jour eventuelles de la base
+		$t = array();
 		installe_un_plugin($dir, $t, $dir_type);
 		$paramcss = array();
 	}
