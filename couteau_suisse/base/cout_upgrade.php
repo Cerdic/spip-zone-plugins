@@ -56,9 +56,9 @@ function couteau_suisse_vider_tables($nom_meta_base_version) {
 }
 
 // installation des tables du plugin et mises a jour
-function couteau_suisse_upgrade($nom_meta_base_version,$version_cible){
+function couteau_suisse_upgrade($nom_meta_base_version, $version_cible){
 //echo "<br>UPGRADE : $nom_meta_base_version,$version_cible,",$GLOBALS['meta'][$nom_meta_base_version];
-if(defined('_LOG_CS')) cs_log("couteau_suisse_upgrade($nom_meta_base_version,$version_cible)");
+if(defined('_LOG_CS')) cs_log("couteau_suisse_upgrade($nom_meta_base_version, $version_cible)");
 	$current_version = 0.0;
 	if(	(!isset($GLOBALS['meta'][$nom_meta_base_version]))
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
@@ -66,7 +66,7 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_upgrade($nom_meta_base_version,$ve
 			include_spip('base/create');
 			creer_base();
 		}
-		if (version_compare($current_version,$tmp='1.0','<')){
+		if (version_compare($current_version, $tmp='1.0','<')){
 			echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
 			cs_suppr_metas_var('set_options');
 			cs_suppr_metas_var('radio_set_options3');
@@ -89,10 +89,12 @@ if(defined('_LOG_CS')) cs_log("couteau_suisse_upgrade($nom_meta_base_version,$ve
 			foreach(array('cs_decoration', 'cs_decoration_racc', 'cs_smileys', 'cs_smileys_racc', 'cs_chatons', 'cs_chatons_racc',
 					'cs_jcorner', 'cs_couleurs', 'cs_couleurs_racc', 'cs_filets_sep', 'cs_filets_sep_racc', 'cs_insertions') as $meta) 
 				effacer_meta($meta);
-			ecrire_meta($nom_meta_base_version,$current_version=$tmp);
+			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
-		if (version_compare($current_version,$tmp='1.1','<')){
+		if (version_compare($current_version, $tmp='1.1','<')){
+			echo '<h4>',_T('couteau:titre'),' - Upgrade ',$tmp,'</h4>';
 			effacer_meta('tweaks_contribs');
+			ecrire_meta($nom_meta_base_version, $current_version=$tmp);
 		}
 		ecrire_metas();
 	}
