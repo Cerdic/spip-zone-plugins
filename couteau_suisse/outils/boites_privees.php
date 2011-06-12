@@ -21,25 +21,27 @@ if(!defined('_SPIP19300')) {
 
 function boites_privees_affiche_gauche($flux){
 	$exec = &$flux['args']['exec'];
-	if(defined('boites_privees_TRI_AUTEURS') && ($exec=='articles')) {
+	if(defined('boites_privees_TRI_AUTEURS') && ($exec=='article' || $exec=='articles')) {
 		include_spip('outils/boites_privees_action_rapide');
 		$flux['data'] .= action_rapide_tri_auteurs($flux['args']['id_article']);
 	}
 	if(defined('boites_privees_URLS_PROPRES')) 
 		switch($exec) {
-			case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
-			case 'naviguer': $flux['data'] .= cs_urls_propres('rubrique', $flux['args']['id_rubrique']); break;
-			case 'auteur_infos': case 'auteurs_edit': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
-			case 'breves_voir': $flux['data'] .= cs_urls_propres('breve', $flux['args']['id_breve']); break;
-			case 'mots_edit': $flux['data'] .= cs_urls_propres('mot', $flux['args']['id_mot']); break;
-			case 'sites': $flux['data'] .= cs_urls_propres('syndic', $flux['args']['id_syndic']); break;
+			// SPIP>=3.0 : objets au singulier uniquement (autres 'case' pour compatibilite SPIP<3.0)
+			case 'article': case 'articles': $flux['data'] .= cs_urls_propres('article', $flux['args']['id_article']); break;
+			case 'rubrique': case 'naviguer': $flux['data'] .= cs_urls_propres('rubrique', $flux['args']['id_rubrique']); break;
+			case 'auteur': case 'auteur_infos': case 'auteurs_edit': $flux['data'] .= cs_urls_propres('auteur', $flux['args']['id_auteur']); break;
+			case 'breve': case 'breves_voir': $flux['data'] .= cs_urls_propres('breve', $flux['args']['id_breve']); break;
+			case 'mot': case 'mots_edit': $flux['data'] .= cs_urls_propres('mot', $flux['args']['id_mot']); break;
+			case 'site': case 'sites': $flux['data'] .= cs_urls_propres('syndic', $flux['args']['id_syndic']); break;
 		}
 	return cs_pipeline_boite_privee($flux, 'gauche');
 }
 
 function boites_privees_affiche_milieu($flux){
 	switch($flux['args']['exec']) {
-		case 'articles': {
+		// SPIP >= 3.0 : objets au singulier
+		case 'article': case 'articles': {
 			// texte original au format spip
 			if(defined('boites_privees_ARTICLES'))
 				$flux['data'] .= cs_formatspip($flux['args']['id_article']);
