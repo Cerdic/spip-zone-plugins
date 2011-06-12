@@ -4,8 +4,8 @@
 		<:svp:option_categorie_toute:>
 	</option>
 <BOUCLE_categories(DATA) {source table, #SVP_CATEGORIES}>
-	[(#CLE}|!={aucune}|oui) 
-	<option value="#ENV{cle}"[ (#ENV{categorie}|=={#CLE}}|oui)selected="selected"]>
+	[(#CLE|!={aucune}|oui) 
+	<option value="#CLE"[ (#ENV{categorie}|=={#CLE}|oui)selected="selected"]>
 		#VALEUR
 	</option>]
 </BOUCLE_categories>

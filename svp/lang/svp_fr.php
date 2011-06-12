@@ -150,6 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
 	'message_nok_depot_deja_ajoute' => 'L\'adresse « @url@ » correspond à un dépôt déjà ajouté',
 	'message_nok_url_depot_incorrecte' => 'L\'adresse « @url@ » est incorrecte',
+	'message_nok_sql_insert_depot' => 'Erreur SQL lors de l\'ajout du dépôt @objet@',
 	'message_nok_xml_non_conforme' => 'Le fichier XML « @fichier@ » de description du dépôt n\'est pas conforme',
 	'message_ok_aucun_plugin_trouve' => 'Aucun plugin ne correspond aux critères choisis.',
 	'message_ok_depot_ajoute' => 'Le dépôt « @url@ » a été ajouté.',
