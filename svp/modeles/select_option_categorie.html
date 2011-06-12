@@ -1,8 +1,0 @@
-[(#ENV{iteration}|=={1}|oui) 
-<option value="toute_categorie"[ (#ENV{categorie}|=={#ENV{cle}}|oui)selected="selected"]><:svp:option_categorie_toute:></option>
-]
-[(#ENV{cle}|!={aucune}|oui) 
-<option value="#ENV{cle}"[ (#ENV{categorie}|=={#ENV{cle}}|oui)selected="selected"]>
-	#ENV{valeur}
-</option>
-]
