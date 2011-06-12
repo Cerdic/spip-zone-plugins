@@ -28,7 +28,6 @@ function bannieres_declarer_tables_principales($tables_principales){
 		"debut"			=> "date DEFAULT '0000-00-00' NOT NULL",
 		"fin"			=> "date DEFAULT '0000-00-00' NOT NULL",
 		"clics"			=> "int(11) DEFAULT '0' NOT NULL",
-		"affichages"		=> "int(11) DEFAULT '0' NOT NULL",
 		"commentaires" 	=> "text DEFAULT '' NOT NULL",
 		"creation"		=> "date DEFAULT '0000-00-00' NOT NULL",
 		"position"		=> "tinyint(2) NOT NULL default '1'",
