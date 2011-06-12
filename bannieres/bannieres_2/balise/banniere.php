@@ -209,6 +209,10 @@ function afficher_banniere($id_objet='',$id='',$alt='') {
 		$lien = $logo_banniere;
 	}
 
+// Incrementer compteur affichage
+
+	$query = sql_update ("spip_bannieres", array('affichages' => "affichages+1"), "id_banniere=$id") ;
+
   return $lien;
 
 }

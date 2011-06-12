@@ -22,7 +22,13 @@ function bannieres_upgrade($nom_meta_base_version, $version_cible){
 
 		$current_version = $GLOBALS['meta']['ban_base_version'];
 		
-		} else {
+		} 
+	else if  (isset($GLOBALS['meta']['bannieres_base_version'])){
+
+		$current_version = $GLOBALS['meta']['bannieres_base_version'];
+		
+		} 
+		else {
 			$current_version = "0.0";
 		}
 
@@ -91,7 +97,7 @@ function renommer_bandeaux() {
 			}
 	}
 
-echo 'Les anciennes images ont &eacute;t&eacute;es renom&eacute;es<br />';
+echo 'Les anciennes images ont &eacute;t&eacute; renom&eacute;es<br />';
 
 closedir($dossier);
 

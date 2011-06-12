@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_voir' => 'Voir',
 	'active' => 'Campagne active',
 	'actives' => 'Campagnes actives',
+	'affichages' => 'Nb. affichages',
 	'alt' => 'Texte alternatif',
 	'alt_ancien' => 'Ancien texte alternatif (utilisez plut&ocirc;t le titre du document - voir doc)',
 	
@@ -100,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'moyenne' => 'Clics par jour&nbsp;: <strong>@moyenne@</strong>',
 
 	// N
+	'nombre_affichages' => 'Nombre d\'affichages&nbsp;: <strong>@affichages@</strong>',
 	'nombre_clics' => 'Nombre de clics&nbsp;: <strong>@clics@</strong>',
 	'nombre_jours' => 'Nombre de jours&nbsp;: <strong>@jours@</strong>',
 
