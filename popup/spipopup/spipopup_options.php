@@ -7,7 +7,17 @@
  * @todo plusieurs popups ?
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
+//ini_set('display_errors','1'); error_reporting(E_ALL);
 	
+/**
+ * Test de la nouveaute SPIP 2.1 : etendre l'aide de SPIP (ici pour l'aide du plugin)
+ */
+if (isset($GLOBALS['help_server']) && is_array($GLOBALS['help_server']))
+	$GLOBALS['help_server'][] = url_de_base(1).str_replace("../", "", _DIR_PLUGIN_SPIPOPUP)."aide/";
+
+/**
+ * Valeurs par defaut (modifiees par CFG)
+ */
 define('POPUP_SKEL_DEFAUT', 'popup_defaut.html');
 define('POPUP_TITRE_DEFAUT', 'popup');
 define('POPUP_WIDTH_DEFAUT', '620');

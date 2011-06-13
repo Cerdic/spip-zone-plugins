@@ -11,6 +11,6 @@
 		|titre=mon titre (option)
 	>
 	
-][(#ENV{lien}|=={''}|non)[(#ENV{texte}|=={''}|non)
+][(#ENV{lien}|=={''}|?{'',' '})[(#ENV{texte}|=={''}|?{'',' '})
 	<a href="#POPUP{#ENV{lien},#ENV{skel,''},#ENV{width,''},#ENV{height,''},#ENV{titre,''}}">#ENV{texte}</a>
 ]]

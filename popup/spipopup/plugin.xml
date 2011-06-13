@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Balise &#035;POPUP</nom>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<version>1.02</version>
+	<version>1.03</version>
 	<licence>&#169; 2010/2011 [GPL->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
 	<icon>images/popup-128.png</icon>
 	<etat>dev</etat>
@@ -10,17 +10,19 @@
 Gestion d'une fen&ecirc;tre popup ({fen&ecirc;tre externe}) unique sous forme de squelette SPIP et aux dimensions r&eacute;glables pour diff&eacute;rents usages.
 
 {{Utilisation de la balise {{&#035;POPUP}} }}
-<quote><code>
+<code>
 <a href="#POPUP{objet SPIP,squelette,width,height,titre}">texte du lien</a>
-</code></quote>
+</code>
 - {{objet SPIP}} : 'article1' ou 'id_article=1' (valable par d&eacute;faut pour tout objet &eacute;ditorial de SPIP).
 - {{squelette}} : squelette utilis&eacute; pour afficher la fen&ecirc;tre ({optionnel - par d&eacute;faut : '{{popup_defaut.html}}'}).
 - {{width}} : la largeur de la fen&ecirc;tre en pixels ({optionnel - {{620px}} par d&eacute;faut}).
 - {{height}} : la hauteur de la fen&ecirc;tre en pixels ({optionnel - {{640px}} par d&eacute;faut}).
 - {{titre}} : le titre ajout&eacute; au lien.
 
+{{Attention}} - Le squelette livr&eacute; avec le plugin n'est pas compatible avec SPIP 1.9.
+
 {{Utilisation du mod&egrave;le dans les articles}}
-<quote><code>
+<code>
 <popup
 	|texte=le texte du lien (necessaire)
 	|lien=objet SPIP pour le lien (necessaire)
@@ -29,13 +31,13 @@ Gestion d'une fen&ecirc;tre popup ({fen&ecirc;tre externe}) unique sous forme de
 	|height=XX (option)
 	|titre=mon titre (option)
 >
-</code></quote>
+</code>
 M&ecirc;mes options que la balise, le texte du lien en plus.
 
 {{Retour de la balise {{&#035;POPUP}} }}
-<quote><code>
+<code>
 <a href="url" onclick="_popup_set('url',width,height);return false;" title="titre - nouvelle fenetre">texte du lien</a>
-</code></quote>
+</code>
 	</description>
 	<options>spipopup_options.php</options>
 	<options>spipopup_fonctions.php</options>
@@ -45,5 +47,6 @@ M&ecirc;mes options que la balise, le texte du lien en plus.
 		<nom>insert_head</nom>
 		<inclure>spipopup_pipelines.php</inclure>
 	</pipeline>
+	<necessite id='SPIP' version='[1.9;]' />
 	<categorie>squelette</categorie>
 </plugin>
