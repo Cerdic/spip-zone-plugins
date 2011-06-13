@@ -25,7 +25,7 @@ function spiplistes_ajouterBoutons($boutons_admin) {
 	// affiche le bouton dans "Edition"
 		$boutons_admin[$menu]->sousmenu['spiplistes'] = new Bouton(
 			_DIR_PLUGIN_SPIPLISTES_IMG_PACK.$icone  // icone
-			, _T('spiplistes:listes_de_diffusion_')	// titre
+			, 'spiplistes:listes_de_diffusion_'	// titre
 			, _SPIPLISTES_EXEC_COURRIERS_LISTE
 		);
 	}

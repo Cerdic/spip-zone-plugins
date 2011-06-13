@@ -38,7 +38,7 @@ function spiplistes_ajouter_onglets ($flux) {
 			case 'configuration':
 				$flux['data'][_SPIPLISTES_PREFIX] = new Bouton( 
 					_DIR_PLUGIN_SPIPLISTES_IMG_PACK."courriers_listes-24.png"
-					, _T("spiplistes:listes_de_diffusion_")
+					, 'spiplistes:listes_de_diffusion_'
 					, generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)
 					)
 					;
@@ -55,19 +55,19 @@ function spiplistes_ajouter_onglets ($flux) {
 			case 'spiplistes':
 				$flux['data']['courriers_casier'] = new Bouton( 
 					_DIR_PLUGIN_SPIPLISTES_IMG_PACK."stock_hyperlink-mail-and-news-24.gif"
-					, _T('spiplistes:casier_a_courriers')
+					, 'spiplistes:casier_a_courriers'
 					, generer_url_ecrire(_SPIPLISTES_EXEC_COURRIERS_LISTE)
 					)
 					;
 				$flux['data']['listes_toutes'] = new Bouton( 
 					_DIR_PLUGIN_SPIPLISTES_IMG_PACK."reply-to-all-24.gif"
-					, _T('spiplistes:listes_de_diffusion_')
+					, 'spiplistes:listes_de_diffusion_'
 					, generer_url_ecrire(_SPIPLISTES_EXEC_LISTES_LISTE)
 					)
 					;
 				$flux['data']['abonnes_tous'] = new Bouton( 
 					_DIR_PLUGIN_SPIPLISTES_IMG_PACK."addressbook-24.gif"
-					, _T('spiplistes:suivi')
+					, 'spiplistes:suivi'
 					, generer_url_ecrire(_SPIPLISTES_EXEC_ABONNES_LISTE)
 					)
 					;
