@@ -110,6 +110,7 @@ function boussole_supprimer($aka_boussole) {
 function boussole_localiser_xml($xml) {
 
 	include_spip('inc/distant');
+	include_spip('inc/filtres'); // url_absolue
 	$retour = '';
 
 	// On calcul une url absolue dans tous les cas
