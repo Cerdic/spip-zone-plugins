@@ -14,14 +14,26 @@
   - categorie, alias en cours d'affichage pour exposition
 
 ]
-[<div class="menu categories">
+<B_categories>
+<div class="menu categories">
 	[<h2 class="h2">(#ENV{titre})</h2>]	
 	<ul class="menu-items">
-	(#SVP_CATEGORIES|iterer_modele{
-		filnav-item-categorie, 
-		url_lien=#ENV{url_lien}, 
-		bulle_lien=#ENV{bulle_lien},
-		bulle_croix=#ENV{bulle_croix},
-		categorie=#ENV{categorie}})
+<BOUCLE_categories(DATA) {source table, #SVP_CATEGORIES}>
+		<li class="item">
+		[(#ENV{categorie}|!={#CLE}|?{ 
+			<a[ href="(#ENV{url_lien}|parametre_url{categorie, #CLE})"][ title="(#ENV{bulle_lien})"]>,
+			<span class="on">})]
+				#VALEUR
+		[(#ENV{categorie}|!={#CLE}|?{</a>,</span>})]
+		[(#ENV{categorie}|=={#CLE}|oui|et{#ENV{bulle_croix}|oui})
+			<span style="float: right;">
+				<a[ href="(#ENV{url_lien}|parametre_url{categorie,''})"][ title="(#ENV{bulle_croix})"]>
+					[(#CHEMIN{prive/images/croix-rouge.gif}|balise_img{croix-rouge})]
+				</a>
+			</span>
+		]
+		</li>
+</BOUCLE_categories>
 	</ul>
-</div>]
+<B_categories>
+</div>
