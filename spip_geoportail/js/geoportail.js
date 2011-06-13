@@ -1072,7 +1072,7 @@ jQuery.geoportail =
 						);
 		// Hauteur max 
 		var h = 200;
-		if (hover)
+		if (hover && att.logo)
 		{	// Pour le survol : hauteur calculee sur le logo
 			h = Number(att.logo.replace (/(.*height=.)([0-9]+)(.*)/,"$2"));
 			h = (h?h+10:40);
