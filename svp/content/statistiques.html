@@ -39,10 +39,16 @@
 		]
 		<p><:svp:info_stats_categories{nb_categories=#GET{compteur}}:></p>
 		<p><:svp:info_stats_plugins:></p>
-		[<ul class="liste-items">
-		(#SVP_CATEGORIES|iterer_modele{
-			statistiques-categorie, 
-			id_depot=#ENV{id_depot}})
-		</ul>]
+		<B_categories>
+		<ul class="liste-items">
+		<BOUCLE_categories(DATA) {source table, #SVP_CATEGORIES}>
+			<INCLURE{fond=inclure/statistiques-categorie, 
+				id_depot=#ENV{id_depot},
+				alias_categorie=#CLE,
+				libelle_categorie=#VALEUR,
+				env} />
+		</BOUCLE_categories>
+		</ul>
+		<B_categories>
 	</div>
 </div>
