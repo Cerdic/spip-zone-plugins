@@ -69,9 +69,8 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
     if ($id>0) {
         $id_photo_rand  =  $id;
     }  else { 
-        // etape 1bis: ou recuperer une image au hasard selon nos criteres
-        $page_max = ceil($plage/50);        
-        $page_rnd = rand(1, $page_max); 
+        // etape 1bis: ou recuperer une image au hasard selon nos criteres               
+        $page_rnd = rand(1, $plage); 
         
         $params = array(
         	'api_key'	=> $api_key,
@@ -80,17 +79,30 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
         	'license' => $license,   
         	'safe_search' => $safesearch,  
         	'format'	=> 'php_serial',
-        	'per_page' => '50',           // pool ds lequel on pioche
-          'page' => '$page_rnd'         // page au hasard selon la taille du pool, si la page n existe pas l'API retourne la 1er page de resultat
+        	'per_page' => '1',         
+          'page' => $page_rnd        // page (=photo) au hasard selon la taille du pool
         );
     
-        $rsp_obj =  fetch_data_flickr($params);
+        $rsp_obj =  fetch_data_flickr($params); 
         
         if ($rsp_obj) {
           $photos = $rsp_obj['photos']['photo'];
-          if (!$photos) return false;     // pas de resultats
+          if (!$photos) {
+              // pas de resultat, la plage est sans doute trop grand pour la requete
+              // on refait une tentative en ignorant la parametre de plage
+              $params['page'] = 1;
+              $params['per_page'] = 100;
+              $rsp_obj =  fetch_data_flickr($params); 
+              if ($rsp_obj) {
+                $photos = $rsp_obj['photos']['photo'];
+                if (!$photos)
+                      return false;    // vraiment pas de resultats
+              } else {
+                      return false;  
+              }
+          } 
           $id_photo_rand = $photos[array_rand($rsp_obj['photos']['photo'], 1)]['id'];   // on prend une image au hasard           
-        }
+        }  
    }    
     
     
