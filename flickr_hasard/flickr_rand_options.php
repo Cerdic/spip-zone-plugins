@@ -127,14 +127,17 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
                       if ($rsp_size['label']==$size)
                                    break;
                      
-                  }
-                  if ($_photo_rand_url)
-                    return  "<dl class='flick_rand flickr_".strtolower($size)." spip_documents_$align' style='width:".$_photo_rand_width."px'>
-                                  <dt><a href='$_photo_rand_url_page'><img src='$_photo_rand_url' alt='flickr' /></a></dt>
-                                  <dt class='spip_doc_titre'><strong>$_photo_rand_title</strong><dt>
-                                  <dt class='spip_doc_descriptif'>par $_photo_rand_owner<dt>
-                                  <dt class='spip_doc_licence'><a href='$licence_url' rel='license'>$license_name</a><dt>
-                            </dl>";                             
+                  }                                     
+                  if ($_photo_rand_url) {
+                       $output = "<dl class='flick_rand flickr_".strtolower($size)." spip_documents_$align' style='width:".$_photo_rand_width."px'>\n
+                                  <dt><a href='$_photo_rand_url_page'><img src='$_photo_rand_url' alt='flickr' /></a></dt>\n";
+                       if ($_photo_rand_title)
+                                 $output .=  "<dt class='spip_doc_titre'><strong>$_photo_rand_title</strong><dt>\n";
+                       $output .= "<dt class='spip_doc_descriptif'>par $_photo_rand_owner<dt>\n
+                                   <dt class='spip_doc_licence'><a href='$licence_url' rel='license'>$license_name</a><dt>\n
+                                  </dl>"; 
+                       return $output;                   
+                  }                            
             }
     
            
