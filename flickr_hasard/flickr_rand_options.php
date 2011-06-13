@@ -34,6 +34,15 @@ function fetch_data_flickr($params,$debug=false) {
 function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1,$id) {
     $api_key =  _KEY_API_FLICKR_RAND;
     
+    // etape -1: recuper config sur present
+    if (function_exists(lire_config))  {         
+        $plage = (int) lire_config('flickr_rand/plage'); 
+        if ($plage>4000) $plage = 4000; 
+        if ($plage<0)    $plage = 1;
+    } else {
+        $plage = 100;
+    }
+    
     // etape 0: traiter des parametres et ajouter les valeurs par defaut (le php ne les prends pas via fonction a cause du modele)
     $tags = strip_tags($tags);
     $license = strip_tags($license);
@@ -61,6 +70,9 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
         $id_photo_rand  =  $id;
     }  else { 
         // etape 1bis: ou recuperer une image au hasard selon nos criteres
+        $page_max = ceil($plage/50);        
+        $page_rnd = rand(1, $page_max); 
+        
         $params = array(
         	'api_key'	=> $api_key,
         	'method'	=> 'flickr.photos.search',
@@ -68,7 +80,8 @@ function flickr_rand($str,$tags,$license=5,$align='',$size='Small',$safesearch=1
         	'license' => $license,   
         	'safe_search' => $safesearch,  
         	'format'	=> 'php_serial',
-        	'per_page' => '100'        // pool ds lequel on pioche
+        	'per_page' => '50',           // pool ds lequel on pioche
+          'page' => '$page_rnd'         // page au hasard selon la taille du pool, si la page n existe pas l'API retourne la 1er page de resultat
         );
     
         $rsp_obj =  fetch_data_flickr($params);

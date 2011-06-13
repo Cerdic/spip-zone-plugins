@@ -1,0 +1,24 @@
+#CACHE{0}
+[(#REM) descriptif=<p><a href="http://www.spip-contrib.net/Flickr-hasard">Documentation</a></p>]
+[(#REM) titre=Flickr hasard]
+[(#REM) icone=img/logo_flickrnd_24.png]
+
+              
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+ <fieldset>
+  <p>     
+   <label for="plage"><strong>Plage de recherche de vos images aléatoires</strong></label>
+      <br />
+      <input type="text" name="plage" class="text"  id='plage' value="[(#ENV{plage}|attribut_html)]" />
+      <i>Indiquer un chiffre entre 1 et 4000</i>
+      <br />- valeur conseillée: 200
+      <br />- maximum autorisé par Flickr: 4000 
+   <p>
+   <i>Plus le chiffre est grand, plus vos images seront variées mais moins elles seront récentes</i></p>
+  </p>
+  </fieldset>
+
+
+  <input type="submit" name="_cfg_ok" value="<:OK:>" /> 
+</form>
