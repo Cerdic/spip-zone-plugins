@@ -23,4 +23,5 @@ du filtre less_css
 	<pipeline>
 		<nom>insert_head</nom>
 	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;3.1.0)" />
 </plugin>
