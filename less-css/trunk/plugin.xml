@@ -1,8 +1,10 @@
 <plugin>
-	<nom>LESSpip</nom>
+	<nom>LESS CSS</nom>
 	<auteur>Jean-Baptiste Bourgoin</auteur>
 	<licence>MIT</licence>
-	<version>0.2</version>
+	<version>0.3.0</version>
+	<etat>test</etat>
+	<icon>img/lesscss-32.png</icon>
 	<description>
 Int&eacute;gration de l'impl&eacute;mentation php de LESS dans SPIP.
 
@@ -10,13 +12,15 @@ LESS est une extension de CSS ajoutant les variables, les classes,
 les op&eacute;rations, les imbrications au langage. Facilitant ainsi
 l'&eacute;criture de feuilles de style complexes.
 
-Ce plugin cr&eacute;&eacute; les fichiers css correspondant &agrave; vos fichiers less dans le r&eacute;pertoire o&ugrave; ces derniers ont &eacute;t&eacute; cr&eacute;&eacute;s.
-  
+Ce plugin compile &agrave; la vol&eacute;e tous les fichiers .less.css ou .less du squelette qui contient #INSERT_HEAD.
+Vous pouvez aussi forcer la compilation d'un fichier ou d'une feuille de style calcul&eacute;e &agrave; l'aide
+du filtre less_css
 	</description>
-	<etat>dev</etat>
-	<prefix>lesspip</prefix>
-	<icon>img/lesspip.png</icon>
+	<prefix>lesscss</prefix>
 	<lien>http://leafo.net/lessphp/</lien>
 	<categorie>outil</categorie>
-	<fonctions>lessphp/gen_styles.php</fonctions>
+	<fonctions>lesscss_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
 </plugin>
