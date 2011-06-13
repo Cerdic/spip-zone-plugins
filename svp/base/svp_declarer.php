@@ -84,9 +84,16 @@ function svp_declarer_tables_principales($tables_principales) {
 		"PRIMARY KEY"	=> "id_paquet",
 		"KEY id_plugin"	=> "id_plugin"
 	);
+
+	// Les jointures
+	// -- Entre spip_paquets et spip_plugins
+	$paquets_join = array(
+		"id_paquet"	=> "id_paquet",
+		"id_plugin"	=> "id_plugin"
+	);
 	
 	$tables_principales['spip_paquets'] =
-		array('field' => &$paquets, 'key' => &$paquets_key);
+		array('field' => &$paquets, 'key' => &$paquets_key, 'join' => &$paquets_join);
 
 	return $tables_principales;
 }
@@ -128,8 +135,6 @@ function svp_declarer_tables_interfaces($interface) {
 	$interface['tables_jointures']['spip_plugins'][] = 'depots_plugins';
 	$interface['tables_jointures']['spip_depots'][] = 'depots_plugins';
 	// -- Entre spip_paquets et spip_plugins
-	$interface['tables_jointures']['spip_plugins'][] = 'paquets';
-	$interface['tables_jointures']['spip_paquets'][] = 'plugins';
 
 	// Titre pour url des objets plugin et depot
 	$interface['table_titre']['depots'] = "titre, '' AS lang";
