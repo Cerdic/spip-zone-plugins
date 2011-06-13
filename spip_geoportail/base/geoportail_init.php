@@ -53,6 +53,10 @@ function geoportail_install($action){
 			{	spip_query("ALTER TABLE spip_geoservices ADD niveau INTEGER DEFAULT '0' NOT NULL");
 			}
 			
+			// Pas de RGC
+			$desc = sql_showtable("spip_georgc", true, '');
+			if (!isset($desc['field']['id_dep'])) return false;
+			
 			// Charger la base
 			$desc = sql_showtable("spip_geopositions", true, '');
 			return (isset($desc['field']['id_geoposition']));
@@ -64,6 +68,9 @@ function geoportail_install($action){
 			// On demande la creation de la base
 			include_spip('base/geoportail');
 			creer_base();
+			
+			// Creer un index Fulltext
+			spip_query("ALTER TABLE spip_georgc ADD FULLTEXT(asciiname,cpostal)");
 			
 			// Par defaut, on travaille sur les auteurs et les articles
 			ecrire_meta('geoportail_geoarticle',1);

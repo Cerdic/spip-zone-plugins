@@ -28,8 +28,7 @@ $spip_georgc = array(
 					"cpostal"		=> "varchar(5) NOT NULL default ''", 
 					"lon"			=> "double NOT NULL default '0'", 
 					"lat"			=> "double NOT NULL default '0'", 
-					"map"			=> "varchar(6) NOT NULL default ''",
-					"fulltext"		=> "(asciiname,cpostal)"
+					"map"			=> "varchar(6) NOT NULL default ''"
 				);
 
 $spip_georgc_key = array(
