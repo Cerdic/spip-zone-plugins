@@ -12,9 +12,6 @@ function svp_upgrade($nom_meta_base_version, $version_cible){
 		include_spip('base/svp_declarer');
 		creer_base();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
-		ecrire_meta('svp_categories', 
-					serialize(array('auteur', 'communication', 'date', 'divers', 'edition', 'maintenance', 'multimedia', 'navigation', 'outil', 'performance', 'statistique', 'squelette', 'theme', 'aucune')));
-		ecrire_meta('svp_branches_spip', serialize(array('1.9', '2.0', '2.1', '3.0')));
 
 		spip_log('INSTALLATION BDD', 'svp_actions.' . _LOG_INFO);
 	}
@@ -26,7 +23,6 @@ function svp_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_depots_plugins");
 	sql_drop_table("spip_paquets");
 	effacer_meta($nom_meta_base_version);
-	effacer_meta('svp_categories');
 	effacer_meta('svp_branches_spip');
 
 	spip_log('DESINSTALLATION BDD', 'svp_actions.' . _LOG_INFO);

@@ -232,12 +232,12 @@ function balise_SVP_CATEGORIES($p) {
 
 function calcul_svp_categories($categorie) {
 
-	$retour = '';
-	$svp_categories = unserialize($GLOBALS['meta']['svp_categories']);
+	$retour = array();
+	$svp_categories = $GLOBALS['categories_plugin'];
 
 	if (is_array($svp_categories)) {
 		if (($categorie) AND in_array($categorie, $svp_categories))
-			$retour = _T('svp:categorie_' . strtolower($categorie));
+			$retour[$categorie] = _T('svp:categorie_' . strtolower($categorie));
 		else {
 			sort($svp_categories);
 			// On positionne l'absence de categorie en fin du tableau
@@ -250,11 +250,40 @@ function calcul_svp_categories($categorie) {
 	return $retour;
 }
 
+
+function balise_SVP_BRANCHES_SPIP($p) {
+
+	$branche = interprete_argument_balise(1,$p);
+	$branche = isset($branche) ? str_replace('\'', '"', $branche) : '""';
+
+	$p->code = 'calcul_svp_branches_spip('.$branche.')';
+
+	return $p;
+}
+
+function calcul_svp_branches_spip($branche) {
+
+	$retour = array();
+	$svp_branches = $GLOBALS['infos_branches_spip'];
+
+	if (is_array($svp_branches)) {
+		if (($branche) AND in_array($branche, $svp_branches))
+			// On renvoie les bornes inf et sup de la branche specifiee
+			$retour = $svp_branches[$branche];
+		else {
+			// On renvoie uniquement les numeros de branches
+			$retour = array_keys($svp_branches);
+		}
+	}
+	
+	return $retour;
+}
+
 function svp_traduire_categorie($alias) {
 
 	$traduction = '';
 	if ($alias) {
-		$traduction = _T('svp:categorie_' . $alias);
+		$traduction = _T('svp:categorie_' . strtolower($alias));
 	}
 	return $traduction;
 }

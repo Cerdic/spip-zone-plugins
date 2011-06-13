@@ -1,9 +1,8 @@
-#SET{filtre_categorie, #ARRAY}
-[(#ENV{categorie}|oui)
-	#SET{filtre_categorie, #GET{filtre_categorie}|push{#ENV{categorie}}}
-]
 <B_branches>
-<BOUCLE_branches(DATA){source table, #GET{filtre_categorie}|sinon{#CONFIG*{svp_categories}}}>
-	<INCLURE{fond=listes/plugins-categorie}{env}{selection=#VALEUR} />
+<BOUCLE_branches(DATA){source table, #SVP_CATEGORIES{#ENV{categorie}}}>
+	<INCLURE{fond=listes/plugins-categorie,
+		alias_categorie=#CLE,
+		libelle_categorie=#VALEUR,
+		env} />
 </BOUCLE_branches>
 </B_branches>

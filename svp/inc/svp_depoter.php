@@ -279,7 +279,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 				$insert_plugin['categorie'] = 'aucune';
 			}
 			else {
-				$svp_categories = unserialize($GLOBALS['meta']['svp_categories']);
+				$svp_categories = $GLOBALS['categories_plugin'];
 				if (!in_array($insert_plugin['categorie'], $svp_categories)) {
 					spip_log("Categorie &#107;" . $insert_plugin['categorie'] . "&#108; incorrecte dans le paquet issu de <". $insert_paquet['src_archive'] . 
 							"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets.' . _LOG_INFO_IMPORTANTE);

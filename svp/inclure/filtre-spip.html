@@ -14,7 +14,7 @@
 <div class="menu branches-spip">
 	[<h2 class="h2">(#ENV{titre})</h2>]
 	<ul class="menu-items">
-<BOUCLE_branches(DATA){source table, #CONFIG*{svp_branches_spip}}{!par valeur}>
+<BOUCLE_branches(DATA){source table, #SVP_BRANCHES_SPIP}{!par valeur}>
 		<li class="item">
 		[(#ENV{compatible_spip}|=={#VALEUR}|oui)
 			<span>SPIP #VALEUR</span>

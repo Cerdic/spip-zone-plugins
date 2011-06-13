@@ -1,14 +1,14 @@
 <B_plugins>
-<table class="spip[ (#ENV{selection}|sinon{aucune})]" summary="<:svp:resume_table_plugins{categorie=#ENV{selection}}:>">
+<table class="spip[ (#ENV{alias_categorie})]" summary="<:svp:resume_table_plugins{categorie=#ENV{alias_categorie}}:>">
 	<thead>
-		<tr id="categorie[-(#ENV{selection}|sinon{aucune})]">
+		<tr id="categorie[-(#ENV{alias_categorie})]">
 			<th>
-				<strong>[(#ENV{selection}|sinon{aucune}|svp_traduire_categorie)]</strong>
+				<strong>[(#ENV{libelle_categorie})]</strong>
 			</th>
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_plugins(PLUGINS){categorie=#ENV{selection}}{id_depot?}{compatible_spip?}{par nom}>
+<BOUCLE_plugins(PLUGINS){categorie=#ENV{alias_categorie}}{id_depot?}{compatible_spip?}{par nom}>
 		<tr id="plugin[-(#ID_DEPOT)]-#PREFIXE" class="[row_(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td>
 				<a[ href="(#URL_PLUGIN)"] title="<:svp:bulle_aller_plugin:>">[(#NOM)]</a>
