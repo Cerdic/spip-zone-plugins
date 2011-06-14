@@ -17,6 +17,7 @@
 			<option value="websnapr"[ (#ENV{serveur}|=={websnapr}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_websnapr:></option>
 			<option value="robothumb"[ (#ENV{serveur}|=={robothumb}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_robothumb:></option>
 			<option value="miwin"[ (#ENV{serveur}|=={miwin}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_miwin:></option>
+			<option value="apercite"[ (#ENV{serveur}|=={apercite}|?{selected="selected"})]><:thumbsites:cfg_itm_serveur_apercite:></option>
 		</select>
 	</fieldset>
 
@@ -103,6 +104,36 @@
 				<option value="560x420" [(#ENV{miwin_taille}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>				
 				<option value="640x480" [(#ENV{miwin_taille}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>	
 				<option value="800x600" [(#ENV{miwin_taille}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>									
+			</select>
+		</p>
+	</fieldset>
+
+	<fieldset id="apercite" class="conf_serveur [(#ENV{serveur}|=={'apercite'}|?{'actif'})]">
+		<legend><:thumbsites:cfg_itm_serveur_apercite:></legend>
+		<p><:thumbsites:cfg_inf_apercite_presentation:></p>
+		<p><:thumbsites:cfg_inf_apercite_parametres:></p>
+		<p>
+			<label for="apercite_taille"><:thumbsites:cfg_lbl_taille_vignette:></label>
+			<select name="apercite_taille" id="apercite_taille">
+				<option value="80x50" [(#ENV{apercite_taille}|=={80x50}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80x50}:></option>
+				<option value="80x60" [(#ENV{apercite_taille}|=={80x60}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=80x60}:></option>
+				<option value="100x75" [(#ENV{apercite_taille}|=={100x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=100x75}:></option>
+				<option value="120x75" [(#ENV{apercite_taille}|=={120x75}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x75}:></option>
+				<option value="120x90" [(#ENV{apercite_taille}|=={120x90}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=120x90}:></option>
+				<option value="160x100" [(#ENV{apercite_taille}|=={160x100}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x100}:></option>
+				<option value="160x120" [(#ENV{apercite_taille}|=={160x120}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=160x120}:></option>
+				<option value="180x135" [(#ENV{apercite_taille}|=={180x135}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=180x135}:></option>
+				<option value="200x125" [(#ENV{apercite_taille}|=={200x125}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=200x125}:></option>
+				<option value="240x150" [(#ENV{apercite_taille}|=={240x150}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x150}:></option>
+				<option value="240x180" [(#ENV{apercite_taille}|=={240x180}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=240x180}:></option>
+				<option value="320x200" [(#ENV{apercite_taille}|=={320x200}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x200}:></option>
+				<option value="320x240" [(#ENV{apercite_taille}|=={320x240}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=320x240}:></option>
+				<option value="560x420" [(#ENV{apercite_taille}|=={560x420}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x420}:></option>
+				<option value="560x350" [(#ENV{apercite_taille}|=={560x350}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=560x350}:></option>
+				<option value="640x400" [(#ENV{apercite_taille}|=={640x400}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x400}:></option>
+				<option value="640x480" [(#ENV{apercite_taille}|=={640x480}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=640x480}:></option>
+				<option value="800x500" [(#ENV{apercite_taille}|=={800x500}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x500}:></option>
+				<option value="800x600" [(#ENV{apercite_taille}|=={800x600}|?{selected="selected"})]><:thumbsites:cfg_itm_taille_vignette{taille=800x600}:></option>
 			</select>
 		</p>
 	</fieldset>
