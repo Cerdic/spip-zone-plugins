@@ -66,6 +66,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 		$from = array('spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3');
 		$select = array('t1.nom AS nom', 't1.slogan AS slogan', 't1.prefixe AS prefixe', 't1.id_plugin AS id_plugin', 
 						't2.id_paquet AS id_paquet', 't2.description AS description', 't2.compatibilite_spip AS compatibilite_spip',
+						't2.lien_doc AS lien_doc',
 						't2.auteur AS auteur', 't2.licence AS licence', 't2.etat AS etat',
 						't2.logo AS logo', 't2.version AS version', 't2.nom_archive AS nom_archive',
 						't3.url_archives AS url_archives', );

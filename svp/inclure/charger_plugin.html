@@ -2,27 +2,64 @@
 <div class="liste plugins distants">
 	<ul class="liste-items">
 <BOUCLE_plugins_trouves(DATA) {source table, #ENV{plugins}}>
-		<li class="item[(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
-			[(#REM) <!-- Icone de telechargement -->]
-			<div class="download">
-			[(#VALEUR{installe}|non)
-				<a[ href="(#URL_ACTION_AUTEUR{charger_plugin, charger_zip,./}|parametre_url{url_zip_plugin, #VALEUR{url_archive}})"] title="<:plugin_charger:>">
-					[(#CHEMIN_IMAGE{telecharger-16.png}|balise_img{<:plugin_charger:>})]
-				</a>
-			]
+		<li class="item"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
+			[(#REM) <!-- Checkbox de selection pour telechargement -->]
+			<div class="check">
+				<input type="checkbox" class="checkbox" name="a_installer#EVAL{chr(91)}#EVAL{chr(93)}" id="a_installer_#VALEUR{id_paquet}" value="#VALEUR{url_archive}" />
+				<label for="a_installer_#VALEUR{id_paquet}"><:svp:label_installer_plugin:></label>
 			</div>
 		
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
-				<h3 class="nom">[(#VALEUR{nom})]</h3>
+				<h3 class="nom"><a[ href="(#VALEUR{version})"] rel="info">[(#VALEUR{nom})]</a></h3>
 				<span class="version">[(#VALEUR{version})]</span>
 				<span class="etat">[ - (#VALEUR{etat})]</span>
 				[<span class="installe"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
 				<div class="short">[(#VALEUR{slogan})]</div>
 				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
 			</div>
+
+			[(#REM) <!-- Details du plugin -->]
+			<div class="details">
+				<dl>
+					<dd class="desc">
+						[(#VALEUR{description}|propre)]
+						[<em class="site">
+							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:en_savoir_plus:></a>
+						</em>]
+					</dd>
+					[<dt class="auteurs"><:public:par_auteur:></dt>
+					<dd class="auteurs">(#AUTEUR*|svp_afficher_credits)</dd>]
+					[<dt class="licence"><:intitule_licence:></dt>
+					<dd class="licence">(#LICENCE|svp_afficher_credits{','})</dd>]
+				</dl>
+			</div>
 		</li>
 </BOUCLE_plugins_trouves>
 	</ul>
 </div>
 <B_plugins_trouves>
+
+<script type="text/javascript">
+//<![CDATA[
+	jQuery(function(){
+		jQuery('.plugins li.item a[rel=info]').click(function(){
+			var li = jQuery(this).parents('li').eq(0);
+			if (!jQuery('div.details',li).html()) {
+				jQuery('div.details',li).prepend(ajax_image_searching).load(
+					jQuery(this).attr('href').replace(/admin_plugin|plugins|charger_plugin/, 'info_plugin_distant'), {}, function(){
+						li.addClass('on');
+					}
+				);
+			}
+			else {
+				if (jQuery('div.details',li).toggle().is(':visible'))
+					li.addClass('on');
+				else
+					li.removeClass('on');
+			}
+			return false;
+		});
+	});
+//]]>
+</script>

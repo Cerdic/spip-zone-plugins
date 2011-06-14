@@ -1,70 +1,71 @@
-<div class="liste-plugins formulaire_spip formulaire_charger_plugin" id="formulaire_charger_plugin">
-	<div class="cadre cadre-trait-couleur">
+<div class="formulaire_spip formulaire_charger_plugin" id="formulaire_charger_plugin">
 		<h3 class='titrem'>[(#CHEMIN{prive/themes/spip/images/ajouter_plugin-24.gif}|balise_img{icone ajouter_plugin-24,cadre-icone})]<:plugin_titre_automatique_ajouter:></h3>
 	
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		<!-- <br class='bugajaxie' /> -->
-		[(#ENV{editable})
-		<form method="post" action="#ENV{action}"><div>
+		<form method="post" action="#ENV{action}">
 			[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 			parametre : url d'action --> ]
 			#ACTION_FORMULAIRE{#ENV{action}}
-			<ul>
-				<li class="fieldset">
-					<fieldset>
-						<p class="explication"><:svp:info_charger_plugin{version=#SPIP_VERSION}:></p>
-						<ul>
-							<li class="editer_phrase obligatoire[(#ENV{erreurs}|table_valeur{phrase}|oui) erreur]">
-								<label for="phrase"><:svp:label_critere_phrase:></label>
-								<p class="explication"><:svp:info_critere_phrase:></p>
-								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{phrase})</span>]
-								<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" />						
-							</li>
-							<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
-								<label for="categorie"><:svp:label_critere_categorie:></label>
-								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
-								<INCLURE{fond=inclure/select_option_categorie, categorie=#ENV{categorie}, env} />
-							</li>
-							<li class="editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
-								<label for="etat"><:svp:label_critere_etat:></label>
-								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{etat})</span>]
-								<select name="etat" id="etat">
-									<option value="tout_etat"[ (#ENV{etat}|=={tout_etat}|oui)selected="selected"]><:svp:option_etat_tout:></option>
-									<option value="stable"[ (#ENV{etat}|=={stable}|oui)selected="selected"]><:plugin_etat_stable|ucfirst:></option>
-									<option value="test"[ (#ENV{etat}|=={test}|oui)selected="selected"]><:plugin_etat_test|ucfirst:></option>
-									<option value="dev"[ (#ENV{etat}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
-									<option value="experimental"[ (#ENV{etat}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
-								</select>
-							</li>
-							<li class="editer_depot obligatoire[(#ENV{erreurs}|table_valeur{depot}|oui) erreur]">
-								<label for="depot"><:svp:label_critere_depot:></label>
-								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{depot})</span>]
-								<INCLURE{fond=formulaires/inc-charger_depots, env} />
-							</li>
-							<li class="editer_doublon obligatoire[(#ENV{erreurs}|table_valeur{doublon}|oui) erreur]">
-								<label for="doublon"><:svp:label_critere_doublon:></label>
-								[<span class="erreur_message">(#ENV{erreurs}|table_valeur{doublon})</span>]
-								<select name="doublon" id="doublon">
-									<option value="non"[ (#ENV{doublon}|=={non}|oui)selected="selected"]><:svp:option_doublon_non:></option>
-									<option value="oui"[ (#ENV{doublon}|=={oui}|oui)selected="selected"]><:svp:option_doublon_oui:></option>
-								</select>
-							</li>
-						</ul>
-					</fieldset>
-				</li>
-			</ul>
+			<div>
+				<fieldset>
+					<legend><:svp:legende_rechercher_plugins:></legend>
+					<p class="explication"><:svp:info_charger_plugin{version=#SPIP_VERSION}:></p>
+					<ul>
+						<li class="editer_phrase obligatoire[(#ENV{erreurs}|table_valeur{phrase}|oui) erreur]">
+							<label for="phrase"><:svp:label_critere_phrase:></label>
+							<p class="explication"><:svp:info_critere_phrase:></p>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{phrase})</span>]
+							<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" />						
+						</li>
+						<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
+							<label for="categorie"><:svp:label_critere_categorie:></label>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
+							<INCLURE{fond=inclure/select_option_categorie, categorie=#ENV{categorie}, env} />
+						</li>
+						<li class="editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
+							<label for="etat"><:svp:label_critere_etat:></label>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{etat})</span>]
+							<select name="etat" id="etat">
+								<option value="tout_etat"[ (#ENV{etat,stable}|=={tout_etat}|oui)selected="selected"]><:svp:option_etat_tout:></option>
+								<option value="stable"[ (#ENV{etat,stable}|=={stable}|oui)selected="selected"]><:plugin_etat_stable|ucfirst:></option>
+								<option value="test"[ (#ENV{etat,stable}|=={test}|oui)selected="selected"]><:plugin_etat_test|ucfirst:></option>
+								<option value="dev"[ (#ENV{etat,stable}|=={dev}|oui)selected="selected"]><:plugin_etat_developpement|ucfirst:></option>
+								<option value="experimental"[ (#ENV{etat,stable}|=={experimental}|oui)selected="selected"]><:plugin_etat_experimental|ucfirst:></option>
+							</select>
+						</li>
+						<li class="editer_depot obligatoire[(#ENV{erreurs}|table_valeur{depot}|oui) erreur]">
+							<label for="depot"><:svp:label_critere_depot:></label>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{depot})</span>]
+							<INCLURE{fond=formulaires/inc-charger_depots, env} />
+						</li>
+						<li class="editer_doublon obligatoire[(#ENV{erreurs}|table_valeur{doublon}|oui) erreur]">
+							<label for="doublon"><:svp:label_critere_doublon:></label>
+							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{doublon})</span>]
+							<select name="doublon" id="doublon">
+								<option value="non"[ (#ENV{doublon}|=={non}|oui)selected="selected"]><:svp:option_doublon_non:></option>
+								<option value="oui"[ (#ENV{doublon}|=={oui}|oui)selected="selected"]><:svp:option_doublon_oui:></option>
+							</select>
+						</li>
+					</ul>
+				</fieldset>
 	
 			<p class='boutons'><input type='submit' class='submit' value='<:info_rechercher:>' /></p>
+			</div>
+		</form>
+
 	
-			[<ul>
-				<li class="fieldset">
-					<fieldset>
-						<p class="explication">(#ENV*{message_ok}|table_valeur{resume})</p>
-						<INCLURE{fond=inclure/charger_plugin, plugins=#ENV*{message_ok}|table_valeur{plugins}, env} />
-					</fieldset>
-				</li>
-			</ul>]
-		</div></form>
-		]
-	</div>
+		[<form method="post" action="#ENV{action}">
+			[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
+			parametre : url d'action --> ]
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<div class="liste-plugins">
+				<fieldset>
+					<legend><:svp:legende_installer_plugins:></legend>
+					<p class="explication">(#ENV*{message_ok}|table_valeur{resume})</p>
+					<INCLURE{fond=inclure/charger_plugin, plugins=#ENV*{message_ok}|table_valeur{plugins}, env} />
+				</fieldset>
+				<p class='boutons'><input type='submit' class='submit' value='<:svp:bouton_installer:>' /></p>
+			</div>
+		</form>]
 </div>

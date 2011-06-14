@@ -26,7 +26,7 @@ function formulaires_charger_plugin_traiter_dist(){
 	$doublon = (_request('doublon') == 'oui') ? true : false;
 	$tri = ($phrase) ? 'score' : 'nom';
 	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
-	$afficher_exclusions = true;
+	$afficher_exclusions = false;
 
 	// On recupere la liste des paquets:
 	// - sans doublons, ie on ne garde que la version la plus recente 
