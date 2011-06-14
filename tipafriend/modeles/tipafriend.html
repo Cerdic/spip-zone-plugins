@@ -5,6 +5,9 @@
 	mais vous pouvez utiliser les votres ;-)
 ]
 #SET{tipafriend_img,#CHEMIN{img/mail_16.png}}
+<style type="text/css">
+div.spip_tipafriend {display:inline}
+</style>
 <div class="spip_tipafriend">
 <a href="[(#ENV{java,oui}|=={oui}|?{#ENV{lien_href_accessible,#ENV{lien_href}},#ENV{lien_href}})]"
 	target="_blank"[ (#ENV{java,oui}|=={oui}|oui)onclick="taf_popup('#ENV{lien_href}', '<:tipafriend:tipafriend:>'); return false;" ]

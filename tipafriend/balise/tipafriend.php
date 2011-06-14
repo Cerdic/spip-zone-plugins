@@ -176,6 +176,6 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		echo taf_dbg_block($div_debug);
 	}
 
-	return array('modeles/'.$model.'.html', $temps_de_cache, $contexte);
+	return array('modeles/'.$model, $temps_de_cache, $contexte);
 }
 ?>
