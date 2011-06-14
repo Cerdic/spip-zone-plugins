@@ -22,16 +22,4 @@ function tag_img($img,$alt="",$class=""){
 }
 
 
-/**
- * Ajouter un timestamp a une url de fichier
- *
- * @param unknown_type $fichier
- * @return unknown
- */
-function timestamp($fichier){
-	if (!$fichier) return $fichier;
-	$m = filemtime($fichier);
-	return "$fichier?$m";
-}
-
 ?>
