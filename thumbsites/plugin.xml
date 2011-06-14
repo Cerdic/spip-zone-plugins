@@ -3,31 +3,27 @@
 	<nom>Thumbsites</nom>
 
     <!-- Auteur du plugin -->
-	<auteur>
-	        Camille Lafitte, Eric Lupinacci
-	</auteur>
-	<licence>GNU/GPL - &#169; 2008 - &#224; plus tard</licence>
-	<version>0.3</version>
+	<auteur>Camille Lafitte, Eric Lupinacci</auteur>
+	<licence>GNU/GPL - &#169; 2008-&#224; plus tard</licence>
+	<version>0.3.0</version>
 	<etat>stable</etat>
 
     <!-- spécifie une icone pour le plugin -->
 	<icon>images/thumbsites.png</icon>
-
+	<slogan>Une vignette pour les objets sites</slogan>
 	<description>
 Thumbsites fournit un syst&egrave;me de capture d'&eacute;cran de site g&eacute;n&eacute;r&eacute;e par des serveurs d&eacute;di&eacute;s. Le plugin propose des balises, des filtres et des mod&egrave;les pour afficher la vignette d'un site donn&eacute;.
 _ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&eacute;s fr&eacute;quentes des serveurs et d'acc&eacute;l&eacute;rer les affichages. Une configuration est disponible dans l'espace priv&eacute;.
 	</description>
 
     <!-- URI de documentation -->
-	<lien>
-	    [Documentation sur SPIP-Contrib->http://www.spip-contrib.net/?article2584]
-	</lien>
+	<lien>http://www.spip-contrib.net/?article2584</lien>
 
     <!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en general le nom du plugin -->
 	<prefix>thumbsites</prefix>
 
     <!-- précise les dependances vis-a-vis de d'autres plugins -->
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.0-dev)" />
 	<necessite id="cfg" version="[1.7.6;]" />
 
     <!-- mes fonctions -->
@@ -38,7 +34,6 @@ _ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&
 		<inclure>thumbsites_pipelines.php</inclure>
 	</pipeline>
 
-	<chemin dir='' />
 	<categorie>multimedia</categorie>
 	<traduire gestionnaire="salvatore" module="thumbsites" reference="fr" />
 </plugin>
