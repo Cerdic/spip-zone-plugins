@@ -20,5 +20,6 @@ Logo et certaines images du plugin : [->http://pixel-mixer.com/]
 	<categorie>communication</categorie>
 	<necessite id='SPIP' version='[2.0.0;]' />
 	<utilise id='cfg' version='[1.0;]' />
+	<utilise id='facteur' version='[1.5;]' />
 	<traduire gestionnaire="salvatore" module="tipafriend" reference="fr" />
 </plugin>
