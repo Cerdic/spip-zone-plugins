@@ -7,6 +7,7 @@
  * Il semble que CFG ajoute un lien en exec=admin_plugin
  * dans la boite SPIP-Listes, sur le droite,
  * qui part en erreur 404
+ * (SPIP 2.1.10, CFG 1.16)
  * En attendant de comprendre pourquoi,
  * une petite redirection sur la vraie page
  * de configuration.
