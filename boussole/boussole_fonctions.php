@@ -104,8 +104,7 @@ function boussole_informer_taille($logo) {
 
 // -------------------- Filtres de compatibilite avec SPIP 2.0 ------------------------
 
-include_spip('inc/plugin');
-if (spip_version_compare($GLOBALS['spip_version_branche'], '2.1', '<')) {
+if (substr($GLOBALS['spip_version_branche'],0, 3) == '2.0') {
 	function bouton_action($libelle, $url, $class="", $confirm="", $title=""){
 		$onclick = $confirm?" onclick='return confirm(\"" . attribut_html($confirm) . "\");'":"";
 		$title = $title ? " title='$title'" : "";
