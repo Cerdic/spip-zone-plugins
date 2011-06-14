@@ -30,7 +30,7 @@
 
 		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/cases_a_cocher.png', "case", '');
 
-		$vals[] = typo($row['titre']);
+		$vals[] = '<a href="'.generer_url_ecrire('themes_edit', 'id_theme='.$row['id_theme']).'">'.typo($row['titre']).'</a>';
 
 		$vals[] = http_img_pack(_DIR_PLUGIN_LETTRES.'prive/images/rubrique-12.png', "rub", '');
 

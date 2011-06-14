@@ -19,7 +19,6 @@
 	include_spip('inc/meta');
 	include_spip('lettres_fonctions');
 
-
 	function exec_config_lettres_formulaire() {
 
 		if (!autoriser('configurer', 'lettres')) {
@@ -62,7 +61,6 @@
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('titre_configuration'), "configuration", "configuration");
 
-
 		echo '<br /><br /><br />';
 		echo gros_titre(_T('titre_configuration'),'',false);
 		echo barre_onglets("configuration", "config_lettres_formulaire_top");
@@ -80,7 +78,11 @@
 
    		echo debut_droite('', true);
 
-		$themes = afficher_objets('theme', _T('lettresprive:themes_disponibles'), array('SELECT' => 'T.*, RUB.titre AS titre_rub', 'FROM' => 'spip_themes AS T LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=T.id_rubrique', 'ORDER BY' => 'T.titre'));
+		echo('<h1>'._T('lettresprive:config_formulaire').'</h1>');
+		
+		$themes = afficher_objets(
+			'theme', _T('lettresprive:themes_disponibles'), 
+			array('SELECT' => 'T.*, RUB.titre AS titre_rub', 'FROM' => 'spip_themes AS T LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=T.id_rubrique', 'ORDER BY' => 'T.titre'));
 		if ($themes) {
 			echo $themes;
 			echo '<br />';
@@ -102,6 +104,7 @@
 
 		echo '<input type="text" class="text" name="titre" id="titre" value="" />';
 		echo '</p>';
+
 	    echo '<p>';
 		echo '<label for="id_parent">'._T('lettresprive:choix_rubrique').'</label>';
 		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');

@@ -202,12 +202,29 @@
 		'supprimer_cron' => "retirer des envois récurrents",
 		'ajouter_rubrique' => "Ajouter une rubrique",
 		'aucun_envoi_programme' => "Aucun envoi programmé.",
+
+		'toutes_lettres_thematique' => 'Pour toutes les lettres de cette thématique',		
+		'modifier_thematique' => "Modifier une th&eacute;matique",
+		'nom_expediteur' => "Nom de l'expéditeur",
+		'email_expediteur' => "adresse email de l'expéditeur",
+		'email_return_path' => "adresse email pour les retours d'erreur (return-path)",
+		'expediteur_defaut'		=> "l&apos;expéditeur par défaut (configuration facteur / SPIP)",
+		'webmestre_site'	=> "le webmestre du site",
+		'auteur_lettre'	=> "l&apos;auteur de la lettre",
+		'choisir_parmi_auteurs' => "choisir parmi la liste des auteurs de SPIP",
+		'thematique_modifiee' => "La thématique a bien été modifiée",
+		'thematique_erreur_modif' => "Une erreur s'est produite pendant la modification de la thématique",
+		'selectionner_auteur' => "Sélectionner un auteur",
+		'notifier_desabonnement_par_mail' => "Notifier par email lors de la suppression d'un abonné de la base de données",
+		'envoyer_notification_desabonnement_webmaster' => "Envoyer la notification de désabonnement au webmaster",
+		'envoyer_notification_desabonnement_auteur' => "Envoyer la notification de désabonnement à un auteur",
+		
 		
 // Thematiques et abonnement par defaut
-		'theme_par_defaut' 			=> 'Abonnement par défaut',
-		'theme_par_defaut_actuel' 	=> 'Abonnement par défaut actuel : ',
+		'theme_par_defaut' 			=> 'Thématique par défaut',
+		'theme_par_defaut_actuel' 	=> 'Thématique par défaut actuel : ',
 		'theme_racine' 				=> 'Toutes les thématiques',
-		'theme_par_defaut_modifier'	=> "Modifier l'abonnement par défaut",
+		'theme_par_defaut_modifier'	=> "Modifier la thématique par défaut",
 		'admin_abo_toutes_rubriques' => 'Les administrateurs peuvent ils attribuer des abonnements en dehors des th&eacute;matiques publiques ?',
 		
 		'Z' => 'ZZzZZzzz',

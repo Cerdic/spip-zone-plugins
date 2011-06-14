@@ -1,0 +1,22 @@
+<!--#hierarchie-->
+<!--/#hierarchie-->
+ 
+
+
+
+
+<!--#navigation-->
+<div class="logo_navigation">
+<img src="#CHEMIN{images/contact-128.png}" width="128" height="128" alt="Modifier thematique" />
+</div>
+<!--/#navigation-->
+ 
+ 
+<!--#extra-->
+
+<!--/#extra-->
+<h1><:lettresprive:modifier_thematique:></h1>
+<BOUCLE_theme(THEMES){id_theme=#ID_THEME}>
+#FORMULAIRE_EDITER_THEMATIQUE{#ID_THEME, #TITRE, #ID_RUBRIQUE, #EXPEDITEUR_TYPE, #EXPEDITEUR_ID, #RETOURS_TYPE, #RETOURS_ID}
+</BOUCLE_theme>
+

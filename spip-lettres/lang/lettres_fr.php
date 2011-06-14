@@ -73,7 +73,7 @@
 		'a_ete_supprime' => "a été enlevé de la base de données. Veuillez synchroniser avec votre fichier client.",
 
 		// Page d'abonnement
-		'description_page-lettres' => 'Acessible via spip.php?page=lettres, cette page fournit un formulaire d\'abonnement aux lettres d\'information',
+		'description_page-lettres' => 'Accessible via spip.php?page=lettres, cette page fournit un formulaire d\'abonnement aux lettres d\'information',
 
 		'Z' => 'ZZzZZzzz'
 

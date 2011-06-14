@@ -59,6 +59,8 @@
 		$interface['tables_jointures']['spip_auteurs'][] = 'auteurs_lettres';
 		$interface['tables_jointures']['spip_mots'][] = 'mots_lettres';
 		$interface['tables_jointures']['spip_themes'][] = 'rubriques';
+		$interface['tables_jointures']['spip_themes']['expediteur_id'] = 'auteurs';
+		$interface['tables_jointures']['spip_themes']['retours_id'] = 'auteurs';
 		$interface['table_date']['abonnes']	= 'maj';
 		$interface['table_date']['lettres']	= 'date';
 		$interface['table_des_traitements']['URL_FORMULAIRE_LETTRES'][] = 'quote_amp(%s)';
@@ -131,10 +133,14 @@
 							"UNIQUE id_rubrique"	=> "id_rubrique"
 						);
 		$spip_themes = array(
-							"id_theme"		=> "BIGINT(21) NOT NULL",
-							"id_rubrique"	=> "BIGINT (21) DEFAULT '0' NOT NULL",
-							"titre"			=> "TEXT NOT NULL",
-							"lang"			=> "VARCHAR(10) NOT NULL"
+							"id_theme"					=> "BIGINT(21) NOT NULL",
+							"id_rubrique"				=> "BIGINT (21) DEFAULT '0' NOT NULL",
+							"titre"						=> "TEXT NOT NULL",
+							"lang"						=> "VARCHAR(10) NOT NULL",
+							"expediteur_type"			=> "ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'",
+							"expediteur_id"				=> "BIGINT(21) NOT NULL DEFAULT '0'",
+							"retours_type"				=> "ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'",
+							"retours_id"				=> "BIGINT(21) NOT NULL DEFAULT '0'"
 						);
 		$spip_themes_key = array(
 							"PRIMARY KEY"			=> "id_theme",
@@ -353,11 +359,26 @@
 				sql_alter("TABLE spip_lettres CHANGE extra extra longtext NULL");
 				ecrire_meta($nom_meta_base_version,$current_version='4.0.2','non');
 			}
-			if (version_compare($current_version,'4.1','<'))
+			if (version_compare($current_version,'4.1','<')){
 				ecrire_meta('spip_lettres_cliquer_anonyme', 'oui');
 				ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', 'non');
 				ecrire_meta('spip_lettres_log_utiliser_email', 'non');
 				ecrire_meta($nom_meta_base_version,$current_version='4.1','non');
+			}
+			if (version_compare($current_version,'4.2','<')){
+				echo "SPIP-Lettres MAJ 4.2<br />";
+				sql_alter("TABLE spip_themes ADD COLUMN expediteur_type ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'");
+				sql_alter("TABLE spip_themes ADD COLUMN expediteur_id BIGINT(21) NOT NULL DEFAULT '0'");
+				sql_alter("TABLE spip_themes ADD COLUMN retours_type ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'");
+				sql_alter("TABLE spip_themes ADD COLUMN retours_id BIGINT(21) NOT NULL DEFAULT '0'");
+				
+				// on verifie la configuration de spip-lettres
+				// si toutes les lettres sont signées de leur auteur, on répercute sur les thématiques
+				if ('oui' == $GLOBALS['meta']['spip_lettres_signe_par_auteurs'])
+					sql_updateq('spip_themes', array('expediteur_type' => 'author'), '1');
+
+				ecrire_meta($nom_meta_base_version,$current_version='4.2','non');
+			}
 		}
 	}
 

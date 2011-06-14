@@ -364,8 +364,57 @@
 
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 
+			// on récupère les paramètres d'envoi de la thématique
+			$theme = sql_fetsel(
+					"expediteur_type, expediteur_id, retours_type, retours_id",
+					"spip_themes LEFT JOIN spip_lettres USING(id_rubrique)",
+					"id_lettre=".$id_lettre
+			);
+			$expediteur_type = $theme['expediteur_type'];
+			$expediteur_id = $theme['expediteur_id'];
+			$retours_type = $theme['retours_type'];
+			$retours_id = $theme['retours_id'];
+
+
+			if (!empty($expediteur_type) && 'author'!=$expediteur_type)
+			{
+				// l'expéditeur par défaut, dépend de la configuration de facteur et du site
+				if (isset($GLOBALS['meta']['facteur_smtp_sender']) && !empty($GLOBALS['meta']['facteur_smtp_sender']))
+					$email_envoyeur =  $GLOBALS['meta']['facteur_smtp_sender'];
+				else
+					$email_envoyeur =  $GLOBALS['meta']['email_webmaster'];
+
+				$nom_envoyeur = strip_tags($GLOBALS['meta']['nom_site']);
+
+				// l'expéditeur est le webmaster
+				if ('webmaster'==$expediteur_type)
+				{
+						$nom_envoyeur = _T('webmaster');
+						$email_envoyeur = $GLOBALS['meta']['email_webmaster'];
+				}
+
+				// l'expéditeur est un auteur sélectionné
+				else if ('custom'==$expediteur_type)
+				{
+						$auteur = sql_fetsel(
+							"nom, email", 
+							"spip_auteurs",
+							"id_auteur=".$expediteur_id
+						);
+						$nom_envoyeur = $auteur['nom'];
+						$email_envoyeur = $auteur['email'];
+				}
+
+				$corps = array( 
+					'html' => $message_html, 
+					'texte' => $message_texte,
+					'nom_envoyeur' =>  $nom_envoyeur
+				);
+				$expediteur = $email_envoyeur;
+			}
+
 			// si signe_par_auteurs = oui
-			if ($GLOBALS['meta']['spip_lettres_signe_par_auteurs'] == 'oui') {
+			else if ('author'==$expediteur_type || $GLOBALS['meta']['spip_lettres_signe_par_auteurs'] == 'oui') {
 				
 				// on récupère le 1er auteur; pas traité si plusieurs auteurs
 				$envoyeur = sql_fetsel(
@@ -382,7 +431,44 @@
 				);
 				$expediteur = $email_envoyeur;
 			}
-			return $envoyer_mail($this->email, $objet, $corps, $expediteur);
+			
+			// on spécifie l'adresse e-mail pour les retours en erreur
+			if (!empty($retours_type))
+			{
+				switch($retours_type)
+				{
+					case "webmaster":
+						$corps['adresse_erreur'] =  $GLOBALS['meta']['email_webmaster'];
+						break;
+
+					case "author":
+						$auteur = sql_fetsel(
+							"email", 
+							"spip_auteurs LEFT JOIN spip_auteurs_lettres USING(id_auteur)",
+							"id_lettre=".$id_lettre
+						);
+						$corps['adresse_erreur'] = $auteur['email'];
+						break;
+
+					case "custom":
+						$auteur = sql_fetsel(
+							"email", 
+							"spip_auteurs",
+							"id_auteur=".$retours_id
+						);
+						$corps['adresse_erreur'] = $auteur['email'];
+						break;
+
+					default:
+						if (isset($GLOBALS['meta']['facteur_smtp_sender']) && !empty($GLOBALS['meta']['facteur_smtp_sender']))
+							$corps['adresse_erreur'] =  $GLOBALS['meta']['facteur_smtp_sender'];
+						else
+							$corps['adresse_erreur'] =  $GLOBALS['meta']['email_webmaster'];
+						break;
+				}
+			}
+
+			return $envoyer_mail($this->email, $objet, $corps, $expediteur, $headers);
 		}
 		
 		
@@ -488,13 +574,22 @@
 		
 		
 		function supprimer() {
-			if ($GLOBALS['meta']['spip_lettres_notifier_suppression_abonne'] == 'oui') {
+			if ($GLOBALS['meta']['spip_lettres_notifier_suppression_abonne'] != 'non') {
 				$objet			= recuperer_fond('emails/lettres_suppression_abonne_titre', array('email' => $this->email));
 				$message_html	= recuperer_fond('emails/lettres_suppression_abonne_html', array('email' => $this->email));
 				$message_texte	= recuperer_fond('emails/lettres_suppression_abonne_texte', array('email' => $this->email));
 				$corps = array('html' => $message_html, 'texte' => $message_texte);
 				$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
-				$envoyer_mail($GLOBALS['meta']['email_webmaster'], $objet, $corps);
+				
+				$email_recoit_desabonnement = $GLOBALS['meta']['email_webmaster'];
+
+				if ('webmaster'!=$GLOBALS['meta']['spip_lettres_notifier_suppression_abonne'])
+				{
+					$id_auteur = intval($GLOBALS['meta']['spip_lettres_notifier_suppression_abonne']);
+					$row = sql_fetsel("email", "spip_auteurs", "id_auteur=".$id_auteur);
+					$email_recoit_desabonnement = $row["email"];
+				}
+				$envoyer_mail($email_recoit_desabonnement, $objet, $corps);
 			}
 			$req = sql_select('*', 'spip_abonnes_statistiques', 'periode="'.date('Y-m').'"');
 			if (sql_count($req) == 0)
