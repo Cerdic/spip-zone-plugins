@@ -39,10 +39,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_itm_taille_vignette' => '@taille@ pixels',
 	'cfg_lbl_choix_serveur' => 'Choisissez le serveur de vignettes',
 	'cfg_lbl_cle' => 'Votre clé',
+	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)',
 	'cfg_lbl_identifiant' => 'Votre identifiant',
 	'cfg_lbl_signature' => 'Votre signature',
 	'cfg_lbl_taille_vignette' => 'Taille des vignettes',
 	'cfg_lgd_choix_serveur' => 'Serveur',
+	'cfg_lgd_cache' => 'Cache',
 
 	// T
 	'titre_thumbshot_site' => 'VIGNETTE DU SITE'

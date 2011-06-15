@@ -79,8 +79,11 @@ function thumbshot($url_site, $refresh=false) {
 		$ret=supprimer_fichier($thumb_cache);
 		spip_log("thumbshot demande de rafraichissement url $url_site file $thumb_cache suppression reussie ? $ret");
 	}
+	
+	include_spip("inc/filtres");
+	$duree = intval(sinon(lire_config('thumbsites/duree_cache'),30)) ;
 
-	if ((!file_exists($thumb_cache)	OR ((time()-3600*24*30 > filemtime($thumb_cache)) AND $nb > 0))) {
+	if ((!file_exists($thumb_cache)	OR ((time()-3600*24*$duree > filemtime($thumb_cache)) AND $nb > 0))) {
 
 		$nb--;
 		include_spip("inc/distant");
