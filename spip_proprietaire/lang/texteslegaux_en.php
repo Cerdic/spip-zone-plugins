@@ -88,7 +88,7 @@ Website {{[@nom_site@->@url_site@]}} is hosted by its owner.
 	'mention_cnil' => 'As such, {{[@nom_site@->@url_site@]}} was the subject of a statement from the {{<abbr title="National French Commission for informatical freedom - Commission Nationale de l&#039;informatique et des Libert&#233;s - www.cnil.fr">CNIL</abbr>}} on @date_cnil@, registered under reference {{@numero_cnil@.}}',
 	'mentions_legales_copyright' => '{{{Contents and copyright}}}
 
-Pursuant to [articles L. 111-1 et L. 123-1 of the French Intellectual Property Code|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414], the entire contents of this site ({texts, images, videos and any media in general}), unless explicitly stated otherwise, is {{protected by copyright}}. Reproduction, even partial, of the contents of pages on this site without prior agreement of @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] is strictly prohibited.
+Pursuant to [articles L. 111-1 et L. 123-1 of the French Intellectual Property Code|See the text (legifrance.gouv.fr) [fr]->http://www.legifrance.gouv.fr/affichCode.do?cidTexte=LEGITEXT000006069414], the entire contents of this site ({texts, images, videos and any media in general}), unless explicitly stated otherwise, is {{protected by copyright}}. Reproduction, even partial, of the contents of pages on this site without prior agreement of @proprietaire_forme@ [{{@proprietaire_nom@}}->#proprietaire] is strictly prohibited. Short citations are permitted by French law for comments and criticism, as they are strictly concurrent, and are specified the original author and the Internet link to the source page.
 ',
 	'mentions_legales_fonctionnement' => '{{{Operation site}}}
 

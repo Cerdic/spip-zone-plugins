@@ -42,8 +42,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'copyright_comment' => 'Pour rappel, en France, il n\'est pas n&eacute;cessaire d\'avoir d&eacute;pos&eacute; votre copyright aupr&egrave;s d\'un organisme pour qu\'une protection soit effective. Les informations de copyright peuvent donc &ecirc;tre mentionn&eacute;es par d&eacute;faut.',
 	'copyright_comment_label' => 'Mention de protection',
 	'copyright_complement_label' => 'Compl&eacute;ment',
-	'copyright_default_comment' => 'La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.',
-	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited.[fr]La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.</multi>',
+//	'copyright_default_comment' => 'La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.',
+	'copyright_default_comment' => 'La reproduction, m&ecirc;me partielle, des contenus des pages de ce site sans accord pr&eacute;alable est strictement interdite (les citations courtes sont autoris&eacute;es par le droit fran&ccedil;ais pour commentaires et critiques, tant que ceux-ci y sont strictement concomitants et que sont pr&eacute;cis&eacute;s l\'auteur original et le lien Internet vers la page source).',
+//	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited.[fr]La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.</multi>',
+	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited (short citations are permitted by French law for comments and criticism, as they are strictly concurrent, and are specified the original author and the Internet link to the source page).[fr]La reproduction, m&ecirc;me partielle, des contenus des pages de ce site sans accord pr&eacute;alable est strictement interdite (les citations sont autoris&eacute;es par le droit fran&ccedil;ais pour commentaires et critiques, tant que ceux-ci y sont strictement concomitants et que sont pr&eacute;cis&eacute;s l\'auteur original et le lien Internet vers la page source).</multi>',
 	'copyright_legend' => 'Informations de copyright',
 	'createur' => 'cr&#233;ateur',
 

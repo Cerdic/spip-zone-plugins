@@ -44,8 +44,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'copyright_comment' => 'To recap, in France, there\'s not necessary to have to file your copyright by an organization for an effective protection. The copyright information may be listed by default.',
 	'copyright_comment_label' => 'Protection comment',
 	'copyright_complement_label' => 'Completion',
-	'copyright_default_comment' => 'Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited.',
-	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited.[fr]La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite.</multi>', # NEW
+	'copyright_default_comment' => 'Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited (short citations are permitted by French law for comments and criticism, as they are strictly concurrent, and are specified the original author and the Internet link to the source page).',
+	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited (short citations are permitted by French law for comments and criticism, as they are strictly concurrent, and are specified the original author and the Internet link to the source page).[fr]La reproduction, m&ecirc;me partielle, des contenus des pages de ce site sans accord pr&eacute;alable est strictement interdite (les citations sont autoris&eacute;es par le droit fran&ccedil;ais pour commentaires et critiques, tant que ceux-ci y sont strictement concomitants et que sont pr&eacute;cis&eacute;s l\'auteur original et le lien Internet vers la page source).</multi>',
 	'copyright_legend' => 'Copyright informations',
 	'createur' => 'creator',
 
