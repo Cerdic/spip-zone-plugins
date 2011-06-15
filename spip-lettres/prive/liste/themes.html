@@ -5,9 +5,9 @@
 <tbody>
 <BOUCLE_themes(THEMES RUBRIQUES) {par num titre}>
 <tr class="tr_liste">
-<td style="width: 16px;"><img src="../plugins/zone/spip-lettres/prive/images/abonnements-16.png" alt="case" width="16" height="16"></td>
+<td style="width: 16px;"><img src="#CHEMIN{/images/abonnements-16.png}" alt="case" width="16" height="16"></td>
 <td class="arial2"><a href="#URL_ECRIRE{themes_edit,id_theme=#ID_THEME}">#TITRE</a></td>
-<td style="width: 12px;"><img src="../plugins/zone/spip-lettres/prive/images/rubrique-12.png" alt="rub" width="12" height="12"></td>
+<td style="width: 12px;"><img src="#CHEMIN{images/rubrique-12.png}" alt="rub" width="12" height="12"></td>
 <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
 <td class="arial2"><a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></td>
 </BOUCLE_rubrique>
