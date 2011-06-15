@@ -1,9 +1,9 @@
 <plugin>
 	<nom>SPIP Mentions L&#233;gales</nom>
-	<version>1.6</version>
+	<version>1.61</version>
 	<etat>stable</etat>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<licence>&#169; 2009-2011 [GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+	<licence>[GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
  	<prefix>spip_proprio</prefix>
 	<chemin dir='public' type='public' />
 	<chemin dir='prive' type='prive' />
