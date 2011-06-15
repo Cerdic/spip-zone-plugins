@@ -43,7 +43,20 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 .cArticle .stats {
   float: #LANG_RIGHT;
 }
-.cArticle #forum_lire_tous, #forum_repondre[(#PLUGIN{notation}|?{' '}), .cArticle .notation ]{
+[(#CONFIG{articles_versions}|=={oui}|?{" "})
+.cArticle .diff-ajoute {
+  background-color: #VAR{acsArticlesAdded};
+}
+.cArticle .diff-para-supprime, .cArticle .diff-supprime {
+  background-color: #VAR{acsArticlesDeleted};
+  text-decoration: line-through;
+}
+.cArticle .version {
+  text-align: #LANG_RIGHT;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+].cArticle #forum_lire_tous, #forum_repondre[(#PLUGIN{notation}|?{' '}), .cArticle .notation ]{
   margin-left: 5px;
   margin-right: 5px;
 }[(#PLUGIN{recommander}|?{' '})
@@ -66,7 +79,7 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 
 .liste-articles .entete, .cArticle .entete, .plan-secteur h1 {
   [background-color: (#VAR{acsArticlesTitreFond});]
-  [background: url('[(#ACS_CHEMIN)]trame/(#VAR{acsArticlesTitreFondImage})') repeat top left;]
+  [background: url('(#ACS_CHEMIN{trame/#VAR{acsArticlesTitreFondImage}})') repeat top left;]
  }
 
 .liste-articles .entete {
@@ -153,7 +166,7 @@ Styles utilisés par les pages sommaire, recherche, resume, plan, sites ...
 
 .plan-secteur .menu-item {
   margin-left: 1.5em;
-  list-style: url(#ACS_CHEMIN{puces/}#VAR{acsArticlesPuce,puce_8x8.gif});
+  list-style: url(#ACS_CHEMIN{puces/#VAR{acsArticlesPuce,puce_8x8.gif}});
 }
 
 .plan-rubrique {

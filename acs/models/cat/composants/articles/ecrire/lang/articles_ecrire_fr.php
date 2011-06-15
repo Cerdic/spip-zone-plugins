@@ -43,6 +43,8 @@ Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans l
 'Sommaire' => 'Sommaire',
 'Stats' => 'Statistiques de visites',
 'Lock' => 'Contrôle d\'accès',
+'Added' => 'Ajout',
+'Deleted' => 'Suppression',
 
 'Pagination' => 'Nombre d\'articles par page',
 'ListesLogoTailleMax' => 'Taille maxi du logo',

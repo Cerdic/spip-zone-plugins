@@ -6,7 +6,7 @@
     </div>
     <ul>
       <BOUCLE_rubriques_trouves(RUBRIQUES) {recherche} {par points}{inverse (#ORDRE|?{0,1})} {pagination 5}>
-      <li class="menu-item"><a href="#URL_RUBRIQUE">#TITRE</a></li>
+      <li class="menu-item"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero)]</a></li>
       </BOUCLE_rubriques_trouves>
     </ul>
   </div>[(#REM) fin rubriques trouves]

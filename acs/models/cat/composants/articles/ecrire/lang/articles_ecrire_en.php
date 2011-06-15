@@ -25,6 +25,9 @@ The content of the article page can depend on a keyword from a keyword group cho
 'ChapoGras' => 'Set the header\'s font weight to bold',
 'Stats' => 'Visits',
 'Lock' => 'Access control',
+'Added' => 'Added',
+'Deleted' => 'Deleted',
+
 'Pagination' => 'Articles per page',
 'ListesLogoTailleMax' => 'Max logo size',
 

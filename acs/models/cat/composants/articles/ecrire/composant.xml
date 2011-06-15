@@ -85,6 +85,16 @@
     <nom>StylePage</nom>
     <type>KeyGroup</type>
   </variable>
+  <variable>
+    <nom>Added</nom>
+    <type>color</type>
+    <valeur>#d0ffc0</valeur>
+  </variable>
+  <variable>
+    <nom>Deleted</nom>
+    <type>color</type>
+    <valeur>#ffd0c0</valeur>
+  </variable>
 
   <variable>
     <nom>ListesLogoTailleMax</nom>

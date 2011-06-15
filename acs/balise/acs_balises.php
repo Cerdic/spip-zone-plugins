@@ -75,7 +75,7 @@ function balise_ACS_CHEMIN($p) {
   $p->interdire_scripts = false;
   $p->code = $arg ? '_DIR_RACINE.$GLOBALS["ACS_CHEMIN"]."/".'.$arg : '_DIR_RACINE.$GLOBALS["ACS_CHEMIN"]."/"';
   eval('$path = '.$p->code.';');
-  if (!is_readable($path))
+  if (!is_readable($path) || !is_file($path))
   	$p->code = '""';
   return $p;
 }
