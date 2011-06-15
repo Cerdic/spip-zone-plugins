@@ -22,13 +22,13 @@
 	<BOUCLE_resultats(ORGANISATIONS){recherche #ENV{recherche_organisation}}{par points}{pagination 10}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='nom'>
-			[(#LOGO_AUTEUR|image_reduire{20,26})]<a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a>
+				<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
 			</td>
 			<td class='action'>
-			[(#AUTORISER{modifier, contact, #ENV{id_contact}}|?{
+			[(#AUTORISER{modifier, rubrique, #ENV{id_rubrique}}|?{
 				[(#BOUTON_ACTION{
 					[(#CHEMIN{images/ajouter-16.png}|balise_img{<:contacts:lier_cette_organisation:>})],
-					[(#URL_ACTION_AUTEUR{lier_contact,[(#ENV{id_contact})/#ID_ORGANISATION],[(#ENV{redirect,#SELF})]})],
+					[(#URL_ACTION_AUTEUR{lier_rubrique,[(#ENV{id_rubrique})/#ID_ORGANISATION],[(#ENV{redirect,#SELF})]})],
 					ajax})],
 				#ID_AUTEUR
 			})]

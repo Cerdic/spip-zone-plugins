@@ -8,24 +8,35 @@
 /**
  * Affichage du formulaire de choix Contact/Organisation
  * dans la colonne de vue d'un auteur
+ * et 
+ * Affichage du formulaire de recherche et de sélection d'Organisations
+ * dans la colonne de vue d'une rubrique
 **/
 function contacts_affiche_gauche($flux){
+
 	if ($flux['args']['exec'] == 'auteur_infos'){
 		$flux['data'] .= recuperer_fond('prive/boite/selecteur_contacts_organisations', array(
 			'id_auteur'=>$flux['args']['id_auteur']
 		), array('ajax'=>true));
 	}
+
+	if ($flux['args']['exec'] == 'naviguer' && $flux['args']['id_rubrique']){
+		$flux['data'] .= recuperer_fond('prive/boite/selecteur_organisations_de_rubrique', array(
+			'id_rubrique'=>$flux['args']['id_rubrique']
+		));
+	}	
+
 	return $flux;
 }
-
-
-
 
 
 /**
  *
  * Insertion dans la vue des auteurs
  * des informations relatives aux contacts et organisations
+ * et
+ * Insertion dans la vue des rubriques
+ * des informations relatives aux organisations
  */
 function contacts_affiche_milieu($flux){
 	if ($flux['args']['exec'] == 'auteur_infos') {
@@ -35,6 +46,13 @@ function contacts_affiche_milieu($flux){
 			array('id_auteur' => $flux['args']['id_auteur'], 'cadre'=>'oui'));
 		$flux['data'] = $data . $flux['data'];
 		}
+		
+	if ($flux['args']['exec'] == 'naviguer' && $flux['args']['id_rubrique']){
+		$flux['data'] .= recuperer_fond('prive/liste/organisations_liees_rubrique', array(
+			'id_rubrique' => $flux['args']['id_rubrique'],
+			'titre' => _T('contacts:info_organisations_appartenance')
+		), array('ajax'=>true));
+	}
 	return $flux;
 }
 
@@ -62,7 +80,7 @@ function contacts_rechercher_liste_des_champs($tables){
 
 /**
  * Autoriser les champs extras sur les objets
- * Contacs et Organisations
+ * Contacts et Organisations
 **/
 function contacts_objets_extensibles($objets){
 		return array_merge($objets, array(

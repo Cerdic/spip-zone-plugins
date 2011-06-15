@@ -25,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_statut' => 'Status',
 	'confirmer_delier_contact' => 'Are you sure you want to unlink this organisation from this contact?',
 	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organisation?',
+	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organisation from this section?',
 	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?',
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
 	'contact' => 'One contact',

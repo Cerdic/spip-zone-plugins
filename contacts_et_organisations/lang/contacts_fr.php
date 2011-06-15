@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_statut' => 'Statut',
 	'confirmer_delier_contact' => '&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier cette organisation de ce contact ?',
 	'confirmer_delier_organisation' => '&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier ce contact de cette organisation ?',
+	'confirmer_delier_organisation_rubrique' => '&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier cette organisation de cette rubrique ?',
 	'confirmer_supprimer_contact' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
 		les informations relatives &agrave; ce contact ?',
 	'confirmer_supprimer_organisation' => '&Ecirc;tes-vous s&ucirc;r de vouloir supprimer
