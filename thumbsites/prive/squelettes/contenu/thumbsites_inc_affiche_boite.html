@@ -5,7 +5,7 @@
       <span class="titre"><:thumbsites:titre_thumbshot_site:></span>
    </div>
    <div class="cadre_padding infos">
-      <div><a href="#ENV{thumbshot_cache}">[(#ENV{thumbshot_cache}|balise_img{'',miniature_logo})]</a></div>
+      <div><a href="#ENV{thumbshot_cache}">[(#ENV{thumbshot_cache}|image_reduire{170,170}|inserer_attribut{class,miniature_logo})]</a></div>
       <div id="thumsites-#ENV{id_syndic}" class='bloc_depliable blocreplie'>
          <div class="spip_xx-small">#ENV{taille}</div>
          <div class="spip_xx-small">[(#VAL{"d-m-Y H:i:s"}|date{#ENV{thumbshot_cache}|filemtime})]</div>

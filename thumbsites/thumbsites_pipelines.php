@@ -8,8 +8,6 @@ function thumbsites_affiche_gauche($flux) {
 			include_spip('inc/thumbsites_filtres');
 			if ($thumbshot_cache = thumbshot($url)) {
 				// On affiche un bloc identique a celui du logo du site
-				include_spip('inc/filtres_images_mini');
-				$img = image_reduire('<img src="'.$thumbshot_cache.'" alt="" class="miniature_logo" />', 170, 170);
 				if ($taille = @getimagesize($thumbshot_cache))
 					$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
 
