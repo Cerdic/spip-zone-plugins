@@ -5,17 +5,17 @@
 -* Mis en plugin par Fil, Izo, BoOz
 -* Am&eacute;lior&eacute; par [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]
 	</auteur>
-	<version>3</version>
-	<licence>(c) 2009 GNU GPL v3</licence>
+	<version>3.1</version>
+	<licence>GNU GPL v3</licence>
 	<icon>images/thickbox.png</icon>
 	<etat>stable</etat>
 	<description>
 {{Thickbox_v3 :: fen&ecirc;tres popup javascript}}
-<p><br />
+
 Ce plugin ajoute un effet [thickbox->http://codylindley.com/Javascript/257/thickbox-one-box-to-rule-them-all] sur les liens de type image (<code><a href="#URL_DOCUMENT" type="#MIME_TYPE">...</a></code>) ou de class="thickbox".
 Il fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>.
-<br /><br />Il ajoute de nouvelles balises ainsi qu'un panel de configuration dans l'espace priv&eacute; (cf. documentation).
-</p>
+
+Il ajoute de nouvelles balises ainsi qu'un panel de configuration dans l'espace priv&eacute; (cf. documentation).
 	</description>
 	<lien>
 	[Configuration->.?exec=cfg&amp;cfg=thickbox]
