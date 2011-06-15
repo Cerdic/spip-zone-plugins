@@ -12,20 +12,13 @@ function thumbsites_affiche_gauche($flux) {
 				$img = image_reduire('<img src="'.$thumbshot_cache.'" alt="" class="miniature_logo" />', 170, 170);
 				if ($taille = @getimagesize($thumbshot_cache))
 					$taille = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
-				$bouton = bouton_block_depliable(_T('thumbsites:titre_thumbshot_site'), false, "thumbshot-$id_syndic");
 
-				$cadre = '<div id="iconifier-thumbshot-' . $id_syndic . '" class="iconifier">';
-				$cadre .= debut_cadre('r', find_in_path('prive/themes/spip/images/thumbsites-24.png'), '', $bouton, '', '', false);
-				$cadre .= '<div><a href="' . $thumbshot_cache . '">'. $img . '</a></div>';
-				$cadre .= debut_block_depliable(false,"thumbshot-$id_syndic") 
-					. '<div class="cadre_padding">'
-					. '<div class="spip_xx-small">' . $taille . '</div>' 
-					. '</div>'
-					. fin_block();
-				$cadre .= fin_cadre_relief(true);
-				$cadre .= '</div>';
-
-				$flux['data'] .= $cadre;
+				$flux["data"] .= recuperer_fond('prive/squelettes/contenu/thumbsites_affiche_boite',array(
+					'thumbshot_cache' => $thumbshot_cache,
+					'taille' => $taille,
+					'id_syndic' => $id_syndic,
+					'url' => $url
+					));
 			}
 		}
 	}

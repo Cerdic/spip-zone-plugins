@@ -1,0 +1,14 @@
+<div class="item thumsites cadre cadre-r">
+   [(#CHEMIN{prive/themes/spip/images/thumbsites-24.png}|balise_img{'',cadre-icone})]
+	<div onmouseover="jQuery(this).depliant('#thumsites-#ENV{id_syndic}');" class="titrem replie">
+		<a class="titremancre" onclick="return jQuery(this).depliant_clicancre('#thumsites-#ENV{id_syndic}');" href="#"></a>
+      <span class="titre"><:thumbsites:titre_thumbshot_site:></span>
+   </div>
+   <div class="cadre_padding infos">
+      <div><a href="#ENV{thumbshot_cache}">[(#ENV{thumbshot_cache}|balise_img{'',miniature_logo})]</a></div>
+      <div id="thumsites-#ENV{id_syndic}" class='bloc_depliable blocreplie'>
+         <div class="spip_xx-small">#ENV{taille}</div>
+         <div class="spip_xx-small">[(#VAL{"d-m-Y H:i:s"}|date{#ENV{thumbshot_cache}|filemtime})]</div>
+      </div>
+   </div>
+</div>
