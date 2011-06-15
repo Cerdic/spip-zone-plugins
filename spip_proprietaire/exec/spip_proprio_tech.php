@@ -77,7 +77,7 @@ function exec_spip_proprio_tech() {
 	if ($connect_statut != "0minirezo" ) { include_spip('inc/minipres'); echo minipres(); exit; }
 	include_spip('inc/presentation');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	$titre_page = _T('spip_proprio:proprietaire_export_import');
+	$titre_page = _T('spipproprio:proprietaire_export_import');
 
 // --------
 // Traitement du formulaire
@@ -88,62 +88,62 @@ function exec_spip_proprio_tech() {
 			'languages' => _request('languages'),
 		);
 		if( $ok = spip_proprio_exporter($datas) )
-			$msg_export = _T('spip_proprio:ok_export', array('fichier'=>_DIR_DUMP.$ok));
-		else $msg_export = _T('spip_proprio:erreur_export');
+			$msg_export = _T('spipproprio:ok_export', array('fichier'=>_DIR_DUMP.$ok));
+		else $msg_export = _T('spipproprio:erreur_export');
 	}
 	elseif ($a = _request('do_proprio_import')) {
 		$archive = _request('import_archive');
 		if( $ok = spip_proprio_importer($archive) )
-			$msg_import = _T('spip_proprio:ok_import');
-		else $msg_import = _T('spip_proprio:erreur_import');
+			$msg_import = _T('spipproprio:ok_import');
+		else $msg_import = _T('spipproprio:erreur_import');
 	}
 // -------
 
-	$contenu = debut_cadre_trait_couleur("rien.gif", true, "", _T('spip_proprio:outil_exporter'))
+	$contenu = debut_cadre_trait_couleur("rien.gif", true, "", _T('spipproprio:outil_exporter'))
 		.( $msg_export ? "<p><strong>".$msg_export."</strong></p>" : '' )
 		."<form method='get' action='' enctype='multipart/form-data'><div>
 			<input type='hidden' name='exec' value='spip_proprio_tech' />
 			<input type='hidden' name='do_proprio_export' value='oui' />
 			<p class='editer'><label>
 				<input type='checkbox' class='checkbox' name='configuration' id='configuration' value='oui' />
-				"._T('spip_proprio:exporter_configuration')."</label>
+				"._T('spipproprio:exporter_configuration')."</label>
 			</p>
 			<p class='editer'><label>
 				<input type='checkbox' class='checkbox' name='languages' id='languages' value='oui' />
-				"._T('spip_proprio:exporter_fichiers_langues')."</label>
+				"._T('spipproprio:exporter_fichiers_langues')."</label>
 			</p>
-			<span><input type='submit' value='"._T('spip_proprio:bouton_exporter')."' class='fondo' style='float: right' /></span>
+			<span><input type='submit' value='"._T('spipproprio:bouton_exporter')."' class='fondo' style='float: right' /></span>
 		</div></form>"
 		. fin_cadre_trait_couleur(true);
 	$liste = liste_proprio_dump();
 	if($liste)
-		$contenu .= debut_cadre_trait_couleur("rien.gif", true, "", _T('spip_proprio:outil_importer'))
+		$contenu .= debut_cadre_trait_couleur("rien.gif", true, "", _T('spipproprio:outil_importer'))
 		.( $msg_import ? "<p><strong>".$msg_import."</strong></p>" : '' )
 		. "\n<div class='verdana2' style='margin:1em;text-align: justify'>"
 		. http_img_pack("warning.gif", (_T('avis_attention')),
 			"width='48' height='48' style='float: $spip_lang_right; padding-$spip_lang_left: 10px;'")
-		. _T('spip_proprio:import_avertissement')
+		. _T('spipproprio:import_avertissement')
 		. "</div><br class=\"nettoyeur\" />"
 		."<form method='get' action='' enctype='multipart/form-data'><div>
 			<input type='hidden' name='exec' value='spip_proprio_tech' />
 			<input type='hidden' name='do_proprio_import' value='oui' />
 			<p class='editer'><label>
-				"._T('spip_proprio:importer_dump')."
+				"._T('spipproprio:importer_dump')."
 				<select name='import_archive' id='import_archive'>
 				".$liste."
 				</select>
 				</label>
 			</p>
-			<p><small>"._T('spip_proprio:sauvegardes_dans_dump')."</small></p>
-			<span><input type='submit' value='"._T('spip_proprio:bouton_importer')."' class='fondo' style='float: right' /></span>
+			<p><small>"._T('spipproprio:sauvegardes_dans_dump')."</small></p>
+			<span><input type='submit' value='"._T('spipproprio:bouton_importer')."' class='fondo' style='float: right' /></span>
 		</div></form>"
 		. fin_cadre_trait_couleur(true);
-	$info_texte = icone_horizontale(_T('spip_proprio:proprietaire_retour_plateforme'), generer_url_ecrire('spip_proprio'), find_in_path('images/idisk-dir-24.png'), 'rien.gif', false);
-	$info_supp = _T("spip_proprio:proprietaire_export_import_texte_supp");
+	$info_texte = icone_horizontale(_T('spipproprio:proprietaire_retour_plateforme'), generer_url_ecrire('spip_proprio'), find_in_path('images/idisk-dir-24.png'), 'rien.gif', false);
+	$info_supp = _T("spipproprio:proprietaire_export_import_texte_supp");
 	$icone = find_in_path('images/stock_export.png');
 
 
-	echo($commencer_page(_T('spip_proprio:spip_proprio')." - ".$titre_page, 'configuration', "configuration")),
+	echo($commencer_page(_T('spipproprio:spip_proprio')." - ".$titre_page, 'configuration', "configuration")),
 		"<br /><br />", debut_gauche('', true),
 		debut_cadre_relief($icone, true, "", $titre_page), $info_supp, $info_texte, fin_cadre_relief(true), 
 		"<br class='nettoyeur' />", creer_colonne_droite('', true), debut_droite('', true), 

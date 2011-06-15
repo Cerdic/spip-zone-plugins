@@ -27,10 +27,11 @@ Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://ww
 	<fonctions>spip_proprio_fonctions.php</fonctions>
 	<onglet id="spip_proprio" parent="configuration">
 	    <icone>images/idisk-dir-24.png</icone>
-	    <titre>spip_proprio:spip_proprio</titre>  
+	    <titre>spipproprio:spip_proprio</titre>  
 	    <url>spip_proprio</url>
 	</onglet>
+	<necessite id='SPIP' version='[2.0.0;]' />
 	<categorie>communication</categorie>
-	<traduire gestionnaire="salvatore" module="spip_proprio" reference="fr" />
-	<traduire gestionnaire="salvatore" module="textes_legaux" reference="fr" />
+	<traduire gestionnaire="salvatore" module="spipproprio" reference="fr" />
+	<traduire gestionnaire="salvatore" module="texteslegaux" reference="fr" />
 </plugin>

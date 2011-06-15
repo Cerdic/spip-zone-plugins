@@ -26,17 +26,17 @@ jQuery(document).ready(function(){
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{idem}|oui)erreur]">
-		    <label for="idem"><:spip_proprio:idem_label:>&nbsp;:</label>[
+		    <label for="idem"><:spipproprio:idem_label:>&nbsp;:</label>[
 		    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{idem})</span>
 			]
 			<select class='forml' name='idem' id='idem'>
 				<option value="non"[(#ENV**{idem}|=={non}|oui) selected="selected"]>...</option>
 				[(#ENV{who}|=={proprietaire}|non)
-				<option value="proprietaire"[(#ENV**{idem}|=={proprietaire}|oui) selected="selected"]><:spip_proprio:proprietaire:></option>
+				<option value="proprietaire"[(#ENV**{idem}|=={proprietaire}|oui) selected="selected"]><:spipproprio:proprietaire:></option>
 				][(#ENV{who}|=={hebergeur}|non)
-				<option value="hebergeur"[(#ENV**{idem}|=={hebergeur}|oui) selected="selected"]><:spip_proprio:hebergeur:></option>
+				<option value="hebergeur"[(#ENV**{idem}|=={hebergeur}|oui) selected="selected"]><:spipproprio:hebergeur:></option>
 				][(#ENV{who}|=={createur}|non)
-				<option value="createur"[(#ENV**{idem}|=={createur}|oui) selected="selected"]><:spip_proprio:createur:></option>
+				<option value="createur"[(#ENV**{idem}|=={createur}|oui) selected="selected"]><:spipproprio:createur:></option>
 				]
 			</select>
 		</li>

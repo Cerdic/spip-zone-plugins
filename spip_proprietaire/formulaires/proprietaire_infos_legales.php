@@ -33,13 +33,13 @@ function formulaires_proprietaire_infos_legales_verifier_dist($who='proprietaire
 	$erreurs = array();
 	if($siren = _request('enregistrement_siren')) {
 		if (!siren_valide($siren)) {
-			$erreurs['enregistrement_siren'] = _T('spip_proprio:num_invalide');
+			$erreurs['enregistrement_siren'] = _T('spipproprio:num_invalide');
 		} elseif($siret = _request('enregistrement_siret')) {
 			if (!siret_valide($siren, $siret)) {
-				$erreurs['enregistrement_siret'] = _T('spip_proprio:num_invalide');
+				$erreurs['enregistrement_siret'] = _T('spipproprio:num_invalide');
 			} elseif($tva = _request('enregistrement_tvaintra')) {
 				if ($tva!=tva_intracom_valide($tva.$siren)) {
-					$erreurs['enregistrement_tvaintra'] = _T('spip_proprio:num_invalide');
+					$erreurs['enregistrement_tvaintra'] = _T('spipproprio:num_invalide');
 				}
 			}
 		}
@@ -90,9 +90,9 @@ function formulaires_proprietaire_infos_legales_traiter_dist($who='proprietaire'
 
 	// Enregistrement et retour
 	if( $ok = spip_proprio_enregistrer_config($datas) ) {
-		$messages['message_ok'] = _T('spip_proprio:ok_config');
+		$messages['message_ok'] = _T('spipproprio:ok_config');
 	} else {
-		$messages['message_erreur'] = _T('spip_proprio:erreur_config');
+		$messages['message_erreur'] = _T('spipproprio:erreur_config');
 	}
 	return $messages;
 }

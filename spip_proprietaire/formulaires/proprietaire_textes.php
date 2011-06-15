@@ -33,8 +33,8 @@ function formulaires_proprietaire_textes_traiter_dist($raccourci=''){
 		include_spip('inc/headers');
 		if( $redirect = redirige_formulaire( generer_url_ecrire('spip_proprio', 'page=textes') ) )
 			return $redirect;
-		return array('message_ok' => _T('spip_proprio:ok_config'));
+		return array('message_ok' => _T('spipproprio:ok_config'));
 	}
-	return array('message_erreur' => _T('spip_proprio:erreur_config'));
+	return array('message_erreur' => _T('spipproprio:erreur_config'));
 }
 ?>

@@ -27,15 +27,15 @@ div.carte_visite img, div.carte_visite table td img {z-index: 105;}
 			</a>
 		</td>
 		<td style="padding: 0.4em; padding-left: 1em; text-align: right; color: ##GET{couleur_police};">
-			<a href="mailto:#GET{adresse_mail}" target="_blank" title="<:spip_proprio:mail_to:>">[(#GET{adresse_mail}|image_typo{police=#GET{police_grasse},taille=17,couleur=#GET{couleur_police}}|inserer_attribut{alt,#GET{adresse_mail}}|inserer_attribut{class,spip_logos}|liens_absolus|spip_proprio_image_alpha{#GET{alpha}})]</a>
+			<a href="mailto:#GET{adresse_mail}" target="_blank" title="<:spipproprio:mail_to:>">[(#GET{adresse_mail}|image_typo{police=#GET{police_grasse},taille=17,couleur=#GET{couleur_police}}|inserer_attribut{alt,#GET{adresse_mail}}|inserer_attribut{class,spip_logos}|liens_absolus|spip_proprio_image_alpha{#GET{alpha}})]</a>
 			[(#ENV{who}|=={chef}|oui)<br /><small>[(#GET*{proprietaire}|table_valeur{proprietaire_nom_responsable})][ - <i>(#GET*{proprietaire}|table_valeur{proprietaire_fonction_responsable}|typo)</i>]</small>]
-			[(#ENV{who}|=={admin}|oui)<br /><small><i><:spip_proprio:fonction_administrateur:></i></small>]
-			[(#ENV{who}|=={webmaster}|oui)<br /><small><i><:spip_proprio:fonction_webmaster:></i></small>]
+			[(#ENV{who}|=={admin}|oui)<br /><small><i><:spipproprio:fonction_administrateur:></i></small>]
+			[(#ENV{who}|=={webmaster}|oui)<br /><small><i><:spipproprio:fonction_webmaster:></i></small>]
 			[(#ENV{who}|=={site}|oui)<br />
-				&nbsp;&nbsp;<a href="#URL_SITE_SPIP" target="_blank" title="<:spip_proprio:home_page:>"><img src="[(#CHEMIN{bwpx-icns/icons/monitor.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
-				&nbsp;&nbsp;<a href="mailto:#GET{adresse_mail}" target="_blank" title="<:spip_proprio:mail_to:>"><img src="[(#CHEMIN{bwpx-icns/icons/envelope.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
-				&nbsp;&nbsp;<a href="[(#URL_PAGE{backend}|url_absolue)]" target="_blank" title="RSS 2.0 - <:spip_proprio:all_site:>"><img src="[(#CHEMIN{bwpx-icns/icons/rss.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
-				[(#CONFIG{activer_breves}|=={oui}|oui)&nbsp;&nbsp;<a href="[(#URL_PAGE{backend-breves}|url_absolue)]" target="_blank" title="RSS 2.0 - <:spip_proprio:news:>"><img src="[(#CHEMIN{bwpx-icns/icons/rss_comment.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>]
+				&nbsp;&nbsp;<a href="#URL_SITE_SPIP" target="_blank" title="<:spipproprio:home_page:>"><img src="[(#CHEMIN{bwpx-icns/icons/monitor.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
+				&nbsp;&nbsp;<a href="mailto:#GET{adresse_mail}" target="_blank" title="<:spipproprio:mail_to:>"><img src="[(#CHEMIN{bwpx-icns/icons/envelope.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
+				&nbsp;&nbsp;<a href="[(#URL_PAGE{backend}|url_absolue)]" target="_blank" title="RSS 2.0 - <:spipproprio:all_site:>"><img src="[(#CHEMIN{bwpx-icns/icons/rss.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>
+				[(#CONFIG{activer_breves}|=={oui}|oui)&nbsp;&nbsp;<a href="[(#URL_PAGE{backend-breves}|url_absolue)]" target="_blank" title="RSS 2.0 - <:spipproprio:news:>"><img src="[(#CHEMIN{bwpx-icns/icons/rss_comment.gif}|spip_proprio_image_alpha{#GET{alpha_icones},true}|liens_absolus)]" align="absmiddle" /></a>]
 			]
 		</td>
 	</tr>

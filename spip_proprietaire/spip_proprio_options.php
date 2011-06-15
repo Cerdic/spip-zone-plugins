@@ -206,9 +206,9 @@ function spip_proprio_proprietaire_texte($str='', $args=array(), $langdef='fr'){
 	$text = $traduire('proprietaire:test_fichier_langue',$GLOBALS['spip_lang']);
 
 	if (!isset($GLOBALS['i18n_proprietaire_'.$langdef])){
-		$test = _T('textes_legaux:exemple');
-		creer_fichier_textes_proprietaire( $GLOBALS['i18n_textes_legaux_'.$langdef], $langdef );
-		$GLOBALS['i18n_proprietaire_'.$langdef] = $GLOBALS['i18n_textes_legaux_'.$langdef];
+		$test = _T('texteslegaux:exemple');
+		creer_fichier_textes_proprietaire( $GLOBALS['i18n_texteslegaux_'.$langdef], $langdef );
+		$GLOBALS['i18n_proprietaire_'.$langdef] = $GLOBALS['i18n_texteslegaux_'.$langdef];
 	}
 	$GLOBALS['spip_lang'] = $souvenir;
 	return _T('proprietaire:'.$str, $args);
@@ -265,7 +265,7 @@ function charger_textes_proprietaire($bloc=true){
 		foreach ($tableau as $raccourci => $val) {
 			$bgcolor = alterner(++$i, 'row_even','row_odd');
 			$div .= "\n<tr class='$bgcolor'><td class='verdana2' style='min-width:150px;'>"
-				."<a href='".generer_url_ecrire('spip_proprio','page=textes&editer='.$raccourci)."' title='"._T('spip_proprio:ptexte_cliquez_pour_editer')."'><b>$raccourci</b></td>\n"
+				."<a href='".generer_url_ecrire('spip_proprio','page=textes&editer='.$raccourci)."' title='"._T('spipproprio:ptexte_cliquez_pour_editer')."'><b>$raccourci</b></td>\n"
 				."<td id='$raccourci' class='arial2 editable' style='min-width:300px;'>".propre( $val )."</td></tr>";
 		}
 		$div .= "</table>";

@@ -4,48 +4,48 @@
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
-	<p class='explication'><:spip_proprio:legal_comment:></p>
+	<p class='explication'><:spipproprio:legal_comment:></p>
 	<ul>
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{capital_social}|oui)erreur]">
-		    <label for="capital_social"><:spip_proprio:capital_social_label:>&nbsp;:</label>[
+		    <label for="capital_social"><:spipproprio:capital_social_label:>&nbsp;:</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{legal_capital})</span>
 			]<input type='text' class='text' name='capital_social' id='capital_social' value="[(#ENV**{capital_social})]" />
-			<span class='explication'><:spip_proprio:capital_social_comment:></span>
+			<span class='explication'><:spipproprio:capital_social_comment:></span>
 		</li>
 
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{legal_forme}|oui)erreur]">
-		    <label for="legal_forme"><:spip_proprio:forme_label:>&nbsp;:</label>[
+		    <label for="legal_forme"><:spipproprio:forme_label:>&nbsp;:</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{legal_forme})</span>
 			]<input type='text' class='text' name='legal_forme' id='legal_forme' value="[(#ENV**{legal_forme})]" />
-			<span class='explication'><:spip_proprio:forme_comment:></span>
+			<span class='explication'><:spipproprio:forme_comment:></span>
 		</li>
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{legal_abbrev}|oui)erreur]">
-		    <label for="legal_abbrev"><:spip_proprio:abbreviation_genre_label:>&nbsp;:</label>[
+		    <label for="legal_abbrev"><:spipproprio:abbreviation_genre_label:>&nbsp;:</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{legal_abbrev})</span>
 			]<input type='text' class='text' name='legal_abbrev' id='legal_abbrev' value="[(#ENV**{legal_abbrev})]" style="width: 100px; display: inline; float: left;" />
 			<select class="fondl" name="legal_genre" id="legal_genre" style="width: 100px; margin-left: 1em;">
-				<option value="fem"[(#ENV**{legal_genre}|=={fem}|oui) selected="selected"]><:spip_proprio:feminin:></option>
-				<option value="hom"[(#ENV**{legal_genre}|=={hom}|oui) selected="selected"]><:spip_proprio:masculin:></option>
+				<option value="fem"[(#ENV**{legal_genre}|=={fem}|oui) selected="selected"]><:spipproprio:feminin:></option>
+				<option value="hom"[(#ENV**{legal_genre}|=={hom}|oui) selected="selected"]><:spipproprio:masculin:></option>
 			</select>
 		</li>
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{enregistrement_organisme}|oui)erreur]">
-		    <label for="enregistrement_organisme"><:spip_proprio:enregistrement_organisme_label:>&nbsp;:</label>[
+		    <label for="enregistrement_organisme"><:spipproprio:enregistrement_organisme_label:>&nbsp;:</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_organisme})</span>
 			]<input type='text' class='text' name='enregistrement_organisme' id='enregistrement_organisme' value="[(#ENV**{enregistrement_organisme})]" />
-			<span class='explication'><:spip_proprio:enregistrement_organisme_comment:></span>
+			<span class='explication'><:spipproprio:enregistrement_organisme_comment:></span>
 		</li>
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{enregistrement_abbrev}|oui)erreur]">
-		    <label for="enregistrement_abbrev"><:spip_proprio:abbreviation_genre_label:>&nbsp;:</label>[
+		    <label for="enregistrement_abbrev"><:spipproprio:abbreviation_genre_label:>&nbsp;:</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{enregistrement_abbrev})</span>
 			]<input type='text' class='text' name='enregistrement_abbrev' id='enregistrement_abbrev' value="[(#ENV**{enregistrement_abbrev})]" style="width: 100px; display: inline; float: left;" />
 			<select class="fondl" name="enregistrement_genre" id="enregistrement_genre" style="width: 100px; margin-left: 1em;">
-				<option value="fem"[(#ENV**{enregistrement_genre}|=={fem}|oui) selected="selected"]><:spip_proprio:feminin:></option>
-				<option value="hom"[(#ENV**{enregistrement_genre}|=={hom}|oui) selected="selected"]><:spip_proprio:masculin:></option>
+				<option value="fem"[(#ENV**{enregistrement_genre}|=={fem}|oui) selected="selected"]><:spipproprio:feminin:></option>
+				<option value="hom"[(#ENV**{enregistrement_genre}|=={hom}|oui) selected="selected"]><:spipproprio:masculin:></option>
 			</select>
 		</li>
 
 		<li class="editer[ (#ENV**{erreurs}|table_valeur{enregistrement_numero}|oui)erreur]">
-		    <label for="enregistrement_numero"><:spip_proprio:enregistrement_numero_label:>&nbsp;:</label>
+		    <label for="enregistrement_numero"><:spipproprio:enregistrement_numero_label:>&nbsp;:</label>
 			[(#INCLURE{fond=formulaires/inc-numero_enregistrement}{env}{type_enregistrement=#ENV{proposer_enregistrement}})]
 		</li>
 

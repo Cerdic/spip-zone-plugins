@@ -24,7 +24,7 @@ function formulaires_proprietaire_infos_serveur_traiter_dist(){
 		'os_serveur_web' => _request('os_serveur_web'),
 	);
 	if( $ok = spip_proprio_enregistrer_config($datas) )
-		return array('message_ok' => _T('spip_proprio:ok_config'));
-	return array('message_erreur' => _T('spip_proprio:erreur_config'));
+		return array('message_ok' => _T('spipproprio:ok_config'));
+	return array('message_erreur' => _T('spipproprio:erreur_config'));
 }
 ?>

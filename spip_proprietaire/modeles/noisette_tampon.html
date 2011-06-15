@@ -9,8 +9,8 @@
 	[ - (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_pays]})]
 ]
 [<br />
-	<:spip_proprio:tel_abbrev:>: (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telephone]}|spip_proprio_isoler_telephone)
-	[ - <:spip_proprio:fax_abbrev:>: (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telecopie]}|spip_proprio_isoler_telephone)]
+	<:spipproprio:tel_abbrev:>: (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telephone]}|spip_proprio_isoler_telephone)
+	[ - <:spipproprio:fax_abbrev:>: (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telecopie]}|spip_proprio_isoler_telephone)]
 ]
 <br />#URL_SITE_SPIP[ - (#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})]
 [<br />
@@ -18,13 +18,13 @@
 ]
 [<br />(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|=={''}|non)[
 		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|non)
-			[<:spip_proprio:siret_abbrev:> [
+			[<:spipproprio:siret_abbrev:> [
 				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
 			 ](#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|typo)]
 		][
 		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|oui)
-			[<:spip_proprio:siren_abbrev:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
-		][<br /><:spip_proprio:tva_intracommunautaire_abbrev:> 
+			[<:spipproprio:siren_abbrev:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
+		][<br /><:spipproprio:tva_intracommunautaire_abbrev:> 
 			(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tvaintra]}|typo)[ 
 				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
 			]

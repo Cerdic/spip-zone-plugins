@@ -3,43 +3,43 @@
 <small>
 [(#GET*{proprietaire}|table_valeur{[(#GET{who})_nom]}|typo)][, (#GET*{proprietaire}|table_valeur{[(#GET{who})_libelle]}|typo)]
 [<br />(#GET*{proprietaire}|table_valeur{[(#GET{who})_legal_forme]}|typo)
-	[<:spip_proprio:au_capital_de:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_capital_social]}|typo)]
+	[<:spipproprio:au_capital_de:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_capital_social]}|typo)]
 	[
-		[(#GET*{proprietaire}|table_valeur{[(#GET{who})_legal_genre]}|=={fem}|?{<:spip_proprio:enregistree_pres:>,<:spip_proprio:enregistre_pres:>})]
+		[(#GET*{proprietaire}|table_valeur{[(#GET{who})_legal_genre]}|=={fem}|?{<:spipproprio:enregistree_pres:>,<:spipproprio:enregistre_pres:>})]
 		[(#LANG|=={fr}|oui)
-			[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_genre]}|=={fem}|?{<:spip_proprio:de_la:>,<:spip_proprio:du:>})]
+			[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_genre]}|=={fem}|?{<:spipproprio:de_la:>,<:spipproprio:du:>})]
 		](#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_organisme]}|typo)
 	]
-	[<:spip_proprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_numero]}|typo)]
-	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|=={''}|non)<:spip_proprio:sous_le_numero:>[
+	[<:spipproprio:sous_le_numero:>(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_numero]}|typo)]
+	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|=={''}|non)<:spipproprio:sous_le_numero:>[
 		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|non)
-			[<:spip_proprio:siret:> [
+			[<:spipproprio:siret:> [
 				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
 			 ](#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|typo)]
 		][
 		(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siret]}|=={''}|oui)
-			[<:spip_proprio:siren:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
+			[<:spipproprio:siren:> (#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)]
 		][(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tva_nonapplicable]}|=={oui}|non)[
-		<br /><:spip_proprio:numero_maj:> <:spip_proprio:tva_intracommunautaire:> 
+		<br /><:spipproprio:numero_maj:> <:spipproprio:tva_intracommunautaire:> 
 			(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tvaintra]}|typo)[ 
 				(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_siren]}|typo)
 			]]
 		][(#GET*{proprietaire}|table_valeur{[(#GET{who})_enregistrement_tva_nonapplicable]}|=={oui}|oui)
-			<br /><:spip_proprio:tva_non_applicable:>]
+			<br /><:spipproprio:tva_non_applicable:>]
 	]
 ]
 [<br />
 	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_fonction_responsable]}|typo) : ]
 	(#GET*{proprietaire}|table_valeur{[(#GET{who})_nom_responsable]})
-	[ - <a href="mailto:[(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail_responsable]})]" title="<:spip_proprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail_responsable]})</a>]
+	[ - <a href="mailto:[(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail_responsable]})]" title="<:spipproprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail_responsable]})</a>]
 ]
-[<br /><:spip_proprio:siege:> : 
+[<br /><:spipproprio:siege:> : 
 	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_rue]}) - ]
 	[(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_code_postal]}) ]
 	(#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_ville]})
 	[ - (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_pays]})]
 ]
-[<br /><:spip_proprio:tel:> : (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telephone]}|spip_proprio_formater_telephone)]
-[<br /><:spip_proprio:fax:> : (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telecopie]}|spip_proprio_formater_telephone)]
-[<br /><:spip_proprio:mel:> : <a href='mailto:[(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})]' title="<:spip_proprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})</a>]
+[<br /><:spipproprio:tel:> : (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telephone]}|spip_proprio_formater_telephone)]
+[<br /><:spipproprio:fax:> : (#GET*{proprietaire}|table_valeur{[(#GET{who})_adresse_telecopie]}|spip_proprio_formater_telephone)]
+[<br /><:spipproprio:mel:> : <a href='mailto:[(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})]' title="<:spipproprio:coordonnees_mailto_ttl:>" class='spip_mail'>(#GET*{proprietaire}|table_valeur{[(#GET{who})_mail]})</a>]
 </small>

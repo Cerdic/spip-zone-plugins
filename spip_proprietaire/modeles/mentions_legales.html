@@ -7,7 +7,7 @@
 	[<strong>(#MODELE{noisette_ours}{who=hebergeur})</strong>]
 ]
 [(#GET*{proprietaire}|table_valeur{hebergeur_idem}|=={''}|non)
-	<:textes_legaux:hebergeur_mentions_legales_idem{nom_site=#NOM_SITE_SPIP,url_site=#URL_SITE_SPIP}|propre:>
+	<:texteslegaux:hebergeur_mentions_legales_idem{nom_site=#NOM_SITE_SPIP,url_site=#URL_SITE_SPIP}|propre:>
 ]
 
 [(#GET*{proprietaire}|table_valeur{createur_idem}|=={''}|oui)
@@ -15,7 +15,7 @@
 	[<strong>(#MODELE{noisette_ours}{who=createur})</strong>]
 ]
 [(#GET*{proprietaire}|table_valeur{createur_idem}|=={''}|non)
-	<:textes_legaux:createur_mentions_legales_idem{nom_site=#NOM_SITE_SPIP,url_site=#URL_SITE_SPIP}|propre:>
+	<:texteslegaux:createur_mentions_legales_idem{nom_site=#NOM_SITE_SPIP,url_site=#URL_SITE_SPIP}|propre:>
 ]
 
 	[(#TEXTES_LEGAUX{mentions_legales_fonctionnement})]

@@ -31,7 +31,7 @@ function formulaires_proprietaire_adresse_traiter_dist($who='proprietaire'){
 		$who.'_adresse_telecopie' => _request('adresse_telecopie'),
 	);
 	if( $ok = spip_proprio_enregistrer_config($datas) )
-		return array('message_ok' => _T('spip_proprio:ok_config'));
-	return array('message_erreur' => _T('spip_proprio:erreur_config'));
+		return array('message_ok' => _T('spipproprio:ok_config'));
+	return array('message_erreur' => _T('spipproprio:erreur_config'));
 }
 ?>
