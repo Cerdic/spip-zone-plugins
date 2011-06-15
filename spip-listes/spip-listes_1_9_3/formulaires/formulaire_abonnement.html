@@ -54,7 +54,7 @@
 
 -->][(#ENV*{reponse_formulaire}|?{'',' '})[(#ENV{accepter_nouveau}|=={oui}|?{' ',''})
 <fieldset>
-	<legend class='titre-bloc'><:spiplistes:devenir_membre:></legend>
+	<legend class='titre-bloc'><span><:spiplistes:devenir_membre:></span></legend>
 [<!--(#REM) ===============	texte d'inscription	===============
 
 	Si la maison accepte l'inscription en tant que redacteur,
@@ -120,7 +120,7 @@
 	<B_id_liste>
 	<BOUCLE_id_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste=#ENV{id_liste}} {0,(#ENV{mode_login}|?{1,0})}>
 		[<fieldset>
-			[<legend>(#TITRE)</legend>]
+			[<legend><span>(#TITRE)</span></legend>]
 			(#TEXTE)
 		</fieldset>]
 	</BOUCLE_id_liste>
@@ -128,9 +128,9 @@
 		
 	<B_listes>
 		<fieldset>
-		<legend>[(#TOTAL_BOUCLE|=={1}|?{
+		<legend><span>[(#TOTAL_BOUCLE|=={1}|?{
 			<:spiplistes:abo_1_lettre:>
-			,<:spiplistes:listes_de_diffusion_:>})] : </legend>
+			,<:spiplistes:listes_de_diffusion_:>})] : </span></legend>
 	<ul class='liste-des-listes'>
 	<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{0,(#ENV{mode_login}|?{100,0})}>
 			[(#TOTAL_BOUCLE|=={1}|?{' ',''})
@@ -174,7 +174,7 @@
 			[(#ENV{mode_login}|oui)<fieldset><:spiplistes:aucune_liste_publique:></fieldset>]
 		]
 		[(#ENV{reponse_formulaire}|oui)
-			[(#ENV{mode_login}|oui)<fieldset><legend><:spiplistes:abo_1_lettre:></legend></fieldset>]
+			[(#ENV{mode_login}|oui)<fieldset><legend><span><:spiplistes:abo_1_lettre:></span></legend></fieldset>]
 		]
 	<//B_listes>
 	
@@ -197,7 +197,7 @@
 				
 	[(#ENV{mode_modifier}|?{' ',''})
 	<fieldset>
-		<legend><:spiplistes:format_reception:></legend>
+		<legend><span><:spiplistes:format_reception:></span></legend>
 		<ul class='liste-formats'>
 			<li>
 				<label class="block">
@@ -214,8 +214,8 @@
 		</ul>
 	</fieldset>
 	<fieldset>
-		<legend><:spiplistes:suspendre_abonnement_:> : </legend>
-		<ul>
+		<legend><span><:spiplistes:abo_listes:> : </span></legend>
+		<ul class="suspend-abo">
 			<li>
 				<label class="block">
 					<input name="suppl_abo" value="non"[ (#ENV{format}|=={non}|?{' ',''})checked="checked"] type="radio" />
