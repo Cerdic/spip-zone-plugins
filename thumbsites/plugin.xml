@@ -5,11 +5,11 @@
     <!-- Auteur du plugin -->
 	<auteur>Camille Lafitte, Eric Lupinacci</auteur>
 	<licence>GNU/GPL - &#169; 2008-&#224; plus tard</licence>
-	<version>0.4.0</version>
+	<version>0.4.1</version>
 	<etat>stable</etat>
 
     <!-- spécifie une icone pour le plugin -->
-	<icon>images/thumbsites.png</icon>
+	<icon>prive/themes/spip/images/thumbsites-32.png</icon>
 	<slogan>Une vignette pour les objets sites</slogan>
 	<description>
 Thumbsites fournit un syst&egrave;me de capture d'&eacute;cran de site g&eacute;n&eacute;r&eacute;e par des serveurs d&eacute;di&eacute;s. Le plugin propose des balises, des filtres et des mod&egrave;les pour afficher la vignette d'un site donn&eacute;.
