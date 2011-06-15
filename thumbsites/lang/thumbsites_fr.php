@@ -7,6 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer' => 'Effacer',
+	'bouton_rafraichir' => 'Rafraichir la vignette',
 	'bouton_valider' => 'Valider',
 	'bulle_bouton_effacer' => 'Effacer les saisies et revenir aux valeurs de départ',
 	'bulle_bouton_valider' => 'Valider les saisies',

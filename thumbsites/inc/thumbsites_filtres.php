@@ -13,6 +13,7 @@ if (!function_exists('url_thumbsite')) {
 	function url_thumbsite($url_site) {
 		$url_serveur = '';
 		//determine le serveur d'aperçu a utiliser, defaut thumbshots.com
+		include_spip("inc/filtres");
 		$serveur = sinon(lire_config('thumbsites/serveur'), "thumbshots");
 		//Charge le fichier de conf specifique au serveur
 		include_spip('serveurs/'.$serveur);
@@ -64,7 +65,7 @@ function creer_index_thumbshots($tmp) {
 }
 
 // Cree le fichier cache du thumbshot et renvoie le fichier
-function thumbshot($url_site) {
+function thumbshot($url_site, $refresh=false) {
 	static $nb=5; // ne pas en charger plus de 5 anciens par tour
 
 	if (!strlen($url_site) OR !parse_url($url_site))
@@ -73,6 +74,11 @@ function thumbshot($url_site) {
 	$tmp = sous_repertoire(_DIR_VAR, 'cache-thumbsites');
 	$md5_url = md5(strtolower($url_site));
 	$thumb_cache = $tmp.$md5_url.'.jpg';
+
+	if( $refresh AND file_exists($thumb_cache)) {
+		$ret=supprimer_fichier($thumb_cache);
+		spip_log("thumbshot demande de rafraichissement url $url_site file $thumb_cache suppression reussie ? $ret");
+	}
 
 	if ((!file_exists($thumb_cache)	OR ((time()-3600*24*30 > filemtime($thumb_cache)) AND $nb > 0))) {
 

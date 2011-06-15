@@ -9,6 +9,9 @@
       <div id="thumsites-#ENV{id_syndic}" class='bloc_depliable blocreplie'>
          <div class="spip_xx-small">#ENV{taille}</div>
          <div class="spip_xx-small">[(#VAL{"d-m-Y H:i:s"}|date{#ENV{thumbshot_cache}|filemtime})]</div>
+         <div class="actions">
+            [(#BOUTON_ACTION{<:thumbsites:bouton_rafraichir:>,#URL_ACTION_AUTEUR{thumbsites_rafraichir,#ENV{id_syndic}--#ENV{url},#SELF},ajax})]
+         </div>
       </div>
    </div>
 </div>
