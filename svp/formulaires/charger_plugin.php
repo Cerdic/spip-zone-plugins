@@ -22,7 +22,7 @@ function formulaires_charger_plugin_traiter_dist(){
 	if (_request('rechercher')) {
 		include_spip('inc/svp_rechercher');
 
-		// On a demande un recherche (bouton rechercher)
+		// On a demande une recherche (bouton rechercher)
 		$phrase = _request('phrase');
 		$categorie = _request('categorie');
 		$etat = _request('etat');
