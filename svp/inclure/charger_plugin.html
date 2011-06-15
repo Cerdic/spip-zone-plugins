@@ -20,7 +20,7 @@
 			</div>
 
 			[(#REM) <!-- Details du plugin -->]
-			<div class="details">
+			<div class="details" style="display:none">
 				<dl>
 					<dd class="desc">
 						[(#VALEUR{description}|propre)]
@@ -45,21 +45,15 @@
 	jQuery(function(){
 		jQuery('.plugins li.item a[rel=info]').click(function(){
 			var li = jQuery(this).parents('li').eq(0);
-			if (!jQuery('div.details',li).html()) {
-				jQuery('div.details',li).prepend(ajax_image_searching).load(
-					jQuery(this).attr('href').replace(/admin_plugin|plugins|charger_plugin/, 'info_plugin_distant'), {}, function(){
-						li.addClass('on');
-					}
-				);
-			}
-			else {
-				if (jQuery('div.details',li).toggle().is(':visible'))
-					li.addClass('on');
-				else
-					li.removeClass('on');
-			}
+			if (jQuery('div.details',li).toggle().is(':visible'))
+				li.addClass('on');
+			else
+				li.removeClass('on');
 			return false;
 		});
+		jQuery('.plugins li.item input.checkbox').change(function(){
+			jQuery(this).parents('form').eq(0).find('.boutons').slideDown();
+		}); 
 	});
 //]]>
 </script>
