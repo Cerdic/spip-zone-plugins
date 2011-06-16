@@ -11,9 +11,21 @@ function less_compile($style, $import_dir="", $contexte = array()){
 	// le compilateur lessc compile le contenu
 	$less = new lessc();
 	if ($import_dir){
-		$less->importDir = rtrim($import_dir,"/")."/";
+		$import_dir = rtrim($import_dir,"/")."/";
+		$less->importDir = $import_dir;
 	}
 	try {
+		// avant compilation par less, remplacer les @import_spip par un @import+find_in_path
+		if (preg_match_all(",@import_spip\s+['\"]([^'\"]+)['\"],",$style,$matches,PREG_SET_ORDER)){
+			// faker le chemin depuis le $import_dir
+			$i = $import_dir."dummy";$base = "";
+			while ($i AND ($i = dirname($i))!=".") {$base.="../";};
+			foreach($matches as $m){
+				if ($f=find_in_path($m[1])){
+					$style = str_replace($m[0],"@import '$base$f'",$style);
+				}
+			}
+		}
 		$out = $less->parse($style);
 		return $out;
 	}
