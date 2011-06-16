@@ -5,11 +5,14 @@
  * @param string $style
  * @return string
  */
-function less_compile($style){
+function less_compile($style, $import_dir="", $contexte = array()){
 	require_once 'lessphp/lessc.inc.php';
 
 	// le compilateur lessc compile le contenu
 	$less = new lessc();
+	if ($import_dir){
+		$less->importDir = rtrim($import_dir,"/")."/";
+	}
 	try {
 		$out = $less->parse($style);
 		return $out;
@@ -17,6 +20,11 @@ function less_compile($style){
 	// en cas d'erreur, on retourne du vide...
 	catch (exception $ex) {
 		spip_log('lessc fatal error:'.$ex->getMessage(),'less'._LOG_ERREUR);
+		erreur_squelette(
+			"LESS : Echec compilation"
+			. (isset($contexte['file'])?" fichier ".$contexte['file']:"")
+		  . "<br />".$ex->getMessage()
+		);
 		return '';
 	}
 }
@@ -40,6 +48,10 @@ function less_css($source){
 	if (!preg_match(',[\s{}],', $source)
 	  AND preg_match(',\.(less|css)$,i', $source, $r)
 	  AND file_exists($source)) {
+		static $done = array();
+		// ne pas essayer de compiler deux fois le meme fichier dans le meme hit
+		// si on a echoue une fois, on echouera pareil
+		if (isset($done[$source])) return $done[$source];
 
 		$f = basename($source,$r[0]);
 		$f = sous_repertoire (_DIR_VAR, 'cache-less')
@@ -57,18 +69,18 @@ function less_css($source){
 			return $source;
 
 		# compiler le LESS
-		$contenu = less_compile($contenu);
+		$contenu = less_compile($contenu, dirname($source), array('file'=>$source));
 		// si erreur de compilation on renvoit la source, et il y a deja eu un log
 		if (!$contenu)
-			return $source;
+			return $done[$source] = $source;
 		# passer la css en url absolue (on ne peut pas le faire avant, car c'est du LESS, pas des CSS)
 		$contenu = urls_absolues_css($contenu, $source);
 
 		// ecrire le fichier destination, en cas d'echec renvoyer la source
 		if (ecrire_fichier($f, $contenu, true))
-			return $f;
+			return $done[$source] = $f;
 		else
-			return $source;
+			return $done[$source] = $source;
 	}
 	$source = less_compile($source);
 	if (!$source)
