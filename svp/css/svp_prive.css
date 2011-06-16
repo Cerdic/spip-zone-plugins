@@ -2,3 +2,7 @@
 .liste-items .item.installe{ color: #999; background: url('../prive/themes/spip/images/fond-installe.gif') repeat; }
 .liste-items .item span.installe { color: red; }
 
+.liste-objets.depots .caption {
+    background-image: url("../prive/themes/spip/images/depot-24.png");
+    padding-left: 30px;
+}

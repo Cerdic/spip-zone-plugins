@@ -1,0 +1,26 @@
+<B_depots>
+<div class="liste-objets depots">
+	<table class="spip liste" summary="<:svp:resume_table_depots:>">
+	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:objet_depot,svp:objet_depot_pluriel}})</strong></caption>]
+		<tbody>
+<BOUCLE_depots(DEPOTS){par titre}>
+			<tr class="tr_liste">
+				<td class="arial11">
+					<a href="#URL_ECRIRE{depots, id_depot=#ID_DEPOT}" title="<:svp:bulle_afficher_depot:>">
+						[(#TITRE)]
+						[<span style="float: #LANG_RIGHT; margin-top: -2px; margin-bottom: -2px;">(#LOGO_DEPOT|image_reduire{16})</span>]
+					</a>
+				</td>
+				<td class="arial11">&nbsp;</td>
+				<td class="arial11">[(#NBR_PAQUETS) [(#NBR_PAQUETS|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]</td>
+				<td class="arial11">[<:svp:label_actualise_le:> (#MAJ|affdate{d-m H:i})]</td>
+				<td class="arial11">[(#BOUTON_ACTION{<:svp:bouton_actualiser:>, #URL_ACTION_AUTEUR{actualiser_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_actualiser_depot:>})]</td>
+				<td class="arial11">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_supprimer_depot:>})]</td>
+			</tr>
+</BOUCLE_depots>
+		</tbody>
+	</table>
+</div>
+</B_depots>
+	<p><:svp:info_liste_aucun_depot:></p>
+<//B_depots>

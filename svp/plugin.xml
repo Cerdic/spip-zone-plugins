@@ -58,12 +58,6 @@
 		<inclure>svp_pipelines.php</inclure>
 	</pipeline>
 
-	<onglet id='svp_depots' parent='plugins'>
-		<icone>prive/themes/spip/images/svp-24.png</icone>
-		<titre>svp:onglet_depots</titre>
-		<url>depots_gerer</url>
-	</onglet>
-
 	<necessite id="SPIP" version='[3.0.0-dev;]' />
 	<utilise id="Zpip" version='[2.0.2-dev;]' />
 
