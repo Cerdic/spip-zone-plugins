@@ -1,0 +1,43 @@
+<plugin>
+	<nom>SVP Statistiques</nom>
+	<auteur>Eric Lupinacci</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1.0</version>
+	<version_base>0.1</version_base>
+	<icon>prive/themes/spip/images/svp_stats-64.png</icon>
+	<etat>dev</etat>
+    <slogan>Module SVP de gestion des statistiques d'utilisation des plugins</slogan>
+    <description>
+Ce plugin est un module optionnel de SVP. 
+_ Il permet d'acqu&eacute;rir, de mettre &agrave; jour et de restituer les statistiques d'utilisation des plugins SPIP sur le net. 
+Ces statistiques sont issues du site http://stats/spip.org.
+	</description>
+	<lien></lien>
+	<prefix>svpstats</prefix>
+
+	<options>svpstats_options.php</options>
+	<install>base/svpstats_installer.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/svpstats_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/svpstats_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/svpstats_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>genie/svpstats_taches_generales_cron.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>svpstats_pipelines.php</inclure>
+	</pipeline>
+
+	<necessite id="svp" version="[0.7.0;)" />
+	<categorie>statistique</categorie>
+</plugin>
