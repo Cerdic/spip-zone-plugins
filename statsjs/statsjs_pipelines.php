@@ -4,24 +4,26 @@ function statsjs_affichage_final($page) {
 
 	if (!$GLOBALS['html']) return $page;
 
-	// Identification de l'element
-	foreach($GLOBALS['contexte'] as $k => &$v) {
-		if (preg_match(',^id_(\w+)$,S', $k, $r)
-		AND ($id = intval($v))>0
-		) {
-			$identifier = $r[1].$id;
+	// Identification automagique de l'element
+	// sauf si le squelette s'en est deja occupe
+	if (!strpos($page, '<meta name="SPIP.identifier" content="')) {
+		foreach($GLOBALS['contexte'] as $k => &$v) {
+			if (preg_match(',^id_(\w+)$,S', $k, $r)
+			AND ($id = intval($v))>0
+			) {
+				$identifier = $r[1].$id;
+			}
+		}
+		if (isset($identifier)) {
+			$page = preg_replace(',</head>,i',
+				"\n".'<meta name="SPIP.identifier" content="'.$identifier.'" />'."\n".'\0',
+				$page, 1);
 		}
 	}
 
-	if (isset($identifier)) {
-		$page = preg_replace(',</head>,i',
-			"\n".'<meta name="SPIP.identifier" content="'.$identifier.'" />'."\n".'\0',
-			$page, 1);
-	}
-
+	// Insertion du mouchard JS
 	if (!strpos($page, '<!-- MOUCHARD STATS SPIP -->'))
 		$page = preg_replace(',</body>,i', statsjs_mouchard()."\n".'\0', $page, 1);
-
 
 	return $page;
 }
