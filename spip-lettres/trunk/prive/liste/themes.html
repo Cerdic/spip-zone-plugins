@@ -1,0 +1,19 @@
+<div class="cadre cadre-liste" style="">
+<img src="#CHEMIN{images/rubrique-24.png}" alt="" class="cadre-icone" width="24" height="24">
+<div id="b0c06e144" class="titrem deplie depliant" onmouseover="jQuery(this).depliant('#tdb1c5fc4');"><a href="#" onclick="return jQuery(this).depliant_clicancre('#tdb1c5fc4');" class="titremancre"></a>#TITRE</div><div><div id="tdb1c5fc4" class="bloc_depliable blocdeplie">
+<table width="100%" border="0" cellpadding="2" cellspacing="0">
+<tbody>
+<BOUCLE_themes(THEMES RUBRIQUES) {par num titre}>
+<tr class="tr_liste">
+<td style="width: 16px;"><img src="#CHEMIN{/images/abonnements-16.png}" alt="case" width="16" height="16"></td>
+<td class="arial2"><a href="#URL_ECRIRE{themes_edit,id_theme=#ID_THEME}">#TITRE</a></td>
+<td style="width: 12px;"><img src="#CHEMIN{images/rubrique-12.png}" alt="rub" width="12" height="12"></td>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<td class="arial2"><a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></td>
+</BOUCLE_rubrique>
+<td class="arial1" style="width: 110px;"><a href="#URL_ECRIRE{config_lettres_formulaire,supprimer_theme=#ID_THEME}"><:lettresprive:supprimer_theme:></a></td>
+</tr>
+</BOUCLE_themes>
+</tbody>
+</table><div class="nettoyeur"></div>
+</div><div class="nettoyeur"></div></div></div>
