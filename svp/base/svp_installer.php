@@ -23,7 +23,6 @@ function svp_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_depots_plugins");
 	sql_drop_table("spip_paquets");
 	effacer_meta($nom_meta_base_version);
-	effacer_meta('svp_branches_spip');
 
 	spip_log('DESINSTALLATION BDD', 'svp_actions.' . _LOG_INFO);
 }
