@@ -6,7 +6,7 @@
  * @return string
  */
 function less_compile($style){
-	require 'lessphp/lessc.inc.php';
+	require_once 'lessphp/lessc.inc.php';
 
 	// le compilateur lessc compile le contenu
 	$less = new lessc();
