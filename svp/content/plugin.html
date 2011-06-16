@@ -14,9 +14,10 @@
 	<strong class="on">#NOM</strong>
 </p>
 
-[(#REM) Cartouche avec le titre de la page et les informations generales ]
+[(#REM) Informations generales sur le plugin ]
 <div class="contenu-principal">
 	<div class="unit size4of5">
+		[(#REM) Nom, categorie, tags, slogan, prefixe ]
 		<div class="cartouche">
 			<h1 class="h1">#NOM</h1>
 			[<p class="info-publi">
@@ -29,12 +30,16 @@
 				</small></abbr>
 			</p>]
 		</div>
-	
-		[<div class="meta-publi">
-			(#SLOGAN)
+		[<div class="meta-publi">(#SLOGAN)</div>]
+
+		[(#REM) Si le plugin SVP Statistiques est active on peut afficher les stats du plugin ]
+		[(#PLUGIN{SVPSTATS}|oui)
+		<div class="meta-publi">
+			<:svpstats:label_nbr_sites:> [(#NBR_SITES|singulier_ou_pluriel{info_sites_un,info_sites_nb})]
 		</div>]
 	</div>
 	
+	[(#REM) Les branches SPIP compatibles ]
 	<B_branches>
 	<div class="unit size1of5 lastunit">
 		<div class="liste branches">

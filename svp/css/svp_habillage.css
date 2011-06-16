@@ -1,5 +1,5 @@
 /* **************** PAGE PLUGIN ***************** */
-.liste.branches {float: right;}
+.liste.branches {float: left;}
 .branches .liste-items {border-top: 0;}
 .branches .liste-items .item {padding: 0 0 0 22px; border-bottom: 0; font-weight: bold; background: url("../prive/themes/spip/images/branche_ok-16.gif") no-repeat left center;}
 .branches .liste-items .item:hover {background-color: transparent;}
