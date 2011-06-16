@@ -22,8 +22,8 @@
 	[(#EVAL{_SVP_CRON_ACTUALISATION_DEPOTS}|oui)
 	<p><:svp:info_actualisation_depot_cron{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_DEPOTS}}:></p>
 	]
-	[(#EVAL{_SVP_CRON_ACTUALISATION_STATS}|oui)
-	<p><:svp:info_actualisation_stats_cron{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_STATS}}:></p>
+	[(#PLUGIN{SVPSTATS}|et{#EVAL{_SVP_CRON_ACTUALISATION_STATS}}|oui)
+	<p><:svpstats:info_actualisation_stats_cron{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_STATS}}:></p>
 	]
 </B_depots>
 	<p><:svp:info_liste_aucun_depot:></p>

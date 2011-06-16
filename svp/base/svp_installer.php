@@ -10,7 +10,7 @@ function svp_upgrade($nom_meta_base_version, $version_cible){
 		
 	if ($current_version=="0.0") {
 		include_spip('base/svp_declarer');
-		creer_base();
+		maj_tables(array('spip_depots','spip_plugins','spip_depots_plugins','spip_paquets'));
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 
 		spip_log('INSTALLATION BDD', 'svp_actions.' . _LOG_INFO);

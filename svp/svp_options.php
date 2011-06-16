@@ -6,14 +6,6 @@ define('_SVP_CRON_ACTUALISATION_DEPOTS', true);
 // - Periode d'actualisation en nombre d'heures (de 1 a 24)
 define('_SVP_PERIODE_ACTUALISATION_DEPOTS', 6);
 
-// Mise a jour automatique des stats (CRON)
-// - Flag de declenchement
-define('_SVP_CRON_ACTUALISATION_STATS', false);
-// - Periode d'actualisation en nombre de jours
-define('_SVP_PERIODE_ACTUALISATION_STATS', 7);
-// - Adresse de la page fournissant les statistiques par json
-define('_SVP_SOURCE_STATS', 'http://stats.spip.org/spip.php?page=stats.json');
-
 
 // Définition de la boite du logo de depot pour utilisation de iconifier()
 $GLOBALS['logo_libelles']['id_depot'] = _T('svp:titre_boite_logo_depot');
