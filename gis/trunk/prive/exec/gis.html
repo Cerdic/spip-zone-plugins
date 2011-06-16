@@ -1,9 +1,6 @@
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
-		<a href="#URL_ECRIRE{gis_tous}" class="icone36" style="float:left;">
-			<img width="24" height="24" src="#CHEMIN{images/gis-24.png}" />
-			<span><:retour:></span>
-		</a>
+		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{gis_tous}},#CHEMIN{images/gis-24.png},rien.gif,left}:>
 		<h1>
 			<BOUCLE_gis(GIS){id_gis=#VAL{id_gis}|_request}>
 			#TITRE
@@ -12,7 +9,7 @@
 			<//B_gis>
 		</h1>
 	</div>
-[(#INCLURE{fond=modeles/carte_gis_preview,id_gis})]
+	[(#INCLURE{fond=modeles/carte_gis_preview,id_gis=#VAL{id_gis}|_request})]
 </div>
 
 [(#INCLURE{fond=prive/liste/objets_gis,

@@ -1,9 +1,6 @@
 <div class="cadre-formulaire-editer">
 	<div class="entete-formulaire">
-		<a href="#ENV{retour,#URL_ECRIRE{gis_tous}}" class="icone36" style="float:left;">
-			<img width="24" height="24" src="#CHEMIN{images/gis-24.png}" />
-			<span><:retour:></span>
-		</a>
+		<:icone_retour|icone_inline{#ENV{retour,#URL_ECRIRE{gis_tous}},#CHEMIN{images/gis-24.png},rien.gif,left}:>
 		[(#VAL{id_gis}|_request|?{<:gis:formulaire_modifier_gis:>,<:gis:formulaire_creer_gis:>})]
 		<h1>
 			<BOUCLE_gis(GIS){id_gis=#VAL{id_gis}|_request}>
@@ -24,6 +21,7 @@
 		<p>[(#ENV{id_gis})]</p>
 	</div>
 </div>
+[(#INCLURE{fond=prive/navigation/gis_editer,ajax,env})]
 ]
 <!--/#navigation-->
 

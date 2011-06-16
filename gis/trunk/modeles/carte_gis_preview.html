@@ -1,4 +1,4 @@
-<BOUCLE_gis(GIS){objet}{id_objet}{0,1}>
+<BOUCLE_gis(GIS){objet ?}{id_objet ?}{id_gis ?}{0,1}>
 <div id="map_preview" class="carte_gis" style="width: 100%; height: 150px;"></div>
 
 <script type="text/javascript">
@@ -29,6 +29,12 @@ var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 			map_preview.autoCenterAndZoom();
 		]
 		</B_points>
+		<BOUCLE_point(GIS){id_gis}>
+		point_#ID_GIS = new mxn.LatLonPoint([(#LAT)],[(#LON)]);
+		marker_#ID_GIS = new mxn.Marker(point_#ID_GIS);
+		map_preview.addMarker(marker_#ID_GIS);
+		</BOUCLE_point>
+		<//B_points>
 	}
 
 	$(function(){

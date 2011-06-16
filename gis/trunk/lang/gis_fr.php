@@ -70,6 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_bloc_creer_point' => 'Lier un nouveau point',
 	'titre_bloc_points_lies' => 'Points liés',
 	'titre_bloc_rechercher_point' => 'Rechercher un point',
+	'titre_nombre_utilisation' => '@nb@ utilisation',
+	'titre_nombre_utilisations' => '@nb@ utilisations',
 	
 	"zoom" => "Zoom"
 		
