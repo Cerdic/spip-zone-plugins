@@ -15,7 +15,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 // on recoit la demande de stats, on stocke la visite
 // puis on fait un coup de cron
 // => permet de supprimer les hits sur action=cron
-function action_stats() {
+function action_stats_dist() {
 	if ($GLOBALS['meta']["activer_statistiques"] != "non")
 		do_stats();
 	action_cron();
