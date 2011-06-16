@@ -1,9 +1,0 @@
-
-/* Habillage des petitions
----------------------------------------------- */
-#signatures { }
-#signatures caption h2 { margin: 0; }
-#signatures td.signature-date { white-space: nowrap; }
-#signatures td.signature-nom small { display: block; }
-#signatures .formulaire_recherche {  } /*Cf.: spip_formulaires.css*/
-#signatures .formulaire_recherche input.text {  } /*Cf.: spip_formulaires.css*/
