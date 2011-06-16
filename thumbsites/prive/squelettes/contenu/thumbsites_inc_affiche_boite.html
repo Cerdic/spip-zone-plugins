@@ -5,12 +5,13 @@
       <span class="titre"><:thumbsites:titre_thumbshot_site:></span>
    </div>
    <div class="cadre_padding infos">
-      <div><a href="#ENV{thumbshot_cache}">[(#ENV{thumbshot_cache}|image_reduire{170,170}|inserer_attribut{class,miniature_logo})]</a></div>
+   	#SET{vignette_cache,#ENV{thumbshot_cache}|image_reduire{170,170}|inserer_attribut{class,miniature_logo}}
+      <div><a href="#ENV{thumbshot_cache}">#GET{vignette_cache}</a></div>
       <div id="thumsites-#ENV{id_syndic}" class='bloc_depliable blocreplie'>
          <div class="spip_xx-small">#ENV{taille}</div>
          <div class="spip_xx-small">[(#VAL{"d-m-Y H:i:s"}|date{#ENV{thumbshot_cache}|filemtime})]</div>
          <div class="actions">
-            [(#BOUTON_ACTION{<:thumbsites:bouton_rafraichir:>,#URL_ACTION_AUTEUR{thumbsites_rafraichir,#ENV{id_syndic}--#ENV{url},#SELF},ajax})]
+            [(#BOUTON_ACTION{<:thumbsites:bouton_rafraichir:>,[(#URL_ACTION_AUTEUR{thumbsites_rafraichir,#ENV{id_syndic}--#ENV{url}--[(#GET{vignette_cache}|extraire_attribut{src})],#SELF})],ajax})]
          </div>
       </div>
    </div>

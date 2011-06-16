@@ -17,11 +17,12 @@ function action_thumbsites_rafraichir_dist(){
 	$arg = $securiser_action();
 
 	$arg = explode('--',$arg);
+	
+	$ret=supprimer_fichier($arg[2]);
+	spip_log("action_thumbsites_rafraichir_dist file $arg[2] suppression reussie ? $ret");
 
 	include_spip("inc/thumbsites_filtres");
-	$retour = thumbshot($arg[1],true) ;
-	spip_log("action_thumbsites_rafraichir_dist $arg[0] $arg[1] - retour $retour","thumbsites");
-	return($retour);
+	return(thumbshot($arg[1],true));
 }
 
 ?>
