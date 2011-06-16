@@ -46,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'facteur_smtp_username' => 'Nom d\'utilisateur :',
 	
 	// N
-	'note_test_configuration' => "Un email sera envoy&eacute;e &agrave; l'adresse d'envoi d&eacute;finie (ou celle du webmaster).",
+	'note_test_configuration' => "Un email sera envoy&eacute; &agrave; l'adresse d'envoi d&eacute;finie (ou celle du webmaster).",
 	
 	// P
 	'personnaliser' => "Personnaliser ces r&eacute;glages",
