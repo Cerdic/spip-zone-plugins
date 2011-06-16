@@ -40,7 +40,7 @@ function balise_BOUTONS_ADMIN_FORUM_dist($p) {
 		AND (\$id = '.intval($_id).')
 		AND	include_spip(\'inc/autoriser\')
 		AND autoriser(\'moderer\',\'forum\',\$id)) {
-			include_spip(\'inc/actions\');
+			include_spip(\'inc/actions\');include_spip(\'inc/filtres\');
 			echo \"<div class=\'boutons spip-admin actions modererforum\'>\"
 			. bouton_action(_T(\'forum:icone_supprimer_message\'),generer_action_auteur(\'instituer_forum\',\$id.\'-off\',ancre_url(self(),\'forum\')))
 			. bouton_action(_T(\'forum:icone_bruler_message\'),generer_action_auteur(\'instituer_forum\',\$id.\'-spam\',ancre_url(self(),\'forum\')))
