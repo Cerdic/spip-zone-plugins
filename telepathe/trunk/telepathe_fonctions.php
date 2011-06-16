@@ -41,7 +41,7 @@ function telepathe($contenu=null, $type=null) {
 function telepathe_formater($html) {
 
 	$v = telepathe();
-	$r = array("a".$v['id'] => $v);
+	$r = array($v['id'] => $v);
 
 	switch (_request('format')) {
 		case 'json':
