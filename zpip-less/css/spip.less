@@ -9,13 +9,13 @@
 
 /* Listes SPIP */
 ul.spip,
-ol.spip { margin-left: @text-indent/*@text-indent*/; }
+ol.spip { margin-left: /*@text-indent*/@text-indent; }
 ul.spip { list-style-type: disc; }
 li ul.spip { list-style-type: circle; }
 ol.spip { list-style-type: decimal; }
 
 dl.spip dt,
-dl.spip dd { padding-left: @text-indent/*@text-indent*/; }
+dl.spip dd { padding-left: /*@text-indent*/@text-indent; }
 dl.spip dt { clear: both; }
 dl.spip dd {}
 
@@ -29,28 +29,28 @@ table.spip tr.row_even td,table.spip tr.row_even th {background: #e5ecf9;}
 /* Citations, code et poesie */
 blockquote.spip {}
 .spip_poesie {}
-.spip_poesie div { margin-left: @text-indent/*@text-indent*/; text-indent: @minus-text-indent/*@minus-text-indent*/; }
+.spip_poesie div { margin-left: /*@text-indent*/@text-indent; text-indent: /*@minus-text-indent*/@minus-text-indent; }
 .spip_code,
-.spip_cadre {font-family: @font-family-mono/*@font-family-mono*/; font-size: 1em;}
-.spip_cadre {padding:@demi-margin-bottom/*@demi-margin-bottom*/;width: 100%;-webkit-box-sizing: border-box;-ms-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+.spip_cadre {font-family: /*@font-family-mono*/@font-family-mono; font-size: 1em;}
+.spip_cadre {padding:/*@demi-margin-bottom*/@demi-margin-bottom;width: 100%;-webkit-box-sizing: border-box;-ms-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
 
 /* Enluminures typo V3 / Cf.: http://www.spip-contrib.net/3118 */
 sc { font-variant: small-caps; }
 .caractencadre-spip { background-color: #FFFFCC; color: purple; }
 .caractencadre2-spip { background-color: #FFFFCC; color: orange; }
-.texteencadre-spip { display: block; margin:@margin-bottom/*@margin-bottom*/ @text-indent/*@text-indent*/; padding: @demi-line-height/*@demi-line-height*/; background: #EEE; }
+.texteencadre-spip { display: block; margin-top:/*@margin-bottom*/@margin-bottom;margin-bottom:/*@margin-bottom*/@margin-bottom; margin-left:/*@text-indent*/@text-indent;margin-right:/*@text-indent*/@text-indent; padding: /*@demi-line-height*/@demi-line-height; background: #EEE; }
 
 /* Logos, documents et images */
-.spip_logos { float: left; margin: 0; margin-right: @margin-bottom/*@margin-bottom*/; margin-bottom: @margin-bottom/*@margin-bottom*/; padding: 0; border: none; }
+.spip_logos { float: left; margin: 0; margin-right: /*@margin-bottom*/@margin-bottom; margin-bottom: /*@margin-bottom*/@margin-bottom; padding: 0; border: none; }
 
-.spip_documents { margin-bottom: @margin-bottom/*@margin-bottom*/; padding: 0; background: none; }
+.spip_documents { margin-bottom: /*@margin-bottom*/@margin-bottom; padding: 0; background: none; }
 .spip_documents,
 .spip_documents_center,
 .spip_doc_titre,
 .spip_doc_descriptif { margin-right: auto; margin-left: auto; text-align: center; }
 .spip_documents_center { clear: both; display: block; width: 100%; }
-.spip_documents_left { float: left; margin-right: @margin-bottom/*@margin-bottom*/; }
-.spip_documents_right { float: right; margin-left: @margin-bottom/*@margin-bottom*/; }
+.spip_documents_left { float: left; margin-right: /*@margin-bottom*/@margin-bottom; }
+.spip_documents_right { float: right; margin-left: /*@margin-bottom*/@margin-bottom; }
 .spip_doc_titre {}
 .spip_doc_descriptif { clear: both; }
 
@@ -63,7 +63,7 @@ sc { font-variant: small-caps; }
 .formulaire_recherche * { display: inline; }
 
 /* Paragraphes */
-div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: @margin-bottom/*@margin-bottom*/; }
+div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: /*@margin-bottom*/@margin-bottom; }
 
 /* Pagination */
 .pagination { clear: both; text-align: center; }
@@ -72,7 +72,7 @@ div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_docu
 }
 
 /* Notes */
-.notes > div {padding-left: @text-indent/*@text-indent*/; position: relative; }
+.notes > div {padding-left: /*@text-indent*/@text-indent; position: relative; }
 .notes .spip_note_ref { display:block;position:absolute;left:0;}
 
 /* Liens de SPIP */
