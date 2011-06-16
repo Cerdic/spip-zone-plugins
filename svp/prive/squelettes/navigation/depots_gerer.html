@@ -1,8 +1,7 @@
-<INCLURE{fond=prive/squelettes/inclure/menu-navigation, 
-	menu=bando_configuration, 
-	bloc=navigation,
-	env} />
-
-#BOITE_OUVRIR{'',info}
-<p><:svp:info_boite_depot_gerer:></p>
+[(#REM) Bloc d'information sur la page ]
+#BOITE_OUVRIR{'', info}
+	<p><:svp:info_boite_depot_gerer:></p>
 #BOITE_FERMER
+
+[(#REM) Bloc d'information et d'actualisation des statistiques de plugins ]
+<INCLURE{fond=prive/squelettes/inclure/depots-statistiques} />

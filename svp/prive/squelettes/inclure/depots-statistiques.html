@@ -1,6 +1,4 @@
-[(#BOITE_OUVRIR{<:svp:titre_boite_statistiques:>, note})]
-	<:svp:info_statistiques{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_STATS}}:>
-	<div id="stats" style="text-align:right; margin-top:1em;">
-		[(#BOUTON_ACTION{<:svp:bouton_actualiser_stats:>, #URL_ACTION_AUTEUR{actualiser_stats,'', #SELF}, '', '', <:svp:bulle_actualiser_stats:>})]
-	</div>
+[(#BOITE_OUVRIR{'', simple})]
+	<:svp:info_boite_statistiques{periode=#EVAL{_SVP_PERIODE_ACTUALISATION_STATS}}:>
+	[(#BOUTON_ACTION{<:svp:bouton_actualiser_stats:>, #URL_ACTION_AUTEUR{actualiser_stats,'', #SELF}, '', '', <:svp:bulle_actualiser_stats:>})]
 #BOITE_FERMER
