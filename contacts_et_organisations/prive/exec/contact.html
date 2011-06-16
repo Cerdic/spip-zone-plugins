@@ -60,7 +60,7 @@
 		<:contacts:contact_numero:>
 		<p>#ID_CONTACT</p>
 	</div>
-
+	<div><a href="[(#URL_PAGE{contact}|parametre_url{'id_contact',#ID_CONTACT})]"><:voir_en_ligne:></a></div>
 	[(#REM) faudra mettre {si #ID_AUTEUR} sur la 3.0 ]
 	<BOUCLE_auteur_lie(AUTEURS){id_contact}{tout}>
 		
