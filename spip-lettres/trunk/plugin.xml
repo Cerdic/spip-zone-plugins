@@ -7,10 +7,9 @@
 	<etat>dev</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de lettres d'information</description>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[3.0.0-dev;]" />
 	<necessite id="facteur" version="[1.5.1;]" />
 	<necessite id="queue" version="[0.3.4;]" />
-	<necessite id="spip_bonux" version="[1.9.3;]" />
 	<necessite id="YAML" version="[1.5;]" />
 	<necessite id="saisies" version="[1.9.6;]" />
 	<categorie>communication</categorie>
