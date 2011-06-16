@@ -5,7 +5,7 @@
  *
  * interface de gestion des projets disapages
  *
- * Auteur : moise.maindron@ac-nantes.fr
+ * Auteur : moise.maindron@ac-nantes.fr, Olivier Gautier : olivier.gautier@ac-rouen.fr
  * © 2008 - Distribue sous licence GPL
  *
  */
@@ -16,6 +16,12 @@ if (!defined('_DIR_PLUGIN_DIDASPIP')){
 }
 
 	function dida_ajouterBoutons($boutons_admin) {
+		//test si le plugin bando est activé
+		$liste_plugin = unserialize($GLOBALS['meta']['plugin']);
+		if (array_key_exists('BANDO',$liste_plugin)==true){
+			return $boutons_admin;
+		}
+		else {
 		// si on est admin
 		//if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
 		//AND $GLOBALS["options"]=="avancees" ) {
@@ -27,7 +33,6 @@ if (!defined('_DIR_PLUGIN_DIDASPIP')){
 			);
 		//}
 		return $boutons_admin;
+		}
 	}
-
-
 ?>
