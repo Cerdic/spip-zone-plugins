@@ -10,27 +10,27 @@ id_rubrique : documents de la rubrique.
 recherche : documents résultats d'une recherche.
 
 ][(#SET{docs,pdf|odt|ods|doc,xls,wmf})][
-(#SET{types_diapos,flv|mp4|ogv|webm|swf|jpg|png|gif[|(#GET{docs})]})][
+(#SET{types_diapos,flv|mp4|mp3|ogv|webm|swf|jpg|jpeg|png|gif[|(#GET{docs})]})][
 (#SET{nom_diaporama,dp[(#ENV{c}|?{c})][_art(#ID_ARTICLE)[_rub(#ID_RUBRIQUE)]]})]<B_doc>
 <div class="cDiapo" align="center">
   <table>
     <tr>
     <td class="diapog">[(#PAGINATION{videoprecedent})]</td>
-<BOUCLE_doc(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}{pagination #VAR{acsDiapoNb,3}}><td class="diapo"><a class="diapo nsize"[(#PLUGIN{mediabox}|?{" "}) rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] type="#MIME_TYPE" href="#URL_DOCUMENT" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"><img src="[(#LOGO_DOCUMENT|image_reduire{100,75}|extraire_attribut{src})]" alt="[(#TITRE)]" />[<br />(#TITRE|couper{20})]</a></td>[(#COMPTEUR_BOUCLE|modulo{#VAR{acsDiapoNbCol}}|=={0}|?{" "})[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|?{" "})<td class="diapod"></td></tr><tr><td class="diapog"></td>]]</BOUCLE_doc>
+<BOUCLE_doc(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}{pagination #VAR{acsDiapoNb,3}}><td class="diapo"><a class="diapo nsize"[(#PLUGIN{mediabox}|?{" "}) rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] type="#MIME_TYPE" href="#URL_DOCUMENT" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"><img src="[(#LOGO_DOCUMENT||image_reduire{#VAR{acsDiapoWidth,100},#VAR{acsDiapoHeight,75}}|extraire_attribut{src})]"[ alt="(#TITRE)"] />[<span class="titre">(#TITRE|couper{20})</span>]</a></td>[(#COMPTEUR_BOUCLE|modulo{#VAR{acsDiapoNbCol}}|=={0}|?{" "})[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|?{" "})<td class="diapod"></td></tr><tr><td class="diapog"></td>]]</BOUCLE_doc>
     <td class="diapod">[(#PAGINATION{videosuivant})]</td>
     </tr>
   </table>
 </div><BOUCLE_doc2(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}><a style="display:none" [(#PLUGIN{mediabox}|?{" "}) class="diapo" rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] href="#URL_DOCUMENT" type="#MIME_TYPE" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"></a></BOUCLE_doc2></B_doc>[(#REM)
 
   Liste des autres documents joints (d'après squelettes-dist/inc-documents.html)
-  Indispensable car sinon ces documents ne sont jamais listés.
+  Indispensable car sinon ces documents ne sont listés nulle part.
   
 ]<B_documents_joints>
 <div class="spacer"></div>
   <div class="bsize" id="documents_joints">
   <h2><:titre_documents_joints:></h2>
   <ul>
-    <BOUCLE_documents_joints(DOCUMENTS){id_article ?}{id_rubrique ?}{recherche ?}{vu=non}{doublons diapos}{par num titre, date}>[
+    <BOUCLE_documents_joints(DOCUMENTS){mode=document}{id_article ?}{id_rubrique ?}{recherche ?}{vu=non}{doublons diapos}{par num titre, date}>[
     <li>
       <strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
       <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>

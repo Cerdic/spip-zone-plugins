@@ -9,7 +9,7 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>150</valeur>
+    <valeur>250</valeur>
   </param>
 
   <variable>
@@ -23,16 +23,59 @@
     <valeur>8</valeur>
   </variable>
 
+  <variable>
+    <nom>Img</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>pellicule.png</valeur>
+  </variable>
+  <variable>
+    <nom>ImgG</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>filmg.gif</valeur>
+  </variable>
+  <variable>
+    <nom>ImgD</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>filmd.gif</valeur>
+  </variable>
+
+  <variable>
+    <nom>ImgGoff</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>filmgoff.gif</valeur>
+  </variable>
+  <variable>
+    <nom>ImgGon</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>filmgon.gif</valeur>
+  </variable>
+  <variable>
+    <nom>ImgDoff</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>filmdoff.gif</valeur>
+  </variable>
+  <variable>
+    <nom>ImgDon</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>filmdon.gif</valeur>
+  </variable>
 
   <variable>
     <nom>Width</nom>
     <type>text</type>
-    <valeur>100px</valeur>
+    <valeur>100</valeur>
   </variable>
   <variable>
     <nom>Height</nom>
     <type>text</type>
-    <valeur>75px</valeur>
+    <valeur>75</valeur>
   </variable>
   <variable>
     <nom>Fond</nom>

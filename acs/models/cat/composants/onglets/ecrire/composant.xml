@@ -8,12 +8,25 @@
 
   <param>
     <nom>preview</nom>
-    <valeur>80</valeur>
+    <valeur>100</valeur>
   </param>
   <param>
     <nom>update</nom>
   </param>
 
+  <variable>
+    <nom>Left</nom>
+    <type>img</type>
+    <chemin>onglets</chemin>
+    <valeur>left.gif</valeur>
+  </variable>
+  <variable>
+    <nom>Right</nom>
+    <type>img</type>
+    <chemin>onglets</chemin>
+    <valeur>right.gif</valeur>
+  </variable>
+  
   <variable>
     <nom>FondColor</nom>
     <type>color</type>
@@ -47,7 +60,11 @@
     <nom>Space</nom>
     <type>text</type>
   </variable>
-  
+  <variable>
+    <nom>Width</nom>
+    <type>text</type>
+  </variable>
+
   <variable>
     <nom>1</nom>
     <type>text</type>

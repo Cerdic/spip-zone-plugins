@@ -6,6 +6,12 @@
  * La classe acsOngletsEdit étend CEdit,
  * et implémente sa méthode update() pour personnaliser
  * les images d'onglets "portes coulissantes CSS".
+ * 
+ * Ce composant utilise des images gif indexées comme suit:
+ * couleur 0: bordure
+ * couleur 1: inactif
+ * couleur 2: au survol
+ * couleur 3: actif
  */
 class acsOngletsEdit extends CEdit {
   function update() {
@@ -14,8 +20,12 @@ class acsOngletsEdit extends CEdit {
   $ic = metacol('acsOngletsCouleurInactif');
   $hc = metacol('acsOngletsCouleurSurvol');
 
+  /*
     $imr = @ImageCreateFromGif(find_in_path('composants/onglets/images/right.gif'));
     $iml = @ImageCreateFromGif(find_in_path('composants/onglets/images/left.gif'));
+*/
+    $imr = ImageCreateFromGif(_DIR_RACINE.$GLOBALS["ACS_CHEMIN"].'/onglets/'.$GLOBALS['meta']['acsOngletsRight']);
+    $iml = ImageCreateFromGif(_DIR_RACINE.$GLOBALS["ACS_CHEMIN"].'/onglets/'.$GLOBALS['meta']['acsOngletsLeft']);
 
     if (!$imr || !$iml) {
     	$this->errors[] = 'ImageCreateFromGif_fail';

@@ -18,8 +18,9 @@ function initDiapos() {
       if (img.length) {
       	var dw = jQuery("#colorbox").innerWidth() - jQuery("#colorbox").width();
       	var dh = jQuery("#colorbox").innerHeight() - jQuery("#colorbox").height();
-      	img.css("max-height", img.height() - dh)
-      	   .css("max-width", img.width() - dw);
+      	img.css("max-height", img.height()-dh-10)
+           .css("margin-top", "3px")
+      	   .css("max-width", img.width()-dw);
       }
     }
   });

@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'table' => 'Tableau',
 'sommaire' => 'Sommaire',
 
-'latest' => 'Derni&egrave;re version',
+'latest' => 'Version actuelle',
 
 'lire_la_suite' => 'lire la suite',
 

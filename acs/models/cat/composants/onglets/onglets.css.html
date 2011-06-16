@@ -1,7 +1,9 @@
-#CACHE{0}[(#REM)
+[(#CACHE{0})][(#REM)
 
 Onglets - dF 2008-2011
-]
+
+][(#SET{lw,[(#ACS_CHEMIN{onglets/#VAR{acsOngletsLeft,left.gif}}|largeur)]})]
+[(#SET{h,[(#ACS_CHEMIN{onglets/#VAR{acsOngletsRight,right.gif}}|hauteur|div{3})]})]
 
 /* onglets de menu */
 #menunav {
@@ -23,9 +25,9 @@ Onglets - dF 2008-2011
   float: #LANG_LEFT;
   position:relative; /* pour IE */
   z-index: 1; /* pour IE */
-  background: url("[(#ACS_CHEMIN)]onglets/left.gif") no-repeat left top;
+  background: url("[(#ACS_CHEMIN{onglets/#VAR{acsOngletsLeft,left.gif}})]") no-repeat left top;
   [margin-#LANG_RIGHT: (#VAR{acsOngletsSpace,0});] [(#REM) space between Onglets ]
-  padding:0 0 0 9px;
+  padding:0 0 0 [(#GET{lw,9})]px;
   border-bottom: 1px solid [(#VAR{acsOngletsBordColor})];
   line-height: 14px; /* PROVISOIRE : en px pour permettre différentes tailles de fontes sans flinguer le système d'onglets */
 }
@@ -34,38 +36,42 @@ Onglets - dF 2008-2011
   float: #LANG_LEFT;
   display:block;
   width:.1em;
-  background:url("[(#ACS_CHEMIN)]onglets/right.gif") no-repeat right top;
+  background:url("[(#ACS_CHEMIN{onglets/#VAR{acsOngletsRight,right.gif}})]") no-repeat right top;
   padding:5px 14px 4px 6px;
   text-decoration:none;
   font-weight:bold;
+  text-align: center;
   color: #VAR{acsOngletsLienInactif,#VAR{acsFondLink,#4f4f8f}};
   word-wrap: nowrap;
 }
+#menunav > ul a {
+  [min-width: (#VAR{acsOngletsWidth});]
+  width: auto;
+}
 
-#menunav > ul a {width:auto;}
-  /* Commented Backslash Hack hides rule from IE5-Mac \*/
-  #menunav a {float:none;}
-  /* End IE5-Mac hack */
-  #menunav a:hover {
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#menunav a {float:none;}
+/* End IE5-Mac hack */
+#menunav a:hover {
   color: #VAR{acsOngletsLinkHover,#VAR{acsFondLinkHover,#ff0000}};
 }
 
 #menunav #current {
-  background-position: 0 -300px;
+  background-position: 0 -[(#GET{h,150}|mult{2})]px;
   border-width: 0;
 }
 
 #menunav #current a {
-  background-position:100% -300px;
+  background-position:100% -[(#GET{h,150}|mult{2})]px;
   padding-bottom:5px;
   color: #VAR{acsOngletsLink,#VAR{acsFondLink,#002f6f}};
 }
 
 #menunav li:hover, #menunav li:hover a {
-  background-position:0% -150px;
+  background-position:0% -[(#GET{h,150})]px;
   color: #VAR{acsOngletsLinkHover,#ff0000};
 }
 
 #menunav li:hover a {
-  background-position:100% -150px;
+  background-position:100% -[(#GET{h,150})]px;
 }

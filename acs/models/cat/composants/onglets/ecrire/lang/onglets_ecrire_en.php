@@ -7,7 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'Panels',
 'description' => 'Panels - Navigation menu',
 'info' => 'Panel 2 (Top 10) is only displayed when spip internal statistics are activated.',
-'help' => 'Panels titles and tooltips translations are in the component lang file. You can edit theses translations when plugin crayons is installed.<br />
+'help' => 'Panels titles and tooltips translations are in the component lang file. You can edit theses translations when plugin crayons is installed.
+<br /><br />
 Panels use CSS styles to change aspect when cursor is over.',
 
 'FondColor' => 'Background',
