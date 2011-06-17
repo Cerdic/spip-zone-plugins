@@ -3,10 +3,14 @@
 */
 @font-size: 0.8125em;
 @font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif;
-@font-family-mono: 'andale mono','lucida console',monospace;
-@text-indent: 50px;
 @line-height: 1.5em;
-@margin-bottom: 1.5em;
+
+@font-size-mono: 1em;
+@font-family-mono: 'andale mono','lucida console',monospace;
+@line-height-mono: @line-height;
+
+@text-indent: 50px;
+@margin-bottom: @line-height;
 @color: #333;
 @background-color:#FFFFFF;
 
@@ -43,4 +47,6 @@ background-color:/*@background-color*/@background-color;
 }
 .typo_mono {
 font-family:/*@font-family-mono*/@font-family-mono;
+line-height:/*@line-height-mono*/@line-height-mono;
+font-size:/*@font-size-mono*/@font-size-mono;
 }
