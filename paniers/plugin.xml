@@ -2,7 +2,7 @@
 	<nom>Paniers</nom>
 	<auteur>[Les Développements Durables->http://www.ldd.fr], Cédric Morin ([yterium.net->http://www.yterium.net])</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description>Permet de créer des sélections d'objets ayant un prix.</description>
