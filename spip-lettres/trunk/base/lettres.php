@@ -49,15 +49,9 @@
 		$interface['tables_jointures']['spip_lettres'][] = 'articles_lettres';
 		$interface['tables_jointures']['spip_lettres'][] = 'articles';
 		$interface['tables_jointures']['spip_lettres'][] = 'lettres_statistiques';
-		$interface['tables_jointures']['spip_lettres'][] = 'mots_lettres';
-		$interface['tables_jointures']['spip_lettres'][] = 'mots';
 		$interface['tables_jointures']['spip_lettres'][] = 'rubriques';
 		$interface['tables_jointures']['spip_lettres'][] = 'abonnes_lettres';
-		$interface['tables_jointures']['spip_lettres']['id_auteur'] = 'auteurs_lettres';
-		$interface['tables_jointures']['spip_lettres'][] = 'auteurs_lettres';
 		$interface['tables_jointures']['spip_lettres'][] = 'documents_liens';
-		$interface['tables_jointures']['spip_auteurs'][] = 'auteurs_lettres';
-		$interface['tables_jointures']['spip_mots'][] = 'mots_lettres';
 		$interface['tables_jointures']['spip_themes'][] = 'rubriques';
 		$interface['tables_jointures']['spip_themes']['expediteur_id'] = 'auteurs';
 		$interface['tables_jointures']['spip_themes']['retours_id'] = 'auteurs';
@@ -206,29 +200,12 @@
 							"KEY id_article"	=> "id_article",
 							"KEY id_lettre"		=> "id_lettre"
 						);
-		$spip_auteurs_lettres = array(
-							"id_auteur"		=> "BIGINT(21) NOT NULL",
-							"id_lettre"		=> "BIGINT(21) NOT NULL"
-						);
-		$spip_auteurs_lettres_key = array(
-							"PRIMARY KEY" 	=> "id_auteur, id_lettre",
-							"KEY id_auteur"	=> "id_auteur",
-							"KEY id_lettre"	=> "id_lettre"
-						);
 		$spip_lettres_statistiques = array(
 							"periode"		=> "VARCHAR(7) NOT NULL",
 							"nb_envois"		=> "BIGINT (21) DEFAULT '0' NOT NULL"
 						);
 		$spip_lettres_statistiques_key = array(
 							"PRIMARY KEY"	=> "periode"
-						);
-		$spip_mots_lettres = array(
-							"id_mot"		=> "BIGINT (21) DEFAULT '0' NOT NULL",
-							"id_lettre"		=> "BIGINT (21) DEFAULT '0' NOT NULL"
-						);
-		$spip_mots_lettres_key = array(
-							"PRIMARY KEY"	=> "id_lettre, id_mot",
-							"KEY id_mot"	=> "id_mot"
 						);
 		$tables_auxiliaires['spip_abonnes_clics'] = 
 			array('field' => &$spip_abonnes_clics, 'key' => &$spip_abonnes_clics_key);
@@ -240,12 +217,8 @@
 			array('field' => &$spip_abonnes_statistiques, 'key' => &$spip_abonnes_statistiques_key);
 		$tables_auxiliaires['spip_articles_lettres'] = 
 			array('field' => &$spip_articles_lettres, 'key' => &$spip_articles_lettres_key);
-		$tables_auxiliaires['spip_auteurs_lettres'] = 
-			array('field' => &$spip_auteurs_lettres, 'key' => &$spip_auteurs_lettres_key);
 		$tables_auxiliaires['spip_lettres_statistiques'] = 
 			array('field' => &$spip_lettres_statistiques, 'key' => &$spip_lettres_statistiques_key);
-		$tables_auxiliaires['spip_mots_lettres'] = 
-			array('field' => &$spip_mots_lettres, 'key' => &$spip_mots_lettres_key);
 		return $tables_auxiliaires;
 	}
 
@@ -257,14 +230,109 @@
 			ecrire_meta($nom_meta_base_version,$GLOBALS['meta']['spip_lettres_version'],'non');
 			effacer_meta('spip_lettres_version');
 		}
+		$maj = array();
+										
+		$maj['create'] = array(
+			array('maj_tables',array('spip_abonnes_clics',
+									'spip_abonnes_lettres',
+									'spip_desabonnes',
+									'spip_abonnes_rubriques',
+									'spip_articles_lettres',
+									'spip_lettres_statistiques',
+									'spip_themes',
+									'spip_lettres',
+									'spip_rubriques_crontabs')),
 
-		$current_version = 0.0;
-		if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-				|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			if (version_compare($current_version,'0.1','<')){
-				creer_base();
+		);
+		$maj['0.1'] = array( 
+			array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),	
+			array('spip_lettres_creer_repertoire_documents'),
+		);
+		$maj['3.0'] = array( 
+			array('maj_tables',array('spip_abonnes_clics',
+									'spip_abonnes_lettres',
+									'spip_desabonnes',
+									'spip_abonnes_rubriques',
+									'spip_articles_lettres',
+									'spip_lettres_statistiques',
+									'spip_themes',
+									'spip_lettres',
+									'spip_rubriques_crontabs')),
+			array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),	
+		);
+		$maj['3.1'] = array( 	
+			array('maj_tables',array('spip_lettres')),
+			array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),	
+		);
+		$maj['3.2'] = array(
+			array('spip_lettres_maj_index_elements_objet')
+		);
+		$maj['3.3'] = array(
+			array('maj_tables',array('spip_desabonnes')),
+		);
+		$maj['3.4'] = array(
+			array('maj_tables',array('spip_desabonnes')),
+			array('spip_lettres_creer_repertoire_documents')
+		);
+		$maj['3.6'] = array(
+			array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),		
+		);
+		$maj['3.7'] = array(
+			array('maj_tables',array('spip_rubriques_crontabs')),		
+		);
+		$maj['3.8'] = array(
+			array('maj_tables',array('spip_lettres')),
+			array('sql_alter',"TABLE spip_lettres DROP idx"),	
+			array('sql_drop_table',"spip_documents_lettres",true),
+			array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),			
+		);
+		$maj['4.0.0'] = array(
+			array('spip_lettres_update_fond'),
+		);
+		$maj['4.0.1'] = array(
+			array('sql_alter',"TABLE spip_lettres CHANGE statut statut VARCHAR(15) NOT NULL DEFAULT 'brouillon'"),
+		);
+		$maj['4.0.2'] = array(
+			array('sql_alter',"TABLE spip_lettres CHANGE texte texte longtext DEFAULT '' NOT NULL"),
+			array('sql_alter',"TABLE spip_lettres CHANGE message_html message_html longtext DEFAULT '' NOT NULL"),
+			array('sql_alter',"TABLE spip_lettres CHANGE message_texte message_texte longtext DEFAULT '' NOT NULL"),
+			array('sql_alter',"TABLE spip_lettres CHANGE extra extra longtext NULL"),
+		);
+		$maj['4.1'] = array(
+			array('sql_alter',"TABLE spip_lettres CHANGE texte texte longtext DEFAULT '' NOT NULL"),
+			array('sql_alter',"TABLE spip_lettres CHANGE message_html message_html longtext DEFAULT '' NOT NULL"),
+			array('sql_alter',"TABLE spip_lettres CHANGE message_texte message_texte longtext DEFAULT '' NOT NULL"),
+			array('sql_alter',"TABLE spip_lettres CHANGE extra extra longtext NULL"),
+			array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),
+		);
+		$maj['4.2'] = array(
+			array('sql_alter',"TABLE spip_themes ADD COLUMN expediteur_type ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'"),
+			array('sql_alter',"TABLE spip_themes ADD COLUMN expediteur_id BIGINT(21) NOT NULL DEFAULT '0'"),
+			array('sql_alter',"TABLE spip_themes ADD COLUMN retours_type ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'"),
+			array('sql_alter',"TABLE spip_themes ADD COLUMN retours_id BIGINT(21) NOT NULL DEFAULT '0'"),
+			array('spip_lettres_update_meta',$version_plugin,$nom_meta_base_versio,$current_version,$version_cible),
+		);	
+		if ('oui' == $GLOBALS['meta']['spip_lettres_signe_par_auteurs'])
+			array_push($maj['4.2'][],array('sql_updateq','spip_themes',array('expediteur_type' => 'author'), '1'));
+		// Laissons de la place dans la numerotation si la version de base de la branche 2 evolue
+		include_spip('maj/svn10000');
+		$maj['5.2'] = array(
+			array('maj_liens','mot','lettre'),
+			array('sql_drop_table',"spip_mots_lettres"),
+			array('maj_liens','auteur','lettre'),
+			array('sql_drop_table',"spip_auteurs_lettres"),			
+		);
+
+		include_spip('base/upgrade');
+		maj_plugin($nom_meta_base_version, $version_cible, $maj);
+	}
+	function spip_lettres_maj_index_elements_objet() {
+				$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
+				unset($INDEX_elements_objet['spip_lettres']);
+				ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
+	}
+	
+	function spip_lettres_update_meta($version_plugin,$nom_meta_base_versio,$current_version,$version_cible) {
 				ecrire_meta('spip_lettres_version', $version_plugin);
 				ecrire_meta('spip_lettres_fond_formulaire_lettres', 'lettres');
 				ecrire_meta('spip_lettres_fond_lettre_titre', 'emails/lettre_titre');
@@ -279,62 +347,12 @@
 				ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
 				ecrire_meta('spip_lettres_cliquer_anonyme', 'oui');
 				ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', 'non');
+				ecrire_meta('spip_lettres_log_utiliser_email', 'non');
 				if (!strpos($GLOBALS['meta']['preview'],',0minirezo,'))
 					ecrire_meta('preview',',0minirezo,');
 				ecrire_metas();
-				include_spip('inc/getdocument');
-				creer_repertoire_documents('lettres');
-				ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-			}
-			if (version_compare($current_version,'3.0','<')){
-				creer_base();
-				ecrire_meta('spip_lettres_notifier_suppression_abonne', 'non');
-				ecrire_meta('spip_lettres_utiliser_articles', 'non');
-				ecrire_meta($nom_meta_base_version,$current_version='3.0','non');
-			}
-			if (version_compare($current_version,'3.1','<')){
-				maj_tables('spip_lettres');
-				ecrire_meta('spip_lettres_utiliser_ps', 'non');
-				ecrire_meta($nom_meta_base_version,$current_version='3.1','non');
-			}
-			if (version_compare($current_version,'3.2','<')){
-				$INDEX_elements_objet = unserialize($GLOBALS['meta']['INDEX_elements_objet']);
-				unset($INDEX_elements_objet['spip_lettres']);
-				ecrire_meta('INDEX_elements_objet',serialize($INDEX_elements_objet));
-				ecrire_meta($nom_meta_base_version,$current_version='3.2','non');
-			}
-			if (version_compare($current_version,'3.3','<')){
-				creer_base(); // table spip_desabonnes
-				ecrire_meta($nom_meta_base_version,$current_version='3.3','non');
-			}
-			if (version_compare($current_version,'3.4','<')){
-				include_spip('inc/getdocument');
-				creer_repertoire_documents('lettres');
-				ecrire_meta($nom_meta_base_version,$current_version='3.4','non');
-			}
-			if (version_compare($current_version,'3.5','<')){
-				ecrire_meta($nom_meta_base_version,$current_version='3.5','non');
-			}
-			if (version_compare($current_version,'3.6','<')){
-				ecrire_meta('spip_lettres_cron', md5(uniqid(rand())));
-				ecrire_meta($nom_meta_base_version,$current_version='3.6','non');
-			}
-			if (version_compare($current_version,'3.7','<')){
-				creer_base(); // table spip_rubriques_crontabs
-				ecrire_meta($nom_meta_base_version,$current_version='3.7','non');
-			}
-			if (version_compare($current_version,'3.8','<')){
-				maj_tables('spip_lettres');
-				sql_alter("TABLE spip_lettres DROP idx");
-				sql_drop_table('spip_documents_lettres', true);
-				ecrire_meta('spip_lettres_utiliser_descriptif', 'non');
-				ecrire_meta('spip_lettres_utiliser_chapo', 'non');
-				ecrire_meta('spip_lettres_fond_lettre_titre', 'emails/lettre_titre');
-				ecrire_meta('spip_lettres_envois_recurrents', 'non');
-				ecrire_meta($nom_meta_base_version,$current_version='3.8','non');
-			}
-			if (version_compare($current_version,'4.0.0','<')){
-				echo "SPIP-Lettres MAJ 4.0.0<br />";
+	}
+	function spip_lettres_update_fond() {
 				if ($GLOBALS['meta']['spip_lettres_fond_lettre_titre']=='lettre_titre'
 				  AND !find_in_path('lettre_titre.html'))
 					ecrire_meta('spip_lettres_fond_lettre_titre', 'emails/lettre_titre');
@@ -344,44 +362,11 @@
 				if ($GLOBALS['meta']['spip_lettres_fond_lettre_html']=='lettre_html'
 				  AND !find_in_path('lettre_html.html'))
 					ecrire_meta('spip_lettres_fond_lettre_html', 'emails/lettre_html');
-				ecrire_meta($nom_meta_base_version,$current_version='4.0.0','non');
-			}
-			if (version_compare($current_version,'4.0.1','<')){
-				echo "SPIP-Lettres MAJ 4.0.1<br />";
-				sql_alter("TABLE spip_lettres CHANGE statut statut VARCHAR(15) NOT NULL DEFAULT 'brouillon'");
-				ecrire_meta($nom_meta_base_version,$current_version='4.0.1','non');
-			}
-			if (version_compare($current_version,'4.0.2','<')){
-				echo "SPIP-Lettres MAJ 4.0.2<br />";
-				sql_alter("TABLE spip_lettres CHANGE texte texte longtext DEFAULT '' NOT NULL");
-				sql_alter("TABLE spip_lettres CHANGE message_html message_html longtext DEFAULT '' NOT NULL");
-				sql_alter("TABLE spip_lettres CHANGE message_texte message_texte longtext DEFAULT '' NOT NULL");
-				sql_alter("TABLE spip_lettres CHANGE extra extra longtext NULL");
-				ecrire_meta($nom_meta_base_version,$current_version='4.0.2','non');
-			}
-			if (version_compare($current_version,'4.1','<')){
-				ecrire_meta('spip_lettres_cliquer_anonyme', 'oui');
-				ecrire_meta('spip_lettres_admin_abo_toutes_rubriques', 'non');
-				ecrire_meta('spip_lettres_log_utiliser_email', 'non');
-				ecrire_meta($nom_meta_base_version,$current_version='4.1','non');
-			}
-			if (version_compare($current_version,'4.2','<')){
-				echo "SPIP-Lettres MAJ 4.2<br />";
-				sql_alter("TABLE spip_themes ADD COLUMN expediteur_type ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'");
-				sql_alter("TABLE spip_themes ADD COLUMN expediteur_id BIGINT(21) NOT NULL DEFAULT '0'");
-				sql_alter("TABLE spip_themes ADD COLUMN retours_type ENUM('default','webmaster','author','custom') NOT NULL DEFAULT 'default'");
-				sql_alter("TABLE spip_themes ADD COLUMN retours_id BIGINT(21) NOT NULL DEFAULT '0'");
-				
-				// on verifie la configuration de spip-lettres
-				// si toutes les lettres sont signées de leur auteur, on répercute sur les thématiques
-				if ('oui' == $GLOBALS['meta']['spip_lettres_signe_par_auteurs'])
-					sql_updateq('spip_themes', array('expediteur_type' => 'author'), '1');
-
-				ecrire_meta($nom_meta_base_version,$current_version='4.2','non');
-			}
-		}
 	}
-
+	function spip_lettres_creer_repertoire_documents() {
+				include_spip('inc/getdocument');
+				creer_repertoire_documents('lettres');
+	}
 	function lettres_vider_tables($nom_meta_base_version) {
 		include_spip('inc/meta');
 		include_spip('base/abstract_sql');
