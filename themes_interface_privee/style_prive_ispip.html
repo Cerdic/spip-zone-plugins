@@ -46,11 +46,9 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 
 #bandeau-principal {
 	.bandeau_sec {
-		-webkit-border-bottom-left-radius: 8px;
-		-webkit-border-bottom-right-radius: 8px;
-		border-bottom-left-radius: 8px;
-		border-bottom-right-radius: 8px;
-		-moz-border-radius: 0px 0px 8px 8px;
+		-spip-border-bottom-left-radius: 8px;
+		-spip-border-bottom-right-radius: 8px;
+		position: absolute;
 	}
 }
 #bandeau_couleur {
@@ -74,16 +72,15 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 		background-color: #f1f1f1;
 		border-top: 0px;
 		color: #464646;
-		-webkit-border-bottom-left-radius: 8px;
-		-webkit-border-bottom-right-radius: 8px;
-		border-bottom-left-radius: 8px;
-		border-bottom-right-radius: 8px;
-		-moz-border-radius: 0px 0px 8px 8px;
+		-spip-border-bottom-left-radius: 8px;
+		-spip-border-bottom-right-radius: 8px;
+		position: absolute;
 
 		. :hover {
 			box-shadow:  0px 0px 2px #999;
-			-webkit-box-shadow:  0px 0px 2px #999;
-			-moz-box-shadow:  0px 0px 2px #999;
+			-spip-box-shadow:  0px 0px 2px #999;
+			position: absolute;
+
 		}
 		
 		a {
@@ -102,9 +99,7 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
     color: black;
     background: #fff;
     border-color: #B4B4B4;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-spip-border-radius: 8px;
 	
 
 	.cadre-icone {
@@ -127,11 +122,8 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 		padding-top: 8px;
 		padding-bottom: 8px;
 		text-shadow: white 0px 1px 1px;
-		-webkit-border-top-left-radius: 8px;
-		-webkit-border-top-right-radius: 8px;
-		-moz-border-radius: 8px 8px 0px 0px;
-		border-top-left-radius: 8px;
-		border-top-right-radius: 8px;
+		-spip-border-top-left-radius: 8px;
+		-spip-border-top-right-radius: 8px;
 		
 		
 	}
@@ -139,9 +131,7 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 
 .fiche_objet, .no_onglets .fiche_objet {
 	border-color: #dfdfdf;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-spip-border-radius: 8px;
 }
 
 
@@ -156,9 +146,7 @@ h1, h2, h3, .bandeau_couleur, .bandeau_couleur_sous, a.icone26, a.cellule-h-text
 
 div.liste, div.cadre-liste {
 	border-color: #b4b4b4;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-spip-border-radius: 8px;
 
 	table {
 	
@@ -174,18 +162,12 @@ div.liste, div.cadre-liste {
 			. :last-child {
 			
 				td:first-child {
-					-webkit-border-bottom-left-radius: 8px;
-					-webkit-border-top-left-radius: 8px;
-					-moz-border-radius: 8px 0px 0px 8px;
-					border-bottom-left-radius: 8px;
-					border-top-left-radius: 8px;
+					-spip-border-bottom-left-radius: 8px;
+					-spip-border-top-left-radius: 8px;
 				}
 				td:last-child {
-					-webkit-border-bottom-right-radius: 8px;
-					-webkit-border-top-right-radius: 8px;
-					-moz-border-radius: 0px 8px 8px 0px;
-					border-bottom-right-radius: 8px;
-					border-top-right-radius: 8px;
+					-spip-border-bottom-right-radius: 8px;
+					-spip-border-top-right-radius: 8px;
 				}
 			}
 			. :nth-child(2n) {
@@ -202,11 +184,8 @@ div.liste, div.cadre-liste {
 		background: url(#CHEMIN{rien.gif});
 		background-color: [#(#ENV{couleur_foncee}|couleur_saturation{0.4})];
 		border-bottom: 1px solid #b4b4b4;
-		-webkit-border-top-left-radius: 8px;
-		-webkit-border-top-right-radius: 8px;
-		-moz-border-radius: 8px 8px 0px 0px;
-		border-top-left-radius: 8px;
-		border-top-right-radius: 8px;
+		-spip-border-top-left-radius: 8px;
+		-spip-border-top-right-radius: 8px;
 	}
 	
 	.titrem.hover {
@@ -232,9 +211,7 @@ div.liste, div.cadre-liste {
 }
 .icone36 {
 	a img, img {
-		-moz-border-radius: 6px;
-		-webkit-border-radius: 6px;
-		border-radius: 6px;	
+		-spip-border-radius: 6px;
 	}
 }
 
@@ -260,9 +237,7 @@ div.liste, div.cadre-liste {
 }
 
 .icone36 a span, a.icone36 span {
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;	
+	-spip-border-radius: 8px;
 	border: 1px solid #bbb;
 	padding: 8px 10px;
 	width: auto;
@@ -290,9 +265,7 @@ div.liste, div.cadre-liste {
 	.formulaire_spip {
 		background-color: white;
 		border: 1px solid #eee;
-		-moz-border-radius: 8px;
-		-webkit-border-radius: 8px;
-		border-radius: 8px;	
+		-spip-border-radius: 8px;
 		
 		li.editer_parent {
 			background-color: #f0f0f0;
@@ -324,21 +297,14 @@ div.liste, div.cadre-liste {
 }
 
 .cadre-forum {
-	-webkit-border-bottom-left-radius: 0px;
-	-webkit-border-bottom-right-radius: 0px;
-	-moz-border-radius: 6px 6px 0px 0px;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
+	-spip-border-bottom-left-radius: 0px;
+	-spip-border-bottom-right-radius: 0px;
 }
 .cadre-thread-forum {
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	border-radius: 0px;
+	-spip-border-radius: 0px;
 	
 	.titrem {
-		-webkit-border-radius: 0px;
-		-moz-border-radius: 0px;
-		border-radius: 0px;
+		-spip-border-radius: 0px;
 	}
 }
 
@@ -350,9 +316,7 @@ input[type="submit"] {
 	font-weight: bold;
     text-shadow: #[(#ENV{couleur_foncee}|couleur_saturation{1})] -1px -1px 0px;
 	color: white;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-spip-border-radius: 8px;
 
 }
 input[type="submit"]:hover {
