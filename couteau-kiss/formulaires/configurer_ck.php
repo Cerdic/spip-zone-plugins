@@ -108,6 +108,14 @@ function formulaires_configurer_ck_verifier_dist(){
 			$erreurs['cache_taille'] = _T('ck:erreur_cache_taille_mini');
 		}
 	}
+	if ($d = _request('dossier_squelettes')){
+		$d = explode(":",$d);
+		foreach($d as $s){
+			$s = trim($s);
+			if (strncmp($s,"/",1)==0 OR strpos($s,"../")!==false)
+				$erreurs['dossier_squelettes'] = _T('ck:erreur_dossier_squelette_invalide');
+		}
+	}
 	return $erreurs;
 }
 

@@ -56,6 +56,7 @@ Quand vous aurez termin&eacute; la configuration de votre site, vous pourrez, si
 	'label_inhiber_javascript_ecrire' => 'D&eacute;sactiver le javascript dans les articles',
 
 	'erreur_cache_taille_mini' => 'Le cache ne peut avoir une taille inf&eacute;rieure &agrave 10Mo',
+	'erreur_dossier_squelette_invalide' => 'Le dossier squelette ne peut pas être un chemin absolu ni contenir de référence <tt>../</tt>',
 	'message_ok' => 'Vos r&eacute;glages ont &eacute;t&eacute; pris en compte et enregistr&eacute;s dans le fichier <tt>@file@</tt>. Ils sont maintenant appliqu&eacute;s.',
 );
 
