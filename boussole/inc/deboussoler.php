@@ -153,11 +153,12 @@ function boussole_valider_xml($url, &$erreur) {
 		return $ok;
 	// -- En SPIP >= 2.1 on peut effectuer la validation
 	$retour = $valider_xml(recuperer_page($url));
-	if ($retour[1] === false) {
+	$erreurs = is_array($retour) ? $retour[1] : $retour->err;
+	if ($erreurs === false) {
 		$ok = false;
 	}
-	else if ($retour[1]) {
-		$erreur['detail'] = $retour[1];
+	else if ($erreurs) {
+		$erreur['detail'] = $erreurs;
 		$ok = false;
 	}
 
