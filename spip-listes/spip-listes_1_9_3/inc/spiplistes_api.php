@@ -895,7 +895,7 @@ function spiplistes_formats_autorises ($idx = 'array') {
  * @version CP-20110508
  * @return string
  */
-function spiplistes_formats_abo_default () {
+function spiplistes_format_abo_default () {
 	$defaut = spiplistes_pref_lire('opt_format_courrier_defaut');
 	if (
 		($defaut != 'html')
@@ -1150,6 +1150,16 @@ function spiplistes_patron_find_in_path ($path_patron, $lang, $chercher_texte = 
 }
 
 /**
+ * Renvoie le nom du patron pour la composition des messages de gestion
+ * (confirmation d'abonnement, modification, etc.)
+ * @todo boite de sélection dans une page de configuration ?
+ * @return string
+ * */
+function spiplistes_patron_message () {
+	return ('standard');
+}
+
+/**
  * Incruster les styles inline
  * 
  * @version CP-20110510
@@ -1188,8 +1198,11 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 		include_spip('public/assembler');
 	}
 	
+	spiplistes_debug_log('Chemin patrons : '.$path_patron);
+	
 	$patron_html = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], false);
 	$contexte['patron_html'] = $patron_html;
+	spiplistes_debug_log('CREATE html version USING '.$patron_html);
 	
 	$result_html =
 		($patron_html && find_in_path('patron_switch.html'))
@@ -1494,10 +1507,72 @@ function spiplistes_texte_2_charset ($texte, $charset) {
 }
 
 /**
- * utiliser l'api pour pouvoir envoyer par smtp si besoin
- * @version CP-20090111
+ * Compose le contenu du message via un patron
+ * Les patrons de messages sont dans ~/patrons/messages_abos
+ * @param string $objet
+ * @param string $patron
+ * @param array $contexte
+ * @return string
  */
-function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $headers = '', $format = 'texte') {
+function spiplistes_preparer_message ($objet, $patron, $contexte) {
+	
+	include_once (_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
+	
+	// si pas encore abonne' ou desabonne', pas de format ! donc forcer a texte
+	$format = ($contexte['format'] == 'html') ? $contexte['format'] : ($contexte['format'] = 'texte');
+
+	$contexte['patron'] = $patron;
+	$path_patron = _SPIPLISTES_PATRONS_MESSAGES_DIR . $patron;
+	
+	list($message_html, $message_texte) = spiplistes_assembler_patron($path_patron, $contexte);
+
+	$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
+	
+	if($charset != $GLOBALS['meta']['charset'])
+	{
+		include_spip('inc/charsets');
+		if($format == 'html') {
+			$message_html = unicode2charset(charset2unicode($message_html), $charset);
+		}
+		//$message_texte = unicode2charset(charset2unicode($message_texte), $charset);
+		$message_texte = spiplistes_translate_2_charset ($message_texte, $charset);
+	}
+	$email_a_envoyer = array();
+	$email_a_envoyer['texte'] = new phpMail('', $objet, '', $message_texte, $charset);
+	if($format == 'html') {
+		$email_a_envoyer['html'] = new phpMail('', $objet, $message_html, $message_texte, $charset);
+		$email_a_envoyer['html']->Body = "<html>\n\n<body>\n\n" . $message_html	. "\n\n</body></html>";
+		$email_a_envoyer['html']->AltBody = $message_texte;
+	}
+	$email_a_envoyer['texte']->Body = $message_texte ."\n\n";
+	$email_a_envoyer[$format]->SetAddress($contexte['email'], $contexte['nom']);
+	
+	return($email_a_envoyer);
+}
+
+/**
+ * Envoyer un message en tenant compte des prefs SPIP-Listes
+ * (SMTP ou mail(), simuler l'envoi,....)
+ *
+ * Le message ($message) peut être
+ * - soit un string (au format texte)
+ * - soit un array ('html' => $contenu_html, 'texte' => $contenu_texte)
+ * 
+ * @param string $to
+ * @param string $subject
+ * @param string|array $message
+ * @param string|bool $from
+ * @param string $headers
+ * @param string $format
+ * @staticvar string|bool $opt_simuler_envoi
+ * @version CP-20110618
+ */
+function spiplistes_envoyer_mail ($to
+								  , $subject
+								  , $message
+								  , $from = false
+								  , $headers = ''
+								  , $format = 'texte') {
 	
 	static $opt_simuler_envoi;
 
@@ -1508,6 +1583,7 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 	if(!$opt_simuler_envoi) {
 		$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
 	}
+	
 	if (!$from)
 	{
 		$from = spiplistes_email_from_default();
@@ -1520,11 +1596,13 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 			$fromname = unicode2charset(charset2unicode($fromname),$charset);
 		}
 	}
-	// @TODO: voir email_reply_to ?
+	/**
+	 * @TODO: voir email_reply_to ?
+	 */
 	$reply_to = 'no-reply'.preg_replace("|.*(@[a-z.]+)|i", "$1", email_valide($from));
 	
 	if($opt_simuler_envoi == 'oui') {
-		spiplistes_log("!!! MAIL SIMULATION MODE !!!");
+		spiplistes_log('!!! MAIL SIMULATION MODE !!!');
 		$result = true;
 	}
 	else {
@@ -1532,10 +1610,11 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 		
 		$email_a_envoyer = array();
 		
-		$return_path = spiplistes_return_path($from);
+		$return_path = spiplistes_return_path ($from);
 		
-		if(is_array($message))
+		if(is_array($message) && ($format == 'html'))
 		{
+		spiplistes_debug_log ('Messages HTML: '.strlen($message['html']));
 			if($format=='html' && isset($message[$format])) {
 				$email_a_envoyer['html'] = new phpMail($to, $subject, $message['html'], $message['texte'], $charset);
 				$email_a_envoyer['html']->From = $from ; 
@@ -1544,27 +1623,31 @@ function spiplistes_envoyer_mail ($to, $subject, $message, $from = false, $heade
 				$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
 				$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$return_path); 	
 				$email_a_envoyer['html']->SMTPKeepAlive = true;
-				$email_a_envoyer['html']->Body = $message['html']->Body;
-				$email_a_envoyer['html']->AltBody = $message['html']->AltBody;
+				$email_a_envoyer['html']->Body = $message['html'];
+				$email_a_envoyer['html']->AltBody = $message['texte'];
 			}
-			$message = $message['texte']->Body;
 		}
 		//$message = spiplistes_html_entity_decode ($message, $charset);
 		$message = spiplistes_translate_2_charset ($message, $charset, true);
 		
 		//$email_a_envoyer['texte'] = new phpMail($to, $subject, '', html_entity_decode($message), $charset);
-		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', $message, $charset);
+		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', $message['texte'], $charset);
 		$email_a_envoyer['texte']->From = $from ;
 		if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
 		$email_a_envoyer['texte']->AddCustomHeader('Errors-To: '.$return_path); 
 		$email_a_envoyer['texte']->AddCustomHeader('Reply-To: '.$reply_to); 
 		$email_a_envoyer['texte']->AddCustomHeader('Return-Path: '.$return_path); 
 		$email_a_envoyer['texte']->SMTPKeepAlive = true;
+		$email_a_envoyer['texte']->Body = $message['texte'];
 		
-		$result = $email_a_envoyer[$format]->send();
-		
+		if ($result = $email_a_envoyer[$format]->send())
+		{
+			$email_a_envoyer['html']->SmtpClose();
+			$email_a_envoyer['texte']->SmtpClose();	
+		}
+							
 		$msg = "email from $from to $to";
-		spiplistes_log(!$result ? "error: $msg not sent" : "$msg sent");
+		spiplistes_log(!$result ? 'error: '.$msg.' not sent' : "$msg sent");
 	}
 	return($result);
 }
@@ -1685,6 +1768,7 @@ function spiplistes_str_listes ($nb)
 		;
 	return($result);
 }
+
 
 /******************************************************************************************/
 /* SPIP-Listes est un systeme de gestion de listes d'abonnes et d'envoi d'information     */

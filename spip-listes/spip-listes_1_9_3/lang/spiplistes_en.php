@@ -600,5 +600,3 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 );
 
 // English translation: Pierre ROUSSET : p.rousset@gmail.com from the transalation by Simon simon@okko.org
-
-

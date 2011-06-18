@@ -306,7 +306,7 @@ function exec_spiplistes_config () {
 	
 	($GLOBALS['meta']['abonnement_config'] == 'simple') ? $checked1 = $is_checked  : $checked2 = $is_checked;
 	
-	$opt_format_courrier_defaut = spiplistes_formats_abo_default();
+	$opt_format_courrier_defaut = spiplistes_format_abo_default();
 
 	$page_result .= ''
 		. '<!-- options inscription -->' . $eol

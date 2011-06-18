@@ -487,7 +487,7 @@ function spiplistes_courriers_assembler_patron ($path_patron, $contexte, $ignore
 		$result = array('', '');
 	}
 	else {
-		$result = spiplistes_assembler_patron($path_patron, $contexte);
+		$result = spiplistes_assembler_patron ($path_patron, $contexte);
 	}
 	
 	return($result);

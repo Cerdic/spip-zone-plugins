@@ -448,7 +448,7 @@ function spiplistes_formulaire_abonnement (
 				$abonne['statut'] = ($inscription_redacteur == 'oui') ? 'nouveau' : '6forum';
 	
 				// format d'envoi par defaut pour le premier envoi de confirmation
-				$abonne['format'] = spiplistes_formats_abo_default();
+				$abonne['format'] = spiplistes_format_abo_default();
 				
 				// creation du compte ...
 				if($id_abonne = spiplistes_auteurs_auteur_insertq(
@@ -523,40 +523,6 @@ function spiplistes_formulaire_abonnement (
 } // end spiplistes_formulaire_abonnement()
 
 
-function spiplistes_preparer_message ($objet, $patron, $contexte) {
-	
-	// si pas encore abonne' ou desabonne', pas de format ! donc forcer a texte
-	$format = ($contexte['format'] == 'html') ? $contexte['format'] : ($contexte['format'] = 'texte');
-
-	$contexte['patron'] = $patron;
-	$path_patron = _SPIPLISTES_PATRONS_MESSAGES_DIR . $patron;
-	
-	list($message_html, $message_texte) = spiplistes_assembler_patron($path_patron, $contexte);
-
-	$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
-	
-	if($charset != $GLOBALS['meta']['charset'])
-	{
-		include_spip('inc/charsets');
-		if($format == 'html') {
-			$message_html = unicode2charset(charset2unicode($message_html), $charset);
-		}
-		//$message_texte = unicode2charset(charset2unicode($message_texte), $charset);
-		$message_texte = spiplistes_translate_2_charset ($message_texte, $charset);
-	}
-	$email_a_envoyer = array();
-	$email_a_envoyer['texte'] = new phpMail('', $objet, '', $message_texte, $charset);
-	if($format == 'html') {
-		$email_a_envoyer['html'] = new phpMail('', $objet, $message_html, $message_texte, $charset);
-		$email_a_envoyer['html']->Body = "<html>\n\n<body>\n\n" . $message_html	. "\n\n</body></html>";
-		$email_a_envoyer['html']->AltBody = $message_texte;
-	}
-	$email_a_envoyer['texte']->Body = $message_texte ."\n\n";
-	$email_a_envoyer[$format]->SetAddress($contexte['email'], $contexte['nom']);
-	
-	return($email_a_envoyer);
-}
-
 
 function spiplistes_texte_inventaire_abos ($id_abonne, $type_abo, $nom_site_spip) {
 	
@@ -585,11 +551,3 @@ function spiplistes_texte_inventaire_abos ($id_abonne, $type_abo, $nom_site_spip
 	return($texte);
 }
 
-/**
- * renvoie le nom du patron pour la composition des messages de gestion
- * (confirmation d'abonnement, modification, etc.)
- * @return string
- * */
-function spiplistes_patron_message () {
-	return ('standard');
-}

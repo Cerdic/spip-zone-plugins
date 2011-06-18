@@ -16,6 +16,10 @@
 include_spip('inc/acces');
 include_spip('inc/spiplistes_api');
 
+
+/**
+ * @return array
+ */
 function formulaires_spip_listes_inscription_charger_dist ($id_liste='')
 {
 	$valeurs = array(
@@ -26,6 +30,9 @@ function formulaires_spip_listes_inscription_charger_dist ($id_liste='')
 	return $valeurs;
 }
 
+/**
+ * @return array
+ */
 function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 {
 	$erreurs = array();
@@ -79,70 +86,168 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
     return ($erreurs); // si c'est vide, traiter sera appele, sinon le formulaire sera re-soumis
 }
 
-
-function formulaires_spip_listes_inscription_traiter_dist ($id_liste='') {
+/**
+ * Traite les donnees du formulaire de saisie
+ * - valide l'adresse mail
+ * - l'enregistre si manquant
+ * - l'abonne aux listes souhaitees
+ * - envoie un mail de confirmation
+ * @return array
+ */
+function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 	
-	// enregistre dans spip_auteurs, spip_auteurs_elargis, spip_auteurs_listes			
-			
+	/**
+	 * Un abonné doit etre enregistre
+	 * dans spip_auteurs,
+	 * spip_auteurs_elargis, (historique, pour le format de réception)
+	 * spip_auteurs_listes (table des abonnements)
+	 */
+	
+	include_spip('inc/spiplistes_api_courrier');
+	
 	$val['email'] = _request('email');
-	$val['nom'] = _request('email');
-	$alea_actuel = creer_uniqid();
-	$alea_futur = creer_uniqid();
-	$val['alea_actuel'] = $alea_actuel;
-	$val['alea_futur'] = $alea_futur;
-	$val['low_sec'] = '';
-	$val['statut'] = 'aconfirmer';
+	$val['email'] = email_valide ($val['email']);
 	
-	$format = _request('format_abo');
-	$listes = _request('listes');
-
-	// si l'auteur existe deja, 
-	$auteur = spiplistes_auteurs_auteur_select('id_auteur,statut,lang'
-											   , 'email='.sql_quote($val['email']));
+	if ($val['email'])
+	{
+		$val['nom'] = _request('email');
+		$val['lang'] = _request('lang');
+		if (!$val['lang']) {
+			$val['lang'] = $GLOBALS['meta']['langue_site'];
+		}
+		$val['alea_actuel'] = creer_uniqid();
+		$val['alea_futur'] = creer_uniqid();
+		$val['low_sec'] = '';
+		$val['statut'] = 'aconfirmer';
+		
+		$format = _request('format_abo');
+		if (!$format) {
+			$format = spiplistes_format_abo_default ();
+		}
+		$listes = _request('listes');
+		spiplistes_debug_log ('format '.$format);
+	}
+	
+	/**
+	 * Verifier si l'auteur existe deja,
+	 */
+	if ($val['email'])
+	{
+		$auteur = spiplistes_auteurs_auteur_select('id_auteur,nom,statut,lang'
+											   , 'email='.sql_quote($val['email'])
+					);
+	}
+	
 	if ($auteur)
 	{
-		$id_auteur = $auteur['id_auteur'];
-		// reactiver le compte si necessaire
+		/**
+		 * Si le compte existe, le reactivier
+		 */
+		$contexte['id_auteur'] = $id_auteur = $auteur['id_auteur'];
 		if ($auteur['statut'] == '5poubelle')
 		{
-			spiplistes_auteurs_auteur_statut_modifier ($id_auteur, 'aconfirmer');
+			$new_statut = 'aconfirmer';
+			spiplistes_auteurs_auteur_statut_modifier ($id_auteur, $new_statut);
+			$auteur['statut'] = $new_statut;
 		}
+		$contexte['nouvel_inscription'] = 'non';
+		$contexte['nom'] = $auteur['nom'];
+		$contexte['statut'] = $auteur['statut'];
+		$contexte['lang'] = ($auteur['lang'])
+							? $auteur['lang']
+							: $GLOBALS['meta']['langue_site']
+							;
 		spiplistes_debug_log ('inscription auteur #'.$id_auteur.' email:'.$val['email']);
 	}
 	else
 	{
-		// creer le compte abonne'
+		/**
+		 * Si le compte n'existe pas, le créer
+		 */
 		if ($id_auteur = spiplistes_auteurs_auteur_insertq ($val))
 		{
-			sql_insertq(
-					'spip_auteurs_elargis'
-				  , array('id_auteur'=>$id_auteur
-						 ,'spip_listes_format'=>$format
-						 )
-				  );
+			spiplistes_format_abo_modifier ($id_auteur, $format);
 		}
+		$contexte['nouvel_inscription'] = 'oui';
+		$contexte['id_auteur'] = $id_auteur;
+		$contexte['nom'] = $val['nom'];
+		$contexte['statut'] = $val['statut'];
+		$contexte['lang'] = $GLOBALS['meta']['langue_site'];
+
 		spiplistes_debug_log ('NEW inscription email:'.$val['email']);
-		$lang = $GLOBALS['meta']['langue_site'];
 	}
 	
 	if ($listes) {
+		/**
+		 * @todo a optimiser (une seule req)
+		 */
 		foreach($listes as $liste) {
 			sql_insertq ('spip_auteurs_listes'
-					, array('id_auteur'=>$id_auteur
-							,'id_liste'=>$liste
+					, array('id_auteur' => $id_auteur
+							,'id_liste' => $liste
 							)
 					);
 		}
 	}
 	
-	// envoyer mail de confirmation
-	if (
-		spiplistes_envoyer_mail (
+	/**
+	 * Construit le message à partir du patron
+	 */
+	if ($id_auteur > 0)
+	{
+		$cur_format = spiplistes_format_abo_demande ($id_auteur);
+		if (!$cur_format)
+		{
+			$cur_format = $format;
+			spiplistes_format_abo_modifier ($id_auteur, $format);
+		}
+		$contexte['format'] = $cur_format;
+		$nom_site_spip = spiplistes_nom_site_texte ($lang);
+		$email_objet = '['.$nom_site_spip.'] '._T('spiplistes:confirmation_inscription');
+		//$email_contenu = spiplistes_preparer_message (
+		//						$email_objet
+		//						, spiplistes_patron_message()
+		//						, $contexte
+		//					);
+		/**
+		* Assemble le patron
+		* Obtient en retour le contenu en version html et texte
+		*/
+		$path_patron = _SPIPLISTES_PATRONS_MESSAGES_DIR . spiplistes_patron_message();
+		spiplistes_debug_log ('Patron: '.$path_patron);
+		list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
+			$path_patron
+			, $contexte);
+		spiplistes_debug_log ('Messages size: html: '.strlen($courrier_html));
+		spiplistes_debug_log ('Messages size: text: '.strlen($courrier_texte));
+		
+		$email_contenu = array(
+				/**
+				 * La version HTML du message
+				 */
+				'html' => '<html>' . PHP_EOL
+					. '<body>' . PHP_EOL
+					. $courrier_html
+					. '</body>' . PHP_EOL
+					. '</html>' . PHP_EOL
+				/**
+				 * Et la version texte
+				 */
+				, 'texte' => $courrier_texte
+				);
+	}
+	
+	/**
+	 * envoyer mail de confirmation
+	 */
+	if ($id_auteur
+		&& spiplistes_envoyer_mail (
 			$val['email']
-			, _T('spiplistes:confirmation_inscription')
-			, _T('spiplistes:inscription_reponses_s'
-				 , array('s' => spiplistes_nom_site_texte ($lang))
-				 )
+			, $email_objet
+			, $email_contenu
+			, false
+			, ''
+			, $format
 	   )
 	) {
 		$contexte = array('message_ok'=>_T('spiplistes:demande_ok'),'editable' => false,);
