@@ -36,7 +36,7 @@ function balise_NOIZETIER_AFFICHER_NOISETTE_dist($p) {
 	
 	$code = "((noizetier_inclusion_dynamique($noisette)) ? $inclusion_dynamique : $inclusion_statique)";
 	
-	$p->code =  "(!$id_noisette) ? _T('zbug_champ_hors_motif', array('champ'=>'ID_NOISETTE', 'motif'=>'NOISETTES')) : ".$code;
+	$p->code =  "((!$id_noisette) ? _T('zbug_champ_hors_motif', array('champ'=>'ID_NOISETTE', 'motif'=>'NOISETTES')) : $code)";
 	$p->interdire_scripts = false;
 	
 	return $p;
