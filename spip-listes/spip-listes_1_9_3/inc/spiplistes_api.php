@@ -1591,7 +1591,7 @@ function spiplistes_envoyer_mail ($to
 		if (isset($message['html']))
 		{
 			$message['html'] = spiplistes_translate_2_charset ($message['html'], $charset, true);
-			$message['texte'] = spiplistes_translate_2_charset ($message['texte'], $charset, true);
+			$message['texte'] = spiplistes_translate_2_charset ($message['texte'], $charset, false);
 		}
 		else if (is_string ($message)) {
 			$message = array('texte' => $message);

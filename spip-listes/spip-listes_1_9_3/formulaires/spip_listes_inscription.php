@@ -206,6 +206,14 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 		$email_objet = '['.$nom_site_spip.'] '._T('spiplistes:confirmation_inscription');
 
 		/**
+		 * Le cookie pour le lien direct
+		 */
+		$cookie = creer_uniqid();
+		spiplistes_auteurs_cookie_oubli_updateq($cookie, $email);
+		$contexte['cookie_oubli'] = $cookie;
+		
+		/**
+		*
 		* Assemble le patron
 		* Obtient en retour le contenu en version html et texte
 		*/
