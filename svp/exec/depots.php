@@ -120,7 +120,7 @@ function afficher_depot($id_depot, $depot) {
 }
 
 function afficher_autres_depots($id_depot) {
-	$bloc = recuperer_fond("prive/navigation/depots_autres", array('id_depot' => $id_depot));
+	$bloc = recuperer_fond("prive/squelettes/navigation/depots_autres", array('id_depot' => $id_depot));
 	return $bloc;
 }
 

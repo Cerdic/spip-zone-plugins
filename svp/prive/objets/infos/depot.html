@@ -1,0 +1,30 @@
+<BOUCLE_infos_depot(DEPOTS) {id_depot=#ENV{id}}>
+<div class="infos">
+	[(#REM) <!-- La reference du depot --> ]
+	#SET{titre_info, #ENV{type}|objet_info{texte_objet}|_T}
+	<div class="numero">
+		<:titre_cadre_numero_objet{objet=#GET{titre_info}}:>
+		<p>#ID_DEPOT</p>
+	</div>
+	
+	[(#REM) <!-- Les compteurs et l'etat d'actualisation --> ]
+	<div class="liste compteurs">
+		<ul class="liste-items">
+			<li>[(#NBR_PAQUETS) [(#NBR_PAQUETS|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]</li>
+		[(#NBR_PLUGINS|>{0}|oui)
+			<li>[(#NBR_PLUGINS) [(#NBR_PLUGINS|singulier_ou_pluriel{svp:label_1_plugin, svp:label_n_plugins})]]</li>
+		]
+		[(#NBR_AUTRES|>{0}|oui)
+			<li>[(#NBR_AUTRES) [(#NBR_AUTRES|singulier_ou_pluriel{svp:label_1_autre_contribution, svp:label_n_autres_contributions})]]</li>
+		]
+		</ul>
+	</div>
+	<p>[<:svp:label_actualise_le:><br />(#MAJ|affdate), [(#MAJ|affdate{H:i})]]</p>
+	
+	[(#REM) <!-- Le bouton d'affichage de la page publique du depot --> ]
+	[(#VAL{redirect}
+		|generer_url_action{type=depot&id=#ID_DEPOT}
+		|parametre_url{var_mode, calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>, racine})]
+</div>
+</BOUCLE_infos_depot>

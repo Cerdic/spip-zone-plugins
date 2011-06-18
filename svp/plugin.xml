@@ -2,7 +2,7 @@
 	<nom>SVP</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.7.0</version>
+	<version>0.8.0</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/svp-64.png</icon>
 	<etat>test</etat>
@@ -16,9 +16,14 @@
 
 	<options>svp_options.php</options>
 	<fonctions>svp_fonctions.php</fonctions>
+
 	<install>base/svp_installer.php</install>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/svp_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_sql</nom>
 		<inclure>base/svp_declarer.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -37,6 +42,7 @@
 		<nom>declarer_url_objets</nom>
 		<inclure>base/svp_declarer.php</inclure>
 	</pipeline>
+
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 		<inclure>genie/svp_taches_generales_cron.php</inclure>

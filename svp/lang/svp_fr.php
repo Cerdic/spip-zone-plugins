@@ -71,6 +71,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_charger_plugin' => 'Effectuez une recherche multi-critères sur les plugins de la galaxie SPIP (catégorie, état, nom, auteur...). La recherche n\'inclut que les plugins compatibles avec la version SPIP installée et exclut les plugins déjà actifs sur le site.',
 	'info_contributions_hebergees' => '@total_autres@ autre(s) contribution(s) hébergée(s)',
 	'info_critere_phrase' => 'Saisissez les mots-clés à chercher dans le préfixe, le nom, le slogan, la description et les auteurs des plugins',
+
+	'info_aucun_depot' => 'aucun dépôt',
+	'info_1_depot' => '1 dépôt',
+	'info_nb_depots' => '@nb@ dépôts',
+
 	'info_depots_disponibles' => '@total_depots@ dépôt(s)',
 	'info_fichier_depot' => 'Saisissez l\'url du fichier de description du dépôt à ajouter.<br />Pour ajouter la Zone des plugins SPIP cliquez sur ce lien : ',
 	'info_liste_aucun_depot' => 'Aucun dépôt n\'a encore été chargé dans votre base. Utilisez le formulaire ci-dessous pour en ajouter.',
@@ -131,6 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_depot_manuel' => 'Dépôt manuel',
 	'label_type_depot_svn' => 'Dépôt sous SVN',
 	'label_url_archives' => 'URL du conteneur des archives',
+	'label_url_brouteur' => 'URL de la racine des sources',
 	'label_url_serveur' => 'URL du serveur',
 	'label_utilise_plugins' => 'Fonctions supplémentaires avec les plugins',
 	'label_version' => 'Version',
@@ -153,8 +159,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_depot_ajoute' => 'Le dépôt « @url@ » a été ajouté.',
 	'message_ok_plugins_trouves' => '@nb_plugins@ plugin(s) correspondent aux critères choisis (@tri@). Sélectionnez ci-dessous les plugins que vous souhaitez télécharger et installer sur votre serveur.',
 // O
-	'objet_depot' => '@nb@ dépôt',
-	'objet_depot_pluriel' => '@nb@ dépôts',
 	'onglet_depots' => 'Gérer les dépôts',
 	'onglet_plugins' => 'Rechercher un plugin',
 	'option_categorie_toute' => 'Toutes les catégories',
@@ -167,12 +171,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'resume_table_plugins' => 'Liste des plugins de la catégorie @categorie@',
 	'resume_table_autres_contributions' => 'Liste des autres contributions',
 // T
-	'titre_bloc_depots' => 'DÉPÔTS',
+
+
+// 	'titre_bloc_depots' => 'DÉPÔTS',
 	'titre_boite_autres_depots' => 'Autres dépôts',
-	'titre_boite_infos_depot' => 'DÉPÔT NUMÉRO',
-	'titre_boite_logo_depot' => 'LOGO DU DÉPÔT',
+// 	'titre_boite_infos_depot' => 'DÉPÔT NUMÉRO',
 	'titre_boite_paquets_autre_depot' => 'Paquets du dépôt correspondant à d\'autres contributions',
 	'titre_boite_paquets_plugin_depot' => 'Paquets du dépôt correspondant à des plugins',
+
+	'titre_depot' => 'Dépôt',
+	'titre_depots' => 'Dépôts',
+	'titre_logo_depot' => 'Logo du dépôt',
+
 	'titre_filtre_categorie' => 'Filtrer par catégorie',
 	'titre_filtre_depot' => 'Filtrer par dépôt',
 	'titre_filtre_spip' => 'Filtrer par branche',

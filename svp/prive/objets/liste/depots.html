@@ -6,7 +6,7 @@
 <BOUCLE_depots(DEPOTS){par titre}>
 			<tr class="tr_liste">
 				<td class="arial11">
-					<a href="#URL_ECRIRE{depots, id_depot=#ID_DEPOT}" title="<:svp:bulle_afficher_depot:>">
+					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_afficher_depot:>">
 						[(#TITRE)]
 						[<span style="float: #LANG_RIGHT; margin-top: -2px; margin-bottom: -2px;">(#LOGO_DEPOT|image_reduire{16})</span>]
 					</a>

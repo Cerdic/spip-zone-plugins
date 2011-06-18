@@ -1,29 +1,89 @@
 <?php
 
+// Declaration des tables pourles nouveaux objets de SVP:
+// - depot : table spip_depots
+// - plugin : table spip_plugins
+// - paquet : table spip_paquets
+//
+function svp_declarer_tables_objets_sql($tables) {
+
+	// Table des depots
+	$tables['spip_depots'] = array(
+		// Base de donnees
+		'table_objet'			=> 'depots',
+		'type'					=> 'depot',
+		'field'					=> array(
+			"id_depot"		=> "bigint(21) NOT NULL",
+			"titre"			=> "text DEFAULT '' NOT NULL",
+			"descriptif"	=> "text DEFAULT '' NOT NULL",
+			"type" 			=> "varchar(10) DEFAULT '' NOT NULL",
+			"url_serveur"	=> "varchar(255) DEFAULT '' NOT NULL", // url du serveur svn ou git
+			"url_brouteur"	=> "varchar(255) DEFAULT '' NOT NULL", // url de l'interface de gestion du repository (trac, redmine...)
+			"url_archives"	=> "varchar(255) DEFAULT '' NOT NULL", // url de base des zips
+			"xml_paquets"	=> "varchar(255) DEFAULT '' NOT NULL", // chemin complet du fichier xml du depot
+			"sha_paquets"	=> "varchar(40) DEFAULT '' NOT NULL",
+			"nbr_paquets" 	=> "integer DEFAULT 0 NOT NULL",
+			"nbr_plugins" 	=> "integer DEFAULT 0 NOT NULL",
+			"nbr_autres" 	=> "integer DEFAULT 0 NOT NULL", // autres contributions, non plugin
+			"maj"			=> "timestamp"),
+		'key'					=> array(
+			"PRIMARY KEY"	=> "id_depot"),
+		'tables_jointures'		=> 'depots_plugins',
+		'principale'			=> 'oui',
+
+		// Titre, date et gestion du statut
+		'titre'					=> "titre, '' AS lang",
+		
+		// Edition, affichage et recherche
+		'page'					=> 'depot',
+		'url_voir'				=> 'depot',
+		'url_edit'				=> 'depot_edit',
+		'editable'				=> 'oui',
+		'champs_editables'		=> array('titre', 'descriptif'),
+		'icone_objet'			=> 'depot',
+		
+		// Textes standard
+		'texte_retour' 			=> 'icone_retour',
+		'texte_modifier' 		=> 'svp:label_modifier_depot',
+		'texte_creer' 			=> '',
+		'texte_creer_associer' 	=> '',
+		'texte_signale_edition' => '',
+		'texte_objet' 			=> 'svp:titre_depot',
+		'texte_objets' 			=> 'svp:titre_depots',
+		'info_aucun_objet'		=> 'svp:info_aucun_depot',
+		'info_1_objet' 			=> 'svp:info_1_depot',
+		'info_nb_objets' 		=> 'svp:info_nb_depots',
+		'texte_logo_objet' 		=> 'svp:titre_logo_depot',
+	);
+
+	return $tables;
+}
+
+
 function svp_declarer_tables_principales($tables_principales) {
 
 	// Tables des depots : spip_depots
-	$depots = array(
-		"id_depot"		=> "bigint(21) NOT NULL",
-		"titre"			=> "text DEFAULT '' NOT NULL",
-		"descriptif"	=> "text DEFAULT '' NOT NULL",
-		"type" 			=> "varchar(10) DEFAULT '' NOT NULL",
-		"url_serveur"	=> "varchar(255) DEFAULT '' NOT NULL", // url du serveur svn ou git
-		"url_brouteur"	=> "varchar(255) DEFAULT '' NOT NULL", // url de l'interface de gestion du repository (trac, redmine...)
-		"url_archives"	=> "varchar(255) DEFAULT '' NOT NULL", // url de base des zips
-		"xml_paquets"	=> "varchar(255) DEFAULT '' NOT NULL", // chemin complet du fichier xml du depot
-		"sha_paquets"	=> "varchar(40) DEFAULT '' NOT NULL",
-		"nbr_paquets" 	=> "integer DEFAULT 0 NOT NULL",
-		"nbr_plugins" 	=> "integer DEFAULT 0 NOT NULL",
-		"nbr_autres" 	=> "integer DEFAULT 0 NOT NULL", // autres contributions, non plugin
-		"maj"			=> "timestamp");
-
-	$depots_key = array(
-		"PRIMARY KEY"	=> "id_depot"
-	);
-
-	$tables_principales['spip_depots'] =
-		array('field' => &$depots, 'key' => &$depots_key);
+// 	$depots = array(
+// 		"id_depot"		=> "bigint(21) NOT NULL",
+// 		"titre"			=> "text DEFAULT '' NOT NULL",
+// 		"descriptif"	=> "text DEFAULT '' NOT NULL",
+// 		"type" 			=> "varchar(10) DEFAULT '' NOT NULL",
+// 		"url_serveur"	=> "varchar(255) DEFAULT '' NOT NULL", // url du serveur svn ou git
+// 		"url_brouteur"	=> "varchar(255) DEFAULT '' NOT NULL", // url de l'interface de gestion du repository (trac, redmine...)
+// 		"url_archives"	=> "varchar(255) DEFAULT '' NOT NULL", // url de base des zips
+// 		"xml_paquets"	=> "varchar(255) DEFAULT '' NOT NULL", // chemin complet du fichier xml du depot
+// 		"sha_paquets"	=> "varchar(40) DEFAULT '' NOT NULL",
+// 		"nbr_paquets" 	=> "integer DEFAULT 0 NOT NULL",
+// 		"nbr_plugins" 	=> "integer DEFAULT 0 NOT NULL",
+// 		"nbr_autres" 	=> "integer DEFAULT 0 NOT NULL", // autres contributions, non plugin
+// 		"maj"			=> "timestamp");
+// 
+// 	$depots_key = array(
+// 		"PRIMARY KEY"	=> "id_depot"
+// 	);
+// 
+// 	$tables_principales['spip_depots'] =
+// 		array('field' => &$depots, 'key' => &$depots_key);
 
 	// Tables des plugins : spip_plugins
 	$plugins = array(
@@ -116,8 +176,8 @@ function svp_declarer_tables_auxiliaires($tables_auxiliaires) {
 
 
 function svp_declarer_tables_interfaces($interface) {
-	// Les tables
-	$interface['table_des_tables']['depots'] = 'depots';
+	// Les tables : permet d'appeler une boucle avec le *type* de la table uniquement
+ 	$interface['table_des_tables']['depots'] = 'depots';
 	$interface['table_des_tables']['plugins'] = 'plugins';	
 	$interface['table_des_tables']['paquets'] = 'paquets';	
 	$interface['table_des_tables']['depots_plugins'] = 'depots_plugins';	
@@ -131,11 +191,11 @@ function svp_declarer_tables_interfaces($interface) {
 	// Les jointures
 	// -- Entre spip_depots et spip_plugins
 	$interface['tables_jointures']['spip_plugins'][] = 'depots_plugins';
-	$interface['tables_jointures']['spip_depots'][] = 'depots_plugins';
+// 	$interface['tables_jointures']['spip_depots'][] = 'depots_plugins';
 	// -- Entre spip_paquets et spip_plugins
 
 	// Titre pour url des objets plugin et depot
-	$interface['table_titre']['depots'] = "titre, '' AS lang";
+// 	$interface['table_titre']['depots'] = "titre, '' AS lang";
 	$interface['table_titre']['plugins'] = "nom, '' AS lang";
 
 	return $interface;
@@ -157,7 +217,7 @@ function svp_rechercher_liste_des_champs($tables) {
 
 function svp_declarer_url_objets($objets){
 	// On déclare url d'objet plugin et depot
-	$objets[] = 'depot';
+// 	$objets[] = 'depot';
 	$objets[] = 'plugin';
 	return $objets;
 }

@@ -9,11 +9,11 @@
 function svp_affiche_enfants($flux){
 	if ($flux['args']['exec'] == 'depots') {
 		$id_depot = $flux['args']['id_depot'];
-		$flux['data'] .= recuperer_fond('prive/liste/paquets_plugin_depot', 
+		$flux['data'] .= recuperer_fond('prive/squelettes/liste/paquets_plugin_depot', 
 			array('id_depot'=>$id_depot, 
 				'titre' => _T('svp:titre_boite_paquets_plugin_depot'), 
 				'bloc' => '_paquets_plugin'));
-		$flux['data'] .= recuperer_fond('prive/liste/paquets_autre_depot', 
+		$flux['data'] .= recuperer_fond('prive/squelettes/liste/paquets_autre_depot', 
 			array('id_depot'=>$id_depot, 
 				'titre' => _T('svp:titre_boite_paquets_autre_depot'), 
 				'bloc' => '_paquets_autre'));
