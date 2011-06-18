@@ -176,64 +176,55 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
  * Abonner un id_auteur a une id_liste
  * ou une liste de listes ($id_liste est un tableau de (id)listes)
  * avec la date d'inscription
- * @version CP-20110505
+ * @version CP-20110619
  * @param int $id_auteur
- * @param int|array $id_liste
+ * @param int|array $id_listes
  * @return array id_listes ajoutees
  */
-function spiplistes_abonnements_ajouter ($id_auteur, $id_liste) {
+function spiplistes_abonnements_ajouter ($id_auteur, $id_listes) {
 	
-	spiplistes_debug_log('SUBSCRIBE auteur #'.$id_auteur.' TO liste #'.$id_liste);
-	
-	$r_id_listes = false;
-	
-	if(($id_auteur = intval($id_auteur)) > 0) {
+	if(($id_auteur = intval($id_auteur)) > 0)
+	{
 		$sql_table = 'spip_auteurs_listes';
 		$sql_noms = '(id_auteur,id_liste,date_inscription)';
+		/**
+		 * Note les abos de cet auteur
+		 */
+		$curr_abos = spiplistes_abonnements_listes_auteur($id_auteur);
+		$real_id_listes = array();
+		$sql_valeurs = array();
 		
-		$curr_abos_auteur = spiplistes_abonnements_listes_auteur($id_auteur);
-		$r_id_listes = array();
+		if (!is_array($id_listes)) $id_listes = array($id_listes);
 		
-		if(is_array($id_liste)) {
-			// si une seule liste demandee
-			$sql_valeurs = array();
-			$msg = array();
-			foreach($id_liste as $id) {
-				if(
+		if (is_array($id_listes))
+		{
+			foreach ($id_listes as $id) {
+				if (
 				   (($id = intval($id)) > 0)
 				   // si pas encore abonne'
-					&& !in_array($id, $curr_abos_auteur)
-				  )
+					&& (!$curr_abos || !in_array($id, $curr_abos)))
 				{
-					$sql_valeurs[] = "($id_auteur,$id,NOW())";
-					$msg[] = $id;
+					$sql_valeurs[] = '('.$id_auteur.','.$id.',NOW())';
+					$real_id_listes[] = $id;
 				}
 			}
-			if(count($sql_valeurs)) {
-				$sql_valeurs = implode(",", $sql_valeurs);
-			}
-		}
-		else if(
-			// si une seule liste demandee, et si pas encore abonne'
-			(($id_liste = intval($id_liste)) > 0)
-			&& (!$curr_abos || !in_array($id_liste, $curr_abos))
-			)
-		{
-			$sql_valeurs = " ($id_auteur,$id_liste,NOW())";
-			$msg = array($id_liste);
-			$r_id_listes[] = $id_liste;
-		}
-		if($sql_valeurs) {
-			$msg = "#" . implode(",#", $msg);
-			if(sql_insert($sql_table, $sql_noms, $sql_valeurs) === false) {
-				spiplistes_sqlerror_log ("spiplistes_abonnements_ajouter()");
-			}
-			else {
-				spiplistes_log_api("subscribe id_auteur #$id_auteur to id_liste $msg");
+			if (count($sql_valeurs)) {
+				$sql_valeurs = implode(',', $sql_valeurs);
+				if (sql_insert($sql_table, $sql_noms, $sql_valeurs) === false)
+				{
+					spiplistes_sqlerror_log ('spiplistes_abonnements_ajouter()');
+				}
+				else {
+					spiplistes_log_api ('SUBSCRIBE id_auteur #'
+									   . $id_auteur
+									   . ' to id_liste '
+									   . "#" . implode(',#', $real_id_listes)
+									   );
+				}
 			}
 		}
 	}
-	return($r_id_listes);
+	return($real_id_listes);
 } // spiplistes_abonnements_ajouter()
 
 /**
@@ -359,7 +350,7 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false
 			spiplistes_debug_log ('ERR sql_delete: abonnements_auteur_desabonner()');
 		}
 		else {
-			spiplistes_log_api('desabonne '.$msg1.' '.$msg2);
+			spiplistes_log_api('UNSUBSCRIBE '.$msg1.' '.$msg2);
 		}
 	}
 	return ($result);

@@ -52,14 +52,16 @@ function formulaires_spip_listes_inscription_verifier_dist ($id_liste='')
 	
 	$listes = _request('listes');
 	
+	$listes_sel = array();
+	
 	if (is_array($listes))
 	{
 		foreach($listes as $liste)
 		{
 			$id_liste = intval($liste);
-			if(!$id_liste) 
+			if ($id_liste > 0) 
 			{
-				$erreurs['liste'] = _T('spiplistes:liste_inconnue');
+				$listes_sel[] = $id_liste;
 			}
 		}
 	}
@@ -125,7 +127,6 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 			$format = spiplistes_format_abo_default ();
 		}
 		$listes = _request('listes');
-		//spiplistes_debug_log ('format '.$format);
 	}
 	
 	/**
@@ -157,6 +158,8 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 							? $auteur['lang']
 							: $GLOBALS['meta']['langue_site']
 							;
+		spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
+		
 		spiplistes_debug_log ('inscription auteur #'.$id_auteur.' email:'.$val['email']);
 	}
 	else
@@ -177,17 +180,10 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 		spiplistes_debug_log ('NEW inscription email:'.$val['email']);
 	}
 	
-	if ($listes) {
-		/**
-		 * @todo a optimiser (une seule req)
-		 */
-		foreach($listes as $liste) {
-			sql_insertq ('spip_auteurs_listes'
-					, array('id_auteur' => $id_auteur
-							,'id_liste' => $liste
-							)
-					);
-		}
+	if ($listes && is_array($listes) && count($listes))
+	{
+		spiplistes_abonnements_ajouter ($id_auteur, $listes);
+		$contexte['ids_abos'] = array_values($listes);
 	}
 	
 	/**
@@ -213,17 +209,16 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 		$contexte['cookie_oubli'] = $cookie;
 		
 		/**
-		*
 		* Assemble le patron
 		* Obtient en retour le contenu en version html et texte
 		*/
 		$path_patron = _SPIPLISTES_PATRONS_MESSAGES_DIR . spiplistes_patron_message();
-		spiplistes_debug_log ('Patron: '.$path_patron);
+		
 		list($courrier_html, $courrier_texte) = spiplistes_courriers_assembler_patron (
 			$path_patron
 			, $contexte);
-		spiplistes_debug_log ('Messages size: html: '.strlen($courrier_html));
-		spiplistes_debug_log ('Messages size: text: '.strlen($courrier_texte));
+		//spiplistes_debug_log ('Messages size: html: '.strlen($courrier_html));
+		//spiplistes_debug_log ('Messages size: text: '.strlen($courrier_texte));
 		
 		$email_contenu = array(
 				/**
