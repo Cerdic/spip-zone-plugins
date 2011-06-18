@@ -1,0 +1,8 @@
+<BOUCLE_extra_depot(DEPOTS){id_depot}{si #ENV{exec}|=={depot}}>
+	<INCLURE{fond=prive/objets/liste/depots,
+		titre=<:svp:titre_liste_depots:>,
+		id_depot,
+		exec,
+		ajax} />
+</BOUCLE_extra_depot>
+<//B_extra_depot>

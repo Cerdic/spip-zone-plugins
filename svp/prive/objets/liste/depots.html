@@ -1,26 +1,43 @@
-<B_depots>
+[(#SET{defaut_tri, #ARRAY{
+	titre, 1,
+	nbr_paquets, -1,
+	maj, -1,
+	id_depot, 1}})]
+<B_liste_depots>
+#ANCRE_PAGINATION
 <div class="liste-objets depots">
 	<table class="spip liste" summary="<:svp:resume_table_depots:>">
-	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:objet_depot,svp:objet_depot_pluriel}})</strong></caption>]
+	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:info_1_depot,svp:info_nb_depots}})</strong></caption>]
+		<thead>
+			<tr class="first_row">
+				<th class="titre principale">[(#TRI{titre, <:info_titre:>, ajax})]</th>
+				<th class="nombre">[(#TRI{nbr_paquets, <:svp:label_n_paquets|ucfirst:>, ajax})]</th>
+				<th class="date secondaire">[(#TRI{maj, <:svp:label_actualise_le:>, ajax})]</th>
+				<th class="id">[(#TRI{id_depot, <:info_numero_abbreviation:>, ajax})]</th>
+				<th class="bouton">&nbsp;</th>
+				<th class="bouton">&nbsp;</th>
+			</tr>
+		</thead>
 		<tbody>
-<BOUCLE_depots(DEPOTS){par titre}>
-			<tr class="tr_liste">
-				<td class="arial11">
+<BOUCLE_liste_depots(DEPOTS) {tri titre, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
+			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+				<td class="titre principale">
+					[(#LOGO_DEPOT|image_reduire{20,26})]
 					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_afficher_depot:>">
 						[(#TITRE)]
-						[<span style="float: #LANG_RIGHT; margin-top: -2px; margin-bottom: -2px;">(#LOGO_DEPOT|image_reduire{16})</span>]
 					</a>
 				</td>
-				<td class="arial11">&nbsp;</td>
-				<td class="arial11">[(#NBR_PAQUETS) [(#NBR_PAQUETS|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]</td>
-				<td class="arial11">[<:svp:label_actualise_le:> (#MAJ|affdate{d-m H:i})]</td>
-				<td class="arial11">[(#BOUTON_ACTION{<:svp:bouton_actualiser:>, #URL_ACTION_AUTEUR{actualiser_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_actualiser_depot:>})]</td>
-				<td class="arial11">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_supprimer_depot:>})]</td>
+				<td class="nombre">[(#NBR_PAQUETS)]</td>
+				<td class="date secondaire">[(#MAJ|affdate{d-m H:i})]</td>
+				<td class="id">[(#ID_DEPOT)]</td>
+				<td class="bouton">[(#BOUTON_ACTION{<:svp:bouton_actualiser:>, #URL_ACTION_AUTEUR{actualiser_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_actualiser_depot:>})]</td>
+				<td class="bouton">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_supprimer_depot:>})]</td>
 			</tr>
-</BOUCLE_depots>
+</BOUCLE_liste_depots>
 		</tbody>
 	</table>
+	[<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
-</B_depots>
+</B_liste_depots>
 	<p><:svp:info_liste_aucun_depot:></p>
-<//B_depots>
+<//B_liste_depots>
