@@ -1575,13 +1575,27 @@ function spiplistes_envoyer_mail ($to
 								  , $format = 'texte') {
 	
 	static $opt_simuler_envoi;
+	if(!$opt_simuler_envoi) {
+		$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
+	}
 
-	// si desabo, plus de format ! donc forcer a texte
+	/**
+	 * si desabo, plus de format ! donc forcer a texte
+	 */
 	$format = ($format == 'html') ? $format : 'texte';
 	
 	$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
-	if(!$opt_simuler_envoi) {
-		$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
+	
+	if ($charset != $GLOBALS['meta']['charset'])
+	{
+		if (isset($message['html']))
+		{
+			$message['html'] = spiplistes_translate_2_charset ($message['html'], $charset, true);
+			$message['texte'] = spiplistes_translate_2_charset ($message['texte'], $charset, true);
+		}
+		else if (is_string ($message)) {
+			$message = array('texte' => $message);
+		}
 	}
 	
 	if (!$from)
@@ -1614,7 +1628,6 @@ function spiplistes_envoyer_mail ($to
 		
 		if(is_array($message) && ($format == 'html'))
 		{
-		spiplistes_debug_log ('Messages HTML: '.strlen($message['html']));
 			if($format=='html' && isset($message[$format])) {
 				$email_a_envoyer['html'] = new phpMail($to, $subject, $message['html'], $message['texte'], $charset);
 				$email_a_envoyer['html']->From = $from ; 
@@ -1627,8 +1640,6 @@ function spiplistes_envoyer_mail ($to
 				$email_a_envoyer['html']->AltBody = $message['texte'];
 			}
 		}
-		//$message = spiplistes_html_entity_decode ($message, $charset);
-		$message = spiplistes_translate_2_charset ($message, $charset, true);
 		
 		//$email_a_envoyer['texte'] = new phpMail($to, $subject, '', html_entity_decode($message), $charset);
 		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', $message['texte'], $charset);

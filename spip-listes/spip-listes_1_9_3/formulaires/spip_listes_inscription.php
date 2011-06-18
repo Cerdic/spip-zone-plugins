@@ -125,7 +125,7 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 			$format = spiplistes_format_abo_default ();
 		}
 		$listes = _request('listes');
-		spiplistes_debug_log ('format '.$format);
+		//spiplistes_debug_log ('format '.$format);
 	}
 	
 	/**
@@ -204,11 +204,7 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 		$contexte['format'] = $cur_format;
 		$nom_site_spip = spiplistes_nom_site_texte ($lang);
 		$email_objet = '['.$nom_site_spip.'] '._T('spiplistes:confirmation_inscription');
-		//$email_contenu = spiplistes_preparer_message (
-		//						$email_objet
-		//						, spiplistes_patron_message()
-		//						, $contexte
-		//					);
+
 		/**
 		* Assemble le patron
 		* Obtient en retour le contenu en version html et texte
