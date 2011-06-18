@@ -329,7 +329,7 @@ function spiplistes_import (
 			   === FALSE
 			)
 			{
-				spiplistes_sqlerror_log('import: nouveauxformats dans spip_auteurs_elargis');
+				spiplistes_sqlerror_log('import: nouveaux formats dans spip_auteurs_elargis');
 			}
 		}
 		
@@ -346,7 +346,7 @@ function spiplistes_import (
 			($tt = ($ii = count($stack_new_auteurs)) + ($jj = count($stack_new_abonnes)))
 			?	'<ul>'.PHP_EOL
 				. '<li class="verdana2">'._T('spiplistes:nb_comptes_importees_en_ms_dont_'
-										 , array('nb' => $tt, 'ms' => (microtime(1) - $start_time)))
+										 , array('nb' => $ii, 'ms' => (microtime(1) - $start_time)))
 				. '<ul>'.PHP_EOL
 					. '<li>'._T('spiplistes:nb_fiches_crees', array('nb' => $ii)).'</li>'.PHP_EOL
 					//. '<li>'._T('spiplistes:nb_comptes_modifies', array('nb' => $jj)).'</li>'.PHP_EOL
