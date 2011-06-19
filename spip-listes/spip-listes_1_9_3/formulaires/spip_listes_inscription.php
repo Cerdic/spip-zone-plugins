@@ -10,7 +10,7 @@
  * @package spiplistes
  */
  // $LastChangedRevision: 47063 $
- // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedBy$
  // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
 	
 include_spip('inc/acces');
@@ -258,4 +258,3 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 	
 	return ($contexte);
 }
-

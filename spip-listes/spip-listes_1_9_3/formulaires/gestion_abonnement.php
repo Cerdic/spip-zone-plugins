@@ -6,8 +6,8 @@
  * @package spiplistes
  */
  // $LastChangedRevision: 47063 $
- // $LastChangedBy: paladin@quesaco.org $
- // $LastChangedDate$
+ // $LastChangedBy$
+ // $LastChangedDate: 2011-06-19 09:47:18 +0200 (Dim 19 jui 2011) $
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
@@ -249,4 +249,3 @@ function spiplistes_auteur_cookie_ou_session ($d)
 	}
 	return $return;
 }
-

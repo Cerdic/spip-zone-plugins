@@ -3,7 +3,7 @@
  * @package spiplistes
  */
  // $LastChangedRevision: 47063 $
- // $LastChangedBy: paladin@quesaco.org $
+ // $LastChangedBy$
  // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
