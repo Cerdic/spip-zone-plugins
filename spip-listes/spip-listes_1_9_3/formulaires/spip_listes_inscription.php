@@ -205,7 +205,8 @@ function formulaires_spip_listes_inscription_traiter_dist ($id_liste = '') {
 		 * Le cookie pour le lien direct
 		 */
 		$cookie = creer_uniqid();
-		spiplistes_auteurs_cookie_oubli_updateq($cookie, $email);
+		spiplistes_auteurs_cookie_oubli_updateq($cookie, $val['email'], false);
+		spiplistes_debug_log ('COOKIE: '.$cookie);
 		$contexte['cookie_oubli'] = $cookie;
 		
 		/**
