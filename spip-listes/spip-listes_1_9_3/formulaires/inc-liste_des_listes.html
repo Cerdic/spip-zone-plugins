@@ -19,7 +19,20 @@ Le STATUT est transmis par le squelette appelant
 
 #SET{liste_statuts, #ARRAY{0,liste,1,pub_jour,2,pub_hebdo,3,pub_7jours,4,pub_mensul,5,pub_mois,6,pub_an}} 
 
+[<!-- (#REM)
+
+	Afficher les listes privées si administrateur ou rédacteur
+
+-->]
 [(#STATUT|=={0minirezo}|ou{#STATUT|=={1comite}}|?{#SET{liste_statuts, #GET{liste_statuts}|push{inact}}})]
+
+[<!-- (#REM)
+
+	Récupérer la liste des listes ou il est abonné
+
+-->]
+#SET{liste_abos, #ARRAY{}}
+<BOUCLE_abos(auteurs_listes){id_auteur=#ENV{id_auteur}}>#SET{liste_abos,#GET{liste_abos}|push{#ID_LISTE}}</BOUCLE_abos>
 
 <B_listes>
 <li class="liste-des-listes fieldset">
@@ -28,16 +41,16 @@ Le STATUT est transmis par le squelette appelant
 	<ul>
 	<BOUCLE_listes(LISTES) {id_liste?} {statut IN #GET{liste_statuts}}>
 		<li>
-	#SET{checked,non}<BOUCLE_inscription(AUTEURS){tous} {id_liste} {id_auteur=#ENV{id_auteur}}>#SET{checked,oui}</BOUCLE_inscription>
 		<div class="choix">
 			<input type="checkbox"
 				   class="checkbox"
 				   name="listes[]"
 				   value="#ID_LISTE"
 				   id="liste_#ID_LISTE"
-				   [(#GET{checked}|=={oui}|oui)checked="checked"]
+					[(#ID_LISTE|in_array{#GET{liste_abos}}|oui)checked="checked"]
 				   />
-			<label for="liste_#ID_LISTE">#TITRE[ <span class="text-list">((#TEXTE|textebrut|couper{80}))</span>]</label>
+			<label for="liste_#ID_LISTE">#TITRE[ <span class="text-list">((#TEXTE|textebrut|couper{80}))</span>]
+			</label>
 		</div>
 		</li>
 	</BOUCLE_listes>
