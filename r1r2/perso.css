@@ -1,0 +1,17 @@
+/*---------------------------------------
+ * feuille de style surcharge de habillage.css
+ * --------------------------------------
+ */
+
+#conteneur { overflow:visible; clear:none; }
+#navigation { clear:right; }
+
+#nav { width:30%; float:right; }
+#nav ul { list-style:none; margin:0; padding:0; }
+#nav li { margin:.5em 0; padding:.5em; background:#FF7E00; border:5px solid #000; -moz-border-radius:14px; }
+#nav li a { color:#000; }
+#nav li li { background:#FEFE00; margin:.3em 0; padding:.3em; }
+#nav li li li { background:#FF0000 ; }
+
+
+#hierarchie { clear: none; }

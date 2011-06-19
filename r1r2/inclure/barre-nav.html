@@ -1,0 +1,33 @@
+<!-- inclure/barre-nav.html -->
+<div class="menu rubriques">
+	<ul>
+	<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+		<li><a href="<INCLURE{fond=inclure/lien_rubrique,id_rubrique}>"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>
+		
+		<B_test_expose><ul>
+			<BOUCLE_test_expose(RUBRIQUES) {id_rubrique}>#EXPOSE{' '}</BOUCLE_test_expose>
+				<BOUCLE_test_article_r1(ARTICLES){id_rubrique}{1,2}>
+				</BOUCLE_test_article_r1>
+				<INCLURE{fond=inclure/liste_articles,id_rubrique,id_article}>
+				</B_test_article_r1>
+
+				<BOUCLE_rubriques_rubrique(RUBRIQUES) {id_parent} {par num titre} {0,10}>
+				<li>
+				<a href="<INCLURE{fond=inclure/lien_rubrique,id_rubrique}>"[ class="(#EXPOSE)"]>#TITRE</a>
+				<BOUCLE_test_expose_r2(RUBRIQUES) {id_rubrique}>#EXPOSE{' '}</BOUCLE_test_expose_r2>
+					<BOUCLE_test_article_r2(ARTICLES){id_rubrique}{1,2}>
+					</BOUCLE_test_article_r2>
+					<ul>
+						<INCLURE{fond=inclure/liste_articles,id_rubrique,id_article}>
+					</ul>
+					</B_test_article_r2>
+				</B_test_expose_r2>
+				</li>
+				</BOUCLE_rubriques_rubrique>
+				
+		</ul></B_test_expose>
+		
+		</li>
+	</BOUCLE_rubriques>
+	</ul>
+</div>

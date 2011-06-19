@@ -1,0 +1,23 @@
+<plugin>
+	<nom><multi>[fr]R1R2, squelette simple dans un plugin simple : avec 2 niveaux de rubrique seulement, surchage du squelette ZPIP</multi></nom>
+	<icon>img_pack/r1r2.png</icon>
+	<auteur><a href="http://www.spip-contrib.net/chankalan">chankalan</a></auteur>
+	<licence>GNU-GPL V3</licence>
+	<version>0.11</version>
+	<etat>test</etat>
+	<description>
+		<multi>[fr]Ce plugin installe les fichiers n&eacute;cessaires au squelette r1r2.<br />
+		Il n&eacute;cessite ZPIP v1.7.9 qu'il surcharge, et un SPIP 2.1.1 minimum (mais ça devrait fonctionner sur toute version...).<br />
+		C'est un point de d&eacute;part pour des sites plus complexes, et en même temps l'occasion de faire un tutoriel sur le squelette, ZPIP et les balises inclure.<br />
+		Plus d&rsquo;explcation sur la page du tutoriel : http://spip-contrib.net/r1r2-un-squelette-simple-dans-un-plugin-simple
+		</multi>
+	</description>
+
+	<prefix>r1r2</prefix>
+
+	<categorie>squelette</categorie>
+	
+	<necessite id="SPIP" version="[2.1.1;]" />
+	<necessite id="Z" version="[1.7.9;]" />
+	
+</plugin>
