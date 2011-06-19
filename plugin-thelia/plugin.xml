@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Interface Th&eacute;lia</nom>
- 	<version>1.4.1</version>
+ 	<version>1.4.2</version>
 	<prefix>spip_thelia</prefix>
  	<auteur><br />Arnault Pachot et Gilles Vincent : d&eacute;veloppement<br />Claude Chadoutaud : squelettes pour beeSpip<br />Aur&eacute;lien Dumas : squelettes par d&eacute;faut</auteur>
  	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes <br/>
