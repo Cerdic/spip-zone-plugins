@@ -7,7 +7,7 @@
  */
  // $LastChangedRevision: 47063 $
  // $LastChangedBy: paladin@quesaco.org $
- // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
@@ -24,19 +24,23 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 	$valeurs['d'] = $d;
 	$valeurs['editable'] = false;
 	
-	if($auteur = auteur_cookie_ou_session($d))
+	if($auteur = spiplistes_auteur_cookie_ou_session($d))
 	{
 		$id_auteur = $auteur['id_auteur'];
 		$valeurs['id_auteur'] = intval($id_auteur);
 		$valeurs['format'] = spiplistes_format_abo_demande($id_auteur);
 		$valeurs['editable'] = true;
 		
-		// la liste des abonnements en cours
-		// pour cet auteur (avec titre des  listes)
+		/**
+		 * Recupere la liste des abonnements en cours
+		 * pour cet auteur (avec titre des  listes)
+		 */
 		$mes_abos = spiplistes_abonnements_listes_auteur ($id_auteur, true);
 		
-		// si c'est un desabonnement a une liste
-		// affiche juste la demande de confirmation
+		/**
+		 * Si c'est un desabonnement a une liste
+		 * affiche juste la demande de confirmation
+		 */
 		if ($stop > 0)
 		{
 			if ($id_auteur > 0)
@@ -89,7 +93,7 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 	$format = _request('suppl_abo');
 	$stop = intval(_request('stop'));
 	
-	if ($auteur = auteur_cookie_ou_session($d))
+	if ($auteur = spiplistes_auteur_cookie_ou_session($d))
 	{
 		$id_auteur = $auteur['id_auteur'];
 		$email = $auteur['email'];
@@ -188,7 +192,8 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 			$contexte = array(
 				'editable' => true,
 				'message_ok' => $message_ok,
-				'format' => $format
+				'format' => $format,
+				'id_auteur' => $id_auteur
 			);
 		}
 	}
@@ -196,12 +201,15 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 	return ($contexte);
 }
 
-// recuperer id_auteur, statut, nom et email pour :
-// -* l'auteur associé au cookie de l'environnement
-// -* ou l'auteur de la session en cours
-function auteur_cookie_ou_session($d)
+/**
+ * Recuperer id_auteur, statut, nom et email pour :
+ * -* l'auteur associé au cookie de l'environnement
+ * -* ou l'auteur de la session en cours
+ * @return array
+ */
+function spiplistes_auteur_cookie_ou_session ($d)
 {
-	//spiplistes_debug_log ("auteur_cookie_ou_session($d)");
+	//spiplistes_debug_log ("spiplistes_auteur_cookie_ou_session($d)");
 	$return = array();
 	// si pas de cookie on chope l'auteur de la session
 	if(empty($d)) {
@@ -236,7 +244,7 @@ function auteur_cookie_ou_session($d)
 			$return['email'] = $row['email'];
 		}
 		else {
-			spiplistes_debug_log ("auteur_cookie_ou_session ni cookie, ni id ?");
+			spiplistes_debug_log ("spiplistes_auteur_cookie_ou_session ni cookie, ni id ?");
 		}
 	}
 	return $return;
