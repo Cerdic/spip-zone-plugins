@@ -2,7 +2,7 @@
 	<nom><multi>[fr]noiZetier[de]Nussbaum</multi></nom>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
-	<version>0.12.0</version>
+	<version>0.12.1</version>
 	<version_base>0.4</version_base>
 	<etat>stable</etat>
 	<description><multi>[fr]Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.[de]Verwaltung der Code-Nüsse, als Ergänzung der Z-Squelette oder als eigenständiges Modul.</multi></description>
