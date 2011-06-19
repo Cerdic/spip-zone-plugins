@@ -89,7 +89,12 @@
 		<:contacts:organisation_numero:>
 		<p>#ID_ORGANISATION</p>
 	</div>
-	<div><a href="[(#URL_PAGE{organisation}|parametre_url{'id_organisation',#ID_ORGANISATION})]"><:voir_en_ligne:></a></div>
+
+	<div class="cellule-h-lien" >
+        <a href="[(#URL_PAGE{organisation}|parametre_url{'id_organisation',#ID_ORGANISATION})]" class="cellule-h"><span class="cell-i"><img src="#CHEMIN{./prive/images/racine-24.gif}" alt="<:voir_en_ligne:>" style="vertical-align:middle" /></span>
+        <:voir_en_ligne:></a>
+    </div>
+
 	[(#REM) faudra mettre {si #ID_AUTEUR} sur la 3.0 ]
 	<BOUCLE_auteur_lie(AUTEURS){id_auteur}{tout}>
 		

@@ -138,7 +138,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_organisation' => 'D&eacute;tails de l\'organisation',
 	'titre_page_contacts' => 'Gestion des contacts',
 	'titre_page_organisations' => 'Gestion des organisations',
-	'titre_page_repertoire' => 'Répertoire'
+	'titre_page_repertoire' => 'Répertoire',
+	
+	
 );
 
 ?>
