@@ -3,6 +3,7 @@
 	
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		<!-- <br class='bugajaxie' /> -->
+<BOUCLE_depot_existe(DEPOTS) {0,1}>
 		<form method="post" action="#ENV{action}">
 			[(#REM) <!-- declarer les hidden qui declencheront le service du formulaire
 			parametre : url d'action --> ]
@@ -62,4 +63,9 @@
 				<p class="boutons" style="display:none"><input type="submit" name="installer" class="submit" value="<:svp:bouton_installer:>" /></p>
 			</div>]
 		</form>
+</BOUCLE_depot_existe>
+	#BOITE_OUVRIR{'','notice'}
+		<p><:svp:message_nok_aucun_depot_disponible:></p>
+	#BOITE_FERMER
+<//B_depot_existe>
 </div>
