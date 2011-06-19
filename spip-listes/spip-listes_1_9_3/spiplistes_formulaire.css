@@ -146,3 +146,33 @@ div.formulaire_modif_abonnement input.submit, div.formulaire_modif_abonnement2 i
 p.reponse_formulaire_ok {background-color:green;}
 p.reponse_formulaire_erreur {background-color:red;}
 p.reponse_formulaire_ok, p.reponse_formulaire_erreur {text-align:center;color:white}
+
+/**
+ * abonnement-defaut.html
+ */
+html {
+	padding:0;
+}
+#spiplistes-pageabo {
+	background-color:#fff;
+	margin:0;
+	padding:0;
+}
+#spiplistes-pageabo div.bloc {
+	background-color:#fff;
+	width:75%;
+	margin:0 auto;
+}
+#spiplistes-formabo form
+, #spiplistes-formabo .message-formulaire {
+	margin:0 auto;
+	background-color:#fff
+}
+#spiplistes-formabo .souhait
+, #spiplistes-formabo .message-formulaire {display:block;font-size:100%;text-align:center}
+#spiplistes-formabo p.nom {display:block;text-align:center}
+#spiplistes-formabo p.email {display:block;text-align:center}
+#spiplistes-formabo p.email span {color:#cfc}
+#spiplistes-formabo p.spip_bouton {font-size:100%;text-align:right}
+#spiplistes-formabo ul {list-style:none}
+#spiplistes-formabo input.submit { font-size: 1.2em; }
