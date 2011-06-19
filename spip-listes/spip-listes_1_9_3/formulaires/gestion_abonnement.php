@@ -5,9 +5,9 @@
  * @see http://www.spip.net/fr_article3796.html (CVT par l'exemple)
  * @package spiplistes
  */
- // $LastChangedRevision: 47063 $
+ // $LastChangedRevision$
  // $LastChangedBy$
- // $LastChangedDate: 2011-06-19 09:47:18 +0200 (Dim 19 jui 2011) $
+ // $LastChangedDate$
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 

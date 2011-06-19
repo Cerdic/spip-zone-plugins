@@ -9,9 +9,9 @@
  * 		utilisé ici
  * @package spiplistes
  */
- // $LastChangedRevision: 47063 $
+ // $LastChangedRevision$
  // $LastChangedBy$
- // $LastChangedDate: 2011-04-25 18:46:50 +0200 (Lun 25 avr 2011) $
+ // $LastChangedDate$
 	
 include_spip('inc/acces');
 include_spip('inc/spiplistes_api');
