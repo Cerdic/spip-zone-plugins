@@ -11,8 +11,6 @@ infinie. A supprimer par la meleuse. (la trieuse ne peut plus rien y faire).
 + et dans la foulee : suprimer la queue des envois pour une liste si cette liste est supprimee (je
 crois que ca y est deja, mais...)
 
-+ probleme d'accents signale' sur les variables perso. Revoir spiplistes_personnaliser_courrier()
-dans le meleuse.
 + recuper les erreurs de phpmailer ($this->error) dans les logs de spiplistes
 + ajouter option de maintenance "supprimer les invites sans abonnements"
 . ajouter outil de nettoyage de tables ?

@@ -567,7 +567,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'format_obligatoire_pour_diffusion' => 'Pour confirmer l&#8217;abonnement de ce compte, vous devez s&#233;lectionner un format 
 	de r&#233;ception.'
 , 'valider_abonnement' => 'Valider cet abonnement'
+, 'vous_etes_abonne_a_la_liste_selectionnee' => 'Vous &ecirc;tes abonn&#233; &#224; la liste s&#233;lectionn&#233;e.'
+, 'vous_etes_abonne_aux_listes_selectionnees' => 'Vous &ecirc;tes abonn&#233; aux listes s&#233;lectionn&#233;es.'
 , 'vous_etes_abonne_aux_listes_selectionnees_' => 'Vous &ecirc;tes abonn&#233; aux listes s&#233;lectionn&#233;es '
+, 'vous_n_etes_plus_abonne_aux_listes' => 'Vous n&#39;&#234;tes plus abonn&#233; aux listes de diffusion.'
 
 // inc/spiplistes_pipeline_ajouter_boutons.php
 // inc/spiplistes_pipeline_ajouter_onglets.php
@@ -644,6 +647,9 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'difficile_lire_msg' => 'Si vous rencontrez des difficult&eacute;s &agrave; lire ce courrier ici, '
 , 'vous_consultez_ori' => 'vous pouvez consulter l&#8217;original sur le site'
 , 'vous_recevez_ce_courrier' => 'Vous recevez cet courrier suite &#224; votre inscription en ligne'
+, 'ce_mail_envoye_a_' => 'Ce message est adress&#233; &#224; '
+, 'si_mail_par_erreur' => 'Si ce mail vous a &#233;t&#233; d&#233;livr&#233; par erreur,
+		merci de pr&#233;venir votre correspondant et de supprimer ce message.'
 
 // tableau items *_options
 , 'liste_de_destination' => 'Liste de destination'

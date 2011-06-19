@@ -101,7 +101,7 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 		// la liste des abonnements en cours
 		// pour cet auteur
 		$mes_abos = spiplistes_abonnements_listes_auteur ($id_auteur, true);
-		
+							  
 		// demander de stopper une inscription ?
 		if ($stop > 0)
 		{
@@ -110,9 +110,10 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 			if (isset ($mes_abos[$id_liste]))
 			{
 				spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste);
-				$contexte = array(
-					'message_ok' => _T('spiplistes:vous_etes_desinscrit')
-				);
+				$message_ok = _T('spiplistes:abonnement_modifie').'.'
+					. '<br />' . PHP_EOL
+					. _T('spiplistes:vous_n_etes_plus_abonne_aux_listes')
+					;
 			}
 		}
 		else
@@ -124,49 +125,41 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 				? $listes
 				: array()
 				;
+			
+			/**
+			 * supprime d'abord tous les abonnements
+			 */
+			spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
+			$message_ok = _T('spiplistes:abonnement_modifie').'.';
+			
+			/**
+			 * Abonne aux listes sélectionnées
+			 */
 			if (count ($listes_souhaitees))
 			{
+									  
+				// les cles sont les id_listes
 				$listes_souhaitees = array_flip ($listes_souhaitees);
 				
-				// abonner aux listes demandées
-				foreach (array_keys($listes_souhaitees) as $id_liste)
+				spiplistes_abonnements_ajouter ($id_auteur
+												, array_keys($listes_souhaitees)
+												);
+				$nb = count ($listes_souhaitees);
+				if ($nb >= 1)
 				{
-					if (!isset($mes_abos[$id_liste]))
-					{
-						spiplistes_abonnements_ajouter ($id_auteur, $id_liste);
-						$mes_abos[$id_liste] = '';
-					}
-				}
-				
-				// désabonner les listes non souhaitées
-				foreach (array_keys($mes_abos) as $id_liste)
-				{
-					if (!isset ($listes_souhaitees[$id_liste]))
-					{
-						spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste);
-					}
-				}
-				
-				// abonner aux listes demandées,
-				// si pas déjà abonné
-				foreach (array_keys($listes_souhaitees) as $id_liste)
-				{
-					if (!isset ($mes_abos[$id_liste]))
-					{
-						if(spiplistes_abonnements_ajouter($id_auteur, $id_liste) !== false)
-						{
-							// @todo a ameliorer, style une ligne de confirmation par liste ?
-							$message_ok = _T('spiplistes:abonnement_modifie');
-						}
-					}
+					$message_ok .= '<br />' . PHP_EOL;
+					$message_ok .=
+						($nb > 1)
+						? _T('spiplistes:vous_etes_abonne_aux_listes_selectionnees')
+						: _T('spiplistes:vous_etes_abonne_a_la_liste_selectionnee')
+						;
 				}
 			}
-			else if (count ($mes_abos))
+			else if (count($mes_abos))
 			{
-				// tout est déselectionné ?
-				// supprimer tout les abonnements !
-				spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
-				$mes_abos = array();
+				$message_ok .= '<br />' . PHP_EOL
+					. _T('spiplistes:vous_n_etes_plus_abonne_aux_listes')
+					;
 			}
 			
 			if($format != $prev_format)
@@ -178,7 +171,10 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 						spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
 					}
 					
-					$message_ok = _T('spiplistes:desabonnement_valid').' :&nbsp;'.$email;  
+					$message_ok = _T('spiplistes:abonnement_modifie').'.'
+						. '<br />' . PHP_EOL
+						. _T('spiplistes:vous_n_etes_plus_abonne_aux_listes')
+						; 
 				}
 				else {
 					spiplistes_format_abo_modifier($id_auteur, $format);

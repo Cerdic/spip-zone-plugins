@@ -1,5 +1,6 @@
 <?php
 /**
+ * @deprecated ? (a vérifier, CP-20110619)
  * @package spiplistes
  */
  // $LastChangedRevision$
@@ -11,7 +12,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_api_globales');
 
-function formulaires_modif_abonnement2_charger_dist(){
+function formulaires_modif_abonnement2_charger_dist() {
+	
+	spiplistes_debug_log('formulaires_modif_abonnement2_charger_dist()');
+	
 	$confirm = _request('confirm');
 	$d = _request('d');
 	$list = _request('list');

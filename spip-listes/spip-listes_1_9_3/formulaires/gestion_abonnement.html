@@ -12,7 +12,10 @@ Pour la classe ajax, voir http://www.spip.net/fr_article3753.html
 
 -->]<BOUCLE_auteur(AUTEURS){tous} {id_auteur=(#ENV{id_auteur})}{0,1}>
 <div class="message-formulaire">
+	[(#NOM|!={#EMAIL}|oui)
 	<p class='nom'>#NOM</p>
+	]<p class='nom email'><:spiplistes:ce_mail_envoye_a_:><span>#EMAIL</span></p>
+	<p class='nom email text'><:spiplistes:si_mail_par_erreur:></p>
 	[(#SET{statut_auteur,#STATUT})]
 </div>
 </BOUCLE_auteur>

@@ -1316,7 +1316,7 @@ function spiplistes_format_valide ($format) {
  * soit update cookie de l'email transmis
  */
 function spiplistes_auteurs_cookie_oubli_updateq ($cookie_oubli, $where, $where_is_cookie = false) {
-	if(is_string($where)) {
+	if(is_string($where) && !empty($where)) {
 		$where = (($where_is_cookie) ? "cookie_oubli" : "email")
 			. "=" . sql_quote($where) . " LIMIT 1";
 	}
