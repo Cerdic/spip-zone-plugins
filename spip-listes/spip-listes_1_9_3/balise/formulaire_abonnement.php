@@ -1,6 +1,7 @@
 <?php
 /**
- *
+ * Balise: #FORMULAIRE_ABONNEMENT
+ * 
  * Si inscriptions pas autorisees, retourner une chaine d'avertissement
  * Sinon inclusion du squelette
  * Si pas de nom ou pas de mail valide, premier appel rien d'autre a faire
@@ -316,9 +317,11 @@ function spiplistes_formulaire_abonnement (
 		
 	}
 	
+	$abonne['cookie_oubli'] = creer_uniqid();
+	spiplistes_debug_log ('COOKIE: '.$abonne['cookie_oubli']);
+	
 	// si identifie' par cookie ou login... effectuer les modifications demandees
 	if(count($abonne)) {
-		
 		
 		// toujours rester en mode modif pour permettre la correction
 		$mode_modifier = 'oui';
@@ -385,10 +388,10 @@ function spiplistes_formulaire_abonnement (
 		{
 			// si l'abonne existe deja mais pas d'action demandee,
 			// affiche formulaire complet
-			//if($row = sql_fetch(
 			if ($row = 
-				spiplistes_auteurs_auteur_select ('id_auteur,login,nom,statut,lang', 'email='.sql_quote($abonne['email']))
-				
+				spiplistes_auteurs_auteur_select ('id_auteur,login,nom,statut,lang'
+												  , 'email='.sql_quote($abonne['email'])
+												  )
 			) {
 				
 				$abonne['id_auteur'] = intval($row['id_auteur']);
@@ -415,12 +418,14 @@ function spiplistes_formulaire_abonnement (
 				}
 				else {
 					// demande de modifier l'abonnement ? envoie le cookie de relance par mail
-					spiplistes_auteurs_cookie_oubli_updateq($abonne['cookie_oubli'] = creer_uniqid(), $abonne['email']);
-					
+					spiplistes_auteurs_cookie_oubli_updateq($abonne['cookie_oubli']
+															, $abonne['email']
+															);
 					$objet_email = _T('spiplistes:abonnement_titre_mail');
-					$texte_email = spiplistes_texte_inventaire_abos($abonne['id_auteur'], $type_abo, $nom_site_spip);
-					
-					
+					$texte_email = spiplistes_texte_inventaire_abos($abonne['id_auteur']
+																	, $type_abo
+																	, $nom_site_spip
+																	);
 					$contexte = array('titre' => $objet_email);
 					$id_abonne = $abonne['id_auteur'];
 				}
@@ -442,8 +447,6 @@ function spiplistes_formulaire_abonnement (
 				$abonne['zepass'] = $pass;
 				$abonne['mdpass'] = md5($pass);
 				$abonne['htpass'] = generer_htpass($pass);
-				
-				$abonne['cookie_oubli'] = creer_uniqid();
 				
 				$abonne['statut'] = ($inscription_redacteur == 'oui') ? 'nouveau' : '6forum';
 	
@@ -523,7 +526,10 @@ function spiplistes_formulaire_abonnement (
 } // end spiplistes_formulaire_abonnement()
 
 
-
+/**
+ * Petit message texte - inventaire des abonnements
+ * @return string
+ */
 function spiplistes_texte_inventaire_abos ($id_abonne, $type_abo, $nom_site_spip) {
 	
 	// fait l'inventaire des abos
@@ -550,4 +556,3 @@ function spiplistes_texte_inventaire_abos ($id_abonne, $type_abo, $nom_site_spip
 		;
 	return($texte);
 }
-
