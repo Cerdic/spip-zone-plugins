@@ -174,7 +174,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 	'titre_bloc_depots' => 'DÉPÔTS',
-	'titre_boite_autres_depots' => 'Autres dépôts',
 // 	'titre_boite_infos_depot' => 'DÉPÔT NUMÉRO',
 	'titre_boite_paquets_autre_depot' => 'Paquets du dépôt correspondant à d\'autres contributions',
 	'titre_boite_paquets_plugin_depot' => 'Paquets du dépôt correspondant à des plugins',
@@ -190,6 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_head_modifier_depot' => 'Modifier : @depot@',
 	'titre_head_svp' => 'SVP',
 	'titre_liste_autres_contributions' => 'Squelettes, librairies, jeux d\'icônes...',
+	'titre_liste_autres_depots' => 'Autres dépôts',
 	'titre_liste_depots' => 'Liste des dépôts disponibles',
 	'titre_navigation_depot' => 'Dépôts',
 	'titre_navigation_plugin' => 'Dans la catégorie',
