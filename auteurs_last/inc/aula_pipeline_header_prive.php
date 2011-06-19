@@ -32,19 +32,19 @@
 	Ce fichier est un des composants de AuLa. 
 	
 	AuLa est un programme libre, vous pouvez le redistribuer et/ou le modifier 
-	selon les termes de la Licence Publique Generale GNU publiée par 
-	la Free Software Foundation (version 2 ou bien toute autre version ultérieure 
+	selon les termes de la Licence Publique Generale GNU publiÃ©e par 
+	la Free Software Foundation (version 2 ou bien toute autre version ultÃ©rieure 
 	choisie par vous).
 	
-	AuLa est distribué car potentiellement utile, mais SANS AUCUNE GARANTIE,
+	AuLa est distribuÃ© car potentiellement utile, mais SANS AUCUNE GARANTIE,
 	ni explicite ni implicite, y compris les garanties de commercialisation ou
-	d'adaptation dans un but spécifique. Reportez-vous à la Licence Publique Générale GNU 
-	pour plus de détails. 
+	d'adaptation dans un but spÃ©cifique. Reportez-vous Ã  la Licence Publique GÃ©nÃ©rale GNU 
+	pour plus de dÃ©tails. 
 	
-	Vous devez avoir reçu une copie de la Licence Publique Generale GNU 
-	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez à la  
+	Vous devez avoir reÃ§u une copie de la Licence Publique Generale GNU 
+	en meme temps que ce programme ; si ce n'est pas le cas, ecrivez Ã  la  
 	Free Software Foundation, Inc., 
-	59 Temple Place, Suite 330, Boston, MA 02111-1307, États-Unis.
+	59 Temple Place, Suite 330, Boston, MA 02111-1307, Ã‰tats-Unis.
 	
 	*****************************************************/
 	
@@ -70,8 +70,8 @@ function aula_header_prive ($flux) {
 							(is_bool($value)) 
 							?	(
 									($value)
-									? 'true' // actuellement connecté
-									: 'false' // ne s'est jamais connecté
+									? 'true' // actuellement connectÃ©
+									: 'false' // ne s'est jamais connectÃ©
 								)
 							:	"'".affdate_jourcourt($value)." ".heures($value).":".minutes($value)."'"
 						)
@@ -159,9 +159,10 @@ function aula_last_array () {
 	$current_date = spip_fetch_array(spip_query("SELECT NOW()"));
 	$current_date = $current_date['NOW()'];
 
-	// récupère les heures de connexion
+	// rÃ©cupÃ¨re les heures de connexion
 	$sql_query = "SELECT id_auteur,maj,en_ligne FROM spip_auteurs WHERE $where";
 	$sql_result = spip_query($sql_query);
+	
 	while($row = spip_fetch_array($sql_result)) {
 		$en_ligne = vider_date($row['en_ligne']);
 		$maj = vider_date($row['maj']);
@@ -171,9 +172,10 @@ function aula_last_array () {
 			?	(
 				(aula_last_interval($current_date, $en_ligne))
 					? true // connexion en cours
-					: $en_ligne // date dernière connexion
+					// date derniÃ¨re connexion
+					: (($maj > $en_ligne) ? $maj : $en_ligne)
 				) 
-			: false; // ne s'est pas encore connecté
+			: false; // ne s'est pas encore connectÃ©
 	}
 	return($result);
 }

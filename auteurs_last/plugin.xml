@@ -10,13 +10,13 @@
 	 -->
 	<nom>Auteurs Last (AuLa)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>1.01</version>
+	<version>1.02</version>
 	<icon>images/aula-64.png</icon>
 	<etat>stable</etat>
 
-	<description><strong>Aula</strong> affiche dans la liste des auteurs l'&eacute;tat des derni&egrave;res 
-connexions (auteur actuellement connect&eacute;, date et heure de derni&egrave;re 
-connexion, jamais connect&eacute;).
+	<description><strong>Aula</strong> affiche dans la liste des auteurs l'&#233;tat des derni&#232;res 
+connexions (auteur actuellement connect&#233;, date et heure de derni&#232;re 
+connexion, jamais connect&#233;).
 	</description>
 
 	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Lister-les-auteurs-avec-date-de]</lien>
