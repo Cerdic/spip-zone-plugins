@@ -1,14 +1,14 @@
 [(#REM) <!-- Liste des depots :
 	- soit integrale de l'ensemble du site si on est dans la page depots (dans le bloc contenu)
-	- soit reduite aux autre depots que celui affiche dabs la page depot (dans le bloc extra/navigation)
+	- soit reduite aux autre depots que celui affiche dans la page depot (dans le bloc extra/navigation)
 	Dans ces deux cas les informations different car la taille des blocs influe sur l'affichage.
 	
 	Les parametres d'environnement specifiques sont :
 	- titre     : le titre de la liste
-	- par       : le champ tri principale
+	- par       : le champ tri principal
 	- pas       : le pas de pagination
 	- where     : condition d'exclusion du depot eventuellement en cours d'affichage (page depot)
-	- affichage : complet, tous les champs, ou simplifie, letitre et l'id pour la liste en extra/navigation
+	- affichage : complet, tous les champs, ou simplifie, le titre et l'id pour la liste en extra/navigation
  -->]
 
 [(#SET{defaut_tri, #ARRAY{
