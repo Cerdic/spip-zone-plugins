@@ -36,11 +36,11 @@ function exec_mutualisation_dist() {
 			<td>Nom</td>
 			<td>Admin</td>
 			<td id='IMG'>IMG<span class='unite'>&nbsp;(Mo)</span><br />
-				<input type='button' name='IMGcalculer' id='IMGcalculer' value='Calculer' onclick='rechercher_tailles(\"IMG\");'></td>
+				<input type='button' name='IMGcalculer' id='IMGcalculer' value='Calculer' onclick='rechercher_tailles(\"IMG\");' /></td>
 			<td id='local'>local<span class='unite'>&nbsp;(Mo)</span><br />
-				<input type='button' name='localcalculer' id='localcalculer' value='Calculer' onclick='rechercher_tailles(\"local\");'></td>
+				<input type='button' name='localcalculer' id='localcalculer' value='Calculer' onclick='rechercher_tailles(\"local\");' /></td>
 			<td id='cache'>cache<span class='unite'>&nbsp;(Mo)</span><br />
-				<input type='button' name='cachecalculer' id='cachecalculer' value='Calculer' onclick='rechercher_tailles(\"cache\");'></td>
+				<input type='button' name='cachecalculer' id='cachecalculer' value='Calculer' onclick='rechercher_tailles(\"cache\");' /></td>
 			<td title='Popularit&eacute; totale du site'>Stats</td>
 			<td>Plugins</td>
 			<td>Date</td>
