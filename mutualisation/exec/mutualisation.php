@@ -22,15 +22,25 @@ function exec_mutualisation_dist() {
 	$titre .= _L(count($sites).' '.'sites mutualis&#233;s <em>('._T('version')
 		. ' ' . $GLOBALS['spip_version_base'].')</em>');
 
-	$page = '';
+	$page .= '<script type="text/javascript">
+	//<![CDATA[
+	var tableau_sites = new Array();
+	//]]>
+	</script>';
 
-
+	//$page .= "<div id='trace'></div>" ;
 	$page .= "<table style='clear:both;'>
 	<thead>
 		<tr>
 			<td>Site</td>
 			<td>Nom</td>
 			<td>Admin</td>
+			<td id='IMG'>IMG<span class='unite'>&nbsp;(Mo)</span><br />
+				<input type='button' name='IMGcalculer' id='IMGcalculer' value='Calculer' onclick='rechercher_tailles(\"IMG\");'></td>
+			<td id='local'>local<span class='unite'>&nbsp;(Mo)</span><br />
+				<input type='button' name='localcalculer' id='localcalculer' value='Calculer' onclick='rechercher_tailles(\"local\");'></td>
+			<td id='cache'>cache<span class='unite'>&nbsp;(Mo)</span><br />
+				<input type='button' name='cachecalculer' id='cachecalculer' value='Calculer' onclick='rechercher_tailles(\"cache\");'></td>
 			<td title='Popularit&eacute; totale du site'>Stats</td>
 			<td>Plugins</td>
 			<td>Date</td>
@@ -91,11 +101,20 @@ function exec_mutualisation_dist() {
 			$erreur = ' <em><small><span class="erreur">Erreur&nbsp;!</span></small></em>';
 			$plugins = '-';
 		}
+		$page .= '<script type="text/javascript">
+		//<![CDATA[
+		tableau_sites.push(["../../sites/'.$v.'"]);
+		//]]>
+		</script>';
+
 		$page .= "<tr class='tr". $nsite % 2 ."'"
 			. " style='background-image: url(${url}ecrire/index.php?exec=mutualisation&amp;renouvelle_alea=yo)'>
 			<td style='text-align:right;'>$v$erreur$version_installee</td>
 			<td><a href='${url}'>".typo($nom_site)."</a></td>
 			<td><a href='${url}ecrire/'>ecrire</a></td>
+			<td><div id='IMG$nsite' class='taille loading'></div></td>
+			<td><div id='local$nsite' class='taille loading'></div></td>
+			<td><div id='cache$nsite' class='taille loading'></div></td>
 			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
 			<td>$adminplugin<a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
 			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
@@ -147,6 +166,8 @@ function exec_mutualisation_dist() {
 		tr {vertical-align:top;border: 1px solid #999;}
 		.tr0 {background-color:#ddded5}
 		thead tr {font-weight:bold;background-color:#333;color:#fff;}
+		thead tr input {font-weight:normal;font-size:0.9em;}
+		thead tr .unite {font-weight:normal;font-size:0.9em;}
 		td {text-align:left;border-left: 1px solid #ccc;}
 		td em {color:#aaa;}
 		#minipres{width:auto;}
@@ -154,11 +175,13 @@ function exec_mutualisation_dist() {
 		.upgrade div {display:inline;}
 		.upgrade input { border: 2px solid red;color:red; background-color:#fff; font-weight:bold;}
 		.erreur {color:red;font-weight:bold;}
+		.taille {text-align: right;}
+		.loading {background: url(../mutualisation/images/loading.gif) left center no-repeat}
 		</style>
+		<script src="../prive/javascript/jquery.js" type="text/javascript"></script>
+		<script src="../mutualisation/mutualisation_tailles.js" type="text/javascript"></script>
 		</head>
 		', $page);
-		
-
 
 	echo $page;
 }
