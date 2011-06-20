@@ -2,7 +2,7 @@
 	<nom>SVP</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.8.0</version>
+	<version>0.8.1</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/svp-64.png</icon>
 	<etat>test</etat>
