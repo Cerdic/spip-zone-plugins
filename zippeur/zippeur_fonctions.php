@@ -27,6 +27,7 @@ function zippeur($array,$date,$cmd,$nom=''){
 }
 
 function zippeur_zipper($chemin,$array,$cmd){
+	$temps_un=explode(" ",microtime());
 	if($cmd=='PclZip'){include_spip('inc/pclzip');}
 	defined('_DIR_SITE') ? sous_repertoire(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip') : sous_repertoire(_DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip');
 	supprimer_fichier($chemin);
@@ -54,37 +55,45 @@ function zippeur_zipper($chemin,$array,$cmd){
 	{
 		foreach ($array as $fichier){
 			if (test_espace_prive()){
-				$fichier = '../'.$fichier;
-			}
-			passthru("7za a -tzip ".$chemin." ".$fichier." -mx5 >/dev/null",$result);
+				$fichier_liste .= ' ../'.$fichier;
+			}else{
+				$fichier_liste .= ' '.$fichier;
+				}
+				$fichiers++;
+		}
+			passthru("7za a -tzip ".$chemin." ".$fichier_liste." -mx5 >/dev/null",$result);
 			if($result!=0)
 			{
-				spip_log($fichier." -- code d'erreur 7z: ".$result,"zippeur_erreur");
+				spip_log($fichier_liste." -- code d'erreur 7z: ".$result,"zippeur_erreur");
 			}
 			else{
-				$fichiers++;
+				//$fichiers++;
 			}
-		}
 	}elseif($cmd=='zip')
 	{
 		foreach ($array as $fichier){
 			if (test_espace_prive()){
-				$fichier = '../'.$fichier;
-			}
-			passthru("zip -q9 ".$chemin." ".$fichier." >/dev/null",$result);
+				$fichier_liste .= ' ../'.$fichier;
+			}else{
+				$fichier_liste .= ' '.$fichier;
+				}
+				$fichiers++;
+		}
+			passthru("zip -jq9 ".$chemin." ".$fichier_liste." >/dev/null",$result);
 			if($result!=0)
 			{
-				spip_log($fichier." -- code d'erreur zip: ".$result,"zippeur_erreur");
+				spip_log($fichier_liste." -- code d'erreur zip: ".$result,"zippeur_erreur");
 			}
 			else{
-				$fichiers++;
+				//$fichiers++;
 			}
-		}
 	}
 	if ($fichiers !=count($array)){
 		spip_log("$chemin : $fichiers fichiers présents mais ".count($array)." prévus",'zippeur_erreur');
 		return false;		
 	}else{
+		$temps_deux=explode(" ",microtime());
+		spip_log('zipper en '.($temps_deux[1]-$temps_un[1]).'sec avec '.$cmd,'zippeur');
 		return true;
 	}
 }
