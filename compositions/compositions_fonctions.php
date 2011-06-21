@@ -15,7 +15,10 @@ define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
  * @return string
  */
 function compositions_chemin(){
-	$config_chemin = defined('_DIR_PLUGIN_Z')?'contenu/':'compositions/';
+	$config_chemin = 'compositions/';
+	if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE'))
+		$config_chemin = (isset($GLOBALS['z_blocs'])?reset($GLOBALS['z_blocs']):'contenu/');
+
 	if (isset($GLOBALS['meta']['compositions'])){
 		$config = unserialize($GLOBALS['meta']['compositions']);
 		if (isset ($config['chemin_compositions'])){
@@ -28,15 +31,18 @@ function compositions_chemin(){
 
 /**
  * Tester si la stylisation auto est activee
- * @return <type>
+ * @return string
  */
 function compositions_styliser_auto(){
-		$config_styliser = true;
-		if (isset($GLOBALS['meta']['compositions'])){
-			$config = unserialize($GLOBALS['meta']['compositions']);
-			$config_styliser = $config['styliser_auto'] != 'non';
-		}
-		return $config_styliser?' ':'';
+	$config_styliser = true;
+	if (defined('_DIR_PLUGIN_Z') OR defined('_DIR_PLUGIN_ZCORE')){
+		$config_styliser = false; // Z s'occupe de styliser les compositions
+	}
+	elseif (isset($GLOBALS['meta']['compositions'])){
+		$config = unserialize($GLOBALS['meta']['compositions']);
+		$config_styliser = $config['styliser_auto'] != 'non';
+	}
+	return $config_styliser?' ':'';
 }
 
 /**
@@ -66,7 +72,7 @@ function compositions_lister_disponibles($type, $informer=true){
 			$base = preg_replace(',[.]html$,i','',$s);
 			if (preg_match(",$match,ims",$s,$regs)
 			  AND ($composition = !$informer
-					   OR $composition = compositions_charger_infos($base)))
+				OR $composition = compositions_charger_infos($base)))
 				$res[$regs[1]][$regs[3]] = $composition;
 			// retenir les skels qui ont un xml associe
 		}
@@ -176,16 +182,16 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table,$serveur);
 	if (isset($desc['field']['composition']) AND $id){
-			$composition = sql_getfetsel('composition', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
-			if ($composition != '')
-				$retour = $composition;
-			elseif (!$etoile AND isset($desc['field']['id_rubrique'])) {
-				$_id_rubrique = ($type == 'rubrique') ? 'id_parent' : 'id_rubrique';
-				$id_rubrique = sql_getfetsel($_id_rubrique,$table_sql,"$_id_table=".intval($id),'','','','',$serveur);
-				$retour = compositions_heriter($type, $id_rubrique, $serveur);
-			}
-			else
-				$retour = '';
+		$composition = sql_getfetsel('composition', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
+		if ($composition != '')
+			$retour = $composition;
+		elseif (!$etoile AND isset($desc['field']['id_rubrique'])) {
+			$_id_rubrique = ($type == 'rubrique') ? 'id_parent' : 'id_rubrique';
+			$id_rubrique = sql_getfetsel($_id_rubrique,$table_sql,"$_id_table=".intval($id),'','','','',$serveur);
+			$retour = compositions_heriter($type, $id_rubrique, $serveur);
+		}
+		else
+			$retour = '';
 	}
 	return ($retour == '-') ? '' : $retour;
 }
