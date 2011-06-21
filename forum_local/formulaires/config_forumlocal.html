@@ -1,0 +1,65 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=forumlocal -->
+
+[(#SET{saisies,
+   #ARRAY{
+      0, #ARRAY{
+         saisie, input,
+         options, #ARRAY{
+            nom, id_secteur,
+            label, <:forumlocal:label_id_secteur:>,
+            explication, <:forumlocal:explication_id_secteur:>,
+            defaut,
+         }
+      },
+      1, #ARRAY{
+         saisie, selection,
+         options, #ARRAY{
+            nom, type,
+            cacher_option_intro, 'on',
+            label, <:forumlocal:label_type:>,
+            explication, <:forumlocal:explication_type:>,
+            defaut, non,
+            datas,#ARRAY{
+               pos, <:bouton_radio_modere_posteriori:>,
+               pri, <:bouton_radio_modere_priori:>,
+               abo, <:bouton_radio_modere_abonnement:>,
+               non, <:info_pas_de_forum:>,
+            }
+         }
+      },
+      2, #ARRAY{
+         saisie, radio,
+         options, #ARRAY{
+            nom, option,
+            label, <:forumlocal:label_option:>,
+            explication, <:forumlocal:explication_option:>,
+            defaut, tous,
+            datas,#ARRAY{
+               futur, <:bouton_radio_articles_futurs:>,
+               saufnon, <:bouton_radio_articles_tous_sauf_forum_desactive:>,
+               tous, <:bouton_radio_articles_tous:>,
+            }
+         }
+      }
+   }
+})]
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_forumlocal">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   <form name="formulaire_config_forumlocal" method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+      <ul>
+      	#GENERER_SAISIES{#GET{saisies}}
+      </ul>
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>
