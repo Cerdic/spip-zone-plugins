@@ -3,10 +3,10 @@
 <icon>prive/themes/spip/images/links.png</icon>
 <description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. avec ouverture possible en nouvelle fen&ecirc;tre.</description>
 <lien>http://www.spip-contrib.net/?article3706</lien>
-<auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin et Gael Chareyre</auteur>
-<licence>(c) GPL 2011</licence>
+<auteur>[romy.tetue.net->http://romy.tetue.net], C&eacute;dric Morin et Gael Chareyre</auteur>
+<licence>GPL 2011</licence>
 <version>2.2.3</version>
-<etat>test</etat>
+<etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
 <necessite id='SPIP' version='[2.0.0;]' />
@@ -31,10 +31,10 @@
 <icon>prive/themes/spip/images/links.png</icon>
 <description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. avec ouverture possible en nouvelle fen&ecirc;tre.</description>
 <lien>http://www.spip-contrib.net/?article3706</lien>
-<auteur>[romy.tetue.net->http://romy.tetue.net] et C&eacute;dric Morin et Gael Chareyre</auteur>
-<licence>(c) GPL 2011</licence>
+<auteur>[romy.tetue.net->http://romy.tetue.net], C&eacute;dric Morin et Gael Chareyre</auteur>
+<licence>GPL 2011</licence>
 <version>2.2.3</version>
-<etat>test</etat>
+<etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
 <bouton id='links' parent='bando_squelette'>
