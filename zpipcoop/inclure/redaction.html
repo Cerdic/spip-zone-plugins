@@ -1,4 +1,4 @@
-[(#AUTORISER{creerrubriquedans}|ou{#CONFIG{activer_sites}}|ou{#CONFIG{activer_breves}}|ou{#PLUGIN{tickets}})
+[(#AUTORISER{creerrubriquedans}|ou{#CONFIG{activer_sites}}|ou{#CONFIG{activer_breves}}|ou{#PLUGIN{ticketskiss}})
 <div class="liste">
 <h2 class="h2"><:zpipcoop:redaction:></h2>
 <ul class="liste-items">
@@ -23,7 +23,8 @@
 	[(#AUTORISER{creerrubriquedans, rubrique, #ID_RUBRIQUE})<li class="item"><a href="[(#URL_PAGE{rubriques_edit,id_rubrique=oui,id_rubrique=[(#ID_RUBRIQUE|sinon{'0'})]}|parametre_url{retour,#URL_RUBRIQUE})]" class="add" title="<:zpipcoop:nouveau_groupe|attribut_html:>"><:zpipcoop:nouveau_groupe:></a></li>]
 
 	[(#REM) Cree un ticket]
-	[(#PLUGIN{tickets}|oui)
-	<li class="item"><a href="[(#URL_PAGE{tickets_edit,id_ticket=news}|parametre_url{retour,tickets_edit})]" class="add" title="<:zpipcoop:nouveau_ticket|attribut_html:>"><:zpipcoop:nouveau_ticket:></a></li>]
+	[(#ENV{type}|=={page}|oui)[(#ENV{id_ticket}|oui)[(#ENV{id_ticket}|=={oui}|non)[(#AUTORISER{ecrire, ticket}|oui)
+	<li class="item"><a href="[(#URL_PAGE{tickets_edit,id_ticket=#ID_TICKET}|parametre_url{retour,[(#URL_PAGE{tickets,id_ticket=#ID_TICKET})]})]" class="edit" title="<:zpipcoop:modifier_ticket|attribut_html:>"><:zpipcoop:modifier_ticket:></a></li>]]]]
+	[(#PLUGIN{ticketskiss}|oui)<li class="item"><a href="[(#URL_PAGE{tickets_edit,id_ticket=news}|parametre_url{retour,tickets_edit})]" class="add" title="<:zpipcoop:nouveau_ticket|attribut_html:>"><:zpipcoop:nouveau_ticket:></a></li>]
 </ul>
 </div>]

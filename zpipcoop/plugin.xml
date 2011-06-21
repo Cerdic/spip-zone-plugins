@@ -23,7 +23,7 @@
 	<utilise id="slogan" version='[2.0.2;]' />
 	<utilise id="spiplistes" version="[2.0135;]" />
 	<utilise id="thumbsites" version='[0.3;]' />
-	<utilise id="tickets" version='[1.6;]' />
+	<utilise id="ticketskiss" version='[1.10;]' />
 	<utilise id="zengarden" version="[1.0.1;]" />
 	<traduire gestionnaire="salvatore" module="zpipcoop" reference="fr" />
 </plugin>

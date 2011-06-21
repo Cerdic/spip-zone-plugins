@@ -1,9 +1,9 @@
 <div class="contenu-principal">
 	<div class="cartouche">
-		<h2 class="h2"><:tickets:tickets:></h2>
+		<h2 class="h2"><:ticketskiss:tickets:></h2>
 	</div><!--#cartouche-->
-		[(#REM) <!-- Listes de tickets pour chaque jalon considere --> ]
+		[(#REM) <!-- Listes de ticketskiss pour chaque jalon considere --> ]
  		[(#EVAL{_TICKETS_LISTE_JALONS}|afaire_liste_par_jalon)]
-		[(#REM) <!-- Liste des tickets non planifies (uniquement si pas de jalon) --> ]
+		[(#REM) <!-- Liste des ticketskiss non planifies (uniquement si pas de jalon) --> ]
  		<INCLURE{fond=inclure/afaire/inc_afaire_non_planifie}>
 </div><!--#contenu-principal-->

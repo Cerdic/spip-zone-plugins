@@ -2,49 +2,42 @@
 [(#REM) Bloc 1: d'information sur le ticket]
 <div id="tf#ID_TICKET_FORUM" class="cadre cadre-r">
 	<div class="cadre_padding">
-		[(#REM) Bloc d'informations de base du ticket (titre, texte, date, type...)]
-		[(#REM) - Bouton de modification]
-		[(#AUTORISER{ecrire, ticket}|oui)
-		<span style="float:right"><a href="[(#URL_PAGE{tickets_edit,id_ticket=#ID_TICKET}|parametre_url{retour,[(#URL_PAGE{tickets,id_ticket=#ID_TICKET})]})]">
-		<:zpipcoop:modifier_ticket:>
-		</a></span>
-		]
 		
 		[(#REM) - Titre du ticket]
-		<span class="arial1 spip_small"><strong><:tickets:ticket:> ##ID_TICKET</strong></span>
+		<span class="arial1 spip_small"><strong><:ticketskiss:ticket:> ##ID_TICKET</strong></span>
 		<h1>[(#TITRE|typo)]</h1>
 		[(#REM) Statut, severite, assignement]
 		<div>
 			<div style="float: #LANG_RIGHT; padding-#LANG_RIGHT: 20px;">
-				[<div><:tickets:champ_statut:> : <strong>(#STATUT|tickets_texte_statut)</strong></div>]
+				[<div><:ticketskiss:champ_statut:> : <strong>(#STATUT|tickets_texte_statut)</strong></div>]
 				<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
-				<div style="color: red;"><:tickets:assigne_a:> <strong><a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">#NOM</a></strong></div>
+				<div style="color: red;"><:ticketskiss:assigne_a:> <strong><a href="#URL_AUTEUR" title="[(#NOM|supprimer_numero)]">#NOM</a></strong></div>
 				</BOUCLE_assigne>
 			</div>
-			[<div><:tickets:champ_severite:> : <strong>(#SEVERITE|tickets_texte_severite)</strong></div>]
-			[<:tickets:champ_type:> : <strong>(#TYPE|tickets_texte_type)</strong>]
+			[<div><:ticketskiss:champ_severite:> : <strong>(#SEVERITE|tickets_texte_severite)</strong></div>]
+			[<:ticketskiss:champ_type:> : <strong>(#TYPE|tickets_texte_type)</strong>]
 		</div>
 		
 		[(#REM) - Date de creation et auteur du ticket]
 		<div>
 			<BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}>
 			[(#SET{date,[(#_principale:DATE|affdate_court)]})]
-			<:tickets:date_creation_auteur{date=#GET{date},nom=#NOM}:>
+			<:ticketskiss:date_creation_auteur{date=#GET{date},nom=#NOM}:>
 			</BOUCLE_auteur>
 		</div>
 		[(#REM) - Champs optionnels]
 		<br />
 		[<div>(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
-			[<div><:tickets:champ_projet:> : <strong>(#PROJET)</strong></div>]
-			[<div><:tickets:champ_composant:>: <strong>(#COMPOSANT)</strong></div>]
-			[<div><:tickets:champ_projet:> : <strong>(#VERSION)</strong></div>]
-			[<div><:tickets:champ_jalon:> : <strong>(#JALON)</strong></div>]
+			[<div><:ticketskiss:champ_projet:> : <strong>(#PROJET)</strong></div>]
+			[<div><:ticketskiss:champ_composant:>: <strong>(#COMPOSANT)</strong></div>]
+			[<div><:ticketskiss:champ_projet:> : <strong>(#VERSION)</strong></div>]
+			[<div><:ticketskiss:champ_jalon:> : <strong>(#JALON)</strong></div>]
 		</div>
 		<div class="nettoyeur"></div>]
 		
 		[(#REM) - Texte du ticket et url d'exemple]
 		[<div class="texte" style="font-size: 125%; line-height: 1.4em;">(#TEXTE|propre)</div>]
-		[<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+		[<div><:ticketskiss:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 
 		[(#REM) - Extensions, Extras 2 entre autre]
 		[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]

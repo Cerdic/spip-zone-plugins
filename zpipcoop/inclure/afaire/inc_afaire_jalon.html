@@ -1,14 +1,14 @@
 [(#REM) <!-- Pour chaque jalon on affiche les listes:
-	- des Tickets termines
-	- des Tickets ouverts et assignes (donc en cours de traitement)
-	- des Tickets ouverts ou en redac mais non assignes (donc en cours d'analyse)
+	- des ticketskiss termines
+	- des ticketskiss ouverts et assignes (donc en cours de traitement)
+	- des ticketskiss ouverts ou en redac mais non assignes (donc en cours d'analyse)
 --> ]
 #SET{jalon_vide, 1}
 <div class="portfolio">
 	<a name="#ENV{ancre}"></a>
 	<h2 class="jalon"><:zpipcoop:afaire_colonne_jalon:>&nbsp;&#171;&nbsp;#ENV{jalon}&nbsp;&#187;</h2>
 	<div class="description">
-		[(#REM) <!-- Tickets termines --> ]
+		[(#REM) <!-- ticketskiss termines --> ]
 		<B_termines>
 		<table class="spip"[ summary="<:zpipcoop:afaire_colonne_jalon:>(#ENV{jalon}) - <:zpipcoop:afaire_tickets_termines:>"]>
 			[(#INCLURE{fond=inclure/afaire/inc_afaire_table_entete}{caption=<:zpipcoop:afaire_tickets_termines:>})]
@@ -23,7 +23,7 @@
 		#SET{jalon_vide, 0}
 		</B_termines>
 
-		[(#REM) <!-- Tickets en cours de traitement --> ]
+		[(#REM) <!-- ticketskiss en cours de traitement --> ]
 		<B_en_traitement>
 		[(#GET{jalon_vide}|non)<br />]
 		<table class="spip"[ summary="<:zpipcoop:afaire_colonne_jalon:>(#ENV{jalon}) - <:zpipcoop:afaire_tickets_en_traitement:>"]>
@@ -39,7 +39,7 @@
 		#SET{jalon_vide, 0}
 		</B_en_traitement>
 
-		[(#REM) <!-- Tickets en cours d'analyse --> ]
+		[(#REM) <!-- ticketskiss en cours d'analyse --> ]
 		<B_en_analyse>
 		[(#GET{jalon_vide}|non)<br />]
 		<table class="spip"[ summary="<:zpipcoop:afaire_colonne_jalon:>(#ENV{jalon}) - <:zpipcoop:afaire_tickets_en_analyse:>"]>

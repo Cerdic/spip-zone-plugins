@@ -9,7 +9,7 @@
 		[(#CONFIG{activer_breves}|oui)<li class="item"><a href="[(#URL_PAGE{breves_page})]" title="<:zpipcoop:toutes_les_breves|attribut_html:>"><:zpipcoop:toutes_les_breves:></a></li>]
 		[(#CONFIG{activer_sites}|oui)<li class="item"><a href="[(#URL_PAGE{sites_page})]" title="<:zpipcoop:tous_les_sites|attribut_html:>"><:zpipcoop:tous_les_sites:></a></li>]
 		[(#PLUGIN{spiplistes}|ou{#PLUGIN{clevermail}}|oui)<li class="item"><a href="#URL_PAGE{abonnement}" title="<:zpipcoop:abonnement|attribut_html:>"><:zpipcoop:abonnement:></a></li>]
-		[(#PLUGIN{tickets}|oui)<li class="item"><a href="#URL_PAGE{tickets_page}" title="<:zpipcoop:tous_les_tickets|attribut_html:>"><:zpipcoop:tous_les_tickets:></a></li>]
+		[(#PLUGIN{ticketskiss}|oui)<li class="item"><a href="#URL_PAGE{tickets_page}" title="<:zpipcoop:tous_les_tickets|attribut_html:>"><:zpipcoop:tous_les_tickets:></a></li>]
 		[(#AUTORISER{webmestre})<li class="item"><a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a></li>]
 		<li class="item"><a href="#URL_LOGOUT{#URL_PAGE{login_public}|parametre_url{url,#URL_SITE_SPIP}}" rel="nofollow" title="<:icone_deconnecter|attribut_html:>"><:icone_deconnecter:></a></li>
 	</ul>
