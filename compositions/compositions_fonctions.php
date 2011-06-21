@@ -172,6 +172,11 @@ function compositions_types(){
  * @return string
  */
 function compositions_determiner($type, $id, $serveur='', $etoile = false){
+	static $composition = array();
+
+	if (isset($composition[$etoile][$serveur][$type][$id]))
+		return $composition[$etoile][$serveur][$type][$id];
+
 	include_spip('base/abstract_sql');
 	$table = table_objet($type);
 	$table_sql = table_objet_sql($type);
@@ -182,18 +187,18 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($table,$serveur);
 	if (isset($desc['field']['composition']) AND $id){
-		$composition = sql_getfetsel('composition', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
-		if ($composition != '')
-			$retour = $composition;
-		elseif (!$etoile AND isset($desc['field']['id_rubrique'])) {
-			$_id_rubrique = ($type == 'rubrique') ? 'id_parent' : 'id_rubrique';
-			$id_rubrique = sql_getfetsel($_id_rubrique,$table_sql,"$_id_table=".intval($id),'','','','',$serveur);
-			$retour = compositions_heriter($type, $id_rubrique, $serveur);
-		}
-		else
-			$retour = '';
+		$select = "composition";
+		if (isset($desc['field']['id_rubrique']))
+			$select .= "," . (($type == 'rubrique') ? 'id_parent' : 'id_rubrique as id_parent');
+		$row = sql_fetsel($select, $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
+		if ($row['composition'] != '')
+			$retour = $row['composition'];
+		elseif (!$etoile
+		  AND isset($row['id_parent'])
+		  AND $row['id_parent'])
+			$retour = compositions_heriter($type, $row['id_parent'], $serveur);
 	}
-	return ($retour == '-') ? '' : $retour;
+	return $composition[$etoile][$serveur][$type][$id] = (($retour == '-') ? '' : $retour);
 }
 
 /**
@@ -207,18 +212,20 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 function compositions_heriter($type, $id_rubrique, $serveur=''){
 	if ($type=='syndic') $type='site'; //grml
 	if (intval($id_rubrique) < 1) return '';
-	if($infos_rubrique = sql_fetsel(array('id_parent','composition'),'spip_rubriques','id_rubrique='.intval($id_rubrique),'','','','',$serveur)) {
-		if (
-			$infos_rubrique['composition'] != ''
-			AND $infos = compositions_lister_disponibles('rubrique')
-			AND isset($infos['rubrique'][$infos_rubrique['composition']])
-			AND isset($infos['rubrique'][$infos_rubrique['composition']]['branche'])
-			AND isset($infos['rubrique'][$infos_rubrique['composition']]['branche'][$type])
-			)
-			return $infos['rubrique'][$infos_rubrique['composition']]['branche'][$type];
-		else
-			return compositions_heriter($type, $infos_rubrique['id_parent'],$serveur);
+	$infos = null;
+	$id_parent = $id_rubrique;
+	do {
+		$row = sql_fetsel(array('id_parent','composition'),'spip_rubriques','id_rubrique='.intval($id_parent),'','','','',$serveur);
+		if (strlen($row['composition']) AND is_null($infos))
+			$infos = compositions_lister_disponibles('rubrique');
 	}
+	while ($id_parent = $row['id_parent']
+		AND
+		(!strlen($row['composition']) OR !isset($infos['rubrique'][$row['composition']]['branche'][$type])));
+
+	if (strlen($row['composition']) AND isset($infos['rubrique'][$row['composition']]['branche'][$type]))
+		return $infos['rubrique'][$row['composition']]['branche'][$type];
+
 	return '';
 }
 
@@ -254,7 +261,7 @@ function balise_COMPOSITION_dist($p) {
 		$p->code = "compositions_determiner($_objet, $_id_objet, '$connect', ".($p->etoile?'true':'false').")";
 		// ne declencher l'usine a gaz que si composition est vide ...
 		if ($_composition)
-			$p->code = "((\$zc=$_composition)?\$zc:".$p->code.")";
+			$p->code = "((\$zc=$_composition)?(\$zc=='-'?'':\$zc):".$p->code.")";
 	}
 	return $p;
 }
