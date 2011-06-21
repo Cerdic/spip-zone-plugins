@@ -22,7 +22,7 @@ function links_insert_head($flux) {
 		if($links['external'] == 'on'){
 			$flux .= '<script type="text/javascript">var links_site = \''.$GLOBALS['meta']['adresse_site'].'\';</script>';
 		}
-		//Ouverture d'une nouvelle fenetre sur les documents (extensions à préciser)
+		//Ouverture d'une nouvelle fenetre sur les documents (extensions a preciser)
 		if(($links['download'] == 'on')&&($links['doc_list'])){
 			$flux .= '<script type="text/javascript">var links_doc = \''.$links['doc_list'].'\';</script>';
 		}
