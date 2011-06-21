@@ -20,7 +20,7 @@
 	<licence>GPL</licence>
 	<lien>http://www.spip-contrib.net/Zippeur</lien>
 </plugin>
-<plugin spip='[3.0.0-dev;3.1.0)'>
+<plugin spip='[3.0.0-dev;3.0.*]'>
     <nom>Zippeur</nom>
     <auteur>Maïeul Rouquette, Julien Coste-Louret</auteur>
     <version>1.3</version>
