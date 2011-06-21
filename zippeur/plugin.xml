@@ -6,7 +6,7 @@
   	<categorie>multimedia</categorie>
     <etat>stable</etat>
 	<lien>http://www.spip-contrib.net/Zippeur</lien>
-	<icon>zip.png</icon>
+	<icon>images/zip.png</icon>
 	<description> Zippez facilement vos documents joints.</description>
 	<install>base/zippeur.php</install>
     <prefix>zippeur</prefix>
@@ -26,7 +26,6 @@
     <version>1.3</version>
     <version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
-	<lien>http://www.spip-contrib.net/Zippeur</lien>
     <etat>stable</etat>
 	<icon>images/zip.png</icon>
 	<description> Zippez facilement vos documents joints.</description>
