@@ -281,7 +281,8 @@ class ctlChoix extends Controle {
  */
 class ctlUse extends Controle {
   public function draw() {
-    return ctlChoix($this->composant, $this->nic, $this->nom, (($GLOBALS['meta'][nomvar($this->composant, $this->nic, $this->nom)] == 'oui') ? 'oui' : 'non'), array('option' => array('oui', 'non')), $this->wid);
+    $ctl = new ctlChoix($this->composant, $this->nic, $this->nom, (($GLOBALS['meta'][nomvar($this->composant, $this->nic, $this->nom)] == 'oui') ? 'oui' : 'non'), array('option' => array('oui', 'non')), $this->wid);
+    return $ctl->draw();
   }
 }
 

@@ -52,9 +52,9 @@ function page_modes($page, $mode_source, $detail) {
   }
   // Rendu
   $r = '<table><tr><td>';
-  $r .= $lblsch.'</td><td> / </td><td> '.$lblsrc.' </td><td> ';
+  $r .= $lblsrc.'</td><td> / </td><td> '.$lblsch.' </td><td> ';
   $r .= acs_plieur('plieur_spip_params', 'spip_params', '?exec=acs&onglet=pages&pg='.$page.$detail, $on);
-  $r .= '</td></tr></table>';
+  $r .= '</td><td>&nbsp;</td><td>'.acs_help_call('acs_bloc_page').'</td></tr></table>';
   return $r;
 }
 
@@ -65,6 +65,8 @@ function page_get_infos($page, $mode_source=false, $detail='') {
   $pg_derniere_modif = filemtime($pg);
   $pageContent = @file_get_contents($pg);
   $includes = analyse_page($pageContent, $mode_source);
+  
+  $r = acs_help_div('acs_bloc_page', _T('acs:pg_help').'<br /><br />');
 
   if (!$mode_source && (count($includes['vars']) > 0)) {
     $r .= '<div class="onlinehelp">'._T('acs:variables').' : '.

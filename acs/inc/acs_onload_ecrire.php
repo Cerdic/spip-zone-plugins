@@ -30,7 +30,6 @@ function acs_acces($page) {
   	'acs_selectionner_admin',
   	'acs_rechercher_admin',
     'acs_page_get_infos',
-  	'acs_page_source',
     'composant_get_infos',
     'composant_get_trad',
     'configuration',

@@ -4,7 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Carte',
-'description' => 'Categories map',
+'description' => 'Keywords, categories and/or articles map',
 'help' => 'Require GIS plugin and its dependancies.<br />
 Display last updated geolocated keywords, sections, and articles on the map. If these have keywords from choosen group, 
 these are displayed with their keyword icon as markers on the map.<br /><br />

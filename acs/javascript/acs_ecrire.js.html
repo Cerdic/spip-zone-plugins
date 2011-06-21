@@ -84,13 +84,7 @@ function acs_ecrire_init_ajax(ajax) {
   if (ajax == null)
     ajax=true;
 
-  if (detail() == "") {
-    $("#page_infos .pliable").each(
-      function(i) {
-        $(this).hide();
-      }
-    );
-  }
+  acs_ecrire_init()
 
   draw_ctlWidgets();
 

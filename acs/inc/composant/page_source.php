@@ -146,10 +146,12 @@ function pi_INCLURE($args) {
   if (preg_match('/{nic=(\d*)\}/', $args[0][0], $matches)) {
     $nic = $matches[1];
   }
+  // Inclusion d'un composant
   if (substr($include, 0, 11) == 'composants/') {
     $r = affiche_widgy($include, $param, $args[1]['indentation'], $nic);
   }
   else {
+    // inclusion classique
     if (find_in_path($include.'.html'))
       $r = indent($args[1]['indentation']).'<a class="'.get_widget_class($include, $param['on'], 'widgy').' lien_page" style="background: none" href="?exec=acs&onglet=page&pg='.$include.'" onclick=\'$("#page_infos").empty();
         AjaxSqueeze("?exec=acs_page_get_infos&pg=" + this.text, "page_infos");

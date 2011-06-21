@@ -13,26 +13,32 @@ function acs_pages($page) {
   return '<div id="page_infos"><a name="page_infos"></a>'.acs_page_get_infos($page, _request('mode'), _request('detail')).'</div>';
 }
 
-function acs_pages_gauche($page) {
+function acs_pages_droite($page) {
   return acs_info_box(
     _T('acs:acs'),
-    _T('acs:assistant_configuration_squelettes').'<br /><br />',
-    _T('acs:onglet_pages_help'),
-    _T('acs:onglet_pages_info').'<br /><br />',
-    _DIR_PLUGIN_ACS."images/acs_32x32.gif",
     _T('acs:model_actif', array('model' => $GLOBALS['meta']['acsModel'])).
     (($GLOBALS['meta']['acsSqueletteOverACS']) ? 
       _T('acs:overriden_by', array('over' => str_replace(':', ' ', $GLOBALS['meta']['acsSqueletteOverACS'])))
        :
-     	''
+      ''
     ).
     _T('acs:model_actif2').
-    '<br /><br />'
+    '<br /><br />',
+    false,
+    _T('acs:onglet_pages_info'),
+    _DIR_PLUGIN_ACS."images/acs_32x32.gif",
+    false
   );
 }
 
-function acs_pages_droite($page) {
-  return acs_box(_T('acs:pages'), liste_pages_du_site('pages'),_DIR_PLUGIN_ACS."/images/pages-24.gif" );
+function acs_pages_gauche($page) {
+  return acs_box(
+      _T('acs:pages'),
+      acs_help_div('help_onglet_pages', _T('acs:onglet_pages_help').'<br /><br />').liste_pages_du_site('pages'),
+      _DIR_PLUGIN_ACS."images/pages-24.gif",
+      'acs_box_pages',
+      acs_help_call('help_onglet_pages')
+    );
 }
 
 

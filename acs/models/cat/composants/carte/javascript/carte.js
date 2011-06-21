@@ -86,6 +86,7 @@ function addPicto(item, markerLayer, map, pins) {
         			this.hide();
         		}
         );
+        // popup.imageSrc = OpenLayers.ImgPath + 'cloud-popup-relative.png'; /* déjà fait par défaut si OpenLayers.ImgPath pointe vers le dossier qui contient cette image */
         popup.imageSize = new OpenLayers.Size(676, 736);
         popup.positionBlocks = {
             "tl": {

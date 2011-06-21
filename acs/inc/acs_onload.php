@@ -30,6 +30,10 @@ define('_ACS_DIR_SITE_ROOT', $dir_site);
 // Dossier du cache ACS (par defaut: tmp/cache/acs)
 define('_ACS_TMP_DIR', _ACS_DIR_SITE_ROOT._NOM_TEMPORAIRES_INACCESSIBLES.'cache/acs/');
 
+// Desactivation du cache de SPIP
+if ($GLOBALS['meta']['ACS_CACHE_SPIP_OFF'] == 'on')
+  define('_NO_CACHE',-1); // Desactive totalement le cache de SPIP (aucune creation des pages en cache)
+
 // Modèle ACS par defaut - Default ACS model
 $GLOBALS['meta']['acsModel'] = isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat';
 

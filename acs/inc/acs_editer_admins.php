@@ -3,7 +3,7 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 // from spip 1.9.2.c, 1.9.2d
@@ -111,13 +111,15 @@ function editer_admins_objet($type, $id, $flag, $cherche_auteur, $ids, $les_aute
   }
   else
     $formpages = _T('acs:locked_pages').' : '.implode(', ', $GLOBALS['ACS_ENFER']);
+
   $formpages = '<div>'.$formpages.'</div>';
-	$res = '<div style="text-align:'.$GLOBALS['spip_lang_left'].'"><div>&nbsp;</div>' // pour placer le gif patienteur
-	. debut_cadre_enfonce($icon, true, "", $bouton)
-	. $les_auteurs
-  . acs_bloc_depliable(($flag === 'ajax'), "admins$type$id", $formpages.$res)
-	. fin_cadre_enfonce(true)
-. '</div>';
+	$res = '<div style="text-align:'.$GLOBALS['spip_lang_left'].'">'
+	.debut_cadre_enfonce($icon, true, "", $bouton)
+	.$les_auteurs
+  .acs_bloc_depliable(($flag === 'ajax'), "admins$type$id", $formpages.$res)
+	.fin_cadre_enfonce(true)
+  .'</div>';
+
 	return acs_ajax_action_greffe("acs_editer_admins", $id, $res);
 }
 

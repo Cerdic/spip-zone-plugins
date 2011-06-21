@@ -4,7 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Mots-clés',
-'description' => 'Mots-clés d\'un article ou liste de tous les mots-clés lorsque id_article n\'est pas défini.',
+'description' => 'Mots-clés d\'un article, d\'une rubrique, d\'un groupe de mots-clés, résultats d\'une recherche, ou sinon liste de tous les mots-clés.',
 
 'TitreFond' => 'Titre'
 

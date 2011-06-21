@@ -96,7 +96,10 @@ hr {height: 1px; margin:2px; border:0; border-top: 1px solid #GET{foncee};}
   color: #000000;
   overflow: auto;
 }
-
+.acs_box_pages .acs_box_texte {
+  max-height: 600px;
+  overflow: auto;
+}
 .acs_box_composants {
   width: 208px;
 }
@@ -113,7 +116,7 @@ fieldset.apercu {
   top:-1px;
   border: thin inset #GET{claire};
   [background-color: (#VAR{acsFondColor, #ffffff});]
-  [background-image: url([(#ACS_CHEMIN)]fond/(#VAR{acsFondImage}));]
+  [background-image: url((#ACS_CHEMIN{fond/#VAR{acsFondImage}}));]
   background-repeat: repeat;
 }
 
@@ -343,10 +346,10 @@ fieldset.apercu {
   outline: thin dashed #dfdfdf;
 }
 .ctlWidget_droppable_over {
-  outline: thin dotted blue;
+  outline: 3px dotted lightgreen;
 }
 .ctlWidget_droppable_drop {
-  outline: thin dotted red;
+  outline: 3px dotted orange;
 }
 
 .select_widget {
@@ -431,9 +434,9 @@ l'utilisation du contrôleur par défaut qui pointe vers crayons_store standard 
   background: #f4f4f4;
   border: thin outset;
   font-size: 10px;
-  box-shadow: 2px 2px 2px #cfcfcf;
-  -webkit-box-shadow: 2px 2px 2px #cfcfcf;
-  -moz-box-shadow: 2px 2px 2px #cfcfcf;
+  box-shadow: 2px 2px 5px #cfcfcf;
+  -webkit-box-shadow: 2px 2px 5px #cfcfcf;
+  -moz-box-shadow: 2px 2px 5px #cfcfcf;
   filter: progid:DXImageTransform.Microsoft.dropShadow(color=#cfcfcf, offX=2, offY=2, positive=true);
 }
 
@@ -460,7 +463,9 @@ img.bouton_edit_composant:hover {
   left: 0;
   display: block;
   z-index: 99999999;
-  border : [(#GET{foncee})] 0px solid;
+  background: #efefdf;
+  border : [(#GET{foncee})] 1px solid;
+  vertical-align: middle;
   -moz-border-radius: 0;
 }
 .acsColorBlock {

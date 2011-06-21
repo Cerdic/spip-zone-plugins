@@ -7,7 +7,8 @@
 Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-Cliquez <u><a href="?exec=acs&onglet=pages&pg=composants/articles/page-article">ici</a></u> pour d&eacute;finir le contenu de la page.
-Click <u><a href="?exec=acs&onglet=pages&pg=composants/articles/page-article">here</a></u> to define page content.
+La présentation de cette page peut dépendre du choix d'un mot-clé: cliquez <u><a href="?exec=acs&onglet=pages&pg=composants/articles/page-article">ici</a></u> pour d&eacute;finir le contenu de la page.
+
+These page design could depend on a keyword: click <u><a href="?exec=acs&onglet=pages&pg=composants/articles/page-article">here</a></u> to define page content.
 
 ][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsArticlesLock}|=={oui}|?{' '})[(#INCLURE{fond=composants/articles/test-acces-page}{env}{self})]][(#VAR{acsArticlesLock}|!={oui}|?{' '})[(#INCLURE{fond=composants/articles/test-page}{id_article}{env}{self})]]

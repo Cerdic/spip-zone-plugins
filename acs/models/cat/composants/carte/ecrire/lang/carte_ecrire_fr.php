@@ -4,7 +4,7 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Carte',
-'description' => 'Carte des rubriques',
+'description' => 'Carte de mot-clés, rubriques, et/ou articles.',
 'help' => 'Affiche sur une carte les derniers mot-clés, rubriques, et articles g&eacute;or&eacute;f&eacute;renc&eacute;s mise à jour. Les rubriques et articles qui ont des mots-cl&eacute;s du groupe choisi ici sont affich&eacute;s avec leurs logos de mot-cl&eacute; comme pictogrammes personnalis&eacute;es.
 <br /><br />
 Le centrage et le zoom sont ceux pass&eacute;s en param&egrave;tres, ou ceux du mot-clé, de l\'article, ou de la rubrique, ou les valeurs par defaut du compossant carte.<br /><br />

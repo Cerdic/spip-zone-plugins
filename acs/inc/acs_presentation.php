@@ -3,12 +3,12 @@
 #          (Plugin Spip)
 #     http://acs.geomaticien.org
 #
-# Copyright Daniel FAIVRE, 2007-2008
+# Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
 
-// Appels aux fonctions de mise en page
-// Simplifie le suivi des versions de spip, et assure la compatibilité entre 1.9.2 et 1.9.3
+// Appels aux fonctions de mise en page ACS
+// Simplifie le suivi des versions de spip, et assure la compatibilité depuis 1.9.2
 // au niveau de l'affichage de l'espace ecrire
 
 include_spip('inc/presentation');
@@ -28,11 +28,18 @@ function acs_info_box($titre, $description, $help, $info, $icon, $description_co
   if ($description) $r .= '<div>'.$description.'</div>';
   if ($description_contextuelle) $r .= '<div>'.$description_contextuelle.'</div>';
   if ($info) $r .= '<div class="onlinehelp">'.$info.'</div>';
-  if ($help) $r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'/images/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$help.'</div>';
+  if ($help) $r .= acs_help_call('info_box_'.$titre).'<br />'.acs_help_div('info_box_'.$titre, $help);
   if ($addon) $r .= '<br />'.$addon;
-  return acs_box($titre, $r, $icon, false, '<img src="'._DIR_PLUGIN_ACS.'/images/info.png" />');
+  return acs_box($titre, $r, $icon, false, '<img src="'._DIR_PLUGIN_ACS.'images/info.png" />');
 }
-
+/**
+ * Boite
+ * @param string titre : titre
+ * @param string contenu: contenu
+ * @param string icon: chemin de l'icône
+ * @param string class: classe de la boite acs_box
+ * @param string titre2: autre élément positionné à droite dans la barre de titre
+ */
 function acs_box($titre, $contenu, $icon=false, $class=false, $titre2=false) {
   if ($class) $class = " $class";
   $r = '<div class="acs_box'.$class.'">';
@@ -43,7 +50,7 @@ function acs_box($titre, $contenu, $icon=false, $class=false, $titre2=false) {
     $r .= '</tr></table></div>';
   }
   $r .= '<div class="acs_box_texte arial2">'.$contenu.'</div>';
-  $r .= '</div>'; // fin acs_box
+  $r .= '</div>';
   return $r;
 }
 
@@ -62,6 +69,13 @@ function acs_3colonnes($col1, $col2, $col3) {
   echo '</div><br style ="clear: both"/>';
 }
 
+function acs_help_call($id) {
+  return '<img src="'._DIR_PLUGIN_ACS.'images/aide.gif" onmouseover=\'$("#'.$id.'").slideToggle("slow");\' onclick=\'$("#'.$id.'").slideToggle("slow");\' style="cursor:pointer;" title="'._T('icone_aide_ligne').'" align="right"/>';
+}
+
+function acs_help_div($id, $help) {
+  return '<div id="'.$id.'" class="onlinehelp pliable" style="text-align: justify" onclick=\'$("#'.$id.'").slideToggle("slow");\'>'.$help.'</div>';
+}
 
 /**
  * Crée un lien image plieur/déplieur jQuery pour les éléments de la classe $classe

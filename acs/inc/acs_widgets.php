@@ -16,7 +16,8 @@ function liste_widgets($visible = true) {
 	if (!is_array($composants))
 		return acs_box('0 '.strtolower(_T('composants')), '&nbsp;', _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
 
-   $r .= '<div id="widgets" class="widgets">';
+  $elts = '';
+  $cadres = '';
   foreach($composants as $class=>$cp) {
   	$vp = 'acs'.ucfirst($class);
   	foreach($cp['instances'] as $nic=>$c) {
@@ -31,15 +32,19 @@ function liste_widgets($visible = true) {
       	$nom = ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '');
       	$title = _T('composant');
       }
-  		$r .= '<div id="widget_'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
+  		$html = '<div id="widget_'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
         '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'">'.widget_icon($class, $nic).'</a>'.
         '</td><td title="'.$title.'" style="width: 95%;"><div><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'.$title.'">'.$nom.'</a></div></td></tr></table>'.
       '</div>';
+  		if ($class == 'cadre')
+  		  $cadres .= $html;
+  		else
+  		  $elts .= $html;
   		$nbci++;
   	}
   	$nbc++;
   }
-  $r .= '</div>';
+  $r = '<div id="widgets" class="widgets">'.$elts.'<hr />'.$cadres.'</div>';
   return acs_box($nbci.' '.(($nbci==1) ? strtolower(_T('composant')) : strtolower(_T('composants'))).' ('.$nbc.')', $r, _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants'.($visible ? '' : '_hidden').'');
 }
 

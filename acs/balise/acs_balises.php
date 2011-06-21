@@ -67,16 +67,25 @@ function balise_ACS_DERNIERE_MODIF($p) {
   return $p;
 }
 
-// Retourne le chemin d'une ressource ACS
-// ou vide si la ressource n'est pas accessible au moins en lecture. 
+/**
+ * Retourne le chemin d'une ressource ACS ou vide si la ressource n'est pas
+ * accessible au moins en lecture.
+ * Usage: #ACS_CHEMIN{chemin_dossier_ou_fichier,type}
+ */
 function balise_ACS_CHEMIN($p) {
   $arg = interprete_argument_balise(1,$p);
+  $type = interprete_argument_balise(2,$p);
+  spip_log($type,'type');
   $p->statut = 'php';
   $p->interdire_scripts = false;
   $p->code = $arg ? '_DIR_RACINE.$GLOBALS["ACS_CHEMIN"]."/".'.$arg : '_DIR_RACINE.$GLOBALS["ACS_CHEMIN"]."/"';
   eval('$path = '.$p->code.';');
-  if (!is_readable($path) || !is_file($path))
+  // On retourne vide si la ressource n'est pas lisible
+  if (!is_readable($path))
   	$p->code = '""';
+  // Si la ressource n'est pas un fichier on retourne vide sauf si on recherchait un dossier
+  if (($type != "'dir'") && is_dir($path))
+    $p->code = '""';
   return $p;
 }
 

@@ -1,6 +1,7 @@
 Suivi des principales révisions - Version ACS actuelle : 0.8.2
 
 ACS version 0.8
+- nouvelle option de configuration d'ACS : Désactiver le cache de SPIP (lors du développement d'un site).
 - nouvelle balise #ACS_AUTORISE{};
 - nouveau parametre de composant : preview_type (inline ou iframe=valeur par defaut). Ceci permet de faire interagir un composant avec son interface d'administration et en particulier de récupérer des parametres definis par le composant lui-même pour définir ses variables (exemple : composant Carte);
 - chargement des balises, scripts, et styles publics dans l'espace privé pour permettre aux modèles SPIP d'utiliser des composants d'un modèle ACS dans l'espace privé;
@@ -8,6 +9,7 @@ ACS version 0.8
 - échappe les guillemets dans l'affichage des contrôles de type text
 - modification de l'éditeur de composants pour gérer l'overide éventuel avec la souplesse maximale : fichier par fichier.
 - nouveau type de contrôle : KeyGgroup (choix d'un groupe de mots-clefs)
+- formulaire administration de SPIP enrichi d'un accès direct à l'édition de la page et du bouton inclusions
  
 Modele Cat pour ACS vesion 0.8 :
 - nouveaux composants Carte, Diapo, NavGroup et NavKeys;

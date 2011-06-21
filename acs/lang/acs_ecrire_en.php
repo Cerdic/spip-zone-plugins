@@ -20,8 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <br /><br />Click on the little black triangle to display a more detailed schema.
 <br /><br />
 <b>Source</b> display colorized source code of the page.
-<br /><br />
-To setup your website, customize <a href="?exec=acs&onglet=composants">components</a>.',
+',
 
   'page' => 'Page',
   'pages' => 'Pages',
@@ -71,6 +70,9 @@ To use some components from an ACS model in your own SPIP templates, you need to
   'voir_pages_preview_composants' => 'Preview pages',
   'voir_onglet_vars' => 'Variables pane.',
   'preview_background' => 'Preview background',
+  'spip_admin_form_style' => 'SPIP admin form style',
+  'cache-spip_on' => 'Disable SPIP cache',
+  'cache-spip_off' => 'SPIP cache disabled',
   'save' => 'Save',
   'restore' => 'Restore',
 

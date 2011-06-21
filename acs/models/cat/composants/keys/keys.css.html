@@ -3,7 +3,9 @@
   [border-width: (#VAR{acsKeysBord/Width,#VAR{acsRubnavBord/Width}});]
   [border-style: (#VAR{acsKeysBord/Style,#VAR{acsRubnavBord/Style}});]
   [border-color: (#VAR{acsKeysBord/Color,#VAR{acsRubnavBord/Color}});]
-  [background: (#VAR{acsRubnavFondColor});]
+  [background: (#VAR{acsRubnavFondColor});][
+  (#MODELE{c_css_border-radius}{c=Keys}{var=BordRond}{sauf=bottom})][
+  (#MODELE{c_css_shadow}{c=Keys})]
 }
 
 .cKeys .bloc-title {

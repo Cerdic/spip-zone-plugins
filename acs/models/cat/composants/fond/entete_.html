@@ -19,14 +19,14 @@ Entete de page - page header
   <meta name="page-topic" content="Document" />
   <meta name="distribution" content="Global" />
   <meta name="audience" content="General" />
-  [<title>(#ENV{title})</title>]
+  [<title>(#ENV**{title}|textebrut)</title>]
   <meta name="robots" content="#ENV{mrobots,#ENV{calendrier_mois}|=={""}|?{all,none}}" />
   [<meta name="expires" content="(#ENV{mexpires,3600})" />]
-  [<meta name="description" content="(#ENV{mdescription,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
+  [<meta name="description" content="(#ENV{mdescription,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
   [<meta name="keywords" lang="#LANG" content="(#ENV{mkeywords,<:acs:fond_meta_keywords:>})" />]
   [<meta name="author" content="(#ENV{mauthor,<:acs:fond_meta_author:>})" />]
   [<meta name="copyright" content="(#ENV{mcopyright,<:acs:fond_meta_copyright:>})" />]
-  [<meta name="abstract" content="(#ENV{mabstract,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
+  [<meta name="abstract" content="(#ENV{mabstract,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
   <meta name="organization" content="#NOM_SITE_SPIP" />
   [<meta name="location" content="(#ENV{mlocation,<:acs:fond_meta_location:>})" />]
   <meta name="DC.Type" content="Document" />
@@ -38,7 +38,7 @@ Entete de page - page header
   [<meta name="DC.Date" content="(#ENV{mdate, #DATE})" />]
   [<meta name="DC.Contributor" content="(#ENV{mcontributor,#NOM_SITE_SPIP})" />]
   [<meta name="DC.Publisher" content="(#ENV{mpublisher,#NOM_SITE_SPIP})" />]
-  [<meta name="DC.Subject" content="(#ENV{msubject,[(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)]})" />]
+  [<meta name="DC.Subject" content="(#ENV{msubject,[(#DESCRIPTIF_SITE_SPIP|textebrut|couper{150})]})" />]
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <link rel="schema.DC" href="#URL_SITE_SPIP/dc" />[(#REM) DC metas ]
   [(#REM) Lien vers l'icone destinee a la barre de bookmarks

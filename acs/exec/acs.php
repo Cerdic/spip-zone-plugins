@@ -13,18 +13,10 @@ include_spip('inc/config');
 include_spip('inc/meta');
 
 function exec_acs() {
-  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right,$changer_config, $spip_display;
+  global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_left, $spip_lang_right, $spip_display;
 
   if (isset($GLOBALS['meta']['ACS_ADMINS']) && (!acs_autorise()))
     acs_exit();
-
-  // Modifications
-  $changer_config = $_POST['changer_config'];
-  if ($changer_config=='oui') {
-    ecrire_meta("acsDerniereModif", time());
-    ecrire_metas();
-    lire_metas();
-  }
 
   if (_request('onglet')) $onglet = _request('onglet');
   else  $onglet = 'pages';
