@@ -1,17 +1,38 @@
 <plugin>
     <nom>Zippeur</nom>
     <auteur>Maïeul Rouquette, Julien Coste-Louret</auteur>
-    <version>1.2</version>
+    <version>1.3</version>
     <version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
     <etat>stable</etat>
+	<lien>http://www.spip-contrib.net/Zippeur</lien>
 	<icon>zip.png</icon>
 	<description> Zippez facilement vos documents joints.</description>
 	<install>base/zippeur.php</install>
     <prefix>zippeur</prefix>
 	<fonctions>zippeur_fonctions.php</fonctions>
-	<necessite id="spip" version="[2.0;)" />
+	<necessite id="spip" version="[2.0.0;3.0.0-dev)" />
 	<necessite id='cfg' version='[1.10.0;]' />
+	<pipeline>
+       <nom>declarer_tables_principales</nom>
+       <inclure>zippeur_pipelines.php</inclure>
+   </pipeline>
+	<licence>GPL</licence>
+	<lien>http://www.spip-contrib.net/Zippeur</lien>
+</plugin>
+<plugin spip='[3.0.0-dev;3.1.0)'>
+    <nom>Zippeur</nom>
+    <auteur>Maïeul Rouquette, Julien Coste-Louret</auteur>
+    <version>1.3</version>
+    <version_base>0.3</version_base>
+  	<categorie>multimedia</categorie>
+	<lien>http://www.spip-contrib.net/Zippeur</lien>
+    <etat>stable</etat>
+	<icon>images/zip.png</icon>
+	<description> Zippez facilement vos documents joints.</description>
+	<install>base/zippeur.php</install>
+    <prefix>zippeur</prefix>
+	<fonctions>zippeur_fonctions.php</fonctions>
 	<pipeline>
        <nom>declarer_tables_principales</nom>
        <inclure>zippeur_pipelines.php</inclure>
