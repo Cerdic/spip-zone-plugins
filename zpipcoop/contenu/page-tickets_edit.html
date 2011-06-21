@@ -1,9 +1,6 @@
 [(#REM) Squelette du formulaire de la page d'edition d'un ticket]
 <div class="entete-formulaire">
 [(#ENV{id_ticket}|intval|oui)
-	<span style="float:right"><a href="[(#URL_PAGE{ticketskiss_edit,id_ticket=#ID_TICKET}|parametre_url{retour,[(#URL_PAGE{ticketskiss,id_ticket=#ID_TICKET})]})]">
-	<:zpipcoop:retour:>
-	</a></span>
 	<span class="arial1 spip_small"><strong><:ticketskiss:ticket:> ##ENV{id_ticket}</strong></span>
 ]
 	<h1>[(#ENV{titre}|typo)]</h1>
