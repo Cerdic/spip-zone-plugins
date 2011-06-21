@@ -285,8 +285,6 @@ function multilang_multi_recover(el,container,target,event){
  * @param id chaine correspondant a l'id du champ
  */
 function multilang_is_title(el) {
-	console.log($(el).parents('#configurer-accueil').size());
-	console.log(el);
 	return (el.id=='titre' || (el.id=='nom_site' && ($(el).parents('#configurer-accueil,.formulaire_configurer_identite').size() < 1)) || el.id.match(/^titre_document[0-9]+/)!=null || el.name.match(/^content_[a-z0-9_]+_titre/)!=null || el.name.match(/^content_[a-z0-9_-]+nom_/)!=null)
 }
 
