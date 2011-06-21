@@ -11,7 +11,7 @@
 	<install>base/zippeur.php</install>
     <prefix>zippeur</prefix>
 	<fonctions>zippeur_fonctions.php</fonctions>
-	<necessite id="spip" version="[2.0.0;3.0.0-dev)" />
+	<necessite id="spip" version="[2.0.0;)" />
 	<necessite id='cfg' version='[1.10.0;]' />
 	<pipeline>
        <nom>declarer_tables_principales</nom>
