@@ -141,6 +141,44 @@ function compositions_selectionner($composition,$type,$defaut="",$ext="html",$fu
 }
 
 /**
+ * Decrire une composition pour un objet
+ * @param string $type
+ * @param string $composition
+ * @return array|bool|string
+ */
+function compositions_decrire($type, $composition){
+	static $compositions = array();
+	if ($type=='syndic') $type='site'; //grml
+	if (isset($compositions[$type][$composition]))
+		return $compositions[$type][$composition];
+	$ext = "html";
+	$fond = compositions_chemin() . $type;
+	if (strlen($composition)
+		AND $f = find_in_path("$fond-$composition.$ext")
+		AND $desc = compositions_charger_infos($f))
+		return $compositions[$type][$composition] = $desc;
+	return $compositions[$type][$composition] = false;
+}
+
+/**
+ * Un filtre a utiliser sur [(#COMPOSITION|classe_composition{#ENV{type}})]
+ * pour poser des classes generiques sur le <body>
+ * si une balise <class> est definie dans la composition c'est elle qui est appliquee
+ * sinon on pose le nom de la composition comme classe
+ * 
+ * @param string $composition
+ * @param string $type
+ * @return string
+ */
+function classe_composition($composition,$type){
+	if ($desc = compositions_decrire($type, $composition)
+		AND isset($desc['class'])
+		AND strlen($desc['class']))
+		return $desc['class'];
+	return $composition;
+}
+
+/**
  * Liste les types d'objets qui ont une composition
  * utilise la valeur en cache meta sauf si demande de recalcul
  * ou pas encore definie

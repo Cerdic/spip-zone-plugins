@@ -33,7 +33,7 @@ function compositions_decomposer_nom($nom){
  *
  * @param string $nom
  * @param string $info
- * @return array/string
+ * @return array|string
  */
 function compositions_charger_infos($nom,$info=""){
 		// on peut appeller avec le nom du squelette
@@ -46,6 +46,7 @@ function compositions_charger_infos($nom,$info=""){
 				$composition['nom'] = _T_ou_typo(spip_xml_aplatit($xml['nom']));
 				$composition['description'] = isset($xml['description'])?_T_ou_typo(spip_xml_aplatit($xml['description'])):'';
 				$composition['icon'] = isset($xml['icon'])?find_in_path(reset($xml['icon'])):'';
+				$composition['class'] = isset($xml['class'])?trim(reset($xml['class'])):'';
 				$composition['configuration'] = isset($xml['configuration'])?spip_xml_aplatit($xml['configuration']):'';
 				$composition['branche'] = array();
 				if (spip_xml_match_nodes(',^branche,', $xml, $branches)){
@@ -74,7 +75,7 @@ function compositions_charger_infos($nom,$info=""){
  * Si une composition est retiree du file system sans etre deselectionnee
  * l'erreur sera evitee par la verification d'existence au moment de styliser
  *
- * @param <type> $liste
+ * @param array $liste
  */
 function compositions_cacher($liste=null){
 	if (!is_array($liste)){
