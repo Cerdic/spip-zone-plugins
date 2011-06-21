@@ -1,4 +1,4 @@
-[(#CACHE{86400})]<BOUCLE_mot(MOTS) {id_mot}>[(#REM)
+[(#CACHE{86400})][(#REM)
 
              ACS
          (Plugin Spip)
@@ -8,8 +8,19 @@
 Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]#SET{show_type,^[^_].*}[(#SET{title,[(#TYPE|supprimer_numero|match{#GET{show_type},i,0}) - ][(#TITRE|textebrut|texte_backend)]})][(#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][(#SET{mkeywords,[(#TITRE|textebrut|texte_backend),]<:acs:fond_meta_keywords:>})][(#SET{mrsstitle,[(#TITRE|textebrut|texte_backend)]})][(#SET{mrssurl,[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]})]
+Cette page peut dépendre du groupe de mot-clés: si le champ descriptif du groupe
+contient "<nic-page=nnnn>", alors le cadre de la page est le cadre n° nnnn à la
+place du cadre par défaut (nic=2150).
+
+]<BOUCLE_mot(MOTS) {id_mot}>[
+(#CONFIG{langues_utilisees}|detecte_langue{#SELF})]#SET{show_type,^[^_].*}[
+(#SET{title,[(#TYPE|supprimer_numero|match{#GET{show_type},i,0}) - ][(#TITRE|textebrut|texte_backend)]})][
+(#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][
+(#SET{mkeywords,[(#TITRE|textebrut|texte_backend),]<:acs:fond_meta_keywords:>})][
+(#SET{mrsstitle,[(#TITRE|textebrut|texte_backend)]})][
+(#SET{mrssurl,[(#URL_PAGE{backend}|parametre_url{id_mot,#ID_MOT})]})
+]<BOUCLE_groupes(GROUPES_MOTS){id_groupe}>[(#SET{nic,[(#DESCRIPTIF|match{<nic-page=(\d*)>})]})]</BOUCLE_groupes>
 <INCLURE{fond=composants/fond/entete}{self=#SELF}{env=#ENV}{page=mot}{title=#GET{title}}{mrobots=all}{mkeywords=#GET{mkeywords}}{mdescription=#GET{mdescription}}{rsstitle=#GET{rsstitle}}{rssurl=#GET{rssurl}}{mexpires=86400}>
-<INCLURE{fond=composants/cadre/cadre}{self}{env}{nic=2150}{type}>
+<INCLURE{fond=composants/cadre/cadre}{self}{env}{nic=#GET{nic,2150}}{type}>
 <INCLURE{fond=composants/fond/pied}{self}>
 </BOUCLE_mot>

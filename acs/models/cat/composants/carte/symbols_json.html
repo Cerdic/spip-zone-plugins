@@ -33,8 +33,10 @@ Parameters:
   (#SET{over,[(#LOGO_MOT_SURVOL|extraire_attribut{src}|url_absolue)]})][
   (#SET{iw,[(#LOGO_MOT_NORMAL|largeur)]})][(#SET{ih,[(#LOGO_MOT_NORMAL|hauteur)]})][
   (#SET{ow,[(#LOGO_MOT_SURVOL|largeur)]})][(#SET{oh,[(#LOGO_MOT_SURVOL|hauteur)]})
-]</BOUCLE_pictor><INCLURE{fond=composants/carte/inc-symbols_json-pictos}{nic}{id_name=rubrique}{id=#ID_RUBRIQUE}{lat=#LAT}{lon=#LONX}{titre=#TITRE}{url=#URL_RUBRIQUE}{icon=#GET{icon}}{over=#GET{over}}{iw=#GET{iw}}{ih=#GET{ih}}{ow=#GET{ow}}{oh=#GET{oh}}></BOUCLE_rub></B_rub>
-<BOUCLE_srub(RUBRIQUES){tous}{id_parent}{par date}{inverse}{doublons}><B_grub>[(#GET{virgule})][
+]</BOUCLE_pictor><INCLURE{fond=composants/carte/inc-symbols_json-pictos}{nic}{id_name=rubrique}{id=#ID_RUBRIQUE}{lat=#LAT}{lon=#LONX}{titre=#TITRE}{url=#URL_RUBRIQUE}{icon=#GET{icon}}{over=#GET{over}}{iw=#GET{iw}}{ih=#GET{ih}}{ow=#GET{ow}}{oh=#GET{oh}}></BOUCLE_rub>[
+(#SET{virgule,","})
+]</B_rub>
+<BOUCLE_srub(RUBRIQUES){tous}{id_parent}{id_mot ?}{recherche ?}{par date}{inverse}{doublons}><B_grub>[(#GET{virgule})][
 (#SET{virgule,""})
 ]<BOUCLE_grub(GIS){id_rubrique}{lat >= #ENV{minlat}}{lat <= #ENV{maxlat}}{lonx >= #ENV{minlon}}{lonx <= #ENV{maxlon}}{0,#ENV{maxrubs,#ENV{limit,10}}}{","}>
 <BOUCLE_pr2(MOTS){id_rubrique}{id_groupe=#VAR{#EVAL{'acsCarte'.'#NIC'.'PictosRubriques'}}}{0,1}>[

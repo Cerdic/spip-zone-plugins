@@ -1,4 +1,4 @@
-Suivi des principales révisions - Version ACS actuelle : 0.8.2
+Suivi des principales révisions - Version ACS actuelle : 0.8.3
 
 ACS version 0.8
 - nouvelle option de configuration d'ACS : Désactiver le cache de SPIP (lors du développement d'un site).
@@ -16,7 +16,7 @@ Modele Cat pour ACS vesion 0.8 :
 - gestion amelioree des droits d'acces a un article par mot-cle;
 - suppression du modèle doc au profit de celui de la dist;
 - un modèle spécifique, "c", permet désormais d'utiliser n'importe quel composant comme un modèle SPIP (donc dans un article, par exemple);
-- page rubrique : la page peut dépendre d'un mot-clef de style de page rubrique.
+- pages rubrique, article, mots, et mot : ces pages peuvent dépendre d'un mot-clef (article et rubrique) ou du groupe de mot-clé.(mot et mots).
 - Audio: suppression du bouton STOP,  remplacé par un double-clic sur le bouton play/pause. Création d'un modèle minimaliste de lecteur audio (bouton play/pause).
 - Hierarchie : hiérarchies des mot-clés, avec masquage des groupes de mots-clés commençant par "_".
 - Rubnav : affichage du titre du mot-clé pour les rubriques dépendant d'un mot-clé affichées sur les pages où id_mot est défini.
