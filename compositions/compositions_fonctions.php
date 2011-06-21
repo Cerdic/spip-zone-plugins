@@ -157,13 +157,15 @@ function compositions_types(){
 /**
  * Renvoie la composition qui s'applique à un objet
  * en tenant compte, le cas échéant, de la composition héritée
+ * si etoile=true on renvoi dire le champ sql
  *
  * @param string $type
  * @param integer $id
  * @param string $serveur
+ * @param bool $etoile
  * @return string
  */
-function compositions_determiner($type, $id, $serveur=''){
+function compositions_determiner($type, $id, $serveur='', $etoile = false){
 	include_spip('base/abstract_sql');
 	$table = table_objet($type);
 	$table_sql = table_objet_sql($type);
@@ -177,11 +179,12 @@ function compositions_determiner($type, $id, $serveur=''){
 			$composition = sql_getfetsel('composition', $table_sql, "$_id_table=".intval($id), '', '', '', '', $serveur);
 			if ($composition != '')
 				$retour = $composition;
-			elseif (isset($desc['field']['id_rubrique'])) {
+			elseif (!$etoile AND isset($desc['field']['id_rubrique'])) {
 				$_id_rubrique = ($type == 'rubrique') ? 'id_parent' : 'id_rubrique';
 				$id_rubrique = sql_getfetsel($_id_rubrique,$table_sql,"$_id_table=".intval($id),'','','','',$serveur);
 				$retour = compositions_heriter($type, $id_rubrique, $serveur);
-			} else
+			}
+			else
 				$retour = '';
 	}
 	return ($retour == '-') ? '' : $retour;
@@ -222,21 +225,31 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
  * dans la boucle en cours, mais l'on peut spécifier notre recherche
  * en passant objet et id_objet en argument de la balise :
  * #COMPOSITION{article, 8}
- * 
+ *
+ * #COMPOSITION* renvoie toujours le champs brut, sans tenir compte de l'heritage
  *
  * @param array $p 	AST au niveau de la balise
  * @return array	AST->code modifié pour calculer le nom de la composition
  */
 function balise_COMPOSITION_dist($p) {
-	if ($objet = interprete_argument_balise(1, $p)) {
-		$id_objet = interprete_argument_balise(2, $p);
+	$_composition = "";
+	if ($_objet = interprete_argument_balise(1, $p)) {
+		$_id_objet = interprete_argument_balise(2, $p);
 	} else {
-		$_id_objet = $p->boucles[$p->id_boucle]->primary;
-		$id_objet = champ_sql($_id_objet, $p);
-		$objet = "'" . $p->boucles[$p->id_boucle]->id_table . "'";
+		$_composition = champ_sql('composition',$p);
+		$_id_objet = champ_sql($p->boucles[$p->id_boucle]->primary, $p);
+		$_objet = "objet_type('" . $p->boucles[$p->id_boucle]->id_table . "')";
 	}
-	$connect = $p->boucles[$p->id_boucle]->sql_serveur;
-	$p->code = "compositions_determiner(objet_type($objet), $id_objet, '$connect')";
+	// si on veut le champ brut, et qu'on l'a sous la main, inutile d'invoquer toute la machinerie
+	if ($_composition AND $p->etoile)
+		$p->code = $_composition;
+	else {
+		$connect = $p->boucles[$p->id_boucle]->sql_serveur;
+		$p->code = "compositions_determiner($_objet, $_id_objet, '$connect', ".($p->etoile?'true':'false').")";
+		// ne declencher l'usine a gaz que si composition est vide ...
+		if ($_composition)
+			$p->code = "((\$zc=$_composition)?\$zc:".$p->code.")";
+	}
 	return $p;
 }
 
