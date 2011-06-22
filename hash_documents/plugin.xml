@@ -1,26 +1,21 @@
 <plugin>
 	<nom>Hash documents</nom>
 	<auteur>Fil - GNU/GPL</auteur>
-	<version>
-	1.0
-	</version>
-	<etat>
-	stable
-	</etat>
+	<version>1.1</version>
+	<etat>stable</etat>
 	<description>
-	Enregistrer les documents dans <code>IMG/mp3/a/b/c/fichier.mp3</code>
+	<multi>
+	[fr]Enregistrer les documents dans <code>IMG/mp3/a/b/c/fichier.mp3</code>
+	[en]Save documents in <code>IMG/mp3/a/b/c/file.mp3</code>
+	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Le-plugin-hash_documents</lien>
-	<prefix>
-	hasher
-	</prefix>
+	<prefix>hasher</prefix>
 	<icon>hash_documents.png</icon>
-
 	<pipeline>
 		<nom>post_edition</nom>
 		<inclure>hash_fonctions.php</inclure>
 	</pipeline>
-
 	<chemin dir='' />
 	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>

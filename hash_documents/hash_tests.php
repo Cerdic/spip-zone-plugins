@@ -22,5 +22,5 @@ foreach (array(
 spip_timer('hash');
 var_dump(count(hasher_deplacer_n_documents(10000, true)));
 var_dump(spip_timer('hash'));
-
+*/
 ?>

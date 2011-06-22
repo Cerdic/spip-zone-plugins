@@ -15,10 +15,10 @@ function exec_hash_documents_dist($class = null)
 	pipeline('exec_init',array('args'=>array('exec'=>'hash_documents'),'data'=>''));
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("Hash documents", 'hash_documents');
+	echo $commencer_page(_T('hasher:titre'), 'hash_documents');
 	echo "<br /><br /><br />\n";
 
-	echo gros_titre(_L('Hash documents'), '', false);
+	echo gros_titre(_T('hasher:titre'), '', false);
 	
 	// colonne gauche
 	echo debut_gauche('', true);
@@ -29,7 +29,7 @@ function exec_hash_documents_dist($class = null)
 
 	echo debut_droite("", true);
 
-	echo debut_cadre_trait_couleur('', true, '', 'Documents du site');
+	echo debut_cadre_trait_couleur('', true, '', _T('hasher:documents_site'));
 
 	if (($hasher = intval(_request('hasher'))) > 0)
 		$modif = hasher_deplacer_n_documents($hasher);
@@ -38,21 +38,21 @@ function exec_hash_documents_dist($class = null)
 		$modif = hasher_deplacer_n_documents(-$hasher, true);
 
 	if ($modif) {
-		echo "<p>Documents modifiés : ".join(', ', $modif)."</p>";
+		echo "<p>"._T('hasher:documents_modifies').join(', ', $modif)."</p>";
 	}
 
 	// centre de la page
 	list($oui, $non) = hasher_compter_documents();
-	echo "Ce site comporte $oui documents hashés, et $non qui ne le sont pas encore (ou ne peuvent pas l'être).";
+	echo _T('hasher:bilan',array('oui'=>$oui,'non'=>$non)) ;
 
 	if (intval($non) > 0) {
 		$n = min(intval($non), 100);
-		echo "<p><a href='".parametre_url(self(), 'hasher', $n)."'>hasher $n documents</a></p>";
+		echo "<p><a href='".parametre_url(self(), 'hasher', $n)."'>"._T('hasher:action_hasher',array('n'=>$n))."</a></p>";
 	}
 
 	if (intval($oui) > 0) {
 		$n = min(intval($oui), 100);
-		echo "<p><a href='".parametre_url(self(), 'hasher', -$n)."'>déhasher $n documents</a></p>";
+		echo "<p><a href='".parametre_url(self(), 'hasher', -$n)."'>"._T('hasher:action_dehasher',array('n'=>$n))."</a></p>";
 	}
 
 	echo fin_cadre_trait_couleur(true);
@@ -60,18 +60,21 @@ function exec_hash_documents_dist($class = null)
 
 	echo "<br /><br />\n";
 
-	echo debut_cadre_trait_couleur('', true, '', 'Redirections');
+	echo debut_cadre_trait_couleur('', true, '', _T('hasher:redirections'));
 	$htaccess = _DIR_IMG.'.htaccess';
 	if (!lire_fichier($htaccess, $contenu)
 	OR !preg_match(',hash_404,', $contenu)) {
-		echo "<p>Veuillez installer dans $htaccess un fichier contenant les codes suivants :</p>";
+		echo "<p>"._T('hasher:htaccess_a_installer',array('htaccess'=>$htaccess))."</p>";
 	} else {
-		echo "<p>Le fichier $htaccess semble correctement installé ; pour mémoire, il doit contenir les codes suivants :</p>";
+		echo "<p>"._T('hasher:htaccess_installe',array('htaccess'=>$htaccess))."</p>";
 	}
 	echo propre('<cadre>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule .* /plugins/hash_documents/hash_404.php [L]
+# Si spip est range a la racine du domaine ou pour un mutualise
+RewriteRule .* /ecrire/?action=hash_404 [L]
+# Si spip est range dans un sous dossier spip
+#RewriteRule .* /spip/ecrire/?action=hash_404 [L]
 	</cadre>');
 
 	echo fin_cadre_trait_couleur(true);
