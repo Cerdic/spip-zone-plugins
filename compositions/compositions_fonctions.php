@@ -148,6 +148,8 @@ function compositions_selectionner($composition,$type,$defaut="",$ext="html",$fu
  */
 function compositions_decrire($type, $composition){
 	static $compositions = array();
+	if (!function_exists('compositions_charger_infos'))
+		include_spip('inc/compositions');
 	if ($type=='syndic') $type='site'; //grml
 	if (isset($compositions[$type][$composition]))
 		return $compositions[$type][$composition];
