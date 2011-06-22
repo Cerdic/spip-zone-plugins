@@ -35,6 +35,7 @@ function entravaux_check_verrou($nom, $force=false){
 function is_entravaux(){
 	// upgrade sauvage ?
 	if (isset($GLOBALS['meta']['entravaux_id_auteur'])){include_spip('entravaux_install');entravaux_poser_verrou("accesferme");effacer_meta('entravaux_id_auteur');}
+	if (defined('_ENTRAVAUX_IP_EXCEPTIONS') AND in_array($GLOBALS['ip'],explode(',',_ENTRAVAUX_IP_EXCEPTIONS))) return false;
 	return entravaux_check_verrou("accesferme");
 }
 
