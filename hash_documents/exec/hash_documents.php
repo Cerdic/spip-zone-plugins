@@ -71,10 +71,7 @@ function exec_hash_documents_dist($class = null)
 	echo propre('<cadre>
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-# Si spip est range a la racine du domaine ou pour un mutualise
-RewriteRule .* /ecrire/?action=hash_404 [L]
-# Si spip est range dans un sous dossier spip
-#RewriteRule .* /spip/ecrire/?action=hash_404 [L]
+RewriteRule .* ../index.php?action=hash_404 [L]
 	</cadre>');
 
 	echo fin_cadre_trait_couleur(true);
