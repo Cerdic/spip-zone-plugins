@@ -13,17 +13,19 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
 // http://doc.spip.org/@action_purger_dist
-function action_purger_dist()
+function action_purger_dist($arg=null)
 {
-	if ($securiser_action = charger_fonction('securiser_action', 'inc', true))
-		$arg = $securiser_action();
-	else {
-		/* compat SPIP 1.9 */
-		$arg = _request('arg');
-		$redirect = 'ecrire/'._request('redirect');
-		include_spip('inc/meta');
-		function spip_unlink($u) {
-			return unlink($u);
+	if (is_null($arg)) {
+		if ($securiser_action = charger_fonction('securiser_action', 'inc', true))
+			$arg = $securiser_action();
+		else {
+			/* compat SPIP 1.9 */
+			$arg = _request('arg');
+			$redirect = 'ecrire/'._request('redirect');
+			include_spip('inc/meta');
+			function spip_unlink($u) {
+				return unlink($u);
+			}
 		}
 	}
 
