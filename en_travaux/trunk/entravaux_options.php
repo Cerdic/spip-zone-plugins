@@ -15,10 +15,28 @@
 function autoriser_travaux_dist(){ return autoriser('webmestre'); }
 
 /**
+ * Verifier un verrou fichier pose dans local/entravaux_xxx.lock
+ * pour ne pas qu'il saute si on importe une base
+ * La meta n'est qu'un cache qu'on met a jour si pas dispo.
+ * @param string $nom
+ * @param bool $force
+ * @return bool
+ */
+function entravaux_check_verrou($nom, $force=false){
+	if (!isset($GLOBALS['meta'][$m='entravaux_'.$nom]) OR $force){
+		ecrire_meta($m,file_exists(_DIR_VAR.$m.".lock")?"oui":"non",'non');
+	}
+	return $GLOBALS['meta'][$m]=="oui"; // si oui : verrou pose
+}
+/**
  * A-t-on active les travaux oui ou non ?
  * @return bool
  */
-function is_entravaux(){ return (isset($GLOBALS['meta']['entravaux_id_auteur']) AND $GLOBALS['meta']['entravaux_id_auteur']);}
+function is_entravaux(){
+	// upgrade sauvage ?
+	if (isset($GLOBALS['meta']['entravaux_id_auteur'])){include_spip('entravaux_install');entravaux_poser_verrou("accesferme");effacer_meta('entravaux_id_auteur');}
+	return entravaux_check_verrou("accesferme");
+}
 
 if (is_entravaux()){
 	include_spip('inc/autoriser');
@@ -91,7 +109,7 @@ function entravaux_styliser($flux){
  * Afficher une icone de travaux sur tout le site public pour que le webmestre n'oublie pas
  * de retablir le site
  * 
- * @param <type> $flux
+ * @param string $flux
  */
 function entravaux_affichage_final($flux){
 	if (is_entravaux()

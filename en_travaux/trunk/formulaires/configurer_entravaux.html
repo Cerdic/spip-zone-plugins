@@ -21,11 +21,11 @@
 		<input type="hidden" name="_meta_prefixe" value="entravaux" />
 		#ACTION_FORMULAIRE{SELF}
 		<ul>
-			<li class="editer_id_auteur pleine_largeur">
+			<li class="editer_accesferme pleine_largeur">
 				<div class="choix">
-					<input type="checkbox" name="id_auteur"[ (#ENV{id_auteur}|?{checked="checked"})] id="id_auteur" value="#SESSION{id_auteur}"
+					<input type="checkbox" name="accesferme"[ (#ENV{accesferme}|?{checked="checked"})] id="accesferme" value="1"
 					onchange="if ($(this).attr('checked')) $(this).closest('li').next().show('fast').next().hide('fast'); else $(this).closest('li').next().hide('fast').next().show('fast');" />
-					<label for="id_auteur"><:entravaux:activer_message:></label>
+					<label for="accesferme"><:entravaux:activer_message:></label>
 				</div>
 			</li>
 			<li class="editer_message pleine_largeur[(#ENV{id_auteur}|non)none]">
