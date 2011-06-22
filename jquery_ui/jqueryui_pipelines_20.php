@@ -124,7 +124,7 @@ function jqueryui_insert_head($flux) {
 	// appeler les CSS necessaires
 	foreach ($config['plugins'] as $plug) {
 		if (in_array($plug, $Tjquery_css)) {
-			$flux .= "<link rel='stylesheet' type='text/css' media='all' href='"._DIR_JQUERYUI_CSS.$theme.$plug.".css' />\n";
+			$flux .= "<link rel='stylesheet' type='text/css' media='all' href='".find_in_path(_DIR_JQUERYUI_CSS.$theme.$plug.'.css')."' />\n";
 		}
 	}
 
