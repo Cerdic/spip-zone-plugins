@@ -5,76 +5,79 @@
 // Toutes les infos sur : http://www.spip-contrib.net/?article1561
 // dessin des frimousses : Sylvain Michel [http://www.guaph.net/]
 
-// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
-function smileys_installe_dist() {
-	$path = find_in_path('img/smileys');
+// fonction ajoutant un sailey au tableau $tab
+// ex : compile_smiley($tab, ':-*', 'icon_kiss', 'gif');
+function compile_smiley(&$tab, $smy, $img, $ext='png') {
+	static $path, $path2;
+	if(!isset($path)) {
+		$path = find_in_path('img/smileys');
 cs_log("smileys_installe_dist() : $path");
-	$path2 = url_absolue($path);
+		$path2 = url_absolue($path);
+		$pp = defined('_DIR_PLUGIN_PORTE_PLUME');
+	}
+	$espace = strlen($smy)==2?' ':'';
+	$file = "$img.$ext";
+	list(,,,$size) = @getimagesize("$path/$file");
+	$tab['0']['0'][] = $espace.$smy;
+	// cs_code_echappement evite que le remplacement se fasse a l'interieur des attributs de la balise <img>
+	$tab[0][1][] = cs_code_echappement("$espace<img alt=\"$smy\" title=\"$smy\" class=\"no_image_filtrer format_$ext\" src=\"$path2/$file\" $size/>", 'SMILE');
+	$tab[0][2][] = $file;
+	$tab['racc'][] = $smy;
+	// pour le porte-plume
+	$tab[0][4]['smiley_'.$img] = $file;
+}
 
+// cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
+function smileys_installe_dist($tab = array(0 => array(), 'racc' => array())) {
 	// l'ordre des smileys ici est important :
 	//  - les doubles, puis les simples, puis les courts
 	//  - le raccourci insere par la balise #SMILEYS est la premiere occurence de chaque fichier
 	$smileys = array(
 	// attention ' est different de ’ (&#8217;) (SPIP utilise/ecrit ce dernier)
-	 ":&#8217;-))"=> 'pleure_de_rire.png',
-	 ":&#8217;-)"=> 'pleure_de_rire.png',
-	 ":&#8217;-D"	=> 'pleure_de_rire.png',
-	 ":&#8217;-("	=> 'triste.png',
+	 ":&#8217;-))"=> 'pleure_de_rire',
+	 ":&#8217;-)"=> 'pleure_de_rire',
+	 ":&#8217;-D"	=> 'pleure_de_rire',
+	 ":&#8217;-("	=> 'triste',
 	
 	// les doubles :
-	 ':-))'	=> 'mort_de_rire.png',
-	 ':))'	=> 'mort_de_rire.png',
-	 ":'-))"=> 'pleure_de_rire.png',
-	 ':-(('	=> 'en_colere.png',
+	 ':-))'	=> 'mort_de_rire',
+	 ':))'	=> 'mort_de_rire',
+	 ":'-))"=> 'pleure_de_rire',
+	 ':-(('	=> 'en_colere',
 
 	// les simples :
-	 ';-)'	=> 'clin_d-oeil.png',
-	 ':-)'	=> 'sourire.png',
-	 ':-D'	=> 'mort_de_rire.png',
-	 ":'-)"=> 'pleure_de_rire.png',
-	 ":'-D"	=> 'pleure_de_rire.png',
-	 ':-('	=> 'pas_content.png',
-	 ":'-("	=> 'triste.png',
-	 ':-&gt;' => 'diable.png',
-	 '|-)'	=> 'rouge.png',
-	 ':o)'	=> 'rigolo.png',
-	 'B-)'	=> 'lunettes.png',
-	 ':-P'	=> 'tire_la_langue.png',
-	 ':-p'	=> 'tire_la_langue.png',
-	 ':-|'	=> 'bof.png',
-	 ':-/'	=> 'mouais.png',
-	 ':-O'	=> 'surpris.png',
-	 ':-o'	=> 'surpris.png',
+	 ';-)'	=> 'clin_d-oeil',
+	 ':-)'	=> 'sourire',
+	 ':-D'	=> 'mort_de_rire',
+	 ":'-)"=> 'pleure_de_rire',
+	 ":'-D"	=> 'pleure_de_rire',
+	 ':-('	=> 'pas_content',
+	 ":'-("	=> 'triste',
+	 ':-&gt;' => 'diable',
+	 '|-)'	=> 'rouge',
+	 ':o)'	=> 'rigolo',
+	 'B-)'	=> 'lunettes',
+	 ':-P'	=> 'tire_la_langue',
+	 ':-p'	=> 'tire_la_langue',
+	 ':-|'	=> 'bof',
+	 ':-/'	=> 'mouais',
+	 ':-O'	=> 'surpris',
+	 ':-o'	=> 'surpris',
 
 	// les courts : tester a l'usage...
 	// attention : ils ne sont reconnus que s'il y a un espace avant !
-	 ':)'	=> 'sourire.png',
-	 ':('	=> 'pas_content.png',
-	 ';)'	=> 'clin_d-oeil.png',
-	 ':|'	=> 'bof.png',
-	 '|)'	=> 'rouge.png',
-	 ':/'	=> 'mouais.png',
+	 ':)'	=> 'sourire',
+	 ':('	=> 'pas_content',
+	 ';)'	=> 'clin_d-oeil',
+	 ':|'	=> 'bof',
+	 '|)'	=> 'rouge',
+	 ':/'	=> 'mouais',
 	);
 	
-	$aide = array();
-	foreach ($smileys as $smy=>$val) {
-		$espace = strlen($smy)==2?' ':'';
-		$smileys2[0][] = $espace.$smy;
-		list(,,,$size) = @getimagesize("$path/$val");
-		// cs_code_echappement evite que le remplacement se fasse a l'interieur des attributs de la balise <img>
-		$smileys2[1][] = cs_code_echappement($espace."<img alt=\"$smy\" title=\"$smy\" class=\"no_image_filtrer format_png\" src=\"$path2/$val\" $size/>", 'SMILE');
-		$smileys2[2][] = $val;
-		// aide : liste des smileys disponibles
-		$aide[] = $smy;
-	}
+	foreach ($smileys as $smy=>$val)
+		compile_smiley($tab, $smy, $val);
 
-	if(defined('_DIR_PLUGIN_PORTE_PLUME')) {
-		$sm = smileys_uniques($smileys2);
- 		$max = count($sm[2]);
-		for ($i=0; $i<$max; $i++)
-			$smileys2[4]['smiley_'.str_replace('.png','',$sm[2][$i])] = $sm[2][$i];
-	}
-	return array($smileys2, 'racc'=>$aide);
+	return $tab;
 }
 
 // liste des nouveaux raccourcis ajoutes par l'outil
@@ -142,7 +145,7 @@ function cs_smileys_PP_pre_charger($flux) {
 	$max = count($smileys[0]);
 	$r = array();
 	for ($i=0; $i<$max; $i++) {
-		$id = 'smiley_'.str_replace('.png','',$smileys[2][$i]);
+		$id = 'smiley_' . substr($smileys[2][$i], 0, strrpos($smileys[2][$i], '.'));
 		$r[] = array(
 				"id" => $id,
 				"name" => _T('couteau:pp_smileys_inserer', array('smiley'=>$smileys[0][$i])),

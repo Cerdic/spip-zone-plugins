@@ -683,8 +683,9 @@ function cs_optimise_if($code, $root=true) {
 }
 
 // lance la fonction d'installation de chaque outil actif, si elle existe.
-// la fonction doit etre ecrite sous la forme monoutil_installe() et placee
+// la fonction doit etre ecrite sous la forme monoutil_installe_dist() et placee
 // dans le fichier outils/monoutil.php
+// une surcharge de la fnction native est possible en ecrivant une fonction monoutil_installe() 
 function cs_installe_outils() {
 	global $metas_outils;
 	$datas = array();
