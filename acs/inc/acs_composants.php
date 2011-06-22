@@ -23,14 +23,19 @@ function composants($c) {
 
 	$nom = $c->T('nom');
 	if ($nom == $c->class.' nom') $nom = ucfirst($c->class);
+	
 	// Si le composant est instanciable, on affiche de quoi gérer l'instanciation
 	if ($c->instanciable)
 		$instances = '<td>'.instance_create($c).'</td><td>'.instance_select($c).'</td>';
 	else
 		$instances = '';
+
+	$help = $c->help();
+
 	// Affichage de la box de gestion du composant
 	$r .= acs_box(
-				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td>'.$instances.'<td>'.$over.'</td></tr></table>',
+				'<table width="100%"><tr><td width="99%">'.$nom.' '.$c->nic.'</td>'.$instances.'<td>'.$over.'</td>'.($help ? '<td>'.acs_help_call($c->class.'_help').'</td>' : '').'</tr></table>',
+	      ($help ? acs_help_div($c->class.'_help', $help) : '').
 				'<form id="acs" name="acs" action="?exec=acs&onglet=composants&composant='.$c->class.'" method="post">'.
 				$c->edit().
 				'<table width="100%"><td valign="bottom"><div style="text-align:'.$GLOBALS['spip_lang_right'].';">'.

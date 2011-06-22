@@ -55,7 +55,7 @@ Ce sont des <i>"noisettes"</i>, c\'est à dire des squelettes de blocs fonctionn
   'err_cache' => 'Impossible de lire ou d\'&eacute;crire dans le cache ACS',
 
   'onglet_adm_description' => 'Configuration d\'ACS',
-  'onglet_adm_info' => 'Choix du mod&egrave;le, gestion des droits, sauvegarder / restaurer.',
+  'onglet_adm_info' => 'Choix du jeu de composants et de squelettes, gestion des droits, sauvegarder / restaurer.',
   'onglet_adm_help' => '',
 
   'admins' => 'Administrateurs',

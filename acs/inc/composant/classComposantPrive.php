@@ -278,12 +278,22 @@ class AdminComposant {
 
 		if ($this->T('info') != str_replace('_', ' ', $this->class.' info'))
 			$r .= '<div class="onlinehelp" style="text-align: justify">'.$this->T('info').'</div><br />';
-			
-		if ($this->T('help') != str_replace('_', ' ', $this->class.'_help'))
-			$r .= '<div class="onlinehelp" onclick=\'$("#help_context").slideToggle("slow");\' style="cursor:pointer;"><img src="'._DIR_PLUGIN_ACS.'images/aide.gif" onmouseover=\'$("#help_context").slideToggle("slow");\' /> '._T('icone_aide_ligne').'</div><div id="help_context" class="onlinehelp pliable" style="text-align: justify">'.$this->T('help').'</div><br />';
 
 		$n = 999;
-		$r .= '<div class="onlinehelp">'.acs_plieur('plieur_pu'.$n, 'pu'.$n, '#', false, 'if (typeof done'.$n.' == \'undefined\') {AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->class.($this->nic ? '&nic='.$this->nic: '').'\',\'puAjax'.$n.'\'); done'.$n.' = true;}', _T('acs:dev_infos') ).'</div><div class="pu'.$n.' pliable">';
+		$r .= '<div class="onlinehelp">'.
+		acs_plieur('plieur_pu'.$n,
+		  'pu'.$n,
+		  '#',
+		  false,
+		  'if (typeof done'.$n.' == \'undefined\') {
+		    AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->class.($this->nic ? '&nic='.$this->nic: '').'\', \'puAjax'.$n.'\');
+		    done'.$n.' = true;
+      }',
+		  _T('acs:dev_infos')
+    ).
+    '</div>
+    <div class="pu'.$n.' pliable">';
+    
 		if (count($this->cvars))
 			$r .= '<br /><div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
 						'<div class="onlinehelplayer">'.$this->get_cvars_html().'</div>';
@@ -407,6 +417,17 @@ class AdminComposant {
 		$r .= '</td>';
 		$r .= '</tr></table>';
 		return $r;
+  }
+/**
+ * Méthode help: retourne l'aide d'une variable ou d'un composant
+ */
+  function help($var=NULL) {
+    $help_src = 'acs:'.$this->class.($var ? '_'.$var : '').'_help';
+    $help = _T($help_src);
+    if ($help != $this->class.($var ? ' '.$var : '').' help')
+      return $help;
+    else
+      return false;
   }
 /**
  * Méthode nextInstance: retourne un numéro d'instance de composant inutilisé

@@ -44,98 +44,88 @@ function instance_delete(msg) {
     return false;
 }
 
-$(document).ready(
+jQuery(document).ready(
 	function() {
-    acs_ecrire_init();
-    acs_ecrire_init_ajax(false);
-		onAjaxLoad(acs_ecrire_init_ajax);
+    acs_ecrire_init(false);
+		onAjaxLoad(acs_ecrire_init);
 	}
 );
 
-function acs_ecrire_init() {
-	if (detail() == "") {
-		$(".pliable").each(
-			function(i) {
-				$(this).hide();
-			}
-		);
-	}
-
-	// Retourne les infos sur la page avec le niveau de détail défini par le plieur 
-	// get page infos with detail level setted by plieur
-	$(".page_lien").each(
-		function(i,link) {
-			link.onclick = function(e) {
-				AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + mode_source(), "page_infos");
-				document.location.href = "#page_infos";
-				return false;
-			}
-		}
-	);
+function acs_ecrire_init(ajax) {
+  if (detail() != "&detail=2") {
+    jQuery(".pliable:not(.deplie)").each(function(i) {$(this).hide();});
+  }
+  if (ajax == false) { [(#REM) on document ready]
+  
+    [(#REM) Retourne les infos sur la page avec le niveau de détail défini par le plieur 
+            get page infos with detail level setted by plieur 
+    ]jQuery(".page_lien").each(
+      function(i,link) {
+        link.onclick = function(e) {
+          AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + mode_source(), "page_infos");
+          document.location.href = "#page_infos";
+          return false;
+        }
+      }
+    );
 
 [(#ENV{jquery_version}|=={1}|?{
    [(#INCLURE{javascript/acs_dragdrop.js})],
    [(#INCLURE{javascript/acs_dragdrop_for_older_jquery.js})]
 })]
+  }
+  else { [(#REM) on ajax load]
+    draw_ctlWidgets();
 
-}
-
-function acs_ecrire_init_ajax(ajax) {
-  if (ajax == null)
-    ajax=true;
-
-  acs_ecrire_init()
-
-  draw_ctlWidgets();
-
-  [(#REM) Donne leur fonction onclick aux plieurs (générique)]
-  $(".acs_plieur").each(
-    function(i, plieur) {
-      var cap = plieur.name.substr(7); //classe à plier
-      if ((typeof plieur.onclick) != "undefined") {
-        plieur.clic = plieur.onclick.toString();
-      }
-      plieur.onclick = function(e) {
-        e.preventDefault();
-        imgp = $(".imgp_" + cap).attr("src");
-        ploff = $(".imgoff_" + cap).attr("src");
-        plon = $(".imgon_" + cap).attr("src");
-        if (imgp == ploff)
-          $(".imgp_" + cap).attr("src", plon)
-        else
-          $(".imgp_" + cap).attr("src", ploff)
-        $("." + cap).each(
-          function(i, cap) {
-            $(cap).slideToggle("slow");
-          }
-        );
-        if ((typeof plieur.clic) != "undefined") {
-          if (!ajax) 
-            eval(plieur.clic + ";onclick(e);");
+    [(#REM) Donne leur fonction onclick aux plieurs (générique)]
+    jQuery(".acs_plieur").each(
+      function(i, plieur) {
+        var cap = plieur.name.substr(7); //classe à plier
+        if ((typeof plieur.onclick) != "undefined") {
+          plieur.clic = plieur.onclick.toString();
         }
-        return false;
+        plieur.onclick = function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          imgp = jQuery(".imgp_" + cap).attr("src");
+          ploff = jQuery(".imgoff_" + cap).attr("src");
+          plon = jQuery(".imgon_" + cap).attr("src");
+          if (imgp == ploff)
+            jQuery(".imgp_" + cap).attr("src", plon)
+          else
+            jQuery(".imgp_" + cap).attr("src", ploff)
+          jQuery("." + cap).each(
+            function(i, cap) {
+              jQuery(cap).slideToggle("slow");
+            }
+          );
+          if ((typeof plieur.clic) != "undefined") {
+              eval(plieur.clic + ";onclick(e);");
+          }
+          return false;
+        }
       }
-    }
-  );
-  
-  $("#mode_source").each(
-  function(i, link) {
-    link.onclick = function(e) {
-      AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=source", "page_infos");
-      document.location.href = "#page_infos";
-        return false;
-      }
-    }
-  );
-
-  $("#mode_schema").each(
+    );
+    
+    $("#mode_source").each(
     function(i, link) {
       link.onclick = function(e) {
-        AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=schema", "page_infos");
+        AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=source", "page_infos");
         document.location.href = "#page_infos";
-        return false;
+          return false;
+        }
       }
-    }
-  );
+    );
+  
+    $("#mode_schema").each(
+      function(i, link) {
+        link.onclick = function(e) {
+          AjaxSqueeze("?exec=acs_page_get_infos&pg=" + link.title + detail() + "&mode=schema", "page_infos");
+          document.location.href = "#page_infos";
+          return false;
+        }
+      }
+    );
+  }
 }
 

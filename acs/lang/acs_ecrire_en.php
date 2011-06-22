@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'err_cache' => 'Unable to read or write ACS cache',
 
   'onglet_adm_description' => 'Configuration',
-  'onglet_adm_info' => 'ACS model choice, administration, backup / restore.',
+  'onglet_adm_info' => 'ACS components set and templates choice, administration, backup / restore.',
   'onglet_adm_help' => '<b>Model</b>:<br />Model is a set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the model and/or its components. If more than one is needed, separator is ":"  between paths.
 <br />
 To use some components from an ACS model in your own SPIP templates, you need to fill in this field with your SPIP templates directory.
