@@ -52,9 +52,11 @@ jQuery(document).ready(
 );
 
 function acs_ecrire_init(ajax) {
-  if (detail() != "&detail=2") {
-    jQuery(".pliable:not(.deplie)").each(function(i) {$(this).hide();});
-  }
+  if (detail() != "&detail=2")
+    jQuery(".pliable").each(function(i) {jQuery(this).hide();});
+  else
+    jQuery(".pliable:not(.spip_params)").each(function(i) {jQuery(this).hide();});
+
   if (ajax == false) { [(#REM) on document ready]
   
     [(#REM) Retourne les infos sur la page avec le niveau de détail défini par le plieur 
