@@ -161,16 +161,16 @@ function compositions_decrire($type, $composition){
 }
 
 /**
- * Un filtre a utiliser sur [(#COMPOSITION|classe_composition{#ENV{type}})]
+ * Un filtre a utiliser sur [(#COMPOSITION|composition_class{#ENV{type}})]
  * pour poser des classes generiques sur le <body>
- * si une balise <class> est definie dans la composition c'est elle qui est appliquee
- * sinon on pose le nom de la composition comme classe
+ * si une balise <class>toto</class> est definie dans la composition c'est elle qui est appliquee
+ * sinon on pose simplement le nom de la composition
  * 
  * @param string $composition
  * @param string $type
  * @return string
  */
-function classe_composition($composition,$type){
+function composition_class($composition,$type){
 	if ($desc = compositions_decrire($type, $composition)
 		AND isset($desc['class'])
 		AND strlen($desc['class']))
