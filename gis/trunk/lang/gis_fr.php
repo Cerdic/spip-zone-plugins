@@ -66,13 +66,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"lat" => "Latitude",
 	"lon" => "Longitude",
 	
-	//T
+	// T
 	'titre_bloc_creer_point' => 'Lier un nouveau point',
 	'titre_bloc_points_lies' => 'Points liés',
 	'titre_bloc_rechercher_point' => 'Rechercher un point',
-	'titre_nombre_utilisation' => '@nb@ utilisation',
+	'titre_nombre_utilisation' => 'Une utilisation',
 	'titre_nombre_utilisations' => '@nb@ utilisations',
 	
+	// Z
 	"zoom" => "Zoom"
 		
 );

@@ -1,6 +1,10 @@
 <?php
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	//A
+	'aucun_gis' => 'No point',
+	'aucun_objet' => 'No object',
+
 	// B
 	'bouton_lier' => 'Link this point',
 	'bouton_supprimer_lien' => 'Remove this link',
@@ -45,6 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"icone_gis_tous" => "Geolocated points",
 	"info_numero_gis" => "Point number",
 	"info_id_objet" => "N&deg;",
+	"info_liste_gis_objet" => "Linked points to this object",
 	"info_liste_objets_gis" => "Objects attached to this point",
 	"info_objet" => "Object",
 	"info_supprimer_lien" => "Detach",
@@ -61,6 +66,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"lat" => "Latitude",
 	"lon" => "Longitude",
 	
+	// T
+	'titre_bloc_creer_point' => 'Link a new point',
+	'titre_bloc_points_lies' => 'Linked points',
+	'titre_bloc_rechercher_point' => 'Search for a point',
+	'titre_nombre_utilisation' => 'One use',
+	'titre_nombre_utilisations' => '@nb@ uses',
+
+	// Z
 	"zoom" => "Zoom"
 		
 );

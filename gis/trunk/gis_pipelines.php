@@ -108,6 +108,8 @@ function gis_post_edition($flux){
 			$id_document = $document['id_document'];
 			// on recupere les coords definies dans les exif du document s'il y en a
 			if ($exifs =  @exif_read_data($fichier,'GPS')) {
+				if(!function_exists('dms_to_dec'))
+					include_spip('gis_fonctions');
 				spip_log("GIS EXIFS : Récuperation des coordonnees du fichier $fichier","gis");
 				
 				$LatDeg = explode("/",$exifs["GPSLatitude"][0]);
