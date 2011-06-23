@@ -1,5 +1,14 @@
 Bannieres pour SPIP 2.0
 ------------------------
++ version 0.29
+----------------
+- Ajout de la Balise #BANNIERES
+- Redimendionnement automatique des bannières suivant les informations renseigné dans le formulaire de configuration 
+- Amélioration des performances
+
++ version 0.28
+----------------
+???
 
 + version 0.27
 ----------------

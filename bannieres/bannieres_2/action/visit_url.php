@@ -46,6 +46,6 @@ function action_visit_url() {
 			
 header("location:".$url);
 
-exit;
+exit();
 }
 ?>

@@ -31,6 +31,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_departement' => 'Choisir le d&eacute;partement',
 	'choix_pays' => 'Choisir le pays',
 	'choix_region' => 'Choisir la r&eacute;gion',
+	'config_legende_image' => 'Redimensionner les banni&egrave;res',
+	'config_libelle_hauteur' => 'Hauteur maximale',
+	'config_libelle_largeur' => 'Largeur maximale',
+	'config_libelle_pixels'	 => 'en pixels',
 	'confirm_supprimer' => '&Ecirc;tes vous s&ucirc;r de vouloir supprimer cette campagne ?',
 	'creation' => 'Date de cr&eacute;ation : ',
 
