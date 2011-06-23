@@ -65,7 +65,7 @@ function depublication_taches_generales_cron($taches) {
 function depublication_header_prive($flux) { 
 	
 	
-	if (ereg('^depublication_.*$',_request('exec'))) {
+	if (preg_match('"^depublication_.*$"',_request('exec'))) {
 
 		
 		$paramcss = array (

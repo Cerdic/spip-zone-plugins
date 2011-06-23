@@ -32,7 +32,7 @@ include_spip('inc/plugin');         // xml function
 include_spip('inc/date');
 
 // $id, $type = 'auteurs_infos'
-function inc_depublication_auteurs_dist($id, $flag, $statut='', $type= 'auteur_infos') {
+function inc_depublication_auteurs_dist($id, $flag='', $statut='', $type= 'auteur_infos') {
 	
 	global $spip_lang_left, $spip_lang_right, $options;
 
@@ -51,7 +51,7 @@ function inc_depublication_auteurs_dist($id, $flag, $statut='', $type= 'auteur_i
 	}
 	
 	
-		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?", $date, $regs)) {
+		if (preg_match("'([0-9]{4})-([0-9]{2})-([0-9]{2})( ([0-9]{2}):([0-9]{2}))?'", $date, $regs)) {
 			$annee = $regs[1];
 			$mois = $regs[2];
 			$jour = $regs[3];
