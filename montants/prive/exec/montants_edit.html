@@ -1,0 +1,10 @@
+
+[(#ENV{redirect}|sinon{#URL_ECRIRE{montants}}
+	|icone{<:icone_retour:>,[(#CHEMIN{images/montants_22.png})],left,rien.gif}
+)]
+
+<h1>[(#ENV{id_montant}|intval|?{<:montants:editer_montant:>,<:montants:creer_montant:>})]</h1>
+	
+<div class="ajax">
+[(#FORMULAIRE_EDITER_MONTANT{#ENV{id_montant,new},#ENV{redirect}})]
+</div>

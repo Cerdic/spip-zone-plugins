@@ -1,0 +1,36 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_montant formulaire_editer_montant-#ENV{id_groupe_mot,nouveau}'>
+	<!-- <br class='bugajaxie' /> -->
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <input type='hidden' name='id_montant' value='#ENV{id_montant}' />
+	  <ul>
+	   	  	[(#SAISIE{input,objet,obligatoire=oui,
+			label=<:montants:label_objet:>})]
+			
+	   
+	   	  	[(#SAISIE{input,prix_ht,obligatoire=oui,
+			label=<:montants:label_prix_ht:>})]
+			
+			[(#SAISIE{input,ids_objet,
+			explication=<:montants:explication_ids_objet:>,
+			label=<:montants:label_ids_objet:>})]
+			
+			[(#SAISIE{input,le_parent,
+			explication=<:montants:explication_le_parent:>,
+			label=<:montants:label_le_parent:>})]
+			
+			[(#SAISIE{input,taxe,
+			label=<:montants:label_taxe:>})]
+
+	  </ul>
+	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+	  <!--extra-->
+	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

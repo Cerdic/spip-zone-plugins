@@ -1,0 +1,52 @@
+<plugin>
+	<nom>Montants</nom>
+	<auteur>Anne-lise Martenot - elastick.net</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description>Ce plugin -grace au pipeline_prix- permet d'avoir un prix par defaut pour tout objet SPIP:
+	article, mot, document, rubrique... ou autre.On peut configurer la liste des identifiants ou du parent de la branche.
+    </description>
+	<categorie>divers</categorie>
+	<icon>images/montants-16.png</icon>
+	
+	<prefix>montants</prefix>
+	<install>base/montants_upgrade.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/montants.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/montants.php</inclure>
+	</pipeline>
+   	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>montants_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>prix</nom>
+		<inclure>montants_pipelines.php</inclure>
+	</pipeline>
+	<!-- afficher le bloc prix par defaut -->
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>montants_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>prix_ht</nom>
+		<inclure>montants_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='cfg_montants' parent="bando_configuration">
+		<titre>montants:montants_titre</titre>
+		<icone>images/montants_22.png</icone>
+		<url>montants</url>
+	</bouton>
+	
+	<necessite id="SPIP" version="[2.1.8;]" />
+    <necessite id="prix" version="[0.1;]" />
+    <traduire gestionnaire="salvatore" module="montants" reference="fr" />
+
+</plugin>

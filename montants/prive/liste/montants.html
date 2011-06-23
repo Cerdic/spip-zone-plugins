@@ -1,0 +1,40 @@
+<B_liste_montants>
+#ANCRE_PAGINATION
+<div class="liste-elements montants">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{objet,<:montants:liste_des_montants:>})</strong></caption>]
+	<thead>
+	<tr>
+		<th><:montants:label_objet:></th>
+		<th><:montants:label_prix_ht:></th>
+		<th><:montants:label_parent:></th>
+		<th></th>
+		
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_montants(MONTANTS){pagination 10}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="#EDIT{objet}">#OBJET</td>
+			<td>#PRIX_HT</td>
+			<td><a href="[(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique,#LE_PARENT})]" title="#INFO_TITRE{rubrique, #LE_PARENT}">#LE_PARENT</a></td>
+			<td>
+				[(#AUTORISER{modifier,montant}|oui)
+					<a href="[(#URL_ECRIRE{montants_edit}|parametre_url{id_montant,#ID_MONTANT}|parametre_url{redirect,#SELF})]">
+						<:montants:action_editer:>
+					</a> | 
+					[(#BOUTON_ACTION{
+						<:montants:action_supprimer:>,
+						#URL_ACTION_AUTEUR{supprimer_montant,-#ID_MONTANT,#SELF}}
+					)]			
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_montants>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_montants>[
+<div class="liste-elements montants"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_montants>

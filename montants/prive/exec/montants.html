@@ -1,0 +1,21 @@
+[(#AUTORISER{configurer,plugins})
+	<h1><:montants:configurer_montants:></h1>
+	
+	<div class="ajax">
+	[(#INCLURE{fond=prive/liste/montants, env})]
+	</div>
+	
+
+	
+	[(#AUTORISER{modifier,montant}|oui)
+		[(#URL_ECRIRE{montants_edit}
+			|parametre_url{id_montant,new}
+			|parametre_url{redirect,#SELF}
+			|icone{
+				<:montants:action_creer_nouveau_montant:>,
+				[(#CHEMIN{images/montants_22.png})],
+				right,creer.gif}
+		)]
+	]
+
+]
