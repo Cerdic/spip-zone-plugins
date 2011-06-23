@@ -8,6 +8,7 @@
 	<description>
 	<multi>[fr]Ce plugin permet d'activer les forums publics uniquement sur un secteur du site. Tous les nouveaux articles cr&eacute;&eacute;s dans ce secteur se verront attribuer le type de forum d&eacute;fini dans la configuration du plugin. Evidemment ce plugin n'a un int&eacute;r&egrave;t que si les forums sont d&eacute;sactiv&eacute;s dans la configuration g&eacute;n&eacute;rale du site.</multi>
 	</description>
+	<lien>http://www.spip-contrib.net/Forum-sectorise</lien>
 	<icon>images/forumsectorise-32.png</icon>
 	<lien></lien>
 	<prefix>forumsectorise</prefix>
