@@ -2,8 +2,15 @@
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_ARTICLE_PDF',(_DIR_PLUGINS.end($p)));
 
+	function pdf_first_clean_prepropre($texte){
+		// Cette fonction est appelé avant propre.
+		$texte = preg_replace ('#(<code class=(\'|")([\w]+)(\'|")>)#','<code>',$texte);	// si on a coloration code, on décolorie d'abord
+		return propre($texte);
+		 	
+	}
 	function pdf_first_clean($texte)
 	{
+			// Cette focntion est appelé après la fonction propre
 			// $texte = ereg_replace("<p class[^>]*>", "<P>", $texte);
 			//Translation des codes iso
 			// PB avec l'utilisation de <code>
