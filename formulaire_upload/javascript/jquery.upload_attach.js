@@ -36,7 +36,7 @@ if(window.jQuery)
 		
 			// si multifile est la, on l'utilise (trop bien)
 			if ($.fn.MultiFile)
-			$('form input[@type=file]',self).MultiFile({
+			$('form input[type=file]',self).MultiFile({
 				max: 5,
 				STRING: {'remove': 'x', 'selected': '$file'}
 			});

@@ -10,7 +10,7 @@
 	'cfg_inf_insert_code' => 'Afficher le code d\'insertion des documents (si on a un autre formulaire pour cr&eacute;er des articles par exemple)',
 	'cfg_inf_files_number' => 'L\'utilisateur ne pourra uploader que ce nombre de fichiers au maximum',
 	'cfg_titre_formupload' => 'Formulaire upload',
-	'choosefiles' => 'Choisir les fichiers à ajouter&nbsp;:',
+	'choosefiles' => 'Choisir les fichiers &agrave; ajouter&nbsp;:',
 	'nodocs' => 'Pas encore de document sur la zone de t&eacute;l&eacute;chargement',
 	'insert_code' => 'Code &agrave; ins&eacute;rer dans la zone de texte&nbsp;:',
 	'doc_delete' => 'Supprimer ce document',
