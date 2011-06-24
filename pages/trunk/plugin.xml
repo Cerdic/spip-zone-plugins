@@ -6,10 +6,10 @@
  		RastaPopoulos - Distribu&#233; sous licence GPL
 	</auteur>
 	<version>
-		1.0.0-dev
+		1.0.0
 	</version>
 	<etat>
-		dev
+		stable
 	</etat>
 	<icon>
 		images/page-128.png

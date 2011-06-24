@@ -159,7 +159,7 @@ function pages_pre_edition_ajouter_page($flux){
  */
 function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
-		if ($flux['args']['row']['page'] == ''){
+		if (sql_getfetsel('page', 'spip_articles', 'id_article='. $flux['args']['id']) == ''){
 			$flux['data'] .= '<div>
 				<a href="'.parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page').'" class="cellule-h">
 					<img src="'.find_in_path('images/page-24.png').'" style="vertical-align:middle;" alt="" />
