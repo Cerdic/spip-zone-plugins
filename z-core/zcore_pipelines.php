@@ -141,9 +141,18 @@ function balise_SI_PAGE_dist($p) {
 }
 }
 
+/** 
+ * balise #CSS
+ * 
+ */
 function balise_CSS_dist($p) {
 	$_css = interprete_argument_balise(1,$p);
-	$p->code = "direction_css(find_in_path($_css))";
+	if (!$_css) {
+		$msg = array('zbug_balise_sans_argument',	array('balise' => ' CSS'));
+		erreur_squelette($msg, $p);
+	} else {
+		$p->code = "direction_css(find_in_path($_css))";
+	}
 	$p->interdire_scripts = false;
 	return $p;
 }
