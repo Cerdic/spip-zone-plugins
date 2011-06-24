@@ -6,10 +6,10 @@
  		RastaPopoulos - Distribu&#233; sous licence GPL
 	</auteur>
 	<version>
-		0.3.6
+		1.0.0-dev
 	</version>
 	<etat>
-		test
+		dev
 	</etat>
 	<icon>
 		images/page-128.png
@@ -32,7 +32,7 @@ This allows the creation of pages of legal information, about, contact, etc..
 	<prefix> 
 		pages
 	</prefix>
-	<necessite id='SPIP' version='[2.0.0;]' /> 
+	<necessite id='SPIP' version='[3.0.0-dev;]' /> 
 	
 	<install>base/pages_installation.php</install>
 	<version_base>1.0</version_base>
@@ -49,12 +49,12 @@ This allows the creation of pages of legal information, about, contact, etc..
 	<bouton id='page_creer' parent="outils_rapides">
 		<icone>images/page-new-16.png</icone>
 		<titre>pages:creer_page</titre>
-		<url>articles_edit</url>
-		<args>new=oui&amp;type=page&amp;id_rubrique=-1</args>
+		<url>article_edit</url>
+		<args>new=oui&amp;modele=page&amp;id_rubrique=-1</args>
 	</bouton>
 	
 	<pipeline>
-		<nom>declarer_tables_principales</nom>
+		<nom>declarer_tables_objets_sql</nom>
 		<inclure>base/pages_tables.php</inclure>
 	</pipeline>
 	
@@ -63,6 +63,7 @@ This allows the creation of pages of legal information, about, contact, etc..
 		<action>affiche_milieu_ajouter_page</action>
 		<inclure>pages_pipelines.php</inclure>
 	</pipeline>
+	
 	<pipeline>
 		<nom>boite_infos</nom>
 		<inclure>pages_pipelines.php</inclure>
@@ -88,5 +89,6 @@ This allows the creation of pages of legal information, about, contact, etc..
 		<action>pre_edition_ajouter_page</action>
 		<inclure>pages_pipelines.php</inclure>
 	</pipeline>
+	
 	<categorie>divers</categorie>
 </plugin>

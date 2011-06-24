@@ -12,11 +12,10 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Change l'entête du formulaire des articles pour montrer que c'est une page
 function pages_affiche_milieu_ajouter_page($flux){
 
-	if ($flux['args']['exec'] == 'articles_edit'){
-	
-		find_in_path('abstract_sql', 'base/', true);
+	if ($flux['args']['exec'] == 'article_edit'){
+		include_spip('base/abstract_sql');
 		if (
-			_request('type') == 'page'
+			_request('modele') == 'page'
 			or
 			(
 				($id_article = $flux['args']['id_article']) > 0
@@ -27,17 +26,17 @@ function pages_affiche_milieu_ajouter_page($flux){
 		{
 			
 			// On cherche et remplace l'entete de la page : "modifier la page"
-			$cherche = "/(<div[^>]*class=('|\")entete-formulaire.*?<\/a>).*?(<h1>.*?<\/h1>.*?<\/div>)/is";
+			$cherche = "/(<div[^>]*class=('|\")entete-formulaire.*?<\/span>).*?(<h1>.*?<\/h1>.*?<\/div>)/is";
 			$surtitre = _T('pages:modifier_page');
 			$remplace = "$1$surtitre$3";
 			$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
 			
 			// Si c'est une nouvelle page, on remplace le lien de retour dans l'entete
 			if (_request('new') == 'oui'){
-			
-				$cherche = "/(<a[^>]*class=('|\")icone36[^>]*?href=('|\"))[^'\"]*(('|\").*?<\/a>)/is";
+				$cherche = "/(<span[^>]*class=(?:'|\")icone[^'\"]*retour[^'\"]*(?:'|\")>"
+				         . "<a[^>]*href=(?:'|\"))[^'\"]*('|\")/is";
 				$retour = generer_url_ecrire("pages_tous");
-				$remplace = "$1$retour$4";
+				$remplace = "$1$retour$2";
 				$flux['data'] = preg_replace($cherche, $remplace, $flux['data']);
 			
 			}
@@ -57,9 +56,9 @@ function pages_formulaire_charger($flux){
 	// Si on est dans l'édition d'un article
 	if (is_array($flux) and $flux['args']['form'] == 'editer_article'){
 	
-		// Si on est dans un article de type page
-		if (_request('type') == 'page' or ($flux['data']['page'] and _request('type') != 'article')){
-			$flux['data']['type'] = 'page';
+		// Si on est dans un article de modele page
+		if (_request('modele') == 'page' or ($flux['data']['page'] and _request('modele') != 'article')){
+			$flux['data']['modele'] = 'page';
 			$flux['data']['champ_page'] = $flux['data']['page'];
 		}
 		unset($flux['data']['page']);
@@ -77,11 +76,11 @@ function pages_formulaire_verifier($flux){
 	if (is_array($flux) and $flux['args']['form'] == 'editer_article'){
 	
 		// Si on est dans un article de type page mais que le champ "page" est vide
-		if (_request('type') == 'page' and !_request('champ_page'))
+		if (_request('modele') == 'page' and !_request('champ_page'))
 			$flux['data']['champ_page'] .= _T('info_obligatoire');
 	
 	}
-	
+
 	return $flux;
 
 }
@@ -93,14 +92,14 @@ function pages_editer_contenu_objet($flux){
 	$args = $flux['args'];
 	$erreurs = $args['contexte']['erreurs'];
 	
-	if ($args['type'] == 'article' and $args['contexte']['type'] == 'page'){
+	if ($args['type'] == 'article' and $args['contexte']['modele'] == 'page'){
 	
 		// On cherche et remplace l'édition de la rubrique
-		$cherche = "/<li[^>]*class=('|\")editer_parent.*?<\/li>/is";
+		$cherche = "/<li[^>]*class=('|\")editer editer_parent.*?<\/li>/is";
 		$remplace = '<li class="editer_page obligatoire'.($erreurs['champ_page'] ? ' erreur' : '').'">';
 		$remplace .= '<input type="hidden" name="id_parent" value="-1" />';
 		$remplace .= '<input type="hidden" name="id_rubrique" value="-1" />';
-		$remplace .= '<input type="hidden" name="type" value="page" />';
+		$remplace .= '<input type="hidden" name="modele" value="page" />';
     	$remplace .= '<label for="id_page">'._T('pages:titre_page').'</label>';
     	if ($erreurs['champ_page'])
     		$remplace .= '<span class="erreur_message">'.$erreurs['champ_page'].'</span>';
@@ -162,7 +161,7 @@ function pages_boite_infos($flux){
 	if ($flux['args']['type'] == 'article' and autoriser('modifier', 'article', $flux['args']['id'])){
 		if ($flux['args']['row']['page'] == ''){
 			$flux['data'] .= '<div>
-				<a href="'.parametre_url(parametre_url(generer_url_ecrire('articles_edit'), 'id_article', $flux['args']['id']), 'type', 'page').'" class="cellule-h">
+				<a href="'.parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'page').'" class="cellule-h">
 					<img src="'.find_in_path('images/page-24.png').'" style="vertical-align:middle;" alt="" />
 					<span style="vertical-align:middle;">'._T('pages:convertir_page').'</span>
 				</a>
@@ -170,7 +169,7 @@ function pages_boite_infos($flux){
 		}
 		else{
 			$flux['data'] .= '<div>
-				<a href="'.parametre_url(parametre_url(generer_url_ecrire('articles_edit'), 'id_article', $flux['args']['id']), 'type', 'article').'" class="cellule-h">
+				<a href="'.parametre_url(parametre_url(generer_url_ecrire('article_edit'), 'id_article', $flux['args']['id']), 'modele', 'article').'" class="cellule-h">
 					<img src="'.find_in_path('images/article-24.gif').'" style="vertical-align:middle;" alt="" />
 					<span style="vertical-align:middle;">'._T('pages:convertir_article').'</span>
 				</a>
