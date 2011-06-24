@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_espace_public' => 'Use multilang in the public space',
 	'cfg_lbl_evenement' => 'of the events',
 	'cfg_lbl_formstables' => 'of forms&tables',
+	'cfg_lbl_gis' => 'of the geolocated points',
 	'cfg_lbl_motcle' => 'of the keywords',
 	'cfg_lbl_rubrique' => 'of the sections',
 	'cfg_lbl_site' => 'of the websites',

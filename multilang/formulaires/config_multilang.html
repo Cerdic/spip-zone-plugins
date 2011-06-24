@@ -22,11 +22,11 @@
                   )]
                   [(#SAISIE{oui_non,article,
                      label=<:multilang:cfg_lbl_article:>,
-                     defaut=off}
+                     defaut=''}
                   )]
                   [(#SAISIE{oui_non,breve,
                      label=<:multilang:cfg_lbl_breve:>,
-                     defaut=off}
+                     defaut=''}
                   )]
                   [(#SAISIE{oui_non,rubrique,
                      label=<:multilang:cfg_lbl_rubrique:>,
@@ -42,16 +42,22 @@
                   )]
                   [(#SAISIE{oui_non,motcle,
                      label=<:multilang:cfg_lbl_motcle:>,
-                     defaut=off}
+                     defaut=''}
                   )]
                   [(#SAISIE{oui_non,site,
                      label=<:multilang:cfg_lbl_site:>,
-                     defaut=off}
+                     defaut=''}
                   )]
 				  [(#PLUGIN{agenda}|oui)
 					  [(#SAISIE{oui_non,evenement,
 	                     label=<:multilang:cfg_lbl_evenement:>,
-	                     defaut=off}
+	                     defaut=''}
+	                  )]
+				  ]
+				  [(#PLUGIN{gis}|oui)
+					  [(#SAISIE{oui_non,gis,
+	                     label=<:multilang:cfg_lbl_gis:>,
+	                     defaut=''}
 	                  )]
 				  ]
 				  [(#SAISIE{oui_non,multilang_public,

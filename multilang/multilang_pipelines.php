@@ -93,6 +93,9 @@ function multilang_inserer_head($config=array()){
 		if($config['motcle']) { // Mots
 			$root .= ',div.formulaire_editer_mot,div.formulaire_editer_groupe_mot';
 		}
+		if($config['gis']) { // GIS
+			$root .= ',div.formulaire_editer_gis';
+		}
 
 		// Docs traites a part dans pages d'edition d'articles et de rubriques
 		if($config['document']){
@@ -125,7 +128,7 @@ function multilang_inserer_head($config=array()){
 	jQuery(document).ready(function(){
 		function multilang_init(){
 			var root = "'.$root.'";
-			var fields_selector = "textarea:not(textarea#adresses_secondaires),input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,*.nomulti),.multilang";
+			var fields_selector = "textarea:not(textarea#adresses_secondaires),input:text:not(input#new_login,input#email,#titreparent,input.date,input.heure,input#largeur,input#hauteur,.ac_input,#url_syndic,#url_auto,#champ_geocoder,#champ_lat,#champ_lon,#champ_zoom,*.nomulti),.multilang";
 			// on exclue aussi les form d upload (Pour les vignettes de docs, logos...)
 			var forms_selector = "form[class!=\'form_upload\'][class!=\'form_upload_icon\']";
 			// Les div qui ont un formulaire de classe multilang (pour accélérer la recherche dans le DOM,
@@ -174,6 +177,9 @@ function multilang_affichage_final($flux){
 			}
 			if($config['motcle']) { // Mots
 				$root .= ',input[type=hidden][name*=name_][value|=mot]:not(input[value|=mot-logo])';
+			}
+			if($config['gis']) { // GIS
+				$root .= ',input[type=hidden][name*=name_][value|=gis]:not(input[value|=gis-logo])';
 			}
 			$flux .= '
 		var crayons_multilang_init = function(){
