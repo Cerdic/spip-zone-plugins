@@ -1,0 +1,92 @@
+<plugin>
+	<nom>
+		<multi>[fr]Pages[en]Pages[ar]&#1589;&#1601;&#1581;&#1575;&#1578;</multi>
+	</nom>
+	<auteur>
+ 		RastaPopoulos - Distribu&#233; sous licence GPL
+	</auteur>
+	<version>
+		0.3.6
+	</version>
+	<etat>
+		test
+	</etat>
+	<icon>
+		images/page-128.png
+	</icon>
+	<description><multi>
+[fr]
+Ce plugin permet de cr&#233;er des pages d'articles qui ne sont reli&#233;es &#224; aucune hi&#233;rarchie particuli&#232;re. En revanche elles peuvent &#234;tre associ&#233;es &#224; un nom de squelette.
+
+Cela permet notamment de cr&#233;er des pages de notice l&#233;gale, d'&#224;-propos, de contact, etc.
+[en]
+This plugin allows you to create pages of articles that are not linked to any particular hierarchy. However they may be associated with a name template.
+
+This allows the creation of pages of legal information, about, contact, etc..
+[ar]
+&#1607;&#1584;&#1575; &#1575;&#1604;&#1576;&#1585;&#1606;&#1575;&#1605;&#1580; &#1575;&#1604;&#1605;&#1587;&#1575;&#1593;&#1583; &#1610;&#1587;&#1605;&#1581; &#1604;&#1603; &#1573;&#1606;&#1588;&#1575;&#1569; &#1589;&#1601;&#1581;&#1575;&#1578; &#1605;&#1606; &#1575;&#1604;&#1576;&#1606;&#1608;&#1583; &#1575;&#1604;&#1578;&#1610; &#1604;&#1575; &#1578;&#1585;&#1578;&#1576;&#1591; &#1576;&#1571;&#1610; &#1578;&#1587;&#1604;&#1587;&#1604; &#1605;&#1593;&#1610;&#1606;&#46; &#1576;&#1610;&#1583; &#1571;&#1606;&#1607;&#1575; &#1602;&#1583; &#1578;&#1578;&#1585;&#1575;&#1601;&#1602; &#1605;&#1593; &#1575;&#1587;&#1605; &#1575;&#1604;&#1602;&#1575;&#1604;&#1576;
+&#1610;&#1571;&#1584;&#1606; &#1604;&#1604;&#1573;&#1606;&#1588;&#1575;&#1569; &#1589;&#1601;&#1581;&#1577; &#1605;&#1606; &#1575;&#1604;&#1605;&#1593;&#1604;&#1608;&#1605;&#1575;&#1578; &#1575;&#1604;&#1602;&#1575;&#1606;&#1608;&#1606;&#1610;&#1577; &#1548; &#1605;&#1606; &#1606;&#1581;&#1606; &#1548; &#1575;&#1578;&#1589;&#1575;&#1604; &#1548; &#1608;&#1605;&#1575; &#1573;&#1604;&#1609; &#1584;&#1604;&#1603;&#46;
+</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-Pages-uniques</lien>
+	<prefix> 
+		pages
+	</prefix>
+	<necessite id='SPIP' version='[2.0.0;]' /> 
+	
+	<install>base/pages_installation.php</install>
+	<version_base>1.0</version_base>
+		
+	<bouton id='pages_tous' parent='naviguer'>
+		<icone>images/page-24.png</icone>
+		<titre>pages:pages_uniques</titre>
+	</bouton>
+	<bouton id='bando_pages_tous' parent='bando_edition'>
+		<url>pages_tous</url>
+		<icone>images/page-16.png</icone>
+		<titre>pages:pages_uniques</titre>
+	</bouton>
+	<bouton id='page_creer' parent="outils_rapides">
+		<icone>images/page-new-16.png</icone>
+		<titre>pages:creer_page</titre>
+		<url>articles_edit</url>
+		<args>new=oui&amp;type=page&amp;id_rubrique=-1</args>
+	</bouton>
+	
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/pages_tables.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu_ajouter_page</action>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
+		<nom>pre_edition</nom>
+		<action>pre_edition_ajouter_page</action>
+		<inclure>pages_pipelines.php</inclure>
+	</pipeline>
+	<categorie>divers</categorie>
+</plugin>
