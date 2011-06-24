@@ -50,10 +50,13 @@ function balise_PRIX_dist($p) {
  * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
  */
 function prix_formater($prix){
+	//si negatif
+	if($prix<0) $negatif=true;
 	// On formate d'abord le montant suivant les conventions du pays
 	setlocale(LC_MONETARY, 'fr_FR');
 	//$prix = money_format('%i', $prix); // 1 234,57 EUR
-	$prix = money_format('%!n &euro;', $prix); // 1 234,57 � (rendu utf8 = €)
+	$prix = money_format('%!n &euro;', $prix); // 1 234,57 €
+	if($negatif) $prix="-".str_replace(array('-','(',')'),'',$prix);
 	return $prix;
 }
 
