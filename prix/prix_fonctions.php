@@ -52,12 +52,8 @@ function balise_PRIX_dist($p) {
 function prix_formater($prix){
 	// On formate d'abord le montant suivant les conventions du pays
 	setlocale(LC_MONETARY, 'fr_FR');
-	$prix = money_format('%i', $prix);
-	
-	// Ensuite on ajoute la devise
-	$prix .= '&nbsp;€';
-	
-	// Fini
+	//$prix = money_format('%i', $prix); // 1 234,57 EUR
+	$prix = money_format('%!n &euro;', $prix); // 1 234,57 � (rendu utf8 = €)
 	return $prix;
 }
 
