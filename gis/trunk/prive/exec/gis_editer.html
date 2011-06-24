@@ -21,6 +21,7 @@
 		<p>[(#ENV{id_gis})]</p>
 	</div>
 </div>
+[(#ENV**{id_gis}|gis_form_logo)]
 [(#INCLURE{fond=prive/navigation/gis_editer,ajax,env})]
 ]
 <!--/#navigation-->

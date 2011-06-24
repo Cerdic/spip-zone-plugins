@@ -64,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_region" => "R&eacute;gion",
 	"label_ville" => "Ville",
 	"lat" => "Latitude",
+	"libelle_logo_gis" => "LOGO DU POINT",
 	"lon" => "Longitude",
 	
 	// T
