@@ -1,15 +1,18 @@
 <?php
 
 function telepathe($contenu=null, $type=null) {
-	static $t;
+	static $id = ' ';
+	static $t = array();
 
 	// id = initialisation
-	if ($type == 'id')
-		$t = array();
+	if ($type == 'id') {
+		$id = $contenu;
+		$t[$id] = array();
+	}
 
 	// autre, remplir
 	if (!is_null($type)
-	AND is_array($t)) {
+	AND is_array($t[$id])) {
 
 		# un pipeline qui permet de traiter tout le contenu a envoyer,
 		# par exemple pour recoder les URLs des liens
@@ -20,13 +23,13 @@ function telepathe($contenu=null, $type=null) {
 		preg_match(',^(.*?)([\*\+])?$,S', $type, $r);
 		switch($r[2]) {
 			case '':
-				$t[$r[1]] = $contenu;
+				$t[$id][$r[1]] = $contenu;
 				break;
 			case '*':
-				$t[$r[1]][] = $contenu;
+				$t[$id][$r[1]][] = $contenu;
 				break;
 			case '+':
-				$t[$r[1]] .= $contenu;
+				$t[$id][$r[1]] .= $contenu;
 				break;
 		}
 		return "<dt>$type</dt>\n<dd>".safehtml(filtre_print($contenu))."</dd>";
@@ -40,8 +43,7 @@ function telepathe($contenu=null, $type=null) {
 
 function telepathe_formater($html) {
 
-	$v = telepathe();
-	$r = array($v['id'] => $v);
+	$r = telepathe();
 
 	switch (_request('format')) {
 		case 'json':
