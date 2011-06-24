@@ -5,6 +5,7 @@
 	function pdf_first_clean_prepropre($texte){
 		// Cette fonction est appelé avant propre.
 		$texte = preg_replace ('#(<code class=(\'|")([\w]+)(\'|")>)#','<code>',$texte);	// si on a coloration code, on décolorie d'abord
+		$texte = preg_replace ('#(<cadre class=(\'|")([\w]+)(\'|")>)#','<cadre>',$texte);
 		return propre($texte);
 		 	
 	}
