@@ -41,10 +41,7 @@ function formulaires_editer_produit_saisies($id_produit='new', $id_rubrique=0, $
 				'defaut' => 0,
 			),
 			'verifier' => array(
-				'type' => 'decimal',
-				'options' => array(
-					'min' => 0
-				)
+				'type' => 'decimal'
 			)
 		),
 		array(

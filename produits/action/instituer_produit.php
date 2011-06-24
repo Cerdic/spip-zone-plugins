@@ -3,6 +3,7 @@
 // Sécurité
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
+// exemple #URL_ACTION_AUTEUR{instituer_produit, #ID_PRODUIT-prop, #SELF}
 function action_instituer_produit_dist($arg=null) {
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
