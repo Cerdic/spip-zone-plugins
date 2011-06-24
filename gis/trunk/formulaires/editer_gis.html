@@ -59,9 +59,23 @@ var geocoder;]
 		geocoder = new mxn.Geocoder('#CONFIG{gis/api,openlayers}',geocode);]
 		
 		[(#ENV{lat}|oui)
-		point = new mxn.LatLonPoint([(#ENV{lat})],[(#ENV{lon})]);
-		marker = new mxn.Marker(point);
-		form_map.addMarker(marker);]
+		var data = {
+			"type": "FeatureCollection",
+			"features": [(#VAL{91}|chr)]
+				{"type": "Feature",
+					"geometry": {"type": "Point", "coordinates": [(#VAL{91}|chr)]#LON, #LAT[(#VAL{93}|chr)]},
+					"id":"#ID_GIS",
+					"title":[(#TITRE|supprimer_numero|json_encode)],
+					"description":[(#DESCRIPTIF|json_encode)][,(#LOGO_GIS|oui)
+					[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]
+					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
+					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
+					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
+					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]]
+				}[(#VAL{93}|chr)]
+		}
+		form_map.addJSON(data);
+		]
 		
 		// mettre a jour les coordonnees quand on clique la carte
 		form_map.click.addHandler(function(name, source, args) {
