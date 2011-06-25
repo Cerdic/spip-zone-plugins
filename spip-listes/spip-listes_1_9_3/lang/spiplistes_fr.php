@@ -231,6 +231,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'sujet_courrier' => '<strong>Sujet du courrier</strong> [obligatoire]'
 , 'texte_courrier' => '<strong>Texte du courrier</strong> (HTML autoris&#233;)'
 , 'avec_patron_pied__' => 'Avec le patron de pied : '
+, 'icone_creation_courrier' => 'Cr&#233;er un nouveau courrier'
 
 // exec/spiplistes_courrier_gerer.php
 , 'erreur_adresse_email_invalide' => 'Erreur: l&#8217;adresse email que vous avez fournie n&#8217;est pas valide'
