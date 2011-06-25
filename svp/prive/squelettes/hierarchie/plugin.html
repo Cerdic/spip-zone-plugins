@@ -1,0 +1,16 @@
+[(#REM) <!-- hierarchie specifique pour le plugin :
+	- Lien parent vers la page des depots
+	- Nom du plugin expose
+--> ]
+
+<B_plugin>
+<div id="chemin">
+	<a href="[(#URL_ECRIRE{#VAL{depot}|objet_info{table_objet}})]">
+		[(#VAL{depot}|objet_info{texte_objets}|_T)]
+	</a>
+<BOUCLE_plugin(PLUGINS) {id_plugin}>
+	&gt;
+	<strong class="on">#NOM</strong>
+</BOUCLE_plugin>
+</div>
+</B_plugin>

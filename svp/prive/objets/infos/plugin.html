@@ -1,0 +1,39 @@
+<BOUCLE_infos_plugin(PLUGINS) {id_plugin=#ENV{id}}>
+<div class="infos">
+	[(#REM) <!-- La reference du depot --> ]
+	#SET{titre_info, #ENV{type}|objet_info{texte_objet}|_T}
+	<div class="numero">
+		<:titre_cadre_numero_objet{objet=#GET{titre_info}}:>
+		<p>#ID_PLUGIN</p>
+	</div>
+	
+	[(#REM) <!-- Les informations sur la version la plus a jour --> ]
+	<B_vmax>
+	<div class="liste versions">
+		<ul class="liste-items">
+	<BOUCLE_vmax(PAQUETS) {id_plugin}{!par version}{0,1}>
+			<li><p><:svp:label_derniere_modif:></p></li>
+			<li>[(#DATE_MODIF|affdate), [(#DATE_MODIF|affdate{H:i})]]</li>
+			<li>[<:svp:label_version:> <strong>(#VERSION)</strong>]</li>
+			[<li><:svp:label_version_base:> (#VERSION_BASE)</li>]
+	</BOUCLE_vmax>
+		</ul>
+	</div>
+	</B_vmax>
+
+	[(#REM) <!-- Le nombre de paquets du plugin --> ]
+	<div class="liste compteurs">
+		<ul class="liste-items">
+		<BOUCLE_nbr_paquets(PAQUETS) {id_plugin}> </BOUCLE_nbr_paquets>
+			<li>[(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]</li>
+		</B_nbr_paquets>
+		</ul>
+	</div>
+	
+	[(#REM) <!-- Le bouton d'affichage de la page publique du plugin --> ]
+	[(#VAL{redirect}
+		|generer_url_action{type=plugin&id=#ID_PLUGIN}
+		|parametre_url{var_mode, calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>, racine})]
+</div>
+</BOUCLE_infos_plugin>

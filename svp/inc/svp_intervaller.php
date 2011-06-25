@@ -68,6 +68,8 @@ function contruire_intervalle($bornes, $dtd='paquet') {
 
 
 function compiler_branches_spip($intervalle) {
+	include_spip('plugins/installer');
+
 	global $infos_branches_spip;
 	$liste_branches_spip = array_keys($GLOBALS['infos_branches_spip']);
 		
@@ -103,6 +105,8 @@ function compiler_branches_spip($intervalle) {
 	}
 	
 	// -- on initialise la branche sup de l'intervalle que l'on va preciser ensuite
+	// HACK !!!!! on traite le cas particulier 3.1.0 tant que 3.0.* n'est pas utilisable
+	$borne_sup = $borne_sup=='3.1.0' ? _SVP_VERSION_SPIP_MAX : $borne_sup;
 	$t = explode('.', $borne_sup);
 	$branche_sup = $t[0] . '.' . $t[1];
 	// -- pour eviter toutes erreur fatale on verifie que la branche est bien dans la liste des possibles

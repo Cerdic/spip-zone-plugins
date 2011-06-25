@@ -3,7 +3,6 @@
 // Declaration des tables pourles nouveaux objets de SVP:
 // - depot : table spip_depots
 // - plugin : table spip_plugins
-// - paquet : table spip_paquets
 //
 function svp_declarer_tables_objets_sql($tables) {
 
@@ -28,7 +27,7 @@ function svp_declarer_tables_objets_sql($tables) {
 			"maj"			=> "timestamp"),
 		'key'					=> array(
 			"PRIMARY KEY"	=> "id_depot"),
-		'tables_jointures'		=> 'depots_plugins',
+		'tables_jointures'		=> array('id_plugin' => 'depots_plugins'),
 		'principale'			=> 'oui',
 
 		// Titre, date et gestion du statut
@@ -56,59 +55,64 @@ function svp_declarer_tables_objets_sql($tables) {
 		'texte_logo_objet' 		=> 'svp:titre_logo_depot',
 	);
 
+	// Table des plugins
+	$tables['spip_plugins'] = array(
+		// Base de donnees
+		'table_objet'			=> 'plugins',
+		'type'					=> 'plugin',
+		'field'					=> array(
+			"id_plugin"		=> "bigint(21) NOT NULL",
+			"prefixe"		=> "varchar(30) DEFAULT '' NOT NULL",
+			"nom"			=> "text DEFAULT '' NOT NULL",
+			"slogan"		=> "text DEFAULT '' NOT NULL",
+			"categorie"		=> "varchar(100) DEFAULT '' NOT NULL",
+			"tags"			=> "text DEFAULT '' NOT NULL",
+			"vmax"			=> "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
+			"date_crea"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus ancienne des paquets du plugin
+			"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus recente des paquets du plugin
+			"compatibilite_spip"	=> "varchar(24) DEFAULT '' NOT NULL", // union des intervalles des paquets du plugin
+			"branches_spip"	=> "varchar(255) DEFAULT '' NOT NULL"), // union des branches spip supportees par les paquets du plugin
+		'key'					=> array(
+			"PRIMARY KEY"	=> "id_plugin",
+			"KEY"	=> "prefixe"),
+		'tables_jointures'		=> array('id_depot' => 'depots_plugins'),
+		'principale'			=> 'oui',
+
+		// Titre, date et gestion du statut
+		'titre'					=> "nom AS titre, '' AS lang",
+		
+		// Edition, affichage et recherche
+		'page'					=> 'plugin',
+		'url_voir'				=> 'plugin',
+		'editable'				=> 'non',
+		'champs_editables'		=> array(),
+		'rechercher_champs'		=> array('prefixe' => 8, 'nom' => 8, 'slogan' => 4),
+		'rechercher_jointures'	=> array('paquet' => array('auteur' => 8, 'description' => 2)),
+		'icone_objet'			=> 'plugin',
+		
+		// Textes standard
+		'texte_retour' 			=> 'icone_retour',
+		'texte_modifier' 		=> '',
+		'texte_creer' 			=> '',
+		'texte_creer_associer' 	=> '',
+		'texte_signale_edition' => '',
+		'texte_objet' 			=> 'svp:titre_plugin',
+		'texte_objets' 			=> 'svp:titre_plugins',
+		'info_aucun_objet'		=> 'svp:info_aucun_plugin',
+		'info_1_objet' 			=> 'svp:info_1_plugin',
+		'info_nb_objets' 		=> 'svp:info_nb_plugins',
+		'texte_logo_objet' 		=> '',
+	);
+
 	return $tables;
 }
 
 
 function svp_declarer_tables_principales($tables_principales) {
 
-	// Tables des depots : spip_depots
-// 	$depots = array(
-// 		"id_depot"		=> "bigint(21) NOT NULL",
-// 		"titre"			=> "text DEFAULT '' NOT NULL",
-// 		"descriptif"	=> "text DEFAULT '' NOT NULL",
-// 		"type" 			=> "varchar(10) DEFAULT '' NOT NULL",
-// 		"url_serveur"	=> "varchar(255) DEFAULT '' NOT NULL", // url du serveur svn ou git
-// 		"url_brouteur"	=> "varchar(255) DEFAULT '' NOT NULL", // url de l'interface de gestion du repository (trac, redmine...)
-// 		"url_archives"	=> "varchar(255) DEFAULT '' NOT NULL", // url de base des zips
-// 		"xml_paquets"	=> "varchar(255) DEFAULT '' NOT NULL", // chemin complet du fichier xml du depot
-// 		"sha_paquets"	=> "varchar(40) DEFAULT '' NOT NULL",
-// 		"nbr_paquets" 	=> "integer DEFAULT 0 NOT NULL",
-// 		"nbr_plugins" 	=> "integer DEFAULT 0 NOT NULL",
-// 		"nbr_autres" 	=> "integer DEFAULT 0 NOT NULL", // autres contributions, non plugin
-// 		"maj"			=> "timestamp");
-// 
-// 	$depots_key = array(
-// 		"PRIMARY KEY"	=> "id_depot"
-// 	);
-// 
-// 	$tables_principales['spip_depots'] =
-// 		array('field' => &$depots, 'key' => &$depots_key);
-
-	// Tables des plugins : spip_plugins
-	$plugins = array(
-		"id_plugin"		=> "bigint(21) NOT NULL",
-		"prefixe"		=> "varchar(30) DEFAULT '' NOT NULL",
-		"nom"			=> "text DEFAULT '' NOT NULL",
-		"slogan"		=> "text DEFAULT '' NOT NULL",
-		"categorie"		=> "varchar(100) DEFAULT '' NOT NULL",
-		"tags"			=> "text DEFAULT '' NOT NULL",
-		"vmax"			=> "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
-		"date_crea"		=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus ancienne des paquets du plugin
-		"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus recente des paquets du plugin
-		"compatibilite_spip"	=> "varchar(24) DEFAULT '' NOT NULL", // union des intervalles des paquets du plugin
-		"branches_spip"	=> "varchar(255) DEFAULT '' NOT NULL", // union des branches spip supportees par les paquets du plugin
-	);
-	
-	$plugins_key = array(
-		"PRIMARY KEY"	=> "id_plugin",
-		"KEY"	=> "prefixe"
-	);
-
-	$tables_principales['spip_plugins'] =
-		array('field' => &$plugins, 'key' => &$plugins_key);
-
 	// Tables des paquets : spip_paquets
+	// Cette declaration n'est pas modifiee car le paquet n'est pas manipule actuellement comme un
+	// objet editorial
 	$paquets = array(
 		"id_paquet"		=> "bigint(21) NOT NULL",
 		"id_plugin"		=> "bigint(21) NOT NULL",
@@ -187,39 +191,8 @@ function svp_declarer_tables_interfaces($interface) {
 	$interface['table_des_traitements']['SLOGAN']['plugins'] = _TRAITEMENT_RACCOURCIS;	
 	// - table spip_paquets
 	$interface['table_des_traitements']['DESCRIPTION']['paquets'] = _TRAITEMENT_RACCOURCIS;	
-	
-	// Les jointures
-	// -- Entre spip_depots et spip_plugins
-	$interface['tables_jointures']['spip_plugins'][] = 'depots_plugins';
-// 	$interface['tables_jointures']['spip_depots'][] = 'depots_plugins';
-	// -- Entre spip_paquets et spip_plugins
-
-	// Titre pour url des objets plugin et depot
-// 	$interface['table_titre']['depots'] = "titre, '' AS lang";
-	$interface['table_titre']['plugins'] = "nom, '' AS lang";
 
 	return $interface;
-}
-
-
-function svp_rechercher_liste_des_champs($tables) {
-	// On déclare les champs de recherche dans les tables plugins et paquets
-	// -- Table spip_plugins
-	$tables['plugin']['prefixe'] = 8;
-	$tables['plugin']['nom'] = 8;
-	$tables['plugin']['slogan'] = 4;
-	// -- Table spip_paquets
-	$tables['paquet']['description'] = 2;
-	$tables['paquet']['auteur'] = 1;
-
-	return $tables;
-}
-
-function svp_declarer_url_objets($objets){
-	// On déclare url d'objet plugin et depot
-// 	$objets[] = 'depot';
-	$objets[] = 'plugin';
-	return $objets;
 }
 
 ?>

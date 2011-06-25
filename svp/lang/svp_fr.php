@@ -185,6 +185,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_depot' => 'Dépôt',
 	'titre_depots' => 'Dépôts',
 	'titre_logo_depot' => 'Logo du dépôt',
+	'titre_plugin' => 'Plugin',
+	'titre_plugins' => 'Plugins',
+	'titre_logo_plugin' => 'Logo du plugin',
 
 	'titre_filtre_categorie' => 'Filtrer par catégorie',
 	'titre_filtre_depot' => 'Filtrer par dépôt',

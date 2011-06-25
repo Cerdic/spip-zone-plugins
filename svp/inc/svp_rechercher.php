@@ -18,7 +18,7 @@ function svp_rechercher_plugins_spip($phrase, $categorie, $etat, $depot, $versio
 	// et spip_paquets  si elle n'est pas vide
 	if ($phrase) {
 		$liste = liste_des_champs();
-		$tables = array('plugin' => $liste['plugin'], 'paquet' => $liste['paquet']);
+		$tables = array('plugin' => $liste['plugin']);
 		$options = array('jointures' => true, 'score' => true);
 	
 		// On cherche dans tous les enregistrements de ces tables des correspondances les plugins qui
