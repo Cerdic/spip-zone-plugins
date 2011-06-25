@@ -139,6 +139,11 @@ function geoportail_affiche_milieu($flux)
 			if ($a) $contexte['pos_article'] = $a['lon'].",".$a['lat'].",".$a['zoom'];
 		}
 	}
+	// Documents (utile avec le plugin mediatheque)
+	else if ($exec == 'documents_edit' && $GLOBALS['meta']['geoportail_geodocument']) 
+	{	$contexte['id_objet'] = $flux['args']['id_document'];
+		$contexte['objet'] = 'document';
+	}
 	// Mots
 	else if ($exec == 'mots_edit' && $GLOBALS['meta']['geoportail_geomot']) 
 	{	$contexte['id_objet'] = $flux['args']['id_mot'];
