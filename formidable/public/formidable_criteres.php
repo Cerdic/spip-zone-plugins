@@ -36,4 +36,25 @@ function critere_tri_selon_donnee_dist($idb, &$boucles, $crit) {
 	}
 }
 
+// {recherche_donnee} ou {recherche_donnee susan}
+// Intégralement pompé et adapté de Forms&Tables
+function critere_recherche_donnee_dist($idb, &$boucles, $crit) {
+	global $table_des_tables;
+	$boucle = &$boucles[$idb];
+	$t = $boucle->id_table;
+	if ($t=='formulaires_reponses'){
+		if (isset($crit->param[0]))
+			$_quoi = calculer_liste($crit->param[0], array(), $boucles, $boucles[$idb]->id_parent);
+		else
+			$_quoi = '@$Pile[0]["recherche"]';
+
+		$k = count($boucle->join)+1;
+		$boucle->join[$k]= array($t,'id_formulaires_reponse');
+		$boucle->from["L$k"]= 'spip_formulaires_reponses_champs';
+		$op = array("'LIKE'","'L$k.valeur'","_q(strpos($_quoi,'%')===false?'%'.".$_quoi.".'%':$_quoi)");
+		$boucle->where[]= array("'?'",$_quoi,$op,"''");
+	}
+}
+
+
 ?>
