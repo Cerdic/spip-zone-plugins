@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>[#NOM_SITE_SPIP] - test mots techniques - </title>
+<style type="text/css">
+body{font-size:100%;}
+h1{
+	font-size:100%;
+	color:#E84D08;
+	border-bottom:1px solid #E84D08;
+	text-align:left;
+}
+h2{
+	font-size:90%;
+	color:#4A8CC5;
+	text-align:left;
+}
+</style>
+</head>
+<body>
+
+<h1>Boucle GROUPES_MOTS</h1>
+<h2>Normal</h2>
+<B_groupe_normal>
+<ul>
+<BOUCLE_groupe_normal(GROUPES_MOTS)>
+<li>#TITRE</li>
+</BOUCLE_groupe_normal>
+</ul>
+</B_groupe_normal>
+
+<h2>Critere {tout}</h2>
+<B_groupe_critere_tout>
+<ul>
+<BOUCLE_groupe_critere_tout(GROUPES_MOTS){tout}>
+<li>#TITRE</li>
+</BOUCLE_groupe_critere_tout>
+</ul>
+</B_groupe_critere_tout>
+
+<h2>Critere {technique=oui}</h2>
+<B_groupe_critere_technique>
+<ul>
+<BOUCLE_groupe_critere_technique(GROUPES_MOTS){technique=oui}>
+<li>#TITRE</li>
+</BOUCLE_groupe_critere_technique>
+</ul>
+</B_groupe_critere_technique>
+
+
+
+
+<h1>Boucle MOTS</h1>
+<h2>Normal</h2>
+<B_mot_normal>
+<ul>
+<BOUCLE_mot_normal(MOTS)>
+<li>#TITRE</li>
+</BOUCLE_mot_normal>
+</ul>
+</B_mot_normal>
+
+<h2>Critere {tout}</h2>
+<B_mot_critere_tout>
+<ul>
+<BOUCLE_mot_critere_tout(MOTS){tout}>
+<li>#TITRE</li>
+</BOUCLE_mot_critere_tout>
+</ul>
+</B_mot_critere_tout>
+
+<h2>Critere {technique=oui}</h2>
+<B_mot_critere_technique>
+<ul>
+<BOUCLE_mot_critere_technique(MOTS){technique=oui}>
+<li>#TITRE</li>
+</BOUCLE_mot_critere_technique>
+</ul>
+</B_mot_critere_technique>
+
+
+
+</body>
+</html>
