@@ -16,51 +16,53 @@
 <B_galerie_carree>
 <div class="galerie_carree">
 	[(#TOTAL_BOUCLE|>{10}|?{' ',''})<p class="gentil_message"><:cliquer_pour_agrandir:></p>]
-	<BOUCLE_galerie_carree(DOCUMENTS)
-	{id_article?}
-	{vu?}
-	{extension IN jpg,gif,png}
-	{largeur>200}{hauteur>200}
-	{doublons tof}
-	{mode=document}
-	{par #ENV{tri}}{inverse #ENV{inverse}}
-	{par num titre,date,id_document}
-	>
-
-	[(#SET{desc,[(#TITRE*|sinon{#DESCRIPTIF*}|?{' '})]})]
-	<BOUCLE_lien_article(ARTICLES)
-	{id_document}
-	{exclus}
-	{0,1}
-	>#SET{tof_titre,#TITRE}</BOUCLE_lien_article>
-	[(#COMPTEUR_BOUCLE|moins{#GET{pas}}|<={#ENV{debut_photos,0}}|?{#COMPTEUR_BOUCLE}|>{#ENV{debut_photos,0}}|?{
-		[(#SET{vignette,[(#FICHIER|copie_locale|image_passe_partout{#GET{taille},#GET{taille}}|image_recadre{#GET{taille},#GET{taille},center}|image_aplatir{jpg,ffffff}|inserer_attribut{class,spip_logos[ first(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={1}|oui)][ last(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={0}|oui)]})]})]
-	,
-		[(#SET{vignette,''})]
-	})]
-
-	[(#REM)
-		Inserer le longdesc dans la vignette (la creer le cas echeant)
-	]
-	[(#GET{desc}|?{[(#SET{vignette,[(#GET{vignette}
-		|sinon{<img style="display:none;" />}
-		|inserer_attribut{longdesc,[(#VAL{#desc}|concat{#ID_DOCUMENT})]})]})]})]
-	<a href="[(#FICHIER|copie_locale|image_reduire{800}|extraire_attribut{src})]" rel="galerie_carree#ID_ARTICLE"
-	type="#MIME_TYPE"[
-	title="(#TITRE|sinon{#GET{tof_titre}|supprimer_tags}|texte_backend)"]>#GET{vignette}</a>
-
-	[(#GET{desc})
-	[(#VAL{"<script"}|unique{scriptlongdesc}) type="text/javascript">
-		$("<style>div.longdesc {position: absolute; left: -9999px;}<\/style>")
-		.attr('type', 'text/css')
-		.appendTo('head');
-	</script>
-	]
-	<div id="desc#ID_DOCUMENT" class="longdesc">
-		[<h4 class="#EDIT{titre}">(#TITRE)</h4>]
-		[<div class="#EDIT{descriptif}">(#DESCRIPTIF)</div>]
-	</div>]
-	</BOUCLE_galerie_carree>
+	<ul>
+		<BOUCLE_galerie_carree(DOCUMENTS)
+		{id_article?}
+		{vu?}
+		{extension IN jpg,gif,png}
+		{largeur>200}{hauteur>200}
+		{doublons tof}
+		{mode=document}
+		{par #ENV{tri}}{inverse #ENV{inverse}}
+		{par num titre,date,id_document}
+		>
+		<li>
+			[(#SET{desc,[(#TITRE*|sinon{#DESCRIPTIF*}|?{' '})]})]
+			<BOUCLE_lien_article(ARTICLES)
+			{id_document}
+			{exclus}
+			{0,1}
+			>#SET{tof_titre,#TITRE}</BOUCLE_lien_article>
+			[(#COMPTEUR_BOUCLE|moins{#GET{pas}}|<={#ENV{debut_photos,0}}|?{#COMPTEUR_BOUCLE}|>{#ENV{debut_photos,0}}|?{
+				[(#SET{vignette,[(#FICHIER|copie_locale|image_passe_partout{#GET{taille},#GET{taille}}|image_recadre{#GET{taille},#GET{taille},center}|image_aplatir{jpg,ffffff}|inserer_attribut{class,spip_logos[ first(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={1}|oui)][ last(#COMPTEUR_BOUCLE|modulo{#GET{last}}|=={0}|oui)]})]})]
+			,
+				[(#SET{vignette,''})]
+			})]
+		
+			[(#REM)
+				Inserer le longdesc dans la vignette (la creer le cas echeant)
+			]
+			[(#GET{desc}|?{[(#SET{vignette,[(#GET{vignette}
+				|sinon{<img style="display: none;" />}
+				|inserer_attribut{longdesc,[(#VAL{#desc}|concat{#ID_DOCUMENT})]})]})]})]
+			<a href="[(#FICHIER|copie_locale|image_reduire{800}|extraire_attribut{src})]" rel="galerie_carree#ID_ARTICLE"
+			type="#MIME_TYPE"[
+			title="(#TITRE|sinon{#GET{tof_titre}|supprimer_tags}|texte_backend)"]>#GET{vignette}</a>
+		
+			[(#GET{desc})
+			[(#VAL{"<script"}|unique{scriptlongdesc}) type="text/javascript">
+				$("<style>div.longdesc { position: absolute; left: -9999px; }<\/style>")
+				.attr('type', 'text/css')
+				.appendTo('head');
+			</script>
+			]
+			<div id="desc#ID_DOCUMENT" class="longdesc">
+				[<h4 class="#EDIT{titre}">(#TITRE)</h4>]
+				[<div class="#EDIT{descriptif}">(#DESCRIPTIF)</div>]
+			</div>]
+		</li>
+		</BOUCLE_galerie_carree>
 
 	<BOUCLE_photos(DOCUMENTS)
 	{id_article?}
@@ -77,7 +79,7 @@
 		((#_galerie_carree:TOTAL_BOUCLE)&nbsp;<:images:>)]</p>]
 	]
 	<//B_photos>
-
-	<br class="nettoyeur" />
+	</ul>
+	<br class="clear" />
 </div><!--.galerie_carree-->
 </B_galerie_carree>
