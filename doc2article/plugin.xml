@@ -29,6 +29,6 @@
 		<titre>doc2article:icone_doc2article</titre>
 		<url>doc2article</url>
 	</bouton>
-	<necessite id="crud"version='[0.3.4;]' />
-	<necessite id="saisies"version='[1.9.9;]' />
+	<necessite id="crud" version='[0.3.4;]' />
+	<necessite id="saisies" version='[1.9.9;]' />
 </plugin>
