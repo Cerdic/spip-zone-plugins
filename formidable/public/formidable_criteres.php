@@ -19,7 +19,10 @@
  * © 2005,2006 - Distribue sous licence GNU/GPL
  */
 
-function critere_tri_selon_donnee_dist($idb, &$boucles, $crit) {
+function critere_tri_selon_donnee_dist($idb, &$boucles, $crit) { // Garder cette fontion pour compatibilite
+	critere_tri_selon_reponse_dist($idb, &$boucles, $crit) ;
+}
+function critere_tri_selon_reponse_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
 	$t = $boucle->id_table;
@@ -38,7 +41,7 @@ function critere_tri_selon_donnee_dist($idb, &$boucles, $crit) {
 
 // {recherche_donnee} ou {recherche_donnee susan}
 // Intégralement pompé et adapté de Forms&Tables
-function critere_recherche_donnee_dist($idb, &$boucles, $crit) {
+function critere_recherche_reponse_dist($idb, &$boucles, $crit) {
 	global $table_des_tables;
 	$boucle = &$boucles[$idb];
 	$t = $boucle->id_table;
