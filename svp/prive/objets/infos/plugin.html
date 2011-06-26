@@ -7,26 +7,28 @@
 		<p>#ID_PLUGIN</p>
 	</div>
 	
-	[(#REM) <!-- Les informations sur la version la plus a jour --> ]
-	<B_vmax>
-	<div class="liste versions">
+	[(#REM) <!-- Le prefixe --> ]
+	<div class="liste prefixe">
 		<ul class="liste-items">
-	<BOUCLE_vmax(PAQUETS) {id_plugin}{!par version}{0,1}>
-			<li><p><:svp:label_derniere_modif:></p></li>
-			<li>[(#DATE_MODIF|affdate), [(#DATE_MODIF|affdate{H:i})]]</li>
-			<li>[<:svp:label_version:> <strong>(#VERSION)</strong>]</li>
-			[<li><:svp:label_version_base:> (#VERSION_BASE)</li>]
-	</BOUCLE_vmax>
+			<li>[<:svp:label_prefixe:> : <strong>(#PREFIXE|strtolower)</strong>]</li>
 		</ul>
 	</div>
-	</B_vmax>
 
-	[(#REM) <!-- Le nombre de paquets du plugin --> ]
+	[(#REM) <!-- La derniere mise a jour, le nombre de paquets du plugin et les stats d'utilisation --> ]
 	<div class="liste compteurs">
 		<ul class="liste-items">
+			<li>[<:svp:label_actualise_le:> (#DATE_MODIF|affdate)]</li>
+
 		<BOUCLE_nbr_paquets(PAQUETS) {id_plugin}> </BOUCLE_nbr_paquets>
 			<li>[(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]</li>
 		</B_nbr_paquets>
+
+		[(#REM) <!-- Si le plugin SVP Statistiques est active on peut afficher les stats du plugin --> ]
+		[(#PLUGIN{SVPSTATS}|oui)
+		<li>
+			<:svpstats:label_nbr_sites:> [(#NBR_SITES|singulier_ou_pluriel{info_sites_un,info_sites_nb})]
+		</li>]
+
 		</ul>
 	</div>
 	

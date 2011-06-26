@@ -101,7 +101,7 @@ function svp_declarer_tables_objets_sql($tables) {
 		'info_aucun_objet'		=> 'svp:info_aucun_plugin',
 		'info_1_objet' 			=> 'svp:info_1_plugin',
 		'info_nb_objets' 		=> 'svp:info_nb_plugins',
-		'texte_logo_objet' 		=> '',
+		'texte_logo_objet' 		=> 'svp:titre_logo_plugin',
 	);
 
 	return $tables;
