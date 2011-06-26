@@ -1,0 +1,34 @@
+<plugin>
+	<nom>doc2article</nom>
+	<auteur>b_b, kent1</auteur>
+	<version>0.0.1</version>
+	<version_base>0.0.1</version_base>
+	<etat>dev</etat>
+	<icon>images/doc2article-32.png</icon>
+	<description>
+	Importer l'ensemble des fichiers du répertoire tmp/upload et cr&eacute;er un article par fichier automatiquement.
+	_ Icone en CC-BY de http://www.fatcow.com/
+	</description>
+	<prefix>doc2article</prefix>
+	<categorie>edition</categorie>
+	<install>base/doc2article_upgrade.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/doc2article.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/doc2article.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>doc2article_pipelines.php</inclure>
+	</pipeline>
+	<bouton id='doc2article' parent='bando_publication'>
+		<icone>images/doc2article-16.png</icone>
+		<titre>doc2article:icone_doc2article</titre>
+		<url>doc2article</url>
+	</bouton>
+	<necessite id="crud"version='[0.3.4;]' />
+	<necessite id="saisies"version='[1.9.9;]' />
+</plugin>

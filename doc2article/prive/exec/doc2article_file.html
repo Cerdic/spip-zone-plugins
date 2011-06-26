@@ -1,0 +1,17 @@
+<h1><:doc2article:titre_page_file:></h1>
+<div class='cadre-formulaire-editer'>
+	[(#INCLURE{fond=prive/liste/doc2article,
+		titre=<:doc2article:liste_tous:>,
+		sinon=<:doc2article:liste_aucun:>,
+		env,
+		ajax})]
+</div>
+
+<!--#navigation-->
+
+<div class="cadre infos cadre-info">
+<p><:doc2article:explication_file_attente:></p>
+<p><a href="#URL_ECRIRE{doc2article}"><:icone_retour:></a></p>
+</div>
+
+<!--/#navigation-->

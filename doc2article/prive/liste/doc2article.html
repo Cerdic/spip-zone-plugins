@@ -1,0 +1,43 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	id_doc2article,-1,
+	id_auteur,1
+	id_rubrique,1
+	fichier,1
+}})
+]<B_doc2article>
+#ANCRE_PAGINATION
+<div class="liste-elements doc2article">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id'>[(#TRI{id_doc2article,ID,ajax})]</th>
+			<th class='auteur'>[(#TRI{id_auteur,<:auteur:>,ajax})]</th>
+			<th class='rubrique'>[(#TRI{id_rubrique,<:rubrique:>,ajax})]</th>
+			<th class='fichier'>[(#TRI{fichier,<:fichier:>,ajax})]</th>
+			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_doc2article(DOC2ARTICLE){tri #ENV{order,id_doc2article},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='id'>#ID_DOC2ARTICLE</td>
+			<td class='auteur'>#INFO_NOM{auteur,#ID_AUTEUR}</td>
+			<td class='rubrique'>#ID_RUBRIQUE</td>
+			<td class='fichier'>[(#FICHIER|basename)]</td>
+			<td class='date'>[(#DATE)]</td>
+			<td class='action'>[(#AUTORISER{webmestre}|oui)
+				[(#BOUTON_ACTION{<:doc2article:bouton_importer:>,#URL_ACTION_AUTEUR{doc2article_importer,#ID_DOC2ARTICLE,#SELF},ajax})]
+				[(#BOUTON_ACTION{<:doc2article:bouton_supprimer:>,#URL_ACTION_AUTEUR{doc2article_supprimer,#ID_DOC2ARTICLE,#SELF},ajax})]
+			]</td>
+		</tr>
+	</BOUCLE_doc2article>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_doc2article>[
+<div class="liste-elements doc2article"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_doc2article>

@@ -1,0 +1,9 @@
+<B_ls>
+<select name="fichiers[]" multiple="multiple" size="10">
+<BOUCLE_ls(DATA){source glob, #CHEMIN{tmp/upload/}|concat{*.*}}>
+[<option value="#VALEUR">(#VALEUR|basename)</option>]
+</BOUCLE_ls>
+</select>
+</B_ls>
+<span class="erreur_message"><:doc2article:erreur_repertoire{repertoire=tmp/upload}:></span>
+<//B_ls>

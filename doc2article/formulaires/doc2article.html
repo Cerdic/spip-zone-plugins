@@ -1,0 +1,29 @@
+<div class="formulaire_spip formulaire_editer formulaire_doc2article">
+[<div class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</div>]
+[<div class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</div>]
+[(#ENV{editable})
+<form method='post' action='#ENV{action}' enctype='multipart/form-data'>
+	<div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		[<li class="select_fihciers[ (#ENV**{erreurs}|table_valeur{fichiers}|oui)erreur]">
+			<label for="fichiers"><:doc2article:label_fichiers:></label>
+			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{fichiers})</span>]
+			<p class='explication'><:doc2article:explication_fichiers{repertoire=tmp/upload}:></p>
+			(#INCLURE{fond=formulaires/inc-select_fichiers})
+		</li>]
+		[(#SAISIE{auteurs,auteur,
+			label=<:doc2article:label_auteur:>,
+			explication=<:doc2article:explication_auteur:>,
+			obligatoire=oui})]
+		[(#SAISIE{secteur,rubrique,
+			label=<:doc2article:label_rubrique:>,
+			explication=<:doc2article:explication_rubrique:>,
+			recursif=oui,
+			obligatoire=oui})]
+	</ul>
+	<p class='boutons'><input type='submit' class='submit' value='<:bouton_ajouter:>' /></p>
+	</div>
+</form>
+]
+</div>
