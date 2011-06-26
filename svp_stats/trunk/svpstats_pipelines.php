@@ -7,7 +7,7 @@
  * @return $flux
  */
 function svpstats_affiche_gauche($flux){
-	if ($flux['args']['exec'] == 'depots_gerer') {
+	if ($flux['args']['exec'] == 'depots') {
 		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/info_stats', array());
 	}
 	return $flux;
