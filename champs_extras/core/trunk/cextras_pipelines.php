@@ -6,19 +6,19 @@ include_spip('inc/cextras');
 
 
 // recuperer un tableau des indications fournies pour des selections (enum, radio...)
-function cextras_enum_array($enum) {
-	$enums = array();
+function cextras_data_array($data) {
+	$datas = array();
 	// 2 possibilites : enum deja un tableau (vient certainement d'un plugin),
 	// sinon texte a decouper (vient certainement de interfaces pour champs extra).
-	if (is_array($enum)) {
-		$enums = $enum;
+	if (is_array($data)) {
+		$datas = $data;
 	} else {
-		foreach ($vals = explode("\n", $enum) as $x) {
+		foreach ($vals = explode("\n", $data) as $x) {
 			list($cle, $desc) = explode(',', trim($x), 2);
-			$enums[$cle] = _T($desc);
+			$datas[$cle] = _T($desc);
 		}
 	}
-	return $enums;	
+	return $datas;	
 }
 
 
@@ -54,24 +54,23 @@ function cextras_creer_contexte($c, $contexte_flux, $prefixe='') {
 // en utilisant le plugin "saisies"
 function ce_calculer_saisie($c, $contexte, $prefixe='') {
 	
+	// pas besoin de la config de SPIP ?
+	unset($contexte['config']);
+
+
 	$nom_champ = $prefixe . $c->champ;
 	$contexte['nom'] = $nom_champ;
-	$contexte['type_saisie'] = $c->type;
+	$contexte['type_saisie'] = $c->saisie;
 	$contexte['label'] = _T($c->label);
 	if (isset($contexte[$nom_champ]) and $contexte[$nom_champ]) {
 		$contexte['valeur'] = $contexte[$nom_champ];
 	}
-	// enum -> data
-	if ($c->enum) {
-		$contexte['datas'] = cextras_enum_array($c->enum);
+
+	if ($c->saisie_parametres['datas']) {
+		$contexte['datas'] = cextras_data_array($c->saisie_parametres['datas']);
 	}
 
 	$params = $c->saisie_parametres;
-
-	// remapper les precisions
-	if ($c->precisions) {
-		$params['explication'] = $c->precisions;
-	}
 
 	// traductions a faire
 	$contexte['explication'] = _T($params['explication']);
@@ -83,10 +82,15 @@ function ce_calculer_saisie($c, $contexte, $prefixe='') {
 	// tout inserer le reste des champs
 	$contexte = array_merge($contexte, $params);
 
+	
 	// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
 	// Champs Extra les stocke separes par des virgule.
 	if ($contexte['datas']) {
-		$contexte['valeur'] = explode(',', $contexte['valeur']);
+		// n'appliquer que si la saisie en a besoin !
+		$desc_saisies = saisies_lister_par_nom( saisies_charger_infos($c->saisie) );
+		if ($desc_saisies['datas']) {
+			$contexte['valeur'] = explode(',', $contexte['valeur']);
+		}
 	}
 
 	return array('saisies/_base', $contexte);
@@ -236,8 +240,9 @@ function cextras_pre_edition($flux){
 		foreach ($extras as $c) {
 			if (_request('cextra_' . $prefixe . $c->champ)) {
 				$extra = _request($prefixe . $c->champ);
-				if (is_array($extra))
+				if (is_array($extra)) {
 					$extra = join(',',$extra);
+				}
 				$flux['data'][$c->champ] = corriger_caracteres($extra);
 			}
 		}
@@ -255,7 +260,7 @@ function cextras_afficher_contenu_objet($flux){
 
 		$contexte = cextra_quete_valeurs_extras($extras, $flux['args']['type'], $flux['args']['id_objet']);
 		$contexte = array_merge($flux['args']['contexte'], $contexte);
-		foreach($extras as $c) {
+		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la vue est autorisee
 			$type = $c->_type . '_' . $c->champ;
@@ -269,17 +274,18 @@ function cextras_afficher_contenu_objet($flux){
 				$contexte = cextras_creer_contexte($c, $contexte);
 
 				// calculer le bon squelette et l'ajouter
-				if (!find_in_path(($f = 'saisies-vues/'.$c->type).'.html')) {
-					extras_log("Vue de saisie non trouvee pour $c->type", true);
+				if (!find_in_path(($f = 'saisies-vues/' . $c->saisie) . '.html')) {
+					$flux['data'] .= recuperer_fond('prive/squelettes/saisie_vue_absente', array(
+						'saisie' => $c->saisie,
+						'valeur' => $contexte[$c->champ],
+					));
+					extras_log("Vue de saisie non trouvee pour $c->saisie", true);
 				} else {
 					$contexte['valeur'] = $contexte[$c->champ];
 					// ajouter les listes d'éléments possibles
 					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
-						$contexte['datas'] = $c->saisie_parametres['datas'];
-					// sinon peut provenir du plugin d'interface, directement dans enum.
-					} elseif ($c->enum) {
-						$contexte['datas'] = cextras_enum_array($c->enum);
-					}
+						$contexte['datas'] = cextras_enum_array($c->saisie_parametres['datas']);
+					} 
 
 					// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
 					// Champs Extra les stocke separes par des virgule.
