@@ -12,10 +12,11 @@ function cextras_objets_valides(){
 	ksort($tables);
 	
 	foreach($tables as $table => $desc) {
-		if ($tables['principale'] == 'oui') {
+		if ($desc['principale'] == 'oui') {
 			$objets[$table] = $desc;
 		}
 	}
+
 	return $objets;
 }
 
@@ -174,7 +175,7 @@ function vider_champs_extras($champs) {
 function extras_champs_utilisables($connect='') {
 	$tout = extras_champs_anormaux($connect);
 	$objets = cextras_objets_valides();
-	return array_diff_key($tout, $objets);
+	return array_intersect_key($tout, $objets);
 }
 
 // Liste les champs anormaux par rapport aux definitions de SPIP
@@ -198,19 +199,23 @@ function extras_champs_anormaux($connect='') {
 	// chercher ce qui est different
 	$ntables = array();
 	$nchamps = array();
+	// la table doit être un objet editorial
+	$tout = array_intersect_key($tout, $tables_spip);
 	foreach ($tout as $table => $champs) {
-		if (!isset($tables_spip[$table]['field'])) {
-			$nchamps[$table] = $champs;
-		} else {
+		// la table doit être un objet editorial principal
+		if ($tables_spip[$table]['principale'] == 'oui') {
+			// pour chaque champ absent de la déclaration, on le note dans $nchamps.
 			foreach($champs as $champ => $desc) {
 				if (!isset($tables_spip[$table]['field'][$champ])) {
+					if (!isset($nchamps[$table])) {
+						$nchamps[$table] = array(); 
+					}
 					$nchamps[$table][$champ] = $desc;
 				}
 			}
 		}
 	}
 
-	unset($tout);
 	if($nchamps) {
 		$tout = $nchamps;
 	} else {

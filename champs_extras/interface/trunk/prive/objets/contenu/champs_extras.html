@@ -1,8 +1,11 @@
 <BOUCLE_si_extras(CONDITION){si (#VAL|iextras_get_extras_par_table)}>
-
-[(#CHEMIN{images/iextras-24.png}|debut_cadre_trait_couleur{1, "", <:iextras:liste_des_extras:>})]
+[(#BOITE_OUVRIR{
+	#CHEMIN_IMAGE{iextras-24.png}
+		|balise_img{'',cadre-icone}
+		|concat{<:iextras:liste_des_extras:>},'simple','titrem'})]
+		
 	<BOUCLE_tables(POUR){tableau (#VAL|iextras_get_extras_par_table)}>
-	<h2>[(#CLE|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets})]</h2>
+	<h2>[(#CLE|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets}|_T)]</h2>
 		<B_extras>
 		<div class='liste'>
 		<ul class="liste-items liste_extras">
@@ -30,7 +33,9 @@
 		</div>
 		</B_extras>
 	</BOUCLE_tables>
-[(#VAL{1}|fin_cadre_trait_couleur)]
+	
+#BOITE_FERMER
+
 <script type="text/javascript">
 (function($) {
 	$('ul.liste_extras .supprimer').click(function(){
