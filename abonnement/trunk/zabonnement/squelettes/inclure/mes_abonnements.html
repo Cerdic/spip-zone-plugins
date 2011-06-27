@@ -1,0 +1,72 @@
+#CACHE{0}
+[(#SET{date_future,[(#ENV{date}|ajouter_des_jours{7})]})]
+
+Bonjour #SESSION{nom}
+
+<BOUCLE_auteur(AUTEURS){id_auteur = #SESSION{id_auteur}}{tout}>
+
+	[(#REM)
+		Si on a un abonnement valide sur le site, on l'affiche.
+	]
+	<B_abo_valide>
+			[(#TOTAL_BOUCLE|=={1}|oui)<h2 class="h2"><:abo:votre_abonnement:></h2>]
+			[(#TOTAL_BOUCLE|>{1}|oui)<h2 class="h2"><:abo:vos_abonnements:></h2>]
+
+	<BOUCLE_abo_valide(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite > #GET{date_future}}>
+
+		#SET{ladate,#VALIDITE|affdate}
+		<BOUCLE_abo(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+		#TITRE
+		</BOUCLE_abo>- <:abo:echeance_le{date=#GET{ladate}}:>
+	</BOUCLE_abo_valide>		
+
+		[(#REM)
+			Sinon on teste si on etait deja abonne
+			et que l'abonnement est perime
+		]	
+		<BOUCLE_abo_echu(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite < #GET{date_future}}>
+
+			[(#ENV{reabo}|non)
+				<h2 class="h2"><:abo:votre_abonnement:></h2>
+				
+				<div class="abonnement_echeance">
+				<p>
+				#SET{ladate,#VALIDITE|affdate}
+				#SET{proche,#VALIDITE|>{#ENV{date}}|oui}
+				[(#GET{proche}|non)<:abo:echance_abonnement_passee{date=#GET{ladate},titre=#TITRE}:>]
+				[(#GET{proche}|oui)<:abo:echance_abonnement_proche{date=#GET{ladate},titre=#TITRE}:>]
+				</p>
+				<p>
+				[(#GET{proche}|non)<:abo:renouveler_abonnement_passe{date=#GET{ladate},titre=#TITRE}:>]
+				[(#GET{proche}|oui)<:abo:renouveler_abonnement_proche{date=#GET{ladate},titre=#TITRE}:>]
+				</p>
+				</div>
+			]
+			
+			
+		</BOUCLE_abo_echu>
+			#SET{pas_abo,oui}
+		<//B_abo_echu>
+
+		[(#REM)
+			Et on affiche aussi la liste des articles payes
+		]			
+		<B_articles>
+			<h2 class="h2"><:abo:vous_etes_abonne_aux_articles_suivants:></h2>
+			<ul>
+			<BOUCLE_articles(CONTACTS_ABONNEMENTS){objet=article}{id_auteur=#ID_AUTEUR}>
+			<BOUCLE_article(ARTICLES){id_article=#ID_OBJET}{tout_voir}>
+			<li><a href="#URL_ARTICLE">#TITRE</a></li>
+			</BOUCLE_article>
+			</BOUCLE_articles>
+			</ul>
+		</B_articles>
+
+		<div style="border:1px solid #CCC; padding:1em">
+		<a href="[(#SELF|parametre_url{voirabo,oui})]">-> Toutes les formules d'abonnement</a>
+		[(#REM)[(#GET{voirabo}|!={oui}|oui) style="display:none;"]]
+		<div><INCLURE{fond=inclure/les_abonnements}{env}></div>
+		</div>		
+
+		
+</BOUCLE_auteur>
