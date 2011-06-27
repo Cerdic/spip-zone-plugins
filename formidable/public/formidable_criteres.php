@@ -20,7 +20,7 @@
  */
 
 function critere_tri_selon_donnee_dist($idb, &$boucles, $crit) { // Garder cette fontion pour compatibilite
-	critere_tri_selon_reponse_dist($idb, &$boucles, $crit) ;
+	critere_tri_selon_reponse_dist($idb, $boucles, $crit) ;
 }
 function critere_tri_selon_reponse_dist($idb, &$boucles, $crit) {
 
