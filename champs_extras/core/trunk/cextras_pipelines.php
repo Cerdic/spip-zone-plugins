@@ -299,7 +299,7 @@ function cextras_afficher_contenu_objet($flux){
 					
 					$extra = recuperer_fond($f, $contexte);
 					$extra = '<div class="champ ' . $c->champ.'">
-						<div class="label">' . _T($c->label) . '</div>' . $extra . '</div>';
+						<div class="label_extra">' . _T($c->label) . '</div>' . $extra . '</div>';
 					
 					$flux['data'] .= "\n".$extra;
 				} 
