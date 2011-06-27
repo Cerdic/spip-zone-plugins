@@ -180,6 +180,10 @@ function extras_champs_utilisables($connect='') {
 // Liste les champs anormaux par rapport aux definitions de SPIP
 // (aucune garantie que $connect autre que la connexion principale fasse quelque chose)
 function extras_champs_anormaux($connect='') {
+	static $tout = false;
+	if ($tout !== false) {
+		return $tout;
+	}
 	// recuperer les tables et champs de la base de donnees
 	// les vrais de vrai dans la base sql...
 	$tout = extras_base($connect);

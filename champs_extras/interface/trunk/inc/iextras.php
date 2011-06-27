@@ -6,12 +6,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/cextras');
 
 function iextras_get_extras(){
-	$extras = @unserialize($GLOBALS['meta']['iextras']);
-	if (!is_array($extras)) $extras = array();
-	// reinitialiser aucazou les valeurs de tables
-	foreach($extras as $e) {
-		if (!$e->_table_sql) {
-			$e->definir(); // va recreer les infos des tables/objet/type
+	static $extras = null;
+	if ($extras === null) {
+		$extras = @unserialize($GLOBALS['meta']['iextras']);
+		if (!is_array($extras)) $extras = array();
+		// reinitialiser aucazou les valeurs de tables
+		foreach($extras as $e) {
+			if (!$e->_table_sql) {
+				$e->definir(); // va recreer les infos des tables/objet/type
+			}
 		}
 	}
 	return $extras;

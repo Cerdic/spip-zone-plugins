@@ -33,6 +33,10 @@
 		<inclure>inc/iextras_autoriser.php</inclure>
 	</pipeline>
 	
+	<onglet id='iextras' parent='configuration'> 
+			<icone>images/iextras-24.png</icone> 
+			<titre>iextras:champs_extras</titre> 
+	</onglet>
 	
 	<bouton id='iextras' parent='bando_configuration'>
 		<icone>images/iextras-16.png</icone>

@@ -1,11 +1,13 @@
-<BOUCLE_si_extras(CONDITION){si #ENV{extras}}>
+<BOUCLE_si_extras(CONDITION){si (#VAL|iextras_get_extras_par_table)}>
+
 [(#CHEMIN{images/iextras-24.png}|debut_cadre_trait_couleur{1, "", <:iextras:liste_des_extras:>})]
-	<BOUCLE_tables(POUR){tableau #ENV**{extras}}>
+	<BOUCLE_tables(POUR){tableau (#VAL|iextras_get_extras_par_table)}>
 	<h2>[(#CLE|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets})]</h2>
 		<B_extras>
-		<ul class="liste_extras">
+		<div class='liste'>
+		<ul class="liste-items liste_extras">
 		<BOUCLE_extras(POUR){tableau #VALEUR}>
-			<li>
+			<li class='item'>
 				[(#VALEUR{champ})]
 				[<small>&mdash; (#VALEUR{label})</small>]
 				[(type: <tt>(#VALEUR{type})</tt>)]
@@ -25,6 +27,7 @@
 			</li>
 		</BOUCLE_extras>
 		</ul>
+		</div>
 		</B_extras>
 	</BOUCLE_tables>
 [(#VAL{1}|fin_cadre_trait_couleur)]
