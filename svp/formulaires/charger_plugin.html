@@ -22,7 +22,7 @@
 						<li class="editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
 							<label for="categorie"><:svp:label_critere_categorie:></label>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
-							<INCLURE{fond=inclure/select_option_categorie, categorie=#ENV{categorie}, env} />
+							<INCLURE{fond=formulaires/inc-select_categorie, categorie=#ENV{categorie}, env} />
 						</li>
 						<li class="editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
 							<label for="etat"><:svp:label_critere_etat:></label>
@@ -38,7 +38,7 @@
 						<li class="editer_depot obligatoire[(#ENV{erreurs}|table_valeur{depot}|oui) erreur]">
 							<label for="depot"><:svp:label_critere_depot:></label>
 							[<span class="erreur_message">(#ENV{erreurs}|table_valeur{depot})</span>]
-							<INCLURE{fond=formulaires/inc-charger_depots, env} />
+							<INCLURE{fond=formulaires/inc-select_depot, env} />
 						</li>
 						<li class="editer_doublon obligatoire[(#ENV{erreurs}|table_valeur{doublon}|oui) erreur]">
 							<label for="doublon"><:svp:label_critere_doublon:></label>
