@@ -284,17 +284,22 @@ function cextras_afficher_contenu_objet($flux){
 					$contexte['valeur'] = $contexte[$c->champ];
 					// ajouter les listes d'éléments possibles
 					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
-						$contexte['datas'] = cextras_enum_array($c->saisie_parametres['datas']);
+						$contexte['datas'] = cextras_data_array($c->saisie_parametres['datas']);
 					} 
 
 					// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
 					// Champs Extra les stocke separes par des virgule.
 					if ($contexte['datas']) {
-						$contexte['valeur'] = explode(',', $contexte['valeur']);
+						// n'appliquer que si la saisie en a besoin !
+						$desc_saisies = saisies_lister_par_nom( saisies_charger_infos($c->saisie) );
+						if ($desc_saisies['datas']) {
+							$contexte['valeur'] = explode(',', $contexte['valeur']);
+						}	
 					}
 					
 					$extra = recuperer_fond($f, $contexte);
-					$extra = '<div class="'.$c->champ.'"><strong>'._T($c->label).'</strong>'.$extra.'</div>';
+					$extra = '<div class="champ ' . $c->champ.'">
+						<div class="label">' . _T($c->label) . '</div>' . $extra . '</div>';
 					
 					$flux['data'] .= "\n".$extra;
 				} 

@@ -145,10 +145,10 @@ function action_associer_champ_sql_comme_champ_extra($table, $champ){
 		$sql = $champs[$table][$champ];
 		// creer un champ extra avec ce champ
 		$extra = new ChampExtra(array(
-			'table' => objet_type($table),
+			'table' => $table,
 			'champ' => $champ,
 			'label' => 'label_'.$champ,
-			'type' => 'ligne',
+			'saisie' => 'ligne',
 			'sql' => $sql,
 		));
 		// penser a creer une fonction pour ajouter et supprimer un champ...
