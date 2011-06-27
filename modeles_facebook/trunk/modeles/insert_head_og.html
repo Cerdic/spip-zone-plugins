@@ -1,0 +1,58 @@
+[(#REM)
+	Informations Open Graph de Facebook en en-tete
+	! necessite de transmettre l'environnement !
+	
+	Les balises 'title', 'type', 'url' et 'image' sont necessaires
+
+]#SET{og_ok,''}
+[
+    <meta property="og:site_name" content="(#NOM_SITE_SPIP|propre|supprimer_tags|textebrut)" />]
+<BOUCLE_breve_og(BREVES){id_breve=#ENV{id_breve}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_BREVE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_BREVE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#INTRODUCTION|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_breve_og>
+<BOUCLE_artcile_og(ARTICLES){id_article=#ENV{id_article}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_ARTICLE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_ARTICLE_RUBRIQUE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#INTRODUCTION|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_artcile_og>
+<BOUCLE_auteur_og(AUTEURS){id_auteur=#ENV{id_auteur}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#NOM|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="author" />
+[    <meta property="og:url" content="(#URL_AUTEUR|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_AUTEUR||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#BIO|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_auteur_og>
+<BOUCLE_site_og(SITES){id_syndic=#ENV{id_syndic}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#NOM_SITE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="website" />
+[    <meta property="og:url" content="(#URL_SITE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_SITE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#DESCRIPTIF|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_site_og>
+<BOUCLE_mot_og(MOTS){id_mot=#ENV{id_mot}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_MOT|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_MOT||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#TEXTE|propre|couper{260}|supprimer_tags|textebrut)" />]
+</BOUCLE_mot_og>
+<BOUCLE_rubrique_og(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>#SET{og_ok,oui}
+[    <meta property="og:title" content="(#TITRE|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="article" />
+[    <meta property="og:url" content="(#URL_RUBRIQUE|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_RUBRIQUE||sinon{#LOGO_SITE_SPIP}|extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#INTRODUCTION|propre|supprimer_tags|textebrut)" />]
+</BOUCLE_rubrique_og>
+[(#GET{og_ok}|=={''}|oui)
+[    <meta property="og:title" content="(#NOM_SITE_SPIP|supprimer_tags|textebrut)" />]
+    <meta property="og:type" content="website" />
+[    <meta property="og:url" content="(#URL_SITE_SPIP|url_absolue)" />]
+[    <meta property="og:image" content="(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue)" />]
+[    <meta property="og:description" content="(#DESCRIPTIF_SITE_SPIP|propre|supprimer_tags|textebrut)" />]
+]

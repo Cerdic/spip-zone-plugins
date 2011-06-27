@@ -1,0 +1,25 @@
+<plugin>
+	<nom><multi>Facebook Models[fr]Mod&#232;les Facebook</multi></nom>
+	<version>0.14</version>
+	<etat>test</etat>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<licence>[GNU/GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
+ 	<prefix>fb_modeles</prefix>
+	<chemin dir='' />
+	<lien>[Documentation->http://www.spip-contrib.net/?article3872]</lien>
+	<description>
+{{Un ensemble de mod&#232;les pour inclure les modules sociaux Facebook.}}
+
+Une documentation interne est disponible lorsque le plugin est actif sur la page publique [fb_modeles_documentation->../?page=fb_modeles_documentation].
+	</description>
+ 	<icon>img/facebook-icon.png</icon>
+	<options>fb_modeles_options.php</options>
+	<fonctions>fb_modeles_fonctions.php</fonctions>
+	<categorie>navigation</categorie>
+    <pipeline>
+        <nom>insert_head</nom>
+        <inclure>fb_modeles_pipelines.php</inclure>
+    </pipeline>
+	<traduire gestionnaire="salvatore" module="fbmodeles" reference="fr" />
+	<utilise id='z' version='[1.0.0;]' />
+</plugin>
