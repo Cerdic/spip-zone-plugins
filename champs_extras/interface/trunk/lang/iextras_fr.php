@@ -34,13 +34,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_description_champ_extra_presents' => "Enfin, si des champs existent d&eacute;j&agrave; dans votre base de donn&eacute;e,
 						mais ne sont pas d&eacute;clar&eacute;s (par un plugin ou un jeu de squelettes), vous
 						pouvez demander &agrave; ce plugin de les g&eacute;rer. Ces champs, s'il y en a,
-						apparaissent dans un cadre «Liste des champs pr&eacute;sents non g&eacute;r&eacute;s».",		
+						apparaissent dans un cadre «Liste des champs pr&eacute;sents non g&eacute;r&eacute;s».",	
+	'info_saisie' => 'Saisie :',	
 				
 	//L
 	'label_champ' => 'Nom du champ',
 	'label_class' => 'Classes CSS',
 	'label_li_class' => 'Classes CSS du &lt;li&gt; parent',
-	'label_enum' => 'Liste de valeurs',
+	'label_datas' => 'Liste de valeurs',
 	'label_label' => 'Label de la saisie',
 	'label_obligatoire' => 'Champ obligatoire&nbsp;?',
 	'label_explication' => 'Explications de la saisie',
@@ -49,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_table' => 'Objet',
 	'label_traitements' => 'Traitements automatiques',
-	'label_type' => 'Type de saisie',
+	'label_saisie' => 'Type de saisie',
 	'legend_declaration' => 'D&eacute;claration',
 	'legend_options_techniques' => 'Options techniques',
 	'legend_options_saisies' => 'Options de la saisie',
@@ -62,7 +63,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_li_class' => 'Ajouter des classes CSS sur le &lt;li&gt; parent,
 		s&eacute;par&eacute;es par un espace. Exemple : "haut" pour avoir toute la
 		largeur sur le formulaire',	
-	'precisions_pour_enum' => 'Certains types de champ demandent une liste des valeurs accept&eacute;es&nbsp;: indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par d&eacute;faut. La description peut &ecirc;tre une cha&icirc;ne de langue.',
+	'precisions_pour_datas' => 'Certains types de champ demandent une liste des valeurs accept&eacute;es&nbsp;: indiquez-en une par ligne, suivie d\'une virgule et d\'une description. Une ligne vide pour la valeur par d&eacute;faut. La description peut &ecirc;tre une cha&icirc;ne de langue.',
 	'precisions_pour_label' => 'Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
 	'precisions_pour_explication' => 'Vous pouvez donner plus d\'informations concernant la saisie. 
 		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
@@ -70,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		&Agrave; utiliser avec beaucoup de mod&eacute;ration !
 		Peut &ecirc;tre une cha&icirc;ne de langue &laquo;plugin:chaine&raquo;.',
 	'precisions_pour_rechercher' => 'Inclure ce champ dans le moteur de recherche ?',
-	'precisions_pour_type' => 'Afficher une saisie de type :',
+	'precisions_pour_saisie' => 'Afficher une saisie de type :',
 	'precisions_pour_traitements' => 'Appliquer automatiquement un traitement
 		pour la balise #NOM_DU_CHAMP r&eacute;sultante :',
 	//R

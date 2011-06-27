@@ -26,18 +26,18 @@
 				label=<:iextras:label_label:>,
 				explication=<:iextras:precisions_pour_label:>,
 				obligatoire=oui})]
-			[(#SAISIE{selection,type,
-				label=<:iextras:label_type:>,
+			[(#SAISIE{selection,saisie,
+				label=<:iextras:label_saisie:>,
 				obligatoire=oui,
-				explication=<:iextras:precisions_pour_type:>,
+				explication=<:iextras:precisions_pour_saisie:>,
 				datas=[(#VAL|cextras_types_formulaires)]})]
 				
 			#SET{defaut,",-vide-
 1,valeur 1
 2,valeur 2"}
-			[(#SAISIE{textarea,enum,
-				label=<:iextras:label_enum:>,
-				explication=<:iextras:precisions_pour_enum:>,
+			[(#SAISIE{textarea,datas,
+				label=<:iextras:label_datas:>,
+				explication=<:iextras:precisions_pour_datas:>,
 				rows=3,
 				defaut=#GET{defaut}})]
 

@@ -16,7 +16,7 @@ function cextras_declarer_tables_objets_sql($tables){
 	
 	// ajoutons les champs un par un
 	foreach ($champs as $c){
-		$table = $c->_table_sql;
+		$table = $c->table;
 		if (isset($tables[$table]) and $c->champ and $c->sql) {
 			$tables[$table]['field'][$c->champ] = $c->sql;
 			// ajouter le champ dans la fonction de recherche de SPIP

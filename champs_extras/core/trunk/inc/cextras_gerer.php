@@ -25,7 +25,7 @@ function cextras_objets_valides(){
 function cextras_objets_valides_boucle_pour(){
 	$objets = array();
 	foreach(lister_tables_objets_sql() as $table => $desc) {
-		$objets[ $desc['type'] ] = $desc['texte_objets'];
+		$objets[ $table ] = _T($desc['texte_objets']);
 	}
 	return $objets;
 }
@@ -77,10 +77,10 @@ function creer_champs_extras($champs) {
 		$champs = array($champs);
 				
 	// on recupere juste les differentes tables a mettre a jour
-	$tables = array();
+	$tables_modifiees = array();
 	foreach ($champs as $c){ 
-		if ($table = $c->_table_sql) {
-			$tables[$table] = $table;
+		if ($table = $c->table) {
+			$tables_modifiees[$table] = $table;
 		} else {
 			// ici on est bien ennuye, vu qu'on ne pourra pas creer ce champ.
 			extras_log("Aucune table trouvee pour le champs extras ; il ne pourra etre cree :", true);
@@ -88,34 +88,24 @@ function creer_champs_extras($champs) {
 		}
 	}	
 
-	if (!$tables) {
+	if (!$tables_modifiees) {
 		return false;
 	}
 	
+	$tables = lister_tables_objets_sql();
+	$tables = array_intersect_key($tables, $tables_modifiees);
+	foreach ($champs as $c) {
+		if (!isset($tables[$c->table]['field'][$c->champ])) {
+			$tables[$c->table]['field'][$c->champ] = $c->sql;
+		}
+	};
 	
-	// on met a jour les tables trouvees
-	// recharger les tables principales et auxiliaires
-/*
-	include_spip('base/serial');
-	include_spip('base/auxiliaires');
-	global $tables_principales, $tables_auxiliaires;
-	base_serial($tables_principales);
-	base_auxiliaires($tables_auxiliaires);
-*/
-	
-	// inclure les champs extras declares ALORS que le pipeline
-	// n'est pas encore actif : important lorsqu'on active
-	// en meme temps CE2 et un plugin dependant
-	// et non l'un apres l'autre
-/*
-	if (!defined('_CHAMPS_EXTRAS_DECLARES')) {
-		include_spip('base/cextras');
-		$tables_principales = cextras_declarer_tables_principales($tables_principales);
-	}
-*/
+
 	// executer la mise a jour
 	include_spip('base/create');
-	maj_tables($tables);
+	foreach ($tables as $table => $desc) {
+		creer_ou_upgrader_table($table, $desc, true, true);
+	}
 
 	// pour chaque champ a creer, on verifie qu'il existe bien maintenant !
 	$trouver_table = charger_fonction('trouver_table','base');
@@ -155,7 +145,7 @@ function vider_champs_extras($champs) {
 		
 	// on efface chaque champ trouve
 	foreach ($champs as $c){ 
-		if ($table = $c->_table_sql and $c->champ and $c->sql) {
+		if ($table = $c->table and $c->champ and $c->sql) {
 			sql_alter("TABLE $table DROP $c->champ");
 		}
 	}	

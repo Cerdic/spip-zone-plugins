@@ -2,35 +2,41 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 class ChampExtra{
-	var $table = ''; // type de table ('rubrique')
-	var $champ = ''; // nom du champ ('ps')
-	var $label = ''; // label du champ, code de lanque ('monplug:mon_label')
-	var $precisions = ''; // (deprecie ; voir $saisie_parametres) precisions pour la saisie du champ (optionnel), code de lanque ('monplug:mon_label')
-	var $obligatoire = false; // ce champ est il obligatoire ? 'oui' ou true : c'est le cas.
-	var $verifier = false; // Fonction de vérification du plugin API verifier
+	var $table       = ''; // table SQL (spip_rubriques)
+	var $champ       = ''; // nom du champ SQL (ps)
+	var $sql         = ''; // définition SQL du champ SQL (text NOT NULL DEFAULT '')
+
+	var $saisie      = ''; // type de saisie (input)
+	var $label       = ''; // label du champ. Code de langue (monplug:mon_label)
+	var $obligatoire = false; // champ obligatoire ? 'oui'/true 
+	var $saisie_parametres = array();
+		/*
+		    // peut indiquer tout parametre d'une #SAISIE, tel que :
+			explication => '', // message d'explication !
+			attention => '',   // message d'attention !
+			class => '',       // classes CSS sur l'element
+			li_class => '',    // classes CSS sur l'element parent LI
+			datas => '',       // donnees pour les listes d'éléments
+		                       // liste de valeurs 
+		                       // champ texte : "cle1,val1\ncle2,val2" 
+		                       // ou tableau : array("cle1"=>"val1","cle2"=>"val2") 
+		*/
+
+
+	var $verifier         = false;   // Fonction de vérification du plugin API verifier
 	var $verifier_options = array(); // Fonction de vérification du plugin API verifier
-	var $rechercher = false; // ce champ entre-t-il dans le moteur de recherche ?
-	var $enum = ''; // liste de valeurs (champ texte : "cle1,val1\ncle2,val2" ou tableau : array("cle1"=>"val1","cle2"=>"val2") )
-	var $type = ''; // type (ligne/bloc/etc)
-	var $sql = ''; // declaration sql (text NOT NULL DEFAULT '')
-	var $traitements = ''; // _TRAITEMENT_RACCOURCIS ,  _TRAITEMENT_TYPO ou autre declaration pour la $table_des_traitements
+	
+	var $rechercher       = false;   // ce champ entre-t-il dans le moteur de recherche ?
+	var $traitements      = '';      // _TRAITEMENT_RACCOURCIS ,  
+	                                 // _TRAITEMENT_TYPO ou autre declaration pour la $table_des_traitements
 
 	var $_id = ''; // identifiant de ce champ extra
 
 	// calcules a la volee
 	var $_type = ''; // rubrique
 	var $_objet = ''; // rubriques
-	var $_table_sql = ''; // spip_rubriques
 
 
-	var $saisie_parametres = array();
-		/*
-		    peut indiquer tout parametre d'une #SAISIE, tel que :
-			explication => ''; // message d'explication !
-			attention => ''; // message d'attention !
-			class => ""; // classes CSS	sur l'element
-			li_class => ""; // classes CSS sur l'element parent LI
-		*/
 
 
 	// constructeur
@@ -49,7 +55,6 @@ class ChampExtra{
 		// calculer _objet et _table_sql
 		$this->_type      = objet_type(table_objet($this->table)); // article
 		$this->_objet     = table_objet($this->_type); // articles
-		$this->_table_sql = table_objet_sql($this->table); // spip_articles
 		
 		// calculer l'id du champ extra
 		$this->make_id();
@@ -72,7 +77,7 @@ class ChampExtra{
 	function toArray(){
 		$extra = array();
 		foreach ($this as $cle=>$val) {
-			if ($cle[0]!=='_') {
+			if ($cle[0] !== '_') {
 				$extra[$cle] = $val;
 			}
 		}

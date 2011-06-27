@@ -12,8 +12,8 @@ function iextras_get_extras(){
 		if (!is_array($extras)) $extras = array();
 		// reinitialiser aucazou les valeurs de tables
 		foreach($extras as $e) {
-			if (!$e->_table_sql) {
-				$e->definir(); // va recreer les infos des tables/objet/type
+			if (!$e->_objet) {
+				$e->definir(); // va recreer les infos des objet/type
 			}
 		}
 	}

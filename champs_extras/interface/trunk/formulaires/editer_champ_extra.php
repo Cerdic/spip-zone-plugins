@@ -18,8 +18,8 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 	// valeur par defaut tout de meme sur sql et pour saisie
 	if (!$valeurs['sql']) $valeurs['sql'] = "text NOT NULL DEFAULT ''";
 
-	if (!$valeurs['type']) {
-		$valeurs['type'] = "ligne";
+	if (!$valeurs['saisie']) {
+		$valeurs['saisie'] = "input";
 	}
 	
 	// si un extra est demande (pour edition)
@@ -31,10 +31,6 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 		if (!$extra) return false;
 		
 		$valeurs = array_merge($valeurs, $extra->toArray());
-		// compatibilite le temps de migrer vers cextras 1.4.0
-		if (isset($valeurs['precisions']) and $valeurs['precisions']) {
-			$valeurs['saisie_parametres']['explication'] = $valeurs['precisions'];
-		}
 
 		// chaque saisie_parametres devient un parametre a charger
 		$valeurs = array_merge($valeurs, $valeurs['saisie_parametres']);
@@ -53,7 +49,7 @@ function formulaires_editer_champ_extra_verifier_dist($extra_id='new', $redirect
 	$extra = iextras_post_formulaire();
 	
 	// pas de champ vide
-	foreach(array('champ', 'table', 'type', 'label', 'sql') as $c) {
+	foreach(array('champ', 'table', 'saisie', 'label', 'sql') as $c) {
 		if (!$extra[$c]) {
 			$erreurs[$c] = _T('iextras:veuillez_renseigner_ce_champ');
 		}
@@ -98,7 +94,7 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 	// cextra 1.4.0 : on separe les parametres des saisies
 	// dans un tableau specifique
 	$extra['saisie_parametres'] = array();
-	foreach (array('explication', 'attention', 'class', 'li_class') as $p) {
+	foreach (array('explication', 'attention', 'class', 'li_class', 'datas') as $p) {
 		$extra['saisie_parametres'][$p] = $extra[$p];
 		unset($extra[$p]);
 	}
@@ -158,12 +154,12 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 function iextras_post_formulaire() {
 	$extra = array();
 	foreach(array(
-		'champ', 'table', 'type',
+		'champ', 'table', 'saisie',
 		'label', 'sql',
 		'traitements',
-		// 'precisions',
 		'obligatoire',
-		'enum', 'rechercher',
+		'datas', 
+		'rechercher',
 		'explication', 'attention', 'class', 'li_class'
 	) as $c) {
 		$extra[$c] = _request($c);
