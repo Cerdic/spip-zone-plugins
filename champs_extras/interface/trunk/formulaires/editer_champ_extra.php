@@ -35,12 +35,7 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 		if (isset($valeurs['precisions']) and $valeurs['precisions']) {
 			$valeurs['saisie_parametres']['explication'] = $valeurs['precisions'];
 		}
-		// separer saisies internes a celles du plug "saisies"
-		if ($valeurs['saisie_externe']) {
-			$valeurs['type'] = 'externe/' . $valeurs['type'];
-		} else {
-			$valeurs['type'] = 'interne/' . $valeurs['type'];
-		}
+
 		// chaque saisie_parametres devient un parametre a charger
 		$valeurs = array_merge($valeurs, $valeurs['saisie_parametres']);
 	}
@@ -107,9 +102,6 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 		$extra['saisie_parametres'][$p] = $extra[$p];
 		unset($extra[$p]);
 	}
-	// type est soit interne, soit externe (plugin saisies)
-	$extra['saisie_externe'] = (substr($extra['type'],0,7) == 'externe' );
-	$extra['type'] = substr($extra['type'], 8); // enlever 'externe/' et 'interne/'
 
 	// recreer le tableau de stockage des extras
 	$extras = iextras_get_extras();

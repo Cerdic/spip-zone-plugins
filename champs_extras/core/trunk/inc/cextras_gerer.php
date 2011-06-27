@@ -3,37 +3,19 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/cextras');
 
-// mettre 'true' pour autoriser l'utilisation
-// les saisies du plugin SAISIES
-// en plus de celles de 'extra-saisies/'
-// (experimental)
-define('_CHAMPS_EXTRAS_SAISIES_EXTERNES', false);
-
 // retourne la liste des objets valides utilisables par le plugin
 // (dont on peut afficher les champs dans les formulaires)
 function cextras_objets_valides(){
 	
 	$objets = array();
+	$tables = lister_tables_objets_sql();
+	ksort($tables);
 	
-	$objets_extensibles = pipeline("objets_extensibles", array(
-		'article'     => _T('cextras:table_article'),
-		'auteur'      => _T('cextras:table_auteur'),
-		'breve'       => _T('cextras:table_breve'),
-		'groupes_mot' => _T('cextras:table_groupes_mot'),
-		'mot'         => _T('cextras:table_mot'),
-		'rubrique'    => _T('cextras:table_rubrique'),
-		'site'        => _T('cextras:table_site')
-	));
-	ksort($objets_extensibles);
-	
-	foreach ($objets_extensibles as $objet => $traduction) {
-		$objets[$objet] = array(
-			'table' => table_objet_sql($objet), 
-			'type' => objet_type(table_objet($objet)), 
-			'nom' => $traduction,
-		);
+	foreach($tables as $table => $desc) {
+		if ($tables['principale'] == 'oui') {
+			$objets[$table] = $desc;
+		}
 	}
-
 	return $objets;
 }
 
@@ -41,8 +23,8 @@ function cextras_objets_valides(){
 // formater pour les boucles pour 'type'=>'nom'
 function cextras_objets_valides_boucle_pour(){
 	$objets = array();
-	foreach(cextras_objets_valides() as $objet) {
-		$objets[$objet['type']] = $objet['nom'];
+	foreach(lister_tables_objets_sql() as $table => $desc) {
+		$objets[ $desc['type'] ] = $desc['texte_objets'];
 	}
 	return $objets;
 }
@@ -53,26 +35,9 @@ function cextras_objets_valides_boucle_pour(){
 // (crayons appelle cela des 'controleurs')
 function cextras_types_formulaires(){
 	$types = array();
-	
-	// saisies de ce plugin
-	$saisies = find_all_in_path('extra-saisies/','.*\.html$');
-	$noms = array();
-	foreach($saisies as $saisie) {
-		$type = basename($saisie,'.html');
-		$noms['interne/'.$type] = _T('cextras:type', array('type' => $type));
-	}
-	$types[_T('iextras:saisies_champs_extras')] = $noms;
-
-		
-	if (_CHAMPS_EXTRAS_SAISIES_EXTERNES) {
-		// plugin saisies (attention au chemin "/saisies/saisies/_base.html")
-		$saisies = find_all_in_path('saisies/','/([^_/]{1}[^/]*)\.html$');
-		$noms = array();
-		foreach($saisies as $saisie) {
-			$type = basename($saisie,'.html');
-			$noms['externe/'.$type] = _T('cextras:type', array('type' => $type));
-		}
-		$types[_T('iextras:saisies_saisies')] = $noms;
+	include_spip('inc/saisies');
+	foreach(saisies_lister_disponibles() as $saisie => $desc) {
+		$types[$saisie] = $desc['titre'];
 	}
 
 	return $types;
@@ -126,23 +91,27 @@ function creer_champs_extras($champs) {
 		return false;
 	}
 	
+	
 	// on met a jour les tables trouvees
 	// recharger les tables principales et auxiliaires
+/*
 	include_spip('base/serial');
 	include_spip('base/auxiliaires');
 	global $tables_principales, $tables_auxiliaires;
 	base_serial($tables_principales);
 	base_auxiliaires($tables_auxiliaires);
+*/
 	
 	// inclure les champs extras declares ALORS que le pipeline
 	// n'est pas encore actif : important lorsqu'on active
 	// en meme temps CE2 et un plugin dependant
 	// et non l'un apres l'autre
+/*
 	if (!defined('_CHAMPS_EXTRAS_DECLARES')) {
 		include_spip('base/cextras');
 		$tables_principales = cextras_declarer_tables_principales($tables_principales);
 	}
-
+*/
 	// executer la mise a jour
 	include_spip('base/create');
 	maj_tables($tables);
@@ -205,27 +174,22 @@ function vider_champs_extras($champs) {
 function extras_champs_utilisables($connect='') {
 	$tout = extras_champs_anormaux($connect);
 	$objets = cextras_objets_valides();
-
-	$tables_utilisables = array();
-	foreach ($objets as $o){$tables_utilisables[] = $o['table'];}
-	foreach ($tout as $table=>$champs) {
-		if (!in_array($table, $tables_utilisables)) {
-			unset($tout[$table]);
-		}
-	}
-	return $tout;
+	return array_diff_key($tout, $objets);
 }
 
 // Liste les champs anormaux par rapport aux definitions de SPIP
 // (aucune garantie que $connect autre que la connexion principale fasse quelque chose)
 function extras_champs_anormaux($connect='') {
-	// recuperer les tables et champs accessibles
+	// recuperer les tables et champs de la base de donnees
+	// les vrais de vrai dans la base sql...
 	$tout = extras_base($connect);
 
 	// recuperer les champs SPIP connus
-	include_spip('base/auxiliaires');
-	include_spip('base/serial');
-	$tables_spip = array_merge($GLOBALS['tables_principales'], $GLOBALS['tables_auxiliaires']);
+	// si certains ne sont pas declares alors qu'ils sont presents
+	// dans la base sql, on pourra proposer de les utiliser comme champs
+	// extras (plugin interface).
+	include_spip('base/objets');
+	$tables_spip = lister_tables_objets_sql();
 
 	// chercher ce qui est different
 	$ntables = array();
@@ -290,31 +254,4 @@ function extras_champs($table, $connect) {
 	}
 }
 
-
-/** fonctions non utilisees du futur defunt plugin extras2 **
-
-// Liste les connexions disponibles dans config/
-function extras_connexions() {
-	$connexions = array();
-	foreach(preg_files(_DIR_CONNECT.'.*[.]php$') as $fichier) {
-		if (lire_fichier($fichier, $contenu)
-		AND strpos($contenu, 'spip_connect_db')
-		)
-			$connexions[] = basename($fichier, '.php');
-	}
-
-	return $connexions;
-}
-
-
-// etablit la liste de tous les champs de toutes les tables de toutes les bases dispos
-function extras_tout() {
-	$champs = array();
-	foreach(extras_connexions() as $connect)
-		foreach (extras_tables($connect) as $table)
-			$champs[$connect][$table] = extras_champs($table, $connect);
-
-	return $champs;
-}
-*/
 ?>

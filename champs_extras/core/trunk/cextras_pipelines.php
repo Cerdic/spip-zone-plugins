@@ -21,58 +21,6 @@ function cextras_enum_array($enum) {
 	return $enums;	
 }
 
-// Creer les item d'un select a partir des enum
-function cextras_enum($enum, $val='', $type='valeur', $name='', $class='') {
-
-	// transformer la saisie utilisateur en tableau
-	$enums = cextras_enum_array($enum);
-
-	$val_t = explode(',', $val);
-	$class = $class ? " class='$class'" : '';
-	foreach($enums as $cle => $desc) {
-		switch($type) {
-			case 'valeur':
-				$enums[$cle] =
-					($cle == $val
-					OR in_array($cle, $val_t))
-						? sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
-						: '';
-				break;
-			case 'option':
-				$enums[$cle] = '<option value="'.entites_html($cle).'"'
-					. ($cle == $val
-						? " selected='selected'"
-						: ''
-					) .'> '.sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
-					.'</option>'
-					."\n";
-				break;
-			case 'radio':
-				$enums[$cle] = "<div class='choix'><input type='radio' name='$name'$class id='${name}_$cle' value=\"".entites_html($cle).'"'
-					. ($cle == $val
-						? " checked='checked'"
-						: ''
-					) ."><label for='${name}_$cle'>"
-					. sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
-					.'</label></div>'
-					."\n";
-				break;
-			case 'cases':
-				$enums[$cle] = "<div class='choix'><input type='checkbox' name='${name}[]'$class id='${name}_$cle' value=\"".entites_html($cle).'"'
-					. (in_array($cle, $val_t)
-						? " checked='checked'"
-						: ''
-					) ." /><label for='${name}_$cle'>"
-					. sinon(sinon($desc,$cle),_T('cextras:cextra_par_defaut'))
-					.'</label></div>'
-					."\n";
-				break;
-		}
-	}
-
-	return trim(join("\n", $enums));
-}
-
 
 // Calcule des elements pour le contexte de compilation
 // des squelettes de champs extras
@@ -102,27 +50,9 @@ function cextras_creer_contexte($c, $contexte_flux, $prefixe='') {
 }
 
 
-// recuperation d'une saisie interne
-function ce_calculer_saisie_interne($c, $contexte, $prefixe='') {
-	// le contexte possede deja l'entree SQL,
-	// calcule par le pipeline formulaire_charger.
-	$contexte = cextras_creer_contexte($c, $contexte, $prefixe);
-
-	// calculer le bon squelette et l'ajouter
-	if (!find_in_path(
-	($f = 'extra-saisies/'.$c->type).'.html')) {
-		// si on ne sait pas, on se base sur le contenu
-		// pour choisir ligne ou bloc
-		$f = strstr($contexte[$prefixe . $c->champ], "\n")
-			? 'extra-saisies/bloc'
-			: 'extra-saisies/ligne';
-	}
-	return array($f, $contexte);
-}
-
 
 // en utilisant le plugin "saisies"
-function ce_calculer_saisie_externe($c, $contexte, $prefixe='') {
+function ce_calculer_saisie($c, $contexte, $prefixe='') {
 	
 	$nom_champ = $prefixe . $c->champ;
 	$contexte['nom'] = $nom_champ;
@@ -264,11 +194,8 @@ function cextras_editer_contenu_objet($flux){
 				'contexte' => $flux['args']['contexte'])))
 			{
 
-				if ($c->saisie_externe) {
-					list($f, $contexte) = ce_calculer_saisie_externe($c, $flux['args']['contexte'], $prefixe);
-				} else {
-					list($f, $contexte) = ce_calculer_saisie_interne($c, $flux['args']['contexte'], $prefixe);
-				}
+				list($f, $contexte) = ce_calculer_saisie($c, $flux['args']['contexte'], $prefixe);
+
 				// Si un prefixe de champ est demande par le pipeline
 				// par exemple pour afficher et completer un objet différent dans
 				// le formulaire d'un premier objet (ex: spip_auteurs_etendus et spip_auteurs)
@@ -340,11 +267,11 @@ function cextras_afficher_contenu_objet($flux){
 			{
 
 				$contexte = cextras_creer_contexte($c, $contexte);
-				$saisie_externe = false;
-				
+
 				// calculer le bon squelette et l'ajouter
-				if($c->saisie_externe && find_in_path(
-				($f = 'saisies-vues/'.$c->type).'.html')){
+				if (!find_in_path(($f = 'saisies-vues/'.$c->type).'.html')) {
+					extras_log("Vue de saisie non trouvee pour $c->type", true);
+				} else {
 					$contexte['valeur'] = $contexte[$c->champ];
 					// ajouter les listes d'éléments possibles
 					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
@@ -359,22 +286,12 @@ function cextras_afficher_contenu_objet($flux){
 					if ($contexte['datas']) {
 						$contexte['valeur'] = explode(',', $contexte['valeur']);
 					}
-						
-					$saisie_externe = true;
-				}
-				else if (!find_in_path(
-				($f = 'extra-vues/'.$c->type).'.html')) {
-					// si on ne sait pas, on se base sur le contenu
-					// pour choisir ligne ou bloc
-					$f = strstr($contexte[$c->champ], "\n")
-						? 'extra-vues/bloc'
-						: 'extra-vues/ligne';
-				}
-				$extra = recuperer_fond($f, $contexte);
-				if($saisie_externe){
+					
+					$extra = recuperer_fond($f, $contexte);
 					$extra = '<div class="'.$c->champ.'"><strong>'._T($c->label).'</strong>'.$extra.'</div>';
-				}
-				$flux['data'] .= "\n".$extra;
+					
+					$flux['data'] .= "\n".$extra;
+				} 
 			}
 		}
 	}
@@ -442,37 +359,6 @@ function cextras_formulaire_verifier($flux){
 	return $flux;
 }
 
-
-// prendre en compte les champs extras 2 dans les recherches
-// pour les champs qui le demandent
-function cextras_rechercher_liste_des_champs($tables){
-	if ($champs = pipeline('declarer_champs_extras', array())) {
-		$t = array();
-		// trouver les tables/champs a rechercher
-		foreach ($champs as $c) {
-			if ($c->rechercher) {
-				// priorite 2 par defaut, sinon sa valeur.
-				// Plus le chiffre est grand, plus les points de recherche
-				// attribues pour ce champ seront eleves
-				if ($c->rechercher === true
-				OR  $c->rechercher === 'oui'
-				OR  $c->rechercher === 'on') {
-					$priorite = 2;
-				} else {
-					$priorite = intval($c->rechercher);
-				}
-				if ($priorite) {
-					$t[$c->_type][$c->champ] = $priorite;
-				}
-			}
-		}
-		// les ajouter
-		if ($t) {
-			$tables = array_merge_recursive($tables, $t);
-		}
-	}
-	return $tables;
-}
 
 
 ?>

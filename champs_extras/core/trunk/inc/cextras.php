@@ -22,8 +22,7 @@ class ChampExtra{
 	var $_objet = ''; // rubriques
 	var $_table_sql = ''; // spip_rubriques
 
-	// experimental (avec saisies)
-	var $saisie_externe = false;
+
 	var $saisie_parametres = array();
 		/*
 		    peut indiquer tout parametre d'une #SAISIE, tel que :
@@ -85,37 +84,6 @@ class ChampExtra{
 	function __toString() {
 		return "<pre>" . print_r($this, true) . "</pre>";
 	}
-}
-
-
-function declarer_champs_extras($champs, $tables){
-	// ajoutons les champs un par un
-	foreach ($champs as $c){
-		$table = $c->_table_sql;
-		if (isset($tables[$table]) and $c->champ and $c->sql) {
-			$tables[$table]['field'][$c->champ] = $c->sql;
-		}
-	}
-	return $tables;
-}
-
-
-function declarer_champs_extras_interfaces($champs, $interface){
-	// ajoutons les filtres sur les champs
-	foreach ($champs as $c){
-		if ($c->traitements and $c->champ and $c->sql) {
-			$tobjet = $c->_objet;
-			$balise = strtoupper($c->champ);
-			// definir
-			if (!isset($interface['table_des_traitements'][$balise])) {
-				$interface['table_des_traitements'][$balise] = array();
-			}
-			// le traitement peut etre le nom d'un define
-			$traitement = defined($c->traitements) ? constant($c->traitements) : $c->traitements;
-			$interface['table_des_traitements'][$balise][$tobjet] = $traitement;
-		}
-	}
-	return $interface;
 }
 
 

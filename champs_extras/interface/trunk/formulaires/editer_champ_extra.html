@@ -26,7 +26,7 @@
 				label=<:iextras:label_label:>,
 				explication=<:iextras:precisions_pour_label:>,
 				obligatoire=oui})]
-			[(#SAISIE{selection_par_groupe,type,
+			[(#SAISIE{selection,type,
 				label=<:iextras:label_type:>,
 				obligatoire=oui,
 				explication=<:iextras:precisions_pour_type:>,
@@ -78,7 +78,7 @@
 				label=<:iextras:label_explication:>,
 				explication=<:iextras:precisions_pour_explication:>})]
 
-[(#VAL{_CHAMPS_EXTRAS_SAISIES_EXTERNES}|defined|et{#EVAL{_CHAMPS_EXTRAS_SAISIES_EXTERNES}})
+
 			[(#SAISIE{input,attention,
 				label=<:iextras:label_attention:>,
 				explication=<:iextras:precisions_pour_attention:>})]
@@ -86,7 +86,6 @@
 			[(#SAISIE{input,li_class,
 				label=<:iextras:label_li_class:>,
 				explication=<:iextras:precisions_pour_li_class:>})]
-]
 
 			[(#SAISIE{input,class,
 				label=<:iextras:label_class:>,

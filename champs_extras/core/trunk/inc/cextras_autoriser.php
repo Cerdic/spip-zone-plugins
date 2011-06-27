@@ -1,12 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// mes_fonctions peut aussi declarer des autorisations, donc il faut donc le charger
-// en 2.1, c'est deja fait dans inc/autoriser.
-// en 2.0, c'est include ($f) au lieu de include_once dans public/parametrer...
-// du coup, on appelle directement ce fichier pour eviter des plantages.
-include_spip('public/parametrer'); 
-
+// mes_fonctions peut aussi declarer des autorisations
 
 // fonction pour le pipeline autoriser
 function cextras_autoriser(){}
@@ -154,8 +149,8 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 		// on tente de le trouver dans la table de l'objet
 		$table = table_objet_sql($objet);
 		$id_table = id_table_objet($table);
-		$trouver_table = charger_fonction('trouver_table', 'base');
-		$desc = $trouver_table( table_objet($table) );
+		include_spip('base/objets');
+		$desc = lister_tables_objets_sql($table);
 		if (isset($desc['field'][$_id_cible])) {
 			$id_cible = sql_getfetsel($_id_cible, $table, "$id_table=".sql_quote($id_objet));
 		}

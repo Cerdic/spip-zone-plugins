@@ -1,29 +1,52 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function cextras_declarer_tables_principales($tables_principales){
-	// declarer que le pipeline de declaration est bien actif
-	define('_CHAMPS_EXTRAS_DECLARES', true);
-	
+
+/* 
+ * Déclarer les nouveaux champs et 
+ * les nouvelles infos des objets éditoriaux
+ */
+function cextras_declarer_tables_objets_sql($tables){
+
 	// pouvoir utiliser la class ChampExtra
 	include_spip('inc/cextras');
-
-	// lors du renouvellement de l'alea, au demarrage de SPIP
-	// les chemins de plugins ne sont pas encore connus.
-	// il faut se mefier et charger tout de meme la fonction, sinon page blanche.
-	if (!function_exists('declarer_champs_extras')) {
-		include_once(dirname(__file__).'/../inc/cextras.php');
-	}
 	
 	// recuperer les champs crees par les plugins
 	$champs = pipeline('declarer_champs_extras', array());
-
-	// ajouter les champs au tableau spip
-	return declarer_champs_extras($champs, $tables_principales);
+	
+	// ajoutons les champs un par un
+	foreach ($champs as $c){
+		$table = $c->_table_sql;
+		if (isset($tables[$table]) and $c->champ and $c->sql) {
+			$tables[$table]['field'][$c->champ] = $c->sql;
+			// ajouter le champ dans la fonction de recherche de SPIP
+			if ($c->rechercher) {
+				// priorite 2 par defaut, sinon sa valeur.
+				// Plus le chiffre est grand, plus les points de recherche
+				// attribues pour ce champ seront eleves
+				if ($c->rechercher === true
+				OR  $c->rechercher === 'oui'
+				OR  $c->rechercher === 'on') {
+					$priorite = 2;
+				} else {
+					$priorite = intval($c->rechercher);
+				}
+				if ($priorite) {
+					$tables[$table]['rechercher_champs'][$c->champ] = $priorite;
+				}
+			}
+		}
+	}
+	
+	return $tables;
 }
 
 
-
+/**
+ * Déclarer les nouvelles infos sur les champs extras ajoutés
+ * en ce qui concerne les traitements automatiques sur les balises.
+ *
+**/
 function cextras_declarer_tables_interfaces($interface){
 
 	// pouvoir utiliser la class ChampExtra
@@ -32,8 +55,22 @@ function cextras_declarer_tables_interfaces($interface){
 	// recuperer les champs crees par les plugins
 	$champs = pipeline('declarer_champs_extras', array());
 
+	// ajoutons les filtres sur les champs
+	foreach ($champs as $c){
+		if ($c->traitements and $c->champ and $c->sql) {
+			$tobjet = $c->_objet;
+			$balise = strtoupper($c->champ);
+			// definir
+			if (!isset($interface['table_des_traitements'][$balise])) {
+				$interface['table_des_traitements'][$balise] = array();
+			}
+			// le traitement peut etre le nom d'un define
+			$traitement = defined($c->traitements) ? constant($c->traitements) : $c->traitements;
+			$interface['table_des_traitements'][$balise][$tobjet] = $traitement;
+		}
+	}
 	// ajouter les champs au tableau spip
-	return declarer_champs_extras_interfaces($champs, $interface);
+	return $interface;
 }
 
 

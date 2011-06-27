@@ -1,8 +1,8 @@
 <plugin>
-	<nom><multi>[fr]Champs Extras2[de]Zusatzfelder 2[en]Extra fields 2[it]Campi Extra 2</multi></nom>
+	<nom><multi>[fr]Champs Extras[de]Zusatzfelder[en]Extra fields[it]Campi Extra</multi></nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.9.0</version>
+	<version>2.0.0-dev</version>
 	<icon>images/cextras-64.png</icon>
 	<description>
 		<multi>
@@ -13,21 +13,27 @@
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Champs-Extras-2</lien>
-	<etat>test</etat>
+	<etat>dev</etat>
 	<prefix>cextras</prefix>
 	<options>cextras_options.php</options>
 	<fonctions>cextras_balises.php</fonctions>
 	<necessite id="SPIP" version="[2.0;]" />
+	
+	<!-- declaration de pipeline -->
+	<pipeline><nom>declarer_champs_extras</nom><action></action></pipeline>
+	
  	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/cextras_autoriser.php</inclure>
 	</pipeline>	
-	<!--
+
+<!--
  	<pipeline>
-		<nom>declarer_tables_principales</nom>
+		<nom>declarer_tables_objets_sql</nom>
 		<inclure>base/cextras.php</inclure>
 	</pipeline>	
-	-->
+-->
+
  	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<inclure>cextras_pipelines.php</inclure>
@@ -36,6 +42,7 @@
 		<nom>afficher_contenu_objet</nom>
 		<inclure>cextras_pipelines.php</inclure>
 	</pipeline>	
+	
  	<pipeline>
 		<nom>pre_edition</nom>
 		<inclure>cextras_pipelines.php</inclure>
@@ -44,9 +51,8 @@
 		<nom>formulaire_verifier</nom>
 		<inclure>cextras_pipelines.php</inclure>
 	</pipeline>	
- 	<pipeline>
-		<nom>rechercher_liste_des_champs</nom>
-		<inclure>cextras_pipelines.php</inclure>
-	</pipeline>	
+
 	<categorie>outil</categorie>
+	
+	<necessite id="saisies" version="[1.9.0;]" />
 </plugin>

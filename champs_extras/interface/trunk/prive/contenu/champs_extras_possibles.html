@@ -1,7 +1,7 @@
 <BOUCLE_si_extras(CONDITION){si #ENV{extras}}>
 [(#CHEMIN{images/iextras-24.png}|debut_cadre_trait_couleur{1, "", <:iextras:liste_des_extras_possibles:>})]
 	<BOUCLE_tables(POUR){tableau #ENV**{extras}}>
-	<h2>[(#ENV**{noms_tables}|table_valeur{#CLE|replace{^spip_|s$,''}}|table_valeur{nom})]</h2>
+	<h2>[(#CLE|lister_tables_objets_sql|table_valeur{texte_objets})]</h2>
 		<B_extras>
 		<ul class="liste_extras_possibles">
 		<BOUCLE_extras(POUR){tableau #VALEUR}>

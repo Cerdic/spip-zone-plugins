@@ -42,12 +42,10 @@ function exec_iextras_dist(){
 	include_spip('inc/iextras');
 	include_spip('inc/cextras_gerer');
 	echo recuperer_fond('prive/contenu/champs_extras', array(
-		'extras'=>iextras_get_extras_par_table(),
-		'noms_tables'=>cextras_objets_valides()
+		'extras'=>iextras_get_extras_par_table()
 	));
 	echo recuperer_fond('prive/contenu/champs_extras_possibles', array(
-		'extras'=>extras_champs_utilisables(),
-		'noms_tables'=>cextras_objets_valides()
+		'extras'=>extras_champs_utilisables()
 	));
 			
 	echo icone_inline(_T('iextras:icone_creer_champ_extra'), generer_url_ecrire("iextras_edit"), find_in_path("images/iextras-24.png"), "creer.gif", $spip_lang_right);

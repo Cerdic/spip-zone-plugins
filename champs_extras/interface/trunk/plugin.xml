@@ -8,7 +8,7 @@
 	</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.2.2</version>
+	<version>2.0.0-dev</version>
 	<icon>images/iextras-64.png</icon>
 	<description>
 		<multi>
@@ -19,9 +19,10 @@
 	</description>
 	<etat>dev</etat>
 	<prefix>iextras</prefix>
+	
 	<necessite id="cextras" version="[1.4.5;]" />
-	<necessite id="spip_bonux" version="[1.2;]" />
-	<necessite id="saisies" version="[1.6.1;]" />
+	<necessite id="saisies" version="[1.9.0;]" />
+	<necessite id="yaml" version="[1.5;]" />
 	
 	<pipeline>
 		<nom>declarer_champs_extras</nom>
@@ -32,10 +33,6 @@
 		<inclure>inc/iextras_autoriser.php</inclure>
 	</pipeline>
 	
-	<onglet id='iextras' parent='configuration'>
-		<icone>images/iextras-24.png</icone>
-		<titre>iextras:champs_extras</titre>
-	</onglet>
 	
 	<bouton id='iextras' parent='bando_configuration'>
 		<icone>images/iextras-16.png</icone>
