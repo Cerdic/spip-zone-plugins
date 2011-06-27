@@ -2,7 +2,7 @@
 	<nom>SVP</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.8.3</version>
+	<version>0.9.0</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/svp-64.png</icon>
 	<etat>test</etat>
@@ -44,20 +44,11 @@
 		<inclure>inc/svp_autoriser.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>affiche_enfants</nom>
-		<inclure>svp_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>insert_head_css</nom>
-		<inclure>svp_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
 		<nom>header_prive_css</nom>
 		<inclure>svp_pipelines.php</inclure>
 	</pipeline>
 
 	<necessite id="SPIP" version='[3.0.0-dev;]' />
-	<utilise id="Zpip" version='[2.0.2-dev;]' />
 
 	<categorie>maintenance</categorie>
 </plugin>
