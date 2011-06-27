@@ -1,0 +1,16 @@
+#CACHE{0}
+<BOUCLE_intro(ARTICLES){id_article}{tout_voir}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=head/#ENV{type},env}>
+<INCLURE{fond=inclure/head}>
+</head>
+
+<body class="page_#ENV{type,page}[ #ENV{type,page}_(#ENV{composition,''})]">
+<INCLURE{fond=body,env}>
+</body>
+</html>
+</BOUCLE_intro>
