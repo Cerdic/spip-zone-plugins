@@ -1,5 +1,8 @@
 <?php
 
+# textwheel fournit yaml_decode() aussi...
+# include_spip('inc/yaml-mini');
+
 # wrapper de la class sfYAML pour SPIP
 #
 # fournit deux fonctions pour YAML,
@@ -40,6 +43,7 @@ function yaml_encode($struct, $opt = array()) {
  * Decode un texte yaml, renvoie la structure
  * @param string $input
  */
+if (!function_exists('yaml_decode')) {
 function yaml_decode($input) {
 	// Si PHP4
 	if (_LIB_YAML == 'spyc-php4') {
@@ -54,6 +58,7 @@ function yaml_decode($input) {
 
 	require_once _DIR_PLUGIN_YAML.'inc/yaml_sfyaml.php';
 	return yaml_sfyaml_decode($input);
+}
 }
 
 /*
