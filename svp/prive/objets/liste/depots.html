@@ -7,6 +7,7 @@
 	- titre     : le titre de la liste
 	- par       : le champ tri principal
 	- pas       : le pas de pagination
+	- recherche : critere de recherche
 	- where     : condition d'exclusion du depot eventuellement en cours d'affichage (page depot)
 	- affichage : complet, tous les champs, ou simplifie, le titre et l'id pour la liste en extra/navigation
  -->]
@@ -35,7 +36,7 @@
 			</tr>
 		</thead>
 		<tbody>
-<BOUCLE_liste_depots(DEPOTS) {where?}{tri #ENV{par, titre}, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
+<BOUCLE_liste_depots(DEPOTS) {where?}{recherche?}{tri #ENV{par, titre}, #GET{defaut_tri}}{pagination #ENV{pas, 5}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="titre principale">
 				[(#ENV{affichage}|=={complet}|oui)[(#LOGO_DEPOT|image_reduire{20,26})]]

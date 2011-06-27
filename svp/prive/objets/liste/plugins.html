@@ -8,6 +8,7 @@
 	- pas       : le pas de pagination
 	- categorie : filtrer la liste sur categorie
 	- id_depot  : filtrer la liste sur un depot
+	- recherche : critere de recherche
 	- where     : condition supplementaire construire par l'appelant (non utilisee)
  -->]
 
@@ -33,7 +34,7 @@
 			</tr>
 		</thead>
 		<tbody>
-<BOUCLE_liste_plugins(PLUGINS) {where?}{id_depot?}{categorie?}{tri #ENV{par, nom}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}>
+<BOUCLE_liste_plugins(PLUGINS) {where?}{id_depot?}{categorie?}{recherche?}{tri #ENV{par, nom}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="titre principale">
 					<a[ href="(#ID_PLUGIN|generer_url_entite{plugin})"] title="<:svp:bulle_afficher_plugin:>">

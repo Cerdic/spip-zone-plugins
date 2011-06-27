@@ -8,6 +8,7 @@
 	- pas       : le pas de pagination
 	- id_depot  : filtrer la liste sur un depot
 	- id_plugin : filtrer la liste sur un plugin
+	- recherche : critere de recherche
 	- where     : condition supplementaire construire par l'appelant (non utilisee)
  -->]
 
@@ -33,7 +34,7 @@
 			</tr>
 		</thead>
 		<tbody>
-<BOUCLE_liste_paquets(PAQUETS) {where?}{id_depot?}{id_plugin?}{tri #ENV{par, nom_archive}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}>
+<BOUCLE_liste_paquets(PAQUETS) {where?}{id_depot?}{id_plugin?}{recherche?}{tri #ENV{par, nom_archive}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<BOUCLE_depot_paquet(DEPOTS) {id_depot}>
 				<td class="titre principale">
