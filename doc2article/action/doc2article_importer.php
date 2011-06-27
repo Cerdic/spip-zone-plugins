@@ -29,19 +29,30 @@ function action_doc2article_importer_dist($arg=null){
 			'statut'=>'publie'
 		);
 
+		// envoyer aux plugins
+		$valeurs_article = pipeline('doc2article_preparer_article',
+			array(
+				'args' => array(
+					'id_doc2article' => $doc2article['id_doc2article'],
+					'fichier' => $doc2article['fichier'],
+				),
+				'data' => $valeurs_article
+			)
+		);
+
 		// creation de l'article
 		$article = $crud('create','articles',null,$valeurs_article);
+		
+		// corriger l'id_auteur attribué automatiquement par action/editer_article
+		sql_delete('spip_auteurs_articles', 'id_article='.$article['result']['id']);
+		sql_insertq('spip_auteurs_articles', array('id_auteur' => $doc2article['id_auteur'], 'id_article' => $article['result']['id']));
 		
 		if(!$article['success']) {
 			$err = _T('doc2article:erreur_creation_article');
 		} else {
 			spip_log("création de l'article ". $article['result']['id'],"doc2article");
 			spip_log($valeurs_article,"doc2article");
-			
-			// detacher l'auteur de la session + attacher l'auteur à l'article
-			sql_delete('spip_auteurs_articles', 'id_article='.$article['result']['id']);
-			sql_insertq('spip_auteurs_articles', array('id_auteur' => $doc2article['id_auteur'], 'id_article' => $article['result']['id']));
-			
+						
 			// ajout du doc à l'article
 			$doc = $crud('create','documents',null,
 				array(

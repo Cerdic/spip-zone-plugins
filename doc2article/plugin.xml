@@ -24,6 +24,7 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>doc2article_pipelines.php</inclure>
 	</pipeline>
+	<pipeline><nom>doc2article_preparer_article</nom></pipeline>
 	<bouton id='doc2article' parent='bando_publication'>
 		<icone>images/doc2article-16.png</icone>
 		<titre>doc2article:icone_doc2article</titre>
