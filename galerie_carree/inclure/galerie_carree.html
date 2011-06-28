@@ -71,8 +71,7 @@
 	{pagination #GET{pas}}
 	></BOUCLE_photos>
 	[(#ENV{pagination}|=={non}|?{' '})
-		<p class="plus"><a
-		href="[(#URL_PAGE{page_photos})]"><:photos_tout:></a></p>
+		<p class="plus"><a href="[(#URL_PAGE{page_photos})]"><:images_tout:></a></p>
 	]
 	[(#ENV{pagination}|=={non}|?{'',' '})
 		[<p class="pagination">(#PAGINATION)[
