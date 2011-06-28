@@ -1,0 +1,42 @@
+#CACHE{0}[(#ENV{type,''}|=={export}|oui)
+	[(#ENV{pub,''}|pubban_exporter)]
+]
+[(#ENV{type,''}|=={export}|non)
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>APERCU DE PUBLICITE - [(#NOM_SITE_SPIP|textebrut)]</title>
+<INCLURE{fond=inc-head}>
+<style>
+.spip-admin-float { display:none; }
+.table_statpub { border:2px solid #ccc;text-align:left;}
+.header_th { background-color: #ccc; line-height:1.8em; font-size:1.4em;}
+.header_td { background-color: #ccc; }
+.pubban_statpub_entry {font-variant:italic;}
+abbr { border-bottom: 1px dotted; cursor: help; }
+</style>
+<script type='text/javascript'>
+function popup(l,h,url) {
+	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
+	pp.focus();
+}
+</script>
+</head>
+<body>
+<center>
+	&#091;&nbsp;<a href="[(#SELF|parametre_url{type,export})]">exporter</a>&nbsp;&#093;
+	&nbsp;&nbsp;
+	&#091;&nbsp;<a href="javascript:print()">imprimer</a>&nbsp;&#093;
+	&nbsp;&nbsp;
+	&#091;&nbsp;<a href="javascript:window.close()">fermer</a>&nbsp;&#093;
+	<hr>
+
+[(#MODELE{stat_pub}{tablo_pub=[(#ENV{pub,''}|explode{','})]}{tablo_empl=[(#ENV{empl,''}|explode{','})]})]
+
+	<hr>
+	&#091;&nbsp;<a href="javascript:print()">imprimer</a>&nbsp;&#093;
+	&nbsp;&nbsp;
+	&#091;&nbsp;<a href="javascript:window.close()">fermer</a>&nbsp;&#093;
+</center>
+</body>
+</html>]

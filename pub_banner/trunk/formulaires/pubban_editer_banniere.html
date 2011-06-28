@@ -1,0 +1,39 @@
+<div class='formulaire_spip formulaire_editer formulaire_editer_pubban_pub-#ENV{id_pub,new}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+	  <ul>
+
+	    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+		    	<label for="titre"><:pubban:info_titre_banniere:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
+				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" />
+				<p class="explication"><:pubban:info_titre_comment:></p>
+	    </li>
+	    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{dimensions}|oui)erreur]">
+		    	<label for="width"><:pubban:info_taille_banniere:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{dimensions})</span>
+				]<:pubban:width:>&nbsp;<input type='text' class='text' name='width' id='width' value="[(#ENV**{width})]" style="width:60px" />
+				&nbsp;x&nbsp;
+				<:pubban:height:>&nbsp;<input type='text' class='text' name='height' id='height' value="[(#ENV**{height})]" style="width:60px" />
+				&nbsp;<:pubban:en_pixels:>
+	    </li>
+	    <li class="editer">
+	      		<label for="statut"><:pubban:info_emplacement:>&nbsp;:</label>
+				<select name='statut' id='statut' class="fondl">
+					<option value='1inactif'[(#ENV**{statut}|=={1inactif}|?{' selected="selected"'})] style='background-color: #B4E8C5'><:pubban:inactif:></option>
+					<option value='2actif'[(#ENV**{statut}|=={2actif}|?{' selected="selected"'})] style='background-color: #ffc5cc'><:pubban:actif:></option>
+				</select>
+	    </li>
+	    <li class="editer">
+		    	<label for="ratio_pages"><:pubban:info_ratio_banniere:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ratio_pages})</span>
+				]<input type='text' class='text' name='ratio_pages' id='ratio_pages' value="[(#ENV**{ratio_pages})]" style="width:100px" />
+				&nbsp;<:pubban:en_pourcent:>
+				<p class="explication"><:pubban:ratio_comment:></p>
+	    </li>
+	  </ul>
+	  <p class="boutons"><input type='submit' class='fondo' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

@@ -1,0 +1,77 @@
+	<a name="top"></a>
+	<div id="entete">
+		<strong id="nom_site_spip">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{img/ico-pubban.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Pub Banner<br /></b><small>by <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a><br /><i>Version 1.1 (stable)  - © 2009 <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/' class='spip_out' title='Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique' rel='external'>Creative Commons BY-NC-SA</a></i></small></td>
+</tr></table>
+
+		</strong>
+        
+                                    
+                            <div style="float: right; font-size: 0.9em;">
+		[ <a href="[(#SELF|parametre_url{doc,todolist})]">TODO</a> ]        	        [ <b>Pub</b> :
+	        	<a href="[(#SELF|parametre_url{doc,classtrees_Pub})]"><:phpdoc:map:></a> | 
+            	<a href="[(#SELF|parametre_url{doc,elementindex_Pub})]"><:phpdoc:index:></a> 
+            ]
+        						</div>
+	</div>
+
+
+    <div class="hfeed" id="conteneur" style="width: 100%">
+	    <div class="hentry" id="contenu"><h1 align="center"><:phpdoc:source_file_for:>&nbsp;'<i>PUBBAN</i>'</h1>
+<p><img src="[(#CHEMIN{doc_pub_banner//media/left.gif})]" alt=" " />&nbsp;<:phpdoc:back_to_doc:>&nbsp;:&nbsp;<a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---pubban.php})]">PUBBAN</a></p>
+<div class="src-code"><span class="php">
+<code><ol><li><div class="src-line"><a name="a1"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a2"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a3"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@name</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PUBBAN</span></div></li>
+<li><div class="src-line"><a name="a4"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@author</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Piero&nbsp;Wbmstr&nbsp;&lt;@link&nbsp;piero.wbmstr@gmail.com&gt;</span></div></li>
+<li><div class="src-line"><a name="a5"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@license</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http://creativecommons.org/licenses/by-nc-sa/3.0/&nbsp;Creative&nbsp;Commons&nbsp;BY-NC-SA</span></div></li>
+<li><div class="src-line"><a name="a6"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@version</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.0&nbsp;(06/2009)</span></div></li>
+<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@package</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pub&nbsp;Banner</span></div></li>
+<li><div class="src-line"><a name="a8"></a><span class="src-doc">&nbsp;*&nbsp;</span><span class="src-doc-coretag">@subpackage</span><span class="src-doc">&nbsp;&nbsp;&nbsp;&nbsp;Balises</span></div></li>
+<li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a10"></a><span class="src-key">if&nbsp;</span><span class="src-sym">(</span><span class="src-sym">!</span><a href="http://www.php.net/defined">defined</a><span class="src-sym">(</span><span class="src-str">&quot;_ECRIRE_INC_VERSION&quot;</span><span class="src-sym">))&nbsp;</span><span class="src-key">return</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a11"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a12"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---pubban.php})]#functionbalise_PUBBAN_dist">balise_PUBBAN_dist</a><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a13"></a>&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">calculer_balise_dynamique</span><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">,&nbsp;</span><span class="src-id"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---pubban.php})]">PUBBAN</a></span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-sym">))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a14"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a15"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a16"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---pubban.php})]#functionbalise_PUBBAN_dyn">balise_PUBBAN_dyn</a><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a17"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$div&nbsp;</span>=&nbsp;<span class="src-str">''</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a18"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$border&nbsp;</span>=&nbsp;<span class="src-sym">(&nbsp;</span><span class="src-id">_request</span><span class="src-sym">(</span><span class="src-str">'border'</span><span class="src-sym">)&nbsp;)&nbsp;</span>?&nbsp;<span class="src-id">_request</span><span class="src-sym">(</span><span class="src-str">'border'</span><span class="src-sym">)&nbsp;</span>:&nbsp;<span class="src-num">0</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a19"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$emplacement&nbsp;</span>=&nbsp;<a href="[(#SELF|parametre_url{doc,Pub/_pubban_options.php})]#functionpubban_recuperer_emplacement_par_nom">pubban_recuperer_emplacement_par_nom</a><span class="src-sym">(</span><span class="src-var">$p</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a20"></a>&nbsp;&nbsp;&nbsp;&nbsp;</div></li>
+<li><div class="src-line"><a name="a21"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$emplacement</span><span class="src-sym">[</span><span class="src-str">'statut'</span><span class="src-sym">]&nbsp;</span>==&nbsp;<span class="src-str">'2actif'</span><span class="src-sym">)&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a22"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$div&nbsp;</span>=&nbsp;<span class="src-str">&quot;&lt;center&gt;&lt;iframe&nbsp;name='&quot;</span>.<span class="src-var">$emplacement</span><span class="src-sym">[</span><span class="src-str">'titre'</span><span class="src-sym">]</span>.<span class="src-str">&quot;'&nbsp;src='&quot;</span>.<span class="src-id"><a href="[(#SELF|parametre_url{doc,Pub/_pubban_options.php})]#define_PUBBAN_ADDS_DISPLAYER">_PUBBAN_ADDS_DISPLAYER</a></span>.<span class="src-str">&quot;&amp;empl=&quot;</span>.<span class="src-var">$p</span>.<span class="src-str">&quot;'&nbsp;width=&quot;</span>.<span class="src-var">$emplacement</span><span class="src-sym">[</span><span class="src-str">'width'</span><span class="src-sym">]</span>.<span class="src-str">&quot;&nbsp;height=&quot;</span>.<span class="src-var">$emplacement</span><span class="src-sym">[</span><span class="src-str">'height'</span><span class="src-sym">]</span>.<span class="src-str">&quot;&nbsp;marginwidth=auto&nbsp;marginheight=0&nbsp;hspace=0&nbsp;vspace=0&nbsp;frameborder=&quot;</span>.<span class="src-var">$border</span>.<span class="src-str">&quot;&nbsp;scrolling=no&gt;&lt;/iframe&gt;&lt;/center&gt;&quot;</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a23"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a24"></a>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-var">$div</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a25"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a26"></a><span class="src-php">?&gt;</span></div></li>
+</ol></code>
+</span></div>
+			<br />
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	<div id="pied">
+	<table cellspacing="1em"><tr>
+	<td width="20%"></td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_pub_banner/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:> 
+		<br />| Tue, 23 Nov 2010 14:31:03 +0100
+		</p>
+	</td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_pub_banner/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</td>
+	<td width="20%"></td>
+	</tr></table>
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Pub Banner</i></a> |
+	</div>

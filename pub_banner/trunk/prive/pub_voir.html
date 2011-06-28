@@ -1,0 +1,89 @@
+<B_pubban>
+<BOUCLE_pubban(pubban_publicites){id_pub=#ENV{id_pub}}>
+<BOUCLE_pre(pubban_pub_empl){id_pub=#ENV{id_pub}}>
+	<BOUCLE_emplacement(pubban_emplacements){id_empl=#ID_EMPL}>
+#SET{width, #WIDTH}
+#SET{height, #HEIGHT}
+	</BOUCLE_emplacement>
+</BOUCLE_pre>
+	[(#ENV**{icone_editer})]
+<h1 style="margin-left: 60px">#TITRE</h1>
+
+<div class='nettoyeur'></div>
+
+<div class='cadre cadre-e' style='margin-top: 20px;'>
+	<strong>&nbsp;<:pubban:fiche:></strong>
+</div>
+
+<div class="vevent id_#ID_PUB">
+	<p class='date'>
+		<strong><:pubban:date_pub:></strong>&nbsp;:&nbsp;[(#DATE_ADD|affdate)]
+	</p>
+	<p class='date'><strong><:pubban:emplacement_pub:>&nbsp;:&nbsp;
+<BOUCLE_empl(pubban_pub_empl){id_pub=#ENV{id_pub}}>
+		[<a href='[(#URL_ECRIRE{pubban_emplacement}|parametre_url{id_empl,#ID_EMPL})]' title='<:pubban:btn_details:>'>(#EMPLACEMENT{#ID_EMPL})</a>] / 
+</BOUCLE_empl>
+	</strong></p>
+	<p class='date'>
+		<strong><:pubban:stats:></strong>&nbsp;:
+		<ul>
+			<li><:pubban:nb_affires_pub:>&nbsp;:&nbsp;
+				[(#ILLIMITE|=={oui}|oui)<strong><:pubban:no_limit:></strong>]
+				[(#ILLIMITE|=={non}|oui)
+					[<strong>#AFFICHAGES_RESTANT</strong>&nbsp;<i>(total : <strong>(#AFFICHAGES|plus{#AFFICHAGES_RESTANT})</strong>)</i>]
+				]
+			</li>
+			<li><:pubban:nb_clicres_pub:>&nbsp;:&nbsp;
+				[(#ILLIMITE|=={oui}|oui)<strong><:pubban:no_limit:></strong>]
+				[(#ILLIMITE|=={non}|oui)
+					[<strong>#CLICS_RESTANT</strong>&nbsp;<i>(total : <strong>(#CLICS|plus{#CLICS_RESTANT})</strong>)</i>]
+				]
+			</li>
+			<li><:pubban:dates_validite_pub:>&nbsp;:<ul>
+				<li><:pubban:date_debut:>&nbsp;:&nbsp;<strong>[(#DATE_DEBUT|affdate|sinon{" - "})]</strong></li>
+				<li><:pubban:date_fin:>&nbsp;:&nbsp;<strong>[(#DATE_FIN|affdate|sinon{" - "})]</strong></li>
+			</ul></li>
+		</ul>
+	</p>
+	<p class='date'>
+		<strong><:pubban:url_pub:></strong>&nbsp;:
+		<ul><li>&nbsp;[(#URL)]</li></ul>
+	</p>
+	<p class='date'>
+		<strong><:pubban:code_pub:></strong>&nbsp;:
+		<br /><ul><li>[(#OBJET|affiche_code_pub)]</li></ul>
+	</p>
+</div>
+<div class='nettoyeur'></div>
+
+<div class='cadre cadre-e' style='margin-top: 20px;'>
+	<strong>&nbsp;<:pubban:apercu:></strong>
+	</div>
+	<div style="text-align: center; padding: 1em 0; overflow-x: scroll;">
+		[(#MODELE{pub}{type=#TYPE}
+			{objet=#OBJET}
+			{url=#URL}
+			{width=#GET{width}}
+			{height=#GET{height}}
+			{id_pub=#ID_PUB}
+			{nom_pub=#TITRE}
+		)]
+	</div>
+<div class='nettoyeur'></div>
+
+	</BOUCLE_pubban>
+</B_pubban>
+<div style="margin-left: 6em;"><:pubban:no_pub_found:></div>
+<//B_pubban>
+
+<script type='text/javascript'>
+function popup(l,h,url) {
+	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
+	pp.focus();
+}
+function delete_entry(url, mess){
+	if(confirm(mess)){
+		window.location.href = url;
+	}
+}
+</script>

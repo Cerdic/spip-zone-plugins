@@ -1,0 +1,1021 @@
+	<a name="top"></a>
+	<div id="entete">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{img/ico-pubban.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Pub Banner<br /></b><small>by <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a><br /><i>Version 1.1 (stable)  - ¬© 2009 <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/' class='spip_out' title='Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique' rel='external'>Creative Commons BY-NC-SA</a></i></small></td>
+</tr></table>
+
+        
+                                    
+                            <div style="float: right; font-size: 0.9em;">
+		[ <a href="[(#SELF|parametre_url{doc,todolist})]">TODO</a> ]        	        [ <b>Pub</b> :
+	        	<a href="[(#SELF|parametre_url{doc,classtrees_Pub})]"><:phpdoc:map:></a> | 
+            	<a href="[(#SELF|parametre_url{doc,elementindex_Pub})]"><:phpdoc:index:></a> 
+            ]
+        				&nbsp;|&nbsp;[ <b><a href="[(#SELF|parametre_url{doc,index})]"><:phpdoc:user_docbook:></a></b> ]		</div>
+	</div>
+
+    <div class="hfeed" id="conteneur">
+	    <div class="hentry" id="contenu">
+
+					<div id="hierarchie"><:phpdoc:source_file_path:>&nbsp;:&nbsp;/pubban_options.php</div>
+		
+	        <div class="cartouche">
+		        <div class="surlignable">
+	    			<h1 class="entry-title"><:phpdoc:procedural_file:>&nbsp;'<i>Options</i>'</h1>
+					</div>
+			</div>
+
+
+<ul class="forum">
+
+<a name="sec-description"></a>
+<li class="forum-fil">
+<div class="forum-message">
+	<div class="forum-chapo">
+		<div class="forum-titre"><:phpdoc:page_details:></div>
+		<small>
+		<span class="on"><:phpdoc:details:></span>&nbsp;						|&nbsp;<a href="#sec-constants"><:phpdoc:constants:></a>&nbsp;				|&nbsp;<a href="#sec-functions"><:phpdoc:functions:></a>&nbsp;		</small>
+	</div>
+	<div class="forum-texte">
+			<p align="center" class="surtitre"><strong>Gestionnaire de bannieres publicitaires</strong></p>
+	<div class="introduction"><p>Le statut des pub peut être : <ul><li>0cree	=&gt; cas exceptionnel de création via ADDS</li><li>1inactif</li><li>2actif</li><li>3obsolete</li><li>4rompu</li><li>5poubelle</li></ul>  <strong>Tailles classiques des bannières publicitaires</strong> <ul><li>banniere : 468x60 px | 35 Ko</li><li>skyscraper : 120x600 px | 50 Ko</li><li>pave : 300x250 px | 50 Ko</li><li>carre : 250x250 px | 50 Ko</li><li>bouton (logos ...) : jusqu'à 120 px (120x60 px)</li><li>pour les animations, recommander des gif animés de 15 secondes max</li></ul>  <strong>Les tarifs</strong> <ul><li>CPM : coût pour mille affichages</li><li>CPC : coût par clic</li></ul></p></div>
+		<div class="menu rubriques tags">
+	<strong><:phpdoc:tags:></strong>
+	<ul>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:name:></strong></td>
+    <td width="6%"></td>
+    <td><small>Options</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:filesource:></strong></td>
+    <td width="6%"></td>
+    <td><small><a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]"><:phpdoc:source_code_for_this_file:></a></small></td>
+  </tr>
+</table>
+</li>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:author:></strong></td>
+    <td width="6%"></td>
+    <td><small>Piero Wbmstr &lt;<a href="mailto:piero.wbmstr@gmail.com">piero.wbmstr@gmail.com</a>&gt;</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:version:></strong></td>
+    <td width="6%"></td>
+    <td><small>1.1 (09/2010)</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:todo:></strong></td>
+    <td width="6%"></td>
+    <td><small>Faire une page 'ADDS' autonome, qui ne depende ni de SPIP (entete et pied) ni d'un article</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:todo:></strong></td>
+    <td width="6%"></td>
+    <td><small>Il reste un probleme de lien (au clic) sur les bannieres flash ...</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:todo:></strong></td>
+    <td width="6%"></td>
+    <td><small>inclure les prix par defaut pour les nouvelles bannieres</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:license:></strong></td>
+    <td width="6%"></td>
+    <td><small><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons BY-NC-SA</a></small></td>
+  </tr>
+</table>
+</li>
+
+	</ul>
+</div>
+			</div>
+</div>
+</li>
+
+
+
+<a name="sec-constants"></a>
+<li class="forum-fil">
+<div class="forum-message">
+	<div class="forum-chapo">
+		<div class="forum-titre"><:phpdoc:constants:></div>
+		<small>
+		<a href="#sec-description"><:phpdoc:details:></a>&nbsp;						|&nbsp;<span class="on"><:phpdoc:constants:></span>&nbsp;				|&nbsp;<a href="#sec-functions"><:phpdoc:functions:></a>&nbsp;		</small>
+	</div>
+	<div class="forum-texte">
+		<a name="definePUBBAN_FORCE_UNINSTALL"><!-- --></a>
+<div class="evenrow">
+	<div class="var-header">
+		<span class="const-title">
+			<span class="const-name">PUBBAN_FORCE_UNINSTALL</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a47">47</a>]</span>
+		</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1">
+    <tr>
+    	<td class="code-border">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<tr>
+    		<td class="code">
+			<code>PUBBAN_FORCE_UNINSTALL = 0</code>
+    		</td>
+    	</tr></table>
+    	</td>
+    </tr></table>
+    	<p align="center" class="surtitre"><strong>Pour forcer l'effacement des tables lors de la desinstall, meme s'ils sont pleins</strong></p>
+	<div class="introduction"><p>=&gt; desinstall impossible si des champs sont !=0  =&gt; define('PUBBAN_FORCE_UNINSTALL',1); pour forcer l'effacement des tables  =&gt; utilitaire de dev ou test</p></div>
+    		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="define_DIR_IMGPUB"><!-- --></a>
+<div class="oddrow">
+	<div class="var-header">
+		<span class="const-title">
+			<span class="const-name">_DIR_IMGPUB</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a68">68</a>]</span>
+		</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1">
+    <tr>
+    	<td class="code-border">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<tr>
+    		<td class="code">
+			<code>_DIR_IMGPUB = str_replace('../',$GLOBALS['meta']['adresse_site'].'/',_DIR_PLUGIN_PUBBAN).'img_pub'</code>
+    		</td>
+    	</tr></table>
+    	</td>
+    </tr></table>
+    	<p align="center" class="surtitre"><strong>Chemin vers les images PUB</strong></p>
+    		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="define_PUBBAN_ADDS_CLICKER"><!-- --></a>
+<div class="evenrow">
+	<div class="var-header">
+		<span class="const-title">
+			<span class="const-name">_PUBBAN_ADDS_CLICKER</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a57">57</a>]</span>
+		</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1">
+    <tr>
+    	<td class="code-border">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<tr>
+    		<td class="code">
+			<code>_PUBBAN_ADDS_CLICKER = $GLOBALS['meta']['adresse_site'].'/?page=clic'</code>
+    		</td>
+    	</tr></table>
+    	</td>
+    </tr></table>
+    	<p align="center" class="surtitre"><strong>Adresse du cliqueur</strong></p>
+    		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="define_PUBBAN_ADDS_COMMANDE"><!-- --></a>
+<div class="oddrow">
+	<div class="var-header">
+		<span class="const-title">
+			<span class="const-name">_PUBBAN_ADDS_COMMANDE</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a63">63</a>]</span>
+		</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1">
+    <tr>
+    	<td class="code-border">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<tr>
+    		<td class="code">
+			<code>_PUBBAN_ADDS_COMMANDE = 'pubban_commande'</code>
+    		</td>
+    	</tr></table>
+    	</td>
+    </tr></table>
+    	<p align="center" class="surtitre"><strong>Nom du fichier gestionnaire de commande (renvoi depuis 'adds' pour les commandes publiques)</strong></p>
+	<div class="introduction"><p>On n'indique pas l'extension '.php' pour pouvoir charger le fichier via la fonction 'include_spip()'</p></div>
+    		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="define_PUBBAN_ADDS_DISPLAYER"><!-- --></a>
+<div class="evenrow">
+	<div class="var-header">
+		<span class="const-title">
+			<span class="const-name">_PUBBAN_ADDS_DISPLAYER</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a52">52</a>]</span>
+		</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1">
+    <tr>
+    	<td class="code-border">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<tr>
+    		<td class="code">
+			<code>_PUBBAN_ADDS_DISPLAYER = $GLOBALS['meta']['adresse_site'].'/?page=pub_displayer'</code>
+    		</td>
+    	</tr></table>
+    	</td>
+    </tr></table>
+    	<p align="center" class="surtitre"><strong>Adresse du displayer de pub</strong></p>
+    		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="define_PUBBAN_UPDATE"><!-- --></a>
+<div class="oddrow">
+	<div class="var-header">
+		<span class="const-title">
+			<span class="const-name">_PUBBAN_UPDATE</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a130">130</a>]</span>
+		</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1">
+    <tr>
+    	<td class="code-border">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<tr>
+    		<td class="code">
+			<code>_PUBBAN_UPDATE = 'http://sources.pierowbmstr.fr/SPIP/pub_banner.zip'</code>
+    		</td>
+    	</tr></table>
+    	</td>
+    </tr></table>
+    	<p align="center" class="surtitre"><strong>URL de telechargement des mises a jour</strong></p>
+    		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="define_PUBBAN_URL"><!-- --></a>
+<div class="evenrow">
+	<div class="var-header">
+		<span class="const-title">
+			<span class="const-name">_PUBBAN_URL</span>&nbsp;&nbsp;<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a126">126</a>]</span>
+		</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1">
+    <tr>
+    	<td class="code-border">
+    	<table width="100%" border="0" cellspacing="0" cellpadding="2">
+    	<tr>
+    		<td class="code">
+			<code>_PUBBAN_URL = 'http://www.spip-contrib.fr/?article3637'</code>
+    		</td>
+    	</tr></table>
+    	</td>
+    </tr></table>
+    	<p align="center" class="surtitre"><strong>URL de documentation/information</strong></p>
+    		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+	</div>
+</div>
+</li>
+
+
+<a name="sec-functions"></a>
+<li class="forum-fil">
+<div class="forum-message">
+	<div class="forum-chapo">
+		<div class="forum-titre"><:phpdoc:functions:></div>
+		<small>
+		<a href="#sec-description"><:phpdoc:details:></a>&nbsp;						|&nbsp;<a href="#sec-constants"><:phpdoc:constants:></a>&nbsp;				|&nbsp;<span class="on"><:phpdoc:functions:></span>&nbsp;		</small>
+	</div>
+	<div class="forum-texte">
+		<a name="functionafficher_statistiques_pubban" id="functionafficher_statistiques_pubban"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">afficher_statistiques_pubban</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a315">315</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void afficher_statistiques_pubban(
+[ $return = false], [ $div = &#039;&#039;], [ $plie = &#039;deplie&#039;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Affichage des statistiques generales</strong></p>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$return</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$div</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$plie</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_calculer_prix" id="functionpubban_calculer_prix"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_calculer_prix</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a291">291</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_calculer_prix(
+ $id_emp,  $nb_aff&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$id_emp</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$nb_aff</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_comparer_emplacements" id="functionpubban_comparer_emplacements"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_comparer_emplacements</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a183">183</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_comparer_emplacements(
+ $emp&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$emp</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_extension" id="functionpubban_extension"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_extension</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a430">430</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>boolean/string pubban_extension(
+string $file, [numeric $car = &#039;5&#039;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Recuperateur d'extension  Recupere la chaine apres son dernier point.</strong></p>
+	<div class="introduction"><p>Si cette chaine est plus longue qu'attendu pour une extension (par defaut 5 caracteres),  retourne FALSE. Sinon, retourne l'extension, SANS le point.</p></div>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type">string</span></td>
+			    <td width="1%"></td>
+				<td><strong>$file</strong></td>
+			    <td width="6%"></td>
+				<td><small>Le fichier ou l'adresse dont on cherche l'extension</small></td>
+			</tr>
+			</table>
+			</li>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type">numeric</span></td>
+			    <td width="1%"></td>
+				<td><strong>$car</strong></td>
+			    <td width="6%"></td>
+				<td><small>Le nombre de caracteres a verifier (longueur de l'extension) | default : 5 caracteres</small></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+		<div class="menu rubriques tags">
+	<strong><:phpdoc:tags:></strong>
+	<ul>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:return:></strong></td>
+    <td width="6%"></td>
+    <td><small>FALSE | extension sans point</small></td>
+  </tr>
+</table>
+</li>
+
+
+	</ul>
+</div>
+		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_lien_doc" id="functionpubban_lien_doc"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_lien_doc</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a305">305</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_lien_doc(
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    			<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_liste_empl" id="functionpubban_liste_empl"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_liste_empl</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a243">243</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_liste_empl(
+[ $statut = false]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$statut</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_poubelle_pleine" id="functionpubban_poubelle_pleine"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_poubelle_pleine</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a269">269</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_poubelle_pleine(
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    			<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_recuperer_emplacement" id="functionpubban_recuperer_emplacement"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_recuperer_emplacement</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a204">204</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array pubban_recuperer_emplacement(
+integer $id_empl, [string $str = false]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Recuperation des donnes d'une banniere</strong></p>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type">integer</span></td>
+			    <td width="1%"></td>
+				<td><strong>$id_empl</strong></td>
+			    <td width="6%"></td>
+				<td><small>L'ID de la bannière à récuperer</small></td>
+			</tr>
+			</table>
+			</li>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type">string</span></td>
+			    <td width="1%"></td>
+				<td><strong>$str</strong></td>
+			    <td width="6%"></td>
+				<td><small>Le nom d'un paramètre à récupérer (optionnel)</small></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+		<div class="menu rubriques tags">
+	<strong><:phpdoc:tags:></strong>
+	<ul>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:return:></strong></td>
+    <td width="6%"></td>
+    <td><small>Les données de la banniere (ou la valeur du paramètre si demandé)</small></td>
+  </tr>
+</table>
+</li>
+
+
+	</ul>
+</div>
+		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_recuperer_emplacement_par_nom" id="functionpubban_recuperer_emplacement_par_nom"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_recuperer_emplacement_par_nom</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a236">236</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>integer pubban_recuperer_emplacement_par_nom(
+string $name&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Recuperation de l'ID d'une banniere depuis son nom</strong></p>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type">string</span></td>
+			    <td width="1%"></td>
+				<td><strong>$name</strong></td>
+			    <td width="6%"></td>
+				<td><small>Le nom de la banniere a recuperer</small></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+		<div class="menu rubriques tags">
+	<strong><:phpdoc:tags:></strong>
+	<ul>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:return:></strong></td>
+    <td width="6%"></td>
+    <td><small>L'ID recherche</small></td>
+  </tr>
+</table>
+</li>
+
+
+	</ul>
+</div>
+		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_recuperer_pub" id="functionpubban_recuperer_pub"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_recuperer_pub</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a145">145</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>array pubban_recuperer_pub(
+integer $id_pub, [string $str = false]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Recuperation des donnes d'une publicite</strong></p>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type">integer</span></td>
+			    <td width="1%"></td>
+				<td><strong>$id_pub</strong></td>
+			    <td width="6%"></td>
+				<td><small>L'ID de la pub a recuperer</small></td>
+			</tr>
+			</table>
+			</li>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type">string</span></td>
+			    <td width="1%"></td>
+				<td><strong>$str</strong></td>
+			    <td width="6%"></td>
+				<td><small>Le nom d'un paramètre à récupérer (optionnel)</small></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+		<div class="menu rubriques tags">
+	<strong><:phpdoc:tags:></strong>
+	<ul>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:return:></strong></td>
+    <td width="6%"></td>
+    <td><small>Les données de la pub (ou la valeur du paramètre si demandé)</small></td>
+  </tr>
+</table>
+</li>
+
+
+	</ul>
+</div>
+		<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_search" id="functionpubban_search"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_search</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a378">378</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_search(
+ $str&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Moteur de rcherche Pubban</strong></p>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$str</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_transformer_nombre" id="functionpubban_transformer_nombre"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_transformer_nombre</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a285">285</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_transformer_nombre(
+ $nombre&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$nombre</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_transform_prix" id="functionpubban_transform_prix"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_transform_prix</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a278">278</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_transform_prix(
+ $prix&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$prix</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_trouver_emplacements" id="functionpubban_trouver_emplacements"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_trouver_emplacements</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a257">257</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_trouver_emplacements(
+ $id_pub&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$id_pub</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_UrlOK" id="functionpubban_UrlOK"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_UrlOK</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a440">440</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_UrlOK(
+ $url&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Valideur d'url</strong></p>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$url</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_url_reponse" id="functionpubban_url_reponse"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_url_reponse</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub__pubban_options.php})]#a445">445</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_url_reponse(
+ $url&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$url</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+	</div>
+</div>
+</li>
+
+</ul>
+
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    <div id="navigation">
+        <div class="menu">
+		<h2><:phpdoc:content:></h2>
+        <ul>
+						</ul>
+		</div>
+		    </div><!--#navigation-->
+    
+    <div id="extra">
+        <div class="menu">
+				<h2><:phpdoc:files:></h2>
+			<ul>
+		  <div class="package">
+						<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_inc---pubban_configset.php})]">Configuration</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_base---pubban_chargeur.php})]">Defaults / Chargeur</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_pubban_fonctions.php})]">Fonctions</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_base---pubban_upgrade.php})]">Installation</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_pubban_options.php})]">Options</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_pubban_pipelines.php})]">Pipelines</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_base---pubban_tables.php})]">Tables</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_genie---pubban_cron.php})]">Taches Cron</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Actions</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Actions/_action---activer_emplacement.php})]">Activer banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Actions/_action---activer_pub.php})]">Activer pub</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Actions/_action---vider_poubelle_pubban.php})]">Vider poubelle</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Balises</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---emplacement.php})]">Banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---clic_banner.php})]">Clic banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---demo_flash.php})]">Demo Flash</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---pubban.php})]">PUBBAN</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Formulaires</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_config_adds.php})]">Configurer plugin</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_config.php})]">Configurer plugin</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_editer_banniere.php})]">Editer banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_editer_pub.php})]">Editer pub</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_editer_tarifs.php})]">Editer tarifs</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---form_adds.php})]">Page publique (ADDS)</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---form_adds - copie.php})]">Page publique (ADDS)</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---display_adds.php})]">Pubban displayer</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---search_pub.php})]">Recherche</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---stats_adds.php})]">Statistiques</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Pages</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_integer.php})]">Bannieres</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_integer_edit.php})]">Bannieres edit</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_integer_tous.php})]">Bannieres toutes</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_config.php})]">Configuration</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_admin.php})]">Home</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_info.php})]">Informations / Conseils</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_pub.php})]">Publicites</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_pub_edit.php})]">Publicites edit</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_pub_tous.php})]">Publicites toutes</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_puce_activation.php})]">Puce activation</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_stats.php})]">Statistiques</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_tarifs.php})]">Tarifs</a></span><br />
+			  </div>
+			</ul>
+					</div>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_pub_banner/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:>
+		<br />| Tue, 23 Nov 2010 14:31:01 +0100
+		</p>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_pub_banner/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</div>
+
+	<div id="pied">
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Pub Banner</i></a> |
+	</div>

@@ -1,0 +1,422 @@
+	<a name="top"></a>
+	<div id="entete">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{img/ico-pubban.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Pub Banner<br /></b><small>by <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a><br /><i>Version 1.1 (stable)  - © 2009 <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/' class='spip_out' title='Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique' rel='external'>Creative Commons BY-NC-SA</a></i></small></td>
+</tr></table>
+
+        
+                                    
+                            <div style="float: right; font-size: 0.9em;">
+		[ <a href="[(#SELF|parametre_url{doc,todolist})]">TODO</a> ]        	        [ <b>Pub</b> :
+	        	<a href="[(#SELF|parametre_url{doc,classtrees_Pub})]"><:phpdoc:map:></a> | 
+            	<a href="[(#SELF|parametre_url{doc,elementindex_Pub})]"><:phpdoc:index:></a> 
+            ]
+        				&nbsp;|&nbsp;[ <b><a href="[(#SELF|parametre_url{doc,index})]"><:phpdoc:user_docbook:></a></b> ]		</div>
+	</div>
+
+    <div class="hfeed" id="conteneur">
+	    <div class="hentry" id="contenu">
+
+		
+	        <div class="cartouche">
+		        <div class="surlignable">
+	    					</div>
+			</div>
+
+<h1><:phpdoc:errors:></h1>
+
+<br />
+<div class="menu rubriques">
+<h3><:phpdoc:files:></h3>
+<ul>
+	<li><a href="#Post-parsing">Post-parsing</a></li>
+</ul>
+<ul>
+	<li><a href="#activer_pub.php">activer_pub.php</a></li>
+</ul>
+<ul>
+	<li><a href="#clic_banner.php">clic_banner.php</a></li>
+</ul>
+<ul>
+	<li><a href="#demo_flash.php">demo_flash.php</a></li>
+</ul>
+<ul>
+	<li><a href="#display_adds.php">display_adds.php</a></li>
+</ul>
+<ul>
+	<li><a href="#emplacement.php">emplacement.php</a></li>
+</ul>
+<ul>
+	<li><a href="#form_adds - copie.php">form_adds - copie.php</a></li>
+</ul>
+<ul>
+	<li><a href="#form_adds.php">form_adds.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban.php">pubban.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_admin.php">pubban_admin.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_commande.php">pubban_commande.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_config.php">pubban_config.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_config_adds.php">pubban_config_adds.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_editer_banniere.php">pubban_editer_banniere.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_editer_pub.php">pubban_editer_pub.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_editer_tarifs.php">pubban_editer_tarifs.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_info.php">pubban_info.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_integer.php">pubban_integer.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_integer_edit.php">pubban_integer_edit.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_integer_tous.php">pubban_integer_tous.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_process.php">pubban_process.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_pub.php">pubban_pub.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_pub_edit.php">pubban_pub_edit.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_pub_tous.php">pubban_pub_tous.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_puce_activation.php">pubban_puce_activation.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_stats.php">pubban_stats.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_tables.php">pubban_tables.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_tarifs.php">pubban_tarifs.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_test_chargeur.php">pubban_test_chargeur.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_upgrade.php">pubban_upgrade.php</a></li>
+</ul>
+<ul>
+	<li><a href="#pubban_validation_adds.php">pubban_validation_adds.php</a></li>
+</ul>
+<ul>
+	<li><a href="#search_pub.php">search_pub.php</a></li>
+</ul>
+<ul>
+	<li><a href="#stats_adds.php">stats_adds.php</a></li>
+</ul>
+<ul>
+	<li><a href="#vider_poubelle_pubban.php">vider_poubelle_pubban.php</a></li>
+</ul>
+</div>
+
+
+<div class="menu tags">
+<br />
+<a name="Post-parsing"></a>
+	<h2>Post-parsing</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning</b> - 
+duplicate function element "formulaires_form_adds_verifier_dist" in file /Applications/MAMP/htdocs/SPIP_MUTU/plugins/tests_banners/pub_banner/formulaires/form_adds.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.</li>
+					<li><b>Warning</b> - 
+duplicate function element "formulaires_form_adds_charger_dist" in file /Applications/MAMP/htdocs/SPIP_MUTU/plugins/tests_banners/pub_banner/formulaires/form_adds.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.</li>
+					<li><b>Warning</b> - 
+duplicate function element "formulaires_form_adds_traiter_dist" in file /Applications/MAMP/htdocs/SPIP_MUTU/plugins/tests_banners/pub_banner/formulaires/form_adds.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.</li>
+				</ul>
+	<br />
+<a name="activer_emplacement.php"></a>
+	<h2>activer_emplacement.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 64</b> - Page-level DocBlock precedes "function action_activer_emplacement", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="activer_pub.php"></a>
+	<h2>activer_pub.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 64</b> - Page-level DocBlock precedes "function action_activer_pub", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="clic_banner.php"></a>
+	<h2>clic_banner.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 13</b> - Page-level DocBlock precedes "function balise_CLIC_BANNER", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="demo_flash.php"></a>
+	<h2>demo_flash.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 14</b> - Page-level DocBlock precedes "function balise_DEMO_FLASH", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="display_adds.php"></a>
+	<h2>display_adds.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 68</b> - Page-level DocBlock precedes "function formulaires_display_adds_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="emplacement.php"></a>
+	<h2>emplacement.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 13</b> - Page-level DocBlock precedes "function balise_EMPLACEMENT", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="form_adds - copie.php"></a>
+	<h2>form_adds - copie.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 55</b> - Page-level DocBlock precedes "function formulaires_form_adds_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="form_adds.php"></a>
+	<h2>form_adds.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 55</b> - Page-level DocBlock precedes "function formulaires_form_adds_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban.php"></a>
+	<h2>pubban.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 13</b> - Page-level DocBlock precedes "function balise_PUBBAN_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_admin.php"></a>
+	<h2>pubban_admin.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 90</b> - Page-level DocBlock precedes "function exec_pubban_admin_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_commande.php"></a>
+	<h2>pubban_commande.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 67</b> - File "/Applications/MAMP/htdocs/SPIP_MUTU/plugins/tests_banners/pub_banner/pubban_commande.php" has no page-level DocBlock, use @package in the first DocBlock to create one</li>
+				</ul>
+	<br />
+<a name="pubban_config.php"></a>
+	<h2>pubban_config.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 32</b> - Page-level DocBlock precedes "function formulaires_pubban_config_charger_dist", use another DocBlock to document the source element</li>
+					<li><b>Warning on line 40</b> - Page-level DocBlock precedes "function exec_pubban_config_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_config_adds.php"></a>
+	<h2>pubban_config_adds.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 35</b> - Page-level DocBlock precedes "function formulaires_pubban_config_adds_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_editer_banniere.php"></a>
+	<h2>pubban_editer_banniere.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 24</b> - Page-level DocBlock precedes "function formulaires_pubban_editer_banniere_charger", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_editer_pub.php"></a>
+	<h2>pubban_editer_pub.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 32</b> - Page-level DocBlock precedes "function formulaires_pubban_editer_pub_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_editer_tarifs.php"></a>
+	<h2>pubban_editer_tarifs.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 24</b> - Page-level DocBlock precedes "function formulaires_pubban_editer_tarifs_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_info.php"></a>
+	<h2>pubban_info.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 33</b> - Page-level DocBlock precedes "function exec_pubban_info_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_integer.php"></a>
+	<h2>pubban_integer.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 75</b> - Page-level DocBlock precedes "function exec_pubban_integer_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_integer_edit.php"></a>
+	<h2>pubban_integer_edit.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 37</b> - Page-level DocBlock precedes "function exec_pubban_integer_edit_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_integer_tous.php"></a>
+	<h2>pubban_integer_tous.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 46</b> - Page-level DocBlock precedes "function exec_pubban_integer_tous_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_process.php"></a>
+	<h2>pubban_process.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 197</b> - File "/Applications/MAMP/htdocs/SPIP_MUTU/plugins/tests_banners/pub_banner/inc/pubban_process.php" has no page-level DocBlock, use @package in the first DocBlock to create one</li>
+				</ul>
+	<br />
+<a name="pubban_pub.php"></a>
+	<h2>pubban_pub.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 72</b> - Page-level DocBlock precedes "function exec_pubban_pub_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_pub_edit.php"></a>
+	<h2>pubban_pub_edit.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 37</b> - Page-level DocBlock precedes "function exec_pubban_pub_edit_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_pub_tous.php"></a>
+	<h2>pubban_pub_tous.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 48</b> - Page-level DocBlock precedes "function exec_pubban_pub_tous_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_puce_activation.php"></a>
+	<h2>pubban_puce_activation.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 16</b> - Page-level DocBlock precedes "function exec_pubban_puce_activation_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_stats.php"></a>
+	<h2>pubban_stats.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 41</b> - Page-level DocBlock precedes "function exec_pubban_stats_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_tables.php"></a>
+	<h2>pubban_tables.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 17</b> - Page-level DocBlock precedes "function pubban_declarer_tables_interfaces", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_tarifs.php"></a>
+	<h2>pubban_tarifs.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 40</b> - Page-level DocBlock precedes "function exec_pubban_tarifs_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_test_chargeur.php"></a>
+	<h2>pubban_test_chargeur.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 46</b> - File "/Applications/MAMP/htdocs/SPIP_MUTU/plugins/tests_banners/pub_banner/base/pubban_test_chargeur.php" has no page-level DocBlock, use @package in the first DocBlock to create one</li>
+				</ul>
+	<br />
+<a name="pubban_upgrade.php"></a>
+	<h2>pubban_upgrade.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 36</b> - Page-level DocBlock precedes "function pubban_upgrade", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="pubban_validation_adds.php"></a>
+	<h2>pubban_validation_adds.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 17</b> - File "/Applications/MAMP/htdocs/SPIP_MUTU/plugins/tests_banners/pub_banner/inc/pubban_validation_adds.php" has no page-level DocBlock, use @package in the first DocBlock to create one</li>
+				</ul>
+	<br />
+<a name="search_pub.php"></a>
+	<h2>search_pub.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 16</b> - Page-level DocBlock precedes "function formulaires_search_pub_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="stats_adds.php"></a>
+	<h2>stats_adds.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 241</b> - Page-level DocBlock precedes "function formulaires_stats_adds_charger_dist", use another DocBlock to document the source element</li>
+				</ul>
+	<br />
+<a name="vider_poubelle_pubban.php"></a>
+	<h2>vider_poubelle_pubban.php</h2>
+			<h3><:phpdoc:warnings:>&nbsp;:</h3>
+		<ul>
+					<li><b>Warning on line 33</b> - Page-level DocBlock precedes "function action_vider_poubelle_pubban", use another DocBlock to document the source element</li>
+				</ul>
+	</div>
+
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    <div id="navigation">
+        <div class="menu">
+		<h2><:phpdoc:content:></h2>
+        <ul>
+						</ul>
+		</div>
+		    </div><!--#navigation-->
+    
+    <div id="extra">
+        <div class="menu">
+					</div>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_pub_banner/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:>
+		<br />| Tue, 23 Nov 2010 14:31:07 +0100
+		</p>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_pub_banner/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</div>
+
+	<div id="pied">
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Pub Banner</i></a> |
+	</div>

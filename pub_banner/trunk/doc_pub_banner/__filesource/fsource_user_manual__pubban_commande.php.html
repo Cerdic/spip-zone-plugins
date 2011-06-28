@@ -1,0 +1,114 @@
+	<a name="top"></a>
+	<div id="entete">
+		<strong id="nom_site_spip">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{img/ico-pubban.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Pub Banner<br /></b><small>by <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a><br /><i>Version 1.1 (stable)  - © 2009 <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/' class='spip_out' title='Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique' rel='external'>Creative Commons BY-NC-SA</a></i></small></td>
+</tr></table>
+
+		</strong>
+        
+                                    <div style="float: right; font-size: 0.9em;">
+		[ <a href="[(#SELF|parametre_url{doc,todolist})]">TODO</a> ]        						</div>
+	</div>
+
+
+    <div class="hfeed" id="conteneur" style="width: 100%">
+	    <div class="hentry" id="contenu"><h1 align="center"><:phpdoc:source_file_for:>&nbsp;'<i>pubban_commande.php</i>'</h1>
+<p><img src="[(#CHEMIN{doc_pub_banner//media/left.gif})]" alt=" " />&nbsp;<:phpdoc:back_to_doc:>&nbsp;:&nbsp;<a href="[(#SELF|parametre_url{doc,user_manual/_pubban_commande.php})]">pubban_commande.php</a></p>
+<div class="src-code"><span class="php">
+<code><ol><li><div class="src-line"><a name="a1"></a><span class="src-php">&lt;?php</span></div></li>
+<li><div class="src-line"><a name="a2"></a><span class="src-comm">//&nbsp;----------------------------</span></div></li>
+<li><div class="src-line"><a name="a3"></a><span class="src-comm">//&nbsp;FONCTIONS&nbsp;DE&nbsp;GESTION&nbsp;DES&nbsp;COMMANDES&nbsp;DEPUIS&nbsp;LA&nbsp;PAGE&nbsp;PUBLIQUE</span></div></li>
+<li><div class="src-line"><a name="a4"></a><span class="src-comm">//&nbsp;----------------------------</span></div></li>
+<li><div class="src-line"><a name="a5"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a6"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a7"></a><span class="src-doc">&nbsp;*&nbsp;PRINCIPE&nbsp;DE&nbsp;FONCTIONNEMENT</span></div></li>
+<li><div class="src-line"><a name="a8"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a9"></a><span class="src-doc">&nbsp;*&nbsp;Les&nbsp;données&nbsp;récupérées&nbsp;depuis&nbsp;le&nbsp;formulaire&nbsp;public&nbsp;(page&nbsp;'spip.php?page=adds'&nbsp;ou&nbsp;copie&nbsp;personnalisée&nbsp;-</span></div></li>
+<li><div class="src-line"><a name="a10"></a><span class="src-doc">&nbsp;*&nbsp;utilisation&nbsp;du&nbsp;formulaire&nbsp;'form_adds')&nbsp;sont&nbsp;systématiquement&nbsp;envoyées&nbsp;vers&nbsp;la&nbsp;fonction&nbsp;de&nbsp;ce&nbsp;fichier&nbsp;:</span></div></li>
+<li><div class="src-line"><a name="a11"></a><span class="src-doc">&nbsp;*&nbsp;&lt;code&gt;pubban_commande($panier)&lt;/code&gt;</span></div></li>
+<li><div class="src-line"><a name="a12"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a13"></a><span class="src-doc">&nbsp;*&nbsp;où&nbsp;$panier&nbsp;est&nbsp;le&nbsp;panier&nbsp;généré&nbsp;résumant&nbsp;la&nbsp;commande&nbsp;:</span></div></li>
+<li><div class="src-line"><a name="a14"></a><span class="src-doc">&nbsp;*&nbsp;&lt;code&gt;pub:titre_emplacement:nombre_d_affichages:prix_par_affichage:id_pub&lt;/code&gt;</span></div></li>
+<li><div class="src-line"><a name="a15"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a16"></a><span class="src-doc">&nbsp;*&nbsp;La&nbsp;fonction&nbsp;doit&nbsp;retourner&nbsp;TRUE&nbsp;ou&nbsp;FALSE&nbsp;selon&nbsp;l'état&nbsp;de&nbsp;la&nbsp;commande&nbsp;:</span></div></li>
+<li><div class="src-line"><a name="a17"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;TRUE&nbsp;si&nbsp;le&nbsp;réglement&nbsp;a&nbsp;été&nbsp;fait,</span></div></li>
+<li><div class="src-line"><a name="a18"></a><span class="src-doc">&nbsp;*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;FALSE&nbsp;sinon,</span></div></li>
+<li><div class="src-line"><a name="a19"></a><span class="src-doc">&nbsp;*&nbsp;ou&nbsp;rediriger&nbsp;tout&nbsp;simplement&nbsp;vers&nbsp;une&nbsp;nouvelle&nbsp;page.</span></div></li>
+<li><div class="src-line"><a name="a20"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a21"></a><span class="src-doc">&nbsp;*&nbsp;A&nbsp;noter&nbsp;que&nbsp;lors&nbsp;de&nbsp;sa&nbsp;création&nbsp;(enregistrement&nbsp;en&nbsp;base&nbsp;de&nbsp;données),&nbsp;la&nbsp;publicité&nbsp;porte&nbsp;le&nbsp;statut</span></div></li>
+<li><div class="src-line"><a name="a22"></a><span class="src-doc">&nbsp;*&nbsp;'0cree'.&nbsp;Pour&nbsp;être&nbsp;présentée&nbsp;dans&nbsp;les&nbsp;bannières&nbsp;du&nbsp;site,&nbsp;elle&nbsp;doit&nbsp;être&nbsp;activée&nbsp;par&nbsp;l'appel&nbsp;:</span></div></li>
+<li><div class="src-line"><a name="a23"></a><span class="src-doc">&nbsp;*&nbsp;&lt;code&gt;pubban_editer_pub($id_pub,&nbsp;array(&quot;statut&quot;=&gt;&quot;2actif&quot;))&lt;/code&gt;</span></div></li>
+<li><div class="src-line"><a name="a24"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a25"></a><span class="src-doc">&nbsp;*&nbsp;Vous&nbsp;pouvez&nbsp;également&nbsp;lui&nbsp;donner&nbsp;le&nbsp;statut&nbsp;'1inactif'&nbsp;si&nbsp;son&nbsp;activation&nbsp;est&nbsp;prévue&nbsp;à&nbsp;une&nbsp;date&nbsp;précise.</span></div></li>
+<li><div class="src-line"><a name="a26"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a27"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,user_manual/_pubban_commande.php})]#functionpubban_commande">pubban_commande</a><span class="src-sym">(</span><span class="src-var">$panier</span>=<span class="src-str">''</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a28"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(&nbsp;</span><span class="src-sym">!</span><a href="http://www.php.net/strlen">strlen</a><span class="src-sym">(</span><span class="src-var">$panier</span><span class="src-sym">)&nbsp;)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-id">false</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a29"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a30"></a>&nbsp;&nbsp;&nbsp;&nbsp;echo&nbsp;<span class="src-str">&quot;YO&quot;</span><span class="src-sym">;&nbsp;</span><span class="src-key">exit</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a31"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><a href="[(#SELF|parametre_url{doc,user_manual/_pubban_commande.php})]#functionpubban_adds_nouvelle_commande_payeur">pubban_adds_nouvelle_commande_payeur</a><span class="src-sym">(</span><span class="src-var">$panier</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a32"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a33"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a34"></a><span class="src-doc">/**</span></div></li>
+<li><div class="src-line"><a name="a35"></a><span class="src-doc">&nbsp;*&nbsp;Insertion&nbsp;de&nbsp;la&nbsp;commande&nbsp;via&nbsp;l'API&nbsp;de&nbsp;Payeur</span></div></li>
+<li><div class="src-line"><a name="a36"></a><span class="src-doc">&nbsp;*</span></div></li>
+<li><div class="src-line"><a name="a37"></a><span class="src-doc">&nbsp;*&nbsp;Si&nbsp;vous&nbsp;utilisez&nbsp;le&nbsp;plugin&nbsp;'Payeur',&nbsp;cette&nbsp;fonction&nbsp;génère&nbsp;une&nbsp;nouvelle&nbsp;commande&nbsp;et&nbsp;redirige</span></div></li>
+<li><div class="src-line"><a name="a38"></a><span class="src-doc">&nbsp;*&nbsp;l'internaute&nbsp;vers&nbsp;son&nbsp;réglement.</span></div></li>
+<li><div class="src-line"><a name="a39"></a><span class="src-doc">&nbsp;*/</span></div></li>
+<li><div class="src-line"><a name="a40"></a><span class="src-key">function&nbsp;</span><a href="[(#SELF|parametre_url{doc,user_manual/_pubban_commande.php})]#functionpubban_adds_nouvelle_commande_payeur">pubban_adds_nouvelle_commande_payeur</a><span class="src-sym">(</span><span class="src-var">$panier</span>=<span class="src-str">''</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a41"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(&nbsp;</span><span class="src-sym">!</span><a href="http://www.php.net/strlen">strlen</a><span class="src-sym">(</span><span class="src-var">$panier</span><span class="src-sym">)&nbsp;)&nbsp;</span><span class="src-key">return&nbsp;</span><span class="src-id">false</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a42"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(&nbsp;</span><span class="src-sym">!</span><a href="http://www.php.net/strpos">strpos</a><span class="src-sym">(</span><span class="src-var">$panier</span><span class="src-sym">,&nbsp;</span><span class="src-str">';'</span><span class="src-sym">)&nbsp;)&nbsp;</span><span class="src-var">$panier&nbsp;</span>.=&nbsp;<span class="src-str">';'</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a43"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$panier_entries&nbsp;</span>=&nbsp;<a href="http://www.php.net/array_filter">array_filter</a><span class="src-sym">(&nbsp;</span><a href="http://www.php.net/explode">explode</a><span class="src-sym">(</span><span class="src-str">';'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$panier</span><span class="src-sym">)</span><span class="src-sym">,&nbsp;</span><span class="src-str">'trim'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a44"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><a href="http://www.php.net/count">count</a><span class="src-sym">(</span><span class="src-var">$panier_entries</span><span class="src-sym">))&nbsp;</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a45"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-sym">!</span><a href="http://www.php.net/defined">defined</a><span class="src-sym">(</span><span class="src-str">'_PAYEUR_API'</span><span class="src-sym">))&nbsp;</span><span class="src-id">include_spip</span><span class="src-sym">(</span><span class="src-str">'payeur_options'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a46"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-id">include_spip</span><span class="src-sym">(</span><span class="src-id">_PAYEUR_API</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a47"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$a&nbsp;</span>=&nbsp;<span class="src-key">new&nbsp;</span><span class="src-id">PayeurCommande</span><span class="src-sym">(</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a48"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$a</span><span class="src-sym">-&gt;</span><span class="src-id">charger</span><span class="src-sym">(</span><span class="src-str">'titre'</span><span class="src-sym">,&nbsp;</span><span class="src-id">_T</span><span class="src-sym">(</span><span class="src-str">'pubban:titre_commande'</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">'site'</span>=&gt;<span class="src-var">$GLOBALS</span><span class="src-sym">[</span><span class="src-str">'meta'</span><span class="src-sym">]</span><span class="src-sym">[</span><span class="src-str">'nom_site'</span><span class="src-sym">]</span><span class="src-sym">)))</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a49"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">foreach</span><span class="src-sym">(</span><span class="src-var">$panier_entries&nbsp;</span><span class="src-key">as&nbsp;</span><span class="src-var">$k</span>=&gt;<span class="src-var">$entries</span><span class="src-sym">)</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a50"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$entry&nbsp;</span>=&nbsp;<a href="http://www.php.net/explode">explode</a><span class="src-sym">(</span><span class="src-str">':'</span><span class="src-sym">,&nbsp;</span><span class="src-var">$entries</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a51"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">if</span><span class="src-sym">(</span><span class="src-var">$entry</span><span class="src-sym">[</span><span class="src-num">0</span><span class="src-sym">]&nbsp;</span>==&nbsp;<span class="src-str">'pub'&nbsp;</span><span class="src-key">AND&nbsp;</span><span class="src-var">$emplacement&nbsp;</span>=&nbsp;<a href="[(#SELF|parametre_url{doc,Pub/_pubban_options.php})]#functionpubban_recuperer_emplacement_par_nom">pubban_recuperer_emplacement_par_nom</a><span class="src-sym">(</span><span class="src-var">$entry</span><span class="src-sym">[</span><span class="src-num">1</span><span class="src-sym">]</span><span class="src-sym">)&nbsp;)</span><span class="src-sym">{</span></div></li>
+<li><div class="src-line"><a name="a52"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$ligne&nbsp;</span>=&nbsp;<span class="src-key">array</span><span class="src-sym">(</span></div></li>
+<li><div class="src-line"><a name="a53"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'designation'&nbsp;</span>=&gt;&nbsp;<span class="src-var">$entry</span><span class="src-sym">[</span><span class="src-num">1</span><span class="src-sym">]</span>.<span class="src-id">_T</span><span class="src-sym">(</span><span class="src-str">'pubban:affichages_commande_entree'</span><span class="src-sym">)</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a54"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'quantite'&nbsp;</span>=&gt;&nbsp;<span class="src-var">$entry</span><span class="src-sym">[</span><span class="src-num">2</span><span class="src-sym">]</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a55"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'prix_unitaire'&nbsp;</span>=&gt;&nbsp;<span class="src-var">$entry</span><span class="src-sym">[</span><span class="src-num">3</span><span class="src-sym">]</span>/<span class="src-num">100</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a56"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-str">'id_pub'&nbsp;</span>=&gt;&nbsp;<span class="src-var">$entry</span><span class="src-sym">[</span><span class="src-num">4</span><span class="src-sym">]</span><span class="src-sym">,</span></div></li>
+<li><div class="src-line"><a name="a57"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a58"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$a</span><span class="src-sym">-&gt;</span><span class="src-id">ajouter_ligne</span><span class="src-sym">(</span><span class="src-var">$ligne</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a59"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a60"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a61"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$a</span><span class="src-sym">-&gt;</span><span class="src-id">definir_retour</span><span class="src-sym">(</span><span class="src-str">'pubban_validation_adds'</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a62"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-var">$a</span><span class="src-sym">-&gt;</span><span class="src-id">terminer</span><span class="src-sym">(&nbsp;</span><span class="src-var">$ref_commande&nbsp;</span><span class="src-sym">)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a63"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return</span><span class="src-sym">(&nbsp;</span><span class="src-var">$a</span><span class="src-sym">-&gt;</span><span class="src-id">rediriger</span><span class="src-sym">(</span><span class="src-sym">)&nbsp;)</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a64"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a65"></a>&nbsp;&nbsp;&nbsp;&nbsp;<span class="src-key">return&nbsp;</span><span class="src-id">false</span><span class="src-sym">;</span></div></li>
+<li><div class="src-line"><a name="a66"></a><span class="src-sym">}</span></div></li>
+<li><div class="src-line"><a name="a67"></a>&nbsp;</div></li>
+<li><div class="src-line"><a name="a68"></a><span class="src-php">?&gt;</span></div></li>
+</ol></code>
+</span></div>
+			<br />
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	<div id="pied">
+	<table cellspacing="1em"><tr>
+	<td width="20%"></td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_pub_banner/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:> 
+		<br />| Tue, 23 Nov 2010 14:31:03 +0100
+		</p>
+	</td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_pub_banner/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</td>
+	<td width="20%"></td>
+	</tr></table>
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Pub Banner</i></a> |
+	</div>
