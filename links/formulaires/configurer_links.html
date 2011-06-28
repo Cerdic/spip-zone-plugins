@@ -17,7 +17,7 @@
 			<legend>Apparence</legend>
 			<ul class="choix ">
 				<li class="links_style_yes[ (#ENV**{erreurs}|table_valeur{style_yes}|oui)erreur]">
-					<label for="style_yes">Style par d&eacute;faut</label>[
+					<label for="style_yes">Styler les liens (avec <code>links.css</code>)</label>[
 					<span class='erreur'>(#ENV**{erreurs}|table_valeur{style_yes})</span>
 					]<input type="radio" class="radio" name="style" id="style_yes"[ (#ENV{style}|=={on}|?{'checked="checked"'})] value="on" />
 					<p class="explication">Pour voir, affichez la page de test <code>?page=demo/links</code> ou mieux, ins&eacute;rez le mod&egrave;le <code>&lt;charte|links&gt;</code> dans un de vos articles. Pour toute personnalisation, compl&eacute;tez en CSS, dans votre feuille de style.</p>
