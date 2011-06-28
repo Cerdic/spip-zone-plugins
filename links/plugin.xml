@@ -1,11 +1,11 @@
 <plugin>
 <nom>Liens explicites</nom>
 <icon>prive/themes/spip/images/links.png</icon>
-<description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. avec ouverture possible en nouvelle fen&ecirc;tre.</description>
+<description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. (avec ouverture possible en nouvelle fen&ecirc;tre).</description>
 <lien>http://www.spip-contrib.net/?article3706</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net], C&eacute;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
-<version>2.2.3</version>
+<version>2.3</version>
 <etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
@@ -29,11 +29,11 @@
 <plugin spip="[3.0.0-dev;3.0.*]">
 <nom>Liens explicites</nom>
 <icon>prive/themes/spip/images/links.png</icon>
-<description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. avec ouverture possible en nouvelle fen&ecirc;tre.</description>
+<description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. (avec ouverture possible en nouvelle fen&ecirc;tre).</description>
 <lien>http://www.spip-contrib.net/?article3706</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net], C&eacute;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
-<version>2.2.3</version>
+<version>2.3</version>
 <etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
