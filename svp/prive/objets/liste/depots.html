@@ -40,7 +40,7 @@
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="titre principale">
 				[(#ENV{affichage}|=={complet}|oui)[(#LOGO_DEPOT|image_reduire{20,26})]]
-					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_afficher_depot:>">
+					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_aller_depot:>">
 						[(#TITRE)]
 					</a>
 				</td>
@@ -58,5 +58,5 @@
 	[<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_depots>
-	[(#ENV{affichage}|=={complet}|oui)<p><:svp:info_liste_aucun_depot:></p>]
+	[(#ENV{affichage}|=={complet}|oui)<p><:svp:info_aucun_depot_ajoute:></p>]
 <//B_liste_depots>

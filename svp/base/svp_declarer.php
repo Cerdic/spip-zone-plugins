@@ -43,7 +43,7 @@ function svp_declarer_tables_objets_sql($tables) {
 		
 		// Textes standard
 		'texte_retour' 			=> 'icone_retour',
-		'texte_modifier' 		=> 'svp:label_modifier_depot',
+		'texte_modifier' 		=> 'svp:bouton_modifier_depot',
 		'texte_creer' 			=> '',
 		'texte_creer_associer' 	=> '',
 		'texte_signale_edition' => '',
