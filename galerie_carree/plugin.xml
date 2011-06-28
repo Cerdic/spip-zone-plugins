@@ -1,10 +1,10 @@
 <plugin>
 <nom>Galerie carr&eacute;e</nom>
 <icon>icon.jpg</icon>
-<description>Galerie d'images carr&eacute;es.</description>
+<description>Galerie d'images carr&eacute;es, avec attribut longdesc.</description>
 <auteur>[romy.tetue.net->http://romy.tetue.net], Fil</auteur>
 <licence>&copy; 2009 GPL</licence>
-<version>0.1</version>
+<version>0.2</version>
 <etat>dev</etat>
 <prefix>galerie_carree</prefix>
 <pipeline>
