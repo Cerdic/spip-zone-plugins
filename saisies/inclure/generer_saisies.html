@@ -35,9 +35,10 @@
     #INCLURE{fond=inclure/generer_saisies, env, saisies=#ENV{tableau}}
 
 ]
+
 <BOUCLE_contenu(POUR){tableau #ENV{saisies}}>
 [(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
-[(#VALEUR**|saisies_generer_html{#ENV**|unserialize})]
+[(#VALEUR**|saisies_generer_html{#ENV{_env}|sinon{#ENV**|unserialize}})]
 ]
 </BOUCLE_contenu>
 

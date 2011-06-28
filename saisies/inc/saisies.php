@@ -610,10 +610,14 @@ function saisies_generer_html($champ, $env=array()){
 	
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
-	
+
 	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
-	if(isset($contexte['env']) or is_array($champ['saisies'])){
+	if (isset($contexte['env']) or is_array($champ['saisies'])) {
 		unset($contexte['env']);
+
+		// on sauve l'ancien environnement
+		// car les sous-saisies ne doivent pas en être affectees.
+		$contexte['_env'] = $env;
 		
 		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
 		unset($env['inserer_debut']);
@@ -633,7 +637,7 @@ function saisies_generer_html($champ, $env=array()){
 		// On récupère la liste des erreurs
 		$contexte['erreurs'] = $env['erreurs'];
 	}
-	
+
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
 	// Si le nom du champ est un tableau indexé, il faut parser !
 	if (preg_match('/([\w]+)((\[[\w]+\])+)/', $contexte['nom'], $separe)){
