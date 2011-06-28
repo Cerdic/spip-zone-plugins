@@ -15,11 +15,23 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 		'new' => $new,
 		'redirect' => $redirect,
 	));
+	
 	// valeur par defaut tout de meme sur sql et pour saisie
-	if (!$valeurs['sql']) $valeurs['sql'] = "text NOT NULL DEFAULT ''";
+	if (!$valeurs['sql']) {
+		$valeurs['sql'] = "text NOT NULL DEFAULT ''";
+	}
 
 	if (!$valeurs['saisie']) {
 		$valeurs['saisie'] = "input";
+	}
+	
+	if ($new) {
+		// donnees des options de la saisie, pour #GENERER_SAISIES
+		$s = saisies_charger_infos( $valeurs['saisie'] );
+		$valeurs['_saisies_defs']    = $s['options'];
+
+		// liste des champs (d'option) à interpreter et capturer pour CVT
+		$valeurs = array_merge($valeurs, saisies_lister_valeurs_defaut( $valeurs['_saisies_defs'] ));
 	}
 	
 	// si un extra est demande (pour edition)
@@ -27,14 +39,22 @@ function formulaires_editer_champ_extra_charger_dist($extra_id='new', $redirect=
 	if (!$new) {
 		$extra = iextra_get_extra($extra_id);
 		// si l'identifiant n'est pas trouve, c'est que le champ n'existe plus
-		// une ancienne url d'un marque page ?
 		if (!$extra) return false;
-		
+
+		// donnees des options de la saisie, pour #GENERER_SAISIES
+		$s = saisies_charger_infos( $extra->saisie );
+		$valeurs['_saisies_defs']    = $s['options'];
+
+		// liste des champs (d'option) à interpreter et capturer pour CVT
+		$valeurs = array_merge($valeurs, saisies_lister_valeurs_defaut( $valeurs['_saisies_defs'] ));
+				
 		$valeurs = array_merge($valeurs, $extra->toArray());
 
 		// chaque saisie_parametres devient un parametre a charger
 		$valeurs = array_merge($valeurs, $valeurs['saisie_parametres']);
+		unset ($valeurs['saisie_parametres']);
 	}
+
 	return $valeurs;
 }
 
@@ -49,7 +69,7 @@ function formulaires_editer_champ_extra_verifier_dist($extra_id='new', $redirect
 	$extra = iextras_post_formulaire();
 	
 	// pas de champ vide
-	foreach(array('champ', 'table', 'saisie', 'label', 'sql') as $c) {
+	foreach( array('champ', 'table', 'saisie', 'sql') as $c) {
 		if (!$extra[$c]) {
 			$erreurs[$c] = _T('iextras:veuillez_renseigner_ce_champ');
 		}
@@ -62,6 +82,11 @@ function formulaires_editer_champ_extra_verifier_dist($extra_id='new', $redirect
 		}
 	}
 	
+	// erreurs des options de saisies
+	// donnees des options de la saisie
+	$saisies_definitions = saisies_charger_infos( $valeurs['saisie'] );
+	$erreurs = array_merge($erreurs, saisies_verifier( $saisies_definitions['options'] ));
+	
 	// si nouveau champ, ou modification du nom du champ
 	// verifier qu'un champ homonyme 
 	// n'existe pas deja sur la meme table
@@ -73,8 +98,7 @@ function formulaires_editer_champ_extra_verifier_dist($extra_id='new', $redirect
 		}
 	}
 	if ($new or $verifier) {	
-		$table = table_objet_sql($extra['table']);
-		$desc = sql_showtable($table);
+		$desc = sql_showtable($extra['table']);
 		if (isset($desc['field'][$champ])) {
 			$erreurs['champ'] = _T('iextras:champ_deja_existant');
 		}
@@ -88,14 +112,15 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 	// nouveau ?
 	$new = ($extra_id == 'new') ? ' ': '';
 		
-	// recuperer les valeurs postees
+	// recuperer les valeurs postees (de base)
 	$extra = iextras_post_formulaire();
 
-	// cextra 1.4.0 : on separe les parametres des saisies
-	// dans un tableau specifique
+	// recuperer les valeurs postees des options de la saisie
+	$description_saisie = saisies_charger_infos( $extra['saisie'] );
+	$champs = saisies_lister_champs( $description_saisie['options'] );
 	$extra['saisie_parametres'] = array();
-	foreach (array('explication', 'attention', 'class', 'li_class', 'datas') as $p) {
-		$extra['saisie_parametres'][$p] = $extra[$p];
+	foreach ($champs as $p) {
+		$extra['saisie_parametres'][$p] = _request($p);
 		unset($extra[$p]);
 	}
 
@@ -151,16 +176,12 @@ function formulaires_editer_champ_extra_traiter_dist($extra_id='new', $redirect=
 }
 
 // recuperer les valeurs postees par le formulaire
+// des saisies (hors options fournies par le yaml de la saisie)
 function iextras_post_formulaire() {
 	$extra = array();
 	foreach(array(
-		'champ', 'table', 'saisie',
-		'label', 'sql',
-		'traitements',
-		'obligatoire',
-		'datas', 
-		'rechercher',
-		'explication', 'attention', 'class', 'li_class'
+		'champ', 'table', 'saisie', 'sql',
+		'traitements', 'rechercher'
 	) as $c) {
 		$extra[$c] = _request($c);
 	}

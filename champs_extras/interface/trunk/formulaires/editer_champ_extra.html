@@ -10,6 +10,7 @@
 		<fieldset>
 			<h3 class='legend'><:iextras:legend_declaration:></h3>
 			<ul>
+			
 			[(#SAISIE{input,champ,
 				label=<:iextras:label_champ:>,
 				explication=<:iextras:caracteres_autorises_champ:>,
@@ -21,17 +22,23 @@
 				obligatoire=oui,
 				disable_avec_post=#GET{disable},
 				datas=[(#VAL|cextras_objets_valides_boucle_pour)]})]
-
+[(#REM)
 			[(#SAISIE{input,label,
 				label=<:iextras:label_label:>,
 				explication=<:iextras:precisions_pour_label:>,
 				obligatoire=oui})]
+]
+
 			[(#SAISIE{selection,saisie,
 				label=<:iextras:label_saisie:>,
 				obligatoire=oui,
 				explication=<:iextras:precisions_pour_saisie:>,
 				datas=[(#VAL|cextras_types_formulaires)]})]
-				
+
+</ul>
+[(#GENERER_SAISIES{#ENV{_saisies_defs}})]
+
+[(#REM) 		
 			#SET{defaut,",-vide-
 1,valeur 1
 2,valeur 2"}
@@ -50,23 +57,35 @@
 			[(#SAISIE{oui_non,obligatoire,
 				label=<:iextras:label_obligatoire:>,
 				obligatoire=oui})]
+]
+
+					
+			<li class='fieldset'>
+				<fieldset>
+					<h3 class='legend'><:iextras:legend_options_techniques:></h3>
+					<ul>
+					[(#SAISIE{radio,traitements,
+						label=<:iextras:label_traitements:>,
+						explication=<:iextras:precisions_pour_traitements:>,
+						datas=#ARRAY{
+							'',<:iextras:radio_traitements_aucun:>,
+							'_TRAITEMENT_TYPO',<:iextras:radio_traitements_typo:>,
+							'_TRAITEMENT_RACCOURCIS',<:iextras:radio_traitements_raccourcis:>}})]
+					
+					[(#SAISIE{oui_non,rechercher,
+						label=<:iextras:label_rechercher:>,
+						explication=<:iextras:precisions_pour_rechercher:>})]
 				
-			[(#SAISIE{oui_non,rechercher,
-				label=<:iextras:label_rechercher:>,
-				explication=<:iextras:precisions_pour_rechercher:>})]
+					[(#SAISIE{input,sql,
+						label=<:iextras:label_sql:>,
+						obligatoire=oui,
+						disable_avec_post=#GET{disable}})]
+					</ul>
+				<fieldset>				
+			</li>
 
-			[(#SAISIE{input,sql,
-				label=<:iextras:label_sql:>,
-				obligatoire=oui,
-				disable_avec_post=#GET{disable}})]
+[(#REM)
 
-			[(#SAISIE{radio,traitements,
-				label=<:iextras:label_traitements:>,
-				explication=<:iextras:precisions_pour_traitements:>,
-				datas=#ARRAY{
-					'',<:iextras:radio_traitements_aucun:>,
-					'_TRAITEMENT_TYPO',<:iextras:radio_traitements_typo:>,
-					'_TRAITEMENT_RACCOURCIS',<:iextras:radio_traitements_raccourcis:>}})]
 			
 			</ul>
 		</fieldset>
@@ -93,6 +112,7 @@
 
 			</ul>
 		</fieldset>	
+]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{new}|?{<:bouton_ajouter:>,<:bouton_modifier:>})]' /></p>

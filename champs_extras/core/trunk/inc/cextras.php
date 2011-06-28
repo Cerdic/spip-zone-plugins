@@ -7,11 +7,12 @@ class ChampExtra{
 	var $sql         = ''; // définition SQL du champ SQL (text NOT NULL DEFAULT '')
 
 	var $saisie      = ''; // type de saisie (input)
-	var $label       = ''; // label du champ. Code de langue (monplug:mon_label)
-	var $obligatoire = false; // champ obligatoire ? 'oui'/true 
+
 	var $saisie_parametres = array();
 		/*
 		    // peut indiquer tout parametre d'une #SAISIE, tel que :
+			label       = ''; // label du champ. Code de langue (monplug:mon_label)
+			obligatoire = false; // champ obligatoire ? 'oui'/true 
 			explication => '', // message d'explication !
 			attention => '',   // message d'attention !
 			class => '',       // classes CSS sur l'element
