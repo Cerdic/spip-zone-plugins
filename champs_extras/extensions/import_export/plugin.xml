@@ -7,6 +7,8 @@
 	Pour importer ou exporter les descriptions des Champs Extras
 	install&eacute; sur un SPIP
 	</description>
+	<lien>http://www.spip-contrib.net/Champs-Extras-2</lien>
+	<icon>images/ieextras-64.png</icon>
 	<etat>test</etat>
 	<prefix>ie_extras</prefix>
 	<necessite id="cextras" version="[1.4.5;]" />
