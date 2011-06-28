@@ -1,27 +1,25 @@
 <plugin>
-  <nom>
-<!-- Nom du plugin -->
-	Belles puces
-	</nom>
-  <auteur>
-<!-- Auteur du plugin -->[J&#233;r&#244;me Combaz->http://conseil-recherche-innovation.net/le-cri/jerome-combaz] - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-  <version>
-	0.1
-	</version> <!-- Version du plugin -->
-  <etat>
-        stable
-	</etat>
-  <description>Remplace les puces - (tiret) des articles par des puces -* (&lt;li>...)</description>
-	<lien></lien> <!-- URI de documentation -->
-  <prefix>bellespuces
-	</prefix>
-<!-- Definitions des fonctions qui s'inserent dans les pipelines -->  <pipeline>
-    <nom>pre_typo</nom>
-    <action>pre_typo</action>
-    <inclure>bellespuces.php</inclure>
-  </pipeline>
-  
+	<nom>Belles puces</nom>
+	<prefix>bellespuces</prefix>
+
+	<version>0.1</version>
+	<etat>stable</etat>
+
+	<auteur>[J&#233;r&#244;me Combaz->http://conseil-recherche-innovation.net/le-cri/jerome-combaz]</auteur>
+	<licence>GNU/GPL</licence>
+
+	<slogan>De belles puces normalis&eacute;es pour les listes de vos articles</slogan>
+	<description>
+Ce plugin remplace les puces <code>-</code> (tiret) des articles par des puces <code>-*</code> g&eacute;n&eacute;ratrices de 
+vraies listes HTML non ordonn&eacute;es (&lt;li&gt;...)
+	</description>
+
+	<pipeline>
+		<nom>pre_typo</nom>
+		<action>pre_typo</action>
+		<inclure>bellespuces.php</inclure>
+	</pipeline>
+
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;)" />
 </plugin>
