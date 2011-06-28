@@ -16,6 +16,12 @@
 	<version>1.0.4</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
+	<slogan>
+		<multi>
+			[fr]Attribuer un article d'accueil aux rubriques
+			[en]Assign an home article to a section
+		</multi>
+	</slogan>
 	<description>
 		<multi>
 			[fr]Ce plugin vous permet de d'attribuer un article d'accueil aux rubriques. Le champ id_article_accueil peut ensuite &ecirc;tre utilis&eacute; par les squelettes.
