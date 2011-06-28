@@ -22,33 +22,6 @@ function cextras_data_array($data) {
 }
 
 
-// Calcule des elements pour le contexte de compilation
-// des squelettes de champs extras
-// en fonction des parametres donnes dans la classe ChampExtra
-function cextras_creer_contexte($c, $contexte_flux, $prefixe='') {
-	$contexte = array();
-	$nom_champ = $prefixe . $c->champ;
-	$contexte['champ_extra'] = $nom_champ;
-	$contexte['label_extra'] = _T($c->label);
-	$contexte['precisions_extra'] = _T($c->precisions);
-	if (isset($c->saisie_parametres['explication']) and $c->saisie_parametres['explication'])
-		$contexte['precisions_extra'] = _T($c->saisie_parametres['explication']);
-	$contexte['obligatoire_extra'] = $c->obligatoire ? 'obligatoire' : '';
-	$contexte['verifier_extra'] = $c->verifier;
-	$contexte['verifier_options_extra'] = $c->verifier_options;
-	$contexte['valeur_extra'] = $contexte_flux[$nom_champ];
-	$contexte['enum_extra'] = $c->enum;
-	$contexte['class_extra'] = $c->saisie_parametres['class']; // class CSS sur les champs (input, textarea, ...)
-	// ajouter 'erreur_extra' dans le contexte s'il y a une erreur sur le champ
-	if (isset($contexte_flux['erreurs'])
-	and is_array($contexte_flux['erreurs'])
-	and array_key_exists($nom_champ, $contexte_flux['erreurs'])) {
-		$contexte['erreur_extra'] = $contexte_flux['erreurs'][$nom_champ];
-	}
-
-	return array_merge($contexte_flux, $contexte);
-}
-
 
 
 // en utilisant le plugin "saisies"
@@ -260,6 +233,11 @@ function cextras_afficher_contenu_objet($flux){
 
 		$contexte = cextra_quete_valeurs_extras($extras, $flux['args']['type'], $flux['args']['id_objet']);
 		$contexte = array_merge($flux['args']['contexte'], $contexte);
+		
+		$saisies = $valeurs = array();
+		
+		// on cree un tableau de saisie a partir de la liste des 
+		// champs extras dont on peut voir l'affichage
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la vue est autorisee
@@ -270,41 +248,21 @@ function cextras_afficher_contenu_objet($flux){
 				'id_objet' => $flux['args']['id_objet'],
 				'contexte' => $contexte)))
 			{
-
-				$contexte = cextras_creer_contexte($c, $contexte);
-
-				// calculer le bon squelette et l'ajouter
-				if (!find_in_path(($f = 'saisies-vues/' . $c->saisie) . '.html')) {
-					$flux['data'] .= recuperer_fond('prive/squelettes/saisie_vue_absente', array(
-						'saisie' => $c->saisie,
-						'valeur' => $contexte[$c->champ],
-					));
-					extras_log("Vue de saisie non trouvee pour $c->saisie", true);
-				} else {
-					$contexte['valeur'] = $contexte[$c->champ];
-					// ajouter les listes d'éléments possibles
-					if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
-						$contexte['datas'] = cextras_data_array($c->saisie_parametres['datas']);
-					} 
-
-					// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
-					// Champs Extra les stocke separes par des virgule.
-					if ($contexte['datas']) {
-						// n'appliquer que si la saisie en a besoin !
-						$desc_saisies = saisies_lister_par_nom( saisies_charger_infos($c->saisie) );
-						if ($desc_saisies['datas']) {
-							$contexte['valeur'] = explode(',', $contexte['valeur']);
-						}	
-					}
-					
-					$extra = recuperer_fond($f, $contexte);
-					$extra = '<div class="champ ' . $c->champ.'">
-						<div class="label_extra">' . _T($c->label) . '</div>' . $extra . '</div>';
-					
-					$flux['data'] .= "\n".$extra;
-				} 
+				$options = $c->saisie_parametres;
+				$options['nom'] = $c-> champ;
+				$saisies[] = array('saisie' => $c->saisie, 'options' => $options); 
+				# saisies_charger_infos($c->saisie);
+				
+				$valeurs[$c->champ] = $contexte[$c->champ];
+				
 			}
 		}
+
+		$flux['data'] .= recuperer_fond('inclure/voir_saisies', array_merge($contexte, array(
+					'saisies' => $saisies,
+					'valeurs' => $valeurs,
+		)));
+
 	}
 	return $flux;
 }

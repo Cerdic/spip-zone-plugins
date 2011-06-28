@@ -7,59 +7,34 @@
 		<input type='hidden' name='extra_id' value='#ENV{extra_id}' />
 
 		#SET{disable,#ENV{new}|?{'',oui}}
-		<fieldset>
-			<h3 class='legend'><:iextras:legend_declaration:></h3>
-			<ul>
+		<ul>
+			<li class='fieldset'>
+				<fieldset>
+					<h3 class='legend'><:iextras:legend_declaration:></h3>
+					<ul>
+						[(#SAISIE{input,champ,
+							label=<:iextras:label_champ:>,
+							explication=<:iextras:caracteres_autorises_champ:>,
+							obligatoire=oui,
+							disable_avec_post=#GET{disable}})]
+
+						[(#SAISIE{selection,table,
+							label=<:iextras:label_table:>,
+							obligatoire=oui,
+							disable_avec_post=#GET{disable},
+							datas=[(#VAL|cextras_objets_valides_boucle_pour)]})]
+
+						[(#SAISIE{selection,saisie,
+							label=<:iextras:label_saisie:>,
+							obligatoire=oui,
+							explication=<:iextras:precisions_pour_saisie:>,
+							datas=[(#VAL|cextras_types_formulaires)]})]	
+					</ul>
+				</fieldset>
+			</li>
 			
-			[(#SAISIE{input,champ,
-				label=<:iextras:label_champ:>,
-				explication=<:iextras:caracteres_autorises_champ:>,
-				obligatoire=oui,
-				disable_avec_post=#GET{disable}})]
-
-			[(#SAISIE{selection,table,
-				label=<:iextras:label_table:>,
-				obligatoire=oui,
-				disable_avec_post=#GET{disable},
-				datas=[(#VAL|cextras_objets_valides_boucle_pour)]})]
-[(#REM)
-			[(#SAISIE{input,label,
-				label=<:iextras:label_label:>,
-				explication=<:iextras:precisions_pour_label:>,
-				obligatoire=oui})]
-]
-
-			[(#SAISIE{selection,saisie,
-				label=<:iextras:label_saisie:>,
-				obligatoire=oui,
-				explication=<:iextras:precisions_pour_saisie:>,
-				datas=[(#VAL|cextras_types_formulaires)]})]
-
-</ul>
-[(#GENERER_SAISIES{#ENV{_saisies_defs}})]
-
-[(#REM) 		
-			#SET{defaut,",-vide-
-1,valeur 1
-2,valeur 2"}
-			[(#SAISIE{textarea,datas,
-				label=<:iextras:label_datas:>,
-				explication=<:iextras:precisions_pour_datas:>,
-				rows=3,
-				defaut=#GET{defaut}})]
-
-			</ul>
-		</fieldset>
-		
-		<fieldset>
-			<h3 class='legend'><:iextras:legend_options_techniques:></h3>	
-			<ul>
-			[(#SAISIE{oui_non,obligatoire,
-				label=<:iextras:label_obligatoire:>,
-				obligatoire=oui})]
-]
-
-					
+			[(#GENERER_SAISIES{#ENV{_saisies_defs}})]
+			
 			<li class='fieldset'>
 				<fieldset>
 					<h3 class='legend'><:iextras:legend_options_techniques:></h3>
@@ -81,38 +56,10 @@
 						obligatoire=oui,
 						disable_avec_post=#GET{disable}})]
 					</ul>
-				<fieldset>				
+				</fieldset>				
 			</li>
+		</ul>
 
-[(#REM)
-
-			
-			</ul>
-		</fieldset>
-		
-		<fieldset>
-			<h3 class='legend'><:iextras:legend_options_saisies:></h3>	
-			<ul>
-			[(#SAISIE{input,explication,
-				label=<:iextras:label_explication:>,
-				explication=<:iextras:precisions_pour_explication:>})]
-
-
-			[(#SAISIE{input,attention,
-				label=<:iextras:label_attention:>,
-				explication=<:iextras:precisions_pour_attention:>})]
-				
-			[(#SAISIE{input,li_class,
-				label=<:iextras:label_li_class:>,
-				explication=<:iextras:precisions_pour_li_class:>})]
-
-			[(#SAISIE{input,class,
-				label=<:iextras:label_class:>,
-				explication=<:iextras:precisions_pour_class:>})]
-
-			</ul>
-		</fieldset>	
-]
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		<p class='boutons'><input type='submit' class='submit' value='[(#ENV{new}|?{<:bouton_ajouter:>,<:bouton_modifier:>})]' /></p>
