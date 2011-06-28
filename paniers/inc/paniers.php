@@ -84,6 +84,7 @@ function paniers_creer_panier(){
 	include_spip("inc/acces");
 	include_spip('inc/session');
 	include_spip('base/abstract_sql');
+	include_spip('inc/cookie');
 	
 	$id_auteur = session_get('id_auteur') > 0 ? session_get('id_auteur') : 0;
 	$nom_cookie = $GLOBALS['cookie_prefix'].'_panier';
