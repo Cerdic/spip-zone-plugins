@@ -616,7 +616,8 @@ function saisies_generer_html($champ, $env=array()){
 		unset($contexte['env']);
 
 		// on sauve l'ancien environnement
-		// car les sous-saisies ne doivent pas en être affectees.
+		// car les sous-saisies ne doivent pas être affectees
+		// par les modification sur l'environnement servant à generer la saisie mère
 		$contexte['_env'] = $env;
 		
 		// À partir du moment où on passe tout l'environnement, il faut enlever certains éléments qui ne doivent absolument provenir que des options
@@ -651,7 +652,7 @@ function saisies_generer_html($champ, $env=array()){
 	// Sinon la valeur est juste celle du nom
 	else
 		$contexte['valeur'] = $env[$contexte['nom']];
-	
+
 	// Si ya des enfants on les remonte dans le contexte
 	if (is_array($champ['saisies']))
 		$contexte['saisies'] = $champ['saisies'];
@@ -675,9 +676,9 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	// Si le paramètre n'est pas bon, on génère du vide
 	if (!is_array($saisie))
 		return '';
-	
+
 	$contexte = array();
-	
+		
 	// On sélectionne le type de saisie
 	$contexte['type_saisie'] = $saisie['saisie'];
 	
@@ -689,11 +690,16 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	
 	// On ajoute les options propres à la saisie
 	$contexte = array_merge($contexte, $options);
-	
+
 	// Si env est définie dans les options ou qu'il y a des enfants, on ajoute tout l'environnement
 	if(isset($contexte['env']) or is_array($saisie['saisies'])){
 		unset($contexte['env']);
-		
+
+		// on sauve l'ancien environnement
+		// car les sous-saisies ne doivent pas être affectees
+		// par les modification sur l'environnement servant à generer la saisie mère
+		$contexte['_env'] = $env;
+				
 		// À partir du moment où on passe tout l'environnement, il faut enlever 
 		// certains éléments qui ne doivent absolument provenir que des options
 		$saisies_disponibles = saisies_lister_disponibles();
@@ -706,7 +712,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 		
 		$contexte = array_merge($env, $contexte);
 	}
-	
+
 	// Dans tous les cas on récupère de l'environnement la valeur actuelle du champ
 	
 	// On regarde en priorité s'il y a un tableau listant toutes les valeurs
@@ -725,7 +731,7 @@ function saisies_generer_vue($saisie, $env=array(), $env_obligatoire=array()){
 	// Sinon la valeur est juste celle du nom
 	else
 		$contexte['valeur'] = $env[$contexte['nom']];
-	
+
 	// Si ya des enfants on les remonte dans le contexte
 	if (is_array($saisie['saisies']))
 		$contexte['saisies'] = $saisie['saisies'];
