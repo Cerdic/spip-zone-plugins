@@ -16,10 +16,14 @@
 	</div>
 
 	[<br /><p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>
-	[(#REM) Si deja eu les en tetes, pas la peine de montrer le bouton, il est deja present en pied ]
-	[(#ENV**{header_deja}|=={oui}|non)
+	[(#REM)
+		Si deja eu les en tetes :
+			- si bouton 'Fermer' pas la peine de le montrer de nouveau, il est deja present en pied 
+			- si pas de bouton 'Fermer' on le montre maintenant
+	]
+	[(#ENV**{header_deja}|=={oui}|oui)[(#ENV**{close_button}|=={non}|oui)
 		<a class="spip_popup" href="javascript:#ENV{form_reset,window.close();}"><:tipafriend:bouton_fermer:></a>
-	]<br />]
+	]]<br />]
 
 	[<br /><p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p><br />]
 
@@ -29,8 +33,9 @@
 		<input type="hidden" name="id" value="#ENV{id,''}" />
 		<input type="hidden" name="type" value="#ENV{type,''}" />
 		<input type="hidden" name="url" value="#ENV{url}" />
-		<input type="hidden" name="titre" value="#ENV{'titre'}" />
+		<input type="hidden" name="titre" value="#ENV{titre}" />
 		<input type="hidden" name="self" value="[(#SELF|url_absolue)]" />
+		<input type="hidden" name="close_button" value="#ENV{close_button}" />
 		<ul>
 			<li class="saisie_destinataires[ (#ENV**{erreurs}|table_valeur{destinataires}|oui)erreur] obligatoire">
 				<label for="destinataires"><:tipafriend:form_dest_label:>&nbsp;:</label>

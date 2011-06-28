@@ -74,6 +74,7 @@ define('_TIPAFRIEND_TEST', 0);
 
 /**
  * Dimensions par défaut de la popup
+ * => ces dimensions ne sont pas prises en compte en fenêtre javascript (FancyBox, MediaBox)
  */
 define('_TIPAFRIEND_POPUP_WIDTH', 600);
 define('_TIPAFRIEND_POPUP_HEIGHT', 460);
