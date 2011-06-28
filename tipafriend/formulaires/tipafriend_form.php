@@ -118,8 +118,6 @@ function formulaires_tipafriend_form_traiter(){
 
 	// Headers
 	$header = "X-Originating-IP: ".$GLOBALS['ip']."\n";
-	if( $send_exp = _request('expediteur_send') AND $send_exp == 'oui')
-		$header .= "Cc: ".$expediteur_adresse."\n";
 
 	// Utilisation du plugin Facteur si présent ...
 	if (strlen($mel['mail_patron_html']) && defined('_DIR_PLUGIN_FACTEUR')) {
@@ -131,16 +129,29 @@ function formulaires_tipafriend_form_traiter(){
 			$patron_html = 'patrons/'.str_replace('.html', '', $GLOBALS['TIPAFRIEND_DEFAULTS']['patron_html']);
 		}
 		$html_content = recuperer_fond($patron_html, $mel);
+
+		$corps = array(
+			'html' => $html_content,
+			'texte' => $mel['body'], 
+		);
+		if( $send_exp = _request('expediteur_send') AND $send_exp == 'oui')
+			$corps['cc'] = $expediteur_adresse;
+/*
 		$mail = $envoyer_mail(
-			join(",", $destinataires), $mel['subject'], 
+			join(',', $destinataires), $mel['subject'], 
 			array(
 				'html' => $html_content,
 				'texte' => $mel['body'], 
 			), $mel['expediteur_adresse'], $header
 		);
+*/
+		// Tout simplement ... c'est finalement trop simple Facteur ;-)
+		$mail = $envoyer_mail($destinataires, $mel['subject'], $corps, $mel['expediteur_adresse'], $header);
 	} 
 	// Sinon fonction de SPIP standard
 	else {
+		if( $send_exp = _request('expediteur_send') AND $send_exp == 'oui')
+			$header .= "Cc: ".$expediteur_adresse."\n";
 		$mail = $envoyer_mail(
 			join(",", $destinataires), $mel['subject'], $mel['body'], 
 			$mel['expediteur_adresse'], $header
@@ -158,7 +169,7 @@ function formulaires_tipafriend_form_traiter(){
 	// Debugger
 	if(_TIPAFRIEND_TEST) {
 		$tab_dbg[_T('tipafriend:taftest_content')] = $sep
-			._T('tipafriend:taftest_to')."&nbsp;:&nbsp;".join(" ; ", $mel['destinataires']).$sep
+			._T('tipafriend:taftest_to')."&nbsp;:&nbsp;".join(',', $mel['destinataires']).$sep
 			._T('tipafriend:taftest_from')."&nbsp;:&nbsp;".$mel['expediteur_adresse'].$sep
 			._T('tipafriend:taftest_mail_title')."&nbsp;:&nbsp;".$mel['subject'].$sep
 			._T('tipafriend:taftest_mail_headers')."&nbsp;:&nbsp;".$header.$sep
@@ -177,7 +188,7 @@ function formulaires_tipafriend_form_traiter(){
 
 	// LOG spip
 	$infos_log = array(
-		"To=[".join(" ; ", $mel['destinataires'])."]",
+		"To=[".join(',', $mel['destinataires'])."]",
 		"From=[".$mel['expediteur_adresse']."]",
 		"Sujet=[".$mel['subject']."]",
 		"Envoi=[".var_export($mail,true)."]",
