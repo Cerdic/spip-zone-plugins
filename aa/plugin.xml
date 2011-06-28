@@ -17,10 +17,10 @@
 	<slogan>Afficher un article sur la page de sommaire du site</slogan>
 	<description>
 Les &#233;l&#233;ments de l'article choisi dans l'interface de configuration seront affich&#233;s sur la page sommaire du site:
--* dans une balise <code><div id="aa"><code> si il en existe une dans le squelette {{sommaire.html}}.
+-* dans une balise <code><div id="aa"></code> si il en existe une dans le squelette {{sommaire.html}}.
 -* sinon, pour le squelette Z ou le squelette par d&#233;faut (dist), juste avant la liste des derniers articles .
 
-Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il faut ajouter la balise <code><div id="aa"><code> dans {{sommaire.html}}.
+Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il faut ajouter la balise <code><div id="aa"></code> dans {{sommaire.html}}.
 		</description>
 	    <lien>http://www.spip-contrib.net/?article1605</lien>
 
