@@ -1,0 +1,136 @@
+				<a name="top"></a>
+	<div id="entete">
+			<a rel="start home" href="#URL_SITE_SPIP/" title="<:accueil_site:>" class="accueil">[(#LOGO_SITE_SPIP||image_reduire{300,100}) ]<strong id="nom_site_spip">#NOM_SITE_SPIP</strong></a>
+			#MENU_LANG
+        <div style="float: right; font-size: 0.9em;">
+								[ <a href="[(#SELF|parametre_url{doc,ric_LICENSE})]">LICENSE</a> ]
+					[&nbsp;|&nbsp;(#AUTORISER{configurer}) 
+	&#91; <b><a href="[(#SELF|parametre_url{doc,index_dev})]"><:phpdoc:dev_docbook:></a></b> &#93;
+]
+		</div>
+	</div>
+
+
+    <div class="hfeed" id="conteneur" style="width: 100%">
+	    <div class="hentry" id="contenu">
+
+			<div class="cartouche">
+			
+<div class='pres_spip'><table><tr>
+	<td style='margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{img/ico-pubban.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Pub Banner<br /></b><small>|&nbsp;<i><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt=' ' width='48' height='16' align='absmiddle' hspace='3' />&nbsp;<:phpdoc:plugin_spip:>&nbsp;-&nbsp;version [2.0.3;]</i>&nbsp;|<br />by <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a><br /><i>Version 1.1 (stable)  - © 2009 <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/' class='spip_out' title='Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique' rel='external'>Creative Commons BY-NC-SA</a></i></small></td>
+</tr></table></div>
+
+						<div class="spip_menu_manual"><small>|&nbsp;
+									&nbsp;<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]">Pub Banner : gestionnaire de banni&egrave;res publicitaires</a>&nbsp;|
+		
+						</small></div>
+						</div>			<div class="spip_tuto"><a name=""></a><div class="cartouche"><h1 class="entry-title">Pub Banner : gestionnaire de banni&egrave;res publicitaires</h1>
+		<p class="soustitre">PlugIn pour SPIP 2.0+ | <strong>Manuel utilisateur</strong></p></div>
+	<div class="menu"><small><ul><li><:phpdoc:by:>&nbsp;<strong>Piero Wbmstr
+			[&nbsp;<a href="http://www.pierowbmstr.fr">http://www.pierowbmstr.fr</a>&nbsp;]
+			[&nbsp;<a href="mailto:contact@pierowbmstr.fr">mailto:contact@pierowbmstr.fr</a>&nbsp;]</strong></li>
+		<li><:phpdoc:copyright:>&nbsp;<strong>&copy; 2009 Piero Wbmstr</strong></li>
+		<li><:phpdoc:license:>&nbsp;<strong><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons BY-NC-SA</a></strong></li></ul></small></div>
+	<table width="100%"><tr>
+<td width="10%"></td>
+<td>
+<div class="menu">
+<h3><:phpdoc:toc:></h3>
+<ul>
+	
+									<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#install">Installation</a>
+				
+			</li>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#requires">Pr&eacute;requis</a>
+				
+			</li>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#samples">Aper&ccedil;us des banni&egrave;res</a>
+				
+				<ul>						<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#samples.skyscraper">Banni&egrave;re 'Skyscraper'</a>
+			
+						</li>				<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#samples.leaderboard">Banni&egrave;re 'Leaderboard'</a>
+			
+						</li>				<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#samples.banner">Banni&egrave;re 'Banner'</a>
+			
+						</li>				<li>
+		
+		<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]#samples.cube">Banni&egrave;re 'Cube'</a>
+		</ul>
+</div>
+</td>
+<td width="10%"></td>
+</tr></table>
+
+		<p><center>&nbsp;<a href = "[(#SELF|parametre_url{border,1})]">VOIR LE CONTOUR DES BANNI&Egrave;RES</a>&nbsp;
+			&nbsp;|&nbsp;
+			&nbsp;<a href = "[(#SELF|parametre_url{border,''})]">CACHER LE CONTOUR DES BANNI&Egrave;RES</a>&nbsp;</center></p>
+	<div class="texte entry-content"><a name="install"></a><h3>Installation</h3><p>Le plugin PUB BANNER s'installe de la m&ecirc;me mani&egrave;re que l'ensemble des plugins SPIP (<em><a href = "http://www.spip.net/fr_article3396.html">article d&eacute;di&eacute; sur 'spip.net'</a></em>).
+				<br/><br/>
+				Des valeurs par d&eacute;faut sont entr&eacute;es dans les tables, &agrave; savoir :
+				<ul><li>quatre emplacements 'type', les plus r&eacute;pandus sur le web :
+					<ul><li><a href = "#skyscraper"><strong>skyscraper</strong></a> : la longue banni&egrave;re verticale, de 160 ou 180 sur 600 pixels,</li>
+						<li><a href = "#leaderboard"><strong>leaderboard</strong></a> : la longue banni&egrave;re horizontale, de 728 sur 90 pixels,</li>
+						<li><a href = "#banner"><strong>banner</strong></a> : la banni&egrave;re horizontale 'standard', de 468 sur 60 pixels,</li>
+						<li><a href = "#cube"><strong>cube</strong></a> : le carr&eacute;, de 250 sur 250 pixels, emplacement privil&eacute;gi&eacute; pour les encarts flash,</li></ul></li>
+					<li>cinq exemples d'encart publicitaires, un pour chaque emplacement, deux pour la 'banner', avec divers options quand &agrave; la limite d'affichage (nombre d'affichages, de clics et dates encadrantes).</li></ul>
+				<br/>
+				Ces banni&egrave;res s'int&egrave;grent dans vos squelettes en indiquant simplement la balise :
+				<pre><strong># PUBBAN</strong></pre>
+				Suivie du nom de la banni&egrave;re que vous souhaitez afficher.
+				<br/>La balise est remplac&eacute;e par une frame de la taille de la banni&egrave;re.</p><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="requires"></a><h3>Pr&eacute;requis</h3><p>Pour une raison pratique (*), le plugin PUB BANNER n&eacute;cessite d'avoir install&eacute; au pr&eacute;alable le plugin '<strong>Spip Bonux</strong>' en version 1.3 au minimum.
+			<ul><li>Vous pouvez lire une description de ce plugin sur le site 'Spip Contrib' &agrave; l'adresse :<br/>&nbsp;&nbsp;&nbsp;&nbsp;<a href = "http://www.spip-contrib.net/SPIP-Bonux">http://www.spip-contrib.net/SPIP-Bonux</a>.<br/></li>
+			<li>Vous pouvez le t&eacute;l&eacute;charger &agrave; l'adresse :<br/>&nbsp;&nbsp;&nbsp;&nbsp;<a href = "http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575">http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575</a> (<em>ici en version 2</em>).</li></ul></p>
+		<div class="comment"><strong>*</strong> : <em>Spip Bonux est utilis&eacute; par Pub Banner pour sa fonctionnalit&eacute; 'POUR', qui permet de cr&eacute;er des boucles depuis des array PHP (ndlr) ...</em></div><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br />
+	<div class="texte entry-content"><a name="samples"></a><h3>Aper&ccedil;us des banni&egrave;res</h3><div><a name="samples.skyscraper"></a><div class="menu"><br /><ul><li>Banni&egrave;re 'Skyscraper'</li></ul></div><p>Int&egrave;gration :
+				<pre><strong># PUBBAN{skyscraper}</strong></pre></p>
+			<p>#PUBBAN{skyscraper}</p></div>
+		<div><a name="samples.leaderboard"></a><div class="menu"><br /><ul><li>Banni&egrave;re 'Leaderboard'</li></ul></div><p>Int&egrave;gration :
+				<pre><strong># PUBBAN{leaderboard}</strong></pre></p>
+			<p>#PUBBAN{leaderboard}</p></div>
+		<div><a name="samples.banner"></a><div class="menu"><br /><ul><li>Banni&egrave;re 'Banner'</li></ul></div><p>Int&egrave;gration :
+				<pre><strong># PUBBAN{banner}</strong></pre></p>
+			<p>#PUBBAN{banner}</p></div>
+		<div><a name="samples.cube"></a><div class="menu"><br /><ul><li>Banni&egrave;re 'Cube'</li></ul></div><p>Int&egrave;gration :
+				<pre><strong># PUBBAN{cube}</strong></pre></p>
+			<p>#PUBBAN{cube}</p></div><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div></div><hr><br /></div>
+						<br />
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+	<div id="pied">
+	<table cellspacing="1em"><tr>
+	<td width="20%"></td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_pub_banner/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:> 
+		<br />| Tue, 23 Nov 2010 14:30:53 +0100
+		</p>
+	</td>
+	<td width="30%">
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_pub_banner/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</td>
+	<td width="20%"></td>
+	</tr></table>
+	<a href="http://www.spip.net/" title="<:site_realise_avec_spip:>"><img src="#CHEMIN{spip.png}" alt="SPIP" width="48" height="16" /></a> | 
+	<a href="#ENV{skel}" title="<:voir_squelette:>" rel="nofollow"><:squelette:></a>[
+	(#SESSION{id_auteur}|?{' '})| <a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a>
+	][(#SESSION{id_auteur}|?{'',' '})| <a href="[(#URL_PAGE{login}|parametre_url{url,#SELF})]" rel="nofollow" class='login_modal'><:lien_connecter:></a>][
+	(#AUTORISER{ecrire})| <a href="#EVAL{_DIR_RESTREINT_ABS}"><:espace_prive:></a>] | 
+	<a rel="contents" href="#URL_PAGE{plan}"><:plan_site:></a> | 
+	<a href="#URL_PAGE{backend}" rel="alternate" title="<:syndiquer_site:>"><img src="#CHEMIN{feed.png}" alt="<:icone_suivi_activite:>" width="16" height="16" />&nbsp;RSS&nbsp;2.0</a>
+	</div>	

@@ -1,0 +1,55 @@
+<div style="border:1px solid red;margin:.2em;padding:.4em;font-weight:bold;text-align:center;"><:doc_pubban:info_doc{link=#info_doc}|propre:></div>
+
+[(#REM) Fil d'Ariane ]
+<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <strong class="on"><:doc_pubban:doc_titre_court:></strong></div>
+
+<div class="cartouche">
+	<h1 class="entry-title"><:doc_pubban:doc_titre_page:></h1>
+</div>
+		
+<div class="chapo"><:doc_pubban:doc_chapo|propre:></div>
+
+<div class="texte entry-content">
+[(#SET{lien_bordure,[
+	(#ENV{border}|=={non}|non)<a href="[(#SELF|parametre_url{border,non})]"><:doc_pubban:cacher_bordure:></a>][
+	(#ENV{border}|=={non}|oui)<a href="[(#SELF|parametre_url{border,''})]"><:doc_pubban:montrer_bordure:></a>
+]})]
+[(#SET{lien_habillage,[
+	(#ENV{bar}|=={oui}|non)<a href="[(#SELF|parametre_url{bar,oui})]"><:doc_pubban:montrer_bar:></a>][
+	(#ENV{bar}|=={oui}|oui)<a href="[(#SELF|parametre_url{bar,''})]"><:doc_pubban:cacher_bar:></a>
+]})]
+[(#SET{lien_squelette,<a href="#ENV{skel}" title="<:voir_squelette:>" rel="nofollow"><:doc_pubban:exemple_squelette:></a>})]
+	<:doc_pubban:exemple{lien_bordure=#GET{lien_bordure},lien_habillage=#GET{lien_habillage}}|propre:>
+	<div id="eudock"> </div>
+	<p><ul>
+		<li><a href="[(#SELF|parametre_url{type,logos_rubriques})]"><:doc_pubban:voir_logos_rubrique:></a></li>
+		<li><a href="[(#SELF|parametre_url{type,documents_articles})]"><:doc_pubban:voir_documents_articles:></a></li>
+		<li><a href="[(#SELF|parametre_url{type,''})]"><:doc_pubban:voir_logos_articles:></a></li>
+		<li><a href="[(#SELF|parametre_url{limit,4})]"><:doc_pubban:limiter_4_images:></a></li>
+		<li><a href="[(#SELF|parametre_url{vide,oui})]"><:doc_pubban:image_si_vide:></a></li>
+	</ul></p>
+	<:doc_pubban:documentation{lien_habillage=#GET{lien_habillage},lien_skel=#GET{lien_squelette}}|propre:>
+	<:doc_pubban:exemple_site{lien_gadgets=#URL_PAGE{eudock_gadgets}}|propre:>
+	<:doc_pubban:sep|propre:>
+</div>
+
+[<div class="notes"><h2 class="pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+
+	<center><a href='http://eudock.jules.it'>
+		<img src='http://eudock.jules.it/littlEuDock.jpg' border=0 /></a><br /><br /></center>
+
+<div id="bloc_licence" class="cartouche" style="border:1px solid #404040;margin:.2em;padding:.8em;line-height:1.4em;">
+	<img class='spip_logos' alt="" src="#CHEMIN{img/eudock-logo-120.png}" width='120' height='59' style='height:59px;width:120px;' />
+	<p class="soustitre"><:doc_pubban:titre_original:></p>
+	<p><small><:doc_pubban:licence_originale|propre:></small></p>
+	<p><small><:doc_pubban:licence_actuelle|propre:></small></p>
+</div>
+
+<div id="info_doc" style="background:#eee;color:#000;margin:.2em;padding:.4em;border:1px solid red;font-size:96%;">
+[(#SET{urldocbrut,[(#URL_PAGE{eudock_documentation}|parametre_url{docmode,brut})]})]
+[(#SET{urldoczpip,[(#URL_PAGE{eudock_documentation}|parametre_url{docmode,zpip})]})]
+[(#SET{urldocspip,[(#URL_PAGE{eudock_documentation}|parametre_url{docmode,spip})]})]
+<h3><:doc_pubban:info_doc_titre:></h3>
+<:doc_pubban:info_skel_doc{mode_brut=#GET{urldocbrut},mode_zpip=#GET{urldoczpip},mode_spip=#GET{urldocspip}}|propre:>
+<:doc_pubban:info_skel_contrib|propre:>
+</div>

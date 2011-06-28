@@ -1,0 +1,68 @@
+<plugin>
+	<nom>Pub Banner</nom>
+	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
+	<licence>&#169; 2009 [Creative Commons BY-NC-SA|Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique->http://creativecommons.org/licenses/by-nc-sa/3.0/]</licence>
+	<description>
+{{Pub Banner :: Gestionnaire de banni&#232;res publicitaires}}
+
+Gestion et statistiques de banni&#232;res publicitaires pour un site SPIP int&#233;gr&#233;es aux squelettes ...
+
+{{UTILISATION}}
+-* Ce plugin ajoute la balise {{ &#035;PUBBAN&#123;nom de la banni&#232;re&#125; }} pour les squelettes, qui est remplac&#233;e par une frame englobant la banni&#232;re.
+-* Une page publique vous permet de pr&#233;senter les statistiques des encarts et de les exporter au format '.xls'.
+
+{{VALEURS PAR DEFAUT}}
+-* Des banni&#232;res standards sont charg&#233;es par d&#233;faut &#224; l'installation ; il s'agit des quatre types les plus r&#233;pandus sur le web. Vous pouvez les effacer et en cr&#233;er de nouvelles.
+-* Des exemples d'encarts ({&#233;cureuil SPIP}) sont &#233;galement charg&#233;s, pour d&#233;monstration.
+
+{{AIDE / DOC}}
+-* Une explication ainsi qu'un exemple complet sont disponibles dans la documentation, qui vous permettra &#233;galement de visualiser l'int&#233;gration des banni&#232;res dans vos squelettes.
+Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique [doc_pub_banner->/?page=doc_pub_banner].
+
+-* La page de statistiques du plugin est une adaptation libre du script '{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}' d&#233;velopp&#233; par {{Vincent Roseberry}} ({sous licence GPL &#224; l'&#233;poque}).
+
+{{CHARGEMENT AUTOMATIQUE / MISE A JOUR}}
+-* Ce plugin est disponible en chargement automatique ou en version mise &#224; jour &#224; l'adresse : [->http://projets.pierowbmstr.fr/SPIP_paquets/pub_banner.zip].
+	</description>
+	<version>1.22</version>
+	<version_base>0.4</version_base>
+	<etat>stable</etat>
+ 	<icon>img/ico-pubban.png</icon>
+	<options>pubban_options.php</options>
+	<fonctions>pubban_fonctions.php</fonctions>
+	<install>base/pubban_upgrade.php</install>
+ 	<prefix>pubban</prefix>
+	<lien>[Documentation->http://www.spip-contrib.net/?article3637]</lien>
+	<chemin dir='public' type='public' />
+	<chemin dir='prive' type='prive' />
+	<chemin dir='' />
+    <pipeline>
+        <nom>header_prive</nom>
+		<inclure>pubban_pipelines.php</inclure>
+    </pipeline>
+	<pipeline>
+        <nom>declarer_tables_interfaces</nom>
+        <inclure>base/pubban_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_principales</nom>
+        <inclure>base/pubban_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>pubban_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>jquery_plugins</nom>
+		<inclure>pubban_pipelines.php</inclure>
+	</pipeline>	
+	<bouton id='pubban' parent='naviguer'>
+		<icone>img/ico-pubban-24.png</icone>
+		<titre>pubban:pubban_titre</titre>
+		<url>pubban_admin</url>
+	</bouton>
+ 	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id='spip_bonux' version='[1.3;]' />
+	<categorie>multimedia</categorie>
+	<traduire gestionnaire="salvatore" module="pubban" reference="fr" />
+</plugin>

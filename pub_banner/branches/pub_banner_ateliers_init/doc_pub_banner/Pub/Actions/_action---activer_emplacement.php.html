@@ -1,0 +1,213 @@
+	<a name="top"></a>
+	<div id="entete">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{img/ico-pubban.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Pub Banner<br /></b><small>by <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a><br /><i>Version 1.1 (stable)  - © 2009 <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/' class='spip_out' title='Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique' rel='external'>Creative Commons BY-NC-SA</a></i></small></td>
+</tr></table>
+
+        
+                                    
+                            <div style="float: right; font-size: 0.9em;">
+		[ <a href="[(#SELF|parametre_url{doc,todolist})]">TODO</a> ]        	        [ <b>Pub</b> :
+	        	<a href="[(#SELF|parametre_url{doc,classtrees_Pub})]"><:phpdoc:map:></a> | 
+            	<a href="[(#SELF|parametre_url{doc,elementindex_Pub})]"><:phpdoc:index:></a> 
+            ]
+        				&nbsp;|&nbsp;[ <b><a href="[(#SELF|parametre_url{doc,index})]"><:phpdoc:user_docbook:></a></b> ]		</div>
+	</div>
+
+    <div class="hfeed" id="conteneur">
+	    <div class="hentry" id="contenu">
+
+					<div id="hierarchie"><:phpdoc:source_file_path:>&nbsp;:&nbsp;/action/activer_emplacement.php</div>
+		
+	        <div class="cartouche">
+		        <div class="surlignable">
+	    			<h1 class="entry-title"><:phpdoc:procedural_file:>&nbsp;'<i>Activer banniere</i>'</h1>
+					</div>
+			</div>
+
+
+<ul class="forum">
+
+<a name="sec-description"></a>
+<li class="forum-fil">
+<div class="forum-message">
+	<div class="forum-chapo">
+		<div class="forum-titre"><:phpdoc:page_details:></div>
+		<small>
+		<span class="on"><:phpdoc:details:></span>&nbsp;										|&nbsp;<a href="#sec-functions"><:phpdoc:functions:></a>&nbsp;		</small>
+	</div>
+	<div class="forum-texte">
+			<p align="center" class="surtitre"><strong>Change le statut des emplacements</strong></p>
+	<div class="introduction"><p>Il s'agit d'une 'action SPIP' (<em>url_action()</em>) qui doit recevoir en argument une  chaine construite sur le modèle : 'action-ID' avec 'action' :  <ul><li>'desactiver' : désactivation : passe en '1inactif' si était '2actif'</li><li>'activer' : activation : passe en '2actif' si était '1inactif'</li><li>'rompu' : introuvable : passe en '4rompu' si était '1inactif' ou '2actif'</li><li>'out_trash' : sortie de poubelle : passe en '1inactif' si était '5poubelle'</li><li>'trash' : poubelle : passe en '5poubelle' si était '1inactif' ou '2actif'</li></ul></p></div>
+		<div class="menu rubriques tags">
+	<strong><:phpdoc:tags:></strong>
+	<ul>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:name:></strong></td>
+    <td width="6%"></td>
+    <td><small>Activer banniere</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:filesource:></strong></td>
+    <td width="6%"></td>
+    <td><small><a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub_Actions_actionactiver_emplacement.php})]"><:phpdoc:source_code_for_this_file:></a></small></td>
+  </tr>
+</table>
+</li>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:author:></strong></td>
+    <td width="6%"></td>
+    <td><small>Piero Wbmstr &lt;<a href="mailto:@link">piero.wbmstr@gmail.com @link piero.wbmstr@gmail.com</a>&gt;</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:version:></strong></td>
+    <td width="6%"></td>
+    <td><small>1.0 (06/2009)</small></td>
+  </tr>
+</table>
+</li>
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:license:></strong></td>
+    <td width="6%"></td>
+    <td><small><a href="http://creativecommons.org/licenses/by-nc-sa/3.0/">Creative Commons BY-NC-SA</a></small></td>
+  </tr>
+</table>
+</li>
+
+	</ul>
+</div>
+			</div>
+</div>
+</li>
+
+
+
+
+
+<a name="sec-functions"></a>
+<li class="forum-fil">
+<div class="forum-message">
+	<div class="forum-chapo">
+		<div class="forum-titre"><:phpdoc:functions:></div>
+		<small>
+		<a href="#sec-description"><:phpdoc:details:></a>&nbsp;										|&nbsp;<span class="on"><:phpdoc:functions:></span>&nbsp;		</small>
+	</div>
+	<div class="forum-texte">
+		<a name="functionaction_activer_emplacement" id="functionaction_activer_emplacement"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">action_activer_emplacement</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_Pub_Actions_actionactiver_emplacement.php})]#a24">24</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void action_activer_emplacement(
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+	<br />
+    			<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+	</div>
+</div>
+</li>
+
+</ul>
+
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    <div id="navigation">
+        <div class="menu">
+		<h2><:phpdoc:content:></h2>
+        <ul>
+						</ul>
+		</div>
+		    </div><!--#navigation-->
+    
+    <div id="extra">
+        <div class="menu">
+				<h2><:phpdoc:files:></h2>
+			<ul>
+		  <div class="package">
+						<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_inc---pubban_configset.php})]">Configuration</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_base---pubban_chargeur.php})]">Defaults / Chargeur</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_pubban_fonctions.php})]">Fonctions</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_base---pubban_upgrade.php})]">Installation</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_pubban_options.php})]">Options</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_pubban_pipelines.php})]">Pipelines</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_base---pubban_tables.php})]">Tables</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/_genie---pubban_cron.php})]">Taches Cron</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Actions</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Actions/_action---activer_emplacement.php})]">Activer banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Actions/_action---activer_pub.php})]">Activer pub</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Actions/_action---vider_poubelle_pubban.php})]">Vider poubelle</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Balises</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---emplacement.php})]">Banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---clic_banner.php})]">Clic banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---demo_flash.php})]">Demo Flash</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Balises/_balise---pubban.php})]">PUBBAN</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Formulaires</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_config_adds.php})]">Configurer plugin</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_config.php})]">Configurer plugin</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_editer_banniere.php})]">Editer banniere</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_editer_pub.php})]">Editer pub</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---pubban_editer_tarifs.php})]">Editer tarifs</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---form_adds.php})]">Page publique (ADDS)</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---form_adds - copie.php})]">Page publique (ADDS)</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---display_adds.php})]">Pubban displayer</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---search_pub.php})]">Recherche</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Formulaires/_formulaires---stats_adds.php})]">Statistiques</a></span><br />
+			  </div>
+  <div class="package">
+	<strong>Pages</strong><br />					<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_integer.php})]">Bannieres</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_integer_edit.php})]">Bannieres edit</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_integer_tous.php})]">Bannieres toutes</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_config.php})]">Configuration</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_admin.php})]">Home</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_info.php})]">Informations / Conseils</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_pub.php})]">Publicites</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_pub_edit.php})]">Publicites edit</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_pub_tous.php})]">Publicites toutes</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_puce_activation.php})]">Puce activation</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_stats.php})]">Statistiques</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,Pub/Pages/_exec---pubban_tarifs.php})]">Tarifs</a></span><br />
+			  </div>
+			</ul>
+					</div>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_pub_banner/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:>
+		<br />| Tue, 23 Nov 2010 14:30:53 +0100
+		</p>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_pub_banner/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</div>
+
+	<div id="pied">
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Pub Banner</i></a> |
+	</div>

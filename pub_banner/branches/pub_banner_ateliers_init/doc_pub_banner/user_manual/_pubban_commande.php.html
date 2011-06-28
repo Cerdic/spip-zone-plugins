@@ -1,0 +1,191 @@
+	<a name="top"></a>
+	<div id="entete">
+		
+<table><tr>
+	<td style='padding: 0.4em 1em;'><a rel='start home' href='#URL_SITE_SPIP/' title='<:accueil_site:>' class='accueil'>[(#LOGO_SITE_SPIP||image_reduire{150,100}) ]<br /><strong id='nom_site_spip'>#NOM_SITE_SPIP</strong></a></td>
+	<td style='border-left: 2px solid #8B6F92; margin: 0; padding: 0.4em 1em;'><a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:accueil_doc:>'>[(#CHEMIN{img/ico-pubban.png}||image_reduire{150,100})]</a></td>
+	<td style='padding: 0.4em 1em;'><b>Pub Banner<br /></b><small>by <a href='http://www.spip-contrib.net/PieroWbmstr' class='spip_out' rel='external'>Piero Wbmstr</a><br /><i>Version 1.1 (stable)  - © 2009 <a href='http://creativecommons.org/licenses/by-nc-sa/3.0/' class='spip_out' title='Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique' rel='external'>Creative Commons BY-NC-SA</a></i></small></td>
+</tr></table>
+
+        
+                                    <div style="float: right; font-size: 0.9em;">
+		[ <a href="[(#SELF|parametre_url{doc,todolist})]">TODO</a> ]        				&nbsp;|&nbsp;[ <b><a href="[(#SELF|parametre_url{doc,index})]"><:phpdoc:user_docbook:></a></b> ]		</div>
+	</div>
+
+    <div class="hfeed" id="conteneur">
+	    <div class="hentry" id="contenu">
+
+					<div id="hierarchie"><:phpdoc:source_file_path:>&nbsp;:&nbsp;/pubban_commande.php</div>
+		
+	        <div class="cartouche">
+		        <div class="surlignable">
+	    			<h1 class="entry-title"><:phpdoc:procedural_file:>&nbsp;'<i>pubban_commande.php</i>'</h1>
+					</div>
+			</div>
+
+
+<ul class="forum">
+
+<a name="sec-description"></a>
+<li class="forum-fil">
+<div class="forum-message">
+	<div class="forum-chapo">
+		<div class="forum-titre"><:phpdoc:page_details:></div>
+		<small>
+		<span class="on"><:phpdoc:details:></span>&nbsp;										|&nbsp;<a href="#sec-functions"><:phpdoc:functions:></a>&nbsp;		</small>
+	</div>
+	<div class="forum-texte">
+		<br />
+		<div class="menu rubriques tags">
+	<strong><:phpdoc:tags:></strong>
+	<ul>
+
+<li>
+<table border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><strong><:phpdoc:filesource:></strong></td>
+    <td width="6%"></td>
+    <td><small><a href="[(#SELF|parametre_url{doc,__filesource/fsource_user_manual__pubban_commande.php})]"><:phpdoc:source_code_for_this_file:></a></small></td>
+  </tr>
+</table>
+</li>
+
+
+	</ul>
+</div>
+			</div>
+</div>
+</li>
+
+
+
+
+
+<a name="sec-functions"></a>
+<li class="forum-fil">
+<div class="forum-message">
+	<div class="forum-chapo">
+		<div class="forum-titre"><:phpdoc:functions:></div>
+		<small>
+		<a href="#sec-description"><:phpdoc:details:></a>&nbsp;										|&nbsp;<span class="on"><:phpdoc:functions:></span>&nbsp;		</small>
+	</div>
+	<div class="forum-texte">
+		<a name="functionpubban_adds_nouvelle_commande_payeur" id="functionpubban_adds_nouvelle_commande_payeur"><!-- --></a>
+<div class="evenrow">
+	<div>
+		<span class="method-title">pubban_adds_nouvelle_commande_payeur</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_user_manual__pubban_commande.php})]#a40">40</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_adds_nouvelle_commande_payeur(
+[ $panier = &#039;&#039;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>Insertion de la commande via l'API de Payeur</strong></p>
+	<div class="introduction"><p>Si vous utilisez le plugin 'Payeur', cette fonction génère une nouvelle commande et redirige  l'internaute vers son réglement.</p></div>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$panier</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+<a name="functionpubban_commande" id="functionpubban_commande"><!-- --></a>
+<div class="oddrow">
+	<div>
+		<span class="method-title">pubban_commande</span>&nbsp;&nbsp;
+		<span class="smalllinenumber">[line <a href="[(#SELF|parametre_url{doc,__filesource/fsource_user_manual__pubban_commande.php})]#a27">27</a>]</span>
+	</div>
+	<br />
+    <table width="90%" border="0" cellspacing="0" cellpadding="1"><tr><td class="code-border">
+    <table width="100%" border="0" cellspacing="0" cellpadding="2"><tr><td class="code">
+		<code>void pubban_commande(
+[ $panier = &#039;&#039;]&nbsp;
+)</code>
+    </td></tr></table>
+    </td></tr></table>
+		<p align="center" class="surtitre"><strong>PRINCIPE DE FONCTIONNEMENT</strong></p>
+	<div class="introduction"><p>Les données récupérées depuis le formulaire public (page 'spip.php?page=adds' ou copie personnalisée -  utilisation du formulaire 'form_adds') sont systématiquement envoyées vers la fonction de ce fichier :  <code><ol><li><div class="src-line"><a href="[(#SELF|parametre_url{doc,user_manual/_pubban_commande.php})]#functionpubban_commande">pubban_commande</a><span class="src-sym">(</span><span class="src-var">$panier</span><span class="src-sym">)</span></div></li>
+</ol></code></p><p>où $panier est le panier généré résumant la commande :  <code><ol><li><div class="src-line"><span class="src-id">pub</span>:<span class="src-id">titre_emplacement</span>:<span class="src-id">nombre_d_affichages</span>:<span class="src-id">prix_par_affichage</span>:<span class="src-id">id_pub</span></div></li>
+</ol></code></p><p>La fonction doit retourner TRUE ou FALSE selon l'état de la commande : <ul></ul><ul><li>FALSE sinon,</li></ul> ou rediriger tout simplement vers une nouvelle page.</p><p>A noter que lors de sa création (enregistrement en base de données), la publicité porte le statut  '0cree'. Pour être présentée dans les bannières du site, elle doit être activée par l'appel :  <code><ol><li><div class="src-line"><a href="[(#SELF|parametre_url{doc,user_manual/_inc---pubban_process.php})]#functionpubban_editer_pub">pubban_editer_pub</a><span class="src-sym">(</span><span class="src-var">$id_pub</span><span class="src-sym">,&nbsp;</span><span class="src-key">array</span><span class="src-sym">(</span><span class="src-str">&quot;statut&quot;</span>=&gt;<span class="src-str">&quot;2actif&quot;</span><span class="src-sym">))</span></div></li>
+</ol></code></p><p>Vous pouvez également lui donner le statut '1inactif' si son activation est prévue à une date précise.</p></div>
+    	<div class="menu rubriques tags">
+		<strong><:phpdoc:parameters:></strong><br />
+		<ul>
+					<li>
+			<table border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td><span class="var-type"></span></td>
+			    <td width="1%"></td>
+				<td><strong>$panier</strong></td>
+			    <td width="6%"></td>
+				<td></td>
+			</tr>
+			</table>
+			</li>
+				</ul>
+	</div>
+				<br /><div class="top">[ <a href="#top"><img src="[(#CHEMIN{images/spip_out.gif})]" alt=" " title=" " />&nbsp;<:phpdoc:top:></a> ]</div>
+</div>
+	</div>
+</div>
+</li>
+
+</ul>
+
+		</div><!--#contenu-->
+	</div><!--#conteneur-->
+
+    <div id="navigation">
+        <div class="menu">
+		<h2><:phpdoc:content:></h2>
+        <ul>
+						</ul>
+		</div>
+		        <div class="menu rubriques">
+        <ul>
+													&nbsp;<a href="[(#SELF|parametre_url{doc,user_manual/tutorial_user_manual.pkg})]">Pub Banner : gestionnaire de banni&egrave;res publicitaires</a>&nbsp;|
+		
+															</ul>
+		</div>
+		    </div><!--#navigation-->
+    
+    <div id="extra">
+        <div class="menu">
+				<h2><:phpdoc:files:></h2>
+			<ul>
+		  <div class="package">
+									<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,user_manual/_pubban_commande.php})]">pubban_commande.php</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,user_manual/_inc---pubban_process.php})]">pubban_process.php</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,user_manual/_base---pubban_test_chargeur.php})]">pubban_test_chargeur.php</a></span><br />
+							<span style="padding-left: 1em;"><a href="[(#SELF|parametre_url{doc,user_manual/_inc---pubban_validation_adds.php})]">pubban_validation_adds.php</a></span><br />
+			  </div>
+			</ul>
+					</div>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href="http://www.phpdoc.org"><img src='#CHEMIN{doc_pub_banner/media/phpdoc_logo_50.png}' border='0' alt='PhpDoc' /> phpDocumentor 1.4.1</a>
+		<br />| <:phpdoc:date_generation:>
+		<br />| Tue, 23 Nov 2010 14:31:03 +0100
+		</p>
+		<p style="font-size: 0.8em; padding: 0.4em; border: 1px solid #cccccc;">
+		<a href='http://creadesignweb.free.fr' target='_blank' title='CreaDesign :: Vous avez un projet web ? R&eacute;alisons-le ensemble ...'><img src='#CHEMIN{doc_pub_banner/media/CD_mini_logo.png}' border='0' alt='CreaDesign' />&nbsp;<b>Crea Design</b></a><br />&nbsp;|&nbsp;PhpDocumentor plugin pour SPIP<br />&nbsp;|&nbsp;version 1.0.09 (c) 08/2009
+		</p>
+	</div>
+
+	<div id="pied">
+		| <a href='http://www.spip.net/' title='<:site_realise_avec_spip:>'><img src='http://cdc.spiplocal:8888/squelettes-dist/spip.png' alt='SPIP' width='48' height='16' /></a> | <a rel='contents' href='http://cdc.spiplocal:8888'><:accueil_site:></a> | <a href='http://cdc.spiplocal:8888/ecrire/'><:espace_prive:></a> | <a href='[(#SELF|parametre_url{doc,index})]' title='<:phpdoc:retour_doc:>'><:phpdoc:accueil_doc:> <i>Pub Banner</i></a> |
+	</div>
