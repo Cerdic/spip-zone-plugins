@@ -1,7 +1,6 @@
 <?php
 
 // Ceci est un fichier langue de SPIP -- This is a SPIP language file
-// Produit automatiquement par le plugin LangOnet a partir de la langue source fr
 // Module: svp
 // Langue: fr
 
@@ -12,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 	'bouton_actualiser' => 'Actualiser',
 	'bouton_installer' => 'Installer',
-	'bouton_modifier_depot' => 'Modifier ce dépôt',
+	'bouton_modifier_depot' => 'Modifier le dépôt',
 	'bouton_supprimer' => 'Supprimer',
 	'bulle_actualiser_depot' => 'Actualiser les paquets du dépôt',
 	'bulle_afficher_xml_plugin' => 'Afficher le fichier XML du plugin',
@@ -53,6 +52,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 	'label_actualise_le' => 'Actualisé le',
+	'label_compatibilite_spip' => 'Compatiblité',
+	'label_xml_depot' => 'Fichier XML du dépôt',
+	'label_version' => 'Version',
+
+//	'lien_gerer_depots' => 'Tous les dépôts',
 
 
 // M
@@ -67,6 +71,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_depot_ajoute' => 'Le dépôt « @url@ » a été ajouté.',
 	'message_ok_plugins_trouves' => '@nb_plugins@ plugin(s) correspondent aux critères choisis (@tri@). Sélectionnez ci-dessous les plugins que vous souhaitez télécharger et installer sur votre serveur.',
 
+// R
+	'resume_table_depots' => 'Liste des dépôts ajoutés',
+	'resume_table_plugins' => 'Liste des plugins @categorie@',
+	'resume_table_autres_contributions' => 'Liste des autres contributions', // pas encore utilise dans svp
+
+// T
+	'titre_liste_autres_contributions' => 'Squelettes, librairies, jeux d\'icônes...',
+
+//	'titre_page_svp' => 'SerVeur d\'information sur les Plugins',
 
 // ici
 
@@ -99,38 +112,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_1_autre_contribution' => 'autre contribution',
 	'label_1_paquet' => 'paquet',
 	'label_1_plugin' => 'plugin',
-	'label_archive' => 'Archive',
-	'label_auteur' => 'Auteur(s)',
 	'label_branches_spip' => 'Compatible',
 	'label_categorie' => 'Catégorie',
-	'label_compatibilite_spip' => 'Compatiblité SPIP',
-	'label_copyright' => 'Copyright',
-	'label_credit' => 'Crédits',
 	'label_critere_categorie' => 'Catégories',
 	'label_critere_depot' => 'Dépôts',
 	'label_critere_doublon' => 'Compatibilité',
 	'label_critere_etat' => 'Etats',
 	'label_critere_phrase' => 'Rechercher dans les plugins',
-	'label_depot' => 'Hébergée par',
-	'label_etat' => 'État',
-	'label_fichier_depot' => 'Fichier XML du dépôt',
 	'label_xml_plugin' => 'XML',
-	'label_gestionnaire' => 'Gestionnaire',
-	'label_langue_reference' => 'Langue référence',
-	'label_licence' => 'Licence',
-	'label_maj' => 'Générée le',
 	'label_modifier_depot' => 'Modifier le dépôt',
 	'label_modifie_le' => 'Modifié le',
-	'label_module' => 'Module de langue',
 	'label_n_autres_contributions' => 'autres contributions',
 	'label_n_paquets' => 'paquets',
 	'label_n_plugins' => 'plugins',
-	'label_necessite_librairies' => 'Nécessite les librairies',
-	'label_necessite_plugins' => 'Nécessite les plugins',
 	'label_prefixe' => 'Préfixe',
 	'label_tags' => 'Tags',
-	'label_taille' => 'Taille',
-	'label_traductions' => 'Traductions',
 	'label_type_depot' => 'Type de dépôt :',
 	'label_type_depot_git' => 'Dépôt sous GIT',
 	'label_type_depot_manuel' => 'Dépôt manuel',
@@ -138,18 +134,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_url_archives' => 'URL du conteneur des archives',
 	'label_url_brouteur' => 'URL de la racine des sources',
 	'label_url_serveur' => 'URL du serveur',
-	'label_utilise_plugins' => 'Fonctions supplémentaires avec les plugins',
-	'label_version' => 'Version',
 	'label_paquet_recent' => 'Paquet le plus à jour :',
 	'label_version_base' => 'Schéma BDD',
 	'legende_rechercher_plugins' => 'Rechercher des plugins',
 	'legende_installer_plugins' => 'Installer des plugins',
-	'lien_demontrer' => 'La démo',
-	'lien_developper' => 'La zone de dev',
-	'lien_documenter' => 'La documentation',
-	'lien_gerer_depots' => 'Tous les dépôts',
-	'lien_sourcer' => 'Les sources',
-	'lien_telecharger' => 'L\'archive',
 // O
 	'onglet_depots' => 'Gérer les dépôts',
 	'onglet_plugins' => 'Rechercher un plugin',
@@ -158,10 +146,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_doublon_non' => 'La version la plus récente',
 	'option_doublon_oui' => 'Toutes les versions compatibles',
 	'option_etat_tout' => 'Tous les états',
-// R
-	'resume_table_depots' => 'Liste des dépôts ajoutés',
-	'resume_table_plugins' => 'Liste des plugins @categorie@',
-	'resume_table_autres_contributions' => 'Liste des autres contributions',
 // T
 
 
@@ -177,26 +161,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_plugins' => 'Plugins',
 	'titre_logo_plugin' => 'Logo du plugin',
 
-	'titre_filtre_categorie' => 'Filtrer par catégorie',
-	'titre_filtre_depot' => 'Filtrer par dépôt',
-	'titre_filtre_spip' => 'Filtrer par branche',
 	'titre_form_ajouter_depot' => 'Ajouter un dépôt',
 	'titre_head_modifier_depot' => 'Modifier : @depot@',
 	'titre_head_svp' => 'SVP',
-	'titre_liste_autres_contributions' => 'Squelettes, librairies, jeux d\'icônes...',
 	'titre_liste_autres_depots' => 'Autres dépôts',
 	'titre_liste_depots' => 'Liste des dépôts disponibles',
 	'titre_liste_plugins' => 'Liste des plugins',
 	'titre_liste_paquets_plugin' => 'Liste des paquets du plugin',
-	'titre_navigation_depot' => 'Dépôts',
-	'titre_navigation_plugin' => 'Dans la catégorie',
 	'titre_nouveau_depot' => 'Nouveau dépôt',
-	'titre_page_depots' => 'Dépôts',
 	'titre_page_edition_depot' => 'Édition d\'un dépôt',
-	'titre_page_plugins' => 'Plugins',
-	'titre_page_prefixes' => 'Préfixes',
-	'titre_page_statistiques' => 'Statistiques',
-	'titre_page_svp' => 'SerVeur d\'information sur les Plugins',
-	'titre_page_telechargements' => 'Téléchargements',
 );
 ?>
