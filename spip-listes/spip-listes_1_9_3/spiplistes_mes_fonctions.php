@@ -145,3 +145,44 @@ if (function_exists('spiplistes_spip_est_inferieur_193') AND spiplistes_spip_est
 	}
 }
 
+/**
+ * Un filtre pour transformer les URLs relatives
+ * à l'espace privé en URLs pour espace public.
+ * A appliquer au conteneur, dans le patron,
+ * du style : [(#TEXTE|liens_publics)]
+ * @version CP-20110629
+ * @example [(#TEXTE|liens_publics)]
+ * @see http://www.spip.net/fr_article3377.html
+ * @param string $texte
+ * @return string
+ */
+function liens_publics ($texte)
+{
+	$url_site = $GLOBALS['meta']['adresse_site'];
+	
+	$replace = array(
+		'articles' => 'article',
+		'naviguer' => 'rubrique',
+		'breves' => 'breve',
+		'mots_edit' => 'mot',
+		'sites_tous' => 'site',
+	);
+	
+	foreach ($replace as $key => $value)
+	{
+		if (preg_match_all(',(<a[[:space:]]+[^<>]*href=["\']?' . $url_site . ')'
+						   . '/ecrire/\?exec=(' . $key . ')'
+						   . '([^<>]*>),imsS', 
+						$texte,
+						$liens,
+						PREG_SET_ORDER))
+		{
+			foreach ($liens as $lien)
+			{
+				$to = $lien[1] . '/?page=' . $value . $lien[3];
+				$texte = str_ireplace($lien[0], $to, $texte);
+			}
+		}
+	}
+	return ($texte);
+}
