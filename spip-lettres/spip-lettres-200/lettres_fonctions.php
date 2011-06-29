@@ -154,10 +154,19 @@
 	function styler_pournavigateur ($html) {
 		return str_replace ('pouremail', 'invisiblepournavigateur', $html);
 	};
-	
+
+// pour le format texte les liens html sont transformés de manière à avoir à la fois le texte
+// et le lien clicable à la suite, entre parenthèse.
+// Si le texte du lien est déjà une url ou y ressemble fort, on ne met que l'url
+	function prepare_format_texte_lien($matches) {
+		if ((strpos($matches[1], 'http:')===0) 
+			or (strpos($matches[1], 'www.')===0))
+			return $matches[2];
+		else return $matches[1]." ( ".$matches[1]." )";
+	};
 	function prepare_format_texte ($html) {
 		$pat = "!<a[^>]+href\s*=\s*['\"]([^'\"]*)['\"][^>]*>([^<]*)<\/a>!i";
-		return textebrut (preg_replace ($pat, "$2 ( $1 )", $html));
+		return textebrut (preg_replace_callback ($pat, 'prepare_format_texte_lien', $html));
 	};
 	
 	/**
