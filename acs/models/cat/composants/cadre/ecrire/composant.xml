@@ -15,6 +15,11 @@
   </param>
 
   <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
     <nom>Orientation</nom>
     <type>choix</type>
     <option>vertical</option>
@@ -151,11 +156,6 @@
   </variable>
   <variable>
   	<nom>ShadowBlur</nom>
-    <type>text</type>
-  </variable>
-  
-  <variable>
-    <nom>Nom</nom>
     <type>text</type>
   </variable>
 </composant>

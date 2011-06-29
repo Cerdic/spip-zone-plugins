@@ -10,7 +10,7 @@
 # Save / restore ACS variables
 
 include_spip('inc/actions');
-include_spip('inc/presentation');
+include_spip('inc/acs_presentation');
 
 function inc_acs_sr() {
 	global $spip_lang_right;

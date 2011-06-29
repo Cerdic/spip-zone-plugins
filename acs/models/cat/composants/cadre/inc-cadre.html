@@ -41,7 +41,7 @@ Ce fichier-source est formaté pour ne pas générer de sauts de lignes inutiles
 #SET{use6,#VAR{#EVAL{acs(#GET{c6}|ucfirst)(#GET{n6})Use}}}
 #SET{use7,#VAR{#EVAL{acs(#GET{c7}|ucfirst)(#GET{n7})Use}}}
 #SET{use8,#VAR{#EVAL{acs(#GET{c8}|ucfirst)(#GET{n8})Use}}}
-[(#VAR{#EVAL{'acsCadre'.'#NIC'.'Orientation'},vertical}|=={horizontal}|?{" "})#SET{oh,style="float: #LANG_LEFT"}]<div class="Cadre cCadre#NIC">[
+[(#VAR{#EVAL{'acsCadre'.'#NIC'.'Orientation'},vertical}|=={horizontal}|?{" "})#SET{oh,style="float: #LANG_LEFT"}]<div class="Cadre[ cCadre(#NIC)]">[
 (#GET{use1}|=={oui}|?{' '})[(#SET{c11,composants/[(#GET{c1})]/[(#GET{c1})]})][<div id="#GET{v1}" class="cadre-composant[ (#GET{v1})style]"[ (#GET{oh})]>(#INCLURE{fond=#GET{c11}}{env}{self}{lang}{nic=#GET{n1}})</div>]][
 (#GET{use2}|=={oui}|?{' '})[(#SET{c12,composants/[(#GET{c2})]/[(#GET{c2})]})][<div id="#GET{v2}" class="cadre-composant[ (#GET{v2})style]"[ (#GET{oh})]>(#INCLURE{fond=#GET{c12}}{env}{self}{lang}{nic=#GET{n2}})</div>]][
 (#GET{use3}|=={oui}|?{' '})[(#SET{c13,composants/[(#GET{c3})]/[(#GET{c3})]})][<div id="#GET{v3}" class="cadre-composant[ (#GET{v3})style]"[ (#GET{oh})]>(#INCLURE{fond=#GET{c13}}{env}{self}{lang}{nic=#GET{n3}})</div>]][

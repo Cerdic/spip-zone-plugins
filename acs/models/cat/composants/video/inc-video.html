@@ -11,7 +11,7 @@ See Video for Everybody Embed Code http://camendesign.com/code/video_for_everybo
 (#TYPE_DOCUMENT=={MPEG4}|?{" "})#SET{type,'video/mp4; codecs="avc1.42E01E, mp4a"'}][
 (#TYPE_DOCUMENT=={WEBM}|?{" "})#SET{type,'video/webm; codecs="vp8, vorbis"'}
 ]<div class="cVideo[(#NIC)]" style="width: #GET{w}px; height: #GET{h}px">
-  <video id="video[(#NIC)]_#ID_DOCUMENT" class="html5video" width="#GET{w}" height="#GET{h}" controls="controls" preload="auto"[ poster="(#GET{startimage})"]>
+  <video id="video[(#NIC)]_#ID_DOCUMENT" class="html5video" width="#GET{w}px" height="#GET{h}px" controls="controls" preload="auto"[ poster="(#GET{startimage})"]>
     <source src="[(#URL_DOCUMENT|url_absolue)]"[ type='(#GET{type})'] />
     <object id="flashvideo[(#NIC)]_#ID_DOCUMENT" type="application/x-shockwave-flash" data="[(#CHEMIN{composants/video/swf/player_flv_maxi.swf}|url_absolue)]" width="#GET{w}" height="#GET{h}">
       <param name="movie" value="[(#CHEMIN{composants/video/swf/player_flv_maxi.swf}|url_absolue)]" />

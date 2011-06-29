@@ -63,7 +63,13 @@ class acsOngletsEdit extends CEdit {
     imagecolorset($iml, 3, $ar, $ag, $ab);
 
     $dir_img = '../'.$GLOBALS['ACS_CHEMIN'].'/onglets';
-    if (!is_readable($dir_img)) mkdir_recursive($dir_img);
+    if (!is_readable($dir_img)) {
+      mkdir_recursive($dir_img);
+      if (!is_readable($dir_img)) {
+        $this->errors[] = $dir_img.' not readable.';
+        return false;
+      }
+    }
     if ( (!@imagegif($imr,$dir_img.'/right.gif')) ||
     	(!@imagegif($iml,$dir_img.'/left.gif')) ) {
   			$this->errors[] = 'unable_to_create_imagegif in '.$dir_img;

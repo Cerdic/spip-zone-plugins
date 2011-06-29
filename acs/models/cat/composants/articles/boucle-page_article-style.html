@@ -14,4 +14,4 @@ si le champ descriptif du mot-clé du groupe de mot-clés #VAR{acsArticlesStyleP
 
 Article page styled according to a keyword
 
-][(#SET{id_groupe_style_article,#VAR{acsArticlesStylePage}})]<BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}><BOUCLE_style(MOTS){id_article}{id_groupe=#GET{id_groupe_style_article}}{0,1}>[(#SET{nic,[(#DESCRIPTIF|match{<nic-page=(\d*)>})]})]</BOUCLE_style>[(#INCLURE{fond=composants/articles/page-article}{self}{env}{id_article}{titre=#TITRE}{surtitre=#SURTITRE}{soustitre=#SOUSTITRE}{descriptif=#DESCRIPTIF}{nic=#GET{nic,2100}})]</BOUCLE_article>
+][(#SET{id_groupe_style_article,#VAR{acsArticlesStylePage}})]#SET{_rp,<nic-page=([0-9]*)>}<BOUCLE_article(ARTICLES){id_article}{statut==[publie|propose|refuse]}><BOUCLE_style(MOTS){id_article}{id_groupe=#GET{id_groupe_style_article}}{0,1}>[(#SET{nic,[(#DESCRIPTIF|match{#GET{_rp},Uims,1})]})]</BOUCLE_style>[(#INCLURE{fond=composants/articles/page-article}{self}{env}{id_article}{titre=#TITRE}{surtitre=#SURTITRE}{soustitre=#SOUSTITRE}{descriptif=#DESCRIPTIF}{nic=#GET{nic,2100}})]</BOUCLE_article>

@@ -224,10 +224,10 @@ class AdminComposant {
 		}
 		if (isset($updated)) {
   	  if (isset($this->update)) {
-  			@include_once($this->rootDir.'/ecrire/'.$class.'.php');
+  	    include_spip('composants/'.$class.'/ecrire/'.$class);
   			$cObj = 'acs'.ucfirst($class).'Edit';
   			if(class_exists($cObj)) {
-  				$$cObj = @new $cObj();
+  				$$cObj = new $cObj();
   				if (($$cObj instanceof CEdit) && is_callable(array($$cObj, 'update'))) {
   				  if (!$$cObj->update())
   						$this->errors[] = $cObj.'->update '._T('acs:failed').' '.implode(' ', $$cObj->errors);

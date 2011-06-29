@@ -1,0 +1,40 @@
+[(#CACHE{0})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+][(#SET{h,[(#ACS_CHEMIN{diapo/#VAR{acsDiapoImg}}|hauteur)]})]
+.cDiapo#NIC td.diapo {
+  [width: (#ACS_CHEMIN{diapo/#VAR{acsDiapoImg}}|largeur)px;]
+  height: #GET{h}px;
+  [background: url((#ACS_CHEMIN{diapo/#VAR{acsDiapoImg}})) top left repeat-x;]
+
+}
+.cDiapo#NIC td.diapo a.diapo:link {
+  height: [(#VAR{acsDiapoHeight,75})px];
+  line-height: [(#VAR{acsDiapoHeight,75})px];
+  width: [(#VAR{acsDiapoWidth,100})px][
+  color: (#VAR{acsDiapoLink});][
+  background-color: (#VAR{acsDiapoFond});][
+  border: #VAR{acsDiapoBord/Width}[ (#VAR{acsDiapoBord/Style})](#VAR{acsDiapoBord/Color});]
+}
+[.cDiapo#NIC td.diapo a.diapo:hover {
+  color: (#VAR{acsDiapoLinkHover});
+}]
+.cDiapo#NIC td.diapo img {
+  max-height: [(#VAR{acsDiapoHeight,75})px];
+  max-width: [(#VAR{acsDiapoWidth,100})px];
+}
+.cDiapo#NIC td.diapog {
+  height: #GET{h}px;
+  [background: url((#ACS_CHEMIN{diapo/#VAR{acsDiapoImgG}})) top right no-repeat;]
+}
+
+.cDiapo#NIC td.diapod {
+  height: #GET{h}px;
+  [background: url((#ACS_CHEMIN{diapo/#VAR{acsDiapoImgD}})) top right no-repeat;]
+}

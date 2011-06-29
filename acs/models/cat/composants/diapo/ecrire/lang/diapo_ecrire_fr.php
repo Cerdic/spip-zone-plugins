@@ -24,6 +24,9 @@ Soft-downgrade: fonctionne aussi sans javascript.',
 
 'NbCol' => 'Colonnes',
 'UseG' => 'Utiliser Google Docs<sup>&reg;</sup>',
+'ExtG' => 'Associer à Google Doc API',
+'ExtEmbed' => 'Associer au modèle EMBED',
+'ExtPlayer' => 'Associer au modèle PLAYER',
 
 'ImgG' => 'Fond gauche',
 'Img' => 'Fond',

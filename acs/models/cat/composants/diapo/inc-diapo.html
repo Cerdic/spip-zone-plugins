@@ -1,7 +1,7 @@
 [(#CACHE{86400})][(#REM)
 
-Affiche les documents d'un article, d'une rubrique, ou du site, sous forme de diapos.
-Utilise le plugin Mediabox.
+Affiche les vignettes des documents d'un article, d'une rubrique, ou du site, 
+sous forme de diapos. Utilise le plugin Mediabox.
 
 Paramètres :
 c : chemin du composant. Défini si le composant Diapo est appellé depuis le modèle composant, et nul sinon. Utilisé dans le nom du diaporama.
@@ -9,14 +9,13 @@ id_article : documents de l'article.
 id_rubrique : documents de la rubrique.
 recherche : documents résultats d'une recherche.
 
-][(#SET{docs,pdf|odt|ods|doc,xls,wmf})][
-(#SET{types_diapos,flv|mp4|mp3|ogv|webm|swf|jpg|jpeg|png|gif[|(#GET{docs})]})][
-(#SET{nom_diaporama,dp[(#ENV{c}|?{c})][_art(#ID_ARTICLE)[_rub(#ID_RUBRIQUE)]]})]<B_doc>
-<div class="cDiapo" align="center">
+][(#SET{types_diapos,[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtPlayer'},mp3|flv|mp4|ogv|webm})|][(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtEmbed'},gif|jpg|tif|png|swf})|][(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtG'},pdf|odt|ods|doc|xls|wmf})]})][
+(#SET{nom_diaporama,dp[(#ENV{c}|?{c})#NIC][_art(#ID_ARTICLE)[_rub(#ID_RUBRIQUE)]]})]<B_doc>
+<div class="cDiapo[ cDiapo(#NIC)]" align="center">
   <table>
     <tr>
     <td class="diapog">[(#PAGINATION{videoprecedent})]</td>
-<BOUCLE_doc(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}{pagination #VAR{acsDiapoNb,3}}><td class="diapo"><a class="diapo nsize"[(#PLUGIN{mediabox}|?{" "}) rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] type="#MIME_TYPE" href="#URL_DOCUMENT" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"><img src="[(#LOGO_DOCUMENT||image_reduire{#VAR{acsDiapoWidth,100},#VAR{acsDiapoHeight,75}}|extraire_attribut{src})]"[ alt="(#TITRE)"] />[<span class="titre">(#TITRE|couper{20})</span>]</a></td>[(#COMPTEUR_BOUCLE|modulo{#VAR{acsDiapoNbCol}}|=={0}|?{" "})[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|?{" "})<td class="diapod"></td></tr><tr><td class="diapog"></td>]]</BOUCLE_doc>
+<BOUCLE_doc(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu=non}{doublons diapos}{pagination #VAR{#EVAL{'acsDiapo'.'#NIC'.'Nb'},3}}><td class="diapo"><a class="diapo nsize"[(#PLUGIN{mediabox}|?{" "}) rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] type="#MIME_TYPE" href="#URL_DOCUMENT" title="[(#TITRE) ]([(#TAILLE|taille_en_octets|texte_backend)])"><img src="[(#LOGO_DOCUMENT||image_reduire{#VAR{#EVAL{'acsDiapo'.'#NIC'.'Width'},100},#VAR{#EVAL{'acsDiapo'.'#NIC'.'Height'},75}}|extraire_attribut{src})]"[ alt="(#TITRE)"] />[<span class="titre">(#TITRE|couper{20})</span>]</a></td>[(#COMPTEUR_BOUCLE|modulo{#VAR{#EVAL{'acsDiapo'.'#NIC'.'NbCol'}}}|=={0}|?{" "})[(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE}|?{" "})<td class="diapod"></td></tr><tr><td class="diapog"></td>]]</BOUCLE_doc>
     <td class="diapod">[(#PAGINATION{videosuivant})]</td>
     </tr>
   </table>
