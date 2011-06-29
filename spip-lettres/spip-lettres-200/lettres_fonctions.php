@@ -165,7 +165,10 @@
  * author: paladin@...
  * Corrige le bug de spip2 (corrigé dans spip3) qui fait que liens [ xxx->n] calculés dans le privé 
  * (comme les lettres le sont au  moment de leur envoi) pointent vers l'adresse privée au lieu de publique
- *
+ * J'y ajoute une fonction corrige_liens_publics, à utiliser de préférence dans SPIP2 pour corriger les liens,
+ * et qui est redéfinie dans la version pour SPIP 3, de manière à ce que les squelettes ne corrigent plus,
+ * sans devoir être immédiatement corrigés, eux, lors du portage du site sous spip3.
+ *  
  * Commentaire d'origine :
  *
  * Un filtre pour transformer les URLs relatives
@@ -178,6 +181,9 @@
  * @param string $texte
  * @return string
  */
+function corrige_liens_publics ($texte) {
+	return liens_publics ($texte);
+}
 function liens_publics ($texte)
 {
         $url_site = $GLOBALS['meta']['adresse_site'];
