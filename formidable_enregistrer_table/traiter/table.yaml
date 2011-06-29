@@ -15,3 +15,36 @@ options:
       label: 'correspondances du formulaire vers la table'
       explication : 'Indiquez pour chaque champ du formulaire, le nom du champ de la table utilisateur'
       defaut: 'input_1|titre...'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'multiple'
+      label: '<:formidable:traiter_enregistrement_option_multiple_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_multiple_explication:>'
+      defaut: 'on'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'modifiable'
+      label: '<:formidable:traiter_enregistrement_option_modifiable_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_modifiable_explication:>'
+      defaut: ''
+  -
+    saisie: 'radio'
+    options:
+      nom: 'identification'
+      label: '<:formidable:traiter_enregistrement_option_identification_label:>'
+      explication: '<:formidable:traiter_enregistrement_option_identification_explication:>'
+      datas:
+        cookie: '<:formidable:identification_par_cookie:>'
+        id_auteur: '<:formidable:identification_par_id_auteur:>'
+      defaut: 'cookie'
+  -
+    saisie: 'radio'
+    options:
+      nom: 'moderation'
+      label: '<:formidable:traiter_enregistrement_option_moderation_label:>'
+      datas:
+        posteriori: '<:bouton_radio_modere_posteriori:>'
+        priori: '<:bouton_radio_modere_priori:>'
+      defaut: 'posteriori'
