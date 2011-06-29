@@ -23,6 +23,10 @@ function exec_fulltext()
 	echo "<img src='".find_in_path('fulltext.png')."' />\n";
 
 	echo propre(_T('fulltext:liste_tables_connues')." [->http://www.spip-contrib.net/Fulltext].");
+	
+	// lien vers le panneau de configuration de l'indexation des documents
+	$url = generer_url_ecrire('fulltext_document');
+	echo propre(_T('fulltext:configurer_egalement_doc'))."<a href='$url'>"._T('fulltext:configuration_indexation_document')."</a>";
 
 	echo debut_droite("", true);
 
@@ -69,9 +73,12 @@ function exec_fulltext()
 			if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
 				echo Fulltext_regenerer_index($table);
 			
-			// Reinitialiser les documents
+			// Reinitialiser les documents en erreurs
 			if (_request('reinitialise') == $table OR _request('reinitialise') == 'tous')
 				echo Fulltext_reinitialiser_document();
+			// Reinitialiser tous les documents	
+			if (_request('reinitialise') == 'document_tout')
+				echo Fulltext_reinitialiser_totalement_document();
 				
 			// Recuperation des index deja existant
 			$keys = fulltext_keys($table);
@@ -122,12 +129,18 @@ function exec_fulltext()
 		echo "<p><b><a href='$url'>"._T('fulltext:convertir_toutes')."</a></b></p>\n";
 	}
 
+	// lien vers le panneau de configuration de l'indexation des documents
+	$url = generer_url_ecrire('fulltext_document');
+	echo "<p><b><a href='$url'>"._T('fulltext:configuration_indexation_document')."</a></b></p>\n";
+	
 	$url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
 	echo "<p><b><a href='$url'>"._T('fulltext:regenerer_tous')."</a></b></p>\n";
 
 	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document');
 	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_index_doc')."</a></b></p>\n";
-	
+
+	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document_tout');
+	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_totalement_doc')."</a></b></p>\n";	
 	// charset site
 	$charset = strtolower(str_replace('-','',$GLOBALS['meta']['charset']));
 	$necessite_conversion = false;

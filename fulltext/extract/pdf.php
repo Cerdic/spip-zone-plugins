@@ -10,29 +10,29 @@ $GLOBALS['extracteur']['pdf'] = 'extracteur_pdf';
 // dans le charset iso-8859-1
 
 // http://doc.spip.org/@extracteur_pdf
-function extracteur_pdf($fichier, &$charset) {
+function extracteur_pdf($fichier, &$charset, $bin, $opt = '') {
   $charset = 'iso-8859-1';
 	
   $texte = '';
   $output = array();
-  if (defined('_FULLTEXT_PDF_EXE')) {
-    $exe = _FULLTEXT_PDF_EXE;
+  if((defined('_FULLTEXT_PDF_EXE'))||($bin)) {
+    $exe = $bin ? $bin : _FULLTEXT_PDF_EXE;
   } else {
   	// TODO : essayer de trouver tout seul l'exécutable
-  	spip_log('Erreur extraction PDF : Il faut spécifier _FULLTEXT_PDF_EXE dans mes_options.php');
+  	spip_log('Erreur extraction PDF : Il faut specifier _FULLTEXT_PDF_EXE dans mes_options.php ou utiliser le panneau de configuration');
   	return false;
   }
-  if (defined(_FULLTEXT_PDF_CMD_OPTIONS) && '' != _FULLTEXT_PDF_CMD_OPTIONS) {
-  	$options = ' '._FULLTEXT_PDF_CMD_OPTIONS.' ';
+  if ((defined('_FULLTEXT_PDF_CMD_OPTIONS') && '' != _FULLTEXT_PDF_CMD_OPTIONS)||($opt)) {
+  	$options = $opt ? ' '.$opt.' ' : ' '._FULLTEXT_PDF_CMD_OPTIONS.' ';
   } else {
   	$options = ' ';
   }
- 	spip_log('Extraction PDF avec '.$exe, 'extract');
   $cmd = $exe.$options.$fichier;
+  spip_log('Extraction PDF avec '.$cmd, 'extract');
   $sortie = exec($cmd, $output, $return_var);
   if ($return_var != 0) {
     if ($return_var == 3) {
-      $erreur = "Le contenu de ce fichier PDF est protégé.";
+      $erreur = "Le contenu de ce fichier PDF est protege.";
     }
     spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
     return false;
