@@ -106,12 +106,24 @@
 		if (sql_count($verification_clic) == 1) {
 			$url = sql_fetch($verification_clic);
 			$redirection = $url['url'];
-		} else {
+		} else
 			$redirection = $GLOBALS['meta']['adresse_site'];
-		}
-		return $redirection;
+		return corrige_lien($redirection);
 	}
 	
+
+	function corrige_lien ($url) {
+		$replace = array(
+			'articles' => 'article',
+			'naviguer' => 'rubrique',
+			'breves' => 'breve',
+			'mots_edit' => 'mot',
+			'sites_tous' => 'site',
+		);
+		foreach ($replace as $key => $value)
+			$url = str_ireplace ("/ecrire/?exec=$key&", "/spip.php?page=$value&", $url);
+		return $url; 
+	}
 	
 	if(!function_exists('str_split')) {
 		function str_split($text, $split = 1) {
@@ -158,69 +170,17 @@
 // pour le format texte les liens html sont transformés de manière à avoir à la fois le texte
 // et le lien clicable à la suite, entre parenthèse.
 // Si le texte du lien est déjà une url ou y ressemble fort, on ne met que l'url
+// Si c'est une url relative, on ajoute l'adresse du site
 	function prepare_format_texte_lien($matches) {
 		if ((strpos(ltrim($matches[2]), 'http:')===0) 
 			or (strpos(ltrim($matches[2]), 'www.')===0))
 			return $matches[1];
-		else return $matches[2]." [ ".$matches[1]." ]";
+		if (strpos(ltrim($matches[1]),'/')===0)
+			 $matches[1] =  $GLOBALS['meta']['adresse_site'].$matches[1];
+		return $matches[2]." [ ".$matches[1]." ]";
 	};
 	function prepare_format_texte ($html) {
 		$pat = "!<a[^>]+href\s*=\s*['\"]([^'\"]*)['\"][^>]*>([^<]*)<\/a>!i";
 		return textebrut (preg_replace_callback ($pat, 'prepare_format_texte_lien', $html));
 	};
-	
-	/**
- * Filtre copié depuis spip-listes http://zone.spip.org/trac/spip-zone/changeset/49179
- * author: paladin@...
- * Corrige le bug de spip2 (corrigé dans spip3) qui fait que liens [ xxx->n] calculés dans le privé 
- * (comme les lettres le sont au  moment de leur envoi) pointent vers l'adresse privée au lieu de publique
- * J'y ajoute une fonction corrige_liens_publics, à utiliser de préférence dans SPIP2 pour corriger les liens,
- * et qui est redéfinie dans la version pour SPIP 3, de manière à ce que les squelettes ne corrigent plus,
- * sans devoir être immédiatement corrigés, eux, lors du portage du site sous spip3.
- *  
- * Commentaire d'origine :
- *
- * Un filtre pour transformer les URLs relatives
- * à l'espace privé en URLs pour espace public.
- * A appliquer au conteneur, dans le patron,
- * du style : [(#TEXTE|liens_publics)]
- * @version CP-20110629
- * @example [(#TEXTE|liens_publics)]
- * @see http://www.spip.net/fr_article3377.html
- * @param string $texte
- * @return string
- */
-function corrige_liens_publics ($texte) {
-	return liens_publics ($texte);
-}
-function liens_publics ($texte)
-{
-        $url_site = $GLOBALS['meta']['adresse_site'];
-        
-        $replace = array(
-                'articles' => 'article',
-                'naviguer' => 'rubrique',
-                'breves' => 'breve',
-                'mots_edit' => 'mot',
-                'sites_tous' => 'site',
-        );
-        
-        foreach ($replace as $key => $value)
-        {
-                if (preg_match_all(',(<a[[:space:]]+[^<>]*href=["\']?' . $url_site . ')'
-                                                   . '/ecrire/\?exec=(' . $key . ')'
-                                                   . '([^<>]*>),imsS', 
-                                                $texte,
-                                                $liens,
-                                                PREG_SET_ORDER))
-                {
-                        foreach ($liens as $lien)
-                        {
-                                $to = $lien[1] . '/?page=' . $value . $lien[3];
-                                $texte = str_ireplace($lien[0], $to, $texte);
-                        }
-                }
-        }
-        return ($texte);
-}
 ?>

@@ -233,7 +233,7 @@
 				sql_insertq('spip_abonnes_clics', array('id_abonne' => 0, 'id_clic' => intval($id_clic), 'id_lettre' => $id_lettre));
 
 			if ($redirection)
-				return $redirection;
+				return corrige_lien($redirection);
 			else
 				return $GLOBALS['meta']['adresse_site'];
 		}
