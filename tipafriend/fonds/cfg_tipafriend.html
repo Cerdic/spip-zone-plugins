@@ -119,6 +119,11 @@ $(document).ready(function(){
 			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_options:></span>
 		</p>
 		<p class="forml">
+			<label for="options_url"><strong><:tipafriend:cfgform_titre_options_url:>&nbsp;:</strong></label>
+			<br /><input type="text" name="options_url" id="options_url" value="[(#GET{config}|table_valeur{options_url})]" size="50" />
+			<br /><span class="comment" style="font-size:.9em">=>&nbsp;<:tipafriend:cfgform_comment_options_url:></span>
+		</p>
+		<p class="forml">
 			<label for="javascript_standard"><strong><:tipafriend:cfgform_titre_javascript:>&nbsp;:</strong></label>
 			<br />&nbsp;&nbsp;&nbsp;&nbsp;
 				<input type="radio" name="javascript_standard" value="oui"[(#GET{config}|table_valeur{javascript_standard}|=={oui}|oui) checked="checked"] />&nbsp;<:tipafriend:bouton_activer:>

@@ -103,6 +103,8 @@ $GLOBALS['TIPAFRIEND_DEFAULTS'] = array(
 	'close_button'			=> 'oui',
 	// options ajoutees comme attributs au lien
 	'options' 				=> '',
+	// arguments ajoutes au lien
+	'options_url' 				=> '',
 	// fonctions JS standards (ouverture de popup) ?
 	'javascript_standard' 	=> 'oui',
 	// contenus des objets inclus au mail

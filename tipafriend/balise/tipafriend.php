@@ -135,10 +135,17 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		$model = str_replace('.html', '', $GLOBALS['TIPAFRIEND_DEFAULTS']['modele']);
 	}
 
+	// On traite les arguments utilisateurs
+	$user_opts = '';
+	if(isset($config['options_url']) && strlen($config['options_url'])) {
+		parse_str($config['options_url'], $opts_url);
+		$user_opts = "&".http_build_query($opts_url);
+	}
+
 	// Construction du contexte
 	$contexte = array( 
 		'fond' => 'modeles/'.$model,
-		'url' => $_url,
+		'url' => $_url.$user_opts,
 		'type' => $type_skel,
 		'options' => _request('options') ? _request('options') : (
 			$config['options'] ? $config['options'] : ''
@@ -155,7 +162,7 @@ function balise_TIPAFRIEND_dyn($objet='', $id_objet='', $url='', $skel='', $mail
 		}
 		else $contexte["id_$_obj"] = '';
 	}
-	$url_args = "id=$id&type=$type&mex=$mail_exp&nex=$nom_exp&mdes=$mail_dest";
+	$url_args = "id=$id&type=$type&mex=$mail_exp&nex=$nom_exp&mdes=$mail_dest".$user_opts;
 	$skel = $config['squelette'];
 	if(!find_in_path($skel.'.html')) {
 		if(_TIPAFRIEND_TEST)
