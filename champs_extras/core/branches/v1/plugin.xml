@@ -17,7 +17,7 @@
 	<prefix>cextras</prefix>
 	<options>cextras_options.php</options>
 	<fonctions>cextras_balises.php</fonctions>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0;3.0.0-dev]" />
  	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/cextras_autoriser.php</inclure>
