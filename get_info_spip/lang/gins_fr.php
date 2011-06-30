@@ -19,6 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'menu_proprietes' => 'Menu des propri&#233;t&#233;s',
 
 	'configspip' => 'Infos SPIP',
+	'squelettes' => 'Squelettes',
 	'configsyst' => 'Infos Syst&#232;me',
 	'phpconfig' => 'Configuration PHP',
 	'tablessql' => 'Tables SQL',

@@ -80,3 +80,13 @@
 	font-style:italic;
 	color:grey;
 }
+#gins-squelettes df {
+	width:12ex;
+	float:left;
+}
+#gins-squelettes dd span.size {
+	font-weight:700;
+	background-color:#999;
+	color:#fff;
+	padding:0 1ex;
+}

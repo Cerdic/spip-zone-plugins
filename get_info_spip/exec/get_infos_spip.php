@@ -116,6 +116,138 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:'.$ii)
 		);
 
+		/**
+		 * Inventaire des squelettes disponibles
+		 * dans l'ordre utilisé par find_in_path()
+		 */
+		$ii = 'squelettes';
+		$chemins = array();
+		/**
+		 * le répertoire des squelettes nommés par la variable
+		 * globale $dossier_squelettes dans l’ordre de déclaration
+		 * s’il y en a plusieurs ;
+		 */
+		if (isset($GLOBALS['dossier_squelettes']))
+		{
+			foreach(explode(':',
+							 $GLOBALS['dossier_squelettes']
+						) as $chemin) {
+				$chemins[] = _DIR_RACINE . $chemin;
+			}
+		}
+		/**
+		 * le répertoire nommé ’squelettes’ s’il existe ;
+		 */
+		$chemins[] = _DIR_RACINE . 'squelettes';
+		/**
+		 * le répertoire extensions/compresseur ;
+		 */
+		$chemins[] = _DIR_EXTENSIONS . 'compresseur';
+		/**
+		 * le répertoire racine des plugins activés ;
+		 */
+		if (isset($GLOBALS['meta']['plugin']))
+		{
+			$res = liste_chemin_plugin_actifs();
+			if($res)
+			{
+				foreach ($res as $chemin)
+				{
+					$chemins[] = _DIR_PLUGINS.$chemin;
+				}
+			}
+		}
+		/**
+		 * le répertoire extensions/vertebres ;
+		 */
+		$chemins[] = _DIR_EXTENSIONS . 'vertebres';
+		/**
+		 * le répertoire extensions/safehtml ;
+		 */
+		$chemins[] = _DIR_EXTENSIONS . 'safehtml';
+		/**
+		 * le répertoire extensions/porte_plume ;
+		 */
+		$chemins[] = _DIR_EXTENSIONS . 'porte_plume';
+		/**
+		 * le répertoire extensions/msie_compat ;
+		 */
+		$chemins[] = _DIR_EXTENSIONS . 'msie_compat';
+		/**
+		 * le répertoire extensions/filtres_images ;
+		 */
+		$chemins[] = _DIR_EXTENSIONS . 'filtres_images';
+		/**
+		 * dans les répertoires déclarés par _chemin() dans l’ordre inverse
+		 * d’appel à cette fonction (le dernier déclaré sera le premier scruté) ;
+		 * @todo
+		 */
+		/**
+		 * la racine du site (WROOT) ;
+		 */
+		$chemins[] = rtrim(_DIR_RACINE, '/');
+		/**
+		 * le répertoire ’squelettes-dist’ ;
+		 */
+		$chemins[] = _DIR_RACINE . 'squelettes-dist';
+		/**
+		 * le répertoire ’ecrire’ ;
+		 */
+		$chemins[] = _DIR_RACINE . 'ecrire';
+		/**
+		 * le répertoire ’prive’ ;
+		 */
+		$chemins[] = _DIR_RACINE . 'prive';
+		
+		$squelettes = array();
+		$url = $GLOBALS['meta']['adresse_site'];
+		foreach ($chemins as $chemin)
+		{
+			if (is_dir($chemin))
+			{
+				if ($dh = opendir($chemin))
+				{
+					while (($file = readdir($dh)) !== FALSE)
+					{
+						if (substr($file, -5) == '.html')
+						{
+							if (!isset($squelettes[$file]))
+							{
+								$filename = $chemin.'/'.$file;
+								
+								$squelettes[$file] = array(
+									'chemin' => $filename .
+										(filesize ($filename) ? '' : ' <span class="size">vide</span>'),
+									'url' => $url.'?page='.substr($file, 0, -5)
+									);
+							}
+						}
+					}
+					closedir($dh);
+				}
+				ksort ($squelettes);
+				$res = array();
+				foreach ($squelettes as $key => $value)
+				{
+					$res[$key] =
+						'<dl>' . PHP_EOL .
+						'<df>chemin: </df><dd class"chemin">' . $value['chemin'] . '</dd>' . PHP_EOL .
+						'<df>url: </df><dd class"url"><a href="'.$value['url'].'">' . $value['url'] . '</a></dd>' . PHP_EOL .
+						'</dl>' . PHP_EOL
+						;
+				}
+			}
+		}
+		
+		if (isset($res) && count($res))
+		{
+			$corps[$ii] = gins_lister_values(
+					$res,
+					_T('gins:'.$ii)
+			);
+		}
+		unset($res);
+		
 		//////////
 		// Audit systeme
 		$ii = 'configsyst';
@@ -265,7 +397,7 @@ function exec_get_infos_spip_dist() {
  * Les valeurs à afficher en listes
  * @return string html code
  **/
-function gins_lister_values($array, $titre, $stitre = '')
+function gins_lister_values($array, $titre, $stitre = '', $legend = '')
 {
 	$eol = PHP_EOL;
 	
@@ -276,6 +408,7 @@ function gins_lister_values($array, $titre, $stitre = '')
 	}
 	$result = ''
 		. debut_cadre_trait_couleur($icone, true, '', $titre.$stitre)
+		. $legend
 		. '<ul>' . $eol
 		. $result
 		. '</ul>' . $eol
