@@ -17,7 +17,8 @@
 	<prefix>cextras</prefix>
 	<options>cextras_options.php</options>
 	<fonctions>cextras_balises.php</fonctions>
-	<necessite id="SPIP" version="[2.0;]" />
+	
+	<necessite id="SPIP" version="[3.0.0-dev;]" />
 	
 	<!-- declaration de pipeline -->
 	<pipeline><nom>declarer_champs_extras</nom><action></action></pipeline>
