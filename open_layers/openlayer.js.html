@@ -1,9 +1,14 @@
 [(#REM)
 
-	Charger la librairie GoogleMaps et nos ajouts
+	Mise en cache des libraries OpenLayers, OpenStreetMap, ainsi que des 
+  extensions Google Maps du plugin googlemap_api s'il est installé.
 
-]#CACHE{7*24*3600,cache-client}
-#HTTP_HEADER{'Content-Type: text/javascript'}
-[#SET{cache,#REM|sinon{http://www.openlayers.org/api/OpenLayers.js}
-[(#GET{cache}|recuperer_page|compacte_js)]]
+  Ces scripts ne doivent PAS être compactees dans cette page:: le compactage 
+  optionnel des javascripts est un réglage à effectuer dans la configuration
+  de SPIP lui-même.
+
+][(#CACHE{7*24*3600,cache-client})][(#HTTP_HEADER{'Content-Type: text/javascript'})]
+#SET{_cache_ol,#REM|sinon{http://www.openlayers.org/api/OpenLayers.js}[(#GET{_cache_ol}|recuperer_page)]
+[(#INCLURE{js/openlayers.js})]
+#SET{_cache_osm,#REM|sinon{http://openstreetmap.org/openlayers/OpenStreetMap.js}[(#GET{_cache_osm}|recuperer_page)]
 [(#INCLURE{js/geomap.js})]
