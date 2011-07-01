@@ -37,7 +37,12 @@ include_spip('inc/plugin');
 include_spip('inc/spiplistes_lister_courriers_listes');
 include_spip('inc/spiplistes_api_abstract_sql');
 
-function spiplistes_afficher_pile_messages() {
+/**
+ * Construction de la boite des envois programmés.
+ * 
+ * @return string le code html
+ */
+function spiplistes_pile_messages_progr () {
 
 	$sql_select = "id_liste,titre,date,maj,periode,patron,statut";
 	$list = sql_select($sql_select, 'spip_listes', "message_auto='oui' AND date > 0");
@@ -46,7 +51,7 @@ function spiplistes_afficher_pile_messages() {
 		return (false); 
 	}
 	
-	$pile_result = ""
+	$pile_result = ''
 		. debut_cadre_enfonce(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'stock_timer.gif', true, ''
 			, _T('spiplistes:messages_automatiques').spiplistes_plugin_aide(_SPIPLISTES_EXEC_AIDE, "casier_courriers"))
 		. "\n"
@@ -59,7 +64,9 @@ function spiplistes_afficher_pile_messages() {
 		;
 
 	$couleur_ligne = 1;
-	while($row = sql_fetch($list)) {
+	
+	while($row = sql_fetch($list))
+	{
 		foreach(explode(",", $sql_select) as $key) {
 			$$key = $row[$key];
 		}
@@ -111,15 +118,16 @@ function spiplistes_afficher_pile_messages() {
 			;
 	} // end while
 	
-	$pile_result .= ""
-		. "</table>\n"
-		. fin_cadre_enfonce(true)
-		;
+	$pile_result .= '</table>' . PHP_EOL . fin_cadre_enfonce(true);
+	
 	return ($pile_result);
 	
-} // end spiplistes_afficher_pile_messages()
+} // end spiplistes_pile_messages_progr()
 
-
+/**
+ * Construit et affiche la page
+ * 
+ */
 function exec_spiplistes_courriers_casier () {
 	
 	include_spip ('inc/acces');
@@ -141,8 +149,9 @@ function exec_spiplistes_courriers_casier () {
 		, $supp_dest
 		;
 
-	///////////////////////////
-	// initialise les variables postées par formulaire (formulaire gerer)
+	/**
+	 * initialise les variables postées par formulaire (formulaire gerer)
+	 */
 	foreach(array(
 		'btn_confirmer_envoi', 'id_courrier', 'id_liste', 'id_auteur_test', 'btn_annuler_envoi'
 		, 'statut'
@@ -165,8 +174,11 @@ function exec_spiplistes_courriers_casier () {
 
 	if($flag_modifiable) {
 
-		// annuler le destinataire d'un courrier (retour de courrier_gerer)
-		// repasse le courrier en mode 'redac'
+		/**
+		 * Annuler l'envoi d'un courrier (retour de courrier_gerer)
+		 * supprime  le destinataire du courrier
+		 * et repasse le courrier en mode 'redac'
+		 */
 		if($btn_annuler_envoi) {
 			spiplistes_courrier_modifier(
 				$id_courrier
@@ -179,9 +191,13 @@ function exec_spiplistes_courriers_casier () {
 			);
 		}
 
-		// confirmer l'envoi d'un courrier
+		/**
+		 * Confirmer l'envoi d'un courrier
+		 */
 		if($btn_confirmer_envoi) {
-			// passe le courrier directement a la meleuse
+			/**
+			 * Passe le courrier directement a la meleuse
+			 */
 			if($id_liste >= 0) {
 				// destinataire(s) = abonnés à une liste
 				// si id_liste == 0, destinataire = adresse email de test
@@ -273,7 +289,7 @@ function exec_spiplistes_courriers_casier () {
 		if($statut == $_skip_statut) {
 			// liste des courriers programmés (des listes)
 			$page_result .= ""
-				. spiplistes_afficher_pile_messages()
+				. spiplistes_pile_messages_progr()
 				. "<br />"
 				;
 		}
