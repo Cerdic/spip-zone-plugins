@@ -70,11 +70,11 @@ function acs_3colonnes($col1, $col2, $col3) {
 }
 
 function acs_help_call($id) {
-  return '<img src="'._DIR_PLUGIN_ACS.'images/aide.gif" onmouseover=\'$("#'.$id.'").slideToggle("slow");\' onclick=\'$("#'.$id.'").slideToggle("slow");\' style="cursor:pointer;" title="'._T('icone_aide_ligne').'" align="right"/>';
+  return '<img src="'._DIR_PLUGIN_ACS.'images/aide.gif" onmouseover=\'$("#'.$id.'").slideToggle("slow");\' onclick=\'$("#'.$id.'").slideToggle("slow");\' style="cursor:help;" title="'._T('icone_aide_ligne').'" align="right"/>';
 }
 
 function acs_help_div($id, $help) {
-  return '<div id="'.$id.'" class="onlinehelp pliable" style="text-align: justify" onclick=\'$("#'.$id.'").slideToggle("slow");\'>'.$help.'</div>';
+  return '<div id="'.$id.'" class="contexthelp onlinehelp pliable" style="text-align: justify" onclick=\'$("#'.$id.'").slideToggle("slow");\'>'.$help.'</div>';
 }
 
 /**

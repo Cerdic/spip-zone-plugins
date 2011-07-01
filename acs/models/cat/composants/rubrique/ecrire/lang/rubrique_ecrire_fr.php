@@ -17,6 +17,7 @@ Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site publi
 'TitreAlign'=>'Alignement du titre',
 'Article'=>'Remplacer par l\'article s\'il est unique',
 'Souligne' => 'Souligner le titre avec la couleur dominante du logo',
+'Lock' => 'Contrôle d\'accès',
 'StylePage' => 'Style de page'
 
 );

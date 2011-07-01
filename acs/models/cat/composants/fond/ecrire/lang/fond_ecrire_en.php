@@ -28,6 +28,7 @@ Size for little navigation links set the size of pagination, notes, post-scriptu
 ',
 
 'Favicon' => 'Favicon',
+'Favicon_help' => 'Displayed in address bar and navigator panes.',
 
 'Color' => 'Background',
 'NavSize' => 'Size for little navigation links',

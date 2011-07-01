@@ -339,8 +339,8 @@ class AdminComposant {
 				$nc = ucfirst($this->nom);
 			$r .= '<div align="'.$GLOBALS['spip_lang_right'].'" style ="font-weight: normal"><label>'._T('acs:use').' '.$nc.' '.$this->nic.' : </label>';
 			// acs_bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="", $enable=true)
-			$r .= acs_bouton_radio($varname, "oui", _T('item_oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$this->enable);
-			$r .= acs_bouton_radio($varname, "non", _T('item_non'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$this->enable);
+			$r .= acs_bouton_radio($varname, "oui", _T('acs:oui'), $var == "oui", "changeVisible(this.checked, '$varconf', 'block', 'none');",$this->enable);
+			$r .= acs_bouton_radio($varname, "non", _T('acs:non'), $var == "non", "changeVisible(this.checked, '$varconf', 'none', 'block');",$this->enable);
 			$r .= '</div>';
 		}
 

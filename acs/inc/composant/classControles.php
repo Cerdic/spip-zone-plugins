@@ -6,6 +6,8 @@
 # Copyright Daniel FAIVRE, 2007-2011
 # Copyleft: licence GPL - Cf. LICENCES.txt
 
+include_spip('inc/acs_presentation');
+
 /**
  * \~french
  * Classe Controle : affiche une interface de saisie pour une variable ACS
@@ -27,6 +29,7 @@ abstract class Controle {
   protected $param;
   protected $wid;
   protected $var;
+  protected $help;
   
   public function __construct($composant, $nic, $nom, $value, $param, $wid) {
     $this->composant = $composant;
@@ -35,7 +38,12 @@ abstract class Controle {
     $this->value = $value;
     $this->param = $param;
     $this->wid = $wid;
+
     $this->var = 'acs'.ucfirst($composant).$nic.$nom;
+
+    $help_src = $nom.'Help';
+    $help = _TC($composant, $help_src);
+    $this->help = ($help != $help_src) ? $help : false;
   }
   
   abstract public function draw();
@@ -56,7 +64,10 @@ class ctlColor extends Controle {
       $color = meta_recursive($GLOBALS['meta'], substr($this->value, 1).'/Color'); // Cas des variables de type "Bord", par exemple
     else
       $color = meta_recursive($GLOBALS['meta'], $this->var);
-    return '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$this->var.'" name="'.$this->var.'_'.$this->wid.'" size="16" value="'.$this->value.'" style="background: '.$color.'"></td></tr></table></div>';
+    $r = '<div align="'.$GLOBALS['spip_lang_right'].'"><table><tr><td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'" class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td><td><input type="text" class="palette" id="'.$this->var.'" name="'.$this->var.'_'.$this->wid.'" size="16" value="'.$this->value.'" style="background: '.$color.'"></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
+    return $r;
   }
 }
 
@@ -77,7 +88,9 @@ class ctlImg extends Controle {
     if ($this->param['label'] != 'non')
       $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
     $r .= '<td><input type="text" id="'.$this->var.'_'.$this->wid.'" name="'.$this->var.'_'.$this->wid.'"'.(is_array($s) ? ' title="'.$s[0].'x'.$s[1].'"' : '').' value="'.$this->value.'" size="40" class="forml" /></td>';
-    $r .= '<td>&nbsp;</td><td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$this->var.'_'.$this->wid.'\'], document.forms[\'acs\'].elements[\''.$this->var.'_'.$this->wid.'\'].value, \''.$path.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').'" /></a>'.$err.'</td></tr></table></div>';
+    $r .= '<td>&nbsp;</td><td><a href="javascript:TFP.popup(document.forms[\'acs\'].elements[\''.$this->var.'_'.$this->wid.'\'], document.forms[\'acs\'].elements[\''.$this->var.'_'.$this->wid.'\'].value, \''.$path.'\', \''._DIR_RACINE.'\');" title="'._T('acs:choix_image').' '.$this->var.'"><img src="'._DIR_ACS.'images/folder_image.png" class="icon" alt="'._T('acs:choix_image').' '.$this->var.'" /></a>'.$err.'</td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -111,7 +124,10 @@ class ctlBord extends Controle {
             <td>'.$ctlColor->draw().'</td>
             <td>'.$ctlLargeurBord->draw().'</td>
             <td>'.$ctlStyleBord->draw().'</td>'.
+            ($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').
          '</tr></table>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -142,7 +158,9 @@ class ctlLargeurBord extends Controle {
       '<option value="8px"'.($largeur=="8px" ? ' selected' : '').' title="8px">8px</option>'.
       '<option value="10px"'.($largeur=="10px" ? ' selected' : '').' title="10px">10px</option>'.
       '<option value="15px"'.($largeur=="15px" ? ' selected' : '').' title="15px">15px</option>'.
-      '</select></td></tr></table></div>';
+      '</select></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -173,7 +191,9 @@ class ctlStyleBord extends Controle {
       '<option value="ridge"'.($style=="ridge" ? ' selected' : '').' title="'._T('acs:ridge').'">ridge</option>'.
       '<option value="inset"'.($style=="inset" ? ' selected' : '').' title="'._T('acs:inset').'">inset</option>'.
       '<option value="outset"'.($style=="outset" ? ' selected' : '').' title="'._T('acs:outset').'">outset</option>'.
-      '</select></td></tr></table></div>';
+      '</select></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -195,7 +215,9 @@ class ctlFontFamily extends Controle {
       '<option value="cursive"'.($style=="cursive" ? ' selected' : '').' title="'._T('acs:cursive').'">cursive</option>'.
       '<option value="fantasy"'.($style=="fantasy" ? ' selected' : '').' title="'._T('acs:fantasy').'">fantasy</option>'.
       '<option value="monotype"'.($style=="monotype" ? ' selected' : '').' title="'._T('acs:monotype').'">monotype</option>'.
-      '</select></td></tr></table></div>';
+      '</select></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -212,7 +234,9 @@ class ctlText extends Controle {
     $r = '<table width="100%"><tr>';
     if ($this->param['label'] != 'non')
       $r .= '<td align="'.$GLOBALS['spip_lang_right'].'">&nbsp;<label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'"  class="label">'._TC($this->composant, $this->nom).'</label>&nbsp;</td>';
-    $r .= '<td><input id="'.$this->var.'" type="text" name="'.$this->var.'_'.$this->wid.'" size="'.$this->param['taille'].'" maxlength="'.$this->param['taille'].'" class="forml" value="'.htmlspecialchars($this->value).'" /></td></tr></table>';
+    $r .= '<td><input id="'.$this->var.'" type="text" name="'.$this->var.'_'.$this->wid.'" size="'.$this->param['taille'].'" maxlength="'.$this->param['taille'].'" class="forml" value="'.htmlspecialchars($this->value).'" /></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -226,7 +250,10 @@ class ctlText extends Controle {
  */
 class ctlTextarea extends Controle {
   public function draw() {
-    return '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'">'._TC($this->composant, $this->nom).'</label><textarea name="'.$this->var.'_'.$this->wid.'" class="forml" rows="'.(isset($this->param['lines']) ? $this->param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
+    $r = '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'">'._TC($this->composant, $this->nom).'</label><textarea name="'.$this->var.'_'.$this->wid.'" class="forml" rows="'.(isset($this->param['lines']) ? $this->param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
+    return $r;
   }
 }
 
@@ -248,11 +275,11 @@ class ctlChoix extends Controle {
       switch($option) {
         case 'oui':
         case 'yes';
-          $label = _T('item_oui');
+          $label = _T('acs:oui');
           break;
         case 'non':
         case 'no':
-          $label = _T('item_non');
+          $label = _T('acs:non');
           break;
         default:
           $label = _TC($this->composant, $this->nom.ucfirst($option));
@@ -267,7 +294,9 @@ class ctlChoix extends Controle {
         $this->value == $option
       ).'&nbsp;<td>';
     }
-    $r .= '</tr></table>';
+    $r .= ($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -282,7 +311,10 @@ class ctlChoix extends Controle {
 class ctlUse extends Controle {
   public function draw() {
     $ctl = new ctlChoix($this->composant, $this->nic, $this->nom, (($GLOBALS['meta'][nomvar($this->composant, $this->nic, $this->nom)] == 'oui') ? 'oui' : 'non'), array('option' => array('oui', 'non')), $this->wid);
-    return $ctl->draw();
+    $r = $ctl->draw();
+    if ($this->help)  
+      $r .= acs_help_div($this->var.'Help', $this->help);
+    return $r;
   }
 }
 
@@ -322,7 +354,9 @@ class ctlKey extends Controle {
         $r .= '<option value="'.$titre_mot.'"'.($titre_mot == $vmot ? ' selected' : '').'>'.$titre_mot.'</option>';
       }   
     }
-    $r .= '</select></td></tr></table></div>';
+    $r .= '</select></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -352,7 +386,9 @@ class ctlKeyGroup extends Controle {
       $titre_groupe = typo($row_groupes['titre']);
       $r .= '<option value="'.$id_groupe.'"'.($id_groupe == $vid_group ? ' selected' : '').'>'.$titre_groupe.'</option>';
     }
-    $r .= '</select></td></tr></table></div>';
+    $r .= '</select></td>'.($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table></div>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -383,7 +419,9 @@ class ctlWidget extends Controle {
       }
     }
     $r .= '</select></div></td>';
-    $r .= '</tr></table>';
+    $r .= ($this->help ? '<td>&nbsp;</td><td>'.acs_help_call($this->var.'Help').'</td>' : '').'</tr></table>';
+    if ($this->help)
+      $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
   }
 }
@@ -403,22 +441,22 @@ class ctlHidden extends Controle {
 
 /**
  * \~french
- * Retourne la traduction spécifique au composant,
- * une traduction par défaut, ou le texte 
+ * Retourne la traduction spécifique au composant, ou sinon une traduction par 
+ * défaut, ou sinon, le texte. 
  */
 function _TC($composant, $texte) {
 	// traduction ACS propre au composant
 	$t = _T('acs:'.$composant.'_'.$texte);
 	if ($t != str_replace('_', ' ', $composant.'_'.$texte))
-		return str_replace(' ', '&nbsp;', $t);
+		return $t;
 	// traduction ACS generique 
 	$t = _T('acs:'.strtolower($texte));
-	if ($t != str_replace('_', ' ', $texte))
-		return str_replace(' ', '&nbsp;', $t);
+	if ($t != str_replace('_', ' ', strtolower($texte)))
+		return $t;
 	// traduction SPIP generique 
 	$t = _T(strtolower($texte));
-	if ($t != str_replace('_', ' ', $texte))
-		return str_replace(' ', '&nbsp;', $t);
+	if ($t != str_replace('_', ' ', strtolower($texte)))
+		return $t;
 	return $texte;
 }
 

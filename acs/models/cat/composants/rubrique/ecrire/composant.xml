@@ -64,6 +64,13 @@
   </variable>
 
   <variable>
+    <nom>Lock</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
     <nom>StylePage</nom>
     <type>KeyGroup</type>
   </variable>

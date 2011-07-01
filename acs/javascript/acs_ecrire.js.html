@@ -59,6 +59,9 @@ function acs_ecrire_init(ajax) {
   else
     jQuery(".pliable:not(.spip_params)").each(function(i) {jQuery(this).hide();});
 
+  [(#REM) Attribue une position absolue à l'aide contextuelle
+  ]jQuery(".contexthelp").css('position', 'absolute');
+
   if (ajax == false) { [(#REM) on document ready]
   
     [(#REM) Retourne les infos sur la page avec le niveau de détail défini par le plieur 

@@ -28,6 +28,7 @@ Nécessite le plugin GIS et ses d&eacute;pendances.<br />',
 'PictoHover' => 'Au survol',
 'pictos' => 'Pictogrammes',
 
+'ListRubriques' => 'Rubriques associées au mot-clé',
 'ListArticles' => 'Articles des rubriques et mot-clés',
 'LastUpdate' => 'Derni&eacute;re mise &agrave; jour',
 'LogoMax' => 'Taille maxi du logo',

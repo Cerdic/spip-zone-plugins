@@ -31,6 +31,7 @@ Le style des listes d'articles d'une rubrique est defini par le composant Articl
     [<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]
     [(#GET{done}|!={oui}|?{' '})[<p>(#DESCRIPTIF|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>#SET{done,oui}]]
     [(#GET{done}|!={oui}|?{' '})[<p>(#TEXTE|coupe{#VAR{acsArticlesNbLettres,300}, &nbsp; ... <i><a href="#URL_MOT" class="nsize"><:acs:articles_lire_la_suite:></a></i>})</p>]]
-    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ListArticles'}}|!={non}|?{" "})<INCLURE{fond=composants/carte/bubble_liste_articles}{id_rubrique}>]
+    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ListRubriques'}}|!={non}|?{" "})[(#INCLURE{fond=composants/carte/bubble_liste_rubriques}{id_mot}]]
+    [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ListArticles'}}|!={non}|?{" "})[(#INCLURE{fond=composants/carte/bubble_liste_articles}{id_mot}]]
   </div>
 </BOUCLE_mot>

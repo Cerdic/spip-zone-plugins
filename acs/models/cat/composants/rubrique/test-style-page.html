@@ -1,0 +1,15 @@
+[(#CACHE{0})][(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Test pages rubriques personnalisées
+
+Test customized categories pages
+
+][(#VAR{acsRubriqueStylePage}|=={""}|?{' ',''})[(#INCLURE{fond=composants/rubrique/boucle-page_rubrique}{self}{env})]][(#VAR{acsRubriqueStylePage}|=={""}|?{'',' '})[(#INCLURE{fond=composants/rubrique/boucle-page_rubrique-style}{self}{env})]]

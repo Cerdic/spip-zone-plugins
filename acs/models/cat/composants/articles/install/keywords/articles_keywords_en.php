@@ -1,7 +1,7 @@
 <?php
   $keywords = array(
   	'_Restricted' => array(
-      'descriptif' => 'Restricted access (must be activated in the "articles" component).',
+      'descriptif' => 'Restricted access (must be activated in the "Articles" and/or the "Rubrique" component).',
       'texte' => '',
       'unseul' => 'non',
       'obligatoire' => 'non',

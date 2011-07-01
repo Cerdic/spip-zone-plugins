@@ -1,7 +1,7 @@
 <?php
   $keywords = array(
   	'_Accès restreint' => array(
-      'descriptif' => 'Restriction d\'accès (la fonction doit être activée dans le composant "articles").',
+      'descriptif' => 'Restriction d\'accès (la fonction doit être activée dans le composant "Articles" et/ou dans le composant "Rubrique").',
       'texte' => '',
       'unseul' => 'non',
       'obligatoire' => 'non',

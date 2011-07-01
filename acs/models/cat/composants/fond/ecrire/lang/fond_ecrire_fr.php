@@ -28,8 +28,9 @@ La taille des petits liens de navigation s\'applique aux paginations, aux notes,
 ',
 
 'Favicon' => 'Ic&ocirc;ne de signet',
-
+'FaviconHelp' => 'S\'affiche dans la barre d\'adresse et les titres d\'onglets de l\'explorateur.',
 'Color' => 'Fond',
+'ImageHelp' => 'Image de fond pour toutes les pages du site. Il faut définir une couleur par défaut pour que l\'image de fond soit prise en compte.',
 'NavSize' => 'Taille des petits liens de navigation',
 'BlocSize' => 'Taille des blocs',
 

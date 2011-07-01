@@ -6,7 +6,7 @@
   <version>0.8.3</version>
   <necessite id='acs' version='[0.7.1;]' />
   <necessite id='gis' version='[0.2;]' />
-  <necessite id='openlayers' version='[0.0.1;]' />
+  <necessite id='openlayers' version='[0.0.2;]' />
 
   <param>
     <nom>preview</nom>
@@ -192,6 +192,13 @@
     <type>text</type>
   </variable>
 
+  <variable>
+    <nom>ListRubriques</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
   <variable>
     <nom>ListArticles</nom>
     <type>choix</type>

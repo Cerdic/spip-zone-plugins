@@ -12,15 +12,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 <u>Article</u> :
 <br />
 Apparence d\'un article.
-<br />
-<br />
-La fonction contrôle d\'accès limite l\'accès aux articles avec mot-clé 
-_ide, _aut, _adm ou _acs aux visiteurs enregistrés, aux rédacteurs, aux administrateurs, ou aux administrateurs ACS.
-<br /><br />
-La page article peut dépendre d\'un mot-clé: dans ce cas, la page article contiendra l\'instance de composant Cadre de numéro nn défini par une balise &lt;nic-page=nn&gt; dans le champ description du mot clé choisi pour cet article dans le groupe des mots-clefs de styles de pages article, ou à défaut le cadre n° 2100 si aucun mot-clé n\'est choisi dans ce groupe ou si le mot-clé choisi ne contient pas cette balise.
-<br />
-<br />
-Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site public, il suffit que son titre commence par un "_".
 <br /><br />
 <u>Articles</u> :<br />
 Apparence des listes d\'articles (d\'une rubrique, associés à un mot-clé, ...).
@@ -31,6 +22,10 @@ Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans l
 ',
 
 'StylePage' => 'Style de page',
+'StylePageHelp' => 'La page article peut dépendre d\'un mot-clé: dans ce cas, elle contiendra l\'instance de composant Cadre de numéro <i>nn</i> défini par une balise &lt;nic-page=<i>nn</i>&gt; dans le champ description du mot clé choisi pour cet article dans le groupe des mots-clefs des styles de pages article, ou à défaut le cadre n° 2100 si aucun mot-clé n\'est choisi dans ce groupe ou si le mot-clé choisi ne contient pas cette balise.
+<br />
+<br />
+Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site public, il suffit que son titre commence par un "_".',
 
 'Bord' => 'Bord sup&eacute;rieur',
 'MargeBas' => 'Marge inf&eacute;rieure',
@@ -43,8 +38,9 @@ Les couleurs 2 &agrave; 6 concernent les rubriques de niveau 2 &agrave; 6 dans l
 'Sommaire' => 'Sommaire',
 'Stats' => 'Statistiques de visites',
 'Lock' => 'Contrôle d\'accès',
-'Added' => 'Ajout',
-'Deleted' => 'Suppression',
+'LockHelp' => 'Limite l\'accès aux articles avec le mot-clé _ide, _aut, _adm ou _acs, respectivement, aux visiteurs enregistrés, aux rédacteurs, aux administrateurs, ou aux administrateurs ACS.',
+'Added' => 'Ajouté à la dernière révision',
+'Deleted' => 'Supprimé à la dernière révision',
 
 'Pagination' => 'Nombre d\'articles par page',
 'ListesLogoTailleMax' => 'Taille maxi du logo',

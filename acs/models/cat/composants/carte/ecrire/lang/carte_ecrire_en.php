@@ -24,6 +24,7 @@ Map size is 100% of its container. Tooltip size is computed according to its con
 'PictoHover' => 'Hover',
 'pictos' => 'Pictograms',
 
+'ListRubriques' => 'Categories with the keyword',
 'ListArticles' => 'Articles of sections and keywords',
 'LastUpdate' => 'Last update',
 'LogoMax' => 'Max logo size',

@@ -13,6 +13,9 @@
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   'use' => 'Use',
 
+  'oui' => 'Yes',
+  'non' => 'No',
+
 	'fond' => 'Background',
 	'titrefond' => 'Title background',
 

@@ -1,4 +1,4 @@
-[(#CACHE{0})][(#REM)
+[(#CACHE{7200})][(#REM)
 
              ACS
          (Plugin Spip)
@@ -19,6 +19,4 @@ Section page
 
 Keywords meta-tags come from section title.
 
-][(#SET{title,#TITRE[ - (#NOM_SITE_SPIP)]})][(#SET{mkeywords,[(#TITRE|askeywords)]})]<INCLURE{fond=composants/fond/entete}{title=#GET{title}}{mkeywords=#GET{mkeywords}}{mdescription}>
-<INCLURE{fond=composants/cadre/cadre}{self}{env}{nic}>
-<INCLURE{fond=composants/fond/pied}>
+][(#SET{title,#TITRE[ - (#NOM_SITE_SPIP)]})][(#SET{mkeywords,[(#TITRE|askeywords)]})][(#INCLURE{fond=composants/fond/entete}{title=#GET{title}}{mkeywords=#GET{mkeywords}}{mdescription})][(#INCLURE{fond=composants/cadre/cadre}{self}{env}{nic})][(#INCLURE{fond=composants/fond/pied})]
