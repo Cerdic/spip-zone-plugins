@@ -1,0 +1,30 @@
+<plugin>
+	<nom>Scenari</nom>
+	<auteur>[Grégory Pascal->http://www.spip-contrib.net/ngombe], distribu&#233; sous licence GNU/GPL</auteur>
+	<version>0.0.1</version>
+	<etat>test</etat>
+	<prefix>scenari</prefix>
+	<description><multi>
+	[fr] Permet d'ajouter facilement une archive <a href="http://scenari-platform.org/">scenari</a> dans un article spip.
+	[en] Make it easy to add a <a href="http://scenari-platform.org/">scenari</a> in articles.
+	</multi></description>
+	<icon>images/scenari-32.png</icon>
+	<lien>http://www.spip-contrib.net/Scenari-pour-SPIP</lien>
+	<bouton id='scenari_2' parent='naviguer'>
+		<icone>images/scenari-24.png</icone>
+		<titre>scenari:scenari</titre>
+		<url>scenari</url>
+	</bouton>
+	<bouton id='scenari' parent='bando_edition'>
+		<titre>scenari:scenari</titre>
+		<icone>images/scenari-24.png</icone>
+		<url>scenari</url>
+	</bouton>
+	<fonctions>scenari_fonctions.php</fonctions>
+		<pipeline>
+		<nom>post_typo</nom>
+		<action>insert_projet</action>
+		<inclure>scenari_fonctions.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+</plugin>
