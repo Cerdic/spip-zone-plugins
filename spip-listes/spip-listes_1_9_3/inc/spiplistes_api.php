@@ -1260,45 +1260,69 @@ function spiplistes_tampon_assembler_patron () {
 	return($result);
 }
 
-function spiplistes_pied_page_assembler_patron ($id_liste, $lang = false) {
+/**
+ * Construire le contenu à partir du patron
+ * appartenant à la liste donnée, ou du patron nommé.
+ * @version CP-20110701
+ * @param bool|int $id_liste
+ * @param bool|string $lang
+ * @param string $pied_patron
+ * @return array (version html, version texte)
+ */
+function spiplistes_pied_page_assembler_patron ($id_liste = FALSE,
+												$lang = FALSE,
+												$pied_patron = FALSE)
+{
+	$result = array('', '');
 	
-	$result = array("", "");
-	
-	if(($id_liste = intval($id_liste)) > 0)
+	/**
+	 * Si l'id_liste > 0, prendre le pied patron de la liste
+	 * sauf si transmis en paramètre.
+	 */
+	if(
+	   (($id_liste = intval($id_liste)) > 0)
+		&& !$pied_patron)
 	{
-		$pied_patron = sql_getfetsel('pied_page', 'spip_listes', "id_liste=".sql_quote($id_liste), '','',1);
-		
-		$pied_patron =
-			(!$pied_patron)
-			// si patron vide (ancienne version de SPIP-Listes ?), appliquer le patron par defaut
-			? _SPIPLISTES_PATRONS_PIED_DEFAUT
-			: $pied_patron
-			;
-		if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX)
+		$pied_patron = sql_getfetsel('pied_page', 'spip_listes',
+									 'id_liste='.sql_quote($id_liste), '','',1);
+		/**
+		 * Si patron vide (ancienne version de SPIP-Listes ?),
+		 * appliquer le patron par defaut
+		 */
+		if (!$pied_patron)
 		{
-			// probablement le contenu du pied (SPIP-Listes <= 1.9.2 ?)
-			// rester compatible avec les anciennes version de SPIP-Listes
-			// qui stoquaient le patron assemble' en base
-			$pied_texte = spiplistes_courrier_version_texte($pied_html = $pied_patron);
-			$result = array($pied_html, $pied_texte);
-		}
-		else if(strlen($pied_patron) && ($pied_patron != _SPIPLISTES_PATRON_PIED_IGNORE)) {
-			
-			if(!$lang) {
-				$lang = spiplistes_listes_langue($id_liste) || $GLOBALS['spip_lang'];
-			}
-			$contexte = array('lang' => $lang);
-			$result = spiplistes_assembler_patron (
-				_SPIPLISTES_PATRONS_PIED_DIR . $pied_patron
-				, $contexte
-			);
+			$pied_patron = _SPIPLISTES_PATRONS_PIED_DEFAUT;
 		}
 	}
+	if (!empty($pied_patron)) {
+		/**
+		 * Dans les anciennes versions de SPIP-Listes,
+		 * (SPIP-Listes <= 1.9.2 ?)
+		 * le contenu du pied de page était dans le champ pied_page.
+		 * Rester compatible avec les anciennes versions de SPIP-Listes
+		 */
+		if(strlen($pied_patron) > _SPIPLISTES_PATRON_FILENAMEMAX)
+		{
+			$pied_html = $pied_patron;
+			$pied_texte = spiplistes_courrier_version_texte ($pied_html);
+		}
+		/**
+		 * ou construire à partir du patron désigné
+		 */
+		else if ($pied_patron != _SPIPLISTES_PATRON_PIED_IGNORE) {
+			list($pied_html, $pied_texte) = spiplistes_courriers_assembler_patron (
+				_SPIPLISTES_PATRONS_PIED_DIR . $pied_patron
+				, array('lang'=>$lang));
+		}
+		
+		$result = array($pied_html, $pied_texte);
+	}
+	
 	return ($result);
 }
 
 function spiplistes_format_valide ($format) {
-	return(in_array($format, array("non", "texte", "html")) ? $format : false);
+	return(in_array($format, array('non', 'texte', 'html')) ? $format : false);
 }
 
 /**
