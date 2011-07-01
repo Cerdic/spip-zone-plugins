@@ -30,15 +30,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-/*
-	Affiche un courrier. 
-	Le formulaire permet :
-	- l'envoi sur mail de test
-	- l'envoi sur les destinataires d'une liste
-	- le passage en mode edition
-	- la duplication d'un courrier archive, le passe en mode redac	
-*/
-
+/**
+ * Affiche un courrier.
+ * Le formulaire permet :
+ * - l'envoi sur mail de test
+ * - l'envoi sur les destinataires d'une liste
+ * - le passage en mode edition
+ * - la duplication d'un courrier archive, le passe en mode redac
+ */
 function exec_spiplistes_courrier_gerer () {
 
 	include_spip('inc/barre');
@@ -104,7 +103,9 @@ function exec_spiplistes_courrier_gerer () {
 			$id_courrier = $btn_dupliquer_courrier;
 		}
 
-		// effectue les modifications demandees si retour local ou retour editeur
+		/**
+		 * Effectue les modifications demandees si retour local ou retour editeur
+		 */
 		if($id_courrier > 0) {
 
 			if($btn_dupliquer_courrier > 0)
@@ -210,15 +211,17 @@ function exec_spiplistes_courrier_gerer () {
 			} // if($btn_changer_destination
 	
 			else if($btn_courrier_valider) {
-				// retour editeur local
+				/**
+				 * Retour editeur local (prévisu)
+				 */
 				if(!empty($titre)) {
 					$sql_set = array(
 							  'titre' => $titre
 							, 'texte' => $texte
-							, 'message_texte' => $message_texte
+							, 'message_texte' => $pied_patron
 						);
-					spiplistes_courrier_modifier($id_courrier, $sql_set);
-					spiplistes_courrier_attacher_documents($id_courrier, $id_temp);
+					spiplistes_courrier_modifier ($id_courrier, $sql_set);
+					spiplistes_courrier_attacher_documents ($id_courrier, $id_temp);
 				}
 				else {
 					$message_erreur .= spiplistes_boite_alerte (_T('spiplistes:erreur_courrier_titre_vide'), true);

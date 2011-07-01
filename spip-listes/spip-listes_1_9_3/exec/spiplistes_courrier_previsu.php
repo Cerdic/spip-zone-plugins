@@ -35,19 +35,19 @@ include_spip('inc/spiplistes_api_globales');
 // MaZiaR - NetAktiv
 // tech@netaktiv.com
 
-/*
-	Affiche previsu d'un courrier
-	- en plein ecran si demande
-	- sinon pour import iframe
-	- format html ou texte seul, si demande
-	
-	Utilise par courrier_gerer et courrier_edit
-	
-	CP-20080322 : 
-	- ce script devrait plutot etre en action/ au lieur d'exec/ ?
-	- charset en previsu plein ecran texte seul : Mozilla affiche parfois en iso ? parfois respecte UTF-8 !
-	CP-20071011
-*/
+/**
+ * Affiche previsu d'un courrier
+ * - en plein ecran si demande
+ * - sinon pour import iframe
+ * - format html ou texte seul, si demande
+ * 
+ * Utilise par courrier_gerer et courrier_edit
+ * 
+ * CP-20080322 : 
+ * - ce script devrait plutot etre en action/ au lieu d'exec/ ?
+ * - charset en previsu plein ecran texte seul : Mozilla affiche parfois en iso ? parfois respecte UTF-8 !
+ * CP-20071011
+ * */
 
 function exec_spiplistes_courrier_previsu () {
 
@@ -68,7 +68,7 @@ function exec_spiplistes_courrier_previsu () {
 	
 	spiplistes_debug_log ('ACTION: exec_spiplistes_courrier_previsu()');
 
-	$eol = PHP_EOL;
+	static $eol = PHP_EOL;
 	
 	$int_values = array(
 		'id_rubrique', 'id_mot', 'id_courrier', 'id_liste'
@@ -106,14 +106,15 @@ function exec_spiplistes_courrier_previsu () {
 			);
 	
 	list($lien_html, $lien_texte) = spiplistes_courriers_assembler_patron (
-		_SPIPLISTES_PATRONS_TETE_DIR . spiplistes_pref_lire('lien_patron')
-		, $contexte
-		, !((spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui') && $id_courrier)
+		_SPIPLISTES_PATRONS_TETE_DIR . spiplistes_pref_lire('lien_patron'),
+		$contexte,
+		!((spiplistes_pref_lire('opt_lien_en_tete_courrier') == 'oui') && $id_courrier)
 		);
 	
-	// si envoi a une liste, reprendre le patron de pied de la liste
-	list($pied_html, $pied_texte) = spiplistes_pied_page_assembler_patron($id_liste, $lang);
-		
+	list($pied_html, $pied_texte) = spiplistes_pied_page_assembler_patron ($id_liste,
+												$lang,
+												$pied_patron);
+	
 	$texte_intro = $texte_patron =
 		$tampon_html = $tampon_texte =
 		$sommaire_html = '';
@@ -122,8 +123,10 @@ function exec_spiplistes_courrier_previsu () {
 		list($tampon_html, $tampon_texte) = spiplistes_tampon_assembler_patron();
 	}
 	
-	if($lire_base) { 
-		// prendre le courrier enregistre dans la base
+	if($lire_base) {
+		/**
+		 * Prendre le courrier enregistre dans la base
+		 */
 		$sql_select = 'texte,titre' . (($format=='texte') ? ',message_texte' : '');
 		if(
 			$id_courrier 
@@ -184,12 +187,12 @@ function exec_spiplistes_courrier_previsu () {
 			echo(_T('spiplistes:erreur_courrier_introuvable'));
 		}
 	}
-	
-	//////////////////////////////////////////////////
-	// si nouveau courrier (pas dans la base), generer un apercu
+	/**
+	 * Si nouveau courrier (pas dans la base), generer un apercu
+	 */
 	else {
 		
-		//spiplistes_debug_log('ACTION: generate preview');
+		spiplistes_debug_log('ACTION: generate preview');
 
 		$intro_html = $intro_texte = 
 			$sommaire_html = $sommaire_texte = '';
@@ -306,52 +309,56 @@ function exec_spiplistes_courrier_previsu () {
 		
 		spiplistes_debug_log('ACTION: generate page');
 
-		$page_result = ''
+		/**
+		 * Le pied fait partie du courrier
+		 */
+		$message_html .= $pied_html;
+		$message_texte .= $pied_texte;
+		
+		$page_result = $eol.$eol
 			// boite courrier au format html
-			. debut_cadre_couleur('', true)
-			. "<form id='choppe_patron-1' action='$form_action' method='post' name='choppe_patron-1'>\n"
-			. "<div id='previsu-html' class='switch-previsu'>\n"
+			. debut_cadre_couleur('', true).$eol
+			. '<form id="choppe_patron-1" action="'.$form_action.'"
+					method="post" name="choppe_patron-1">'.$eol
+			. '<div id="previsu-html" class="switch-previsu">'.$eol
 			. _T('spiplistes:version_html') 
-				. " / " . "<a href='javascript:jQuery(this).switch_previsu()'>" 
-				. _T('spiplistes:version_texte') . "</a>\n"
-			. "<div class='previsu-content'>\n"
+				. ' / ' . '<a href="javascript:jQuery(this).switch_previsu()">' 
+				. _T('spiplistes:version_texte') . '</a>'.$eol
+			. '<div class="previsu-content">'.$eol
 			. $message_html
-			. $message_erreur
-			. $pied_html
 			. $tampon_html
-			. "</div>\n"
-			. "</div>\n" // fin id='previsu-html
-			. "<div id='previsu-texte' class='switch-previsu' style='display:none;'>\n"
-			. "<a href='javascript:jQuery(this).switch_previsu()'>" . _T('spiplistes:version_html') . "</a>\n"
-				. " / " 
+			. '</div>'.$eol
+			. '</div>'.$eol // fin id='previsu-html
+			. '<div id="previsu-texte" class="switch-previsu" style="display:none;">'.$eol
+			. '<a href="javascript:jQuery(this).switch_previsu()">'
+				. _T('spiplistes:version_html') . '</a>'.$eol
+				. ' / ' 
 				. _T('spiplistes:version_texte') 
-			. "<div class='previsu-content'>\n"
-			. "<pre>"
+			. '<div class="previsu-content">'.$eol
+			. '<pre>'
 			. $message_texte
-			. $message_erreur
-			. $pied_texte
 			. $tampon_texte
-			. "</pre>"
-			. "</div>\n"
-			. "</div>\n" // fin id='previsu-texte
-			. "<p style='text-align:right;margin-bottom:0;'>"
-			. "<input type='hidden' name='modifier_message' value='oui' />\n"
+			. '</pre>'.$eol
+			. '</div>'.$eol
+			. '</div>'.$eol // fin id='previsu-texte
+			. '<p style="text-align:right;margin-bottom:0;">'.$eol
+			. '<input type="hidden" name="modifier_message" value="oui" />'.$eol
 			.	(
 					($id_courrier)
 					?	"<input type='hidden' name='id_courrier' value='$id_courrier' />\n"
 					:	"<input type='hidden' name='new' value='oui' />\n"
 				)
-			. "<input type='hidden' name='titre' value=\"".htmlspecialchars($titre)."\">\n"
-			. "<input type='hidden' name='message' value=\"".htmlspecialchars($message_html)."\">\n"
-			. "<input type='hidden' name='message_texte' value=\"".htmlspecialchars($message_texte)."\">\n"
-			. "<input type='hidden' name='date' value='$date'>\n"
-			. "<input type='submit' name='btn_courrier_valider' value='"._T('bouton_valider')."' class='fondo' /></p>\n"
-			. "</form>\n"
+			. '<input type="hidden" name="titre" value="'.htmlspecialchars($titre).'">'.$eol
+			. '<input type="hidden" name="message" value="'.htmlspecialchars($message_html).'">'.$eol
+			. '<input type="hidden" name="message_texte" value="'.htmlspecialchars($message_texte).'">'.$eol
+			. '<input type="hidden" name="date" value="'.$date.'">'.$eol
+			. '<input type="submit" name="btn_courrier_valider"
+				value="'._T('bouton_valider').'" class="fondo" /></p>'.$eol
+			. '</form>'.$eol
 			. fin_cadre_couleur(true)
-			. "<br />\n"
+			. '<br />'.$eol
 			;
 		echo($page_result);
-
 	}
 	exit(0);
 }	
