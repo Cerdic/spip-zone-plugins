@@ -1,6 +1,7 @@
 <?php
 
 function pubban_poubelle_pleine(){
+	include_spip('base/abstract_sql');
 	$trash = sql_countsel($GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='5poubelle'", '', '', '', '', _BDD_PUBBAN) + sql_countsel($GLOBALS['_PUBBAN_CONF']['table_empl'], "statut='5poubelle'", '', '', '', '', _BDD_PUBBAN);
 	return $trash;
 }
@@ -21,6 +22,7 @@ function pubban_lien_doc(){
  * Affichage des statistiques generales
  */
 function afficher_statistiques_pubban($return=false, $div='', $plie='deplie') {
+	include_spip('base/abstract_sql');
 
 	$div = "<div id='$div' class='bloc_depliable bloc$plie'><table width='100%'>";
 
@@ -84,6 +86,7 @@ function afficher_statistiques_pubban($return=false, $div='', $plie='deplie') {
  * Moteur de rcherche Pubban
  */
 function pubban_search($str){
+	include_spip('base/abstract_sql');
 	$results = array('pub', 'emp');
 	$i=0;
 	$j=0;

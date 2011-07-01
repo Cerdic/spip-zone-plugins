@@ -49,12 +49,12 @@ define('PUBBAN_FORCE_UNINSTALL', 0);
 /**
  * Adresse du displayer de pub
  */
-define('_PUBBAN_ADDS_DISPLAYER', $GLOBALS['meta']['adresse_site'].'/?page=pub_displayer');
+define('_PUBBAN_ADDS_DISPLAYER', 'pub_displayer');
 
 /**
  * Adresse du cliqueur
  */
-define('_PUBBAN_ADDS_CLICKER', $GLOBALS['meta']['adresse_site'].'/?page=clic');
+define('_PUBBAN_ADDS_CLICKER', 'clic');
 
 /**
  * Chemin vers les images PUB
@@ -141,6 +141,7 @@ if(test_espace_prive())
  * @return array	Les donnŽes de la pub (ou la valeur du paramtre si demandŽ)
  */
 function pubban_recuperer_pub($id_pub, $str=false) {
+	include_spip('base/abstract_sql');
 	$vals = array();
 	if($id_pub != '0') {
 		$resultat = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_pub'],"id_pub=".intval($id_pub)	, '', '', '', '', _BDD_PUBBAN);
@@ -200,6 +201,7 @@ function pubban_comparer_emplacements($emp){
  * @return array	Les donnŽes de la banniere (ou la valeur du paramtre si demandŽ)
  */
 function pubban_recuperer_emplacement($id_empl, $str=false) {
+	include_spip('base/abstract_sql');
 	$vals = array();
 	if($id_empl != '0') {
 		$resultat = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_empl'],"id_empl=".intval($id_empl), '', '', '', '', _BDD_PUBBAN);
@@ -232,6 +234,7 @@ function pubban_recuperer_emplacement($id_empl, $str=false) {
  * @return integer	L'ID recherche
  */
 function pubban_recuperer_emplacement_par_nom($name) {
+	include_spip('base/abstract_sql');
 	$_name = str_replace('_', ' ', strtolower($name));
 	$id_empl = sql_getfetsel("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "titre LIKE ('$name')", '', '', '', '', _BDD_PUBBAN);
 	if($id_empl) return( $vals = pubban_recuperer_emplacement($id_empl) );
@@ -239,6 +242,7 @@ function pubban_recuperer_emplacement_par_nom($name) {
 }
 
 function pubban_liste_empl($statut=false){
+	include_spip('base/abstract_sql');
 	$emplacements = array();
 	if($statut AND !is_array($statut))
 		$statut = array( $statut );
@@ -254,6 +258,7 @@ function pubban_liste_empl($statut=false){
 
 function pubban_trouver_emplacements($id_pub){
 	if($id_pub == '0') return;
+	include_spip('base/abstract_sql');
 	$emplacements = array();
 	$resultat = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_join'], 'id_pub='.intval($id_pub), '', '', '', '', _BDD_PUBBAN);
 	if (sql_count($resultat) > 0) {

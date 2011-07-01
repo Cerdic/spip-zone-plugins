@@ -72,6 +72,7 @@ function exec_pubban_admin_dist() {
 		}
 	}
 
+	include_spip('base/abstract_sql');
 	$verif_empl = sql_countsel($GLOBALS['_PUBBAN_CONF']['table_empl'], '', '', '', '', '', _BDD_PUBBAN);
 	$verif = sql_countsel($GLOBALS['_PUBBAN_CONF']['table_pub'], '', '', '', '', '', _BDD_PUBBAN);
 	$bloc_pliable_plie = ( $verif != 0 AND $verif_empl != 0 AND !$stats_ferme ) ? 'deplie' : 'replie';

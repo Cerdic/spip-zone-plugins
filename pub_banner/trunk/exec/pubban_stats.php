@@ -12,6 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_pubban_stats_dist() {
 	global $connect_statut, $connect_id_auteur, $spip_lang_right, $spip_lang_left;
 	include_spip('inc/presentation');
+	include_spip('base/abstract_sql');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
  	$titre_page = _T('pubban:stats_pubban');
 	$rubrique = 'pubban';

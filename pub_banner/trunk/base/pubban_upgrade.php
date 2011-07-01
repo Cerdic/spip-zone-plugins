@@ -8,13 +8,13 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/pubban_chargeur');
+include_spip('base/abstract_sql');
 
 function pubban_upgrade($nom_meta_base_version,$version_cible) {
 	include_spip('inc/meta');
 	$current_version = 0.0;
 	if (!isset($GLOBALS['meta'][$nom_meta_base_version])
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		include_spip('base/abstract_sql');
 		include_spip('base/create');
 		maj_tables(array(
 			$GLOBALS['_PUBBAN_CONF']['table_pub'],

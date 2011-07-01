@@ -14,6 +14,7 @@ function balise_CLIC_BANNER($p) {
 }
 
 function balise_CLIC_BANNER_dyn($p, $id_pub, $id_empl) {
+	include_spip('base/abstract_sql');
 	$id_pub = _request('id_pub');
 	$id_empl = _request('id_empl') ? _request('id_empl') : $pub['emplacement'];
 	$redirect = _request('redirect') ? _request('redirect') : false;

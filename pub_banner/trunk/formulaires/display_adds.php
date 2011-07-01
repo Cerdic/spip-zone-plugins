@@ -11,6 +11,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_display_adds_charger_dist(){
 	include_spip('inc/pubban_process');
+	include_spip('base/abstract_sql');
 	$emplacement = pubban_recuperer_emplacement_par_nom(_request('empl'));
 	if($emplacement['statut'] != '2actif') return;
 
@@ -61,7 +62,7 @@ function formulaires_display_adds_charger_dist(){
 		'id_pub' => $id_pub,
 		'type' => $type,
 		'code' => $code,
-		'java_goto' => _PUBBAN_ADDS_CLICKER,
+		'java_goto' => generer_url_public(_PUBBAN_ADDS_CLICKER),
 		'width' => $emplacement['width'],
 		'height' => $emplacement['height']
 	);

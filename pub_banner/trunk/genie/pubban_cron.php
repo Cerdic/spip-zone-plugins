@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * si necessaire ...
  */
 function genie_pubban_cron($time){
+	include_spip('base/abstract_sql');
 	$nb_modif = $nb_delete = $nb_errors = 0;
 	$gdate = date("Y-m-d");
 

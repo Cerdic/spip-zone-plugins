@@ -5,6 +5,7 @@
 // ----------------------------
 
 function pubban_pubs_de_emplacement($id_emp, $toutes=true){
+	include_spip('base/abstract_sql');
 	$list_pub = array();
 	$requete = sql_select("id_pub", $GLOBALS['_PUBBAN_CONF']['table_join'], "id_empl=".intval($id_emp), '', '', '', '', _BDD_PUBBAN);
 	if (sql_count($requete) > 0) {
@@ -30,6 +31,7 @@ function pubban_pubs_de_emplacement($id_emp, $toutes=true){
  * Liste les emplacements dans lesquels la pub est présente
  */
 function pubban_emplacements_de_la_pub($id_pub, $id_empl_verif=false){
+	include_spip('base/abstract_sql');
 	$list_emp = array();
 	$requete = sql_select("id_empl", $GLOBALS['_PUBBAN_CONF']['table_join'], "id_pub=".intval($id_pub), '', '', '', '', _BDD_PUBBAN);
 	if (sql_count($requete) > 0) {

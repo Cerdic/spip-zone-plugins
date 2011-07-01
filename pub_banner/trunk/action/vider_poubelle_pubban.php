@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_vider_poubelle_pubban(){
+	include_spip('base/abstract_sql');
 	$resultat1 = sql_select("id_pub", $GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='5poubelle'", '', '', '', '', _BDD_PUBBAN);
 	if (sql_count($resultat1) > 0) {
 		while ($row = spip_fetch_array($resultat1)) {

@@ -10,6 +10,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_stats_adds_charger_dist(){
+	include_spip('base/abstract_sql');
 	$valeurs = array(
 		'action' => generer_url_ecrire('pubban_stats'),
 		'date_today' => date("d/m/Y"),
