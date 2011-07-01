@@ -2,7 +2,7 @@
     <nom><multi>[fr]Saisies pour formulaires[en]Entries for forms</multi></nom>
     <auteur>Matthieu Marcillaud - RastaPopoulos - Joseph</auteur>
     <licence>&#169; 2009 GNU/GPL</licence>
-    <version>1.9.9</version>
+    <version>1.9.10</version>
     <etat>test</etat>
     <categorie>outil</categorie>
     
@@ -31,6 +31,7 @@
     
     <fonctions>balise/saisie.php</fonctions>
     <fonctions>inc/saisies.php</fonctions>
+    <options>saisies_options.php</options>
 
     <pipeline>
     	<nom>header_prive</nom>
