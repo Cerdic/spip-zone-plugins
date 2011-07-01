@@ -9,10 +9,11 @@ function pubban_poubelle_pleine(){
 // FONCTIONS AFFICHAGE
 // ---------------------
 
+// On change vers 'pubban_documentation' (precedemment 'doc_pub_banner' via PhpDoc)
 function pubban_lien_doc(){
 	$div = "<br/><br/><hr>"._T('pubban:doc_info')
-		. icone_horizontale(_T('pubban:see_doc'), generer_url_public('doc_pub_banner'), "article-24.gif", "rien.gif", false)
-		. "[<a href='".generer_url_public('doc_pub_banner')."' target='_blank' title='"._T('pubban:see_doc_in_new_window')."'>"._T('pubban:new_window')."</a>]";
+		. icone_horizontale(_T('pubban:see_doc'), generer_url_public('pubban_documentation'), "article-24.gif", "rien.gif", false)
+		. "[<a href='".generer_url_public('pubban_documentation')."' target='_blank' title='"._T('pubban:see_doc_in_new_window')."'>"._T('pubban:new_window')."</a>]";
 	return $div;
 }
 

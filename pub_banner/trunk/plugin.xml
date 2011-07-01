@@ -17,7 +17,7 @@ Gestion et statistiques de banni&#232;res publicitaires pour int&#233;gr&#233;es
 
 {{AIDE / DOC}}
 -* Une explication ainsi qu'un exemple complet sont disponibles dans la documentation, qui vous permettra &#233;galement de visualiser l'int&#233;gration des banni&#232;res dans vos squelettes.
-Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique [doc_pub_banner->/?page=doc_pub_banner].
+Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique [pubban_documentation->/?page=pubban_documentation].
 
 -* La page de statistiques du plugin est une adaptation libre du script '{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}' d&#233;velopp&#233; par {{Vincent Roseberry}} ({sous licence GPL &#224; l'&#233;poque}).
 	</description>

@@ -20,7 +20,8 @@
 	</div><!--#conteneur-->
 	[(#REM) Menu de navigation laterale ]
 	<div id="navigation">
-	[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inc-rubriques}>]
+		[(#ENV{docmode}|=={brut}|non)<INCLURE{fond=inc-rubriques}>]
+		<INCLURE{fond=navigation/doc_pubbaner}{env}>
     </div><!--#navigation-->
 	<div id="extra">
 	</div><!--#extra-->
