@@ -41,13 +41,13 @@ function plugins_preparer_sql_plugin($plugin)
 	$champs['tags'] = ($plugin['tags']) ? serialize($plugin['tags']) : '';
 	
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
-	$champs['description'] = unicode2charset(html2unicode($plugin['description']));
+	$champs['description'] = unicode2charset($plugin['description']);
 	
 	// Traitement des auteurs, credits, licences et copyright
 	// -- on extrait les auteurs, licences et copyrights sous forme de tableaux
-	$plugin['auteur'] = unicode2charset(html2unicode($plugin['auteur']));
+	$plugin['auteur'] = unicode2charset($plugin['auteur']);
 	$auteurs = normaliser_auteur_licence($plugin['auteur'], 'auteur');
-	$plugin['licence'] = unicode2charset(html2unicode($plugin['licence']));
+	$plugin['licence'] = unicode2charset($plugin['licence']);
 	$licences = normaliser_auteur_licence($plugin['licence'], 'licence');
 	// -- on merge les tableaux recuperes dans auteur et licence
 	$champs['auteur'] = $champs['licence'] = $champs['copyright'] = '';
@@ -59,14 +59,10 @@ function plugins_preparer_sql_plugin($plugin)
 		$champs['copyright'] = serialize($t);
 	
 	// Extrait d'un nom et un slogan normalises
-	$plugin['slogan'] = unicode2charset(html2unicode($plugin['slogan']));
-	$plugin['nom'] = unicode2charset(html2unicode($plugin['nom']));
-	// Calcul *temporaire* de la nouvelles balise slogan si celle-ci n'est
-	// pas renseignee et de la balise nom. Ceci devrait etre temporaire jusqu'a la nouvelle ere
-	// glaciaire des plugins
-	// - Slogan	:	si vide alors on prend la premiere phrase de la description limitee a 255
-	$champs['slogan'] = (!$plugin['slogan']) ? normaliser_slogan($champs['description']) : $plugin['slogan'];
-	// - Nom :	on repere dans le nom du plugin un chiffre en fin de nom
+	// Slogan : si vide on ne fait plus rien de special, on traitera ça a l'affichage
+	$champs['slogan'] = $plugin['slogan'] ? unicode2charset($plugin['slogan']) : '';
+	$plugin['nom'] = unicode2charset($plugin['nom']);
+	// Nom :	on repere dans le nom du plugin un chiffre en fin de nom
 	//			et on l'ampute de ce numero pour le normaliser
 	//			et on passe tout en unicode avec le charset du site
 	$champs['nom'] = normaliser_nom($plugin['nom'], 'fr', false);
@@ -87,34 +83,6 @@ function plugins_preparer_sql_plugin($plugin)
 	$champs['credit'] = '';
 
 	return $champs;
-}
-
-
-function normaliser_slogan($description) {
-	include_spip('inc/texte');
-
-	// On extrait les traductions de l'eventuel multi
-	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
-	$descriptions = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $description, $nbr_replace));
-	$multi = ($nbr_replace > 0) ? true : false;
-
-	// On boucle sur chaque multi ou sur la chaine elle-meme en extrayant le slogan
-	// dans les differentes langues
-	$slogan = '';
-	foreach ($descriptions as $_lang => $_descr) {
-		$_descr = trim($_descr);
-		if (!$_lang)
-			$_lang = 'fr';
-		$nbr_matches = preg_match(',^(.+)[.!?\r\n\f],Um', $_descr, $matches);
-		$slogan .= (($multi) ? '[' . $_lang . ']' : '') . 
-					(($nbr_matches > 0) ? trim($matches[1]) : couper($_descr, 80, ''));
-	}
-
-	if ($slogan)
-		// On renvoie un nouveau slogan multi ou pas
-		$slogan = (($multi) ? '<multi>' : '') . $slogan . (($multi) ? '</multi>' : '');
-
-	return $slogan;
 }
 
 

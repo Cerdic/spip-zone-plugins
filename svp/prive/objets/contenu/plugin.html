@@ -9,7 +9,7 @@
 </div>
 <div class="champ contenu_texte[ (#SLOGAN*|strlen|?{'',vide})]">
 	<div class='label'><:info_descriptif:></div>
-	<div dir='#LANG_DIR' class='texte'>#SLOGAN</div>
+	<div dir='#LANG_DIR' class='texte'>[(#SLOGAN|sinon{#DESCRIPTION|couper{80}})]</div>
 </div>
 <div class="champ contenu_ps">
 	<div class='label'><:svp:label_categorie:>&nbsp;:</div>

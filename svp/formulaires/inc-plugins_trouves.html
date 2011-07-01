@@ -15,7 +15,7 @@
 				<span class="version">[(#VALEUR{version})]</span>
 				<span class="etat">[ - (#VALEUR{etat})]</span>
 				[<span class="installe"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
-				<div class="short">[(#VALEUR{slogan})]</div>
+				<div class="short">[(#VALEUR{slogan}|sinon{#VALEUR{description}|couper{80}})]</div>
 				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
 			</div>
 
