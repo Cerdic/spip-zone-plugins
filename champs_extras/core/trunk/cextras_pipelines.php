@@ -155,7 +155,7 @@ function cextras_editer_contenu_objet($flux){
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la saisie est autorisee
-			$type = $c->_type . '_' . $c->champ;
+			$type = $c->_type . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
 			include_spip('inc/autoriser');
 			if (autoriser('modifierextra', $type, $flux['args']['id'], '', array(
 				'type' => $flux['args']['type'],
@@ -232,7 +232,7 @@ function cextras_afficher_contenu_objet($flux){
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la vue est autorisee
-			$type = objet_type($c->table) . '_' . $c->champ;
+			$type = objet_type($c->table) . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
 			include_spip('inc/autoriser');
 			if (autoriser('voirextra', $type, $flux['args']['id_objet'], '', array(
 				'type' => $flux['args']['type'],
@@ -295,7 +295,7 @@ function cextras_formulaire_verifier($flux){
 				// obligatoire, mais qu'il n'est pas visible dans le formulaire
 				// (si affiche uniquement pour la rubrique XX par exemple).
 				// On teste seulement les champs dont la modification est autorisee
-				$type = $c->_type . '_' . $c->champ;
+				$type = $c->_type . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
 				$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
 
 				// l'autorisation n'a pas de contexte a transmettre

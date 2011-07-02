@@ -7,6 +7,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function cextras_autoriser(){}
 
 
+define('_SEPARATEUR_CEXTRAS_AUTORISER', '0');
+
 /**
   * Autorisation de voir un champ extra
   * autoriser('voirextra','auteur_prenom', $id_auteur);
@@ -60,7 +62,8 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 	$m = '_modifierextra_dist';
 	$v = '_voirextra_dist';
 	foreach ($noms as $nom) {
-		$f = "autoriser_$objet" . "_$nom";
+		$nom = str_replace('_', '', $nom);
+		$f = "autoriser_$objet" . _SEPARATEUR_CEXTRAS_AUTORISER . "$nom";
 		$code = "
 			if (!function_exists('$f$m')) {
 				function $f$m(\$faire, \$type, \$id, \$qui, \$opt) {
@@ -73,7 +76,8 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 				}
 			}
 		";
-#		echo $code;
+
+		# var_dump($code);
 		eval($code);
 	}
 
@@ -144,13 +148,14 @@ function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubriq
 function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id_cible) {
 
     $id_cible = $opt['contexte'][$_id_cible];
-
+  
     if (!$id_cible) {
 		// on tente de le trouver dans la table de l'objet
 		$table = table_objet_sql($objet);
 		$id_table = id_table_objet($table);
 		include_spip('base/objets');
 		$desc = lister_tables_objets_sql($table);
+  
 		if (isset($desc['field'][$_id_cible])) {
 			$id_cible = sql_getfetsel($_id_cible, $table, "$id_table=".sql_quote($id_objet));
 		}
@@ -197,6 +202,7 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 function inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt, $ids, $recursif) {
 
 	list($id_rubrique, $ok) = _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, 'id_rubrique');
+
 	if ($ok) {
 		return true;
 	}
