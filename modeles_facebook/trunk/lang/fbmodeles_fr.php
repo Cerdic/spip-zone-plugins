@@ -36,7 +36,7 @@ Pour inclure les balises "Open Graph" en en-t&ecirc;te de vos pages publiques, v
 	'cfg_reglages' => 'R&eacute;glages par d&eacute;faut',
 	'cfg_comment_reglages' => '{{Vous pouvez ici choisir certains r&eacute;glages concernant les outils javascript de Facebook.}} Par d&eacute;faut, les mod&egrave;les utilisent le langage XFBML ({SDK javascript Facebook}) mais vous pouvez d&eacute;sactiver cette fonctionnalit&eacute;, les outils seront alors charg&eacute;s en frames.',
 	'cfg_label_appid' => 'Identifiant application "App ID"',
-	'cfg_comment_appid' => 'Identifiant d\'une application propore &agrave; vote site ; cela n&eacute;cessite d\'avoir cr&eacute;&eacute; l\'application.',
+	'cfg_comment_appid' => 'Identifiant d\'une application propre &agrave; vote site ; cela n&eacute;cessite d\'avoir cr&eacute;&eacute; l\'application.',
 	'cfg_label_pageid' => 'Identifiant page "Page ID"',
 	'cfg_comment_pageid' => 'Identifiant d\'une page ; cela n&eacute;cessite d\'avoir cr&eacute;&eacute; la page.',
 	'cfg_label_userid' => 'Identifiant utilisateur "User ID"',
