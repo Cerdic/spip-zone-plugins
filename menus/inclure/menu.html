@@ -2,7 +2,7 @@
 <BOUCLE_menu(MENUS){id_menu?}{identifiant?}>
 	
 	<B_entrees>
-	<ul class="menu-liste menu-items[ (#ENV{css})]">
+	<ul class="menu-liste menu-items[ (#CHAMP_SQL{css})]">
 		<BOUCLE_entrees(MENUS_ENTREES){id_menu}{par rang}>
 		#MENUS_AFFICHER_ENTREE
 			<BOUCLE_sous_menu(MENUS){id_menus_entree}>
