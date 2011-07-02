@@ -22,7 +22,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	// Si le formulaire actuel est différent du formulaire initial on agite un drapeau pour le dire
 	if ($formulaire_actuel != $formulaire_initial){
 		$contexte['formulaire_modifie'] = true;
-		$contexte['_message_attention'] = _T('formidable:construire_attention_modifie');
+		$contexte['_message_attention'] = _T('saisies:construire_attention_modifie');
 	}
 	
 	// On passe ça pour l'affichage
@@ -77,8 +77,8 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 				'saisie' => 'selection',
 				'options' => array(
 					'nom' => "saisie_modifiee_${nom}[verifier][type]",
-					'label' => _T('formidable:construire_verifications_label'),
-					'option_intro' => _T('formidable:construire_verifications_aucune'),
+					'label' => _T('saisies:construire_verifications_label'),
+					'option_intro' => _T('saisies:construire_verifications_aucune'),
 					'li_class' => 'liste_verifications',
 					'datas' => array()
 				)
@@ -293,8 +293,8 @@ function formidable_generer_saisie_configurable($saisie, $env){
 				'saisie' => 'position_construire_formulaire',
 				'options' => array(
 					'nom' => "saisie_modifiee_${nom}[position]",
-					'label' => _T('formidable:construire_position_label'),
-					'explication' => _T('formidable:construire_position_explication'),
+					'label' => _T('saisies:construire_position_label'),
+					'explication' => _T('saisies:construire_position_explication'),
 					'formulaire' => $env['_contenu'],
 					'saisie_a_positionner' => $nom
 				)

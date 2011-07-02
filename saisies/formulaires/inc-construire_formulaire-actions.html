@@ -1,21 +1,21 @@
 <div class="actions">
 	[(#ENV{formulaire_config}|is_array|non)
-	<button type="submit" class="submit configurer_saisie" name="configurer_saisie" value="#ENV{nom}" title="<:formidable:construire_action_configurer:>">
-		<img src="[(#CHEMIN{images/formulaire-configurer-16.png})]" alt="<:formidable:construire_action_configurer:>"/>
+	<button type="submit" class="submit configurer_saisie" name="configurer_saisie" value="#ENV{nom}" title="<:saisies:construire_action_configurer:>">
+		<img src="[(#CHEMIN{images/formulaire-configurer-16.png})]" alt="<:saisies:construire_action_configurer:>"/>
 	</button>
-	<button type="submit" class="submit dupliquer_saisie" name="dupliquer_saisie" value="#ENV{nom}" title="<:formidable:construire_action_dupliquer:>">
-		<img src="[(#CHEMIN{images/formulaire-dupliquer-16.png})]" alt="<:formidable:construire_action_dupliquer:>"/>
+	<button type="submit" class="submit dupliquer_saisie" name="dupliquer_saisie" value="#ENV{nom}" title="<:saisies:construire_action_dupliquer:>">
+		<img src="[(#CHEMIN{images/formulaire-dupliquer-16.png})]" alt="<:saisies:construire_action_dupliquer:>"/>
 	</button>
-	<button type="submit" class="submit supprimer_saisie" name="supprimer_saisie" value="#ENV{nom}" title="<:formidable:construire_action_supprimer:>" onclick="javascript:return confirm('<:formidable:construire_confirmer_supprimer_champ:>');">
-		<img src="[(#CHEMIN{images/formulaire-supprimer-16.png})]" alt="<:formidable:construire_action_supprimer:>"/>
+	<button type="submit" class="submit supprimer_saisie" name="supprimer_saisie" value="#ENV{nom}" title="<:saisies:construire_action_supprimer:>" onclick="javascript:return confirm('<:saisies:construire_confirmer_supprimer_champ:>');">
+		<img src="[(#CHEMIN{images/formulaire-supprimer-16.png})]" alt="<:saisies:construire_action_supprimer:>"/>
 	</button>
 	]
 	[(#ENV{formulaire_config}|is_array|oui)
 	<button type="submit" class="submit enregistrer_saisie" name="enregistrer_saisie" value="#ENV{nom}" title="<:bouton_enregistrer:>">
 		<img src="[(#CHEMIN{images/formulaire-enregistrer-16.png})]" alt="<:bouton_enregistrer:>"/>
 	</button>
-	<button type="submit" class="submit annuler" name="enregistrer_saisie" value="" title="<:formidable:construire_action_annuler:>">
-		<img src="[(#CHEMIN{images/formulaire-annuler-16.png})]" alt="<:formidable:construire_action_annuler:>"/>
+	<button type="submit" class="submit annuler" name="enregistrer_saisie" value="" title="<:saisies:construire_action_annuler:>">
+		<img src="[(#CHEMIN{images/formulaire-annuler-16.png})]" alt="<:saisies:construire_action_annuler:>"/>
 	</button>
 	]
 </div>

@@ -11,6 +11,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_docs_rubrique' => 'Parcourir la rubrique',
 	'bouton_parcourir_mediatheque' => 'Parcourir la médiathèque',
 
+	// C
+	'construire_action_annuler' => 'Annuler',
+	'construire_action_configurer' => 'Configurer',
+	'construire_action_dupliquer' => 'Dupliquer',
+	'construire_action_supprimer' => 'Supprimer',
+	'construire_ajouter_champ' => 'Ajouter un champ',
+	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !',
+	'construire_attention_modifie' => 'Le formulaire ci-dessous est diff&eacute;rent du formulaire initial. Vous avez la possibilit&eacute; de le r&eacute;initialiser &agrave; son &eacute;tat avant vos modifications.',
+	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.',
+	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.',
+	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?',
+	'construire_position_explication' => 'Indiquez devant quel autre champ sera plac&eacute; celui-ci.',
+	'construire_position_fin_groupe' => '&Agrave; la fin du groupe @groupe@',
+	'construire_position_fin_formulaire' => '&Agrave; la fin du formulaire',
+	'construire_position_label' => 'Position du champ',
+	'construire_reinitialiser' => 'R&eacute;initialiser le formulaire',
+	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?',
+	'construire_verifications_aucune' => 'Aucune',
+	'construire_verifications_label' => 'Type de v&eacute;rification &agrave; effectuer',
+
 	// L
 	'label_annee' => 'Année',
 	'label_jour' => 'Jour',
