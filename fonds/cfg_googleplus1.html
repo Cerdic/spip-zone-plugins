@@ -1,0 +1,30 @@
+[(#REM) descriptif=
+<h4>Configuration du plugin Google plus 1</h4>
+<br />
+]
+
+[(#REM) titre=Google +1]
+[(#REM) icone=images/plusone-32.png]
+#CACHE{0}
+
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
+
+<fieldset><legend><:googleplus1:taille:></legend>
+<p>
+
+
+<select name="googleplus1_taille" id="googleplus1_taille">
+<option value="small"[(#ENV{googleplus1_taille}|=={small}|oui)selected="selected"]><:googleplus1:taillepetit:></option>
+<option value="standard"[(#ENV{googleplus1_taille}|=={standard}|oui)selected="selected"]><:googleplus1:taillestandard:></option>
+<option value="medium"[(#ENV{googleplus1_taille}|=={medium}|oui)selected="selected"]><:googleplus1:taillemoyen:></option>
+<option value="tall"[(#ENV{googleplus1_taille}|=={tall}|oui)selected="selected"]><:googleplus1:taillegrand:></option>
+</fieldset>
+</p>
+
+
+<div>
+<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+<input type="reset" value="<:reset:>" class="fondo" />
+</div>
+</form>
+
