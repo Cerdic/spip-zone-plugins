@@ -5,6 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /* 
  * Déclarer les nouveaux champs et 
  * les nouvelles infos des objets éditoriaux
+ * 
+ * /!\ Ne pas utiliser table_objet() qui ferait une reentrance et des calculs faux.
  */
 function cextras_declarer_tables_objets_sql($tables){
 
@@ -58,7 +60,6 @@ function cextras_declarer_tables_interfaces($interface){
 	// ajoutons les filtres sur les champs
 	foreach ($champs as $c){
 		if ($c->traitements and $c->champ and $c->sql) {
-			$tobjet = $c->_objet;
 			$balise = strtoupper($c->champ);
 			// definir
 			if (!isset($interface['table_des_traitements'][$balise])) {
@@ -66,7 +67,9 @@ function cextras_declarer_tables_interfaces($interface){
 			}
 			// le traitement peut etre le nom d'un define
 			$traitement = defined($c->traitements) ? constant($c->traitements) : $c->traitements;
-			$interface['table_des_traitements'][$balise][$tobjet] = $traitement;
+			
+			// SPIP 3 permet de declarer par la table sql directement.
+			$interface['table_des_traitements'][$balise][$c->table] = $traitement;
 		}
 	}
 	// ajouter les champs au tableau spip

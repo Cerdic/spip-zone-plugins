@@ -43,7 +43,17 @@ class ChampExtra{
 	// constructeur
 	function ChampExtra($params=array()) {
 		$this->definir($params);
+
+		// ne pas definir les objets à la creation
+		// car au moment de l'appel de declarer_table_objet_sql
+		// il peut y avoir une reentrance, via table_objet, surnoms,
+		// dans declarer_table_objet_sql, renvoyant alors 0, puis aucun surnom,
+		// et ne calculant finalement pas un table_objet correct.
+		// On definit donc plus tard, au besoin.
+		# $this->definir_raccourcis();
+
 	}
+
 
 	// definir les champs
 	function definir($params=array()) {
@@ -53,14 +63,15 @@ class ChampExtra{
 			}
 		}
 		
-		// calculer _objet et _table_sql
-		$this->_type      = objet_type(table_objet($this->table)); // article
-		$this->_objet     = table_objet($this->_type); // articles
-		
-		// calculer l'id du champ extra
 		$this->make_id();
 	}
 
+	// definir les raccourcis _objet _type
+	function definir_raccourcis($params=array()) {			
+		$this->_objet     = table_objet($this->table); // articles
+		$this->_type      = objet_type($this->_objet); // article
+	}
+	
 	// creer l'id du champ extra :
 	function make_id(){
 		// creer un hash

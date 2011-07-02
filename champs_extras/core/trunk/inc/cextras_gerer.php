@@ -112,7 +112,7 @@ function creer_champs_extras($champs) {
 	$trouver_table(''); // recreer la description des tables.
 	$retour = true;
 	foreach ($champs as $c){
-		if ($objet = $c->_objet) {
+		if ($objet = table_objet($c->table)) {
 			$desc = $trouver_table($objet);
 			if (!isset($desc['field'][$c->champ])) {
 				extras_log("Le champ extra '" . $c->champ . "' sur $objet n'a pas ete cree :(", true);

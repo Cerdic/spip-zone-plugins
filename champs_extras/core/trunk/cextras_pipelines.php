@@ -15,7 +15,7 @@ function cextras_data_array($data) {
 	} else {
 		foreach ($vals = explode("\n", $data) as $x) {
 			list($cle, $desc) = explode(',', trim($x), 2);
-			$datas[$cle] = _T($desc);
+			$datas[$cle] = _T_ou_typo($desc);
 		}
 	}
 	return $datas;	
@@ -30,30 +30,21 @@ function ce_calculer_saisie($c, $contexte, $prefixe='') {
 	// pas besoin de la config de SPIP ?
 	unset($contexte['config']);
 
-
 	$nom_champ = $prefixe . $c->champ;
 	$contexte['nom'] = $nom_champ;
 	$contexte['type_saisie'] = $c->saisie;
-	$contexte['label'] = _T($c->label);
+
 	if (isset($contexte[$nom_champ]) and $contexte[$nom_champ]) {
 		$contexte['valeur'] = $contexte[$nom_champ];
 	}
 
+	// a faire reellement ou les saisies s'en occupent ?
 	if ($c->saisie_parametres['datas']) {
 		$contexte['datas'] = cextras_data_array($c->saisie_parametres['datas']);
 	}
 
-	$params = $c->saisie_parametres;
-
-	// traductions a faire
-	$contexte['explication'] = _T($params['explication']);
-	$contexte['attention'] = _T($params['attention']);
-
-	unset (	$params['explication'],
-			$params['attention']);
-
 	// tout inserer le reste des champs
-	$contexte = array_merge($contexte, $params);
+	$contexte = array_merge($contexte, $c->saisie_parametres);
 
 	
 	// lorsqu'on a 'datas', c'est qu'on est dans une liste de choix.
@@ -94,23 +85,22 @@ function cextra_quete_valeurs_extras($extras, $type, $id){
 
 // recuperer tous les extras qui verifient le critere demande :
 // l'objet sur lequel s'applique l'extra est comparee a $type
-function cextras_get_extras_match($type) {
+function cextras_get_extras_match($table) {
 	static $champs = false;
 	if ($champs === false) {
 		$champs = pipeline('declarer_champs_extras', array());
 	}
-	
+
 	$extras = array();
 	if ($champs) {
-		$type = objet_type(table_objet($type));
 		foreach ($champs as $c) {
 			// attention aux cas compliques site->syndic !
-			if ($type == $c->_type and $c->champ and $c->sql) {
+			if ($table == $c->table and $c->champ and $c->sql) {
 				$extras[] = $c;
 			}
 		}
 	}
-	
+
 	return $extras;
 }
 
@@ -123,8 +113,8 @@ function cextras_get_extras_match($type) {
  * 
  * @return ChampExtra|false
 **/
-function cextras_get_extra($type, $champ) {
-	$extras = cextras_get_extras_match($type);
+function cextras_get_extra($table, $champ) {
+	$extras = cextras_get_extras_match($table);
 	foreach ($extras as $c) {
 		if ($c->champ == $champ) {
 			return $c;
@@ -139,8 +129,10 @@ function cextras_get_extra($type, $champ) {
 
 // ajouter les champs sur les formulaires CVT editer_xx
 function cextras_editer_contenu_objet($flux){
+
 	// recuperer les champs crees par les plugins
-	if ($extras = cextras_get_extras_match($flux['args']['type'])) {
+	if ($extras = cextras_get_extras_match( table_objet_sql($flux['args']['type'])) ) {
+
 		// les saisies a ajouter seront mises dedans.
 		$inserer_saisie = '';
 
@@ -154,7 +146,7 @@ function cextras_editer_contenu_objet($flux){
 		// il faut qu'il s'occupe lui même d'ajouter les données via
 		// le pipeline formulaire_charger de spip_auteurs (pour cet exemple) avec les bons prefixe.
 		if (isset($flux['args']['prefixe_champs_extras']) and $prefixe = $flux['args']['prefixe_champs_extras']) {
-			$inserer_saisie .= "<input type='hidden' name='prefixe_champs_extras_" . $flux['args']['type'] . "' value='$prefixe' />\n";
+			$inserer_saisie .= "<input type='hidden' name='prefixe_champs_extras_" . table_objet_sql($flux['args']['type']) . "' value='$prefixe' />\n";
 		} else {
 			$prefixe = '';
 		}
@@ -205,8 +197,7 @@ function cextras_pre_edition($flux){
 	// recuperer les champs crees par les plugins
 	if ($extras = cextras_get_extras_match($flux['args']['table'])) {
 		// recherchons un eventuel prefixe utilise pour poster les champs
-		$type = objet_type(table_objet($flux['args']['table']));
-		$prefixe = _request('prefixe_champs_extras_' . $type);
+		$prefixe = _request('prefixe_champs_extras_' . $flux['args']['table']);
 		if (!$prefixe) {
 			$prefixe = '';
 		}
@@ -229,7 +220,7 @@ function cextras_pre_edition($flux){
 function cextras_afficher_contenu_objet($flux){
 
 	// recuperer les champs crees par les plugins
-	if ($extras = cextras_get_extras_match($flux['args']['type'])) {
+	if ($extras = cextras_get_extras_match( table_objet_sql($flux['args']['type']) ) ) {
 
 		$contexte = cextra_quete_valeurs_extras($extras, $flux['args']['type'], $flux['args']['id_objet']);
 		$contexte = array_merge($flux['args']['contexte'], $contexte);
@@ -241,7 +232,7 @@ function cextras_afficher_contenu_objet($flux){
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la vue est autorisee
-			$type = $c->_type . '_' . $c->champ;
+			$type = objet_type($c->table) . '_' . $c->champ;
 			include_spip('inc/autoriser');
 			if (autoriser('voirextra', $type, $flux['args']['id_objet'], '', array(
 				'type' => $flux['args']['type'],
@@ -249,7 +240,7 @@ function cextras_afficher_contenu_objet($flux){
 				'contexte' => $contexte)))
 			{
 				$options = $c->saisie_parametres;
-				$options['nom'] = $c-> champ;
+				$options['nom'] = $c->champ;
 				$saisies[] = array('saisie' => $c->saisie, 'options' => $options); 
 				# saisies_charger_infos($c->saisie);
 				
@@ -269,6 +260,7 @@ function cextras_afficher_contenu_objet($flux){
 
 // verification de la validite des champs extras
 function cextras_formulaire_verifier($flux){
+
 	// recuperer les champs crees par les plugins
 	$form = $flux['args']['form'];
 	// formulaire d'edition ?

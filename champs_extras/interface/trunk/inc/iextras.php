@@ -13,7 +13,7 @@ function iextras_get_extras(){
 		// reinitialiser aucazou les valeurs de tables
 		foreach($extras as $e) {
 			if (!$e->_objet) {
-				$e->definir(); // va recreer les infos des objet/type
+				$e->definir_raccourcis(); // va recreer les infos des objet/type
 			}
 		}
 	}

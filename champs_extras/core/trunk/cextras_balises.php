@@ -27,7 +27,7 @@ function balise_CHAMP_EXTRA_dist($p) {
 function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 	// recuperer la liste des champs extras existants
 	include_spip('cextras_pipelines');
-	if (!$c = cextras_get_extra($objet, $colonne)) {
+	if (!$c = cextras_get_extra(table_objet_sql($objet), $colonne)) {
 		return '';
 	}
 	if (!$demande) {

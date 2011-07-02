@@ -55,5 +55,5 @@
 
 	<categorie>outil</categorie>
 	
-	<necessite id="saisies" version="[1.9.0;]" />
+	<necessite id="saisies" version="[1.10.0;]" />
 </plugin>

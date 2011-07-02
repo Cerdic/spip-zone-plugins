@@ -5,6 +5,7 @@
   if(!isset($GLOBALS['spip_pipeline']['objets_extensibles']))
     $GLOBALS['spip_pipeline']['objets_extensibles'] = "";
 	
+
 	// utiliser ce pipeline a part
 	// afin d'etre certain d'arriver apres les autres plugins
 	// sinon toutes les tables ne sont pas declarees
