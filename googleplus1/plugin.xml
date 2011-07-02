@@ -1,27 +1,12 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Google +1
-	</nom>
-	<auteur> <!-- Auteur du plugin -->
-	Phil
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	dev
-	</etat>
-	<description>
-	Ajoute un bouton Google +1
- 	<h4>[Configuration->.?exec=cfg&amp;cfg=googleplus1]</h4>
-	</description>
-	<icon>plusone-32.png</icon>
-	<lien>
-	[Documentation->http://www.spip-contrib.net/?article2495]
-    </lien>
-	<prefix>
-	googleplus1
-	</prefix>
+	<nom>Google +1</nom>
+	<auteur>Phil</auteur>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>Ajoute un bouton Google +1 grace à la balise #GOOGLEPLUS1</description>
+	<icon>images/plusone-32.png</icon>
+	<lien>http://www.spip-contrib.net</lien>
+	<prefix>googleplus1</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>googleplus1_insert_head.php</inclure>
