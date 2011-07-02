@@ -903,8 +903,9 @@ _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du
 	'verstexte:nom' => 'Version texte',
 	'visiteurs_connectes:description' => 'Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connectés sur le site public.
 
-Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans vos pages.',
+Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans vos pages après avoir activé les statistiques de votre site.',
 	'visiteurs_connectes:nom' => 'Visiteurs connectés',
+	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.',
 	'voir' => 'Voir : @voir@',
 	'votre_choix' => 'Votre choix :',
 

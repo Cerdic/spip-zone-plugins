@@ -774,6 +774,9 @@ add_outil( array(
 function cs_compter_visiteurs(){ return count(preg_files(_DIR_TMP.'visites/','.')); }
 function action_visiteurs_connectes(){ echo cs_compter_visiteurs(); return true; }",
 	'version-min' => '1.9200', // pour la balise #ARRAY
+	'pipelinecode:pre_description_outil' => 'if($id=="visiteurs_connectes") if($GLOBALS["meta"]["activer_statistiques"]!="oui")
+		$texte.="\n\n<span style=\\"color:red;\\">"._T("couteauprive:visiteurs_connectes:inactif")."</span>";',
+
 	//	une mise a jour toutes les 120 sec ?
 /*	'code:js' => 'function Timer_visiteurs_connectes(){
 		jQuery("span.cs_nb_visiteurs").load("spip.php?action=visiteurs_connectes");

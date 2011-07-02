@@ -161,6 +161,9 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		installe_un_plugin($dir, $t, $dir_type);
 	}
 	if(!strlen($bt_version)) { $bt_version = $get_infos($bt_dir); $bt_version = $bt_version['version']; }
+	
+	// precaution (inutile ?) sur mes_fonctions.php
+	include_spip('public/parametrer');
 
 	$cs_revision = ((lire_fichier(_DIR_PLUGIN_COUTEAU_SUISSE.'svn.revision',$t)) && (preg_match(',<revision>(\d+)</revision>,',$t, $r)))
 		?'<br/>'.couteauprive_T('version_revision', array('revision'=>$r[1])):"";
