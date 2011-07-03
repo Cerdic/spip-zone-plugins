@@ -130,7 +130,8 @@ function normaliser_lien($url) {
 // - transformation en attribut des balises A
 // - interpretation des balises BR et LI et de la virgule et du espace+tiret comme separateurs
 function normaliser_auteur_licence($texte, $balise) {
-
+	include_spip('inc/lien');
+	
 	// On extrait le multi si besoin et on selectionne la traduction francaise
 	$t = normaliser_multi($texte);
 
