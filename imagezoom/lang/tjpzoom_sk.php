@@ -8,23 +8,23 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// D
-	'descriptif' => 'This page allows you to configure the style of the magnifier. A personal style can be configured: see the <a href="http://plugins.spip.net/?page=article&amp;id_article=48">online documentation</a>.', # MODIF
+	'descriptif' => 'Táto stránka vám umožní nastaviť štýl lupy. Môžete nastaviť vlastný štýl: prečítajte si <a href="http://plugins.spip.net/?page=article&amp;id_article=48">online dokumentáciu.</a>',
 
 	// E
-	'example' => '<NEW>Grafický výsledok',
+	'example' => 'Výsledok v grafickej podobe',
 
 	// N
-	'nostyle' => '<NEW>Žiaden štýl',
+	'nostyle' => 'Žiaden štýl',
 
 	// O
-	'other' => '<NEW>Iný',
+	'other' => 'Iný',
 
 	// S
-	'size_vignette' => '<NEW>Maximálna šírka miniatúry',
-	'style' => '<NEW>Štýl lupy',
+	'size_vignette' => 'Maximálna šírka miniatúry',
+	'style' => 'Štýl lupy',
 
 	// T
-	'titre' => '<NEW>Configurácia lupy'
+	'titre' => 'Konfigurácia lupy'
 );
 
 ?>
