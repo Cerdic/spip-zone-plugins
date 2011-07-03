@@ -37,6 +37,14 @@ gras:
   priority: -130
 
 
+intro:
+  # suppr raccourci <intro>
+  # + suppression de <intro>
+  match: ['<intro>', '</intro>']
+  replace: ['', '']
+  if_str: '<intro>'
+  type: str
+
 italiques:
   # raccourcis en {..}
   # strong
