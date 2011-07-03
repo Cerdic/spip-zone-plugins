@@ -25,7 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'chercher_statut' => 'Status',
 	'confirmer_delier_contact' => 'Are you sure you want to unlink this organisation from this contact?',
 	'confirmer_delier_organisation' => 'Are you sure you want to unlink this contact from this organisation?',
-	'confirmer_delier_organisation_rubrique' => 'Are you sure you want to unlink this organisation from this section?',
+	'confirmer_delier_organisation_rubrique' => '&Ecirc;tes-vous s&ucirc;r de vouloir d&eacute;lier cette organisation de cette rubrique ?', # NEW
 	'confirmer_supprimer_contact' => 'Ares you sure you want to delete all information about this contact?',
 	'confirmer_supprimer_organisation' => 'Are you sure you want to delete all the information about this organisation?',
 	'contact' => 'One contact',
@@ -134,9 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_organisation' => 'Organization details',
 	'titre_page_contacts' => 'Contacts management',
 	'titre_page_organisations' => 'Organisations management',
-	'titre_page_repertoire' => 'Directory',
-	
-
+	'titre_page_repertoire' => 'Directory'
 );
 
 ?>
