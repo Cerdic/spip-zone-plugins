@@ -6,10 +6,6 @@ define('_SVP_CRON_ACTUALISATION_DEPOTS', true);
 // - Periode d'actualisation en nombre d'heures (de 1 a 24)
 define('_SVP_PERIODE_ACTUALISATION_DEPOTS', 6);
 
-
-// Définition de la boite du logo de depot pour utilisation de iconifier()
-$GLOBALS['logo_libelles']['id_depot'] = _T('svp:titre_boite_logo_depot');
-
 // Type parseur XML a appliquer pour recuperer les infos du plugin 
 // - plugin, pour utiliser plugin.xml 
 // - paquet, pour paquet.xml 

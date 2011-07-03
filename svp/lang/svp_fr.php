@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_supprimer_depot' => 'Supprimer le dépôt et ses paquets',
 	'bulle_telecharger_archive' => 'Télécharger l\'archive',
 	'bulle_telecharger_fichier_depot' => 'Télécharger le fichier XML du dépôt',
+	'bulle_telecharger_librairie' => 'Télécharger la librairie',
 
 //	'bouton_svp' => 'Serveur d\'information sur les plugins',
 //	'bulle_aller_gerer_depots' => 'Retourner à la page de gestion des dépôts',
@@ -55,12 +56,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_compatibilite_spip' => 'Compatiblité',
 	'label_xml_depot' => 'Fichier XML du dépôt',
 	'label_version' => 'Version',
+	'label_selectionner_plugin' => 'Sélectionner ce plugin',
 
 //	'lien_gerer_depots' => 'Tous les dépôts',
 
 
 // M
 	'message_nok_aucun_depot_disponible' => 'Aucun plugin n\'est disponible ! Veuillez vous rendre dans la page de gestion des dépôts pour ajouter des listes de plugins installables.',
+	'message_nok_aucun_plugin_selectionne' => 'Aucun plugin à installer. Veuillez sélectionner les plugins à installer',
 	'message_nok_aucun_paquet_ajoute' => 'Le dépôt « @url@ » ne fournit aucun nouveau paquet par rapport à la base déjà enregistrée. Il n\'a donc pas ét&eacute ajouté',
 	'message_nok_champ_obligatoire' => 'Ce champ est obligatoire',
 	'message_nok_depot_deja_ajoute' => 'L\'adresse « @url@ » correspond à un dépôt déjà ajouté',
@@ -73,6 +76,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // R
 	'resume_table_depots' => 'Liste des dépôts ajoutés',
+	'resume_table_paquets' => 'Liste des paquets',
 	'resume_table_plugins' => 'Liste des plugins @categorie@',
 	'resume_table_autres_contributions' => 'Liste des autres contributions', // pas encore utilise dans svp
 
