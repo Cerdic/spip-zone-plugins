@@ -357,7 +357,7 @@ Los bloques multi s\'amuesen siempre na llingua pidía pol visitante.', # MODIF
 	// H
 	'help' => '{{Esta páxina únicamente ye accesible pa los responsables del sitiu.}}<p>Da accesu a les diferentes funciones suplementaries aportáes pol plugin «{{La Navaya Suiza}}».',
 	'help2' => 'Versión local: @version@',
-	'help3' => '<p>Enllaces de documentaci&oacute;n :@contribs@</p><p>Reentamos:
+	'help3' => '<p>Enllaces de documentaci&oacute;n :<br/>• [La&nbsp;Navaya&nbsp;Suiza->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Reentamos:
 _ • [De les ferramientes tapec&iacute;es|Tornar a l\'apariencia inicial d\'esta p&aacute;xina->@hide@]
 _ • [De tol plugin|Tornar a l\'est&aacute;u inicial del plugin->@reset@]@install@
 </p>', # MODIF
@@ -875,6 +875,7 @@ _ version_plein_texte : estrái el conteníu de testu d\'una páxina html pa amo
 	'visiteurs_connectes:description' => 'Ufre una plizquina de códigu pa la cadarma que amuesa el númberu de visites coneutáes col sitiu públicu.
 
 Amesta-yos simplemente <code><INCLURE{fond=fonds/visiteurs_connectes}></code> a les tos páxines.', # MODIF
+	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
 	'visiteurs_connectes:nom' => 'Visites coneutáes',
 	'voir' => 'Ver: @voir@',
 	'votre_choix' => 'Seleición:',

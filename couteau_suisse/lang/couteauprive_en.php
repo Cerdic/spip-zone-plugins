@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'2pts_oui' => ': yes',
 
 	// S
-	'SPIP_liens:description' => '@puce@ By default, all links on the site open in the current window. But it can be useful to open external links in a new external window, i.e. by adding {target="_blank"} to all link tags bearing one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
+	'SPIP_liens:description' => '@puce@ All links on the site open in the current window by default. It may be useful to open external links in a new window, i.e. by adding {target="_blank"} to all link tags in one of the SPIP classes {spip_out}, {spip_url} or {spip_glossaire}. It is sometimes necessary to add one of these classes to the links in the site\'s templates (html files) in order make this functionality wholly effective.[[%radio_target_blank3%]]
 
-@puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definitions. By default (or if you leave the checkbox below empty), wikipedia.org is used as the external glossary. You may choose another address if you wish. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]', # MODIF
+@puce@ SPIP provides the shortcut <code>[?word]</code> to link words to their definitions. By default (or if you leave the checkbox below empty), wikipedia.org is used as the external glossary. You may choose another address if you wish. <br />Test link: [?SPIP][[%url_glossaire_externe2%]]',
 	'SPIP_liens:description1' => '@puce@ SPIP includes a CSS style for "mailto:" email links: a little envelope should appear just before each "mailto" link. However, not all browsers are able to display it (specifically IE6, IE7 and SAF3, in particular, cannot). It is up to you to decide whether to retain this image insertion feature.
 
 _ Test link:[->test@example.com] (Reload the whole page to test.)[[%enveloppe_mails%]]',
@@ -60,10 +60,10 @@ The value of 1,000,000 pixels appears to be reasonable for a configuration with 
 @puce@ Which kinds of authors should be listed on these pages?
 [[%auteurs_tout_voir%[[->%auteurs_0%]][[->%auteurs_1%]][[->%auteurs_5%]][[->%auteurs_6%]][[->%auteurs_n%]]]]',
 	'auteurs:nom' => 'Authors page',
-	'autobr:description' => 'Apply the {|post_autobr} filter to certain SPIP contents, which replaces all single line feeds with an HTML line break <br />.[[%alinea%]]', # MODIF
+	'autobr:description' => 'Applies the {|post_autobr} filter to certain types of SPIP content, replacing single line feeds with an HTML line break <br />.[[%alinea%]]',
 	'autobr:nom' => 'Automatic line breaks',
-	'autobr_non' => 'All texts on the site, but only those inside <alinea></alinea> tags', # MODIF
-	'autobr_oui' => 'All article texts and public messages  (the #TEXTE tag)', # MODIF
+	'autobr_non' => '>All site text between <alinea></alinea> tags',
+	'autobr_oui' => 'All article text and public messages  (the #TEXTE tag)',
 	'autobr_racc' => 'Line breaks: <b><alinea></alinea></b>',
 
 	// B
@@ -75,20 +75,20 @@ Examples: <code>#SET{x,1}#SET_PLUS{x,2}</code> or <code>#SET{x,avions}#SET_REPLA
 	'barres_typo_forum' => 'Forum messages',
 	'barres_typo_intro' => 'The «Porte-Plume» plugin is installed. Please choose here the typographical bars on which to insert various buttons.',
 	'basique' => 'Basic',
-	'blocs:aide' => 'Folding blocks: <b><bloc></bloc></b> (alias: <b><invisible></invisible></b>) and <b><visible></visible></b>', # MODIF
+	'blocs:aide' => 'Collapsible blocks: <b><bloc></bloc></b> (alias: <b><invisible></invisible></b>) and <b><visible></visible></b>',
 	'blocs:description' => 'Allows you to create blocks which show/hide themselves when you click on their titles.
 
-@puce@ {{In SPIP texts}}: authors can use the new <bloc> (or <invisible>) and <visible> tags in their texts as illustrated below: 
+@puce@ {{In SPIP texts}}: authors can use the new <bloc> (or <invisible>) and <visible> tags in their texts as below: 
 
 <quote><code>
 <bloc>
  A clickable title
 
- The text which is to be shown/hidden, after two empty lines.
+ The text to be shown/hidden, after two empty lines.
  </bloc>
 </code></quote>
 
-@puce@ {{In templates}}: you can use the new #BLOC_TITRE, #BLOC_DEBUT and #BLOC_FIN tags as demonstrated below: 
+@puce@ {{In templates}}: you can use the new #BLOC_TITRE, #BLOC_DEBUT and #BLOC_FIN tags like this: 
 
 <quote><code> #BLOC_TITRE or #BLOC_TITRE(my_URL)
  My title
@@ -104,7 +104,7 @@ Examples: <code>#SET{x,1}#SET_PLUS{x,2}</code> or <code>#SET{x,avions}#SET_REPLA
 
 @puce@ By default, the Swiss Knife plugin uses the HTML tag <h4> for the titles of the collapsible blocks. You can specify another tag to use instead here <hN>:[[%bloc_h4%]]
 
-@puce@ In order to obtain a smoother transition when you click on the title, your collapsible blocks can be animated with a "sliding" effect".[[%blocs_slide%]][[->%blocs_millisec% milliseconds]]', # MODIF
+@puce@ In order to obtain a smoother transition when you click on the title, your collapsible blocks can be animated with a "sliding" effect".[[%blocs_slide%]][[->%blocs_millisec% milliseconds]]',
 	'blocs:nom' => 'Folding Blocks',
 	'boites_privees:description' => 'All of the boxes described below appear either here in the private zone.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Updates to the Swiss Knife tool}}: a frame on this current configuration page indicating the most recent modifications made to the code of the ([Source->@_CS_RSS_SOURCE@]) plugin.
@@ -319,7 +319,7 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'detail_spip_options' => '{{Note}}: If this tool malfunctions, give the SPIP options priority by using the "@lien@" utility.',
 	'detail_spip_options2' => 'It is recommended to give the SPIP options priority using the «[.->cs_comportement]» utility.',
 	'detail_spip_options_ok' => '{{Note}}: This tool currently gives the SPIP options priority using the "@lien@" utility.',
-	'detail_surcharge' => 'Outil surchargé :', # NEW
+	'detail_surcharge' => 'Tool overloaded:',
 	'detail_traitements' => 'Treatment:',
 	'devdebug:description' => '{{This tool enables you to see any PHP errors on the screen.}}<br />You can choose the level of PHP execution errors that will be displayed whenever the debugger is active, as well as the SPIP space to which these settings will apply.',
 	'devdebug:item_e_all' => 'All messages errors (all)',
@@ -346,7 +346,7 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	'ecran_conflit2' => 'Note: a static file named "@file@" has been detected and activated. The Swiss Knife could not update it or configure it.',
 	'ecran_ko' => 'Inactive screen!',
 	'ecran_maj_ko' => 'Version {{@n@}} of the security screen is available. Please update the remote file for this utility.',
-	'ecran_maj_ko2' => 'La version @n@ de l\'écran de sécurité est disponible. Vous pouvez actualiser le fichier distant de l\'outil « [.->ecran_securite] ».', # NEW
+	'ecran_maj_ko2' => 'Version @n@ of the safetu screen is available. You can update the remote file " [.->ecran_securite] ".',
 	'ecran_maj_ok' => '(appears to be up to date).',
 	'ecran_securite:description' => 'The security screen is a PHP file directly downloaded from the official SPIP site which protects your sites by blocking certain attacks aimed at specific security flaws. This system allows you to react very quickly whenever a problem is discovered, by covering up for such flaws without needing to immediately update your site nor apply any complex patches.
 
@@ -447,7 +447,7 @@ This means that multi blocks will always displayed in the language requested by 
 	// H
 	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Penknife}}.',
 	'help2' => 'Local version: @version@',
-	'help3' => '<p>Documentation links:@contribs@</p><p>Resets:
+	'help3' => '<p>Documentation links:<br/>• [{{The&nbsp;Swiss&nbsp;Knife}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Resets:
 
 _ • [Hidden tools|Return to the original appearance of this page->@hide@]
 
@@ -570,7 +570,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:liens_orphelins' => 'Clickable links:',
 	'label:log_couteau_suisse' => 'Activate:',
 	'label:logo_Hmax' => 'Logo maximum height:',
-	'label:long_url' => 'Longueur du libellé cliquable :', # NEW
+	'label:long_url' => 'Length of clickable description:',
 	'label:marqueurs_urls_propres' => 'Add markers to distinguish between objects (SPIP>=2.0:<br />(e.g. " - " pour -My-section-, " @ " for @My-site@) ',
 	'label:max_auteurs_page' => 'Authors per page:',
 	'label:message_travaux' => 'Your maintenance message:',
@@ -642,7 +642,7 @@ _ • {Extended}: additionally links such as these are also replaced:  {<html>me
 _ • {By default}: automatic replacement (from SPIP version 2.0).
 
 [[%liens_orphelins%]]', # MODIF
-	'liens_orphelins:description1' => '[[Si l\'URL rencontrée dépasse les %long_url% caractères, alors SPIP la réduit à %coupe_url% caractères]].', # NEW
+	'liens_orphelins:description1' => '[[If the URL is more than %long_url% characters long, SPIP will reduce it to %coupe_url% characters]].',
 	'liens_orphelins:nom' => 'Fine URLs',
 
 	// M
@@ -1112,7 +1112,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'url_propres2' => 'propres2@_CS_ASTER@',
 	'url_propres_qs' => 'propres_qs',
 	'url_standard' => 'standard',
-	'url_verouillee' => 'URL verrouillée', # NEW
+	'url_verouillee' => 'URL locked',
 	'urls_3_chiffres' => 'Require a minum of 3 digits',
 	'urls_avec_id' => 'Place as a suffix',
 	'urls_avec_id2' => 'Place as a prefix',
@@ -1134,7 +1134,7 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_url_calculee' => 'URL PUBLIC  « @type@ »:',
 	'urls_url_objet' => 'Saved "clean" URL:', # MODIF
 	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
-	'urls_verrouiller' => '{{Verrouiller}} cette URL afin que SPIP ne la modifie plus, notamment lors d\'un clic sur « @voir@ » ou d\'un changement du titre de l\'objet.', # NEW
+	'urls_verrouiller' => '{{Lock}} this URL so that SPIP cannot change it, e.g. when someone clicks on " @voir@ " or when the title is modified.',
 
 	// V
 	'validez_page' => 'To access modifications:',
@@ -1160,6 +1160,7 @@ _ version_plein_texte: extracts the textual content from an HTML page to display
 
 
 Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the template.', # MODIF
+	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
 	'visiteurs_connectes:nom' => 'Vistors logged in',
 	'voir' => 'See: @voir@',
 	'votre_choix' => 'Your choice:',

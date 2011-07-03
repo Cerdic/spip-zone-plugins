@@ -345,7 +345,7 @@ Opgelet: in de forums, petities, georganiseerde stromen, enz., het beleid van ja
 	// H
 	'help' => '<MODIF>{{Deze bladzijde is alleen toegankelijk voor de site verantwoordelijken.}} Zij geeft toegang tot de verschillende aanvullende functies die door plugin worden gebracht«{{Le Couteau Suisse}}».',
 	'help2' => 'Plaatselijke versie : @version@',
-	'help3' => '<p>Band van documentatie :@contribs@</p><p>R&eacute;initialisatie :
+	'help3' => '<p>Band van documentatie :<br/>• [Le&nbsp;Couteau&nbsp;Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisatie :
 _ • [Verborgen werktuigen|Aan de eerste schijn van deze bladzijde terugkomen->@hide@]
 _ • [Van hele plugin|Aan de eerste stand van plugin terugkomen->@reset@]@install@
 </p>', # MODIF
@@ -857,6 +857,7 @@ _ volle_tekst_versie : uitgetrokken de inhoud tekst van een HTML bladzijde om va
 	'visiteurs_connectes:description' => 'Aanbod een hazelnoot voor uw skelet dat het aantal bezoekers te kennen geeft die op de openbare plaats worden aangesloten.
 
 Ajoutez simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans vos pages.', # MODIF
+	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
 	'visiteurs_connectes:nom' => 'Aangesloten bezoekers',
 	'voir' => 'Zie : @voir@',
 	'votre_choix' => 'Uw keus :',

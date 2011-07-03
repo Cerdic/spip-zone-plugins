@@ -870,6 +870,7 @@ _ version_plein_texte : extrae el texto contenido en una página html para mostr
 	'visiteurs_connectes:description' => 'Añade un fragmento a tu esqueleto que muestra el número de visitantes conectados en el sitio público.
 
 Añade sencillamente <code><INCLURE{fond=fonds/visiteurs_connectes}></code> en tus páginas.', # MODIF
+	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
 	'visiteurs_connectes:nom' => 'Visitantes conectados',
 	'voir' => 'Ver: @voir@',
 	'votre_choix' => 'Tu elección:',

@@ -1,13 +1,11 @@
 <traduction module="couteauprive" gestionnaire="salvatore" reference="fr">
-	<langue code="ar">
-		<traducteur nom="kandalaft" />
-	</langue>
 	<langue code="ast" />
 	<langue code="ca">
 		<traducteur nom="merce" />
 	</langue>
 	<langue code="en">
 		<traducteur nom="mark_baber" />
+		<traducteur nom="squonk" />
 		<traducteur nom="merce" />
 	</langue>
 	<langue code="es" />
@@ -16,6 +14,8 @@
 	</langue>
 	<langue code="gl" />
 	<langue code="nl" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="tr" />
 </traduction>
