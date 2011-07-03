@@ -16,7 +16,6 @@ function tw_liste_item($t,$quoi='item'){
 	static $pile_li;
 	static $pile_type;
 	static $type;
-
 	switch ($quoi){
 		case 'init':
 			$niveau = 0;
@@ -42,8 +41,8 @@ function tw_liste_item($t,$quoi='item'){
 		
 		case 'item':
 		default:
-			if ($l=strlen($t[2])) {$profond=$l;$nouv_type='ul';}
-			elseif ($l=strlen($t[3])) {$profond=$l;$nouv_type='ol';}
+			if ($l=strlen($t[2])) {$profond=$l;$nouv_type='itemize';}
+			elseif ($l=strlen($t[3])) {$profond=$l;$nouv_type='enumerate';}
 
 			if ($profond > 0) {
 				$ajout='';
@@ -77,8 +76,8 @@ function tw_liste_item($t,$quoi='item'){
 						$pile_li[$niveau] = "\end/debutitemize/fin";
 					}
 					$niveau ++;
-					$ajout .= "\begin/debutitemize/fin";
-					$pile_type[$niveau] = "\end/debutitemize/fin";
+					$ajout .= "\begin/debut$type/fin";
+					$pile_type[$niveau] = "\begin/debut$type/fin";
 				}
 
 				$ajout .= "\item ";
