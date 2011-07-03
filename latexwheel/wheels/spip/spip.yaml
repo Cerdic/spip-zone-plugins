@@ -45,3 +45,11 @@ italiques:
   type: str
   #if_str: '{'
   priority: -120				# en tout premier
+
+quote:
+  # raccourci <quote>
+  match: ['<quote>', '</quote>']
+  replace: ['\begin/beginquotation/end', '\end/beginquotation/end']
+  if_str: '<quote>'
+  type: str
+  priority: -120
