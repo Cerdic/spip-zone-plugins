@@ -29,6 +29,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_comment_header' => 'cette option vous permet de choisir si les informations de la balise &lt;head&gt; de la page doivent être présentes ou non (<i>il peut être utile de les désactiver si vous utilisez une fenêtre javascript type \'thickbox\', ou au contraire de forcer leur affichage dans le même contexte avec un contenu en frame</i>).', # NEW
 	'cfgform_comment_javascript' => 'vous pouvez désactiver la fonction d\'ouverture de la popup (<i>dans le cas de l\'utilisation de fenêtres javascript type \'thickbox\' ou \'fancybox\' par exemple</i>).', # NEW
 	'cfgform_comment_options' => 'vous devez indiquer des attributs complets, par exemple : "class=\'thickbox\'", ils seront automatiquement ajoutés au lien inclus dans vos squelettes ; <b>utilisez seulement des guillemets simples</b>.', # NEW
+	'cfgform_comment_options_url' => 'vous pouvez ici indiquer une liste d\'arguments, par exemple : "arg=valeur&arg2=nouvelle_valeur", ils seront automatiquement ajoutés à l\'URL générée par la balise.', # NEW
 	'cfgform_comment_patron' => 'patron par défaut du mail dans sa version classique (<i>texte brut</i>).', # NEW
 	'cfgform_comment_patron_html' => 'si vous utilisez cette option, le mail envoyé comportera tout de même le premier squelette en version texte brut ; laissez le champ vide pour annuler cette option.', # NEW
 	'cfgform_comment_reset' => 'vous pouvez ici définir l\'action du bouton "Annuler" du formulaire (<i>redéfinir cette action peut vous permettre de fermer la thickbox plutôt que la fenêtre par exemple</i>).', # NEW
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfgform_titre_header' => 'Inclure les en-têtes HTML', # NEW
 	'cfgform_titre_javascript' => 'Fonction javascript standard (ouverture d\'une popup)', # NEW
 	'cfgform_titre_options' => 'Attribut(s) ajouté(s) au lien créé par la balise', # NEW
+	'cfgform_titre_options_url' => 'Argument(s) ajouté(s) à l\'URL du lien créé par la balise', # NEW
 	'cfgform_titre_patron' => 'Patron du mail envoyé', # NEW
 	'cfgform_titre_patron_html' => 'Patron du mail au format HTML', # NEW
 	'cfgform_titre_reset' => 'Action du bouton d\'annulation', # NEW
