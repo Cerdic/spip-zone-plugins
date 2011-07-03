@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'aff_resume' => 'Show summaries',
-	'afficher_sources' => 'Show this feed', # MODIF
+	'afficher_sources' => 'Zobraziť tento zdroj',
 	'annee' => 'Last year',
 	'articles_recents_court' => 'Recent posts',
 
@@ -27,8 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// M
 	'masquer_resume' => 'Hide summaries',
-	'masquer_sources' => 'Hide this feed', # MODIF
-	'mois' => 'Last month', # MODIF
+	'masquer_sources' => 'Schovať tento zdroj',
+	'mois' => 'Minulý mesiac',
 
 	// P
 	'pas_articles' => 'No post within this period of time!',
@@ -38,9 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// S
 	'semaine' => 'Minulý týždeň',
-	'sources' => 'Feeds', # MODIF
+	'sources' => 'Zdroje',
 	'synchro' => 'Synchronizuj',
-	'synchro_titre' => 'Save the list of read posts on website', # MODIF
+	'synchro_titre' => 'Uložiť zoznam prečítaných príspevkov na stránke',
 	'syndication_ajour' => 'Update now',
 	'syndication_fait' => 'Syndication done',
 
