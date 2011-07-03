@@ -1,0 +1,41 @@
+--- # Syntaxe des raccourcis SPIP, version 0.0.1
+    #
+    # Si on nomme une regle, elle devient surchargeable
+
+begin:
+  match: ['/begin', '/end']
+  replace: ['{', '}']
+  type: str
+  priority: -20
+
+
+intertitres:
+  # raccourcis en {{{..}}}
+  # intertitres
+  match: ['{{{', '}}}']
+  replace: ["\n\n\n\subsection/begin", "/end"]
+#  if_str: '{{{'
+  type: str
+  priority: -140
+
+
+
+
+gras:
+  # raccourcis en {{..}}
+  # strong
+  match: ['{{', '}}']
+  replace: ['\textbf/begin', '/end']
+  type: str
+  #if_str: '{{'
+  priority: -130
+
+
+italiques:
+  # raccourcis en {..}
+  # strong
+  match: ['{', '}']
+  replace: ['\emph/begin', '/end']
+  type: str
+  #if_str: '{'
+  priority: -120				# en tout premier
