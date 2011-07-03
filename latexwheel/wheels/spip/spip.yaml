@@ -13,13 +13,19 @@ intertitres:
   # raccourcis en {{{..}}}
   # intertitres
   match: ['{{{', '}}}']
-  replace: ["\n\n\n\subsection/begin", "/end"]
+  replace: ["\n\n\n\subsection/begin", "/end\n\n\n"]
 #  if_str: '{{{'
   type: str
   priority: -140
 
 
-
+intertitres-compliques:
+  # raccourcis imbriques en {{{{..}}}}
+  # intertitres
+  match: ['/(^|[^{])[{][{][{]/S', '/[}][}][}]($|[^}])/S']
+  replace: ["$1\n\n\n\subsection/begin", "/end\n\n\n$1"]
+  if_str: '}}}}'
+  priority: -150
 
 gras:
   # raccourcis en {{..}}
