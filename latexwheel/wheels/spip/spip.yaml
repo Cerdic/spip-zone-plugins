@@ -2,8 +2,8 @@
     #
     # Si on nomme une regle, elle devient surchargeable
 
-begin:
-  match: ['/begin', '/end']
+fin:
+  match: ['/debut', '/fin']
   replace: ['{', '}']
   type: str
   priority: -20
@@ -13,7 +13,7 @@ intertitres:
   # raccourcis en {{{..}}}
   # intertitres
   match: ['{{{', '}}}']
-  replace: ["\n\n\n\subsection/begin", "/end\n\n\n"]
+  replace: ["\n\n\n\subsection/debut", "/fin\n\n\n"]
 #  if_str: '{{{'
   type: str
   priority: -140
@@ -23,7 +23,7 @@ intertitres-compliques:
   # raccourcis imbriques en {{{{..}}}}
   # intertitres
   match: ['/(^|[^{])[{][{][{]/S', '/[}][}][}]($|[^}])/S']
-  replace: ["$1\n\n\n\subsection/begin", "/end\n\n\n$1"]
+  replace: ["$1\n\n\n\subsection/debut", "/fin\n\n\n$1"]
   if_str: '}}}}'
   priority: -150
 
@@ -31,7 +31,7 @@ gras:
   # raccourcis en {{..}}
   # strong
   match: ['{{', '}}']
-  replace: ['\textbf/begin', '/end']
+  replace: ['\textbf/debut', '/fin']
   type: str
   #if_str: '{{'
   priority: -130
@@ -41,7 +41,7 @@ italiques:
   # raccourcis en {..}
   # strong
   match: ['{', '}']
-  replace: ['\emph/begin', '/end']
+  replace: ['\emph/debut', '/fin']
   type: str
   #if_str: '{'
   priority: -120				# en tout premier
@@ -49,7 +49,7 @@ italiques:
 quote:
   # raccourci <quote>
   match: ['<quote>', '</quote>']
-  replace: ['\begin/beginquotation/end', '\end/beginquotation/end']
+  replace: ['\begin/debutquotation/fin', '\end/debutquotation/fin']
   if_str: '<quote>'
   type: str
   priority: -120
