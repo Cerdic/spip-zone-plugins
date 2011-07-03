@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C //
 	// Documentation
-	'cf_navigation' => 'Cf. colonne de navigation',
+	'cf_navigation' => 'Cf. [colonne de navigation->@url@]',
 	'configuration' => '{{{Configuration}}}
 
 Le plugin est pr&eacute;vu pour proposer une page de configuration gr&acirc;ce au plugin {{[CFG : moteur de configuration->http://www.spip-contrib.net/?rubrique575]}} mais celui-ci n\'est pas obligatoire.
