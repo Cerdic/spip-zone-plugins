@@ -9,12 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer' => 'حذف ',
+	'bouton_rafraichir' => 'Rafraichir la vignette', # NEW
 	'bouton_valider' => 'تأييد ',
 	'bulle_bouton_effacer' => 'حذف كردن اقلام و بازگشت به مقادير اوليه',
 	'bulle_bouton_valider' => 'تأييد اقلام',
 
 	// C
 	'cfg_descriptif' => 'اين صفحه به شما اجازه مي‌دهد تا پلاگين تام‌سايتز (Thumbsites) را پيكربندي كنيد، و به ويژه، سرور ريزنش‌ها را انتخاب كنيد. براي اطلاعات بيشتر به اينجا مراجعه كنيد: <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>',
+	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
+	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'ريزنقش‌هاي خلق شده حداكثر 160x120 پيكسل خواهند بود(اين مقادرمي‌تواند در سايت Girafa اصلاح شود)',
 	'cfg_inf_girafa_parametres' => 'لطفاً داده‌هاي شخصي خود را وارد كنيد',
 	'cfg_inf_girafa_presentation' => 'براي استفاده از اين خدمت بايد در سايت <a href="http://www.girafa.com">Girafa</a> ثبت نام كنيد. اگر روزانه به كمتر از 200 كاپچر (گيراندازي) احتياج داشته باشيد نسخه‌ي رايگان نيز وجود دارد.',
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> خدمتي رايگان ارايه مي‌دهد كه به شناسايي نيازي نيست. ',
 	'cfg_inf_websnapr_parametres' => 'لطفاً داده‌هاي شخصي خود را وارد كنيد:',
 	'cfg_inf_websnapr_presentation' => 'براي استفاده از اين خدمت بايد در سايت <a href="http://www.websnapr.com">Websnapr</a> ثبت نام كنيد. نسخه‌ي رايگان مي‌تواند 250 هزار كاپچبر (گيراندازي) سايت را در طول يك ماه و با آهنگ 80 كاپچر در ساعت پردازش كند. ',
+	'cfg_itm_serveur_apercite' => 'Apercite.fr', # NEW
 	'cfg_itm_serveur_girafa' => 'Girafa',
 	'cfg_itm_serveur_miwin' => 'Miwin',
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
@@ -37,9 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_itm_taille_vignette' => '@taille@ پيكسل',
 	'cfg_lbl_choix_serveur' => 'سرور ريزنقش‌ها را انتخاب كنيد',
 	'cfg_lbl_cle' => 'كليد شما',
+	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)', # NEW
 	'cfg_lbl_identifiant' => 'شناسه‌ي شما',
 	'cfg_lbl_signature' => 'امضاي شما',
 	'cfg_lbl_taille_vignette' => 'اندازه‌ي ريزنقش‌ها',
+	'cfg_lgd_cache' => 'Cache', # NEW
 	'cfg_lgd_choix_serveur' => 'سرور',
 
 	// T

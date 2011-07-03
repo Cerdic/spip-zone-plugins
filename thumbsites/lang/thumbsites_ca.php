@@ -9,12 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer' => 'Esborrar',
+	'bouton_rafraichir' => 'Rafraichir la vignette', # NEW
 	'bouton_valider' => 'Validar',
 	'bulle_bouton_effacer' => 'Esborrar les entrades i tornar als valors inicials',
 	'bulle_bouton_valider' => 'Validar les dades',
 
 	// C
 	'cfg_descriptif' => 'Aquesta pàgina us permet configurar el plugin Thumbsites, i, en particular, escollir el servidor de vinyetes. Per saber-ne més, consulteu la <a href="http://www.spip-contrib.net/?article2584">documentació a contrib</a>',
+	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
+	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'Les vinyetes generades seran com a molt de 160 x 120 píxels (aquest valor es pot modificar al lloc de Girafa)',
 	'cfg_inf_girafa_parametres' => 'Introduïu les vostres dades personals:',
 	'cfg_inf_girafa_presentation' => 'Per utilitzar aquest servei haureu d\'estar registrats al lloc <a href="http://www.girafa.com">Girafa</a>. Si voleu fer menys de 2000 captures per dia, hi ha una versió gratuïta.',
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> proposa un servei gratuït que no necessita identificació.',
 	'cfg_inf_websnapr_parametres' => 'Vulgueu introduir les vostres dades personals:',
 	'cfg_inf_websnapr_presentation' => 'Per utilitzar aquest servei heu d\'estar registrat al lloc <a href="http://www.websnapr.com">Websnapr</a>. La versió gratuïta permet processar unes 250.000 captures del lloc per mes, a un ritme de 80 captures per hora.',
+	'cfg_itm_serveur_apercite' => 'Apercite.fr', # NEW
 	'cfg_itm_serveur_girafa' => 'Girafa',
 	'cfg_itm_serveur_miwin' => 'Miwin',
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
@@ -37,9 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_itm_taille_vignette' => '@taille@ píxels',
 	'cfg_lbl_choix_serveur' => 'Escolliu el servidor de vinyetes',
 	'cfg_lbl_cle' => 'La vostra clau',
+	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)', # NEW
 	'cfg_lbl_identifiant' => 'El vostre identificador ',
 	'cfg_lbl_signature' => 'La vostra signatura',
 	'cfg_lbl_taille_vignette' => 'Mida de les vinyetes ',
+	'cfg_lgd_cache' => 'Cache', # NEW
 	'cfg_lgd_choix_serveur' => 'Servidor',
 
 	// T

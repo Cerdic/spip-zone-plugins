@@ -9,12 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer' => 'Löschen',
+	'bouton_rafraichir' => 'Rafraichir la vignette', # NEW
 	'bouton_valider' => 'Bestätigen',
 	'bulle_bouton_effacer' => 'Eingaben löschen und mit Standardwerten neu beginnen',
 	'bulle_bouton_valider' => 'Eingaben bestätigen',
 
 	// C
 	'cfg_descriptif' => 'Auf dieser Seite können sie das Plugin Thumbsites konfigurieren und den Thumbnailserver einstellen. Weitere Informationen: <a href="http://www.spip-contrib.net/?article2584">Dokumentation auf Spip-Contrib</a>',
+	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
+	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'Die Thumbnails sind maximal 160 x 120 Pixel groß (Dieser Wert kann auf der Website Girafa modifiziert werden.)',
 	'cfg_inf_girafa_parametres' => 'Bitte geben sie ihre persönlichen Daten ein:',
 	'cfg_inf_girafa_presentation' => 'Um diesen Dienst zu nutzen, müssen sie eingetragener Nutzer der Website <a href="http://www.girafa.com">Girafa</a> sein. Es gibt eine kostenlose Version für bis zu 200 Screenshots am Tag.',
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> bietet einen kostenlosen Dienst ohne Anmeldung.',
 	'cfg_inf_websnapr_parametres' => 'Bitte geben sie ihre persönlichen Daten ein:',
 	'cfg_inf_websnapr_presentation' => 'Um diesen Dienst zu nutzen, müssen sie sich bei <a href="http://www.websnapr.com">Websnapr</a> anmelden. Die kostenlose Version erlaubt 250.000 Screenshots pro Monat und schafft bis zu 80 neue Screenshots pro Stunde.',
+	'cfg_itm_serveur_apercite' => 'Apercite.fr', # NEW
 	'cfg_itm_serveur_girafa' => 'Girafa',
 	'cfg_itm_serveur_miwin' => 'Miwin',
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
@@ -37,9 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_itm_taille_vignette' => '@taille@ pixels',
 	'cfg_lbl_choix_serveur' => 'Bitte wählen sie den Thumbnail-Server',
 	'cfg_lbl_cle' => 'Ihr Schlüssel',
+	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)', # NEW
 	'cfg_lbl_identifiant' => 'Ihre ID',
 	'cfg_lbl_signature' => 'Ihre Unterschrift',
 	'cfg_lbl_taille_vignette' => 'Größe der Thumbnails',
+	'cfg_lgd_cache' => 'Cache', # NEW
 	'cfg_lgd_choix_serveur' => 'Server',
 
 	// T

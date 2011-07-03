@@ -9,12 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
 	'bouton_effacer' => 'Effacer',
+	'bouton_rafraichir' => 'Rafraichir la vignette', # NEW
 	'bouton_valider' => 'Valider',
 	'bulle_bouton_effacer' => 'Effacer les saisies et revenir aux valeurs de départ',
 	'bulle_bouton_valider' => 'Valider les saisies',
 
 	// C
 	'cfg_descriptif' => 'Cette page te permet de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consultez la <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>',
+	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:', # NEW
+	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.', # NEW
 	'cfg_inf_girafa_description' => 'Les vignettes générées seront au maximum de 160 x 120 pixels (cette valeur peut être modifiée sur le site de Girafa)',
 	'cfg_inf_girafa_parametres' => 'Saisi tes données personnelles:',
 	'cfg_inf_girafa_presentation' => 'Pour utiliser ce service tu dois être inscrit sur le site <a href="http://www.girafa.com">Girafa</a>. Il existe une version gratuite si vous souhaitez moins de 2000 captures par jour.',
@@ -28,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inf_thumbshots_presentation' => '<a href="http://www.thumbshots.com">Thumbshots.com</a> propose un service gratuit qui ne nécessite pas d\'identification.',
 	'cfg_inf_websnapr_parametres' => 'Saisi tes données personnelles :',
 	'cfg_inf_websnapr_presentation' => 'Pour utiliser ce service tu dois être inscrit sur le site <a href="http://www.websnapr.com">Websnapr</a>. La version gratuite permet de traiter de 250.000 captures de site par mois, à un rythme de 80 captures par heure.',
+	'cfg_itm_serveur_apercite' => 'Apercite.fr', # NEW
 	'cfg_itm_serveur_girafa' => 'Girafa',
 	'cfg_itm_serveur_miwin' => 'Miwin',
 	'cfg_itm_serveur_robothumb' => 'Robothumb',
@@ -37,9 +41,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_itm_taille_vignette' => '@taille@ pixels',
 	'cfg_lbl_choix_serveur' => 'Choisis le serveur de vignettes',
 	'cfg_lbl_cle' => 'Ta clé',
+	'cfg_lbl_duree_cache' => 'Durée du cache (en jours)', # NEW
 	'cfg_lbl_identifiant' => 'Ton identifiant',
 	'cfg_lbl_signature' => 'Ta signature',
 	'cfg_lbl_taille_vignette' => 'Taille des vignettes',
+	'cfg_lgd_cache' => 'Cache', # NEW
 	'cfg_lgd_choix_serveur' => 'Serveur',
 
 	// T

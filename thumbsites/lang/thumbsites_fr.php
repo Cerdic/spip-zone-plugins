@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cfg_descriptif' => 'Cette page vous permez de configurer le plugin Thumbsites, et, en particulier, de choisir le serveur de vignettes. Pour en savoir plus, consultez la <a href="http://www.spip-contrib.net/?article2584">documentation sur contrib</a>',
+	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:',
+	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.',
 	'cfg_inf_girafa_description' => 'Les vignettes générées seront au maximum de 160 x 120 pixels (cette valeur peut être modifiée sur le site de Girafa)',
 	'cfg_inf_girafa_parametres' => 'Veuillez saisir vos données personnelles:',
 	'cfg_inf_girafa_presentation' => 'Pour utiliser ce service vous devez être inscrit sur le site <a href="http://www.girafa.com">Girafa</a>. Il existe une version gratuite si vous souhaitez moins de 2000 captures par jour.',
 	'cfg_inf_miwin_parametres' => 'Veuillez saisir vos données personnelles:',
 	'cfg_inf_miwin_presentation' => 'Pour utiliser ce service vous devez mettre un lien vers le site <a href="http://thumbs.miwim.fr">Miwin</a>. La présence de ce lien est vérifié périodiquement par un script.',
-	'cfg_inf_apercite_parametres' => 'Veuillez saisir vos données personnelles:',
-	'cfg_inf_apercite_presentation' => '<a href="http://www.apercite.fr">apercite.fr</a> propose un service gratuit qui ne nécessite pas d\'identification.',
 	'cfg_inf_rotothumb_parametres' => 'Veuillez saisir vos données personnelles:',
 	'cfg_inf_rotothumb_presentation' => 'Pour utiliser ce service vous ne devez pas vous enregistrer mais vous devez mettre un lien vers le site <a href="http://www.robothumb.com">Robothumb</a>. La présence de ce lien est vérifié périodiquement par leur soin.',
 	'cfg_inf_thumbshots_de_description' => 'Les vignettes générées seront de 120 x 90 pixels.',
@@ -43,8 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_identifiant' => 'Votre identifiant',
 	'cfg_lbl_signature' => 'Votre signature',
 	'cfg_lbl_taille_vignette' => 'Taille des vignettes',
-	'cfg_lgd_choix_serveur' => 'Serveur',
 	'cfg_lgd_cache' => 'Cache',
+	'cfg_lgd_choix_serveur' => 'Serveur',
 
 	// T
 	'titre_thumbshot_site' => 'VIGNETTE DU SITE'
