@@ -73,16 +73,16 @@ function tw_liste_item($t,$quoi='item'){
 					if ($niveau == 0)
 						$ajout .= "\n\n";
 					elseif (!isset($pile_li[$niveau])) {
-						$ajout .= "<li$class_spip>";
-						$pile_li[$niveau] = "</li>";
+						$ajout .= "\begin/debutitemize/fin";
+						$pile_li[$niveau] = "\end/debutitemize/fin";
 					}
 					$niveau ++;
-					$ajout .= "<$type$class_spip_plus>";
-					$pile_type[$niveau] = "</$type>";
+					$ajout .= "\begin/debutitemize/fin";
+					$pile_type[$niveau] = "\end/debutitemize/fin";
 				}
 
-				$ajout .= "<li$class_spip>";
-				$pile_li[$profond] = "</li>";
+				$ajout .= "\item ";
+				$pile_li[$profond] = "";
 			}
 			else {
 				$ajout = $t[1];	// puce normale ou <hr>

@@ -6,7 +6,7 @@ fin:
   match: ['/debut', '/fin']
   replace: ['{', '}']
   type: str
-  priority: -20
+  priority: 0
 
 
 intertitres:
@@ -53,3 +53,10 @@ quote:
   if_str: '<quote>'
   type: str
   priority: -120
+
+listes:
+  if_str: "\n-"
+  is_wheel: Y
+  type: all
+  replace: spip/spip-listes.yaml
+  priority: -20 # avant !paragraphes
