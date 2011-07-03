@@ -32,21 +32,30 @@
 		<br class="nettoyeur" style="line-height:30px" />
 
         <div class="cartouche">
+        	<h2><:pubban:pratique:></h2>
+        </div>
+		<div class="texte entry-content">
+			#SET{url_page,#URL_PAGE{stat_pub}|parametre_url{pub,"1,2"}}
+        	<:pubban:documentation_3{url_exemple=#GET{url_page}}|propre:>
+		</div>
+		<br class="nettoyeur" style="line-height:30px" />
+
+        <div class="cartouche">
         	<h2><:pubban:exemples_par_defaut:></h2>
         </div>
         <div class="cartouche">
-        	<h3>1_ <:pubban:skyscraper_banner:></h2>
+        	<h3 id="skyscraper">1_ <:pubban:skyscraper_banner:></h2>
             <p><small><:pubban:testing_page_code:>
             <code>
             &#035;PUBBAN{skyscraper}
             </code>
             </small></p>
         </div>
-		<div class="texte entry-content"><:pubban:cf_navigation:></div>
+		<div class="texte entry-content"><:pubban:cf_navigation{url=#skyscraper_frame}|propre:></div>
 		<br class="nettoyeur" style="line-height:30px" />
 
         <div class="cartouche">
-        	<h3>2_ <:pubban:leaderboard_banner:></h2>
+        	<h3 id="leaderboard">2_ <:pubban:leaderboard_banner:></h2>
             <p><small><:pubban:testing_page_code:>
             <code>
             &#035;PUBBAN{leaderboard}
@@ -57,10 +66,10 @@
 		<br class="nettoyeur" style="line-height:30px" />
 
         <div class="cartouche">
-        	<h3>3_ <:pubban:banner_banner:></h2>
+        	<h3 id="banner">3_ <:pubban:banner_banner:></h2>
             <p><small><:pubban:testing_page_code:>
             <code>
-            &#035;PUBBAN{banner}
+            &#035;PUBBAN{banner_yo}
             </code>
             </small></p>
         </div>
@@ -68,7 +77,7 @@
 		<br class="nettoyeur" style="line-height:30px" />
 
         <div class="cartouche">
-        	<h3>4_ <:pubban:cube_banner:></h2>
+        	<h3 id="cube">4_ <:pubban:cube_banner:></h2>
             <p><small><:pubban:testing_page_code:>
             <code>
             &#035;PUBBAN{cube}
