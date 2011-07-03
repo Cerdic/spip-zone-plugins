@@ -14,7 +14,7 @@ intertitres:
   # intertitres
   match: ['{{{', '}}}']
   replace: ["\n\n\n\subsection/debut", "/fin\n\n\n"]
-#  if_str: '{{{'
+  if_str: '{{{'
   type: str
   priority: -140
 
@@ -33,7 +33,7 @@ gras:
   match: ['{{', '}}']
   replace: ['\textbf/debut', '/fin']
   type: str
-  #if_str: '{{'
+  if_str: '{{'
   priority: -130
 
 
@@ -51,7 +51,7 @@ italiques:
   match: ['{', '}']
   replace: ['\emph/debut', '/fin']
   type: str
-  #if_str: '{'
+  if_str: '{'
   priority: -120				# en tout premier
 
 quote:

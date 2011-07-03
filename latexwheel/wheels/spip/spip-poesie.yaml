@@ -14,14 +14,12 @@
 -
     # ligne contenant une espace => ligne contenant un &nbsp;
     match: "/\n[\s]*\n/Su"
-    replace: "\n&nbsp;\n"
+    replace: "\n~\n"
 -
-    # deux sauts de ligne => div
-    match: "/\n+/"
-    replace: "</div>\n<div>"
+
 
 -
-    # entourer avec un blockquote.spip_poesie
+    # entourer avec un begin{verse}
     type: all
-    replace: "<blockquote class=\"spip_poesie\">\n\n<div>$0</div>\n</blockquote>\n\n"
+    replace: "\begin/debutverse/fin\n\n$0\n\end/debutverse/fin\n\n"
 
