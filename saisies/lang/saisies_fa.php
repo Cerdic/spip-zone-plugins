@@ -13,6 +13,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_docs_rubrique' => 'مرور بخش',
 	'bouton_parcourir_mediatheque' => 'مرور كتابخانه چندرسانه‌اي',
 
+	// C
+	'construire_action_annuler' => 'Annuler', # NEW
+	'construire_action_configurer' => 'Configurer', # NEW
+	'construire_action_dupliquer' => 'Dupliquer', # NEW
+	'construire_action_supprimer' => 'Supprimer', # NEW
+	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
+	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
+	'construire_attention_modifie' => 'Le formulaire ci-dessous est diff&eacute;rent du formulaire initial. Vous avez la possibilit&eacute; de le r&eacute;initialiser &agrave; son &eacute;tat avant vos modifications.', # NEW
+	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
+	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
+	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
+	'construire_position_explication' => 'Indiquez devant quel autre champ sera plac&eacute; celui-ci.', # NEW
+	'construire_position_fin_formulaire' => '&Agrave; la fin du formulaire', # NEW
+	'construire_position_fin_groupe' => '&Agrave; la fin du groupe @groupe@', # NEW
+	'construire_position_label' => 'Position du champ', # NEW
+	'construire_reinitialiser' => 'R&eacute;initialiser le formulaire', # NEW
+	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?', # NEW
+	'construire_verifications_aucune' => 'Aucune', # NEW
+	'construire_verifications_label' => 'Type de v&eacute;rification &agrave; effectuer', # NEW
+
 	// L
 	'label_annee' => 'سال',
 	'label_jour' => 'روز',
