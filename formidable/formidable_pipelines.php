@@ -3,12 +3,6 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formidable_header_prive($flux){
-	$css = find_in_path('css/formulaires_constructeur.css');
-	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' />\n";
-	return $flux;
-}
-
 // Si pas de critère "statut", on affiche que les réponses publiées
 function formidable_pre_boucle($boucle){
 	if ($boucle->type_requete == 'formulaires_reponses') {

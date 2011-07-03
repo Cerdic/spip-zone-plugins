@@ -8,6 +8,8 @@ function saisies_header_prive($flux){
 	$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
 	$css = generer_url_public('saisies.css');
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' media='all' />\n";
+	$css_constructeur = find_in_path('css/formulaires_constructeur.css');
+	$flux .= "\n<link rel='stylesheet' href='$css_constructeur' type='text/css' />\n";
 	return $flux;
 }
 
