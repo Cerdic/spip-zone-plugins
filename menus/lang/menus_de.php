@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'confirmer_supprimer_entree' => 'Voulez-vous vraiment supprimer cette entrée ?', # NEW
+	'confirmer_supprimer_entree' => 'Wollen sie diesen Eintrag wirklich löschen?',
 
 	// D
 	'description_menu_accueil' => 'Link zur Startseite.',
@@ -33,10 +33,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_menus_exporter' => 'Menü exportieren',
 	'editer_menus_nouveau' => 'Neues Menü anlegen',
 	'editer_menus_titre' => 'Menüs der Website',
-	'entree_afficher_articles' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
-	'entree_afficher_item_suite' => 'Inclure les articles dans le menu ? (mettre "oui" pour cela)', # NEW
-	'entree_articles_max' => 'Si oui, afficher les articles seulement si la rubrique contient au maximum xx articles ? (mettre le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
-	'entree_articles_max_affiches' => 'Si oui, limiter le nombre d\'articles list&eacute;s &agrave; xx maximum (suivis d\'un item "... Tous les articles" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum d\'articles, laissez vide pour afficher tous les articles)', # NEW
+	'entree_afficher_articles' => 'Artikel in das Menü einbeziehen? ("oui" eintragen wenn gewünscht)',
+	'entree_afficher_item_suite' => 'Artikel in das Menü einbeziehen? ("oui" eintragen wenn gewünscht)',
+	'entree_articles_max' => 'Wenn ja, Artikel nur anzeigen, wenn die Rubrik maximal xx Artikel enthält. (Obergrenze eintragen, leer lassen um alle anzuzeigen)',
+	'entree_articles_max_affiches' => 'Wenn ja, Anzahl der angezeigten Artikel auf xx begrenzen; weitere werden durch den Eintrag "... alle Artikel" ersetzt. (Obergrenze eintragen, leer lassen um alle anzuzeigen)',
 	'entree_aucun' => 'Keiner',
 	'entree_bloc' => 'ZPIP Block',
 	'entree_choisir' => 'Wählen sie die Art EIntrag, die sie hinzufügen wollen:',
@@ -48,11 +48,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_mot' => 'Nummer des Schlagworts',
 	'entree_id_objet' => 'Nummer',
 	'entree_id_rubrique' => 'Nummer der übergeordeneten Rubrik',
-	'entree_id_rubriques_exclues' => 'Numéros des rubriques à exclure, séparés par des virgules', # NEW
-	'entree_id_secteur_exclus' => 'Numéro du secteur à exclure', # NEW
+	'entree_id_rubriques_exclues' => 'Nummern der auszuschließenden Rubriken, getrennt durch Semikolons.',
+	'entree_id_secteur_exclus' => 'Nummer des auszuschließenden Sektors',
 	'entree_infini' => 'Unendlich',
 	'entree_mapage' => 'Meine eigene Seite',
-	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)', # NEW
+	'entree_masquer_articles_uniques' => 'Wenn ja und falls die Rubrik nur einen Artikel enthält wird dieser maskiert ("oui" eintragen wenn gewünscht).',
 	'entree_niveau' => 'Tiefe der Unterrubriken',
 	'entree_nombre_articles' => 'Maximale Anzahl Artikel (Standardwert 0)',
 	'entree_page' => 'Name der Seite',
@@ -64,7 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre' => 'Titel',
 	'entree_titre_connecter' => 'Titel für den Zugang zum Anmeldeformular',
 	'entree_titre_prive' => 'Titel für den Redaktionszugang',
-	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)', # NEW
+	'entree_traduction_articles_rubriques' => 'Wenn möglich Artikel der Rubrik in der Sprache des Kontext anzeigen ("oui" eintragen wenn gewünscht)',
 	'entree_traduction_objet' => 'Übersetzung von Artikeln in Abhängigkeit vom Sprachkontext auswählen (für diese EInstellung "trad" eintragen)',
 	'entree_tri_alpha' => 'Sortierkriterium (alphanumerisch)',
 	'entree_tri_num' => 'Sortierkriterium (numerisch)',
@@ -110,16 +110,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_titre' => 'Titel',
 
 	// I
-	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
-	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
-	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
+	'info_afficher_articles' => 'Artikel werden im Menü angezeigt',
+	'info_articles_max' => 'Nur wenn die Rubrik maximal @max@ Artikel enthält.',
+	'info_articles_max_affiches' => 'Anzeige ist begrenst auf maximal @max@  Artikel.',
 	'info_connexion_obligatoire' => 'Login obligatorisch',
 	'info_deconnexion_obligatoire' => 'Nur wenn nicht eingelogt',
-	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
+	'info_masquer_articles_uniques' => 'Einzelne Artikel maskieren.',
 	'info_numero_menu' => 'MENÜ NUMMER:',
 	'info_page_speciale' => 'Link zu Seite « @page@ »',
 	'info_page_speciale_zajax' => 'Modale Box der Seite « @page@ » für den Block « @bloc@ »',
-	'info_secteur_exclus' => ' (sauf le secteur @id_secteur@)', # NEW
+	'info_secteur_exclus' => '(außer Sektor @id_secteur@)',
 	'info_sousrub_cond' => 'Nur die Unterrubriken der aktuellen Rubrik werden angezeigt',
 	'info_tous_groupes_mots' => 'Alle Schlagwortgruppen',
 	'info_traduction_recuperee' => 'Die angezeigte Übersetzung wird je nach Sprachkontext gewählt.',
@@ -143,13 +143,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_objet' => 'Artikel, Rubrik oder anderes SPIP-Objekt',
 	'nom_menu_page_speciale' => 'Link zu einer HTML-Vorlage',
 	'nom_menu_page_speciale_zajax' => 'Block einer ZPIP-Seite',
-	'nom_menu_rubriques' => 'Liste oder Baumansicht der Rubriken', # MODIF
+	'nom_menu_rubriques' => 'Liste oder Baumansicht der Rubriken und Artikel',
 	'nom_menu_rubriques_evenements' => 'Ereignisse der Rubriken',
 	'nom_menu_secteurlangue' => 'Hauptrubriken nach Sprache',
 	'nom_menu_texte_libre' => 'Freitext',
 
 	// T
-	'tous_les_articles' => '... Tous les articles' # NEW
+	'tous_les_articles' => '... alle Artikel'
 );
 
 ?>
