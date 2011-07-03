@@ -80,17 +80,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Next page', # MODIF
 	'plug_actifs' => 'Active plugins', # MODIF
 	'plug_inactifs' => 'Inactive plugins', # MODIF
-	'plugin_xml' => 'Je kolekciou malých užitočných nástrojov na uľahčenie riadenia SPIP-stránky v jednom zásuvnom module.
+	'plugin_xml' => 'Kolekcia malých, užitočných nástrojov, aby bolo riadenie vašej stránky ešte ľahšie.
 
-Každý nástroj sa dá osobitne (de)aktivovať individually na [administračnej stránke zásuvného modulu->./?exec=admin_couteau_suisse]. Ak chcete nastaviť nejaké možnosti, kliknite na{{Konfiguráciu}}, potom vyberte kartu{{Vreckový nožík}}.
+Každý nástroj sa dá osobitne (de)aktivovať  na [administračnej stránke zásuvného modulu->./?exec=admin_couteau_suisse]. Ak chcete nastaviť niekoľko možností stránky, kliknite na {{Konfiguráciu}}, potom vyberte kartu{{Vreckový nožík}}.
 
-Available categories are: Administration, Typographical improvements, Typographical shortcuts, Display on the public site, Tags, Filters, Criteria.
+K dispozícii sú kategórie: Administrácia, Klávesové vylepšenia, Klávesové skratky, Zobraziť na verejnej stránke, Tagy, Filtre, Kritériá.
 
-Nájdite si svoje obľúbené nástroje v tomto zásuvnom module: {Vymazať číslo}, {Formáty URL},{Horný index}, {Okrúhle obrátené bodky}, {Krásne obrázky}, {Boj proti SPAMU}, {Mailcrypt}, {Pekné adresy URL}, {SPIP a externé odkazy}, {Smajlíky}, {Súhrn vašich článkov}, {Rozdelenie na stránky a karty}, atď., atď.
+V tomto zásuvnom module je zaradených niekoľko populárnych nástrojov: {Vymazať číslo}, {Formáty URL},{Horný index}, {Okrúhle obrátené bodky}, {Krásne odrážky}, {Boj proti SPAMU}, {Šifrovanie pošty}, {Spriatelené weby}, {SPIP a externé odkazy}, {Smajlíky}, {Zhrnutie pre vaše články}, {Rozdelenie na stránky a karty}, atď., atď.
 
 Prečítajte si dokumentáciu na: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Kompatibilita: SPIP 1.92x and v2.0.x', # MODIF
+Kompatibilita: SPIP 1.92x and v2.0.x',
 	'pp_autobr' => 'Vložte blok textu s automatickým dopĺňaním',
 	'pp_blocs_bloc' => 'Insérer un bloc replié', # NEW
 	'pp_blocs_visible' => 'Insérer un bloc déplié', # NEW

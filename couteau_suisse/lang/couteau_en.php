@@ -21,38 +21,38 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'colorer_fond' => 'Colour the background',
 	'colorer_texte' => 'Colour the text',
-	'configurer' => 'Suiss Army Knife configuration',
+	'configurer' => 'Swiss Army Knife configuration',
 	'connections' => 'Connections',
 
 	// D
 	'date_court' => '@jour@/@mois@/@annee@',
-	'derniers_connectes' => 'Last connected:',
+	'derniers_connectes' => 'Connected recently:',
 
 	// E
-	'email_forum' => 'Please give your email address!',
-	'explique_spam' => 'Warning : you have used forbidden tags, characters or words. <br /><br />Start again!',
+	'email_forum' => 'Enter your email address!',
+	'explique_spam' => 'Warning: you have used forbidden tags, characters or words. <br /><br />Start again!',
 
 	// L
 	'lancer_test' => 'Run the test!',
 	'lutte_spam' => 'Fight against SPAM',
 
 	// M
-	'maj_actu' => 'Force the remote update',
-	'maj_liste' => 'List of detected plugins:',
-	'maj_maj' => 'Update the selected plugin',
+	'maj_actu' => 'Force a remote update',
+	'maj_liste' => 'Plugins detected:',
+	'maj_maj' => 'Update this plugin',
 	'maj_ok' => 'This [plugin->@zip@] appears to be [up-to-date->@url@].',
 	'maj_rev' => 'Ver. @revision@',
 	'maj_rev_ko' => 'The [remote version->@url@] could not be found.',
 	'maj_rev_ok' => 'Version [@revision@->@url@] is [available->@zip@].',
-	'maj_spip' => 'After having carefully updated all of your plugins, it is highly recommended to update SPIP itself by clicking on the link above and following the suggested instructions.',
+	'maj_spip' => 'After having updated all of your plugins, we strongly recommended you now update SPIP itself by clicking on the link above and following the instructions.',
 	'maj_svn' => 'This SVN plugin appears to be [up-to-date->@url@].',
 	'maj_verif' => 'First check which file is right for you:',
-	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you wish to update.',
+	'maj_verif2' => 'N.B. After clicking on the button above, make sure that the file you downloaded corresponds to the plugin you want to update.',
 	'maj_zip_ko' => 'The remote .zip file could not be identified.',
-	'msg_publies' => 'Only the published messages',
+	'msg_publies' => 'Only published messages',
 
 	// N
-	'nom_email_forum' => 'Please give your name or email address!',
+	'nom_email_forum' => 'Give your name or email address!',
 	'nom_forum' => 'Please give your name!',
 	'non_confirmes' => 'Unconfirmed:',
 
@@ -80,18 +80,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'Next page',
 	'plug_actifs' => 'Active plugins',
 	'plug_inactifs' => 'Inactive plugins',
-	'plugin_xml' => 'Gathers together a collection of small, useful tools in one plugin for facilitating the management of your SPIP site.
+	'plugin_xml' => 'A collection of small, useful tools in a single plugin to make managing your SPIP site even easier.
 
-Each tool can be activated/deactivated individually from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set numerous site options, click on {{Configuration}}, then choose the {{Swiss Army Knife}} tab.
+Each tool can be individually activated/deactivated from the [plugin\'s admin page->./?exec=admin_couteau_suisse]. To set several site options, click on {{Configuration}}, then choose the {{Swiss Army Knife}} tab.
 
-Available categories are: Administration, Typographical improvements, Typographical shortcuts, Public site display options, Tags, Filters, Criteria.
+Categories available: Administration, Typographical improvements, Typographical shortcuts, Public site display options, Tags, Filters, Criteria.
 
-Some of your already familiar favourite tools are included in this plugin: {Delete the number}, {URL formats}, {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Friendly URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
+Some popular tools are included in this plugin: {Delete the number}, {URL formats}, {Superscript}, {Curly inverted commas}, {Beautiful bullets}, {Fight against SPAM}, {Mailcrypt}, {Friendly URLs}, {SPIP and external links}, {Smileys}, {A summary for your articles}, {Division in pages and tabs}, etc., etc.
 
 See the documentation articles at: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-Compatibility: SPIP 1.92x, v2.0.x and v2.1.x', # MODIF
-	'pp_autobr' => 'Insert a text block with automatic line returns',
+Compatibility: SPIP 1.92x, v2.0.x and v2.1.x',
+	'pp_autobr' => 'Insert a block of text with automatic line returns',
 	'pp_blocs_bloc' => 'Insert a collapsed block',
 	'pp_blocs_visible' => 'Insert an expanded block',
 	'pp_chatons_inserer' => 'Insert the " @chaton@ " emoticon/smiley',
@@ -140,7 +140,7 @@ Compatibility: SPIP 1.92x, v2.0.x and v2.1.x', # MODIF
 
 	// V
 	'variable_vide' => '(Empty)',
-	'visiteurs_connectes' => 'Logged in visitors: @nb@',
+	'visiteurs_connectes' => 'Visitors logged in: @nb@',
 
 	// W
 	'webmestres' => 'SPIP webmasters'
