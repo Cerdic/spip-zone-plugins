@@ -15,6 +15,7 @@ function formulaires_pubban_editer_pub_charger_dist($id_pub='new', $retour=''){
 		'statut' => '1inactif',
 		'titre' => '',
 		'url' => $GLOBALS['meta']['adresse_site'].'/',
+		'blank' => 'oui',
 		'url_optionnel' => defined('_DIR_PUBLIC_PUBBAN') && _PUBBAN_ADDS ? 'oui' : '',
 		'objet' => '',
 		'emplacement' => _request('id_empl') ? _request('id_empl') : array(),
@@ -88,6 +89,7 @@ function formulaires_pubban_editer_pub_traiter_dist($id_pub='new', $retour=''){
 	$datas = array( 
 		'titre' => _request('titre'),
 		'url' => _request('url'),
+		'blank' => _request('blank'),
 		'objet' => $objet,
 		'type' => $type,
 		'illimite' => ($ill = _request('illimite') AND $ill == 'oui') ? 'oui' : 'non',

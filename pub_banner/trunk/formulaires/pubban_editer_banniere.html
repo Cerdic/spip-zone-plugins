@@ -9,7 +9,12 @@
 		    	<label for="titre"><:pubban:info_titre_banniere:>&nbsp;:</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" />
-				<p class="explication"><:pubban:info_titre_comment:></p>
+	    </li>
+	    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{titre_id}|oui)erreur]">
+		    	<label for="titre"><:pubban:info_titre_id_banniere:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre_id})</span>
+				]<input type='text' class='text' name='titre_id' id='titre_id' value="[(#ENV**{titre_id})]" />
+				<p class="explication"><:pubban:info_titre_id_comment:></p>
 	    </li>
 	    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{dimensions}|oui)erreur]">
 		    	<label for="width"><:pubban:info_taille_banniere:>&nbsp;:</label>[

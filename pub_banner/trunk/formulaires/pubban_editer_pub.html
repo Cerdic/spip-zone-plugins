@@ -18,6 +18,16 @@
 				]<input type='text' class='text' name='url' id='url' value="[(#ENV**{url})]" />
 				[(#ENV{url_optionnel}|=={oui}|oui)<p class='explication'><:pubban:comment_url_optionnel:></p>]
 		    </li>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{blank}|oui)erreur]">
+	      		<label for="blank"><:pubban:target_blank:>&nbsp;:</label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{blank})</span>]
+		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
+					<input type='radio' class='radio' name='blank' id='blank_oui' value="oui"[(#ENV**{blank}|=={oui}|oui) checked="checked"] /><:pubban:oui:>
+				</label>
+		    	<label style="padding:0;margin:0;width:auto;padding-right:1em;">
+					<input type='radio' class='radio' name='blank' id='blank_non' value="non"[(#ENV**{blank}|=={non}|oui) checked="checked"] /><:pubban:non:>
+				</label>
+		    </li>
 		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{emplacement}|oui)erreur]">
 		    	<label for="emplacement"><:pubban:titre_tablo_emplacement:>&nbsp;:</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{emplacement})</span>

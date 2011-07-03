@@ -12,6 +12,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_pubban_editer_banniere_charger($id_empl='new', $retour=''){
 	$valeurs = array(
 		'titre' => '',
+		'titre_id' => '',
 		'width' => '',
 		'height' => '',
 		'ratio_pages' => '',
@@ -39,11 +40,15 @@ function formulaires_pubban_editer_banniere_traiter($id_empl='new', $retour=''){
 	include_spip('inc/pubban_process');
 	$datas = array(
 		'titre' => _request('titre'),
+		'titre_id' => pubban_transformer_titre_id(_request('titre_id')),
 		'width' => pubban_transformer_nombre( _request('width') ),
 		'height' => pubban_transformer_nombre( _request('height') ),
 		'ratio_pages' => _request('ratio_pages'),
 		'statut' => _request('statut'),
 	);
+	if (empty($datas['titre_id'])) {
+		$datas['titre_id'] = pubban_transformer_titre_id($datas['titre']);
+	}
 	if($id_empl == 'new') {
 		$instit_empl = charger_fonction('instituer_emplacement', 'inc');
 		if( $id_empl = $instit_empl($datas) )

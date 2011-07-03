@@ -13,6 +13,7 @@
 $GLOBALS['emplacements_site'] = array(
 	'1' => array(
 		'titre' => 'Skyscraper', 
+		'titre_id' => 'skyscraper', 
 		'width' => '160', 
 		'height' => '600', 
 		'statut' => '2actif',
@@ -20,6 +21,7 @@ $GLOBALS['emplacements_site'] = array(
 	),
 	'2' => array(
 		'titre' => 'Banner', 
+		'titre_id' => 'banner', 
 		'width' => '468', 
 		'height' => '60', 
 		'statut' => '2actif',
@@ -27,6 +29,7 @@ $GLOBALS['emplacements_site'] = array(
 	),
 	'3' => array(
 		'titre' => 'Leaderboard', 
+		'titre_id' => 'leaderboard', 
 		'width' => '728', 
 		'height' => '90', 
 		'statut' => '2actif',
@@ -34,6 +37,7 @@ $GLOBALS['emplacements_site'] = array(
 	),
 	'4' => array(
 		'titre' => 'Cube', 
+		'titre_id' => 'cube', 
 		'width' => '250', 
 		'height' => '250', 
 		'statut' => '2actif',
@@ -49,6 +53,7 @@ $GLOBALS['publicites_site'] = array(
 		'id_empl' => '1',
 		'titre' => 'Skyscraper : exemple 1',
 		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+		'blank' => 'non',
 		'objet' => _DIR_IMGPUB.'/pubbantest_skyscraper.png',
 		'type' => 'img',
 		'statut' => '2actif',
@@ -69,6 +74,7 @@ $GLOBALS['publicites_site'] = array(
 		'id_empl' => '2',
 		'titre' => 'Banner : exemple 2', 
 		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
+		'blank' => 'non',
 		'objet' => _DIR_IMGPUB.'/bannierewipub468x60.gif',
 		'type' => 'img',
 		'statut' => '2actif',

@@ -24,6 +24,7 @@ function pubban_declarer_tables_principales($tables_principales){
 		"id_pub"			=> "int(21) NOT NULL",
 		"statut"			=> "varchar(100) NOT NULL default '1inactif'",
 		"url"				=> "varchar(200) NOT NULL default ''",
+		"blank"				=> "enum('non','oui') NOT NULL default 'oui'",
 		"titre"				=> "varchar(200) NOT NULL default ''",
 		"objet" 			=> "text NOT NULL",
 		"type"				=> "varchar(60) NOT NULL default 'img'",
@@ -54,6 +55,7 @@ function pubban_declarer_tables_principales($tables_principales){
 		"id_empl"		=> "int(21) NOT NULL",
 		"statut"		=> "varchar(100) NOT NULL default '1inactif'",
 		"titre"			=> "varchar(30) NOT NULL default ''",
+		"titre_id"		=> "varchar(30) NOT NULL default ''",
 		"width"			=> "bigint(5) NOT NULL default '0'",
 		"height"		=> "bigint(5) NOT NULL default '0'",
 		"ratio_pages"	=> "int(3) NOT NULL default '0'",
@@ -61,6 +63,7 @@ function pubban_declarer_tables_principales($tables_principales){
 	);
 	$spip_table_pubban_empl_key = array(
 		"PRIMARY KEY" 	=> "id_empl",
+//		"KEY titre_id" 	=> "titre_id",
 	);
 	$spip_table_pubban_empl_join = array(
 		"id_empl" 	=> "id_empl",

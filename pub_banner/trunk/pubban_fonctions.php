@@ -95,7 +95,8 @@ function pubban_exporter($list_id){
 	exit;
 */
 	inc_exporter_csv_dist(
-		$export, $donnees,';', array_map('texte_backend', array_map('textebrut', $entetes))
+//		$export, $donnees,';', array_map('texte_backend', array_map('textebrut', $entetes))
+		$export, $donnees,',', array_map('texte_backend', array_map('textebrut', $entetes))
 	);
 }
 

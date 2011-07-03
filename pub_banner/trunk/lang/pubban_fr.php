@@ -53,7 +53,7 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'comment_dates' => 'Notez les dates sous la forme \'AAAA-MM-JJ\'',
 	'cube_banner' => 'Banni&egrave;re "Cude"',
 	'cacher_bordure' => 'Cacher les bordures des banni&egrave;res',
-	'cf_navigation' => 'Cf. colonne de navigation',
+	'cf_navigation' => 'Cf. [colonne de navigation->@url@]',
 
 // D //
 	'documentation_info' => 'Documentation/Information',
@@ -64,6 +64,7 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'doc_info' => 'Nous vous renvoyons &agrave; la doc du plugin pour plus d\'informations :',
 	'derniers_jours' => 'derniers jours',
 	'date_pub' => 'Date d\'enregistrement',
+	'date_pub_maj' => 'Date de derni&egrave;re mise &agrave; jour',
 	'dates_validite_pub' => 'Dates de validit&eacute;',
 	'date_debut' => 'Date de d&eacute;but de validit&eacute;',
 	'date_fin' => 'Date de fin de validit&eacute;',
@@ -91,6 +92,9 @@ Des valeurs par d&eacute;faut sont entr&eacute;es dans les tables, &agrave; savo
 
 Ces banni&egrave;res s\'int&egrave;grent dans vos squelettes en indiquant simplement la balise :
 <cadre class="spip">
+// identifiant "banner_id" de la banniere
+#PUBBAN{banner_id}
+
 // nom de la banniere
 #PUBBAN{nom_de_la_banniere}
 
@@ -103,6 +107,9 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 -* Vous pouvez lire une description de ce plugin sur le site Spip-Contrib &agrave; l\'adresse : [->http://www.spip-contrib.net/SPIP-Bonux].
 -* Vous pouvez le t&eacute;l&eacute;charger &agrave; l\'adresse : [->http://zone.spip.org/trac/spip-zone/browser/_plugins_/spip-bonux-2?rev=31575] ({ici en version 2}).
 ',
+	'documentation_3' => 'Le plugin propose de suivre l\'efficacit&eacute; des campagnes de plusieurs fa&ccedil;ons :
+-* via la page de "statistiques" de l\'espace priv&eacute;, qui pr&eacute;sente diff&eacute;rents graphes de suivi des affichages et des clics, selon plusieurs p&eacute;riodes au choix, pour chaque banni&egrave;re,
+-* via une page publique qui r&eacute;sume les valeurs de chaque publicit&eacute; ({toutes, une seule ou plusieurs}) et permet de les exporter au fromat CSV ({[voir une exemple pour les pubs 1 et 2->@url_exemple@]}).',
 
 // E //
 	'exemples_par_defaut' => 'Exemples (banni&egrave;res par d&eacute;faut)',
@@ -150,9 +157,10 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'illimite' => 'Droits illimit&eacute;s',
 	'integer_edit' => '&Eacute;dition d\'une banni&egrave;re',
 	'intro_integer_edit' => '&Eacute;dition de banni&egrave;res',
-	'intro_integer_edit_texte' => 'Pour appeler une banni&egrave;re dans vos squelettes, indiquez la balise&nbsp;: <br /><center><b># PUBBAN{nom_banniere}</b></center><br />Les espaces du titre r&eacute;el sont remplac&eacute;s par des <b>underscore</b> dans l\'appel &agrave; la balise.<br /><br /><i>Nous attirons votre attention sur le commentaire concernant le titre des banni&egrave;res : <u>&eacute;vitez les caract&egrave;res sp&eacute;ciaux</u>! Si vous souhaitez les utiliser, faites de nombreux tests avant mise en ligne ...</i>',
+	'intro_integer_edit_texte' => 'Pour appeler une banni&egrave;re dans vos squelettes, indiquez la balise&nbsp;: <br /><center><b># PUBBAN{banner_id}</b></center><br />Si vous laissez le champ "Banner ID" vide, il sera g&eacute;n&eacute;r&eacute; automatiquement en utilisant le titre et en rempla&ccedil;ant les espaces par des <b>underscore</b>.<br /><br /><i>Nous attirons votre attention sur le commentaire concernant le "banner_id" des banni&egrave;res : <u>&eacute;vitez les caract&egrave;res sp&eacute;ciaux</u>! Si vous souhaitez les utiliser, faites de nombreux tests avant mise en ligne ...</i>',
 	'info_titre_banniere' => 'Titre de l\'emplacement',
-	'info_titre_comment' => '<i>Il est fortement d&eacute;conseill&eacute; d\'utiliser des caract&egrave;res accentu&eacute;s ou sp&eacute;ciaux dans les titres de banni&egrave;res, cela pourrait provoquer une erreur lors de l\'appel de la balise PUBBAN ...</i>',
+	'info_titre_id_banniere' => 'Banner_ID de l\'emplacement',
+	'info_titre_id_comment' => '<i>Il est fortement d&eacute;conseill&eacute; d\'utiliser des caract&egrave;res accentu&eacute;s ou sp&eacute;ciaux, cela pourrait provoquer une erreur lors de l\'appel de la balise PUBBAN ...</i>',
 	'info_taille_banniere' => 'Dimensions de la banni&egrave;re',
 	'info_emplacement' => 'Statut de l\'emplacmenet',
 	'info_ratio_banniere' => 'Ratio de la banni&egrave;re (<i>optionnel</i>)',
@@ -223,6 +231,8 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'manque_date_fin' => 'Veuillez pr&eacute;ciser une date de fin',
 
 // N //
+	'num_version_svn' => 'Num&eacute;ro de r&eacute;vision SVN',
+	'num_version_base' => 'Version des tables SQL',
 	'nouveau_empl' => 'Cr&eacute;er une nouvelle banni&egrave;re',
 	'no_empl_found' => 'Banni&egrave;re introuvable ...',
 	'no_empl_yet' => 'Il n\'y a pas encore de banni&egrave;re configur&eacute;e ...',
@@ -269,6 +279,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'pub' => 'publicit&eacute;(s)',
 	'page_stats' => 'Page de statistiques',
 	'prerequis' => 'Pr&eacute;-requis',
+	'pratique' => 'Dans la pratique',
 
 // R //
 	'retour_liste_empl' => 'Retour &agrave; la liste des banni&egrave;res',
@@ -296,6 +307,8 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'skyscraper_banner' => 'Banni&egrave;re "Skyscraper"',
 
 // T //
+	'target_blank' => 'Redirection dans une nouvelle fen&ecirc;tre',
+	'target_parent' => 'Redirection en fen&ecirc;tre courante',
 	'titre_cadre_modifier_empl' => 'Modification d\'une banni&egrave;re',
 	'titre_cadre_ajouter_empl' => 'Cr&eacute;ation d\'une banni&egrave;re',
 	'titre_nouvel_empl' => 'NOUVELLE BANNI&Egrave;RE',
@@ -322,6 +335,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 
 // U //
 	'url_update' => 'URL de t&eacute;l&eacute;chargement',
+	'url_traceur' => 'URL du traceur de d&eacute;veloppement SVN (spip-zone)',	
 	'url_pub' => 'URL de redirection (au clic)',
 
 // V //

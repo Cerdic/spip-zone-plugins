@@ -121,7 +121,11 @@ define('_PUBBAN_URL', 'http://www.spip-contrib.net/?article3637');
 /**
  * URL de telechargement des mises a jour
  */
-define('_PUBBAN_UPDATE', 'http://projets.pierowbmstr.fr/SPIP_paquets/pub_banner.zip');
+define('_PUBBAN_UPDATE', 'http://files.spip.org/spip-zone/pub_banner.zip');
+/**
+ * Traceur de dev.
+ */
+define('_PUBBAN_TRAC', 'http://zone.spip.org/trac/spip-zone/browser/_plugins_/pub_banner');
 
 // charger la config
 include_spip('inc/pubban_configset');
@@ -209,14 +213,17 @@ function pubban_recuperer_emplacement($id_empl, $str=false) {
 			while ($row=spip_fetch_array($resultat)) {
 				$vals['id'] = $id_empl;
 				$vals['titre'] = $row['titre'];
+				$vals['titre_id'] = $row['titre_id'];
 				$vals['width'] = $row['width'];
 				$vals['height'] = $row['height'];
 				$vals['ratio_pages'] = $row['ratio_pages'];
 				$vals['statut'] = $row['statut'];
+/*
 				$vals['prix_tranche_1'] = $row['prix_tranche1'];
 				$vals['prix_tranche_2'] = $row['prix_tranche2'];
 				$vals['prix_tranche_3'] = $row['prix_tranche3'];
 				$vals['prix_tranche_4'] = $row['prix_tranche4'];
+*/
 			}
 			sql_free($resultat, _BDD_PUBBAN);
 		}
@@ -235,9 +242,22 @@ function pubban_recuperer_emplacement($id_empl, $str=false) {
  */
 function pubban_recuperer_emplacement_par_nom($name) {
 	include_spip('base/abstract_sql');
-	$_name = str_replace('_', ' ', strtolower($name));
+
+	// Si c'est un "id" on renvoie
+	if (is_numeric($name))
+		return pubban_recuperer_emplacement($name);
+
+	// Par "titre_id"
+	$id_empl = sql_getfetsel("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "titre_id=".sql_quote($name), '', '', '', '', _BDD_PUBBAN);
+	if($id_empl)
+		return pubban_recuperer_emplacement($id_empl);
+
+	// Par "titre" (compatibilite)
 	$id_empl = sql_getfetsel("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "titre LIKE ('$name')", '', '', '', '', _BDD_PUBBAN);
-	if($id_empl) return( $vals = pubban_recuperer_emplacement($id_empl) );
+	if($id_empl)
+		return pubban_recuperer_emplacement($id_empl);
+
+	// Sinon nada
 	return false;
 }
 
@@ -273,6 +293,11 @@ function pubban_transformer_nombre($nombre){
 	$nombre = str_replace(' ', '', $nombre);
 	$nombre = str_replace(',', '.', $nombre);
 	return trim($nombre);
+}
+
+function pubban_transformer_titre_id($str){
+	$str = str_replace(' ', '_', utf8_encode($str));
+	return trim($str);
 }
 
 ?>

@@ -17,7 +17,8 @@
 
 <div class="vevent id_#ID_PUB">
 	<p class='date'>
-		<strong><:pubban:date_pub:></strong>&nbsp;:&nbsp;[(#DATE_ADD|affdate)]
+		[<strong><:pubban:date_pub:></strong>&nbsp;:&nbsp;(#DATE_ADD|affdate) [(#DATE_ADD|affdate{H:i})]]
+		[<br /><strong><:pubban:date_pub_maj:></strong>&nbsp;:&nbsp;(#MAJ|affdate) [(#MAJ|affdate{H:i})]]
 	</p>
 	<p class='date'><strong><:pubban:emplacement_pub:>&nbsp;:&nbsp;
 <BOUCLE_empl(pubban_pub_empl){id_pub=#ENV{id_pub}}>
@@ -47,7 +48,10 @@
 	</p>
 	<p class='date'>
 		<strong><:pubban:url_pub:></strong>&nbsp;:
-		<ul><li>&nbsp;[(#URL)]</li></ul>
+		<ul>
+			<li>&nbsp;[(#URL)]</li>
+			<li>&nbsp;[(#BLANK|=={oui}|?{<:pubban:target_blank:>,<:pubban:target_parent:>})]</li>
+		</ul>
 	</p>
 	<p class='date'>
 		<strong><:pubban:code_pub:></strong>&nbsp;:

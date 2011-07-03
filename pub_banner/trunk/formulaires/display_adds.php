@@ -26,6 +26,7 @@ function formulaires_display_adds_charger_dist(){
 		$id_pub = $tableau['id_pub'];
 		$nompub = $tableau['titre'];
 		$url = $tableau['url'];
+		$blank = $tableau['blank'];
 		$code = $tableau['objet'];
 		$type = $tableau['type'];
 		$affires = $tableau['affichages_restant'];
@@ -57,6 +58,7 @@ function formulaires_display_adds_charger_dist(){
 	$valeurs = array(
 		'test' => $a,
 		'url' => substr_count($url, 'http://') ? $url : generer_url_public($url),
+		'blank' => $blank,
 		'nompub' => $nompub,
 		'id_empl' => $emplacement['id'],
 		'id_pub' => $id_pub,

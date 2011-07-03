@@ -23,7 +23,8 @@ $GLOBALS['_PUBBAN_CONF'] = array(
  */
 if(isset($GLOBALS['meta']['pubban_config']))
 	$config = unserialize($GLOBALS['meta']['pubban_config']);
-else $config = $GLOBALS['_PUBBAN_CONF']['config'];
+else $config = $GLOBALS['_PUBBAN_CONF'];
+//else $config = $GLOBALS['_PUBBAN_CONF']['config'];
 
 /**
  * Base de donnees de Pubban ('connect' par defaut)
@@ -102,13 +103,19 @@ function pubban_boite_info(){
 		$get_infos = charger_fonction('get_infos','plugins');
 		$infos = $get_infos(_DIR_PLUGIN_PUBBAN);
 	}
-	$pubban_version = $infos['version'].' _ '.$infos['version_base'];
+	$infos['revision'] = version_svn_courante (_DIR_PLUGIN_PUBBAN);
 	return(
 		debut_boite_info(true)
 		. "<div class='verdana1 spip_xx-small' style='text-align: left; font-size: 0.8em;'>"
-		. "<center><big><strong>"._T('pubban:pubban')." [ ".$pubban_version." ]</strong><br /><i>"._T('pubban:plugin_spip')."</i></big><br /><img src='".url_absolue(find_in_path('img/ico-pubban.png'))."' border='0' style='margin-top:1em' /></center>"
+		. "<center><big><strong>"._T('pubban:pubban').' '.$infos['version']."</strong>"
+		. "<br /><i>"._T('pubban:plugin_spip')."</i></big><br /><img src='".url_absolue(find_in_path('img/ico-pubban.png'))."' border='0' style='margin-top:1em' /></center>"
+		. "<p><b>"
+		. _T('pubban:num_version_base')." : ".$infos['version_base']
+		. "<br />"._T('pubban:num_version_svn')." : ".$infos['revision']
+		. "</b></p>"
 		. "<p><b>"._T('pubban:documentation_info')." :</b><br /><a href='"._PUBBAN_URL."'>"._PUBBAN_URL."</a></p>"
 		. "<p><b>"._T('pubban:url_update')." :</b><br /><a href='"._PUBBAN_UPDATE."'>"._PUBBAN_UPDATE."</a></p>"
+		. "<p><b>"._T('pubban:url_traceur')." :</b><br /><a href='"._PUBBAN_TRAC."'>"._PUBBAN_TRAC."</a></p>"
 		. "</div>".fin_boite_info(true)
 	);
 }

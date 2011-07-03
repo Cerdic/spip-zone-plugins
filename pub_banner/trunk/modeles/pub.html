@@ -2,20 +2,21 @@
 
 [(#ENV{type}|=={img}|oui)
 <a href="[(#GET{goto_clicker}|parametre_url{redirect,#ENV{url,#ADRESSE_SITE}})]" 
-	onclick="clic('#ENV{url,#ADRESSE_SITE}');return false;" 
-	target="_blank">
+	onclick="clic('#ENV{url,#ADRESSE_SITE}', [(#ENV{target_blank}|=={non}|?{false,true})]);return false;" 
+	[ (#ENV{target_blank}|=={oui}|?{target="_blank",target="_parent"})]
+>
 	<img src="[(#ENV{objet}|textebrut)]" border="0" title="#ENV{nompub}" />
 </a>
 ]
 
 [(#ENV{type}|=={swf}|oui)
 <a href="[(#GET{goto_clicker}|parametre_url{redirect,#ENV{url,#ADRESSE_SITE}})]" 
-	target="_blank"
+	[ (#ENV{target_blank}|=={oui}|?{target="_blank",target="_parent"})]
 	[ (#ENV{javascript}|=={oui}|oui)onclick="return false;"]>
 <object type="application/x-shockwave-flash" 
 	data="[(#ENV{objet}|textebrut|affiche_pub)]" 
 	width="#ENV{width}" height="#ENV{height}"
-	[ (#ENV{javascript}|=={oui}|oui)onmouseup="javascript:clic('#ENV{url}');"]>
+	[ (#ENV{javascript}|=={oui}|oui)onmouseup="javascript:clic('#ENV{url,#ADRESSE_SITE}', [(#ENV{target_blank}|=={non}|?{false,true})]);"]>
 	<param name="movie" value="[(#ENV{objet}|textebrut|affiche_pub)]" />
 	<param name="wmode" value="transparent" />
 	<param name="quality" value="high" />
@@ -34,10 +35,15 @@
 [(#ENV{javascript}|=={oui}|oui)
 <script language="javascript"><!--
 if(typeof(clic)=="undefined"){ 
-	function clic(url){ 
+	function clic(url, blank){ 
+		if (blank=="undefined") blank = false;
 		var xhr=null; if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP"); 
 		xhr.open("GET", "#GET{goto_clicker}", true); xhr.send(null); 
-		win = window.open(url); win.focus(); 
+		if (blank) {
+			win = window.open(url); win.focus(); 
+		} else {
+			window.parent.location.href = url;
+		}
 	}
 }
 --></script>
