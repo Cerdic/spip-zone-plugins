@@ -8,48 +8,48 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'articles_utilisant' => 'Articles using this table', # MODIF
-	'aucune_reponse' => 'No data',
+	'articles_utilisant' => 'Články, ktoré používajú túto tabuľku',
+	'aucune_reponse' => 'Žiadne údaje',
 
 	// C
-	'champs_formulaire' => 'Fields of the table', # MODIF
+	'champs_formulaire' => 'Polia tabuľky',
 
 	// F
-	'formulaire' => 'Table', # MODIF
+	'formulaire' => 'Tabuľka',
 
 	// I
-	'icone_ajouter_donnees' => 'Add data',
-	'icone_creer_table' => '',
-	'importer_donnees_csv' => 'Imprt data',
-	'info_supprimer_formulaire' => 'Do you really want to delete this table?', # MODIF
-	'info_supprimer_formulaire_reponses' => 'Existing data is associated with this table. Do you really want to delete it?',
+	'icone_ajouter_donnees' => 'Pridať údaje',
+	'icone_creer_table' => 'Vytvoriť tabuľku',
+	'importer_donnees_csv' => 'Nahrať údaje',
+	'info_supprimer_formulaire' => 'Naozaj chcete vymazať túto tabuľku?',
+	'info_supprimer_formulaire_reponses' => 'K tejto tabuľke sú priradené existujúce údaje. Naozaj ju chcete vymazať?',
 
 	// L
-	'lien_retirer_donnee_liante' => 'Delete the link from this data item',
-	'lien_retirer_donnee_liee' => 'Delete this data item',
+	'lien_retirer_donnee_liante' => 'Odstrániť prepojenie z tejto položky dát',
+	'lien_retirer_donnee_liee' => 'Odstrániť tento údaj',
 
 	// N
-	'nombre_reponses' => '@nombre@ data items',
-	'nouveau_formulaire' => 'New table', # MODIF
+	'nombre_reponses' => '@nombre@ údajov',
+	'nouveau_formulaire' => 'Nová tabuľka',
 
 	// S
-	'suivi_reponses' => 'See data',
-	'supprimer_formulaire' => 'Delete this table', # MODIF
+	'suivi_reponses' => 'Zobraziť údaje',
+	'supprimer_formulaire' => 'Vymazať túto tabuľku',
 
 	// T
-	'telecharger_reponses' => 'Download data',
-	'texte_donnee_statut' => 'Status of this data item',
-	'texte_statut_poubelle' => 'Data item deleted',
-	'texte_statut_prepa' => 'Data item being edited',
-	'texte_statut_prop' => 'Proposed data item',
-	'texte_statut_publie' => 'Published data item',
-	'texte_statut_refuse' => 'Refused data item',
-	'titre_formulaire' => 'Table title', # MODIF
-	'toutes_tables' => 'All the tables', # MODIF
-	'type_des_tables' => 'Tables', # MODIF
+	'telecharger_reponses' => 'Stiahnuť údaje',
+	'texte_donnee_statut' => 'Stav tohto údaja',
+	'texte_statut_poubelle' => 'Údaj odstránený',
+	'texte_statut_prepa' => 'Údaj sa upravuje',
+	'texte_statut_prop' => 'Navrhovaný údaj',
+	'texte_statut_publie' => 'Publikovaný údaj',
+	'texte_statut_refuse' => 'Zamietnutý údaj',
+	'titre_formulaire' => 'Názov tabuľky',
+	'toutes_tables' => 'Všetky tabuľky',
+	'type_des_tables' => 'Tabuľky',
 
 	// U
-	'une_reponse' => 'One data item'
+	'une_reponse' => 'Jeden údaj'
 );
 
 ?>

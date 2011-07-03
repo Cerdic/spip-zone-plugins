@@ -13,7 +13,9 @@
 	<langue code="nl" />
 	<langue code="pt_br" />
 	<langue code="ro" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
 </traduction>
