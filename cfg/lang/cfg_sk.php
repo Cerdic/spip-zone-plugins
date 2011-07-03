@@ -23,10 +23,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_copie_fichier' => 'Súbor @fichier@ na nedá skopírovať do cieľového priečinka',
 	'erreur_enregistrement' => 'Pri ukladaní <b>@nom@</b> nastala chyba',
 	'erreur_lecture' => '@nom@ sa nedá čítať',
-	'erreur_open_w_fichier' => '@fichier@ sa nedá otvoriť na upravovanie',
+	'erreur_open_w_fichier' => 'Do súboru @fichier@ sa nedá zapisovať',
 	'erreur_suppression' => 'Pri odstraňovaní <b>@nom@</b> nastala chyba',
 	'erreur_suppression_fichier' => 'Súbor @fichier@ sa nedá odstrániť.',
-	'erreur_type_id' => 'Pole @champ@ sa musí začínať na písmeno alebo podčiarkovník',
+	'erreur_type_id' => 'Pole @champ@ sa musí začínať písmenom alebo podčiarkovníkom',
 	'erreur_type_idnum' => 'Pole @champ@ musí byť číselné',
 	'erreur_type_pwd' => 'Pole @champ@ musí mať viac ako 5 znakov',
 
