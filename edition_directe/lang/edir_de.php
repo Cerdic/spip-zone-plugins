@@ -16,10 +16,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'breve' => 'Meldungen',
 
 	// G
-	'groupe_mots' => 'Schhlagwortgruppe',
+	'groupe_mots' => 'Schlagwortgruppe',
 
 	// M
-	'mot' => 'Schhlagwort',
+	'mot' => 'Schlagwort',
 
 	// R
 	'rubrique' => 'Rubriken',
