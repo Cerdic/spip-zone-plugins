@@ -96,7 +96,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// M
 	'madame' => 'Madam', # MODIF
 	'mademoiselle' => 'Mademoiselle', # NEW
-	'modele_label_auteur' => 'Pré-sélectionner un auteur (facultatif) ?', # NEW
+	'modele_label_auteur' => 'Dopredu vybrať autora (nepovinné)?',
 	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
 	'monsieur' => 'Mister', # MODIF
 	'msg_accueil' => 'Here are messages from contacts you have received.',
@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_titre_perso' => 'Titre personnalisé', # NEW
 
 	// P
-	'par' => 'Par : ', # NEW
+	'par' => 'Pre:',
 	'preselection' => 'Décocher tous les items de la liste de destinataires', # NEW
 
 	// S
