@@ -16,6 +16,8 @@
 	</langue>
 	<langue code="gl" />
 	<langue code="it" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="tr" />
 </traduction>

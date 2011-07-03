@@ -8,97 +8,97 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'a_confirmer' => '<NEW>Na potvrdenie',
-	'accesrestreint' => '<NEW>Obmedzený prístup',
-	'aconfirmer' => '<NEW>Na potvrdenie',
-	'action_adherent' => '<NEW>Operácie',
-	'activation_compte' => '<NEW>Aktivujte si účet',
-	'adherents' => '<NEW>Členovia',
-	'admin' => '<NEW>Správca',
-	'admin_modifier_auteur_supp' => '<NEW>Doplňujúce informácie',
-	'adresse' => '<NEW>Adresa',
-	'adresse_pro' => '<NEW>Adresa do práce',
-	'afficher_tous' => '<NEW>Zobraziť členov',
-	'ajouter_adherent' => '<NEW>Pridať nového člena',
-	'ans' => '<NEW>rokov',
+	'a_confirmer' => 'Na potvrdenie',
+	'accesrestreint' => 'Obmedzený prístup',
+	'aconfirmer' => 'Treba potvrdiť',
+	'action_adherent' => 'Operácie',
+	'activation_compte' => 'Aktivujte si účet',
+	'adherents' => 'Členovia',
+	'admin' => 'Administrátor',
+	'admin_modifier_auteur_supp' => 'Informácie naviac',
+	'adresse' => 'Adresa',
+	'adresse_pro' => 'Adresa do práce',
+	'afficher_tous' => 'Zobraziť členov',
+	'ajouter_adherent' => 'Pridať nového člena',
+	'ans' => 'rokov',
 	'aout' => 'August',
-	'aucun_resultat_recherche' => '<NEW>Nenašiel sa žiadny výsledok, ktorý  vyhovuje vašej požiadavke.',
-	'auteur' => '<NEW>Autor',
-	'autre' => '<NEW>Iné',
-	'avril' => '<NEW>Apríl',
+	'aucun_resultat_recherche' => 'Vašej požiadavke nezodpovedá žiaden výsledok.',
+	'auteur' => 'Autor',
+	'autre' => 'Ostatní',
+	'avril' => 'Apríl',
 
 	// B
-	'bio' => '<NEW>Životopis',
+	'bio' => 'Životopis',
 
 	// C
-	'caracteres' => 'characters', # MODIF
-	'categorie' => '<NEW>Kategória príspevku',
-	'chaine_valide' => '<NEW>Prosím, vložte reťazec',
-	'chainelettre' => '<NEW>(skladá sa len z písmen)',
-	'chainenombre' => '<NEW>((skladá sa len z písmen a/lebo čísel)',
-	'champ_obligatoire' => '<NEW>Toto pole je povinné',
-	'choisir_categories' => '<NEW>Vyberte ich z tohto zoznamu:',
-	'choisir_nouveau_password' => '<NEW>Po kliknutí na tento odkaz si budete môcť vybrať nové heslo',
-	'choisir_zones' => '<NEW>Vyberte oblasti, ku ktorým budú noví členovia priradení',
-	'choisissez' => '<NEW>Vyberte si',
-	'choix_affordance_email' => '<NEW>E-mail',
-	'choix_affordance_login' => '<NEW>Používateľské meno (predvolené na SPIPe)',
-	'choix_affordance_login_email' => '<NEW>Prihlasovacie meno a e-mail',
+	'caracteres' => 'Zakázané znaky!',
+	'categorie' => 'Kategória príspevku',
+	'chaine_valide' => 'Prosím, vložte reťazec',
+	'chainelettre' => '(má len písmená)',
+	'chainenombre' => '<NEW>(má písmená a/lebo čísla)',
+	'champ_obligatoire' => 'Toto pole je povinné',
+	'choisir_categories' => 'Vyberte ich v tomto zozname:',
+	'choisir_nouveau_password' => 'Ak kliknete na tento odkaz, budete si môcť zvoliť nové heslo',
+	'choisir_zones' => 'Choose the areas to which new members will be assigned', # NEW
+	'choisissez' => 'Vybrať',
+	'choix_affordance_email' => 'E-mail',
+	'choix_affordance_login' => 'Prihlasovacie meno (predvolené na SPIPE)',
+	'choix_affordance_login_email' => 'Prihlasovacie meno a e-mail',
 	'choix_domaine' => 'Choose your domain', # MODIF
-	'civilite' => '<NEW>Oslovenie',
-	'code_postal' => '<NEW>PSČ',
-	'code_postal_pro' => '<NEW>PSČ',
-	'commentaire' => '<NEW>Komentáre',
-	'compte_active' => '<NEW>Váš účet na @nom_site@',
-	'compte_efface' => '<NEW>Váš účet bol zrušený.',
-	'conf_plugin' => '<NEW>Nastavenia Inscription 2.0',
-	'conf_plugin_page' => '<NEW>Uložené nastavenia zásuvného modulu Inscription 2.0',
-	'configs' => '<NEW>Konfigurácie',
-	'configuration' => '<NEW>Konfigurácia používateľských polí',
-	'confirmation' => '<NEW><p>Určite chcete pokračovať?</p><p>Zmeny sú nevratné!</p>',
-	'contacts_personnels' => '<NEW>Osobné kontakty',
-	'contacts_pros' => '<NEW>Pracovné kontakty',
-	'cp_valide' => '<NEW>Prosím, zadajte platné poštové smerovacie číslo',
-	'creation' => '<NEW>Dátum vytvorenia záznamu',
+	'civilite' => 'Title', # NEW
+	'code_postal' => 'PSČ',
+	'code_postal_pro' => 'PSČ',
+	'commentaire' => 'Komentáre',
+	'compte_active' => 'Váš účet na @nom_site@',
+	'compte_efface' => 'Your account has been deleted.', # NEW
+	'conf_plugin' => 'Inscription 2.0 settings', # NEW
+	'conf_plugin_page' => 'Saved settings of the Inscription 2.0 plugin', # NEW
+	'configs' => 'Configurations', # NEW
+	'configuration' => 'User\'s fields configuration', # NEW
+	'confirmation' => '<p>Are you sure you wish to continue</p><p>The changes made are irreversible!</p>', # NEW
+	'contacts_personnels' => 'Personnal contacts', # NEW
+	'contacts_pros' => 'Professional contacts', # NEW
+	'cp_valide' => 'Please give a valid postcode', # NEW
+	'creation' => 'Creation date of the record', # NEW
 
 	// D
 	'decembre' => 'December',
-	'delete_user_select' => '<NEW>Vymazať vybraných používateľov',
-	'demande_password' => '<NEW>Vaše heslo:',
-	'descriptif_plugin' => '<NEW>Tu sú zásuvné moduly všetkých členov stránky. Ich status ukazuje farba ikony.<br /><br />Môžete nastaviť ďalšie polia, ktoré budú ponúknuté používateľom, keď sa prihlásia.',
-	'description_cfg' => '<NEW>Konfigurácia doplnkových používateľských polí',
-	'description_page' => '<NEW>Tu môžete skontrolovať uložené nastavenia',
+	'delete_user_select' => 'Delete selected user(s)', # NEW
+	'demande_password' => 'Your password:', # NEW
+	'descriptif_plugin' => 'Hera are all the site\'s members. Their status is shown by their icon\'s color.<br /><br />You can set up additional fields, that will be proposed to visitors when they subscribe.', # NEW
+	'description_cfg' => 'Users\' additionnal fields configuration', # NEW
+	'description_page' => 'Here you can check your saved settings', # NEW
 	'divers' => 'any other business', # MODIF
 	'domaine' => 'Domain', # MODIF
 	'domaines' => 'Domain', # MODIF
 
 	// E
-	'editer_adherent' => '<NEW>Upraviť člena',
-	'effacement_auto_impossible' => '<NEW>Účet sa nedá automaticky vystopovať. Prosím, kontaktujte nás.',
-	'email' => '<NEW>E-mail',
-	'email_bonjour' => '<NEW>Dobrý deň, @nom@,',
-	'email_deja_enregistre' => '<NEW>Táto e-mailová adresa je už zaregistrovaná. Prosím, využite tento prihlasovací formulár, aby ste sa dostali k svojmu účtu.',
-	'email_obligatoire' => '<NEW>E-mailová adresa je povinná',
-	'email_valide' => '<NEW>Prosím, zadajte platnú e-mailovú adresu',
-	'erreur_reglement_obligatoire' => '<NEW>Musíte súhlasiť s pravidlami stránky',
+	'editer_adherent' => 'Edit member', # NEW
+	'effacement_auto_impossible' => 'The account cannot be traced automatically. Please contact us.', # NEW
+	'email' => 'Email', # NEW
+	'email_bonjour' => 'Hello @nom@,', # NEW
+	'email_deja_enregistre' => 'This email is already registered. Please, use the login form to get into your account.', # NEW
+	'email_obligatoire' => 'An email address is required', # NEW
+	'email_valide' => 'Please insert a valid e-mail address', # NEW
+	'erreur_reglement_obligatoire' => 'You must accept the site\'s rules', # NEW
 	'exp_divers' => 'Field which will be offered to the visitors with the name Comments',
-	'exp_publication' => '<NEW>Autorizácia na uverejnenie  osobných údajov',
-	'exp_statut' => '<NEW>Vyberte status pre nových členov',
+	'exp_publication' => 'Authorization for publication of personal data', # NEW
+	'exp_statut' => 'Choose the status to be given to new members', # NEW
 	'exp_statut_rel' => 'This field is different from the SPIP status, this one is used for the internal control of an institution',
-	'explication_affordance_form' => '<NEW>Polia, ktoré sa použijú v prihlasovacom formulári (#LOGIN_PUBLIC)',
+	'explication_affordance_form' => 'Fields used in the login form (#LOGIN_PUBLIC)', # NEW
 
 	// F
 	'fax' => 'Fax', # MODIF
-	'fax_pro' => '<NEW>Fax do práce',
-	'feminin' => '<NEW>slečna',
-	'fevrier' => '<NEW>Február',
-	'fiche' => '<NEW>Záznam',
-	'fiche_adherent' => '<NEW>Záznam člena',
+	'fax_pro' => 'Work fax', # NEW
+	'feminin' => 'Ms.', # NEW
+	'fevrier' => 'February', # NEW
+	'fiche' => 'Record', # NEW
+	'fiche_adherent' => 'Member\'s record', # NEW
 	'fiche_expl' => ': Display this field  on member\'s record (backoffice)',
-	'fiche_mod' => '<NEW>Môže sa upravovať',
+	'fiche_mod' => 'Can be modified', # NEW
 	'fiche_mod_expl' => ': Member can modify this field from public interface, if the #CRAYONS plugin is active ',
-	'fonction' => '<NEW>Funkcia',
-	'form' => '<NEW>Formulár',
+	'fonction' => 'Function', # NEW
+	'form' => 'Form', # NEW
 	'form_expl' => ': Display this field on #INSCRIPTION2 form',
 	'form_oblig_expl' => ' : required field on the form', # MODIF
 	'format' => 'Format', # MODIF
@@ -304,7 +304,7 @@ If you did not ask for this registration or do not want to take part in the site
 	'votre_profil' => 'Your profile', # MODIF
 
 	// W
-	'website' => '<NEW>Stránka'
+	'website' => 'Website' # NEW
 );
 
 ?>
