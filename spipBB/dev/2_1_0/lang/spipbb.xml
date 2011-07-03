@@ -24,6 +24,8 @@
 	<langue code="oc_ni" />
 	<langue code="pt" />
 	<langue code="ro" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="tr" />
 </traduction>
