@@ -1,0 +1,22 @@
+<div class="formulaire_spip formulaire_editer formulaire_rechercher_remplacer">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form action="#ENV{action}" method="post" style="padding:15px;">
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<p class="explication">Recherche et remplace du texte dans les champs texte de la BDD</p>
+	
+	<br><br>
+	[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{txt_search})</span><br>]
+	Texte à rechercher : <input type="text" name="txt_search" value="#ENV{txt_search}" size="55px" />
+
+	<br><br>Remplacement du texte <input type="checkbox" name="remplace" value="oui"><br>	
+	<br>Remplacer le texte recherché par : <input type="text" name="remplacer_par" value="#ENV{remplacer_par}" size="55px" />
+
+	
+	<p class="boutons">
+	<input type='submit' name='ok' value="Rechercher" />
+	</p>
+</form>
+</div>
