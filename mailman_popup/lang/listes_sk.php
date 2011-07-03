@@ -11,46 +11,46 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajoutee' => 'The address <@var_email@> will be added to the list <@liste@> once it has been checked. Please reply to the message which has just been sent to you.',
 
 	// C
-	'confirm' => '<NEW>Žiadosť o potvrdenie bola odoslaná na &lt;@var_email@&gt;.',
+	'confirm' => 'Na <@var_email@> bola poslaná žiadosť o potvrdenie.',
 
 	// D
-	'deja' => '<NEW>&lt;@var_email@&gt;: Už ste prihlásený do zoznamu &lt;@liste@&gt;.',
-	'desabo' => '<NEW>Registrácia bola zrušená.',
+	'deja' => '<@var_email@>: Do konferencie <@liste@> ste sa už zaregistrovali.',
+	'desabo' => 'Registrácia zrušená.',
 
 	// F
-	'fermer' => '<NEW>Zatvoriť',
+	'fermer' => 'Zatvoriť',
 
 	// I
-	'inscription' => '<NEW>Registrácia do &lt;@liste@&gt;',
+	'inscription' => 'Registrácia na <@liste@>',
 
 	// M
-	'mail_removed' => '<NEW>
+	'mail_removed' => '
 
-Adresa &lt;@var_email@&gt; bola odstránená zo zoznamu @liste@.
+Adresa <@var_email@> bola odstránená z konferencie @liste@.
 
-Ak sa vyskytol problém alebo ak ste
-nežiadali o zrušenie, prosím, napíšte na &lt;@responsable@&gt;.
+Ak sa vyskytol problém, alebo ak ste o toto zrušenie nepožiadali,
+prosím, napíšte na <@responsable@>.
 
-Dovidenia a ďakujeme.
+Ďakujeme a dovidenia.
 ',
-	'merci' => '<NEW>Ďakujeme.',
+	'merci' => 'Ďakujeme.',
 
 	// P
-	'pasabo' => '<NEW>Adresa &lt;@var_email@&gt; nie je prihlásená do zoznamu &lt;@liste@&gt;.',
-	'patientez' => '<NEW>Prosím, počkajte...',
+	'pasabo' => 'Adresa <@var_email@> nie je zaregistrovaná v konferencii <@liste@>.',
+	'patientez' => 'Prosím počkajte...',
 
 	// Q
-	'quitter' => '<NEW>Zrušenie',
+	'quitter' => 'Zrušenie',
 
 	// S
-	'subject_removed' => '<NEW>Vaša adresa bola odstránená zo zoznamu @liste@.',
+	'subject_removed' => 'Vaša adresa bola odstránená z konferencie @liste@.',
 
 	// T
-	'titrefenetre' => '<NEW>Prihlásiť sa',
+	'titrefenetre' => 'Zaregistrovať sa',
 
 	// V
-	'veuillez' => '<NEW>Prosím, dajte nám svoju adresu.',
-	'votreemail' => '<NEW>Váš e-mail:'
+	'veuillez' => 'Prosím, zadajte svoju adresu',
+	'votreemail' => 'Váš e-mail:'
 );
 
 ?>
