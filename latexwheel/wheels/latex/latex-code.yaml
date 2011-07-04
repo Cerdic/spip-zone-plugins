@@ -1,10 +1,15 @@
-code:
+code_couleur:
   match: ["#<code[\s]*class=('|\")([\w]+)('|\")>#", '#</code>#']
   replace: ["<html>\begin{minted}{$2}", "\end{minted}</html>"]	# mettons <html> pour protéger pour protéger via echappe_html
   priority: -200
 
-cadre:
+cadre_couleur:
   match: ["#<cadre[\s]*class=('|\")([\w]+)('|\")>#", '#</cadre>#']
   replace: ["<html>\begin{minted}[linenos]{$2}", "\end{minted}</html>"]		#mettons <html> pour protéger via echappe_html
-
   priority: -200
+
+code:															
+  priority: -300# pour le moment on suppose que tout les <code> sont en lignes, le reste serait uniquement avec un langage indiqué
+  match: ['<code>', "</code>"]
+  replace: ['<html>\verb?', "?</html>"]
+  type: str
