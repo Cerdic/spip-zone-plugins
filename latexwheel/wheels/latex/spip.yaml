@@ -68,3 +68,10 @@ listes:
   type: all
   replace: spip/spip-listes.yaml
   priority: -20 # avant !paragraphes
+
+code:
+  if_str: "<code"
+  type: text
+  match: ['<code>', '</code>']
+  replace: ['\begin/debutverbatim/fin', '\end/debutverbatim/fin']
+  priority: -200
