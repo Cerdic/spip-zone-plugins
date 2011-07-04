@@ -1,0 +1,50 @@
+[(#SET{goto_clicker,#ENV{java_goto}&id_pub=#ENV{id_pub}&id_empl=#ENV{id_empl}})]
+
+[(#ENV{type}|=={img}|oui)
+<a href="[(#GET{goto_clicker}|parametre_url{redirect,#ENV{url,#ADRESSE_SITE}})]" 
+	onclick="clic('#ENV{url,#ADRESSE_SITE}', [(#ENV{target_blank}|=={non}|?{false,true})]);return false;" 
+	[ (#ENV{target_blank}|=={oui}|?{target="_blank",target="_parent"})]
+>
+	<img src="[(#ENV{objet}|textebrut)]" border="0" title="#ENV{nompub}" />
+</a>
+]
+
+[(#ENV{type}|=={swf}|oui)
+<a href="[(#GET{goto_clicker}|parametre_url{redirect,#ENV{url,#ADRESSE_SITE}})]" 
+	[ (#ENV{target_blank}|=={oui}|?{target="_blank",target="_parent"})]
+	[ (#ENV{javascript}|=={oui}|oui)onclick="return false;"]>
+<object type="application/x-shockwave-flash" 
+	data="[(#ENV{objet}|textebrut|affiche_pub)]" 
+	width="#ENV{width}" height="#ENV{height}"
+	[ (#ENV{javascript}|=={oui}|oui)onmouseup="javascript:clic('#ENV{url,#ADRESSE_SITE}', [(#ENV{target_blank}|=={non}|?{false,true})]);"]>
+	<param name="movie" value="[(#ENV{objet}|textebrut|affiche_pub)]" />
+	<param name="wmode" value="transparent" />
+	<param name="quality" value="high" />
+	<param name="FlashVars" value="lien=#ENV{url}" />
+	<center><a href="http://www.adobe.com/fr/products/flashplayer/" 
+		title="<:pubban:download_flash_player:>">
+		<img src="[(#CHEMIN{img/get_adobe_flash_player.png})]" border="0" />
+	</a></center>
+</object></a>
+]
+
+[(#ENV{type}|=={flash}|oui)
+	[(#ENV{objet}|env_to_html)]
+]
+
+[(#ENV{javascript}|=={oui}|oui)
+<script language="javascript"><!--
+if(typeof(clic)=="undefined"){ 
+	function clic(url, blank){ 
+		if (blank=="undefined") blank = false;
+		var xhr=null; if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP"); 
+		xhr.open("GET", "#GET{goto_clicker}", true); xhr.send(null); 
+		if (blank) {
+			win = window.open(url); win.focus(); 
+		} else {
+			window.parent.location.href = url;
+		}
+	}
+}
+--></script>
+]
