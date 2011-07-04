@@ -66,7 +66,7 @@ listes:
   if_str: "\n-"
   is_wheel: Y
   type: all
-  replace: spip/spip-listes.yaml
+  replace: latex/latex-listes.yaml
   priority: -20 # avant !paragraphes
 
 code:

@@ -2,15 +2,15 @@
 # not usefull as this file is include by the engine itself
 # require_once 'engine/textwheel.php';
 
-function tw_liste_init($t){
-	return tw_liste_item($t,'init');
+function latex_liste_init($t){
+	return latex_liste_item($t,'init');
 }
 
-function tw_liste_close($t){
-	return tw_liste_item($t,'close');
+function latex_liste_close($t){
+	return latex_liste_item($t,'close');
 }
 
-function tw_liste_item($t,$quoi='item'){
+function latex_liste_item($t,$quoi='item'){
 	global $class_spip, $class_spip_plus;
 	static $niveau;
 	static $pile_li;
