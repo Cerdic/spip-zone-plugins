@@ -7,4 +7,5 @@
 	<prefix>latexwheel</prefix>
 	<licence>GPL</licence>
 	<necessite id="tw"/>
+	<fonctions>latexwheel_fonctions.php</fonctions>
 </plugin>
