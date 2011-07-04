@@ -57,7 +57,7 @@ italiques:
 quote:
   # raccourci <quote>
   match: ['<quote>', '</quote>']
-  replace: ['\begin/debutquotation/fin', '\end/debutquotation/fin']
+  replace: ["\n\begin/debutquotation/fin\n", "\n\end/debutquotation/fin\n"]
   if_str: '<quote>'
   type: str
   priority: -120
@@ -70,7 +70,7 @@ listes:
   priority: -20 # avant !paragraphes
 
 code:
-  if_str: "<code"
+#  if_str: "<code>"
   type: text
   match: ['<code>', '</code>']
   replace: ['\begin/debutverbatim/fin', '\end/debutverbatim/fin']
