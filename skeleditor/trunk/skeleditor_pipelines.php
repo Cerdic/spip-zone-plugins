@@ -66,7 +66,7 @@ function skeleditor_dir($extension, $type) {
 	if(!$type)
 	return false;
 
-	$dir = _DIR_PLUGIN_SKELEDITOR ."spip_210/";
+	$dir = _DIR_PLUGIN_SKELEDITOR;
 	if ($type == "css") {
 	$files .= "
 	<link rel='stylesheet' href='".$dir."codemirror/lib/codemirror.css' type='text/css' />

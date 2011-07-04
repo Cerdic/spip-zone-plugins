@@ -123,7 +123,7 @@ function skeleditor_tree_open_close_dir(&$current,$target,$current_file){
 		$chemin .= $open . "/";
 		$closed = ((strncmp($current_file, ltrim($chemin,'/'), strlen(ltrim($chemin,'/')))==0)?"":" closed");
 
-		$output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."spip_210/img_pack/se-folder-16.png' alt='directory'/> $open",!$closed,md5($chemin));
+		$output .= bouton_block_depliable("<img src='"._DIR_PLUGIN_SKELEDITOR."img_pack/se-folder-16.png' alt='directory'/> $open",!$closed,md5($chemin));
 		$output .= "<div class='dir$closed' id='".md5($chemin)."'>\n";
 	}
 	$current = $target;

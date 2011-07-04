@@ -1,6 +1,6 @@
 <plugin>
 	<nom>SkelEditor</nom>
-	<icon>spip_210/img_pack/skeleditor-32.png</icon>
+	<icon>img_pack/skeleditor-32.png</icon>
 	<auteur>[erational->http://www.erational.org], [C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<licence>GNU/GPL v3</licence>
 	<version>2.5.4</version>
@@ -14,7 +14,7 @@
 	</multi></description>
 	<lien>http://www.spip-contrib.net/SkelEditor-2-0</lien>
 	<prefix>skeleditor</prefix>
-	<options>spip_210/skeleditor_pipelines.php</options>
+	<options>skeleditor_pipelines.php</options>
 
 	<!-- bouton prive spip sans bando -->
   <bouton id="skeleditor" parent="naviguer">
@@ -32,23 +32,22 @@
   <!-- pipeline -->
   <pipeline>
 		<nom>insert_head_css</nom>
-      <inclure>spip_210/skeleditor_pipelines.php</inclure>
+      <inclure>skeleditor_pipelines.php</inclure>
   </pipeline>  
   <pipeline>
 		<nom>header_prive</nom>
 		<action>insert_head</action>
-      <inclure>spip_210/skeleditor_pipelines.php</inclure>
+      <inclure>skeleditor_pipelines.php</inclure>
   </pipeline>
 
   <pipeline>
       <nom>autoriser</nom>
-      <inclure>spip_210/inc/skeleditor_autoriser.php</inclure>
+      <inclure>inc/skeleditor_autoriser.php</inclure>
   </pipeline>
   <pipeline>
       <nom>affichage_final</nom>
   </pipeline>
 
-	<chemin dir="spip_210/" />
 	<necessite id="SPIP" version="[2.1.0-beta;)" />
 	<categorie>outil</categorie>
 </plugin>
