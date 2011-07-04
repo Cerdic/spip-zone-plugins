@@ -6,7 +6,7 @@ function propre_latex($t) {
 
 	if (!isset($wheel)) {
 		$ruleset = SPIPTextWheelRuleset::loader(
-			'latex.yaml'
+			array('latex/latex.yaml'),'personnaliser_raccourcis'
 		);
 		
 		$wheel = new TextWheel($ruleset);
