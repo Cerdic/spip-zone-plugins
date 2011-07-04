@@ -77,7 +77,7 @@ function latex_liste_item($t,$quoi='item'){
 					}
 					$niveau ++;
 					$ajout .= "\begin/debut$type/fin";
-					$pile_type[$niveau] = "\n\begin/debut$type/fin\n";
+					$pile_type[$niveau] = "\n\end/debut$type/fin\n";
 				}
 
 				$ajout .= "\n\item ";
