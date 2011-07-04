@@ -1,31 +1,26 @@
 <?php
 
 function propre_latex($t) {
-	static $wheel, $notes;
-
-
-	if (!isset($wheel)) {
-		$ruleset = SPIPTextWheelRuleset::loader(
-			array('latex/latex.yaml'),'personnaliser_raccourcis'
-		);
-		
-		$wheel = new TextWheel($ruleset);
-
-		if (_request('var_mode') == 'wheel'
-		AND autoriser('debug')) {
-			$f = $wheel->compile();
-			echo "<pre>\n".htmlspecialchars($f)."</pre>\n";
-			exit;
-		}
-	}
-
-
-
-	$t = $wheel->text($t);
-
+	
+	$t = echappe_html(latex_echappe_coloration($t));
+	
+	$t = appliquer_regles_wheel($t,array('latex/latex.yaml'));
+	$t = echappe_retour($t, $interdire_script);
 
 
 	return $t;
 }
 
+
+function latex_echappe_coloration($texte){
+	return appliquer_regles_wheel($texte,array('latex/latex-code.yaml'));
+}
+
+function appliquer_regles_wheel($texte,$regles){
+	$ruleset = SPIPTextWheelRuleset::loader(
+			$regles
+		);
+	$wheel = new TextWheel($ruleset);
+	return  $wheel->text($texte);
+}
 ?>

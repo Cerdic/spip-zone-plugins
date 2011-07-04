@@ -68,9 +68,3 @@ listes:
   type: all
   replace: latex/latex-listes.yaml
   priority: -20 # avant !paragraphes
-
-code:
-  type: str
-  match: ['<code>', '</code>']
-  replace: ['\begin/debutverbatim/fin', '\end/debutverbatim/fin']
-  priority: -200

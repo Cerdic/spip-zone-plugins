@@ -1,0 +1,10 @@
+code:
+  match: ["#<code[\s]*class=('|\")([\w]+)('|\")>#", '#</code>#']
+  replace: ["<html>\begin{minted}{$2}", "\end{minted}</html>"]	# mettons <html> pour protéger pour protéger via echappe_html
+  priority: -200
+
+cadre:
+  match: ["#<cadre[\s]*class=('|\")([\w]+)('|\")>#", '#</cadre>#']
+  replace: ["<html>\begin{minted}[linenos]{$2}", "\end{minted}</html>"]		#mettons <html> pour protéger via echappe_html
+
+  priority: -200
