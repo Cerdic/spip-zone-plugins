@@ -8,8 +8,8 @@ cadre_couleur:
   replace: ["<html>\begin{minted}[linenos]{$2}", "\end{minted}</html>"]		#mettons <html> pour protéger via echappe_html
   priority: -200
 
-code:															
-  priority: -300# pour le moment on suppose que tout les <code> sont en lignes, le reste serait uniquement avec un langage indiqué
-  match: ['<code>', "</code>"]
-  replace: ['<html>\verb?', "?</html>"]
-  type: str
+#code:															
+#  priority: -300# pour le moment on suppose que tout les <code> sont en lignes, le reste serait uniquement avec un langage indiqué
+#  match: ['<code>', "</code>"]
+#  replace: ['<html>\verb?', "?</html>"]
+#  type: str
