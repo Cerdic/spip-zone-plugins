@@ -9,12 +9,12 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function balise_EMPLACEMENT($p) {
-   return calculer_balise_dynamique($p, EMPLACEMENT, array());
+function balise_BANNIERE($p) {
+   return calculer_balise_dynamique($p, BANNIERE, array());
 }
 
-function balise_EMPLACEMENT_dyn($id_empl) {
-	$empl = pubban_recuperer_emplacement($id_empl);
+function balise_BANNIERE_dyn($id_empl) {
+	$empl = pubban_recuperer_banniere($id_empl);
 	echo $empl['titre'];
 }
 

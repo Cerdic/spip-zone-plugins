@@ -28,33 +28,33 @@ function formulaires_stats_adds_charger_dist(){
 
 	//  Clic
 	if($type_perf == 'clic') {
-		$recup = sql_select("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], '', '', '', '', '', _BDD_PUBBAN);
+		$recup = sql_select("id_banniere", 'spip_bannieres', '', '', '', '', '');
 		$n=1;
 		$n_emp_zero = 0;
 		$n_emp_verif = 0;
 		while($tableau = spip_fetch_array($recup)){
-			$emp = $tableau['id_empl'];
-			$emplacement = pubban_recuperer_emplacement($emp);
+			$emp = $tableau['id_banniere'];
+			$banniere = pubban_recuperer_banniere($emp);
 			$n_emp_verif++;
 
-			if($period_perf == 1) $requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND date IN ('".$date_stats."')", '', '', '', '', _BDD_PUBBAN);
+			if($period_perf == 1) $requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", 'spip_pubban_stats', "id_banniere=".$emp." AND date IN ('".$date_stats."')", '', '', '', '');
 
 			elseif($period_perf == 7){
 				$inter_stats = date('z', time() - 604800); 
 				$sep = ($inter_stats > $jour_stats) ? 'OR' : 'AND';
-				$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
+				$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '');
 			}
 
 			elseif($period_perf == 30){
 				$inter_stats = date('z', time() - 2592000); 
 				$sep = ($inter_stats > $jour_stats) ? 'OR' : 'AND';
-				$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
+				$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '');
 			}
 
 			elseif($period_perf == 90){
 				$inter_stats = date('z', time() - 7776000); 
 				$sep = ($inter_stats > $jour_stats) ? 'OR' : 'AND';
-				$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
+				$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '');
 			}
 
 			$array = spip_fetch_array($requete);
@@ -68,8 +68,8 @@ function formulaires_stats_adds_charger_dist(){
 				$n_emp_zero_empl[$emp] = false;
 				$valeurs['clics_perf_'.$n] = $cpt_clic;
 				$valeurs['affis_perf_'.$n] = $cpt_affi;
-				$valeurs['titre_empl_'.$n] = $emplacement['titre'];
-				$valeurs['titre_cut_empl_'.$n] = substr($emplacement['titre'], 0, 3).".";
+				$valeurs['titre_empl_'.$n] = $banniere['titre'];
+				$valeurs['titre_cut_empl_'.$n] = substr($banniere['titre'], 0, 3).".";
 				$valeurs['n_perf_'.$n] = $n;
 				$valeurs['div1js'][$n] = $n;
 				$toshow_perf = 1;
@@ -96,39 +96,39 @@ function formulaires_stats_adds_charger_dist(){
 
 	//  Ratio %
 	if($type_perf == 'ratio'){
-		$recup = sql_select("DISTINCT id_empl", $GLOBALS['_PUBBAN_CONF']['table_join'], '', '', '', '', '', _BDD_PUBBAN);
+		$recup = sql_select("DISTINCT id_banniere", 'spip_bannieres_publicites', '', '', '', '', '');
 		$n=1;
 		$n_emp_zero = 0;
 		$n_emp_verif = 0;
 		while($tableau = mysql_fetch_array($recup)){
-			$emp = $tableau['id_empl'];
-			$emplacement = pubban_recuperer_emplacement($emp);
+			$emp = $tableau['id_banniere'];
+			$banniere = pubban_recuperer_banniere($emp);
 			$n_emp_verif++;
 
 			if($period_perf==1){
-				$requete = sql_select("SUM(clics) AS Cpt", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND date IN ('".$date_stats."')", '', '', '', '', _BDD_PUBBAN);
-				$requete2 = sql_select("SUM(affichages) AS Affi", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND date IN ('".$date_stats."')", '', '', '', '', _BDD_PUBBAN);
+				$requete = sql_select("SUM(clics) AS Cpt", 'spip_pubban_stats', "id_banniere=".$emp." AND date IN ('".$date_stats."')", '', '', '', '');
+				$requete2 = sql_select("SUM(affichages) AS Affi", 'spip_pubban_stats', "id_banniere=".$emp." AND date IN ('".$date_stats."')", '', '', '', '');
 			}
 
 			elseif($period_perf==7){
 				$inter_stats = date('z', time() - 604800); 
 				$sep = ($inter_stats>$jour_stats) ? 'AND' : 'OR';
-				$requete = sql_select("SUM(clics) AS Cpt", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
-				$requete2 = sql_select("SUM(affichages) AS Affi", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') OR jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
+				$requete = sql_select("SUM(clics) AS Cpt", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '');
+				$requete2 = sql_select("SUM(affichages) AS Affi", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') OR jour < ('".$jour_stats."')", '', '', '', '');
 			}
 
 			elseif($period_perf==30){
 				$inter_stats = date('z', time() - 2592000); 
 				$sep = ($inter_stats>$jour_stats) ? 'AND' : 'OR';
-				$requete = sql_select("SUM(clics) AS Cpt", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
-				$requete2 = sql_select("SUM(affichages) AS Affi", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') OR jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
+				$requete = sql_select("SUM(clics) AS Cpt", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '');
+				$requete2 = sql_select("SUM(affichages) AS Affi", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') OR jour < ('".$jour_stats."')", '', '', '', '');
 			}
 
 			elseif($period_perf=="90"){
 				$inter_stats = date('z', time() - 7776000); 
 				$sep = ($inter_stats>$jour_stats) ? 'AND' : 'OR';
-				$requete = sql_select("SUM(clics) AS Cpt", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
-				$requete2 = sql_select("SUM(affichages) AS Affi", $GLOBALS['_PUBBAN_CONF']['table_stats'], "id_empl=".$emp." AND jour >= ('".$inter_stats."') OR jour < ('".$jour_stats."')", '', '', '', '', _BDD_PUBBAN);
+				$requete = sql_select("SUM(clics) AS Cpt", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') ".$sep." jour < ('".$jour_stats."')", '', '', '', '');
+				$requete2 = sql_select("SUM(affichages) AS Affi", 'spip_pubban_stats', "id_banniere=".$emp." AND jour >= ('".$inter_stats."') OR jour < ('".$jour_stats."')", '', '', '', '');
 			}
 			$array = spip_fetch_array($requete);
 			$array2 = spip_fetch_array($requete2);		
@@ -136,8 +136,8 @@ function formulaires_stats_adds_charger_dist(){
 			if($perf_emp_ratio == 0) $n_emp_zero++;
 			else {
 				$valeurs['ratios_perf_'.$n] = $perf_emp_ratio;
-				$valeurs['titre_empl_'.$n] = $emplacement['titre'];
-				$valeurs['titre_cut_empl_'.$n] = substr($emplacement['titre'], 0, 3).".";
+				$valeurs['titre_empl_'.$n] = $banniere['titre'];
+				$valeurs['titre_cut_empl_'.$n] = substr($banniere['titre'], 0, 3).".";
 				$valeurs['n_perf_'.$n] = $n;
 				$valeurs['div1js_2'][$n] = $n;
 				$n++;
@@ -172,7 +172,7 @@ function formulaires_stats_adds_charger_dist(){
 			$period_de=date('z', time() - $period_sec_de); 
 			$period_a=date('z', time() - $period_sec_a);
 			$sep = ($period_de>$period_a) ? 'OR' : 'AND';
-			$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", $GLOBALS['_PUBBAN_CONF']['table_stats'], "jour >= ('".$period_de."') ".$sep." jour <= ('".$period_a."')", '', '', '', '', _BDD_PUBBAN);
+			$requete = sql_select("SUM(clics) AS Cpt, SUM(affichages) AS Aff", 'spip_pubban_stats', "jour >= ('".$period_de."') ".$sep." jour <= ('".$period_a."')", '', '', '', '');
 			$array = spip_fetch_array($requete);
 			$cpt_clic = (isset($array['Cpt'])) ? $array['Cpt'] : 0;
 			$cpt_affi = (isset($array['Aff'])) ? $array['Aff'] : 0;
@@ -210,8 +210,8 @@ function formulaires_stats_adds_charger_dist(){
 			$period_de = date('z', time() - $period_sec_de); 
 			$period_a = date('z', time() - $period_sec_a);
 			$sep = ($period_de > $period_a) ? 'OR' : 'AND';
-			$requete = sql_select("SUM(clics) AS Cpt", $GLOBALS['_PUBBAN_CONF']['table_stats'], "jour >= ('".$period_de."') ".$sep." jour <= ('".$period_a."')", '', '', '', '', _BDD_PUBBAN);
-			$requete2 = sql_select("SUM(affichages) AS affievo", $GLOBALS['_PUBBAN_CONF']['table_stats'], "jour >= ('".$period_de."') ".$sep." jour <= ('".$period_a."')", '', '', '', '', _BDD_PUBBAN);
+			$requete = sql_select("SUM(clics) AS Cpt", 'spip_pubban_stats', "jour >= ('".$period_de."') ".$sep." jour <= ('".$period_a."')", '', '', '', '');
+			$requete2 = sql_select("SUM(affichages) AS affievo", 'spip_pubban_stats', "jour >= ('".$period_de."') ".$sep." jour <= ('".$period_a."')", '', '', '', '');
 			$array = spip_fetch_array($requete);
 			$array2 = spip_fetch_array($requete2);
 			$cpt_clic = (isset($array['Cpt'])) ? $array['Cpt'] : 0;

@@ -1,7 +1,7 @@
 <B_pubban>
-<BOUCLE_pubban(pubban_publicites){id_pub=#ENV{id_pub}}>
-<BOUCLE_pre(pubban_pub_empl){id_pub=#ENV{id_pub}}>
-	<BOUCLE_emplacement(pubban_emplacements){id_empl=#ID_EMPL}>
+<BOUCLE_pubban(PUBLICITES){id_publicite=#ENV{id_pub}}>
+<BOUCLE_pre(bannieres_publicites){id_publicite=#ENV{id_pub}}>
+	<BOUCLE_emplacement(BANNIERES){id_banniere=#ID_BANNIERE}>
 #SET{width, #WIDTH}
 #SET{height, #HEIGHT}
 	</BOUCLE_emplacement>
@@ -15,14 +15,17 @@
 	<strong>&nbsp;<:pubban:fiche:></strong>
 </div>
 
-<div class="vevent id_#ID_PUB">
-	<p class='date'>
-		[<strong><:pubban:date_pub:></strong>&nbsp;:&nbsp;(#DATE_ADD|affdate) [(#DATE_ADD|affdate{H:i})]]
-		[<br /><strong><:pubban:date_pub_maj:></strong>&nbsp;:&nbsp;(#MAJ|affdate) [(#MAJ|affdate{H:i})]]
-	</p>
+<div class="vevent id_#ID_PUBLICITE">
+	<p class='date'><small>
+		[<:pubban:date_creation:> : <abbr title="[(#DATE_ADD|date_iso)]">(#DATE_ADD|affdate) [(#DATE_ADD|affdate{H:i})]</abbr>]
+		[(#MAJ|affdate{'d-m-Y H:i'}|=={#DATE_ADD|affdate{'d-m-Y H:i'}}|non)
+			&nbsp;|&nbsp;
+			<:pubban:date_maj:> : <abbr title="[(#MAJ|date_iso)]">[(#MAJ|affdate)] [(#MAJ|affdate{H:i})]</abbr>
+		]
+	</small></p>
 	<p class='date'><strong><:pubban:emplacement_pub:>&nbsp;:&nbsp;
-<BOUCLE_empl(pubban_pub_empl){id_pub=#ENV{id_pub}}>
-		[<a href='[(#URL_ECRIRE{pubban_emplacement}|parametre_url{id_empl,#ID_EMPL})]' title='<:pubban:btn_details:>'>(#EMPLACEMENT{#ID_EMPL})</a>] / 
+<BOUCLE_empl(bannieres_publicites){id_publicite=#ENV{id_pub}}>
+		[<a href='[(#URL_ECRIRE{pubban_banniere}|parametre_url{id_empl,#ID_BANNIERE})]' title='<:pubban:btn_details:>'>(#BANNIERE{#ID_BANNIERE})</a>] / 
 </BOUCLE_empl>
 	</strong></p>
 	<p class='date'>
@@ -69,7 +72,7 @@
 			{url=#URL}
 			{width=#GET{width}}
 			{height=#GET{height}}
-			{id_pub=#ID_PUB}
+			{id_pub=#ID_PUBLICITE}
 			{nom_pub=#TITRE}
 		)]
 	</div>

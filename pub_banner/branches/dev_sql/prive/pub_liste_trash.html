@@ -10,41 +10,41 @@
 	</tr>
 
 <B_pubban>
-	<BOUCLE_pubban(pubban_publicites){pagination #ENV{pagine,20}}{par titre}{inverse #ENV{inverse}}{statut=5poubelle}>
+	<BOUCLE_pubban(PUBLICITES){pagination #ENV{pagine,20}}{par titre}{inverse #ENV{inverse}}{statut=5poubelle}>
 	<tr class='tr_liste'>
 	<td class="arial11">
 		<img src='[(#TYPE|pubban_recup_puce_pub)]' title='[(#TYPE|pubban_recup_puce_pub{type})]' alt='[(#TYPE|pubban_recup_puce_pub{type})]' border="0" align="absmiddle" hspace="3" />
 	</td>
 	<td class="arial11">
-		<strong><a href='[(#URL_ECRIRE{pubban_pub,id_pub=#ID_PUB})]' title='<:pubban:btn_details:>'>#TITRE</a></strong>
+		<strong><a href='[(#URL_ECRIRE{pubban_publicite,id_pub=#ID_PUBLICITE})]' title='<:pubban:btn_details:>'>#TITRE</a></strong>
 	</td>
 	<td class="arial11">[(#DATE_ADD|affdate)]</td>
 	<td class="arial11">
-		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_pub,out_trash-#ID_PUB,#SELF})]', '<:pubban:confirm_undelete:>');">
+		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,out_trash-#ID_PUBLICITE,#SELF})]', '<:pubban:confirm_undelete:>');">
 			<img src='#ENV{btn_sortie_poubelle}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabilite:>' border="0" align="absmiddle" hspace="3" />
 		</a>
 	</td>
-	<td class="arial11"><strong>N&deg;#ID_PUB</strong></td>
+	<td class="arial11"><strong>N&deg;#ID_PUBLICITE</strong></td>
 	</tr>
 	</BOUCLE_pubban>
 </B_pubban>
 
 <B_pubbanempl>
-	<BOUCLE_pubbanempl(pubban_emplacements){pagination #ENV{pagine,20}}{par titre}{inverse #ENV{inverse}}{statut=5poubelle}>
+	<BOUCLE_pubbanempl(BANNIERES){pagination #ENV{pagine,20}}{par titre}{inverse #ENV{inverse}}{statut=5poubelle}>
 	<tr class='tr_liste'>
 	<td class="arial11">
 		<img src='#ENV{puce_empl}' title='<:pubban:empl:>' alt='<:pubban:empl:>' border="0" align="absmiddle" hspace="3" />
 	</td>
 	<td class="arial11">
-			<strong><a href='[(#URL_ECRIRE{pubban_emplacement,id_empl=#ID_EMPL})]' title='<::pubban:btn_details:>'>#TITRE</a></strong>
+			<strong><a href='[(#URL_ECRIRE{pubban_banniere,id_empl=#ID_BANNIERE})]' title='<::pubban:btn_details:>'>#TITRE</a></strong>
 	</td>
 	<td class="arial11">-</td>
 	<td class="arial11">
-		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_emplacement,out_trash-#ID_EMPL,#SELF})]', '<:pubban:confirm_undelete:>');">
+		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,out_trash-#ID_BANNIERE,#SELF})]', '<:pubban:confirm_undelete:>');">
 			<img src='#ENV{btn_sortie_poubelle}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabilite:>' border="0" align="absmiddle" hspace="3" />
 		</a>
 	</td>
-	<td class="arial11"><strong>N&deg;#ID_EMPL</strong></td>
+	<td class="arial11"><strong>N&deg;#ID_BANNIERE</strong></td>
 	</tr>
 	</BOUCLE_pubbanempl>
 	<tr bgcolor='#DBE1C5'>

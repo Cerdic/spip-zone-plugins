@@ -3,7 +3,7 @@
 /**
  * Création d'un emplacement
  */
-function inc_instituer_emplacement_dist($datas) {
+function inc_instituer_banniere_dist($datas) {
 	if (!is_array($datas)) return;
 	include_spip('base/abstract_sql');
 	$conf = pubban_recuperer_config();
@@ -16,7 +16,7 @@ function inc_instituer_emplacement_dist($datas) {
 			'prix_tranche_4' => $conf['prix_tranche_4'],
 		));
 */
-	if ( $id_empl = sql_insertq($GLOBALS['_PUBBAN_CONF']['table_empl'], $datas, '', _BDD_PUBBAN) )
+	if ( $id_empl = sql_insertq('spip_bannieres', $datas, '') )
 		return $id_empl;
 	return false;
 }

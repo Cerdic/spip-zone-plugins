@@ -34,7 +34,7 @@ function exec_pubban_admin_dist() {
 		'btn_active' => $GLOBALS['pubban_btns']['actif'],
 		'btn_obsolete' => $GLOBALS['pubban_btns']['obsolete'],
 		'btn_sortie_poubelle' => $GLOBALS['pubban_btns']['sortie_poubelle'],
-		'puce_empl' => $GLOBALS['_PUBBAN_PUCES_STATUTS']['emplacement']['icon'],
+		'puce_empl' => $GLOBALS['_PUBBAN_PUCES_STATUTS']['banniere']['icon'],
 	);
 
 	$milieu = recuperer_fond("prive/search", $contexte);
@@ -42,13 +42,13 @@ function exec_pubban_admin_dist() {
 
 	if ($connect_statut == "0minirezo" ) {
 		$trash = pubban_poubelle_pleine();
-		$boutons .= icone_inline(_T('pubban:liste_pub'), generer_url_ecrire('pubban_pub_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", $GLOBALS['spip_lang_right'])
-			. icone_inline(_T('pubban:list_empl'), generer_url_ecrire('pubban_emplacement_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", $GLOBALS['spip_lang_right'])
+		$boutons .= icone_inline(_T('pubban:liste_pub'), generer_url_ecrire('pubban_publicite_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", $GLOBALS['spip_lang_right'])
+			. icone_inline(_T('pubban:list_empl'), generer_url_ecrire('pubban_banniere_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", $GLOBALS['spip_lang_right'])
 			. ( defined('_DIR_PUBLIC_PUBBAN') && _PUBBAN_ADDS ? icone_inline(_T('pubban:page_config'), generer_url_ecrire('pubban_config'), find_in_path("img/stock_import.png"), "rien.gif", $GLOBALS['spip_lang_right']) : '')
 			. ( defined('_DIR_PUBLIC_PUBBAN') && _PUBBAN_ADDS ? icone_inline(_T('pubban:page_tarifs'), generer_url_ecrire('pubban_tarifs'), find_in_path("img/money.png"), "rien.gif", $GLOBALS['spip_lang_right']) : '')
 			. ( $trash ? icone_inline(_T('pubban:open_trash'), generer_url_ecrire('pubban_admin','mode=trash'), find_in_path("img/stock_delete.png"), "rien.gif", $GLOBALS['spip_lang_right']) : '');
-		$res = icone_horizontale(_T('pubban:nouveau_pub'), generer_url_ecrire('pubban_pub_edit','id_pub=new'), find_in_path("img/stock_insert-object.png"), "creer.gif", false)
-			. icone_horizontale(_T('pubban:nouveau_empl'), generer_url_ecrire('pubban_emplacement_edit','id_empl=new'), find_in_path("img/stock_insert-image.png"), "creer.gif", false);
+		$res = icone_horizontale(_T('pubban:nouveau_pub'), generer_url_ecrire('pubban_editer_publicite','id_pub=new'), find_in_path("img/stock_insert-object.png"), "creer.gif", false)
+			. icone_horizontale(_T('pubban:nouveau_empl'), generer_url_ecrire('pubban_editer_banniere','id_empl=new'), find_in_path("img/stock_insert-image.png"), "creer.gif", false);
 		$bloc_racc = bloc_des_raccourcis($res);
 
 		//poubelle
@@ -73,8 +73,8 @@ function exec_pubban_admin_dist() {
 	}
 
 	include_spip('base/abstract_sql');
-	$verif_empl = sql_countsel($GLOBALS['_PUBBAN_CONF']['table_empl'], '', '', '', '', '', _BDD_PUBBAN);
-	$verif = sql_countsel($GLOBALS['_PUBBAN_CONF']['table_pub'], '', '', '', '', '', _BDD_PUBBAN);
+	$verif_empl = sql_countsel('spip_bannieres', '', '', '', '', '');
+	$verif = sql_countsel('spip_publicites', '', '', '', '', '');
 	$bloc_pliable_plie = ( $verif != 0 AND $verif_empl != 0 AND !$stats_ferme ) ? 'deplie' : 'replie';
 	$bloc_pliable_titre = "<div class='titrem $bloc_pliable_plie' onmouseover=\"jQuery(this).depliant('#stats_div');\">"
 		."<a href='#' onclick=\"return jQuery(this).depliant_clicancre('#stats_div');\" class='titremancre'></a>"

@@ -112,16 +112,16 @@ function formulaires_pubban_editer_pub_traiter_dist($id_pub='new', $retour=''){
 		$id_pub = $instit_pub($datas);
 	}
 	if($id_pub) {
-		$attacher = charger_fonction('attacher_pub_emplacements', 'inc');
+		$attacher = charger_fonction('attacher_pub_bannieres', 'inc');
 		$ok = $attacher($id_pub, $empls);
 	}
 
-	if(!pubban_comparer_emplacements($empls)) $message = array(
+	if(!pubban_comparer_bannieres($empls)) $message = array(
 		'message_ok' => _T('pubban:edit_pub_ok_emplacements_differents')
 	);
 	else {
 		include_spip('inc/headers');
-		$retour = generer_url_ecrire("pubban_pub","id_pub=$id_pub");
+		$retour = generer_url_ecrire("pubban_publicite","id_pub=$id_pub");
 		return( redirige_formulaire($retour) );
 	}
 	return $message;

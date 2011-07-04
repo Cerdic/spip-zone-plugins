@@ -80,8 +80,8 @@ $GLOBALS['_PUBBAN_PUCES_STATUTS'] = array(
 		'value' => 'flash',
 		'icon' => _DIR_PLUGIN_PUBBAN."img/application_flash.gif",
 	),
-	'emplacement' => array(
-		'name' => 'Emplacement',
+	'banniere' => array(
+		'name' => 'Banner',
 		'icon' => _DIR_PLUGIN_PUBBAN."img/insert-image-16.png",
 	),
 );
@@ -148,7 +148,7 @@ function pubban_recuperer_pub($id_pub, $str=false) {
 	include_spip('base/abstract_sql');
 	$vals = array();
 	if($id_pub != '0') {
-		$resultat = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_pub'],"id_pub=".intval($id_pub)	, '', '', '', '', _BDD_PUBBAN);
+		$resultat = sql_select("*", 'spip_publicites',"id_publicite=".intval($id_pub)	, '', '', '', '');
 		if (sql_count($resultat) > 0) {
 			while ($row=spip_fetch_array($resultat)) {
 				$vals['id'] = $id_pub;
@@ -166,14 +166,14 @@ function pubban_recuperer_pub($id_pub, $str=false) {
 				$vals['date_add'] = $row['date_add'];
 				$vals['statut'] = $row['statut'];
 			}
-			sql_free($resultat, _BDD_PUBBAN);
+			sql_free($resultat);
 		}
-		$resultat_empl = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_join'],"id_pub=".intval($id_pub), '', '', '', '', _BDD_PUBBAN);
+		$resultat_empl = sql_select("*", 'spip_bannieres_publicites',"id_publicite=".intval($id_pub), '', '', '', '');
 		if (sql_count($resultat_empl) > 0) {
 			while ($row_empl=spip_fetch_array($resultat_empl)) {
-				$vals['emplacement'][] = $row_empl['id_empl'];
+				$vals['banniere'][] = $row_empl['id_banniere'];
 			}
-			sql_free($resultat_empl, _BDD_PUBBAN);
+			sql_free($resultat_empl);
 		}
 	}
 	if($str){
@@ -183,13 +183,13 @@ function pubban_recuperer_pub($id_pub, $str=false) {
 	return $vals;
 }
 
-function pubban_comparer_emplacements($emp){
+function pubban_comparer_bannieres($emp){
 	if(!is_array($emp)) return;
 	if(count($emp) > 1) {
 		$width = $height = array();
 		foreach($emp as $k=>$empl){
-			$width[] = pubban_recuperer_emplacement($empl, 'width');
-			$height[] = pubban_recuperer_emplacement($empl, 'height');
+			$width[] = pubban_recuperer_banniere($empl, 'width');
+			$height[] = pubban_recuperer_banniere($empl, 'height');
 		}
 		if( count(array_unique($width)) != 1 OR 
 			count(array_unique($height)) != 1
@@ -204,11 +204,11 @@ function pubban_comparer_emplacements($emp){
  * @param	string	$str	Le nom d'un paramtre ˆ rŽcupŽrer (optionnel)
  * @return array	Les donnŽes de la banniere (ou la valeur du paramtre si demandŽ)
  */
-function pubban_recuperer_emplacement($id_empl, $str=false) {
+function pubban_recuperer_banniere($id_empl, $str=false) {
 	include_spip('base/abstract_sql');
 	$vals = array();
 	if($id_empl != '0') {
-		$resultat = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_empl'],"id_empl=".intval($id_empl), '', '', '', '', _BDD_PUBBAN);
+		$resultat = sql_select("*", 'spip_bannieres',"id_banniere=".intval($id_empl), '', '', '', '');
 		if (sql_count($resultat) > 0) {
 			while ($row=spip_fetch_array($resultat)) {
 				$vals['id'] = $id_empl;
@@ -225,7 +225,7 @@ function pubban_recuperer_emplacement($id_empl, $str=false) {
 				$vals['prix_tranche_4'] = $row['prix_tranche4'];
 */
 			}
-			sql_free($resultat, _BDD_PUBBAN);
+			sql_free($resultat);
 		}
 	}
 	if($str){
@@ -240,53 +240,53 @@ function pubban_recuperer_emplacement($id_empl, $str=false) {
  * @param	string	$name	Le nom de la banniere a recuperer
  * @return integer	L'ID recherche
  */
-function pubban_recuperer_emplacement_par_nom($name) {
+function pubban_recuperer_banniere_par_nom($name) {
 	include_spip('base/abstract_sql');
 
 	// Si c'est un "id" on renvoie
 	if (is_numeric($name))
-		return pubban_recuperer_emplacement($name);
+		return pubban_recuperer_banniere($name);
 
 	// Par "titre_id"
-	$id_empl = sql_getfetsel("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "titre_id=".sql_quote($name), '', '', '', '', _BDD_PUBBAN);
+	$id_empl = sql_getfetsel("id_banniere", 'spip_bannieres', "titre_id=".sql_quote($name), '', '', '', '');
 	if($id_empl)
-		return pubban_recuperer_emplacement($id_empl);
+		return pubban_recuperer_banniere($id_empl);
 
 	// Par "titre" (compatibilite)
-	$id_empl = sql_getfetsel("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "titre LIKE ('$name')", '', '', '', '', _BDD_PUBBAN);
+	$id_empl = sql_getfetsel("id_banniere", 'spip_bannieres', "titre LIKE ('$name')", '', '', '', '');
 	if($id_empl)
-		return pubban_recuperer_emplacement($id_empl);
+		return pubban_recuperer_banniere($id_empl);
 
 	// Sinon nada
 	return false;
 }
 
-function pubban_liste_empl($statut=false){
+function pubban_liste_bannieres($statut=false){
 	include_spip('base/abstract_sql');
-	$emplacements = array();
+	$bannieres = array();
 	if($statut AND !is_array($statut))
 		$statut = array( $statut );
 	$where = $statut ? "statut IN ('".join("','", $statut)."')" : '';
-	$resultat = sql_select("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], $where, '', '', '', '', _BDD_PUBBAN);
+	$resultat = sql_select("id_banniere", 'spip_bannieres', $where, '', '', '', '');
 	if (sql_count($resultat) > 0) {
 		while ($row=spip_fetch_array($resultat)) {
-			$emplacements[] = $row['id_empl'];
+			$bannieres[] = $row['id_banniere'];
 		}
 	}
-	return $emplacements;
+	return $bannieres;
 }
 
-function pubban_trouver_emplacements($id_pub){
+function pubban_trouver_bannieres($id_pub){
 	if($id_pub == '0') return;
 	include_spip('base/abstract_sql');
-	$emplacements = array();
-	$resultat = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_join'], 'id_pub='.intval($id_pub), '', '', '', '', _BDD_PUBBAN);
+	$bannieres = array();
+	$resultat = sql_select("*", 'spip_bannieres_publicites', 'id_publicite='.intval($id_pub), '', '', '', '');
 	if (sql_count($resultat) > 0) {
 		while ($row=spip_fetch_array($resultat)) {
-			$emplacements[] = $row['id_empl'];
+			$bannieres[] = $row['id_banniere'];
 		}
 	}
-	return $emplacements;
+	return $bannieres;
 }
 
 function pubban_transformer_nombre($nombre){

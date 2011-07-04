@@ -2,7 +2,7 @@
 
 function pubban_poubelle_pleine(){
 	include_spip('base/abstract_sql');
-	$trash = sql_countsel($GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='5poubelle'", '', '', '', '', _BDD_PUBBAN) + sql_countsel($GLOBALS['_PUBBAN_CONF']['table_empl'], "statut='5poubelle'", '', '', '', '', _BDD_PUBBAN);
+	$trash = sql_countsel('spip_publicites', "statut='5poubelle'", '', '', '', '') + sql_countsel('spip_bannieres', "statut='5poubelle'", '', '', '', '');
 	return $trash;
 }
 
@@ -28,32 +28,32 @@ function afficher_statistiques_pubban($return=false, $div='', $plie='deplie') {
 
 	// nbre d'emplacements
 	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"\">"._T('pubban:nb_emplacements')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
-	$div .= sql_getfetsel("COUNT(*)", $GLOBALS['_PUBBAN_CONF']['table_empl'], "statut='2actif'", '', '', '', '', _BDD_PUBBAN);
+	$div .= sql_getfetsel("COUNT(*)", 'spip_bannieres', "statut='2actif'", '', '', '', '');
 	$div .= "</strong></td></tr>";
 
 	// nbre total de pubs
-	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('pubban_pub')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_pub')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
-	$div .= sql_getfetsel("COUNT(*)", $GLOBALS['_PUBBAN_CONF']['table_pub'], "statut!='5poubelle'", '', '', '', '', _BDD_PUBBAN);
+	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('pubban_publicite')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_pub')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
+	$div .= sql_getfetsel("COUNT(*)", 'spip_publicites', "statut!='5poubelle'", '', '', '', '');
 	$div .= "</strong></td></tr>";
 
 	// nbre de pubs actives
 	$div .= "<tr><td>&nbsp;&nbsp;&nbsp;<i>-&nbsp;"._T('pubban:nb_pub_actives')."&nbsp;:</i></td><td><strong>";
-	$div .= sql_getfetsel("COUNT(*)", $GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='2actif'", '', '', '', '', _BDD_PUBBAN);
+	$div .= sql_getfetsel("COUNT(*)", 'spip_publicites', "statut='2actif'", '', '', '', '');
 	$div .= "</strong></td></tr>";
 
 	// nbre de pubs inactives
 	$div .= "<tr><td>&nbsp;&nbsp;&nbsp;<i>-&nbsp;"._T('pubban:nb_pub_inactives')."&nbsp;:</i></td><td><strong>";
-	$div .= sql_getfetsel("COUNT(*)", $GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='1inactif'", '', '', '', '', _BDD_PUBBAN);
+	$div .= sql_getfetsel("COUNT(*)", 'spip_publicites', "statut='1inactif'", '', '', '', '');
 	$div .= "</strong></td></tr>";
 
 	// nbre de pubs obsoletes
 	$div .= "<tr><td>&nbsp;&nbsp;&nbsp;<i>-&nbsp;"._T('pubban:nb_pub_obsoletes')."&nbsp;:</i></td><td><strong>";
-	$div .= sql_getfetsel("COUNT(*)", $GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='3obsolete'", '', '', '', '', _BDD_PUBBAN);
+	$div .= sql_getfetsel("COUNT(*)", 'spip_publicites', "statut='3obsolete'", '', '', '', '');
 	$div .= "</strong></td></tr>";
 
 	// nbre total d'affichages
 	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('pubban_stats')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_affichages')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
-	$resultat = sql_select("Sum(affichages) as A", $GLOBALS['_PUBBAN_CONF']['table_pub'], '', '', '', '', '', _BDD_PUBBAN);
+	$resultat = sql_select("Sum(affichages) as A", 'spip_publicites', '', '', '', '', '');
 	while($row = sql_fetch($resultat)) {
 		$global_nbaffi = $row['A'];
 	}
@@ -62,7 +62,7 @@ function afficher_statistiques_pubban($return=false, $div='', $plie='deplie') {
 
 	// nbre total de clics
 	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('pubban_stats')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_clics')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
-	$resultat = sql_select("Sum(clics) as B", $GLOBALS['_PUBBAN_CONF']['table_pub'], '', '', '', '', '', _BDD_PUBBAN);
+	$resultat = sql_select("Sum(clics) as B", 'spip_publicites', '', '', '', '', '');
 	while($row = sql_fetch($resultat)) {
 		$global_nbclic = $row['B'];
 	}
@@ -92,36 +92,36 @@ function pubban_search($str){
 	$j=0;
 	if(substr_count($str, 'id_empl') != 0 AND is_numeric(substr($str, 8))) {
 		$id_empl = substr($str, 8);
-		$pub = sql_select("id_pub", $GLOBALS['_PUBBAN_CONF']['table_join'], "id_empl=".intval($id_empl), '', '', '', '', _BDD_PUBBAN);
+		$pub = sql_select("id_publicite", 'spip_bannieres_publicites', "id_banniere=".intval($id_empl), '', '', '', '');
 		while ($row = spip_fetch_array($pub)) {
-			$results['pub'][$i] = $row['id_pub'];
+			$results['pub'][$i] = $row['id_publicite'];
 			$i++;
 		}
 	}
 	if(is_integer(intval($str)) AND intval($str) != 0){
-		$pub = sql_getfetsel("id_pub", $GLOBALS['_PUBBAN_CONF']['table_pub'], "id_pub=".intval($str), '', '', '', '', _BDD_PUBBAN);
+		$pub = sql_getfetsel("id_publicite", 'spip_publicites', "id_publicite=".intval($str), '', '', '', '');
 		if($pub) {
 			$results['pub'][$i] = $pub;
 			$i++;
 		}
-		$empl = sql_getfetsel("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "id_empl=".intval($str), '', '', '', '', _BDD_PUBBAN);
+		$empl = sql_getfetsel("id_banniere", 'spip_bannieres', "id_banniere=".intval($str), '', '', '', '');
 		if($empl) {
 			$results['emp'][$j] = $empl;
 			$j++;
 		}
 	}
 	else{
-		$pub = sql_select("id_pub", $GLOBALS['_PUBBAN_CONF']['table_pub'], "titre LIKE '%".$str."%'", '', '', '', '', _BDD_PUBBAN);
+		$pub = sql_select("id_publicite", 'spip_publicites', "titre LIKE '%".$str."%'", '', '', '', '');
 		if(sql_count($pub) > 0) {
 			while($row = spip_fetch_array($pub)){
-				$results['pub'][$i] = $row['id_pub'];
+				$results['pub'][$i] = $row['id_publicite'];
 				$i++;
 			}
 		}
-		$empl = sql_select("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "titre LIKE '%".$str."%'", '', '', '', '', _BDD_PUBBAN);
+		$empl = sql_select("id_banniere", 'spip_bannieres', "titre LIKE '%".$str."%'", '', '', '', '');
 		if(sql_count($empl) > 0) {
 			while($row = spip_fetch_array($empl)){
-				$results['emp'][$j] = $row['id_empl'];
+				$results['emp'][$j] = $row['id_banniere'];
 				$j++;
 			}
 		}

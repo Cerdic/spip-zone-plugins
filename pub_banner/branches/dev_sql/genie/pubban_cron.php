@@ -18,23 +18,23 @@ function genie_pubban_cron($time){
 	$nb_modif = $nb_delete = $nb_errors = 0;
 	$gdate = date("Y-m-d");
 
-	$requete = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_pub'], "date_debut!='' OR date_fin!=''", '', '', '', '',_BDD_PUBBAN);
+	$requete = sql_select("*", 'spip_publicites', "date_debut!='' OR date_fin!=''", '', '', '', '');
 	while($tableau = spip_fetch_array($requete)) {
 		$nom = $tableau['titre'];
 		$actif = $tableau['statut'];
 		$datedebut = (isset($tableau['date_debut']) AND strlen($tableau['date_debut'])) ? $tableau['date_debut'] : false;
 		$datefin = (isset($tableau['date_fin']) AND strlen($tableau['date_fin'])) ? $tableau['date_fin'] : false;
 		if($datedebut AND $actif == '1inactif' AND $datedebut >= $gdate) {
-			sql_updateq($GLOBALS['_PUBBAN_CONF']['table_pub'], array('statut' => '2actif'), "titre='".$nom."'", '', _BDD_PUBBAN);
+			sql_updateq('spip_publicites', array('statut' => '2actif'), "titre='".$nom."'", '');
 			$nb_modif++;
 		}
 		if($datefin AND $actif == '2actif' AND $datefin <= $gdate) {
-			sql_updateq($GLOBALS['_PUBBAN_CONF']['table_pub'], array( 'statut' => '3obsolete', 'affichages_restant' => '0', 'clics_restant' => '0' ), "titre='".$nom."'", '', _BDD_PUBBAN);
+			sql_updateq('spip_publicites', array( 'statut' => '3obsolete', 'affichages_restant' => '0', 'clics_restant' => '0' ), "titre='".$nom."'", '');
 			$nb_modif++;
 		}
 	}
 
-	$requete2 = sql_select("id_pub, date_add", $GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='0cree'", '', '', '', '',_BDD_PUBBAN);
+	$requete2 = sql_select("id_publicite, date_add", 'spip_publicites', "statut='0cree'", '', '', '', '');
 	while($tableau = spip_fetch_array($requete2)) {
 		list($date1, $rien) = explode(' ', $tableau['date_add']);
 		list($y1, $m1, $d1) = explode('-', $date1);
@@ -42,15 +42,15 @@ function genie_pubban_cron($time){
 		list($y2, $m2, $d2) = explode('-', $gdate);
 		$time2 = mktime(0, 0, 0, $m2, $d2, $y2);
 		if( ($time2-$time1) >= 2592000){
-			echo "ON y va pour id : ".$tableau['id_pub'];
-			if( $ok = sql_delete($GLOBALS['_PUBBAN_CONF']['table_pub'], 'id_pub='.$tableau['id_pub'], _BDD_PUBBAN) )
+			echo "ON y va pour id : ".$tableau['id_publicite'];
+			if( $ok = sql_delete('spip_publicites', 'id_publicite='.$tableau['id_publicite']) )
 				$nb_delete++;
 			else $nb_errors++;
 		}
 	}
 
 	$old_delete_stats = date('z', time() - 8726400);
-	sql_delete($GLOBALS['_PUBBAN_CONF']['table_stats'], "jour < ('".$old_delete_stats."')", _BDD_PUBBAN);
+	sql_delete('spip_pubban_stats', "jour < ('".$old_delete_stats."')");
 
 	spip_log("PUB BANNER CRON - Mise a jour OK [ $nb_modif updates | $nb_delete deletes | $nb_errors erreurs ]");
 }

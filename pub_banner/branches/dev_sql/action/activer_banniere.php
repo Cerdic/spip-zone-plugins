@@ -1,6 +1,6 @@
 <?php
 /**
- * Change le statut des publicités
+ * Change le statut des emplacements
  *
  * Il s'agit d'une 'action SPIP' (<i>url_action()</i>) qui doit recevoir en argument une
  * chaine construite sur le modèle : 'action-ID' avec 'action' :
@@ -12,7 +12,7 @@
  * <li>'trash' : poubelle : passe en '5poubelle' si était '1inactif' ou '2actif'</li>
  * </ul>
  *
- * @name 		Activer pub
+ * @name 		Activer banniere
  * @author 		Piero Wbmstr <@link piero.wbmstr@gmail.com>
  * @license		http://creativecommons.org/licenses/by-nc-sa/3.0/ Creative Commons BY-NC-SA
  * @version 	1.0 (06/2009)
@@ -21,42 +21,42 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_activer_pub(){
+function action_activer_banniere(){
 	include_spip('inc/autoriser');
 	include_spip('inc/pubban_process');
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	list($activer, $id_pub) = explode('-', $arg);
+	list($activer, $id_empl) = explode('-', $arg);
 
-	if (intval($id_pub)){
-		$statut = pubban_recuperer_pub($id_pub, "statut");
-		$editer_pub = charger_fonction('editer_pub', 'inc');
+	if (intval($id_empl)){
+		$statut = pubban_recuperer_banniere($id_empl, "statut");
+		$editer_empl = charger_fonction('editer_banniere', 'inc');
 		switch ($activer) {
 			case 'activer' :
 				if($statut == '1inactif') 
-					$ok = $editer_pub($id_pub, array("statut" => "2actif"));
+					$ok = $editer_empl($id_empl, array("statut" => "2actif"));
 				break;
 			case 'desactiver' :
 				if($statut == '2actif') 
-					$ok = $editer_pub($id_pub, array("statut" => "1inactif"));
+					$ok = $editer_empl($id_empl, array("statut" => "1inactif"));
 				break;
 			case 'rompu' :
 				if(in_array($statut, array('1inactif', '2actif')))
-					$ok = $editer_pub($id_pub, array("statut" => "4rompu"));
+					$ok = $editer_empl($id_empl, array("statut" => "4rompu"));
 				break;
 			case 'trash' :
 				if(in_array($statut, array('1inactif', '2actif')))
-					$ok = $editer_pub($id_pub, array("statut" => "5poubelle"));
+					$ok = $editer_empl($id_empl, array("statut" => "5poubelle"));
 				break;
 			case 'out_trash' :
 				if($statut == '5poubelle') 
-					$ok = $editer_pub($id_pub, array("statut" => "1inactif"));
+					$ok = $editer_empl($id_empl, array("statut" => "1inactif"));
 				break;
 		}
 		if ($redirect = _request('redirect') ) {
 			$redirect = str_replace('&amp;', '&', $redirect);
-//			if( $mode = _request('mode') )
-//				$redirect = parametre_url($redirect, 'mode', $mode);
+			if( $mode = _request('mode') )
+				$redirect = parametre_url($redirect, 'mode', $mode);
 			include_spip('inc/headers');
 			redirige_par_entete( $redirect );
 		}

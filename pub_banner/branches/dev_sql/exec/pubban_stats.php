@@ -20,10 +20,10 @@ function exec_pubban_stats_dist() {
 
 	$res = icone_horizontale(_T('pubban:home'), generer_url_ecrire("pubban_admin"), find_in_path("img/stock_home.png"), "rien.gif", false);
 	if ($connect_statut == "0minirezo") 
-		$res .= icone_horizontale(_T('pubban:liste_pub'), generer_url_ecrire('pubban_pub_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", false)
-			. icone_horizontale(_T('pubban:list_empl'), generer_url_ecrire('pubban_emplacement_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", false);
+		$res .= icone_horizontale(_T('pubban:liste_pub'), generer_url_ecrire('pubban_publicite_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", false)
+			. icone_horizontale(_T('pubban:list_empl'), generer_url_ecrire('pubban_banniere_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", false);
 	$contexte = array();
-	$verif = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_stats'], '', '', '', '', '', _BDD_PUBBAN);
+	$verif = sql_select("*", 'spip_pubban_stats', '', '', '', '', '');
 	if (sql_count($verif) == 0) $contexte['no_datas'] = true;
 	$milieu = recuperer_fond("prive/statistiques",$contexte);
 

@@ -9,7 +9,7 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_pubban_emplacement_edit_dist() {
+function exec_pubban_editer_banniere_dist() {
 	global $connect_statut, $connect_id_auteur, $spip_lang_right;
 	if ($connect_statut != "0minirezo" ) { include_spip('inc/minipres'); echo minipres(); exit; }
 	include_spip('inc/presentation');
@@ -20,11 +20,11 @@ function exec_pubban_emplacement_edit_dist() {
 	$id_empl = _request('id_empl') ? _request('id_empl') : 'new';
 
 	$retour = _request('retour') ? _request('retour') : (
-		($id_empl == 'new') ? generer_url_ecrire("pubban_emplacement_tous") : generer_url_ecrire("pubban_emplacement","id_empl=$id_empl")
+		($id_empl == 'new') ? generer_url_ecrire("pubban_banniere_tous") : generer_url_ecrire("pubban_banniere","id_empl=$id_empl")
 	);
 	$contexte = array(
 		'id_empl' => $id_empl,
-		'titre' => ($id_empl == 'new') ? '' : pubban_recuperer_emplacement($id_empl, 'titre'),
+		'titre' => ($id_empl == 'new') ? '' : pubban_recuperer_banniere($id_empl, 'titre'),
 		'icone_retour' => icone_inline(_T('icone_retour'), $retour, find_in_path("img/stock_left.png"), "rien.gif", $GLOBALS['spip_lang_left']),
 		'redirect' => $retour
 	);
@@ -33,7 +33,7 @@ function exec_pubban_emplacement_edit_dist() {
 	echo($commencer_page(_T('pubban:pubban')." - ".$titre_page, $rubrique, $sous_rubrique)), debut_gauche('', true),
 		debut_cadre_relief(find_in_path("img/ico-pubban.png"), true, "", "<br />"._T('pubban:intro_integer_edit')),
   		_T("pubban:intro_integer_edit_texte"),  fin_cadre_relief(true), creer_colonne_droite('', true), debut_droite('', true),
-		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'pubban_emplacement_edit', 'id_empl' => $id_empl ), 'data' => $milieu ) ),
+		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'pubban_editer_banniere', 'id_empl' => $id_empl ), 'data' => $milieu ) ),
 		fin_gauche(), fin_page();
 }
 ?>

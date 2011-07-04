@@ -12,18 +12,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_display_adds_charger_dist(){
 	include_spip('inc/pubban_process');
 	include_spip('base/abstract_sql');
-	$emplacement = pubban_recuperer_emplacement_par_nom(_request('empl'));
+	$emplacement = pubban_recuperer_banniere_par_nom(_request('empl'));
 	if($emplacement['statut'] != '2actif') return;
 
-	$list_pub = pubban_pubs_de_emplacement($emplacement['id'], false);
+	$list_pub = pubban_pubs_de_la_banniere($emplacement['id'], false);
 	$nbpub = count($list_pub);
 	if($nbpub == 0) return;
 	$nbpub = $nbpub-1;
 	$banaffi = rand(0, $nbpub);
 
-	$recup = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_pub'], "id_pub IN (".join(',', $list_pub).") AND statut IN ('2actif')", '', '', $banaffi.",1", '', _BDD_PUBBAN);
+	$recup = sql_select("*", 'spip_publicites', "id_publicite IN (".join(',', $list_pub).") AND statut IN ('2actif')", '', '', $banaffi.",1", '');
 	while($tableau = spip_fetch_array($recup)){
-		$id_pub = $tableau['id_pub'];
+		$id_pub = $tableau['id_publicite'];
 		$nompub = $tableau['titre'];
 		$url = $tableau['url'];
 		$blank = $tableau['blank'];
@@ -44,15 +44,15 @@ function formulaires_display_adds_charger_dist(){
 	// Statistiques
 	$date_stats = date("Y-m-d");
 	$jour_stats = date("z");
-	$recup = sql_select("*", $GLOBALS['_PUBBAN_CONF']['table_stats'], "date IN ('".$date_stats."') AND id_empl=".$emplacement['id'], '', '', '', '', _BDD_PUBBAN);
+	$recup = sql_select("*", 'spip_pubban_stats', "date IN ('".$date_stats."') AND id_banniere=".$emplacement['id'], '', '', '', '');
 	if (sql_count($recup) > 0) {
 		while($tableau = spip_fetch_array($recup)){
 			$verif_affi = $tableau['affichages'];
 		}
-		sql_updateq($GLOBALS['_PUBBAN_CONF']['table_stats'], array("affichages" => $verif_affi + 1), "date IN ('".$date_stats."') AND id_empl=".$emplacement['id'], '', _BDD_PUBBAN);
+		sql_updateq('spip_pubban_stats', array("affichages" => $verif_affi + 1), "date IN ('".$date_stats."') AND id_banniere=".$emplacement['id'], '');
 	}
 	else{
-		sql_insertq($GLOBALS['_PUBBAN_CONF']['table_stats'],  array('id_empl'=>$emplacement['id'],'jour'=>$jour_stats,'date'=>$date_stats,'clics'=>'0','affichages'=>'1'), '', _BDD_PUBBAN);
+		sql_insertq('spip_pubban_stats',  array('id_banniere'=>$emplacement['id'],'jour'=>$jour_stats,'date'=>$date_stats,'clics'=>'0','affichages'=>'1'), '');
 	}
 
 	$valeurs = array(

@@ -1,29 +1,23 @@
 <plugin>
-	<nom>Pub Banner</nom>
+	<nom>Pub Banner [sql dev version]</nom>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
 	<licence>[Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l'Identique->http://creativecommons.org/licenses/by-sa/3.0/]</licence>
 	<description>
 {{Pub Banner :: Gestionnaire de banni&#232;res publicitaires}}
 
-Gestion et statistiques de banni&#232;res publicitaires pour int&#233;gr&#233;es aux squelettes SPIP ...
+[branche "sql_dev"]
 
-{{UTILISATION}}
--* Ce plugin ajoute la balise {{ &#035;PUBBAN&#123;nom de la banni&#232;re&#125; }} pour les squelettes, qui est remplac&#233;e par une frame englobant la banni&#232;re.
--* Une page publique vous permet de pr&#233;senter les statistiques des encarts et de les exporter au format '.xls'.
+=> les tables ne sont pas supprimees en desinstall ??
 
-{{VALEURS PAR DEFAUT}}
--* Des banni&#232;res standards sont charg&#233;es par d&#233;faut &#224; l'installation ; il s'agit des quatre types les plus r&#233;pandus sur le web. Vous pouvez les effacer et en cr&#233;er de nouvelles.
--* Des exemples d'encarts ({&#233;cureuil SPIP}) sont &#233;galement charg&#233;s, pour d&#233;monstration.
+=> la jointure n'est pas faite automatiquement entre les tables 'publicites' et 'bannieres'
+alors que la table 'bannieres_publicites' est bein definit
 
-{{AIDE / DOC}}
--* Une explication ainsi qu'un exemple complet sont disponibles dans la documentation, qui vous permettra &#233;galement de visualiser l'int&#233;gration des banni&#232;res dans vos squelettes.
-Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique [pubban_documentation->/?page=pubban_documentation].
+=> les boucles sont re-declarees dans 'fonctions' (necessaire ?)
 
--* La page de statistiques du plugin est une adaptation libre du script '{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}' d&#233;velopp&#233; par {{Vincent Roseberry}} ({sous licence GPL &#224; l'&#233;poque}).
 	</description>
-	<version>1.24</version>
-	<version_base>0.5</version_base>
-	<etat>stable</etat>
+	<version>1.25</version>
+	<version_base>0.8</version_base>
+	<etat>dev</etat>
  	<icon>img/ico-pubban.png</icon>
 	<options>pubban_options.php</options>
 	<fonctions>pubban_fonctions.php</fonctions>
@@ -43,6 +37,10 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 	</pipeline>
 	<pipeline>
         <nom>declarer_tables_principales</nom>
+        <inclure>base/pubban_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+        <nom>declarer_tables_auxiliaires</nom>
         <inclure>base/pubban_tables.php</inclure>
 	</pipeline>
 	<pipeline>

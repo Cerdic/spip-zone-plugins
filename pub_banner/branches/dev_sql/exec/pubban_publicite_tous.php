@@ -9,7 +9,7 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_pubban_pub_tous_dist() {
+function exec_pubban_publicite_tous_dist() {
 	global $connect_statut, $connect_id_auteur, $spip_lang_right;
 	if ($connect_statut != "0minirezo" ) { include_spip('inc/minipres'); echo minipres(); exit; }
 	include_spip('inc/presentation');
@@ -44,7 +44,7 @@ function exec_pubban_pub_tous_dist() {
 		debut_cadre_relief(find_in_path("img/ico-pubban.png"), true, "", "<br />"._T('pubban:intro_pub')),
   		_T("pubban:intro_pub_texte"), fin_cadre_relief(true), bloc_des_raccourcis($res),
 		creer_colonne_droite('', true), debut_droite('', true),
-		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'pubban_pub_tous' ), 'data' => $milieu ) ),
+		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'pubban_publicite_tous' ), 'data' => $milieu ) ),
 		fin_gauche(), fin_page();
 }
 ?>

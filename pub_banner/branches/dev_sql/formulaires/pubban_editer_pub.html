@@ -32,8 +32,8 @@
 		    	<label for="emplacement"><:pubban:titre_tablo_emplacement:>&nbsp;:</label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{emplacement})</span>
 				]<select name="id_empl[]" id="emplacement" size='4' multiple="multiple" class="fondl">
-<BOUCLE_liste_emplacements(pubban_emplacements){statut=2actif}>
-					<option value="#ID_EMPL"<BOUCLE_emppub(POUR){tableau #ENV**{emplacement}}>[(#VALEUR|=={#ID_EMPL}|oui) selected="selected"]</BOUCLE_emppub>>
+<BOUCLE_liste_emplacements(BANNIERES){statut=2actif}>
+					<option value="#ID_BANNIERE"<BOUCLE_emppub(POUR){tableau #ENV**{emplacement}}>[(#VALEUR|=={#ID_BANNIERE}|oui) selected="selected"]</BOUCLE_emppub>>
 						#TITRE (#WIDTH x #HEIGHT)</option>
 </BOUCLE_liste_emplacements>
 				</select>

@@ -11,23 +11,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_vider_poubelle_pubban(){
 	include_spip('base/abstract_sql');
-	$resultat1 = sql_select("id_pub", $GLOBALS['_PUBBAN_CONF']['table_pub'], "statut='5poubelle'", '', '', '', '', _BDD_PUBBAN);
+	$resultat1 = sql_select("id_publicite", 'spip_publicites', "statut='5poubelle'", '', '', '', '');
 	if (sql_count($resultat1) > 0) {
 		while ($row = spip_fetch_array($resultat1)) {
-			$id_supp = $row['id_pub'];
+			$id_supp = $row['id_publicite'];
 			if (intval($id_supp)) {
-				sql_delete($GLOBALS['_PUBBAN_CONF']['table_pub'], "id_pub=".$id_supp, _BDD_PUBBAN);
-				sql_delete($GLOBALS['_PUBBAN_CONF']['table_join'], "id_pub=".$id_supp, _BDD_PUBBAN);
+				sql_delete('spip_publicites', "id_publicite=".$id_supp);
+				sql_delete('spip_bannieres_publicites', "id_publicite=".$id_supp);
 			}
 		}
 	}
-	$resultat2 = sql_select("id_empl", $GLOBALS['_PUBBAN_CONF']['table_empl'], "statut='5poubelle'", '', '', '', '', _BDD_PUBBAN);
+	$resultat2 = sql_select("id_banniere", 'spip_bannieres', "statut='5poubelle'", '', '', '', '');
 	if (sql_count($resultat2) > 0) {
 		while ($row = spip_fetch_array($resultat2)) {
-			$id_supp = $row['id_empl'];
+			$id_supp = $row['id_banniere'];
 			if (intval($id_supp)) {
-				sql_delete($GLOBALS['_PUBBAN_CONF']['table_empl'], "id_empl=".$id_supp, _BDD_PUBBAN);
-				sql_delete($GLOBALS['_PUBBAN_CONF']['table_join'], "id_empl=".$id_supp, _BDD_PUBBAN);
+				sql_delete('spip_bannieres', "id_banniere=".$id_supp);
+				sql_delete('spip_bannieres_publicites', "id_banniere=".$id_supp);
 			}
 		}
 	}

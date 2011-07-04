@@ -1,11 +1,9 @@
 #CACHE{0}
-<BOUCLE_payer(pubban_publicites){id_pub}>
-<BOUCLE_pre(pubban_pub_empl){id_pub}>
-	<BOUCLE_emplacement(pubban_emplacements){id_empl=#ID_EMPL}>
+<BOUCLE_payer(PUBLICITES){id_publicite}>
+	<BOUCLE_banniere(BANNIERES){id_banniere}>
 #SET{width, #WIDTH}
 #SET{height, #HEIGHT}
-	</BOUCLE_emplacement>
-</BOUCLE_pre>
+	</BOUCLE_banniere>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
 <head>

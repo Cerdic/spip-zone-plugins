@@ -34,6 +34,7 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'btn_reabiliter' => 'R&eacute;cup&eacute;rer',
 	'btn_lister_empl' => 'Lister les publicit&eacute;s de cette banni&egrave;re',
 	'btn_see_liste' => 'Voir la liste',
+	'banner' => 'Banni&egrave;re',
 	'banner_banner' => 'Banni&egrave;re "Banner"',
 
 // C //
@@ -54,6 +55,12 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'cube_banner' => 'Banni&egrave;re "Cude"',
 	'cacher_bordure' => 'Cacher les bordures des banni&egrave;res',
 	'cf_navigation' => 'Cf. [colonne de navigation->@url@]',
+	'campagne_presentation' => 'Présentation de la campagne',
+	'campagne_deroulement' => 'Déroulement de la campagne',
+	'campagne_donnees_suivi' => 'Données de suivi',
+	'campagne_statistiques' => 'Analyse statistique',
+	'campagne_date_debut' => 'Début de la campagne',
+	'campagne_date_fin' => 'Fin de la campagne',
 
 // D //
 	'documentation_info' => 'Documentation/Information',
@@ -63,8 +70,8 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'date_add' => 'Cr&eacute;ation',
 	'doc_info' => 'Nous vous renvoyons &agrave; la doc du plugin pour plus d\'informations :',
 	'derniers_jours' => 'derniers jours',
-	'date_pub' => 'Date d\'enregistrement',
-	'date_pub_maj' => 'Date de derni&egrave;re mise &agrave; jour',
+	'date_creation' => 'Date de création',
+	'date_maj' => 'Dernière mise à jour',
 	'dates_validite_pub' => 'Dates de validit&eacute;',
 	'date_debut' => 'Date de d&eacute;but de validit&eacute;',
 	'date_fin' => 'Date de fin de validit&eacute;',
@@ -132,6 +139,7 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'erreur_img_not_url' => 'L\'adresse web saisie est inaccessible ...',
 	'erreur_nb_aff' => 'Vous n\'avez pas pr&eacute;cis&eacute; de nombre d\'affichage ...',
 	'edit_pub_ok_emplacements_differents' => 'OK - Valeurs enregistr&eacute;es mais les emplacements s&eacute;lectionn&eacute;s pour la publicit&eacute; ont des tailles diff&eacute;rentes ... Cela pourra g&eacute;n&eacute;rer des erreurs d\'affichage.',
+	'exporter_donnees' => 'Exporter ces données',
 
 // F //
 	'fiche' => 'Fiche',
@@ -292,6 +300,8 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'reponse_form_def_droits' => 'Veuillez saisir des droits pour le publicit&eacute; (une seule ligne)',
 	'retour_liste_pub' => 'Retour &agrave; la liste compl&egrave;te des publicit&eacute;s',
 	'ratio_txt' => 'Ratio', 
+	'retirer_arg' => 'Retirer de la page',
+	'resultats_du' => 'Résultats de la derniere analyse au ',
 
 // S //
 	'search_results' => 'R&eacute;sultats de votre recherche',
@@ -300,6 +310,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'see_doc_in_texte_brut' => 'Voir la doc en texte brut (probl&egrave;mes de squelette)',
 	'see_doc_in_new_window' => 'Ouvrir la doc dans une nouvelle fen&ecirc;tre',
 	'statut' => 'Statut',
+	'statut_actuel' => 'Statut actuel',
 	'select_articles_choose' => '&gt; liste de vos articles',
 	'stats_pubban' => 'Statistiques des publicit&eacute;s',
 	'statistiques_pubban' => 'Statistiques des banni&egrave;res publicitaires',
