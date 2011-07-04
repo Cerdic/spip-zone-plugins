@@ -4,10 +4,10 @@
 	<div class="actions">
 		<div class="add">
 		[(#AUTORISER{creerdans,squelette,#ENV{path_base}}|oui)
-			[(#BOUTON_ACTION{#CHEMIN{img_pack/se-file-add-16.png}|balise_img{'new'}|concat{' ',<:skeleditor:action_nouveau:>},#URL_ECRIRE{skeleditor}})]
+			[(#BOUTON_ACTION{#CHEMIN{images/se-file-add-16.png}|balise_img{'new'}|concat{' ',<:skeleditor:action_nouveau:>},#URL_ECRIRE{skeleditor}})]
 		]
 		[(#AUTORISER{upload,squelette,#ENV{path_base}}|oui)
-			[(#BOUTON_ACTION{#CHEMIN{img_pack/se-upload-16.png}|balise_img{'upload'}|concat{' ',<:skeleditor:action_upload:>},#URL_ECRIRE{skeleditor,upload=oui}})]
+			[(#BOUTON_ACTION{#CHEMIN{images/se-upload-16.png}|balise_img{'upload'}|concat{' ',<:skeleditor:action_upload:>},#URL_ECRIRE{skeleditor,upload=oui}})]
 		]
 		</div>
 	</div>

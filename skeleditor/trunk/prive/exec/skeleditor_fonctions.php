@@ -46,7 +46,7 @@ function skeleditor_afficher_dir_skel($path_base,$current_file) {
 			$icon = "image";
 
 		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($path_base.$file))."' class='$class'>"
-						. "<img src='"._DIR_PLUGIN_SKELEDITOR."img_pack/se-$icon-16.png' alt='$icon' /> "
+						. "<img src='"._DIR_PLUGIN_SKELEDITOR."images/se-$icon-16.png' alt='$icon' /> "
 						.basename($file)."</a>";
 	}
 	$output .= skeleditor_tree_open_close_dir($current_dir,$init_dir,$current_file);
@@ -71,7 +71,7 @@ function editor_form_directory($path,$depth="") {
 // add file form
 function skeleditor_addfile($path_list) {
   //$output = bouton_block_invisible('editor_newfile');
-  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
+  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."images/action_add.png' alt='new' />"._T("skeleditor:fichier_nouveau");
   //$output .= debut_block_invisible('editor_newfile');  
   $output .= "<form method='get'>\n"; 
   $output .= "<input type='hidden' name='exec' value='skeleditor' />"; 
@@ -90,7 +90,7 @@ function skeleditor_addfile($path_list) {
 // upload file form
 function skeleditor_uploadfile($path_list) {
   //$output = "<br />".bouton_block_invisible('editor_uploadfile');
-  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."img_pack/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
+  $output .= "<img src='"._DIR_PLUGIN_SKELEDITOR."images/action_add.png' alt='new' />"._T("skeleditor:fichier_upload");
   //$output .= debut_block_invisible('editor_uploadfile');
   
   $output .= "<form method='post' enctype='multipart/form-data' >\n";  

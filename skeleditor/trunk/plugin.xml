@@ -1,6 +1,6 @@
 <plugin>
 	<nom>SkelEditor</nom>
-	<icon>img_pack/skeleditor-32.png</icon>
+	<icon>images/skeleditor-32.png</icon>
 	<auteur>[erational->http://www.erational.org], [C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<licence>GNU/GPL v3</licence>
 	<version>2.5.4</version>
@@ -19,7 +19,7 @@
 	<options>skeleditor_pipelines.php</options>
 	<!-- bouton prive spip sans bando -->
 	<bouton id="skeleditor" parent="naviguer">
-		<icone>img_pack/skeleditor-24.png</icone>
+		<icone>images/skeleditor-24.png</icone>
 		<titre>skeleditor:editer_skel</titre>
 		<url>skeleditor</url>
 	</bouton>
