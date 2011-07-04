@@ -68,3 +68,10 @@ listes:
   type: all
   replace: latex/latex-listes.yaml
   priority: -20 # avant !paragraphes
+
+notes:
+  if_str: '[['
+  match: ['[[', ']]']
+  type: str
+  replace: ['\footnote/debut', '/fin']
+  priority: -140
