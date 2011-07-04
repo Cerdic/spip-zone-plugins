@@ -40,7 +40,7 @@ function exec_pages_tous_dist()
 
 	echo sinon(afficher_objets('article',_T('pages:toutes_les_pages'), array('FROM' => "spip_articles AS articles ", "WHERE" => "id_rubrique='-1'", 'ORDER BY' => "articles.date DESC, articles.statut DESC")), '<div class="messages"><p>'._T('pages:aucune_page').'</p></div>');
 
-	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles_page'),'data'=>''));
+	echo pipeline('affiche_milieu',array('args'=>array('exec'=>'pages_tous'),'data'=>''));
 
 	echo fin_gauche(), fin_page();
 }
