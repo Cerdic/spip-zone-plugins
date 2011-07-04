@@ -5,49 +5,47 @@
 	<licence>GNU/GPL v3</licence>
 	<version>2.5.4</version>
 	<etat>test</etat>
-	<description><multi>
-	[fr]Editeur de squelettes, css, js, dans l'espace priv&#233;
-	[en]Template editor - Edit template files in the backoffice
-	[it]Redattore di scheletro - Nello spazio riservato, concede a redattore gli scheletri delle lime
-	[es]Redactor esquel&#233;tico - En espacio privado, no prohibe a redactor los esqueletos de los archivos
-	[de]Skeleton Herausgeber - Im privaten Raum erlaubt Herausgeber die Aktenskelette
-	</multi></description>
+	<description>
+		<multi>
+		[fr]Editeur de squelettes, css, js, dans l'espace priv&#233;
+		[en]Template editor - Edit template files in the backoffice
+		[it]Redattore di scheletro - Nello spazio riservato, concede a redattore gli scheletri delle lime
+		[es]Redactor esquel&#233;tico - En espacio privado, no prohibe a redactor los esqueletos de los archivos
+		[de]Skeleton Herausgeber - Im privaten Raum erlaubt Herausgeber die Aktenskelette
+		</multi>
+	</description>
 	<lien>http://www.spip-contrib.net/SkelEditor-2-0</lien>
 	<prefix>skeleditor</prefix>
 	<options>skeleditor_pipelines.php</options>
-
 	<!-- bouton prive spip sans bando -->
-  <bouton id="skeleditor" parent="naviguer">
-      <icone>img_pack/skeleditor-24.png</icone>
-      <titre>skeleditor:editer_skel</titre>
-      <url>skeleditor</url>
-  </bouton>
+	<bouton id="skeleditor" parent="naviguer">
+		<icone>img_pack/skeleditor-24.png</icone>
+		<titre>skeleditor:editer_skel</titre>
+		<url>skeleditor</url>
+	</bouton>
 	<!-- bouton prive spip avec bando -->
-  <bouton id="skeleditor21" parent="bando_squelette" position="0">
-			<icone>images/skeleditor-16.png</icone>
-      <titre>skeleditor:editer_skel</titre>
-      <url>skeleditor</url>
-  </bouton>
-
-  <!-- pipeline -->
-  <pipeline>
+	<bouton id="skeleditor21" parent="bando_squelette" position="0">
+		<icone>images/skeleditor-16.png</icone>
+		<titre>skeleditor:editer_skel</titre>
+		<url>skeleditor</url>
+	</bouton>
+	<!-- pipeline -->
+	<pipeline>
 		<nom>insert_head_css</nom>
-      <inclure>skeleditor_pipelines.php</inclure>
-  </pipeline>  
-  <pipeline>
+		<inclure>skeleditor_pipelines.php</inclure>
+	</pipeline>  
+	<pipeline>
 		<nom>header_prive</nom>
 		<action>insert_head</action>
-      <inclure>skeleditor_pipelines.php</inclure>
-  </pipeline>
-
-  <pipeline>
-      <nom>autoriser</nom>
-      <inclure>inc/skeleditor_autoriser.php</inclure>
-  </pipeline>
-  <pipeline>
-      <nom>affichage_final</nom>
-  </pipeline>
-
+		<inclure>skeleditor_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/skeleditor_autoriser.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+	</pipeline>
 	<necessite id="SPIP" version="[2.1.0-beta;)" />
 	<categorie>outil</categorie>
 </plugin>
