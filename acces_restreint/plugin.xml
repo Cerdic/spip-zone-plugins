@@ -23,9 +23,9 @@ _ Each area contains sections.
 _ Authors can be associated with these areas to gain access to them.
 _ All SPIP's loops are loaded with the necessary tools to filter the results according to the visitors' access priviliges.
 	[de] Verwaltung von Bereichen mit Zugangskontrolle
-_ Jeder Bereich enth&auml;lt Rubriken.
-_ Einzelnen Autoren k&ouml;nnen Zugangsrechte f�r Bereiche zugeordnet werden.
-_ ALle Standardschleifen (Abfragen) von SPIP werden �berladen, und um die �berpr&uuml;fung der Rechte des jeweiligen Sitebesuchers erg&auml;nzt.
+_ Jeder Bereich enthält Rubriken.
+_ Einzelnen Autoren können Zugangsrechte für Bereiche zugeordnet werden.
+_ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Überprüfung der Rechte des jeweiligen Sitebesuchers ergänzt.
 	</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Acces-restreint-V1</lien> <!-- URI de documentation -->
