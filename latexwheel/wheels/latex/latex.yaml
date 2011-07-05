@@ -79,13 +79,13 @@ listes:
   replace: latex/latex-listes.yaml
   priority: -20 # avant !paragraphes
 
-subsection:
+commande:
   # on passe en dernière, on supprime les tags
-  match: "#\\subsection/debut(.*)/fin#"
+  match: "#\\(.*)/debut(.*)/fin#"
   replace: supprimer_verb
   is_callback: Y
   priority: -20
-  if_str: "\subsection"
+#  if_str: "\subsection"
   
   
 notes:
