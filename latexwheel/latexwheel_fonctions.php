@@ -1,11 +1,11 @@
 <?php
 
 function propre_latex($t) {
-	
+
 	$t = echappe_html(latex_echappe_coloration($t));
 	
 	$t = appliquer_regles_wheel($t,array('latex/latex.yaml'));
-	$t = echappe_retour($t, $interdire_script);
+	$t = echappe_retour($t);
 
 
 	return $t;
