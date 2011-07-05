@@ -22,7 +22,6 @@ function action_doc2article_importer_dist($arg=null){
 		@list(,$titre,$ext) = $match;
 		
 		// préparer les valeurs de l'article
-		$titre = preg_replace(',_,',' ',$titre);
 		$valeurs_article = array(
 			'titre'=>$titre,
 			'id_rubrique'=>$doc2article['id_rubrique'],
