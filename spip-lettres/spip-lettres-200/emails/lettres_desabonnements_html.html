@@ -1,0 +1,17 @@
+#INCLURE{fond=emails/inc-haut}
+
+<h2><:lettres:validation_desabonnements:></h2>
+
+<p><:lettres:vous_avez_demande_a_vous_desabonner:></p>
+
+[<ul class="spip">
+(#ENV{themes}|filtre_themes{'<li>','</li>'})
+</ul>
+
+]<h3><:lettres:confirmation:></h3>
+
+<ul class="spip">	
+<li><a href="%%URL_VALIDATION_DESABONNEMENTS%%" class="spip"><:lettres:cliquez_ici_pour_confirmer:></a></li>
+</ul>
+
+#INCLURE{fond=emails/inc-bas}
