@@ -1,15 +1,15 @@
 code_couleur:
-  match: ["#<code[\s]*class=('|\")([\w]+)('|\")>#", ",</code>,"]
+  match: ["#<code[\s]*class=('|\")([\w]+)('|\")>[\r\n]#", ",[\r\n]</code>,"]
   replace: tw_code_latex
   is_callback: Y
   priority: -200
 
 cadre_couleur:
-  match: ["#<cadre[\s]*class=('|\")([\w]+)('|\")>#", ",</cadre>,"]
+  match: ["#<cadre[\s]*class=('|\")([\w]+)('|\")>[\r\n]#", ",[\r\n]</cadre>,"]
   replace: tw_cadre_latex
   is_callback: Y
 
 code:
-  priority: -300# pour le moment on suppose que tout les <code> sont en lignes, le reste serait uniquement avec un langage indiqué
-  match: ',<(code|var)>(.*)</(code|var)>,'
+  priority: -100# pour le moment on suppose que tout les <code> sont en lignes, le reste serait uniquement avec un langage indiqué
+  match: ',(<(code|var)>)(.*)(</(code|var)>),'
   replace: "<html>\verb?$2?</html>"
