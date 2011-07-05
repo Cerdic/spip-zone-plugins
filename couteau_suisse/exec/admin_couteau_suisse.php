@@ -205,9 +205,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	if(function_exists('redirige_action_post')) $t = redirige_action_post('charger_plugin', '', 'admin_couteau_suisse', '', $t); // SPIP >= 2.0
 	$t = '<div class="cs_aide">'.couteauprive_T('help')."\n\n$t</div>";
 	echo debut_boite_info(true), propre($t), fin_boite_info(true);
-	$t = cs_aide_raccourcis();
-	if(strlen($t))
-		echo debut_boite_info(true), $t, fin_boite_info(true);
+//	if(strlen($t = cs_aide_raccourcis()))
+//		echo debut_boite_info(true), $t, fin_boite_info(true);
 	$t = cs_aide_pipelines($outils_affiches_actifs);
 	if(strlen($t))
 		echo debut_boite_info(true), $t, fin_boite_info(true);
@@ -218,8 +217,12 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>$exec),'data'=>'')),
 		debut_droite('', true),
 		debut_cadre_trait_couleur(find_in_path('img/couteau-24.gif'),true,'','&nbsp;'.couteauprive_T('outils_liste')),
-		couteauprive_T('outil_intro'),
-		"\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
+		'<div class="titrem cs_intros">', couper($t = couteauprive_T('outil_intro'), 50),
+		'</div><div id="cs_infos_1" class="sous_liste cs_intros_inner">', $t, '</div>';
+	if(strlen($t = cs_aide_raccourcis()))
+		echo '<div class="titrem cs_intros">', couper($t, 50),
+		'</div><div id="cs_infos_2" class="sous_liste cs_intros_inner">', $t, '</div>';
+	echo "\n<table border='0' cellspacing='0' cellpadding='5' style='width:100%;'><tr><td class='sansserif'>";
 
 	$_GET['source'] = $exec;
 	echo '<div class="conteneur">', $liste_outils,

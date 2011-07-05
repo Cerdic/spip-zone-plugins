@@ -14,7 +14,7 @@ div.cadre_padding form { padding:0; margin:0; }
 [(#EVAL{defined('_SPIP30000')}|oui)
 	#SET{claire,##ENV{couleur_claire,edf3fe}}
 	#SET{foncee,##ENV{couleur_foncee,3874b0}}
-	div.cs_outils fieldset { border:2px solid #GET{claire}; background:#fcfcfc;}
+	div.cs_outils fieldset, div.cs_intros_inner { border:2px solid #GET{claire}; background:#fcfcfc;}
 	div.cs_infos fieldset { border: 1px threedface groove; padding: 0.3em; }
 ]
 
@@ -84,7 +84,7 @@ div.cs_toggle {
 	margin:50px 0 0 0;
 }
 
-div.categorie {
+div.categorie, div.cs_intros {
 	margin-top:.6em;
 	padding:2px;
 	font-weight:bold;
@@ -97,6 +97,12 @@ div.categorie span {
 }
 div.categorie span.light {
 	font-weight:normal;
+}
+
+div.cs_intros_inner {
+	margin-left:1em;
+	padding:0.4em;
+	font-size:90%;
 }
 
 .cs_sobre {
@@ -193,15 +199,15 @@ if(window.jQuery) jQuery(function(){
 
 	jQuery('div.cs_liste script').remove();
 	// clic sur un titre de categorie
-	jQuery('div.categorie').click( function() {
+	jQuery('div.categorie, div.cs_intros').click( function() {
 		jQuery(this).children().toggleClass('cs_hidden');
 		next = jQuery(this).next();
 		next.toggleClass('cs_hidden');
 		cs_EcrireCookie(next[0].id, '+'+next[0].className, dixans);
 		// annulation du clic
 		return false;
-	})
-	.dblclick(function(){
+	});
+	jQuery('div.categorie').dblclick(function(){
 		id = '#'+this.nextSibling.id;
 		a = jQuery(id+' a.outil_on').length;
 		b = jQuery(id+' a.cs_href').length;
