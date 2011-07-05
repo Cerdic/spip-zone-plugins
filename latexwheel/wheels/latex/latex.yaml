@@ -1,6 +1,11 @@
 --- # Syntaxe des raccourcis SPIP, version 0.0.1
     #
     # Si on nomme une regle, elle devient surchargeable
+liens:
+  match: "/\[([^][]*?([[]\w*[]][^][]*)*)->(>?)([^]]*)\]/msS"# repris de la constante '_RACCOURCI_LIEN' -> comment fait on pour appeler morceaux php
+  priority: -15
+  replace: tx_latex_traiter_liens
+  is_callback: Y
 
 fin:
   match: ['/debut', '/fin']

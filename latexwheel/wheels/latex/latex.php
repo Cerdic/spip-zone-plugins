@@ -1,4 +1,39 @@
 <?php
+
+function tx_latex_traiter_liens($lien){
+	
+	// uniformisation des différents raccouris de liens interne
+			$lien[4] = preg_replace('#^rubrique#','rub',$lien[4]);
+			$lien[4] = preg_replace('#^article#','art',$lien[4]);
+			if (is_numeric($lien[4])){
+				$lien[4] = 'art'.$lien[4];	
+			}
+	
+	
+	if ($lien[1]==''){ 	// si pas de texte correspondant au liens
+
+		if (stripos($lien[4],'://')!=0){ // liens externes
+			$texte = "\url/debut$lien[4]/fin";
+		}	
+		else{
+			//sinon objet SPIP pour le moment seul rubrique et article, on verra pour la suite
+						
+			$texte	= "\labelref/debut$lien[4]/fin (p. \pageref/debut$lien[4]/fin)";
+		}
+	}
+	
+	else{
+		
+		if (stripos($lien[4],'://')!=0){ // liens externes
+			$texte = "\href/debut$lien[4]/fin/debut$lien[1]/fin";
+		}
+		else {
+			$texte = "$lien[1]  (p. \pageref/debut$lien[4]/fin)";
+		}
+	}
+	
+	return $texte;	
+}
 function supprimer_verb($code){
 	$texte = $code[0];
 	$array = array();
