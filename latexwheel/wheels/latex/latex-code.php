@@ -8,7 +8,7 @@ function tw_code_latex($code){
 }
 
 function tw_cadre_latex($code){
-	$texte = str_replace($code[1],"\begin{minted}[lineos]{".strtolower($code[3])."}",$code[0]);
+	$texte = str_replace($code[1],"\begin{minted}[linenos]{".strtolower($code[3])."}",$code[0]);
 	$texte = str_replace('</cadre>','\end{minted}',$texte);
 	$texte = '<latex>'.base64_encode($texte).'</latex>';
 
