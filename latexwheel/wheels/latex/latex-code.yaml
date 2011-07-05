@@ -1,11 +1,11 @@
 code_couleur:
-  match: ["#<code[\s]*class=('|\")([\w]+)('|\")>#", ",</code>,"]
+  match: "#(<code[\s]*class=('|\")([\w]+)('|\")>)(.*)</code>#us"
   replace: tw_code_latex
   is_callback: Y
   priority: -200
 
 cadre_couleur:
-  match: ["#<cadre[\s]*class=('|\")([\w]+)('|\")>#", ",</cadre>,"]
+  match: "#(<cadre[\s]*class=('|\")([\w]+)('|\")>)(.*)</cadre>#us"
   replace: tw_cadre_latex
   is_callback: Y
 
