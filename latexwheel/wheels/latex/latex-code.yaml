@@ -12,4 +12,4 @@ cadre_couleur:
 code:
   priority: -300# pour le moment on suppose que tout les <code> sont en lignes, le reste serait uniquement avec un langage indiqué
   match: ',<(code|var)>(.*)</(code|var)>,'
-  replace: "<html>\verb?$1?</html>"
+  replace: "<html>\verb?$2?</html>"
