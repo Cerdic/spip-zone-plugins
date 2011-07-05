@@ -54,6 +54,7 @@ function zippeur_zipper($chemin,$array,$cmd,$plat){
 				spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur");
 				
 			}
+		$fichiers  =count($array) ;
 	}elseif($cmd=='7zip')
 	{
 		foreach ($array as $fichier){
