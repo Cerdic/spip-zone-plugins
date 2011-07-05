@@ -2,15 +2,15 @@
 
 function tw_code_latex($code){
 	if (count($code)>1)
-		return "<html>\begin{minted}{".strtolower($code[2])."}\n";
+		return echappe_html("<html>\begin{minted}{".strtolower($code[2])."}\n",'latex');
 	else
-		return 	"\n\end{minted}</html>";
+		return 	echappe_html("\n\end{minted}</html>",'latex');
 }
 
 function tw_cadre_latex($code){
 	if (count($code)>1)
-		return "<html>\begin{minted}[linenos]{".strtolower($code[2])."}\n";
+		return echappe_html("<html>\begin{minted}[linenos]{".strtolower($code[2])."}\n",'latex');
 	else
-		return 	"\n\end{minted}</html>";
+		return echappe_html("\n\end{minted}</html>",'latex');
 }
 ?>

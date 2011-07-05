@@ -55,7 +55,7 @@ function supprimer_verb($code){
 	}
 	$array = array();
 	
-	preg_match_all('#verb\?(.*)\?#',$texte,$array,PREG_SET_ORDER);
+	preg_match_all('#verb¡(.*)\¡#',$texte,$array,PREG_SET_ORDER);
 	foreach ($array as $i){
 		$texte = str_replace("\\".$i[0],$i[1],$texte);	
 	}
