@@ -211,7 +211,7 @@ function cs_rempl_glossaire($texte, $liste=false) {
 				$table1[$gloss_id] = array($gloss_id, $lien, $les_titres);
 			else {
 				$table1[$gloss_id] = "href='$lien' name='mot$gloss_id"; // name est complete plus tard pour eviter les doublons
-				$table2[$gloss_id] = recuperer_fond(
+				$table2[$gloss_id] = defined('_CS_PRINT')?'':recuperer_fond(
 					defined('_GLOSSAIRE_JS')?'fonds/glossaire_js':'fonds/glossaire_css', 
 					array('id_mot' => $gloss_id, 'titre' => $les_titres, 
 						'texte' => glossaire_safe($mot['texte']), 
