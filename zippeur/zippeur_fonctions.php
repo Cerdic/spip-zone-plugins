@@ -1,6 +1,6 @@
 <?php
 
-function zippeur($array,$date,$cmd,$nom=''){
+function zippeur($array,$date,$cmd,$nom='',$plat='oui'){
 	$nom == '' ? $nom = md5(serialize($array)) : $nom = $nom;
 	$cmd =='' ? $cmd = lire_config('zippeur/zippeur_cmd'):$cmd=$cmd;
 	
@@ -10,7 +10,7 @@ function zippeur($array,$date,$cmd,$nom=''){
 	/* On vérifie si le zip existe*/
 	if (count(preg_files($chemin))==0 or!$enbase['id_zip'] or $enbase['date_modif']!=$date or count($array)!=$enbase['fichiers']){
 		
-		if(zippeur_zipper($chemin,$array,$cmd))
+		if(zippeur_zipper($chemin,$array,$cmd,$plat))
 		{
 			spip_log("Zippage de $nom.zip avec cmd=$cmd","zippeur");
 			if ($enbase['id_zip']){
@@ -26,7 +26,7 @@ function zippeur($array,$date,$cmd,$nom=''){
 	return $chemin;
 }
 
-function zippeur_zipper($chemin,$array,$cmd){
+function zippeur_zipper($chemin,$array,$cmd,$plat){
 	$temps_un=explode(" ",microtime());
 	if($cmd=='PclZip'){include_spip('inc/pclzip');}
 	defined('_DIR_SITE') ? sous_repertoire(_DIR_SITE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip') : sous_repertoire(_DIR_RACINE._NOM_TEMPORAIRES_ACCESSIBLES,'cache-zip');
@@ -46,7 +46,10 @@ function zippeur_zipper($chemin,$array,$cmd){
 			
 			
 		}
-		$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_ALL_PATH);
+		if ($plat==oui)
+			$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_ALL_PATH);
+		else
+			$erreur = $zip->add($array,PCLZIP_OPT_REMOVE_PATH, $plat);
 		if ($erreur == 0){
 				spip_log("$chemin".$zip->errorInfo(true),"zippeur_erreur");
 				

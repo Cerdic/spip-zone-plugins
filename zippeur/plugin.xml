@@ -23,7 +23,7 @@
 <plugin spip='[3.0.0-dev;3.0.*]'>
     <nom>Zippeur</nom>
     <auteur>Maïeul Rouquette, Julien Coste-Louret</auteur>
-    <version>1.3</version>
+    <version>1.4.0</version>
     <version_base>0.3</version_base>
   	<categorie>multimedia</categorie>
     <etat>stable</etat>
