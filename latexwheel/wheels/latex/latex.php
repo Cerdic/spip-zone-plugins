@@ -1,5 +1,15 @@
 <?php
 
+function tx_latex_traiter_glossaire($glossaire){
+	
+	$glossaire_spip = traiter_raccourci_glossaire($glossaire[0]);
+	preg_match_all("#href=\"(.*)\"#",$glossaire_spip,$tableau);
+	$url = $tableau[1][0];
+	preg_match_all(",>(.*)</a>,",$glossaire_spip,$tableau);
+	$texte = $tableau[1][0];
+	return "\href/debut$url/fin/debut$texte/fin";
+	
+}
 function tx_latex_traiter_liens($lien){
 	
 	// uniformisation des différents raccouris de liens interne

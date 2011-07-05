@@ -94,3 +94,9 @@ notes:
   type: str
   replace: ['\footnote/debut', '/fin']
   priority: -140
+glossaire:
+  if_str: "[?"
+  match: "/\[\?+\s*([^][<>]+)\]/S"			# '_RACCOURCI_GLOSES'
+  is_callback: Y
+  priority: -25
+  replace: tx_latex_traiter_glossaire
