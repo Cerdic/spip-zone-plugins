@@ -28,13 +28,13 @@ function spiplistes_utiliser_facteur()
 	return($utiliser);
 }
 
-if(!spiplistes_utiliser_facteur() && !class_exists('PHPMailer'))
-{
+//if(!spiplistes_utiliser_facteur() && !class_exists('PHPMailer'))
+//{
 	include_spip('phpmailer/class.phpmailer');
 	include_spip('phpmailer/class.smtp');
-}
+//}
 
-	class phpMail extends PHPMailer {
+	class phpMail extends PHPMailer_2003 {
 
 		function phpMail($email, $objet, $message_html, $message_texte, $charset) {
 		
