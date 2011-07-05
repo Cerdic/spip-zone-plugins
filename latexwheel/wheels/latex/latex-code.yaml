@@ -5,7 +5,7 @@ code_couleur:
   priority: -200
 
 cadre_couleur:
-  match: ["#<cadre[\s]*class=('|\")([\w]+)('|\")>[\r\n]#", ",[\r\n]</cadre>,"]
+  match: ["#<cadre[\s]*class=('|\")([\w]+)('|\")>#", ",</cadre>,"]
   replace: tw_cadre_latex
   is_callback: Y
 
