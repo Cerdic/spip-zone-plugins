@@ -524,7 +524,7 @@ class PHPMailer_2003
      * @return bool
      */
     function SmtpConnect() {
-        if($this->smtp == NULL) { $this->smtp = new SMTP(); }
+        if($this->smtp == NULL) { $this->smtp = new SMTP_1_02(); }
 
         $this->smtp->do_debug = $this->SMTPDebug;
         $hosts = explode(";", $this->Host);

@@ -21,7 +21,7 @@
  * @package PHPMailer
  * @author Chris Ryan
  */
-class SMTP
+class SMTP_1_02
 {
     /**
      *  SMTP server port
