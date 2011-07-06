@@ -45,8 +45,19 @@ function tx_latex_traiter_liens($lien){
 	return $texte;	
 }
 function supprimer_verb($code){
-	
+	// d'abord le décodage du echappe_html général
 	$texte = $code[0];
+	
+	$array = array();
+	preg_match_all("#<span class=\"base64\" title=\"(.*)\"></span>#",$texte,$array);
+	
+	foreach ($array[1] as $i){
+		$texte = str_replace("<span class=\"base64\" title=\"$i\"></span>",base64_decode($i),$texte);
+		
+	}
+	
+	
+	// ensuite décodage du echappe_html propre à latex
 	$array = array();
 	preg_match_all("#<span class=\"base64latex\" title=\"(.*)\"></span>#",$texte,$array);
 	
@@ -54,6 +65,8 @@ function supprimer_verb($code){
 		$texte = str_replace("<span class=\"base64latex\" title=\"$i\"></span>",base64_decode($i),$texte);
 		
 	}
+	
+	
 	$array = array();
 	
 	preg_match_all('#verb¡(.*)\¡#',$texte,$array,PREG_SET_ORDER);
