@@ -2,18 +2,22 @@
 <script type="text/javascript">
 $(document).ready(function(){
 		$('#tagsphere-#ENV{id}').tagSphere({
-			height: [(#ENV{height}|?{#ENV{height},200})],
-			width:  [(#ENV{width}|?{#ENV{width},200})],
-			slower: [(#ENV{slower}|?{#ENV{slower},0.90})],
-			radius: [(#ENV{radius}|?{#ENV{radius},100})],
-			timer: [(#ENV{timer}|?{#ENV{timer},40})]
+			height: [(#ENV{height}|?{#ENV{height},400})],
+			width:  [(#ENV{width}|?{#ENV{width},400})],
+			radius: [(#ENV{radius}|?{#ENV{radius},150})],
+			speed: [(#ENV{speed}|?{#ENV{speed},3})],
+			slower: [(#ENV{slower}|?{#ENV{slower},0.9})],
+			timer: [(#ENV{timer}|?{#ENV{timer},5})],
+      fontMultiplier: [(#ENV{fontMultiplier}|?{#ENV{fontMultiplier},15})], 
+      tagCSSOver: {#ENV{tagCSSOver}},
+      tagCSSOut: {#ENV{tagCSSOut}}	
 		});
 });   
 </script> 
 
 <div id="tagsphere-#ENV{id}"> 
   <ul>
-  <BOUCLE_mot(MOTS){id_groupe ?}>					
+  <BOUCLE_mot(MOTS){tout}{id_groupe ?}>					
       <li>[<a href="#URL_MOT">(#TITRE)</a>]</li>	
   </BOUCLE_mot>	
   </ul>
