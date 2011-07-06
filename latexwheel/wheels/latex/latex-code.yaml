@@ -14,5 +14,13 @@ code:
   match: [',<(code|var)>,', ',</(code|var)>,']
   replace: ['<html>\verb¡', '¡</html>']
  
-code_protege:
-  
+code_couleur_ligne:
+  priority: -10
+  match: "#<code[\s]*class=('|\")([\w]+)('|\")>#"
+  replace: '<html>\verb¡'
+
+code_echappe:
+  priority: -10
+  match: "#<html>(\\verb¡(.*)¡)</html>#U"
+  is_callback: Y
+  replace: tw_echappe_code_latex  
