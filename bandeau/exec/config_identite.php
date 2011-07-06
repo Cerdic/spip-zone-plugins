@@ -34,7 +34,12 @@ function exec_config_identite(){
 
 
 	echo recuperer_fond('prive/configurer/identite',$_GET);
+	echo pipeline('affiche_milieu', array(
+		'args' => array('exec' => 'configurer_identite'),
+		'data' => ''
+	));
+	
 	echo fin_gauche(),fin_page();
-}
+} 
 
 ?>
