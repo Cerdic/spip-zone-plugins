@@ -1,6 +1,6 @@
 [(#REM)
-	"Like" plugin : fameux bouton "J'aime"
-	Doc officielle : http://developers.facebook.com/docs/reference/plugins/like/
+	"Like Box" plugin : boite de commentaires + bouton "J'aime"
+	Doc officielle : http://developers.facebook.com/docs/reference/plugins/like-box/
 	
 	Arguments d'environnement a passer :
 		- href : URL qui sera "aimee" (defaut URL courante)
@@ -12,6 +12,8 @@
 		- height : hauteur totale de l'outil (utilise en iframe - defaut 400px)
 		- font : la police utilisee ('arial' 'lucida grande' 'segoe ui' 'tahoma' 'trebuchet ms' 'verdana' - defaut 'lucida grande' - cf. doc)
 		- colorscheme : couleur generale du bouton (light/dark - defaut 'light')
+
+		- force_wall (inutilise)
 
 ]
 #SET{href,#ENV{href,#SELF|url_absolue}}
