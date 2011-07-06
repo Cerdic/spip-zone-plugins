@@ -30,12 +30,14 @@ function exec_hash_documents_dist($class = null)
 	echo debut_droite("", true);
 
 	echo debut_cadre_trait_couleur('', true, '', _T('hasher:documents_site'));
+	
+	$corriger = intval(_request('corriger')) ;
 
 	if (($hasher = intval(_request('hasher'))) > 0)
-		$modif = hasher_deplacer_n_documents($hasher);
+		$modif = hasher_deplacer_n_documents($hasher, $corriger);
 
 	if (($hasher = intval(_request('hasher'))) < 0)
-		$modif = hasher_deplacer_n_documents(-$hasher, true);
+		$modif = hasher_deplacer_n_documents(-$hasher, $corriger, true);
 
 	if ($modif) {
 		echo "<p>"._T('hasher:documents_modifies').join(', ', $modif)."</p>";
@@ -47,7 +49,8 @@ function exec_hash_documents_dist($class = null)
 
 	if (intval($non) > 0) {
 		$n = min(intval($non), 100);
-		echo "<p><a href='".parametre_url(self(), 'hasher', $n)."'>"._T('hasher:action_hasher',array('n'=>$n))."</a></p>";
+		echo "<p><a href='".parametre_url(parametre_url(self(), 'hasher', $n), 'corriger', '')."'>"._T('hasher:action_hasher',array('n'=>$n))."</a></p>";
+		echo "<p>"._T('hasher:action_corriger_explication')."<a href='".parametre_url(parametre_url(self(), 'hasher', $n), 'corriger', '1')."'>"._T('hasher:action_corriger',array('n'=>$n))."</a></p>";
 	}
 
 	if (intval($oui) > 0) {
