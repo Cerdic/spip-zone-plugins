@@ -15,7 +15,7 @@ fin:
 
 caractereslatex:
   #proteges les caractères spécifiques à latex : & _ et d'autres
-  match : ",(%|&|_|#),"
+  match : ",($|%|&|_|#),"
   replace: "\\$1"
   priority: -10
 
