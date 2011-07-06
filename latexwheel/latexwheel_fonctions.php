@@ -2,7 +2,9 @@
 
 function propre_latex($t) {
 	
-	$t = echappe_html(latex_echappe_coloration($t)); 
+	$t = latex_echappe_coloration($t);
+	
+	$t = echappe_html($t); 
 	
 	$t = appliquer_regles_wheel($t,array('latex/latex.yaml'));
 	$t = latex_traiter_modeles($t);
