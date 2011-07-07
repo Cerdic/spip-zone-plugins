@@ -39,6 +39,9 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 	if (method_exists($c, $demande)) {
 		return $c->$demande();
 	}
+	if (property_exists($c, 'saisie_parametres') and isset($c->saisie_parametres[$demande])) {
+		return $c->saisie_parametres[$demande];
+	}
 	return '';
 }
 
