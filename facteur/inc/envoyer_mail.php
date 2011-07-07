@@ -28,7 +28,8 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
  *       string chemin : chemin file system pour trouver le fichier a embarquer
  *       string nom : nom du document tel qu'apparaissant dans l'email
  *       string encodage : encodage a utiliser, parmi 'base64', '7bit', '8bit', 'binary', 'quoted-printable'
- *       string mime :
+ *       string mime : mime type du document
+ *     array headers : tableau d'en-tetes personalises, une entree par ligne d'en-tete
  * @param string $from (deprecie, utiliser l'entree from de $corps)
  * @param string $headers (deprecie, utiliser l'entree headers de $corps)
  * @return bool
