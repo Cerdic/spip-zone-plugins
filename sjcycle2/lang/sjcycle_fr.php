@@ -72,11 +72,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'noisette_fx' => 'Effet&nbsp;:',
 	'noisette_hauteur' => 'Hauteur (px)&nbsp;:',
 	'noisette_id_sjcycle' => 'Num&eacute;ro de l\'article contenant les images',
+	'noisette_label_afficher_nom_site' => 'Afficher le nom du site sous le logo&nbsp;:',
 	'noisette_label_afficher_titre_menu' => 'Afficher le titre&nbsp;:',
 	'noisette_largeur' => 'Largeur (px)&nbsp;:',
 	'noisette_nb' => 'Nombre d\'images&nbsp;:',
 	'noisette_nom_noisette' => 'Diaporama',
+	'noisette_sites_description' => 'Affiche un diaporama des logos des sites enregistr&eacute;s',
+	'noisette_sites_nom_noisette' => 'Diaporama des sites',
+	'noisette_titre_alea_defaut' => 'Au Hasard',
 	'noisette_titre_noisette' => 'Titre&nbsp;:',
+	'noisette_titre_sites_defaut' => 'Liens',
 
 	// V
 	'valeur_hex' => 'Valeur hexadecimale ou "transparent"',

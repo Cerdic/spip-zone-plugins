@@ -1,33 +1,31 @@
-nom: '<:sjcycle:noisette_alea_nom_noisette:>'
-description: '<:sjcycle:noisette_alea_description:>'
-icon: 'images/sjcycle_alea-24.png'
+nom: '<:sjcycle:noisette_sites_nom_noisette:>'
+description: '<:sjcycle:noisette_sites_description:>'
+icon: 'images/sjcycle_sites-24.png'
 parametres:
   -
     saisie: 'oui_non'
     options:
-      nom: 'sjcycle_alea_afficher_titre_noisette'
+      nom: 'sjcycle_sites_afficher_titre_noisette'
       label: '<:sjcycle:noisette_label_afficher_titre_menu:>'
       defaut: 'on'
   -
     saisie: 'input'
     options:
-      nom: 'sjcycle_alea_titre_noisette'
+      nom: 'sjcycle_sites_titre_noisette'
       label: '<:sjcycle:noisette_titre_noisette:>'
-      defaut: '<:sjcycle:noisette_titre_alea_defaut:>'
+      defaut: '<:sjcycle:noisette_titre_sites_defaut:>'
       explication: '<:aveline:explication_raccourcis_typo:>'
-      afficher_si: '@sjcycle_alea_afficher_titre_noisette@ == "on"'  -
+      afficher_si: '@sjcycle_sites_afficher_titre_noisette@ == "on"'  -
   -
-    saisie: 'input'
+    saisie: 'oui_non'
     options:
-      nom: 'sjcycle_alea_nombre'
-      defaut: '10'
-      label: '<:sjcycle:noisette_nb:>'
-    verifier:
-      type: 'entier'
+      nom: 'sjcycle_sites_afficher_nom_site'
+      label: '<:sjcycle:noisette_label_afficher_nom_site:>'
+      defaut: 'on'
   -
     saisie: 'selection'
     options:
-      nom: 'sjcycle_alea_fx'
+      nom: 'sjcycle_sites_fx'
       defaut: 'fade'
       label: '<:sjcycle:noisette_fx:>'
       datas:
@@ -61,7 +59,7 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'sjcycle_alea_duree'
+      nom: 'sjcycle_sites_duree'
       defaut: '5000'
       label: '<:sjcycle:noisette_duree:>'
     verifier:
@@ -69,7 +67,7 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'sjcycle_alea_largeur'
+      nom: 'sjcycle_sites_largeur'
       defaut: '200'
       label: '<:sjcycle:noisette_largeur:>'
     verifier:
@@ -77,7 +75,7 @@ parametres:
   -
     saisie: 'input'
     options:
-      nom: 'sjcycle_alea_hauteur'
+      nom: 'sjcycle_sites_hauteur'
       defaut: '0'
       label: '<:sjcycle:noisette_hauteur:>'
     verifier:
