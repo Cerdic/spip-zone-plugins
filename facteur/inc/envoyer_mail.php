@@ -11,6 +11,28 @@ include_spip('classes/facteur');
 // inclure le fichier natif de SPIP, pour les fonctions annexes
 include_once _DIR_RESTREINT."inc/envoyer_mail.php";
 
+/**
+ * @param string $destinataire
+ * @param string $sujet
+ * @param string|array $corps
+ *   au format string, c'est un corps d'email au format texte, comme supporte nativement par le core
+ *   au format array, c'est un corps etendu qui peut contenir
+ *     string texte : le corps d'email au format texte
+ *     string html : le corps d'email au format html
+ *     string from : email de l'envoyeur (prioritaire sur argument $from de premier niveau, deprecie)
+ *     string nom_envoyeur : un nom d'envoyeur pour completer l'email from
+ *     string cc : destinataires en copie conforme
+ *     string bcc : destinataires en copie conforme cachee
+ *     string adresse_erreur : addresse de retour en cas d'erreur d'envoi
+ *     array pieces_jointes : listes de pieces a embarquer dans l'email, chacune au format array :
+ *       string chemin : chemin file system pour trouver le fichier a embarquer
+ *       string nom : nom du document tel qu'apparaissant dans l'email
+ *       string encodage : encodage a utiliser, parmi 'base64', '7bit', '8bit', 'binary', 'quoted-printable'
+ *       string mime :
+ * @param string $from (deprecie, utiliser l'entree from de $corps)
+ * @param string $headers (deprecie, utiliser l'entree headers de $corps)
+ * @return bool
+ */
 function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = "") {
 	$message_html	= '';
 	$message_texte	= '';
@@ -22,10 +44,14 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$message_texte	= nettoyer_caracteres_mail($corps['texte']);
 		$pieces_jointes	= $corps['pieces_jointes'];
 		$nom_envoyeur = $corps['nom_envoyeur'];
+		$from = (isset($corps['from'])?$corps['from']:$from);
 		$cc = $corps['cc'];
 		$bcc = $corps['bcc'];
 		$adresse_erreur = $corps['adresse_erreur'];
-	} 
+		$headers = (isset($corps['headers'])?$corps['headers']:$headers);
+		if (is_string($headers))
+			$headers = array_map('trim',explode("\n",$headers));
+	}
 	// si $corps est une chaine -> compat avec la fonction native SPIP
 	// gerer le cas ou le corps est du html avec un Content-Type: text/html dans les headers
 	else {
@@ -35,6 +61,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		else {
 			$message_texte	= nettoyer_caracteres_mail($corps);
 		}
+		$headers = array_map('trim',explode("\n",$headers));
 	}
 	$sujet = nettoyer_titre_email($sujet);
 	// mode TEST : forcer l'email
@@ -49,12 +76,17 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
 	
 	// On ajoute le courriel de l'envoyeur s'il est fournit par la fonction
-	if (!empty($from)) {
-		$facteur->From = $from;
-		// la valeur par défaut de la config n'est probablement pas valable pour ce mail,
-		// on l'écrase pour cet envoi
-		$facteur->FromName = $from;
+	if (empty($from)) {
+		$from = $GLOBALS['meta']["email_envoi"];
+		if (!email_valide($from)) {
+			spip_log("Meta email_envoi invalide. Le mail sera probablement vu comme spam.");
+			$from = $destinataire;
+		}
 	}
+	$facteur->From = $from;
+	// la valeur par défaut de la config n'est probablement pas valable pour ce mail,
+	// on l'écrase pour cet envoi
+	$facteur->FromName = $from;
 
 	// On ajoute le nom de l'envoyeur s'il fait partie des options
 	if ($nom_envoyeur)
@@ -81,25 +113,34 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	// S'il y a des pièces jointes on les ajoute proprement
 	if (count($pieces_jointes)) {
 		foreach ($pieces_jointes as $piece) {
-			$facteur->AddAttachment($piece['chemin'], $piece['nom'], $piece['encodage'], $piece['mime']);
+			$facteur->AddAttachment(
+				$piece['chemin'],
+				isset($piece['nom']) ? $piece['nom']:'',
+				(isset($piece['encodage']) AND in_array($piece['encodage'],array('base64', '7bit', '8bit', 'binary', 'quoted-printable'))) ? $piece['encodage']:'base64',
+				isset($piece['mime']) ? $piece['mime']:Facteur::_mime_types(pathinfo($piece['chemin'], PATHINFO_EXTENSION))
+			);
 		}
 	}
 
 	// Si une adresse email a été spécifiée pour les retours en erreur, on l'ajoute
 	if (!empty($adresse_erreur))
 		$facteur->Sender = $adresse_erreur;
+
+	// si entetes personalises : les ajouter
+	if (!empty($headers)) {
+		foreach($headers as $h)
+			$facteur->AddCustomHeader($h);
+	}
 	
 	// On passe dans un pipeline pour modifier tout le facteur avant l'envoi
 	$facteur = pipeline('facteur_pre_envoi', $facteur);
 	
 	// On génère les headers
 	$head = $facteur->CreateHeader();
-		
+
 	// Et c'est parti on envoie enfin
-	spip_log("mail via facteur\n$head"."Destinataire: 
-$destinataire\n",'mail');
-	spip_log("mail\n$head"."Destinataire: 
-$destinataire\n",'facteur');
+	spip_log("mail via facteur\n$head"."Destinataire: \n$destinataire\n",'mail');
+	spip_log("mail\n$head"."Destinataire: \n$destinataire\n",'facteur');
 	return $facteur->Send();
 }
 
