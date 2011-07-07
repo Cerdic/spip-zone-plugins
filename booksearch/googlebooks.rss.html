@@ -1,0 +1,36 @@
+﻿#HTTP_HEADER{Content-Type: text/xml; charset=utf-8}
+<?xml version="1.0" encoding="utf-8"?>
+[(#SET{api,[(#VAL{https://www.googleapis.com/books/v1/volumes?maxResults=40}|parametre_url{q,#ENV{q},&})]})]<!-- [(#GET{api})] -->
+
+<rss version="2.0" 
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
+
+<channel xml:lang="fr">
+	<title>Booksearch: #ENV{q}</title>
+	<link>[(#SELF|url_absolue)]</link>
+	<generator>SPIP - www.spip.net</generator>
+
+<BOUCLE_books(DATA){source json,#GET{api}}
+{datapath items}
+>
+<item>
+	<title>[(#VALEUR{volumeInfo/authors}|print|texte_backend): ][(#VALEUR{volumeInfo/title}|texte_backend)]</title>
+	<link>[(#VALEUR{volumeInfo/infoLink})]</link>
+	<description>
+	<![CDATA[
+	[<img src="(#VALEUR{volumeInfo/imageLinks/thumbnail})" style="float:right">
+	][<b>(#VALEUR{volumeInfo/publishedDate})</b> ][(#VALEUR{volumeInfo/description}|print)][
+	- (#VALEUR{volumeInfo/categories}|print)]
+
+	]]></description>
+</item>
+
+</BOUCLE_books>
+
+
+</channel>
+
+</rss>
+
