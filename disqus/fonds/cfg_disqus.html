@@ -1,0 +1,25 @@
+<!-- titre=<:disqus:title:>--> 
+<!-- descriptif=<:disqus:description:> <p> <a href="http://www.disqus.com">www.disqus.com</a></p>--> 
+<!-- logo=disqus-logo.png -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_config_crayons">
+<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
+
+
+
+<h3 class="legend"><:disqus:configuration:></h3>
+<ul>
+    <li>
+      <label for='paypal_account'><:disqus:disqus_shortname:></label>
+      <p class="explication"><:disqus:disqus_shortname_explication:></p>
+      <input type="text" name="disqus_shortname" class="text" value="#ENV{disqus_shortname}" />
+    </li>
+</ul>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</div>
+</form>
+
+</div>
+
