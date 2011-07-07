@@ -6,15 +6,74 @@
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]
 
 
-
-<h3 class="legend"><:disqus:configuration:></h3>
+<fieldset>
+<legend><:disqus:configuration:></legend>
 <ul>
     <li>
-      <label for='paypal_account'><:disqus:disqus_shortname:></label>
+      <label for='disqus_shortname'><:disqus:disqus_shortname:></label>
       <p class="explication"><:disqus:disqus_shortname_explication:></p>
       <input type="text" name="disqus_shortname" class="text" value="#ENV{disqus_shortname}" />
     </li>
 </ul>
+</fieldset>
+
+<h3><:disqus:widgets_configuration:></h3>
+<fieldset>
+<legend><:disqus:recent_comments:></legend>
+<ul>
+    <li>
+      <label for='recent_num_items'><:disqus:num_items:></label>
+      <select name="recent_num_items">
+        <option [(#ENV{recent_num_items}|=={1}|?{selected="selected"})] value="1">1</option>
+        <option [(#ENV{recent_num_items}|=={2}|?{selected="selected"})] value="2">2</option>
+        <option [(#ENV{recent_num_items}|=={3}|?{selected="selected"})] value="3">3</option>
+        <option [(#ENV{recent_num_items}|=={4}|?{selected="selected"})] value="4">4</option>
+        <option [(#ENV{recent_num_items}|=={5}|?{selected="selected"})] value="5">5</option>
+        <option [(#ENV{recent_num_items}|=={6}|?{selected="selected"})] value="6">6</option>
+        <option [(#ENV{recent_num_items}|=={7}|?{selected="selected"})] value="7">7</option>
+        <option [(#ENV{recent_num_items}|=={8}|?{selected="selected"})] value="8">8</option>
+        <option [(#ENV{recent_num_items}|=={9}|?{selected="selected"})] value="9">9</option>
+        <option [(#ENV{recent_num_items}|=={10}|?{selected="selected"})] value="10">10</option>
+        <option [(#ENV{recent_num_items}|=={11}|?{selected="selected"})] value="11">11</option>
+        <option [(#ENV{recent_num_items}|=={12}|?{selected="selected"})] value="12">12</option>
+        <option [(#ENV{recent_num_items}|=={13}|?{selected="selected"})] value="13">13</option>
+        <option [(#ENV{recent_num_items}|=={14}|?{selected="selected"})] value="14">14</option>
+        <option [(#ENV{recent_num_items}|=={15}|?{selected="selected"})] value="15">15</option>
+        <option [(#ENV{recent_num_items}|=={16}|?{selected="selected"})] value="16">16</option>
+        <option [(#ENV{recent_num_items}|=={17}|?{selected="selected"})] value="17">17</option>
+        <option [(#ENV{recent_num_items}|=={18}|?{selected="selected"})] value="18">18</option>
+        <option [(#ENV{recent_num_items}|=={19}|?{selected="selected"})] value="19">19</option>
+        <option [(#ENV{recent_num_items}|=={20}|?{selected="selected"})] value="20">20</option>
+    </select>
+    </li>
+    
+     <li>
+      <label for='recent_hide_avatars'><:disqus:show_avatars:></label>
+      <select name="recent_hide_avatars">
+        <option [(#ENV{recent_hide_avatars}|=={0}|?{selected="selected"})] value="0"><:oui:></option>
+        <option [(#ENV{recent_hide_avatars}|=={1}|?{selected="selected"})] value="1"><:non:></option>
+    </select>
+    </li>
+    
+    <li>
+    <label for='recent_avatar_size'><:disqus:avatar_size:></label>
+    <select name="recent_avatar_size">
+        <option [(#ENV{recent_avatar_size}|=={24}|?{selected="selected"})] value="24"><:disqus:size_small:> (24px)</option>
+        <option [(#ENV{recent_avatar_size}|=={32}|?{selected="selected"})] value="32"><:disqus:size_medium:> (32px)</option>
+        <option [(#ENV{recent_avatar_size}|=={48}|?{selected="selected"})] value="48"><:disqus:size_large:> (48px)</option>
+        <option [(#ENV{recent_avatar_size}|=={92}|?{selected="selected"})] value="92"><:disqus:size_x_large:> (92px)</option>
+        <option [(#ENV{recent_avatar_size}|=={128}|?{selected="selected"})] value="128"><:disqus:size_ginormous:> (128px)</option>
+    </select>
+    </li>
+    
+    <li>
+    <label for='recent_excerpt_length'><:disqus:excerpt_length:></label>
+    <input type="text" name="recent_excerpt_length" class="text" value="[(#ENV{recent_excerpt_length}|sinon{200})]" />    
+    </li>
+</ul>
+</fieldset>
+
+
 
 <input type="submit" name="_cfg_ok" value="<:OK:>" />
 <input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
