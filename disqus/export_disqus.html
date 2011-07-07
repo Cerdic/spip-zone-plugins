@@ -1,0 +1,41 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dsq="http://www.disqus.com/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:wp="http://wordpress.org/export/1.0/"
+>
+  <channel>
+  <BOUCLE_articles(ARTICLES){!par date}{plat}>
+    <item>
+      <title>#TITRE</title>
+      <!-- absolute URI to article -->
+      <link>[(#URL_ARTICLE|url_absolue)]</link>
+      <content:encoded><![CDATA[#INTRODUCTION]]></content:encoded>
+      
+      <dsq:thread_identifier>article_id_#ID_ARTICLE</dsq:thread_identifier>
+      
+      <wp:post_date_gmt>#DATE</wp:post_date_gmt>
+      <wp:comment_status>[(#ACCEPTER_FORUM|=={non}|?{closed, open})]</wp:comment_status>  
+      <BOUCLE_comments(FORUMS){id_article}{plat}>
+      
+      <wp:comment>
+        <wp:comment_id>#ID_FORUM</wp:comment_id>
+        <wp:comment_author>#NOM</wp:comment_author>
+        <wp:comment_author_email>[(#EMAIL|textebrut)]</wp:comment_author_email>
+        <wp:comment_author_url>#URL_SITE </wp:comment_author_url>
+        <wp:comment_author_IP>#IP</wp:comment_author_IP>
+        
+        <wp:comment_date_gmt>#DATE</wp:comment_date_gmt>
+        
+        <wp:comment_content><![CDATA[#TEXTE]]></wp:comment_content>
+        
+        <wp:comment_approved>1</wp:comment_approved>
+        
+        <wp:comment_parent>#ID_PARENT</wp:comment_parent>
+      </wp:comment>
+      </BOUCLE_comments>
+    </item>
+  </BOUCLE_articles> 
+  </channel>
+</rss>

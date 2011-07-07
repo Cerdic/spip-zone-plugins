@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description' => 'Disqus comment platform for SPIP',
 	'configuration' => 'Configuration variables', 
 	'disqus_shortname' => 'Disqus shortname',
-	'disqus_shortname_explication' => 'To install Disqus, you will need to know your forum shortname as registered on Disqus',
+	'disqus_shortname_explication' => 'To install Disqus, you will need to know your forum shortname as registered on <a href="http://disqus.com">Disqus</a>',
 
 
 );
