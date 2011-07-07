@@ -16,9 +16,6 @@
     <lien>http://nqnwebs.com/blog/</lien>
     <prefix>disqus</prefix>
     
-    <fonctions>disqus_fonctions.php</fonctions>
-
-    
     <necessite id="SPIP" version="[2.0.0;]" />
     <necessite id="cfg" version="[1.14.1;]" />
     <!-- <traduire gestionnaire="salvatore" module="disqus" reference="es" /> -->
