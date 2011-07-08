@@ -1,6 +1,7 @@
 
 titre: '<:saisies:saisie_explication_titre:>'
 description: '<:saisies:saisie_explication_explication:>'
+icone: 'images/saisies_explication.png'
 options:
   -
     saisie: 'fieldset'
