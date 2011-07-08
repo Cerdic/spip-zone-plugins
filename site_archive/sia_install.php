@@ -77,7 +77,7 @@ function sia_install($action)
 					{
 						if ($value === FALSE)
 						{
-							$msg .= '<li>' . _T('sia:erreur_manque_cde',
+							$msg .= '<li>' . _T('sia:err_manque_command',
 											 array('cde' => $key))
 								. '</li>' . PHP_EOL
 								;

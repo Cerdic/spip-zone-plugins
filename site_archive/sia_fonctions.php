@@ -418,16 +418,15 @@ function calculer_URL_ARCHIVE()
 
 	/**
 	 * Recherche les commandes systèmes nécessaires
-	 * Envoie une erreur si non trouvée.
-	 * @todo A tester sous Win (avec ou sans gnu tools ?)
 	 */
-	$c = array_flip(array('batch', 'wget2', 'zip'));
+	$c = sia_command_available ();
 	$commandes_ok = true;
+	
 	foreach(array_keys($c) as $key)
 	{
 		// $batch, $wget et $zip
 
-		if(!($$key = sia_chemin_exec($key)))
+		if(!$c[$key])
 		{
 			sia_error_log('Error: command not found: '.$key);
 			if(!isset($simulation_mode) || ($simulation_mode != 'on'))
@@ -437,7 +436,7 @@ function calculer_URL_ARCHIVE()
 		}
 		else
 		{
-			$$key .= ' ';
+			$c[$key] .= ' ';
 		}
 	}
 
@@ -751,9 +750,9 @@ function balise_URL_ARCHIVE($p)
 
 /**
  * Recherche les commandes systèmes nécessaires
- * Envoie une erreur si non trouvée.
+ * Erreur si l'une des valeurs == FALSE
  * @todo A tester sous Win (avec ou sans gnu tools ?)
- * @return bool|array false ou tableau des chemins
+ * @return array false ou tableau des chemins
  */
 function sia_command_available ()
 {

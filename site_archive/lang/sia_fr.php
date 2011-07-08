@@ -56,5 +56,5 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Par d&#233;faut: Wget/&#60;version&#62;',
 		
 	'err_manque_script' => 'Shell scrip manquant. Re-installer le plugin.',
-	'erreur_manque_cde' => 'La commande syst&#232;me @cde@ est introuvable.'
+	'err_manque_command' => 'La commande syst&#232;me @cde@ est introuvable.'
 );
