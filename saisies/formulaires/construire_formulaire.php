@@ -269,6 +269,20 @@ function formidable_generer_saisie_configurable($saisie, $env){
 		// Si possible on met en readonly
 		$saisie['options']['readonly'] = 'oui';
 		
+		// On vire les sous-saisies s'il y en a
+		if ($saisie['saisies'] and is_array($saisie['saisies'])){
+			$nb_champs_masques = count(saisies_lister_champs($saisie['saisies']));
+			$saisie['saisies'] = array(
+				array(
+					'saisie' => 'explication',
+					'options' => array(
+						'nom' => 'truc',
+						'texte' => _T('saisies:construire_info_nb_champs_masques', array('nb'=>$nb_champs_masques)),
+					)
+				)
+			);
+		}
+		
 		// On va ajouter le champ pour la position
 		if (!($chemin_description = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true))){
 			$chemin_description = array(0);

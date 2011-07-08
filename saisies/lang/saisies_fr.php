@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.',
 	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.',
 	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?',
+	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.',
 	'construire_position_explication' => 'Indiquez devant quel autre champ sera plac&eacute; celui-ci.',
 	'construire_position_fin_formulaire' => '&Agrave; la fin du formulaire',
 	'construire_position_fin_groupe' => '&Agrave; la fin du groupe @groupe@',
