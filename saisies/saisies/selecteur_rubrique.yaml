@@ -97,5 +97,4 @@ options:
           label: '<:saisies:option_obligatoire_label:>'
 defaut:
   options:
-    label: '<:saisies:saisie_input_titre:>'
-    size: 40
+    label: '<:saisies:saisie_selecteur_rubrique_titre:>'
