@@ -14,7 +14,6 @@ parametres:
       nom: 'sjcycle_sites_titre_noisette'
       label: '<:sjcycle:noisette_titre_noisette:>'
       defaut: '<:sjcycle:noisette_titre_sites_defaut:>'
-      explication: '<:aveline:explication_raccourcis_typo:>'
       afficher_si: '@sjcycle_sites_afficher_titre_noisette@ == "on"'  -
   -
     saisie: 'oui_non'
