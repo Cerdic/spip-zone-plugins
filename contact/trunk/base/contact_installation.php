@@ -59,10 +59,7 @@ function contact_vider_tables($nom_meta_version_base){
 		'type = '.sql_quote('contact')
 	);
 	// On supprime les liens
-	sql_delete(
-		'spip_auteurs_messages',
-		$in
-	);
+	sql_delete('spip_auteurs_liens', array($in, "objet='message'"));
 		
 	// On efface la version entregistrée
 	effacer_meta($nom_meta_version_base);

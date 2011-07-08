@@ -46,7 +46,7 @@
 		<url>contact_messages</url>
 	</bouton>
 	
-	<necessite id='SPIP' version="[2.0.0;]" />
+	<necessite id='SPIP' version="[2.0.0;3.0.0-dev)" />
 	<necessite id="spip_bonux" version="[2.2.8;]" />
 	<necessite id="jqueryui" version="[1.8.5;]" />
 	<utilise id="facteur" />

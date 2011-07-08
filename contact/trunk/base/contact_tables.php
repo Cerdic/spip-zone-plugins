@@ -36,24 +36,4 @@ function contact_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-
-function contact_declarer_tables_auxiliaires($tables_auxiliaires){
-	// On vérifie si la table n'a pas déjà été déclarée.
-	if(!$tables_auxiliaires['spip_auteurs_messages']) {
-		// Déclaration de la table spip_auteurs_messages
-		$spip_auteurs_messages = array(
-			"id_auteur"	=> "bigint(21) DEFAULT '0' NOT NULL",
-			"id_message"	=> "bigint(21) DEFAULT '0' NOT NULL",
-			"vu"		=> "CHAR (3)");
-
-		$spip_auteurs_messages_key = array(
-			"PRIMARY KEY"	=> "id_auteur, id_message",
-			"KEY id_message"	=> "id_message");
-
-		$tables_auxiliaires['spip_auteurs_messages'] = array(
-			'field' => &$spip_auteurs_messages,
-			'key' => &$spip_auteurs_messages_key);
-	}
-	return $tables_auxiliaires;
-}
 ?>

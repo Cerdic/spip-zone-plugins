@@ -109,7 +109,7 @@ function message_affiche($id_message, $row)
  */
 function marquer_message_vu($id_message, $id_auteur) {
 
-	sql_updateq("spip_auteurs_messages", array("vu" => 'oui'), "id_message=$id_message AND id_auteur=$id_auteur");
+	sql_updateq("spip_auteurs_liens", array("vu" => 'oui'), "objet='message' AND id_message=$id_message AND id_auteur=$id_auteur");
 	/**
 	 * Si le message est affiché dans l'espace public, on invalide le cache
 	 */
@@ -143,9 +143,8 @@ function http_affiche_un_message($id_message)
 
 // Fonction d'affichage des pièces jointes
 function afficher_pieces_jointes($type, $id) {
-	$documenter = charger_fonction('documenter', 'inc');
+	$documenter_objet = charger_fonction('documenter_objet', 'inc');
 
-	return "<div id='portfolio'>" . $documenter($id, $type, 'portfolio') . "</div><br />"
-	. "<div id='documents'>" . $documenter($id, $type, 'documents') . "</div>";
+	return "<div id='documents'>" . $documenter_objet($id, $type) . "</div><br />";
 }
 ?>

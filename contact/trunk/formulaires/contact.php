@@ -353,19 +353,21 @@ function formulaires_contact_traiter_dist($id_auteur='',$tracer=''){
 		// S'il y a des pièces jointes on les ajoute aux documents de SPIP.
 		if ($pj_enregistrees_nom != null) {
 			//On charge la fonction pour ajouter le document là où il faut
-			$ajouter_document = charger_fonction('ajouter_documents', 'inc');
+			$ajouter_documents = charger_fonction('ajouter_documents','action');
+			$files[] = array('tmp_name'=>$repertoire_temp_pj.$nom_pj,'name'=>$nom_pj);
 			foreach ($pj_enregistrees_nom as $nom_pj) {
-				$id_doc = $ajouter_document($repertoire_temp_pj.$nom_pj, $nom_pj, 'message', $id_message, 'document', $id_document, $titrer=false);
+				$id_doc = $ajouter_documents("new", $files, 'message', $id_message, 'document');
 			}
 		}
 
 		// On lie le message au(x) destinataire(s) concerné(s)
 		foreach ($destinataire as $id_destinataire) {
 			sql_insertq(
-				'spip_auteurs_messages',
+				'spip_auteurs_liens',
 				array(
 					'id_auteur' => $id_destinataire,
-					'id_message' => $id_message,
+					'id_objet' => $id_message,
+					'objet' => 'message',
 					'vu' =>'non')
 			);
 		}
