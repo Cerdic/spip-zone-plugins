@@ -10,14 +10,18 @@
  * @license: GPL3
  */
 
-if(!defined("_ECRIRE_INC_VERSION")) { return; }
+if(!defined('_ECRIRE_INC_VERSION')) { return; }
 
 // _DIR_PLUGIN_SIA est défini par ecrire_plugin_actifs()
 if(!defined('_DIR_PLUGIN_SIA')) { return(false); }
 
 // chemin du script de sauvegarde
-@define('SIA_BIN_FOLDER', _DIR_PLUGIN_SIA.'bin/');
-@define('SIA_SCRIPT_FILE', SIA_BIN_FOLDER.'site_archive.sh');
+if (!defined('SIA_BIN_FOLDER')) {
+	define('SIA_BIN_FOLDER', _DIR_PLUGIN_SIA.'bin/');
+}
+if (!defined('SIA_SCRIPT_FILE')) {
+	define('SIA_SCRIPT_FILE', SIA_BIN_FOLDER.'site_archive.sh');
+}
 
 // Délai (time) pour la commande batch
 // @see: man batch
@@ -44,7 +48,8 @@ define('SIA_LOGS_DIR', _DIR_RACINE._NOM_TEMPORAIRES_INACCESSIBLES.'sia/');
 
 /**
  * Envoyer un message sur la console système
- * */
+ * @return bool
+ */
 function sia_syslog($priority, $message)
 {
 	$message = SIA_LOG_TAG.' '.trim($message);
@@ -55,7 +60,8 @@ function sia_syslog($priority, $message)
 
 /**
  * Envoyer un message sur le journal plugin SPIP
- * */
+ * @return bool
+ */
 function sia_log($message)
 {
 	spip_log(SIA_LOG_TAG.' '.$message, 'sia');
@@ -68,7 +74,8 @@ function sia_log($message)
  * Envoyer un message d'erreur
  * - sur le journal plugin SPIP
  * - sur la console système
- * */
+ * @return bool
+ */
 function sia_error_log($message)
 {
 	$message = trim($message);
@@ -86,7 +93,8 @@ function sia_error_log($message)
 /**
  * Lancer une commande et récupérer
  * le résultat qui est envoyé en STDOUT
- * */
+ * @return string
+ */
 function sia_passthru($exec)
 {
 	$string = null;
@@ -104,8 +112,8 @@ function sia_passthru($exec)
 /**
  * Rechercle le chemin d'un exécutable système
  * en fouillant dans la variable d'environnement PATH
- * @return: complete filename path string ou false
- **/
+ * @return bool complete filename path string ou false
+ */
 function sia_cherche_chemin_exec($exec)
 {
 	static $paths;
@@ -137,9 +145,9 @@ function sia_cherche_chemin_exec($exec)
 
 /**
  * Recherche un exécutable système
- * @param: $exec string, le nom de l'exécutable
- * @return: string chemin du fichier string ou false
- **/
+ * @param: string $exec le nom de l'exécutable
+ * @return string chemin du fichier string ou false
+ */
 function sia_chemin_exec($exec)
 {
 	static $paths;
@@ -151,8 +159,10 @@ function sia_chemin_exec($exec)
 	
 	$exec = trim($exec);
 	
-	// recherche l'exec
-	// signale en log spip si manquante (~/tmp/spip.log)
+	/**
+	 * Recherche l'exec
+	 * signale en log spip si manquante (~/tmp/spip.log)
+	 */
 	if(!isset($paths[$exec]))
 	{
 		$paths[$exec] = sia_cherche_chemin_exec($exec);
@@ -160,7 +170,8 @@ function sia_chemin_exec($exec)
 	return($paths[$exec]);
 }
 
-/** Titre de l'objet (rubrique ou article)
+/**
+ * Titre de l'objet (rubrique ou article)
  * @return string
  * */
 function sia_titre_objet($objet, $id_objet, $prefix='', $type=SIA_TYPE_UNIQUE)
@@ -197,8 +208,8 @@ function sia_titre_objet($objet, $id_objet, $prefix='', $type=SIA_TYPE_UNIQUE)
  * @todo: compléter le skel rubrique
  *  qui ne fait pas de récursif. Ne traite que le premier
  *  niveau. Voir date_modif_rubrique.html
- * 
- * 	* */
+ * @return int
+ */
 function sia_time_modif_objet($objet, $id_objet)
 {
 	$time = null;
@@ -236,6 +247,7 @@ function sia_time_modif_objet($objet, $id_objet)
 
 /**
  * Renvoie valeur bool cfg pour une option de config
+ * @return bool
  * */
 function sia_cfg_option_on($option)
 {
@@ -254,9 +266,9 @@ function sia_cfg_option_on($option)
  * dans le modèle lien_archive.html,
  * eux-mêmes transmis en paramètres dans le corps de l'article
  * 
- * @return $url-path string de l'archive archive
+ * @return string $url-path  de l'archive archive
  * 	ex.: '/img/zip/titre-rubrique-u.zip'
- **/
+ */
 function calculer_URL_ARCHIVE()
 {
 	static $myjobs = array();
@@ -311,7 +323,7 @@ function calculer_URL_ARCHIVE()
 	 * serveur de test, et recopier ces archives
 	 * dans IMG/zip sur le serveur officiel.
 	 * 
-	 * */
+	 */
 	if(!$simulation_mode)
 	{
 		// Commence par vérifier si le script shell existe
@@ -331,11 +343,15 @@ function calculer_URL_ARCHIVE()
 	// le lien de l'archive zip transmise en retour
 	$url_zip = false;
 	
-	// $objet peut être rubrique ou article
-	// (ou autre, si vous écrivez le skel qui va)
+	/**
+	 * $objet peut être rubrique ou article
+	 * (ou autre, si vous écrivez le skel qui va)
+	 */
 	$objet = false;
 	
-	// le site cible
+	/**
+	 * Note l'url du site cible
+	 */
 	$url_site = lire_meta('adresse_site');
 	$url_site = trim($url_site);
 	if(empty($url_site))
@@ -344,7 +360,9 @@ function calculer_URL_ARCHIVE()
 	}
 	$url_site = trim($url_site,'/').'/';
 
-	// par défaut, archive en une seule page
+	/**
+	 * Par défaut, archive en une seule page
+	 */
 	$type = SIA_TYPE_UNIQUE;
 		
 	// pour le moment (20101005), 4 args acceptés
@@ -398,8 +416,12 @@ function calculer_URL_ARCHIVE()
 		}
 	}
 
-	// les commandes systèmes nécessaires
-	$c = array_flip(array('batch', 'wget', 'zip'));
+	/**
+	 * Recherche les commandes systèmes nécessaires
+	 * Envoie une erreur si non trouvée.
+	 * @todo A tester sous Win (avec ou sans gnu tools ?)
+	 */
+	$c = array_flip(array('batch', 'wget2', 'zip'));
 	$commandes_ok = true;
 	foreach(array_keys($c) as $key)
 	{
@@ -488,22 +510,24 @@ function calculer_URL_ARCHIVE()
 					// le todo: les params de l'archive
 					$todo_file = _NOM_TEMPORAIRES_INACCESSIBLES . $name.'.todo';
 					
-					// le lock est géré par le script shell.
-					//
-					// Il est créé ici pour éviter de re-écrire
-					// le todo à chaque hit de page, inutilement.
-					//
-					// Le script shell scrute les *lock disponibles
-					// et le todo qui lui est attaché.
-					//
-					// Puis il lit le todo,
-					// vérifie si c'est un sia (première ligne)
-					//
-					// Enfin, il supprime le lock et le todo
-					// lorsque la tâche est terminée.
-					
-					// Si lock existe, tâche en cours. Abandon.
-					// sinon, faire le job.
+					/**
+					 * le lock est géré par le script shell.
+					 *
+					 * Il est créé ici pour éviter de re-écrire
+					 * le todo à chaque hit de page, inutilement.
+					 *
+					 * Le script shell scrute les *lock disponibles
+					 * et le todo qui lui est attaché.
+					 *
+					 * Puis il lit le todo,
+					 * vérifie si c'est un sia (première ligne)
+					 * 
+					 * Enfin, il supprime le lock et le todo
+					 * lorsque la tâche est terminée.
+					 *
+					 * Si lock existe, tâche en cours. Abandon.
+					 * sinon, faire le job.
+					 */
 					if(!file_exists($lock))
 					{
 						// SPIP passe 3 fois ici.
@@ -691,7 +715,9 @@ function calculer_URL_ARCHIVE()
 		} // fin if($id_objet)
 	}
 	
-	// complète l'url (sera placé option + tard)
+	/**
+	 * Complète l'url (sera placé option + tard)
+	 */
 	if($url_zip)
 	{
 		$s = lire_meta('adresse_site');
@@ -705,9 +731,10 @@ function calculer_URL_ARCHIVE()
 	return($url_zip);
 }
 
-/** La balise active l'archivage.
+/**
+ * La balise active l'archivage.
  * Placer la balise #URL_ARCHIVE dans la page des liens d'archives
- * @return string l'url de l'archive zip
+ * @return string url de l'archive zip
  * */
 function balise_URL_ARCHIVE($p)
 {
@@ -719,4 +746,35 @@ function balise_URL_ARCHIVE($p)
 	$p->code = "calculer_URL_ARCHIVE($arg1,$arg2,$arg3,$arg4)";
 	$p->interdire_scripts = false;
 	return($p);
+}
+
+
+/**
+ * Recherche les commandes systèmes nécessaires
+ * Envoie une erreur si non trouvée.
+ * @todo A tester sous Win (avec ou sans gnu tools ?)
+ * @return bool|array false ou tableau des chemins
+ */
+function sia_command_available ()
+{
+	static $c = array('batch' => NULL,
+					  'wget' => NULL,
+					  'zip' => NULL
+					  );
+	if (in_array(NULL, $c))
+	{
+		foreach(array_keys($c) as $key)
+		{
+			// $batch, $wget et $zip
+			
+			$c[$key] = sia_chemin_exec($key);
+	
+			if(!$c[$key])
+			{
+				sia_error_log('Error: command not found: '.$key);
+				$ok = false;
+			}
+		}
+	}
+	return ($c);
 }
