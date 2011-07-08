@@ -53,5 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		sa requ&#234;te. Le serveur web peut donc identifier le type
 		de visiteur gr&#226;ce &#224; ce user-agent.<br />
 		Cette option vous permet de modifier la valeur de &#171; User-Agent &#187;.
-		Par d&#233;faut: Wget/&#60;version&#62;'
+		Par d&#233;faut: Wget/&#60;version&#62;',
+		
+	'err_manque_script' => 'Shell scrip manquant. Re-installer le plugin.',
+	'erreur_manque_cde' => 'La commande syst&#232;me @cde@ est introuvable.'
 );

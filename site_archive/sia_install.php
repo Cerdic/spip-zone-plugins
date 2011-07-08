@@ -23,8 +23,14 @@ function sia_install($action)
 	switch($action)
 	{
 		case 'install':
-			// si script shell ok, installer
-			if(is_file(SIA_SCRIPT_FILE))
+			$sh_ok = is_file(SIA_SCRIPT_FILE);
+			$c = sia_command_available();
+			/**
+			 * Si le script sh est là
+			 * et si les commandes dispo,
+			 * installer
+			 */
+			if($sh_ok && !in_array(FALSE, $c))
 			{
 				chmod(SIA_SCRIPT_FILE, 0700);
 				// Créer protection (attention, vérifiez votre
@@ -53,6 +59,38 @@ function sia_install($action)
 							ecrire_config('sia/level','1');
 						}
 					}
+				}
+			}
+			/**
+			 * Sinon, afficher message d'erreur
+			 * dans la boite témoin.
+			 */
+			else
+			{
+				$msg = '';
+				if (!$sh_ok) {
+					$msg .= '<li>' . _T('sia:err_manque_script') . '</li>' . PHP_EOL;
+				}
+				if (in_array(FALSE, $c))
+				{
+					foreach ($c as $key => $value)
+					{
+						if ($value === FALSE)
+						{
+							$msg .= '<li>' . _T('sia:erreur_manque_cde',
+											 array('cde' => $key))
+								. '</li>' . PHP_EOL
+								;
+						}
+					}
+				}
+				if (!empty($msg))
+				{
+					$msg = '<ul>' . PHP_EOL
+						. $msg
+						. '</ul>' . PHP_EOL
+						;
+					echo($msg);
 				}
 			}
 			sia_log('install '.($result ? 'ok' : 'err'));

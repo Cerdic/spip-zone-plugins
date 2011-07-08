@@ -1,22 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
-
 	<!--  
 
 	// $LastChangedBy$
 	// $LastChangedDate$
 	
 	 -->
-	 	
 	<nom>Site Archive (SiA)</nom>
 	<auteur>
 		[Christian Paulus->http://www.quesaco.org/]
 	</auteur>
-	<licence>&#169; 2010 [GNU/GPL 3->http://fr.wikipedia.org/wiki/Licence_publique_g%C3%A9n%C3%A9rale_GNU]</licence>
+	<licence>&#169; 2010 [GNU/GPL 3->http://fr.wikipedia.org/wiki/Licence_publique_g&#233;n&#233;rale_GNU]</licence>
 
 	<description>
-		Maintenance d&#39;archives de rubriques ou d'articles 
-		pour une consultation hors connexion.
+		Maintenance d&#39;archives de rubriques ou d&#39;articles 
+		pour une consultation hors connexion.<br />
+		Principe de fonctionnement : vous ajoutez un nouvel article dans lequel
+		vous proposez au visiteur de t&#233;l&#233;charger l&#8217;archive
+		d&#8217;une rubrique de votre site afin qu&#8217;il puisse la consulter
+		hors connexion Internet.<br />
+		N&#233;cessite les commandes syst&#232;mes batch, wget, zip.
 	</description>
 	<icon>images/sia-64.png
 	</icon>
@@ -24,7 +26,7 @@
 	<!-- documentation -->
 	<lien>http://www.quesaco.org/Archive-de-site-Website-archiver</lien>
 	
-	<version>0.2.02</version>
+	<version>0.3.00</version>
 	<etat>test</etat>
 	
 	<!-- espace de nommage -->
@@ -38,6 +40,6 @@
 	
 	<utilise id="cfg" version="[1.15.0;]" />
 	
-	<categorie>maintenance</categorie>
+	<categorie>navigation</categorie>
 	
 </plugin>
