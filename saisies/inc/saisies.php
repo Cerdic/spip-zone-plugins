@@ -180,7 +180,8 @@ function saisies_chercher($saisies, $nom_ou_chemin, $retourner_chemin=false){
 			$saisie = $saisies;
 			// On vérifie l'existence quand même
 			foreach ($chemin as $cle){
-				$saisie = $saisie[$cle];
+				if (isset($saisie[$cle])) $saisie = $saisie[$cle];
+				else return null;
 			}
 			// Si c'est une vraie saisie
 			if ($saisie['saisie'] and $saisie['options']['nom'])
@@ -358,9 +359,9 @@ function saisies_modifier($saisies, $nom_ou_chemin, $modifs){
 		$parent =& $parent[$cle];
 	}
 	
-	// On récupère le type, le nom et les enfants tels quels
+	// On récupère le type, le nom s'il n'y est pas, et les enfants tels quels
 	$modifs['saisie'] = $parent[$position]['saisie'];
-	$modifs['options']['nom'] = $parent[$position]['options']['nom'];
+	if (!isset($modifs['options']['nom'])) $modifs['options']['nom'] = $parent[$position]['options']['nom'];
 	if (is_array($parent[$position]['saisies'])) $modifs['saisies'] = $parent[$position]['saisies'];
 	
 	// On remplace tout

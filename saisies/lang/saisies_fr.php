@@ -32,6 +32,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?',
 	'construire_verifications_aucune' => 'Aucune',
 	'construire_verifications_label' => 'Type de v&eacute;rification &agrave; effectuer',
+	
+	// E
+	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.',
 
 	// L
 	'label_annee' => 'Année',
