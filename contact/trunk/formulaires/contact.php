@@ -129,7 +129,7 @@ function formulaires_contact_verifier_dist($id_auteur='',$tracer=''){
 	}
 
 	if(!(strlen(_request('sujet'))>3))
-		$erreurs['sujet'] = _T('forum_attention_trois_caracteres');
+		$erreurs['sujet'] = _T('forum:forum_attention_trois_caracteres');
 
 	$texte_min = !defined('_TEXTE_MIN')?10:_TEXTE_MIN;
 	if(!(strlen(_request('texte'))>$texte_min) && !$erreurs['texte'])
