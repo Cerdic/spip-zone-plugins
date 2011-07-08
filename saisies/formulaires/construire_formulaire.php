@@ -139,7 +139,7 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 			// Si on autorise à modifier le nom ET qu'il doit être unique : on vérifie
 			if ($options['modifier_nom'] and $options['nom_unique']){
 				$nom_modifie = $saisie_modifiee['options']['nom'];
-				if (saisies_chercher($formulaire_actuel, $nom_modifie))
+				if ($nom_modifie != $enregistrer_saisie and saisies_chercher($formulaire_actuel, $nom_modifie))
 					$vraies_erreurs["saisie_modifiee_${nom}[options][nom]"] = _T('saisies:erreur_option_nom_unique');
 			}
 			// On regarde s'il a été demandé un type de vérif
