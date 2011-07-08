@@ -19,18 +19,19 @@ function contact_upgrade($nom_meta_version_base, $version_cible){
 			echo "Création des tables de messageries si inexistantes.<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
-		
-		/*if (version_compare($version_actuelle,'0.5','<')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			
-			// Modification de contact
-			sql_alter('');
-						
-			// On change la version
-			echo "Mise à jour du plugin contact en version 0.5<br/>";
-			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
-		}*/
+	$maj = array();
+	$maj['create'] = array(		
+		array('maj_tables',array('spip_messages')),
+	);
+
+	include_spip('maj/svn10000'); //pour maj_liens
+	$maj['0.2.0'] = array(	
+		array('maj_liens','auteur','message'),
+		array('sql_drop_table',"spip_auteurs_messages"),
+	);
+
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 	
 	}
 
