@@ -2,6 +2,21 @@
 
 Diaporama avec l'apparence d'une pellicule de film. Navigation Ajax entre vignettes.
 
+Affiche les vignettes des documents d'un article, d'une rubrique, ou du site, 
+sous forme de diapos. Utilise le plugin Mediabox.
+
+Paramètres :
+c : chemin du composant. Défini si le composant Diapo est appellé depuis le modèle composant, et nul sinon. Utilisé dans le nom du diaporama.
+nic: numéro d'instance du composant.
+id_article : documents de l'article.
+id_rubrique : documents de la rubrique.
+recherche : documents résultats d'une recherche.
+
+ATTENTION: la navigation entre "pages" du diaporama se faisant en ajax (sans recharger toute la page),
+lesdites "pages" de diaporama sont mises en cache et ne sont PAS recalculées automatiquement: après un changement 
+de présentation du composant Diapo, il faut donc vider le cache de SPIP pour mettre à jour le site sans attendre 
+l'expiration du cache de ces pages.
+
 A diaporama that looks like a film pellicula. Ajax navigation between thumbnails.
 
 ][<div class="#PINCEAU{diapo,#NIC}">(#INCLURE{fond=composants/diapo/inc-diapo}{env}{ajax})</div>]

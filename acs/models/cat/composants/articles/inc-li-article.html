@@ -20,7 +20,7 @@ Un article dans une liste d'articles
       <BOUCLE_Rubb2(RUBRIQUES){id_rubrique}>[(#ENV{masquer_rubrique}|!={oui}|?{' '})[(#VAR{acsArticlesDates}|=={oui}|?{ - })]<i><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>[(#TITRE|supprimer_numero|coupe{80,...})]</a></i>]</BOUCLE_Rubb2>
         </span>  
       [<p class="surtitre stsize">(#SURTITRE|coupe{80,...})</p>]
-      <h3 class="titre tsize"><a href="#URLA">#TITRE</a></h3>
+      <h3 class="titre tsize"><a href="#URLA">[(#TITRE|supprimer_numero)]</a></h3>
       [<p class="soustitre stsize">(#SOUSTITRE|coupe{80,...})</p>]
       [<div class="enclosures">(#TAGS|afficher_enclosures)</div>]
     </div>

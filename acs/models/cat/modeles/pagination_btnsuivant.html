@@ -1,0 +1,19 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Bouton suivant
+
+]#ENV*{bloc_ancre}
+#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
+#SET{derniere, #GET{bornes}|end}
+#SET{i,#ENV{page_courante}|plus{1}}
+[(#GET{i}|<={#ENV{nombre_pages}}|?{' ',''})[
+	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
+  ]<a href='[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}})]' class="ajax" title="<:spip:suivant:> ([(#GET{i})][/(#ENV{nombre_pages})])">&nbsp;</a>
+]

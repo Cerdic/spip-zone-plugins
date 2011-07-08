@@ -16,46 +16,31 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   padding: 0;
 }
 .cDiapo td.diapo {
-  overflow:hidden;
   text-align: center;
 }
 .cDiapo td.diapo a.diapo:link {
-  overflow:hidden;
-  display: inline-block;
+  display: block;
   position:relative;
   outline: none;
+  background-repeat: no-repeat;
+  background-position: center center;
 }
-[.cDiapo td.diapo a.diapo:hover {
+.cDiapo td.diapo a.diapo:hover {
   outline: none;
-}]
-.cDiapo td.diapo img {
-  vertical-align: middle;
-  border: 0;
-  position:absolute;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  margin:auto;
-}
-.cDiapo td.diapo span.titre {
-  position: absolute;
-  top: 30%;
-  bottom: 0;
-  left:0;
-  right:0;
-  margin:auto;
 }
 .cDiapo td.diapog {
   width: 25px;
   min-width: 25px;
   text-align: right;
 }
-
 .cDiapo td.diapod {
   width: 25px;
   min-width: 25px;
   text-align: left;
+}
+.cDiapo td.diapog a.ajax:link, .cDiapo td.diapod a.ajax:link {
+  display: block;
+  outline: none;
 }
 #cboxLoadedContent .spip_documents {
   margin: 0;

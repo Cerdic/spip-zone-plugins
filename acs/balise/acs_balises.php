@@ -67,25 +67,33 @@ function balise_ACS_DERNIERE_MODIF($p) {
   return $p;
 }
 
+function acs_chemin($path='', $type=false) {
+	$path = _DIR_RACINE.$GLOBALS["ACS_CHEMIN"].'/'.$path;
+  // On retourne vide si la ressource n'est pas lisible
+  if (!is_readable($path))
+  	return '';
+  // Sinon si la ressource n'est pas un fichier on retourne vide
+  // sauf si on recherchait un sous-dossier ou la racine des ressources ACS
+  elseif (($path != '') && ($type != 'dir') && is_dir($path))
+  	return '';
+	return $path;
+}
 /**
  * Retourne le chemin d'une ressource ACS ou vide si la ressource n'est pas
  * accessible au moins en lecture.
- * Usage: #ACS_CHEMIN{chemin_dossier_ou_fichier,type}
+ * Usages: #ACS_CHEMIN, #ACS_CHEMIN{chemin_fichier}, #ACS_CHEMIN{chemin_dossier,dir}
  */
 function balise_ACS_CHEMIN($p) {
   $arg = interprete_argument_balise(1,$p);
   $type = interprete_argument_balise(2,$p);
-  spip_log($type,'type');
   $p->statut = 'php';
   $p->interdire_scripts = false;
-  $p->code = $arg ? '_DIR_RACINE.$GLOBALS["ACS_CHEMIN"]."/".'.$arg : '_DIR_RACINE.$GLOBALS["ACS_CHEMIN"]."/"';
-  eval('$path = '.$p->code.';');
-  // On retourne vide si la ressource n'est pas lisible
-  if (!is_readable($path))
-  	$p->code = '""';
-  // Si la ressource n'est pas un fichier on retourne vide sauf si on recherchait un dossier
-  if (($type != "'dir'") && is_dir($path))
-    $p->code = '""';
+  if (is_null($arg))
+  	$p->code = "acs_chemin()";
+  elseif (is_null($type))
+  	$p->code = "acs_chemin($arg)";
+	else
+  	$p->code = "acs_chemin($arg, $type)";
   return $p;
 }
 

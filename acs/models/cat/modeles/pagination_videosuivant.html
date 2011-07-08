@@ -1,9 +1,0 @@
-#ENV*{bloc_ancre}
-#SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
-#SET{derniere, #GET{bornes}|end}
-#SET{i,#ENV{page_courante}|moins{1}}
-#SET{i,#ENV{page_courante}|plus{1}}
-[(#GET{i}|<={#ENV{nombre_pages}}|?{' ',''})[
-	(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
-	][(#INCLURE{fond=composants/diapo/pagination-d}{num=#GET{i}}{url=#ENV{url}|parametre_url{#ENV{debut},#GET{item}}}{page_courante=#ENV{page_courante}}{derniere=#ENV{derniere}}{nombre_pages=#ENV{nombre_pages}})]
-]

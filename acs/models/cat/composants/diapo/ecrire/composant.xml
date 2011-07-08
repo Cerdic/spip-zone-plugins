@@ -30,6 +30,20 @@
     <type>text</type>
     <valeur>8</valeur>
   </variable>
+  <variable>
+    <nom>Vu</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
 
   <variable>
     <nom>Img</nom>
@@ -100,17 +114,14 @@
   </variable>
 
   <variable>
-    <nom>UseG</nom>
-    <type>choix</type>
-    <option>oui</option>
-    <option>non</option>
-    <valeur>oui</valeur>
-  </variable>
-
-  <variable>
-    <nom>ExtG</nom>
+    <nom>Viewer</nom>
     <type>text</type>
-    <valeur>pdf|odt|ods|doc|xls|wmf</valeur>
+    <valeur>http://docs.google.com/viewer?embedded=true&url=</valeur>
+  </variable>
+  <variable>
+    <nom>ExtViewer</nom>
+    <type>text</type>
+    <valeur>pdf|odt|ods|doc|docx|xls|xlsx|ppt|pptx|wmf|pages|ai|psd|dxf|svg|eps|ps|ttf|xps</valeur>
   </variable>
   <variable>
     <nom>ExtEmbed</nom>

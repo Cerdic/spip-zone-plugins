@@ -13,12 +13,11 @@ function acs_ajouterBouton($boutons_admin) {
 	// si on est admin SPIP ET admin ACS
 	if ($GLOBALS['connect_statut'] == "0minirezo" && $GLOBALS["connect_toutes_rubriques"]
       && (acs_autorise() || (!isset($GLOBALS['meta']['ACS_ADMINS'])))
-     ) {
-
+    ) {
 		// on voit le bouton ACS dans la barre "configuration"
 		$boutons_admin['configuration']->sousmenu["acs"]= new Bouton(
-		_DIR_ACS."images/acs_32x32.gif",  // affichage de l'icone
-		_T('acs:configurer_site') // affichage du texte
+		  _DIR_ACS."images/acs_32x32.gif",  // affichage de l'icone
+		  _T('acs:configurer_site') // affichage du texte
 		);
 	}
 	return $boutons_admin;
@@ -35,10 +34,10 @@ function acs_header_prive($flux) {
   // overrider ce qui pourrait perturber l'interface privee, comme par exemple la couleur du <body> 
   $url_css = '../spip.php?page=acs_style_prive.css&couleur_foncee='.substr($GLOBALS['couleur_foncee'],1).'&couleur_claire='.substr($GLOBALS['couleur_claire'],1);
   $r .= '<link rel="stylesheet" href="'.$url_css.'" type="text/css" media="projection, screen, tv" />';
-      
+
   $js_model = find_in_path($model.'.js.html');
   if ($js_model)
-    $r .= '<script type="text/javascript" src="../spip.php?page='.$model.'.js"></script>';
+    $r .= '<script type="text/javascript" src="../spip.php?page='.$model.'.js&v='.$GLOBALS["meta"]["acsDerniereModif"].'"></script>';
 
   $js_dragdrop = find_in_path('javascript/dragdrop_interface.js');
   

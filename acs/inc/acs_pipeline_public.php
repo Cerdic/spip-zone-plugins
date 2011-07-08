@@ -18,7 +18,7 @@ function acs_insert_head($flux) {
     $r .= '<link rel="stylesheet" href="spip.php?page='.$model.'.css&v='.$GLOBALS["meta"]["acsDerniereModif"].'" type="text/css" media="projection, screen, tv" />';
   $js_model = find_in_path($model.'.js.html');
   if ($js_model)
-    $r .= '<script type="text/javascript" src="spip.php?page='.$model.'.js"></script>';
+    $r .= '<script type="text/javascript" src="spip.php?page='.$model.'.js&v='.$GLOBALS["meta"]["acsDerniereModif"].'"></script>';
 
   // On ajoute une css et des javascripts rien que pour les administrateurs ACS
   if (acs_autorise()) {
