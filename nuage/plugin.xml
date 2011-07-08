@@ -1,5 +1,5 @@
 <plugin>
-	<version>3.0.1</version>
+	<version>3.1</version>
 	<nom>Nuage</nom>
 	<prefix>nuage</prefix>
 	<auteur>Booz, Fil, James, St&#233;phane, Bill(stephane (at) rezo.net), Camille Lafitte</auteur>
@@ -21,7 +21,7 @@
 	Les modeles sont personnalisable et exploitent 3 nouveaux criteres et leurs balises associees
 	</description>
 	<icon>
-	nuage.png
+	images/nuage-64.png
 	</icon>
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
