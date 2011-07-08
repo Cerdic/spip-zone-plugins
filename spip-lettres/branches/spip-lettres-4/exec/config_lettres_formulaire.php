@@ -79,10 +79,10 @@
    		echo debut_droite('', true);
 
 		echo('<h1>'._T('lettresprive:config_formulaire').'</h1>');
+
+		$themes = recuperer_fond("prive/liste/themes");
 		
-		$themes = afficher_objets(
-			'theme', _T('lettresprive:themes_disponibles'), 
-			array('SELECT' => 'T.*, RUB.titre AS titre_rub', 'FROM' => 'spip_themes AS T LEFT JOIN spip_rubriques AS RUB ON RUB.id_rubrique=T.id_rubrique', 'ORDER BY' => 'T.titre'));
+			
 		if ($themes) {
 			echo $themes;
 			echo '<br />';

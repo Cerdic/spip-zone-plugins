@@ -1,9 +1,12 @@
+<BOUCLE_theme(THEMES){id_theme=#ID_THEME}>
 <!--#hierarchie-->
+<ul id="chemin">
+    <li><a href="#URL_ECRIRE{accueil}"><:configuration|ucfirst:></a> &gt; </li>
+    <li><a href="#URL_ECRIRE{lettres_tous}"><:lettres:lettres_information:></a> &gt; </li>
+     <li><a href="#URL_ECRIRE{config_lettres_formulaire}"><:lettres:tout_le_site:></a> &gt; </li>
+     <li>#TITRE</li>
+</ul>
 <!--/#hierarchie-->
- 
-
-
-
 
 <!--#navigation-->
 <div class="logo_navigation">
@@ -13,10 +16,18 @@
  
  
 <!--#extra-->
-
+<div class="cadre">
+    <div class="cadre_padding">
+    <:rubrique:> : 
+    <BOUCLE_rubrique(RUBRIQUES){tout}{id_rubrique}>
+    <a href="[(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique, #ID_RUBRIQUE})]">#TITRE</a>
+    </BOUCLE_rubrique>
+    </div>
+</div>
 <!--/#extra-->
+
 <h1><:lettresprive:modifier_thematique:></h1>
-<BOUCLE_theme(THEMES){id_theme=#ID_THEME}>
+
 #FORMULAIRE_EDITER_THEMATIQUE{#ID_THEME, #TITRE, #ID_RUBRIQUE, #EXPEDITEUR_TYPE, #EXPEDITEUR_ID, #RETOURS_TYPE, #RETOURS_ID}
 </BOUCLE_theme>
 
