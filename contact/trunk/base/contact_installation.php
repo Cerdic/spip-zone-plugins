@@ -48,14 +48,28 @@ function contact_vider_tables($nom_meta_version_base){
 		$messages
 	);
 	
-	// On supprime les messages
+	// Pour les liens, id_message est id_objet/objet
+	$in_messages = sql_in(
+		'id_objet',
+		$messages
+	);
+	
+	// On supprime les documents qui ne sont rattaches qu'aux messages ainsi que leur liens en passant par supprimer_lien_document
+	include_spip('action/dissocier_document');
+	$s = sql_select(array('id_document','id_objet'),
+		"spip_documents_liens",
+		$in_messages." AND objet='message'");
+	while ($t = sql_fetch($s)) {
+		supprimer_lien_document($t['id_document'], 'message', $t['id_objet'], true);
+	}
+	// On supprimer les liens avec les auteurs
+	sql_delete('spip_auteurs_liens', $in_messages." AND objet='message'");
+	
+	// On supprime les messages, mais pas la table qui peut etre utilise par organiseur
 	sql_delete(
 		'spip_messages',
-		'type = '.sql_quote('contact')
-	);
-	// On supprime les liens
-	sql_delete('spip_auteurs_liens', array($in, "objet='message'"));
-		
+		'type = '.sql_quote('contac')
+	);	
 	// On efface la version entregistrée
 	effacer_meta($nom_meta_version_base);
 
