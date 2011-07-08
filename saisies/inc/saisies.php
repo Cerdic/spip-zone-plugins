@@ -257,8 +257,8 @@ function saisies_inserer($saisies, $saisie, $chemin=array()){
 
 
 /*
- * Duplique une saisie (ou groupe de saisie)
- * en placant la copie a la suite de la saisie d'origine.
+ * Duplique une saisie (ou groupe de saisies)
+ * en placant la copie à la suite de la saisie d'origine.
  * Modifie automatiquement les identifiants des saisies
  *
  * @param array $saisies Un tableau décrivant les saisies
@@ -274,6 +274,8 @@ function saisies_dupliquer($saisies, $nom_ou_chemin){
 		$chemin_validation = saisies_chercher($saisies, $nom_ou_chemin, true);
 		// 1 de plus pour mettre APRES le champ trouve
 		$chemin_validation[count($chemin_validation)-1]++;
+		// On ajoute "copie" après le label du champs
+		$clone['options']['label'] .= ' '._T('saisies:construire_action_dupliquer_copie');
 
 		$saisies = saisies_inserer($saisies, $clone, $chemin_validation);
 	}
@@ -393,8 +395,8 @@ function saisies_transformer_noms($saisies, $masque, $remplacement){
 
 
 /*
- * Transforme les noms d'une liste de saisie pour qu'ils soient
- * uniques dans le formulaire donne.
+ * Transforme les noms d'une liste de saisies pour qu'ils soient
+ * uniques dans le formulaire donné.
  *
  * @param array $formulaire Le formulaire à analyser 
  * @param array $saisies Un tableau décrivant les saisies.
