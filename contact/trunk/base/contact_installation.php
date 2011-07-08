@@ -11,12 +11,6 @@ function contact_upgrade($nom_meta_version_base, $version_cible){
 	){
 		
 		if (version_compare($version_actuelle,'0.0','=')){
-			// Création des tables
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			creer_base();
-			
-			echo "Création des tables de messageries si inexistantes.<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 	$maj = array();
