@@ -23,6 +23,7 @@
 	<necessite id="SPIP" version="[3.0.0-dev;]" />
 	<necessite id="cextras" version="[1.4.5;]" />
 	<necessite id="saisies" version="[1.9.0;]" />
+	<necessite id="verifier" version="[0.1.9;]" />
 	<necessite id="yaml" version="[1.5;]" />
 	
 	<pipeline>

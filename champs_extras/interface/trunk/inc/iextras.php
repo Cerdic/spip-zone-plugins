@@ -10,12 +10,6 @@ function iextras_get_extras(){
 	if ($extras === null) {
 		$extras = @unserialize($GLOBALS['meta']['iextras']);
 		if (!is_array($extras)) $extras = array();
-		// reinitialiser aucazou les valeurs de tables
-		foreach($extras as $e) {
-			if (!$e->_objet) {
-				$e->definir_raccourcis(); // va recreer les infos des objet/type
-			}
-		}
 	}
 	return $extras;
 }
@@ -39,8 +33,11 @@ function iextras_set_extras($extras){
 
 // tableau des extras, mais classes par table SQL
 // et sous forme de tableau PHP pour pouvoir boucler dessus.
-function iextras_get_extras_par_table(){
+function iextras_get_extras_par_table($appliquer_typo = false){
 	$extras = iextras_get_extras();
+	if ($appliquer_typo) {
+		$extras = _extras_typo($extras);
+	}
 	$tables = array();
 	foreach($extras as $e) {
 		if (!isset($tables[$e->table])) {
@@ -48,6 +45,7 @@ function iextras_get_extras_par_table(){
 		}
 		$tables[$e->table][] = $e->toArray();
 	}
+
 	return $tables;
 }
 

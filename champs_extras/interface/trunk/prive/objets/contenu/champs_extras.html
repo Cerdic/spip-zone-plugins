@@ -4,7 +4,7 @@
 		|balise_img{'',cadre-icone}
 		|concat{<:iextras:liste_des_extras:>},'simple','titrem'})]
 		
-	<BOUCLE_tables(POUR){tableau (#VAL|iextras_get_extras_par_table)}>
+	<BOUCLE_tables(POUR){tableau (#VAL{1}|iextras_get_extras_par_table)}>
 	<h2>[(#CLE|table_objet_sql|lister_tables_objets_sql|table_valeur{texte_objets}|_T)]</h2>
 		<B_extras>
 		<div class='liste'>

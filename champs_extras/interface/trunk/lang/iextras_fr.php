@@ -19,6 +19,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champs_extras' => 'Champs Extras',
 	'champ_sauvegarde' => 'Champ extra sauvegard&eacute; !',
 	'champ_deja_existant' => 'Un champ homonyme existe déjà pour cette table.',
+	'champs_extras_de' => 'Champs Extras de : @objet@',
+	
 	//E
 	'erreur_action' => 'Action @action@ inconnue.',
 	'erreur_enregistrement_champ' => 'Probl&egrave;me de cr&eacute;ation du champ extra.',
@@ -56,6 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_options_saisies' => 'Options de la saisie',
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs pr&eacute;sents non g&eacute;r&eacute;s',
+	'liste_objets_applicables' => 'Liste des objets éditoriaux',
+	
 	//P
 	'precisions_pour_class' => 'Ajouter des classes CSS sur l\'&eacute;l&eacute;ment,
 		s&eacute;par&eacute;es par un espace. Exemple : "inserer_barre_edition" pour un bloc
