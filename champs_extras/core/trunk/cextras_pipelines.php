@@ -26,7 +26,7 @@ function cextras_data_array($data) {
 
 // en utilisant le plugin "saisies"
 function ce_calculer_saisie($c, $contexte, $prefixe='') {
-	
+
 	// pas besoin de la config de SPIP ?
 	unset($contexte['config']);
 
@@ -39,9 +39,12 @@ function ce_calculer_saisie($c, $contexte, $prefixe='') {
 	}
 
 	// a faire reellement ou les saisies s'en occupent ?
-	if ($c->saisie_parametres['datas']) {
+	if (isset($c->saisie_parametres['datas']) and $c->saisie_parametres['datas']) {
 		$contexte['datas'] = cextras_data_array($c->saisie_parametres['datas']);
 	}
+	
+	// typoyfier
+	$c = _extras_typo($c);
 
 	// tout inserer le reste des champs
 	$contexte = array_merge($contexte, $c->saisie_parametres);
@@ -151,13 +154,12 @@ function cextras_editer_contenu_objet($flux){
 			$prefixe = '';
 		}
 
-		
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la saisie est autorisee
-			$type = $c->_type . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
+			$autoriser_quoi = $flux['args']['type'] . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
 			include_spip('inc/autoriser');
-			if (autoriser('modifierextra', $type, $flux['args']['id'], '', array(
+			if (autoriser('modifierextra', $autoriser_quoi, $flux['args']['id'], '', array(
 				'type' => $flux['args']['type'],
 				'id_objet' => $flux['args']['id'],
 				'contexte' => $flux['args']['contexte'])))
@@ -229,12 +231,13 @@ function cextras_afficher_contenu_objet($flux){
 		
 		// on cree un tableau de saisie a partir de la liste des 
 		// champs extras dont on peut voir l'affichage
+		$type = objet_type( $flux['args']['type'] );
 		foreach ($extras as $c) {
 
 			// on affiche seulement les champs dont la vue est autorisee
-			$type = objet_type($c->table) . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
+			$autoriser_quoi = $type . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
 			include_spip('inc/autoriser');
-			if (autoriser('voirextra', $type, $flux['args']['id_objet'], '', array(
+			if (autoriser('voirextra', $autoriser_quoi, $flux['args']['id_objet'], '', array(
 				'type' => $flux['args']['type'],
 				'id_objet' => $flux['args']['id_objet'],
 				'contexte' => $contexte)))
@@ -268,7 +271,7 @@ function cextras_formulaire_verifier($flux){
 		$type = substr($form, 7);
 		
 		// des champs extras correspondent ?
-		if ($extras = cextras_get_extras_match($type)) {
+		if ($extras = cextras_get_extras_match(table_objet_sql($type)) ) {
 
 			// Il peut arriver qu'un prefixe soit appliqué sur les noms de champs de formulaire
 			// La contrainte est que le formulaire inseré doit appeler le pipeline 'formulaire_verifier'
@@ -295,15 +298,15 @@ function cextras_formulaire_verifier($flux){
 				// obligatoire, mais qu'il n'est pas visible dans le formulaire
 				// (si affiche uniquement pour la rubrique XX par exemple).
 				// On teste seulement les champs dont la modification est autorisee
-				$type = $c->_type . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
+				$autoriser_quoi = $type . _SEPARATEUR_CEXTRAS_AUTORISER . $c->champ;
 				$id_objet = $flux['args']['args'][0]; // ? vraiment toujours ?
 
 				// l'autorisation n'a pas de contexte a transmettre
 				// comme dans l'autre appel (cextras_afficher_contenu_objet())
 				// du coup, on risque de se retrouver parfois avec des
 				// resultats differents... Il faudra surveiller.
-				if (autoriser('modifierextra', $type, $id_objet, '', array(
-					'type' => $c->_type,
+				if (autoriser('modifierextra', $autoriser_quoi, $id_objet, '', array(
+					'type' => $type,
 					'id_objet' => $id_objet)))
 				{	
 					if ($c->obligatoire AND !_request($prefixe . $c->champ)) {

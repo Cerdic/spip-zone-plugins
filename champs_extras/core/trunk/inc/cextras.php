@@ -65,12 +65,6 @@ class ChampExtra{
 		
 		$this->make_id();
 	}
-
-	// definir les raccourcis _objet _type
-	function definir_raccourcis($params=array()) {			
-		$this->_objet     = table_objet($this->table); // articles
-		$this->_type      = objet_type($this->_objet); // article
-	}
 	
 	// creer l'id du champ extra :
 	function make_id(){
@@ -101,6 +95,23 @@ class ChampExtra{
 	function __toString() {
 		return "<pre>" . print_r($this, true) . "</pre>";
 	}
+}
+
+
+// applique les typos sur tous les parametres des saisies...
+function _extras_typo($extras) {
+	if (is_array($extras)) {
+		foreach ($extras as $i => $e) {
+			foreach ($e->saisie_parametres as $c => $p) {
+				$extras[$i]->saisie_parametres[$c] = _T_ou_typo($p);
+			}			
+		}
+	} elseif (is_object($extras)) {
+		foreach ($extras->saisie_parametres as $c => $p) {
+			$extras->saisie_parametres[$c] = _T_ou_typo($p);
+		}		
+	}
+	return $extras;
 }
 
 

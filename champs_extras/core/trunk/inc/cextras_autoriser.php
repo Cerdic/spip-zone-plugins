@@ -55,7 +55,7 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 	if (!is_array($noms)) { $noms = array($noms); }
 	if (!is_array($ids))  { $ids  = array($ids); }
 
-	$objet = objet_type($objet);
+	#$objet = objet_type($objet);
 	$ids = var_export($ids, true);
 	$recursif = var_export($recursif, true);
 
@@ -66,13 +66,13 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
 		$f = "autoriser_$objet" . _SEPARATEUR_CEXTRAS_AUTORISER . "$nom";
 		$code = "
 			if (!function_exists('$f$m')) {
-				function $f$m(\$faire, \$type, \$id, \$qui, \$opt) {
+				function $f$m(\$faire, \$quoi, \$id, \$qui, \$opt) {
 					return _restreindre_extras_objet('$objet', \$id, \$opt, $ids, '$cible', $recursif);
 				}
 			}
 			if (!function_exists('$f$v')) {
-				function $f$v(\$faire, \$type, \$id, \$qui, \$opt) {
-					return autoriser('modifierextra', \$type, \$id, \$qui, \$opt);
+				function $f$v(\$faire, \$quoi, \$id, \$qui, \$opt) {
+					return autoriser('modifierextra', \$quoi, \$id, \$qui, \$opt);
 				}
 			}
 		";
