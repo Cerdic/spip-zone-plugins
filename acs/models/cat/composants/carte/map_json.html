@@ -111,6 +111,15 @@ Paramètres:
     map[(#GET{id_carte_gis})].zoomTo(zoom);
     map[(#GET{id_carte_gis})].setCenter(lonlat.fromDataToDisplay());
 
+    // Disable zoom with MouseWheel
+    var disableZoomWheel = [(#VAR{#EVAL{'acsCarte'.'#NIC'.'ZoomWheel'}}|!={non}|?{false, true})];
+    if (disableZoomWheel) {
+      var controls = map[(#GET{id_carte_gis})].getControlsByClass('OpenLayers.Control.Navigation');
+      for(var i = 0; i<controls.length; ++i){
+        controls[i].disableZoomWheel();
+      }
+    }
+    
     // Chargement KML article
     <BOUCLE_kml_art(documents){id_article}{0,1}{extension=kml}>[
       (#ENV{id_article}|=={''}|non)

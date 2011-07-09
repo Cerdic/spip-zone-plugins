@@ -54,6 +54,7 @@ div.cRubnav {
 
 .cRubnav li .menu-item {
   position: relative;
+  font-weight: normal;
   [background: (#VAR{acsRubnavFond2});]
   /*[
   z-index: (#GET{z-index}|plus{1});]*/
@@ -63,9 +64,8 @@ div.cRubnav {
 [.cRubnav li li li li .menu-item {background: (#VAR{acsRubnavFond5});}]
 [.cRubnav li li li li li.menu-item {background: (#VAR{acsRubnavFond6});}]
 
-.cRubnav .menu-item .on {
+.cRubnav li.menu-item.on {
   font-weight: bold;
-  width: 100%;
 }
 
 [.cRubnav .menu-item:hover, .cRubnav .menu-item a:hover { background: (#VAR{acsRubnavFondHover});}]

@@ -1,17 +1,18 @@
-/* todo : debug ! ;-) */
-if(document.all) {
-	jQuery(document).ready(
-		function() {
-			setHoverForDamnedBuggyIE();
-		  onAjaxLoad(setHoverForDamnedBuggyIE);
+
+jQuery(document).ready(
+	function() {
+		function _setHover() {
+			jQuery(".cRubnav li.menu-item:not(.on)").hover(function(){
+			  jQuery("ul.hidden:first", this).css("display", "none").show("fast");
+			},function(){
+				jQuery("ul.hidden", this).hide();
+			});
 		}
-	);
-	
-	function setHoverForDamnedBuggyIE() {
-		jQuery(".cRubnav li.menu-item>a").hover(function(){
-		  jQuery(this).parent().find("ul.hidden:first").show("slow");
-		},function(){
-		  jQuery(this).parent().find("ul.hidden:first").hide("slow");
-		});
+		_setHover();
+	  onAjaxLoad(_setHover);
 	}
-}
+);
+jQuery(document).unload(function() {
+	jQuery(".cRubnav li.menu-item:not(.on)").unbind('mouseenter mouseleave');
+});
+

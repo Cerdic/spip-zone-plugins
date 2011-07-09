@@ -14,6 +14,7 @@ La dimension de la carte est de 100% de l\'&eacute;l&eacute;ment qui la contient
 <br /><br />
 Nécessite le plugin GIS et ses d&eacute;pendances.<br />',
 
+'ZoomWheel' => 'Zoom avec la molette de souris',
 'ShowLayerSwitcher' => 'Afficher le s&eacute;lecteur de cartes',
 'tooltip' => 'Info-Bulle',
 'TitreFont' => 'Fonte du titre',

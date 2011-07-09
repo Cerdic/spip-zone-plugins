@@ -12,6 +12,10 @@
  * insert_head pipeline for ACS plugin.
  */
 function acs_insert_head($flux) {
+	$r = '';
+  // On ajoute au début une css rien que pour les administrateurs ACS
+  if (acs_autorise())
+  	$r .= '<link rel="stylesheet" href="'.direction_css(generer_url_public('acs_style_prive.css')).'" type="text/css" media="projection, screen, tv" />';
   $model =$GLOBALS['meta']['acsModel'];
   $css_model = find_in_path($model.'.css.html');
   if ($css_model)
@@ -20,9 +24,8 @@ function acs_insert_head($flux) {
   if ($js_model)
     $r .= '<script type="text/javascript" src="spip.php?page='.$model.'.js&v='.$GLOBALS["meta"]["acsDerniereModif"].'"></script>';
 
-  // On ajoute une css et des javascripts rien que pour les administrateurs ACS
+  // On ajoute à la fin les javascripts spécifiques des administrateurs ACS
   if (acs_autorise()) {
-  	$r .= '<link rel="stylesheet" href="'.direction_css(generer_url_public('acs_style_prive.css')).'" type="text/css" media="projection, screen, tv" />';
   	$js_dragdrop = find_in_path('javascript/dragdrop_interface.js');
   	$jquery_version = 0;
   	// A partir de spip 2.1, l'interface dragdrop de JQuery a changé de nom:

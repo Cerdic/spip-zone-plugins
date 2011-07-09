@@ -10,6 +10,7 @@ Display last updated geolocated keywords, sections, and articles on the map. If 
 these are displayed with their keyword icon as markers on the map.<br /><br />
 Map size is 100% of its container. Tooltip size is computed according to its content and a max size balanced with the map size',
 
+'ZoomWheel' => 'Zoom/unzoom with mousewheel',
 'ShowLayerSwitcher' => 'Show layer switcher',
 'tooltip' => 'Tooltip',
 'TitreFont' => 'Tilte font',
