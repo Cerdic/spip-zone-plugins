@@ -1,0 +1,129 @@
+<B_pubban>
+<BOUCLE_pubban(BANNIERES){id_banniere=#ENV{id_banniere}}>
+	[(#ENV**{icone_editer})]
+	[(#ENV**{icone_nouvelle_pub})]
+<h1>#TITRE</h1>
+
+<div class='cadre cadre-e' style='margin-top: 20px;width:300px'>
+	&nbsp;Banner ID : <strong>#TITRE_ID</strong>
+</div>
+
+<div class='nettoyeur'></div>
+
+<div class='cadre cadre-e' style='margin-top: 20px;'>
+	<strong>&nbsp;<:pubban:fiche:></strong>
+</div>
+
+<div class="vevent id_#ID_BANNIERE">
+	<p class='date'><small>
+		[<:pubban:date_maj:> : <abbr title="[(#MAJ|date_iso)]">(#MAJ|affdate) [(#MAJ|affdate{H:i})]</abbr>]
+	</small></p>
+	<p class='date'>
+		<strong><:pubban:dimensions:>&nbsp;:&nbsp;#WIDTH x #HEIGHT px</strong>
+	</p>
+	<p class='date'>
+		<strong><:pubban:stats:></strong>&nbsp;:
+		<ul>
+			<li><:pubban:ratio_pages:>&nbsp;:&nbsp;<strong>#RATIO_PAGES %</strong></li>
+			<li><:pubban:nb_pub:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub}&nbsp;<:pubban:pub:></strong>
+			<ul>
+				<li><:pubban:nb_pub_actives:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_actives}&nbsp;<:pubban:pub:></strong>
+				<li><:pubban:nb_pub_inactives:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_inactives}&nbsp;<:pubban:pub:></strong>
+				<li><:pubban:nb_pub_obsoletes:>&nbsp;:&nbsp;<strong>#ENV{decompte_pub_obsoletes}&nbsp;<:pubban:pub:></strong>
+			</ul></li>
+		</ul>
+	</p>
+</div>
+<div class='nettoyeur'></div>
+
+<div class='cadre cadre-e' style='margin-top: 20px;'>
+	<strong>&nbsp;<:pubban:listing_empl:></strong>
+</div>
+
+<B_pourpub>
+<div class='cadre cadre-liste' style='margin-top: 20px;'>
+<div class='titrem replie' onmouseover="jQuery(this).depliant('#pubban_liste_contenu_pub');"><a href='#' onclick="return jQuery(this).depliant_clicancre('#pubban_liste_contenu_pub');" class='titremancre'></a><:pubban:btn_see_liste:></div>
+<div id='pubban_liste_contenu_pub' class='bloc_depliable blocreplie'>
+<table border='0' cellpadding='3' cellspacing='0' width='100%' class='verdana1'>
+	<tr bgcolor='#DBE1C5'>
+	<th><:pubban:statut:></th>
+	<th><:pubban:titre:></th>
+	<th><:pubban:outils:></th>
+	<th></th>
+	</tr>
+<BOUCLE_pourpub(POUR){tableau #ENV**{listing_pub}}{pagination #ENV{pagine,10}}{inverse #ENV{inverse}}>
+	<BOUCLE_pubbanpub(PUBLICITES){id_publicite=#VALEUR}>
+	<tr class='tr_liste'>
+	<td class="arial11">
+[(#STATUT|=={1inactif}|oui)
+			<img src='#ENV{btn_inactive}' title='<:pubban:inactif:>' alt='<:pubban:inactif:>' border="0" align="absmiddle" hspace="3" />
+]
+[(#STATUT|=={2actif}|oui)
+			<img src='#ENV{btn_active}' title='<:pubban:actif:>' alt='<:pubban:actif:>' border="0" align="absmiddle" hspace="3" />
+]
+[(#STATUT|=={3obsolete}|oui)
+			<img src='#ENV{btn_obsolete}' title='<:pubban:obsolete:>' alt='<:pubban:obsolete:>' border="0" align="absmiddle" hspace="3" />
+]
+	</td>
+	<td class="arial11">
+		<strong>
+			<a href='[(#URL_ECRIRE{publicite_voir,id_publicite=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:btn_details:>'>
+			#TITRE</a>
+		</strong>
+	</td>
+	<td class="arial11">
+		<a href="javascript:popup(600,600,'#URL_SITE_SPIP/?page=view_pub&id_publicite=#ID_PUBLICITE');">
+			<img src='#ENV{btn_apercu}' title='<:pubban:btn_apercu:>' alt='<:pubban:btn_apercu:>' border="0" align="absmiddle" hspace="3" />
+		</a>
+		<a href='[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]'>
+			<img src='#ENV{btn_editer}' title='<:bouton_modifier:>' alt='<:bouton_modifier:>' border="0" align="absmiddle" hspace="3" />
+		</a>
+		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{supprimer_pub,#ID_PUBLICITE,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_delete:>');">
+			<img src='#ENV{btn_poubelle}' title='<:pubban:btn_supprimer:>' alt='<:pubban:btn_supprimer:>' border="0" align="absmiddle" hspace="3" />
+		</a>
+	</td>
+	<td class="arial11">
+		<strong>N&deg;#ID_PUBLICITE</strong>
+	</td>
+	</tr>
+	</BOUCLE_pubbanpub>
+</BOUCLE_pourpub>
+	<tr bgcolor='#DBE1C5'>
+	<th colspan='4'>
+[(#ENV{inverse}|oui)
+			<a href='[(#SELF|parametre_url{inverse,''})]' class='noajax'><:pubban:btn_inverser:></a>
+]
+[(#ENV{inverse}|non)
+			<a href='[(#SELF|parametre_url{inverse,non})]' class='noajax'><:pubban:btn_inverser:></a>
+]
+	[&nbsp;|&nbsp;(#PAGINATION{page})]
+	</th>
+	</tr>
+</table>
+</div>
+</div>
+</B_pourpub>
+<p><:pubban:no_pub_yet:></p>
+<//B_pourpub>
+
+<div class='cadre cadre-e' style='margin-top: 20px;'>
+	<strong>&nbsp;<:pubban:apercu:></strong>
+</div>
+	#PUBBAN{#TITRE_ID,tout}
+<div class='nettoyeur'></div>
+	</BOUCLE_pubban>
+</B_pubban>
+<h3><:pubban:no_empl_found:></h3>
+<//B_pubban>
+
+<script type='text/javascript'>
+function popup(l,h,url) {
+	var pp = window.open(url,"popup","resizable=yes,toolbar=no,scrollbars=yes,width="+l+",height="+h);
+	pp.focus();
+}
+function delete_entry(url, mess){
+	if(confirm(mess)){
+		window.location.href = url;
+	}
+}
+</script>

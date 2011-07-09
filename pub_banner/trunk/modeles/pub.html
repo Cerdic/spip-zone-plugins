@@ -1,4 +1,4 @@
-[(#SET{goto_clicker,#ENV{java_goto}&id_pub=#ENV{id_pub}&id_empl=#ENV{id_empl}})]
+[(#SET{goto_clicker,#ENV{java_goto}&id_publicite=#ENV{id_publicite}&id_banniere=#ENV{id_banniere}})]
 
 [(#ENV{type}|=={img}|oui)
 <a href="[(#GET{goto_clicker}|parametre_url{redirect,#ENV{url,#ADRESSE_SITE}})]" 
@@ -38,12 +38,17 @@ if(typeof(clic)=="undefined"){
 	function clic(url, blank){ 
 		if (blank=="undefined") blank = false;
 		var xhr=null; if (window.XMLHttpRequest) xhr = new XMLHttpRequest(); else if (window.ActiveXObject) xhr = new ActiveXObject("Microsoft.XMLHTTP"); 
-		xhr.open("GET", "#GET{goto_clicker}", true); xhr.send(null); 
-		if (blank) {
-			win = window.open(url); win.focus(); 
-		} else {
-			window.parent.location.href = url;
+		xhr.open("GET", "#GET{goto_clicker}", true); 
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4) {
+				if (blank) {
+					win = window.open(url); win.focus(); 
+				} else {
+					window.parent.location.href = url;
+				}
+			}
 		}
+		xhr.send(null); 
 	}
 }
 --></script>

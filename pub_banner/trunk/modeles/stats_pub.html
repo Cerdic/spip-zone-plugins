@@ -1,0 +1,95 @@
+#CACHE{0}
+<BOUCLE_payer(PUBLICITES){id_publicite IN #ENV**{tablo_pub}}>
+
+<a href="../?page=view_pub&id_publicite=#ID_PUBLICITE" target="_blank" onclick="popup(600,600,'../?page=view_pub&id_publicite=#ID_PUBLICITE');return false;"><:pubban:apercu:></a>
+&nbsp;|&nbsp;<a href="[(#URL_PAGE{stat_pub}|parametre_url{type,export}|parametre_url{pub,#ID_PUBLICITE})]" title="Exporter les donnees au format .xls"><:pubban:exporter_donnees:></a>
+&nbsp;|&nbsp;<a href="[(#SELF|retirer_lien_pub{pub,#ID_PUBLICITE})]"><:pubban:retirer_arg:></a>
+<table class="table_statpub">
+
+	<tr><th colspan="2" class="header_th">
+		#TITRE (#TYPE)
+		<div style="float:right;">
+			<img class="spip_logo" src="#OBJET" border="0" style="max-width:40px;max-height:40px;" />
+		</div>
+	</th></tr>
+
+	<tr>
+		<td colspan="2"><small>
+		[<:pubban:date_creation:> : <abbr title="[(#DATE_ADD|date_iso)]">(#DATE_ADD|affdate) [(#DATE_ADD|affdate{H:i})]</abbr>]
+		[(#MAJ|affdate{'d-m-Y H:i'}|=={#DATE_ADD|affdate{'d-m-Y H:i'}}|non)
+			&nbsp;|&nbsp;
+			<:pubban:date_maj:> : <abbr title="[(#MAJ|date_iso)]">[(#MAJ|affdate)] [(#MAJ|affdate{H:i})]</abbr>
+		]
+		</small></td>
+	</tr>
+
+	<tr>
+		<th colspan="2" class="header_td"><:pubban:campagne_presentation:></th>
+	</tr>
+
+	<tr>
+		<td><:pubban:statut_actuel:> :</td>
+		<td><strong>[(#STATUT|pubban_recup_statut_pub)]</strong></td>
+	</tr>
+	[<tr>
+		<td><:pubban:url_pub:> :</td>
+		<td><strong><a href="#URL" title="<:voir_en_ligne:>" target="_blank">(#URL)</a></strong></td>
+	</tr>]
+
+	<BOUCLE_pre(bannieres_publicites){id_publicite}>
+		<BOUCLE_emplacement(BANNIERES){id_banniere=#ID_BANNIERE}>
+	<tr>
+		<td><:pubban:banner:> :</td>
+		<td><strong>#TITRE</strong> (#WIDTH x #HEIGHT px)</td>
+	</tr>
+		</BOUCLE_emplacement>
+	</BOUCLE_pre>
+
+	<tr>
+		<th colspan="2" class="header_td"><:pubban:campagne_deroulement:></th>
+	</tr>
+
+	<tr>
+		<td><:pubban:campagne_date_debut:> :</td>
+		<td class="pubban_statpub_entry">[(#DATE_DEBUT|affdate|sinon{#DATE_ADD|affdate})]</td>
+	</tr>
+	[<tr>
+		<td><:pubban:campagne_date_fin:> :</td>
+		<td class="pubban_statpub_entry">(#DATE_FIN|affdate)</td>
+	</tr>]
+
+	<tr>
+		<th colspan="2" class="header_td"><:pubban:campagne_donnees_suivi:></th>
+	</tr>
+
+	<tr>
+		<td><:pubban:nb_affichages:> :</td>
+		<td class="pubban_statpub_entry">#AFFICHAGES</td>
+	</tr>
+	[(#AFFICHAGES_RESTANT|=={0}|non)<tr>
+		<td><:pubban:nb_affires_pub:> :</td>
+		<td class="pubban_statpub_entry">#AFFICHAGES_RESTANT</td>
+	</tr>]
+
+	<tr>
+		<td><:pubban:nb_clics:> :</td>
+		<td class="pubban_statpub_entry">#CLICS</td>
+	</tr>
+	[(#CLICS_RESTANT|=={0}|non)<tr>
+		<td><:pubban:nb_clicres_pub:> :</td>
+		<td class="pubban_statpub_entry">#CLICS_RESTANT</td>
+	</tr>]
+
+	<tr>
+		<th colspan="2" class="header_td"><:pubban:campagne_statistiques:></th>
+	</tr>
+
+	<tr>
+		<td><:pubban:ratio:> :</td>
+		<td class="pubban_statpub_entry">[(#CLICS|div{#AFFICHAGES}) %]</td>
+	</tr>
+
+</table>
+<br />
+</BOUCLE_payer>
+<p><small><i><:pubban:resultats_du:> <abbr title="[(#DATE|date_iso)]">[(#DATE|affdate)]</abbr></i></small></p>

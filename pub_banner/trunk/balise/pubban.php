@@ -10,20 +10,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_PUBBAN_dist($p) {
-   return calculer_balise_dynamique($p, PUBBAN, array());
+	return calculer_balise_dynamique($p, PUBBAN, array());
 }
 
-function balise_PUBBAN_dyn($p) {
+function balise_PUBBAN_dyn($banner_id, $tout='non') {
 	$div = '';
+	$tout_montrer = ($tout=='oui' || $tout=='tout');
 	$border = ( _request('border') ) ? _request('border') : 0;
-	if (is_numeric($p))
-		$emplacement = pubban_recuperer_emplacement($p);
+	if (is_numeric($banner_id))
+		$banniere = pubban_recuperer_banniere($banner_id);
 	else
-		$emplacement = pubban_recuperer_emplacement_par_nom($p);
+		$banniere = pubban_recuperer_banniere_par_nom($banner_id);
 	
-	if($emplacement['statut'] == '2actif') {
-//		$div = "<center><div class=\"pubban pubban_".$emplacement['titre']."\"><iframe name='".$emplacement['titre']."' src='".generer_url_public(_PUBBAN_ADDS_DISPLAYER)."&empl=".$emplacement['titre']."' width=".$emplacement['width']." height=".$emplacement['height']." marginwidth=auto marginheight=0 hspace=0 vspace=0 frameborder=".$border." scrolling=no></iframe></div></center>";
-		$div = "<center><div class=\"pubban pubban_".$emplacement['titre_id']."\"><iframe name='".$emplacement['titre_id']."' src='".generer_url_public(_PUBBAN_ADDS_DISPLAYER)."&empl=".$emplacement['titre_id']."' width=".$emplacement['width']." height=".$emplacement['height']." marginwidth=auto marginheight=0 hspace=0 vspace=0 frameborder=".$border." scrolling=no></iframe></div></center>";
+	if ($banniere && ($tout_montrer || $banniere['statut'] == '2actif')) {
+		$url = generer_url_public(_PUBBAN_ADDS_DISPLAYER)."&empl=".$banniere['titre_id'];
+		if ($tout_montrer)
+			$url .= "&tout=oui";
+		$div = "<center><div class=\"pubban pubban_".$banniere['titre_id']."\"><iframe name='".$banniere['titre_id']."' src='".$url."' width=".$banniere['width']." height=".$banniere['height']." marginwidth=auto marginheight=0 hspace=0 vspace=0 frameborder=".$border." scrolling=no></iframe></div></center>";
 	}
 	echo $div;
 }

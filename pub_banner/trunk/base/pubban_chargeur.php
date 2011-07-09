@@ -8,9 +8,9 @@
  */
 
 /**
- * Defintion des emplacements du site
+ * Defintion des bannieres du site
  */
-$GLOBALS['emplacements_site'] = array(
+$GLOBALS['bannieres_site'] = array(
 	'1' => array(
 		'titre' => 'Skyscraper', 
 		'titre_id' => 'skyscraper', 
@@ -50,7 +50,7 @@ $GLOBALS['emplacements_site'] = array(
  */
 $GLOBALS['publicites_site'] = array(
 	'1' => array(
-		'id_empl' => '1',
+		'id_banniere' => '1',
 		'titre' => 'Skyscraper : exemple 1',
 		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
 		'blank' => 'non',
@@ -61,7 +61,7 @@ $GLOBALS['publicites_site'] = array(
 		'date_add' => date("Y-m-d H:i:s"),
 	),
 	'2' => array(
-		'id_empl' => '2',
+		'id_banniere' => '2',
 		'titre' => 'Banner : exemple 1', 
 		'url' => 'http://www.example.com/',
 		'objet' => _DIR_IMGPUB.'/pubbantest_banner.gif',
@@ -71,7 +71,7 @@ $GLOBALS['publicites_site'] = array(
 		'date_add' => date("Y-m-d H:i:s"),
 	),
 	'3' => array(
-		'id_empl' => '2',
+		'id_banniere' => '2',
 		'titre' => 'Banner : exemple 2', 
 		'url' => $GLOBALS['meta']['adresse_site'].'/?page=adds',
 		'blank' => 'non',
@@ -82,7 +82,7 @@ $GLOBALS['publicites_site'] = array(
 		'date_add' => date("Y-m-d H:i:s"),
 	),
 	'4' => array(
-		'id_empl' => '3',
+		'id_banniere' => '3',
 		'titre' => 'Leaderboard : exemple 1', 
 		'url' => 'http://www.example.com/',
 		'objet' => _DIR_IMGPUB.'/pubbantest_leaderboard.gif',
@@ -92,7 +92,7 @@ $GLOBALS['publicites_site'] = array(
 		'date_add' => date("Y-m-d H:i:s"),
 	),
 	'5' => array(
-		'id_empl' => '4',
+		'id_banniere' => '4',
 		'titre' => 'Cube : exemple 1', 
 		'url' => '',
 		'objet' => _DIR_IMGPUB.'/pubbantest_cube.gif',
@@ -102,7 +102,7 @@ $GLOBALS['publicites_site'] = array(
 		'date_add' => date("Y-m-d H:i:s"),
 	),
 	'6' => array(
-		'id_empl' => '4',
+		'id_banniere' => '4',
 		'titre' => 'Cube : exemple flash', 
 		'url' => 'http://www.example.com/',
 		'objet' => "<object onClick='clic();' type='application/x-shockwave-flash' data='"._DIR_IMGPUB."/dewslider.swf?xml=index.php?page=pubban_demo_flash' width='250' height='250'><param name='movie' value='"._DIR_IMGPUB."/dewslider.swf?xml=index.php?page=pubban_demo_flash' /></object>",
@@ -113,7 +113,7 @@ $GLOBALS['publicites_site'] = array(
 		'date_add' => date("Y-m-d H:i:s"),
 	),
 	'7' => array(
-		'id_empl' => '4',
+		'id_banniere' => '4',
 		'titre' => 'Cube : exemple SPIP', 
 		'url' => 'http://www.spip.net/',
 		'objet' => _DIR_IMGPUB.'/ad_home.png',

@@ -9,19 +9,26 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function pubban_declarer_tables_interfaces($interface){
-	$config = $GLOBALS['_PUBBAN_CONF'];
-	$interface['table_des_tables']['spip_pubban_publicites'] = $config['table_pub'];
-	$interface['table_des_tables']['spip_pubban_emplacements'] = $config['table_empl'];
-	$interface['table_des_tables']['spip_pubban_stats'] = $config['table_stats'];
-	$interface['table_des_tables']['spip_pubban_pub_empl'] = $config['table_join'];
-	return($interface);
+
+	// Tables principales
+	$interface['table_des_tables']['publicites'] = 'publicites';
+	$interface['table_des_tables']['bannieres'] = 'bannieres';
+	$interface['table_des_tables']['pubban_stats'] = 'pubban_stats';
+	// Table de jointure
+	$interface['tables_jointures']['publicites'][] = 'publicites';
+	$interface['tables_jointures']['bannieres'][] = 'bannieres';
+	// Table des dates
+	$interface['table_date']['publicites'] = 'date_debut';
+	$interface['table_date']['publicites'] = 'date_fin';
+	$interface['table_date']['publicites'] = 'date_add';
+
+	return $interface;
 }
 
 function pubban_declarer_tables_principales($tables_principales){
-	$config = $GLOBALS['_PUBBAN_CONF'];
 
 	$spip_table_pubban = array(
-		"id_pub"			=> "int(21) NOT NULL",
+		"id_publicite"		=> "bigint(21) NOT NULL",
 		"statut"			=> "varchar(100) NOT NULL default '1inactif'",
 		"url"				=> "varchar(200) NOT NULL default ''",
 		"blank"				=> "enum('non','oui') NOT NULL default 'oui'",
@@ -39,20 +46,21 @@ function pubban_declarer_tables_principales($tables_principales){
 		"maj"				=> "TIMESTAMP",
 	);
 	$spip_table_pubban_key = array(
-		"PRIMARY KEY" 	=> "id_pub",
+		"PRIMARY KEY" 	=> "id_publicite",
 		"KEY titre" 	=> "titre",
+		"KEY statut" 	=> "statut"
 	);
 	$spip_table_pubban_join = array(
-		"id_pub" 	=> "id_pub",
+		"id_publicite" 	=> "id_publicite",
 	);
-	$tables_principales[$config['table_pub']] = array(
+	$tables_principales['spip_publicites'] = array(
 		'field' 	=> &$spip_table_pubban,
 		'key' 		=> &$spip_table_pubban_key,
 		'join'		=> &$spip_table_pubban_join
 	);
         
 	$spip_table_pubban_empl = array(
-		"id_empl"		=> "int(21) NOT NULL",
+		"id_banniere"	=> "bigint(21) NOT NULL",
 		"statut"		=> "varchar(100) NOT NULL default '1inactif'",
 		"titre"			=> "varchar(30) NOT NULL default ''",
 		"titre_id"		=> "varchar(30) NOT NULL default ''",
@@ -62,45 +70,52 @@ function pubban_declarer_tables_principales($tables_principales){
 		"maj"			=> "TIMESTAMP",
 	);
 	$spip_table_pubban_empl_key = array(
-		"PRIMARY KEY" 	=> "id_empl",
-//		"KEY titre_id" 	=> "titre_id",
+		"PRIMARY KEY" 	=> "id_banniere",
+		"KEY titre_id" 	=> "titre_id",
+		"KEY statut" 	=> "statut"
 	);
 	$spip_table_pubban_empl_join = array(
-		"id_empl" 	=> "id_empl",
+		"id_banniere" 	=> "id_banniere",
 	);
-	$tables_principales[$config['table_empl']] = array(
+	$tables_principales['spip_bannieres'] = array(
 		'field' 	=> &$spip_table_pubban_empl,
 		'key' 		=> &$spip_table_pubban_empl_key,
 		'join'		=> &$spip_table_pubban_empl_join,
 	);
 
 	$spip_table_pubban_stats = array(
-		"id_empl"		=> "int(21) NOT NULL",
+		"id_banniere"	=> "bigint(21) NOT NULL",
 		"date"			=> "date NOT NULL default '0000-00-00'",
 		"jour"			=> "int(3) NOT NULL",
 		"clics"			=> "bigint(20) NOT NULL default '0'",
 		"affichages"	=> "bigint(20) NOT NULL default '0'",
 	);
 	$spip_table_pubban_stats_key = array(
-		"KEY id_empl" 	=> "id_empl",
+		"KEY id_banniere" 	=> "id_banniere",
 	);
-	$tables_principales[$config['table_stats']] = array(
+	$tables_principales['spip_pubban_stats'] = array(
 		'field' 	=> &$spip_table_pubban_stats,
 		'key' 		=> &$spip_table_pubban_stats_key,
 	);
 
+	return $tables_principales;
+}
+
+function pubban_declarer_tables_auxiliaires($tables_auxiliaires){
+
 	$new_pub_emp = array(
-		"id_pub" => "int(21) NOT NULL",
-		"id_empl" => "int(21) NOT NULL"
+		"id_publicite" => "bigint(21) NOT NULL",
+		"id_banniere" => "bigint(21) NOT NULL"
 	);
 	$new_pub_emp_cles = array(
-		"PRIMARY KEY" => "id_pub, id_empl"
+		"PRIMARY KEY" => "id_publicite, id_banniere",
+		"KEY id_banniere"	=> "id_banniere"
 	);
-   	$tables_principales[$config['table_join']] = array(
+   	$tables_auxiliaires['spip_bannieres_publicites'] = array(
 		'field' => &$new_pub_emp,
 		'key' => &$new_pub_emp_cles
 	);
 
-	return($tables_principales);
+	return $tables_auxiliaires;
 }
 ?>

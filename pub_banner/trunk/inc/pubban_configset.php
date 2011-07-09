@@ -11,11 +11,11 @@
  * Declaration de configuration par defaut
  */
 $GLOBALS['_PUBBAN_CONF'] = array(
-	'server' 		=> '', // definit ci-dessous
-	'table_pub' 	=> $GLOBALS['table_prefix'].'_pubban_publicites',
-	'table_empl' 	=> $GLOBALS['table_prefix'].'_pubban_emplacements',
-	'table_stats' 	=> $GLOBALS['table_prefix'].'_pubban_stats',
-	'table_join'	=> $GLOBALS['table_prefix'].'_pubban_pub_empl',
+	'server' 		=> '',
+	'table_pub' 	=> 'publicites',
+	'table_empl' 	=> 'bannieres',
+	'table_stats' 	=> 'pubban_stats',
+	'table_join'	=> 'bannieres_publicites',
 );
 
 /**
@@ -24,13 +24,6 @@ $GLOBALS['_PUBBAN_CONF'] = array(
 if(isset($GLOBALS['meta']['pubban_config']))
 	$config = unserialize($GLOBALS['meta']['pubban_config']);
 else $config = $GLOBALS['_PUBBAN_CONF'];
-//else $config = $GLOBALS['_PUBBAN_CONF']['config'];
-
-/**
- * Base de donnees de Pubban ('connect' par defaut)
- */
-define('_BDD_PUBBAN', $config['server']);
-$GLOBALS['_PUBBAN_CONF']['server'] = _BDD_PUBBAN;
 
 // -------------------------
 // Process

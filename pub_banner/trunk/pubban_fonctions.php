@@ -9,6 +9,46 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
+ * <BOUCLE(PUBLICITES)>
+ */
+function boucle_PUBLICITES($id_boucle, &$boucles) {
+	global $table_des_tables;
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$type = $boucle->type_requete;
+	$id_table = $table_des_tables[$type];
+	if (!$id_table)
+	//      table hors SPIP
+		$boucle->from[$type] =  $type;
+	else {
+	// les tables declarees par spip ont un prefixe et un surnom
+		$boucle->from[$id_table] =  'spip_' . $type ;
+	}
+	
+	return (calculer_boucle($id_boucle, $boucles));
+}
+
+/**
+ * <BOUCLE(BANNIERES)>
+ */
+function boucle_BANNIERES($id_boucle, &$boucles) {
+	global $table_des_tables;
+	$boucle = &$boucles[$id_boucle];
+	$id_table = $boucle->id_table;
+	$type = $boucle->type_requete;
+	$id_table = $table_des_tables[$type];
+	if (!$id_table)
+	//      table hors SPIP
+		$boucle->from[$type] =  $type;
+	else {
+	// les tables declarees par spip ont un prefixe et un surnom
+		$boucle->from[$id_table] =  'spip_' . $type ;
+	}
+	
+	return (calculer_boucle($id_boucle, $boucles));
+}
+
+/**
  * Renvoie la puce d'un element en fonction de son statut
  */
 function pubban_recup_puce_pub($statut, $type=false) {
@@ -33,6 +73,10 @@ function pubban_recup_statut_pub($statut) {
  * @todo ecrire la fonction !!
  */
 function retirer_lien_pub($url='', $what='pub', $id_del=false){
+	$tot_arg = _request($what);
+	$_tot_arg = str_replace($id_del, '', $tot_arg);
+	$n_url = parametre_url($url, $what, $_tot_arg);
+	return $n_url;
 }
 
 function pubban_exporter($list_id){
@@ -45,8 +89,8 @@ function pubban_exporter($list_id){
 			_T('pubban:date_add'),
 			_T('pubban:statut'),
 			_T('pubban:url'),
-			_T('pubban:emplacement'),
-			_T('pubban:dimensions_emplacement'),
+			_T('pubban:banniere'),
+			_T('pubban:dimensions_banniere'),
 			_T('pubban:illimite'),
 			_T('pubban:date_debut'),
 			_T('pubban:date_fin'),
@@ -59,9 +103,9 @@ function pubban_exporter($list_id){
 	$donnees = array();
 	if(count($ids)) foreach($ids as $id){
 		include_spip('inc/pubban_process');
-		$datas = pubban_recuperer_pub($id);
-		$id_emp = pubban_emplacements_de_la_pub($id);
-		$datas_emp = pubban_recuperer_emplacement($id_emp);
+		$datas = pubban_recuperer_publicite($id);
+		$id_emp = pubban_bannieres_de_la_pub($id);
+		$datas_emp = pubban_recuperer_banniere($id_emp);
 		$donnees[$id] = array(
 			textebrut($GLOBALS['meta']['nom_site']),
 			textebrut($datas['titre']),
