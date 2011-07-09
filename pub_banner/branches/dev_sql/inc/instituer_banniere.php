@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Création d'un emplacement
+ * Création d'une banniere
  */
 function inc_instituer_banniere_dist($datas) {
 	if (!is_array($datas)) return;
@@ -16,8 +16,8 @@ function inc_instituer_banniere_dist($datas) {
 			'prix_tranche_4' => $conf['prix_tranche_4'],
 		));
 */
-	if ( $id_empl = sql_insertq('spip_bannieres', $datas, '') )
-		return $id_empl;
+	if ( $id_banniere = sql_insertq('spip_bannieres', $datas, '') )
+		return $id_banniere;
 	return false;
 }
 

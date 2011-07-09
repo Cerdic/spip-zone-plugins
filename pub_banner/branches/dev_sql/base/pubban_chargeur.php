@@ -8,9 +8,9 @@
  */
 
 /**
- * Defintion des emplacements du site
+ * Defintion des bannieres du site
  */
-$GLOBALS['emplacements_site'] = array(
+$GLOBALS['bannieres_site'] = array(
 	'1' => array(
 		'titre' => 'Skyscraper', 
 		'titre_id' => 'skyscraper', 

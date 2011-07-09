@@ -12,24 +12,24 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function exec_pubban_puce_activation_dist() {
 	if(!_request('id')) return;
 	if(!_request('type')) return;
-	if(_request('type') == 'emplacement') exec_pubban_puce_activation_emplacement_args(_request('id'));
+	if(_request('type') == 'banniere') exec_pubban_puce_activation_banniere_args(_request('id'));
 	elseif(_request('type') == 'pub') exec_pubban_puce_activation_pub_args(_request('id'));
 }
 
-function exec_pubban_puce_activation_emplacement_args($id) {
+function exec_pubban_puce_activation_banniere_args($id) {
 	$div = '';
 	$empl = pubban_recuperer_banniere($id);
 	$img_a = "<img src='".$GLOBALS['pubban_btns']['actif']."' alt='"._T('pubban:btn_active')."'";
 	$img_ina = "<img src='".$GLOBALS['pubban_btns']['inactif']."' alt='"._T('pubban:btn_desactive')."'";
 	$end_img = " />";
-	$img_id = " id='imgstatutemplacement$id'";
+	$img_id = " id='imgstatutbanniere$id'";
 
-	$div .= "<span class='puce_emplacement_fixe'>"
+	$div .= "<span class='puce_banniere_fixe'>"
 		.($empl['statut'] == '1inactif' ? $img_a.$img_id.$end_img : $img_ina.$img_id.$end_img )
 		."</span>"
-		."<span class='puce_emplacement_popup' id='statutdecalemplacement$id' style='margin-left: -11px;'>"
-		."<a href='".(generer_action_auteur("activer_banniere", 'activer-'.$id, generer_url_ecrire('pubban_banniere_tous','id_empl='.$id)))."&activer=oui' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_active')."'>".$img_a.$end_img."</a>"
-		."<a href='".(generer_action_auteur("activer_banniere", 'desactiver-'.$id, generer_url_ecrire('pubban_banniere_tous','id_empl='.$id)))."&activer=non' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_desactive')."'>".$img_ina.$end_img."</a>"
+		."<span class='puce_banniere_popup' id='statutdecalbanniere$id' style='margin-left: -11px;'>"
+		."<a href='".(generer_action_auteur("activer_banniere", 'activer-'.$id, generer_url_ecrire('bannieres_tous','id_banniere='.$id)))."&activer=oui' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_active')."'>".$img_a.$end_img."</a>"
+		."<a href='".(generer_action_auteur("activer_banniere", 'desactiver-'.$id, generer_url_ecrire('bannieres_tous','id_banniere='.$id)))."&activer=non' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_desactive')."'>".$img_ina.$end_img."</a>"
 		. "</span>";
 	
 	ajax_retour($div);
@@ -37,7 +37,7 @@ function exec_pubban_puce_activation_emplacement_args($id) {
 
 function exec_pubban_puce_activation_pub_args($id) {
 	$div = '';
-	$pub = pubban_recuperer_pub($id);
+	$pub = pubban_recuperer_publicite($id);
 	$img_a = "<img src='".$GLOBALS['pubban_btns']['actif']."' alt='"._T('pubban:btn_active')."'";
 	$img_ina = "<img src='".$GLOBALS['pubban_btns']['inactif']."' alt='"._T('pubban:btn_desactive')."'";
 	$end_img = " />";
@@ -47,8 +47,8 @@ function exec_pubban_puce_activation_pub_args($id) {
 		.($pub['statut'] == '1inactif' ? $img_a.$img_id.$end_img : $img_ina.$img_id.$end_img )
 		."</span>"
 		."<span class='puce_pub_popup' id='statutdecalpub$id' style='margin-left: -11px;'>"
-		."<a href='".(generer_action_auteur("activer_publicite", 'activer-'.$id, generer_url_ecrire('pubban_publicite_tous','id_pub='.$id)))."&activer=oui' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_active')."'>".$img_a.$end_img."</a>"
-		."<a href='".(generer_action_auteur("activer_publicite", 'desactiver-'.$id, generer_url_ecrire('pubban_publicite_tous','id_pub='.$id)))."&activer=non' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_desactive')."'>".$img_ina.$end_img."</a>"
+		."<a href='".(generer_action_auteur("activer_publicite", 'activer-'.$id, generer_url_ecrire('publicites_tous','id_publicite='.$id)))."&activer=oui' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_active')."'>".$img_a.$end_img."</a>"
+		."<a href='".(generer_action_auteur("activer_publicite", 'desactiver-'.$id, generer_url_ecrire('publicites_tous','id_publicite='.$id)))."&activer=non' onclick='return confirm(confirm_changer_statut);' title='"._T('pubban:btn_desactive')."'>".$img_ina.$end_img."</a>"
 		. "</span>";
 	
 	ajax_retour($div);

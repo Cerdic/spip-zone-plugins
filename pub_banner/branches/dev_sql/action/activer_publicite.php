@@ -26,31 +26,31 @@ function action_activer_publicite(){
 	include_spip('inc/pubban_process');
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	list($activer, $id_pub) = explode('-', $arg);
+	list($activer, $id_publicite) = explode('-', $arg);
 
-	if (intval($id_pub)){
-		$statut = pubban_recuperer_pub($id_pub, "statut");
-		$editer_pub = charger_fonction('editer_pub', 'inc');
+	if (intval($id_publicite)){
+		$statut = pubban_recuperer_publicite($id_publicite, "statut");
+		$editer_pub = charger_fonction('editer_publicite', 'inc');
 		switch ($activer) {
 			case 'activer' :
 				if($statut == '1inactif') 
-					$ok = $editer_pub($id_pub, array("statut" => "2actif"));
+					$ok = $editer_pub($id_publicite, array("statut" => "2actif"));
 				break;
 			case 'desactiver' :
 				if($statut == '2actif') 
-					$ok = $editer_pub($id_pub, array("statut" => "1inactif"));
+					$ok = $editer_pub($id_publicite, array("statut" => "1inactif"));
 				break;
 			case 'rompu' :
 				if(in_array($statut, array('1inactif', '2actif')))
-					$ok = $editer_pub($id_pub, array("statut" => "4rompu"));
+					$ok = $editer_pub($id_publicite, array("statut" => "4rompu"));
 				break;
 			case 'trash' :
 				if(in_array($statut, array('1inactif', '2actif')))
-					$ok = $editer_pub($id_pub, array("statut" => "5poubelle"));
+					$ok = $editer_pub($id_publicite, array("statut" => "5poubelle"));
 				break;
 			case 'out_trash' :
 				if($statut == '5poubelle') 
-					$ok = $editer_pub($id_pub, array("statut" => "1inactif"));
+					$ok = $editer_pub($id_publicite, array("statut" => "1inactif"));
 				break;
 		}
 		if ($redirect = _request('redirect') ) {

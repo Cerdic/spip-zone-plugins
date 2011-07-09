@@ -89,8 +89,8 @@ function pubban_exporter($list_id){
 			_T('pubban:date_add'),
 			_T('pubban:statut'),
 			_T('pubban:url'),
-			_T('pubban:emplacement'),
-			_T('pubban:dimensions_emplacement'),
+			_T('pubban:banniere'),
+			_T('pubban:dimensions_banniere'),
 			_T('pubban:illimite'),
 			_T('pubban:date_debut'),
 			_T('pubban:date_fin'),
@@ -103,7 +103,7 @@ function pubban_exporter($list_id){
 	$donnees = array();
 	if(count($ids)) foreach($ids as $id){
 		include_spip('inc/pubban_process');
-		$datas = pubban_recuperer_pub($id);
+		$datas = pubban_recuperer_publicite($id);
 		$id_emp = pubban_bannieres_de_la_pub($id);
 		$datas_emp = pubban_recuperer_banniere($id_emp);
 		$donnees[$id] = array(

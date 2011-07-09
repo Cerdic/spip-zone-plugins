@@ -9,10 +9,10 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_stats_adds_charger_dist(){
+function formulaires_pubban_statistiques_charger_dist(){
 	include_spip('base/abstract_sql');
 	$valeurs = array(
-		'action' => generer_url_ecrire('pubban_stats'),
+		'action' => generer_url_ecrire('statistiques_bannieres'),
 		'date_today' => date("d/m/Y"),
 		'date_from_7' => date('d/m/y', time() - 604800),
 		'date_from_30' => date('d/m/y', time() - 2592000),
@@ -96,7 +96,7 @@ function formulaires_stats_adds_charger_dist(){
 
 	//  Ratio %
 	if($type_perf == 'ratio'){
-		$recup = sql_select("DISTINCT id_banniere", 'spip_bannieres_publicites', '', '', '', '', '');
+		$recup = sql_select("DISTINCT id_banniere", 'spip_publicites', '', '', '', '', '');
 		$n=1;
 		$n_emp_zero = 0;
 		$n_emp_verif = 0;
@@ -241,4 +241,7 @@ function formulaires_stats_adds_charger_dist(){
 
 	return $valeurs;
 }
+
+function formulaires_pubban_statistiques_verifier_dist(){}
+function formulaires_pubban_statistiques_traiter_dist(){}
 ?>

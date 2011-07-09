@@ -13,8 +13,8 @@ function balise_BANNIERE($p) {
    return calculer_balise_dynamique($p, BANNIERE, array());
 }
 
-function balise_BANNIERE_dyn($id_empl) {
-	$empl = pubban_recuperer_banniere($id_empl);
+function balise_BANNIERE_dyn($id_banniere) {
+	$empl = pubban_recuperer_banniere($id_banniere);
 	echo $empl['titre'];
 }
 

@@ -9,13 +9,15 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_display_adds_charger_dist(){
+function formulaires_inc_pubban_charger_dist(){
 	include_spip('inc/pubban_process');
 	include_spip('base/abstract_sql');
-	$emplacement = pubban_recuperer_banniere_par_nom(_request('empl'));
-	if($emplacement['statut'] != '2actif') return;
+	$id_banniere = _request('empl');
+	$tout = _request('tout') ? _request('tout') : false;
+	$banniere = pubban_recuperer_banniere_par_nom(_request('empl'));
+	if(!$tout && $banniere['statut'] != '2actif') return;
 
-	$list_pub = pubban_pubs_de_la_banniere($emplacement['id'], false);
+	$list_pub = pubban_pubs_de_la_banniere($banniere['id'], false);
 	$nbpub = count($list_pub);
 	if($nbpub == 0) return;
 	$nbpub = $nbpub-1;
@@ -23,7 +25,7 @@ function formulaires_display_adds_charger_dist(){
 
 	$recup = sql_select("*", 'spip_publicites', "id_publicite IN (".join(',', $list_pub).") AND statut IN ('2actif')", '', '', $banaffi.",1", '');
 	while($tableau = spip_fetch_array($recup)){
-		$id_pub = $tableau['id_publicite'];
+		$id_publicite = $tableau['id_publicite'];
 		$nompub = $tableau['titre'];
 		$url = $tableau['url'];
 		$blank = $tableau['blank'];
@@ -38,21 +40,21 @@ function formulaires_display_adds_charger_dist(){
 		$datas['affichages_restant'] = $affires-1;
 		if($datas['affichages_restant'] == 0) $datas['statut'] = '3obsolete';
 	}
-	$editer_pub = charger_fonction('editer_pub', 'inc');
-	$editer_pub($id_pub, $datas);
+	$editer_pub = charger_fonction('editer_publicite', 'inc');
+	$editer_pub($id_publicite, $datas);
 
 	// Statistiques
 	$date_stats = date("Y-m-d");
 	$jour_stats = date("z");
-	$recup = sql_select("*", 'spip_pubban_stats', "date IN ('".$date_stats."') AND id_banniere=".$emplacement['id'], '', '', '', '');
+	$recup = sql_select("*", 'spip_pubban_stats', "date IN ('".$date_stats."') AND id_banniere=".$banniere['id'], '', '', '', '');
 	if (sql_count($recup) > 0) {
 		while($tableau = spip_fetch_array($recup)){
 			$verif_affi = $tableau['affichages'];
 		}
-		sql_updateq('spip_pubban_stats', array("affichages" => $verif_affi + 1), "date IN ('".$date_stats."') AND id_banniere=".$emplacement['id'], '');
+		sql_updateq('spip_pubban_stats', array("affichages" => $verif_affi + 1), "date IN ('".$date_stats."') AND id_banniere=".$banniere['id'], '');
 	}
 	else{
-		sql_insertq('spip_pubban_stats',  array('id_banniere'=>$emplacement['id'],'jour'=>$jour_stats,'date'=>$date_stats,'clics'=>'0','affichages'=>'1'), '');
+		sql_insertq('spip_pubban_stats',  array('id_banniere'=>$banniere['id'],'jour'=>$jour_stats,'date'=>$date_stats,'clics'=>'0','affichages'=>'1'), '');
 	}
 
 	$valeurs = array(
@@ -60,17 +62,17 @@ function formulaires_display_adds_charger_dist(){
 		'url' => substr_count($url, 'http://') ? $url : generer_url_public($url),
 		'blank' => $blank,
 		'nompub' => $nompub,
-		'id_empl' => $emplacement['id'],
-		'id_pub' => $id_pub,
+		'id_banniere' => $banniere['id'],
+		'id_publicite' => $id_publicite,
 		'type' => $type,
 		'code' => $code,
 		'java_goto' => generer_url_public(_PUBBAN_ADDS_CLICKER),
-		'width' => $emplacement['width'],
-		'height' => $emplacement['height']
+		'width' => $banniere['width'],
+		'height' => $banniere['height']
 	);
 	
 	return $valeurs;
 }
-function formulaires_display_adds_verifier_dist(){}
-function formulaires_display_adds_traiter_dist(){}
+function formulaires_inc_pubban_verifier_dist(){}
+function formulaires_inc_pubban_traiter_dist(){}
 ?>

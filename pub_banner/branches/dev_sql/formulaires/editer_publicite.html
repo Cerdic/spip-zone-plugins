@@ -1,9 +1,9 @@
-<div class='formulaire_spip formulaire_editer formulaire_editer_pubban_pub-#ENV{id_pub,new}'>
+<div class='formulaire_spip formulaire_editer formulaire_editer_publicite-#ENV{id_publicite,new}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV**{message_erreur})</p>]
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type='hidden' class='text' name='id_pub' value="[(#ENV**{id_pub,new})]" />
+		<input type='hidden' class='text' name='id_publicite' value="[(#ENV**{id_publicite,new})]" />
 	  <ul>
 	    <li class='editer fieldset'><fieldset><legend><:pubban:infos_pub:></legend>
 	    <ul>
@@ -28,14 +28,14 @@
 					<input type='radio' class='radio' name='blank' id='blank_non' value="non"[(#ENV**{blank}|=={non}|oui) checked="checked"] /><:pubban:non:>
 				</label>
 		    </li>
-		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{emplacement}|oui)erreur]">
-		    	<label for="emplacement"><:pubban:titre_tablo_emplacement:>&nbsp;:</label>[
-				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{emplacement})</span>
-				]<select name="id_empl[]" id="emplacement" size='4' multiple="multiple" class="fondl">
-<BOUCLE_liste_emplacements(BANNIERES){statut=2actif}>
-					<option value="#ID_BANNIERE"<BOUCLE_emppub(POUR){tableau #ENV**{emplacement}}>[(#VALEUR|=={#ID_BANNIERE}|oui) selected="selected"]</BOUCLE_emppub>>
+		    <li class="editer obligatoire[ (#ENV**{erreurs}|table_valeur{banniere}|oui)erreur]">
+		    	<label for="banniere"><:pubban:titre_tablo_banniere:>&nbsp;:</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{banniere})</span>
+				]<select name="banniere[]" id="banniere" size='4' multiple="multiple" class="fondl">
+<BOUCLE_liste_bannieres(BANNIERES){statut=2actif}>
+					<option value="#ID_BANNIERE"<BOUCLE_emppub(POUR){tableau #ENV**{banniere}}>[(#VALEUR|=={#ID_BANNIERE}|oui) selected="selected"]</BOUCLE_emppub>>
 						#TITRE (#WIDTH x #HEIGHT)</option>
-</BOUCLE_liste_emplacements>
+</BOUCLE_liste_bannieres>
 				</select>
 				<p class='explication'><:pubban:comment_multiple_empl:></p>
 		    </li>

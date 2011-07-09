@@ -27,12 +27,12 @@ function afficher_statistiques_pubban($return=false, $div='', $plie='deplie') {
 	$div = "<div id='$div' class='bloc_depliable bloc$plie'><table width='100%'>";
 
 	// nbre d'emplacements
-	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"\">"._T('pubban:nb_emplacements')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
+	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"\">"._T('pubban:nb_bannieres')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
 	$div .= sql_getfetsel("COUNT(*)", 'spip_bannieres', "statut='2actif'", '', '', '', '');
 	$div .= "</strong></td></tr>";
 
 	// nbre total de pubs
-	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('pubban_publicite')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_pub')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
+	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('publicite_voir')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_pub')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
 	$div .= sql_getfetsel("COUNT(*)", 'spip_publicites', "statut!='5poubelle'", '', '', '', '');
 	$div .= "</strong></td></tr>";
 
@@ -52,7 +52,7 @@ function afficher_statistiques_pubban($return=false, $div='', $plie='deplie') {
 	$div .= "</strong></td></tr>";
 
 	// nbre total d'affichages
-	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('pubban_stats')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_affichages')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
+	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('statistiques_bannieres')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_affichages')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
 	$resultat = sql_select("Sum(affichages) as A", 'spip_publicites', '', '', '', '', '');
 	while($row = sql_fetch($resultat)) {
 		$global_nbaffi = $row['A'];
@@ -61,7 +61,7 @@ function afficher_statistiques_pubban($return=false, $div='', $plie='deplie') {
 	$div .= "</strong></td></tr>";
 
 	// nbre total de clics
-	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('pubban_stats')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_clics')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
+	$div .= "<tr><td style='border-top: 1px solid #808080;'><strong><a href=\"".generer_url_ecrire('statistiques_bannieres')."\" title=\""._T('pubban:lien_page')."\">"._T('pubban:nb_clics')."&nbsp;:</a></strong></td><td style='border-top: 1px solid #808080;'><strong>";
 	$resultat = sql_select("Sum(clics) as B", 'spip_publicites', '', '', '', '', '');
 	while($row = sql_fetch($resultat)) {
 		$global_nbclic = $row['B'];
@@ -90,9 +90,13 @@ function pubban_search($str){
 	$results = array('pub', 'emp');
 	$i=0;
 	$j=0;
-	if(substr_count($str, 'id_empl') != 0 AND is_numeric(substr($str, 8))) {
-		$id_empl = substr($str, 8);
-		$pub = sql_select("id_publicite", 'spip_bannieres_publicites', "id_banniere=".intval($id_empl), '', '', '', '');
+
+	// Recherche dans les publicites
+	$ban_str = 'id_banniere=';
+	$ban_max = strlen($ban_str);
+	if(substr_count($str, $ban_str) != 0 AND is_numeric(substr($str, $ban_str))) {
+		$id_banniere = substr($str, $ban_str);
+		$pub = sql_select("id_publicite", 'spip_publicites', "id_banniere=".intval($id_banniere), '', '', '', '');
 		while ($row = spip_fetch_array($pub)) {
 			$results['pub'][$i] = $row['id_publicite'];
 			$i++;

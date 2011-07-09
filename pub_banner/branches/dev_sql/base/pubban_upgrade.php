@@ -18,7 +18,7 @@ function pubban_upgrade($nom_meta_base_version,$version_cible) {
 	// Si pas installe : on creer les tables et on insere les bannieres de test
 	if (!isset($GLOBALS['meta'][$nom_meta_base_version]) || $current_version=='0.0'){
 		creer_base();
-		foreach($GLOBALS['emplacements_site'] as $key => $value)
+		foreach($GLOBALS['bannieres_site'] as $key => $value)
 			sql_insertq('spip_bannieres', $value, '');
 		foreach($GLOBALS['publicites_site'] as $key => $value){
 			$id_empl = $value['id_banniere'];
@@ -29,6 +29,7 @@ function pubban_upgrade($nom_meta_base_version,$version_cible) {
 		ecrire_meta($nom_meta_base_version,$version_cible,'non');
 		spip_log("Plugin PUB BANNER - installation OK - tables creees en base et valeurs de tests inserees");
 	}
+
 	// Si deja installe : on met a jour et on n'insere pas les bannieres de test
 	elseif (version_compare(
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version],
@@ -43,7 +44,8 @@ function pubban_upgrade($nom_meta_base_version,$version_cible) {
 		ecrire_meta($nom_meta_base_version,$version_cible,'non');
 		spip_log("Plugin PUB BANNER - installation OK - tables mises a jour en base");
 	}
-	// Si rien a faire
+
+	// Sinon rien a faire
 	else spip_log("Plugin PUB BANNER - installation OK - rien a faire version_base idem");
 }
 

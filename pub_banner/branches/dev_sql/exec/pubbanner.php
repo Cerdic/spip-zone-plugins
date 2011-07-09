@@ -9,7 +9,7 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_pubban_admin_dist() {
+function exec_pubbanner_dist() {
 	global $connect_statut, $connect_id_auteur, $spip_lang_right;
 	include_spip('inc/presentation');
 	$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -19,13 +19,13 @@ function exec_pubban_admin_dist() {
 	$texte_page = _T("pubban:texte_admin");
 
 	$boutons = "<br class='nettoyeur' />"
-		. icone_inline(_T('pubban:page_stats'), generer_url_ecrire('pubban_stats'), find_in_path("img/stock-tool-button-color-balance.png"), "rien.gif", $GLOBALS['spip_lang_right'])
+		. icone_inline(_T('pubban:page_stats'), generer_url_ecrire('statistiques_bannieres'), find_in_path("img/stock-tool-button-color-balance.png"), "rien.gif", $GLOBALS['spip_lang_right'])
 		. icone_inline(_T('pubban:page_infos'), generer_url_ecrire('pubban_info'), find_in_path("img/status-dock-24.png"), "rien.gif", $GLOBALS['spip_lang_right']);
 
 	$search_str = _request('search_pubban');
 	$contexte = array(
 		'search_pubban' => $search_str,
-		'redirect'=> generer_url_ecrire("pubban_admin"),
+		'redirect'=> generer_url_ecrire("pubbanner"),
 		'inverse' => _request('inverse'),
 		'btn_apercu' => $GLOBALS['pubban_btns']['apercu'],
 		'btn_editer' => $GLOBALS['pubban_btns']['editer'],
@@ -37,27 +37,27 @@ function exec_pubban_admin_dist() {
 		'puce_empl' => $GLOBALS['_PUBBAN_PUCES_STATUTS']['banniere']['icon'],
 	);
 
-	$milieu = recuperer_fond("prive/search", $contexte);
-	$contenu = pipeline('affiche_milieu',array('args'=>array('exec'=>'pubban_admin'),'data'=>$milieu));
+	$milieu = recuperer_fond("prive/pubban_recherche", $contexte);
+	$contenu = pipeline('affiche_milieu',array('args'=>array('exec'=>'pubbanner'),'data'=>$milieu));
 
 	if ($connect_statut == "0minirezo" ) {
 		$trash = pubban_poubelle_pleine();
-		$boutons .= icone_inline(_T('pubban:liste_pub'), generer_url_ecrire('pubban_publicite_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", $GLOBALS['spip_lang_right'])
-			. icone_inline(_T('pubban:list_empl'), generer_url_ecrire('pubban_banniere_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", $GLOBALS['spip_lang_right'])
+		$boutons .= icone_inline(_T('pubban:liste_pub'), generer_url_ecrire('publicites_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", $GLOBALS['spip_lang_right'])
+			. icone_inline(_T('pubban:list_empl'), generer_url_ecrire('bannieres_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", $GLOBALS['spip_lang_right'])
 			. ( defined('_DIR_PUBLIC_PUBBAN') && _PUBBAN_ADDS ? icone_inline(_T('pubban:page_config'), generer_url_ecrire('pubban_config'), find_in_path("img/stock_import.png"), "rien.gif", $GLOBALS['spip_lang_right']) : '')
 			. ( defined('_DIR_PUBLIC_PUBBAN') && _PUBBAN_ADDS ? icone_inline(_T('pubban:page_tarifs'), generer_url_ecrire('pubban_tarifs'), find_in_path("img/money.png"), "rien.gif", $GLOBALS['spip_lang_right']) : '')
-			. ( $trash ? icone_inline(_T('pubban:open_trash'), generer_url_ecrire('pubban_admin','mode=trash'), find_in_path("img/stock_delete.png"), "rien.gif", $GLOBALS['spip_lang_right']) : '');
-		$res = icone_horizontale(_T('pubban:nouveau_pub'), generer_url_ecrire('pubban_editer_publicite','id_pub=new'), find_in_path("img/stock_insert-object.png"), "creer.gif", false)
-			. icone_horizontale(_T('pubban:nouveau_empl'), generer_url_ecrire('pubban_editer_banniere','id_empl=new'), find_in_path("img/stock_insert-image.png"), "creer.gif", false);
+			. ( $trash ? icone_inline(_T('pubban:open_trash'), generer_url_ecrire('pubbanner','mode=trash'), find_in_path("img/stock_delete.png"), "rien.gif", $GLOBALS['spip_lang_right']) : '');
+		$res = icone_horizontale(_T('pubban:nouveau_pub'), generer_url_ecrire('publicite_edit','id_publicite=new'), find_in_path("img/stock_insert-object.png"), "creer.gif", false)
+			. icone_horizontale(_T('pubban:nouveau_empl'), generer_url_ecrire('banniere_edit','id_banniere=new'), find_in_path("img/stock_insert-image.png"), "creer.gif", false);
 		$bloc_racc = bloc_des_raccourcis($res);
 
 		//poubelle
 		if( _request('mode') == 'trash' ){
 			$stats_ferme = true;
-			$milieu = recuperer_fond("prive/pub_liste_trash",$contexte);
-			$contenu_add = pipeline('affiche_milieu',array('args'=>array('exec'=>'pubban_admin'),'data'=>$milieu))
-				. icone_inline(_T('pubban:vider_trash'), "javascript:delete_entry(\"".generer_action_auteur('vider_poubelle_pubban', false, generer_url_ecrire('pubban_admin','mode=trash'))."\", \""._T('pubban:confirm_vider_poubelle')."\");", find_in_path("img/trash-empty-accept.png"), "rien.gif", $GLOBALS['spip_lang_right'])
-				. icone_inline(_T('pubban:home'), generer_url_ecrire("pubban_admin"), find_in_path("img/stock_home.png"), "rien.gif", $GLOBALS['spip_lang_right']);
+			$milieu = recuperer_fond("prive/poubelle_liste_voir",$contexte);
+			$contenu_add = pipeline('affiche_milieu',array('args'=>array('exec'=>'pubbanner'),'data'=>$milieu))
+				. icone_inline(_T('pubban:vider_trash'), "javascript:delete_entry(\"".generer_action_auteur('vider_poubelle_pubban', false, generer_url_ecrire('pubbanner','mode=trash'))."\", \""._T('pubban:confirm_vider_poubelle')."\");", find_in_path("img/trash-empty-accept.png"), "rien.gif", $GLOBALS['spip_lang_right'])
+				. icone_inline(_T('pubban:home'), generer_url_ecrire("pubbanner"), find_in_path("img/stock_home.png"), "rien.gif", $GLOBALS['spip_lang_right']);
 		}
 		//recherche
 		elseif( strlen($search_str) ){
@@ -66,9 +66,9 @@ function exec_pubban_admin_dist() {
 			$contexte['pub'] = $search['pub'];
 			$contexte['emp'] = $search['emp'];
 			$contexte['boucle_search'] = count($contexte['pub'])+count($contexte['emp']);
-			$milieu = recuperer_fond("prive/search_results", $contexte);
-			$contenu_add = pipeline('affiche_milieu',array('args'=>array('exec'=>'pubban_admin'),'data'=>$milieu))
-				. icone_inline(_T('pubban:home'), generer_url_ecrire("pubban_admin"), find_in_path("img/stock_home.png"), "rien.gif", $GLOBALS['spip_lang_right']);
+			$milieu = recuperer_fond("prive/pubban_recherche_resultats", $contexte);
+			$contenu_add = pipeline('affiche_milieu',array('args'=>array('exec'=>'pubbanner'),'data'=>$milieu))
+				. icone_inline(_T('pubban:home'), generer_url_ecrire("pubbanner"), find_in_path("img/stock_home.png"), "rien.gif", $GLOBALS['spip_lang_right']);
 		}
 	}
 

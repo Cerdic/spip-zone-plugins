@@ -9,7 +9,7 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_pubban_editer_banniere_charger($id_empl='new', $retour=''){
+function formulaires_editer_banniere_charger($id_banniere='new', $retour=''){
 	$valeurs = array(
 		'titre' => '',
 		'titre_id' => '',
@@ -18,14 +18,14 @@ function formulaires_pubban_editer_banniere_charger($id_empl='new', $retour=''){
 		'ratio_pages' => '',
 		'statut' => '1inactif',
 	);
-	if( $id_empl != 'new' ) {
-		$emp = pubban_recuperer_banniere($id_empl);
+	if( $id_banniere != 'new' ) {
+		$emp = pubban_recuperer_banniere($id_banniere);
 		$valeurs = array_merge($valeurs, $emp);
 	}
 	return $valeurs;
 }
 
-function formulaires_pubban_editer_banniere_verifier($id_empl='new', $retour=''){
+function formulaires_editer_banniere_verifier($id_banniere='new', $retour=''){
 	$erreurs = array();
 	if(!$titre = _request('titre') OR !strlen($titre)) 
 		$erreurs['titre'] = _T('pubban:error_titre_empl');	
@@ -36,7 +36,7 @@ function formulaires_pubban_editer_banniere_verifier($id_empl='new', $retour='')
 	return $erreurs;
 }
 
-function formulaires_pubban_editer_banniere_traiter($id_empl='new', $retour=''){
+function formulaires_editer_banniere_traiter($id_banniere='new', $retour=''){
 	include_spip('inc/pubban_process');
 	$datas = array(
 		'titre' => _request('titre'),
@@ -49,15 +49,15 @@ function formulaires_pubban_editer_banniere_traiter($id_empl='new', $retour=''){
 	if (empty($datas['titre_id'])) {
 		$datas['titre_id'] = pubban_transformer_titre_id($datas['titre']);
 	}
-	if($id_empl == 'new') {
+	if($id_banniere == 'new') {
 		$instit_empl = charger_fonction('instituer_banniere', 'inc');
-		if( $id_empl = $instit_empl($datas) )
-			$redirect = generer_url_ecrire("pubban_banniere","id_empl=$id_empl");
+		if( $id_banniere = $instit_empl($datas) )
+			$redirect = generer_url_ecrire("banniere_voir","id_banniere=$id_banniere");
 	}
 	else {
 		$editer_empl = charger_fonction('editer_banniere', 'inc');
-		if ($ok = $editer_empl($id_empl, $datas))
-			$redirect = strlen($retour) ? $retour : generer_url_ecrire("pubban_banniere","id_empl=$id_empl");
+		if ($ok = $editer_empl($id_banniere, $datas))
+			$redirect = strlen($retour) ? $retour : generer_url_ecrire("banniere_voir","id_banniere=$id_banniere");
 	}
 	if($redirect){
 		include_spip('inc/headers');

@@ -9,9 +9,9 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_search_pub_charger_dist(){
+function formulaires_recherche_pubban_charger_dist(){
 	return array(
-			'action' => generer_url_ecrire('pubban_admin'),
+			'action' => generer_url_ecrire('pubbanner'),
 			'search_pubban' => _request('search_pubban')
 		);
 }

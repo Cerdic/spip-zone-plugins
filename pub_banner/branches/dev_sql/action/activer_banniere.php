@@ -1,6 +1,6 @@
 <?php
 /**
- * Change le statut des emplacements
+ * Change le statut des bannieres
  *
  * Il s'agit d'une 'action SPIP' (<i>url_action()</i>) qui doit recevoir en argument une
  * chaine construite sur le modèle : 'action-ID' avec 'action' :
@@ -26,31 +26,31 @@ function action_activer_banniere(){
 	include_spip('inc/pubban_process');
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
-	list($activer, $id_empl) = explode('-', $arg);
+	list($activer, $id_banniere) = explode('-', $arg);
 
-	if (intval($id_empl)){
-		$statut = pubban_recuperer_banniere($id_empl, "statut");
+	if (intval($id_banniere)){
+		$statut = pubban_recuperer_banniere($id_banniere, "statut");
 		$editer_empl = charger_fonction('editer_banniere', 'inc');
 		switch ($activer) {
 			case 'activer' :
 				if($statut == '1inactif') 
-					$ok = $editer_empl($id_empl, array("statut" => "2actif"));
+					$ok = $editer_empl($id_banniere, array("statut" => "2actif"));
 				break;
 			case 'desactiver' :
 				if($statut == '2actif') 
-					$ok = $editer_empl($id_empl, array("statut" => "1inactif"));
+					$ok = $editer_empl($id_banniere, array("statut" => "1inactif"));
 				break;
 			case 'rompu' :
 				if(in_array($statut, array('1inactif', '2actif')))
-					$ok = $editer_empl($id_empl, array("statut" => "4rompu"));
+					$ok = $editer_empl($id_banniere, array("statut" => "4rompu"));
 				break;
 			case 'trash' :
 				if(in_array($statut, array('1inactif', '2actif')))
-					$ok = $editer_empl($id_empl, array("statut" => "5poubelle"));
+					$ok = $editer_empl($id_banniere, array("statut" => "5poubelle"));
 				break;
 			case 'out_trash' :
 				if($statut == '5poubelle') 
-					$ok = $editer_empl($id_empl, array("statut" => "1inactif"));
+					$ok = $editer_empl($id_banniere, array("statut" => "1inactif"));
 				break;
 		}
 		if ($redirect = _request('redirect') ) {

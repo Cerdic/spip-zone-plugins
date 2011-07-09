@@ -1,8 +1,8 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	#ENV**{icone_retour}
-	[<p>(#ENV{id_empl}|!={new}|?{<:pubban:titre_cadre_modifier_empl:>,<:pubban:titre_cadre_ajouter_empl:>})</p>]
+	[<p>(#ENV{id_banniere}|!={new}|?{<:pubban:titre_cadre_modifier_empl:>,<:pubban:titre_cadre_ajouter_empl:>})</p>]
 	[<h1>(#ENV{titre})</h1>]
 </div>
-#FORMULAIRE_PUBBAN_EDITER_BANNIERE{#ENV{id_empl},#ENV{redirect}}
+#FORMULAIRE_EDITER_BANNIERE{#ENV{id_banniere},#ENV{redirect}}
 </div>

@@ -9,7 +9,7 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_pubban_stats_dist() {
+function exec_statistiques_bannieres_dist() {
 	global $connect_statut, $connect_id_auteur, $spip_lang_right, $spip_lang_left;
 	include_spip('inc/presentation');
 	include_spip('base/abstract_sql');
@@ -18,14 +18,14 @@ function exec_pubban_stats_dist() {
 	$rubrique = 'pubban';
 	$sous_rubrique = "home_pub";
 
-	$res = icone_horizontale(_T('pubban:home'), generer_url_ecrire("pubban_admin"), find_in_path("img/stock_home.png"), "rien.gif", false);
+	$res = icone_horizontale(_T('pubban:home'), generer_url_ecrire("pubbanner"), find_in_path("img/stock_home.png"), "rien.gif", false);
 	if ($connect_statut == "0minirezo") 
-		$res .= icone_horizontale(_T('pubban:liste_pub'), generer_url_ecrire('pubban_publicite_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", false)
-			. icone_horizontale(_T('pubban:list_empl'), generer_url_ecrire('pubban_banniere_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", false);
+		$res .= icone_horizontale(_T('pubban:liste_pub'), generer_url_ecrire('publicites_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", false)
+			. icone_horizontale(_T('pubban:list_empl'), generer_url_ecrire('bannieres_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", false);
 	$contexte = array();
 	$verif = sql_select("*", 'spip_pubban_stats', '', '', '', '', '');
 	if (sql_count($verif) == 0) $contexte['no_datas'] = true;
-	$milieu = recuperer_fond("prive/statistiques",$contexte);
+	$milieu = recuperer_fond("prive/pubban_statistiques",$contexte);
 
 	echo($commencer_page(_T('pubban:pubban')." - ".$titre_page, $rubrique, $sous_rubrique)), debut_gauche('', true),
 		debut_cadre_relief(find_in_path("img/ico-pubban.png"), true, "", "<br />"._T('pubban:intro_stats')),
@@ -38,7 +38,7 @@ function exec_pubban_stats_dist() {
 			. "<br />"._T('pubban:avertissement_js_necessaire')
 			. "</p></div>", "<p>&nbsp;</p>\n",
 			"<script type=\"text/javascript\"><!--\n \$(document).ready(function(){\$(\"#pubban_info_nojs\").hide(); });\n //--></script>",
-		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'pubban_admin' ), 'data' => $milieu ) ),
+		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'pubbanner' ), 'data' => $milieu ) ),
 		fin_gauche(), fin_page();
 }
 ?>

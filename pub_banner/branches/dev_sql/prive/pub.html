@@ -1,8 +1,8 @@
 <div class='cadre-formulaire-editer'>
 <div class="entete-formulaire">
 	[(#ENV**{icone_retour})]
-	[<p>(#ENV{id_pub}|!={new}|?{<:pubban:titre_cadre_modifier_pub:>,<:pubban:titre_cadre_ajouter_pub:>})</p>]
+	[<p>(#ENV{id_publicite}|!={new}|?{<:pubban:titre_cadre_modifier_pub:>,<:pubban:titre_cadre_ajouter_pub:>})</p>]
 	[<h1>(#ENV{titre})</h1>]
 </div>
-#FORMULAIRE_PUBBAN_EDITER_PUB{#ENV{id_pub},#ENV{redirect}}
+#FORMULAIRE_EDITER_PUBLICITE{#ENV{id_publicite},#ENV{redirect}}
 </div>

@@ -9,13 +9,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function pubban_declarer_tables_interfaces($interface){
+
 	// Tables principales
 	$interface['table_des_tables']['publicites'] = 'publicites';
 	$interface['table_des_tables']['bannieres'] = 'bannieres';
 	$interface['table_des_tables']['pubban_stats'] = 'pubban_stats';
 	// Table de jointure
-	$interface['tables_jointures']['publicites'][] = 'bannieres_publicites';
-	$interface['tables_jointures']['bannieres'][] = 'bannieres_publicites';
+	$interface['tables_jointures']['publicites'][] = 'publicites';
+	$interface['tables_jointures']['bannieres'][] = 'bannieres';
 	// Table des dates
 	$interface['table_date']['publicites'] = 'date_debut';
 	$interface['table_date']['publicites'] = 'date_fin';
@@ -25,6 +26,7 @@ function pubban_declarer_tables_interfaces($interface){
 }
 
 function pubban_declarer_tables_principales($tables_principales){
+
 	$spip_table_pubban = array(
 		"id_publicite"		=> "bigint(21) NOT NULL",
 		"statut"			=> "varchar(100) NOT NULL default '1inactif'",
@@ -100,13 +102,13 @@ function pubban_declarer_tables_principales($tables_principales){
 }
 
 function pubban_declarer_tables_auxiliaires($tables_auxiliaires){
+
 	$new_pub_emp = array(
 		"id_publicite" => "bigint(21) NOT NULL",
 		"id_banniere" => "bigint(21) NOT NULL"
 	);
 	$new_pub_emp_cles = array(
 		"PRIMARY KEY" => "id_publicite, id_banniere",
-		"KEY id_publicite"	=> "id_publicite",
 		"KEY id_banniere"	=> "id_banniere"
 	);
    	$tables_auxiliaires['spip_bannieres_publicites'] = array(

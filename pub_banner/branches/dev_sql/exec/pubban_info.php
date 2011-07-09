@@ -17,11 +17,11 @@ function exec_pubban_info_dist() {
 	$rubrique = 'pubban';
 	$sous_rubrique = "home_pub";
 
-	$res = icone_horizontale(_T('pubban:home'), generer_url_ecrire("pubban_admin"), find_in_path("img/stock_home.png"), "rien.gif", false)
-		. icone_horizontale(_T('pubban:page_stats'), generer_url_ecrire('pubban_stats'), find_in_path("img/stock-tool-button-color-balance.png"), "rien.gif", false);
+	$res = icone_horizontale(_T('pubban:home'), generer_url_ecrire("pubbanner"), find_in_path("img/stock_home.png"), "rien.gif", false)
+		. icone_horizontale(_T('pubban:page_stats'), generer_url_ecrire('statistiques_bannieres'), find_in_path("img/stock-tool-button-color-balance.png"), "rien.gif", false);
 	if ($connect_statut == "0minirezo") 
-		$res .= icone_horizontale(_T('pubban:liste_pub'), generer_url_ecrire('pubban_publicite_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", false)
-			. icone_horizontale(_T('pubban:list_empl'), generer_url_ecrire('pubban_banniere_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", false);
+		$res .= icone_horizontale(_T('pubban:liste_pub'), generer_url_ecrire('publicites_tous'), find_in_path("img/stock_insert-object.png"), "rien.gif", false)
+			. icone_horizontale(_T('pubban:list_empl'), generer_url_ecrire('bannieres_tous'), find_in_path("img/stock_insert-image.png"), "rien.gif", false);
 
   	$contenu = propre(_T("pubban:infos_texte"));
 

@@ -1,17 +1,17 @@
 <?php
 
 // ----------------------------
-// FONCTIONS EMPLACEMENT
+// FONCTIONS BANNIERE
 // ----------------------------
 
-function pubban_pubs_de_la_banniere($id_emp, $toutes=true){
+function pubban_pubs_de_la_banniere($id_banniere, $toutes=true){
 	include_spip('base/abstract_sql');
 	$list_pub = array();
-	$requete = sql_select("id_publicite", 'spip_bannieres_publicites', "id_banniere=".intval($id_emp), '', '', '', '');
+	$requete = sql_select("id_publicite", 'spip_bannieres_publicites', "id_banniere=".intval($id_banniere), '', '', '', '');
 	if (sql_count($requete) > 0) {
 		while ($row = spip_fetch_array($requete)) {
 			if(!$toutes){
-				$statut = pubban_recuperer_pub($row['id_publicite'], 'statut');
+				$statut = pubban_recuperer_publicite($row['id_publicite'], 'statut');
 				if($statut == '2actif')
 					$list_pub[] = $row['id_publicite'];
 			}
@@ -28,21 +28,21 @@ function pubban_pubs_de_la_banniere($id_emp, $toutes=true){
 // ----------------------------
 
 /**
- * Liste les emplacements dans lesquels la pub est présente
+ * Liste les bannieres dans lesquelles la pub est présente
  */
-function pubban_bannieres_de_la_pub($id_pub, $id_empl_verif=false){
+function pubban_bannieres_de_la_pub($id_publicite, $id_banniere_verif=false){
 	include_spip('base/abstract_sql');
 	$list_emp = array();
-	$requete = sql_select("id_banniere", 'spip_bannieres_publicites', "id_publicite=".intval($id_pub), '', '', '', '');
+	$requete = sql_select("id_banniere", 'spip_bannieres_publicites', "id_publicite=".intval($id_publicite), '', '', '', '');
 	if (sql_count($requete) > 0) {
 		while ($row = spip_fetch_array($requete)) {
 			// On ne passe plus en reference, PHP le fait tout seul
-//			array_push(&$list_emp, $row['id_empl']);
+//			array_push(&$list_emp, $row['id_banniere']);
 			array_push($list_emp, $row['id_banniere']);
 		}
 		sql_free($requete);
-		if($id_empl_verif)
-			return( in_array($id_empl_verif, $list_emp) );
+		if($id_banniere_verif)
+			return( in_array($id_banniere_verif, $list_emp) );
 		return $list_emp;
 	}
 	return false;

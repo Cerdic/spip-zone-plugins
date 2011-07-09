@@ -40,10 +40,10 @@
 	<td class="arial11">
 		<strong>
 [(#STATUT|=={5poubelle}|non)
-			<a href='[(#URL_ECRIRE{pubban_publicite,id_pub=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:btn_details:>'>
+			<a href='[(#URL_ECRIRE{publicite_voir,id_publicite=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:btn_details:>'>
 ]
 [(#STATUT|=={5poubelle}|oui)
-			<a href='[(#URL_ECRIRE{pubban_trash,id_pub=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:trash:>'>
+			<a href='[(#URL_ECRIRE{pubban_trash,id_publicite=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:trash:>'>
 ]
 			#TITRE</a>
 		</strong>
@@ -53,15 +53,15 @@
 		<a href="javascript:popup(600,600,'#URL_SITE_SPIP/?page=view_pub&id_publicite=#ID_PUBLICITE');">
 			<img src='#ENV{btn_apercu}' title='<:pubban:btn_apercu:>' alt='<:pubban:btn_apercu:>' border="0" align="absmiddle" hspace="3" />
 		</a>
-		<a href='[(#URL_ECRIRE{pubban_editer_publicite,id_pub=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]'>
+		<a href='[(#URL_ECRIRE{publicite_edit,id_publicite=#ID_PUBLICITE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]'>
 			<img src='#ENV{btn_editer}' title='<:bouton_modifier:>' alt='<:bouton_modifier:>' border="0" align="absmiddle" hspace="3" />
 		</a>
-		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,trash-#ID_PUBLICITE,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_delete:>');">
+		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,trash-#ID_PUBLICITE,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_delete:>');">
 			<img src='#ENV{btn_poubelle}' title='<:pubban:btn_supprimer:>' alt='<:pubban:btn_supprimer:>' border="0" align="absmiddle" hspace="3" />
 		</a>
 ]
 [(#STATUT|=={5poubelle}|oui)
-		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,out_trash-#ID_PUBLICITE,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_undelete:>');">
+		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_publicite,out_trash-#ID_PUBLICITE,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_undelete:>');">
 			<img src='#ENV{btn_sortie_poubelle}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabilite:>' border="0" align="absmiddle" hspace="3" />
 		</a>
 ]
@@ -95,25 +95,25 @@
 		<td class="arial11">
 			<strong>
 [(#STATUT|=={5poubelle}|non)
-				<a href='[(#URL_ECRIRE{pubban_banniere,id_empl=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:btn_details:>'>
+				<a href='[(#URL_ECRIRE{banniere_voir,id_banniere=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:btn_details:>'>
 ]
 [(#STATUT|=={5poubelle}|oui)
-			<a href='[(#URL_ECRIRE{pubban_trash,id_empl=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:trash:>'>
+			<a href='[(#URL_ECRIRE{pubban_trash,id_banniere=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]' title='<:pubban:trash:>'>
 ]
 				#TITRE</a>
 			</strong>
 		</td>
 		<td class="arial11">
 [(#STATUT|=={5poubelle}|oui)
-		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,out_trash-#ID_BANNIERE,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_undelete:>');">
+		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,out_trash-#ID_BANNIERE,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_undelete:>');">
 			<img src='#ENV{btn_sortie_poubelle}' title='<:pubban:btn_reabiliter:>' alt='<:pubban:btn_reabilite:>' border="0" align="absmiddle" hspace="3" />
 		</a>
 ]
 [(#STATUT|=={5poubelle}|non)
-		<a href='[(#URL_ECRIRE{pubban_editer_banniere,id_empl=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]'>
+		<a href='[(#URL_ECRIRE{banniere_edit,id_banniere=#ID_BANNIERE}|parametre_url{retour,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]'>
 			<img src='#ENV{btn_editer}' title='<:bouton_modifier:>' alt='<:bouton_modifier:>' border="0" align="absmiddle" hspace="3" />
 		</a>
-		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,trash-#ID_BANNIERE,[(#URL_ECRIRE{pubban_admin,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_delete_empl:>');">
+		<a href="javascript:delete_entry('[(#URL_ACTION_AUTEUR{activer_banniere,trash-#ID_BANNIERE,[(#URL_ECRIRE{pubbanner,search_pubban=#ENV{search_pubban}})]})]', '<:pubban:confirm_delete_empl:>');">
 			<img src='#ENV{btn_poubelle}' title='<:pubban:btn_supprimer:>' alt='<:pubban:btn_supprimer:>' border="0" align="absmiddle" hspace="3" />
 		</a>
 ]

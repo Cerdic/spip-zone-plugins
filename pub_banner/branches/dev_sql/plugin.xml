@@ -54,7 +54,12 @@ alors que la table 'bannieres_publicites' est bein definit
 	<bouton id='pubban' parent='naviguer'>
 		<icone>img/ico-pubban-24.png</icone>
 		<titre>pubban:pubban_titre</titre>
-		<url>pubban_admin</url>
+		<url>pubbanner</url>
+	</bouton>
+	<bouton id='pubban_stats' parent='statistiques_visites'>
+		<icone>img/ico-pubban-24.png</icone>
+		<titre>pubban:stats_pubban</titre>
+		<url>statistiques_bannieres</url>
 	</bouton>
  	<necessite id='SPIP' version='[2.0.0;]' />
 	<necessite id='spip_bonux' version='[1.3;]' />

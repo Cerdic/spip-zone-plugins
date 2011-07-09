@@ -44,7 +44,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * => define('PUBBAN_FORCE_UNINSTALL',1); pour forcer l'effacement des tables
  * => utilitaire de dev ou test
  */
-define('PUBBAN_FORCE_UNINSTALL', 0);
+define('PUBBAN_FORCE_UNINSTALL', 1);
 
 /**
  * Adresse du displayer de pub
@@ -140,18 +140,19 @@ if(test_espace_prive())
 
 /**
  * Recuperation des donnes d'une publicite
- * @param	integer	$id_pub	L'ID de la pub a recuperer
+ * @param	integer	$id_publicite	L'ID de la pub a recuperer
  * @param	string	$str	Le nom d'un paramtre ˆ rcuprer (optionnel)
  * @return array	Les donnes de la pub (ou la valeur du paramtre si demand)
  */
-function pubban_recuperer_pub($id_pub, $str=false) {
+function pubban_recuperer_publicite($id_publicite, $str=false) {
 	include_spip('base/abstract_sql');
 	$vals = array();
-	if($id_pub != '0') {
-		$resultat = sql_select("*", 'spip_publicites',"id_publicite=".intval($id_pub)	, '', '', '', '');
+	if($id_publicite != '0') {
+		$resultat = sql_select("*", 'spip_publicites',"id_publicite=".intval($id_publicite)	, '', '', '', '');
 		if (sql_count($resultat) > 0) {
 			while ($row=spip_fetch_array($resultat)) {
-				$vals['id'] = $id_pub;
+				$vals['id'] = $id_publicite;
+				$vals['id_publicite'] = $id_publicite;
 				$vals['type'] = $row['type'];
 				$vals['titre'] = $row['titre'];
 				$vals['url'] = $row['url'];
@@ -168,7 +169,7 @@ function pubban_recuperer_pub($id_pub, $str=false) {
 			}
 			sql_free($resultat);
 		}
-		$resultat_empl = sql_select("*", 'spip_bannieres_publicites',"id_publicite=".intval($id_pub), '', '', '', '');
+		$resultat_empl = sql_select("*", 'spip_bannieres_publicites',"id_publicite=".intval($id_publicite), '', '', '', '');
 		if (sql_count($resultat_empl) > 0) {
 			while ($row_empl=spip_fetch_array($resultat_empl)) {
 				$vals['banniere'][] = $row_empl['id_banniere'];
@@ -200,18 +201,19 @@ function pubban_comparer_bannieres($emp){
 
 /**
  * Recuperation des donnes d'une banniere
- * @param	integer	$id_empl	L'ID de la bannire ˆ rcuperer
+ * @param	integer	$id_banniere	L'ID de la bannire ˆ rcuperer
  * @param	string	$str	Le nom d'un paramtre ˆ rcuprer (optionnel)
  * @return array	Les donnes de la banniere (ou la valeur du paramtre si demand)
  */
-function pubban_recuperer_banniere($id_empl, $str=false) {
+function pubban_recuperer_banniere($id_banniere, $str=false) {
 	include_spip('base/abstract_sql');
 	$vals = array();
-	if($id_empl != '0') {
-		$resultat = sql_select("*", 'spip_bannieres',"id_banniere=".intval($id_empl), '', '', '', '');
+	if($id_banniere != '0') {
+		$resultat = sql_select("*", 'spip_bannieres',"id_banniere=".intval($id_banniere), '', '', '', '');
 		if (sql_count($resultat) > 0) {
 			while ($row=spip_fetch_array($resultat)) {
-				$vals['id'] = $id_empl;
+				$vals['id'] = $id_banniere;
+				$vals['id_banniere'] = $id_banniere;
 				$vals['titre'] = $row['titre'];
 				$vals['titre_id'] = $row['titre_id'];
 				$vals['width'] = $row['width'];
@@ -248,14 +250,14 @@ function pubban_recuperer_banniere_par_nom($name) {
 		return pubban_recuperer_banniere($name);
 
 	// Par "titre_id"
-	$id_empl = sql_getfetsel("id_banniere", 'spip_bannieres', "titre_id=".sql_quote($name), '', '', '', '');
-	if($id_empl)
-		return pubban_recuperer_banniere($id_empl);
+	$id_banniere = sql_getfetsel("id_banniere", 'spip_bannieres', "titre_id=".sql_quote($name), '', '', '', '');
+	if($id_banniere)
+		return pubban_recuperer_banniere($id_banniere);
 
 	// Par "titre" (compatibilite)
-	$id_empl = sql_getfetsel("id_banniere", 'spip_bannieres', "titre LIKE ('$name')", '', '', '', '');
-	if($id_empl)
-		return pubban_recuperer_banniere($id_empl);
+	$id_banniere = sql_getfetsel("id_banniere", 'spip_bannieres', "titre LIKE ('$name')", '', '', '', '');
+	if($id_banniere)
+		return pubban_recuperer_banniere($id_banniere);
 
 	// Sinon nada
 	return false;
@@ -276,11 +278,11 @@ function pubban_liste_bannieres($statut=false){
 	return $bannieres;
 }
 
-function pubban_trouver_bannieres($id_pub){
-	if($id_pub == '0') return;
+function pubban_trouver_bannieres($id_publicite){
+	if($id_publicite == '0') return;
 	include_spip('base/abstract_sql');
 	$bannieres = array();
-	$resultat = sql_select("*", 'spip_bannieres_publicites', 'id_publicite='.intval($id_pub), '', '', '', '');
+	$resultat = sql_select("*", 'spip_bannieres_publicites', 'id_publicite='.intval($id_publicite), '', '', '', '');
 	if (sql_count($resultat) > 0) {
 		while ($row=spip_fetch_array($resultat)) {
 			$bannieres[] = $row['id_banniere'];

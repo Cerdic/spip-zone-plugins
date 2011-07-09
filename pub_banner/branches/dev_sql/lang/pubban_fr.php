@@ -36,18 +36,19 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'btn_see_liste' => 'Voir la liste',
 	'banner' => 'Banni&egrave;re',
 	'banner_banner' => 'Banni&egrave;re "Banner"',
+	'banniere_desactivee' => 'Cette banni&egrave;re est d&eacute;sactiv&eacute;e ... apre&ccedil;u impossible.',
 
 // C //
 	'content_trash' => 'Contenu de la poubelle',
 	'confirm_vider_poubelle' => '&Ecirc;tes-vous s&ucirc;r de vouloir vider la poubelle ?',
 	'confirm_undelete' => 'Attention : vous avez demand&eacute; la r&eacute;habilitation d un encart publicitaire ...\n\nCliquez sur OK pour confirmer.',
-	'confirm_delete_empl' => 'Attention : vous avez demand&eacute; &agrave; mettre un emplacement publicitaire &agrave; la poubelle ...\n\nCliquez sur OK pour confirmer :',
+	'confirm_delete_empl' => 'Attention : vous avez demand&eacute; &agrave; mettre unz banni&egrave;re publicitaire &agrave; la poubelle ...\n\nCliquez sur OK pour confirmer :',
 	'clics' => 'Clics',
 	'clics_txt' => 'clic(s)',
 	'comment_ratio' => '(nombre de clics / nombre d&prime;affichages)',
 	'code_pub' => 'Code ou adresse de l\'objet &agrave; afficher',
 	'confirm_delete' => 'Attention : vous avez demand&eacute; &agrave; mettre un encart publicitaire &agrave; la poubelle ...\n\nCliquez sur OK pour confirmer :',
-	'comment_multiple_empl' => 'Vous pouvez s&eacute;lectionner plusieurs emplacements en utilisant la touche \'MAJ.\' de votre clavier.',
+	'comment_multiple_empl' => 'Vous pouvez s&eacute;lectionner plusieurs banni&egrave;res en utilisant la touche \'MAJ.\' de votre clavier.',
 	'comment_code_pub' => '<i>Pour une publicit&eacute; de type \'image\' ou \'swf\', vous ne devez indiquer ici que l\'adresse url de cette image. Pour un objet flash, vous devez en indiquer le code complet ...</i>',
 	'comment_url_optionnel' => 'Vous pouvez laisser ce champ vide, un clic sur la publicit&eacute; renverra alors sur la page d\'achat des encarts publicitaires.',
 	'comment_illimite' => '<i>Affichages et clics illimit&eacute;s ; vous pouvez pr&eacute;ciser une date de d&eacute;but ou de fin de p&eacute;riode d\'affichage.</i>',
@@ -90,12 +91,12 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'documentation_1' => 'Le plugin PUB BANNER s\'installe de la m&ecirc;me mani&egrave;re que l\'ensemble des plugins SPIP ({[article d&eacute;di&eacute; sur spip.net->http://www.spip.net/fr_article3396.html]}).
 
 Des valeurs par d&eacute;faut sont entr&eacute;es dans les tables, &agrave; savoir :
--* quatre emplacements "type", les plus r&eacute;pandus sur le web :
+-* quatre banni&egrave;res "type", les plus r&eacute;pandues sur le web :
 -** {{[skyscraper->#skyscraper]}} : la longue banni&egrave;re verticale, de 160 ou 180 sur 600 pixels,
 -** {{[leaderboard->#leaderboard]}} : la longue banni&egrave;re horizontale, de 728 sur 90 pixels,
 -** {{[banner->#banner]}} : la banni&egrave;re horizontale {standard}, de 468 sur 60 pixels,
--** {{[cube->#cube]}} : le carr&eacute;, de 250 sur 250 pixels, emplacement privil&eacute;gi&eacute; pour les encarts flash,
--* cinq exemples d\'encart publicitaires, un pour chaque emplacement, deux pour la "banner", avec divers options quand &agrave; la limite d\'affichage (nombre d\'affichages, de clics et dates encadrantes).
+-** {{[cube->#cube]}} : le carr&eacute;, de 250 sur 250 pixels, banni&egrave;re privil&eacute;gi&eacute;e pour les encarts flash,
+-* cinq exemples d\'encart publicitaires, un pour chaque banni&egrave;re, deux pour la "banner", avec divers options quand &agrave; la limite d\'affichage (nombre d\'affichages, de clics et dates encadrantes).
 
 Ces banni&egrave;res s\'int&egrave;grent dans vos squelettes en indiquant simplement la balise :
 <cadre class="spip">
@@ -122,8 +123,8 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'exemples_par_defaut' => 'Exemples (banni&egrave;res par d&eacute;faut)',
 	'error_global' => 'Il semble qu\'une erreur soit survenue ...',
 	'evo_empl' => '&Eacute;volution des performances',
-	'emplacement_pub' => 'Emplacement',
-	'empl_is' => 'Cet emplacement est',
+	'banniere_pub' => 'Banni&egrave;re',
+	'empl_is' => 'Cette banni&egrave;re est',
 	'en_pixels' => '<i>(en pixels)</i>',
 	'en_pourcent' => '<i>(en %)</i>',
 	'error_titre_empl' => 'Vous devez indiquer un titre pour votre banni&egrave;re',
@@ -132,13 +133,13 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'erreur_titre' => 'Vous devez indiquer un titre pour votre publicit&eacute; (<i>il apparaitra au passage de la souris</i>)',
 	'erreur_url' => 'Vous devez indiquer une adresse URL de redirection de la publicit&eacute;',
 	'erreur_code' => 'Veuillez saisir le code de la publicit&eacute;',
-	'erreur_empl' => 'Vous n\'avez pas choisi d\'emplacement pour votre publicit&eacute; ...',
+	'erreur_empl' => 'Vous n\'avez pas choisi de banni&egrave;re pour votre publicit&eacute; ...',
 	'erreur_url_not_url' => 'L\'adresse saisie ne semble pas &ecirc;tre une adresse web ...',
 	'erreur_url_no_response' => 'L\'adresse saisie ne r&eacute;pond pas ... &ecirc;tes vous s&ucirc;r qu\'elle soit valide ?',
 	'erreur_img_not_img' => 'L\'url saisie ne semble pas correspondre &agrave; une image ...',
 	'erreur_img_not_url' => 'L\'adresse web saisie est inaccessible ...',
 	'erreur_nb_aff' => 'Vous n\'avez pas pr&eacute;cis&eacute; de nombre d\'affichage ...',
-	'edit_pub_ok_emplacements_differents' => 'OK - Valeurs enregistr&eacute;es mais les emplacements s&eacute;lectionn&eacute;s pour la publicit&eacute; ont des tailles diff&eacute;rentes ... Cela pourra g&eacute;n&eacute;rer des erreurs d\'affichage.',
+	'edit_pub_ok_bannieres_differents' => 'OK - Valeurs enregistr&eacute;es mais les banni&egrave;res s&eacute;lectionn&eacute;es pour la publicit&eacute; ont des tailles diff&eacute;rentes ... Cela pourra g&eacute;n&eacute;rer des erreurs d\'affichage.',
 	'exporter_donnees' => 'Exporter ces données',
 
 // F //
@@ -166,13 +167,13 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 	'integer_edit' => '&Eacute;dition d\'une banni&egrave;re',
 	'intro_integer_edit' => '&Eacute;dition de banni&egrave;res',
 	'intro_integer_edit_texte' => 'Pour appeler une banni&egrave;re dans vos squelettes, indiquez la balise&nbsp;: <br /><center><b># PUBBAN{banner_id}</b></center><br />Si vous laissez le champ "Banner ID" vide, il sera g&eacute;n&eacute;r&eacute; automatiquement en utilisant le titre et en rempla&ccedil;ant les espaces par des <b>underscore</b>.<br /><br /><i>Nous attirons votre attention sur le commentaire concernant le "banner_id" des banni&egrave;res : <u>&eacute;vitez les caract&egrave;res sp&eacute;ciaux</u>! Si vous souhaitez les utiliser, faites de nombreux tests avant mise en ligne ...</i>',
-	'info_titre_banniere' => 'Titre de l\'emplacement',
-	'info_titre_id_banniere' => 'Banner_ID de l\'emplacement',
+	'info_titre_banniere' => 'Titre de la banni&egrave;re',
+	'info_titre_id_banniere' => 'Banner_ID de la banni&egrave;re',
 	'info_titre_id_comment' => '<i>Il est fortement d&eacute;conseill&eacute; d\'utiliser des caract&egrave;res accentu&eacute;s ou sp&eacute;ciaux, cela pourrait provoquer une erreur lors de l\'appel de la balise PUBBAN ...</i>',
 	'info_taille_banniere' => 'Dimensions de la banni&egrave;re',
-	'info_emplacement' => 'Statut de l\'emplacmenet',
+	'info_banniere' => 'Statut de la banni&egrave;re',
 	'info_ratio_banniere' => 'Ratio de la banni&egrave;re (<i>optionnel</i>)',
-	'intro_integer' => 'Les <i>banni&egrave;res</i> : emplacements publicitaires',
+	'intro_integer' => 'Les <i>banni&egrave;res</i> : banni&egrave;res publicitaires',
 	'intro_integer_texte' => 'Voici la liste des banni&egrave;res inscrites sur le site.<br />Les banni&egrave;res se caract&eacute;risent principalement par leurs dimensions et leur positionnement dans vos squelettes.<br /><br />Vous pouvez ici les <b>activer</b> ou les <b>d&eacute;sactiver</b>, les <i>jeter &agrave; la poubelle</i>, ainsi que les <b>modifier</b> ...<br />',
 	'intro_admin' => 'Gestion des <i>Banni&egrave;res Publicitaires</i>',
 	'info_stats' => 'Quelques chiffres ...',
@@ -191,7 +192,7 @@ Les informations y sont assimil&eacute;es plus facilement car le lecteur peut li
 
 {{{Positionnement}}}
 
-Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicitaires pr&eacute;sents en haut d'une page web, haut de page et haut de contenu, ont de meilleures performances.
+Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publicitaires pr&eacute;sentes en haut d'une page web, haut de page et haut de contenu, ont de meilleures performances.
 
 {{Les standards publicitaires apportent les cl&eacute;s pour proposer des banni&egrave;res ou construire des publicit&eacute;s.}}
 
@@ -244,7 +245,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'nouveau_empl' => 'Cr&eacute;er une nouvelle banni&egrave;re',
 	'no_empl_found' => 'Banni&egrave;re introuvable ...',
 	'no_empl_yet' => 'Il n\'y a pas encore de banni&egrave;re configur&eacute;e ...',
-	'nb_emplacements' => 'Nombre d\'emplacements',
+	'nb_bannieres' => 'Nombre de banni&egrave;re',
 	'nb_pub' => 'Nombre total de publicit&eacute;s', 
 	'nb_pub_actives' => 'Dont actives', 
 	'nb_pub_inactives' => 'Dont inactives', 
@@ -263,7 +264,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'nb_affires_pub' => 'Nombre d\'affichages restant',
 	'nb_clicres_pub' => 'Nombre de clics restant',
 	'nouveau_pub' => 'Cr&eacute;er une nouvelle publicit&eacute;',
-	'nouveau_pub_dans_emplacement' => 'Ajouter une nouvelle publicit&eacute;',
+	'nouveau_pub_dans_banniere' => 'Ajouter une nouvelle publicit&eacute;',
 
 // O //
 	'open_trash' => 'Ouvrir la poubelle',
@@ -273,7 +274,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 // P //
 	'plugin_spip' => 'un plugin pour <b>SPIP 2.0+</b>',
 	'page_infos' => 'Conseils et informations',
-	'pas_emplacement_selectionne' => 'Vous n\'avez pas s&eacute;lectionn&eacute; d\'emplacement ...',
+	'pas_banniere_selectionne' => 'Vous n\'avez pas s&eacute;lectionn&eacute; de banni&egrave;re ...',
 	'pub_edit' => '&Eacute;dition d\'un encart publicitaire',
 	'pub_is' => 'Cette publicit&eacute; est',
 	'pub_actives' => 'Liste des publicit&eacute;s actives',
@@ -329,14 +330,14 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'type' => 'Type',
 	'titre' => 'Intitul&eacute;',
 	'type_encart' => 'Encart',
-	'type_empl' => 'Emplacement',
+	'type_empl' => 'Banni&egrave;re',
 	'trash_is_empty' => 'La poubelle est vide',
 	'titre_info_pub' => 'PUBLICIT&Eacute; NUM&Eacute;RO :',
 	'titre_tablo_url' => 'URL de redirection (au clic)',
 	'titre_cadre_ajouter_pub' => 'Cr&eacute;ation d\'une nouvelle publicit&eacute;',
 	'titre_cadre_modifier_pub' => '&Eacute;dition d\'une publicit&eacute;',
 	'titre_tablo_nom' => 'Titre de la publicit&eacute;',
-	'titre_tablo_emplacement' => 'Emplacement',
+	'titre_tablo_banniere' => 'Banni&egrave;re',
 	'type_img' => 'Objet de type image',
 	'type_swf' => 'Objet flash .swf',
 	'type_flash' => 'Objet flash autre',
@@ -355,6 +356,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les emplacements publicit
 	'view_pub' => 'D&eacute;tails d\'un encart publicitaire',
 	'voir_un_apercu' => 'Voir un aper&ccedil;u (fen&ecirc;tre popup)',
 	'voir_bordure' => 'Voir les bordures des banni&egrave;res',
+	'valider_pour_forcer' => 'Validez &agrave; nouveau pour forcer l\'enregistrement de cette valeur ...',
 
 // W //
 	'width' => 'Largeur',

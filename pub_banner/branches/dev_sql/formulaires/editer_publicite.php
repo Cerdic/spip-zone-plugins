@@ -9,16 +9,16 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_pubban_editer_pub_charger_dist($id_pub='new', $retour=''){
+function formulaires_editer_publicite_charger_dist($id_publicite='new', $retour=''){
 	$valeurs = array(
-		'id_pub' => $id_pub,
+		'id_publicite' => $id_publicite,
 		'statut' => '1inactif',
 		'titre' => '',
 		'url' => $GLOBALS['meta']['adresse_site'].'/',
 		'blank' => 'oui',
 		'url_optionnel' => defined('_DIR_PUBLIC_PUBBAN') && _PUBBAN_ADDS ? 'oui' : '',
 		'objet' => '',
-		'emplacement' => _request('id_empl') ? _request('id_empl') : array(),
+		'banniere' => _request('id_banniere') ? _request('id_banniere') : array(),
 		'illimite' => 'non',
 		'affichages_restant' => '',
 		'clics_restant' => '',
@@ -26,35 +26,37 @@ function formulaires_pubban_editer_pub_charger_dist($id_pub='new', $retour=''){
 		'date_fin' => '',
 		'type' => 'img',
 	);
-	if (!is_array($valeurs['emplacement'])) {
-		$valeurs['emplacement'] = array($valeurs['emplacement']);
+	if (!is_array($valeurs['banniere'])) {
+		$valeurs['banniere'] = array($valeurs['banniere']);
 	}
-	if($id_pub != 'new') {
-		$pub = pubban_recuperer_pub($id_pub);
+	if($id_publicite != 'new') {
+		$pub = pubban_recuperer_publicite($id_publicite);
 		$valeurs = array_merge($valeurs, $pub);
 	}
 	return $valeurs;
 }
 
-function formulaires_pubban_editer_pub_verifier_dist($id_pub='new', $retour=''){
+function formulaires_editer_publicite_verifier_dist($id_publicite='new', $retour=''){
 	$erreurs = array();
 
 	if(!$titre = _request('titre')) 
 		$erreurs['titre'] = _T('pubban:erreur_titre');
-	if( !defined('_PUBBAN_ADDS') ) {
-		if(!$url = _request('url') AND !defined('_PUBBAN_ADDS') ) 
-			$erreurs['url'] = _T('pubban:erreur_url');
-		elseif(!pubban_UrlOK($url)) {
-			if(!$forcer = _request('forcer_url') || $forcer=='oui')
-				$erreurs['url'] = _T('pubban:erreur_url_no_response')
-					."<input type=\"hidden\" name=\"forcer_url\" value=\"oui\" />"
-					._T('pubban:valider_pour_forcer');
-		}
+
+	if(!$url = _request('url') AND !defined('_PUBBAN_ADDS') ) 
+		$erreurs['url'] = _T('pubban:erreur_url');
+	elseif(!pubban_UrlOK($url)) {
+		if(!$forcer = _request('forcer_url') || $forcer=='oui')
+			$erreurs['url'] = _T('pubban:erreur_url_no_response')
+				." <input type=\"hidden\" name=\"forcer_url\" value=\"oui\" /> "
+				._T('pubban:valider_pour_forcer');
 	}
+
 	if(!$objet = _request('objet')) 
 		$erreurs['objet'] = _T('pubban:erreur_code');
-	if(!$empls = _request('id_empl'))
-		$erreurs['emplacement'] = _T('pubban:pas_emplacement_selectionne');
+
+	$empls = _request('banniere');
+	if(!is_array($empls) || !count($empls))
+		$erreurs['banniere'] = _T('pubban:pas_banniere_selectionne');
 
 	if(	// illimites
 		($ill = _request('illimite') AND $ill == 'oui') OR
@@ -70,6 +72,7 @@ function formulaires_pubban_editer_pub_verifier_dist($id_pub='new', $retour=''){
 		// erreur si date debut sans date fin
 		else $erreurs['droits_dates'] = _T('pubban:manque_date_fin');
 	}
+
 	if(!isset($droits) || !$droits)
 		$erreurs['droits'] = _T('pubban:reponse_form_def_droits');
 
@@ -77,8 +80,8 @@ function formulaires_pubban_editer_pub_verifier_dist($id_pub='new', $retour=''){
 	return $erreurs;
 }
 
-function formulaires_pubban_editer_pub_traiter_dist($id_pub='new', $retour=''){
-	$empls = _request('id_empl');
+function formulaires_editer_publicite_traiter_dist($id_publicite='new', $retour=''){
+	$empls = _request('banniere');
 
 	// verification de l'objet : son extension ?
 	$objet = _request('objet');
@@ -103,25 +106,25 @@ function formulaires_pubban_editer_pub_traiter_dist($id_pub='new', $retour=''){
 				intval( pubban_transformer_nombre($clics) ) : '',
 	);
 	include_spip('inc/pubban_process');
-	if($id_pub != 'new' AND $id_pub != '0') {
-		$editer_pub = charger_fonction('editer_pub', 'inc');
-		$ok = $editer_pub($id_pub, $datas);
+	if($id_publicite != 'new' AND $id_publicite != '0') {
+		$editer_pub = charger_fonction('editer_publicite', 'inc');
+		$ok = $editer_pub($id_publicite, $datas);
 	}
 	else {
-		$instit_pub = charger_fonction('instituer_pub', 'inc');
-		$id_pub = $instit_pub($datas);
+		$instit_pub = charger_fonction('instituer_publicite', 'inc');
+		$id_publicite = $instit_pub($datas);
 	}
-	if($id_pub) {
+	if($id_publicite) {
 		$attacher = charger_fonction('attacher_pub_bannieres', 'inc');
-		$ok = $attacher($id_pub, $empls);
+		$ok = $attacher($id_publicite, $empls);
 	}
 
 	if(!pubban_comparer_bannieres($empls)) $message = array(
-		'message_ok' => _T('pubban:edit_pub_ok_emplacements_differents')
+		'message_ok' => _T('pubban:edit_pub_ok_bannieres_differents')
 	);
 	else {
 		include_spip('inc/headers');
-		$retour = generer_url_ecrire("pubban_publicite","id_pub=$id_pub");
+		$retour = generer_url_ecrire("publicite_voir","id_publicite=$id_publicite");
 		return( redirige_formulaire($retour) );
 	}
 	return $message;

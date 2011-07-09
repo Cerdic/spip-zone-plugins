@@ -1,6 +1,6 @@
 <B_pubban>
-<BOUCLE_pubban(PUBLICITES){id_publicite=#ENV{id_pub}}>
-<BOUCLE_pre(bannieres_publicites){id_publicite=#ENV{id_pub}}>
+<BOUCLE_pubban(PUBLICITES){id_publicite=#ENV{id_publicite}}>
+<BOUCLE_pre(bannieres_publicites){id_publicite=#ENV{id_publicite}}>
 	<BOUCLE_emplacement(BANNIERES){id_banniere=#ID_BANNIERE}>
 #SET{width, #WIDTH}
 #SET{height, #HEIGHT}
@@ -23,9 +23,9 @@
 			<:pubban:date_maj:> : <abbr title="[(#MAJ|date_iso)]">[(#MAJ|affdate)] [(#MAJ|affdate{H:i})]</abbr>
 		]
 	</small></p>
-	<p class='date'><strong><:pubban:emplacement_pub:>&nbsp;:&nbsp;
-<BOUCLE_empl(bannieres_publicites){id_publicite=#ENV{id_pub}}>
-		[<a href='[(#URL_ECRIRE{pubban_banniere}|parametre_url{id_empl,#ID_BANNIERE})]' title='<:pubban:btn_details:>'>(#BANNIERE{#ID_BANNIERE})</a>] / 
+	<p class='date'><strong><:pubban:banniere_pub:>&nbsp;:&nbsp;
+<BOUCLE_empl(bannieres_publicites){id_publicite=#ENV{id_publicite}}>
+		[<a href='[(#URL_ECRIRE{banniere_voir,id_banniere=#ID_BANNIERE})]' title='<:pubban:btn_details:>'>(#BANNIERE{#ID_BANNIERE})</a>] / 
 </BOUCLE_empl>
 	</strong></p>
 	<p class='date'>
@@ -72,7 +72,7 @@
 			{url=#URL}
 			{width=#GET{width}}
 			{height=#GET{height}}
-			{id_pub=#ID_PUBLICITE}
+			{id_publicite=#ID_PUBLICITE}
 			{nom_pub=#TITRE}
 		)]
 	</div>

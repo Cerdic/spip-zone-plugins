@@ -9,7 +9,7 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function exec_pubban_banniere_tous_dist() {
+function exec_bannieres_tous_dist() {
 	global $connect_statut, $connect_id_auteur, $spip_lang_right;
 	if ($connect_statut != "0minirezo" ) { include_spip('inc/minipres'); echo minipres(); exit; }
 	include_spip('inc/presentation');
@@ -18,11 +18,11 @@ function exec_pubban_banniere_tous_dist() {
 	$rubrique = 'pubban';
 	$sous_rubrique = "home_pub";
 
-	$res = icone_horizontale(_T('pubban:home'), generer_url_ecrire("pubban_admin"), find_in_path("img/stock_home.png"), "rien.gif", false)
-		. icone_horizontale(_T('pubban:nouveau_empl'), generer_url_ecrire('pubban_editer_banniere','id_empl=new'), find_in_path("img/stock_insert-image.png"), "creer.gif", false)
-		. icone_horizontale(_T('pubban:page_stats'), generer_url_ecrire('pubban_stats'), find_in_path("img/stock-tool-button-color-balance.png"), "rien.gif", false);
+	$res = icone_horizontale(_T('pubban:home'), generer_url_ecrire("pubbanner"), find_in_path("img/stock_home.png"), "rien.gif", false)
+		. icone_horizontale(_T('pubban:nouveau_empl'), generer_url_ecrire('banniere_edit','id_banniere=new'), find_in_path("img/stock_insert-image.png"), "creer.gif", false)
+		. icone_horizontale(_T('pubban:page_stats'), generer_url_ecrire('statistiques_bannieres'), find_in_path("img/stock-tool-button-color-balance.png"), "rien.gif", false);
 	$trash = pubban_poubelle_pleine();
-	if($trash) $res .= icone_horizontale(_T('pubban:open_trash'), generer_url_ecrire('pubban_admin','mode=trash'), find_in_path("img/stock_delete.png"), "rien.gif", false);
+	if($trash) $res .= icone_horizontale(_T('pubban:open_trash'), generer_url_ecrire('pubbanner','mode=trash'), find_in_path("img/stock_delete.png"), "rien.gif", false);
 
 	$contexte = array(
 		'redirect'		=> generer_url_ecrire("pubban_pub"),
@@ -41,7 +41,7 @@ function exec_pubban_banniere_tous_dist() {
 		_T("pubban:intro_integer_texte"), _T("pubban:voir_page"), 
 		icone_horizontale(_T('pubban:page_infos'), generer_url_ecrire('pubban_info'), find_in_path("img/status-dock-24.png"), "rien.gif", false),
   		fin_cadre_relief(true), bloc_des_raccourcis($res), creer_colonne_droite('', true), debut_droite('', true),
-		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'pubban_banniere_tous' ), 'data' => $milieu ) ),
+		pipeline('affiche_milieu', array( 'args' => array( 'exec' => 'bannieres_tous' ), 'data' => $milieu ) ),
 		fin_gauche(), fin_page();
 }
 ?>
