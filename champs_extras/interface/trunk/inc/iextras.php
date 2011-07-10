@@ -67,4 +67,25 @@ function iextras_get_extras_tries_par_table(){
 	}
 	return $extras_tries;
 }
+
+/**
+ * Compter les saisies extras d'un objet
+ *
+ * @param 
+ * @return 
+**/
+function compter_champs_extras($objet) {
+	static $objets = array();
+	if (isset($objets[$objet])) {
+		return $objets[$objet];
+	}
+	
+	include_spip('inc/saisies');
+	if ($s = unserialize( $GLOBALS['meta'][ 'champs_extras_'.$objet ] )) {
+		$s = saisies_lister_par_nom($s);
+		return $objets[$objet] = count($s);
+	}
+	
+	return $objets[$objet] = 0;
+}
 ?>

@@ -60,6 +60,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_des_extras_possibles' => 'Liste des champs pr&eacute;sents non g&eacute;r&eacute;s',
 	'liste_objets_applicables' => 'Liste des objets éditoriaux',
 	
+	//N
+	'nb_element' => "1 élément",
+	'nb_elements' => "@nb@ éléments",
+	
 	//P
 	'precisions_pour_class' => 'Ajouter des classes CSS sur l\'&eacute;l&eacute;ment,
 		s&eacute;par&eacute;es par un espace. Exemple : "inserer_barre_edition" pour un bloc
