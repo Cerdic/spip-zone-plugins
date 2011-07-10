@@ -1,12 +1,12 @@
 <plugin spip="[2.1.0;2.3.0-dev)" >
-<nom>Base CSS P&eacute;tronille&nbsp;2</nom>
-<version>2.1.5</version>
-<etat>test</etat>
+<nom>Base CSS</nom>
+<version>2.1.6</version>
+<etat>stable</etat>
 <icon>prive/img/petronille.png</icon>
 <description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
 de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
 </description>
-<lien>http://www.spip-contrib.net/?rubrique214</lien>
+<lien>http://www.spip-contrib.net/3752</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <categorie>outil</categorie>
 <prefix>basecss</prefix>
@@ -23,14 +23,14 @@ de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;gl
 <utilise id="typoenluminee" />
 </plugin>
 <plugin spip="[2.3.0-dev;]" >
-<nom>Base CSS P&eacute;tronille&nbsp;2</nom>
+<nom>Base CSS</nom>
 <version>2.1.6</version>
-<etat>test</etat>
+<etat>stable</etat>
 <icon>prive/img/petronille.png</icon>
 <description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
 de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
 </description>
-<lien>http://www.spip-contrib.net/?rubrique214</lien>
+<lien>http://www.spip-contrib.net/3752</lien>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
 <categorie>outil</categorie>
 <prefix>basecss</prefix>

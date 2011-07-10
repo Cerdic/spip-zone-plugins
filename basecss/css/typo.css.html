@@ -20,7 +20,8 @@
 #SET{color,#CONFIG{basecss/typo/color,#222222}} [ color: (#GET{color});]
 */
 
-html { font-size: 100.01%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+html { font-size: 100.01%; } /* pour IE < 6 */
+/* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ et http://forum.alsacreations.com/topic-4-54377-1.html */
 body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
 
 /* Titraille / Intertitres */
