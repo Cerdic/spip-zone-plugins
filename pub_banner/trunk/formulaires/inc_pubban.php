@@ -14,7 +14,7 @@ function formulaires_inc_pubban_charger_dist(){
 	include_spip('base/abstract_sql');
 	$id_banniere = _request('empl');
 	$tout = _request('tout') ? _request('tout') : false;
-	$banniere = pubban_recuperer_banniere_par_nom(_request('empl'));
+	$banniere = pubban_recuperer_banniere_par_nom($id_banniere);
 	if(!$tout && $banniere['statut'] != '2actif') return;
 
 	$list_pub = pubban_pubs_de_la_banniere($banniere['id'], false);
@@ -34,7 +34,10 @@ function formulaires_inc_pubban_charger_dist(){
 		$affires = $tableau['affichages_restant'];
 		$affi = $tableau['affichages'];
 	}
-	if(!strlen($url) AND _PUBBAN_ADDS) $url = $GLOBALS['meta']['adresse_site'].'/?page='.PUBBAN_SKEL_ADDS;
+/*
+	if(!strlen($url) AND _PUBBAN_ADDS) 
+		$url = $GLOBALS['meta']['adresse_site'].'/?page='.PUBBAN_SKEL_ADDS;
+*/
 	$datas['affichages'] = $affi+1;
 	if($affires != 0) {
 		$datas['affichages_restant'] = $affires-1;

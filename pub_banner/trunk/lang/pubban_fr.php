@@ -155,8 +155,11 @@ Suivie du nom de la banni&egrave;re que vous souhaitez afficher. La balise est r
 
 // I //
 	'inactif' => 'Inactiv&eacute;',
-	'intro_stats' => 'Lecture des statistiques',
-	'intro_texte_stats' => 'Les chiffres des statistiques permettent d\'estimer l\'efficacit&eacute; des encarts publicitaires : en particulier, <b>le ratio global</b> indique le nombre de clic par rapport au nombre d\'affichage des encarts.<br /><br />Il est int&eacute;ressant de comparer les ratios des banni&egrave;res en fonction de leur positionnement notamment.<br /><br /><i>(cf. LICENSES en bas de page)</i><br />',
+	'intro_stats' => 'Statistiques',
+	'intro_stats_banner' => 'Lecture des statistiques',
+	'intro_texte_stats_banner' => 'Les chiffres des statistiques permettent d\'estimer l\'efficacit&eacute; des encarts publicitaires : en particulier, <b>le ratio global</b> indique le nombre de clic par rapport au nombre d\'affichage des encarts.<br /><br />Il est int&eacute;ressant de comparer les ratios des banni&egrave;res en fonction de leur positionnement notamment.<br /><br /><i>(cf. LICENSES en bas de page)</i><br />',
+	'intro_stats_pub' => 'Lecture des statistiques',
+	'intro_texte_stats_pub' => '',
 	'info_evo' => '10 blocs * 10 jours (100 derniers jours)',
 	'intro_pub' => 'Encarts publicitaires',
 	'intro_pub_texte' => 'Voici la liste des publicit&eacute;s inscrites sur le site.<br /><br />Vous pouvez ici les <b>activer</b> ou les <b>d&eacute;sactiver</b>, les <i>jeter &agrave; la poubelle</i>, ainsi que les <b>modifier</b> ou <b>obtenir un aper&ccedil;u</b> ...<br /><br />Les publicit&eacute;s <i>obsol&egrave;tes</i> ont une validit&eacute; d&eacute;pass&eacute;e : nombre de clics ou d\'affichages atteints, dates r&eacute;volues.',
@@ -231,7 +234,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 // L //
 	'listing_empl' => 'Liste des publicit&eacute;s de cette banni&egrave;re',
 	'list_empl' => 'Liste des banni&egrave;res',
-	'licence_stats' => '<i><b>LICENCES :</b><br /><b>\'wz_jsgraphics.js\'</b> :: v. 2.33 - (c) 2002-2004 Walter Zorn [<a href="http://www.walterzorn.com" target="_blank">www.walterzorn.com</a>]<br /><b>\'graph.js\', \'line.js\' & \'pie.js\'</b> :: (c) Balamurugan S. 2005 [<a href="http://www.jexp.com" target="_blank">www.jexp.com</a>]</i>',
+	'licence_stats' => '{{LICENCES :}}<br />{{\'wz_jsgraphics.js\'}} :: v. 2.33 - (c) 2002-2004 Walter Zorn ([www.walterzorn.com->http://www.walterzorn.com])<br />{{\'graph.js\', \'line.js\' & \'pie.js\'}} :: (c) Balamurugan S. 2005 ([www.jexp.com->http://www.jexp.com])',
 	'liste_pub' => 'Liste des publiclit&eacute;s',
 	'leaderboard_banner' => 'Banni&egrave;re "Leaderboard"',
 	'licence' => 'Copyright © 2009 [Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr] distribué sous licence [Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l\'Identique->http://creativecommons.org/licenses/by-sa/3.0/].',
@@ -289,7 +292,9 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 	'page_stats' => 'Page de statistiques',
 	'prerequis' => 'Pr&eacute;-requis',
 	'pratique' => 'Dans la pratique',
-
+	'pubban_stats_pub' => 'Statistiques des publicit&eacute;s',
+	'pubban_stats_banner' => 'Statistiques des banni&egrave;res',
+	
 // R //
 	'retour_liste_empl' => 'Retour &agrave; la liste des banni&egrave;res',
 	'ratio_comment' => 'Quotient pages pr&eacute;sentant la banni&egrave;re / pages totales.',
@@ -352,7 +357,7 @@ Les nombreuses &eacute;tudes statistiques montrent que les banni&egrave;res publ
 
 // V //
 	'vider_trash' => 'Vider la poubelle',
-	'voir_page' => '<br /><b>Voir la page :',
+	'voir_page' => '<br /><b>Voir la page :</b>',
 	'view_pub' => 'D&eacute;tails d\'un encart publicitaire',
 	'voir_un_apercu' => 'Voir un aper&ccedil;u (fen&ecirc;tre popup)',
 	'voir_bordure' => 'Voir les bordures des banni&egrave;res',

@@ -37,12 +37,10 @@ function balise_CLIC_BANNIERE_dyn($p, $id_publicite, $id_banniere) {
 		}
 		sql_updateq('spip_pubban_stats', array("clics" => $verif_clic + 1), "date IN ('".$date_stats."') AND id_banniere=".$banniere['id'], '');
 	}
-/*
 	if($redirect){
 		include_spip('inc/headers');
 		redirige_par_entete($redirect);
 	}
-*/
 }
 
 ?>
