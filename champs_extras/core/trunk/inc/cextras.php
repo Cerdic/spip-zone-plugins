@@ -33,25 +33,11 @@ class ChampExtra{
 
 	var $_id = ''; // identifiant de ce champ extra
 
-	// calcules a la volee
-	var $_type = ''; // rubrique
-	var $_objet = ''; // rubriques
-
-
-
 
 	// constructeur
 	function ChampExtra($params=array()) {
 		$this->definir($params);
-
-		// ne pas definir les objets à la creation
-		// car au moment de l'appel de declarer_table_objet_sql
-		// il peut y avoir une reentrance, via table_objet, surnoms,
-		// dans declarer_table_objet_sql, renvoyant alors 0, puis aucun surnom,
-		// et ne calculant finalement pas un table_objet correct.
-		// On definit donc plus tard, au besoin.
-		# $this->definir_raccourcis();
-
+		// ne pas definir les objets (objet_type, table_objet) à la creation
 	}
 
 
