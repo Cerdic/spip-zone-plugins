@@ -1,6 +1,6 @@
 <?php
 
-$GLOBALS['jeux_base_version'] = 0.16;
+$GLOBALS['jeux_base_version'] = 0.17;
 
 function jeux_install($install){
 	switch($install) {
@@ -18,14 +18,9 @@ function jeux_install($install){
 
 function jeux_vider_tables() {
 	include_spip('base/abstract_sql');
-	sql_drop_table("spip_jeux");
+	sql_drop_table('spip_jeux');
 	sql_drop_table("spip_jeux_resultats");
 	effacer_meta('jeux_base_version');
-
-}
-
-function jeux_sql_showtable($table, $table_spip=false, $serveur='') {
-	return sql_showtable($table, $table_spip, $serveur);
 
 }
 
@@ -52,7 +47,7 @@ function jeux_verifier_base(){
 		}
 		if ($current_version<($test_version=0.11)){
 			// ajout du champ 'nom' a la table spip_jeux, si pas deja existant
-			$desc = jeux_sql_showtable("spip_jeux", true);
+			$desc = sql_showtable('spip_jeux', true);
 			if (!isset($desc['field']['nom'])){
 				sql_alter("TABLE spip_jeux ADD `nom` text DEFAULT '' NOT NULL AFTER `date`");
 				// ajout d'un nom par defaut aux jeux existants
@@ -65,53 +60,64 @@ function jeux_verifier_base(){
 			if (!isset($desc['field']['titre'])){
 				sql_alter("TABLE spip_jeux ADD `titre` text DEFAULT '' NOT NULL AFTER `nom`");
 				// ajout d'un titre par defaut aux jeux existants
-				$res = sql_select(array('id_jeu'), "spip_jeux");
+				$res = sql_select(array('id_jeu'), 'spip_jeux');
 				$sans = _T('jeux:sans_titre_prive');
 				while ($row = sql_fetch($res))
-					sql_update("spip_jeux", array('titre'=>$sans), "id_jeu=".$row['id_jeu']);
+					sql_update('spip_jeux', array('titre'=>$sans), "id_jeu=".$row['id_jeu']);
 			}
 			jeux_maj_version($current_version, $test_version);
 		}
 		if ($current_version<($test_version=0.12)){
 			// changement de noms 'titre' => 'titre_prive' et 'nom' => 'type_jeu'
-			$desc = jeux_sql_showtable("spip_jeux", true);
+			$desc = sql_showtable('spip_jeux', true);
 			if (isset($desc['field']['titre']))
-				sql_alter('TABLE `spip_jeux` CHANGE `titre` `titre_prive` TEXT');
+				sql_alter('TABLE spip_jeux CHANGE `titre` `titre_prive` TEXT');
 			if (isset($desc['field']['nom']))
-				sql_alter('TABLE `spip_jeux` CHANGE `nom` `type_jeu` TEXT');
+				sql_alter('TABLE spip_jeux CHANGE `nom` `type_jeu` TEXT');
 			jeux_maj_version($current_version, $test_version);
 		}
 		if ($current_version<($test_version=0.13)){
 			// suppression de 'titre' et 'nom'
-			$desc = jeux_sql_showtable("spip_jeux", true);
+			$desc = sql_showtable('spip_jeux', true);
 			if (isset($desc['field']['titre']))
-				sql_alter('TABLE `spip_jeux` DROP `titre`');
+				sql_alter('TABLE spip_jeux DROP `titre`');
 			if (isset($desc['field']['nom']))
-				sql_alter('TABLE `spip_jeux` DROP `nom`');
+				sql_alter('TABLE spip_jeux DROP `nom`');
 			jeux_maj_version($current_version, $test_version);
 		}
 		if ($current_version<($test_version=0.14)){
 			// ajout de 'total'
-			$desc = jeux_sql_showtable("spip_jeux_resultats", true);
+			$desc = sql_showtable("spip_jeux_resultats", true);
 			if (!isset($desc['field']['total']))
-				sql_alter('TABLE `spip_jeux_resultats` ADD `total` int(12) NOT NULL DEFAULT 0 AFTER `resultat_long`');
+				sql_alter('TABLE spip_jeux_resultats ADD `total` int(12) NOT NULL DEFAULT 0 AFTER `resultat_long`');
 			jeux_maj_version($current_version, $test_version);
 		}
 		if ($current_version<($test_version=0.15)){
 			// ajout de 'resultat_unique'
-			$desc = jeux_sql_showtable("spip_jeux", true);
+			$desc = sql_showtable('spip_jeux', true);
 			if (!isset($desc['field']['resultat_unique']))
-				sql_alter("TABLE `spip_jeux` ADD `resultat_unique` NOT NULL DEFAULT 'non'");
+				sql_alter("TABLE spip_jeux ADD `resultat_unique` NOT NULL DEFAULT 'non'");
 			jeux_maj_version($current_version, $test_version);
 		}
 		if ($current_version<($test_version=0.16)){
 			// fusion de 'resultat_unique' et 'enregistrer_resultat' vers 'type_resultat'
 			// types d'enregistrement disponibles : 'defaut', 'aucun', 'premier', 'dernier', 'meilleur', 'tous'
-			sql_alter('TABLE `spip_jeux` CHANGE `resultat_unique` `type_resultat` VARCHAR(10)');
+			sql_alter('TABLE spip_jeux CHANGE `resultat_unique` `type_resultat` VARCHAR(10)');
 			sql_updateq('spip_jeux',array('type_resultat'=>'premier'),  "`type_resultat`='oui'");
 			sql_updateq('spip_jeux',array('type_resultat'=>'dernier'), "`type_resultat`='non'");
 			sql_updateq('spip_jeux',array('type_resultat'=>'aucun'), "`enregistrer_resultat`='non'");
-			sql_alter('TABLE `spip_jeux` DROP `enregistrer_resultat`');
+			sql_alter('TABLE spip_jeux DROP `enregistrer_resultat`');
+			jeux_maj_version($current_version, $test_version);
+		}
+		if ($current_version<($test_version=0.17)){
+			// tenir compte du bug sur les prefixes
+			$desc = sql_showtable('spip_jeux', true);
+			if (isset($desc['field']['titre']))
+				sql_alter('TABLE spip_jeux CHANGE `titre` `titre_prive` TEXT');
+			if (isset($desc['field']['nom']))
+				sql_alter('TABLE spip_jeux CHANGE `nom` `type_jeu` TEXT');
+			if (!isset($desc['field']['resultat_unique']))
+				sql_alter("TABLE spip_jeux ADD `resultat_unique` VARCHAR(10) NOT NULL DEFAULT 'non'");
 			jeux_maj_version($current_version, $test_version);
 		}
 		
