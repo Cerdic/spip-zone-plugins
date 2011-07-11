@@ -6,6 +6,7 @@
 	<h4>&nbsp;#ENV{boucle_search}[ (#ENV{boucle_search}|singulier_ou_pluriel{pubban:result_match,pubban:results_match})]</h4>
 })]
 </div>
+
 <div class='titrem deplie' onmouseover="jQuery(this).depliant('#pubban_liste_pub');"><a href='#' onclick="return jQuery(this).depliant_clicancre('#pubban_liste_pub');" class='titremancre'></a><:pubban:search_results:></div>
 <div id='pubban_liste_pub' class='bloc_depliable blocdeplie'>
 <table border='0' cellpadding='3' cellspacing='0' width='100%' class='verdana1'>
@@ -16,9 +17,7 @@
 	<th><:pubban:outils:></th>
 	</tr>
 
-<BOUCLE_pourpub(POUR){tableau #ENV{pub}}>
-<B_pubban>
-	<BOUCLE_pubban(PUBLICITES){id_publicite=#VALEUR}>
+<BOUCLE_pubban(PUBLICITES){id_publicite IN #ENV{pub}}>
 	<tr class='tr_liste'>
 	<td class="arial11">
 [(#STATUT|=={1inactif}|oui)
@@ -67,13 +66,9 @@
 ]
 	</td>
 	</tr>
-	</BOUCLE_pubban>
-</B_pubban>
-</BOUCLE_pourpub>
+</BOUCLE_pubban>
 
-<BOUCLE_pouremp(POUR){tableau #ENV{emp}}>
-<B_pubban2>
-	<BOUCLE_pubban2(BANNIERES){id_banniere=#VALEUR}>
+<BOUCLE_pubban2(BANNIERES){id_banniere IN #ENV{emp}}>
 	<tr class='tr_liste'>
 	<td class="arial11">
 [(#STATUT|=={1inactif}|oui)
@@ -119,9 +114,8 @@
 ]
 		</td>
 	</tr>
-	</BOUCLE_pubban2>
-</B_pubban2>
-</BOUCLE_pouremp>
+</BOUCLE_pubban2>
+
 </table>
 </div>
 </div>

@@ -17,24 +17,4 @@ function pubban_taches_generales_cron($taches_generales){
 	return $taches_generales;
 }
 
-function pubban_jquery_plugins($scripts){
-	$scripts[] = "javascripts/jquery.bgiframe.js";
-	$scripts[] = "javascripts/jquery.dimensions.js";
-	$scripts[] = "javascripts/jquery.tooltip.js";
-	return $scripts;
-}
-
-/**
- * Header des pages exec
- */
-function pubban_header_prive($texte) {
-	$texte .= "<link rel='stylesheet' type='text/css' href='".find_in_path("javascripts/jquery.tooltip.css")."' media='all' />"
-		."<script type=\"text/javascript\"><!--
-$(document).ready(function(){
-	$('.pubban_tltp').tooltip({ track: true, showURL: false, delay: 0, left: -30, extraClass: 'pubban' });
-});
-//--></script>";
-	return $texte;
-}
-
 ?>

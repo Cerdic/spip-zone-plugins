@@ -20,7 +20,7 @@ function exec_publicite_edit_dist() {
 	$id_publicite = _request('id_publicite') ? _request('id_publicite') : 'new';
 
 	$retour = _request('retour') ? _request('retour') : (
-		($id_publicite == 'new') ? generer_url_ecrire("publicites_tous") : generer_url_ecrire("pubban_pub","id_publicite=$id_publicite")
+		($id_publicite == 'new') ? generer_url_ecrire("publicites_tous") : generer_url_ecrire("publicite_voir","id_publicite=$id_publicite")
 	);
 	$contexte = array(
 		'id_publicite' => $id_publicite,

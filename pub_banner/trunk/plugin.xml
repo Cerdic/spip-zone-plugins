@@ -21,7 +21,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 
 -* La page de statistiques du plugin est une adaptation libre du script '{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}' d&#233;velopp&#233; par {{Vincent Roseberry}} ({sous licence GPL &#224; l'&#233;poque}).
 	</description>
-	<version>1.25</version>
+	<version>1.26</version>
 	<version_base>0.8</version_base>
 	<etat>dev</etat>
  	<icon>img/ico-pubban.png</icon>
@@ -33,10 +33,6 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 	<chemin dir='public' type='public' />
 	<chemin dir='prive' type='prive' />
 	<chemin dir='' />
-    <pipeline>
-        <nom>header_prive</nom>
-		<inclure>pubban_pipelines.php</inclure>
-    </pipeline>
 	<pipeline>
         <nom>declarer_tables_interfaces</nom>
         <inclure>base/pubban_tables.php</inclure>
@@ -51,10 +47,6 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 	</pipeline>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
-		<inclure>pubban_pipelines.php</inclure>
-	</pipeline>	
-	<pipeline>
-		<nom>jquery_plugins</nom>
 		<inclure>pubban_pipelines.php</inclure>
 	</pipeline>	
 	<bouton id='pubban' parent='naviguer'>

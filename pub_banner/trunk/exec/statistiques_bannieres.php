@@ -29,7 +29,7 @@ function exec_statistiques_bannieres_dist() {
 
 	echo($commencer_page(_T('pubban:pubban')." - ".$titre_page, $rubrique, $sous_rubrique)), debut_gauche('', true),
 		debut_cadre_relief(find_in_path("img/ico-pubban.png"), true, "", "<br />"._T('pubban:intro_stats')),
-  		_T("pubban:intro_texte_stats"), _T("pubban:voir_page"), icone_horizontale(_T('pubban:page_infos'), generer_url_ecrire('pubban_info'), find_in_path("img/status-dock-24.png"), "rien.gif", false),
+  		_T("pubban:intro_texte_stats_banner"), _T("pubban:voir_page"), icone_horizontale(_T('pubban:page_infos'), generer_url_ecrire('pubban_info'), find_in_path("img/status-dock-24.png"), "rien.gif", false),
   		fin_cadre_relief(true), bloc_des_raccourcis($res),
 		creer_colonne_droite('', true), debut_droite('', true), gros_titre($titre_page, '', false),
 		"\n<div id='pubban_info_nojs' class='verdana2' style='text-align: justify;border:1px solid #404040;padding:1em;'><p>"

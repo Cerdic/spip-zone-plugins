@@ -17,6 +17,8 @@ function pubban_declarer_tables_interfaces($interface){
 	// Table de jointure
 	$interface['tables_jointures']['publicites'][] = 'publicites';
 	$interface['tables_jointures']['bannieres'][] = 'bannieres';
+	$interface['tables_jointures']['bannieres_publicites'][] = 'publicites';
+	$interface['tables_jointures']['bannieres_publicites'][] = 'bannieres';
 	// Table des dates
 	$interface['table_date']['publicites'] = 'date_debut';
 	$interface['table_date']['publicites'] = 'date_fin';

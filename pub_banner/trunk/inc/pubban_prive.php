@@ -94,9 +94,9 @@ function pubban_search($str){
 	// Recherche dans les publicites
 	$ban_str = 'id_banniere=';
 	$ban_max = strlen($ban_str);
-	if(substr_count($str, $ban_str) != 0 AND is_numeric(substr($str, $ban_str))) {
-		$id_banniere = substr($str, $ban_str);
-		$pub = sql_select("id_publicite", 'spip_publicites', "id_banniere=".intval($id_banniere), '', '', '', '');
+	if(substr_count($str, $ban_str) != 0 AND is_numeric(substr($str, $ban_max))) {
+		$id_banniere = substr($str, $ban_max);
+		$pub = sql_select("id_publicite", 'spip_bannieres_publicites', "id_banniere=".intval($id_banniere), '', '', '', '');
 		while ($row = spip_fetch_array($pub)) {
 			$results['pub'][$i] = $row['id_publicite'];
 			$i++;
