@@ -108,6 +108,17 @@ options:
           type: 'entier'
           options:
             min: 1
+      -
+        saisie: 'radio'
+        options:
+          nom: 'autocomplete'
+          label: '<:saisies:option_autocomplete_label:>'
+          explication: '<:saisies:option_autocomplete_explication:>' 
+          datas:
+            defaut: '<:saisies:option_autocomplete_defaut:>'
+            on: '<:saisies:option_autocomplete_on:>'
+            off: '<:saisies:option_autocomplete_off:>'
+          defaut: 'defaut'
   -
     saisie: 'fieldset'
     options:

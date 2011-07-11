@@ -29,6 +29,11 @@
 [(#REM) Pas de HTML5, pas de datas]
 #SET{datas, #HTML5|?{#GET{datas}}}
 
+[(#REM)  l'attribut autocomplete ne peut avoir pour valeur que on ou off ]
+#SET{val_autocomplete, #ARRAY}
+#SET{val_autocomplete, #GET{val_autocomplete}|push{on}}
+#SET{val_autocomplete, #GET{val_autocomplete}|push{off}}
+
 <B_selection>
 #SET{list_id,champ_#ENV{nom}_datas}
 <datalist id="#GET{list_id}">
@@ -37,4 +42,4 @@
 ]</BOUCLE_selection>
 </datalist>
 </B_selection>
-<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ list="(#GET{list_id})"][ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
+<input type="#GET{type}" name="#ENV{nom}" class="#GET{type}[ (#ENV{class})]" id="champ_#ENV{nom}"[ list="(#GET{list_id})"][ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"][(#GET{val_autocomplete}|find{#ENV{autocomplete}}|oui) autocomplete="#ENV{autocomplete}"] />
