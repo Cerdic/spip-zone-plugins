@@ -1,7 +1,7 @@
 <plugin>
 
 	<nom>Pr&eacute;-prod</nom>
- 	<version>1.1.1</version>
+ 	<version>1.1.2</version>
 
  	<prefix>preprod</prefix>
  	<categorie>outil</categorie>
@@ -18,7 +18,7 @@
 	<etat>dev</etat>
 
  	<auteur>
-	Cyril Marion, Nadine Pavot, [Ateliers CYM->http://www.cym.fr]
+	Cyril Marion [Ateliers CYM->http://www.cym.fr]
  	</auteur>
 
 	<pipeline>
