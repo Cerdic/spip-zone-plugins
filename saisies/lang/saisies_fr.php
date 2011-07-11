@@ -35,7 +35,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.',
-
+	
+	// I
+	'info_configurer_saisies' => 'Page de test des Saisies',
+	
 	// L
 	'label_annee' => 'Année',
 	'label_jour' => 'Jour',
