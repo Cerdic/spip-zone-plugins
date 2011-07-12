@@ -324,7 +324,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'nb_comptes_importees_en_ms_dont_' => '@nb@ fiches import&#233;es en @ms@ ms. dont : '
 , 'nb_fiches_crees' => '@nb@ comptes cr&#233;&#233;s'
 , 'nb_comptes_modifies' => '@nb@ comptes modifi&#233;s'
-, 'nb_comptes_abonnes' => '@nb@ comptes abonn&#233;s'
+, 'nb_auteurs_exists' => '@nb@ comptes d&#233;j&#224; dans la base'
+, 'nb_abos_enregistres_pour_nb_listes' => '@nb@ abonnements enregistr&#233;s pour @nb@ listes.'
 , 'nb_comptes_ignores' => '@nb@ comptes ignor&#233;s (d&#233;j&#224; dans la base)'
 , 'format_de_reception_' => 'Format de r&#233;ception : '
 
