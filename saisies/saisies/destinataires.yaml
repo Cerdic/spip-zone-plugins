@@ -73,3 +73,5 @@ defaut:
   options:
     label: '<:saisies:saisie_destinataires_titre:>'
     choix_destinataires: [1,2,3,4]
+    # champs extras (definition du champ sql)
+    sql: 'text DEFAULT "" NOT NULL'

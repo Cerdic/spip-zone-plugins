@@ -25,3 +25,5 @@ options:
 defaut:
   options:
     label: '<:saisies:saisie_hidden_titre:>'
+    # champs extras (definition du champ sql)
+    sql: 'text DEFAULT "" NOT NULL'

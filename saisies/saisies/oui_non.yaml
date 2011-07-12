@@ -85,3 +85,5 @@ options:
 defaut:
   options:
     label: '<:saisies:saisie_oui_non_titre:>'
+    # champs extras (definition du champ sql)
+    sql: 'varchar(3) DEFAULT "" NOT NULL'

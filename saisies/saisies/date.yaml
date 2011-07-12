@@ -93,5 +93,7 @@ defaut:
   options:
     label: '<:saisies:saisie_date_titre:>'
     size: 40
+    # champs extras (definition du champ sql)
+    sql: 'datetime DEFAULT "0000-00-00 00:00:00" NOT NULL'
   verifier:
     type: 'date'

@@ -99,3 +99,5 @@ defaut:
       choix1: '<:saisies:saisie_radio_defaut_choix1:>'
       choix2: '<:saisies:saisie_radio_defaut_choix2:>'
       choix3: '<:saisies:saisie_radio_defaut_choix3:>'
+    # champs extras (definition du champ sql)
+    sql: 'text DEFAULT "" NOT NULL'
