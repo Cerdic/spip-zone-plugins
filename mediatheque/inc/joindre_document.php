@@ -115,6 +115,7 @@ function joindre_trouver_fichier_envoye(){
 		}
 	}
 	elseif (_request('joindre_zip') AND $path = _request('chemin_zip')){
+		define('_tmp_zip', $path);
 		define('_tmp_dir', creer_repertoire_documents(md5($path.$GLOBALS['visiteur_session']['id_auteur'])));
 		if (_tmp_dir == _DIR_IMG)
 			return _T('avis_operation_impossible');

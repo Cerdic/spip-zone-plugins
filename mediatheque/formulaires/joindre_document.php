@@ -167,6 +167,8 @@ function formulaires_joindre_document_traiter_dist($id_document='new',$id_objet=
 
 		$nouveaux_doc = $ajouter_documents($id_document,$files,$objet,$id_objet,$mode);
 
+		if (defined('_tmp_zip'))
+			unlink(_tmp_zip);
 		if (defined('_tmp_dir'))
 			effacer_repertoire_temporaire(_tmp_dir);
 
