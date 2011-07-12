@@ -31,6 +31,10 @@
 		<inclure>base/iextras.php</inclure>
 	</pipeline>
 	<pipeline>
+		<nom>formulaire_verifier</nom>
+		<inclure>inc/iextras.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/iextras_autoriser.php</inclure>
 	</pipeline>

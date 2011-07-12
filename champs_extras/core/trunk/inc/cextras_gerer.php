@@ -65,7 +65,87 @@ function installer_champs_extras($champs, $nom_meta_base_version, $version_cible
 }
 
 /**
+ * Créer les champs extras 
+ * definies par le lot de saisies donné 
+ *
+ * @param 
+ * @return 
+**/
+function champs_extras_creer($table, $saisies) {
+	if (!$table) {
+		return false;
+	}
+	if (!is_array($saisies) OR !count($saisies)) {
+		return false;
+	}
+	
+	$desc = lister_tables_objets_sql($table);
+
+	// parcours des saisies et ajout des champs extras nouveaux dans
+	// la description de la table
+	foreach ($saisies as $saisie) {
+		$nom = $saisie['options']['nom'];
+		// champ deja la, on passe
+		if (isset($desc['field'][$nom])) {
+			continue;
+		}
+		// la saisie possede une description SQL (sinon, ce n'est pas un champ extra !
+		if ($sql = $saisie['options']['sql']) {
+			$desc['field'][$nom] = $sql;
+		}
+	}
+	
+	// executer la mise a jour
+	include_spip('base/create');
+	creer_ou_upgrader_table($table, $desc, true, true);
+	
+}
+
+
+/**
+ * Supprimer les champs extras 
+ * definies par le lot de saisies donné 
+ *
+ * @param 
+ * @return 
+**/
+function champs_extras_supprimer($table, $saisies) {
+	if (!$table) {
+		return false;
+	}
+	if (!is_array($saisies) OR !count($saisies)) {
+		return false;
+	}
+	
+	$desc = lister_tables_objets_sql($table);
+	
+	$ok = true;
+	foreach ($saisies as $saisie) {
+		$nom = $saisie['options']['nom'];
+		if (isset($desc['field'][$nom])) {
+			$ok &= sql_alter("TABLE $table DROP COLUMN $nom");
+		}
+	}
+	return $ok;
+}
+
+
+/**
+ * Modifier les champs extras 
+ * definies par le lot de saisies donné   
+ *
+ * @param 
+ * @return 
+**/
+function champs_extras_modifier($table, $saisies_nouvelles, $saisies_anciennes) {
+	
+}
+
+
+/**
+ * /!\ À supprimer (API EXTRAS2)
  * Cree en base les champs extras demandes
+ * 
  * @param $champs : objet ChampExtra ou tableau d'objets ChampExtra
  */
 function creer_champs_extras($champs) {

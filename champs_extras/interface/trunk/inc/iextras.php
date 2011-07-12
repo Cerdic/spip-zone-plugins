@@ -88,4 +88,77 @@ function compter_champs_extras($objet) {
 	
 	return $objets[$objet] = 0;
 }
+
+
+/**
+ * Ajouter les saisies SQL et de recherche
+ * sur les options de config d'une saisie (de champs extras)
+ *
+ * @param 
+ * @return 
+**/
+function iextras_formulaire_verifier($flux) {
+	if ($flux['args']['form'] == 'construire_formulaire' 
+	AND strpos($flux['args']['args'][0], 'champs_extras_')===0) {
+		
+		// recherche de la saisie à configurer
+		$name = "";
+		foreach($flux['data'] as $nom=>$err) {
+			if (strpos($nom, 'configurer_')===0) {
+				$name = substr($nom, strlen('configurer_'));
+			}
+			break;
+		}
+		
+		// pas de formulaire de configuration de saisie a afficher.
+		// on sort sans rien faire.
+		if (!$name) {
+			return $flux;
+		}
+		
+		// On ajoute un préfixe devant l'identifiant
+		$identifiant = 'constructeur_formulaire_'.$flux['args']['args'][0];
+		// On récupère le formulaire à son état actuel
+		$formulaire_actuel = session_get($identifiant);
+		$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
+		$type_saisie = $saisies_actuelles[$name]['saisie'];
+		
+		// on récupère les informations de la saisie
+		// pour savoir si c'est un champs éditable (il a une ligne SQL)
+		$saisies_disponibles = saisies_lister_disponibles();
+		if (isset($saisies_disponibles[$type_saisie]['defaut']['options']['sql'])) {
+			$sql = $saisies_disponibles[$type_saisie]['defaut']['options']['sql'];
+			$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
+
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => "saisie_modifiee_${name}[options][options_techniques]",
+						'label' => _T('iextras:legend_options_techniques'),			
+					),
+					'saisies' => array(
+						array(
+							'saisie' => 'input',
+							'options' => array(
+								'nom' => "saisie_modifiee_${name}[options][sql]",
+								'label' => _T('iextras:label_sql'),
+								'obligatoire' => 'oui',
+								'size' => 50,
+								'defaut' => $sql
+							)
+						),
+						array(
+							'saisie' => 'oui_non',
+							'options' => array(
+								'nom' => "saisie_modifiee_${name}[options][rechercher]",
+								'label' => _T('iextras:label_rechercher'),
+								'explication' => _T('iextras:precisions_pour_rechercher'),
+								'defaut' => ''
+							)
+						),
+					
+				)));	
+		}
+	}
+	return $flux;
+}
 ?>

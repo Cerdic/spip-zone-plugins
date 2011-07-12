@@ -42,27 +42,20 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	$extras = array();
 	$table = table_objet_sql($objet);
 
-	foreach ($diff['ajoutees'] as $saisie) {
-		$nom = $saisie['options']['nom'];
-		// a corriger
-		if (true OR $sql = $saisie['options']['sql']) {
-			$sql = "text default '' not null";
-			$extra = new ChampExtra(array(
-				'champ' => $nom,
-				'table' => $table,
-				'sql' => $sql
-			));
-			$extras[] = $extra;
-		}
-	}
-
-	// l'enregistrer les modifs
 	include_spip('inc/cextras_gerer');
-	creer_champs_extras($extras);	
+	// supprimer les champs supprimes
+	champs_extras_supprimer($table, $diff['supprimees']);
+	// ajouter les nouveaux champs;
+	champs_extras_creer($table, $diff['ajoutees']);
+	// modifier les champs modifies;
+	# champs_extras_modifier($table, $diff['modifiees']);	
+	# champs_extras_modifier($table, # modifiees nouvelles, # modifiees anciennes);	
+
 	
 	ecrire_meta("champs_extras_$objet", serialize($nouvelles_saisies));
 	$retour['message_ok'] = 'Super !';
 	return $retour;
 }
+
 
 ?>
