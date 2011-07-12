@@ -41,7 +41,7 @@ jQuery('a#spip_pass').click(function(){window.open(this.href, 'spip_pass', 'scro
 		<a href="#ENV{url,./}"><:login_par_ici:></a>
 	]
 	[(#SESSION{statut}|non)
-	[(#FORMULAIRE_LOGIN{#ENV{url,.*}|sinon{#URL_ECRIRE{accueil}}})]
+		[(#FORMULAIRE_LOGIN{#ENV{url}|sinon{#URL_ECRIRE{accueil}}})]
 	]
 	<p class="retour">
 		[&#91;<a href="#URL_PAGE{identifiants,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{1comite})" target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=400'); return false;"><:login_sinscrire:></a>&#93;]
