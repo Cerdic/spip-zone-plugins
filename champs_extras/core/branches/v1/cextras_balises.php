@@ -33,13 +33,24 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 	if (!$demande) {
 		return $c; // retourner ChampExtra (attention, c'est un objet !)
 	}
+	$chaine = '';
 	if (property_exists($c, $demande)) {
-		return $c->$demande;
+		$chaine = $c->$demande;
 	}
 	if (method_exists($c, $demande)) {
-		return $c->$demande();
+		$chaine = $c->$demande();
 	}
-	return '';
+	
+	// appliquer _T ou typo
+	if (is_string($chaine) and !$p->etoile) {
+		if (strpos($chaine, "<multi>") !== false) {
+			$chaine = typo($chaine);
+		} else {
+			$chaine = _T($chaine);
+		}
+	}
+	
+	return $chaine;
 }
 
 
