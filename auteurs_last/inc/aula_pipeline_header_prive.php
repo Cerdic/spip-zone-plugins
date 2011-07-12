@@ -50,6 +50,11 @@
 	
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Insertion du résultat dans le head de la page
+ * des auteurs, en espace privé.
+ * @return string
+ */
 function aula_header_prive ($flux) {
 	global $connect_toutes_rubriques;
 
@@ -149,6 +154,14 @@ jQuery().ready(function(){
 	
 } // end aula_insert_head()
 
+/**
+ * Donne les dernières connexions.
+ * Tableau dont l'index est l'id de l'auteur, la valeur :
+ * - bool TRUE si l'auteur est en ligne, ou
+ * - bool FALSE si jamais connecté, ou
+ * - la date de dernière connexion
+ * @return bool|array
+ */
 function aula_last_array () {
 	include_spip('inc/filtres');
 	
@@ -180,10 +193,13 @@ function aula_last_array () {
 	return($result);
 }
 
+/**
+ * Calcule de l'intervalle
+ * @return int
+ */
 function aula_last_interval ($current_date, $en_ligne, $interval_minutes = _AULA_DELAY_MINUTES) {
 	$en_ligne = strtotime($en_ligne);
 	$current_date = strtotime($current_date);
 	return($en_ligne > ($current_date - $interval_minutes) && $en_ligne < ($current_date + $interval_minutes));
 }
 
-?>
