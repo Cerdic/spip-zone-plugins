@@ -113,29 +113,37 @@ function gis_post_edition($flux){
 				spip_log("GIS EXIFS : Récuperation des coordonnees du fichier $fichier","gis");
 				
 				$LatDeg = explode("/",$exifs["GPSLatitude"][0]);
-				$intLatDeg = $LatDeg[0]/$LatDeg[1];
+				if(intval($LatDeg[1]) > 0)
+					$intLatDeg = $LatDeg[0]/$LatDeg[1];
 
 				$LatMin = explode("/",$exifs["GPSLatitude"][1]);
-				$intLatMin = $LatMin[0]/$LatMin[1];
+				if(intval($LatMin[1]) > 0)
+					$intLatMin = $LatMin[0]/$LatMin[1];
 
 				$LatSec = explode("/",$exifs["GPSLatitude"][2]);
-				$intLatSec = $LatSec[0]/$LatSec[1];
+				if(intval($LatSec[1]) > 0)
+					$intLatSec = $LatSec[0]/$LatSec[1];
 
 				$LongDeg = explode("/",$exifs["GPSLongitude"][0]);
-				$intLongDeg = $LongDeg[0]/$LongDeg[1];
+				if(intval($LongDeg[1]) > 0)
+					$intLongDeg = $LongDeg[0]/$LongDeg[1];
 
 				$LongMin = explode("/",$exifs["GPSLongitude"][1]);
-				$intLongMin = $LongMin[0]/$LongMin[1];
+				if(intval($LongMin[1]) > 0)
+					$intLongMin = $LongMin[0]/$LongMin[1];
 
 				$LongSec = explode("/",$exifs["GPSLongitude"][2]);
-				$intLongSec = $LongSec[0]/$LongSec[1];
+				if(intval($LongSec[1]) > 0)
+					$intLongSec = $LongSec[0]/$LongSec[1];
 
 				// round to 5 = approximately 1 meter accuracy
-				$latitude = round(dms_to_dec($exifs["GPSLatitudeRef"],
-				$intLatDeg,$intLatMin,$intLatSec),5);
+				if(intval($intLatDeg) && intval($intLatMin) && intval($intLatSec))
+					$latitude = round(dms_to_dec($exifs["GPSLatitudeRef"],
+						$intLatDeg,$intLatMin,$intLatSec),5);
 
-				$longitude =  round(dms_to_dec($exifs["GPSLongitudeRef"],
-				$intLongDeg,$intLongMin,$intLongSec), 5);
+				if(intval($intLongDeg) && intval($intLongMin) && intval($intLongSec))
+					$longitude =  round(dms_to_dec($exifs["GPSLongitudeRef"],
+						$intLongDeg,$intLongMin,$intLongSec), 5);
 				if($config['adresse'] == 'on'){
 					include_spip('inc/xml');
 					$url_geocoder = 'http://maps.googleapis.com/maps/api/geocode/xml?latlng='.urlencode($latitude).','.urlencode($longitude).'&sensor=true';
