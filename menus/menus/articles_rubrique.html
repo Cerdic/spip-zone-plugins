@@ -34,7 +34,7 @@
 	</B_env_trad>
 	#SET{cpt,0}
 	<BOUCLE_cpt_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}> </BOUCLE_cpt_articles>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_articles>
-	<BOUCLE_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{pagination #GET{pagination}}>
+	<BOUCLE_articles(ARTICLES){id_rubrique=#GET{id_rubrique}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
 		<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 			<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
 		</li>
