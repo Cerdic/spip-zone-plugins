@@ -34,4 +34,4 @@ defaut:
   options:
     texte: '<:saisies:saisie_explication_titre:>'
     # champs extras (definition du champ sql)
-    sql: 'text DEFAULT "" NOT NULL'
+    sql: "text DEFAULT '' NOT NULL"

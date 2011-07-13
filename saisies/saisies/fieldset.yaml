@@ -44,5 +44,5 @@ defaut:
   options:
     label: '<:saisies:saisie_fieldset_titre:>'
     # champs extras (definition du champ sql)
-    sql: 'text DEFAULT "" NOT NULL'
+    sql: "text DEFAULT '' NOT NULL"
   saisies: []

@@ -93,4 +93,4 @@ defaut:
     label: '<:saisies:saisie_case_titre:>'
     label_case: '<:saisies:saisie_case_titre:>'
     # champs extras (definition du champ sql)
-    sql: 'varchar(3) DEFAULT "" NOT NULL'
+    sql: "varchar(3) DEFAULT '' NOT NULL"

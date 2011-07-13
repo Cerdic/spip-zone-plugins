@@ -135,4 +135,4 @@ defaut:
     label: '<:saisies:saisie_input_titre:>'
     size: 40
     # champs extras (definition du champ sql)
-    sql: 'text DEFAULT "" NOT NULL'
+    sql: "text DEFAULT '' NOT NULL"

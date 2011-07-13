@@ -131,4 +131,4 @@ defaut:
     cols: 40
     rows: 5
     # champs extras (definition du champ sql)
-    sql: 'text DEFAULT "" NOT NULL'
+    sql: "text DEFAULT '' NOT NULL"
