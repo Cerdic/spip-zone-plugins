@@ -39,12 +39,12 @@
 		<inclure>inc/iextras_autoriser.php</inclure>
 	</pipeline>
 	
-	<onglet id='iextras' parent='configuration'> 
+	<onglet id='champs_extras' parent='configuration'> 
 			<icone>images/iextras-24.png</icone> 
 			<titre>iextras:champs_extras</titre> 
 	</onglet>
 	
-	<bouton id='iextras' parent='bando_configuration'>
+	<bouton id='champs_extras' parent='bando_configuration'>
 		<icone>images/iextras-16.png</icone>
 		<titre>iextras:champs_extras</titre>
 	</bouton>

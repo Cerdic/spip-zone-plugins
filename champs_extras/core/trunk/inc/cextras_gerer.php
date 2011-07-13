@@ -79,26 +79,28 @@ function champs_extras_creer($table, $saisies) {
 		return false;
 	}
 	
+	// uniquement les saisies décrivant SQL
+	include_spip('inc/saisies');
+	$saisies = saisies_lister_avec_sql($saisies);
+	if (!$saisies) {
+		return false;
+	}
+	
 	$desc = lister_tables_objets_sql($table);
 
 	// parcours des saisies et ajout des champs extras nouveaux dans
 	// la description de la table
 	foreach ($saisies as $saisie) {
 		$nom = $saisie['options']['nom'];
-		// champ deja la, on passe
-		if (isset($desc['field'][$nom])) {
-			continue;
-		}
-		// la saisie possede une description SQL (sinon, ce n'est pas un champ extra !
-		if ($sql = $saisie['options']['sql']) {
-			$desc['field'][$nom] = $sql;
+		// le champ ne doit pas deja exister !
+		if (!isset($desc['field'][$nom])) {
+			$desc['field'][$nom] = $saisie['options']['sql'];
 		}
 	}
 	
 	// executer la mise a jour
 	include_spip('base/create');
 	creer_ou_upgrader_table($table, $desc, true, true);
-	
 }
 
 
@@ -117,11 +119,18 @@ function champs_extras_supprimer($table, $saisies) {
 		return false;
 	}
 	
-	$desc = lister_tables_objets_sql($table);
+	include_spip('inc/saisies');
+	$saisies = saisies_lister_avec_sql($saisies);
+
+	if (!$saisies) {
+		return false;
+	}	
 	
+	$desc = lister_tables_objets_sql($table);
+
 	$ok = true;
 	foreach ($saisies as $saisie) {
-		$nom = $saisie['options']['nom'];
+		$nom = $saisie['options']['nom'];	
 		if (isset($desc['field'][$nom])) {
 			$ok &= sql_alter("TABLE $table DROP COLUMN $nom");
 		}

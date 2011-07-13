@@ -1,7 +1,7 @@
 <?php
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function iextras_declarer_champs_extras($champs=array()) {
+function iextras_declarer_champs_extras($saisies_tables=array()) {
 	include_spip('inc/iextras');
 	
 	// lors du renouvellement de l'alea, au demarrage de SPIP
@@ -13,8 +13,8 @@ function iextras_declarer_champs_extras($champs=array()) {
 	}
 	
 	// recuperer le tableau de champ et les ajouter.
-	$extras = iextras_get_extras();
-	$champs = array_merge($champs, $extras);
-	return $champs;
+	$extras = iextras_champs_extras_definis();
+	$saisies_tables = array_merge_recursive($saisies_tables, $extras);
+	return $saisies_tables;
 }
 ?>

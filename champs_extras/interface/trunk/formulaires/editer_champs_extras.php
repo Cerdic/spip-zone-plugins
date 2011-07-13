@@ -8,9 +8,9 @@ function formulaires_editer_champs_extras_charger_dist($objet, $redirect=''){
 		'redirect' => $redirect
 	);
 
-	$saisies = unserialize( $GLOBALS['meta']["champs_extras_$objet"] );
+	include_spip('inc/iextras');
+	$saisies = iextras_champs_extras_definis( table_objet_sql($objet) );
 
-	if (!is_array($saisies)) $saisies = array();
 	$valeurs['_saisies'] = $saisies;
 	$valeurs['_options'] = array(
 		"modifier_nom"=>true,
@@ -32,10 +32,10 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 		'redirect' => $redirect
 	);
 	
-	$saisies = unserialize( $GLOBALS['meta']["champs_extras_$objet"] );
-	if (!is_array($saisies)) $saisies = array();
+	include_spip('inc/iextras');
+	$saisies = iextras_champs_extras_definis( table_objet_sql($objet) );
 	
-	include_spip('inc/saisies');
+
 	$nouvelles_saisies = session_get('constructeur_formulaire_champs_extras_' . $objet);
 	$diff = saisies_comparer($saisies, $nouvelles_saisies);
 	
@@ -52,7 +52,7 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	# champs_extras_modifier($table, # modifiees nouvelles, # modifiees anciennes);	
 
 	
-	ecrire_meta("champs_extras_$objet", serialize($nouvelles_saisies));
+	ecrire_meta("champs_extras_" . $table, serialize($nouvelles_saisies));
 	$retour['message_ok'] = 'Super !';
 	return $retour;
 }
