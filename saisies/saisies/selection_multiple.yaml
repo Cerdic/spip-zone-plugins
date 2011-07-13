@@ -90,6 +90,16 @@ options:
       -
         saisie: 'input'
         options:
+          nom: 'size'
+          label: '<:saisies:option_size_label:>'
+          explication: '<:saisies:option_size_explication:>'
+        verifier:
+          type: 'entier'
+          options:
+            min: 1
+      -
+        saisie: 'input'
+        options:
           nom: 'info_obligatoire'
           label: '<:saisies:option_info_obligatoire_label:>'
           explication: '<:saisies:option_info_obligatoire_explication:>'
