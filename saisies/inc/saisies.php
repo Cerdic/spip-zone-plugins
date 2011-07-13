@@ -58,16 +58,21 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
  * Liste les saisies ayant une definition SQL
  *  
  *
- * @param liste de saisies par nom ou par id
- * @return liste de ces saisies (même classement) ayant une option sql définie
+ * @param liste de saisies
+ * @return liste de ces saisies triees par nom ayant une option sql définie
 **/
 function saisies_lister_avec_sql($saisies) {
 	$saisies_sql = array();
+	// tri par nom si ce n'est pas le cas
+	if (is_int(array_shift(array_keys($saisies)))) {
+		$saisies = saisies_lister_par_nom($saisies);
+	}
 	foreach ($saisies as $nom_ou_id => $saisie) {
 		if (isset($saisie['options']['sql']) and $saisie['options']['sql']) {
 			$saisies_sql[$nom_ou_id] = $saisie;
 		}
 	}
+
 	return $saisies_sql;
 }
 
@@ -854,7 +859,7 @@ function saisies_lister_disponibles(){
 function saisies_lister_disponibles_sql() {
 	$saisies = array();
 	$saisies_disponibles = saisies_lister_disponibles();
-	foreach ($saisies as $type=>$saisie) {
+	foreach ($saisies_disponibles as $type=>$saisie) {
 		if (isset($saisie['defaut']['options']['sql']) and $saisie['defaut']['options']['sql']) {
 			$saisies[$type] = $saisie;
 		}
