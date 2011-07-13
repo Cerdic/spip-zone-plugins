@@ -26,7 +26,7 @@ function balise_PUBBAN_dyn($banner_id, $tout='non') {
 		$url = generer_url_public(_PUBBAN_ADDS_DISPLAYER)."&empl=".$banniere['titre_id'];
 		if ($tout_montrer)
 			$url .= "&tout=oui";
-		$div = "<center><div class=\"pubban pubban_".$banniere['titre_id']."\"><iframe name='".$banniere['titre_id']."' src='".$url."' width=".$banniere['width']." height=".$banniere['height']." marginwidth=auto marginheight=0 hspace=0 vspace=0 frameborder=".$border." scrolling=no></iframe></div></center>";
+		$div = "<center><div class=\"pubban banniere_".$banniere['titre_id']."\"><iframe name='".$banniere['titre_id']."' src='".$url."' width=".$banniere['width']." height=".$banniere['height']." marginwidth=auto marginheight=0 hspace=0 vspace=0 frameborder=".$border." scrolling=no></iframe></div></center>";
 	}
 	echo $div;
 }
