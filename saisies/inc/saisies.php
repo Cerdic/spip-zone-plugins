@@ -127,7 +127,7 @@ function saisies_lister_valeurs_defaut($contenu){
 		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $nom, $separe)){
 			$nom = $separe[1];
 			// Dans ce cas on ne récupère que le nom, la valeur par défaut du tableau devra être renseigné autre part
-			$defaut[$nom] = array();
+			$defauts[$nom] = array();
 		}
 		else{
 			$defauts[$nom] = isset($saisie['options']['defaut']) ? $saisie['options']['defaut'] : '';
