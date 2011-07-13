@@ -21,7 +21,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 
 -* La page de statistiques du plugin est une adaptation libre du script '{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}' d&#233;velopp&#233; par {{Vincent Roseberry}} ({sous licence GPL &#224; l'&#233;poque}).
 	</description>
-	<version>1.26</version>
+	<version>1.27</version>
 	<version_base>0.8</version_base>
 	<etat>dev</etat>
  	<icon>img/ico-pubban.png</icon>
