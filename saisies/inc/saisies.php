@@ -121,10 +121,19 @@ function saisies_lister_champs($contenu, $avec_conteneur=true){
  */
 function saisies_lister_valeurs_defaut($contenu){
 	$contenu = saisies_lister_par_nom($contenu, false);
-	$defaut = array();
-	foreach ($contenu as $champs => $ligne)
-		$defaut[$champs]  = isset($ligne['options']['defaut']) ? $ligne['options']['defaut'] : ''; 
-	return $defaut;
+	$defauts = array();
+	foreach ($contenu as $nom => $saisie){
+		// Si le nom du champ est un tableau indexé, il faut parser !
+		if (preg_match('/([\w]+)((\[[\w]+\])+)/', $nom, $separe)){
+			$nom = $separe[1];
+			// Dans ce cas on ne récupère que le nom, la valeur par défaut du tableau devra être renseigné autre part
+			$defaut[$nom] = array();
+		}
+		else{
+			$defauts[$nom] = isset($saisie['options']['defaut']) ? $saisie['options']['defaut'] : '';
+		}
+	}
+	return $defauts;
 }
 
 
