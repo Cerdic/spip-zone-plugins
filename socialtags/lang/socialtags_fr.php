@@ -21,6 +21,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_inserer' => 'Ins&#233;rer le bloc social-tags en-dessous du bloc suivant :',
 	'cfg_insertion' => 'Insertion dans les pages :',
 	'cfg_liste_site' => 'Liste des sites sociaux',
+	'cfg_plusone' => 'Google plus one',
+	'cfg_plusone_existe' => 'Pour activer Google+1, installer le plugin (<a href="http://www.spip-contrib.net/Google-1" class="spip_out">aide sur spip-contrib</a>).',
 	'cfg_referer' => 'N\'afficher le badge et les boutons que pour les visiteurs originaires des sites concern&#233;s.',
 	'cfg_selector' => 'S&#233;lecteur :',
 	'cfg_sous_bloc' => 'Sous le bloc de titre des pages article',
@@ -29,6 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_socialtags' => 'Social tags',
 	'cfg_tout_cocher' => 'Tout cocher',
 	'cfg_tout_decocher' => 'Tout d&#233;cocher',
+
 
 );
 ?>

@@ -35,6 +35,20 @@
 			</p>
 		</li>
 		<li class="fieldset">
+			<fieldset id="plusone">
+				<legend><:socialtags:cfg_plusone:></legend>
+				<div class="choix">
+				[(#PLUGIN{googleplus1}|?{
+				<input type="checkbox" name="plusone" class="checkbox" id="plusone" [checked="(#ENV{plusone}|?{checked})"]/>
+				<label for="choix_plusone">
+					<img src="[(#CHEMIN{images/plusone-32.png})]" title="plusone" alt=" " /><span style="font-size:90%">&nbsp;[(#ENV{plusone}|?{<strong>})]<:socialtags:cfg_plusone:>[(#ENV{plusone}|?{<strong>})]</span>
+				</label>,
+				<li><p class="explication"><:socialtags:cfg_plusone_existe:></p></li>}
+				)]
+			</div>
+			</fieldset>
+		</li>
+		<li class="fieldset">
 			<fieldset>
 				<legend><:socialtags:cfg_insertion:></legend>
 				<ul>

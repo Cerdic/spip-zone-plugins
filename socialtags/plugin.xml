@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Social tags</nom>
-	<auteur>phil@yaquoi.com</auteur>
+	<auteur>phil... et d autres</auteur>
 	<icon>socialtags-32.png</icon>
-	<version>0.9.6</version>
+	<version>0.9.7</version>
 	<etat>stable</etat>
 	<description>
 		<multi>[fr]Active les r&eacute;seaux sociaux de partage de liens.
@@ -26,7 +26,7 @@
 </plugin>
 <plugin spip="[3.0.0-dev;3.0.*]">
 	<nom>Social tags</nom>
-	<auteur>phil@yaquoi.com</auteur>
+	<auteur>phil...  et d autres</auteur>
 	<icon>socialtags-32.png</icon>
 	<version>0.9.7</version>
 	<etat>stable</etat>
