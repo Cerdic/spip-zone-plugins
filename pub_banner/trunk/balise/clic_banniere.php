@@ -13,12 +13,13 @@ function balise_CLIC_BANNIERE($p) {
    return calculer_balise_dynamique($p,CLIC_BANNIERE,array());
 }
 
-function balise_CLIC_BANNIERE_dyn($p, $id_publicite, $id_banniere) {
+function balise_CLIC_BANNIERE_dyn($p) {
 	include_spip('base/abstract_sql');
 	$id_publicite = _request('id_publicite');
+
 	$pub = pubban_recuperer_publicite($id_publicite);
 	$id_banniere = _request('id_banniere') ? _request('id_banniere') : $pub['id_banniere'];
-	$redirect = _request('redirect') ? _request('redirect') : false;
+	$redirect = _request('redirect') ? urldecode(_request('redirect')) : false;
 	$banniere = pubban_recuperer_banniere($id_banniere);
 
 	$datas['clics'] = $pub['clics'] + 1;
