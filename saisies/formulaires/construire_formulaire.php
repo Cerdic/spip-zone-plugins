@@ -64,11 +64,27 @@ function formulaires_construire_formulaire_verifier($identifiant, $formulaire_in
 		$saisie = $saisies_actuelles[$nom];
 		$formulaire_config = $saisies_disponibles[$saisie['saisie']]['options'];
 		array_walk_recursive($formulaire_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
+
+		// Si la saisie possede un identifiant, on l'ajoute
+		// au formulaire de configuration pour ne pas le perdre en route
+		if (isset($saisie['identifiant']) and $saisie['identifiant']) {
+			$formulaire_config = saisies_inserer(
+				$formulaire_config,
+				array(
+					'saisie' => 'hidden',
+					'options' => array(
+						'nom' => "saisie_modifiee_${nom}[identifiant]",
+						'defaut' => $saisie['identifiant']
+					),
+				)
+			);
+		}
 		
 		// S'il y a l'option adéquat, on ajoute le champ pour modifier le nom
 		if ($options['modifier_nom'] and $chemin_nom = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true)){
 			$chemin_nom[] = 'saisies';
 			$chemin_nom[] = '0';
+
 			$formulaire_config = saisies_inserer(
 				$formulaire_config,
 				array(
@@ -392,7 +408,7 @@ function formidable_generer_saisie_configurable($saisie, $env){
 /**
  * Callback d'array_filter()
  * Permet de retourner tout ce qui n'est pas un contenu vide.
- * La valeur 0 est par contre retournée.
+ * La valeur '0' est par contre retournée.
  *
  * @param $var La variable a tester
  * @return bool L'accepte-t-on ?

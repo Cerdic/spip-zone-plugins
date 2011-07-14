@@ -25,6 +25,33 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * saisies_autonomes()
  */
 
+/*
+ * Prend la description complète du contenu d'un formulaire et retourne
+ * les saisies "à plat" classées par identifiant.
+ *
+ * @param array $contenu Le contenu d'un formulaire
+ * @param bool $avec_conteneur Indique si on renvoie aussi les saisies ayant des enfants, comme les fieldset
+ * @return array Un tableau avec uniquement les saisies
+ */
+function saisies_lister_par_identifiant($contenu, $avec_conteneur=true){
+	$saisies = array();
+	
+	if (is_array($contenu)){
+		foreach ($contenu as $ligne){
+			if (is_array($ligne)){
+				if (array_key_exists('saisie', $ligne) and (!is_array($ligne['saisies']) or $avec_conteneur)){
+					$saisies[$ligne['identifiant']] = $ligne;
+				}
+				if (is_array($ligne['saisies'])){
+					$saisies = array_merge($saisies, saisies_lister_par_identifiant($ligne['saisies']));
+				}
+			}
+		}
+	}
+	
+	return $saisies;
+}
+
 
 /*
  * Prend la description complète du contenu d'un formulaire et retourne
@@ -58,14 +85,16 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
  * Liste les saisies ayant une definition SQL
  *  
  *
- * @param liste de saisies
+ * @param Array $saisies liste de saisies
+ * @param String $tri tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom', 'identifiant')
  * @return liste de ces saisies triees par nom ayant une option sql définie
 **/
-function saisies_lister_avec_sql($saisies) {
+function saisies_lister_avec_sql($saisies, $tri = 'nom') {
 	$saisies_sql = array();
 	// tri par nom si ce n'est pas le cas
 	if (is_int(array_shift(array_keys($saisies)))) {
-		$saisies = saisies_lister_par_nom($saisies);
+		$trier = 'saisies_lister_par_' . $tri;
+		$saisies = $trier($saisies);
 	}
 	foreach ($saisies as $nom_ou_id => $saisie) {
 		if (isset($saisie['options']['sql']) and $saisie['options']['sql']) {
@@ -185,28 +214,33 @@ function saisies_chercher_formulaire($form, $args){
 }
 
 /*
- * Cherche une saisie par son nom ou son chemin et renvoie soit la saisie, soit son chemin
+ * Cherche une saisie par son id, son nom ou son chemin et renvoie soit la saisie, soit son chemin
  *
  * @param array $saisies Un tableau décrivant les saisies
- * @param unknown_type $nom_ou_chemin Le nom de la saisie à chercher ou le chemin sous forme d'une liste de clés
+ * @param unknown_type $id_ou_nom_ou_chemin L'identifiant ou le nom de la saisie à chercher ou le chemin sous forme d'une liste de clés
  * @param bool $retourner_chemin Indique si on retourne non pas la saisie mais son chemin
  * @return array Retourne soit la saisie, soit son chemin, soit null
  */
-function saisies_chercher($saisies, $nom_ou_chemin, $retourner_chemin=false){
-	if (is_array($saisies) and $nom_ou_chemin){
-		if (is_string($nom_ou_chemin)){
-			$nom = $nom_ou_chemin;
+function saisies_chercher($saisies, $id_ou_nom_ou_chemin, $retourner_chemin=false){
+
+	if (is_array($saisies) and $id_ou_nom_ou_chemin){
+		if (is_string($id_ou_nom_ou_chemin)){
+			$nom = $id_ou_nom_ou_chemin;
+			// identifiant ? premier caractere @
+			$id = ($nom[0] == '@');
+
 			foreach($saisies as $cle => $saisie){
 				$chemin = array($cle);
-				if ($saisie['options']['nom'] == $nom)
+				if ($nom == ($id ? $saisie['identifiant'] : $saisie['options']['nom'])) {
 					return $retourner_chemin ? $chemin : $saisie;
-				elseif ($saisie['saisies'] and is_array($saisie['saisies']) and ($retour = saisies_chercher($saisie['saisies'], $nom, $retourner_chemin))){
+				} elseif ($saisie['saisies'] and is_array($saisie['saisies']) and ($retour = saisies_chercher($saisie['saisies'], $nom, $retourner_chemin))) {
 					return $retourner_chemin ? array_merge($chemin, array('saisies'), $retour) : $retour;
 				}
+
 			}
 		}
-		elseif (is_array($nom_ou_chemin)){
-			$chemin = $nom_ou_chemin;
+		elseif (is_array($id_ou_nom_ou_chemin)){
+			$chemin = $id_ou_nom_ou_chemin;
 			$saisie = $saisies;
 			// On vérifie l'existence quand même
 			foreach ($chemin as $cle){
@@ -220,6 +254,46 @@ function saisies_chercher($saisies, $nom_ou_chemin, $retourner_chemin=false){
 	}
 	
 	return null;
+}
+
+
+/**
+ * Crée un identifiant Unique
+ * pour toutes les saisies donnees qui n'en ont pas 
+ *
+ * @param Array $saisies Tableau de saisies
+ * @param Bool $regenerer_id Régénère un nouvel identifiant pour toutes les saisies ?
+ * @return Array Tableau de saisies complété des identifiants
+**/
+function saisies_identifier($saisies, $regenerer = false) {
+	if (!is_array($saisies)) {
+		return array();
+	}
+	foreach ($saisies as $k => $saisie) {
+		$saisies[$k] = saisie_identifier($saisie, $regenerer);
+	}
+	return $saisies;
+}
+
+/**
+ * Crée un identifiant Unique
+ * pour la saisie donnee si elle n'en a pas
+ * (et pour ses sous saisies éventuels)
+ *
+ * @param Array $saisie Tableau d'une saisie
+ * @param Bool $regenerer_id Régénère un nouvel identifiant pour la saisie ?
+ * @return Array Tableau de la saisie complété de l'identifiant
+**/
+function saisie_identifier($saisie, $regenerer = false) {
+	if (!isset($saisie['identifiant']) OR !$saisie['identifiant']) {
+		$saisie['identifiant'] = uniqid('@');
+	} elseif ($regenerer) {
+		$saisie['identifiant'] = uniqid('@');
+	}
+	if (isset($saisie['saisies']) AND is_array($saisie['saisies'])) {
+		$saisie['saisies'] = saisies_identifier($saisie['saisies'], $regenerer);
+	}
+	return $saisie;
 }
 
 /*
@@ -260,6 +334,9 @@ function saisies_supprimer($saisies, $nom_ou_chemin){
 function saisies_inserer($saisies, $saisie, $chemin=array()){
 	// On vérifie quand même que ce qu'on veut insérer est correct
 	if ($saisie['saisie'] and $saisie['options']['nom']){
+		// ajouter un identifiant
+		$saisie = saisie_identifier($saisie);
+		
 		// Par défaut le parent c'est la racine
 		$parent =& $saisies;
 		// S'il n'y a pas de position, on va insérer à la fin du formulaire
@@ -308,6 +385,9 @@ function saisies_dupliquer($saisies, $nom_ou_chemin){
 		// On ajoute "copie" après le label du champs
 		$clone['options']['label'] .= ' '._T('saisies:construire_action_dupliquer_copie');
 
+		// Création de nouveau identifiants pour le clone
+		$clone = saisie_identifier($clone, true);
+		
 		$saisies = saisies_inserer($saisies, $clone, $chemin_validation);
 	}
 
@@ -510,16 +590,32 @@ function saisies_verifier($formulaire){
 	return $erreurs;
 }
 
+
 /*
  * Compare deux tableaux de saisies pour connaitre les différences
+ * en s'appuyant sur les identifiants de saisies
+ * 
  * @param array $saisies_anciennes Un tableau décrivant des saisies
  * @param array $saisies_nouvelles Un autre tableau décrivant des saisies
  * @param bool $avec_conteneur Indique si on veut prendre en compte dans la comparaison les conteneurs comme les fieldsets
  * @return array Retourne le tableau des saisies supprimées, ajoutées et modifiées
  */
-function saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneur=true){
-	$saisies_anciennes = saisies_lister_par_nom($saisies_anciennes, $avec_conteneur);
-	$saisies_nouvelles = saisies_lister_par_nom($saisies_nouvelles, $avec_conteneur);
+function saisies_comparer_par_identifiant($saisies_anciennes, $saisies_nouvelles, $avec_conteneur=true) {
+	return saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneur, $tri = 'identifiant');
+}
+
+/*
+ * Compare deux tableaux de saisies pour connaitre les différences
+ * @param array $saisies_anciennes Un tableau décrivant des saisies
+ * @param array $saisies_nouvelles Un autre tableau décrivant des saisies
+ * @param bool $avec_conteneur Indique si on veut prendre en compte dans la comparaison les conteneurs comme les fieldsets
+ * @param string $tri Comparer selon quel tri ? 'nom' / 'identifiant'
+ * @return array Retourne le tableau des saisies supprimées, ajoutées et modifiées
+ */
+function saisies_comparer($saisies_anciennes, $saisies_nouvelles, $avec_conteneur=true, $tri = 'nom') {
+	$trier = "saisies_lister_par_$tri";
+	$saisies_anciennes = $trier($saisies_anciennes, $avec_conteneur);
+	$saisies_nouvelles = $trier($saisies_nouvelles, $avec_conteneur);
 	
 	// Les saisies supprimées sont celles qui restent dans les anciennes quand on a enlevé toutes les nouvelles
 	$saisies_supprimees = array_diff_key($saisies_anciennes, $saisies_nouvelles);
