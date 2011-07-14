@@ -83,7 +83,7 @@ function cextras_editer_contenu_objet($flux){
 	
 	// recuperer les saisies de l'objet en cours
 	$objet = $flux['args']['type'];
-	include_spip('inc/cextras_gerer');
+	include_spip('inc/cextras');
 	if ($saisies = champs_extras_objet( table_objet_sql($objet) )) {
 		// filtrer simplement les saisies que la personne en cours peut voir
 		$saisies = champs_extras_autorisation('modifier', $objet, $saisies, $flux['args']);
@@ -102,7 +102,7 @@ function cextras_editer_contenu_objet($flux){
 // ajouter les champs extras soumis par les formulaire CVT editer_xx
 function cextras_pre_edition($flux){
 	
-	include_spip('inc/cextras_gerer');
+	include_spip('inc/cextras');
 	$table = $flux['args']['table'];
 	if ($saisies = champs_extras_objet( $table )) {
 		$saisies = saisies_lister_avec_sql($saisies);
@@ -126,13 +126,27 @@ function cextras_pre_edition($flux){
 function cextras_afficher_contenu_objet($flux){
 	// recuperer les saisies de l'objet en cours
 	$objet = $flux['args']['type'];
-	include_spip('inc/cextras_gerer');
+	include_spip('inc/cextras');
 	if ($saisies = champs_extras_objet( $table = table_objet_sql($objet) )) {
 		// ajouter au contexte les noms et valeurs des champs extras
 		$saisies_sql = saisies_lister_avec_sql($saisies);
 		$valeurs = sql_fetsel(array_keys($saisies_sql), $table, id_table_objet($table) . '=' . sql_quote($flux['args']['id_objet']));
 		if (!$valeurs) {
 			$valeurs = array();
+		} else {
+			// on applique les eventuels traitements definis
+			// /!\ La saisies-vues/_base applique |propre par defaut si elle ne trouve pas de saisie
+			// Dans ce cas, certains traitements peuvent être effectués 2 fois !
+			$saisies_traitees = saisies_lister_avec_traitements($saisies_sql);
+			unset($saisies_sql);
+			foreach ($saisies_traitees as $saisie) {
+				$traitement = $saisie['options']['traitements'];
+				$traitement = defined($traitement) ? constant($traitement) : $traitement;
+				$nom = $saisie['options']['nom'];
+				list($avant, $apres) = explode('%s', $traitement);
+				eval('$val = ' . $avant . ' $valeurs[$nom] ' . $apres . ';');
+				$valeurs[$nom] = $val;
+			}
 		}
 		$contexte = array_merge($flux['args']['contexte'], $valeurs);
 

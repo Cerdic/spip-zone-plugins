@@ -42,7 +42,7 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	$extras = array();
 	$table = table_objet_sql($objet);
 
-	include_spip('inc/cextras_gerer');
+	include_spip('inc/cextras');
 	// supprimer les champs supprimes
 	champs_extras_supprimer($table, $diff['supprimees']);
 	// ajouter les nouveaux champs;

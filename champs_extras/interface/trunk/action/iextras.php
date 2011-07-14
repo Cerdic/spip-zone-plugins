@@ -107,7 +107,7 @@ function action_supprimer_champ_extra($extra_id) {
 			extras_log("Suppression d'un champ par auteur ".$GLOBALS['auteur_session']['id_auteur'],true);
 			extras_log($extra, true);
 			
-			include_spip('inc/cextras_gerer');
+			include_spip('inc/cextras');
 			vider_champs_extras($extra);
 			
 			unset($extras[$i]);
@@ -138,7 +138,7 @@ function action_desassocier_champ_extra($extra_id) {
 // en compte par ce plugin
 function action_associer_champ_sql_comme_champ_extra($table, $champ){
 	// recuperer la description du champ
-	include_spip('inc/cextras_gerer');
+	include_spip('inc/cextras');
 	include_spip('inc/iextras');
 	$champs = extras_champs_anormaux();
 	if (isset($champs[$table][$champ])) {
@@ -169,7 +169,7 @@ function action_associer_champ_sql_comme_champ_extra($table, $champ){
 function action_supprimer_champ_sql($table, $champ) {
 	// recuperer les descriptions
 	// pour verifier que le champ n'est pas declare par quelqu'un
-	include_spip('inc/cextras_gerer');
+	include_spip('inc/cextras');
 	$champs = extras_champs_anormaux();
 	if (isset($champs[$table][$champ])) {
 		// suppression

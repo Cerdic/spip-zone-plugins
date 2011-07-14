@@ -59,19 +59,21 @@ function cextras_declarer_tables_interfaces($interface){
 	include_spip('inc/saisies');
 	foreach ($saisies_tables as $table=>$saisies) {
 		$saisies = saisies_lister_avec_sql($saisies);
-		foreach ($saisies as $saisie) {
-			if (isset($saisie['options']['traitements']) and $traitement = $saisie['options']['traitements']) {
-				$balise = strtoupper($saisie['options']['nom']);
-				// definir
-				if (!isset($interface['table_des_traitements'][$balise])) {
-					$interface['table_des_traitements'][$balise] = array();
-				}
-				// le traitement peut etre le nom d'un define
-				$traitement = defined($traitement) ? constant($traitement) : $traitement;
+		$saisies = saisies_lister_avec_traitements($saisies);
 		
-				// SPIP 3 permet de declarer par la table sql directement.
-				$interface['table_des_traitements'][$balise][$table] = $traitement;		
+		foreach ($saisies as $saisie) {
+			$traitement = $saisie['options']['traitements'];
+			$balise = strtoupper($saisie['options']['nom']);
+			// definir
+			if (!isset($interface['table_des_traitements'][$balise])) {
+				$interface['table_des_traitements'][$balise] = array();
 			}
+			// le traitement peut etre le nom d'un define
+			$traitement = defined($traitement) ? constant($traitement) : $traitement;
+	
+			// SPIP 3 permet de declarer par la table sql directement.
+			$interface['table_des_traitements'][$balise][$table] = $traitement;		
+			
 		}
 	}
 
