@@ -22,13 +22,13 @@
       [(#REM) Messages du forum ]
       <B_commentaires>
         <ul class="forum">
-         <BOUCLE_commentaires(PHPBB3_POSTS){topic_id=#TOPIC_ID}{1,10}>
+         <BOUCLE_commentaires(phpbb_posts){topic_id=#TOPIC_ID}{1,10}>
            [(#REM) on ne rÃ©cupÃ¨re pas le premier post, celui-ci est en effet le message envoyÃ© par spip Ã  phpbb]
            <li class="forum-fil">
 
             <div class="forum-message">
              <B_posteur>
-               <BOUCLE_posteur(PHPBB3_USERS){user_id=#POSTER_ID}>
+               <BOUCLE_posteur(phpbb_users){user_id=#POSTER_ID}>
                  <!-- Affichage de l'avatar -->
                  [<div class="gravatar"><img src="forum/download/file.php?avatar=(#USER_AVATAR)" style="width:32px ;" alt="Avatar de #USERNAME" align="right"/></div>]
                   [(#SET{username, [(#USERNAME|couper{80})]})]

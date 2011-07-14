@@ -30,7 +30,7 @@ $phpbb_prefix = lire_config('comments_phpbb/phpbb_prefix');
 if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
 {
 ?>
-<BOUCLE_general_test(PHPBB_USERS){0,1}>
+<BOUCLE_general_test(phpbb_users){0,1}>
 	<fieldset>
 	  <legend>PhpBB</legend>
 <ul>
@@ -38,7 +38,7 @@ if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
 	<label>Utilisateur-robot (cet utilisateur sera le posteur du topic) :</label>
 	<select name="phpbb_poster">
 		[(#REM) le critère group_id est à modifier selon la configuration du forum ]
-		<BOUCLE_phpbb_users(PHPBB_USERS){par username}{group_id IN 1,2,5}>
+		<BOUCLE_phpbb_users(phpbb_users){par username}{group_id IN 1,2,5}>
 			<option value="#USER_ID"[(#USER_ID|=={#CONFIG{comments_phpbb/phpbb_poster}}|?{' selected="selected"',''})]>[(#USERNAME|utf8_encode)]</option>
 		</BOUCLE_phpbb_users>
 	</select>
@@ -47,10 +47,10 @@ if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
 
 <label><:comments_phpbb:conf_comment:> :</label>
 	<select name="phpbb_forum">
-		<BOUCLE_phpbb_categories1(PHPBB_FORUMS){parent_id=0 }>
+		<BOUCLE_phpbb_categories1(phpbb_forums){parent_id=0 }>
 			<option value="0" disabled="disabled">[(#FORUM_NAME)]</option>
 		
-			<BOUCLE_phpbb_forums1(PHPBB_FORUMS){parent_id=#FORUM_ID}>
+			<BOUCLE_phpbb_forums1(phpbb_forums){parent_id=#FORUM_ID}>
 				<option value="#FORUM_ID"[(#FORUM_ID|=={#CONFIG{comments_phpbb/phpbb_forum}}|?{' selected="selected"',''})]>|- [(#FORUM_NAME)]</option>
 			</BOUCLE_phpbb_forums1>
 		</BOUCLE_phpbb_categories1>
@@ -59,10 +59,10 @@ if(sql_showtable($phpbb_prefix."posts",$phpbb_base))
 <li>
    <label><:comments_phpbb:conf_temp:> :</label> 
    <select name="phpbb_tmpforum">
-			<BOUCLE_phpbb_categories2(PHPBB_FORUMS){parent_id=0 }>
+			<BOUCLE_phpbb_categories2(phpbb_forums){parent_id=0 }>
 			<option value="0" disabled="disabled">[(#FORUM_NAME)]</option>
 		
-			<BOUCLE_phpbb_forums2(PHPBB_FORUMS){parent_id=#FORUM_ID}>
+			<BOUCLE_phpbb_forums2(phpbb_forums){parent_id=#FORUM_ID}>
 				<option value="#FORUM_ID"[(#FORUM_ID|=={#CONFIG{comments_phpbb/phpbb_tmpforum}}|?{' selected="selected"',''})]>|- [(#FORUM_NAME)]</option>
 			</BOUCLE_phpbb_forums2>
 		</BOUCLE_phpbb_categories2>	
