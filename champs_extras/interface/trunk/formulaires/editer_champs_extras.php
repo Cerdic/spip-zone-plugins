@@ -37,8 +37,8 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	
 
 	$nouvelles_saisies = session_get('constructeur_formulaire_champs_extras_' . $objet);
-	$diff = saisies_comparer($saisies, $nouvelles_saisies);
-	
+	$diff = saisies_comparer_par_identifiant($saisies, $nouvelles_saisies);
+
 	$extras = array();
 	$table = table_objet_sql($objet);
 

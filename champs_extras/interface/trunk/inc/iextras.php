@@ -183,6 +183,20 @@ function iextras_formulaire_verifier($flux) {
 								'defaut' => ''
 							)
 						),
+						array(
+							'saisie' => 'radio',
+							'options' => array(
+								'nom' => "saisie_modifiee_${name}[options][traitements]",
+								'label' => _T('iextras:label_traitements'),
+								'explication' => _T('iextras:precisions_pour_traitements'),
+								'defaut' => '',
+								'datas' => array(
+									'' => _T('iextras:radio_traitements_aucun'),
+									'_TRAITEMENT_TYPO' => _T('iextras:radio_traitements_typo'),
+									'_TRAITEMENT_RACCOURCIS' => _T('iextras:radio_traitements_raccourcis'),
+								)
+							)
+						),
 					
 				)));	
 		}

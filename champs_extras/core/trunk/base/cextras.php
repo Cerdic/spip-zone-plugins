@@ -10,7 +10,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function cextras_declarer_tables_objets_sql($tables){
 
-	// pouvoir utiliser la class ChampExtra
 	include_spip('inc/cextras');
 	
 	// recuperer les champs crees par les plugins
@@ -49,7 +48,6 @@ function cextras_declarer_tables_objets_sql($tables){
 **/
 function cextras_declarer_tables_interfaces($interface){
 
-	// pouvoir utiliser la class ChampExtra
 	include_spip('inc/cextras');
 	
 	// recuperer les champs crees par les plugins
