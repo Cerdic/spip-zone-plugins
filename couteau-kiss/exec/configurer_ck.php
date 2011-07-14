@@ -33,4 +33,22 @@ function exec_configurer_ck_dist() {
 
 	}
 }
+
+
+if (!function_exists('sinon_interdire_acces_dist')){
+	/**
+	 * Bloquer l'acces a une page en renvoyant vers 403
+	 * @param bool $ok
+	 * @return string
+	 */
+	function sinon_interdire_acces($ok=false) {
+		if ($ok) return '';
+		// vider tous les tampons
+		while (ob_get_level())
+			ob_end_clean();
+		include_spip('inc/minipres');
+		minipres();
+		exit;
+	}
+}
 ?>
