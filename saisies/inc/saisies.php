@@ -82,6 +82,32 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
 
 
 /**
+ * Liste les saisies ayant une option X
+ * # saisies_lister_avec_option('sql', $saisies);
+ *  
+ *
+ * @param String $option Nom de l'option cherchée
+ * @param Array $saisies liste de saisies
+ * @param String $tri tri par défaut des résultats (s'ils ne sont pas deja triés) ('nom', 'identifiant')
+ * @return liste de ces saisies triees par nom ayant une option X définie
+**/
+function saisies_lister_avec_option($option, $saisies, $tri = 'nom') {
+	$saisies_option = array();
+	// tri par nom si ce n'est pas le cas
+	if (is_int(array_shift(array_keys($saisies)))) {
+		$trier = 'saisies_lister_par_' . $tri;
+		$saisies = $trier($saisies);
+	}
+	foreach ($saisies as $nom_ou_id => $saisie) {
+		if (isset($saisie['options'][$option]) and $saisie['options'][$option]) {
+			$saisies_option[$nom_ou_id] = $saisie;
+		}
+	}
+
+	return $saisies_option;
+}
+
+/**
  * Liste les saisies ayant une definition SQL
  *  
  *
@@ -90,19 +116,7 @@ function saisies_lister_par_nom($contenu, $avec_conteneur=true){
  * @return liste de ces saisies triees par nom ayant une option sql définie
 **/
 function saisies_lister_avec_sql($saisies, $tri = 'nom') {
-	$saisies_sql = array();
-	// tri par nom si ce n'est pas le cas
-	if (is_int(array_shift(array_keys($saisies)))) {
-		$trier = 'saisies_lister_par_' . $tri;
-		$saisies = $trier($saisies);
-	}
-	foreach ($saisies as $nom_ou_id => $saisie) {
-		if (isset($saisie['options']['sql']) and $saisie['options']['sql']) {
-			$saisies_sql[$nom_ou_id] = $saisie;
-		}
-	}
-
-	return $saisies_sql;
+	return saisies_lister_avec_option('sql', $saisies, $tri);
 }
 
 /*
