@@ -32,7 +32,7 @@ function balise_PROPRIETAIRE_dyn($wich='', $who='', $separator='<br />') {
 			$nom_site = typo($conf['proprietaire_nom'])
 				.( strlen($conf['adresse_pays']) ? ' - '.$conf['adresse_pays'] : '');
 			if ($wich == 'footer') $div .= '<small>';
-			$div = _T('proprietaire:copyright_info', array(
+			$div .= _T('proprietaire:copyright_info', array(
 				'nom_site' => $nom_site,
 				'date' => ( strlen($conf['copyright_annee']) ? $conf['copyright_annee'].'-' : '').date("Y"),
 			));
