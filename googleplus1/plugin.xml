@@ -3,7 +3,7 @@
 	<auteur>Phil</auteur>
 	<version>0.2</version>
 	<etat>stable</etat>
-	<description>Ajoute un bouton Google +1 grace à la balise #GOOGLEPLUS1</description>
+	<description>Ajoute un bouton Google +1</description>
 	<icon>images/plusone-32.png</icon>
 	<lien>http://www.spip-contrib.net</lien>
 	<prefix>googleplus1</prefix>
