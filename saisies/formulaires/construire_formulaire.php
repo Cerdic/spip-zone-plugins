@@ -230,8 +230,8 @@ function formulaires_construire_formulaire_traiter($identifiant, $formulaire_ini
 			unset($saisie_modifiee['verifier']);
 		
 		// On récupère les options postées en enlevant les chaines vides
-		$saisie_modifiee['options'] = array_filter($saisie_modifiee['options']);
-		if ($saisie_modifiee['verifier']['options']) $saisie_modifiee['verifier']['options'] = array_filter($saisie_modifiee['verifier']['options']);
+		$saisie_modifiee['options'] = array_filter($saisie_modifiee['options'], 'saisie_option_contenu_vide');
+		if ($saisie_modifiee['verifier']['options']) $saisie_modifiee['verifier']['options'] = array_filter($saisie_modifiee['verifier']['options'], 'saisie_option_contenu_vide');
 		
 		// On désinfecte à la main
 		if (is_array($saisie_modifiee['options']))
@@ -389,4 +389,21 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	return $html;
 }
 
+/**
+ * Callback d'array_filter()
+ * Permet de retourner tout ce qui n'est pas un contenu vide.
+ * La valeur 0 est par contre retournée.
+ *
+ * @param $var La variable a tester
+ * @return bool L'accepte-t-on ?
+**/
+function saisie_option_contenu_vide($var) {
+	if (!$var) {
+		if (is_string($var) AND strlen($var)) {
+			return true;
+		}
+		return false;
+	}
+	return true;
+}
 ?>
