@@ -48,7 +48,11 @@ function formulaires_editer_champs_extras_traiter_dist($objet, $redirect=''){
 	// ajouter les nouveaux champs;
 	champs_extras_creer($table, $diff['ajoutees']);
 	// modifier les champs modifies;
-	# champs_extras_modifier($table, $diff['modifiees']);	
+	if ($diff['modifiees']) {
+		$anciennes = saisies_lister_par_identifiant($saisies);
+		$anciennes = array_intersect_key($anciennes, $diff['modifiees']);
+		champs_extras_modifier($table, $diff['modifiees'], $anciennes);
+	}
 	# champs_extras_modifier($table, # modifiees nouvelles, # modifiees anciennes);	
 
 	

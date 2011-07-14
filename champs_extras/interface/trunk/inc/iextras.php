@@ -2,7 +2,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// etre certain d'avoir la classe ChampExtra de connue
 include_spip('inc/cextras');
 
 /**
@@ -158,47 +157,47 @@ function iextras_formulaire_verifier($flux) {
 			$sql = $saisies_sql[$type_saisie]['defaut']['options']['sql'];
 			$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
 
-					'saisie' => 'fieldset',
-					'options' => array(
-						'nom' => "saisie_modifiee_${name}[options][options_techniques]",
-						'label' => _T('iextras:legend_options_techniques'),			
+				'saisie' => 'fieldset',
+				'options' => array(
+					'nom' => "saisie_modifiee_${name}[options][options_techniques]",
+					'label' => _T('iextras:legend_options_techniques'),			
+				),
+				'saisies' => array(
+					array(
+						'saisie' => 'input',
+						'options' => array(
+							'nom' => "saisie_modifiee_${name}[options][sql]",
+							'label' => _T('iextras:label_sql'),
+							'obligatoire' => 'oui',
+							'size' => 50,
+							'defaut' => $sql
+						)
 					),
-					'saisies' => array(
-						array(
-							'saisie' => 'input',
-							'options' => array(
-								'nom' => "saisie_modifiee_${name}[options][sql]",
-								'label' => _T('iextras:label_sql'),
-								'obligatoire' => 'oui',
-								'size' => 50,
-								'defaut' => $sql
+					array(
+						'saisie' => 'oui_non',
+						'options' => array(
+							'nom' => "saisie_modifiee_${name}[options][rechercher]",
+							'label' => _T('iextras:label_rechercher'),
+							'explication' => _T('iextras:precisions_pour_rechercher'),
+							'defaut' => ''
+						)
+					),
+					array(
+						'saisie' => 'radio',
+						'options' => array(
+							'nom' => "saisie_modifiee_${name}[options][traitements]",
+							'label' => _T('iextras:label_traitements'),
+							'explication' => _T('iextras:precisions_pour_traitements'),
+							'defaut' => '',
+							'datas' => array(
+								'' => _T('iextras:radio_traitements_aucun'),
+								'_TRAITEMENT_TYPO' => _T('iextras:radio_traitements_typo'),
+								'_TRAITEMENT_RACCOURCIS' => _T('iextras:radio_traitements_raccourcis'),
 							)
-						),
-						array(
-							'saisie' => 'oui_non',
-							'options' => array(
-								'nom' => "saisie_modifiee_${name}[options][rechercher]",
-								'label' => _T('iextras:label_rechercher'),
-								'explication' => _T('iextras:precisions_pour_rechercher'),
-								'defaut' => ''
-							)
-						),
-						array(
-							'saisie' => 'radio',
-							'options' => array(
-								'nom' => "saisie_modifiee_${name}[options][traitements]",
-								'label' => _T('iextras:label_traitements'),
-								'explication' => _T('iextras:precisions_pour_traitements'),
-								'defaut' => '',
-								'datas' => array(
-									'' => _T('iextras:radio_traitements_aucun'),
-									'_TRAITEMENT_TYPO' => _T('iextras:radio_traitements_typo'),
-									'_TRAITEMENT_RACCOURCIS' => _T('iextras:radio_traitements_raccourcis'),
-								)
-							)
-						),
-					
-				)));	
+						)
+					),
+				
+			)));
 		}
 	}
 	return $flux;
