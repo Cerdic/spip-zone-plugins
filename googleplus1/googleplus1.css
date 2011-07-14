@@ -1,0 +1,19 @@
+div.googleplus1 {
+	margin: 2px 0 0px 0;
+	padding: 0;
+	clear:both;
+}
+
+.googleplus1 ul {
+	display: inline;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.googleplus1 ul li {
+	background: none;
+	display: inline;
+	list-style-type: none;
+	margin: 1px;
+	padding: 1px;
+}
+

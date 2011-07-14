@@ -1,30 +1,60 @@
-[(#REM) descriptif=
-<h4>Configuration du plugin Google plus 1</h4>
-<br />
-]
+<!-- titre=<:googleplus1:cfg_titre_googleplus1:> -->
+<!-- descriptif= <h4><:googleplus1:cfg_titre_boite_info:></h4>
+<p><:googleplus1:cfg_explication_boite_info:></p>
+<a href="http://www.spip-contrib.net/Google+1" class="spip_out">Documentation</a>-->
+<!-- logo=plusone-32.png -->
 
 [(#REM) titre=Google +1]
 [(#REM) icone=images/plusone-32.png]
 #CACHE{0}
-
-<form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
-
-<fieldset><legend><:googleplus1:taille:></legend>
-<p>
-
-
-<select name="googleplus1_taille" id="googleplus1_taille">
-<option value="small"[(#ENV{googleplus1_taille}|=={small}|oui)selected="selected"]><:googleplus1:taillepetit:></option>
-<option value="medium"[(#ENV{googleplus1_taille}|=={medium}|oui)selected="selected"]><:googleplus1:taillemoyen:></option>
-<option value="standard"[(#ENV{googleplus1_taille}|=={standard}|oui)selected="selected"]><:googleplus1:taillestandard:></option>
-<option value="tall"[(#ENV{googleplus1_taille}|=={tall}|oui)selected="selected"]><:googleplus1:taillegrand:></option>
-</fieldset>
-</p>
-
-
-<div>
-<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
-<input type="reset" value="<:reset:>" class="fondo" />
+<div class="formulaire_spip formulaire_config">
+	<form method="post" action="#SELF">
+	<div>[(#ENV{_cfg_}|form_hidden)]</div>
+	<div>
+	<ul>
+	<li class="fieldset">
+			<fieldset><legend><:googleplus1:cfg_taille:></legend>
+			<ul>
+				<li>
+				<label for="jsselector"><:googleplus1:cfg_taille:></label>
+				<p class="explication"><:googleplus1:cfg_taille:></p>
+			<select name="googleplus1_taille" id="googleplus1_taille">
+			<option value="small"[(#ENV{googleplus1_taille}|=={small}|oui)selected="selected"]><:googleplus1:cfg_taillepetit:></option>
+			<option value="medium"[(#ENV{googleplus1_taille}|=={medium}|oui)selected="selected"]><:googleplus1:cfg_taillemoyen:></option>
+			<option value="standard"[(#ENV{googleplus1_taille}|=={standard}|oui)selected="selected"]><:googleplus1:cfg_taillestandard:></option>
+			<option value="tall"[(#ENV{googleplus1_taille}|=={tall}|oui)selected="selected"]><:googleplus1:cfg_taillegrand:></option>
+			</select>
+				</li></ul>
+			</fieldset>
+		</li>
+		<li class="fieldset">
+			<fieldset><legend><:googleplus1:cfg_insertion:></legend>
+				<ul>
+					<li>
+						<label for="jsselector"><:googleplus1:cfg_selector:></label>
+						<p class="explication"><:googleplus1:cfg_inserer:></p>
+						<input type="text" name="jsselector" class="text" id="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" />
+						<div class="explication">
+							<strong><:googleplus1:cfg_exemples:></strong>
+							<dl>
+								<dt><tt>#contenu</tt></dt>
+								<dd><:googleplus1:cfg_en_bas:></dd>
+								<dt><tt>.page_article .cartouche:first</tt></dt>
+								<dd><:googleplus1:cfg_sous_bloc:></dd>
+								<dt><tt>#googleplus1</tt></dt>
+								<dd><:googleplus1:cfg_sous_div:></dd>
+							</dl>
+						</div>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+</ul>
+	<p class="bouton">
+	<input type="submit" name="_cfg_ok" value="<:ok:>" class="fondo" />
+	<input type="reset" value="<:reset:>" class="fondo" />
+	</p>
 </div>
 </form>
+</div>
 

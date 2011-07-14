@@ -1,0 +1,21 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+// googleplus1.js
+
+
+(function($) {
+	var googleplus1_init = function() {
+		var selector = $('[(#CONFIG{googleplus1/jsselector}|sinon{#contenu})]');
+		if (!selector.length) return;
+
+		var ul = $('<ul><\/ul>');
+		
+		selector.after(ul.wrap('<div class="googleplus1"><\/div>').parent());
+
+		[$('<li>(#GOOGLEPLUS1)</li>').appendTo(ul);]
+
+
+	};
+	$(function(){
+		$(googleplus1_init);
+	});
+})(jQuery);

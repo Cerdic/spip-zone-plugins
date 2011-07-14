@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Google +1</nom>
 	<auteur>Phil</auteur>
-	<version>0.1</version>
-	<etat>dev</etat>
+	<version>0.2</version>
+	<etat>stable</etat>
 	<description>Ajoute un bouton Google +1 grace à la balise #GOOGLEPLUS1</description>
 	<icon>images/plusone-32.png</icon>
 	<lien>http://www.spip-contrib.net</lien>
@@ -11,6 +11,6 @@
 		<nom>insert_head</nom>
 		<inclure>googleplus1_insert_head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
-	<categorie>statistique</categorie>
+	<necessite id="SPIP" version="[2.0.10;2.2.0)" />
+	<categorie>communication</categorie>
 </plugin>
