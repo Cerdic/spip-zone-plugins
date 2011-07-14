@@ -112,8 +112,9 @@ function compter_champs_extras($table) {
 		include_spip('inc/saisies');
 		$saisies_tables = iextras_champs_extras_definis();
 		foreach($saisies_tables as $t=>$s) {
-			$s = saisies_lister_par_nom($s);
-			$tables[$table] = count($s);
+			if ($s = saisies_lister_par_nom($s)) {
+				$tables[$t] = count($s);
+			}
 		}
 	}
 	
