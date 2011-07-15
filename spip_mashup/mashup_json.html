@@ -1,0 +1,37 @@
+#CACHE{24*3600,cache-client}
+[(#REM)
+/**
+* Plugin SPIP-Mashup
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Chargement d'une rubrique au format json pour affichage dans un mashup.
+* Inclusion des fonds :
+*  - inc-mash-legende : chargement du mot cle legende
+*  - inc-mash-articles : chargement des articles de la rubrique
+*  - inc-mash-documents : chargement des documents de la rubrique
+*  - inc-mash-rubriques : chargement des rubriques de la rubrique (recursif).
+*
+**/
+]#HTTP_HEADER{'Content-Type: text/html'}
+[(#ENV|mashup_url_page)]
+{<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{geoposition}>
+"legende":<INCLURE {fond=fonds/inc-mash-legende, id_rubrique, legende} >,
+	"objet" : 'rubrique', 
+	"id" : #ID_RUBRIQUE,
+	"lon" : #LON,
+	"lat" : #LAT,
+	"zoom" : #ZOOM,
+	"logo" : "[(#LOGO_RUBRIQUE||image_reduire{100}|texte_mashup)]",
+	"img" : "[IMG/(#LOGO_RUBRIQUE|fichier)]",
+	"url" : "[(#URL_RUBRIQUE)]",
+	"titre" : "[(#TITRE|texte_mashup)]",
+	"description" : "[(#INTRODUCTION|texte_mashup)]",
+"articles":[(#INCLURE {fond=fonds/inc-mash-articles, id_rubrique, legende})],
+"documents":[(#INCLURE {fond=fonds/inc-mash-documents, id_rubrique})],
+"rubriques":[(#INCLURE {fond=fonds/inc-mash-rubriques, id_rubrique, legende})]
+</BOUCLE_rubrique>}

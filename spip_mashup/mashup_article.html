@@ -1,0 +1,49 @@
+[(#REM)
+/**
+* Plugin SPIP-Mashup
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Cette page permet d'afficher les articles dans les dialogues du mashup.
+*
+**/
+][(#REM) passer en url page pour le decodage dans la page ]
+[(#ENV|mashup_url_page)]
+<BOUCLE_article(ARTICLES){id_article}>
+<!-- titre=#TITRE -->
+    <div class="cartouche">
+			[(#LOGO_ARTICLE||image_reduire{160})]
+			[<p class="surtitre">(#SURTITRE)</p>]
+			[<p class="soustitre">(#SOUSTITRE)</p>]
+			<p><small><abbr class="published" title="[(#DATE|date_iso)]">[(#DATE|nom_jour) ][(#DATE|affdate)]</abbr>[, <:par_auteur:> (#LESAUTEURS)][ (<:texte_date_publication_anterieure:> (#DATE_REDAC|affdate)).]</small></p>
+			<INCLURE{fond=inc-tag}{id_article}>
+			[(#FORMULAIRE_JAIME_JAIMEPAS)]
+	</div>
+    <div class="contenu">
+			[(#REM) Inclure le modele des liens de traductions ]
+			#MODELE{article_traductions}
+			
+			[<div class="chapo">(#CHAPO|image_reduire{500,0})</div>]
+			[<div class="texte">(#TEXTE|sinon{[(#DESCRIPTIF)]}|image_reduire{500,0})</div>]
+    </div>
+	<BOUCLE_loc(GEOPOSITIONS){objet='article'}{id_objet=#ID_ARTICLE}>
+		<a class="voir" href="javascript:mashup.center(#LON,#LAT,#ZOOM)"><:spip_mashup:voir:></a>
+	</BOUCLE_loc>
+
+	[(#REM) Portfolio : album d'images ]
+	<B_documents_portfolio>
+	<div id="documents_portfolio">
+		<h2><:info_portfolio:></h2>
+		<BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+		[<a href="#URL_DOCUMENT" type="#MIME_TYPE" [ title="(#TITRE|couper{80}|texte_backend)"]>
+		(#FICHIER|copie_locale|image_reduire{0,80}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+		</a>]
+		</BOUCLE_documents_portfolio>
+	</div>
+	</B_documents_portfolio>
+	
+</BOUCLE_article>

@@ -1,0 +1,31 @@
+[(#REM)
+/**
+* Plugin SPIP-Mashup
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Chargement des articles de la rubrique
+* Inclusion des fonds :
+*  - inc-mash-documents : chargement des documents de la rubrique
+*
+**/
+][<BOUCLE_articles_racine(ARTICLES){id_rubrique}{geoposition}>[(#COMPTEUR_BOUCLE|!={1}|?{","})]
+{	"objet" : 'article', 
+	"id" : #ID_ARTICLE,
+	"lon" : #LON,
+	"lat" : #LAT,
+	"zoom" : #ZOOM,
+	"url" : "[(#URL_ARTICLE)]",
+	"logo" : "[(#LOGO_ARTICLE||image_reduire{100}|addslashes)]",
+	"titre" : "[(#TITRE|texte_mashup)]",
+	"description" : "[(#INTRODUCTION{150}|texte_mashup)]" ,
+	"img":"[(#LOGO_ARTICLE|icon_mashup{[(#CHEMIN{img/article.png})]}|extraire_attribut{src})]",
+	"align" : "[(#DESCRIPTIF**|mashup_param{align})]",
+	<BOUCLE_mot(MOTS){type=#LEGENDE}{id_article}{0,1}>"mot" : #ID_MOT,</BOUCLE_mot>
+"documents":[(#INCLURE {fond=fonds/inc-mash-documents, id_article})]
+}</BOUCLE_articles_racine>
+]

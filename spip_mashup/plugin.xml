@@ -1,0 +1,32 @@
+<plugin>
+	<nom> <!-- Nom du plugin -->
+	SPIP Mashup
+	</nom>
+	<auteur>	<!-- Auteur du plugin -->
+		[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]
+	</auteur>
+	<version>0.1</version>
+	<icon>img/mashup.png</icon>
+	<etat>test</etat>
+	<necessite id="geoportail" version="[1.02;]" />
+	<licence>(c) 2011 GPL</licence>
+	<description>
+Ce plugin permet d'afficher le contenu d'une rubrique sur une carte.
+_ Il nécessite le plugin [SPIP-Géoportail->http://www.spip-contrib.net/Plugin-SPIP-Geoportail] pour l'affichage des cartes.
+
+Les articles, rubriques et documents sont localisés sur une carte et leur affichage se fait en [?AJAX] directement sur la carte.
+	</description>
+	<prefix>
+		spip_mashup
+	</prefix>
+	<pipeline>
+		<!-- Affichage des rubriques -->
+		<nom>styliser</nom>
+		<inclure>mashup_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>mashup_fonctions.php</inclure>
+	</pipeline>
+	<categorie>divers</categorie>
+</plugin>

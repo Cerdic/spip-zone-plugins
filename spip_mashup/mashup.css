@@ -1,0 +1,221 @@
+/** Style pour l'affichage des traces
+*/
+#geoportailDefaultStyle
+{	width: 2px;									/* pointRadius */
+	border-style: solid;						/* strokeDashstyle : solid, dashed ou dotted */
+	border-width: 2px;							/* strokeWidth */
+	border-color: #00A;							/* strokeColor */
+}
+
+.cartouche .tag
+{	vertical-align:middle;
+}
+
+.mashup,
+#page_mashup
+{	overflow:hidden;
+	text-align:left;
+}
+
+#page_mashup .GeoportalMapDiv 
+{	margin:auto;
+}
+
+#page_mashup #entete, #page_mashup #pied
+{	margin:auto;
+	border:0;
+}
+
+#page_mashup .gpLeftColumn
+{	background:url("img/spip.png") no-repeat center bottom;
+}
+
+#page_mashup .gpViewerUpperSeparator
+{	background:url("img/regl_Horiz_Haut_Bleu.gif") no-repeat center center;
+	height:6px!important;
+	cursor:pointer;
+}
+#page_mashup .gpViewerUpperSeparatorTop,
+#page_mashup .gpViewerLowerSeparator
+{	background:url("img/regl_Horiz_Bas_Bleu.gif") no-repeat center center;
+	height:6px!important;
+	cursor:pointer;
+}
+
+#page_mashup .gpViewerLowerSeparatorBottom
+{	background:url("img/regl_Horiz_Haut_Bleu.gif") no-repeat center center;
+}
+
+#page_mashup .plein_ecran:hover
+{	background:url("img/picto_normalScreen_on.gif") no-repeat center center;
+}
+#page_mashup .plein_ecran
+{	background:url("img/picto_normalScreen_off.gif") no-repeat center center;
+	width:40px;
+	height:35px;
+	display:block;
+	float:right;
+}
+
+/** Popup */
+#popup
+{	background:url("img/globe-pt.png") no-repeat bottom right;
+}
+
+#popup .savoirplus
+{	float:right;
+	margin-top:1em;
+	text-align:right;
+}
+#popup .savoirplus a
+{	padding-right:18px;
+}
+#popup .savoirplus a.lien
+{	background:url("img/lien.png") no-repeat center right;
+}
+
+.gpControlFloatingBody
+{	padding:0 1em;
+}
+.gpControlFloatingBody img.spip_logos
+{	float:left;
+	padding:0 5px 5px;
+}
+.gpControlFloatingBody ul.legende
+{	background-color:White;
+	list-style:none outside none; 
+	margin:1em;
+	padding:0.5em;
+	clear:both;
+	border:1px solid #369;
+}
+.gpControlFloatingBody .legende img
+{	width:15px;
+	padding:0 8px;
+	vertical-align:middle;
+}
+
+/** Boite Info */
+#jqDialog.wait 
+{	width:280px;
+}
+#jqDialog.boiteInfo 
+{	width:600px;
+	font-size:1em;
+	background:url("img/globe.png") no-repeat scroll right bottom #FFFFFF;
+	border:1px solid #000;
+}
+#jqDialog.patience .jqDialogBlock
+{	padding:0.5em 1em !important;
+} 
+#jqDialog.patience .jqDialogInner
+{	padding-left:1.5em;
+} 
+#jqDialog.patience .jqCloseButton 
+{	display:none;
+}
+#jqDialog.wait .jqCloseButton ,
+#jqDialog.viewer .jqCloseButton ,
+#jqDialog.boiteInfo .jqCloseButton 
+{	background: url("img/close.png") no-repeat scroll 0 0 transparent;
+    height: 30px;
+    right: -19px;
+    top: -19px;
+    width: 30px;
+}
+#jqDialog.wait .jqCloseButton:hover ,
+#jqDialog.viewer .jqCloseButton:hover ,
+#jqDialog.boiteInfo .jqCloseButton:hover
+{	background-position: 0 -30px;
+} 
+#jqDialog.viewer .jqDialogInner
+{	overflow:hidden;
+	background-color:White;
+}
+#jqDialog.viewer .prevnext a
+{	background: url("img/next.png") no-repeat scroll center transparent;
+	width:20px;
+	height:12px;
+    vertical-align:top;
+	display:inline-block;
+	opacity : 0.7;
+	filter : alpha(opacity=70); 
+}
+#jqDialog.viewer .prevnext a.prev
+{	background-image: url("img/prev.png");
+}
+#jqDialog.viewer .prevnext a:hover
+{	opacity : 1;
+	filter : alpha(opacity=100); 
+}
+
+
+#jqDialog.boiteInfo .titre
+{	font-size:1.7em;
+    font-family: Georgia,Times,serif;
+    font-weight:normal;
+    color:#000;
+    margin:0.3em 0.5em 0.1em;
+    padding:0;
+}
+#jqDialog.boiteInfo .jqDialogInner
+{   color: #333333;
+    font-family: "Luxi sans","Lucida Grande",Lucida,"Lucida Sans Unicode",sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    padding:0;
+}
+#jqDialog.wait .jqDialogBlock
+{	padding:1em!important;
+}
+#jqDialog.wait .jqDialogInner
+{	padding:1em;
+	font-size:1em;
+}
+
+#jqDialog .prevnext
+{	float:right;
+	padding:0.5em;
+}
+#jqDialog .prev
+{	url("img/voir.gif") no-repeat scroll center transparent;
+}
+
+#jqDialog.boiteInfo h2
+{	font-size:1.3em;
+}
+#jqDialog.boiteInfo .menu
+{	margin-bottom:0.5em;
+}
+#jqDialog.boiteInfo .articles ul li
+{	margin:0;
+	padding:0;
+}
+
+#jqDialog.boiteInfo .cartouche
+{	margin-bottom:1em;
+}
+
+/*
+#jqDialog.boiteInfo .jqDialogBlock,
+#jqDialog.boiteInfo .jqDialogInner
+{	margin:0;
+	padding:0!important;
+}
+#jqDialog.boiteInfo .titre0
+{	padding:0 1em;
+	background-color:#369;
+	color:White;
+	clear:both;
+}
+*/
+
+/** Affichage des articles, rubriques, etc. */
+a.voir {
+  background: url("img/voir.gif") no-repeat scroll right bottom transparent;
+  clear: both;
+  float: right;
+  height: 24px;
+  margin: 3px 2em;
+  padding-right: 24px;
+}

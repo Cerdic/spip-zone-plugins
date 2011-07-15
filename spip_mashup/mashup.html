@@ -1,0 +1,83 @@
+[(#REM)
+/**
+* Plugin SPIP-Mashup
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Page d'affichage des mashups : cette page est appelee en lieu et place de la 
+* place rubrique lorsque celle ci contient un raccourcis <mashup|carte>
+*
+**/
+]#CACHE{3600}
+<BOUCLE_principale(RUBRIQUES) {id_rubrique}{geoposition}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION{150}|textebrut)" />]
+<INCLURE{fond=inc-head}>
+[(#REM) Lien vers le flux RSS des articles la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+
+<link rel="stylesheet" href="#CHEMIN{mashup.css}" type="text/css" media="all" />
+<script language=javascript src="#CHEMIN{mashup.js}" ></script>
+
+<script language=javascript>
+/** Variable pour Thickbox 2 */
+var TB_chemin_animation = "#CHEMIN{circle_animation.gif}";
+var TB_chemin_close = "#CHEMIN{close.gif}";
+
+mashup.waitIcon = "#CHEMIN{img/loading.gif}";
+mashup.graphic = "#CHEMIN{img/graphic.png}";
+mashup._T["plus"] = "<:spip_mashup:plus:>";
+mashup._T["voir"] = "<:spip_mashup:voir:>";
+
+[(#ENV|mashup_config)]
+
+/** Initialisation de la carte */
+function initSpipMap0 (map,id)
+{	// Enregistrer le comportement des bords
+	$(".gpViewerUpperSeparator").click(function(e){ mashup.pleinEcran('haut'); });
+	$(".gpViewerLowerSeparator").click(function(e){ mashup.pleinEcran('bas'); });
+		
+	// Chargement de la rubrique
+	mashup.load ("#ID_RUBRIQUE", "[(#ENV{legende,[(#DESCRIPTIF**|mashup_param{legende})]})]");
+}
+</script>
+</head>
+
+<body class="mashup">
+<div id="page_mashup" style='width:100%; height:100%'>
+	
+	[(#REM) Entete de la page + titre du site ]
+	<div style="display:block; position:relative">
+		<div style="position:absolute; bottom:0; right:1em">
+			<table cellpadding=0 cellspacing=0><tr><td>
+			<a class='plein_ecran' href="javascript:mashup.pleinEcran();" title="<:spip_mashup:plein_ecran:>"></a>
+			</td><td>
+			[(#MODELE{geoportail_geolien}{align=right})]
+			</td></tr></table>
+		</div>
+		<INCLURE{fond=inc-entete}>
+	</div>
+	[(#SET{carto,[(#DESCRIPTIF**|mashup_param{carto,0.8})]})]
+	[(#SET{ortho,[(#DESCRIPTIF**|mashup_param{ortho,0})]})]
+	[(#SET{min_zoom,[(#DESCRIPTIF**|mashup_param{min_zoom,0})]})]
+	[(#SET{max_zoom,[(#DESCRIPTIF**|mashup_param{max_zoom,20})]})]
+	[(#SET{mode,[(#ENV{mode,[(#DESCRIPTIF**|mashup_param{mode})]})]})]
+	[(#MODELE{geoportail}{id_rubrique}{id_secteur}{zone=#ZONE}{type=Standard}{mode=#GET{mode}}{carto=#GET{carto}}{ortho=#GET{ortho}}{min_zoom=#GET{min_zoom}}{max_zoom=#GET{max_zoom}}{layerctrl=1}{width=600px}{height=400px})]
+	[(#REM) Centrer si pas d'arguments ]
+	[(#ENV{lon,0}|=={0}|?{[(#MODELE{geoportail_centrer}{id_rubrique})]})]
+	
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>
+	

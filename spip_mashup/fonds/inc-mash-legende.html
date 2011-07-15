@@ -1,0 +1,20 @@
+[(#REM)
+/**
+* Plugin SPIP-Mashup
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Chargement chargement du mot cle legende
+*
+**/
+][<BOUCLE_mot(MOTS){type=#LEGENDE}>[(#COMPTEUR_BOUCLE|!={1}|?{","})]
+{	"id" : '#ID_MOT', 
+	"titre" : "[(#TITRE|texte_mashup)]",
+	"description" : "[(#DESCRIPTIF|texte_mashup)]" ,
+	"img" : "[(#LOGO_MOT||image_reduire{60}|extraire_attribut{src})]"
+}</BOUCLE_mot>
+]

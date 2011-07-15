@@ -1,0 +1,44 @@
+[(#REM)
+/**
+* Plugin SPIP-Mashup
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Cette page permet d'afficher les rubriques dans les dialogues du mashup.
+*
+**/
+][(#REM) passer en url page pour le decodage dans la page ]
+[(#ENV|mashup_url_page)]
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<!-- titre=#TITRE-->
+    <div class="cartouche">
+		[(#LOGO_RUBRIQUE||image_reduire{160})]
+		[<p><small><:dernier_ajout:> : (#DATE|affdate_jourcourt).</small></p>]
+		<INCLURE{fond=inc-tag}{id_rubrique}>
+		[(#FORMULAIRE_JAIME_JAIMEPAS)]
+    </div>
+	
+    <div class="contenu">
+		[<div class="texte">(#TEXTE|sinon{[(#DESCRIPTIF)]}|image_reduire{500,0})</div>]
+	</div>
+	<BOUCLE_loc(GEOPOSITIONS){objet='rubrique'}{id_objet=#ID_RUBRIQUE}>
+		<a class="voir" href="javascript:mashup.center(#LON,#LAT,#ZOOM)"><:spip_mashup:voir:></a>
+	</BOUCLE_loc>
+
+	[(#REM) Portfolio : album d'images ]
+	<B_documents_portfolio>
+	<div id="documents_portfolio">
+		<h2><:info_portfolio:></h2>
+		<BOUCLE_documents_portfolio(DOCUMENTS) {id_rubrique} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+		[<a href="#URL_DOCUMENT" type="#MIME_TYPE" [ title="(#TITRE|couper{80}|texte_backend)"]>
+		(#FICHIER|copie_locale|image_reduire{0,80}|inserer_attribut{class,spip_logos}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})
+		</a>]
+		</BOUCLE_documents_portfolio>
+	</div>
+	</B_documents_portfolio>
+
+</BOUCLE_rub>

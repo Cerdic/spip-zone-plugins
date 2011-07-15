@@ -1,0 +1,35 @@
+[(#REM)
+/**
+* Plugin SPIP-Mashup
+*
+* @author:
+* Jean-Marc Viglino (ign.fr)
+*
+* Copyright (c) 2011
+* Logiciel distribue sous licence GNU/GPL.
+*
+* Chargement des rubriques de la rubrique (recursif).
+* Inclusion des fonds :
+*  - inc-mash-articles : chargement des articles de la rubrique
+*  - inc-mash-documents : chargement des documents de la rubrique
+*  - inc-mash-rubriques : chargement des rubriques de la rubrique (recursif).
+*
+**/
+][<BOUCLE_rubriques(RUBRIQUES){geoposition}{id_parent=#ID_RUBRIQUE}>[(#COMPTEUR_BOUCLE|!={1}|?{","})]
+{	"objet" : 'rubrique', 
+	"id" : #ID_RUBRIQUE,
+	"lon" : #LON,
+	"lat" : #LAT,
+	"zoom" : #ZOOM,
+	"logo" : "[(#LOGO_RUBRIQUE||image_reduire{100}|addslashes)]",
+	"img":"[(#LOGO_RUBRIQUE|icon_mashup{[(#CHEMIN{img/rubrique.png})]}|extraire_attribut{src})]",
+	"url" : "[(#URL_RUBRIQUE)]",
+	"titre" : "[(#TITRE|texte_mashup)]",
+	"description" : "[(#INTRODUCTION|texte_mashup)]",
+	"align" : "[(#DESCRIPTIF**|mashup_param{align})]",
+	<BOUCLE_mot(MOTS){type=#LEGENDE}{id_rubrique}{0,1}>"mot" : #ID_MOT,</BOUCLE_mot>
+"articles":[(#INCLURE {fond=fonds/inc-mash-articles, id_rubrique, legende})],
+"documents":[(#INCLURE {fond=fonds/inc-mash-documents, id_rubrique})],
+"rubriques":[(#INCLURE {fond=fonds/inc-mash-rubriques, id_rubrique, legende})]
+}
+</BOUCLE_rubriques>]
