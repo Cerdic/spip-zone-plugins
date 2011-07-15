@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_action_annuler' => 'Annuler', # NEW
 	'construire_action_configurer' => 'Configurer', # NEW
 	'construire_action_dupliquer' => 'Dupliquer', # NEW
+	'construire_action_dupliquer_copie' => '(copie)', # NEW
 	'construire_action_supprimer' => 'Supprimer', # NEW
 	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
 	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
@@ -24,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
 	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
 	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
+	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
 	'construire_position_explication' => 'Indiquez devant quel autre champ sera plac&eacute; celui-ci.', # NEW
 	'construire_position_fin_formulaire' => '&Agrave; la fin du formulaire', # NEW
 	'construire_position_fin_groupe' => '&Agrave; la fin du groupe @groupe@', # NEW
@@ -32,6 +34,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?', # NEW
 	'construire_verifications_aucune' => 'Aucune', # NEW
 	'construire_verifications_label' => 'Type de v&eacute;rification &agrave; effectuer', # NEW
+
+	// E
+	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
+
+	// I
+	'info_configurer_saisies' => 'Page de test des Saisies', # NEW
 
 	// L
 	'label_annee' => 'Jahr',
@@ -47,6 +55,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Mehrsprachige Anzeige',
 	'option_attention_explication' => 'Nachricht wichtiger als Meldung',
 	'option_attention_label' => 'Achtung',
+	'option_autocomplete_defaut' => 'Laisser par défaut', # NEW
+	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
+	'option_autocomplete_label' => 'Pré-remplissage du champ', # NEW
+	'option_autocomplete_off' => 'Désactiver', # NEW
+	'option_autocomplete_on' => 'Activer', # NEW
 	'option_cacher_option_intro_label' => 'Erste leere Auswahl ausblenden',
 	'option_choix_destinataires_explication' => 'Einer oder mehrere Empfänger, welche der Besucher auswählen kann. Wenn er keine Auswahl trifft, geht die Nachricht an den ersten Administrator (Autor 1).',
 	'option_choix_destinataires_label' => 'Mögliche Empfänger',
