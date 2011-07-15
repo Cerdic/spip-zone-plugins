@@ -6,4 +6,7 @@
 		<traducteur nom="davood" />
 	</langue>
 	<langue code="pt" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
