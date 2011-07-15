@@ -1,0 +1,35 @@
+<plugin>
+	<!--  
+
+	// ausu plugin.xml
+
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	<nom>Auteurs Supprimer (AuSu)</nom>
+	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
+	<version>1.00.00</version>
+	<icon>images/ausu-64.png</icon>
+	<etat>stable</etat>
+
+	<description><strong>AuSu</strong> permet de supprimer rapidement
+	un ou plusieurs auteurs via un seul formulaire.<br />
+	Si SPIP-Listes est pr&#233;sent, <strong>AuSu</strong> supprime &#233;galement
+	les abonnements et les formats de r&#233;ception des auteurs concern&#233;s.
+	</description>
+
+	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Formulaire-de-suppression-d-auteurs]</lien>
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	
+	<prefix>ausu</prefix>
+	
+	<bouton id='auteurs_supprimer' parent='auteurs'>
+		<icone>images/ausu-24.png</icone>
+		<titre>Supprimer les auteurs</titre>
+	</bouton>
+
+	<necessite id="SPIP" version="[2.1.10;]" />
+	<categorie>maintenance </categorie>
+</plugin>
