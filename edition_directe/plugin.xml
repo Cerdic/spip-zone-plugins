@@ -39,5 +39,6 @@
 	<necessite id="SPIP" version="[2.0.14;]" />
 	<necessite id="medias" version='[1.6.1;]'/>	
 	<necessite id="cfg" version='[1.16.0 ;]'/>
+	<necessite id="spip_bonux" version='[2.2.17;]'/>	
 </plugin>
 
