@@ -6,9 +6,9 @@
 		"description":[(#DESCRIPTIF|json_encode)]
 		[,(#LOGO_GIS|oui)
 		[(#SET{logo_doc,#LOGO_GIS|image_passe_partout{28,28}|image_recadre{28,28}|image_recadre{32,32,center}|image_aplatir{jpg,ffffff}})]]
-		[,(#LOGO_GIS|non)
-		[(#CHEMIN{images/marker_defaut.png}|oui)
-			[(#SET{logo_doc,#CHEMIN{images/marker_defaut.png}|image_passe_partout{28,28}|image_recadre{28,28}|image_aplatir{jpg,ffffff}})]
+		[(#LOGO_GIS|non)
+		[,(#CHEMIN{images/marker_defaut.png}|oui)[
+			(#SET{logo_doc,#CHEMIN{images/marker_defaut.png}|image_passe_partout{28,28}|image_recadre{28,28}|image_aplatir{jpg,ffffff}})]
 		]]
 		[(#GET{logo_doc}|oui)
 		#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
