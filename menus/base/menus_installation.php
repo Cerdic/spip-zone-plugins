@@ -20,7 +20,6 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 			include_spip('base/abstract_sql');
 			creer_base();
 			
-			echo "Installation du plugin menus<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
