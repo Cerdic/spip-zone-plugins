@@ -9,15 +9,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'المحرك يتجاهل العلامات النطقية (فإدخال «déjà» او «deja» يعطي «déjà» و«dejà» و«déja»...)',
-	'activer_indexation' => 'Activer l\'indexation des', # NEW
+	'activer_indexation' => 'تفعيل فهرسة',
 	'asie' => 'آسيا',
 	'asterisque_terminale' => 'لا يعطي شيئاً: فالنجمة يجب ان تكون في الآخر',
 	'aussi' => 'أيضاً',
 
 	// C
 	'casse_indifferente' => 'لا يتأثر المحرك بحالة الأحرف ان كانت كبيرة او صغيرة.',
-	'configuration_indexation_document' => 'Configuration de l\'indexation des documents', # NEW
-	'configurer_egalement_doc' => 'Vous pouvez &eacute;galement configurer l\'indexation des documents :', # NEW
+	'configuration_indexation_document' => 'إعداد فهرسة المستندات',
+	'configurer_egalement_doc' => 'يمكن أيضاً إعداد فهرسة المستندات:',
 	'convertir_myisam' => 'تحويل الى MyISAM',
 	'convertir_toutes' => 'تحويل كل الجداول الى  MyISAM',
 	'convertir_utf8' => 'تحويل الى UTF-8 لاسترجاع الاتساق',
@@ -30,11 +30,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfanter' => 'ولدت',
 	'enfantillage' => 'ولدن',
 	'enfants' => 'ولد',
-	'erreur_doc_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .doc', # NEW
-	'erreur_pdf_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .pdf', # NEW
-	'erreur_ppt_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .ppt', # NEW
-	'erreur_taille_index' => 'Il faut au moins indexer un caract&egrave;re.', # NEW
-	'erreur_xls_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .xls', # NEW
+	'erreur_doc_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات doc.',
+	'erreur_pdf_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات pdf.',
+	'erreur_ppt_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات ppt.',
+	'erreur_taille_index' => 'يجب فهرسة حرف واحد على الأقل.',
+	'erreur_xls_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات xls.',
 	'et' => '<strong>و</strong>',
 	'etranger' => 'غريب',
 	'exemples' => 'أمثلة على الاستخدام',
@@ -43,33 +43,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fant' => 'لدي',
 	'fonctionnement_recherche' => '<strong>طريقة عمل محرك البحث</strong>',
 	'fulltext_cree' => 'تم إنشاء FULLTEXT',
-	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
+	'fulltext_documentation' => 'لمزيد من المعلومات حول الإعداد، راجع التعليمات الفورية:',
 
 	// G
-	'general' => 'Général', # NEW
+	'general' => 'عام',
 
 	// I
 	'il_faut_myisam' => 'يجب ان يكون نوع الجداول MyISAM',
 	'incoherence_charset' => 'قد يؤدي عدم تجانس بين طقم أحرف موقعك وطقم أحرف جداول قاعدة البيانات الى تحريف نتائج البحث للعديد من الأحرف:',
 	'index_regenere' => 'فهارس الجدول المعاد إنتاجها',
 	'index_reinitialise' => 'تمت إعادة تأصيل المستندات الخاطئة',
-	'index_reinitialise_totalement' => 'Les document ont tous été réinitialisés', # NEW
+	'index_reinitialise_totalement' => 'تمت إعادة تأصيل كل المستندات',
 	'index_supprime' => 'تم حذف الفهرس',
-	'indiquer_chemin_bin' => 'Indiquer le chemin vers le binaire traitant l\'indexation des', # NEW
-	'indiquer_options_bin' => 'Indiquer les options pour l\'indexation des', # NEW
-	'infos_fulltext_document' => 'Vous pourrez ici choisir quels type dedocuments sont indexés par Fulltext et configurer les binaires utilisés et leurs options.', # NEW
+	'indiquer_chemin_bin' => 'تحديد مسار التطبيق الدي يعالج فهرسة',
+	'indiquer_options_bin' => 'تحديد خيارات فهرسة',
+	'infos_fulltext_document' => 'يمكن من هنا اختيار اي نوع من المستندات يخضع لفهرسة الملحق وإعداد التطبيقات المستخدمة وخياراتها.',
 
 	// L
 	'liste_tables_connues' => 'هذه هي قائمة الجداول التي تعرّف عليها محرك البحث. يمكنك إضافة عناصر FULLTEXT، انظر التوثيق على العنوان',
 
 	// M
 	'mais_pas' => 'ولكن <strong>ليس</strong>',
-	'message_ok_configuration' => 'Enregistrement de vos pr&eacute;f&eacute;rences termin&eacute;e', # NEW
-	'message_ok_update_configuration' => 'Mise &agrave; jour de vos pr&eacute;f&eacute;rences termin&eacute;e', # NEW
+	'message_ok_configuration' => 'تم تسجيل تفضيلاتك',
+	'message_ok_update_configuration' => 'تم تحديث تفضيلاتك',
 
 	// N
-	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)', # NEW
-	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).', # NEW
+	'necessite_version_php' => '(يتطلب PHP 5.2 الأقل وخيار -enable-zip)',
+	'nombre_caracteres' => 'عدد الحروف المفهرسة (من بداية المستند).',
 
 	// O
 	'ou_bien' => 'أو',
@@ -79,14 +79,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'premier_soit' => '<strong>إما</strong>',
 
 	// Q
-	'que_des_exemples' => 'NB : les adresses de binaires et options propos&eacute;es ici ab initio ne sont que des exemples.', # NEW
+	'que_des_exemples' => 'ملاحظة: عناوين التطبيقات المقترحة هنا هي أمثلة.',
 
 	// R
 	'regenerer_tous' => 'إعادة إنتاج كل فهارس FULLTEXT',
 	'reinitialise_index_doc' => 'إعادة تأصيل فهرسة المستندات الخاطئة',
-	'reinitialise_totalement_doc' => 'Réinitialiser l\'indexation de tous les documents', # NEW
+	'reinitialise_totalement_doc' => 'إعادة تأصيل فهرسة كل المستندات',
 	'reserve_webmestres' => 'صفحة محصورة بمسؤول الموقع',
-	'retour_configuration_fulltext' => 'Retour &agrave; la configuration de Fulltext', # NEW
+	'retour_configuration_fulltext' => 'العودة الى إعداد الملحق',
 	'retourne' => 'يسترجع النصوص التي تحتوي ',
 
 	// S
