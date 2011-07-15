@@ -1,5 +1,5 @@
 [(#SET{id_rubrique, #ENV{id_rubrique}|intval})]
-[(#SET{id_secteur_exclus, #ENV{id_secteur_exclus,0}|intval})]
+[(#SET{id_secteur_exclus, #ENV{id_secteur_exclus}|?{#ENV{id_secteur_exclus}|explode{','},#ARRAY}})]
 [(#SET{niveau_max_txt, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
 [(#SET{niveau_max, #ENV{niveau}|intval|?{#ENV{niveau},1000}})]
 [(#SET{sousrub_cond, #ENV{sousrub_cond}|=={oui}|?{'on',''}})]
@@ -10,7 +10,7 @@
 
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
 
-[(#SET{id_rubriques_exclues, #ENV{id_rubriques_exclues}|explode{','}|sinon{#ARRAY}})]
+[(#SET{id_rubriques_exclues, #ENV{id_rubriques_exclues}|?{#ENV{id_rubriques_exclues}|explode{','},#ARRAY}})]
 
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
@@ -25,8 +25,11 @@
 		[(#GET{niveau_max_txt}|=={infini}|oui)
 			<:menus:entree_infini:>
 		]
-		[(#GET{id_secteur_exclus}|=={0}|non)
-			<:menus:info_secteur_exclus{id_secteur=#GET{id_secteur_exclus}}:>
+		[(#GET{id_secteur_exclus}|oui)
+			<:menus:info_secteur_exclus{id_secteur=#ENV{id_secteur_exclus}}:>
+		]
+		[(#GET{id_rubriques_exclues}|oui)
+			<:menus:info_rubriques_exclues{id_rubriques=#ENV{id_rubriques_exclues}}:>
 		]
 		[(#GET{sousrub_cond}|oui)
 			<br /><:menus:info_sousrub_cond:>
