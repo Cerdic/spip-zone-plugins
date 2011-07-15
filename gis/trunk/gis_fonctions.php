@@ -118,5 +118,13 @@ function balise_distance_dist($p) {
 	return rindex_pile($p, 'distance', 'gis');
 }
 
-
+function generer_url_ecrire_gis($id, $args='', $ancre='', $statut='', $connect='') {
+	$a = "id_gis=" . intval($id);
+	if (!$statut) {
+		$statut = sql_getfetsel('statut', 'spip_articles', $a,'','','','',$connect);
+	}
+	$h = generer_url_ecrire('gis', $a . ($args ? "&$args" : ''))
+	. ($ancre ? "#$ancre" : '');
+	return $h;
+}
 ?>

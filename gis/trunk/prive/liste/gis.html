@@ -1,0 +1,36 @@
+[(#SET{defaut_tri,#ARRAY{
+	objet,#ENV{objet_sens,-1},
+	id_objet,1
+}})
+]<B_liste_gis>
+#ANCRE_PAGINATION
+<div class="liste-elements gis ajax">
+<table class='spip liste'>
+[(#ENV{where}|oui)[(#SET{titre,<:gis:info_liste_gis:>})]]
+[<caption><strong class="caption">(#GET{titre,#ENV*{titre,<:gis:info_liste_gis:>}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th></th>
+			<th></th>
+			<th class='id_gis id'>[(#TRI{id_objet,<:gis:info_id_objet:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_gis(GIS){objet ?}{id_objet ?}{where?}{tri #ENV{order,objet},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='titre'><a href="[(#ID_GIS|generer_url_entite{gis}|parametre_url{retour,#SELF})]" title="<:gis:editer_gis_editer:>">[(#TITRE|sinon{<:ecrire:info_sans_titre:>})]</a></td>
+			<td class='supprimer_lien'>
+			</td>
+			<td class='supprimer_gis'>
+			</td>
+			<td class='id'>[(#ID_GIS)]</td>
+		</tr>
+	</BOUCLE_liste_gis>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_gis>[
+<div class="liste-elements objets_gis"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_gis>

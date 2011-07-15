@@ -39,11 +39,11 @@
 ]
 
 [(#ENV{bloc_gis,#GET{bloc_gis}}|=={lier}|oui)
-[(#INCLURE{fond=prive/liste/gis_objet,sinon=<:gis:aucun_gis:>,ajax,env})]
+[(#INCLURE{fond=prive/liste/gis_objet,sinon=<:gis:aucun_gis:>,env})]
 ]
 
 <BOUCLE_gis(GIS){0,1}> </BOUCLE_gis>[(#ENV{bloc_gis,#GET{bloc_gis}}|=={rechercher}|oui)
 <div class="ajax">
-	#FORMULAIRE_RECHERCHER_GIS{#ENV{objet},#ENV{id_objet},#SELF}
+	#FORMULAIRE_RECHERCHER_GIS{#ENV{objet},#ENV{id_objet},#SELF|parametre_url{bloc_gis,lier}}
 </div>]</B_gis>
 </div>
