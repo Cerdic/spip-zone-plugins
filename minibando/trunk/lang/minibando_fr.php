@@ -1,16 +1,18 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-if (!defined("_ECRIRE_INC_VERSION")) return;
+// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/minibando/branches/v0/lang/
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// M
 	'mode_debug' => 'Mode debug',
-	'mode_profile' => 'Mode profile',
 	'mode_inclure' => 'Mode inclure',
-	
-	'titre_debug' => 'Debug',
-	'titre_outils_rapides' => 'Cr&eacute;ation',
+	'mode_profile' => 'Mode profile',
 
+	// T
+	'titre_debug' => 'Debug',
+	'titre_outils_rapides' => 'Cr&eacute;ation'
 );
 
 ?>
