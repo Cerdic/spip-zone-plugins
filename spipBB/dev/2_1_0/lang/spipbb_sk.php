@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_ban_ip_info' => 'To write more than one IP or server names, separate them using commas. To specify IP intervals, separate the biginning and the end with a dash -, to specify a joker use a star *',
 	'admin_ban_ip_none' => 'Žiadne zakázané IP adresy',
 	'admin_ban_user' => 'Zakázané používateľské mená',
-	'admin_ban_user_info' => 'You can ban more than one user at a time using CTRL or UP combined with the mouse or the keyboard', # MODIF
+	'admin_ban_user_info' => 'Pomocou klávesov CTRL a šípky hore v kombinácii s myšou alebo ďalšieho klávesu na klávesnici môžete vylúčiť viac používateľov naraz.',
 	'admin_ban_user_none' => 'Žiadne zakázané používateľské mená',
 	'admin_cat_01_general' => 'Administrácia',
 	'admin_cat_outils' => 'Nástroje',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'admin_plugin_requis_erreur_s' => 'Tieto požiadované zásuvné moduly chýbajú. Aktivujte ich!',
 	'admin_plugin_requis_ok' => 'Installed and activated plugin(s):',
 	'admin_plugin_requis_ok_balisesession' => '[Plugin BALISE_SESSION->http://www.spip-contrib.net/?article1224] : gives information on visitors who are logged in.',
-	'admin_plugin_requis_ok_cfg' => '[Plugin CFG->http://www.spip-contrib.net/?article1605] : provides tags and functions.', # MODIF
+	'admin_plugin_requis_ok_cfg' => '[Zásuvný modul CFG->http://www.spip-contrib.net/?article1605]: poskytuje tagy a funkcie.',
 	'admin_sous_titre' => 'Go to the SpipBB forums admin panel',
 	'admin_spip_config_forums' => 'SPIP configuration:',
 	'admin_spip_forums_ok' => 'The public forums are enabled.',
@@ -138,36 +138,36 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choix_mots_creation' => 'If you want to create the keywords dedicated to SpipBB  <strong>automatically</strong>B, click this button. These keywords can be modified or deleted later...',
 	'choix_mots_creation_submit' => 'Automatické nastavenie kľúčových slov',
 	'choix_mots_ferme' => 'Zatvoriť niť',
-	'choix_mots_postit' => 'Set sticky', # MODIF
+	'choix_mots_postit' => 'Dať na štítok',
 	'choix_mots_selection' => 'This keyword group should at least contain 3 keywords. Usually, the plugin will create them while installing. SpipBB needs - in general - the {ferme} (closed), {annonce} (announce) and {postit} (postit) keywords, but you are allowed to choose another one.',
 	'choix_rubrique_creation' => 'If you want to create the main section containing the SpipBB forums and the first empty forum <strong>automatically</strong>, click this button. This forum is the created hierarchy can be modified or deleted later...',
 	'choix_rubrique_creation_submit' => 'Automatické nastavenie hlavnej rubriky',
 	'choix_rubrique_selection' => 'Select the section that will host the base of your forums. Inside, each sub-section will be a forum group, each published article will open a new forum.',
-	'choix_squelettes' => 'You are allowed to used other templates, but the selected files replacing groupeforum.html and filforum.html must already exist!', # MODIF
+	'choix_squelettes' => 'Môžete používať iné šablóny, ale vybrané súbory, ktoré nahradia groupeforum.html a filforum.html už musia existovať!',
 	'citer' => 'Citovať',
-	'cocher' => 'cocher', # NEW
+	'cocher' => 'označiť',
 	'col_avatar' => 'Avatar',
 	'col_date_crea' => 'Dátum registrácie',
 	'col_marquer' => 'Označiť',
 	'col_signature' => 'Podpis',
 	'config_affiche_champ_extra' => 'Zobraziť pole: <b>@nom_champ@</b>',
 	'config_affiche_extra' => 'Zobraziť pole v šablónach',
-	'config_champs_auteur' => 'SPIPBB Fields', # MODIF
+	'config_champs_auteur' => 'Polia SPIPBB ',
 	'config_champs_auteurs_plus' => 'Author extra fields admin',
 	'config_champs_requis' => 'Fields required by SpipBB',
 	'config_choix_mots' => 'Choose the keyword group',
-	'config_choix_rubrique' => 'Choose the section used by spipBB forums', # MODIF
+	'config_choix_rubrique' => 'Vybrať rubriku, ktorá obsahuje diskusné fóra spipBB',
 	'config_choix_squelettes' => 'Choose the templates',
 	'config_orig_extra' => 'Which source used to store the extra fields',
-	'config_orig_extra_info' => 'Infos EXTRA fields or other db table, table auteurs_profils.', # MODIF
-	'config_spipbb' => 'Basic SpipBB config in order to use the forums with this plugin.', # MODIF
-	'contacter' => 'Contact', # MODIF
+	'config_orig_extra_info' => 'Polia s údajmi NAVIAC alebo iná databázová tabuľka, tabuľka auteurs_profils.',
+	'config_spipbb' => 'Základné nastavenie SpipBB, aby ste mohli používať diskusné fóra s týmto zásuvným modulom.',
+	'contacter' => 'Kontakt',
 	'contacter_dpt' => 'Contact: ',
 	'creer_categorie' => 'Create a new category',
 	'creer_forum' => 'Create a new Forum',
 
 	// D
-	'dans_forum' => 'in the forum', # MODIF
+	'dans_forum' => 'v diskusnom fóre',
 	'deconnexion_' => 'Logout ',
 	'deplacer' => 'Move',
 	'deplacer_confirmer' => 'Confirm the move',
@@ -176,149 +176,149 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'deplacer_vide' => 'Not any other forum left: moving this thread is impossible!',
 	'dernier' => ' Last<br />',
 	'dernier_membre' => 'Last registered member: ',
-	'derniers_messages' => 'Last topics', # MODIF
-	'diviser' => 'Split', # MODIF
+	'derniers_messages' => 'Posledné témy',
+	'diviser' => 'Rozdeliť',
 	'diviser_confirmer' => 'Confirm the topics splitting',
 	'diviser_dans_dpt' => 'Into this Forum:',
 	'diviser_expliquer' => 'Using the below form you can split a topic in two, either by selecting the posts individually or by splitting at a selected post.',
 	'diviser_selection_dpt' => 'Select:',
 	'diviser_separer_choisis' => 'Split selected posts',
 	'diviser_separer_suite' => 'Split from selected posts',
-	'diviser_vide' => 'Not any other forum left: spliting this thread is impossible!', # MODIF
+	'diviser_vide' => 'Žiadne iné diskusné fórum nie je: táto téma sa nedá rozdeliť!',
 
 	// E
 	'ecrirea' => 'Write an Email to',
-	'effacer' => 'Delete', # MODIF
-	'email' => 'E-mail', # MODIF
-	'en_ligne' => 'Who\'s online?', # MODIF
+	'effacer' => 'Odstrániť',
+	'email' => 'E-mail',
+	'en_ligne' => 'Kto je online?',
 	'en_rep_sujet_' => ' ::: Topic : ',
 	'en_reponse_a' => 'Answering the message',
-	'etplus' => '...and more...', # MODIF
-	'extra_avatar_saisie_url' => 'Your avatar\'s URL (http://... ...)', # MODIF
-	'extra_avatar_saisie_url_info' => 'Visitor\'s avatar URL', # MODIF
-	'extra_date_crea' => 'Registration date', # MODIF
-	'extra_date_crea_info' => 'SpipBB profile registration date', # MODIF
-	'extra_emploi' => 'Job', # MODIF
+	'etplus' => '...a viac...',
+	'extra_avatar_saisie_url' => 'Internetová adresa vášho avataru (http://... ...)',
+	'extra_avatar_saisie_url_info' => 'Internetová adresa avataru návštevníka',
+	'extra_date_crea' => 'Dátum registrácie',
+	'extra_date_crea_info' => 'Dátum registrácie vizitky SpipBB ',
+	'extra_emploi' => 'Zamestnanie',
 	'extra_localisation' => 'Localization', # MODIF
-	'extra_loisirs' => 'Hobbies', # MODIF
-	'extra_nom_aim' => 'Chat id (AIM)', # MODIF
-	'extra_nom_msnm' => 'Chat id (MSN Messenger)', # MODIF
-	'extra_nom_yahoo' => 'Chat id (Yahoo)', # MODIF
-	'extra_numero_icq' => 'Chat id (ICQ)', # MODIF
-	'extra_refus_suivi_thread' => '(don\'t follow). Do not modify!', # MODIF
-	'extra_refus_suivi_thread_info' => 'Threads you want not to follow any more', # MODIF
-	'extra_signature_saisie_texte' => 'Fill your signature here', # MODIF
-	'extra_signature_saisie_texte_info' => 'Short signature', # MODIF
-	'extra_visible_annuaire' => 'Appear in the (public) members\' list', # MODIF
-	'extra_visible_annuaire_info' => 'Allow you not to appear in the public members\' list', # MODIF
+	'extra_loisirs' => 'Záľuby',
+	'extra_nom_aim' => 'ID v chate (AIM)',
+	'extra_nom_msnm' => 'ID v chate (MSN Messenger)',
+	'extra_nom_yahoo' => 'ID v chate (Yahoo)',
+	'extra_numero_icq' => 'ID v chate (ICQ)',
+	'extra_refus_suivi_thread' => '(nesledovať). Neupravovať!',
+	'extra_refus_suivi_thread_info' => 'Témy, ktoré už viac nechcete sledovať',
+	'extra_signature_saisie_texte' => 'Sem zadajte svoj podpis',
+	'extra_signature_saisie_texte_info' => 'Krátky podpis',
+	'extra_visible_annuaire' => 'Zobraziť v zozname členov (na verejnej stránke)',
+	'extra_visible_annuaire_info' => 'Povoliť nezobrazovanie sa na zozname členov na verejnej stránke',
 
 	// F
-	'fiche_contact' => 'Contact form', # MODIF
-	'fil_annonce_annonce' => 'Move this topic into Announcement', # MODIF
-	'fil_annonce_desannonce' => 'Remove the Announcement mode', # MODIF
+	'fiche_contact' => 'Kontaktný formulár',
+	'fil_annonce_annonce' => 'Presunúť túto tému do oznamu',
+	'fil_annonce_desannonce' => 'Odstrániť režim oznamu',
 	'fil_deplace' => 'Move this thread',
-	'filtrer' => 'Filter', # MODIF
-	'forum' => 'Forums', # MODIF
-	'forum_annonce_annonce' => 'Mark as announce', # MODIF
-	'forum_annonce_desannonce' => 'Remove the announce mark', # MODIF
+	'filtrer' => 'Filter',
+	'forum' => 'Diskusné fóra',
+	'forum_annonce_annonce' => 'Označiť ako oznam',
+	'forum_annonce_desannonce' => 'Odstrániť označenie oznamu',
 	'forum_dpt' => 'Forum : ',
 	'forum_ferme' => 'This forum is disactivated',
 	'forum_ferme_texte' => 'This forum is disactivated. You can\'t post here.',
 	'forum_maintenance' => 'This forum is close for maintenance',
-	'forum_ouvrir' => 'Open this Forum', # MODIF
-	'forums_categories' => 'Miscellaneous', # MODIF
-	'forums_spipbb' => 'SpipBB forums', # MODIF
-	'forums_titre' => 'My first forum', # MODIF
-	'fromphpbb_erreur_db_phpbb_config' => 'Impossible to read config value in phpBB database', # MODIF
+	'forum_ouvrir' => 'Otvoriť toto diskusné fórum',
+	'forums_categories' => 'Rôzne',
+	'forums_spipbb' => 'Diskusné fóra SpipBB',
+	'forums_titre' => 'Moje prvé diskusné fórum',
+	'fromphpbb_erreur_db_phpbb_config' => 'Nastavená hodnota v databáze phpBB sa nedá čítať',
 	'fromphpbb_migre_categories' => 'Categories migration',
 	'fromphpbb_migre_categories_dans_rub_dpt' => 'Implanting the forums into the sector:',
-	'fromphpbb_migre_categories_forum' => 'Forum', # MODIF
-	'fromphpbb_migre_categories_groupe' => 'Group', # MODIF
+	'fromphpbb_migre_categories_forum' => 'Diskusné fórum',
+	'fromphpbb_migre_categories_groupe' => 'Skupina',
 	'fromphpbb_migre_categories_impossible' => 'Impossible to migrate the categories',
 	'fromphpbb_migre_categories_kw_ann_dpt' => 'The announce will use the keyword:',
 	'fromphpbb_migre_categories_kw_ferme_dpt' => 'The closed topics will use the keyword:',
 	'fromphpbb_migre_categories_kw_postit_dpt' => 'The postits will use the keyword:',
 	'fromphpbb_migre_existe_dpt' => 'exist:',
-	'fromphpbb_migre_thread' => 'Migration of topics and posts', # MODIF
-	'fromphpbb_migre_thread_ajout' => 'Adding thread', # MODIF
-	'fromphpbb_migre_thread_annonce' => 'Announce', # MODIF
+	'fromphpbb_migre_thread' => 'Presunutie tém a príspevkov',
+	'fromphpbb_migre_thread_ajout' => 'Pridať tému',
+	'fromphpbb_migre_thread_annonce' => 'Oznam',
 	'fromphpbb_migre_thread_existe_dpt' => 'Forum already exist:',
 	'fromphpbb_migre_thread_ferme' => 'Closed',
 	'fromphpbb_migre_thread_impossible_dpt' => 'Impossible to migrate the topics:',
-	'fromphpbb_migre_thread_postit' => 'Post-it', # MODIF
+	'fromphpbb_migre_thread_postit' => 'Štítok',
 	'fromphpbb_migre_thread_total_dpt' => 'Total number of topics and posts added:',
-	'fromphpbb_migre_utilisateurs' => 'Migrate the members', # MODIF
-	'fromphpbb_migre_utilisateurs_admin_restreint_add' => 'Add restricted admin', # MODIF
-	'fromphpbb_migre_utilisateurs_admin_restreint_already' => 'Already restricted admin', # MODIF
+	'fromphpbb_migre_utilisateurs' => 'Nahrať používateľov',
+	'fromphpbb_migre_utilisateurs_admin_restreint_add' => 'Pridať administrátora s obmedzeniami',
+	'fromphpbb_migre_utilisateurs_admin_restreint_already' => 'Už administrátor s obmedzeniami',
 	'fromphpbb_migre_utilisateurs_impossible' => 'Impossible to migrate the members',
 	'fromphpbb_migre_utilisateurs_total_dpt' => 'Total number of members added:',
 
 	// H
-	'haut_page' => 'Top of page', # MODIF
+	'haut_page' => 'Horná časť stránky',
 
 	// I
-	'icone_ferme' => 'Close', # MODIF
+	'icone_ferme' => 'Zatvoriť',
 	'import_base' => 'Database name:',
 	'import_choix_test' => 'Make a blank test (default):',
 	'import_choix_test_titre' => 'Blank or real migration',
 	'import_erreur_db' => 'Impossible to connect to @nom_base@ database',
-	'import_erreur_db_config' => 'Impossible to read the configuration of @nom_base@', # MODIF
+	'import_erreur_db_config' => 'Konfigurácia súboru @nom_base@ sa nedá čítať',
 	'import_erreur_db_rappel_connexion' => 'Impossible to reconnect tp @nom_base@ database',
 	'import_erreur_db_spip' => 'Impossible to connect to SPIP database',
-	'import_erreur_forums' => 'Impossible to migrate the forums', # MODIF
+	'import_erreur_forums' => 'Diskusné fóra sa nedajú nahrať',
 	'import_fichier' => '@nom_base@ configration file found:',
-	'import_host' => 'Server\'s name/address', # MODIF
+	'import_host' => 'Názov/adresa servera',
 	'import_login' => 'Login:',
 	'import_parametres_base' => 'Please choose the path to the config file of @nom_base@, or the database parameters of @nom_base@:',
 	'import_parametres_rubrique' => 'Please choose the sector into which the @nom_base@ forums will be migrated',
-	'import_parametres_titre' => 'Informations about @nom_base@', # MODIF
+	'import_parametres_titre' => 'Informácie o databáze @nom_base@',
 	'import_password' => 'Password:',
 	'import_prefix' => 'Database tables prefix:',
 	'import_racine' => 'Path to @nom_base@ (avatars):',
 	'import_table' => 'Config table of @nom_base@ found:',
-	'import_titre' => 'Migration of @nom_base@ forum', # MODIF
+	'import_titre' => 'Nahrávanie diskusného fóra @nom_base@',
 	'import_titre_etape' => 'Migration of @nom_base@ forum - step',
-	'info' => 'Information', # MODIF
-	'info_annonce_ferme' => 'State Announce/Closed', # MODIF
+	'info' => 'Informácie',
+	'info_annonce_ferme' => 'Stav oznamu/Zatvorený',
 	'info_confirmer_passe' => 'Confirm this new password:',
 	'info_ferme' => 'State closed',
-	'info_inscription_invalide' => 'Impossible to register', # MODIF
+	'info_inscription_invalide' => 'Nedá sa zaregistrovať',
 	'info_plus_cinq_car' => 'more than 5 characters',
-	'infos_refus_suivi_sujet' => 'Don\'t follow these threads', # MODIF
-	'infos_suivi_forum_par_inscription' => 'Follow the thread by registration', # MODIF
-	'inscription' => 'Register', # MODIF
-	'inscrit_le' => 'Registrered on', # MODIF
-	'inscrit_le_dpt' => 'Registrered on', # MODIF
-	'inscrit_s' => 'Registered', # MODIF
+	'infos_refus_suivi_sujet' => 'Nesledovať tieto témy',
+	'infos_suivi_forum_par_inscription' => 'Sledovať tieto témy po registrácii',
+	'inscription' => 'Zaregistrovať sa',
+	'inscrit_le' => 'Zaregistrovaný dňa',
+	'inscrit_le_dpt' => 'Zaregistrovaný dňa:',
+	'inscrit_s' => 'Zaregistrovaný',
 	'ip_adresse_autres' => 'Other IP addresses this user has posted from',
 	'ip_adresse_membres' => 'Users posting from this IP address',
-	'ip_adresse_post' => 'IP address for this post', # MODIF
-	'ip_informations' => 'IP Informations', # MODIF
+	'ip_adresse_post' => 'IP adresa tohto príspevku',
+	'ip_informations' => 'IP adresa',
 
 	// L
-	'le' => 'The', # MODIF
-	'liste_des_messages' => 'Posts list', # MODIF
-	'liste_inscrits' => 'Member list', # MODIF
-	'login' => 'Connection', # MODIF
+	'le' => 'Dňa',
+	'liste_des_messages' => 'Zoznam príspevkov',
+	'liste_inscrits' => 'Zoznam používateľov',
+	'login' => 'Pripojenie',
 
 	// M
-	'maintenance' => '<NEW>N\'oubliez pas d\'enlever<br />"Fermeture pour maintenance",<br />sur les Forums concernés.', # MODIF
+	'maintenance' => 'Majte na pamäti, že treba deaktivovať <br /> "Zatvorené kvôli údržbe" na diskusných fórach,<br /> ktorých sa to týka.',
 	'maintenance_fermer' => 'closed the news/forum:',
-	'maintenance_pour' => 'for MAINTENANCE.', # MODIF
-	'membres_en_ligne' => 'members online', # MODIF
-	'membres_inscrits' => 'registered members', # MODIF
-	'membres_les_plus_actifs' => 'Most active members', # MODIF
-	'message' => 'Message', # MODIF
-	'message_s' => 'Messages', # MODIF
+	'maintenance_pour' => 'kvôli ÚDRŽBE.',
+	'membres_en_ligne' => 'používatelia online',
+	'membres_inscrits' => 'zaregistrovaní používatelia',
+	'membres_les_plus_actifs' => 'Najaktívnejší používatelia',
+	'message' => 'Príspevok',
+	'message_s' => 'Príspevky',
 	'message_s_dpt' => 'Messages: ',
 	'messages' => 'Messages',
-	'messages_anonymes' => 'anonymize', # MODIF
-	'messages_derniers' => 'Latest Messages', # MODIF
-	'messages_laisser_nom' => 'put the name', # MODIF
+	'messages_anonymes' => 'anonymne',
+	'messages_derniers' => 'Najnovšie príspevky',
+	'messages_laisser_nom' => 'dať meno',
 	'messages_supprimer_titre_dpt' => 'For the posts:',
-	'messages_supprimer_tous' => 'delete', # MODIF
-	'messages_voir_dernier' => 'Jump to the last message', # MODIF
-	'messages_voir_dernier_s' => 'Watch the last messages', # MODIF
+	'messages_supprimer_tous' => 'Odstrániť',
+	'messages_voir_dernier' => 'Prejsť na posledný príspevok',
+	'messages_voir_dernier_s' => 'Sledovať posledné príspevky',
 	'moderateur' => 'Moderator',
 	'moderateur_dpt' => 'Moderator: ',
 	'moderateurs' => 'Moderator(s)',
@@ -330,28 +330,28 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  -* when an article-forum uses this keyword, only moderators can post messages.
  -* when a forum topic is closed, only the moderators will be able to post messages.',
 	'mot_groupe_moderation' => 'Keywords group used for SpipBB moderation',
-	'mot_postit' => 'Post-it
- _ A post-it is placed underneath announcements, before ordinary messages. It only appears once in the list.', # MODIF
+	'mot_postit' => 'Štítok
+ _ Štítok sa umiestňuje pod odkazy pred obyčajné príspevky. V zozname sa zobrazí iba raz.',
 
 	// N
 	'no_message' => 'No message by that search criterium',
-	'nom_util' => 'Member name', # MODIF
-	'non' => 'No', # MODIF
+	'nom_util' => 'Meno používateľa',
+	'non' => 'Žiaden',
 
 	// O
 	'ordre_croissant' => 'Increasing', # MODIF
 	'ordre_decroissant' => 'Decreasing',
 	'ordre_dpt' => 'Order:',
-	'oui' => 'Yes', # MODIF
+	'oui' => 'Áno',
 
 	// P
-	'pagine_page_' => ' .. page ', # MODIF
+	'pagine_page_' => '... stránka',
 	'pagine_post_' => ' reply',
 	'pagine_post_s' => ' replies',
-	'pagine_sujet_' => 'topic', # MODIF
-	'pagine_sujet_s' => ' topics', # MODIF
+	'pagine_sujet_' => 'téma',
+	'pagine_sujet_s' => ' témy',
 	'par_' => 'by ', # MODIF
-	'plugin_auteur' => 'The SpipBB Team: [See the list of contributors on Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]', # MODIF
+	'plugin_auteur' => 'Tím SpipBB: [Pozrite si zoznam prispievateľov modulu Spip-contrib->http://www.spip-contrib.net/Plugin-SpipBB#contributeurs]',
 	'plugin_description' => 'The SpipBB plugin provides the following features:
 -* centralizes the forum management in SPIP (in the private area),
 -* turns a main section (sector) of the site into a group of forum, "Bulletin Board" style, similar to phpBB. In this sector, sub-sections are used as forum groups, articles are dedicated forums where threads are made of messages posted to an article.
@@ -364,9 +364,9 @@ _ {{The SpipBB plugin is still being developed. You use it at your own risk.}}
 
 _ [Access to the management panel-> .?exec=spipbb_configuration]',
 	'plugin_licence' => 'Distributed under the GPL licence',
-	'plugin_lien' => '[See the documentation of the plugin from Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]', # MODIF
-	'plugin_mauvaise_version' => 'This version of the plugin cannot be used with your version of SPIP!', # MODIF
-	'plugin_nom' => 'SpipBB: Management of SPIP forums', # MODIF
+	'plugin_lien' => '[Pozrite si dokumentáciu zásuvného modulu zo Spip-contrib->http://www.spip-contrib.net/SpipBB-le-forum]',
+	'plugin_mauvaise_version' => 'Túto verziu zásuvného modulu memôžete použiť s vašou verziou SPIPU!',
+	'plugin_nom' => 'SpipBB: Riadenie diskusných fór SPIPU',
 	'post_aucun_pt' => 'aucun !',
 	'post_efface_lui' => 'This topic contains @
 nbr_post@ message(s). Deleted along with it!\\n',
@@ -377,25 +377,25 @@ nbr_post@ message(s). Deleted along with it!\\n',
 	'post_verifier_sujet' => 'Check this post',
 	'poste_valide' => 'Post(s) to check...',
 	'poster_date_' => 'Posted the: ',
-	'poster_message' => 'Post a topic', # MODIF
-	'postit' => 'Postit', # MODIF
+	'poster_message' => 'Poslať príspevok',
+	'postit' => 'Štítok',
 	'postit_dpt' => 'Postit: ',
 	'posts_effaces' => 'Topics deleted!',
 	'posts_refuses' => 'Blocked topics to delete!',
 	'previsualisation' => 'Preview',
-	'profil' => '<NEW>Profil de', # MODIF
+	'profil' => 'Vizitka - ',
 
 	// R
-	'raison_clic' => 'clic here', # MODIF
-	'raison_texte' => 'To know the cause', # MODIF
-	'recherche' => 'Search', # MODIF
+	'raison_clic' => 'Kliknite sem',
+	'raison_texte' => 'Ak sa chcete dozvedieť dôvod',
+	'recherche' => 'Vyhľadať',
 	'recherche_elargie' => 'Advanced search',
-	'redige_post' => 'Write a topic', # MODIF
-	'reglement' => '<NEW><p>Les administrateurs et modérateurs de ce forum s\'efforceront de supprimer ou éditer tous les messages à caractère répréhensible aussi rapidement que possible. Toutefois, il leur est impossible de passer en revue tous les messages. Vous admettez donc que tous les messages postés sur ces forums expriment la vue et opinion de leurs auteurs respectifs, et non pas des administrateurs, ou modérateurs, ou webmestres (excepté les messages postés par eux-même) et par conséquent ne peuvent pas être tenus pour responsables.</p>
+	'redige_post' => 'Vytvoriť tému',
+	'reglement' => '<NEW> <p> The administrators and moderators of this forum will attempt to remove or edit any generally objectionable material as quickly as possible. However, it is impossible to review every message. Therefore you acknowledge that all posts made to these forums express the views and opinions of the author and not the administrators, moderators or webmaster (except for posts by these people) and hence can not be held responsible. </ p> 
 
-<p>Vous consentez à ne pas poster de messages injurieux, obscènes, vulgaires, diffamatoires, menaçants, sexuels ou tout autre message qui violerait les lois applicables. Le faire peut vous conduire à être banni immédiatement de façon permanente (et votre fournisseur d\'accès à internet en sera informé). L\'adresse IP de chaque message est enregistrée afin d\'aider à faire respecter ces conditions. Vous êtes d\'accord sur le fait que le webmestre, l\'administrateur et les modérateurs de ce forum ont le droit de supprimer, éditer, déplacer ou verrouiller n\'importe quel sujet de discussion à tout moment. En tant qu\'utilisateur, vous êtes d\'accord sur le fait que toutes les informations que vous donnerez ci-après seront stockées dans une base de données. Cependant, ces informations ne seront divulguées à aucune tierce personne ou société sans votre accord. Le webmestre, l\'administrateur, et les modérateurs ne peuvent pas être tenus pour responsables si une tentative de piratage informatique conduit à l\'accès de ces données.</p>
+<p> You agree not to post any abusive, obscene, vulgar, slanderous, threatening, sexual or any other material that may violate any applicable laws. Doing so may lead to you being immediately and permanently banned (and your service provider being informed). The IP address of all posts is recorded to aid in enforcing these conditions. You agree that the webmaster, administrator and moderators of this forum have the right to remove, edit, move or close any topic at any time. As a user you agree to the fact that all the information you have entered above being stored in a database. While this information will not be disclosed to any third party without your consent. The webmaster, administrator and moderators can not be held responsible for any hacking attempt that may lead to access that data. </ P> 
 
-<p>Ce forum utilise les cookies pour stocker des informations sur votre ordinateur. Ces cookies ne contiendront aucune information que vous aurez entré ci-après, ils servent uniquement à améliorer le confort d\'utilisation. L\'adresse e-mail est uniquement utilisée afin de confirmer les détails de votre enregistrement ainsi que votre mot de passe (et aussi pour vous envoyer un nouveau mot de passe dans la cas où vous l\'oublieriez).</p><p>En vous enregistrant, vous vous portez garant du fait d\'être en accord avec le règlement ci-dessus.</p>', # MODIF
+<p> This forum system uses cookies to store information on your computer. These cookies do not contain any information you have entered above, they serve only to improve your viewing pleasure. The e-mail address is used only for confirming your registration details and password (and for sending new password in case you forget). </ P> <p > By clicking Register below you guarantee of being in agreement with the above rules. </ p>', # MODIF
 	'repondre' => 'Reply',
 	'reponse_s_' => 'Replies',
 	'resultat_s_pour_' => ' results for ',
@@ -403,8 +403,8 @@ nbr_post@ message(s). Deleted along with it!\\n',
 
 	// S
 	's_abonner_a' => 'RSS: subscribe to this thread',
-	'secteur_forum' => '<NEW>SECTEURS FORUMS', # MODIF
-	'selection_efface' => '<NEW>Effacer la sélection ...',
+	'secteur_forum' => 'KOREŇOVÝ ADRESÁR',
+	'selection_efface' => 'Zmazať výber...',
 	'selection_tri_dpt' => 'Choose the sorting method:',
 	'sign_admin' => '{{This page can only be seen by the site owner.}}<p>It provides access to the plugin configuration of &laquo;{{<a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>}}&raquo; as well as to the forum management of your site.</p><p>Version : @version@ @distant@</p><p>See&nbsp;:
 _ • [The documentation of Spip-Contrib->http://www.spip-contrib.net/?article2460]
@@ -414,85 +414,85 @@ _ • [Help and support on spipbb.spip-zone.info->http://spipbb.spip-zone.info/s
 	'sign_reinit' => '<p>Reset:
  _ • [the whole plugin->@plugin@]</p>',
 	'sign_tempo' => 'Build with <a href="http://www.spip-contrib.net/Plugin-SpipBB#contributeurs" class="copyright">SpipBB</a>',
-	'signature' => 'Signature', # MODIF
-	'sinscrire' => '<NEW>s\'enregistrer', # MODIF
+	'signature' => 'Podpis',
+	'sinscrire' => 'Zaregistrovať sa',
 	'site_propose' => 'Proposed Website',
-	'site_web' => 'Web site', # MODIF
-	'squelette_filforum' => 'Skeleton base for threads:', # MODIF
-	'squelette_groupeforum' => 'Skeleton base for forum groups:', # MODIF
-	'statut' => 'Status', # MODIF
-	'statut_admin' => 'Admin', # MODIF
+	'site_web' => 'Webová stránka',
+	'squelette_filforum' => 'Základná šablóna diskusných príspevkov:',
+	'squelette_groupeforum' => 'Základná šablóna skupín diskusného fóra:',
+	'statut' => 'Stav',
+	'statut_admin' => 'Admininstrátor',
 	'statut_redac' => 'Moderator',
-	'statut_visit' => 'Member', # MODIF
-	'sujet' => '<NEW>Sujet ', # MODIF
-	'sujet_auteur' => 'Author', # MODIF
-	'sujet_clos_texte' => 'This topic is closed, you cannot post to it.', # MODIF
-	'sujet_clos_titre' => 'Topic closed', # MODIF
+	'statut_visit' => 'Používateľ',
+	'sujet' => 'Téma',
+	'sujet_auteur' => 'Autor',
+	'sujet_clos_texte' => 'Táto téma je uzavretá, už na ňu nemôžete diskutovať.',
+	'sujet_clos_titre' => 'Téma uzavretá',
 	'sujet_dpt' => 'Topic: ',
 	'sujet_ferme' => 'Topic: closed',
-	'sujet_nombre' => 'Topic number', # MODIF
-	'sujet_nouveau' => 'New topic', # MODIF
+	'sujet_nombre' => 'Téma číslo',
+	'sujet_nouveau' => 'Nová téma',
 	'sujet_rejete' => 'Rejected topic',
 	'sujet_repondre' => 'Reply',
-	'sujet_s' => 'Topics', # MODIF
+	'sujet_s' => 'Témy',
 	'sujet_valide' => 'Topic to confirm',
-	'sujets' => 'Topics', # MODIF
-	'sujets_aucun' => 'No topics in this forum for the time being', # MODIF
-	'support_extra_normal' => 'extra', # MODIF
-	'support_extra_table' => 'table', # MODIF
-	'supprimer' => 'Delete', # MODIF
+	'sujets' => 'Témy',
+	'sujets_aucun' => 'Zatiaľ nie sú na tomto diskusnom fóre žiadne témy',
+	'support_extra_normal' => 'extra',
+	'support_extra_table' => 'tabuľka',
+	'supprimer' => 'Odstrániť',
 	'sw_admin_can_spam' => 'Allow admin to post spam words',
-	'sw_admin_no_spam' => 'No spam', # MODIF
+	'sw_admin_no_spam' => 'Žiadny spam',
 	'sw_ban_ip_titre' => 'Ban IP as well?',
 	'sw_config_exceptions' => 'You can set exceptions for privileged members here. The members who meet these criteria will be permitted to post spam words.',
-	'sw_config_exceptions_titre' => 'Exceptions', # MODIF
-	'sw_config_generale' => 'Currently activated spam words:', # MODIF
+	'sw_config_exceptions_titre' => 'Výnimky',
+	'sw_config_generale' => 'Nastavené slová v spamoch:',
 	'sw_config_generale_titre' => 'General spam filtering settings',
 	'sw_config_warning' => 'Here you can define the text to PM your users if you choose to warn them via PM when they posts a spam word (max. 255 characters).',
 	'sw_config_warning_titre' => 'Private message warning settings',
-	'sw_disable_sw_titre' => '<strong>Enable Spam words filter</strong><br />If you need to do without this filter,<br />then click "No".', # MODIF
+	'sw_disable_sw_titre' => '<MODIF><strong>Povoliť filter slov v spamoch</strong><br />Ak potrebujete funguvať bez tohto filtra,<br />potom kliknite na "Nie".',
 	'sw_modo_can_spam' => 'Allow moderators to post spam words',
-	'sw_nb_spam_ban_titre' => 'Number of offenses before user is automatically banned', # MODIF
+	'sw_nb_spam_ban_titre' => 'Počet urážok predtým, ako bude používateľ automaticky vylúčený',
 	'sw_pm_spam_warning_message' => 'This is a warning. You have tried to post a word that is defined as spam on this website. Please stop.',
-	'sw_pm_spam_warning_titre' => 'Warning.', # MODIF
+	'sw_pm_spam_warning_titre' => 'Pozor.',
 	'sw_send_pm_warning' => '<strong>Send a PM to the user</strong> to warn them when they submit a post containing a prohibited word',
-	'sw_spam_forum_titre' => 'Manage flagged posts', # MODIF
-	'sw_spam_titre' => 'Spam filtering', # MODIF
+	'sw_spam_forum_titre' => 'Riadenie podozrivých príspevkov',
+	'sw_spam_titre' => 'Filtrovanie spamu',
 	'sw_spam_words_action' => 'From this control panel you can add, edit, and remove spam words. Wildcards (*) are accepted in the word field. For example, *test* will match detestable, test* would match testing, *test would match detest.',
 	'sw_spam_words_mass_add' => 'Paste or type your spam words lists into the text area. Separate each spam word by either a comma, semi-colon, or line-break',
-	'sw_spam_words_titre' => 'Spam words filtering', # MODIF
+	'sw_spam_words_titre' => 'Filtrovanie slov v spamoch',
 	'sw_spam_words_url_add' => 'Type the URL of a file containing a list of word formatted in the style above. Example: http://spipbb.spip-zone.info/IMG/csv/spamwordlist.csv .',
 	'sw_warning_from_admin' => 'Select the administrator that is listed as the Private Message sender',
 	'sw_warning_pm_message' => 'Private message text',
 	'sw_warning_pm_titre' => 'Private message subject',
-	'sw_word' => 'Word', # MODIF
+	'sw_word' => 'Slovo',
 
 	// T
-	'title_ferme' => 'Close the forum/news', # MODIF
+	'title_ferme' => 'Zatvoriť diskusné fórum/článok',
 	'title_libere' => 'Reopen the forum/news',
 	'title_libere_maintenance' => 'Remove the Maintenance lock',
-	'title_maintenance' => 'Close the forum/news for Maintenance', # MODIF
-	'title_sujet_ferme' => 'Close this topic', # MODIF
+	'title_maintenance' => 'Zatvoriť diskusné fórum/článok kvôli údržbe',
+	'title_sujet_ferme' => 'Uzavrieť túto tému',
 	'title_sujet_libere' => 'Reopen this topic',
-	'titre_spipbb' => 'SpipBB', # MODIF
-	'total_membres' => '<NEW>Celkovo máme',
+	'titre_spipbb' => 'SpipBB',
+	'total_membres' => 'Máme celkom',
 	'total_messages_membres' => 'Our members posted a total of ',
-	'tous' => 'All', # MODIF
-	'tous_forums' => '<NEW>Všetky fóra',
-	'trier' => 'Sort', # MODIF
-	'trouver_messages_auteur_dpt' => 'Find all messages from:', # MODIF
+	'tous' => 'Všetko',
+	'tous_forums' => 'Všetky diskusné fóra',
+	'trier' => 'Zoradiť',
+	'trouver_messages_auteur_dpt' => 'Nájsť všetky príspevky zo dňa:',
 
 	// V
-	'visible_annuaire_forum' => 'Appear on the member list', # MODIF
-	'visites' => '<NEW>Prezretí',
-	'voir' => '<NEW>POZRI',
-	'votre_bio' => '<NEW>Krátky životopis.',
-	'votre_email' => '<NEW>Váš e-mail',
-	'votre_nouveau_passe' => '<NEW>Nové heslo',
-	'votre_signature' => '<NEW>Váš podpis:',
-	'votre_site' => '<NEW>Názov vašej webstránky',
-	'votre_url_avatar' => '<NEW>URL vášho avatara (http://...)',
-	'votre_url_site' => '<NEW>Adresa vašej webstránky (URL)'
+	'visible_annuaire_forum' => 'Zobraziť v zozname používateľov',
+	'visites' => 'Návštev',
+	'voir' => 'POZRI',
+	'votre_bio' => 'Slovom krátky životopis.',
+	'votre_email' => 'Váš e-mailová adresa',
+	'votre_nouveau_passe' => 'Nové heslo',
+	'votre_signature' => 'Váš podpis',
+	'votre_site' => 'Názov vašej stránky',
+	'votre_url_avatar' => 'URL vášho avataru (http://...)',
+	'votre_url_site' => 'Adresa vašej stránky (URL)'
 );
 
 ?>
