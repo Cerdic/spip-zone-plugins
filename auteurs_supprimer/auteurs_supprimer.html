@@ -1,0 +1,325 @@
+[<!--(#REM)
+
+// $LastChangedBy$
+// $LastChangedDate$
+
+/**
+ * Squelette de maintenance.
+ * Permet de supprimer plusieurs auteurs par un seul formulaire.
+ *
+ * Si SPIP-Listes actif, supprime également les abonnements
+ * aux listes et le format de réception de l'auteur.
+ *
+ * Ne permet pas de supprimer les auteurs
+ * qui ont un article.
+ *
+ * Squelette à appeler via :
+ * 	http://<votredomain>/?page=auteurs_supprimer
+ * ou via le bouton dans sous-menu des auteurs
+ *
+ * @author Christian Paulus
+ * @license GPLv3
+ * @version 20110714
+ */
+	
+
+-->][<!-- (#REM)
+
+	Si pas de session, ne rien cacher, 
+	Renvoyer sur la page d'accueil du site.
+
+-->][(#AUTORISER{supprimer,auteur,#ID_AUTEUR}|non)
+	#HTTP_HEADER{Location: #URL_SITE_SPIP}]
+<!DOCTYPE html>
+
+<html> <head>
+<title><:ausu:supprimer_auteurs:></title>
+[<!--(#REM)
+
+	Charger l'incontournable jQuery
+	
+-->]#INSERT_HEAD
+[<!--(#REM)
+
+	Le SELECT du formulaire permet de choisir le nombre d'objet 
+	à afficher par page.
+
+-->][(#ENV{pagination}|oui)#SET{pagination,#ENV{pagination}}]
+[<!--(#REM)
+
+	Par défaut, pagination est à 10
+
+-->][(#ENV{pagination}|non)#SET{pagination,10}]
+[<!--(#REM)
+
+	Un petit bout de code javascript
+	pour faciliter la multi-sélection
+
+-->]<script type="text/javascript">
+//<![CDATA[
+;(function($) {
+	
+	$(document).ready(function() {
+		
+		$('#set-all-on').click( function() { 
+			$('#ul_liste_auteurs input').each(function() {
+				if (!this.disabled) {
+					this.checked = true;
+				}
+			});
+		});
+		$('#set-all-off').click( function() { 
+			$('#ul_liste_auteurs input').each(function() {
+				this.checked = false;
+			});
+		}); 
+
+	});
+	
+})(jQuery);
+//]]>
+</script>
+<style type="text/css">
+	html,body,form,fieldset,ul,li,label,input,img,p {
+		margin:0;
+		padding:0;
+		border:0;
+	}
+	body {
+		text-align: center;
+		font-family: Verdana, "DejaVu Sans", "Bitstream Vera Sans", Geneva, sans-serif;
+	}
+	form {
+		padding:1ex;
+		margin-top:1em;
+		margin-bottom:1em;
+	}
+	fieldset {
+		padding-left:32px;
+	}
+	ul {
+		list-style:none;
+		padding-top:1ex;
+		padding-bottom:1ex;
+	}
+	#corps {
+		margin: 0 auto;
+		width:80%;
+		text-align:left
+	}
+	p.attention {
+		background-color:red;
+		color:white;
+		font-size:120%;
+		padding:1ex;
+		text-align:center;
+	}
+	span.important {
+		font-weight:700;
+		font-style:italic;
+	}
+	fieldset.submit {
+	}
+	label.submit {
+		display:block;
+		right:0;
+		bottom:0;
+		padding:0.5ex;
+		text-align:right;
+	}
+	label.submit input {
+		-moz-border-radius:7px;
+		-webkit-border-radius:7px;
+		border-radius:7px;
+		border:1px groove #800000;
+		background-color:#FF1200;
+		color:#fff;
+		font-size:120%;
+		padding:0 16px;
+	}
+	label.submit input:hover,
+	#form-liste-auteurs select:hover {
+		cursor:pointer;
+	}
+	span.total {
+		color:grey
+	}
+	span.id_objet {
+		color:#ccc;
+	}
+	#form-liste-auteurs {
+		border:4px solid #9CBDFF;
+	}
+	#form-liste-selection {
+		border:4px solid #008008;
+	}
+	#ul_liste_confirmer {
+		padding:1ex 2ex;
+		list-style:square;
+	}
+	#select_pagination {
+		font-size:100%;
+	}
+</style>
+</head>
+<body>
+<div id="corps" class="cadre">
+	<h1><:ausu:supprimer_auteurs:></h1>
+	<p class="attention">
+		<:ausu:introduction:>
+	</p>
+	
+	[<!--(#REM)
+	
+		Si retour du formulaire,
+		afficher la liste des comptes à supprimer
+		et demander confirmation.
+		
+		Si c'est un retour du confirmé,
+		afficher message action réalisée.
+	
+	-->]
+	<B_confirmer>
+	<form action="#SELF" method="post" id="form-liste-selection">
+		[(#ENV{btn-confirmer}|non)
+		<p>
+			<:ausu:message_confirmer_:>
+			[(#GRAND_TOTAL|singulier_ou_pluriel{ausu:cet_auteur, ausu:ces_auteurs})]
+			?</p>]
+		<fieldset>
+		<ul id="ul_liste_confirmer">
+		<BOUCLE_confirmer(AUTEURS){tout}{id_auteur IN #ENV{auteurs_supprimer}}{par id_auteur}>
+			<li>
+				<span class="id_objet">[#ID_AUTEUR]</span>
+						<a href="[(#VAL{auteur_infos}|generer_url_ecrire{id_auteur=#ID_AUTEUR})]">
+							#NOM</a>
+						[ - <a href="mailto:#EMAIL">(#EMAIL)</a>]
+			[(#ENV{btn-confirmer}|non)
+				<input type="hidden" name="auteurs_supprimer" value="#ID_AUTEUR" />
+			]
+			[(#ENV{btn-confirmer}|oui)
+				[<!--(#REM)
+				
+					Supprimer le compte
+				
+				-->]
+				[(#VAL{DELETE FROM spip_auteurs WHERE id_auteur=#ID_AUTEUR}|sql_query)]
+				[<!--(#REM)
+				
+				Si plugin SPIP-Listes....
+				
+				-->]
+				[(#PLUGIN{spiplistes}|oui)
+					[<!--(#REM)
+					
+						Supprimer le compte dans la table des formats
+						de réception
+					
+					-->]
+					[(#VAL{DELETE FROM spip_auteurs_elargis WHERE id_auteur=#ID_AUTEUR}|sql_query)]
+					[<!--(#REM)
+					
+						Supprimer le compte dans la table des abonnements.
+					
+					-->]
+					[(#VAL{DELETE FROM spip_auteurs_listes WHERE id_auteur=#ID_AUTEUR}|sql_query)]
+				]
+			]
+			</li>
+		</BOUCLE_confirmer>
+		</ul>
+		</fieldset>
+		[(#ENV{btn-confirmer}|non)
+		<fieldset class="submit">
+			<label class="submit">
+				<input type="submit" name="btn-confirmer" value="<:ausu:confirmer:>" />
+			</label>
+		</fieldset>
+		]
+		[(#ENV{btn-confirmer}|oui)
+		<p><:ausu:action_realisee:></p>
+		]
+	</form>
+	</B_confirmer>
+	
+	[<!--(#REM)
+	
+		Le premier formulaire : lister les auteurs par groupe
+		de pagination.
+	
+	-->]
+	<form action="#SELF" method="post" id="form-liste-auteurs">
+		<fieldset>
+		<B_auteurs>
+		#SET{total,#GRAND_TOTAL}
+		
+		[<p class="pagination">(#PAGINATION)</p>]
+		<ul id="ul_liste_auteurs">
+			<BOUCLE_auteurs(auteurs)
+				{tout}
+				{par id_auteur}
+				{pagination #GET{pagination}}
+				><li>
+					<label for="auteur-#ID_AUTEUR">
+						[<!--(#REM)
+						
+							Compter les articles pour l'auteur.
+						
+						-->]
+						<BOUCLE_articles(auteurs_articles)
+								{tout}
+								{id_auteur=#ID_AUTEUR}> </BOUCLE_articles>
+						#SET{nb_articles, #TOTAL_BOUCLE}
+						</B_articles>#SET{nb_articles, 0}<//B_articles>
+						
+						[<!--(#REM)
+						
+						La case à cocher n'apparait que si l'auteur
+						n'a pas d'article attaché.
+						
+						-->]
+						<input type="checkbox"
+							[(#GET{nb_articles}|oui)disabled="disabled"]
+							   name="auteurs_supprimer[]"
+							   id="auteur-#ID_AUTEUR"
+							   [(#ENV{auteurs_supprimer}|oui)
+								[(#ID_AUTEUR|in_array{#ENV{auteurs_supprimer}}|oui)checked="checked"]
+							   ]
+							   value="#ID_AUTEUR" />
+						<span class="id_objet">[#ID_AUTEUR]</span>
+						<a href="[(#VAL{auteur_infos}|generer_url_ecrire{id_auteur=#ID_AUTEUR})]">
+							#NOM</a>
+						[ - <a href="mailto:#EMAIL">(#EMAIL)</a>]
+						[ : (#GET{nb_articles}|singulier_ou_pluriel{ausu:un_article, ausu:nb_articles, nb})]
+					</label>
+				</li>
+			</BOUCLE_auteurs>
+		</ul>
+		<img width="24" height="24" alt="" src="#EVAL{_DIR_PLUGIN_AUSU}images/tout_cocher-24.png" />
+		<a href="#" id="set-all-on"><:ausu:tout_cocher:></a> / 
+		<a href="#" id="set-all-off"><:ausu:tout_decocher:></a>
+		[<span class="total">(
+						[(#GET{total}|singulier_ou_pluriel{ausu:total_un_auteur, ausu:total_nb_auteur, nb})]
+						)</span>]
+		[(#GET{total}|>{#GET{pagination}}|oui)
+		<:ausu:pagination_:>
+		<select name="pagination" id="select_pagination">
+			<option[ (#GET{pagination}|=={10}|oui)selected="selected"] value="10">10</option>
+			[(#GET{total}|>{25}|oui)
+			<option[ (#GET{pagination}|=={25}|oui)selected="selected"] value="25">25</option>]
+		</select>
+		]
+		[<p class="pagination">(#PAGINATION)</p>]
+		</B_auteurs>
+		</fieldset>
+		<fieldset class="submit">
+		
+		<label class="submit">
+			<input type="submit" name="btn-supprimer" value="<:ausu:supprimer:>" />
+		</label>
+		</fieldset>
+	</form>
+</div>
+</body>
+
+</html>
