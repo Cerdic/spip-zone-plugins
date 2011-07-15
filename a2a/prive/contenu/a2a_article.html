@@ -1,11 +1,13 @@
 #CACHE{0}
 <div id="editer_articles_lies-#ID_ARTICLE_ORIG" class="ajax-action nom_action">
 <B_LesLie>
+#ANCRE_PAGINATION
 <div class="cadre cadre-liste"><table width="100%" cellpadding="2" cellspacing="0" border="0">
-<BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}>
+<BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}{pagination #ENV{nb,10}}>
 <tr class='tr_liste'>
 	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}>
 		<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
+		<td class='rang'>#RANG</td>
 		<td class="arial2"><a href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></td>
 		<BOUCLE_autorise(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui}> 
 			[<td class="arial1">(#BOUTON_ACTION{<:a2a:rang_moins:>,#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/moins,#SELF},ajax})</td>]
@@ -18,7 +20,8 @@
 	</BOUCLE_lesArticlesLies>
 </tr>	
 </BOUCLE_LesLie>
-</table></div>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]</div>
 </B_LesLie>
 <:a2a:pas_articles_lies:>
 <//B_LesLie>
