@@ -1,0 +1,24 @@
+#HTTP_HEADER{Content-Type: text/javascript}
+
+
+	$(document).ready(function() {
+		$('#fileInput').uploadify({
+		'uploader':'[(#CHEMIN{uploadify.swf})]',
+		'script':'../?page=uploadify',
+		'scriptData':{'id_article':[(#ENV{id_article})]},
+		'cancelImg':'[(#CHEMIN{images/cancel.png})]',
+		'multi':true,
+		'displayData': 'speed',
+    		'buttonText':   '<:uploadify:texte_parcourir:>',
+    		'wmode' : 'transparent',
+		'fileExt' : '[(#CONFIG{uploadify/fileExt}|sinon{*.jpg;*.gif;*.png})]',
+		'fileDesc' : '[(#CONFIG{uploadify/fileExt}|sinon{*.jpg;*.gif;*.png})]',
+		//$simUploadLimit_txt
+		'sizeLimit' : '[(#CONFIG{uploadify/sizeLimit}|sinon{2097152})]',
+		'onQueueFull': function (evt, queueID, fileObj, response, data) {
+         	alert(response);
+	  		}
+	});
+	});
+
+

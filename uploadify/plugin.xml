@@ -17,6 +17,5 @@
 	        <inclure>uploadify_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[2.0.10;2.2.0)" />
-	<necessite id='cfg' version='[1.10.4;]' />
 	<categorie>multimedia</categorie>
 </plugin>
