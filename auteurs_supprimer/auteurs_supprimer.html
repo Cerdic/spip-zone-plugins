@@ -61,17 +61,19 @@
 	
 	$(document).ready(function() {
 		
-		$('#set-all-on').click( function() { 
+		$('#set-all-on').click( function() {
 			$('#ul_liste_auteurs input').each(function() {
 				if (!this.disabled) {
 					this.checked = true;
 				}
 			});
+			return false;
 		});
 		$('#set-all-off').click( function() { 
 			$('#ul_liste_auteurs input').each(function() {
 				this.checked = false;
 			});
+			return false;
 		}); 
 
 	});
