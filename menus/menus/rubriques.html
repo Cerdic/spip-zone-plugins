@@ -22,8 +22,8 @@
 [(#REM) Tri des articles ]
 [(#SET{tri_num_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_num_articles},'titre'}})]
 [(#SET{tri_alpha_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_alpha_articles},'titre'}})]
-[(#SET{tri_num_articles_inverse, #ENV{tri_num_inverse_articles}|=={oui}|?{'1','0'}})]
-[(#SET{tri_alpha_articles_inverse, #ENV{tri_alpha_inverse_articles}|=={oui}|?{'1','0'}})]
+[(#SET{tri_num_articles_inverse, #ENV{tri_num_articles_inverse}|=={oui}|?{'1','0'}})]
+[(#SET{tri_alpha_articles_inverse, #ENV{tri_alpha_articles_inverse}|=={oui}|?{'1','0'}})]
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
