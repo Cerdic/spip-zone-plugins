@@ -47,6 +47,8 @@ function onLoadSpipDoc(id, l)
 		l.features[i].attributes.description += "<p class='savoirplus'><a class='lien' href='"+l.features[i].attributes.url+"'>"+mashup._T['plus']+"</a></p>";
 		// Substitue les popup
 		l.features[i].attributes.popup = mashup.popup;
+		l.features[i].attributes.classe = l.info.objet;
+		l.features[i].attributes.id = l.info.id;
 	}
 }
 
