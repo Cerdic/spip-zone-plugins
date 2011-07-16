@@ -186,6 +186,12 @@
 			<:ausu:message_confirmer_:>
 			[(#GRAND_TOTAL|singulier_ou_pluriel{ausu:cet_auteur, ausu:ces_auteurs})]
 			?</p>]
+		[<!--(#REM)
+		
+		Ne pas oublier pagination !
+		
+		-->]
+		<input type="hidden" name="pagination" value="#GET{pagination}" />
 		<fieldset>
 		<ul id="ul_liste_confirmer">
 		<BOUCLE_confirmer(AUTEURS){tout}{id_auteur IN #ENV{auteurs_supprimer}}{par id_auteur}>
