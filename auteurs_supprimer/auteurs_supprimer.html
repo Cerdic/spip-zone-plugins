@@ -61,6 +61,9 @@
 	
 	$(document).ready(function() {
 		
+		/**
+		 * Pseudo bouton sélectionner tout
+		 */
 		$('#set-all-on').click( function() {
 			$('#ul_liste_auteurs input').each(function() {
 				if (!this.disabled) {
@@ -76,10 +79,30 @@
 			return false;
 		});
 		
+		/**
+		 * Si modification pagination,
+		 * recharger le formulaire
+		 */
 		$('#select_pagination').change(function() {
 			$(this).closest("form").submit();
 		});
 
+		/**
+		 * Transmettre la pagination dans la pagination
+		 * (compléter les url).
+		 */
+		$('p.pagination a').each(function() {
+			if(url = $(this).attr('href')) {
+				pagination = $('input.pagination').attr('value');
+				var ancre = '';
+				if(pos = (url + '').indexOf('#')) {
+					ancre = url.substr(pos);
+					url = url.substr(0, pos);
+				}
+				$(this).attr('href', url + '&pagination=' + pagination + ancre);				
+			}
+		});
+		
 	});
 	
 })(jQuery);
@@ -197,7 +220,7 @@
 		Ne pas oublier pagination !
 		
 		-->]
-		<input type="hidden" name="pagination" value="#GET{pagination}" />
+		<input type="hidden" name="pagination" class="pagination" value="#GET{pagination}" />
 		<fieldset>
 		<ul id="ul_liste_confirmer">
 		<BOUCLE_confirmer(AUTEURS){tout}{id_auteur IN #ENV{auteurs_supprimer}}{par id_auteur}>
@@ -312,7 +335,7 @@
 						[(#GET{total}|singulier_ou_pluriel{ausu:total_un_auteur, ausu:total_nb_auteur, nb})]
 						)</span>]
 		[(#GET{total}|>{#GET{pagination}}|oui)
-		<input type="hidden" name="pagination" value="#GET{pagination}" />
+		<input type="hidden" name="pagination" class="pagination" value="#GET{pagination}" />
 		<:ausu:pagination_:>
 		<select name="pagination" id="select_pagination">
 			<option[ (#GET{pagination}|=={10}|oui)selected="selected"] value="10">10</option>
