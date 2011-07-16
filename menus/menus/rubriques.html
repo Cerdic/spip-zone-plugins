@@ -61,7 +61,7 @@
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
 	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{rubriques_max_affichees}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
-		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
+		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
 
 			[(#REM) Doit-on descendre plus loin ? ]
@@ -78,7 +78,7 @@
 					#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
 					[(#REM) Doit-on descendre recursivement plus loin ? ]
 					[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
-					<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
+					<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})] rub#ID_RUBRIQUE">
 
 						[(#REM) ------------------------------------------------
 								Positionnement de la classe daddy sur le lien pour indiquer qu'il a un ul a suivre, un autre sous-menu a ouvrir
