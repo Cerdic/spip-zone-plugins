@@ -9,6 +9,10 @@
 	<prefix>menuder</prefix>
 	<fonctions>menuder_fonctions.php</fonctions>
 	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>menuder_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>menuder_fonctions.php</inclure>
 	</pipeline>
