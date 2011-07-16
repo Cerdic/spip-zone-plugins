@@ -30,22 +30,23 @@ function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=ar
 	if (!$saisies) return array();
 	foreach ($saisies as $cle=>$saisie) {
 		$autoriser_quoi = $quoi . _SEPARATEUR_CEXTRAS_AUTORISER . $saisie['options']['nom'];
-		if (autoriser($faire . 'extra', $autoriser_quoi, $args['id'], '', array(
+		if (!autoriser($faire . 'extra', $autoriser_quoi, $args['id'], '', array(
 			'type' => $quoi,
 			'id_objet' => isset($args['id']) ? $args['id'] : $args['id_objet'],
 			'contexte' => $args['contexte'],
-		)))
+			'table' => table_objet_sql($quoi),
+			'saisie' => $saisie
+		))) {
+			// on n'est pas autorise
+			unset($saisies[$cle]);
+		}
+		else
 		{
 			// on est autorise
 			// on teste les sous-elements
 			if (isset($saisie['saisies']) and $saisie['saisies']) {
 				$saisies['saisies'] = champs_extras_autorisation($faire, $quoi, $saisie['saisies'], $args);
 			}
-		}
-		else
-		{
-			// on n'est pas autorise
-			unset($saisies[$cle]);
 		}
 	}
 	return $saisies;

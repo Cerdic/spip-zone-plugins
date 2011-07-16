@@ -49,13 +49,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_explication' => 'Explications de la saisie',
 	'label_attention' => 'Explications tr&egrave;s importantes',
 	'label_rechercher' => 'Recherche',
+	'label_restrictions_auteur' => 'Par auteur',
+	'label_restrictions_secteurs' => 'Par secteur',
+	'label_restrictions_branches' => 'Par branche',
+	'label_restrictions_groupes' => 'Par groupe',
 	'label_sql' => 'D&eacute;finition SQL',
 	'label_table' => 'Objet',
 	'label_traitements' => 'Traitements automatiques',
 	'label_saisie' => 'Type de saisie',
 	'legend_declaration' => 'D&eacute;claration',
-	'legend_options_techniques' => 'Options techniques',
+	'legend_options_techniques' => 'Technique',
 	'legend_options_saisies' => 'Options de la saisie',
+	'legend_restrictions' => 'Restrictions',
+	'legend_restrictions_voir' => 'Voir la saisie',
+	'legend_restrictions_modifier' => 'Modifier la saisie',
+	
 	'liste_des_extras' => 'Liste des champs extras',
 	'liste_des_extras_possibles' => 'Liste des champs pr&eacute;sents non g&eacute;r&eacute;s',
 	'liste_objets_applicables' => 'Liste des objets éditoriaux',
@@ -82,10 +90,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'precisions_pour_saisie' => 'Afficher une saisie de type :',
 	'precisions_pour_traitements' => 'Appliquer automatiquement un traitement
 		pour la balise #NOM_DU_CHAMP r&eacute;sultante :',
+	'precisions_pour_restrictions_secteurs' => 'Identifiants de secteurs à restreindre (séparateur «:»)',
+	'precisions_pour_restrictions_branches' => 'Identifiants de branches à restreindre (séparateur «:»)',
+	'precisions_pour_restrictions_groupes' => 'Identifiants de groupes à restreindre (séparateur «:»)',
 	//R
+	'radio_restrictions_auteur_aucune' => 'Tout le monde peut',
+	'radio_restrictions_auteur_admin' => 'Seulement les administrateurs',
+	'radio_restrictions_auteur_webmestre' => 'Seulement les webmestres',
+	
 	'radio_traitements_aucun' => 'Aucun',
 	'radio_traitements_typo' => 'Traitements de typographie uniquement (typo)',
 	'radio_traitements_raccourcis' => 'Traitements des raccourcis SPIP (propre)',
+	
 	//S
 	'saisies_champs_extras' => 'De &laquo;Champs Extras&raquo;',
 	'saisies_saisies' => 'De «Saisies&raquo;',

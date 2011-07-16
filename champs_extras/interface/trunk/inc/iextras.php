@@ -137,6 +137,7 @@ function iextras_formulaire_verifier($flux) {
 	AND $name = _request('configurer_saisie') ) {
 	
 		$nom = 'configurer_' . $name;
+		$table = substr($flux['args']['args'][0], strlen('champs_extras_'));
 
 		// On ajoute un préfixe devant l'identifiant
 		$identifiant = 'constructeur_formulaire_'.$flux['args']['args'][0];
@@ -148,10 +149,80 @@ function iextras_formulaire_verifier($flux) {
 		if (!isset($saisies_actuelles[$name])) {
 			return $flux;
 		}
-		$type_saisie = $saisies_actuelles[$name]['saisie'];
+
+		// on ajoute le fieldset de restrictions de champs
+		// (des autorisations pre-reglées en quelque sorte)
+		$saisies_restrictions = array();
+		
+		// les restrictions de X ne peuvent apparaître que
+		// si l'objet possede un Y.
+		// secteurs -> id_secteur
+		// branches -> id_rubrique
+		// groupes -> id_groupe
+		$desc = lister_tables_objets_sql($table);
+		$types = array(
+			'secteurs' => 'id_secteur',
+			'branches' => 'id_rubrique',
+			'groupes'  => 'id_groupe',
+		);
+		foreach ($types as $type => $champ) {
+			if (isset($desc['field'][$champ])) {
+				$saisies_restrictions[] = array(
+					'saisie' => 'input',
+					'options' => array(
+						'nom' => "saisie_modifiee_${name}[options][restrictions][$type]",
+						'label' => _T('iextras:label_restrictions_' . $type),
+						'explication' => _T('iextras:precisions_pour_restrictions_' . $type),
+						'defaut' => '',
+					)
+				);
+			}
+		}
+
+		// ajout des restrictions voir | modifier par auteur
+		$actions = array('voir', 'modifier');
+		foreach ($actions as $action) {
+			$saisies_restrictions[] = array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => "saisie_modifiee_${name}[options][restrictions][$action]",
+						'label' => _T('iextras:legend_restrictions_' . $action),
+					),
+					'saisies' => array(
+						array(
+							'saisie' => 'radio',
+							'options' => array(
+								'nom' => "saisie_modifiee_${name}[options][restrictions][$action][auteur]",
+								'label' => _T('iextras:label_restrictions_auteur'),
+								'defaut' => '',
+								'datas' => array(
+									'' => _T('iextras:radio_restrictions_auteur_aucune'),
+									'admin' => _T('iextras:radio_restrictions_auteur_admin'),
+									'webmestre' => _T('iextras:radio_restrictions_auteur_webmestre'),
+								)
+							)
+						)
+					)
+				);
+		}
+		
+				
+		$flux['data'][$nom] = saisies_inserer($flux['data'][$nom], array(
+			'saisie' => 'fieldset',
+			'options' => array(
+				'nom' => "saisie_modifiee_${name}[options][restrictions]",
+				'label' => _T('iextras:legend_restrictions'),			
+			),
+			'saisies' => $saisies_restrictions
+		));
+
+		
+		
 		
 		// on récupère les informations de la saisie
 		// pour savoir si c'est un champs éditable (il a une ligne SQL)
+		// et dans ce cas, on ajoute les options techniques
+		$type_saisie = $saisies_actuelles[$name]['saisie'];
 		$saisies_sql = saisies_lister_disponibles_sql();
 
 		if (isset($saisies_sql[$type_saisie])) {
@@ -197,8 +268,7 @@ function iextras_formulaire_verifier($flux) {
 							)
 						)
 					),
-				
-			)));
+				)));
 		}
 	}
 	return $flux;

@@ -10,11 +10,88 @@ function cextras_autoriser(){}
 define('_SEPARATEUR_CEXTRAS_AUTORISER', '0');
 
 /**
+ * Retourne si une saisie peut s'afficher ou non 
+ *
+ * @param Array $saisie Saisie que l'on traite.
+ * @param String $action Le type d'action : voir | modifier
+ * @param String $table La table d'application : spip_articles
+ * @param Int $id Identifiant de la table : 3
+ * @param Array $qui L'auteur en cours
+ * @param Array $opt Options de l'autorisation
+ * @return Bool : la saisie peut elle s'afficher ?
+**/
+function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
+	if (!$saisie) {
+		return true;
+	}
+	
+	if (!isset($saisie['options']['restrictions']) OR !$saisie['options']['restrictions']) {
+		return true;
+	}
+
+	if (!in_array($action, array('voir', 'modifier'))) {
+		return true;
+	}
+
+	$restrictions = $saisie['options']['restrictions'];
+
+	// tester si des options d'autorisations sont definies pour cette saisie
+	// et les appliquer.
+	// peut être 'voir' ou 'modifier'
+		// dedans peut être par type d'auteur 'webmestre', 'admin'
+	// peut être par secteur parent.
+	// peut être par branche parente.
+	// peut être par groupe parent.
+
+	// restriction par type d'auteur
+	if (isset($restrictions[$action]['auteur']) and $auteur = $restrictions[$action]['auteur']) {
+		switch ($auteur) {
+			case 'webmestre':
+				if (!autoriser('webmestre')) {
+					return false;
+				}
+				break;
+			case 'admin':
+				if ($qui['statut'] != '0minirezo' AND !$qui['restreint']) {
+					return false;
+				}
+				break;
+		}
+	}
+
+	// pour les autres autorisations, dès qu'une est valide, on part.
+	// cela permet de dire que l'on peut restreindre au secteur 1 et à la branche 3,
+	// branche en dehors du secteur 1
+	// le cumul des autorisations rendrait impossible cela
+	unset($restrictions['voir']);
+	unset($restrictions['modifier']);
+
+	if ($restrictions) {
+		foreach ($restrictions as $type => $ids) {
+			$ids = explode(':', $ids);
+			$cible = rtrim($type, 's');
+			$restriction = charger_fonction("restreindre_extras_objet_sur_$cible", "inc", true);
+
+			if ($restriction and $restriction($opt['type'], $opt['id_objet'], $opt, $ids, $cible)) {
+				return true;
+			}	
+		}
+		// aucune des restrictions n'a ete validee
+		return false;
+	}
+	
+	return true;
+}
+
+/**
   * Autorisation de voir un champ extra
   * autoriser('voirextra','auteur_prenom', $id_auteur);
   * -> autoriser_auteur_prenom_voirextra_dist() ...
   */
 function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
+	if (isset($opt['saisie'])) {
+		return champs_extras_restrictions($opt['saisie'], substr($faire, 0, -5), $opt['table'], $id, $qui, $opt);
+	}
 	return true;
 }
 
@@ -24,6 +101,9 @@ function autoriser_voirextra_dist($faire, $type, $id, $qui, $opt){
   * -> autoriser_auteur_prenom_modifierextra_dist() ...
   */
 function autoriser_modifierextra_dist($faire, $type, $id, $qui, $opt){
+	if (isset($opt['saisie'])) {
+		return champs_extras_restrictions($opt['saisie'], substr($faire, 0, -5), $opt['table'], $id, $qui, $opt);
+	}
 	return true;
 }
 
@@ -107,9 +187,8 @@ function restreindre_extras($objet, $noms=array(), $ids=array(), $cible='rubriqu
  * @return bool : autorise ou non .
  */
 function _restreindre_extras_objet($objet, $id_objet, $opt, $ids, $cible='rubrique', $recursif=false) {
-	static $autorise = null;
+	static $autorise = array();
 
-	if ( $autorise === null )        { $autorise = array(); }
 	if ( !isset($autorise[$objet]) ) { $autorise[$objet] = array(); }
 
 	$cle = $cible . implode('-', $ids);
@@ -186,6 +265,10 @@ function _restreindre_extras_objet_sur_cible($objet, $id_objet, $opt, $ids, $_id
 
 
 
+function inc_restreindre_extras_objet_sur_branche_dist($objet, $id_objet, $opt, $ids, $recursif) {
+	return inc_restreindre_extras_objet_sur_rubrique_dist($objet, $id_objet, $opt, $ids, true);
+}
+
 /**
  *
  * Fonction d'autorisation interne a la fonction restreindre_extras()
@@ -243,6 +326,9 @@ function inc_restreindre_extras_objet_sur_secteur_dist($objet, $id_objet, $opt, 
 
 
 
+function inc_restreindre_extras_objet_sur_groupe_dist($objet, $id_objet, $opt, $ids, $recursif) {
+	return inc_restreindre_extras_objet_sur_groupemot_dist($objet, $id_objet, $opt, $ids, $recursif);
+}
 
 /**
  *
