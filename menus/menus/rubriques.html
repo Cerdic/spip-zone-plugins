@@ -3,15 +3,15 @@
 [(#SET{niveau_max_txt, #ENV{niveau}|intval|?{#ENV{niveau},infini}})]
 [(#SET{niveau_max, #ENV{niveau}|intval|?{#ENV{niveau},1000}})]
 [(#SET{sousrub_cond, #ENV{sousrub_cond}|=={oui}|?{'on',''}})]
+[(#SET{rubriques_max_affichees, #ENV{rubriques_max_affichees}|intval|?{#ENV{rubriques_max_affichees},10000}})]
+[(#SET{id_rubriques_exclues, #ENV{id_rubriques_exclues}|?{#ENV{id_rubriques_exclues}|explode{','},#ARRAY}})]
+[(#SET{classe_parent, #ENV{classe_parent}})]
+
 [(#SET{afficher_articles, #ENV{afficher_articles}|=={oui}|?{'on',''}})]
 [(#SET{masquer_articles_uniques, #ENV{masquer_articles_uniques}|=={oui}|?{'on',''}})]
 [(#SET{articles_max, #ENV{articles_max}|intval|?{#ENV{articles_max},10000}})]
 [(#SET{articles_max_plus_un, #GET{articles_max}|plus{1}})]
-
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
-[(#SET{rubriques_max_affichees, #ENV{rubriques_max_affichees}|intval|?{#ENV{rubriques_max_affichees},10000}})]
-
-[(#SET{id_rubriques_exclues, #ENV{id_rubriques_exclues}|?{#ENV{id_rubriques_exclues}|explode{','},#ARRAY}})]
 
 [(#REM) Tri des rubriques ]
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
@@ -47,6 +47,7 @@
 		]
 		[(#GET{rubriques_max_affichees}|<{10000}|oui) / <:menus:info_rubriques_max_affichees{max=#GET{rubriques_max_affichees}}:>]
 		<br /><:menus:info_tri:> [(#GET{tri_num}) [(#GET{tri_num_inverse}|=={1}|oui) inverse] <:menus:info_tri_num:>][(#GET{tri_num}|et{GET{tri_alpha}}), ][(#GET{tri_alpha}) [(#GET{tri_alpha_inverse}|=={1}|oui) inverse] <:menus:info_tri_alpha:>]
+		[<br /><:menus:info_classe_parent:>(#GET{classe_parent})]
 
 		[(#GET{afficher_articles}|oui)
 			<br /><:menus:info_afficher_articles:>
@@ -84,17 +85,19 @@
 								si on doit descendre plus loin et
 										- qu'il y a des sous-rubriques a afficher
 										- ou qu'il y a des articles a afficher et qu'on l'a demande ]
-						#SET{class,""}
-						[(#REM) On commence par compter le nombre de sous-rubriques ]
-						#SET{cpt_sousrub_asuivre,0}
-						<BOUCLE_cpt_sousrub_asuivre(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}> </BOUCLE_cpt_sousrub_asuivre>#SET{cpt_sousrub_asuivre,#TOTAL_BOUCLE}</B_cpt_sousrub_asuivre>
-						[(#REM) Puis on compte le nombre d'articles ]
-						#SET{cpt_articles_asuivre,0}
-						<BOUCLE_cpt_articles_asuivre(ARTICLES){id_rubrique}{lang}> </BOUCLE_cpt_articles_asuivre>#SET{cpt_articles_asuivre,#TOTAL_BOUCLE}</B_cpt_articles_asuivre>
-						[(#GET{cond}|oui)
-							[(#GET{cpt_sousrub_asuivre}|oui) #SET{class,"daddy rub"}]
-							[(#GET{afficher_articles}|et{#GET{cpt_articles_asuivre}|<={#GET{articles_max}}|oui|et{#GET{cpt_articles_asuivre}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}}) #SET{class,"daddy art"}]
-						]
+                  #SET{class,""}
+						<BOUCLE_test_classe_parent(CONDITION){si #GET{classe_parent}}>
+                     [(#REM) On commence par compter le nombre de sous-rubriques ]
+                     #SET{cpt_sousrub_asuivre,0}
+                     <BOUCLE_cpt_sousrub_asuivre(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}> </BOUCLE_cpt_sousrub_asuivre>#SET{cpt_sousrub_asuivre,#TOTAL_BOUCLE}</B_cpt_sousrub_asuivre>
+                     [(#REM) Puis on compte le nombre d'articles ]
+                     #SET{cpt_articles_asuivre,0}
+                     <BOUCLE_cpt_articles_asuivre(ARTICLES){id_rubrique}{lang}> </BOUCLE_cpt_articles_asuivre>#SET{cpt_articles_asuivre,#TOTAL_BOUCLE}</B_cpt_articles_asuivre>
+                     [(#GET{cond}|oui)
+                        [(#GET{cpt_sousrub_asuivre}|oui) #SET{class,#GET{classe_parent}}]
+                        [(#GET{afficher_articles}|et{#GET{cpt_articles_asuivre}|<={#GET{articles_max}}|oui|et{#GET{cpt_articles_asuivre}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}}) #SET{class,#GET{classe_parent}}]
+                     ]
+                  </BOUCLE_test_classe_parent>
 						[(#REM) --------------------------- Fin Positionnement de la classe daddy ]
 
 						<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]"[ class="(#GET{class})"]>#TITRE</a>

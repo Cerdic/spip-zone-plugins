@@ -9,6 +9,7 @@
 	<parametre nom="id_rubriques_exclues" label="menus:entree_id_rubriques_exclues" />
 	<parametre nom="rubriques_max_affichees" label="menus:entree_rubriques_max_affichees" />
 	<parametre nom="sousrub_cond" label="menus:entree_sousrub_cond" />
+	<parametre nom="classe_parent" label="menus:entree_classe_parent" />
 	<parametre nom="tri_num" label="menus:entree_tri_num" />
 	<parametre nom="tri_num_inverse" label="menus:entree_tri_num_inverse" />
 	<parametre nom="tri_alpha" label="menus:entree_tri_alpha" />
