@@ -9,6 +9,7 @@
 [(#SET{articles_max_plus_un, #GET{articles_max}|plus{1}})]
 
 [(#SET{articles_max_affiches, #ENV{articles_max_affiches}|intval|?{#ENV{articles_max_affiches},10000}})]
+[(#SET{rubriques_max_affichees, #ENV{rubriques_max_affichees}|intval|?{#ENV{rubriques_max_affichees},10000}})]
 
 [(#SET{id_rubriques_exclues, #ENV{id_rubriques_exclues}|?{#ENV{id_rubriques_exclues}|explode{','},#ARRAY}})]
 
@@ -35,6 +36,7 @@
 		[(#GET{sousrub_cond}|oui)
 			<br /><:menus:info_sousrub_cond:>
 		]
+		[(#GET{rubriques_max_affichees}|<{10000}|oui) / <:menus:info_rubriques_max_affichees{max=#GET{rubriques_max_affichees}}:>]
 		[(#GET{afficher_articles}|oui)
 			<br /><:menus:info_afficher_articles:>
 			[(#GET{articles_max}|<{10000}|oui) / <:menus:info_articles_max{max=#GET{articles_max}}:>]
@@ -45,24 +47,35 @@
 	</div>
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
-	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
+	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{rubriques_max_affichees}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+
+			[(#REM) Doit-on descendre plus loin ? ]
 			[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
+
 			<BOUCLE_test_niveau(CONDITION){si #GET{cond}}>
+				[(#REM) On commence par compter le nombre total de sous-rubriques (servira pour l'item "Toutes les rubriques")]
+				#SET{cpt_sousrub,0}
+				<BOUCLE_cpt_sousrub(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}> </BOUCLE_cpt_sousrub>#SET{cpt_sousrub,#TOTAL_BOUCLE}</B_cpt_sousrub>
+
 				<B_sous_rubriques>
 					<ul class="menu-liste menu-items">
-				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{par #GET{tri_alpha}}>
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{rubriques_max_affichees}}>
 					#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
+					[(#REM) Doit-on descendre recursivement plus loin ? ]
+					[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
 					<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 						<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
-						[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
 						<BOUCLE_test_niveau2(CONDITION){si #GET{cond}}>
 						<BOUCLE_sous_sous(BOUCLE_sous_rubriques)></BOUCLE_sous_sous>
 						</BOUCLE_test_niveau2>
 					</li>
 				</BOUCLE_sous_rubriques>
+					[(#REM) On affiche le lien vers le reste si on a dépassé le quota ]
+					[(#GET{cpt_sousrub}|>{#GET{rubriques_max_affichees}}|oui)
+						<li class="menu-entree item"><a class="suite" href="#URL_RUBRIQUE"><:menus:toutes_les_rubriques:></a></li>]
 
 					[(#REM) ------------------------------------------------
 							Premier cas de gestion de l'affichage des articles 
@@ -73,7 +86,7 @@
 							spip.php?page=rubrique&id_rubrique=2&connect=condition qu'on enleve avec le filtre parametre_url ]
 
 					<BOUCLE_test_articles_si_sousrub(CONDITION){si #GET{afficher_articles}}>
-						[(#REM) On commence par compter le nombre d'articles de la rubrique]
+						[(#REM) On commence par compter le nombre d'articles de la rubrique (servira pour l'item "Tous les articles") ]
 						#SET{cpt,0}
 						<BOUCLE_cpt_si_sousrub(ARTICLES){id_rubrique}> </BOUCLE_cpt_si_sousrub>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_si_sousrub>
 			
@@ -82,7 +95,7 @@
 									- ET	- si on n'a pas demandé de masquage des articles uniques
 											- OU si le masquage des articles uniques est demandé et qu'il y en a plus d'un ]
 						#SET{afficher,non}
-						[(#GET{cpt}|<={#GET{articles_max}}|oui|et{#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}) 
+						[(#GET{cpt}|<={#GET{articles_max}}|oui|et{#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}})
 							#SET{afficher,oui}]
 
 						<BOUCLE_test_afficher_si_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
@@ -91,8 +104,8 @@
 									<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
 								</li>
 							</BOUCLE_articles_si_sousrub>
-								[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-									<li class="menu-entree item><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
+							[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
+								<li class="menu-entree item"><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
 							</B_articles_si_sousrub>
 						</BOUCLE_test_afficher_si_sousrub>
 					</BOUCLE_test_articles_si_sousrub>
@@ -103,32 +116,33 @@
 					[(#REM) ---------------------------------- 
 							Second cas de gestion de l'affichage des articles ]
 					<BOUCLE_test_articles_pas_de_sousrub(CONDITION){si #GET{afficher_articles}}>
-						[(#REM) On commence par compter le nombre d'articles de la rubrique]
+						[(#REM) On commence par compter le nombre d'articles de la rubrique (servira pour l'item "Tous les articles") ]
+						#SET{cpt,0}
 						<BOUCLE_cpt_pas_de_sousrub(ARTICLES){id_rubrique}> </BOUCLE_cpt_pas_de_sousrub>#SET{cpt,#TOTAL_BOUCLE}</B_cpt_pas_de_sousrub>
 
-							[(#REM) On affiche les articles :
-										- S'il y en a moins que le max demandé 
-										- ET	- si on n'a pas demandé de masquage des articles uniques
-												- OU si le masquage des articles uniques est demandé et qu'il y en a plus d'un ]
-							#SET{afficher,non}
-							[(#GET{cpt}|<={#GET{articles_max}}|oui|et{#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}) 		
-								#SET{afficher,oui}]
+						[(#REM) On affiche les articles :
+									- S'il y en a moins que le max demandé 
+									- ET	- si on n'a pas demandé de masquage des articles uniques
+											- OU si le masquage des articles uniques est demandé et qu'il y en a plus d'un ]
+						#SET{afficher,non}
+						[(#GET{cpt}|<={#GET{articles_max}}|oui|et{#GET{cpt}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}) 		
+							#SET{afficher,oui}]
 
-							<BOUCLE_test_afficher_pas_de_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
-								<B_articles_pas_de_sousrub>
-									<ul class="menu-liste menu-items">
-										<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
-											<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-													<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
-											</li>
-										</BOUCLE_articles_pas_de_sousrub>
-											[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-												<li class="menu-entree item><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
-										</B_articles_pas_de_sousrub>
-									</ul>
-								</B_articles_pas_de_sousrub>
-							</BOUCLE_test_afficher_pas_de_sousrub>
-						</BOUCLE_test_articles_pas_de_sousrub>
+						<BOUCLE_test_afficher_pas_de_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
+							<B_articles_pas_de_sousrub>
+								<ul class="menu-liste menu-items">
+									<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
+										<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+												<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+										</li>
+									</BOUCLE_articles_pas_de_sousrub>
+										[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
+											<li class="menu-entree item"><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
+									</B_articles_pas_de_sousrub>
+								</ul>
+							</B_articles_pas_de_sousrub>
+						</BOUCLE_test_afficher_pas_de_sousrub>
+					</BOUCLE_test_articles_pas_de_sousrub>
 					[(#REM) --------------------------- Fin Second cas ]
 
 				<//B_sous_rubriques>

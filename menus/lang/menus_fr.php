@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Nombre d\'articles au maximum (0 par défaut)',
 	'entree_page' => 'Nom de la page',
 	'entree_parametres' => 'Liste des paramètres',
+	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques list&eacute;s &agrave; xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)',
 	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)',
 	'entree_sur_n_articles' => '@n@ articles affiché(s)',
 	'entree_sur_n_mots' => '@n@ mots affiché(s)',
@@ -118,6 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_page_speciale' => 'Lien vers la page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187',
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@',
+	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques',
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@',
 	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.',
 	'info_tous_groupes_mots' => 'Tous les groupes de mots',
@@ -148,7 +150,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'Texte libre',
 
 	// T
-	'tous_les_articles' => '... Tous les articles'
+	'tous_les_articles' => '... Tous les articles',
+	'toutes_les_rubriques' => '... Toutes les rubriques'
 );
 
 ?>
