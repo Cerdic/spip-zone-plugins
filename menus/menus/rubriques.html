@@ -150,14 +150,13 @@
 						<BOUCLE_test_afficher_pas_de_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
 							<B_articles_pas_de_sousrub>
 								<ul class="menu-liste menu-items">
-									<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
-										<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
-												<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
-										</li>
-									</BOUCLE_articles_pas_de_sousrub>
-										[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
-											<li class="menu-entree item"><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
-									</B_articles_pas_de_sousrub>
+							<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
+								<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
+										<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+								</li>
+							</BOUCLE_articles_pas_de_sousrub>
+								[(#GET{cpt}|>{#GET{articles_max_affiches}}|oui)
+									<li class="menu-entree item"><a class="suite" href="[(#URL_RUBRIQUE|parametre_url{connect,''})]"><:menus:tous_les_articles:></a></li>]
 								</ul>
 							</B_articles_pas_de_sousrub>
 						</BOUCLE_test_afficher_pas_de_sousrub>
