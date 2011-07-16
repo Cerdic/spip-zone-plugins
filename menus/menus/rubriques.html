@@ -67,7 +67,26 @@
 					[(#REM) Doit-on descendre recursivement plus loin ? ]
 					[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
 					<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
-						<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
+
+						[(#REM) ------------------------------------------------
+								Positionnement de la classe daddy sur le lien pour indiquer qu'il a un ul a suivre, un autre sous-menu a ouvrir
+								si on doit descendre plus loin et
+										- qu'il y a des sous-rubriques a afficher
+										- ou qu'il y a des articles a afficher et qu'on l'a demande ]
+						#SET{class,""}
+						[(#REM) On commence par compter le nombre de sous-rubriques ]
+						#SET{cpt_sousrub_asuivre,0}
+						<BOUCLE_cpt_sousrub_asuivre(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}> </BOUCLE_cpt_sousrub_asuivre>#SET{cpt_sousrub_asuivre,#TOTAL_BOUCLE}</B_cpt_sousrub_asuivre>
+						[(#REM) Puis on compte le nombre d'articles ]
+						#SET{cpt_articles_asuivre,0}
+						<BOUCLE_cpt_articles_asuivre(ARTICLES){id_rubrique}{lang}> </BOUCLE_cpt_articles_asuivre>#SET{cpt_articles_asuivre,#TOTAL_BOUCLE}</B_cpt_articles_asuivre>
+						[(#GET{cond}|oui)
+							[(#GET{cpt_sousrub_asuivre}|oui) #SET{class,"daddy rub"}]
+							[(#GET{afficher_articles}|et{#GET{cpt_articles_asuivre}|<={#GET{articles_max}}|oui|et{#GET{cpt_articles_asuivre}|>{1}|ou{#GET{masquer_articles_uniques}|=={'on'}|non}}}) #SET{class,"daddy art"}]
+						]
+						[(#REM) --------------------------- Fin Positionnement de la classe daddy ]
+
+						<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]"[ class="(#GET{class})"]>#TITRE</a>
 						<BOUCLE_test_niveau2(CONDITION){si #GET{cond}}>
 						<BOUCLE_sous_sous(BOUCLE_sous_rubriques)></BOUCLE_sous_sous>
 						</BOUCLE_test_niveau2>
