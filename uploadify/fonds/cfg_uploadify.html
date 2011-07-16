@@ -1,11 +1,8 @@
-[(#REM) descriptif=
-<h4>Configuration du plugin Uploadify - T&eacute;l&eacute;chargement par lot</h4>
-Ici vous pouvez indiquer diff&eacute;rentes valeurs pour configurer le plugin.<br />
-<br />
-]
-
-[(#REM) titre=Uploadify]
-[(#REM) icone=uploadify-24.png]
+<!-- titre=<:uploadify:cfg_titre_uploadify:> -->
+<!-- descriptif= <h4><:uploadify:cfg_titre_boite_info:></h4>
+<p><:uploadify:cfg_explication_boite_info:></p>
+<a href="http://www.spip-contrib.net/uploadify" class="spip_out">Documentation</a>-->
+<!-- logo=images/uploadify-24.png -->
 #CACHE{0}
 
 <form method="post" action="#SELF"><div>[(#ENV{_cfg_}|form_hidden)]</div>
@@ -13,15 +10,15 @@ Ici vous pouvez indiquer diff&eacute;rentes valeurs pour configurer le plugin.<b
 <fieldset><legend><:uploadify:titre_uploadify:></legend>
 <p><:uploadify:texte_uploadify:></p>
 <p>
-<label for="sizeLimit"><:uploadify:file_size_limit:></label>
+<label for="sizeLimit"><:uploadify:cfg_file_size_limit:></label>
 <input type="text" name="sizeLimit" class="type_txt" id="sizeLimit" size="60"	value="#ENV{sizeLimit,2097152}" />
 </p>
 <p>
-<label for="file_types"><:uploadify:file_types:></label>
+<label for="file_types"><:uploadify:cfg_file_types:></label>
 <input type="text" name="fileExt" class="type_txt" id="fileExt" size="60"	value="#ENV{fileExt,*.jpg;*.gif;*.png}" />
 </p>
 <p>
-<label for="simUploadLimit"><:uploadify:file_upload_limit:></label>
+<label for="simUploadLimit"><:uploadify:cfg_file_upload_limit:></label>
 <input type="text" name="simUploadLimit" class="type_txt" id="simUploadLimit" size="60"	value="#ENV{simUploadLimit,0}" />
 </p>
 
