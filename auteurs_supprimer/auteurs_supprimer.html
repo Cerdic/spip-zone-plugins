@@ -52,8 +52,20 @@
 -->][(#ENV{pagination}|non)#SET{pagination,10}]
 [<!--(#REM)
 
+	Tableau des statuts pour titrer 
+
+-->]
+[(#SET{titre_statut,
+	#ARRAY{
+		0minirezo,<:info_statut_administrateur:>,
+		1comite,<:info_statut_redacteur:>,
+		6forum,<:info_visiteur_1:>,
+		aconfirmer,<:info_statut_auteur_autre:>}
+	}
+)]
+[<!--(#REM)
+
 	Un petit bout de code javascript
-	pour faciliter la multi-sélection
 
 -->]<script type="text/javascript">
 //<![CDATA[
@@ -175,6 +187,7 @@
 	}
 	span.id_objet {
 		color:#ccc;
+		display:none;
 	}
 	#form-liste-auteurs {
 		border:4px solid #9CBDFF;
@@ -188,6 +201,23 @@
 	}
 	#select_pagination {
 		font-size:100%;
+	}
+	span.statut {
+		background-repeat:no-repeat;
+		background-position:center;
+		padding:0 12px;
+	}
+	span.statut-0minirezo {
+		background-image:url(#EVAL{_DIR_IMG_PACK}admin-12.gif);
+	}
+	span.statut-1comite {
+		background-image:url(#EVAL{_DIR_IMG_PACK}redac-12.gif);
+	}
+	span.statut-6forum {
+		background-image:url(#EVAL{_DIR_IMG_PACK}visit-12.gif);
+	}
+	span.statut-aconfirmer {
+		background-image:url(#EVAL{_DIR_IMG_PACK}visit-12.gif);
 	}
 </style>
 </head>
@@ -226,7 +256,9 @@
 		<BOUCLE_confirmer(AUTEURS){tout}{id_auteur IN #ENV{auteurs_supprimer}}{par id_auteur}>
 			<li>
 				<span class="id_objet">[#ID_AUTEUR]</span>
-						<a href="[(#VAL{auteur_infos}|generer_url_ecrire{id_auteur=#ID_AUTEUR})]">
+				<span class="statut statut-#STATUT"
+							  title="[(#GET{titre_statut}|table_valeur{#STATUT})]"></span>
+				<a href="[(#VAL{auteur_infos}|generer_url_ecrire{id_auteur=#ID_AUTEUR})]">
 							#NOM</a>
 						[ - <a href="mailto:#EMAIL">(#EMAIL)</a>]
 				<input type="hidden" name="auteurs_supprimer[]" value="#ID_AUTEUR" />
@@ -320,6 +352,8 @@
 							   ]
 							   value="#ID_AUTEUR" />
 						<span class="id_objet">[#ID_AUTEUR]</span>
+						<span class="statut statut-#STATUT"
+							  title="[(#GET{titre_statut}|table_valeur{#STATUT})]"></span>
 						<a href="[(#VAL{auteur_infos}|generer_url_ecrire{id_auteur=#ID_AUTEUR})]">
 							#NOM</a>
 						[ - <a href="mailto:#EMAIL">(#EMAIL)</a>]
