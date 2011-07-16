@@ -15,17 +15,17 @@ function gis_inserer_javascript($flux){
 	}
 	// insertion du script de l'api a utiliser
 	if ($config['api'] == 'cloudmade')
-		$flux .="\n".'<script type="application/javascript" src="http://tile.cloudmade.com/wml/latest/web-maps-lite.js"></script>'."\n";
+		$flux .="\n".'<script type="text/javascript" src="http://tile.cloudmade.com/wml/latest/web-maps-lite.js"></script>'."\n";
 	if ($config['api'] == 'google')
-		$flux .="\n".'    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key='.$config['api_key_google'].'&hl='.$GLOBALS['spip_lang'].'"></script>'."\n";
+		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key='.$config['api_key_google'].'&hl='.$GLOBALS['spip_lang'].'"></script>'."\n";
 	if ($config['api'] == 'googlev3')
-		$flux .="\n".'<script type="application/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>'."\n";
+		$flux .="\n".'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language='.$GLOBALS['spip_lang'].'"></script>'."\n";
 	if ($config['api'] == 'microsoft')
-		$flux .="\n".'<script src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6"></script>'."\n";
+		$flux .="\n".'<script type="text/javascript" src="http://dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6"></script>'."\n";
 	if ($config['api'] == 'openlayers')
-		$flux .="\n".'<script src="http://openlayers.org/api/OpenLayers.js"></script>'."\n";
+		$flux .="\n".'<script type="text/javascript" src="http://openlayers.org/api/OpenLayers.js"></script>'."\n";
 	if ($config['api'] == 'yahoo')
-		$flux .="\n".'<script type="application/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid=MapstractionDemo"></script>'."\n";
+		$flux .="\n".'<script type="text/javascript" src="http://api.maps.yahoo.com/ajaxymap?v=3.8&appid=MapstractionDemo"></script>'."\n";
 	
 	// insertion de la lib mapstraction
 	if(in_array($config['api'],array('cartociudad','google','googlev3','yandex'))){
@@ -33,10 +33,10 @@ function gis_inserer_javascript($flux){
 	}else{
 		$geocoder = '';
 	}
-	$flux .="\n".'<script type="application/javascript" src="'. url_absolue(find_in_path(_DIR_LIB_GIS.'mxn.js')) .'?('. $config['api'] . $geocoder .')"></script>'."\n";
+	$flux .="\n".'<script type="text/javascript" src="'. url_absolue(find_in_path(_DIR_LIB_GIS.'mxn.js')) .'?('. $config['api'] . $geocoder .')"></script>'."\n";
 	
 	// insertion des scripts de gis
-	$flux .="\n".'<script type="application/javascript" src="'. url_absolue(find_in_path('javascript/gis.js')) .'"></script>'."\n";
+	$flux .="\n".'<script type="text/javascript" src="'. url_absolue(find_in_path('javascript/gis.js')) .'"></script>'."\n";
 
 	return $flux;
 }
