@@ -207,7 +207,7 @@
 					Supprimer le compte
 				
 				-->]
-				[(#VAL{DELETE FROM spip_auteurs WHERE id_auteur=#ID_AUTEUR}|sql_query)]
+				[(#VAL{DELETE FROM spip_auteurs WHERE id_auteur=#ID_AUTEUR}|sql_query|non)<:erreur:>]
 				[<!--(#REM)
 				
 				Si plugin SPIP-Listes....
@@ -220,13 +220,13 @@
 						de réception
 					
 					-->]
-					[(#VAL{DELETE FROM spip_auteurs_elargis WHERE id_auteur=#ID_AUTEUR}|sql_query)]
+					[(#VAL{DELETE FROM spip_auteurs_elargis WHERE id_auteur=#ID_AUTEUR}|sql_query|non)<:erreur:>]
 					[<!--(#REM)
 					
 						Supprimer le compte dans la table des abonnements.
 					
 					-->]
-					[(#VAL{DELETE FROM spip_auteurs_listes WHERE id_auteur=#ID_AUTEUR}|sql_query)]
+					[(#VAL{DELETE FROM spip_auteurs_listes WHERE id_auteur=#ID_AUTEUR}|sql_query|non)<:erreur:>]
 				]
 			]
 			</li>
