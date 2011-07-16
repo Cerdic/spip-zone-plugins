@@ -26,5 +26,6 @@ $GLOBALS['i18n_ausu_fr'] = array(
 	'total_un_auteur' => 'Total: 1 auteur',
 	'total_nb_auteur' => 'Total: @nb@ auteurs',
 	'tout_cocher' => 'Tout cocher',
-	'tout_decocher' => 'Tout d&#233;cocher'
+	'tout_decocher' => 'Tout d&#233;cocher',
+	'tous' => 'Tous'
 );

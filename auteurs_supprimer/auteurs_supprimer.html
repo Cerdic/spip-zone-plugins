@@ -74,7 +74,11 @@
 				this.checked = false;
 			});
 			return false;
-		}); 
+		});
+		
+		$('#select_pagination').change(function() {
+			$(this).closest("form").submit();
+		});
 
 	});
 	
@@ -308,11 +312,18 @@
 						[(#GET{total}|singulier_ou_pluriel{ausu:total_un_auteur, ausu:total_nb_auteur, nb})]
 						)</span>]
 		[(#GET{total}|>{#GET{pagination}}|oui)
+		<input type="hidden" name="pagination" value="#GET{pagination}" />
 		<:ausu:pagination_:>
 		<select name="pagination" id="select_pagination">
 			<option[ (#GET{pagination}|=={10}|oui)selected="selected"] value="10">10</option>
 			[(#GET{total}|>{25}|oui)
 			<option[ (#GET{pagination}|=={25}|oui)selected="selected"] value="25">25</option>]
+			[(#GET{total}|>{50}|oui)
+			<option[ (#GET{pagination}|=={50}|oui)selected="selected"] value="50">50</option>]
+			[(#GET{total}|>{100}|oui)
+			<option[ (#GET{pagination}|=={100}|oui)selected="selected"] value="100">100</option>]
+			[(#GET{total}|>{#GET{pagination}}|oui)
+			<option[ (#GET{pagination}|=={#GET{total}}|oui)selected="selected"] value="#GET{total}"><:ausu:tous:></option>]
 		</select>
 		]
 		[<p class="pagination">(#PAGINATION)</p>]
