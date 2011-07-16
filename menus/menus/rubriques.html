@@ -13,8 +13,17 @@
 
 [(#SET{id_rubriques_exclues, #ENV{id_rubriques_exclues}|?{#ENV{id_rubriques_exclues}|explode{','},#ARRAY}})]
 
+[(#REM) Tri des rubriques ]
 [(#SET{tri_num, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_num},'titre'}})]
 [(#SET{tri_alpha, #ENV{tri_num}|ou{#ENV{tri_alpha}}|?{#ENV{tri_alpha},'titre'}})]
+[(#SET{tri_num_inverse, #ENV{tri_num_inverse}|=={oui}|?{'1','0'}})]
+[(#SET{tri_alpha_inverse, #ENV{tri_alpha_inverse}|=={oui}|?{'1','0'}})]
+
+[(#REM) Tri des articles ]
+[(#SET{tri_num_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_num_articles},'titre'}})]
+[(#SET{tri_alpha_articles, #ENV{tri_num_articles}|ou{#ENV{tri_alpha_articles}}|?{#ENV{tri_alpha_articles},'titre'}})]
+[(#SET{tri_num_articles_inverse, #ENV{tri_num_inverse_articles}|=={oui}|?{'1','0'}})]
+[(#SET{tri_alpha_articles_inverse, #ENV{tri_alpha_inverse_articles}|=={oui}|?{'1','0'}})]
 
 [(#ENV{appel_formulaire}|oui)
 	[(#SET{titre, #GET{id_rubrique}|?{#INFO_TITRE{rubrique, #GET{id_rubrique}}, <:info_racine_site:>}})]
@@ -37,17 +46,19 @@
 			<br /><:menus:info_sousrub_cond:>
 		]
 		[(#GET{rubriques_max_affichees}|<{10000}|oui) / <:menus:info_rubriques_max_affichees{max=#GET{rubriques_max_affichees}}:>]
+		<br /><:menus:info_tri:> [(#GET{tri_num}) [(#GET{tri_num_inverse}|=={1}|oui) inverse] <:menus:info_tri_num:>][(#GET{tri_num}|et{GET{tri_alpha}}), ][(#GET{tri_alpha}) [(#GET{tri_alpha_inverse}|=={1}|oui) inverse] <:menus:info_tri_alpha:>]
+
 		[(#GET{afficher_articles}|oui)
 			<br /><:menus:info_afficher_articles:>
 			[(#GET{articles_max}|<{10000}|oui) / <:menus:info_articles_max{max=#GET{articles_max}}:>]
 			[(#GET{articles_max_affiches}|<{10000}|oui) / <:menus:info_articles_max_affiches{max=#GET{articles_max_affiches}}:>]
 			[(#GET{masquer_articles_uniques}|oui) / <:menus:info_masquer_articles_uniques:>]
 		]
-		<br /><:menus:info_tri:> [(#GET{tri_num}) <:menus:info_tri_num:>][(#GET{tri_num}|et{GET{tri_alpha}}), ][(#GET{tri_alpha}) <:menus:info_tri_alpha:>]
+		<br /><:menus:info_tri_articles:> [(#GET{tri_num_articles}) [(#GET{tri_num__articles_inverse}|=={1}|oui) inverse] <:menus:info_tri_num:>][(#GET{tri_num_articles}|et{GET{tri_alpha_articles}}), ][(#GET{tri_alpha_articles}) [(#GET{tri_alpha_articles_inverse}|=={1}|oui) inverse] <:menus:info_tri_alpha:>]
 	</div>
 ]
 <BOUCLE_appel(CONDITION){si #ENV{appel_menu}|oui}>
-	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{rubriques_max_affichees}}>
+	<BOUCLE_rubriques(RUBRIQUES){id_parent=#GET{id_rubrique}}{id_secteur !IN #GET{id_secteur_exclus}}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{rubriques_max_affichees}}>
 		#SET{niveau_actuel,#EVAL{1}|intval}
 		<li class="menu-entree item[ (#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}})]">
 			<a href="#URL_RUBRIQUE" title="[(#TITRE|attribut_html)]">#TITRE</a>
@@ -62,7 +73,7 @@
 
 				<B_sous_rubriques>
 					<ul class="menu-liste menu-items">
-				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{rubriques_max_affichees}}>
+				<BOUCLE_sous_rubriques(RUBRIQUES){id_parent}{id_rubrique !IN #GET{id_rubriques_exclues}}{par num #GET{tri_num}}{inverse #GET{tri_num_inverse}}{par #GET{tri_alpha}}{inverse #GET{tri_alpha_inverse}}{0,#GET{rubriques_max_affichees}}>
 					#SET{niveau_actuel,#GET{niveau_actuel}|plus{1}}
 					[(#REM) Doit-on descendre recursivement plus loin ? ]
 					[(#SET{cond,#GET{niveau_max}|>{#GET{niveau_actuel}}|et{#GET{sousrub_cond}|?{#ID_RUBRIQUE|menus_exposer{rubrique,#ENV*{env}},'on'}}})]
@@ -118,7 +129,7 @@
 							#SET{afficher,oui}]
 
 						<BOUCLE_test_afficher_si_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
-							<BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
+							<BOUCLE_articles_si_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
 								<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 									<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
 								</li>
@@ -150,7 +161,7 @@
 						<BOUCLE_test_afficher_pas_de_sousrub(CONDITION){si #GET{afficher}|=={oui}|oui}>
 							<B_articles_pas_de_sousrub>
 								<ul class="menu-liste menu-items">
-							<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num}}{par #GET{tri_alpha}}{0,#GET{articles_max_affiches}}>
+							<BOUCLE_articles_pas_de_sousrub(ARTICLES){id_rubrique}{lang}{par num #GET{tri_num_articles}}{inverse #GET{tri_num_articles_inverse}}{par #GET{tri_alpha_articles}}{inverse #GET{tri_alpha_articles_inverse}}{0,#GET{articles_max_affiches}}>
 								<li class="menu-entree item[ (#ID_ARTICLE|menus_exposer{article,#ENV*{env}})]">
 										<a href="#URL_ARTICLE" title="[(#TITRE|attribut_html)]">#TITRE</a>
 								</li>
