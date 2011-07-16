@@ -9,38 +9,30 @@ var geocoder;]
 
 (function($){
 	
-	var maj_inputs = function(map,pos) {
+	var maj_inputs = function(map,data) {
 		var zoom = map.getZoom();
-		$("#champ_lat").val(pos.lat);
-		$("#champ_lon").val(pos.lon);
 		$("#champ_zoom").val(zoom);
+		[(#GET{geocoder}|oui)
+			$("#champ_lat").val(data.point.lat);
+			$("#champ_lon").val(data.point.lon);
+			$('#champ_adresse').val(data.street);
+			$('#champ_code_postal').val(data.postcode);
+			$('#champ_ville').val(data.locality);
+			$('#champ_region').val(data.region);
+			$('#champ_pays').val(data.country);
+		][(#GET{geocoder}|non)
+			$("#champ_lat").val(data.lat);
+			$("#champ_lon").val(data.lon);
+		]
 	}
 	
 	[(#GET{geocoder}|oui)
-	function geocode(address) {
-		form_map.setCenterAndZoom(address.point, 15);
-		geocode_marker = new mxn.Marker(address.point);
-		var info = address.locality + ", " + address.region;
-		geocode_marker.setInfoBubble(info);
+	function geocode(query) {
+		form_map.setCenter(query.point);
+		geocode_marker = new mxn.Marker(query.point);
 		form_map.removeAllMarkers();
 		form_map.addMarker(geocode_marker);
-		geocode_marker.openBubble();
-		maj_inputs(form_map,address.point);
-		if(address.street != ''){
-			$('#champ_adresse').val(address.street)
-		}
-		if(address.postcode != ''){
-			$('#champ_code_postal').val(address.postcode)
-		}
-		if(address.locality != ''){
-			$('#champ_ville').val(address.locality)
-		}
-		if(address.region != ''){
-			$('#champ_region').val(address.region)
-		}
-		if(address.country != ''){
-			$('#champ_pays').val(address.country)
-		}
+		maj_inputs(form_map,query);
 	}]
 
 	var init_map = function() {
@@ -82,10 +74,12 @@ var geocoder;]
 			var pos = args.location;
 			form_map.removeAllMarkers();
 			marker = new mxn.Marker(pos);
-			marker.setDraggable(true);
 			form_map.addMarker(marker);
 			form_map.setCenter(pos,{pan:true});
-			maj_inputs(form_map,pos);
+			[(#GET{geocoder}|non)
+			maj_inputs(form_map,pos);]
+			[(#GET{geocoder}|oui)
+			geocoder.geocode(pos);]
 		});
 		
 		// mettre à jour le zoom quand on le modifie

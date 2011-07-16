@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descr_gis' => 'Syst&egrave;me d\'Information G&eacute;ographique.<br />Lien vers la documentation.',
 	'cfg_inf_adresse' => 'Affiche des champs suppl&eacute;mentaires d\'adresse (pays, ville, r&eacute;gion, adresse...)',
 	'cfg_inf_cloudmade' => 'Cette API n&eacute;cessite une cl&eacute; &agrave; cr&eacute;er sur <a href=\'@url@\'>le site de CloudMade</a>.',
-	'cfg_inf_geocoder' => 'Activer la fonction de recherche &agrave; partir d\'une adresse dans le formulaire.',
+	'cfg_inf_geocoder' => 'Activer les fonctions du geocoder (recherche &agrave; partir d\'une adresse, r&eacute;cup&eacute;ration de l\'adresse &agrave; partir des coordonn&eacute;es).',
 	'cfg_inf_geolocaliser_user_html5' => 'Si le navigateur de l\'utilisateur le permet, son emplacement g&eacute;ographique approximatif est r&eacute;cup&eacute;r&eacute; pour donner la position par d&eacute;faut lors de la cr&eacute;ation d\'un point.',
 	'cfg_inf_google' => 'Cette API n&eacute;cessite une cl&eacute; &agrave; cr&eacute;er sur <a href=\'@url@\'>le site de GoogleMaps</a>.',
 	'cfg_lbl_adresse' => 'Afficher les champs d\'adresse',
