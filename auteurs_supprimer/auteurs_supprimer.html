@@ -101,20 +101,52 @@
 
 		/**
 		 * Transmettre la pagination dans la pagination
-		 * (compléter les url).
+		 * (compléter les url)
+		 * sauf si déjà présent.
 		 */
+		document.pagi_value = $('input.pagination').attr('value');
+		document.pagi_string = 'pagination=';
+		document.pagi_search = null;
 		$('p.pagination a').each(function() {
 			if(url = $(this).attr('href')) {
-				pagination = $('input.pagination').attr('value');
-				var ancre = '';
-				if(pos = (url + '').indexOf('#')) {
-					ancre = url.substr(pos);
-					url = url.substr(0, pos);
+				var pos = (url + '').indexOf(document.pagi_string);
+				if (pos > 0) {
+					var target = /(pagination=\d*)/;
+					target.exec(url);
+					document.pagi_search = RegExp.$1;
+					/* break a-la-jquery */
+					return false;
 				}
-				$(this).attr('href', url + '&pagination=' + pagination + ancre);				
+			};
+		});
+		$('p.pagination a').each(function() {
+			if((url = $(this).attr('href')) && document.pagi_search) {
+				var pos = (url + '').indexOf(document.pagi_search);
+				/**
+				 * Si la pagination manque, l'ajouter
+				 */
+				if(pos < 0) {
+					var ancre = '';
+					pos = (url + '').indexOf('#');
+					if(pos >= 0) {
+						ancre = url.substr(pos);
+						url = url.substr(0, pos);
+					}
+					$(this).attr('href', url + '&' + document.pagi_string
+								 + document.pagi_value + ancre);
+				}
+				/**
+				 * sinon, la remplacer
+				 */
+				else {
+					var left = url.substr(0, pos);
+					var right = url.substr(pos + document.pagi_search.length);
+					$(this).attr('href',left
+								 + document.pagi_string + document.pagi_value
+								 + right);
+				}
 			}
 		});
-		
 	});
 	
 })(jQuery);
@@ -368,7 +400,7 @@
 		[<span class="total">(
 						[(#GET{total}|singulier_ou_pluriel{ausu:total_un_auteur, ausu:total_nb_auteur, nb})]
 						)</span>]
-		[(#GET{total}|>{#GET{pagination}}|oui)
+		
 		<input type="hidden" name="pagination" class="pagination" value="#GET{pagination}" />
 		<:ausu:pagination_:>
 		<select name="pagination" id="select_pagination">
@@ -382,7 +414,7 @@
 			[(#GET{total}|>{#GET{pagination}}|oui)
 			<option[ (#GET{pagination}|=={#GET{total}}|oui)selected="selected"] value="#GET{total}"><:ausu:tous:></option>]
 		</select>
-		]
+		
 		[<p class="pagination">(#PAGINATION)</p>]
 		</B_auteurs>
 		</fieldset>
