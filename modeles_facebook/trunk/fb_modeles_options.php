@@ -1,12 +1,21 @@
 <?php
 /**
+ * @name 		Options
+ * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @license		GNU/GPLv3 (http://www.opensource.org/licenses/gpl-3.0.html)
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 //ini_set('display_errors','1'); error_reporting(E_ALL);
 
+/**
+ * Nom du meta CFG de configuration
+ */
+define('FB_MODELS_CFGMETA', 'config_fb_modeles');
 
+/**
+ * Nom de la page de documentation interne pour generation des liens
+ */
 define('FB_MODELS_DOC', 'fb_modeles');
-
 
 // -------------------------
 // CONFIGURATION
@@ -19,6 +28,7 @@ $GLOBALS['FB_APP_DEF'] = array(
 	'appid' => '',
 	'userid' => '',
 	'pageid' => '',
+	'url_page' => '',
 	'include_metas' => 'non',
 	'xfbml' => 'oui',
 	// URL des plugins
@@ -41,7 +51,7 @@ $GLOBALS['FB_APP_DEF'] = array(
  */
 function fbmod_config($str=null, $sinon=null){
 	$conf = array_merge($GLOBALS['FB_APP_DEF'], 
-		function_exists('lire_config') ? lire_config('fb_modeles', array()) : array());
+		function_exists('lire_config') ? lire_config(FB_MODELS_CFGMETA, array()) : array());
 	// On ajoute la langue a la mode facebook
 	include_spip('inc/xfbml_languages');
 	$conf['fb_lang'] = isset($GLOBALS['xfbml_languages'][$GLOBALS['spip_lang']]) ? 

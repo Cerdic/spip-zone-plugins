@@ -1,8 +1,13 @@
 <?php
+/**
+ * @name 		Balise_FBMOD
+ * @author 		Piero Wbmstr <piero.wbmstr@gmail.com>
+ * @license		GNU/GPLv3 (http://www.opensource.org/licenses/gpl-3.0.html)
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Balise unique FB modeles
+ * Balise unique FB modeles : renvoie une valeur de la configuration, la valeur par défaut sinon
  */
 function balise_FBMOD_dist($p) {
 	// Interpretation des arguments :

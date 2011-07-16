@@ -64,7 +64,7 @@
         </div>
 		<div class="texte entry-content">
 		
-			[(#MODELE{fb_comments}{href=#CONFIG{config_fb_modeles/url_page,http://www.example.com/}})]
+			[(#MODELE{fb_comments}{href=#CONFIG{#EVAL{FB_MODELS_CFGMETA}/url_page}|sinon{http://www.example.com/}})]
 			
 		</div>
 		<br class="nettoyeur" style="line-height:30px" />
@@ -77,7 +77,7 @@
         </div>
 		<div class="texte entry-content">
 		
-			[(#MODELE{fb_live_stream}{event_app_id=243059592386301}{via_url=#CONFIG{config_fb_modeles/url_page,http://www.example.com/}})]
+			[(#MODELE{fb_live_stream}{event_app_id=243059592386301}{via_url=#CONFIG{#EVAL{FB_MODELS_CFGMETA}/url_page}|sinon{http://www.example.com/}})]
 
 		</div>
 		<br class="nettoyeur" style="line-height:30px" />

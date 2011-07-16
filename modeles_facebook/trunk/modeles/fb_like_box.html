@@ -51,7 +51,7 @@
 
 [(#REM) Version accessible sans javascript ni XFBML ]
 [(#FBMOD{xfbml}|=={oui}|oui)<noscript>
-<p><small><:fbmodeles:javascript_inactif:></small></p>
+<div class="fb_modeles fb_messagejsabsent"><:fbmodeles:javascript_inactif:></div>
 ]
 <iframe src="[(#FBMOD{like_box_url}
 	|parametre_url{locale,#FBMOD{fb_lang}}
