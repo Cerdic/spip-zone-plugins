@@ -1,4 +1,4 @@
-<div class="formulaire_spip formulaire_configurer formulaire_configurer_fancy">
+<div class="formulaire_spip formulaire_configurer formulaire_configurer_fb_modeles">
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -23,6 +23,11 @@
 			<label for="userid"><strong><:fbmodeles:cfg_label_userid:>&nbsp;:</strong></label>
 			<input type="text" name="userid" id="userid" value="[(#ENV{userid}|sinon{#FBMOD{userid}})]" size="50" />
 			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_userid:></span>
+		</p>
+		<p class="forml" style="width:98%">
+			<label for="url_page"><strong><:fbmodeles:cfg_label_url_page:>&nbsp;:</strong></label>
+			<input type="text" name="url_page" id="url_page" value="[(#ENV{url_page}|sinon{#FBMOD{url_page}})]" size="50" />
+			<br /><span style="font-size:.8em"><:fbmodeles:cfg_comment_url_page:></span>
 		</p>
 	</fieldset>
 
@@ -63,6 +68,7 @@
 		<input type="reset" value="<:fbmodeles:bouton_reset:>" class="fondo" title="<:fbmodeles:effacer_les_modifications:>" />
 		<input type="submit" name="_cfg_delete" value="<:fbmodeles:bouton_effacer:>" class="fondo" title="<:fbmodeles:effacer_config_courante:>" />
 	</p>
+
 </div></form>
 #CFG_ARBO{fb_modeles}
 </div>

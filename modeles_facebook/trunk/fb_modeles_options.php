@@ -4,6 +4,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 //ini_set('display_errors','1'); error_reporting(E_ALL);
 
+
+define('FB_MODELS_DOC', 'fb_modeles');
+
+
 // -------------------------
 // CONFIGURATION
 // -------------------------

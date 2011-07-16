@@ -10,7 +10,7 @@
 	<description>
 {{Un ensemble de mod&#232;les pour inclure les modules sociaux Facebook.}}
 
-Une documentation interne est disponible lorsque le plugin est actif sur la page publique [fb_modeles_documentation->../?page=fb_modeles_documentation].
+Une documentation interne est disponible lorsque le plugin est actif sur la page publique [fb_modeles->../?page=fb_modeles].
 	</description>
  	<icon>img/facebook-icon.png</icon>
 	<options>fb_modeles_options.php</options>

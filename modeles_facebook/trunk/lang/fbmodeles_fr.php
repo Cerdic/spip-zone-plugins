@@ -41,6 +41,8 @@ Pour inclure les balises "Open Graph" en en-t&ecirc;te de vos pages publiques, v
 	'cfg_comment_pageid' => 'Identifiant d\'une page ; cela n&eacute;cessite d\'avoir cr&eacute;&eacute; la page.',
 	'cfg_label_userid' => 'Identifiant utilisateur "User ID"',
 	'cfg_comment_userid' => 'Identifiant(s) utilisateur(s) des administrateurs des plugins. Vous pouvez en indiquer plusieurs en les s&eacute;parant par une virgule.',
+	'cfg_label_url_page' => 'URL de page ou profil',
+	'cfg_comment_url_page' => 'Adresse URL compl&egrave;te de votre page ou profil Facebook ; elle sera utilis&eacute;e par d&eacute;faut par les mod&egrave;les (URL du type "<code>http://www.facebook.com/...</code>").',
 	'cfg_label_xfbml' => 'Utilisation du XFBML',
 	'cfg_comment_xfbml' => 'Utilisation de la biblioth&egrave;que javascript du SDK Facebook et du langage associ&eacute;. Si vous choisissez "non", les modules seront pr&eacute;sent&eacute;s en iframe.',
 	'cfg_label_border_color' => 'Couleur de bordure par d&eacute;faut',
@@ -60,6 +62,8 @@ Pour inclure les balises "Open Graph" en en-t&ecirc;te de vos pages publiques, v
 
 Comme montr&eacute; ci-dessus, les mod&egrave;les s\'incluent directement en leur passant les options souhait&eacute;es.
 
+Chaque mod&egrave;le peut recevoir une liste d\'options, dont certaines sont n&eacute;cessaires &agrave; son affichage. Pour une liste compl&egrave;te, reportez-vous aux informations des en-t&ecirc;te de fichiers de mod&egrave;les, dans le r&eacute;pertoire "<code>modeles/</code>" du plugin.
+
 Le plugin propose &eacute;galement un mod&egrave;le g&eacute;n&eacute;rant des informations {{Open Graph}}, les metas informations utilis&eacute;es par Facebook, propres &agrave; chaque objet SPIP. Pour l\'utiliser, vous devez ajouter manuellement en en-t&ecirc;te de vos squelettes le mod&egrave;le "{{insert_head_og}}".
 
 {{Attention - }}Ce mod&egrave;le n&eacute;cessite de recevoir l\'environnement courant, vous devez donc l\'inclure dans chacun des squelettes de pages ({"article.html", "rubrique.html" ...}) et non dans l\'inclusion globale en en-t&ecirc;te ({"inc_head.html"}) en indiquant : 
@@ -76,7 +80,7 @@ Le plugin propose &eacute;galement un mod&egrave;le g&eacute;n&eacute;rant des i
 	// Documentation
 	'exemple' => '{{{Exemple}}}
 
-Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaque mod&egrave;le avec des valeurs fictives. Reportez-vous au mod&egrave;le correspondant pour les options.',
+Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaque mod&egrave;le avec des valeurs fictives ({la page utilisera vos valeurs si vous utilisez [CFG->http://www.spip-contrib.net/?rubrique575]}). Reportez-vous au mod&egrave;le correspondant pour les options.',
 
 // F //
 	'fb_modeles' => 'Mod&egrave;les Facebook',
@@ -93,6 +97,18 @@ Les diff&eacute;rents blocs ci-dessous vous pr&eacute;sentent un exemple de chaq
 // P //
 	'page_test' => 'Page de test (locale)',
 	'page_test_in_new_window' => 'Page de test en nouvelle fen&#234;tre',
+	// Documentation
+	'personnalisation' => '{{{Personnalisation}}}
+
+Chaque mod&egrave;le pr&eacute;sente son contenu dans un bloc de type <code>div</code> portant des classes CSS du type <code>fb_modeles fb_XXX</code> o&ugrave; {{XXX}} est le nom du modèle. Cela permet une personnalisation des styles pour l\'ensemble des mod&egrave;les et pour chacun d\'eux.
+
+
+Par exemple pour le module Facebook "Send" :
+<cadre class="spip">
+<div class="fb_modeles fb_send">
+     ... contenu ... 
+</div>
+</cadre>',
 
 // T //
 	'titre_original' => 'Facebook Models, plugin pour SPIP 2.0+',

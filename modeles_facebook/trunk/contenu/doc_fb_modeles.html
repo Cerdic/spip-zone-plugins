@@ -64,7 +64,7 @@
         </div>
 		<div class="texte entry-content">
 		
-			[(#MODELE{fb_comments}{href=http://www.example.com/})]
+			[(#MODELE{fb_comments}{href=#CONFIG{config_fb_modeles/url_page,http://www.example.com/}})]
 			
 		</div>
 		<br class="nettoyeur" style="line-height:30px" />
@@ -77,7 +77,7 @@
         </div>
 		<div class="texte entry-content">
 		
-			[(#MODELE{fb_live_stream}{event_app_id=243059592386301}{via_url=http://www.example.com/})]
+			[(#MODELE{fb_live_stream}{event_app_id=243059592386301}{via_url=#CONFIG{config_fb_modeles/url_page,http://www.example.com/}})]
 
 		</div>
 		<br class="nettoyeur" style="line-height:30px" />
@@ -85,6 +85,7 @@
 	<:fbmodeles:documentation|propre:>
 [(#SET{url_cfg,[(#EVAL{function_exists('lire_config')}|=={1}|?{<a href="[(#URL_ECRIRE{cfg,cfg=fb_modeles})]"><:fbmodeles:cfg_page:></a>,<small><:fbmodeles:cfg_pas_installe:></small>})]})]
 	<:fbmodeles:configuration{bloc_cfg=#GET{url_cfg}}|propre:>
+	<:fbmodeles:personnalisation|propre:>
 	<:fbmodeles:sep|propre:>
 </div>
 
@@ -97,9 +98,9 @@
 </div>
 
 <div id="info_doc" style="background:#eee;color:#000;margin:.2em;padding:.4em;border:1px solid red;font-size:96%;">
-[(#SET{urldocbrut,[(#URL_PAGE{fb_modeles_documentation}|parametre_url{docmode,brut})]})]
-[(#SET{urldoczpip,[(#URL_PAGE{fb_modeles_documentation}|parametre_url{docmode,zpip})]})]
-[(#SET{urldocspip,[(#URL_PAGE{fb_modeles_documentation}|parametre_url{docmode,spip})]})]
+[(#SET{urldocbrut,[(#URL_PAGE{#EVAL{FB_MODELS_DOC}}|parametre_url{docmode,brut})]})]
+[(#SET{urldoczpip,[(#URL_PAGE{#EVAL{FB_MODELS_DOC}}|parametre_url{docmode,zpip})]})]
+[(#SET{urldocspip,[(#URL_PAGE{#EVAL{FB_MODELS_DOC}}|parametre_url{docmode,spip})]})]
 <h3><:fbmodeles:info_doc_titre:></h3>
 <:fbmodeles:info_skel_doc{mode_brut=#GET{urldocbrut},mode_zpip=#GET{urldoczpip},mode_spip=#GET{urldocspip}}|propre:>
 <:fbmodeles:info_skel_contrib|propre:>
