@@ -180,7 +180,7 @@
 	
 	-->]
 	<B_confirmer>
-	<form action="#SELF" method="post" id="form-liste-selection">
+	<form action="#SELF#deleted-ok" method="post" id="form-liste-selection">
 		[(#ENV{btn-confirmer}|non)
 		<p>
 			<:ausu:message_confirmer_:>
@@ -200,9 +200,7 @@
 						<a href="[(#VAL{auteur_infos}|generer_url_ecrire{id_auteur=#ID_AUTEUR})]">
 							#NOM</a>
 						[ - <a href="mailto:#EMAIL">(#EMAIL)</a>]
-			[(#ENV{btn-confirmer}|non)
-				<input type="hidden" name="auteurs_supprimer" value="#ID_AUTEUR" />
-			]
+				<input type="hidden" name="auteurs_supprimer[]" value="#ID_AUTEUR" />
 			[(#ENV{btn-confirmer}|oui)
 				[<!--(#REM)
 				
@@ -243,7 +241,7 @@
 		</fieldset>
 		]
 		[(#ENV{btn-confirmer}|oui)
-		<p><:ausu:action_realisee:></p>
+		<p id="deleted-ok"><:ausu:action_realisee:></p>
 		]
 	</form>
 	</B_confirmer>
