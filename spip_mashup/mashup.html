@@ -31,6 +31,7 @@
 var TB_chemin_animation = "#CHEMIN{circle_animation.gif}";
 var TB_chemin_close = "#CHEMIN{close.gif}";
 
+/** Variable du mashup */
 mashup.waitIcon = "#CHEMIN{img/loading.gif}";
 mashup.graphic = "#CHEMIN{img/graphic.png}";
 mashup._T["plus"] = "<:spip_mashup:plus:>";
@@ -48,6 +49,13 @@ function initSpipMap0 (map,id)
 	mashup.load ("#ID_RUBRIQUE", "[(#ENV{legende,[(#DESCRIPTIF**|mashup_param{legende})]})]");
 }
 </script>
+[(#REM) recuperation des argument du mashup ]
+[(#SET{carto,[(#DESCRIPTIF**|mashup_param{carto,0.8})]})]
+[(#SET{ortho,[(#DESCRIPTIF**|mashup_param{ortho,0})]})]
+[(#SET{min_zoom,[(#DESCRIPTIF**|mashup_param{min_zoom,0})]})]
+[(#SET{max_zoom,[(#DESCRIPTIF**|mashup_param{max_zoom,20})]})]
+[(#SET{type,[(#DESCRIPTIF**|mashup_param{type,Standard})]})]
+[(#SET{mode,[(#ENV{mode,[(#DESCRIPTIF**|mashup_param{mode})]})]})]
 </head>
 
 <body class="mashup">
@@ -57,19 +65,14 @@ function initSpipMap0 (map,id)
 	<div style="display:block; position:relative">
 		<div style="position:absolute; bottom:0; right:1em">
 			<table cellpadding=0 cellspacing=0><tr><td>
-			<a class='plein_ecran' href="javascript:mashup.pleinEcran();" title="<:spip_mashup:plein_ecran:>"></a>
+			[(#GET{type}|=={Standard}|?{' '})<a class='plein_ecran' href="javascript:mashup.pleinEcran();" title="<:spip_mashup:plein_ecran:>"></a>]
 			</td><td>
 			[(#MODELE{geoportail_geolien}{align=right})]
 			</td></tr></table>
 		</div>
 		<INCLURE{fond=inc-entete}>
 	</div>
-	[(#SET{carto,[(#DESCRIPTIF**|mashup_param{carto,0.8})]})]
-	[(#SET{ortho,[(#DESCRIPTIF**|mashup_param{ortho,0})]})]
-	[(#SET{min_zoom,[(#DESCRIPTIF**|mashup_param{min_zoom,0})]})]
-	[(#SET{max_zoom,[(#DESCRIPTIF**|mashup_param{max_zoom,20})]})]
-	[(#SET{mode,[(#ENV{mode,[(#DESCRIPTIF**|mashup_param{mode})]})]})]
-	[(#MODELE{geoportail}{id_rubrique}{id_secteur}{zone=#ZONE}{type=Standard}{mode=#GET{mode}}{carto=#GET{carto}}{ortho=#GET{ortho}}{min_zoom=#GET{min_zoom}}{max_zoom=#GET{max_zoom}}{layerctrl=1}{width=600px}{height=400px})]
+	[(#MODELE{geoportail}{id_rubrique}{id_secteur}{zone=#ZONE}{type=#GET{type}}{mode=#GET{mode}}{carto=#GET{carto}}{ortho=#GET{ortho}}{min_zoom=#GET{min_zoom}}{max_zoom=#GET{max_zoom}}{layerctrl=1}{width=600px}{height=400px})]
 	[(#REM) Centrer si pas d'arguments ]
 	[(#ENV{lon,0}|=={0}|?{[(#MODELE{geoportail_centrer}{id_rubrique})]})]
 	
