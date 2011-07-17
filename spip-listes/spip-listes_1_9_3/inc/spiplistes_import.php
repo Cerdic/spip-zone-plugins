@@ -98,12 +98,12 @@ function spiplistes_import (
 
 		$new_entries = file($filename);
 		
-		//spiplistes_debug_log (LOG_NOTICE, 'memory_get_usage[3]: ' . memory_get_usage());
+		//spiplistes_debug_log ('memory_get_usage[3]: ' . memory_get_usage());
 		
 		$nb_new_entries = count($new_entries);
 		
-		//spiplistes_debug_log (LOG_NOTICE, 'memory_get_usage[2]: ' . memory_get_usage());
-		//spiplistes_debug_log (LOG_NOTICE, 'memory_get_peak_usage[2]: ' . memory_get_peak_usage());
+		//spiplistes_debug_log ('memory_get_usage[2]: ' . memory_get_usage());
+		//spiplistes_debug_log ('memory_get_peak_usage[2]: ' . memory_get_peak_usage());
 		
 		for($jj = 0; $jj < $nb_new_entries; $jj++)
 		{
@@ -239,7 +239,7 @@ function spiplistes_import (
 				$sql_col_names = '('.implode(',', array_keys($stack_new_auteurs[0])).')';
 				$sql_col_values = '';
 				
-				//spiplistes_debug_log (LOG_NOTICE, 'memory_get_usage[5]: ' . memory_get_usage());
+				//spiplistes_debug_log ('memory_get_usage[5]: ' . memory_get_usage());
 				
 				// Préparer le paquet
 				foreach($stack_new_auteurs as $auteur)
@@ -273,7 +273,7 @@ function spiplistes_import (
 			$inscrire_abos = count($stack_new_abonnes);
 			spiplistes_debug_log ('SUBCRIBE '.$inscrire_abos.' accounts');
 			
-			//spiplistes_debug_log (LOG_NOTICE, 'memory_get_usage[6]: ' . memory_get_usage());
+			//spiplistes_debug_log ('memory_get_usage[6]: ' . memory_get_usage());
 			
 			/**
 			 * Inscrire les abonnements
@@ -283,8 +283,8 @@ function spiplistes_import (
 				spiplistes_debug_log ('inscription des abos');
 		
 				$sql_table = 'spip_auteurs_listes';
-				$sql_noms = '(id_auteur,id_liste,format,date_inscription)';
-				$sql_valeurs ='';
+				$sql_update_valeurs = array();
+				$sql_insert_valeurs ='';
 				$q_format = sql_quote($format_abo);
 				
 				/**
@@ -302,21 +302,80 @@ function spiplistes_import (
 					 */
 					foreach ($stack_new_abonnes as $id_auteur)
 					{
-						if ((!isset($abonnements[$id_liste]))
-							|| (!in_array($id_auteur, $abonnements[$id_liste]))
-						) {
-							$sql_valeurs .= '('.$id_auteur.','.$id_liste.','.$q_format.',NOW()),';
+						$deja_abonne = isset($abonnements[$id_liste])
+							&& in_array($id_auteur, $abonnements[$id_liste]);
+						
+						if (!$deja_abonne)
+						{
+							$sql_insert_valeurs .= '('.$id_auteur.','.$id_liste.','.$q_format.',NOW()),';
+							$nb_abos_records++;
+						}
+						else if ($forcer_abo)
+						{
+							if (!isset($sql_update_valeurs[$id_liste]))
+							{
+								$sql_update_valeurs[$id_liste] = array();
+							}
+							$sql_update_valeurs[$id_liste][] = $id_auteur;
 							$nb_abos_records++;
 						}
 					} // foreach
 				} // foreach
-				if (!empty($sql_valeurs))
+				/**
+				 * Insertion dans la table des abonnements
+				 */
+				if (!empty($sql_insert_valeurs))
 				{
-					$sql_valeurs = rtrim($sql_valeurs, ',');
+					$sql_noms = '(id_auteur,id_liste,format,date_inscription)';
+					$sql_insert_valeurs = rtrim($sql_insert_valeurs, ',');
 					
-					if (sql_insert($sql_table, $sql_noms, $sql_valeurs) === FALSE)
+					if (sql_insert($sql_table, $sql_noms, $sql_insert_valeurs) === FALSE)
 					{
 						spiplistes_sqlerror_log ('INSERT abonnements');
+					}
+				}
+				/**
+				 * Correction de la table des abonnements
+				 * si forcé.
+				 */
+				if (count($sql_update_valeurs))
+				{
+					$desabonner = ($format_abo == 'non');
+					$sql_table = 'spip_auteurs_listes';
+					$sql_update_champ = array('format' => sql_quote($format_abo));
+					
+					/**
+					 * Traiter les listes une par une
+					 */
+					foreach ($sql_update_valeurs as $id_liste => $id_auteurs)
+					{
+						$sql_where = '
+							id_liste = '.$id_liste . ' AND 
+							id_auteur IN (' . implode(',', $id_auteurs) . ')';
+						
+						/**
+						 * Désabonner ?
+						 * Supprimer de la liste des abonnements.
+						 */
+						if ($desabonner)
+						{
+							if (sql_delete ($sql_table, $sql_where) === FALSE)
+							{
+								spiplistes_sqlerror_log ('DELETE abonnements');
+							}
+						}
+						/**
+						 * sinon, appliquer le format souhaité
+						 */
+						else
+						{
+							if (sql_update ($sql_table,
+											$sql_update_champ,
+											$sql_where) === FALSE)
+							{
+								spiplistes_sqlerror_log ('UPDATE format abonnements');
+							}
+						}
 					}
 				}
 			} // if
