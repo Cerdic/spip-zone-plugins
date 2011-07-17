@@ -377,11 +377,20 @@ jQuery.geoportail =
 		{	for(j=0; j<couches.length; j++)
 			{	if (map.getMap().layers[i].name == couches[j]) 
 				{	// map.getMap().removeLayer(map.getMap().layers[i]);
-					map.getMap().layers[i].displayInLayerSwitcher = false;
+					tab[tab.length] = map.getMap().layers[i];
+					// map.getMap().layers[i].displayInLayerSwitcher = false;
 					map.getMap().layers[i].setVisibility (false);
 					break;
 				}
 			}
+		}
+		// Layer poubelle
+		if (tab.length>0)
+		{	var l = new Geoportal.Layer.Aggregate ("#", tab, 
+			{	visibility:false, 
+				displayInLayerSwitcher:false 
+			});
+			map.getMap().addLayer ( l );
 		}
 	},
 	
