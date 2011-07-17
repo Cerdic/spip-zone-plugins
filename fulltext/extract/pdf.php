@@ -32,10 +32,13 @@ function extracteur_pdf($fichier, &$charset, $bin, $opt = '') {
   $sortie = exec($cmd, $output, $return_var);
   if ($return_var != 0) {
     if ($return_var == 3) {
-      $erreur = "Le contenu de ce fichier PDF est protege.";
-    }
-    spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
-    return false;
+      $erreur = "Le contenu de ce fichier PDF est protégé.";
+	  spip_log('Erreur extraction '.$fichier.' protege (code '.$return_var.') : '.$erreur, 'extract');
+	  return $return_var;
+    }else{
+		spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
+	    return false;
+	}
   } else {
     // on ouvre et on lit le .txt
     // TODO : comment connaitre l'encoding du fichier ?

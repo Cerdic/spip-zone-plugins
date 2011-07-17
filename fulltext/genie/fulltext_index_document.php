@@ -5,8 +5,8 @@ function genie_fulltext_index_document_dist($t) {
 	$fulltext = unserialize($fulltext['valeur']);
 	// Ne retenir que les 50 000 premiers caracteres (ou la valeur choisie)
 	$taille_index = $fulltext['taille_index'] ? $fulltext['taille_index'] : @define('_FULLTEXT_TAILLE',50000);
-
-	$nb_docs = 5;
+	//Nombre de documents traite par iteration
+	$nb_docs = $fulltext['nb_docs'] ? $fulltext['nb_docs'] : @define('_FULLTEXT_NB_DOCS',5);
 	if ($docLists = sql_select("*", "spip_documents", "extrait = 'non'", "", "maj", "0,".intval($nb_docs+1))) {
 		while($nb_docs-- AND $row = sql_fetch($docLists)) {
 			$extension = $row['extension'];
@@ -36,10 +36,15 @@ function genie_fulltext_index_document_dist($t) {
 							sql_updateq("spip_documents", array('contenu' => '', 'extrait' => 'err'), "id_document=".intval($row['id_document']));
 						} else {
 							$contenu = substr($contenu, 0, $taille_index);
+							// Statut protege
+							if($contenu == 3){
+								sql_updateq("spip_documents", array('contenu' => '', 'extrait' => 'ptg'), "id_document=".intval($row['id_document']));
+							}else{
 							// importer le charset
-							include_spip('inc/charsets');
-							$contenu = importer_charset($contenu, $charset);
-							sql_updateq("spip_documents", array('contenu' => $contenu, 'extrait' => 'oui'), "id_document=".intval($row['id_document']));
+								include_spip('inc/charsets');
+								$contenu = importer_charset($contenu, $charset);
+								sql_updateq("spip_documents", array('contenu' => $contenu, 'extrait' => 'oui'), "id_document=".intval($row['id_document']));
+							}
 						}
 					}
 				}

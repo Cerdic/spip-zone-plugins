@@ -5,6 +5,8 @@ function formulaires_configurer_document_fulltext_charger_dist(){
 	$fulltext = unserialize($fulltext['valeur']);
 	//Valeurs prealablement saisie ou par defaut/d'exemple 
 	$valeur = array(
+		'intervalle_cron' =>  $fulltext['intervalle_cron'] ? $fulltext['intervalle_cron'] : 600,
+		'nb_docs' =>  $fulltext['nb_docs'] ? $fulltext['nb_docs'] : 5,
 		'taille_index' => $fulltext['taille_index'] ? $fulltext['taille_index'] : 50000,
 		
 		'pdf_index' => $fulltext['pdf_index'] ? $fulltext['pdf_index'] : 'off',
@@ -26,7 +28,7 @@ function formulaires_configurer_document_fulltext_charger_dist(){
 		'pptx_index' => $fulltext['pptx_index'] ? $fulltext['pptx_index'] : 'off',
 		
 		'xls_index' => $fulltext['xls_index'] ? $fulltext['xls_index'] : 'off',
-		'xls_bin' => $fulltext['xls_bin'] ? $fulltext['xls_bin'] : '/usr/bin/xls2csvt',
+		'xls_bin' => $fulltext['xls_bin'] ? $fulltext['xls_bin'] : '/usr/bin/xls2csv',
 		'xls_opt' => $fulltext['xls_opt'] ? $fulltext['xls_opt'] : '-s cp1252 -d 8859-1',
 		
 		'xlsx_index' => $fulltext['xlsx_index'] ? $fulltext['xlsx_index'] : 'off',
@@ -36,6 +38,14 @@ function formulaires_configurer_document_fulltext_charger_dist(){
 }
 function formulaires_configurer_document_fulltext_verifier_dist(){
 	$erreurs = array();
+	//Il faut au moins une seconde
+	if((!_request('intervalle_cron'))||(_request('intervalle_cron') < 1)){
+		$erreurs['intervalle_cron'] = _T('fulltext:erreur_intervalle_cron');
+	}
+	//Il faut au moins une documents a la fois
+	if((!_request('nb_docs'))||(_request('nb_docs') < 1)){
+		$erreurs['nb_docs'] = _T('fulltext:erreur_nb_docs');
+	}	
 	//Il faut au moins indexer un caractere
 	if((!_request('taille_index'))||(_request('taille_index') < 1)){
 		$erreurs['taille_index'] = _T('fulltext:erreur_taille_index');
@@ -70,7 +80,10 @@ function formulaires_configurer_document_fulltext_verifier_dist(){
 function formulaires_configurer_document_fulltext_traiter_dist(){
 	//Recuperation de la configuration et serialization
 	$fulltext = serialize(array(
-		'taille_index' => _request('taille_index'),
+		'intervalle_cron' => intval(_request('intervalle_cron')),
+		'nb_docs' => intval(_request('nb_docs')),
+		'taille_index' => intval(_request('taille_index')),
+		
 		'pdf_index' => _request('pdf_index'),
 		'pdf_bin' => _request('pdf_bin'),
 		'pdf_opt' => _request('pdf_opt'),

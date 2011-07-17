@@ -19,11 +19,22 @@
 		<fieldset>
 			<legend><:fulltext:general:></legend>
 			<ul class="choix">
+				<li class="fulltext_intervalle_cron[ (#ENV**{erreurs}|table_valeur{intervalle_cron}|oui)erreur]">
+					<label for="nb_docs"><:fulltext:intervalle_cron:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{intervalle_cron})</span>
+					]<input type="text" class="text" name="intervalle_cron" id="intervalle_cron" value="[(#ENV{intervalle_cron})]" />
+				</li>
+				<li class="fulltext_nb_docs[ (#ENV**{erreurs}|table_valeur{nb_docs}|oui)erreur]">
+					<label for="nb_docs"><:fulltext:nombre_documents:></label>
+					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{nb_docs})</span>
+					]<input type="text" class="text" name="nb_docs" id="nb_docs" value="[(#ENV{nb_docs})]" />
+				</li>
 				<li class="fulltext_taille_index[ (#ENV**{erreurs}|table_valeur{taille_index}|oui)erreur]">
 					<label for="taille_index"><:fulltext:nombre_caracteres:></label>
 					[<span class='erreur'>(#ENV**{erreurs}|table_valeur{taille_index})</span>
 					]<input type="text" class="text" name="taille_index" id="taille_index" value="[(#ENV{taille_index})]" />
 				</li>
+				
 			</ul>
 		</fieldset>
 		<fieldset>

@@ -24,9 +24,31 @@ function exec_fulltext()
 
 	echo propre(_T('fulltext:liste_tables_connues')." [->http://www.spip-contrib.net/Fulltext].");
 	
-	// lien vers le panneau de configuration de l'indexation des documents
 	$url = generer_url_ecrire('fulltext_document');
 	echo propre(_T('fulltext:configurer_egalement_doc'))."<a href='$url'>"._T('fulltext:configuration_indexation_document')."</a>";
+	
+	if ($res = sql_select('id_document', 'spip_documents', 'extrait = "oui"')) {
+		$nb_indexer = sql_count($res);
+	}
+	if ($res = sql_select('id_document', 'spip_documents', 'extrait = "non"')) {
+		$nb_non_indexer = sql_count($res);
+	}
+	if ($res = sql_select('id_document', 'spip_documents', 'extrait = "ptg"')) {
+		$nb_ptg = sql_count($res);
+	}
+	if ($res = sql_select('id_document', 'spip_documents', 'extrait = "err"')) {
+		$nb_err = sql_count($res);
+	}
+	
+	echo propre(_T('fulltext:statistiques_indexation'));
+	echo _T('fulltext:nb_index')." : <strong>".$nb_indexer.'</strong><br />';
+	echo _T('fulltext:nb_non_index')." : <strong>".$nb_non_indexer.'</strong><br />';
+	echo _T('fulltext:nb_ptg')." : <strong>".$nb_ptg.'</strong><br />';
+	if($nb_ptg > 0){
+		$url = generer_url_ecrire('fulltext_document_ptg');
+		echo "<a href='$url'>"._T('fulltext:voir_doc_ptg')."</a><br />";	
+	}
+	echo _T('fulltext:nb_err')." : <strong>".$nb_err.'</strong><br />';
 
 	echo debut_droite("", true);
 
@@ -73,12 +95,15 @@ function exec_fulltext()
 			if (_request('regenerer') == $table OR _request('regenerer') == 'tous')
 				echo Fulltext_regenerer_index($table);
 			
-			// Reinitialiser les documents en erreurs
+			// Reinitialiser les documents
 			if (_request('reinitialise') == $table OR _request('reinitialise') == 'tous')
 				echo Fulltext_reinitialiser_document();
-			// Reinitialiser tous les documents	
+				
 			if (_request('reinitialise') == 'document_tout')
 				echo Fulltext_reinitialiser_totalement_document();
+
+			if (_request('reinitialise') == 'document_ptg')
+				echo Fulltext_reinitialiser_document_ptg();
 				
 			// Recuperation des index deja existant
 			$keys = fulltext_keys($table);
@@ -129,7 +154,7 @@ function exec_fulltext()
 		echo "<p><b><a href='$url'>"._T('fulltext:convertir_toutes')."</a></b></p>\n";
 	}
 
-	// lien vers le panneau de configuration de l'indexation des documents
+	//Liens vers la configuration des documents
 	$url = generer_url_ecrire('fulltext_document');
 	echo "<p><b><a href='$url'>"._T('fulltext:configuration_indexation_document')."</a></b></p>\n";
 	
@@ -138,7 +163,10 @@ function exec_fulltext()
 
 	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document');
 	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_index_doc')."</a></b></p>\n";
-
+	
+	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document_ptg');
+	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_index_ptg')."</a></b></p>\n";
+	
 	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document_tout');
 	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_totalement_doc')."</a></b></p>\n";	
 	// charset site

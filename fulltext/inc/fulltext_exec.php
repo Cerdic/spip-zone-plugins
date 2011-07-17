@@ -94,6 +94,12 @@ function Fulltext_reinitialiser_totalement_document() {
   return "<p><strong>"._T('fulltext:index_reinitialise_totalement')."</strong></p>";
 }
 
+function Fulltext_reinitialiser_document_ptg() {
+  sql_updateq("spip_documents", array('contenu' => '', 'extrait' => 'non'), "extrait='ptg'");
+  return "<p><strong>"._T('fulltext:index_reinitialise_ptg')."</strong></p>";
+}
+
+
 function Fulltext_creer_tous($tables = false) {
 	if(!$tables) { // Si les tables ne sont pas donnee, on va les chercher
 		include_spip('inc/rechercher');

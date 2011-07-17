@@ -34,11 +34,14 @@ function extracteur_ppt($fichier, &$charset, $bin, $opt = '') {
   spip_log('Extraction PPT avec '.$exe.' ('.$cmd.')', 'extract');
   $sortie = exec($cmd, $output, $return_var);
   if ($return_var != 0) {
-    if ($return_var == 3) {
-      $erreur = "Le contenu de ce fichier PPT est protege.";
-    }
-    spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
-    return false;
+	if ($return_var == 3) {
+	  $erreur = "Le contenu de ce fichier PPT est protégé.";
+	  spip_log('Erreur extraction '.$fichier.' protege (code '.$return_var.') : '.$erreur, 'extract');
+	  return $return_var;
+	}else{
+		spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
+		return false;
+	}
   } else {
 		spip_log('Fichier PPT '.$fichier.' a ete extrait avec '.$options,'extract');
 		foreach($output as $out){

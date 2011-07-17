@@ -20,7 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'convertir_toutes' => 'Convertir toutes les tables en MyISAM',
 	'convertir_utf8' => 'convertir en UTF-8 pour restaurer la cohérence',
 	'creer_tous' => 'Créer tous les index FULLTEXT suggérés',
-
+	
+	// D
+	'des_utilisations' => '@nb@ utilisations',
+	'descriptif' => 'Descriptif',
+	'documents_proteges' => 'Documents prot&eacute;g&eacute;s',
+	
 	// E
 	'enfan' => 'enfan',
 	'enfance' => 'enfance',
@@ -29,6 +34,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfantillage' => 'enfantillage',
 	'enfants' => 'enfants',
 	'erreur_doc_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .doc',
+	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle sup&eacute;rieur &agrave; une seconde.',
+	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents &agrave; traiter par it&eacute;ration sup&eacute;rieur &agrave; un.',
 	'erreur_pdf_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .pdf',
 	'erreur_ppt_bin' => 'Vous devez renseigner le binaire &agrave; utiliser pour extraire les .ppt',
 	'erreur_taille_index' => 'Il faut au moins indexer un caract&egrave;re.',
@@ -47,18 +54,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'general' => 'Général',
 
 	// I
+	'id' => 'ID',
 	'il_faut_myisam' => 'il faut MyISAM',
 	'incoherence_charset' => 'Une incohérence entre le charset de votre site et celui des tables de votre base de données risque de fausser les recherches avec caractères accentués:',
 	'index_regenere' => 'index de la table régénérés',
 	'index_reinitialise' => 'Les documents en erreur ont été réinitialisés',
+	'index_reinitialise_ptg' => 'Les documents protégés ont tous été réinitialisés',
 	'index_reinitialise_totalement' => 'Les document ont tous été réinitialisés',
 	'index_supprime' => 'index supprimé',
 	'indiquer_chemin_bin' => 'Indiquer le chemin vers le binaire traitant l\'indexation des',
 	'indiquer_options_bin' => 'Indiquer les options pour l\'indexation des',
-	'infos_fulltext_document' => 'Vous pourrez ici choisir quels type dedocuments sont indexés par Fulltext et configurer les binaires utilisés et leurs options.',
+	'infos' => 'Informations',
+	'infos_documents_proteges' => 'Vous trouverez ici la liste des documents protégés et donc non-indexés par Fulltext',
+	'infos_fulltext_document' => 'Vous pourrez ici choisir quels type de documents sont indexés par Fulltext et configurer les binaires utilisés et leurs options.',
+	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).',
 
 	// L
 	'liste_tables_connues' => 'Voici la liste des tables connues de la recherche. Vous pouvez y ajouter des éléments FULLTEXT, cf. documentation à l\'adresse',
+	'logo' => 'Logo',
 
 	// M
 	'mais_pas' => 'mais PAS',
@@ -66,13 +79,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_update_configuration' => 'Mise &agrave; jour de vos pr&eacute;f&eacute;rences termin&eacute;e',
 
 	// N
+	'nb_err' => 'En erreur d\'indexation', 
+	'nb_index' => 'Index&eacute;s',
+	'nb_non_index' => 'Non-index&eacute;s',
+	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', 
 	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)',
 	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).',
+	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON',
 
 	// O
 	'ou_bien' => 'ou bien',
 
 	// P
+	'pas_document_ptg' => 'Il n\'y a pas de document protégé.',
 	'pas_index' => 'Pas d\'index FULLTEXT',
 	'premier_soit' => 'SOIT',
 
@@ -82,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'regenerer_tous' => 'Régénérer tous les index FULLTEXT',
 	'reinitialise_index_doc' => 'Réinitialiser l\'indexation des documents en erreur',
+	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés',
 	'reinitialise_totalement_doc' => 'Réinitialiser l\'indexation de tous les documents',
 	'reserve_webmestres' => 'Page réservée aux webmestres',
 	'retour_configuration_fulltext' => 'Retour &agrave; la configuration de Fulltext',
@@ -90,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sequence_exacte' => 'exactement la séquence de mots',
 	'soit' => 'SOIT',
+	'statistiques_indexation' => 'Statistiques d\'indexation des documents :',
 	'supprimer' => 'Supprimer',
 
 	// T
@@ -99,7 +120,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'textes_premier' => 'mais présente en premier les textes qui contiennent',
 
 	// U
-	'utiliser_operateurs_logiques' => 'La recherche utilise les opérateurs logiques les plus courants.'
+	'une_utilisation' => '1 utilisation',
+	'utiliser_operateurs_logiques' => 'La recherche utilise les opérateurs logiques les plus courants.',
+	
+	// V
+	'voir_doc_ptg' => 'Voir les documents protegés'
+	
 );
 
 ?>

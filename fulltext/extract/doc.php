@@ -34,9 +34,14 @@ function extracteur_doc($fichier, &$charset, $bin, $opt = '') {
 	$cmd = $exe.$options.$fichier;
 	$sortie = exec($cmd, $output, $return_var); 
 	if($return_var != 0){
-		//Erreur
-		spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
-		return false;
+	    if ($return_var == 3) {
+	      $erreur = "Le contenu de ce fichier DOC est protégé.";
+		  spip_log('Erreur extraction '.$fichier.' protege (code '.$return_var.') : '.$erreur, 'extract');
+		  return $return_var;
+	    }else{
+			spip_log('Erreur extraction '.$fichier.' (code '.$return_var.') : '.$erreur, 'extract');
+		    return false;
+		}
 	}else{
 		//Go
 		spip_log('Fichier DOC '.$fichier.' a ete extrait avec '.$options,'extract');
