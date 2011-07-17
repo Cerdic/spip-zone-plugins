@@ -7,7 +7,11 @@ function targetLinks() {
 		.attr('rel','external')
 		.addClass('external')
 		.each(function(){
-			title =  "(nouvelle fenêtre)";
+			if(jQuery(this).text()){
+				title =  jQuery(this).text() + " (nouvelle fenêtre)";
+			}else{
+				title = " (nouvelle fenêtre)";
+			}
 			if(jQuery(this).attr("title")) title = jQuery(this).attr("title") + " (nouvelle fenêtre)";
 			jQuery(this).attr("title",title);
 		});
@@ -22,7 +26,13 @@ function targetLinks() {
 					.addClass('blank')
 					.addClass('spip_doc')
 					.each(function(){
-						title =  "(nouvelle fenêtre)";
+						var my_ext = extensions[i].replace('.','');
+						jQuery(this).addClass(my_ext);
+						if(jQuery(this).text()){
+							title =  jQuery(this).text() + " (nouvelle fenêtre)";
+						}else{
+							title = " (nouvelle fenêtre)";
+						}
 						if((jQuery(this).attr("title"))&&(jQuery(this).attr("title").match(reg) == false)){ 
 							title = jQuery(this).attr("title") + " (nouvelle fenêtre)";
 						}	
