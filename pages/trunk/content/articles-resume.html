@@ -1,0 +1,12 @@
+<B_articles>
+<div class="liste resume articles">
+	#ANCRE_PAGINATION
+	<h2 class="h2">[(#ENV{titre,<:derniers_articles:>})]</h2>
+	<ul class="liste-items">
+		<BOUCLE_articles(ARTICLES){id_rubrique?} {id_rubrique >= 0} {!par date} {pagination #ENV{nb,5}}>
+		#INCLURE{fond=inclure/article-resume,id_article}
+		</BOUCLE_articles>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_articles>
