@@ -5,7 +5,9 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// Foncion pour transformer les liens dans la popup pour qu'ils renvoient vers l'opener et ferment la fenetre
+/**
+ * Fonction pour transformer les liens dans la popup pour qu'ils renvoient vers l'opener et ferment la fenetre
+ */
 function popup_liens_retour($texte,$_popup='oui'){
 	$popup = ($_popup=='non') ? false : true;
 	if(!$popup) return $texte;
@@ -62,4 +64,5 @@ function popup_liens_retour_transformer_liens_ajax($url=''){
 		$new_lien = generer_url_public(POPUP_SKEL, $lien);
 	return $new_lien;
 }
+
 ?>

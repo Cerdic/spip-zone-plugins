@@ -5,6 +5,11 @@
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+/**
+ * Insertion du Javascript en en-tete
+ * @necessite La balise #INSERT_HEAD en en-tete de squelettes
+ * @utilise Pipeline 'insert_head'
+ */
 function spipopup_insert_head($flux){
 	spipopup_config();
 	$flux .= "\n<script src='".find_in_path('javascript/spipopup.js')

@@ -9,7 +9,7 @@
 	<p><a name="plugin_popup"></a></p>
 	<h3 class="spip">Fonctionnalités du plugin '<i>&#035;POPUP</i>'</h3>
 	
-	<p><strong>Attention à ne pas abuser des liens ouvrant une nouvelle fenêtre, par respect des internautes ...</strong></p>
+	<small><strong>Attention à ne pas abuser des liens ouvrant une nouvelle fenêtre, par respect pour les internautes ...</strong></small>
 
 	<p><a name="popup"></a></p>
 	<p>- &nbsp;<strong>Liens hypertextes ouvrant une fenêtre externe</strong></p>
@@ -20,7 +20,10 @@
 <input type='hidden' name='exec' value='' />
 <textarea readonly='readonly' cols='50' rows='7' class='spip_cadre' dir='ltr'>&lt;popup
   |texte=le texte du lien (nécessaire)
-  |lien=référence d'un objet SPIP pour le lien généré (nécessaire)
+  |lien= (nécessaire)
+      : référence d'un objet SPIP pour générer un lien interne
+      ou 
+      : URL absolue pour ouvrir une page externe
   |skel=squelette utilisé (option)
   |width=XX (largeur de la fenêtre - option)
   |height=XX (hauteur de la fenêtre - option)
@@ -37,18 +40,19 @@
 
 <p><a href="./spip.php?page=article&amp;id_article=1" onclick="_popup_set('./spip.php?page=popup_defaut&amp;id_article=1',620,640);return false;" title="un titre explicatif [Nouvelle fen&#234;tre]">mon texte</a></p>
 
-<p><i>N.B.</i> Vous pouvez également préciser une URL complète au lien d&#8217;une référence d&#8217;objet SPIP (<i>paramètre "lien=..."</i>), le lien généré ouvrira alors cette URL.</p>
-
 	<p><a name="popup_img"></a></p>
 	<p>- &nbsp;<strong>Aperçus de documents ouvrant une fenêtre externe</strong></p>
 
-	<p>Sur le même principe que ci-dessus, vous pouvez utiliser le raccourci typographique d&#8217;appel du modèle "popup_img" pour générer un aperçu d&#8217;un document SPIP de type image ouvrant un lien en nouvelle fenêtre.</p>
+	<p>Sur le même principe que pour le modèle ci-dessus, vous pouvez utiliser le raccourci typographique du modèle "popup_img" pour générer un aperçu d&#8217;un document SPIP dans une nouvelle fenêtre.</p>
 
 <form action=''  method='get'><div>
 <input type='hidden' name='exec' value='' />
-<textarea readonly='readonly' cols='50' rows='7' class='spip_cadre' dir='ltr'>&lt;popup_img
+<textarea readonly="readonly" cols='50' rows='7' class='spip_cadre' dir='ltr'>&lt;popup_img
   |doc=référence du document SPIP (nécessaire)
-  |lien=référence d'un objet SPIP pour le lien généré (nécessaire)
+  |lien= (nécessaire)
+      : référence d'un document SPIP pour générer un lien interne
+      ou 
+      : URL absolue pour ouvrir un media externe
   |skel=squelette utilisé (option)
   |width=XX (largeur de la fenêtre - option)
   |height=XX (hauteur de la fenêtre - option)

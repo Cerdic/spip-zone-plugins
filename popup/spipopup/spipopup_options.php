@@ -24,6 +24,9 @@ define('POPUP_WIDTH_DEFAUT', '620');
 define('POPUP_HEIGHT_DEFAUT', '640');
 $GLOBALS['spipopup_datas'] = array('popup_skel','popup_titre','popup_width','popup_height');
 
+/**
+ * Renvoie la configuration courante du plugin (defaut + Config)
+ */
 function spipopup_config(){
 	$conf = function_exists('lire_config') ? lire_config('spipopup') : null;
 	if(is_null($conf)) $conf = false;
@@ -38,4 +41,5 @@ function spipopup_config(){
 		}
 	}
 }
+
 ?>

@@ -52,7 +52,7 @@ Choisissez ci-dessous la hauteur par d&eacute;faut de la fen&ecirc;tre, {{en pix
 	'width' => 'Largeur (en pixels)',
 	'height' => 'Hauteur (en pixels)',
 	'titre_popup' => 'Nom JavaScript de la fen&ecirc;tre',
-	'titre_popup_comment' => 'Vous pourrez par la suite utiliser ce nom pour la d&eacute;signer dans vos scripts ({"window.popup"}).',
+	'titre_popup_comment' => 'Vous pourrez par la suite utiliser ce nom pour la d&eacute;signer dans vos scripts ("window.popup").',
 
 // Popup
 	'popup_titre' => 'Bo&#238;te de dialogue',
