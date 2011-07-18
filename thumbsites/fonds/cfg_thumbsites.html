@@ -33,21 +33,6 @@
 		<p><:thumbsites:cfg_inf_thumbshots_de_description:></p>
 	</fieldset>
 
-	<fieldset id="girafa" class="conf_serveur [(#ENV{serveur}|=={'girafa'}|?{'actif'})]">
-		<legend><:thumbsites:cfg_itm_serveur_girafa:></legend>
-		<p><:thumbsites:cfg_inf_girafa_presentation:></p>
-		<p><:thumbsites:cfg_inf_girafa_description:></p>
-		<p><:thumbsites:cfg_inf_girafa_parametres:></p>
-		<p>
-			<label for="girafa_identifiant"><:thumbsites:cfg_lbl_identifiant:></label>
-			<input type="text" name="girafa_identifiant" id="girafa_identifiant" [value="(#ENV{girafa_identifiant})"]>
-		</p>
-		<p>
-			<label for="girafa_signature"><:thumbsites:cfg_lbl_signature:></label>
-			<input type="text" name="girafa_signature" id="girafa_signature" [value="(#ENV{girafa_signature})"]>
-		</p>
-	</fieldset>
-
 	<fieldset id="websnapr" class="conf_serveur [(#ENV{serveur}|=={'websnapr'}|?{'actif'})]">
 		<legend><:thumbsites:cfg_itm_serveur_websnapr:></legend>
 		<p><:thumbsites:cfg_inf_websnapr_presentation:></p>
