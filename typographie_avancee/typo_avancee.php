@@ -49,7 +49,9 @@ function traiter_typo_avancee($texte) {
 	$typo->set_smart_quotes_language($lang);
 	// et ne pas l'appliquer (ça déconne)
 	$typo->set_smart_quotes(false);
-
+	$typo->set_smart_quotes_primary(false); /* added in version 1.15 */
+	$typo->set_smart_quotes_secondary(false); /* added in version 1.15 */
+	
 	// Pas de gestion des fractons
 	$typo->set_smart_fractions(false);
 	
@@ -120,9 +122,12 @@ function typo_avancee_typo($texte) {
 	// Traiter paragraphe par paragraphe
 	include_spip("inc/texte");
 	$texte_par = traiter_retours_chariots($texte);
+	
+	$texte_par = preg_replace(",(^|\n)_ ,", "<br />", $texte_par);
 
 	$paragraphes = explode("\n\n", $texte_par);
 	$retour = "";
+	
 	foreach($paragraphes as $paragraphe) {
 	
 	

@@ -108,7 +108,6 @@
 
     /* Private Methods */
     function getOEmbedProvider(url) {
-    
         for (var i = 0; i < providers.length; i++) {
             if (providers[i].matches(url))
                 return providers[i];
@@ -148,6 +147,7 @@
         new OEmbedProvider("vids.myspace.com", "vids.myspace.com", "http://vids.myspace.com/index.cfm?fuseaction=oembed"),
 		new OEmbedProvider("screenr", "screenr.com", "http://screenr.com/api/oembed.json")
 		/* Crado pour forcer format=js */
+        new OEmbedProvider("bandcamp", "bandcamp.com", "http://www.bandcamp.com/oembed"),
         new OEmbedProvider("soundcloud", "soundcloud", "http://soundcloud.com/oembed", "format=js&callback"),
     ];
 

@@ -57,6 +57,8 @@ function recuperer_fond_ajax() {
 	// - soit retourner l'url de la noisette {ajaxload=url}
 	// - soit retourner l'url du fichier html {ajaxload=url_html}
 	$methode = $args[1]["ajaxload"];
+	$entete = "<"."?xml version='1.0' encoding='".$GLOBALS['meta']['charset']."'?".">";
+	echo $entete;
 
 	$ttl = _DUREE_CACHE_AJAXSTATIC;
 	if ($args[1]['ttl_ajaxload']) $ttl = valeur_numerique($args[1]['ttl_ajaxload']);
@@ -73,7 +75,8 @@ function recuperer_fond_ajax() {
 				|| (file_exists($fichier) && date("U") - @filemtime($fichier) > $ttl)
 			){
 			//echo "RECALCULER";
-			$contenu = call_user_func_array('recuperer_fond', $args);
+			$contenu = $entete.call_user_func_array('recuperer_fond', $args);
+						
 			ecrire_fichier($fichier, $contenu);
 			// ecrire une version .gz pour content-negociation par apache, cf. [11539]
 			//ecrire_fichier("$fichier.gz",$contenu, true);
@@ -92,7 +95,7 @@ function recuperer_fond_ajax() {
 				|| (file_exists($fichier) && date("U") - @filemtime($fichier) > $ttl)
 			){
 			//echo "RECALCULER";
-			$contenu = call_user_func_array('recuperer_fond', $args);
+			$contenu = $entete.call_user_func_array('recuperer_fond', $args);
 			ecrire_fichier($fichier, $contenu);
 			// ecrire une version .gz pour content-negociation par apache, cf. [11539]
 			//ecrire_fichier("$fichier.gz",$contenu, true);
