@@ -298,18 +298,29 @@ function exec_get_infos_spip_dist() {
 		// Menu de haut de page (onglets)
 		$menu = '';
 		$jamaisvu = true;
+		$end = end(array_keys($corps));
 		foreach($corps as $key=>$results)
 		{
-			$menu .= '<li><a href="#gins-'.$key.'" class="'.($jamaisvu ? 'highlight' : '').'" name="'.$key.'">'
-				._T('gins:'.$key).'</a></li>'.$eol;
+			$class = $jamaisvu ? 'on' : 'off';
+			if ($end == $key) { $class .= ' end'; }
+			if (!empty($class)) { $class = ' class="'.trim($class).'"'; }
+			
+			$menu .= '<li'.$class.'>'
+				. '<a href="#gins-'.$key.'"'.$class.' name="'.$key.'">'
+				. '<h3'.$class.' title="' . _T('gins:'.$key) . '">'
+				. _T('gins:'.$key)
+				. '</h3>'
+				. '</a>'
+				. '</li>'.$eol;
 			$jamaisvu = false;
 		}
 		$page_result .=
 			  '<div id="gins-menu" >'.$eol
 			. '<h2>'._T('gins:menu_proprietes').'</h2>'.$eol
-			. '<lu>'.$eol
-			. $menu
-			. '</lu>'.$eol
+			. '<ul>'.$eol
+			. $menu . $eol
+			. '</ul>'.$eol
+			. '<div id="fin-onglets" class="hr"><hr /></div>'.$eol
 			. '</div>'.$eol
 			;
 		
@@ -319,7 +330,7 @@ function exec_get_infos_spip_dist() {
 		foreach($corps as $key=>$results)
 		{
 			$page_result .=
-				  '<div id="gins-'.$key.'" class="gins-item '.$key.($jamaisvu ? ' highlight' : '').'">'
+				  '<div id="gins-'.$key.'" class="gins-item '.$key.($jamaisvu ? ' on' : '').'">'
 				. $results
 				. '</div>'.$eol
 				;

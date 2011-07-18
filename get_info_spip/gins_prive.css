@@ -5,26 +5,45 @@
 	width:auto;
 	height:130px;
 }
+
+/* le menu en onglets */
+#gins-menu {	
+}
 #gins-menu h2 {position:absolute; top:-3000px}
-#gins-menu lu {display:block; margin:0 auto;padding:0; list-style:none}
-#gins-menu li {
-	display:inline-table;
-	margin:0; margin-right:1ex;
-	padding:0;
-	font-weight:700;
-	font-size:80%;
-	}
-#gins-menu li a {
+#gins-menu ul {
 	display:block;
-	width:auto;
-	padding:0.5em 1ex;
+	margin:0 auto;padding:0; list-style:none;
+}
+#gins-menu li {
+	display:block;
+	float:left; /* */
+	margin:0; margin-right:4px;
+	padding:0;
+	background-color:#fff;
 	border:1px solid green;
 	background-color:#fff;
-	color:green;
+	padding:0 1ex;
 }
-#gins-menu li a.highlight {
+#gins-menu li.end {
+}
+#gins-menu #fin-onglets {
+	clear:left;
+}
+#gins-menu #fin-onglets hr {
+	display:none;
+}
+#gins-menu li.on {
 	border-color:red;
 	background-color:green;
+}
+#gins-menu h3 {
+	font-size:90%;
+	line-height:1.8em;
+	height:1.8em;
+	background-color:transparent;
+	overflow:hidden;
+}
+#gins-menu li.on h3 {
 	color:#fff;
 }
 
