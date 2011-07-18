@@ -83,7 +83,7 @@ function exec_get_infos_spip_dist() {
 		
 		//////////
 		// Audit SPIP
-		$ii = 'configspip';
+		$onglet = 'configspip';
 		$contexte = array();
 		$comptes_auteurs = recuperer_fond('compter_auteurs', $contexte);
 		$comptes_articles = recuperer_fond('compter_articles', $contexte);
@@ -111,94 +111,33 @@ function exec_get_infos_spip_dist() {
 			, _T('gins:SPIP_nombre_documents_publ/tous') => $comptes_documents
 			, _T('gins:SPIP_nombre_sites_syndic') => $comptes_sites_syndic
 		);
-		$corps[$ii] = gins_lister_values(
+		$corps[$onglet] = gins_lister_values(
 			$infos
-			, _T('gins:'.$ii)
+			, _T('gins:'.$onglet)
 		);
 
 		/**
 		 * Inventaire des squelettes disponibles
 		 * dans l'ordre utilisé par find_in_path()
 		 */
-		$ii = 'squelettes';
+		$onglet = 'squelettes';
+		$msg_html = $msg = '';
 		$chemins = array();
-		/**
-		 * le répertoire des squelettes nommés par la variable
-		 * globale $dossier_squelettes dans l’ordre de déclaration
-		 * s’il y en a plusieurs ;
-		 */
-		if (isset($GLOBALS['dossier_squelettes']))
+		foreach (creer_chemin() as $chemin)
 		{
-			foreach(explode(':',
-							 $GLOBALS['dossier_squelettes']
-						) as $chemin) {
-				$chemins[] = _DIR_RACINE . $chemin;
-			}
+			// les derniers chemins sont vides ?
+			$chemin = trim($chemin);
+			if (!empty($chemin)) { $chemins[] = $chemin; }
 		}
 		/**
-		 * le répertoire nommé ’squelettes’ s’il existe ;
+		 * Appelé en prive, semble oublier 'ecrire' ?
+		 * (qui doit être le dernier)
 		 */
-		$chemins[] = _DIR_RACINE . 'squelettes';
-		/**
-		 * le répertoire extensions/compresseur ;
-		 */
-		$chemins[] = _DIR_EXTENSIONS . 'compresseur';
-		/**
-		 * le répertoire racine des plugins activés ;
-		 */
-		if (isset($GLOBALS['meta']['plugin']))
+		$ecrire = _DIR_RACINE . _DIR_RESTREINT_ABS;
+		if (!in_array($ecrire, $chemins))
 		{
-			$res = liste_chemin_plugin_actifs();
-			if($res)
-			{
-				foreach ($res as $chemin)
-				{
-					$chemins[] = _DIR_PLUGINS.$chemin;
-				}
-			}
+			$chemins[] = $ecrire;
 		}
-		/**
-		 * le répertoire extensions/vertebres ;
-		 */
-		$chemins[] = _DIR_EXTENSIONS . 'vertebres';
-		/**
-		 * le répertoire extensions/safehtml ;
-		 */
-		$chemins[] = _DIR_EXTENSIONS . 'safehtml';
-		/**
-		 * le répertoire extensions/porte_plume ;
-		 */
-		$chemins[] = _DIR_EXTENSIONS . 'porte_plume';
-		/**
-		 * le répertoire extensions/msie_compat ;
-		 */
-		$chemins[] = _DIR_EXTENSIONS . 'msie_compat';
-		/**
-		 * le répertoire extensions/filtres_images ;
-		 */
-		$chemins[] = _DIR_EXTENSIONS . 'filtres_images';
-		/**
-		 * dans les répertoires déclarés par _chemin() dans l’ordre inverse
-		 * d’appel à cette fonction (le dernier déclaré sera le premier scruté) ;
-		 * @todo
-		 */
-		/**
-		 * la racine du site (WROOT) ;
-		 */
-		$chemins[] = rtrim(_DIR_RACINE, '/');
-		/**
-		 * le répertoire ’squelettes-dist’ ;
-		 */
-		$chemins[] = _DIR_RACINE . 'squelettes-dist';
-		/**
-		 * le répertoire ’ecrire’ ;
-		 */
-		$chemins[] = _DIR_RACINE . 'ecrire';
-		/**
-		 * le répertoire ’prive’ ;
-		 */
-		$chemins[] = _DIR_RACINE . 'prive';
-		
 		$squelettes = array();
 		$url = $GLOBALS['meta']['adresse_site'];
 		foreach ($chemins as $chemin)
@@ -213,7 +152,7 @@ function exec_get_infos_spip_dist() {
 						{
 							if (!isset($squelettes[$file]))
 							{
-								$filename = $chemin.'/'.$file;
+								$filename = $chemin.$file;
 								
 								$squelettes[$file] = array(
 									'chemin' => $filename .
@@ -231,26 +170,37 @@ function exec_get_infos_spip_dist() {
 				{
 					$res[$key] =
 						'<dl>' . PHP_EOL .
-						'<df>chemin: </df><dd class"chemin">' . $value['chemin'] . '</dd>' . PHP_EOL .
-						'<df>url: </df><dd class"url"><a href="'.$value['url'].'">' . $value['url'] . '</a></dd>' . PHP_EOL .
+						'<df>'._T('gins:chemin_').'</df><dd class"chemin">' . $value['chemin'] . '</dd>' . PHP_EOL .
+						'<df>'._T('gins:url_').'</df><dd class"url"><a href="'.$value['url'].'">' . $value['url'] . '</a></dd>' . PHP_EOL .
 						'</dl>' . PHP_EOL
 						;
 				}
+			}
+			else
+			{
+				$msg = $chemin.' manquant';
+				spip_log('Erreur: '.$chemin.' manquant');
+				$msg_html = '<li>' . $msg . '</li>';
 			}
 		}
 		
 		if (isset($res) && count($res))
 		{
-			$corps[$ii] = gins_lister_values(
+			$corps[$onglet] = gins_lister_values(
 					$res,
-					_T('gins:'.$ii)
+					_T('gins:'.$onglet)
 			);
+			if (!empty($msg_html))
+			{
+				$corps[$onglet] .= '<h3>'._T('gins:err_skels').'</h3>' . PHP_EOL
+					. '<ul class="erreurs">' . $msg_html . '</ul>' . PHP_EOL;
+			}
 		}
 		unset($res);
 		
 		//////////
 		// Audit systeme
-		$ii = 'configsyst';
+		$onglet = 'configsyst';
 		$infos = array(
 			  'OS' => php_uname() . ' - ' . (PHP_INT_SIZE * 8).' bits'
 			, 'Apache version' => (function_exists('apache_get_version') ? apache_get_version() : null)
@@ -283,30 +233,30 @@ function exec_get_infos_spip_dist() {
 				. $ini
 				;
 		}
-		$corps[$ii] = gins_lister_values(
+		$corps[$onglet] = gins_lister_values(
 			$infos
-			, _T('gins:'.$ii)
+			, _T('gins:'.$onglet)
 		);
 	
 		//////////
 		// Les constantes déclarées
-		$ii = 'constantes';
-		$corps[$ii] = gins_lister_values(
+		$onglet = 'constantes';
+		$corps[$onglet] = gins_lister_values(
 			get_defined_constants(1)
-			, _T('gins:'.$ii)
+			, _T('gins:'.$onglet)
 		);
 	
 		//////////
 		// Les valeurs de configuration PHP (php.ini, ...)
-		$ii = 'phpconfig';
-		$corps[$ii] = gins_lister_values(
+		$onglet = 'phpconfig';
+		$corps[$onglet] = gins_lister_values(
 			ini_get_all()
-			, _T('gins:'.$ii)
+			, _T('gins:'.$onglet)
 		);
 		
 		//////////
 		// Les tables SQL (toutes les tables, SPIP et autres)
-		$ii = 'tablessql';
+		$onglet = 'tablessql';
 		$res = 
 			($is_mysql)
 			? sql_query('SHOW TABLE STATUS')
@@ -337,9 +287,9 @@ function exec_get_infos_spip_dist() {
 			}
 			
 			// ajouter le résultat aux tableaux
-			$corps[$ii] = gins_lister_values(
+			$corps[$onglet] = gins_lister_values(
 				$arr
-				, _T('gins:'.$ii)
+				, _T('gins:'.$onglet)
 				, ($sum ? ' ('.gins_decodeSize($sum).')' : '')
 			);
 		}
