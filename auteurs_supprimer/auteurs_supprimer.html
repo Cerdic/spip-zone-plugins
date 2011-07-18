@@ -397,9 +397,9 @@
 		<img width="24" height="24" alt="" src="#EVAL{_DIR_PLUGIN_AUSU}images/tout_cocher-24.png" />
 		<a href="#" id="set-all-on"><:ausu:tout_cocher:></a> / 
 		<a href="#" id="set-all-off"><:ausu:tout_decocher:></a>
-		[<span class="total">(
+		<span class="total">(
 						[(#GET{total}|singulier_ou_pluriel{ausu:total_un_auteur, ausu:total_nb_auteur, nb})]
-						)</span>]
+						)</span>
 		
 		<input type="hidden" name="pagination" class="pagination" value="#GET{pagination}" />
 		<:ausu:pagination_:>
