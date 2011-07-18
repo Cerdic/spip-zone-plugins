@@ -71,7 +71,8 @@ function formulaires_inc_pubban_charger_dist(){
 		'code' => $code,
 		'java_goto' => generer_url_public(_PUBBAN_ADDS_CLICKER),
 		'width' => $banniere['width'],
-		'height' => $banniere['height']
+		'height' => $banniere['height'],
+		'javascript' => defined('PUBBAN_FORCE_JAVASCRIPT') && PUBBAN_FORCE_JAVASCRIPT==1 ? 'oui' : 'non',
 	);
 	
 	return $valeurs;

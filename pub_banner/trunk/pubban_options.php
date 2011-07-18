@@ -47,6 +47,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('PUBBAN_FORCE_UNINSTALL', 0);
 
 /**
+ * Pour forcer l'utilisation d'une fonction Javascript pour ouvrir les popups (retrait de l'attribut "target")
+ */
+define('PUBBAN_FORCE_JAVASCRIPT', 0);
+
+/**
  * Adresse du displayer de pub
  */
 define('_PUBBAN_ADDS_DISPLAYER', 'pub_displayer');
