@@ -72,6 +72,14 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		else
 			$destinataire = _TEST_EMAIL_DEST;
 	}
+
+	// plusieurs destinataires peuvent etre fournis separes par des virgules
+	// c'est un format standard dans l'envoi de mail
+	// les passer au format array pour phpMailer
+	// mais ne pas casser si on a deja un array en entree
+	if (is_array($destinataire))
+		$destinataire = implode(", ",$destinataire);
+	$destinataire = array_map('trim',explode(",",$destinataire));
 	
 	// On crée l'objet Facteur (PHPMailer) pour le manipuler ensuite
 	$facteur = new Facteur($destinataire, $sujet, $message_html, $message_texte);
