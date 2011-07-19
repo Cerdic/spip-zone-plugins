@@ -16,8 +16,9 @@
 [(#SET{legende,        [(#ENV{legende,        0})]})]
 [(#REM) largeur div = largeur image + 2*bordure ]
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
+[(#SET{div_height,  #GET{img_bordure}|mult{2}|plus{#GET{img_height}} })]
 
-[(#REM) Je ne sais plus a quoi ca sert, mais ca gene pour l'affichage des legendes à partir des titres des dcuments 
+[(#REM) Je ne sais plus a quoi ca sert, mais ca gene pour l'affichage des legendes a partir des titres des documents 
 		  C'etait auparavant dans le style de la div principale ]
 [(#SET{div_height, #GET{img_bordure}|mult{2}|plus{#GET{img_height}} })]
 
@@ -63,7 +64,7 @@
 
 	</script>
 	[(#REM) diaporama documents images conteneur jquery cycle ]
-	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][background:(#GET{div_background})]})]
+	[(#SET{style,[float:(#ENV{align}|match{left|right});margin:[(#GET{div_margin})]px;][width:(#GET{div_width})px;][height:(#GET{div_height})px;][background:(#GET{div_background})]})]
    
 	<div class="#CONFIG{sjcycle/div_class}" id="dsjcycle_#GET{id_diapo}" style='#GET{style}'>
 
@@ -72,7 +73,7 @@
 	<BOUCLE_img(DOCUMENTS){id_article=#GET{id_objet}}{extension==jpg|png|gif}{id_document==^((#ENV{docs}|replace{',',|}|sinon{.*}))$}{par num titre, date}{doublons}>
    	<div>
    		[(#REM) Les effets de type turnLeft ne fonctionnent pas si ce div est en place. En attendant de corriger
-         rajout dans la doc de l'incompatibilité entre infobulles et ces effets. Du coup la bordure autour de l'image
+         rajout dans la doc de l'incompatibilite entre infobulles et ces effets. Du coup la bordure autour de l'image
          ne se met pas en place non plus ]
          
          [(#CONFIG{sjcycle/tooltip}|=={on}|oui)
