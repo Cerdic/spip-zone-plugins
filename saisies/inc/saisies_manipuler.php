@@ -110,7 +110,7 @@ function saisies_dupliquer($saisies, $id_ou_nom_ou_chemin){
 function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou){
 	// On récupère le contenu de la saisie à déplacer
 	$saisie = saisies_chercher($saisies, $id_ou_nom_ou_chemin);
-	
+
 	// Si on l'a bien trouvé
 	if ($saisie){
 		// On cherche l'endroit où la déplacer
@@ -120,7 +120,7 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou){
 			$chemin = array(count($saisies));
 		}
 		// Si l'endroit est entre crochet, c'est un conteneur
-		elseif (preg_match('/^\[([\w]*)\]$/', $ou, $match)){
+		elseif (preg_match('/^\[([@\w]*)\]$/', $ou, $match)){
 			$parent = $match[1];
 			// Si dans les crochets il n'y a rien, on met à la fin du formulaire
 			if (!$parent){

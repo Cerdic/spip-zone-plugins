@@ -3,7 +3,9 @@
 	border:none;
 	background:transparent;
 }
-
+#deplacable .ui-state-highlight { height: 5em; line-height: 1.2em; }
+#deplacable .ui-sortable {min-height:3em;}
+/*
 .formulaire_construire_formulaire{
 	padding:1em;
 }
@@ -18,7 +20,7 @@
 .formulaire_construire_formulaire input.text, .formulaire_construire_formulaire input.password, .formulaire_construire_formulaire textarea, .formulaire_construire_formulaire select{
 	width:auto;
 }
-
+*/
 .formulaire_construire_formulaire li.actions_formulaire{
 	margin:0;
 	padding:1em;
@@ -28,7 +30,7 @@
 .formulaire_construire_formulaire li.actions_formulaire img{
 	vertical-align:middle;
 }
-
+/*
 .formulaire_construire_formulaire li.configurable{
 	position:relative;
 	padding:1em;
@@ -42,10 +44,14 @@
 .formulaire_construire_formulaire li.configurable.hover{
 	border-color:#999;
 }
+*/
 .formulaire_construire_formulaire li.en_configuration{
-	padding-bottom:0;
 	border:5px solid #999;
+	border-radius:5px;
+	margin:.5em;
 }
+.formulaire_construire_formulaire li.fieldset.configurable>fieldset>ul {margin-left:30px;}
+/*
 .formulaire_construire_formulaire li.fieldset.configurable{
 	padding:0;
 }
@@ -59,10 +65,18 @@
 .formulaire_construire_formulaire li.fieldset.configurable > fieldset > ul{
 	padding:0 1em;
 }
+*/
 .formulaire_construire_formulaire .formulaire_configurer{
-	margin:1em -1em 0 -1em;
-	border-top:1px dashed #999;
+	border-top:3px dashed #999;
+	margin: 1em -8px 0 -138px;
+    padding: 0.5em;
+    background:white;
 }
+.formulaire_construire_formulaire .fieldset > .formulaire_configurer{
+	margin: 1em -8px 0;
+}
+
+/*
 .formulaire_construire_formulaire li.fieldset.configurable > .formulaire_configurer{
 	margin:1em 0 0 0;
 }
@@ -82,13 +96,14 @@
 	-moz-border-radius:0 0 5px 5px;
 	-webkit-border-radius:0 0 5px 5px;
 }
+*/
 .formulaire_construire_formulaire .formulaire_configurer .formulaire_configurer-onglets li{
 	float:left;
 	width:auto;
 	clear:none;
 	margin-bottom:-1px;
 	padding:0;
-	background:#eee;
+	/*background:#eee;*/
 	border:0;
 	border-bottom:1px solid #ddd;
 	border-right:1px solid #999;
@@ -107,6 +122,14 @@
 	display:block;
 	padding:1em;
 }
+.formulaire_construire_formulaire .formulaire_configurer .boutons { margin-bottom: -20px; }
+
+.formulaire_construire_formulaire li.editer,
+.formulaire_construire_formulaire li.fieldset {padding-top:30px; position:relative;}
+.formulaire_construire_formulaire .formulaire_configurer li.fieldset {padding-top:0px;}
+.formulaire_construire_formulaire .formulaire_configurer fieldset fieldset>ul>li.editer:first-child {padding-top:0px;}
+
+.formulaire_construire_formulaire li.hover {background-color:transparent;}
 
 .formulaire_construire_formulaire .actions{
 	position:absolute;
@@ -123,12 +146,18 @@
 .formulaire_construire_formulaire .actions button:hover{
 	opacity:1;
 }
-
-.formulaire_construire_formulaire li.saisies_disponibles{
-	padding:1em;
+.formulaire_construire_formulaire .actions .move {
+	cursor:move;
 }
+
+
+
+.formulaire_construire_formulaire li.saisies_disponibles {
+	/*padding:1em;*/
+}
+
 .formulaire_construire_formulaire .ajouter_saisie{
-	width:40%;
+	width:45%;
 	margin:5px;
 	padding:0.5em 8px 0.5em 36px;
 	font-size:1em;
@@ -142,3 +171,4 @@
 .formulaire_construire_formulaire .ajouter_saisie img{
 	vertical-align:middle;
 }
+

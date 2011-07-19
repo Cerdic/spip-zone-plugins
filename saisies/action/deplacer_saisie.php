@@ -20,7 +20,8 @@ function action_deplacer_saisie_dist() {
 		return "";
 	}
 
-	if ($ou and !isset($saisies_actuelles[$ou])) {
+	// tester @id et [@id] (fieldset)
+	if ($ou and !isset($saisies_actuelles[$ou]) and !isset($saisies_actuelles[ substr($ou,1,-1) ])) {
 		return "";
 	}
 

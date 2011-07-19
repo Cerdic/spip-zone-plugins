@@ -114,7 +114,9 @@
 				});
 			[(#ENV{erreurs}|non|et{#GET{sortable}})
 				if ($.fn.sortable) {
-					$( "#deplacable" ).sortable({
+					$( "#deplacable, #deplacable ul" ).sortable({
+						containment: 'parent',
+						connectWith: "#deplacable, #deplacable ul",
 						placeholder: "ui-state-highlight",
 						handle: '>.actions .deplacer_saisie',
 						start: function(event, ui) {
@@ -125,6 +127,15 @@
 						update: function(event, ui) {
 							id = ui.item.data('id');
 							ou = ui.item.next().data('id');
+							// avant le suivant
+							if (!ou) {
+								// sinon dans le parent
+								ou = ui.item.closest('.fieldset').data('id');
+								if (ou) {
+									ou = '[(#VAL{91}|chr)]' + ou + '[(#VAL{93}|chr)]';
+								}
+								console.log(ou);
+							}
 							url = "#URL_ECRIRE";
 							$.get(url, {
 								session: '#ENV{_identifiant_session}',
