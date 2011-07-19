@@ -44,7 +44,7 @@ function formulaires_doc2article_traiter_dist(){
 			sql_insertq('spip_doc2article',array(
 				'id_auteur' => $id_auteur,
 				'id_rubrique' => $id_rubrique,
-				'fichier' => $item,
+				'fichier' => basename($item),
 				'date' => date('Y-m-d H:i:s')
 			));
 			spip_log("ajout dans la file d'attente : $item","doc2article");

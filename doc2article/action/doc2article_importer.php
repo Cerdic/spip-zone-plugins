@@ -17,7 +17,7 @@ function action_doc2article_importer_dist($arg=null){
 	if ($crud = charger_fonction('crud','action')) {
 		
 		//extraire le nom du fichier
-		$filename = basename($doc2article['fichier']);
+		$filename = $doc2article['fichier'];
 		preg_match(",^(.*)\.([^.]+)$,", $filename, $match);
 		@list(,$titre,$ext) = $match;
 		
@@ -45,13 +45,15 @@ function action_doc2article_importer_dist($arg=null){
 		// corriger l'id_auteur attribué automatiquement par action/editer_article
 		sql_delete('spip_auteurs_articles', 'id_article='.$article['result']['id']);
 		sql_insertq('spip_auteurs_articles', array('id_auteur' => $doc2article['id_auteur'], 'id_article' => $article['result']['id']));
+		// update de l'article car action/editer_article ne permet pas tout
+		sql_updateq('spip_articles', $valeurs_article, 'id_article='.$article['result']['id']);
 		
 		if(!$article['success']) {
 			$err = _T('doc2article:erreur_creation_article');
 		} else {
 			spip_log("création de l'article ". $article['result']['id'],"doc2article");
 			spip_log($valeurs_article,"doc2article");
-						
+			
 			// ajout du doc à l'article
 			$doc = $crud('create','documents',null,
 				array(
@@ -59,7 +61,7 @@ function action_doc2article_importer_dist($arg=null){
 					'type' => 'article',
 					'id_objet' => $article['result']['id'],
 					'mode' => 'document',
-					'source' => $doc2article['fichier'],
+					'source' => _DIR_TRANSFERT.$doc2article['fichier'],
 					'titre' => $titre
 				)
 			);
@@ -71,8 +73,8 @@ function action_doc2article_importer_dist($arg=null){
 				// suppression du doc de la file d'attente
 				sql_delete('spip_doc2article','id_doc2article='.$doc2article['id_doc2article']);
 				// supression du fichier du dossier d'import
-				spip_log(_DIR_TMP."upload/$filename","doc2article");
-				$suppitem = supprimer_fichier(_DIR_TMP."upload/$filename");
+				spip_log(_DIR_TRANSFERT.$filename,"doc2article");
+				$suppitem = supprimer_fichier(_DIR_TRANSFERT.$filename);
 				if($suppitem){
 					spip_log("suppression du fichier ". $doc2article['fichier'],"doc2article");
 				}else{
