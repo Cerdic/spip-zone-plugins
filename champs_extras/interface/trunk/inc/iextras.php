@@ -134,21 +134,29 @@ function compter_champs_extras($table) {
 function iextras_formulaire_verifier($flux) {
 	if ($flux['args']['form'] == 'construire_formulaire' 
 	AND strpos($flux['args']['args'][0], 'champs_extras_')===0
-	AND $name = _request('configurer_saisie') ) {
-	
-		$nom = 'configurer_' . $name;
-		$table = substr($flux['args']['args'][0], strlen('champs_extras_'));
+	AND $nom_ou_id = _request('configurer_saisie') ) {
 
-		// On ajoute un préfixe devant l'identifiant
+		// On ajoute le préfixe devant l'identifiant
 		$identifiant = 'constructeur_formulaire_'.$flux['args']['args'][0];
 		// On récupère le formulaire à son état actuel
 		$formulaire_actuel = session_get($identifiant);
-		$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
+				
+		if ($nom_ou_id[0] == '@') {
+			$saisies_actuelles = saisies_lister_par_identifiant($formulaire_actuel);
+			$name = $saisies_actuelles[$nom_ou_id]['options']['nom'];
+		} else {
+			$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
+			$name = $nom_ou_id;
+		}
 
 		// saisie inexistante => on sort
-		if (!isset($saisies_actuelles[$name])) {
+		if (!isset($saisies_actuelles[$nom_ou_id])) {
 			return $flux;
 		}
+
+		$nom = 'configurer_' . $name;
+		$table = substr($flux['args']['args'][0], strlen('champs_extras_'));
+
 
 		// on ajoute le fieldset de restrictions de champs
 		// (des autorisations pre-reglées en quelque sorte)
@@ -222,7 +230,7 @@ function iextras_formulaire_verifier($flux) {
 		// on récupère les informations de la saisie
 		// pour savoir si c'est un champs éditable (il a une ligne SQL)
 		// et dans ce cas, on ajoute les options techniques
-		$type_saisie = $saisies_actuelles[$name]['saisie'];
+		$type_saisie = $saisies_actuelles[$nom_ou_id]['saisie'];
 		$saisies_sql = saisies_lister_disponibles_sql();
 
 		if (isset($saisies_sql[$type_saisie])) {

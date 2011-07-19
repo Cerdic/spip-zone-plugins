@@ -15,7 +15,7 @@ function formulaires_editer_champs_extras_charger_dist($objet, $redirect=''){
 	$valeurs['_saisies'] = $saisies;
 	$valeurs['_options'] = array(
 		"modifier_nom"=>true,
-		"nom_unique"=>true
+		"nom_unique"=>true,
 	);
 		
 	return $valeurs;
