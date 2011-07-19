@@ -118,14 +118,11 @@
 						placeholder: "ui-state-highlight",
 						handle: '>.actions .deplacer_saisie',
 						start: function(event, ui) {
-							$('.ui-state-highlight').css('height', ui.item.css('height'));
-							$('.ui-state-highlight').css('height', '+=20px');
+							$('.ui-state-highlight')
+								.css('height', ui.item.css('height'))
+								.css('height', '+=20px');
 						},
 						update: function(event, ui) {
-							/*
-							console.log(event);
-							console.log(ui);
-							*/
 							id = ui.item.data('id');
 							ou = ui.item.next().data('id');
 							url = "#URL_ECRIRE";
