@@ -13,7 +13,7 @@
     #SET{selected,#CONFIG{inscription2/newsletters,#ARRAY}}
 	
     <B_listes>
-    [<p class="explications">(#TOTAL_BOUCLE|affiche_un_ou_plusieurs{<:i2_spiplistes:exp_newsletter:>,<:i2_spiplistes:exp_newsletter:>})</p>]
+    [<p class="explications">(#TOTAL_BOUCLE|singulier_ou_pluriel{<:i2_spiplistes:exp_newsletter:>,<:i2_spiplistes:exp_newsletter:>})</p>]
     <ul>
 	<BOUCLE_listes(LISTES){id_liste IN #GET{selected}}{statut IN '.*pub.*','liste'}>
 	    <li class="editer_newsletters">
