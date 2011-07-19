@@ -9,6 +9,7 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	
 	// On ajoute un préfixe devant l'identifiant, pour être sûr
 	$identifiant = 'constructeur_formulaire_'.$identifiant;
+	$contexte['_identifiant_session'] = $identifiant;
 	
 	// On vérifie ce qui a été passé en paramètre 
 	if (!is_array($formulaire_initial)) $formulaire_initial = array();
@@ -46,139 +47,154 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 function formulaires_construire_formulaire_verifier($identifiant, $formulaire_initial=array(), $options=array()){
 	include_spip('inc/saisies');
 	$erreurs = array();
+
+	// Pas d'erreur si l'on ne demande rien
+	if (!($nom_ou_id = $configurer_saisie  = _request('configurer_saisie')
+	OR    $nom_ou_id = $enregistrer_saisie = _request('enregistrer_saisie'))) {
+		return $erreurs;
+	}
+
 	// On ajoute un préfixe devant l'identifiant
 	$identifiant = 'constructeur_formulaire_'.$identifiant;
 	// On récupère le formulaire à son état actuel
 	$formulaire_actuel = session_get($identifiant);
-	// On récupère les saisies actuelles
-	$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
+
+	// On récupère les saisies actuelles, par identifiant ou par nom
+	if ($nom_ou_id[0] == '@') {
+		$saisies_actuelles = saisies_lister_par_identifiant($formulaire_actuel);
+		$nom = $saisies_actuelles[$nom_ou_id]['options']['nom'];
+	} else {
+		$saisies_actuelles = saisies_lister_par_nom($formulaire_actuel);
+		$nom = $nom_ou_id;
+	}
 	$noms_autorises = array_keys($saisies_actuelles);
+
+	// le nom (ou identifiant) doit exister
+	if (!in_array($nom_ou_id, $noms_autorises)) {
+		return $erreurs;
+	}
+	
 	// La liste des saisies
 	$saisies_disponibles = saisies_lister_disponibles();
 	
-	if (
-		($nom = $configurer_saisie =  _request('configurer_saisie') or $nom = $enregistrer_saisie = _request('enregistrer_saisie'))
-		and
-		in_array($nom, $noms_autorises)
-	){
-		$saisie = $saisies_actuelles[$nom];
-		$formulaire_config = $saisies_disponibles[$saisie['saisie']]['options'];
-		array_walk_recursive($formulaire_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
+	$saisie = $saisies_actuelles[$nom_ou_id];
+	$formulaire_config = $saisies_disponibles[$saisie['saisie']]['options'];
+	array_walk_recursive($formulaire_config, 'formidable_transformer_nom', "saisie_modifiee_${nom}[options][@valeur@]");
 
-		// Si la saisie possede un identifiant, on l'ajoute
-		// au formulaire de configuration pour ne pas le perdre en route
-		if (isset($saisie['identifiant']) and $saisie['identifiant']) {
-			$formulaire_config = saisies_inserer(
-				$formulaire_config,
-				array(
-					'saisie' => 'hidden',
-					'options' => array(
-						'nom' => "saisie_modifiee_${nom}[identifiant]",
-						'defaut' => $saisie['identifiant']
-					),
-				)
-			);
-		}
-		
-		// S'il y a l'option adéquat, on ajoute le champ pour modifier le nom
-		if ($options['modifier_nom'] and $chemin_nom = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true)){
-			$chemin_nom[] = 'saisies';
-			$chemin_nom[] = '0';
-
-			$formulaire_config = saisies_inserer(
-				$formulaire_config,
-				array(
-					'saisie' => 'input',
-					'options' => array(
-						'nom' => "saisie_modifiee_${nom}[options][nom]",
-						'label' => _T('saisies:option_nom_label'),
-						'explication' => _T('saisies:option_nom_explication'),
-						'obligatoire' => 'oui',
-						'size' => 50
-					),
-					'verifier' => array(
-						'type' => 'regex',
-						'options' => array(
-							'modele' => '/^[\w]+$/'
-						)
-					)
-				),
-				$chemin_nom
-			);
-		}
-		
-		// S'il y a un groupe "validation" alors on va construire le formulaire des vérifications
-		if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)){
-			include_spip('inc/verifier');
-			$liste_verifications = verifier_lister_disponibles();
-			$chemin_validation[] = 'saisies';
-			$chemin_validation[] = 1000000; // à la fin
-			
-			// On construit la saisie à insérer et les fieldset des options
-			$saisie_liste_verif = array(
-				'saisie' => 'selection',
+	// Si la saisie possede un identifiant, on l'ajoute
+	// au formulaire de configuration pour ne pas le perdre en route
+	if (isset($saisie['identifiant']) and $saisie['identifiant']) {
+		$formulaire_config = saisies_inserer(
+			$formulaire_config,
+			array(
+				'saisie' => 'hidden',
 				'options' => array(
-					'nom' => "saisie_modifiee_${nom}[verifier][type]",
-					'label' => _T('saisies:construire_verifications_label'),
-					'option_intro' => _T('saisies:construire_verifications_aucune'),
-					'li_class' => 'liste_verifications',
-					'datas' => array()
+					'nom' => "saisie_modifiee_${nom}[identifiant]",
+					'defaut' => $saisie['identifiant']
+				),
+			)
+		);
+	}
+	
+	// S'il y a l'option adéquat, on ajoute le champ pour modifier le nom
+	if ($options['modifier_nom'] and $chemin_nom = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][description]", true)){
+		$chemin_nom[] = 'saisies';
+		$chemin_nom[] = '0';
+
+		$formulaire_config = saisies_inserer(
+			$formulaire_config,
+			array(
+				'saisie' => 'input',
+				'options' => array(
+					'nom' => "saisie_modifiee_${nom}[options][nom]",
+					'label' => _T('saisies:option_nom_label'),
+					'explication' => _T('saisies:option_nom_explication'),
+					'obligatoire' => 'oui',
+					'size' => 50
+				),
+				'verifier' => array(
+					'type' => 'regex',
+					'options' => array(
+						'modele' => '/^[\w]+$/'
+					)
 				)
-			);
-			$verif_options = array();
-			foreach ($liste_verifications as $type_verif => $verif){
-				$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
-				// Si le type de vérif a des options, on ajoute un fieldset
-				if ($verif['options'] and is_array($verif['options'])){
-					$groupe = array(
-						'saisie' => 'fieldset',
-						'options' => array(
-							'nom' => 'options',
-							'label' => $verif['titre'],
-							'li_class' => "$type_verif options_verifier"
-						),
-						'saisies' => $verif['options']
-					);
-					array_walk_recursive($groupe, 'formidable_transformer_nom', "saisie_modifiee_${nom}[verifier][$type_verif][@valeur@]");
-					$verif_options[$type_verif] = $groupe;
-				}
-			}
-			$verif_options = array_merge(array($saisie_liste_verif), $verif_options);
-		}
+			),
+			$chemin_nom
+		);
+	}
+	
+	// S'il y a un groupe "validation" alors on va construire le formulaire des vérifications
+	if ($chemin_validation = saisies_chercher($formulaire_config, "saisie_modifiee_${nom}[options][validation]", true)){
+		include_spip('inc/verifier');
+		$liste_verifications = verifier_lister_disponibles();
+		$chemin_validation[] = 'saisies';
+		$chemin_validation[] = 1000000; // à la fin
 		
-		
-		if ($enregistrer_saisie){
-			// La saisie modifié
-			$saisie_modifiee = _request("saisie_modifiee_${nom}");
-			// On cherche les erreurs de la configuration
-			$vraies_erreurs = saisies_verifier($formulaire_config);
-			// Si on autorise à modifier le nom ET qu'il doit être unique : on vérifie
-			if ($options['modifier_nom'] and $options['nom_unique']){
-				$nom_modifie = $saisie_modifiee['options']['nom'];
-				if ($nom_modifie != $enregistrer_saisie and saisies_chercher($formulaire_actuel, $nom_modifie))
-					$vraies_erreurs["saisie_modifiee_${nom}[options][nom]"] = _T('saisies:erreur_option_nom_unique');
-			}
-			// On regarde s'il a été demandé un type de vérif
-			if (($type_verif = $saisie_modifiee['verifier']['type']) != '' and $verif_options[$type_verif]){
-				// On ne vérifie que les options du type demandé
-				$vraies_erreurs = array_merge($vraies_erreurs, saisies_verifier($verif_options[$type_verif]['saisies']));
-			}
-		}
-		
-		// On insère chaque saisie des options de verification
-		if ($verif_options){
-			foreach ($verif_options as $saisie_verif){
-				$formulaire_config = saisies_inserer($formulaire_config, $saisie_verif, $chemin_validation);
+		// On construit la saisie à insérer et les fieldset des options
+		$saisie_liste_verif = array(
+			'saisie' => 'selection',
+			'options' => array(
+				'nom' => "saisie_modifiee_${nom}[verifier][type]",
+				'label' => _T('saisies:construire_verifications_label'),
+				'option_intro' => _T('saisies:construire_verifications_aucune'),
+				'li_class' => 'liste_verifications',
+				'datas' => array()
+			)
+		);
+		$verif_options = array();
+		foreach ($liste_verifications as $type_verif => $verif){
+			$saisie_liste_verif['options']['datas'][$type_verif] = $verif['titre'];
+			// Si le type de vérif a des options, on ajoute un fieldset
+			if ($verif['options'] and is_array($verif['options'])){
+				$groupe = array(
+					'saisie' => 'fieldset',
+					'options' => array(
+						'nom' => 'options',
+						'label' => $verif['titre'],
+						'li_class' => "$type_verif options_verifier"
+					),
+					'saisies' => $verif['options']
+				);
+				array_walk_recursive($groupe, 'formidable_transformer_nom', "saisie_modifiee_${nom}[verifier][$type_verif][@valeur@]");
+				$verif_options[$type_verif] = $groupe;
 			}
 		}
-		$erreurs['configurer_'.$nom] = $formulaire_config;
-		$erreurs['positionner'] = '#configurer_'.$nom;
-		
-		if ($enregistrer_saisie)
-			if ($vraies_erreurs)
-				$erreurs = array_merge($erreurs, $vraies_erreurs);
-			else
-				$erreurs = array();
+		$verif_options = array_merge(array($saisie_liste_verif), $verif_options);
+	}
+	
+	
+	if ($enregistrer_saisie){
+		// La saisie modifié
+		$saisie_modifiee = _request("saisie_modifiee_${nom}");
+		// On cherche les erreurs de la configuration
+		$vraies_erreurs = saisies_verifier($formulaire_config);
+		// Si on autorise à modifier le nom ET qu'il doit être unique : on vérifie
+		if ($options['modifier_nom'] and $options['nom_unique']){
+			$nom_modifie = $saisie_modifiee['options']['nom'];
+			if ($nom_modifie != $enregistrer_saisie and saisies_chercher($formulaire_actuel, $nom_modifie))
+				$vraies_erreurs["saisie_modifiee_${nom}[options][nom]"] = _T('saisies:erreur_option_nom_unique');
+		}
+		// On regarde s'il a été demandé un type de vérif
+		if (($type_verif = $saisie_modifiee['verifier']['type']) != '' and $verif_options[$type_verif]){
+			// On ne vérifie que les options du type demandé
+			$vraies_erreurs = array_merge($vraies_erreurs, saisies_verifier($verif_options[$type_verif]['saisies']));
+		}
+	}
+	
+	// On insère chaque saisie des options de verification
+	if ($verif_options){
+		foreach ($verif_options as $saisie_verif){
+			$formulaire_config = saisies_inserer($formulaire_config, $saisie_verif, $chemin_validation);
+		}
+	}
+	$erreurs['configurer_'.$nom] = $formulaire_config;
+	$erreurs['positionner'] = '#configurer_'.$nom;
+	
+	if ($enregistrer_saisie) {
+		if ($vraies_erreurs)
+			$erreurs = array_merge($erreurs, $vraies_erreurs);
+		else
+			$erreurs = array();
 	}
 	
 	return $erreurs;
@@ -283,6 +299,7 @@ function formidable_transformer_nom(&$valeur, $cle, $transformation){
 function formidable_generer_saisie_configurable($saisie, $env){
 	// On récupère le nom
 	$nom = $saisie['options']['nom'];
+	$identifiant = $saisie['identifiant'];
 	// On cherche si ya un formulaire de config
 	$formulaire_config = $env['erreurs']['configurer_'.$nom];
 	// On ajoute une classe
@@ -291,15 +308,16 @@ function formidable_generer_saisie_configurable($saisie, $env){
 	$saisie['options']['tout_afficher'] = 'oui';
 	
 	// On ajoute les boutons d'actions, mais seulement s'il n'y a pas de configuration de lancée
-	if (!$env['erreurs'])
+	if (!$env['erreurs']) {
 		$saisie = saisies_inserer_html(
 			$saisie,
 			recuperer_fond(
 				'formulaires/inc-construire_formulaire-actions',
-				array('nom' => $nom, 'formulaire_config' => $formulaire_config)
+				array('nom' => $nom, 'identifiant' => $identifiant, 'formulaire_config' => $formulaire_config)
 			),
 			'debut'
 		);
+	}
 	
 	// On ajoute une ancre pour s'y déplacer
 	$saisie = saisies_inserer_html(

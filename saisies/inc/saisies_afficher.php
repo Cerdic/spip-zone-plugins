@@ -84,6 +84,10 @@ function saisies_generer_html($champ, $env=array()){
 	
 	// On sélectionne le type de saisie
 	$contexte['type_saisie'] = $champ['saisie'];
+	// Identifiant unique de saisie, si present
+	if (isset($champ['identifiant'])) {
+		$contexte['id_saisie'] = $champ['identifiant'];
+	}
 	
 	// Peut-être des transformations à faire sur les options textuelles
 	$options = $champ['options'];

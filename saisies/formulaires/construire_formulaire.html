@@ -12,7 +12,9 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
-		<ul>
+		<input style="display:none;" type="submit" class="vide" name="" value="" />
+
+		<ul id="deplacable">
 			[(#ENV{formulaire_modifie}|oui)
 			<li class="actions_formulaire">
 				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')">
@@ -40,13 +42,22 @@
 			</li>
 			</B_saisies_disponibles>
 		</ul>
+
 		
 		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 		<!--extra-->
 		
 		<span class='image_loading'></span>
 	</div></form>
-	
+
+	[(#ENV{erreurs}|non)
+		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.core.js})'></script>]
+		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.widget.js})'></script>]
+		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.mouse.js})'></script>]
+		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.sortable.js})'></script>
+			[(#SET{sortable,1})]
+		]
+	]
 	<script type="text/javascript">
 		$(function(){
 			$('.formulaire_construire_formulaire li.configurable')
@@ -101,6 +112,36 @@
 						.removeClass('plie')
 						.find('> fieldset > ul').show();
 				});
+			[(#ENV{erreurs}|non|et{#GET{sortable}})
+				if ($.fn.sortable) {
+					$( "#deplacable" ).sortable({
+						placeholder: "ui-state-highlight",
+						handle: '>.actions .deplacer_saisie',
+						start: function(event, ui) {
+							$('.ui-state-highlight').css('height', ui.item.css('height'));
+							$('.ui-state-highlight').css('height', '+=20px');
+						},
+						update: function(event, ui) {
+							/*
+							console.log(event);
+							console.log(ui);
+							*/
+							id = ui.item.data('id');
+							ou = ui.item.next().data('id');
+							url = "#URL_ECRIRE";
+							$.get(url, {
+								session: '#ENV{_identifiant_session}',
+								action: 'deplacer_saisie',
+								saisie: id,
+								ou: ou
+							}, function() {
+								$('input.vide').submit();
+							});
+						}
+					});
+					$( "#deplacable" ).disableSelection();
+				}
+			]
 		});
 		
 		function formulaire_configurer_onglets(){
