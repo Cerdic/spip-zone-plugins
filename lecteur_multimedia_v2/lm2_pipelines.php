@@ -1,7 +1,7 @@
 <?php
 
 function lm2_jquery_plugins($plugins){
-	if(!test_espace_prive() && (_request('page') !== 'login')){
+	if(!test_espace_prive()){
 		$plugins[] = _DIR_LIB_SM.'script/soundmanager2.js';
 	}
 	return $plugins;
