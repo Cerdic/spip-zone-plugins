@@ -9,11 +9,11 @@
 	</shortdesc>
 	<auteur>
 	Matthieu Marcillaud
-_ &#169; 2008 2010
+_ &#169; 2008 2011
 	</auteur>
 	<licence>GPL</licence>
 	<lien></lien>
-	<version>0.15.1</version>
+	<version>0.15.2</version>
 	<version_base>0.5</version_base>
 	<install>base/step_install.php</install>
 
