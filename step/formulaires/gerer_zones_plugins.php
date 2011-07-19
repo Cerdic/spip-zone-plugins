@@ -6,7 +6,11 @@ include_spip('inc/step');
 include_spip('inc/step_presentation');
 
 function formulaires_gerer_zones_plugins_charger_dist(){
-	return array();
+	$ret = array();
+	if((_AUTORISER_TELECHARGER_PLUGINS == false) OR (_DIR_PLUGINS_AUTO == false)){
+		$ret['editable'] = false;
+	}
+	return $ret;
 }
 
 function formulaires_gerer_zones_plugins_verifier_dist(){
