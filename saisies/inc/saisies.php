@@ -212,19 +212,22 @@ function saisies_chercher_formulaire($form, $args){
 	if ($fonction_saisies = charger_fonction('saisies', 'formulaires/'.$form, true)
 		and $saisies = call_user_func_array($fonction_saisies, $args)
 		and is_array($saisies)
-	){
 		// On passe les saisies dans un pipeline normé comme pour CVT
-		$saisies = pipeline(
+		and $saisies = pipeline(
 			'formulaire_saisies',
 			array(
 				'args' => array('form' => $form, 'args' => $args),
 				'data' => $saisies
 			)
-		);
+		)
+		// Si c'est toujours un tableau après le pipeline
+		and is_array($saisies)
+	){
 		return $saisies;
 	}
-	else
+	else{
 		return false;
+	}
 }
 
 /*
@@ -314,12 +317,12 @@ function saisie_identifier($saisie, $regenerer = false) {
  * Supprimer une saisie dont on donne le nom ou le chemin
  *
  * @param array $saisies Un tableau décriant les saisies
- * @param unknown_type $nom_ou_chemin Le nom de la saisie à supprimer ou son chemin sous forme d'une liste de clés
+ * @param unknown_type $id_ou_nom_ou_chemin L'identifiant unique ou le nom de la saisie à supprimer ou son chemin sous forme d'une liste de clés
  * @return array Retourne le tableau modifié décrivant les saisies
  */
-function saisies_supprimer($saisies, $nom_ou_chemin){
+function saisies_supprimer($saisies, $id_ou_nom_ou_chemin){
 	// Si la saisie n'existe pas, on ne fait rien
-	if ($chemin = saisies_chercher($saisies, $nom_ou_chemin, true)){
+	if ($chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true)){
 		// La position finale de la saisie
 		$position = array_pop($chemin);
 	
@@ -384,16 +387,16 @@ function saisies_inserer($saisies, $saisie, $chemin=array()){
  * Modifie automatiquement les identifiants des saisies
  *
  * @param array $saisies Un tableau décrivant les saisies
- * @param unknown_type $nom_ou_chemin Le nom ou le chemin de la saisie a dupliquer
+ * @param unknown_type $id_ou_nom_ou_chemin L'identifiant unique ou le nom ou le chemin de la saisie a dupliquer
  * @return array Retourne le tableau modifié des saisies
  */
-function saisies_dupliquer($saisies, $nom_ou_chemin){
+function saisies_dupliquer($saisies, $id_ou_nom_ou_chemin){
 	// On récupère le contenu de la saisie à déplacer
-	$saisie = saisies_chercher($saisies, $nom_ou_chemin);
+	$saisie = saisies_chercher($saisies, $id_ou_nom_ou_chemin);
 	if ($saisie) {
 		list($clone) = saisies_transformer_noms_auto($saisies, array($saisie));
 		// insertion apres quoi ?
-		$chemin_validation = saisies_chercher($saisies, $nom_ou_chemin, true);
+		$chemin_validation = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true);
 		// 1 de plus pour mettre APRES le champ trouve
 		$chemin_validation[count($chemin_validation)-1]++;
 		// On ajoute "copie" après le label du champs
@@ -413,20 +416,20 @@ function saisies_dupliquer($saisies, $nom_ou_chemin){
  * Déplace une saisie existante autre part
  *
  * @param array $saisies Un tableau décrivant les saisies
- * @param unknown_type $nom_ou_chemin Le nom ou le chemin de la saisie à déplacer
+ * @param unknown_type $id_ou_nom_ou_chemin L'identifiant unique ou le nom ou le chemin de la saisie à déplacer
  * @param string $ou Le nom de la saisie devant laquelle on déplacera OU le nom d'un conteneur entre crochets [conteneur]
  * @return array Retourne le tableau modifié des saisies
  */
-function saisies_deplacer($saisies, $nom_ou_chemin, $ou){
+function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou){
 	// On récupère le contenu de la saisie à déplacer
-	$saisie = saisies_chercher($saisies, $nom_ou_chemin);
+	$saisie = saisies_chercher($saisies, $id_ou_nom_ou_chemin);
 	
 	// Si on l'a bien trouvé
 	if ($saisie){
 		// On cherche l'endroit où la déplacer
 		// Si $ou est vide, c'est à la fin de la racine
 		if (!$ou){
-			$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
+			$saisies = saisies_supprimer($saisies, $id_ou_nom_ou_chemin);
 			$chemin = array(count($saisies));
 		}
 		// Si l'endroit est entre crochet, c'est un conteneur
@@ -434,13 +437,13 @@ function saisies_deplacer($saisies, $nom_ou_chemin, $ou){
 			$parent = $match[1];
 			// Si dans les crochets il n'y a rien, on met à la fin du formulaire
 			if (!$parent){
-				$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
+				$saisies = saisies_supprimer($saisies, $id_ou_nom_ou_chemin);
 				$chemin = array(count($saisies));
 			}
 			// Sinon on vérifie que ce conteneur existe
 			elseif (saisies_chercher($saisies, $parent, true)){
 				// S'il existe on supprime la saisie et on recherche la nouvelle position
-				$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
+				$saisies = saisies_supprimer($saisies, $id_ou_nom_ou_chemin);
 				$parent = saisies_chercher($saisies, $parent, true);
 				$chemin = array_merge($parent, array('saisies', 1000000));
 			}
@@ -451,8 +454,9 @@ function saisies_deplacer($saisies, $nom_ou_chemin, $ou){
 		else{
 			// On vérifie que le champ existe
 			if (saisies_chercher($saisies, $ou, true)){
-				// S'il existe on supprime la saisie et on recherche la nouvelle position
-				$saisies = saisies_supprimer($saisies, $nom_ou_chemin);
+				// S'il existe on supprime la saisie
+				$saisies = saisies_supprimer($saisies, $id_ou_nom_ou_chemin);
+				// Et on recherche la nouvelle position qui n'est plus forcément la même maintenant qu'on a supprimé une saisie
 				$chemin = saisies_chercher($saisies, $ou, true);
 			}
 			else
@@ -471,12 +475,12 @@ function saisies_deplacer($saisies, $nom_ou_chemin, $ou){
  * Modifie une saisie
  *
  * @param array $saisies Un tableau décrivant les saisies
- * @param unknown_type $nom_ou_chemin Le nom ou le chemin de la saisie à modifier
+ * @param unknown_type $id_ou_nom_ou_chemin L'identifiant unique ou le nom ou le chemin de la saisie à modifier
  * @param array $modifs Le tableau des modifications à apporter à la saisie
  * @return Retourne le tableau décrivant les saisies, mais modifié
  */
-function saisies_modifier($saisies, $nom_ou_chemin, $modifs){
-	$chemin = saisies_chercher($saisies, $nom_ou_chemin, true);
+function saisies_modifier($saisies, $id_ou_nom_ou_chemin, $modifs){
+	$chemin = saisies_chercher($saisies, $id_ou_nom_ou_chemin, true);
 	$position = array_pop($chemin);
 	$parent =& $saisies;
 	foreach ($chemin as $cle){
