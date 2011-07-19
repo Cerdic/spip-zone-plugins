@@ -186,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'zones_ajouter' => 'Add a plugin zone',
 	'zones_ajouter_info' => 'You can add a zone prividing its address in the field.',
 	'zones_exemple' => 'Example :',
-	'zones_info' => 'An zone of plugins indicates a set of plugins that SPIP can automatically download.',
+	'zones_info' => 'A zone of plugins indicates a set of plugins that SPIP can automatically download.',
 	'zones_liste' => 'Zones list',
 	'zones_paquets' => 'Plugin\'s zones',
 );
