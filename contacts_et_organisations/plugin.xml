@@ -26,7 +26,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	
 	<prefix>contacts</prefix>
 	
-	<version>1.8.11</version>
+	<version>1.8.12</version>
 	<version_base>1.3.7</version_base>
 	
 	<install>base/contacts_upgrade.php</install>
@@ -43,33 +43,43 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/contacts.php</inclure>
 	</pipeline>
-	
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
-	
 
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
-	
 
-		
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
 
-	
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>contacts_autorisations.php</inclure>
 	</pipeline>
 
-	
 	<pipeline>
 		<nom>rechercher_liste_des_champs</nom>
 		<inclure>contacts_pipelines.php</inclure>

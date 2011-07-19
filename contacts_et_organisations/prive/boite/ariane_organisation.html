@@ -1,0 +1,20 @@
+<script type="text/html" id="ariane">
+	<ul id='chemin-fer'>
+		<li> <a href='#URL_ECRIRE' class='racine'><:info_racine_site:></a> &gt;</li>
+		<li> <a href='[(#URL_ECRIRE{organisations})]'><:contacts:organisations:></a>  &gt;</li>
+			<BOUCLE_orga_chemin(ORGANISATIONS){id_organisation=#ENV{id_parent}}{tous}>
+		<BOUCLE_orga_chemin_recursif(BOUCLE_orga_chemin) />
+		[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
+		<li>
+			<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>  &gt;
+		</li>
+		</BOUCLE_orga_chemin>
+		<li>#ENV{nom}</li>
+	</ul>
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var s_image = "#CHEMIN{images/organisation-24.png}";
+	$("#auteur-voir>img.cadre-icone:first-child").attr("src", s_image) ;
+});
+</script>

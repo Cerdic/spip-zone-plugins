@@ -1,0 +1,14 @@
+<script type="text/html" id="ariane">
+	<ul id='chemin-fer'>
+		<li> <a href='#URL_ECRIRE' class='racine'><:info_racine_site:></a> &gt;</li>
+		<li> <a href='[(#URL_ECRIRE{contacts})]'><:contacts:contacts:></a>  &gt;</li>
+		<li>#ENV{prenom} &nbsp; #ENV{nom}</li>
+	</ul>
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var prenom = $('.contenu_prenom span.prenom').text();
+	var nom = $('.contenu_nom span.nom').text();
+	$('h1').text(prenom + ' ' + nom) ;
+});
+</script>

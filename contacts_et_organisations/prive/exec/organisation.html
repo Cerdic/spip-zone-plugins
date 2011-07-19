@@ -1,26 +1,6 @@
 <BOUCLE_orga(ORGANISATIONS){id_organisation}{tous}>
 <!--#hierarchie-->
-<div id="chemin">
-	<span class="bloc">
-		<a href="#URL_ECRIRE" class="racine"><:info_racine_site:></a>
-	</span>
-	<span class="bloc">
-		<em> &gt; </em>
-		<a href="[(#URL_ECRIRE{organisations})]"><:contacts:organisations:></a>
-	</span>
-	<BOUCLE_orga_chemin(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
-		<BOUCLE_orga_chemin_recursif(BOUCLE_orga_chemin) />
-		[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
-		<span class="bloc">
-			<em> &gt; </em>
-			<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
-		</span>
-	</BOUCLE_orga_chemin>
-	<span class="bloc">
-		<em> &gt; </em>
-		#NOM
-	</span>
-</div>
+[(#INCLURE{fond=prive/boite/hierarchie_organisation}{id_parent=#ID_PARENT}{nom=#NOM})]
 <!--/#hierarchie-->
 
 <div class="fiche_objet">
@@ -98,12 +78,6 @@
 
 
 <!--#extra-->
-[(#CHEMIN{images/contact-24.png}
-	|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:contacts:lier_contact:>})],0})]
-#SET{rien,0}#SET{contact,0}
-	<div class='ajax'>
-	[(#FORMULAIRE_LIER_CONTACT{#ID_ORGANISATION, #SELF})]
-	</div>
-[(#EVAL{true}|fin_cadre_relief)]
+[(#INCLURE{fond=prive/boite/organisation_lier_contact}{id_organisation=#ID_ORGANISATION}{redirect=#SELF})]
 <!--/#extra-->
 </BOUCLE_orga>

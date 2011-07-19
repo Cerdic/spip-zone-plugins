@@ -1,18 +1,6 @@
 <BOUCLE_contact(CONTACTS){id_contact}{tous}>
 <!--#hierarchie-->
-<div id="chemin">
-	<span class="bloc">
-		<a href="#URL_ECRIRE" class="racine"><:info_racine_site:></a>
-	</span>
-	<span class="bloc">
-		<em> &gt; </em>
-		<a href="[(#URL_ECRIRE{contacts})]"><:contacts:contacts:></a>
-	</span>
-	<span class="bloc">
-		<em> &gt; </em>
-		#NOM #PRENOM
-	</span>
-</div>
+[(#INCLURE{fond=prive/boite/hierarchie_contact}{nom=#NOM}{prenom=#PRENOM})]
 <!--/#hierarchie-->
 
 <div class="fiche_objet">
@@ -67,12 +55,6 @@
 <!--/#navigation-->
 
 <!--#extra-->
-[(#CHEMIN{images/organisation-24.png}
-	|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:contacts:lier_organisation:>})],0})]
-#SET{rien,0}#SET{contact,0}
-	<div class='ajax'>
-	[(#FORMULAIRE_LIER_ORGANISATION{#ID_CONTACT, #SELF})]
-	</div>
-[(#EVAL{true}|fin_cadre_relief)]
+[(#INCLURE{fond=prive/boite/contact_lier_organisation}{id_contact=#ID_CONTACT}{redirect=#SELF})]
 <!--/#extra-->
 </BOUCLE_contact>
