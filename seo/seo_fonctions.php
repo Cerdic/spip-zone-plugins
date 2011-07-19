@@ -167,3 +167,18 @@ function generer_webmaster_tools(){
 	
 	return $flux;
 }
+
+/**
+ * Renvoyer la META ALEXA
+ * @return string $flux
+ */
+function generer_alexa(){
+	/* CONFIG */
+	$config = unserialize($GLOBALS['meta']['seo']);
+
+	if($config['alexa']['id']){
+		$flux .= '<meta name="alexaVerifyID" content="'. $config['alexa']['id'] .'"/>';
+	}
+	
+	return $flux;
+}

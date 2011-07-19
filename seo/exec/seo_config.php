@@ -11,13 +11,9 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-include_spip('inc/spiplistes_api_globales');
-
 function exec_seo_config () {
 
 	include_spip('inc/distant');
-	include_spip('inc/spiplistes_api');
-	include_spip('inc/spiplistes_api_presentation');
 	include_spip('inc/meta');
 	include_spip('inc/config');
 	
@@ -33,20 +29,23 @@ function exec_seo_config () {
 	$config = unserialize($GLOBALS['meta']['seo']);
 	
 	// Save it if needed
-	if (isSet($_POST['insert_head_submit'])) {
-		$config['insert_head'] = $_POST['insert_head'];
+	if (isset(_request('insert_head_submit'))) {
+		$config['insert_head'] = _request('insert_head');
 		ecrire_meta('seo', serialize($config));
-	} elseif (isSet($_POST['meta_tags_submit'])) {
-		$config['meta_tags'] = $_POST['meta_tags'];
+	} elseif (isset(_request('meta_tags_submit'))) {
+		$config['meta_tags'] = _request('meta_tags');
 		ecrire_meta('seo', serialize($config));
-	} elseif ($_POST['webmaster_tools_submit']) {
-		$config['webmaster_tools'] = $_POST['webmaster_tools'];
+	} elseif (_request('webmaster_tools_submit')) {
+		$config['webmaster_tools'] = _request('webmaster_tools');
 		ecrire_meta('seo', serialize($config));
-	} elseif ($_POST['analytics_submit']) {
-		$config['analytics'] = $_POST['analytics'];
+	} elseif (_request('analytics_submit')) {
+		$config['analytics'] = _request('analytics');
 		ecrire_meta('seo', serialize($config));
-	} elseif ($_POST['canonical_url_submit']) {
-		$config['canonical_url'] = $_POST['canonical_url'];
+	} elseif (_request('canonical_url_submit')) {
+		$config['canonical_url'] = _request('canonical_url');
+		ecrire_meta('seo', serialize($config));
+	} elseif (_request('alexa_submit')) {
+		$config['alexa'] = _request('alexa');
 		ecrire_meta('seo', serialize($config));
 	}
 	
@@ -248,7 +247,27 @@ function exec_seo_config () {
 		. '</form>'
 		. fin_cadre_trait_couleur(true)
 		;
+	
+	// Alexa meta //
+	$page_result .= ''
+		. debut_cadre_trait_couleur(_DIR_PLUGIN_SEO.'img_pack/alexa-24.png', true, '', _T('seo:alexa'))
+		. '<form action="" method="post">'
 		
+		. debut_cadre_relief('', true, '', _T('seo:alexa'))
+		. '<input type="checkbox" value="yes" name="alexa[activate]" '.(($config['alexa']['activate'] == 'yes') ? "checked='checked'" : "").' onChange="activeForm($(this), $(\'.alexa_slide\'))"/>'
+		. '<label for="alexa">'._T('seo:alexa_activate').'</label>'
+		. fin_cadre_relief(true)
+		
+		. debut_cadre_relief('', true, '', _T('seo:alexa_id'), '', 'alexa_slide')
+		. '<input type="text" name="alexa[id]" value="'.$config['alexa']['id'].'" id="alexa" class="formo"/>'
+		. fin_cadre_relief(true)
+				
+		// Submit button
+		. '<div style="text-align:right;"><input type="submit" name="alexa_submit" class="fondo" value="'._T('bouton_valider').'" /></div>'
+		. '</form>'
+		. fin_cadre_trait_couleur(true)
+		;
+			
 	// JavaScript for fun //
 	$page_result .= ''
 		. '<script type="text/javascript">'
@@ -258,9 +277,9 @@ function exec_seo_config () {
 		. (($config['meta_tags']['activate'] != 'yes') ? "$('.meta_tags_slide').hide();" : "")
 		. (($config['webmaster_tools']['activate'] != 'yes') ? "$('.webmaster_tools_slide').hide();" : "")
 		. (($config['analytics']['activate'] != 'yes') ? "$('.analytics_slide').hide();" : "")
+		. (($config['alexa']['activate'] != 'yes') ? "$('.alexa_slide').hide();" : "")
 		. '</script>'
 		;
-		
 		
 	echo $page_result, pipeline('affiche_milieu',array('args'=>array('exec'=>$sous_rubrique),'data'=> '')), fin_gauche(), fin_page();
 }

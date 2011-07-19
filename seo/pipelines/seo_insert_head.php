@@ -13,9 +13,7 @@ function seo_insert_head($flux) {
 	
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
-
 	if ($config['insert_head']['activate'] == 'yes') {
-	
 		if (count($GLOBALS['contexte']) == 0) {
 			$type_object = 'sommaire';
 		} elseif (isSet($GLOBALS['contexte']['id_article'])) {
@@ -43,7 +41,12 @@ function seo_insert_head($flux) {
 		/* GOOGLE ANALYTICS */
 		if ($config['analytics']['activate'] == 'yes') {
 			$flux .= generer_google_analytics();
-		}		
+		}
+
+		/* ALEXA */
+		if ($config['alexa']['activate'] == 'yes' && $type_object == 'sommaire') {
+			$flux .= generer_alexa();
+		}
 	}
 	
 	return $flux;
