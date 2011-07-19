@@ -120,7 +120,7 @@ function saisies_deplacer($saisies, $id_ou_nom_ou_chemin, $ou){
 			$chemin = array(count($saisies));
 		}
 		// Si l'endroit est entre crochet, c'est un conteneur
-		elseif (preg_match('/^\[([@\w]*)\]$/', $ou, $match)){
+		elseif (preg_match('/^\[(@?[\w]*)\]$/', $ou, $match)){
 			$parent = $match[1];
 			// Si dans les crochets il n'y a rien, on met à la fin du formulaire
 			if (!$parent){
