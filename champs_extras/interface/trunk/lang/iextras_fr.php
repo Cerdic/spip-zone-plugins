@@ -60,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legend_declaration' => 'D&eacute;claration',
 	'legend_options_techniques' => 'Technique',
 	'legend_options_saisies' => 'Options de la saisie',
-	'legend_restrictions' => 'Restrictions',
+	'legend_restriction' => 'Restriction',
 	'legend_restrictions_voir' => 'Voir la saisie',
 	'legend_restrictions_modifier' => 'Modifier la saisie',
 	

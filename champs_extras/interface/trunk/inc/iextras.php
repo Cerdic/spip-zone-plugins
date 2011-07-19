@@ -219,7 +219,7 @@ function iextras_formulaire_verifier($flux) {
 			'saisie' => 'fieldset',
 			'options' => array(
 				'nom' => "saisie_modifiee_${name}[options][restrictions]",
-				'label' => _T('iextras:legend_restrictions'),			
+				'label' => _T('iextras:legend_restriction'),			
 			),
 			'saisies' => $saisies_restrictions
 		));
