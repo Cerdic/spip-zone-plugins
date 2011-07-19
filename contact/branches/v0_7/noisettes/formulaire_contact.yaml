@@ -25,3 +25,15 @@ parametres:
       nom: 'titre_noisette_perso'
       label: '<:contact:noisette_label_titre_noisette_perso:>'
       afficher_si: '@afficher_titre_noisette@ == "on" && @titre_noisette@ == "titre_perso"'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'niveau_titre'
+      label: '<:contact:noisette_label_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      datas:
+        h1: 'h1'
+        h2: 'h2'
+        h3: 'h3'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
