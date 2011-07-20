@@ -1,0 +1,41 @@
+[(#SET{icone,[(#CHEMIN{img/abonnement_22.png}|url_absolue)]})]
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:abo:abonnements:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+
+<BOUCLE_actifs(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite>#DATE}>
+	<div class="liste-elements abos" style="background:#FFFFFF;font-size: 1em;padding: 0 1em;">
+	<BOUCLE_lib0(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+	<p><strong><:abo:titre:></strong> : #TITRE</p>
+	</BOUCLE_lib0> 
+	<p><strong><:abo:statut_abonnement:></strong> : #STATUT_ABONNEMENT</p>
+	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)]</p>
+	<BOUCLE_quellecommande(COMMANDES_DETAILS){id_objet}{objet}>
+	<p><:abo:liaison_commande:><a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a></p>
+	</BOUCLE_quellecommande><!--<p><:abo:aucune_liaison_commande:></p>--><//B_quellecommande>
+	
+	<div style="float:right; text-align:right; width:30px; position:relative; top:-30px">
+	[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
+	[(#BOUTON_ACTION{
+		[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_abonnement:>})],
+		[(#URL_ACTION_AUTEUR{supprimer_contactabonnement,contactabonnement-#ENV{id_auteur}-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
+		ajax,
+		<:abo:confirmer_suppression_abonnement:>})]
+	]
+	</div>
+	</div>
+</BOUCLE_actifs>
+<B_echus>
+<h4><:abo:abonnements_echus:></h4>
+<BOUCLE_echus(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite<#DATE}>
+	<div class="liste-elements abosechus" style="background:#FFFFFF;font-size: 1em;padding: 0 1em;">
+	<BOUCLE_lib(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+	<p><strong><:abo:abonnement:></strong> : #TITRE</p>
+	</BOUCLE_lib> 
+	<p><strong><:abo:statut_abonnement:></strong> : #STATUT_ABONNEMENT</p>
+	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)]</p>
+	<BOUCLE_quellecommand(COMMANDES_DETAILS){id_objet}{objet}>
+	<p>Attention commande li&eacute;e: [(#ID_COMMANDE|sinon{pas de commande li&eacutee})]</p>
+	</BOUCLE_quellecommand>
+	</div>
+</BOUCLE_echus>
+[(#VAL{e}|fin_cadre)]
+
