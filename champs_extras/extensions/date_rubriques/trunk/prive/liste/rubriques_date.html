@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	titre,1,
+	num titre,1,
+	id_rubrique,1
+}})
+]<B_liste_date>
+#ANCRE_PAGINATION
+<div class="liste-elements articles">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:daterubriques:info_rubriques_secteur{numero=#ID_SECTEUR}:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='article'><:article:></th>
+			<th class='date'>[(#TRI{date_utile,<:date:>,ajax})]</th>
+			<th class='id'>[(#TRI{id_rubrique,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_date(RUBRIQUES){id_secteur?}{id_rubrique?}{id_mot?}{id_article?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='statut'>[(#ID_RUBRIQUE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,rubrique})]</td>
+			<td class='titre'>[(#LOGO_RUBRIQUE||image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|supprimer_numero)]</a></td>
+			<td class='date'><BOUCLE_articles(ARTICLES){id_rubrique}{par date}{0,1}>[(#DATE|affdate{d/m/Y})] <a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}" title="#TITRE">article#ID_ARTICLE</a></BOUCLE_articles><:daterubriques:aucun:><//B_articles></td>
+			<td class='date'>[(#DATE_UTILE|affdate{d/m/Y})]</td>
+			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{
+				<a href="[(#URL_ECRIRE{rubriques_edit,id_rubrique=#ID_RUBRIQUE})]">#ID_RUBRIQUE</a>,
+				#ID_RUBRIQUE
+			})]</td>
+		</tr>
+	</BOUCLE_liste_date>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_date>[
+<div class="liste-elements articles"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_date>

@@ -11,12 +11,12 @@ function daterubriques_pre_edition($flux){
 			$prefixe = '';
 		}
 		foreach ($extras as $c) {
-			if ( $c->champ == "ce_date" ) {
+			if ( $c->champ == "date_utile" ) {
 				//On met la date saisie au format MySql AAAA-MM-JJ
-				if ($date = recup_date($flux['data']['ce_date'])) {				
-					$flux['data']['ce_date'] = date("Y-m-d",mktime($date[3],$date[4],0,$date[1],$date[2],$date[0]));
+				if ($date = recup_date($flux['data']['date_utile'])) {				
+					$flux['data']['date_utile'] = date("Y-m-d",mktime($date[3],$date[4],0,$date[1],$date[2],$date[0]));
 				} else {
-					$flux['data']['ce_date'] = date("Y-m-d");
+					$flux['data']['date_utile'] = date("Y-m-d");
 				}
 			}
 		}
