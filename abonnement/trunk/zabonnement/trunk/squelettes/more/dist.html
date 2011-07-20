@@ -1,0 +1,39 @@
+#SET{today,#DATE}
+<style>
+#aboperso {position:absolute; margin:1em; width:180px; border:1px solid #666; text-align:left; padding:1em; font-size:0.8em}
+</style>
+	<div id="aboperso">
+	<h3><a href="[(#URL_PAGE{_abonnement_})]"><:abo:les_abonnements:></a></h3>
+<B_auteur_info>
+
+	
+	<h3><:abo:info_vos_abonnements:></h3>
+	
+<BOUCLE_auteur_info(AUTEURS){id_auteur = #SESSION{id_auteur}}{tout}>
+	<div>
+		<B_abo><:abo:abonnements:><ul class="menu-liste">
+			<BOUCLE_abo(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+				<BOUCLE_detail_abonnement(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+					<li><a href="[(#URL_PAGE{abonnement}|parametre_url{id_abonnement,#ID_ABONNEMENT})]">#TITRE</a></li>
+				</BOUCLE_detail_abonnement>
+			</BOUCLE_abo>
+		</ul></B_abo>
+		
+		<B_rubriques><:abo:rubriques:><ul class="menu-liste">	
+			<BOUCLE_rubriques(CONTACTS_ABONNEMENTS){objet=rubrique}{id_auteur=#ID_AUTEUR}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+				<BOUCLE_detail_rubrique(RUBRIQUES){id_rubrique=#ID_OBJET}{tout_voir}>
+					<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+				</BOUCLE_detail_rubrique>
+			</BOUCLE_rubriques>
+		</ul></B_rubriques>
+		
+		<B_articles><:abo:articles:><ul class="menu-liste">	
+			<BOUCLE_articles(CONTACTS_ABONNEMENTS){objet=article}{id_auteur=#ID_AUTEUR}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+				<BOUCLE_detail_article(ARTICLES){id_article=#ID_OBJET}{tout_voir}>
+					<li><a href="#URL_ARTICLE">#TITRE</a></li>
+				</BOUCLE_detail_article>
+			</BOUCLE_articles>
+		</ul></B_articles>
+	</div>
+</BOUCLE_auteur_info>
+</div>

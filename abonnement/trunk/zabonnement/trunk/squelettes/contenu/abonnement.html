@@ -1,0 +1,88 @@
+#SET{today,#DATE}
+<BOUCLE_contenu_abonnement(ABONNEMENTS){id_abonnement}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{_abonnement_}"><:abo:abonnements:></a>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+	<div class="cartouche">
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		<h2 class="h2"><:abo:label_duree:> #DUREE #PERIODE</h2>
+		<h2>#PRIX</h2>
+	</div>
+
+	<div class="surlignable">
+		[<div class="#EDIT{descriptif}">(#DESCRIPTIF|image_reduire{500,0})</div>]
+	</div>
+
+	[<div><:abo:nous_sommes_le:> [(#GET{today}|affdate{nom_jour})] (#GET{today}|affdate)</div>]
+	
+	<BOUCLE_votreabo(CONTACTS_ABONNEMENTS){id_abonnement}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}>
+	<div style="padding:1em; margin:1em; border:1Px solid red">
+	
+
+	[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
+	
+	[(#GET{today}|<{[(#VALIDITE)]}|oui) <:abo:abo_valide_jusqu_au{date=#GET{datefin}}:> 
+		[(#SET{boutontexte,<:abo:renouveller_mon_abonnement:>})]
+	]
+	[(#GET{today}|>{[(#VALIDITE)]}|oui) <:abo:valide_echu_depuis{date=#GET{datefin}}:>
+		[(#SET{boutontexte,<:abo:je_me_reabonne:>})]
+	]
+	
+	[(#REM) 
+		Todo clarifier les possibilites d'acces ...
+		-Prérequis : bloquer au moins une zone restreinte
+		
+		Les 4 possibilites d'accéder aux pages, par ordre
+		-acces a un article (pas besoin ici)
+		-acces a une rubrique
+		-abonne a un abonnement durant une periode aux dates exactes de parutions
+		-abonne a un abonnement definissant une zone d'abonnement (gere en amont par acces restreint, pas besoin ici)
+	
+		[statut_abonnement:(#STATUT_ABONNEMENT)]
+		
+		
+		ne pas creer du tout de zone et ne pas l'ouvrir à l'abonne ?
+		suivant la zone d'origine #IDS_ZONE...
+		On ferme la zone entière de toute manière
+		on ouvre au cas par cas dans un squelette unique et voila, pas de risque de fuite inter-zone etc
+		
+	]
+	
+		[(#REM) <!--  acces a une rubrique aux dates exactes -->]
+		<BOUCLE_date_exacte(CONDITION){si #EXACT|=={oui}}>
+			<B_rubriques_bonnedate>
+				<h3><:abo:acces_ouvert:></h3> 
+					<ul>
+				<BOUCLE_rubriques_bonnedate(RUBRIQUES){date_utile>=#DATE}{date_utile<=#VALIDITE}{!date_utile}{tout_voir}>
+					<li><a href="#URL_RUBRIQUE">#TITRE</a> <em>[(#DATE_UTILE|affdate{nom_mois})][ (#DATE_UTILE|affdate{Y})]</em></li>
+				</BOUCLE_rubriques_bonnedate>
+					</ul>
+			</B_rubriques_bonnedate>
+			<:abo:aucun_acces:>
+			<//B_rubriques_bonnedate>
+		</BOUCLE_date_exacte>
+		
+		<B_zones_ouvertes>
+		[(#REM) <!--  Zones ouvertes ? = #IDS_ZONE -->]
+		<h3><:abo:acces_ouvert:></h3> 
+		<ul>
+		<BOUCLE_zones_ouvertes(ZONES zones_rubriques){id_zone IN #IDS_ZONE|explode{','}}>
+		<li><a href="#URL_RUBRIQUE{#ID_RUBRIQUE}">#INFO_TITRE{rubrique,#ID_RUBRIQUE}</a></li>
+		</BOUCLE_zones_ouvertes>
+		</ul>
+		</B_zones_ouvertes>
+
+	</div>
+	</BOUCLE_votreabo>
+	[(#SET{boutontexte,<:abo:je_m_abonne:>})]
+	<//B_votreabo>
+	
+	<div style='height:50px; width:100px; margin:1em'>
+	[(#BOUTON_ACTION{[(#GET{boutontexte})],#URL_ACTION_AUTEUR{remplir_panier,abonnement-#ID_ABONNEMENT-1,#URL_PAGE{panier}},ajax})] 
+	</div>
+	
+
+</div>
+
+</BOUCLE_contenu_abonnement>

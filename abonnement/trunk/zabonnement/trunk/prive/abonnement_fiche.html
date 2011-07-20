@@ -1,0 +1,27 @@
+[(#SET{icone,[(#CHEMIN{img/abonnement_22.png}|url_absolue)]})]
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:abo:abonnements:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+
+<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=abonnement}{par validite}>
+	<div class="liste-elements abos" style="background:#FFFFFF;font-size: 1em;padding: 0 1em;">
+	<BOUCLE_lib0(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+	<p><strong><:abo:titre:></strong> : #TITRE </p>
+	</BOUCLE_lib0> 
+	<p><strong><:abo:statut_abonnement:></strong> : #STATUT_ABONNEMENT</p>
+	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)][ (#VALIDITE|<{#DATE}|oui) (<:abo:terme_echu:>)]</p>
+	<BOUCLE_quellecommande(COMMANDES_DETAILS){id_commandes_detail}>
+	<p><:abo:liaison_commande:><a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a></p>
+	</BOUCLE_quellecommande><!--<p><:abo:aucune_liaison_commande:></p>--><//B_quellecommande>
+	
+		<div style="float:right; text-align:right; width:30px; position:relative; top:-30px">
+		[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
+		[(#BOUTON_ACTION{
+			[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_abonnement:>})],
+			[(#URL_ACTION_AUTEUR{supprimer_contactabonnement,contactabonnement-#ENV{id_auteur}-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
+			ajax,
+			<:abo:confirmer_suppression_abonnement:>})]
+		]
+		</div>
+	</div>
+</BOUCLE_actifs>
+[(#VAL{e}|fin_cadre)]
+

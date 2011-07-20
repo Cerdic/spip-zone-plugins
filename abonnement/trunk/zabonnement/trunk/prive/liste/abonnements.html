@@ -1,0 +1,51 @@
+<B_liste_abonnements>
+#ANCRE_PAGINATION
+<div class="liste-elements abonnements">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:abo:liste_des_abonnements:>})</strong></caption>]
+	<thead>
+	<tr>
+		<th><:abo:label_titre:></th>
+		<th ><:abo:label_duree:></th>
+		<th><:abo:label_zones_ouvrir:></th>
+		<th><:abo:exact:></th>
+		<th><:abo:label_prix:></th>
+		<th><:abo:label_action:></th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_abonnements(ABONNEMENTS){pagination 10}{par num titre}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="#EDIT{titre}" style="width:30%">#TITRE</td>
+			<td>#DUREE #PERIODE</td>
+			<td>
+			[(#SET{id_zones,#ARRAY})]
+			[(#SET{id_zones,[(#IDS_ZONE|explode{','})]})]
+			<BOUCLE_zones(ZONES){id_zone IN #GET{id_zones}}>
+			<a href="[(#URL_ECRIRE{acces_restreint})]" title="#TITRE">#ID_ZONE</a>
+			</BOUCLE_zones>
+			<:abo:aucune_zone:>
+			<//B_zones>
+			</td>
+			<td>#EXACT</td>
+			<td>#PRIX</td>
+			<td>
+				[(#AUTORISER{modifier,abonnement}|oui)
+					<a href="[(#URL_ECRIRE{abonnement_edit}|parametre_url{id_abonnement,#ID_ABONNEMENT}|parametre_url{redirect,#SELF})]">
+						<:abo:action_editer:>
+					</a> | 
+					[(#BOUTON_ACTION{
+						<:abo:action_supprimer:>,
+						#URL_ACTION_AUTEUR{supprimer_abonnement,-#ID_ABONNEMENT,#SELF}}
+					)]			
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_abonnements>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_abonnements>[
+<div class="liste-elements abonnements"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_abonnements>

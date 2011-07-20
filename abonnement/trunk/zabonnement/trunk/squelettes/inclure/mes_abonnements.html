@@ -1,0 +1,85 @@
+#CACHE{0}
+[(#SET{date_future,[(#ENV{date}|ajouter_des_jours{7})]})]
+
+#SET{today,#DATE}
+
+<BOUCLE_auteur(AUTEURS){id_auteur = #SESSION{id_auteur}}{tout}>
+<BOUCLE_count(CONTACTS_ABONNEMENTS){id_auteur}{validite >= #GET{today}}{statut_abonnement IN paye,offert}>
+</BOUCLE_count><h2><:abo:liste_vos_abonnements:></h2></B_count>
+
+	[(#REM) Si on a un abonnement valide, on l'affiche]
+	<B_abo_valide>
+			[(#TOTAL_BOUCLE|=={1}|oui)<h3 class="h3"><:abo:votre_abonnement:></h3>]
+			[(#TOTAL_BOUCLE|>{1}|oui)<h3 class="h3"><:abo:vos_abonnements:></h3>]
+			<ul class="liste_abonnement">
+	<BOUCLE_abo_valide(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite > #GET{date_future}}{statut_abonnement IN paye,offert}>
+
+		#SET{ladate,#VALIDITE|affdate}
+		<BOUCLE_abo(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+		<li><a href="[(#URL_PAGE{abonnement}|parametre_url{id_abonnement,#ID_ABONNEMENT})]">#TITRE</a>
+		</BOUCLE_abo><span><:abo:echeance_le{date=#GET{ladate}}:></span>
+		</li>
+	</BOUCLE_abo_valide>
+	</ul>
+	</B_abo_valide>
+
+		[(#REM) Sinon on teste si l'abonnement est perime ]	
+		<BOUCLE_abo_echu(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite < #GET{date_future}}{statut_abonnement IN paye,offert}>
+
+			[(#ENV{reabo}|non)
+				<h3 class="h3"><:abo:votre_abonnement:></h3>
+				
+				<div class="abonnement_echeance">
+				<p>
+				#SET{ladate,#VALIDITE|affdate}
+				#SET{proche,#VALIDITE|>{#ENV{date}}|oui}
+				[(#GET{proche}|non)<:abo:echance_abonnement_passee{date=#GET{ladate},titre=#TITRE}:>]
+				[(#GET{proche}|oui)<:abo:echance_abonnement_proche{date=#GET{ladate},titre=#TITRE}:>]
+				</p>
+				<p>
+				[(#GET{proche}|non)<:abo:renouveler_abonnement_passe{date=#GET{ladate},titre=#TITRE}:>]
+				[(#GET{proche}|oui)<:abo:renouveler_abonnement_proche{date=#GET{ladate},titre=#TITRE}:>]
+				</p>
+				</div>
+			]
+			
+			
+		</BOUCLE_abo_echu>
+			#SET{pas_abo,oui}
+		<//B_abo_echu>
+		
+		[(#REM)
+		la liste des acces aux rubriques
+		]			
+		<B_abo_rubriques_valide>
+			<h3 class="h3"><:abo:vos_acces_rubriques:></h3>
+			<ul class="liste_abonnement">
+			<BOUCLE_abo_rubriques_valide(CONTACTS_ABONNEMENTS){objet=rubrique}{id_auteur=#ID_AUTEUR}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
+				<BOUCLE_rubriquev(RUBRIQUES){id_rubrique=#ID_OBJET}{tout_voir}>
+	[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
+	<li><a href="#URL_RUBRIQUE">#TITRE</a>
+				<span> <:abo:jusqu_au{date=#GET{datefin}}:></span></li>
+				</BOUCLE_rubriquev>
+			</BOUCLE_abo_rubriques_valide>
+			</ul>
+		</B_abo_rubriques_valide>
+		
+		
+		[(#REM)
+		la liste des acces aux articles
+		]			
+		<B_abo_articles_valide>
+			<h3 class="h3"><:abo:vos_acces_articles:></h3>
+			<ul class="liste_abonnement">
+			<BOUCLE_abo_articles_valide(CONTACTS_ABONNEMENTS){objet=article}{id_auteur=#ID_AUTEUR}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
+				<BOUCLE_articlev(ARTICLES){id_article=#ID_OBJET}{tout_voir}>
+	[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
+	<li><a href="#URL_ARTICLE">#TITRE</a>
+				<span> <:abo:jusqu_au{date=#GET{datefin}}:></span></li>
+				</BOUCLE_articlev>
+			</BOUCLE_abo_articles_valide>
+			</ul>
+		</B_abo_articles_valide>
+		
+				
+</BOUCLE_auteur>
