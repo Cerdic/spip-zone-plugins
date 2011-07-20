@@ -41,6 +41,7 @@ function factures_declarer_tables_principales($tables_principales){
 	// structure de la table factures
 	$factures = array(
 		"id_facture"			=>	"int(11) NOT NULL auto_increment",
+		"id_organisation"		=>	"int(11) default NULL",
 		"num_facture"			=>	"varchar(50) default NULL", // un numéro unique selon l'organisation
 		"num_devis"				=>	"varchar(50) default NULL", // l'éventuel numéro de devis d'où est issu la facture
 		"id_type_facture"		=>	"int(11) default NULL",
