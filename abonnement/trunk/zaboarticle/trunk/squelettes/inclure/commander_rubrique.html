@@ -1,0 +1,19 @@
+<B_rubriques>
+<table class="spip">
+<BOUCLE_rubriques(RUBRIQUES){id_rubrique?}{tout_voir}>
+		<tr>
+		<td>[(#LOGO_RUBRIQUE|image_reduire{100})]</td>
+		<td>
+		<p class="titre">
+		&laquo;&nbsp;<strong><i>#TITRE</i></strong>&nbsp;&raquo;
+		[(<span class="auteurs">(#LESAUTEURS)</span>)]
+	</p></td>
+		<td style="display:none">#DESCRIPTIF</td>
+		<td>#PRIX</td>
+		<td style='height:50px; width:100px'>
+		[(#BOUTON_ACTION{<:commander_ce_numero:>,
+		#URL_ACTION_AUTEUR{remplir_panier,rubrique-#ID_RUBRIQUE,#ENV{vers,#URL_PAGE{panier}}},ajax})] 
+		</td>
+		</tr>
+</BOUCLE_rubriques></table>
+</B_rubriques>

@@ -1,0 +1,40 @@
+[(#REM) les abonnes apparaissent dans la partie prive de la page rubrique ]
+[(#REM)<!-- 1er possibilite > via un abonnement court a la rubrique -->]
+<B_abonnes_object>
+<div class="liste-elements">
+<strong style="display:block; padding:1em 0 0 1em"><:abo:abonnes_rubrique:></strong>
+<ul>
+<BOUCLE_abonnes_object(CONTACTS_ABONNEMENTS){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}>
+
+<li><a href="#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}">#INFO_NOM{auteur, #ID_AUTEUR}</a>
+[<:abo:echeance:> (#VALIDITE|affdate)] - #STATUT_ABONNEMENT
+</li>
+
+</BOUCLE_abonnes_object>
+</ul>
+</div>
+</B_abonnes_object>
+
+		
+		[(#REM)
+		<!--2em possibilite > via un abonnement correspondant a la date_utile de la rubrique-->
+		]<B_abonnes_abonnement>
+		<div class="liste-elements">
+		<strong style="display:block; padding:1em 0 0 1em"><:abo:abonnes_abonnement:></strong>
+		<ul>
+		<BOUCLE_abonnes_abonnement(CONTACTS_ABONNEMENTS){objet=abonnement}{id_objet=#GET{id_abonnement}}>
+		
+		<li><a href="#URL_ECRIRE{auteur_infos,id_auteur=#ID_AUTEUR}">#INFO_NOM{auteur, #ID_AUTEUR}</a>
+		[<:abo:echeance:> (#VALIDITE|affdate)] - #STATUT_ABONNEMENT
+		</li>
+		
+		</BOUCLE_abonnes_abonnement>
+		</ul>
+		</div>
+		</B_abonnes_abonnement>
+
+			[(#REM)
+			<!--4em possibilite > via un abonnement avec ouverture de zone-->
+			]
+
+<//B_abonnes_object>

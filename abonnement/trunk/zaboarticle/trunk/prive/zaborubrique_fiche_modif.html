@@ -1,0 +1,23 @@
+<li class="editer_zaborubrique fieldset">
+	<fieldset>
+		<h3 class='legend'><:abo:acces_rubriques_restreintes:></h3>
+		<B_actives>
+		<ul><li><label><:abo:rubriques:></label>
+			<BOUCLE_actives(CONTACTS_ABONNEMENTS){id_auteur}{objet=rubrique}{par id_objet}>
+				<BOUCLE_abo(RUBRIQUES){id_rubrique=#ID_OBJET}>#TITRE<br /></BOUCLE_abo>
+			</BOUCLE_actives>
+		</li></ul>
+		</B_actives>
+		<ul>
+			<li>
+				<label><:abo:ajouter_une_rubrique:></label>
+				<select name="rubriques[]">
+						<option value="non">Aucune</option>
+						<BOUCLE_lesrubs(RUBRIQUES)>
+						<option value="#ID_RUBRIQUE">#TITRE</option>
+						</BOUCLE_lesrubs>
+				</select>
+			</li>
+		</ul>
+	</fieldset>
+</li>

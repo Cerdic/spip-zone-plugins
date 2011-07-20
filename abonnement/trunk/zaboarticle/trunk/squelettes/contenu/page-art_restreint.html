@@ -1,6 +1,7 @@
 #CACHE{0}
+#SET{today,#DATE}
 <BOUCLE_contenu(ARTICLES){id_article}{tout_voir}>
-        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
+        <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}{tout_voir}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</div>
 
         <div class="cartouche">
             <div class="surlignable">
@@ -14,27 +15,56 @@
             [(#REM) Inclure le modele des liens de traductions ]
             #MODELE{article_traductions}
         </div>
-
-[(#AUTORISER{voir,article,#ID_ARTICLE})
- <h1>Vous etes autorise specifiquement a voir cet article youpi!</h1>
-]
-
-	<BOUCLE_article_abonne(CONTACTS_ABONNEMENTS articles){id_article}{id_auteur=#SESSION{id_auteur}}{statut_abonnement=paye}>
+        
+        #SET{valide,non}
+[(#REM) <!--  acces a l'article ? -->]
+	<BOUCLE_article_abonne(CONTACTS_ABONNEMENTS articles){id_article}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
 	#SET{valide,oui}
 	[(#REM)
 	#ID_AUTEUR est abonne a l'article donc on a une ouverture d'autorisation
 	]
 	</BOUCLE_article_abonne>
 	
-	#SET{valide,non}
+[(#REM) <!-- sinon acces a la rubrique ? -->]	
+		<BOUCLE_rubrique_abonne(CONTACTS_ABONNEMENTS rubriques){id_rubrique}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+		#SET{valide,oui}
+		[(#REM)
+		#ID_AUTEUR est abonne a la rubrique donc on a une ouverture d'autorisation de 3 jours
+		]
+		</BOUCLE_rubrique_abonne>
+		
+[(#REM) <!-- sinon abonnement ET la date de publication de la rubrique est dans les dates -->]
+			<BOUCLE_thisrubrique(RUBRIQUES){id_rubrique}{tout_voir}>
+				<BOUCLE_tester_date(CONTACTS_ABONNEMENTS){id_auteur=#SESSION{id_auteur}}{date<=#DATE_UTILE}{validite>=#DATE_UTILE}{statut_abonnement IN paye,offert}>
+					#SET{valide,oui} 
+					
+					[(#REM) ...car la date de publication est comprise entre le debut et la fin d'un des abonnements du contact
+					<br />debut #DATE <= #DATE_UTILE 
+					<br />fin #VALIDITE >= #DATE_UTILE
+					<br />Pour en etre sur exact doit valoir oui, sinon invalider
+					]
+				
+					<BOUCLE_verifier_exact(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+						[(#EXACT|!={oui}|oui) 
+						#SET{valide,non} 
+						]
+					</BOUCLE_verifier_exact>
+				
+				</BOUCLE_tester_date>
+			</BOUCLE_thisrubrique>
+			
+		<//B_rubrique_abonne>		
+[(#REM) <!-- de toutes facon si un abonnement ouvre l'acces restreint, cette page n'est pas appellee -->]
 	<//B_article_abonne>
  
 [(#GET{valide}|=={oui}|oui)
-<h3>Vous etes autorise a voir l'article</h3>
+<h3  style="background:url('#CHEMIN{img_pack/acces-ok-24.png}') left top no-repeat; padding-left:2em;">
+Vous etes autorise a voir l'article et a telecharger les documents</h3>
 
-<h3>et a telecharger les documents</h3>
+<div style="border:1px solid #333; padding:2em; margin:1em;">
+<INCLURE{fond=inclure/merger_pdf,id_article,id_rubrique}>
+</div>
 
-<INCLURE{fond=inclure/voirdocuments,id_article}>
 
 	        <div class="surlignable">
 		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
@@ -90,12 +120,12 @@
 			
 			<p><:abo:abonner_ou_acheter_article:></p>
 
-			[(#PLUGIN{abonnement}|oui)	
+			[(#PLUGIN{abonnementXXX}|oui)	
 			<INCLURE{fond=inclure/commander_abonnements,env,ajax}>
 			]
 
 						
-			<INCLURE{fond=inclure/commander_article}{id_article} />
+			<INCLURE{fond=inclure/commander_article,env,vers=#URL_PAGE{_abonnement_}|parametre_url{appel,mon_panier}} />
 		</div>
 		
 <//B_autorise>

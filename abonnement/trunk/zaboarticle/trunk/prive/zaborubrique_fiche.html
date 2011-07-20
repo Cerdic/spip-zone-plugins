@@ -1,23 +1,23 @@
 [(#SET{icone,[(#CHEMIN{img/zaboarticle_22.png}|url_absolue)]})]
-[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:abo:acces_articles_restreints:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:abo:acces_rubriques_restreintes:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
 
-<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=article}{par validite}>
+<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=rubrique}{par validite}>
 	<div class="liste-elements abos">
-	<BOUCLE_lib0(ARTICLES){id_article=#ID_OBJET}>
-	<p><strong><:abo:article_abonnement:></strong> : <a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#TITRE</a></p>
+	<BOUCLE_lib0(RUBRIQUES){id_rubrique=#ID_OBJET}>
+	<p><strong><:abo:rubrique_abonnement:></strong> : <a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}">#TITRE</a></p>
 	</BOUCLE_lib0> 
 	<p><strong><:abo:statut_abonnement:></strong> : #STATUT_ABONNEMENT</p>
-	<strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)][ (#VALIDITE|<{#DATE}|oui) (<:abo:terme_echu:>)]</p>
+	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)][ (#VALIDITE|<{#DATE}|oui) (<:abo:terme_echu:>)]</p>
 	<BOUCLE_quellecommande(COMMANDES_DETAILS){id_commandes_detail}>
 	<p><:abo:liaison_commande:><a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a></p>
 	</BOUCLE_quellecommande><!--<p><:abo:aucune_liaison_commande:></p>--><//B_quellecommande>
 <div class="suppri">
 	[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 	[(#BOUTON_ACTION{
-		[(#CHEMIN{images/supprimer-16.png}|balise_img{<:zaboarticle:supprimer_acces_article:>})],
+		[(#CHEMIN{images/supprimer-16.png}|balise_img{<:zaborubrique:supprimer_acces_rubrique:>})],
 		[(#URL_ACTION_AUTEUR{supprimer_contactabonnement,contactabonnement-#ENV{id_auteur}-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
 		ajax,
-		<:zaboarticle:confirmer_suppression_acces_article:>})]
+		<:zaborubrique:confirmer_suppression_acces_rubrique:>})]
 	]
 	</div>
 	</div>

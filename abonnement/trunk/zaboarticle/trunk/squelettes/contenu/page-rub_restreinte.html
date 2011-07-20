@@ -1,0 +1,129 @@
+#CACHE{0}
+#SET{today,#DATE}
+<BOUCLE_contenu(RUBRIQUES){id_rubrique}{tout_voir}>
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+
+<div class="contenu-principal">
+
+	<div class="cartouche">
+		[(#LOGO_RUBRIQUE||image_reduire{200,200})]
+		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
+		[(#REM) Si la date de publication n'est pas correcte]
+		[<p class="info-publi"><span class="published"><:abo:date_utile:> : (#DATE_UTILE|>{0000-00-00 00:00:00}|oui) [(#DATE_UTILE|affdate)].</span></p>]
+	</div>
+	
+</div>
+	#SET{valide,non}
+[(#REM) <!--  acces a la rubrique ? si #ID_AUTEUR est abonne a la rubrique on valide -->]	
+	<BOUCLE_rubrique_abonne(CONTACTS_ABONNEMENTS){id_rubrique}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+	#SET{valide,oui}
+	</BOUCLE_rubrique_abonne>
+
+[(#REM) <!-- sinon c'est un abonnement ET la date de publication de la rubrique est dans les dates -->]
+[(#REM) <!-- todo= verifier le nombre de 4 numeros pour un an exact ?-->]
+		<BOUCLE_tester_date(CONTACTS_ABONNEMENTS){id_auteur=#SESSION{id_auteur}}{date<=#DATE_UTILE}{validite>=#DATE_UTILE}{statut_abonnement IN paye,offert}>
+			#SET{valide,oui} 
+			
+			[(#REM) ...car la date de publication est comprise entre le debut et la fin d'un des abonnements du contact
+			<br />debut #DATE <= #DATE_UTILE 
+			<br />fin #VALIDITE >= #DATE_UTILE
+			<br />Pour en etre sur exact doit valoir oui, sinon invalider
+			]
+		
+			<BOUCLE_verifier_exact(ABONNEMENTS){id_abonnement=#ID_OBJET}>
+				[(#EXACT|!={oui}|oui) 
+				#SET{valide,non} 
+				]
+			</BOUCLE_verifier_exact>
+		
+		</BOUCLE_tester_date>
+		
+[(#REM) <!-- de toutes facon si un abonnement ouvre l'acces restreint, cette page n'est pas appellee -->
+todo colle pas car archives font moins que toutes les revues?... question]
+	<//B_rubrique_abonne>	
+ 
+[(#GET{valide}|=={oui}|oui)
+<h3 style="background:url('#CHEMIN{img_pack/acces-ok-24.png}') left top no-repeat; padding-left:2em;">
+Vous etes autorise a voir la rubrique et a telecharger les documents</h3>
+
+<div style="border:1px solid #333; padding:2em; margin:1em;">
+<INCLURE{fond=inclure/merger_pdf,id_rubrique,id_rubrique}>
+</div>
+
+
+	        <div class="surlignable">
+		[<div class="#EDIT{chapo} chapo">(#CHAPO|image_reduire{500,0})</div>]
+		[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{500,0})</div>]
+	</div>
+
+
+	[<div class="ps">
+		<h2 class="h2"><:info_ps:></h2>
+		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
+	</div>]
+
+	[(#REM) Gestion du portfolio et des documents ]
+	[(#INCLURE{fond=inclure/documents}{id_rubrique})]
+
+	
+	[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]
+	
+
+
+]
+
+<BOUCLE_autorise(CONDITION){si #GET{valide}|!={'non'}}>
+[(#REM) autorise a voir la rubrique ]
+
+</BOUCLE_autorise>
+	[(#REM) PAS autorise
+		Deux possibilites :
+		- soit le bonhomme est pas identifie
+		- soit il faut qu'il s'abonne ou paie la rubrique
+	]
+
+        <div class="surlignable">
+			[<div class="#EDIT{introduction} introduction">(#INTRODUCTION)</div>]
+		</div>
+
+		<div class="abonnement_refus">
+			<h3><:abo:acces_refuse:></h3>
+
+			[(#SESSION{id_auteur}|non)
+			<p><:abo:connexion_deja_abonne:></p>
+				#FORMULAIRE_LOGIN{#SELF}
+			]
+			
+			<p><:abo:abonner_ou_acheter_rubrique:></p>
+
+			[(#PLUGIN{abonnementXXXX}|oui)	
+			<INCLURE{fond=inclure/commander_abonnements,env,ajax}>
+			]
+
+						
+			<INCLURE{fond=inclure/commander_rubrique,env,vers=#URL_PAGE{_abonnement_}|parametre_url{appel,mon_panier}} />
+		</div>
+		
+<//B_autorise>
+
+
+[(#REM) On propose la liste des articles de la rubrique]
+<B_articles>
+<div class="liste articles">
+	#ANCRE_PAGINATION
+	<h2 class="h2"><:articles_rubrique:></h2>
+	<ul class="liste-items">
+		<BOUCLE_articles(ARTICLES){id_rubrique} {!par date} {pagination 5}{tout_voir}>
+		#INCLURE{fond=inclure/article-resume_restreint,id_article}
+		</BOUCLE_articles>
+	</ul>
+	[<p class="pagination">(#PAGINATION)</p>]
+</div>
+</B_articles>
+
+<//B_articles>
+
+
+
+</BOUCLE_contenu>

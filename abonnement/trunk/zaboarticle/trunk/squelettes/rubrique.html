@@ -1,0 +1,8 @@
+<BOUCLE_principale_rubrique(RUBRIQUES){id_rubrique}>
+<INCLURE{fond=structure}{env}{id_secteur=#ID_SECTEUR}{composition=#COMPOSITION}{type=rubrique}/>
+</BOUCLE_principale_rubrique></B_principale_rubrique>
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|oui) 
+<INCLURE{fond=rub_restreinte}{env}{id_rubrique}{id_rubrique=#ENV{id_rubrique,#ID_RUBRIQUE}}{id_secteur=#ID_SECTEUR}{type=page-rub_restreinte}{composition=#COMPOSITION}> ] 
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|non) Cette page n'existe pas ]	
+<//B_principale_rubrique>
+

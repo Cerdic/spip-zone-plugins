@@ -1,0 +1,72 @@
+[(#REM) les abonnes apparaissent dans la partie prive de la page article ]
+[(#REM)<!-- 1er possibilite > via un abonnement court a l'article -->]
+<B_abonnes_object>
+<div class="liste-elements">
+<strong style="display:block; padding:1em 0 0 1em"><:abo:abonnes_article:></strong>
+<ul>
+<BOUCLE_abonnes_object(CONTACTS_ABONNEMENTS){objet=#ENV{objet}}{id_objet=#ENV{id_objet}}>
+
+<li><a href="#URL_AUTEUR{#ID_AUTEUR}">#INFO_NOM{auteur, #ID_AUTEUR}</a>
+[<:abo:echeance:> (#VALIDITE|affdate)] - #STATUT_ABONNEMENT
+</li>
+
+</BOUCLE_abonnes_object>
+</ul>
+</div>
+</B_abonnes_object>
+
+	[(#REM)<!--2em possibilite > via un abonnement court a la rubrique-->]
+	[(#REM) todo hierarchie en array pour prendre aussi les grands parents]
+	<BOUCLE_objet(ARTICLES){id_article=#ENV{id_objet}}>
+	<BOUCLE_thisrubrique(RUBRIQUES){id_rubrique}>
+	#SET{id_rubrique,#ID_RUBRIQUE}
+	#SET{date_utile,#DATE_UTILE}
+	</BOUCLE_thisrubrique>
+	
+		#SET{parents,#ARRAY}
+		<BOUCLE_hi(HIERARCHIE){id_rubrique}>
+		#SET{parents, #GET{parents}|push{#ID_RUBRIQUE}}
+		</BOUCLE_hi>
+		
+	</BOUCLE_objet>
+	
+	<B_abonnes_rubrique>
+	<div class="liste-elements">
+	<strong style="display:block; padding:1em 0 0 1em"><:abo:abonnes_rubrique:></strong>
+	<ul>
+	<BOUCLE_abonnes_rubrique(CONTACTS_ABONNEMENTS){objet=rubrique}{id_objet IN #GET{id_rubrique}}>
+	
+	<li><a href="#URL_AUTEUR{#ID_AUTEUR}">#INFO_NOM{auteur, #ID_AUTEUR}</a>
+	[<:abo:echeance:> (#VALIDITE|affdate)] - #STATUT_ABONNEMENT
+	</li>
+	
+	</BOUCLE_abonnes_rubrique>
+	</ul>
+	</div>
+	</B_abonnes_rubrique>
+
+		
+		[(#REM)
+		<!--3em possibilite > via un abonnement correspondant a la date_utile de la rubrique-->
+		]<B_abonnes_abonnement>
+		<div class="liste-elements">
+		<strong style="display:block; padding:1em 0 0 1em"><:abo:abonnes_abonnement:></strong>
+		<ul>
+		<BOUCLE_abonnes_abonnement(CONTACTS_ABONNEMENTS){objet=abonnement}{id_objet=#GET{id_abonnement}}>
+		
+		<li><a href="#URL_AUTEUR{#ID_AUTEUR}">#INFO_NOM{auteur, #ID_AUTEUR}</a>
+		[<:abo:echeance:> (#VALIDITE|affdate)] - #STATUT_ABONNEMENT
+		</li>
+		
+		</BOUCLE_abonnes_abonnement>
+		</ul>
+		</div>
+		</B_abonnes_abonnement>
+
+			[(#REM)
+			<!--4em possibilite > via un abonnement avec ouverture de zone-->
+			]
+
+	<//B_abonnes_rubrique>
+
+<//B_abonnes_object>

@@ -1,26 +1,21 @@
 <li class="editer_zaboarticle fieldset">
 	<fieldset>
-		<h3 class='legend'><:zaboarticle:acces_articles_restreints:></h3>
+		<h3 class='legend'><:abo:acces_articles_restreints:></h3>
 		<B_actifs>
-		<ul>
-			<BOUCLE_actifs(CONTACTS_ABONNEMENTS ARTICLES){id_auteur}{id_article!=''}>
-				<BOUCLE_abo(ARTICLES){id_article}>
-				<li>
-					<label><:abo:article:></label>
-					<input type="hidden" value="#ID_ARTICLE" name="articles[]">#TITRE</option>
-				</li>
-				</BOUCLE_abo>
+		<ul><li><label><:abo:articles:></label>
+			<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=article}{par id_objet}>
+				<BOUCLE_abo(ARTICLES){id_article=#ID_OBJET}>#TITRE<br /></BOUCLE_abo>
 			</BOUCLE_actifs>
-		</ul>
+		</li></ul>
 		</B_actifs>
 		<ul>
 			<li>
 				<label><:abo:ajouter_un_article:></label>
 				<select name="articles[]">
 						<option value="non">Aucun</option>
-						<BOUCLE_lesabos(ARTICLES)>
+						<BOUCLE_lesarts(ARTICLES)>
 						<option value="#ID_ARTICLE">#TITRE</option>
-						</BOUCLE_lesabos>
+						</BOUCLE_lesarts>
 				</select>
 			</li>
 		</ul>
