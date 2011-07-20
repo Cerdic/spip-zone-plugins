@@ -34,7 +34,7 @@ function modifier_date($id_secteur) {
 	$r = sql_select("id_rubrique", "spip_rubriques", "id_secteur=$id_secteur");
 
 	while ($row = sql_fetch($r)) {
-		//date du premier article = min, ou du dernier = max
+		//date de l'article le plus ancien = min, ou du plus recent = max
 		
 	$ru = sql_select("min(fille.date) AS date_art", "spip_articles AS fille","id_rubrique=".$row['id_rubrique']." AND fille.date >'0000-00-00 00:00:00'");
 			while ($rowu = sql_fetch($ru)){
