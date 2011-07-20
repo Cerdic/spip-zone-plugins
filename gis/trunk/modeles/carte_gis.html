@@ -36,19 +36,22 @@
 
 [(#REM)  
 	// todo
-	{id_groupe}
 	{recursive=#ENV{recursive}}
-	{attente=#ENV{attente}}{ombre=#ENV{ombre}}{load_map=#ENV{load_map}}
-	{id_a_ouvrir=#ENV{id_a_ouvrir}}{swfobject=#CONFIG{gis/swfobject,oui}}
+	{attente=#ENV{attente}}
+	{ombre=#ENV{ombre}}
+	{load_map=#ENV{load_map}}
+	{id_a_ouvrir=#ENV{id_a_ouvrir}}
+	{swfobject=#CONFIG{gis/swfobject,oui}}
 	
 	// pas documentes
-	{control_move=#ENV{control_move}}{control_zoom=#ENV{control_zoom}}
+	{control_move=#ENV{control_move}}
+	{control_zoom=#ENV{control_zoom}}
 	
 	// done
 	
 	{latit}{lonxit}{zoom}{hauteur=#GET{height}}{largeur=#GET{width}}{id_carte_gis}{zoom_molette=#ENV{zoom_molette}}
 	{control}{control_type=#ENV{control_type}}{type}{limit=#ENV{limit}}
-	{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_article}{id_auteur}{recherche}
+	{id_rubrique=#GET{id_rubrique}}{id_secteur}{id_mot}{id_article}{id_auteur}{recherche}{id_groupe}
 ]
 
 <div id="map[(#GET{id})]" class="carte_gis"[(#ENV{style}|!={'non'}|?{' '})style="[width:(#GET{width});][ height:(#GET{height});]"]></div>

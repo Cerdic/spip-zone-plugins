@@ -69,6 +69,13 @@ function gis_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables(array('spip_gis'));
 			ecrire_meta($nom_meta_base_version,$current_version="2.0.1",'non');
 		}
+		if (version_compare($current_version, '2.0.2','<')){
+			// augmenter la précision des coords lat/lon
+			include_spip('base/abstract_sql');
+			sql_alter("TABLE spip_gis CHANGE lat lat DOUBLE NULL NULL");
+			sql_alter("TABLE spip_gis CHANGE lon lon DOUBLE NULL NULL");
+			ecrire_meta($nom_meta_base_version,$current_version="2.0.2",'non');
+		}
 	}
 }
 
