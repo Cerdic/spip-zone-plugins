@@ -24,7 +24,7 @@ function action_editer_montant_dist()
 
 	$c = $opt = array();
 	foreach (array(
-		'objet', 'ids_objet', 'le_parent', 'prix_ht', 'taxe'
+		'objet', 'ids_objet', 'le_parent', 'prix_ht', 'taxe','descriptif'
 		) as $champ){
 		$c[$champ] = _request($champ);
 		spip_log($champ ."=". _request($champ),"montants");

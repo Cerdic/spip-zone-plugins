@@ -8,16 +8,18 @@
 		<th><:montants:label_objet:></th>
 		<th><:montants:label_prix_ht:></th>
 		<th><:montants:label_parent:></th>
+		<th><:montants:label_descriptif:></th>
 		<th></th>
 		
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_montants(MONTANTS){pagination 10}>
+	<BOUCLE_liste_montants(MONTANTS){pagination 10}{par id_montant}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="#EDIT{objet}">#OBJET</td>
 			<td>#PRIX_HT</td>
 			<td><a href="[(#URL_ECRIRE{naviguer}|parametre_url{id_rubrique,#LE_PARENT})]" title="#INFO_TITRE{rubrique, #LE_PARENT}">#LE_PARENT</a></td>
+			<td>[(#DESCRIPTIF|Ptobr)]</td>
 			<td>
 				[(#AUTORISER{modifier,montant}|oui)
 					<a href="[(#URL_ECRIRE{montants_edit}|parametre_url{id_montant,#ID_MONTANT}|parametre_url{redirect,#SELF})]">
@@ -29,6 +31,7 @@
 					)]			
 				]
 			</td>
+			
 		</tr>
 	</BOUCLE_liste_montants>
 	</tbody>

@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'label_ids_objet'=>'Liste des identifiants (optionnel)',
 'label_le_parent'=>'Identifiant du parent (optionnel)',
 'label_taxe'=>'Taxe',
+'label_descriptif'=>'Commentaire',
 'label_parent'=>'Parent',
 'explication_ids_objet' =>'Identifiants de l\'objet qui ont ce montant -s&eacute;par&eacute;s par une virgule-',
 'explication_le_parent'=>'Num&eacute;ro identifiant du premier parent de la branche',
