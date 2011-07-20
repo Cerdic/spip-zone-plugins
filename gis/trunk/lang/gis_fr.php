@@ -52,6 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_gis_tous' => 'Points g&eacute;olocalis&eacute;s',
 	'info_id_objet' => 'N&deg;',
+	'info_liste_gis' => 'Points géolocalisés',
 	'info_liste_gis_objet' => 'Points li&eacute;s &agrave; cet objet',
 	'info_liste_objets_gis' => 'Objets li&eacute;s &agrave; ce point',
 	'info_numero_gis' => 'Point num&eacute;ro',
