@@ -1,15 +1,15 @@
 [(#SET{defaut_tri,#ARRAY{
 	date,-1,
 	id_doc2article,-1,
-	id_auteur,1
-	id_rubrique,1
+	id_auteur,1,
+	id_rubrique,1,
 	fichier,1
 }})
 ]<B_doc2article>
 #ANCRE_PAGINATION
 <div class="liste-elements doc2article">
 <table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>})</strong></caption>]
+[<caption><strong class="caption">(#ENV*{titre,<:info_tous_articles_presents:>}) [((#GRAND_TOTAL))]</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='id'>[(#TRI{id_doc2article,ID,ajax})]</th>
