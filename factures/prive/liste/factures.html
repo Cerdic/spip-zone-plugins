@@ -37,7 +37,7 @@
 [(#REM) On construit un tableau avec tous les types de documents; clause "id_type_facture IN" de la boucle ]
 	#SET{type,#ARRAY}
 	<BOUCLE_t(types_facture)>
-	#SET{type, #GET{type}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_type_facture}}}
+	#SET{type, #GET{type}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_TYPE_FACTURE}}}
 	</BOUCLE_t>
 
 
@@ -77,7 +77,7 @@
 	<select name="id_type_facture" onchange="this.form.submit()" >
 		<option value="">---</option>
 		<BOUCLE_t2(types_facture)>
-		<option value="#ID_type_facture" [(#GET{type}|=={#ID_type_facture}|?{'selected="selected"'})]>#NOM_type_facture</option>
+		<option value="#ID_TYPE_FACTURE" [(#GET{type}|=={#ID_TYPE_FACTURE}|?{'selected="selected"'})]>#TITRE</option>
 		</BOUCLE_t2>
 	</select>
 	
