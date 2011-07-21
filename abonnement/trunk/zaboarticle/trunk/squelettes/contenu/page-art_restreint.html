@@ -58,12 +58,11 @@
 	<//B_article_abonne>
  
 [(#GET{valide}|=={oui}|oui)
-<h3  style="background:url('#CHEMIN{img_pack/acces-ok-24.png}') left top no-repeat; padding-left:2em;">
+<h3  style="background:url('#CHEMIN{img_pack/acces-ok-24.png}') left top no-repeat; padding-left:2em; min-height:2em;">
 Vous etes autorise a voir l'article et a telecharger les documents</h3>
 
-<div style="border:1px solid #333; padding:2em; margin:1em;">
-<INCLURE{fond=inclure/merger_pdf,id_article,id_rubrique}>
-</div>
+
+<INCLURE{fond=inclure/documents_article,id_article,id_rubrique}>
 
 
 	        <div class="surlignable">
@@ -77,9 +76,6 @@ Vous etes autorise a voir l'article et a telecharger les documents</h3>
 		<h2 class="h2"><:info_ps:></h2>
 		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
 	</div>]
-
-	[(#REM) Gestion du portfolio et des documents ]
-	[(#INCLURE{fond=inclure/documents}{id_article})]
 	
 	
 	[(#REM) Petition :
@@ -96,7 +92,7 @@ Vous etes autorise a voir l'article et a telecharger les documents</h3>
 
 ]
 
-<BOUCLE_autorise(CONDITION){si #GET{valide}|!={'non'}}>
+<BOUCLE_autorise(CONDITION){si #GET{valide}|=={'oui'}}>
 [(#REM) autorise a voir l'article ]
 
 </BOUCLE_autorise>

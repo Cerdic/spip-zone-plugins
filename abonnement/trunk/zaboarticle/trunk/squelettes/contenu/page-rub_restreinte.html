@@ -44,12 +44,12 @@ todo colle pas car archives font moins que toutes les revues?... question]
 	<//B_rubrique_abonne>	
  
 [(#GET{valide}|=={oui}|oui)
-<h3 style="background:url('#CHEMIN{img_pack/acces-ok-24.png}') left top no-repeat; padding-left:2em;">
-Vous etes autorise a voir la rubrique et a telecharger les documents</h3>
+<h3 style="background:url('#CHEMIN{img_pack/acces-ok-24.png}') left top no-repeat; padding-left:2em; min-height:2em">
+Vous etes autorise a voir la rubrique et a telecharger les documents
+</h3>
 
-<div style="border:1px solid #333; padding:2em; margin:1em;">
-<INCLURE{fond=inclure/merger_pdf,id_rubrique,id_rubrique}>
-</div>
+
+<INCLURE{fond=inclure/documents_rubrique,id_rubrique}>
 
 
 	        <div class="surlignable">
@@ -63,8 +63,7 @@ Vous etes autorise a voir la rubrique et a telecharger les documents</h3>
 		<div class="#EDIT{ps} surlignable">(#PS|image_reduire{500,0})</div>
 	</div>]
 
-	[(#REM) Gestion du portfolio et des documents ]
-	[(#INCLURE{fond=inclure/documents}{id_rubrique})]
+
 
 	
 	[<div class="notes surlignable"><h2 class="h2 pas_surlignable"><:info_notes:></h2>(#NOTES)</div>]

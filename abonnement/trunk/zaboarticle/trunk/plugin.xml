@@ -2,14 +2,14 @@
 	<nom>Z-aboarticle</nom>
 	<auteur>Anne-lise Martenot (elastick.net) - BoOz (booz@reo.net)
 	</auteur>
-	<version>0.1</version>
+	<version>0.2</version>
 	<etat>
 	test
 	</etat>
 	<icon>img/zaboarticle_48.png</icon>
 	<description>
-   G&eacute;rer des abonnements aux articles, n&eacute;cessite les plugins acces restreint et abonnement.
-   On peut ajouter un systeme de commande payant lié à l'abonnement.
+   G&eacute;rer des abonnements aux articles et aux rubriques, n&eacute;cessite les plugins acces restreint et abonnement.
+   On peut ajouter un systeme de commande payant li&eacute; à l'abonnement.
     </description>
 	<lien>http://www.spip-contrib.net/</lien>
 	<prefix>zaboarticle</prefix>
