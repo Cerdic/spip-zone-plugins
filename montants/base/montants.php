@@ -24,8 +24,8 @@ function montants_declarer_tables_principales($tables_principales){
 			"ids_objet"	=> "text NOT NULL",
 			"le_parent"	=> "int(10) NOT NULL",
 			"prix_ht" 	=> "float not null default 0",
-			//"taxe"		=> "decimal(4,3) default null",
-			//"descriptif"	=> "text NOT NULL",
+			"taxe"		=> "decimal(4,3) default null",
+			"descriptif"	=> "text NOT NULL",
 			);
 
 	$spip_montants_key = array(
