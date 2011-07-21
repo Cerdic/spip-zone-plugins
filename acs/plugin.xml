@@ -80,9 +80,6 @@
 	</pipeline>
 
 	<necessite id='spip' version='[1.9.2;]' />
-	<utilise id='cfg' version='[1.12.3;]' />
-	<utilise id='crayons' version='[1.7;]' />
-	<utilise id='palette' version='[1.2;]' />
 
 	<categorie>outil</categorie>
 </plugin>

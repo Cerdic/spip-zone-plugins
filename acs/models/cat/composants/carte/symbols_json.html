@@ -17,7 +17,7 @@ Parameters:
 - maxmots: nb max de pictos de mots-clés géoréférencés.
 - maxrubs: nb max de pictos de rubriques géoréférencés.
 - maxarts: nb max de pictos d'articles géoréférencés.
-- limit : limits results to n lasts when maxrubs, or maxarts is NOT defined.
+- limit : limits results to n lasts when maxrubs, maxarts or maxmots is NOT defined.
 
 ]{"pictos": [<BOUCLE_mots(MOTS gis_mots){tout}{id_groupe ?}{id_mot ?}{recherche ?}{lat >= #ENV{minlat}}{lat <= #ENV{maxlat}}{lonx >= #ENV{minlon}}{lonx <= #ENV{maxlon}}{0,#ENV{maxmots,#ENV{limit,10}}}{","}>[
   (#SET{icon,[(#LOGO_MOT_NORMAL|extraire_attribut{src}|url_absolue)]})][

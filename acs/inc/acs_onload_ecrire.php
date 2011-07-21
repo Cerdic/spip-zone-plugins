@@ -79,7 +79,7 @@ function acs_exit() {
   echo '<br /><div style="width: 50%">';
   echo '<h2 class="alert">'._T('avis_non_acces_page').'</h2>';
   if (in_array(_request('exec'), $GLOBALS['ACS_ENFER']))
-    echo avertissement_config();
+    echo @avertissement_config();
   echo '</div>';
   echo fin_gauche(), fin_page();
   exit;

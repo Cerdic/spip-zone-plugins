@@ -7,8 +7,6 @@
 Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-Ce fichier-source est formaté pour ne pas générer de sauts de lignes inutiles.
-
 ]#SET{v1,#EVAL{'acsCadre'.'#NIC'.'1'}}
 #SET{v2,#EVAL{'acsCadre'.'#NIC'.'2'}}
 #SET{v3,#EVAL{'acsCadre'.'#NIC'.'3'}}
@@ -17,22 +15,23 @@ Ce fichier-source est formaté pour ne pas générer de sauts de lignes inutiles
 #SET{v6,#EVAL{'acsCadre'.'#NIC'.'6'}}
 #SET{v7,#EVAL{'acsCadre'.'#NIC'.'7'}}
 #SET{v8,#EVAL{'acsCadre'.'#NIC'.'8'}}
-#SET{c1,#VAR{#GET{v1}}|cclass}
-#SET{c2,#VAR{#GET{v2}}|cclass}
-#SET{c3,#VAR{#GET{v3}}|cclass}
-#SET{c4,#VAR{#GET{v4}}|cclass}
-#SET{c5,#VAR{#GET{v5}}|cclass}
-#SET{c6,#VAR{#GET{v6}}|cclass}
-#SET{c7,#VAR{#GET{v7}}|cclass}
-#SET{c8,#VAR{#GET{v8}}|cclass}
-#SET{n1,#VAR{#GET{v1}}|cnic}
-#SET{n2,#VAR{#GET{v2}}|cnic}
-#SET{n3,#VAR{#GET{v3}}|cnic}
-#SET{n4,#VAR{#GET{v4}}|cnic}
-#SET{n5,#VAR{#GET{v5}}|cnic}
-#SET{n6,#VAR{#GET{v6}}|cnic}
-#SET{n7,#VAR{#GET{v7}}|cnic}
-#SET{n8,#VAR{#GET{v8}}|cnic}
+#SET{c1,#VAR{#GET{v1}}|strtok{-}}
+#SET{c2,#VAR{#GET{v2}}|strtok{-}}
+#SET{c3,#VAR{#GET{v3}}|strtok{-}}
+#SET{c4,#VAR{#GET{v4}}|strtok{-}}
+#SET{c5,#VAR{#GET{v5}}|strtok{-}}
+#SET{c6,#VAR{#GET{v6}}|strtok{-}}
+#SET{c7,#VAR{#GET{v7}}|strtok{-}}
+#SET{c8,#VAR{#GET{v8}}|strtok{-}}
+#SET{reg,\-([0-9]+)$}
+#SET{n1,#VAR{#GET{v1}}|match{#GET{reg}, Uims, 1}}
+#SET{n2,#VAR{#GET{v2}}|match{#GET{reg}, Uims, 1}}
+#SET{n3,#VAR{#GET{v3}}|match{#GET{reg}, Uims, 1}}
+#SET{n4,#VAR{#GET{v4}}|match{#GET{reg}, Uims, 1}}
+#SET{n5,#VAR{#GET{v5}}|match{#GET{reg}, Uims, 1}}
+#SET{n6,#VAR{#GET{v6}}|match{#GET{reg}, Uims, 1}}
+#SET{n7,#VAR{#GET{v7}}|match{#GET{reg}, Uims, 1}}
+#SET{n8,#VAR{#GET{v8}}|match{#GET{reg}, Uims, 1}}
 #SET{use1,#VAR{#EVAL{acs(#GET{c1}|ucfirst)(#GET{n1})Use}}}
 #SET{use2,#VAR{#EVAL{acs(#GET{c2}|ucfirst)(#GET{n2})Use}}}
 #SET{use3,#VAR{#EVAL{acs(#GET{c3}|ucfirst)(#GET{n3})Use}}}

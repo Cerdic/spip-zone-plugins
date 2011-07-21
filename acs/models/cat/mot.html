@@ -12,7 +12,7 @@ Cette page peut dépendre du groupe de mot-clés: si le champ descriptif du grou
 contient "<nic-page=nnnn>", alors le cadre de la page est le cadre n° nnnn à la
 place du cadre par défaut (nic=2150).
 
-]<BOUCLE_mot(MOTS) {id_mot}>[
+]<BOUCLE_mot(MOTS){id_mot}>[
 (#CONFIG{langues_utilisees}|detecte_langue{#SELF})]#SET{show_type,^[^_].*}[
 (#SET{title,[(#TYPE|supprimer_numero|match{#GET{show_type},i,0}) - ][(#TITRE|textebrut|texte_backend)]})][
 (#SET{mdescription,[(#DESCRIPTIF|couper{150}|textebrut)]})][
