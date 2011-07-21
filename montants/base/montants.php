@@ -23,7 +23,7 @@ function montants_declarer_tables_principales($tables_principales){
 			"objet" 	=> "text NOT NULL",
 			"ids_objet"	=> "text NOT NULL",
 			"le_parent"	=> "int(10) NOT NULL",
-			"prix_ht" 	=> "float not null default 0",
+			"prix_ht" 	=> "float not null default ''",
 			"taxe"		=> "decimal(4,3) default null",
 			"descriptif"	=> "text NOT NULL",
 			);

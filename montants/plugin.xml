@@ -2,8 +2,8 @@
 	<nom>Montants</nom>
 	<auteur>Anne-lise Martenot - elastick.net</auteur>
 	<licence>GPL v3</licence>
-	<version>0.3</version>
-	<version_base>0.2</version_base>
+	<version>0.4</version>
+	<version_base>0.3</version_base>
 	<etat>dev</etat>
 	<description>Ce plugin -grace au pipeline_prix- permet d'avoir un prix par defaut pour tout objet SPIP:
 	article, mot, document, rubrique... ou autre. On peut configurer la liste des identifiants ou du parent de la branche.

@@ -27,6 +27,11 @@ function montants_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 	
+	if (version_compare($current_version,"0.2","<=")){
+		sql_alter("TABLE spip_montants CHANGE le_parent le_parent tinytext NOT NULL");
+		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
+	}
+	
 	if ($current_version=="0.0") {
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
