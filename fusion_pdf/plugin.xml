@@ -1,0 +1,22 @@
+<plugin>
+	<nom>Fusion pdf</nom>
+	<auteur>Anne-lise Martenot (elastick.net)</auteur>
+	<version>0.1</version>
+	<etat>test</etat>
+	<icon>img/fusionpdf_120.png</icon>
+	<description>
+    Fabriquer un pdf -de plusieurs pages- a partir d'un autre.
+    - Attention MODIF essentielle sur fpdf/fpdf.php: fusion marche uniquement sur file (case 'F') ligne 1049 remplacer break par return true;
+    </description>
+	<lien>http://www.spip-contrib.net/</lien>
+	<prefix>fusionpdf</prefix>
+	<fonctions>inc/fusionpdf_fonctions.php</fonctions>
+	
+    <chemin dir='' />
+	<chemin dir="squelettes" />
+	<necessite id="lib:PDFMerger" src="http://pdfmerger.codeplex.com/" />
+
+    <traduire gestionnaire="salvatore" module="fusionpdf" reference="fr" />
+
+	<categorie>divers</categorie>
+</plugin>
