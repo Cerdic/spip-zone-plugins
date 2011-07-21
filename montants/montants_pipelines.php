@@ -42,6 +42,7 @@ function montants_prix_ht($flux){
 	$prixdefaut=$flux['data'];
 	$type_objet=$flux['args']['type_objet'];
 	$id_objet=$flux['args']['id_objet'];
+	$ids_objet=array();
 	
 	//si l'objet n'a pas de prix propre
 	if ($prixdefaut==0 && $id_objet>0){

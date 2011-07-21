@@ -24,6 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'creer_montant' => 'Cr&eacute;er un nouveau montant',
 'prix_defaut'=>'Prix par defaut :',
 'modifier_prix_defaut'=>'Modifier',
+'bouton_supprimer_montants_confirmer' => 'Etes-vous s&ucirc;r de vouloir supprimer le montant ?',
+
 
 
 );

@@ -20,7 +20,13 @@ function montants_upgrade($nom_meta_base_version, $version_cible){
 	
 	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
-
+	
+	if (version_compare($current_version,"0.1","<=")){
+		sql_alter("TABLE spip_montants ADD taxe decimal(4,3) default null");
+		sql_alter("TABLE spip_montants ADD descriptif text NOT NULL");
+		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
+	}
+	
 	if ($current_version=="0.0") {
 		creer_base();
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
