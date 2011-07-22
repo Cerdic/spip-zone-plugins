@@ -1,0 +1,28 @@
+[(#REM) cf plugin abonnements -> changer montant des abonnements par prix etc ]
+<B_abonnements>
+	<div class="liste_abonnements">
+	<h2><:abo:les_abonnements:></h2>
+	<table class="spip">
+		<BOUCLE_abonnements(ABONNEMENTS){par num titre, titre}>
+		<tr class="row_[(#COMPTEUR_BOUCLE|alterner{odd, even})]">
+			<BOUCLE_documents(DOCUMENTS){id_abonnement}{0,1}>
+			<td>[(#URL_DOCUMENT|image_reduire{100})]</td>
+			</BOUCLE_documents>
+			
+		<td><a href="[(#URL_PAGE{abonnement}|parametre_url{id_abonnement,#ID_ABONNEMENT})]" title="<:abo:en_savoir_plus:>">#TITRE</a></td>
+		<td style="display:none">#DESCRIPTIF</td>
+		<td>#PRIX</td>
+		<td style='height:50px; width:100px'>
+		
+		[(#SET{txtaction,<:ajouter_au_panier:>})]
+		<BOUCLE_auteur_abonnement(CONTACTS_ABONNEMENTS){id_abonnement}{id_auteur = #SESSION{id_auteur}}>
+			[(#SET{txtaction,<:abo:renouveller_mon_abonnement:>})]
+		</BOUCLE_auteur_abonnement>
+		[(#BOUTON_ACTION{#GET{txtaction},
+		#URL_ACTION_AUTEUR{remplir_panier,abonnement-#ID_ABONNEMENT-1,#ENV{vers,#SELF}},ajax})] 
+		</td>
+		</tr>
+		</BOUCLE_abonnements>
+	</table>
+	</div>
+</B_abonnements><:aucun_abonnement:><//B_abonnements>

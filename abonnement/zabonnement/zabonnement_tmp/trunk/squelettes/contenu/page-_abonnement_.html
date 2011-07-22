@@ -1,0 +1,47 @@
+<style>
+ul.menu-zabonnement{margin:0;padding:0;list-style-type:none;text-transform:lowercase;}
+.menu-zabonnement li{display: inline; margin-right:1.2em;}
+#contenu_zabonnement{margin-top:2em;}
+#contenu_zabonnement .h3{color:#777}
+#navigation{font-size:0.7em}
+.liste_commande .row_even{font-weight:bold;}
+.continuer{border:1px solid #999; background:#F7F7F7; padding:1em; float:right; width:90px; text-align:center}
+.submit:hover{background:#B9ED9A}
+.commande thead tr th{background:#ccc; border:1px solid #fff; border-width:0 1px 0 1px;}
+.liste_abonnement span{display:block; color:#999; font-style:italic}</style>
+
+<INCLURE{fond=inclure/menuzabonnement}{env}>
+
+<div id="contenu_zabonnement">     
+		
+     	[(#REM) 1 -les abonnements ]
+	[(#ENV{appel}|=={""}|oui)
+			[(#SESSION{nom}|oui)
+        		<INCLURE{fond=inclure/mes_abonnements,env,vers=#URL_PAGE{_abonnement_}|parametre_url{appel,mon_panier}}>
+        		]
+		<INCLURE{fond=inclure/les_abonnements}{env,vers=#SELF|parametre_url{appel,mon_panier}}>
+	]
+	
+	[(#REM) 2 - mon_panier ]
+	[(#ENV{appel}|=={"mon_panier"}|oui)
+		<INCLURE{fond=inclure/mon_panier}{env}>
+	]
+	
+	[(#REM) 3 - mes_coordonnees ]
+	[(#ENV{appel}|=={"mes_coordonnees"}|oui)
+		<INCLURE{fond=inclure/mes_coordonnees}{env}>
+		<!-- todo pipeline mes_coordonnees > ma_commande enregistre -->
+	]
+	
+	[(#REM) 4 - ma_commande ]
+	[(#ENV{appel}|=={"ma_commande"}|oui)
+		<INCLURE{fond=inclure/ma_commande}{env}>
+	]
+	
+	[(#REM) 5 - paiement et retour banque ]
+	[(#ENV{appel}|=={"paiement"}|oui)
+		<INCLURE{fond=inclure/paiement}{env}>
+	]
+	 
+
+</div>
