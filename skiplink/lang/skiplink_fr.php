@@ -26,8 +26,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'go_back' => 'Retour',
 
 /* go_home */
-'accueil_site' => 'Accueil',
-'accueil' => 'Accueil',
 'home' => 'Accueil',
 'go_home' => 'Retour &agrave; l\'accueil',
 

@@ -19,6 +19,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bottom' => 'Bottom',
 'go_bottom' => 'Bottom',
 
+/* yoyo */
+
+/* go_back */
+'back' => 'Back',
+'go_back' => 'Back',
+
+/* go_home */
+'home' => 'Home',
+'go_home' => 'Home'
+
 );
 
 ?>
