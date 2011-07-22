@@ -1,4 +1,4 @@
-#SET{valeur,(#ENV{valeur_extra,#ARRAY}|explode{","})}
+#SET{valeur,(#ENV{valeur_extra,''}|explode{","})}
 
 <li class="editer_[(#ENV{champ_extra})][ (#ENV{obligatoire_extra})][ (#ENV{erreur_extra}|oui)erreur]">
 	<label for="#ENV{champ_extra}">#ENV{label_extra}</label>
