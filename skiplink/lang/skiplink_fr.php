@@ -10,13 +10,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'go_search' => 'Aller &agrave; la recherche',
 
 /* go_top */
-'ancre_top' => 'haut',
-'haut' => 'Haut',
+'a_top' => 'haut',
+'top' => 'Haut',
 'go_top' => 'Remonter en haut de la page',
 
 /* go_bottom */
-'bottom' => 'bas',
-'bas' => 'Bas',
+'a_bottom' => 'bas',
+'bottom' => 'Bas',
 'go_bottom' => 'Bas de page',
 
 /* yoyo */
