@@ -21,7 +21,7 @@
 	<prefix>iextras</prefix>
 	
 	<necessite id="SPIP" version="[2.0.0;3.0.0-dev]" />
-	<necessite id="cextras" version="[1.4.5;]" />
+	<necessite id="cextras" version="[1.10.0;]" />
 	<necessite id="spip_bonux" version="[2.0.0;]" />
 	<necessite id="saisies" version="[1.13.0;]" />
 	
