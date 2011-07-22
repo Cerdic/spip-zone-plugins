@@ -4,6 +4,14 @@
 
 -------------------------------------------------------------- */
 
-@media print { .skiplink { display: none; } }
+#raccourcis { z-index: 100; }
+
+.yoyo * { vertical-align: middle; }
+.yoyo a { display: block; }
+.yoyo .sep { display: none; }
+
+@media print {
+.skiplink { display: none; }
+}
 
 /* end */

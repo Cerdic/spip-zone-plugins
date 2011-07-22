@@ -1,6 +1,6 @@
 <?php
 
-// This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
+// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
