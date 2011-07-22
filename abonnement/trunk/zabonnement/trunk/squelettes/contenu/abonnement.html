@@ -5,6 +5,7 @@
 
 <div class="contenu-principal">
 	<div class="cartouche">
+	[(#LOGO_ABONNEMENT|image_reduire{180})]
 		<h1 class="h1 #EDIT{titre}">#TITRE</h1>
 		<h2 class="h2"><:abo:label_duree:> #DUREE #PERIODE</h2>
 		<h2>#PRIX</h2>
@@ -13,8 +14,6 @@
 	<div class="surlignable">
 		[<div class="#EDIT{descriptif}">(#DESCRIPTIF|image_reduire{500,0})</div>]
 	</div>
-
-	[<div><:abo:nous_sommes_le:> [(#GET{today}|affdate{nom_jour})] (#GET{today}|affdate)</div>]
 	
 	<BOUCLE_votreabo(CONTACTS_ABONNEMENTS){id_abonnement}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}>
 	<div style="padding:1em; margin:1em; border:1Px solid red">
@@ -27,26 +26,6 @@
 	]
 	[(#GET{today}|>{[(#VALIDITE)]}|oui) <:abo:valide_echu_depuis{date=#GET{datefin}}:>
 		[(#SET{boutontexte,<:abo:je_me_reabonne:>})]
-	]
-	
-	[(#REM) 
-		Todo clarifier les possibilites d'acces ...
-		-Prérequis : bloquer au moins une zone restreinte
-		
-		Les 4 possibilites d'accéder aux pages, par ordre
-		-acces a un article (pas besoin ici)
-		-acces a une rubrique
-		-abonne a un abonnement durant une periode aux dates exactes de parutions
-		-abonne a un abonnement definissant une zone d'abonnement (gere en amont par acces restreint, pas besoin ici)
-	
-		[statut_abonnement:(#STATUT_ABONNEMENT)]
-		
-		
-		ne pas creer du tout de zone et ne pas l'ouvrir à l'abonne ?
-		suivant la zone d'origine #IDS_ZONE...
-		On ferme la zone entière de toute manière
-		on ouvre au cas par cas dans un squelette unique et voila, pas de risque de fuite inter-zone etc
-		
 	]
 	
 		[(#REM) <!--  acces a une rubrique aux dates exactes -->]
