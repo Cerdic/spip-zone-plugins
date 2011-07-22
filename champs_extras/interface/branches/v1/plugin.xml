@@ -8,7 +8,7 @@
 	</nom>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.2.2</version>
+	<version>1.3.0</version>
 	<icon>images/iextras-64.png</icon>
 	<description>
 		<multi>
@@ -22,8 +22,8 @@
 	
 	<necessite id="SPIP" version="[2.0.0;3.0.0-dev]" />
 	<necessite id="cextras" version="[1.4.5;]" />
-	<necessite id="spip_bonux" version="[1.2;]" />
-	<necessite id="saisies" version="[1.6.1;]" />
+	<necessite id="spip_bonux" version="[2.0.0;]" />
+	<necessite id="saisies" version="[1.13.0;]" />
 	
 	<pipeline>
 		<nom>declarer_champs_extras</nom>

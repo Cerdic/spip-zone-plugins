@@ -4,7 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // pouvoir utiliser la class ChampExtra
 include_spip('inc/cextras');
 
-
 // recuperer un tableau des indications fournies pour des selections (enum, radio...)
 function cextras_enum_array($enum) {
 	$enums = array();
@@ -15,7 +14,7 @@ function cextras_enum_array($enum) {
 	} else {
 		foreach ($vals = explode("\n", $enum) as $x) {
 			list($cle, $desc) = explode(',', trim($x), 2);
-			$enums[$cle] = _T($desc);
+			$enums[$cle] = _TT($desc);
 		}
 	}
 	return $enums;	
@@ -81,10 +80,10 @@ function cextras_creer_contexte($c, $contexte_flux, $prefixe='') {
 	$contexte = array();
 	$nom_champ = $prefixe . $c->champ;
 	$contexte['champ_extra'] = $nom_champ;
-	$contexte['label_extra'] = _T($c->label);
-	$contexte['precisions_extra'] = _T($c->precisions);
+	$contexte['label_extra'] = _TT($c->label);
+	$contexte['precisions_extra'] = _TT($c->precisions);
 	if (isset($c->saisie_parametres['explication']) and $c->saisie_parametres['explication'])
-		$contexte['precisions_extra'] = _T($c->saisie_parametres['explication']);
+		$contexte['precisions_extra'] = _TT($c->saisie_parametres['explication']);
 	$contexte['obligatoire_extra'] = $c->obligatoire ? 'obligatoire' : '';
 	$contexte['verifier_extra'] = $c->verifier;
 	$contexte['verifier_options_extra'] = $c->verifier_options;

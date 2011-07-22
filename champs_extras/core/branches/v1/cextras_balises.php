@@ -1,6 +1,30 @@
 <?php
 
 
+// pouvoir utiliser _T_ou_typo si present
+function _TT($texte) {
+	static $T = null;
+	if (!isset($T)) {
+		$T = function_exists('_T_ou_typo') ? '_T_ou_typo' : false ;
+	}
+	$change = false;
+	// tenter de traiter les "<multi>" et "<:x:>"
+	if ($T) {
+		$t = $T($texte);
+		if ($t !== $texte) {
+			$change = true;
+		}
+		$texte = $t;
+	}
+	// tenter comme avant avec _T(x)
+	if (!$change) {
+		$texte = _T($texte);
+	}
+	
+	return $texte;
+}
+
+
 /**
  * Retourne la classe ChampExtra du champ demande
  * permettant ainsi d'exploiter ses donnees.
@@ -43,11 +67,8 @@ function calculer_balise_CHAMP_EXTRA($objet, $colonne, $demande='') {
 	
 	// appliquer _T ou typo
 	if (is_string($chaine) and !$p->etoile) {
-		if (strpos($chaine, "<multi>") !== false) {
-			$chaine = typo($chaine);
-		} else {
-			$chaine = _T($chaine);
-		}
+		// '<multi>' ou '<:x:>' ou 'x:y'
+		$chaine = _TT($chaine);
 	}
 	
 	return $chaine;
