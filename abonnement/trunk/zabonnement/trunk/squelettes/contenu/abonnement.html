@@ -58,8 +58,10 @@
 	<//B_votreabo>
 	
 	<div style='height:50px; width:100px; margin:1em'>
-	[(#BOUTON_ACTION{[(#GET{boutontexte})],#URL_ACTION_AUTEUR{remplir_panier,abonnement-#ID_ABONNEMENT-1,#URL_PAGE{panier}},ajax})] 
-	</div>
+	[(#BOUTON_ACTION{[(#GET{boutontexte})],
+		#URL_ACTION_AUTEUR{remplir_panier,abonnement-#ID_ABONNEMENT-1,#URL_PAGE{_abonnement_}|parametre_url{appel,mon_panier}},ajax})]
+		
+		</div>
 	
 
 </div>
