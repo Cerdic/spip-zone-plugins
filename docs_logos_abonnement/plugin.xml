@@ -1,0 +1,29 @@
+<plugin>
+	<nom>Images sur les abonnements</nom>
+	<auteur>Guy Cesaro - Touti</auteur>
+	<version>1.0</version>
+	<prefix>imgabo</prefix>
+	<icon>img/imgabo_48.png</icon>
+	<etat>test</etat>
+	<description>
+	<multi>
+	[fr]Documents et Logo sur les abonnements
+	[es]Documentos y el logotipo en los suscripciones
+	[en]Documents and logo on subscriptions
+	[de]Dokumente und logo auf der abonnement
+	</multi>
+	</description>
+	<fonctions>imgabo_fonctions.php</fonctions>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>imgabo_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>imgabo_pipelines.php</inclure>
+	</pipeline>
+	<categorie>outil</categorie>
+	<necessite id='SPIP' version='[2.0;]' />
+	<necessite id="abonnement" version='[1.0;]'/>
+	<necessite id="medias" version='[1.4.5;]'/>
+</plugin>
