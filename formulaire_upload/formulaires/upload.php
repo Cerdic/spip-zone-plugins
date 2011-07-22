@@ -40,9 +40,9 @@ function formulaires_upload_traiter_dist($objet, $id_objet, $fond_documents){
 	foreach (_request('supprimer') as $supprimer) {
 		if ($supprimer = intval($supprimer)) {
 			include_spip('inc/autoriser');
+			sql_delete('spip_documents_liens', 'id_document='.$supprimer);
 			$supprimer_document = charger_fonction('supprimer_document','action');
 			$supprimer_document($supprimer);
-			sql_delete('spip_documents_liens', 'id_document='.$supprimer);
 			$invalider = true;
 			$res['message_ok'] = _T("formupload:msg_doc_deleted");
 			spip_log("supprimer document ($type)".$supprimer, 'upload');
