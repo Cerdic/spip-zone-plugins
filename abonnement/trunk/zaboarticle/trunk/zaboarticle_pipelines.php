@@ -88,29 +88,32 @@ $flux['args']['action'] = modifier
  ne sert actuellement que dans le backoffice en 'cadeau' (statut paye sans lien a une commande)
  */
 function zaboarticle_post_edition($flux){
-	
+		
 	// lors de l'edition d'un auteur
 	if ($flux['args']['table']=='spip_auteurs') {
 		
 		$id_auteur = $flux['args']['id_objet'];
 		$articles = _request('articles') ;
+		$rubriques = _request('rubriques') ; //todo?
+		$statut_abonnement='offert';
 		
 		if ($articles && is_array($articles)) {
 			foreach($articles as $key => $id_article){
 				if($id_article!='non'){
 				$article = sql_fetsel('*', 'spip_articles', 'id_article = ' . $id_article);
 				if (!$article) {
-					spip_log("article $id_article inexistant");
+					spip_log("article $id_article inexistant",'abonnement');
 					die("article $id_article inexistant");
 				}
-				
+				//todo verifier avec plugin montants?
 				$calculer_prix = charger_fonction('prix', 'inc/');
-				$prix = $calculer_prix('article',$id_article);
+				$prix=($statut_abonnement=='offert')?'':$calculer_prix('article',$id_article);//pas de prix puisque offert
 				$date = date('Y-m-d H:i:s');
 				$duree = 3; //valable 3 jours
 				$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
 
-					
+				spip_log("zaboarticle_post_edition article $id_article prix $prix date $validite",'abonnement');
+
 				if (!$id = sql_getfetsel('id_auteur',
 					'spip_contacts_abonnements',
 					'id_auteur='.$id_auteur.' AND id_objet='.sql_quote($id_article)." AND objet='article'")
@@ -121,7 +124,7 @@ function zaboarticle_post_edition($flux){
 					'id_objet' => $id_article,
 					'date'=>$date,
 					'validite'=>$validite,
-					'statut_abonnement'=>'paye',
+					'statut_abonnement'=>$statut_abonnement,
 					'prix'=>$prix));
 			}
 			}	
@@ -135,7 +138,7 @@ function zaboarticle_post_edition($flux){
 					'id_auteur' => $id_auteur,
 					'objet'=>'article',
 					'id_objet' => $id_article,
-					'statut_abonnement' => 'paye'
+					'statut_abonnement' => $statut_abonnement
 				),
 				'data' => $auteur
 			)

@@ -24,6 +24,7 @@
 		</tr>
 	</thead>
 	<tbody>
+	
 	<BOUCLE_liste_abonnements(CONTACTS_ABONNEMENTS)
 		{id_auteur?}{id_abonnement?}{where?}{objet?}
 		{stade_relance ?}{tri #ENV{order,date},#GET{defaut_tri}}
@@ -31,6 +32,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='id'>---</td>
 			<td class='commande'>
+			#SET{id_commande,''}
 				<BOUCLE_quellecommand(COMMANDES_DETAILS){id_commandes_detail}>
 				<a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a>#SET{id_commande,#ID_COMMANDE}
 				</BOUCLE_quellecommand><:abo:aucune_commande:><//B_quellecommand>
@@ -40,26 +42,19 @@
 			<td class='date'>[(#DATE|affdate)]</td>
 			<td class='date validite'>[(#VALIDITE|affdate)]</td>
 			<td class='descriptif'>
-			<BOUCLE_zabo(CONDITION){si #OBJET|=={abonnement}}>
-					<BOUCLE_detail_abonnement(ABONNEMENTS){id_abonnement=#ID_OBJET}>
-					<:abo:abonnement:> <a href="#URL_ECRIRE{abonnements}">[(#TITRE)]</a>
-					#SET{prix,#PRIX}
-					</BOUCLE_detail_abonnement>
-			</BOUCLE_zabo>
-			<BOUCLE_zarti(CONDITION){si #OBJET|=={article}}>
-					<BOUCLE_detail_article(ARTICLES){id_article=#ID_OBJET}>
-					<:abo:article:> <a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">[(#TITRE)]</a>
-					#SET{prix,#PRIX}
-					</BOUCLE_detail_article>
-			</BOUCLE_zarti>
-			<BOUCLE_zrubi(CONDITION){si #OBJET|=={rubrique}}>
-					<BOUCLE_detail_rubrique(RUBRIQUES){id_rubrique=#ID_OBJET}>
-					<:abo:rubrique:> <a href="#URL_ECRIRE{naviguer,id_rubrique=#ID_RUBRIQUE}">[(#TITRE)]</a>
-					#SET{prix,#PRIX}
-					</BOUCLE_detail_rubrique>
-			</BOUCLE_zrubi>
+			#SET{lienobjet,#}
+			[(#OBJET|=={abonnement}|oui)
+				#SET{lienobjet,#URL_ECRIRE{abonnements}}
+			]
+			[(#OBJET|=={rubrique}|oui)
+				#SET{lienobjet,#URL_ECRIRE{naviguer,id_rubrique=#ID_OBJET}}
+			]
+			[(#OBJET|=={article}|oui)
+				#SET{lienobjet,#URL_ECRIRE{articles,id_article=#ID_OBJET}}
+			]
+			[(#VAL{abo:#OBJET}|_T)] <a href="#GET{lienobjet}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
 			</td>
-			<td class='montant'>#GET{prix}</td>
+			<td class='montant'>[(#STATUT_ABONNEMENT|=={offert}|non) #PRIX{#OBJET,#ID_OBJET}]</td>
 			<td class='action'>
 			[(#GET{id_commande}|oui)
 				[(#AUTORISER{voir,abonnement,#ID_ABONNEMENT})

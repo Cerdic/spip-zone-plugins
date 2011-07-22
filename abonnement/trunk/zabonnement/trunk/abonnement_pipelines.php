@@ -154,7 +154,7 @@ function abonnement_post_edition($flux){
 		$id_auteur = $flux['args']['id_objet'];
 		$abonnements = _request('abonnements') ;
 		$echeances = _request('validites');
-		$statut_abonnement_prive='offert';
+		$statut_abonnement='offert';
 		
 		if ($abonnements && is_array($abonnements)) {
 			$objet='abonnement';
@@ -170,7 +170,7 @@ function abonnement_post_edition($flux){
 					// abonnement non trouve ?
 					$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = ' . $id_objet);
 					if (!$abonnement) {
-						spip_log("abonnement $id_objet inexistant");
+						spip_log("abonnement $id_objet inexistant",'abonnement');
 						die("abonnement $id_objet inexistant");
 					}
 					
@@ -187,7 +187,11 @@ function abonnement_post_edition($flux){
 						$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$duree,date('j'),date('Y')));
 					}
 					
-					spip_log("abonnement_post_edition $objet et $table pour $validite",'abonnement');
+					
+					$prix=($statut_abonnement=='offert')?'':$abonnement['prix'];//pas de prix puisque offert
+
+					
+					spip_log("abonnement_post_edition $objet $id_objet et $table pour $validite",'abonnement');
 
 					// attention aux doublons, on verifie 
 					$deja = sql_fetsel('id_auteur,validite','spip_contacts_abonnements','id_auteur='.$id_auteur.' and id_objet='.sql_quote($id_objet)." and objet='$objet'");
@@ -203,8 +207,8 @@ function abonnement_post_edition($flux){
 							'objet'=>'abonnement',
 							'date'=>$date,
 							'validite'=>$validite,
-							'statut_abonnement'=>$statut_abonnement_prive,
-							'prix'=>$abonnement['prix']
+							'statut_abonnement'=>$statut_abonnement,
+							'prix'=>$prix
 							));
 					}else{
 						spip_log("abonnement_post_edition existe deja $objet et $table pour $validite",'abonnement');
@@ -229,7 +233,7 @@ function abonnement_post_edition($flux){
 					'id_auteur' => $id_auteur,
 					'objet'=>$objet,
 					'id_objet' => $id_objet,
-					'statut_abonnement' => $statut_abonnement_prive
+					'statut_abonnement' => $statut_abonnement
 				),
 				'data' => $objets
 			)

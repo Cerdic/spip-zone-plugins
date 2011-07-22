@@ -25,7 +25,7 @@
 		<nom>post_insertion</nom>
 		<inclure>zaboarticle_pipelines.php</inclure>
 	</pipeline> 
-		<pipeline>
+	<pipeline>
 		<nom>post_edition</nom>
 		<inclure>zaboarticle_pipelines.php</inclure>
 	</pipeline>
