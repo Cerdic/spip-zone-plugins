@@ -4,12 +4,19 @@
 
 -------------------------------------------------------------- */
 
-#raccourcis { z-index: 100; }
+/* Skip Links */
+#skiplinks { z-index: 100; }
 
+/* go_top */
+
+/* go_bottom */
+
+/* yoyo */
 .yoyo * { vertical-align: middle; }
 .yoyo a { display: block; }
 .yoyo .sep { display: none; }
 
+/* print */
 @media print {
 .skiplink { display: none; }
 }

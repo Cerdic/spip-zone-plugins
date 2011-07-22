@@ -4,10 +4,10 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'ancre_haute' => 'topo',
+'ancre_top' => 'topo',
 
 'haut' => 'Topo',
-'remonter' => 'Voltar ao topo',
+'go_top' => 'Voltar ao topo',
 
 );
 

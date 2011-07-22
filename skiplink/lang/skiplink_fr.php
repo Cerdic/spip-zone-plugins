@@ -4,17 +4,32 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+/* Skip Links */
 'go_content' => 'Aller au contenu',
 'go_nav' => 'Aller au menu',
 'go_search' => 'Aller &agrave; la recherche',
 
-'ancre_haute' => 'haut',
-'ancre_basse' => 'bas',
-
+/* go_top */
+'ancre_top' => 'haut',
 'haut' => 'Haut',
-'remonter' => 'Remonter en haut de la page',
+'go_top' => 'Remonter en haut de la page',
+
+/* go_bottom */
+'bottom' => 'bas',
 'bas' => 'Bas',
-'descendre' => 'Bas de page',
+'go_bottom' => 'Bas de page',
+
+/* yoyo */
+
+/* go_back */
+'back' => 'Retour',
+'go_back' => 'Retour',
+
+/* go_home */
+'accueil_site' => 'Accueil',
+'accueil' => 'Accueil',
+'home' => 'Accueil',
+'go_home' => 'Retour &agrave; l\'accueil',
 
 // Configuration CFG
 'go_plus_label' => 'Ajouter un lien vers l\'article num&eacute;ro&nbsp;:'

@@ -1,17 +1,17 @@
 <plugin>
-<nom>SkipLink</nom>
+<nom>SkipLinks</nom>
 <icon>icon/skiplink-64.png</icon>
-<version>1.0.2</version>
-<etat>stable</etat>
+<version>2.0.0</version>
+<etat>dev</etat>
 <description>
 <multi>
-[fr]Liens facilitant la navigation dans la page&nbsp;: liens d'acc&egrave;s rapide, retour en haut de page et leurs ancres. Indispensables pour naviguer au clavier et tr&egrave;s appr&eacute;ciables sur t&eacute;l&eacute;phone portable.
+[fr]Liens facilitant la navigation dans la page&nbsp;: liens d'acc&egrave;s rapide, retour en haut de page et leurs ancres. Indispensables pour naviguer au clavier.
 [en]Skip Navigation Links
 [ar]&#1585;&#1608;&#1575;&#1576;&#1591; &#1578;&#1587;&#1607;&#1617;&#1604; &#1575;&#1604;&#1578;&#1606;&#1602;&#1604; &#1601;&#1610; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577;: &#1585;&#1608;&#1575;&#1576;&#1591; &#1608;&#1589;&#1608;&#1604; &#1587;&#1585;&#1610;&#1593; &#1608;&#1593;&#1608;&#1583;&#1577; &#1575;&#1604;&#1609; &#1571;&#1593;&#1604;&#1609; &#1575;&#1604;&#1589;&#1601;&#1581;&#1577; &#1608;&#1605;&#1585;&#1575;&#1587;&#1610;&#1607;&#1575;.&#1607;&#1584;&#1607; &#1575;&#1604;&#1585;&#1608;&#1575;&#1576;&#1591; &#1590;&#1585;&#1608;&#1585;&#1610;&#1577; &#1604;&#1604;&#1578;&#1606;&#1602;&#1604; &#1576;&#1575;&#1587;&#1578;&#1582;&#1583;&#1575;&#1605; &#1604;&#1608;&#1581;&#1577; &#1575;&#1604;&#1605;&#1601;&#1575;&#1578;&#1610;&#1581; &#1608;&#1605;&#1601;&#1610;&#1583;&#1577; &#1580;&#1583;&#1575;&#1611; &#1601;&#1610; &#1575;&#1604;&#1607;&#1608;&#1575;&#1578;&#1601; &#1575;&#1604;&#1580;&#1608;&#1575;&#1604;&#1577;.
 </multi>
 </description>
-<lien>http://www.spip-contrib.net/skiplink</lien>
-<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
+<lien>http://www.spip-contrib.net/?rubrique1213</lien>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009-2011</auteur>
 <licence>GPL</licence>
 <prefix>skiplink</prefix>
 <pipeline>
@@ -23,5 +23,5 @@
 	<inclure>skiplink_pipelines.php</inclure>
 </pipeline>
 <categorie>navigation</categorie>
-<necessite id='SPIP' version='[1.9.0;]' />
+<necessite id='SPIP' version='[2.1.0;]' />
 </plugin>
