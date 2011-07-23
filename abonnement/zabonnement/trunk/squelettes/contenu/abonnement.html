@@ -1,7 +1,13 @@
 #SET{today,#DATE}
+
+[(#ENV{id_abonnement}|non)
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <:abo:abonnements:></p>
+		<INCLURE{fond=inclure/les_abonnements}{env,vers=#SELF|parametre_url{appel,mon_panier}}>
+]
+
 <BOUCLE_contenu_abonnement(ABONNEMENTS){id_abonnement}>
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{_abonnement_}"><:abo:abonnements:></a>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a> &gt; <a href="#URL_PAGE{abonnement}"><:abo:abonnements:></a>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
 
 <div class="contenu-principal">
 	<div class="cartouche">
