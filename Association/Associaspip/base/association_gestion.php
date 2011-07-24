@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -86,7 +86,7 @@ function association_upgrade($meta, $courante, $table='meta')
 	}
 }
 
-$GLOBALS['association_maj'][21] = array(array('sql_alter',"TABLE spip_asso_adherents ADD publication text NOT NULL AFTER secteur"));
+$GLOBALS['association_maj'][21] = array(array('sql_alter',"TABLE spip_asso_membres ADD publication text NOT NULL AFTER secteur"));
 
 $GLOBALS['association_maj'][30] = array(
 	array('sql_drop_table', "spip_asso_bienfaiteurs"),
@@ -121,9 +121,9 @@ function association_maj_64(){
 			return;
 		}
 		// Simulation provisoire
-		@sql_alter("TABLE spip_asso_adherents ADD commentaire text NOT NULL default ''");
-		@sql_alter("TABLE spip_asso_adherents ADD statut_interne text NOT NULL default '' ");
-		@sql_alter("TABLE spip_asso_adherents CHANGE COLUMN nom nom_famille text DEFAULT '' NOT NULL");
+		@sql_alter("TABLE spip_asso_membres ADD commentaire text NOT NULL default ''");
+		@sql_alter("TABLE spip_asso_membres ADD statut_interne text NOT NULL default '' ");
+		@sql_alter("TABLE spip_asso_membres CHANGE COLUMN nom nom_famille text DEFAULT '' NOT NULL");
 	}
 }
 
@@ -407,7 +407,7 @@ $GLOBALS['association_maj'][48225] = array(
 					   );
 
 /* cette mise a jour introduit un controle sur l'activation des modules de gestions des dons, */
-/* ventes, prets, activités subordonnes a l'activation de la gestion comptable.               */
+/* ventes, prets, activitï¿½s subordonnes a l'activation de la gestion comptable.               */
 /* la fonction de mise a jour desactive donc d'eventuels modules actives si la gestion        */
 /* comptable n'est pas activee                                                               */
 function association_maj_48466()
