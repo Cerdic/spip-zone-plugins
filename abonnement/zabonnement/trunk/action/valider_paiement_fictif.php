@@ -63,10 +63,10 @@ function action_valider_paiement_fictif_dist($arg=null) {
 				if($reponse_banque=='ok'){
 					$objet = $detail['objet'];
 					$id_objet=$detail['id_objet'];	
-					$statut_nouveau='paye';
+					$statut_paiement='paye';
 					}		
 				
-				if (_DEBUG_ABONNEMENT) spip_log('action_valider_paiement_fictif pour'.$detail['id_objet'].' '.$detail['objet'].' paiement='.$statut_paiement,'abonnement');
+				if (_DEBUG_ABONNEMENT) spip_log("action_valider_paiement_fictif pour $objet $id_objet paiement=".$statut_paiement,'abonnement');
 
 			}
 		}

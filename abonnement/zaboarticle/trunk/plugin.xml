@@ -2,7 +2,7 @@
 	<nom>Z-aboarticle</nom>
 	<auteur>Anne-lise Martenot (elastick.net) - BoOz (booz@reo.net)
 	</auteur>
-	<version>0.3</version>
+	<version>0.3.1</version>
 	<etat>
 	test
 	</etat>
@@ -19,10 +19,6 @@
 	</pipeline>
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
-		<inclure>zaboarticle_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>post_insertion</nom>
 		<inclure>zaboarticle_pipelines.php</inclure>
 	</pipeline>
  	<pipeline>

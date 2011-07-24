@@ -2,94 +2,59 @@
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('action/editer_contactabonnement');
 
-// abonnement payant gere par panier / commande etc
 // espace public
-// ˆ la validation du paiement de la commande inserer l'abonnement ˆ l'abonnement 
-//todo sinon inserer l'abonnement -refuse-
+// si sql commande inserer l'abonnement aux objets avec statut_commande repris
 function abonnement_post_insertion($flux){
-	
+		
 	if (
 		$flux['args']['table'] == 'spip_commandes'
 		and ($id_commande = intval($flux['args']['id_objet'])) > 0
-		and $flux['data']['statut'] == 'paye'
+		and ($id_auteur = intval($flux['args']['id_auteur'])) > 0
 	){
-	
-	$objet='abonnement';
-	
-	// On recupere le contenu des articles dans les details de la commande
-		$commande_abos = sql_allfetsel(
-			'*',
-			'spip_commandes_details',
-			'id_commande = '.$id_commande." AND objet='$objet'"
-		);
+			
+		//statut de la commande
+		$statut=$flux['data']['statut'];
 		
-	// On recupere le id_auteur (unique) du flux data
-	$id_auteur=$flux['args']['id_auteur'];
+		if (_DEBUG_ABONNEMENT) spip_log("a_p_i id_commande=$id_commande $statut_commande pour auteur $id_auteur",'abonnement');
+		
+		// si dans les details de la commande il y a abonnement, article ou rubrique en objet
+		$objets=array('article','rubrique','abonnement');
+		foreach($objets as $objet){
+			if (_DEBUG_ABONNEMENT) spip_log("a_p_i objet= $objet",'abonnement');		
 
-		// Pour chaque commande d'abonnement
-		foreach($commande_abos as $abo){
-			$objet=$abo['objet'];
-			$id_objet = $abo['id_objet'];
-			$id_commandes_detail=$abo['id_commandes_detail'];
-			if (_DEBUG_ABONNEMENT) spip_log('abonnement_post_insertion > id_commande='.$id_commandes_detail.' id_abonnement='.$id_objet.'et auteur= '.$id_auteur,'abonnement');
+			$commande_abos = sql_allfetsel(
+				'*',
+				'spip_commandes_details',
+				'id_commande = '.$id_commande." AND objet='$objet'"
+			);
 			
-			$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = '. $id_objet);
-			
-			$date = date('Y-m-d H:i:s');
-			$ids_zone=$verif['ids_zone'];
-			if($ids_zone!='')
-			ouvrir_zone($id_auteur,$ids_zone);
-					
-					// jour
-					if ($verif['periode'] == 'jours') {
-						$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$verif['duree'],date('Y')));
-					}
-					// ou mois
-					else {
-						$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$verif['duree'],date('j'),date('Y')));
-					}
-					
-			// attention aux doublons, on verifie 
-			if ((!$id = sql_getfetsel('id_auteur','spip_contacts_abonnements','objet="'.$objet.'" and id_auteur='.$id_auteur.' and id_objet='.sql_quote($id_objet).' and validite > NOW()')))
-						sql_insertq("spip_contacts_abonnements",
-							array(
-							'id_auteur'=> $id_auteur,
-							'objet'=>$objet,							
-							'id_objet'=> $id_objet,
-							'date'=>$date,
-							'validite'=>$validite,
-							'id_commandes_detail'=>$id_commandes_detail,
-							'statut_abonnement'=>$flux['data']['statut'],
-							'prix'=>$abo['prix_unitaire_ht'])
-							);
-					// sinon cet abonnement existe deja
-					else { 
-					if (_DEBUG_ABONNEMENT) spip_log("abonnement $objet existe deja","abonnement");
-					}
+				// Pour chaque commande contenant article ou rubrique en objet
+				foreach($commande_abos as $abo){
 
+					$arg=array(
+						'id_auteur'=>$id_auteur,
+						'statut'=>$statut,
+						'objet'=>$abo['objet'],
+						'table'=>"spip_".$objet."s",
+						'ids' => array($abo['id_objet']), //tjs envoyer un array
+						'prix'=>$abo['prix_unitaire_ht'],
+						'duree'=>3,
+						'periode'=>'jour',
+						'id_commandes_detail'=>$abo['id_commandes_detail'],
+					);
+
+					editer_contactabonnement($arg);
+				}
 		}
 
 	}
 	
 return $flux;
 	
-}
+}             
 
-//fonctions a mettre ailleurs?
-              
-function ouvrir_zone($id_auteur,$ids_zone)
-{
-	$array_ids = explode(",", $ids_zone);
-	foreach($array_ids as $id_zone)
-	{
-	if (_DEBUG_ABONNEMENT) spip_log("ouvrir_zone $id_zone pour $id_auteur",'abonnement');
-		sql_insertq("spip_zones_auteurs", array(
-			"id_zone"=>$id_zone,
-			"id_auteur"=>$id_auteur
-		));
-	}
-}
 
 //espace prive
 //affiche les abonnements auxquels l'auteur est abonne (sur auteur_infos)
@@ -102,21 +67,24 @@ function abonnement_affiche_milieu($flux){
 	/*
 	//affiche les auteurs dont l'abonnement comprend cet article (sur articles)	
 	if($flux['args']['exec'] == 'articles') {
-		$affiche_abonnes = recuperer_fond('prive/abocomprend_article',
+		$affiche_abonnes = recuperer_fond('prive/liste/abonnes_article',
 			array('id_objet'=>$flux['args']['id_article'],	
 			'objet'=>'article'
 			));
 		$flux['data'] .= $affiche_abonnes;
 	}
+	
+	
 	//affiche les auteurs dont l'abonnement comprend cette rubrique (sur rubriques)	
 	if($flux['args']['exec'] == 'naviguer') {
-		$affiche_abonnes = recuperer_fond('prive/abocomprend_rubrique',
+		$affiche_abonnes = recuperer_fond('prive/liste/abonnes_rubrique',
 			array('id_objet'=>$flux['args']['id_rubrique'],	
 			'objet'=>'rubrique'
 			));
 		$flux['data'] .= $affiche_abonnes;
 	}
 	*/
+	
 	return $flux;
 }
 
@@ -149,37 +117,28 @@ function abonnement_post_edition($flux){
 		
 	// lors de l'edition d'un auteur
 	if ($flux['args']['table']=='spip_auteurs') {
-	$continue=false;
-	
-		$id_auteur = $flux['args']['id_objet'];
 		
-		$abonnements = _request('abonnements');
-		$rubriques = _request('rubriques');
-		$articles = _request('articles');
-		$echeances = _request('validites');
+		//valable 3 jours, todo in config
+		$statut ='offert';
+		$duree = 3; 
+		$id_auteur=$flux['args']['id_objet'];
 		
-		$statut_abonnement='offert';
-		$duree = 3; //valable 3 jours, todo in config
+		$objets=array('article','rubrique','abonnement');
 		
-		if ($articles && is_array($articles)) {
-		$objet='article';
-		$ids=$articles;
-		$table="spip_articles";
-		creer_abonnement_objet($id_auteur,$statut_abonnement,$objet,$table,$ids,$duree);
-		}
-		
-		if ($rubriques && is_array($rubriques)) {
-		$objet='rubrique';
-		$ids=$rubriques;
-		$table="spip_rubriques";
-		creer_abonnement_objet($id_auteur,$statut_abonnement,$objet,$table,$ids,$duree);
-		}
-		
-		if ($abonnements && is_array($abonnements)) {
-		$objet='abonnement';
-		$ids=$abonnements;
-		$table="spip_abonnements";
-		creer_abonnement_objet($id_auteur,$statut_abonnement,$objet,$table,$ids,$duree);
+		foreach($objets as $objet){
+			$ids=_request($objet.'s');
+			if ($ids && is_array($ids)) {				
+				$args=array(
+				'id_auteur'=> $id_auteur,
+				'objet'=>$objet,
+				'table'=>"spip_".$objet."s",
+				'ids' => $ids,
+				'duree'=>$duree,
+				'statut'=>$statut
+				);
+				if (_DEBUG_ABONNEMENT) spip_log("APE args ".$args['table'] ." ids0=".$args['ids'][0],'abonnement');
+				editer_contactabonnement($args);
+			}	
 		}
 
 	}
@@ -187,87 +146,7 @@ function abonnement_post_edition($flux){
 	return $flux;
 }
 
-function creer_abonnement_objet($id_auteur,$statut_abonnement,$objet,$table,$ids,$duree)
-{
-	foreach($ids as $key => $id_objet)
-	{
-		if($id_objet!='non')
-		{
-				
-			$verif = sql_fetsel('*', $table, 'id_'."$objet = " . $id_objet);
-			if (!$verif) 
-			{
-				if (_DEBUG_ABONNEMENT) spip_log("$objet $id_objet inexistant",'abonnement');
-				die("$objet $id_objet inexistant");
-			}
-			
-			//todo verifier avec plugin montants?
-			$calculer_prix = charger_fonction('prix', 'inc/');
-			$prix=($statut_abonnement=='offert')?'':$calculer_prix($objet,$id_objet);//pas de prix puisque offert
-			$date = date('Y-m-d H:i:s');
-			$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
-			
-			//specific a abonnement
-			if($objet=='abonnement'){
-				$prix=($statut_abonnement=='offert')?'':$verif['prix'];//pas de prix puisque offert
-				$duree = $verif['duree'];
-				$periode = $verif['periode'];
-					
-				// jour
-				if ($periode == 'jours') {
-					$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
-				}
-				// ou mois
-				else {
-					$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$duree,date('j'),date('Y')));
-				}
-			}
-				
-			if (_DEBUG_ABONNEMENT) spip_log("zaboarticle_post_edition $objet $id_objet date $validite",'abonnement');
 
-			if (!$deja = sql_getfetsel('id_auteur,validite',
-				'spip_contacts_abonnements',
-				'id_auteur='.$id_auteur.' AND id_objet='.sql_quote($id_objet)." AND objet='$objet'")
-				)
-			{
-				$ids_zone=$verif['ids_zone'];
-				if($ids_zone!='')
-				ouvrir_zone($id_auteur,$ids_zone);
-					
-				sql_insertq("spip_contacts_abonnements",array(
-					'id_auteur'=> $id_auteur,
-					'objet'=>$objet,
-					'id_objet' => $id_objet,
-					'date'=>$date,
-					'validite'=>$validite,
-					'statut_abonnement'=>$statut_abonnement,
-					'prix'=>$prix));
-			}else{
-				if (_DEBUG_ABONNEMENT) spip_log("abonnement_post_edition pour auteur=$id_auteur $objet $id_objet existe deja",'abonnement');
-				//modif des dates d'echeances
-				if($echeances[$key]!='' && ($echeances[$key]!=$deja['validite'])){
-					if (_DEBUG_ABONNEMENT) spip_log("changer date ". $echeances[$key]."!=".$deja['validite'],'abonnement');
-				sql_updateq("spip_contacts_abonnements",array('validite'=>$echeances[$key]),
-					'id_auteur='.$id_auteur.' and id_objet='.sql_quote($id_objet)." and objet='$objet'");
-				}
-			}
-		}
-	}
-			// Notifications, gestion des revisions, reindexation...
-		pipeline('post_edition',
-		array(
-			'args' => array(
-				'table' => 'spip_contacts_abonnements',
-				'id_auteur' => $id_auteur,
-				'objet'=>$objet,
-				'id_objet' => $id_objet,
-				'statut_abonnement' => $statut_abonnement
-			),
-			'data' => $ids
-		)
-		);
-		
-}
 
 //utiliser le cron pour gerer les dates de validite des abonnements et envoyer les messages de relance
 function abonnement_taches_generales_cron($taches_generales){
