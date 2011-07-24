@@ -54,7 +54,7 @@
 			]
 			[(#VAL{abo:#OBJET}|_T)] <a href="#GET{lienobjet}">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
 			</td>
-			<td class='montant'>[(#STATUT_ABONNEMENT|=={offert}|non) #PRIX{#OBJET,#ID_OBJET}]</td>
+			<td class='montant'>[(#STATUT_ABONNEMENT|=={offert}|non) #PRIX]</td>
 			<td class='action'>
 			[(#GET{id_commande}|oui)
 				[(#AUTORISER{voir,abonnement,#ID_ABONNEMENT})

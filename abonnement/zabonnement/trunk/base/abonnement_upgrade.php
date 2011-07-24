@@ -32,6 +32,12 @@ function abonnement_upgrade($nom_meta_base_version,$version_cible){
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 	
+	if (version_compare($current_version,"1.2","<=")){
+		sql_alter("TABLE spip_contacts_abonnements ADD id_contacts_abonnement bigint(21) not null FIRST");
+		creer_base();
+		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
+	}
+	
 	//jamais installe
 	if ($current_version==0.0){
 		creer_base();
