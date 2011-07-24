@@ -87,12 +87,16 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	// aller chercher le formulaire html qui va bien				
 	$formulaire = 'formulaires/'.$formulaire ;		
 			
-	// Accepter l'inscription en tant qu'auteur ?
-	// pour memo: l'auteur a acces a l'espace prive'
-	$inscriptions_ecrire = ($GLOBALS['meta']['accepter_inscriptions'] == 'oui');
-	// Accepter l'inscription en tant que visiteur ?
-	// pour memo: le visiteur n'a pas acces a l'espace prive'
-	$inscriptions_publiques = ($GLOBALS['meta']['accepter_visiteurs'] == 'oui');
+	/**
+	 * Accepter l'inscription en tant qu'auteur ?
+	 * pour memo: l'auteur a acces a l'espace prive'
+	 */
+	$accepter_inscrire_auteur = ($GLOBALS['meta']['accepter_inscriptions'] == 'oui');
+	/**
+	 * Accepter l'inscription en tant que visiteur ?
+	 * pour memo: le visiteur n'a pas acces a l'espace prive'
+	 */
+	$accepter_inscrire_visiteur = ($GLOBALS['meta']['accepter_visiteurs'] == 'oui');
 	
 	$affiche_formulaire = $inscription_redacteur = $inscription_visiteur = '';
 	
@@ -184,8 +188,8 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	
 	//code pour s inscrire
 	else if(
-		$inscriptions_ecrire 
-		|| $inscriptions_publiques 
+		$accepter_inscrire_auteur 
+		|| $accepter_inscrire_visiteur 
 		|| ($GLOBALS['meta']['forums_publics'] == 'abo') 
 	) {
 		$accepter_nouveau = 'oui';
@@ -193,13 +197,13 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 		// debut presentation
 	
 		$inscription_redacteur = 
-			($inscriptions_ecrire && ($type=='redac')) 
+			($accepter_inscrire_auteur && ($type=='redac')) 
 			? 'oui' 
 			: 'non'
 			;
 
 		$inscription_visiteur = 
-			(($type!='redac') && $inscriptions_publiques && ($acces_membres=='oui')) 
+			(($type!='redac') && $accepter_inscrire_visiteur && ($acces_membres=='oui')) 
 			? 'oui' 
 			: 'non'
 			;
@@ -364,9 +368,9 @@ function spiplistes_formulaire_abonnement (
 			$reponse_formulaire = _T('spiplistes:demande_enregistree_retour_mail');
 			$email_a_envoyer = true;
 		}
-		else
+		else if ( isset($abonne['nom']) )
 		{
-			//spiplistes_debug_log('pas de demande, afficher formulaire de modif au complet');
+			spiplistes_debug_log('pas de demande, afficher formulaire de modif au complet');
 			$reponse_formulaire = ''
 				. '<span class="nom">' . $abonne['nom'] . "</span>\n"
 				. '<span class="souhait">' . _T('spiplistes:effectuez_modif_validez', array('s'=>$abonne['nom'])). "</span>\n"
@@ -520,9 +524,16 @@ function spiplistes_formulaire_abonnement (
 		else {
 			$reponse_formulaire = _T('form_forum_probleme_mail');
 		}
-	} 
+	}
+	
+	$result = array(
+		TRUE,
+		$reponse_formulaire,
+		$mode_modifier,
+		$abonne
+	);
 
-	return(array(true, $reponse_formulaire, $mode_modifier, $abonne));
+	return($result);
 } // end spiplistes_formulaire_abonnement()
 
 
