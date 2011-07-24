@@ -14,7 +14,7 @@
 <div class="suppri">
 	[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 	[(#BOUTON_ACTION{
-		[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_acces_rubrique:>})],
+		[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:confirmer_supprimer_element:>})],
 		[(#URL_ACTION_AUTEUR{supprimer_contactabonnement,contactabonnement-#ENV{id_auteur}-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
 		ajax,
 		<:abo:confirmer_supprimer_element:>})]

@@ -4,8 +4,8 @@
 	<B_actifs>
 	<ul>
 		<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=abonnement}>
-			<li>
-			<label><:abo:abonnement:></label>
+			<li class='prive_abo_border'>
+			<label><:abo:echeance:></label>
 				<BOUCLE_abo(ABONNEMENTS){id_abonnement=#ID_OBJET}>
 				<input type="hidden" value="#ID_ABONNEMENT" name="abonnements[]">#TITRE</option>
 				</BOUCLE_abo>
