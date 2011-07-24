@@ -1,11 +1,11 @@
 <B_articles>
 <table class="spip">
-<BOUCLE_articles(ARTICLES){id_article?}{tout_voir}>
+<BOUCLE_articles(ARTICLES){id_article}{tout_voir}>
 		<tr>
 		<td>[(#LOGO_ARTICLE|image_reduire{100})]</td>
 		<td>
 		<p class="titre">
-		&laquo;&nbsp;<strong><i>#TITRE</i></strong>&nbsp;&raquo;
+		&laquo;&nbsp;<strong><i><a href="#URL_ARTICLE">#TITRE</a></i></strong>&nbsp;&raquo;
 		[(<span class="auteurs">(#LESAUTEURS)</span>)]
 	</p></td>
 		<td style="display:none">#DESCRIPTIF</td>
