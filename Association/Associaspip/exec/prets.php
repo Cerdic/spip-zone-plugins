@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -77,7 +77,7 @@ function exec_prets(){
 			echo '<td class="arial11 border1" style="text-align:right">'.association_datefr($data['date_sortie']).'</td>';
 			$id_emprunteur=intval($data['id_emprunteur']);
 
-			$auteur=sql_fetsel("*", "spip_asso_adherents", "id_auteur=$id_emprunteur");
+			$auteur=sql_fetsel("*", "spip_asso_membres", "id_auteur=$id_emprunteur");
 			echo '<td class="arial11 border1">'.$auteur['nom'].' '.$auteur['prenom'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.$data['duree'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right">';
