@@ -20,13 +20,13 @@ function zaboarticle_post_insertion($flux){
 		);
 	// On recupere le id_auteur (unique) du flux data
 	$id_auteur=$flux['args']['id_auteur'];
-	spip_log('id_auteur= '.$id_auteur,'abonnement');
+	if (_DEBUG_ABONNEMENT) spip_log('zaboarticle_post_insertion id_auteur= '.$id_auteur,'abonnement');
 
 
 	// Pour chaque commande d'article
 		foreach($commande_abos as $abo){
 			$id_article = $abo['id_objet'];
-			spip_log('zaboarticle_post_insertion > id_article='.$id_article.'et auteur= '.$id_auteur,'abonnement');
+			if (_DEBUG_ABONNEMENT) spip_log('zaboarticle_post_insertion > id_article='.$id_article.'et auteur= '.$id_auteur,'abonnement');
 			$date = date('Y-m-d H:i:s');
 			$duree = 3; //valable 3 jours
 			$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
@@ -102,7 +102,7 @@ function zaboarticle_post_edition($flux){
 				if($id_article!='non'){
 				$article = sql_fetsel('*', 'spip_articles', 'id_article = ' . $id_article);
 				if (!$article) {
-					spip_log("article $id_article inexistant",'abonnement');
+					if (_DEBUG_ABONNEMENT) spip_log("article $id_article inexistant",'abonnement');
 					die("article $id_article inexistant");
 				}
 				//todo verifier avec plugin montants?
@@ -112,7 +112,7 @@ function zaboarticle_post_edition($flux){
 				$duree = 3; //valable 3 jours
 				$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
 
-				spip_log("zaboarticle_post_edition article $id_article prix $prix date $validite",'abonnement');
+				if (_DEBUG_ABONNEMENT) spip_log("zaboarticle_post_edition article $id_article prix $prix date $validite",'abonnement');
 
 				if (!$id = sql_getfetsel('id_auteur',
 					'spip_contacts_abonnements',

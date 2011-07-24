@@ -17,7 +17,7 @@ function action_valider_paiement_fictif_dist($arg=null) {
 	
 	// ne rien faire si on est en prod !
 	if (lire_config("abonnement/environnement") != "test") {
-		spip_log('Petit malin ! (action/valider_paiement_fictif) ', 'abonnement');
+		if (_DEBUG_ABONNEMENT) spip_log('Petit malin ! (action/valider_paiement_fictif) ', 'abonnement');
 		$arg=null;
 		die("Page prot&eacute;g&eacute;e");
 	}
@@ -35,7 +35,7 @@ function action_valider_paiement_fictif_dist($arg=null) {
 		//chdir('..');
 		//include('ecrire/inc_version.php');
 	**/
-	spip_log("valider_paiement_fictif auteur $id_auteur commande $id_commande $statut", 'abonnement');
+	if (_DEBUG_ABONNEMENT) spip_log("valider_paiement_fictif auteur $id_auteur commande $id_commande $statut", 'abonnement');
 	
 	// on recupere les petites variables (envoi de la banque?)
 	/*
@@ -66,7 +66,7 @@ function action_valider_paiement_fictif_dist($arg=null) {
 					$statut_nouveau='paye';
 					}		
 				
-				spip_log('action_valider_paiement_fictif pour'.$detail['id_objet'].' '.$detail['objet'].' paiement='.$statut_paiement,'abonnement');
+				if (_DEBUG_ABONNEMENT) spip_log('action_valider_paiement_fictif pour'.$detail['id_objet'].' '.$detail['objet'].' paiement='.$statut_paiement,'abonnement');
 
 			}
 		}

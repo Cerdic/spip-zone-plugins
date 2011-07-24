@@ -14,19 +14,13 @@ include_spip('base/create');
 
 function abonnement_upgrade($nom_meta_base_version,$version_cible){
 	
-	//ecrire_meta($nom_meta_base_version,$current_version="0.7");
-	//nom_meta_base_version = abonnement_base_version
-	//version_cible = num version_base demande dans plugin.xml
-	//spip_log("version abonnement=|$nom_meta_base_version |$version_cible|$current_version|",'abonnement');
-
-	
 	$current_version = 0.0; //suppose que le plugin n'a jamais ete installe
 	if (isset($GLOBALS['meta'][$nom_meta_base_version]))
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 
 
 	if (version_compare($current_version,"0.75","<=")){
-		//spip_log('il faut renommer la table spip_abonnements','abonnement');
+		if (_DEBUG_ABONNEMENT) spip_log('il faut renommer les tables spip_abonnements','abonnement');
 		abonnement_modifier_tables($nom_meta_base_version);
 		creer_base();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);

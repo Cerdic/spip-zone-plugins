@@ -32,7 +32,7 @@ function abonnement_post_insertion($flux){
 			$objet=$abo['objet'];
 			$id_objet = $abo['id_objet'];
 			$id_commandes_detail=$abo['id_commandes_detail'];
-			spip_log('abonnement_post_insertion > id_commande='.$id_commandes_detail.' id_abonnement='.$id_objet.'et auteur= '.$id_auteur,'abonnement');
+			if (_DEBUG_ABONNEMENT) spip_log('abonnement_post_insertion > id_commande='.$id_commandes_detail.' id_abonnement='.$id_objet.'et auteur= '.$id_auteur,'abonnement');
 			
 			$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = '. $id_objet);
 			
@@ -65,7 +65,7 @@ function abonnement_post_insertion($flux){
 							);
 					// sinon cet abonnement existe deja
 					else { 
-					spip_log("abonnement $objet existe deja","abonnement");
+					if (_DEBUG_ABONNEMENT) spip_log("abonnement $objet existe deja","abonnement");
 					}
 
 		}
@@ -83,7 +83,7 @@ function ouvrir_zone($id_auteur,$ids_zone)
 	$array_ids = explode(",", $ids_zone);
 	foreach($array_ids as $id_zone)
 	{
-	spip_log("ouvrir_zone $id_zone pour $id_auteur",'abonnement');
+	if (_DEBUG_ABONNEMENT) spip_log("ouvrir_zone $id_zone pour $id_auteur",'abonnement');
 		sql_insertq("spip_zones_auteurs", array(
 			"id_zone"=>$id_zone,
 			"id_auteur"=>$id_auteur
@@ -170,7 +170,7 @@ function abonnement_post_edition($flux){
 					// abonnement non trouve ?
 					$abonnement = sql_fetsel('*', 'spip_abonnements', 'id_abonnement = ' . $id_objet);
 					if (!$abonnement) {
-						spip_log("abonnement $id_objet inexistant",'abonnement');
+						if (_DEBUG_ABONNEMENT) spip_log("abonnement $id_objet inexistant",'abonnement');
 						die("abonnement $id_objet inexistant");
 					}
 					
@@ -191,7 +191,7 @@ function abonnement_post_edition($flux){
 					$prix=($statut_abonnement=='offert')?'':$abonnement['prix'];//pas de prix puisque offert
 
 					
-					spip_log("abonnement_post_edition $objet $id_objet et $table pour $validite",'abonnement');
+					if (_DEBUG_ABONNEMENT) spip_log("abonnement_post_edition $objet $id_objet et $table pour $validite",'abonnement');
 
 					// attention aux doublons, on verifie 
 					$deja = sql_fetsel('id_auteur,validite','spip_contacts_abonnements','id_auteur='.$id_auteur.' and id_objet='.sql_quote($id_objet)." and objet='$objet'");
@@ -211,10 +211,10 @@ function abonnement_post_edition($flux){
 							'prix'=>$prix
 							));
 					}else{
-						spip_log("abonnement_post_edition existe deja $objet et $table pour $validite",'abonnement');
+						if (_DEBUG_ABONNEMENT) spip_log("abonnement_post_edition pour auteur=$id_auteur $objet $id_objet existe deja donc todo rallonger date= $validite + newdate",'abonnement');
 						//modif des dates d'echeances
 						if($echeances[$key]!='' && ($echeances[$key]!=$deja['validite'])){
-							spip_log("effectivement ". $echeances[$key]."!=".$deja['validite'],'abonnement');
+							if (_DEBUG_ABONNEMENT) spip_log("effectivement ". $echeances[$key]."!=".$deja['validite'],'abonnement');
 						sql_updateq("spip_contacts_abonnements",array('validite'=>$echeances[$key]),
 							'id_auteur='.$id_auteur.' and id_objet='.sql_quote($id_objet)." and objet='$objet'");
 						}

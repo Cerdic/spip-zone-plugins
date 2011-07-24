@@ -4,7 +4,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	"abonnements" => "Abonnements",
 	"articles" => "Articles",
-	'confirmer_supprimer_abonnement'=>'Attention, vous avez demand&eacute; la suppression de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
+	'confirmer_supprimer_element'=>'Attention, vous avez demand&eacute; la suppression de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 	'rubriques'=>'Rubriques',
 	"abonnement_client"=>"Client",
 	'abonnement_archives'=>'Abonnement aux archives, commence aujourd\'hui moins le nombre de jours',

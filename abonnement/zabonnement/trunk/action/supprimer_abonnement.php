@@ -15,7 +15,7 @@ function action_supprimer_abonnement_dist()
 	$arg = $securiser_action();
 
 	if (!preg_match(",^(-?\d+)$,", $arg, $r)) {
-		 spip_log("action_supprimer_abonnement_dist $arg pas compris");
+		 if (_DEBUG_ABONNEMENT) spip_log("action_supprimer_abonnement_dist $arg pas compris");
 	} else action_supprimer_abonnement_post($r[1]);
 }
 
@@ -26,7 +26,7 @@ function action_supprimer_abonnement_post($id_abonnement)
 		sql_delete("spip_abonnements", "id_abonnement=" . (0- $id_abonnement));
 	}
 	else
-		spip_log('appel deprecie, rien a faire ici (voir action/editer_abonnement)');
+		if (_DEBUG_ABONNEMENT) spip_log('appel deprecie, rien a faire ici (voir action/editer_abonnement)');
 }
 
 

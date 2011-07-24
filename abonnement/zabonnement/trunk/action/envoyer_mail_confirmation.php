@@ -28,7 +28,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 			)
 		)
 	)
-	spip_log("suite = $validation_paiement,$id_auteur,$titre,$produit,$id_article, nom_famille=".$abonne['nom'] ." email=".$email." id_auteur=".$id_auteur,"abonnement");
+	if (_DEBUG_ABONNEMENT) spip_log("suite = $validation_paiement,$id_auteur,$titre,$produit,$id_article, nom_famille=".$abonne['nom'] ." email=".$email." id_auteur=".$id_auteur,"abonnement");
 	else return;
 	
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
@@ -80,7 +80,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 
 	if($validation_paiement == "paye"){
 	
-	spip_log("Mail depuis $expediteur paiement par ".$abonne['nom']." mail ".$email." Num ".$id_auteur,"abonnement");
+	if (_DEBUG_ABONNEMENT) spip_log("Mail depuis $expediteur paiement par ".$abonne['nom']." mail ".$email." Num ".$id_auteur,"abonnement");
 		
 	//Au webmaster
 		$message_webmaster = "Une nouvelle transaction a eu lieu sur $nom_site <br />$info_client";
@@ -164,7 +164,7 @@ function abonnement_envoyer_mails_confirmation($validation_paiement,$id_auteur,$
 	}
 	
 	// signaler un changement
-	spip_log("$produit: mail envoye. $titre pour auteur " .$id_auteur,"abonnement");
+	if (_DEBUG_ABONNEMENT) spip_log("$produit: mail envoye. $titre pour auteur " .$id_auteur,"abonnement");
 
 if($ok) return true;	
 
