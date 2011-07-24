@@ -242,6 +242,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 					, 'mode_modifier' => $mode_modifier
 					, 'id_auteur' => $abonne['id_auteur']
 					, 'format' => $abonne['format']
+					, 'statut_auteur' => $abonne['statut']
 					)
 				);
 				
