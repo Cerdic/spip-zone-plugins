@@ -1635,28 +1635,36 @@ function spiplistes_envoyer_mail ($to
 		$result = true;
 	}
 	else {
-		include_once(_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
+		if ( !class_exists('phpMail') ) {
+			include_once (_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
+		}
 		
 		$email_a_envoyer = array();
 		
 		$return_path = spiplistes_return_path ($from);
 		
-		if(is_array($message) && ($format == 'html'))
+		if ( $format == 'html' )
 		{
-			if($format=='html' && isset($message[$format])) {
-				$email_a_envoyer['html'] = new phpMail($to, $subject, $message['html'], $message['texte'], $charset);
-				$email_a_envoyer['html']->From = $from ; 
-				if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
-				$email_a_envoyer['html']->AddCustomHeader("Errors-To: ".$return_path); 
-				$email_a_envoyer['html']->AddCustomHeader("Reply-To: ".$from); 
-				$email_a_envoyer['html']->AddCustomHeader("Return-Path: ".$return_path); 	
-				$email_a_envoyer['html']->SMTPKeepAlive = true;
-				$email_a_envoyer['html']->Body = $message['html'];
-				$email_a_envoyer['html']->AltBody = $message['texte'];
+			if ( is_string($message) ) {
+				$message = array (
+					'html' => $message,
+					'texte' => spiplistes_courrier_version_texte($message)
+				);
+			}
+			if ( is_array($message) && isset($message[$format]) )
+			{
+				$email_a_envoyer[$format] = new phpMail($to, $subject, $message[$format], $message['texte'], $charset);
+				$email_a_envoyer[$format]->From = $from ; 
+				if($fromname) $email_a_envoyer[$format]->FromName = $fromname ; 
+				$email_a_envoyer[$format]->AddCustomHeader("Errors-To: ".$return_path); 
+				$email_a_envoyer[$format]->AddCustomHeader("Reply-To: ".$from); 
+				$email_a_envoyer[$format]->AddCustomHeader("Return-Path: ".$return_path); 	
+				$email_a_envoyer[$format]->SMTPKeepAlive = true;
+				$email_a_envoyer[$format]->Body = $message[$format];
+				$email_a_envoyer[$format]->AltBody = $message['texte'];
 			}
 		}
 		
-		//$email_a_envoyer['texte'] = new phpMail($to, $subject, '', html_entity_decode($message), $charset);
 		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', $message['texte'], $charset);
 		$email_a_envoyer['texte']->From = $from ;
 		if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
