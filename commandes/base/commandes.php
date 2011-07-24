@@ -10,7 +10,7 @@ function commandes_declarer_tables_interfaces($interface){
 	
 	$interface['table_date']['commandes'] = 'date';
 	
-	$interface['table_titre']['commandes'] = 'numero as titre, "" as lang';
+	$interface['table_titre']['commandes'] = 'reference as titre, "" as lang';
 	
 	return $interface;
 }
@@ -75,7 +75,7 @@ function commandes_declarer_tables_principales($tables_principales){
 
 
 function commandes_rechercher_liste_des_champs($tables){
-	$tables['commande']['numero'] = 8;
+	$tables['commande']['reference'] = 8;
 	return $tables;
 }
 
