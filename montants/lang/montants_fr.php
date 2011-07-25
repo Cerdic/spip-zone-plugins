@@ -12,6 +12,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'configurer_montant' => 'Configurer le prix des objets (articles) par defaut',
 'label_objet'=>'Objet',
 'label_prix_ht'=>'Prix HT',
+'label_prix'=>'Prix',
 'label_ids_objet'=>'Liste des identifiants (optionnel)',
 'label_le_parent'=>'Identifiant du parent (optionnel)',
 'label_taxe'=>'Taxe',
@@ -23,7 +24,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'editer_montant' => 'Modifiez le montant',
 'creer_montant' => 'Cr&eacute;er un nouveau montant',
 'prix_defaut'=>'Prix par defaut :',
-'modifier_prix_defaut'=>'Modifier',
+'prix'=>'Prix :',
+'modifier_prix_defaut'=>'Modifier le prix par defaut',
 'bouton_supprimer_montants_confirmer' => 'Etes-vous s&ucirc;r de vouloir supprimer le montant ?',
 
 

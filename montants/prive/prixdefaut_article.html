@@ -15,6 +15,8 @@ Tester pour afficher le prix si
 	]
 </BOUCLE_verifier>
 
+[(#SET{textprix,<:montants:prix_defaut:>})]
+
 	[(#REM) parents = array des rubriques parentes de l'article en cours ]
 	#SET{parents,#ARRAY}
 	<BOUCLE_lobjet(ARTICLES){id_article=#ENV{id_objet}}>
@@ -33,12 +35,19 @@ Tester pour afficher le prix si
 	#SET{prix,#PRIX_HT}
 	</BOUCLE_artinlist>
 	
+	[(#REM) ....ou bien le prix de l'article dans son champ]
+	<BOUCLE_article(ARTICLES){objet=#OBJET}{id_article=#ID_OBJET}>
+	#SET{prix,#PRIX_HT}
+	[(#SET{textprix,<:montants:prix:>})]
+	</BOUCLE_article>
+	
 	
 		[
 		<div class="liste-elements" style="padding:1em">
-		<:montants:prix_defaut:>
-		<strong>(#GET{prix})</strong>
-		<a href="#URL_ECRIRE{montants}"><:montants:modifier_prix_defaut:></a>
+		[<strong>(#GET{textprix})</strong> ](#GET{prix})
+			[(#GET{textprix}|=={<:montants:prix_defaut:>}|oui)
+			<a href="#URL_ECRIRE{montants}"><:montants:modifier_prix_defaut:></a>
+			]
 		</div>
 		]
 	
