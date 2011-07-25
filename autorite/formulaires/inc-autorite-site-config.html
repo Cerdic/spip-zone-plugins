@@ -7,7 +7,7 @@
 				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:config_site_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select class="select" name="#GET{name}" id="#GET{name}">
+					]<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,''}
 						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admins:></option>
 						#SET{val,webmestre}
@@ -18,7 +18,7 @@
 				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:config_plugin_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select class="select" name="#GET{name}" id="#GET{name}">
+					]<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,''}
 						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admins:></option>
 						#SET{val,webmestre}
@@ -29,7 +29,7 @@
 				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:sauvegarde_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select class="select" name="#GET{name}" id="#GET{name}">
+					]<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,''}
 						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admin_complets:></option>
 						#SET{val,'admin'}
@@ -44,7 +44,7 @@
 				<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:effacer_base_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select class="select" name="#GET{name}" id="#GET{name}">
+					]<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,''}
 						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admins:></option>
 						#SET{val,webmestre}
@@ -61,21 +61,21 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:nouvelles_rubriques:></label>
 					</div>
 					#SET{name,interdire_creer_sousrub}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:nouvelles_sous_rubriques:></label>
 					</div>
 					#SET{name,interdire_creer_rub_sauf_webmestre}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:non_webmestres:></label>
 					</div>
 					<p class="explication small"><:autorite:note_rubriques:></p>

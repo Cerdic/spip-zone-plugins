@@ -6,7 +6,7 @@
 		<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:autorite:config_auteurs_statut:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<select class="select" name="#GET{name}" id="#GET{name}">
+			]<select name="#GET{name}" class="select" id="#GET{name}">
 				#SET{val,visiteur}
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:visiteur:></option>
 				#SET{val,redacteur}
@@ -19,7 +19,7 @@
 		<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:autorite:config_auteurs_rubriques:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<select class="select" name="#GET{name}" id="#GET{name}">
+			]<select name="#GET{name}" class="select" id="#GET{name}">
 				#SET{val,''}
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admins:></option>
 				#SET{val,1}
@@ -35,7 +35,7 @@
 			<label for="#GET{name}"><:autorite:admin_restreints:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
 			]<p class="explication"><:autorite:admins_rubriques:></p>
-			<select class="select" name="#GET{name}" id="#GET{name}">
+			<select name="#GET{name}" class="select" id="#GET{name}">
 				#SET{val,''}
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:droits_limites:></option>
 				#SET{val,oui}
@@ -64,7 +64,7 @@
 		<li class="long_label editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 			<label for="#GET{name}"><:autorite:publication_qui:></label>[
 			<span class='erreur_message'>(#GET{erreurs})</span>
-			]<select class="select" name="#GET{name}" id="#GET{name}">
+			]<select name="#GET{name}" class="select" id="#GET{name}">
 				#SET{val,1}
 				<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:webmestres:></option>
 				#SET{val,3}

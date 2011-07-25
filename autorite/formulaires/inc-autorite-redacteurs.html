@@ -8,7 +8,7 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:auteur_modifie_email:></label>
 					</div>
 				</li>
@@ -17,7 +17,7 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:redacteur_modifie_article:></label>
 					</div>
 				</li>
@@ -25,7 +25,7 @@
 				<li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
 					<label for="#GET{name}"><:autorite:mots_cles_qui:></label>[
 					<span class='erreur_message'>(#GET{erreurs})</span>
-					]<select class="select" name="#GET{name}" id="#GET{name}">
+					]<select name="#GET{name}" class="select" id="#GET{name}">
 						#SET{val,0}
 						<option value="#GET{val}"[(#ENV{#GET{name}}|=={#GET{val}}|oui)selected="selected"]><:autorite:admin_complets:></option>
 						#SET{val,1}
@@ -39,7 +39,7 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:redacteur_lire_stats:></label>
 					</div>
 				</li>
@@ -48,7 +48,7 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:pas_acces_espace_prive:></label>
 					</div>
 				</li>

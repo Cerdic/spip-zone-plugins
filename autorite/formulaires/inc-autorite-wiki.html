@@ -25,28 +25,28 @@
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:redacs:></label>
 					</div>
 					#SET{name,espace_wiki_visiteurs}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:visiteurs_enregistres:></label>
 					</div>
 					#SET{name,espace_wiki_anonyme}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{#GET{name}}|?{checked})"]/>
 						<label for="#GET{name}"><:autorite:visiteurs_tous:></label>
 					</div>
 					#SET{name,espace_wiki_rubrique_anonyme}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
 					<div class="choix">
 						[
 						<span class='erreur_message'>(#GET{erreurs})</span>
-						]<input type="checkbox" class="checkbox" name="#GET{name}" id="#GET{name}" [checked="(#ENV{espace_wiki_anonyme}|?{#ENV{espace_wiki_rubrique_anonyme}|?{checked}})"]/>
+						]<input type="checkbox" name="#GET{name}" class="checkbox" id="#GET{name}" [checked="(#ENV{espace_wiki_anonyme}|?{#ENV{espace_wiki_rubrique_anonyme}|?{checked}})"]/>
 						<label for="#GET{name}"><:autorite:visiteurs_anonymes:></label>
 					</div>
 				</li>

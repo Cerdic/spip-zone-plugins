@@ -34,7 +34,7 @@
 
 		<INCLURE{fond=formulaires/inc-autorite-auteurs,env} />
 
-		[(#REM) : On teste si le plugin crayons est présent pour afficher les fonctions relatives]
+		[(#REM) : On teste si le plugin crayons est present pour afficher les fonctions relatives]
 		[(#PLUGIN{crayons}|oui)
 			<INCLURE{fond=formulaires/inc-autorite-crayons,env} />
 		]
@@ -52,7 +52,7 @@
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	  <!--extra-->
 	  <p class='boutons'><span class='image_loading'>&nbsp;</span>
-			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+			<input type='submit' class='submit' name="_cfg_ok" value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 
 </div>
