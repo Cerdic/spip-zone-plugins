@@ -46,7 +46,7 @@ include_spip('inc/texte');
 	$titre=couper($titre,$raccourcir);
 	$titre=translitteration($titre);
 	$titre = preg_replace(',[[:punct:][:space:]]+,u', ' ', $titre);
-	$titre = preg_replace(',\.([^.]+)$,', '', $titre);
+	$titre = trim(preg_replace(',\.([^.]+)$,', '', $titre));
 	$titre= str_replace(' ','-',strtolower($titre));
 	$titre=$pretitre."$numero_revue"."_".$titre;
 	
