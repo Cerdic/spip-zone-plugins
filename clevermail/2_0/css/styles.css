@@ -49,3 +49,19 @@ h4 {
 .clevermail_menu .documentation {
   background: url(../prive/themes/spip/images/fatcow/16/document_image.png) top left no-repeat;
 }
+
+
+/* Liste des lettres */
+
+.liste_lettres .description {
+  font-size: 1.2em;
+  margin: .5em 0;
+}
+
+.liste_lettres .actions {
+  list-style-type: none;
+}
+
+.liste_lettres .actions li {
+  display: inline;
+}
