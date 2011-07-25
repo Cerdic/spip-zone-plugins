@@ -1,15 +1,15 @@
-<!--#hierarchie-->
-<ul id="chemin">
-  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
-  <li>&gt;</li>
-  <li><a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:liste_lettres:></a></li>
-</ul>
-<!--/#hierarchie-->
 #SET{preview_text,#EVAL{_CLEVERMAIL_PREVIEW_TEXTE}}
 #SET{preview_html,#EVAL{_CLEVERMAIL_PREVIEW_HTML}}
 <BOUCLE_list(CM_LISTS){lst_id=#ENV{lst_id}}>
+  <!--#hierarchie-->
+  <ul id="chemin">
+    <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+    <li>&gt; <a href="#URL_ECRIRE{clevermail_lists}"><:clevermail:liste_lettres:></a></li>
+    <li>&gt; #LST_NAME</li>
+  </ul>
+  <!--/#hierarchie-->
   <BOUCLE_subscribers(CM_LISTS_SUBSCRIBERS){lst_id} />#SET{nbSubs,#TOTAL_BOUCLE}<//B_subscribers>
-  <h1>#LST_NAME</h1>
+  <h1><:clevermail:messages:></h1>
   <B_posts_new>
 		<h2><:clevermail:nouveaux_messages:></h2>
 	  <p><:clevermail:nouveaux_messages_text:> :</p>

@@ -15,24 +15,37 @@ h4 {
 	font-size: 12px;
 }
 
-.liste_lettres {
-  border: 1px solid #000000;
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.liste_lettres th, .liste_lettres td {
-  padding: 0.3em;
-  border: 1px dotted #ccc;
-  vertical-align: top;
-}
-
-.liste_lettres thead th {
-  background-color: #ccc;
-}
-
-.liste_lettres ul {
+.clevermail_menu {
   list-style-type: none;
   padding-left: 0;
 }
 
+.clevermail_menu li {
+  margin-bottom: 10px;
+  line-height: 16px;
+  padding-left: 20px;
+}
+
+.clevermail_menu .liste_lettres {
+  background: url(../prive/themes/spip/images/fatcow/16/email_open.png) top left no-repeat;
+}
+
+.clevermail_menu .creer_lettre {
+  background: url(../prive/themes/spip/images/fatcow/16/email_add.png) top left no-repeat;
+}
+
+.clevermail_menu .liste_abonnes {
+  background: url(../prive/themes/spip/images/fatcow/16/group.png) top left no-repeat;
+}
+
+.clevermail_menu .ajouter_abonnes {
+  background: url(../prive/themes/spip/images/fatcow/16/user_add.png) top left no-repeat;
+}
+
+.clevermail_menu .parametres {
+  background: url(../prive/themes/spip/images/fatcow/16/gear_in.png) top left no-repeat;
+}
+
+.clevermail_menu .documentation {
+  background: url(../prive/themes/spip/images/fatcow/16/document_image.png) top left no-repeat;
+}
