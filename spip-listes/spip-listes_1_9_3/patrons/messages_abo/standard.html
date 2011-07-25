@@ -46,17 +46,11 @@
 	</li>
 	</BOUCLE_listes>
 	</ul>
-
 	[<p><:spiplistes:pour_modifier_votre_abo_:>
 	<a href="#URL_SITE_SPIP/spip.php?page=abonnement&d=(#ENV{cookie_oubli})"><:spiplistes:_cliquez_lien_formulaire:></a>.</p>]
 
 </B_listes>
-[<!-- (#REM)
 
-	Création de compte : proposer un lien direct
-	sur le formulaire via le cookie
-
--->]
 <p><:spiplistes:vous_abonne_aucune_liste:>.</p>
 	<B_dispos>
 	<p>[(#TOTAL_BOUCLE|=={1}|?{<:spiplistes:liste_dispo_site_:>,<:spiplistes:listes_dispos_site_:>})]</p>
