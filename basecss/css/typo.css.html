@@ -25,8 +25,12 @@ html { font-size: 100.01%; } /* pour IE < 6 */
 body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
 
 /* Titraille / Intertitres */
-h1,h2,h3,h4,h5,h6,
-.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4,
+h5,.h5,
+h6,.h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
 hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
 
 /* Titraille Blueprint
@@ -92,7 +96,7 @@ address { font-style: italic; }
 
 pre,code,kbd,samp,var,tt { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
 pre { margin:[ (#GET{margin-bottom}) ]0;
-	/* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ /
+	/* Cf.: http://perishablepress.com/press/2010/06/01/wrapping-content/ */
 	white-space: pre;           /* CSS 2.0 */
 	white-space: pre-wrap;      /* CSS 2.1 */
 	white-space: pre-line;      /* CSS 3.0 */
