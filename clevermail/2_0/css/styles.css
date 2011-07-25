@@ -64,4 +64,18 @@ h4 {
 
 .liste_lettres .actions li {
   display: inline;
+  padding-left: 20px;
+  margin-left: 10px;
+}
+
+.liste_lettres .actions li.lettre_modifier {
+  background: url(../prive/themes/spip/images/fatcow/16/email_edit.png) top left no-repeat;
+}
+
+.liste_lettres .actions li.lettre_supprimer {
+  background: url(../prive/themes/spip/images/fatcow/16/email_delete.png) top left no-repeat;
+}
+
+.liste_lettres .actions li.message_creer {
+  background: url(../prive/themes/spip/images/fatcow/16/newspaper_add.png) top left no-repeat;
 }

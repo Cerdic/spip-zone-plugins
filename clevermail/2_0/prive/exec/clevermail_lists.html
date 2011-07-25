@@ -49,11 +49,11 @@
       </li>
     </ul>
     <ul class="actions">
-      <li><a href="[(#URL_ECRIRE{clevermail_list_edit}|parametre_url{lst_id,#LST_ID})]"><:clevermail:modifier:></a></li>
+      <li class="lettre_modifier"><a href="[(#URL_ECRIRE{clevermail_list_edit}|parametre_url{lst_id,#LST_ID})]"><:clevermail:modifier:></a></li>
       [(#GET{nbSubs}|>{0}|non)
-        <li>[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_list_remove,#LST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
+        <li class="lettre_supprimer">[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_list_remove,#LST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
       ]
-      <li>[(#BOUTON_ACTION{<:clevermail:nouveau_message:>,#URL_ACTION_AUTEUR{clevermail_post_create,#LST_ID,#URL_ECRIRE{clevermail_posts,lst_id=#LST_ID}}})]</li>
+      <li class="message_creer">[(#BOUTON_ACTION{<:clevermail:nouveau_message:>,#URL_ACTION_AUTEUR{clevermail_post_create,#LST_ID,#URL_ECRIRE{clevermail_posts,lst_id=#LST_ID}}})]</li>
     </ul>
   </li>
 </BOUCLE_lists>
