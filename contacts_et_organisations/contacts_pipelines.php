@@ -66,7 +66,7 @@ function contacts_afficher_contenu_objet($flux)
 				if ( autoriser('modifier', 'organisation', $id_organisation) )
 				{
 					$texte = _T('contacts:organisation_editer');
-					$lien = generer_url_ecrire('organisation_edit', 'id_organisation='.$id_organisation.'&redirect='.$self);
+					$lien = parametre_url(generer_url_ecrire('organisation_edit', 'id_organisation='.$id_organisation), 'redirect' , $self);
 					$fond = find_in_path('images/organisation-24.png');				
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur" />' ;
 				}
