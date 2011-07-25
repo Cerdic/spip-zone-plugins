@@ -11,12 +11,12 @@ function action_lier_rubrique_dist($arg=null) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
-	$arg = explode('/', $arg);
+	$args = explode('/', $arg);
 
 	// cas liaison id_rubrique / id_organisation
-	if (intval($arg[0]) and is_numeric($arg[1])) {
+	if (intval($args[0]) and is_numeric($args[1])) {
 		//spip_log("appel à l'action_lier_rubrique_dist avec $arg[0] $arg[1] comme argument");
-		action_lier_rubrique_post($arg[0], $arg[1]);
+		action_lier_rubrique_post($args[0], $args[1]);
 	}
 
 	else {

@@ -35,8 +35,8 @@ function contacts_afficher_contenu_objet($flux)
 	if ($flux["args"]["type"] == "auteur") {
 	
 		$id = $flux["args"]["id_objet"];
-		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', 'objet=\'auteur\' AND id_objet=' . intval($id));
-		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
+		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
+		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
 
 		if ($id_contact || $id_organisation)
 		{
@@ -116,8 +116,8 @@ function contacts_affiche_gauche($flux){
 	if ($flux['args']['exec'] == 'auteur_infos'){
 
 		$id = $flux["args"]["id_auteur"];
-		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', 'objet=\'auteur\' AND id_objet=' . intval($id));
-		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
+		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
+		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
 
 		if ($id_contact || $id_organisation)
 		{
@@ -180,8 +180,8 @@ function contacts_affiche_milieu($flux){
 	if ($flux['args']['exec'] == 'auteur_infos')
 	{
 		$id = $flux["args"]["id_auteur"];
-		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', 'objet=\'auteur\' AND id_objet=' . intval($id));
-		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
+		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
+		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
 
 		if ( $id_contact || $id_organisation )
 		{
@@ -258,7 +258,7 @@ function contacts_rechercher_liste_des_champs($tables){
 	$tables['contact']['prenom'] = 2;
 	
 	// ajouter la recherche sur organisations
-	$tables['organisation']['id_auteur'] = 12;
+	$tables['organisation']['id_organisation'] = 12;
 	$tables['organisation']['nom'] = 4;
 
 	return $tables;

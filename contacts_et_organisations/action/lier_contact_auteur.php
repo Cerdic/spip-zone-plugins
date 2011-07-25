@@ -11,12 +11,12 @@ function action_lier_contact_auteur_dist($arg=null) {
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
-	$arg = explode('/', $arg);
+	$args = explode('/', $arg);
 
 	// cas liaison id_organisation / id_auteur
-	if (intval($arg[0]) and is_numeric($arg[1])) {
+	if (intval($args[0]) and is_numeric($args[1])) {
 		// spip_log("appel à l'action_lier_contact_auteur_dist avec $arg[0] $arg[1] comme argument");
-		action_lier_contact_auteur_post($arg[0], $arg[1]);
+		action_lier_contact_auteur_post($args[0], $args[1]);
 	}
 
 	else {

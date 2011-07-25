@@ -153,6 +153,33 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		maj_tables('spip_organisations_liens');
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.7");
 	}
+	
+	// on utilise la table spip_organisations_liens
+	// pour stocker le id_auteur de spip_organisations
+    if (version_compare($current_version,"1.4.0","<")){
+		$auteurs = sql_allfetsel(array('id_auteur', 'id_organisation'), 'spip_organisations', 'id_auteur > 0');
+		if ($auteurs) {
+			foreach ($auteurs as $r) {
+				// possibilité d'erreur sql si la ligne est déjà là.
+				// rien de dramatique
+				sql_insertq('spip_organisations_liens', array(
+					'id_organisation' => $r['id_organisation'],
+					'id_objet' => $r['id_auteur'],
+					'objet' => 'auteur',
+				));
+			}
+		}
+		sql_alter('TABLE spip_organisations DROP INDEX id_auteur');
+		sql_alter('TABLE spip_organisations DROP COLUMN id_auteur');
+		ecrire_meta($nom_meta_base_version, $current_version="1.4.0");
+	}
+
+	// coquille sur la clé de spip_organisations_liens
+	if (version_compare($current_version,"1.4.1","<")){
+		sql_alter('TABLE spip_organisations DROP INDEX id_contact');
+		sql_alter('TABLE spip_organisations ADD INDEX (id_organisation)');
+		ecrire_meta($nom_meta_base_version, $current_version="1.4.1");
+	}
 
 }
 

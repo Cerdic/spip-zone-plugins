@@ -14,8 +14,8 @@ function contacts_declarer_tables_interfaces($interface){
 	// -- Liaisons organisations/auteurs, contacts/auteurs et organisations/contacts
 	$interface['tables_jointures']['spip_contacts'][]= 'contacts_liens';
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts_liens';
-	$interface['tables_jointures']['spip_organisations'][] = 'auteurs';
-	$interface['tables_jointures']['spip_auteurs'][]= 'organisations';
+	$interface['tables_jointures']['spip_organisations'][] = 'organisations_liens';
+	$interface['tables_jointures']['spip_auteurs'][]= 'organisations_liens';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
 	$interface['tables_jointures']['spip_contacts'][]= 'organisations_contacts';
@@ -48,7 +48,6 @@ function contacts_declarer_tables_principales($tables_principales){
 	//-- Table organisations ------------------------------------------
 	$organisations = array(
 		"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
-		"id_auteur"			=> "bigint(21) NOT NULL default 0",
 		"id_parent"			=> "bigint(21) NOT NULL default 0",
 		"nom" 				=> "tinytext DEFAULT '' NOT NULL",
         "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
@@ -59,17 +58,15 @@ function contacts_declarer_tables_principales($tables_principales){
 		"maj"				=> "TIMESTAMP"
 		);
 	$organisations_key = array(
-		"PRIMARY KEY"		=> "id_organisation",
-		"KEY id_auteur"     => "id_auteur"
+		"PRIMARY KEY"		=> "id_organisation"
 		);
-	$organisations_join = array(
+/*	$organisations_join = array(
 		// sinon (ORGANISATIONS){auteurs.statut = xxx} ne fonctionne pas...
 		// va comprendre...
-		"id_auteur" 		=> "id_auteur", 
 		"id_organisation" 	=> "id_organisation"
-	);
+	);*/
 	$tables_principales['spip_organisations'] =
-		array('field' => &$organisations, 'key' => &$organisations_key, 'join' => &$organisations_join);
+		array('field' => &$organisations, 'key' => &$organisations_key,/* 'join' => &$organisations_join*/);
 
 	//-- Table contacts ------------------------------------------
 	$contacts = array(
@@ -121,7 +118,7 @@ function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
     );
     $organisations_liens_key = array(
         "PRIMARY KEY"    => "id_organisation, id_objet, objet",
-		"KEY id_contact" => "id_organisation"
+		"KEY id_organisation" => "id_organisation"
     );
 	$tables_auxiliaires['spip_organisations_liens'] =
 		array('field' => &$organisations_liens, 'key' => &$organisations_liens_key);

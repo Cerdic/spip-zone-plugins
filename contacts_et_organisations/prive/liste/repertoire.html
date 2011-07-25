@@ -14,7 +14,12 @@
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		[(#ENV{id_parent}|non)<tr class="vide"><td colspan="2" class='vide'></td></tr>]
 		<tr class="[(#ENV{id_parent}|non)racine ][(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR|sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a></td>
+			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
+				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+			</BOUCLE_lien_organisation>
+				[(#SET{url,[(#ID_ORGANISATION|generer_url_entite{organisation})]})]
+			<//BOUCLE_lien_organisation>
+			<td class="logo"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
 			<td class='nom'>
 				<a [ (#ENV{id_parent}|non)class="racine" ] href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
 				[(#INCLURE{fond=prive/liste/repertoire_contacts,
