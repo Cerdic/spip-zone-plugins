@@ -16,7 +16,9 @@ function contacts_header_prive($flux)
 {
 	$flux .= '<script type="text/javascript">';
 	$flux .= '$(document).ready(function(){';
-	$flux .= 'if ($("#ariane").length>0)$("#conteneur").prepend($("#ariane").html());});';
+	$flux .= 'if ($("#ariane").length>0) {';
+	$flux .= '	$("#page").prepend($("#ariane").html());';
+	$flux .= '}});';
 	$flux .= '</script>';
 
     return $flux;
