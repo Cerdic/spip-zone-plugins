@@ -51,7 +51,7 @@ function contacts_afficher_contenu_objet($flux)
 				if ( autoriser('modifier', 'contact', $id_contact) )
 				{
 					$texte = _T('contacts:contact_editer');
-					$lien = generer_url_ecrire('contact_edit', 'id_contact='.$id_contact.'&redirect='.$self);
+					$lien = parametre_url(generer_url_ecrire('contact_edit', 'id_contact='.$id_contact), 'redirect' , $self);
 					$fond = find_in_path('images/contact-24.png');				
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur" />' ;
 				}
