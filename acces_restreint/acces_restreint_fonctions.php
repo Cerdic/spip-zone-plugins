@@ -143,4 +143,60 @@ function accesrestreint_zones_rubrique($id_rubrique) {
 }
 
 
+/**
+ * Retourne la liste de toutes les rubriques sélectionnées dans des zones 
+ *
+ * @return Array liste d'identifiants de rubriques
+**/
+function accesrestreint_liste_rubriques_restreintes() {
+	static $rubs = array();
+
+	$_publique = !test_espace_prive();
+
+	if (isset($rubs[$_publique])) {
+		return $rubs[$_publique];
+	} 
+	
+	if ($_publique) {
+		$p = 'publique=' . sql_quote('oui');
+	} else {
+		$p = 'prive=' . sql_quote('non');
+	}
+	
+	$idz = sql_allfetsel('DISTINCT(id_rubrique)', array('spip_zones_rubriques AS zr', 'spip_zones AS z'), array(
+		'z.id_zone = zr.id_zone', $p
+	));
+	
+	if (is_array($idz)) {
+		$idz = array_map('reset', $idz);
+		return $rubs[$_publique] = $idz;
+	}
+	
+	return $rubs[$_publique] = array();
+}
+
+
+/**
+ * Retourne la liste de toutes les rubriques sélectionnées dans des zones 
+ *
+ * @return Array liste d'identifiants de rubriques
+**/
+function accesrestreint_liste_rubriques_restreintes_et_enfants() {
+	static $rubs = array();
+
+	$_publique = !test_espace_prive();
+
+	if (isset($rubs[$_publique])) {
+		return $rubs[$_publique];
+	}
+
+	$parents = accesrestreint_liste_rubriques_restreintes();
+	if ($parents) {
+		include_spip('inc/rubriques');
+		$branches = explode(',', calcul_branche_in($parents));
+		return $rubs[$_publique] = $branches;
+	}
+	
+	return $rubs[$_publique] = array();
+}
 ?>
