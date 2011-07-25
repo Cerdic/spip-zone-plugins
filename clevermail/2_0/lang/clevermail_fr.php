@@ -64,7 +64,7 @@ veuillez cliquer sur ce lien :
 Merci',
 
 	  // Back Office : toutes pages
-    'administration' => 'Administration de CleverMail',
+    'administration' => 'CleverMail',
 
 	  // Back Office : menu
     'liste_lettres' => 'Liste des lettres d\'information',
@@ -134,7 +134,7 @@ Merci',
 		'nom' => 'Nom',
 		'description' => 'Description',
     'informations' => 'Informations',
-		'moderation' => 'Mod&eacute;ration',
+		'moderation' => 'Mod&eacute;ration des inscriptions',
 	  'mod_explication' => 'Les diff&eacute;rents modes de mod&eacute;ration sont d&eacute;crits ci-contre.',
 		'mod_explication_open' => 'Ouverte : tout le monde peut s\'inscrire sans confirmation',
 		'mod_explication_email' => 'E-mail : tout le monde peut s\'inscrire apr&egrave;s confirmation par e-mail',
