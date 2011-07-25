@@ -425,6 +425,9 @@ if(!function_exists('html_entity_decode')) {
  */
 function spiplistes_translate_2_charset ($texte, $charset='AUTO', $is_html = false)
 {
+	$texte = trim($texte);
+	if ( empty($texte) ) { return ($texte); }
+	
 	/**
 	 * En entités unicode
 	 */
@@ -465,8 +468,8 @@ function spiplistes_utf2iso ($texte, $is_html = false) {
 		// versions diacritiques rencontrées parfois
 		// voir http://fr.wikipedia.org/wiki/Table_des_caract%C3%A8res_Unicode_%280000-0FFF%29#Sous-ensembles
 		, 'a&#768;' => chr(224) // à
-		, 'e&#768;' => chr(233) // é
-		, 'e&#769;' => chr(233) // è
+		, 'e&#768;' => chr(232) // è
+		, 'e&#769;' => chr(233) // é
 		)
 		;
 	if(!$is_html) {

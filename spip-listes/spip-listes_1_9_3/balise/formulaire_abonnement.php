@@ -104,6 +104,9 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	$adresse_site = $GLOBALS['meta']['adresse_site'];
 	
 	// envoyer le cookie de relance mot de passe si pass oublie
+	/**
+	 * @todo bloc email_oubli non fonctionnel ?
+	 */
 	if($email_oubli)
 	{
 		if(email_valide($email_oubli))
@@ -133,14 +136,12 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 					$objet = "[$nom_site_spip] " . _T('pass_oubli_mot');
 					$patron = spiplistes_patron_message();
 					$format = spiplistes_format_abo_demande($id_abo);
-					$contexte = array();
-					$email_a_envoyer = spiplistes_preparer_message (
+					$contexte = array('format' => $format);
+					list ($message_html, $message_texte) = spiplistes_preparer_message (
 						$objet
 						, $patron
-						, $format
 						, $contexte
-						, $abonne['email']
-						, $abonne['nom']);
+						);
 					
 					if(spiplistes_envoyer_mail($email_oubli
 											   , $objet
@@ -501,16 +502,16 @@ function spiplistes_formulaire_abonnement (
 
 		$abonne['format'] = spiplistes_format_valide($abonne['format']);
 		
-		$email_a_envoyer = spiplistes_preparer_message(
+		list ($message_html, $message_texte) = spiplistes_preparer_message(
 					($objet_email = "[$nom_site_spip] " . $objet_email)
 					, spiplistes_patron_message()
 					, array_merge($contexte, $abonne)
 					);
 		if(
-			spiplistes_envoyer_mail(
+			spiplistes_envoyer_mail (
 				$abonne['email']
 				, $objet_email
-				, $email_a_envoyer
+				, array ('html' => $message_html, 'texte' => $message_texte)
 				, false
 				, ''
 				, $abonne['format']

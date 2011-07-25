@@ -1527,14 +1527,17 @@ function spiplistes_texte_2_charset ($texte, $charset) {
  * @param string $objet
  * @param string $patron
  * @param array $contexte
- * @return string
+ * @return array ( message html, message texte)
  */
 function spiplistes_preparer_message ($objet, $patron, $contexte) {
 	
-	include_once (_DIR_PLUGIN_SPIPLISTES.'inc/spiplistes_mail.inc.php');
-	
-	// si pas encore abonne' ou desabonne', pas de format ! donc forcer a texte
-	$format = ($contexte['format'] == 'html') ? $contexte['format'] : ($contexte['format'] = 'texte');
+	/**
+	 * Si pas de format, forcer a texte
+	 */
+	if ( $contexte['format'] != 'html' ) {
+		$contexte['format'] = 'texte';
+	}
+	$format = $contexte['format'];
 
 	$contexte['patron'] = $patron;
 	$path_patron = _SPIPLISTES_PATRONS_MESSAGES_DIR . $patron;
@@ -1546,23 +1549,18 @@ function spiplistes_preparer_message ($objet, $patron, $contexte) {
 	if($charset != $GLOBALS['meta']['charset'])
 	{
 		include_spip('inc/charsets');
+		
 		if($format == 'html') {
 			$message_html = unicode2charset(charset2unicode($message_html), $charset);
 		}
-		//$message_texte = unicode2charset(charset2unicode($message_texte), $charset);
 		$message_texte = spiplistes_translate_2_charset ($message_texte, $charset);
 	}
-	$email_a_envoyer = array();
-	$email_a_envoyer['texte'] = new phpMail('', $objet, '', $message_texte, $charset);
-	if($format == 'html') {
-		$email_a_envoyer['html'] = new phpMail('', $objet, $message_html, $message_texte, $charset);
-		$email_a_envoyer['html']->Body = "<html>\n\n<body>\n\n" . $message_html	. "\n\n</body></html>";
-		$email_a_envoyer['html']->AltBody = $message_texte;
-	}
-	$email_a_envoyer['texte']->Body = $message_texte ."\n\n";
-	$email_a_envoyer[$format]->SetAddress($contexte['email'], $contexte['nom']);
+	$message_html = ($format == 'html')
+		? "<html>\n\n<body>\n\n" . $message_html	. "\n\n</body></html>"
+		: ''
+		;
 	
-	return($email_a_envoyer);
+	return( array($message_html, $message_texte) );
 }
 
 /**
@@ -1594,24 +1592,21 @@ function spiplistes_envoyer_mail ($to
 		$opt_simuler_envoi = spiplistes_pref_lire('opt_simuler_envoi');
 	}
 
+	if ($format != 'html') { $format = 'texte'; }
+	
 	/**
-	 * si desabo, plus de format ! donc forcer a texte
+	 * Si le message à transmettre est string
+	 * il est considéré comme au format texte
 	 */
-	$format = ($format == 'html') ? $format : 'texte';
+	if (is_string ($message)) {
+		$format = 'texte';
+		$message = array(
+			'html' => '',
+			'texte' => $message
+			);
+	}
 	
 	$charset = $GLOBALS['meta']['spiplistes_charset_envoi'];
-	
-	if ($charset != $GLOBALS['meta']['charset'])
-	{
-		if (isset($message['html']))
-		{
-			$message['html'] = spiplistes_translate_2_charset ($message['html'], $charset, true);
-			$message['texte'] = spiplistes_translate_2_charset ($message['texte'], $charset, false);
-		}
-		else if (is_string ($message)) {
-			$message = array('texte' => $message);
-		}
-	}
 	
 	if (!$from)
 	{
@@ -1643,47 +1638,23 @@ function spiplistes_envoyer_mail ($to
 		
 		$return_path = spiplistes_return_path ($from);
 		
-		if ( $format == 'html' )
+		if ( $format != 'html' ) { $message['html'] = ''; }
+		$email_a_envoyer = new phpMail($to, $subject, $message['html'], $message['texte'], $charset);
+		$email_a_envoyer->From = $from ;
+		$email_a_envoyer->AddCustomHeader('Errors-To: '.$return_path); 
+		$email_a_envoyer->AddCustomHeader('Reply-To: '.$reply_to); 
+		$email_a_envoyer->AddCustomHeader('Return-Path: '.$return_path); 
+		$email_a_envoyer->SMTPKeepAlive = true;
+		if($fromname) $email_a_envoyer->FromName = $fromname ; 
+
+		if ($result = $email_a_envoyer->send())
 		{
-			if ( is_string($message) ) {
-				$message = array (
-					'html' => $message,
-					'texte' => spiplistes_courrier_version_texte($message)
-				);
-			}
-			if ( is_array($message) && isset($message[$format]) )
-			{
-				$email_a_envoyer[$format] = new phpMail($to, $subject, $message[$format], $message['texte'], $charset);
-				$email_a_envoyer[$format]->From = $from ; 
-				if($fromname) $email_a_envoyer[$format]->FromName = $fromname ; 
-				$email_a_envoyer[$format]->AddCustomHeader("Errors-To: ".$return_path); 
-				$email_a_envoyer[$format]->AddCustomHeader("Reply-To: ".$from); 
-				$email_a_envoyer[$format]->AddCustomHeader("Return-Path: ".$return_path); 	
-				$email_a_envoyer[$format]->SMTPKeepAlive = true;
-				$email_a_envoyer[$format]->Body = $message[$format];
-				$email_a_envoyer[$format]->AltBody = $message['texte'];
-			}
+			$email_a_envoyer->SmtpClose();
 		}
 		
-		$email_a_envoyer['texte'] = new phpMail($to, $subject, '', $message['texte'], $charset);
-		$email_a_envoyer['texte']->From = $from ;
-		if($fromname) $email_a_envoyer['html']->FromName = $fromname ; 
-		$email_a_envoyer['texte']->AddCustomHeader('Errors-To: '.$return_path); 
-		$email_a_envoyer['texte']->AddCustomHeader('Reply-To: '.$reply_to); 
-		$email_a_envoyer['texte']->AddCustomHeader('Return-Path: '.$return_path); 
-		$email_a_envoyer['texte']->SMTPKeepAlive = true;
-		$email_a_envoyer['texte']->Body = $message['texte'];
-		
-		if ($result = $email_a_envoyer[$format]->send())
-		{
-			$email_a_envoyer['html']->SmtpClose();
-			$email_a_envoyer['texte']->SmtpClose();	
-		}
-							
-		$msg = "email from $from to $to";
-		spiplistes_log(!$result ? 'error: '.$msg.' not sent' : "$msg sent");
+		spiplistes_debug_log ('EMAIL FROM '.$from.' TO '.$to.' : '.($result ? 'OK' : 'ERROR'));
 	}
-	return($result);
+	return ($result);
 }
 
 function spiplistes_listes_statuts_periodiques () {
