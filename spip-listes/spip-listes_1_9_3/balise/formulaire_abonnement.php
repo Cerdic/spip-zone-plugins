@@ -105,7 +105,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 	
 	// envoyer le cookie de relance mot de passe si pass oublie
 	/**
-	 * @todo bloc email_oubli non fonctionnel ?
+	 * @todo 25/07/2011: bloc email_oubli non fonctionnel ? A vérifier.
 	 */
 	if($email_oubli)
 	{
@@ -187,8 +187,10 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 		);
 	}
 	
-	//code pour s inscrire
-	else if(
+	/**
+	 * S'inscrire en tant qu'auteur ou visiteur
+	 */
+	else if (
 		$accepter_inscrire_auteur 
 		|| $accepter_inscrire_visiteur 
 		|| ($GLOBALS['meta']['forums_publics'] == 'abo') 
@@ -253,8 +255,10 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 
 /**
  * Abonnement d'un visiteur ou d'un auteur
- * Si authentifie', modifie l'abonnement, sinon envoie mail avec cookie_oubli pour confirmer.
- * Si adresse_mail absent de la base, cree un login a partir de l'email et renvoie un mail de confirmation.
+ * Si authentifie', modifie l'abonnement,
+ * 	sinon envoie mail avec cookie_oubli pour confirmer.
+ * Si adresse_mail absent de la base, cree un login
+ * 	a partir de l'email et renvoie un mail de confirmation.
  *
  * @param string $type
  * @param string $acces_membres
@@ -323,12 +327,23 @@ function spiplistes_formulaire_abonnement (
 		
 	}
 	
-	$abonne['cookie_oubli'] = creer_uniqid();
-	spiplistes_debug_log ('COOKIE: '.$abonne['cookie_oubli']);
+	
 	
 	// si identifie' par cookie ou login... effectuer les modifications demandees
 	if(count($abonne)) {
 		
+		/**
+		 * Créer un nouveau cookie pour ce compte
+		 * afin de le transmettre par mail
+		 * pour lien direct sur le formulaire sans auth.
+		 */
+		$abonne['cookie_oubli'] = creer_uniqid();
+		spiplistes_auteurs_cookie_oubli_updateq(
+												$abonne['cookie_oubli'],
+												$abonne['email']
+												);
+		//spiplistes_debug_log ('COOKIE: '.$abonne['cookie_oubli']);
+	
 		// toujours rester en mode modif pour permettre la correction
 		$mode_modifier = 'oui';
 		
@@ -386,9 +401,13 @@ function spiplistes_formulaire_abonnement (
 	}
 	else // non identifie' ? gestion par cookie_oubli.
 	{
+		
 		$texte_intro = _T('form_forum_message_auto') . '<br /><br />'._T('spiplistes:bonjour') . "<br />\n";
 		
-		$abonne = array('email' => email_valide($mail_inscription_));
+		$abonne = array(
+			'email' => email_valide($mail_inscription_),
+			'cookie_oubli' => creer_uniqid()
+			);
 		
 		if($abonne['email'])
 		{
@@ -437,7 +456,9 @@ function spiplistes_formulaire_abonnement (
 				}
 				
 			}
-			// l'adresse mail n'existe pas dans la base.
+			/**
+			 * Si l'adresse mail n'existe pas dans la base
+			 */
 			else 
 			{
 				
@@ -459,7 +480,9 @@ function spiplistes_formulaire_abonnement (
 				// format d'envoi par defaut pour le premier envoi de confirmation
 				$abonne['format'] = spiplistes_format_abo_default();
 				
-				// creation du compte ...
+				/**
+				 * creation du compte
+				 */
 				if($id_abonne = spiplistes_auteurs_auteur_insertq(
 						array(
 							'nom' => $abonne['nom']
@@ -496,6 +519,7 @@ function spiplistes_formulaire_abonnement (
 			return(array(true, _T('spiplistes:erreur_adresse'), $mode_modifier, false));
 		}
 	}
+	
 	if($id_abonne && $email_a_envoyer) {
 		
 		$abonne['ids_abos'] = spiplistes_abonnements_listes_auteur($abonne['id_auteur']);
