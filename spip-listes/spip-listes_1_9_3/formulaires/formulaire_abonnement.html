@@ -144,10 +144,11 @@
 				La selection des listes desirees est
 				accessible a la confirmation recue par mail
 			
-			-->][(#ENV{statut_auteur}|oui)
-							<label lang='#LANG'>
-							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
-							]<span class='liste-titre'>#TITRE</span>
+			-->][(#ENV{activer_formulaire}|=={oui}|oui)
+				[(#ENV{statut_auteur}|oui)
+					<label lang='#LANG'>
+					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
+					]]<span class='liste-titre'>#TITRE</span>
 				<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 				[<!--(#REM)</label>-->]
 			</li>
@@ -163,10 +164,11 @@
 				La selection des listes desirees est
 				accessible a la confirmation recue par mail
 				
-				-->][(#ENV{statut_auteur}|oui)
-							<label lang='#LANG'>
-							<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
-							]<span class='liste-titre'>#TITRE</span>
+				-->][(#ENV{activer_formulaire}|=={oui}|oui)
+				[(#ENV{statut_auteur}|oui)
+					<label lang='#LANG'>
+					<input type="checkbox" name="list&#91;&#93;" [(#_inscription:TOTAL_BOUCLE|?{' ',''})checked="checked"] value="#ID_LISTE" />
+					]]<span class='liste-titre'>#TITRE</span>
 							<span id='listeDescriptif#ID_LISTE' class='listeDescriptif liste-descriptif'>[(#TEXTE|textebrut|couper{80})]</span>
 						[<!--(#REM)</label>-->]
 					</li>
@@ -231,9 +233,11 @@
 		</ul>
 	</fieldset>
 	]
+[(#ENV{activer_formulaire}|=={oui}|oui)
 	<p class="boutons spip_bouton">
 		<input type="submit" class="submit" name="Valider" value="<:bouton_valider:>" />
 	</p>
+]
 	</form>][<!--(#REM) fin mode_login -->]
 </div>
 

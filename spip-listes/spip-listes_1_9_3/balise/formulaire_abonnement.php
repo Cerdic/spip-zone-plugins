@@ -215,6 +215,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 			 , $reponse_formulaire
 			 , $mode_modifier
 			 , $abonne
+			 , $activer_formulaire
 			 ) = 
 			spiplistes_formulaire_abonnement(
 				(($type=='redac') ? 'redac' : 'forum')
@@ -246,6 +247,7 @@ function balise_FORMULAIRE_ABONNEMENT_dyn($id_liste, $formulaire) {
 					, 'id_auteur' => $abonne['id_auteur']
 					, 'format' => $abonne['format']
 					, 'statut_auteur' => $abonne['statut']
+					, 'activer_formulaire' => $activer_formulaire
 					)
 				);
 				
@@ -288,6 +290,13 @@ function spiplistes_formulaire_abonnement (
 	$reponse_formulaire = '';
 	$email_a_envoyer = $mode_modifier = $sql_where = false;
 	$abonne = array();
+	
+	/**
+	 * Le formulaire est (re) activé
+	 * sauf si c'est un retour d'inscription
+	 * (qui attend confirmation via mail)
+	 */
+	$activer_formulaire = 'oui';
 	
 	/**
 	 * La variable d est transmise via URL proposé en pied de mail
@@ -457,10 +466,12 @@ function spiplistes_formulaire_abonnement (
 				
 			}
 			/**
-			 * Si l'adresse mail n'existe pas dans la base
+			 * Si l'adresse mail n'existe pas dans la base,
+			 * créer le compte
 			 */
 			else 
 			{
+				$activer_formulaire = 'non';
 				
 				$abonne['login'] = spiplistes_login_from_email($abonne['email']);
 				$abonne['nom'] =
@@ -556,7 +567,8 @@ function spiplistes_formulaire_abonnement (
 		TRUE,
 		$reponse_formulaire,
 		$mode_modifier,
-		$abonne
+		$abonne,
+		$activer_formulaire
 	);
 
 	return($result);
