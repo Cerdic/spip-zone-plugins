@@ -39,8 +39,7 @@
 		
 		</BOUCLE_tester_date>
 		
-[(#REM) <!-- de toutes facon si un abonnement ouvre l'acces restreint, cette page n'est pas appellee -->
-todo colle pas car archives font moins que toutes les revues?... question]
+[(#REM) <!-- de toutes facon si un abonnement ouvre l'acces restreint, cette page n'est pas appellee -->]
 	<//B_rubrique_abonne>	
  
 [(#GET{valide}|=={oui}|oui)
@@ -94,14 +93,17 @@ Vous etes autorise a voir la rubrique et a telecharger les documents
 				#FORMULAIRE_LOGIN{#SELF}
 			]
 			
+			[(#PRIX*|!={999.99}|oui)
+			
 			<p><:abo:abonner_ou_acheter_rubrique:></p>
 
 			[(#PLUGIN{abonnementXXXX}|oui)	
 			<INCLURE{fond=inclure/commander_abonnements,env,ajax}>
 			]
 
-						
+				
 			<INCLURE{fond=inclure/commander_rubrique,env,vers=#URL_PAGE{_abonnement_}|parametre_url{appel,mon_panier}} />
+			]
 		</div>
 		
 <//B_autorise>
