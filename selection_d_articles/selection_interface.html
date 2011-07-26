@@ -15,15 +15,15 @@
 
 
 	<tr class='tr_liste'>
-		[<td><img src="(#EVAL{puce_statut_article_dist([(#ID_ARTICLE)], "[(#STATUT)]", "[(#ID_RUBRIQUE)]", 'article', 0) }|extraire_attribut{src}|url_absolue)" /></td>]
+		[<td><img src="(#EVAL{puce_statut_article_dist([(#ID_ARTICLE)], "[(#STATUT)]", "[(#ID_RUBRIQUE)]", 'article', 0) }|extraire_attribut{src}|url_absolue)" alt="" /></td>]
 
 		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
 		<td>
 			[(#EVAL{#COMPTEUR_BOUCLE!=1}|?{" ",""})
-				<div><a href="#" onclick="$('#pave_selection').load('?exec=selection_interface&id_rubrique=#ENV{id_rubrique}&remonter_ordre=#ID_ARTICLE'); return false;"><img src="[(#EVAL{_DIR_PLUGIN_SELECTION}|url_absolue)]/imgs/fleche-haut.gif" /></a></div> 
+				<div><a href="#" onclick="$('#pave_selection').load('?exec=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;remonter_ordre=#ID_ARTICLE'); return false;"><img src="[(#EVAL{_DIR_PLUGIN_SELECTION}|url_absolue)]/imgs/fleche-haut.gif" /></a></div> 
 			]
 			[(#EVAL{#COMPTEUR_BOUCLE!=#TOTAL_BOUCLE}|?{" ",""})
-				<div><a href="#" onclick="$('#pave_selection').load('?exec=selection_interface&id_rubrique=#ENV{id_rubrique}&descendre_ordre=#ID_ARTICLE'); return false;"><img src="[(#EVAL{_DIR_PLUGIN_SELECTION}|url_absolue)]/imgs/fleche-bas.gif" /></a></div> 
+				<div><a href="#" onclick="$('#pave_selection').load('?exec=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;descendre_ordre=#ID_ARTICLE'); return false;"><img src="[(#EVAL{_DIR_PLUGIN_SELECTION}|url_absolue)]/imgs/fleche-bas.gif" /></a></div> 
 			]
 		</td>
 		]
@@ -33,7 +33,7 @@
 		<td class="arial1"><b style="white-space: nowrap;">N°#ID_ARTICLE</b></td>
 		[(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
 		<td>
-			<a title='Retirer de la liste' onclick="$('#pave_selection').load('?exec=selection_interface&id_rubrique=#ENV{id_rubrique}&supprimer_ordre=#ID_ARTICLE'); return false;" href="#"><img src="#CHEMIN{images/croix-rouge.gif}" alt="X" /></a>
+			<a title='Retirer de la liste' onclick="$('#pave_selection').load('?exec=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;supprimer_ordre=#ID_ARTICLE'); return false;" href="#"><img src="#CHEMIN{images/croix-rouge.gif}" alt="X" /></a>
 		</td>
 		]
 	</tr>	
@@ -43,12 +43,14 @@
 
 
 [(#EVAL{autoriser('modifier','rubrique', [(#ENV{id_rubrique})])==1}|?{" ",""})
-	<form onsubmit="valeur=Math.floor($('#ajouter_selection').attr('value')); if (valeur > 0){ $('#pave_selection').load('?exec=selection_interface&id_rubrique=#ENV{id_rubrique}&ajouter_selection='+valeur); }; return false;" action="index.php" method="get">
-	Sélectionner l'article numéro : 
-	<input type="hidden" name="exec" value="naviguer">
-	<input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}">
-	<input id="ajouter_selection" type="text" />
-	<input type="submit" value="Ajouter" class="fondo" />
+	<form onsubmit="valeur=Math.floor($('#ajouter_selection').attr('value')); if (valeur > 0){ $('#pave_selection').load('?exec=selection_interface&amp;id_rubrique=#ENV{id_rubrique}&amp;ajouter_selection='+valeur); }; return false;" action="index.php" method="get">
+      <div>
+         <input type="hidden" name="exec" value="naviguer" />
+         <input type="hidden" name="id_rubrique" value="#ENV{id_rubrique}" />
+         <label for="ajouter_selection">Sélectionner l'article numéro : </label>
+         <input id="ajouter_selection" type="text" />
+         <input type="submit" value="Ajouter" class="fondo" />
+      </div>
 	</form>
 
 ]
