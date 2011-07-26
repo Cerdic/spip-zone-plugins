@@ -35,7 +35,8 @@ function exec_configurer_ck_dist() {
 }
 
 
-if (!function_exists('sinon_interdire_acces_dist')){
+if (!include_spip('inc/filtres_ecrire')
+	OR !function_exists('sinon_interdire_acces')){
 	/**
 	 * Bloquer l'acces a une page en renvoyant vers 403
 	 * @param bool $ok
