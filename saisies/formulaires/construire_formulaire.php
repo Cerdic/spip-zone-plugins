@@ -23,8 +23,8 @@ function formulaires_construire_formulaire_charger($identifiant, $formulaire_ini
 	// Si le formulaire actuel est différent du formulaire initial on agite un drapeau pour le dire
 	if ($formulaire_actuel != $formulaire_initial){
 		$contexte['formulaire_modifie'] = true;
-		$contexte['_message_attention'] = _T('saisies:construire_attention_modifie');
 	}
+	$contexte['_message_attention'] = _T('saisies:construire_attention_modifie');
 	
 	// On passe ça pour l'affichage
 	$contexte['_contenu'] = $formulaire_actuel;

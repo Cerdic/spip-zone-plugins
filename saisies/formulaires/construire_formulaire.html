@@ -3,7 +3,7 @@
 ]
 <div class="formulaire_spip formulaire_editer formulaire_#ENV{form}">
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{_message_attention})</p>]
+	<p id="message_attention" class="reponse_formulaire reponse_formulaire_ok[ (#ENV{formulaire_modifie}|non) invisible]">#ENV*{_message_attention}</p>
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	
 	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
@@ -12,17 +12,16 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<input style="display:none;" type="submit" class="submit" name="enregistrer" value="<:bouton_enregistrer:>" />
-		<input style="display:none;" type="submit" class="vide" name="" value="" />
 
 		<ul id="deplacable">
-			[(#ENV{formulaire_modifie}|oui)
-			<li class="actions_formulaire">
+			
+			<li id="reinitialiser" class="actions_formulaire[ (#ENV{formulaire_modifie}|non) invisible]">
 				<button type="submit" class="submit" name="reinitialiser" value="oui" onclick="return confirm('<:saisies:construire_reinitialiser_confirmer:>')">
 					<img src="#CHEMIN{images/formulaire-reinitialiser-24.png}" alt="" />
 					<:saisies:construire_reinitialiser:>
 				</button>
 			</li>
-			]
+
 			<BOUCLE_contenu(POUR){tableau #ENV{_contenu}}>
 			[(#VAL{saisie}|array_key_exists{#VALEUR}|oui)
 				[(#VALEUR**|formidable_generer_saisie_configurable{#ENV**|unserialize})]
@@ -51,10 +50,7 @@
 	</div></form>
 
 	[(#ENV{erreurs}|non)
-		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.core.js})'></script>]
-		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.widget.js})'></script>]
-		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.mouse.js})'></script>]
-		[<script type='text/javascript' src='(#CHEMIN{javascript/ui/jquery.ui.sortable.js})'></script>
+		[(#CHEMIN{javascript/ui/jquery.ui.sortable.js}|oui)
 			[(#SET{sortable,1})]
 		]
 	]
@@ -113,42 +109,49 @@
 						.find('> fieldset > ul').show();
 				});
 			[(#ENV{erreurs}|non|et{#GET{sortable}})
-				if ($.fn.sortable) {
-					$( "#deplacable, #deplacable ul" ).sortable({
-						containment: 'parent',
-						connectWith: "#deplacable, #deplacable ul",
-						placeholder: "ui-state-highlight",
-						handle: '>.actions .deplacer_saisie',
-						start: function(event, ui) {
-							$('.ui-state-highlight')
-								.css('height', ui.item.css('height'))
-								.css('height', '+=20px');
-						},
-						update: function(event, ui) {
-							id = ui.item.data('id');
-							ou = ui.item.next().data('id');
-							// avant le suivant
-							if (!ou) {
-								// sinon dans le parent
-								ou = ui.item.closest('.fieldset').data('id');
-								if (ou) {
-									ou = '[(#VAL{91}|chr)]' + ou + '[(#VAL{93}|chr)]';
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.core.js}", function(){
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.widget.js}", function(){
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.mouse.js}", function(){
+				$.getScript("#CHEMIN{javascript/ui/jquery.ui.sortable.js}", function(){
+					if ($.fn.sortable) {
+						$( "#deplacable, #deplacable ul" ).sortable({
+							revert: true,
+							containment: '#deplacable',
+							connectWith: "#deplacable, #deplacable ul",
+							placeholder: "ui-state-highlight",
+							handle: '>.actions .deplacer_saisie',
+							start: function(event, ui) {
+								$('.ui-state-highlight')
+									.css('height', ui.item.css('height'))
+									.css('height', '+=20px');
+							},
+							update: function(event, ui) {
+								id = ui.item.data('id');
+								ou = ui.item.next().data('id');
+								// avant le suivant
+								if (!ou) {
+									// sinon dans le parent
+									ou = ui.item.closest('.fieldset').data('id');
+									if (ou) {
+										ou = '[(#VAL{91}|chr)]' + ou + '[(#VAL{93}|chr)]';
+									}
+									console.log(ou);
 								}
-								console.log(ou);
+								url = "#URL_ECRIRE";
+								$.get(url, {
+									session: '#ENV{_identifiant_session}',
+									action: 'deplacer_saisie',
+									saisie: id,
+									ou: ou
+								}, function() {
+									//$('input.vide').submit();
+									$('#reinitialiser').removeClass('invisible');
+									$('#message_attention').removeClass('invisible');
+								});
 							}
-							url = "#URL_ECRIRE";
-							$.get(url, {
-								session: '#ENV{_identifiant_session}',
-								action: 'deplacer_saisie',
-								saisie: id,
-								ou: ou
-							}, function() {
-								$('input.vide').submit();
-							});
-						}
-					});
-					$( "#deplacable" ).disableSelection();
-				}
+						});
+					}
+				});});});});
 			]
 		});
 		
