@@ -134,9 +134,8 @@ function jqueryui_insert_head($flux) {
 	if ($theme == 'no_css/')
 		return $flux;
 	
-	// ajouter core si necessaire
-	if (!in_array('jquery.ui.core', $config['plugins']))
-		$config['plugins'][] = 'jquery.ui.core';
+	// ajouter core tout le temps et en debut de tableau, array_unique supprimera les occurrences suivantes
+	array_unshift($config['plugins'],'jquery.ui.core');
 
 	// recuperer la liste des plugins jquery actives ou issus du pipeline jqueryui_forcer
 	// Attention, l'ordre du merge est important, le css du core doit est charge avant le reste
@@ -145,7 +144,7 @@ function jqueryui_insert_head($flux) {
 	// ajouter theme si necessaire
 	if (!in_array('jquery.ui.theme', $config['plugins']))
 		$config['plugins'][] = 'jquery.ui.theme';
-		
+
 	// les CSS correspondantes aux plugins
 	$Tjquery_css = array(
 						'jquery.ui.accordion',
