@@ -1,45 +1,9 @@
 <?php
 function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
-	// Ces define sont mis ici car dans clevermail_options.php, il etait impossible de surcharger avec un plugin ayant :
-	// 	<utilise id="clevermail" version="[2.5.0;]" />
-	// Pour proposer une URL complète (true) ou juste le chemin du squelette (false) à la création d'une nouvelle lettre
-	@define("_CLEVERMAIL_DISTANT", true);
-	@define("_CLEVERMAIL_NOUVEAUTES_HTML", 'clevermail_nouveautes_html');
-	// _CLEVERMAIL_NOUVEAUTES_HTML_OPTION est facultatif. Il permet de completer l'url amorcee avec _CLEVERMAIL_NOUVEAUTES_HTML.
-	// define("_CLEVERMAIL_NOUVEAUTES_HTML_OPTION", 'cat=mot&sujet=1&pied=1&entete=1');
-	@define("_CLEVERMAIL_NOUVEAUTES_TEXT", 'clevermail_nouveautes_text');
-	// _CLEVERMAIL_NOUVEAUTES_TEXT_OPTION est facultatif. Il permet de completer l'url amorcee avec _CLEVERMAIL_NOUVEAUTES_TEXT.
-	// define("_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION", 'cat=mot&sujet=1&pied=1&entete=1');
 	if ($valeurs = sql_fetsel('*', 'spip_cm_lists', 'lst_id='.intval($lst_id))) {
 		$valeurs['lst_auto_week_days'] = explode(',', $valeurs['lst_auto_week_days']);
 	} else {
     $cm_mail_admin = sql_getfetsel('set_value', 'spip_cm_settings', 'set_name="CM_MAIL_ADMIN"');
-  	if (defined('_CLEVERMAIL_NOUVEAUTES_HTML_OPTION')) {
-			if (_CLEVERMAIL_DISTANT) {
-				$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML,_CLEVERMAIL_NOUVEAUTES_HTML_OPTION);
-			} else {
-				$url_html = _CLEVERMAIL_NOUVEAUTES_HTML;
-			}
-		} else {
-			if (_CLEVERMAIL_DISTANT) {
-				$url_html = generer_url_public(_CLEVERMAIL_NOUVEAUTES_HTML);
-			} else {
-				$url_html = _CLEVERMAIL_NOUVEAUTES_HTML;
-			}
-		}
-		if (defined('_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION')) {
-			if (_CLEVERMAIL_DISTANT) {
-				$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT,_CLEVERMAIL_NOUVEAUTES_TEXT_OPTION);
-			} else {
-				$url_text = _CLEVERMAIL_NOUVEAUTES_TEXT;
-			}
-		} else {
-			if (_CLEVERMAIL_DISTANT) {
-				$url_text = generer_url_public(_CLEVERMAIL_NOUVEAUTES_TEXT);
-			} else {
-				$url_text = _CLEVERMAIL_NOUVEAUTES_TEXT;
-			}
-		}
 		$valeurs = array(
 			'lst_id' => -1,
 			'lst_name' => '',
@@ -52,10 +16,8 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 			'lst_unsubscribe_subject' => _T('clevermail:confirmation_votre_desinscription'),
 			'lst_unsubscribe_text' => _T('clevermail:confirmation_votre_desinscription_text'),
 			'lst_subject_tag' => 1,
-			//'lst_url_html' => $GLOBALS['meta']['adresse_site'].'/?page=clevermail_nouveautes_html',
-			'lst_url_html' => $url_html,
-			//'lst_url_text' => $GLOBALS['meta']['adresse_site'].'/?page=clevermail_nouveautes_text',
-			'lst_url_text' => $url_text,
+			'lst_url_html' => 'clevermail_nouveautes_html',
+			'lst_url_text' => 'clevermail_nouveautes_text',
 		  'lst_auto_mode' => 'none',
 		  'lst_auto_hour' => 8,
       'lst_auto_week_days' => array(1),
@@ -69,7 +31,7 @@ function formulaires_clevermail_list_edit_charger_dist($lst_id = -1) {
 
 function formulaires_clevermail_list_edit_verifier_dist($lst_id = -1) {
 	$erreurs = array();
-	foreach(array('lst_name', 'lst_moderator_email', 'lst_url_html', 'lst_url_text') as $obligatoire) {
+	foreach(array('lst_name', 'lst_moderator_email', 'lst_url_html') as $obligatoire) {
 		if (!_request($obligatoire)) {
 			$erreurs[$obligatoire] = _T('clevermail:ce_champ_est_obligatoire');
 		}
@@ -155,11 +117,11 @@ function formulaires_clevermail_list_edit_traiter_dist($lst_id = -1) {
 
   if (_request('lst_id') == -1) {
     sql_insertq('spip_cm_lists', $champs);
-    // XXX : log en chaîne de langue
+    // TODO : log en chaîne de langue
     spip_log('Nouvelle liste « '._request('lst_name').' »', 'clevermail');
   } else {
   	sql_updateq('spip_cm_lists', $champs, "lst_id = ".intval(_request('lst_id')));
-  	// XXX : log en chaîne de langue
+  	// TODO : log en chaîne de langue
     spip_log('Modification de la liste « '._request('lst_name').' » (id = '._request('lst_id').')', 'clevermail');
   }
 

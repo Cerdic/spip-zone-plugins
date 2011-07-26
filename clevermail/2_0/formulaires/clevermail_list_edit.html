@@ -112,14 +112,16 @@
           <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
             <label for="#GET{name}"><:clevermail:version_html:></label>
             [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:url_templates_explication:></p>
             <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
           </li>
           #SET{name,lst_url_text}
           #SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-          #SET{obli,'obligatoire'}
+          #SET{obli,''}
           <li class="editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
             <label for="#GET{name}"><:clevermail:version_txt:></label>
             [<span class='erreur_message'>(#GET{erreurs})</span>]
+            <p class="explication"><:clevermail:version_txt_explication:></p>
             <input type="text" class="text" name="#GET{name}" id="#GET{name}" size="50" maxlength="255" value="#ENV{#GET{name}}" />
           </li>
         </ul>
