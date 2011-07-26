@@ -75,6 +75,14 @@ function exec_adherents() {
 	
 
 		/* on appelle ici la fonction qui calcule le code du formulaire/tableau de membres pour pouvoir recuperer la liste des membres affiches a transmettre a adherents_table pour la generation du pdf */
+		//Filtre ID
+		$id = intval(_request('id'));
+		if (!$id) {
+			$id = _T('asso:adherent_libelle_id_auteur');
+		} else {
+			$critere = "a.id_auteur=$id";
+		}
+
 		list($liste_id_auteurs, $code_liste_membres) = adherents_liste(intval(_request('debut')), $lettre, $critere, $statut_interne);
 	
 		echo debut_cadre_enfonce('',true),
@@ -115,15 +123,8 @@ function exec_adherents() {
 		echo "\n<a href='$h'>"._T('asso:adherent_entete_tous').'</a>'; }
 		
 		// FILTRES
-		echo '</td><td style="text-align:right;">';
-		
 		//Filtre ID
-		$id = intval(_request('id'));
-		if (!$id) {
-			$id = _T('asso:adherent_libelle_id_auteur');
-		} else {
-			$critere = "a.id_auteur=$id";
-		}
+		echo '</td><td style="text-align:right;">';
 		
 		echo "\n<form method='post' action='".$url_adherents."'><div>";
 		echo '<input type="text" name="id"  class="fondl" style="padding:0.5px" onfocus=\'this.value=""\' size="10"  value="'. $id .'" onchange="form.submit()" />';
