@@ -58,7 +58,15 @@ jQuery.geoportail =
 		for (i = 0; i < this.cartes.length; i++)
 		{	var carte = this.cartes[i];
 			
-			var fview = (typeof (Geoportal.Viewer[carte.type]) == 'function') ? Geoportal.Viewer[carte.type] : Geoportal.Viewer.Default;
+			var fview;
+			switch (carte.type)
+			{	case 'Standard' : 
+					fview = Geoportal.Viewer[carte.type];
+					break;
+				default : 
+					fview = Geoportal.Viewer.Default;
+					break;
+			}
 			// Declarer une nouvelle carte
 			carte.map = new fview
 			(	"GeoportalMapDiv"+carte.id,
@@ -70,6 +78,7 @@ jQuery.geoportail =
 					gGEOPORTALRIGHTSMANAGEMENT
 				)
 			);
+			carte.map.type = carte.type;
 		}
 		//Attente du chargement des cartes...
 		this.initMap2();
@@ -841,7 +850,7 @@ jQuery.geoportail =
 					box.info = 0;
 				break;
 				/* */
-				case 'mini': box.info = box.tools = box.layer = 0				
+				case 'mini': box.info = box.tools = box.layer = 0;				
 				default: 
 					map.addGeoportalLayers(); 
 					// Affichage des des couches ORTHO et CARTO
@@ -863,11 +872,19 @@ jQuery.geoportail =
 			// centrage
 			if (lon) map.getMap().setCenterAtLonLat(lon, lat, ech);
 
+			// Cas du type OpenLayers
+			if (map.type == 'OpenLayers') 
+			{	if (box.layer!='0' || box.layer=='false') 
+					map.getMap().addControl(new OpenLayers.Control.PanZoom());
+				if (box.layer!='0' && box.layer!='false') 
+					map.getMap().addControl(new OpenLayers.Control.LayerSwitcher());
+				box.tools = box.layer = '0';
+			}
 			// Gestion des controles
 			switch (box.layer) 
 			{	case '0':
 				case 'false': map.setLayersPanelVisibility(false); break;
-				case '1': map
+				case '1': 
 				case 'true': map.setLayersPanelVisibility(true); break;
 				default: map.openLayersPanel(false); break;
 			}
