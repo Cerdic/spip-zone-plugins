@@ -137,8 +137,8 @@ var mashup =
 		}
 		// Masquer les palettes
 		if (!quoi) 
-		{	map0.setLayersPanelVisibility(0);
-			map0.setToolsPanelVisibility(0);
+		{	map0.openLayersPanel(false);
+			map0.openToolsPanel(false);
 		}
 	},
 	
