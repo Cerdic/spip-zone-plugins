@@ -51,18 +51,18 @@ h4 {
 }
 
 
-/* Liste des lettres */
+/* Listes des lettres et des messages */
 
 .liste_lettres .description {
   font-size: 1.2em;
   margin: .5em 0;
 }
 
-.liste_lettres .actions {
+.liste_lettres .actions, .liste_messages .actions {
   list-style-type: none;
 }
 
-.liste_lettres .actions li {
+.liste_lettres .actions li, .liste_messages .actions li {
   display: inline;
   padding-left: 20px;
   margin-left: 10px;
@@ -77,5 +77,9 @@ h4 {
 }
 
 .liste_lettres .actions li.message_creer {
+  background: url(../prive/themes/spip/images/fatcow/16/newspaper_add.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_envoyer {
   background: url(../prive/themes/spip/images/fatcow/16/newspaper_add.png) top left no-repeat;
 }

@@ -13,7 +13,7 @@
   <B_posts_new>
 		<h2><:clevermail:nouveaux_messages:></h2>
 	  <p><:clevermail:nouveaux_messages_text:> :</p>
-		<ul class="liste_items">
+		<ul class="liste_items liste_messages">
 			<BOUCLE_posts_new(CM_POSTS){lst_id}{pst_date_sent=0}{par pst_date_create}{inverse}>
 			  <li class="item">
 			    <p><strong>#PST_SUBJECT</strong></p>
@@ -21,19 +21,18 @@
             <:clevermail:cree:> le [(#PST_DATE_CREATE|cm_date)] à [(#PST_DATE_CREATE|cm_heure)]
 	          [(#PST_DATE_UPDATE|>{0}|oui) | <:clevermail:modifie:> le [(#PST_DATE_UPDATE|cm_date)] à [(#PST_DATE_UPDATE|cm_heure)]]
 		      </div>
-			    <div class="actions">
-				    <:clevermail:actions:> :
-				    <a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> TXT</a>
-	          | <a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu:> HTML</a>
-				    | <a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a>
-		        | [(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]
+			    <ul class="actions">
+	          <li><a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_html:></a></li>
+				    <li><a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_texte:></a></li>
+				    <li><a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a></li>
+		        <li>[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
 	          [(#GET{nbSubs}|>{0}|oui)
-  	          | [(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF},ajax})]
+  	          <li class="message_envoyer">[(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF},ajax})]</li>
   	        ]
 	          [(#GET{nbSubs}|>{0}|non)
-	            | <span title="<:clevermail:envoyer_non_aucun_abonne:>"><:clevermail:envoyer:></span>
+	            <li><span title="<:clevermail:envoyer_non_aucun_abonne:>"><:clevermail:envoyer:></span></li>
 	          ]
-			    </div>
+			    </ul>
 			  </li>
 	  	</BOUCLE_posts_new>
 		</ul>
