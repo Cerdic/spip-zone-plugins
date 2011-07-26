@@ -103,10 +103,6 @@ function jqueryui_jquery_plugins($plugins){
 		$keys = array_keys($intersect);
 		array_splice($config['plugins'],$keys[0], 0, "jquery.effects.core");
 	}
-	if(count($intersect = array_intersect($config['plugins'],$dependance_effects)) > 0){
-		$keys = array_keys($intersect);
-		array_splice($config['plugins'],$keys[0], 0, "jquery.effects.core");
-	}
 	$config['plugins'] = array_unique($config['plugins']);
 	foreach ($config['plugins'] as $val) {
 		$plugins[] = _DIR_JQUERYUI_JS.$val.".js";
@@ -138,12 +134,15 @@ function jqueryui_insert_head($flux) {
 	if ($theme == 'no_css/')
 		return $flux;
 	
-	// recuperer la liste des plugins jquery actives ou issus du pipeline jqueryui_forcer
-	$config['plugins'] = array_unique(array_merge(sinon(pipeline('jqueryui_forcer'),array()),$config['plugins']));
-
-	// ajouter core et theme si necessaire
+	// ajouter core si necessaire
 	if (!in_array('jquery.ui.core', $config['plugins']))
 		$config['plugins'][] = 'jquery.ui.core';
+
+	// recuperer la liste des plugins jquery actives ou issus du pipeline jqueryui_forcer
+	// Attention, l'ordre du merge est important, le css du core doit est charge avant le reste
+	$config['plugins'] = array_unique(array_merge($config['plugins'],sinon(pipeline('jqueryui_forcer'),array())));
+
+	// ajouter theme si necessaire
 	if (!in_array('jquery.ui.theme', $config['plugins']))
 		$config['plugins'][] = 'jquery.ui.theme';
 		
