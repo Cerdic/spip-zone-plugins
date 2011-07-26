@@ -242,8 +242,9 @@ function tri_champ_select($t){
  * @param bool $ok Indique si l'on doit rediriger ou pas
  * @param string $url Adresse vers laquelle rediriger
  * @param int $statut Statut HTML avec lequel on redirigera
+ * @return string
  */
-function sinon_interdire_acces($ok=false, $url='', $statut=0){
+function filtre_sinon_interdire_acces_dist($ok=false, $url='', $statut=0){
 	if ($ok) return '';
 	
 	// vider tous les tampons
