@@ -54,5 +54,10 @@ Ic&ocirc;nes issues de la collection [FatCow->http://www.fatcow.com/free-icons].
     <titre>CleverMail</titre>
     <url>clevermail_lists</url>
   </bouton>
+  <bouton id='clevermail2' parent='naviguer'> 
+    <titre>CleverMail</titre> 
+    <icone>prive/themes/spip/images/fatcow/32/email_open.png</icone> 
+    <url>clevermail_lists</url>
+  </bouton>
 	<categorie>communication</categorie>
 </plugin>
