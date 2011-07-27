@@ -13,6 +13,11 @@ function action_clevermail_post_remove_dist() {
 	  	$list = sql_fetsel("*", "spip_cm_lists", "lst_id = ".intval($lst_id));
 	    sql_delete("spip_cm_posts", "pst_id = ".intval($pst_id));
 	    spip_log('Suppression du message « '.$post['pst_subject'].' » (id='.$pst_id.') de la liste « '.$list['lst_name'].' » (id='.$lst_id.')', 'clevermail');
+      $nb = sql_countsel("spip_cm_posts", "lst_id = ".intval($lst_id));
+      if ($nb == 0) {
+        include_spip('inc/headers');
+        redirige_par_entete(generer_url_ecrire('clevermail_lists').'#lst'.$lst_id);
+      }
   	}
   }
 }
