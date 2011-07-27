@@ -18,7 +18,7 @@ function jquerysuperfish_insert_head($flux){
 	$conf_jquerysuperfish = lire_config('jquerysuperfish');
 	$flux .= "\n".'<script src="'.url_absolue(find_in_path('javascript/hoverIntent.js')).'" type="text/javascript"></script>';
 	$flux .= "\n".'<script src="'.url_absolue(find_in_path('javascript/superfish.js')).'" type="text/javascript"></script>';
-	$flux .= "\n".'<script type="text/javascript">'."\n".'jQuery(document).ready(function(){' ;
+	$flux .= "\n".'<script type="text/javascript">/* <![CDATA[ */'."\n".'jQuery(document).ready(function(){' ;
 	if($conf_jquerysuperfish["menu_hori"]) {
 		$flux .= "\n".'
 		$(".'.$conf_jquerysuperfish["classe_hori"].'").addClass("sf-menu sf-shadow").superfish({ 
@@ -33,7 +33,7 @@ function jquerysuperfish_insert_head($flux){
 					delay:'.$conf_jquerysuperfish["delai_vert"].'
 			  });';
 	}
-	$flux .= "});\n</script>";
+	$flux .= "});\n/* ]]> */</script>";
 	$flux .= jquerysuperfish_insert_head_css(''); // compat pour les vieux spip
 	return $flux;
 }
