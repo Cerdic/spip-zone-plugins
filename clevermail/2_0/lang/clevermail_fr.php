@@ -74,7 +74,7 @@ Merci',
     'ajouter_abonnes' => 'Ajouter des abonn&eacute;s',
     'parametres' => 'Param&egrave;tres',
 
-		// Back Office : ?exec=clevermail
+		// Back Office : ?exec=clevermail_lists
 		'aucun_message_en_attente' => 'aucun en attente',
     'un_message_en_attente' => '1 en attente',
 	  'plusieurs_messages_en_attente' => '@nb@ en attente',
@@ -84,6 +84,7 @@ Merci',
     'aucun_message_envoye' => 'aucun envoy&eacute;',
     'un_message_envoye' => '1 envoy&eacute;',
     'plusieurs_messages_envoyes' => '@nb@ envoy&eacute;s',
+    'erreur_contenu_vide' => 'Un nouveau message n\'a pas pu &ecirc;tre cr&eacute;&eacute; faute de contenu.',
 
 		// Back reste
 		'editer_lettre' => 'Editer la lettre d\'information',

@@ -22,7 +22,7 @@
   <BOUCLE_posts_queued(CM_POSTS_QUEUED){pst_id IN #GET{posts}}{fusion pst_id} />#SET{nbPostsQueued,#TOTAL_BOUCLE}<//B_posts_queued>
   #SET{nbPostsSent,#GET{nbPosts}|moins{#GET{nbPostsNew}}|moins{#GET{nbPostsQueued}}}
 
-  <li class="item">
+  <li class="item" id="lst#LST_ID">
     <h2>#LST_NAME</h2>
     [<div class="description">(#LST_COMMENT)</div>]
     <ul>
@@ -49,6 +49,11 @@
         ]
       </li>
     </ul>
+    [(#ENV{err_msg}|!={''}|oui)
+      [(#ENV{err_lst}|=={#LST_ID}|oui)
+        <p class="error">[(#VAL{clevermail:#ENV{err_msg}}|_T)]</p>
+      ]
+    ]
     <ul class="actions">
       <li class="lettre_modifier"><a href="[(#URL_ECRIRE{clevermail_list_edit}|parametre_url{lst_id,#LST_ID})]"><:clevermail:modifier:></a></li>
       [(#GET{nbSubs}|>{0}|non)
