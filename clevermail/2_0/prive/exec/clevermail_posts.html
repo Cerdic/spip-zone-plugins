@@ -22,10 +22,10 @@
 	          [(#PST_DATE_UPDATE|>{0}|oui) | <:clevermail:modifie:> le [(#PST_DATE_UPDATE|cm_date)] à [(#PST_DATE_UPDATE|cm_heure)]]
 		      </div>
 			    <ul class="actions">
-	          <li><a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_html:></a></li>
-				    <li><a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_texte:></a></li>
-				    <li><a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a></li>
-		        <li>[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
+	          <li class="message_apercu_html"><a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_html:></a></li>
+				    <li class="message_apercu_texte"><a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_texte:></a></li>
+				    <li class="message_modifier"><a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a></li>
+		        <li class="message_supprimer">[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
 	          [(#GET{nbSubs}|>{0}|oui)
   	          <li class="message_envoyer">[(#BOUTON_ACTION{<:clevermail:envoyer:>,#URL_ACTION_AUTEUR{clevermail_post_queue,#PST_ID,#SELF},ajax})]</li>
   	        ]

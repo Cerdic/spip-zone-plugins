@@ -64,9 +64,13 @@ h4 {
 
 .liste_lettres .actions li, .liste_messages .actions li {
   display: inline;
-  padding-left: 20px;
+  padding: 0 0 5px 18px;
   margin-left: 10px;
+  font-size: 11px;
+  line-height: 20px;
 }
+
+/* Actions sur les lettres */
 
 .liste_lettres .actions li.lettre_modifier {
   background: url(../prive/themes/spip/images/fatcow/16/email_edit.png) top left no-repeat;
@@ -77,9 +81,27 @@ h4 {
 }
 
 .liste_lettres .actions li.message_creer {
-  background: url(../prive/themes/spip/images/fatcow/16/newspaper_add.png) top left no-repeat;
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_add.png) top left no-repeat;
+}
+
+/* Actions sur les messages */
+
+.liste_messages .actions li.message_apercu_html {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_code.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_apercu_texte {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_text.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_modifier {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_edit.png) top left no-repeat;
+}
+
+.liste_messages .actions li.message_supprimer {
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_delete.png) top left no-repeat;
 }
 
 .liste_messages .actions li.message_envoyer {
-  background: url(../prive/themes/spip/images/fatcow/16/newspaper_add.png) top left no-repeat;
+  background: url(../prive/themes/spip/images/fatcow/16/page_white_go.png) top left no-repeat;
 }
