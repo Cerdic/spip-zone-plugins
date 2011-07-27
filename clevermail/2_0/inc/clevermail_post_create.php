@@ -33,6 +33,7 @@ function clevermail_post_create($lst_id) {
   			);
   		  $post['pst_text'] = recuperer_fond($list['lst_url_text'], $contexte);
   	  }
+      $post['pst_text'] = strip_tags($post['pst_text']);
   	} else {
   	  // TODO : essayer d'utiliser TEN : http://www.headstar.com/ten/
   	  include_spip('classes/facteur.php');
