@@ -36,7 +36,7 @@ function clevermail_post_create($lst_id) {
       $post['pst_text'] = strip_tags($post['pst_text']);
   	} else {
   	  // TODO : essayer d'utiliser TEN : http://www.headstar.com/ten/
-  	  include_spip('classes/facteur.php');
+  	  include_spip('classes/facteur');
   	  $post['pst_text'] = Facteur::html2text($post['pst_html']);
   	}
 	  if (trim($post['pst_html']) != '' && trim($post['pst_text']) != '') {
