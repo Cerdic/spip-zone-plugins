@@ -109,7 +109,7 @@ function multilang_inserer_head($config=array()){
 		$data = '
 <script type="text/javascript" src="'.generer_url_public("multilang_lang.js","lang=".$GLOBALS["spip_lang"]).'"></script>
 <script type="text/javascript" src="'.find_in_path("javascript/multilang.js").'"></script>
-<script type="text/javascript">
+<script type="text/javascript">/* <![CDATA[ */
 	var multilang_avail_langs = "'.$GLOBALS["meta"]["langues_multilingue"].'".split(\',\'),
 	multilang_def_lang = "'.$GLOBALS["meta"]["langue_site"].'",
 	multilang_lang_courante = "'.$GLOBALS["spip_lang"].'",
@@ -140,7 +140,7 @@ function multilang_inserer_head($config=array()){
 		multilang_init();
 		if(typeof onAjaxLoad == "function") onAjaxLoad(multilang_init);
 	});
-</script>
+/* ]]> */</script>
 ';
 	}
 	return $data;
