@@ -10,7 +10,7 @@
 	#MODELE{document_case,id_document=#ID_DOCUMENT,id_objet,objet,ajax}
 </BOUCLE_docslies>
 </div>
-<script type="text/javascript">
+<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
 function editbox_init(){
 	jQuery('a.editbox:not(.nobox)')
 	.attr("onclick","").addClass('nobox').click(function(){
@@ -27,4 +27,4 @@ if (window.jQuery)
 (function($){if(typeof onAjaxLoad == "function") onAjaxLoad(editbox_init);
 	$(editbox_init);
  })(jQuery);
-</script>
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
