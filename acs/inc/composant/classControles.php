@@ -250,7 +250,7 @@ class ctlText extends Controle {
  */
 class ctlTextarea extends Controle {
   public function draw() {
-    $r = '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'">'._TC($this->composant, $this->nom).'</label><textarea name="'.$this->var.'_'.$this->wid.'" class="forml" rows="'.(isset($this->param['lines']) ? $this->param['lines']-1 : 2).'">'.$txt.'</textarea></div>';
+    $r = '<div align="'.$GLOBALS['spip_lang_left'].'"><label for "'.$this->var.'_'.$this->wid.'" title="'.$this->var.'">'._TC($this->composant, $this->nom).'</label><textarea name="'.$this->var.'_'.$this->wid.'" class="forml" rows="'.(isset($this->param['lines']) ? $this->param['lines']-1 : 2).'">'.$this->value.'</textarea></div>';
     if ($this->help)
       $r .= acs_help_div($this->var.'Help', $this->help);
     return $r;
