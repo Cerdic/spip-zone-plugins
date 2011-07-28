@@ -41,7 +41,7 @@
       </li>
       <li>
          <h4>&lt;sjcycleN|ALIGN|<span style="color:red">docs=n1,n2</span>&gt;</h4>
-         <strong>Parameter"<span style="color:#666">docs=n1,n2,[...],nx</span>", optional :</strong>
+         <strong>Parameter "<span style="color:#666">docs=n1,n2,[...],nx</span>", optional :</strong>
          <br />
          Allows to specify the list of images to be displayed in the slide show.
          <br />
@@ -59,7 +59,7 @@
       </li>
       <li>
         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">id_diapo=X</span>&gt;</h4>
-        <strong>Parameter&quot;<span style="color:#666">id_diapo=X</span>&quot;, optional :</strong> <br />
+        <strong>Parameter &quot;<span style="color:#666">id_diapo=X</span>&quot;, optional :</strong> <br />
 Allows to attribute a specific id to a slide show to be able to target it in css by dsjcycle_X<br />
 Since the version 1.1, not necessary any more to display several slide shows in the same article<br />
 <strong>Example :</strong><br />
@@ -69,7 +69,7 @@ This displays 2 slide shows in the same article, the first one on 4 images with 
       </li>
       <li>
       	<h4>&lt;sjcycleN|ALIGN|<span style="color:red">legende=X</span>&gt;</h4>
-        <strong>Parameter&quot;<span style="color:#666">legende=X</span>&quot;, optional :</strong> <br />
+        <strong>Parameter &quot;<span style="color:#666">legende=X</span>&quot;, optional :</strong> <br />
 	Allows to post a legend under the slide show 
 		<ul>
           <li>If X=1, we post as legend the images'title </li>
@@ -79,7 +79,7 @@ This displays 2 slide shows in the same article, the first one on 4 images with 
       </li>   
       <li>
         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">opt=p1:v1;p2:v2</span>&gt;</h4>
-        <strong>Parameter&quot;<span style="color:#666">opt=p1:v1;p2:v2;[...];px:vx</span>&quot;, optional :</strong> <br />
+        <strong>Parameter &quot;<span style="color:#666">opt=p1:v1;p2:v2;[...];px:vx</span>&quot;, optional :</strong> <br />
 Allows to use the options of the script jcycle. The complete list is defined on the site of the plugin jquery jcycle <a href="http://malsup.com/jquery/cycle/options.html" target="_blank">here</a>.<br />
 These values overwrite those defined in the configuration page of the plugin.<br />
 The possible options correspond to those of the version used in this plugin spip and not to those proposed on the page quoted above.  At present, it is the version 2.88 (08-JUN-2010) that is used. <br />
@@ -87,6 +87,12 @@ The possible options correspond to those of the version used in this plugin spip
 &lt;sjcycle16|center|opt=autostop:1;autostopCount:5&gt; : Slide show on all the images of the article 16 but which will stop at the fifth image<br />
 &lt;sjcycle16|center|opt=fx:'fade'&gt; :Slide show on all the images of the article 16 with a « fade » effect of transition which replaces the one defined globally for the whole site<br />
       </li>
+     <li>
+       <h4>&lt;sjcycleN|ALIGN|<span style="color:red">lien_article=XXX</span>&gt;</h4>
+       <strong>Parameter &quot;<span style="color:#666">lien_article=XXX</span>&quot;, optional :</strong> <br />
+       <span id="result_box" lang="en" xml:lang="en"><span title="Cliquer ici pour voir d'autres traductions">Lets</span> <span title="Cliquer ici pour voir d'autres traductions">put</span> <span title="Cliquer ici pour voir d'autres traductions">a link on the</span> <span title="Cliquer ici pour voir d'autres traductions">slideshow to</span> <span title="Cliquer ici pour voir d'autres traductions">an</span> <span title="Cliquer ici pour voir d'autres traductions">article</span> <span title="Cliquer ici pour voir d'autres traductions">XXX</span> <span title="Cliquer ici pour voir d'autres traductions">other than that</span> <span title="Cliquer ici pour voir d'autres traductions">containing</span> <span title="Cliquer ici pour voir d'autres traductions">images.</span> <span title="Cliquer ici pour voir d'autres traductions">In the case of</span> <span title="Cliquer ici pour voir d'autres traductions">a multilingual site</span><span title="Cliquer ici pour voir d'autres traductions">, provide</span> <span title="Cliquer ici pour voir d'autres traductions">the id of</span> <span title="Cliquer ici pour voir d'autres traductions">the reference article</span><span title="Cliquer ici pour voir d'autres traductions">, the model</span> <span title="Cliquer ici pour voir d'autres traductions">is responsible for finding</span> <span title="Cliquer ici pour voir d'autres traductions">the id of</span> <span title="Cliquer ici pour voir d'autres traductions">the article</span> <span title="Cliquer ici pour voir d'autres traductions">to</span> <span title="Cliquer ici pour voir d'autres traductions">the visitor's language</span><span title="Cliquer ici pour voir d'autres traductions">.</span> <span title="Cliquer ici pour voir d'autres traductions">This option disables</span> <span title="Cliquer ici pour voir d'autres traductions">the opening</span> <span title="Cliquer ici pour voir d'autres traductions">in a</span> <span title="Cliquer ici pour voir d'autres traductions">box.</span></span><br />
+<strong>Example :</strong><br />
+&lt;sjcycle16|center|lien_article=171&gt; : Slide show on all the images of the article 16 with a link to the article 171 </li>
      <li>
          <h4>&lt;sjcycleN|ALIGN|<span style="color:red">param=valeur</span>&gt;<br />
          </h4>

@@ -82,14 +82,20 @@ Depuis la version 1.1, n’est plus n&eacute;cessaire pour afficher plusieurs di
          La liste complète est définie sur le site du plugin jquery jcycle <a href="http://malsup.com/jquery/cycle/options.html" target="_blank">par ici</a><br />
    Ces valeurs écrasent 
          celles définies dans la page de configuration du plugin.<br />
-   Les options possibles correspondent à celles de la version utilisée dans ce plugin spip et non à celles proposées sur la page citée ci-dessus. Actuellement, c'est la version 2.88 (08-JUN-2010) qui est utilisée <br />
+   Les options possibles correspondent à celles de la version utilisée dans ce plugin spip et non à celles proposées sur la page citée ci-dessus. Actuellement, c'est la version 2.88 (08-JUN-2010) qui est utilisée<br />
    <strong>Exemple :</strong><br />
    &lt;sjcycle16|center|opt=autostop:1;autostopCount:5&gt; : diaporama sur toutes les images de l'article 16 mais qui s'arrêtera à la cinquième image<br />
-   &lt;sjcycle16|center|opt=fx:'fade'&gt; : diaporama sur toutes les images de l'article 16 avec un effet de transition &quot;fade&quot; qui remplace celui défini globalement pour le site entier<br />
+   &lt;sjcycle16|center|opt=fx:'fade'&gt; : diaporama sur toutes les images de l'article 16 avec un effet de transition &quot;fade&quot; qui remplace celui défini globalement pour le site entier</li>
+      <li>
+      	<h4>&lt;sjcycleN|ALIGN|<span style="color:red">lien_article=XXX</span>&gt;</h4>
+         <strong>Param&egrave;tre &quot;<span style="color:#666">lien_article=XXX</span>&quot;, optionnel :</strong> <br />
+	Permet de poser un lien sur le diaporama vers un article d'identifiant XXX autre que celui contenant les images. Dans le cas d'un site multilingue, fournir l'id de l'article de référence, le modèle se charge de trouver l'id de l'article correspondant à la langue du visiteur. Cette option désactive l'ouverture vers une box.<br />
+   <strong>Exemple :</strong><br />
+   &lt;sjcycle16|center|lien_article=171&gt; : diaporama sur toutes les images de l'article 16 avec un lien vers l'article 171
+
       </li>
      <li>
-         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">param=valeur</span>&gt;<br />
-         </h4>
+         <h4>&lt;sjcycleN|ALIGN|<span style="color:red">param=valeur</span>&gt;</h4>
          <strong>Autres param&egrave;tres optionnels :</strong>
       <br />
          Ces paramètres écrasent localement les valeurs définies dans la page de configuration du plugin :

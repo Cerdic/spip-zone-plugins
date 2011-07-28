@@ -50,7 +50,13 @@ V 1.3 :
 - Une noisette pour le Noizetier
 
 V 1.4 :
-- MAJ de la librairie jsycle
+- MAJ de la librairie jcycle
+
+V 1.5 :
+- Ajout d'un modèle pour afficher sous forme de diaporama les logos des sites référencés. Et la noisette qui va avec.
+
+V 1.6 :
+- Ajout de la possiblité de poser un lien sur le diaporama vers un article autre que celui contenant les images. Dans le cas d'un site multilingue, fournir l'id de l'article de référence, le modèle se charge de trouver l'id de l'article correspondant à la langue du visiteur. Cette option désactive l'ouverture vers une box.
 
 A faire :
 - On verra plus tard pour les vérifications des saisies de config, car VERIFIER ne fonctionne pas avec les gestion particulière des formulaires par CFG
