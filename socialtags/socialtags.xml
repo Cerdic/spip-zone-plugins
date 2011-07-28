@@ -322,6 +322,13 @@
 </item>
 
 <item>
+<title>Seenthis</title>
+<author>seenthis</author>
+<link>http://seenthis.net/#ajouter=%t&url_site=%u&extrait=%d</link>
+<description>Macroblogging</description>
+</item>
+
+<item>
 <title>Slashdot</title>
 <author>slashdot</author>
 <link>http://slashdot.org/bookmark.pl?url=%u&amp;title=%t</link>
