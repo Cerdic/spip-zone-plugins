@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_1' => 'Configuration du plugin Social tags',
 	'cfg_2' => 'Ici vous pouvez choisir les sites de partages de vos articles.',
 	'cfg_3' => 'Documentation',
+	'cfg_activer_javascript' => 'SVP, veuillez activer Javascript.',
 	'cfg_badge_fb' => 'Badge/Widget Facebook',
 	'cfg_badge_fb_existe' => 'Si vous avez un Badge Facebook (<a href="http://www.facebook.com/facebook-widgets/" class="spip_out">aide sur le site FB</a>), indiquez ci-dessous son contenu, soit en JS, soit en HTML.',
 	'cfg_badge_html' => 'Badge HTML',

@@ -2,14 +2,13 @@
 <!-- autoriser=webmestre -->
 <!-- refus=<:cfg:refus_configuration_webmestre:> -->
 <!-- nom=socialtags -->
-<div class="formulaire_spip formulaire_config">
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_#FORM">
 
 [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 
-<form method="post" action="#SELF">
-	<div>
-	#ACTION_FORMULAIRE{SELF}
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<li class="editer_tags" id="sc_list">
 			<label><:socialtags:cfg_liste_site:></label>
@@ -25,7 +24,7 @@
 			//]]>
 			</script>
 			<noscript>
-			<multi>[fr]SVP, veuillez activer Javascript.[en]Please activate Javascript.[de]Bitte aktivieren sie Javascript.<multi>
+				<:socialtags:cfg_activer_javascript:>
 			</noscript>
 			<p>
 				<small>
@@ -41,7 +40,7 @@
 				[(#PLUGIN{googleplus1}|?{
 				<input type="checkbox" name="plusone" class="checkbox" id="plusone" [checked="(#ENV{plusone}|?{checked})"]/>
 				<label for="choix_plusone">
-					<img src="[(#CHEMIN{images/plusone-32.png})]" title="plusone" alt=" " /><span style="font-size:90%">&nbsp;[(#ENV{plusone}|?{<strong>})]<:socialtags:cfg_plusone:>[(#ENV{plusone}|?{<strong>})]</span>
+					<img src="[(#CHEMIN{images/plusone-normal.png})]" title="plusone" alt=" " /><span style="font-size:90%">&nbsp;[(#ENV{plusone}|?{<strong>})]<:socialtags:cfg_plusone:>[(#ENV{plusone}|?{</strong>})]</span>
 				</label>,
 				<li><p class="explication"><:socialtags:cfg_plusone_existe:></p></li>}
 				)]
