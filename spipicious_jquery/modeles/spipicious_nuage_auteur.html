@@ -3,4 +3,4 @@
 	[(#ID_MOT|nuage{#TITRE,[(#ENV{url}|?{[(#ENV{url}|parametre_url{id_mot,#ID_MOT})],#URL_MOT})]})]
 	<BOUCLE_nb(SPIPICIOUS){id_mot}></BOUCLE_nb>[(#ID_MOT|nuage{'','',#TOTAL_BOUCLE})]<//B_nb>
 </BOUCLE_motsElement>
-[(#NUAGE|nuage_tri{#ENV{tri,poids}}|nuage_affiche{#ENV{max, -1}})]
+[(#NUAGE|nuage_tri{#ENV{tri,titre}}|nuage_affiche{#ENV{max, -1}})]
