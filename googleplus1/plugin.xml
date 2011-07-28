@@ -1,11 +1,16 @@
 <plugin>
 	<nom>Google +1</nom>
 	<auteur>Phil</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<etat>stable</etat>
-	<description>Ajoute un bouton Google +1</description>
+	<description>
+		<multi>
+			[fr]Ajoute un bouton Google +1
+			[en]Add a Google +1 button
+		</multi>
+	</description>
 	<icon>images/plusone-32.png</icon>
-	<lien>http://www.spip-contrib.net</lien>
+	<lien>http://www.spip-contrib.net/Google-1</lien>
 	<prefix>googleplus1</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
