@@ -136,10 +136,10 @@ jQuery.geoportail.addMap(
 
 // Ajouter les documents (si dans un article)
 <BOUCLE_gpx(DOCUMENTS){id_article}{extension=gpx}>
-	jQuery.geoportail.addDoc ('#ENV{id_geoportail,0}', "GPX", #ID_DOCUMENT, "#TITRE", "#FICHIER");
+	jQuery.geoportail.addDoc ('#ENV{id_geoportail,0}', "GPX", #ID_DOCUMENT, "#TITRE", "#URL_DOCUMENT");
 </BOUCLE_gpx>
 <BOUCLE_kml(DOCUMENTS){id_article}{extension=kml}>
-	jQuery.geoportail.addDoc ('#ENV{id_geoportail,0}', "KML", #ID_DOCUMENT, "#TITRE", "#FICHIER");
+	jQuery.geoportail.addDoc ('#ENV{id_geoportail,0}', "KML", #ID_DOCUMENT, "#TITRE", "#URL_DOCUMENT");
 </BOUCLE_kml>
 
 </script>
