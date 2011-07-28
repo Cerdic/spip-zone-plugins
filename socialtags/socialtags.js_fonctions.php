@@ -17,7 +17,7 @@ function socialtags_json($cfg) {
 		$d = _q($service['descriptif']);
 		$u_site = _q($GLOBALS['meta']['adresse_site']);
 		$i = _q(find_in_path('images/'.$a.'.png'));
-		$json[] = "{ a: '{$a}', n: {$t}, i: {$i}, u: {$u}, u_site: {$u_site}";
+		$json[] = "{ a: '{$a}', n: {$t}, i: {$i}, u: {$u}, u_site: {$u_site}}";
 	}
 
 	return "[\n" . join(",\n", $json) . "\n]";
