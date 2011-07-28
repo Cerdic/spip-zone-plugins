@@ -46,8 +46,8 @@ jQuery.SplickerBox = function(e,m,s) {
 		this.cote = 100;
 	else
 		this.cote = s;
-	this.init()
-}
+	this.init();
+};
 
 //les methodes
 jQuery.SplickerBox.prototype = {
@@ -112,7 +112,7 @@ jQuery.SplickerBox.prototype = {
 		this.top = ligne*this.cote/2;
 		t = (ligne - (ligne%2));
 		if((ligne == this.rows-1) && (this.rows%2 > 0)) t = t-1;
-		t= t* this.cote/2
+		t= t* this.cote/2;
 		$(this.c).css("top",t + "px");
 
 
@@ -130,4 +130,4 @@ jQuery.SplickerBox.prototype = {
 		var l = new Number(this.left);
 		jQuery(this.c).animate({top:t,left:l,width:this.cote/2,height:this.cote/2},1500);
 	}
-}
+};
