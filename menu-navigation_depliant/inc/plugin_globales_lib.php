@@ -246,7 +246,15 @@ if(!function_exists('__plugin_boite_meta_info')) {
 		$result = false;
 		if(!empty($prefix)) {
 			$meta_info = __plugin_get_meta_infos($prefix); // dir et version
-			$info = plugin_get_infos($meta_info['dir']);
+			
+			if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+				$get_infos = charger_fonction('get_infos','plugins');
+				$infos = $get_infos($plug);
+			}
+			else {
+				$info = plugin_get_infos($meta_info['dir']);
+			}
+
 			$icon = 
 				(isset($info['icon']))
 				? "<div "
@@ -320,7 +328,16 @@ if(!function_exists('__plugin_html_signature')) {
 	// du style "Dossier plugin [version]"
 	function __plugin_html_signature ($prefix, $return = false, $html = true, $verifier_svn = false) {
 
-		$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
+		
+		if(version_compare($GLOBALS['spip_version_code'],'15375','>=')) {
+			$get_infos = charger_fonction('get_infos','plugins');
+			$infos = $get_infos($plug);
+		}
+		else {
+			$info = plugin_get_infos(__plugin_get_meta_dir($prefix));
+		}
+
+
 		$nom = typo($info['nom']);
 		$version = typo($info['version']);
 		//$base_version = typo($info['version_base']); // cache ?
@@ -334,8 +351,9 @@ if(!function_exists('__plugin_html_signature')) {
 				;
 			$base_version = (($base_version) ? " <span style='color:#66c;'>&lt;".$base_version."&gt;</span>" : "");
 		}
-		$result = ""
-			. $nom
+		$result = ''
+			// $nom
+			. _MENUDEP_PREFIX
 			. $version
 			. $base_version
 			;

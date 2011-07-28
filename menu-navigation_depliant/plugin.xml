@@ -11,7 +11,7 @@
 	 -->
 	<nom>Menu de navigation d&eacute;pliant (MenuDep)</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>1.08</version>
+	<version>1.09</version>
 	<version_base>0.01</version_base>
 	<icon>images/menudep-64.png</icon>
 	<etat>stable</etat>
@@ -19,7 +19,7 @@
 	<description>Menu de navigation d&eacute;pliant avec sous-menus incrust&eacute;s ou d&eacute;tach&eacute;s. 
 		Animations param&eacute;trables [via la page de configuration->/ecrire/?exec=configuration].</description>
 
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Menu-de-navigation-depliant-pour]</lien>
+	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/menu-navigation-depliant-spip]</lien>
 	
 	<prefix>menudep</prefix>
 
