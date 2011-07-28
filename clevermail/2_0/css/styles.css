@@ -60,6 +60,7 @@ h4 {
 
 .liste_lettres .actions, .liste_messages .actions {
   list-style-type: none;
+  margin-top: 5px !important;
 }
 
 .liste_lettres .actions li, .liste_messages .actions li {
