@@ -33,25 +33,29 @@
 				</small>
 			</p>
 		</li>
-		<li class="fieldset">
-			<fieldset id="plusone">
+		<li class="fieldset" id="plusone">
+			<fieldset>
 				<legend><:socialtags:cfg_plusone:></legend>
-				<div class="choix">
-				[(#PLUGIN{googleplus1}|?{
-				<input type="checkbox" name="plusone" class="checkbox" id="plusone" [checked="(#ENV{plusone}|?{checked})"]/>
-				<label for="choix_plusone">
-					<img src="[(#CHEMIN{images/plusone-normal.png})]" title="plusone" alt=" " /><span style="font-size:90%">&nbsp;[(#ENV{plusone}|?{<strong>})]<:socialtags:cfg_plusone:>[(#ENV{plusone}|?{</strong>})]</span>
-				</label>,
-				<li><p class="explication"><:socialtags:cfg_plusone_existe:></p></li>}
-				)]
-			</div>
+				<ul>
+					<li class="editer_plusone">
+						<div class="choix">
+							[(#PLUGIN{googleplus1}|?{
+							<input type="checkbox" name="plusone" class="checkbox" id="plusone" [checked="(#ENV{plusone}|?{checked})"]/>
+							<label for="choix_plusone">
+								<img src="[(#CHEMIN{images/plusone-normal.png})]" title="plusone" alt=" " /><span style="font-size:90%">&nbsp;[(#ENV{plusone}|?{<strong>})]<:socialtags:cfg_plusone:>[(#ENV{plusone}|?{</strong>})]</span>
+							</label>,
+							<li><p class="explication"><:socialtags:cfg_plusone_existe:></p></li>}
+							)]
+						</div>
+					</li>
+				</ul>
 			</fieldset>
 		</li>
-		<li class="fieldset">
+		<li class="fieldset" id="sc_insertion">
 			<fieldset>
 				<legend><:socialtags:cfg_insertion:></legend>
 				<ul>
-					<li>
+					<li class="editer_jsselector">
 						<label for="jsselector"><:socialtags:cfg_selector:></label>
 						<p class="explication"><:socialtags:cfg_inserer:></p>
 						<input type="text" name="jsselector" class="text" id="jsselector" value="[(#ENV{jsselector}|sinon{'#contenu'})]" size="50" />
@@ -70,7 +74,7 @@
 				</ul>
 			</fieldset>
 		</li>
-		<li class="fieldset">
+		<li class="fieldset" id="sc_fanbadge">
 			<fieldset id="fanbadge">
 				<legend><:socialtags:cfg_badge_fb:></legend>
 				<ul>
@@ -92,14 +96,13 @@
 				</ul>
 			</fieldset>
 		</li>
-		<li>
+		<li class="editer_ifreferer">
 			<div class="choix">
 				<input type="checkbox" name="ifreferer"  class="checkbox" id="ifreferer"[ checked="(#ENV{ifreferer}|?{checked})"] />
 				<label for="ifreferer"><:socialtags:cfg_referer:></label>
 			</div>
 		</li>
 	</ul>
-
 	<p class="boutons">
 		<input type="submit" class="submit" name="_cfg_ok" value="<:bouton_valider:>" />
 	</p>

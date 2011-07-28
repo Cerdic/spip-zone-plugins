@@ -24,10 +24,24 @@
 
 <!-- B -->
 <item>
+<title>BarraPunto</title>
+<author>barrapunto</author>
+<link>http://barrapunto.com/submit.pl?subj=%t&amp;story=%u</link>
+<description>Communauté, es</description>
+</item>
+
+<item>
 <title>Bebo</title>
 <author>bebo</author>
 <link>http://www.bebo.com/c/share?Url=%u&amp;Title=%t</link>
 <description>Communauté, fr</description>
+</item>
+
+<item>
+<title>Bitacoras</title>
+<author>bitacoras</author>
+<link>http://bitacoras.com/anotaciones/%u</link>
+<description>Digg-like, es</description>
 </item>
 
 <item>
@@ -40,13 +54,6 @@
 <title>BlogMemes</title>
 <author>blogmemes</author>
 <link>http://www.blogmemes.fr/post.php?url=%u&amp;title=%t</link>
-</item>
-
-<item>
-<title>Bluegger</title>
-<author>bluegger</author>
-<link>http://www.bluegger.com/submit.php?url=%u</link>
-<description>Digg-like, fr</description>
 </item>
 
 <item>
@@ -93,11 +100,18 @@
 <description>Portail, communauté, en-us</description>
 </item>
 
+<item>
+<title>DZone</title>
+<author>dzone</author>
+<link>http://www.dzone.com/links/add.html?url=%u&amp;title=%t</link>
+<description>Digg-like, en-us</description>
+</item>
+
 <!-- F -->
 <item>
 <title>Facebook</title>
 <author>facebook</author>
-<link>http://www.facebook.com/sharer.php?u=%u&amp;t=%t</link>
+<link>http://www.facebook.com/sharer/sharer.php?u=%u&amp;t=%t</link>
 </item>
 
 <item>
@@ -115,10 +129,9 @@
 </item>
 
 <item>
-<title>Furl</title>
-<author>furl</author>
-<link>http://www.furl.net/storeIt.jsp?add=%u&amp;t=%t</link>
-<description>Redirect sur Diigo</description>
+<title>FriendFeed</title>
+<author>friendfeed</author>
+<link>http://www.friendfeed.com/share?title=%t&amp;link=%u</link>
 </item>
 
 <item>
@@ -138,9 +151,15 @@
 </item>
 
 <item>
-<title>Google</title>
+<title>Google bookmarks</title>
 <author>google</author>
 <link>http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=%u&amp;title=%t</link>
+</item>
+
+<item>
+<title>Google buzz</title>
+<author>googlebuzz</author>
+<link>http://www.google.com/reader/link?url=%u&amp;title=%t</link>
 </item>
 
 <!-- H -->
@@ -149,6 +168,14 @@
 <author>healthranker</author>
 <link>http://healthranker.com/submit.php?url=%u&amp;title=%t</link>
 <description>Digg-like, health santé, en-us</description>
+</item>
+
+<!-- I -->
+<item>
+<title>Identi.ca</title>
+<author>identica</author>
+<link>http://identi.ca/notice/new?status_textarea=%u</link>
+<description>Microblogging</description>
 </item>
 
 <!-- J -->
@@ -165,14 +192,6 @@
 <author>joook</author>
 <link>http://www.joook.net/submit.php?url=%u</link>
 <description>Digg-like, humour, fr</description>
-</item>
-
-<!-- K -->
-<item>
-<title>Kirtsy</title>
-<author>kirtsy</author>
-<link>http://www.kirtsy.com//submit.php?url=%u</link>
-<description>Digg-like, news, en-us</description>
 </item>
 
 <!-- L -->
@@ -198,6 +217,12 @@
 </item>
 
 <item>
+<title>LinkedIn</title>
+<author>linkedin</author>
+<link>http://www.linkedin.com/shareArticle?mini=true&amp;url=%u&amp;title=%t&amp;source=%u_site&amp;summary=%d</link>
+</item>
+
+<item>
 <title>Live</title>
 <author>live</author>
 <link>https://favorites.live.com/quickadd.aspx?marklet=1&amp;add=%u&amp;title=%t</link>
@@ -217,12 +242,13 @@
 <link>http://www.mister-wong.com/addurl/?bm_url=%u&amp;bm_description=%t</link>
 </item>
 
+<!--
 <item>
 <title>Mixx</title>
 <author>mixx</author>
 <link>http://www.mixx.com/submit?page_url=%u</link>
 <description>Digg-like, news, en-us</description>
-</item>
+</item> -->
 
 <item>
 <title>MySpace</title>
@@ -268,10 +294,9 @@
 
 <!-- P -->
 <item>
-<title>Pioche</title>
-<author>pioche</author>
-<link>http://www.pioche.fr/soumettre_nouvelle.php?url=%u</link>
-<description>Digg-like, fr</description>
+<title>Plaxo</title>
+<author>plaxo</author>
+<link>http://www.plaxo.com/events?share_link=%u&amp;desc=%t</link>
 </item>
 
 <item>
@@ -279,13 +304,6 @@
 <author>plurk</author>
 <link>http://www.plurk.com/m?content=%u</link>
 <description>Digg-like, fr en-us etc...</description>
-</item>
-
-<item>
-<title>Propeller</title>
-<author>propeller</author>
-<link>http://www.propeller.com/submit/?url=%u</link>
-<description>Bookmarks</description>
 </item>
 
 <!-- R -->
@@ -301,20 +319,6 @@
 <author>scoopeo</author>
 <link>http://www.scoopeo.com/scoop/new?newurl=%u&amp;title=%t</link>
 <description>Digg-like, news, fr</description>
-</item>
-
-<item>
-<title>Shoutwire</title>
-<author>shoutwire</author>
-<link>http://shoutwire.com/?p=submit&amp;link=%u</link>
-<description>Digg-like, news, en-us</description>
-</item>
-
-<item>
-<title>Simpy</title>
-<author>simpy</author>
-<link>http://simpy.com/simpy/LinkAdd.do?href=%u&amp;title=%t</link>
-<description>Bookmarks</description>
 </item>
 
 <item>
@@ -343,13 +347,6 @@
 </item>
 
 <!-- T -->
-<item>
-<title>TagTooga</title>
-<author>tagtooga</author>
-<link>http://www.tagtooga.com/tapp/db.exe?c=jsEntryForm&amp;b=fx&amp;url=%u</link>
-<description>Bookmarks</description>
-</item>
-
 <item>
 <title>Tapemoi !</title>
 <author>tapemoi</author>
@@ -392,13 +389,6 @@
 </item>
 
 <item>
-<title>Twine</title>
-<author>twine</author>
-<link>http://www.twine.com/bookmark/basic?u=%u&amp;t=%t</link>
-<description>Bookmarks</description>
-</item>
-
-<item>
 <title>Twitter</title>
 <author>twitter</author>
 <link>http://twitter.com/share?text=%t&amp;url=%u</link>
@@ -423,8 +413,8 @@
 <item>
 <title>Wikio</title>
 <author>wikio</author>
-<link>http://www.wikio.fr/sharethis?url=%u&amp;title=%t</link> <!-- En fait wikio a chang� et ne propose en partage rien de plus qu'un clone de socialtags. Ce qu'il faudrait c'est
-integrer un bouton de vote quand ils auront r�tablis leur truc -->
+<link>http://www.wikio.fr/sharethis?url=%u&amp;title=%t</link> <!-- En fait wikio a change et ne propose en partage rien de plus qu'un clone de socialtags. Ce qu'il faudrait c'est
+integrer un bouton de vote quand ils auront retablis leur truc -->
 <description>Digg-like, news, en-us fr</description>
 </item>
 
@@ -451,4 +441,3 @@ integrer un bouton de vote quand ils auront r�tablis leur truc -->
 </items>
 </channel>
 </rss>
-
