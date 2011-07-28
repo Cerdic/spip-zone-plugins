@@ -47,7 +47,7 @@ function formulaires_depublication_auteurs_traiter_dist($retour='', $lier_auteur
 
 	foreach ($_POST as $cle => $valeur) {
 		//echo "cle : ", $cle, ' ----> ' , $valeur[0],"<br>";
-		if (preg_match(('"^([0-9]*)_state$"',$cle,$regs)) {
+		if (preg_match('"^([0-9]*)_state$"',$cle,$regs)) {
 			// on change l'etat de l'article
 			$statut = sql_getfetsel("statut","spip_auteurs","id_auteur=".$regs[1]);
 			$statut_new = _request($regs[0]);
