@@ -142,30 +142,62 @@ function accesrestreint_zones_rubrique($id_rubrique) {
 	return array();
 }
 
+/**
+ * Cherche si la rubrique donnée est inclue dans une zone d'accès restreinte.
+ * 
+ * [(#ID_RUBRIQUE|accesrestreint_rubrique_zone_restreinte|oui) Rubrique non visible dans une zone]
+ * [(#ID_RUBRIQUE|accesrestreint_rubrique_zone_restreinte{tout}) Rubrique dans une zone ]
+ *
+ * @param int $id_rubrique : identifiant de la rubrique
+ * @param null|bool|'tout'	Sélectionner les rubriques
+ *   cachées dans le public (true),
+ *   le privé (false),
+ *   selon le contexte privé ou public (null),
+ *   cachées ou non quelque soit le contexte ('tout')
+ * @return bool La rubrique est présente dans une zone
+**/
+function accesrestreint_rubrique_zone_restreinte($id_rubrique, $_publique=null) {
+	return
+		@in_array($id_rubrique,
+			accesrestreint_liste_rubriques_restreintes_et_enfants($_publique)
+		);
+}
 
 /**
  * Retourne la liste de toutes les rubriques sélectionnées dans des zones 
  *
+  @param null|bool|'tout'	Sélectionner les rubriques
+ *   cachées dans le public (true),
+ *   le privé (false),
+ *   selon le contexte privé ou public (null),
+ *   cachées ou non quelque soit le contexte ('tout')
  * @return Array liste d'identifiants de rubriques
 **/
-function accesrestreint_liste_rubriques_restreintes() {
+function accesrestreint_liste_rubriques_restreintes($_publique = null) {
 	static $rubs = array();
 
-	$_publique = !test_espace_prive();
+	// $_publique : null, true, false, 'tout'
+	$tout = false;
+	if (is_null($_publique)) {
+		$_publique = !test_espace_prive();
+	} elseif ($_publique === 'tout') {
+		$tout = true;
+	}
 
 	if (isset($rubs[$_publique])) {
 		return $rubs[$_publique];
-	} 
-	
-	if ($_publique) {
-		$p = 'publique=' . sql_quote('oui');
-	} else {
-		$p = 'prive=' . sql_quote('non');
+	}
+
+	$where = array('z.id_zone = zr.id_zone');
+	if (!$tout) {
+		if ($_publique) {
+			$where[] = 'publique=' . sql_quote('oui');
+		} else {
+			$where[] = 'privee=' . sql_quote('oui');
+		}
 	}
 	
-	$idz = sql_allfetsel('DISTINCT(id_rubrique)', array('spip_zones_rubriques AS zr', 'spip_zones AS z'), array(
-		'z.id_zone = zr.id_zone', $p
-	));
+	$idz = sql_allfetsel('DISTINCT(id_rubrique)', array('spip_zones_rubriques AS zr', 'spip_zones AS z'), $where);
 	
 	if (is_array($idz)) {
 		$idz = array_map('reset', $idz);
@@ -179,18 +211,26 @@ function accesrestreint_liste_rubriques_restreintes() {
 /**
  * Retourne la liste de toutes les rubriques sélectionnées dans des zones 
  *
+ * @param null|bool|'tout'	Sélectionner les rubriques
+ *   cachées dans le public (true),
+ *   le privé (false),
+ *   selon le contexte privé ou public (null),
+ *   cachées ou non quelque soit le contexte ('tout')
  * @return Array liste d'identifiants de rubriques
 **/
-function accesrestreint_liste_rubriques_restreintes_et_enfants() {
+function accesrestreint_liste_rubriques_restreintes_et_enfants($_publique = null) {
 	static $rubs = array();
 
-	$_publique = !test_espace_prive();
+	if (is_null($_publique)) {
+		$_publique = !test_espace_prive();
+	}
 
 	if (isset($rubs[$_publique])) {
 		return $rubs[$_publique];
 	}
+	
+	$parents = accesrestreint_liste_rubriques_restreintes($_publique);
 
-	$parents = accesrestreint_liste_rubriques_restreintes();
 	if ($parents) {
 		include_spip('inc/rubriques');
 		$branches = explode(',', calcul_branche_in($parents));
