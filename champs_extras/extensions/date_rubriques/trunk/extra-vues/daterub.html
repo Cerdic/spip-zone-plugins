@@ -1,8 +1,0 @@
-<BOUCLE_restreindre_secteur(RUBRIQUES){id_rubrique}{id_secteur IN #CONFIG{datesecteurs/secteurs}|explode{','}}{tout}>
-	[<div class="#ENV{champ_extra}">
-		<strong>#ENV{label_extra}</strong>
-		(#ENV*{valeur_extra}|affdate{d/m/Y})
-	</div>]
-</BOUCLE_restreindre_secteur>
-
-

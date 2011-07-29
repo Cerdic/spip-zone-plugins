@@ -1,21 +1,40 @@
-<?php
+﻿<?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-	//D
-	'date_label' => 'Date&nbsp;: ',
-	'rubriques_liste'=>'Dater les rubriques par lot',
+	//A
 	'aucun'=>'aucun',
+	'aucune_rubrique_dans_secteur'=>'Il n\'y a aucune rubrique dans ce secteur',
+
+	//C
 	'configurer_date_rubriques'=>'Configurer les dates des rubriques',
-	'aucun_secteur'=>'Il n\'y a aucune rubrique dans ce secteur',
-	'entrer_id_secteur'=>'Entrer un num&eacute;ro de secteur',
-	'id_secteur'=>'id_secteur',
-	'date_premier_article'=>'Attribuer &agrave; chaque rubrique d\'un secteur la date de son article le plus ancien',
+
+	//B
+	'bando_date_rubriques'=>'Dates des rubriques',
 	'bouton_attribuer'=>'Attribuer',
 	'bouton_previsualiser'=>'Previsualiser',
-	'restreindre_secteurs'=>'Restreindre aux secteurs suivants',
-	'entrer_liste_secteurs'=>'Entrez les num&eacute;ros des secteurs s&eacute;par&eacute;s par une virgule',
+
+	//D
+	'date_label' => 'Date : ',
+	'date_premier_article'=>'Attribuer à chaque rubrique d\'un secteur la date de son article le plus ancien',
+
+	//E
+	'entrer_id_secteur'=>'Entrer un numéro de secteur',
+	'entrer_liste_secteurs'=>'Entrez les numéros des secteurs séparés par une virgule',
+	'explication_secteurs' => 'Choisir le ou les secteurs pour lesquel rajouter ce champ supplémentaire. Ne rien sélectionner pour que le champ soit rajouté à toutes les rubriques du site.',
+
+	//I
+	'id_secteur'=>'id_secteur',
 	'info_rubriques_secteur'=>'Rubriques du secteur @numero@',
-	'valeur_incorrecte'=>'Ce n\'est pas vraiment un num&eacute;ro!',
-	'date_rubriques'=>'Dates des rubriques',
-	'mise_a_jour_rubriques'=>'Les dates des rubriques ont &eacute;t&eacute; mises a jour',
 	
+	//L
+	'label_secteurs' => 'Secteurs concernés',
+
+	//M
+	'mise_a_jour_rubriques'=>'Les dates des rubriques ont été mises a jour',
+
+	//R
+	'restreindre_secteurs'=>'Restreindre aux secteurs suivants',
+	'rubriques_liste'=>'Dater les rubriques par lot',
+
+	//V
+	'valeur_incorrecte'=>'Ce n\'est pas vraiment un numéro!',
 );

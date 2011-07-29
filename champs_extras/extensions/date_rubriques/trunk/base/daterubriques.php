@@ -7,7 +7,7 @@ function daterubriques_declarer_champs_extras($champs = array()){
 		'table' => 'rubrique', // sur quelle table ?
 		'champ' => 'date_utile', // nom sql
 		'label' => 'daterubriques:date_label', // chaine de langue 'prefix:cle'
-		'type' => 'daterub', // type de saisie
+		'type' => 'date', // type de saisie
 		'sql' => "datetime NOT NULL DEFAULT '".date("Y-m-d 00:00:00")."'", // declaration sql
 		'saisie_externe' => true,
 		'saisie_parametres' => array('defaut' => date("Y-m-d 00:00:00")), // Maintenant

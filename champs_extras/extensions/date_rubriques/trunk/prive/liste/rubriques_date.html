@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_date(RUBRIQUES){id_secteur?}{id_rubrique?}{id_mot?}{id_article?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_date(RUBRIQUES){id_secteur?}{id_rubrique?}{id_mot?}{id_article?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_RUBRIQUE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,rubrique})]</td>
 			<td class='titre'>[(#LOGO_RUBRIQUE||image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|supprimer_numero)]</a></td>
