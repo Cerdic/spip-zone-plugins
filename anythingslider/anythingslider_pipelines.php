@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function anythingslider_anythingslider_charger_fx($flux){return $flux;}
+function anythingslider_anythingslider_charger_video($flux){return $flux;}
 
 function anythingslider_insert_head($flux){
 	$css = find_in_path('css/anythingslider.css');
@@ -18,8 +19,16 @@ function anythingslider_insert_head($flux){
 		$js = find_in_path('js/swfobject.js');
 		$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
 	}
+	if (pipeline('anythingslider_charger_video',false)) {
+		$js = find_in_path('js/jquery.anythingslider.video.min.js');
+		$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
+	}
 	return $flux;
 }
 
+
+
+
+jquery.anythingslider.video.min.js
 
 ?>

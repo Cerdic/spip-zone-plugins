@@ -3,13 +3,17 @@
 	<auteur>[Chris Coyier, Remy Sharp, Doug Neiner, ProLoser->https://github.com/ProLoser/AnythingSlider/wiki/Credits] pour le script AnythingSlider, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin SPIP</auteur>
 	<icon>images/anythingslider.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1.3</version>
+	<version>0.2.0</version>
 	<etat>test</etat>
-	<description>Permets d'utiliser le plugin jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] dans les squelettes.</description>
+	<description>Permets d'utiliser le plugin jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] (v1.7.5) dans les squelettes.</description>
 	<lien>http://www.spip-contrib.net/?article3783</lien>
 	<prefix>anythingslider</prefix>
 	<pipeline>
 		<nom>anythingslider_charger_fx</nom>
+		<inclure>anythingslider_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>anythingslider_charger_video</nom>
 		<inclure>anythingslider_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
