@@ -24,6 +24,7 @@ function sprite ($img, $nom) {
 	$class = extraire_attribut($img, "class");
 
 	$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites').$nom;
+	$fichier .= "?m=spiprempdate[$fichier]";
 	
 	$date_src = @filemtime($src);
 	if ($date_src > $GLOBALS["sprites"]["$nom"]["date"]) $GLOBALS["sprites"]["$nom"]["date"] = $date_src;
@@ -43,8 +44,11 @@ function creer_sprites_terminaison_fichier_image($fichier) {
 
 function creer_sprites($flux) {
 	$sprites = $GLOBALS["sprites"];
+	$page = $flux['data']['texte'];
 	
 	if ($sprites) {
+
+
 	
 		foreach($sprites as $key => $sprite) {
 			$fichier = sous_repertoire(_DIR_VAR, 'cache-sprites').$key;
@@ -96,14 +100,34 @@ function creer_sprites($flux) {
 						
 				}
 				
+				
+				
 				imagedestroy($im);
 				imagedestroy($im_);
 	
 			}
 		}
 	}
+	
+	// Mettre les dates des fichiers en variable de chaque appel
+	$page = preg_replace_callback(",spiprempdate\[([^\]]*)\],", "creer_sprites_remplacer_date", $page);
+	
+	$flux["data"]['texte'] = $page;
 	$GLOBALS["sprites"] = false;	
 	return $flux;	
+}
+
+
+function creer_sprites_remplacer_date($regs) {
+	$fichier = $regs[1];
+	
+	if ($date_fichier["$fichier"] > 0) {
+		return $date_fichier["$fichier"];
+	}
+	else {
+		$date_fichier["$fichier"] = @filemtime($fichier);
+		return $date_fichier["$fichier"];
+	}
 }
 
 function creer_sprites_recuperer_fond ($flux) {
