@@ -13,6 +13,13 @@ function propre_latex($t) {
 	return $t;
 }
 
+function latex_proteger_index($texte){
+	// Function qui sert à protéger les ! et @ dans une donnée à indexer, en remplacant par \textexclam et \textat (à définir)
+	$texte = str_replace('!','\textexclam{}',$texte);
+	$texte = str_replace('@','\textat{}',$texte);
+	return $texte;
+		
+}
 
 function latex_echappe_coloration($texte){
 	return appliquer_regles_wheel($texte,array('latex/latex-code.yaml'));
