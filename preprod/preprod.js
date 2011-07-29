@@ -1,6 +1,4 @@
-#HTTP_HEADER{Content-Type: text/javascript}
-
-jQuery(function($) {
+$(document).ready(function() {
     var bodyClasses = $("body").attr("class");
     var bcArray = bodyClasses.split(" ");
     var pageType = "n&eacute;ant";

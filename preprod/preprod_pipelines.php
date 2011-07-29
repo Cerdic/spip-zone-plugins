@@ -4,29 +4,24 @@
  * Licence GPL (c) 2011 - Ateliers CYM
  */
 
-
-function preprod_affichage_final($page){
-	
-	$pos_head = strpos($page, '</head>');
-	// si pas de </head>
-	if ($pos_head === false) {
-		return $page;
-	}
-
-	// si admin
+function preprod_insert_head($flux)
+{
 	include_spip('inc/autoriser');
+
 	if (autoriser('configurer')) {
-		$jsFile = generer_url_public('preprod.js');
-		include_spip('public/spip_bonux_balises');
-
-		$head_reperes  = "<!-- insertion du js preprod --><script src='$jsFile' type='text/javascript'></script>";
-		$head_reperes .= '<!-- insertion de la css preprod --><link rel="stylesheet" type="text/css" href="' . produire_css_fond('preprod.css') . '" media="all" />';
-		$page = substr_replace($page, $head_reperes, $pos_head, 0);
-
+		$js = find_in_path("preprod.js");
+		if ($js)
+			$flux .= '<script type="application/javascript" src="'. $js .'"></script>';
 	}
+    return $flux;	
+}
 
-	return $page;
-		
+function preprod_insert_head_css($flux)
+{
+    $css = find_in_path('preprod.css');
+	if ($css)
+    	$flux .= '<link rel="stylesheet" type="text/css" media="all" href="'.$css.'" />';
+    return $flux;	
 }
 
 ?>
