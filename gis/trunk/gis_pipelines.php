@@ -33,7 +33,7 @@ function gis_inserer_javascript($flux){
 	}else{
 		$geocoder = '';
 	}
-	$flux .="\n".'<script type="text/javascript" src="'. url_absolue(find_in_path(_DIR_LIB_GIS.'mxn.js')) .'?('. $config['api'] . $geocoder .')"></script>'."\n";
+	$flux .="\n".'<script id="mxn_script" type="text/javascript" src="'. url_absolue(find_in_path(_DIR_LIB_GIS.'mxn.js')) .'?('. $config['api'] . $geocoder .')"></script>'."\n";
 	
 	// insertion des scripts de gis
 	$flux .="\n".'<script type="text/javascript" src="'. url_absolue(find_in_path('javascript/gis.js')) .'"></script>'."\n";
