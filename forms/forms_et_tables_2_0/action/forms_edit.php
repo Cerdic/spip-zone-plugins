@@ -10,12 +10,16 @@
  * 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
+ 
 include_spip('inc/forms');
 include_spip('inc/forms_edit');
 include_spip('inc/forms_type_champs');
+
 if (!include_spip('inc/autoriser'))
 	include_spip('inc/autoriser_compat');
+	
 // TODO : charger la bonne langue !
+
 function Forms_ordonne_champs($id_form){
 	if (strlen($ordre = _request('ordre'))){
 		$ordre = explode("&",$ordre);
@@ -121,12 +125,22 @@ function Forms_update($id_form){
 	$supp_choix = _request('supp_choix');
 	$supp_champ = _request('supp_champ');
 	$ordonne_champs = _request('ordonne_champs');
+	
+	$num_rubrique_export = _request('num_rubrique_export');
+	$champ_titre_export = _request('champ_titre_export');
+	
+	// SI la variable est "" (cas quand on n'a pas encore de champs) ALORS on le remet à "null"
+	if( $champ_titre_export == "" ){
+		$champ_titre_export = "null";
+	}
+	
 
 	//
 	// Modifications des donnees de base du formulaire
 	//
 
 	$nouveau_champ = $champ_visible = $ajout_choix = NULL;
+	
 	// creation
 	if ($id_form == 'new' && $titre) {
 		//adapatation SPIP2
@@ -134,9 +148,36 @@ function Forms_update($id_form){
 		//$id_form = spip_insert_id();
 
 		$id_form = sql_insertq('spip_forms',array('titre'=>_q($titre)));
+		
+		//// Ajout d'une colonne 'num_rubrique_export' à la table 'spip_forms' pour permettre d'indiquer dans quelle rubrique
+		//// les réponses au formulaire(/table) doivent être exportées
+		// (Au cas où la nouvelle colonne n'a pas été créee par le script '\base\forms.php' (à l'installation du plugin??) )
+		// (Bonne solution de l'ajouter ici??? --> Regarder plutôt vers la fonction 'forms_et_tables_upgrade()'??) 
+		include_spip('base/create');
+		maj_tables("spip_forms");
+		
+		// (Ajout de la colonne 'num_rubrique_export' si elle n'existe pas déjà, et avec par défaut la valeur 1 :)
+		//sql_alter("TABLE spip_forms ADD UNIQUE(num_rubrique_export) INT DEFAULT '1'");
+		// (??Ligne du dessus redondant avec "maj_tables()" ??)
+		
 	}
+	
 	// maj
 	if (intval($id_form) && $titre) {
+	
+		//// Vérifie que la valeur de 'num_rubrique_export' est bien un numéro de rubrique valide :
+		//// (??Vérification à mettre ici??)
+		
+		// Récupération du nom de la rubrique choisie (ne retourne rien si elle n'existe pas) :
+		$nom_rubrique_export = sql_getfetsel( 'titre', 'spip_rubriques', sql_in('id_rubrique', $num_rubrique_export) );
+	
+		// SI la rubrique indiquée n'existe pas...
+		if( !$nom_rubrique_export ){
+			//$txt_alerte = "/!\ Rubrique n&deg;" . intval($num_rubrique_export) . " inexistante! /!\ ";
+			$num_rubrique_export = sql_getfetsel("id_rubrique", "spip_rubriques", "statut = 'publie'"); //... mettre à la première rubrique définie
+		}
+		
+	
 		$query = "UPDATE spip_forms SET ".
 			"titre="._q($titre).", ".
 			"descriptif="._q($descriptif).", ".
@@ -152,10 +193,15 @@ function Forms_update($id_form){
 			"linkable="._q($linkable?$linkable:'non').", ".
 			"documents="._q($documents?$documents:'non').", ".
 			"documents_mail="._q($documents_mail?$documents_mail:'non').", ".
-			"html_wrap="._q($html_wrap)." ".
-			"WHERE id_form="._q($id_form);
+			"html_wrap=" . _q($html_wrap) . ", " .
+			"num_rubrique_export=" . _q($num_rubrique_export) . ", " .
+			"champ_titre_export=" . _q($champ_titre_export) .
+			
+			" WHERE id_form="._q($id_form);
+		
 		$result = spip_query($query);
 	}
+	
 	// lecture
 	$result = spip_query("SELECT * FROM spip_forms WHERE id_form="._q($id_form));
 	if ($row = spip_fetch_array($result)) {
@@ -179,6 +225,7 @@ function Forms_update($id_form){
 
 	if ($id_form) {
 		$champ_visible = NULL;
+		
 		// Ajout d'un champ
 		if (($type = $ajout_champ) && Forms_type_champ_autorise($type)) {
 			$titre = _T("forms:nouveau_champ");
@@ -187,6 +234,7 @@ function Forms_update($id_form){
 			$champ = Forms_insere_nouveau_champ($id_form,$type,$titre);
 			$champ_visible = $nouveau_champ = $champ;
 		}
+		
 		// Modif d'un champ
 		if ($champ = $modif_champ) {
 			if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ)))) {
@@ -224,16 +272,21 @@ function Forms_update($id_form){
 				spip_query("DELETE FROM spip_forms_champs_choix WHERE choix="._q($choix)." AND id_form="._q($id_form)." AND champ="._q($row['champ']));
 			}
 		}
+		
 		// Suppression d'un champ
 		if ($champ = $supp_champ) {
 			spip_query("DELETE FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
 			spip_query("DELETE FROM spip_forms_champs WHERE id_form="._q($id_form)." AND champ="._q($champ));
 		}
+		
 		if ($id_form==intval($ordonne_champs)){
 			Forms_ordonne_champs($id_form);
 		}
+		
 	}
-	return array($id_form,$champ_visible,$nouveau_champ,$ajout_choix);
+	
+	return array($id_form, $champ_visible, $nouveau_champ, $ajout_choix);
+	
 }
 
 function action_forms_edit(){
@@ -244,14 +297,21 @@ function action_forms_edit(){
 	$redirect = str_replace("&amp;","&",urldecode(_request('redirect')));
 	//$redirect = parametre_url($redirect,'var_ajaxcharset',''); // si le redirect sert, pas d'ajax !
 	if ($redirect==NULL) $redirect="";
+	
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
-	if (verifier_action_auteur("forms_edit-$arg",$hash,$id_auteur)==TRUE) {
+		
+	if (verifier_action_auteur("forms_edit-$arg",$hash,$id_auteur)==TRUE)
+	{
 		$arg=explode("-",$arg);
 		$id_form = $arg[0];
-		if ((intval($id_form) && autoriser('modifier','form',$id_form))
-			|| (($id_form=='new') && (autoriser('creer','form'))) ) {
-			list($id_form,$champ_visible,$nouveau_champ,$ajout_choix) = Forms_update($id_form);
+		
+		if ( (intval($id_form) && autoriser('modifier','form',$id_form))
+			|| (($id_form=='new') && (autoriser('creer','form'))) ) 
+		{
+			// (Fonction " Forms_update()" définie juste au dessus)
+			list($id_form, $champ_visible, $nouveau_champ, $ajout_choix) = Forms_update($id_form);
+			
 			if ($redirect) $redirect = parametre_url($redirect,"id_form",$id_form);
 			if ($redirect && $champ_visible) $redirect = parametre_url($redirect,"champ_visible",$champ_visible);
 			if ($redirect && $nouveau_champ) $redirect = parametre_url($redirect,"nouveau_champ",$nouveau_champ);

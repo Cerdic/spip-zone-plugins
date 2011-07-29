@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_plugins_/_stable_/forms/forms_et_tables_1_9_1/lang/
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'activer_barre_typo' => 'Activer la barre typographique',
 	'adresse_invalide' => 'Cette adresse n\'est pas valide.',
-	'afficher' => 'Afficher',
+	'afficher' => 'Afficher le tableau des r&eacute;ponses',
 	'aide_contextuelle' => 'Aide contextuelle',
 	'ajouter_champ' => 'Ajouter un champ',
 	'ajouter_champ_type' => 'Cr&eacute;er un champ de type&nbsp;:',
@@ -21,6 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'attention' => 'Attention :',
 	'aucune_reponse' => 'aucune donn&eacute;e',
 	'avis_message_confirmation' => 'Un message de confirmation est envoy&eacute; &agrave; @mail@',
+
 
 	// B
 	'boite_info' => 'Cliquez sur les icones pour voir les donn&eacute;es associ&eacute;es a un formulaire, l\'editer, le dupliquer, l\'exporter, vider les donn&eacute;es ou le supprimer.',
@@ -81,6 +82,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'csv_classique' => 'CSV classique (,)',
 	'csv_excel' => 'CSV pour Excel (;)',
 	'csv_tab' => 'CSV avec tabulations',
+	
+	'csv_import_csv' => 'CSV sp&eacute;cial pour \'Import CSV\'  (;)',
+	'champ_titre_export' => 'Champ utilis&eacute; pour d&eacute;finir le titre de l\'article export&eacute; :  "nom (identifiant)"',
+	
 
 	// D
 	'date' => 'Date',
@@ -96,10 +101,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'echec_upload' => 'Le transfert du fichier a &eacute;chou&eacute;.',
 	'edit_champ_obligatoire' => 'Ce champ est obligatoire',
-	'editer' => 'Editer',
+	'editer' => 'Editer le formulaire',
 	'email_independant' => 'Email independant de la reponse',
 	'exporter' => 'Exporter',
 	'exporter_article' => 'Exporter dans un article',
+	//'exporter_toutes_reponses' => 'NE FONCTIONNE PAS ENCORE !!', //'(Exporter TOUTES les r&eacute;ponses)'
+	
 
 	// F
 	'fichier_trop_gros' => 'Ce fichier est trop gros.',
@@ -131,7 +138,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_sondage' => 'Si votre formulaire est un sondage, les r&eacute;sultats des champs de type &laquo; s&eacute;lection &raquo; seront additionn&eacute;s et affich&eacute;s.',
 	'info_supprimer_formulaire' => 'Voulez-vous vraiment supprimer ce formulaire ?',
 	'info_supprimer_formulaire_reponses' => 'Des donn&eacute;es sont associ&eacute;es &agrave; ce formulaire. Voulez-vous vraiment le supprimer ?',
-
+	'identifiant_champ' => 'Identifiant du champ :',
+	
 	// L
 	'lien_apercu' => 'Aper&ccedil;u',
 	'lien_champ' => 'Champs',
@@ -142,6 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lier_documents' => 'Permettre de joindre des documents aux donn&eacute;es',
 	'lier_documents_mail' => 'Joindre les documents &agrave; l\'email',
 	'liste_choix' => 'Liste des choix propos&eacute;s',
+	'label_param_export' => 'Export des r&eacute;ponses en articles : ',
 
 	// M
 	'moderation_donnees' => 'Valider les donn&eacute;es avant publication :',
@@ -160,6 +169,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_choix' => 'Nouveau choix',
 	'nouveau_formulaire' => 'Nouveau formulaire',
 	'numerique_invalide' => 'Champ num&eacute;rique invalide',
+	'num_rubrique_export' => 'Num&eacute;ro de la rubrique dans laquelle les r&eacute;ponses doivent &ecirc;tre export&eacute;es : ',
+	'nom_rubrique' => 'Rubrique n&deg; @num@ : \'@nom@\'',
 
 	// P
 	'page' => 'Page',
@@ -171,7 +182,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'rang' => 'Rang',
 	'remplir_un_champ' => 'Veuillez remplir au moins un champ.',
-	'reponse' => 'Reponse @id_reponse@',
+	
+	'reponse' => 'Réponse @id_reponse@',
+	
 	'reponse_depuis' => 'Depuis la page ',
 	'reponse_enregistree' => 'Votre saisie a &eacute;t&eacute; enregistr&eacute;e.',
 	'reponse_envoyee' => 'R&eacute;ponse envoy&eacute;e le ',
@@ -208,6 +221,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tous_sondages_public' => 'Tous les sondages publics',
 	'toutes_tables' => 'Tous les formulaires',
 	'type_form' => 'Type de formulaire',
+	
+	'titre_defaut_export' => 'Titre par d&eacute;faut : "R&eacute;ponse n&deg..." ',
 
 	// U
 	'une_reponse' => 'une donn&eacute;e',

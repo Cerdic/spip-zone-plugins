@@ -10,9 +10,11 @@
  * 2005,2006 - Distribue sous licence GNU/GPL
  *
  */
+ 
 // compatibilite trans 1.9.1-1.9.2
 // Cadre formulaires
 // http://doc.spip.org/@debut_cadre_formulaire
+
 function Forms_debut_cadre_formulaire($style='', $return=false){
 	$x = "\n<div class='cadre-formulaire'" .
 	  (!$style ? "" : " style='$style'") .
@@ -38,6 +40,7 @@ function Forms_nouveau_champ($id_form,$type){
 	$champ = $type.'_'.strval($n);
 	return $champ;
 }
+
 function Forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
 	if (!strlen($champ))
 		$champ = Forms_nouveau_champ($id_form,$type);
@@ -55,6 +58,7 @@ function Forms_insere_nouveau_champ($id_form,$type,$titre,$champ=""){
 		sql_insert('spip_forms_champs', '(id_form,champ,rang,titre,type,obligatoire,extra_info)', '('._q($id_form).','._q($champ).','._q($rang).','._q($titre).','._q($type).",'non','')");
 	return $champ;
 }
+
 function Forms_nouveau_choix($id_form,$champ){
 	$n = 1;
 	$res = spip_query("SELECT choix FROM spip_forms_champs_choix WHERE id_form="._q($id_form)." AND champ="._q($champ));
@@ -66,6 +70,7 @@ function Forms_nouveau_choix($id_form,$champ){
 	$choix = $champ.'_'.$n;
 	return $choix;
 }
+
 function Forms_insere_nouveau_choix($id_form,$champ,$titre){
 	$choix = Forms_nouveau_choix($id_form,$champ);
 	$rang = 0;
@@ -310,21 +315,27 @@ function Forms_bloc_edition_champ($row, $action_link, $redirect, $idbloc) {
 		));
 }
 
-function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect,$ajax=false){
-	global $spip_lang_right,$couleur_claire,$spip_lang_left;
+function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect, $ajax=false){
+
+	global $spip_lang_right, $couleur_claire, $spip_lang_left;
+	
 	$res = spip_query("SELECT type_form FROM spip_forms WHERE id_form="._q($id_form));
 	$row = spip_fetch_array($res);
+	
 	$prefixei18n = forms_prefixi18n($row['type_form']);
 	$is_form = 	$prefixei18n=='form';
 
 	$out = "";
 	if (!$id_form) return $out;
+	
 	$out .= "<div><br />";
 	$out .= Forms_debut_cadre_formulaire('',true);
+	
 	$out .= "<div class='verdana3'>";
 	$out .= "<strong>"._T("$prefixei18n:champs_formulaire")."</strong><br />\n";
 	$out .= _T("forms:info_champs_formulaire");
 	$out .= "</div>\n";
+	
 	$out .= "<div id='forms_lang'></div>";
 	$out .= "<div id='sortableChamps'>";
 
@@ -333,8 +344,10 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$index_max = $row['rangmax'];
 	}
 
-	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form="._q($id_form).($ajax?" AND champ="._q($ajax):"")." ORDER BY rang");
+	$res = spip_query("SELECT * FROM spip_forms_champs WHERE id_form=" . _q($id_form).($ajax?" AND champ="._q($ajax):"")." ORDER BY rang");
+	
 	while ($row = spip_fetch_array($res)) {
+	
 		$champ = $row['champ'];
 		$visible = ($champ == $champ_visible)||($champ == $nouveau_champ);
 		$nouveau = ($champ == $nouveau_champ);
@@ -396,6 +409,10 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		$focus="";
 		if ($nouveau) $focus='antifocus';
 
+		// Affichage de l'identifiant du champ (Permet à l'utilisateur définir facilement le champ servant de titre à l'article exporté)
+		$formulaire .=  "( " . _T("forms:identifiant_champ") . " <strong>" . $champ  . "</strong> )\n<br /><br />";
+		
+		
 		if ($type=='separateur'){
 			$formulaire .= "<label for='nom_$champ'>"._T("forms:champ_nom_bloc")."</label>&nbsp;:";
 			$formulaire .= " &nbsp;<input type='text' name='nom_champ' id='nom_$champ' value=\"".
@@ -419,6 +436,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 				entites_html($row['aide'])."</textarea><br />\n";
 
 		}
+		
 		$formulaire .= "<label for='wrap_$champ'>"._T("forms:html_wrapper")."</label> :";
 		$formulaire .= " &nbsp;<textarea name='wrap_champ' id='wrap_$champ'  class='verdana2' style='width:90%;height:3em;' rows='2' cols='40'>".
 		entites_html($row['html_wrap'])."</textarea><br />\n";
@@ -488,6 +506,7 @@ function Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $re
 		form_hidden($action_link_noredir) .
 		"<input type='hidden' name='redirect' value='$redirect' />" . // form_hidden ne desencode par redirect ...
 		"<input type='hidden' name='idtarget' value='champs' />"; // on target toute la boite, pas juste le div parent
+		
 	$out .=	"<strong>"._T("forms:ajouter_champ")."</strong><br />\n";
 	$out .= _T("forms:ajouter_champ_type");
 	$out .= " \n";
@@ -524,6 +543,8 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "<div class='verdana2'>";
 	//$out .= "<form method='post' action='$action_link' style='border: 0px; margin: 0px;'>";
 	//$out .= form_hidden($action_link);
+	
+	
 	$out .= "<form class='ajaxAction' method='post' action='$action_link_noredir'" .
 		" style='border: 0px; margin: 0px;'>" .
 		form_hidden($action_link_noredir) .
@@ -655,14 +676,89 @@ function boite_proprietes($id_form, $row, $focus, $action_link, $redirect) {
 	$out .= "<label for='wrap'>"._T("forms:html_wrapper")."</label> :";
 	$out .= " &nbsp;<textarea name='html_wrap' id='wrap'  class='verdana2' style='width:90%;height:3em;' rows='2' cols='40'>".
 	entites_html($row['html_wrap'])."</textarea><br />\n";
+	
+	
+	//// Ajout d'un champ dans les propriétés pour définir la rubrique dans laquelle les réponses devront être exportées 
+	
+	// SI la clé 'num_rubrique_export' n'existe pas OU est à 'null'
+	if( !is_null($row) && !array_key_exists('num_rubrique_export', $row) ){
+		$row['num_rubrique_export'] = sql_getfetsel("id_rubrique", "spip_rubriques", "statut = 'publie'"); // Mettre à la première rubrique définie
+	}
+
+	$num_rubrique_export = entites_html($row['num_rubrique_export']);
+	
+	/*** DEBUT du cadre "Export des réponses en articles" ***/
+	$out .= debut_cadre_enfonce("",true);
+	$out .= "<strong><label>" . _T('forms:label_param_export') . "</label></strong>";
+	$out .= "<br /><br />";
+
+	$out .= "<label for='num_rubrique_export_form'>" . _T('forms:num_rubrique_export') . "</label> ";
+	$out .= "<br />";
+	$out .= "<input type='text' name='num_rubrique_export' id='num_rubrique_export_form' class='formo $focus' ".
+		"value=\"" . $num_rubrique_export . "\" size='10' style='width:auto; margin:2px 0;' />\n";
+	
+	// Récupération du nom de la rubrique choisie (ne retourne rien si elle n'existe pas) :
+	$nom_rubrique_export = sql_getfetsel( 'titre', 'spip_rubriques', sql_in('id_rubrique', $num_rubrique_export) );
+	
+	// Test si la rubrique indiquée existe ou pas :
+	$existe_rubrique_export = $nom_rubrique_export ? 1 : 0;
+	if( $existe_rubrique_export == 1 ) {
+		$out .= "( " . _T( 'forms:nom_rubrique' , array('num'=>$num_rubrique_export, 'nom'=>$nom_rubrique_export) ) . " )";
+	} else {
+		$out .= "<strong>( /!\ Rubrique n&deg;" . intval($num_rubrique_export) . " inexistante! /!\ )</strong>" ;
+	}
+	
+	$out .= "<br /><br />";
+	$out .= "<hr />";
+	$out .= "<br />";
+	
+	
+	///// Liste permettant de choisir le champ à utiliser pour définir le titre de l'article exporté : /////
+	$out .= _T("forms:champ_titre_export") . "<br/>\n";
+
+	// Liste déroulante de tous les champs
+	$out .= "<select name='champ_titre_export' class='fondo' style='margin:3px 0;'>\n";
+	
+	// Choix : "Titre par défaut"
+	$out .= "<option value='null'>" . _T("forms:titre_defaut_export") . "</option>\n";
+	
+	$res = spip_query( "SELECT * FROM spip_forms_champs " .
+		"WHERE ( id_form=" . _q($id_form) . " AND type!='multiple' AND type!='select' AND type!='separateur' ) " .
+		"ORDER BY rang" );
+		
+	while ($row = spip_fetch_array($res)) {
+		$id_champ = $row['champ'];
+		$nom_champ = couper($row['titre'], 50, "..."); // Coupe le nom(/titre) s'il est trop long...
+		
+		$out .= "<option value='$id_champ' ";
+		// Sélectionné par défaut : celui définit
+		$champ_titre_export = sql_getfetsel("champ_titre_export", "spip_forms", "id_form=".intval($id_form) );
+		if( $id_champ == $champ_titre_export ) {
+			$out .= "selected='selected'";
+		}
+		$out .= " >$nom_champ&nbsp;&nbsp;($id_champ)</option>\n";
+		
+	}
+	
+	$out .= "</select>\n";
+	
+	
+	$out .= "<br /><br />";
+	
+	$out .= fin_cadre_enfonce(true);
+	/*** FIN du cadre "Export des réponses en articles" ***/
+	
 
 	$out .= "<div style='text-align:right'>";
 	$out .= "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo' /></div>\n";
 
 	$out .= "</form>";
 	$out .= "</div>";
+	
 	$out .= Forms_fin_cadre_formulaire(true);
 	$out .= "</div>";
+	
 	return $out;
 }
+
 ?>

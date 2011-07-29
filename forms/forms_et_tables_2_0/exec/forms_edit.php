@@ -49,6 +49,7 @@ function Forms_formulaire_confirme_suppression($id_form,$nb_reponses,$redirect,$
 	return $out;
 }
 
+
 function contenu_boite_resume($id_form, $row, &$apercu){
 	$prefixei18n = forms_prefixi18n($row['type_form']);
 	$is_form = 	$prefixei18n=='form';
@@ -71,6 +72,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 		$out .= $email['defaut'];
 		$out .= "</div>\n";
 	}
+	
 	if ($champconfirm = $row['champconfirm']){
 		$champconfirm_known = false;
 		$out .= "<div class='champconfirm'><strong>"._T('forms:confirmer_reponse')."</strong>";
@@ -124,6 +126,7 @@ function contenu_boite_resume($id_form, $row, &$apercu){
 	$out .= fin_cadre_relief(true);
 	return $out;
 }
+
 
 function exec_forms_edit(){
 	global $spip_lang_right;
@@ -321,28 +324,33 @@ function exec_forms_edit(){
 		echo "</div>";
 	}
 
+	
 	$out = "";
+	
 	if ($id_form){
+		// centre "Aperçu" (resume) ----------------------------------------------------
 		$out .= "<div id='resume'>";
 		$out .= contenu_boite_resume($id_form, $row, $apercu);
 		$out .= "</div>";
 	}
 
-	// centre proprietes ---------------------------------------------------------------
+	// centre "Propriétés" --------------------------------------------------------------
 	$out .= "<div id='proprietes'>";
 	$out .= boite_proprietes($id_form, $row, $focus, $action_link, $redirect);
 	$out .= "</div>";
 
 	// edition des champs ---------------------------------------------------------------
 	$out .= "<div id='champs'>";
-	$out .= Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ,$redirect);
+	$out .= Forms_zone_edition_champs($id_form, $champ_visible, $nouveau_champ, $redirect);
 	$out .= "</div>\n";
 
 	echo $out;
 
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
+		
 	echo fin_page();
+	
 }
 
 ?>

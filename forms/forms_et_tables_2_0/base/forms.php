@@ -35,7 +35,13 @@ $spip_forms = array(
 	"documents_mail" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	"arborescent" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	'html_wrap' => "text",
-	"maj" 		=> "TIMESTAMP");
+	"maj" 		=> "TIMESTAMP",
+
+	"num_rubrique_export" => "bigint(21) NOT NULL DEFAULT 1",
+	"champ_titre_export" => "varchar(100) DEFAULT 'null'"
+	
+);
+
 
 $spip_forms_key = array(
 	"PRIMARY KEY" => "id_form");

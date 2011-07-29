@@ -15,45 +15,69 @@ include_spip('inc/forms_export');
 
 function action_forms_telecharger(){
 	global $auteur_session;
+	
 	$arg = _request('arg');
 	$hash = _request('hash');
 	$id_auteur = $auteur_session['id_auteur'];
 	$redirect = _request('redirect');
 	if ($redirect==NULL) $redirect="";
+	
 	if (!include_spip("inc/securiser_action"))
 		include_spip("inc/actions");
+		
 	if (verifier_action_auteur("forms_telecharger-$arg",$hash,$id_auteur)==TRUE) {
 		if (!include_spip('inc/autoriser'))
 			include_spip('inc/autoriser_compat');
+			
 		if (autoriser('supprimer','form',$id_form)){
 			$id_form = intval($arg);
 			$delim = _request('delim');
-			if ($delim == 'TAB') $delim = "\t";
 			
-			$out = Forms_formater_les_reponses($id_form, "csv", $delim, $fichiers, $filename);
+			// (Gestion du cas "Import_CSV")
+			if( $delim != "Import_CSV" ){ // SI autre cas :	
+			
+				$format = "csv";
+				if ($delim == 'TAB') { $delim = "\t"; }
+				
+			} else { // SI cas "Import_CSV" :
+			
+				$format = "Import_CSV";
+				$delim = ";";
+			}
+			
+			// function Forms_formater_les_reponses($id_form, $format, $separateur, &$fichiers, &$filename, $head=true, $traduit=true)
+			//( dans /inc/forms_export.php )
+			$out = Forms_formater_les_reponses($id_form, $format, $delim, $fichiers, $filename);
 		
-			// Excel ?
-			if ($delim == ','){
+			// SI ',' ... (Excel ?)
+			if ($delim == ','){ 
+			
 				$extension = 'csv';
 				$charset = $GLOBALS['meta']['charset'];
-			}
-			else {
-				$extension = 'xls';
+				
+			} else {
+				
+				// Extension 'csv' si delim = ';' (et pas forcément 'xls' !)
+				if ( $delim == ';' ) { $extension = 'csv'; }
+				else { $extension = 'xls'; }
+				
 				# Excel n'accepte pas l'utf-8 ni les entites html... on fait quoi?
 				include_spip('inc/charsets');
 				$out = unicode2charset(charset2unicode($out), 'iso-8859-1');
 				$charset = 'iso-8859-1';
 			}
 		
-			if (!count($fichiers)) {
+			// SI PAS de fichiers joints...
+			if ( !count($fichiers) ) {
+			
 				Header("Content-Type: text/comma-separated-values; charset=$charset");
 				Header("Content-Disposition: attachment; filename=$filename.$extension");
 				//Header("Content-Type: text/plain; charset=$charset");
 				Header("Content-Length: ".strlen($out));
 				echo $out;
 				exit();
-			} 
-			else {
+				
+			} else {
 				//
 				// S'il y a des fichiers joints, creer un ZIP
 				//
@@ -86,8 +110,10 @@ function action_forms_telecharger(){
 			}
 		}
 	}
+	
 	if ($redirect)
 		redirige_par_entete(str_replace("&amp;","&",urldecode($redirect)));
+		
 }
 
 ?>

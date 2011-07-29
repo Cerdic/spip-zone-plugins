@@ -32,7 +32,11 @@ function acces_interdit() {
 
 
 //
-// Telechargement d'un fichier particulier
+// (Telechargement d'un fichier particulier)
+// function exec_forms_telecharger() : 
+//		Fonction servant à affiche une liste déroulante des différents formats disponibles au téléchargement
+// (Le bouton 'Télécharger' éxécute l'action "action_forms_telecharger" du fichier "action/forms_telecharger.php"
+// 
 //
 function exec_forms_telecharger(){
 	$id_donnee = _request('id_donnee');
@@ -104,16 +108,25 @@ function exec_forms_telecharger(){
 	echo "<br />\n";
 	echo _T("forms:format_fichier");
 	echo "<br />\n";
+	
 	// Extrait de la table en commencant par les dernieres maj
 	$action = generer_action_auteur("forms_telecharger","$id_form",urlencode($retour));
 	$action = parametre_url($action,'var_mode','download'); // hack pour desactiver la compression gzip par buffer qui corromp le zip
+	
 	echo "<form action='$action' method='POST'>";
 	echo form_hidden($action);
+	
+	// Liste des formats de CSV disponibles au téléchargement :
 	echo "<select name='delim'>\n";
+	
 	echo "<option value=','>"._T("forms:csv_classique")."</option>\n";
 	echo "<option value=';'>"._T("forms:csv_excel")."</option>\n";
 	echo "<option value='TAB'>"._T("forms:csv_tab")."</option>\n";
+	// Ajout d'un nouveau format de téléchargement spécialement pour "CSV_Import"
+	echo "<option value='Import_CSV'>" . _T("forms:csv_import_csv") . "</option>\n"; 
+	
 	echo "</select>";
+	
 	echo "<br /><br />\n";
 	echo "<input type='submit' name='ok' value='"._T("forms:telecharger")."' />\n";
 

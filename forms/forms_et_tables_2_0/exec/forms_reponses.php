@@ -150,8 +150,28 @@ function exec_forms_reponses(){
 		$where r.confirmation='valide' AND r.date > DATE_SUB(NOW(), INTERVAL 6 MONTH)
 		ORDER BY r.date DESC LIMIT "._q($debut).", "._q($tranche);
 	}
+	
+	// Nouveau bouton pour exporter toutes les réponses en même temps
+	// (NON ENCORE FONCITONNEL!!)
+	/*
+	echo icone_inline(
+		_T("forms:exporter_toutes_reponses"),
+		generer_action_auteur('RIEN', self()),
+		"article-24.gif",
+		"creer.gif",
+		"right"
+	);
+	*/
+	
+	// Ajout d'une barre de séparation invisible :
+	echo "<hr style='clear:both; visibility:hidden; margin:0;'> ";
+	
+	
 	$result = spip_query($query);
+	
 	while ($row = spip_fetch_array($result)) {
+	
+		
 		$id_form = $row['id_form'];
 		$id_donnee = $row['id_donnee'];
 		$id_article_export = $row['id_article_export'];
@@ -162,7 +182,7 @@ function exec_forms_reponses(){
 		$nom_auteur = $row['nom'];
 		$titre_form = $row['titre'];
 
-		echo "<br />\n";
+		//echo "<br />\n";
 		echo debut_cadre_relief(_DIR_PLUGIN_FORMS."img_pack/donnees-24.png",true,'','');
 
 		$link=parametre_url(self(),'supp_reponse', $id_donnee);
@@ -170,36 +190,55 @@ function exec_forms_reponses(){
 		
 		if ($id_article_export!=0){
 			$row=spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE id_article="._q($id_article_export)));
+			
+			// SI l'article n'a pas été exporté OU exporté mais mis à la poubelle...
 			if (!$row OR ($row['statut']=='poubelle'))
-				$id_article_export = 0;
+				$id_article_export = 0; //... on met son 'id' à 0 pour montrer qu'on peut l'exporter
+				
 		}
+		
 		if ($id_article_export==0){
 			echo icone_inline(_T("forms:exporter_article"), generer_action_auteur('forms_exporte_reponse_article',"$id_donnee",self()),"article-24.gif", "creer.gif", "right");
 		}
-		else 
-			echo icone_inline(_T("forms:voir_article"), generer_url_ecrire('articles',"id_article=".$row['id_article_export']),"article-24.gif", "", "right");
+		else {
+			/* Changement ici : "_q($id_article_export)" au lieu de "$row[...]" */
+			echo icone_inline(_T("forms:voir_article"), generer_url_ecrire('articles',"id_article="._q($id_article_export)),"article-24.gif", "", "right");
+		}
 		
+		
+		// "Réponse @id_reponse@"
+		echo _T("forms:reponse", array('id_reponse' => $id_donnee)) . "<br />\n";
 
-		echo _T("forms:reponse_envoyee").affdate($date)."<br />\n";
+		// "Réponse envoyée le @date@"
+		echo _T("forms:reponse_envoyee") . affdate($date) . " à " . affdate($date, 'H:i') . "<br />\n";
+		
+		// "à ..." (??Si plusieurs formulaires??)
 		if (!$form_unique) {
 			echo _T("forms:reponse_envoyee_a")." ";
 			echo "<strong class='verdana3' style='font-weight: bold;'><a href='?exec=forms_reponses&id_form=$id_form'>"
 				.typo($titre_form)."</a></strong> ";
 		}
 
+		// "par @auteur@"
 		if ($id_auteur) {
 			$s = "<a href='".generer_url_ecrire("auteur_infos","id_auteur=$id_auteur")."'>".typo($nom_auteur)."</a>";
 			echo _T('forum_par_auteur', array('auteur' => $s));
 			echo "<br />\n";
 		}
+		
+		// "Depuis la page @url@"
 		echo _T("forms:reponse_depuis")."<a href='"._DIR_RACINE."$url'>".$url."</a><br />\n";
 		
-		echo "<br />\n";
-
-		list($lib,$values,$urls) = 	Forms_extraire_reponse($id_donnee);
 		
+		echo "<br />\n";
+		
+
+		list($lib, $values, $urls) = Forms_extraire_reponse($id_donnee);
+		
+		// Affichage de l'ensemble des données de la réponses (liste des champs avec leur contenu)
 		foreach ($lib as $champ => $titre) {
 			$s = '';
+			
 			foreach ($values[$champ] as $id=>$valeur){
 				$valeur = typo($valeur);
 				if(strlen($s)) $s .= ", ";
@@ -208,21 +247,23 @@ function exec_forms_reponses(){
 				else
 					$s .= $valeur;
 			}
+			
 			echo "<span class='verdana1' style='text-transform: uppercase; font-weight: bold; color: #404040;'>";
 			echo typo($titre)."&nbsp;:</span>";
 			echo " ".$s;
 			echo "<br />\n";
 		}
 
+		
 		echo "<div style='clear: both;'></div>";
 
 		echo fin_cadre_relief(true);
 	}
 
 
-
 	if ($GLOBALS['spip_version_code']>=1.9203)
 		echo fin_gauche();
+	
 	echo fin_page();
 }
 

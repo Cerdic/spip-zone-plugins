@@ -12,7 +12,6 @@
  */
 	
 	
-	
 	$GLOBALS['forms_types_champs_etendus']=array();
 	Forms_importe_types_etendus();
 
@@ -75,6 +74,7 @@
 		$liste = array_diff(array_keys(Forms_nom_type_champ()),array(''));
 		return $liste;
 	}
+	
 	function Forms_type_champ_autorise($type) {
 		static $t;
 		if (!$t) {
@@ -82,6 +82,7 @@
 		}
 		return (strlen($type)&&isset($t[$type]));
 	}
+	
 	function Forms_nom_type_champ($type='') {
 		static $noms;
 		if (!$noms) {
@@ -124,14 +125,18 @@
 			else
 				$val = _request($champ, $c);
 			if ($type == 'fichier') $val = $_FILES[$champ]['tmp_name'];
+			
 			// verifier la presence des champs obligatoires	dont la saisie n'est pas desactivee
-			if (($val===NULL || (!is_array($val) && !strlen($val)) || (is_array($val) && (count($val)<2))) 
-				&& ($infos['obligatoire'] == 'oui') 
-				&& ($infos['saisie'] != 'non'))
+			if ( ($val===NULL || (!is_array($val) && !strlen($val)) || (is_array($val) && (count($val)<2))) 
+				&& ($infos['obligatoire'] == 'oui')
+				&& ($infos['saisie'] != 'non')
+				)
+			{
 				// Cas particulier de l'upload de fichier : on ne force pas à uploader à nouveau un fichier si celui-ci est existant
 				// Cas particulier des password : on ne force pas a donner un nouveau mot de passe si existe deja
 				if (( (in_array($type,array('fichier','password'))) && ($val==NULL) && (Forms_valeurs($id_donnee,$id_form,$champ)!=NULL) ));
-					else $erreur[$champ] = _T("forms:champ_necessaire");
+				else $erreur[$champ] = _T("forms:champ_necessaire");	
+			}
 		}
 
 		$erreur = array_merge($erreur,
@@ -150,12 +155,19 @@
 
 		foreach($structure as $champ=>$infos){
 			$type = $infos['type'];
+			
 			if ($GLOBALS['spip_version_code']<1.92)
 				$val = _request($champ);
 			else
 				$val = _request($champ, $c);
-			if ( $val!=NULL && strlen($val) ) {
-
+			
+	
+			/* INFO : Les booléens en PHP : FALSE = "" = "0" = 0 = array() // TRUE = Toutes les autres valeurs! */
+			/* ATTENTION : Depuis PHP 5.3 'strlen()' sur un 'array' ne marche plus!!! Avant, cela retournait toujours la valeur '5' (= strlen("Array")) */ 
+			if ( $val!=NULL  &&  ((!is_array($val) && strlen($val)>0) || (is_array($val))) )
+			/* SI( != de NULL  ET (SOIT ce n'est pas un tableau (caractères OU chiffres) donc ça doit être de longueur > 0, SOIT c'est un tableau)) */
+			{
+			
 				// Verifier la conformite des donnees entrees
 				switch ($type){
 					case 'date':
@@ -222,27 +234,34 @@
 						if (strlen($val)<6 and strlen($val))
 							$erreur[$champ] = _T("info_passe_trop_court");
 						break;
-				}			
+				}// FIN du switch
+				
 				if (isset($GLOBALS['forms_types_champs_etendus'][$type])){
 					$match = $GLOBALS['forms_types_champs_etendus'][$type]['match'];
 					if (strlen($match) && !preg_match($match,$val))
 						$erreur[$champ] = _T("forms:champs_perso_invalide");
 				}
-				$erreur = pipeline('forms_valide_conformite_champ',array(
-					'args'=>array(
-						'id_form'=>$id_form,
-						'id_donnee'=>$id_donnee,
-						'champ'=>$champ,
-						'type'=>$type,
-						'infos'=>$infos,
-						'val'=>$val
-					),
-					'data'=>$erreur)
-				);
-			}
-		}
+				
+				$erreur = pipeline( 
+					'forms_valide_conformite_champ' , 
+					array(
+						'args'=>array(
+							'id_form'=>$id_form,
+							'id_donnee'=>$id_donnee,
+							'champ'=>$champ,
+							'type'=>$type,
+							'infos'=>$infos,
+							'val'=>$val
+						),
+						'data'=>$erreur
+					)
+				); // FIN de 'pipeline()'
+				
+			} // FIN du if
+			
+		} // FIN du foreach
+		
 		return $erreur;
 	}
-
 
 ?>
