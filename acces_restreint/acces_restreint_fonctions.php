@@ -199,4 +199,36 @@ function accesrestreint_liste_rubriques_restreintes_et_enfants() {
 	
 	return $rubs[$_publique] = array();
 }
+
+/**
+ * Un auteur donné fait il partie d'une zone permettant de voir telle rubrique.
+ * Renvoie true, si l'auteur peut voir la rubrique,
+ * quelquesoit la visibilité des rubriques de la zone 
+ *
+ * @param int $id_auteur	Identifiant de l'auteur
+ * @param int $id_rubrique	Identifiant de la rubrique
+ * @return bool L'auteur fait partie de la rubrique.
+**/
+function accesrestreint_auteur_lie_a_rubrique($id_auteur, $id_rubrique) {
+	if (!$id_auteur)   return false;
+	if (!$id_rubrique) return false;
+	// $auteur[3][8] : l'auteur 3 ne peut pas voir la rubrique 8
+	static $auteurs = array();
+	if (!isset($auteurs[$id_auteur])) {
+		$auteurs[$id_auteur] = array();
+
+		include_spip('inc/acces_restreint');
+		$auteurs[$id_auteur] = array_flip(accesrestreint_liste_rubriques_exclues(true, $id_auteur, true));
+	}
+	
+	// si la rubrique est presente, c'est qu'on ne peut pas la voir !
+	if (isset($auteurs[$id_auteur][$id_rubrique])) {
+		return false;
+	}
+	
+	return true;
+	
+}
+
+
 ?>

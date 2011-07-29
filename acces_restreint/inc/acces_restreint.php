@@ -152,24 +152,28 @@ function accesrestreint_liste_contenu_zone_auteur($id_zone) {
  * au visiteur courant
  * d'ou le recours a $GLOBALS['accesrestreint_zones_autorisees']
  *
- * @param bool $publique
- * @param int $id_auteur
+ * @param bool $publique Sélectionner les rubriques interdites dans l'espace public (true) ou privé (false)
+ * @param int $id_auteur Identifiant de l'auteur
+ * @param bool $quelquesoit_visibilite Si true, on ne s'occupe pas de savoir si une zone est restreinte sur le prive ou sur le public.
  * @return array
  */
-function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL) {
+function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL, $quelquesoit_visibilite = false) {
 	// cache static
 	static $liste_rub_exclues = array();
 	static $liste_rub_inclues = array();
+	if ($quelquesoit_visibilite) { $publique = 'tout'; }
 	
 	$id_auteur = is_null($id_auteur)?$GLOBALS['visiteur_session']['id_auteur']:$id_auteur;
 	if (!isset($liste_rub_exclues[$id_auteur][$publique]) || !is_array($liste_rub_exclues[$id_auteur][$publique])) {
 
 		$where = array();
 		// Ne selectionner que les zones pertinentes
-		if ($publique)
-			$where[] = "publique='oui'";
-		else
-			$where[] = "privee='oui'";
+		if (!$quelquesoit_visibilite) {
+			if ($publique)
+				$where[] = "publique='oui'";
+			else
+				$where[] = "privee='oui'";
+		}
 
 		// Si le visiteur est autorise sur certaines zones publiques,
 		// on selectionne les rubriques correspondant aux autres zones,
@@ -208,10 +212,12 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 
 			$where = array();
 			// Ne selectionner que les zones pertinentes
-			if ($publique)
-				$where[] = "publique='oui'";
-			else
-				$where[] = "privee='oui'";
+			if (!$quelquesoit_visibilite) {
+				if ($publique)
+					$where[] = "publique='oui'";
+				else
+					$where[] = "privee='oui'";
+			}
 
 			// Calcul des rubriques dans des zones autorisees
 			include_spip('base/abstract_sql');
@@ -237,6 +243,7 @@ function accesrestreint_liste_rubriques_exclues($publique=true, $id_auteur=NULL)
 		$final_liste_rub_exclues = array_diff($final_liste_rub_exclues,
 			array_intersect($final_liste_rub_exclues,$liste_rub_inclues[$id_auteur][$publique]));
 	}
+
 	return $final_liste_rub_exclues;
 }
 
