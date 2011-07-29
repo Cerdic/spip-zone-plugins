@@ -41,6 +41,7 @@ function action_supprimer_contact_post($id_contact) {
 
 function action_supprimer_organisation_post($id_organisation) {
 	$id_organisation = intval($id_organisation);
+	sql_delete("spip_organisations_liens", "id_organisation=" . sql_quote($id_organisation));	
 	sql_delete("spip_organisations", "id_organisation=" . sql_quote($id_organisation));
 	sql_delete("spip_organisations_contacts", "id_organisation=" . sql_quote($id_organisation));
 	
