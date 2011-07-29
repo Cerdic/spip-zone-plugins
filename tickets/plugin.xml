@@ -188,6 +188,6 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<!-- pour les boucles pour des "selections" de saisies -->
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<!-- pour la gestion des forums dans la table spip_forums -->
-	<necessite id="forum" version="[1.0;]" />
+	<necessite id="forum" version="[0.1;]" />
 	<utilise id="cfg" version="[1.14.1;]" />
 </plugin>
