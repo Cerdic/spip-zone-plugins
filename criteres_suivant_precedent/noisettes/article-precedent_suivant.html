@@ -1,0 +1,4 @@
+[(#ENV{meme_rubrique}|oui)
+	[(#INCLURE{fond=inclure/article_precedent_suivant,id_article,id_rubrique})]]
+[(#ENV{meme_rubrique}|non)
+	[(#INCLURE{fond=inclure/article_precedent_suivant,id_article})]]

@@ -1,0 +1,11 @@
+nom: '<:suivant_precedent:noisette_nom:>'
+description: '<:suivant_precedent:noisette_description:>'
+icon: 'images/precedent_suivant-24.png'
+contexte:
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'meme_rubrique'
+      label: '<:suivant_precedent:noisette_label_meme_rubrique:>'
+      defaut: 'on'
