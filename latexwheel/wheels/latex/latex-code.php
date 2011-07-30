@@ -12,9 +12,9 @@ function tw_code_latex($code){
 		$options = '';
 	
 	if (count($code)>1)
-		return echappe_html("<html>\begin{minted}$options{".$lang."}\n",'latex');
+		return echappe_html("<html>\begin{english}\begin{minted}$options{".$lang."}\n",'latex');
 	else
-		return 	echappe_html("\n\end{minted}</html>",'latex');
+		return 	echappe_html("\n\end{minted}\end{english}</html>",'latex');
 }
 
 function tw_cadre_latex($code){
@@ -25,8 +25,8 @@ function tw_cadre_latex($code){
 	else 
 		$options = '[linenos]';
 	if (count($code)>1)
-		return echappe_html("<html>\begin{minted}$options{".$lang."}\n",'latex');
+		return echappe_html("<html>\begin{english}\begin{minted}$options{".$lang."}\n",'latex');
 	else
-		return echappe_html("\n\end{minted}</html>",'latex');
+		return echappe_html("\n\end{minted}\end{english}</html>",'latex');
 }
 ?>
