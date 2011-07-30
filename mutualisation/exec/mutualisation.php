@@ -43,6 +43,7 @@ function exec_mutualisation_dist() {
 				<input type='button' name='cachecalculer' id='cachecalculer' value='Calculer' onclick='rechercher_tailles(\"cache\");' /></td>
 			<td title='Popularit&eacute; totale du site'>Stats</td>
 			<td>Plugins</td>
+			<td>Compression</td>
 			<td>Date</td>
 		</tr>
 	</thead>
@@ -101,6 +102,20 @@ function exec_mutualisation_dist() {
 			$erreur = ' <em><small><span class="erreur">Erreur&nbsp;!</span></small></em>';
 			$plugins = '-';
 		}
+		
+		$compression = '';
+		if ($meta['auto_compress_css']=='oui') {
+			$compression .= 'CSS';
+		}
+		if ($meta['auto_compress_js']=='oui') {
+			
+			$compression .= ($compression!='') ? '+JS':'JS';
+		}
+		if ($meta['auto_compress_http']=='oui') {
+			
+			$compression .= ($compression!='') ? '+HTTP':'HTTP';
+		}
+		
 		$page .= '<script type="text/javascript">
 		//<![CDATA[
 		tableau_sites.push(["../../sites/'.$v.'"]);
@@ -117,6 +132,7 @@ function exec_mutualisation_dist() {
 			<td><div id='cache$nsite' class='taille loading'></div></td>
 			<td style='text-align:right;'><a href='${url}ecrire/index.php?exec=statistiques_visites'>${stats}</a></td>
 			<td>$adminplugin<a href='${url}ecrire/index.php?exec=admin_plugin'>${cntplugins}</a> <small>${plugins}</small></td>
+			<td>$compression</td>
 			<td style='text-align:right;'>".date_creation_repertoire_site($v)."</td>
 			</tr>\n";
 		$nsite++;
