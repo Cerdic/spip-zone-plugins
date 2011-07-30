@@ -1,6 +1,6 @@
 <?php
 function tw_echappe_code_latex($code){
-	return '<html>'.echappe_html($code[0],'latex').'</html>';	
+	return '<html>\textenglish{'.echappe_html($code[0],'latex').'}</html>';	
 }
 
 function tw_code_latex($code){
