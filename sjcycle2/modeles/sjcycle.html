@@ -91,7 +91,6 @@
                                     margin:[(#GET{img_bordure})]px;">
          ]
          [(#REM) Si un lien est demande vers un article, on annule l'ouverture vers une box ]
-         #SET{fermer_a,non}
          [(#GET{id_article_a_lier}|oui)
             <a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}">
             #SET{fermer_a,oui}]
