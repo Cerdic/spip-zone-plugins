@@ -271,7 +271,7 @@ function plugin2balise_lien($url, $nom='lien', $sep="\n\t") {
 	return "$sep$nom=\"$url\"";
 }
 
-// Extrait la tradution francaise uniquement
+// Extrait la traduction francaise uniquement
 // Pour l'instant on ne normalise pas le nom comme le fait SVP
 // --> A voir plus tard
 function plugin2balise_nom($texte) {
@@ -286,7 +286,8 @@ function plugin2balise_nom($texte) {
 //    recalculer ensuite
 function plugin2balise_commentaire($description, $slogan, $prefixe) {
 	$descriptions = extraire_descriptions($description, $slogan, $prefixe);
-	$res = "\t<!-- ". $descriptions['fr'][strtolower($prefixe) . '_slogan'] . " -->";
+	if ($slogan = $descriptions['fr'][strtolower($prefixe) . '_slogan'])
+		$res = "\t<!-- ". $slogan . " -->";
 
 	return array($res ? "\n$res" : '', $descriptions);
 }
@@ -435,7 +436,6 @@ function plugin2balise_chemin($D) {
 function plugin2balise_necessite($D) {
 	$nec = $lib = '';
 
-	// Si on lit avec get_infos les librairies sont incluses dans l'arbre des necessite
 	if ($D['necessite']) {
 		foreach($D['necessite'] as $i) {
 			$nom = isset($i['id']) ? $i['id'] : $i['nom'];
@@ -477,8 +477,9 @@ function plugin2balise_utilise($D) {
 // Extraction des boutons et onglets
 function plugin2balise_exec($D, $balise) {
 	$res = '';
+	$balise_finale = ($balise=='bouton') ? 'menu' : $balise;
 	foreach($D[$balise] as $nom => $i) {
-		$res .= "\n\t<$balise" .
+		$res .= "\n\t<$balise_finale" .
 			" nom=\"" . $nom . "\"" .
 			plugin2attribut('titre', @$i['titre']) .
 			plugin2attribut('parent', @$i['parent']) .
@@ -644,7 +645,7 @@ function extraire_descriptions($description, $slogan, $prefixe) {
 			$lang = 'fr';
 		$texte = entite2utf(trim($_descr));
 		$langs[$lang][strtolower($prefixe) . '_description'] = $texte;
-		if (!slogan)
+		if (!$slogan)
 			if (preg_match(',^\s*(.+)[.!?:\r\n\f],Um', $texte, $matches))
 				$langs[$lang][strtolower($prefixe) . '_slogan'] = trim($matches[1]);
 			else

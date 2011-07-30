@@ -38,6 +38,8 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['version_base'] = trim(spip_xml_aplatit($arbre['version_base']));
 	if (isset($arbre['etat']))
 		$ret['etat'] = trim(spip_xml_aplatit($arbre['etat']));
+
+	$ret['description'] = $ret['slogan'] = "";
 	if (isset($arbre['slogan']))
 		$ret['slogan'] = spip_xml_aplatit($arbre['slogan']);
 	if (isset($arbre['description']))
@@ -56,11 +58,11 @@ function plugins_infos_plugin($desc, $plug='', $dir_plugins=_DIR_PLUGINS) {
 		$ret['meta'] = trim(spip_xml_aplatit($arbre['meta']));
 
 	$necessite = info_plugin_normalise_necessite($arbre['necessite']);
-	if (isset($necessite['compatible']))
-		$ret['compatible'] = $necessite['compatible'];
+	$ret['compatible'] = isset($necessite['compatible'])?$necessite['compatible']:'';
 	$ret['necessite'] = $necessite['necessite'];
 	$ret['lib'] = $necessite['lib'];
 	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise']);
+	$ret['procure'] = $arbre['procure'];
 
 	$ret['path'] = $arbre['path'];
 	if (isset($arbre['pipeline']))
