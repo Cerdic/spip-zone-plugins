@@ -12,7 +12,7 @@
 <h3 class="spip">D&eacute;cryptage de la syntaxe et param&egrave;tres du raccourci typographique "sjcycle"</h3>
 
 <div>
-	<p style="background:#eee;color:#666;padding:10px;font-weight:700">Le raccourci typographique "sjcycle" permet d'ins&eacute;rer facilement un ou plusieurs diaporamas au sein d'un article : il vous suffit de le recopier &agrave; l’int&eacute;rieur de la case « Texte » de l'article, l&agrave; vous d&eacute;sirez situer le diaporama. Exemples d'utilisation par ici.
+  <p style="background:#eee;color:#666;padding:10px;font-weight:700">Le raccourci typographique "sjcycle" permet d'ins&eacute;rer facilement un ou plusieurs diaporamas au sein d'un article : il vous suffit de le recopier &agrave; l’int&eacute;rieur de la case « Texte » de l'article, l&agrave; vous d&eacute;sirez situer le diaporama. Exemples d'utilisation par ici.
 	<br /><br />
 	Ce raccourci comporte plusieurs param&egrave;tres s&eacute;par&eacute;s par le caract&egrave;re "|".</p>
    
@@ -87,9 +87,10 @@ Depuis la version 1.1, n’est plus n&eacute;cessaire pour afficher plusieurs di
    &lt;sjcycle16|center|opt=autostop:1;autostopCount:5&gt; : diaporama sur toutes les images de l'article 16 mais qui s'arrêtera à la cinquième image<br />
    &lt;sjcycle16|center|opt=fx:'fade'&gt; : diaporama sur toutes les images de l'article 16 avec un effet de transition &quot;fade&quot; qui remplace celui défini globalement pour le site entier</li>
       <li>
-      	<h4>&lt;sjcycleN|ALIGN|<span style="color:red">lien_article=XXX</span>&gt;</h4>
-         <strong>Param&egrave;tre &quot;<span style="color:#666">lien_article=XXX</span>&quot;, optionnel :</strong> <br />
-	Permet de poser un lien sur le diaporama vers un article d'identifiant XXX autre que celui contenant les images. Dans le cas d'un site multilingue, fournir l'id de l'article de référence, le modèle se charge de trouver l'id de l'article correspondant à la langue du visiteur. Cette option désactive l'ouverture vers une box.<br />
+     	  <h4>&lt;sjcycleN|ALIGN|<span style="color:red">lien_article=XXX|forcer_lien_reference=on</span>&gt;</h4>
+         <strong>Param&egrave;tres &quot;<span style="color:#666">lien_article=XXX</span>&quot; et  &quot;<span style="color:#666">forcer_lien_reference=on</span>&quot;, optionnels :</strong> <br />
+	Permet de poser un lien sur le diaporama vers un article d'identifiant XXX autre que celui contenant les images. Dans le cas d'un site multilingue, fournir l'id de l'article de référence, le modèle se charge de trouver l'id de l'article correspondant à la langue du visiteur. Cette option désactive l'ouverture vers une box. Si l'article n'existe pas dans la langue courante on met ou pas un lien
+vers l'article de référence suivant que le paramètre forcer_lien_reference soit défini ou pas.<br />
    <strong>Exemple :</strong><br />
    &lt;sjcycle16|center|lien_article=171&gt; : diaporama sur toutes les images de l'article 16 avec un lien vers l'article 171
 

@@ -17,8 +17,13 @@
 [(#REM) largeur div = largeur image + 2*bordure ]
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
 
-[(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit ]
+[(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
+			- Si l'article n'existe pas dans la langue courante on met ou pas un lien
+           vers l'article de reference suivant la valeur de forcer_lien_reference ]
 <BOUCLE_contexte_article(ARTICLES){id_article=#ENV{lien_article}}>
+   [(#ENV{forcer_lien_reference}|oui)
+      #SET{id_article_a_lier,#ID_ARTICLE}
+      #SET{titre_article_a_lier,#TITRE}]
    <BOUCLE_traductions(ARTICLES){traduction}>
    	[(#ENV{lang}|=={#LANG}|oui)
       	#SET{id_article_a_lier,#ID_ARTICLE}
