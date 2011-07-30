@@ -359,6 +359,8 @@ jQuery.geoportail =
 		ext = ext.toUpperCase();
 		// Verifier OK
 		if (ext != 'GPX' && ext != 'KML' && ext != 'GXT') return;
+		// &amp; => & (sinon on les code 2 fois)
+		fic = fic.replace(/&amp;/g,"&");
 		// Ajouter
 		var carte = this.getCarte(id_map);
 		if (carte) {
