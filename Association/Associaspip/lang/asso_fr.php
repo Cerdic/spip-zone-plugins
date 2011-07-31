@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_onglet_prets' => 'Gestion des pr&ecirc;ts',
 			
 #Configuration
-	# Libellé
+	# Libellï¿½
 	'config_libelle_nom' => 'Nom',
 	'config_libelle_email' => 'Adresse courriel',
 	'config_libelle_adresse' => 'Adresse',
@@ -416,7 +416,7 @@ Commentaire: @commentaire@
 			'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
 			'ressources_libelle_commentaires' => 'Commentaires',
 		
-		# Prêts
+		# Prï¿½ts
 			
 			#Messages
 				'prets_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer la r&eacute;servation n&deg; @id_pret@ !',
@@ -652,7 +652,7 @@ Commentaire: @commentaire@
 'valeur' => 'Valeur',
 'validite' => 'Validit&eacute;',
 'vous_vous_appretez_a_effacer_la_ligne_de_compte' => 'Vous vous appr&ecirc;tez &agrave; effacer la ligne de compte',
-'vous_vous_appretez_a_effacer_le_categorie' => 'Vous vous appr&ecirc;tez &agrave; effacer le cat&eacute;gorie',
+'vous_vous_appretez_a_effacer_la_categorie' => 'Vous vous appr&ecirc;tez &agrave; effacer la cat&eacute;gorie',
 'vous_vous_appretez_a_effacer_le_compte' => 'Vous vous appr&ecirc;tez &agrave; effacer le compte',
 'vous_vous_appretez_a_effacer_la_destination' => 'Vous vous appr&ecirc;tez &agrave; effacer la destination',
 'vous_vous_appretez_a_effacer_le_don' => 'Vous vous appr&ecirc;tez &agrave; effacer le don',

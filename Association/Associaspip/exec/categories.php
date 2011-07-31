@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -33,7 +33,7 @@ function exec_categories(){
 		echo fin_boite_info(true);
 		
 		$res=association_icone(_T('asso:ajouter_une_categorie_de_cotisation'),  generer_url_ecrire('edit_categorie','agir=ajoute'), "calculatrice.gif");
-		$res.= association_icone(_T('asso:bouton_retour'), str_replace('&', '&amp;', $_SERVER['HTTP_REFERER']), "retour-24.png");
+		$res.= association_icone(_T('asso:bouton_retour'), generer_url_ecrire('association'), "retour-24.png");
 		echo bloc_des_raccourcis($res);	
 		echo debut_droite("",true);
 		
