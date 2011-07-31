@@ -2,8 +2,8 @@
 	<nom>Forum Sectoris&eacute;</nom>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1</version>
-	<version_base>0.1</version_base>
+	<version>0.2</version>
+	<version_base>0.2</version_base>
 	<etat>test</etat>
 	<description>
 	<multi>[fr]Ce plugin permet d'activer les forums publics uniquement sur un secteur du site. Tous les nouveaux articles cr&eacute;&eacute;s dans ce secteur se verront attribuer le type de forum d&eacute;fini dans la configuration du plugin. Evidemment ce plugin n'a un int&eacute;r&egrave;t que si les forums sont d&eacute;sactiv&eacute;s dans la configuration g&eacute;n&eacute;rale du site.</multi>
