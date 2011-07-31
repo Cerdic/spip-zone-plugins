@@ -13,7 +13,7 @@
 include_spip('inc/distant');
 
 function inc_openlayer_public_script_init_dist(){
-	$out = '<script type="application/javascript" src="'.generer_url_public('openlayer.js').'"></script>';
+	$out = '<script type="text/javascript" src="'.generer_url_public('openlayer.js').'"></script>';
 	return $out;
 }
 ?>

@@ -10,12 +10,12 @@
  */
 
 function openlayer_insert_head_prive($flux){
-  $flux .= '<script type="application/javascript" src="'.generer_url_public('openlayer.js').'"></script>';
+  $flux .= '<script type="text/javascript" src="'.generer_url_public('openlayer.js').'"></script>';
 	return $flux;
 }
 
 function openlayer_insert_head($flux){
-	$flux .= '<script type="application/javascript" src="'.generer_url_public('openlayer.js').'"></script>';
+	$flux .= '<script type="text/javascript" src="'.generer_url_public('openlayer.js').'"></script>';
 	return $flux;
 }
 
