@@ -2,7 +2,7 @@
 	<nom>Geo-Localisation des Tables</nom>
 	<icon>img_pack/form-24.png</icon>
 	<auteur>Cedric Morin [notre-ville.net->http://www.notre-ville.net]</auteur>
-	<version>0.1.0.0</version>
+	<version>0.1.0.1</version>
 	<etat>dev</etat>
 	<description>Ajout des fonctionnalit&eacute;s de Geolocalisation aux tables de Forms&amp;tables
 	</description>
