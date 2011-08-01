@@ -4,9 +4,9 @@
 	<icon>images/anythingslider.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>1.0.0</version>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<description>Permets d'utiliser le plugin jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] (v1.7.6) dans les squelettes.</description>
-	<lien>http://www.spip-contrib.net/?article3783</lien>
+	<lien>http://www.spip-contrib.net/?article3897</lien>
 	<prefix>anythingslider</prefix>
 	<pipeline>
 		<nom>anythingslider_charger</nom>
