@@ -23,4 +23,9 @@ function menus_pre_boucle($boucle){
 function menus_menus_lister_disponibles($flux){
 	return $flux;
 }
+
+function menus_declarer_url_objets($array){
+    $array[] = 'menu';
+    return $array;
+}
 ?>
