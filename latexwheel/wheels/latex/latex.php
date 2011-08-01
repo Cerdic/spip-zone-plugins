@@ -28,7 +28,7 @@ function tx_latex_traiter_liens($lien){
 		else{
 			//sinon objet SPIP pour le moment seul rubrique et article, on verra pour la suite
 						
-			$texte	= '\nameref/debut'.$lien[4]."/fin (p. \pageref/debut$lien[4]/fin)";
+			$texte	= '\nameref/debut'.$lien[4]."/fin (p. \pageref/debut$lien[4]/fin)"; #nameref=renvoi au nom de l'endroit pointé par un label
 		}
 	}
 	
