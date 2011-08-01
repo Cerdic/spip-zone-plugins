@@ -5,20 +5,26 @@
 	<licence>GNU/GPL</licence>
 	<version>1.0.0</version>
 	<etat>dev</etat>
-	<description>Permets d'utiliser le plugin jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] (v1.7.5) dans les squelettes.</description>
+	<description>Permets d'utiliser le plugin jQuery [AnythingSlider->https://github.com/ProLoser/AnythingSlider/wiki] (v1.7.6) dans les squelettes.</description>
 	<lien>http://www.spip-contrib.net/?article3783</lien>
 	<prefix>anythingslider</prefix>
 	<pipeline>
-		<nom>anythingslider_charger_fx</nom>
-		<inclure>anythingslider_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>anythingslider_charger_video</nom>
+		<nom>anythingslider_charger</nom>
 		<inclure>anythingslider_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>anythingslider_pipelines.php</inclure>
 	</pipeline>
+	<bouton id='anythingslider_2' parent='configuration'>
+		<icone>images/anythingslider-24.png</icone>
+		<titre>anythingslider:anythingslider</titre>
+		<url>configurer_anythingslider</url>
+	</bouton>
+	<bouton id='anythingslider' parent='bando_squelette'>
+		<icone>images/anythingslider-16.png</icone>
+		<titre>anythingslider:anythingslider</titre>
+		<url>configurer_anythingslider</url>
+	</bouton>
 	<categorie>multimedia</categorie>
 </plugin>

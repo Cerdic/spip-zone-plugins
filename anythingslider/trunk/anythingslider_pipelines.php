@@ -3,32 +3,34 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function anythingslider_anythingslider_charger_fx($flux){return $flux;}
-function anythingslider_anythingslider_charger_video($flux){return $flux;}
+function anythingslider_anythingslider_charger($flux){return $flux;}
 
 function anythingslider_insert_head($flux){
+	// Chargement de la CSS et du JS d'AnythingSlider
 	$css = find_in_path('css/anythingslider.css');
 	$flux .= "\n<link rel='stylesheet' href='$css' type='text/css' />\n";
 	$js = find_in_path('js/jquery.anythingslider.min.js');
-	$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
-	if (pipeline('anythingslider_charger_fx',false)) {
-		$js = find_in_path('js/jquery.anythingslider.fx.min.js');
-		$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
-		$js = find_in_path('js/jquery.easing.1.2.js');
-		$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
-		$js = find_in_path('js/swfobject.js');
-		$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
+	$flux .= "<script type='text/javascript' src='$js'></script>\n";
+	// Chargement optionnels de scripts et/ou de thèmes
+	$config = unserialize($GLOBALS['meta']['anythingslider']);;
+	if (!is_array($config))
+		$config = array();
+	$config = array_unique(pipeline('anythingslider_charger',$config));
+	foreach ($config as $script) {
+		$ext = substr(strrchr($script, "."), 1);
+		if ($fichier = find_in_path($ext.'/'.$script)) {
+			if ($ext=='css')
+				$flux .= "<link rel='stylesheet' href='$fichier' type='text/css' />\n";
+			else
+				$flux .= "<script type='text/javascript' src='$fichier'></script>\n";
+		}
 	}
-	if (pipeline('anythingslider_charger_video',false)) {
-		$js = find_in_path('js/jquery.anythingslider.video.min.js');
-		$flux .= "\n<script type='text/javascript' src='$js'></script>\n";
-	}
+	// Script pour internet explorer, doit être placé en dernier.
+	$css = find_in_path('css/anythingslider-ie.css');
+	$flux .= "<!--[if lte IE 7]>\n";
+	$flux .= "<link rel='stylesheet' href='$css' type='text/css' />\n";
+	$flux .= "<![endif]-->\n";
 	return $flux;
 }
-
-
-
-
-jquery.anythingslider.video.min.js
 
 ?>

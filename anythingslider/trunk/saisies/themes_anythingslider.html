@@ -2,12 +2,13 @@
   Parametres :
   - class : classe(s) css ajoutes au select
 ]
+[(#SET{dispos,[(#PIPELINE{anythingslider_charger,[(#CONFIG{anythingslider}|unserialize|sinon{#ARRAY})]})]})]
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 	<option value="default"[(#ENV{valeur,#ENV{defaut}}|=={default}|oui)selected="selected"]>Default</option>
-	<option value="minimalist-round"[(#ENV{valeur,#ENV{defaut}}|=={minimalist-round}|oui)selected="selected"]>Minimalist-Round</option>
-	<option value="minimalist-square"[(#ENV{valeur,#ENV{defaut}}|=={minimalist-square}|oui)selected="selected"]>Minimalist-Square</option>
-	<option value="metallic"[(#ENV{valeur,#ENV{defaut}}|=={metallic}|oui)selected="selected"]>Metallic</option>
-	<option value="construction"[(#ENV{valeur,#ENV{defaut}}|=={construction}|oui)selected="selected"]>Construction</option>
-	<option value="cs-portfolio"[(#ENV{valeur,#ENV{defaut}}|=={cs-portfolio}|oui)selected="selected"]>CS-Portfolio</option>
-	<option value="simple"[(#ENV{valeur,#ENV{defaut}}|=={simple}|oui)selected="selected"]>Simple</option>
+	[(#VAL{theme-minimalist-round.css}|in_array{#GET{dispos}})<option value="minimalist-round"[(#ENV{valeur,#ENV{defaut}}|=={minimalist-round}|oui)selected="selected"]>Minimalist-Round</option>]
+	[(#VAL{theme-minimalist-square.css}|in_array{#GET{dispos}})<option value="minimalist-square"[(#ENV{valeur,#ENV{defaut}}|=={minimalist-square}|oui)selected="selected"]>Minimalist-Square</option>]
+	[(#VAL{theme-metallic.css}|in_array{#GET{dispos}})<option value="metallic"[(#ENV{valeur,#ENV{defaut}}|=={metallic}|oui)selected="selected"]>Metallic</option>]
+	[(#VAL{theme-construction.css}|in_array{#GET{dispos}})<option value="construction"[(#ENV{valeur,#ENV{defaut}}|=={construction}|oui)selected="selected"]>Construction</option>]
+	[(#VAL{theme-cs-portfolio.css}|in_array{#GET{dispos}})<option value="cs-portfolio"[(#ENV{valeur,#ENV{defaut}}|=={cs-portfolio}|oui)selected="selected"]>CS-Portfolio</option>]
+	[(#VAL{theme-simple.css}|in_array{#GET{dispos}})<option value="simple"[(#ENV{valeur,#ENV{defaut}}|=={simple}|oui)selected="selected"]>Simple</option>]
 </select>
