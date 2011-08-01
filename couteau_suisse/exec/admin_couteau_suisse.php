@@ -11,18 +11,18 @@ include_spip('inc/autoriser');
 include_spip('inc/texte');
 include_spip('inc/layer');
 include_spip('inc/presentation');
-include_spip('base/cout_upgrade');
+include_spip('couteau_suisse_administrations');
 
 // mise a jour des donnees si envoi via formulaire
-function enregistre_modif_outils($cmd){
+function enregistre_modif_outils(&$cmd, &$outil){
 cs_log("INIT : enregistre_modif_outils()");
 	global $outils, $metas_outils;
 	// recuperer les outils dans $_POST ou $_GET
 	$toggle = array();
-	if(isset($_GET['outil'])) $toggle[] = $_GET['outil'];
+	if(strlen($outil)) $toggle[] = $outil;
 		elseif(isset($_POST['cs_selection'])) $toggle = explode(',', $_POST['cs_selection']);
 		else return;
-	$_GET['outil'] = ($cmd!='hide' && count($toggle)==1)?$toggle[0]:'';
+	$outil = ($cmd!='hide' && count($toggle)==1)?$toggle[0]:'';
 	$i = $cmd=='hide'?'cache':'actif';
 	${$i} = isset($GLOBALS['meta']["tweaks_{$i}s"])?unserialize($GLOBALS['meta']["tweaks_{$i}s"]):array();
 	foreach($toggle as $o) if(autoriser('configurer', 'outil', 0, NULL, $outils[$o])) {
@@ -52,6 +52,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	cs_minipres();
 	$cmd = _request('cmd');
 	$exec = _request('exec');
+	$outil = _request('outil');
 
 	include_spip('inc/cs_outils');
 	cs_init_plugins();
@@ -90,16 +91,16 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		}
 	}
 	// reset des variables d'un outil
-	if($cmd=='reset' && strlen($_GET['outil'])){
+	if($cmd=='reset' && strlen($outil)){
 		spip_log("Reset des variables de '$_GET[outil]' par l'auteur id=$connect_id_auteur");
 		global $outils;
 		include_spip('cout_utils');
 		include_spip('config_outils');
-		if(autoriser('configurer', 'outil', 0, NULL, $outils[$_GET['outil']])) {
+		if(autoriser('configurer', 'outil', 0, NULL, $outils[$outil])) {
 			include_spip('inc/cs_outils');
-			cs_initialisation_d_un_outil($_GET['outil'], charger_fonction('description_outil', 'inc'), true);
-			foreach ($outils[$_GET['outil']]['variables'] as $a)
-				if(autoriser('configurer', 'variable', 0, NULL, array('nom'=>$a, 'outil'=>$outils[$_GET['outil']])))
+			cs_initialisation_d_un_outil($outil, charger_fonction('description_outil', 'inc'), true);
+			foreach ($outils[$outil]['variables'] as $a)
+				if(autoriser('configurer', 'variable', 0, NULL, array('nom'=>$a, 'outil'=>$outils[$outil])))
 					unset($metas_vars[$a]);
 				else spip_log("Reset interdit de la variable %$a% !!");
 			ecrire_meta('tweaks_variables', serialize($metas_vars));
@@ -115,7 +116,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	}
 
 	// afficher la description d'un outil ?
-	$afficher_outil = ($cmd=='descrip' OR $cmd=='switch')?$_GET['outil']:'';
+	$afficher_outil = ($cmd=='descrip' OR $cmd=='switch')?$outil:'';
 
 	// initialisation generale forcee : recuperation de $outils;
 	cs_initialisation(true, $cmd!='noinclude');
@@ -124,8 +125,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les outils
 	if($cmd=='switch' OR $cmd=='hide'){
-		enregistre_modif_outils($cmd);
-		cout_exec_redirige(strlen($_GET['outil'])?"cmd=descrip&outil={$_GET[outil]}#cs_infos":'');
+		enregistre_modif_outils($cmd, $outil);
+		cout_exec_redirige(strlen($outil)?"cmd=descrip&outil=$outil#cs_infos":'');
 	}
 //	else
 //		verif_outils();
@@ -139,6 +140,7 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		$t = unserialize($GLOBALS['meta']['plugin']);
 		$dir = $t['COUTEAU_SUISSE']['dir'];
 		$dir_type = $t['COUTEAU_SUISSE']['dir_type'];
+		// obsolete pour SPIP>=3.0 :
 		$bt_dir = $t['BARRETYPOENRICHIE']['dir'];
 		$bt_version = $t['BARRETYPOENRICHIE']['version'];
 	}
@@ -175,9 +177,11 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		'cs_version' => $cs_version,
 		'exec' => _request('exec'),
 	)));
-	echo "<br /><br /><br />";
+	if(!defined('_SPIP30000')) echo "<br /><br /><br />";
 	gros_titre(couteauprive_T('titre'), '', false);
-	echo barre_onglets("configuration", 'couteau_suisse');
+
+	// Onglet pour SPIP<3.0
+	if(!defined('_SPIP30000')) echo barre_onglets("configuration", 'couteau_suisse');
 
 	echo quelques_verifications($bt_version);
 
@@ -229,7 +233,8 @@ cs_log("INIT : exec_admin_couteau_suisse()");
 		'</div><br class="conteneur" /><div class="cs_patience"><br />'.http_img_pack('searching.gif','*','').' ...</div>';
 	flush();
 	echo '<div class="conteneur"><div id="cs_infos" class="cs_infos">',
-		$cmd=='pack'?cs_description_pack():description_outil2($afficher_outil),
+		($cmd=='pack' || ($cmd=='descrip' && $outil=='pack'))
+			?cs_description_pack():description_outil2($afficher_outil),
 		'</div><script type="text/javascript"><!--
 var cs_descripted = "', $afficher_outil, '";
 document.write("<style type=\'text/css\'>#csjs{display:none;}<\/style>");
@@ -254,12 +259,14 @@ if(!window.jQuery) document.write('".str_replace('/','\/',addslashes(propre('<p>
 	// verification d'une base venant de SPIP 1.8
 	$tmp = spip_query('DESCRIBE spip_meta valeur');
 	$tmp = function_exists('spip_fetch_array')?spip_fetch_array($tmp):sql_fetch($tmp);
-	if($tmp['Type']!='text')
+	if(strlen($tmp['Type']) && $tmp['Type']!='text')
 		$res .= "<p style=\"color:red;\">Attention : votre base semble ancienne et le Couteau Suisse ne va pas bien fonctionner.</p><p>La table 'spip_meta' a pour type de valeur '$tmp[Type]' au lieu de 'text'.</p>";
-	// verification de la barre typo V2
-	$mini = '2.5.3';
-	if(strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) 
-		$res .= "<p>".couteauprive_T('erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
+	if(!defined('_SPIP30000')) {
+		// verification de la barre typo V2 (SPIP<3.0)
+		$mini = '2.5.3';
+		if(strlen($bt_version) and (version_compare($bt_version,$mini,'<'))) 
+			$res .= "<p>".couteauprive_T('erreur:bt', array('version'=>$bt_version, 'mini'=>$mini))."</p>";
+	}
 	return "<div style='font-size:85%'>$res</div>";
 }
 

@@ -148,6 +148,7 @@ function couteau_suisse_propres_creer_chaine_url($flux){
 	return eval_metas_pipelines($flux, 'propres_creer_chaine_url');
 }
 
+// eux fonctions obsoletes, conservees pour SPIP<3.0 :
 // le contenu du sous-menu est gere par les lames elles-memes
 function couteau_suisse_bt_toolbox($params) {
 	global $cs_metas_pipelines;
@@ -161,7 +162,6 @@ function couteau_suisse_bt_toolbox($params) {
 	$params['flux'] .= produceWharf('couteau_suisse', '', $tableau_formulaire);
 	return $params;
 }
-
 // bouton principal du Couteau Suisse
 function couteau_suisse_bt_gadgets($params) {
 	global $cs_metas_pipelines;

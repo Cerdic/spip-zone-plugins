@@ -37,7 +37,7 @@ function exec_cs_version_dist() {
 		ecrire_metas();
 	}
 	include_spip('inc/texte');
-	include_spip('cout_fonctions'); // fonctions pour les pipelines
+	include_spip('couteau_suisse_fonctions'); // fonctions pour les pipelines
 	if (!$distant)
 		return ajax_retour('<span style="color: red;">'._T('couteauprive:erreur:probleme', array('pb'=>cs_lien(_URL_CS_PLUGIN_XML,_T('couteauprive:erreur:distant')))).'</span>');
 	ajax_retour(ptobr(propre($distant==$version?_T('couteauprive:version_a_jour'):(

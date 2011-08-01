@@ -1,3 +1,3 @@
 <?php
-	include_spip('base/cout_upgrade');
+	include_spip('couteau_suisse_administrations');
 ?>

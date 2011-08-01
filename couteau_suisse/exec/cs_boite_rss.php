@@ -53,7 +53,7 @@ function exec_cs_boite_rss_dist() {
 		}
 	} else {
 		// pour cs_lien()
-		include_spip('cout_fonctions');
+		include_spip('couteau_suisse_fonctions');
 		$p = '<span style="color: red;">'._T('couteauprive:erreur:probleme', array('pb'=>cs_lien(_CS_RSS_SOURCE,_T('couteauprive:erreur:distant')))).'</span>';
 	}
 	$du = affdate_heure(date('Y-m-d H:i:s',time()));

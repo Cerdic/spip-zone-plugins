@@ -54,7 +54,7 @@ function cs_initialisation_d_un_outil($outil_, $description_outil, $modif) {
 	return $description_outil($outil_, 'admin_couteau_suisse', $modif);
 }
 
-// renvoie le configuration du pack actuel
+// renvoie la configuration du pack actuel
 function cs_description_pack() {
 	if(!isset($GLOBALS['cs_pack_actuel'])) return '';
 	return debut_cadre_relief('', true)

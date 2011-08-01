@@ -47,7 +47,7 @@ elseif (version_compare($GLOBALS['spip_version_code'],'1.9200','>='))
 	@define('_SPIP19200', 1);
 else @define('_SPIP19100', 1);
 // chemin du fichier de fonctions
-define('_COUT_FONCTIONS_PHP', find_in_path('cout_fonctions.php'));
+define('_COUT_FONCTIONS_PHP', find_in_path('couteau_suisse_fonctions.php'));
 // globales de controles de passes
 $GLOBALS['cs_options'] = $GLOBALS['cs_fonctions'] = $GLOBALS['cs_fonctions_essai'] = $GLOBALS['cs_init'] = $GLOBALS['cs_utils'] = $GLOBALS['cs_verif'] = 0;
 // parametres d'url concernant le plugin ?
@@ -66,7 +66,7 @@ if (($metas_outils['cs_comportement']['actif'] && $metas_vars['log_couteau_suiss
  || defined('_LOG_CS_FORCE') || in_array('log', $GLOBALS['cs_params']))	@define('_LOG_CS', 1);
 if(defined('_LOG_CS')) {
 	cs_log(str_repeat('-', 80), '', sprintf('COUTEAU-SUISSE. [#%04X]. ', rand()));
-	cs_log('INIT : cout_options, '.$_SERVER['REQUEST_URI']);
+	cs_log('INIT : couteau_suisse_options, '.$_SERVER['REQUEST_URI']);
 }
 
 // on passe son chemin si un reset general est demande
@@ -74,7 +74,7 @@ $zap = _request('cmd')=='resetall';
 
 // lancer maintenant les options du Couteau Suisse
 if($zap)
-	cs_log(' FIN : cout_options sans initialisation du plugin');
+	cs_log(' FIN : couteau_suisse_options sans initialisation du plugin');
 else {
 	// $cs_metas_pipelines ne sert qu'a l'execution et ne comporte que :
 	//	- le code pour <head></head>
@@ -97,7 +97,7 @@ else {
 	// lancer l'initialisation du plugin. on force la compilation si cs=calcul
 	include_spip('cout_lancement');
 	cs_initialisation(!$cs_exists || in_array('calcul', $GLOBALS['cs_params']));
-	if(defined('_LOG_CS')) cs_log("PUIS : cout_options, initialisation terminee");
+	if(defined('_LOG_CS')) cs_log("PUIS : couteau_suisse_options, initialisation terminee");
 
 	// inclusion des options hautes de SPIP, si ce n'est pas deja fait par config/mes_options.php
 	if (!$GLOBALS['cs_spip_options']) {
@@ -138,13 +138,13 @@ else {
 		}
 	}
 
-	// a-t-on voulu inclure cout_fonctions.php ?
+	// a-t-on voulu inclure couteau_suisse_fonctions.php ?
 	if ($GLOBALS['cs_fonctions_essai']) {
 		if(defined('_LOG_CS')) cs_log(" -- inclusion de : "._COUT_FONCTIONS_PHP);
 		@include(_COUT_FONCTIONS_PHP);
 	}
 
-	if(defined('_LOG_CS')) cs_log(" FIN : cout_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
+	if(defined('_LOG_CS')) cs_log(" FIN : couteau_suisse_options, cs_spip_options = $GLOBALS[cs_spip_options], cs_options = $GLOBALS[cs_options], cs_fonctions_essai = $GLOBALS[cs_fonctions_essai]");
 }
 
 // Droits pour configurer le Couteau Suisse (fonction surchargeable sans le _dist)

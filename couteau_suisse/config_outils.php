@@ -10,8 +10,8 @@ if(!defined("_ECRIRE_INC_VERSION")) return;
 
 // Noter :
 // outils/mon_outil.php : inclus par les pipelines de l'outil
-// outils/mon_outil_options.php : inclus par cout_options.php
-// outils/mon_outil_fonctions.php : inclus par cout_fonctions.php
+// outils/mon_outil_options.php : inclus par couteau_suisse_options.php
+// outils/mon_outil_fonctions.php : inclus par couteau_suisse_fonctions.php
 
 cs_log("inclusion de config_outils.php");
 //-----------------------------------------------------------------------------//

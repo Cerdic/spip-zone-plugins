@@ -320,7 +320,7 @@ function cs_sauve_configuration() {
 		. "\t'variables' => array(\n\t" . join(",\n\t", $metas_actifs) . "\n\t)\n);} # $nom_pack #\n";
 
 	ecrire_fichier(_DIR_CS_TMP.'config.php', '<'."?php\n// Configuration de controle pour le plugin 'Couteau Suisse'\n\n$sauve?".'>');
-	if(@$_GET['cmd']=='pack') $GLOBALS['cs_pack_actuel'] = $temp;
+	if(_request('cmd')=='pack' || (_request('cmd')=='descrip' && _request('outil')=='pack')) $GLOBALS['cs_pack_actuel'] = $temp;
 }
 
 // cree les tableaux $infos_pipelines et $infos_fichiers, puis initialise $cs_metas_pipelines
@@ -333,8 +333,8 @@ function cs_initialise_includes($count_metas_outils) {
 	// variables temporaires
 	$temp_js_html = $temp_css_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
 	@define('_CS_HIT_EXTERNE', 1500);
-	// inclure d'office outils/cout_fonctions.php
-	if($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
+	// inclure d'office outils/couteau_suisse_fonctions.php
+	if($temp=cs_lire_fichier_php("outils/couteau_suisse_fonctions.php"))
 		$infos_fichiers['code_fonctions'][] = $temp;
 	// variable de verification
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_verif']=$count_metas_outils;";

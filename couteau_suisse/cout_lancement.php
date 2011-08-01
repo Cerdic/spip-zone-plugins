@@ -41,7 +41,7 @@ function cs_preg_quote(&$item) {
 }
 
 // lit ecrit les metas et initialise $cs_metas_pipelines
-// cette fonction est appellee par cout_options a chaque hit de la page
+// cette fonction est appellee par couteau_suisse_options a chaque hit de la page
 function cs_initialisation($forcer=false, $init_includes=true) {
 	global $cs_metas_pipelines, $metas_outils;
 	static $deja_passe_ici = 0;
@@ -101,7 +101,7 @@ if($log) cs_log("$rand -- foreach(\$outils) : cs_initialisation_d_un_outil()");
 		cs_initialisation_d_un_outil($id = $outil['id'], $description_outil, false);
 	// installer $cs_metas_pipelines
 	$cs_metas_pipelines = array();
-if($log) cs_log("$rand -- cs_initialise_includes()... cout_fonctions.php sera peut-etre inclus.");
+if($log) cs_log("$rand -- cs_initialise_includes()... couteau_suisse_fonctions.php sera peut-etre inclus.");
 	// creer les includes (config/mes_options, mes_options et mes_fonctions) et le fichier de controle pipelines.php
 	if($init_includes) cs_initialise_includes(count($metas_outils));
 	// verifier le fichier d'options _FILE_OPTIONS (ecrire/mes_options.php ou config/mes_options.php)
@@ -151,7 +151,7 @@ function cs_echappe_balises($balises, $fonction, $texte, $arg=NULL){
 	if(!strlen($texte)) return '';
 	if (($fonction!==false) && !function_exists($fonction)) {
 		// chargement des fonctions
-		include_spip('cout_fonctions');
+		include_spip('couteau_suisse_fonctions');
 		if (!function_exists($fonction)) {
 			spip_log("Erreur - cs_echappe_balises() : $fonction() non definie dans : ".$_SERVER['REQUEST_URI']);
 			return $texte;
@@ -211,7 +211,9 @@ if(defined('_LOG_CS')) cs_log(" -- fichier $fo absent ".($ok?'mais cree avec l\'
 // liste des barres typo disponibles
 function cs_pp_liste_barres($outil=false) {
 	global $metas_vars;
-	include_spip('inc/barre_outils');
+	// pour barre_outils_liste() qu'on trouve maintenant dans l'extension porte_plume
+	if(defined('_SPIP30000')) include_spip('public/parametrer');
+		else include_spip('inc/barre_outils');
 	if (!$sets = barre_outils_liste()) return array();
 	if($outil) foreach($sets as $f=>$b) {
 		$v = 'pp_'.$b.'_'.$outil;
