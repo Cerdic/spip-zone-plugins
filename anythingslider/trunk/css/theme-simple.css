@@ -3,27 +3,21 @@
     par Joseph Larmarange
 */
 
-/****** SET COLORS HERE *******/
 /* Default State */
+div.anythingSlider-simple {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 div.anythingSlider-simple .anythingWindow {
 	border: none;
 }
-div.anythingSlider-simple .start-stop.playing {
-	background-color: #300;
-}
-div.anythingSlider-simple .start-stop:hover, div.anythingSlider-simple .start-stop.hover {
-	color: #ddd
-}
+
 /* Active State */
 div.anythingSlider-simple.activeSlider .anythingWindow {
 	border: none;
 }
-div.anythingSlider-simple.activeSlider .start-stop.playing {
-	background-color: #f00;
-}
-div.anythingSlider-simple .start-stop:hover, div.anythingSlider-simple .start-stop.hover {
-	color: #fff
-}
+
 /* Navigation Arrows */
 div.anythingSlider-simple .arrow {
 	top: 50%;
@@ -51,19 +45,18 @@ div.anythingSlider-simple .back a:hover, div.anythingSlider-simple .back a.hover
 
 /* Navigation Links */
 div.anythingSlider-simple .anythingControls {
-	position: absolute;
-	bottom: 5px;
-	left: 30px;
-	right: 30px;
-	z-index: 100;
+	margin-top: 10px;
 	text-align: center;
 	opacity: 0.75;
 	filter: alpha(opacity=75);
+	width:100%;
 }
 div.anythingSlider-simple .thumbNav {
 	float: none;
-	margin: 0;
-	z-index: 100;
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+	margin-left: 50px;
 }
 div.anythingSlider-simple  ul.thumbNav, div.anythingSlider-simple.activeSlider  ul.thumbNav { list-style: none; }
 div.anythingSlider-simple .thumbNav li {
@@ -98,21 +91,20 @@ div.anythingSlider-simple .thumbNav a:hover,
 div.anythingSlider-simple.activeSlider .thumbNav a:hover {
 	background-position: center center;
 }
-/* slider autoplay right-to-left, reverse order of nav links to look better */
-div.anythingSlider-simple.rtl .thumbNav a { float: right; } /* reverse order of nav links */
-div.anythingSlider-simple.rtl .thumbNav { float: left; }    /* move nav link group to left */
-/* div.anythingSlider-simple.rtl .start-stop { float: right; } */ /* move start/stop button - in case you want to switch sides */
 
 /* Autoplay Start/Stop button */
-div.anythingSlider-simple .start-stop {
-	display: none;
+div.anythingSlider-simple .start-stop, div.anythingSlider .start-stop, div.anythingSlider .start-stop.playing, div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover {
+	position: absolute;
+	right: 0px;
+	background-color: #fff;
+	color: #666;
 }
 
 /* Extra - replace defaults */
 div.anythingSlider-simple {
 	padding-top: 5px;
 	padding-right: 30px;
-	padding-bottom: 20px;
+	padding-bottom: 30px;
 	padding-left: 30px;
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px; 
@@ -120,4 +112,8 @@ div.anythingSlider-simple {
 	-moz-box-shadow: 0 0 6px #888;  
 	-webkit-box-shadow: 0 0 6px #888;
 	border: solid 1px #ccc;
+}
+
+div.anythingSlider.activeSlider .anythingControls ul a.cur, div.anythingSlider.activeSlider .anythingControls ul a {
+	background-color: transparent;
 }
