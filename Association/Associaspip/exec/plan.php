@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -39,7 +39,9 @@ function exec_plan(){
 		echo propre(_T('asso:plan_info'));
 		echo fin_boite_info(true);
 		
-		echo bloc_des_raccourcis(association_icone(_T('asso:plan_nav_ajouter'),  generer_url_ecrire('edit_plan'), 'EuroOff.gif',  'creer.gif'));
+		$res = association_icone(_T('asso:plan_nav_ajouter'), $url_edit_plan, 'EuroOff.gif', 'creer.gif');
+                $res.= association_icone(_T('asso:bouton_retour'), generer_url_ecrire('association'), "retour-24.png");
+                echo bloc_des_raccourcis($res);
 
 		echo debut_droite("",true);
 		
@@ -93,9 +95,23 @@ function exec_plan(){
 		echo '<th colspan="2" style="text-align:center;">' . _T('asso:action') . "</th>\n";
 		echo'  </tr>';
 		$query = sql_select('*', 'spip_asso_plan', "classe LIKE " . sql_quote($classe) ." AND active=" . sql_quote($active),'', "classe, code" );
-		while ($data = sql_fetch($query)) {
+		$classe = ''; $i = 0;
+                while ($data = sql_fetch($query)) {
 			echo '<tr style="background-color: #EEEEEE;">';
-			echo '<td class="arial11 border1" style="text-align:right;">'.$data['classe'].'</td>';
+                        if ($classe != $data['classe']) {
+                            if ($i != 0) {
+                                echo '<td colspan="8"><hr style="color: #EEE;" /></td>';
+                                echo '<tr style="background-color: #EEEEEE;">';
+                            }
+                            else {
+                                $i++;
+                            }
+                            $classe = $data['classe'];
+                            echo '<td class="arial11 border1" style="text-align:center;">' . $data['classe'] . '</td>';
+                        }
+                        else {
+                            echo '<td class="arial11 border1"> </td>';
+                        }
 			echo '<td class="arial11 border1">'.$data['code'].'</td>';
 			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
 			echo '<td class="arial11 border1">'.$data['reference'].'</td>';
