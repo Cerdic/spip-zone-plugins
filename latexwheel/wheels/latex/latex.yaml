@@ -13,6 +13,11 @@ fin:
   type: str
   priority: 0
 
+guillemet:
+  match: ['«','»']
+  replace: ['\enquote/debut','/fin']
+  type: str
+  priority: -120
 caractereslatex:
   #proteges les caractères spécifiques à latex : & _ et d'autres
   match : ",(\$|%|&|_|#),"
