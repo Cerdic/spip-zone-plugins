@@ -1,14 +1,33 @@
+
+<!-- #### Page de test du plugin 'geoforms' #### -->
+
 <html>
-<head>
-#INSERT_HEAD
-<style type='text/css'><!--
-.geomap {
-width:750px;
-height:500px;
-}
---></style>
-</head>
-<body style='width:100%;height:100%;'>
-#MODELE{geomap,georss=#URL_PAGE{geoforms.rss,id_form=#ID_FORM}}
-</body>
+
+	<!-- HEAD -->
+	<head>
+	
+		#INSERT_HEAD
+		
+		<!-- (Styles externalisés dans un fichier 'geoforms.css') -->
+		<style type='text/css'>
+		<!--
+		.geomap {
+		width:750px;
+		height:500px;
+		}
+		-->
+		</style>
+		
+	</head>
+	
+	
+	<!-- BODY -->
+	<body style='width:100%; height:100%;'>
+	
+		<!-- Modèle permettant d'intégrer la carte Google Map -->
+		#MODELE{geomap,georss=#URL_PAGE{geoforms.rss,id_form=#ID_FORM}}
+		
+	</body>
+	
 </html>
+

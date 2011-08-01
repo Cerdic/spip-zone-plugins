@@ -23,4 +23,33 @@ function geoforms_ajouter_boutons($boutons_admin) {
 	return $boutons_admin;
 }
 
+
+/* 
+	Inserer les scripts dans le public
+	
+	INFO : Fonction récupérée du plugin "googlemap_api" (googlemap_api/inc/geomap_pipeline.php)
+	et modifiée pour faire afficher la carte GoogleMap dans la partie public du site
+	La fonction appelle un script du plugin "googlemap_api" qui inclue le JavaScript
+	"geomap.js" dans le header de la page, ce qui permet d'afficher la carte GoogleMap
+	dans la partie public (à la place d'un cadre vide!)
+*/
+function geoforms_affichage_final($flux){
+	
+	// SI on trouve le mot "geomap" dans la page (class CSS du div contenant la carte GoogleMap)
+	// ET que la clé API est définie...
+    if (
+		(strpos($flux, 'geomap') == true) 
+		&& (lire_config('geomap/cle_api'))
+	){
+		$incHead = '';
+		$geomap_script_init = charger_fonction('geomap_script_init','inc');
+		$incHead .= $geomap_script_init();
+		
+        return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
+		
+    } else {
+		return $flux;
+	}
+}
+
 ?>

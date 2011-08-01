@@ -45,4 +45,11 @@
 		<nom>ajouter_boutons</nom>
 		<inclure>geoforms_pipeline.php</inclure>
 	</pipeline>
+	
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>geoforms_pipeline.php</inclure>
+	</pipeline>
+	
 </plugin>
