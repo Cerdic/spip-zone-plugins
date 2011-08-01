@@ -1,0 +1,11 @@
+<paquet
+	prefix="latexwheel"
+	categorie="edition"
+	version="0.1.0"
+	compatibilite="[3.0.0 ;["
+	etat="dev">
+	<nom>LaTeXWheel</nom>
+	<auteur lien="http://www.maieul.net">Maïeul Rouquette</auteur>
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL</licence>
+	<necessite nom="tw"/>
+</paquet>
