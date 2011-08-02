@@ -93,7 +93,7 @@ div.anythingSlider-simple.activeSlider .thumbNav a:hover {
 }
 
 /* Autoplay Start/Stop button */
-div.anythingSlider-simple .start-stop, div.anythingSlider .start-stop, div.anythingSlider .start-stop.playing, div.anythingSlider .start-stop:hover, div.anythingSlider .start-stop.hover {
+div.anythingSlider-simple .start-stop, div.anythingSlider-simple .start-stop, div.anythingSlider-simple .start-stop.playing, div.anythingSlider-simple .start-stop:hover, div.anythingSlider-simple .start-stop.hover {
 	position: absolute;
 	right: 0px;
 	background-color: #fff;
@@ -114,6 +114,6 @@ div.anythingSlider-simple {
 	border: solid 1px #ccc;
 }
 
-div.anythingSlider.activeSlider .anythingControls ul a.cur, div.anythingSlider.activeSlider .anythingControls ul a {
+div.anythingSlider-simple.activeSlider .anythingControls ul a.cur, div.anythingSlider-simple.activeSlider .anythingControls ul a {
 	background-color: transparent;
 }
