@@ -334,7 +334,7 @@ function cs_initialise_includes($count_metas_outils) {
 	$temp_js_html = $temp_css_html = $temp_css = $temp_js = $temp_jq = $temp_jq_init = $temp_filtre_imprimer = array();
 	@define('_CS_HIT_EXTERNE', 1500);
 	// inclure d'office outils/couteau_suisse_fonctions.php
-	if($temp=cs_lire_fichier_php("outils/couteau_suisse_fonctions.php"))
+	if($temp=cs_lire_fichier_php("outils/cout_fonctions.php"))
 		$infos_fichiers['code_fonctions'][] = $temp;
 	// variable de verification
 	$infos_fichiers['code_options'][] = "\$GLOBALS['cs_verif']=$count_metas_outils;";
