@@ -1,0 +1,67 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=jquerycorner -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_jquerycorner">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   <form name="formulaire_config_jquerycorner" method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+
+      <ul>
+      	[(#REM) On pourrait faire un truc plus elegant qui rajoute et supprime des elements... ]
+
+         [(#SAISIE{fieldset,fjquerycorner_nombre,env,
+            label=<:jquerycorner:legend_jquerycorner_nombre:>,
+            saisies=#ARRAY{
+               0, #ARRAY{
+                  saisie, input,
+                  options, #ARRAY{
+                     nom, nombre,
+                     defaut, 2,
+                     label, <:jquerycorner:nombre_elements:>
+                  },
+                  verifier, #ARRAY{
+                     type, entier,
+                     options, #ARRAY{
+                     	min, 1,
+                        max, 10
+                     }
+                  }
+               }
+            }
+         })]
+			<BOUCLE_elements(ENUM){1,#CONFIG{jquerycorner/nombre,2}}>
+            [(#SAISIE{fieldset,fjquerycorner#VALEUR,env,
+               label=<:jquerycorner:legend_jquerycorner{numero=#VALEUR}:>,
+               saisies=#ARRAY{
+                  0, #ARRAY{
+                     saisie, input,
+                     options, #ARRAY{
+                        nom, element#VALEUR,
+                        label, <:jquerycorner:label_elements:>
+                        explication, <:jquerycorner:explication_elements:>
+                     }
+                  },
+                  1, #ARRAY{
+                     saisie, input,
+                     options, #ARRAY{
+                        nom, param#VALEUR,
+                        label, <:jquerycorner:label_parametres:>
+                        explication, <:jquerycorner:explication_parametres:>
+                     }
+                  }
+               }
+            })]
+			</BOUCLE_elements>
+
+      </ul>
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>

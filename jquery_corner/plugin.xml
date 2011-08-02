@@ -1,0 +1,24 @@
+<plugin>
+	<nom>Spip jQuery Corner</nom>
+	<auteur>Yffic</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description>
+		Le plugin qui arrondi les angles... Une adaptation pour Spip du plugin JQuery Corner : <a href="http://jquery.malsup.com/corner/" title="plugin JQuery Corner">http://jquery.malsup.com/corner/</a>
+	</description>
+	<icon>images/jquerycorner-32.png</icon>
+	<prefix>jquerycorner</prefix>
+	<install>base/jquerycorner_install.php</install>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>jquerycorner_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="cfg" version="[1.10;]" />
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="saisies" version="[1.1;]" />
+	<necessite id="Iterateurs" version="[0.3.0;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<categorie>multimedia</categorie>
+</plugin>
