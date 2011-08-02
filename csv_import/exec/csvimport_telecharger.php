@@ -117,10 +117,16 @@ function exec_csvimport_telecharger(){
 		$filename = preg_replace(',[^-_\w]+,', '_', translitteration(textebrut(typo($titre))));
 
 		// Excel ?
-		if ($delim == ',')
+		if ($delim == ',') {
+		
 			$extension = 'csv';
-		else {
-			$extension = 'xls';
+			
+		} else {
+		
+			// Extension 'csv' si delim = ';' (et pas forcément 'xls' !)
+			if ($delim == ';') { $extension = 'csv'; }
+			else { $extension = 'xls'; }
+			
 			# Excel n'accepte pas l'utf-8 ni les entites html... on fait quoi?
 			include_spip('inc/charsets');
 			$output = unicode2charset(charset2unicode($output), 'iso-8859-1');

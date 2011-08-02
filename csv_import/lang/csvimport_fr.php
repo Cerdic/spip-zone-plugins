@@ -11,16 +11,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_table' => 'Ajouter à la table',
 	'aucune_donnee' => 'Il n\'y a aucune donnée dans le fichier.',
 	'aucune_table_declaree' => 'Aucune table n\'est déclarée pour l\'import CSV',
-	'avertissement_ajout' => 'Les données du fichier CSV vont être ajoutées à la table "@table@" comme illustré ci-dessous.',
+	'avertissement_ajout' => 'Les données du fichier CSV vont être ajoutées à la table "@table@" comme illustré ci-dessus.',
 	'avertissement_remplacement' => 'Cette opération va entraîner la suppression de toutes les données présentes dans la table. Les données du fichier seront insérées comme ci-dessous :',
 
 	// C
 	'caracteres_separation' => 'Caractère de séparation',
 	'champs_csv' => 'Champs du fichier CSV',
-	'champs_table' => 'Champs de la table',
+	'champs_table' => 'Champs de la table : "libellé (clé)"',
 	'correspondance_incomplete' => 'Correspondances CSV-Table incomplètes',
 	'correspondance_indefinie' => 'Correspondances CSV-Table non définies',
 	'csvimport' => 'Import CSV',
+	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !',
+	
 
 	// D
 	'delimiteur_indefini' => 'Délimiteur non défini',
@@ -34,6 +36,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'export_table' => 'Export de la table : @table@',
 	'export_tabulation' => 'CSV avec tabulations',
 	'exporter' => 'Exporter',
+	'extrait_table' => 'Extrait de la table "@nom_table@" : ',
+	'etape' => '(&Eacute;tape @step@ sur 3)',
+	'extrait_CSV_importe' => 'Extrait du fichier CSV importé : ',
 
 	// F
 	'fichier_absent' => 'Fichier absent',
@@ -41,7 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_vide' => 'Fichier vide',
 
 	// I
-	'import_csv' => 'Import CSV : @table@',
+	'import_csv' => 'Import CSV : "@table@"',
 	'import_export_tables' => 'Import / Export dans les tables',
 
 	// L
@@ -52,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_enregistrements' => '@nb@ enregistrements',
+	'noms_colonnes_CSV' => 'Noms des colonnes (attendus) du fichier CSV à importer : ',
 
 	// P
 	'pas_importer' => 'Ne pas importer',
@@ -59,6 +65,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'probleme_chargement_fichier' => 'Problème lors du chargement du fichier',
 	'probleme_chargement_fichier_erreur' => 'Problème lors du chargement du fichier (erreur @erreur@).',
 	'probleme_inextricable' => 'Problème inextricable...',
+	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ',
 
 	// R
 	'remplacer_toute_table' => 'Remplacer toute la table',

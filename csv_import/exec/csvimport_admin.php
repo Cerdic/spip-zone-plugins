@@ -111,7 +111,7 @@ function ligne_table_import($table,$desc){
 	
 	// champs de la table
 	//$s = "";
-	$s .= "<table>";
+	$s .= "<table class='csv_import' >";
 	$col=0;
 	foreach($desc['field'] as $field=>$type){
 		if ($col==0)

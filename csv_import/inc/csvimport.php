@@ -165,7 +165,9 @@ function csvimport_afficher_tables($titre_table, $icone = '') {
 		echo "</table>";
 		echo "</div>\n";
 	}
-	$out = "<br />";
+	
+	$out = "<br /> <br />";
+	
 	if (defined('_DIR_PLUGIN_FORMS')&&($GLOBALS['meta']['forms_base_version']>0.17)){
 		if (include_spip('inc/forms_tables_affichage'))
 			$out .= afficher_tables_tous_corps('table');
@@ -203,42 +205,60 @@ function csvimport_importcsv($file, $head = 0, $delim = ",", $enclos = '"', $len
 
 function csvimport_show_erreurs($erreur){
 	$output = "";
+	
 	if (count($erreur)>0){
 		$output .= "<div class='messages'>";
-		foreach($erreur as $steper=>$desc)
+		
+		foreach($erreur as $line=>$desc)
 			foreach($desc as $key=>$val)
-				$output .=  "<strong>$steper::$key:$val</strong><br />";
+				$output .=  " Ligne $line :: $val <br />";
+				
 		$output .=  "</div>\n";
 	}
+	
 	return $output;
 }
 
-function csvimport_table_visu_extrait($nom_table,$nombre_lignes = 0){
-        
+function csvimport_table_visu_extrait($nom_table, $nombre_lignes = 0){
+  	
 	$limit = "";
 	if ($nombre_lignes > 0)
 		$limit = $nombre_lignes+1;
 
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($nom_table);
-	if (in_array('maj', $desc['field'])) {
+	
+	//if ( in_array('maj', $desc['field']) ) // (Ne marchait pas...)
+	if ( isset($desc['field']['maj']) )
+	{
 		$maj_exist = true;
-		$result = sql_select("*",$nom_table,"","","maj DESC",$limit);
-	}
-	else {
+		$result = sql_select("*", $nom_table, "", "", "maj DESC", $limit);
+		
+	} elseif( isset($desc['field']['id_article']) )
+	{
 		$maj_exist = false;
-		$result = sql_select("*",$nom_table,"","","",$limit);
+		$result = sql_select("*", $nom_table, "", "", "id_article DESC", $limit);
+		
+	} else {
+		$maj_exist = false;
+		$result = sql_select("*", $nom_table, "", "", "", $limit);
 	}
 		  
-	$nb_data=sql_count($result);
+	$nb_data = sql_count($result);
+	
 	if ($nombre_lignes==0)
 		$nombre_lignes = $nb_data;
+		
 	$data_count = 0;
 	$head_set = false;
 	$nb_col = 0;
+	
 	if($nb_data>0){
-		$ret .= "<table width='100%'>";
-		while (($row = sql_fetch($result))&&($data_count++<$nombre_lignes)){
+	
+		$ret .= "<table class='csv_import' width='100%' border='1' cellspacing='0' cellpadding='2'>";
+		
+		while ( ($row = sql_fetch($result)) && ($data_count++<$nombre_lignes) )
+		{
 			if (!$head_set){
 				$ret .= "<tr>";
 				foreach($row as $key=>$value){
@@ -248,31 +268,46 @@ function csvimport_table_visu_extrait($nom_table,$nombre_lignes = 0){
 				$ret .= "</tr>\n";
 				$head_set = true;
 			}
+			
 			$ret .= "<tr>";
+			
 			foreach($row as $key=>$value)
-				$ret .= "<td>" . $value . "</td>";
+				$ret .= "<td>" . couper($value,50) . "</td>"; // (Couper le texte aprés 50 caractères)
+				
 			$ret .= "</tr>\n";
 		}
+		
 		if ($nb_data>$nombre_lignes){
 			$num_rows = sql_count(sql_select("*",$nom_table));
-			$ret .= "<tr><td colspan='$nb_col' style='border-top:1px dotted;'>"._T("csvimport:lignes_table",array('table'=>$nom_table,'nb_resultats'=>$num_rows))."</td></tr>\n";
+			
+			$ret .= "<tr><td colspan='$nb_col' style='border-top:1px dotted; font-weight:bold;'> (" . 
+				_T("csvimport:lignes_table", array('table'=>$nom_table,'nb_resultats'=>$num_rows) ) .
+				") </td></tr>\n";
 		}
+		
 		$ret .= "</table>\n";
-	}
-	else
+	
+	} else {
 		$ret = "<p>"._T("csvimport:table_vide", array('table'=>$nom_table))."</p>";
+	}
 	  
 	return $ret;
 }
 
+
+// ### Affichage des @nombre_lignes@ premières lignes du fichier CSV importé ### //
 function csvimport_array_visu_extrait($data, $head, $nombre_lignes = 0){
 	$output = "";
 	$data_count = 0;
 	$head_set = false;
 	$nb_col = 0;
+	
 	if ($data!=false){
-		$output .= "<table width='100%'>";
+	
+		$output .= "<table width='100%' border='1' cellspacing='0' cellpadding='2'>";
 		foreach($data as $key=>$ligne) {
+		
+			// SI c'est la 1ère itération ALORS on affiche d'abord la ligne des noms de colonne (<th>)
 			if (($head==true)&&($head_set==false)){
 				$output .= "<tr>";
 				foreach($ligne as $key=>$value){
@@ -280,33 +315,43 @@ function csvimport_array_visu_extrait($data, $head, $nombre_lignes = 0){
 					$nb_col++;
 				}
 				$output .= "</tr>\n";
-				$head_set = true;
+				$head_set = true; //(à ne faire qu'une seule fois!)
 			}
-			else{
+			
+			// Changement ici : Suppression du "else" pour qu'on ne saute pas à chaque fois la 1ère ligne!
+			//else{
 				$output .= "<tr>";
 				foreach($ligne as $value){
 					$output .= "<td>" . $value . "</td>";
 				}
 				$output .= "</tr>\n";
-			}
+			//}
+			
 			if (($nombre_lignes>0)&&($data_count++>=$nombre_lignes))
 				break;
+				
 		}
+		
 		if ($data_count>0)
-			$output .= '<tr><td style="border-top:1px dotted" colspan="'.$nb_col.'">'._T("csvimport:lignes_totales_csv",array("nb"=>count($data))).'</td></tr>';
+			$output .= '<tr><td style="border-top:1px dotted; font-weight:bold;" colspan="'.$nb_col.'"> ('._T("csvimport:lignes_totales_csv",array("nb"=>count($data))).') </td></tr>';
 		$output .= "</table>\n";
 	}
+	
 	if ($data_count==0)
 		$output .= _T("csvimport:aucune_donnee");
+		
 	return $output;
 }
 
+
+// ### Affichage du résultat des $nombre_lignes premières lignes du fichier CSV ajoutées à la table ### //
+//	(selon les choix "Champs du fichier CSV" - "Champs de la table")
 function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_lignes = 0){
 	$assoc=array_flip($assoc_field);
 
 	$output = "";
 	$data_count = 0;
-	$output .= "<table width='100%'>";
+	$output .= "<table width='100%' border='1' cellspacing='0' cellpadding='2'>";
 	$output .= "<tr>";
 	foreach($table_fields as $key=>$value){
 		$output .= "<th>" . $value . "</th>";
@@ -315,9 +360,12 @@ function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 	
 	$nb_col = 0;
 	if ($data!=false){
+	
 		foreach($data as $key=>$ligne) {
+		
 			$nb_col = 0;
 			$output .= "<tr>";
+			
 			foreach($table_fields as $key=>$value){
 				$nb_col++;
 				$kc = csvimport_nettoie_key($key);
@@ -329,91 +377,128 @@ function csvimport_array_visu_assoc($data, $table_fields, $assoc_field, $nombre_
 					$output .= "&nbsp;";
 				$output .= "</td>";
 			}
+			
 			$output .= "</tr>\n";
+			
 			if (($nombre_lignes>0)&&(++$data_count>=$nombre_lignes))
 				break;
 		}
 	}
+	
 	if ($data_count>0)
-		$output .= '<tr><td style="border-top:1px dotted" colspan="'.$nb_col.'">'._T("csvimport:lignes_totales_csv",array("nb"=>count($data))).'</td></tr>';
+		$output .= '<tr><td style="border-top:1px dotted; font-weight:bold;" colspan="'.$nb_col.'"> ('._T("csvimport:lignes_totales_csv",array("nb"=>count($data))).') </td></tr>';
+	
 	$output .= "</table>";
+	
 	return $output;
 }
 
+
 function csvimport_nettoie_key($key){
+
+	/*
+		Fonction "string importer_csv_nettoie_key(string $key)" :
+		Plugin Spip-Bonux 2 (/inc/importer_csv.php)
+		Enlever les accents des cles presentes dans le head, sinon ca pose des problemes ...
+		(cf. http://spip-plugins.quesaco.org/phpdoc/_plugins_/spip-bonux-2/spip-bonux-2/_inc---importer_csv.php.html )
+	*/
 	return importer_csv_nettoie_key($key);
+	
 }
+
 
 function csvimport_field_associate($data, $table_fields, $assoc_field){
 	global $tables_principales;
-	$assoc=$assoc_field;
+	
+	$assoc = $assoc_field;
 	if (!is_array($assoc)) $assoc = array();
-	$csvfield=array_keys($data{0});
+	
+	$csvfield = array_keys($data{0});
 	foreach($csvfield as $k=>$v){
 		$csvfield[$k] = csvimport_nettoie_key($v);
 	}
-	$csvfield=array_flip($csvfield);
+	//(Retourne le tableau : Remplace les clés par les valeurs, et les valeurs par les clés)
+	$csvfield = array_flip($csvfield); 
 
-	// on enleve toutes les associations dont
-	// la cle n'est pas un csvfield
-	// la valeur n'est pas un tablefield
-	// l'un des deux est deja affecte
+	// On enleve toutes les associations dont :
+	// - la cle n'est pas un csvfield
+	// - la valeur n'est pas un tablefield
+	// - l'un des deux est deja affecte
 	foreach ($assoc as $key=>$value){
 		$good_key = false;
 		$good_value = false;
+		
 		if (isset($csvfield[$key])){
 			$good_key = true;
 		}
-		if ((isset($table_fields[$value]))||($value==-1)){
+		
+		if ( (isset($table_fields[$value])) || ($value==-1) ){
 			$good_value = true;
 		}
-		if (($good_key==false)||($good_value==false))
+		
+		if ( ($good_key==false) || ($good_value==false) ) {
 			unset($assoc[$key]);
-		else{
+		}else{
 			unset($csvfield[$key]);
-			if ($value!=-1) unset($table_fields[$value]);
+			if ($value != -1) unset($table_fields[$value]);
 		}
 	}
+	
 
-	//assoc auto des cles qui portent le meme nom
-	foreach(array_keys($csvfield) as $csvkey){
-		foreach(array_keys($table_fields) as $tablekey)
-			if (strcasecmp($csvkey,$tablekey)==0){
-				$assoc[$csvkey]=$tablekey;
-				unset($csvfield[$csvkey]);
+	//// Modification ici : Il y avait un mélange entre les clés et les valeurs...
+	//// Association automatique des clés qui portent le meme nom (même valeur/libellé) :
+	foreach($csvfield as $csvkey=>$csvval ){
+		foreach($table_fields as $tablekey=>$tableval )
+			if (strcasecmp($csvkey, $tableval)==0){ // (Comparaison insensible à la casse de chaînes binaires. 0 si égales)
+				$assoc[$csvkey] = $tablekey;
+				unset($csvfield[$csvkey]); // ("unset()" : efface l'élément du tableau)
 				unset($table_fields[$tablekey]);
 			}
  	}
-	//assoc des autres dans l'ordre qui vient
-	$table_fields=array_keys($table_fields);
+	////
+	
+	
+	//// Changement de comportement : Association des autres avec "Ne pas importer!" (-1)
+	//// (AU LIEU DE : Association des autres dans l'ordre qui vient)
+	//$table_fields = array_keys($table_fields);
 	foreach(array_keys($csvfield) as $csvkey){
-		$assoc[$csvkey]=array_shift($table_fields);
-		if ($assoc[$csvkey]==NULL) $assoc[$csvkey]="-1";
+		//$assoc[$csvkey] = array_shift($table_fields);
+		//if ($assoc[$csvkey] == NULL) {
+			$assoc[$csvkey] = "-1"; 
+		//}
 		unset($csvfield[$csvkey]);
 	}
+	
 	return $assoc;
 }
 
 function csvimport_field_configure($data, $table_fields, $assoc){
 	$output = "";
-	$csvfield=array_keys($data{0});
+	$csvfield = array_keys($data{0});
+	
+	$output .= "<table border='0' cellpadding='4' cellspacing='2'>";
+	$output .= "<tr> <th>"._T("csvimport:champs_csv")."</th>";
+	$output .= "<th>" . _T("csvimport:champs_table") . "</th> </tr>";
 
-	$output .= "<table><tr><td>"._T("csvimport:champs_csv")."</td><td>"._T("csvimport:champs_table")."</td></tr>";
-	foreach($csvfield as $csvkey){
-		$csvkey = csvimport_nettoie_key($csvkey);
-		$output .=  "<tr>";
-		$output .=  "<td>$csvkey</td>";
+	foreach($csvfield as $csvkey){ //(ATTENTION : "$csvkey" n'est en fait pas une CLE du tableau, c'est une VALEUR du tableau!)
+		$csvkey = csvimport_nettoie_key($csvkey); // (Supprime les accents des clés)
+		
+		$output .= "<tr>";
+		$output .= "<td>$csvkey</td>";
 		$output .= "<td><select name='assoc_field[$csvkey]'>\n";
-		$output .= "<option value='-1'>"._T("csvimport:pas_importer")."</option>\n";
+		$output .= "<option value='-1'>" . _T("csvimport:pas_importer") . "</option>\n";
+		
 		foreach($table_fields as $tablekey => $libelle){
 			$output .= "<option value='$tablekey'";
-			if ($assoc[$csvkey]==$tablekey)
-				$output .= " selected='selected'";
-			$output .= ">$libelle</option>\n";
+			if ($assoc[$csvkey]==$tablekey) { $output .= " selected='selected' "; }
+			$output .= ">". $libelle . " (" . $tablekey . ")</option>\n";
 		}
+		
 		$output .= "</select></td></tr>";
 	}
+	
 	$output .= "</table>";
+	
 	return $output;
 }
 
@@ -429,55 +514,84 @@ function csvimport_vidange_table($table){
 
 function csvimport_ajoute_table_csv($data, $table, $assoc_field, &$erreur){
 	global $tables_principales;
+	
 	$csvimport_tables_auth = csvimport_tables_auth();
 	$assoc = array_flip($assoc_field);
 	$desc = sql_showtable($table);
-	if (!isset($desc['field']) || count($desc['field'])==0){
+		
+	if ( !isset($desc['field']) || count($desc['field'])==0 ){
 		$erreur[0][] = _T("csvimport:description_table_introuvable");
 		return;
 	}
-	if ($GLOBALS['mysql_rappel_nom_base'] AND $db = $GLOBALS['spip_mysql_db'])
+	
+	// Supression du prefixe du nom de la table (Par exemple : "spip1_*" --> "spip_*")
+	if( isset($GLOBALS['db_ok']['prefixe']) && ($GLOBALS['db_ok']['prefixe'] != 'spip') )
+	{
+		$prefixe_tables = $GLOBALS['db_ok']['prefixe'];
+		$table = str_replace( $prefixe_tables , 'spip' , $table );
+	}
+
+	if ( $GLOBALS['mysql_rappel_nom_base'] AND $db = $GLOBALS['spip_mysql_db'] )
 		$table = '`'.$db.'`.'.$table;
 
-	
 	$tablefield=array_keys($desc['field']);
-	$output = "";
+	//$output = ""; //???
+		
 	// y a-t-il une cle primaire ?
-	if (isset($desc['key']["PRIMARY KEY"])){
+	if( isset($desc['key']["PRIMARY KEY"]) )
+	{
 		$primaire = $desc['key']["PRIMARY KEY"];
 		// la cle primaire est-elle importee ?
 		if (in_array($primaire,$assoc_field))
 		  unset($primaire);
  	}
+	
 	// y a-t-il un champ TIMESTAMP ?
-	$test=array_flip($desc['field']);
-	if (isset($test['TIMESTAMP']))
+	$test = array_flip($desc['field']);
+	if( isset($test['TIMESTAMP']) )
 		$stamp = $test['TIMESTAMP'];
 
-	if ($data!=false){
+	if( $data != false )
+	{
 		$count_lignes = 0;
-		foreach($data as $key=>$ligne) {
-		$count_lignes ++;
+		
+		foreach($data as $key=>$ligne)
+		{
+			$count_lignes ++;
+			
 			$check = array_flip($tablefield);
+			
 			foreach($check as $key=>$value){
 				$kc = csvimport_nettoie_key($key);
-				if ((isset($assoc[$kc]))&&(isset($ligne[$assoc[$kc]]))){
+				if ( (isset($assoc[$kc])) && (isset($ligne[$assoc[$kc]])) )
+				{
 					$what[$key] = addslashes($ligne[$assoc[$kc]]);
 					unset($check[$key]);
 				}
-	 		}
-			if ((isset($stamp))&&isset($check[$stamp])){
+	 		} // (FIN foreach)
+			
+			if ( (isset($stamp)) && isset($check[$stamp]) ){
 				$what[$stamp] = date('Y-m-d H:i:s');
 			}
-			if (is_array($what)) {
+			
+			if (is_array($what)) 
+			{
 				$id_primary = sql_insertq($table, $what);
-				if ($id_primary==0)
-					$erreur[$count_lignes][] = "ajout impossible ::$what::$with::<br />";
+				
+				// SI id = 0 (Erreur d'insertion) ...
+				if ($id_primary==0) {
+					$apercu = couper(print_r($what,true), 150, ' ...'); // Petit aperçu de la valeur (150 caractères)
+					$erreur[$count_lignes][] = "Ajout impossible ! :: $apercu ";	
+				}
+					
+			} else {
+				$erreur[$count_lignes][] = "Rien &agrave; ajouter ! ";
 			}
-			else
-				$erreur[$count_lignes][] = "rien &agrave; ajouter<br />";
-		}
-	}
+			
+		}// (FIN foreach)
+		
+	}// (FIN if)
+		
 }
 
 ?>
