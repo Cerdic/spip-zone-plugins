@@ -216,7 +216,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	
 		// Constrution de toutes les autres balises incluses dans paquet uniquement
 		$nom = plugin2balise_nom($D['nom']);
-		list($commentaire, $descriptions) = plugin2balise_commentaire($D['description'], $D['slogan'], $D['prefix']);
+		list($commentaire, $descriptions) = plugin2balise_commentaire($D['nom'], $D['description'], $D['slogan'], $D['prefix']);
 	
 		$auteur = plugin2balise_copy($D['auteur'], 'auteur');
 		$licence = plugin2balise_copy($D['licence'], 'licence');
@@ -260,7 +260,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 //
 // - attribut documentation
 // - balise nom
-// - slogan extrait de la description en commentaire (langue française)
+// - slogan extrait eventuellement de la description en commentaire (langue française)
 
 // Eliminer les textes superflus dans les liens (raccourcis [XXX->http...])
 // et normaliser l'esperluete pour eviter l'erreur d'entite indefinie
@@ -271,7 +271,7 @@ function plugin2balise_lien($url, $nom='lien', $sep="\n\t") {
 	return "$sep$nom=\"$url\"";
 }
 
-// Extrait la traduction francaise uniquement
+// Extrait la traduction francaise uniquement du nom pour creer la balise
 // Pour l'instant on ne normalise pas le nom comme le fait SVP
 // --> A voir plus tard
 function plugin2balise_nom($texte) {
@@ -282,10 +282,10 @@ function plugin2balise_nom($texte) {
 }
 
 // Extrait la traduction francaise uniquement
-// -- on renvoie aussi le tableau des descriptions et slogans par langue pour eviter de le 
+// -- on renvoie aussi le tableau des noms, descriptions et slogans par langue pour eviter de le 
 //    recalculer ensuite
-function plugin2balise_commentaire($description, $slogan, $prefixe) {
-	$descriptions = extraire_descriptions($description, $slogan, $prefixe);
+function plugin2balise_commentaire($nom, $description, $slogan, $prefixe) {
+	$descriptions = extraire_descriptions($nom, $description, $slogan, $prefixe);
 	if ($slogan = $descriptions['fr'][strtolower($prefixe) . '_slogan'])
 		$res = "\t<!-- ". $slogan . " -->";
 
@@ -624,10 +624,17 @@ function traiter_multi($texte)
 	return $trads;
 }
 
-function extraire_descriptions($description, $slogan, $prefixe) {
+function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 	include_spip('inc/langonet_utils');
 
 	$langs = array();
+	
+	// Traitement de la balise nom
+	foreach (traiter_multi($nom) as $lang => $_descr) {
+		if (!$lang)
+			$lang = 'fr';
+		$langs[$lang][strtolower($prefixe) . '_nom'] = entite2utf(trim($_descr));
+	}
 	
 	// Traitement de la balise slogan si elle existe
 	if ($slogan) {
