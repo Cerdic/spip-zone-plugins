@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -24,15 +24,7 @@ function exec_action_plan(){
 	} else {
 		
 		$id_plan=intval(_request('id'));
-		$code=$_POST['code'];
-		$intitule=$_POST['intitule'];
-		$classe=$_POST['classe'];
-		$reference=$_POST['reference'];
-		$solde_anterieur=$_POST['solde_anterieur'];
-		$date_anterieure=$_POST['date_anterieure'];
-		$actif=$_POST['actif'];
-		$commentaire=$_POST['commentaire'];
-		
+				
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 
@@ -45,9 +37,12 @@ function exec_action_plan(){
 		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite('',true);
+
+                $code = sql_getfetsel('code', 'spip_asso_plan', "id_plan=$id_plan");
+                $intitule = sql_getfetsel('intitule', 'spip_asso_plan', "id_plan=$id_plan");
 			
 		debut_cadre_relief(  "", false, "", $titre = _T('asso:suppression_de_compte'));
-		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_le_compte').$id_plan.'</strong></p>';
+		echo '<p><strong>' . _T('asso:vous_vous_appretez_a_effacer_le_compte').' : '.$code.' -> '.$intitule.'</strong></p>';
 
 		$res .= '<p style="float:right;"><input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" /></p>';
 		echo redirige_action_post('supprimer_plans', $id_plan, 'plan', '', $res);
