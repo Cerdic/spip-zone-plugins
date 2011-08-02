@@ -21,10 +21,10 @@ function action_seo_save_meta_dist() {
 		return;
 	}
 	
-	sql_delete("seo_meta_tags", "id_object = $id_object AND type_object = '$type_object'");
+	sql_delete("spip_seo", "id_object = $id_object AND type_object = '$type_object'");
 	
 	foreach ($meta_tag as $name => $content) {
-		sql_insertq('seo_meta_tags', array('id_object' => $id_object, 'type_object' => $type_object, 'meta_name' => $name, 'meta_content' => $content));
+		sql_insertq('spip_seo', array('id_object' => $id_object, 'type_object' => $type_object, 'meta_name' => $name, 'meta_content' => $content));
 	} 
 	
 }

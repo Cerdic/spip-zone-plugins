@@ -34,7 +34,7 @@ function seo_affiche_milieu($vars) {
 		return $vars;
 	}
 	
-	$result = sql_select("*", "seo_meta_tags", "id_object = $id_object AND type_object = '$type_object'");
+	$result = sql_select("*", "spip_seo", "id_object = $id_object AND type_object = '$type_object'");
 	while($r = sql_fetch($result)){
 			$meta_tag[$r['meta_name']] = $r['meta_content'];
 	}

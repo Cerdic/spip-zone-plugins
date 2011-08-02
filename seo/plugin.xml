@@ -1,9 +1,7 @@
 <plugin>
 	<nom><multi>[fr]SEO[en]SEO</multi></nom>
 	<auteur>[Pierre ROUSSET->p.rousset@gmail.com] for [Bouncing Orange->http://www.bouncingorange.com/]</auteur>
-	<version>1.3.3</version>
-	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
-	<etat>test</etat>
+	<prefix>seo</prefix>
 	<icon>seo.png</icon>
 	<description>
 		<multi>
@@ -11,12 +9,25 @@
 			[en]SEO is a plugin who add the possibility to insert in the head of your website: meta tags, canoical URL, Google webmaster tools Meta Code and Google Analytics javascript code. It is fully configurable in the SPIP configuration page and in each article or rubrique page for meta tags.
 		</multi>
 	</description>
-	<prefix>seo</prefix>
 	<lien>http://www.spip-contrib.net/?rubrique1248</lien>
+	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
+	<etat>test</etat>
+	
+	<version>1.4</version>
+	<version_base>1.0.1</version_base>
+
+	<install>base/seo_installation.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/seo_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/seo_tables.php</inclure>
+	</pipeline>
+	
 	<fonctions>public/seo_balises.php</fonctions>
 	<fonctions>seo_fonctions.php</fonctions>
-
-	<install>base/seo_update.php</install>
 
 	<pipeline>
         <nom>insert_head</nom>

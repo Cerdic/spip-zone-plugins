@@ -117,7 +117,7 @@ function generer_meta_tags(){
 			
 			// If the meta tags rubrique and articles editing is activate (should overwrite other setting)
 			if ($config['meta_tags']['activate_editing'] == 'yes' && ($type_object == 'article' || $type_object == 'rubrique')) {
-				$result = sql_select("*", "seo_meta_tags", "id_object = $id_object AND type_object = '$type_object'");
+				$result = sql_select("*", "spip_seo", "id_object = $id_object AND type_object = '$type_object'");
 				while($r = sql_fetch($result)){
 					if ($r['meta_content'] != '')
 						$meta_tags[$r['meta_name']] = $r['meta_content'];
