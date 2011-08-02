@@ -59,7 +59,7 @@ function exec_plan(){
 		$query = sql_select('DISTINCT classe, active', 'spip_asso_plan', "active=". sql_quote($active),'', "classe");
 		
 		while ($data = sql_fetch($query)) {
-			if ($data['classe']==$class)	{echo ' <strong>'.$data['classe'].' </strong>';}
+			if ($data['classe']==$classe)	{echo ' <strong>'.$data['classe'].' </strong>';}
 			else {echo '<a href="'.$url_plan.'&classe='.$data['classe'].'">'.$data['classe'].'</a> ';}
 		}
 		if ($classe == "%") { echo ' <strong>'._T('asso:plan_entete_tous').'</strong>'; }
