@@ -14,13 +14,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_annuler' => 'Annuler',
 	'message_confirmer' => 'Confirmer',	
 	
-	'operation_executee' => "L'opération a bien été exécutée.",
-	'operation_annulee' => "L'opération a été annulée.",
-	'operation_retour_ok' => "Se rendre dans la rubrique copiée.",
+	'operation_executee' => "L'op&eacute;ration a bien &eacute;t&eacute; ex&eacute;cut&eacute;e.",
+	'operation_annulee' => "L'op&eacute;ration a &eacute;t&eacute; annul&eacute;e.",
+	'operation_retour_ok' => "Se rendre dans la rubrique copi&eacute;e.",
 	'operation_retour_ko' => "Retour aux rubriques.",
 
 	'icone_dupliquer_article' => "Dupliquer l'article",
 
-	'operation_retour_ok_article' => "Se rendre dans l'article dupliqué.",
+	'operation_retour_ok_article' => "Se rendre dans l'article dupliqu&eacute;.",
 	'operation_retour_ko_article' => "Retour aux articles."
 );
