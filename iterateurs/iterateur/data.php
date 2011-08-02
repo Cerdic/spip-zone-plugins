@@ -28,7 +28,7 @@ function iterateur_DATA_dist($b) {
 		'field' => array(
 			'cle' => 'STRING',
 			'valeur' => 'STRING',
-			'*' => 'ALL'
+			'*' => 'ALL' // Champ joker *
 		)
 	);
 	$b->select[] = '.valeur';
@@ -140,7 +140,7 @@ class IterateurDATA implements Iterator {
 	 * @return void
 	 */
 	protected function select($command) {
-		
+
 		// l'iterateur DATA peut etre appele en passant (data:type)
 		// le type se retrouve dans la commande 'from'
 		// dans ce cas la le critere {source} n'a pas besoin du 1er argument
@@ -152,14 +152,16 @@ class IterateurDATA implements Iterator {
 		// les commandes connues pour l'iterateur DATA
 		// sont : {tableau #ARRAY} ; {cle=...} ; {valeur=...}
 		// {source format, [URL], [arg2]...}
-
+		
 		if (isset($this->command['source'])
 		AND isset($this->command['sourcemode'])) {
 
 			# un peu crado : avant de charger le cache il faut charger
 			# les class indispensables, sinon PHP ne saura pas gerer
 			# l'objet en cache ; cf plugins/icalendar
-			if (isset($this->command['sourcemode']))
+			# perf : pas de fonction table_to_array ! (table est deja un array)
+			if (isset($this->command['sourcemode'])
+			  AND !in_array($this->command['sourcemode'],array('table', 'array', 'tableau')))
 				charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true);
 
 			# le premier argument peut etre un array, une URL etc.
@@ -197,29 +199,30 @@ class IterateurDATA implements Iterator {
 					)
 						$this->tableau = $a;
 				}
-				else if (preg_match(',^https?://,', $src)) {
-					include_spip('inc/distant');
-					$u = recuperer_page($src);
-					if (!$u)
-						throw new Exception("404");
-					if (!isset($ttl)) $ttl = 24*3600;
-				} else if (@is_dir($src)) {
-					$u = $src;
-					if (!isset($ttl)) $ttl = 10;
-				} else if (@is_readable($src) && @is_file($src)) {
-					$u = spip_file_get_contents($src);
-					if (!isset($ttl)) $ttl = 10;
-				} else {
-					$u = $src;
-					if (!isset($ttl)) $ttl = 10;
-				}
-
-				if (!$this->err
-				AND $g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
-					$args = $this->command['source'];
-					$args[0] = $u;
-					if (is_array($a = call_user_func_array($g,$args))) {
-						$this->tableau = $a;
+				else {
+					if (preg_match(',^https?://,', $src)) {
+						include_spip('inc/distant');
+						$u = recuperer_page($src);
+						if (!$u)
+							throw new Exception("404");
+						if (!isset($ttl)) $ttl = 24*3600;
+					} else if (@is_dir($src)) {
+						$u = $src;
+						if (!isset($ttl)) $ttl = 10;
+					} else if (@is_readable($src) && @is_file($src)) {
+						$u = spip_file_get_contents($src);
+						if (!isset($ttl)) $ttl = 10;
+					} else {
+						$u = $src;
+						if (!isset($ttl)) $ttl = 10;
+					}
+					if (!$this->err
+					AND $g = charger_fonction($this->command['sourcemode'] . '_to_array', 'inc', true)) {
+						$args = $this->command['source'];
+						$args[0] = $u;
+						if (is_array($a = call_user_func_array($g,$args))) {
+							$this->tableau = $a;
+						}
 					}
 				}
 
@@ -250,6 +253,10 @@ class IterateurDATA implements Iterator {
 
 		// Critere {liste X1, X2, X3}
 		if (isset($this->command['liste'])) {
+			# s'il n'y a qu'une valeur dans la liste, sans doute une #BALISE
+			if (!isset($this->command['liste'][1])) {
+				$this->command['liste'] = explode(',', $this->command['liste'][0]);
+			}
 			$this->tableau = $this->command['liste'];
 		}
 
@@ -559,19 +566,19 @@ function inc_ls_to_array_dist($u) {
 function ObjectToArray($object){
 	$xml_array = array();
 	for( $object->rewind(); $object->valid(); $object->next() ) {
-		if(!array_key_exists($object->key(), $xml_array)){
-			$xml_array[$object->key()] = array();
+		if(array_key_exists($key = $object->key(), $xml_array)){
+			$key .= '-'.uniqid();
 		}
 		$vars = get_object_vars($object->current());
 		if (isset($vars['@attributes']))
 			foreach($vars['@attributes'] as $k => $v)
-			$xml_array[$object->key()][$k] = $v;
+			$xml_array[$key][$k] = $v;
 		if($object->hasChildren()){
-			$xml_array[$object->key()][] = ObjectToArray(
+			$xml_array[$key][] = ObjectToArray(
 				$object->current());
 		}
 		else{
-			$xml_array[$object->key()][] = strval($object->current());
+			$xml_array[$key][] = strval($object->current());
 		}
 	}
 	return $xml_array;
