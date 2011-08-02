@@ -29,10 +29,10 @@ function exec_seo_config () {
 	$config = unserialize($GLOBALS['meta']['seo']);
 	
 	// Save it if needed
-	if (isset(_request('insert_head_submit'))) {
+	if (_request('insert_head_submit')) {
 		$config['insert_head'] = _request('insert_head');
 		ecrire_meta('seo', serialize($config));
-	} elseif (isset(_request('meta_tags_submit'))) {
+	} elseif (_request('meta_tags_submit')) {
 		$config['meta_tags'] = _request('meta_tags');
 		ecrire_meta('seo', serialize($config));
 	} elseif (_request('webmaster_tools_submit')) {
