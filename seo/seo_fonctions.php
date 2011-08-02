@@ -51,18 +51,6 @@ function generer_google_analytics(){
 	})();
 </script>
 ";
-		
-		// Ancien Code Google Analytics
-		// $flux .= '<script type="text/javascript">';
-		// $flux .= 'var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");';
-		// $flux .= 'document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));';
-		// $flux .= '</script>';
-		// $flux .= '<script type="text/javascript">';
-		// $flux .= 'try{';
-		// $flux .= 'var pageTracker = _gat._getTracker("'. $config['analytics']['id'] .'");';
-		// $flux .= 'pageTracker._trackPageview();';
-		// $flux .= '} catch(err) {}';
-		// $flux .= '</script>';
 	}
 
 	return $flux;
