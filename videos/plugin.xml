@@ -1,23 +1,24 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Vidéo(s)
+			[fr]Vid&eacute;o(s)
 			[en]Video(s)
 		</multi>
 	</nom>
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
 	
-	<version>0.8.3</version>
+	<version>0.8.4</version>
 	<version_base>0.3</version_base>
-	<!-- <version_html5media>1.1.3</version_html5media> -->
-	<!-- <necessite id="lib:html5media" src="https://github.com/downloads/etianen/html5media/html5media-1.1.3.zip" /> -->
+	<!-- <version_html5media>1.1.4</version_html5media> -->
+	<!-- Le fichier semble trop lourd (env. 20mo car contient des médias de test) pour être téléchargé -->
+	<!-- <necessite id="lib:html5media-1.1.4" src="https://github.com/downloads/etianen/html5media/html5media-1.1.4.zip" /> -->
 	
 	<icon>theme/img/videos-32.png</icon>
 	<etat>dev</etat>
 	<description>
 		<multi>
-			[fr]Interface de gestion et modèles d'insertion de(s) vidéo(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
+			[fr]Interface de gestion et mod&egrave;les d'insertion de(s) vid&eacute;o(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
 			-* Fichiers MP4/H264/WebM/OGG/MKV
 			-* Dailymotion
 			-* Vimeo
