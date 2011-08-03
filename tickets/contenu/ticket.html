@@ -13,18 +13,18 @@
 	[(#REM) Statut, severite, assignement]
 	<div class="infos">
 		<dl>
-			[<dt><:tickets:champ_statut:> :</dt><dd>(#STATUT|tickets_texte_statut)</dd>]
+			[<dt><:tickets:champ_statut:></dt><dd>(#STATUT|tickets_texte_statut)</dd>]
 			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
 			<dt><:tickets:assigne_a:></dt><dd>#NOM</dd>
 			</BOUCLE_assigne>
-			[<dt><:tickets:champ_severite:> :</dt><dd>(#SEVERITE|tickets_texte_severite)</dd>]
-			[<dt><:tickets:champ_type:> :</dt><dd>(#TYPE|tickets_texte_type)</dd>]
-			[<dt><:tickets:champ_date:> :</dt><dd>(#DATE|affdate_court)</dd>]
-			<B_auteur><dt><:tickets:champ_createur:> :</dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd>#NOM</dd></BOUCLE_auteur>
-			[<dt><:tickets:champ_projet:> :</dt><dd>(#PROJET)</dd>]
-			[<dt><:tickets:champ_composant:> :</dt><dd>(#COMPOSANT)</dd>]
-			[<dt><:tickets:champ_projet:> :</dt><dd>(#VERSION)</dd>]
-			[<dt><:tickets:champ_jalon:> :</dt><dd>(#JALON)</dd>]
+			[<dt><:tickets:champ_severite:></dt><dd>(#SEVERITE|tickets_texte_severite)</dd>]
+			[<dt><:tickets:champ_type:></dt><dd>(#TYPE|tickets_texte_type)</dd>]
+			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
+			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd>#NOM</dd></BOUCLE_auteur>
+			[<dt><:tickets:champ_projet:></dt><dd>(#PROJET)</dd>]
+			[<dt><:tickets:champ_composant:></dt><dd>(#COMPOSANT)</dd>]
+			[<dt><:tickets:champ_projet:></dt><dd>(#VERSION)</dd>]
+			[<dt><:tickets:champ_jalon:></dt><dd>(#JALON)</dd>]
 		</dl>
 		[(#REM) Bloc de choix du statut et de l'assignation]
 		[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
@@ -40,7 +40,7 @@
 
 	[(#REM) - Texte du ticket et url d'exemple]
 	[<div class="texte">(#TEXTE|propre)</div>]
-	[<div><:tickets:champ_exemple:> : <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
+	[<div><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
 
 	[(#REM) - Extensions, Extras 2 entre autre]
 	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]

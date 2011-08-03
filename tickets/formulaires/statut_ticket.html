@@ -11,7 +11,7 @@
 				<div class="explication">
 					<:tickets:explication_redaction:>
 				</div>]
-				<label for="statut"><:tickets:champ_statut:> :</label>
+				<label for="statut"><:tickets:champ_statut:></label>
 				<select name="statut" id="statut" class="text" onchange="jQuery('#validation_bouton_statut').slideDown();">
 					<option value="redac"[(#ENV{statut}|=={redac}|?{" selected='selected'",""})]>[(#VAL{redac}|tickets_texte_statut)]</option>
 					<option value="ouvert"[(#ENV{statut}|=={ouvert}|?{" selected='selected'",""})]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
