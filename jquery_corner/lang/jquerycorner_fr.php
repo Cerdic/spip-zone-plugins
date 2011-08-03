@@ -1,5 +1,5 @@
-﻿<?php
-// This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+<?php
+// Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -15,6 +15,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// P
 	'explication_elements' => 'Classe ou id des éléments à traiter (saisir par exemple .coinsarrondis)',
-	'explication_parametres' => 'Paramètres à appliquer aux angles (saisir par exemple bevel pour des coins chanfreinés). Pour voir une démo des paramètres, visitez le site indiqué ci-contre.',
+	'explication_parametres' => 'Paramètres à appliquer aux angles (saisir par exemple bevel pour des coins chanfreinés). Pour voir une démo des paramètres, visitez le site indiqué ci-contre.'
 );
 ?>
