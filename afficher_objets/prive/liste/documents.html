@@ -1,14 +1,14 @@
 <B_liste_docs>
 #ANCRE_PAGINATION
-<div class="liste-elements documents">
+<div class="liste-elements liste-objets documents">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:info_tous_documents_presents:>}) ([(#GRAND_TOTAL)])</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
-			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
-			<th class='id'>[(#TRI{id_document,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_document,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -34,6 +34,6 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_docs>[
-<div class="liste-elements documents"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-elements liste-objets documents caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_docs>
 

@@ -5,15 +5,15 @@
 }})
 ]<B_liste_art>
 #ANCRE_PAGINATION
-<div class="liste-elements syndic_articles">
+<div class="liste-elements liste-objets syndic_articles">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:titre_articles_syndiques:>}) ([(#GRAND_TOTAL)])</strong></caption>]
 	<thead>
 		<tr class='first_row'>
-			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
-			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
-			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
-			<th class='action'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
+			<th class='titre' scope='col'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='action' scope='col'></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -47,5 +47,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_art>[
-<div class="liste-elements syndic_articles"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-elements liste-objets syndic_articles caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_art>

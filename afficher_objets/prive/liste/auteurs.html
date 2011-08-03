@@ -9,7 +9,7 @@
 #SET{debut,#ENV{debutaut,#EVAL{_request("debutaut");}}}
 #ANCRE_PAGINATION
 [(#ENV{recherche}|et{#ENV{exec}|!={recherche}}|oui)<h3><:info_resultat_recherche:> &laquo;#ENV{recherche}&raquo;</h3>]
-<div class="liste-elements auteurs">
+<div class="liste-elements liste-objets auteurs">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:info_auteurs:>}) ([(#GRAND_TOTAL)])</strong></caption>]
 	<thead>
@@ -23,12 +23,12 @@
 	
 		[<tr><td colspan="5"><p class='pagination'>(#PAGINATION{prive})</p></td></tr>]
 		<tr class='first_row'>
-			<th class='statut'>[(#TRI{statut,#CHEMIN{images/admin-12.gif}|balise_img{<:afficher_objets:info_statut|attribut_html:>},ajax})]</th>
-			<th class='email'></th>
-			<th class='nom'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
-			<th class='site'>[(#TRI{url_site,<:info_site:>,ajax})]</th>
-			<th class='nombre'>[(#TRI{compteur_articles,<:info_articles:>,ajax})]</th>
-			<th class='id'>[(#TRI{id_auteur,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='statut' scope='col'>[(#TRI{statut,#CHEMIN{images/admin-12.gif}|balise_img{<:afficher_objets:info_statut|attribut_html:>},ajax})]</th>
+			<th class='email' scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{multi nom,<:info_nom:>,ajax})]</th>
+			<th class='site' scope='col'>[(#TRI{url_site,<:info_site:>,ajax})]</th>
+			<th class='nombre' scope='col'>[(#TRI{compteur_articles,<:info_articles:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_auteur,<:info_numero_abbreviation:>,ajax})]</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -50,5 +50,5 @@
 [<p class='pagination'>(#PAGINATION{prive})</p>]
 </div>
 </B_liste_aut>[<h3>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</h3>(#ENV{recherche}|et{#ENV{exec}|!={recherche}}|oui)][
-<div class="liste-elements auteurs"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+<div class="liste-elements liste-objets auteurs caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
 ]<//B_liste_aut>
