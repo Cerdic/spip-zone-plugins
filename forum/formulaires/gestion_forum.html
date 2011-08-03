@@ -96,6 +96,16 @@ if (window.jQuery)(function($){
 	$("#pagination, #select_type, #select_statut").change(function(){
 		$("#formulaire_gestion_forum form").submit();
 	});
+	
+	var limite = $("#formulaire_gestion_forum .boutons").offset().top ;
+	
+	$(window).scroll(function() {
+		if($(this).scrollTop() > limite)
+			$("#formulaire_gestion_forum .boutons").css({'border-bottom': '3px solid black' , 'position': 'fixed', 'top': 0, 'width': '481px'});
+		if($(this).scrollTop() < limite)
+			$("#formulaire_gestion_forum .boutons").css({'border-bottom': '0' , 'position': 'static', 'width': 'auto'});	
+	});		
+	
 }(jQuery));
 /*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
 </div>
