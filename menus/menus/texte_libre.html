@@ -3,10 +3,10 @@
 ]
 
 [(#ENV{appel_formulaire}|oui)
-	<div class="titre">#GET{contenu}</div>
+	<div class="titre">[(#GET{contenu}|expanser_liens)]</div>
 	<div class="infos"></div>
 ]
 [(#ENV{appel_menu}|oui)
 	<li class="menu-entree item[ (#ENV{css})]">
-		#GET{contenu}
+		[(#GET{contenu}|expanser_liens)]
 ]
