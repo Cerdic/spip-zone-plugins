@@ -7,7 +7,7 @@ $GLOBALS['z_blocs']=array('contenu','navigation','extra','head','more');
 
 # faut-il tracer abonnement dans tmp/abonnement.log et tmp/prive_abonnement.log
 # a modifier dans mes_options.php
-define ('_DEBUG_ABONNEMENT', true);
+//define ('_DEBUG_ABONNEMENT', true);
 
 
 ?>

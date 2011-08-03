@@ -1,0 +1,21 @@
+[(#SET{identifiant,[(#VAL{lier_[(#SOURCE)]_[(#OBJET)]}|uniqid)]})]
+[(#SET{icone,[(#CHEMIN{images/abonnement_22.png}|url_absolue)]})]
+
+[(#VAL{liste}|debut_cadre{#GET{icone},'',[(#TITRE_BOUTON|bouton_block_depliable{#EVAL{true},#GET{identifiant}})],'','',0})]
+[(#VAL{1}|debut_block_depliable{#GET{identifiant}})]
+
+	[(#SET{fonction_unique,[rechercher_(#GET{identifiant})]})]
+	<script  type="text/javascript"><!--
+		var [(#GET{fonction_unique})] = function() {
+			rechercher_objet(['#'+'(#GET{identifiant})'],'[(#URL_PAGE{selecteurs_auteurs}
+				|parametre_url{objet,#OBJET,&}
+				|parametre_url{#ID_TABLE_SOURCE,#ID_SOURCE,&})]');
+		}
+		jQuery(document).ready([(#GET{fonction_unique})]);
+		onAjaxLoad(function(){setTimeout([(#GET{fonction_unique})], 200);});
+	// --></script>
+
+	[(#FORMULAIRE_LIER_OBJETS_ABONNE{#OBJET,#SOURCE,#ID_SOURCE,#GET{identifiant}})]
+
+[(#VAL{1}|fin_block)]
+[(#VAL{liste}|fin_cadre)]

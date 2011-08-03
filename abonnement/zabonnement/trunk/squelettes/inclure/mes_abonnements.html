@@ -1,5 +1,5 @@
 #CACHE{0}
-[(#SET{date_future,[(#ENV{date}|ajouter_des_jours{7})]})]
+[(#SET{date_future,[(#ENV{date}|modifier_date{7})]})]
 
 #SET{today,#DATE}
 
@@ -48,13 +48,26 @@
 			#SET{pas_abo,oui}
 		<//B_abo_echu>
 		
+		[(#REM)La liste des elements de l'abonne]
+				<B_abo_objets_valide>
+			<h3 class="h3"><:abo:vos_acces_objets:></h3>
+			<ul class="liste_abonnement">
+			<BOUCLE_abo_objets_valide(CONTACTS_ABONNEMENTS){id_auteur}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
+#INFO_TITRE{#OBJET,#ID_OBJET}			
+			[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
+			</BOUCLE_abo_objets_valide>
+			</ul>
+		</B_abo_objets_valide>
+		
+		
+		
 		[(#REM)
 		la liste des acces aux rubriques
 		]			
 		<B_abo_rubriques_valide>
 			<h3 class="h3"><:abo:vos_acces_rubriques:></h3>
 			<ul class="liste_abonnement">
-			<BOUCLE_abo_rubriques_valide(CONTACTS_ABONNEMENTS){objet=rubrique}{id_auteur=#ID_AUTEUR}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
+			<BOUCLE_abo_rubriques_valide(CONTACTS_ABONNEMENTS){objet=rubrique}{id_auteur}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
 				<BOUCLE_rubriquev(RUBRIQUES){id_rubrique=#ID_OBJET}{tout_voir}>
 	[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
 	<li><a href="#URL_RUBRIQUE">#TITRE</a>
@@ -71,7 +84,7 @@
 		<B_abo_articles_valide>
 			<h3 class="h3"><:abo:vos_acces_articles:></h3>
 			<ul class="liste_abonnement">
-			<BOUCLE_abo_articles_valide(CONTACTS_ABONNEMENTS){objet=article}{id_auteur=#ID_AUTEUR}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
+			<BOUCLE_abo_articles_valide(CONTACTS_ABONNEMENTS){objet=article}{id_auteur}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
 				<BOUCLE_articlev(ARTICLES){id_article=#ID_OBJET}{tout_voir}>
 	[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
 	<li><a href="#URL_ARTICLE">#TITRE</a>

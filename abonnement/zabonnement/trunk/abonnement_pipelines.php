@@ -2,7 +2,59 @@
  
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('action/editer_contactabonnement');
+
+/**
+ * Plugin Groupes pour Spip 2.0
+ * Licence GPL (c) 2008 Matthieu Marcillaud
+ * (selecteur des auteurs a abonner)
+ */
+
+function abonnement_inserer_js_recherche_objet(){
+	return <<<EOS
+
+		function rechercher_objet(id_selecteur, page_selection) {
+			// chercher l'input de saisie
+			var me = jQuery(id_selecteur+' input[name=nom_objet]');
+			me.autocomplete(page_selection,
+					{
+						delay: 200,
+						autofill: false,
+						minChars: 1,
+						multiple:false,
+						multipleSeparator:";",
+						formatItem: function(data, i, n, value) {
+							return data[0];
+						},
+						formatResult: function(data, i, n, value) {
+							return data[1];
+						}
+					}
+				);
+				me.result(function(event, data, formatted) {
+					if (data[2] > 0) {
+						jQuery(id_selecteur + ' #pid_objet').val(data[2]);
+						jQuery(id_selecteur + ' input[type="submit"]').focus();
+						jQuery(me)
+						.end();
+					}
+					else{
+						return data[1];
+					}
+				});
+			};
+EOS;
+}
+
+function abonnement_inserer_javascript($flux){
+	include_spip('selecteurgenerique_fonctions');
+	$flux .= selecteurgenerique_verifier_js($flux);
+
+	$js = abonnement_inserer_js_recherche_objet();
+	$js = "<script type='text/javascript'><!--\n$js\n// --></script>\n";
+
+	return $flux.$js;
+}
+
 
 // espace public
 // si sql commande inserer l'abonnement aux objets avec statut_commande repris
@@ -35,7 +87,6 @@ function abonnement_post_insertion($flux){
 
 					$arg=array(
 						'id_auteur'=>$id_auteur,
-						'statut'=>$statut,
 						'objet'=>$abo['objet'],
 						'table'=>"spip_".$objet."s",
 						'ids' => array($abo['id_objet']), //tjs envoyer un array
@@ -43,8 +94,10 @@ function abonnement_post_insertion($flux){
 						'duree'=>3,
 						'periode'=>'jour',
 						'id_commandes_detail'=>$abo['id_commandes_detail'],
-					);
+						'statut'=>$statut,
+						);
 
+					include_spip('action/editer_contactabonnement');
 					editer_contactabonnement($arg);
 				}
 		}
@@ -63,27 +116,49 @@ function abonnement_affiche_milieu($flux){
 		$legender_auteur_supp = recuperer_fond('prive/abonnement_fiche',array('id_auteur'=>$flux['args']['id_auteur']));
 		$flux['data'] .= $legender_auteur_supp;
 	}
-	//todo tester le flux pour savoir si abonnement ok
-	/*
-	//affiche les auteurs dont l'abonnement comprend cet article (sur articles)	
-	if($flux['args']['exec'] == 'articles') {
-		$affiche_abonnes = recuperer_fond('prive/liste/abonnes_article',
-			array('id_objet'=>$flux['args']['id_article'],	
-			'objet'=>'article'
-			));
-		$flux['data'] .= $affiche_abonnes;
-	}
+
+	if ($exec = $flux['args']['exec']){
+		switch ($exec){
+			case 'articles':
+				$source = 'article';
+				$id_source = $flux['args']['id_article'];
+				break;
+			case 'abonnement_edit':
+				$source = 'abonnement';
+				$id_source = $flux['args']['id_abonnement'];
+				break;
+			case 'naviguer':
+				$source = 'rubrique';
+				$id_source = $flux['args']['id_rubrique'];
+				break;
+			/*
+			//abonnes a un mot-clef
+			case 'mots_edit':
+				$source = 'mot';
+				$id_source = $flux['args']['id_mot'];
+				break;
+			*/
+			default:
+				$source = $id_source = '';
+				break;
+		}
+		if ($source && intval($id_source)) {
 	
-	
-	//affiche les auteurs dont l'abonnement comprend cette rubrique (sur rubriques)	
-	if($flux['args']['exec'] == 'naviguer') {
-		$affiche_abonnes = recuperer_fond('prive/liste/abonnes_rubrique',
-			array('id_objet'=>$flux['args']['id_rubrique'],	
-			'objet'=>'rubrique'
-			));
-		$flux['data'] .= $affiche_abonnes;
+//todo a partir de source et id_source on essaie de retrouver les abonnes en cascade?
+//on les affichera avec l'icone de leur abonnement (article-rubrique-abonnement)?
+
+		$contexte= array(
+			'objet' => 'auteurs',
+			'titre_bouton'=>_T('abo:titre_les_abonnes'),
+			'source'=>$source,
+			'id_source'=> $id_source,
+			'id_table_source'=>'spip_contacts_abonnements',
+			);
+		
+		$flux['data'] .= recuperer_fond("prive/liste/lister-contacts_abonnements", $contexte);	
+		
+		}
 	}
-	*/
 	
 	return $flux;
 }
@@ -137,6 +212,7 @@ function abonnement_post_edition($flux){
 				'statut'=>$statut
 				);
 				if (_DEBUG_ABONNEMENT) spip_log("APE args ".$args['table'] ." ids0=".$args['ids'][0],'abonnement');
+				include_spip('action/editer_contactabonnement');
 				editer_contactabonnement($args);
 			}	
 		}
@@ -153,5 +229,7 @@ function abonnement_taches_generales_cron($taches_generales){
 	$taches_generales['abonnement'] = 60*60*24 ;
 	return $taches_generales;
 }
+
+
 
 ?>

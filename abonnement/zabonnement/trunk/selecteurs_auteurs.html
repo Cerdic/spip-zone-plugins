@@ -1,0 +1,14 @@
+#HTTP_HEADER{Content-Type: text/plain; charset=#CHARSET}[(#REM) Chercher les auteurs correspondant a la requete ]
+<BOUCLE_s(AUTEURS){tout}
+{nom LIKE %(#ENV{q})%}{0,20}{par nom}>
+#NOM[ - (#LOGIN)]|#NOM|#ID_AUTEUR
+</BOUCLE_s>
+	[(#REM) Si aucun, on recherche dans le login]
+	<BOUCLE_s1(AUTEURS){tout}
+	{login LIKE (#ENV{q})%}{0,20}{par nom}>
+#NOM[ - (#LOGIN)]|#NOM|#ID_AUTEUR
+	</BOUCLE_s1>
+		[(#REM) Vraiment on n'a rien trouve ]
+		<:selecteurgenerique:pas_suggestion:>|#ENV{q}|
+	<//B_s1>
+<//B_s>

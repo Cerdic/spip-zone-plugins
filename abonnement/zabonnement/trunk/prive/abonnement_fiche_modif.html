@@ -1,3 +1,4 @@
+#SET{today,#DATE}
 <li class="editer_abonnement fieldset">
 <fieldset>
 	<h3 class='legend'><:abo:abonnements:></h3>
@@ -9,7 +10,7 @@
 				<BOUCLE_abo(ABONNEMENTS){id_abonnement=#ID_OBJET}>
 				<input type="hidden" value="#ID_ABONNEMENT" name="abonnements[]">#TITRE</option>
 				</BOUCLE_abo>
-			<input type="text" value="[(#VALIDITE)]" name="validites[]" /> [(#VALIDITE|<{#DATE}|oui) (<:abo:echu:>)]
+			<input type="text" value="[(#VALIDITE)]" name="validites[]" /> [(#VALIDITE|<{#GET{today}}|oui) (<:abo:statut_echu:>)]
 			</li>
 		</BOUCLE_actifs>
 		

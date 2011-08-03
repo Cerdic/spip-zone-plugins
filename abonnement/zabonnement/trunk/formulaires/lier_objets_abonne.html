@@ -1,0 +1,27 @@
+<div class="lier_objets ajax" id="#ENV{identifiant}">
+	[(#REM) Les liens actifs ]
+	[(#INCLURE{fond=prive/liste/inc-lister-contacts_abonnements}
+		{env}{ajax}{action=delier}{editable})]
+		
+	[(#REM) Recherche pour ajouter de nouvelles liaisons ]
+	[(#ENV{editable})
+	<div class="formulaire_ajouter_objet">
+	<form action="#SELF" method="post">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#SELF}
+		<ul style="list-style-type:none">
+			<li class="nom_objet [ (#ENV**{erreurs}|table_valeur{nom_objet}|oui)erreur]">
+				<label for="nom_objet"><:abo:bouton_chercher:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_objet})</span>]
+				<input type='text' class='text' name='nom_objet' id='nom_objet' value="#ENV{nom_objet}" onclick="jQuery(this).val('');jQuery('[#(#ENV{selecteur})] #pid_objet').val('');" />
+				<input type="hidden" name="pid_objet" id="pid_objet" value="" />
+				<input type='submit' class='submit' value='<:abo:bouton_ajouter:>' />
+			</li>
+		</ul>
+	</form>
+	</div>]
+
+</div>

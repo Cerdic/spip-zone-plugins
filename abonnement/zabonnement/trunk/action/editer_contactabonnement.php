@@ -9,10 +9,6 @@ function editer_contactabonnement($arg=null)
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
-
-	//$c = array('statut' => $statut);
-
-	//instituer_contactabonnement($id_contactabonnement, $c);
 	
 	$id_auteur=$arg['id_auteur'];
 	$statut=$arg['statut'];
@@ -28,14 +24,12 @@ function editer_contactabonnement($arg=null)
 	
 	if (_DEBUG_ABONNEMENT) spip_log("editer_contactabonnement1 $objet et ".$ids[0],'abonnement');
 
-
 	if(is_array($ids) && $id_auteur>0)
 	foreach($ids as $key => $id_objet)
 	{
-
 		if($id_objet!='non')
 		{
-				
+			//objet = rubrique, article ou abonnement
 			$verif = sql_fetsel('*', $table, 'id_'."$objet = " . $id_objet);
 			if (!$verif) 
 			{
@@ -43,11 +37,13 @@ function editer_contactabonnement($arg=null)
 				die("$objet $id_objet inexistant");
 			}
 			
-			//todo verifier avec plugin montants?
 			$calculer_prix = charger_fonction('prix', 'inc/');
 			$prix=($statut=='offert')?'':$calculer_prix($objet,$id_objet);//pas de prix puisque offert
 			$date = date('Y-m-d H:i:s');
-			$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
+			//la duree par defaut est fixee a 3 jours
+			$duree=($arg['duree'])?$arg['duree']:'3';
+			$periode=($arg['periode'])?$arg['periode']:'jours';
+			$validite = modifier_date($date,$duree);
 			
 			//specific a abonnement
 			if($objet=='abonnement'){
@@ -57,18 +53,17 @@ function editer_contactabonnement($arg=null)
 					
 				// jour
 				if ($periode == 'jours') {
-					$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n'),date('j')+$duree,date('Y')));
+					$validite = modifier_date($date,$duree);
 				}
 				// ou mois
 				else {
-					$validite = date('Y-m-d H:i:s', mktime(date('H'),date('i'),date('s'),date('n')+$duree,date('j'),date('Y')));
+					$validite = modifier_date($date,'',$duree);
 				}
 			}
 				
 			if (_DEBUG_ABONNEMENT) spip_log("editer_contactabonnement $objet $id_objet date $validite",'abonnement');
 
-			if (!$deja = sql_getfetsel('id_auteur,validite',
-				'spip_contacts_abonnements',
+			if (!$deja = sql_getfetsel('id_auteur,validite','spip_contacts_abonnements',
 				'id_auteur='.$id_auteur.' AND id_objet='.sql_quote($id_objet)." AND objet='$objet'")
 				)
 			{
