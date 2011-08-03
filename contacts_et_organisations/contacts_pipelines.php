@@ -155,6 +155,10 @@ function contacts_affiche_gauche($flux){
 						'id_parent'			=> $organisation['id_parent']
 					));
 			}// fin 'si organisation'
+		} else {
+			$flux['data'] .= recuperer_fond('prive/boite/selecteur_contacts_organisations', array( 
+								'id_auteur'=>$flux['args']['id_auteur'] 
+								)); 
 		}
 	}
 
