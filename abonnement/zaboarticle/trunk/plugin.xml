@@ -2,11 +2,11 @@
 	<nom>Z-aboarticle</nom>
 	<auteur>Anne-lise Martenot (elastick.net) - BoOz (booz@reo.net)
 	</auteur>
-	<version>0.3.1</version>
+	<version>0.3.2</version>
 	<etat>
 	test
 	</etat>
-	<icon>img/zaboarticle_48.png</icon>
+	<icon>images/zaboarticle_48.png</icon>
 	<description>
    G&eacute;rer des abonnements aux articles et aux rubriques, n&eacute;cessite les plugins acces restreint et abonnement.
    On peut ajouter un systeme de commande payant li&eacute; ˆ l'abonnement.

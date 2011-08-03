@@ -18,7 +18,7 @@
         
         #SET{valide,non}
 [(#REM) <!--  acces a l'article ? -->]
-	<BOUCLE_article_abonne(CONTACTS_ABONNEMENTS articles){id_article}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+	<BOUCLE_article_abonne(CONTACTS_ABONNEMENTS){objet=article}{id_objet=#ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
 	#SET{valide,oui}
 	[(#REM)
 	#ID_AUTEUR est abonne a l'article donc on a une ouverture d'autorisation
@@ -26,7 +26,7 @@
 	</BOUCLE_article_abonne>
 	
 [(#REM) <!-- sinon acces a la rubrique ? -->]	
-		<BOUCLE_rubrique_abonne(CONTACTS_ABONNEMENTS rubriques){id_rubrique}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+		<BOUCLE_rubrique_abonne(CONTACTS_ABONNEMENTS){objet=rubrique}{id_objet=#ID_RUBRIQUE}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
 		#SET{valide,oui}
 		[(#REM)
 		#ID_AUTEUR est abonne a la rubrique donc on a une ouverture d'autorisation de 3 jours

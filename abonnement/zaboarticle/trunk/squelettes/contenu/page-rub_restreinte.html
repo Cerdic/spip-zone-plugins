@@ -2,7 +2,7 @@
 #SET{today,#DATE}
 <BOUCLE_contenu(RUBRIQUES){id_rubrique}{tout_voir}>
 [(#REM) Fil d'Ariane ]
-<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}{tout_voir}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; <strong class="on">(#TITRE|couper{80})</strong>]</p>
 
 <div class="contenu-principal">
 
@@ -16,7 +16,7 @@
 </div>
 	#SET{valide,non}
 [(#REM) <!--  acces a la rubrique ? si #ID_AUTEUR est abonne a la rubrique on valide -->]	
-	<BOUCLE_rubrique_abonne(CONTACTS_ABONNEMENTS){id_rubrique}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
+	<BOUCLE_rubrique_abonne(CONTACTS_ABONNEMENTS){objet=rubrique}{id_objet=#ID_RUBRIQUE}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
 	#SET{valide,oui}
 	</BOUCLE_rubrique_abonne>
 

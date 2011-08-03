@@ -1,4 +1,4 @@
-[(#SET{icone,[(#CHEMIN{img/zaboarticle_22.png}|url_absolue)]})]
+[(#SET{icone,[(#CHEMIN{images/zaboarticle_22.png}|url_absolue)]})]
 [(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:abo:acces_articles_restreints:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
 
 <BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=article}{par validite}>
