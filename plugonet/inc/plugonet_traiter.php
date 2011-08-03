@@ -630,10 +630,13 @@ function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 	$langs = array();
 	
 	// Traitement de la balise nom
-	foreach (traiter_multi($nom) as $lang => $_descr) {
-		if (!$lang)
-			$lang = 'fr';
-		$langs[$lang][strtolower($prefixe) . '_nom'] = entite2utf(trim($_descr));
+	$noms = traiter_multi($nom);
+	if (count($noms) > 1) {
+		foreach ($noms as $lang => $_descr) {
+			if (!$lang)
+				$lang = 'fr';
+			$langs[$lang][strtolower($prefixe) . '_nom'] = entite2utf(trim($_descr));
+		}
 	}
 	
 	// Traitement de la balise slogan si elle existe
