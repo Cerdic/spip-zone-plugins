@@ -8,7 +8,8 @@
 <table>
 	<thead>
 		<tr>
-			<th colspan="2"><:tickets:champ_titre:></th>
+			<th></th>
+			<th>#</th>
 			<th><:tickets:champ_texte:></th>
 			<th><:tickets:champ_date:></th>
 		</tr>
@@ -18,7 +19,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 
 			<td><img[ src="(#CHEMIN{[prive/images/(#INFO_STATUT{ticket, #ID_OBJET}|tickets_icone_statut)]})"][ alt="(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)"][ title="(#INFO_STATUT{ticket, #ID_OBJET}|tickets_texte_statut)"] /></td>
-			<td><b><a title="[(#TITRE|attribut_html)]" href="[(#URL_PAGE{ticket}|parametre_url{id_ticket,#ID_OBJET})]#forum#ID_FORUM">##ID_OBJET</a></b></td>
+			<td><strong><a title="[(#TITRE|attribut_html)]" href="[(#URL_TICKET{#ID_OBJET})]#forum#ID_FORUM">##ID_OBJET</a></strong></td>
 			<td>[(#TEXTE|couper{160})]</td>
 			<td>[(#DATE|affdate_court)]</td>
 		</tr>

@@ -8,7 +8,9 @@
 <table>
 	<thead>
 		<tr>
-			<th colspan="3"><:tickets:champ_titre:></th>
+			<th></th>
+			<th>#</th>
+			<th><:tickets:champ_titre:></th>
 			[(#ENV{type}|non)<th><:tickets:champ_type:></th>]
 			<th><:tickets:champ_importance:></th>
 			<th><:tickets:champ_date:></th>
@@ -18,8 +20,8 @@
 <BOUCLE_detaillee(TICKETS){!par date}{pagination 10 #GET{hash_pagination}}{id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{jalon?}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
-			<td><b>##ID_TICKET</b></td>
-			<td><a href="[(#URL_PAGE{ticket}|parametre_url{id_ticket,#ID_TICKET})]">#TITRE</a></td>
+			<td><strong><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
+			<td><a href="[(#URL_TICKET)]">#TITRE</a></td>
 			[(#REM) Si le type est explicite, on ne l'affiche pas ]
 			[(#ENV{type}|non)<td>[(#TYPE|tickets_texte_type)]</td>]
 			<td>

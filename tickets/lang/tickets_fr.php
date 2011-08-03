@@ -6,38 +6,34 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'afficher_tickets' => 'Afficher les tickets',
-	'assignes_a' => 'Assign&eacute;s &agrave;',
-	'assigne_a' => 'Assign&eacute; &agrave;&nbsp;:',
 	'assignation_attribuee_a' => 'Le ticket a &eacute;t&eacute; assign&eacute; &agrave; @nom@.',
 	'assignation_mail_titre' => 'Changement d\'assignation du ticket',
 	'assignation_modifiee' => 'Assignation mise &agrave; jour',
 	'assignation_non_modifiee' => 'Assignation non mise &agrave; jour',
 	'assignation_supprimee' => 'L\'assignation de ce ticket a &eacute;t&eacute; supprim&eacute;e.',
+	'assignes_a' => 'Assign&eacute;s &agrave;',
+	'assigne_a' => 'Assign&eacute; &agrave;&nbsp;:',
 
 	// C
+	'cfg_bouton_radio_desactiver_forum_public' => "D&eacute;sactiver l'utilisation des forums publics.",
 	'cfg_descr_tickets' => 'Configuration du plugin Tickets pour SPIP',
+	'cfg_form_tickets_autorisations' => 'Configuration des autorisations',
+	'cfg_form_tickets_general' => 'Configuration g&eacute;n&eacute;rale',
+	'cfg_inf_type_autorisation' => 'Si vous choisissez par statut ou par auteur, il vous sera demand&eacute; ci-dessous votre s&eacute;lection de statuts ou d\'auteurs.',
+	'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d\'auteurs',
+	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d\'auteurs',
+	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
+	'cfg_lbl_case_notification_publique' => '&Ecirc;tre notifi&eacute; dans l\'espace public plut&ocirc;t que dans l\'espace priv&eacute; (N&eacute;cessite Zpip)',
+	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets',
+	'cfg_lbl_liste_auteurs' => 'Auteurs du site',
+	'cfg_lbl_notification_publique' => 'Notification publique',
+	'cfg_lbl_statuts_auteurs' => 'Statuts possibles',
+	'cfg_lbl_type_autorisation' => 'M&eacute;thode d\'autorisation',
 	'cfg_lgd_autorisation_assigner' => 'Assigner les tickets',
 	'cfg_lgd_autorisation_ecrire' => '&Eacute;crire les tickets',
 	'cfg_lgd_autorisation_modifier' => 'Modifier les tickets',
 	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
-	'cfg_form_tickets_autorisations' => 'Configuration des autorisations',
-	'cfg_form_tickets_general' => 'Configuration g&eacute;n&eacute;rale',
-	'cfg_inf_type_autorisation' => 'Si vous choisissez par statut ou par auteur, il vous sera demand&eacute; ci-dessous votre s&eacute;lection de statuts ou d\'auteurs.',
-	'cfg_lbl_type_autorisation' => 'M&eacute;thode d\'autorisation',
-	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
-	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d\'auteurs',
-	'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d\'auteurs',
-	'cfg_lbl_case_notification_publique' => '&Ecirc;tre notifi&eacute; dans l\'espace public plut&ocirc;t que dans l\'espace priv&eacute; (N&eacute;cessite Zpip)',
-	'cfg_lbl_notification_publique' => 'Notification publique',
-	'cfg_lbl_statuts_auteurs' => 'Statuts possibles',
-	'cfg_lbl_liste_auteurs' => 'Auteurs du site',
-	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets',
-	'cfg_bouton_radio_desactiver_forum_public' => "D&eacute;sactiver l'utilisation des forums publics.",
 	'cfg_titre_tickets' => 'Tickets',
-	'commentaire' => 'commentaire',
-	'commentaires' => 'commentaires',
-	'commentaire_aucun' => 'Aucun commentaire',
-
 	'champ_assigner' => 'Assigner &agrave;&nbsp;:',
 	'champ_composant' => 'Composant:',
 	'champ_createur' => 'Cr&eacute;&eacute; par&nbsp;:',
@@ -46,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_description' => 'Description du ticket',
 	'champ_exemple' => 'Exemple&nbsp;:',
 	'champ_id' => 'Num&eacute;ro',
-	'champ_importance' => 'Importance',
+	'champ_importance' => 'Importance&nbsp;:',
 	'champ_jalon' => 'Jalon&nbsp;',
 	'champ_nouveau_commentaire' => 'Nouveau commentaire',
 	'champ_projet' => 'Projet&nbsp;:',
@@ -64,6 +60,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'classement_jalon' => 'Tickets par jalon',
 	'classement_termine' => 'Tickets termin&eacute;s',
 	'classement_type' => 'Tickets par type',
+	'commentaire' => 'commentaire',
+	'commentaires' => 'commentaires',
+	'commentaire_aucun' => 'Aucun commentaire',
 	'commenter_ticket' => 'Commenter ce ticket',
 	'creer_ticket' => 'Cr&eacute;er un ticket',
 
@@ -130,8 +129,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ticket' => 'Ticket',
 	'ticket_enregistre' => 'Ticket enregistr&eacute;',
 	'tickets' => 'Tickets',
-	'tickets_autorisations' => 'Configuration des autorisations',
-	'tickets_general' => 'Configuration g&eacute;n&eacute;rale',
 	'tickets_derniers_commentaires' => 'Les derniers commentaires',
 	'tickets_sur_inscription' => "
 		L'&eacute;criture des tickets ou commentaires n'est
@@ -151,10 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'vos_tickets_assignes' => 'Les tickets qui vous sont assign&eacute;s',
-	'vos_tickets_en_cours' => 'Vos tickets en cours de r&eacute;daction',
-
-	// Z
-	'z' => 'zzz'
+	'vos_tickets_en_cours' => 'Vos tickets en cours de r&eacute;daction'
 );
 
 

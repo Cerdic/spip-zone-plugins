@@ -15,19 +15,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignes_a' => 'Assigned to',
 
 	// C
+	'cfg_bouton_radio_desactiver_forum_public' => "Disable the use of public forums.",
+	'cfg_form_tickets_autorisations' => 'Setting up permissions',
+	'cfg_form_tickets_general' => 'General setup',
 	'cfg_descr_tickets' => 'Configuration of the Bug reports plugin for SPIP',
 	'cfg_inf_type_autorisation' => 'If you choose by status or by author, you will be prompted below your selection of status or authors.',
 	'cfg_lbl_autorisation_auteurs' => '	Allow list of authors',
 	'cfg_lbl_autorisation_statuts' => 'Allow by authors status',
 	'cfg_lbl_autorisation_webmestre' => 'Allow webmasters only',
+	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space (Requires Zpip)',
+	'cfg_lbl_forums_publics' => 'Comments on bug reports',
 	'cfg_lbl_liste_auteurs' => 'Authors of the website',
+	'cfg_lbl_notification_publique' => 'Public notification',
 	'cfg_lbl_statuts_auteurs' => 'Possible status',
 	'cfg_lbl_type_autorisation' => 'Authorization method',
 	'cfg_lgd_autorisation_assigner' => 'Assign bug reports',
 	'cfg_lgd_autorisation_commenter' => 'Comment bug reports',
 	'cfg_lgd_autorisation_ecrire' => 'Write bug reports',
 	'cfg_lgd_autorisation_modifier' => 'Modify bug reports',
-	'cfg_form_tickets_autorisations' => 'Configuring permissions',
 	'cfg_titre_tickets' => 'Bug reports',
 	'champ_assigner' => 'Assign to:',
 	'champ_composant' => 'Component:',
@@ -37,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_description' => 'Description of the bug report',
 	'champ_exemple' => 'Example:',
 	'champ_id' => 'Number',
-	'champ_importance' => 'Importance',
+	'champ_importance' => 'Importance:',
 	'champ_jalon' => 'Milestone:',
 	'champ_nouveau_commentaire' => 'New comment',
 	'champ_projet' => 'Project:',
@@ -45,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_titre' => 'Abstract',
 	'champ_titre_ticket' => 'Title of the bug report',
 	'champ_type' => 'Type:',
+	'champ_texte' => 'Text',
 	'champ_statut' => 'Status:',
 	'champ_url_exemple' => 'Example URL',
 	'champ_version' => 'Version',
@@ -78,6 +84,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// I
 	'info_numero_ticket' => 'BUG REPORT NUMBER:',
+	'info_tickets_ouvert' => 'opened and discussed',
+	'info_tickets_redac' => 'being edited',
+	'info_tickets' => 'Bug reports',
 	'icone_modifier_ticket' => 'Modify this bug report',
 	'icone_retour_ticket' => 'Back to the bug report',
 
@@ -101,6 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'revenir_gestion' => 'Back to the bug reports management',
 
 	// S
+	'sinscrire' => "Subscribe",
 	'severite_bloquant' => 'Critical',
 	'severite_important' => 'Major',
 	'severite_normal' => 'Normal',
@@ -113,15 +123,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_redac' => 'Editing in progress',
 	'statut_resolu' => 'Resolved',
 	'statut_resolu_long' => 'All the resolved bug reports',
+	'syndiquer_tickets' => 'Syndicate the bug reports of the website',
 
 	// T
 	'ticket' => 'Bug report',
 	'ticket_enregistre' => 'The bug report has been saved.',
 	'tickets' => 'Bug reports',
+	'tickets_derniers_commentaires' => 'Last comments',
 	'tickets_sur_inscription' => "
 		Bug report or comment only available for registered users.
 	",
+	'tickets_traites' => 'All tickets processed',
 	'titre' => 'Bug reports, bug tracking',
+	'titre_identification' => 'Authentication',
 	'titre_liste' => 'List of the bug reports',
 	'tous_tickets_ouverts' => 'All opened bug reports',
 	'type_amelioration' => 'Improvements',
@@ -133,10 +147,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'vos_tickets_assignes' => 'Bug reports assigned to you',
-	'vos_tickets_en_cours' => 'Your bug reports being editing',
-
-	// Z
-	'z' => 'zzz'
+	'vos_tickets_en_cours' => 'Your bug reports being editing'
 );
 
 

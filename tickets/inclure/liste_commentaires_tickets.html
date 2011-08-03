@@ -8,7 +8,8 @@
 <table>
 	<thead>
 		<tr>
-			<th colspan="2"><:tickets:champ_titre:></th>
+			<th></th>
+			<th>#</th>
 			<th><:tickets:champ_texte:></th>
 			<th><:tickets:champ_date:></th>
 		</tr>
@@ -17,7 +18,7 @@
 <BOUCLE_detaillee(TICKETS_FORUM tickets){!par date}{pagination 10 #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
-			<td><b><a title="[(#TITRE|attribut_html)]" href="[(#URL_PAGE{ticket}|parametre_url{id_ticket,#ID_TICKET})]#forum#ID_TICKET_FORUM">##ID_TICKET</a></b></td>
+			<td><strong><a title="[(#TITRE|attribut_html)]" href="[(#URL_PAGE{ticket}|parametre_url{id_ticket,#ID_TICKET})]#forum#ID_TICKET_FORUM">##ID_TICKET</a></strong></td>
 			<td>[(#TEXTE|couper{160})]</td>
 			<td>[(#DATE|affdate_court)]</td>
 		</tr>

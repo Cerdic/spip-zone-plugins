@@ -38,7 +38,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_description' => 'Beschreibung des Tickets',
 	'champ_exemple' => 'Beispiel:',
 	'champ_id' => 'Nummmer',
-	'champ_importance' => 'Bedeutung',
+	'champ_importance' => 'Bedeutung:',
 	'champ_jalon' => 'Meilenstein:',
 	'champ_nouveau_commentaire' => 'Neuer Kommentar',
 	'champ_projet' => 'Projekt:',
@@ -141,10 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'vos_tickets_assignes' => 'Ihnen zugewiesene Tickets',
-	'vos_tickets_en_cours' => 'Ihre Tickets in Bearbeitung',
-
-	// Z
-	'z' => 'zzz'
+	'vos_tickets_en_cours' => 'Ihre Tickets in Bearbeitung'
 );
 
 
