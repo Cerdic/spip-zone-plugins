@@ -9,6 +9,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['organisations'] = 'organisations';
 	$interface['table_des_tables']['organisations_liens'] = 'organisations_liens';
 	$interface['table_des_tables']['contacts'] = 'contacts';
+	$interface['table_des_tables']['contacts_liens'] = 'contacts_liens';
 	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
 	
 	// -- Liaisons organisations/auteurs, contacts/auteurs et organisations/contacts
