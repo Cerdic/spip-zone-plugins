@@ -9,6 +9,7 @@
 		Le plugin qui arrondi les angles... Une adaptation pour Spip du plugin JQuery Corner : <a href="http://jquery.malsup.com/corner/" title="plugin JQuery Corner">http://jquery.malsup.com/corner/</a>
 	</description>
 	<icon>images/jquerycorner-32.png</icon>
+	<lien>http://www.spip-contrib.net/JQuery-Corner</lien>
 	<prefix>jquerycorner</prefix>
 	<install>base/jquerycorner_install.php</install>
 	<pipeline>
