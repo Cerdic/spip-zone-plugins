@@ -72,11 +72,12 @@ function importer_post($a, $rub =1) {
 		return;
 	}
 
+	$texte = importer_texte($a['content']);
 
 	$p = sql_updateq('spip_articles',
 		array(
 			'titre' => $a['title'],
-			'texte' => $a['content'],
+			'texte' => $texte,
 			'date' => $a['date'],
 			'id_rubrique' => $rub,
 			'id_secteur' => $rub,
@@ -84,6 +85,7 @@ function importer_post($a, $rub =1) {
 		),
 		'id_article='.$id
 	);
+
 
 if (_MODE_AUTEURS) { /* SPIP 3 */
 	sql_delete('spip_auteurs_liens', 'id_objet='.$id.' AND objet="article"');
@@ -149,9 +151,11 @@ function importer_comment($a) {
 		return;
 	}
 
+	$texte = importer_texte($a['content']);
+
 	$f = array(
 			'titre' => '', ## $a['title'], sur blogspot le titre n'est que le debut du content
-			'texte' => $a['content'],
+			'texte' => $texte,
 			'date_heure' => $a['date'],
 			'date_thread' => $a['date'],
 			'auteur' => $a['author'],
@@ -325,4 +329,105 @@ function importer_blogspot(&$content) {
 		}
 	}
 
+}
+
+
+
+function importer_texte($t) {
+
+	ecrire_fichier('../tmp/x.html', $t);
+	#$a = `/opt/local/bin/pandoc ../tmp/x.html -t mediawiki`;
+	#echo "<pre>".htmlspecialchars($a)."</pre>\n";
+	#exit;
+
+
+	# italiques
+	#<span style="font-style: italic;">...</span>
+	$t = preg_replace(',<span style="font-style: italic;">(.*)</span>,Ums', '{\1}', $t);
+	$t = preg_replace(',<i>(.*)</i>,Ums', '{\1}', $t);
+
+	# images
+	foreach (extraire_balises($t, 'a') as $l) {
+		if (preg_match(',^<a [^>]*><img [^>]*></a>$,Uims', $l)
+		AND $href = extraire_attribut($l, 'href')
+		AND $src = extraire_attribut(extraire_balise($l, 'img'), 'src')
+		#AND $height = extraire_attribut(extraire_balise($l, 'img'), 'height')
+		#AND $width = extraire_attribut(extraire_balise($l, 'img'), 'width')
+		AND preg_match(',\.(jpg|gif|png)$,i', $src, $r)
+		AND $extension = $r[1]
+		) {
+			$doc = importer_doc(array('fichier' => $src, 'extension' => strtolower($extension), 'distant' => 'oui', 'mode' => 'image'));
+
+			if (preg_match('@<div style="text-align: center;">'.preg_quote($l,'@').'((?:.*?\n){0,5})</div>@ms', $t, $r)) {
+				$legende = trim($r[1]);
+				sql_updateq('spip_documents', array('descriptif' => $legende), 'id_document='.$doc);
+				$repl = "\n".'<doc'.$doc.'|center>'."\n";
+				$t = str_replace($r[0], $repl, $t);
+			}
+			else {
+				$repl = "\n".'<img'.$doc.'|center>'."\n";
+				$t = str_replace($l, $repl, $t);
+			}
+		} else
+		if (preg_match(',^<a [^>]*>(.*)</a>$,Uims', $l, $r)
+		AND $href = extraire_attribut($l, 'href')
+		) {
+			$repl = '['.$r[1].'->'.$href.']';
+			$t = str_replace($l, $repl, $t);
+		}
+	}
+
+	# sauts de lignes
+	$t = preg_replace(',<br />,', "\n_ ", $t);
+	$t = preg_replace(',{\n_ },', "\n_ ", $t);
+	$t = preg_replace(',\n_ \n_ ,', "\n\n", $t);
+
+	## videos
+	
+	# youtube
+	foreach (extraire_balises($t, 'object') as $l) {
+		if (preg_match(',http://(www\.)?youtube.com/v/[^"\']*,', $l, $r)
+		AND $a = extraire_balise($l, 'embed')
+		AND $height=extraire_attribut($a, 'height')
+		AND $width=extraire_attribut($a, 'width')
+		)
+		{
+			$doc = importer_doc(array('fichier' => $r[0], 'hauteur' => $height, 'largeur' => $width, 'extension' => 'swf', 'distant' => 'oui', 'mode' => 'document'));
+			$t = str_replace($l, '<emb'.$doc.'|center>', $t);
+		}
+	}
+
+
+	$t = preg_replace(",\n_ </div>,S", "</div>\n_ ", $t);
+	$t = preg_replace(',<div style="text-align: center;"></div>,S', '', $t);
+
+	$t = preg_replace(',(\n_ )*<div class="blogger-post-footer">.*$,Sms', '', $t);
+	$t = str_replace("\n\n</span>", "</span>\n\n", $t);
+	$t = str_replace("\n\n</div>", "</div>\n\n", $t);
+	$t = str_replace("\n\n_ ", "\n\n\n", $t);
+
+	
+
+	return $t;
+
+}
+
+
+function importer_doc($doc) {
+	$s = sql_query($q = "SELECT id_document FROM spip_documents WHERE fichier=".sql_quote($doc['fichier']));
+	if ($t = sql_fetch($s))
+		$id = $t['id_document'];
+	else {
+		$id = sql_insertq('spip_documents', array(
+			'fichier' => $doc['fichier'],
+			'date' => date('Y-m-d H:i:s')
+		));
+	}
+	
+	$p = sql_updateq('spip_documents',
+		$doc,
+		'id_document='.$id
+	);
+
+	return $id;
 }
