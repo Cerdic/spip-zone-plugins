@@ -9,6 +9,7 @@
 <prefix>comments</prefix>
 <chemin dir="" />
 <chemin dir="feed/" />
+<options>comments_options.php</options>
 <fonctions>comments_pipelines.php</fonctions>
 <pipeline>
 	<nom>pre_boucle</nom>
