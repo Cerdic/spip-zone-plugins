@@ -131,9 +131,6 @@ function instituer_organisation($id_organisation, $c, $calcul_rub=true){
 	$id_parent_actuel = $row['id_parent'];
 	$champs = array();
 
-spip_log($c, 'l');	
-spip_log($row, 'l');
-spip_log($id_organisation, 'l');
 	// Verifier que le parent demandee existe et est different
 	// du parent actuel
 	if (isset($c['id_parent'])
