@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_le' => 'Le',
 
 	// F
+	'forum_attention_peu_caracteres' => '<b>Attention ! </b>votre message est trop court (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas être inférieur à @min@ caractères.',
 	'forum_qui_etes_vous' => 'Qui êtes-vous ?',
 
 	// L

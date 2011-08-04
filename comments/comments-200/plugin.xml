@@ -24,6 +24,10 @@
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>
 <pipeline>
+	<nom>formulaire_verifier</nom>
+	<inclure>comments_pipelines.php</inclure>
+</pipeline>
+<pipeline>
 	<nom>formulaire_traiter</nom>
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>

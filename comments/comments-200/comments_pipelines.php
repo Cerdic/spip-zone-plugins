@@ -105,7 +105,45 @@ function comments_pre_boucle($boucle){
 	return $boucle;
 }
 
-
+/**
+* Vérifier le formulaire de forum :
+*
+* - Utiliser le define _FORUM_LONGUEUR_MINI
+*
+* @param <type> $flux
+* @return <type>
+*/
+function comments_formulaire_verifier($flux){
+	if ($flux['args']['form']=='forum'){
+		spip_log($flux,'forum');
+		if(!$flux['data']['texte']){
+			spip_log('pas d erreur','forum');
+			if (strlen($texte = _request('texte')) < _FORUM_LONGUEUR_MINI
+			AND $GLOBALS['meta']['forums_texte'] == 'oui'){
+				unset($flux['data']['previsu']);
+				$flux['data']['texte'] = _T('comments:forum_attention_peu_caracteres',
+					array(
+						'compte' => strlen($texte),
+						'min' => _FORUM_LONGUEUR_MINI
+					));
+			}
+		}else{
+			if (strlen($texte = _request('texte')) < _FORUM_LONGUEUR_MINI
+				AND $GLOBALS['meta']['forums_texte'] == 'oui'){
+					unset($flux['data']['previsu']);
+					$flux['data']['texte'] = _T('comments:forum_attention_peu_caracteres',
+						array(
+							'compte' => strlen($texte),
+							'min' => _FORUM_LONGUEUR_MINI
+						));
+			}else{
+				unset($flux['data']['texte']);
+				$flux['data']['previsu'] = $texte;
+			}
+		}
+	}
+	return $flux;
+}
 /**
  * Traiter le formulaire de forum :
  *
@@ -167,6 +205,5 @@ function comments_formulaire_traiter($flux){
 	}
 	#die('paf');
 	return $flux;
-
 }
 ?>
