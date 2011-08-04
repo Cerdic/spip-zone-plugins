@@ -110,14 +110,13 @@ function comments_pre_boucle($boucle){
 *
 * - Utiliser le define _FORUM_LONGUEUR_MINI
 *
-* @param <type> $flux
-* @return <type>
+* @param array $flux
+* @return array $flux
 */
 function comments_formulaire_verifier($flux){
 	if ($flux['args']['form']=='forum'){
-		spip_log($flux,'forum');
-		if(!$flux['data']['texte']){
-			spip_log('pas d erreur','forum');
+		// Si pas d'erreurs sur le texte et que l'on n'est pas en validation finale
+		if(!$flux['data']['texte'] && !_request('confirmer_previsu_forum')){
 			if (strlen($texte = _request('texte')) < _FORUM_LONGUEUR_MINI
 			AND $GLOBALS['meta']['forums_texte'] == 'oui'){
 				unset($flux['data']['previsu']);
@@ -138,7 +137,11 @@ function comments_formulaire_verifier($flux){
 						));
 			}else{
 				unset($flux['data']['texte']);
-				$flux['data']['previsu'] = $texte;
+				if(!_request('confirmer_previsu_forum')){
+					$doc = &$_FILES['ajouter_document'];
+					$flux['data']['previsu'] = inclure_previsu($texte, _request('titre'), _request('url_site'), _request('nom_site'), _request('ajouter_mot'), $doc,
+						intval(_request('id_rubrique')), intval(_request('id_forum')), intval(_request('id_article',0)), intval(_request('id_breve')), intval(_request('id_syndic')));
+				}
 			}
 		}
 	}
