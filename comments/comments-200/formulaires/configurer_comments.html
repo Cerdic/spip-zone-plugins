@@ -10,30 +10,30 @@
 <form method="post" action="#ENV{action}"><div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<fieldset id="comments-type">
-		<legend>Liste ou thread ?</legend>
+		<legend><:comments:cfg_type_legende:></legend>
 		<ul>
 			<li class="comments_fil[ (#ENV**{erreurs}|table_valeur{comments_fil}|oui)erreur]">
-				<label for="comments_fil">Pr&eacute;sentation du&nbsp;fil de discussion</label>[
+				<label for="comments_fil"><:comments:cfg_type_label:></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="comments_fil" id="comments_fil">
-						<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]>Liste de commentaires (&agrave; plat)</option>
-						<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]>Enfilade de commentaires (en thread)</option>
-						<option value="thread-1"[(#ENV{comments_fil,list}|=={thread-1}|oui) selected="selected"]>Enfilade de commentaires (en thread) &agrave; un niveau</option>
+					<option value="list"[(#ENV{comments_fil,list}|=={list}|oui) selected="selected"]><:comments:cfg_option_liste:></option>
+					<option value="thread"[(#ENV{comments_fil,list}|=={thread}|oui) selected="selected"]><:comments:cfg_option_thread:></option>
+					<option value="thread-1"[(#ENV{comments_fil,list}|=={thread-1}|oui) selected="selected"]><:comments:cfg_option_thread_un:></option>
 				</select>
 			</li>
 		</ul>
 	</fieldset>
 	<fieldset id="comments-permalien">
-		<legend>Permalien</legend>
+		<legend><:comments:cfg_permalien_legende:></legend>
 		<ul>
 			<li class="comments_permalink[ (#ENV**{erreurs}|table_valeur{comments_permalink}|oui)erreur]">
-				<label for="permalink">Apparence du lien permanent vers le commentaire</label>[
+				<label for="permalink"><:comments:cfg_permalien_label:></label>[
 				<span class='erreur'>(#ENV**{erreurs}|table_valeur{comments_fil})</span>
 				]<select name="permalink" id="permalink" style="width: 12em;">
-					<option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]>Aucun</option>
-					<option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]>Di&egrave;se (#)</option>
-					<option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]>Compteur (1.)</option>
-					<option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]>Picto</option>
+					<option value="aucun"[(#ENV{permalink,diese}|=={aucun}|oui) selected="selected"]><:comments:cfg_option_aucun:></option>
+					<option value="diese"[(#ENV{permalink,diese}|=={diese}|oui) selected="selected"]><:comments:cfg_option_diese:></option>
+					<option value="compteur"[(#ENV{permalink,diese}|=={compteur}|oui) selected="selected"]><:comments:cfg_option_compteur:></option>
+					<option value="picto"[(#ENV{permalink,diese}|=={picto}|oui) selected="selected"]><:comments:cfg_option_picto:></option>
 				</select>
 			</li>
 		</ul>
@@ -69,7 +69,7 @@
 		</ul>
 	</fieldset>
 	<p class="boutons">
-		<input type="submit" name="enregistrer" class="submit" value="<:enregistrer:>" />
+		<input type="submit" name="enregistrer" class="submit" value="<:bouton_valider:>" />
 	</p>
 </div></form>
 </div>
