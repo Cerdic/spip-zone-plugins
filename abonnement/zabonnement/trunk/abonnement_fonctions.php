@@ -54,7 +54,6 @@ if (is_numeric($id_objet)){
 	$zones=array_merge($zones,accesrestreint_zones_rubrique($id_parent));
 	
 	foreach($zones as $id_zone){
-		spip_log("abonne_objet id_parent=$id_parent id_zone=$id_zone",'abonnement');
 		if(accesrestreint_acces_zone($id_zone,$id_auteur)) 
 			return true;
 	}
@@ -69,7 +68,6 @@ if (is_numeric($id_objet)){
 		$where[] = "statut_abonnement IN ('paye','offert')";
 
 	$liste_objets = sql_getfetsel('id_objet','spip_contacts_abonnements',$where);
-	spip_log("abonne_objet $objet => $id_objet et $id_rubrique et $liste_objets",'abonnement');
 	if ($liste_objets) return $liste_objets;
 	}
 	
@@ -96,7 +94,6 @@ if (is_numeric($id_objet)){
 	if ($exact!='oui') $valide=false;
 	
 	if($valide){
-	spip_log("abonne_objet id_abonnement = $id_abo et exact=$exact et valide=$valide et date=$date et date_utile=$date_utile et validite=$validite",'abonnement');
 	return true;
 	}
 

@@ -16,50 +16,16 @@
             #MODELE{article_traductions}
         </div>
         
-        #SET{valide,non}
-[(#REM) <!--  acces a l'article ? -->]
-	<BOUCLE_article_abonne(CONTACTS_ABONNEMENTS){objet=article}{id_objet=#ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
-	#SET{valide,oui}
-	[(#REM)
-	#ID_AUTEUR est abonne a l'article donc on a une ouverture d'autorisation
-	]
-	</BOUCLE_article_abonne>
-	
-[(#REM) <!-- sinon acces a la rubrique ? -->]	
-		<BOUCLE_rubrique_abonne(CONTACTS_ABONNEMENTS){objet=rubrique}{id_objet=#ID_RUBRIQUE}{id_auteur=#SESSION{id_auteur}}{statut_abonnement IN paye,offert}{validite>=#GET{today}}>
-		#SET{valide,oui}
-		[(#REM)
-		#ID_AUTEUR est abonne a la rubrique donc on a une ouverture d'autorisation de 3 jours
-		]
-		</BOUCLE_rubrique_abonne>
-		
-[(#REM) <!-- sinon abonnement ET la date de publication de la rubrique est dans les dates -->]
-			<BOUCLE_thisrubrique(RUBRIQUES){id_rubrique}{tout_voir}>
-				<BOUCLE_tester_date(CONTACTS_ABONNEMENTS){id_auteur=#SESSION{id_auteur}}{date<=#DATE_UTILE}{validite>=#DATE_UTILE}{statut_abonnement IN paye,offert}>
-					#SET{valide,oui} 
-					
-					[(#REM) ...car la date de publication est comprise entre le debut et la fin d'un des abonnements du contact
-					<br />debut #DATE <= #DATE_UTILE 
-					<br />fin #VALIDITE >= #DATE_UTILE
-					<br />Pour en etre sur exact doit valoir oui, sinon invalider
-					]
+#SET{valide,non}
+[(#SESSION{id_auteur}|abonne_objet{article,#ID_ARTICLE}|oui) #SET{valide,oui} ]
 				
-					<BOUCLE_verifier_exact(ABONNEMENTS){id_abonnement=#ID_OBJET}>
-						[(#EXACT|!={oui}|oui) 
-						#SET{valide,non} 
-						]
-					</BOUCLE_verifier_exact>
-				
-				</BOUCLE_tester_date>
-			</BOUCLE_thisrubrique>
-			
-		<//B_rubrique_abonne>		
-[(#REM) <!-- de toutes facon si un abonnement ouvre l'acces restreint, cette page n'est pas appellee -->]
-	<//B_article_abonne>
+[(#REM) <!-- si un abonnement ouvre l'acces restreint, cette page n'est pas appellee -->]
+ 
  
 [(#GET{valide}|=={oui}|oui)
-<h3  style="background:url('#CHEMIN{img_pack/acces-ok-24.png}') left top no-repeat; padding-left:2em; min-height:2em;">
-Vous etes autorise a voir l'article et a telecharger les documents</h3>
+		<h3 class="acces_autorise_h3" title="<:abo:acces_ouvert:>">
+		<:abo:acces_complet:>
+		</h3>
 
 
 <INCLURE{fond=inclure/documents_article,id_article,id_rubrique}>

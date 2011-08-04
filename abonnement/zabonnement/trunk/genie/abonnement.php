@@ -30,7 +30,7 @@ function abonnement_dist($t){
 		//on note echu le statut abonnement	
 		sql_updateq("spip_contacts_abonnements",array('statut_abonnement'=>'echu'),"id_contacts_abonnement='$id_contabo'");
 		
-		spip_log("Pour auteur $id_auteur fermer zones ($ids_zone) abonnement $id_contabo validite=$validite",'abonnement');
+		if (_DEBUG_ABONNEMENT) spip_log("Pour auteur $id_auteur fermer zones ($ids_zone) abonnement $id_contabo validite=$validite",'abonnement');
 	}
 	
 return 1;

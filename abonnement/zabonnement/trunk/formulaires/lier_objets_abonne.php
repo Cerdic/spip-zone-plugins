@@ -32,18 +32,12 @@ function formulaires_lier_objets_abonne_verifier($objet, $source, $id_source, $i
 
 function formulaires_lier_objets_abonne_traiter($objet, $source, $id_source, $identifiant){
 	$id_objet = _request('pid_objet');
-	// (article,12041,objet_type(auteurs),219)
-	spip_log("($source,$id_source,".objet_type($objet).",$id_objet)",'abonnement');
 	include_spip('action/editer_contactabonnement');
 			$arg=array(
 				'id_auteur'=>$id_objet,
 				'objet'=>$source,
 				'table'=>"spip_".$source."s",
 				'ids' => array($id_source), //tjs envoyer un array
-				//'prix'=>$abo['prix_unitaire_ht'],
-				//'duree'=>3,
-				//'periode'=>'jour',
-				//'id_commandes_detail'=>$abo['id_commandes_detail'],
 				'statut'=>'offert',//puisque espace prive
 				);
 
