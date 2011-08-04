@@ -8,10 +8,10 @@
 		&#169; 2011 - GNU/GPL
 	</licence>
 	<version>
-	0.1
+	0.2
 	</version>
 	<etat>
-	dev
+	test
 	</etat>
 	<description>
 	Importer une sauvegarde d'un systeme de blog comme blogspot
@@ -21,6 +21,7 @@
 	<prefix>
 	Importerblog
 	</prefix>
+	<lien>http://www.spip-contrib.net/Importer_blog</lien>
 	<categorie>outils</categorie>
 	<necessite id="SPIP" version="[2.1.0;]" />
 </plugin>
