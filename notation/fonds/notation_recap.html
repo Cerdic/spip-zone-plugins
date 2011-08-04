@@ -89,7 +89,7 @@
 	<BOUCLE_derniers_votes(NOTATIONS){0,10}{!par maj}>
 	<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
 		[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
-		<td>#MAJ|affdate_court</td>
+		<td>[(#MAJ|affdate_court)]</td>
 		<td>#NOTE</td>
 	</tr>
 	</BOUCLE_derniers_votes>
