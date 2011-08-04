@@ -78,7 +78,7 @@ function organisation_set($id_organisation, $set=null) {
 	
 	$c = array();
 	foreach ($champs as $champ)
-		$c[$champ] = _request($champ,$set);
+		$c[$champ] = _request($champ, $set);
 
 		
 	include_spip('inc/modifier');
@@ -131,7 +131,9 @@ function instituer_organisation($id_organisation, $c, $calcul_rub=true){
 	$id_parent_actuel = $row['id_parent'];
 	$champs = array();
 
-	
+spip_log($c, 'l');	
+spip_log($row, 'l');
+spip_log($id_organisation, 'l');
 	// Verifier que le parent demandee existe et est different
 	// du parent actuel
 	if (isset($c['id_parent'])
@@ -139,7 +141,7 @@ function instituer_organisation($id_organisation, $c, $calcul_rub=true){
 		AND $id_parent != $id_parent_actuel
 		AND sql_getfetsel('1', 'spip_organisations', 'id_organisation='.$id_parent))
 	{
-		$champs['id_parent'] = intval($id_parent);
+		$champs['id_parent'] = $id_parent;
 	}
 	
 	// Envoyer aux plugins

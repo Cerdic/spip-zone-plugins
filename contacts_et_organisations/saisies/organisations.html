@@ -12,8 +12,8 @@
 <a href="#" id="changer_selection_organisation"><:contacts:changer:></a>
 <div id="selection_organisation">
 <BOUCLE_organisation(ORGANISATIONS){id_organisation=#ENV{valeur,#ENV{defaut}}}{tout}>
-<input type="hidden" name="#ENV{nom}" value="#ID_ORGANISATION" />
 <input type="text" name="#ENV{nom}" readonly="readonly" value="#NOM" />
+<input type="hidden" name="#ENV{nom}" value="#ID_ORGANISATION" />[(#REM) La vrai valeur a priorite]
 </BOUCLE_organisation>
 </div>
 
