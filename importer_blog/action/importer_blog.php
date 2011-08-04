@@ -372,7 +372,7 @@ function importer_texte($t) {
 		if (preg_match(',^<a [^>]*>(.*)</a>$,Uims', $l, $r)
 		AND $href = extraire_attribut($l, 'href')
 		) {
-			$repl = '['.$r[1].'->'.$href.']';
+			$repl = '['.$r[1].'->'.trim($href).']';
 			$t = str_replace($l, $repl, $t);
 		}
 	}
