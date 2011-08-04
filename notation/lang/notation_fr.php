@@ -34,9 +34,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tables' => 'Cr&eacute;er les tables',
 
 	// D
+	'date' => 'date',
 	'destruction' => 'Destruction des tables',
 	'detruit' => 'Tables d&eacute;truites...',
 	'detruire' => '<strong style="color:red">Attention, cette commande va d&eacute;truire les tables du plugin !</strong><br />Vous ne devez l\'utiliser que si vous voulez d&eacute;activer le plugin...',
+	'derniers_votes' => 'Derniers votes',
 
 	// E
 	'effacer_tables' => '&Eacute;ffacer les tables',

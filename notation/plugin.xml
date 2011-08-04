@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Notation[en]Rating</multi></nom>
 	<auteur>JEM - b_b - Matthieu Marcillaud</auteur>
-	<version>0.9.4</version>
+	<version>0.9.5</version>
 	<version_base>0.6.3</version_base>
 	<etat>stable</etat>
 	<prefix>notation</prefix>

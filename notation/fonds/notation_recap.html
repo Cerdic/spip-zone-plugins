@@ -74,3 +74,25 @@
 	</table>
 </div>
 </B_nombre_votes>
+
+
+
+<B_derniers_votes>
+<div class="cadre cadre-trait-couleur" style="padding: 5px;">
+	<div class="titrem"><:notation:derniers_votes:></div>
+	<table>
+		<tr>
+			<td><:notation:objets:></td>
+			<td><:notation:date:></td>
+			<td style='width:10%;'><:notation:vote:></td>
+		</tr>
+	<BOUCLE_derniers_votes(NOTATIONS){0,10}{!par maj}>
+	<tr[ style="background:(#COMPTEUR_BOUCLE|alterner{#eee,#fff});"]>
+		[(#INCLURE{fond=modeles/inc-notation-preferee-#OBJET}{id_objet})]
+		<td>#MAJ|affdate_court</td>
+		<td>#NOTE</td>
+	</tr>
+	</BOUCLE_derniers_votes>
+	</table>
+</div>
+</B_derniers_votes>
