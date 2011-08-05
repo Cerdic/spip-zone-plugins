@@ -8,18 +8,18 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'config_desc' => '<NEW><strong>Paleta</strong> automaticky pridá koliesko s výberom farieb k vstupnému poľu,
+	'config_desc' => '<strong>Paleta</strong> automaticky pridá koliesko s výberom farieb k vstupnému poľu,
   ak ho označíte CSS triedou palette',
-	'config_exemple' => '<NEW>Vzorka :',
-	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Cf. documentation</a>', # NEW
+	'config_exemple' => 'Príklad:',
+	'config_lien_doc' => '<a href="http://www.spip-contrib.net/Palette" class="spip_out">Dokumentácia</a>',
 
 	// F
-	'fermer' => '<NEW>Zatvoriť paletu',
+	'fermer' => 'Zatvoriť paletu',
 
 	// P
-	'palette' => '<NEW>Paleta',
-	'palette_ecrire' => '<NEW>Aktivovať paletu pre súkromnú zónu',
-	'palette_public' => '<NEW>Aktivovať paletu pre verejnú zónu'
+	'palette' => 'Paleta',
+	'palette_ecrire' => 'Aktivovať paletu pre súkromnú zónu',
+	'palette_public' => 'Aktivovať paletu pre verejne prístupnú stránku'
 );
 
 ?>
