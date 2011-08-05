@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'None',
 	'entree_bloc' => 'Zpip block',
 	'entree_choisir' => 'Choose the type of item you want to add:',
+	'entree_classe_parent' => 'Classe des liens des éléments parents. Cette classe sera rajoutée aux li>a ayant une suite ul/li. Par exemple, si vous saisissez "daddy", cela vous permet d\'utiliser le plugin menu deroulant 2 pour la mise en forme du menu.', # NEW
 	'entree_connexion_objet' => 'Requires being connected (insert "session") or disconnected (insert "nosession") in order to see the object',
 	'entree_contenu' => 'Content',
 	'entree_css' => 'CSS classes of this (container) item',
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Maximum number of articles (0 by default)',
 	'entree_page' => 'Name of the page',
 	'entree_parametres' => 'List of parameters',
+	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques list&eacute;s &agrave; xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
 	'entree_sousrub_cond' => 'Only display the subsections for the current section (enter "oui" (yes), otherwise leave it empty)',
 	'entree_sur_n_articles' => '@n@ article(s) shown',
 	'entree_sur_n_mots' => '@n@ keyword(s) shown',
@@ -66,8 +68,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_prive' => 'The title for accessing the private zone',
 	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)', # NEW
 	'entree_traduction_objet' => 'For an article, select the translation depending on the context (insert "trad" to accomplish this)',
-	'entree_tri_alpha' => 'Sort criterion (alphabetic)',
-	'entree_tri_num' => 'Sort criterion (numeric)',
+	'entree_tri_alpha' => 'Sort criterion (alphabetic)', # MODIF
+	'entree_tri_alpha_articles' => 'Critère de tri des articles (alphabétique). Si vous saisissez "date", le critère ajouté sera {par date} et les articles seront triés par date', # NEW
+	'entree_tri_alpha_articles_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_alpha_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num' => 'Sort criterion (numeric)', # MODIF
+	'entree_tri_num_articles' => 'Critère de tri des articles (numérique). Si vous saisissez "titre", le critère ajouté sera {par num titre} et les articles seront triés par numéro de titre', # NEW
+	'entree_tri_num_articles_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
 	'entree_type_objet' => 'Object type',
 	'entree_url' => 'URL',
 	'entree_url_public' => 'Return address after logging in',
@@ -113,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
 	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
+	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
 	'info_connexion_obligatoire' => 'Connection required',
 	'info_deconnexion_obligatoire' => 'Only when disconnected',
 	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
@@ -120,12 +129,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_page_speciale' => 'Link to the page « @page@ »',
 	'info_page_speciale_zajax' => 'Modalbox for the "@page@" page for the "@bloc@" block',
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
+	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
 	'info_sousrub_cond' => 'Only the subsections of the current section are displayed.',
 	'info_tous_groupes_mots' => 'All keyword groups',
 	'info_traduction_recuperee' => 'The context will determine the selected translation',
-	'info_tri' => 'Sort:',
+	'info_tri' => 'Sort:', # MODIF
 	'info_tri_alpha' => '(alphabetical)',
+	'info_tri_articles' => 'Tri des articles :', # NEW
 	'info_tri_num' => '(numerical)',
 
 	// N
@@ -150,7 +161,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'Free text',
 
 	// T
-	'tous_les_articles' => '... Tous les articles' # NEW
+	'tous_les_articles' => '... Tous les articles', # NEW
+	'toutes_les_rubriques' => '... Toutes les rubriques' # NEW
 );
 
 ?>

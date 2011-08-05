@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Nessun',
 	'entree_bloc' => 'Bloc Zpip', # NEW
 	'entree_choisir' => 'Scegli il tipo di voce che vuoi aggiungere:',
+	'entree_classe_parent' => 'Classe des liens des éléments parents. Cette classe sera rajoutée aux li>a ayant une suite ul/li. Par exemple, si vous saisissez "daddy", cela vous permet d\'utiliser le plugin menu deroulant 2 pour la mise en forme du menu.', # NEW
 	'entree_connexion_objet' => 'Obliger à être connecté (mettre "session") ou déconnecté (mettre "nosession") pour voir l\'objet', # NEW
 	'entree_contenu' => 'Contenu', # NEW
 	'entree_css' => 'Classi CSS della voce', # MODIF
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Numero massimo di articoli (0 predefinito)',
 	'entree_page' => 'Nome della pagina',
 	'entree_parametres' => 'Lista dei parametri',
+	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques list&eacute;s &agrave; xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
 	'entree_sousrub_cond' => 'N\'afficher que les sous-rubriques de la rubrique en cours (mettre "oui", sinon laisser vide)', # NEW
 	'entree_sur_n_articles' => '@n@ articoli mostrati',
 	'entree_sur_n_mots' => '@n@ parole chiave mostrate',
@@ -66,8 +68,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_prive' => 'Titolo per accedere alla redazione',
 	'entree_traduction_articles_rubriques' => 'Dans la mesure du possible, afficher les articles de la rubrique dans la langue du contexte (mettre "trad" pour cela)', # NEW
 	'entree_traduction_objet' => 'Dans le cas d\'un article, choisir la traduction en fonction du contexte (mettre "trad" pour cela)', # NEW
-	'entree_tri_alpha' => 'Criterio di ordinamento (alfabetico)',
-	'entree_tri_num' => 'Criterio di ordinamento (numerico)',
+	'entree_tri_alpha' => 'Criterio di ordinamento (alfabetico)', # MODIF
+	'entree_tri_alpha_articles' => 'Critère de tri des articles (alphabétique). Si vous saisissez "date", le critère ajouté sera {par date} et les articles seront triés par date', # NEW
+	'entree_tri_alpha_articles_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_alpha_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num' => 'Criterio di ordinamento (numerico)', # MODIF
+	'entree_tri_num_articles' => 'Critère de tri des articles (numérique). Si vous saisissez "titre", le critère ajouté sera {par num titre} et les articles seront triés par numéro de titre', # NEW
+	'entree_tri_num_articles_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
 	'entree_type_objet' => 'Tipo di oggetto',
 	'entree_url' => 'Indirizzo',
 	'entree_url_public' => 'Adresse de retour après la connexion', # NEW
@@ -113,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_afficher_articles' => 'Les articles seront inclus dans le menu.', # NEW
 	'info_articles_max' => 'Seulement si la rubrique contient au plus @max@ articles', # NEW
 	'info_articles_max_affiches' => 'Affichage limit&eacute; &agrave; @max@ articles', # NEW
+	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
 	'info_connexion_obligatoire' => 'Connexion obligatoire', # NEW
 	'info_deconnexion_obligatoire' => 'Uniquement déconnecté', # NEW
 	'info_masquer_articles_uniques' => 'Articles uniques masqu&eacute;s', # NEW
@@ -120,12 +129,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_page_speciale' => 'Link verso la pagina "@page@"',
 	'info_page_speciale_zajax' => 'Modalbox de la page « @page@ » pour le bloc « @bloc@ &#187', # NEW
 	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
+	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
 	'info_secteur_exclus' => ' / sauf secteur(s) @id_secteur@', # NEW
 	'info_sousrub_cond' => 'Seules les sous-rubriques de la rubriques en cours sont affichées.', # NEW
 	'info_tous_groupes_mots' => 'Tutti i gruppi di parole chiave',
 	'info_traduction_recuperee' => 'Le contexte décidera de la traduction choisie', # NEW
-	'info_tri' => 'Ordina:',
+	'info_tri' => 'Ordina:', # MODIF
 	'info_tri_alpha' => '(alfabetico)',
+	'info_tri_articles' => 'Tri des articles :', # NEW
 	'info_tri_num' => '(numerico)',
 
 	// N
@@ -150,7 +161,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'Texte libre', # NEW
 
 	// T
-	'tous_les_articles' => '... Tous les articles' # NEW
+	'tous_les_articles' => '... Tous les articles', # NEW
+	'toutes_les_rubriques' => '... Toutes les rubriques' # NEW
 );
 
 ?>

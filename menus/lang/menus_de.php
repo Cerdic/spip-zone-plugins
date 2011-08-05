@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_aucun' => 'Keiner',
 	'entree_bloc' => 'ZPIP Block',
 	'entree_choisir' => 'Wählen sie die Art EIntrag, die sie hinzufügen wollen:',
+	'entree_classe_parent' => 'Classe des liens des éléments parents. Cette classe sera rajoutée aux li>a ayant une suite ul/li. Par exemple, si vous saisissez "daddy", cela vous permet d\'utiliser le plugin menu deroulant 2 pour la mise en forme du menu.', # NEW
 	'entree_connexion_objet' => 'Objekt wird nur angezeigt, wenn man entweder eingelogt ("session" eintragen) oder nicht eingelogt ist ("nosession" eintragen)',
 	'entree_contenu' => 'Inhalt',
 	'entree_css' => 'CSS-Klassen des Eintrags (des Containers)',
@@ -49,7 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_id_objet' => 'Nummer',
 	'entree_id_rubrique' => 'Nummer der übergeordeneten Rubrik',
 	'entree_id_rubriques_exclues' => 'Nummern der auszuschließenden Rubriken, getrennt durch Semikolons.',
-	'entree_id_secteur_exclus' => 'Nummer des auszuschließenden Sektors', # MODIF
+	'entree_id_secteur_exclus' => 'Nummern der auszuschließenden Sektoren, getrennt mit Kommata',
 	'entree_infini' => 'Unendlich',
 	'entree_mapage' => 'Meine eigene Seite',
 	'entree_masquer_articles_uniques' => 'Wenn ja und falls die Rubrik nur einen Artikel enthält wird dieser maskiert ("oui" eintragen wenn gewünscht).',
@@ -57,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_nombre_articles' => 'Maximale Anzahl Artikel (Standardwert 0)',
 	'entree_page' => 'Name der Seite',
 	'entree_parametres' => 'Parameterliste',
+	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques list&eacute;s &agrave; xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
 	'entree_sousrub_cond' => 'Nur Unterrubriken der aktuellen Rubrik anzeigen ("oui" eintragen, falls nicht gewünscht leer lassen)',
 	'entree_sur_n_articles' => '@n@ Artikel angezeigt',
 	'entree_sur_n_mots' => '@n@ Worte angezeigt',
@@ -66,8 +68,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_titre_prive' => 'Titel für den Redaktionszugang',
 	'entree_traduction_articles_rubriques' => 'Wenn möglich Artikel der Rubrik in der Sprache des Kontext anzeigen ("oui" eintragen wenn gewünscht)',
 	'entree_traduction_objet' => 'Übersetzung von Artikeln in Abhängigkeit vom Sprachkontext auswählen (für diese EInstellung "trad" eintragen)',
-	'entree_tri_alpha' => 'Sortierkriterium (alphanumerisch)',
-	'entree_tri_num' => 'Sortierkriterium (numerisch)',
+	'entree_tri_alpha' => 'Sortierkriterium (alphanumerisch)', # MODIF
+	'entree_tri_alpha_articles' => 'Critère de tri des articles (alphabétique). Si vous saisissez "date", le critère ajouté sera {par date} et les articles seront triés par date', # NEW
+	'entree_tri_alpha_articles_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_alpha_inverse' => 'Inverser le critère de tri alphabétique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num' => 'Sortierkriterium (numerisch)', # MODIF
+	'entree_tri_num_articles' => 'Critère de tri des articles (numérique). Si vous saisissez "titre", le critère ajouté sera {par num titre} et les articles seront triés par numéro de titre', # NEW
+	'entree_tri_num_articles_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
+	'entree_tri_num_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
 	'entree_type_objet' => 'Objekttyp',
 	'entree_url' => 'Adresse',
 	'entree_url_public' => 'Zieladresse nach der Anmeldung',
@@ -113,19 +121,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_afficher_articles' => 'Artikel werden im Menü angezeigt',
 	'info_articles_max' => 'Nur wenn die Rubrik maximal @max@ Artikel enthält.',
 	'info_articles_max_affiches' => 'Anzeige ist begrenst auf maximal @max@  Artikel.',
+	'info_classe_parent' => 'Classe des éléments parents : ', # NEW
 	'info_connexion_obligatoire' => 'Login obligatorisch',
 	'info_deconnexion_obligatoire' => 'Nur wenn nicht eingelogt',
 	'info_masquer_articles_uniques' => 'Einzelne Artikel maskieren.',
 	'info_numero_menu' => 'MENÜ NUMMER:',
 	'info_page_speciale' => 'Link zu Seite « @page@ »',
 	'info_page_speciale_zajax' => 'Modale Box der Seite « @page@ » für den Block « @bloc@ »',
-	'info_rubriques_exclues' => ' / sauf rubrique(s) @id_rubriques@', # NEW
-	'info_secteur_exclus' => '(außer Sektor @id_secteur@)', # MODIF
+	'info_rubriques_exclues' => ' / außer Rubrik(en) @id_rubriques@',
+	'info_rubriques_max_affichees' => 'Affichage limit&eacute; &agrave; @max@ rubriques', # NEW
+	'info_secteur_exclus' => ' / außer Sektor(en) @id_secteur@',
 	'info_sousrub_cond' => 'Nur die Unterrubriken der aktuellen Rubrik werden angezeigt',
 	'info_tous_groupes_mots' => 'Alle Schlagwortgruppen',
 	'info_traduction_recuperee' => 'Die angezeigte Übersetzung wird je nach Sprachkontext gewählt.',
-	'info_tri' => 'Sortierung:',
+	'info_tri' => 'Sortierung:', # MODIF
 	'info_tri_alpha' => '(alphabetisch)',
+	'info_tri_articles' => 'Tri des articles :', # NEW
 	'info_tri_num' => '(numerische)',
 
 	// N
@@ -150,7 +161,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nom_menu_texte_libre' => 'Freitext',
 
 	// T
-	'tous_les_articles' => '... alle Artikel'
+	'tous_les_articles' => '... alle Artikel',
+	'toutes_les_rubriques' => '... Toutes les rubriques' # NEW
 );
 
 ?>
