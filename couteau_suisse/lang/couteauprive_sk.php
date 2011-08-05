@@ -141,23 +141,23 @@ Tu môžete definovať skratky SPIPU. Prázdna hodnota je ekvivalentom k použit
 SPIP na podnadpisy štandardne používa tag <h3>. Tu môžete vybrať iný tag: [[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
 
-SPIP normally uses <strong> for marking boldface type. But <b> could also be used. You can choose: [[%racc_g1%]][[->%racc_g2%]]
+Na označenie tučného písma SPIP obyčajne používa tag <strong>. Ale tag <b> môžete použiť tiež. Môžete si vybrať: [[%racc_g1%]][[->%racc_g2%]]
 
-SPIP normally uses <i> for marking italics. But <em> could also be used. You can choose: [[%racc_i1%]][[->%racc_i2%]]
+Na označenie kurzívy SPIP obyčajne používa tag <i>. Ale tag <em> môžete použiť tiež. Môžete si vybrať: [[%racc_i1%]][[->%racc_i2%]]
 
- You can also define the code used to open and close the calls to footnotes (N.B. These changes will only be visible on the public site.): [[%ouvre_ref%]][[->%ferme_ref%]]
+ Môžete definovať aj kód, ktorý sa bude používať na otváranie a uzatváranie volania poznámok pod čiarou.(Pozn. Tieto zmeny uvidíte len na verejne prístupnej stránke.): [[%ouvre_ref%]][[->%ferme_ref%]]
  
- You can define the code used to open and close footnotes: [[%ouvre_note%]][[->%ferme_note%]]
+  Môžete definovať aj kód, ktorý sa bude používať na otváranie a uzatváranie poznámok pod čiarou: [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{SPIP styles}}. Up to version 1.92 of SPIP, typographical shortcuts produced HTML tags all marked with the class "spip". For exeample, <code><p class="spip"></code>. Here you can define the style of these tags to link them to your stylesheet. An empty box means that no particular style will be applied.
+@puce@ {{Štýly SPIPu}}. Do verzie 1.92, klávesové skratky vytvárali HTML tagy, ktoré boli označené ako trieda "spip". Napríklad <code><p class="spip"></code>. Tu môžete definovať štýl týchto tagov, aby sa prepojili s vaším štýlopisom. Prázdne pole znamená, že sa nepoužije žiaden štýl.
 
-{N.B. If any shortcuts above (horizontal line, subtitle, italics, bold) have been modified, then the styles below will not be applied.}
+{Pozn. Ak sa niektorá zo skratiek uvedených vyššie zmení (vodorovná čiara, podnázov, kurzíva, tučné písmo), potom sa štýly uvedené nižšie nepoužijú.}
 
 <q1>
-_ {{1.}} Tags <p>, <i>, <strong>: [[%style_p%]]
-_ {{2.}} Tags <tables>, <hr>, <h3>, <blockquote> and the lists (<ol>, <ul>, etc.):[[%style_h%]]
+_ {{1.}} Tagy <p>, <i>, <strong>: [[%style_p%]]
+_ {{2.}} Tagy <tables>, <hr>, <h3>, <blockquote> a zoznamy (<ol>, <ul>, atď.):[[%style_h%]]
 
-N.B.: by changing the second parameter you will lose any standard styles associated with these tags.</q1>', # MODIF
+Pozn.: zmenou  druhého parametra stratíte štandardné štýly priradené k týmto tagom.</q1>',
 	'class_spip:nom' => 'SPIP and its shortcuts...',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Funkcie',
@@ -272,10 +272,10 @@ This tool may be combined with "[.->sommaire]".', # MODIF
 	// E
 	'ecran_activer' => 'Povoliť bezpečnostnú obrazovku',
 	'ecran_conflit' => 'Varovanie: súbor "@file@" spôsobuje konflikt a mal by byť odstránený!',
-	'ecran_conflit2' => 'Note: a static file named "@file@" has been detected and activated. The Swiss Knife could not update it or configure it.', # NEW
+	'ecran_conflit2' => 'Poznámka: statický súbor s názvom "@file@" sa našiel a bol aktivovaný. Modul Vreckový nožík ho nevedel aktualizovať ani nastaviť.',
 	'ecran_ko' => 'Neaktívna obrazovka!',
-	'ecran_maj_ko' => 'Version {{@n@}} of the security screen is available. Please update the remote file for this utility.', # NEW
-	'ecran_maj_ko2' => 'Version @n@ of the safetu screen is available. You can update the remote file " [.->ecran_securite] ".', # NEW
+	'ecran_maj_ko' => 'K dispozícii je verzia {{@n@}} bezpečnostnej obrazovky. Prosím, aktualizujte vzdialený súbor tejto utility.',
+	'ecran_maj_ko2' => 'K dispozícii je verzia @n@ bezpečnostnej obrazovky. Môžete aktualizovať vzdialený súbor " [.->ecran_securite] ".',
 	'ecran_maj_ok' => '(zdá sa, že je aktuálny).',
 	'ecran_securite:description' => 'The security screen is a PHP file directly downloaded from the official SPIP site which protects your sites by blocking certain attacks aimed at specific security flaws. This system allows you to react very quickly whenever a problem is discovered, by covering up for such flaws without needing to immediately update your site nor apply any complex patches.
 
@@ -357,10 +357,10 @@ Thus multi blocks are always displayed in the language requested by the visitor.
 	// H
 	'help' => '{{This page is only accessible to main site administrators.}} It gives access to the configuration of some additional functions of the {{Penknife}}.',
 	'help2' => 'Lokálna verzia: @version@',
-	'help3' => '<p>Odkazy na dokumentáciu:<br/>• [Le Couteau Suisse->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Obnovenie:
+	'help3' => '<p>Odkazy na dokumentáciu:<br/>• [{{Vreckový nožík}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>Obnovenie:
 _ • [Skryté nastavenia|Návrat na pôvodný vzhľad tejto stránky->@hide@]
 _ • [Celý zásuvný modul|Nastaviť na pôvodné nastavenia zásuvného modulu->@reset@]@install@
-</p>', # MODIF
+</p>',
 	'horloge:description' => 'Nástroj vo vývoji. Ponúka javascriptové hodiny. Tag: <code>#HORLOGE{format,utc,id}</code>. Model: <code><horloge></code>',
 	'horloge:nom' => 'Hodiny',
 
@@ -442,7 +442,7 @@ N.B. This tool requires the {Round Corners} jQuery plugin in order to function. 
 	'label:i_couleur' => 'Farba písma:',
 	'label:i_hauteur' => 'Výška riadka:',
 	'label:i_largeur' => 'Maximálna šírka riadka:',
-	'label:i_padding' => 'Text padding:', # NEW
+	'label:i_padding' => 'Obtekanie textu:',
 	'label:i_police' => 'Súbor písma priečinky ({polices/}):',
 	'label:i_taille' => 'Veľkosť písma:',
 	'label:img_GDmax' => 'Výpočty obrázkov s GD:',
@@ -516,7 +516,7 @@ _ • {Basic}: links such as {<html>http://spip.net</html>} (whatever protocol) 
 _ • {Extended}: additionally links such as these are also replaced:  {<html>me@spip.net</html>}, {<html>mailto:myaddress</html>} ou {<html>news:mynews</html>}.
 _ • {By default}: automatic replacement (from SPIP version 2.0).
 [[%liens_orphelins%]]', # MODIF
-	'liens_orphelins:description1' => '[[If the URL is more than %long_url% characters long, SPIP will reduce it to %coupe_url% characters]].', # NEW
+	'liens_orphelins:description1' => '[[Ak má internetová adresa viac ako %long_url% znakov, SPIP ju zmenší na %coupe_url% znakov]].',
 	'liens_orphelins:nom' => 'Pekné www adresy',
 
 	// M
@@ -669,7 +669,7 @@ The summary can be used in conjunction with : {[.->decoupe]}.', # MODIF
 	'sommaire_ancres' => 'Vybrané kotvy: <b><html>{{{My Názov<my_anchor>}}}</html></b>',
 	'sommaire_avec' => 'An article with summary: <b>@_CS_AVEC_SOMMAIRE@</b>',
 	'sommaire_sans' => 'An article without summary: <b>@_CS_SANS_SOMMAIRE@</b>',
-	'sommaire_titres' => 'Structured sub-headings: <b><html>{{{*Title}}}</html></b>, <b><html>{{{**Sub-title}}}</html></b>, etc.', # NEW
+	'sommaire_titres' => 'Štruktúrované podnadpisy: <b><html>{{{*Nadpis}}}</html></b>, <b><html>{{{**Podnadpis}}}</html></b>, atď.',
 	'spam:description' => '<MODIF>Attempts to fight against the sending of abusive and automatic messages through forms on the public site. Some words and the tags  &lt;a>&lt;/a> are prohibited. Train your authors to use SPIP shortcuts for links.
 
 @puce@ List here the sequences you wish to prohibit separating them with spaces. [[%spam_mots%]]
@@ -744,7 +744,7 @@ The SPIP function used is: <code>_T(\'a_text\')</code> (with no parmameters), an
 
 Do not forget to check that the variable used <code>\'a_text\'</code> is defined in the language files.', # MODIF
 	'toutmulti:nom' => 'Viacjazyčné bloky',
-	'travaux_masquer_avert' => '<NEW>Masquer le cadre indiquant sur le site public qu\'une maintenance est en cours', # MODIF
+	'travaux_masquer_avert' => 'Schovať rám, ktorý uvádza na verejnej stránke, že sa vykonáva údržba',
 	'travaux_nom_site' => '@_CS_NOM_SITE@',
 	'travaux_prochainement' => 'This site will be back online soon.
 _ Thank you for your understanding.',
@@ -855,8 +855,8 @@ You can also choose here to use superscript for some other abbreviations, despit
 	'urls_type_objet' => '<MODF>Order:',
 	'urls_url_calculee' => 'URL PUBLIC  « @type@ »:',
 	'urls_url_objet' => 'Uložená "čistá" adresa:',
-	'urls_valeur_vide' => '(An empty value triggers the recalculation of the URL)', # MODIF
-	'urls_verrouiller' => '{{Lock}} this URL so that SPIP cannot change it, e.g. when someone clicks on " @voir@ " or when the title is modified.', # NEW
+	'urls_valeur_vide' => '(Prázdna hodnota prepína na obnovenie adresy stránky)',
+	'urls_verrouiller' => '{{Zamknite}} túto internetovú adresu, aby ju SPIP nemohol zmeniť, napr. keď niekto klikne na " @voir@ " alebo keď sa zmení nadpis.',
 
 	// V
 	'validez_page' => 'To access modifications:',
@@ -875,9 +875,9 @@ You can also choose here to use superscript for some other abbreviations, despit
 _ version_texte : extracts the text content of an HTML page, excluding some basic tags.
 _ version_plein_texte : extracts the full text content from an html page.', # MODIF
 	'verstexte:nom' => 'Textová verzia',
-	'visiteurs_connectes:description' => 'Creates an HTML fragment for your templates which displays on the public site the number of vistors logged in.
+	'visiteurs_connectes:description' => 'Vytvorí fragment HTML pre vaše šablóny, ktorý zobrazí počet návštevníkov, ktorí sú práve pripojení na verejnej stránke.
 
-Simply add <code><INCLURE{fond=fonds/visiteurs_connectes}></code> in the template.', # MODIF
+Jednoducho do šablóny pridajte <code><INCLURE{fond=fonds/visiteurs_connectes}>.</code>',
 	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
 	'visiteurs_connectes:nom' => 'Prihlásení návštevníci',
 	'voir' => 'Pozri: @voir@',
