@@ -3,4 +3,7 @@
 		<traducteur nom="abelass1" />
 	</langue>
 	<langue code="en" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
