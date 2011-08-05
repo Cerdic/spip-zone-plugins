@@ -13,13 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_table' => 'Add to the table',
 	'aucune_donnee' => 'There is no data in the file.',
 	'aucune_table_declaree' => 'There is no table declared for the CSV import',
-	'avertissement_ajout' => 'The data in the CSV file will be added to the "@table@" table as illustrated below.',
+	'avertissement_ajout' => 'The data in the CSV file will be added to the "@table@" table as illustrated below.', # MODIF
 	'avertissement_remplacement' => 'This operation will involve deleting all existing data in the table. The data from the file will be inserted as shown below:',
 
 	// C
 	'caracteres_separation' => 'Separator character',
 	'champs_csv' => 'Fields in the CSV file',
-	'champs_table' => 'Fields in the table',
+	'champs_table' => 'Fields in the table', # MODIF
+	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !', # NEW
 	'correspondance_incomplete' => 'The CSV-Table correspondences are incomplete',
 	'correspondance_indefinie' => 'The CSV-Table correspondences are undefined',
 	'csvimport' => 'CSV Import',
@@ -30,12 +31,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreurs_ajout_base' => 'There were @nb@ insertion errors into the database.',
+	'etape' => '(&Eacute;tape @step@ sur 3)', # NEW
 	'export_classique' => 'standard CSV (,)',
 	'export_excel' => 'Excel CSV (;)',
 	'export_format' => 'File format:',
 	'export_table' => 'Export of the table: @table@',
 	'export_tabulation' => 'Tab-separated CSV',
 	'exporter' => 'Export',
+	'extrait_CSV_importe' => 'Extrait du fichier CSV importé : ', # NEW
+	'extrait_table' => 'Extrait de la table "@nom_table@" : ', # NEW
 
 	// F
 	'fichier_absent' => 'Missing file',
@@ -43,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_vide' => 'Empty file',
 
 	// I
-	'import_csv' => 'CSV Import: @table@',
+	'import_csv' => 'CSV Import: @table@', # MODIF
 	'import_export_tables' => 'Import / Export for tables',
 
 	// L
@@ -54,10 +58,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_enregistrements' => '@nb@ records saved',
+	'noms_colonnes_CSV' => 'Noms des colonnes (attendus) du fichier CSV à importer : ', # NEW
 
 	// P
 	'pas_importer' => 'Do not import',
 	'premieres_lignes' => '@nb@ first rows in the file.',
+	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ', # NEW
 	'probleme_chargement_fichier' => 'Problem loading the file',
 	'probleme_chargement_fichier_erreur' => 'Problem loading the file (@erreur@ error).',
 	'probleme_inextricable' => 'Unrecognised error...',

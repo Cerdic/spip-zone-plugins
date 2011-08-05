@@ -18,11 +18,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'caracteres_separation' => 'Caractère de séparation',
 	'champs_csv' => 'Champs du fichier CSV',
 	'champs_table' => 'Champs de la table : "libellé (clé)"',
+	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !',
 	'correspondance_incomplete' => 'Correspondances CSV-Table incomplètes',
 	'correspondance_indefinie' => 'Correspondances CSV-Table non définies',
 	'csvimport' => 'Import CSV',
-	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !',
-	
 
 	// D
 	'delimiteur_indefini' => 'Délimiteur non défini',
@@ -30,15 +29,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreurs_ajout_base' => 'Il y a eu @nb@ erreurs lors de l\'ajout dans la base.',
+	'etape' => '(&Eacute;tape @step@ sur 3)',
 	'export_classique' => 'CSV classique (,)',
 	'export_excel' => 'CSV pour Excel (;)',
 	'export_format' => 'Format du fichier :',
 	'export_table' => 'Export de la table : @table@',
 	'export_tabulation' => 'CSV avec tabulations',
 	'exporter' => 'Exporter',
-	'extrait_table' => 'Extrait de la table "@nom_table@" : ',
-	'etape' => '(&Eacute;tape @step@ sur 3)',
 	'extrait_CSV_importe' => 'Extrait du fichier CSV importé : ',
+	'extrait_table' => 'Extrait de la table "@nom_table@" : ',
 
 	// F
 	'fichier_absent' => 'Fichier absent',
@@ -62,10 +61,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'pas_importer' => 'Ne pas importer',
 	'premieres_lignes' => '@nb@ premières lignes du fichier.',
+	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ',
 	'probleme_chargement_fichier' => 'Problème lors du chargement du fichier',
 	'probleme_chargement_fichier_erreur' => 'Problème lors du chargement du fichier (erreur @erreur@).',
 	'probleme_inextricable' => 'Problème inextricable...',
-	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ',
 
 	// R
 	'remplacer_toute_table' => 'Remplacer toute la table',

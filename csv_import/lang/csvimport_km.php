@@ -13,13 +13,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_table' => 'បន្ថែម ទៅតារាង',
 	'aucune_donnee' => 'គ្មានទិន្នន័យ ក្នុងឯកសារ។',
 	'aucune_table_declaree' => 'Aucune table n\'est déclarée pour l\'import CSV', # NEW
-	'avertissement_ajout' => 'Les données du fichier CSV vont être ajoutées à la table "@table@" comme illustré ci-dessous.', # NEW
+	'avertissement_ajout' => 'Les données du fichier CSV vont être ajoutées à la table "@table@" comme illustré ci-dessous.', # MODIF
 	'avertissement_remplacement' => 'Cette opération va entraîner la suppression de toutes les données présentes dans la table. Les données du fichier seront insérées comme ci-dessous :', # NEW
 
 	// C
 	'caracteres_separation' => 'Caractère de séparation', # NEW
 	'champs_csv' => 'Champs du fichier CSV', # NEW
-	'champs_table' => 'វាល នៃតារាង',
+	'champs_table' => 'វាល នៃតារាង', # MODIF
+	'confirmation_ajout_base' => 'Le CSV a été correctement ajouté à la base !', # NEW
 	'correspondance_incomplete' => 'Correspondances CSV-Table incomplètes', # NEW
 	'correspondance_indefinie' => 'Correspondances CSV-Table non définies', # NEW
 	'csvimport' => 'នាំចូល CSV',
@@ -30,12 +31,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreurs_ajout_base' => 'Il y a eu @nb@ erreurs lors de l\'ajout dans la base.', # NEW
+	'etape' => '(&Eacute;tape @step@ sur 3)', # NEW
 	'export_classique' => 'CSV classique (,)', # NEW
 	'export_excel' => 'CSV pour Excel (;)', # NEW
 	'export_format' => 'ទ្រង់ទ្រាយ នៃឯកសារ ៖',
 	'export_table' => 'ការនាំចេញ នៃតារាង៖ @table@',
 	'export_tabulation' => 'CSV avec tabulations', # NEW
 	'exporter' => 'នាំចេញ',
+	'extrait_CSV_importe' => 'Extrait du fichier CSV importé : ', # NEW
+	'extrait_table' => 'Extrait de la table "@nom_table@" : ', # NEW
 
 	// F
 	'fichier_absent' => 'ឯកសារអវត្តមាន',
@@ -43,7 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fichier_vide' => 'ឯកសារទទេ',
 
 	// I
-	'import_csv' => 'នាំចូល CSV ៖ @table@',
+	'import_csv' => 'នាំចូល CSV ៖ @table@', # MODIF
 	'import_export_tables' => 'នាំចូល / នាំចេញ ក្នុងតារាង',
 
 	// L
@@ -54,10 +58,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'nb_enregistrements' => '@nb@ enregistrements', # NEW
+	'noms_colonnes_CSV' => 'Noms des colonnes (attendus) du fichier CSV à importer : ', # NEW
 
 	// P
 	'pas_importer' => 'គ្មានត្រូវនាំចូល',
 	'premieres_lignes' => '@nb@ បន្ទាត់ដំបូង នៃឯកសារ។',
+	'previsualisation_CSV_integre' => 'Prévisualisation des @nb@ premières lignes du fichier CSV intégrées à la table : ', # NEW
 	'probleme_chargement_fichier' => 'បញ្ហា ពេលទាញយកឯកសារ',
 	'probleme_chargement_fichier_erreur' => 'បញ្ហា ពេលទាញយកឯកសារ (កំហុស @erreur@)។',
 	'probleme_inextricable' => 'Problème inextricable...', # NEW
