@@ -291,5 +291,10 @@ function contacts_insert_head($flux){
 	return $flux;
 }
 
+function contacts_declarer_url_objets($array){ 
+	$array[] = 'organisation'; 
+	$array[] = 'contact'; 
+	return $array; 
+} 
 
 ?>

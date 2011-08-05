@@ -26,7 +26,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	
 	<prefix>contacts</prefix>
 	
-	<version>1.9.1</version>
+	<version>1.9.2</version>
 	<version_base>1.4.1</version_base>
 	
 	<install>base/contacts_upgrade.php</install>
@@ -82,6 +82,11 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 
 	<pipeline>
 		<nom>rechercher_liste_des_champs</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_url_objets</nom>
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
 	
