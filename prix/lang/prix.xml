@@ -1,2 +1,5 @@
 <traduction module="prix" gestionnaire="salvatore" reference="fr">
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
