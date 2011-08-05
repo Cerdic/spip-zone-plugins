@@ -21,6 +21,8 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 	if ($current_version=="0.0") {
 		include_spip('base/create');
 		creer_base();
+		// mettre les auteurs par defaut comme objet «coordonnable»
+		ecrire_meta('coordonnees', serialize(array('objets'=>array('auteur'))));
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 	
@@ -108,6 +110,12 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 		else return false;
 	}
 
+	if (version_compare($current_version, "1.5", "<")) { 
+		// mettre les auteurs par defaut comme objet «coordonnable»
+		ecrire_meta('coordonnees', serialize(array('objets'=>array('auteur'))));
+		ecrire_meta($nom_meta_base_version, $current_version="1.5");
+	}
+
 }
 
 function coordonnees_vider_tables($nom_meta_base_version) {
@@ -119,6 +127,7 @@ function coordonnees_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_emails");
 	sql_drop_table("spip_emails_liens");
 
+	effacer_meta('coordonnees');
 	effacer_meta($nom_meta_base_version);
 }
 
