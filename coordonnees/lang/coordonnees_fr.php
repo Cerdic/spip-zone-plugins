@@ -12,9 +12,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_adresse' => 'Ajouter une adresse',
 	'ajouter_email' => 'Ajouter un email',
 	'ajouter_telephone' => 'Ajouter un t&eacute;l&eacute;phone',
-	'auteurs' => 'Auteurs',
 	'articles' => 'Articles',
-	
+	'auteurs' => 'Auteurs',
 
 	// C
 	'configuration_coordonnees' => 'Configuration des coordonnées',
@@ -27,11 +26,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_email' => '&Eacute;diter un courriel',
 	'editer_numero' => '&Eacute;diter un num&eacute;ro',
 	'emails' => 'Courriels',
+	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?',
 	'explication_type_adresse' => 'Le type peut être \'perso\' ou \'pro\'.',
 	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.',
 	'explication_type_numero' => 'Le type peut être \'perso\' ou \'pro\' ou \'fax\'.',
-	'explication_objets_actifs' => "Sur quels objets éditoriaux proposer les coordonnées ?",
-	
+
 	// F
 	'fax' => 'Fax.',
 
@@ -52,6 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_complement' => 'Compl&eacute;ment',
 	'label_email' => 'Courriel',
 	'label_numero' => 'Num&eacute;ro',
+	'label_objets_actifs' => 'Objets',
 	'label_pays' => 'Pays',
 	'label_titre' => 'Titre',
 	'label_type_adresse' => 'Type d\'adresse',
@@ -59,8 +59,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_type_numero' => 'Type de num&eacute;ro',
 	'label_ville' => 'Ville',
 	'label_voie' => 'Adresse',
-	'label_objets_actifs' => 'Objets',
-	
 
 	// M
 	'mobile' => 'Mobile',
@@ -76,7 +74,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'rubriques' => 'Rubriques',
-	
+
 	// S
 	'supprimer_adresse' => 'Supprimer cette adresse',
 	'supprimer_email' => 'Supprimer ce courriel',

@@ -14,8 +14,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_adresse' => 'Add an address',
 	'ajouter_email' => 'Add an email',
 	'ajouter_telephone' => 'Add a phone number',
+	'articles' => 'Articles', # NEW
+	'auteurs' => 'Auteurs', # NEW
 
 	// C
+	'configuration_coordonnees' => 'Configuration des coordonnées', # NEW
 	'confirmer_suppression_adresse' => 'Are you sure you want to detele this address ?',
 	'confirmer_suppression_email' => 'Are you sure you want to detele this email ?',
 	'confirmer_suppression_numero' => 'Are you sure you want to detele this phone number ?',
@@ -25,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_email' => 'Edit an email',
 	'editer_numero' => 'Edit a phone number',
 	'emails' => 'Emails',
+	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?', # NEW
 	'explication_type_adresse' => 'Type can be private or work',
 	'explication_type_email' => 'Type can be private or profesionnal',
 	'explication_type_numero' => 'Type can be private, work or fax',
@@ -49,6 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_complement' => 'Additional information',
 	'label_email' => 'Email',
 	'label_numero' => 'Phone number',
+	'label_objets_actifs' => 'Objets', # NEW
 	'label_pays' => 'Country',
 	'label_titre' => 'Titre', # NEW
 	'label_type_adresse' => 'Address type',
@@ -68,6 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouvel_email' => 'New email',
 	'nouvelle_adresse' => 'New address',
 	'numeros' => 'Phone numbers',
+
+	// R
+	'rubriques' => 'Rubriques', # NEW
 
 	// S
 	'supprimer_adresse' => 'Delette this address',
