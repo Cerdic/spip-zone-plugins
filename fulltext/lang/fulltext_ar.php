@@ -23,6 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'convertir_utf8' => 'تحويل الى UTF-8 لاسترجاع الاتساق',
 	'creer_tous' => 'إنشاء كل فهارس FULLTEXT المقترحة',
 
+	// D
+	'des_utilisations' => '@nb@ utilisations', # NEW
+	'descriptif' => 'Descriptif', # NEW
+	'documents_proteges' => 'Documents prot&eacute;g&eacute;s', # NEW
+
 	// E
 	'enfan' => 'ولد',
 	'enfance' => 'ولدان',
@@ -31,6 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfantillage' => 'ولدن',
 	'enfants' => 'ولد',
 	'erreur_doc_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات doc.',
+	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle sup&eacute;rieur &agrave; une seconde.', # NEW
+	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents &agrave; traiter par it&eacute;ration sup&eacute;rieur &agrave; un.', # NEW
 	'erreur_pdf_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات pdf.',
 	'erreur_ppt_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات ppt.',
 	'erreur_taille_index' => 'يجب فهرسة حرف واحد على الأقل.',
@@ -49,18 +56,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'general' => 'عام',
 
 	// I
+	'id' => 'ID', # NEW
 	'il_faut_myisam' => 'يجب ان يكون نوع الجداول MyISAM',
 	'incoherence_charset' => 'قد يؤدي عدم تجانس بين طقم أحرف موقعك وطقم أحرف جداول قاعدة البيانات الى تحريف نتائج البحث للعديد من الأحرف:',
 	'index_regenere' => 'فهارس الجدول المعاد إنتاجها',
 	'index_reinitialise' => 'تمت إعادة تأصيل المستندات الخاطئة',
+	'index_reinitialise_ptg' => 'Les documents protégés ont tous été réinitialisés', # NEW
 	'index_reinitialise_totalement' => 'تمت إعادة تأصيل كل المستندات',
 	'index_supprime' => 'تم حذف الفهرس',
 	'indiquer_chemin_bin' => 'تحديد مسار التطبيق الدي يعالج فهرسة',
 	'indiquer_options_bin' => 'تحديد خيارات فهرسة',
-	'infos_fulltext_document' => 'يمكن من هنا اختيار اي نوع من المستندات يخضع لفهرسة الملحق وإعداد التطبيقات المستخدمة وخياراتها.',
+	'infos' => 'Informations', # NEW
+	'infos_documents_proteges' => 'Vous trouverez ici la liste des documents protégés et donc non-indexés par Fulltext', # NEW
+	'infos_fulltext_document' => 'يمكن من هنا اختيار اي نوع من المستندات يخضع لفهرسة الملحق وإعداد التطبيقات المستخدمة وخياراتها.', # MODIF
+	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).', # NEW
 
 	// L
 	'liste_tables_connues' => 'هذه هي قائمة الجداول التي تعرّف عليها محرك البحث. يمكنك إضافة عناصر FULLTEXT، انظر التوثيق على العنوان',
+	'logo' => 'Logo', # NEW
 
 	// M
 	'mais_pas' => 'ولكن <strong>ليس</strong>',
@@ -68,13 +81,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_update_configuration' => 'تم تحديث تفضيلاتك',
 
 	// N
+	'nb_err' => 'En erreur d\'indexation', # NEW
+	'nb_index' => 'Index&eacute;s', # NEW
+	'nb_non_index' => 'Non-index&eacute;s', # NEW
+	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', # NEW
 	'necessite_version_php' => '(يتطلب PHP 5.2 الأقل وخيار -enable-zip)',
 	'nombre_caracteres' => 'عدد الحروف المفهرسة (من بداية المستند).',
+	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
 
 	// O
 	'ou_bien' => 'أو',
 
 	// P
+	'pas_document_ptg' => 'Il n\'y a pas de document protégé.', # NEW
 	'pas_index' => 'لا يوجد فهارس FULLTEXT',
 	'premier_soit' => '<strong>إما</strong>',
 
@@ -84,6 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// R
 	'regenerer_tous' => 'إعادة إنتاج كل فهارس FULLTEXT',
 	'reinitialise_index_doc' => 'إعادة تأصيل فهرسة المستندات الخاطئة',
+	'reinitialise_index_ptg' => 'Réinitialiser l\'indexation des documents protégés', # NEW
 	'reinitialise_totalement_doc' => 'إعادة تأصيل فهرسة كل المستندات',
 	'reserve_webmestres' => 'صفحة محصورة بمسؤول الموقع',
 	'retour_configuration_fulltext' => 'العودة الى إعداد الملحق',
@@ -92,6 +112,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// S
 	'sequence_exacte' => 'تسلسل الكلمات تماماً',
 	'soit' => '<strong>أو</strong>',
+	'statistiques_indexation' => 'Statistiques d\'indexation des documents :', # NEW
 	'supprimer' => 'حذف',
 
 	// T
@@ -101,7 +122,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'textes_premier' => 'ولكن يعرض أولاً النصوص التي تحتوي',
 
 	// U
-	'utiliser_operateurs_logiques' => 'يستخدم البحث العوامل المنطقية الشائعة.'
+	'une_utilisation' => '1 utilisation', # NEW
+	'utiliser_operateurs_logiques' => 'يستخدم البحث العوامل المنطقية الشائعة.',
+
+	// V
+	'voir_doc_ptg' => 'Voir les documents protegés' # NEW
 );
 
 ?>

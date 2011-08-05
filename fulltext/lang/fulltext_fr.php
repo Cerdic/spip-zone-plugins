@@ -20,12 +20,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'convertir_toutes' => 'Convertir toutes les tables en MyISAM',
 	'convertir_utf8' => 'convertir en UTF-8 pour restaurer la cohérence',
 	'creer_tous' => 'Créer tous les index FULLTEXT suggérés',
-	
+
 	// D
 	'des_utilisations' => '@nb@ utilisations',
 	'descriptif' => 'Descriptif',
 	'documents_proteges' => 'Documents prot&eacute;g&eacute;s',
-	
+
 	// E
 	'enfan' => 'enfan',
 	'enfance' => 'enfance',
@@ -79,10 +79,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_ok_update_configuration' => 'Mise &agrave; jour de vos pr&eacute;f&eacute;rences termin&eacute;e',
 
 	// N
-	'nb_err' => 'En erreur d\'indexation', 
+	'nb_err' => 'En erreur d\'indexation',
 	'nb_index' => 'Index&eacute;s',
 	'nb_non_index' => 'Non-index&eacute;s',
-	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', 
+	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)',
 	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)',
 	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).',
 	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON',
@@ -122,10 +122,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// U
 	'une_utilisation' => '1 utilisation',
 	'utiliser_operateurs_logiques' => 'La recherche utilise les opérateurs logiques les plus courants.',
-	
+
 	// V
 	'voir_doc_ptg' => 'Voir les documents protegés'
-	
 );
 
 ?>
