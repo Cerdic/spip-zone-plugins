@@ -2,7 +2,9 @@
 	<langue code="ast" />
 	<langue code="br" />
 	<langue code="ca" />
-	<langue code="de" />
+	<langue code="de">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="en">
 		<traducteur nom="mark_baber" />
 	</langue>
