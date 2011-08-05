@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_descr_gis' => 'Geographic Information System.<br />Link to the documentation.',
 	'cfg_inf_adresse' => 'Displays additional address fields (country, city, state, address ...)',
 	'cfg_inf_cloudmade' => 'This API needs a key you can create on <a href=\'@url@\'>the CloudMade website</a>.',
-	'cfg_inf_geocoder' => 'Enable search function in form.',
+	'cfg_inf_geocoder' => 'Enable search function in form.', # MODIF
 	'cfg_inf_geolocaliser_user_html5' => 'If the user\'s browser allows it, its approximate geographic location is retrieved to give the default position when creating a new point.',
 	'cfg_inf_google' => 'This API needs a key you can create on <a href=\'@url@\'>the GoogleMaps website</a>.',
 	'cfg_lbl_adresse' => 'Show address fields',
@@ -54,6 +54,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// I
 	'icone_gis_tous' => 'Geolocated points',
 	'info_id_objet' => 'N&deg;',
+	'info_liste_gis' => 'Points géolocalisés', # NEW
 	'info_liste_gis_objet' => 'Linked points to this object',
 	'info_liste_objets_gis' => 'Objects attached to this point',
 	'info_numero_gis' => 'Point number',
