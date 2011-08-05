@@ -1,2 +1,8 @@
 <traduction module="minibando" gestionnaire="salvatore" reference="fr">
+	<langue code="de">
+		<traducteur nom="jaro" />
+	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
