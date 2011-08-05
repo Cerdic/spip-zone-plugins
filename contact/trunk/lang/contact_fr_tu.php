@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
+	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
 	'noisette_label_titre_noisette' => 'Titre :',
 	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :',
 	'noisette_titre_perso' => 'Titre personnalisé',

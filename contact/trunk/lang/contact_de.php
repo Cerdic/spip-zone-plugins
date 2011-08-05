@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'madame' => 'Frau',
 	'mademoiselle' => 'Fräulein',
 	'modele_label_auteur' => 'Vorauswahl eines Autors (fakultativ)',
-	'modele_nom_formulaire' => 'Kontaktformular', # MODIF
+	'modele_nom_formulaire' => 'Kontaktný formulár',
 	'monsieur' => 'Herr',
 	'msg_accueil' => 'Hier finden Sie die Kontaktdaten Nachrichten, die Sie erhalten haben.',
 	'msg_contact' => 'Kontakt Botschaft',
@@ -111,6 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Titel anzeigen?',
+	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
 	'noisette_label_titre_noisette' => 'Titel:',
 	'noisette_label_titre_noisette_perso' => 'Falls Titel personalisiert:',
 	'noisette_titre_perso' => 'Personalisierter Titel',

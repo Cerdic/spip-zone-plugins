@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_telephone' => 'Phone Number',
 	'champ_texte' => 'Text', # MODIF
 	'champ_ville' => 'City', # MODIF
-	'configuration_barre_forum' => 'Afficher la barre typo des forums.', # NEW
+	'configuration_barre_forum' => 'Pridať klávesový panel do diskusných fór.',
 	'configuration_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public, les réglages ci-dessous seront sans effets.',
 	'configuration_barre_oui' => 'View the complete bar typo.',
 	'configuration_champs_message' => 'PenHolder Settings.',
@@ -60,8 +60,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'configuration_pj_facteur_absent' => 'You have to install the Facteur plugin to use this functionality.', # MODIF
 	'configuration_pj_nb_max' => 'Maximum number of attachments',
 	'configuration_regle_liste_explication' => 'Select a calculation rule from the list of potential recipients and the selection method proposed to the visitors.',
-	'configuration_texteinfolettre' => 'Texte infolettre', # NEW
-	'configuration_texteinfolettre_explication' => 'Changez éventuellement le texte associé à la case à cocher infolettre.', # NEW
+	'configuration_texteinfolettre' => 'Text bulletinu',
+	'configuration_texteinfolettre_explication' => 'Môžete zmeniť text priradený k týmto zaškrtávacím políčkam ',
 	'consulter_memoire' => 'This message is saved on your site:',
 	'courriel_de' => 'From', # MODIF
 	'courriel_pour' => 'To', # MODIF
@@ -69,7 +69,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// D
 	'deplacement_possible' => 'Vertical displacement by drag and drop',
 	'description_menu_contact' => 'Élément de menu vers la page du formulaire de contact', # NEW
-	'description_page-contact' => 'Acessible via <i>spip.php?page=contact</i>, cette page optionnelle permet de fournir un formulaire de contact (pensez à ajouter un lien dans vos menus).', # NEW
+	'description_page-contact' => 'Prístupné cez <i>spip.php?page=contact,</i> táto stránka môže poskytnúť alternatívny kontaktný formulár (pamätajte si, že treba pridať odkaz do vášho menu).',
 
 	// F
 	'form_destinataire' => 'Choose a recipient', # MODIF
@@ -97,7 +97,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'madame' => 'Madam', # MODIF
 	'mademoiselle' => 'Mademoiselle', # NEW
 	'modele_label_auteur' => 'Dopredu vybrať autora (nepovinné)?',
-	'modele_nom_formulaire' => 'le formulaire de contact avancé', # NEW
+	'modele_nom_formulaire' => 'Podrobný kontaktný formulár',
 	'monsieur' => 'Mister', # MODIF
 	'msg_accueil' => 'Here are messages from contacts you have received.',
 	'msg_contact' => 'Message from contact', # MODIF
@@ -110,10 +110,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'msg_supprimer_message' => 'Delete this message', # MODIF
 
 	// N
-	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?', # NEW
-	'noisette_label_titre_noisette' => 'Titre :', # NEW
-	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :', # NEW
-	'noisette_titre_perso' => 'Titre personnalisé', # NEW
+	'noisette_label_afficher_titre_noisette' => 'Zobraziť názov?',
+	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
+	'noisette_label_titre_noisette' => 'Názov:',
+	'noisette_label_titre_noisette_perso' => 'Ak je to vlastný názov:',
+	'noisette_titre_perso' => 'Vlastný názov',
 
 	// P
 	'par' => 'Pre:',
