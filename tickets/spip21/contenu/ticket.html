@@ -45,7 +45,8 @@
 </div>
 
 [(#PARAMETRES_FORUM|?{''})]
-<div class="ticket_commentaires comments">
+#SET{config_thread,#CONFIG{comments/comments_fil,list}}
+<div class="ticket_commentaires comments comments-#GET{config_thread}">
 	<BOUCLE_decompte(FORUMS){id_ticket} {plat} />[<h2 class="h2">(#TOTAL_BOUCLE|>{0}|?{#TOTAL_BOUCLE,''})
 	[(#TOTAL_BOUCLE|=={1}|?{<:tickets:commentaire:>,<:tickets:commentaires:>})]</h2>]
 	[(#TOTAL_BOUCLE|=={0}|oui)<h2><:tickets:commentaire_aucun:></h2>]
@@ -53,9 +54,84 @@
 
 	[(#REM) Bloc 2: liste des commentaires sur le ticket]
 	<B_messages>
-	<ul class="forum">
-	<BOUCLE_messages(FORUMS){id_ticket}{par date}>
-		<li class="forum-fil" id="forum#ID_FORUM">
+	<ul class="forum comment-ul">
+	<BOUCLE_messages(FORUMS?) {id_ticket}{0,1}>
+	<BOUCLE_si_comment(CONDITION){si #PLUGIN{comments}|oui}>
+		<BOUCLE_si_list(CONDITION){si #GET{config_thread}|=={list}|oui}>
+		<BOUCLE_comments-list(FORUMS) {statut IN publie} {id_ticket} {plat} {par date}>
+		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+			[(#MODELE{comment}{id_forum}{compteur=#COMPTEUR_BOUCLE})]
+			[(#BOUTONS_ADMIN_FORUM)]
+		</li>
+		</BOUCLE_comments-list>
+		</BOUCLE_si_list>
+		</B_si_list>
+		<BOUCLE_si_thread(CONDITION){si #GET{config_thread}|=={thread}|oui}>
+		<BOUCLE_comments-thread(FORUMS) {statut IN publie} {id_ticket} {par date}>
+		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+			[(#MODELE{comment}{id_forum}{compteur=#COMPTEUR_BOUCLE}{thread=oui})]
+			[(#BOUTONS_ADMIN_FORUM)]
+			[<p class="repondre"><a
+				href="(#PARAMETRES_FORUM|url_reponse_forum)"
+				onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
+				rel="noindex nofollow"><:repondre_message:></a></p>]
+			<B_comments-fils>
+			<ul class="comments-ul comments-fils">
+				<BOUCLE_comments-fils(FORUMS){id_parent}{par date}>
+				<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+					[(#MODELE{comment}{id_forum}{thread=oui})]
+					[(#BOUTONS_ADMIN_FORUM)]
+					[<p class="repondre"><a
+						href="(#PARAMETRES_FORUM|url_reponse_forum)"
+						onclick="jQuery(this).add_reply_to([(#ID_FORUM)]);return false;"
+						rel="noindex nofollow"><:repondre_message:></a></p>]
+					<BOUCLE_comments-fils-etc(boucle_comments-fils)></BOUCLE_comments-fils-etc>
+				</li>
+				</BOUCLE_comments-fils>
+			</ul>
+			</B_comments-fils>
+		</li>
+		</BOUCLE_comments-thread>
+		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+		(#INCLURE{javascript/thread-move.js}|compacte{js})
+		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
+		</BOUCLE_si_thread>
+		</B_si_thread>
+		<BOUCLE_si_thread-1(CONDITION){si #GET{config_thread}|=={thread-1}|oui}>
+		<BOUCLE_comments-list-1(FORUMS){id_ticket} {!par date_thread}{pagination 10}>
+		<li class="comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]">
+			<INCLURE{fond=modeles/comment}{id_forum}{compteur=#COMPTEUR_BOUCLE}{thread=oui}>
+			[(#BOUTONS_ADMIN_FORUM)]
+			<B_comments-fils-1>
+			<ul class="comments-ul">
+				<BOUCLE_comments-fils-1(FORUMS){id_thread}{id_forum!=#_comments-list:ID_FORUM}{par date}>
+				<li class="comment-li[ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|oui)last]">
+					<INCLURE{fond=modeles/comment}{id_forum}{thread=oui}>
+					[(#BOUTONS_ADMIN_FORUM)]
+					[<p class="repondre"><a
+						href="(#PARAMETRES_FORUM|url_reponse_forum)"
+						onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
+						rel="noindex nofollow"><:repondre_message:></a></p>]
+				</li>
+				</BOUCLE_comments-fils-1>
+			</ul>
+			</B_comments-fils-1>
+			[<p class="repondre"><a
+					href="(#PARAMETRES_FORUM|url_reponse_forum)"
+					onclick="jQuery(this).add_reply_to([(#ID_THREAD)]);return false;"
+					rel="noindex nofollow"><:repondre_message:></a></p>]
+		</li>
+		</BOUCLE_comments-list-1>
+		[<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+		(#INCLURE{javascript/thread-move.js}|compacte{js})
+		/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>]
+		</BOUCLE_si_thread-1>
+		<//B_si_thread>
+		<//B_si_list>
+	</BOUCLE_si_comment>
+	</B_si_comment>
+	<BOUCLE_messages_ticket(FORUMS){id_ticket}{par date}>
+		<li class="forum-fil comment-li[ (#COMPTEUR_BOUCLE|alterner{'odd','even'})][ (#COMPTEUR_BOUCLE|=={1}|oui)first][ (#EXPOSE)]" id="forum#ID_FORUM">
 			<div class="forum-message">
 				<div class="forum-chapo">
 					<BOUCLE_auteur_message(AUTEURS){id_auteur}{tout}>
@@ -69,7 +145,9 @@
 				</div>
 			</div>
 		</li>
-		</BOUCLE_messages>
+	</BOUCLE_messages_ticket>
+	<//B_si_comment>
+	</BOUCLE_messages>	
 	</ul>
 	</B_messages>
 	[(#REM) Bloc 3: formulaire d'ajout d'un commentaire sur le ticket]
