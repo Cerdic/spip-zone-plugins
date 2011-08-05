@@ -237,9 +237,9 @@ You will receive and email telling you how to change your login.',
 	'septembre' => 'september',
 	'sexe' => 'Title',
 	'societe' => 'Company / Association ...',
-	'statut' => 'Status', # MODIF
-	'statut_rel' => 'Internal status', # MODIF
-	'statuts_actifs' => 'Status is shown by icon\'s color: ', # MODIF
+	'statut' => 'Status',
+	'statut_rel' => 'Interný status',
+	'statuts_actifs' => 'Status označuje farba ikony:',
 	'suppression_faite' => 'Deletion completed',
 	'supprimer_adherent' => 'Odstrániť používateľov',
 	'supprimer_adherent_red' => 'Odstr',
