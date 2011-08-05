@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'construire_action_annuler' => 'Annuler', # NEW
 	'construire_action_configurer' => 'Configurer', # NEW
+	'construire_action_deplacer' => 'Déplacer', # NEW
 	'construire_action_dupliquer' => 'Dupliquer', # NEW
 	'construire_action_dupliquer_copie' => '(copie)', # NEW
 	'construire_action_supprimer' => 'Supprimer', # NEW
