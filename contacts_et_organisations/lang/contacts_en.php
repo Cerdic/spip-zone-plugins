@@ -39,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contact_voir' => 'See',
 	'contacts' => 'Contacts',
 	'contacts_nb' => '@nb@ contacts',
+	'contacts_un' => 'Un contact', # NEW
 	'creer_auteur_contact' => 'Create a new author and link it to this contact',
 	'creer_auteur_organisation' => 'Create a new author and link it to this organization',
 
@@ -80,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_date_naissance' => 'Date of birth',
 	'label_descriptif' => 'Description',
 	'label_email' => 'Email',
-	'label_fonction' => 'Occupation',
+	'label_fonction' => 'Function',
 	'label_identification' => 'Identification',
 	'label_nom' => 'Name',
 	'label_nom_organisation' => 'Organisation',
