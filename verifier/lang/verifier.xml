@@ -17,4 +17,7 @@
 	<langue code="pt_br">
 		<traducteur nom="rporto" />
 	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
