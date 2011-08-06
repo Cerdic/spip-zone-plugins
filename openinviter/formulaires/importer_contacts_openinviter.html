@@ -1,0 +1,4 @@
+#SET{titre_fournisseur, #ENV{_fournisseurs_choisis}|table_valeur{#ENV{fournisseur}}|table_valeur{titre}}
+
+[(#SAISIE{input, email, obligatoire=oui, label=[(#VAL{openinviter:champ_email_label}|_T{#ARRAY{fournisseur,#GET{titre_fournisseur}}})]})]
+[(#SAISIE{input, password, type=password, obligatoire=oui, label=<:openinviter:champ_password_label:>, explication=<:openinviter:champ_password_explication:>})]
