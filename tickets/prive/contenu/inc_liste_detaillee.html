@@ -24,7 +24,7 @@
 		<tr class="tr_liste">
 			<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
 			<td class="arial1"><b>##ID_TICKET</b></td>
-			<td class="arial2"><a href="?exec=ticket_afficher&amp;id_ticket=#ID_TICKET">#TITRE</a></td>
+			<td class="arial2"><a href="[(#ID_TICKET|generer_url_entite{ticket})]">#TITRE</a></td>
 			[(#REM) Si le type est explicite, on ne l'affiche pas ]
 			[(#ENV{type}|non)
 			<td class="arial0">[(#TYPE|tickets_texte_type)]</td>
@@ -33,7 +33,7 @@
 				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] />
 				[&nbsp;(#SEVERITE|tickets_texte_severite)]
 			</td>
-			<td class="arial0">[(#DATE|affdate_court)]</td>
+			<td class="arial0">[(#DATE|affdate)]</td>
 		</tr>
 </BOUCLE_detaillee>
 	</tbody>
