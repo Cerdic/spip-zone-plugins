@@ -5,9 +5,9 @@
 	<div class="cadre_padding">
 		<div style="text-align: #LANG_RIGHT;">
 			<BOUCLE_auteur_message(AUTEURS){id_auteur}{tout}>
-			post&eacute; par <strong><a href="#URL_ECRIRE{'auteur_infos','id_auteur='#ID_AUTEUR}">#NOM</a></strong>
+			post&eacute; par <strong><a href="[(#ID_AUTEUR|generer_url_entite{autaur})]">#NOM</a></strong>
 			</BOUCLE_auteur_message>
-			le [(#DATE|affdate_court)]
+			le [(#DATE|affdate)]
 		</div>
 	[<div>(#TEXTE)</div>]
 	</div>
