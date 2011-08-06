@@ -1,4 +1,4 @@
-<?
+<?php
 
 function _fichier_microcache($id, $fond) {
 	$fond = str_replace("/", "-", $fond);

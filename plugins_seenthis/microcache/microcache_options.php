@@ -1,4 +1,4 @@
-<?
+<?php
 
 function supprimer_microcache($id, $fond) {
 	include_spip("inc/microcache");
