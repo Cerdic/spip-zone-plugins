@@ -1,4 +1,9 @@
 <?php
+/**
+ * Activer le plugin no_spam sur les tickets
+ */
+$GLOBALS['formulaires_no_spam'][] = 'forum_ticket';
+$GLOBALS['formulaires_no_spam'][] = 'editer_ticket';
 
 /**
  * Enregistre une revision de ticket
