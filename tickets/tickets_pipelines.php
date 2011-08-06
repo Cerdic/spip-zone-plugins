@@ -246,4 +246,20 @@ function tickets_declarer_url_objets($flux){
 	$flux[] = 'ticket';
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline rechercher_liste_des_champs (SPIP)
+ *
+ * Ajoute les tickets dans la recherche
+ *
+ * @param array $tables
+ * @return array $tables
+ */
+function tickets_rechercher_liste_des_champs($tables){
+	$tables['ticket'] = array(
+		'titre' => 8,
+		'texte' => 5
+	);
+	return $tables;
+}
 ?>

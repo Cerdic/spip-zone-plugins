@@ -9,7 +9,7 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.64</version>
+	<version>1.65</version>
 	<version_base>0.7</version_base>
 	<etat>stable</etat>
 
@@ -71,6 +71,10 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 		<nom>declarer_url_objets</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
 
 	<bouton id='tickets' parent='bando_publication'>
 		<icone>images/ticket-16.png</icone>
@@ -105,7 +109,7 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.71</version>
+	<version>1.72</version>
 	<version_base>1.0</version_base>
 
 	<etat>stable</etat>
@@ -183,6 +187,10 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	</pipeline>
 	<pipeline>
 		<nom>declarer_url_objets</nom>
+		<inclure>tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
 		<inclure>tickets_pipelines.php</inclure>
 	</pipeline>
 
