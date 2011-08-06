@@ -1,0 +1,23 @@
+<plugin>
+	<nom><multi>[fr]Importateur de contacts [en]Contacts importer</multi></nom>
+	<auteur>Les Développements Durables (http://www.ldd.fr)</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1.0</version>
+	<version_base>0.1</version_base>
+	<etat>dev</etat>
+	<description><multi>
+		[fr]Permet d'importer des contacts à l'aide d'un ou plusieurs services web.
+		[en]Lets you import contacts from one or more web services.
+	</multi></description>
+	<categorie>outil</categorie>
+	<icon></icon>
+	
+	<prefix>importateur_contacts</prefix>
+	
+	<install>base/importateur_contacts_installation.php</install>
+	
+	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="spip_bonux" version="[2.2.21;]" />
+	<necessite id="cvtm" version="[0.2.0;]" />
+	<necessite id="saisies" version="[1.11.0;]" />
+</plugin>
