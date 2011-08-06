@@ -137,7 +137,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ou_distant' => 'Plugins t&eacute;l&eacute;chargeables',
 
 	// statut
-	'statut' => 'Statut',
+	'statut' => 'Statut d\'activation',
 	'statut_tous' => 'Tous',
 	'statut_actif' => 'Actif',
 	'statut_inactif' => 'Inactif',
@@ -148,7 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'categorie_tous' => 'Toutes',
 
 	// etat (des plugins)
-	'etat' => '&Eacute;tat',
+	'etat' => '&Eacute;tat de développement',
 	'etat_tous' => 'Tous',
 	'etat_stable' => 'Stable',
 	'etat_test' => 'En test',
