@@ -11,8 +11,9 @@
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
 	
-	<version>0.1</version>
+	<version>0.2</version>
 	<version_base>0.1</version_base>
+	<icon>images/type_articles-64.png</icon>
 
 	<prefix>type_articles</prefix>
 
