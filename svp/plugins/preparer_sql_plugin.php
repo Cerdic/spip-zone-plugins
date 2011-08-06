@@ -24,11 +24,11 @@ function plugins_preparer_sql_plugin($plugin)
 	$champs['categorie'] = $plugin['categorie'] ? $plugin['categorie'] : '';
 	$champs['etat'] = $plugin['etat'] ? $plugin['etat'] : '';
 	$champs['version'] = $plugin['version'] ? $plugin['version'] : '';
-	$champs['version_base'] = $plugin['version_base'] ? $plugin['version_base'] : '';
+	$champs['version_base'] = $plugin['schema'] ? $plugin['schema'] : '';
 
 	// Renommage de certains champs
-	$champs['logo'] = $plugin['icon'] ? $plugin['icon'] : '';
-	$champs['lien_doc'] = $plugin['lien'] ? normaliser_lien($plugin['lien']) : '';
+	$champs['logo'] = $plugin['logo'] ? $plugin['logo'] : '';
+	$champs['lien_doc'] = $plugin['documentation'] ? normaliser_lien($plugin['documentation']) : '';
 	// On passe le prefixe en lettres majuscules comme ce qui est fait dans SPIP
 	// Ainsi les valeurs dans la table spip_plugins coincideront avec celles de la meta plugin
 	$champs['prefixe'] = strtoupper($plugin['prefix']);
@@ -45,8 +45,10 @@ function plugins_preparer_sql_plugin($plugin)
 	
 	// Traitement des auteurs, credits, licences et copyright
 	// -- on extrait les auteurs, licences et copyrights sous forme de tableaux
-	$plugin['auteur'] = unicode2charset($plugin['auteur']);
-	$auteurs = normaliser_auteur_licence($plugin['auteur'], 'auteur');
+	// -- depuis le commit xxxx du core la balise auteur est renvoyee sous forme de tableau mais
+	//    contient toujours qu'un seul index
+	$balise_auteur = unicode2charset($plugin['auteur'][0]);
+	$auteurs = normaliser_auteur_licence($balise_auteur, 'auteur');
 	$plugin['licence'] = unicode2charset($plugin['licence']);
 	$licences = normaliser_auteur_licence($plugin['licence'], 'licence');
 	// -- on merge les tableaux recuperes dans auteur et licence
@@ -68,8 +70,8 @@ function plugins_preparer_sql_plugin($plugin)
 	$champs['nom'] = normaliser_nom($plugin['nom'], 'fr', false);
 
 	// Extraction de la compatibilite SPIP et construction de la liste des branches spip supportees
-	$champs['compatibilite_spip'] = ($plugin['compatible']) ? $plugin['compatible'] : '';
-	$champs['branches_spip'] = ($plugin['compatible']) ? compiler_branches_spip($plugin['compatible']) : '';
+	$champs['compatibilite_spip'] = ($plugin['compatibilite']) ? $plugin['compatibilite'] : '';
+	$champs['branches_spip'] = ($plugin['compatibilite']) ? compiler_branches_spip($plugin['compatibilite']) : '';
 	
 	// Construction du tableau des dependances necessite, lib et utilise
 	$dependances['necessite'] = $plugin['necessite'];
