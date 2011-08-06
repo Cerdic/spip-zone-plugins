@@ -212,7 +212,7 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 				$prefix = strtoupper($insert['prefixe']);
 				// flag sur plugin actif et installe
 				if (is_array($actifs[$prefix])
-				and ($actifs[$prefix]['dir'] == $p)) {
+				and (basename($actifs[$prefix]['dir']) == $p)) {
 					$insert['actif'] = 'oui';
 					if (step_plugin_est_installe($p))
 						$insert['installe'] = 'oui';
