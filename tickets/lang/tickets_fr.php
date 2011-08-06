@@ -130,7 +130,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ticket' => 'Ticket',
 	'ticket_enregistre' => 'Ticket enregistr&eacute;',
 	'tickets' => 'Tickets',
+	'tickets_autorisations' => 'Les autorisations',
 	'tickets_derniers_commentaires' => 'Les derniers commentaires',
+	'tickets_general' => 'Général',
 	'tickets_sur_inscription' => "
 		L'&eacute;criture des tickets ou commentaires n'est
 		possible qu'aux personnes identifi&eacute;es.
