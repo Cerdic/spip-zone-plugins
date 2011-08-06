@@ -109,7 +109,7 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.72</version>
+	<version>1.73</version>
 	<version_base>1.0</version_base>
 
 	<etat>stable</etat>
@@ -199,7 +199,13 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 		<titre>tickets:titre</titre>
 		<url>tickets</url>
 	</bouton>
-
+	<bouton id='ticket_editer' parent="outils_rapides">
+		<icone>images/ticket-16-new.png</icone>
+		<titre>tickets:creer_ticket</titre>
+		<url>ticket_editer</url>
+		<args>id_ticket=new</args>
+	</bouton>
+	
 	<chemin dir='' />
 	<chemin dir='spip21/' />
 
