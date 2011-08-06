@@ -17,20 +17,23 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_detaillee(TICKETS){!par date}{pagination 10 #GET{hash_pagination}}{id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{jalon?}>
+	<BOUCLE_detaillee(TICKETS){!par date}{pagination 10 #GET{hash_pagination}}{id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{jalon?}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
-			<td><a href="[(#URL_TICKET)]">#TITRE</a></td>
+			<td>
+				<a href="[(#URL_TICKET)]">#TITRE</a><br />
+				[(#TEXTE|couper{160})]
+			</td>
 			[(#REM) Si le type est explicite, on ne l'affiche pas ]
 			[(#ENV{type}|non)<td>[(#TYPE|tickets_texte_type)]</td>]
 			<td>
 				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"][ title="(#STATUT|tickets_texte_severite)"] />
 				[&nbsp;(#SEVERITE|tickets_texte_severite)]
 			</td>
-			<td>[(#DATE|affdate_court)]</td>
+			<td>[(#DATE|affdate)]</td>
 		</tr>
-</BOUCLE_detaillee>
+	</BOUCLE_detaillee>
 	</tbody>
 </table>
 [<p class="pagination">(#PAGINATION)</p>]
