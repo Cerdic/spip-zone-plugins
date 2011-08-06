@@ -78,7 +78,7 @@ function openinviter_authentification($nom_plugin, $email, $password, &$erreurs)
 	// S'il y a une erreur de connexion au plugin
 	$erreur_eventuelle = $inviter->getInternalError();
 	if (!empty($erreur_eventuelle)){
-		if (autoriser('configurer')) $erreurs['message_erreur'] = $erreur_eventuelle;
+		if (include_spip('inc/autoriser') and autoriser('configurer')) $erreurs['message_erreur'] = $erreur_eventuelle;
 		else $erreurs['message_erreur'] = _T('openinviter:erreur_generale');
 	}
 	// Sinon s'il y a une erreur d'authentification au plugin avec les infos fournies
