@@ -34,7 +34,9 @@ if (!function_exists('autoriser_meta_modifier_dist')) {
 }
 
 // table spip_messages, la c'est tout simplement non (peut mieux faire,
-// mais c'est a voir dans le core ou dans autorite)
+// mais c'est a voir dans le core/organiseur ou dans autorite)
+if (defined('_DIR_PLUGIN_ORGANISEUR'))
+	include_spip('organiseur_autoriser');
 if (!function_exists('autoriser_message_modifier_dist')) {
 	function autoriser_message_modifier_dist($faire, $type, $id, $qui, $opt) {
 		return false;
