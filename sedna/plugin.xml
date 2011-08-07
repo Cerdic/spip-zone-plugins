@@ -3,13 +3,14 @@
 	<auteur>
  	Fil
 	</auteur>
-	<licence>&#169; 2005-2010 - Distribu&eacute; sous licence GPL</licence>
+	<licence>&#169; 2005-2011 - GNU/GPL</licence>
 	<version>1.2</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	stable
-	</etat>
+	<etat>stable</etat>
 	<description>
-	Agr&#233;gateur RSS
+		<multi>
+			[fr]Agr&#233;gateur RSS
+			[en]RSS aggregator
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Sedna-agregateur</lien>
 	<icon>sedna-logo.jpg</icon>
