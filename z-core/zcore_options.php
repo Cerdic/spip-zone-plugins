@@ -6,8 +6,8 @@
  *
  */
 
-// demander a SPIP de definir 'type' dans le contexte du premier squelette
-define('_DEFINIR_CONTEXTE_TYPE',true);
+// demander a SPIP de definir 'type-page' dans le contexte du premier squelette
+define('_DEFINIR_CONTEXTE_TYPE_PAGE',true);
 define('_ZPIP',true);
 // differencier le cache,
 // la verification de credibilite de var_zajax sera faite dans public_styliser_dist
