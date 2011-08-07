@@ -163,12 +163,15 @@ function abonnement_affiche_milieu($flux){
 	return $flux;
 }
 
+include_spip('inc/autoriser');
 
 //affiche liste des abonnements pour s'abonner dans le formulaire d'un auteur
 function abonnement_editer_contenu_objet($flux){
 	if ($flux['args']['type']=='auteur') {
+		if (autoriser('modifier','abonnement')){
 		$abonnement = recuperer_fond('prive/abonnement_fiche_modif',array('id_auteur'=>$flux['args']['id']));
 		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$abonnement, $flux['data']);
+		}
 	}
 	return $flux;
 }

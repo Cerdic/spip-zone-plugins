@@ -7,7 +7,7 @@
 	[(#SET{fonction_unique,[rechercher_(#GET{identifiant})]})]
 	<script  type="text/javascript"><!--
 		var [(#GET{fonction_unique})] = function() {
-			rechercher_objet(['#'+'(#GET{identifiant})'],'[(#URL_PAGE{selecteurs_auteurs}
+			rechercher_objet(['#'+'(#GET{identifiant})'],'[(#URL_PAGE{prive/selecteurs_auteurs}
 				|parametre_url{objet,#OBJET,&}
 				|parametre_url{#ID_TABLE_SOURCE,#ID_SOURCE,&})]');
 		}
