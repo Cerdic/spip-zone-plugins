@@ -6,7 +6,7 @@
 	<BOUCLE_lib0(ARTICLES){id_article=#ID_OBJET}>
 	<p><strong><:abo:article_abonnement:></strong> : <a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}">#TITRE</a></p>
 	</BOUCLE_lib0> 
-	<p><strong><:abo:statut_abonnement:></strong> : #STATUT_ABONNEMENT</p>
+	<p><strong><:abo:statut_abonnement:></strong> : [(#VAL{abo:statut_#STATUT_ABONNEMENT}|_T)]</p>
 	<strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)][ (#VALIDITE|<{#DATE}|oui) (<:abo:terme_echu:>)]</p>
 	<BOUCLE_quellecommande(COMMANDES_DETAILS){id_commandes_detail}>
 	<p><:abo:liaison_commande:><a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a></p>
