@@ -41,15 +41,15 @@ function plugins_preparer_sql_plugin($plugin)
 	$champs['tags'] = ($plugin['tags']) ? serialize($plugin['tags']) : '';
 	
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
-	$champs['description'] = unicode2charset($plugin['description']);
+	$champs['description'] = entite2charset($plugin['description']);
 	
 	// Traitement des auteurs, credits, licences et copyright
 	// -- on extrait les auteurs, licences et copyrights sous forme de tableaux
 	// -- depuis le commit xxxx du core la balise auteur est renvoyee sous forme de tableau mais
 	//    contient toujours qu'un seul index
-	$balise_auteur = unicode2charset($plugin['auteur'][0]);
+	$balise_auteur = entite2charset($plugin['auteur'][0]);
 	$auteurs = normaliser_auteur_licence($balise_auteur, 'auteur');
-	$plugin['licence'] = unicode2charset($plugin['licence']);
+	$plugin['licence'] = entite2charset($plugin['licence']);
 	$licences = normaliser_auteur_licence($plugin['licence'], 'licence');
 	// -- on merge les tableaux recuperes dans auteur et licence
 	$champs['auteur'] = $champs['licence'] = $champs['copyright'] = '';
@@ -62,8 +62,8 @@ function plugins_preparer_sql_plugin($plugin)
 	
 	// Extrait d'un nom et un slogan normalises
 	// Slogan : si vide on ne fait plus rien de special, on traitera ça a l'affichage
-	$champs['slogan'] = $plugin['slogan'] ? unicode2charset($plugin['slogan']) : '';
-	$plugin['nom'] = unicode2charset($plugin['nom']);
+	$champs['slogan'] = $plugin['slogan'] ? entite2charset($plugin['slogan']) : '';
+	$plugin['nom'] = entite2charset($plugin['nom']);
 	// Nom :	on repere dans le nom du plugin un chiffre en fin de nom
 	//			et on l'ampute de ce numero pour le normaliser
 	//			et on passe tout en unicode avec le charset du site
@@ -224,6 +224,12 @@ function normaliser_multi($texte)
 		}
 	}
 	return $trads;
+}
+
+function entite2charset($texte) {
+	if (!$texte) return;
+	include_spip('inc/charsets');
+	return unicode2charset(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $texte), ENT_NOQUOTES, $GLOBALS['meta']['charset']));
 }
 
 ?>
