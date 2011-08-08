@@ -44,3 +44,6 @@ jQuery(document).ready(
     onAjaxLoad(initDiapos);
   }
 );
+jQuery(document).unload(function() {
+	jQuery("a.diapo").colorbox.remove();
+});

@@ -7,38 +7,32 @@
 Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-].cDiapo table {
-  border:0;
-  cell-spacing:0;
-  cell-padding:0;
+].cDiapo div {
+  float: left;
 }
-.cDiapo td {
-  padding: 0;
-}
-.cDiapo td.diapo {
+.cDiapo div.diapo {
+  position:relative;
   text-align: center;
 }
-.cDiapo td.diapo a.diapo:link {
+.cDiapo a.vignette:link {
   display: block;
-  position:relative;
   outline: none;
   background-repeat: no-repeat;
   background-position: center center;
 }
-.cDiapo td.diapo a.diapo:hover {
+.cDiapo a.vignette:hover {
   outline: none;
 }
-.cDiapo td.diapog {
+.cDiapo div.titreDiapo {
+  position: absolute;
+  text-align: center;
+}
+.cDiapo .diapog, .cDiapo .diapod {
   width: 25px;
   min-width: 25px;
-  text-align: right;
+  text-align: center;
 }
-.cDiapo td.diapod {
-  width: 25px;
-  min-width: 25px;
-  text-align: left;
-}
-.cDiapo td.diapog a.ajax:link, .cDiapo td.diapod a.ajax:link {
+.cDiapo .diapog a.ajax:link, .cDiapo .diapod a.ajax:link {
   display: block;
   outline: none;
 }
