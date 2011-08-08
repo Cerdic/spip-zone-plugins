@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function boussole_declarer_tables_principales($tables_principales) {
 
 	// Tables des boussoles : spip_boussoles

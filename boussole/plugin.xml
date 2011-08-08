@@ -1,16 +1,30 @@
 <plugin>
-	<nom>Boussole</nom>
+	<nom>
+		<multi>
+			[fr]Boussole
+			[en]Compass
+		</multi>
+	</nom>
 	<auteur>Eric Lupinacci</auteur>
 	<licence>GPL</licence>
 	<version>0.6.3</version>
 	<version_base>0.1</version_base>
 	<icon>prive/themes/spip/images/boussole_icone-64.png</icon>
 	<etat>dev</etat>
-    <slogan>Les bonnes adresses de la galaxie SPIP !</slogan>
+    <slogan>
+    	<multi>
+    		[fr]Les bonnes adresses de la galaxie SPIP ! (ou autres)
+    		[en]The favorite places of the SPIP galaxy! (or other)
+    </slogan>
     <description>
-Installez ce plugin sur votre site et vous aurez acc&egrave;s, dans vos squelettes, &agrave; l'ensemble des sites de la Galaxie SPIP en utilisant
-les mod&egrave;les, les noisettes ou la page Z propos&eacute;s.
+    	<multi>
+    		[fr]Installez ce plugin sur votre site et vous aurez acc&#232;s, dans vos squelettes, &#224; l'ensemble des sites de la Galaxie SPIP en utilisant
+les mod&#232;les, les noisettes ou la page Z propos&#233;s.
 _ Pour les bricoleurs, vous pouvez aussi utiliser ce plugin pour afficher votre propre liste de sites et concevoir vos propres affichages.
+			[en]Install this plugin on your site and you will have access, in your skeletons, to all the sites of the SPIP Galaxy using 
+models, noisettes or the Z page provided.
+_ For DIYers, you can also use this plugin to display your own list of sites and design your own displays.
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Boussole,3688</lien>
 	<prefix>boussole</prefix>
@@ -56,5 +70,5 @@ _ Pour les bricoleurs, vous pouvez aussi utiliser ce plugin pour afficher votre 
 		<url>boussoles_gerer</url>
 	</onglet>
 
-	<necessite id="SPIP" version='[2.0;]' />
+	<necessite id="SPIP" version='[2.0.0;]' />
 </plugin>
