@@ -342,15 +342,15 @@ class Actionneur {
 		if ($i['id_zone'] > 0) {
 			// a telecharger et activer
 			if ($dirs = $this->get_paquet_id($i)) {
-				$this->activer_plugin_dossier($dirs['dossier'], $i, '_DIR_PLUGINS');
+				$this->activer_plugin_dossier($dirs['dossier'], $i, $i['constante']);
 				return true;
 			}
 		} else {
 			// a activer uniquement
 			// il faudra prendre en compte les autres _DIR_xx
-			if ($i['constante'] == '_DIR_PLUGINS') {
+			if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 				$dossier = rtrim($i['dossier'],'/');
-				$this->activer_plugin_dossier($dossier, $i);
+				$this->activer_plugin_dossier($dossier, $i, $i['constante']);
 				return true;
 			}
 		}
@@ -383,7 +383,7 @@ class Actionneur {
 					// - supprimer l'ancien (si faisable)
 					if (($dirs['dossier'] . '/') != $i['dossier']) {
 						if ($i['actif'] == 'oui') {
-							$this->activer_plugin_dossier($dirs['dossier'], $maj);
+							$this->activer_plugin_dossier($dirs['dossier'], $maj,$maj['constante']);
 						}
 
 						if (substr($i['dossier'],0,5) == 'auto/') {
@@ -405,7 +405,7 @@ class Actionneur {
 	function do_upon($info) {
 		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
 		if ($dirs = $this->do_up($info)) {
-			$this->activer_plugin_dossier($dirs['dossier'], $i, '_DIR_PLUGINS');
+			$this->activer_plugin_dossier($dirs['dossier'], $i, $i['constante']);
 			return true;
 		}
 		return false;
@@ -416,9 +416,10 @@ class Actionneur {
 	function do_off($info) {
 		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
-		if ($i['constante'] == '_DIR_PLUGINS') {
+		if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
-			ecrire_plugin_actifs(array(rtrim($i['dossier'],'/')), false, 'enleve');
+			$dossier = ($i['constante'] == '_DIR_PLUGINS')? $i['dossier'] : '../'.constant($i['constante']).$i['dossier'];
+			ecrire_plugin_actifs(array(rtrim($dossier,'/')), false, 'enleve');
 			sql_updateq('spip_plugins', array('actif'=>'non', 'installe'=>'non'), 'id_plugin='.sql_quote($info['i']));
 			$this->actualiser_plugin_interessants();
 			// ce retour est un rien faux...
@@ -434,14 +435,16 @@ class Actionneur {
 	function do_stop($info) {
 		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
-		if ($i['constante'] == '_DIR_PLUGINS') {
+		if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))) {
 			include_spip('inc/plugin');
 			include_spip('inc/step');
 			$dossier = rtrim($i['dossier'],'/');
+			$constante = $i['constante'];
 			$plugin_get_infos = charger_fonction('get_infos', 'plugins');
-			$infos = $plugin_get_infos($dossier);
+			$infos = $plugin_get_infos($dossier,false,constant($i['constante']));
 			if (isset($infos['install'])){
 				// desinstaller
+				$dossier = ($constante == '_DIR_PLUGINS')? $dossier : '../'.constant($constante).$dossier;
 				$etat = desinstalle_un_plugin($dossier, $infos);
 
 				// desactiver si il a bien ete desinstalle
@@ -466,7 +469,7 @@ class Actionneur {
 		// cette option est encore plus delicate que les autres...
 		$i = sql_fetsel('*','spip_plugins','id_plugin='.sql_quote($info['i']));
 
-		if ($i['constante'] == '_DIR_PLUGINS'
+		if (in_array($i['constante'],array('_DIR_PLUGINS','_DIR_PLUGINS_SUPPL'))
 		and substr($i['dossier'],0,5) == 'auto/') {
 			$dir = constant($i['constante']) . $i['dossier'];
 			if ($this->deleteDirectory($dir)) {
@@ -536,14 +539,13 @@ class Actionneur {
 	// lancer l'installation d'un plugin
 	function do_install($info) {
 		include_spip('inc/plugin');
-		$dossier = $info['dossier'];
-		$message_install = $this->installe_plugin($dossier);
+		$message_install = $this->installe_plugin($info);
 		return $message_install;
 	}
 
 
 	// adresse du dossier, et row SQL du plugin en question
-	function activer_plugin_dossier($dossier, $i, $constante="") {
+	function activer_plugin_dossier($dossier, $i, $constante='_DIR_PLUGINS') {
 		include_spip('inc/plugin');
 
 		//il faut absolument que tous les fichiers de cache
@@ -555,13 +557,15 @@ class Actionneur {
 		if (@is_readable(_CACHE_PLUGINS_FCT)) {include_once(_CACHE_PLUGINS_FCT);}
 		if (@is_readable(_CACHE_PIPELINES))   {include_once(_CACHE_PIPELINES);}
 
+		$dossier = ($constante == '_DIR_PLUGINS')? $dossier : '../'.constant($constante).$dossier;
 		ecrire_plugin_actifs(array($dossier), false, 'ajoute');
 		$installe = $i['version_base'] ? 'oui' : 'non';
 		if ($installe == 'oui') {
 			// installer le plugin au prochain tour
 			$new_action = array_merge($this->work, array(
 				'todo'=>'install',
-				'dossier'=>$dossier,
+				'dossier'=>rtrim($i['dossier'],'/'),
+				'constante'=>$i['constante']
 			));
 			array_unshift($this->end, $new_action);
 			#$this->installe_plugin($dossier);
@@ -618,12 +622,13 @@ class Actionneur {
 	}
 
 
-	function installe_plugin($dossier){
+	function installe_plugin($info){
 		$plugin_get_infos = charger_fonction('get_infos', 'plugins');
-		$infos = $plugin_get_infos($dossier);
+		$infos = $plugin_get_infos($info['dossier'],false,constant($info['constante']));
 		if (isset($infos['install'])) {
 			ob_start();
 			include_spip('inc/step');
+			$dossier = ($info['constante'] == '_DIR_PLUGINS')? $info['dossier'] : '../'.constant($info['constante']).$info['dossier'];
 			if (installe_un_plugin($dossier, $infos)) {
 				$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
 				if (!$meta_plug_installes) $meta_plug_installes=array();

@@ -11,7 +11,7 @@ function step_get_infos_plugin($constante, $p, $actifs, $recents) {
 	// enlever la balise doctype qui provoque une erreur "balise non fermee"
 	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
 	// traduire le xml en php
-	spip_log("spip_get_infos $dir $p");
+	//spip_log("spip_get_infos $dir $p");
 	if (!is_array($plugin = spip_xml_parse($xml))) return;
 		
 	// [extrait] de plugins/verifie_conformite.php

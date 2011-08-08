@@ -214,7 +214,8 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 				if (is_array($actifs[$prefix])
 				and (basename($actifs[$prefix]['dir']) == $p)) {
 					$insert['actif'] = 'oui';
-					if (step_plugin_est_installe($p))
+					$dossier = ($constante == '_DIR_PLUGINS')? $p : '../'.constant($constante).$p;
+					if (step_plugin_est_installe($dossier))
 						$insert['installe'] = 'oui';
 				}
 				// flag sur plugin utilise recemment
@@ -461,7 +462,7 @@ function step_liste_plugin_files($dir_plugins = ""){
 	if (!$dir_plugins) {
 		$dir_plugins = array(
 			'_DIR_PLUGINS',
-			'_DIR_EXTENSIONS',
+			'_DIR_EXTENSIONS'
 		);
 		// plugins supp (1 seul dossier)
 		if (defined('_DIR_PLUGINS_SUPPL')) {$dir_plugins[] = '_DIR_PLUGINS_SUPPL';}
