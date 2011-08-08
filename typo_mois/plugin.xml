@@ -1,10 +1,14 @@
 <plugin>
-	<nom>Typographie : dates (<code>"1er mars"</code> donne <code>"1er&nbsp;mars"</code>)</nom>
-	<version>1.0</version>
+	<nom>Typographie MOIS</nom>
+	<version>1.0.0</version>
 	<prefix>typo_mois</prefix>
 	<etat>stable</etat>
 	<auteur>Fil</auteur>
-	<description></description>
+	<slogan>Eviter de couper une date en fin de ligne</slogan>
+	<description>
+Ce plugin propose un filtre qui reconnait les dates au format "10 Mars" et remplace l'espace entre le jour et le mois par un espace ins&eacute;cable.
+Par exemple, <code>"1er mars"</code> devient <code>"1er&nbsp;mars"</code>.
+	</description>
 	<pipeline>
 		<nom>pre_typo</nom>
 		<action>mois</action>

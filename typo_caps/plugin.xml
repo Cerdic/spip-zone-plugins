@@ -1,10 +1,14 @@
 <plugin>
-	<nom>Typographie : CAPS (<code>ONU</code> devient <code><span class="caps">ONU</span></code>)</nom>
-	<version>1.0</version>
+	<nom>Typographie CAPS</nom>
+	<version>1.0.0</version>
 	<prefix>typo_caps</prefix>
 	<etat>stable</etat>
 	<auteur>Fil</auteur>
-	<description></description>
+	<slogan>Styler les mots en lettres capitales</slogan>
+	<description>
+Ce plugin propose un filtre qui reconnait les mots &eacte;crits en lettres capitales et les encadrent dans une balise <code><span class="caps"></code>.
+Par exemple, <code>ONU</code> devient <code><span class="caps">ONU</span></code>. De ce fait, les mots en lettres capitales peuvent &ecirc;tre styl&eacute;s en css.
+	</description>
 	<pipeline>
 		<nom>pre_typo</nom>
 		<action>caps</action>
