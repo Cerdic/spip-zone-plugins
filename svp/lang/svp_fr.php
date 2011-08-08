@@ -72,8 +72,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // L
 	'label_1_autre_contribution' => 'autre contribution',
-	'label_1_paquet' => 'paquet',
-	'label_1_plugin' => 'plugin',
 	'label_actualise_le' => 'Actualisé le',
 	'label_branches_spip' => 'Compatible',
 	'label_categorie' => 'Catégorie',
@@ -85,8 +83,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_phrase' => 'Rechercher dans les plugins',
 	'label_modifie_le' => 'Modifié le',
 	'label_n_autres_contributions' => 'autres contributions',
-	'label_n_paquets' => 'paquets',
-	'label_n_plugins' => 'plugins',
 	'label_prefixe' => 'Préfixe',
 	'label_selectionner_plugin' => 'Sélectionner ce plugin',
 	'label_tags' => 'Tags',

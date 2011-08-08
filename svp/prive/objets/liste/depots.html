@@ -27,7 +27,7 @@
 			<tr class="first_row">
 				<th class="titre principale">[(#TRI{titre, <:info_titre:>, ajax})]</th>
 				[(#ENV{affichage}|=={complet}|oui)
-				<th class="nombre">[(#TRI{nbr_paquets, <:svp:label_n_paquets|ucfirst:>, ajax})]</th>
+				<th class="nombre">[(#TRI{nbr_paquets, <:svp:titre_paquets:>, ajax})]</th>
 				<th class="date secondaire">[(#TRI{maj, <:svp:label_actualise_le:>, ajax})]</th>]
 				<th class="id">[(#TRI{id_depot, <:info_numero_abbreviation:>, ajax})]</th>
 				[(#ENV{affichage}|=={complet}|oui)

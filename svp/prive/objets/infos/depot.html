@@ -10,9 +10,9 @@
 	[(#REM) <!-- Les compteurs et l'etat d'actualisation --> ]
 	<div class="liste compteurs">
 		<ul class="liste-items">
-			<li>[(#NBR_PAQUETS) [(#NBR_PAQUETS|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]</li>
+			<li>[(#NBR_PAQUETS|singulier_ou_pluriel{svp:info_1_paquet, svp:info_nb_paquets})]</li>
 		[(#NBR_PLUGINS|>{0}|oui)
-			<li>[(#NBR_PLUGINS) [(#NBR_PLUGINS|singulier_ou_pluriel{svp:label_1_plugin, svp:label_n_plugins})]]</li>
+			<li>[(#NBR_PLUGINS|singulier_ou_pluriel{svp:info_1_plugin, svp:info_nb_plugins})]</li>
 		]
 		[(#NBR_AUTRES|>{0}|oui)
 			<li>[(#NBR_AUTRES) [(#NBR_AUTRES|singulier_ou_pluriel{svp:label_1_autre_contribution, svp:label_n_autres_contributions})]]</li>

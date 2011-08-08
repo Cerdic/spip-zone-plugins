@@ -20,7 +20,7 @@
 			[<li><:svp:label_actualise_le:> (#DATE_MODIF|affdate)</li>]
 
 		<BOUCLE_nbr_paquets(PAQUETS) {id_plugin}> </BOUCLE_nbr_paquets>
-			<li>[(#TOTAL_BOUCLE) [(#TOTAL_BOUCLE|singulier_ou_pluriel{svp:label_1_paquet, svp:label_n_paquets})]]</li>
+			<li>[(#TOTAL_BOUCLE|singulier_ou_pluriel{svp:info_1_paquet, svp:info_nb_paquets})]</li>
 		</B_nbr_paquets>
 
 		[(#REM) <!-- Si le plugin SVP Statistiques est active on peut afficher les stats du plugin --> ]
