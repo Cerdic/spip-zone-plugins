@@ -16,6 +16,6 @@
 		<nom>insert_head</nom>
 		<inclure>googleplus1_insert_head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;2.2.0)" />
+	<necessite id="SPIP" version="[2.0.10;3.0.0-dev)" />
 	<categorie>communication</categorie>
 </plugin>
