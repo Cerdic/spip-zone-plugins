@@ -1,10 +1,14 @@
 <plugin>
-	<nom>Plugin de versioning</nom>
+	<nom>Versioning</nom>
 	<version>1.0</version>
 	<prefix>versioning</prefix>
-	<auteur>
-		michael.courcy@netapsys.fr, mamadou.niagate@netapsys.fr
-	</auteur>
+	<auteur>michael.courcy@netapsys.fr, mamadou.niagate@netapsys.fr</auteur>
+	<slogan>G&eacute;rer deux versions d'un m&ecirc;me article</slogan>
+	<description>
+Ce plugin permet de cr&eacute;er une nouvelle version d'un article sans modifier celle qui est en ligne, puis quand l'administrateur l'estime opportun, 
+de d&eacute;ployer la nouvelle version de l'article &agrave; la place de la premi&egrave;re version, faisant passer cette derni&egrave;re au statut &#171; archiv&eacute; &#187;.
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-versionning</lien>
 	<options>versioning_options.php</options>
 	<pipeline>
 		<nom>insert_head</nom>
