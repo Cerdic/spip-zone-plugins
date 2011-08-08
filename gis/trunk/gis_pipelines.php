@@ -106,6 +106,7 @@ function gis_post_edition($flux){
 			include_spip('inc/documents');
 			$fichier = get_spip_doc($document['fichier']);
 			$id_document = $document['id_document'];
+			spip_log("hop geocode auto de chez gis2","bb");
 			// on recupere les coords definies dans les exif du document s'il y en a
 			if ($exifs =  @exif_read_data($fichier,'GPS')) {
 				if(!function_exists('dms_to_dec'))
@@ -144,7 +145,7 @@ function gis_post_edition($flux){
 				if(is_numeric($intLongDeg) && is_numeric($intLongMin) && is_numeric($intLongSec))
 					$longitude =  round(dms_to_dec($exifs["GPSLongitudeRef"],
 						$intLongDeg,$intLongMin,$intLongSec), 5);
-				if($config['adresse'] == 'on'){
+				if($config['geocoder'] == 'on'){
 					include_spip('inc/xml');
 					$url_geocoder = 'http://maps.googleapis.com/maps/api/geocode/xml?latlng='.urlencode($latitude).','.urlencode($longitude).'&sensor=true';
 					$geocoder = spip_xml_load($url_geocoder);
