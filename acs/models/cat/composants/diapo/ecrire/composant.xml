@@ -40,9 +40,10 @@
   <variable>
     <nom>Titre</nom>
     <type>choix</type>
-    <option>oui</option>
+    <option>over</option>
+    <option>under</option>
     <option>non</option>
-    <valeur>oui</valeur>
+    <valeur>over</valeur>
   </variable>
 
   <variable>

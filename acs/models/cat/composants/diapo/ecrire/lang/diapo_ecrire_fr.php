@@ -20,7 +20,9 @@ Soft-downgrade: fonctionne aussi sans javascript.',
 
 'Vu' => 'Documents déjà vus',
 'VuHelp' => 'Par défaut, les documents déjà affichés dans un article ou une rubrique ne sont PAS ré-affichés dans le diaporama, ce qui est le comportement souhaité pour un composant diaporama inséré dans une page article ou rubrique. Dans une autre page, on veut voir tous les documents qu\'ils soient ou non affichés dans un article ou une rubrique.',
-'TitreHelp' => 'Afficher le titre du document sur sa vignette.',
+'TitreOver' => 'Superpos&eacute;',
+'TitreUnder' => 'Dessous',
+'TitreHelp' => 'Affichage du titre et de la description du document.',
 'NbCol' => 'Colonnes',
 'NbColHelp' => 'Nombre de vignettes à afficher, et nombre de colonnes avant de changer de ligne. Par exemple, Nombre=12 et Colonnes=4 affichera 3 lignes de 4 vignettes.',
 
