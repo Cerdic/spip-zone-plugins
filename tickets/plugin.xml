@@ -93,7 +93,7 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<nom>
 		<multi>
 			[fr]Tickets, syst&egrave;me de suivi de bugs
-			[en]Bur reports, Bug tracking system
+			[en]Bug reports, Bug tracking system
 			[de]Tickets - System zur Fehler-Nachverfolgung</multi></nom>
 	<auteur>ARNO*</auteur>
 	<licence>GPL v3</licence>
