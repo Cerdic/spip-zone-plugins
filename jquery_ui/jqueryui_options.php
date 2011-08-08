@@ -1,7 +1,7 @@
 <?php
 
-define('_DIR_JQUERYUI_JS','lib/jquery-ui-1.8.9/ui/');
-define('_DIR_JQUERYUI_CSS','lib/jquery-ui-1.8.9/themes/');
+define('_DIR_JQUERYUI_JS','lib/jquery-ui-1.8.15/ui/');
+define('_DIR_JQUERYUI_CSS','lib/jquery-ui-1.8.15/themes/');
 
 /**
  * Fonction pour lister les ss-repertoires de themes/ de jQuery UI
