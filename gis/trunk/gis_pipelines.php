@@ -106,7 +106,6 @@ function gis_post_edition($flux){
 			include_spip('inc/documents');
 			$fichier = get_spip_doc($document['fichier']);
 			$id_document = $document['id_document'];
-			spip_log("hop geocode auto de chez gis2","bb");
 			// on recupere les coords definies dans les exif du document s'il y en a
 			if ($exifs =  @exif_read_data($fichier,'GPS')) {
 				if(!function_exists('dms_to_dec'))
