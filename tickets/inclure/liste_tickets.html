@@ -1,6 +1,13 @@
 #CACHE{0}
 [(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
 [(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
+#SET{champs_optionnels,#ARRAY}
+#SET{champs, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
+<BOUCLE_champs_optionnels(POUR) {tableau #GET{champs}}>
+[(#VALEUR|tickets_champ_optionnel_actif|oui)
+	#SET{champs_optionnels,#GET{champs_optionnels}|push{#CLE}}
+]
+</BOUCLE_champs_optionnels>
 <B_detaillee>
 [<h3>(#ENV{titre})</h3>]
 <div class="ticket">
@@ -13,11 +20,16 @@
 			<th><:tickets:champ_titre:></th>
 			[(#ENV{type}|non)<th><:tickets:champ_type:></th>]
 			<th><:tickets:champ_importance:></th>
+			#SET{champs, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
+ 			<BOUCLE_champs(POUR) {tableau #GET{champs_optionnels}}>
+				<th>[(#VAL{tickets:champ_}|concat{#VALEUR}|_T)]</th>
+			</BOUCLE_champs>
 			<th><:tickets:champ_date:></th>
+			<th><abbr title="<:tickets:champ_maj_long:>"><:tickets:champ_maj:></abbr></th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS){!par date}{pagination 10 #GET{hash_pagination}}{id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{jalon?}>
+	<BOUCLE_detaillee(TICKETS){!par date}{pagination #ENV{pagination,10} #GET{hash_pagination}}{id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{version?}{jalon?}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
@@ -31,7 +43,20 @@
 				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"][ title="(#STATUT|tickets_texte_severite)"] />
 				[&nbsp;(#SEVERITE|tickets_texte_severite)]
 			</td>
+			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td>[(#PROJET|sinon{-})]</td>
+			]
+			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td>[(#COMPOSANT|sinon{-})]</td>
+			]
+			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td>[(#VERSION|sinon{-})]</td>
+			]
+			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<td>[(#JALON|sinon{-})]</td>
+			]
 			<td>[(#DATE|affdate)]</td>
+			<td>[(#MAJ|affdate)]</td>
 		</tr>
 	</BOUCLE_detaillee>
 	</tbody>
