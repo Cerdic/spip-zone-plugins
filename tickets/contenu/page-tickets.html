@@ -8,10 +8,12 @@
 		<h1 class="titre"><:tickets:tickets:></h1>
 	</div>
 
-	<div class="ajax">
-	[(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=ouvert,
-		titre=<:tickets:tous_tickets_ouverts:>})]
-	</div>
+	[(#SESSION{id_auteur}|oui)
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=ouvert,id_assigne=#SESSION{id_auteur},
+			titre=<:tickets:vos_tickets_assignes:>}|trim)
+		</div>]
+	]
 	
 	[(#SESSION{id_auteur}|oui)
 		<div class="ajax">
@@ -20,13 +22,18 @@
 		</div>
 	]
 	
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=ouvert,
+		titre=<:tickets:tous_tickets_ouverts:>}|trim)
+	</div>]
+	
 	<div class="ajax">
 	[(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=#ARRAY{0,resolu,1,ferme},
-		titre=<:tickets:tickets_traites:>})]
+		titre=<:tickets:tickets_traites:>}|trim)]
 	</div>
 
-	<div class="ajax">
-	[(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,type="",
-		titre=<:tickets:tickets_derniers_commentaires:>})]
-	</div>	
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,type="",
+		titre=<:tickets:tickets_derniers_commentaires:>}|trim)
+	</div>]
 </div>

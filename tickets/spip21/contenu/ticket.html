@@ -21,10 +21,10 @@
 			[<dt><:tickets:champ_type:></dt><dd>(#TYPE|tickets_texte_type)</dd>]
 			[<dt><:tickets:champ_date:></dt><dd>(#DATE|affdate)</dd>]
 			<B_auteur><dt><:tickets:champ_createur:></dt><BOUCLE_auteur(AUTEURS){id_auteur=#ID_AUTEUR}{tous}><dd><a href="#URL_AUTEUR" class="spip_in">#NOM</a></dd></BOUCLE_auteur>
-			[<dt><:tickets:champ_projet:></dt><dd>(#PROJET)</dd>]
-			[<dt><:tickets:champ_composant:></dt><dd>(#COMPOSANT)</dd>]
-			[<dt><:tickets:champ_version:></dt><dd>(#VERSION)</dd>]
-			[<dt><:tickets:champ_jalon:></dt><dd>(#JALON)</dd>]
+			[<dt><:tickets:champ_projet:></dt><dd class="#EDIT{projet}">(#PROJET)</dd>]
+			[<dt><:tickets:champ_composant:></dt><dd class="#EDIT{composant}">(#COMPOSANT)</dd>]
+			[<dt><:tickets:champ_version:></dt><dd class="#EDIT{version}">(#VERSION)</dd>]
+			[<dt><:tickets:champ_jalon:></dt><dd class="#EDIT{jalon}">(#JALON)</dd>]
 		</dl>
 		[(#REM) Bloc de choix du statut et de l'assignation]
 		[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
