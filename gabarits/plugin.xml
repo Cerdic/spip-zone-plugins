@@ -3,7 +3,8 @@
 	<icon>prive/themes/spip/images/gabarits-64.png</icon>
 	<auteur>[b_b->http://www.spip-contrib.net/b_b]</auteur>
 	<licence>GPL 3</licence>
-	<version>1.0</version>
+	<version>1.1.0</version>
+	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>Gestion de gabarits pour les &eacute;l&eacute;ments de SPIP.</description>
 	<lien>http://www.spip-contrib.net/Gabarits</lien>
@@ -44,5 +45,5 @@
 	</bouton>
 	<necessite id='SPIP' version='[2.1;]' />
 	<necessite id='afficher_objets' version='[1.1.3;]' />
-	<necessite id="spip_bonux" version="[2.2.2;]" />
+	<necessite id="spip_bonux" version="[2.2.21;]" />
 </plugin>

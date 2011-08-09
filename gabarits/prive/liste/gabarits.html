@@ -1,6 +1,7 @@
 [(#SET{defaut_tri,#ARRAY{
 	date,-1,
 	titre,1,
+	objet,1,
 	statut,1
 }})
 ]<B_gabarits>
@@ -12,6 +13,7 @@
 		<tr class='first_row'>
 			<th class='statut'>[(#TRI{statut,<span title="<:afficher_objets:info_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class='titre'>[(#TRI{titre,<:info_titre:>,ajax})]</th>
+			<th class='objet'>[(#TRI{objet,<:gabarits:info_objet:>,ajax})]</th>
 			<th class='auteur'><:auteur:></th>
 			<th class='date'>[(#TRI{date,<:date:>,ajax})]</th>
 			<th class='action'></th>
@@ -22,6 +24,7 @@
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_GABARIT|puce_changement_statut{#STATUT,'',gabarit})]</td>
 			<td class='titre'><a href="[(#URL_ECRIRE{gabarits_edit,id_gabarit=#ID_GABARIT})]">#TITRE</a></td>
+			<td class='objet'>[(#OBJET)]</td>
 			<td class='auteur'><BOUCLE_auteur(AUTEURS){id_auteur}{tout}><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></BOUCLE_auteur></td>
 			<td class='date'>[(#DATE|affdate_court)]</td>
 			<td class='action'>[(#AUTORISER{supprimer,gabarit,#ID_GABARIT}|oui)

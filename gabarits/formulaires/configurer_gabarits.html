@@ -1,0 +1,32 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}"><div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+	<li class="editer_gabarits_objets[ (#ENV**{erreurs}|table_valeur{gabarits_objets}|oui)erreur]">
+		<label><:gabarits:cfg_label_objets:></label>
+		<p class="explication"><:gabarits:cfg_explication_objets:></p>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{gabarits_objets})</span>
+		]
+		<div class="choix">
+			<input type="checkbox" name="objets[]" id="objets_article" value="article"[(#VAL{'article'}|in_array{#ENV{objets,#ARRAY{0,'article'}}}|oui)checked="checked"] />
+			<label for="objets_article"><:gabarits:cfg_label_objets_article:></label>
+		</div>
+		<div class="choix">
+			<input type="checkbox" name="objets[]" id="objets_breve" value="breve"[(#VAL{'breve'}|in_array{#ENV{objets,#ARRAY{0,'article'}}}|oui)checked="checked"] />
+			<label for="objets_breve"><:gabarits:cfg_label_objets_breve:></label>
+		</div>
+		<div class="choix">
+			<input type="checkbox" name="objets[]" id="objets_rubrique" value="rubrique"[(#VAL{'rubrique'}|in_array{#ENV{objets,#ARRAY{0,'article'}}}|oui)checked="checked"] />
+			<label for="objets_rubrique"><:gabarits:cfg_label_objets_rubrique:></label>
+		</div>
+		<div class="choix">
+			<input type="checkbox" name="objets[]" id="objets_mot" value="mot"[(#VAL{'mot'}|in_array{#ENV{objets,#ARRAY{0,'article'}}}|oui)checked="checked"] />
+			<label for="objets_mot"><:gabarits:cfg_label_objets_mot:></label>
+		</div>
+	</li>
+</ul>
+<p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+</div></form>
+</div>

@@ -7,14 +7,14 @@
 				<select size="5" class="selecteur_gabarits" name="select_gabarits" id="select_gabarits">
 					<B_vos_gabarits>
 					<optgroup label="<:gabarits:label_vos_gabarits|attribut_html:>">
-					<BOUCLE_vos_gabarits(GABARITS){id_auteur=#SESSION{id_auteur}}{!par id_gabarit}{doublons}>
+					<BOUCLE_vos_gabarits(GABARITS){id_auteur=#SESSION{id_auteur}}{!par id_gabarit}{objet=#ENV{objet}}{doublons}>
 					<option class="item[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" value="#ID_GABARIT">#TITRE</option>
 					</BOUCLE_vos_gabarits>
 					</optgroup>
 					</B_vos_gabarits>
 					<B_autres_gabarits>
 					<optgroup label="<:gabarits:label_autres_gabarits|attribut_html:>">
-					<BOUCLE_autres_gabarits(GABARITS){!par id_gabarit}{statut=public}{doublons}>
+					<BOUCLE_autres_gabarits(GABARITS){!par id_gabarit}{statut=public}{objet=#ENV{objet}}{doublons}>
 					<option class="item[ (#COMPTEUR_BOUCLE|alterner{'','odd'})]" value="#ID_GABARIT">#TITRE</option>
 					</BOUCLE_autres_gabarits>
 					</optgroup>
@@ -32,9 +32,6 @@
 	<script type="text/javascript">
 	(function($){
 	$(function(){
-		$('input.check').click(function(){
-			$(this).parent().toggleClass('nomplugin_on');
-		});
 		$('#select_gabarits option').click(function(){
 			var id = $(this).attr('value');
 			$('#texte_previsu').html('')

@@ -1,0 +1,9 @@
+<li class="editer_objet[ (#ENV**{erreurs}|table_valeur{objet}|oui)erreur]">
+	<label for="objet"><:gabarits:label_objet:></label>[
+	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{objet})</span>
+	]<select name="objet" id="objet">
+		<BOUCLE_objets(POUR){tableau #CONFIG{gabarits/objets,#ARRAY{0,'article'}}}>
+		<option value='#VALEUR'[(#ENV{objet}|=={#VALEUR}|oui)selected='selected']>#VALEUR</option>
+		</BOUCLE_objets>
+	</select>
+</li>

@@ -6,42 +6,46 @@
  *
  */
 
-	$GLOBALS['gabarits_base_version'] = 0.1;
-	function gabarits_verifier_base(){
-		$version_base = $GLOBALS['gabarits_base_version'];
-		$current_version = 0.0;
-		if ((!isset($GLOBALS['meta']['gabarits_base_version'])) ||
-			(($current_version = $GLOBALS['meta']['gabarits_base_version'])!=$version_base)){
+include_spip('inc/meta');
+
+/**
+ * Installation/maj des tables gabarits
+ *
+ * @param string $nom_meta_base_version
+ * @param string $version_cible
+ */
+function gabarits_upgrade($nom_meta_base_version,$version_cible){
+	$current_version = '0.0';
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
+			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+		// installation
+		if (version_compare($current_version, '0.0','<=')){
 			include_spip('base/gabarits');
-			if ($current_version==0.0){
-				include_spip('base/create');
-				include_spip('base/abstract_sql');
-				creer_base();
-				maj_tables('spip_rubriques'); 
-				ecrire_meta('gabarits_base_version',$current_version=$version_base,'non');
-			}
+			include_spip('base/create');
+			// creer les tables
+			creer_base();
+			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+		}
+		if (version_compare($current_version, '0.2','<')){
+			include_spip('base/gabarits');
+			include_spip('base/create');
+			creer_base();
+			include_spip('base/abstract_sql');
+			// lier les gabarits existants aux articles
+			sql_updateq('spip_gabarits', array('objet' => 'articles'));
+			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
 	}
+}
+
+/**
+ * Desinstallation/suppression des tables gabarits
+ *
+ * @param string $nom_meta_base_version
+ */
+function gabarits_vider_tables($nom_meta_base_version) {
+	sql_drop_table('spip_gabarits');
+	effacer_meta($nom_meta_base_version);
+}
 	
-	function gabarits_vider_tables() {
-		include_spip('base/gabarits');
-		include_spip('base/abstract_sql');
-		sql_drop_table("spip_gabarits");
-		effacer_meta('gabarits_base_version');
-	}
-	
-	function gabarits_install($action){
-		$version_base = $GLOBALS['gabarits_base_version'];
-		switch ($action){
-			case 'test':
-				return (isset($GLOBALS['meta']['gabarits_base_version']) AND ($GLOBALS['meta']['gabarits_base_version']>=$version_base));
-				break;
-			case 'install':
-				gabarits_verifier_base();
-				break;
-			case 'uninstall':
-				gabarits_vider_tables();
-				break;
-		}
-	}
 ?>

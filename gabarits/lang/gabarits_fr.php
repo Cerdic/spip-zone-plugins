@@ -8,16 +8,26 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'bouton_supprimer' => 'Supprimer',
 
+'cfg_explication_objets' => 'Sur quels objets souhaitez vous utiliser les gabarits ?',
+'cfg_label_objets' => 'Types d\'objets',
+'cfg_label_objets_article' => 'les articles',
+'cfg_label_objets_breve' => 'les br&egrave;ves',
+'cfg_label_objets_mot' => 'les mots-cl&eacute;s',
+'cfg_label_objets_rubrique' => 'les rubriques',
+'cfg_titre_page' => 'Configuration du plugin Gabarits',
+'cree_le' => 'Créé le',
+
 'gabarits' => 'Gabarits',
 'gabarits_auteur' => 'Gabarits de :',
-'cree_le' => 'Créé le',
 
 'gestion_gabarits' => 'Gestion des gabarits',
 
 'icone_creer_gabarit' => 'Créer un nouveau gabarit',
+'info_objet' => 'Objet',
 'inserer_texte' => 'Ajouter au texte',
 
 'label_autres_gabarits' => 'Gabarits publics',
+'label_objet' => 'Objet',
 'label_previsu_gabarits' => 'Pr&eacute;visualisation',
 'label_select_gabarits' => 'S&eacute;lectionnez un gabarit',
 'label_statut' => 'Statut',
@@ -27,6 +37,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nombre_gabarits' => '@nb@ gabarits',
 'numero_gabarit' => 'Gabarit num&eacute;ro',
+
+'objet_type' => '@type@',
 
 'par' => 'Par',
 

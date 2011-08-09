@@ -20,6 +20,7 @@
 				<option value='prive'[(#ENV{statut}|=={'prive'}|oui)selected='selected']><:gabarits:statut_prive:></option>
 	    	</select>
 	    </li>
+		[(#INCLURE{fond=formulaires/inc-gabarits_objets,env})]
 	    <li class="editer_texte[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
 			<label for="texte"><:info_texte:></label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>
