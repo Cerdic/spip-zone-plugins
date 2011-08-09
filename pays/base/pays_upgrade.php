@@ -34,7 +34,7 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 	if (version_compare($current_version,"1.2","<")){
         // on renomme IR en 00 (il n'existe pas de code ISO numérique)
         sql_update("spip_pays",
-                array("code" => "00"),
+                array("code" => "0"),
                 array("code='IR'",));
 
         // on renomme IQ en IR (qui etait du coup libre)
@@ -44,7 +44,7 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
         // on renomme IX en IQ (qui etait du coup libre)
         sql_update("spip_pays",
                 array("code" => "IQ"),
-                array("code='00'",));
+                array("code='0'",));
         // IR et IQ sont echanges ;) log et maj meta maintenant
         ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
     }   
