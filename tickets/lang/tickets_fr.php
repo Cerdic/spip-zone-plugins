@@ -103,6 +103,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_ticket' => 'Modifier ce ticket',
 	'icone_retour_ticket' => 'Retour au ticket',
 
+	// L
+	'label_paginer_par' => 'Paginer par&nbsp;:',
+	
 	// M
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',

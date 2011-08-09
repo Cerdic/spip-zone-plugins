@@ -1,5 +1,17 @@
 #CACHE{0}
-[(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
+[(#SET{defaut_tri,#ARRAY{
+	date,#ENV{date_sens,-1},
+	maj,#ENV{date_sens,-1},
+	titre,1,
+	type,1,
+	jalon,1,
+	version,1,
+	composant,1,
+	projet,1,
+	severite,1,
+	id_ticket,1
+}})
+][(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
 [(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
 #SET{champs_optionnels,#ARRAY}
 #SET{champs, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
@@ -12,24 +24,95 @@
 [<h3>(#ENV{titre})</h3>]
 <div class="ticket">
 [(#ANCRE_PAGINATION)]
-<table>
+[<p class="pagination">(#PAGINATION)</p>]
+[(#COMPTEUR_BOUCLE|>{10}|oui)
+<p class="actions">
+	<:tickets:label_paginer_par:> 
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{10,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">10</a>})]
+	<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{50,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">50</a>})]
+	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{100,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">100</a>})]]
+	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{200,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">200</a>})]]
+</p>
+]
+<table class="spip">
 	<thead>
 		<tr>
 			<th></th>
-			<th>#</th>
-			<th><:tickets:champ_titre:></th>
-			[(#ENV{type}|non)<th><:tickets:champ_type:></th>]
-			<th><:tickets:champ_importance:></th>
-			#SET{champs, #ARRAY{projet,projets,composant,composants,version,versions,jalon,jalons}}
- 			<BOUCLE_champs(POUR) {tableau #GET{champs_optionnels}}>
-				<th>[(#VAL{tickets:champ_}|concat{#VALEUR}|_T)]</th>
-			</BOUCLE_champs>
-			<th><:tickets:champ_date:></th>
-			<th><abbr title="<:tickets:champ_maj_long:>"><:tickets:champ_maj:></abbr></th>
+			<th>
+				[(#ENV{tri_detaillee}|=={id_ticket}|non)[(#TRI{id_ticket,#,ajax})]]
+				[(#ENV{tri_detaillee}|=={id_ticket}|oui)
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',#,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',#,ajax})]]]
+			</th>
+			<th>
+				[(#ENV{tri_detaillee}|=={titre}|non)[(#TRI{titre,<:tickets:champ_titre:>,ajax})]]
+				[(#ENV{tri_detaillee}|=={titre}|oui)
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_titre:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_titre:>,ajax})]]]
+			</th>
+			[(#ENV{type}|non)<th>
+				[(#ENV{tri_detaillee}|=={type}|non)[(#TRI{type,<:tickets:champ_type:>,ajax})]]
+				[(#ENV{tri_detaillee}|=={type}|oui)
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_type:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_type:>,ajax})]]]
+			</th>]
+			<th>
+				[(#ENV{tri_detaillee}|=={severite}|non)[(#TRI{severite,<:tickets:champ_importance:>,ajax})]]
+				[(#ENV{tri_detaillee}|=={severite}|oui)
+					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_importance:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_importance:>,ajax})]]]
+			</th>
+			[(#VAL{projet}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th>
+					[(#ENV{tri_detaillee}|=={projet}|non)[(#TRI{projet,<:tickets:champ_projet:>,ajax})]]
+					[(#ENV{tri_detaillee}|=={projet}|oui)
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_projet:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_projet:>,ajax})]]]
+				</th>
+			]
+			[(#VAL{composant}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th>
+					[(#ENV{tri_detaillee}|=={composant}|non)[(#TRI{composant,<:tickets:champ_composant:>,ajax})]]
+					[(#ENV{tri_detaillee}|=={composant}|oui)
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_composant:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_composant:>,ajax})]]]
+				</th>
+			]
+			[(#VAL{version}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th>
+					[(#ENV{tri_detaillee}|=={version}|non)[(#TRI{version,<:tickets:champ_version:>,ajax})]]
+					[(#ENV{tri_detaillee}|=={version}|oui)
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_version:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_version:>,ajax})]]]
+				</th>
+			]
+			[(#VAL{jalon}|in_array{#GET{champs_optionnels,#ARRAY}}|oui)
+				<th>
+					[(#ENV{tri_detaillee}|=={jalon}|non)[(#TRI{jalon,<:tickets:champ_jalon:>,ajax})]]
+					[(#ENV{tri_detaillee}|=={jalon}|oui)
+						[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_jalon:>,ajax})]]
+						[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_jalon:>,ajax})]]]
+				</th>
+			]
+			<th>
+				[(#ENV{tri_detaillee}|!={date}|et{#ENV{tri_detaillee}|oui}|oui)[(#TRI{date,<:tickets:champ_date:>,ajax})]]
+				[(#ENV{tri_detaillee}|=={date}|ou{#ENV{tri_detaillee}|non}|oui)
+					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{'>',<:tickets:champ_date:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'<',<:tickets:champ_date:>,ajax})]]]
+			</th>
+			<th><abbr title="<:tickets:champ_maj_long:>">
+				[(#ENV{tri_detaillee}|=={maj}|non)[(#TRI{maj,<:tickets:champ_maj:>,ajax})]]
+				[(#ENV{tri_detaillee}|=={maj}|oui)
+					[(#ENV{sens_detaillee}|=={1}|oui)[(#TRI{'>',<:tickets:champ_maj:>,ajax})]]
+					[(#ENV{sens_detaillee}|=={-1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'<',<:tickets:champ_maj:>,ajax})]]]
+			</abbr></th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS){!par date}{pagination #ENV{pagination,10} #GET{hash_pagination}}{id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{version?}{jalon?}{composant?}{projet?}>
+	<BOUCLE_detaillee(TICKETS){id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
@@ -61,6 +144,17 @@
 	</BOUCLE_detaillee>
 	</tbody>
 </table>
+[(#COMPTEUR_BOUCLE|>{10}|oui)
+<p class="actions">
+	<:tickets:label_paginer_par:> 
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{10,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">10</a>})]
+	<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{50,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">50</a>})]
+	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{100,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">100</a>})]]
+	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{200,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">200</a>})]]
+</p>]
 [<p class="pagination">(#PAGINATION)</p>]
 </div>
 </B_detaillee>

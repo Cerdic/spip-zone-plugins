@@ -103,6 +103,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'icone_modifier_ticket' => 'Modify this bug report',
 	'icone_retour_ticket' => 'Back to the bug report',
 
+	// L
+	'label_paginer_par' => 'Paginate by&nbsp;:',
+	
 	// M
 	'mail_texte_message_auto' => 'This is an automatic message: please don\'t answer.',
 	'message_automatique' => 'This is an automatic message: please don\'t answer.',
