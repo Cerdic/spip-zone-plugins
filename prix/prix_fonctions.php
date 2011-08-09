@@ -50,12 +50,15 @@ function balise_PRIX_dist($p) {
  * @return string Retourne une chaine contenant le prix formaté avec une devise (par défaut l'euro)
  */
 function prix_formater($prix){
-	       setlocale(LC_MONETARY, 'fr_FR.utf8'); 
-	       $prix = money_format('%i', $prix); 
-	 	         
-	 	        // Ensuite on ajoute la devise 
-	 	        $prix .= '&nbsp;&euro;'; 
-	return $prix;
+    setlocale(LC_MONETARY, 'it_IT.utf8'); 
+
+    $prix = money_format('%i', $prix); 
+
+    // Afficher la devise € si celle ci n'est pas remontée par la fonction money
+    if (money_format('%#1.0n', 0) == "0") 
+        $prix .= '&nbsp;&euro;'; 
+
+    return $prix;
 }
 
 ?>
