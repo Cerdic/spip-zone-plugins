@@ -32,7 +32,7 @@ function gabarits_upgrade($nom_meta_base_version,$version_cible){
 			creer_base();
 			include_spip('base/abstract_sql');
 			// lier les gabarits existants aux articles
-			sql_updateq('spip_gabarits', array('objet' => 'articles'));
+			sql_updateq('spip_gabarits', array('objet' => 'article'));
 			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
 	}
