@@ -22,6 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_explication_composants' => 'Separate the components with the character ":".',
 	'cfg_explication_jalons' => 'Separate the milestones with the character ":".',
 	'cfg_explication_projets' => 'Separate the projects with the character ":".',
+	'cfg_explication_readonly' => 'This part of the configuration is already set somewhere else.',
 	'cfg_explication_versions' => 'Separate the versions with the character ":".',
 	'cfg_inf_type_autorisation' => 'If you choose by status or by author, you will be prompted below your selection of status or authors.',
 	'cfg_lbl_autorisation_auteurs' => '	Allow list of authors',

@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_explication_composants' => 'Séparez les composants par le caractère ":".',
 	'cfg_explication_jalons' => 'Séparez les jalons par le caractère ":".',
 	'cfg_explication_projets' => 'Séparez les projets par le caractère ":".',
+	'cfg_explication_readonly' => 'Cette partie de la configuration est déjà définie autre part.',
 	'cfg_explication_versions' => 'Séparez les versions par le caractère ":".',
 	'cfg_form_tickets_autorisations' => 'Configuration des autorisations',
 	'cfg_form_tickets_general' => 'Configuration g&eacute;n&eacute;rale',
