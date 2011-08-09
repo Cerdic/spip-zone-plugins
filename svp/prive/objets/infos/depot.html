@@ -21,13 +21,7 @@
 	</div>
 	<p>[<:svp:label_actualise_le:><br />(#MAJ|affdate), [(#MAJ|affdate{H:i})]]</p>
 	
-	[(#REM) <!-- Le bouton d'affichage de la page publique du depot si le module SVP Squelettes
-	             est active --> ]
-	[(#PLUGIN{SVPSKEL}|oui)
-		[(#VAL{redirect}
-			|generer_url_action{type=depot&id=#ID_DEPOT}
-			|parametre_url{var_mode, calcul}
-			|icone_horizontale{<:icone_voir_en_ligne:>, racine})]
-	]
+	[(#REM) <!-- Le bouton d'affichage de la page publique du depot si un squelette public existe --> ]
+	<INCLUDE{fond=prive/squelettes/inclure/voir_en_ligne, type=#ENV{type}, id=#ID_DEPOT} />
 </div>
 </BOUCLE_infos_depot>

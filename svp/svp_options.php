@@ -55,4 +55,9 @@ $GLOBALS['infos_branches_spip'] = array(
 	'3.0' => array('3.0.0',_SVP_VERSION_SPIP_MAX) 
 );
 
+// Liste des pages publiques d'objet supportees par le squelette (depot, plugin, paquet).
+// Par defaut, SVP n'en propose plus.
+// Le squelette qui les propose doit definir la constante en suivant l'exemple ci-dessous :
+// define('_SVP_PAGES_OBJET_PUBLIQUES', 'depot:plugin');
+
 ?>
