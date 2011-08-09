@@ -167,23 +167,29 @@ function comments_formulaire_traiter($flux){
 		// $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour
 		// si pas d'url de retour explicite
 		$redirect = $flux['data']['redirect'];
-		if (!isset($flux['args']['args'][12]) OR !$flux['args']['args'][12]){
-			// si on est pas sur la page forum, on ne redirige pas
-			// mais il faudra traiter l'ancre
-			if (!($p=_request('page')) OR $p!=='forum'){
-				unset($flux['data']['redirect']);
-				// mais on le remet editable !
-				$flux['data']['editable']=true;
-				// vider la saisie :
-				set_request('texte');
-				set_request('titre');
-				set_request('url_site');
-				set_request('ajouter_groupe');
-				set_request('ajouter_mot');
-				set_request('id_forum');
+		
+		$f = chercher_filtre('info_plugin');
+		if($f)
+			$version_forum = $f('forum', 'version');
+
+		if(!$version_forum OR ($version_forum < '1')){
+			if (!isset($flux['args']['args'][12]) OR !$flux['args']['args'][12]){
+				// si on est pas sur la page forum, on ne redirige pas
+				// mais il faudra traiter l'ancre
+				if (!($p=_request('page')) OR $p!=='forum'){
+					unset($flux['data']['redirect']);
+					// mais on le remet editable !
+					$flux['data']['editable']=true;
+					// vider la saisie :
+					set_request('texte');
+					set_request('titre');
+					set_request('url_site');
+					set_request('ajouter_groupe');
+					set_request('ajouter_mot');
+					set_request('id_forum');
+				}
 			}
 		}
-
 		$id_forum = $flux['data']['id_forum'];
 		include_spip('base/abstract_sql');
 		$statut = sql_getfetsel('statut','spip_forum','id_forum='.intval($id_forum));
