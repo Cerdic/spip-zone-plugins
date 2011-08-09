@@ -65,7 +65,7 @@ function formulaires_inserer_modeles_verifier_dist() {
 		$infos = charger_infos_formulaire_modele(_request('formulaire_modele'));
 		$erreurs = saisies_verifier($infos['parametres']);
 	}
-	
+	spip_log("formulaires_inserer_modeles_verifier_dist "._request('id_modele'),"bug");
 	return $erreurs;
 }
 
