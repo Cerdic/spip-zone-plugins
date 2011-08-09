@@ -9,23 +9,46 @@
 
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-	<ul>
-		[(#SAISIE{case, notification_publique,
-			label=<:tickets:cfg_lbl_notification_publique:>,
-			label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
-
-		[(#REM) uniquement avec le plugin forums ]
-		[(#SPIP_VERSION|version_compare{'2.1','>'}|oui)
-			[(#SAISIE{radio, forums_publics,
-				label=<:tickets:cfg_lbl_forums_publics:>,
-				defaut=posteriori,
-				datas=[(#ARRAY{
-					non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
-					posteriori,<:bouton_radio_publication_immediate:>,
-					priori,<:bouton_radio_moderation_priori:>,
-					abo,<:bouton_radio_enregistrement_obligatoire:>,
-				})]})]
-		]
+		<ul>
+			<li class="fieldset">
+				<h3 class="legend"><:tickets:cfg_lgd_champs_optionnels:></h3>
+				<ul>
+					[(#SAISIE{input, versions,
+						label=<:tickets:cfg_lbl_versions:>,
+						explication=<:tickets:cfg_explication_versions:>})]
+					[(#SAISIE{input, jalons,
+						label=<:tickets:cfg_lbl_jalons:>,
+						explication=<:tickets:cfg_explication_jalons:>})]
+					[(#SAISIE{input, composants,
+						label=<:tickets:cfg_lbl_composants:>,
+						explication=<:tickets:cfg_explication_composants:>})]
+					[(#SAISIE{input, projets,
+						label=<:tickets:cfg_lbl_projets:>,
+						explication=<:tickets:cfg_explication_projets:>})]
+				</ul>
+			</li>
+			
+			<li class="fieldset">
+				<h3 class="legend"><:tickets:cfg_lgd_champs_optionnels:></h3>
+				<ul>
+				[(#SAISIE{case, notification_publique,
+					label=<:tickets:cfg_lbl_notification_publique:>,
+					label_case=<:tickets:cfg_lbl_case_notification_publique:>})]
+		
+				[(#REM) uniquement avec le plugin forums ]
+				[(#PLUGIN{forum,version}|>{'1.0'}|oui)
+					[(#SAISIE{radio, forums_publics,
+						label=<:tickets:cfg_lbl_forums_publics:>,
+						defaut=posteriori,
+						datas=[(#ARRAY{
+							non,<:tickets:cfg_bouton_radio_desactiver_forum_public:>,
+							posteriori,<:bouton_radio_publication_immediate:>,
+							priori,<:bouton_radio_moderation_priori:>,
+							abo,<:bouton_radio_enregistrement_obligatoire:>,
+						})]})]
+				]
+				</ul>
+			</li>
 		</ul>
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_valider:>" />

@@ -1,15 +1,24 @@
 <?php
 
-// Creation de la liste des options du select des champ jalon, version, projet ou composant
-
-// retourne false si pas de champ defini
-// sinon retourne un tableau des elements du champ
+/**
+ * Crée la liste des options du select des champs :
+ * -* jalon
+ * -* version
+ * -* projet
+ * -* composant
+ * 
+ * @param string $nom
+ */
 function tickets_champ_optionnel_actif($nom){
-	$nom = '_TICKETS_LISTE_' . strtoupper($nom);
-	if (!defined($nom)) {
+	$constante = '_TICKETS_LISTE_' . strtoupper($nom);
+	if (!defined($constante) && !lire_config('tickets/general/'.$nom)) {
 		return false;
 	}
-	$liste = constant($nom);
+	if(defined($constante))
+		$liste = constant($constante);
+	else 
+		$liste = lire_config('tickets/general/'.$nom,'');
+	spip_log($liste,'ticket');
 	if ($liste == '') return false;
 
 	return explode(':', $liste);
@@ -32,7 +41,6 @@ function tickets_select_assignation($en_cours){
 	while ($row_auteur = sql_fetch($query_auteurs)) {
 		$selected = ($row_auteur["id_auteur"] == $en_cours) ? ' selected="selected"' : '';
 		$options .= '<option value="' . $row_auteur["id_auteur"] . '"' . $selected . '>' . $row_auteur["nom"] . '</option>';
-
 	}
 
 	return $options;
@@ -41,7 +49,7 @@ function tickets_select_assignation($en_cours){
 // Affichage de la page des tickets classes par jalon
 function tickets_classer_par_jalon($bidon) {
 	$page = NULL;
-	if (defined('_TICKETS_LISTE_JALONS')) {
+	if (defined('_TICKETS_LISTE_JALONS') OR lire_config()) {
 		$liste = explode(":", _TICKETS_LISTE_JALONS);
 		$i = 0;
 		foreach($liste as $_jalon) {
