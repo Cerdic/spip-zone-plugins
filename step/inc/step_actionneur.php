@@ -383,7 +383,7 @@ class Actionneur {
 					// - supprimer l'ancien (si faisable)
 					if (($dirs['dossier'] . '/') != $i['dossier']) {
 						if ($i['actif'] == 'oui') {
-							$this->activer_plugin_dossier($dirs['dossier'], $maj,$maj['constante']);
+							$this->activer_plugin_dossier($dirs['dossier'], $maj);
 						}
 
 						if (substr($i['dossier'],0,5) == 'auto/') {
