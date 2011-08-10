@@ -1,0 +1,101 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=jquerymasonry -->
+
+<div class="formulaire_spip formulaire_configurer formulaire_config_jquerymasonry">
+
+   [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+   [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+   <form name="formulaire_config_jquerymasonry" method="post" action="#ENV{action}">
+   <div>
+      #ACTION_FORMULAIRE{#ENV{action}}
+
+      <ul>
+      	[(#REM) On pourrait faire un truc plus elegant qui rajoute et supprime des elements... ]
+
+         [(#SAISIE{fieldset,fjquerymasonry_nombre,env,
+            label=<:jquerymasonry:legend_jquerymasonry_nombre:>,
+            saisies=#ARRAY{
+               0, #ARRAY{
+                  saisie, input,
+                  options, #ARRAY{
+                     nom, nombre,
+                     defaut, 1,
+                     label, <:jquerymasonry:nombre_elements:>
+                  },
+                  verifier, #ARRAY{
+                     type, entier,
+                     options, #ARRAY{
+                     	min, 1,
+                        max, 10
+                     }
+                  }
+               }
+            }
+         })]
+			<BOUCLE_elements(ENUM){1,#CONFIG{jquerymasonry/nombre,2}}>
+            [(#SAISIE{fieldset,fjquerymasonry#VALEUR,env,
+               label=<:jquerymasonry:legend_jquerymasonry{numero=#VALEUR}:>,
+               saisies=#ARRAY{
+                  0, #ARRAY{
+                     saisie, input,
+                     options, #ARRAY{
+                        nom, container#VALEUR,
+                        label, <:jquerymasonry:label_container:>,
+                        explication, <:jquerymasonry:explication_container:>
+                     }
+                  },
+                  1, #ARRAY{
+                     saisie, input,
+                     options, #ARRAY{
+                        nom, items#VALEUR,
+                        label, <:jquerymasonry:label_items:>,
+                        explication, <:jquerymasonry:explication_items:>
+                     }
+                  },
+                  2, #ARRAY{
+                     saisie, input,
+                     options, #ARRAY{
+                        nom, largeur#VALEUR,
+                        label, <:jquerymasonry:label_largeur:>,
+                        explication, <:jquerymasonry:explication_largeur:>
+                     }
+                  },
+                  3, #ARRAY{
+                     saisie, input,
+                     options, #ARRAY{
+                        nom, marge#VALEUR,
+                        label, <:jquerymasonry:label_marge:>,
+                        explication, <:jquerymasonry:explication_marge:>
+                     }
+                  },
+                  4, #ARRAY{
+                     saisie, oui_non,
+                     options, #ARRAY{
+                        nom, multicolonne#VALEUR,
+                        label, <:jquerymasonry:label_multicolonne:>,
+                        explication, <:jquerymasonry:explication_multicolonne:>,
+                        defaut, 
+                     }
+                  },
+                  5, #ARRAY{
+                     saisie, oui_non,
+                     options, #ARRAY{
+                        nom, animation#VALEUR,
+                        label, <:jquerymasonry:label_animation:>,
+                        explication, <:jquerymasonry:explication_animation:>,
+                        defaut, on
+                     }
+                  }
+               }
+            })]
+			</BOUCLE_elements>
+
+      </ul>
+      <p class="boutons">
+         <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
+      </p>
+   </div>
+   </form>
+</div>
