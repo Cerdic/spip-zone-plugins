@@ -22,6 +22,7 @@ function tickets_declarer_tables_principales($tables_principales){
 			"composant"	=> "varchar(40) DEFAULT '' NOT NULL",
 			"version"	=> "varchar(30) DEFAULT '' NOT NULL",
 			"jalon"	=> "varchar(30) DEFAULT '' NOT NULL",
+			"navigateur" => "varchar(60) DEFAULT '' NOT NULL",
 			"maj"	=> "TIMESTAMP"
 			);
 

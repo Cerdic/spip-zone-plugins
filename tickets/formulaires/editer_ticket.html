@@ -38,6 +38,13 @@
 				]
 				</BOUCLE_saisies>
 
+				[(#CONFIG{tickets/general/selecteur_navigateur}|=={on}|oui)
+					[(#SAISIE{selection, navigateur,
+						label=<:tickets:champ_navigateur:>,
+						option_intro='-',
+						datas=[(#REM|tickets_liste_navigateur)]})]				
+				]
+				
 				[(#SAISIE{textarea, texte,
 					label=<:tickets:champ_description:>,
 					explication=<:tickets:explication_description_ticket:>,

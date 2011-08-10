@@ -17,13 +17,13 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 	if (version_compare($current_version,"0.2","<")){
-		//modifications de la table spip_tickets,
+		// modifications de la table spip_tickets,
 		// ajout des champs jalon, version, composant, projet
 		maj_tables('spip_tickets');
 		ecrire_meta($nom_meta_base_version,$current_version="0.2");
 	}
 	if (version_compare($current_version,"0.6","<")){
-		//modifications de la table spip_tickets
+		// modifications de la table spip_tickets
 		sql_alter("TABLE spip_tickets MODIFY jalon varchar(30) DEFAULT '' NOT NULL");
 		sql_alter("TABLE spip_tickets MODIFY version varchar(30) DEFAULT '' NOT NULL");
 		
@@ -42,7 +42,12 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		sql_drop_table("spip_tickets_forum");
 		ecrire_meta($nom_meta_base_version,$current_version="1.0");
 	}
-		
+	if (version_compare($current_version,"1.1","<")){
+		// modifications de la table spip_tickets,
+		// ajout du champ navigateur
+		maj_tables('spip_tickets');
+		ecrire_meta($nom_meta_base_version,$current_version="1.1");
+	}
 }
 
 function tickets_vider_tables($nom_meta_base_version) {

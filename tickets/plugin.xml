@@ -109,8 +109,8 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.74</version>
-	<version_base>1.0</version_base>
+	<version>1.75</version>
+	<version_base>1.1</version_base>
 
 	<etat>stable</etat>
 

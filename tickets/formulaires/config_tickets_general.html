@@ -46,6 +46,9 @@
 						class=#GET{projets_readonly},
 						explication=#GET{explications_projets},
 						valeur_forcee=[(#GET{projets_readonly}|?{#EVAL{'_TICKETS_LISTE_PROJETS'},''})]})]
+					[(#SAISIE{case, selecteur_navigateur,
+						label=<:tickets:cfg_lbl_selecteur_navigateur:>,
+						label_case=<:tickets:cfg_lbl_case_selecteur_navigateur:>})]
 				</ul>
 			</li>
 			

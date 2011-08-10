@@ -29,12 +29,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_statuts' => 'Allow by authors status',
 	'cfg_lbl_autorisation_webmestre' => 'Allow webmasters only',
 	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space (Requires Zpip)',
+	'cfg_lbl_case_selecteur_navigateur' => 'Having a browser selector in the bug report form',
 	'cfg_lbl_composants' => 'Components',
 	'cfg_lbl_forums_publics' => 'Comments on bug reports',
 	'cfg_lbl_jalons' => 'Milestones',
 	'cfg_lbl_liste_auteurs' => 'Authors of the website',
 	'cfg_lbl_notification_publique' => 'Public notification',
 	'cfg_lbl_projets' => 'Projects',
+	'cfg_lbl_selecteur_navigateur' => 'Browser selector',
 	'cfg_lbl_statuts_auteurs' => 'Possible status',
 	'cfg_lbl_type_autorisation' => 'Authorization method',
 	'cfg_lbl_versions' => 'Versions',
@@ -57,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_jalon' => 'Milestone:',
 	'champ_maj' => 'Update:',
 	'champ_maj_long' => 'Updated date',
+	'champ_navigateur' => 'Browser:',
 	'champ_nouveau_commentaire' => 'New comment',
 	'champ_projet' => 'Project:',
 	'champ_severite' => 'Severity:',
@@ -88,6 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_description_ticket' => 'Describe as precisely as possible the need or problem.
 	Indicate in particular if it occurs consistently or occasionally.
 	If it is a display problem, specify with what browser you are experiencing it.',
+	'explication_description_ticket_ss_nav' => 'Describe as precisely as possible the need or problem.
+	Indicate in particular if it occurs consistently or occasionally.',
 	'explication_url_exemple' => 'Enter here the URL of a page covered by this bug report.',
 	'explication_redaction' => 'When you\'re finished writing your bug report, select the status &laquo;open and discussed&raquo;.',
 
@@ -120,6 +125,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_commentaire_mail' => 'New comment on bug report',
 	'nouveau_ticket' => 'New bug report',
 
+	// O
+	'option_navigateur_autre' => 'Other',
+	'option_navigateur_tous' => 'All browsers',
+	
 	// P
 	'page_titre' => 'Bug reports, bug tracking system',
 

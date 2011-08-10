@@ -13,7 +13,7 @@
 <div>
 		<div style="float: #LANG_RIGHT; padding-#LANG_RIGHT: 20px;">
 			[<div class="champ">
-				<:tickets:champ_statut:> : <strong>(#STATUT|tickets_texte_statut)</strong>
+				<:tickets:champ_statut:> <strong>(#STATUT|tickets_texte_statut)</strong>
 			</div>]
 			<BOUCLE_assigne(AUTEURS){id_auteur=#ID_ASSIGNE}{tous}>
 				<div style="color: red;"><:tickets:assigne_a:> <strong>#NOM</strong></div>
@@ -21,9 +21,9 @@
 		</div>
 		<div>
 			[<div class="champ">
-				<:tickets:champ_severite:> : <strong>(#SEVERITE|tickets_texte_severite)</strong>
+				<:tickets:champ_severite:> <strong>(#SEVERITE|tickets_texte_severite)</strong>
 			</div>]
-			[<:tickets:champ_type:> : <strong>(#TYPE|tickets_texte_type)</strong>]
+			[<:tickets:champ_type:> <strong>(#TYPE|tickets_texte_type)</strong>]
 		</div>
 
 		[(#REM) - Date de creation et auteur du ticket]
@@ -37,10 +37,13 @@
 		[(#REM) - Champs optionnels]		
 		[(#PROJET|ou{#COMPOSANT}|ou{#VERSION}|ou{#JALON}|oui)
 		<div>
-			[<div><:tickets:champ_projet:> : <strong>(#PROJET)</strong></div>]
-			[<div><:tickets:champ_composant:>: <strong>(#COMPOSANT)</strong></div>]
-			[<div><:tickets:champ_version:> : <strong>(#VERSION)</strong></div>]
-			[<div><:tickets:champ_jalon:> : <strong>(#JALON)</strong></div>]
+			[<div><:tickets:champ_projet:> <strong>(#PROJET)</strong></div>]
+			[<div><:tickets:champ_composant:> <strong>(#COMPOSANT)</strong></div>]
+			[<div><:tickets:champ_version:> <strong>(#VERSION)</strong></div>]
+			[<div><:tickets:champ_jalon:> <strong>(#JALON)</strong></div>]
+		</div>]
+		[<div class="champ">
+			<:tickets:champ_navigateur:> (#NAVIGATEUR|tickets_texte_navigateur)
 		</div>]
 </div>
 <div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">

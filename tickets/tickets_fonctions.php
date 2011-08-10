@@ -82,11 +82,11 @@ function tickets_bouton_block_depliable($texte,$deplie,$page="",$ids=""){
 
 // creation des fonction de selection de texte
 // encore en truc a reprendre !
-foreach (array('severite', 'type', 'statut') as $nom){
-	eval("function tickets_texte_$nom(\$niveau) {
+foreach (array('severite', 'type', 'statut', 'navigateur') as $nom){
+	eval("function tickets_texte_$nom(\$valeur) {
 		\$type = tickets_liste_$nom();
-		if (isset(\$type[\$niveau])) {
-			return \$type[\$niveau];
+		if (isset(\$type[\$valeur])) {
+			return \$type[\$valeur];
 		}
 	}");
 }
@@ -169,4 +169,34 @@ function generer_url_ecrire_ticket($id, $args='', $ancre='', $statut='', $connec
 	. ($ancre ? "#$ancre" : '');
 	return $h;
 }
+
+/**
+ * Liste des navigateurs possibles
+ */
+function tickets_liste_navigateur($nav=false){
+	$navs = array(
+		'tous' => _T('tickets:option_navigateur_tous'),
+		'android4' => 'Android 4.x',
+		'firefox3' => 'Firefox 3.x',
+		'firefox4' => 'Firefox 4.x',
+		'firefox5' => 'Firefox 5.x',
+		'firefox6' => 'Firefox 6.x',
+		'chrome9' => 'Google Chrome 9.x',
+		'chrome11' => 'Google Chrome 11.x',
+		'chrome12' => 'Google Chrome 12.x',
+		'chrome13' => 'Google Chrome 13.x',
+		'chrome14' => 'Google Chrome 14.x',
+		'ie6' => 'Internet Explorer 6',
+		'ie7' => 'Internet Explorer 7',
+		'ie8' => 'Internet Explorer 8',
+		'ie9' => 'Internet Explorer 9',
+		'opera11' => 'Opera 11.x',
+		'opera12' => 'Opera 12.x',
+		'safari4' => 'Safari 4.x',
+		'safari5' => 'Safari 5.x',
+		'autre' => _T('tickets:option_navigateur_autre')
+	);
+	return $navs;
+}
+
 ?>

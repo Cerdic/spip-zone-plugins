@@ -29,12 +29,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d\'auteurs',
 	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
 	'cfg_lbl_case_notification_publique' => '&Ecirc;tre notifi&eacute; dans l\'espace public plut&ocirc;t que dans l\'espace priv&eacute; (N&eacute;cessite Zpip)',
+	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket',
 	'cfg_lbl_composants' => 'Composants',
 	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets',
 	'cfg_lbl_jalons' => 'Jalons',
 	'cfg_lbl_liste_auteurs' => 'Auteurs du site',
 	'cfg_lbl_notification_publique' => 'Notification publique',
 	'cfg_lbl_projets' => 'Projets',
+	'cfg_lbl_selecteur_navigateur' => 'Sélecteur de navigateur',
 	'cfg_lbl_statuts_auteurs' => 'Statuts possibles',
 	'cfg_lbl_type_autorisation' => 'M&eacute;thode d\'autorisation',
 	'cfg_lbl_versions' => 'Versions',
@@ -57,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_jalon' => 'Jalon&nbsp;',
 	'champ_maj' => 'MAJ :',
 	'champ_maj_long' => 'Date de mise à jour',
+	'champ_navigateur' => 'Navigateur&nbsp;:',
 	'champ_nouveau_commentaire' => 'Nouveau commentaire',
 	'champ_projet' => 'Projet&nbsp;:',
 	'champ_severite' => 'S&eacute;v&eacute;rit&eacute;&nbsp;:',
@@ -88,6 +91,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'explication_description_ticket' => 'D&eacute;crivez aussi pr&eacute;cis&eacute;ment que possible le besoin ou le probl&egrave;me rencontr&eacute;.
 	Indiquez en particulier s&rsquo;il se produit syst&eacute;matiquement ou occasionnellement.
 	S&rsquo;il s&rsquo;agit d&rsquo;un probl&egrave;me d\'affichage, pr&eacute;cisez avec quel navigateur vous le rencontrez.',
+	'explication_description_ticket_ss_nav' => 'D&eacute;crivez aussi pr&eacute;cis&eacute;ment que possible le besoin ou le probl&egrave;me rencontr&eacute;.
+	Indiquez en particulier s&rsquo;il se produit syst&eacute;matiquement ou occasionnellement.',
 	'explication_url_exemple' => 'Indiquez ici l&rsquo;URL d&rsquo;une page concern&eacute;e par ce ticket.',
 	'explication_redaction' => 'Quand vous avez termin&eacute; la r&eacute;daction de votre ticket, s&eacute;lectionnez le statut &laquo;ouvert et discut&eacute;&raquo;.',
 
@@ -120,6 +125,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nouveau_commentaire_mail' => 'Nouveau commentaire sur ticket',
 	'nouveau_ticket' => 'Nouveau ticket',
 
+	// O
+	'option_navigateur_autre' => 'Autre',
+	'option_navigateur_tous' => 'Tous les navigateurs',
+	
 	// P
 	'page_titre' => 'Tickets, syst&egrave;me de suivi de bugs',
 
