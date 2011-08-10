@@ -89,7 +89,7 @@ function exec_plan(){
 		echo '<th>' . _T('asso:classe') . "</th>\n";
 		echo '<th>' . _T('asso:code') . "</th>\n";
 		echo '<th>' . _T('asso:intitule') . "</th>\n";
-		echo '<th>' . _T('asso:reference') . "</th>\n";
+		#echo '<th>' . _T('asso:reference') . "</th>\n";
 		echo '<th style="text-align:right;">' . _T('asso:solde_initial') . "</th>\n";
 		echo '<th>' . _T('asso:date') . "</th>\n";
 		echo '<th colspan="2" style="text-align:center;">' . _T('asso:action') . "</th>\n";
@@ -114,7 +114,7 @@ function exec_plan(){
                         }
 			echo '<td class="arial11 border1">'.$data['code'].'</td>';
 			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
-			echo '<td class="arial11 border1">'.$data['reference'].'</td>';
+			#echo '<td class="arial11 border1">'.$data['reference'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
 			echo '<td class="arial11 border1">'.association_datefr($data['date_anterieure']).'</td>';
 			echo '<td class="arial11 border1" style="text-align:center;"><a href="'.$url_action_plan.'&id='.$data['id_plan'].'"><img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'poubelle-12.gif" title="Supprimer"></a></td>';

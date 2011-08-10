@@ -459,8 +459,8 @@ Commentaire: @commentaire@
 	
 	# Plan comptable
 		#Message
-			'plan_info' => 'Vous pouvez g&eacute;rer ici les comptes de votre plan comptable<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.</p><p>Vous pouvez vous inspirer du plan comptable normalis&eacute; fran&ccedil;ais joint au package.',
-			
+			'plan_info' => 'Vous pouvez d&eacute;finir ici les comptes de votre plan comptable.<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.',
+                        'edit_plan' => 'Vous devez choisir d\'abord une "CLASSE" puis un "CODE" dont le 1er chiffre doit correspondre &agrave; la "classe". Par exemple : classe 5 et code 5171<br />Vous pouvez donner un complément (libre) d\'information dans le champ INTITULE.<p>Vous pouvez vous inspirer du plan comptable normalis&eacute; fran&ccedil;ais joint au package.</p>',
 		# Titres
 			'plan_comptable' => 'Plan comptable',
 		
@@ -593,7 +593,7 @@ Commentaire: @commentaire@
 'depenses' => 'D&eacute;penses',
 'destination' => "Destinations",
 'date_aaaa_mm_jj' => 'Date (AAAA-MM-JJ) :',
-'date_report_aaa_mm_jj' => 'Date report (AAA-MM-JJ) :',
+'date_report_aaaa_mm_jj' => 'Date report (AAAA-MM-JJ) :',
 'date' => 'Date',
 'don' => 'Don :',
 'don_financier_en_e__' => 'Don financier (en &euro;) :',

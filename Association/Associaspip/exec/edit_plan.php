@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -33,14 +33,13 @@ function exec_edit_plan(){
 		association_onglets();
 		echo debut_gauche("",true);
 		echo debut_boite_info(true);
-		echo association_date_du_jour();	
+		echo association_date_du_jour();
+                echo propre(_T('asso:edit_plan'));
 		echo fin_boite_info(true);
 		echo association_retour();
 		echo debut_droite("",true);
 
-		echo recuperer_fond("prive/editer/editer_asso_plan", array (
-			'id_plan' => $id_plan
-		));
+		echo recuperer_fond("prive/editer/editer_asso_plan", array ('id_plan' => $id_plan));
 		echo fin_page_association();
 	}
 }
