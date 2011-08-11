@@ -7,4 +7,4 @@
 ][(#INCLURE{fond=saisies/input,
 			env,
             type=#HTML5|?{email,text},
-            class=#HTML5|?{'',email}})]
+            class=[(#HTML5|?{[(#ENV{class}) ],[(#ENV{class}) ]email})]})]
