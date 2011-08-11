@@ -29,8 +29,7 @@ function aed_header_prive($flux){
 	
 	$formulaire=recuperer_fond('prive/editer/article_mod',$contexte);
 	
-	$flux['data'] =preg_replace('/<div id=\'props\' class=\'tabs-container\'>/',$formulaire.'<div id="props" class="tabs-container">',$flux['data']);
-	
+	$flux['data'] =preg_replace('/<div id=\'props\' class=\'tabs-container\'>/',$formulaire.'<div id="props" class="tabs-container">',$flux['data']);	
 	}
 return $flux;
 }
