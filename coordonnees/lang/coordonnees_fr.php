@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresses' => 'Adresses',
 	'ajouter_adresse' => 'Ajouter une adresse',
 	'ajouter_email' => 'Ajouter un email',
-	'ajouter_telephone' => 'Ajouter un t&eacute;l&eacute;phone',
+	'ajouter_telephone' => 'Ajouter un num&eacute;ro',
 	'articles' => 'Articles',
 	'auteurs' => 'Auteurs',
 
