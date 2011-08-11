@@ -4,18 +4,20 @@
    dans une boucle, id prenant l'id de l'objet de la boucle. Donc on evite cette ecriture)
 ]
 
-[(#SET{id_objet,       [(#ENV{id_sjcycle,     0})]})]
-[(#SET{id_diapo,   	  [(#ENV{id_diapo,       #VAL{id_}|uniqid})]})]
-[(#SET{img_width,      [(#ENV{width,     		 #CONFIG{sjcycle/img_width}})]})]
-[(#SET{img_height,     [(#ENV{height,    		 #CONFIG{sjcycle/img_height}})]})]
-[(#SET{img_position,   [(#ENV{position,  		 #CONFIG{sjcycle/img_position}})]})]
-[(#SET{img_background, [(#ENV{background,		 #CONFIG{sjcycle/img_background}})]})]
-[(#SET{div_background, [(#ENV{border_color,   #CONFIG{sjcycle/div_background}})]})]
-[(#SET{div_margin,     [(#ENV{div_margin,   	 #CONFIG{sjcycle/div_margin}})]})]
-[(#SET{img_bordure,    [(#ENV{border_width,   #CONFIG{sjcycle/img_bordure}})]})]
-[(#SET{legende,        [(#ENV{legende,        0})]})]
+[(#SET{id_objet,       		[(#ENV{id_sjcycle,     		0})]})]
+[(#SET{id_diapo,   	  		[(#ENV{id_diapo,       		#VAL{id_}|uniqid})]})]
+[(#SET{img_width,      		[(#ENV{width,     		 	#CONFIG{sjcycle/img_width}})]})]
+[(#SET{img_height,     		[(#ENV{height,    		 	#CONFIG{sjcycle/img_height}})]})]
+[(#SET{img_position,   		[(#ENV{position,  		 	#CONFIG{sjcycle/img_position}})]})]
+[(#SET{img_background, 		[(#ENV{background,		 	#CONFIG{sjcycle/img_background}})]})]
+[(#SET{div_background, 		[(#ENV{border_color,   		#CONFIG{sjcycle/div_background}})]})]
+[(#SET{div_margin,     		[(#ENV{div_margin,   	 	#CONFIG{sjcycle/div_margin}})]})]
+[(#SET{img_bordure,    		[(#ENV{border_width,   		#CONFIG{sjcycle/img_bordure}})]})]
+[(#SET{legende,        		[(#ENV{legende,        		0})]})]
+[(#SET{liens_individuels,  [(#ENV{liens_individuels,	0})]})]
 [(#REM) largeur div = largeur image + 2*bordure ]
 [(#SET{div_width,  #GET{img_bordure}|mult{2}|plus{#GET{img_width}} })]
+#ENV{lien_article}
 
 [(#REM) Si un lien est demande vers un article, on cherche eventuellement l'id de l'article traduit
 			- Si l'article n'existe pas dans la langue courante on met ou pas un lien
@@ -96,10 +98,19 @@
                                     margin:[(#GET{img_bordure})]px;">
          ]
          [(#REM) Si un lien est demande vers un article, on annule l'ouverture vers une box ]
+         [(#GET{liens_individuels}|=={article}|oui)
+            <a href="#URL_ARTICLE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"]>
+            #SET{fermer_a,oui}]
+         [(#GET{liens_individuels}|=={rubrique}|oui)
+            <a href="#URL_RUBRIQUE{#DESCRIPTIF|supprimer_tags}"[ title="(#TITRE)"]>
+            #SET{fermer_a,oui}]
+         [(#GET{liens_individuels}|=={externe}|oui)
+            <a href="[(#DESCRIPTIF|supprimer_tags)]"[ title="(#TITRE)"]>
+            #SET{fermer_a,oui}]
          [(#GET{id_article_a_lier}|oui)
             <a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}">
             #SET{fermer_a,oui}]
-         [(#GET{id_article_a_lier}|non|et{#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui})
+         [(#GET{fermer_a}|non|et{#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui})
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
                                          class="#GET{cssbox}"
                                          rel="#GET{cssbox}"
