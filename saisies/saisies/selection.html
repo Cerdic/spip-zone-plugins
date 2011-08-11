@@ -7,6 +7,8 @@
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
   - cacher_option_intro : pas de premier option vide  (defaut:"")
   - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
   Exemple d'appel :
 	[(#SAISIE{selection,produits,
@@ -20,7 +22,7 @@
 [(#REM) datas peut être une chaine qu'on sait décomposer ]
 #SET{datas, #ENV*{datas}}
 #SET{datas, #GET{datas}|is_string|?{(#GET{datas}|saisies_chaine2tableau), #GET{datas}}}
-#SET{valeur,#ENV{valeur}|is_null|?{#ENV{defaut},#ENV{valeur}}}
+#SET{valeur,#ENV{valeur_forcee,#ENV{valeur}}|is_null|?{#ENV{defaut},#ENV{valeur_forcee,#ENV{valeur}}}}
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>

@@ -7,6 +7,8 @@
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
   - cacher_option_intro : pas de premier option vide  (defaut:"")
   - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
   Exemple d'appel :
 	[(#SAISIE{selection_par_groupe,produits,
@@ -26,7 +28,7 @@
 <BOUCLE_groupes(POUR){tableau #ENV{datas}}>
 	<optgroup label="[(#CLE|attribut_html)]">
 		<BOUCLE_selection(POUR){tableau #VALEUR}>
-			<option value="#CLE" [(#CLE|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]>#VALEUR</option>
+			<option value="#CLE" [(#CLE|=={#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}}|oui) selected="selected"]>#VALEUR</option>
 		</BOUCLE_selection>
 	</optgroup>
 </BOUCLE_groupes>

@@ -11,14 +11,16 @@
   - multiple : si oui, on peut selectionner plusieurs rubriques
   - afficher_langue : si oui, on affiche la langue de l'objet selectionne
   - afficher_rub_dans_langue_interface : si oui, on n'affiche que les rubriques de la langue de l'interface
-
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
+  
   Exemple d'appel :
 	[(#SAISIE{selecteur_rubrique,rubriques_menu,
 		multiple=oui,
 		label=<:plugin:article_en_une:>})] 
 ]
 [(#REM) Donner a manger a CFG si aucune valeur definie ]
-[(#SET{val,#ENV{valeur,#ENV{defaut}}})]
+[(#SET{val,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})]
 
 [(#SET{filtrer_langue_rubrique,[(#ENV{afficher_rub_dans_langue_interface,0}|oui) #ENV{lang}]})]
 

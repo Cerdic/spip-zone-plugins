@@ -6,17 +6,19 @@
   - size : taille du champ
   - maxlength : nombre de caracteres maximum
   - disable : champ insaisissable ? 'oui' (defaut : '')
-  - media : pour restreindre la modalboxe à un type de media particulier
-  - extension : pour restreindre à un type de fichier
+  - media : pour restreindre la modalboxe a un type de media particulier
+  - extension : pour restreindre a un type de fichier
+  - defaut : valeur par defaut si pas prÃ©sente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
-  Note : dans les options, il faut définir 'env' à 'oui' pour que le sélecteur puisse récupérer id_article, id_rubrique ou id_breve.
-  Note 2 : si on appelle le sélecteur depuis une modalbox, il faut alors lui passer _modalbox_retour qui correspond à l'url de retour
-  après sélection du document. L'id du document sera alors passé par URL.
+  Note : dans les options, il faut definir 'env' a 'oui' pour que le selecteur puisse recuperer id_article, id_rubrique ou id_breve.
+  Note 2 : si on appelle le selecteur depuis une modalbox, il faut alors lui passer _modalbox_retour qui correspond a l'url de retour
+  apres selection du document. L'id du document sera alors passe par URL.
 ]
 
-<input type="text" name="#ENV{nom}" class="text[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur,#ENV{defaut}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
+<input type="text" name="#ENV{nom}" class="text[ (#ENV{class})]" id="champ_#ENV{nom}"[ value="(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}})"][ size="(#ENV{size})"][ maxlength="(#ENV{maxlength})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][(#ENV{obligatoire}|et{#HTML5}|oui) required="required"] />
 
-[(#REM) Si la médiathèque est présente ]
+[(#REM) Si la mediatheque est presente ]
 [(#PLUGIN{medias}|oui)
 
 [(#SET{mod_fn,#ENV{_modalbox_retour}|?{'2','1'}})]
@@ -41,7 +43,7 @@
 /></p>
 ]
 
-[(#REM) Parcourir les documents de la brève ]
+[(#REM) Parcourir les documents de la breve ]
 [(#ENV{id_breve}|oui)
 <p class='boutons'><input class='submit' type="button" name="parcourir" value="<:saisies:bouton_parcourir_docs_breve:>"
 	onclick="jQuery.modalboxload(
@@ -51,7 +53,7 @@
 /></p>
 ]
 
-[(#REM) Parcourir toute la médiathèque ]
+[(#REM) Parcourir toute la mediatheque ]
 <p class='boutons'><input class='submit' type="button" name="parcourir" value="<:saisies:bouton_parcourir_mediatheque:>"
 	onclick="jQuery.modalboxload(
 		'[(#URL_ECRIRE{portfolio,selectfunc=mediaselect#GET{mod_fn}_#ENV{nom}[&media=(#ENV{media})][&extension=(#ENV{extension})]})]',

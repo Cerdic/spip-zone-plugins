@@ -3,10 +3,12 @@
   ### /!\ boucle POUR (spip Bonux) ###
 	
   Parametres :
-  - ** datas : tableau de donnees cle=>valeur
+  - datas : tableau de donnees cle=>valeur
   - option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
   - cacher_option_intro : pas de premier option vide  (defaut:"")
   - class : classe(s) css ajoutes au select
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
   
   Exemple d'appel :
 	[(#SAISIE{selection_multiple,produits,
@@ -28,6 +30,6 @@
 <select name="#ENV{nom}[]" id="champ_#ENV{nom}" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ size="(#ENV{size})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
-	<option value="#CLE" [(#CLE|in_array{#ENV{valeur,#GET{defaut}}}|oui) selected="selected"]>#VALEUR</option>
+	<option value="#CLE" [(#CLE|in_array{#ENV{valeur_forcee,#ENV{valeur,#GET{defaut}}}}|oui) selected="selected"]>#VALEUR</option>
 </BOUCLE_selection>
 </select>

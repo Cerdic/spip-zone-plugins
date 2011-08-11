@@ -11,13 +11,15 @@
   - multiple : si oui, on peut selectionner plusieurs articles
   - afficher_langue : si oui, on affiche la langue de l'objet selectionne
   - afficher_art_dans_langue_interface : si oui, on n'affiche que les articles de la langue de l'interface
+  - defaut : valeur par defaut si pas présente dans l'environnement
+  - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
 	 
   Exemple d'appel :
 	[(#SAISIE{selecteur_article,id_article,
 		label=<:plugin:article_en_une:>})] 
 ]
 [(#REM) Donner a manger a CFG si aucune valeur definie ]
-[(#SET{val,#ENV{valeur,#ENV{defaut}}})]
+[(#SET{val,#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut}}}})]
 
 [(#SET{filtrer_langue_article,[(#ENV{afficher_art_dans_langue_interface,0}|oui) #ENV{lang}]})]
 

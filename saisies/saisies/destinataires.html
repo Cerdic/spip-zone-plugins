@@ -19,7 +19,7 @@
 		<input type="checkbox" name="#ENV{nom}&#91;&#93;" class="checkbox"
 			readonly="readonly" checked="checked"
 			id="champ_#ENV{nom}_destinataire#ID_AUTEUR"
-			value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur,#ENV*{defaut,#ARRAY}}}|oui)checked="checked"]
+			value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
 		/>
 		<label for="champ_#ENV{nom}_destinataire#ID_AUTEUR">#NOM</label>
 	</div>
@@ -46,13 +46,13 @@
 				<div class="choix">
 					<input type="checkbox" name="#ENV{nom}&#91;&#93;" class="checkbox"
 						id="champ_#ENV{nom}_destinataire#ID_AUTEUR"
-						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur,#ENV*{defaut,#ARRAY}}}|oui)checked="checked"]
+						value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)checked="checked"]
 					/>
 					<label for="champ_#ENV{nom}_destinataire#ID_AUTEUR">#NOM</label>
 				</div>
 			]
 			[(#GET{type_choix}|=={un}|oui)
-				<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV*{valeur,#ENV*{defaut,#ARRAY}}}|oui)selected="selected"]>#NOM</option>
+				<option value="#ID_AUTEUR"[ (#ID_AUTEUR|in_array{#ENV{valeur_forcee,#ENV*{valeur,#ENV*{defaut,#ARRAY}}}}|oui)selected="selected"]>#NOM</option>
 			]
 		</BOUCLE_destinataires>
 		[(#GET{type_choix}|=={un}|oui)
