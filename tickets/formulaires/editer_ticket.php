@@ -32,6 +32,10 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 	if ((!$id_ticket or $id_ticket=='oui') and ($exemple = _request('exemple'))) {
 		$valeurs['exemple'] = $exemple;
 	}
+	
+	if ((!$id_ticket or $id_ticket=='oui')){
+		$valeurs['id_assigne'] = $GLOBALS['visiteur_session']['id_auteur'];
+	}
 	$valeurs['editable'] = $editable;
 	return $valeurs;
 }

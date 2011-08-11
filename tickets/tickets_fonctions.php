@@ -26,9 +26,24 @@ function tickets_champ_optionnel_actif($nom){
 
 
 // Creation de la liste des options du select d'assignation
-function tickets_select_assignation($en_cours){
-	$options = NULL;
 
+/**
+ * 
+ * Crée la liste des options du champ select d'assignation de ticket
+ * Prend deux arguments optionnels :
+ * -* $en_cours qui est l'id_auteur que l'on souhaite préselectionner
+ * -* $format qui permet de choisir le format que la fonction renvoit :
+ * -** rien ou autre chose que 'array' renverra les options d'un select
+ * -** 'array' renverra un array des auteurs possibles
+ * 
+ * @param int $en_cours
+ * @param string $format
+ * @return multitype:array|string
+ */
+function tickets_select_assignation($en_cours='0',$format='select'){
+	$options = NULL;
+	$liste_assignables=array();
+	
 	include_spip('inc/tickets_autoriser');
 	$select = array('nom','id_auteur');
 	$from = array('spip_auteurs AS t1');
@@ -37,12 +52,16 @@ function tickets_select_assignation($en_cours){
 		$where = array(sql_in('t1.statut', $autorises['statut']), 't1.email LIKE '.sql_quote('%@%'));
 	else
 		$where = array(sql_in('t1.id_auteur', $autorises['auteur']), 't1.email LIKE '.sql_quote('%@%'));
+	
 	$query_auteurs = sql_select($select, $from, $where);
 	while ($row_auteur = sql_fetch($query_auteurs)) {
+		$liste_assignables[$row_auteur["id_auteur"]] = $row_auteur["nom"];
 		$selected = ($row_auteur["id_auteur"] == $en_cours) ? ' selected="selected"' : '';
 		$options .= '<option value="' . $row_auteur["id_auteur"] . '"' . $selected . '>' . $row_auteur["nom"] . '</option>';
 	}
-
+	if($format=='array'){
+		return $liste_assignables;
+	}
 	return $options;
 }
 
