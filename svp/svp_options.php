@@ -22,7 +22,6 @@ define('_SVP_REGEXP_BALISE_PLUGIN', '#<plugin[^>]*>(.*)</plugin>#Uims');
 define('_SVP_REGEXP_BALISE_PAQUET', '#<paquet[^>]*>(.*)</paquet>#Uims');
 
 // Liste des categories de plugin
-// --> A METTRE DANS SPIP !!!
 $GLOBALS['categories_plugin'] = array(
 	'auteur', 
 	'communication', 
@@ -50,8 +49,8 @@ define('_SVP_VERSION_SPIP_MAX', '3.0.99');
 // A mettre a jour en fonction des sorties
 $GLOBALS['infos_branches_spip'] = array(
 	'1.9' => array(_SVP_VERSION_SPIP_MIN,'1.9.2'),
-	'2.0' => array('2.0.0','2.0.15'),
-	'2.1' => array('2.1.0','2.1.10'),
+	'2.0' => array('2.0.0','2.0.99'),
+	'2.1' => array('2.1.0','2.1.99'),
 	'3.0' => array('3.0.0',_SVP_VERSION_SPIP_MAX) 
 );
 
