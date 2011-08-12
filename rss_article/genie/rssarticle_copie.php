@@ -62,6 +62,8 @@ function genie_rssarticle_copie_dist($t){
             $lang  = $a['lang'];
             $url   = $a['url'];
             $tags =  $a['tags'];
+            $lsDate = $a['date'];
+            
           
             if ($lang=="") 	
                 $lang = $GLOBALS['spip_lang'];  
@@ -75,8 +77,7 @@ function genie_rssarticle_copie_dist($t){
                       $lang = $a_lang['lang'];                   
             }
             
-        
-            $lsDate = date('Y-m-d H:i:s');
+            //$lsDate = date('Y-m-d H:i:s');            
             // creation de l'article
             $id_article = sql_insertq( 'spip_articles', array(
                                 'titre'=>$titre, 'id_rubrique'=>$id_rubrique,

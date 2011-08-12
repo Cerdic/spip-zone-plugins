@@ -27,6 +27,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'install_rssarticle' => 'Cr&eacute;ation de la table spip_articles_syndic',
   
   // M
+  'maj_manuelle' => 'La copie manuelle des derniers flux RSS en articles a été effectuée',
+  'maj_recharge' => 'Relancer la copie manuelle',
   'mode' => 'Mode de fonctionnement',
   'mode_auto' => 'Mode automatique: tous les sites r&eacute;f&eacute;renc&eacute;s sont recopi&eacute;s en articles',
   'mode_manuel' => 'Mode manuel: vous selectionnez manuellement les sites r&eacute;f&eacute;renc&eacute;s qui doivent être recopi&eacute;s en articles'  
