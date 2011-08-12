@@ -42,8 +42,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // I
 	'info_1_depot' => '1 dépôt',
-	'info_1_plugin' => '1 plugin',
 	'info_1_paquet' => '1 paquet',
+	'info_1_plugin' => '1 plugin',
 	'info_adresse_spipzone' => 'SPIP-Zone',
 	'info_ajouter_depot' => 'En ajoutant des dépôts à votre base, vous aurez la possiblité d\'obtenir des informations et d\'effectuer des recherches sur tous les paquets hébergés par les dépôts ajoutés.<br />Un dépôt est décrit par un fichier XML contenant les informations sur le dépôt et sur tous ses paquets.',
 	'info_aucun_depot_ajoute' => 'Aucun dépôt disponible. Utilisez le formulaire ci-dessous pour en ajouter.',
@@ -58,8 +58,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_depots_disponibles' => '@total_depots@ dépôt(s)',
 	'info_fichier_depot' => 'Saisissez l\'url du fichier de description du dépôt à ajouter.<br />Pour ajouter la Zone des plugins SPIP cliquez sur ce lien : ',
 	'info_nb_depots' => '@nb@ dépôts',
-	'info_nb_plugins' => '@nb@ plugins',
 	'info_nb_paquets' => '@nb@ paquets',
+	'info_nb_plugins' => '@nb@ plugins',
 	'info_paquets_disponibles' => '@total_paquets@ paquet(s) disponible(s)',
 	'info_plugin_installe' => 'déjà installé',
 	'info_plugins_disponibles' => '@total_plugins@ plugin(s) disponible(s)',
@@ -137,10 +137,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_logo_depot' => 'Logo du dépôt',
 	'titre_logo_plugin' => 'Logo du plugin',
 	'titre_nouveau_depot' => 'Nouveau dépôt',
-	'titre_plugin' => 'Plugin',
-	'titre_plugins' => 'Plugins',
 	'titre_paquet' => 'Paquet',
 	'titre_paquets' => 'Paquets',
+	'titre_plugin' => 'Plugin',
+	'titre_plugins' => 'Plugins',
 );
 
 ?>

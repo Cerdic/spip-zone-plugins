@@ -496,7 +496,7 @@ function svp_nettoyer_apres_actualisation($id_depot, $ids_a_supprimer, $versions
 function svp_completer_plugins($id_depot) {
 	include_spip('inc/svp_intervaller');
 
-	// On limite la revue des paquets a ceux des plugins heberges par le depot en cours d'acutalisation
+	// On limite la revue des paquets a ceux des plugins heberges par le depot en cours d'actualisation
 	if ($ids_plugin = sql_allfetsel('id_plugin', 'spip_depots_plugins', array('id_depot=' . sql_quote($id_depot)))) {
 		// -- on commence donc par recuperer les id des plugins du depot
 		$ids_plugin = array_map('reset', $ids_plugin);
@@ -510,13 +510,14 @@ function svp_completer_plugins($id_depot) {
 			while ($paquet = sql_fetch($resultats)) {
 				// On finalise le plugin en cours et on passe au suivant 
 				if ($plugin_en_cours != $paquet['id_plugin']) {
-					// On deduit maintenant les branches de la compatibilite globale
-					$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
 					// On met a jour le plugin en cours
-					if ($plugin_en_cours != 0)
+					if ($plugin_en_cours != 0) {
+						// On deduit maintenant les branches de la compatibilite globale
+						$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
 						sql_updateq('spip_plugins',
 									$complements,
 									'id_plugin=' . sql_quote($plugin_en_cours));
+					}
 					// On passe au plugin suivant
 					$plugin_en_cours = $paquet['id_plugin'];
 					$complements = array('compatibilite_spip' => '', 'branches_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
@@ -535,9 +536,14 @@ function svp_completer_plugins($id_depot) {
 					else
 						$complements['compatibilite_spip'] = fusionner_intervalles($paquet['compatibilite_spip'], $complements['compatibilite_spip']);
 			}
+			// On finalise le dernier plugin en cours
+			$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
+			sql_updateq('spip_plugins',
+						$complements,
+						'id_plugin=' . sql_quote($plugin_en_cours));
 		}
-		
 	}
+
 	return true;
 }
 

@@ -1,15 +1,5 @@
 <?php
 
-/***************************************************************************\
- *  SPIP, Systeme de publication pour l'internet                           *
- *                                                                         *
- *  Copyright (c) 2001-2011                                                *
- *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
- *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
-\***************************************************************************/
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function plugins_preparer_sql_plugin($plugin)
@@ -45,7 +35,7 @@ function plugins_preparer_sql_plugin($plugin)
 	
 	// Traitement des auteurs, credits, licences et copyright
 	// -- on extrait les auteurs, licences et copyrights sous forme de tableaux
-	// -- depuis le commit xxxx du core la balise auteur est renvoyee sous forme de tableau mais
+	// -- depuis le commit 18294 du core la balise auteur est renvoyee sous forme de tableau mais
 	//    contient toujours qu'un seul index
 	$balise_auteur = entite2charset($plugin['auteur'][0]);
 	$auteurs = normaliser_auteur_licence($balise_auteur, 'auteur');
@@ -63,10 +53,10 @@ function plugins_preparer_sql_plugin($plugin)
 	// Extrait d'un nom et un slogan normalises
 	// Slogan : si vide on ne fait plus rien de special, on traitera ça a l'affichage
 	$champs['slogan'] = $plugin['slogan'] ? entite2charset($plugin['slogan']) : '';
-	$plugin['nom'] = entite2charset($plugin['nom']);
 	// Nom :	on repere dans le nom du plugin un chiffre en fin de nom
 	//			et on l'ampute de ce numero pour le normaliser
 	//			et on passe tout en unicode avec le charset du site
+	$plugin['nom'] = entite2charset($plugin['nom']);
 	$champs['nom'] = normaliser_nom($plugin['nom'], 'fr', false);
 
 	// Extraction de la compatibilite SPIP et construction de la liste des branches spip supportees

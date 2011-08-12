@@ -83,9 +83,6 @@ function svp_phraser_archives($archives) {
 
 				// Extraction *des balises* plugin ou *de la balise* paquet suivant la DTD et la version SPIP
 				// -- DTD : si on utilise plugin.xml on extrait la balise <plugin> sinon la balise <paquet>
-				// -- Pour SPIP < 2.2, seule la DTD de plugin.xml est utilisee. 
-				// -- De plus, la fonction infos_plugins() n'existant pas dans SPIP 2.1, son backport 
-				// est inclus dans SVP
 				$paquets[$zip[file]]['plugin'] = svp_phraser_plugin($paquets[$zip[file]]['dtd'], $_archive);
 			}
 		}
@@ -122,7 +119,7 @@ function svp_phraser_plugin($dtd, $contenu) {
 }
 
 
-// Phrase le contenu dans la balise <zip>
+// Phrase le contenu de la balise <zip>
 // -- nom du zip, taille, date, dernier commit, arborescence relative des sources...
 function svp_phraser_zip($contenu) {
 	static $balises_zip = array('file', 'size', 'date', 'source', 'last_commit');

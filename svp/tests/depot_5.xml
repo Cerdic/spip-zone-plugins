@@ -1,38 +1,112 @@
-<!-- 
-Ce d&eacute;p&ocirc;t ne pas la nouvelle balise <code><depot></code> et sa liste de paquets est :
--* fancyboxy en balise plugin multiple dans une seule archive: il faut donc crŽer les deux paquets avec la mme archive
- -->
 <depot>
-    <titre>D&eacute;p&ocirc;t #4</titre>
+    <titre>Depot #5</titre>
 	<type>svn</type>
-	<url_archives>http://files.spip.org/spip-zone</url_archives>
 	<url_serveur>svn://zone.spip.org/spip-zone</url_serveur>
+	<url_brouteur>http://zone.spip.org/trac/spip-zone/browser</url_brouteur>
+	<url_archives>http://files.spip.org/spip-zone</url_archives>
 </depot>
 
 <archives>
-<archive id="fancyboxy.zip">
+<archive id="spip-bonux.zip">
 <zip>
-	<file>fancyboxy.zip</file>
-	<size>50872</size>
-	<date>1280223744</date>
-	<source>_plugins_/fancyboxy</source>
-	<last_commit>2010-06-29 12:57:03</last_commit>
+	<file>spip-bonux.zip</file>
+	<size>213959</size>
+	<date>1311721202</date>
+	<source>_plugins_/spip-bonux-2</source>
+	<last_commit>2011-07-27 01:00:02</last_commit>
 </zip>
+<traductions>
+	<traduction module="spip_bonux" reference="fr">
+	<langue code="ar"></langue>
+	<langue code="en"></langue>
+	<langue code="it"></langue>
+</traduction>
+</traductions>
+
 <plugin>
-	<nom>FancyBoxy</nom>
+  <nom>SPIP Bonux</nom>
+  <auteur>Cedric Morin, Matthieu Marcillaud, romy.tetue.net</auteur>
+  <icon>img_pack/spip-bonux.png</icon>
+  <licence>(c) 2008-2010 GPL</licence>
+  <version>2.2.21</version>
+  <etat>stable</etat>
+  <description>Le plugin qui lave plus SPIP que SPIP, avec des chouettes cadeaux dedans ! Interface douce, boucles POUR et CONDITION, tableaux, compteur, etc.</description>
+  <lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
+  <fonctions>public/spip_bonux_criteres.php</fonctions>
+  <fonctions>public/spip_bonux_balises.php</fonctions>
+  <fonctions>spip_bonux_fonctions.php</fonctions>
+  <options>spip_bonux_options.php</options>
+  <prefix>spip_bonux</prefix>
+  <necessite id='SPIP' version='[2.0.0;2.0.99]' />
+	<chemin dir='' />
+	<chemin dir='spip20/' />
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+  <fonctions>configurer/pipelines.php</fonctions>
+  <categorie>outil</categorie>
+</plugin>
+<plugin spip='[2.1.0-beta;3.0.0-dev)'>
+  <nom>SPIP Bonux</nom>
+  <auteur>Cedric Morin, Matthieu Marcillaud, romy.tetue.net</auteur>
+  <icon>img_pack/spip-bonux.png</icon>
+  <licence>(c) 2008-2010 GPL</licence>
+  <version>2.2.21</version>
+  <etat>stable</etat>
+  <description>Le plugin qui lave plus SPIP que SPIP, avec des chouettes cadeaux dedans ! Interface douce, boucles POUR et CONDITION, tableaux, compteur, etc.</description>
+  <lien>http://www.spip-contrib.net/SPIP-Bonux</lien>
+  <fonctions>public/spip_bonux_criteres.php</fonctions>
+  <fonctions>public/spip_bonux_balises.php</fonctions>
+  <fonctions>spip_bonux_fonctions.php</fonctions>
+  <options>spip_bonux_options.php</options>
+  <prefix>spip_bonux</prefix>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>configurer/pipelines.php</inclure>
+	</pipeline>
+  <fonctions>configurer/pipelines.php</fonctions>
+  <categorie>outil</categorie>
+</plugin>
+</archive>
+
+<archive id="fancybox.zip">
+<zip>
+	<file>fancybox.zip</file>
+	<size>50897</size>
+	<date>1300975226</date>
+	<source>_plugins_/fancybox</source>
+	<last_commit>2011-03-24 14:17:23</last_commit>
+</zip>
+<traductions>
+	<traduction module="fancybox" reference="fr">
+	<langue code="en"></langue>
+</traduction>
+</traductions>
+
+<plugin>
+	<nom>FancyBox</nom>
 	<auteur>
-	fancyboxy par [fancyboxy.net->http://fancyboxy.net/]
+	FancyBox par [fancybox.net->http://fancybox.net/]
 _ Mis en plugin par b_b
 	</auteur>
 	<version>0.4</version>
 	<etat>test</etat>
 	<description>
-Fen&#234;tre de dialogue ou de galerie photo.
+Fen&#234;tre de dialogue ou de galerie photo
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
 	</description>
-	<lien>http://www.spip-contrib.net/fancyboxy</lien>
-	<prefix>fancyboxy</prefix>
-	<icon>images/fancyboxy-32.png</icon>
+	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<prefix>fancybox</prefix>
+	<icon>images/fancybox-32.png</icon>
 	<necessite id="SPIP" version="[2.0;]" />
 	<utilise id="cfg" version="[1.12;]" />
 	<chemin dir='' />
@@ -48,28 +122,28 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 	</pipeline>
 	<categorie>multimedia</categorie>
 </plugin>
-<plugin spip='[2.1.0-beta;2.2)' >
-	<nom>FancyBoxy</nom>
+<plugin spip='[2.1.0-beta;]' >
+	<nom>FancyBox</nom>
 	<auteur>
-	fancyboxy par [fancyboxy.net->http://fancyboxy.net/]
-_ Mis en plugin par b_b et eric
+	FancyBox par [fancybox.net->http://fancybox.net/]
+_ Mis en plugin par b_b
 	</auteur>
-	<version>0.5</version>
+	<version>0.6</version>
 	<icon></icon>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>
-Fen&#234;tre de dialogue ou de galerie photo.
+Fen&#234;tre de dialogue ou de galerie photo
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
-_ C'est le plus recent
 	</description>
-	<lien>http://www.spip-contrib.net/fancyboxy2</lien>
-	<prefix>fancyboxy</prefix>
+	<lien>http://www.spip-contrib.net/FancyBox</lien>
+	<prefix>fancybox</prefix>
+	<icon>images/fancybox-32.png</icon>
 	<options>fancybox_options.php</options>
 	<utilise id="cfg" version="[1.12;]" />
 	<necessite id="saisies" version="[1.7.1;]" />
 	<!-- pour les boucles pour de saisies, je ne suis pas desole :p  -->
 	<necessite id="spip_bonux" version="[1.8;]" />
-	<necessite id="lib:jquery.fancyboxy-1.3.1" src="http://fancyboxy.googlecode.com/files/jquery.fancyboxy-1.3.1.zip" />
+	<necessite id="lib:jquery.fancybox-1.3.4" src="http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip" />
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>fancybox_pipelines.php</inclure>
@@ -79,6 +153,7 @@ _ C'est le plus recent
 		<action>insert_head</action>
 		<inclure>fancybox_pipelines.php</inclure>
 	</pipeline>
+	<categorie>multimedia</categorie>
 </plugin>
 </archive>
 
