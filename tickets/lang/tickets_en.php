@@ -149,6 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_redac' => 'Editing in progress',
 	'statut_resolu' => 'Resolved',
 	'statut_resolu_long' => 'All the resolved bug reports',
+	'syndiquer_ticket' => 'Syndicate the bug report:',
 	'syndiquer_tickets' => 'Syndicate the bug reports of the website',
 
 	// T

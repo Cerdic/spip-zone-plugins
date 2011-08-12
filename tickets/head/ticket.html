@@ -1,7 +1,9 @@
 <BOUCLE_ticket_head(TICKETS){id_ticket}>
 <title><:tickets:ticket:> - [(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#TEXTE|couper{150}|attribut_html)" />]
-</BOUCLE_ticket_head>
+[<link rel="alternate" type="application/rss+xml" title="<:tickets:syndiquer_ticket:> [(#TITRE|texte_backend)]" href="(#URL_PAGE{backend-tickets}|parametre_url{id_ticket,#ID_TICKET})" />]
+[<link rel="alternate" type="application/rss+xml" title="<:tickets:syndiquer_tickets:>" href="(#URL_PAGE{backend-tickets})" />]
 <meta name="robots" content="none" />
 <INCLURE{fond=inclure/head}>
 [<link rel="stylesheet" href="(#CHEMIN{tickets.css})" type="text/css" media="projection, screen, tv" />]
+</BOUCLE_ticket_head>

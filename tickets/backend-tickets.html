@@ -29,14 +29,9 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
-
-<BOUCLE_10recents(TICKETS){id_auteur ?} {par date}{inverse}{0,10}{unique}>
+<BOUCLE_10recents(TICKETS){id_ticket?}{severite?}{statut?}{id_auteur?}{id_assigne?}{projet?}{composant?}{version?}{jalon?}{navigateur?}{par date}{inverse}{0,10}{unique}>
 <INCLURE{fond=inclure/rss-item-ticket,id_ticket}>
 </BOUCLE_10recents>
-
-<BOUCLE_tres_recents(TICKETS){id_auteur ?} {par date}{inverse}{age<3}{unique}>
-<INCLURE{fond=inclure/rss-item-ticket,id_ticket}>
-</BOUCLE_tres_recents>
 
 </channel>
 

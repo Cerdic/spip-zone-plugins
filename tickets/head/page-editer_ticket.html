@@ -1,7 +1,9 @@
 <BOUCLE_editer_ticket_head(TICKETS){id_ticket}>
 <title><:tickets:icone_modifier_ticket:> - [(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#TEXTE|couper{150}|attribut_html)" />]
+[<link rel="alternate" type="application/rss+xml" title="<:tickets:syndiquer_ticket_simple:> [(#TITRE|backend-tickets)]" href="(#URL_PAGE{backend}|parametre_url{id_ticket,#ID_TICKET})" />]
 </BOUCLE_editer_ticket_head>
+[<link rel="alternate" type="application/rss+xml" title="<:tickets:syndiquer_tickets:>" href="(#URL_PAGE{backend-tickets})" />]
 <title><:tickets:nouveau_ticket:> - [(#NOM_SITE_SPIP|textebrut)]</title>
 <//B_editer_ticket_head>
 <INCLURE{fond=inclure/head}>
