@@ -273,16 +273,20 @@ function tickets_recuperer_fond($flux){
 	$args = $flux['args'];
 	$type = $args['fond'];
 	if ($type == 'formulaires/forum'){
-		$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($args['contexte']['id_ticket']));
-		if(_request('id_assigne')){
-			spip_log('on a un id_assigne'._request('id_assigne'),'tickets');
-			$infos_ticket['id_assigne'] = _request('id_assigne');
+		if(is_numeric($args['contexte']['id_ticket'])){
+			$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($args['contexte']['id_ticket']));
+			if(_request('id_assigne')){
+				spip_log('on a un id_assigne'._request('id_assigne'),'tickets');
+				$infos_ticket['id_assigne'] = _request('id_assigne');
+			}
+			if(_request('statut')){
+				$infos_ticket['statut'] = _request('statut');
+			}
+			if(is_array($infos_ticket)){
+				$saisie_ticket = recuperer_fond('inclure/inc-formulaire_forum',array_merge($args['contexte'],$infos_ticket));
+				$flux['data']['texte'] = preg_replace(",(<fieldset.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
+			}
 		}
-		if(_request('statut')){
-			$infos_ticket['statut'] = _request('statut');
-		}
-		$saisie_ticket = recuperer_fond('inclure/inc-formulaire_forum',array_merge($args['contexte'],$infos_ticket));
-		$flux['data']['texte'] = preg_replace(",(<fieldset.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
 	}
 	return $flux;
 }
