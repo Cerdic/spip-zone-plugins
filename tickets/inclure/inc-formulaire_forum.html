@@ -1,0 +1,18 @@
+<BOUCLE_ticket(TICKETS){id_ticket}>
+[(#AUTORISER{modifier,ticket, #ID_TICKET}|oui)
+<fieldset>
+	<legend><:tickets:icone_modifier_ticket:></legend>
+	<ul>
+	[(#SET{assignables,[(#ENV{id_assigne,0}|tickets_select_assignation{'array'})]})]
+	[(#SAISIE{selection, id_assigne,
+		label=<:tickets:champ_assigner:>,
+		datas=#GET{assignables},
+		valeur_forcee=#ENV{id_assigne,#ID_ASSIGNE}})]
+	[(#SAISIE{selection, statut,
+		label=<:tickets:champ_statut:>,
+		cacher_option_intro=oui,
+		valeur_forcee=#ENV{statut,#STATUT},
+		datas=[(#SESSION{id_auteur}|tickets_liste_statut)]})]
+	</ul>
+</fieldset>]
+</BOUCLE_ticket>

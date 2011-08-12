@@ -200,28 +200,6 @@ function tickets_affiche_milieu($flux){
 }
 
 /**
- * Insertion dans le pipeline formulaire_traiter (SPIP)
- * 
- * pour les notifications de forums des tickets en 2.1
- * 
- * @param array $flux
- * @return array $flux
- */
-function tickets_formulaire_traiter($flux){
-	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][3]=='ticket')) {
-		if ($notifications = charger_fonction('notifications', 'inc')) {
-			$notifications('commenterticket', $flux['args']['args'][6],
-				array(
-					'id_auteur' => id_assigne,
-					'texte' => texte
-				)
-			);
-		}
-	}
-	return $flux;
-}
-
-/**
  * Insertion dans le pipeline forum_objets_depuis_env (plugin forums balises/formulaire_forum.php)
  * 
  * Permet de récupérer l'id du ticket dans le formulaire de forum
@@ -261,5 +239,84 @@ function tickets_rechercher_liste_des_champs($tables){
 		'texte' => 5
 	);
 	return $tables;
+}
+
+/**
+ * Insertion dans le pipeline formulaire_charger (SPIP)
+ * Si on est dans un formulaire de forum sur un ticket, on ajoute l'id_ticket dans les champs chargés
+ * Permet de le récupérer par la suite dans le contexte de recuperer_fond
+ * 
+ * @param array $flux Le contexte du formulaire
+ */
+function tickets_formulaire_charger($flux){
+	$args = $flux['args'];
+	$form = $flux['args']['form'];
+	if ($form == 'forum'){
+		if($args['args'][4] == 'id_ticket'){
+			$flux['data']['objet'] = 'ticket';
+			$flux['data']['id_objet'] = $args['args'][6];
+			$flux['data']['id_ticket'] = $args['args'][6];
+		}
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline recuperer_fond (SPIP)
+ * Sur le formulaire de forum, on ajoute 2 champs quand on commente un ticket :
+ * -* La possibilité de changer le statut;
+ * -* La possibilité de changer l'assignation
+ * 
+ * @param array $flux Le contexte du pipeline
+ */
+function tickets_recuperer_fond($flux){
+	$args = $flux['args'];
+	$type = $args['fond'];
+	if ($type == 'formulaires/forum'){
+		$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($args['contexte']['id_ticket']));
+		if(_request('id_assigne')){
+			spip_log('on a un id_assigne'._request('id_assigne'),'tickets');
+			$infos_ticket['id_assigne'] = _request('id_assigne');
+		}
+		if(_request('statut')){
+			$infos_ticket['statut'] = _request('statut');
+		}
+		$saisie_ticket = recuperer_fond('inclure/inc-formulaire_forum',array_merge($args['contexte'],$infos_ticket));
+		$flux['data']['texte'] = preg_replace(",(<fieldset.*<\/fieldset>),Uims","\\1".$saisie_ticket,$flux['data']['texte'],1);
+	}
+	return $flux;
+}
+
+/**
+ * Insertion dans le pipeline formulaire_traiter (SPIP)
+ * Si on est dans un formulaire de forum sur un ticket, on récupère le statut et l'assignation si présents
+ * pour les notifications de forums des tickets en 2.1
+ *
+ * @param array $flux
+ * @return array $flux
+ */
+function tickets_formulaire_traiter($flux){
+	if (($flux['args']['form']=='forum') AND ($flux['args']['args'][3]=='ticket')) {
+		if($flux['args']['args'][3] == 'ticket'){
+			include_spip('action/editer_ticket');
+			$id_ticket = $flux['args']['args'][6];
+			$infos_ticket = sql_fetsel('*','spip_tickets','id_ticket='.intval($id_ticket));
+			if(($new_statut = _request('statut')) && ($new_statut != $infos_ticket['statut'])){
+				instituer_ticket($id_ticket,array('statut'=>$new_statut));
+			}
+			if(($new_assigne=_request('id_assigne')) && ($new_assigne != $infos_ticket['id_assigne'])){
+				revision_ticket($id_ticket, array('id_assigne'=>$new_assigne));
+			}
+		}
+		if ($notifications = charger_fonction('notifications', 'inc')) {
+			$notifications('commenterticket', $flux['args']['args'][6],
+			array(
+					'id_auteur' => id_assigne,
+					'texte' => texte
+			)
+			);
+		}
+	}
+	return $flux;
 }
 ?>
