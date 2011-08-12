@@ -7,7 +7,7 @@
 	<description>Construite des tests systematiques</description>
 	<lien>http://www.spip-contrib.net/TestBuilder</lien> <!-- URI de documentation -->
 	<prefix>tb</prefix>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;3.0.0-dev]" />
 	<categorie>outil</categorie>
 	<bouton id="tb" parent="configuration">
 		<icone>images/tb-24.png</icone>
@@ -21,7 +21,7 @@
 	</bouton>
 	<necessite id='spip_bonux' version='[1.9.0;]' />
 </plugin>
-<plugin spip='[2.3.0-dev;3.0.*]'>
+<plugin spip='[3.0.0-dev;3.1.0)'>
 	<nom>Test Builder</nom>
 	<auteur>Cedric [->http://www.yterium.com]</auteur>
 	<version>0.3.2</version>

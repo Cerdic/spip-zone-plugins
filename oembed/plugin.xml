@@ -41,5 +41,5 @@
 		<icone>images/oembed-16.png</icone>
 		<titre>oembed:titre_oembed</titre>
 	</bouton>
-	<necessite id='SPIP' version='[2.3.0-dev;]' />
+	<necessite id='SPIP' version='[3.0.0-dev;]' />
 </plugin>

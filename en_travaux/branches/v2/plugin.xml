@@ -28,6 +28,6 @@ _ Attention : seul le webmestre acc&eacute;de encore &agrave; l'espace priv&eacu
 <pipeline>
 <nom>affichage_final</nom>
 </pipeline>
-<necessite id="SPIP" version="[2.0.7;2.3.0-dev)" />
+<necessite id="SPIP" version="[2.0.7;3.0.0-dev)" />
 <categorie>maintenance</categorie>
 </plugin>

@@ -19,5 +19,5 @@
 		<url>admin_restore</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.3.0-dev;)" />
+	<necessite id="SPIP" version="[3.0.0-dev;)" />
 </plugin>

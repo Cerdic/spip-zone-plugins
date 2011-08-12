@@ -32,5 +32,5 @@
 		<inclure>zcore_pipelines.php</inclure>
 	</pipeline>
 	<categorie>squelette</categorie>
-	<necessite id="SPIP" version="[2.3.0-dev;]" />
+	<necessite id="SPIP" version="[3.0.0-dev;]" />
 </plugin>

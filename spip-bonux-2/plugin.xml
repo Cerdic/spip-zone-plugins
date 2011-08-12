@@ -26,7 +26,7 @@
   <fonctions>configurer/pipelines.php</fonctions>
   <categorie>outil</categorie>
 </plugin>
-<plugin spip='[2.1.0-beta;2.3.0-dev)'>
+<plugin spip='[2.1.0-beta;3.0.0-dev)'>
   <nom>SPIP Bonux</nom>
   <auteur>Cedric Morin, Matthieu Marcillaud, romy.tetue.net</auteur>
   <icon>img_pack/spip-bonux.png</icon>

@@ -67,6 +67,6 @@ La version {Kiss} ({Keep it simple, stupid!}) est moins param&eacute;trable que 
 		<url>ticketskiss</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.0.0;2.3.0-dev)" />
+	<necessite id="SPIP" version="[2.0.0;3.0.0-dev)" />
 	<categorie>divers</categorie>
 </plugin>

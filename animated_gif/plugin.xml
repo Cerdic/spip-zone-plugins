@@ -1,26 +1,26 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
     <version>
     0.0.1
     </version>
-    <nom> <!-- Nom du plugin -->
+    <nom>
     Animated GIF
     </nom>
-    <auteur><!-- Auteur du plugin -->
-      Renato Formato &#169; 2010 - [rformato@gmail.com->mailto:rformato@gmail.com] - GNU/GPL
+    <auteur>
+       [Renato Formato->mailto:rformato@gmail.com] - &#169; 2010
     </auteur>
+    <licence>
+       GNU/GPL
+    </licence>
     <etat>
     dev
     </etat>
     <description>
-      Allow to preserve animated GIF when using image filters
+    <multi>
+      [fr]Permet de pr&#233;server les GIF anim&#233;s lors de l'utilisation des filtres d'images.
+      [en]Allow to preserve animated GIF when using image filters.
+    </multi>
     </description>
-    <lien></lien> <!-- URI de documentation -->
-    <!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-    sur le mode Rien::
-    ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-    ce parametre est obligatoire et doit etre non vide
-    -->
+    <lien></lien>
     <prefix> 
     animatedGIF
     </prefix>
@@ -32,5 +32,5 @@
       <inclure>animated_GIF_pipelines.php</inclure>
     </pipeline>
 	<categorie>multimedia</categorie>
-	<necessite id="SPIP" version="[2.3.0-dev;]" />
+	<necessite id="SPIP" version="[3.0.0-dev;]" />
 </plugin>

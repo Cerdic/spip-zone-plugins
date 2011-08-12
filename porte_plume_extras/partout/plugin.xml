@@ -25,12 +25,12 @@
 		<inclure>ppp_pipelines.php</inclure>
 	</pipeline>
 	<necessite id='porte_plume' version='[1.6.4;]' />
-	<necessite id='spip' version='[2.0.10;]' />
+	<necessite id='spip' version='[2.0.10;3.0.0-dev)' />
 	<necessite id="cfg" version="[1.14.3;]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<categorie>edition</categorie>
 </plugin>
-<plugin spip='[2.3.0-dev;3.0.0]'>
+<plugin spip='[3.0.0-dev;)'>
 	<nom>
 		<multi>
 			[fr]Porte Plume Partout
