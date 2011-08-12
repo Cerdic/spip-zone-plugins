@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_sur_inscription' => "
 		Bug report or comment only available for registered users.
 	",
-	'tickets_traites' => 'All tickets processed',
+	'tickets_traites' => 'All processed bug reports',
 	'titre' => 'Bug reports, bug tracking',
 	'titre_identification' => 'Authentication',
 	'titre_liste' => 'List of the bug reports',

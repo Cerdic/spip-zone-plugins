@@ -6,7 +6,7 @@
 ][(#SET{hash_pagination,[_tickets_(#ENV{titre}|sinon{pas de chance}|md5|substr{0,4})]})]
 [(#REM) Noisette d'affichage d'une liste detaillee des tickets suivant des criteres passes en arguments]
 <B_detaillee>
-[<h3>(#ENV{titre})</h3>]
+[<h3>(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
 <div class="ticket">
 [(#ANCRE_PAGINATION)]
 [<p class="pagination">(#PAGINATION)</p>]
