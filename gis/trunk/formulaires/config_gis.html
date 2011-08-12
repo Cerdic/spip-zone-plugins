@@ -27,12 +27,11 @@
 				cloudmade,<:gis:cfg_lbl_api_cloudmade:>,
 				google,<:gis:cfg_lbl_api_google:>,
 				googlev3,<:gis:cfg_lbl_api_googlev3:>,
-				mapquest,<:gis:cfg_lbl_api_mapquest:>,
 				microsoft,<:gis:cfg_lbl_api_microsoft:>,
-				multimap,<:gis:cfg_lbl_api_multimap:>,
 				openlayers,<:gis:cfg_lbl_api_openlayers:>,
-				openspace,<:gis:cfg_lbl_api_openspace:>,
-				yahoo,<:gis:cfg_lbl_api_yahoo:>})]})]
+				ovi,<:gis:cfg_lbl_api_ovi:>,
+				yahoo,<:gis:cfg_lbl_api_yahoo:>,
+				yandex,<:gis:cfg_lbl_api_yandex:>})]})]
 		
 		[(#VAL{_GIS_APIS}|defined|oui)
 			[(#EVAL{_GIS_APIS}|unserialize|is_array|oui)#SET{apis,#EVAL{_GIS_APIS}|unserialize}]
@@ -70,6 +69,10 @@
 		[(#SAISIE{input,api_key_google,
 			label=<:gis:cfg_lbl_api_key_google:>,
 			explication=<:gis:cfg_inf_google{url=http://www.google.com/apis/maps/signup.html}:>,
+			size=40})]
+		[(#SAISIE{input,api_key_yandex,
+			label=<:gis:cfg_lbl_api_key_yandex:>,
+			explication=<:gis:cfg_inf_yandex{url=http://api.yandex.ru/maps/}:>,
 			size=40})]
 	</ul>
 
@@ -140,15 +143,20 @@
 	}
 	
 	var show_apis_keys = function(){
+		if(($('#champ_api').val() == "cloudmade") && $('.editer_api_key_cloudmade').is(':hidden')){
+			$('.editer_api_key_cloudmade').slideDown();
+		}else if(($('#champ_api').val() != "cloudmade") && $('.editer_api_key_cloudmade').is(':visible')) {
+			$('.editer_api_key_cloudmade').slideUp();
+		}
 		if(($('#champ_api').val() == "google") && $('.editer_api_key_google').is(':hidden')){
 			$('.editer_api_key_google').slideDown();
 		}else if(($('#champ_api').val() != "google") && $('.editer_api_key_google').is(':visible')) {
 			$('.editer_api_key_google').slideUp();
 		}
-		if(($('#champ_api').val() == "cloudmade") && $('.editer_api_key_cloudmade').is(':hidden')){
-			$('.editer_api_key_cloudmade').slideDown();
-		}else if(($('#champ_api').val() != "cloudmade") && $('.editer_api_key_cloudmade').is(':visible')) {
-			$('.editer_api_key_cloudmade').slideUp();
+		if(($('#champ_api').val() == "yandex") && $('.editer_api_key_yandex').is(':hidden')){
+			$('.editer_api_key_yandex').slideDown();
+		}else if(($('#champ_api').val() != "yandex") && $('.editer_api_key_yandex').is(':visible')) {
+			$('.editer_api_key_yandex').slideUp();
 		}
 	}
 	
