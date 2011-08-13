@@ -31,11 +31,10 @@ function gestionml_api_traiter_ovh($toutes,$ovhaction='', $nameML='', $email='')
 	$config = lire_config('gestionml',array());
 
 	try {
-		if ($config['hebergeur'] == "0" ) {
+		if (($config['hebergeur'] == "0" ) || preg_match(',\.loc\.,', $_SERVER['HTTP_HOST'])){
 			include_spip('inc/soap_local');
 			$soap = new SoapClientLocal(NULL, array('location' => _DIR_PLUGIN_GESTIONML."/inc/soap_local.php",
                                      'uri'      => "http://".$_SERVER["HTTP_HOST"]));
-
 		} else {
 			$soap = new SoapClient($config['serveur_distant']);
 		}
