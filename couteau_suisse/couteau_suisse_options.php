@@ -153,6 +153,14 @@ function autoriser_cs_configurer_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer', 'plugins', $id, $qui, $opt);
 }
 
+// Droits pour afficher le bouton du Couteau Suisse dans le bandeau de SPIP
+function autoriser_csconfig_bouton_dist($faire, $type, $id, $qui, $opt) {
+    return autoriser('configurer', 'cs', $id, $qui, $opt); // SPIP < 3.0
+}
+function autoriser_csconfig_menu_dist($faire, $type, $id, $qui, $opt) {
+    return autoriser('configurer', 'cs', $id, $qui, $opt); // SPIP >= 3.0
+}
+
 // Droits pour voir/manipuler un outil du Couteau Suisse
 // $opt doit representer ici l'outil concerne : $outil
 // Si $opt['autoriser'] (code PHP) n'est pas renseigne, ces droits natifs sont toujours accordes
