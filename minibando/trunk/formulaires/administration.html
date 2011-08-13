@@ -35,20 +35,10 @@
 					href="[(#VALEUR{url}|sinon{#CLE}|bandeau_creer_url{#VALEUR{urlArg},#GET{contexte}})]"
 					class="bando2_#CLE">(#VALEUR{libelle}|_T)</a></li>]</BOUCLE_sous></ul></B_sous>#GET{li}</BOUCLE_boutons>
 	<li class="minibando_sep">&nbsp;</li>
-	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_article})]" id="voir_article">
-		<:article:>((#ENV{id_article}))</a><span></span><ul><li><p><:bouton_modifier:> (<:article:> [(#ENV{id_article})])</p></li></ul></li>]
-	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_breve})]" id="voir_breve">
-		<:breves:breve:>((#ENV{id_breve}))</a><span></span><ul><li><p><:bouton_modifier:> (<:breve:> [(#ENV{id_breve})])</p></li></ul></li>]
-	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_rubrique})]" id="voir_rubrique">
-		<:rubrique:>((#ENV{id_rubrique}))</a><span></span><ul><li><p><:bouton_modifier:> (<:rubrique:> [(#ENV{id_rubrique})])</p></li></ul></li>]
-	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_mot})]" id="voir_mot">
-		<:mots_clef:>((#ENV{id_mot}))</a><span></span><ul><li><p><:bouton_modifier:> (<:mots_clef:> [(#ENV{id_mot})])</p></li></ul></li>]
-	[(#ENV{id_syndic}|oui)[(#AUTORISER{modifier,site,#ENV{id_syndic}}|oui)
-	<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_site})]" id="voir_site">
-		<:info_site:>[((#ENV{id_syndic}))]</a><span></span><ul><li><p><:bouton_modifier:> (<:info_site:>[ (#ENV{id_syndic})])</p></li></ul></li>]]
-	[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_auteur})]" id="voir_auteur">
-		<:auteur:>((#ENV{id_auteur}))</a><span></span><ul><li><p><:bouton_modifier:> (<:auteur:> [(#ENV{id_auteur})])</p></li></ul></li>]
-	<li id="minibando_bouton_recalcul"><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" id="var_mode">
+	[(#ENV{objet}|oui)
+		[<li id="minibando_bouton_modifier"><a href="[(#ENV{voir_#ENV{objet}})]" id="voir_#ENV{objet}">
+			[(#ENV{objet}|objet_info{texte_objet}|_T)]((#ENV{id_objet}))</a><span></span><ul><li><p><:bouton_modifier:> ([(#ENV{objet}|objet_info{texte_objet}|_T)] [(#ENV{id_objet})])</p></li></ul></li>]
+	]<li id="minibando_bouton_recalcul"><a href="[(#SELF|parametre_url{var_mode,#ENV{calcul}})]" id="var_mode">
 		<:admin_recalculer:>[(#ENV{use_cache})]</a><span></span><ul><li><p><:admin_recalculer:></p></li></ul></li>
 	<!--extra-->[<a href="(#ENV{preview})" id="preview"><:previsualisation:></a>][(#SESSION{statut}|=={0minirezo}|oui)
 	<li class="minibando_sep">&nbsp;</li>
