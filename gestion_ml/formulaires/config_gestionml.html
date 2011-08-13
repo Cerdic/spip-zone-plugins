@@ -21,7 +21,7 @@
             saisie, selection_multiple,
             options, #ARRAY{
                nom, listes_auteur_#ID_AUTEUR,
-               label, <:gestionml:liste_de{nom=#NOM}:>,
+               label, <:gestionml:label_liste_de{nom=#NOM}:>,
                explication, <:gestionml:explication_liste_de{nom=#NOM}:>,
                cacher_option_intro, oui,
                datas, #GET{tab_pour_select}
@@ -45,7 +45,7 @@
       <ul>
 
          [(#SAISIE{radio, hebergeur,
-                 label=<:gestionml:afficher_hebergeurs:>,
+                 label=<:gestionml:label_afficher_hebergeurs:>,
         			  defaut=0,
                  datas=#ARRAY{
                  			 0,local,
@@ -61,7 +61,7 @@
                   saisie, input,
                   options, #ARRAY{
                      nom, serveur_distant,
-                     label, <:gestionml:serveur_distant:>,
+                     label, <:gestionml:label_serveur_distant:>,
                      defaut, https://www.ovh.com/soapi/soapi-re-1.11.wsdl,
                      obligatoire, oui,
                      explication, <:gestionml:explication_serveur_distant:>
@@ -71,7 +71,7 @@
                   saisie, input,
                   options, #ARRAY{
                      nom, domaine,
-                     label, <:gestionml:domaine:>,
+                     label, <:gestionml:label_domaine:>,
                      defaut, mondomaine.tld,
                      obligatoire, oui,
                      explication, <:gestionml:explication_domaine:>
@@ -81,7 +81,7 @@
                   saisie, input,
                   options, #ARRAY{
                      nom, identifiant,
-                     label, <:gestionml:identifiant:>,
+                     label, <:gestionml:label_identifiant:>,
                      obligatoire, oui,
                      explication, <:gestionml:explication_identifiant:>
                   }
@@ -91,7 +91,7 @@
                   options, #ARRAY{
                      nom, mot_de_passe,
                      type, password,
-                     label, <:gestionml:mot_de_passe:>,
+                     label, <:gestionml:label_mot_de_passe:>,
                      obligatoire, oui,
                      explication, <:gestionml:explication_mot_de_passe:>
                   }
@@ -101,7 +101,7 @@
         
 
          [(#SAISIE{fieldset,auteurs_listes,env,
-                     label=<:gestionml:auteurs_listes_legend:>,
+                     label=<:gestionml:label_auteurs_listes:>,
                      saisies=#GET{les_saisies}
          })]
 

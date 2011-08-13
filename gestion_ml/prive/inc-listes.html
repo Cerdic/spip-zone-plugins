@@ -5,19 +5,19 @@
       <BOUCLE_contenu(POUR){tableau #ENV{tab} }>
          <tr>
             <td>#CLE (#VALEUR abonn&eacute;s)</td> 
-            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','infos'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:infos:>">
-            <img width="16" height="16" src="#CHEMIN{images/gestionml-infos.png}" alt="<:gestionml:infos:>" />
+            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','infos'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:icone_infos:>">
+            [(#CHEMIN{images/gestionml-infos.png}|balise_img|inserer_attribut{alt,<:gestionml:icone_infos:>})]
             </a></td>
-            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','users'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:abonnes:>">
-            <img width="16" height="16" src="#CHEMIN{images/gestionml-abonnes.png}" alt="<:gestionml:abonnes:>" />
+            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','users'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:icone_abonnes:>">
+            [(#CHEMIN{images/gestionml-abonnes.png}|balise_img|inserer_attribut{alt,<:gestionml:icone_abonnes:>})]
             </a></td>
-            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','sendlist'}|parametre_url{'nameML',#CLE}|parametre_url{'email',#SESSION{email}})]" title="<:gestionml:envoyermail:>">
-            <img width="16" height="16" src="#CHEMIN{images/gestionml-envoyermail.png}" alt="<:gestionml:envoyermail:>" />
+            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','sendlist'}|parametre_url{'nameML',#CLE}|parametre_url{'email',#SESSION{email}})]" title="<:gestionml:icone_envoyer_mail:>">
+            [(#CHEMIN{images/gestionml-envoyermail.png}|balise_img|inserer_attribut{alt,<:gestionml:icone_envoyer_mail:>})]
             </a></td>
          </tr>
       </BOUCLE_contenu>
    </table>
    </B_contenu>
-   <h2><:gestionml:aucune_listes_dispo:></h2>
+   <h2><:gestionml:aucune_liste_dispo:></h2>
    <//B_contenu>
 </div>

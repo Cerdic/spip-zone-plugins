@@ -1,0 +1,17 @@
+[(#AUTORISER{configurer,videos}|oui)
+   <!--#navigation-->
+   <div class="logo_navigation">
+   [(#CHEMIN{images/gestionml-64.png}|balise_img)]
+   <p><:gestionml:boite_info:></p>
+   </div>
+   <!--/#navigation-->
+   
+   <h1><:gestionml:description:></h1>
+   
+	<div class='nettoyeur' style="width:600px;"></div>
+   <div class='cadre-formulaire-editer'>
+      <div class="formulaire_spip">
+         [(#INCLURE{fond=prive/inc-gestionml}{ajax}{env})]
+      </div>
+   </div>
+]
