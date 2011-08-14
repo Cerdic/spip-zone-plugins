@@ -11,7 +11,7 @@
 			<B_imputation>
 			<select name="imputation" id="imputation" class="formo" > 
 			<BOUCLE_imputation(ASSO_PLAN){par classe}{par code}{classe!=#ENV{classe_banques}}{active=1}>
-			<option value="#CODE" [(#ENV{imputation}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE[(#TYPE_OP|!={multi}|oui)&nbsp;-&nbsp;[(#TYPE_OP|=={credit}|?{<:asso:crediteur:>,<:asso:debiteur:>})]][&nbsp;-&nbsp;(#ENV{classe_banques}|=={#CLASSE}|oui)<:asso:compte_financier:>]</option>
+			<option value="#CODE" [(#ENV{imputation}|=={#CODE}|?{selected="selected"})]>#CODE - [(#CODE|association_plan_comptable_complet)] [(#INTITULE|encadre|sinon{''})][&nbsp;-&nbsp;(#ENV{classe_banques}|=={#CLASSE}|oui)<:asso:compte_financier:>]</option>
 			</BOUCLE_imputation>
 			</select>
 			</B_imputation>

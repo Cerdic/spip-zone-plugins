@@ -3,7 +3,7 @@
 <B_mode_paiement>
 	<select name="journal" id="journal" class="formo" > 
 <BOUCLE_mode_paiement(ASSO_PLAN){par classe}{par code}{active=1}{classe=#ENV{classe_banques}}>
-	<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - #INTITULE</option>
+	<option value="#CODE" [(#ENV{journal}|=={#CODE}|?{selected="selected"})]>#CODE - [(#CODE|association_plan_comptable_complet)] [(#INTITULE|encadre|sinon{''})]</option>
 </BOUCLE_mode_paiement>
 	</select>
 </B_mode_paiement>

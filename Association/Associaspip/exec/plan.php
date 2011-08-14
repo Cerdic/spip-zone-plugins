@@ -112,8 +112,8 @@ function exec_plan(){
                         else {
                             echo '<td class="arial11 border1"> </td>';
                         }
-			echo '<td class="arial11 border1">'.$data['code'].'</td>';
-			echo '<td class="arial11 border1">'.$data['intitule'].'</td>';
+                        echo '<td class="arial11 border1">'.$data['code'].'</td>';
+			echo '<td class="arial11 border1">'.association_plan_comptable_complet($data['code']).(($data['intitule'] != '') ? ' ['.$data['intitule'].']' : '') .'</td>';
 			#echo '<td class="arial11 border1">'.$data['reference'].'</td>';
 			echo '<td class="arial11 border1" style="text-align:right;">'.number_format($data['solde_anterieur'], 2, ',', ' ').' &euro;</td>';
 			echo '<td class="arial11 border1">'.association_datefr($data['date_anterieure']).'</td>';

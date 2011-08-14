@@ -160,7 +160,7 @@ function association_delete_tables($flux){
   spip_unlink(cache_meta('association_metas'));
 }
 
-function association_plan_comptable_complet() {
+function association_plan_comptable_complet($code='') {
     /**
      * Plan comptable prenant en compte les nouvelles dispositions du règlement
      * N° 99-01 du 16 février 1999 relatif aux modalités d’établissement des comptes
@@ -176,9 +176,11 @@ function association_plan_comptable_complet() {
      * pour les comptes 60 et 70.
      * Les associations releveront le plus souvent, non pas de l’inventaire
      * permanent, mais de l’inventaire intermittent.
+     *
+     * Retourne soit le tableau complet soit le libellé du $code donné en paramètre
      */
     $pcc = array(
-             1 => "Comptes de capitaux (fonds propres, emprunts et dettes assimilées)",
+            1 => "Comptes de capitaux (fonds propres, emprunts et dettes assimilées)",
             10 => "Fonds associatif et réserves",
             102 => "Fonds associatif (sans droit de reprise)",
             1021 => "Valeur du patrimoine intégré",
@@ -321,7 +323,7 @@ function association_plan_comptable_complet() {
             2971 => "Titres immobilisés (droit de propriété) (même ventilation que celle du compte 271)",
             2972 => "Titres immobilisés (droit de créance) (même ventilation que celle du compte 272)",
             2974 => "Prêts (même ventilation que celle du compte 274)",
-            2975 => "dépôts et cautionnements versés (même ventilation que celle du compte 275)",
+            2975 => "Dépôts et cautionnements versés (même ventilation que celle du compte 275)",
             2976 => "Autres créances immobilisées (même ventilation que celle du compte 276)",
 
             3 => "Comptes de stocks et en-cours",
@@ -402,7 +404,7 @@ function association_plan_comptable_complet() {
             4487 => "Produits à recevoir",
             45 => "Confédération, fédération, union,  associations affiliées",
             451 => "Confédération, fédération, associations affiliées – compte courant",
-            455 => "sociétaires – comptes courants",
+            455 => "Sociétaires – comptes courants",
             46 => "Débiteurs divers et créditeurs divers",
             467 => "Autres comptes débiteurs ou créditeurs",
             468 => "Divers – Charges à payer et produits à recevoir",
@@ -439,9 +441,9 @@ function association_plan_comptable_complet() {
             512 => "Banques",
             513 => "Caisse des dépôts et consignations",
             514 => "Chèques postaux",
-            515 => "« Caisses » du trésor et des établissements publics",
+            515 => "«Caisses» du trésor et des établissements publics",
             517 => "Autres organismes financiers",
-            5171 => "caisse d’épargne",
+            5171 => "Caisse d’Epargne",
             518 => "Intérêts courus",
             5186 => "Intérêts courus à payer",
             5187 => "Intérêts courus à recevoir",
@@ -457,7 +459,7 @@ function association_plan_comptable_complet() {
             590 => "Provisions pour dépréciation des valeurs mobilières de placement",
 
             6 =>"Comptes de charges",
-            60 => "Achats (sauf 603)",
+            60 => "Achats", # sauf 603
             601 => "Achats stockés – matières premières et fournitures", # Structure laissée libre en vue de répondre à la diversité des actions entreprises par le secteur associatif.
             602 => "Achats stockés – Autres approvisionnements", # Structure laissée libre en vue de répondre à la diversité des actions entreprises par le secteur associatif.
             603 => "Variation des stocks (approvisionnement et marchandises)",
@@ -483,8 +485,8 @@ function association_plan_comptable_complet() {
             6135 => "Locations mobilières",
             614 => "Charges locatives et de copropriété",
             615 => "Entretiens et réparations",
-            6152 => "sur biens immobiliers",
-            6155 => "sur biens mobiliers",
+            6152 => "Entretiens et réparations sur biens immobiliers",
+            6155 => "Entretiens et réparations sur biens mobiliers",
             6156 => "Maintenance",
             616 => "Primes d’assurance",
             6161 => "Multirisques",
@@ -517,6 +519,7 @@ function association_plan_comptable_complet() {
             6256 => "Missions",
             6257 => "Réceptions",
             626 => "Frais postaux et frais de télécommunications",
+            6261 => "Frais postaux",
             627 => "Frais de tenu du compte bancaire",
             628 => "Divers",
             6281 => "Cotisations (liées à l’activité économique)",
@@ -558,7 +561,8 @@ function association_plan_comptable_complet() {
             6475 => "Médecine du travail, pharmacie",
             648 => "Autres charges de personnel",
             65 => "Autres charges de gestion courante",
-            651 => "Redevances pour concessions, brevets, licences, marques, procédés",
+            651 => "Redevances pour concessions, brevets, licences, marques, procédés, droits et valeurs similaires",
+            6511 => "Redevances pour concessions, brevets, licences, marques, procédés",
             6516 => "Droits d’auteur et de reproduction (SACEM)",
             6518 => "Autres droits et valeurs similaires",
             654 => "Pertes sur créances irrécouvrables",
@@ -628,9 +632,13 @@ function association_plan_comptable_complet() {
             7134 => "Variation des en-cours de production de services",
             7135 => "Variation des stocks de produits",
             72 => "Production immobilisée",
+            720 => "Report exercice précédent",
             74 => "Subvention d’exploitation",
+            740 => "Subvention \"municipale\"",
+            741 => "Subvention \"département\"",
+            742 => "Subvention \"région\"",
             75 => "Autres produits de gestion courante",
-            751 => "redevances pour concessions, brevets, licences, marques, procédés, droits et valeurs similaires",
+            751 => "Redevances pour concessions, brevets, licences, marques, procédés, droits et valeurs similaires",
             754 => "Collectes",
             756 => "Cotisations",
             757 => "Quote-part d’éléments du fonds associatif virée au compte de résultat",
@@ -671,13 +679,13 @@ function association_plan_comptable_complet() {
             7811 => "Reprises sur amortissements des immobilisations incorporelles et corporelles",
             7815 => "Reprises sur provisions pour risques et charges d’exploitation",
             7816 => "Reprises sur provisions pour dépréciation des immobilisations incorporelles et corporelles",
-            7817 => "reprises sur provisions pour  dépréciation des actifs circulants", # Autres que valeurs mobilières de placements.
+            7817 => "Reprises sur provisions pour  dépréciation des actifs circulants", # Autres que valeurs mobilières de placements.
             786 => "Reprises sur provisions (à inscrire dans les produits financiers)",
             7866 => "Reprises sur provisions pour dépréciation des éléments financiers",
             78662 => "Immobilisations financières",
             78665 => "Valeurs mobilières de placement",
             787 => "Reprises sur provisions (à inscrire dans les produits exceptionnels)",
-            7876 => "reprises sur provisions pour dépréciations exceptionnelles",
+            7876 => "Reprises sur provisions pour dépréciations exceptionnelles",
             789 => "Report des ressources non utilisées des exercices antérieurs (à éclater)",
             79 => "Transferts de charges",
             791 => "Transferts de charges d’exploitation",
@@ -696,7 +704,11 @@ function association_plan_comptable_complet() {
             875 => "Dons en nature"
     );
 
-    return $pcc;
+    return ($code==='')?$pcc:$pcc[$code];
+}
+
+function encadre($texte,$avant='[',$apres=']') {
+    return ($texte=='')?'':$avant.$texte.$apres;
 }
 
 // Raccourcis

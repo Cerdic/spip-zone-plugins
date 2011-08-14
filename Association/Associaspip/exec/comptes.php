@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -94,7 +94,7 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 	while ($plan = sql_fetch($sql)) {
 		echo '<option value="'.$plan['code'].'" ';
 		if ($imputation==$plan['code']) { echo ' selected="selected"'; }
-		echo '>'.$plan['classe'].' - '.$plan['intitule'].'</option>';
+		echo '>' . $plan['code'],' : '. association_plan_comptable_complet($plan['code']).(($plan['intitule'] != '') ? ' ['.$plan['intitule'].']' : '') . '</option>';
 	}
 	echo '</select></div></form></td>';
 	echo '</tr></table>';

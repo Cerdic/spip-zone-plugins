@@ -21,7 +21,23 @@
                 <li class="editer_code">
 			[<span class='erreur_message'>(#GET{erreurs})</span>]
                     <label for="code"><strong><:asso:code:></strong></label>
-                    <input type="text" name="code" [value="(#ENV{code})"] id="code" class='formo'/>
+                    <select name="code" id="code" class="formo">
+                        #SET{new,1}
+                        <BOUCLE_code(POUR){tableau #ENV{pcc}}>
+                            [(#CLE|<{9}|? {
+                                [(#GET{new}|=={1}|? {
+                                    <optgroup label="#CLE - #VALEUR">
+                                    #SET{new,0}
+                                    ,
+                                    </optgroup>
+                                    <optgroup label="#CLE - #VALEUR">
+                                })]
+                                ,
+                                <option value="#CLE" [(#ENV{code}|== {#CLE}|?{selected="selected"})]>#CLE - #VALEUR</option>
+                            })]
+                        </BOUCLE_code>
+                        </optgroup>
+                    </select>
                 </li>
 
                 <li class="editer_intitule">
