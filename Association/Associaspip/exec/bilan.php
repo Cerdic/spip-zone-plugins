@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -110,13 +110,13 @@ function exec_bilan(){
 			
 			// si on fait le bilan sur toutes les destinations (ou que destination n'est pas on)
 			if ($id_destination == 0) {
-				$query = sql_select("imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee$sel", "spip_asso_comptes$join", "", "${order}annee", "annee DESC", '',  "annee=$annee$having");
+				$query = sql_select("imputation, sum( recette ) AS recettes, sum( depense ) AS depenses, date_format( date, '%Y' ) AS annee$sel", "spip_asso_comptes$join", "", $order."annee", "annee DESC", '',  "annee=$annee$having");
 				while ($data = sql_fetch($query)) {
 					$recettes=$data['recettes'];
 					$depenses=$data['depenses']; 
 					$soldes=$recettes - $depenses;
 					echo '<tr style="background-color: #EEEEEE;">';
-					echo "<td class='arial11 border1'>\n".$data['intitule'].'</td>';
+					echo "<td class='arial11 border1'>\n" . $data['code'] . ' : ' . association_plan_comptable_complet($data['code']) . (($data['intitule'] != '') ? ' [' . $data['intitule'] . ']' : '') . '</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($soldes, 2, ',', ' ').'</td>';
@@ -128,13 +128,13 @@ function exec_bilan(){
 			}
 			else // on fait le bilan d'une seule destination
 			{
-				$query = sql_select("imputation, date_format( date, '%Y' ) AS annee, sum( spip_asso_destination_op.recette ) AS recettes, sum( spip_asso_destination_op.depense ) AS depenses, spip_asso_destination_op.id_destination$sel", "spip_asso_comptes LEFT JOIN spip_asso_destination_op ON spip_asso_destination_op.id_compte=spip_asso_comptes.id_compte$join", "spip_asso_destination_op.id_destination=$id_destination", "${order}annee", "annee DESC", '',  "annee=$annee$having");
+				$query = sql_select("imputation, date_format( date, '%Y' ) AS annee, sum( spip_asso_destination_op.recette ) AS recettes, sum( spip_asso_destination_op.depense ) AS depenses, spip_asso_destination_op.id_destination$sel", "spip_asso_comptes LEFT JOIN spip_asso_destination_op ON spip_asso_destination_op.id_compte=spip_asso_comptes.id_compte$join", "spip_asso_destination_op.id_destination=$id_destination", $order."annee", "annee DESC", '',  "annee=$annee$having");
 				while ($data = sql_fetch($query)) {
 					$recettes=$data['recettes'];
 					$depenses=$data['depenses']; 
 					$soldes=$recettes - $depenses;
 					echo '<tr style="background-color: #EEEEEE;">';
-					echo "<td class='arial11 border1'>\n".$data['intitule'].'</td>';
+					echo "<td class='arial11 border1'>\n" . $data['code'] . ' : ' . association_plan_comptable_complet($data['code']) . (($data['intitule'] != '') ? ' [' . $data['intitule'] . ']' : '') . '</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($soldes, 2, ',', ' ').'</td>';
@@ -182,7 +182,7 @@ function bilan_encaisse($annee)
 		$solde=$banque['solde_anterieur'];
 		$total_initial += $solde;
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo "\n<td class='arial11 border1'>".$banque['intitule']; 
+		echo "\n<td class='arial11 border1'>" . $banque['code'] . ' : ' . association_plan_comptable_complet($banque['code']) . (($banque['intitule'] != '') ? ' [' . $banque['intitule'] . ']' : '') . '</td>';
 		echo "\n<td class='arial11 border1' style='text-align:right;'>".association_datefr($date_solde).'</td>'; 
 		echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($solde, 2, ',', ' ').'</td>'; 
 			
@@ -190,7 +190,7 @@ function bilan_encaisse($annee)
 			
 		if ($compte)
 			$solde += ($compte['recettes'] -$compte['depenses']);
-		echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($solde, 2, ',', ' ').'</tr>';
+		echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($solde, 2, ',', ' ').'</td></tr>';
 		$total_actuel += $solde;		
 	}
 		
