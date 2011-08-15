@@ -7,18 +7,11 @@
 var cloudmade_key = '#CONFIG{gis/api_key_cloudmade}';]
 
 (function($){
-
-	#SET{api_defaut,openlayers}
-	[(#VAL{_GIS_APIS_DEFAUT}|defined|oui)
-		#SET{api_defaut,#EVAL{_GIS_APIS_DEFAUT}}
-	]
-	#SET{api_utilisee,#CONFIG{gis/api,#GET{api_defaut}}}
-	
 	var init_map_preview = function() {
 		var map_preview;
 		var map_preview_container = 'map_preview';
 		var marker;
-		map_preview = new mxn.Mapstraction(map_preview_container,'#GET{api_utilisee}');
+		map_preview = new mxn.Mapstraction(map_preview_container,'[(#REM|gis_api_utilisee)]');
 		
 		map_preview.addControls({
 			pan: true,

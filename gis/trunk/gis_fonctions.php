@@ -127,4 +127,17 @@ function generer_url_ecrire_gis($id, $args='', $ancre='', $statut='', $connect='
 	. ($ancre ? "#$ancre" : '');
 	return $h;
 }
+
+
+function gis_api_utilisee(){
+	$defaut = 'openlayers';
+	if(defined('_GIS_APIS_FORCEE')){
+		return _GIS_APIS_FORCEE;
+	}else{
+		if(defined('_GIS_APIS_DEFAUT')){
+			$defaut = _GIS_APIS_DEFAUT;
+		}
+		return lire_config('gis/api',$defaut);
+	}
+}
 ?>
