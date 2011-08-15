@@ -118,7 +118,7 @@ function jqueryui_jquery_plugins($plugins){
 }
 
 /**
- * jqueryui_insert_head : ajout des CSS de jQuery-UI pour les pages publiques
+ * jqueryui_insert_head : ajout des CSS de jQuery-UI pour les pages publiques et privées
  * avec gestion du theme et des UI utilises
  * 
  * @param: $flux 
@@ -129,11 +129,11 @@ function jqueryui_insert_head($flux) {
 
 	// recuperer le repertoire du theme
 	$theme = 'base/';
-	if (isset($config['theme']) AND $config['theme'] != '')
+	if (isset($config['theme']) AND $config['theme'] != '' AND $config['theme'] != 'no_css')
 		$theme = $config['theme'].'/';
-	if ($theme == 'no_css/')
+	if ($theme == 'no_css/' && !defined('_JQUERYUI_FORCER_CSS'))
 		return $flux;
-	
+
 	// ajouter core tout le temps et en debut de tableau, array_unique supprimera les occurrences suivantes
 	array_unshift($config['plugins'],'jquery.ui.core');
 
