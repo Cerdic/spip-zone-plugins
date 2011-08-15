@@ -8,10 +8,10 @@
 
 [(#REM) Chercher les rubriques correspondant a la requete ]
 <BOUCLE_s(RUBRIQUES){statut==.}{titre LIKE (#ENV{q})%}{0,20}{par multi titre}>
-<BOUCLE_h(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})] &gt; </BOUCLE_h>[(#TITRE)]|[(#TITRE|textebrut)]|#ID_RUBRIQUE
+<BOUCLE_h(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})] > </BOUCLE_h>[(#TITRE|supprimer_tags)]|[(#TITRE|supprimer_tags)]|#ID_RUBRIQUE
 </BOUCLE_s>
 <BOUCLE_s1(RUBRIQUES){statut==.}{titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
-<BOUCLE_h1(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})] &gt; </BOUCLE_h1>[(#TITRE)]|[(#TITRE|textebrut)]|#ID_RUBRIQUE
+<BOUCLE_h1(HIERARCHIE){statut==.}{n-3,3}>[(#TITRE|couper{12})] > </BOUCLE_h1>[(#TITRE|supprimer_tags)]|[(#TITRE|supprimer_tags)]|#ID_RUBRIQUE
 </BOUCLE_s1>
 [(#REM) Vraiment on n'a rien trouve ]
 <:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0<//B_s1>

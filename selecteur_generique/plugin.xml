@@ -5,25 +5,18 @@
 			[en]Generic selector
 		</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Fil, kent1
-	</auteur>
-	<version>
-	0.6
-	</version>
+	<auteur>Fil, kent1</auteur>
+	<version>0.7</version>
 	<licence>GNU/GPL</licence>
-	<etat>
-	stable
-	</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 			[fr]Remplace les s&#233;lecteurs (auteurs, mots, rubriques) par quelque chose de plus l&#233;ger &#38; rapide, capable de traiter autant de donn&#233;es que possible.
 			[en]Replaces selectors (authors, words, sections) to something lighter and faster, can handle as much data as possible.
 		</multi>
 	</description>
-	<prefix>
-	SelecteurGenerique
-	</prefix>
+	<prefix>SelecteurGenerique</prefix>
+	<lien>http://www.spip-contrib.net/Selecteur-generique</lien>
 	<fonctions>public/selecteur_generique_criteres.php</fonctions>
 	<pipeline>
 		<nom>header_prive</nom>
@@ -31,6 +24,40 @@
 		<inclure>inserer_javascript.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0;2.1.9)" />
+	<categorie>outil</categorie>
+</plugin>
+<plugin spip='[2.1.10;]'>
+  <nom>
+		<multi>
+			[fr]S&#233;lecteur g&#233;n&#233;rique
+			[en]Generic selector
+		</multi>
+	</nom>
+	<auteur>Fil, kent1</auteur>
+	<version>0.7</version>
+	<licence>GNU/GPL</licence>
+	<etat>stable</etat>
+	<description>
+		<multi>
+			[fr]Remplace les s&#233;lecteurs (auteurs, mots, rubriques) par quelque chose de plus l&#233;ger &#38; rapide, capable de traiter autant de donn&#233;es que possible.
+			[en]Replaces selectors (authors, words, sections) to something lighter and faster, can handle as much data as possible.
+		</multi>
+	</description>
+	<prefix>SelecteurGenerique</prefix>
+	<lien>http://www.spip-contrib.net/Selecteur-generique</lien>
+	<fonctions>public/selecteur_generique_criteres.php</fonctions>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>inserer_javascript</action>
+		<inclure>selecteur_generique_pipelines.php</inclure>
+	</pipeline>
+		<pipeline>
+		<nom>jqueryui_forcer</nom>
+		<inclure>selecteur_generique_pipelines.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="jqueryui" version="[1.8.9;]" />
 	<categorie>outil</categorie>
 </plugin>
