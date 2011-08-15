@@ -17,7 +17,8 @@ function jqueryui_array_themes() {
         }
         closedir($pointeur);
     }
-    $Tthemes['no_css'] = _T('jqueryui:cfg_no_css');
+	if(!defined('_JQUERYUI_FORCER_CSS'))
+    	$Tthemes['no_css'] = _T('jqueryui:cfg_no_css');
     
 	return $Tthemes;
 }
