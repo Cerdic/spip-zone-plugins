@@ -26,7 +26,7 @@ function action_editer_grappe_dist()
 
 	$c = $opt = array();
 	foreach (array(
-		'titre', 'descriptif', 'liaisons'
+		'titre', 'descriptif', 'liaisons','type'
 	) as $champ)
 		$c[$champ] = _request($champ);
 
@@ -36,6 +36,7 @@ function action_editer_grappe_dist()
 		$opt[$champ] = _request($champ);
 
 	$c['options'] = serialize($opt);
+	$c['id_admin'] = $GLOBALS['visiteur_session']['id_auteur'];
 
 	if (is_array($c['liaisons']))
 		$c['liaisons'] = implode(',',$c['liaisons']);

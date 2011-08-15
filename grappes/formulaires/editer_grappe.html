@@ -2,9 +2,9 @@
 	<!-- <br class='bugajaxie' /> -->
 	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
 	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
-	[(#ENV{editable})
+	<BOUCLE_editable(CONDITION){si #ENV{editable}|oui}>
 	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
-		[(#REM) declarer les hidden qui declencheront le service du formulaire 
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 	  <input type='hidden' name='id_grappe' value='#ENV{id_grappe}' />
@@ -14,7 +14,7 @@
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
 				]<input type='text' class='text' name='titre' id='titre' value='[(#ENV**{titre,#VAL{grappes:titre_nouvelle_grappe}|_T|filtrer_entites})]'
 				[(#ENV{titre,''}|?{'',' '})onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
-	    </li>	
+	    </li>
 	    <li class='editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur] editer_type_textarea'>
 				<label for='descriptif'><:grappes:texte_descriptif:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
@@ -23,21 +23,29 @@
 
 	    <li class="fieldset">
 	      <fieldset><h3 class="legend"><:grappes:info_grappes_association:></h3>
-	      <ul><li class="editer_grappes_associer">
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='articles'[(#VAL{articles}|in_any{#ENV{liaisons}})checked='checked'] id='articles' /><label for='articles'><:grappes:item_groupes_association_articles:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='auteurs'[(#VAL{auteurs}|in_any{#ENV{liaisons}})checked='checked'] id='auteurs' /><label for='auteurs'><:grappes:item_groupes_association_auteurs:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='mots'[(#VAL{mots}|in_any{#ENV{liaisons}})checked='checked'] id='mots' /><label for='mots'><:grappes:item_groupes_association_mots:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='rubriques'[(#VAL{rubriques}|in_any{#ENV{liaisons}})checked='checked'] id='rubriques' /><label for='rubriques'><:grappes:item_groupes_association_rubriques:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='liaisons&#91;&#93;' value='syndic'[(#VAL{syndic}|in_any{#ENV{liaisons}})checked='checked'] id='syndic' /><label for='syndic'><:grappes:item_groupes_association_syndic:></label></div>
-	    	<!--choix_liaisons-->
+	      <ul>
+	      	<li class="editer_grappes_associer">
+	      		<BOUCLE_liaisons(POUR){tableau #PIPELINE{grappes_objets_lies}}>
+					<div class='choix'>
+						<input type='checkbox' class='checkbox' name='liaisons[]' value='#CLE'[(#VAL{#CLE}|in_any{#ENV{liaisons}})checked='checked'] id='#CLE' />
+						<label for='#CLE'>#VALEUR</label>
+					</div>
+				</BOUCLE_liaisons>
+	    		<!--choix_liaisons-->
 	      </li>
 	      </ul>
 	     </fieldset>
 
 		<fieldset><h3 class="legend"><:grappes:info_qui_peut_lier:></h3>
 		<ul><li class="editer_grappes_qui">
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces&#91;&#93;' value='0minirezo'[ (#VAL{0minirezo}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_minirezo' /><label for='acces_minirezo'><:grappes:bouton_checkbox_qui_administrateurs:></label></div>
-	    	<div class='choix'><input type='checkbox' class='checkbox' name='acces&#91;&#93;' value='1comite'[ (#VAL{1comite}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_comite' /><label for='acces_comite'><:grappes:bouton_checkbox_qui_redacteurs:></label></div>
+	    	<div class='choix'>
+	    		<input type='checkbox' class='checkbox' name='acces[]' value='0minirezo'[ (#VAL{0minirezo}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_minirezo' />
+				<label for='acces_minirezo'><:grappes:bouton_checkbox_qui_administrateurs:></label>
+			</div>
+	    	<div class='choix'>
+	    		<input type='checkbox' class='checkbox' name='acces[]' value='1comite'[ (#VAL{1comite}|in_any{#ENV{acces}}|oui)checked='checked'] id='acces_comite' />
+				<label for='acces_comite'><:grappes:bouton_checkbox_qui_redacteurs:></label>
+			</div>
 			<!--choix_acces-->
     		</li>
     		</ul></fieldset>
@@ -47,5 +55,5 @@
 	  <!--extra-->
 	  <p class='boutons'><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
-	]
+	</BOUCLE_editable>
 </div>

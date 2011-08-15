@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_ajouter' => 'Ajouter',
 'bouton_chercher' => 'Chercher',
 'bouton_checkbox_qui_administrateurs' => 'Les administrateurs',
+'bouton_checkbox_qui_id_admin' => 'Le cr&eacute;ateur de la grappe (Vous?)',
 'bouton_checkbox_qui_redacteurs' => 'Les r&eacute;dacteurs',
 
 // D

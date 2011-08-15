@@ -18,12 +18,22 @@ function Grappes_upgrade($nom_meta_base_version,$version_cible){
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		include_spip('base/grappes');
+		include_spip('base/create');
 		if (version_compare($current_version,'0.0','<=')){
-			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			echo "Installation des Grappes r&eacute;alis&eacute;e<br/>";
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+		}
+		if (version_compare($current_version,'0.2','<')){
+			include_spip('base/abstract_sql');
+			maj_tables('spip_grappes');
+			ecrire_meta($nom_meta_base_version,$current_version='0.2','non');
+		}
+		if (version_compare($current_version,'0.2.1','<')){
+			include_spip('base/abstract_sql');
+			maj_tables('spip_grappes_liens');
+			maj_tables('spip_grappes');
+			ecrire_meta($nom_meta_base_version,$current_version='0.2.1','non');
 		}
 	}
 }

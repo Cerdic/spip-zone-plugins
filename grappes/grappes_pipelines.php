@@ -6,7 +6,49 @@
  */
 
 function grappes_inserer_js_recherche_objet(){
-	return <<<EOS
+	global $spip_version_branche;
+	if(defined('_DIR_PLUGIN_JQUERYUI') && ($spip_version_branche >= '2.1.10')){
+		$contenu =
+<<<EOS
+		function rechercher_objet(id_selecteur, page_selection) {
+			// chercher l'input de saisie
+			var me = jQuery(id_selecteur+' input[name=nom_objet]');
+			me.autocomplete(
+					{
+						source: function( request, response ) {
+							$.ajax({
+								url: page_selection,
+								data:{
+									q:extractLast( request.term )
+								},
+								success: function(data) {
+									datas = selecteur_format(data);
+									response( $.map( datas, function( item ) {
+										return item;
+									}));
+								}
+							});
+						},
+						delay: 200,
+						select:function( event, ui ) {
+							if (ui.item.result > 0) {
+								jQuery(id_selecteur + ' #pid_objet').val(ui.item.result);
+								jQuery(id_selecteur + ' input[type="submit"]').focus();
+								jQuery(me)
+									.end();
+							}else{
+								return ui.item.entry;
+							}
+							return false;
+						}
+					}
+				);
+			}
+EOS;
+	}
+	else{
+		$contenu =
+<<<EOS
 
 		function rechercher_objet(id_selecteur, page_selection) {
 			// chercher l'input de saisie
@@ -39,6 +81,8 @@ function grappes_inserer_js_recherche_objet(){
 				});
 			};
 EOS;
+	}
+	return $contenu;
 }
 
 function grappes_inserer_javascript($flux){
@@ -101,13 +145,13 @@ function grappes_affiche_milieu($flux){
 }
 
 /**
- * 
+ *
  * Insertion dans le pipeline declarer_url_objets
- * Permet d'avoir des url propres de grappes avec un grappe.html et 
+ * Permet d'avoir des url propres de grappes avec un grappe.html et
  * un #URL_GRAPPE (SPIP 2.1)
- * 
+ *
  * @param object $array
- * @return 
+ * @return
  */
 function grappes_declarer_url_objets($array){
 	$array[] = 'grappe';
@@ -115,21 +159,32 @@ function grappes_declarer_url_objets($array){
 }
 
 /**
- * 
+ *
  * Insertion dans le pipeline rechercher_liste_des_champs
- * Permet de rechercher dans les champs des grappes 
+ * Permet de rechercher dans les champs des grappes
  * Nécessite une boucle supplémentaire dans la page de recherche
- * 
- * @return array Tableau contenant plusieurs tableaux en fonction du type de champs 
+ *
+ * @return array Tableau contenant plusieurs tableaux en fonction du type de champs
  * @param object $array Doit recevoir un tableau du même type
  */
 
 function grappes_rechercher_liste_des_champs($array){
-	
+
 	$array['grappe'] = array(
-				'titre' => 8, 
+				'titre' => 8,
 				'descriptif' => 5
 			);
+	return $array;
+}
+
+function grappes_grappes_objets_lies($array){
+	$array['articles'] = _T('grappes:item_groupes_association_articles');
+	$array['auteurs'] = _T('grappes:item_groupes_association_auteurs');
+	$array['mots'] = _T('grappes:item_groupes_association_mots');
+	$array['rubriques'] = _T('grappes:item_groupes_association_rubriques');
+	$array['documents'] = _T('grappes:item_groupes_association_documents');
+	$array['syndic'] = _T('grappes:item_groupes_association_syndic');
+
 	return $array;
 }
 ?>

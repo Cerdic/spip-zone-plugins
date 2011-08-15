@@ -1,7 +1,7 @@
 [(#REM) Chercher les rubriques correspondant a la requete ]
 <BOUCLE_s(ARTICLES){statut==.}
 {titre LIKE %(#ENV{q})%}{0,20}{par multi titre}>
-<BOUCLE_h(HIERARCHIE){statut==.}{n-2,2}>[(#TITRE|couper{12})]&gt; </BOUCLE_h>#TITRE|[(#TITRE|textebrut)]|#ID_ARTICLE
+<BOUCLE_h(HIERARCHIE){statut==.}{n-2,2}>[(#TITRE|couper{12})] > </BOUCLE_h>#TITRE|[(#TITRE|textebrut)]|#ID_ARTICLE
 </BOUCLE_s>
 	[(#REM) Vraiment on n'a rien trouve ]
 	<:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0

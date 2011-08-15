@@ -1,11 +1,11 @@
 [(#REM) Chercher les sites correspondant a la requete ]
 <BOUCLE_s(SYNDIC){statut==.}
 {nom_site LIKE %(#ENV{q})%}{0,20}{par multi nom_site}>
-[<b>(#NOM_SITE)</b>][ (#URL_SITE)]|[(#NOM_SITE|textebrut)]|#ID_SYNDIC
+[(#NOM_SITE)][ (#URL_SITE|couper{25})]|[(#NOM_SITE|textebrut)]|#ID_SYNDIC
 </BOUCLE_s>
 	<BOUCLE_ss(SYNDIC){statut==.}
 	{url_site LIKE %(#ENV{q})%}{0,20}{par multi nom_site}>
-[<b>(#NOM_SITE)</b>][ (#URL_SITE)]|[(#NOM_SITE|textebrut)]|#ID_SYNDIC
+[(#NOM_SITE)][ (#URL_SITE|couper{25})]|[(#NOM_SITE|textebrut)]|#ID_SYNDIC
 	</BOUCLE_ss>
 	[(#REM) Vraiment on n'a rien trouve ]
 	<:selecteurgenerique:pas_suggestion:>|[(#ENV*{q}|textebrut)]|0

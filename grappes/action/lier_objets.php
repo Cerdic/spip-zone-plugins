@@ -36,23 +36,36 @@ function action_lier_objets_dist()
 
 
 function lier_objets($source,$id_source,$cible,$id_cible){
-	list($table,$type,$ids,$idc) = trouver_table_liaison($source,$cible);
+	list($table,$type,$ids,$idc,$rang) = trouver_table_liaison($source,$cible);
 	if ($table) {
+		$nb = sql_countsel($table,"$ids=".sql_quote($id_source))+1;
 		if ($type=='id') {
 			if (!sql_countsel($table,array("'$ids'=".sql_quote($id_source), "'$idc'=".sql_quote($id_cible)))){
-				sql_insertq($table,array($ids=>$id_source,$idc=>$id_cible));
+				if ($rang){
+					sql_insertq($table,array($ids=>$id_source,$idc=>$id_cible,'rang'=>$nb));
+				}else{
+					sql_insertq($table,array($ids=>$id_source,$idc=>$id_cible));
+				}
 			}
 		}
 		elseif ($type=='lien_source') {
 			$cible = objet_type($cible);
 			if (!sql_countsel($table, array("'$ids'=" . sql_quote($id_source), "'objet'=" . sql_quote($cible), "'id_objet'=" . sql_quote($id_cible)))){
-				sql_insertq($table,array($ids=>$id_source,'objet'=>$cible,'id_objet'=>$id_cible));
+				if ($rang){
+					sql_insertq($table,array($ids=>$id_source,'objet'=>$cible,'id_objet'=>$id_cible,'rang'=>$nb));
+				}else{
+					sql_insertq($table,array($ids=>$id_source,'objet'=>$cible,'id_objet'=>$id_cible));
+				}
 			}
 		}
 		elseif ($type=='lien_cible') {
 			$source = objet_type($source);
 			if (!sql_countsel($table, array("'$idc'=" . sql_quote($id_cible), "'objet'=" . sql_quote($source), "'id_objet'=" . sql_quote($id_source)))){
-				sql_insertq($table,array($idc=>$id_cible,'objet'=>$source,'id_objet'=>$id_source));
+				if($rang){
+					sql_insertq($table,array($idc=>$id_cible,'objet'=>$source,'id_objet'=>$id_source,'rang'=>$nb));
+				}else{
+					sql_insertq($table,array($idc=>$id_cible,'objet'=>$source,'id_objet'=>$id_source));
+				}
 			}
 		}
 	}
@@ -91,13 +104,18 @@ function trouver_table_liaison($source,$cible){
 
 	// chercher d'abord les tables : spip_sources_cibles (id_source, id_cible)
 	if (($d = $trouver_table($ts.'_'.$tc))
-	or ($d = $trouver_table($tc.'_'.$ts)))
-		return array($d['table'],'id', $ids, $idc);
+	or ($d = $trouver_table($tc.'_'.$ts))){
+		$rang = isset($d['field']['rang']);
+		return array($d['table'],'id', $ids, $idc,$rang);
+	}
 	// sinon chercher spip_sources_liens (id_source, cible, id_cible)
 	if ($d = $trouver_table($ts.'_liens')){
-		return array($d['table'],'lien_source', $ids, $idc);}
+		$rang = isset($d['field']['rang']);
+		return array($d['table'],'lien_source', $ids, $idc,$rang);}
 	// sinon chercher spip_cibles_liens (id_source, cible, id_cible)
 	if ($d = $trouver_table($tc.'_liens')){
-		return array($d['table'],'lien_cible', $ids, $idc);}
+		$rang = isset($d['field']['rang']);
+		return array($d['table'],'lien_cible', $ids, $idc,$rang);
+	}
 }
 ?>
