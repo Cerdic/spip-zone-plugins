@@ -2,6 +2,15 @@
 /**
  * @version From SPIP-Listes-V :: import_export.php,v 1.19 paladin@quesaco.org  http://www.quesaco.org/
  * @package spiplistes
+ *
+ *
+ *
+ * @todo CP-20110815: lors de la création d'un compte, le format de réception
+ * n'est appliqué qu'à la (les) liste sélectionnée. Appliquer
+ * ce format au profil par défaut (spip_auteurs_elargis.spip_listes_format)
+ * Vérifier ce format lors d'une modification
+ * de compte et appliquer ce profil par défaut si manquant.
+ * 
  */
  // $LastChangedRevision$
  // $LastChangedBy$
