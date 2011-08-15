@@ -277,6 +277,11 @@ function gis_rechercher_liste_des_champs($tables){
 	return $tables;
 }
 
+function gis_declarer_tables_objets_surnoms($surnoms){
+	$surnoms['gis'] = 'gis';
+	return $surnoms;
+}
+
 function gis_taches_generales_cron($taches_generales){
 	$taches_generales['gis_nettoyer_base'] = 3600*48;
 	return $taches_generales;
