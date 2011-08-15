@@ -1,14 +1,13 @@
 <!-- nom=edition_directe -->
 #SET{objets,#ARRAY{
-	0,article,
 	1,rubrique,
 	2,breve,
 	3,site,
+	4,auteur,
+	5,mot,
 		}
 	}
-<!-- to do	
-	5,auteur,		
-	4,mot-->
+
 <div class="formulaire_spip formulaire_#FORM">
 
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
@@ -21,6 +20,11 @@
 			<li class="fieldset">
 				<fieldset><legend><:edir:activer_edition_directe:></legend>
 				<ul>
+				#SAISIE{case,
+						article,
+						label=#EVAL{_T('edir:article');},
+						valeur_defaut=on,
+						}
 				<BOUCLE_objets(POUR) {tableau #GET{objets}}>
 					#SAISIE{case,
 						#VALEUR,
