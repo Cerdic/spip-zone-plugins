@@ -128,7 +128,9 @@ function generer_url_ecrire_gis($id, $args='', $ancre='', $statut='', $connect='
 	return $h;
 }
 
-
+/**
+ * Définition de l'API à utiliser en prenant compte les defines
+ */
 function gis_api_utilisee(){
 	$defaut = 'openlayers';
 	if(defined('_GIS_APIS_FORCEE')){
@@ -137,7 +139,8 @@ function gis_api_utilisee(){
 		if(defined('_GIS_APIS_DEFAUT')){
 			$defaut = _GIS_APIS_DEFAUT;
 		}
-		return lire_config('gis/api',$defaut);
+		$config = @unserialize($GLOBALS['meta']['gis']);
+		return $config['api'] ? $config['api'] : $defaut;
 	}
 }
 ?>

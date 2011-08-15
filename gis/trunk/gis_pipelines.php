@@ -10,9 +10,12 @@ function gis_inserer_javascript($flux){
 		'api' => 'openlayers'
 	), $config);
 	
+	$config['api'] = gis_api_utilisee();
+	spip_log($config['api'],'gis');
 	if(defined('_GIS_APIS') && !array_key_exists($config['api'],unserialize(_GIS_APIS))){
 		return $flux;
 	}
+	
 	// insertion du script de l'api a utiliser
 	if ($config['api'] == 'cloudmade')
 		$flux .="\n".'<script type="text/javascript" src="http://tile.cloudmade.com/wml/latest/web-maps-lite.js"></script>'."\n";

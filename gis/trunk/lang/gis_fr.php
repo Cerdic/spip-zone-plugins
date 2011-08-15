@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_nouveau' => 'Cr&eacute;er un nouveau point',
 	'editer_gis_titre' => 'Les points g&eacute;olocalis&eacute;s',
 	'erreur_recherche_pas_resultats' => 'Aucun point ne correspond &agrave; la recherche.',
+	'explication_api_forcee' => 'L\'API est imposée par un autre plugin ou squelette.',
 
 	// F
 	'formulaire_creer_gis' => 'Cr&eacute;er un point g&eacute;olocalis&eacute; :',

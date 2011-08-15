@@ -37,14 +37,20 @@
 			[(#EVAL{_GIS_APIS}|unserialize|is_array|oui)#SET{apis,#EVAL{_GIS_APIS}|unserialize}]
 		]
 		
-		#SET{api_defaut,openlayers}
+		[(#SET{api_defaut,openlayers})]
 		[(#VAL{_GIS_APIS_DEFAUT}|defined|oui)
-			#SET{api_defaut,#EVAL{_GIS_APIS_DEFAUT}}
+			[(#SET{api_defaut,[(#EVAL{_GIS_APIS_DEFAUT})]})]
+		]
+		[(#VAL{_GIS_APIS_FORCEE}|defined|oui)
+			[(#SET{api_readonly,readonly})]
+			[(#SET{api_disable,disabled})]
+			[(#SET{api_forcee,[(#EVAL{_GIS_APIS_FORCEE})]})]
+			[(#SET{api_explications,<:gis:explication_api_forcee:>})]
 		]
 		[(#SAISIE{selection,api,
 			label=<:gis:cfg_lbl_api:>,
 			cacher_option_intro=oui,
-			defaut=#GET{api_defaut},
+			defaut=#GET{api_defaut},valeur_forcee=#GET{api_forcee},readonly=#GET{api_readonly},disable=#GET{api_disable},explication=#GET{api_explications},
 			datas=#GET{apis}})]
 
 		[(#SAISIE{oui_non,geocoder,
