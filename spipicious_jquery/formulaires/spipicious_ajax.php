@@ -44,7 +44,6 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type,$retour='') {
 	}
 
 	if($invalider){
-		spip_log('invalider');
 		include_spip ("inc/invalideur");
 		suivre_invalideur("1");
 	}

@@ -68,7 +68,7 @@ function spipicious_supprimer_tags($remove_tags,$id_auteur,$id_objet,$type,$id_t
 
 	if($compte > 1){
 		$tags = implode('<br />',$tags_removed);
-		$message = _T('spipicious:tags_supprimes',array('name'=>$tags));
+		$message = _T('spipicious:tags_supprimes',array('name'=>$tags,'nb'=>$compte));
 	}
 
 	return array($message,$invalider,'');

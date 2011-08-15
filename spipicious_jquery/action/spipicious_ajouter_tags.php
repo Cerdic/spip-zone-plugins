@@ -49,19 +49,16 @@ function action_spipicious_ajouter_tags_dist(){
  * @param string $manuel doit on le faire manuellement ou par inc/modifier
  */
 function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe,$manuel=false){
-	spip_log("$id_auteur,$id_objet,$type,$id_table_objet,$table_mot,$id_groupe,$manuel",'test');
 	$tag_analysed = array();
 	$position = 0;
 
 	if (is_array($tableau_tags)) {
 		include_spip('inc/modifier');
 		foreach ($tableau_tags as $k=>$tag) {
-			spip_log("ajout du tag $tag",'test');
 			$tag = trim($tag);
 			if(!empty($tag)){
 				if (!in_array($tag,$tag_analysed)) {
 					$tag_propre = corriger_caracteres($tag);
-					spip_log("ajout du tag bis $tag",'test');
 					// doit on creer un nouveau tag ?
 					$id_tag = sql_getfetsel("id_mot","spip_mots","titre=".sql_quote($tag_propre)." AND id_groupe=".intval($id_groupe));
 					if (!$id_tag) { // creation tag
@@ -96,7 +93,7 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 
 		if($position > 1){
 			$tags = implode('<br />',$tag_analysed);
-			$message = _T('spipicious:tags_ajoutes',array('name'=>$tags));
+			$message = _T('spipicious:tags_ajoutes',array('name'=>$tags,'nb'=>$position));
 		}
 	}
 	return array($message,$invalider,'');

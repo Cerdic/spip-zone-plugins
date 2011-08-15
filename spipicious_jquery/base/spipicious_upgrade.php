@@ -118,7 +118,6 @@ function spipicious_vider_tables($nom_meta_version_base) {
 function spipicious_id_objet_objet_upgrade () {
 	// Recopier les donnees avec le coupe id_objet / objet
 	foreach (array('article', 'rubrique', 'document', 'evenement', 'syndic') as $liste => $l) {
-		spip_log($l);
 		$s = sql_select('*', 'spip_spipicious','id_'.$l.' > 0');
 		while ($t = sql_fetch($s)) {
 			$t['id_objet'] = $t["id_$l"];
