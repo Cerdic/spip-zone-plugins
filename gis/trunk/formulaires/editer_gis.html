@@ -50,11 +50,17 @@ var geocoder;]
 		$('#champ_pays').val(query.country);
 		maj_inputs(form_map,query,'geocoding');
 	}]
-
+	
+	#SET{api_defaut,openlayers}
+	[(#VAL{_GIS_APIS_DEFAUT}|defined|oui)
+		#SET{api_defaut,#EVAL{_GIS_APIS_DEFAUT}}
+	]
+	#SET{api_utilisee,#CONFIG{gis/api,#GET{api_defaut}}}
+	
 	var init_map = function() {
 		// creer la carte
 		var map_container = 'map_[(#ENV{objet})]_[(#ENV{id_objet})]';
-		form_map = new mxn.Mapstraction(map_container,'#CONFIG{gis/api,openlayers}');
+		form_map = new mxn.Mapstraction(map_container,'#GET{api_utilisee}');
 		form_map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,#CONFIG{gis/lat,0}},#ENV{lon,#CONFIG{gis/lon,0}}),#ENV{zoom,#CONFIG{gis/zoom,0}});
 		form_map.addControls({
 			pan: true,
@@ -64,7 +70,7 @@ var geocoder;]
 		
 		[(#GET{geocoder}|oui)
 		// geocoder
-		geocoder = new mxn.Geocoder('#CONFIG{gis/api,openlayers}',geocode);]
+		geocoder = new mxn.Geocoder('#GET{api_utilisee}',geocode);]
 		
 		[(#ENV{lat}|oui)
 		var data = {

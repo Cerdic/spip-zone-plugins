@@ -65,9 +65,15 @@ var map[(#GET{id})];
 
 (function($){
 	
+	#SET{api_defaut,openlayers}
+	[(#VAL{_GIS_APIS_DEFAUT}|defined|oui)
+		#SET{api_defaut,#EVAL{_GIS_APIS_DEFAUT}}
+	]
+	#SET{api_utilisee,#CONFIG{gis/api,#GET{api_defaut}}}
+	
 	var init_map[(#GET{id})] = function() {
 		var map_container = 'map[(#GET{id})]';
-		map[(#GET{id})] = new mxn.Mapstraction(map_container,'#CONFIG{gis/api,openlayers}');
+		map[(#GET{id})] = new mxn.Mapstraction(map_container,'#GET{api_utilisee}');
 		
 		[(#ENV{zoom_molette}|!={non}|oui)
 		map[(#GET{id})].enableScrollWheelZoom();]

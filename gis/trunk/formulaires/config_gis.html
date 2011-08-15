@@ -97,10 +97,16 @@
 		$("#champ_zoom").val(zoom);
 	}
 	
+	#SET{api_defaut,openlayers}
+	[(#VAL{_GIS_APIS_DEFAUT}|defined|oui)
+		#SET{api_defaut,#EVAL{_GIS_APIS_DEFAUT}}
+	]
+	#SET{api_utilisee,#CONFIG{gis/api,#GET{api_defaut}}}
+	
 	var init_config = function() {
 		var map;
 		var map_container = 'map_config';
-		map = new mxn.Mapstraction(map_container,'#CONFIG{gis/api,openlayers}');
+		map = new mxn.Mapstraction(map_container,'#GET{api_utilisee}');
 		map.setCenterAndZoom(new mxn.LatLonPoint(#ENV{lat,0},#ENV{lon,0}),#ENV{zoom,0});
 		
 		map.addControls({
