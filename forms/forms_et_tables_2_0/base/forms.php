@@ -36,10 +36,8 @@ $spip_forms = array(
 	"arborescent" => "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
 	'html_wrap' => "text",
 	"maj" 		=> "TIMESTAMP",
-
-	"num_rubrique_export" => "bigint(21) NOT NULL DEFAULT 1",
-	"champ_titre_export" => "varchar(100) DEFAULT 'null'"
-	
+	"num_rubrique_export" => "bigint(21) NOT NULL DEFAULT 1", // (Contient le numéro de la rubrique dans laquelle les réponses du formulaire doivent être exportées)
+	"champ_titre_export" => "varchar(100) DEFAULT 'null'" // (Contient le nom du champ du formulaire à utiliser pour définir le titre de l'article exporté)
 );
 
 

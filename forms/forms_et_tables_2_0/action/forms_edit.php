@@ -143,23 +143,13 @@ function Forms_update($id_form){
 	
 	// creation
 	if ($id_form == 'new' && $titre) {
+	
 		//adapatation SPIP2
 		//spip_query("INSERT INTO spip_forms (titre) VALUES ("._q($titre).")");
 		//$id_form = spip_insert_id();
-
+		
 		$id_form = sql_insertq('spip_forms',array('titre'=>_q($titre)));
-		
-		//// Ajout d'une colonne 'num_rubrique_export' à la table 'spip_forms' pour permettre d'indiquer dans quelle rubrique
-		//// les réponses au formulaire(/table) doivent être exportées
-		// (Au cas où la nouvelle colonne n'a pas été créee par le script '\base\forms.php' (à l'installation du plugin??) )
-		// (Bonne solution de l'ajouter ici??? --> Regarder plutôt vers la fonction 'forms_et_tables_upgrade()'??) 
-		include_spip('base/create');
-		maj_tables("spip_forms");
-		
-		// (Ajout de la colonne 'num_rubrique_export' si elle n'existe pas déjà, et avec par défaut la valeur 1 :)
-		//sql_alter("TABLE spip_forms ADD UNIQUE(num_rubrique_export) INT DEFAULT '1'");
-		// (??Ligne du dessus redondant avec "maj_tables()" ??)
-		
+				
 	}
 	
 	// maj

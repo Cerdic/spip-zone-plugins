@@ -11,7 +11,8 @@
  *
  */
 
-	$GLOBALS['forms_base_version'] = 0.41;
+	$GLOBALS['forms_base_version'] = 0.42;
+	
 	function Forms_structure2table($row,$clean=false){
 		$id_form=$row[id_form];
 		// netoyer la structure precedente en table
@@ -51,13 +52,16 @@
 	}
 
 	function Forms_upgrade(){
+	
 		$version_base = $GLOBALS['forms_base_version'];
 		$current_version = 0.0;
+		
 		if (   (isset($GLOBALS['meta']['forms_base_version']) )
 				&& (($current_version = $GLOBALS['meta']['forms_base_version'])==$version_base))
 			return;
 
 		include_spip('base/forms');
+		
 		if ($current_version==0.0){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
@@ -71,6 +75,7 @@
 				ecrire_meta('forms_et_tables',serialize(array('associer_donnees_articles'=>0,'associer_donnees_rubriques'=>0,'associer_donnees_auteurs'=>0)));
 			}
 		}
+		
 		if ($current_version<0.11){
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
@@ -311,12 +316,27 @@
 			echo "forms update @ 0.40<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.40,'non');
 		}
+		
 		if ($current_version<0.41){
 			spip_query("ALTER TABLE spip_forms ADD documents_mail ENUM('non', 'oui') DEFAULT 'non' NOT NULL AFTER documents");
 			echo "forms update @ 0.41<br/>";
 			ecrire_meta('forms_base_version',$current_version=0.41,'non');
 		}
-
+		
+		
+		if ($current_version<0.42){
+			// (Version 0.401 du plugin 'forms_et_tables_2_0')
+			// Ajout de 2 colonnes ('num_rubrique_export' et 'champ_titre_export') à la table 'spip_forms'
+			
+			// La colonne 'num_rubrique_export' contient le numéro de la rubrique dans laquelle les réponses du formulaire doivent être exportées
+			sql_alter("TABLE spip_forms ADD num_rubrique_export bigint(21) NOT NULL DEFAULT 1");
+			// La colonne 'champ_titre_export' contient le nom du champ à utiliser pour définir le titre de l'article exporté
+			sql_alter("TABLE spip_forms ADD champ_titre_export varchar(100) DEFAULT 'null'");
+			
+			echo "forms update @ 0.42<br/>";
+			ecrire_meta('forms_base_version',$current_version=0.42,'non');
+		}
+		
 		ecrire_metas();
 	}
 
