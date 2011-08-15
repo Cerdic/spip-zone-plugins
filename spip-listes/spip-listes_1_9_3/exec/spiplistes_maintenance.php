@@ -1,12 +1,18 @@
 <?php
 /**
+ * Script de maintenance proposant la maintenance :
+ * - des courriers
+ * - des listes
+ * - des formats
+ * - des abonnements
+ * 
  * @package spiplistes
  */
  // $LastChangedRevision$
  // $LastChangedBy$
  // $LastChangedDate$
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 include_spip('inc/spiplistes_api_courrier');
@@ -165,13 +171,17 @@ function exec_spiplistes_maintenance () {
 			}
 		}
 		
-		// les abonnements
-		if($btn_nettoyer_abos && $confirmer_nettoyer_abos) {
-			if($ii = spiplistes_abonnements_zombies()) {
-				sort($ii);
-				$ii = array_unique($ii);
+		/**
+		 * Nettoyer les abonnements
+		 */
+		if($btn_nettoyer_abos && $confirmer_nettoyer_abos)
+		{
+			if($ids_auteurs = spiplistes_abonnements_zombies())
+			{
+				spiplistes_log ('CLEAN ABOS '.implode(',', $ids_auteurs));
+				
 				$msg =
-					(spiplistes_abonnements_auteur_desabonner($ii))
+					(spiplistes_abonnements_auteur_desabonner($ids_auteurs, 'toutes'))
 					?	$msg_ok
 					:	$msg_bad
 					;
@@ -387,25 +397,31 @@ function exec_spiplistes_maintenance () {
 		. fin_cadre_trait_couleur(true)
 		;
 
-	//////////////////////////////////////////////////////
-	// Boite maintenance des abonnements
+	/**
+	 * Boite maintenance des abonnements
+	 * Détecte les id_auteur zombies dans la table
+	 * des abonnements (spiplistes_auteurs_listes)
+	 */
 	$objet = array('objet' => _T('spiplistes:des_abonnements'));
 	$page_result .= ""
-		. debut_cadre_trait_couleur('administration-24.gif', true, '', _T('spiplistes:maintenance_objet', $objet))
+		. debut_cadre_trait_couleur('administration-24.gif', TRUE, '',
+									_T('spiplistes:maintenance_objet', $objet))
 		;
-	$ii = spiplistes_abonnements_zombies();
-	if(($nb_abos = count($ii)) > 0) {
-		$nb_auteurs = $ii;
-		sort($nb_auteurs);
-		$nb_auteurs = count(array_unique($nb_auteurs));
-		$nb_abos = spiplistes_str_abonnes($nb_abos);
-		$nb_auteurs = spiplistes_str_auteurs($nb_auteurs);
+	
+	$ids_auteurs = spiplistes_abonnements_zombies ();
+	
+	if(($nb_abos = count($ids_auteurs)) > 0)
+	{
+		spiplistes_debug_log ('ZOMBIES '.implode(',', $ids_auteurs));
+		
 		$page_result .= ""
 			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
 			. spiplistes_form_fieldset_debut(
 								_T('spiplistes:nettoyage_', $objet)
-								 . spiplistes_fieldset_legend_detail(_T('spiplistes:total').": $nb_abos, $nb_auteurs")
+								 . spiplistes_fieldset_legend_detail(_T('spiplistes:total')
+											 . ': '
+											 . trim(spiplistes_str_auteurs(count($ids_auteurs))))
 							   , true)
 			. spiplistes_form_input_checkbox ('confirmer_nettoyer_abos', 'oui'
 											  , _T('spiplistes:confirmer_nettoyer_abos'), false, true)
@@ -416,12 +432,9 @@ function exec_spiplistes_maintenance () {
 	} else {
 		$page_result .= spiplistes_form_message(_T('spiplistes:pas_de_pb_abonnements'), true);
 	}
-	$page_result .= ""
-		. fin_cadre_trait_couleur(true)
-		;
 	
+	$page_result .= fin_cadre_trait_couleur(true);
 	
-
 	// Fin de la page
 	echo($page_result);
 
@@ -458,3 +471,62 @@ function spiplistes_fieldset_legend_detail ($texte = '') {
 	}
 	return ($result);
 }
+
+/**
+ * Compter les abonnements qui n'ont plus d'abonnes
+ * (soit l'abonné a un statut '5poubelle'
+ * soit il n'est plus dans la table des auteurs)
+ * @version CP-20110815
+ * @todo a valider en SPIP 193
+ * @return array id_auteur
+ */
+function spiplistes_abonnements_zombies () {
+
+//La req SQL :
+//
+//SELECT id_auteur 
+//FROM spip_auteurs_listes 
+//WHERE id_auteur
+//IN (SELECT id_auteur FROM spip_auteurs WHERE statut='5poubelle')
+//OR id_auteur NOT IN (SELECT id_auteur FROM spip_auteurs)
+//GROUP BY id_auteur
+//ORDER BY id_auteur ASC
+
+	$sql_select = 'id_auteur';
+	$sql_from = 'spip_auteurs';
+	$sql_where = 'statut='.sql_quote('5poubelle');
+	$selection_poubelle = 
+		(spiplistes_spip_est_inferieur_193())
+		? 'SELECT '.$sql_select.' FROM '.$sql_from.' WHERE '.$sql_where
+		: sql_select($sql_select, $sql_from, $sql_where,
+					 '','','','','',false)
+		;
+	$sql_where = '';
+	$selection_tous = 
+		(spiplistes_spip_est_inferieur_193())
+		? "SELECT $sql_select FROM $sql_from"
+		: sql_select($sql_select, $sql_from, $sql_where,
+					 '','','','','',false)
+		;
+	
+	$sql_from = 'spip_auteurs_listes';
+	$sql_result = sql_select(
+		$sql_select,
+		$sql_from,
+		'id_auteur IN ('.$selection_poubelle.')
+			OR id_auteur NOT IN ('.$selection_tous.')',
+		'id_auteur',
+		'id_auteur ASC'
+		);
+	if($sql_result === FALSE) {
+		spiplistes_sqlerror_log("spiplistes_abonnements_zombies");
+		return (FALSE);
+	}
+	$result = array();
+	while($row = sql_fetch($sql_result)) {
+		$result[] = $row['id_auteur'];
+	}
+	return($result);
+
+}
+

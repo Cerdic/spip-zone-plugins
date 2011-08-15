@@ -306,19 +306,23 @@ function spiplistes_abonnements_listes_auteur ($id_auteur, $avec_titre = false) 
 }
 
 /**
- * desabonner un id_auteur d'une id_liste
+ * Desabonner un id_auteur d'une id_liste
  * ou de toutes les listes si $id_liste = 'toutes'
  * ou tous les abonnes si id_auteur == 'tous'
  * ou une serie si array
  * @version CP-20090410
+ * @param int|string|array $id_auteur
+ * @param bool|int|string $id_liste
+ * @return bool
  */
-function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false)
+function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = FALSE)
 {
 	//spiplistes_debug_log("spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste)");
 	
-	$result = false;
+	$result = FALSE;
 	$msg1 = $msg2 = '';
 	$sql_where = array();
+	
 	if($id_auteur == 'tous') {
 		$sql_where[] = 'id_auteur>0';
 		$msg1 = $id_auteur;
@@ -332,6 +336,7 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false
 		$sql_where[] = 'id_auteur='.sql_quote($id_auteur);
 		$msg1 = 'id_auteur #'.$id_auteur;
 	}
+	
 	if(count($sql_where) && $id_liste)
 	{
 		$sql_table = 'spip_auteurs_listes';
@@ -345,9 +350,9 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = false
 			$sql_where[] = 'id_liste='.$id_liste;
 			$msg2 = ' de la liste #'.$id_liste;
 		}
-		if(($result = sql_delete($sql_table, $sql_where)) === false)
+		if(($result = sql_delete($sql_table, $sql_where)) === FALSE)
 		{
-			spiplistes_debug_log ('ERR sql_delete: abonnements_auteur_desabonner()');
+			spiplistes_log ('ERR sql_delete: abonnements_auteur_desabonner()');
 		}
 		else {
 			spiplistes_log_api('UNSUBSCRIBE '.$msg1.' '.$msg2);
@@ -371,38 +376,6 @@ function spiplistes_abonnements_supprimer ($sql_whereq) {
  */
 function spiplistes_abonnements_compter ($sql_whereq = "") {
 	return(spiplistes_sql_compter("spip_auteurs_listes", $sql_whereq));
-}
-
-/**
- * Compter les abonnements qui n'ont plus d'abonnes
- * @return array id_auteur
- */
-function spiplistes_abonnements_zombies () {
-	// SELECT id_auteur FROM spip_auteurs_listes WHERE id_auteur
-	//	IN (SELECT id_auteur FROM spip_auteurs WHERE statut='5poubelle')
-	$sql_select = "id_auteur";
-	$sql_from = "spip_auteurs";
-	$sql_where = "statut=".sql_quote('5poubelle');
-	$selection = 
-		(spiplistes_spip_est_inferieur_193())
-		? "SELECT $sql_select FROM $sql_from WHERE $sql_where"
-		: sql_select($sql_select, $sql_from, $sql_where,'','','','','',false)
-		;
-	$sql_from = "spip_auteurs_listes";
-	$sql_result = sql_select(
-		$sql_select
-		, $sql_from
-		, "$sql_select IN (".$selection.")"
-		);
-	if($sql_result === false) {
-		spiplistes_sqlerror_log("spiplistes_abonnements_zombies");
-	}
-	$result = array();
-	while($row = sql_fetch($sql_result)) {
-		$result[] = $row[$sql_select];
-	}
-	return($result);
-
 }
 
 /**
