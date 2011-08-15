@@ -11,7 +11,6 @@ function gis_inserer_javascript($flux){
 	), $config);
 	
 	$config['api'] = gis_api_utilisee();
-	spip_log($config['api'],'gis');
 	if(defined('_GIS_APIS') && !array_key_exists($config['api'],unserialize(_GIS_APIS))){
 		return $flux;
 	}
