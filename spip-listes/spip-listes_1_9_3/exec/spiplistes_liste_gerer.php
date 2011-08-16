@@ -960,8 +960,8 @@ function exec_spiplistes_liste_gerer () {
 /*
  * Boite de confirmation pour forcer le format de reception
  * @return 
- * @param $id_bloc Object
- * @param $message Object[optional]
+ * @param int $id_bloc
+ * @param string $message[optional]
  */
 function spiplistes_boutons_forcer_format ($id_bloc, $message = '') {
 	if(!empty($message)) {
@@ -984,11 +984,11 @@ function spiplistes_boutons_forcer_format ($id_bloc, $message = '') {
 	);
 }
 
-/*
+/**
+ * @param string $string
+ * @param string $charset
+ * @param bool $unspace[optional]
  * @return une chaine traduite de HTML en ISO
- * @param $string Object
- * @param $charset Object
- * @param $unspace Object[optional]
  */
 function spiplistes_texte_html_2_iso($string, $charset, $unspace = false)
 {
@@ -1007,8 +1007,10 @@ function spiplistes_texte_html_2_iso($string, $charset, $unspace = false)
 	return ($string);
 }
 
-/*
- * From SPIP-Listes-V: CP:20070923. Boite de selection de patrons
+/**
+ * Boite de selection de patrons
+ *
+ * From SPIP-Listes-V: CP:20070923. 
  * @return string boite de patrons
  * @param $flag_editable bool
  * @param $id_liste int

@@ -1,5 +1,8 @@
 <?php
 /**
+ * Voir le journal du plugin
+ * appelé si javascript non activé
+ * 
  * @package spiplistes
  */
  // $LastChangedRevision$
@@ -38,13 +41,6 @@ include_spip('inc/spiplistes_api');
 include_spip('inc/spiplistes_api_presentation');
 include_spip('inc/spiplistes_api_journal');
 
-/*
- *  si javascript non activé, appel de cet exec
- */
-
-/*
- * Voir le journal du plugin
- */
 function exec_spiplistes_voir_journal () {
 
 	static $eol = PHP_EOL;
