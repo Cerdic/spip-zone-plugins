@@ -73,6 +73,10 @@ _ Icon from [mattrich->http://mattrich.deviantart.com/art/Picnic-101256405] unde
 		<nom>declarer_tables_objets_surnoms</nom>
 		<inclure>gis_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>declarer_type_surnoms</nom>
+		<inclure>gis_pipelines.php</inclure>
+	</pipeline>
 	<utilise id="cfg" version="[1.12;]" />
 	<utilise id="selecteur_generique" version="[1.12;]" />
 	<necessite id="SPIP" version="[2.1.10;3.0.0-dev)" />

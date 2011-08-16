@@ -278,7 +278,12 @@ function gis_rechercher_liste_des_champs($tables){
 	return $tables;
 }
 
-function gis_declarer_tables_objets_surnoms($surnoms){
+function gis_declarer_type_surnoms($surnoms){
+	$surnoms['gi'] = 'gis';
+	return $surnoms;
+}
+
+function gis_declarer_objets_surnoms($surnoms){
 	$surnoms['gis'] = 'gis';
 	return $surnoms;
 }
