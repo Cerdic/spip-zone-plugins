@@ -323,7 +323,7 @@ function spiplistes_import (
 				}
 			}
 			$nb_inscrire_abos = count($stack_new_abonnes);
-			spiplistes_debug_log ('SUBCRIBE '.$nb_inscrire_abos.' accounts');
+			spiplistes_debug_log ('SUBSCRIBE '.$nb_inscrire_abos.' accounts');
 			
 			//spiplistes_debug_log ('memory_get_usage[6]: ' . memory_get_usage());
 			

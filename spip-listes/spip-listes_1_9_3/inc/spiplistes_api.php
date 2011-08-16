@@ -41,11 +41,11 @@ include_spip('inc/spiplistes_api_globales');
 /**
  * Fonction de compatibilite de php4 / php5 pour http_build_query
  * 
+ * @param mixed $data un array de contexte
+ * @param string $prefix[optional]
+ * @param string $sep[optional]
+ * @param int $key[optional]
  * @return un query string a passer a une url 
- * @param object $data un array de contexte
- * @param object $prefix[optional]
- * @param object $sep[optional]
- * @param object $key[optional]
  */
 function spiplistes_http_build_query($data,$prefix=null,$sep='',$key='')
 {

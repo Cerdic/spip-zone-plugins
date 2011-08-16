@@ -220,7 +220,7 @@ function spiplistes_pref_lire ($key) {
 /*
  * lecture dans les metas, format serialise
  * @return 
- * @param $meta_name Object
+ * @param $meta_name
  */
 function spiplistes_lire_serialized_meta ($meta_name) {
 	if(isset($GLOBALS['meta'][$meta_name])) {
@@ -235,8 +235,8 @@ function spiplistes_lire_serialized_meta ($meta_name) {
 /*
  * lecture d'une cle dans la meta serialisee
  * @return 
- * @param $key Object
- * @param $meta_name Object
+ * @param $key
+ * @param $meta_name
  */
 function spiplistes_lire_key_in_serialized_meta ($key, $meta_name) {
 	$result = false;

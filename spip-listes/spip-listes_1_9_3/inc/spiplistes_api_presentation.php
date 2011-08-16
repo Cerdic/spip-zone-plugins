@@ -827,7 +827,7 @@ function spiplistes_nb_destinataire_str_get ($nb) {
 /**
  * Nombre de listes, chaine html
  * @version CP-20081126
- * @param $nb Object
+ * @param int $nb
  * @return string
  */
 function spiplistes_nb_listes_str_get ($nb) {
@@ -900,7 +900,7 @@ function spiplistes_terminer_page_message ($message) {
 }
 
 /**
- * termine la page (a employer qd droits insuffisants)
+ * termine la page (a employer quand droits insuffisants)
  * @param bool $return
  * @return string
  */
@@ -1156,7 +1156,7 @@ function spiplistes_boite_alerte ($message, $return = false) {
 
  /**
   * Un petit bloc info sur le plugin
-  * @param $prefix Object
+  * @param string $prefix
   * @return string
   */
 function spiplistes_boite_meta_info ($prefix) {
@@ -1210,8 +1210,8 @@ function spiplistes_boite_meta_info ($prefix) {
  * Petite boite info pour la page de configuration du plugin
  *
  * Apparait sur la gauche de la page. Affiche infos de configuration.
- * @param $array Object
- * @param $recursive Object[optional]
+ * @param array $array
+ * @param bool $recursive[optional]
  * @global string $spip_lang_left
  * @return string
  */
@@ -1253,9 +1253,9 @@ function spiplistes_boite_meta_info_liste($array, $recursive = false) {
 
 /**
  * Petit bouton aide a placer a droite du titre de bloc
- * @param $fichier_exec_aide Object
- * @param $aide Object[optional]
- * @param $return Object[optional]
+ * @param string $fichier_exec_aide 
+ * @param string $aide[optional]
+ * @param bool $return[optional]
  * @return string|null
  */
 function spiplistes_plugin_aide ($fichier_exec_aide, $aide='', $return=true) {
