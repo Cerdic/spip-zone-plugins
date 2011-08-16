@@ -436,8 +436,8 @@ class ListeTags {
 			if ($clear) {
 				$result = sql_select(
 					'id_mot',
-					'spip_mots',
-					"spip_mots.type = "._q($this->groupe_defaut)." OR spip_mots.id_groupe = "._q($this->id_groupe)
+					'spip_mots as mots',
+					"mots.type = "._q($this->groupe_defaut)." OR mots.id_groupe = "._q($this->id_groupe)
 				);
 				
 				$mots_a_effacer = array('0');
