@@ -1,5 +1,7 @@
 <?php
 /**
+ * Page de configuration du plugin
+ * 
  * @package spiplistes
  */
  // $LastChangedRevision$
@@ -645,25 +647,29 @@ function exec_spiplistes_config () {
 		, fin_gauche(), fin_page();
 } // exec_config()
 
-/*
+/**
  * renvoie une boite select pour un formulaire
- * @return 
- * @param $array_values Object
- * @param $selected Object
- * @param $select_id Object
- * @param $select_name Object
- * @param $size Object[optional]
- * @param $select_style Object[optional]
- * @param $select_class Object[optional]
- * @param $label_value Object[optional]
- * @param $label_style Object[optional]
- * @param $label_class Object[optional]
- * @param $multiple Object[optional]
+ * 
+ * @param array $array_values 
+ * @param int $selected 
+ * @param int $select_id 
+ * @param string $select_name 
+ * @param int $size[optional]
+ * @param string $select_style[optional]
+ * @param string $select_class[optional]
+ * @param string $label_value[optional]
+ * @param string $label_style[optional]
+ * @param string $label_class[optional]
+ * @param bool $multiple[optional]
+ * @return string
  */
-function spiplistes_boite_select_de_formulaire ($array_values, $selected, $select_id, $select_name
-	, $size=1, $select_style='', $select_class=''
-	, $label_value='', $label_style='', $label_class='', $multiple=false
+function spiplistes_boite_select_de_formulaire ($array_values, $selected,
+												$select_id, $select_name,
+												$size=1, $select_style='', $select_class='',
+												$label_value='', $label_style='',
+												$label_class='', $multiple=false
 	) {
+	static $eol = PHP_EOL;
 	$result = '';
 	foreach($array_values as $key=>$value) {
 		$result .= "<option".mySel($value, $selected).">$key</option>" . $eol;
@@ -688,12 +694,13 @@ function spiplistes_boite_select_de_formulaire ($array_values, $selected, $selec
 	return ($result);
 } // spiplistes_boite_select_de_formulaire()
 
-/*
+/**
  * renvoie tableau avec key => value 
- * @return 
- * @param $array Object
+ * 
+ * @param array $array
+ * @return array
  */
-function spiplistes_array_values_in_keys($array) {
+function spiplistes_array_values_in_keys ($array) {
 	$result = array();
 	foreach($array as $value) {
 		$result[$value] = $value;
