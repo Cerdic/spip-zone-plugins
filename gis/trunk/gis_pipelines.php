@@ -10,6 +10,7 @@ function gis_inserer_javascript($flux){
 		'api' => 'openlayers'
 	), $config);
 	
+	include_spip('gis_fonctions');
 	$config['api'] = gis_api_utilisee();
 	if(defined('_GIS_APIS') && !array_key_exists($config['api'],unserialize(_GIS_APIS))){
 		return $flux;
