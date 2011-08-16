@@ -424,6 +424,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'des_listes' => 'des listes'
 , 'des_abonnements' => 'des abonnements'
 , 'confirmer_supprimer_formats' => 'Supprimer les formats de r&#233;ception des abonn&#233;s.'
+, 'nettoyer_table_formats' => 'Nettoyer la table des formats.'
 , 'maintenance_objet' => 'Maintenance @objet@'
 , 'nb_abos' => 'qt.'
 , 'pas_de_liste' => 'Aucune liste de type &laquo;envoi non programm&#233;&raquo;.'
@@ -461,6 +462,8 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'suppression_de_titre_result' => 'Suppression00 de : @titre@ @result@'
 , 'total_1_abonne' => 'Total: 1 abonn&#233;'
 , 'total_n_abonnes' => 'Total: @n@ abonn&#233;s'
+, 'total_1_abo_obsolet' => 'Total: 1 abonnement/format obsol&#232;te'
+, 'total_n_abo_obsolet' => 'Total: @n@ abonnements/formats obsol&#232;tes'
 
 // exec/spiplistes_menu_navigation.php
 // exec/spiplistes_voir_journal.php

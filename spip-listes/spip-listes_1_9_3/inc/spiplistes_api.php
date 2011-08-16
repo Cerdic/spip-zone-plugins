@@ -726,26 +726,40 @@ function spiplistes_formats_compter ($sql_where) {
 }
 
 /**
- * supprimer le format d'un id_auteur
- * si $id_auteur == 'tous', supprimer tous les formats
- * @version CP-20090111
+ * Supprimer le format d'un ou plusieurs id_auteur
+ * donné en argument (int ou tableau).
+ * Si $arg == 'tous', supprimer tous les formats
+ * 
+ * @version CP-20110816
+ * @param int|array|string $arg
+ * @return bool
  */
-function spiplistes_format_abo_supprimer ($id_auteur) {
-	$sql_table = "spip_auteurs_elargis";
-	if(($id_auteur = intval($id_auteur)) > 0) {
-		$sql_where = "id_auteur=$id_auteur";
-		$msg = "id_auteur #$id_auteur";
+function spiplistes_format_abo_supprimer ($arg)
+{
+	static $sql_table = 'spip_auteurs_elargis';
+	$result = $sql_where = FALSE;
+	
+	if (is_string($arg) && ($id_auteur == 'tous'))
+	{
+		$sql_where = 'id_auteur>0';
 	}
-	else if ($id_auteur == 'tous') {
-		$sql_where = "id_auteur>0";
-		$msg = "ALL";
+	else if (is_int ($arg) && ($arg > 0))
+	{
+		$arg = array($arg);
 	}
-	if($sql_where) {
-		if(($result = sql_delete("spip_auteurs_elargis", $sql_where)) === false) {
-			spiplistes_sqlerror_log("format_abo_supprimer()");
+	if (is_array($arg) && count($arg))
+	{
+		$sql_where = 'id_auteur IN ('.implode(',', $arg).')';
+	}
+	
+	if ($sql_where)
+	{
+		if (($result = sql_delete($sql_table, $sql_where)) === FALSE)
+		{
+			spiplistes_sqlerror_log('format_abo_supprimer()');
 		}
 		else {
-			spiplistes_log_api("delete format for $msg");
+			spiplistes_log_api('DELETE FORMAT WHERE '.$sql_where);
 		}
 	}
 	return($result);

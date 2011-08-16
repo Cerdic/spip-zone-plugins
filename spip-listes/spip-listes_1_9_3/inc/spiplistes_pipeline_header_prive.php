@@ -24,6 +24,7 @@ include_spip('inc/spiplistes_api_globales');
 function spiplistes_header_prive ($flux) {
 
 	$exec = _request('exec');
+	
 
 	$flux .= ""
 		. "\n\n<!-- SPIPLISTES GADGETS v.: ".spiplistes_real_version_get(_SPIPLISTES_PREFIX)." -->\n"

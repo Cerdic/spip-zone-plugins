@@ -41,6 +41,7 @@ function exec_spiplistes_maintenance () {
 			'btn_supprimer_courriers', 'btn_reset_listes', 'btn_supprimer_listes'
 			, 'btn_modifier_formats', 'confirmer_modifier_formats'
 			, 'btn_supprimer_formats', 'confirmer_supprimer_formats'
+			, 'btn_nettoyer_table_formats', 'nettoyer_table_formats'
 			, 'btn_nettoyer_abos', 'confirmer_nettoyer_abos'
 		)) as $key) {
 		$$key = _request($key);
@@ -168,6 +169,18 @@ function exec_spiplistes_maintenance () {
 					;
 				$msg_maintenance[] = _T('spiplistes:suppression_', $objet)." : ".$msg.$msg_end;
 				spiplistes_log("DELETE formats "._SPIPLISTES_FORMATS_ALLOWED." by ID_AUTEUR #$connect_id_auteur");
+			}
+		}
+		
+		/**
+		 * Nettoyer spip_auteurs_elargis des liens morts
+		 */
+		if ($btn_nettoyer_table_formats && $nettoyer_table_formats)
+		{
+			$bad_ids = spiplistes_elargis_bad_ids_auteur ();
+			if ($bad_ids)
+			{
+				spiplistes_format_abo_supprimer ($bad_ids);
 			}
 		}
 		
@@ -345,8 +358,9 @@ function exec_spiplistes_maintenance () {
 		. fin_cadre_trait_couleur(true)
 		;
 
-	//////////////////////////////////////////////////////
-	// Boite maintenance des formats
+	/**
+	 * Boite maintenance des formats
+	 */
 	$objet = array('objet' => _T('spiplistes:des_formats'));
 	$page_result .= ''
 		. debut_cadre_trait_couleur("administration-24.gif", true, "", _T('spiplistes:maintenance_objet', $objet))
@@ -377,7 +391,7 @@ function exec_spiplistes_maintenance () {
 			. spiplistes_form_bouton_valider('btn_modifier_formats')
 			. spiplistes_form_fin(true)
 			
-			. "<hr />\n"
+			. '<hr class="spiplistes" />'. PHP_EOL
 			// supprimer les formats
 			. spiplistes_form_debut ($maintenance_url_action, true)
 			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
@@ -390,6 +404,36 @@ function exec_spiplistes_maintenance () {
 			. spiplistes_form_bouton_valider('btn_supprimer_formats')
 			. spiplistes_form_fin(true)
 			;
+		/**
+		 * Si la table des formats contient des id_auteurs
+		 * obsolètes, proposer nettoyer spip_auteurs_elargis
+		 */
+		$bad_ids = spiplistes_elargis_bad_ids_auteur ();
+		if ($bad_ids)
+		{
+			spiplistes_debug_log ('DEAD FROM spip_auteurs_elargis: '.implode(',', $bad_ids));
+			
+			$nb_bad_ids_desc =
+						($bad_ids == 1)
+						? _T('spiplistes:total_1_abo_obsolet')
+						: _T('spiplistes:total_n_abo_obsolet', array('n' => count($bad_ids)))
+						;
+			$page_result .= '<hr class="spiplistes" />'. PHP_EOL
+			// supprimer les zombies
+			. spiplistes_form_debut ($maintenance_url_action, true)
+			. spiplistes_form_description(_T('spiplistes:conseil_sauvegarder_avant', $objet), true)
+			. spiplistes_form_fieldset_debut (
+				_T('spiplistes:nettoyage_')
+					. spiplistes_fieldset_legend_detail($nb_bad_ids_desc)
+				, true) 
+			. spiplistes_form_input_checkbox ('nettoyer_table_formats', 'oui',
+											  _T('spiplistes:nettoyer_table_formats'), false, true)
+			. spiplistes_form_fieldset_fin(true)
+			. spiplistes_form_bouton_valider('btn_nettoyer_table_formats')
+			. spiplistes_form_fin(true)
+			;
+		}
+
 	} else {
 		$page_result .= spiplistes_form_message(_T('spiplistes:pas_de_format'), true);
 	}
@@ -530,3 +574,42 @@ function spiplistes_abonnements_zombies () {
 
 }
 
+/**
+ * Analyse la table spip_auteurs_elargis
+ * Renvoie liste id => id_auteur des
+ * enregistrements erronés.
+ *
+ * @version CP-20110816
+ * @return bool|array
+ */
+function spiplistes_elargis_bad_ids_auteur ()
+{
+//SELECT id, f.id_auteur
+//FROM spip_auteurs_elargis AS f
+//LEFT JOIN spip_auteurs AS a ON a.id_auteur = f.id_auteur
+//WHERE a.id_auteur IS NULL
+//GROUP BY id_auteur
+
+	$result = FALSE;
+	
+	$sql_select = 'id, f.id_auteur';
+	$sql_from = 'spip_auteurs_elargis AS f
+		LEFT JOIN spip_auteurs AS a ON a.id_auteur = f.id_auteur';
+	$sql_where = 'a.id_auteur IS NULL';
+	$sql_group = 'id_auteur';
+	
+	$sql_result = sql_select(
+		$sql_select,
+		$sql_from,
+		$sql_where,
+		$sql_group);
+	
+	if ($sql_result)
+	{
+		$result = array();
+		while($row = sql_fetch($sql_result)) {
+			$result[$row['id']] = $row['id_auteur'];
+		}
+	}
+	return ($result);
+}
