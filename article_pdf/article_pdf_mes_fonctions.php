@@ -42,4 +42,9 @@
 	}
 
 
+function filtre_supprimer_param_logo($texte)
+{
+	return preg_replace('`\?[0-9]*$`','',$texte);
+}
+
 ?>

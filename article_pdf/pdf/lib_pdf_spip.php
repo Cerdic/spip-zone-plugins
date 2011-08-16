@@ -7,7 +7,8 @@
  
 class PDF_SPIP extends PDF
 {
-
+//Private properties
+var $copyright;               //current page number
 
 // haut, gauche,  bas, droite
 function SetAllMargins($TopMargin, $LeftMargin, $BottomMargin, $RightMargin)
@@ -66,8 +67,7 @@ function GenerateTitlePage()
 {
 	global $site, $rubrique, $yahoo, $surtitre, $titre, $soustitre;
 	global $logo_site,  $logo_fichier, $logo_lien;
-  global $auteur, $descriptif;
-	global $copyright;
+	global $auteur, $descriptif;
 	global $conf_url_site;
 	global $DateParution,$DateMiseEnLigne;
 	
@@ -149,11 +149,11 @@ function GenerateTitlePage()
 		$this->WriteHTML($descriptif,5) ;
 	}
 	
-	if ($copyright)
+	if ($this->copyright)
 	{
 		$this->SetXY(45,250);
 		$this->SetFont('times', 'B', 10);
-		$this->MultiCell(120,8,$copyright,'TB','C',0);
+		$this->MultiCell(120,8,$this->copyright,'TB','C',0);
 	}
 }
 
@@ -201,6 +201,13 @@ function BuildDocument()
 	$this->SetFont('helvetica','I',8);
 	$this->AliasNbPages();
 }
+
+function SetCopyright($copyright)
+{
+	$this->copyright=$copyright;
+}
+
+
 //
 }
 

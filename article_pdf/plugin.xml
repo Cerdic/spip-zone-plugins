@@ -12,7 +12,7 @@ _ [Aquinatus->http://www.spip-contrib.net/_Aquinatus_]
 _ [C&#233;dric Morin->http://www.notre-ville.net]
     </auteur>
     <version>
-    0.4
+    0.4.5
     </version>
     <etat>
     stable
@@ -20,7 +20,7 @@ _ [C&#233;dric Morin->http://www.notre-ville.net]
     <description>
     <multi>
     [fr]Conversion d'un article au format pdf pour t&#233;l&#233;chargement
-_ N&#233;cessite GD2 sur votre serveur
+_ N&#233;cessite GD2 sur votre serveur et le telechargement et installation de la librairie FPDF dans le r&eacute;pertoire lib
 _ Inserez la balise #ARTICLE_PDF dans votre squelette pour avoir un lien de t&#233;l&#233;chargement de l'article au format PDF
     [de]Konvertierung eines Artikels in das PDF Format zum herunterladen
 _ Ben&ouml;tigt GD2 auf Ihrem Server
@@ -40,4 +40,6 @@ _ F&uuml;gen Sie den Tag #ARTICLE_PDF in Ihr Skelett ein um &#252;ber einen Link
     </prefix>
     <categorie>edition</categorie>
 	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="lib:h5c1accba-fpdf17" src="http://www.fpdf.org/fr/download/fpdf17.zip" />
+	
 </plugin>

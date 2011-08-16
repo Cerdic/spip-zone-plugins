@@ -50,14 +50,6 @@ function Build($OutputFileFullPathName)
 {
 	$this->Open();
 	
-	$this->FirstIteration=TRUE;
-	$this->BuildDocument() ;
-	
-	$this->ResetBuffer();
-	$this->tag=0;
-	$this->SetFont('','');
-	
-	$this->FirstIteration=FALSE;
 	$this->BuildDocument() ;
 
 	$this->Output($OutputFileFullPathName);
@@ -641,7 +633,6 @@ function CellSize($htmlContent,$fontFamily,$fontSize,$LineFeedHeight,$cellmargin
 	$cell_pdf->FirstIteration=TRUE;
 	$cell_pdf->SetFont($fontFamily, '', $fontSize);
 	
-	$cell_pdf->ResetBuffer();
 	$cell_pdf->maxLineWidth = 0;
 	$cell_pdf->x=$cell_pdf->lMargin;
 	$cell_pdf->y=0;

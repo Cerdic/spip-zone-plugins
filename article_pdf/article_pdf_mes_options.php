@@ -1,4 +1,10 @@
 <?php
+
+// options
+if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
+if (!defined('_DIR_LIB_LIB')) define('_DIR_FPDF_LIB', _DIR_LIB . 'h5c1accba-fpdf17/');
+
+
 function balise_ARTICLE_PDF_dist($p) {
 		if (!is_array($p->param))
 			$p->param=array();
