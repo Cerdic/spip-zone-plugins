@@ -1,12 +1,21 @@
 <!-- nom=edition_directe -->
-#SET{objets,#ARRAY{
-	1,rubrique,
-	2,breve,
-	3,site,
-	4,auteur,
-	5,mot,
-		}
-	}
+
+[(#SPIP_VERSION|>={3}|?{
+	#SET{objets,#ARRAY{
+		1,rubrique,
+		2,breve,
+		3,site,
+		4,auteur,
+		5,mot,
+			}
+		},
+	#SET{objets,#ARRAY{
+		1,rubrique,
+		2,breve,
+		3,site,
+			}
+		}		
+	})]
 
 <div class="formulaire_spip formulaire_#FORM">
 
@@ -23,7 +32,7 @@
 				#SAISIE{case,
 						article,
 						label=#EVAL{_T('edir:article');},
-						valeur_defaut=on,
+						valeur=#ENV{article,on},
 						}
 				<BOUCLE_objets(POUR) {tableau #GET{objets}}>
 					#SAISIE{case,
@@ -38,7 +47,6 @@
 		
 		<p class="boutons">
 			<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:ok:>" />
-			<input type="submit" name="_cfg_delete" class="submit" value="<:cfg:effacer:>" />
 		</p>
 		
 	</div></form>

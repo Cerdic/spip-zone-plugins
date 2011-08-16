@@ -16,7 +16,7 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 	
 	    
 		// objet article
-	   if ($type=='article'AND lire_config('edition_directe/article')){
+	   if ($type=='article' AND objet_edition_directe($type)){
 		$id_article= _request('id_article');
 		if($id_article){
 			$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
@@ -49,7 +49,7 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 	
 	    $type = $flux['args']['type'];
 		// objet rubrique
-		if ($type=='rubrique' AND lire_config('edition_directe/rubrique')){
+		if ($type=='rubrique' AND objet_edition_directe($type)){
 		
 		$id_rubrique= _request('id_rubrique');
 		if($id_rubrique){
@@ -68,7 +68,7 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 		}
 		
 		// objet breve
-		if ($type=='breve' AND lire_config('edition_directe/breve')){
+		if ($type=='breve' AND objet_edition_directe($type)){
 		$id_breve= _request('id_breve');
 			if($id_breve){
 				$contexte = array(
@@ -84,7 +84,7 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 		}
 			
 		//objet site	
-		if ($type=='site' AND lire_config('edition_directe/site')){
+		if ($type=='site' AND objet_edition_directe($type)){
 		
 		$id_syndic= _request('id_syndic');
 			if($id_syndic){
@@ -111,13 +111,13 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 	
 			if(test_plugin_actif('medias') or test_plugin_actif('gest_doc')) $mediatheque='ok';
 			
-			if($exec=='articles' AND $mediatheque AND autoriser('joindredocument','article',_request('id_article')) AND objet_edition_directe('article')){
+			if($exec=='articles' AND $mediatheque AND autoriser('joindredocument','article',_request('id_article')) AND  objet_edition_directe($type)){
 				$flux['data'] .=recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'article','id_objet'=>_request('id_article')));
 				}
-			if($exec=='naviguer' AND autoriser('joindredocument','rubrique',_request('id_rubrique')) AND objet_edition_directe('rubrique')){
+			if($exec=='naviguer' AND autoriser('joindredocument','rubrique',_request('id_rubrique')) AND  objet_edition_directe($type)){
 				$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'rubrique','id_objet'=>_request('id_rubrique')));
 				}		
-			if($exec=='breves_voir' AND autoriser('joindredocument','breve',_request('id_breve')) AND objet_edition_directe('breve')){
+			if($exec=='breves_voir' AND autoriser('joindredocument','breve',_request('id_breve')) AND  objet_edition_directe($type)){
 				$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'breve','id_objet'=>_request('id_breve')));
 				}
 	
@@ -127,28 +127,27 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 else{
 	function edition_directe_afficher_config_objet($flux){
 		$type= $flux['args']['type'];
-		echo serialize($flux['args']);
 		$id = $flux['args']['id'];
-		if($type=='article' AND autoriser('joindredocument',$type,$id ) AND objet_edition_directe('article')){
+		if($type=='article' AND autoriser('joindredocument',$type,$id ) AND  objet_edition_directe($type)){
 			$flux['data'] .=recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 				}
-		if($type=='rubrique' AND autoriser('joindredocument',$type,_request('id_rubrique')) AND objet_edition_directe('rubrique')){
+		if($type=='rubrique' AND autoriser('joindredocument',$type,_request('id_rubrique')) AND  objet_edition_directe($type)){
 			$flux['data'] .=recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 				}	
 						
-		if($type=='breve' AND autoriser('joindredocument',$type,_request('id_breve')) AND objet_edition_directe('breve')){
+		if($type=='breve' AND autoriser('joindredocument',$type,_request('id_breve')) AND  objet_edition_directe($type)){
 			$flux['data'] .=recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 			}
-		if($type=='site' AND autoriser('joindredocument',$type,_request('id_'.$type)) AND objet_edition_directe($type)){
+		if($type=='site' AND autoriser('joindredocument',$type,_request('id_'.$type)) AND  objet_edition_directe($type)){
 			$flux['data'] .=recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
 			}									
 		/* pas de pipeline disponible pour le moment
 		if($type=='auteur' AND autoriser('joindredocument',$type,_request('id_'.$type)) AND objet_edition_directe($type)){
 			$flux['data'] .=recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
-			}	*/								
+			}								
 		if($type=='mot' AND autoriser('joindredocument',$type,_request('id_'.$type)) AND objet_edition_directe($type)){
 			$flux['data'] .=recuperer_fond('prive/objets/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
-			}						
+			}	*/					
 	    return $flux;
 	}
 }
