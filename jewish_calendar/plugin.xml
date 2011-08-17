@@ -1,0 +1,15 @@
+<plugin>
+	<nom>Jewish Calendar</nom>
+	<auteur>Yohann</auteur>
+	<licence>GPL v3</licence>
+	<version>1.0</version>
+	<etat>test</etat>
+	<icon>calendar-64.png</icon>
+	<description>
+		Un filtre pour afficher la date avec le calendrier hebraique
+	</description>
+	<prefix>jewishc</prefix>
+	<fonctions>jewishc_fonctions.php</fonctions>
+	<categorie>navigation</categorie>
+	<necessite id="SPIP" version="[2.0.9;]" />
+</plugin>
