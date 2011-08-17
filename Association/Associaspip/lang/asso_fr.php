@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title="Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d\'avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin">(&agrave; caract&egrave;re informatif)</abbr>',
 	'config_libelle_gerer_champs_membres' => 'La fiche des membres contient les champs :',
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
-	'config_plan_comptable_prerenseigne' => 'Activer l\'aide à la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)',
+	'config_plan_comptable_prerenseigne' => 'Activer l\'aide &agrave; la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)',
 
 	# Options
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
