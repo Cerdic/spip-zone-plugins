@@ -164,6 +164,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	if ($lettre)
 		$critere .= " AND upper( substring( nom_famille, 1, 1 ) ) like '$lettre' ";
 	$chercher_logo = charger_fonction('chercher_logo', 'inc');
+	include_spip('inc/filtres_images_mini','inc');
 	$query = sql_select('a.id_auteur AS id_auteur, b.email AS email, a.sexe, a.nom_famille, a.prenom, a.id_asso, b.statut AS statut, a.validite, a.statut_interne, a.categorie, b.bio AS bio','spip_asso_membres' .  " a LEFT JOIN spip_auteurs b ON a.id_auteur=b.id_auteur", $critere, '', "nom_famille ", "$debut,$max_par_page" );
 	$auteurs = '';
 	$liste_id_auteurs = array();
@@ -174,9 +175,9 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 		
 		$logo = $chercher_logo($id_auteur, 'id_auteur');
 		if ($logo) {
-			$logo = '"'. $logo[0] .  '" width="60"';
+			$logo = image_reduire($logo[0], 60);
 		}else{
-			$logo = '"'._DIR_PLUGIN_ASSOCIATION_ICONES.'ajout.gif"  width="10"' ;
+			$logo = '<img src="'._DIR_PLUGIN_ASSOCIATION_ICONES.'ajout.gif"  width="10"/>' ;
 		}
 		if (empty($data["email"])) { 
 			$mail = $data["nom_famille"]; 
@@ -207,8 +208,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 		. $id_auteur
 		. '</td>'
 		. '<td class="'.$class. '">'
-		. "<img src=$logo" . ' alt="&nbsp;"  title="'
-		. $data["nom_famille"].' '.$data["prenom"].'" />'
+		. $logo
 		. "</td>\n";
 		if ($GLOBALS['association_metas']['civilite']=="on") $auteurs .= '<td class="'.$class. '">'.$data['sexe']."</td>\n";
 		$auteurs .= '<td class="'.$class. '">'
