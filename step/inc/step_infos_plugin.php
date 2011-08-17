@@ -6,14 +6,17 @@
 include_spip('inc/xml');
 
 function step_get_infos_plugin($constante, $p, $actifs, $recents) {
-	$dir = constant($constante);
+	if($constante == '_DIR_PLUGINS_SUPPL')
+		$dir = _DIR_RACINE.constant($constante);
+	else 
+		$dir = constant($constante);
 	lire_fichier($dir . $p . '/plugin.xml', $xml);
 	// enlever la balise doctype qui provoque une erreur "balise non fermee"
 	$xml = preg_replace('#<!DOCTYPE[^>]*>#','',$xml);
 	// traduire le xml en php
 	//spip_log("spip_get_infos $dir $p");
 	if (!is_array($plugin = spip_xml_parse($xml))) return;
-		
+
 	// [extrait] de plugins/verifie_conformite.php
 	// chercher la declaration <plugin spip='...'> a prendre pour cette version de SPIP
 	if (!spip_xml_match_nodes(",^plugin(\s|$),", $plugin, $matches))
@@ -93,7 +96,7 @@ function step_xml_parse_plugin($arbre){
 	
 	// on commence par les simples !
 	$plug_arbre = step_xml_aplatit_multiple(
-				array('nom','icon','auteur','licence','version','version_base','etat','shortdesc','categorie','tags',
+				array('nom','icon','auteur','licence','version','version_base','etat','shortdesc','slogan','categorie','tags',
 				'description','lien','options','fonctions','prefix','install'), 
 				$arbre);
 	$plug_arbre['prefix'] = strtolower($plug_arbre['prefix']);

@@ -7,7 +7,8 @@ function step_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['zones_plugins'] = 'zones_plugins';
 
 	$interface['table_des_traitements']['NOM']['plugins'] = _TRAITEMENT_TYPO;	
-	$interface['table_des_traitements']['AUTEUR']['plugins'] = _TRAITEMENT_RACCOURCIS;	
+	$interface['table_des_traitements']['AUTEUR']['plugins'] = _TRAITEMENT_RACCOURCIS;
+	$interface['table_des_traitements']['SLOGAN']['plugins'] = _TRAITEMENT_RACCOURCIS;
 	$interface['table_des_traitements']['DESCRIPTION']['plugins'] = _TRAITEMENT_RACCOURCIS;	
 	$interface['table_des_traitements']['LIEN']['plugins'] = _TRAITEMENT_RACCOURCIS;	
 	return $interface;
@@ -39,6 +40,7 @@ function step_declarer_tables_principales($tables_principales){
 			"version_base"	=> "VARCHAR(24) DEFAULT '' NOT NULL",
 			"nom"			=> "text DEFAULT '' NOT NULL",
 			"shortdesc"		=> "text DEFAULT '' NOT NULL",
+			"slogan"		=> "text DEFAULT '' NOT NULL",
 			"description"	=> "text DEFAULT '' NOT NULL",
 			"auteur"		=> "text DEFAULT '' NOT NULL",
 			"licence"		=> "text DEFAULT '' NOT NULL",

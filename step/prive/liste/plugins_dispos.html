@@ -17,11 +17,17 @@
 			[(#SET{todo,[(#GET*{totodo}|table_valeur{#ID_PLUGIN})]})]
 			<td class='logo'>
 				[(#DOSSIER|et{#CHAMP_SQL{logo}})
+					[(#CONSTANTE|=={_DIR_PLUGINS_SUPPL}
+						|?{
+							[(#SET{constante,[(#EVAL{_DIR_RACINE}|concat{[(#CONSTANTE|constant)]})]})]
+							,
+							[(#SET{constante,[(#CONSTANTE|constant)]})]
+					})]
 					[(#REM)
 						uniquement si l'image existe bien, because autrement,
 						c'est le nom du fichier qui apparait
-					][(#CONSTANTE|constant|concat{#DOSSIER}|concat{#CHAMP_SQL{logo}}|file_exists|oui)
-						[(#CONSTANTE|constant|concat{#DOSSIER}|concat{#CHAMP_SQL{logo}}
+					][(#GET{constante}|concat{#DOSSIER}|concat{#CHAMP_SQL{logo}}|file_exists|oui)
+						[(#GET{constante}|concat{#DOSSIER}|concat{#CHAMP_SQL{logo}}
 							|image_reduire{36,48}|inserer_attribut{alt,''})]
 					]
 				]

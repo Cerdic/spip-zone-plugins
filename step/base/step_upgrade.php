@@ -1,32 +1,54 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('base/create');
 include_spip('base/abstract_sql');
 
+spip_log("on charge le fichier de step",'test');
+
 function step_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
+	spip_log("$nom_meta_base_version,$version_cible",'test');
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-
-		if ($current_version==0.0){
+		include_spip('base/step');
+		spip_log('maj step','test');
+		spip_log($current_version,'test');
+		if (version_compare($current_version,'0.0','<=')){
 			spip_log('Installation des tables','step');
 			creer_base();
 			// informer des plugins locaux
-			include_spip('inc/step');
 			spip_log('Installation de la liste des plugins locaux','step');
+			include_spip('inc/step');
 			step_actualiser_plugins_locaux();
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
-		else if($current_version==0.4){
+		if(version_compare($current_version,'0.5','<')){
 			/**
 			 * On met à jour la liste des plugins locaux avec categorie = ' ' si aucune catégorie
 			 * Permet de pouvoir les retrouver dans le formulaire de recherche
 			 */
-			include_spip('inc/step');
 			spip_log('Installation de la liste des plugins locaux','step');
+			include_spip('inc/step');
 			step_actualiser_plugins_locaux();
-			ecrire_meta($nom_meta_base_version,$current_version=0.5,'non');
+			ecrire_meta($nom_meta_base_version,$current_version="0.5");
 		}
+		if(version_compare($current_version,'0.6','<')){
+			/**
+			 * On ajoute le champ slogan dans la base
+			 */
+			spip_log('maj step','test');
+			maj_tables(array('spip_plugins', 'spip_tickets_forum'));
+			include_spip('inc/step');
+			step_actualiser_plugins_locaux();
+			ecrire_meta($nom_meta_base_version,$current_version="0.6");
+		}else{
+			spip_log('rien','test');
+		}
+	}
+	else{
+		spip_log('rien2','test');
 	}
 }
 

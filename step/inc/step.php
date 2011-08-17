@@ -188,7 +188,7 @@ function step_actualiser_plugins_locaux(){
 		// si le plugin n'est pas activable,
 		// on ne l'affiche pas non plus
 		sql_delete('spip_plugins','id_zone=' . sql_quote(0));
-
+		
 		foreach($plugins as $constante=>$liste) {
 			foreach ($liste as $p) {
 				step_actualiser_plugin_local($constante, $p, $actifs, $recents);
@@ -204,17 +204,21 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 
 	if ($insert = step_get_infos_plugin($constante, $p, $actifs, $recents)) {
 		// recuperer les champs sql utiles
+		
 		if ($insert = step_selectionner_champs_sql_plugin($insert)) {
 				$insert['id_zone'] = 0;
 				$insert['present'] = 'oui';
 				$insert['constante'] = $constante; 
 				$insert['dossier'] = $p . '/'; 
 				$prefix = strtoupper($insert['prefixe']);
+				if($constante == '_DIR_PLUGINS_SUPPL'){
+					$actifs[$prefix]['dir'] = str_replace('../'.constant($constante),'',$actifs[$prefix]['dir']);
+				}
 				// flag sur plugin actif et installe
 				if (is_array($actifs[$prefix])
-				and (basename($actifs[$prefix]['dir']) == $p)) {
+				and ($actifs[$prefix]['dir'] == $p)) {
 					$insert['actif'] = 'oui';
-					$dossier = ($constante == '_DIR_PLUGINS')? $p : '../'.constant($constante).$p;
+					$dossier = ($constante != '_DIR_PLUGINS_SUPPL')? $p : '../'.constant($constante).$p;
 					if (step_plugin_est_installe($dossier))
 						$insert['installe'] = 'oui';
 				}
@@ -276,7 +280,6 @@ function step_actualiser_plugin_local($constante, $p, $actifs, $recents) {
 						sql_updateq('spip_plugins',array('superieur'=>'oui'), sql_in('id_plugin', $superieurs));
 					}
 				}			
-				
 				sql_insertq('spip_plugins', $insert);	
 		}
 	}
@@ -402,6 +405,7 @@ function step_selectionner_champs_sql_plugin($p) {
 		'version_base' => $p['version_base'],
 		'licence' => $p['licence'],
 		'shortdesc' => $p['shortdesc'],
+		'slogan' => $p['slogan'],
 		'description' => $p['description'],
 		'dependances' => serialize($dependances),
 		'etat' => $p['etat'],
@@ -480,8 +484,13 @@ function step_liste_plugin_files($dir_plugins = ""){
 	if (!isset($plugin_files[$dir_plugins])
 	OR count($plugin_files[$dir_plugins]) == 0){
 		$plugin_files[$dir_plugins] = array();
-		foreach (preg_files(constant($dir_plugins), '/plugin[.]xml$') as $plugin) {
-			$plugin_files[$dir_plugins][] = str_replace(constant($dir_plugins),'',dirname($plugin));
+		if($dir_plugins == '_DIR_PLUGINS_SUPPL'){
+			$dir = _DIR_RACINE.constant($dir_plugins);
+		}else{
+			$dir = constant($dir_plugins);
+		}
+		foreach (preg_files($dir, '/plugin[.]xml$') as $plugin) {
+			$plugin_files[$dir_plugins][] = str_replace($dir,'',dirname($plugin));
 		}
 		sort($plugin_files[$dir_plugins]);
 	}

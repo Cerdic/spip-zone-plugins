@@ -7,15 +7,21 @@
 			[de]Plugin-Manager
 		</multi>
 	</shortdesc>
+	<slogan>
+		<multi>
+			[fr]Syst&#232;me de t&#233;l&#233;chargement de plugins
+			[en]Plugins download system
+			[de]Plugin-Manager
+		</multi>
+	</slogan>
 	<auteur>
 	Matthieu Marcillaud
 _ &#169; 2008 2011
 	</auteur>
 	<licence>GPL</licence>
-	<lien></lien>
-	<version>0.15.3</version>
-	<version_base>0.5</version_base>
-	<install>base/step_install.php</install>
+	<version>0.15.4</version>
+	<version_base>0.6</version_base>
+	<install>base/step_upgrade.php</install>
 
 	<icon>images/step-128.png</icon>
 

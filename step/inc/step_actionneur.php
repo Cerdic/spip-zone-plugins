@@ -342,7 +342,7 @@ class Actionneur {
 		if ($i['id_zone'] > 0) {
 			// a telecharger et activer
 			if ($dirs = $this->get_paquet_id($i)) {
-				$this->activer_plugin_dossier($dirs['dossier'], $i, $i['constante']);
+				$this->activer_plugin_dossier($dirs['dossier'], $i);
 				return true;
 			}
 		} else {
@@ -441,10 +441,16 @@ class Actionneur {
 			$dossier = rtrim($i['dossier'],'/');
 			$constante = $i['constante'];
 			$plugin_get_infos = charger_fonction('get_infos', 'plugins');
-			$infos = $plugin_get_infos($dossier,false,constant($i['constante']));
+			if($i['constante'] == '_DIR_PLUGINS_SUPPL')
+				$constante = _DIR_RACINE.constant($i['constante']);
+			else 
+				$constante = constant($i['constante']);
+			$infos = $plugin_get_infos($dossier,false,$constante);
+
 			if (isset($infos['install'])){
+				
 				// desinstaller
-				$dossier = ($constante == '_DIR_PLUGINS')? $dossier : '../'.constant($constante).$dossier;
+				$dossier = ($i['constante'] == '_DIR_PLUGINS')? $dossier : '../'.constant($i['constante']).$dossier;
 				$etat = desinstalle_un_plugin($dossier, $infos);
 
 				// desactiver si il a bien ete desinstalle
@@ -524,6 +530,7 @@ class Actionneur {
 					// trouver le nouveau paquet et le mettre dans les interessants...
 					$dest = 'auto/' . rtrim($dest, '/');
 					$this->ajouter_plugin_interessants_meta($dest);
+					
 					// c'est la ou _DIR_PLUGINS_AUTO
 					// ne sert pas a grand chose... a ameliorer
 					return true;
@@ -561,6 +568,8 @@ class Actionneur {
 		ecrire_plugin_actifs(array($dossier), false, 'ajoute');
 		$installe = $i['version_base'] ? 'oui' : 'non';
 		if ($installe == 'oui') {
+			if(!$i['constante'])
+				$i['constante'] = '_DIR_PLUGINS';
 			// installer le plugin au prochain tour
 			$new_action = array_merge($this->work, array(
 				'todo'=>'install',
@@ -624,7 +633,12 @@ class Actionneur {
 
 	function installe_plugin($info){
 		$plugin_get_infos = charger_fonction('get_infos', 'plugins');
-		$infos = $plugin_get_infos($info['dossier'],false,constant($info['constante']));
+		if($info['constante'] == '_DIR_PLUGINS_SUPPL')
+			$constante = _DIR_RACINE.constant($info['constante']);
+		else
+			$constante = constant($info['constante']);
+		
+		$infos = $plugin_get_infos($info['dossier'],false,$constante);
 		if (isset($infos['install'])) {
 			ob_start();
 			include_spip('inc/step');
