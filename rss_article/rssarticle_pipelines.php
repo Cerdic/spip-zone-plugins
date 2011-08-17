@@ -4,7 +4,12 @@
  *
  */
 function rssarticle_taches_generales_cron($taches_generales){
+  // si cfg dispo, on charge les valeurs
+  if (function_exists(lire_config))  {
+        $taches_generales['rssarticle_copie'] = intval(lire_config('rssarticle/cron_interval_value'));
+  } else { // sinon valeur par defaut
 	$taches_generales['rssarticle_copie'] = 60*10; // ts les 10 min 
+  }
 	return $taches_generales;
 }
 

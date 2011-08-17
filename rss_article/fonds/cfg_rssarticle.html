@@ -18,8 +18,13 @@
   </p>
   </fieldset>
   
+ <fieldset><legend><:rssarticle:cron_interval:></legend>
+  <p>
+    <label><:rssarticle:cron_interval_timer:><input type="text" name="cron_interval_value" value="[(#ENV{cron_interval_value})]" size="6" class="fondl" />
+    </label>
+  </p>
+  </fieldset>
   
-
  <fieldset><legend><:rssarticle:suivi_syndic:></legend>
   <p>       
     <label><input type="checkbox" name="email_alerte"[ checked="(#ENV{email_alerte}|!={''}|?{'checked'})"] class="fondl" />

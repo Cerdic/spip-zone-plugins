@@ -14,6 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'citer_source' => 'Citer la source',
   'citer_source_oui' => 'Citer l\'URL de l\'article d\'origine dans l\'article import&eacute;',
   'copie_logo' => 'Recopier le logo du site comme logo d\'article',
+    'cron_interval' => 'Cadencement de la fonction de transformation des flux RSS en article',
+    'cron_interval_timer' => 'Interval en secondes : ',
 
   // S
   'statut_article_importe' => 'Statut des articles import&eacute;s',
