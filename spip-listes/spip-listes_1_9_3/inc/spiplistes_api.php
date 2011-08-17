@@ -140,7 +140,7 @@ function spiplistes_courriers_statut_compter ($statut='tous') {
 
 /**
  * Date/time du serveur SQL
- * CP-20091207
+ * @version CP-20091207
  * @return string|bool
  */
 function spiplistes_sql_now ()
@@ -851,7 +851,7 @@ function spiplistes_format_abo_demande ($id_auteur) {
  * 	($idx == 'quoted') la valeur est sql_quote'
  * 	($idx == 'sql_where') string ligne sql_where formatee avec OR
  * @version CP-20090111
- * @param $idx string
+ * @param string $idx
  * @return string|array
  */
 function spiplistes_formats_autorises ($idx = 'array') {
@@ -930,6 +930,8 @@ function spiplistes_formats_defaut_lister ($sql_where = '') {
  * ou de toutes les listes si $id_liste = 'toutes'
  * -> result du style: array[id_liste] => array(id_auteur, ...)
  * @version CP-20080608
+ * @param int $id_liste
+ * @return bool|array
  */
 function spiplistes_mod_listes_get_id_auteur ($id_liste) {
 	$sql_from = 'spip_auteurs_mod_listes';
@@ -956,6 +958,9 @@ function spiplistes_mod_listes_get_id_auteur ($id_liste) {
  * supprime un ou + moderateurs d'une liste
  * ou tous les moderateurs si $id_auteur == 'tous'
  * @version CP-20090111
+ * @param bool|string $id_auteur
+ * @param int $id_liste
+ * @return bool
  */
 function spiplistes_mod_listes_supprimer ($id_auteur, $id_liste) {
 	if(($id_auteur = intval($id_auteur)) > 0) {
@@ -978,7 +983,11 @@ function spiplistes_mod_listes_supprimer ($id_auteur, $id_liste) {
 }
 
 /**
+ * Ajouter un modérateur à une liste
  * @version CP-20080512
+ * @param int $id_auteur
+ * @param int $id_liste
+ * @return bool
  */
 function spiplistes_mod_listes_ajouter ($id_auteur, $id_liste) {
 	if(($id_liste = intval($id_liste)) > 0) {
@@ -1000,7 +1009,10 @@ function spiplistes_mod_listes_ajouter ($id_auteur, $id_liste) {
 }
 
 /**
+ * Donne le nombre d emodérateurs d'une liste
  * @version CP-20080610
+ * @param int $id_liste
+ * @return bool|int
  */
 function spiplistes_mod_listes_compter ($id_liste) {
 	$n = sql_fetch(sql_select("COUNT(*) AS n", "spip_auteurs_mod_listes", "id_liste=".sql_quote($id_liste)));
@@ -1008,7 +1020,7 @@ function spiplistes_mod_listes_compter ($id_liste) {
 }
 
 /**
- * renvoie tableau id_liste des listes moderees par l'auteur
+ * Renvoie tableau id_liste des listes moderees par l'auteur
  * @version CP-20080620
  * @return bool|array
  */
@@ -1027,7 +1039,8 @@ function spiplistes_mod_listes_id_auteur ($id_auteur) {
 }
 
 /**
- * passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html
+ * Passe propre() sur un texte puis nettoie les trucs rajoutes par spip sur du html
+ * @param string $texte
  * @return string
  * Remplace spiplistes_courrier_propre() qui est a supprimer apres verif.
  */
@@ -1088,9 +1101,14 @@ function spiplistes_texte_propre ($texte) {
 	return ($texte);
 }
 
-function spiplistes_titre_propre($titre){
+/**
+ * Renvoie le titre propre. Longeur limitée par défaut à 128 car.
+ * @param string $titre
+ * @return string
+ */
+function spiplistes_titre_propre($titre, $max = 128){
 	$titre = spiplistes_texte_propre($titre);
-	$titre = substr($titre, 0, 128); // Au cas ou copie/colle
+	$titre = substr($titre, 0, $max); // Au cas ou copie/colle
 	return($titre);
 }
 
@@ -1395,8 +1413,8 @@ function spiplistes_auteurs_non_abonnes_compter ()
 }
 
 /**
- * CP-20080511 20110315
  * Renvoie la selection pour un seul auteur
+ * @version CP-20080511 20110315
  * @return array OR false
  */
 function spiplistes_auteurs_auteur_select ($select, $where = array())
@@ -1407,7 +1425,10 @@ function spiplistes_auteurs_auteur_select ($select, $where = array())
 }
 
 /**
- * CP-20080511
+ * Modifie le statut d'un auteur (--> 5poubelle)
+ * @version CP-20080511
+ * @param string $sql_where du style 'id_auteur=12345'
+ * @return bool
  */
 function spiplistes_auteurs_auteur_delete ($sql_where) {
 	// détruire ou mettre à la poubelle ?
@@ -1425,7 +1446,7 @@ function spiplistes_auteurs_auteur_delete ($sql_where) {
 }
 
 /**
- * CP-20080511
+ * @version CP-20080511
  * @return int|bool
  */
 function spiplistes_auteurs_auteur_insertq ($champs_array) {
@@ -1434,7 +1455,7 @@ function spiplistes_auteurs_auteur_insertq ($champs_array) {
 }
 
 /**
- * CP-20090409
+ * @version CP-20090409
  */
 function spiplistes_auteurs_auteur_valider ($id_auteur, $as_redact = false) {
 	if($id_auteur = intval($id_auteur)) {
@@ -1453,7 +1474,7 @@ function spiplistes_auteurs_auteur_valider ($id_auteur, $as_redact = false) {
 }
 
 /**
- * CP-20110315
+ * @version CP-20110315
  * @return bool
  */
 function spiplistes_auteurs_auteur_statut_modifier ($id_auteur, $statut)
@@ -1468,7 +1489,7 @@ function spiplistes_auteurs_auteur_statut_modifier ($id_auteur, $statut)
 }
 
 /**
- * CP-20110321
+ * @version CP-20110321
  * Retourne une version texte pure du nom du site
  * @return string
  */
@@ -1720,45 +1741,44 @@ function spiplistes_pref_lire_defaut ($key, $default)
 	return($value);
 }
 
-function spiplistes_str_auteurs ($nb)
-{
+/**
+ * Renvoie la chaine interprétée au singulier ou au pluriel
+ *
+ * @version CP-20110817
+ * @param int $nb
+ * @param string $str_un index de la chaine de lang, singulier
+ * @param string $str_pluriel index de la chaine de lang, pluriel
+ * @param string $str_aucun index de la chaine de lang, aucun
+ * @param string $idx préfixe de la chaine de lang
+ * @return string
+ */
+function spiplistes_str_sing_pluriel ($nb, $str_un, $str_pluriel,
+									  $str_aucun = FALSE,
+									  $idx = 'spiplistes:'
+									  ) {
+	$nb = intval($nb);
 	$result =
 		($nb > 0)
-		? _T('spiplistes:' . (($nb > 1) ? '_n_auteurs_' : '_1_auteur_'), array('n' => $nb))
-		: 'erreur param'
+		? _T($idx . (($nb > 1) ? $str_pluriel : $str_un), array('n' => $nb))
+		: ($str_aucun ? _T($idx . $str_aucun) : '')
 		;
-	return($result);
+	return ($result);
 }
 
-function spiplistes_str_abonnes ($nb) 
-{
-	$result =
-		($nb > 0)
-		? _T('spiplistes:' . (($nb > 1) ? '_n_abonnes_' : '1_abonne'), array('n' => $nb))
-		: _T('spiplistes:aucun_abo')
-		;
-	return($result);
+function spiplistes_str_auteurs ($nb) {
+	return (spiplistes_str_sing_pluriel ($nb, '_1_auteur_', '_n_auteurs_'));
 }
 
-function spiplistes_str_abonnements ($nb) 
-{
-	$result =
-		($nb > 0)
-		? _T('spiplistes:' . (($nb > 1) ? '_n_abos_' : '_1_abo_'), array('n' => $nb))
-		: _T('spiplistes:aucun_abonmt')
-		;
-	return($result);
+function spiplistes_str_abonnes ($nb) {
+	return (spiplistes_str_sing_pluriel ($nb, '1_abonne', '_n_abonnes_', 'aucun_abo'));
 }
 
+function spiplistes_str_abonnements ($nb) {
+	return (spiplistes_str_sing_pluriel ($nb, '_1_abo_', '_n_abos_', 'aucun_abonmt'));
+}
 
-function spiplistes_str_listes ($nb) 
-{
-	$result =
-		($nb > 0)
-		? _T('spiplistes:' . (($nb > 1) ? 'n_listes' : '1_liste'), array('n' => $nb))
-		: 'erreur param'
-		;
-	return($result);
+function spiplistes_str_listes ($nb) {
+	return (spiplistes_str_sing_pluriel ($nb, '1_liste', 'n_listes'));
 }
 
 
