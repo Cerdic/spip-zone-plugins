@@ -34,6 +34,16 @@ function exec_voir_adherent(){
 
 		$categorie = $data['libelle']?$data['libelle']:_T('asso:pas_de_categorie_attribuee');
 
+		$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
+		switch($statut)	{
+			case "0minirezo":
+				$statut='auteur'; break;
+			case "1comite":
+				$statut='auteur'; break;
+			default :
+				$statut='visiteur'; break;
+		}
+		
 		$commencer_page = charger_fonction('commencer_page', 'inc');
 		echo $commencer_page(_T('asso:titre_gestion_pour_association')) ;
 		association_onglets(_T('asso:titre_onglet_membres'));
@@ -41,10 +51,10 @@ function exec_voir_adherent(){
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
-		echo '<span class="spip_xx-large">';
+		echo '<div class="infos"><div class="numero"><a href="'.generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur).'" title="'._T('asso:adherent_label_modifier_'.$statut).'">'._T('asso:adherent_libelle_numero_'.$statut);
+		echo '<p>';
 		echo $id_auteur;
-		echo '</span></div>';
+		echo '</p></a></div></div>';
 
 		$nom = htmlspecialchars($nom_membre);
 		if ($full) {

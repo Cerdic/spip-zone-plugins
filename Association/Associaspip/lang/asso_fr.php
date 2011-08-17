@@ -147,6 +147,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_libelle_id_asso' => 'R&eacute;f. int.',
 	'adherent_libelle_reference_interne' => 'R&eacute;f&eacute;rence interne',
 	'adherent_libelle_numero' => 'Num&eacute;ro',
+	'adherent_libelle_numero_auteur' => 'AUTEUR NUM&Eacute;RO',
+	'adherent_libelle_numero_visiteur' => 'VISITEUR NUM&Eacute;RO',
 	'adherent_libelle_id_auteur' => 'ID',
 	'adherent_libelle_photo' => 'Photo',
 	'adherent_libelle_nom_famille' => 'Nom',
@@ -221,6 +223,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 
 	# Label
 	'adherent_label_modifier_visiteur' => 'Modifier le visiteur',
+	'adherent_label_modifier_auteur' => 'Modifier l\'auteur',
 	'adherent_label_envoyer_courrier' => 'Envoyer un courrier',
 	'adherent_label_ajouter_cotisation' => 'Ajouter une cotisation',
 	'adherent_label_modifier_membre' => 'Modifier membre',
