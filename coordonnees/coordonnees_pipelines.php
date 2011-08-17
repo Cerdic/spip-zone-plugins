@@ -38,31 +38,52 @@ function liste_objets_coordonnees($quoi = '') {
  * sur la page de visualisation d'un auteur
 **/
 function coordonnees_affiche_milieu($flux) {
-	// cas SPIP 3 ?
+
+	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
+
+	// SPIP 3
 	if (function_exists('trouver_objet_exec')) {
-		$exec = trouver_objet_exec(_request('exec'));
+		$objet_exec = trouver_objet_exec($exec);
+
 		// pas en édition
-		if ($exec['edition']) {
+		if ($objet_exec['edition']) {
 			return $flux;
 		}
-		$_id = $exec['id_table_objet'];
-		$exec = $exec['type'];
 		
-	} else {
-		$exec = $flux['args']['exec'];
+		// recuperation de l'id
+		$_id = $objet_exec['id_table_objet'];
+		// type d'objet
+		$type = $objet_exec['type'];
+		
 	}
 
 	$liste = liste_objets_coordonnees('exec');
-	$liste = array_flip($liste);
+	$ok = false;
 	
-	if (isset($liste[$exec]) and $type = $liste[$exec]) {
+	// SPIP 3
+	if (isset($type) and isset($liste[$type])) {
+		// c'est bon
+		$ok = true;
+		
+	// SPIP 2.x
+	} else {
+		$liste = array_flip($liste);
+		if (isset($liste[$exec])) {
+			$type = $liste[$exec];
+			$ok = true;
+		}
+	}
+
+	if ($ok) {
 		// c'est un exec que l'on peut afficher
 		// verifions qu'il est coche dans la conf
 		$conf = unserialize($GLOBALS['meta']['coordonnees']);
 		if (in_array($type, $conf['objets'])) {
 			// on doit l'afficher
 			// seulement si on a un identifiant
-			$_id = id_table_objet($type);
+			if (!isset($_id)) {
+				$_id = id_table_objet($type);
+			}
 
 			if (isset($flux['args'][$_id]) and $id = $flux['args'][$_id]) {
 				include_spip('inc/presentation');
