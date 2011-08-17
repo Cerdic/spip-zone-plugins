@@ -46,6 +46,7 @@ function coordonnees_affiche_milieu($flux) {
 			return $flux;
 		}
 		$_id = $exec['id_table_objet'];
+		$exec = $exec['type'];
 		
 	} else {
 		$exec = $flux['args']['exec'];
