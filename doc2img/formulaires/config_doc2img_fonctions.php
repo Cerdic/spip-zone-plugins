@@ -32,7 +32,7 @@ function cfg_config_doc2img_pre_traiter(&$cfg){
 	if($valeurs['format_document']){
 		$formats_choisis = explode(',',trim($valeurs['format_document']));
 		$formats = array_map('trim',array_map('strtolower',$formats_choisis));
-		$valeurs['format_document'] = implode(',',$valeurs['format_document']);
+		$valeurs['format_document'] = implode(',',$formats_choisis);
 	}
 }
 ?>
