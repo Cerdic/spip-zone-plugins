@@ -116,7 +116,7 @@ function exec_bilan(){
 					$depenses=$data['depenses']; 
 					$soldes=$recettes - $depenses;
 					echo '<tr style="background-color: #EEEEEE;">';
-					echo "<td class='arial11 border1'>\n" . $data['code'] . ' : ' . association_plan_comptable_complet($data['code']) . (($data['intitule'] != '') ? ' [' . $data['intitule'] . ']' : '') . '</td>';
+					echo "<td class='arial11 border1'>\n" . $data['code'] . ' : ' . $data['intitule'] . '</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($soldes, 2, ',', ' ').'</td>';
@@ -134,7 +134,7 @@ function exec_bilan(){
 					$depenses=$data['depenses']; 
 					$soldes=$recettes - $depenses;
 					echo '<tr style="background-color: #EEEEEE;">';
-					echo "<td class='arial11 border1'>\n" . $data['code'] . ' : ' . association_plan_comptable_complet($data['code']) . (($data['intitule'] != '') ? ' [' . $data['intitule'] . ']' : '') . '</td>';
+					echo "<td class='arial11 border1'>\n" . $data['code'] . ' : ' .  $data['intitule'] . '</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($recettes, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($depenses, 2, ',', ' ').'</td>';
 					echo '<td class="arial11 border1" style="text-align:right;">'.number_format($soldes, 2, ',', ' ').'</td>';
@@ -182,7 +182,7 @@ function bilan_encaisse($annee)
 		$solde=$banque['solde_anterieur'];
 		$total_initial += $solde;
 		echo '<tr style="background-color: #EEEEEE;">';
-		echo "\n<td class='arial11 border1'>" . $banque['code'] . ' : ' . association_plan_comptable_complet($banque['code']) . (($banque['intitule'] != '') ? ' [' . $banque['intitule'] . ']' : '') . '</td>';
+		echo "\n<td class='arial11 border1'>" . $banque['code'] . ' : ' . $banque['intitule'] . '</td>';
 		echo "\n<td class='arial11 border1' style='text-align:right;'>".association_datefr($date_solde).'</td>'; 
 		echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($solde, 2, ',', ' ').'</td>'; 
 			

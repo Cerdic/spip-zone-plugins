@@ -94,7 +94,7 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 	while ($plan = sql_fetch($sql)) {
 		echo '<option value="'.$plan['code'].'" ';
 		if ($imputation==$plan['code']) { echo ' selected="selected"'; }
-		echo '>' . $plan['code'],' : '. association_plan_comptable_complet($plan['code']).(($plan['intitule'] != '') ? ' ['.$plan['intitule'].']' : '') . '</option>';
+		echo '>'.$plan['code'].' - '.$plan['intitule'].'</option>';
 	}
 	echo '</select></div></form></td>';
 	echo '</tr></table>';

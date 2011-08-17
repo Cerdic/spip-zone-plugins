@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_utiliser_champ_id_asso' => 'R&eacute;f&eacute;rence interne <abbr title="Attention, ce champ est purement informatif les membres sont toujours d&eacute;sign&eacute;s et organis&eacute;s par leur id auteur SPIP mais il permet aux associations qui le d&eacute;sirent d\'avoir une r&eacute;f&eacute;rence membre de leur choix et de conserver cette information dans les tables du plugin">(&agrave; caract&egrave;re informatif)</abbr>',
 	'config_libelle_gerer_champs_membres' => 'La fiche des membres contient les champs :',
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
+	'config_plan_comptable_prerenseigne' => 'Activer l\'aide à la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)',
 
 	# Options
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
@@ -461,7 +462,7 @@ Commentaire: @commentaire@
 	# Plan comptable
 		#Message
 			'plan_info' => 'Vous pouvez d&eacute;finir ici les comptes de votre plan comptable.<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.',
-                        'edit_plan' => 'Vous devez choisir d\'abord une "CLASSE" puis un "CODE" dont le 1er chiffre doit correspondre &agrave; la "classe". Par exemple : classe 5 et code 5171<br />Vous pouvez donner un complément (libre) d\'information dans le champ INTITULE.<p>Vous pouvez vous inspirer du plan comptable normalis&eacute; fran&ccedil;ais joint au package.</p>',
+                        'edit_plan' => '<p>Vous devez choisir d\'abord une "CLASSE" puis un "CODE" dont le 1er chiffre doit correspondre &agrave; la "classe". Par exemple : classe 5 et code 5171</p>Si vous avez activ&eacute; l\'aide &agrave; la d&eacute;claration du plan comptable fran&ccedil;ais, un s&eacute;lecteur de code listant tous les codes et intitul&eacute;s correspondant vous permettra de remplir directement les cases code et intitul&eacute; que vous pourrez modifier ensuite, ce sont elles qui seront consid&eacute;r&eacute;es et non le s&eacute;lecteur.',
 		# Titres
 			'plan_comptable' => 'Plan comptable',
 		
