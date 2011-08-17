@@ -1211,7 +1211,7 @@ function spiplistes_boite_meta_info ($prefix) {
  *
  * Apparait sur la gauche de la page. Affiche infos de configuration.
  * @param array $array
- * @param bool $recursive[optional]
+ * @param bool $recursive
  * @global string $spip_lang_left
  * @return string
  */
@@ -1254,8 +1254,8 @@ function spiplistes_boite_meta_info_liste($array, $recursive = false) {
 /**
  * Petit bouton aide a placer a droite du titre de bloc
  * @param string $fichier_exec_aide 
- * @param string $aide[optional]
- * @param bool $return[optional]
+ * @param string $aide
+ * @param bool $return
  * @return string|null
  */
 function spiplistes_plugin_aide ($fichier_exec_aide, $aide='', $return=true) {

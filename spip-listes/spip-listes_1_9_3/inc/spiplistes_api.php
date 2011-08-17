@@ -42,9 +42,9 @@ include_spip('inc/spiplistes_api_globales');
  * Fonction de compatibilite de php4 / php5 pour http_build_query
  * 
  * @param mixed $data un array de contexte
- * @param string $prefix[optional]
- * @param string $sep[optional]
- * @param int $key[optional]
+ * @param string $prefix
+ * @param string $sep
+ * @param int $key
  * @return un query string a passer a une url 
  */
 function spiplistes_http_build_query($data,$prefix=null,$sep='',$key='')
@@ -851,7 +851,7 @@ function spiplistes_format_abo_demande ($id_auteur) {
  * 	($idx == 'quoted') la valeur est sql_quote'
  * 	($idx == 'sql_where') string ligne sql_where formatee avec OR
  * @version CP-20090111
- * @param $idx string[optional]
+ * @param $idx string
  * @return string|array
  */
 function spiplistes_formats_autorises ($idx = 'array') {
