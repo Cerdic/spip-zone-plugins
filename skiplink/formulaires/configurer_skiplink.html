@@ -1,0 +1,78 @@
+<style type="text/css">
+.formulaire_spip, .formulaire_spip * { font-size: 100% !important; line-height: normal !important; }
+.formulaire_spip fieldset { border: 0; }
+.formulaire_spip legend { background: none; font-weight: bold; }
+.formulaire_spip .explication { padding: 5px 10px; background: none; border: 0; }
+.formulaire_spip li .explication { padding: 0; font-size: .9em !important; line-height: 1; color: #666; }
+</style>
+
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		#SET{fl,skiplink}
+		<input type="hidden" name="_meta_casier" value="skiplink/typo" />
+		<fieldset>
+			<legend>Ancres des liens d'acc&egrave;s rapide</legend>
+			<p class="explication">Les liens d'acc&eacute;s rapide pointent vers les blocs principaux des squelettes par&nbsp;d&eacute;faut de&nbsp;SPIP. Mais vous pouvez, pour chacun de ces raccourcis, indiquer une autre ancre, parmi celles pr&eacute;sentes dans vos squelettes personnalis&eacute;s.</p>
+			<ul>
+				<li class="skiplink_go_content[ (#ENV**{erreurs}|table_valeur{go_content}|oui)erreur]">
+					<label for="go_content"><:skiplink:go_content:></label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{go_content})</span>
+					]<input type="text" name="go_content"[ value="(#ENV{go_content}|sinon{#contenu})"] id="go_content" class="text" style="width: 12em;" />
+				</li>
+				<li class="skiplink_go_nav[ (#ENV**{erreurs}|table_valeur{go_nav}|oui)erreur]">
+					<label for="go_nav"><:skiplink:go_nav:></label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{go_nav})</span>
+					]<input type="text" name="go_nav"[ value="(#ENV{go_nav}|sinon{#navigation})"] id="go_nav" class="text" style="width: 12em;" />
+				</li>
+				<li class="skiplink_go_search[ (#ENV**{erreurs}|table_valeur{go_search}|oui)erreur]">
+					<label for="go_search"><:skiplink:go_search:></label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{go_search})</span>
+					]<input type="text" name="go_search"[ value="(#ENV{go_search}|sinon{#recherche})"] id="go_search" class="text" style="width: 12em;" />
+				</li>
+				<li class="skiplink_go_plus[ (#ENV**{erreurs}|table_valeur{go_plus}|oui)erreur]">
+					<label for="go_plus"><:skiplink:go_plus_label:></label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{go_plus})</span>
+					]<input type="text" name="go_plus" value="#ENV{go_plus}" id="go_plus" class="text" style="width: 3em;" />
+				</li>
+				<li class="skiplink_go_plus_2[ (#ENV**{erreurs}|table_valeur{go_plus_2}|oui)erreur]">
+					<label for="go_plus_2"><:skiplink:go_plus_label:></label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{go_plus_2})</span>
+					]<input type="text" name="go_plus_2" value="#ENV{go_plus_2}" id="go_plus_2" class="text" style="width: 3em;" />
+				</li>
+				<li class="skiplink_go_plus_3[ (#ENV**{erreurs}|table_valeur{go_plus_3}|oui)erreur]">
+					<label for="go_plus_3"><:skiplink:go_plus_label:></label>[
+					<span class='erreur'>(#ENV**{erreurs}|table_valeur{go_plus_3})</span>
+					]<input type="text" name="go_plus_3" value="#ENV{go_plus_3}" id="go_plus_3" class="text" style="width: 3em;" />
+				</li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>Apparence</legend>
+			<ul>
+				#SET{name,inserer_focus}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<li class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					<label>[(#GET{fl}|concat{':label_',#GET{name}}|_T)]</label>[
+					<span class='erreur_message'>(#GET{erreurs})</span>
+					]
+					#SET{val,oui}
+					<p class="explication">Signaler le focus am&eacute;liore la navigation au clavier (par exemple par un fort contraste blanc/noir).</p>
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#env{#get{name},oui}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					</div>
+					#SET{val,non}
+					<div class="choix">
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#env{#get{name},oui}|=={#GET{val}}|oui)checked="checked"] />
+						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
+					</div>
+				</li>
+			</ul>
+		</fieldset>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span>
+			<input type='submit' class='submit' name="cancel" value='<:bouton_annuler:>' />
+			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

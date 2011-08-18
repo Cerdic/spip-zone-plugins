@@ -29,8 +29,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'home' => 'Accueil',
 'go_home' => 'Retour &agrave; l\'accueil',
 
-// Configuration CFG
-'go_plus_label' => 'Ajouter un lien vers l\'article num&eacute;ro&nbsp;:'
+// Configuration
+'go_plus_label' => 'Ajouter un lien vers l\'article num&eacute;ro&nbsp;:',
+
+'label_inserer_focus' => 'Focus',
+'label_inserer_focus_oui' => 'Signaler le focus (avec <code>focus.css</code>)',
+'label_inserer_focus_non' => 'Ne pas ins&eacute;rer la feuille de style <code>focus.css</code>'
 
 );
 

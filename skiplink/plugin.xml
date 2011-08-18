@@ -1,7 +1,7 @@
 <plugin>
 <nom>SkipLinks</nom>
 <icon>icon/skiplink-64.png</icon>
-<version>2.1.0</version>
+<version>2.1.1</version>
 <etat>dev</etat>
 <description>
 <multi>
