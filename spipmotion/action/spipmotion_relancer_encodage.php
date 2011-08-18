@@ -22,8 +22,6 @@ function action_spipmotion_relancer_encodage_dist(){
 	$securiser_action = charger_fonction('securiser_action', 'inc');
 	$arg = $securiser_action();
 
-	spip_log($arg,'test');
-
 	include_spip('inc/autoriser');
 
 	$update = 'nok';
