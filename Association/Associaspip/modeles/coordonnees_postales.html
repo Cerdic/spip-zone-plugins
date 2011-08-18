@@ -1,0 +1,16 @@
+[(#REM) Modele permettant l'affichage de l'adresse postale passe en parametre
+	Les parametres d'entree sont les champs fournis par le plugin Coordonnees:
+	- VOIE
+	- COMPLEMENT
+	- BOITE POSTALE
+	- CODE POSTAL
+	- VILLE
+	- PAYS (qui contient en fait le code ISO du pays et non son nom)
+
+	Dans ce modèle par defaut le PAYS n'est pas affiché si c'est FR
+]
+[(#VOIE)]
+[<br/>(#COMPLEMENT)]
+[<br/>(#BOITE_POSTALE)]
+[<br/>(#CODE_POSTAL)]&nbsp;[(#VILLE)]
+<B_p><br/><BOUCLE_p(pays){code=#PAYS}{code!=FR}>#NOM</BOUCLE_p>

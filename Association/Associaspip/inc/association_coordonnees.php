@@ -54,7 +54,6 @@ function association_recuperer_telephones_string($id_auteurs)
 
 /* Cette fonction prend en argument un tableau d'id_auteurs et renvoie un tableau
 id_auteur => array(adresses). Les adresses sont constituees d'une chaine, les caracteres de retour a la ligne et espace peuvent etre passe en parametre */
-/* TODO: l'affichage du pays devrait etre optionnel */
 function association_recuperer_adresses($id_auteurs, $newline="<br/>", $espace="&nbsp;")
 {
 	/* prepare la structure du tableau renvoye */
@@ -67,14 +66,14 @@ function association_recuperer_adresses($id_auteurs, $newline="<br/>", $espace="
 		$id_auteurs_list = sql_in('al.id_objet', $id_auteurs);
 		$query = sql_select('al.id_objet as id_auteur, a.titre as titre, a.voie as voie, a.complement as complement, a.boite_postale as boite_postale, a.code_postal as code_postal, a.ville as ville, a.pays as pays', 'spip_adresses as a INNER JOIN spip_adresses_liens AS al ON al.id_adresse=a.id_adresse',$id_auteurs_list.' AND al.objet=\'auteur\'');
 		while ($data = sql_fetch($query)) {
-			$voie = ($data['voie'])?$data['voie'].$newline:'';
-			$complement = ($data['complement'])?$data['complement'].$newline:'';
-			$boite_postale = ($data['boite_postale'])?$data['boite_postale'].$newline:'';
-			$code_postal = ($data['code_postal'])?$data['code_postal'].$espace:'';
-			$ville = ($data['ville'])?$data['ville'].$newline:'';
-			$pays = ($data['pays'])?$data['pays']:'';
-
-			$adresses_auteurs[$data['id_auteur']][] = $voie.$complement.$boite_postale.$code_postal.$ville.$pays;
+			
+			$adresses_auteurs[$data['id_auteur']][] = recuperer_fond("modeles/coordonnees_postales", array ('voie' => $data['voie'],
+																'complement' => $data['complement'],
+																'boite_postale' => $data['boite_postale'],
+																'code_postal' => $data['code_postal'],
+																'ville' => $data['ville'],
+																'pays' => $data['pays']
+															));
 		}
 	}
 	return $adresses_auteurs;
