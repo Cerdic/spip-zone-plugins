@@ -1,0 +1,12 @@
+[(#REM) Modele permettant l'affichage du numero de telephone passe en parametre
+	Ce modele uniformise la presentation des numeros quelque soit le format d'entree
+	en supprimant tous les espaces, puis en inserant un espace apres tous les groupes
+	de deux chiffres, si des parentheses sont presentes elle sont ignorees dans le
+	regroupement par deux.
+	Ex: 0123456789 -> 01 23 45 67 89
+	Ex: +33 (0)123456789-> +33 (0)1 23 45 67 89
+	Si tous vos numeros sont rentres de facon satisfaisante vous pouvez vous contenter
+	d'un #TELEPHONE ou adapter les filtres a votre format de numeros
+]
+
+[(#TELEPHONE|replace{\s}|replace{(\(*\d\)*\d\)*), $1 })]

@@ -76,7 +76,7 @@ function exec_pdf_adherents()
 			$telephones_string = '';
 			foreach ($telephones[$id_auteur] as $telephone) {
 				if (!$first_tel) {$telephones_string .= "\n";} else $first_tel = false;
-				$telephones_string .=  print_tel($telephone," ");
+				$telephones_string .=  recuperer_fond("modeles/coordonnees_telephoniques", array ('telephone' => $telephone));
 			}
 			$adresses_tels[$id_auteur]['telephone'] = $telephones_string;
 		}

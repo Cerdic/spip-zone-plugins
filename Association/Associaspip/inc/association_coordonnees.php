@@ -44,7 +44,7 @@ function association_recuperer_telephones_string($id_auteurs)
 		$telephones_strings[$id_auteur] = '';
 		if (count($telephones)) {
 			foreach ($telephones as $telephone) {
-				$telephones_strings[$id_auteur] .=  print_tel($telephone).'<br/>';
+				$telephones_strings[$id_auteur] .=  recuperer_fond("modeles/coordonnees_telephoniques", array ('telephone' => $telephone)).'<br/>';
 			}
 		}
 	}
@@ -150,12 +150,5 @@ function association_recuperer_emails_string($id_auteurs)
 	}
 
 	return $emails_strings;
-}
-
-function print_tel($n, $separateur="&nbsp;")
-{
-	$n = preg_replace('/\D/', '', $n);
-	if (!intval($n)) return '';
-	return preg_replace('/(\d\d)/', '\1'.$separateur, $n);
 }
 ?>
