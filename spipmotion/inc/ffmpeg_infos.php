@@ -40,36 +40,37 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		 * On crée un fichier contenant l'ensemble de la conf de ffmpeg
 		 */
 		supprimer_fichier($chemin_fichier);
-		
-		spimotion_write($chemin_fichier,"==VERSION==");
+
+		spimotion_write($chemin_fichier,"==VERSION==\n");
 		exec($spipmotion_sh.' --info "-version" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"==FORMATS==");
+		spimotion_write($chemin_fichier,"\n==FORMATS==\n");
 		exec($spipmotion_sh.' --info "-formats" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"==CODECS==");
+		spimotion_write($chemin_fichier,"\n==CODECS==\n");
 		exec($spipmotion_sh.' --info "-codecs" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"==BSFS==");
+		spimotion_write($chemin_fichier,"\n==BSFS==\n");
 		exec($spipmotion_sh.' --info "-bsfs" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"==PROTOCOLS==");
-		exec($spipmotion_sh.' --info "-protocols" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"==FILTERS==");
+		spimotion_write($chemin_fichier,"\n==FILTERS==\n");
 		exec($spipmotion_sh.' --info "-filters" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"==PIX_FMTS==");
+		spimotion_write($chemin_fichier,"\n==PIX_FMTS==\n");
 		exec($spipmotion_sh.' --info "-pix_fmts" --log '.$chemin_fichier,$retour,$bool);
-		spimotion_write($chemin_fichier,"==fin==");
+		spimotion_write($chemin_fichier,"\n==PROTOCOLS==\n");
+		exec($spipmotion_sh.' --info "-protocols" --log '.$chemin_fichier,$retour,$bool);
+		spimotion_write($chemin_fichier,"\n==FIN==");
 
 		if (lire_fichier($chemin_fichier, $contenu)){
 			$data = array();
 			$look_ups = array(
 				'version' => 'ffmpeg version',
-				'configuration'=>' configuration: ',
-				'formats'=>'File formats:',
-				'codecs'=>'Codecs:',
-				'bitstream_filters'=>'Bitstream filters:',
-				'protocols'=>'Supported file protocols:',
-				'avfilters' => 'Filters',
-				'pix_formats' => 'Pixel formats:',
+				'configuration'=>'configuration:',
+				'formats'=>'==FORMATS==',
+				'codecs'=>'==CODECS==',
+				'bitstream_filters'=>'==BSFS==',
+				'avfilters' => 'Filters:',
+				'pix_formats' => '==PIX_FMTS==',
 				'abbreviations'=>'Frame size, frame rate abbreviations:',
-				'fin' => '==fin==');
+				'protocols'=>'==PROTOCOLS==',
+				'fin' => '==FIN=='
+			);
 			$total_lookups = count($look_ups);
 			$pregs = array();
 			$indexs = array();
@@ -81,7 +82,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			}
 
 			preg_match('/'.implode('(.*)', $pregs).'/s', $contenu, $matches);
-
+			
 			/**
 			 * Récupération des informations de version
 			 */
@@ -89,6 +90,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			$data['spipmotion_compiler']['versions'] = array();
 
 			$version = trim($matches[$indexs['version']]);
+			
 			preg_match('/([a-zA-Z0-9\-]+[0-9\.]+).* on (.*) with gcc (.*)/s', $version, $versions);
 			$data['spipmotion_compiler']['ffmpeg_version'] = $versions[1];
 			$data['spipmotion_compiler']['gcc'] = $versions[3];
@@ -104,7 +106,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			$data['spipmotion_compiler']['configuration'] = $config_flags[0];
 
 			// Replace old vhook support
-			$data['spipmotion_compiler']['avfilter-support'] = in_array('--enable-avfilter', $config_flags[0]) && !in_array('--disable-avfilter', $config_flags[0]);
+			$data['spipmotion_compiler']['avfilter-support'] = (in_array('--enable-avfilter', $config_flags[0]) && !in_array('--disable-avfilter', $config_flags[0]) ? '1' : '0');
 			//$data['compiler']['vhook-support'] = in_array('--enable-vhook', $config_flags[0]) && !in_array('--disable-vhook', $config_flags[0]);
 
 			if(extension_loaded('ffmpeg')){
