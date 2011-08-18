@@ -28,7 +28,6 @@ function action_piwik_recuperer_liste(){
 	 */
 	$method = 'SitesManager.getSitesWithAdminAccess';
 	$datas = $piwik_api($piwik_url,$piwik_token,'',$method,$format);
-	spip_log($datas,'test');
 	ecrire_meta('piwik_sites_dispo', $datas);
 }
 ?>

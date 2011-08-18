@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction de communication avec l'API REST du serveur Piwik
  * 
