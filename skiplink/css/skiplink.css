@@ -4,37 +4,13 @@
 
 -------------------------------------------------------------- */
 
-/* Skip Links */
+/* skiplinks */
 #skiplinks { z-index: 100; }
 
 /* yoyo */
 .yoyo * { vertical-align: middle; }
 .yoyo a { display: block; }
 .yoyo .sep { display: none; }
-
-/* focus / Cf.: http://romy.tetue.net/678 */
-a:focus,
-a:active {
-	z-index: 999 !important;
-	background-color: black !important;
-	border-color: black !important;
-	text-decoration: none;
-	outline: none;
-}
-a:focus,
-a:active,
-* a:focus *,
-* a:active * {
-	color: white !important;
-}
-a:focus img,
-a:active img {
-	-moz-transform: translateY(1px); 
-	-webkit-transform: translateY(1px);
-	-o-transform: translateY(1px);
-	-ms-transform: translate(1px);
-	transform: translateY(1px);
-}
 
 /* print */
 @media print {
