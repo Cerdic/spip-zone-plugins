@@ -60,19 +60,17 @@
 					#SET{val,oui}
 					<p class="explication">Signaler le focus am&eacute;liore la navigation au clavier (par exemple par un fort contraste blanc/noir).</p>
 					<div class="choix">
-						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#env{#get{name},oui}|=={#GET{val}}|oui)checked="checked"] />
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},oui}|=={#GET{val}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 					#SET{val,non}
 					<div class="choix">
-						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#env{#get{name},oui}|=={#GET{val}}|oui)checked="checked"] />
+						<input type="radio" class="radio" name="#GET{name}" id="#GET{name}_#GET{val}" value="#GET{val}"[(#ENV{#GET{name},oui}|=={#GET{val}}|oui)checked="checked"] />
 						<label for="#GET{name}_#GET{val}">[(#GET{fl}|concat{':label_',#GET{name},'_',#GET{val}}|_T)]</label>
 					</div>
 				</li>
 			</ul>
 		</fieldset>
-		<p class='boutons'><span class='image_loading'>&nbsp;</span>
-			<input type='submit' class='submit' name="cancel" value='<:bouton_annuler:>' />
-			<input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+		<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
 	</div></form>
 </div>
