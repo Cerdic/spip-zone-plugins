@@ -34,7 +34,6 @@ function legendes_post_edition($flux){
 	 * On supprime les légendes de documents supprimés
 	 */
 	if($flux['args']['operation'] == 'supprimer_document'){
-		spip_log('suppression du doc : '.$flux['args']['id_objet'],'test');
 		$legendes_documents = sql_select('id_legende','spip_legendes','id_document='.intval($flux['args']['id_objet']));
 		include_spip("action/editer_legende");
 		while($legende = sql_fetch($legendes_documents)){
