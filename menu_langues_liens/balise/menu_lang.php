@@ -26,7 +26,6 @@ function balise_MENU_LANG ($p) {
 // s'il n'y a qu'une langue eviter definitivement la balise ?php 
 // http://doc.spip.org/@balise_MENU_LANG_stat
 function balise_MENU_LANG_stat ($args, $context_compil) {
-	spip_log($args,'test');
 	if (strpos($GLOBALS['meta']['langues_multilingue'],',') === false) return '';
 	$objet = $args[0];
 	$id_objet = $args[1];
@@ -35,7 +34,6 @@ function balise_MENU_LANG_stat ($args, $context_compil) {
 		$id_objet = '';
 		$id_table_objet ='';
 	}else{
-		spip_log('on passe par id_table_objet','test');
 		$objet = table_objet($objet);
 		$id_table_objet = id_table_objet($objet);
 	}
@@ -66,7 +64,6 @@ function balise_MENU_LANG_dyn($objet,$id_objet,$id_table_objet) {
 function balise_LANG_TYPE_BOUCLE($p) {
 	$type = $p->boucles[$p->id_boucle]->id_table;
 	$p->code = $type ? $type : "balise_hors_boucle";
-	spip_log($type ? $type : "balise_hors_boucle",'test');
 	return $p;
 }
 ?>
