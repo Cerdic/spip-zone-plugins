@@ -276,7 +276,6 @@ function tickets_recuperer_fond($flux){
 		if(is_numeric($args['contexte']['id_ticket'])){
 			$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($args['contexte']['id_ticket']));
 			if(_request('id_assigne')){
-				spip_log('on a un id_assigne'._request('id_assigne'),'tickets');
 				$infos_ticket['id_assigne'] = _request('id_assigne');
 			}
 			if(_request('statut')){

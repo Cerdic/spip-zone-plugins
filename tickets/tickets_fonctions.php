@@ -18,7 +18,7 @@ function tickets_champ_optionnel_actif($nom){
 		$liste = constant($constante);
 	else 
 		$liste = lire_config('tickets/general/'.$nom,'');
-	spip_log($liste,'ticket');
+
 	if ($liste == '') return false;
 
 	return explode(':', $liste);

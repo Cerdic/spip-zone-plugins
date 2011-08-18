@@ -43,7 +43,6 @@ function action_editer_ticket() {
  *
  */
 function tickets_set($id_ticket) {
-	spip_log('ticket_set');
 	$err = '';
 
 	$c = array();

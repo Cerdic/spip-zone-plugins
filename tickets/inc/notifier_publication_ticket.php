@@ -42,7 +42,6 @@ function inc_notifier_publication_ticket($id_ticket,$statut_nouveau='',$statut_a
 	while ($row_auteur = sql_fetch($query_auteurs)) {
 		$recipient = $row_auteur["email"];
 		$envoyer_mail($recipient, $titre_message, $message);
-		spip_log("notification instituer ticket envoyer mail $recipient");
 	}
 }
 ?>

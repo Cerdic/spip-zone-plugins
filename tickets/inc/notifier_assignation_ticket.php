@@ -48,7 +48,6 @@ function inc_notifier_assignation_ticket($id_ticket,$options){
 	while ($row_auteur = sql_fetch($query_auteurs)) {
 		$recipient = $row_auteur["email"];
 		$envoyer_mail($recipient, $titre_message, $message);
-		spip_log("notification assignation ticket envoyer mail $recipient");
 	}
 }
 ?>
