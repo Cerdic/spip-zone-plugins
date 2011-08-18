@@ -37,7 +37,6 @@ function formulaires_doc2img_convertir_document_traiter($id_article,$redirect=''
     	$convertir($id_document);
 	}
 	if($redirect){
-		spip_log($redirect,'test');
 		$res['redirect'] = $redirect;
 	}else{
 		$res['redirect'] = $self;

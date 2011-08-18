@@ -55,7 +55,6 @@ function doc2img_post_edition($flux) {
 
 		while($version = sql_fetch($v)){
 			$liste[] = $version['id_doc2img'];
-			spip_log('suppression de '.$version['fichier'],'test');
 			if (@file_exists($f = get_spip_doc($version['fichier']))) {
 				supprimer_fichier($f);
 			}
