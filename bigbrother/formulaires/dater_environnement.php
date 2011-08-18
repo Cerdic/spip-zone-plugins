@@ -53,7 +53,6 @@ function formulaires_dater_environnement_traiter_dist($date_debut='',$date_fin='
 	if(!$retour){
 		$retour = self();
 	}
-	spip_log($date_fin,'test');
 	include_spip('inc/headers');
 	$retour = parametre_url(parametre_url($retour,'date_debut',$date_debut),'date_fin',$date_fin);
 	$message .= redirige_formulaire($retour);
