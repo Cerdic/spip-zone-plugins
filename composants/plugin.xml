@@ -1,0 +1,61 @@
+<plugin>
+	<nom>Composants</nom>
+	<auteur>Cyril Marion</auteur>
+	<licence>&#169; 2011 GPL</licence>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<install>base/composants_upgrade.php</install>
+
+	<icon>images/composants-32.png</icon>
+
+	<etat>dev</etat>
+    <description>
+    	<multi>
+    		[fr]Ce plugin crée un objet de type "composant" en tant que plus petite brique d'un projet.
+		</multi>
+	</description>
+	<prefix>composants</prefix>
+
+    <options>composants_options.php</options>
+    <fonctions>composants_fonctions.php</fonctions>
+
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/composants.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/composants.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/composants.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>rechercher_liste_des_champs</nom>
+		<inclure>composants_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>composants_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_liaison_mots</nom>
+		<inclure>composants_pipelines.php</inclure>
+	</pipeline>
+
+	<bouton id='composants21' parent='bando_squelette'> 
+			<url>composants</url> 
+			<icone>images/composants-16.png</icone> 
+			<titre>composants:nom_bouton_plugin</titre> 
+	</bouton> 
+	
+
+	<necessite id="SPIP" version="[2.1.0;]" />
+
+	<categorie>outils</categorie>
+
+</plugin>

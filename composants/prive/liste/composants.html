@@ -1,0 +1,45 @@
+[(#SET{defaut_tri,#ARRAY{
+	titre,1,
+}})
+]<B_liste_composants>
+#ANCRE_PAGINATION
+<div class="liste-elements composants">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:composants:info_tous_les_composants:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='id'>[(#TRI{id_panier,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='titre'>[(#TRI{titre,<:composant:titre:>,ajax})]</th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_composants(COMPOSANTS)
+		{id_composant?}
+		{tri #ENV{order,id_composant},#GET{defaut_tri}}
+		{pagination #ENV{nb,30}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='id'>#ID_COMPOSANT</td>
+			<td class='titre'>#TITRE</td>
+			<td class='action'>
+				[(#AUTORISER{voir,composant,#ID_COMPOSANT})
+					[<a href="(#URL_PAGE{composant}
+						|parametre_url{redirect,#SELF}
+						|parametre_url{id_composant,#ID_COMPOSANT})"><:composants:voir_composant:></a>]
+				]
+				[(#AUTORISER{supprimer,composant,#ID_COMPOSANT})
+					[(#BOUTON_ACTION{				
+						<:composant:supprimer:>,
+						[(#URL_ACTION_AUTEUR{supprimer_composant,#ID_COMPOSANT}|parametre_url{redirect,#SELF})],
+						ajax,<:composants:confirmer_supprimer_composant:>})]
+				]
+			</td>
+		</tr>
+	</BOUCLE_liste_composants>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_composants>[
+<div class="liste-elements composants"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_composants>
