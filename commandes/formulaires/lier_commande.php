@@ -21,10 +21,22 @@ function formulaires_lier_commande_verifier_dist($id_commande, $objet, $id_objet
 	$erreurs = array();
 	$erreurs[''] = ''; // toujours en erreur : ce sont des actions qui lient les contacts
 
+    //Ne pas passer en action si on a un objet clairement identifié
+    if (!is_null($id_objet) && intval($id_objet))
+            $erreurs = array();
+
 	return $erreurs;
 }
 
 function formulaires_lier_commande_traiter_dist($id_commande, $objet, $id_objet = null, $redirect=''){
+
+    $id_objet = _request('objet_id');
+
+    if ($f=charger_fonction('lier_commande_'.$objet, 'inc')) {
+        $f($id_commande,$id_objet);
+    } else {
+		spip_log("cvt_lier_commande_".$objet."_dist $arg pas compris");
+    }    
 
     set_request('recherche_objet');
 	return array(
