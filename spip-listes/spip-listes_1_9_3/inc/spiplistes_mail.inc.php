@@ -11,7 +11,7 @@ if(!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/spiplistes_api_globales');
 
 /**
- * @return boolean
+ * @return bool
  */
 function spiplistes_utiliser_facteur()
 {

@@ -1,5 +1,8 @@
 <?php
 /**
+ * Affiche gauche
+ * Menu de navigation entre les paniers de courriers ou listes
+ * 
  * @version Original From SPIP-Listes-V :: Id: spiplistes_naviguer_paniers.php paladin@quesaco.org
  * @package spiplistes
  */
@@ -10,11 +13,6 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
-
-/*
-	Affiche gauche
-	Menu de navigation entre les paniers de courriers ou listes
-*/
 
 function spiplistes_naviguer_paniers ($titre, $sql_from, $les_statuts, $script_exec) {
 
@@ -103,4 +101,3 @@ if(!function_exists("array_fill_keys")) {
 	}
 } 
 
-?>

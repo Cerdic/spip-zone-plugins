@@ -56,17 +56,25 @@ define('_SPIPLISTES_ID_GROSSE_BOITE', 'grosse_boite_abonnements');
 define('_SPIPLISTES_ID_PETITE_BOITE', 'petite_boite_abonnements');
 define('_SPIPLISTES_ID_FROM_ELLIGIBL', 'form-recherche-abo-elligibles');
 
-//CP-20080603
-// renvoie un tableau d'auteurs, du style
-// $result['1comite'][$id_auteur] = nom
-// + le nombre d'elligibles
-// si $id_liste == 0, liste complete
-// sinon, ceux non abonnes a la liste
-// Si liste privee, uiquement redacs
-// Si liste publique, tout le monde (sauf si deja abonne)
-// $nb_non_abonnes = nombre d'elligibles trouves
-// Pour recuperer le resultat :
-//   list($non_abonnes, $nb_non_abonnes) = spiplistes_listes_auteurs_elligibles($id_liste, $statut);
+/**
+ * Renvoie un tableau d'auteurs, du style
+ * $result['1comite'][$id_auteur] = nom
+ * + le nombre d'elligibles
+ * si $id_liste == 0, liste complete
+ * sinon, ceux non abonnes a la liste
+ * 
+ * Si liste privee, uiquement redacs
+ * Si liste publique, tout le monde (sauf si deja abonne)
+ * $nb_non_abonnes = nombre d'elligibles trouves
+ * Pour recuperer le resultat :
+ *   list($non_abonnes, $nb_non_abonnes) = spiplistes_listes_auteurs_elligibles($id_liste, $statut);
+ *
+ * @version CP-20080603
+ * @param int $id_liste
+ * @param string $statut_liste
+ * @param string $faire
+ * @return array
+ */
 function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $faire = '') {
 	$nb_auteurs = 0;
 	$auteurs_array = array();
@@ -106,14 +114,14 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 }
 
 /**
- * @versin CP-20080603
- * @return la boite en liste des abonnes a une liste
- * 	si $id_liste == 0, liste tous les abonnements
+ * @version CP-20080603
  * @param $id_liste entier
  * @param $statut_liste staut ou false
  * @param $tri string: 'statut', 'nom', ou 'nombre' (qte)
  * @param $debut id_auteur du premier affiche
  * @param $script_retour string
+ * @return la boite en liste des abonnes a une liste
+ * 	si $id_liste == 0, liste tous les abonnements
  */
 function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
 
@@ -642,10 +650,13 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
 	return($result);
 }
 
-//CP-20080603
-// met en forme le resultat de spiplistes_listes_auteurs_elligibles()
-// retourne liste des elligibles sous forme de select, selecteur_spip ou recherche 
-// si trop nombreux.
+/**
+ * Met en forme le resultat de spiplistes_listes_auteurs_elligibles()
+ * retourne liste des elligibles sous forme de select, selecteur_spip ou recherche
+ * si trop nombreux.
+ *
+ * @version CP-20080603
+ */
 function spiplistes_listes_selectionner_elligibles (
 	$non_abonnes
 	, $nb_non_abonnes
@@ -780,6 +791,17 @@ function spiplistes_listes_selectionner_elligibles (
 	return($result);
 }
 
+/**
+ * Renvoie le code HTML pour un sélecteur d'elligibles.
+ *   Un elligible est un auteur qui peut être abonné à une liste
+ *   ou un modérateur.
+ *
+ * @todo vérifier compatibiliét optgroup
+ * @param array $elligibles
+ * @param int $nb_elligibles
+ * @param string $type_ajout
+ * @return string
+ */
 function spiplistes_elligibles_select ($elligibles, $nb_elligibles, $type_ajout = 'abo') {
 	$t_statut = array(
 		  '0minirezo' => _T('info_administrateurs')
@@ -788,8 +810,10 @@ function spiplistes_elligibles_select ($elligibles, $nb_elligibles, $type_ajout 
 		, '6visiteur' => _T('info_visiteurs')
 	);
 	$legend = ($type_ajout == 'abo') ? 'abon_ajouter' : 'ajouter_un_moderateur';
-	// si un seul, activer plutot la selection par la souris 
-	// onchange n'est pas transmis si un seul 'option'
+	/**
+	 * Si un seul, activer plutot la selection par la souris
+	 * onchange n'est pas transmis si un seul 'option'
+	 */
 	$onevent = ($nb_elligibles == 1) ? "onmousedown" : "onchange";
 	$select_abo = ""
 		. "<span class='verdana1 ajout_legend'>".ucfirst(_T('spiplistes:'.$legend))." : </span>\n"
@@ -807,8 +831,17 @@ function spiplistes_elligibles_select ($elligibles, $nb_elligibles, $type_ajout 
 	return($select_abo);
 }
 
-//CP20080603
-// la boite complete (abonnes et elligibles) enveloppee pour ajax
+/**
+ * La boite complete (abonnes et elligibles) enveloppee pour ajax
+ * 
+ * @version CP20080603
+ * @param int $id_liste
+ * @param string $statut_liste
+ * @param string $tri
+ * @param int $debut
+ * @param string $script_retour
+ * @return string
+ */
 function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
 
 	$boite_abonnements = ""
@@ -820,8 +853,16 @@ function spiplistes_listes_boite_abonnements ($id_liste, $statut_liste, $tri, $d
 	return($boite_abonnements);
 }
 
-//CP-20081117
-// boite construction des elligibles. Appelee aussi via action/ajax
+/**
+ * Boite construction des elligibles. Appelee aussi via action/ajax
+ * 
+ * @param int $id_liste
+ * @param string $statut_liste
+ * @param string $tri
+ * @param int $debut
+ * @version CP-20081117
+ * @return string
+ */
 function spiplistes_listes_boite_elligibles ($id_liste, $statut_liste, $tri, $debut) {
 	
 	$result = '';
@@ -844,8 +885,16 @@ function spiplistes_listes_boite_elligibles ($id_liste, $statut_liste, $tri, $de
 	return($result);
 }
 
-//CP-20080610
-// boite des moderateurs
+
+/**
+ * Boite des moderateurs
+ * 
+ * @version CP-20080610
+ * @param int $id_liste
+ * @param string $script_retour
+ * @param string $id_conteneur
+ * @return string
+ */
 function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_conteneur) 
 {
 	$boite_moderateurs = "";
@@ -911,13 +960,20 @@ function spiplistes_listes_boite_moderateurs ($id_liste, $script_retour, $id_con
 	return($boite_moderateurs);
 } //
 
-
+/**
+ * {@link spiplistes_corrige_img_pack}
+ */
 function spiplistes_bonhomme_statut ($row) {
 	return(spiplistes_corrige_img_pack(bonhomme_statut($row)));
 }
 
-// Lorsqu'appele par ?action (ajax), perd la position
-// corrige le lien relatif
+/**
+ * Lorsqu'appele par ?action (ajax), perd la position
+ * corrige le lien relatif
+ *
+ * @param string $img
+ * @return string
+ */
 function spiplistes_corrige_img_pack ($img) {
 	if(preg_match(",^<img src='dist/images,", $img)) {
 		$img = preg_replace(",^<img src='dist/images,", "<img src='../dist/images", $img);
