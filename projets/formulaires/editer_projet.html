@@ -1,0 +1,45 @@
+<div class="formulaire_spip formulaire_editer formulaire_editer_projet formulaire_editer_projet-#ENV{id_projet,nouveau}">
+	<!-- <br class='bugajaxie' /> -->
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
+		[(#REM) declarer les hidden qui declencheront le service du formulaire
+		parametre : url d'action ]
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_article' value='#ENV{id_projet}' />
+		<ul>
+			<li class="editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
+				<label for="titre"><:info_titre:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>]
+				<input type='text' class='text' name='titre' id='titre'[ lang='(#LANGUE)'] value="[(#ENV**{titre,#REM|concat{projet:info_nouveau_projet}|_T})]"
+				[(#ENV{titre,''}|non)onfocus="if(!antifocus){this.value='';antifocus=true;}"]/>
+			</li>
+			<li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
+				<label for="descriptif"><:texte_descriptif_rapide:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
+				<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
+		    </li>
+		    <li class="editer_texte obligatoire[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
+				<label for="text_area"><:info_texte:></label>
+				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{texte})</span>]
+				[(#ENV**{_texte_trop_long,''})]
+					<div class="explication"><:texte_enrichir_mise_a_jour:></div>
+					[(#ENV**{config}|table_valeur{afficher_barre}|?{#VAL{text_area}|barre_typo{#LANGUE}})]
+					<textarea name='texte' id='text_area' class='barre_inserer'[ lang='(#LANGUE)'] rows='[(#ENV**{config}|table_valeur{lignes}|plus{2})]' cols='40'[
+					(#ENV**{_browser_caret,''})]>[(#ENV**{texte})]</textarea>
+					<script type='text/javascript'><!--
+					jQuery('document').ready(function(){
+					jQuery('#text_area')
+					.height((jQuery(window).height()-80)+'px');
+					});
+					//--></script>
+			</li>
+		</ul>
+
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class='boutons'><input type='submit' name="save" class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

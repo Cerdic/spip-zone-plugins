@@ -1,0 +1,34 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- presentation=non -->
+<!-- nom=projet -->
+<!-- casier=ligatures -->
+<div class="formulaire_spip formulaire_cfg formulaire_configurer formulaire_configurer_ligatures">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<B_ligatures>
+			<li class="editer_ligatures">
+			<label><:projet:cfg_lbl_ligatures:></label>
+			<BOUCLE_ligatures(POUR){tableau #REM|projet_lister_ligatures}>
+			<div class="choix">
+				<input type="checkbox" name="objets[]" id="ligatures_#CLE" value="#CLE"[(#CLE|in_array{#ENV{objets,#ARRAY}}|oui)checked="checked"] />
+				<label for="ligatures_#CLE">#VALEUR</label>
+			</div>
+			</BOUCLE_ligatures>
+			</li>
+			</B_ligatures>
+		</ul>
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:valider:>" />
+			<input type="submit" name="_cfg_delete" class="submit" value="<:effacer:>" />
+		</p>
+	</div></form>
+</div>
+<div id="bloc_debug">
+	<h3> Debug - Etat des variables du fond:</h3>
+	#CFG_ARBO{projet/ligatures}
+</div>

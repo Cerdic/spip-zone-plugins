@@ -1,0 +1,13 @@
+<BOUCLE_projet(PROJETS){id_projet=#ENV{id}}{statut?}>
+<div class='infos'>
+<div class='numero'><:projet:info_numero_projet:><p>#ID_PROJET</p></div>
+
+[(#REM)
+
+	Bloc de changement de statut
+
+]
+[(#ID_PROJET|instituer_projet{#ID_PARENT,#STATUT})]
+
+</div>
+</BOUCLE_projet>

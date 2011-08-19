@@ -1,0 +1,69 @@
+<plugin>
+	<nom>SPIP-Projet</nom>
+	<auteur>Eric Lupinacci</auteur>
+	<version>0.2</version>
+	<version_base>0.1</version_base>
+	<licence>GPL</licence>
+	<etat>dev</etat>
+	<prefix>projet</prefix>
+	<icon>images/projet-64.png</icon>
+	<description>
+	Plugin de gestion de projets pour SPIP 2
+	</description>
+	<install>base/projet_installer.php</install>
+	<options>projet_options.php</options>
+	<fonctions>projet_fonctions.php</fonctions>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/projet_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/projet_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/projet_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>accueil_gadgets</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>accueil_informations</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>inc/projet_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>gouverneur_infos_tables</nom>
+		<inclure>projet_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />
+	<necessite id="cfg" version="[1.14.0;]" />
+	<necessite id="saisies" version="[1.2;]" />
+	<necessite id="gouverneur" version="[0.1.1;]" />
+</plugin>
