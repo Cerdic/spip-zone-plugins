@@ -16,7 +16,7 @@ page: détermine la boucle SPIP à charger si les variables précédentes sont v
 (#ENV{page}|=={sommaire}|?{' '})[(#INCLURE{fond=composants/articles/boucle-une}{env}{self}{debut_articles})#SET{ok,oui}]][(#REM)  TODO : ne pas afficher article de l'édito si Edito actif ][
 (#ENV{page}|=={resume}|?{' '})[(#INCLURE{fond=composants/articles/boucle-resume}{env}{self}{debut_articles})#SET{ok,oui}]][
 (#ENV{page}|=={recherche}|?{' '})[(#INCLURE{fond=composants/articles/boucle-articles_recherche}{env}{self})#SET{ok,oui}]][
-(#ENV{page}|=={plan}|?{' '})[(#INCLURE{fond=composants/articles/boucle-plan}{env}{self})#SET{ok,oui}]][
+(#ENV{page}|=={plan}|?{' '})[(#INCLURE{fond=composants/plan/plan}{env}{self})#SET{ok,oui}]][
 (#ENV{page}|=={forums}|?{' '})[(#INCLURE{fond=composants/articles/boucle-plan}{env}{self}{mode=forums})#SET{ok,oui}]][
 (#GET{ok}|!={oui}|?{' '})???][(#REM) PROVISOIRE : affiche ??? si aucune boucle ne convient - TODO : renvoyer vers 404 ?]
 </div>

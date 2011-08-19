@@ -29,11 +29,5 @@ Colors 2 to 6 are for rubrics level 2 to 6 in sitemap.',
 'Pagination' => 'Articles per page',
 'ListesLogoTailleMax' => 'Max logo size',
 
-'Puce' => 'Bullet',
-'RubFond2' => '2',
-'RubFond3' => '3',
-'RubFond4' => '4',
-'RubFond5' => '5',
-'RubFond6' => '6',
 );
 ?>

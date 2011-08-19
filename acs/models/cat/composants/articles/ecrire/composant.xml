@@ -101,35 +101,4 @@
     <type>text</type>
     <valeur>50</valeur>
   </variable>
-  
-  <variable>
-    <nom>Puce</nom>
-    <type>img</type>
-    <chemin>puces</chemin>
-  </variable>
-  <variable>
-    <nom>RubFond2</nom>
-    <type>color</type>
-    <valeur>#fafffa</valeur>
-  </variable>
-  <variable>
-    <nom>RubFond3</nom>
-    <type>color</type>
-    <valeur>#f5fff5</valeur>
-  </variable>
-  <variable>
-    <nom>RubFond4</nom>
-    <type>color</type>
-    <valeur>#efffef</valeur>
-  </variable>
-  <variable>
-    <nom>RubFond5</nom>
-    <type>color</type>
-    <valeur>#dfffdf</valeur>
-  </variable>
-  <variable>
-    <nom>RubFond6</nom>
-    <type>color</type>
-    <valeur>#d0ffd0</valeur>
-  </variable>
 </composant>

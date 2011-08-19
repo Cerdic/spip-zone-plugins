@@ -42,14 +42,6 @@ Pour que ce groupe de mots-clefs techniques n\'apparraisse pas sur le site publi
 'Added' => 'Ajouté à la dernière révision',
 'Deleted' => 'Supprimé à la dernière révision',
 
-'Pagination' => 'Nombre d\'articles par page',
-'ListesLogoTailleMax' => 'Taille maxi du logo',
-
-'Puce' => 'Puce',
-'RubFond2' => '2',
-'RubFond3' => '3',
-'RubFond4' => '4',
-'RubFond5' => '5',
-'RubFond6' => '6',
+'Pagination' => 'Nombre d\'articles par page'
 );
 ?>
