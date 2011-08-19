@@ -1,0 +1,17 @@
+<plugin>
+	<nom>Commandes pour des contacts ou organisations</nom>
+	<auteur>[Webelys ->http://www.webelys.com]</auteur>
+	<licence>GPL v3</licence>
+	<version>0.0.1</version>
+	<version_base>0.0.1</version_base>
+	<etat>dev</etat>
+	<description>Permet d'associer des commandes directement à des organisations et contacts.</description>
+	<categorie>divers</categorie>
+	<icon></icon>
+	
+	<prefix>commandes2contacts</prefix>
+		
+	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="commandes" version="[0.3.0;]" />
+	<necessite id="contacts" version="[1.9;]" />
+</plugin>
