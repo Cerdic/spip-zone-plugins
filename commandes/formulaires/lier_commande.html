@@ -8,6 +8,7 @@
 			#ACTION_FORMULAIRE{#ENV{action}}
 			<ul>
 				[(#SAISIE{input, recherche_objet, label=<:contacts:label_recherche:>})]
+                #INCLURE{fond=selecteurs/chargeur_selecteur,objet=#ENV{objet},input=champ_recherche_objet}
 			</ul>
 			<p class='boutons'>
 				<input type='submit' name='rechercher' value='<::bouton_rechercher:>' />
