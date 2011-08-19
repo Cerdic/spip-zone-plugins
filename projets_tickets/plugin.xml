@@ -1,0 +1,37 @@
+<plugin>
+	<nom>Association Projets et Tickets</nom>
+	<auteur>kent1</auteur>
+	<version>0.1</version>
+	<version_base>0.1</version_base>
+	<licence>GPL</licence>
+	<etat>dev</etat>
+	<prefix>projets_tickets</prefix>
+	<icon>images/projets_tickets-64.png</icon>
+	<description>
+	Sous Plugin pour le plugin Projets lui associant le plugin tickets
+	</description>
+	<install>base/projets_tickets_installer.php</install>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/projets_tickets_declarer.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_droite</nom>
+		<inclure>projets_tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_enfants</nom>
+		<inclure>projets_tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>projets_tickets_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_edition</nom>
+		<inclure>projets_tickets_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="projet" version="[0.2;]" />
+	<necessite id="tickets" version="[1.5.1;]" />
+</plugin>

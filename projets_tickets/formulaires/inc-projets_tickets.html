@@ -1,0 +1,11 @@
+<B_projets>
+<li class="editer_id_projet">
+	<label for="champ_id_projet"><:projets_tickets:ticket_associer_projet:></label>
+	<select class="select" name="id_projet" id="champ_id_projet">
+		<option value=''></option>
+	<BOUCLE_projets(PROJETS){tout}>
+		<option value="#ID_PROJET"[(#ENV{id_projet}|=={#ID_PROJET}|oui) selected="selected"]>#TITRE</option>
+	</BOUCLE_projets>
+	</select>
+</li>
+</B_projets>
