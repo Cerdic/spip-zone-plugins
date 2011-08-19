@@ -18,6 +18,8 @@
  	<auteur>
 	Cyril Marion [Ateliers CYM->http://www.cym.fr]
  	</auteur>
+	
+	<fonctions>preprod_fonctions.php</fonctions>
 
 	<pipeline>
 		<nom>insert_head</nom>

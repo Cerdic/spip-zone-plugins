@@ -11,5 +11,5 @@ $(document).ready(function() {
         pageSommaire = aClasse2.join("_");
     }
     $("#page").before( "<div id=\'preprod\' class=\'jour\'></div>" );
-    $("#preprod").html("Type de page : "+pageType+"<br />Composition : "+pageSommaire);
+    $("#preprod").html("Type de page : "+pageType+"<br />Composition : "+pageSommaire+"<br />Ajouter un ticket...");
 });
