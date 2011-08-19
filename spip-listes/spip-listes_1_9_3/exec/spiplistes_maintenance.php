@@ -239,7 +239,7 @@ function exec_spiplistes_maintenance () {
 	}
 
 	$page_result = ""
-		. "<br /><br /><br />\n"
+		. '<br class="debut-page" />'.PHP_EOL
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)

@@ -101,7 +101,7 @@ function exec_spiplistes_abonnes_tous () {
 	}
 	
 	$page_result = ''
-		. '<br /><br /><br />' . PHP_EOL
+		. '<br class="debut-page" />'.PHP_EOL
 		. spiplistes_gros_titre($titre_page, '', true)
 		. barre_onglets($rubrique, $sous_rubrique)
 		. debut_gauche($rubrique, true)
