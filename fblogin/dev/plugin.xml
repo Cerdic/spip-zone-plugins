@@ -15,7 +15,7 @@
 	<version>0.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<icon>images/facebook-64.png</icon>
+	<icon>images/fb-login-64.png</icon>
 	<description>
 		<multi>
 			[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur compte Facebook.

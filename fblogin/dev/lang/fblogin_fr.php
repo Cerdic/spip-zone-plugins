@@ -11,7 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_fblogin_info_manquantes' => 'Votre fournisseur fblogin ne nous a pas envoy&eacute; toutes les informations n&eacute;cessaires',
 	
 	// F
-	'form_login_fblogin' => 'Vous pouvez aussi utiliser un identifiant fblogin (<a href="http://www.fbloginfrance.fr/" target="_blank">aide</a>)',
+	'form_login_fblogin' => 'Vous pouvez aussi utiliser un identifiant fblogin (<a href="http://www.fbloginfrance.fr/" target="_blank" rel="external">aide</a>)',
 	'form_forum_indiquer_fblogin' => 'Vous pouvez vous inscrire sur ce site en indiquant un identifiant fblogin.',
 	'form_login_fblogin_ok' => 'Cet identifiant utilise fblogin.',
 	'form_login_fblogin_pass' => 'Utiliser un mot de passe',
