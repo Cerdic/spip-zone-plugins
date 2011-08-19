@@ -1,0 +1,28 @@
+<B_tickets>
+#PAGINATION
+<BOUCLE_tickets(TICKETS){!par date}{par projet, composant}{pagination 30}{severite?}{id_assigne?}{statut!='ferme'}{pagination #ENV{pagination}}>
+<div[(#STATUT|in_array{#ARRAY{0,resolu,1,ferme}}|oui) class="del"]>
+<h2>- <a href=''>##ID_TICKET</a> : <span class="#EDIT{titre}">#TITRE</span></h2>
+
+<ul class="tickets">
+    [<li>Par : <span class="#EDIT{id_auteur}">(#NOM_AUTEUR{#ID_AUTEUR}|sinon{'---'}) </span></li>]
+    <li>Assign&eacute &agrave; : <span class="#EDIT{id_assigne}">[(#NOM_AUTEUR{#ID_ASSIGNE}|sinon{'---'})</span>]</li>
+    <li>Projet/lot : <span class="#EDIT{projet}">[(#PROJET|sinon{'---'})</span>]</li>
+    <li>Composant/livrable : <span class="#EDIT{composant}">[(#COMPOSANT|sinon{'---'})</span>]</li>
+    <li>Url composant : <a href="#URL">---</a></li>
+    <li>Url ticket : <span class="#EDIT{exemple}"><a href="#EXEMPLE">[(#EXEMPLE|sinon{'---'})]</a> </span></li>
+    <li>Type de ticket : <span class="#EDIT{type}">[(#TYPE|tickets_texte_type)]</span></li>
+    <li>Sévérité : <img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] /><span class="#EDIT{severite}">[&nbsp;(#SEVERITE|tickets_texte_severite)]</span></li>
+    <li>Statut : <img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /><span class="#EDIT{statut}">[&nbsp;(#STATUT|tickets_texte_statut)]</span></li>
+    [<li class="#EDIT{version}">Version : (#VERSION)</li>]
+    [<li class="#EDIT{jalon}">Jalon : (#JALON)</li>]
+</ul>
+
+<br /><div class="#EDIT{texte}">#TEXTE</div>
+<br /><br />
+<INCLURE{fond=inclure/forum}{id_ticket} />
+
+</div>
+</BOUCLE_tickets>
+#PAGINATION
+</B_tickets>

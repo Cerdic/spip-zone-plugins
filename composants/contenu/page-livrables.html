@@ -1,0 +1,27 @@
+[(#SET{defaut_tri,#ARRAY{
+    composant,1,
+	projet,1,
+    titre,1
+}})
+]<B_livrables>
+#PAGINATION
+<table class="spip large">
+	<thead>
+    	<th>[(#TRI{id_ticket,Id,ajax})]</th>
+    	<th>[(#TRI{projet,Projet,ajax})]</th>
+        <th>[(#TRI{composant,Composant,ajax})]</th>
+        <th>[(#TRI{titre,Ticket,ajax})]</th>
+    </thead>
+    <tbody>
+	<BOUCLE_livrables(TICKETS){tous}{composant?}{projet?}{statut!='ferme'}{tri #ENV{order,projet},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
+    	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+        	<td>#ID_TICKET</td>
+            <td><span class="#EDIT{projet}">[(#PROJET|sinon{'---'})]</span></td>
+            <td><span class="#EDIT{composant}">[(#COMPOSANT|sinon{'---'})]</span></td>
+            <td><span class="#EDIT{titre}">[(#TITRE|sinon{'---'})]</span>[<div class="#EDIT{texte}">(#TEXTE)</div>]</td>
+        </tr>
+	</BOUCLE_livrables>
+    </tbody>
+</table>
+#PAGINATION
+</B_livrables>

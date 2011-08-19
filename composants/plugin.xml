@@ -20,6 +20,11 @@
     <fonctions>composants_fonctions.php</fonctions>
 
 	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>composants_pipelines.php</inclure>
+	</pipeline>
+	
+	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/composants.php</inclure>
 	</pipeline>
