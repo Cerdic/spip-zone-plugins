@@ -3,6 +3,7 @@
 // $LastChangedBy: paladin@quesaco.org $
 // $LastChangedDate: 2008-06-21 13:45:14 +0200 (sam., 21 juin 2008) $
 */
+br.debut-page {margin-top:2em}
 .spiplistes fieldset { border:1px solid black; }
 .spiplistes .message-alerte { color:red; font-weight:bold; }
 .spiplistes .spip-alert {}
