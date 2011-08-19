@@ -10,7 +10,7 @@ function skiplink_affichage_final(&$page) {
 
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
 	$recherche_existe = (preg_match(',<input.*?name[ ]*=[ ]*"recherche".*?>,i', $page) == 1 ? 'oui' : 'non');
-	$skiplinks = recuperer_fond('inclure/skiplinks', array('lang'=>$GLOBALS['spip_lang'], 'recherche'=>$recherche_existe));
+	$skiplinks = recuperer_fond('go/skiplinks', array('lang'=>$GLOBALS['spip_lang'], 'recherche'=>$recherche_existe));
 	preg_match(',<body\b.*?>,i', $page, $regs);
   
 	if ($regs)
