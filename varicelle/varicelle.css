@@ -11,7 +11,7 @@ et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-butto
 
 .submit { position: relative; display: inline-block; width: auto; padding: 5px 1em 6px; overflow: visible; cursor: pointer;
 background: #888 url("img/varicelle-sprite.png") left top repeat-x; box-shadow: 0 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-border: 0; border-bottom: 1px solid rgba(0,0,0,0.25); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+border: 0; border-bottom: 1px solid rgba(0,0,0,0.25); -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
 font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
 * html .submit { background-image: none; border: none; color: #FFF !important; } /*IE6*/
 .submit,.submit:visited,.submit * { color: #FFF; text-decoration: none; }
@@ -26,7 +26,7 @@ font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba
 /* tailles */
 .small.submit { font-size: .9em; padding: 4px 1em; }
 .big.submit { font-size: 1.2em; padding: 8px 1em 9px; }
-.super.submit { font-size: 2em; padding: 8px 1em 9px; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
+.super.submit { font-size: 2em; padding: 8px 1em 9px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
 
 /* couleurs */
 .pink.submit { background-color: #e22092; }
