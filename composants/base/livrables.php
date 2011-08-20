@@ -25,34 +25,33 @@ function livrables_declarer_tables_interfaces($interface){
 function livrables_declarer_tables_principales($tables_principales){
 	$spip_livrables = array(
 		"id_livrable" 	=> "bigint(21) NOT NULL",
+		"url"			=> "text DEFAULT '' NOT NULL",
 		"titre" 		=> "varchar(255) DEFAULT '' NOT NULL",
 		"descriptif" 	=> "longtext DEFAULT '' NOT NULL",
-		"url"			=> "text DEFAULT '' NOT NULL",
 		"maj" 			=> "TIMESTAMP");
 	
 	$spip_livrables_key = array(
 		"PRIMARY KEY" => "id_livrable",
 		"KEY url" => "url");
 	
-	$tables_principales['spip_livrables'] = array(
-		'field' => &$spip_livrables,
-		'key' => &$spip_livrables_key);
+	$tables_principales['spip_livrables'] = 
+		array('field' => &$spip_livrables, 'key' => &$spip_livrables_key);
 		
 	return $tables_principales;
 }
 
 function livrables_declarer_tables_auxiliaires($tables_auxiliaires){
-    $livrables_liens = array(
+    $spip_livrables_liens = array(
         "id_livrable"	=> "BIGINT(21) NOT NULL",
         "id_objet"   	=> "BIGINT(21) NOT NULL",
         "objet"      	=> "VARCHAR(25) NOT NULL",
     );
-    $livrables_liens_key = array(
+    $spip_livrables_liens_key = array(
         "PRIMARY KEY"    => "id_livrable, id_objet, objet",
 		"KEY id_livrable" => "id_livrable"
     );
-	$tables_auxiliaires['livrables_liens'] =
-		array('field' => &$livrables_liens, 'key' => &$livrables_liens_key);
+	$tables_auxiliaires['spip_livrables_liens'] =
+		array('field' => &$spip_livrables_liens, 'key' => &$spip_livrables_liens_key);
 
 	return $tables_auxiliaires;
 }
