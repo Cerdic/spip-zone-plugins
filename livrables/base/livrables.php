@@ -17,7 +17,7 @@ function livrables_declarer_tables_interfaces($interface){
 	
 	//-- Table des tables ----------------------------------------------------
 	
-	$interface['table_des_tables']['livrables']='livrables';
+	$interface['table_des_tables']['livrables'] = 'livrables';
 
 	return $interface;
 }
@@ -25,14 +25,16 @@ function livrables_declarer_tables_interfaces($interface){
 function livrables_declarer_tables_principales($tables_principales){
 	$spip_livrables = array(
 		"id_livrable" 	=> "bigint(21) NOT NULL",
-		"url"			=> "text DEFAULT '' NOT NULL",
+		"url"			=> "varchar(255) DEFAULT '' NOT NULL",
 		"titre" 		=> "varchar(255) DEFAULT '' NOT NULL",
 		"descriptif" 	=> "longtext DEFAULT '' NOT NULL",
-		"maj" 			=> "TIMESTAMP");
+		"maj" 			=> "TIMESTAMP"
+	);
 	
 	$spip_livrables_key = array(
 		"PRIMARY KEY" => "id_livrable",
-		"KEY url" => "url");
+		"KEY url" => "url"
+	);
 	
 	$tables_principales['spip_livrables'] = 
 		array('field' => &$spip_livrables, 'key' => &$spip_livrables_key);

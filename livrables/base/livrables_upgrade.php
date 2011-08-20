@@ -40,8 +40,8 @@ function livrables_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_livrables_liens");
 	effacer_meta('livrables');
 	effacer_meta($nom_meta_base_version);
-}
-function composants_vider_tables($nom_meta_base_version) {
+
+	// en attendant... 
 	sql_drop_table("spip_composants");
 	sql_drop_table("spip_composants_projets");
 	effacer_meta('composants');
