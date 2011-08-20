@@ -1,58 +1,58 @@
 <?php
 
 /*
- * Plugin Composants
+ * Plugin Livrables
  * Licence GPL (c) 2011 Cyril Marion
  *
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function composants_declarer_tables_interfaces($interface){
+function livrables_declarer_tables_interfaces($interface){
 	/**
 	 * Futures jointures avec projets
 	 *
-	$interface['tables_jointures']['spip_composants'][] = 'composants_liens';
-	$interface['tables_jointures']['spip_projets'][] = 'composants_liens';
+	$interface['tables_jointures']['spip_livrables'][] = 'livrables_liens';
+	$interface['tables_jointures']['spip_projets'][] = 'livrables_liens';
 	 **/
 	
 	//-- Table des tables ----------------------------------------------------
 	
-	$interface['table_des_tables']['composants']='composants';
+	$interface['table_des_tables']['livrables']='livrables';
 
 	return $interface;
 }
 
-function composants_declarer_tables_principales($tables_principales){
-	$spip_composants = array(
-		"id_composant" 	=> "bigint(21) NOT NULL",
+function livrables_declarer_tables_principales($tables_principales){
+	$spip_livrables = array(
+		"id_livrable" 	=> "bigint(21) NOT NULL",
 		"titre" 		=> "varchar(255) DEFAULT '' NOT NULL",
 		"descriptif" 	=> "longtext DEFAULT '' NOT NULL",
 		"url"			=> "text DEFAULT '' NOT NULL",
 		"maj" 			=> "TIMESTAMP");
 	
-	$spip_composants_key = array(
-		"PRIMARY KEY" => "id_composant",
+	$spip_livrables_key = array(
+		"PRIMARY KEY" => "id_livrable",
 		"KEY url" => "url");
 	
-	$tables_principales['spip_composants'] = array(
-		'field' => &$spip_composants,
-		'key' => &$spip_composants_key);
+	$tables_principales['spip_livrables'] = array(
+		'field' => &$spip_livrables,
+		'key' => &$spip_livrables_key);
 		
 	return $tables_principales;
 }
 
-function composants_declarer_tables_auxiliaires($tables_auxiliaires){
-    $composants_liens = array(
-        "id_composant"	=> "BIGINT(21) NOT NULL",
+function livrables_declarer_tables_auxiliaires($tables_auxiliaires){
+    $livrables_liens = array(
+        "id_livrable"	=> "BIGINT(21) NOT NULL",
         "id_objet"   	=> "BIGINT(21) NOT NULL",
         "objet"      	=> "VARCHAR(25) NOT NULL",
     );
-    $composants_liens_key = array(
-        "PRIMARY KEY"    => "id_composant, id_objet, objet",
-		"KEY id_organisation" => "id_composant"
+    $livrables_liens_key = array(
+        "PRIMARY KEY"    => "id_livrable, id_objet, objet",
+		"KEY id_livrable" => "id_livrable"
     );
-	$tables_auxiliaires['spip_composants_liens'] =
-		array('field' => &$composants_liens, 'key' => &$composants_liens_key);
+	$tables_auxiliaires['livrables_liens'] =
+		array('field' => &$livrables_liens, 'key' => &$livrables_liens_key);
 
 	return $tables_auxiliaires;
 }
