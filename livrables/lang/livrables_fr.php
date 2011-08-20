@@ -10,6 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'item_mots_cles_association_composant' => 'aux composants d\'un projet',
 	'item_mots_cles_association_livrables' => 'aux livrables d\'un projet',
+	'action' => 'Action',
 	
 	// C
 	'composant' => 'Composant',
@@ -22,6 +23,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_les_livrables' => 'Tous les livrables',
 	
 	// L
+	'label_descriptif' => 'Descriptif du livrable',
+	'label_livrable' => 'ID',
+	'label_projet' => 'Projet',
+	'label_titre' => 'Titre du livrable',
+	'label_url'	=> 'Adresse du livrable',
 	'livrable' => 'Livrable',
 	'livrables' => 'Livrables',
 	
@@ -34,6 +40,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// S
 	'supprimer' => 'Supprimer ce livrable',
+	
+	// T
+	
+	// U
 	
 	// V
 	'voir_composant' => 'D&eacute;tails',

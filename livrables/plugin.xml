@@ -2,7 +2,7 @@
 	<nom>Livrables</nom>
 	<auteur>Cyril Marion</auteur>
 	<licence>&#169; 2011 GPL</licence>
-	<version>0.1.2</version>
+	<version>0.1.3</version>
 	<version_base>0.1</version_base>
 	<install>base/livrables_upgrade.php</install>
 
@@ -52,13 +52,12 @@
 		<inclure>livrables_pipelines.php</inclure>
 	</pipeline>
 
-	<bouton id='livrables21' parent='bando_squelette'> 
+	<bouton id='livrables21' parent='bando_publication'> 
 			<url>livrables</url> 
 			<icone>images/composants-16.png</icone> 
 			<titre>livrables:nom_bouton_plugin</titre> 
 	</bouton> 
 	
-
 	<necessite id="SPIP" version="[2.1.0;]" />
 
 	<categorie>outils</categorie>

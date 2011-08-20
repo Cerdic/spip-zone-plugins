@@ -26,6 +26,11 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('spip_livrables');
 			ecrire_meta($nom_meta_base_version,$current_version="0.2");
 		}
+		// ajout d'un champ "id_projet"
+		if (version_compare($current_version,"0.3","<")){
+			maj_tables('spip_livrables');
+			ecrire_meta($nom_meta_base_version,$current_version="0.3");
+		}
 
 	}
 }
