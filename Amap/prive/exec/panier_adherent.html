@@ -1,0 +1,12 @@
+<!--#navigation-->
+<div class="cadre-r amap-nav">
+<ul>
+	<li class="subMenu"><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]" title="<:amap:retour_auteur:>"><:amap:retour_auteur:></a></li>
+</ul>
+</div>
+<!--/#navigation-->
+<BOUCLE_aut(AUTEURS){id_auteur}{tous}><h1><:amap:les_paniers:> #NOM</h1></BOUCLE_aut>
+
+<div class="cadre cadre-r">
+	<INCLURE{fond=prive/inclure/liste_panier_adherent}{id_auteur}>
+</div>

@@ -1,0 +1,48 @@
+#CACHE{0}
+<div class='formulaire_spip formulaire_amap formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_amap_panier,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form method='post' action='#ENV{action}'><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<input type='hidden' name='id_amap_panier' value='#ENV{id_amap_panier}' />
+		<ul>
+			[(#SAISIE{auteurs,id_auteur, label=<:amap:nom:>, obligatoire=oui, option_statut=oui, defaut=#SESSION{id_auteur}})]
+			<li class="editer editer_date_distribution obligatoire saisie_checkbox">
+				<label for="champ_date_distribution"><:amap:date_distribution:> <span class='obligatoire'><:info_obligatoire_02:></span></label>
+				[<span class='erreur_message'>(#GET{erreurs})</span>]
+				<BOUCLE_evenement(EVENEMENTS){tous}>
+					#SET{details, #ARRAY}
+					<BOUCLE_evenement_details(EVENEMENTS){par id_evenement}{age<0}>
+						[(#SET_PUSH{details, [(#ARRAY{ date_debut, #DATE_DEBUT, })]})]
+					</BOUCLE_evenement_details>
+					#SET{evenement, #ARRAY{details, #GET{details}}}
+				</BOUCLE_evenement>
+				#SET{evenement,#ENV{evenement}}
+				<//B_evenement>
+
+				<table border="0" width="100%">
+				<BOUCLE_test(CONDITION){si #GET{evenement}|et{#GET{evenement}|is_array}}>
+					<BOUCLE_details(POUR){tableau #GET{evenement}|table_valeur{details}}>
+						[(#COMPTEUR_BOUCLE|alterner{'<tr>',''})]
+							<td>
+								<div class="choix">
+									<input type="checkbox" name="date_distribution[]" class="checkbox" id="champ_date_distribution_#COMPTEUR_BOUCLE"
+										value="[(#VALEUR|table_valeur{date_debut})]"
+										[(#ENV{date_distribution}|=={#VALEUR|table_valeur{date_debut}}|oui) checked="checked"]
+										[(#ENV{date_distribution}|oui) disabled="disabled"]
+									/>
+									<label for="champ_date_distribution_#COMPTEUR_BOUCLE">[(#VALEUR|table_valeur{date_debut}|affdate{'d/m/Y'})]</label>
+								</div>
+							</td>
+						[(#COMPTEUR_BOUCLE|alterner{'','</tr>'})]
+					</BOUCLE_details>
+					[(#TOTAL_BOUCLE|alterner{'</tr>', ''})]
+				</BOUCLE_test>
+				</table>
+			</li>
+		</ul>
+	<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+</div>

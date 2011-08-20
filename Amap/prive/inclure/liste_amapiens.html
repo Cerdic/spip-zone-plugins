@@ -1,0 +1,31 @@
+<B_auteurs>
+[<p class="pagination">(#PAGINATION)</p>]
+<table class="amap spip">
+	<thead>
+	<tr>
+		<th></th>
+		<th>[(#TRI{nom,<:nom:>})]</th>
+		<th>[(#TRI{adhesion,<:amap:adhesion:>})]</th>
+		<th>[(#TRI{type_panier,<:amap:type_panier:>})]</th>
+	</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_auteurs(AUTEURS) {tri nom} {tous} {pagination 20}>
+	<tr>
+		<td>
+			[(#STATUT|=={'6forum'}|oui)<img src="#CHEMIN{prive/images/visit-12.gif}" alt="<:amap:visiteur:>">]
+			[(#STATUT|=={'1comite'}|oui)<img src="#CHEMIN{prive/images/redac-12.gif}" alt="<:auteur:>">]
+			[(#STATUT|=={'0minirezo'}|oui)<img src="#CHEMIN{prive/images/admin-12.gif}" alt="<:amap:administrateur:>">]
+		</td>
+		<td><a href="[(#URL_ECRIRE{auteur_infos}|parametre_url{id_auteur,#ID_AUTEUR})]">#NOM</a></td>
+		<td>#ADHESION</td>
+		<td>
+			[(#TYPE_PANIER|=={'petit'}|oui)<:amap:petit:>]
+			[(#TYPE_PANIER|=={'grand'}|oui)<:amap:grand:>]
+		</td>
+	</tr>
+	</BOUCLE_auteurs>
+	</tbody>
+</table>
+[<p class="pagination">(#PAGINATION)</p>]
+</B_auteurs>

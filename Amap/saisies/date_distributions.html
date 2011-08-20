@@ -1,0 +1,9 @@
+<B_date>
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+	<BOUCLE_date(EVENEMENTS){!par date_debut}{age>0}>
+		<option value="#DATE_DEBUT">[(#DATE_DEBUT|affdate{'d/m/Y'})]</option>
+	</BOUCLE_date>
+</select>
+</B_date>
+<:amap:pas_date_distributions:>
+<//B_date>

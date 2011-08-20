@@ -1,33 +1,33 @@
 <plugin>
 	<nom>Plugin AMAP pour Spip 2</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
-	<version>2.0.4</version>
-	<version_base>0.7</version_base>
+	<version>2.1.0</version>
+	<version_base>0.8</version_base>
 
-	<licence>Distribu&eacute; sous licence GNU/GPL</licence>
+	<licence>GNU/GPL</licence>
 	<etat>dev</etat>
 
     <description>
-	Ce plugin active ou d&eacute;sactive le module AMAP (qui permet de g&eacute;rer aux mieux une Association de Maintien de l'Agriculture Paysanne).
+		Plugin de gestion des paniers et adh&eacute;rents pour les AMAP (Association pour le Maintien de l'Agriculture Paysanne).
     </description>
 
 	<prefix>amap</prefix>
 
-	<icon>img_pack/amapconfig-24.gif</icon>
-	<lien>[Documentation->http://www.spip-contrib.net/Plugin-AMAP-Version-2]</lien>
+	<icon>prive/themes/spip/images/amapconfig-24.gif</icon>
+	<lien>http://www.spip-contrib.net/Plugin-AMAP-Version-2</lien>
 
 	<install>base/amap_installation.php</install>
 	<options>amap_options.php</options>
 	
-	<bouton id='amap' parent='configuration'>
-		<icone>img_pack/amapconfig-24.gif</icone>
+	<bouton id="amap" parent="configuration">
+		<icone>prive/themes/spip/images/amapconfig-24.gif</icone>
 		<titre>amap:gestion_amap</titre>
-		<url>annuaire</url>
+		<url>mini_doc</url>
 	</bouton>
 	<bouton id="amap_bandeau" parent="bando_configuration">
-		<icone>images/amapconfig-12.gif</icone>
+		<icone>images/amapconfig-16.gif</icone>
 		<titre>amap:gestion_amap</titre>
-		<url>annuaire</url>
+		<url>mini_doc</url>
 	</bouton>
 
 	<pipeline>
@@ -43,22 +43,18 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/amap_tables.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>config_motsclefs</nom>
-		<inclure>base/amap_tables.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>config_site</nom>
-		<inclure>base/amap_tables.php</inclure>
-	</pipeline>
+	<!-- Champs Extra -->
 	<pipeline>
 		<nom>declarer_champs_extras</nom>
 		<inclure>base/amap_tables.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.0.0;]' />
+
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="agenda" version="[2.2.1;]" />
 	<necessite id="cextras" version="[1.9;]" />
-	<necessite id="facteur" version='[1.6.2;]' />
-	<necessite id="saisies" version='[1.7.7;]' />
-	<necessite id="verifier" version='[0.1;]' />
+	<necessite id="facteur" version="[1.6.2;]" />
+	<necessite id="saisies" version="[1.7.7;]" />
+	<necessite id="verifier" version="[0.1;]" />
+	<utilise id="z" version="[1.5.1;]" />
 	<categorie>divers</categorie>
 </plugin>

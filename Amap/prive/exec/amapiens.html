@@ -1,0 +1,20 @@
+<!--#navigation-->
+<div class="cadre-r amap-nav">
+<ul>
+	<li class="subMenu"><a href="[(#URL_ECRIRE{amapiens}|parametre_url{tri_auteurs,id_auteur})]" class="page_accueil on" title="<:amap:liste_amapiens:>"><:amap:liste_amapiens:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{panier_liste}" class="page_accueil" title="<:amap:liste_paniers:>"><:amap:liste_paniers:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{impression}" class="page_accueil" title="<:amap:impression:>"><:amap:impression:></a></li>
+</ul>
+</div>
+<!--/#navigation-->
+<h1><:amap:liste_amapiens_enregistres:></h1>
+
+<div class="cadre cadre-trait-couleur">
+	<div class="titrem impliable">
+		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
+		<:amap:liste_amapiens_enregistres:>
+	</div>
+	<div class="cadre_padding">
+		<INCLURE{fond=prive/inclure/liste_amapiens,env,ajax}>
+	</div>
+</div>

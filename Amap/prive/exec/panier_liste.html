@@ -1,23 +1,34 @@
 <!--#navigation-->
 <div class="cadre-r amap-nav">
 <ul>
-	<li class="subMenu"><a href="#URL_ECRIRE{panier_enregistre}" class="page_accueil" title="<:amap:panier_enregistrement:>"><:amap:panier_enregistrement:></a></li>
-	<li class="subMenu"><a href="#URL_ECRIRE{panier_liste}" class="options on" title="<:amap:panier_liste:>"><:amap:panier_liste:></a></li>
-	<li class="subMenu"><a href="#URL_ECRIRE{panier_livraison}" class="options" title="<:amap:panier_livraison:>"><:amap:panier_livraison:></a></li>
+	<li class="subMenu"><a href="[(#URL_ECRIRE{amapiens}|parametre_url{tri_auteurs,id_auteur})]" class="page_accueil" title="<:amap:liste_amapiens:>"><:amap:liste_amapiens:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{panier_liste}" class="page_accueil on" title="<:amap:liste_paniers:>"><:amap:liste_paniers:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{panier_enregistre}" class="options" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{panier_livraison}" class="options" title="<:amap:livraison:>"><:amap:livraison:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{impression}" class="page_accueil" title="<:amap:impression:>"><:amap:impression:></a></li>
 </ul>
 </div>
 <!--/#navigation-->
 
 <h1><:amap:panier_liste:></h1>
 
-<INCLURE{fond=prive/entete/paniers}>
-
-<INCLURE{fond=prive/inc/attention}>
-
 <div class="cadre cadre-trait-couleur">
 	<div class="titrem impliable">
 		<img width="24" height="24" class="cadre-icone" alt="" src="#CHEMIN{img_pack/tabledata.gif}">
 		<:amap:panier_liste:>
+	</div>
+	<div class="cadre_padding">
+	    <p style="text-align: justify;">
+	    <B_totalpanier>
+		<BOUCLE_totalpanier(AMAP_PANIERS){age<0} />
+			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
+		<//B_totalpanier>
+		<:amap:avant_le:>
+		<BOUCLE_evenementfin(EVENEMENTS){!par id_evenement}{age<0}{0,1}>
+			[(#DATE_DEBUT|affdate{'d/m/Y'}).]
+		</BOUCLE_evenementfin>
+		<B_totalpanier>
+	    </p>
 	</div>
 	<div class="cadre_padding">
 		<INCLURE{fond=prive/inclure/liste_paniers}>

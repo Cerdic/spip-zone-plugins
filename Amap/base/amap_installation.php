@@ -14,14 +14,11 @@ include_spip('inc/cextras_gerer');
 function amap_upgrade($nom_meta_version_base, $version_cible){
 	$current_version = 0.0;
 		if ((!isset($GLOBALS['meta'][$nom_meta_version_base])) || (($current_version = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)){
-		if (version_compare($current_version,'0.3','<=')){
+		if (version_compare($current_version,'0.7','<=')){
 			// Creation des tables
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
 			creer_base();
-			// Changement de la config des metas et creation mot clef
-			amap_config_site();
-			amap_config_motsclefs();
 			// Creation des champs extras
 			amap_declarer_champs_extras();
 			sql_alter("TABLE spip_auteurs ADD adhesion text NULL");
@@ -32,51 +29,16 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 				create_rubrique("001. Distribution", $id_rubrique);
 				create_rubrique("002. Événements", $id_rubrique);
 			}
-			spip_log("Amap s'installe V0.3", "amap_installation");
+			create_rubrique("001. Archives", "0");
+			spip_log("Amap s'installe V0.7", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
-		if (version_compare($current_version,'0.4','<')){
-			// On supprime la table personne
-			sql_drop_table("spip_amap_banques");
-			sql_drop_table("spip_amap_paniers");
-			spip_log("Suppression des table banques et paniers V0.4", "amap_installation");
-			}
-		if (version_compare($current_version,'0.5','<')) {
-			create_rubrique("000. Agenda de la saison", "0");
-			$id_rubrique = id_rubrique("000. Agenda de la saison");
-			if ($id_rubrique >0) {
-				create_rubrique("001. Distribution", $id_rubrique);
-				create_rubrique("002. Événements", $id_rubrique);
-			}
-			sql_alter("TABLE spip_auteurs ADD type_panier text NULL");
-			spip_log("Création de rubrique et champ extra type_panier V0.5", "amap_installation");                
-			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
-			}
-		if (version_compare($current_version,'0.6','<')) {
-			sql_alter("TABLE spip_paniers DROP type_panier");
-			sql_alter("TABLE spip_paniers DROP email");
-			sql_alter("TABLE spip_paniers CHANGE date_distribution date_distribution datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
-			sql_alter("TABLE spip_paniers CHANGE nom nom text NOT NULL");
-			sql_alter("TABLE spip_paniers CHANGE prenom prenom text NOT NULL");
-			spip_log("Modification de la colonne date_distribution V0.6", "amap_installation");                
-			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
-			}
-		if (version_compare($current_version,'0.7','<')) {
-			sql_drop_table("spip_amap_contrats");
-			sql_drop_table("spip_amap_evenements");
-			sql_drop_table("spip_amap_famille_varietes");
-			sql_drop_table("spip_amap_lieux");
-			sql_drop_table("spip_amap_participation_sorties");
-			sql_drop_table("spip_amap_prix");
-			sql_drop_table("spip_amap_produits");
-			sql_drop_table("spip_amap_produits_distributions");
-			sql_drop_table("spip_amap_reglements");
-			sql_drop_table("spip_amap_saisons");
-			sql_drop_table("spip_amap_sorties");
-			sql_drop_table("spip_amap_types_contrats");
-			sql_drop_table("spip_amap_vacances");
-			sql_drop_table("spip_amap_varietes");
-			spip_log("Modification de la colonne date_distribution V0.6", "amap_installation");                
+		if (version_compare($current_version,'0.8','<')) {
+			maj_tables("spip_amap_livraisons");
+			maj_tables("spip_amap_paniers");
+			sql_drop_table('spip_paniers');
+			create_rubrique("001. Archives", "0");
+			spip_log("Creation de la table amap_livraisons et amap_paniers V0.8", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
 		}
@@ -85,12 +47,11 @@ function amap_vider_tables($nom_meta_version_base){
 	//supprimer toutes les tables
 	include_spip('inc/meta');
 	include_spip('base/abstract_sql');
-	sql_drop_table('spip_paniers');
+	sql_drop_table('spip_amap_livraisons');
+	sql_drop_table('spip_amap_paniers');
 	//suppression des champs supplementaire
 	$champs = amap_declarer_champs_extras();
 	desinstaller_champs_extras($champs, $nom_meta_base_version);
-	//supprimer les mots clef
-	vider_groupe("_Amap_config");
 	effacer_meta($nom_meta_version_base);
 }
 ?>

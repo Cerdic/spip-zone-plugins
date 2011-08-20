@@ -26,30 +26,23 @@
 /*  ------------------------------------------ */
 
 /*  Changement sur la colonne de navigation  */
-#navigation .amap-nav {margin-top:135px}
-#navigation .amap-nav ul {padding: 0}
+#navigation .amap-nav { margin-top:78px }
+#navigation .amap-nav ul { padding: 0 }
 
 /*  Images de la colonne de navigation  */
 a.page_accueil {
-	background:url(#CHEMIN{img_pack/page_accueil.png}) no-repeat;
+	background:url(#CHEMIN{prive/themes/spip/images/page_accueil.png}) no-repeat;
 	width:22px;
 	height:22px;
 	padding:0px 0px 10px 30px;
 	margin-left:5px;
 	}	
 a.options {
-	background:url(#CHEMIN{img_pack/options.png}) no-repeat;
+	background:url(#CHEMIN{prive/themes/spip/images/options.png}) no-repeat;
 	width:22px;
 	height:22px;
 	padding:0px 0px 10px 30px;
-	margin-left:5px;
-	}
-a.themes {
-	background:url(#CHEMIN{img_pack/themes.png}) no-repeat;
-	width:22px;
-	height:22px;
-	padding:0px 0px 10px 30px;
-	margin-left:5px;
+	margin-left:30px;
 	}
 
 li.subMenu {
@@ -63,8 +56,9 @@ li {
 	list-style-type:none;
 	padding-left:10px
 	}
-
-.onglet_off a {color: #ffffff}
+div.titrem {
+    padding: 4px 10px 4px 38px;
+}
 
 /*  ------------------------------------------
 /*  Surcharge formulaire_spip
@@ -73,8 +67,19 @@ li {
 .formulaire_amap input.password,
 .formulaire_amap textarea,
 .formulaire_amap select
-{
-	width:auto;
-	}
+{ width:auto; }
+
+/*  ------------------------------------------
+/*  Page auteur prive
+/*  ------------------------------------------ */
+#auteur_infos_voir .adhesion,
+#auteur_infos_voir .type_panier
+{margin-top:10px; }
+
+/*  ------------------------------------------
+/*  Page impression
+/*  ------------------------------------------ */
+.impression td.center {text-align:center; }
+.impression ul {padding:0}
 
 [(#REM)</style>]
