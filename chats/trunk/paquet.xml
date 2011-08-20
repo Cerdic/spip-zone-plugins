@@ -1,0 +1,34 @@
+<paquet
+	prefix="chats"
+	categorie="edition"
+	version="2.0.0"
+	etat="stable"
+	compatibilite="[3.0.0-alpha2;["
+	logo="prive/themes/spip/images/chat-128.png"
+	schema="1.2.0"
+	documentation="http://marcimat.magraine.net/?article356"
+>	
+
+	<nom>Chats (Plugin d'exemple)</nom>
+	<!-- Gestion des chats dans SPIP -->
+
+	<auteur lien="http://magraine.net/">Matthieu Marcillaud</auteur>
+	<licence>GNU/GPL</licence>
+		
+	<credit lien="http://www.yootheme.com/icons">Logo de YOOtheme</credit>
+
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/chats.php" />
+	<pipeline nom="declarer_tables_interfaces" inclure="base/chats.php" />
+	<pipeline nom="affiche_enfants" inclure="chats_pipelines.php" />
+
+	<!-- facilitons les champs de formulaires -->
+	<necessite nom="saisies" compatibilite="[1.14.0;]" />
+
+
+	<menu nom="chats" titre="chat:titre_chats" parent="menu_edition" icone="images/chat-16.png" />
+	<menu nom="chat_creer" titre="chat:icone_creer_chat" parent="outils_rapides" icone="images/chat-new-16.png" action="chat_edit" parametres="new=oui" />
+
+</paquet>
+
+

@@ -1,0 +1,29 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_chat,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_chat' value='#ENV{id_chat}' />
+		<ul>
+			[(#SAISIE{input, nom, label=<:chat:label_nom:>})]
+			
+			[<li class="editer editer_rubrique[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">
+					<label for="id_parent"><:titre_cadre_interieur_rubrique:></label>[
+					<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{id_parent})</span>
+					]
+					(#VAL|chercher_rubrique{#ENV{id_chat},#ENV{id_parent},'chat',#ENV{id_secteur},'',0,form_simple})
+			</li>]
+	    
+			[(#SAISIE{input, race, label=<:chat:label_race:>})]
+			[(#SAISIE{input, robe, label=<:chat:label_robe:>})]
+			[(#SAISIE{textarea, infos, label=<:chat:label_infos:>})]
+
+		</ul>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+	</div></form>
+	]
+</div>

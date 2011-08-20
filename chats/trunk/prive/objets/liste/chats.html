@@ -1,0 +1,39 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	date,#ENV{date_sens,-1},
+	id_chat,1
+}})
+]<B_liste_chats>
+#ANCRE_PAGINATION
+<div class="liste-objets chats">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chat:info_1_chat,chat:info_nb_chats}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:chat:label_nom:>,ajax})]</th>
+			<th class='langue' scope='col'></th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th>
+			<th class='id' scope='col'>[(#TRI{id_chat,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_chats(CHATS){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#CHEMIN_IMAGE{chat-16.png}|balise_img)]</td>
+			<td class='nom principale'>[(#LOGO_CHAT|image_reduire{20,26})]<a href="[(#ID_CHAT|generer_url_entite{chat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_RUBRIQUE">[(#RANG). ]#NOM</a></td>
+			<td class='langue'></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td>
+			<td class='id'>[(#AUTORISER{modifier,chat,#ID_CHAT}|?{
+				<a href="[(#URL_ECRIRE{chats_edit,id_chat=#ID_CHAT})]">#ID_CHAT</a>,
+				#ID_CHAT
+			})]</td>
+		</tr>
+	</BOUCLE_liste_chats>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_chats>[
+<div class="liste-objets chats caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_chats>
