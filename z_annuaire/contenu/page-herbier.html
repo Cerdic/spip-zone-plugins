@@ -1,0 +1,26 @@
+[(#REM) Fil d'Ariane ]
+<p id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><span class="sep"> &gt; </span><strong class="on"><:annuaire:annuaire_herbier:></strong></p>
+
+<div class="contenu-principal">
+<div class="cartouche">
+	<h1 class="h1"><:annuaire:annuaire_herbier:></h1>
+</div>
+
+	[(#REM) Contenu principal : affichage du site ]
+		[(#REM) Sur le Web ]
+		<h2 class="h2"><:nouveautes_web:></h2>
+		<B_syndic>
+		<fieldset>
+		<div class="menu">
+            #ANCRE_PAGINATION
+			<ul>
+				<BOUCLE_syndic(SYNDIC_ARTICLES) {age_relatif<180} {par date}{inverse} {pagination #CONFIG{annuaire_herbier/pas_pagination_herbier, 10}}>
+				<li>[(#DATE|affdate_jourcourt) &ndash; ]<a href="#URL_ARTICLE"[ title="(#NOM_SITE|attribut_html|couper{80})"] class="spip_out">#TITRE - (#NOM_SITE)</a></li>
+				</BOUCLE_syndic>
+			</ul>
+            [<p id="pagination">(#PAGINATION{page_precedent_suivant})</p>]
+			[<:annuaire:rss_contient:>(#GRAND_TOTAL{pagination #CONFIG{annuaire_herbier/pas_pagination_herbier, 10}}|singulier_ou_pluriel{annuaire:article,annuaire:articles}).]
+		</div><!--#menu-->
+		</B_syndic>
+		</fieldset>
+</div>

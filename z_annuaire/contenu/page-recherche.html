@@ -49,7 +49,6 @@
 			<BOUCLE_sites(SITES) {recherche} {!par points} {pagination #CONFIG{annuaire_recherche/pas_pagination_recherche, 5}}>
 			<li>
 				<a href="[(#ID_SYNDIC|generer_url_entite{site,'','',#CONNECT})]">#NOM_SITE</a>
-				<BOUCLE_logo(MOTS){id_syndic} {'  '}>[(#LOGO_MOT||inserer_attribut{title, #TITRE|supprimer_numero}|inserer_attribut{alt, #TITRE|supprimer_numero})]</BOUCLE_logo>
 				#FORMULAIRE_NOTATION<p />
 			</li>
 			</BOUCLE_sites>

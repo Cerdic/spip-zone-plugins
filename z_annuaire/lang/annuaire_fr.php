@@ -34,6 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'annuaire_colonne' => 'Colonne et pied',
 	'annuaire_contact' => 'Page contact',
 	'annuaire_general' => 'Généralités',
+	'annuaire_herbier' => 'Herbier',
 	'annuaire_gratuit' => 'Annuaire gratuit de liens en dur',
 	'annuaire_herbier' => 'Page herbier',
 	'annuaire_menu' => 'Menu du site',
@@ -155,6 +156,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // R
 	'resultats' => 'Résultats dans les boucles',
 	'rss' => 'Nombres d\'articles syndiqué par page.',
+	'rss_contient' => 'Le flux RSS contient ',
 
 // S
 	'style' => 'Style :',
