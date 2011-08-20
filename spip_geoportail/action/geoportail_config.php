@@ -54,6 +54,7 @@ function action_geoportail_config_dist()
 		// Modif le fournisseur par defaut
  		if (isset($_POST['provider']))
  		{	ecrire_meta('geoportail_provider',$_POST['defaut_provider']);
+ 			ecrire_meta('geoportail_zone',$_POST['zone']);
  			ecrire_metas();
  		}
 		// Type de popup

@@ -35,7 +35,7 @@ function geoportail_profil ($att, $filtre=null)
 	$profil['id_zone'] = $profil['zone'];
 	$zone = strtoupper($_GET['zone']);
 	if ($zone) $profil['zone'] = $zone;
-	else $profil['zone'] = 'FXX';
+//	else $profil['zone'] = 'FXX';
 	// OK
 	return $profil[$att];
 }
@@ -44,7 +44,8 @@ function geoportail_profil ($att, $filtre=null)
 	Profil par defaut (FXX)
 */
 function geoportail_profil_par_defaut_dist()
-{	return array('zone'=>'FXX','lon'=>null,'lat'=>null,'echelle'=>null);
+{	$zone = $GLOBALS['meta']['geoportail_zone'];
+	return array('zone'=>$zone?$zone:'FXX', 'lon'=>null, 'lat'=>null, 'echelle'=>null);
 }
 
 ?>

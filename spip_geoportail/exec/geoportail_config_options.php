@@ -14,6 +14,7 @@
 
 include_spip('inc/presentation');
 include_spip('inc/config');
+include_spip('public/geoportail_boucles');
 
 function exec_geoportail_config_options()
 {	global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $couleur_claire;
@@ -66,7 +67,7 @@ function exec_geoportail_config_options()
 
 		/* Type d'objet a georef */
 		$form = debut_cadre_trait_couleur("administration-24.gif", true, "", _T('geoportail:options'))
-			.debut_cadre_relief("base-24.gif",true,"", _T('geoportail:geoportail_provider'))
+			.debut_cadre_relief("base-24.gif",true,"", _T('geoportail:geoportail_defaut'))
 				. _T('geoportail:geoprovider_info')."<br/>"
 				."<p>"
 				._T('geoportail:geoportail_provider')." : <select name='defaut_provider' class='fondl'>"
@@ -75,6 +76,9 @@ function exec_geoportail_config_options()
 				."<option value='GMAP'".($geoportail_provider=='GMAP'?" selected":"").">Google Maps</option>"
 				."<option value='YHOO'".($geoportail_provider=='YHOO'?" selected":"").">Yahoo !</option>"
 				."</select>"
+				."<br/>"
+				._T('geoportail:geoportail_zone')." : "
+				.geoportail_popup_zone('zone', $gzone, 'fondl')
 				."<input type='submit' name='provider' class='fondo' style='margin-left:1em;' value='"._T('bouton_valider')."' />"
 				."</p>"
 			.fin_cadre_relief(true)
