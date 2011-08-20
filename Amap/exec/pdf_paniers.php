@@ -12,7 +12,8 @@ function exec_pdf_paniers(){
 
 	$pdf=new PDF();
 	$date_distribution = $_GET["date_distribution"];
-	$pdf->titre = _T('amap:distribution_paniers', array('nb'=>$date_distribution));
+	$pdf->titre = _T('amap:distribution_paniers', array('nb'=>date('d/m/Y',mktime( substr($date_distribution,11,2), substr($date_distribution,14,2),
+			substr($date_distribution,17,2), substr($date_distribution,5,2), substr($date_distribution,8,2), substr($date_distribution,0,4)))));
 	$pdf->Open();
 	$pdf->AddPage();
 	//On definit les colonnes (champs,largeur,intitule,alignement)
