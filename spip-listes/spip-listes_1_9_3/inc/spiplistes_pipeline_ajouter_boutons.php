@@ -1,7 +1,7 @@
 <?php
 /**
  * Nota: plugin.xml en cache.
-		si modif plugin.xml, il faut parfois réactiver le plugin (config/plugin: désactiver/activer)
+		si modif plugin.xml, il faut parfois rÃ©activer le plugin (config/plugin: dÃ©sactiver/activer)
  * @version Original From SPIP-Listes-V :: Id: spiplistes_listes_forcer_abonnement.php paladin@quesaco.org
  * @package spiplistes
  */

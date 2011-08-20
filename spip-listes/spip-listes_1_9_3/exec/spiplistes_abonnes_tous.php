@@ -237,7 +237,7 @@ function exec_spiplistes_abonnes_tous () {
 
 
 /*
- * @return boite de selection des auteurs trouves
+ * @return string boite de selection des auteurs trouves
  */
 function spiplistes_cherche_auteur () {
 	if (!$cherche_auteur = _request('cherche_auteur')) return;

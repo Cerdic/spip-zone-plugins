@@ -11,9 +11,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/spiplistes_api_globales');
 
-// appelé par javascript/autocron.js ??
+// appelÃ© par javascript/autocron.js ??
 
-// ne semble plus être utilisé (CP-20071007)
+// ne semble plus Ãªtre utilisÃ© (CP-20071007)
 
 function exec_spiplistes_autocron () {
 

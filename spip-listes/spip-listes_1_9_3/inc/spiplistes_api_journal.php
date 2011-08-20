@@ -37,14 +37,14 @@ include_spip('inc/plugin');
 include_spip('inc/presentation');
 include_spip('inc/texte');
 
-/*
+/**
  * Afficher le journal (log) en espace prive. Voir:
  * - exec/*_voir_journal.php
  * - action/*_voir_journal.php
  * Ajouter dans la page exec/* spiplistes_raccourci_journal()
  */
 
-/*
+/**
  * Boite raccourci, Afficher le journal du plugin
  */
 function spiplistes_raccourci_journal ($envelopper = true) {
@@ -113,9 +113,9 @@ function spiplistes_raccourci_journal ($envelopper = true) {
 	return($result);
 }
 
-/*
+/**
  * jQuery pour afficher le journal
- * @return le code jQuery à placer au bon endroit
+ * @return string le code jQuery à placer au bon endroit
  */
 function spiplistes_raccourci_journal_jquery () {
 
@@ -304,8 +304,8 @@ $(document).ready(function(){
 	return($result);
 }
 
-/*
- * @return: le contenu du journal (log) du plugin
+/**
+ * @return string le contenu du journal (log) du plugin
  */
 function spiplistes_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NULL) {
 	// definition des constantes 1.9.3 pour les SPIP anterieurs
@@ -346,6 +346,9 @@ function spiplistes_journal_lire ($logname = NULL, $logdir = NULL, $logsuf = NUL
 	return($result);
 }
 
+/**
+ * @return string
+ */
 function spiplistes_journal_titre() {
 	return(_T('spiplistes:titre_page_voir_journal'));
 }

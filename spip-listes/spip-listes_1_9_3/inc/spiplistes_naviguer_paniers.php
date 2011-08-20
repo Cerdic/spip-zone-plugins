@@ -14,6 +14,13 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
+/**
+ * @param string $titre
+ * @param string $sql_from
+ * @param array $les_statuts
+ * @param string $script_exec
+ * @return string contenu HTML
+ */
 function spiplistes_naviguer_paniers ($titre, $sql_from, $les_statuts, $script_exec) {
 
 	$result = "";
@@ -61,6 +68,10 @@ function spiplistes_naviguer_paniers ($titre, $sql_from, $les_statuts, $script_e
 	return($result);
 }
 
+/**
+ * @param string $titre
+ * @return string
+ */
 function spiplistes_naviguer_paniers_listes ($titre = '') {
 
 	$result = spiplistes_naviguer_paniers(
@@ -73,6 +84,10 @@ function spiplistes_naviguer_paniers_listes ($titre = '') {
 	return($result);
 }
 
+/**
+ * @param string $titre
+ * @return string
+ */
 function spiplistes_naviguer_paniers_courriers ($titre = '') {
 	
 	$result = spiplistes_naviguer_paniers(
@@ -86,16 +101,18 @@ function spiplistes_naviguer_paniers_courriers ($titre = '') {
 }
 
 if(!function_exists("array_fill_keys")) {
-	/*
+	/**
 	 * Remplit un tableau avec des valeurs, en spécifiant les clés
+	 *
+	 * @since PHP 5.2.0
+	 * @param array $array
+	 * @param mixed $value 
 	 * @return array
-	 * @param $array Object
-	 * @param $fill Object
 	 */
-	function array_fill_keys($array, $fill) {
+	function array_fill_keys($array, $value) {
 		$result = array();
 		foreach($array as $key) {
-				$result[$key] = $fill;
+				$result[$key] = $value;
 		}
 		return ($result);
 	}

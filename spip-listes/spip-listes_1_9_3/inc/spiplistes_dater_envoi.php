@@ -14,6 +14,22 @@ include_spip('inc/actions');
 include_spip('inc/date');
 include_spip('inc/spiplistes_api');
 
+/**
+ * Boite HTML, sélection de la date de début des envois
+ * à appliquer au courrier ou à une liste.
+ *
+ * @param string $type_objet
+ * @param string $id_objet
+ * @param string $statut_objet
+ * @param bool $flag_autorise
+ * @param string $titre_boite
+ * @param string $date_debut_envoi
+ * @param string $btn_nom_valider
+ * @param bool $enveloppe_formulaire
+ * @global string $spip_lang_left
+ * @global string $spip_lang_right
+ * @return string
+ */
 function spiplistes_dater_envoi (
 	$type_objet, $id_objet, $statut_objet
 	, $flag_autorise
@@ -44,7 +60,7 @@ function spiplistes_dater_envoi (
 	if($flag_autorise && ($courrier_editable || $liste_editable)) {
 
 		if(!$date_valide) {
-			// propose date maintenant par d�faut
+			// propose date maintenant par défaut
 			$date_debut_envoi = normaliser_date(time());
 			$date_valide = spiplistes_date_heure_valide($date_debut_envoi);
 		}

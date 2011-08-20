@@ -191,8 +191,12 @@ function spiplistes_boite_agenda_contenu ($periode, $retour, $img_pack) {
 	return($result);
 }
 
-// dresser l'inventaire des listes a partir 
-// d'aujourd'hui, sur $jours jours.
+/**
+ * Dresser l'inventaire des listes a partir
+ * d'aujourd'hui, sur $jours jours.
+ *
+ * @return string
+ */
 function spiplistes_listes_inventaire ($jours) {
 
 	$sql_result = sql_select(

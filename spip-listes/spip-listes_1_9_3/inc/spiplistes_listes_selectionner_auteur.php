@@ -114,14 +114,16 @@ function spiplistes_listes_auteurs_elligibles ($id_liste, $statut_liste = '', $f
 }
 
 /**
- * @version CP-20080603
- * @param $id_liste entier
- * @param $statut_liste staut ou false
- * @param $tri string: 'statut', 'nom', ou 'nombre' (qte)
- * @param $debut id_auteur du premier affiche
- * @param $script_retour string
- * @return la boite en liste des abonnes a une liste
+ * Bloc HTML, boite des abonnés
  * 	si $id_liste == 0, liste tous les abonnements
+ * 	
+ * @version CP-20080603
+ * @param int $id_liste
+ * @param bool|string $statut_liste statut ou false
+ * @param string $tri 'statut', 'nom', ou 'nombre' (qte)
+ * @param int $debut id_auteur du premier affiche
+ * @param string $script_retour
+ * @return string la boite en liste des abonnes a une liste
  */
 function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut, $script_retour) {
 
@@ -656,6 +658,7 @@ function spiplistes_listes_boite_abonnes ($id_liste, $statut_liste, $tri, $debut
  * si trop nombreux.
  *
  * @version CP-20080603
+ * @return string
  */
 function spiplistes_listes_selectionner_elligibles (
 	$non_abonnes
