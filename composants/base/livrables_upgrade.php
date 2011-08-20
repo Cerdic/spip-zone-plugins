@@ -23,7 +23,7 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
 		}
 		// ajout d'un index sur l'url
 		if (version_compare($current_version,"0.2","<")){
-			maj_tables('spip_composants');
+			maj_tables('spip_livrables');
 			ecrire_meta($nom_meta_base_version,$current_version="0.2");
 		}
 
@@ -36,6 +36,12 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
  * @param unknown_type $nom_meta_base_version
  */
 function livrables_vider_tables($nom_meta_base_version) {
+	sql_drop_table("spip_livrables");
+	sql_drop_table("spip_livrables_liens");
+	effacer_meta('livrables');
+	effacer_meta($nom_meta_base_version);
+}
+function composants_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_composants");
 	sql_drop_table("spip_composants_projets");
 	effacer_meta('composants');

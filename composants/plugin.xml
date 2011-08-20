@@ -1,61 +1,61 @@
 <plugin>
-	<nom>Composants</nom>
+	<nom>Livrables</nom>
 	<auteur>Cyril Marion</auteur>
 	<licence>&#169; 2011 GPL</licence>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<version_base>0.1</version_base>
-	<install>base/composants_upgrade.php</install>
+	<install>base/livrables_upgrade.php</install>
 
 	<icon>images/composants-32.png</icon>
 
 	<etat>dev</etat>
     <description>
     	<multi>
-    		[fr]Ce plugin crée un objet de type "composant" en tant que plus petite brique d'un projet.
+    		[fr]Ce plugin crée un objet de type "livrable" en tant que partie d'un projet web.
 		</multi>
 	</description>
-	<prefix>composants</prefix>
+	<prefix>livrables</prefix>
 
-    <options>composants_options.php</options>
-    <fonctions>composants_fonctions.php</fonctions>
+    <options>livrables_options.php</options>
+    <fonctions>livrables_fonctions.php</fonctions>
 
 	<pipeline>
 		<nom>insert_head_css</nom>
-		<inclure>composants_pipelines.php</inclure>
+		<inclure>livrables_pipelines.php</inclure>
 	</pipeline>
 	
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/composants.php</inclure>
+		<inclure>base/livrables.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
-		<inclure>base/composants.php</inclure>
+		<inclure>base/livrables.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/composants.php</inclure>
+		<inclure>base/livrables.php</inclure>
 	</pipeline>
 
 	<pipeline>
 		<nom>rechercher_liste_des_champs</nom>
-		<inclure>composants_pipelines.php</inclure>
+		<inclure>livrables_pipelines.php</inclure>
 	</pipeline>
 
 	<pipeline>
 		<nom>declarer_url_objets</nom>
-		<inclure>composants_pipelines.php</inclure>
+		<inclure>livrables_pipelines.php</inclure>
 	</pipeline>
 
 	<pipeline>
 		<nom>declarer_liaison_mots</nom>
-		<inclure>composants_pipelines.php</inclure>
+		<inclure>livrables_pipelines.php</inclure>
 	</pipeline>
 
 	<bouton id='composants21' parent='bando_squelette'> 
 			<url>composants</url> 
 			<icone>images/composants-16.png</icone> 
-			<titre>composants:nom_bouton_plugin</titre> 
+			<titre>livrables:nom_bouton_plugin</titre> 
 	</bouton> 
 	
 
