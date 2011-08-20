@@ -31,7 +31,8 @@ function composants_declarer_tables_principales($tables_principales){
 		"maj" 			=> "TIMESTAMP");
 	
 	$spip_composants_key = array(
-		"PRIMARY KEY" => "id_composant");
+		"PRIMARY KEY" => "id_composant",
+		"KEY url" => "url");
 	
 	$tables_principales['spip_composants'] = array(
 		'field' => &$spip_composants,

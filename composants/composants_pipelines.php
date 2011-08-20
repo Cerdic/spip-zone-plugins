@@ -52,8 +52,8 @@ function composants_declarer_liaison_mots($liaisons){
 **/
 function composants_insert_head_css($flux)
 {
-    $css = find_in_path('composants.css');
-	if ($css)
+    $css = find_in_path("composants.css");
+	if ($css) 
     	$flux .= '<link rel="stylesheet" type="text/css" media="all" href="'.$css.'" />';
     return $flux;	
 }

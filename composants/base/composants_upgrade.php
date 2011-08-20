@@ -21,6 +21,12 @@ function composants_upgrade($nom_meta_base_version,$version_cible){
 			creer_base();
 			ecrire_meta($nom_meta_base_version,$current_version='0.1','non');
 		}
+		// ajout d'un index sur l'url
+		if (version_compare($current_version,"0.2","<")){
+			maj_tables('spip_composants');
+			ecrire_meta($nom_meta_base_version,$current_version="0.2");
+		}
+
 	}
 }
 
