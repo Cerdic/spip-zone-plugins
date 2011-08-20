@@ -1,22 +1,22 @@
 <?php
 
 /*
- * Plugin Commandes
- * Distribue sous licence GPL
+ * Plugin Livrables
+ * Licence GPL (c) 2011 Cyril Marion
  *
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_supprimer_commande_dist() {
+function action_supprimer_livrable_dist() {
 
 	$securiser_action = charger_fonction('securiser_action', 'inc');
-	$id_commande = $securiser_action();
+	$id_livrable = $securiser_action();
 
 	// suppression
-	if ($id_commande = intval($id_commande)) {
-		sql_delete('spip_commandes', 'id_commande=' . $id_commande);
-		sql_delete('spip_commandes_details', 'id_commande=' . $id_commande);
+	if ($id_livrable = intval($id_livrable)) {
+		sql_delete('spip_livrables', 'id_livrable=' . $id_livrable);
+		sql_delete('spip_livrables_details', 'id_livrable=' . $id_livrable);
 	}
 
 }
