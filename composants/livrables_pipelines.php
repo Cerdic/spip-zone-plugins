@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Plugin Composants
+ * Plugin Livrables
  * Licence GPL (c) 2011 Cyril Marion
  *
  */
@@ -12,35 +12,36 @@
  * @param 
  * @return 
 **/
-function composants_rechercher_liste_des_champs($tables){
+function livrables_rechercher_liste_des_champs($tables){
 	
 	// ajouter la recherche sur un composant
-	$tables['composant']['titre'] = 12;
-	$tables['composant']['descriptif'] = 4;
+	$tables['livrables']['titre'] = 12;
+	$tables['livrables']['descriptif'] = 4;
+	$tables['livrables']['url'] =3;
 	
 	return $tables;
 }
 
 /**
- * Gerer l'url d'un composant
+ * Gerer l'url d'un livrable
  *
 **/
-function composants_declarer_url_objets($array){ 
-	$array[] = 'composant'; 
+function livrables_declarer_url_objets($array){ 
+	$array[] = 'livrable'; 
 	return $array; 
 } 
 
 /**
- * Pouvoir mettre des mots-cle sur les composants
+ * Pouvoir mettre des mots-cle sur les livrables
  *
 **/
-function composants_declarer_liaison_mots($liaisons){
-	$liaisons['composants'] = new declaration_liaison_mots('composants', array(
-		'exec_formulaire_liaison' => "composant",
-		'singulier' => "composants:composant", //"mediatheque:un_document",
-		'pluriel'   => "composants:composants", //"mediatheque:des_documents",
-		'libelle_objet' => "composants:objet_composant",
-		'libelle_liaisons_objets' => "composants:item_mots_cles_association_composant",
+function livrables_declarer_liaison_mots($liaisons){
+	$liaisons['livrables'] = new declaration_liaison_mots('livrables', array(
+		'exec_formulaire_liaison' => "livrable",
+		'singulier' => "livrables:livrable", //"mediatheque:un_document",
+		'pluriel'   => "livrables:livrables", //"mediatheque:des_documents",
+		'libelle_objet' => "livrables:objet_livrable",
+		'libelle_liaisons_objets' => "livrables:item_mots_cles_association_livrables",
 	));
 
 	return $liaisons;
@@ -50,11 +51,11 @@ function composants_declarer_liaison_mots($liaisons){
  * Ajouter un peu de styles
  *
 **/
-function composants_insert_head_css($flux)
+function livrables_insert_head_css($flux)
 {
-    $css = find_in_path("composants.css");
+    $css = find_in_path("livrables.css");
 	if ($css) 
-    	$flux .= '<link rel="stylesheet" type="text/css" media="all" href="'.$css.'" />';
+    	$flux .= '<!-- css plugin livrables --><link rel="stylesheet" type="text/css" media="all" href="'.$css.'" />';
     return $flux;	
 }
 
