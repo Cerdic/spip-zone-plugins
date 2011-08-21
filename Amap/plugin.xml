@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Plugin AMAP pour Spip 2</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<version_base>0.8</version_base>
 
 	<licence>GNU/GPL</licence>
@@ -43,11 +43,14 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/amap_tables.php</inclure>
 	</pipeline>
-	<!-- Champs Extra -->
 	<pipeline>
 		<nom>declarer_champs_extras</nom>
 		<inclure>base/amap_tables.php</inclure>
 	</pipeline>
+    <pipeline>
+        <nom>affiche_gauche</nom>
+        <inclure>amap_pipelines.php</inclure>
+    </pipeline>
 
 	<necessite id="SPIP" version="[2.0.10;]" />
 	<necessite id="agenda" version="[2.2.1;]" />

@@ -22,8 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									4. Mettre à jour les type de panniers et cotisations sur la page de chaque auteur sinon aucun panier ne pourras lui être attribuer.<br />
 									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>',
 	'aucun_panier_pour_nom' => 'Nous avons aucun panier pour @nom@.',
-	'aucun_panier_pour_vous' => 'Nous avons aucun panier pour vous.',
-        'avant_le' => 'avant le',
+	'avant_le' => 'avant le',
 
 	// C
 	'contenu_panier' => 'Contenu du panier',
