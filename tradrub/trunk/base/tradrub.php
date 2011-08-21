@@ -8,15 +8,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Ajouter des champs a la table rubriques
- * @param array $tables_principales
+ * Ajouter id_trad a la table rubriques
+ * @param array $tables description des objets editoriaux
  * @return array
  */
-function tradrub_declarer_tables_principales($tables_principales){
+function tradrub_declarer_tables_objets_sql($tables){
 	// Extension de la table rubriques
-	$tables_principales['spip_rubriques']['field']['id_trad'] = "bigint(21) DEFAULT '0' NOT NULL";
-		
-	return $tables_principales;
+	$tables['spip_rubriques']['field']['id_trad'] = "bigint(21) DEFAULT '0' NOT NULL";
+	return $tables;
 }
 
 ?>

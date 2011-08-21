@@ -1,0 +1,21 @@
+<paquet
+	prefix="tradrub"
+	categorie="edition"
+	version="2.0.0"
+	etat="dev"
+	compatibilite="[3.0.0-alpha2;["
+	logo="images/tradrub-128.png"
+	schema="1.0.0"
+	documentation=""
+>	
+
+	<nom>TradRub</nom>
+
+	<auteur lien="http://magraine.net/">Matthieu Marcillaud</auteur>
+	<licence>GNU/GPL</licence>
+		
+	<credit lien="http://people.freedesktop.org/~jimmac/icons/#oxygen">Logo de Jakub 'jimmac' Steiner</credit>
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradrub.php" />
+
+</paquet>

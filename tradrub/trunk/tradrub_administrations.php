@@ -7,7 +7,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_spip('inc/meta');
 
 /**
  * Upgrade de la base
@@ -15,21 +14,15 @@ include_spip('inc/meta');
  * @param string $nom_meta_base_version
  * @param string $version_cible
  */
-function tradrub_upgrade($nom_meta_base_version,$version_cible){
-	$current_version = 0.0;
-
-	if ( (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-		|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible))
-	{
-		include_spip('base/tradrub');
-		if ($current_version==0.0){
-			include_spip('base/create');
-			maj_tables('spip_rubriques');
-			// index sur le nouveau champ
-			sql_alter("TABLE spip_rubriques ADD INDEX (id_trad)");
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-		}	
-	}
+function tradrub_upgrade($nom_meta_base_version, $version_cible){
+	$maj = array();
+	$maj['create'] = array(
+		array('maj_tables', array('spip_rubriques')),
+		array('sql_alter',  "TABLE spip_rubriques ADD INDEX (id_trad)")
+	);
+	
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 /**
