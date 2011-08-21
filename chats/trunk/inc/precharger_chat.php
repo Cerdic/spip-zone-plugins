@@ -13,15 +13,15 @@
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 
-include_spip('inc/editer_select');
+include_spip('inc/precharger_objet');
 
-function inc_chat_select_dist($id_chat, $id_rubrique=0, $lier_trad=0) {
-	return select_objet('chat', $id_chat, $id_rubrique, $lier_trad, 'nom');
+function inc_precharger_chat_dist($id_chat, $id_rubrique=0, $lier_trad=0) {
+	return precharger_objet('chat', $id_chat, $id_rubrique, $lier_trad, 'nom');
 }
 
 // fonction facultative si pas de changement dans les traitements
-function inc_chat_select_trad_dist($id_chat, $id_rubrique=0, $lier_trad=0) {
-	return select_objet_trad('chat', $id_chat, $id_rubrique, $lier_trad, 'nom');
+function inc_precharger_traduction_chat_dist($id_chat, $id_rubrique=0, $lier_trad=0) {
+	return precharger_traduction_objet('chat', $id_chat, $id_rubrique, $lier_trad, 'nom');
 }
 
 
