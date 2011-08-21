@@ -22,7 +22,7 @@ function formulaires_attribuer_daterubriques_traiter_dist(){
 	if (_request('attribuer')){
 		$id_secteur=_request('id_secteur');
 
-		include_spip('inc/attribuer_date_rubriques');
+		include_spip('inc/attribuer_daterubriques');
 		if (attribuer_date_rubriques($id_secteur)){
 			return _T("daterubriques:mise_a_jour_rubriques");
 		}

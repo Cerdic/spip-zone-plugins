@@ -8,8 +8,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @param unknown_type $id_secteur
  * @return unknown_type
  */
+ 
 function attribuer_date_rubriques($id_secteur) {
-//spip_log("attribuer_date_rubriques $id_secteur",'rubriques');
+spip_log("attribuer_date_rubriques $id_secteur",'rubriques');
 
 	// si id_secteur n'est pas un nombre, stopper tout
 	if (!$id_secteur = intval($id_secteur)) {
@@ -18,7 +19,7 @@ function attribuer_date_rubriques($id_secteur) {
 
 	// Enregistre l'envoi dans la BD
 	if ($id_secteur > 0) {
-	modifier_date($id_secteur);
+	modifier_date_rubriques($id_secteur);
 	return true;
 	}
 }
@@ -28,7 +29,7 @@ function attribuer_date_rubriques($id_secteur) {
  * @param array $champs Un tableau avec les champs par defaut
  * @return int id_secteur
  */
-function modifier_date($id_secteur) {
+function modifier_date_rubriques($id_secteur) {
 	
 	//routine OK pour inserer en date_utile d'une rubrique la date de son premier article
 	$r = sql_select("id_rubrique", "spip_rubriques", "id_secteur=$id_secteur");
