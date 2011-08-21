@@ -10,17 +10,13 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['organisations_liens'] = 'organisations_liens';
 	$interface['table_des_tables']['contacts'] = 'contacts';
 	$interface['table_des_tables']['contacts_liens'] = 'contacts_liens';
-	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
 	
 	// -- Liaisons organisations/auteurs, contacts/auteurs et organisations/contacts
 	$interface['tables_jointures']['spip_contacts'][]= 'contacts_liens';
+	$interface['tables_jointures']['spip_contacts'][]= 'organisations_liens';
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts_liens';
-	$interface['tables_jointures']['spip_organisations'][] = 'organisations_liens';
 	$interface['tables_jointures']['spip_auteurs'][]= 'organisations_liens';
-	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
-	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
-	$interface['tables_jointures']['spip_contacts'][]= 'organisations_contacts';
-	$interface['tables_jointures']['spip_organisations'][]= 'organisations_contacts';
+	$interface['tables_jointures']['spip_organisations'][] = 'organisations_liens';
 
 
 	/**
@@ -95,21 +91,6 @@ function contacts_declarer_tables_principales($tables_principales){
 
 
 function contacts_declarer_tables_auxiliaires($tables_auxiliaires){
-
-    //-- Table organisations_contacts -------------------------------------
-    $organisations_contacts = array(
-        "id_organisation" => "BIGINT(21) NOT NULL",
-        "id_contact"      => "BIGINT(21) NOT NULL",
-        "type_liaison"    => "tinytext NOT NULL DEFAULT ''",
-    );
-    $organisations_contacts_key = array(
-        "PRIMARY KEY"	       => "id_organisation, id_contact",
-		"KEY id_organisation"  => "id_organisation",
-		"KEY id_contact"       => "id_contact"
-    );
-	$tables_auxiliaires['spip_organisations_contacts'] =
-		array('field' => &$organisations_contacts, 'key' => &$organisations_contacts_key);
-
 
     //-- Table organisations_liens -------------------------------------
     $organisations_liens = array(

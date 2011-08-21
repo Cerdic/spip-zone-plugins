@@ -194,6 +194,25 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.4.2");
 	}
 
+	if (version_compare($current_version,"1.5.0","<")){
+		$contacts = sql_allfetsel(array('id_contact', 'id_organisation','type_liaison'), 'spip_organisations_contacts', 'id_contact > 0');
+		if ($contacts) {
+			foreach ($contacts as $r) {
+				// possibilité d'erreur sql si la ligne est déjà là.
+				// rien de dramatique
+				sql_insertq('spip_organisations_liens', array(
+					'id_organisation' => $r['id_organisation'],
+					'id_objet' => $r['id_contact'],
+					'objet' => 'contact',
+                    'type_liaison' => $r['type_liaison'],
+				));
+			}
+		}
+		sql_drop_table('spip_organisations_contacts');
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.5.0");
+	}
+
 
 }
 
