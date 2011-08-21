@@ -98,15 +98,38 @@ class SMTP_1_02
         }
 
 /**
- * Sparadra. A revoir complètement avec la dernière version
- * de phpMail en important la librairie
+ * Sparadra pour la connexioon SSL.
+ * 
+ * A revoir complètement avec la dernière version
+ * de phpMailer en important la librairie
  * @see http://code.google.com/a/apache-extras.org/p/phpmailer/
  * ou avec facteur.
  * Dans les deux cas, SPIP >= 2.1 !
+ *
+ * Exemple pour une connexion gmail :
+ * host: smtp.gmail.com
+ * port: 465
+ * activer SSL
+ * login et mot de passe à compléter.
+ *
+ * Principe identique pour
+ * - Yahoo (smtp.mail.yahoo.fr).
+ *
+ * Pour bbox, pas de SSL, pas de login/pass,
+ * mais il faut avoir la box.
+ *
+ * Principe identique pour
+ * - Free
+ * - Orange (qui propose aussi un SSL sur port 587)
+ * - SFR
+ *
+ * etc... (des dizaines de possibilités/services)
+ * 
  */
 $opt_smtp_use_ssl = spiplistes_pref_lire('opt_smtp_use_ssl');
 $proto = ($opt_smtp_use_ssl == 'oui') ? 'ssl://' : '';
 $host = $proto.$GLOBALS['meta']['smtp_server'];
+spiplistes_debug_log ('CONNECTION '.$host.':'.$port);
 
         #connect to the smtp server
         $this->smtp_conn = fsockopen($host,    # the host of the server
