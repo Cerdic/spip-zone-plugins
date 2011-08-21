@@ -27,14 +27,22 @@ function chats_affiche_enfants($flux) {
 	return $flux;
 }
 
-function chats_afficher_complement_objet($flux) {
-	if ($flux['args']['type'] == 'chat') {
-		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/editer_liens', array(
-			'source' => 'auteurs',
-			'type' => $flux['args']['type'],
-			'id' => $flux['args']['id']
+function chats_affiche_milieu($flux) {
+	if ($e = trouver_objet_exec($flux['args']['exec'])
+	  AND $e['type'] == 'chat'
+	  AND $e['edition'] == false) {
+		$texte = recuperer_fond('prive/objets/editer/liens', array(
+			'table_source' => 'auteurs',
+			'objet' => $e['type'],
+			'id_objet' => $e['id_objet'],
+			#'editable'=>autoriser('associerauteurs',$e['type'],$e['id_objet'])?'oui':'non'
 		));
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->"))
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		else
+			$flux['data'] .= $texte;
 	}
+	
 	return $flux;
 }
 

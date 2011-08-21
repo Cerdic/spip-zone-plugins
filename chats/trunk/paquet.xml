@@ -21,7 +21,7 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/chats.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/chats.php" />
 	<pipeline nom="affiche_enfants" inclure="chats_pipelines.php" />
-	<pipeline nom="afficher_complement_objet" inclure="chats_pipelines.php" />
+	<pipeline nom="affiche_milieu" inclure="chats_pipelines.php" />
 
 	<!-- facilitons les champs de formulaires -->
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />
