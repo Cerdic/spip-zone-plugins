@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_chat' => "Chat",
 	'titre_chats' => "Chats",
 	'titre_chats_rubrique' => "Chats de la rubrique",
+	'titre_langue_chat' => "Langue de ce chat",
 	'titre_logo_chat' => "Logo du chat",
 
 );
