@@ -128,35 +128,35 @@ function select_objet_trad($type, $id_objet, $id_rubrique=0, $lier_trad=0, $cham
 			return $row;
 		}
 		$id_rubrique = $row['id_rubrique'];
-	}
+	
 
-	// Regler la langue, si possible, sur celle du redacteur
-	// Cela implique souvent de choisir une rubrique ou un secteur
-	if (in_array($GLOBALS['spip_lang'],
-	explode(',', $GLOBALS['meta']['langues_multilingue']))) {
-		// Si le menu de langues est autorise sur l'objet,
-		// on peut changer la langue quelle que soit la rubrique
-		// donc on reste dans la meme rubrique
-		if (in_array($table, explode(',',$GLOBALS['meta']['multi_objets'] == 'oui'))) {
-			$row['id_rubrique'] = $row['id_rubrique']; # explicite :-)
+		// Regler la langue, si possible, sur celle du redacteur
+		// Cela implique souvent de choisir une rubrique ou un secteur
+		if (in_array($GLOBALS['spip_lang'],
+		explode(',', $GLOBALS['meta']['langues_multilingue']))) {
+			// Si le menu de langues est autorise sur l'objet,
+			// on peut changer la langue quelle que soit la rubrique
+			// donc on reste dans la meme rubrique
+			if (in_array($table, explode(',',$GLOBALS['meta']['multi_objets'] == 'oui'))) {
+				$row['id_rubrique'] = $row['id_rubrique']; # explicite :-)
 
-		// Sinon, chercher la rubrique la plus adaptee pour
-		// accueillir l'objet dans la langue du traducteur
-		} elseif ($is_rubrique and $GLOBALS['meta']['multi_rubriques'] == 'oui') {
-			if ($GLOBALS['meta']['multi_secteurs'] == 'oui') {
-				$id_parent = 0;
-			} else {
-				// on cherche une rubrique soeur dans la bonne langue
-				$row_rub = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
-				$id_parent = $row_rub['id_parent'];
+			// Sinon, chercher la rubrique la plus adaptee pour
+			// accueillir l'objet dans la langue du traducteur
+			} elseif ($is_rubrique and $GLOBALS['meta']['multi_rubriques'] == 'oui') {
+				if ($GLOBALS['meta']['multi_secteurs'] == 'oui') {
+					$id_parent = 0;
+				} else {
+					// on cherche une rubrique soeur dans la bonne langue
+					$row_rub = sql_fetsel("id_parent", "spip_rubriques", "id_rubrique=$id_rubrique");
+					$id_parent = $row_rub['id_parent'];
+				}
+				
+				$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent");
+				if ($row_rub)
+					$row['id_rubrique'] = $row_rub['id_rubrique'];	
 			}
-			
-			$row_rub = sql_fetsel("id_rubrique", "spip_rubriques", "lang='".$GLOBALS['spip_lang']."' AND id_parent=$id_parent");
-			if ($row_rub)
-				$row['id_rubrique'] = $row_rub['id_rubrique'];	
 		}
 	}
-
 	return $row;
 }
 
