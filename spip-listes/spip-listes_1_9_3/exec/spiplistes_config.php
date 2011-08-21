@@ -48,7 +48,7 @@ function exec_spiplistes_config () {
 		, $spip_lang_right
 		;
 	
-	$eol = PHP_EOL;
+	static $eol = PHP_EOL;
 		
 	$flag_editable = (($connect_statut == "0minirezo") && ($connect_toutes_rubriques));
 
@@ -99,6 +99,7 @@ function exec_spiplistes_config () {
 			'opt_simuler_envoi' // demande à la méleuse de simuler l'envoi du courrier
 			, 'opt_suspendre_trieuse' // suspendre la trieuse. Les listes restent en attente
 			, 'opt_suspendre_meleuse' // suspendre les envois de courriers
+			, 'opt_smtp_use_ssl' // SMTP avec SSL ?
 			);
 				
 		$keys_console_syslog = array(
@@ -479,8 +480,12 @@ function exec_spiplistes_config () {
 		return($str);
 	}
 	
-	//////////////////////////////////////////////////////
-	// Boite parametrage envoi du courrier
+	/**
+	 * Boite parametrage envoi du courrier
+	 */
+	$opt_smtp_use_ssl = spiplistes_pref_lire('opt_smtp_use_ssl');
+	if ($opt_smtp_use_ssl != 'oui') { $opt_smtp_use_ssl = 'non'; }
+	
 	$page_result .= ''
 		. debut_cadre_trait_couleur(_DIR_PLUGIN_SPIPLISTES_IMG_PACK.'courriers_envoyer-24.png', true, '', _T('spiplistes:envoi_des_courriers'))
 		. spiplistes_form_debut(generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE), true)
@@ -514,11 +519,15 @@ function exec_spiplistes_config () {
 		. bouton_radio("mailer_smtp", "oui", _T('spiplistes:utiliser_smtp'), $mailer_smtp == "oui"
 			, "changeVisible(this.checked, 'smtp', 'block', 'none');")
 		. "</div>" . $eol
-		//
-		// si 'smtp', affiche bloc de paramétrage
+		/**
+		 * Si 'smtp', affiche bloc de paramétrage
+		 */
 		. "<ul id='smtp' class='verdana2' style='list-style: none;display:".(($mailer_smtp == "oui") ? "block" : "none")."'>" . $eol
 		. "<li>"._T('spiplistes:smtp_hote')." : <input type='text' name='smtp_server' value='$smtp_server' size='30' class='forml' /></li>" . $eol
 		. "<li>"._T('spiplistes:smtp_port')." : <input type='text' name='smtp_port' value='$smtp_port' size='4' class='fondl' /></li>" . $eol
+		// SSL
+		. '<li>'.spiplistes_bouton_checkbox ('opt_smtp_use_ssl', _T('spiplistes:opt_smtp_use_ssl'),  $opt_smtp_use_ssl).'</li>'.$eol
+		//
 		. "<li>"._T('spiplistes:requiert_identification')." : "
 		. bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
 		. "&nbsp;"
@@ -708,4 +717,23 @@ function spiplistes_array_values_in_keys ($array) {
 	return($result);
 } // spiplistes_array_values_in_keys()
 
+/**
+ * Petit input checkbox
+ *
+ * @param string $btn_name
+ * @param string $txt_label
+ * @param string $cur_val
+ * @return string
+ */
+function spiplistes_bouton_checkbox ($btn_name, $txt_label, $cur_val) {
+	static $id;
+	static $eol = PHP_EOL;
+	$chk = ($cur_val == 'oui') ? 'checked="checked"' : '';
+	$id++;
+	$texte = '<p class="verdana2">' . $eol
+		. '<input type="checkbox" name="'.$btn_name.'" value="oui" id="'.$btn_name.'-'.$id.'" '.$chk.' />' . $eol
+		. '<label for="'.$btn_name.'-'.$id.'">'.$txt_label.'</label>' . $eol
+		. '</p>' . $eol;
+	return ($texte);
+}
 

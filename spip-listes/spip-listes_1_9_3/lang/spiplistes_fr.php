@@ -123,6 +123,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'formulaire_abonnement' => 'Formulaire <em>Abonnement</em>'
 , 'formulaire_abonnement_effet' => 'Appliquer l&#8217;effet plier/d&#233;plier sur les textes descriptifs des listes de diffusion.'
 , 'utiliser_smtp' => 'Utiliser SMTP'
+, 'opt_smtp_use_ssl' => 'Utiliser SSL (Secure Sockets Layer)'
 , 'requiert_identification' => 'Requiert une identification'
 , 'adresse_smtp' => 'Adresse email du <em>sender</em> SMTP'
 , '_aide_install' => '<p>Bienvenue dans le monde de SPIP-Listes.</p>

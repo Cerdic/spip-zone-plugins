@@ -97,6 +97,17 @@ class SMTP_1_02
             $port = $this->SMTP_PORT;
         }
 
+/**
+ * Sparadra. A revoir complètement avec la dernière version
+ * de phpMail en important la librairie
+ * @see http://code.google.com/a/apache-extras.org/p/phpmailer/
+ * ou avec facteur.
+ * Dans les deux cas, SPIP >= 2.1 !
+ */
+$opt_smtp_use_ssl = spiplistes_pref_lire('opt_smtp_use_ssl');
+$proto = ($opt_smtp_use_ssl == 'oui') ? 'ssl://' : '';
+$host = $proto.$GLOBALS['meta']['smtp_server'];
+
         #connect to the smtp server
         $this->smtp_conn = fsockopen($host,    # the host of the server
                                      $port,    # the port to use
