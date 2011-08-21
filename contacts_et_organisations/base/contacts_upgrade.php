@@ -178,8 +178,22 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	if (version_compare($current_version,"1.4.1","<")){
 		sql_alter('TABLE spip_organisations DROP INDEX id_contact');
 		sql_alter('TABLE spip_organisations ADD INDEX (id_organisation)');
+
 		ecrire_meta($nom_meta_base_version, $current_version="1.4.1");
 	}
+
+	// rajout d'un type_liaison dans les liens
+	if (version_compare($current_version,"1.4.2","<")){
+		maj_tables('spip_contacts_liens');
+		maj_tables('spip_organisations_liens');
+        sql_alter('TABLE `spip_organisations_liens` DROP PRIMARY KEY');
+        sql_alter('TABLE `spip_organisations_liens` ADD PRIMARY KEY ( `id_organisation` , `id_objet` , `objet`, `type_liaison`(25)) ');
+        sql_alter('TABLE `spip_contacts_liens` DROP PRIMARY KEY');
+        sql_alter('TABLE `spip_contacts_liens` ADD PRIMARY KEY ( `id_contact` , `id_objet` , `objet`, `type_liaison`(25)) ');
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.4.2");
+	}
+
 
 }
 
