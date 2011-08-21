@@ -13,14 +13,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adhesion_auteur' => 'Adhésion :',
 	'administrateur' => 'Administrateur',
 	'attention' => 'ATTENTION !',
-	'attention_modifications' => '<p>Vous venez d\'activer le plugin AMAP, ce dernier vient de créer une nouvelle rubrique "Agenda de la saison"
-									 avec deux sous-rubriques "Distribution" et "Évènements", ainsi que la rubrique "Archives".</p>
-									1. Avant de poursuivre veuillez complèter toutes les dates de votre saison grace au plugins agenda.<br />
-									2. Cette opération devra être effectuée avant chaque début de nouvelle saison.<br />
-									3. A la fin de chaque saison, vous prendrez soin de mettre à jour la liste des amapiens, ainsi que l\'archivage
-									 dans la rubrique appropriée, des dates de la saison passée, ceci pour le bon fonctionnement de ce plugin.<br />
-									4. Mettre à jour les type de panniers et cotisations sur la page de chaque auteur sinon aucun panier ne pourras lui être attribuer.<br />
-									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>',
+	'attention_modifications' => '<p>Vous venez d\'activer le plugin AMAP, ce dernier vient de créer une nouvelle rubrique "Agenda de la saison"avec deux sous-rubriques "Distribution" et "Évènements", ainsi que la rubrique "Archives".</p>
+									1. Avant de poursuivre, veuillez renseigner toutes les dates de votre saison grâce au plugin agenda.<br />
+									2. Cette opération devra être effectuée avant chaque début de nouvelles saisons.<br />
+									3. À la fin de chaque saison, vous prendrez soin de mettre à jour la liste des amapiens, ainsi que l\'archivage dans la rubrique appropriée, des dates de la saison passée, ceci pour le bon fonctionnement de ce plugin.<br />
+									4. Mettre à jour les types de panniers et cotisations sur la page de chaque auteur sinon aucun panier ne pourras lui être attribué.<br />
+									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>', 
 	'aucun_panier_pour_nom' => 'Nous avons aucun panier pour @nom@.',
 	'avant_le' => 'avant le',
 
@@ -89,6 +87,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 					<br />Elle ne contient aucun enregistrement.',
 	'type_panier' => 'Type de panier',
 	'type_panier_auteur' => 'Type de panier :',
+
+	//U
+	'utiliser_entete_colone_tri' => 'Utiliser les entêtes de colonne pour classer les amapiens (en noir l\'ordre de tri actif et en vert les ordres disponibles).',
 
 	// V
 	'visiteur' => 'Visiteur',

@@ -24,7 +24,7 @@
 								<a href="[(#URL_ECRIRE{pdf_paniers}|parametre_url{date_distribution,#DATE_DEBUT})]" target="_blank">
 							</BOUCLE_paniers_distribution>
 								[(#DATE_DEBUT|affdate{'d/m/Y'})]
-							<BOUCLE_paniers_distribution2(AMAP_PANIERS){date_distribution=date_debut}>
+							<BOUCLE_paniers_distribution2(AMAP_PANIERS){date_distribution=#DATE_DEBUT}{0,1}>
 								</a>
 							</BOUCLE_paniers_distribution2>
 						</td>
