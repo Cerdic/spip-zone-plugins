@@ -5,7 +5,7 @@
 	etat="stable"
 	compatibilite="[3.0.0-alpha2;["
 	logo="prive/themes/spip/images/chat-128.png"
-	schema="1.4.0"
+	schema="1.5.0"
 	documentation="http://marcimat.magraine.net/?article356"
 >	
 
@@ -21,6 +21,7 @@
 	<pipeline nom="declarer_tables_objets_sql" inclure="base/chats.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/chats.php" />
 	<pipeline nom="affiche_enfants" inclure="chats_pipelines.php" />
+	<pipeline nom="afficher_complement_objet" inclure="chats_pipelines.php" />
 
 	<!-- facilitons les champs de formulaires -->
 	<necessite nom="saisies" compatibilite="[1.14.0;]" />

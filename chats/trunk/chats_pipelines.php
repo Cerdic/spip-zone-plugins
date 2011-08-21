@@ -27,5 +27,15 @@ function chats_affiche_enfants($flux) {
 	return $flux;
 }
 
+function chats_afficher_complement_objet($flux) {
+	if ($flux['args']['type'] == 'chat') {
+		$flux['data'] .= recuperer_fond('prive/squelettes/inclure/editer_liens', array(
+			'source' => 'auteurs',
+			'type' => $flux['args']['type'],
+			'id' => $flux['args']['id']
+		));
+	}
+	return $flux;
+}
 
 ?>
