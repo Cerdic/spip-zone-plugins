@@ -20,7 +20,7 @@
 	<tbody>
 	<BOUCLE_organisations(ORGANISATIONS){id_contact?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		[(#REM) sur boucle pour le crayon ]
-		<BOUCLE_liaisons(organisations_contacts){id_contact}{id_organisation}>
+		<BOUCLE_liaisons(organisations_liens){id_contact}{id_organisation}>
 		<tr class="[(#_organisations:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR|sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a>
 			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#_organisations:NOM</a></td>

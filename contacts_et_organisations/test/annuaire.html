@@ -5,7 +5,7 @@
 </head>
 <body>
 <BOUCLE_Contact(CONTACTS){id_contact}>
-<p><a href="#URL_SITE_SPIP">Accueil</a> | <a href="#URL_PAGE{test/annuaire}">Annuaire</a><BOUCLE_OrganisationContact(ORGANISATIONS organisations_contacts){id_contact}><BOUCLE_ArboOrganisations(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}><BOUCLE_HierarchieArboOrganisations(BOUCLE_ArboOrganisations) />[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ] | <a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></BOUCLE_ArboOrganisations> | <a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></BOUCLE_OrganisationContact> | #NOM
+<p><a href="#URL_SITE_SPIP">Accueil</a> | <a href="#URL_PAGE{test/annuaire}">Annuaire</a><BOUCLE_OrganisationContact(organisations_liens){id_contact}><BOUCLE_ArboOrganisations(ORGANISATIONS){id_organisation}{tous}><BOUCLE_HierarchieArboOrganisations(BOUCLE_ArboOrganisations) />[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ] | <a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></BOUCLE_ArboOrganisations> | <a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></BOUCLE_OrganisationContact> | #NOM
 <h1>#NOM</h1>
 <BOUCLE_AdressesContact(ADRESSES){id_contact}>
 <p>[(#TITRE)<br />]

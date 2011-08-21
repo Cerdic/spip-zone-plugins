@@ -21,7 +21,7 @@
 	<BOUCLE_contacts(CONTACTS)
 		{id_organisation?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		[(#REM) sur boucle pour le crayon ]
-		<BOUCLE_liaisons(organisations_contacts){id_contact}{id_organisation}>
+		<BOUCLE_liaisons(organisations_liens){id_contact}{id_organisation}>
 		<tr class="[(#_contacts:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<BOUCLE_lien_contact(contacts_liens){id_contact}>
 				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]

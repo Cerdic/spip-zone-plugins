@@ -28,8 +28,9 @@ function action_lier_contact_post($id_contact, $id_organisation) {
 	$id_contact = intval($id_contact);
 	$id_organisation = intval($id_organisation);
 	if ($id_contact && $id_organisation) {
-		sql_insertq("spip_organisations_contacts", array(
-			"id_contact" => sql_quote($id_contact),
+		sql_insertq("spip_organisations_liens", array(
+			"id_objet" => sql_quote($id_contact),
+            "objet" => sql_quote("contact"),
 			"id_organisation" => sql_quote($id_organisation)
 		));
 		
