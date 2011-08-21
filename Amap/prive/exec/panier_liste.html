@@ -19,15 +19,10 @@
 	</div>
 	<div class="cadre_padding">
 	    <p style="text-align: justify;">
-	    <B_totalpanier>
 		<BOUCLE_totalpanier(AMAP_PANIERS){age<0} />
 			[(#TOTAL_BOUCLE|singulier_ou_pluriel{amap:reste_panier_distribuer, amap:reste_paniers_distribuer, nb})]
 		<//B_totalpanier>
-		<:amap:avant_le:>
-		<BOUCLE_evenementfin(EVENEMENTS){!par id_evenement}{age<0}{0,1}>
-			[(#DATE_DEBUT|affdate{'d/m/Y'}).]
-		</BOUCLE_evenementfin>
-		<B_totalpanier>
+		<:amap:avant_le:> <BOUCLE_evenementfin(EVENEMENTS){!par id_evenement}{age<0}{0,1}>[(#DATE_DEBUT|affdate{'d/m/Y'}).]</BOUCLE_evenementfin>
 	    </p>
 	</div>
 	<div class="cadre_padding">
