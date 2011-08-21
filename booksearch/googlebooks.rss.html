@@ -17,10 +17,10 @@
 >
 <item>
 	<title>[(#VALEUR{volumeInfo/authors}|print|texte_backend): ][(#VALEUR{volumeInfo/title}|texte_backend)]</title>
-	<link>[(#VALEUR{volumeInfo/infoLink})]</link>
+	<link>[(#VALEUR{volumeInfo/infoLink}|quote_amp)]</link>
 	<description>
 	<![CDATA[
-	[<img src="(#VALEUR{volumeInfo/imageLinks/thumbnail})" style="float:right">
+	[<img src="(#VALEUR{volumeInfo/imageLinks/thumbnail}|quote_amp)" style="float:right">
 	][<b>(#VALEUR{volumeInfo/publishedDate})</b> ][(#VALEUR{volumeInfo/description}|print)][
 	- (#VALEUR{volumeInfo/categories}|print)]
 
