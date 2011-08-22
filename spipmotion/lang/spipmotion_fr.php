@@ -51,6 +51,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'ffmpeg2theora_install' => 'FFMpeg2Theora sur votre serveur :',
+	'flvtool2_install' => 'FLVtool2 sur votre serveur :',
+	'flvtoolplus_install' => 'FLVtool++ sur votre serveur :',
 	'framerate' => 'Nombre d\'images par seconde : ',
 	'frequence_audio' => 'Fréquence d\'échantillonage audio : ',
 
@@ -92,11 +94,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreurs' => 'Erreurs',
 	'info_ffmpeg2theora_libtheora_version' => 'Version de libtheora utilisée par ffmpeg2theora',
 	'info_ffmpeg2theora_version' => 'Version de ffmpeg2theora',
+	'info_flvtool2_version' => 'Version de FLVtool2 installée :',
+	'info_flvtoolplus_version' => 'Version de FLVtool++ installée :',
 	'info_format' => 'Format : ',
 	'info_framecount' => 'Nombre de frames : ',
 	'info_framerate' => 'Framerate : ',
 	'info_infos_techniques' => 'Informations techniques',
 	'info_installer_encoder_ftp' => 'En tant qu\'administrateur, vous pouvez installer (par FTP) des fichiers de type .AVI, .MPG, .MP4 ou .MOV dans le dossier "tmp/upload" pour ensuite les encoder au format FLV ici.',
+	'info_mediainfo_version' => 'Version de MediaInfo installée :',
 	'info_mime' => 'Type mime : ',
 	'info_nom_fichier' => 'Nom du fichier : ',
 	'info_nombre_encodage_attente' => 'Un document est en attente d\'encodage',
@@ -154,6 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_supprimer_versions' => 'Supprimer toutes les versions du document',
 
 	// M
+	'mediainfo_install' => 'MediaInfo sur votre serveur :',
 	'message_confirmation_encodage' => 'Êtes vous sûr de vouloir relancer l\'encodage de ce document au format @version@ ?',
 	'message_confirmation_encodages' => 'Êtes vous sûr de vouloir relancer l\'encodage de ce document dans tous les formats ?',
 	'message_confirmation_suppression_version' => 'Êtes vous sûr de vouloir supprimer la version @version@ de ce document?',

@@ -52,6 +52,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'extensions_video' => 'Video formats',
 
 	// F
+	'flvtool2_install' => 'FLVtool2 on your server:',
+	'flvtoolplus_install' => 'FLVtool++ on your server:',
 	'ffmpeg2theora_install' => 'FFMpeg2Theora on your server:',
 	'framerate' => 'Frame rate: ',
 	'frequence_audio' => 'Audio frequency: ',
@@ -156,6 +158,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_supprimer_versions' => 'Remove all the versions of the document',
 
 	// M
+	'mediainfo_install' => 'MediaInfo on your server:',
 	'message_confirmation_encodage' => 'Are you sure you want to (re)encode this document in the @version@ format?',
 	'message_confirmation_encodages' => 'Are you sure you want to (re)encode this document in all the formats?',
 	'message_confirmation_suppression_version' => 'Are you sure you want to remove the @version@ version of this document?',

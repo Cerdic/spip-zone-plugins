@@ -81,6 +81,25 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 		}
 	
 		/**
+		 * Tester flvtool++
+		 */
+		exec('flvtool++',$retour_flvtoolplus,$retour_flvtoolplus_int);
+		if($retour_flvtoolplus_int != 0){
+			ecrire_config('spipmotion_flvtoolplus_casse', 'oui');
+			$erreurs[] = 'flvtool++';
+		}else{
+			effacer_config('spipmotion_flvtoolplus_casse');
+		}
+		
+		if(!in_array('flvtool2',$erreurs) OR !in_array('flvtool++',$erreurs)){
+			foreach($erreurs as $erreur=>$soft){
+				if(in_array($soft,array('flvtool2','flvtool++'))){
+					unset($erreurs[$erreur]);
+				}
+			}
+		}
+		
+		/**
 		 * Tester qt-faststart
 		 */
 		exec('qt-faststart',$retour_qt_faststart,$retour_qt_faststart_int);

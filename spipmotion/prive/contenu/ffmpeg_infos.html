@@ -35,6 +35,33 @@
 		]
 	</BOUCLE_ffmpeg2theora>
 	</BOUCLE_siffmpeg2theora>
+	
+	<BOUCLE_siflvtool2(CONDITION){si #ENV{spipmotion_flvtool2}|table_valeur{flvtool2}|oui}>
+	<h3 class="h3"><:spipmotion:flvtool2_install:></h3>
+	<BOUCLE_flvtool2(POUR){tableau #ENV{spipmotion_flvtool2}}>
+		[(#CLE|=={flvtool2}|non)
+			<p>[(#VAL{spipmotion:info_flvtool2_#CLE}|_T)] : [(#VALEUR)]</p>
+		]
+	</BOUCLE_flvtool2>
+	</BOUCLE_siflvtool2>
+	
+	<BOUCLE_siflvtoolplus(CONDITION){si #ENV{spipmotion_flvtoolplus}|table_valeur{flvtoolplus}|oui}>
+	<h3 class="h3"><:spipmotion:flvtoolplus_install:></h3>
+	<BOUCLE_flvtoolplus(POUR){tableau #ENV{spipmotion_flvtoolplus}}>
+		[(#CLE|=={flvtoolplus}|non)
+			<p>[(#VAL{spipmotion:info_flvtoolplus_#CLE}|_T)] : [(#VALEUR)]</p>
+		]
+	</BOUCLE_flvtoolplus>
+	</BOUCLE_siflvtoolplus>
+	
+	<BOUCLE_simediainfo(CONDITION){si #ENV{spipmotion_mediainfo}|table_valeur{mediainfo}|oui}>
+	<h3 class="h3"><:spipmotion:mediainfo_install:></h3>
+	<BOUCLE_mediainfo(POUR){tableau #ENV{spipmotion_mediainfo}}>
+		[(#CLE|=={mediainfo}|non)
+			<p>[(#VAL{spipmotion:info_mediainfo_#CLE}|_T)] : [(#VALEUR)]</p>
+		]
+	</BOUCLE_mediainfo>
+	</BOUCLE_simediainfo>
 </div>
 </div>
 <B_formats>
