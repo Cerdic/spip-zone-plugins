@@ -115,4 +115,16 @@ function voir_contact_en_ligne_contact_organisation($type, $id){
 	: icone_horizontale($message, $h, $image, "rien.gif",$af);
 }
 
+if ($id=$GLOBALS['visiteur_session']['id_auteur']) {
+	$row = sql_fetsel(
+		array('prenom'),
+		array('spip_contacts AS c', 'spip_contacts_liens AS cl'),
+		array('c.id_contact = cl.id_contact', 'cl.objet = '.sql_quote('auteur'), 'cl.id_objet =' .$id));
+
+	if($row) {
+		foreach ($row as $cle => $valeur) {
+			session_set($cle . '_auteur', $valeur);
+		}
+	}
+}
 ?>
