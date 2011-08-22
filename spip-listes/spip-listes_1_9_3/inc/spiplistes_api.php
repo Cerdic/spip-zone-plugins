@@ -176,12 +176,12 @@ function spiplistes_courriers_casier_premier ($sql_select, $sql_whereq) {
  * Abonner un id_auteur a une id_liste
  * ou une liste de listes ($id_liste est un tableau de (id)listes)
  * avec la date d'inscription
- * @version CP-20110619
+ * @version CP-20110619 20110822
  * @param int $id_auteur
  * @param int|array $id_listes
  * @return array id_listes ajoutees
  */
-function spiplistes_abonnements_ajouter ($id_auteur, $id_listes) {
+function spiplistes_abonnements_ajouter ($id_auteur, $id_listes, $statut = FALSE) {
 	
 	if(($id_auteur = intval($id_auteur)) > 0)
 	{
@@ -208,8 +208,10 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_listes) {
 					$real_id_listes[] = $id;
 				}
 			}
-			if (count($sql_valeurs)) {
+			if (count($sql_valeurs))
+			{
 				$sql_valeurs = implode(',', $sql_valeurs);
+			
 				if (sql_insert($sql_table, $sql_noms, $sql_valeurs) === false)
 				{
 					spiplistes_sqlerror_log ('spiplistes_abonnements_ajouter()');
@@ -221,6 +223,26 @@ function spiplistes_abonnements_ajouter ($id_auteur, $id_listes) {
 									   . "#" . implode(',#', $real_id_listes)
 									   );
 				}
+				/**
+				 * Si statut, modifier pour tous les abonnements de ce compte.
+				 * Non liée à la requette précédente pour raison historique.
+				 */
+				if ($statut && ($statut == 'a_valider' || $statut == 'valide'))
+				{
+					if (sql_updateq ($sql_table,
+									array('statut' => $statut),
+									'id_auteur='.$id_auteur) === FALSE)
+					{
+						spiplistes_sqlerror_log ('spiplistes_abonnements_ajouter()');
+					}
+					else {
+						spiplistes_log_api ('UPDATE statut id_auteur #'
+										   . $id_auteur
+										   . ' to ' . $statut
+										   );
+					}
+				}
+				
 			}
 		}
 	}
@@ -306,13 +328,16 @@ function spiplistes_abonnements_listes_auteur ($id_auteur, $avec_titre = false) 
 }
 
 /**
- * Desabonner un id_auteur d'une id_liste
- * ou de toutes les listes si $id_liste = 'toutes'
- * ou tous les abonnes si id_auteur == 'tous'
- * ou une serie si array
- * @version CP-20090410
+ * Desabonner un id_auteur si int
+ * ou d'une série d'auteurs si array
+ * ou tous les auteurs si 'tous'
+ * d'une id_liste si int
+ * ou des listes indiqués si array
+ * ou de toutes les listes si 'toutes'
+ * 
+ * @version CP-20090410 20110822
  * @param int|string|array $id_auteur
- * @param bool|int|string $id_liste
+ * @param int|string|array $id_liste
  * @return bool
  */
 function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = FALSE)
@@ -343,12 +368,18 @@ function spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_liste = FALSE
 		
 		if($id_liste == 'toutes')
 		{
-			$msg2 = ' des listes';
+			$msg2 = 'de toutes les listes';
+		}
+		else if (is_array ($id_liste) && count($id_liste))
+		{
+			$ids = implode(',', $id_liste);
+			$sql_where[] = 'id_liste IN ('.$ids.')';
+			$msg2 = 'des listes #'.$ids;
 		}
 		else if(($id_liste = intval($id_liste)) > 0)
 		{
 			$sql_where[] = 'id_liste='.$id_liste;
-			$msg2 = ' de la liste #'.$id_liste;
+			$msg2 = 'de la liste #'.$id_liste;
 		}
 		if(($result = sql_delete($sql_table, $sql_where)) === FALSE)
 		{

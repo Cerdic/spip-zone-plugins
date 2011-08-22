@@ -132,8 +132,20 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 			/**
 			 * supprime d'abord tous les abonnements
 			 */
-			spiplistes_abonnements_auteur_desabonner ($id_auteur, 'toutes');
-			$message_ok = _T('spiplistes:abonnement_modifie').'.';
+			$id_desabos = array();
+			foreach ($mes_abos as $id_liste)
+			{
+				if (!in_array ($id_liste, $listes_souhaitees))
+				{
+					$id_desabos[] = $id_liste;
+				}
+			}
+			if ($ii = count ($id_desabos))
+			{
+				if ($ii == 1) { $id_desabos = current ($id_desabos); }
+				spiplistes_abonnements_auteur_desabonner ($id_auteur, $id_desabos);
+				$message_ok = _T('spiplistes:abonnement_modifie').'.';
+			}
 			
 			/**
 			 * Abonne aux listes sélectionnées
@@ -146,6 +158,7 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 				
 				spiplistes_abonnements_ajouter ($id_auteur
 												, array_keys($listes_souhaitees)
+												, 'valide'
 												);
 				$nb = count ($listes_souhaitees);
 				if ($nb >= 1)
