@@ -1,4 +1,4 @@
-[(#REM) Tableau complet des organisations, affich� sur la page ?exec=organisations ]
+[(#REM) Tableau complet des organisations, affiché sur la page ?exec=organisations ]
 [(#SET{defaut_tri,#ARRAY{
 	nom,1,
 	id_auteur,1
@@ -17,9 +17,10 @@
 		</tr>
 	</thead>
 	<tbody>
+	[(#REM) Il faudrait un {id_contact?} ici, mais le critère n'est pas reconnu ]
 	<BOUCLE_liste_orga(ORGANISATIONS)
-		{id_contact?}{id_auteur?}{id_parent ?= #ENV{id_parent}}
-		{recherche?}{auteurs.statut == #ENV{statut,.*}}
+		{id_parent ?= #ENV{id_parent}}
+		{recherche?}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
