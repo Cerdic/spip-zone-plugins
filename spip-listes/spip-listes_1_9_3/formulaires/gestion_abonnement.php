@@ -19,17 +19,17 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 	
 	$d = _request('d');
 	$stop = intval(_request('stop'));
-	$valeurs = array();
-	$valeurs['id_liste'] = $id_liste;
-	$valeurs['d'] = $d;
-	$valeurs['editable'] = false;
+	$contexte = array();
+	$contexte['id_liste'] = $id_liste;
+	$contexte['d'] = $d;
+	$contexte['editable'] = false;
 	
 	if($auteur = spiplistes_auteur_cookie_ou_session($d))
 	{
 		$id_auteur = $auteur['id_auteur'];
-		$valeurs['id_auteur'] = intval($id_auteur);
-		$valeurs['format'] = spiplistes_format_abo_demande($id_auteur);
-		$valeurs['editable'] = true;
+		$contexte['id_auteur'] = intval($id_auteur);
+		$contexte['format'] = spiplistes_format_abo_demande($id_auteur);
+		$contexte['editable'] = true;
 		
 		/**
 		 * Recupere la liste des abonnements en cours
@@ -54,28 +54,31 @@ function formulaires_gestion_abonnement_charger_dist($id_liste=''){
 				)
 				{
 					$row = spiplistes_listes_liste_fetsel ($id_liste, 'titre,descriptif');
-					$valeurs['titre_liste'] = $row['titre'];
-					$valeurs['descriptif'] = $row['descriptif'];
-					$valeurs['stop'] = $stop;
+					$contexte['titre_liste'] = $row['titre'];
+					$contexte['descriptif'] = $row['descriptif'];
+					$contexte['stop'] = $stop;
 				}
 				else
 				{
-					$valeurs['errormsg'] = _T('spiplistes:pas_abonne_liste');
+					$contexte['errormsg'] = _T('spiplistes:pas_abonne_liste');
 				}
 			}
 			else
 			{
-				unset ($valeurs['d']);
-				unset ($valeurs['editable']);
+				unset ($contexte['d']);
+				unset ($contexte['editable']);
 			}
 		}
 	}
 	else
 	{
 		spiplistes_log ('ERR: UNSUBSCRIBE id_auteur #'.$id_auteur.' id_liste #'.$id_liste);
-		$valeurs['errormsg'] = _T('spiplistes:action_interdite');
+		$contexte['errormsg'] = _T('spiplistes:action_interdite');
 	}
-	return $valeurs;
+	
+	$contexte['nb_abos'] = count($mes_abos);
+	
+	return ($contexte);
 }
 
 function formulaires_gestion_abonnement_verifier($id_liste='') {
@@ -100,7 +103,7 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 		
 		// la liste des abonnements en cours
 		// pour cet auteur
-		$mes_abos = spiplistes_abonnements_listes_auteur ($id_auteur, true);
+		$mes_abos = spiplistes_abonnements_listes_auteur ($id_auteur, FALSE);
 							  
 		// demander de stopper une inscription ?
 		if ($stop > 0)
@@ -199,8 +202,8 @@ function formulaires_gestion_abonnement_traiter_dist($id_liste='') {
 
 /**
  * Recuperer id_auteur, statut, nom et email pour :
- * -* l'auteur associé au cookie de l'environnement
- * -* ou l'auteur de la session en cours
+ * - l'auteur associé au cookie de l'environnement
+ * - ou l'auteur de la session en cours
  * @return array
  */
 function spiplistes_auteur_cookie_ou_session ($d)

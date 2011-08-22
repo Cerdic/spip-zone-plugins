@@ -98,8 +98,15 @@ class SMTP_1_02
         }
 
 /**
- * Sparadra pour la connexioon SSL.
+ * CP-20110821
  * 
+ * Sparadra pour la connexion SSL.
+ *
+ * A vérifier : si plusieurs serveurs indiqués
+ * dans ce champ (séparateur ';'), phpMailer
+ * tente la connexion sur le premier, puis
+ * sur le second si echec, etc.
+ *
  * A revoir complètement avec la dernière version
  * de phpMailer en important la librairie
  * @see http://code.google.com/a/apache-extras.org/p/phpmailer/
