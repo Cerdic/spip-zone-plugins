@@ -107,17 +107,15 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 	// affichage du formulaire de téléchargement des docs
 	function edition_directe_affiche_gauche($flux){
 		$exec= $flux['args']['exec'];
-		
-	
 			if(test_plugin_actif('medias') or test_plugin_actif('gest_doc')) $mediatheque='ok';
 			
-			if($exec=='articles' AND $mediatheque AND autoriser('joindredocument','article',_request('id_article')) AND  objet_edition_directe($type)){
+			if($exec=='articles' AND $mediatheque AND autoriser('joindredocument','article',_request('id_article')) AND  objet_edition_directe('article')){
 				$flux['data'] .=recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'article','id_objet'=>_request('id_article')));
 				}
-			if($exec=='naviguer' AND autoriser('joindredocument','rubrique',_request('id_rubrique')) AND  objet_edition_directe($type)){
+			if($exec=='naviguer' AND autoriser('joindredocument','rubrique',_request('id_rubrique')) AND  objet_edition_directe('rubrique')){
 				$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'rubrique','id_objet'=>_request('id_rubrique')));
 				}		
-			if($exec=='breves_voir' AND autoriser('joindredocument','breve',_request('id_breve')) AND  objet_edition_directe($type)){
+			if($exec=='breves_voir' AND autoriser('joindredocument','breve',_request('id_breve')) AND  objet_edition_directe('breve')){
 				$flux['data'] .= recuperer_fond('prive/editer/colonne_documents_aed',array('objet'=>'breve','id_objet'=>_request('id_breve')));
 				}
 	
