@@ -215,6 +215,45 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_ffmpeg2theora']['libtheora_version'] = $infos[2];
 				ecrire_meta('spipmotion_ffmpeg2theora',serialize($data['spipmotion_ffmpeg2theora']));
 			}
+			
+			/**
+			 * On regarde si flvtool2 est installé
+			 * Si oui on ajoute sa version dans les metas aussi
+			 */
+			$flvtool2 = exec('flvtool2',$retour_flvtool2,$int_flvtool2);
+			if(!empty($retour_flvtool2)){
+				$info = $retour_flvtool2[0];
+				preg_match('/FLVTool2 ([0-9a-z].*)/s',$info,$infos);
+				$data['spipmotion_flvtool2']['flvtool2'] = true;
+				$data['spipmotion_flvtool2']['version'] = $infos[1];
+				ecrire_meta('spipmotion_flvtool2',serialize($data['spipmotion_flvtool2']));
+			}
+			
+			/**
+			 * On regarde si flvtool++ est installé
+			 * Si oui on ajoute sa version dans les metas aussi
+			 */
+			$flvtoolplus = exec('flvtool++',$retour_flvtoolplus,$int_flvtoolplus);
+			if(!empty($retour_flvtoolplus)){
+				$info = $retour_flvtoolplus[0];
+				preg_match('/flvtool\+\+ ([0-9a-z].*)/s',$info,$infos);
+				$data['spipmotion_flvtoolplus']['flvtoolplus'] = true;
+				$data['spipmotion_flvtoolplus']['version'] = $infos[1];
+				ecrire_meta('spipmotion_flvtoolplus',serialize($data['spipmotion_flvtoolplus']));
+			}
+			
+			/**
+			 * On regarde si mediainfo est installé
+			 * Si oui on ajoute sa version dans les metas aussi
+			 */
+			$mediainfo = exec('mediainfo --version',$retour_mediainfo,$int_mediainfo);
+			if(!empty($retour_mediainfo)){
+				$info = $retour_mediainfo[1];
+				preg_match('/MediaInfoLib - ([0-9a-z].*)/s',$info,$infos);
+				$data['spipmotion_mediainfo']['mediainfo'] = true;
+				$data['spipmotion_mediainfo']['version'] = $infos[1];
+				ecrire_meta('spipmotion_mediainfo',serialize($data['spipmotion_mediainfo']));
+			}
 		}
 	}else{
 		$data['spipmotion_compiler'] = unserialize($GLOBALS['meta']['spipmotion_compiler']);
@@ -224,6 +263,9 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		$data['spipmotion_protocols'] = unserialize($GLOBALS['meta']['spipmotion_protocols']);
 		$data['spipmotion_avfilters'] = unserialize($GLOBALS['meta']['spipmotion_avfilters']);
 		$data['spipmotion_ffmpeg2theora'] = unserialize($GLOBALS['meta']['spipmotion_ffmpeg2theora']);
+		$data['spipmotion_flvtool2'] = unserialize($GLOBALS['meta']['spipmotion_flvtool2']);
+		$data['spipmotion_flvtoolplus'] = unserialize($GLOBALS['meta']['spipmotion_flvtoolplus']);
+		$data['spipmotion_mediainfo'] = unserialize($GLOBALS['meta']['spipmotion_mediainfo']);
 	}
 	return $data;
 }
