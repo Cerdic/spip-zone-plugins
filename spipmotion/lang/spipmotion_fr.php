@@ -170,6 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_encodage_unique_oui' => 'Le document @id_document@ a été correctement encodé en @extension@.',
 	'message_texte_binaire_manquant' => 'Un logiciel nécessaire n\'est pas disponible sur votre serveur :',
 	'message_texte_binaires_informer' => 'Veuillez en informer votre administrateur.',
+	'message_texte_binaires_informer_exec' => 'Votre configuration de PHP ne permet pas d\'exécuter d\'applications.',
 	'message_texte_binaires_informer_safe_mode' => 'Le safe mode est activé sur votre site. Les binaires nécessaires doivent se trouver dans le répertoire "@execdir@" du serveur.',
 	'message_texte_binaires_manquant' => 'Plusieurs logiciels nécessaires ne sont pas disponibles sur votre serveur :',
 	'message_titre_binaire_manquant' => 'Un logiciel manquant',

@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -34,7 +34,12 @@ function notifications_spipmotion_verifier_binaires($quoi, $id, $options){
 			,
 				'data'=>$tous)
 		);
-		$msg_mail = recuperer_fond('notifications/spipmotion_verifier_binaires',array('erreurs'=>$options['erreurs'],'nb' => $nb));
+		if(in_array('exec',$options['erreurs'])){
+			unset($erreurs[0]);
+			$msg_mail = recuperer_fond('notifications/spipmotion_verifier_binaires',array('exec'=>'oui','nb' => 1));
+		}else{
+			$msg_mail = recuperer_fond('notifications/spipmotion_verifier_binaires',array('erreurs'=>$options['erreurs'],'nb' => $nb));
+		}
 		/**
 		 * Nettoyage de la liste d'emails en vérifiant les doublons
 		 * et la validité des emails

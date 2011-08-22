@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -16,6 +16,7 @@
  * -* ffmpeg
  * -* ffmpeg2theora
  * -* flvtool2
+ * -* flvtool++
  * -* qt-faststart
  * -* le script spipmotion.sh
  * -* la class ffmpeg-php
@@ -52,96 +53,102 @@ function inc_spipmotion_verifier_binaires_dist($valeurs='',$notif=false){
 	if(!$valeurs)
 		$valeurs = lire_config('spipmotion');
 
-	/**
-	 * Tester ffmpeg2theora
-	 */
-	exec('ffmpeg2theora',$retour_ffmpeg2theora,$retour_ffmpeg2theora_int);
-	if($retour_ffmpeg2theora_int != 0){
-		ecrire_config('spipmotion_ffmpeg2theora_casse', 'oui');
-		$erreurs[] = 'ffmpeg2theora';
-	}else{
-		effacer_config('spipmotion_ffmpeg2theora_casse');
+	if(!function_exists('exec')){
+		ecrire_config('spipmotion_exec_casse', 'oui');
+		$erreurs[] = 'exec';
 	}
-
-	/**
-	 * Tester flvtool2
-	 */
-	exec('flvtool2',$retour_flvtool,$retour_flvtool_int);
-	if($retour_flvtool_int != 0){
-		ecrire_config('spipmotion_flvtool_casse', 'oui');
-		$erreurs[] = 'flvtool2';
-	}else{
-		effacer_config('spipmotion_flvtool_casse');
-	}
-
-	/**
-	 * Tester qt-faststart
-	 */
-	exec('qt-faststart',$retour_qt_faststart,$retour_qt_faststart_int);
-	if($retour_qt_faststart_int != 0){
-		ecrire_config('spipmotion_qt-faststart_casse', 'oui');
-		$erreurs[] = 'qt-faststart';
-	}else{
-		effacer_config('spipmotion_qt-faststart_casse');
-	}
-	
-	/**
-	 * Tester mediainfo
-	 * MediaInfo n'est pas indispensable au bon fonctionnement
-	 * On n'envoie pas de mail de notification
-	 * On ne bloquera pas les encodages
-	 */
-	exec('mediainfo --help',$retour_mediainfo,$retour_mediainfo_int);
-	if(!in_array($retour_mediainfo_int,array(0,255))){
-		ecrire_config('spipmotion_mediainfo_casse', 'oui');
-	}else{
-		effacer_config('spipmotion_mediainfo_casse');
-	}
-
-	/**
-	 * Tester le script spipmotion.sh présent dans script_bash/
-	 * Si le safe_mode est activé, il doit se trouver dans le répertoire des scripts autorisés
-	 */
-	if($safe_mode == 1){
-		$spipmotion_sh = $safe_mode_path.'/spipmotion.sh';
-	}else{
-		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
-	}
-	exec($spipmotion_sh." --help",$retour_spipmotionsh,$retour_spipmotionsh_int);
-	if($retour_spipmotionsh_int != 0){
-		ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
-		$erreurs[] = 'spipmotion.sh';
-	}else{
-		effacer_config('spipmotion_spipmotionsh_casse');
-	}
-
-	/**
-	 * Tester ffmpeg
-	 */
-	if($valeurs['chemin'] != ''){
-		exec($spipmotion_sh." --p ".$valeurs['chemin']." --info '-version'",$retour_ffmpeg,$retour_int_ffmpeg);
-		if($retour_int_ffmpeg != 0){
-			ecrire_config('spipmotion_ffmpeg_casse', 'oui');
-			$erreurs[] = 'ffmpeg';
+	else{
+		/**
+		 * Tester ffmpeg2theora
+		 */
+		exec('ffmpeg2theora',$retour_ffmpeg2theora,$retour_ffmpeg2theora_int);
+		if($retour_ffmpeg2theora_int != 0){
+			ecrire_config('spipmotion_ffmpeg2theora_casse', 'oui');
+			$erreurs[] = 'ffmpeg2theora';
 		}else{
-			effacer_config('spipmotion_ffmpeg_casse');
+			effacer_config('spipmotion_ffmpeg2theora_casse');
 		}
-	}else{
-		exec($spipmotion_sh." --info -version",$retour_ffmpeg,$retour_int_ffmpeg);
-		if($retour_int_ffmpeg != 0){
-			ecrire_config('spipmotion_casse', 'oui');
-			$erreurs[] = 'ffmpeg';
+	
+		/**
+		 * Tester flvtool2
+		 */
+		exec('flvtool2',$retour_flvtool,$retour_flvtool_int);
+		if($retour_flvtool_int != 0){
+			ecrire_config('spipmotion_flvtool_casse', 'oui');
+			$erreurs[] = 'flvtool2';
 		}else{
-			if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
-				effacer_config('spipmotion_casse');
+			effacer_config('spipmotion_flvtool_casse');
+		}
+	
+		/**
+		 * Tester qt-faststart
+		 */
+		exec('qt-faststart',$retour_qt_faststart,$retour_qt_faststart_int);
+		if($retour_qt_faststart_int != 0){
+			ecrire_config('spipmotion_qt-faststart_casse', 'oui');
+			$erreurs[] = 'qt-faststart';
+		}else{
+			effacer_config('spipmotion_qt-faststart_casse');
+		}
+		
+		/**
+		 * Tester mediainfo
+		 * MediaInfo n'est pas indispensable au bon fonctionnement
+		 * On n'envoie pas de mail de notification
+		 * On ne bloquera pas les encodages
+		 */
+		exec('mediainfo --help',$retour_mediainfo,$retour_mediainfo_int);
+		if(!in_array($retour_mediainfo_int,array(0,255))){
+			ecrire_config('spipmotion_mediainfo_casse', 'oui');
+		}else{
+			effacer_config('spipmotion_mediainfo_casse');
+		}
+	
+		/**
+		 * Tester le script spipmotion.sh présent dans script_bash/
+		 * Si le safe_mode est activé, il doit se trouver dans le répertoire des scripts autorisés
+		 */
+		if($safe_mode == 1){
+			$spipmotion_sh = $safe_mode_path.'/spipmotion.sh';
+		}else{
+			$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
+		}
+		exec($spipmotion_sh." --help",$retour_spipmotionsh,$retour_spipmotionsh_int);
+		if($retour_spipmotionsh_int != 0){
+			ecrire_config('spipmotion_spipmotionsh_casse', 'oui');
+			$erreurs[] = 'spipmotion.sh';
+		}else{
+			effacer_config('spipmotion_spipmotionsh_casse');
+		}
+	
+		/**
+		 * Tester ffmpeg
+		 */
+		if($valeurs['chemin'] != ''){
+			exec($spipmotion_sh." --p ".$valeurs['chemin']." --info '-version'",$retour_ffmpeg,$retour_int_ffmpeg);
+			if($retour_int_ffmpeg != 0){
+				ecrire_config('spipmotion_ffmpeg_casse', 'oui');
+				$erreurs[] = 'ffmpeg';
+			}else{
+				effacer_config('spipmotion_ffmpeg_casse');
+			}
+		}else{
+			exec($spipmotion_sh." --info -version",$retour_ffmpeg,$retour_int_ffmpeg);
+			if($retour_int_ffmpeg != 0){
+				ecrire_config('spipmotion_casse', 'oui');
+				$erreurs[] = 'ffmpeg';
+			}else{
+				if($GLOBALS['meta']['spipmotion_casse'] == 'oui'){
+					effacer_config('spipmotion_casse');
+				}
 			}
 		}
-	}
-	if (!class_exists('ffmpeg_movie')) {
-		ecrire_config('spipmotion_ffmpeg-php_casse', 'oui');
-		$erreurs[] = 'ffmpeg-php';
-	}else{
-		effacer_config('spipmotion_ffmpeg-php_casse');
+		if (!class_exists('ffmpeg_movie')) {
+			ecrire_config('spipmotion_ffmpeg-php_casse', 'oui');
+			$erreurs[] = 'ffmpeg-php';
+		}else{
+			effacer_config('spipmotion_ffmpeg-php_casse');
+		}
 	}
 
 	if(count($erreurs) > 0){
