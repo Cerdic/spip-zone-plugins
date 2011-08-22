@@ -3,8 +3,8 @@
 <div class='numero'><:contacts:contact_numero:><p>#ID_CONTACT</p></div>
 
 	[(#REM) faudra mettre {si #ID_AUTEUR} sur la 3.0 ]
-	<BOUCLE_auteur_lie(AUTEURS){id_contact}{tout}>
-		
+	<BOUCLE_auteur_lie(spip_contacts_liens){objet=auteur}{id_contact}{tout}>
+    <BOUCLE_auteur_lie_infos(AUTEURS){id_auteur=#ID_OBJET}>
 	<div class="numero">
 		<div class='num'>
 		<:contacts:contact_associe_a_auteur_numero:>
@@ -21,6 +21,7 @@
 				[(#URL_ACTION_AUTEUR{lier_contact_auteur,[(#ENV{id})/0],[(#ENV{redirect,#SELF})]})]})]		</div>
 		]
 	</div>
+    </BOUCLE_auteur_lie_infos>
 	</BOUCLE_auteur_lie>
 
 	<div class="liaison">
