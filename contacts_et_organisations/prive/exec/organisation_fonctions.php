@@ -5,7 +5,7 @@
 if (defined('_CO_REDIRIGER_SUR_AUTEURS') and _CO_REDIRIGER_SUR_AUTEURS) {
 
 	$id_organisation = _request('id_organisation');
-	$id_auteur = sql_getfetsel('id_auteur', 'spip_organisations', 'id_organisation='. intval($id_organisation) );
+	$id_auteur = sql_getfetsel('id_objet', 'spip_organisations_liens', 'objet=\'auteur\' AND id_organisation='. intval($id_organisation) );
 
 	if ($id_auteur) {
 		include_spip('inc/headers');
