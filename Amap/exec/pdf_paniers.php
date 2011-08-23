@@ -16,9 +16,9 @@ function exec_pdf_paniers(){
 	$pdf->Open();
 	$pdf->AddPage();
 	//On definit les colonnes (champs,largeur,intitule,alignement)
-	//$pdf->AddCol('id_amap_panier',10,'ID','R');
 	$pdf->AddCol('nom',40,_T('amap:nom'),'L');
 	$pdf->AddCol('type_panier',30,_T('amap:type_panier'),'L');
+	$pdf->AddCol('signature',40,_T('amap:signature'),'L');
 	$prop=array(
 		'HeaderColor'=>array(255,150,100),
 		'color1'=>array(224,235,255),

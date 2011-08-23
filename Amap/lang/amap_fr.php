@@ -82,6 +82,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'reste_paniers_recuperer' => 'Il vous reste encore @nb@ paniers à recupérer',
 	'retour_auteur' => 'Retour sur la page auteur',
 
+	//S
+	'signature' => 'Signature',
+
 	// T
 	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide:
 					<br />Elle ne contient aucun enregistrement.',
