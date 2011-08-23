@@ -115,9 +115,11 @@
 		<li class="fieldset">
 			<fieldset>
 				<h3 class="legend"><:spipmotion:profils_encodage_video:></h3>
+				<ul>
 				<BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
 					<INCLURE{fond=formulaires/spipmotion_encodage_video}{valeur=#VALEUR}{env}>
 				</BOUCLE_profils_video>
+				</ul>
 			</fieldset>
 		</li>
 		</B_profils_video>
