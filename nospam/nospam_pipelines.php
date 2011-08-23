@@ -143,6 +143,15 @@ function nospam_formulaire_verifier($flux){
 					$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
 			}
 		}
+		// S'il y a un lien dans le champ session_nom => spam
+		if (!isset($flux['data']['session_nom'])){
+			include_spip("inc/nospam");
+			$infos_texte = analyser_spams(_request('session_nom'));
+			if ($infos_texte['nombre_liens'] > 0) {
+				$flux['data']['message_erreur'] = _T('nospam:erreur_spam');
+				spip_log("Lien dans le champ session_nom ".$flux['data']['message_erreur'],'nospam');
+			}
+		}
 	}
 	return $flux;
 }
