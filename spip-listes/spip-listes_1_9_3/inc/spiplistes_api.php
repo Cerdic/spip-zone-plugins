@@ -1316,7 +1316,7 @@ function spiplistes_assembler_patron ($path_patron, $contexte) {
 		include_spip('public/assembler');
 	}
 	
-	spiplistes_debug_log('Chemin patrons : '.$path_patron);
+	//spiplistes_debug_log('Chemin patrons : '.$path_patron);
 	
 	$patron_html = spiplistes_patron_find_in_path($path_patron, $contexte['lang'], false);
 	$contexte['patron_html'] = $patron_html;
@@ -1472,6 +1472,39 @@ function spiplistes_auteurs_cookie_oubli_updateq ($cookie_oubli, $where, $where_
 			. "=" . sql_quote($where) . " LIMIT 1";
 	}
 	return(sql_update('spip_auteurs', array('cookie_oubli' => sql_quote($cookie_oubli)), $where));
+}
+
+/**
+ * Création d'un auteur à partir de l'email
+ * Renvoie l'auteur sous forme d'un array
+ * ou FALSE si erreur.
+ * Dans la foulée, crée le format.
+ * 
+ * @version CP-20110823
+ * @return bool|array
+ */
+function spiplistes_auteurs_create_from_mail ($email, $statut = '6forum', $format = 'non')
+{
+	$login = spiplistes_login_from_email ($email);
+	$pass = creer_pass_aleatoire ();
+	$auteur = array (
+		'nom' => ucfirst ($login),
+		'email' => $email,
+		'login' => $login,
+		'pass' => md5($pass),
+		'statut' => $statut,
+		'htpass' => generer_htpass($pass),
+		'cookie_oubli' => creer_uniqid()
+	);
+	if (!$id_auteur = spiplistes_auteurs_auteur_insertq ($auteur)) {
+		return (FALSE);
+	}
+	else {
+		spiplistes_log_api('CREATE AUTEUR #'.$id_auteur);
+		$auteur['id_auteur'] = $id_auteur;
+		spiplistes_format_abo_modifier ($id_auteur, $format);
+	}
+	return ($auteur);
 }
 
 /**
