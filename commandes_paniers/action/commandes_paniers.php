@@ -2,8 +2,17 @@
     if (!defined("_ECRIRE_INC_VERSION")) return;
 
     include_spip('inc/base');
+	include_spip('inc/session');
 
     function action_commandes_paniers_dist(){
+
+    	// On commence par chercher le panier du visiteur actuel s'il n'est pas donné
+    	if (!$id_panier) $id_panier = session_get('id_panier');
+
+        //Si aucun panier ne pas agir
+        if (is_null($id_panier)) 
+            return;        
+
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $arg = $securiser_action();
 
