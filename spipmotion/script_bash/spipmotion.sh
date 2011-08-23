@@ -1,13 +1,14 @@
 #!/bin/bash
 # SPIPmotion : A shell program to convert multimedia files
-# Version 0.3
+# Version 0.3.3
 #
 # Dependancies :
 #   * ffmpeg with libmp3lame support
+#	* ffmpeg2theora
 #
 # Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
 
-VERSION="0.3.2"
+VERSION="0.3.3"
 
 ################ LOCALISATION #####################
 messageaide="
@@ -112,7 +113,7 @@ while test -n "${1}"; do
 		--fpre) fpre="-fpre ${2}"
 		shift;;
 		--two-pass) deux_passes="--two-pass"
-		shift;;
+		;;
 		--info) info="${2}"
 		shift;;
 		--log) log="${2}"
@@ -225,7 +226,7 @@ function spipmotion_encodage_ffmpeg2theora ()
 	On encode une video via ffmpeg2theora
 	"
 	echo "$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log" >> $log
-	$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --optimize --nice 9 -o $sortie 2> $log >> $log
+	$chemin $entree -v $videoquality $bitrate_ffmpeg2theora --soft-target $audiobitrate_quality_ffmpeg2theora $audiofreq_ffmpeg2theora $ac_ffmpeg2theora --max_size $size $fps_ffmpeg2theora $deux_passes --nosubtitles --optimize --nice 9 -o $sortie 2> $log >> $log
 	exit $?	
 }
 
