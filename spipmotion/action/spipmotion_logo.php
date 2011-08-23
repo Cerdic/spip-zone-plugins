@@ -37,7 +37,6 @@ function action_infos_video_post($r){
 
 	include_spip('inc/invalideur');
 	suivre_invalideur("id='id_document/$id_document'");
-	spip_log($x,'spipmotion');
 	return $x;
 }
 

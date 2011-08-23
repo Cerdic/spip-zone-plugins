@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -27,8 +27,32 @@ function inc_spipmotion_recuperer_infos($id_document){
 	 * Si c'est un flv on lui applique les metadatas pour éviter les problèmes
 	 * Si c'est un mov ou MP4 on applique qt-faststart
 	 */
-	if(($document['extension'] == 'flv') && !$GLOBALS['meta']['spipmotion_flvtool_casse']){
-		$metadatas = @shell_exec("flvtool2 -xUP $movie_chemin");
+	if($document['extension'] == 'flv'){
+		/**
+		 * Inscrire les metadatas dans la video finale
+		 * On utilise soit :
+		 * -* flvtool++
+		 * -* flvtool2
+		 */
+		if(isset($GLOBALS['meta']['spipmotion_flvtoolplus'])){
+			$flvtoolplus = unserialize($GLOBALS['meta']['spipmotion_flvtoolplus']);
+		}
+		if(isset($GLOBALS['meta']['spipmotion_flvtool2'])){
+			$flvtool2 = unserialize($GLOBALS['meta']['spipmotion_flvtool2']);
+		}
+		if($flvtoolplus['flvtoolplus']){
+			$movie_chemin_tmp = $movie_chemin.'_tmp';
+			$metadatas_flv = "flvtool++ $movie_chemin $movie_chemin_tmp";
+			
+		}else if($flvtool2['flvtool2']){
+			$metadatas_flv = "flvtool2 -xUP $movie_chemin";
+		}
+		if($metadatas_flv){
+			exec($metadatas_flv,$retour,$retour_int);
+			if(file_exists($movie_chemin_tmp)){
+				rename($movie_chemin_tmp,$movie_chemin);
+			}
+		}
 	}
 	if(in_array($document['extension'],array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
 		exec("qt-faststart $movie_chemin $movie_chemin._temp",$retour,$retour_int);
@@ -36,8 +60,15 @@ function inc_spipmotion_recuperer_infos($id_document){
 			rename($movie_chemin.'._temp',$movie_chemin);
 		}
 	}
-
-	if(class_exists('ffmpeg_movie')){
+	
+	/**
+	 * Récupération des métadonnées par mediainfo et le cas échéant par la class ffmpeg-pho
+	 */
+	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
+		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
+		$infos = $mediainfo($movie_chemin);
+	}
+	else if(class_exists('ffmpeg_movie')){
 		$movie = new ffmpeg_movie($movie_chemin, 0);
 	
 		$infos['bitrate'] = $movie->getBitRate();
@@ -85,13 +116,6 @@ function inc_spipmotion_recuperer_infos($id_document){
 			}
 		}
 	}
-	
-	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
-		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
-		$mediainfos = $mediainfo($movie_chemin);
-	}
-
-	$infos = array_merge($mediainfos,$infos);
 	
 	if(strlen($document['titre']) > 0){
 		unset($infos['titre']);

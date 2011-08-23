@@ -36,13 +36,10 @@ function action_spipmotion_infos_post($r){
 
 	$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
 	$infos = $recuperer_infos($id_document);
-	spip_log($infos,'spipmotion');
 	if(_request("iframe") == 'iframe') {
 		$redirect = parametre_url(urldecode($iframe_redirect),"show_video_infos",join(',',$documents_actifs),'&')."&iframe=iframe";
-		spip_log($redirect,'spipmotion');
 	}else{
 		$redirect = urldecode(_request('redirect'));
-		spip_log($redirect,'spipmotion');
 	}
 	return $redirect;
 }

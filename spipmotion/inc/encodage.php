@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -76,7 +76,7 @@ function encodage($source,$doc_attente){
 		return;
 
 	
-	$ffmpeg_version = lire_config('spipmotion_compiler/ffmpeg_version','0.6');
+	$ffmpeg_version = lire_config('spipmotion_compiler/ffmpeg_version','0.7');
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 	
 	/**
@@ -472,14 +472,6 @@ function encodage($source,$doc_attente){
 			$erreur = _T('spipmotion:erreur_script_spipmotion_non_executable');
 			ecrire_fichier($fichier_log,$erreur);
 		}
-		if(is_readable($fichier_temp) && ($extension_attente == 'flv') && $encodage_ok){
-			/**
-			 * Inscrire les metadatas dans la video finale
-			 */
-			$metadatas_flv = 'flvtool2 -Ux '.$fichier_temp;
-			exec($metadatas_flv,$retour,$retour_int);
-			spip_log($retour_int,'spipmotion');
-		}
 	}
 
 	if($encodage_ok && file_exists(get_spip_doc($source['fichier']))){
@@ -521,11 +513,11 @@ function encodage($source,$doc_attente){
 			$champs_recup = array('titre' => '0','descriptif' => '0');
 			if(_DIR_PLUGIN_PODCAST)
 				$champs_recup['podcast'] = 0;
-				$champs_recup['explicit'] = 0;
+				$champs_recup['explicit'] = 'non';
 			if(_DIR_PLUGIN_LICENCES)
 				$champs_recup['id_licence'] = 0;
 			if(_DIR_PLUGIN_MEDIAS)
-				$champs_recup['credits'] = 0;
+				$champs_recup['credits'] = '';
 				
 			$modifs = array_intersect_key($source, $champs_recup);
 			

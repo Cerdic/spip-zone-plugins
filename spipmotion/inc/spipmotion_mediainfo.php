@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -22,7 +22,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 		spip_xml_match_nodes(",^track type,",$arbre, $tracks);
 		foreach($tracks as $track => $info){
 			$metas[$track] = $info;
-			spip_log($info,'spipmotion');
+			//spip_log($info,'spipmotion');
 			if($track == 'track type="General"'){
 				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : $info[0]['Movie_name'][0];
 				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];

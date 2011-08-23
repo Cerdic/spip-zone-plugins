@@ -180,8 +180,6 @@ function spipmotion_genere_file($id_document,$type,$id,$format=''){
 					}
 				}
 			}
-		}else{
-			spip_log('que dalle','spipmotion');
 		}
 		if($invalider){
 			include_spip('inc/invalideur');
