@@ -3,6 +3,7 @@
 
     include_spip('inc/base');
 	include_spip('inc/session');
+    include_spip('inc/commandes');
 
     function action_commandes_paniers_dist(){
 
@@ -15,25 +16,8 @@
 
         $securiser_action = charger_fonction('securiser_action', 'inc');
         $arg = $securiser_action();
-
-        $champs = array(
-            'statut' => 'encours'
-        );
-
-        $id_objet = sql_insertq(
-            'spip_commandes',
-            $champs
-        );
-
-        pipeline('post_insertion',
-            array(
-                'args' => array(
-                    'table' => 'spip_commandes',
-                    'id_objet' => $id_objet
-                ),
-                'data' => $champs
-            )
-        );
+        
+        $id_objet = creer_commande_encours();
 
         $supprimer_panier = charger_fonction('supprimer_panier_encours', 'action/');
         $supprimer_panier();
