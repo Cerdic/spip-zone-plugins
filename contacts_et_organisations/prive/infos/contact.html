@@ -4,7 +4,7 @@
 
 	[(#REM) faudra mettre {si #ID_AUTEUR} sur la 3.0 ]
 	<BOUCLE_auteur_lie(spip_contacts_liens){objet=auteur}{id_contact}{tout}>
-    <BOUCLE_auteur_lie_infos(spip_auteurs){id_auteur=#ID_OBJET}>
+    <BOUCLE_auteur_lie_infos(AUTEURS){id_auteur=#ID_OBJET}>
 	<div class="numero">
 		<div class='num'>
 		<:contacts:contact_associe_a_auteur_numero:>

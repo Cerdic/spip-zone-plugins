@@ -3,7 +3,7 @@
 [(#SET{plie,0})]
 [(#CHEMIN{images/contacts-24.png}|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:contacts:infos_contacts_ou_organisations:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})],0})]
 #SET{rien,0}#SET{contact,0}
-<BOUCLE_est_un_contact(contacts_liens){objet=auteur}{id_objet=#ID_AUTEUR}>
+<BOUCLE_est_un_contact(CONTACTS){id_auteur}>
 		#SET{id_contact,#ID_CONTACT}
 		<a href="[(#ID_CONTACT|generer_url_entite{contact})]" title="<:contacts:contact_voir:>">[(#CHEMIN{images/contact-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
 		<:contacts:est_un_contact:>
@@ -13,7 +13,7 @@
 			court=oui,ajax})]
 </BOUCLE_est_un_contact>
 
-	<BOUCLE_est_une_organisation(organisations_liens){objet=auteur}{id_objet=#ID_AUTEUR}>
+	<BOUCLE_est_une_organisation(ORGANISATIONS){id_auteur}>
 		#SET{id_organisation,#ID_ORGANISATION}
 		<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]" title="<:contacts:organisation_voir:>">[(#CHEMIN{images/organisation-48.png}|image_reduire{48}|inserer_attribut{class,contact_logo})]</a>
 		<:contacts:est_une_organisation:>
