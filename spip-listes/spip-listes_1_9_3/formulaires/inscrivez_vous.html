@@ -1,0 +1,82 @@
+[<!-- (#REM)
+	
+	// $LastChangedRevision$
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	Permet d'afficher un formulaire d'abonnement très léger :
+	- un titre de formulaire
+	- un champ pour l'adresse mail
+	
+	Appel de la page par :
+		http://<foo.bar>/?page=inscrivez_vous
+		
+	Ou en intégrant les quelques lignes ci-dessous dans
+	votre squelette.
+	
+	@licence GNU/GPL
+	
+	Le formulaire apparaît si pas d'identifié en cours.
+
+-->]
+[(#ENV{accepter_visiteurs}|oui|et{#ENV{session_email}|non})
+<div id="spiplistes-inscrivez-vous">
+<div class="formulaire_spip formulaire_inscription ajax" id="formulaire_inscription">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+[(#ENV*{message_ok}|non)
+<h3 title="<:spiplistes:inscrivez_vous_newsletter:>"><:spiplistes:inscription_newsletter:></h3>
+<form method="post" action="#ENV{action}" id="form-inscrivez-vous">
+	
+	#ACTION_FORMULAIRE{#ENV{action}}
+				
+				<label for="mail_inscription" class="invisible"><:form_pet_votre_email:></label>
+				<input type="text"
+					   class="text bg-yes"
+					   name="mail_inscription"
+					   id="mail_inscription"
+					   title="<:form_pet_votre_email:>"
+					   value="#ENV*{mail_inscription}" size="128" />
+	
+	[<!-- (#REM) Piege a robots spammeurs -->]
+	<p style="display: none;">
+		<label for="nobot"><:antispam_champ_vide:></label>
+		<input type="text" class="text" name="nobot" id="nobot" value="#ENV{nobot}" size="10" />
+	</p>
+	<p class="boutons invisible"><input type="submit" class="submit" value="<:bouton_valider:>" /></p>
+ </form>]
+</div>
+</div>
+]
+[<!-- (#REM)
+
+	Code JS qui affiche une image en fond du champ.
+	Cette image est par défaut "adresse@foo.bar".
+	Pour personnaliser cette image, créez un fichier
+	png de 128 x 16 pixels et enregistrez-le dans
+	img_pack/adresse@foo.bar.png du répertoire
+	de vos squelettes.
+
+-->]
+<script type="text/javascript">
+//<![CDATA[
+
+;(function($) {
+	$(document).ready(function() {
+		var sl_bgimg = "url([(#CHEMIN{img_pack/adresse.foo.bar.png})])";
+		var sl_bgnon = "url()";
+		var sl_input = "#spiplistes-inscrivez-vous #mail_inscription";
+		
+		$(sl_input).css('background-image',sl_bgimg);
+		$(sl_input).focusin(function() {
+			$(this).css('backgroundImage',sl_bgnon);
+		});
+		$(sl_input).focusout(function() {
+			if (!$(this).val()) { $(this).css('backgroundImage',sl_bgimg); }
+		});
+	});	
+})(jQuery);
+
+//]]>
+</script>

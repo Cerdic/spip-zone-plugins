@@ -590,6 +590,7 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'abo_listes' => 'Abonnement'
 , 'abonnement_0' => 'Abonnement'
 , 'inscrivez_vous_' => 'Inscrivez-vous : '
+, 'inscription_newsletter' => 'Inscription Newsletter'
 , 'email_deja_enregistre' => 'Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e.'
 , 'inscrivez_vous_newsletter' => 'Inscrivez-vous pour recevoir les newsletters'
 , 'abonnement_titre_mail' => 'Modifier votre abonnement'
