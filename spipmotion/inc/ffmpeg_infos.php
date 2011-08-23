@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -204,6 +204,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 
 			/**
 			 * On regarde si ffmpeg2theora est installé
+			 * http://v2v.cc/~j/ffmpeg2theora/
 			 * Si oui on ajoute sa version dans les metas aussi
 			 */
 			$ffmpeg2theora = exec('ffmpeg2theora',$retour_theora,$int);
@@ -218,6 +219,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			
 			/**
 			 * On regarde si flvtool2 est installé
+			 * http://www.inlet-media.de/flvtool2/
 			 * Si oui on ajoute sa version dans les metas aussi
 			 */
 			$flvtool2 = exec('flvtool2',$retour_flvtool2,$int_flvtool2);
@@ -231,6 +233,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			
 			/**
 			 * On regarde si flvtool++ est installé
+			 * http://mirror.facebook.net/facebook/flvtool++/
 			 * Si oui on ajoute sa version dans les metas aussi
 			 */
 			$flvtoolplus = exec('flvtool++',$retour_flvtoolplus,$int_flvtoolplus);
@@ -244,6 +247,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			
 			/**
 			 * On regarde si mediainfo est installé
+			 * http://mediainfo.sourceforge.net/fr
 			 * Si oui on ajoute sa version dans les metas aussi
 			 */
 			$mediainfo = exec('mediainfo --version',$retour_mediainfo,$int_mediainfo);

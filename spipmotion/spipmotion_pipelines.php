@@ -5,7 +5,7 @@
  *
  * Auteurs :
  * Quentin Drouet (kent1)
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  */
 
@@ -108,7 +108,7 @@ function spipmotion_document_desc_actions($flux){
 				$statut_encodage = sql_getfetsel('encode','spip_spipmotion_attentes','id_document='.intval($id_document).' AND encode IN ("en_cours","non")');
 				if($statut_encodage == 'en_cours'){
 					$action3 = '';
-					$texte3 = _T('spipmotion:document_en_cours_encodage');
+					$texte3 = _T('spipmotion:info_document_encodage_en_cours');
 				}elseif ($statut_encodage == 'non'){
 					$action3 = '';
 					$texte3 = _T('spipmotion:document_dans_file_attente');
