@@ -1,0 +1,24 @@
+<BOUCLE_details(POUR){tableau #ENV{details}}>
+#SET{numero,#COMPTEUR_BOUCLE}
+<input type="hidden" name="item_number_#GET{numero}" value="#GET{numero}" />
+<BOUCLE_detail(POUR){tableau #VALEUR}>
+[(#REM) #CLE=>#VALEUR<br />]
+
+[(#CLE|=={descriptif}|oui)
+<input type="hidden" name="item_name_#GET{numero}" value="#VALEUR" />
+]
+[(#CLE|=={quantite}|oui)
+<input type="hidden" name="quantity_#GET{numero}" value="#VALEUR" />
+]
+[(#CLE|=={prix}|oui)
+<input type="hidden" name="amount_#GET{numero}" value="#VALEUR" />
+]
+[(#REM)
+<input type="hidden" name="on0_#GET{numero}" value="Options" />
+<input type="hidden" name="os0_#GET{numero}" value="Le texte des options" />
+]
+</BOUCLE_detail>
+</BOUCLE_details>
+<input type="hidden" name="num_cart_items" value="#TOTAL_BOUCLE" />
+</B_details>
+

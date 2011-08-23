@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Demo de paypal</title>
+#INSERT_HEAD
+</head>
+<body>
+#SET{details,#ARRAY}
+<div id="page">
+	<div id="entete"></div>
+	<div id="conteneur">
+		<div id="contenu">
+		<h1>Formulaire paypal : </h1>
+		
+		#SET{detail1, #ARRAY{
+		descriptif,Graines de champion,
+		quantite,2,
+		prix,5,
+		}} 
+		#SET{detail2, #ARRAY{
+		descriptif,Cabanes dans les bois,
+		quantite,1,
+		prix,7.5,
+		}}  
+		 
+[(#SET{details,
+	#GET{details}|push{
+		#GET{detail1}
+		}
+		|push{
+		#GET{detail2}
+		}
+        }
+)]  
+				
+		[(#FORMULAIRE_PAYPAL{#ARRAY{
+			periode,M,
+			libelle,Ceci n'est pas une pipe,
+			identifiant,[abonnement-1-(#SESSION{id_auteur})],
+			redirect_ok,[(#URL_PAGE{paiement_ok})],
+			details,#GET{details},		
+		}})]
+		</div>
+	</div>
+	<div id="extra"></div>
+	<div id="navigation"></div>
+	<div id="pied"></div>
+</div>
+</body>
+</html>
