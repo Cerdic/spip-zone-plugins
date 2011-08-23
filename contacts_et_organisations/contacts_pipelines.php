@@ -82,28 +82,6 @@ function contacts_afficher_contenu_objet($flux)
 	return $flux;
 }
 
-
-function contacts_boite_infos($flux){
-	/*
-	if ($flux['args']['type'] == 'contact'){
-
-		$id_auteur = sql_getfetsel('id_objet', 
-		'spip_contacts_liens', 
-		'objet=\'auteur\' AND id_contact=' . intval($flux['args']['id_contact']));
-
-		if ( $id_auteur > 0 )
-		{
-			$auteur = sql_fetsel("*", "spip_auteurs", "id_auteur=$id_auteur");
-			
-			$flux['data']			.= '<div>toto</div>';			
-		}
-	}
-	
-	$flux['data']			=  $flux['data'] ;
-	*/
-	return $flux;
-}
-
 /**
  * Affichage du formulaire de choix Contact/Organisation
  * dans la colonne de vue d'un auteur
