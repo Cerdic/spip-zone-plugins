@@ -17,7 +17,7 @@
 			<:amap:impression_donnees_fonction_date:>
 			<table border="0" width="100%">
 			<B_paniers>
-				<BOUCLE_paniers(EVENEMENTS){age<0}>
+				<BOUCLE_paniers(EVENEMENTS){age<0}{par date_debut}>
 					[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 						<td class="center">
 							<BOUCLE_paniers_distribution(AMAP_PANIERS){date_distribution=#DATE_DEBUT}{0,1}>
