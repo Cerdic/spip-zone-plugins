@@ -22,8 +22,11 @@
         $supprimer_panier = charger_fonction('supprimer_panier_encours', 'action/');
         $supprimer_panier();
 
-        include_spip('inc/headers');
-        redirige_par_entete(generer_url_public('commande','id_commande='.$id_objet,true));
+        if (is_null(_request('redirect'))) {   
+            $redirect = generer_url_public('commande','id_commande='.$id_objet,true);
+            include_spip('inc/headers');
+            redirige_par_entete($redirect);
+        }
 
     }
 ?>
