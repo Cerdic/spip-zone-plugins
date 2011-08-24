@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_bd_cree' => 'La base de donn&#233;es @nombase@ a &#233;t&#233; cr&#233;&#233;e',
 'install_spip_1' => 'Vous pouvez ',
 'install_spip_2' => 'poursuivre l\'installation de SPIP',
+'install_spip_3' => 'Vous pouvez <a href="@url@">poursuivre l\'installation de SPIP</a>.',
 'install_creation_bd' => 'Cr&#233;ation de la base de donn&#233;es @nombase@',
 'install_creer_bd_1' => 'Voulez-vous ',
 'install_creer_bd_2' => 'cr&#233;er cette base ?',

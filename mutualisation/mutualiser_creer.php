@@ -445,7 +445,7 @@ function mutu_etape_fin($e, $options){
 
 		"<div><img alt='SPIP' src='".find_in_path('images/logo-spip.gif')."' /></div>\n"
 		.'<h3>'.
-			_L('Vous pouvez <a href="'.generer_url_ecrire('install').'">poursuivre l\'installation de SPIP</a>.')
+			_T('mutu:install_spip_3',array('url' => generer_url_ecrire('install')))
 		.'</h3>',
 		" id='mutu'"
 	);

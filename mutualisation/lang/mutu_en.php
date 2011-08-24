@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'install_bd_cree' => '@nombase@ database has been created',
 'install_spip_1' => 'You can ',
 'install_spip_2' => 'continue with SPIP installation',
+'install_spip_3' => 'You can <a href="@url@">continue with SPIP installation</a>.',
 'install_creation_bd' => 'Creation of @nombase@ database',
 'install_creer_bd_1' => 'Do you want to ',
 'install_creer_bd_2' => 'create this database?',
