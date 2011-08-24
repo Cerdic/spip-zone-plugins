@@ -66,6 +66,9 @@ function champs_extras_restrictions($saisie, $action, $table, $id, $qui, $opt) {
 	unset($restrictions['voir']);
 	unset($restrictions['modifier']);
 
+	// enlever tous les false (0, '')
+	$restrictions = array_filter($restrictions);
+	
 	if ($restrictions) {
 		foreach ($restrictions as $type => $ids) {
 			$ids = explode(':', $ids);
