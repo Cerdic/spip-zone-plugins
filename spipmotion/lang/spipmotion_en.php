@@ -53,8 +53,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// F
 	'ffmpeg2theora_install' => 'FFMpeg2Theora on your server:',
-	'flvtool2_install' => 'FLVtool2 sur votre serveur :', # NEW
-	'flvtoolplus_install' => 'FLVtool++ sur votre serveur :', # NEW
+	'flvtool2_install' => 'Flvtool2 on your server:',
+	'flvtoolplus_install' => 'FLVtool + + on your server:',
 	'framerate' => 'Frame rate: ',
 	'frequence_audio' => 'Audio frequency: ',
 
@@ -96,14 +96,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_erreurs' => 'Errors',
 	'info_ffmpeg2theora_libtheora_version' => 'Libtheora version used by ffmpeg2theora',
 	'info_ffmpeg2theora_version' => 'ffmpeg2theora version ',
-	'info_flvtool2_version' => 'Version de FLVtool2 installée :', # NEW
-	'info_flvtoolplus_version' => 'Version de FLVtool++ installée :', # NEW
+	'info_flvtool2_version' => 'Flvtool2 version installed:',
+	'info_flvtoolplus_version' => 'Version FLVtool + + installed:',
 	'info_format' => 'Format: ',
 	'info_framecount' => 'Frame count: ',
 	'info_framerate' => 'Framerate: ',
 	'info_infos_techniques' => 'Technical informations',
 	'info_installer_encoder_ftp' => 'As Administrator, you can install (with FTP) .AVI .MPG .MP4 or .MOV files in the directory "tmp/upload" for encoding these files here.',
-	'info_mediainfo_version' => 'Version de MediaInfo installée :', # NEW
+	'info_mediainfo_version' => 'MediaInfo version installed:',
 	'info_mime' => 'Mime type: ',
 	'info_nom_fichier' => 'File name: ',
 	'info_nombre_encodage_attente' => 'One document is awaiting encoding',
@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_supprimer_versions' => 'Remove all the versions of the document',
 
 	// M
-	'mediainfo_install' => 'MediaInfo sur votre serveur :', # NEW
+	'mediainfo_install' => 'MediaInfo on your server:',
 	'message_confirmation_encodage' => 'Are you sure you want to (re)encode this document in the @version@ format?',
 	'message_confirmation_encodages' => 'Are you sure you want to (re)encode this document in all the formats?',
 	'message_confirmation_suppression_version' => 'Are you sure you want to remove the @version@ version of this document?',
@@ -178,7 +178,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_encodage_unique_oui' => 'The document #@id_document@ has been properly encoded to @extension@.',
 	'message_texte_binaire_manquant' => 'A necessary software is not available on your server:',
 	'message_texte_binaires_informer' => 'Please inform your system administrator.',
-	'message_texte_binaires_informer_exec' => 'Votre configuration de PHP ne permet pas d\'exécuter d\'applications.', # NEW
+	'message_texte_binaires_informer_exec' => 'Your PHP configuration does not allow to run applications.',
 	'message_texte_binaires_informer_safe_mode' => 'Safe mode is activated on your website. Binaries should be installed in the "@execdir@" folder of the server.',
 	'message_texte_binaires_manquant' => 'Several software needed are not available on your server:',
 	'message_titre_binaire_manquant' => 'A missing software',
