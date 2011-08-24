@@ -166,6 +166,7 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 			$requete['WHERE'][] = constant('_FULLTEXT_WHERE_'.$table);
 		else
 			if (!test_espace_prive()
+			AND !defined('_RECHERCHE_FULLTEXT_COMPLETE')
 			AND in_array($table, array('article', 'rubrique', 'breve', 'forum', 'syndic_article')))
 				$requete['WHERE'][] = "t.statut='publie'";
 
