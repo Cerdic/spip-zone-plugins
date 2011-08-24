@@ -1,9 +1,8 @@
 #spiplistes-inscrivez-vous {
-	font-family: Arial, Helvetica, FreeSans, sans-serif;
 	font-weight:500;
 	width:140px;
-	background-color:#471f05;
-	color:#fff;
+	background-color:#fff;
+	color:#000;
 	margin:0;
 	padding:0.25em 0;
 	overflow:hidden;
@@ -13,8 +12,8 @@
 #spiplistes-inscrivez-vous h3 {
 	margin:0 0 0.25em;
 	padding:0 0.75ex;
-	font-weight:500;
-	font-size:90%;
+	font-size:0.9em;
+	color:#444;
 	line-height:1.5em;
 	text-align:left;
 }
