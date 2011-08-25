@@ -20,7 +20,7 @@ textarea { overflow: auto; } /* www.sitepoint.com/blogs/2010/08/20/ie-remove-tex
 
 .ie fieldset { padding-top: 0; }
 .ie6 legend,
-.ie7 legend { background-color: #fff; margin-left: -7px; } /* Preciser la couleur des legend et du fond pour IE/Win */
+.ie7 legend { margin-left: -7px; } /* Preciser la couleur des legend et du fond pour IE/Win */
 .ie button,
 .ie input.submit,
 .ie input.button { position: relative; }
