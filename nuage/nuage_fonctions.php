@@ -147,6 +147,8 @@ function filtre_nuage_dist($id_mot, $titre = '', $url = '', $poids = -1, $expose
 	if($titre and $url){
 		$nuage['titre'][$id_mot] = supprimer_tags($titre);
 		$nuage['url'][$id_mot] = $url;
+		if ($poids>=0)
+			$nuage['poids'][$id_mot] = $poids;
 	}
 	elseif($poids>=0){
 		$nuage['poids'][$id_mot] += $poids;

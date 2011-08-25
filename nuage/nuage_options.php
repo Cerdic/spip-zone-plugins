@@ -1,6 +1,6 @@
 <?php
 function nuage_insert_head_css($flux) {
-	$css = "<link rel='stylesheet' href='spip.php?page=nuage_style.css' type='text/css' media='all' />\n";
+	$css = "<link rel='stylesheet' href='".find_in_path("css/nuage.css")."' type='text/css' />\n";
 	static $done = false;
 	if (!$done) {
 		$done = true;

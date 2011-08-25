@@ -1,6 +1,3 @@
-#CACHE{24*3600,cache-client}
-#HTTP_HEADER{'Content-type: text/css'}
-
 ul.nuage,dl.nuage {
 	margin:0;
 	padding: 0;
