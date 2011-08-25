@@ -25,10 +25,10 @@ if(!defined('_SPIP20100')) {
 					AND isset($GLOBALS['meta']['tweaks_actifs']);
 				break;
 			case 'install':
-				cout_upgrade('couteau_suisse_base_version',$t['version_base']);
+				couteau_suisse_upgrade('couteau_suisse_base_version',$t['version_base']);
 				break;
 			case 'uninstall':
-				cout_vider_tables('couteau_suisse_base_version');
+				couteau_suisse_vider_tables('couteau_suisse_base_version');
 				break;
 		}
 	}
