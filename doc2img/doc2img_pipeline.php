@@ -39,7 +39,9 @@ function doc2img_post_edition($flux) {
 
             	$infos_doc = sql_fetsel('extension,mode,fichier,mode,distant','spip_documents','id_document='.intval($id_document));
             	$types_autorises = explode(',',lire_config("doc2img/format_document",null,true));
-
+				if($infos_doc['extension'] == 'tif'){
+					$infos_doc['extension'] = 'tiff';
+				}
             	if(($infos_doc['mode'] != 'vignette')
             		&& ($infos_doc['distant'] == 'non')
             		&& in_array($infos_doc['extension'],$types_autorises)){
