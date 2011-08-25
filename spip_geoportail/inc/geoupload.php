@@ -81,7 +81,7 @@ function geoportail_get_coord_kml($dest, &$lon, &$lat)
 */
 function geoportail_lire_exif($img, $type) //, &$lon, &$lat) 
 {	// Bibliotheque pas installee
-  if (!function_exists("@exif_read_data")) return false;
+  if (!function_exists("exif_read_data")) return false;
   // Rechercher dans le fichier...
   if ($type=='JPG' || $type=='TIFF')
 	{	$lon = $lat = null;
