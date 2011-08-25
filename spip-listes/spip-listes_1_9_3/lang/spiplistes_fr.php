@@ -202,6 +202,13 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'inscription' => 'Inscription'
 , 'mode_inscription' => 'Param&#233;trer le mode d&#8217;inscription des visiteurs'
 , 'jeu_de_caracteres' => 'Jeu de caract&#232;res'
+, 'opt_optin_titre' => 'Filtrage Double Opt-In'
+, 'opt_optin_desc' => 'Lors de l&#39;inscription, l&#39;abonn&#233; re&#231;oit une
+	demande de confirmation par mail.
+	Cette confirmation - appel&#233;e <em>Double Opt-In</em> - permet de valider le
+	d&#233;sir de l&#39;abonn&#233; de recevoir le courrier
+	de la liste de diffusion. Ce filtrage ne concerne pas l&#39;envoi de courrier direct.'
+, 'opt_optin_confirmer' => 'Filtrer les envois sur Opt-In pour les courriers des listes de diffusion.'
 
 // exec/spiplistes_courrier_edit.php
 , 'generer_le_contenu' => 'G&#233;n&#233;rer le contenu'

@@ -209,7 +209,7 @@ function spiplistes_ecrire_metas() {
 
 /**
  * Lecture d'une pref (meta)
- * @param $key string
+ * @param string $key 
  * @return string or null
  */
 function spiplistes_pref_lire ($key) {

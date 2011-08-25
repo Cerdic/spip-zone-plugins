@@ -548,16 +548,36 @@ function spiplistes_listes_liste_creer ($statut, $lang, $titre, $texte, $pied_pa
 }
 
 /**
- * renvoie tableau de id_auteurs abonnes a une liste
- * @version CP-20080602
+ * Renvoie tableau de id_auteurs abonnes a une liste
+ * 	ou FALSE si erreur
+ * 
+ * @version CP-20080602 20110824
+ * @param int $id_liste
+ * @param string $sql_where quoted condition
+ * @return bool|array
  */
-function spiplistes_listes_liste_abo_ids ($id_liste) {
-	$sql_result = sql_select('id_auteur', 'spip_auteurs_listes', "id_liste=".sql_quote($id_liste), '', array('id_auteur'));
+function spiplistes_listes_liste_abo_ids ($id_liste, $sql_where = '') {
+	
 	$ids_abos = array();
-	while($row = sql_fetch($sql_result)) {
-		$ids_abos[] = intval($row['id_auteur']);
+	$sql_where = 'id_liste='.sql_quote($id_liste)
+		. ($sql_where ? ' AND '.$sql_where : '');
+
+	if (($sql_result = sql_select('id_auteur',
+							 'spip_auteurs_listes',
+							 $sql_where,
+							 '',
+							 array('id_auteur'))) === FALSE)
+	{
+		spiplistes_sqlerror_log ('spiplistes_listes_liste_abo_ids ()');
+		return (FALSE);
 	}
-	return($ids_abos);
+	else
+	{
+		while ($row = sql_fetch($sql_result)) {
+			$ids_abos[] = intval($row['id_auteur']);
+		}
+	}
+	return ($ids_abos);
 }
 
 /**

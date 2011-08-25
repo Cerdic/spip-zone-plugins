@@ -100,6 +100,7 @@ function exec_spiplistes_config () {
 			, 'opt_suspendre_trieuse' // suspendre la trieuse. Les listes restent en attente
 			, 'opt_suspendre_meleuse' // suspendre les envois de courriers
 			, 'opt_smtp_use_ssl' // SMTP avec SSL ?
+			, 'opt_restrict_valide' // Opt-In ?
 			);
 				
 		$keys_console_syslog = array(
@@ -316,13 +317,13 @@ function exec_spiplistes_config () {
 		. debut_cadre_trait_couleur('redacteurs-24.gif', true, '', _T('spiplistes:inscription'))
 		. '<form action="' . generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE) . '" method="post">' . $eol
 		. debut_cadre_relief('', true, '', _T('spiplistes:mode_inscription'))
-		. '<p class="verdana2">' . $eol
+		. '<p class="verdana2" style="margin-top:0">' . $eol
 		. '<input type="radio" name="abonnement_config" value="simple"'
 		. $checked1
 		. ' id="statut_simple" />' . $eol
 		. '<label for="statut_simple">'._T('spiplistes:abonnement_simple').'</label>' . $eol
 		. '</p>' . $eol
-		. '<p class="verdana2">' . $eol
+		. '<p class="verdana2" style="margin-top:0">' . $eol
 		. '<input type="radio" name="abonnement_config" value="membre"'
 		. $checked2
 		. ' id="statut_membre" />' . $eol
@@ -333,13 +334,13 @@ function exec_spiplistes_config () {
 		. '<!-- format de courrier par defaut -->' . $eol
 		. debut_cadre_relief('', true, '', _T('spiplistes:format_courrier_defaut'))
 		. '<legend>'._T('spiplistes:format_courrier_defaut_desc').'</legend>'
-		. '<p class="verdana2">' . $eol
+		. '<p class="verdana2" style="margin-top:0">' . $eol
 		. '<input type="radio" name="opt_format_courrier_defaut" value="html"'
 		. ($opt_format_courrier_defaut == 'html' ? $is_checked : '')
 		. ' id="c_format_html" />' . $eol
 		. '<label for="c_format_html">'._T('spiplistes:html_description').'</label>' . $eol
 		. '</p>' . $eol
-		. '<p class="verdana2">' . $eol
+		. '<p class="verdana2" style="margin-top:0">' . $eol
 		. '<input type="radio" name="opt_format_courrier_defaut" value="texte"'
 		. ($opt_format_courrier_defaut == 'texte' ? $is_checked : '')
 		. ' id="c_format_texte" />' . $eol
@@ -359,7 +360,7 @@ function exec_spiplistes_config () {
 	$page_result .= ''
 		. debut_cadre_trait_couleur("redacteurs-24.gif", true, '', _T('spiplistes:formulaire_abonnement'))
 		. "<form action='".generer_url_ecrire(_SPIPLISTES_EXEC_CONFIGURE)."' method='post'>" . $eol
-		. "<p class='verdana2'>" . $eol
+		. '<p class="verdana2" style="margin-top:0">' . $eol
 		. "<input type='checkbox' name='opt_plier_deplier_formabo' value='oui' $checked1 id='plier_deplier' />" . $eol
 		. "<label for='plier_deplier'>"._T('spiplistes:formulaire_abonnement_effet').'</label>' . $eol
 		. "</p>" . $eol
@@ -389,7 +390,7 @@ function exec_spiplistes_config () {
 		// personnaliser le courrier (reprend les données de *_auteur)
 		. "<!-- personnaliser le courrier -->" . $eol
 		. debut_cadre_relief('', true, '', _T('spiplistes:personnaliser_le_courrier'))
-		. "<p class='verdana2'>"._T('spiplistes:personnaliser_le_courrier_desc')."</p>"
+		. '<p class="verdana2" style="margin-top:0">'._T('spiplistes:personnaliser_le_courrier_desc')."</p>"
 		. "<label class='verdana2'>"
 		. "<input type='checkbox' name='opt_personnaliser_courrier' value='oui' "
 			. (($opt_personnaliser_courrier == 'oui') ? "checked='checked'" : '')
@@ -399,7 +400,7 @@ function exec_spiplistes_config () {
 		//
 		// ajout du renvoi de tete, lien courrier
 		. debut_cadre_relief('', true, '', _T('spiplistes:complement_lien_en_tete'))
-		. "<p class='verdana2'>"._T('spiplistes:complement_lien_en_tete_desc')."</p>"
+		. '<p class="verdana2" style="margin-top:0">'._T('spiplistes:complement_lien_en_tete_desc')."</p>"
 		. '<input type="checkbox" name="opt_lien_en_tete_courrier" value="oui" id="opt-lien-en-tete-courrier" '
 			. (($opt_lien_en_tete_courrier) ? 'checked="checked"' : '')
 			. ' />' . $eol
@@ -411,7 +412,7 @@ function exec_spiplistes_config () {
 		. _T('spiplistes:patron_du_lien').'.' . $eol
 		. spiplistes_boite_selection_patrons($lien_patron, true, _SPIPLISTES_PATRONS_TETE_DIR, "lien_patron", 1)
 		. '</label>' . $eol
-		. "</div>" . $eol // fin bloc div-lien-en-tete-courrier
+		. '</div>' . $eol // fin bloc div-lien-en-tete-courrier
 		. fin_cadre_relief(true)
 		//
 		// compléter le titre des listes par le nom du serveur ?
@@ -426,7 +427,7 @@ function exec_spiplistes_config () {
 		//
 		// opt_ajout_lien_desabo
 		. debut_cadre_relief('', true, '', _T('spiplistes:lien_gestion_inscription'))
-		. '<p class="verdana2">'._T('spiplistes:lien_gestion_inscription_desc').'</p>'.$eol
+		. '<p class="verdana2" style="margin-top:0">'._T('spiplistes:lien_gestion_inscription_desc').'</p>'.$eol
 		. '<input type="checkbox" name="opt_ajout_lien_desabo" value="oui" id="opt_ajout_lien_desabo" '
 			. ($opt_ajout_lien_desabo ? 'checked="checked"' : '')
 			. ' />' . $eol
@@ -436,7 +437,7 @@ function exec_spiplistes_config () {
 		//
 		// ajout tampon editeur
 		. debut_cadre_relief('', true, '', _T('spiplistes:complement_tampon_editeur'))
-		. "<p class='verdana2'>"._T('spiplistes:complement_tampon_editeur_desc')."</p>"
+		. '<p class="verdana2" style="margin-top:0">'._T('spiplistes:complement_tampon_editeur_desc')."</p>"
 		. "<input type='checkbox' name='opt_ajout_tampon_editeur' value='oui' id='opt-ajout-tampon-editeur' "
 			. ($opt_ajout_tampon_editeur ? "checked='checked'" : '')
 			. " />" . $eol
@@ -459,7 +460,7 @@ function exec_spiplistes_config () {
 		}
 	$page_result .= ''
 		. "</ul>" . $eol
-		. "</div>" . $eol // fin bloc div-ajout-tampon-editeur
+		. '</div>' . $eol // fin bloc div-ajout-tampon-editeur
 		. fin_cadre_relief(true)
 		//
 		// bouton de validation
@@ -509,39 +510,53 @@ function exec_spiplistes_config () {
 		. spiplistes_cadre_input_text(_T('spiplistes:adresse_on_error_defaut')
 									  , 'email_return_path_defaut' , $email_return_path_defaut
 			)
+		;
+		/**
+		 * Confirmer opt-in
+		 */
+		$opt_restrict_valide = spiplistes_pref_lire ('opt_restrict_valide');
+	$page_result .= ''
+		. debut_cadre_relief('', true, '', _T('spiplistes:opt_optin_titre'))
+		. '<div  class="verdana2">' . $eol
+		. '<p class="verdana2" style="margin-top:0">'._T('spiplistes:opt_optin_desc')."</p>"
+		. spiplistes_bouton_checkbox ('opt_restrict_valide', _T('spiplistes:opt_optin_confirmer'),  $opt_restrict_valide)
+		. '</div>' . $eol
+		. fin_cadre_relief(true)
+		;
+	$page_result .= ''
 		//
 		// Méthode d'envoi 
 		. debut_cadre_relief('', true, '', _T('spiplistes:methode_envoi'))
-		. "<div  class='verdana2'>" . $eol
+		. '<div class="verdana2">' . $eol
 		. _T('spiplistes:pas_sur')
 		. bouton_radio("mailer_smtp", "non", _T('spiplistes:php_mail'), $mailer_smtp == "non", "changeVisible(this.checked, 'smtp', 'none', 'block');")
 		. "<br />" . $eol
 		. bouton_radio("mailer_smtp", "oui", _T('spiplistes:utiliser_smtp'), $mailer_smtp == "oui"
 			, "changeVisible(this.checked, 'smtp', 'block', 'none');")
-		. "</div>" . $eol
+		. '</div>' . $eol
 		/**
 		 * Si 'smtp', affiche bloc de paramétrage
 		 */
 		. "<ul id='smtp' class='verdana2' style='list-style: none;display:".(($mailer_smtp == "oui") ? "block" : "none")."'>" . $eol
-		. "<li>"._T('spiplistes:smtp_hote')." : <input type='text' name='smtp_server' value='$smtp_server' size='30' class='forml' /></li>" . $eol
-		. "<li>"._T('spiplistes:smtp_port')." : <input type='text' name='smtp_port' value='$smtp_port' size='4' class='fondl' /></li>" . $eol
+		. '<li>'._T('spiplistes:smtp_hote')." : <input type='text' name='smtp_server' value='$smtp_server' size='30' class='forml' /></li>" . $eol
+		. '<li>'._T('spiplistes:smtp_port')." : <input type='text' name='smtp_port' value='$smtp_port' size='4' class='fondl' /></li>" . $eol
 		// SSL
 		. '<li>'.spiplistes_bouton_checkbox ('opt_smtp_use_ssl', _T('spiplistes:opt_smtp_use_ssl'),  $opt_smtp_use_ssl).'</li>'.$eol
 		//
-		. "<li>"._T('spiplistes:requiert_identification')." : "
+		. '<li>'._T('spiplistes:requiert_identification')." : "
 		. bouton_radio("smtp_identification", "oui", _T('item_oui'), ($smtp_identification == "oui"), "changeVisible(this.checked, 'smtp-auth', 'block', 'none');")
 		. "&nbsp;"
-		. bouton_radio("smtp_identification", "non", _T('item_non'), ($smtp_identification == "non"), "changeVisible(this.checked, 'smtp-auth', 'none', 'block');")."</li>" . $eol
+		. bouton_radio("smtp_identification", "non", _T('item_non'), ($smtp_identification == "non"), "changeVisible(this.checked, 'smtp-auth', 'none', 'block');").'</li>' . $eol
 		. "</ul>" . $eol
 		. "<ul id='smtp-auth' class='verdana2' style='list-style:none;display:".(($smtp_identification == "oui") ? "block" : "none" )."'>" . $eol
-		. "<li>"
+		. '<li>'
 			. "<label for='smtp_login'>"._T('item_login')." : </label>" . $eol
 			. "<input type='text' id='smtp_login' name='smtp_login' value='".$GLOBALS['meta']['smtp_login']."' size='30' class='fondl' />" . $eol
-		. "</li>" . $eol
-		. "<li>"
+		. '</li>' . $eol
+		. '<li>'
 			. "<label for='smtp_pass'>"._T('entree_passe_ldap')." : </label>" . $eol
 			. "<input type='password' id='smtp_pass' name='smtp_pass' value='".$GLOBALS['meta']['smtp_pass']."' size='30' class='fondl' />" . $eol
-		. "</li>" . $eol
+		. '</li>' . $eol
 		. "</ul>" . $eol
 		. fin_cadre_relief(true)
 		//
@@ -616,7 +631,7 @@ function exec_spiplistes_config () {
 		if(spiplistes_server_rezo_local()) {
 			$page_result .= ''
 				. debut_cadre_relief('', true, '', _T('spiplistes:log_console_syslog'))
-				. '<p class="verdana2">'._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR'])).'</p>' . $eol
+				. '<p class="verdana2" style="margin-top:0">'._T('spiplistes:log_console_syslog_desc', array('IP_LAN' => $_SERVER['SERVER_ADDR'])).'</p>' . $eol
 				. spiplistes_form_input_checkbox (
 					'opt_console_syslog'
 					, 'oui', _T('spiplistes:log_console_syslog_texte')

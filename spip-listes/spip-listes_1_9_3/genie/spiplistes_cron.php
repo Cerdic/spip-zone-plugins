@@ -104,9 +104,9 @@ function cron_spiplistes_cron ($last_time) {
 	
 	$nb_listes_ok = sql_count($listes_privees_et_publiques);
 	
-	spiplistes_debug_log($prefix_log.'nb listes depart: '.$nb_listes_ok);
-
 	if($nb_listes_ok > 0) {
+		
+		spiplistes_debug_log($prefix_log.'nb listes depart: '.$nb_listes_ok);
 	
 		$mod_listes_ids = spiplistes_mod_listes_get_id_auteur('toutes');
 		
@@ -271,10 +271,33 @@ function cron_spiplistes_cron ($last_time) {
 					. ')'
 			);
 
-			if($taille_courrier_ok) {
-				// place les etiquettes
-				// (ajout des abonnes dans la queue (spip_auteurs_courriers))
-				spiplistes_courrier_remplir_queue_envois ($id_courrier, $id_liste);
+			if($taille_courrier_ok)
+			{
+				/**
+				 * Si option controler valide,
+				 * enverra le courrier de la liste
+				 * uniquement à ceux qui ont validé leur abonnement.
+				 *
+				 * Nota: ceci ne concerne pas les courriers direct
+				 * (qui sont envoyés directement à la meleuse par l'exec).
+				 *
+				 * L'option de sélection est à définir dans la page de
+				 * configuration du plugin.
+				 */
+				$sql_where = 
+					(spiplistes_pref_lire ('opt_restrict_valide') === 'oui')
+					? 'statut='.sql_quote('valide')
+					: ''
+					;
+				
+				/**
+				 * Place les etiquettes
+				 * (ajout des abonnes dans la queue (spip_auteurs_courriers))
+				 */
+				spiplistes_courrier_remplir_queue_envois ($id_courrier,
+														  $id_liste,
+														  FALSE,
+														  $sql_where);
 			} 
 		} // end while // fin traitement des listes
 	}	
