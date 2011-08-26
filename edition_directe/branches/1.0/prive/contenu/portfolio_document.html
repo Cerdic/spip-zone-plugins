@@ -1,0 +1,28 @@
+[(#REM)
+
+  Squelette
+  (c) xxx
+  Distribue sous licence GPL
+
+]
+
+[(#ENV{exec}|=={naviguer}|oui)
+	[(#CONFIG{edition_directe/rubrique}|oui)#SET{cacher,oui}]
+]
+[(#ENV{exec}|=={articles}|oui)
+	[(#CONFIG{edition_directe/article}|oui)#SET{cacher,oui}]
+]
+[(#GET{cacher}|non)
+	[
+	(#INCLURE{fond=formulaires/inc-portfolio_documents}{env}{ajax})
+	]
+	[
+	(#INCLURE{fond=prive/inc-ajouter-documents}{env}{ajax})
+	]
+	[<script type="text/javascript" src='(#CHEMIN{javascript/jquery.MultiFile.js})'></script>
+	<script type='text/javascript'>
+	jQuery.MultiFile();
+	onAjaxLoad(function(){jQuery.MultiFile();});
+	</script>
+	]
+]

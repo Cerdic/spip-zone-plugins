@@ -1,0 +1,62 @@
+<!DOCTYPE webproject>
+<webproject>
+  <project type="Local" name="edition_directe" encoding="utf8" >
+    <upload/>
+    <author/>
+    <email/>
+    <defaultDTD>-//W3C//DTD XHTML 1.0 Strict//EN</defaultDTD>
+    <item url="fonds/" uploadstatus="1" />
+    <item url="fonds/cfg_edition_directe.html" uploadstatus="1" />
+    <item url="formulaires/" uploadstatus="1" />
+    <item url="formulaires/configurer_edition_directe.html" uploadstatus="1" />
+    <item url="img/" uploadstatus="1" />
+    <item url="img/logo_aed_edit_128.png" uploadstatus="1" />
+    <item url="img/logo_aed_edit_24.png" uploadstatus="1" />
+    <item url="img/logo_aed_edit_32.png" uploadstatus="1" />
+    <item url="img/logo_aed_edit_64.png" uploadstatus="1" />
+    <item url="lang/" uploadstatus="1" />
+    <item url="lang/edir_de.php" uploadstatus="1" />
+    <item url="lang/edir_en.php" uploadstatus="1" />
+    <item url="lang/edir_fr.php" uploadstatus="1" />
+    <item url="lang/edir_sk.php" uploadstatus="1" />
+    <item url="lang/edir.xml" uploadstatus="1" />
+    <item url="prive/" uploadstatus="1" />
+    <item url="prive/contenu/" uploadstatus="1" />
+    <item url="prive/contenu/portfolio_document.html" uploadstatus="1" />
+    <item url="prive/echafaudage/" uploadstatus="1" />
+    <item url="prive/echafaudage/contenu/" uploadstatus="1" />
+    <item url="prive/echafaudage/contenu/objet_edit_directe.html" uploadstatus="1" />
+    <item url="prive/editer/" uploadstatus="1" />
+    <item url="prive/editer/article_mod.html" uploadstatus="1" />
+    <item url="prive/editer/colonne_documents_aed.html" uploadstatus="1" />
+    <item url="prive/editer/rubrique_mod.html" uploadstatus="1" />
+    <item url="prive/editer/site_mod.html" uploadstatus="1" />
+    <item url="prive/objets/" uploadstatus="1" />
+    <item url="prive/objets/contenu/" uploadstatus="1" />
+    <item url="prive/objets/contenu/article.html" uploadstatus="1" />
+    <item url="prive/objets/contenu/portfolio_document.html" uploadstatus="1" />
+    <item url="prive/objets/editer/" uploadstatus="1" />
+    <item url="prive/objets/editer/colonne_document.html" uploadstatus="1" />
+    <item url="prive/squelettes/" uploadstatus="1" />
+    <item url="prive/squelettes/contenu/" uploadstatus="1" />
+    <item url="prive/squelettes/contenu/article.html" uploadstatus="1" />
+    <item url="prive/squelettes/contenu/auteur.html" uploadstatus="1" />
+    <item url="prive/squelettes/contenu/breve.html" uploadstatus="1" />
+    <item url="prive/squelettes/contenu/mot.html" uploadstatus="1" />
+    <item url="prive/squelettes/contenu/rubrique.html" uploadstatus="1" />
+    <item url="prive/squelettes/contenu/site.html" uploadstatus="1" />
+    <item url="prive/squelettes/inclure/" uploadstatus="1" />
+    <item url="prive/squelettes/inclure/colonne-documents_edition_directe.html" uploadstatus="1" />
+    <item url="prive/squelettes/navigation/" uploadstatus="1" />
+    <item url="prive/squelettes/navigation/auteur.html" uploadstatus="1" />
+    <item url="prive/squelettes/navigation/mot.html" uploadstatus="1" />
+    <item url="edition_directe_fonctions.php" uploadstatus="1" />
+    <item url="edition_directe_pipelines.php" uploadstatus="1" />
+    <item url="edition_directe_styles.html" uploadstatus="1" />
+    <item url="plugin.xml" uploadstatus="1" />
+    <item url="" uploadstatus="1" />
+    <templates>templates/</templates>
+    <toolbars>toolbars/</toolbars>
+    <annotations/>
+  </project>
+</webproject>

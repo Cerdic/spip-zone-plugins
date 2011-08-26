@@ -1,0 +1,13 @@
+<!DOCTYPE webprojectsession>
+<webprojectsession>
+  <session usePreviewPrefix="0" previewPrefix="" >
+    <itemcursorpositions>
+      <item line="117" column="144" url="edition_directe_pipelines.php" />
+      <item line="3" column="0" url="prive/editer/colonne_documents_aed.html" />
+    </itemcursorpositions>
+    <treestatus>
+      <openfolder url="prive" />
+      <openfolder url="prive/editer" />
+    </treestatus>
+  </session>
+</webprojectsession>
