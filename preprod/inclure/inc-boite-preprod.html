@@ -1,0 +1,16 @@
+#CACHE{0}
+<div id="preprod" class="jour">
+<span class="fermer">O/F</span>
+<div id="preprodContent">
+	Type de page : <span id="pageType">...</span><br />
+    Composition : <span id="pageComposition">...</span><br />
+    URL de cette page : <span>#ENV{preprod_url}</span><br />
+    [(#PLUGIN{tickets}|oui)
+    <div id="listeTickets">
+    	#FORMULAIRE_PREPROD_TICKETS{#ENV{preprod_url}}
+    </div>
+    <br />
+    <p><button onclick="ajouterTicket('#ENV{preprod_url}')"><:preprod:titre_ajouter_ticket:></button></p>
+    ]
+</div>
+</div>

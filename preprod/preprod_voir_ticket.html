@@ -1,0 +1,12 @@
+#CACHE{0}
+[(#SESSION{id_auteur}|oui)
+	
+    <BOUCLE_infos_ticket(spip_tickets){id_ticket}>
+    <div>
+    <B_auteur_ticket><p>Rapporté par : <BOUCLE_auteur_ticket(spip_auteurs){id_auteur}>#NOM</BOUCLE_auteur_ticket></p></B_auteur_ticket>
+    <B_assigne_ticket><p>Assigné à : <BOUCLE_assigne_ticket(spip_auteurs){id_auteur=#ID_ASSIGNE}>#NOM</BOUCLE_assigne_ticket></p></B_assigne_ticket>
+    [<h3 class='titrem'>(#TITRE)</h3>]
+        [<div>(#TEXTE)</div>]
+    </div>
+    </BOUCLE_infos_ticket>
+]

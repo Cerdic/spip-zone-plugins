@@ -1,2 +1,1 @@
-#preprod {position:fixed; left:5px; top:5px; color:red; font-weight:bold; }
-
+#preprod {position:fixed; left:5px; top:5px;padding:10px;background-color:white; color:red; font-weight:bold; z-index:10;}

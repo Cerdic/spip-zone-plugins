@@ -4,6 +4,20 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'aucun_ticket_trouve'	=> 'Aucun ticket trouvé',
+	'bouton_enregistrer' => 'Enregistrer',
+	'bouton_fermer' => 'Fermer',
+	'erreur_infos_manquantes' => 'Il manque des informations obligatoires.',
+	'erreur_manque_titre' => 'Un bref résumé est requis.',
+	'erreur_manque_texte' => 'Une description même succincte est attendue.',
+
+	'label_assigner_a' => 'Assigner à',
+	'label_composant_creer' => 'Ou nom du nouveau composant',
+	'label_composant_relier' => 'Relier à un composant existant',
+	'label_description'	=> 'Description',
+	'label_titre_resume' => 'Titre/Résumé',
+	
+		
 	// S
 	'sinscrire' => "S'inscrire",
 	'severite_bloquant' => 'Bloquant',
@@ -18,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_redac' => 'En cours de r&eacute;daction',
 	'statut_resolu' => 'R&eacute;solu',
 	'statut_resolu_long' => 'Tous les tickets r&eacute;solus',
+	'succes_ticket_ajoute' => "Nouveau ticket enregistré (id @id@).",
 	'syndiquer_ticket' => 'Syndiquer le ticket&nbsp;:',
 	'syndiquer_tickets' => 'Syndiquer les tickets du site',
 
@@ -28,12 +43,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_autorisations' => 'Les autorisations',
 	'tickets_derniers_commentaires' => 'Les derniers commentaires',
 	'tickets_general' => 'Général',
+	'tickets_page'	=> 'Tous les tickets relatifs à cette page:',
 	'tickets_sur_inscription' => "
 		L'&eacute;criture des tickets ou commentaires n'est
 		possible qu'aux personnes identifi&eacute;es.
 	",
 	'tickets_traites' => 'Tous les tickets trait&eacute;s',
 	'titre' => 'Tickets, suivi de bugs',
+	'titre_ajouter_ticket' => 'Ajouter un nouveau ticket',
+	'titre_apercu'	=> 'aperçu',
+	'titre_modifier_ticket'	=> "Modifier le ticket @id@",
 	'titre_identification' => 'Identification',
 	'titre_liste' => 'Liste des tickets',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',

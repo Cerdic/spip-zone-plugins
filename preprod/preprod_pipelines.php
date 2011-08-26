@@ -8,12 +8,23 @@ function preprod_insert_head($flux)
 {
 	include_spip('inc/autoriser');
 
-	if (autoriser('configurer') || 9070==$GLOBALS['visiteur_session']['id_auteur']) {
+	if (autoriser('configurer')) {
 		$js = find_in_path("preprod.js");
 		if ($js)
 			$flux .= '<script type="application/javascript" src="'. $js .'"></script>';
 	}
     return $flux;	
+}
+
+function preprod_affichage_final($texte)
+{
+	include_spip('inc/autoriser');
+	if (autoriser('configurer')) {
+		$self = self();
+		$ajout_preprod = recuperer_fond('inclure/inc-boite-preprod',array('preprod_url' => $self));
+		$texte = str_replace('</body>', $ajout_preprod.'</body>', $texte);
+	}
+    return $texte;	
 }
 
 function preprod_insert_head_css($flux)

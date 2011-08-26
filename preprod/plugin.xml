@@ -1,7 +1,7 @@
 <plugin>
 
 	<nom>Pr&eacute;-prod</nom>
- 	<version>1.1.4</version>
+ 	<version>1.1.5</version>
 
  	<prefix>preprod</prefix>
  	<categorie>outil</categorie>
@@ -18,8 +18,6 @@
  	<auteur>
 	Cyril Marion [Ateliers CYM->http://www.cym.fr]
  	</auteur>
-	
-	<fonctions>preprod_fonctions.php</fonctions>
 
 	<pipeline>
 		<nom>insert_head</nom>
@@ -27,8 +25,15 @@
 	</pipeline>
 
 	<pipeline>
-		<nom>insert_head_css</nom>
+		<nom>affichage_final</nom>
 		<inclure>preprod_pipelines.php</inclure>
 	</pipeline>
 
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>preprod_pipelines.php</inclure>
+	</pipeline>
+	
+	<utilise id="tickets" version="[1.65;]" />
+	<utilise id="mediabox" version="[0.6.9;]" />
 </plugin>
