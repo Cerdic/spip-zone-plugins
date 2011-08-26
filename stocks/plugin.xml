@@ -2,7 +2,7 @@
 	<nom>Gérer des quantités et stocks</nom>
 	<auteur>[Webelys ->http://www.webelys.com]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.0.2</version>
+	<version>0.0.3</version>
 	<version_base>0.0.1</version_base>
 	<etat>dev</etat>
 	<description>Pouvoir quantifier des objets, une API de quantité.</description>
@@ -23,7 +23,11 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/stocks.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>stocks_pipelines.php</inclure>
+	</pipeline>
 
-		
 	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="produits" version="[;]" />
 </plugin>
