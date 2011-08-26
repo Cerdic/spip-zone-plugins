@@ -1,0 +1,43 @@
+<plugin>
+	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducción de secciones repensada[de]Rubrikenübersetzung mal Anders</multi></nom>
+	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
+	<version>0.1.1</version>
+	<etat>test</etat>
+	<description>
+		<multi>[fr]Ce plugin, d&eacute;stin&eacute; pour les sites mutlilingue avec [un secteur par langue->http://www.spip-contrib.net/Un-exemple-de-site-multilingue], vous offre une approche similaire au niveau de la navigation et de la gestion de traductions des rubriques &agrave; celle du plugin [Traduction articles autrement->http://files.spip.org/spip-zone/traduction_articles_autrement.zip] dont l'installation est recommand&eacute;. Comme spip ne propose pas nativement la traduction des rubriques l'installation du plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip] est n&eacute;cessaire.</multi>	
+	</description>
+	<lien>http://www.spip-contrib.net/Traduction-de-rubriques-autrement</lien>
+	<licence>GPL 3</licence>
+	<prefix>trad_rub</prefix>
+	<icon>img_pack/Translation-icon_32.png</icon>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>afficher_contenu_objet</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>formulaire_charger</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>	
+	<pipeline>
+		<nom>formulaire_traiter</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>		
+	<pipeline>
+		<nom>pre_insertion</nom>
+		<inclure>trad_rub_pipelines.php</inclure>
+	</pipeline>		
+	<fonctions>trad_rub_fonctions.php</fonctions>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="spip_bonux" version="[2.2.14;]" />
+	<necessite id="tradrub" version="[2.1.0;]" />	
+	<necessite id="saisies" version="[1.8.12;]" />		
+	<utilise id="afficher_objets" version="[1.1.8;]" />	
+	<utilise id="taa" version="[0.1.5;]" />		
+	<traduire gestionnaire="salvatore" module="tra" reference="fr" />
+</plugin>
+
