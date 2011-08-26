@@ -31,7 +31,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
     global $tables_jointures;
     
 	// Liste des paramètres autorisés
-	$params_ok = array('groupe', 'name', 'aide', 'proposer_login', 'remplacer', 'objet', 'uniquement_champ', 'explication', 'nuage');
+	$params_ok = array('groupe', 'name', 'aide', 'proposer_login', 'remplacer', 'objet', 'uniquement_champ', 'explication', 'nuage','label');
 	
 	// On enlève de la liste des arguments ce qui a été récupéré
 	$type_objet = array_shift($args);
@@ -196,7 +196,7 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		// sinon on peut le choisir (sinon c'est aussi automatique)
 		if (!$uniquement_champ or !isset($name)) $name = 'etiquettes_'.etiquettes_produire_id($groupe, $type_objet, $id_objet);
     
-    return array($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage);
+    return array($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage,$label);
 	
 }
 

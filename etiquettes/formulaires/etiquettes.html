@@ -30,7 +30,7 @@
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<fieldset>
 			
-			<legend>[(#ENV*{remplacer}|?{<:etiquettes:modifier_etiquettes:>,<:etiquettes:ajouter_etiquettes:>})]</legend>
+			<legend>[(#ENV{label})][(#ENV*{label}|non)[(#ENV*{remplacer}|?{<:etiquettes:modifier_etiquettes:>,<:etiquettes:ajouter_etiquettes:>})]]</legend>
 			
 			<ul[ (#ENV{aide_liste}|?{style="display:none;"})]>
 			<li>
@@ -86,6 +86,11 @@
 				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
 			]
 			
+			[(#ENV{aide_select}|?{' '})
+				<INCLURE{fond=fonds/etiquettes_aide_liste}{type=#ENV{groupe}}{type_objet}{id_objet}{identifiant}{name}>
+			]
+
+
 [(#REM) Si on ne veut pas que le champ ]
 [(#ENV*{uniquement_champ}|?{'', ' '})			
 			<p class="boutons">

@@ -12,9 +12,9 @@
 // Sécurité
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage){
+function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_autocompletion, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage,$label){
 	
-	$valeurs = compact("groupe", "name", "aide_nuage", "aide_autocompletion", "aide_liste", "remplacer", "type_objet", "cle_objet", "id_objet", "proposer_login", "uniquement_champ", "explication", "squelette_nuage");
+	$valeurs = compact("groupe", "name", "aide_nuage", "aide_autocompletion", "aide_liste", "remplacer", "type_objet", "cle_objet", "id_objet", "proposer_login", "uniquement_champ", "explication", "squelette_nuage","label");
 	
 	// Les paramètres ont tous déjà été testés
 	// Maintenant on teste si la personne a le droit d'ajouter des mots-clés au groupe choisi
@@ -87,7 +87,7 @@ function formulaires_etiquettes_charger_dist($groupe, $id_groupe, $name, $aide_n
 	
 }
 
-function formulaires_etiquettes_verifier_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage){
+function formulaires_etiquettes_verifier_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage,$label){
 	
 	$erreurs = array();
 	
@@ -95,7 +95,7 @@ function formulaires_etiquettes_verifier_dist($groupe, $id_groupe, $name, $aide_
 	
 }
 
-function formulaires_etiquettes_traiter_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage){
+function formulaires_etiquettes_traiter_dist($groupe, $id_groupe, $name, $aide_nuage, $aide_ajax, $aide_liste, $remplacer, $type_objet, $cle_objet, $id_objet, $proposer_login, $uniquement_champ, $explication, $squelette_nuage,$label){
 
 	$identifiant = etiquettes_produire_id($groupe, $type_objet, $id_objet);
 	$id_formulaire = "valider_etiquettes_$identifiant";
