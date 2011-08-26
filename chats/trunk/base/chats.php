@@ -23,7 +23,7 @@ function chats_declarer_tables_objets_sql($tables){
 		),
 		'key' => array(
 			"PRIMARY KEY"	=> "id_chat",
-			"KEY id_rubrique" => "id_rubriqu",
+			"KEY id_rubrique" => "id_rubrique",
 		),
 		'titre' => "nom AS titre, '' AS lang",
 		'date' => "date",
