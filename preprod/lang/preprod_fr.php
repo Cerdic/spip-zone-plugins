@@ -4,6 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
+	'assigne_a'	=> 'Assigné à : ',
 	'aucun_ticket_trouve'	=> 'Aucun ticket trouvé',
 	'bouton_enregistrer' => 'Enregistrer',
 	'bouton_fermer' => 'Fermer',
@@ -16,8 +17,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_composant_relier' => 'Relier à un composant existant',
 	'label_description'	=> 'Description',
 	'label_titre_resume' => 'Titre/Résumé',
-	
 		
+	'rapporte_par'	=> 'Rapporté par : ',
+
 	// S
 	'sinscrire' => "S'inscrire",
 	'severite_bloquant' => 'Bloquant',

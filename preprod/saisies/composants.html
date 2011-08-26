@@ -12,7 +12,7 @@
 
 <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
-<BOUCLE_composant(spip_tickets){composant !=''}>
+<BOUCLE_composant(TICKETS ?){composant !=''}>
 [(#COMPOSANT|unique|oui)<option value="#COMPOSANT">#COMPOSANT</option>]
 </BOUCLE_composant>
 </select>
