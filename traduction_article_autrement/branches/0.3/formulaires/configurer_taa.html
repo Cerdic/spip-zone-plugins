@@ -1,0 +1,40 @@
+<!-- nom=taa -->
+
+<div class="formulaire_spip formulaire_#FORM">
+
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+
+	<form action="#ENV{action}" method="post"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<ul>
+			<li class="fieldset">
+				<fieldset><legend><:taa:options:></legend>
+				<ul>
+					
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{affichage_liste_compacte}}
+					<li class="editer_affichage_liste_compacte[ (#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<div class="choix">
+							[(#PLUGIN{afficher_objets}|oui)<input type="checkbox" name="liste_compacte" class="checkbox" value="on" id="liste_compacte" [(#ENV{liste_compacte}|oui) checked="checked"] />]
+							<label for='liste_compacte'><:taa:affichage_liste_compacte:></label>
+							[(#PLUGIN{afficher_objets}|non)
+								<b>
+									<:taa:necesite_afficher_objet:>
+									<a href="http://files.spip.org/spip-zone/afficher_objets.zip">Afficher Objets</a> !
+								</b>
+							]
+						</div>
+					</li>
+				</ul>
+				</fieldset>
+			</li>
+		</ul>
+		
+		<p class="boutons">
+			<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:ok:>" />
+			<input type="submit" name="_cfg_delete" class="submit" value="<:cfg:effacer:>" />
+		</p>
+		
+	</div></form>
+</div>
