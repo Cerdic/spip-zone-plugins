@@ -125,7 +125,12 @@ function balise_FORMULAIRE_ETIQUETTES_stat($args, $filtres) {
 		}
 	
 		// on ne peut pas continuer si le type choisi n'est pas relié à des mots-clés
-		if ($type_objet and !in_array('mots', $tables_jointures[table_objet_sql($type_objet)]))
+		if (
+            $type_objet and (
+                !in_array('mots', $tables_jointures[table_objet_sql($type_objet)]) and
+                !in_array('mots', $tables_jointures[$type_objet])
+             )
+        )
 			return erreur_squelette(
 				_T('etiquettes:zbug_pas_de_table_mots',
 					array (
