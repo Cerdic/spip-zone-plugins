@@ -1,0 +1,28 @@
+/* le nuage en ul */
+ul.nuage		{ margin-left:0; margin-right:0; padding: 0; list-style: none; }
+ul.nuage li		{ display: inline; line-height:2em; }
+ul.nuage li a	{ display:inline; white-space: nowrap; }
+ul.nuage span.frequence { display: block; float: left; height: 0; overflow: auto; width: 0; }
+
+/* le nuage en dl (modele nuage_dl) */
+dl.nuage	{ margin: 0px 5px 0; padding: 5px 0; list-style: none; font-size: 0.9em; text-align:left; }
+dl.nuage *	{ display: inline; }
+dl.nuage dt	{ display: inline; line-height: 2em; }
+dl.nuage .frequence { display: block; float: left; height: 0; overflow: auto; width: 0; }
+
+/* les mots */
+/* defaut */
+.nuage a.nuage   { font-size: 1.0em; }
+
+/* variantes */
+.nuage a.nuage0  { font-size: 0.9em; }
+.nuage a.nuage1  { font-size: 1.0em; }
+.nuage a.nuage2  { font-size: 1.1em; }
+.nuage a.nuage3  { font-size: 1.2em; }
+.nuage a.nuage4  { font-size: 1.3em; }
+.nuage a.nuage5  { font-size: 1.4em; }
+.nuage a.nuage6  { font-size: 1.5em; }
+.nuage a.nuage7  { font-size: 1.6em; }
+.nuage a.nuage8  { font-size: 1.7em; }
+.nuage a.nuage9  { font-size: 1.8em; }
+.nuage a.nuage10 { font-size: 1.9em; }

@@ -1,0 +1,24 @@
+<!-- autoriser=webmestre -->
+<!-- refus=<:cfg:refus_configuration_webmestre:> -->
+<!-- nom=nuage -->
+<div class="formulaire_spip formulaire_config">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#SELF"><div>
+#ACTION_FORMULAIRE{SELF}
+<ul>
+	<li class="editer_score_min[ (#ENV**{erreurs}|table_valeur{score_min}|oui)erreur]">
+		<label for="score_min"><:nuage:cfg_label_score_min:></label>[
+		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{score_min})</span>]
+		<p class="explication"><:nuage:cfg_explication_score_min:></p>
+		<input type="text" name="score_min" class="text" value="#ENV**{score_min,0.05}" maxlength="4" size="4" id="score_min" />
+	</li>
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+	<input type="submit" name="_cfg_delete" value="<:cfg:reset:>" class="submit" />
+</p>
+</div></form>
+</div>

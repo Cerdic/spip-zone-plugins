@@ -1,0 +1,13 @@
+[(#CONFIG{multi_syndic}|=={oui}|?{' '})#SET{lang,#ENV{lang}}]
+<BOUCLE_tags(MOTS){type ?}{id_groupe==^((#ENV{id,.*}))$}{id_groupe!==^((#ENV{notid,-1}))$}{par #ENV{tri,titre}}>[
+(#ID_MOT|nuage{#TITRE,
+[(#ENV{url}|?{
+	[(#ENV{url}|parametre_url{id_mot,#ID_MOT}|parametre_url{lang,#GET{lang}})]
+	,
+	[(#URL_MOT|parametre_url{lang,#GET{lang}})]
+})]
+})]<BOUCLE_pop(SYNDIC){id_mot}></BOUCLE_pop>[
+(#ID_MOT|nuage{'','',#TOTAL_BOUCLE})
+]<//B_pop></BOUCLE_tags>[<ul class="nuage menu-liste">
+	(#FOREACH{NUAGE})
+</ul>]
