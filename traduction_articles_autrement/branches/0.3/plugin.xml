@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Traduction d'articles autrement[en]Article translations differently[es]Traducción de artículos repensada[de]Artikel Übersetzung mal Anders</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
 	<version>0.3.4</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
 		<multi>
 		[fr]
