@@ -1,0 +1,25 @@
+<plugin>
+    <nom>Des mots clefs pour les produits</nom>
+    <auteur>Webelys</auteur>
+    <version>0.0.1</version>
+    <version_base>0.0.1</version_base>
+    <etat>dev</etat>
+    <icon></icon>
+    <description>
+    	<multi>
+    		[fr]Des mots clefs pour les produits
+		</multi>
+	</description>
+    <lien></lien>
+    <prefix>produits_mots</prefix>
+
+    <pipeline>
+        <nom>declarer_liaison_mots</nom>
+        <inclure>produits_mots_pipelines.php</inclure>
+    </pipeline>
+
+	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="mots_objets" version="[0.4.3;]" />
+	<categorie>edition</categorie>
+</plugin>
+
