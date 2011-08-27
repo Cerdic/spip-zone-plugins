@@ -179,9 +179,15 @@
 					if ($ancien_statut == 'envoi_en_cours') {
 						$this->statut = 'envoyee';
 //						$this->date_fin_envoi = date('Y-m-d h:i:s');
-						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.intval($this->id_lettre));
-						sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), 'id_lettre='.intval($this->id_lettre).' AND statut="a_envoyer"');
+
+						$id_lettre = intval($this->id_lettre);
+						sql_updateq('spip_lettres', array('statut' => $this->statut, 'date_fin_envoi' => 'NOW()', 'maj' => 'NOW()'), 'id_lettre='.$id_lettre);
+						sql_updateq('spip_abonnes_lettres', array('statut' => 'annule'), "id_lettre=$id_lettre AND statut='a_envoyer'");
 						
+						// Invalider les caches
+						include_spip('inc/invalideur');
+						suivre_invalideur("id='id_lettre/$id_lettre'"); 
+								
 						if ($impacte_queue_envois) {
 							include_spip('inc/delivrer'); 
 							$nb = lettres_annuler_envois_restants (intval($this->id_lettre));
