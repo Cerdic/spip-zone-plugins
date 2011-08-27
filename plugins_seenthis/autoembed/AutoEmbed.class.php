@@ -52,7 +52,7 @@ class AutoEmbed {
     foreach ($AutoEmbed_stubs as $stub) { 
       if ( preg_match('~'.$stub['url-match'].'~imu', $url, $match) ) {
         $this->_stub = $stub;
-
+        
         if ( isset($stub['fetch-match'] ) ) {
           return $this->_parseLink($url);
 
@@ -237,7 +237,7 @@ class AutoEmbed {
    */ 
   private function _parseLink($url) {
     $source = preg_replace('/[^(\x20-\x7F)]*/','', file_get_contents($url));
-
+	// echo _stub['fetch-match'];
     if ( preg_match('~'.$this->_stub['fetch-match'].'~imu', $source, $match) ) {
       $this->_media_id = $match;
       $this->_setDefaultParams();

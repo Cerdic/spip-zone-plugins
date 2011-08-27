@@ -36,7 +36,7 @@ function embed_url($url) {
 			$json = json_decode($json);
 			$img = $json->{'url'};
 			if ($img) $code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
-		} 
+		}
 		else if (preg_match("/^http\:\/\/(www\.)?twitpic\.com/i", $url)) {
 			$html = join("", file($url));
 			
@@ -49,6 +49,13 @@ function embed_url($url) {
 				$img =$regs[0];	
 				$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Twitpic' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 			}
+		}
+		else if (preg_match("/^http\:\/\/(www\.)?yfrog\.com/i", $url)) {
+			$oembed = "http://www.yfrog.com/api/oembed?url?format=json&url=".$url;
+			$json = join("",file($oembed));
+			$json = json_decode($json);
+			$img = $json->{'url'};
+			if ($img) $code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 		}
 		else if (preg_match("/^http\:\/\/(www\.)?soundcloud\.com/i", $url)) {
 			$oembed = "http://soundcloud.com/oembed/?format=json&url=".$url;
@@ -70,7 +77,8 @@ function embed_url($url) {
 			}
 		} 
 		else {
-	
+			$url = str_replace("/#/", "/", $url);
+		
 			include "AutoEmbed.class.php";
 			$AE = new AutoEmbed();
 	
