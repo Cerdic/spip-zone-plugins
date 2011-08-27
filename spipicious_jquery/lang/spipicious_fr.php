@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Par',
 
 	// C
-	'cfg_description' => 'Ce plugin permet d\'ajouter aisément des tags aux articles.',
+	'cfg_description' => 'Ce plugin permet d\'ajouter aisément des tags aux objets.',
 
 	// E
 	'explication_ajout_tag' => 'Pour ajouter plusieurs tags à la fois, utilisez le séparateur : "@separateur@".',
