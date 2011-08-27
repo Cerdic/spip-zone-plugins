@@ -29,14 +29,14 @@ function balise_SELECTEUR_CODE_COMPTABLE_dyn($code) {
 		/* pour afficher le code commencant comme celui existant si ce dernier n'est pas dans le plan comptable */
 		if ($code != '') $code = association_plan_comptable_complet($code, true); /* avec un second parametre a true, la fonction renvoie le code lui meme si il est present dans le tableau ou le premier code hierarchiquement superieur present */
 		
-		//$res = "<script type='text/javascript' src='".find_in_path("javascript/jquery.destinations_form.js")."'></script>"; /* on insere le script qui permet de modifier*/
-		$res = '<select id="selecteur_code_comptable" class="formo" onchange="var currentVal=String(document.getElementById(\'selecteur_code_comptable\').value).split(\'-\'); document.getElementById(\'code\').value=currentVal[0]; document.getElementById(\'intitule\').value=currentVal[1]; ">';
+		/* code javascript en dur qui recopie l'intitule et le code dans les champs d'editions sur la page d'edition de la reference */
+		$res = '<select id="selecteur_code_comptable" class="formo" onchange="var currentVal=String(document.getElementById(\'selecteur_code_comptable\').value).split(\'-\'); document.getElementById(\'code\').value=currentVal[0]; document.getElementById(\'intitule\').value=currentVal[1];">';
 		$firstOptgroup = true;
 		/* on boucle sur tout le tableau */
 		foreach ($pcc as $index_code => $intitule) {
 			if ($index_code<9) { /* si le code est inferieur a 9, c'est une definition de classe, on en fait un optgroup */
 				if (!$firstOptgroup) $res .= '</optgroup>';
-				$res .= '<optgroup label="'.$index_code.' - '.$intitule.'">';
+				$res .= '<optgroup id="codeOptGrp'.$index_code.'" label="'.$index_code.' - '.$intitule.'">';
 				$firstOptgroup = false;
 			} else { /* sinon c'est une definition de compte -> une option du select */
 				$res .= '<option value="'.$index_code.'-'.$intitule.'"';
