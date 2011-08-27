@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'title_tag_utilise_nb' => 'Ce mot clé est associé par @nb@ personnes.',
 	'title_tag_utilise_un' => 'Ce mot clé est associé par une personne.',
 	'to' => 'avec',
-	'types_utilisateurs' => 'Qui a accès au formulaire ?',
+	'types_utilisateurs' => 'Qui a accès au formulaire d\'ajout de tags ?',
 
 	// V
 	'vos_tags' => 'Vos tags (modification)',

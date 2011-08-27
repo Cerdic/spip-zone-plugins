@@ -13,11 +13,15 @@
 				[(#SAISIE{statuts_auteurs,people,
 						label=<:spipicious:types_utilisateurs:>,
 						multiple=oui})]
-
+				<BOUCLE_groupes(GROUPES_MOTS){par num titre, titre}> </BOUCLE_groupes>
+				[(#GRAND_TOTAL|>{1}|oui)
 				[(#SAISIE{groupe_mots,groupe_mot,
 						cacher_option_intro=oui,
-						label=<:spipicious:nom_groupe_tag:>})]
-
+						label=<:spipicious:nom_groupe_tag:>})]]
+				[(#GRAND_TOTAL|<{2}|oui)
+				[(#SAISIE{input,groupe_mot,
+						type=hidden})]]
+				</B_groupes>
 			</ul>
 			<p class="boutons">
 				<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
