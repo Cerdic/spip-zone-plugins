@@ -5,7 +5,7 @@
 	Type de page : <span id="pageType">...</span><br />
     Composition : <span id="pageComposition">...</span><br />
     URL de cette page : <span>#ENV{preprod_url}</span><br />
-    [(#PLUGIN{tickets}|oui)
+    [(#PLUGIN{tickets}|ou{#PLUGIN{ticketskiss}}|oui)
     <div id="listeTickets">
     	#FORMULAIRE_PREPROD_TICKETS{#ENV{preprod_url}}
     </div>

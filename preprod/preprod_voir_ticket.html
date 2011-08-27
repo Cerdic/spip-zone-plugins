@@ -1,10 +1,11 @@
 #CACHE{0}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
 [(#SESSION{id_auteur}|oui)
 	
     <BOUCLE_infos_ticket(TICKETS ?){id_ticket}>
     <div>
-    <B_auteur_ticket><p><:preprod:rapporte_par:><BOUCLE_auteur_ticket(auteurs){id_auteur}>#NOM</BOUCLE_auteur_ticket></p></B_auteur_ticket>
-    <B_assigne_ticket><p><:preprod:assigne_a:><BOUCLE_assigne_ticket(auteurs){id_auteur=#ID_ASSIGNE}>#NOM</BOUCLE_assigne_ticket></p></B_assigne_ticket>
+    <B_auteur_ticket><p><:preprod:rapporte_par:><BOUCLE_auteur_ticket(spip_auteurs){id_auteur}>#NOM</BOUCLE_auteur_ticket></p></B_auteur_ticket>
+    <B_assigne_ticket><p><:preprod:assigne_a:><BOUCLE_assigne_ticket(spip_auteurs){id_auteur=#ID_ASSIGNE}>#NOM</BOUCLE_assigne_ticket></p></B_assigne_ticket>
     [<h3 class='titrem'>(#TITRE)</h3>]
         [<div>(#TEXTE)</div>]
     </div>
