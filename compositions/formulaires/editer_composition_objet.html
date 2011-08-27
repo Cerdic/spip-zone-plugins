@@ -4,7 +4,7 @@
 		][(#ENV{composition}|non)
 			[(#ENV{composition_heritee}|oui)<:compositions:composition_utilisee:>
 				[(#ENV{composition_heritee}|=={'-'}|oui)<strong><:compositions:composition_defaut:></strong>]
-				[(#ENV{composition_heritee}|!={'-'}|oui)<strong>[(#ENV{_compositions}|table_valeur{''}|table_valeur{nom}|table_valeur{nom}|sinon{#ENV{composition_heritee}})]</strong>]
+				[(#ENV{composition_heritee}|!={'-'}|oui)<strong>[(#ENV{_compositions}|table_valeur{''}|table_valeur{nom}|supprimer_numero|sinon{#ENV{composition_heritee}})]</strong>]
 				(<:compositions:composition_heritee:>)
 			]
 			[(#ENV{composition_heritee}|non)<:compositions:composition_defaut:>]
