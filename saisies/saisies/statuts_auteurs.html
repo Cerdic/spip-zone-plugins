@@ -10,14 +10,15 @@
   - afficher_tous : permet d'afficher une option de valeur "tous" correspondant à tous les utilisateurs
   - defaut : valeur par defaut si pas présente dans l'environnement
   - valeur_forcee : valeur utilisee meme si une valeur est dans l'environnement
-
+  - size : dans le cas d'un select multiple, limite le nombre de lignes au chiffre passé
+  
   Exemple d'appel :
 	[(#SAISIE{statuts_auteurs,statuts,
 		label=<:plugin:statuts_des_auteurs:>,
 		multiple=oui})]
 ]
 
-<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+<select name="#ENV{nom}[(#ENV{multiple}|?{[(#VAL{&#91;&#93;}|html_entity_decode)]})]" id="champ_#ENV{nom}"[ class="(#ENV{class})"][(#ENV{multiple}|oui) multiple="multiple" size="[(#ENV{size,#ENV{afficher_tous}|?{4,3}})]"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
 	[(#ENV{cacher_option_intro}|ou{#ENV{multiple}}|non)
 		<option value="">[(#ENV{option_intro})]</option>]
 	[(#ENV{multiple}|oui)
