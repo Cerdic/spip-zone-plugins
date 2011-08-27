@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 									2. Cette opération devra être effectuée avant chaque début de nouvelles saisons.<br />
 									3. À la fin de chaque saison, vous prendrez soin de mettre à jour la liste des amapiens, ainsi que l\'archivage dans la rubrique appropriée, des dates de la saison passée, ceci pour le bon fonctionnement de ce plugin.<br />
 									4. Mettre à jour les types de panniers et cotisations sur la page de chaque auteur sinon aucun panier ne pourra lui être attribué.<br />
-									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN c DU PLUGIN AMAP</strong></p>', 
+									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>', 
 	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
 	'avant_le' => 'avant le',
 
@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'signature' => 'Signature',
 
 	// T
-	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide:
+	'table_vide_aucun_enregistrement' => 'Cette table est actuellement vide :
 					<br />Elle ne contient aucun enregistrement.',
 	'type_panier' => 'Type de panier',
 	'type_panier_auteur' => 'Type de panier :',
