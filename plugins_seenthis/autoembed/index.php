@@ -37,6 +37,17 @@ function embed_url($url) {
 			$img = $json->{'url'};
 			if ($img) $code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Flickr' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 		}
+		else if (preg_match("/^http\:\/\/(www\.)?pastebin\.com\/(.*)/i", $url, $regs)) {
+			$val = $regs[2];
+			$html = join("", file($url));
+			
+			$html = substr($html, strpos($html, '<div id="code_frame">'), strlen($html));
+			$html = substr($html, 0, strpos($html, '<div class="content_title">'));
+			$html = trim($html);
+			
+			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
+			
+		}
 		else if (preg_match("/^http\:\/\/(www\.)?twitpic\.com/i", $url)) {
 			$html = join("", file($url));
 			

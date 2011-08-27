@@ -328,7 +328,7 @@ $AutoEmbed_stubs = array(
     'fetch-match' => 'swfo.embedSWF\(.*(http://media.mtvnservices.com/mgid:cms:(video|fullepisode):thedailyshow\.com:[0-9]{1,10})',
     'embed-src' => '$2',
     'embed-width' => '360',
-    'embed-height' => '301',
+    'embed-height' => '205',
   ),
   array(
     'title' => 'ColbertNation',
@@ -336,7 +336,7 @@ $AutoEmbed_stubs = array(
     'url-match' => 'http:\/\/(?:www\.)?colbertnation\.com\/the-colbert-report-videos\/([0-9]*)\/',
     'embed-src' => 'http://media.mtvnservices.com/mgid:cms:item:comedycentral.com:$2',
     'embed-width' => '360',
-    'embed-height' => '301',
+    'embed-height' => '270',
   ),
   array(
     'title' => 'Crackle',
@@ -1399,6 +1399,14 @@ $AutoEmbed_stubs = array(
     'embed-width' => '440',
     'embed-height' => '340',
     'iframe-player' => 'http://maps.google.com/maps?$3&output=embed',
+  ),
+  array(
+    'title' => 'Pastebin',
+    'website' => 'http://pastebin.com',
+    'url-match' => 'pastebin\.com\/(raw\.php\?i\=)?(.*)',
+    'embed-width' => '440',
+    'embed-height' => '150',
+    'iframe-player' => 'http://pastebin.com/embed_iframe.php?i=$3',
   ),
   array(
     'title' => 'Deezer',
