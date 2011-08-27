@@ -32,7 +32,7 @@ function formulaires_sympatic_editer_liste_verifier_dist($id_liste='new', $retou
 
 	// verifier les champs obligatoires
 	foreach (array(
-		'titre', 'email_liste', 'email_robot'
+		'titre', 'visible', 'email_liste', 'email_robot'
 	) as $champ) {
 		if (_request($champ) == '') {
 			$erreurs[$champ] = _T('saisies:option_obligatoire_label');
@@ -49,7 +49,7 @@ function formulaires_sympatic_editer_liste_traiter_dist($id_liste='new', $retour
 	// Récupération des données
 	$datas = array();
 	foreach (array(
-		'titre', 'descriptif', 'email_liste', 'email_robot'
+		'titre', 'visible', 'descriptif', 'email_liste', 'email_robot'
 	) as $champ) {
 		if (($a = _request($champ)) !== null) {
 			$datas[$champ] = $a;

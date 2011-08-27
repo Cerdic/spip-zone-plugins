@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Sympatic</nom>
 	<auteur>b_b</auteur>
-	<version>0.1</version>
-	<version_base>0.1</version_base>
+	<version>0.2</version>
+	<version_base>0.2</version_base>
 	<etat>dev</etat>
 	<prefix>sympatic</prefix>
 	<icon>images/sympatic.png</icon>

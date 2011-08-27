@@ -1,6 +1,6 @@
 <li class="editer editer_listes saisie_checkbox[(#REM|test_espace_prive|oui)fieldset]">
 	<p class="explication"><:sympatic:explication_listes:></p>
-	<BOUCLE_listes(SYMPATIC_LISTES){par num titre, titre}>
+	<BOUCLE_listes(SYMPATIC_LISTES){par num titre, titre}{visible>=#SESSION{statut}}>
 	<div class="choix">
 		<input type="checkbox" name="listes[#ID_LISTE]" class="checkbox" id="champ_listes_#COMPTEUR_BOUCLE"
 		<BOUCLE_test(SYMPATIC_ABONNES){id_liste}{id_auteur=#ENV{id_auteur}}> checked="checked"</BOUCLE_test>

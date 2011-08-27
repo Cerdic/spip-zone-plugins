@@ -5,14 +5,18 @@ include_spip('inc/meta');
 
 function sympatic_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = "0.0";
-	if (	(!isset($GLOBALS['meta'][$nom_meta_base_version]))
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		include_spip('base/sympatic');
+		include_spip('base/create');
+		include_spip('base/abstract_sql');
 		if ($current_version==0.0){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			creer_base();
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
+		}
+		if (version_compare($current_version,'0.2','<')){
+			maj_tables('spip_sympatic_listes');
+			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
 	}
 }

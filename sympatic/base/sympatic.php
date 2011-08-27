@@ -19,7 +19,8 @@ function sympatic_declarer_tables_principales($tables_principales){
 		"titre"			=> "text NOT NULL DEFAULT ''",
 		"descriptif"	=> "text NOT NULL DEFAULT ''",
 		"email_liste"	=> "text NOT NULL DEFAULT ''",
-		"email_robot"	=> "text NOT NULL DEFAULT ''"
+		"email_robot"	=> "text NOT NULL DEFAULT ''",
+		"visible"		=> "VARCHAR(15) NOT NULL DEFAULT '1comite'"
 	);
 	
 	$sympatic_listes_key = array(
