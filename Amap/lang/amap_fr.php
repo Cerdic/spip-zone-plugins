@@ -8,18 +8,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action' => 'Action ?',
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
-	'adherent_sans_type_panier' => 'Vos adhérents non pas encore de type de panier affecter.', 
+	'adherent_sans_type_panier' => 'Vos adhérents non pas encore de type de panier affecté.', 
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
 	'administrateur' => 'Administrateur',
 	'attention' => 'ATTENTION !',
-	'attention_modifications' => '<p>Vous venez d\'activer le plugin AMAP, ce dernier vient de créer une nouvelle rubrique "Agenda de la saison"avec deux sous-rubriques "Distribution" et "Évènements", ainsi que la rubrique "Archives".</p>
+	'attention_modifications' => '<p>Vous venez d\'activer le plugin AMAP, ce dernier vient de créer une nouvelle rubrique "Agenda de la saison" avec deux sous-rubriques "Distribution" et "Évènements", ainsi que la rubrique "Archives".</p>
 									1. Avant de poursuivre, veuillez renseigner toutes les dates de votre saison grâce au plugin agenda.<br />
 									2. Cette opération devra être effectuée avant chaque début de nouvelles saisons.<br />
 									3. À la fin de chaque saison, vous prendrez soin de mettre à jour la liste des amapiens, ainsi que l\'archivage dans la rubrique appropriée, des dates de la saison passée, ceci pour le bon fonctionnement de ce plugin.<br />
-									4. Mettre à jour les types de panniers et cotisations sur la page de chaque auteur sinon aucun panier ne pourras lui être attribué.<br />
-									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN DYSFONCTIONNEMENT DU PLUGIN AMAP</strong></p>', 
-	'aucun_panier_pour_nom' => 'Nous avons aucun panier pour @nom@.',
+									4. Mettre à jour les types de panniers et cotisations sur la page de chaque auteur sinon aucun panier ne pourra lui être attribué.<br />
+									<p><strong>LE NON RESPECT DE CES QUELQUES PRINCIPES ENTRAINERA UN c DU PLUGIN AMAP</strong></p>', 
+	'aucun_panier_pour_nom' => 'Nous n\'avons aucun panier pour @nom@.',
 	'avant_le' => 'avant le',
 
 	// C
@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'impression' => 'Impression',
 	'impression_donnees' => 'Impression de données',
 	'impression_donnees_fonction_date' => 'Impression des paniers en fonction d\'une date :',
-	'impression_explication' => 'Seulement les dates contenant au minimum un panier sont cliquable et ouvre une nouvelle fenêtre.',
+	'impression_explication' => 'Seulement les dates contenant au minimum un panier sont cliquables et ouvrent une nouvelle fenêtre.',
 
 	// L
 	'les_paniers' => 'Les paniers de',
@@ -70,8 +70,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'paniers_distribuer' => 'paniers à distribuer',
 	'panier_liste' => 'Liste des paniers',
 	'panier_livraison' => 'Contenu d\'un panier',
-	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connectés ou on ne vous a pas reconnu.',
-	'pas_date_distributions' => 'Pas de date de distributions renseigné.',
+	'pas_connecte_ou_reconnu' => 'Vous n\'êtes pas connecté ou on ne vous a pas reconnu.',
+	'pas_date_distributions' => 'Pas de date de distribution renseigné.',
 	'pas_paniers' => 'Vous ne disposez d\'aucun panier durant cette saison, en effet aucun contrat vous concernant n\'est actuellement en cours',
 	'petit' => 'Petit',
 
