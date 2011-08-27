@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action' => 'Action ?',
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
-	'adherent_sans_type_panier' => 'Vos adhérents non pas encore de type de panier affecté.', 
+	'adherent_sans_type_panier' => 'Vos adhérents n\'ont pas encore de type de panier affecté.', 
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
 	'administrateur' => 'Administrateur',
@@ -66,6 +66,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'panier_dispo_auteur' => 'Bonjour,
 		<br />Je mets à disposition le panier du @date_distribution@
 		<br />@nom@',
+	'panier_dispo_auteur_mail' => 'Bonjour,
+Je mets à disposition le panier du @date_distribution@, pour le récupéré suiver le lien suivant @lien@=@id_amap_panier@
+@nom@',
 	'panier_distribuer' => 'panier à distribuer',
 	'paniers_distribuer' => 'paniers à distribuer',
 	'panier_liste' => 'Liste des paniers',
@@ -76,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'petit' => 'Petit',
 
 	// R
+	'renseigner_adresse_public_panier' => 'Renseigner ici l\'adresse de la page public "panier" (page où vous aurez le formulaire pour modifier un panier).',
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',
 	'reste_paniers_distribuer' => 'Il nous reste encore @nb@ paniers à distribuer',
