@@ -1,34 +1,44 @@
 <plugin>
-	<nom>
+<nom>
 	<multi>
 	[en]Chess
 	[fr]Echecs
 	</multi>
-	</nom>
-	<icon>
+</nom>
+<slogan>
+	<multi>
+	[en]Allow to Show Chess Games with pgn Files
+	[fr]Pour voir des parties d'&#233;checs avec les fichiers pgn
+	</multi>
+</slogan>
+<icon>
   logo_chess.gif 
-  </icon>
-	<auteur>
+</icon>
+<auteur>
 	S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville<br />
   original script Alf Magne Kalleland owner of DHTMLGoodies
-	</auteur>
-	<version>
-	0.9
-	</version>
-	<etat>
+</auteur>
+<version>
+	0.9.1
+</version>
+<etat>
 	stable
-	</etat>
-	<description>
-Ce plugin est destin&#233; &#224; lire des parties d&#39;&#233;checs grace &agrave; des fichiers PGN.
-_ {{Ce plugin n&#233;cessite le plugin CFG version 1.0.6 ou plus}}<br />
-_ Il suffit de d&#39;ins&#233;rer la balise &#60;chessXX&#62; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
-_ Documentation sur [Spip-contrib->http://www.spip-contrib.net/Plugin-Chess]
-	</description>
+</etat>
+<description>
+  <multi>
+	[fr]
+  Ce plugin est destin&#233; &#224; lire en ligne des parties d&#39;&#233;checs grace &agrave; des fichiers PGN.
+  _ Il suffit de d&#39;ins&#233;rer dans un article la balise &#60;chessXX&#62; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
+    [en]
+  _ This plugin allows to read chess games on line with their pgn file.
+  _ To insert the widget you have just to write in your article the tag   &#60;chessXX&#62; where XX is the number of the article, then upload the pgn files.
+  </multi>
+</description>
 	<lien>http://www.spip-contrib.net/Plugin-Chess</lien>
-	<prefix>
+<prefix>
 	chess
-	</prefix>
-	<fonctions>chess_fonctions.php</fonctions>
+</prefix>
+<fonctions>chess_fonctions.php</fonctions>
 	<pipeline>
 	  <nom>insert_head</nom>
 	  <inclure>chess_fonctions.php</inclure>
@@ -36,11 +46,11 @@ _ Documentation sur [Spip-contrib->http://www.spip-contrib.net/Plugin-Chess]
   </pipeline>
   
   <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-	<pipeline>
+  <pipeline>
         <nom>header_prive</nom>
         <inclure>chess_fonctions.php</inclure>
     </pipeline>
-	<categorie>divers</categorie>
+<categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
 	<necessite id="cfg" version="[1.0.6;]" />
 </plugin>
