@@ -48,6 +48,16 @@ function embed_url($url) {
 			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
 			
 		}
+		else if (preg_match("/^https?\:\/\/gist\.github\.com\/(.*)/i", $url, $regs)) {
+			$html = join("", file($url));
+			
+			$html = substr($html, strpos($html, '<pre>'), strlen($html));
+			$html = substr($html, 0, strpos($html, '</pre>'));
+			$html = trim($html);
+			
+			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
+			
+		}
 		else if (preg_match("/^http\:\/\/(www\.)?twitpic\.com/i", $url)) {
 			$html = join("", file($url));
 			
