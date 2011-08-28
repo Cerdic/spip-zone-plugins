@@ -9,8 +9,8 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
 Affiche les rubriques ayant le mot-clé passé en paramètre.
 
-]<B_rubs><ul>
-<BOUCLE_rubs(RUBRIQUES){id_mot ?}{par date}{inverse}{0, #ENV{limit,10}}{lang}>
+]<B_rubs>[<div class="nsize">(#PAGINATION)</div>]<ul>
+<BOUCLE_rubs(RUBRIQUES){id_mot ?}{par date}{inverse}{pagination #ENV{limit,10}}{lang}>
   [<li><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"] class="tsize">(#TITRE|supprimer_numero)</a></li>]
 </BOUCLE_rubs>
 </ul></B_rubs>

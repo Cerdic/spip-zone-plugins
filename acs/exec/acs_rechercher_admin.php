@@ -22,7 +22,7 @@ function exec_acs_rechercher_admin_dist()
 		exit;
   }
 
-	$where = split("[[:space:]]+", _request('nom'));
+	$where = preg_split("[[:space:]]+", _request('nom'));
 	if ($where) {
 		foreach ($where as $k => $v)
 			$where[$k] = "'%" . substr(str_replace("%","\%", _q($v)),1,-1) . "%'";

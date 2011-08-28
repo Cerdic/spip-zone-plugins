@@ -10,6 +10,10 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 Affiche la bulle d'information de la rubrique, de l'article, ou du mot-clé
 Le style des listes d'articles d'une rubrique est defini par le composant Articles.
 
+Paramètres :
+limit : nb d'articles ou de rubriques affichés dans l'info-bulle.
+
+
 ][(#SET{maxLogo,#VAR{#EVAL{'acsCarte'.'#NIC'.'LogoMax'},100}})]<BOUCLE_rub(RUBRIQUES){tous}{id_rubrique}><div class="titre"><a href="#URL_RUBRIQUE">#TITRE</a></div>[(#VAR{#EVAL{'acsCarte'.'#NIC'.'LastUpdate'}}|!={non}|?{' '})[<div class='date'><small><:dernier_ajout:>: (#DATE|affdate)</small></div>]]
   <div class="bulle liste-articles">
   <BOUCLE_mp3(DOCUMENTS){id_rubrique}{mode=document}{extension=mp3}{0,1}{par date}{inverse}>[(#MODELE{doc_player}{id_document}{autostart=yes}{small=y}{nodownload=y}{align=#LANG_RIGHT})]</BOUCLE_mp3>
