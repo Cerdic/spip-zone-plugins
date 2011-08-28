@@ -26,7 +26,7 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 	
 	<prefix>contacts</prefix>
 	
-	<version>1.9.3</version>
+	<version>1.9.4</version>
 	<version_base>1.5.0</version_base>
 	
 	<install>base/contacts_upgrade.php</install>
@@ -90,6 +90,11 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
 	
+	<pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>contacts_pipelines.php</inclure>
+	</pipeline>
+
 	<!-- pour charger les nouvelles balises #PSEUDO et #ORGANISATIONS -->
 	<fonctions>contacts_fonctions.php</fonctions>
 
