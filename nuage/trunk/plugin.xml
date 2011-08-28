@@ -2,7 +2,7 @@
 	<version>3.2.1</version>
 	<nom>Nuage</nom>
 	<prefix>nuage</prefix>
-	<auteur>Booz, Fil, James, St&#233;phane, Bill (stephane(at)rezo.net) et Camille Lafitte</auteur>
+	<auteur>Booz, Fil, James, St&#233;phane et Camille Lafitte</auteur>
 	<licence>2005 - 2011 GNU/GPL</licence>
 	<etat>stable</etat>
 	<description>
@@ -15,11 +15,6 @@
 	 en fonction de la frequence des mots dans les articles de cette branche
 	- nuage_popularite : affiche les mots cles du site (ou d'un groupe), la taille variant
 	 en fonction de sa popularite relative (somme des popularitedes articles ayant ce mot)
-	
-	La feuille de style est personnalisable (nuage_style.css.html), en particulier la taille
-	des mots : une classe nuageN etant affectee en fonction de la "note" (par defaut de 1 a 10)
-	
-	Les modeles sont personnalisable et exploitent 3 nouveaux criteres et leurs balises associees
 	</description>
 	<icon>
 	images/nuage-64.png
@@ -27,13 +22,12 @@
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head_css</nom> 
-		<inclure>nuage_options.php</inclure>
+		<inclure>nuage_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>insert_head</nom> 
-		<inclure>nuage_options.php</inclure>
+		<inclure>nuage_fonctions.php</inclure>
 	</pipeline>
-	<chemin dir='' />
 	<categorie>navigation</categorie>
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="spip_bonux" version="[2.0;]" />
