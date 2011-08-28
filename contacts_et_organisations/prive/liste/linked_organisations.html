@@ -18,7 +18,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_organisations(ORGANISATIONS){id_contact?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+	<BOUCLE_organisations(ORGANISATIONS_LIENS organisations){id_contact?}{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
 		[(#REM) sur boucle pour le crayon ]
 		<BOUCLE_liaisons(organisations_liens){id_contact}{id_organisation}>
 		<tr class="[(#_organisations:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
