@@ -24,4 +24,9 @@ function spipal_affiche_milieu($flux) {
 	}
 	return $flux;
 }
+function spipal_insert_head($flux){
+	$flux .='<script src="'._DIR_PLUGIN_SPIPAL.'javascript/spipal.js" type="text/javascript"></script>';
+	$flux .= '<link rel="stylesheet" href="'._DIR_PLUGIN_SPIPAL.'css/spipal.css" type="text/css" media="projection, screen, tv" />';
+	return $flux;
+}
 ?>
