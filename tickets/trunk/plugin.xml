@@ -1,118 +1,33 @@
 <plugin>
-	<nom><multi>[fr]Tickets, syst&egrave;me de suivi de bugs[en]Tickets, Bug tracking system[de]Tickets - System zur Fehler-Nachverfolgung</multi></nom>
-	<auteur>ARNO*</auteur>
-	<licence>GPL v3</licence>
-	<description><multi>[fr]<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; &agrave; l'espace priv&eacute; de SPIP.
-Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (notamment les squelettes du site public).[de]<i>Tickets</i> ist ein Werkzeug zur Fehler-Nachverfolgung (bugtracker) das im SPIP Redaktionssystem zug&auml;nglich ist.
-Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &ouml;ffentlichen Sitelayouts zu unterst�tzen.</multi>
-	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<icon>imgs/logo-bugs.png</icon>
-
-	<version>1.65</version>
-	<version_base>0.7</version_base>
-	<etat>stable</etat>
-
-	<prefix>tickets</prefix>
-
-	<options>tickets_options.php</options>
-	<fonctions>tickets_fonctions.php</fonctions>
-	<install>base/tickets_upgrade.php</install>
-
-	<pipeline>
-		<nom>declarer_tables_interfaces</nom>
-		<inclure>base/tickets_install.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>declarer_tables_principales</nom>
-		<inclure>base/tickets_install.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>ajouter_boutons</nom>
-		<action>ajouterBoutons</action>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_droite</nom>
-		<action>droite</action>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_gauche</nom>
-		<action>gauche</action>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>autoriser</nom>
-		<inclure>inc/tickets_autoriser.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>notifications</nom>
-		<inclure>tickets_notifications.php</inclure>
-	</pipeline>
-	<!-- avec plugin champs extras 2 -->
-	<pipeline>
-		<nom>objets_extensibles</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>accueil_gadgets</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>accueil_informations</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>declarer_url_objets</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>rechercher_liste_des_champs</nom>
-		<inclure>tickets_pipelines.php</inclure>
-	</pipeline>
-
-	<bouton id='tickets' parent='bando_publication'>
-		<icone>images/ticket-16.png</icone>
-		<titre>tickets:titre</titre>
-		<url>tickets</url>
-	</bouton>
-
-	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id="saisies" version="[1.3;]" />
-	<!-- pour les boucles pour des "selections" de saisies, je suis vraiment sincerement desole -->
-	<necessite id="spip_bonux" version="[1.8;]" />
-	<utilise id="cfg" version="[1.14.1;]" />
-</plugin>
-<plugin spip='[2.1.0;]'>
 	<nom>
 		<multi>
-			[fr]Tickets, syst&egrave;me de suivi de bugs
-			[en]Bug reports, Bug tracking system
-			[de]Tickets - System zur Fehler-Nachverfolgung</multi></nom>
-	<auteur>ARNO*</auteur>
+		[fr]Tickets
+		[en]Bug reports
+		[de]Tickets
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Syst&egrave;me de suivi de bugs
+		[en]Bug tracking system
+		[de]System zur Fehler-Nachverfolgung
+		</multi>
+	</slogan>
+	<auteur>ARNO*, Kent1, Eric Lupinacci</auteur>
 	<licence>GPL v3</licence>
 	<description>
 		<multi>
-			[fr]<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; dans SPIP.
-Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site.
-			[de]<i>Tickets</i> ist ein Werkzeug zur Fehler-Nachverfolgung (bugtracker) das im SPIP Redaktionssystem zug&auml;nglich ist.
-Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &ouml;ffentlichen Sitelayouts zu unterst�tzen.
-			[en]<i>Bug reports</i> is a bug tracking tool integrated into SPIP. It is designed to facilitate the development phase of the site.
+		[fr]<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; dans SPIP. Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site.
+		[de]<i>Tickets</i> ist ein Werkzeug zur Fehler-Nachverfolgung (bugtracker) das im SPIP Redaktionssystem zug&auml;nglich ist. Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &ouml;ffentlichen Sitelayouts zu unterst&uuml;tzen.
+		[en]<i>Bug reports</i> is a bug tracking tool integrated into SPIP. It is designed to facilitate the development phase of the site.
 		</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.76</version>
+	<version>2.0.0</version>
 	<version_base>1.1</version_base>
-
-	<etat>stable</etat>
+	<etat>dev</etat>
 
 	<prefix>tickets</prefix>
 
@@ -218,7 +133,7 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 	<chemin dir='spip21/' />
 
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[3.0.0-dev;)" />
 	<necessite id="saisies" version="[1.3;]" />
 	<!-- pour les boucles pour des "selections" de saisies -->
 	<necessite id="spip_bonux" version="[1.8;]" />
@@ -226,6 +141,5 @@ Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &
 		pour la gestion des forums dans la table spip_forums 
 		svn://zone.spip.org/spip-zone/_core_/branches/spip-2.1/plugins/forum
 	-->
-	<necessite id="forum" version="[1.2;]" />
 	<utilise id="cfg" version="[1.14.1;]" />
 </plugin>
