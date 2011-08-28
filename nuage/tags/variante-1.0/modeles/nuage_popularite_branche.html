@@ -1,0 +1,14 @@
+[
+(#REM) Noter la popularite relative (somme des popularites des articles associes) maxi 
+]<BOUCLE_max(MOTS){popularite_branche article}{id_groupe?}{!par popularite_relative}{0,1}>#SET{max,#POPULARITE_RELATIVE}</BOUCLE_max>[
+(#REM) afficher le nuage
+]<B_tags>
+<ul class="nuage">
+<BOUCLE_tags(MOTS){popularite_branche article}{id_groupe?}{par num titre,titre}>
+ <li>
+  <span class="frequence">(#POPULARITE_RELATIVE/#GET{max})</span>
+  <a rel="tag" href="#URL_MOT" class="nuage[(#POPULARITE_RELATIVE|nuage_note{#GET{max},10})]">#TITRE</a>
+ </li>
+</BOUCLE_tags>
+</ul>
+</B_tags>
