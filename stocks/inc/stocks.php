@@ -17,4 +17,38 @@ function get_quantite($objet,$id_objet) {
     );
 }
 
+function set_quantite($objet,$id_objet,$quantite) {
+
+    $table_stocks = table_objet_sql('stocks');
+    $quantite = intval($quantite);
+        
+    $insert = sql_insertq(
+        $table_stocks,
+        array(
+            "objet" => sql_quote($objet),
+            "id_objet" => intval($id_objet),
+            "quantite" => $quantite
+        )
+    );
+
+    if (!$insert) {
+        $update = sql_updateq(
+            $table_stocks,
+            array(
+                "quantite" => $quantite
+            ),
+            array(
+                "objet = ".sql_quote($objet),
+                "id_objet = ".intval($id_objet)
+            )
+        );
+    }
+
+    if ($insert || $update)
+        return $quantite;
+    else
+        return false;
+}
+
+
 ?>
