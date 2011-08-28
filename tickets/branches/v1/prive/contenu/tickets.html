@@ -1,0 +1,48 @@
+[(#REM) Squelette du contenu de la page (exec=tickets)
+	- recapitulatif des tickets presente suivant un classement donne]
+#CACHE{0}
+<br />
+<br />
+<br />
+
+<h1>[(#VAL{tickets:classement_#ENV{classement}}|_T)]</h1>
+
+[(#VAL|debut_gauche{true})]
+
+[(#VAL|debut_cadre_enfonce{true})]
+<ul style="list-style:none; padding:0;">
+	<li class="[(#ENV{classement}|=={asuivre}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,asuivre})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_asuivre:>})] <:tickets:classement_asuivre:></a>
+	</li>
+	<li class="[(#ENV{classement}|=={type}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,type})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_type:>})] <:tickets:classement_type:></a>
+	</li>
+	<li class="[(#ENV{classement}|=={assigne}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,assigne})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_assigne:>})] <:tickets:classement_assigne:></a>
+	</li>
+	<BOUCLE_sr(TICKETS){statut IN resolu,ferme}{0,1}> </BOUCLE_sr>
+	<li class="[(#ENV{classement}|=={termine}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,termine})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_termine:>})] <:tickets:classement_termine:></a>
+	</li>
+	</B_sr>
+[(#EVAL{_TICKETS_LISTE_JALONS}|!={_TICKETS_LISTE_JALONS}|oui)
+	<li class="[(#ENV{classement}|=={jalon}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,jalon})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_jalon:>})] <:tickets:classement_jalon:></a>
+	</li>
+]
+</ul>
+[(#VAL{true}|fin_cadre_enfonce)]
+
+[(#VAL|debut_droite{true})]
+
+<INCLURE{fond=prive/contenu/inc_classement_#ENV{classement}}{env}>
+
+[(#AUTORISER{ecrire, ticket}|oui)
+	[(#VAL{<:tickets:creer_ticket:>}|icone_inline{
+		#VAL{ticket_editer}|generer_url_ecrire{id_ticket=new}|parametre_url{retour,#SELF},
+		#CHEMIN{imgs/bugs.png},
+		creer.gif,
+		right
+	})]
+]
+[(#VAL|fin_gauche)]

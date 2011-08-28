@@ -1,0 +1,23 @@
+[(#REM) Noisette servant a l'affichage du menu des tickets presente en colonne droite ou gauche]
+#CACHE{0}
+#SET{visible,true}
+
+<B_simple>
+<div class="cadre cadre-liste">
+	[(#ENV{titre}|tickets_bouton_block_depliable{#GET{visible,true}|=={true}, #ENV{lien}})]
+	[(#GET{visible,true}|=={true}|tickets_debut_block_depliable)]
+	[<div class="arial1 tranches pagination">(#PAGINATION)</div>]
+	<table width="100%" cellpadding="2" cellspacing="0" border="0">
+		<tbody>
+		<BOUCLE_simple(TICKETS){par date}{inverse}{pagination 10 #ENV{bloc}}{id_auteur?}{id_assigne?}{statut?}>
+			<tr class="tr_liste">
+				<td style="width: 10px;"><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] /></td>
+				<td class="arial2"><a href="[(#ID_TICKET|generer_url_entite{ticket})]">#TITRE</a></td>
+				<td class="arial1"><b>##ID_TICKET</b></td>
+			</tr>
+		</BOUCLE_simple>
+		</tbody>
+	</table>
+	[(#VAL|tickets_fin_block)]
+</div>
+</B_simple>

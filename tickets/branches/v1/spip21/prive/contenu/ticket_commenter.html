@@ -1,0 +1,23 @@
+[(#REM) Bloc 2: liste des commentaires sur le ticket]
+<BOUCLE_ticket(TICKETS){id_ticket}>
+<B_messages>
+<div class="cadre cadre-r">
+<BOUCLE_messages(FORUMS){id_ticket}{par date}{"<hr style='height: 1px; background-color: #666666; color: #666666; border: 0px;' />"}>
+	<div class="cadre_padding">
+		<div style="text-align: #LANG_RIGHT;">
+			<BOUCLE_auteur_message(AUTEURS){id_auteur}{tout}>
+			<:par_auteur:> <strong><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#NOM</a></strong>
+			</BOUCLE_auteur_message>
+			le [(#DATE|affdate)]
+		</div>
+	[<div>(#TEXTE)</div>]
+	</div>
+</BOUCLE_messages>
+</div>
+</B_messages>
+
+[(#REM) Bloc 3: formulaire d'ajout d'un commentaire sur le ticket]
+[(#AUTORISER{commenter, ticket, #ID_TICKET}|oui)
+	[(#FORMULAIRE_FORUM{#SELF})]
+]
+</BOUCLE_ticket>

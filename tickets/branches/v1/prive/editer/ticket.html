@@ -1,0 +1,10 @@
+[(#REM) Squelette du formulaire de la page d'edition d'un ticket (exec=ticket_editer)]
+<div class="entete-formulaire">
+#ENV*{icone}
+[(#ENV{id_ticket}|intval|oui)
+	<span class="arial1 spip_small"><strong><:tickets:ticket:> ##ENV{id_ticket}</strong></span>
+]
+	<h1>[(#ENV{titre}|typo)]</h1>
+</div>
+
+#FORMULAIRE_EDITER_TICKET{#ENV{id_ticket,oui},#ENV{retour,#URL_ECRIRE{'ticket_afficher'}}}
