@@ -1,0 +1,7 @@
+.ii_field{padding-right:12px; position:relative; overflow:hidden; float:left; height:22px;}
+.ii_field input{border:1px solid #999; background:#fff; padding:2px; text-align:right;}
+.plus,.moins{border: 1px outset #999; background:#eee; color:#333; height:9px; width:10px; cursor:pointer; float:left; vertical-align:middle; font-size:10px; font-weight:bold; text-align:center; display:block; line-height:10px /*ie6 not reducing height under line-height value*/;}
+.plus{position:absolute; top:0; right:0;}
+.moins{position:absolute; bottom:0; right:0;}
+.plus:hover,.moins:hover{background:#D0EDFF;}
+.plus:active,.moins:active{border-style:inset;}
