@@ -52,7 +52,7 @@ function embed_url($url) {
 			$html = join("", file($url));
 			
 
-			if (preg_match(",http://hotproxy[0-9]+.twitpic.com/photos/large/[a-z0-9]+.(jpg|gif|png),i", $html, $regs)){
+			if (preg_match(",http://(hot)?proxy[0-9]+.twitpic.com/photos/(full|large)/[a-z0-9]+.(jpg|gif|png),i", $html, $regs)){
 				$img =$regs[0];	
 				$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Twitpic' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 			}
