@@ -16,6 +16,11 @@ function sympatic_traiter_abonnement($id_liste,$id_auteur,$action,$email=''){
 		$email_auteur = $email;
 	else
 		$email_auteur = sql_getfetsel('email','spip_auteurs','id_auteur='.intval($id_auteur));
+	
+	// si l'auteur en cours de session n'a pas les droits suffisants ne rien faire
+	if ($liste_data['visible'] < $GLOBALS['visiteur_session']['statut'])
+		return true;
+	
 	$sujet=null;
 	
 	spip_log("traiter abonnement liste : $id_liste | action : $action | id_auteur : $id_auteur","sympatic");
