@@ -15,9 +15,19 @@ function balise_QUANTITE_dist($p) {
 		$_id = interprete_argument_balise(2,$p);
     }
 
-	$p->code = "get_quantite(".sql_quote($_objet).",$_id)";
-	$p->interdire_scripts = false;
+    $p->code = "quantite_champ_ou_stock(".champ_sql('quantite', $p).",".sql_quote($_objet).",$_id)";
+    $p->interdire_scripts = false;
+
 	return $p;
+}
+
+
+function quantite_champ_ou_stock($quantite,$objet,$id_objet) {
+    include_spip('inc/stocks');
+    if (is_null($quantite))
+        return get_quantite($objet,$id_objet);
+    else 
+        return $quantite;
 }
 
 ?>
