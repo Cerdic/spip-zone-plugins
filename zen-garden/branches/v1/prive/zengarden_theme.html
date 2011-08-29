@@ -1,0 +1,49 @@
+#SET{themes,#ENV{tous,''}|zengarden_liste_themes}
+<INCLURE{fond=prive/zengarden_theme_actif}{env}{themes=#GET{themes}}>
+<B_themes>
+[<p class='pagination'>(#PAGINATION)</p>]
+<ul class='liste_themes'>
+<BOUCLE_themes(POUR){tableau #GET{themes}}{cle!=#ENV{selection}}{par chemin_tri}{pagination 20}>
+	<li class='theme'>
+		<div class="qTip target_leftMiddle tooltip_rightMiddle">
+		[(#EVAL{_DIR_THEMES}|concat{#VALEUR|table_valeur{chemin},'/',#VALEUR|table_valeur{icon}}
+		|image_reduire{#ENV{largeur_previsu,100},#ENV{hauteur_previsu,75}}
+		|inserer_attribut{class,''}
+		|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]
+		<h3 class="">[(#VALEUR|table_valeur{nom}|typo|extraire_multi)]</h3>
+		</div>
+		<div class="qTipContent">
+		<div class='descriptif'>[(#VALEUR|table_valeur{description}|propre)]</div>
+		<div class='auteur'>[(#VAL{info_les_auteurs_1}|_T{#ARRAY{les_auteurs,#VALEUR|table_valeur{auteur}|propre|PtoBR}})]</div>
+		<div class='licence'>[<:intitule_licence:> (#VALEUR|table_valeur{licence}|propre|PtoBR)]</div>
+
+		<B_squelettes>
+			<div class='squelette'>
+				<:zengarden:intitule_compatiblite_squelette:>
+				<ul>
+				<BOUCLE_squelettes(POUR){tableau #VALEUR|table_valeur{utilise}}>[(#VALEUR|table_valeur{id}|in_any{#ARRAY{0,Z,1,Zpip}}|non)[
+							<li>
+								(#VALEUR|table_valeur{name}|sinon{#VALEUR|table_valeur{id}}|propre|PtoBR)
+								[: (#VALEUR|table_valeur{version}|zengarden_affiche_version_compatible|propre|PtoBR)]
+							</li>
+				]]</BOUCLE_squelettes>
+				</ul>
+			</div>
+			<br class="nettoyeur" />
+		</B_squelettes>
+
+		[<div class='bandeau'>(#VALEUR|table_valeur{bandeau}|?{<:zengarden:bandeau_personalisable:>})</div>]
+		</div>
+		<p class='actions'>
+		[<a target='_blank' href='[(#URL_ACTION_AUTEUR{zengarden_activer_theme,apercu:#CLE,[(#EVAL{_DIR_RACINE}|sinon{#ENV{redirect}})]})]'><:zengarden:apercevoir_ce_theme:></a>]
+		[<a href='#URL_ACTION_AUTEUR{zengarden_activer_theme,activation:#CLE,#SELF|parametre_url{debut_themes,''}}'><:zengarden:choisir_ce_theme:></a>]
+		</p>
+	</li>
+</BOUCLE_themes>
+</ul>
+<br class="nettoyeur" />
+[<p class='pagination'>(#PAGINATION)</p>]
+
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.qtip-1.0.0-rc3.js})" ></script>]
+[<script type="text/javascript" src="(#CHEMIN{javascript/jquery.qtip.activate.js})" ></script>]
+</B_themes>

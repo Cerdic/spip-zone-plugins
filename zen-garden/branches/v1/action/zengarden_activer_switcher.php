@@ -1,0 +1,21 @@
+<?php
+/**
+ * Plugin Zen-Garden pour Spip 2.0
+ * Licence GPL (c) 2006-2008 Cedric Morin
+ *
+ */
+
+function action_zengarden_activer_switcher_dist(){
+	$securiser_action = charger_fonction('securiser_action','inc');
+	$arg = $securiser_action();
+
+	include_spip('inc/meta');
+	if ($arg=='on'){
+		ecrire_meta("zengarden_switcher", 'on');
+	}
+	else {
+		effacer_meta("zengarden_switcher");
+	}
+}
+
+?>

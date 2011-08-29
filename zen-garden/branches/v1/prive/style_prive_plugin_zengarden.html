@@ -1,0 +1,22 @@
+[(#REM) <style>]
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.zengarden .themes li.item {padding-#GET{left}:227px;}
+.zengarden .themes li.item .spip_documents_left {background:#eee;padding:5px;border:1px solid #e1e1e1;margin-#GET{left}:-227px;position:relative;display:inline;}
+.zengarden .themes li.item .bandeau {margin-top:5px;font-style:italic;}
+.zengarden .themes li.item .squelette {margin-top: 1em;}
+
+.zengarden .liste_themes {list-style:none;margin:0;padding:0;font-size:11px;}
+.zengarden .liste_themes .theme {margin:0;padding:10px 5px;border-bottom:1px solid #e1e1e1;overflow:hidden;float:left;width:115px;height:150px;position:relative;}
+.zengarden .liste_themes .theme:hover {background-color:[#(#GET{claire}|couleur_eclaircir)];}
+.zengarden .liste_themes .theme img {margin:0;display:block;float:none;position:absolute;top:10px;left:5px;padding:5px;background:#eee;border:1px solid #e1e1e1;}
+.zengarden .liste_themes .theme h3 {margin-top:0;padding-top:95px;font-size:1.2em;}
+.zengarden .liste_themes .theme h3 span {font-size:0.9em;}
+
+.zengarden .liste_themes .theme .actions {text-align:#GET{right};font-size:0.9em;}
+.zengarden .liste_themes .theme .bandeau {margin-top:5px;font-style:italic;}
+.zengarden .liste_themes .theme .squelette {margin-top: 1em;}
+.zengarden .liste_themes .theme .qTipContent {display:none;}
