@@ -6,30 +6,26 @@
  // $LastChangedBy$
  // $LastChangedDate$
 
-/*
-	SPIP-Listes
-	
-	Ajoute l'onglet de configuration SPIP-Listes
-	
-	Nota: si mise a jour du plugin, il faut desactiver/reactiver le plugin
-	pour voir apparaitre l'onglet
-	
-	From: SPIP-Listes-V, http://www.quesaco.org/
-*/
-
 if(!defined('_ECRIRE_INC_VERSION')) return;
 
 include_spip('inc/spiplistes_api_globales');
 
+// 	Nota: si mise a jour du plugin, il faut desactiver/reactiver le plugin
+// 	pour voir apparaitre l'onglet.
 
-// pipeline (plugin.xml)
+/**
+ * 	Ajoute l'onglet de configuration SPIP-Listes
+ *
+ * @version From: SPIP-Listes-V, http://www.quesaco.org/
+ * @return string
+ */
 function spiplistes_ajouter_onglets ($flux) {
 
 	global $connect_statut
 		, $connect_toutes_rubriques
 		;
 
-	// seul les webmestres ont acces au bouton de configuration
+	// seuls les webmestres ont acces au bouton de configuration
 	if(
 			$connect_statut 
 		&& $connect_toutes_rubriques
@@ -46,8 +42,10 @@ function spiplistes_ajouter_onglets ($flux) {
 			}
 	}
 	
-	// tous les administrateurs restreints peuvent gerer les listes de diffusion
-	// Leur donner accees a tous les boutons dans "Editer"
+	/**
+	 * Tous les administrateurs restreints peuvent gerer les listes de diffusion
+	 * Leur donner accees a tous les boutons dans "Editer"
+	 */
 	if(
 		$connect_statut == '0minirezo'
 	) {
@@ -77,4 +75,3 @@ function spiplistes_ajouter_onglets ($flux) {
 	return ($flux);
 }
 
-?>
