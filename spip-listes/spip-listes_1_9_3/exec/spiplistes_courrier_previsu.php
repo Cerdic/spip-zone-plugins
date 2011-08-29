@@ -213,7 +213,7 @@ function exec_spiplistes_courrier_previsu () {
 				, 'id_mot' => $id_mot
 				, 'patron' => $patron
 				, 'lang' => $lang
-				, 'sujet' => $titre
+				, 'sujet' => propre($titre)
 				, 'message' => $message
 			);
 			
