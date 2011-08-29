@@ -10,7 +10,7 @@
 			<label for="fichiers"><:doc2article:label_fichiers:></label>
 			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{fichiers})</span>]
 			<p class='explication'><:doc2article:explication_fichiers{repertoire=tmp/upload}:></p>
-			(#INCLURE{fond=formulaires/inc-select_fichiers})
+			(#CHEMIN{tmp/upload/}|?{#INCLURE{fond=formulaires/inc-select_fichiers},<span class="erreur_message"><:doc2article:erreur_repertoire{repertoire=tmp/upload}:></span>})
 		</li>]
 		[(#SAISIE{auteurs,auteur,
 			label=<:doc2article:label_auteur:>,
