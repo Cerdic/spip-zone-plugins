@@ -50,5 +50,30 @@ function set_quantite($objet,$id_objet,$quantite) {
         return false;
 }
 
+function incrementer_quantite($objet,$id_objet,$quantite) {
+
+    $table_stocks = table_objet_sql('stocks');
+
+    $quantite = intval($quantite);
+
+    if ($quantite == 0)
+        return 0;
+
+    if ($quantite > 0)
+        $set = array("quantite" => "quantite + ".abs($quantite));
+    else 
+        $set = array("quantite" => "quantite - ".abs($quantite));
+
+    $update = sql_update(
+        $table_stocks,
+        $set ,
+        array(
+            "objet = ".sql_quote($objet),
+            "id_objet = ".intval($id_objet)
+        )
+    );
+
+    return $update;
+}
 
 ?>
