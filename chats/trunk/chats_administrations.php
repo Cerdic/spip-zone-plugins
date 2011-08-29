@@ -18,7 +18,12 @@ function chats_upgrade($nom_meta_base_version, $version_cible){
 	// id_trad
 	$maj['1.4.0'] = array(array('maj_tables', array('spip_chats')));
 	// statut
-	$maj['1.4.0'] = array(array('maj_tables', array('spip_chats')));
+	$maj['1.5.0'] = array(
+		array('maj_tables', array('spip_chats')),
+		array('sql_updateq', 'spip_chats', array('statut'=>'publie'))
+	);
+	// spip_chats_liens
+	$maj['1.6.0'] = array(array('maj_tables', array('spip_chats_liens')));
 
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);

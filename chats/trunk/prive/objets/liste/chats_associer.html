@@ -1,0 +1,46 @@
+[(#SET{defaut_tri,#ARRAY{
+	statut,1,
+	multi nom,1,
+}})]
+[(#SET{_MAX_CHATS_LISTE,[(#VAL{_MAX_CHATS_LISTE}|defined|?{[(#VAL{_MAX_CHATS_LISTE}|constant)],5})]})]
+<BOUCLE_exclus(CHATS chats_liens){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
+<BOUCLE_nb_chats(CHATS){tout}{doublons 1} />#SET{total,#TOTAL_BOUCLE}<//B_nb_chats>
+
+<BOUCLE_nombreux(CONDITION){si #GET{total}|>{#GET{_MAX_CHATS_LISTE}}}>
+
+	[(#INCLURE{fond=prive/objets/liste/chats_associer-recherche,env,doublons})]
+
+</BOUCLE_nombreux>
+
+[(#REM) Pas beaucoup de chat ]
+<B_chats>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer chats">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chat:info_1_chat,chat:info_nb_chats}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='titre' scope='col'>[(#TRI{nom,<:chat:label_nom:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_chats(CHATS){doublons 2}{tri #ENV{par,nom},#GET{defaut_tri}}{par num nom, nom}{pagination 10}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#CHEMIN_IMAGE{chat-16.png}|balise_img)]</td>
+			<td class='nom principale'>[(#LOGO_CHAT|image_reduire{20,20})]<a href="[(#ID_CHAT|generer_url_entite{chat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAT">[(#RANG). ]#NOM</a></td>
+			<td class='action'><button class="button link" name="ajouter_lien[chat-#ID_CHAT-#OBJET-#ID_OBJET]" value="+"><:chat:lien_ajouter_chat:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_chats>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_chats>
+<div class="liste-objets liste-objets-associer chats caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:chat:info_aucun_chat:>}) ]</strong>
+</div>
+<//B_chats>
+
+<//B_nombreux>

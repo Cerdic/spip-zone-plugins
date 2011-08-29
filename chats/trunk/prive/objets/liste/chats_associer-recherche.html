@@ -1,0 +1,39 @@
+<input type="text" class="text" name="recherche" value="[(#ENV*{recherche})]" />
+<input type="submit" class="submit" name="rechercheb" value="<:info_rechercher:>" />
+<input type="hidden" name="debutchata" value='#ENV{debutchata,#VAL{debutchatachata}|_request}' />
+#SET{recherche,#ENV*{recherche}}
+[(#GET{recherche}|non|et{#ENV*{rechercheb}})
+	#SET{recherche,'/./'}
+	<input type="hidden" name="rechercheb" value='x' />
+]
+<B_liste_chat>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-associer chats">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chat:info_1_chat,chat:info_nb_chats}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:chat:label_nom:>,ajax})]</th>
+			<th class='race' scope='col'>[(#TRI{race,<:chat:label_race:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_chat(CHATS){doublons 2}{recherche #GET{recherche}}{tri #ENV{par,nom},#GET{defaut_tri}}{par num nom}{pagination 10 chata}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class='picto'>[(#CHEMIN_IMAGE{chat-16.png}|balise_img)]</td>
+			<td class='nom principale'>[(#LOGO_CHAT|image_reduire{20,20})]<a href="[(#ID_CHAT|generer_url_entite{chat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAT">[(#RANG). ]#NOM</a></td>
+			<td class='race'>#RACE</td>
+			<td class='action'><button class="button link" name="ajouter_lien[chat-#ID_CHAT-#OBJET-#ID_OBJET]" value="+"><:chat:lien_ajouter_chat:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button></td>
+		</tr>
+	</BOUCLE_liste_chat>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_chat>[(#ENV*{recherche}|oui)
+<div class="liste-objets liste-objets-associer chats caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:chat:info_aucun_chat:>}) ]</strong>
+</div>]
+<//B_liste_chat>

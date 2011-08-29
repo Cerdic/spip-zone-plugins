@@ -1,0 +1,40 @@
+[(#SET{defaut_tri,#ARRAY{
+	num nom,1,
+	nom,1,
+	race,1,
+	id_chat,1
+}})
+]
+<input type="hidden" name="debutchatl" value='#ENV{debutchatl,#EVAL{_request("debutchatl");}}' />
+<B_liste_chat>
+#ANCRE_PAGINATION
+<div class="liste-objets liste-objets-lies chats">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{chat:info_1_chat,chat:info_nb_chats}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='nom' scope='col'>[(#TRI{nom,<:chat:label_nom:>,ajax})]</th>
+			<th class='race' scope='col'>[(#TRI{race,<:chat:label_race:>,ajax})]</th>
+			<th class='action' scope='col'>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_chat(CHATS chats_liens){statut==.*}{id_chat?}{id_rubrique?}{id_objet?}{objet}{where?}{tri #ENV{par,nom},#GET{defaut_tri}}{par num nom,nom}{pagination #ENV{nb,10} chatl}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_CHAT|=={#ENV{id_lien_ajoute}}|oui)append]">
+			<td class='picto'>[(#CHEMIN_IMAGE{chat-16.png}|balise_img)]</td>
+			<td class='nom principale'>[(#LOGO_CHAT|image_reduire{20,20})]<a href="[(#ID_CHAT|generer_url_entite{chat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAT">[(#RANG). ]#NOM</a></td>
+			<td class='race secondaire'>#RACE</td>
+			<td class='action'><button class="button link delete" name="supprimer_lien[chat-#ID_CHAT-#OBJET-#ID_OBJET]" value="X"><:chat:lien_retirer_chat:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></td>
+		</tr>
+	</BOUCLE_liste_chat>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+[(#GRAND_TOTAL|>{3}|oui)<div class="action"><button class="button link" name="supprimer_lien#EVAL{chr(91)}chat-*-#OBJET-#ID_OBJET#EVAL{chr(93)}" value="X"><:chat:lien_retirer_chats:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button></div>]
+</div>
+</B_liste_chat>
+<div class="liste-objets liste-objets-lies chats caption-wrap">
+<strong class="caption">[(#ENV*{titre,<:chat:info_aucun_chat:>}) ]</strong>
+</div>
+<//B_liste_chat>
