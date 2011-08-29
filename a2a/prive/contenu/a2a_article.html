@@ -5,7 +5,7 @@
 <div class="cadre cadre-liste"><table width="100%" cellpadding="2" cellspacing="0" border="0">
 <BOUCLE_LesLie(ARTICLES_LIES){id_article = #ID_ARTICLE_ORIG}{par rang}{pagination #ENV{nb,10}}>
 <tr class='tr_liste'>
-	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}>
+	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}{statut==.*}>
 		<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 		<td class='rang'>#RANG</td>
 		<td class="arial2"><a href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></td>
