@@ -7,9 +7,7 @@ function rubrique_traduction($lang,$id_rubrique){
 	if ($id_trad_parent){
 		$trad = sql_getfetsel('id_rubrique','spip_rubriques','id_trad='. sql_quote($id_trad_parent) . ' AND lang='. sql_quote($lang));
 		}
- 	else{
- 	 	$trad = sql_getfetsel('id_secteur','spip_rubriques','id_parent=0 AND lang='. sql_quote($lang));	
- 		}
+
 
 	return $trad;
 }
