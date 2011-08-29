@@ -20,7 +20,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_chat(CHATS chats_liens){statut==.*}{id_chat?}{id_rubrique?}{id_objet?}{objet}{where?}{tri #ENV{par,nom},#GET{defaut_tri}}{par num nom,nom}{pagination #ENV{nb,10} chatl}>
+	<BOUCLE_liste_chat(CHATS){statut==.*}{id_chat?}{id_rubrique?}{id_objet?}{objet}{where?}{tri #ENV{par,nom},#GET{defaut_tri}}{par num nom,nom}{pagination #ENV{nb,10} chatl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][(#ID_CHAT|=={#ENV{id_lien_ajoute}}|oui)append]">
 			<td class='picto'>[(#CHEMIN_IMAGE{chat-16.png}|balise_img)]</td>
 			<td class='nom principale'>[(#LOGO_CHAT|image_reduire{20,20})]<a href="[(#ID_CHAT|generer_url_entite{chat})]" title="<:info_numero_abbreviation|attribut_html:> #ID_CHAT">[(#RANG). ]#NOM</a></td>

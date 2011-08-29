@@ -2,8 +2,8 @@
 	statut,1,
 	multi nom,1,
 }})]
-[(#SET{_MAX_CHATS_LISTE,[(#VAL{_MAX_CHATS_LISTE}|defined|?{[(#VAL{_MAX_CHATS_LISTE}|constant)],5})]})]
-<BOUCLE_exclus(CHATS chats_liens){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
+[(#SET{_MAX_CHATS_LISTE,[(#VAL{_MAX_CHATS_LISTE}|defined|?{[(#VAL{_MAX_CHATS_LISTE}|constant)],50})]})]
+<BOUCLE_exclus(CHATS){tout}{id_objet}{objet}{doublons 1}{doublons 2} />
 <BOUCLE_nb_chats(CHATS){tout}{doublons 1} />#SET{total,#TOTAL_BOUCLE}<//B_nb_chats>
 
 <BOUCLE_nombreux(CONDITION){si #GET{total}|>{#GET{_MAX_CHATS_LISTE}}}>
