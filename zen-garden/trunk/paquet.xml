@@ -1,0 +1,17 @@
+<paquet
+	prefix="zengarden"
+	categorie="maintenance"
+	version="2.0.0"
+	etat="test"
+	compatibilite="[3.0.0-alpha2;["
+	logo="images/themes-32.png"
+	documentation="http://www.spip-contrib.net/SPIP-Zen-Garden"
+>
+	<nom>Zen-Garden</nom>
+  <auteur lien='http://www.yterium.com'>Cedric Morin, Yterium</auteur>
+
+	<pipeline nom="affichage_final" />
+
+	<menu nom='zengarden' parent='menu_squelette' titre="zengarden:themes" icone="images/themes-16.png" />
+
+</paquet>

@@ -10,22 +10,25 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false){
 	$themes = array();
 
-	$files = array();
 	$files = preg_files($dir,"/plugin.xml$");
 
-	$get_infos = charger_fonction('get_infos','plugins');
-	if (count($files))
-		foreach($files as $file){
-			$path = substr(dirname($file),strlen($dir));
-			$infos = $get_infos($path,false,$dir);
-			if ($infos
-			  AND ($tous OR $infos['etat']=='stable')){
-				$infos['chemin'] = $path;
-				$infos['chemin_tri'] = strtolower($path);
-				$themes[$path] = $infos;
-			}
+	if (count($files)) {
+		$get_infos = charger_fonction('get_infos','plugins');
+		foreach($files as $k=>$file){
+			$files[$k] = substr(dirname($file),strlen($dir));
 		}
-	return $themes;	
+
+		$themes = $get_infos($files,false,$dir);
+
+		foreach($themes as $dir=>$info){
+			if ($info['categorie']!='theme'
+			  OR (!$tous AND $info['etat']!=='stable'))
+				unset($themes[$dir]);
+			else
+				$themes[$dir]['tri'] = strtolower($dir);
+		}
+	}
+	return $themes;
 }
 
 function zengarden_affiche_version_compatible($intervalle){

@@ -66,5 +66,16 @@ function zengarden_affichage_final($texte){
 	}
 	return $texte;
 }
+/**
+ * Lister les thèmes
+ *
+ * @param bool $tous
+ * @return array
+ */
+function 	zengarden_liste_themes($tous){
+	include_spip('inc/zengarden');
+	return zengarden_charge_themes(_DIR_THEMES,$tous);
+}
+
 
 ?>
