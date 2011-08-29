@@ -1411,7 +1411,7 @@ $AutoEmbed_stubs = array(
   array(
     'title' => 'Deezer',
     'website' => 'http://www.deezer.com',
-    'url-match' => 'deezer\.com.*\-([0-9]*)',
+    'url-match' => 'deezer\.com\/listen\-([0-9]*)',
     'embed-width' => '220',
     'embed-height' => '55',
     'embed-src' => 'http://www.deezer.com/embedded/small-widget-v2.swf?idSong=$2',
