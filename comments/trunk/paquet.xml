@@ -1,0 +1,36 @@
+<paquet
+	prefix="comments"
+	categorie="communication"
+	version="3.0.2"
+	etat="test"
+	compatibilite="[3.0.0-alpha2;["
+	logo="prive/themes/spip/images/comment-32.png"
+	documentation="http://www.spip-contrib.net/?article3448"
+>
+
+	<nom>Comments</nom>
+	<!-- Gestion des forums privés et publics dans SPIP -->
+
+	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+	<copyright>2009-2011</copyright>
+	<licence>GPL</licence>
+
+	<traduire module="comments" reference="fr" gestionnaire="salvatore" />
+
+	<chemin path="./" />
+	<chemin path="feed/" />
+
+	<necessite nom="SPIP" compatibilite="[3.0.0-dev;]" />
+	<necessite nom="forum" compatibilite="[1.7.0;]" />
+
+	<utilise nom='Zpip' compatibilite="[;]" />
+
+
+	<pipeline nom="pre_boucle" inclure="comments_fonctions.php" />
+	<pipeline nom="autoriser" inclure="comments_fonctions.php" />
+	<pipeline nom="insert_head_css" inclure="comments_fonctions.php" />
+	<pipeline nom="formulaire_traiter" inclure="comments_fonctions.php" />
+
+	<menu nom="comments" titre="comments:titre_comments" parent="menu_squelette" icone="images/comment-16.png" action="configurer_comments" />
+
+</paquet>
