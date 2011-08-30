@@ -114,7 +114,7 @@ function inc_doc2img_convertir($id_document) {
 	        } else {
 	        	//$image_frame->resizeImage($dimensions['largeur'], $dimensions['hauteur'],Imagick::FILTER_LANCZOS,1);
 	            $image_frame->writeImage($document['cible_url']['absolute'].$document['frame']);
-	            $taille = $image_frame->getImageLength();
+	            $taille = filesize(get_spip_doc(set_spip_doc($document['cible_url']['relative'].$document['frame'])));
 	        }
 
 	        $largeur = $dimensions['largeur'];
