@@ -7,7 +7,7 @@ include_spip('inc/stocks');
 
 // Retourner une quantie pour l'objet en cours
 function balise_QUANTITE_dist($p) {
-	if (!$_type = interprete_argument_balise(1,$p)){
+	if (!$_objet = interprete_argument_balise(1,$p)){
 		$_objet = objet_type($p->type_requete);
 		$_id = champ_sql($p->boucles[$p->id_boucle]->primary,$p);
 	}
