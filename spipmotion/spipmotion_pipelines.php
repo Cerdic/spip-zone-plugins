@@ -254,6 +254,20 @@ function spipmotion_jquery_plugins($array){
 	return $array;
 }
 
+/**
+ * Insertion dans le pipeline jqueryui_forcer (plugin jQueryUI)
+ * 
+ * On ajoute le chargement des js pour les tabs (utilisés dans la conf)
+ * @param array $plugins Un tableau des scripts déjà demandé au chargement
+ * @retune array $plugins Le tableau complété avec les scripts que l'on souhaite 
+ */
+function spipmotion_jqueryui_forcer($plugins){
+	$plugins[] = "jquery.ui.core";
+	$plugins[] = "jquery.ui.widget";
+	$plugins[] = "jquery.ui.tabs";
+	return $plugins;
+}
+
 function spipmotion_post_spipmotion_encodage($flux){
 	if($flux['args']['reussite'] == 'oui'){
 		$origine = sql_fetsel('extension,fichier','spip_documents','id_document='.intval($flux['args']['id_document_orig']));

@@ -3,7 +3,7 @@
 	<icon>images/spipmotion.png</icon>
 	<auteur>kent1 (kent1@arscenic.info)</auteur>
 	<licence>GNU/GPL v3</licence>
-	<version>0.8.0</version>
+	<version>0.9.0</version>
 	<version_base>0.7.8</version_base>
 	<etat>test</etat>
 	<description>
@@ -46,6 +46,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>jquery_plugins</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jqueryui_forcer</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -96,6 +100,7 @@
 	<necessite id='spip_bonux' version='[1.8;]' />
 	<necessite id='getid3' version='[0.2;]' />
 	<necessite id='queue' version='[0.3.1;]' />
+	<necessite id="jqueryui" version="[1.8.5;]" />
 	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.6.zip" />
 	<utilise id='podcast' />
 	<utilise id='fonctions_images' version='[0.5.1]' />

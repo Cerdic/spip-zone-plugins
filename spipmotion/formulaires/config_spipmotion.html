@@ -101,28 +101,48 @@
 		[(#CONFIG{spipmotion/fichiers_audios_encodage,#ARRAY}|array_merge{#CONFIG{spipmotion/fichiers_videos_encodage,#ARRAY}}|count|>{0}|oui)
 			<INCLURE{fond=formulaires/spipmotion_sortie}{env}>
 		]
-		<B_profils_son>
+		<B_profils_son_top>
 		<li class="fieldset">
 			<fieldset>
 				<h3 class="legend"><:spipmotion:profils_encodage_son:></h3>
-				<BOUCLE_profils_son(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
-					<INCLURE{fond=formulaires/spipmotion_encodage_son}{valeur=#VALEUR}{env}>
-				</BOUCLE_profils_son>
+				<div class="spipmotion_formats">
+					<ul>
+						<BOUCLE_profils_son_top(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
+						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
+						</BOUCLE_profils_son_top>
+					</ul>
+					<div id="spipmotion_formats">
+						<BOUCLE_profils_son(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
+						<ul id="spipmotion_#VALEUR">
+							<INCLURE{fond=formulaires/spipmotion_encodage_son}{valeur=#VALEUR}{env}>
+						</ul>
+						</BOUCLE_profils_son>
+					</div>
+				</div>
 			</fieldset>
 		</li>
-		</B_profils_son>
-		<B_profils_video>
+		</B_profils_son_top>
+		<B_profils_video_top>
 		<li class="fieldset">
 			<fieldset>
 				<h3 class="legend"><:spipmotion:profils_encodage_video:></h3>
-				<ul>
-				<BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
-					<INCLURE{fond=formulaires/spipmotion_encodage_video}{valeur=#VALEUR}{env}>
-				</BOUCLE_profils_video>
-				</ul>
+				<div class="spipmotion_formats">
+					<ul>
+						<BOUCLE_profils_video_top(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
+						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
+						</BOUCLE_profils_video_top>
+					</ul>
+					<div id="spipmotion_formats_video">
+						<BOUCLE_profils_video(POUR){tableau #CONFIG{spipmotion/fichiers_videos_sortie}}>
+						<ul id="spipmotion_#VALEUR">
+							<INCLURE{fond=formulaires/spipmotion_encodage_video}{valeur=#VALEUR}{env}>
+						</ul>
+						</BOUCLE_profils_video>
+					</div>
+				</div>
 			</fieldset>
 		</li>
-		</B_profils_video>
+		</B_profils_video_top>
 	</ul>
 	<p class="boutons">
 		<input type="submit" name="_cfg_ok" value="<:bouton_valider:>" class="submit" />
@@ -141,6 +161,15 @@ jQuery(document).ready(function(){
 		return false;
 	});
 });
+
+var spipmotion_tabs = function(){
+    $('.spipmotion_formats').tabs();
+};
+
+jQuery(document).ready(function(){
+	spipmotion_tabs();
+});
+onAjaxLoad(spipmotion_tabs);
 // --></script>
 </BOUCLE_script_perms>
 <p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_verifier_droits:></p>
