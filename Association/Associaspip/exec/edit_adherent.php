@@ -33,11 +33,25 @@ function exec_edit_adherent_args($id_auteur)
 		include_spip('inc/minipres');
 		echo minipres(_T('zxml_inconnu_id') . $id_auteur);
 	} else {
+		include_spip('inc/association_coordonnees');
 		$nom_membre = association_calculer_nom_membre($data['sexe'], $data['prenom'], $data['nom_famille']);
 		$statut_interne=$data['statut_interne'];
-		$categorie=$data['categorie'];
+		$adresses = association_recuperer_adresses_string(array($id_auteur));
+		$emails = association_recuperer_emails_string(array($id_auteur));
+		$telephones = association_recuperer_telephones_string(array($id_auteur));
+		
 		$validite=$data['validite'];
-		$commentaire=$data['commentaire'];
+		
+		$statut = sql_getfetsel('statut', 'spip_auteurs', 'id_auteur='.$id_auteur);
+		switch($statut)	{
+			case "0minirezo":
+				$statut='auteur'; break;
+			case "1comite":
+				$statut='auteur'; break;
+			default :
+				$statut='visiteur'; break;
+		}
+		
 		$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
 	
 		$commencer_page = charger_fonction('commencer_page', 'inc');
@@ -49,18 +63,23 @@ function exec_edit_adherent_args($id_auteur)
 		echo debut_gauche("",true);
 		
 		echo debut_boite_info(true);
-		echo '<div style="font-weight: bold; text-align: center;" class="verdana1 spip_xx-small">'.propre(_T('asso:adherent_libelle_numero')).'<br />';
-		echo '<span class="spip_xx-large">';
+		echo '<div class="infos"><div class="numero"><a href="'.generer_url_ecrire('auteur_infos','id_auteur='.$id_auteur).'" title="'._T('asso:adherent_label_modifier_'.$statut).'">'._T('asso:adherent_libelle_numero_'.$statut);
+		echo '<p>';
 		echo $id_auteur;
-		echo '</span></div>';
-		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">',
-			"<a href='$adh' title=\"",
-			_T('asso:adherent_label_voir_membre'),
-			"\">",
-			htmlspecialchars($nom_membre),
-			 "</a></td></div>\n";
-		echo '<br /><div>'.association_date_du_jour().'</div>';
+		echo '</p></a></div></div>';
 
+		$nom = htmlspecialchars($nom_membre);
+		$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
+		$nom = "<a href='$adh' title=\"" . _T('asso:adherent_label_modifier_membre') . "\">" . $nom . "</a>";
+		$coord = '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">';
+		if ($adresses[$id_auteur]) $coord .= '<br />' . $adresses[$id_auteur] . '<br/>';
+		if ($emails[$id_auteur]) $coord .= '<br/>' . $emails[$id_auteur];
+		if ($telephones[$id_auteur]) $coord .=  '<br/>'.$telephones[$id_auteur];
+		$coord .= "</div>";
+
+		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom."</div>".$coord;
+
+		echo '<br /><div style="text-align:center;">'.association_date_du_jour().'</div>';	
 		echo fin_boite_info(true);
 		
 		echo association_retour();

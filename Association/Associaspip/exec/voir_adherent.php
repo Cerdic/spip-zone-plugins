@@ -57,6 +57,7 @@ function exec_voir_adherent(){
 		echo '</p></a></div></div>';
 
 		$nom = htmlspecialchars($nom_membre);
+		$coord = '';
 		if ($full) {
 			$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
 			$nom = "<a href='$adh' title=\"" .
@@ -64,11 +65,14 @@ function exec_voir_adherent(){
 			  "\">" .
 			  $nom .
 			  "</a>";
+			$coord = '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">';
+			if ($adresses[$id_auteur]) $coord .= '<br />' . $adresses[$id_auteur] . '<br/>';
+			if ($emails[$id_auteur]) $coord .= '<br/>' . $emails[$id_auteur];
+			if ($telephones[$id_auteur]) $coord .=  '<br/>'.$telephones[$id_auteur];
+			$coord .= "<p>".$categorie."</p></div>";
 
-			$coord =  '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">' . $adresses[$id_auteur] . '<br />' . $emails[$id_auteur] . '<br/>' . $telephones[$id_auteur] . "<p>".$categorie."</p></div>\n";
-
-		} else $coord = '';
-		$coord .= "<div style='font-weight: bold; text-align:center' class='verdana1 spip_xx-small'><p>"._T('asso:adherent_libelle_date_validite')."<br/>".$validite."</p></div>";
+		}
+		$coord .= "<div style='font-weight: bold; text-align:center' class='verdana1 spip_xx-small'><p>"._T('asso:adherent_libelle_date_validite')."<br/>".affdate($validite)."</p></div>";
 
 		echo '<br /><div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">'.$nom."</div>".$coord;
 		if ($GLOBALS['association_metas']['id_asso'] == 'on') {
