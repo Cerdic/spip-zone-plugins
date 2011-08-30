@@ -67,12 +67,10 @@ function comments_formulaire_traiter($flux){
 	if ($flux['args']['form']=='forum'
 		){
 		// args :
-		// $titre, $table, $type, $script,
-		// $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
-		// $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour
+		// $objet,$id_objet, $id_forum,$ajouter_mot, $ajouter_groupe, $afficher_previsu, $retour
 		// si pas d'url de retour explicite
 		$redirect = $flux['data']['redirect'];
-		if (!isset($flux['args']['args'][11]) OR !$flux['args']['args'][11]){
+		if (!isset($flux['args']['args'][6]) OR !$flux['args']['args'][6]){
 			// si on est pas sur la page forum, on ne redirige pas
 			// mais il faudra traiter l'ancre
 			if (!($p=_request('page')) OR $p!=='forum'){

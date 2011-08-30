@@ -3,7 +3,7 @@
 <icon>prive/themes/spip/images/comment-32.png</icon>
 <auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
 <licence>Licence GPL</licence>
-<version>3.0.0</version>
+<version>3.0.1</version>
 <etat>test</etat>
 <description>Affichage des messages en liste, fa&ccedil;on commentaires de blog, avec formulaire simplifi&eacute;. Commentaires microformat&eacute;s, nomenclature homog&eacute;ne.</description>
 <lien>[Comments&nbsp;2.0 pour SPIP&nbsp;2.0->http://www.spip-contrib.net/?article3448]</lien>
@@ -28,6 +28,7 @@
 	<inclure>comments_pipelines.php</inclure>
 </pipeline>
 <necessite id="SPIP" version="[3.0.0-dev;]" />
+<necessite id="forum" version="[1.7.0;]" />
 <utilise id='Zpip' version="[;]" />
 <categorie>communication</categorie>
 <bouton id='comments' parent='bando_squelette'>
