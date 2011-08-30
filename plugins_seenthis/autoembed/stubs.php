@@ -43,7 +43,7 @@ $AutoEmbed_stubs = array(
     'embed-width' => '480',
     'embed-height' => '295',
     'image-src' => 'http://img.youtube.com/vi/$2/0.jpg',
-    'iframe-player' => 'http://www.youtube.com/embed/$2',
+    'iframe-player' => 'http://www.youtube.com/embed/$2?rel=0&amp;autoplay=1',
   ),
   array(
     'title' => 'YouTube (Playlists)',
