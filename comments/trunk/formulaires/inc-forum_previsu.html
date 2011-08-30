@@ -6,9 +6,14 @@
         </p>
         <div class="comment-content">
         	[<div class="forum-texte">(#ENV*{texte}|lignes_longues)</div>]
+					[<div class="forum-document"><:medias:info_document:> : (#ENV{ajouter_document}|table_valeur{name})</div>]
         </div>
     </div>
 	[<div class="reponse_formulaire">(#ENV*{erreur})</div>]
-	[<p class="boutons"><input type="submit" class="submit" name="confirmer_previsu_forum" value="(#ENV*{bouton}|?{<:comments:submit2:>,''})" /></p>]
+	[<p class="boutons"><input type="submit" class="submit" onclick="confirmer_previsu_forum=true;" name="confirmer_previsu_forum" value="(#ENV*{bouton}|?{<:comments:submit2:>,''})" /></p>]
 </fieldset>
 <br class="nettoyeur" />
+<script type="text/javascript">/*<![CDATA[*/
+var confirmer_previsu_forum = false;
+if (window.jQuery){ jQuery(function(){ jQuery(window).unload(function() { if (!confirmer_previsu_forum) alert('<:forum:forum_attention_message_non_poste|texte_script:>');confirmer_previsu_forum=true;});});}
+/*]]>*/</script>

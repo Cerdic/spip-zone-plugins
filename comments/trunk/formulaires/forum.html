@@ -65,7 +65,7 @@
 
 	[
 		<fieldset>
-			<legend><:bouton_ajouter_document:></legend>
+			<legend><:medias:bouton_ajouter_document:></legend>
 			<ul>
 				<li class='editer saisie_document_forum[ (#ENV**{erreurs}|table_valeur{document_forum}|oui)erreur]'>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{document_forum})</span>]
@@ -105,18 +105,4 @@
 ]
 </div>
 </form>
-
-[(#REM)
-	Sauver les donnees du formulaire dans un cookie, si on quitte la page,
-	et les remettre quand on revient (dans les limites de 4ko etc)
-]
-<script type="text/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
-if (window.jQuery)(function($){
-	$(function(){
-		$('#formulaire_forum form')
-		.autosave();
-	});
-}(jQuery));
-/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
-]
 </div>
