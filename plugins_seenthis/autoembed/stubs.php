@@ -60,7 +60,7 @@ $AutoEmbed_stubs = array(
     'embed-src' => 'http://www.dailymotion.com/swf/$2&related=0',
     'embed-width' => '420',
     'embed-height' => '339',
-    'image-src' => 'http://www.dailymotion.com/thumbnail/160x120/video/$2',
+//    'image-src' => 'http://www.dailymotion.com/thumbnail/160x120/video/$2',
   ),
   array(
     'title' => 'Google Video',
