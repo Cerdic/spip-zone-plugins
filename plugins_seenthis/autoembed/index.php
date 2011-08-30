@@ -124,8 +124,17 @@ function embed_url($url) {
 					$AE->setWidth($w);
 					$AE->setHeight($h);
 					
-				}		
-				$code_ae = "<div class='oembed-container'>".$AE->getEmbedCode()."</div>";	
+				}	
+				
+				
+				$embed = $AE->getEmbedCode();
+				$vignette = $AE->getImageURL();
+				if (strlen($vignette) >  5) {
+					$embed = rawurlencode($embed);
+					$embed = "<div onclick=\"$(this).html(decodeURIComponent('$embed'));\" style='width: ".$w."px; height: ".$h."px; background: url($vignette) center center; cursor: pointer;'></div>";
+				}
+				
+				$code_ae = "<div class='oembed-container'>".$embed."</div>";	
 				
 				
 			}
