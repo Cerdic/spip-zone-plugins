@@ -2,7 +2,12 @@
 
 function formulaires_contact_libre_charger_dist($adresse, $url=''){
 	include_spip('inc/texte');
-	$valeurs = array('sujet_message'=>'','texte_message'=>'','email_message'=>'');
+	
+	$valeurs = array(
+		'sujet_message'=>'',
+		'texte_message'=>'',
+		'email_message'=>$GLOBALS['visiteur_session']['email']
+	);
 	
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
 	$valeurs['id'] = rand(1, 100);
