@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Zen-Garden pour Spip 2.0
- * Licence GPL (c) 2006-2008 Cedric Morin
+ * Plugin Zen-Garden pour Spip 3.0
+ * Licence GPL (c) 2006-2011 Cedric Morin
  *
  */
 
