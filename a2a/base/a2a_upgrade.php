@@ -24,6 +24,11 @@ function a2a_upgrade($nom_meta_base_version,$version_cible){
 		sql_alter("TABLE spip_articles_lies CHANGE rang rang bigint(21) NOT NULL DEFAULT '0'");
 		ecrire_meta($nom_meta_base_version,$current_version="0.3");
 	}
+	if (version_compare($current_version,"0.4","<")){
+		//ajout du type de liaison
+		maj_tables('spip_articles_lies');
+		ecrire_meta($nom_meta_base_version,$current_version="0.4");
+	}
 		ecrire_metas();
 }
 

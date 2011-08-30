@@ -5,8 +5,8 @@
 		[<span class="titre">(#TITRE)</span>]
 		<span class="actions">
 			<a href="[(#URL_ARTICLE|url_absolue)]"><:a2a:voir:></a> - 
-			<a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG,#SELF})]" class="ajax"><:a2a:lier_cet_article:></a> - 
-			<a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG/both,#SELF})]" class="ajax"><:a2a:lier_cet_article_deux_cotes:></a>
+                        <a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG/uni/[(#ENV{type_liaison})],#SELF})]" class="ajax"><:a2a:lier_cet_article:>[ ((#ENV{type_liaison}))]</a> -
+                        <a href="[(#URL_ACTION_AUTEUR{a2a,lier_article/#ID_ARTICLE/#ID_ARTICLE_ORIG/both/[(#ENV{type_liaison})],#SELF})]" class="ajax"><:a2a:lier_cet_article_deux_cotes:>[ ((#ENV{type_liaison}))]</a>
 		</span>
 	</li>
 </BOUCLE_Recherche>

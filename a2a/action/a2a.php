@@ -7,14 +7,14 @@ function action_a2a_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$args = $securiser_action();
 
-	list($action, $id_article_cible, $id_article_source, $type) = explode('/',$args);
+	list($action, $id_article_cible, $id_article_source, $type, $type_liaison) = explode('/',$args);
 
 	if (!$action_a2a = charger_fonction('a2a_'.$action,'action')) {
 		include_spip('inc/minipres');
 		minipres(_L('Action a2a_'.$action.' introuvable'));
 	}
 
-	$action_a2a($id_article_cible, $id_article_source, $type);
+	$action_a2a($id_article_cible, $id_article_source, $type, $type_liaison);
 	
 	include_spip('inc/header');
 	if ($redirect = _request('redirect'))
@@ -24,7 +24,7 @@ function action_a2a_dist(){
 }
 
 
-function action_a2a_lier_article_dist($id_article_cible, $id_article_source,$type=null){
+function action_a2a_lier_article_dist($id_article_cible, $id_article_source, $type=null, $type_liaison=''){
 	//on verifie que cet article n'est pas deja lie
 	if (!sql_countsel('spip_articles_lies', array(
 		'id_article=' . sql_quote($id_article_source),
@@ -35,7 +35,8 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source,$typ
 			sql_insertq('spip_articles_lies', array(
 				'id_article' => $id_article_source,
 				'id_article_lie' => $id_article_cible,
-				'rang' => ++$rang
+				'rang' => ++$rang,
+				'type_liaison' => $type_liaison,
 				));
 	}
 	if(($type == 'both') && !sql_countsel('spip_articles_lies', array(
@@ -47,7 +48,8 @@ function action_a2a_lier_article_dist($id_article_cible, $id_article_source,$typ
 			sql_insertq('spip_articles_lies', array(
 				'id_article' => $id_article_cible,
 				'id_article_lie' => $id_article_source,
-				'rang' => ++$rang
+				'rang' => ++$rang,
+				'type_liaison' => $type_liaison,
 				));
 	}
 	return true;

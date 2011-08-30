@@ -16,6 +16,11 @@
 					<label for="recherche_titre_a2a"><:a2a:rechercher_seulement_titres:></label>
 				</div>
 			</li>
+			<li class="type_liaison">
+				<label for="recherche_a2a"><:a2a:appliquer_type_liaison:></label>
+				<p class="explication"><:a2a:appliquer_type_liaison_explication:></p>
+				<input type="text" class="text" name="type_liaison" id="type_liaison" />
+			</li>
 		</ul>
 		<p class='boutons'><input type="submit" name="ok" value="<:a2a:rechercher:>" /></p>
 	</div>
@@ -27,11 +32,11 @@
 	</BOUCLE_doublons>
 	[(#ENV*{recherche}|match{^art\d+$}|oui)
 		[(#SET{recherche,[(#ENV{recherche}|substr{3})]})]
-		<INCLURE{fond=formulaires/inc-recherche_id}{id_article_orig}{recherche=#GET{recherche}}{exclure=#GET{exclure}} />]
+		<INCLURE{fond=formulaires/inc-recherche_id}{id_article_orig}{recherche=#GET{recherche}}{type_liaison}{exclure=#GET{exclure}} />]
 	[(#ENV*{recherche}|match{^art\d+$}|non)
 		[(#ENV*{recherche}|oui)
 			[(#ENV*{recherche_titre}|oui)
-				<INCLURE{fond=formulaires/inc-recherche_titre}{id_article_orig}{recherche}{exclure=#GET{exclure}} />]
+				<INCLURE{fond=formulaires/inc-recherche_titre}{id_article_orig}{recherche}{type_liaison}{exclure=#GET{exclure}} />]
 			[(#ENV*{recherche_titre}|non)
-				<INCLURE{fond=formulaires/inc-recherche_libre}{id_article_orig}{recherche}{exclure=#GET{exclure}} />]]]
+				<INCLURE{fond=formulaires/inc-recherche_libre}{id_article_orig}{recherche}{type_liaison}{exclure=#GET{exclure}} />]]]
 </div>

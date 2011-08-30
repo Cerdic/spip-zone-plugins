@@ -12,7 +12,8 @@ $GLOBALS['a2a_version_base'] = 0.3;
 $spip_articles_lies = array(
 	"id_article"	=> "bigint(21) NOT NULL",
 	"id_article_lie"	=> "bigint(21) NOT NULL",
-	"rang"	=> "bigint(21) NOT NULL DEFAULT '0'"
+	"rang"	=> "bigint(21) NOT NULL DEFAULT '0'",
+	"type_liaison" => "tinytext NOT NULL DEFAULT ''",
 	);
 	
 $spip_articles_lies_key = array(

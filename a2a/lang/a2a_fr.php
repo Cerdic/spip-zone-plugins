@@ -5,6 +5,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
+	'appliquer_type_liaison' => 'Type de liaison&nbsp;:',
+	'appliquer_type_liaison_explication' => 'Décrivez le type de lien à appliquer lors de la liaison. Utilisez de préférence un code ou un mot court.',
 	'articles_lies' => 'ARTICLES LI&Eacute;S',
 	
 	// E

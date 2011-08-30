@@ -8,6 +8,7 @@
 	<BOUCLE_lesArticlesLies(ARTICLES){id_article = #ID_ARTICLE_LIE}{!lang_select}{statut==.*}>
 		<td class='statut'>[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article})]</td>
 		<td class='rang'>#RANG</td>
+		<td class='type_liaison'>#TYPE_LIAISON</td>
 		<td class="arial2"><a href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></td>
 		<BOUCLE_autorise(CONDITION){si #AUTORISER{modifier,article,#ID_ARTICLE_ORIG}|oui}> 
 			[<td class="arial1">(#BOUTON_ACTION{<:a2a:rang_moins:>,#URL_ACTION_AUTEUR{a2a,modifier_rang/#ID_ARTICLE/#ID_ARTICLE_ORIG/moins,#SELF},ajax})</td>]

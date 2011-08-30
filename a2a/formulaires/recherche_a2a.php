@@ -6,13 +6,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_recherche_a2a_charger($id_article){
 	$recherche = _request('recherche');
 	$recherche_titre = _request('recherche_titre');
+	$type_liaison = _request('type_liaison');
 	$id_article_orig = $id_article;
 
 	return 
 		array(
 			'recherche' => $recherche,
 			'recherche_titre' => $recherche_titre,
-			'id_article_orig' => $id_article_orig
+			'id_article_orig' => $id_article_orig,
+			'type_liaison' => $type_liaison,
 		);
 }
 
