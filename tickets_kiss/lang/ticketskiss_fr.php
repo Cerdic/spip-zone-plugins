@@ -58,10 +58,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// M
 	'message_automatique' => 'Ceci est un message automatique : n\'y repondez pas.',
-	'message_poste_par' => 'Message post&eacute; par',
-	'message_le' => 'le @date@',
 	'message_publie' => 'Votre message est publi&eacute;',
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
+	'modifier_ticket' => 'Modifier le ticket',
 	
 	// N
 	'no_assignation' => 'Personne',
@@ -72,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_titre' => 'Tickets, syst&egrave;me de suivi de bugs',
 	
 	// R
-	'revenir_gestion' => 'Revenir &agrave; la gestion des tickets',
+	'retour' => 'Retour',
 	
 	// S
 	'severite_bloquant' => 'bloquant',
@@ -87,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_redac' => 'En cours de r&eacute;daction',
 	'statut_resolu' => 'R&eacute;solu',
 	'statut_resolu_long' => 'Tous les tickets r&eacute;solus',
-	
+
 	// T
 	'ticket' => 'Ticket',
 	'tickets' => 'Tickets',
@@ -101,13 +100,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_probleme_long' => 'Les probl&egrave;mes &agrave; r&eacute;soudre',
 	'type_tache' => '&agrave; faire',
 	'type_tache_long' => 'Les t&acirc;ches &agrave; accomplir',
-	
+
 	// V
 	'vos_tickets_assignes' => 'Les tickets qui vous sont assign&eacute;s',
 	'vos_tickets_en_cours' => 'Vos tickets en cours de r&eacute;daction',
-	
-	// Z
-	'z' => 'zzz'
 );
 
 

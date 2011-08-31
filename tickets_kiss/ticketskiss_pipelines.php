@@ -25,14 +25,14 @@ function ticketskiss_ajouterBoutons($boutons_admin) {
 // Menu des ticketskiss presente a droite ou a gauche de la page
 function menu_colonne () {
 	$ret = "<div class='cadre cadre-e'><div class='cadre_padding'>";
-	$ret .= icone_horizontale(_T('ticketskiss:afficher_ticketskiss'), generer_url_ecrire("ticketskiss"), _DIR_PLUGIN_TICKETSKISS."imgs/bugs.png", "", false);
+	$ret .= icone_horizontale(_T('ticketskiss:afficher_tickets'), generer_url_ecrire("ticketskiss"), _DIR_PLUGIN_TICKETSKISS."imgs/bugs.png", "", false);
 
-	$contexte = array("titre"=>_T('ticketskiss:vos_ticketskiss_en_cours'), "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
+	$contexte = array("titre"=>_T('ticketskiss:vos_tickets_en_cours'), "id_auteur"=>$connect_id_auteur, "statut"=>"redac", "bloc"=>"_bloc1");
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
 	
-	$contexte = array("titre"=>_T('ticketskiss:tous_ticketskiss_ouverts'), "statut"=>"ouvert", "bloc"=>"_bloc2");
+	$contexte = array("titre"=>_T('ticketskiss:tous_tickets_ouverts'), "statut"=>"ouvert", "bloc"=>"_bloc2");
 	$options = array("ajax"=>true);
 	$page = recuperer_fond("prive/contenu/inc_liste_simple", $contexte, $options);
 	$ret .= $page;
@@ -75,6 +75,6 @@ function ticketskiss_gauche ($flux) {
 
 // champs extras 2
 function ticketskiss_objets_extensibles($objets){
-	return array_merge($objets, array('ticket' => _T('ticketskiss:ticketskiss')));
+	return array_merge($objets, array('ticket' => _T('ticketskiss:tickets')));
 }
 ?>

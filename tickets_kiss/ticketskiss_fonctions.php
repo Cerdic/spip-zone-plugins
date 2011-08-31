@@ -83,11 +83,11 @@ function ticketskiss_classer_par_jalon($bidon) {
 // Affichage des boutons modifier ou retour
 function ticketskiss_bouton_modifier ($id_ticket, $logo, $align) {
 	include_spip("inc/presentation");
-	return icone_inline(_L('Modifier ce ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), $logo, "edit.gif", $align);
+	return icone_inline(_T('ticketskiss:modifier_ticket'), generer_url_ecrire("ticket_editer","id_ticket=$id_ticket"), $logo, "edit.gif", $align);
 }
 function ticketskiss_bouton_retour ($id_ticket, $logo, $align) {
 	include_spip("inc/presentation");
-	return icone_inline(_L('Retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), $logo, "", $align);
+	return icone_inline(_T('ticketskiss:retour'), generer_url_ecrire("ticket_afficher","id_ticket=$id_ticket"), $logo, "", $align);
 }
 
 // Affichage des blocs de liste depliables et ajaxes
