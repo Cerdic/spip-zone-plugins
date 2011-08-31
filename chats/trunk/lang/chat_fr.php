@@ -23,12 +23,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	
 	// T
-	'titre_ajouter_un_chat' => "Ajouter un chat",
 	'titre_chat' => "Chat",
 	'titre_chats' => "Chats",
 	'titre_chats_rubrique' => "Chats de la rubrique",
 	'titre_langue_chat' => "Langue de ce chat",
 	'titre_logo_chat' => "Logo du chat",
+	'texte_ajouter_chat' => "Ajouter un chat",
 	'texte_changer_statut' => "Ce chat est :"
 
 
