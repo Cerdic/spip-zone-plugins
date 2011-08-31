@@ -4,18 +4,20 @@
 		<h3 class="legend"><:spipmotion:gestion_format_sortie:></h3>
 		<ul>
 			<li>
-				<label><:spipmotion:label_extensions_sortie:></label>
 				<div class="explication"><:spipmotion:explications_extensions_sortie:></div>
+			</li>
+			<li>
 				#SET{audio_extensions_sortie,#ARRAY|push{mp3}|push{ogg}}
-				<p class="explications"><:spipmotion:extensions_audio:></p>
+				<label for="fichiers_audios_sortie"><:spipmotion:extensions_audio:></label>
 				<select name="fichiers_audios_sortie[]" multiple="multiple">
-					<BOUCLE_sons_sortie(TYPES_DOCUMENTS){extension IN #GET{audio_extensions_sortie}}>
+					<BOUCLE_sons_sortie(TYPES_DOCUMENTS){extension IN #GET{audio_extensions_sortie}}{par extension}>
 						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios_sortie}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
 						#SET{extensions_sortie,#GET{extensions_sortie}|push{#EXTENSION}}
 					</BOUCLE_sons_sortie>
 				</select>
 				<p><a href="#" class="select_all"><:spipmotion:select_all:></a> <a href="#" class="unselect_all"><:spipmotion:unselect_all:></a></p>
-
+			</li>
+			<li>
 				#SET{videos_sortie,#ARRAY|push{flv}|push{mov}|push{ogv}|push{mp4}|push{m4v}}
 				[(#REM)
 					On teste si ffmpeg est compilé avec libvpx
@@ -23,9 +25,9 @@
 				[(#VAL{--enable-libvpx}|in_array{#CONFIG**{spipmotion_compiler/configuration}}|oui)
 					#SET{videos_sortie,#GET{videos_sortie}|push{webm}}
 				]
-				<p class="explications"><:spipmotion:extensions_video:></p>
+				<label for="fichiers_videos_sortie"><:spipmotion:extensions_video:></label>
 				<select name="fichiers_videos_sortie[]" multiple="multiple">
-					<BOUCLE_videos1_sortie(TYPES_DOCUMENTS){extension IN #GET{videos_sortie}}>
+					<BOUCLE_videos1_sortie(TYPES_DOCUMENTS){extension IN #GET{videos_sortie}}{par extension}>
 						#SET{extensions_sortie,#GET{extensions_sortie}|push{#EXTENSION}}
 						<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_videos_sortie}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
 					</BOUCLE_videos1_sortie>
