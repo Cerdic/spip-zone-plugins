@@ -149,8 +149,8 @@ function pubban_exporter($list_id){
  * Inverse de {@link affiche_code_pub()}
  */
 function env_to_html($str){
-	$serialize_chars = array('&lt;', '&gt;', '&#39;');
-	$unserialize_chars = array('<', '>', '"');
+	$serialize_chars = array('&lt;', '&gt;', '&#39;', '&quot;');
+	$unserialize_chars = array('<', '>', '"', "'");
 	return( str_replace($serialize_chars, $unserialize_chars, $str) );
 }
 
@@ -159,8 +159,8 @@ function env_to_html($str){
  * Inverse de {@link env_to_html()}
  */
 function affiche_code_pub($str){
-	$serialize_chars = array('&lt;', '&gt;', '&#39;');
-	$unserialize_chars = array('<', '>', '"');
+	$serialize_chars = array('&lt;', '&gt;', '&#39;', '&quot;');
+	$unserialize_chars = array('<', '>', '"', "'");
 	return( str_replace($unserialize_chars, $serialize_chars, $str) );
 }
 
