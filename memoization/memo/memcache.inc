@@ -49,7 +49,7 @@ class MCacheBackend_memcache extends MCacheBackend {
 	
 	function del($key) {
 		if (!$this->ok) return null;
-		return memcache_delete($this->memcache, _CACHE_NAMESPACE.$key);
+		return memcache_delete($this->memcache, _CACHE_NAMESPACE.$key, 0);
 	}
 	
 	function inc($key, $value=null, $ttl=null) {
