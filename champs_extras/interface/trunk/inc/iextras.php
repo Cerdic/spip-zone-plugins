@@ -16,8 +16,8 @@ function iextras_champs_extras_definis($table='') {
 	
 	if (!$tables) {
 		// sinon calculer...
+		$n = strlen('champs_extras_');
 		foreach ($GLOBALS['meta'] as $cle => $val) {
-			$n = strlen('champs_extras_');
 			if (strpos($cle, 'champs_extras_') === 0) {
 				$_table = substr($cle, $n);
 				$s = unserialize($val);

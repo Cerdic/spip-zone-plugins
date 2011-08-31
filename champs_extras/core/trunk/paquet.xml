@@ -14,8 +14,10 @@
 	<auteur>Fil</auteur>
 	<licence>GNU/GPL</licence>
 
-	<traduire module="breves" reference="fr" gestionnaire="salvatore" />
-
+	<!--
+	<traduire module="cextras" reference="fr" gestionnaire="salvatore" />
+	-->
+	
 	<pipeline nom="declarer_champs_extras" action="" />
 
 	<pipeline nom="autoriser" inclure="inc/cextras_autoriser.php" />
