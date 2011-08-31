@@ -28,6 +28,7 @@ function entravaux_check_verrou($nom, $force=false){
 	}
 	return $GLOBALS['meta'][$m]=="oui"; // si oui : verrou pose
 }
+
 /**
  * A-t-on active les travaux oui ou non ?
  * @return bool
@@ -111,6 +112,7 @@ function entravaux_styliser($flux){
  * de retablir le site
  * 
  * @param string $flux
+ * @return string
  */
 function entravaux_affichage_final($flux){
 	if (is_entravaux()
