@@ -1,0 +1,16 @@
+[(#REM)
+	Recupere la liste des projets de la base;
+    affiche un select avec les titres de ces projets;
+    permet ce changer l'attribution d'un projet a un livrable.
+    necessite le plugin projets et le plugin livrables;
+]
+
+<BOUCLE_livrable(LIVRABLES){id_livrable}>
+#SET{id,#ID_PROJET}
+</BOUCLE_livrable>
+
+<select class="crayon-active" name="#ENV{name_id_projet}">
+<BOUCLE_projets(PROJETS){par num titre, titre}>
+	<option value="#ID_PROJET"[(#GET{id}|=={#ID_PROJET}|oui)selected="selected")]>#TITRE</option>
+</BOUCLE_projets>
+</select>

@@ -1,0 +1,18 @@
+[(#REM) 
+	
+	Parametres :
+	- class : classe(s) css ajoutes au select
+	- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+	- cacher_option_intro : pas de premier option vide  (defaut:"")
+	
+	Exemple d'appel :
+	[(#SAISIE{livrables_projets, nom,
+		label=<:plugin:info_projet:>})] 
+]
+
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_liste_projets(PROJETS ?){tout}{par num titre}>
+        [<option value="#ID_PROJET"[(#ID_PROJET|=={#ENV{id_projet,#ENV{defaut}}}|oui) selected="selected"]>(#TITRE|supprimer_numero)</option>]
+</BOUCLE_liste_projets>
+</select>

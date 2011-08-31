@@ -1,0 +1,8 @@
+<BOUCLE_statut(LIVRABLES){id_livrable}>
+#SET{statut,#STATUT_CLIENT,non_vue}
+<select class="crayon-active" name="#ENV{name_statut_client}">
+	<option value="non_vue"[(#GET{statut}|=={'non_vue'}|oui)selected="selected")]><:livrables:libelle_statut_non_vue:></option>
+	<option value="avec_bugs"[(#GET{statut}|=={'avec_bugs'}|oui)selected="selected")]><:livrables:libelle_statut_avec_bugs:></option>
+	<option value="accepte"[(#GET{statut}|=={'accepte'}|oui)selected="selected")]><:livrables:libelle_statut_accepte:></option>
+</select>
+</BOUCLE_statut>

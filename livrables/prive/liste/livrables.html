@@ -1,19 +1,21 @@
 [(#SET{defaut_tri,#ARRAY{
-	url,1,
-    titre,1,
     id_projet,1,
-    id_livrable,1,
+    num titre,1,
 }})
 ]<B_liste_livrables>
 #ANCRE_PAGINATION
 <div class="liste-elements livrables">
+[<p class='pagination'>(#PAGINATION{prive})</p>]
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:livrables:info_tous_les_livrables:>})</strong></caption>]
 	<thead>
 		<tr class='first_row'>
 			<th class='id'>[(#TRI{id_livrable,<:livrables:label_livrable:>,ajax})]</th>
-			<th class='id'>[(#TRI{id_projet,<:livrables:label_projet:>,ajax})]</th>
-			<th class='titre'>[(#TRI{titre,<:livrables:label_titre:>,ajax})]</th>
+			<th class='projet'>[(#TRI{id_projet,<:livrables:label_projet:>,ajax})]</th>
+			<th class='titre'>[(#TRI{'num titre',<:livrables:label_titre:>,ajax})]</th>
+            <th class='statut'>[(#TRI{'statut_client',<:livrables:label_statut_client:>,ajax})]</th>
+            <th class='statut'>[(#TRI{'statut_atelier',<:livrables:label_statut_atelier:>,ajax})]</th>
+			<th class='descriptif'>[(#TRI{descriptif,<:livrables:label_descriptif:>,ajax})]</th>
 			<th class='titre'>[(#TRI{url,<:livrables:label_url:>,ajax})]</th>
 			<th class='action'><:livrables:action:></th>
 		</tr>
@@ -21,13 +23,17 @@
 	<tbody>
 	<BOUCLE_liste_livrables(LIVRABLES)
 		{id_projet?}
-		{tri #ENV{order,id_livrable},#GET{defaut_tri}}
+		{tri #ENV{order,id_projet},#GET{defaut_tri}}
+        {par num titre}
 		{pagination #ENV{nb,30}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='id'>#ID_LIVRABLE</td>
-			<td class='id'[ title="<:livrables:label_projet:> (#TITRE_PROJET{#ID_PROJET})"]><a href="?voir_projet">#TITRE_PROJET{#ID_PROJET}</a></td>
-			<td class='titre'>#TITRE</td>
-			<td class='url'>[<a href="#URL">(#URL|couper{35})</a>]</td>
+			<td class='projet #EDIT{projet}'[ title="<:livrables:label_projet:> #ID_PROJET | (#TITRE_PROJET{#ID_PROJET}|supprimer_numero|couper{60}|texte_backend)"]><a href="?voir_projet">[(#TITRE_PROJET{#ID_PROJET}|supprimer_numero)]</a></td>
+			<td class='titre #EDIT{titre}'>[(#TITRE|supprimer_numero)]</td>
+            <td class='statut #EDIT{statut_client}'>[<img src="(#CHEMIN{[prive/images/(#STATUT_CLIENT|livrables_icone_statut)]})"[ alt="(#STATUT_CLIENT|livrables_explication_statut)"] />]</td>
+            <td class='statut #EDIT{statut_atelier}'>[<img src="(#CHEMIN{[prive/images/(#STATUT_ATELIER|livrables_icone_statut)]})"[ alt="(#STATUT_ATELIER|livrables_explication_statut)"] />]</td>
+            <td class='descriptif #EDIT{descriptif}'>#DESCRIPTIF</td>
+			<td class='url #EDIT{url}'>[<a href="#URL">(#URL|couper{70})</a>]</td>
 			<td class='action'>
 				[(#AUTORISER{voir,livrable,#ID_LIVRABLE})
 					[<a href="(#URL_PAGE{livrable}

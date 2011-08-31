@@ -1,0 +1,18 @@
+<div class='formulaire_spip formulaire_#FORM' id='formulaire_#FORM'>
+<h3 class='titrem'><:livrables:ajouter_livrable:></h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#EDITABLE|oui)
+	<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+        [(#SAISIE{livrables_projets,id_projet,obligatoire=oui,label=<:projet:projet|ucfirst:>,defaut=#ENV{id_projet}})]
+        [(#SAISIE{input,titre,type=text,obligatoire=oui,label=<:livrables:titre:>})]
+        [(#SAISIE{input,url,label=Url,obligatoire=oui})]
+        [(#SAISIE{textarea,descriptif,obligatoire=oui,inserer_barre=edition,previsualisation=oui,label=<:livrables:descriptif:>,rows=6,cols=80})]
+	</ul>
+	<p class='boutons'><button type="submit"><:preprod:bouton_enregistrer:></button></p>
+	</div>
+    </form>
+]
+</div>

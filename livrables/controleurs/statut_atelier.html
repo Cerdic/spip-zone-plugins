@@ -1,0 +1,11 @@
+<BOUCLE_statut(LIVRABLES){id_livrable}>
+[(#SET{statut,#STATUT_ATELIER,non_livre})]
+<select class="crayon-active" name="#ENV{name_statut_atelier}">
+	<option value="non_livre"[(#GET{statut}|=={'non_livre'}|oui)selected="selected")]><:livrables:libelle_statut_non_livre:></option>
+	<option value="alerte"[(#GET{statut}|=={'alerte'}|oui)selected="selected")]><:livrables:libelle_statut_alerte:></option>
+	<option value="dev"[(#GET{statut}|=={'dev'}|oui)selected="selected")]><:livrables:libelle_statut_dev:></option>
+	<option value="test"[(#GET{statut}|=={'test'}|oui)selected="selected")]><:livrables:libelle_statut_test:></option>
+	<option value="prod"[(#GET{statut}|=={'prod'}|oui)selected="selected")]><:livrables:libelle_statut_prod:></option>
+	<option value="abandonne"[(#GET{statut}|=={'abandonne'}|oui)selected="selected")]><:livrables:libelle_statut_abandonne:></option>
+</select>
+</BOUCLE_statut>

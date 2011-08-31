@@ -31,6 +31,20 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
 			maj_tables('spip_livrables');
 			ecrire_meta($nom_meta_base_version,$current_version="0.3");
 		}
+		// ajout d'un champ "id_livrable"
+		if (version_compare($current_version,"0.4","<")){
+			sql_alter("TABLE spip_tickets ADD id_livrable bigint(21) NOT NULL DEFAULT '0' AFTER exemple");
+			sql_alter("TABLE spip_tickets ADD INDEX (id_livrable)");
+			ecrire_meta($nom_meta_base_version,$current_version="0.4");
+		}
+		// ajout des champs "statut_client" et "statut_atelier"
+		if (version_compare($current_version,"0.5","<")){
+			sql_alter("TABLE spip_livrables ADD statut_client VARCHAR(10) NOT NULL AFTER id_projet");
+			sql_alter("TABLE spip_livrables ADD statut_atelier VARCHAR(10) NOT NULL AFTER statut_client");
+			sql_alter("TABLE spip_livrables ADD INDEX (statut_client)");
+			sql_alter("TABLE spip_livrables ADD INDEX (statut_atelier)");
+			ecrire_meta($nom_meta_base_version,$current_version="0.5");
+		}
 
 	}
 }
@@ -41,6 +55,7 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
  * @param unknown_type $nom_meta_base_version
  */
 function livrables_vider_tables($nom_meta_base_version) {
+	sql_alter('TABLE spip_tickets DROP COLUMN id_livrable');
 	sql_drop_table("spip_livrables");
 	sql_drop_table("spip_livrables_liens");
 	effacer_meta('livrables');

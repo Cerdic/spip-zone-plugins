@@ -24,23 +24,30 @@ function livrables_declarer_tables_interfaces($interface){
 
 function livrables_declarer_tables_principales($tables_principales){
 	$spip_livrables = array(
-		"id_livrable" 	=> "bigint(21) NOT NULL",
-		"id_projet"		=> "bigint(21) NOT NULL",
-		"url"			=> "varchar(255) DEFAULT '' NOT NULL",
-		"titre" 		=> "varchar(255) DEFAULT '' NOT NULL",
-		"descriptif" 	=> "longtext DEFAULT '' NOT NULL",
-		"maj" 			=> "TIMESTAMP"
+		"id_livrable" 			=> "bigint(21) NOT NULL",
+		"id_projet"				=> "bigint(21) NOT NULL",
+		"url"					=> "varchar(255) DEFAULT '' NOT NULL",
+		"statut_client"			=> "varchar(10) DEFAULT '' NOT NULL",
+		"statut_atelier"		=> "varchar(10) DEFAULT '' NOT NULL",
+		"titre" 				=> "varchar(255) DEFAULT '' NOT NULL",
+		"descriptif" 			=> "longtext DEFAULT '' NOT NULL",
+		"maj" 					=> "TIMESTAMP"
 	);
 	
 	$spip_livrables_key = array(
-		"PRIMARY KEY" => "id_livrable",
-		"KEY url" => "url",
-		"KEY id_projet" => "id_projet"
+		"PRIMARY KEY" 			=> "id_livrable",
+		"KEY id_projet" 		=> "id_projet",
+		"KEY url" 				=> "url",
+		"KEY statut_client"		=> "statut_client",
+		"KEY statut_atelier"	=> "statut_atelier"
 	);
 	
 	$tables_principales['spip_livrables'] = 
 		array('field' => &$spip_livrables, 'key' => &$spip_livrables_key);
-		
+
+	// ajout du champ id_livrable dans la table spip_tickets
+	$tables_principales['spip_tickets']['field']['id_livrable'] = "bigint(21) NOT NULL";		
+	
 	return $tables_principales;
 }
 
