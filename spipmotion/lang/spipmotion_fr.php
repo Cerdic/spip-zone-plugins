@@ -6,8 +6,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bitrate' => 'Bitrate vidéo de la sortie en kb/s : ',
-	'bitrate_audio' => 'Bitrate audio de la sortie en kb/s : ',
+	'bitrate' => 'Bitrate vidéo de la sortie en kb/s',
+	'bitrate_audio' => 'Bitrate audio de la sortie en kb/s',
 	'bouton_encoder' => 'Encoder',
 	'bouton_reencoder_tout' => 'Réencoder tous les fichiers',
 	'bouton_reencoder_tout_format' => 'Réencoder tous les fichiers au format @format@',
@@ -53,15 +53,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ffmpeg2theora_install' => 'FFMpeg2Theora sur votre serveur :',
 	'flvtool2_install' => 'FLVtool2 sur votre serveur :',
 	'flvtoolplus_install' => 'FLVtool++ sur votre serveur :',
-	'framerate' => 'Nombre d\'images par seconde : ',
-	'frequence_audio' => 'Fréquence d\'échantillonage audio : ',
+	'framerate' => 'Nombre d\'images par seconde',
+	'frequence_audio' => 'Fréquence d\'échantillonage audio',
 
 	// G
 	'gestion_format_entree' => 'Gestion des formats d\'entrée',
 	'gestion_format_sortie' => 'Gestion des formats de sortie',
 
 	// H
-	'height_video' => 'Hauteur de la sortie en px : ',
+	'height_video' => 'Hauteur de la sortie en px',
 
 	// I
 	'info_aucun_resultat_attente' => 'Aucun document n\'est en attente d\'encodage.',
@@ -236,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'version_encodee_de' => 'Ce document est une version encodée du document @id_orig@',
 
 	// W
-	'width_video' => 'Largeur de la sortie en px : '
+	'width_video' => 'Largeur de la sortie en px'
 );
 
 ?>
