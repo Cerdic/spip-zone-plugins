@@ -1,9 +1,9 @@
 <plugin>
 	<nom>Livrables</nom>
-	<auteur>Cyril Marion</auteur>
+	<auteur>Cyril Marion - Ateliers CYM</auteur>
 	<licence>&#169; 2011 GPL</licence>
-	<version>0.1.3</version>
-	<version_base>0.1</version_base>
+	<version>0.1.5</version>
+	<version_base>0.6</version_base>
 	<install>base/livrables_upgrade.php</install>
 
 	<icon>images/composants-32.png</icon>
@@ -49,6 +49,11 @@
 
 	<pipeline>
 		<nom>declarer_liaison_mots</nom>
+		<inclure>livrables_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>affiche_milieu</nom>
 		<inclure>livrables_pipelines.php</inclure>
 	</pipeline>
 

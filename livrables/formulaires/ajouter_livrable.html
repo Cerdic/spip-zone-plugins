@@ -8,7 +8,7 @@
 	<ul>
         [(#SAISIE{livrables_projets,id_projet,obligatoire=oui,label=<:projet:projet|ucfirst:>,defaut=#ENV{id_projet}})]
         [(#SAISIE{input,titre,type=text,obligatoire=oui,label=<:livrables:titre:>})]
-        [(#SAISIE{input,url,label=Url,obligatoire=oui})]
+        [(#SAISIE{input,url,label=Url})]
         [(#SAISIE{textarea,descriptif,obligatoire=oui,inserer_barre=edition,previsualisation=oui,label=<:livrables:descriptif:>,rows=6,cols=80})]
 	</ul>
 	<p class='boutons'><button type="submit"><:preprod:bouton_enregistrer:></button></p>

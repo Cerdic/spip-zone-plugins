@@ -28,6 +28,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_manque_projet' => 'Il manque le projet du livrable.',
 	'erreur_manque_titre' => 'Il manque le titre du livrable.',
 	'erreur_manque_url' => 'Il manque l\'url du livrable.',
+	'erreur_meme_livrable' => 'Erreur : c\'est le même livrable (modification impossible).',
 	"explication_statut_non_livre"	=> "Pas encore fabriqu&eacute;, livraison non effectu&eacute;e.",
 	"explication_statut_non_vue"	=> "Livrable non vérifié; peut-etre pas livré ou simplement pas encore vu.",
 	"explication_statut_alerte"	=> "Alerte, difficult&eacute;s rencontr&eacute;es.",
@@ -43,14 +44,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_tous_les_livrables' => 'Tous les livrables',
 	
 	// L
-	'label_descriptif' => 'Descriptif du livrable',
-	'label_livrable' => 'ID',
-	'label_projet' => 'Projet',
-	'label_projet_lot' => 'Projet/Lot',
-	'label_titre' => 'Titre du livrable',
-	'label_url'	=> 'Adresse du livrable',
-	'label_statut_client' => 'Client',
-	'label_statut_atelier' => 'Atelier',
+	'label_descriptif' 			=> 'Descriptif du livrable',
+	'label_livrable' 			=> 'ID',
+	'label_projet' 				=> 'Projet',
+	'label_projet_lot' 			=> 'Projet/Lot',
+	'label_titre' 				=> 'Titre du livrable',
+	'label_tickets_total' 		=> 'Total Tickets', // 'Total des tickets du livrable',
+	'label_tickets_finis' 		=> 'Tickets Finis', // 'Nombe de tickets termin&eacute;s',
+	'label_tickets_en_cours' 	=> 'En cours', // 'Nombre de tickets restant à traiter',
+	'label_url'					=> 'Adresse du livrable',
+	'label_statut_client' 		=> 'Statut Client',
+	'label_statut_atelier' 		=> 'Statut Atelier',
 	"libelle_statut_non_livre"	=> "Non livr&eacute;",
 	"libelle_statut_non_vue"	=> "Pas encore v&eacute;rifi&eacute;",
 	"libelle_statut_alerte"		=> "Alerte",
@@ -73,6 +77,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'objet_livrable' => 'Livrable',
 
 	// S
+	'selectionner_livrable' => 'Sélectionner un livrable',
 	'succes_enregistrement' => 'Le livrable @id@ a bien été créé.',
 	'supprimer' => 'Supprimer ce livrable',
 	

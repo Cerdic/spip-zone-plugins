@@ -20,8 +20,6 @@ function formulaires_ajouter_livrable_verifier_dist(){
 		$erreurs['id_projet'] = _T('livrables:erreur_manque_projet');
 	if (!_request('titre'))
 		$erreurs['titre'] = _T('livrables:erreur_manque_titre');
-	if (!_request('url'))
-		$erreurs['url'] = _T('livrables:erreur_manque_url');
 	if (!_request('descriptif'))
 		$erreurs['descriptif'] = _T('livrables:erreur_manque_descriptif');	
 

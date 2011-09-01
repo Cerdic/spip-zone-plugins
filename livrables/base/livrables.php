@@ -30,6 +30,9 @@ function livrables_declarer_tables_principales($tables_principales){
 		"statut_client"			=> "varchar(10) DEFAULT '' NOT NULL",
 		"statut_atelier"		=> "varchar(10) DEFAULT '' NOT NULL",
 		"titre" 				=> "varchar(255) DEFAULT '' NOT NULL",
+		"objet"					=> "varchar(50) DEFAULT '' NOT NULL",
+		"type"					=> "varchar(50) DEFAULT '' NOT NULL",
+		"composition"			=> "varchar(50) DEFAULT '' NOT NULL",
 		"descriptif" 			=> "longtext DEFAULT '' NOT NULL",
 		"maj" 					=> "TIMESTAMP"
 	);
@@ -37,6 +40,9 @@ function livrables_declarer_tables_principales($tables_principales){
 	$spip_livrables_key = array(
 		"PRIMARY KEY" 			=> "id_livrable",
 		"KEY id_projet" 		=> "id_projet",
+		"KEY objet" 			=> "objet",
+		"KEY type" 				=> "type",
+		"KEY composition" 		=> "composition",
 		"KEY url" 				=> "url",
 		"KEY statut_client"		=> "statut_client",
 		"KEY statut_atelier"	=> "statut_atelier"

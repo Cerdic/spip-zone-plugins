@@ -86,4 +86,53 @@ function livrables_explications_statut($id_livrable = null){
 }
 
 
+/**
+ * Retrouve le nombre total de tickets concernant ce livrable
+ */
+function balise_TICKETS_TOTAL($p) {
+	$id_livrable = interprete_argument_balise (1, $p);
+	$p->code = "calcule_total_tickets(".$id_livrable.")";
+	$p->statut = 'php';
+	return $p;
+}
+function calcule_total_tickets($id_livrable) {
+	$total = sql_getfetsel("COUNT(id_ticket)","spip_tickets", "id_livrable=" . intval($id_livrable));
+	if (!empty($total))
+		return $total;
+	return '';
+}
+
+/**
+ * Retrouve le nombre de tickets termines
+ */
+function balise_TICKETS_FINIS($p) {
+	$id_livrable = interprete_argument_balise (1, $p);
+	$p->code = "calcule_tickets_finis(".$id_livrable.")";
+	$p->statut = 'php';
+	return $p;
+}
+function calcule_tickets_finis($id_livrable) {
+	$finis = sql_countsel('spip_tickets LEFT JOIN spip_livrables USING (id_livrable)',"spip_tickets.id_livrable=".intval($id_livrable)." AND spip_tickets.statut IN('termine','resolu')");
+	if (!empty($finis))
+		return $finis;
+	return '';
+}
+
+/**
+ * Retrouve le nombre de tickets en cours
+ */
+function balise_TICKETS_EN_COURS($p) {
+	$id_livrable = interprete_argument_balise (1, $p);
+	$p->code = "calcule_tickets_en_cours(".$id_livrable.")";
+	$p->statut = 'php';
+	return $p;
+}
+function calcule_tickets_en_cours($id_livrable) {
+	$en_cours = sql_countsel('spip_tickets LEFT JOIN spip_livrables USING (id_livrable)',"spip_tickets.id_livrable=".intval($id_livrable)." AND spip_tickets.statut NOT IN('termine','resolu')");
+	if (!empty($en_cours))
+		return $en_cours;
+	return '';
+}
+
+		
 ?>

@@ -45,7 +45,16 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_livrables ADD INDEX (statut_atelier)");
 			ecrire_meta($nom_meta_base_version,$current_version="0.5");
 		}
-
+		// ajout des champs "objet", "type" et "composition"
+		if (version_compare($current_version,"0.6","<")){
+			sql_alter("TABLE spip_livrables ADD objet VARCHAR(50) NOT NULL AFTER url");
+			sql_alter("TABLE spip_livrables ADD type VARCHAR(50) NOT NULL AFTER objet");
+			sql_alter("TABLE spip_livrables ADD composition VARCHAR(50) NOT NULL AFTER type");
+			sql_alter("TABLE spip_livrables ADD INDEX (objet)");
+			sql_alter("TABLE spip_livrables ADD INDEX (type)");
+			sql_alter("TABLE spip_livrables ADD INDEX (composition)");
+			ecrire_meta($nom_meta_base_version,$current_version="0.6");
+		}
 	}
 }
 
@@ -67,6 +76,5 @@ function livrables_vider_tables($nom_meta_base_version) {
 	effacer_meta('composants');
 	effacer_meta($nom_meta_base_version);
 }
-
 
 ?>

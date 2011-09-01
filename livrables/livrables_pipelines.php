@@ -48,6 +48,19 @@ function livrables_declarer_liaison_mots($liaisons){
 }
 
 /**
+ * Editer le livrable d'un ticket kiss
+ *
+**/
+function livrables_affiche_milieu($flux){
+	// sur la page exec=ticket_afficher
+	if ($flux['args']['exec'] == 'ticket_afficher') {
+		$flux['data'] .= recuperer_fond("prive/boite/formulaire-ticket-livrable", array('id_ticket' => $flux["args"]["id_ticket"]), array('ajax'=>true));
+	}
+	return $flux;
+}
+
+
+/**
  * Ajouter un peu de styles
  *
 **/

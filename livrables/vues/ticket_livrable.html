@@ -1,0 +1,11 @@
+[(#REM)
+        Vue pour le crayon 'edit' ticket - livrable
+]
+#CACHE{0}
+<B_a>
+<BOUCLE_a(LIVRABLES ?){id_livrable}>
+    <BOUCLE_projet(PROJETS ?){id_projet}>[(#TITRE)/ ]</BOUCLE_projet>
+    [(#TITRE|sinon{'-'})]
+</BOUCLE_a></B_a>
+<:livrables:selectionner_livrable:>
+<//B_a>
