@@ -20,15 +20,16 @@ function crud_documents_create_dist($dummy,$set=null){
 	if ($id_document = 'non' AND $set['source']) {
 		include_spip('action/editer_document');
 		$chemin = $set['source'];
+		$name = $set['name'] ? $set['name'] : basename($chemin);
 		$f = chercher_filtre('info_plugin');
 		// gerer la mediatheque aussi avant son entree dans le core
 		if ($f('medias', 'est_actif')) {
 			$f = charger_fonction('ajouter_documents','action');
-			$id = $f('new', array(array('tmp_name' => $chemin, 'name' => basename($chemin))), $set['type'], $set['id_objet'], $set['mode']);
+			$id = $f('new', array(array('tmp_name' => $chemin, 'name' => $name)), $set['type'], $set['id_objet'], $set['mode']);
 		}
 		else {
 			$f = charger_fonction('ajouter_documents', 'inc');
-			$id = $f($chemin, basename($chemin), $set['type'], $set['id_objet'], $set['mode'], 0, basename($chemin));
+			$id = $f($chemin, $name, $set['type'], $set['id_objet'], $set['mode'], 0, basename($chemin));
 		}
 		if (intval($id = $id[0])) {
 			$resultat = array($id, 'ok');
