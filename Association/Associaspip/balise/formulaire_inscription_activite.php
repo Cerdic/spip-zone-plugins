@@ -33,10 +33,10 @@ function balise_FORMULAIRE_INSCRIPTION_ACTIVITE ($p) {
 		  //return array($filtres[0], $args[0]);
 	//}
 	 
-// Balise de traitement des données du formulaire
+// Balise de traitement des donnï¿½es du formulaire
 function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
 		
-		//On récupère les champs
+		//On rï¿½cupï¿½re les champs
 	$id_evenement= intval(_request('id_evenement'));
 	$id_adherent=_request('id_adherent');
 	$nom=_request('nom');
@@ -100,7 +100,7 @@ function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
 		else {
 			if ($bouton=='Soumettre'){
 				
-				//On contrôle les données du formulaire			
+				//On contrï¿½le les donnï¿½es du formulaire			
 				$bouton='Confirmer';	 // si pas d'erreur
 				
 				//email invalide
@@ -110,7 +110,7 @@ function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
 				}
 				//donnees manquantes
  				if ( empty($nom) ){
-					$erreur_nom='Nom et prénom manquants !';
+					$erreur_nom='Nom et pr&eacute;nom manquants !';
 					$bouton='Soumettre';
 				}
 				if ( empty($inscrits) ){
@@ -118,7 +118,7 @@ function balise_FORMULAIRE_INSCRIPTION_ACTIVITE_dyn() {
 					$bouton='Soumettre';
 				}
 				
-				//on retourne les infos à un formulaire de previsualisation		
+				//on retourne les infos ï¿½ un formulaire de previsualisation		
 				return inclure_balise_dynamique(
 					array(
 						'formulaires/formulaire_inscription_activite_previsu',0,
