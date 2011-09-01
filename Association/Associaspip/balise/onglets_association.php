@@ -21,6 +21,6 @@ function balise_ONGLETS_ASSOCIATION_stat ($args) {
 	return $args; /* on se contente de faire suivre l'argument statique de la balise */
 }
 function balise_ONGLETS_ASSOCIATION_dyn ($titre) {
-	return association_onglets($titre);;
+	return association_onglets($titre);
 }
 ?>
