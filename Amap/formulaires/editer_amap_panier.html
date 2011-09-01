@@ -14,7 +14,7 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 				<BOUCLE_evenement(EVENEMENTS){tous}>
 					#SET{details, #ARRAY}
-					<BOUCLE_evenement_details(EVENEMENTS){par id_evenement}{age<0}>
+					<BOUCLE_evenement_details(EVENEMENTS){par date_debut}{age<0}>
 						[(#SET_PUSH{details, #ARRAY{ date_debut, #DATE_DEBUT, }})]
 					</BOUCLE_evenement_details>
 					#SET{evenement, #ARRAY{details, #GET{details}}}
