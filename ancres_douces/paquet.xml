@@ -1,0 +1,21 @@
+<paquet
+	prefix="ancresdouces"
+	categorie="navigation"
+	version="1.3.0"
+	etat="stable"
+	compatibilite="[3.0.0-dev;3.0.*]"
+	logo="ancres_douces-64.png"
+	documentation="http://www.spip-contrib.net/Ancres-douces"
+>
+
+	<nom>Ancres Douces</nom>
+	<!-- Gestion des brèves dans SPIP -->
+
+	<auteur>Eric Lupinacci</auteur>
+	<credit>Fil</credit>
+
+	<licence>GNU/LGPL</licence>
+
+	<pipeline nom="insert_head" inclure="ancres_douces_pipelines.php" />
+
+</paquet>

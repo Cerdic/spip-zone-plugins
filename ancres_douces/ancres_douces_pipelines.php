@@ -6,7 +6,7 @@
 // ou 
 // define ('ANCRES_DOUCES_CONTEXTE','.ancres_douces'); 
 
-function ancres_douces_insert_head($flux){
+function ancresdouces_insert_head($flux){
 
 if (!defined('CONTEXTE_ANCRES_DOUCES'))
 	$appel_ancres_douces='jQuery';
