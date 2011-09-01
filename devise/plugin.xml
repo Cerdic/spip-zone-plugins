@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Devise [es]Divisa [en]Currency</multi></nom>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>img/pig-64.png</icon>
-	<version>0.1.1</version>
+	<version>0.2.0</version>
         <version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description><multi>
@@ -66,5 +66,6 @@ Los nombres de divisas est&aacute;n en Ingl&eacute;s, Franc&eacute;s y Espa&ntil
 
 	<necessite id="SPIP" version="[2.0;]" />
 	<necessite id="cextras" version="[0.8;]" />
+	<necessite id="saisies" />
 	<categorie>divers</categorie>
 </plugin>
