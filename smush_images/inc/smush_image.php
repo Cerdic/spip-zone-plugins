@@ -16,7 +16,7 @@ function inc_smush_image_dist($im){
 		spip_log("SMUSH : smush_image pour $im","smush");
 		
 		// L'adresse de l'API que l'on utilise
-		$url_smush = 'http://smush.it/ws.php';
+		$url_smush = 'http://www.smushit.com/ysmush.it/ws.php';
 		
 		// On ajoute les paramètres nécessaires pour l'API
 		$url_smush_finale = parametre_url($url_smush,'img',url_absolue($im));
