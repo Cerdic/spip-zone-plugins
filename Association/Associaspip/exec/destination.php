@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -39,8 +39,9 @@ function exec_destination(){
 		echo propre(_T('asso:plan_info'));
 		echo fin_boite_info(true);
 		
-		echo bloc_des_raccourcis(association_icone(_T('asso:destination_nav_ajouter'),  generer_url_ecrire('edit_destination'), 'EuroOff.gif',  'creer.gif'));
-
+		$res = association_icone(_T('asso:destination_nav_ajouter'),  generer_url_ecrire('edit_destination'), 'EuroOff.gif',  'creer.gif');
+		$res.= association_icone(_T('asso:bouton_retour'), generer_url_ecrire('association'), "retour-24.png");
+		echo bloc_des_raccourcis($res);
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(  _DIR_PLUGIN_ASSOCIATION_ICONES."EuroOff.gif", false, "",  '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . _T('asso:destination_comptable'));
