@@ -62,7 +62,7 @@ function association_editeur_destinations($destination, $unique='', $defaut='')
 		$res = "<script type='text/javascript' src='".find_in_path("javascript/jquery.destinations_form.js")."'></script>";
 		$res .= '<label for="destination"><strong>'
 		. _T('asso:destination')
-		. '&nbsp;:</strong></label>'
+		. '</strong></label>'
 		. '<div id="divTxtDestination" class="formulaire_edition_destinations">';
 
 		$idIndex=1;
