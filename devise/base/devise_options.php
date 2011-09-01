@@ -1,9 +1,16 @@
 <?php
 
-function devises_codes() {
-    return Array(
+/* Renvoie un tableau contenant les devises.
+ * Si le parametre $description est fourni, un tableau associatif de la
+ * forme ABC => texte est renvoye, ou 'texte' est interprete par la
+ * fonction formater_devise().
+ * Si $description est absent ou vide, un tableau simple contenant tous les
+ * codes ISO dans l'ordre alphabetique est renvoye.
+ */
+function devises_codes($description='') {
+    $dev = Array(
         'AED', 'AFN', 'ALL', 'AMD', 'ANG', 'AOA', 'ARS', 'AUD', 'AWG', 'AZN',
-        'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTN', 'BWP', 'BYR', 'BZD',
+        'BAM', 'BBD', 'BDT', 'BGN', 'BHD', 'BIF', 'BMD', 'BND', 'BOB', 'BRL', 'BSD', 'BTC', 'BTN', 'BWP', 'BYR', 'BZD',
         'CAD', 'CDF', 'CHF', 'CLP', 'CNY', 'COP', 'CRC', 'CUC', 'CUP', 'CVE', 'CZK', 'DJF', 'DKK', 'DOP', 'DZD',
         'EEK', 'EGP', 'ERN', 'ETB', 'EUR',
         'FJD', 'FKP', 'GBP', 'GEL', 'GHS', 'GIP', 'GMD', 'GNF', 'GTQ', 'GWP', 'GYD',
@@ -24,6 +31,27 @@ function devises_codes() {
         'YER',
         'ZAR', 'ZMK', 'ZWL',
     );
+    if (0 == strlen($description)) {
+        return $dev;
+    } else {
+        $arr = array_map(create_function('$d', "return formater_devise(\$d, '$description');"),
+                         devises_codes());
+        return array_combine($dev, $arr);
+    }
+}
+
+/* Affiche le nom de la devise, au format desire. Le format peut prendre en
+ * compte les champs suivants:
+ *  - %C : code ISO de la devise
+ *  - %N : nom de la devise
+ *  - %% : caractère '%'
+ * La valeur par defaut du parametre $format est '%C - %N'.
+ */
+function formater_devise($devise, $format='%C - %N') {
+    $codes_magiques = array('/%%/', '/%C/', '/%N/');
+    $codes_interpretes = array('%', $devise, _T("devise:$devise"));
+    $resultat = preg_replace($codes_magiques, $codes_interpretes, $format);
+    return preg_replace($codes_magiques, $codes_interpretes, $format);
 }
 
 ?>

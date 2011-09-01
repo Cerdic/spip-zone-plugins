@@ -2,7 +2,7 @@
 	<nom><multi>[fr]Devise [es]Divisa [en]Currency</multi></nom>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>img/pig-64.png</icon>
-	<version>0.1</version>
+	<version>0.1.1</version>
         <version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description><multi>
