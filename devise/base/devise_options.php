@@ -44,12 +44,14 @@ function devises_codes($description='') {
  * compte les champs suivants:
  *  - %C : code ISO de la devise
  *  - %N : nom de la devise
+ *  - %sN: nom de la devise pour un montant singulier
+ *  - %pN: nom de la devise pour un montant pluriel
  *  - %% : caractère '%'
  * La valeur par defaut du parametre $format est '%C - %N'.
  */
 function formater_devise($devise, $format='%C - %N') {
-    $codes_magiques = array('/%%/', '/%C/', '/%N/');
-    $codes_interpretes = array('%', $devise, _T("devise:$devise"));
+    $codes_magiques = array('/%%/', '/%C/', '/%N/', '/%sN/', '/%pN/');
+    $codes_interpretes = array('%', $devise, _T("devise:$devise"), _T("devise:s_$devise"), _T("devise:p_$devise"));
     $resultat = preg_replace($codes_magiques, $codes_interpretes, $format);
     return preg_replace($codes_magiques, $codes_interpretes, $format);
 }
