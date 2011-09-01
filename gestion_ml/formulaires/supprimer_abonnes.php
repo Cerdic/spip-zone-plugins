@@ -16,8 +16,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Fonction de generation des saisies du formulaire
  *
  * @param string $liste liste sur laquelle intervenir
+ * @param array $users tableau des abonnes a la liste
  */
-function formulaires_ajouter_abonne_saisies($liste=0){
+function formulaires_supprimer_abonnes_saisies($liste=0, $users=''){
 	$mes_saisies = array(
 		array(
 			'saisie' => 'hidden',
@@ -27,17 +28,13 @@ function formulaires_ajouter_abonne_saisies($liste=0){
 			)
 		),
 		array(
-			'saisie' => 'input',
+			'saisie' => 'checkbox',
 			'options' => array(
 				'nom' => 'email',
 				'obligatoire' => 'oui',
 				'defaut' => '',
-				'valeur' => '',
-				'size' => 20,
-				'label' => _T('gestionml:label_ajouter_mail')
-			),
-			'verifier' => array(
-				'type' => 'email'
+				'label' => _T('gestionml:label_supprimer_mails'),
+				'datas' => array_combine($users,$users)
 			)
 		)
 	);
@@ -45,24 +42,12 @@ function formulaires_ajouter_abonne_saisies($liste=0){
 }
 
 /**
- * Fonction de chargement du formulaire
- *
- * @param string $liste liste sur laquelle intervenir
- */
-function formulaires_ajouter_abonne_charger_dist($liste){
-	$valeurs = array('email'=>'','liste'=>$liste);
-   return $valeurs;
-}
-
-
-/**
  * Fonction de traitement du formulaire
  *
  */
-function formulaires_ajouter_abonne_traiter_dist(){
+function formulaires_supprimer_abonnes_traiter_dist(){
 	include_spip('inc/gestionml_api');
-	return gestionml_api_ajouter_email(_request('liste'),_request('email')) ;
+	return gestionml_api_supprimer_emails(_request('liste'),_request('email')) ;
 }
-
 
 ?>

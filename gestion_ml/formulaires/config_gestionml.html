@@ -31,7 +31,80 @@
    })]
 </BOUCLE_admins>
 
-   
+[(#SET{saisies,
+   #ARRAY{
+      0, #ARRAY{
+         saisie, radio,
+         options, #ARRAY{
+            nom, hebergeur,
+            label, <:gestionml:label_afficher_hebergeurs:>,
+            defaut, 0,
+            datas, #ARRAY{
+               0,<:gestionml:label_hebergeur_simule:>,
+               1,OVH
+            }
+         }
+      },
+      1, #ARRAY{
+         saisie, fieldset,
+         options, #ARRAY{
+            nom, config_ovh,
+            label, <:gestionml:config_ovh_legend:>,
+            afficher_si, '@hebergeur@ == 1' 
+         },
+         saisies, #ARRAY{
+            0, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, serveur_distant,
+                  label, <:gestionml:label_serveur_distant:>,
+                  defaut, https://www.ovh.com/soapi/soapi-re-1.11.wsdl,
+                  obligatoire, oui,
+                  explication, <:gestionml:explication_serveur_distant:>,
+               }
+            },
+            1, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, domaine,
+                  label, <:gestionml:label_domaine:>,
+                  defaut, mondomaine.tld,
+                  obligatoire, oui,
+                  explication, <:gestionml:explication_domaine:>
+               }
+            },
+            2, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, identifiant,
+                  label, <:gestionml:label_identifiant:>,
+                  obligatoire, oui,
+                  explication, <:gestionml:explication_identifiant:>
+               }
+            },
+            3, #ARRAY{
+               saisie, input,
+               options, #ARRAY{
+                  nom, mot_de_passe,
+                  type, password,
+                  label, <:gestionml:label_mot_de_passe:>,
+                  obligatoire, oui,
+                  explication, <:gestionml:explication_mot_de_passe:>
+               }
+            }
+         }
+      },
+      2, #ARRAY{
+         saisie, fieldset,
+         options, #ARRAY{
+            nom, auteurs_listes,
+            label, <:gestionml:label_auteurs_listes:>
+         },
+         saisies, #GET{les_saisies}
+      }
+   }
+})]
+
 <div class="formulaire_spip formulaire_configurer formulaire_gestionml">
 
    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
@@ -41,72 +114,9 @@
    <form method="post" action="#ENV{action}">
    <div>
       #ACTION_FORMULAIRE{#ENV{action}}
-
       <ul>
-
-         [(#SAISIE{radio, hebergeur,
-                 label=<:gestionml:label_afficher_hebergeurs:>,
-        			  defaut=0,
-                 datas=#ARRAY{
-                 			 0,local,
-                         1,OVH}
-         })]
-
-         [(#SAISIE{fieldset,config_ovh,env,
-         	pliable=on,
-            plie=on,
-            label=<:gestionml:config_ovh_legend:>,
-            saisies=#ARRAY{
-               0, #ARRAY{
-                  saisie, input,
-                  options, #ARRAY{
-                     nom, serveur_distant,
-                     label, <:gestionml:label_serveur_distant:>,
-                     defaut, https://www.ovh.com/soapi/soapi-re-1.11.wsdl,
-                     obligatoire, oui,
-                     explication, <:gestionml:explication_serveur_distant:>
-                  }
-               },
-               1, #ARRAY{
-                  saisie, input,
-                  options, #ARRAY{
-                     nom, domaine,
-                     label, <:gestionml:label_domaine:>,
-                     defaut, mondomaine.tld,
-                     obligatoire, oui,
-                     explication, <:gestionml:explication_domaine:>
-                  }
-               },
-               2, #ARRAY{
-                  saisie, input,
-                  options, #ARRAY{
-                     nom, identifiant,
-                     label, <:gestionml:label_identifiant:>,
-                     obligatoire, oui,
-                     explication, <:gestionml:explication_identifiant:>
-                  }
-               },
-               3, #ARRAY{
-                  saisie, input,
-                  options, #ARRAY{
-                     nom, mot_de_passe,
-                     type, password,
-                     label, <:gestionml:label_mot_de_passe:>,
-                     obligatoire, oui,
-                     explication, <:gestionml:explication_mot_de_passe:>
-                  }
-               }
-            }
-         })]
-        
-
-         [(#SAISIE{fieldset,auteurs_listes,env,
-                     label=<:gestionml:label_auteurs_listes:>,
-                     saisies=#GET{les_saisies}
-         })]
-
+      	#GENERER_SAISIES{#GET{saisies}}
       </ul>
-
       <p class="boutons">
          <input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
       </p>

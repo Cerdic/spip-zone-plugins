@@ -4,10 +4,15 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
+	'api_action_erreur' => 'Action demandée non prise en compte',
+	'api_ajout_email' => 'L\'ajout de @email@ dans la liste @nameML@ sera prise en compte dans quelques instants',
+	'api_liste_envoyee' => 'La liste des abonnés de la liste @nameML@ a été envoyée à @email@',
+	'api_liste_envoyee_err' => 'L\'adresse email de votre compte n\'est pas renseignée',
+	'api_suppression_emails' => 'La suppression de @str_emails@ de la liste @nameML@ sera prise en compte dans quelques instants',
 	'aucune_liste_dispo' => 'Aucune liste disponible',
 
 	// B
-	'boite_info' => 'Cette page vous permet d\'accéder à la gestion des utilisateurs des mailing-lists pour lesquelles le webmestre de ce site vous en a donné l\'autorisation.',
+	'boite_info' => 'Cette page vous permet d\'accéder à la gestion des utilisateurs de mailing-lists. Sont listées celles que le webmestre de ce site vous a autorisé à gérer.',
 	'btn_ajouter' => 'Ajouter',
 
 	// C
@@ -36,15 +41,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_ajouter_mail' => 'Ajouter un email',
 	'label_auteurs_listes' => 'Configuration des listes gérables par auteur' ,
 	'label_domaine' => 'Votre domaine' ,
+	'label_hebergeur_simule' => 'Hébergeur simulé (pour tests)' ,
 	'label_identifiant' => 'Identifiant' ,
 	'label_liste_de' => '@nom@' ,
 	'label_mot_de_passe' => 'Mot de passe' ,
 	'label_serveur_distant' => 'Serveur Soap' ,
 	'label_serveur_local' => 'Serveur local' ,
+	'label_supprimer_mails' => 'Supprimer un ou plusieurs emails',
 	
 	// T
 	'titre' => 'Gestion ML',
-	'titre_abonnes' => 'Abonnés de la liste @liste@',
+	'titre_abonnes' => 'Gestion des abonnés de la liste @liste@',
 	'titre_boite_cfg' => 'Configuration du plugin Gestion ML',
 	'titre_listes_dispo' => 'Listes disponibles',
 	'titre_parametres' => 'Paramètres de la liste @liste@',

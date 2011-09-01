@@ -1,4 +1,4 @@
 <div class="gestionml_details">
-   <h2><:gestionml:titre_parametres{liste=#ENV{liste}}:></h2>
-   <pre>#ENV{infos}</pre>
+   <h3><:gestionml:titre_parametres{liste=#ENV{liste}}:></h3>
+   <pre>[(#ENV{infos}|print_r{true})]</pre>
 </div>

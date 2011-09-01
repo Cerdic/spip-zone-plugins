@@ -1,18 +1,9 @@
 <div class="gestionml_details">
-   <h2><:gestionml:titre_abonnes{liste=#ENV{liste}}:></h2>
-   <table class="liste">
-      <BOUCLE_contenu(POUR){tableau #ENV{tab} }>
-         <tr>
-            <td>#VALEUR</td>
-            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','userdel'}|parametre_url{'nameML',#ENV{liste}}|parametre_url{'email',#VALEUR})]"
-               onclick="return(confirm('<:gestionml:confirmer_suppression:>'));" title="<:gestionml:supprimer_abonne:>">
-               <img width="12" height="12" src="#CHEMIN{images/gestionml-supprimer.png}" alt="<:gestionml:supprimer_abonne:>" />
-            </a></td>
-         </tr>
-      </BOUCLE_contenu>
-   </table>
-   
-   <div class="ajax">
+   <h3><:gestionml:titre_abonnes{liste=#ENV{liste}}:></h3>
+   <div>
    	#FORMULAIRE_AJOUTER_ABONNE{#ENV{liste}}
+   </div>
+   <div>
+   	#FORMULAIRE_SUPPRIMER_ABONNES{#ENV{liste},#ENV{tab}}
    </div>
 </div>

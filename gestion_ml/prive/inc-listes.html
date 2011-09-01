@@ -5,13 +5,13 @@
       <BOUCLE_contenu(POUR){tableau #ENV{tab} }>
          <tr>
             <td>#CLE (#VALEUR abonn&eacute;s)</td> 
-            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','infos'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:icone_infos:>">
+            <td><a href="[(#SELF|parametre_url{'ovhaction','infos'}|parametre_url{'nameML',#CLE}|parametre_url{'email',''})]" title="<:gestionml:icone_infos:>">
             [(#CHEMIN{images/gestionml-infos.png}|balise_img|inserer_attribut{alt,<:gestionml:icone_infos:>})]
             </a></td>
-            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','users'}|parametre_url{'nameML',#CLE})]" title="<:gestionml:icone_abonnes:>">
+            <td><a href="[(#SELF|parametre_url{'ovhaction','users'}|parametre_url{'nameML',#CLE}|parametre_url{'email',''})]" title="<:gestionml:icone_abonnes:>">
             [(#CHEMIN{images/gestionml-abonnes.png}|balise_img|inserer_attribut{alt,<:gestionml:icone_abonnes:>})]
             </a></td>
-            <td><a class="ajax" href="[(#SELF|parametre_url{'ovhaction','sendlist'}|parametre_url{'nameML',#CLE}|parametre_url{'email',#SESSION{email}})]" title="<:gestionml:icone_envoyer_mail:>">
+            <td><a href="[(#SELF|parametre_url{'ovhaction','sendlist'}|parametre_url{'nameML',#CLE}|parametre_url{'email',#SESSION{email}})]" title="<:gestionml:icone_envoyer_mail:>">
             [(#CHEMIN{images/gestionml-envoyermail.png}|balise_img|inserer_attribut{alt,<:gestionml:icone_envoyer_mail:>})]
             </a></td>
          </tr>
