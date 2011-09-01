@@ -1,6 +1,8 @@
-<div class="formulaire_spip formulaire_demo">
-[<span class='erreur'>(#ENV*{message_erreur})</span>]
-<form method="post" action="#ENV{action}"><div>
+<div class="formulaire_spip formulaire_#FORM">
+    [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+    [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+    <form name="formulaire_#FORM" method="post" action="#ENV{action}">
+	<div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
 		<h3 class="legend"><:asso:ressources_titre_edition_ressources:></h3>
