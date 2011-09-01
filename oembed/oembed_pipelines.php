@@ -89,7 +89,7 @@ function oembed_pre_propre($texte) {
 			if ($url = extraire_attribut($lien, 'href')
 			# seuls les autoliens beneficient de la detection oembed
 			AND preg_match(',\bauto\b,', extraire_attribut($lien, 'class'))
-			AND oembed_verifier_provider($url)) {
+			AND (oembed_verifier_provider($url) OR (lire_config('oembed/detecter_lien','non')=='oui'))) {
 				$fond = recuperer_fond('modeles/oembed',array('url'=>$url));
 				if ($fond = trim($fond))
 					$texte = str_replace($lien, $fond, $texte);
