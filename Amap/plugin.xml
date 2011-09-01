@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Plugin AMAP pour Spip 2</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
-	<version>2.1.1</version>
+	<version>2.1.2</version>
 	<version_base>0.8</version_base>
 
 	<licence>GNU/GPL</licence>
@@ -56,7 +56,9 @@
 	<necessite id="agenda" version="[2.2.1;]" />
 	<necessite id="cextras" version="[1.9;]" />
 	<necessite id="facteur" version="[1.6.2;]" />
+	<necessite id="Iterateurs" version="[0.4.0;]" />
 	<necessite id="saisies" version="[1.7.7;]" />
+	<necessite id="spip_bonux" version="[2.2.21;]" />
 	<necessite id="verifier" version="[0.1;]" />
 	<utilise id="z" version="[1.5.1;]" />
 	<categorie>divers</categorie>
