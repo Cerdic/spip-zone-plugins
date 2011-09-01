@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'avant_le' => 'avant le',
 
 	// C
+	'confirmation_envoi' => 'Votre mise a disposition du panier du @date_distribution@ est confimer, nous vous remercions.',
 	'contenu_panier' => 'Contenu du panier',
 
 	// D
@@ -67,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<br />Je mets à disposition le panier du @date_distribution@
 		<br />@nom@',
 	'panier_dispo_auteur_mail' => 'Bonjour,
-Je mets à disposition le panier du @date_distribution@, pour le récupéré suiver le lien suivant @lien@=@id_amap_panier@
+Je mets à disposition le panier du @date_distribution@, pour le récupérer suiver le lien suivant @lien@
 @nom@',
 	'panier_distribuer' => 'panier à distribuer',
 	'paniers_distribuer' => 'paniers à distribuer',
@@ -79,7 +80,6 @@ Je mets à disposition le panier du @date_distribution@, pour le récupéré sui
 	'petit' => 'Petit',
 
 	// R
-	'renseigner_adresse_public_panier' => 'Renseigner ici l\'adresse de la page public "panier" (page où vous aurez le formulaire pour modifier un panier).',
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
 	'reste_panier_recuperer' => 'Il vous reste encore 1 panier à recupérer',
 	'reste_paniers_distribuer' => 'Il nous reste encore @nb@ paniers à distribuer',

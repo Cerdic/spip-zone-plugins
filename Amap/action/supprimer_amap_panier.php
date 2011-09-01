@@ -7,7 +7,7 @@ function action_supprimer_amap_panier_dist() {
 	$arg = $securiser_action();
 
 	if (!preg_match(",^(\d+)$,", $arg, $r)) {
-		 spip_log("action_supprimer_amap_panier_dist $arg pas compris");
+		spip_log("action_supprimer_amap_panier_dist $arg pas compris");
 	} else {
 		action_supprimer_amap_panier_post($r[1]);
 	}

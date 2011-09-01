@@ -15,7 +15,7 @@
 				<BOUCLE_evenement(EVENEMENTS){tous}>
 					#SET{details, #ARRAY}
 					<BOUCLE_evenement_details(EVENEMENTS){par id_evenement}{age<0}>
-						[(#SET_PUSH{details, [(#ARRAY{ date_debut, #DATE_DEBUT, })]})]
+						[(#SET_PUSH{details, #ARRAY{ date_debut, #DATE_DEBUT, }})]
 					</BOUCLE_evenement_details>
 					#SET{evenement, #ARRAY{details, #GET{details}}}
 				</BOUCLE_evenement>

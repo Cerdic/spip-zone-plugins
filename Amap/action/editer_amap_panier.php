@@ -50,6 +50,7 @@ function insert_amap_panier() {
 // Enregistrer certaines modifications d'un amap_panier
 function revisions_amap_paniers($id_amap_panier, $c=false) {
 
+	spip_log("Le panier $id_amap_panier n'a pas été modifier, $id_auteur pour $id_auteur", "amap_instalation");
 	// recuperer les champs dans POST s'ils ne sont pas transmis
 	if ($c === false) {
 		$c = array();

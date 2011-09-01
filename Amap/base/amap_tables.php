@@ -123,8 +123,9 @@ function amap_declarer_tables_principales($tables_principales){
     return $tables_principales;
 }
 
-//creation de champs extra sur la table auteurs
+//creation de champs extra
 function amap_declarer_champs_extras($champs = array()){
+	// table auteurs un cham adhésion
 	$champs[] = new ChampExtra(array(
 		'table' => 'auteurs', // sur quelle table ?
 		'champ' => 'adhesion', // nom sql
@@ -135,6 +136,7 @@ function amap_declarer_champs_extras($champs = array()){
 		'type' => 'input', // type de saisie
 		'sql' => "bigint NULL", // declaration sql
 	));
+	// table auteur un champ type_panier
 	$champs[] = new ChampExtra(array(
 		'table' => 'auteurs', // sur quelle table ?
 		'champ' => 'type_panier', // nom sql
