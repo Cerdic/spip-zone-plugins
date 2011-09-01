@@ -125,7 +125,10 @@ function glossaire_parse($titre) {
 		$titres = join(_GLOSSAIRE_TITRE_SEP, $titres);
 	elseif(count($regs)) {
 		preg_match('/^,(.*),\w*$/', $regs[0], $rr);
-		$titres = preg_replace('@[\\\\]([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|:,-])@', '$1', $rr[1]);
+		if (strpos($titres = $rr[1], '\\')!==false) {
+			$titres = preg_replace('@\\\\([\.\\\+\*\?\[\^\]\$\(\)\{\}\=\!\<\>\|:,-])@', '$1', $titres);
+			$titres = preg_replace(',\\\\[bswd],i', '', $titres);
+		}
 	} else
 		$titres = '??';
 	if(count($mots)) {
