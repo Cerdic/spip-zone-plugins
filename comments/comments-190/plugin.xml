@@ -8,6 +8,6 @@
 <lien>http://www.spip-contrib.net/?article3362</lien>
 <prefix>comments</prefix>
 <fonctions>comments_fonctions.php</fonctions>
-<necessite id='SPIP' version='[1.9.2;]' />
+<necessite id='SPIP' version='[1.9.2;2.0.0)' />
 <categorie>communication</categorie>
 </plugin>
