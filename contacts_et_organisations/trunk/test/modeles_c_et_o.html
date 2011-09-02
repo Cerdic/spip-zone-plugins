@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<INCLURE{fond=inclure/head}>
+<INCLURE{fond=head/#ENV{type},env}>
+</head>
+<body class="page_#ENV{type,page}[ #ENV{type,page}_(#ENV{composition,''})]">
+<div id="page">
+	<div id="entete">
+		<INCLURE{fond=inclure/entete,env}>
+	</div>
+	<div id="nav">
+		<INCLURE{fond=inclure/barre-nav,env}>
+	</div>
+	
+	<div id="conteneur">	
+		<div id="contenu">
+<BOUCLE_a(AUTEURS){par hasard}{0,250}>
+<div style="width:15%; display:inline-block; min-height:350px;">
+[(#MODELE{auteur, id_auteur})]
+</div>
+</BOUCLE_a>			
+		</div>
+
+		<div id="navigation">
+			<INCLURE{fond=navigation/#ENV{type},env}>
+			<INCLURE{fond=extra/#ENV{type},env}>
+		</div>
+	</div>
+
+	<div id="pied">
+		<INCLURE{fond=inclure/pied,env}>
+	</div>
+</div>
+#SPIP_CRON
+</body>
+</html>

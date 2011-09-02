@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Annuaire</title>
+</head>
+<body>
+<BOUCLE_Contact(CONTACTS){id_contact}>
+<p><a href="#URL_SITE_SPIP">Accueil</a> | <a href="#URL_PAGE{test/annuaire}">Annuaire</a><BOUCLE_OrganisationContact(organisations_liens){id_contact}><BOUCLE_ArboOrganisations(ORGANISATIONS){id_organisation}{tous}><BOUCLE_HierarchieArboOrganisations(BOUCLE_ArboOrganisations) />[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ] | <a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></BOUCLE_ArboOrganisations> | <a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></BOUCLE_OrganisationContact> | #NOM
+<h1>#NOM</h1>
+<BOUCLE_AdressesContact(ADRESSES){id_contact}>
+<p>[(#TITRE)<br />]
+[(#VOIE)<br />]
+[(#COMPLEMENT)<br />]
+#CODE_POSTAL #VILLE</p>
+</BOUCLE_AdressesContact>
+</BOUCLE_Contact>
+
+<BOUCLE_Organisation(ORGANISATIONS){id_organisation}>
+<p><a href="#URL_SITE_SPIP">Accueil</a> | <a href="#URL_PAGE{test/annuaire}">Annuaire</a><BOUCLE_ArboContacts(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}><BOUCLE_HierarchieArboContacts(BOUCLE_ArboContacts) />[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ] | <a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a></BOUCLE_ArboContacts> | #NOM
+<h1>#NOM</h1>
+<BOUCLE_AdressesOrganisation(ADRESSES){id_organisation}>
+<p>[(#TITRE)<br />]
+[(#VOIE)<br />]
+[(#COMPLEMENT)<br />]
+#CODE_POSTAL #VILLE</p>
+</BOUCLE_AdressesOrganisation>
+<B_ListeContacts>
+<ul>
+<BOUCLE_ListeContacts(CONTACTS){id_organisation}{par nom}>
+<li><a href="#URL_PAGE{test/annuaire,id_contact=#ID_CONTACT}">[<span class="#EDIT{prenom}">(#PRENOM)</span> ]#NOM</a></li>
+</BOUCLE_ListeContacts>
+</B_ListeContacts>
+</ul>
+</BOUCLE_Organisation>
+
+<B_ListeOrganisationsRacine>
+<ul>
+<BOUCLE_ListeOrganisationsRacine(ORGANISATIONS){racine}{par nom}>
+	<li><a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
+		<B_ListeOrganisationFilles>
+		<ul>
+		<BOUCLE_ListeOrganisationFilles(ORGANISATIONS){id_parent=#ID_ORGANISATION}{par nom}>
+		<li><a href="#URL_PAGE{test/annuaire,id_organisation=#ID_ORGANISATION}">#NOM</a>
+			<BOUCLE_OrganisationsRecursion(BOUCLE_ListeOrganisationFilles)/>
+		</li>
+		</BOUCLE_ListeOrganisationFilles>
+		</ul>
+		</B_ListeOrganisationFilles>
+	</li>
+</BOUCLE_ListeOrganisationsRacine>
+</ul>
+</B_ListeOrganisationsRacine>
+<p>Auncune organisation</p>
+<//B_ListeOrganisationsRacine>
+
+<//B_Organisation>
+
+<//B_Contact>
+</body>
+</html>

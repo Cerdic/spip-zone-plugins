@@ -1,0 +1,10 @@
+<B_mail>
+<h3 class="h3"><:coordonnees:label_email:></h3>
+<ul class="liste-item">
+<BOUCLE_mail(EMAILS emails_liens auteurs){id_auteur=#ENV{id_auteur}}>
+<li class="item #EDIT{titre}">#EMAIL</li>
+</BOUCLE_mail>
+</ul>
+</B_mail>
+<p class="erreur">Pas de mail pour cet auteur.</p>
+<//B_mail>
