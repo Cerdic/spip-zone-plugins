@@ -113,9 +113,10 @@ function contacts_boite_infos($flux){
 **/
 function contacts_affiche_gauche($flux){
 
-	if ($flux['args']['exec'] == 'auteur_infos'){
+	if ($flux['args']['exec'] == 'auteur_infos'
+		AND $id = $flux["args"]["id_auteur"]
+	){
 
-		$id = $flux["args"]["id_auteur"];
 		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
 		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
 
