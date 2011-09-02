@@ -1,0 +1,19 @@
+<paquet
+	prefix="chess"
+	categorie="divers"
+	version="0.9.3"
+	etat="stable"
+	compatibilite="[3.0.0-alpha2;["
+	logo="chess32.png"
+	documentation="http://www.spip-contrib.net/Plugin-Chess"
+>
+	<nom>Chess</nom>
+  <auteur>S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville.
+  
+  Original script Alf Magne Kalleland owner of DHTMLGoodies</auteur>
+	<pipeline nom="header_prive" inclure="chess_fonctions.php"  />
+	<pipeline nom="insert_head" inclure="chess_fonctions.php"  />
+	
+	<utilise nom="cfg" compatibilite="[1.0.6;]" />
+	
+</paquet>

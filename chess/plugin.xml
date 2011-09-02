@@ -19,7 +19,7 @@
   original script Alf Magne Kalleland owner of DHTMLGoodies
 </auteur>
 <version>
-	0.9.2
+	0.9.3
 </version>
 <etat>
 	stable
@@ -52,5 +52,5 @@
     </pipeline>
 <categorie>divers</categorie>
 	<necessite id="SPIP" version="[1.9.0;]" />
-	<necessite id="cfg" version="[1.0.6;]" />
+	<utilise id="cfg" version="[1.0.6;]" />
 </plugin>
