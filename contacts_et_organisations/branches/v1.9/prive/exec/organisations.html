@@ -1,0 +1,29 @@
+
+
+<!--#navigation-->
+<div class="logo_navigation">
+<img src="#CHEMIN{images/organisation-128.png}" width="128" height="128" alt="Logo plugin" />
+</div>
+
+<div class="cadre cadre-infos">
+[(#AUTORISER{creer, organisation}|oui)
+	[(#URL_ECRIRE{organisation_edit}
+		|parametre_url{new,oui}
+		|parametre_url{redirect,[(#ENV{redirect,#SELF})]}
+		|icone{<:contacts:organisation_creer:>,#CHEMIN{images/organisation-24.png},center,creer.gif})]
+]
+</div>
+<!--/#navigation-->
+ 
+
+
+<!--#extra--><!--/#extra-->
+
+
+[(#VAL{contacts}|barre_onglets{organisations})]
+
+<h1><:contacts:titre_page_organisations:></h1>
+
+<div class='ajax'>
+[(#FORMULAIRE_RECHERCHE_ORGANISATIONS)]
+</div>

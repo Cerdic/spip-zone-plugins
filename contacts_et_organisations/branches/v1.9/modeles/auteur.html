@@ -1,0 +1,78 @@
+[(#REM)
+	Modèle pour l'affichage d'un auteur.
+    Si auteur simple => nom en légende, puis vide
+    Si contact => prénom, nom en légende, puis organisation, fonction, coordonnées
+    Si organisation => nom en légende, liste de contacts, TVA, coordonnées
+]
+
+<fieldset class="co_vcard">
+
+    <B_auteur>
+	<BOUCLE_auteur(AUTEURS){id_auteur}{tous}>
+    
+     	[(#REM) L'auteur est un contact ]
+		<BOUCLE_c(CONTACTS){id_auteur}>
+		
+			<legend><span class="c_ou_o c">[C] </span>[<span class="#EDIT{prenom}">(#PRENOM)</span>&nbsp;][<span class="#EDIT{nom}">(#NOM)]<span class="num_auteur">#ID_AUTEUR</span></legend>
+			
+			<dl>
+
+				<B_oc>
+				<h3 class="h3"><:contacts:label_nom_organisation:></h3>
+                <ul>
+				<BOUCLE_oc(ORGANISATIONS){id_contact}>
+				<li class="item #EDIT{nom}">#NOM</li>
+				</BOUCLE_oc>
+				</B_oc>
+                <li class="erreur">pas d'organisation trouvée</li>
+				<//B_oc>
+				</ul>
+			
+				<h3 class="h3"><:contacts:label_fonction:></h3>
+                <ul class="liste-item">
+				<li class="item #EDIT{fonction}">[(#FONCTION|sinon{'...'})]</li>
+                </ul>
+				
+				[(#PLUGIN{coordonnees}|oui)
+                    [(#INCLURE{fond=inclure/adresses, id_auteur})]
+                    [(#INCLURE{fond=inclure/telephones, id_auteur})]
+                    [(#INCLURE{fond=inclure/mails, id_auteur})]
+                ]
+				
+			
+			</dl>
+		</BOUCLE_c>
+        </B_c>
+        	
+            [(#REM) L'auteur n'est pas un contact ]
+            <BOUCLE_o(ORGANISATIONS){id_auteur}>
+                
+                <legend><span class="c_ou_o o">[O] </span>[<span class="#EDIT{nom}">(#NOM)]<span class="num_auteur">#ID_AUTEUR</span></legend>
+                <dl>
+                
+                    <h3 class="h3"><:contacts:label_activite:></h3>
+                    <ul class="liste-item">
+                    <li class="item #EDIT{fonction}">[(#ACTIVITE|sinon{'...'})]</li>
+                    </ul>
+                    
+                    [(#PLUGIN{coordonnees}|oui)
+                        [(#INCLURE{fond=inc/adresses, id_auteur})]
+                        [(#INCLURE{fond=inc/telephones, id_auteur})]
+                        [(#INCLURE{fond=inc/mails, id_auteur})]
+                    ]
+                
+                </dl>
+            
+            </BOUCLE_o>
+            </B_o>
+            <p class="erreur">Auteur #ID_AUTEUR ni contact ni organisation</p>
+            <//B_o>            
+        
+        <//B_c>
+       
+	</BOUCLE_auteur>
+    </B_auteur>
+    <p class="erreur">Aucun auteur #ENV{id_auteur}</p>
+    <//B_auteur>
+
+</fieldset>

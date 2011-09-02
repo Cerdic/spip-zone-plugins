@@ -1,0 +1,47 @@
+[(#REM) Tableau complet des organisations, affiché sur la page ?exec=organisations ]
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	id_auteur,1
+}})
+]<B_liste_orga>
+#ANCRE_PAGINATION
+<div class="liste-elements organisations">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:contacts:info_toutes_organisations:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class="logo"></th>
+			<th class='nom'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+            <th class="nb_contacts"><:contacts:info_nb_contacts:></th>
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_orga(ORGANISATIONS)
+		{id_contact?}{id_auteur?}{id_parent ?= #ENV{id_parent}}
+		{recherche?}{auteurs.statut == #ENV{statut,.*}}
+		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<BOUCLE_lien_organisation(organisations_liens){id_organisation}>
+				[(#SET{url,[(#ID_OBJET|generer_url_entite{#OBJET})]})]
+			</BOUCLE_lien_organisation>
+				[(#SET{url,[(#ID_ORGANISATION|generer_url_entite{organisation})]})]
+			<//BOUCLE_lien_organisation>
+			<td class="logo"><a href="#GET{url}">#INCLURE{fond=logo/organisation, id_organisation}</a></td>
+			<td class='nom'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a></td>
+            <td class='nb_contacts'><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">[(#MODELE{nb_contacts}{id_organisation})]</a></td>
+			<td class='action'>[(#AUTORISER{modifier, contact, #ID_CONTACT}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:contacts:supprimer_organisation:>})],
+					[(#URL_ACTION_AUTEUR{supprimer_contact,[organisation/(#ID_ORGANISATION)],[(#ENV{redirect,#SELF})]})],
+					ajax,<:contacts:confirmer_supprimer_organisation:>})]
+			]</td>
+		</tr>
+	</BOUCLE_liste_orga>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_orga>[
+<div class="liste-elements organisations"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_orga>

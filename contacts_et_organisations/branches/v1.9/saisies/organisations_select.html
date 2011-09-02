@@ -1,0 +1,19 @@
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"] >
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+[(#SET{disable," disabled='disabled' "})]
+<BOUCLE_organisations(ORGANISATIONS){par nom}{racine}>
+	[(#SET{d,[(#ID_ORGANISATION|=={#ENV{id_source}}|?{[(#GET{disable})],''})]})]
+	<option value="#ID_ORGANISATION"[(#ID_ORGANISATION|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]#GET{d}>#NOM</option>
+	#SET{p,0}
+	<BOUCLE_sous_organisations(ORGANISATIONS){par nom}{id_parent=#ID_ORGANISATION}>
+		#SET{p,#GET{p}|plus{1}}
+		[(#SET{d, [(#GET{d}|ou{[(#ID_ORGANISATION|=={#ENV{id_source}})]}|?{[(#GET{disable})],''})]})]
+		[(#REM) #ID_PARENT pour recursivite ]
+		<option value="#ID_ORGANISATION"[(#ID_ORGANISATION|=={#ENV{valeur,#ENV{defaut}}}|oui) selected="selected"]#GET{d}>[(#VAL{ > }|str_repeat{#GET{p}})]#NOM</option>
+		<BOUCLE_repete(BOUCLE_sous_organisations) />
+		#SET{p,#GET{p}|moins{1}}
+		[(#ID_ORGANISATION|=={#ENV{id_source}}|oui) [(#SET{d,''})] ]
+	</BOUCLE_sous_organisations>
+	#SET{d,''} 
+</BOUCLE_organisations>
+</select>

@@ -1,0 +1,30 @@
+[(#REM)
+	Page de test du plugin C&O
+	Test de la table des contacts; liaison avec auteurs et organisations;
+]
+
+<B_c>
+#PAGINATION
+
+<table class="spip" summary="<:contacts:liste_contacts:>">
+	<thead>
+	<tr>
+		<th>id</th>
+		<th>Auteur</th>
+		<th>Nom</th>
+		<th>Prénom</th>
+		<th>Descriptif</th>
+	</tr>
+	</thead>
+	<tbody>
+<BOUCLE_c(CONTACTS){par nom}{pagination}>
+	<tr[ class="(#COMPTEUR_BOUCLE|alterner{'row_odd','row_even'})"]>
+		<td>#ID_CONTACT</td>
+		<td>#ID_AUTEUR</td>
+		<td>#NOM</td>
+		<td>#PRENOM</td>
+		<td>#DESCRIPTIF</td>
+	</tr>
+</BOUCLE_c>
+	</tbody>
+</table>
