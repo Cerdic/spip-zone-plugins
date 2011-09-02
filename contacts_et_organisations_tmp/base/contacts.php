@@ -17,6 +17,7 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_auteurs'][]= 'contacts_liens';
 	$interface['tables_jointures']['spip_auteurs'][]= 'organisations_liens';
 	$interface['tables_jointures']['spip_organisations'][] = 'organisations_liens';
+	#$interface['tables_jointures']['spip_organisations_liens'][] = 'organisations';
 
 
 	/**
