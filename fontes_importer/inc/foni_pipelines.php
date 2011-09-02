@@ -106,10 +106,10 @@ function foni_insert_head ($flux) {
 		if($f = find_in_path('javascript/jquery.fontavailable-1.1.min.js'))
 		{
 			$result .= '
-<script type="text/javascript"><!--
+<script type="text/javascript">/* <![CDATA[ */
 ' . file_get_contents($f)
-. '// --></script>
-<script type="text/javascript"><!--
+. '/* ]]> */</script>
+<script type="text/javascript">/* <![CDATA[ */
 	if(window.jQuery)jQuery(document).ready(function(){
 		if ($.browser.mozilla) {
 			var loaded, reviens, maxt = 5;
@@ -136,7 +136,7 @@ function foni_insert_head ($flux) {
 			/* console.log("Fonte ' . $family . ' loaded: " + $.fontAvailable("' . $family . '")); /* */
 	    });
 	});
-// --></script>
+/* ]]> */</script>
 '			;
 			
 		}
