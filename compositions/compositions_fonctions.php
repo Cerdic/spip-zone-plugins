@@ -97,6 +97,7 @@ function compositions_lister_disponibles($type, $informer=true){
  */
 function compositions_lister_utilisations($type,$composition){
 	$table_sql = table_objet_sql($type);
+	if (!in_array($table_sql, sql_alltable())) return;
 	$_id_table_objet = id_table_objet($type);
 	return sql_allfetsel("$_id_table_objet as id,titre", $table_sql, "composition=".sql_quote($composition));
 }
