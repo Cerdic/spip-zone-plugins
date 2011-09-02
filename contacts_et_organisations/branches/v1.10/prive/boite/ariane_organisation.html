@@ -8,14 +8,15 @@
 			<em> &gt; </em>
 			<a href="[(#URL_ECRIRE{organisations})]"><:contacts:organisations:></a>
 		</span>
-		<BOUCLE_orga_chemin(ORGANISATIONS){id_organisation=#ENV{id_parent}}{tous}>
+		<BOUCLE_orga(ORGANISATIONS){id_organisation}{tous}>
+		<BOUCLE_orga_chemin(ORGANISATIONS){id_organisation=#ID_PARENT}{tous}>
 		<BOUCLE_orga_chemin_recursif(BOUCLE_orga_chemin) />
-		[(#REM) #ID_PARENT doit être present sinon la recursivite se fait mal... etonnant ]
 		<span class="bloc">
 			<em> &gt; </em>
-			<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>  &gt;
+			<a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">#NOM</a>
 		</span>
 		</BOUCLE_orga_chemin>
+		</BOUCLE_orga>
 		<span class="bloc on">
 			<em> &gt; </em>#ENV{nom}
 		</span>
