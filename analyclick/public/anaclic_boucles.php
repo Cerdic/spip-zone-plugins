@@ -22,6 +22,10 @@ function boucle_DOC_COMPTEURS_dist($id_boucle, &$boucles) {
 	if (!isset($boucle->modificateur['plat'])) 
 	{	$boucle->select[] = "SUM(telechargement) as telechargement";
 		$boucle->group[] = "$id_table.id_document";
+		// Modifie le critere par telechargement pour pointer sur la somme
+		$c = count($boucle->order);
+		for ($i=0; $i<$c; $i++)
+			$boucle->order[$i] = str_replace("$id_table.telechargement",'telechargement',$boucle->order[$i]);
 	}
 	
 	return calculer_boucle($id_boucle, $boucles); 
