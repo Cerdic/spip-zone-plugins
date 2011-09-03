@@ -46,10 +46,10 @@ h1,.h1 {font-size: 2em; line-height:#GET{line-height};margin-bottom: [(#GET{marg
 #SET{coeff,#GET{line-height}|plus{2}|div{2}|div{#GET{line-height}}}
 #SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
 h2,.h2 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv}|mult{2})em];[ margin-bottom: (#GET{coeffinv})em;]}
-h3,.h3 {[ font-size: (#GET{line-height}|mult{1})em]; line-height: 1; margin-bottom: 1em; font-weight: bold;}
+h3,.h3 {[ font-size: (#GET{line-height}|mult{1})em]; line-height: 1; margin-bottom: 1em; }
 #SET{coeff,#GET{line-height}|plus{1}|div{2}|div{#GET{line-height}}}
 #SET{coeffinv,#VAL{1}|div{#GET{coeff}}}
-h4,.h4 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;]font-weight: bold; }
+h4,.h4 {[ font-size: (#GET{line-height}|mult{#GET{coeff}})em];[ line-height: (#GET{coeffinv})em];[ margin-bottom: (#GET{coeffinv})em;] }
 h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: #GET{margin-bottom}; }
 h6,.h6 { font-size: 1em; font-weight: bold; }
 
