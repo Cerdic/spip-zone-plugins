@@ -17,6 +17,11 @@ define('FB_MODELS_CFGMETA', 'config_fb_modeles');
  */
 define('FB_MODELS_DOC', 'fb_modeles');
 
+/**
+ * URL de la page de documentation sur spip-contrib (documentation officielle)
+ */
+define('FB_MODELS_DOC_CONTRIB', 'http://www.spip-contrib.net/?article3872');
+
 // -------------------------
 // CONFIGURATION
 // -------------------------
