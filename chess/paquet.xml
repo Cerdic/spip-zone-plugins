@@ -8,9 +8,8 @@
 	documentation="http://www.spip-contrib.net/Plugin-Chess"
 >
 	<nom>Chess</nom>
-  <auteur>S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville.
-  
-  Original script Alf Magne Kalleland owner of DHTMLGoodies</auteur>
+<auteur>S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville. </auteur>
+  <credit lien="http://www.dhtmlgoodies.com">Script original DHTMLGoodies.com</credit>
 	<pipeline nom="header_prive" inclure="chess_fonctions.php"  />
 	<pipeline nom="insert_head" inclure="chess_fonctions.php"  />
 	
