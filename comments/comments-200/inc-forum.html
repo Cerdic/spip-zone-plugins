@@ -1,1 +1,2 @@
-<INCLURE{fond=comments-#CONFIG{comments/comments_fil,list}}{env}>
+[(#SET{type, [(#CONFIG{comments/comments_fil}|sinon{#CONFIG{comments_fil,list}})]})]
+<INCLURE{fond=comments-#GET{type}}{env}>
