@@ -6,10 +6,12 @@
  *    Date : aout 2004
  *    Auteur :  Mortimer Porte mortimer.pa@free.fr
  *    Modifications: Bertrand Marne bmarne@gmail.com
- *    Modifications: StÈphane Deschamps spip@nota-bene.org
+ *    Modifications: St√©phane Deschamps spip@nota-bene.org
+ *    Modifications: Christian Paulus (CP) paladin at quesaco.org
+ *      pour les ancres nomm√©es.
  *   +-------------------------------------+
  *    Fonctions de ce filtre :
- *     affiche une table des matiËres ou gÈnËre automatiquement la numÈrotation des titres.
+ *     affiche une table des mati√®res ou g√©n√®re automatiquement la num√©rotation des titres.
  *   +-------------------------------------+ 
  *
  * Pour toute suggestion, remarque, proposition d'ajout
@@ -17,54 +19,61 @@
  * http://www.spip-contrib.net/article.php3?id_article=627
  *
  * Petites modifications de Bertrand Marne (mise en plugin)
- * - prise en compte des diËses:
- * les * donnent des titres non numÈrotÈs, les # des titres numÈrotÈs
- * Mais attention ils sont tous dÈcomptÈs pareil pour l'arborescence de la table
- * des matiËres et la numÈrotation, qu'ils soient numÈrotÈs (#) ou non (*).
+ * - prise en compte des di√®ses:
+ * les * donnent des titres non num√©rot√©s, les # des titres num√©rot√©s
+ * Mais attention ils sont tous d√©compt√©s pareil pour l'arborescence de la table
+ * des mati√®res et la num√©rotation, qu'ils soient num√©rot√©s (#) ou non (*).
  *
- * - prise ne compte des titres comme <hx class="spip"> o˘ x>3
+ * - prise ne compte des titres comme <hx class="spip"> o√π x>3
  *
- * - encore une modif, trËs moche: pour permettre de n'afficher que la table,
- * quand on utilise ceci comme un filtre avec unn second paramËtre:
+ * - encore une modif, tr√®s moche: pour permettre de n'afficher que la table,
+ * quand on utilise ceci comme un filtre avec unn second param√®tre:
  * [(#TEXTE|table_des_matieres{table_seule})]
  * - ajout d'une fonction qui converti les intertitres des enluminures en
  * intertitres compatibles avec cette contrib'
  * 
- * Petites modifications de StÈphane Deschamps
- * - prise en compte des niveaux de titres si ils sont dÈclarÈs dans mes_fonctions ou mes_options par $GLOBALS['debut_intertitre']
+ * Petites modifications de St√©phane Deschamps
+ * - prise en compte des niveaux de titres si ils sont d√©clar√©s dans mes_fonctions ou mes_options par $GLOBALS['debut_intertitre']
 */
 function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article="") {
-	global $debut_intertitre, $fin_intertitre;
+	global $debut_intertitre, $fin_intertitre; 
+	
+	/**
+	 * La fonction est appel√©e 4 fois. Limiter la consommation !
+	 */
+	static $pass;
+	if ($pass === null) { $pass = 0; }
+	$pass++;
 
-	// dÈfinition de la balise pour les titres des sections %num% sera remplacÈ 
+	// d√©finition de la balise pour les titres des sections %num% sera remplac√© 
 	// par la profondeur de la section
-	// les raccourcis soient remplacÈs par des headlines (<hx>)
+	// les raccourcis soient remplac√©s par des headlines (<hx>)
 	$css_debut_intertitre = "\n<h%num% class=\"spip\">";
 	$css_fin_intertitre = "</h%num%>\n";
 	
-	// on trouve combien ajouter au level pour Ítre dans le bon niveau de titres quand on gÈnËre la balise <hx>
+	// on trouve combien ajouter au level pour √™tre dans le bon niveau de titres quand on g√©n√®re la balise <hx>
 	// sinon par defaut on ajoute 2 pour garder les niveaux du script original
 	if($GLOBALS['debut_intertitre']) {
 		$find = @preg_match("/(\<h)([0-9])/",$GLOBALS['debut_intertitre'],$matches);
 		if($matches) {
-			$level_base = $matches[2] -1; // on dÈduit 1 pour Ítre au bon niveau ensuite : ce sera 1 + nombre d'astÈrisques trouvÈes
+			$level_base = $matches[2] -1; // on d√©duit 1 pour √™tre au bon niveau ensuite : ce sera 1 + nombre d'ast√©risques trouv√©es
 		}
 	}
 	if(!isset($level_base)) {
 		$level_base = 2;
 	}
 	
-	// on cherche les noms de section commenÁant par des * et #
-	$my_debut_intertitre=trim($debut_intertitre); //astuce des trim trouvÈe l‡ : http://www.spip-contrib.net/Generation-automatique-de#forum383092
+	// on cherche les noms de section commen√ßant par des * et #
+	$my_debut_intertitre=trim($debut_intertitre); //astuce des trim trouv√©e l√† : http://www.spip-contrib.net/Generation-automatique-de#forum383092
 	$my_fin_intertitre=trim($fin_intertitre);
 
-	// pour que les diffÈrents niveaux d'intertitres soient gÈrÈs quand on repasse sur le texte dans le cadre d'un filtre avec tableseule
+	// pour que les diff√©rents niveaux d'intertitres soient g√©r√©s quand on repasse sur le texte dans le cadre d'un filtre avec tableseule
 	if ($tableseule) {
 		$my_debut_intertitre=trim("\n<h([3-9]) class=\"spip\">");
 		$my_fin_intertitre=trim("</h[3-9]>\n");
 	}
 	
-	// on cherche les noms de section commenÁant par des * et #
+	// on cherche les noms de section commen√ßant par des * et #
 	$count = preg_match_all(
 					"(($my_debut_intertitre([\\*#]*)(.*?)(<(.*?)>)?$my_fin_intertitre))",
 					$texte,
@@ -76,25 +85,29 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	//initialisation du compteur
 	$cnt[0] = 0;
 	
-	// initialisation du code de la table des matiËres
+	// initialisation du code de la table des mati√®res
 	// s'articule autour d'un <a id=""> et d'un <ul>
 	$table = "\n<a id=\"table_des_matieres\" name=\"table_des_matieres\"></a><div id=\"tablematiere\">\n<ul>";
 	$lastlevel = 1;
 	$cite[''] = '';
 	
-	// dÈcalle le matching quand on repasse sur le texte avec tableseule
+	// d√©calle le matching quand on repasse sur le texte avec tableseule
 	if ($tableseule) $ajout=1;
 	
-	// pour chaque titre trouvÈ
+	// pour chaque titre trouv√©
 	for ($j=0; $j< $count; $j++) {
+		
+		$ancre = composer_ancre ($matches[0][$j], $pass, $j);
+		
 		$level = $matches[2+$ajout][$j];
 		
-		// quand tableseule, le niveau est "recrÈÈ" ‡ partir du nombre du headline (ex <h4> donne niveau 2)
+		// quand tableseule, le niveau est "recr√©√©" √† partir du nombre du headline (ex <h4> donne niveau 2)
 		if ($tableseule) {
 			$level=str_repeat("*",$matches[2][$j]-2);
 		}
 		
-		// pour tenir compte des {{{ }}} sans * ou # et donc qu'un name leur soit ajoutÈ, et qu'ils soient quand mÍme dans la table des matiËres
+		// pour tenir compte des {{{ }}} sans * ou # et donc qu'un name
+		// leur soit ajout√©, et qu'ils soient quand m√™me dans la table des mati√®res
 		if(strlen($level) == 0) $level="*";
 		$titre = $matches[3+$ajout][$j];
 		
@@ -102,9 +115,8 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		if ($tableseule) {
 			$titre=preg_replace("/(<a id=')(.*?)('><\/a>)/","",$titre);
 		}
-		$ref = $matches[5+$ajout][$j];
 		
-		// si tableseule alors le $ref correspond au contenu du <a id=''></a>... Je sais pas si Áa marche: pas testÈ ! :o)
+		// si tableseule alors le $ref correspond au contenu du <a id=''></a>... Je sais pas si √ßa marche: pas test√© ! :o)
 		if ($tableseule) {
 			preg_match(
 				"/(<a id=')(.*?)(' id=')(.*?)('><\/a>)/",
@@ -117,31 +129,31 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		if(strlen($level) == 1) {
 		
 		//on est au niveau de base
-		//on rÈinitialise les compteurs
+		//on r√©initialise les compteurs
 		for ($i=1; $i < count($cnt); $i++) {
 			$cnt[$i] = 0;
 		}
 		
-		//on gÈnËre le titre et le numÈros
+		//on g√©n√®re le titre et le num√©ros
 		$numeros = ++$cnt[0];
 		
 		// on teste si le level contient des # pour savoir si l'on affiche les
-		//numÈros avec le titre ou non (#->numÈros affichÈs)
+		//num√©ros avec le titre ou non (#->num√©ros affich√©s)
 		if (preg_match("/#+/",$level)) $titre = $numeros.'- '.$titre;
 		
 		} else {
 		
-			// on est ‡ un niveau plus profond
-			// on construit le numÈros
+			// on est √† un niveau plus profond
+			// on construit le num√©ro
 			$numeros = $cnt[0].'.';
 			for ($i=1; $i < strlen($level)-1; $i++) {
 				$numeros .= $cnt[$i].".";
 			}
 			$numeros = $numeros.(++$cnt[$i]);
 			
-			//on gÈnËre le titre
+			//on g√©n√®re le titre
 			//on teste si le level contient des # pour savoir si l'on affiche les
-			//numÈros avec le titre ou non (#->numÈros affichÈs)
+			//num√©ros avec le titre ou non (#->num√©ros affich√©s)
 			if(preg_match("/#+/",$level)) $titre = $numeros.'- '.$titre;
 		}
 		
@@ -164,34 +176,52 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		}
 		
 		if($lastlevel >= strlen($level)) {
-			//on doit fermer l'item prÈcÈdent
+			//on doit fermer l'item pr√©c√©dent
 			if($cnt[0] > 1 || strlen($level) > 1) {
 				$table .= "</li>\n";
 			}
 		}
 		
-		//on se rappelle du raccourcis
-		$cite[$ref] = $numeros;
-		$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave;  	&laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
+		//on se rappelle du raccourci
+		$cite[$ref] = $numeros; 	
+		//$table .= '<li><a href="'.$url_article.'#a'.$numeros.'" '
+		//	. 'title="Aller directement &agrave; &laquo;&nbsp;'.attribut_html($titre).'&nbsp;&raquo;">'
+		//	. $titre . '</a>' . PHP_EOL;
+		$table .= '<li><a href="'.$url_article.'#'.$ancre.'" '
+			. 'title="Aller directement &agrave; &laquo;&nbsp;'.attribut_html($titre).'&nbsp;&raquo;">'
+			. $titre . '</a>' . PHP_EOL;
 		
-		//on mÈmorise le niveau de ce titre
+
+		//on m√©morise le niveau de ce titre
 		$lastlevel = strlen($level);
 		
-		//on gÈnËre la balise avec le bon style pour le niveau
-		//et on ajoute $level_base ‡ $lastlevel pour avoir des <hx> qui commencent ‡ <h{$level_base}>
-		$mdebut_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_debut_intertitre);
-		$mfin_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_fin_intertitre);
+		//on g√©n√®re la balise avec le bon style pour le niveau
+		//et on ajoute $level_base √† $lastlevel pour avoir des <hx> qui commencent √† <h{$level_base}>
+		$mdebut_intertitre = trim(str_replace('%num%',$lastlevel+$level_base,$css_debut_intertitre));
+		$mfin_intertitre = trim(str_replace('%num%',$lastlevel+$level_base,$css_fin_intertitre));
 		
-		//on remplace le titre dans le texte
-		$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
+		/**
+		 * Remplacer la premi√®re occurence. 
+		 * Permet d'avoir plusieurs titres au contenu identique.
+		 */
+		$search = str_replace ("'", '\'', $matches[0][$j]);
+		$replace = "$mdebut_intertitre<a id='$ancre' name='$ancre'></a>$titre$mfin_intertitre";
+		if (($pos = strpos($texte, $search)) !== false)
+		{
+			$len_search = strlen ($search);
+			$s = substr ($texte, 0, $pos);
+			$s .= $replace;
+			$s .= substr ($texte, $pos + $len_search);
+			$texte = $s;
+		}
 	}
 
-   //on fini la table
+   //on finit la table
 	for ($i=0; $i < $lastlevel; $i++) {
 		$table .= "</li>\n</ul>";		
 	}
 
-	//on remplace les raccourcis par les numÈros des sections.
+	//on remplace les raccourcis par les num√©ros des sections.
 	foreach ($cite as $ref => $num) {
 		$texte = str_replace("<$ref>","<a href=\"$url_article#$num\">$num</a>",$texte);	
 	}
@@ -199,15 +229,118 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	// ajout d'un div plus propre !
 	$table .="\n</div>";
 
-	//on place la table des matiËres dans le texte
+	//on place la table des mati√®res dans le texte
 	//si y'a rien, ben on envoie rien !
 	if ($cnt[0]==0) $table='';
 	
-	// Comme la TDM est dÈsormais affichÈe de maniËre externe aux articles, si un auteur met #TABLEMATIERES dans son article, cel‡ crÈe un lien vers la TDM externe, d'o˘ un remplacement de:
+	// Comme la TDM est d√©sormais affich√©e de mani√®re externe aux articles,
+	// si un auteur met #TABLEMATIERES dans son article,
+	// cela cr√©e un lien vers la TDM externe, d'o√π un remplacement de:
 	//$texte = str_replace('#TABLEMATIERES',$table,$texte); par:
 	$texte = str_replace('#TABLEMATIERES',"<a href=\"#table_des_matieres\" title=\"Aller &agrave; la table des mati&egrave;res de l'article\">Table des mati&egrave;res</a>",$texte);
 	
+	//if ($pass == 3) { if ($tableseule) {die($table);} else {die($texte);} }
+	//if ($pass == 1) { die($texte); }
+
+
 	// si tableseule on ne renvoit que la table, sinon, on renvoie tout
 	if ($tableseule) {return $table;} else {return $texte;}
 }
-?>
+
+
+if (!defined('_ANCHOR_LEN_MAX')) define('_ANCHOR_LEN_MAX', 35);
+
+/**
+ * Calcul de l'ancre.
+ * R√©alis√© √† la premi√®re passe (ce script est appel√© 4 fois)
+ * Aux passages suivants, donne l'ancre calcul√©e √† la premi√®re passe.
+ * @author Christian Paulus
+ * @param int $pass num du passe (de l'appel du script)
+ * @param int $pos position du titre dans le document
+ * @return string l'ancre compos√©e
+ */
+function composer_ancre ($titre, $pass, $pos)
+{
+	static $ancres_locales;
+	$ancre = '';
+	
+	if (($pass === 1) && ($ancres_locales === null)) {
+		$ancres_locales = array();
+	}
+	
+	/**
+	 * Si l'ancre a d√©j√† √©t√© calcul√©e dans
+	 * un pr√©cedant passage, renvoyer le r√©sultat
+	 */
+	if ($pass > 1)
+	{
+		$ancre = $ancres_locales[$pos];
+		return ($ancre);
+	}
+	
+	/**
+	 * Si une ancre est d√©j√† pr√©sente, la conserver.
+	 * Nota: il y a deux fa√ßons de forcer une ancre :
+	 * 1/ ajout de <a id="ancre" name="ancre"></a>
+	 * 2/ ajout de <monancre> , dans ce cas interpr√©t√©
+	 *    par le compilo SPIP
+	 * Dans les deux cas, il faut placer cet ajout
+	 *    dans l'inter-titre. Par exemple :
+	 *    {{{Mon inter-titre <monancre>}}}
+	 */
+	if (($ii = strpos ($titre, '<a id=')) !== false)
+	{
+		$ancre = substr ($titre, $ii + 6);
+		// ' ou " ?
+		$cc = substr ($ancre, 0, 1);
+		$ancre = substr ($ancre, 1);
+		$ii = strpos ($ancre, $cc);
+		$ancre = substr ($ancre, 0, $ii);
+	}
+	
+	if (!strlen($ancre))
+	{
+		/**
+		 * Traduire le titre en ascii 7 bits
+		 */
+		$titre = preg_replace('{([^[:alnum:]]+)}',
+							  ' ',
+							  translitteration(trim(strip_tags($titre))));
+		
+		/**
+		 * Calculer l'ancre √† partir du titre
+		 */
+		foreach (explode(' ', $titre) as $mot)
+		{
+			/** Ne pas traiter les mots trop courts
+			*/
+			if (strlen($mot) <= 2) { continue; }
+			/**
+			 * Sinon, rajouter √† la suite de l'ancre
+			 */
+			$ancre .= $mot.'-';
+			/**
+			 * Dans la limite acceptable
+			 */
+			if (strlen($ancre) >= _ANCHOR_LEN_MAX) { break; }
+		}
+		$ancre = rtrim($ancre, '-');
+		
+		/**
+		 * Si inter-titre vide (c'est possible ?) baptiser 'ancre'
+		 */
+		if (!strlen($ancre))
+		{
+			$ancre = 'ancre';
+		}
+		
+		// Les ancres sont case-insensitives
+		// Autant tout passer en bdc
+		$ancre = strtolower ($ancre);
+	}
+	
+	$ancre_calcule = $ancre.($pos ? '-'.$pos : '');
+	$ancres_locales[$pos] = $ancre_calcule;
+
+	return ($ancre_calcule);
+}

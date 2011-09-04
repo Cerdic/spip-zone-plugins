@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
  <plugin>
  <nom>Intertitres hi&eacute;rarchis&eacute;s et Table des mati&egrave;res</nom>
- <version>0.7</version>
+ <version>0.8</version>
  <prefix>IntertitresTdm</prefix>
  <etat>dev</etat>
- <auteur>Mortimer, Chtitux (et Beurt pour la mise en plugin)</auteur>
+ <auteur>Mortimer, Chtitux (et Beurt pour la mise en plugin, Paladin pour les ancres nomm&#233;es)</auteur>
  <description>Intertitres hi&eacute;rarchis&eacute;s et Table des mati&egrave;res rajoute des raccourcis 
  typographiques pour g&eacute;rer des niveaux d&#39;intertitres, 
  num&eacute;rot&eacute;s ou non, dans Spip (Ce plugin peut r&eacute;utiliser 
