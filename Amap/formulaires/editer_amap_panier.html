@@ -12,15 +12,19 @@
 			<li class="editer editer_date_distribution obligatoire saisie_checkbox">
 				<label for="champ_date_distribution"><:amap:date_distribution:> <span class='obligatoire'><:info_obligatoire_02:></span></label>
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-				<BOUCLE_evenement(EVENEMENTS){tous}>
-					#SET{details, #ARRAY}
-					<BOUCLE_evenement_details(EVENEMENTS){par date_debut}{age<0}>
-						[(#SET_PUSH{details, #ARRAY{ date_debut, #DATE_DEBUT, }})]
-					</BOUCLE_evenement_details>
-					#SET{evenement, #ARRAY{details, #GET{details}}}
-				</BOUCLE_evenement>
-				#SET{evenement,#ENV{evenement}}
-				<//B_evenement>
+				<BOUCLE_rub(RUBRIQUES){titre = 001. Distribution}>
+					<BOUCLE_art(ARTICLES){id_rubrique}>
+						<BOUCLE_evenement(EVENEMENTS){id_article}>
+							#SET{details, #ARRAY}
+							<BOUCLE_evenement_details(EVENEMENTS){par date_debut}{age<0}{id_article}>
+								[(#SET_PUSH{details, #ARRAY{ date_debut, #DATE_DEBUT, }})]
+							</BOUCLE_evenement_details>
+							#SET{evenement, #ARRAY{details, #GET{details}}}
+						</BOUCLE_evenement>
+						#SET{evenement,#ENV{evenement}}
+						<//B_evenement>
+					</BOUCLE_art>
+				</BOUCLE_rub>
 
 				<table border="0" width="100%">
 				<BOUCLE_test(CONDITION){si #GET{evenement}|et{#GET{evenement}|is_array}}>
