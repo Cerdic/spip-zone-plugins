@@ -21,6 +21,8 @@ function action_editer_amap_livraison_dist() {
 
 
 function insert_amap_livraison() {
+	$champs = array();
+
 	// Envoyer aux plugins
 	$champs = pipeline('pre_insertion', array(
 		'args' => array(
