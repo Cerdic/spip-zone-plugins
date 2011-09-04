@@ -76,13 +76,11 @@ function get_modules()
   return $ret;
 }
 
-//sept 2011, on repasse la liste des modules en dur SPIP + extensions ... la 
-// page avec le vrai bilan plugins + core est dans un autre fichier 
-$modules = array ('spip', 'local', 'public', 'listes', 'ts');
-//$mods = get_modules();
-//$modules = array();
-//foreach($mods as $mod)
-//     $modules[] = $mod["module"];
+//$modules = array ('spip', 'local', 'public', 'listes', 'ts');
+$mods = get_modules();
+$modules = array();
+foreach($mods as $mod)
+     $modules[] = $mod["module"];
 
 echo "<tr><td></td><td>".$ref."</td>";
 foreach ($modules as $module)
