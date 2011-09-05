@@ -1,0 +1,32 @@
+[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
+	<!--#hierarchie-->
+	<ul id="chemin">
+		<li><span class="bloc"><:coordonnees:editer_adresse:></li>
+		<li><span class="bloc"><em> &gt; </em>[(#ENV{id_adresse}|intval|?{<:coordonnees:editer_adresse:>,<:coordonnees:nouvelle_adresse:>})]</span></li>
+	</ul>
+	<!--/#hierarchie-->
+	 
+	<!--#navigation-->
+	[(#REM) Ce pipeline charge prive/infos/$type ]
+	[(#VAL{inc/presentation}|include_spip|non)]
+	[<div class='cadre cadre-info'>
+		(#PIPELINE{boite_infos,[(#ARRAY{
+			args,[(#ARRAY{
+				type,adresse,
+				id,#ENV{id_adresse}})],
+			data,''})]})
+	</div>]
+	<!--/#navigation-->
+
+
+	<div class='cadre-formulaire-editer'>
+	<div class="entete-formulaire">
+		[(#ENV{retour,#SELF}|icone{<:icone_retour:>, #CHEMIN{images/adresse-24.png}, #LANG_LEFT})]
+
+		<h1>[(#ENV{id_adresse}|intval|?{<:coordonnees:editer_adresse:>,<:coordonnees:nouvelle_adresse:>})]</h1>
+	</div>
+		<div class='ajax'>
+		#FORMULAIRE_EDITER_ADRESSE{#ENV{id_adresse,new},#ENV{objet},#ENV{id_objet},#ENV{retour}}
+		</div>
+	</div>
+]
