@@ -1,3 +1,12 @@
-<div class='ajax'>
-	#FORMULAIRE_TICKET_LIVRABLE{#ENV{id_ticket}}
-</div>
+#SET{compositions,#REM|compositions_lister_disponibles}
+ <select name="nom">
+<BOUCLE_compositions(POUR){tableau #GET{compositions}}>
+	<B_pour>
+	[<optgroup label="<:compositions:compositions:> (#CLE|table_objet|ucfirst)">]
+	<BOUCLE_pour(POUR){tableau #VALEUR}{par nom}>
+	<option value="#CLE"[(#GET{compo}|=={#CLE}|oui)selected="selected")]>[(#VALEUR|table_valeur{nom}|supprimer_numero)]</option>
+	</BOUCLE_pour>
+	</optgroup>
+	</B_pour>
+</BOUCLE_compositions>
+</select>

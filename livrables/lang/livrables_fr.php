@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'descriptif' => 'Descriptif',
 	
 	// E
+	'editer_livrable' => 'Editer un livrable',
 	'erreur_echec_enregistrement' => 'Une erreur s\'est produite pendant l\'enregistrement du livrable.',
 	'erreur_manque_descriptif' => 'Il manque le descriptif du livrable.',
 	'erreur_manque_projet' => 'Il manque le projet du livrable.',
@@ -52,9 +53,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_tickets_total' 		=> 'Total Tickets', // 'Total des tickets du livrable',
 	'label_tickets_finis' 		=> 'Tickets Finis', // 'Nombe de tickets termin&eacute;s',
 	'label_tickets_en_cours' 	=> 'En cours', // 'Nombre de tickets restant à traiter',
-	'label_url'					=> 'Adresse du livrable',
+	'label_type'				=> 'Type page', // 'Type de livrable : page ou objet editorial',
+	'label_objet'				=> 'Objet &eacute;dit.', // 'Adresse du livrable',
+	'label_compo'				=> 'Nom compo.', // 'Adresse du livrable',
+	'label_url'					=> 'URL de test', // 'Adresse du livrable',
 	'label_statut_client' 		=> 'Statut Client',
 	'label_statut_atelier' 		=> 'Statut Atelier',
+	'libelle_compo_neant'		=> 'Dist', // 'Par d&eacute;faut', // 'Dist (aucune composition).',
 	"libelle_statut_non_livre"	=> "Non livr&eacute;",
 	"libelle_statut_non_vue"	=> "Pas encore v&eacute;rifi&eacute;",
 	"libelle_statut_alerte"		=> "Alerte",
@@ -64,31 +69,40 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"libelle_statut_prod"		=> "En production",
 	"libelle_statut_accepte"	=> "Livr&eacute; et accept&eacute;",
 	"libelle_statut_abandonne"	=> "Abandonn&eacute;",
-	'lier_livrable' => 'Lier à un livrable',
-	'livrable' => 'Livrable',
-	'livrable_non_trouve' => 'Livrable non trouvé ou inexistant',
-	'livrables' => 'Livrables',
+	'libelle_type_page'			=> "Page",
+	'libelle_type_rubrique'		=> "Rubrique",
+	'libelle_type_article'		=> "Article",
+	'libelle_type_auteur'		=> "Auteur",
+	'libelle_type_vide'			=> "-",
+	'libelle_type_neant	'		=> "N&eacute;ant",
+	'lier_livrable' 			=> 'Lier à un livrable',
+	'livrable' 					=> 'Livrable',
+	'livrable_non_trouve' 		=> 'Livrable non trouvé ou inexistant',
+	'livrables' 				=> 'Livrables',
 
 	// N
 	'nom_bouton_plugin' => 'Livrables',
 	
 	// O
+	'objet'	=> 'Objet',
 	'objet_composant' => 'Composant',
 	'objet_livrable' => 'Livrable',
 
 	// S
 	'selectionner_livrable' => 'Sélectionner un livrable',
 	'succes_enregistrement' => 'Le livrable @id@ a bien été créé.',
+	'succes_modification' => 'Le livrable @id@ a bien été modifié.',
 	'supprimer' => 'Supprimer ce livrable',
 	
 	// T
 	'titre' => 'Titre',
-	
+	'type' => 'Type',
 	// U
 	
 	// V
-	'voir_composant' => 'D&eacute;tails',
-	'voir_livrable' => 'D&eacute;tails',
+	'voir_composant' 	=> 'D&eacute;tails',
+	'voir_en_ligne'		=> 'Voir en ligne',
+	'voir_livrable' 	=> 'D&eacute;tails',
 
 );
 

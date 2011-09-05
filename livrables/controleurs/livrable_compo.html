@@ -1,0 +1,27 @@
+#CACHE{0}
+[(#REM)
+
+	Ici, il faudrait vraiment lister les compositions,
+    par type d'objet éditorial, mais aussi en commençant
+    par les compositions de type "page";
+
+]
+
+<BOUCLE_compo(LIVRABLES){id_livrable}>
+#SET{compo,#COMPOSITION,''}
+#SET{objet,#OBJET,''}
+</BOUCLE_compo>
+
+#SET{compositions,#REM|compositions_lister_disponibles}
+<BOUCLE_compositions(POUR){tableau #GET{compositions}}{cle=#GET{objet}}>
+	<B_pour>
+    <select class="crayon-active" name="#ENV{name_composition}">
+	[<optgroup label="<:compositions:compositions:> (#CLE|table_objet|ucfirst)">]
+    <option value="dist"[(#GET{compo}|=={dist}|oui)selected="selected")]>Dist</option>
+	<BOUCLE_pour(POUR){tableau #VALEUR}{par num titre}>
+	<option value="#CLE"[(#GET{compo}|=={#CLE}|oui)selected="selected")]>[(#VALEUR|table_valeur{nom}|supprimer_numero)]</option>
+	</BOUCLE_pour>
+	</optgroup>
+    </select>
+	</B_pour>
+</BOUCLE_compositions>

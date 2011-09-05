@@ -1,0 +1,23 @@
+<!--#hierarchie-->
+<ul id="chemin">
+    <li><a href="#URL_ECRIRE{accueil}"><:accueil:></a> &gt; </li>
+    <li><a href="[(#URL_ECRIRE{livrables})]"><:livrables:info_tous_les_livrables:></a> &gt; </li>
+    <li><:livrables:editer_livrable:></li>
+</ul>
+<!--/#hierarchie-->
+ 
+<h1><:livrables:editer_livrable:></h1>
+
+<div class='ajax'>
+	#FORMULAIRE_EDITER_LIVRABLE{#ENV{id_livrable}, #SELF}
+</div>
+ 
+<!--#navigation-->
+<div class='cadre-info'>
+Informations complémentaires
+</div>
+<!--/#navigation-->
+ 
+<!--#extra-->
+
+<!--/#extra-->

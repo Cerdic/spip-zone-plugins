@@ -1,8 +1,10 @@
 <h1><:livrables:livrables:></h1>
 
+
 <div class='ajax'>
-#FORMULAIRE_AJOUTER_LIVRABLE
+[(#INCLURE{fond=prive/boite/choix-projet, env})]
+[(#INCLURE{fond=prive/liste/livrables, env})]
 </div>
 <div class='ajax'>
-[(#INCLURE{fond=prive/liste/livrables, env})]
+#FORMULAIRE_AJOUTER_LIVRABLE
 </div>

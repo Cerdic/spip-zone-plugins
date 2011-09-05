@@ -55,6 +55,20 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_livrables ADD INDEX (composition)");
 			ecrire_meta($nom_meta_base_version,$current_version="0.6");
 		}
+		// ajout des champs "objet", "type" et "composition"
+		if (version_compare($current_version,"0.7","<")){
+			sql_alter("TABLE spip_livrables CHANGE statut_client statut_client varchar(10) DEFAULT 'non_vue' NOT NULL");
+			sql_alter("TABLE spip_livrables CHANGE statut_atelier statut_atelier varchar(10) DEFAULT 'non_livre' NOT NULL");
+			sql_updateq("spip_livrables",array("statut_client" => "non_vue"),"statut_client IS NULL OR statut_client == ''");
+			sql_updateq("spip_livrables",array("statut_atelier" => "non_livre"),"statut_atelier IS NULL OR statut_atelier == ''");
+			ecrire_meta($nom_meta_base_version,$current_version="0.7");
+		}
+		// ajout des champs "objet", "type" et "composition"
+		if (version_compare($current_version,"0.8","<")){
+			sql_alter("TABLE spip_livrables DROP COLUMN type");
+			sql_alter("TABLE spip_livrables DROP INDEX (type)");
+			ecrire_meta($nom_meta_base_version,$current_version="0.8");
+		}
 	}
 }
 

@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Formulaire d'édition du livrable d'un ticket
- * 
+ * Formulaire pour filtrer la pages d'affichage des livrables
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -11,13 +10,13 @@ include_spip('inc/autoriser');
 /**
  * Fonction de chargement des valeurs
  */
-function formulaires_ticket_livrable_charger($id_ticket=''){
+function formulaires_projet_livrable_charger($id_projet=''){
 	
-	if(is_numeric($id_ticket)){
-		if (!autoriser('ecrire', 'ticket', $id_ticket)) {
+	if(is_numeric($id_projet)){
+		if (!autoriser('ecrire', 'projet', $id_projet)) {
 			$editable = false;
 		}else{
-			$id_livrable = _request('id_livrable');
+			$id_projet = _request('id_projet');
 			if (!_request('id_livrable'))
 				$id_livrable = sql_getfetsel('id_livrable', 'spip_tickets', 'id_ticket=' . intval($id_ticket));
 			$valeurs['id_ticket'] = $id_ticket;

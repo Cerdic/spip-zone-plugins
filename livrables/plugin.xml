@@ -2,8 +2,8 @@
 	<nom>Livrables</nom>
 	<auteur>Cyril Marion - Ateliers CYM</auteur>
 	<licence>&#169; 2011 GPL</licence>
-	<version>0.1.5</version>
-	<version_base>0.6</version_base>
+	<version>0.1.6</version>
+	<version_base>0.8</version_base>
 	<install>base/livrables_upgrade.php</install>
 
 	<icon>images/composants-32.png</icon>
@@ -53,14 +53,19 @@
 	</pipeline>
 
 	<pipeline>
-		<nom>affiche_milieu</nom>
+		<nom>afficher_contenu_objet</nom>
 		<inclure>livrables_pipelines.php</inclure>
 	</pipeline>
 
+	<bouton id='livrables' parent='naviguer'> 
+		<url>livrables</url> 
+		<icone>images/composants-16.png</icone> 
+		<titre>livrables:nom_bouton_plugin</titre> 
+	</bouton> 
 	<bouton id='livrables21' parent='bando_publication'> 
-			<url>livrables</url> 
-			<icone>images/composants-16.png</icone> 
-			<titre>livrables:nom_bouton_plugin</titre> 
+		<url>livrables</url> 
+		<icone>images/composants-16.png</icone> 
+		<titre>livrables:nom_bouton_plugin</titre> 
 	</bouton> 
 	
 	<necessite id="SPIP" version="[2.1.0;]" />

@@ -1,0 +1,21 @@
+<br />
+<div>
+	
+    #SET{id,#ENV{id_projet}}
+    
+    <form action="#" method="post">
+	
+    	<select name="id_projet">
+            <option value="">Tous<option>
+            <BOUCLE_projets(PROJETS){par num titre}>
+            <option value="#ID_PROJET"[(#GET{id}|=={#ID_PROJET}|oui)selected="selected")]>#TITRE</option>
+            </BOUCLE_projets>
+        </select>
+	
+    	<input type="submit" value="OK" />        
+    
+    </form>
+
+
+</div>
+<br />

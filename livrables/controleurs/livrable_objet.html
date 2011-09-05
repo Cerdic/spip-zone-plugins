@@ -1,0 +1,21 @@
+#CACHE{0}
+[(#REM) 
+
+	Alternativement, il faudrait pouvoir lister
+    tous les objets éditoriaux du site en cours;
+    Parcourir la base et vérifier tout ce qui commence par spip_xx ?
+    regarder dans le tableau $tables_principales ?
+    
+]
+
+<BOUCLE_objet_selected(LIVRABLES){id_livrable}>
+#SET{objet,#OBJET}
+</BOUCLE_objet_selected>
+
+#SET{liste_objets,#EVAL{explode(',', $GLOBALS['meta']['compositions_types'])}}
+
+<select class="crayon-active" name="#ENV{name_objet}">
+    <BOUCLE_nom_objet(POUR){tableau #GET{liste_objets}}{par valeur}>
+	<option value="#VALEUR"[ (#GET{objet}|=={#VALEUR}|oui)selected="selected")]>[(#VALEUR|ucfirst)]</option>
+    </BOUCLE_nom_objet>
+</select>

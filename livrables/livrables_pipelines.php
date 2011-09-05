@@ -51,14 +51,13 @@ function livrables_declarer_liaison_mots($liaisons){
  * Editer le livrable d'un ticket kiss
  *
 **/
-function livrables_affiche_milieu($flux){
+function livrables_afficher_contenu_objet($flux){
 	// sur la page exec=ticket_afficher
-	if ($flux['args']['exec'] == 'ticket_afficher') {
-		$flux['data'] .= recuperer_fond("prive/boite/formulaire-ticket-livrable", array('id_ticket' => $flux["args"]["id_ticket"]), array('ajax'=>true));
+	if ($flux['args']['type'] == 'ticket') {
+		$flux['data'] .= recuperer_fond("prive/boite/formulaire-ticket-livrable", array('id_ticket' => $flux["args"]["id_objet"]), array('ajax'=>true));
 	}
 	return $flux;
 }
-
 
 /**
  * Ajouter un peu de styles

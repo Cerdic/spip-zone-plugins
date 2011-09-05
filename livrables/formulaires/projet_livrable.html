@@ -6,10 +6,16 @@
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
 		<ul>
-			[(#SAISIE{livrables,id_livrable,label=<:livrables:livrable:> :,defaut=#ENV{id_livrable},slide=validation_bouton_livrable})]
+			[(#SAISIE{
+            	liste_projets,
+                id_projet,
+                label=<:livrables:projets:> :,
+                defaut=#ENV{id_projet},
+                slide=validation_bouton_projet
+             })]
 		</ul>
-		<p class='boutons' id="validation_bouton_livrable" style="display: none;">
-			<input type='submit' class='submit' value='<:bouton_enregistrer:>' />
+		<p class='boutons' id="validation_bouton_projet" style="display: none;">
+			<input type='submit' class='submit' value='<:bouton_ok:>' />
 		</p>
 	</div></form>
 </div>

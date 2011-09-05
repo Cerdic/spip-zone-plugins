@@ -1,0 +1,11 @@
+<BOUCLE_type(LIVRABLES){id_livrable}>
+[(#SET{type,#TYPE,''})]
+</BOUCLE_type>
+
+<select class="crayon-active" name="#ENV{name_type}">
+	<option value=""[(#GET{type}|=={''}|oui)selected="selected")]><:livrables:libelle_type_vide:></option>
+	<option value="page"[(#GET{type}|=={'page'}|oui)selected="selected")]><:livrables:libelle_type_page:></option>
+	<option value="rubrique"[(#GET{type}|=={'rubrique'}|oui)selected="selected")]><:livrables:libelle_type_rubrique:></option>
+	<option value="article"[(#GET{type}|=={'article'}|oui)selected="selected")]><:livrables:libelle_type_article:></option>
+	<option value="auteur"[(#GET{type}|=={'auteur'}|oui)selected="selected")]><:livrables:libelle_type_auteur:></option>
+</select>

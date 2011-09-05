@@ -4,10 +4,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_ajouter_livrable_charger_dist(){
 	$valeurs = array(
-		'id_projet' => _request('id_projet'),
-		'titre'		=> _request('titre'),
-		'url'		=> _request('url'),
-		'descriptif'=> _request('descriptif')
+		'id_projet'	 	=> _request('id_projet'),
+		'titre'			=> _request('titre'),
+		'url'			=> _request('url'),
+		'objet'			=> _request('objet'),
+		'composition'	=> _request('composition'),
+		'descriptif'	=> _request('descriptif')
 	);
 	return $valeurs;
 }
@@ -32,6 +34,8 @@ function formulaires_ajouter_livrable_traiter_dist(){
 	// on récupère les données du formulaire
 	$id_projet	= intval(_request('id_projet'));
 	$url		= _request('url');
+	$objet		= _request('objet');
+	$composition= _request('composition');
 	$titre		= _request('titre');
 	$descriptif	= _request('descriptif');
 	
@@ -42,6 +46,8 @@ function formulaires_ajouter_livrable_traiter_dist(){
 	$id_livrable = sql_insertq('spip_livrables', array(
 		'id_projet'	=> $id_projet,
 		'url'		=> $url,
+		'objet'		=> $objet,
+		'composition'=> $composition,
 		'titre'		=> $titre,
 		'descriptif'=> $descriptif,
 		'maj'		=> $maj

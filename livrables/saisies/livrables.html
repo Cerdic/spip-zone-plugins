@@ -10,7 +10,7 @@
 		label=<:plugin:info_livrable:>})] 
 ]
 
-<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"][ onchange="jQuery('#(#ENV{slide})').slideDown();"]>
 [(#ENV{cacher_option_intro}|non)<option value="0">[(#ENV{option_intro})]</option>]
 <BOUCLE_projets(PROJETS){par num titre, titre}>
 <optgroup label="[(#TITRE|htmlspecialchars)]">

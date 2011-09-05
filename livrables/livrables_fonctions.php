@@ -35,15 +35,15 @@ function trouve_titre($id_projet) {
  */
 function livrables_icone_statut($niveau) {
 	$img = array(
-		"non_livre" 	=> "puce-blanche.gif",
-		"non_vue" 		=> "puce-rouge.gif",
-		"alerte" 		=> "puce-rouge.gif",
-		"test" 			=> "puce-jaune.gif",
-		"dev" 			=> "puce-orange.gif",
-		"avec_bugs" 	=> "puce-orange.gif",
-		"prod" 			=> "puce-verte.gif",
-		"accepte" 		=> "puce-verte.gif",
-		"abandonne" 	=> "puce-noire.gif"
+		"non_livre" 	=> "question-24.png", 	// "puce-blanche.gif",
+		"non_vue" 		=> "question-24.png", 	// "puce-rouge.gif",
+		"alerte" 		=> "alerte-24.png", 	// "puce-rouge.gif",
+		"test" 			=> "en_attente_hachures-24.png", // "puce-jaune.gif",
+		"dev" 			=> "outil-24.png", 		// "puce-orange.gif",
+		"avec_bugs" 	=> "travaux-24.png", 	// "puce-orange.gif",
+		"prod" 			=> "termine-24.png", 	// "puce-verte.gif",
+		"accepte" 		=> "termine-24.png", 	// "puce-verte.gif",
+		"abandonne" 	=> "abandonne-24.png", 	// "puce-noire.gif"
 		);
 	return $img[$niveau];
 }
@@ -70,7 +70,7 @@ function livrables_texte_statut($id_livrable = null){
 /**
  * Retrouve les explications des statuts :
  */
-function livrables_explications_statut($id_livrable = null){
+function livrables_explication_statut($id_livrable = null){
 	$explication = array(
 		"non_livre" 	=> _T("livrables:explication_statut_non_livre"),
 		"non_vue" 		=> _T("livrables:explication_statut_non_vue"),

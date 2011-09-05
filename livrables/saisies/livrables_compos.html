@@ -1,0 +1,26 @@
+[(#REM) 
+	
+	Parametres :
+	- class : classe(s) css ajoutes au select
+	- option_intro : chaine de langue de la premiere ligne vide ? (defaut:"")
+	- cacher_option_intro : pas de premier option vide  (defaut:"")
+	
+	Exemple d'appel :
+	[(#SAISIE{livrables_compos, nom,
+		label=<:plugin:info_projet:>})] 
+]
+#SET{compositions,#REM|compositions_lister_disponibles}
+
+ <select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+[(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
+<BOUCLE_compositions(POUR){tableau #GET{compositions}}>
+	<B_pour>
+	[<optgroup label="<:compositions:compositions:> (#CLE|table_objet|ucfirst)">]
+    <option value="dist"[(#GET{compo}|=={'dist'}|oui)selected="selected")]>Dist</option>
+	<BOUCLE_pour(POUR){tableau #VALEUR}{par nom}>
+	<option value="#CLE"[ (#CLE|=={#ENV{composition,#ENV{defaut}}}|oui) selected="selected"]>[(#VALEUR|table_valeur{nom}|supprimer_numero)]</option>
+	</BOUCLE_pour>
+	</optgroup>
+	</B_pour>
+</BOUCLE_compositions>
+</select>
