@@ -34,7 +34,17 @@
  * 
  * Petites modifications de Stéphane Deschamps
  * - prise en compte des niveaux de titres si ils sont déclarés dans mes_fonctions ou mes_options par $GLOBALS['debut_intertitre']
-*/
+ *
+ * CP: pour les ancres nommées :
+ * {@link composer_ancre()}
+ * Les ancres sont calculées à partir du contenu du titre.
+ * Si deux titres ont le même contenu, un chiffre est ajouté
+ * à l'ancre du second (et suivant).
+ * Ce chiffre est la position du titre dans la page.
+ * Les anciennes ancres 'aNNN' sont conservées pour compatibilité
+ * avec les modèles accompagnant le plugin (extrait, ...)
+ * 
+ */
 function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article="") {
 	global $debut_intertitre, $fin_intertitre; 
 	
@@ -203,14 +213,21 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		/**
 		 * Remplacer la première occurence. 
 		 * Permet d'avoir plusieurs titres au contenu identique.
+		 * Appliqué en dernière pass pour éviter de modifier la TDM.
 		 */
 		$search = str_replace ("'", '\'', $matches[0][$j]);
-		$replace = "$mdebut_intertitre<a id='$ancre' name='$ancre'></a>$titre$mfin_intertitre";
-		if (($pos = strpos($texte, $search)) !== false)
+		if ($pass == 4 && ($pos = strpos($texte, $search)) !== false)
 		{
 			$len_search = strlen ($search);
 			$s = substr ($texte, 0, $pos);
-			$s .= $replace;
+			$s .= $mdebut_intertitre
+				// l'ancre avec mots du titre
+				. '<a id="'.$ancre.'" name="'.$ancre.'"></a>'
+				// conserver les ancres compatibles avec les modèles présents
+				// dans le plugin (renvoi, extrait)
+				. '<a id="a'.$numeros.'" name="a'.$numeros.'"></a>'
+				. $titre
+				. $mfin_intertitre;
 			$s .= substr ($texte, $pos + $len_search);
 			$texte = $s;
 		}
