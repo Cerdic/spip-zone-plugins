@@ -17,6 +17,7 @@
  * @param string $mode_typo Le mode d'application de la fonction typo(), avec trois valeurs possibles "toujours", "jamais" ou "multi".
  * @return unknown_type Retourne la valeur éventuellement modifiée.
  */
+if (!function_exists('_T_ou_typo')){
 function _T_ou_typo($valeur, $mode_typo='toujours') {
 	
 	// Si la valeur est bien une chaine (et pas non plus un entier déguisé)
@@ -44,6 +45,7 @@ function _T_ou_typo($valeur, $mode_typo='toujours') {
 
 	return $valeur;
 
+}
 }
 
 /*
