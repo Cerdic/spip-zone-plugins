@@ -49,6 +49,24 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
         ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
     }   
 
+	if (version_compare($current_version,"1.2.1","<")){
+        // on renomme KR en '0' (il n'existe pas de code ISO numérique)
+        sql_update("spip_pays",
+                array("code" => "0"),
+                array("code='KR'",));
+
+        // on renomme KP en KR (qui etait du coup libre)
+        sql_update("spip_pays",
+                array("code" => "KP"),
+                array("code='KR'",));
+        // on renomme KR en KP (qui etait du coup libre)
+        sql_update("spip_pays",
+                array("code" => "KP"),
+                array("code='0'",));
+        // IR et IQ sont echanges ;) log et maj meta maintenant
+        ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
+    }
+
 }
 function pays_vider_tables($nom_meta_base_version) {
 
