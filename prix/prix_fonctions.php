@@ -61,7 +61,7 @@ function prix_formater($prix){
     $prix = money_format('%i', $prix); 
 
     // Afficher la devise € si celle ci n'est pas remontée par la fonction money
-    if (money_format('%#1.0n', 0) == "0") 
+    if (money_format('%#1.0n', 0) == 0) 
         $prix .= '&nbsp;&euro;'; 
 
     return $prix;
