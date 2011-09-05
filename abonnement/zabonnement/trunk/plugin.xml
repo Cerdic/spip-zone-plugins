@@ -71,7 +71,7 @@
 	<chemin dir="squelettes" />
 	<necessite id="SPIP" version="[2.1.8;]" />
 	<necessite id="facteur" version="[1.0;]" />
-    <utilise id="zcommerce" version="[1.0;]" />
+    <utilise id="zcommerce" version="[0.1;[" />
     
 	<categorie>divers</categorie>
         <traduire gestionnaire="salvatore" module="abo" reference="fr" />
