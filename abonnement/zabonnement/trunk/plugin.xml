@@ -11,7 +11,7 @@
 	<description>
 - gerer des abonnements
 - vendre en 'panier' des acces aux objets
-- Necessite les plugins Z, Z-commerce et montants.
+- Necessite ou utilise les plugins Z, Z-commerce et montants.
 - Le plugin inscription2 est &agrave; remplacer par le plugin clients.
 	</description>
 	<lien>http://www.spip-contrib.net/</lien>
@@ -70,9 +70,9 @@
 	<chemin dir='' />
 	<chemin dir="squelettes" />
 	<necessite id="SPIP" version="[2.1.8;]" />
-	<necessite id="zcommerce" version="[0.1;]" />
 	<necessite id="facteur" version="[1.0;]" />
-
+    <utilise id="zcommerce" version="[1.0;]" />
+    
 	<categorie>divers</categorie>
         <traduire gestionnaire="salvatore" module="abo" reference="fr" />
 
