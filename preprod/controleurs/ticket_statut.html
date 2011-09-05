@@ -1,0 +1,15 @@
+[(#REM)
+	Ce crayon permet de modifier le statut d'un ticket
+    au moyen d'un choix déroulant
+]
+[<pre>(#ENV**|unserialize|print_r{1})</pre>]
+<B_infos_ticket>
+<BOUCLE_infos_ticket(TICKETS){id_ticket}{statut==.}>
+	#SET{statut,#STATUT}
+<select class="crayon-active" name="#ENV{name_statut}">
+	<option value="ouvert"><:preprod:statut_ouvert:></option>
+    <option value="resolu"><:preprod:statut_resolu:></option>
+    <option value="ferme"><:preprod:statut_ferme:></option>
+</select>
+</BOUCLE_infos_ticket>
+

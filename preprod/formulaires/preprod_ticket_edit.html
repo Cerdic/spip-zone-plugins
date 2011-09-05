@@ -1,0 +1,34 @@
+<div class='formulaire_spip formulaire_#FORM' id='formulaire_#FORM'>
+<h3 class='titrem'> 
+[(#ENV{id_ticket}|=={0}|oui)<:preprod:titre_ajouter_ticket:>]
+[(#ENV{id_ticket}|!={0}|oui)<:preprod:titre_modifier_ticket{id=#ENV{id_ticket}}:>]
+</h3>
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form id="ajouter_ticket" method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE
+[(#ENV*{message_ok}|non)
+	[<div><:preprod:rapporte_par:> (#ENV{rapporteur})</div>]
+	<div><:exemple|ucfirst:> : #ENV{adresse}</div>
+	<ul>
+		#GENERER_SAISIES{#ENV{saisies_ticket}}
+	</ul>
+	<p class='boutons'><button name="enregistrer_ticket" value="oui" type="submit"><:preprod:bouton_enregistrer:></button></p>
+]
+[(#ENV*{message_ok}|oui)
+	<p class='boutons'><button type="button" onclick="fermerBoxTicket()"><:preprod:bouton_fermer:></button></p>
+]
+	</div>
+    </form>
+[(#REM) Le javascript ne fait qu'envoyer en submit le formulaire
+	quand le select du projet a été choisi (pour calculer le select du composant)
+    Il fait aussi apparaître le champ nouveau projet/composant selon le choix du select
+] 
+<script type="text/javascript">
+jQuery(function($) {
+	$("select[name='id_projet']").change(function() {
+			$(this).parents("form").submit();
+	});
+});
+</script> 
+</div>

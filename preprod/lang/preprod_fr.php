@@ -17,8 +17,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_composant_relier' => 'Relier à un composant existant',
 	'label_description'	=> 'Description',
 	'label_titre_resume' => 'Titre/Résumé',
+	'les_tickets' => 'Tous les tickets &agrave; faire',
 		
-	'rapporte_par'	=> 'Rapporté par : ',
+	'rapporte_par'	=> 'Rapport&eacute; par : ',
+	
+	// N
+	'nom_plugin' => 'Le plugin Pr&eacute;\'Prod',
 
 	// S
 	'sinscrire' => "S'inscrire",
@@ -27,14 +31,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'severite_normal' => 'Normal',
 	'severite_peu_important' => 'Peu important',
 	'statut_mis_a_jour' => 'Statut mis &agrave; jour',
-	'statut_ferme' => 'Ferm&eacute;',
+	'statut_ferme' => 'Fermé',
 	'statut_ferme_long' => 'Tous les tickets ferm&eacute;s',
 	'statut_inchange' => 'Le statut n\'a pas &eacute;t&eacute; modifi&eacute;.',
-	'statut_ouvert' => 'Ouvert et discut&eacute;',
+	'statut_ouvert' => 'Ouvert et discuté',
 	'statut_redac' => 'En cours de r&eacute;daction',
-	'statut_resolu' => 'R&eacute;solu',
+	'statut_resolu' => 'Résolu',
 	'statut_resolu_long' => 'Tous les tickets r&eacute;solus',
 	'succes_ticket_ajoute' => "Nouveau ticket enregistré (id @id@).",
+	'succes_ticket_modifie' => "Ticket (id @id@) modifié.",
 	'syndiquer_ticket' => 'Syndiquer le ticket&nbsp;:',
 	'syndiquer_tickets' => 'Syndiquer les tickets du site',
 
@@ -58,11 +63,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_identification' => 'Identification',
 	'titre_liste' => 'Liste des tickets',
 	'tous_tickets_ouverts' => 'Tous les tickets ouverts',
-	'type_amelioration' => 'Am&eacute;lioration',
+	'type_amelioration' => 'Amélioration',
 	'type_amelioration_long' => 'Les tickets demandant une am&eacute;lioration',
-	'type_probleme' => 'Probl&egrave;me',
+	'type_probleme' => 'Problème',
 	'type_probleme_long' => 'Les probl&egrave;mes &agrave; r&eacute;soudre',
-	'type_tache' => 'T&acirc;che',
+	'type_tache' => 'Tâche',
 	'type_tache_long' => 'Les t&acirc;ches &agrave; accomplir',
 
 );

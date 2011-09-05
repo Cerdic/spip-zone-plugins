@@ -19,6 +19,10 @@
 	Cyril Marion [Ateliers CYM->http://www.cym.fr]
  	</auteur>
 
+	<icon>images/ateliers_cym-24.gif</icon>
+	
+	<fonctions>preprod_fonctions.php</fonctions>
+	
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>preprod_pipelines.php</inclure>
@@ -33,6 +37,17 @@
 		<nom>insert_head_css</nom>
 		<inclure>preprod_pipelines.php</inclure>
 	</pipeline>
+
+	<bouton id='preprod' parent='publication'> 
+		<icone>images/ateliers_cym-24.gif</icone> 
+		<titre>preprod:nom_plugin</titre> 
+		<url>preprod</url> 
+	</bouton> 
+	<bouton id='preprod21' parent='bando_publication'> 
+		<icone>images/ateliers_cym-24.gif</icone>
+		<titre>preprod:nom_plugin</titre> 
+		<url>preprod</url> 
+	</bouton>
 	
 	<utilise id="tickets" version="[1.65;]" />
 	<utilise id="mediabox" version="[0.6.9;]" />

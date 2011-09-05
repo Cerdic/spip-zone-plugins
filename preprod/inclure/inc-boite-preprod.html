@@ -1,16 +1,20 @@
 #CACHE{0}
-<div id="preprod" class="jour">
-<span class="fermer">O/F</span>
-<div id="preprodContent">
-	Type de page : <span id="pageType">...</span><br />
-    Composition : <span id="pageComposition">...</span><br />
+[(#REM) La boîte preprod n'affiche les données des tickets 
+	que si le plugin "tickets" ou "ticketskiss" est installé
+]
+<div id='preprod' class='jour'>
+<span class='fermer'>O/F</span>
+<div id='preprodContent'>
+	Type de page : <span id='pageType'>...</span><br />
+    Composition : <span id='pageComposition'>...</span><br />
     URL de cette page : <span>#ENV{preprod_url}</span><br />
     [(#PLUGIN{tickets}|ou{#PLUGIN{ticketskiss}}|oui)
-    <div id="listeTickets">
-    	#FORMULAIRE_PREPROD_TICKETS{#ENV{preprod_url}}
+    <div id='listeTickets'>
+    	[(#INCLURE{fond=inclure/inc-liste-tickets, env})]
     </div>
     <br />
-    <p><button onclick="ajouterTicket('#ENV{preprod_url}')"><:preprod:titre_ajouter_ticket:></button></p>
+    <p><button type="button" title='#ENV{preprod_url}' value='#ENV{contexte}' onclick='ouvrirTicket(this)' ><:preprod:titre_ajouter_ticket:></button></p>
     ]
+    <span>contexte</span> : #ENV{contexte}<br />
 </div>
 </div>

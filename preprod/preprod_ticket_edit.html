@@ -1,0 +1,10 @@
+#CACHE{0}
+[(#HTTP_HEADER{Content-type: text/html[; charset=(#CHARSET)]})]
+
+[(#REM) Le formulaire ne s'affiche que 
+	si l'utilisateur est connecté
+]
+
+[(#SESSION{id_auteur}|oui)
+	<div class='ajax'>#FORMULAIRE_PREPROD_TICKET_EDIT{#ENV{adresse},#SESSION{id_auteur},#ENV{id_ticket},#ENV{contexte}}</div>
+]

@@ -1,0 +1,17 @@
+[(#REM) Liste des tickets d'après les id_ticket
+	trouvés pour l'url de la page
+]
+<br />
+<B_tickets>
+<:preprod:tickets_page:>
+<ol>
+<BOUCLE_tickets(TICKETS ?){id_ticket IN #ENV{tickets}}{statut!=ferme}{par date}>
+<li>[(#STATUT|=={resolu}|oui) <del>] #ID_TICKET - 
+	<span class='crayon ticket-titre-#ID_TICKET'>#TITRE</span>
+    <button type="button" title='#ENV{preprod_url}' value='#ENV{contexte}' class='apercu' onclick="ouvrirTicket(this, #ID_TICKET)" style='background:transparent;border:0'>[<:editer:>]</button>
+</li>
+</BOUCLE_tickets>
+</ol>
+</B_tickets>
+<:preprod:aucun_ticket_trouve:>
+<//B_tickets>
