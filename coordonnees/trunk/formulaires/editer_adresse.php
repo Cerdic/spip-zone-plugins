@@ -19,7 +19,7 @@ function formulaires_editer_adresse_verifier_dist($id_adresse='new', $objet='', 
 
 function formulaires_editer_adresse_traiter_dist($id_adresse='new', $objet='', $id_objet='', $retour=''){
 	// si redirection demandee, on refuse le traitement en ajax
-	if ($retour) refuser_traiter_formulaire_ajax();
+//	if ($retour) refuser_traiter_formulaire_ajax();
 	return formulaires_editer_objet_traiter('adresse', $id_adresse, '', '', $retour, '');
 }
 

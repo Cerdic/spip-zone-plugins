@@ -41,8 +41,7 @@ function coordonnees_affiche_milieu($flux) {
 
 	$exec = isset($flux['args']['exec']) ? $flux['args']['exec'] : _request('exec');
 
-	// SPIP 3
-	if (function_exists('trouver_objet_exec')) {
+
 		$objet_exec = trouver_objet_exec($exec);
 
 		// pas en édition
@@ -55,26 +54,12 @@ function coordonnees_affiche_milieu($flux) {
 		// type d'objet
 		$type = $objet_exec['type'];
 		
-	}
+
 
 	$liste = liste_objets_coordonnees('exec');
 	$ok = false;
 	
-	// SPIP 3
-	if (isset($type) and isset($liste[$type])) {
-		// c'est bon
-		$ok = true;
-		
-	// SPIP 2.x
-	} else {
-		$liste = array_flip($liste);
-		if (isset($liste[$exec])) {
-			$type = $liste[$exec];
-			$ok = true;
-		}
-	}
-
-	if ($ok) {
+	if (isset($type) and isset($liste[$type])){
 		// c'est un exec que l'on peut afficher
 		// verifions qu'il est coche dans la conf
 		$conf = unserialize($GLOBALS['meta']['coordonnees']);
@@ -89,7 +74,11 @@ function coordonnees_affiche_milieu($flux) {
 				include_spip('inc/presentation');
 				$contexte = array(
 					'objet' => $type,
-					'id_objet' => $id
+					'id_objet' => $id,
+					'id_adresse' => _request('id_adresse'),
+					'id_numero' => _request('id_numero'),
+					'id_email' => _request('id_email')
+					
 				);
 				$flux['data'] .= recuperer_fond('prive/boite/coordonnees', $contexte, array('ajax'=>true));		
 			}

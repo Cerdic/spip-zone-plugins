@@ -19,8 +19,9 @@ function formulaires_editer_numero_verifier_dist($id_numero='new', $objet='', $i
 
 function formulaires_editer_numero_traiter_dist($id_numero='new', $objet='', $id_objet='', $retour=''){
 	// si redirection demandee, on refuse le traitement en ajax
-	if ($retour) refuser_traiter_formulaire_ajax();
-	return formulaires_editer_objet_traiter('numero', $id_numero, '', '', $retour, '');
+	//if ($retour) refuser_traiter_formulaire_ajax();
+	$res=formulaires_editer_objet_traiter('numero', $id_numero, '', '',$retour, '');
+	return $res;
 }
 
 ?>
