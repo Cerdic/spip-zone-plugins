@@ -51,7 +51,7 @@
 		'nom' => "Nom",
 		'enregistrer' => "Enregistrer",
 		'evolution_nb_abonnes' => "Evolution du nombre d'abonnés",
-		'aller_liste_abonnes' => "Aller à la liste des abonnés",
+		'aller_liste_abonnes' => "Tous les abonnés",
 		'ajouter_abonne' => "Ajouter un abonné",
 		'aller_liste_lettres' => "Aller à la liste des lettres d'information",
 		'configurer_formulaire_abonnement' => "Configurer", // lien dans bloc raccourcis

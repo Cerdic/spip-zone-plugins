@@ -86,7 +86,7 @@
 				break;
 		}
 		$vals[] = $d;
-		$vals[] = "<b>N°".$lettre->id_lettre."</b>";
+		$vals[] = "<b>N&deg;".$lettre->id_lettre."</b>";
 
 		return $vals;
 	}
