@@ -48,7 +48,7 @@
 
    		echo debut_droite('', true);
 		echo afficher_objets('abonne', _T('lettresprive:abonnes'), array('FROM' => 'spip_abonnes', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('abonnement', _T('lettresprive:abonnements'), array('SELECT' => 'id_rubrique, COUNT(id_abonne) AS total', 'FROM' => 'spip_abonnes_rubriques', 'WHERE' => 'statut="valide"', 'ORDER BY' => 'total DESC', 'GROUP BY' => 'id_rubrique'));
+		echo afficher_objets('abonnement', _T('lettresprive:thematiques'), array('SELECT' => 'id_rubrique, COUNT(id_abonne) AS total', 'FROM' => 'spip_abonnes_rubriques', 'WHERE' => 'statut="valide"', 'ORDER BY' => 'total DESC', 'GROUP BY' => 'id_rubrique'));
 
 		echo pipeline('affiche_milieu', array('args'=>array('exec'=>'abonnes_tous'),'data'=>''));
 		

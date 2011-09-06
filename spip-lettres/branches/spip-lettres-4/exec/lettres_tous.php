@@ -47,7 +47,7 @@
 		echo afficher_objets('lettre', _T('lettresprive:lettres_envoi_en_cours'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="envoi_en_cours"', 'ORDER BY' => 'maj DESC'));
 		echo afficher_objets('lettre', _T('lettresprive:lettres_brouillon'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="brouillon"', 'ORDER BY' => 'maj DESC'));
 		echo afficher_objets('lettre', _T('lettresprive:lettres_envoyees'), array('FROM' => 'spip_lettres', 'WHERE' => 'statut="envoyee"', 'ORDER BY' => 'maj DESC'));
-		echo afficher_objets('abonnement', _T('lettresprive:abonnements'), array('SELECT' => 'id_rubrique, COUNT(id_abonne) AS total', 'FROM' => 'spip_abonnes_rubriques', 'WHERE' => 'statut="valide"', 'ORDER BY' => 'total DESC', 'GROUP BY' => 'id_rubrique'));
+		echo afficher_objets('abonnement', _T('lettresprive:thematiques'), array('SELECT' => 'id_rubrique, COUNT(id_abonne) AS total', 'FROM' => 'spip_abonnes_rubriques', 'WHERE' => 'statut="valide"', 'ORDER BY' => 'total DESC', 'GROUP BY' => 'id_rubrique'));
 
 		echo pipeline('affiche_milieu', array('args'=>array('exec'=>'lettres_tous'),'data'=>''));
 		

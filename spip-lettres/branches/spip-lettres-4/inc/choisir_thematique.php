@@ -10,6 +10,10 @@
 	 *  
 	 **/
 
+function theme_rubrique ($id_rubrique) {
+	return sql_getfetsel("titre", "spip_themes", "id_rubrique=".intval($id_rubrique));
+};
+
 function choisir_thematique ($id_rubrique=0) {
 	if (!lettres_nombre_themes() or $id_rubrique
 		or ($GLOBALS['meta']['spip_lettres_admin_abo_toutes_rubriques']=='oui')) {

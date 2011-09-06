@@ -226,6 +226,11 @@
 		$res.='<p>'.$lettre->id_lettre.'</p>';
 		$res.='</div>';
 
+		$res.= "<ul class='instituer instituer_article'>
+					<li><strong>"._T('lettresprive:thematique').'</strong> :</li>
+					<li>'.theme_rubrique($lettre->id_rubrique)."</li>
+				</ul>";
+				
 		$res.='<ul class="instituer instituer_article">';
 		$res.='<li>';
 		$res.='<strong>'._T('lettresprive:cette_lettre').'</strong>';
