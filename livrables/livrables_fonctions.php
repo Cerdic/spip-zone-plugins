@@ -48,6 +48,15 @@ function livrables_icone_statut($niveau) {
 	return $img[$niveau];
 }
 
+function icone_ticket($niveau) {
+	$img = array(
+		"redac" => "travaux-16.png",
+		"ouvert" => "travaux-16.png",
+		"resolu" => "livre-16.png",
+		"ferme" => "livre-16.png"
+	);
+	return $img[$niveau];
+}
 
 /**
  * Retrouve les libelles des statuts :

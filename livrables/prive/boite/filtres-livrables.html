@@ -2,14 +2,25 @@
 <div>
 	
     #SET{id,#ENV{id_projet}}
+    #SET{statut,#ENV{statut_client}}
     
     <form action="#" method="get">
 	
+        <label for="id_projet">Projet :</label>
     	<select name="id_projet">
             <option value="">Tous<option>
             <BOUCLE_projets(PROJETS){par num titre}>
             <option value="#ID_PROJET"[(#GET{id}|=={#ID_PROJET}|oui)selected="selected")]>#TITRE</option>
             </BOUCLE_projets>
+        </select>
+        
+        
+        <label for="statut_client">Statut :</label>
+        <select name="statut_client">
+            <option value="">Tous<option>
+            <option value="non_vue"[(#GET{statut}|=={'non_vue'}|oui)selected="selected")]><:livrables:libelle_statut_non_vue:></option>
+            <option value="avec_bugs"[(#GET{statut}|=={'avec_bugs'}|oui)selected="selected")]><:livrables:libelle_statut_avec_bugs:></option>
+            <option value="accepte"[(#GET{statut}|=={'accepte'}|oui)selected="selected")]><:livrables:libelle_statut_accepte:></option>
         </select>
 	
     	<input type="submit" value="OK" />        
