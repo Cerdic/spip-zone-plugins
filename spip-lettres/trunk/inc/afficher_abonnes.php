@@ -90,7 +90,7 @@
 
 		$vals[] = $abonne->format;
 
-		$vals[] = "<b>N°".$abonne->id_abonne."</b>";
+		$vals[] = "<b>N&deg;".$abonne->id_abonne."</b>";
 	
 		return $vals;
 	}
