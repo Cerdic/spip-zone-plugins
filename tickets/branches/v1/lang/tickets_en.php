@@ -105,6 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_sans_previsu' => 'Warning: pas de pr&eacute;visualisation&nbsp;; votre message est publi&eacute; imm&eacute;diatement.',
 
 	// I
+	'info_document_ajoute' => 'Added:',
 	'info_liste_tickets' => 'Bug reports',
 	'info_numero_ticket' => 'BUG REPORT NUMBER:',
 	'info_tickets_ouvert' => 'opened and discussed',

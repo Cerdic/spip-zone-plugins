@@ -68,13 +68,17 @@ function tickets_set($id_ticket) {
 			'.txt', $_FILES['ajouter_document']['tmp_name']));
 	}
 	
+	// Invalider les caches
+	include_spip('inc/invalideur');
+	suivre_invalideur("id='id_ticket/$id_ticket'");
+	
 	// Modification de statut. On ne peut passer par inc/modifier
 	$c = array();
 	foreach (array('statut') as $champ)
 		$c[$champ] = _request($champ);
 		$c['date'] = date('Y-m-d H:i:s');
 	$err .= instituer_ticket($id_ticket, $c);
-
+	
 	return $err;
 }
 
