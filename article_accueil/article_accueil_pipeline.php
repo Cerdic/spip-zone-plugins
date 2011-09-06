@@ -15,7 +15,7 @@
  */
 function article_accueil_affiche_milieu($flux){
 	$exec = $flux['args']['exec'];
-	if ($exec=='naviguer'){
+	if (($exec=='naviguer') || ($exec == 'rubrique')){
 		if ($id = $flux['args']['id_rubrique']) {
 			if (autoriser('modifier','rubrique',$id)) {
 				$ids = 'formulaire_editer_article_accueil-' . $id;
