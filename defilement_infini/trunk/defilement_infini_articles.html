@@ -1,0 +1,5 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+<BOUCLE_defilement_infini(ARTICLES){id_rubrique}{!par date}{#ENV{last},5}>
+	[(#INCLURE{fond=inclure/article/article-resume,id_article})]
+</BOUCLE_defilement_infini>
