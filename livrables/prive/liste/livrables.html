@@ -34,7 +34,7 @@
         {statut_client?}
         {statut_atelier?}
         {par num titre}
-		{pagination #ENV{nb,20}}
+		{pagination #ENV{nb,200}}
 >
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='id'>#ID_LIVRABLE</td>
@@ -43,9 +43,9 @@
             <td class='statut #EDIT{statut_client}'>[<img src="(#CHEMIN{[images/(#STATUT_CLIENT|livrables_icone_statut)]})"[ alt="(#STATUT_CLIENT|livrables_explication_statut)"] />]</td>
             <td class='statut #EDIT{statut_atelier}'>[<img src="(#CHEMIN{[images/(#STATUT_ATELIER|livrables_icone_statut)]})"[ alt="(#STATUT_ATELIER|livrables_explication_statut)"] />]</td>
 			<td class='url #EDIT{url}'>[<a href="(#URL)" target="_blank"><img src="#CHEMIN{images/voir_en_ligne-24.png}" alt="<:livrables:voir_en_ligne:>" /></a>]</td>
-            <td class='nb_tickets'>[(#TICKETS_TOTAL{#ID_LIVRABLE}|sinon{'-'})]</td>
-            <td class='nb_tickets'>[(#TICKETS_EN_COURS{#ID_LIVRABLE}|sinon{'-'})]</td>
-            <td class='nb_tickets'>[(#TICKETS_FINIS{#ID_LIVRABLE}|sinon{'-'})]</td>
+            <td class='nb_tickets'><div class="carre gris"><a href="#URL_ECRIRE{preprod}#livrable_#ID_LIVRABLE">[(#TICKETS_TOTAL{#ID_LIVRABLE}|sinon{'-'})]</a></div></td>
+            <td class='nb_tickets'><div class="carre rouge"><a href="#URL_ECRIRE{preprod}#livrable_#ID_LIVRABLE">[(#TICKETS_EN_COURS{#ID_LIVRABLE}|sinon{'-'})]</a></div></td>
+            <td class='nb_tickets'><div class="carre vert"><a href="#URL_ECRIRE{preprod}#livrable_#ID_LIVRABLE">[(#TICKETS_FINIS{#ID_LIVRABLE}|sinon{'-'})]</a></div></td>
             <td class='objet #EDIT{livrable_objet}'>[(#OBJET)]</td>
             <td class='compo #EDIT{livrable_compo}'>[(#COMPOSITION)]</td>
             <td class='descriptif #EDIT{descriptif}'>#DESCRIPTIF</td>
