@@ -37,7 +37,7 @@
 	<icon>illuminati-32.png</icon>
 	<prefix>autorite</prefix>
 	<options>autorite_options.php</options>
-	<necessite id="SPIP" version="[1.9.2;3.0.0-dev)" />
+	<necessite id="SPIP" version="[1.9.2;2.9.9]" />
 	<necessite id='cfg' version='[1.5.0;]' />
 	<categorie>auteur</categorie>
 </plugin>
@@ -80,6 +80,6 @@
 	<icon>illuminati-32.png</icon>
 	<prefix>autorite</prefix>
 	<options>autorite_options.php</options>
-	<necessite id="SPIP" version="[1.9.2;3.1.0)" />
+	<necessite id="SPIP" version="[3.0.0-dev;3.0.*]" />
 	<categorie>auteur</categorie>
 </plugin>
