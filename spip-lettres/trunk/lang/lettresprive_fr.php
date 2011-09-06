@@ -222,7 +222,7 @@
 		
 // Thematiques et abonnement par defaut
 		'theme_par_defaut' 			=> 'Thématique par défaut',
-		'theme_par_defaut_actuel' 	=> 'Thématique par défaut actuel : ',
+		'theme_par_defaut_actuel' 	=> 'Thématique par défaut : ',
 		'theme_racine' 				=> 'Toutes les thématiques',
 		'theme_par_defaut_modifier'	=> "Modifier la thématique par défaut",
 		'admin_abo_toutes_rubriques' => 'Les administrateurs peuvent ils attribuer des abonnements en dehors des th&eacute;matiques publiques ?',
