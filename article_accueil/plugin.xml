@@ -10,6 +10,7 @@
 		<multi>
 			[fr][Cedric Morin->http://www.yterium.com] pour la contribution originale dans le plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] pour la mise en plugin autonome.
 			[en][Cedric Morin->http://www.yterium.com] for the original contribution in the plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] to create the standalone plugin.
+			[es][Cedric Morin->http://www.yterium.com] por la contribución inicial en el plugin Compositions, [Joseph->http://www.spip-contrib.net/Joseph] por transformarlo en un plugin autónomo.
 		</multi>
 	</auteur>
 	<licence>GPL</licence>
@@ -20,12 +21,14 @@
 		<multi>
 			[fr]Attribuer un article d'accueil aux rubriques
 			[en]Assign an home article to a section
+			[es]Atribuir un artículo de inicio a las secciones
 		</multi>
 	</slogan>
 	<description>
 		<multi>
 			[fr]Ce plugin vous permet de d'attribuer un article d'accueil aux rubriques. Le champ id_article_accueil peut ensuite &ecirc;tre utilis&eacute; par les squelettes.
 			[en]This plugin allows you to assign an article as home of a section. Field "id_article_accueil" can then be used by the skeletons.
+			[es]Este plugin te permite atribuir un artículo de inicio a las secciones. De ahí, se puede usar el campo id_article_accueil en los esqueletos.
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/?article3776</lien> <!-- URI de documentation -->
