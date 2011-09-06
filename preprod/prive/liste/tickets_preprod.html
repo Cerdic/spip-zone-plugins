@@ -99,9 +99,63 @@
         </div>
         </B_tickets>
 
-
-
-
     </BOUCLE_livrables>
 
 </BOUCLE_projets>
+
+    <h2>Tickets sans livrable correspondant</h2>
+    <table width="100%" cellpadding="2" cellspacing="0" border="0">
+    
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Posté le</th>
+                <th>Par</th>
+                <th>Projet</th>
+                <th>Composant</th>
+                <th>Livrable</th>
+                <th>Sujet</th>
+                <th>Type</th>
+                <th>Séverité</th>
+                <th>Statut</th>
+                <th>Assigné à</th>
+                <th>Mis à jour</th>
+                <th>URL</th>
+            </tr>
+        </thead>    
+        <tbody>
+        <BOUCLE_tickets_orphelins(TICKETS){id_livrable <0}>
+            <tr class="tr_liste">
+                <td class="arial1"><b>##ID_TICKET</b></td>
+                <td>[(#DATE|affdate{'d-m-Y'})]</td>
+                <td class="#EDIT{id_auteur}">#NOM_AUTEUR{#ID_AUTEUR}</td>
+                <td class="#EDIT{projet}">[(#PROJET|sinon{'-'})]</td>
+                <td class="#EDIT{composant}">[(#COMPOSANT|sinon{'-'})]</td>
+                <td class="#EDIT{livrable}">
+                    <B_titre_livrable2>
+                    <BOUCLE_titre_livrable2(LIVRABLES){id_livrable}>
+                        <BOUCLE_projet2(PROJETS){id_projet}>[(#TITRE)/ ]</BOUCLE_projet2>
+                        [(#TITRE|sinon{'-'})]
+                    </BOUCLE_titre_livrable2></B_titre_livrable2>
+                    <:livrables:selectionner_livrable:>
+                    <//B_titre_livrable2>
+                 </td>
+                <td class="arial2 #EDIT{titre}[(#STATUT|in_array{#ARRAY{0,ferme,1,resolu}}|oui) del]"[ title="(#GET{discussion}|texte_backend)"]><a href="?exec=ticket_afficher&id_ticket=#ID_TICKET">#TITRE</a>[<p class="#EDIT{texte}">(#TEXTE|PtoBR|couper{100})</p>]</td>
+                <td class="arial0">
+                    [(#TYPE|tickets_texte_type)]
+                </td>			
+                <td class="arial0 #EDIT{severite}">
+                    <img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"] />
+                    [&nbsp;(#SEVERITE|tickets_texte_severite)]
+                </td>
+                <td class="arial0 #EDIT{statut}">
+                    <img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"] />
+                    [&nbsp;(#STATUT|tickets_texte_statut)]
+                </td>
+                <td class="#EDIT{id_assigne}">#NOM_AUTEUR{#ID_ASSIGNE}</td>
+                <td>[(#MAJ|affdate{'d-m-Y'})]</td>
+                <td class="#EDIT{exemple}">[<a href="#URL_SITE_SPIP/(#EXEMPLE)">][(#EXEMPLE|sinon{'-'})</a>]</td>
+            </tr>        
+        </BOUCLE_tickets_orphelins>
+        </tbody>
+    </table>
