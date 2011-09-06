@@ -68,6 +68,8 @@ function cvtm_recuperer_post_precedents($form){
 		foreach($c as $k=>$v)
 			if (!isset($store[$k])) // on ecrase pas si saisi a nouveau !
 				$_REQUEST[$k] = $store[$k] = $v;
+			elseif(is_array($store[$k]) AND is_array($v))
+				$_REQUEST[$k] = $store[$k] = array_merge($v,$store[$k]);
 
 		// vider pour eviter un second appel a verifier_n
 		// en cas de double implementation (unipotence)
