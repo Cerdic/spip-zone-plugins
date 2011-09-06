@@ -1,11 +1,10 @@
 <div class="formulaire_spip formulaire_forum ajax" id="formulaire_forum">
-[(#REM) pour IE qui sinon se perd dans l'ajax !, ne pas retirer]<br class='bugajaxie' />
 
-[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
-[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[<p class="reponse_formulaire reponse_formulaire_ok success">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur error">(#ENV*{message_erreur})</p>]
 
 [(#ENV{login_forum_abo})
-<INCLURE{fond=formulaires/inc-login_forum_abo}{env} />
+<INCLURE{fond=formulaires/inc-login_forum_abo, env} />
 ]
 
 [(#ENV{editable})
@@ -26,7 +25,7 @@
 	<input type='hidden' name='url_site' value="#ENV{url_site}" />
 	<input type='hidden' name='nom_site' value="#ENV{nom_site}" />
 	[<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
-	[(#INCLURE{fond=formulaires/inc-forum_ajouter_mot}{ajouter_mot})]
+	[(#INCLURE{fond=formulaires/inc-forum_ajouter_mot, ajouter_mot})]
 	(#ENV*{erreurs}|table_valeur{previsu})
 	</div>
 </form>]
@@ -37,7 +36,7 @@
 [<input type="hidden" name="id_forum" value="(#ENV*{id_forum})" />]
 [<fieldset class="moderation_info">
 	<legend><:bouton_radio_modere_priori:></legend>
-	<p class="explication">(#ENV{modere})<:comments:moderation_info:></p>
+	<p class="explication info">(#ENV{modere})<:comments:moderation_info:></p>
 </fieldset>]
 
 [(#ENV**{afficher_texte}|choixsiegal{'non', ' ',''})
