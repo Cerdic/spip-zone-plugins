@@ -2,7 +2,7 @@
 
 /**
  * Plugin Tickets pour Spip 2.0
- * Licence GPL (c) 2008-2009
+ * Licence GPL (c) 2008-2011
  *
  * Formulaire d'édition de tickets
  *
@@ -53,6 +53,41 @@ function formulaires_editer_ticket_charger($id_ticket='new', $retour='', $config
 function formulaires_editer_ticket_verifier($id_ticket='new', $retour='', $config_fonc='tickets_edit_config', $row=array(), $hidden=''){
 
 	$erreurs = formulaires_editer_objet_verifier('ticket',$id_ticket,array('titre','texte'));
+	
+	$doc = &$_FILES['ajouter_document'];
+	spip_log($doc,'test');
+	spip_log($_FILES,'test');
+	if (isset($_FILES['ajouter_document'])
+	AND $_FILES['ajouter_document']['tmp_name']) {
+		include_spip('inc/ajouter_documents');
+		list($extension,$doc['name']) = fixer_extension_document($doc);
+		$acceptes = ticket_documents_acceptes();
+
+		if (!in_array($extension, $acceptes)) {
+			# normalement on n'arrive pas ici : pas d'upload si aucun format
+			if (!$formats = join(', ',$acceptes))
+				$formats = '-'; //_L('aucun');
+			$erreurs['ajouter_document'] = _T('public:formats_acceptes', array('formats' => $formats));
+		}
+		else {
+			include_spip('inc/getdocument');
+			if (!deplacer_fichier_upload($doc['tmp_name'], $tmp.'.bin'))
+				$erreurs['ajouter_document'] = _T('copie_document_impossible');
+
+#		else if (...)
+#		verifier le type_document autorise
+#		retailler eventuellement les photos
+			}
+
+		// si ok on stocke les meta donnees, sinon on efface
+		if (isset($erreurs['ajouter_document'])) {
+			spip_unlink($tmp.'.bin');
+			unset ($_FILES['ajouter_document']);
+		} else {
+			$doc['tmp_name'] = $tmp.'.bin';
+			ecrire_fichier($tmp.'.txt', serialize($doc));
+		}
+	}
 	return $erreurs;
 }
 
@@ -86,5 +121,19 @@ function formulaires_editer_ticket_traiter($id_ticket='new',$retour='', $config_
 	}
 	
 	return $message;
+}
+
+function ticket_documents_acceptes()
+{
+	$formats = trim($GLOBALS['meta']['formats_documents_ticket']);
+	if (!$formats) return array('jpg','txt','gif','png');
+	if ($formats !== '*')
+		$formats = array_filter(preg_split(',[^a-zA-Z0-9/+_],', $formats));
+	else {
+		include_spip('base/typedoc');
+		$formats =  array_keys($GLOBALS['tables_mime']);
+	}
+	sort($formats);
+	return $formats;
 }
 ?>

@@ -39,10 +39,9 @@
 	[(#REM) - Texte du ticket et url d'exemple]
 	[<div class="#EDIT{texte} texte">(#TEXTE|propre)</div>]
 	[<div><:tickets:champ_exemple:> <strong><a href="[(#EXEMPLE*|calculer_url{"",url})]">(#EXEMPLE*|calculer_url{"",titre}|replace{"</?html>",""})</a></strong></div>]
-
 	[(#REM) - Extensions, Extras 2 entre autre]
 	[(#PIPELINE{afficher_contenu_objet,[(#ARRAY{args,[(#ARRAY{type,ticket,id_objet,#ID_TICKET,contexte,[(#ENV**|unserialize)]})],data,''})]})]
-
+	<INCLURE{fond=inclure/documents_tickets,id_ticket=#ID_TICKET}>
 </div>
 
 [(#PARAMETRES_FORUM|?{''})]

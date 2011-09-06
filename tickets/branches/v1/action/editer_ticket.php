@@ -49,11 +49,25 @@ function tickets_set($id_ticket) {
 	foreach (array(
 		'titre', 'texte', 'severite', 'type', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur'
 	) as $champ)
-		$c[$champ] = _request($champ);
+		$c[$champ] = trim(_request($champ));
 
 	include_spip('inc/modifier');
 	revision_ticket($id_ticket, $c);
 
+	// Ajouter un document
+	if (isset($_FILES['ajouter_document'])
+	AND $_FILES['ajouter_document']['tmp_name']) {
+		$ajouter_documents = charger_fonction('ajouter_documents', 'inc');
+		$ajouter_documents(
+			$_FILES['ajouter_document']['tmp_name'],
+			$_FILES['ajouter_document']['name'], 'ticket', $id_ticket,
+			'document', 0, $documents_actifs);
+		// supprimer le temporaire et ses meta donnees
+		spip_unlink($_FILES['ajouter_document']['tmp_name']);
+		spip_unlink(preg_replace(',\.bin$,',
+			'.txt', $_FILES['ajouter_document']['tmp_name']));
+	}
+	
 	// Modification de statut. On ne peut passer par inc/modifier
 	$c = array();
 	foreach (array('statut') as $champ)
@@ -130,6 +144,17 @@ function instituer_ticket($id_ticket, $c) {
 				$champs['date'] = $date;
 			else
 				$champs['date'] = date('Y-m-d H:i:s');
+			
+			// On publie les documents du ticket
+			$documents = sql_select('id_document','spip_documents_liens','objet="ticket" AND id_objet='.intval($id_ticket));
+			while($document = sql_fetch($documents)){
+				spip_log("On update le doc ".$document['id_document'],'tickets');
+				$champs = array(
+					'statut'=>'publie',
+					'date_publication'=>date('Y-m-d H:i:s'));
+				$id_document=$document['id_document'];
+				sql_updateq('spip_documents',$champs,"id_document=$id_document AND statut='prepa'");
+			}
 		}
 		// On met à jour la date_modif à chaque mise à jour de statut
 		$champs['date_modif'] = date('Y-m-d H:i:s');

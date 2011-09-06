@@ -28,11 +28,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => '	Allow list of authors',
 	'cfg_lbl_autorisation_statuts' => 'Allow by authors status',
 	'cfg_lbl_autorisation_webmestre' => 'Allow webmasters only',
+	'cfg_lbl_case_joindre_fichiers' => 'Allow to add one or several files to the bug reports',
 	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space (Requires Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Having a browser selector in the bug report form',
 	'cfg_lbl_composants' => 'Components',
 	'cfg_lbl_forums_publics' => 'Comments on bug reports',
 	'cfg_lbl_jalons' => 'Milestones',
+	'cfg_lbl_joindre_fichiers' => 'Add one or several files',
 	'cfg_lbl_liste_auteurs' => 'Authors of the website',
 	'cfg_lbl_notification_publique' => 'Public notification',
 	'cfg_lbl_projets' => 'Projects',
@@ -54,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_date_modif' => 'Modified on',
 	'champ_description' => 'Description of the bug report',
 	'champ_exemple' => 'Example:',
+	'champ_fichier' => 'Add a file',
 	'champ_id' => 'Number',
 	'champ_importance' => 'Importance:',
 	'champ_jalon' => 'Milestone:',
@@ -93,8 +96,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	If it is a display problem, specify with what browser you are experiencing it.',
 	'explication_description_ticket_ss_nav' => 'Describe as precisely as possible the need or problem.
 	Indicate in particular if it occurs consistently or occasionally.',
-	'explication_url_exemple' => 'Enter here the URL of a page covered by this bug report.',
+	'explication_fichier' => 'Add a file to your bug report.',
 	'explication_redaction' => 'When you\'re finished writing your bug report, select the status &laquo;open and discussed&raquo;.',
+	'explication_url_exemple' => 'Enter here the URL of a page covered by this bug report.',
 
 	// F
 	'forum_message' => 'Your message',

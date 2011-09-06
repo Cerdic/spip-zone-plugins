@@ -28,11 +28,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d\'auteurs',
 	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d\'auteurs',
 	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
+	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets',
 	'cfg_lbl_case_notification_publique' => '&Ecirc;tre notifi&eacute; dans l\'espace public plut&ocirc;t que dans l\'espace priv&eacute; (N&eacute;cessite Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket',
 	'cfg_lbl_composants' => 'Composants',
 	'cfg_lbl_forums_publics' => 'Commentaires sur les tickets',
 	'cfg_lbl_jalons' => 'Jalons',
+	'cfg_lbl_joindre_fichiers' => 'Joindre un ou des fichiers',
 	'cfg_lbl_liste_auteurs' => 'Auteurs du site',
 	'cfg_lbl_notification_publique' => 'Notification publique',
 	'cfg_lbl_projets' => 'Projets',
@@ -54,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_date_modif' => 'Modifi&eacute; le',
 	'champ_description' => 'Description du ticket',
 	'champ_exemple' => 'Exemple&nbsp;:',
+	'champ_fichier' => 'Joindre un fichier',
 	'champ_id' => 'Num&eacute;ro',
 	'champ_importance' => 'Importance&nbsp;:',
 	'champ_jalon' => 'Jalon&nbsp;',
@@ -93,8 +96,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	S&rsquo;il s&rsquo;agit d&rsquo;un probl&egrave;me d\'affichage, pr&eacute;cisez avec quel navigateur vous le rencontrez.',
 	'explication_description_ticket_ss_nav' => 'D&eacute;crivez aussi pr&eacute;cis&eacute;ment que possible le besoin ou le probl&egrave;me rencontr&eacute;.
 	Indiquez en particulier s&rsquo;il se produit syst&eacute;matiquement ou occasionnellement.',
-	'explication_url_exemple' => 'Indiquez ici l&rsquo;URL d&rsquo;une page concern&eacute;e par ce ticket.',
+	'explication_fichier' => 'Ajoutez un fichier à votre ticket.',
 	'explication_redaction' => 'Quand vous avez termin&eacute; la r&eacute;daction de votre ticket, s&eacute;lectionnez le statut &laquo;ouvert et discut&eacute;&raquo;.',
+	'explication_url_exemple' => 'Indiquez ici l&rsquo;URL d&rsquo;une page concern&eacute;e par ce ticket.',
 
 	// F
 	'forum_message' => 'Votre message',

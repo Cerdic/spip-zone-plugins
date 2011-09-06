@@ -2,7 +2,7 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<BOUCLE_editable(CONDITION) {si #ENV{editable}}>
-	<form method='post' action='#ENV{action}'><div>
+	<form method='post' action='#ENV{action}' enctype='multipart/form-data'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire
 		parametre : url d'action ]
 		#ACTION_FORMULAIRE{#ENV{action}}
@@ -58,7 +58,13 @@
 					obligatoire=oui,
 					class=inserer_barre_edition,
 					rows=20})]
-
+				
+				[(#CONFIG{tickets/general/joindre_fichiers}|=={on}|oui)
+					[(#SAISIE{input, ajouter_document,
+						type=file,
+						label=<:tickets:champ_fichier:>,
+						explication=<:tickets:explication_fichier:>})]
+				]
 				[(#SAISIE{input, exemple,
 					label=<:tickets:champ_url_exemple:>,
 					explication=<:tickets:explication_url_exemple:>})]

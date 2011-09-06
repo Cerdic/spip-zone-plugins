@@ -8,7 +8,7 @@
 	</nom>
 	<slogan>
 		<multi>
-		[fr]Syst&egrave;me de suivi de bugs
+		[fr]Syst&#232;me de suivi de bugs
 		[en]Bug tracking system
 		[de]System zur Fehler-Nachverfolgung
 		</multi>
@@ -17,8 +17,8 @@
 	<licence>GPL v3</licence>
 	<description>
 		<multi>
-		[fr]<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; &agrave; l'espace priv&eacute; de SPIP. Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (notamment les squelettes du site public).
-		[de]<i>Tickets</i> ist ein Werkzeug zur Fehler-Nachverfolgung (bugtracker) das im SPIP Redaktionssystem zug&auml;nglich ist. Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &ouml;ffentlichen Sitelayouts zu unterst�tzen.
+		[fr]<i>Tickets</i> est un outil de suivi de bugs directement int&#233;gr&#233; &#224; l'espace priv&#233; de SPIP. Il est con&#231;u pour faciliter la phase de d&#233;veloppement du site (notamment les squelettes du site public).
+		[de]<i>Tickets</i> ist ein Werkzeug zur Fehler-Nachverfolgung (bugtracker) das im SPIP Redaktionssystem zug&#228;nglich ist. Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &#252;ffentlichen Sitelayouts zu unterst�tzen.
 		</multi>
 	</description>
 	<lien></lien> <!-- URI de documentation -->
@@ -114,7 +114,7 @@
 	</nom>
 	<slogan>
 		<multi>
-		[fr]Syst&egrave;me de suivi de bugs
+		[fr]Syst&#232;me de suivi de bugs
 		[en]Bug tracking system
 		[de]System zur Fehler-Nachverfolgung
 		</multi>
@@ -123,7 +123,7 @@
 	<licence>GPL v3</licence>
 	<description>
 		<multi>
-		[fr]<i>Tickets</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; dans SPIP. Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site.
+		[fr]<i>Tickets</i> est un outil de suivi de bugs directement int&#233;gr&#233; dans SPIP. Il est con&#231;u pour faciliter la phase de d&#233;veloppement du site.
 		[de]<i>Tickets</i> ist ein Werkzeug zur Fehler-Nachverfolgung (bugtracker) das im SPIP Redaktionssystem zug&auml;nglich ist. Es wurde insbesondere entwickelt, um die Zusammenarbeit bei der Gestaltung des &ouml;ffentlichen Sitelayouts zu unterst&uuml;tzen.
 		[en]<i>Bug reports</i> is a bug tracking tool integrated into SPIP. It is designed to facilitate the development phase of the site.
 		</multi>
@@ -131,7 +131,7 @@
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.8.0</version>
+	<version>1.8.1</version>
 	<version_base>1.1</version_base>
 	<etat>stable</etat>
 
