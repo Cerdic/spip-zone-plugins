@@ -170,8 +170,7 @@ while($val = sql_fetch($res)){
 			}
 		else	{ 
 			$nom_fic='etiquette.pdf';
-			$pdf->Output();
-			//$doc = $pdf->Output($nom_fic, 'F');
+			$pdf->Output('etiquettes.pdf', 'D');
 			$message .='<a href="'.$nom_fic.'">Telecharger le fichier</a>';
 		}
 	
