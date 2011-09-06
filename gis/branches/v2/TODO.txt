@@ -1,0 +1,17 @@
+Regarder la compression JS qui ne fonctionne pas
+Avoir un crayon de modification de point depuis le public
+
+
+Interface de recherche de point :
+- textuelle (recherche dans le titre + descriptif + pays + bla bla bla)
+- par carte : Ouvre une carte + on clique le point avec un bouton choisir dedans + joint le point en question à un objet
+(utilisation via mediabox possible)
+- Une simple liste des points paginés par date de modif/ d'ajout 
+
+Si pas fait dans mapstraction d'ici là :
+Travailler sur geojson dans mapstraction pour envoyer un patch ensuite
+http://geojson.org/
+http://geojson.org/geojson-spec.html
+
+Regarder également les modifs de IDElab sur mapstraction pour une possible utilisation :
+http://dev.idelab.uva.es/idelabmapstraction/#WhyIDELabMapstraction
