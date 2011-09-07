@@ -214,12 +214,12 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		
 		//on remplace le titre dans le texte
 		//$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
-		$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='$ancre' name='$ancre'></a><a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
+		//$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='$ancre' name='$ancre'></a><a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
 		
 		
 		/**
 		 * Remplacer la première occurence. 
-		 * Permet d'avoir plusieurs titres au contenu identique.
+		 * Permet d'avoir plusieurs inter-titres au contenu identique.
 		 */
 		$search = str_replace ("'", '\'', $matches[0][$j]);
 		
