@@ -53,7 +53,7 @@
 	
 	<necessite id='SPIP' version="[2.0.0;3.0.0-dev)" />
 	<necessite id="spip_bonux" version="[2.2.8;]" />
-	<necessite id="jqueryui" version="[1.8.5;]" />
+	<necessite id="jqueryui" version="[1.6;]" />
 	<utilise id="facteur" />
 	<utilise id="inserer_modeles" version="[0.4.3;]" />
 	<categorie>communication</categorie>
