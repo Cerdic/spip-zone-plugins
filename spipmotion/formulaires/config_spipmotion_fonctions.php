@@ -6,10 +6,28 @@
  * Auteurs :
  * Quentin Drouet (kent1)
  *
- * 2008-2010 - Distribué sous licence GNU/GPL
+ * 2008-2011 - Distribué sous licence GNU/GPL
  *
  * Fonctions spécifiques au squelette config_spipmotion.html
  **/
+
+/**
+ * Fonction de verification du formulaire de configuration CFG 
+ */
+function cfg_config_spipmotion_verifier(&$cfg){
+	foreach($cfg->val as $key => $val){
+		if(preg_match('/(bitrate|height|width|frequence_audio|fps|passes|qualite_video|qualite_audio).*/',$key) && $val){
+			if(!ctype_digit($val)){
+				$erreur[$key] = _T('spipmotion:erreur_valeur_int');
+			}else if(preg_match('/(height|width).*/',$key) && ($val < 100)){
+				$erreur[$key] = _T('spipmotion:erreur_valeur_int_superieur',array('val'=> 100));
+			}
+		}
+	}
+	if(count($erreur) > 0)
+		$erreur['message_erreur'] = _T('spipmotion:erreur_formulaire_configuration');
+	return $erreur;
+}
 
 /**
  * Fonction de post-traitement du formulaire de configuration CFG

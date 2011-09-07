@@ -47,16 +47,16 @@
 				<h3 class="legend"><:spipmotion:gestion_format_entree:></h3>
 				<h4><:spipmotion:label_extensions_prises_en_charge:></h4>
 				<div class="explication"><:spipmotion:explications_extensions_prises_en_charge:></div>
-				#SET{extensions,#ARRAY}
+				#SET{extensions,#ARRAY|push{m4u}}
 				<ul>
 					<li>
 						#SET{sons,#ARRAY}
 						<BOUCLE_sons(TYPES_DOCUMENTS){mime_type LIKE audio/%}{par extension}{extension !IN #GET{extensions}}>
 						#SET{sons,#GET{sons}|push{#EXTENSION}}
 						</BOUCLE_sons>
-						
+						<B_sons1>
 						<label for="fichiers_audios"><:spipmotion:extensions_audio:></label>
-						<select name="fichiers_audios[]" multiple="multiple" size="15">
+						<select name="fichiers_audios[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
 							<BOUCLE_sons1(TYPES_DOCUMENTS){extension IN #GET{sons}}>
 								<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_audios}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
 								#SET{extensions,#GET{extensions}|push{#EXTENSION}}
@@ -69,9 +69,9 @@
 						<BOUCLE_videos(TYPES_DOCUMENTS){mime_type LIKE video/%}{par extension}{extension !IN #GET{extensions}}>
 						#SET{videos,#GET{videos}|push{#EXTENSION}}
 						</BOUCLE_videos>
-						
+						<B_videos1>
 						<label for="fichiers_videos"><:spipmotion:extensions_video:></label>
-						<select name="fichiers_videos[]" multiple="multiple" size="15">
+						<select name="fichiers_videos[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
 							<BOUCLE_videos1(TYPES_DOCUMENTS){extension IN #GET{videos}}>
 								#SET{extensions,#GET{extensions}|push{#EXTENSION}}
 								<option value="#EXTENSION"[(#EXTENSION|in_any{#ENV{fichiers_videos}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
@@ -84,9 +84,9 @@
 				<div class="explication"><:spipmotion:explications_extensions_prises_en_charge_encodage:></div>
 				<ul>
 					<li>
-						<label for="fichiers_audios_encodage"><:spipmotion:extensions_audio:></label>
 						<B_sons_encodage>
-						<select name="fichiers_audios_encodage[]" multiple="multiple">
+						<label for="fichiers_audios_encodage"><:spipmotion:extensions_audio:></label>
+						<select name="fichiers_audios_encodage[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
 							<BOUCLE_sons_encodage(TYPES_DOCUMENTS){extension IN #CONFIG{spipmotion/fichiers_audios}}{par extension}>
 								<option value="#EXTENSION"[(#EXTENSION|in_any{#CONFIG{spipmotion/fichiers_audios_encodage}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
 							</BOUCLE_sons_encodage>
@@ -95,9 +95,9 @@
 						</B_sons_encodage>
 					</li>
 					<li>
-						<label for="fichiers_videos_encodage"><:spipmotion:extensions_video:></label>
 						<B_videos1_encodage>
-						<select name="fichiers_videos_encodage[]" multiple="multiple">
+						<label for="fichiers_videos_encodage"><:spipmotion:extensions_video:></label>
+						<select name="fichiers_videos_encodage[]" multiple="multiple" size="[(#GRAND_TOTAL|>{15}|?{15,#GRAND_TOTAL})]">
 							<BOUCLE_videos1_encodage(TYPES_DOCUMENTS){extension IN #CONFIG{spipmotion/fichiers_videos}}{par extension}>
 								<option value="#EXTENSION"[(#EXTENSION|in_any{#CONFIG{spipmotion/fichiers_videos_encodage}}|oui) selected="selected"]>#EXTENSION - #MIME_TYPE</option>
 							</BOUCLE_videos1_encodage>

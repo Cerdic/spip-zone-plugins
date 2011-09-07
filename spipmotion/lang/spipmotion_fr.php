@@ -36,7 +36,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_binaire' => 'Un ou plusieurs logiciels nécessaires au bon fonctionnement du plugin ne sont pas disponibles sur votre système.',
 	'erreur_chemin_ffmpeg' => 'Aucun encodage ne pourra être effectué car le chemin ne fonctionne pas.',
 	'erreur_document_plus_disponible' => 'Ce document n\'est plus disponible sur le site',
+	'erreur_formulaire_configuration' => 'Le formulaire contient au moins une erreur.',
 	'erreur_script_spipmotion_non_executable' => 'Le script spipmotion.sh n\'a pas été trouvé ou n\'est pas exécutable.',
+	'erreur_valeur_int' => 'Cette valeur doit être un chiffre entier.',
+	'erreur_valeur_int_superieur' => 'Cette valeur doit être supérieure à @val@.',
 	'erreur_verifier_droits' => 'Le script d\'encodage "script_bash/spipmotion.sh" n\'est pas executable.',
 	'explication_encodeur' => 'Si vous choisissez l\'encodeur ffmpeg2theora pour vos fichiers Ogg vidéos, les choix de codecs vidéo et audios deviennent inutiles.',
 	'explication_framerate' => 'Laissez ce champs vide pour garder le même nombre de frames par seconde que l\'original',
@@ -198,7 +201,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'select_all' => 'Tout sélectionner',
 	'spipmotion_boite' => 'Configuration de SPIPmotion',
 	'spipmotion_descriptif' => 'Ce plugin permet d"encoder à la volée des documents audios et vidéos.',
-	'spipmotion_liens' => 'Liens complémentaires : ',
 
 	// T
 	'th_avfilter_description' => 'Description',
