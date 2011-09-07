@@ -100,10 +100,10 @@ var map[(#GET{id})];
 
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
-				(#ENV{objet}|id_table_objet) : #ENV{id_objet},][
 				objets : "(#ENV{objets})",][
 				id_rubrique : (#ENV{id_rubrique}),][
 				id_secteur : (#ENV{id_secteur}),][
+				id_parent : (#ENV{id_parent}),][
 				id_article : (#ENV{id_article}),][
 				id_breve : (#ENV{id_breve}),][
 				id_document : (#ENV{id_document}),][
