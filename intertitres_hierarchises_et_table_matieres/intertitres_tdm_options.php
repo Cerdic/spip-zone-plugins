@@ -45,8 +45,13 @@
  * avec les modèles accompagnant le plugin (extrait, ...)
  * 
  */
+// $LastChangedBy$
+// $LastChangedDate$
+
 function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article="") {
 	global $debut_intertitre, $fin_intertitre;
+	static $pass = 0;
+	$pass++;
 
 	// définition de la balise pour les titres des sections %num% sera remplacé 
 	// par la profondeur de la section
@@ -78,7 +83,10 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	
 	// on cherche les noms de section commençant par des * et #
 	$count = preg_match_all(
-					"(($my_debut_intertitre([\\*#]*)(.*?)(<(.*?)>)?$my_fin_intertitre))",
+		// préserver les liens éventuels présents dans le titre
+		// A vérifier le $ref qui semblait s'en servir ?
+		//"(($my_debut_intertitre([\\*#]*)(.*?)(<(.*?)>)?$my_fin_intertitre))",
+					"(($my_debut_intertitre([\\*#]*)(.*?)$my_fin_intertitre))",
 					$texte,
 					$matches
 	);
@@ -113,7 +121,8 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		// leur soit ajouté, et qu'ils soient quand même dans la table des matières
 		if(strlen($level) == 0) $level="*";
 		$titre = $matches[3+$ajout][$j];
-		
+		$titre_lien = trim(strip_tags($matches[0][$j]));
+	
 		// Si tableseule alors on vire les <a id=''></a> des titres
 		if ($tableseule) {
 			$titre=preg_replace("/(<a id=')(.*?)('><\/a>)/","",$titre);
@@ -129,6 +138,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 			);
 			$ref=$tsmatches[2];
 		}
+		IntertitresTdm_log ('ref: '.$ref);
 		
 		if(strlen($level) == 1) {
 		
@@ -189,7 +199,10 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		//on se rappelle du raccourcis
 		$cite[$ref] = $numeros;
 		//$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave;  	&laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
-		$table .= "<li><a href=\"$url_article#$ancre\" title=\"Aller directement &agrave; &laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
+		$table .= "<li><a href=\"$url_article#$ancre\" title=\""
+			. _T('IntertitresTdm:aller_directement_a_', array('titre'=>attribut_html($titre)))
+			. "\">$titre_lien</a>"
+			;
 		
 		//on mémorise le niveau de ce titre
 		$lastlevel = strlen($level);
@@ -212,7 +225,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		
 		if ($ancre && ($pos = strpos($texte, $search)) !== false)
 		{
-			IntertitresTdm_log ('search: '.$search.' pos: '.$pos);
+			//IntertitresTdm_log ('search: '.$search.' pos: '.$pos);
 			
 			$len_search = strlen ($search);
 			$s = substr ($texte, 0, $pos);

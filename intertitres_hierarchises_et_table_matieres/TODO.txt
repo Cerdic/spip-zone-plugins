@@ -2,6 +2,5 @@
 
 CP-20110907:
 - si deux titres avec contenu identique, seul la première ancre nommée est utilisée
-- un titre dans un lien href disparait de la table
 - fichier de lang
 
