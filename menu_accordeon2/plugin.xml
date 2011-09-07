@@ -1,35 +1,22 @@
 <plugin>
-
-    <nom> Menu accordéon </nom>
+	<nom> Menu accordéon </nom>
 	<licence>GPL</licence>
-    <categorie>navigation</categorie>
-    <auteur> Maïeul Rouquette d'après b_b </auteur>
-    <version>2.1</version>
-   
-  
-    <etat>dev</etat>
-
-    <description>Un menu accordéon avec le plugin menu</description>
-      <prefix>accordeon</prefix>
-
-
-
-
-    <pipeline>
+	<categorie>navigation</categorie>
+	<auteur> Maïeul Rouquette d'après b_b </auteur>
+	<version>2.1</version>
+	<lien>http://www.spip-contrib.net/?article3763</lien>
+	<etat>test</etat>
+	<icon>images/accordeon-32.png</icon>
+	<description>Un menu accordéon avec le plugin menu</description>
+	<prefix>accordeon</prefix>
+	<pipeline>
 		<nom>jqueryui_forcer</nom>
 		<inclure>accordeon_pip.php</inclure>
-   </pipeline>
-   
-   <pipeline>
+	</pipeline>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>accordeon_pip.php</inclure>
-   </pipeline>
-
-
-
-   <necessite id="jqueryui" />
-   <necessite id="menus" version="[0.8.10;]" />
-
-
-
+	</pipeline>
+	<necessite id="jqueryui" />
+	<necessite id="menus" version="[0.8.10;]" />
 </plugin>
