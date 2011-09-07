@@ -63,7 +63,7 @@ function exec_conversion_extras_dist(){
 					iextras_convertir($type, $extra);
 				}
 				else {
-					echo count($vals)." $type ($extra) à convertir : veuillez indiquer le nom du champ extra2 o&#249; recopier les donn&#233;es";
+					echo count($vals)." $type ($extra) "._L("&#224; convertir : veuillez indiquer le nom du champ extra2 o&#249; recopier les donn&#233;es");
 					echo "<form action='".parametre_url(self(), 'convertir', '')."' method='post'>
 						<input type='hidden' name='convertir' value='$type-$extra' />
 						<input type='text' name='extra_dest' value='' />
@@ -72,7 +72,7 @@ function exec_conversion_extras_dist(){
 				}
 			
 			} else
-				echo "Aucun $type ($extra) &#224; convertir.";
+				echo sprintf(_L("%s (%s) : rien &#224; convertir."),$type,$extra);
 			echo "</dd>\n";
 
 		}
