@@ -51,7 +51,9 @@ function coordonnees_upgrade($nom_meta_base_version, $version_cible){
 	// mettre les auteurs par defaut comme objet «coordonnable»
 	$maj['1.5'] = array(
 			array('ecrire_meta',array('coordonnees', serialize(array('objets'=>array('auteur'))))));
-
+	
+	include_spip('base/upgrade');
+	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
 
 
