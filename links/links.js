@@ -8,15 +8,15 @@ function targetLinks() {
 		.addClass('external')
 		.each(function(){
 			if(jQuery(this).text()){
-				title =  jQuery(this).text() + " (nouvelle fenêtre)";
+				title =  jQuery(this).text() + " " + js_nouvelle_fenetre;
 			}else{
-				title = " (nouvelle fenêtre)";
+				title = " " + js_nouvelle_fenetre;
 			}
-			if(jQuery(this).attr("title")) title = jQuery(this).attr("title") + " (nouvelle fenêtre)";
+			if(jQuery(this).attr("title")) title = jQuery(this).attr("title") + " " + js_nouvelle_fenetre;
 			jQuery(this).attr("title",title);
 		});
 		//Meme chose sur tous les fichiers dont l'extension a été configurée.
-		var reg=new RegExp("(nouvelle fenêtre)","gi");
+		var reg=new RegExp(js_nouvelle_fenetre,"gi");
 		if (typeof links_doc != "undefined") {
 			var extensions = links_doc.split(',');
 			for(var i = 0; i < extensions.length; i++){
@@ -29,12 +29,12 @@ function targetLinks() {
 						var my_ext = extensions[i].replace('.','');
 						jQuery(this).addClass(my_ext);
 						if(jQuery(this).text()){
-							title =  jQuery(this).text() + " (nouvelle fenêtre)";
+							title =  jQuery(this).text() + " " + js_nouvelle_fenetre;
 						}else{
-							title = " (nouvelle fenêtre)";
+							title = " " + js_nouvelle_fenetre;
 						}
 						if((jQuery(this).attr("title"))&&(jQuery(this).attr("title").match(reg) == false)){ 
-							title = jQuery(this).attr("title") + " (nouvelle fenêtre)";
+							title = jQuery(this).attr("title") + " " + js_nouvelle_fenetre;
 						}	
 						jQuery(this).attr("title",title);
 				});	

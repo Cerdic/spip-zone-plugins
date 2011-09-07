@@ -4,6 +4,7 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+'js_nouvelle_fenetre' => '(nouvelle fen&ecirc;tre)',
 'lien_externe' => 'Lien externe',
 'lien_ouvrant' => 'Lien ouvrant une nouvelle fen&ecirc;tre',
 'titre_menu_liens' => 'Liens explicites',
