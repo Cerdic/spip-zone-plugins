@@ -138,7 +138,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 			);
 			$ref=$tsmatches[2];
 		}
-		IntertitresTdm_log ('ref: '.$ref);
+		//IntertitresTdm_log ('ref: '.$ref);
 		
 		if(strlen($level) == 1) {
 		
@@ -274,7 +274,8 @@ if (!defined('_ANCHOR_LEN_MAX')) define('_ANCHOR_LEN_MAX', 35);
 
 /**
  * Calcul de l'ancre.
- * Réalisé à la première passe (ce script est appelé 4 fois)
+ * Réalisé à la première passe
+ * (ce script est appelé par les balises #TEXTE du squelette)
  * Aux passages suivants, donne l'ancre calculée à la première passe.
  * @author Christian Paulus
  * @param int $pass num du passe (de l'appel du script)
