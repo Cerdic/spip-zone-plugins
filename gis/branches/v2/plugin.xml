@@ -4,7 +4,7 @@
 	<version>2.0.7</version>
 	<version_base>2.0.2</version_base>
 	<licence>GNU/GPL</licence>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<description>
 		<multi>
 			[fr]GIS2 mapstraction
