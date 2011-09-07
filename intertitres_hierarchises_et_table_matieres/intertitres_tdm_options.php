@@ -36,7 +36,7 @@
  * - prise en compte des niveaux de titres si ils sont déclarés dans mes_fonctions ou mes_options par $GLOBALS['debut_intertitre']
  *
  * CP: pour les ancres nommées :
- * {@link composer_ancre()}
+ * {@link IntertitresTdm_composer_ancre()}
  * Les ancres sont calculées à partir du contenu du titre.
  * Si deux titres ont le même contenu, un chiffre est ajouté
  * à l'ancre du second (et suivant).
@@ -46,14 +46,7 @@
  * 
  */
 function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article="") {
-	global $debut_intertitre, $fin_intertitre; 
-	
-	/**
-	 * La fonction est appelée 4 fois. Limiter la consommation !
-	 */
-	static $pass;
-	if ($pass === null) { $pass = 0; }
-	$pass++;
+	global $debut_intertitre, $fin_intertitre;
 
 	// définition de la balise pour les titres des sections %num% sera remplacé 
 	// par la profondeur de la section
@@ -107,7 +100,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	// pour chaque titre trouvé
 	for ($j=0; $j< $count; $j++) {
 		
-		$ancre = composer_ancre ($matches[0][$j], $pass, $j);
+		$ancre = IntertitresTdm_composer_ancre ($matches[0][$j], $pass, $j);
 		
 		$level = $matches[2+$ajout][$j];
 		
@@ -125,6 +118,7 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 		if ($tableseule) {
 			$titre=preg_replace("/(<a id=')(.*?)('><\/a>)/","",$titre);
 		}
+		$ref = $matches[5+$ajout][$j];
 		
 		// si tableseule alors le $ref correspond au contenu du <a id=''></a>... Je sais pas si ça marche: pas testé ! :o)
 		if ($tableseule) {
@@ -192,36 +186,38 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 			}
 		}
 		
-		//on se rappelle du raccourci
-		$cite[$ref] = $numeros; 	
-		//$table .= '<li><a href="'.$url_article.'#a'.$numeros.'" '
-		//	. 'title="Aller directement &agrave; &laquo;&nbsp;'.attribut_html($titre).'&nbsp;&raquo;">'
-		//	. $titre . '</a>' . PHP_EOL;
-		$table .= '<li><a href="'.$url_article.'#'.$ancre.'" '
-			. 'title="Aller directement &agrave; &laquo;&nbsp;'.attribut_html($titre).'&nbsp;&raquo;">'
-			. $titre . '</a>' . PHP_EOL;
+		//on se rappelle du raccourcis
+		$cite[$ref] = $numeros;
+		//$table .= "<li><a href=\"$url_article#a$numeros\" title=\"Aller directement &agrave;  	&laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
+		$table .= "<li><a href=\"$url_article#$ancre\" title=\"Aller directement &agrave; &laquo;&nbsp;".attribut_html($titre)."&nbsp;&raquo;\">$titre</a>";
 		
-
 		//on mémorise le niveau de ce titre
 		$lastlevel = strlen($level);
 		
 		//on génère la balise avec le bon style pour le niveau
 		//et on ajoute $level_base à $lastlevel pour avoir des <hx> qui commencent à <h{$level_base}>
-		$mdebut_intertitre = trim(str_replace('%num%',$lastlevel+$level_base,$css_debut_intertitre));
-		$mfin_intertitre = trim(str_replace('%num%',$lastlevel+$level_base,$css_fin_intertitre));
+		$mdebut_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_debut_intertitre);
+		$mfin_intertitre = str_replace('%num%',$lastlevel+$level_base,$css_fin_intertitre);
+		
+		//on remplace le titre dans le texte
+		//$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
+		$texte = str_replace($matches[0][$j],"$mdebut_intertitre<a id='$ancre' name='$ancre'></a><a id='a$numeros' name='a$numeros'></a>$titre$mfin_intertitre",$texte);
+		
 		
 		/**
 		 * Remplacer la première occurence. 
 		 * Permet d'avoir plusieurs titres au contenu identique.
-		 * Appliqué en dernière pass pour éviter de modifier la TDM.
 		 */
 		$search = str_replace ("'", '\'', $matches[0][$j]);
-		if ($pass == 4 && ($pos = strpos($texte, $search)) !== false)
+		
+		if ($ancre && ($pos = strpos($texte, $search)) !== false)
 		{
+			IntertitresTdm_log ('search: '.$search.' pos: '.$pos);
+			
 			$len_search = strlen ($search);
 			$s = substr ($texte, 0, $pos);
 			$s .= $mdebut_intertitre
-				// l'ancre avec mots du titre
+				// l'ancre nommée (avec mots du titre)
 				. '<a id="'.$ancre.'" name="'.$ancre.'"></a>'
 				// conserver les ancres compatibles avec les modèles présents
 				// dans le plugin (renvoi, extrait)
@@ -231,6 +227,8 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 			$s .= substr ($texte, $pos + $len_search);
 			$texte = $s;
 		}
+		
+		
 	}
 
    //on finit la table
@@ -250,16 +248,10 @@ function IntertitresTdm_table_des_matieres($texte,$tableseule=false,$url_article
 	//si y'a rien, ben on envoie rien !
 	if ($cnt[0]==0) $table='';
 	
-	// Comme la TDM est désormais affichée de manière externe aux articles,
-	// si un auteur met #TABLEMATIERES dans son article,
-	// cela crée un lien vers la TDM externe, d'où un remplacement de:
+	// Comme la TDM est désormais affichée de manière externe aux articles, si un auteur met #TABLEMATIERES dans son article, celà crée un lien vers la TDM externe, d'où un remplacement de:
 	//$texte = str_replace('#TABLEMATIERES',$table,$texte); par:
 	$texte = str_replace('#TABLEMATIERES',"<a href=\"#table_des_matieres\" title=\"Aller &agrave; la table des mati&egrave;res de l'article\">Table des mati&egrave;res</a>",$texte);
 	
-	//if ($pass == 3) { if ($tableseule) {die($table);} else {die($texte);} }
-	//if ($pass == 1) { die($texte); }
-
-
 	// si tableseule on ne renvoit que la table, sinon, on renvoie tout
 	if ($tableseule) {return $table;} else {return $texte;}
 }
@@ -276,20 +268,16 @@ if (!defined('_ANCHOR_LEN_MAX')) define('_ANCHOR_LEN_MAX', 35);
  * @param int $pos position du titre dans le document
  * @return string l'ancre composée
  */
-function composer_ancre ($titre, $pass, $pos)
+function IntertitresTdm_composer_ancre ($titre, $pass, $pos)
 {
-	static $ancres_locales;
+	static $ancres_locales = array();
 	$ancre = '';
-	
-	if (($pass === 1) && ($ancres_locales === null)) {
-		$ancres_locales = array();
-	}
 	
 	/**
 	 * Si l'ancre a déjà été calculée dans
 	 * un précedant passage, renvoyer le résultat
 	 */
-	if ($pass > 1)
+	if (isset($ancres_locales[$pos]))
 	{
 		$ancre = $ancres_locales[$pos];
 		return ($ancre);
@@ -360,4 +348,8 @@ function composer_ancre ($titre, $pass, $pos)
 	$ancres_locales[$pos] = $ancre_calcule;
 
 	return ($ancre_calcule);
+}
+
+function IntertitresTdm_log ($msg) {
+	spip_log ($msg, 'itdm');
 }
