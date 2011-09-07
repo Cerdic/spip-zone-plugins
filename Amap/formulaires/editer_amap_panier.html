@@ -30,6 +30,7 @@
 								<div class="choix">
 									<input type="checkbox" name="date_distribution[]" class="checkbox" id="champ_date_distribution_#COMPTEUR_BOUCLE"
 										value="[(#VALEUR|table_valeur{date_debut})]"
+										[(#ENV{date_distribution}|non) checked="checked"]
 										[(#ENV{date_distribution}|=={#VALEUR|table_valeur{date_debut}}|oui) checked="checked"]
 										[(#ENV{date_distribution}|oui) disabled="disabled"]
 									/>
