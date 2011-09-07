@@ -17,7 +17,7 @@ define('_MARQUEUR_URL', false);
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
-define('URLS_PROPRES_EXEMPLE', 'Titre-de-l-article -Rubrique- (version patchée urledit)');
+define('URLS_PROPRES_EXEMPLE', _T('urledit:version_patchee'));
 
 // TODO: une interface permettant de verifier qu'on veut effectivment modifier
 // une adresse existante
