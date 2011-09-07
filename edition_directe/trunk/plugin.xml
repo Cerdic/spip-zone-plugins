@@ -1,7 +1,7 @@
 <plugin>
 	<nom><multi>[fr]Edition directe[en]Edition mode[es]Editar directamente[de]Redaktion Modus</multi></nom>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -40,6 +40,7 @@
 		<inclure>edition_directe_pipelines.php</inclure>
         </pipeline>	
 	<fonctions>edition_directe_fonctions.php</fonctions>
+	<options>edition_directe_options.php</options>	
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.14;]" />
 	<necessite id="medias" version='[1.6.1;]'/>	

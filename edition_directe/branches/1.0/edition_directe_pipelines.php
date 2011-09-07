@@ -1,7 +1,16 @@
 <?php
 
 function edition_directe_header_prive($flux){
-    	$flux .= '<link rel="stylesheet" href="'.generer_url_public("edition_directe_styles").'" type="text/css" media="all" />';
+	$config=lire_config('edition_directe');
+	
+	$exec=$_REQUEST['exec'];
+	
+	foreach($config AS $objet=>$valeur){
+		$objet_teste=($objet!='rubrique'?$objet.'s':'naviguer');
+		if($objet_teste==$exec){
+			$flux .= '<link rel="stylesheet" href="'.generer_url_public('edition_directe_styles','id_'.$objet.'='.$_REQUEST['id_'.$objet]).'" type="text/css" media="all" />';
+    			}
+		}
 	return $flux;	
  }
 
@@ -46,7 +55,7 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 	}
 	
 	function edition_directe_afficher_contenu_objet($flux){
-	
+
 	    $type = $flux['args']['type'];
 		// objet rubrique
 		if ($type=='rubrique' AND objet_edition_directe($type)){
@@ -61,8 +70,8 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 				'id_rubrique'=>$row['id_parent'], // pour permettre la specialisation par la rubrique appelante
 				'config_fonc'=>'rubriques_edit_config',
 				);
-		
-			 $flux['data']=recuperer_fond("prive/editer/rubrique_mod", $contexte);
+
+				$flux['data'].=recuperer_fond("prive/editer/rubrique_mod", $contexte);
 			 }
 		
 		}
@@ -78,7 +87,7 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 				'config_fonc'=>'breves_edit_config'
 				);
 	 
-				 $flux['data']=recuperer_fond("prive/editer/breve", $contexte);
+				 $flux['data'].=recuperer_fond("prive/editer/breve", $contexte);
 				 }
 		
 		}
@@ -95,11 +104,10 @@ if($version = $GLOBALS['spip_version_branche']<3) {
 				'config_fonc'=>'sites_edit_config'
 				);
 			
-				$flux['data']=recuperer_fond("prive/editer/site_mod", $contexte);
+				$flux['data'].=recuperer_fond("prive/editer/site_mod", $contexte);
 				 }
 		
 		}		
-			
 		return $flux;
 	}
 
