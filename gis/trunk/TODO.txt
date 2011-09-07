@@ -1,4 +1,3 @@
-Regarder la compression JS qui ne fonctionne pas
 Avoir un crayon de modification de point depuis le public
 
 
