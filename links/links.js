@@ -2,7 +2,7 @@ function targetLinks() {
 	var where;
 	where="_blank";
 
-	jQuery("a[href*='://']:not([href^="+links_site+"])")
+	jQuery("a[href*='://']:not([href^="+links_site+"]):not([href^=javascript:]):not([href^=mailto:])")
 	  .attr('target',where)
 		.attr('rel','external')
 		.addClass('external')
