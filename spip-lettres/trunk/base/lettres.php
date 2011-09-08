@@ -13,7 +13,7 @@
 	 **/
 
 	global $table_des_abonnes;
-	$table_des_abonnes['abonnes'] = array(
+	$table_des_abonnes['abonne'] = array(
 										'table'				=> 'abonnes',
 										'url_prive'			=> 'abonnes_edit',
 										'url_prive_titre'	=> _T('lettresprive:modifier_abonne'),
@@ -21,7 +21,7 @@
 										'champ_email'		=> 'email',
 										'champ_nom'			=> 'nom'
 										);
-	$table_des_abonnes['auteurs'] = array(
+	$table_des_abonnes['auteur'] = array(
 										'table'				=> 'auteurs',
 										'url_prive'			=> 'auteur_infos',
 										'url_prive_titre'	=> _T('lettresprive:voir_fiche_auteur'),
@@ -44,6 +44,7 @@
 		$interface['tables_jointures']['spip_abonnes'][] = 'rubriques';
 		$interface['tables_jointures']['spip_abonnes'][] = 'abonnes_clics';
 		$interface['tables_jointures']['spip_abonnes'][] = 'clics';
+		$interface['tables_jointures']['spip_abonnes'][] = 'auteurs';
 		$interface['tables_jointures']['spip_articles'][] = 'articles_lettres';
 		$interface['tables_jointures']['spip_articles'][] = 'lettres';
 		$interface['tables_jointures']['spip_lettres'][] = 'articles_lettres';
@@ -66,7 +67,7 @@
 	function lettres_declarer_tables_principales($tables_principales) {
 		$spip_abonnes = array(
 							"id_abonne"	=> "BIGINT(21) NOT NULL",
-							"objet"		=> "VARCHAR(255) NOT NULL DEFAULT 'abonnes'",
+							"objet"		=> "VARCHAR(255) NOT NULL DEFAULT 'abonne'",
 							"id_objet"	=> "BIGINT(21) NOT NULL",
 							"email"		=> "VARCHAR(255) NOT NULL DEFAULT ''",
 							"code"		=> "VARCHAR(255) NOT NULL DEFAULT ''",
@@ -322,7 +323,12 @@
 			array('maj_liens','auteur','lettre'),
 			array('sql_drop_table',"spip_auteurs_lettres"),			
 		);
-
+		// Attention : cette maj ne gère pas le cas où d'autres tables que ABONNES ou AUTEURS 
+		// sont utilisées pour les abonnés
+		$maj['5.3'] = array(
+			array ('sql_updateq', 'spip_abonnes', array('objet'=>'auteur'), "objet='auteurs'"),
+			array ('sql_updateq', 'spip_abonnes', array('objet'=>'abonne'), "objet='abonnes'"));
+				
 		include_spip('base/upgrade');
 		maj_plugin($nom_meta_base_version, $version_cible, $maj);
 	}

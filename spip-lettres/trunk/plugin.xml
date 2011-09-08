@@ -2,8 +2,8 @@
 <plugin>
 	<nom>SPIP-Lettres</nom>
 	<auteur>[Art&#233;go->http://www.artego.fr], Cedric Morin [->www.yterium.net]</auteur>
-	<version>5.5.11</version>
-	<version_base>5.2</version_base>
+	<version>5.5.13</version>
+	<version_base>5.3</version_base>
 	<etat>dev</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
 	<description>Gestion de lettres d'information par mail</description>

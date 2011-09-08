@@ -65,7 +65,7 @@
 		
 		if (!$abonne->existe) {
 			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		} else if ($abonne->objet != 'abonnes') {
+		} else if ($abonne->objet != 'abonne') {
 			include_spip('inc/minipres');
 			echo minipres();
 			exit;

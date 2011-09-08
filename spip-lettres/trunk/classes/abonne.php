@@ -29,7 +29,7 @@
 	class abonne {
 
 		var $id_abonne;
-		var $objet = 'abonnes';
+		var $objet = 'abonne';
 		var $id_objet;
 		var $email;
 		var $code;
@@ -101,14 +101,14 @@
 			global $table_des_abonnes;
 			if ($this->existe) {
 				sql_updateq('spip_abonnes', array('format' => $this->format), 'id_abonne='.$this->id_abonne);
-				if ($this->objet == 'abonnes')
+				if ($this->objet == 'abonne')
 					sql_updateq('spip_abonnes', array('nom' => ucwords($this->nom), 'email' => strtolower($this->email)), 'id_abonne='.$this->id_abonne);
 			} else {
 				foreach ($table_des_abonnes as $valeur) {
 					$spip_objets = @sql_select('*', 'spip_'.$valeur['table'], $valeur['champ_email'].'='.sql_quote($this->email));
 					if (@sql_count($spip_objets) == 1) {
 						$arr = sql_fetch($spip_objets);
-						$this->objet	= $valeur['table'];
+						$this->objet = objet_type( $valeur['table']); // ou sinon : substr($valeur['table'],0,-1);
 						$this->id_objet	= $arr[$valeur['champ_id']];
 						break;
 					}
@@ -125,7 +125,7 @@
 				if (!intval($this->id_objet))
 					$this->id_objet = $this->id_abonne;
 				sql_updateq('spip_abonnes', array('id_objet' => intval($this->id_objet)), 'id_abonne='.intval($this->id_abonne));
-				if ($this->objet == 'abonnes') {
+				if ($this->objet == 'abonne') {
 					sql_updateq('spip_abonnes', array('email' => strtolower($this->email), 'nom' => ucwords($this->nom)), 'id_abonne='.intval($this->id_abonne));
 				}
 				$req = sql_select('*', 'spip_abonnes_statistiques', 'periode="'.date('Y-m').'"');
@@ -233,7 +233,7 @@
 				sql_insertq('spip_abonnes_clics', array('id_abonne' => 0, 'id_clic' => intval($id_clic), 'id_lettre' => $id_lettre));
 
 			if ($redirection)
-				return $redirection;
+				return corrige_lien($redirection);
 			else
 				return $GLOBALS['meta']['adresse_site'];
 		}
