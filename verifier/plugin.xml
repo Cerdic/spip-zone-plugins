@@ -8,8 +8,8 @@
 	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
 	<icon>images/verifier-128.png</icon>
 	<licence>GPL v3</licence>
-	<version>0.1.9</version>
-	<etat>dev</etat>
+	<version>0.1.10</version>
+	<etat>test</etat>
 	<description>
 		<multi>
 			[fr]Fournit une fonction unique <code>verifier($valeur, $type, $options)</code> permettant de tester la validit&#233; d'une valeur.

@@ -9,13 +9,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * Les contraintes du mail sont déterminées par le mode de validation
  * En option, on contrôle aussi la disponibilité du mail dans la table des auteurs
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option Un éventuel tableau d'options.
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ *   Un éventuel tableau d'options.
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_email_dist($valeur, $options=array()){
 	include_spip('inc/filtres');
-	
+	if (!is_string($valeur))
+		return $erreur;
+
 	// Disponibilite des courriels en base AUTEURS
 	// Si l'adresse n'est pas disponible, on stoppe tout sinon on continue
 	if ($options['disponible'] and !verifier_disponibilite_email($valeur,isset($options['id_auteur'])?$options['id_auteur']:null)){

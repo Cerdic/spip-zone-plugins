@@ -12,9 +12,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  *    Un siren/siret est donc valide si la somme des chiffres pairs
  *    + la somme du double de tous les chiffres impairs (16 = 1+6 = 7) est un multiple de 10
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option Indique s'il faut tester le SIREN ou le SIRET.
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ *   Indique s'il faut tester le SIREN ou le SIRET.
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_siren_siret_dist($valeur, $options=array()){
 	if (!$options['mode'] or !in_array($options['mode'], array('siren', 'siret'))){
@@ -27,6 +30,8 @@ function verifier_siren_siret_dist($valeur, $options=array()){
 	// Test de SIREN
 	if ($mode == 'siren'){
 		$erreur = _T('verifier:erreur_siren');
+		if (!is_string($valeur))
+			return $erreur;
 
 		// Si pas 9 caractère, c'est déjà foiré !
 		if(!preg_match('/^[0-9]{9}$/',$valeur)) return $erreur;
@@ -43,6 +48,8 @@ function verifier_siren_siret_dist($valeur, $options=array()){
 	// Test de SIRET
 	else{
 		$erreur = _T('verifier:erreur_siret');
+		if (!is_string($valeur))
+			return $erreur;
 
 		// Si pas 14 caractère, c'est déjà foiré !
 		if(!preg_match('/^[0-9]{14}$/',$valeur)) return $erreur;

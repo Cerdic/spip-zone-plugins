@@ -6,9 +6,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Vérifie que la valeur correspond à un id_dcoument valide
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_id_document_dist($valeur, $options=array()){
 	$erreur = '';

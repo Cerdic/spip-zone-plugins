@@ -9,9 +9,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - min : valeur minimale acceptée
  * - max : valeur maximale acceptée
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option Si ce tableau associatif contient une valeur pour 'min' ou 'max', un contrôle supplémentaire sera effectué.
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ *   Si ce tableau associatif contient une valeur pour 'min' ou 'max', un contrôle supplémentaire sera effectué.
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_entier_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_entier');

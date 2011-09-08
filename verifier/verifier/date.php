@@ -11,13 +11,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * On pourrait faire mieux, genre vérifier les jours en fonction du mois
  * Mais c'est pas très important, on reste simple
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option tableau d'options [NON UTILISE].
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ *   tableau d'options [NON UTILISE].
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
-
 function verifier_date_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_date_format');
+	if (!is_string($valeur))
+		return $erreur;
+
 	$ok = '';
 	// On tolère différents séparateurs
 	$valeur = preg_replace("#\.|/| #i",'-',$valeur);

@@ -8,14 +8,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * 
  * Si auncune option n'est définie, vérifie uniquement si un protocole de type web est défini
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option.
- * 	mode : protocole_seul, php_filter, complet
- *		type_protocole : tous, web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), exact
- *    protocole : nom du protocole (si type_protocole=exact)
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ * 	 mode : protocole_seul, php_filter, complet
+ *		 type_protocole : tous, web (http ou https), mail (imap, pop3, smtp), ftp (ftp ou sftp), exact
+ *     protocole : nom du protocole (si type_protocole=exact)
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_url_dist($valeur, $options=array()){
+	if (!is_string($valeur))
+		return _T('erreur_inconnue_generique');
 
 	// Choix du mode de verification de la syntaxe des url
 	if (!$options['mode'] or !in_array($options['mode'], array('protocole_seul','php_filter','complet'))){

@@ -12,6 +12,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  */
 function verifier_telephone_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_telephone');
+	if (!is_string($valeur))
+		return $erreur;
 	$ok = '';
 
 	// On accepte differentes notations, les points, les tirets, les espaces, les slashes

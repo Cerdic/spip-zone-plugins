@@ -6,9 +6,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Compare la valeur avec un autre champ du _request().
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option Un éventuel tableau d'options.
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ *   Un éventuel tableau d'options.
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_comparaison_champ_dist($valeur, $options=array()){
 	include_spip('inc/filtres');

@@ -8,13 +8,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * http://fr.wikipedia.org/wiki/Code_postal_en_France
  * a completer pour d'autre pays
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option
- *	pays => code pays
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ *   pays => code pays
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_code_postal_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_code_postal');
+	if (!is_string($valeur))
+		return $erreur;
+
 	$ok = '';
 	switch ($options['pays']){
 		case 'FR':
