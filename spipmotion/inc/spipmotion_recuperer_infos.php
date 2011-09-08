@@ -19,7 +19,7 @@ function inc_spipmotion_recuperer_infos($id_document){
 		return false;
 
 	include_spip('inc/documents');
-	$document = sql_fetsel("docs.titre,docs.descriptif,docs.extension,docs.fichier,docs.taille,docs.mode", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+	$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
 	$chemin = $document['fichier'];
 	$movie_chemin = get_spip_doc($chemin);
 
