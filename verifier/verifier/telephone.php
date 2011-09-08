@@ -6,9 +6,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * Vérifie un numéro de téléphone. Pour l'instant seulement avec le schéma français.
  *
- * @param string $valeur La valeur à vérifier.
- * @param array $option [INUTILISE].
- * @return string Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
+ * @param string $valeur
+ *   La valeur à vérifier.
+ * @param array $options
+ *   [INUTILISE].
+ * @return string
+ *   Retourne une chaine vide si c'est valide, sinon une chaine expliquant l'erreur.
  */
 function verifier_telephone_dist($valeur, $options=array()){
 	$erreur = _T('verifier:erreur_telephone');

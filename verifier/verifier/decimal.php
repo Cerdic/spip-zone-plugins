@@ -9,8 +9,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
  * - min : valeur minimale acceptée
  * - max : valeur maximale acceptée
  *
- * @param string
- *   $valeur La valeur à vérifier.
+ * @param string $valeur
+ *   La valeur à vérifier.
  * @param array $options
  *   Si ce tableau associatif contient une valeur pour 'min' ou 'max', un contrôle supplémentaire sera effectué.
  * @return string
