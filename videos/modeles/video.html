@@ -63,7 +63,7 @@
 	[(#EXTENSION|=={dist_daily}|oui)
 		#SET{videosLiees,#ENV{videosLiees,#CONFIG{videos/videosLiees,'0'}}}
 	
-		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
+		<iframe frameborder="0" width="#GET{largeur}" height="#GET{hauteur}" src="http://www.dailymotion.com/embed/video/#GET{fichier}?width=#GET{largeur}&amp;theme=none&amp;foreground=%23F7FFFD&amp;highlight=%23FFC300&amp;background=%23171D1B&amp;start=[&amp;animatedTitle=(#TITRE|urlencode)]&amp;iframe=1&amp;additionalInfos=0&amp;autoPlay=0&amp;hideInfos=0&amp;wmode=#GET{wmode}"></iframe>
 	]
 [(#REM)
 /** Traiter Viméo **/
