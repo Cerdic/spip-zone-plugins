@@ -24,6 +24,7 @@
 	- autocenterandzoom = oui		centrer et zoomer la carte automatiquement pour afficher tous les marqueurs
 	- kml = 12						kml à superposer à la carte (id_document ou url)
 	- localiser_visiteur = oui		centrer la carte sur la position du visiteur (API geolocation HTML5)
+	- point = non 					si elle vaut "non" cette option n'affichera pas de points du tout (utile pour n'afficher qu'un kml par exemple)
 
 ]
 
@@ -98,6 +99,7 @@ var map[(#GET{id})];
 		[(#ENV{control_pan}|!={non}|oui)
 		map[(#GET{id})].addControls({pan: true});]
 
+		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
 				objets : "(#ENV{objets})",][
@@ -128,7 +130,7 @@ var map[(#GET{id})];
 					}]
 				}
 			}
-		);
+		);]
 		
 		[(#ENV{kml}|oui)
 		[(#ENV{kml}|intval|oui)
