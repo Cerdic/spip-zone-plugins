@@ -481,8 +481,8 @@ jQuery.geoportail =
 	addLayer: function(carte, type, id_document, name, url, nozoom, opts) 
 	{	// Recherche des styles dans le css
 		function setStyle(style, id) 
-		{	var stl = $('#'+id);
-			if (!stl.length) stl = $("<div id='"+id+"'></div>").appendTo("body").hide();
+		{	var stl = jQuery('#'+id);
+			if (!stl.length) stl = jQuery("<div id='"+id+"'></div>").appendTo("body").hide();
 			style.defaultStyle = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
 			style.defaultStyle.cursor = 'pointer';
 			style.defaultStyle.pointRadius = stl.width();
@@ -1039,7 +1039,7 @@ jQuery.geoportail =
 	/** Affichage d'une image dans une fenetre */
 	afficheImage : function (src, titre)
 	{	jQuery.geoportail.unselectAll();
-		$.jqDialog.wait();
+		jQuery.jqDialog.wait();
 		// Precharger l'image
 		var imgPreloader = new Image();
 		imgPreloader.onload = function()
@@ -1096,7 +1096,7 @@ jQuery.geoportail =
 							html,
 							pos ? {size:new OpenLayers.Size(5,5), offset: new OpenLayers.Pixel(-3,-3) } : null,
 							(hover?false:true),
-							function(evt) { if (this.feature) $.geoportail.unpopupFeature(this.feature); }
+							function(evt) { if (this.feature) jQuery.geoportail.unpopupFeature(this.feature); }
 						);
 		// Hauteur max 
 		var h = 200;
@@ -1150,7 +1150,7 @@ jQuery.geoportail =
 /** Fonction de gestion de la synchronisation */
 function geoportail_moveSynchro (e)
 {	if (this.moving) return;
-	var i;	// $.geoportail.synchro([1,2,3])
+	var i;	// jQuery.geoportail.synchro([1,2,3])
 	for (i in this.synchro)
 	{	var c = this.synchro[i].map.getMap()
 		this.synchro[i].moving = true;
@@ -1167,15 +1167,15 @@ function geoportail_moveSynchro (e)
 */
 function geoportail_selectionnable (l, hover)
 {	if (!(l instanceof Array)) l = [l];
-	if (typeof(hover) == 'undefined') hover = $.geoportail.hover;
+	if (typeof(hover) == 'undefined') hover = jQuery.geoportail.hover;
 	// Controle pour la selection
 	options = {
 			clickout: true, toggle: false,
 			multiple: false, hover: (hover ? true : false),
 			/*
-			onSelect: $.geoportail.popupFeature,
+			onSelect: jQuery.geoportail.popupFeature,
 			*/
-			onUnselect: $.geoportail.unpopupFeature,
+			onUnselect: jQuery.geoportail.unpopupFeature,
 			callbacks:
 			{	click: function (feature) 
 				{	// Position du curseur
@@ -1183,16 +1183,16 @@ function geoportail_selectionnable (l, hover)
 					// Selectionner
 					this.unselectAll(); 
 					this.select(feature); 
-					$.geoportail.popupFeature(feature, pos, false); 
+					jQuery.geoportail.popupFeature(feature, pos, false); 
 				},
-				clickout: $.geoportail.unpopupFeature,
+				clickout: jQuery.geoportail.unpopupFeature,
 				over:  hover ? function (feature, e) 
 				{	// Position du curseur
 					var pos = this.layer.map.getLonLatFromPixel(this.handlers.feature.evt.xy);
 					// Selectionner
 					this.unselectAll(); 
 					this.select(feature);
-					$.geoportail.popupFeature(feature, pos, true); 
+					jQuery.geoportail.popupFeature(feature, pos, true); 
 				}: null, 
 				out: function (feature) { if (feature.popup && feature.popup.hover) this.unselectAll(); }
 			}
