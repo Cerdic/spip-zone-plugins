@@ -105,16 +105,14 @@ var $ajoute;
 		
 		foreach($this->aCols as $col) {
 			$this->SetX($x);			
-			$y = $this->GetY();
 			$this->MultiCell($col['w'],5*$max_nb_lignes/$nb_lignes[$col['f']],utf8_decode($data[$col['f']]),1,$col['a'],$fill);
-			$this->SetY($y);
+			$this->SetY($this->GetY()-5*$max_nb_lignes); 
 			$x += $col['w'];
 			
 
 		}
-		//$this->Ln();
-		$this->setY($y+5*$max_nb_lignes);
 		$this->ColorIndex=1-$ci;
+		$this->Ln(5*$max_nb_lignes);
 	}
 }
 ?>

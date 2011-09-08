@@ -12,20 +12,20 @@ require_once('fpdf.php');
 class PDF_Label extends FPDF {
 
 	// Propriétés privées
-	var $_Avery_Name	= '';				// Nom du format de l'étiquette
-	var $_Margin_Left	= 0;				// Marge de gauche de l'étiquette
-	var $_Margin_Top	= 0;				// Marge en haut de la page avant la première étiquette
-	var $_X_Space 		= 0;				// Espace horizontal entre 2 bandes d'étiquettes
-	var $_Y_Space 		= 0;				// Espace vertical entre 2 bandes d'étiquettes
-	var $_X_Number 		= 0;				// Nombre d'étiquettes sur la largeur de la page
-	var $_Y_Number 	= 0;				// Nombre d'étiquettes sur la hauteur de la page
-	var $_Width 			= 0;				// Largeur de chaque étiquette
-	var $_Height 			= 0;				// Hauteur de chaque étiquette
-	var $_Char_Size		= 10;				// Hauteur des caractères
-	var $_Line_Height	= 10;				// Hauteur par défaut d'une ligne
-	var $_Metric 			= 'mm';			// Unité de mesure des étiquettes. Aidera à calculer les bonnes valeurs
-	var $_Metric_Doc 	= 'mm';			// Unité de mesure du document
-	var $_Font_Name	= 'Arial';			// Nom de la police (voir dossier font/)
+	var $_Avery_Name	= '';		// Nom du format de l'étiquette
+	var $_Margin_Left	= 0;		// Marge de gauche de l'étiquette
+	var $_Margin_Top	= 0;		// Marge en haut de la page avant la première étiquette
+	var $_X_Space 		= 0;		// Espace horizontal entre 2 bandes d'étiquettes
+	var $_Y_Space 		= 0;		// Espace vertical entre 2 bandes d'étiquettes
+	var $_X_Number 		= 0;		// Nombre d'étiquettes sur la largeur de la page
+	var $_Y_Number 		= 0;		// Nombre d'étiquettes sur la hauteur de la page
+	var $_Width 		= 0;		// Largeur de chaque étiquette
+	var $_Height 		= 0;		// Hauteur de chaque étiquette
+	var $_Char_Size		= 10;		// Hauteur des caractères
+	var $_Line_Height	= 10;		// Hauteur par défaut d'une ligne
+	var $_Metric 		= 'mm';		// Unité de mesure des étiquettes. Aidera à calculer les bonnes valeurs
+	var $_Metric_Doc 	= 'mm';		// Unité de mesure du document
+	var $_Font_Name		= 'Arial';	// Nom de la police (voir dossier font/)
 
 	var $_COUNTX = 1;
 	var $_COUNTY = 1;
