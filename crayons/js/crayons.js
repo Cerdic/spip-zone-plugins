@@ -328,8 +328,13 @@ $.fn.activatecrayon = function(percent) {
 				)
 				.iconecrayon();
 				// Declencher le onAjaxLoad normal de SPIP
-				if (typeof triggerAjaxLoad == 'function')
+				if (typeof jQuery.spip == 'object' && typeof jQuery.spip.triggerAjaxLoad == 'function') {
+					jQuery.spip.triggerAjaxLoad(tous.get());
+				}
+				// SPIP 2.x
+				else if (typeof triggerAjaxLoad == 'function') {
 					triggerAjaxLoad(tous.get());
+				}
 			}})
 			.one('submit', function(){
 				crayon
@@ -455,8 +460,13 @@ $.fn.activatecrayon = function(percent) {
 		.end();
 		// Declencher le onAjaxLoad normal de SPIP
 		// (apres donc le chargement de la page de saisie (controleur))
-		if (typeof triggerAjaxLoad == 'function')
+		if (typeof jQuery.spip == 'object' && typeof jQuery.spip.triggerAjaxLoad == 'function') {
+			jQuery.spip.triggerAjaxLoad(crayon.get());
+		}
+		// SPIP 2.x
+		else if (typeof triggerAjaxLoad == 'function') {
 			triggerAjaxLoad(crayon.get());
+		}
 	});
 };
 

@@ -8,6 +8,7 @@
 function pack_cQuery($chemin) {
 	$flux = spip_file_get_contents($chemin);
 	$flux = str_replace('jQuery', 'cQuery', $flux);
+	$flux = str_replace('cQuery.spip', 'jQuery.spip', $flux);
 
 	// On ne compacte PAS deux fois (c'est inutile et en plus ca bugge)
 	if (!strlen($flux)

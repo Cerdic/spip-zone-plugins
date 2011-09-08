@@ -16,7 +16,7 @@
 		&#169; 2006-2011 - GNU/GPL
 	</licence>
 	<version>
-	1.12.2
+	1.13.0
 	</version>
 	<etat>
 	stable
@@ -41,15 +41,15 @@ _ <code><h1 class="#EDIT{titre} &#1593;&#1604;&#1575;&#1605;&#1575;&#1578; &#157
 	<icon>
 	images/crayon-128.png
 	</icon>
-	<fonctions>tetecrayons.php</fonctions>
+	<fonctions>crayons_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affichage_final</nom>
-		<inclure>tetecrayons.php</inclure>
+		<inclure>crayons_fonctions.php</inclure>
 	</pipeline>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>insert_head</action>
-		<inclure>tetecrayons.php</inclure>
+		<inclure>crayons_fonctions.php</inclure>
 	</pipeline>
 	<chemin dir='' />
 	<categorie>edition</categorie>
