@@ -42,7 +42,7 @@ var $ajoute;
 	/* le parametre data doit donc etre un tableau de la forme: valeur_champ_jointure => array(champs1=>valeur, champs2=>valeur, ..)  afin d'inserer */
 	/* dans le resultat de la requete les champs champs1 et champ2 en jointure = sur le champs fourni dans l'autre parametre */
 	function Query_extended($res, $prop=array(), $data, $champ_jointure) {
-		//Traite les propriétés
+		//Traite les proprietes
 		if(!isset($prop['width']))
 			$prop['width']=0;
 		if($prop['width']==0)
@@ -105,16 +105,14 @@ var $ajoute;
 		
 		foreach($this->aCols as $col) {
 			$this->SetX($x);			
-			$y = $this->GetY();
 			$this->MultiCell($col['w'],5*$max_nb_lignes/$nb_lignes[$col['f']],utf8_decode($data[$col['f']]),1,$col['a'],$fill);
-			$this->SetY($y);
+			$this->SetY($this->GetY()-5*$max_nb_lignes);
 			$x += $col['w'];
 			
 
 		}
-		//$this->Ln();
-		$this->setY($y+5*$max_nb_lignes);
 		$this->ColorIndex=1-$ci;
+		$this->Ln(5*$max_nb_lignes);
 	}
 }
 ?>

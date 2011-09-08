@@ -70,7 +70,7 @@ function exec_pdf_adherents()
 	foreach($liste_id_auteurs as $id_auteur) {
 		$adresses_tels[$id_auteur] = array();
 		if ($sent['email']=='on') $adresses_tels[$id_auteur]['email'] = implode("\n", $emails[$id_auteur]);
-		if ($sent['adresse']=='on') $adresses_tels[$id_auteur]['adresse'] = preg_replace('/\&nbsp\;/', " ", preg_replace('/\<br\s*\/>/i', "\n", implode("\n\n", $adresses[$id_auteur]))); /* recupere toutes les adresses dans un seul string separees par \n\n et remplace les <br/> par des \n et &nbsp; par des " " car la chaine est en HTML */
+		if ($sent['adresse']=='on') $adresses_tels[$id_auteur]['adresse'] = preg_replace('/\&nbsp\;/', " ", preg_replace('/(\s*\<br\s*\/>\s*)+/i', "\n", implode("\n\n", $adresses[$id_auteur]))); /* recupere toutes les adresses dans un seul string separees par \n\n et remplace les <br/> par des \n et &nbsp; par des " " car la chaine est en HTML */
 		if ($sent['telephone']=='on') {
 			$first_tel = true;
 			$telephones_string = '';
