@@ -51,7 +51,7 @@
 [(#REM) C'est quoi qu'on achette ? ]
 [<input name="item_name" type="hidden" value="(#ENV{libelle})" />]
 [<input name="custom" type="hidden" value="(#ENV{custom})" />]
-[<input name="invoice" type="hidden" value="(#ENV{identifiant})" />]
+[<input name="invoice" type="hidden" value="(#ENV{invoice})" />]
 
 [(#REM) Avoir les details ]
 [(#ENV{details}|et{#ENV{type}|=={abonnement}|non}|oui) 
