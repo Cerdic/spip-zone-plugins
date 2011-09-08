@@ -82,6 +82,7 @@
 		'voir_en_ligne' => "Voir en ligne",
 		'logo_lettre' => "LOGO DE LA LETTRE",
 		'thematiques' => "Thématiques",
+		'thematique' => 'Thématique',
 
 		'statistiques' => "Statistiques",
 		'envoi' => "Envoi",
