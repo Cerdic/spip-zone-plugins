@@ -98,6 +98,7 @@ var map[(#GET{id})];
 		[(#ENV{control_pan}|!={non}|oui)
 		map[(#GET{id})].addControls({pan: true});]
 
+		[(#ENV{point}|!={non}|oui)
 		jQuery.getJSON("[(#URL_PAGE{gis_json}|url_absolue)]",
 			{[
 				objets : "(#ENV{objets})",][
@@ -128,7 +129,7 @@ var map[(#GET{id})];
 					}]
 				}
 			}
-		);
+		);]
 		
 		[(#ENV{kml}|oui)
 		[(#ENV{kml}|intval|oui)

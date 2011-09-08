@@ -106,13 +106,15 @@ function gis_post_edition($flux){
 	if (($flux['args']['operation'] == 'ajouter_document') 
 		AND ($document = sql_fetsel("*","spip_documents","id_document=".intval($flux['args']['id_objet'])))
 	) {
-		if ($document['extension'] == 'jpg') {
+		if(in_array($document['extension'],array('jpg','kml','kmz'))){
 			$config = @unserialize($GLOBALS['meta']['gis']);
 			if(!is_array($config))
 				$config = array();
 			include_spip('inc/documents');
 			$fichier = get_spip_doc($document['fichier']);
 			$id_document = $document['id_document'];
+		}
+		if ($document['extension'] == 'jpg') {
 			// on recupere les coords definies dans les exif du document s'il y en a
 			if ($exifs =  @exif_read_data($fichier,'GPS')) {
 				if(!function_exists('dms_to_dec'))
@@ -249,6 +251,40 @@ function gis_post_edition($flux){
 					revisions_gis($id_gis,$c);
 					lier_gis($id_gis, 'document', $id_document);
 					spip_log("GIS EXIFS : Création des coordonnées depuis EXIFS pour le document $id_document => id_gis = $id_gis","gis");
+				}
+			}
+		}elseif(in_array($document['extension'],array('kml','kmz'))){
+			$recuperer_info = charger_fonction('kml_infos','inc');
+			$infos = $recuperer_info($document['id_document']);
+			if($infos){
+				if(is_numeric($latitude = $infos['latitude']) && is_numeric($longitude = $infos['longitude'])){
+					$c = array(
+						'titre' => basename($fichier),
+						'lat'=> $latitude,
+						'lon' => $longitude,
+						'zoom' => $config['zoom'] ? $config['zoom'] :'4'
+					);
+			
+					include_spip('action/editer_gis');
+		
+					if($id_gis = sql_getfetsel("G.id_gis","spip_gis AS G LEFT  JOIN spip_gis_liens AS T ON T.id_gis=G.id_gis ","T.id_objet=" . intval($id_document) . " AND T.objet='document'")){
+						// Des coordonnées sont déjà définies pour ce document => on les update
+						revisions_gis($id_gis,$c);
+						spip_log("GIS EXIFS : Update des coordonnées depuis EXIFS pour le document $id_document => id_gis = $id_gis","gis");
+					}
+					else{
+						// Aucune coordonnée n'est définie pour ce document  => on les crées
+						$id_gis = insert_gis();
+						revisions_gis($id_gis,$c);
+						lier_gis($id_gis, 'document', $id_document);
+						spip_log("GIS EXIFS : Création des coordonnées depuis EXIFS pour le document $id_document => id_gis = $id_gis","gis");
+					}
+				}
+				unset($infos['longitude']);
+				unset($infos['latitude']);
+				if(count($infos) > 0){
+					include_spip('inc/modifier');
+					revision_document($id_document, $infos);
 				}
 			}
 		}
