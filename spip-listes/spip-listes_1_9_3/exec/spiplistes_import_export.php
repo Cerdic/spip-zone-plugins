@@ -132,14 +132,15 @@ function exec_spiplistes_import_export() {
 			while($row = sql_fetch($sql_result)) {
 				$str_export .= $row['email'].$separateur.$row['login'].$separateur.$row['nom']
 					. ($exporter_statut_auteur ? $separateur.$row['statut'] : '')
-					. "\n"
+					. $eol
 					;
 			}
 			// envoie le fichier
 			header('Content-type: text/plain');
 			header('Content-Disposition: attachment; filename="export_liste_'
 				   . $export
-				   . '_id-'
+				   . '_id'.$id_liste
+				   . '-'
 				   . date("Y-m-d")
 				   . '.txt"'
 				   );
