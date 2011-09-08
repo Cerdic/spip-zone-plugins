@@ -496,16 +496,14 @@ jQuery.geoportail =
 		var map = carte.map;
 		// Ajouter la couche
 		var l;
-		if (type == "GXT") {
-			l = new OpenLayers.Layer.GXT(name, url, opts);
+		if (!opts) opts = {};
+		opts = jQuery.extend ({opacity:1, visibility:true, originators:jQuery.geoportail.originators, view:{ zoomToExtent:1 }}, opts);
+		if (type == "GXT") 
+		{	l = new OpenLayers.Layer.GXT(name, url, opts);
 			map.getMap().addLayer(l);
 		}
 		else 
-		{	if (!opts) opts = {};
-			opts.preFeatureInsert = Geoportal.Popup.setPointerCursorForFeature;
-			opts.opacity = 1;
-			opts.visibility = true;
-			opts.originators = jQuery.geoportail.originators;
+		{	opts.preFeatureInsert = Geoportal.Popup.setPointerCursorForFeature;
 			l = map.getMap().addLayer(type, name, url, opts, { formatOptions :{extractStyles : true}, preventDefaultBehavior : true });
 		}
 		if (l) 
@@ -921,8 +919,8 @@ jQuery.geoportail =
 			if (visu.maxZ) map.getMap().maxZoomLevel = visu.maxZ;
 
 			// Style d'affichage par defaut
-			OpenLayers.Feature.Vector.style['default'].fillOpacity = 1;
-			OpenLayers.Feature.Vector.style['select'].fillOpacity = 1;
+			OpenLayers.Feature.Vector.style['default'].fillOpacity = 0.8;
+			OpenLayers.Feature.Vector.style['select'].fillOpacity = 0.8;
 		}
 	},
 
@@ -1210,6 +1208,20 @@ function geoportail_selectionnable (l, hover)
 	this.getMap().addControl(selectControl);
 	this.selectControl = selectControl;
 	selectControl.activate();
+	/* Patch pour permettre le changment d'opacite meme avec un control actif... 
+		=> limite a 30% pour eviter les problemes d'objets fantomes.... 
+	*/
+	var i;
+	for (i=0; i<l.length; i++)
+	{	// Patch setOpatity to avoid selectControl to catch the event
+		l[i].setOpacity = function (opacity) 
+		{	var b = (selectControl && selectControl.active);
+			if (b && opacity>0.3) selectControl.deactivate(); 
+			OpenLayers.Layer.Vector.prototype.setOpacity.apply (this,[opacity]);
+			if (b && opacity>0.3) selectControl.activate(); 
+		};
+	}
+	
 }
 
 /** Fonction de telechargement
