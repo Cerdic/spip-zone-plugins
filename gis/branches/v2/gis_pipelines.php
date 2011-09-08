@@ -256,6 +256,7 @@ function gis_post_edition($flux){
 		}elseif(in_array($document['extension'],array('kml','kmz'))){
 			$recuperer_info = charger_fonction('kml_infos','inc');
 			$infos = $recuperer_info($document['id_document']);
+			spip_log('kml','test');
 			if($infos){
 				if(is_numeric($latitude = $infos['latitude']) && is_numeric($longitude = $infos['longitude'])){
 					$c = array(
@@ -319,7 +320,7 @@ function gis_declarer_type_surnoms($surnoms){
 	return $surnoms;
 }
 
-function gis_declarer_objets_surnoms($surnoms){
+function gis_declarer_tables_objets_surnoms($surnoms){
 	$surnoms['gis'] = 'gis';
 	return $surnoms;
 }
