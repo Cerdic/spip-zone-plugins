@@ -155,6 +155,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_redac' => 'Editing in progress',
 	'statut_resolu' => 'Resolved',
 	'statut_resolu_long' => 'All the resolved bug reports',
+	'suivre_tickets_assignes_a' => 'Bug reports assigned to @nom@',
+	'suivre_tickets_de' => 'Bug reports of @nom@',
+	'suivre_tickets_statut' => 'Bug reports having the statut(s):',
+	'suivre_tickets_rss' => 'Follow these bug reports by RSS',
+	'suivre_tickets_tous' => 'All bug reports',
 	'syndiquer_ticket' => 'Syndicate the bug report:',
 	'syndiquer_tickets' => 'Syndicate the bug reports of the website',
 

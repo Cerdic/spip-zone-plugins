@@ -12,10 +12,11 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:atom="http://www.w3.org/2005/Atom"
 >
-
+[[(#SET{nom,[(#INFO_NOM{auteur,#ENV{id_auteur}})]})](#ENV{id_auteur}|oui)]
+[[(#SET{nom,[(#INFO_NOM{auteur,#ENV{id_assigne}})]})](#ENV{id_assigne}|oui)]
 <channel[ xml:lang="(#LANG)"]>
-	<title>&#91;[(#NOM_SITE_SPIP|textebrut|texte_backend)]&#93; <:tickets:tickets:></title>
-	<link>[(#URL_PAGE{tickets}|url_absolue)]</link>
+	<title>&#91;[(#NOM_SITE_SPIP|textebrut|texte_backend)]&#93; [<:tickets:suivre_tickets_de{nom=#GET{nom}}:>(#ENV{id_auteur}|oui)][<:tickets:suivre_tickets_assignes_a{nom=#GET{nom}}:>(#ENV{id_assigne}|oui)][<:tickets:suivre_tickets_statut:> [(#ENV{statut}|is_array|?{[(#ENV{statut}|implode{', '})],#ENV{statut}})](#ENV{statut}|oui)][<:tickets:suivre_tickets_tous:>(#ENV{id_auteur,#ENV{id_assigne,#ENV{statut}}}|non)]</title>
+	<link>[(#URL_PAGE{tickets}|parametre_url{id_auteur,#ENV{id_auteur}}|parametre_url{id_assigne,#ENV{id_assigne}}|url_absolue)]</link>
 	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
 	<language>#LANG</language>
 	<generator>SPIP - www.spip.net</generator>
@@ -29,9 +30,9 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
-<BOUCLE_10recents(TICKETS){id_ticket?}{severite?}{statut?}{id_auteur?}{id_assigne?}{tracker?}{projet?}{composant?}{version?}{jalon?}{navigateur?}{par date}{inverse}{0,10}{unique}>
+<BOUCLE_recents(TICKETS){id_auteur?}{id_auteur !IN #ENV{id_auteur_non,''}}{id_ticket?}{id_assigne?}{severite?}{statut?}{tracker?}{projet?}{composant?}{version?}{jalon?}{navigateur?}{par date}{inverse}{0,#ENV{limit,10}}{unique}>
 <INCLURE{fond=inclure/rss-item-ticket,id_ticket}>
-</BOUCLE_10recents>
+</BOUCLE_recents>
 
 </channel>
 
