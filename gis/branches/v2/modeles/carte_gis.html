@@ -8,8 +8,8 @@
 	- lat = 48.3					latitude du centre de la carte
 	- lon = -4.7					longitude du centre de la carte
 	- zoom = 5						zoom de la carte
-	- width = 100%					largeur de la carte, 100% par defaut
-	- height = 400px				hauteur de la carte, 400px par defaut
+	- width|largeur = 100%					largeur de la carte, 100% par defaut
+	- height|hauteur = 400px				hauteur de la carte, 400px par defaut
 	- style = non					ne pas styler la carte
 	- zoom_molette = non			désactiver le zoom avec la molette de la souris, actif par defaut
 	- type = carte					type de la carte : carte, satellite, relief ou hybride
@@ -28,8 +28,8 @@
 
 ]
 
-[(#SET{width,#ENV{width,100%}})]
-[(#SET{height,#ENV{height,400px}})]
+[(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
+[(#SET{height,#ENV{height,#ENV{hauteur,400px}}})]
 [(#SET{id,#ENV{id_carte_gis,1}})]
 [(#REM) -- compat gis v1 -- ]
 [(#SET{lat,#ENV{lat,#ENV{latit,#CONFIG{gis/lat,0}}}})]
