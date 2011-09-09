@@ -18,7 +18,7 @@ function autobr_pre_propre($flux) {
 	// post_autobr() est une fonction de traitement qui possede son propre systeme d'echappement
 	// on traite, sauf si la balise alinea est detectee
 	if(defined('_CS_AUTOBR_TRAIT') && (!defined('_CS_AUTOBR_RACC') || strpos($flux, '<alinea>')===false))
-		$flux = post_autobr($flux, '<br />');
+		$flux = cs_echappe_balises('html|code|cadre|frame|script|jeux', 'post_autobr', $flux, '<br />');
 	return $flux;
 }
 
