@@ -12,7 +12,7 @@ function tickets_declarer_tables_principales($tables_principales){
 			"date"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"date_modif"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 			"severite"	=> "integer DEFAULT '0' NOT NULL",
-			"type"	=> "integer DEFAULT '0' NOT NULL",
+			"tracker"	=> "integer DEFAULT '0' NOT NULL",
 			"statut"	=> "varchar(10) DEFAULT '0' NOT NULL",
 			"id_auteur"	=> "bigint(21) NOT NULL",
 			"ip"	=> "varchar(16) DEFAULT '' NOT NULL",

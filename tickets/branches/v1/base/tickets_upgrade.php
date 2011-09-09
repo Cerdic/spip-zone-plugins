@@ -34,7 +34,6 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		maj_tables(array('spip_tickets', 'spip_tickets_forum'));
 		ecrire_meta($nom_meta_base_version,$current_version="0.7");
 	}
-
 	// au dessus de 1.0, c'est specifique SPIP >= 2.1
 	if (version_compare($current_version,"1.0","<")) {
 		// migrer sur la table forums pour la version 2.1...
@@ -47,6 +46,12 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		// ajout du champ navigateur
 		maj_tables('spip_tickets');
 		ecrire_meta($nom_meta_base_version,$current_version="1.1");
+	}
+	if (version_compare($current_version,"1.2","<")){
+		// modifications de la table spip_tickets,
+		// ajout du champ navigateur
+		maj_tables('spip_tickets');
+		ecrire_meta($nom_meta_base_version,$current_version="1.2");
 	}
 }
 

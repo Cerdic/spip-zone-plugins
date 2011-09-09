@@ -24,10 +24,10 @@
 					defaut=[(#ENV{id_ticket}|is_numeric|?{'',#SESSION{id_auteur}})],
 					datas=#GET{assignables}})]
 					
-				[(#SAISIE{selection, type,
+				[(#SAISIE{selection, tracker,
 					label=<:tickets:champ_type:>,
 					cacher_option_intro=oui,
-					datas=[(#ENV{id_ticket}|tickets_liste_type)]})]
+					datas=[(#ENV{id_ticket}|tickets_liste_tracker)]})]
 
 				[(#SAISIE{selection, severite,
 					label=<:tickets:champ_severite:>,

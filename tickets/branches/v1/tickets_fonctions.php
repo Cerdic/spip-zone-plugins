@@ -101,7 +101,7 @@ function tickets_bouton_block_depliable($texte,$deplie,$page="",$ids=""){
 
 // creation des fonction de selection de texte
 // encore en truc a reprendre !
-foreach (array('severite', 'type', 'statut', 'navigateur') as $nom){
+foreach (array('severite', 'tracker', 'statut', 'navigateur') as $nom){
 	eval("function tickets_texte_$nom(\$valeur) {
 		\$type = tickets_liste_$nom();
 		if (isset(\$type[\$valeur])) {
@@ -144,13 +144,13 @@ function tickets_liste_statut($connecte = true){
 }
 
 
-function tickets_liste_type($id_ticket = null){
-	$types = array(
+function tickets_liste_tracker($id_ticket = null){
+	$trackers = array(
 		1 => _T("tickets:type_probleme"),
 		2 => _T("tickets:type_amelioration"),
 		3 => _T("tickets:type_tache"),
 	);
-	return $types;
+	return $trackers;
 }
 
 function tickets_liste_severite($id_ticket = null){

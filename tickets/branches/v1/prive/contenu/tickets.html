@@ -14,8 +14,8 @@
 	<li class="[(#ENV{classement}|=={asuivre}|?{fondgrison,fondgris})]">
 		<a href="[(#SELF|parametre_url{classement,asuivre})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_asuivre:>})] <:tickets:classement_asuivre:></a>
 	</li>
-	<li class="[(#ENV{classement}|=={type}|?{fondgrison,fondgris})]">
-		<a href="[(#SELF|parametre_url{classement,type})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_type:>})] <:tickets:classement_type:></a>
+	<li class="[(#ENV{classement}|=={tracker}|?{fondgrison,fondgris})]">
+		<a href="[(#SELF|parametre_url{classement,tracker})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_type:>})] <:tickets:classement_type:></a>
 	</li>
 	<li class="[(#ENV{classement}|=={assigne}|?{fondgrison,fondgris})]">
 		<a href="[(#SELF|parametre_url{classement,assigne})]" class="cellule-h">[(#CHEMIN{imgs/bugs.png}|image_reduire{24}|vider_attribut{style}|inserer_attribut{style,vertical-align:middle;}|inserer_attribut{alt,<:tickets:classement_assigne:>})] <:tickets:classement_assigne:></a>

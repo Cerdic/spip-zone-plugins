@@ -3,7 +3,7 @@
 	date,#ENV{date_sens,-1},
 	maj,#ENV{date_sens,-1},
 	titre,1,
-	type,1,
+	tracker,1,
 	jalon,1,
 	version,1,
 	composant,1,
@@ -52,9 +52,9 @@
 					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_titre:>,ajax})]]
 					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_titre:>,ajax})]]]
 			</th>
-			[(#ENV{type}|non)<th>
-				[(#ENV{tri_detaillee}|=={type}|non)[(#TRI{type,<:tickets:champ_type:>,ajax})]]
-				[(#ENV{tri_detaillee}|=={type}|oui)
+			[(#ENV{tracker}|non)<th>
+				[(#ENV{tri_detaillee}|=={tracker}|non)[(#TRI{tracker,<:tickets:champ_type:>,ajax})]]
+				[(#ENV{tri_detaillee}|=={tracker}|oui)
 					[(#ENV{sens_detaillee}|=={1}|ou{#ENV{sens_detaillee}|non}|oui)[(#TRI{'>',<:tickets:champ_type:>,ajax})]]
 					[(#ENV{sens_detaillee}|=={-1}|oui)[(#TRI{'<',<:tickets:champ_type:>,ajax})]]]
 			</th>]
@@ -111,7 +111,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS){id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{type?}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_detaillee(TICKETS){id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{tracker?}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
@@ -119,8 +119,8 @@
 				<a href="[(#URL_TICKET)]">#TITRE</a><br />
 				[(#TEXTE|couper{160})]
 			</td>
-			[(#REM) Si le type est explicite, on ne l'affiche pas ]
-			[(#ENV{type}|non)<td>[(#TYPE|tickets_texte_type)]</td>]
+			[(#REM) Si le tracker est explicite, on ne l'affiche pas ]
+			[(#ENV{tracker}|non)<td>[(#TRACKER|tickets_texte_tracker)]</td>]
 			<td>
 				<img[ src="(#CHEMIN{[prive/images/(#SEVERITE|tickets_icone_severite)]})"][ alt="(#SEVERITE|tickets_texte_severite)"][ title="(#STATUT|tickets_texte_severite)"] />
 				[&nbsp;(#SEVERITE|tickets_texte_severite)]

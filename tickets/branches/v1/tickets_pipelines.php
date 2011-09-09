@@ -271,8 +271,8 @@ function tickets_formulaire_charger($flux){
  */
 function tickets_recuperer_fond($flux){
 	$args = $flux['args'];
-	$type = $args['fond'];
-	if ($type == 'formulaires/forum'){
+	$fond = $args['fond'];
+	if ($fond == 'formulaires/forum'){
 		if(is_numeric($args['contexte']['id_ticket'])){
 			$infos_ticket = sql_fetsel('statut,id_assigne','spip_tickets','id_ticket='.intval($args['contexte']['id_ticket']));
 			if(_request('id_assigne')){

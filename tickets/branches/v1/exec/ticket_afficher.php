@@ -31,7 +31,7 @@ function exec_ticket_args ($id_ticket) {
 		. fin_gauche();
 
 		$commencer_page = charger_fonction('commencer_page', 'inc');
-		echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "tickets");
+		echo $commencer_page("&laquo; ". $row['titre'] ." &raquo;", "naviguer", "ticket_afficher");
 
 		echo debut_grand_cadre(true),
 			fin_grand_cadre(true),

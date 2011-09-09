@@ -10,30 +10,30 @@
 
 	[(#SESSION{id_auteur}|oui)
 		[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=ouvert,id_assigne=#SESSION{id_auteur},
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=ouvert,id_assigne=#SESSION{id_auteur},
 			titre=<:tickets:vos_tickets_assignes:>}|trim)
 		</div>]
 	]
 	
 	[(#SESSION{id_auteur}|oui)
 		<div class="ajax">
-		[(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=redac,id_auteur=#SESSION{id_auteur},
+		[(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=redac,id_auteur=#SESSION{id_auteur},
 			titre=<:tickets:vos_tickets_en_cours:>})]
 		</div>
 	]
 	
 	[<div class="ajax">
-	(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=ouvert,
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=ouvert,
 		titre=<:tickets:tous_tickets_ouverts:>}|trim)
 	</div>]
 	
 	<div class="ajax">
-	[(#INCLURE{fond=inclure/liste_tickets,env,ajax,type="",statut=#ARRAY{0,resolu,1,ferme},
+	[(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=#ARRAY{0,resolu,1,ferme},
 		titre=<:tickets:tickets_traites:>}|trim)]
 	</div>
 
 	[<div class="ajax">
-	(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,type="",
+	(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,tracker="",
 		titre=<:tickets:tickets_derniers_commentaires:>}|trim)
 	</div>]
 </div>
