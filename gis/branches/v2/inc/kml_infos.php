@@ -64,9 +64,21 @@ function inc_kml_infos($id_document){
 						if($compte > 500)
 							break;
 						$coordinates = explode(',',$lieu['Point'][0]['coordinates'][0]);
-						$latitude = trim($coordinates[0]);
-						$longitude = trim($coordinates[1]);
+						$latitude = $latitude + trim($coordinates[1]);
+						$longitude = $longitude + trim($coordinates[0]);
 						$compte++;
+					}else if($lieu['Polygon'][0]['outerBoundaryIs'][0]['LinearRing'][0]['coordinates'][0]){
+						if($compte > 500)
+							break;
+						$coordinates = explode(' ',trim($lieu['Polygon'][0]['outerBoundaryIs'][0]['LinearRing'][0]['coordinates'][0]));
+						foreach($coordinates as $coordinate){
+							if($compte > 500)
+								break;
+							$coordinate = explode(',',$coordinate);
+							$latitude = $latitude + trim($coordinate[1]);
+							$longitude = $longitude + trim($coordinate[0]);
+							$compte++;
+						}
 					}
 				}
 			}
@@ -75,17 +87,17 @@ function inc_kml_infos($id_document){
 				$infos['longitude'] = $longitude / $compte; 
 			}
 		}
-		
+
 		/**
 		 * Si pas de titre ou si le titre est égal au nom de fichier,
 		 * On regarde s'il n'y a qu'un seul Folder et on récupère son nom
 		 */
 		if(!$infos['titre'] OR $infos['titre'] == basename($chemin)){
+			spip_xml_match_nodes(",^Folder,",$arbre, $folders);
 			if(count($folders['Folder']) == 1){
 				foreach($folders['Folder'] as $folder => $dossier){
 					if($dossier['name'][0])
 						$infos['titre'] = $dossier['name'][0];
-					
 				}
 			}
 		}
