@@ -94,7 +94,7 @@ $affiche_civilite = $GLOBALS['association_metas']['etiquette_avec_civilite'];
 
 
 $table = array('m'=>'spip_asso_membres', 'al'=>'spip_adresses_liens','a'=>'spip_adresses');
-$where = 'al.objet=\'auteur\' AND al.id_objet=m.id_auteur AND al.id_adresse=a.id_adresse AND voie<>\'\'';
+$where = 'al.objet=\'auteur\' AND al.id_objet=m.id_auteur AND al.id_adresse=a.id_adresse AND code_postal<>\'\' AND ville<>\'\'';
 $statut_interne=_request('statut_interne');
 if($statut_interne!='tous')
 	{
@@ -144,7 +144,8 @@ while($val = sql_fetch($res)){
 			//$pdf->setX($posx);
 			$pdf->setY($posy);
 			$pdf->SetFont('Arial','',7);
-			$pdf->Cell(0,5,($indice+1).' '.$etiquette['ligne1'],0,2);
+/* la ligne ci-dessous active l'affichage de l'id de l'auteur au dessus de l'adresse */
+//			$pdf->Cell(0,5,($indice+1).' '.$etiquette['ligne1'],0,2); 
 			$pdf->Cell(0,5,' ',0,2);
 			$pdf->SetFont('Arial','B',9);
 			
