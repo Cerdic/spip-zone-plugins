@@ -15,6 +15,31 @@
 		
 	[(#SAISIE{oui_non,activer_barre_forum,
 		label=<:pp_codes:label_activer_barre_forum:>})]
+
+	[(#SET{cadre_spip,[(#CHEMIN{icones_barre/cadre_spip.png}|balise_img)] <:pp_codes:outil_inserer_cadre_spip:>})]
+	[(#SET{cadre_php,[(#CHEMIN{icones_barre/page_white_php.png}|balise_img)] <:pp_codes:outil_inserer_cadre_php:>})]
+	[(#SET{cadre_xml,[(#CHEMIN{icones_barre/page-xml.png}|balise_img)] <:pp_codes:outil_inserer_cadre_xml:>})]
+	[(#SET{cadre_css,[(#CHEMIN{icones_barre/css.png}|balise_img)] <:pp_codes:outil_inserer_cadre_css:>})]
+	[(#SET{pre,[(#CHEMIN{icones_barre/page_white_code_red.png}|balise_img)] <:pp_codes:outil_inserer_pre:>})]
+	[(#SET{samp,[(#CHEMIN{icones_barre/application_osx_terminal.png}|balise_img)] <:pp_codes:outil_inserer_samp:>})]
+	[(#SET{var,[(#CHEMIN{icones_barre/tag.png}|balise_img)] <:pp_codes:outil_inserer_var:>})]
+	[(#SET{kbd,[(#CHEMIN{icones_barre/keyboard.png}|balise_img)] <:pp_codes:outil_inserer_kbd:>})]
+	[(#SET{lien_trac,[(#CHEMIN{icones_barre/trac_logo16.png}|balise_img)] <:pp_codes:outil_inserer_lien_trac:>})]
+
+		
+	[(#SAISIE{checkbox, outils_actifs,
+		label=<:pp_codes:label_outils_actifs:>,
+		datas=#ARRAY{
+			cadre_spip,#GET{cadre_spip},
+			cadre_php,#GET{cadre_php},
+			cadre_xml,#GET{cadre_xml},
+			cadre_css,#GET{cadre_css},
+			pre,#GET{pre},
+			samp,#GET{samp},
+			var,#GET{var},
+			kbd,#GET{kbd},
+			lien_trac,#GET{lien_trac},
+		}})]		
 </ul>
 
 <input type="hidden" name="_meta_casier" value="porte_plume/codes" />

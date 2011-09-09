@@ -5,7 +5,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_activer_barre_forum' => "Forum toolbar",
 	
 	//O
-	'outil_inserer_code' => "Insert tags for included code",
 	'outil_inserer_cadre_spip' => "Insert tags for a SPIP class frame segment (cadre)",
 	'outil_inserer_cadre_php' => "Insert tags for a PHP class frame segment (cadre)",
 	'outil_inserer_pre' => "Insert tags for preformatted text (pre)",
