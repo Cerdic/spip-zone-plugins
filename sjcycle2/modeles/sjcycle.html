@@ -90,7 +90,7 @@
    		[(#REM) Les effets de type turnLeft ne fonctionnent pas si ce div est en place. En attendant de corriger
          rajout dans la doc de l'incompatibilite entre infobulles et ces effets. Du coup la bordure autour de l'image
          ne se met pas en place non plus ]
-         
+         #SET{fermer_a,non}
          [(#CONFIG{sjcycle/tooltip}|=={on}|oui)
         		<div class="infobulle" style="width:#GET{img_width}px;
       										[(#GET{img_height}|>{0}|oui)height:#GET{img_height}px;]
@@ -110,7 +110,7 @@
          [(#GET{id_article_a_lier}|oui)
             <a href="#URL_ARTICLE{#GET{id_article_a_lier}}" title="#GET{titre_article_a_lier}">
             #SET{fermer_a,oui}]
-         [(#GET{fermer_a}|non|et{#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui})
+         [(#GET{fermer_a}|=={oui}|non|et{#CONFIG{sjcycle/fancy}|=={on}|ou{#CONFIG{sjcycle/mediabox}|=={on}}|oui})
             <a href="[(#URL_DOCUMENT)]" type="#MIME_TYPE"
                                          class="#GET{cssbox}"
                                          rel="#GET{cssbox}"
@@ -138,7 +138,7 @@
                       |inserer_attribut{alt,[(#TITRE|supprimer_numero|attribut_html)]}
                       |inserer_attribut{style,"display:block;"})]
          ]
-         [(#GET{fermer_a}|oui)
+         [(#GET{fermer_a}|=={oui}|oui)
          	</a>
          ]
          [(#CONFIG{sjcycle/tooltip}|=={on}|oui)
