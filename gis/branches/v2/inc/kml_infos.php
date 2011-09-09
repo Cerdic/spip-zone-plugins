@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Plugin GIS
+ * Récupération de données dans les fichiers kml permettant de :
+ * -* récupérer latitude et longitude d'un point correspondant centré sur la moyenne des points ou polygones du kml
+ * -* récupérer un titre
+ * -* récupérer un descriptif
+ */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_kml_infos($id_document){
@@ -87,17 +93,36 @@ function inc_kml_infos($id_document){
 				$infos['longitude'] = $longitude / $compte; 
 			}
 		}
-
+		
 		/**
-		 * Si pas de titre ou si le titre est égal au nom de fichier,
-		 * On regarde s'il n'y a qu'un seul Folder et on récupère son nom
+		 * Si pas de titre ou si le titre est égal au nom de fichier ou contient kml ou kmz :
+		 * -* on regarde s'il n'y a qu'un seul Folder et on récupère son nom;
+		 * -* on regarde s'il n'y a qu'un seul Placemark et on récupère son nom;
 		 */
-		if(!$infos['titre'] OR $infos['titre'] == basename($chemin)){
+		if(!$infos['titre'] OR ($infos['titre'] == basename($chemin)) OR (preg_match(',\.km.,',$infos['titre']) > 0)){
 			spip_xml_match_nodes(",^Folder,",$arbre, $folders);
 			if(count($folders['Folder']) == 1){
 				foreach($folders['Folder'] as $folder => $dossier){
 					if($dossier['name'][0])
 						$infos['titre'] = $dossier['name'][0];
+					if(!$infos['descriptif'] && $dossier['description'][0])
+						$infos['descriptif'] = $dossier['description'][0];
+				}
+			}else{
+				if(!is_array($placemarks)){
+					spip_xml_match_nodes(",^Placemark,",$arbre, $placemarks);
+				}
+				if(count($placemarks) == 1){
+					foreach($placemarks as $places){
+						if(count($places) == 1){
+							foreach($places as $placemark => $lieu){
+								if($lieu['name'][0])
+									$infos['titre'] = $lieu['name'][0];
+								if(!$infos['descriptif'] && $lieu['description'][0])
+									$infos['descriptif'] = $lieu['description'][0];
+							}
+						}
+					}
 				}
 			}
 		}
