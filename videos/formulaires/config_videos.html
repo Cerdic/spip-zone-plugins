@@ -10,6 +10,7 @@
 [(#SET{hauteur_defaut,315})]
 [(#SET{largeur_defaut,560})]
 [(#SET{titre_descriptif_defaut,non})]
+[(#SET{liste_definition_defaut,non})]
 
 <div class='formulaire_spip formulaire_configurer formulaire_configurer_#FORM' id='formulaire_configurer_#FORM'>
 
@@ -53,6 +54,18 @@
 						<div class="choix">
 							<input type="radio" name="titre_descriptif" class="radio" id="titre_descriptif_off" value="non" [(#ENV{titre_descriptif,#GET{titre_descriptif_defaut}}|=={non}|oui) checked="checked"] />
 							<label for='titre_descriptif_off'><:item_non:></label>
+						</div>
+					</li>
+					<li>
+						<label for="liste_definition"><:videos:cfg_label_liste_definition:></label>
+						<p class='explication'><:videos:cfg_explication_liste_definition:></p>
+						<div class="choix">
+							<input type="radio" name="liste_definition" class="radio" id="liste_definition_on" value="oui" [(#ENV{liste_definition,#GET{liste_definition_defaut}}|=={oui}|oui) checked="checked"] />
+							<label for='liste_definition_on'><:item_oui:></label>
+						</div>
+						<div class="choix">
+							<input type="radio" name="liste_definition" class="radio" id="liste_definition_off" value="non" [(#ENV{liste_definition,#GET{liste_definition_defaut}}|=={non}|oui) checked="checked"] />
+							<label for='liste_definition_off'><:item_non:></label>
 						</div>
 					</li>
 				</ul>

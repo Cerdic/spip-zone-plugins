@@ -4,6 +4,7 @@
 #SET{document,#ENV{document}|sinon{#ID}}
 #SET{titre_descriptif,#ENV{titre_descriptif,#CONFIG{videos/titre_descriptif,'non'}}}
 #SET{wmode,#ENV{wmode,#CONFIG{videos/wmode,'opaque'}}}
+#SET{liste_definition,#ENV{liste_definition,#CONFIG{videos/liste_definition,'non'}}}
 
 [(#REM) "Extensions" gérées ou rajoutées par le plugin
 <!--
@@ -38,8 +39,10 @@
 #SET{hauteur,#ENV{hauteur,#GET{haut,#CONFIG{videos/hauteur,'315'}}}}
 
 [(#SET{fichier,#FICHIER*})]
+[(#GET{liste_definition}|=={oui}|oui)
 <dl class='spip_document_#ID_DOCUMENT spip_documents[ spip_documents_(#ENV{align})][ (#ENV{class})] spip_lien_ok'[ style='float:(#ENV{align}|match{left|right});']>
 <dt class='spip_doc_titre'>
+]
 
 [(#REM)
 /** Traiter DailyMotion **/
@@ -146,6 +149,7 @@
 [(#REM)
 /** Titre et Descriptif **/
 ]
+[(#GET{liste_definition}|=={oui}|oui)
 	[(#GET{titre_descriptif}|=={oui}|oui)
 	[(#EXTENSION|in_array{#GET{lesExtensionsHtml5}}|non)
 	[<br /><strong>(#TITRE)</strong>]
@@ -156,5 +160,5 @@
 	[<dd class='spip_doc_descriptif'[ style='width:(#GET{largeur})']>(#DESCRIPTIF|PtoBR)</dd>]
 	]]
 </dl>
-
+]
 </BOUCLE_LaVideo>
