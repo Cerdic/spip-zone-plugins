@@ -13,6 +13,10 @@ function inc_kml_infos($id_document){
 	
 	if(in_array($extension,array('kml','kmz'))){
 		$supprimer_chemin = false;
+		/**
+		 * Si on est dans un kmz (kml + autres fichiers compressés en zip),
+		 * On dézip pour trouver le kml
+		 */
 		if($extension == 'kmz'){
 			include_spip('inc/pclzip');
 			$zip = new PclZip($chemin);
@@ -33,8 +37,29 @@ function inc_kml_infos($id_document){
 		foreach($documents as $document => $info){
 			$infos['titre'] = $info[0]['name'][0];
 			$infos['descriptif'] = $info[0]['description'][0];
-			$infos['longitude'] = $info[0]['LookAt'][0]['longitude'][0];
-			$infos['latitude'] = $info[0]['LookAt'][0]['latitude'][0];
+			$infos['longitude'] = $info[0]['LookAt'][0]['longitude'][0] ? $info[0]['LookAt'][0]['longitude'][0] : false;
+			$infos['latitude'] = $info[0]['LookAt'][0]['latitude'][0] ? $info[0]['LookAt'][0]['latitude'][0] : false;
+		}
+		
+		/**
+		 * Si on n'a pas de longitude ou de latitude, 
+		 * on essaie de faire une moyenne des placemarks
+		 */
+		if(!$info['longitude'] OR !$info['latitude']){
+			spip_xml_match_nodes(",^Placemark,",$arbre, $placemarks);
+			$latitude = 0;
+			$longitude = 0;
+			$compte = 0; 
+			foreach($placemarks['Placemark'] as $placemark => $lieu){
+				$latitude = $latitude + $lieu['LookAt'][0]['latitude'][0];
+				$longitude = $longitude + $lieu['LookAt'][0]['longitude'][0];
+				if($lieu['LookAt'][0]['longitude'][0] && $latitude + $lieu['LookAt'][0]['latitude'][0])
+					$compte++;
+			}
+			if(($latitude != 0) && ($longitude != 0)){
+				$infos['latitude'] = $latitude / $compte;
+				$infos['longitude'] = $longitude / $compte; 
+			}
 		}
 	}else
 		return false;
