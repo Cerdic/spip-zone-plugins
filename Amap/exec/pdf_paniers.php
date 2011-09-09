@@ -30,7 +30,7 @@ function exec_pdf_paniers(){
 			$type_panier_extension[$row['id_auteur']] = array("type_panier" => _T('amap:'.$row['type_panier']));
 		}
     }
-	$pdf->Query_extended(sql_select('a.nom as nom, b.date_distribution as date_distribution, a.id_auteur as id_auteur', "spip_amap_paniers b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution=".sql_quote($date_distribution)), $prop, $type_panier_extension, "id_auteur");
+	$pdf->Query_extended(sql_select("a.nom as nom, b.date_distribution as date_distribution, a.id_auteur as id_auteur", "spip_amap_paniers b LEFT JOIN spip_auteurs a ON a.id_auteur=b.id_auteur", "date_distribution=".sql_quote($date_distribution),"" , "nom"), $prop, $type_panier_extension, "id_auteur");
 	$pdf->Output();
 	}
 }
