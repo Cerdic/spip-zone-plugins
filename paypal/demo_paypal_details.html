@@ -31,11 +31,13 @@
 		}
         }
 )]  
-				
+
+[(#REM) La variable invoice doit etre une chaine unique qui identifie la commande ] 
+
 		[(#FORMULAIRE_PAYPAL{#ARRAY{
 			periode,M,
 			libelle,Ceci n'est pas une pipe,
-			identifiant,[abonnement-1-(#SESSION{id_auteur})],
+			invoice,[abonnement-1-(#SESSION{id_auteur})],
 			redirect_ok,[(#URL_PAGE{paiement_ok})],
 			details,#GET{details},		
 		}})]

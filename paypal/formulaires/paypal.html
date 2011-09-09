@@ -39,7 +39,7 @@
 <input name="cancel_return" type="hidden" value="[(#SELF|url_absolue)]" />
 <input name="shopping_url" type="hidden" value="#ENV{shopping_url, #URL_SITE_SPIP}" />
 [(#REM) Un ping est fait sur cette url en cas de traitement ok, avec des parametres envoyes ]
-<input name="notify_url" type="hidden" value="[(#URL_ACTION_AUTEUR{paypal_ipn,[(#SESSION{id_auteur})-#ENV{identifiant}]})]" />
+<input name="notify_url" type="hidden" value="[(#URL_ACTION_AUTEUR{paypal_ipn,[(#SESSION{id_auteur})-#ENV{invoice, #ENV{identifiant}}]})]" />
 
 [(#REM) On ecrit dans quelle langue ? ]
 <input name="lc" type="hidden" value="#LANG" />
@@ -51,7 +51,7 @@
 [(#REM) C'est quoi qu'on achette ? ]
 [<input name="item_name" type="hidden" value="(#ENV{libelle})" />]
 [<input name="custom" type="hidden" value="(#ENV{custom})" />]
-[<input name="invoice" type="hidden" value="(#ENV{identifiant})" />]
+[<input name="invoice" type="hidden" value="(#ENV{invoice, #ENV{identifiant}})" />]
 
 [(#REM) Avoir les details ]
 [(#ENV{details}|et{#ENV{type}|=={abonnement}|non}|oui) 
