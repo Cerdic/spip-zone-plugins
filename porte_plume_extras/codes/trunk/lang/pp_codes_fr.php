@@ -1,6 +1,9 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	//L
+	'label_activer_barre_edition' => "Barre d'&eacute;dition",
+	'label_activer_barre_forum' => "Barre de forum",
+	
 	//O
 	'outil_inserer_code' => "Ins&eacute;rer un code informatique (code)",
 	'outil_inserer_cadre_spip' => "Ins&eacute;rer un code preformat&eacute; SPIP (cadre)",
@@ -14,10 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//P
 	'pp_codes' => "Codes informatiques pour Porte Plume",
 	
-	//C
-	'cfg_description_pp_codes' => "Configurer l'extension codes informatiques pour Porte Plume",
-	'cfg_activer_extension_sur' => "Activer sur quelles barres d'outils ?",
-	'cfg_activer_barre_edition' => "Barre d'&eacute;dition",
-	'cfg_activer_barre_forum' => "Barre de forum",
+	//T
+	'titre_configurer_pp_codes' => "Configurer l'extension codes informatiques pour Porte Plume",
+	'titre_activer_extension_sur' => "Activer sur quelles barres d'outils ?",
 );
 ?>

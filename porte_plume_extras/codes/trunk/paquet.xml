@@ -1,0 +1,23 @@
+<paquet
+	prefix="pp_codes"
+	categorie="edition"
+	version="2.0.0-dev"
+	etat="dev"
+	compatibilite="[3.0.0-alpha2;3.1.0["
+	logo="images/porte_plume_codes-128.png"
+	documentation=""
+>
+	<nom>Codes Informatiques pour Porte Plume</nom>
+	<auteur>Matthieu Marcillaud</auteur>
+	<licence>GNU/GPL</licence>
+
+
+	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
+	
+	<pipeline nom="porte_plume_barre_pre_charger" inclure="pp_codes_pipelines.php" />
+	<pipeline nom="porte_plume_barre_charger" inclure="pp_codes_pipelines.php" />
+	<pipeline nom="porte_plume_lien_classe_vers_icone" inclure="pp_codes_pipelines.php" />
+
+	<necessite nom="porte_plume" compatibilite="[1.10.1;]" />
+	<utilise nom="saisies" compatibilite="[1.2;]" />
+</paquet>

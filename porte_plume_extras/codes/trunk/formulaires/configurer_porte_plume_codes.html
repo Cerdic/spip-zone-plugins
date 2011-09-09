@@ -1,0 +1,25 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM">
+	
+<h3 class="titrem"><:pp_codes:titre_activer_extension_sur:></h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+
+<ul>
+	[(#SAISIE{oui_non,activer_barre_edition,
+		label=<:pp_codes:label_activer_barre_edition:>,
+		defaut=on})]
+		
+	[(#SAISIE{oui_non,activer_barre_forum,
+		label=<:pp_codes:label_activer_barre_forum:>})]
+</ul>
+
+<input type="hidden" name="_meta_casier" value="porte_plume/codes" />
+<p class='boutons'><span class='image_loading'>&nbsp;</span><input type='submit' class='submit' value='<:bouton_enregistrer:>' /></p>
+
+</div>
+</form>
+</div>

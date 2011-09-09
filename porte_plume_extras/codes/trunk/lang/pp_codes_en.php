@@ -1,6 +1,9 @@
 <?php
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	//L
+	'label_activer_barre_edition' => "Site edit toolbar",
+	'label_activer_barre_forum' => "Forum toolbar",
+	
 	//O
 	'outil_inserer_code' => "Insert tags for included code",
 	'outil_inserer_cadre_spip' => "Insert tags for a SPIP class frame segment (cadre)",
@@ -14,10 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	//P
 	'pp_codes' => "Computer codes for Porte Plume",
 	
-	//C
-	'cfg_description_pp_codes' => "Configurer the Porte Plume extension for special display codes",
-	'cfg_activer_extension_sur' => "Activate on which toolbars?",
-	'cfg_activer_barre_edition' => "Site edit toolbar",
-	'cfg_activer_barre_forum' => "Forum toolbar",
+	//T
+	'titre_configurer_pp_codes' => "Configurer the Porte Plume extension for special display codes",
+	'titre_activer_extension_sur' => "Activate on which toolbars?",
 );
 ?>
