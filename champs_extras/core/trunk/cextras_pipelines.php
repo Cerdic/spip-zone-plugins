@@ -29,10 +29,11 @@ function champs_extras_objet($table) {
 function champs_extras_autorisation($faire, $quoi='', $saisies=array(), $args=array()) {
 	if (!$saisies) return array();
 	foreach ($saisies as $cle=>$saisie) {
+		$id = isset($args['id']) ? $args['id'] : $args['id_objet'];
 		$autoriser_quoi = $quoi . _SEPARATEUR_CEXTRAS_AUTORISER . $saisie['options']['nom'];
-		if (!autoriser($faire . 'extra', $autoriser_quoi, $args['id'], '', array(
+		if (!autoriser($faire . 'extra', $autoriser_quoi, $id, '', array(
 			'type' => $quoi,
-			'id_objet' => isset($args['id']) ? $args['id'] : $args['id_objet'],
+			'id_objet' => $id,
 			'contexte' => $args['contexte'],
 			'table' => table_objet_sql($quoi),
 			'saisie' => $saisie
