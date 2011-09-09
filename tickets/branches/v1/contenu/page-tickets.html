@@ -12,25 +12,26 @@
 		[<div class="ajax">
 		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=ouvert,id_assigne=#SESSION{id_auteur},
 			titre=<:tickets:vos_tickets_assignes:>}|trim)
-		</div>]
+		</div>[(#SET{affiche,oui})]]
 	]
 	
 	[(#SESSION{id_auteur}|oui)
-		<div class="ajax">
-		[(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=redac,id_auteur=#SESSION{id_auteur},
-			titre=<:tickets:vos_tickets_en_cours:>})]
-		</div>
+		[<div class="ajax">
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",tri=statut,statut=#ARRAY{0,ouvert,1,redac},id_assigne_non=#SESSION{id_auteur},id_auteur=#SESSION{id_auteur},
+			titre=<:tickets:vos_tickets_en_cours:>}|trim)
+		</div>[(#SET{affiche,oui})]]
 	]
 	
 	[<div class="ajax">
-	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=ouvert,
-		titre=<:tickets:tous_tickets_ouverts:>}|trim)
+	[(#GET{affiche}|=={oui}|?{[(#SET{titre,<:tickets:autres_tickets_ouverts:>})],[(#SET{titre,<:tickets:tous_tickets_ouverts:>})]})]
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=ouvert,id_auteur_non=#SESSION{id_auteur},id_assigne_non=#SESSION{id_auteur},
+		titre=#GET{titre}}|trim)
 	</div>]
 	
-	<div class="ajax">
-	[(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=#ARRAY{0,resolu,1,ferme},
-		titre=<:tickets:tickets_traites:>}|trim)]
-	</div>
+	[<div class="ajax">
+	(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statut=#ARRAY{0,resolu,1,ferme},
+		titre=<:tickets:tickets_traites:>}|trim)
+	</div>]
 
 	[<div class="ajax">
 	(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,tracker="",

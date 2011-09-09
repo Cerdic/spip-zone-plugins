@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_supprimee' => 'L\'assignation de ce ticket a &eacute;t&eacute; supprim&eacute;e.',
 	'assignes_a' => 'Assign&eacute;s &agrave;',
 	'assigne_a' => 'Assign&eacute; &agrave;&nbsp;:',
+	'autres_tickets_ouverts' => 'Les autres tickets ouverts',
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => "D&eacute;sactiver l'utilisation des forums publics.",

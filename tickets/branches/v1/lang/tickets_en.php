@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'assignation_supprimee' => 'The assignment of this bug report has ben deleted.',
 	'assigne_a' => 'Assigned to:',
 	'assignes_a' => 'Assigned to',
+	'autres_tickets_ouverts' => 'Other opened bug reports',
 
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => "Disable the use of public forums.",

@@ -1,3 +1,24 @@
+[(#REM)
+
+	Inclure créant une liste de tickets
+	
+	Les paramètres possibles sont :
+	
+	-* titre = string 				Le titre du bloc (sinon le bloc n'aura pas de titre)
+	-* date_sens = -1|1				Le sens de tri de la date
+	-* id_auteur = int				Un id_auteur numérique
+	-* id_auteur_non = int/array	Un id numérique ou un array des id_auteur dont on ne souhaite pas afficher les tickets
+	-* id_assigne = int				Un id_auteur numérique à qui aurait été assigné les tickets
+	-* id_assigne_non = int/array	Un id numérique ou un array des id_assigne que l'on ne souhaite pas voir
+	-* tracker = int				L'id du tracker (1|2|3|4), anciennement type
+	-* version = string				La version
+	-* jalon = string				Le jalon
+	-* composant = string			Le composant
+	-* projet = string				Le projet
+	-* order = string				Le paramètre de tri (défaut date mais peut être maj|titre|tracker|jalon|version|composant|projet|severite|id_ticket)
+	-* pagination = int				Le nombre d'élément à afficher dans la pagination
+]
+
 #CACHE{0}
 [(#SET{defaut_tri,#ARRAY{
 	date,#ENV{date_sens,-1},
@@ -111,7 +132,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS){id_auteur?}{id_assigne?}{statut IN #ENV{statut,.*}}{tracker?}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_detaillee(TICKETS){id_auteur?}{id_auteur !IN #ENV{id_auteur_non,''}}{id_assigne?}{id_assigne !IN #ENV{id_assigne_non,''}}{statut IN #ENV{statut,.*}}{tracker?}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
