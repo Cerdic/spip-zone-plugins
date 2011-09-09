@@ -14,22 +14,20 @@ function mathjax_spip_header_prive($flux){
 }
 	
 function mathjax_spip_flux(){
-	
-	$js = find_in_path('lib/mathjax-v1.0.1a/MathJax.js');
-	$param = <<<EOF
-		MathJax.Hub.Config({
-    	    extensions: ["tex2jax.js"],
-    	    jax: ["input/TeX", "output/HTML-CSS"],
-    	    tex2jax: {
-    	        inlineMath: [ ['$','$'] ],
-    	        displayMath: [ ['$$','$$'] ]
-    	    },
-    	    "HTML-CSS": { availableFonts: ["TeX"] }
-    	});
-EOF;
-	$flux = "\n<script type='text/javascript' src='$js'>
-		$param
-	</script>\n";
+	$param = "MathJax.Hub.Config({";
+	$param .= "tex2jax: {";
+	$param .= "	inlineMath: [ ['$','$'] ],";
+	$param .= "	processEscapes: true";
+	$param .= "}";
+	$param .= "});";
+	$flux = '<script type="text/x-mathjax-config">'.$param.'</script>';
+	if (lire_config('mathjax/mode_dappel', 'cdn') == 'cdn') {
+		$flux .= '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>';
+	}
+	else if (lire_config('mathjax/mode_dappel', 'cdn') == 'download') {
+		$js = find_in_path('lib/mathjax-1.1a/MathJax.js').'?config=TeX-AMS_HTML';
+		$flux .= '<script type="text/javascript" src="'.$js.'"></script>';
+	}
 	return $flux;
 }
 

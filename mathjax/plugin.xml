@@ -1,17 +1,17 @@
 <plugin>
     <nom>MathJax for SPIP !</nom>
     <auteur>Yohann</auteur>
-    <licence>&#169; 2010 GNU/GPL</licence>
-    <version>1.0.1</version>
+    <licence>&#169; 2010/2011 GNU/GPL</licence>
+    <version>1.1</version>
     <etat>stable</etat>
     <categorie>outil</categorie>
     
     <description>
-		MathJax for SPIP ! {{Attention, pour utiliser la lib, il faudra dézipper le fichier {fonts.zip} dans le repertoire {fonts/}.}}
+		MathJax for SPIP !
 		Le plugin remplace les balises &#60;math&#62; et &#60;&#47;math&#62; de SPIP.
 	</description>
 	
-	<icon>images/mathjax.png</icon>
+	<icon>images/mathjax-32.png</icon>
 	
 	<lien>http://www.spip-contrib.net/?article3639</lien>
     
@@ -25,7 +25,6 @@
     	<nom>header_prive</nom>
     	<inclure>mathjax_spip_pipelines.php</inclure>
     </pipeline>
-    
+	<!--<necessite id="lib:mathjax-1.1a" src="https://github.com/mathjax/MathJax/zipball/v1.1a" />-->
 	<necessite id="SPIP" version="[2.0;]" />
-	<necessite id="lib:mathjax-v1.0.1a" src="http://downloads.sourceforge.net/project/mathjax/MathJax/v1.0.1/MathJax-v1.0.1a.zip?r=&ts=1290546744&use_mirror=freefr" />
 </plugin>

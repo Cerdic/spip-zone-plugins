@@ -1,0 +1,39 @@
+<!-- autoriser=configurer -->
+<!-- refus=<:cfg:refus_configuration_administrateur:> -->
+<!-- nom=mathjax -->
+
+<div class="formulaire_spip formulaire_cfg formulaire_#FORM">
+
+<h3 class='titrem'>Configuration globale de MathJax</h3>
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+<form method="post" action="#ENV{action}">
+<div>
+#ACTION_FORMULAIRE{#ENV{action}}
+<ul>
+
+
+#SET{erreurs,#ENV**{erreurs}|table_valeur{barretypo}}
+<li class="editer_mode_dappel[ (#GET{erreurs}|oui)erreur]">
+	<label for="mode_dappel">Mode d'appel du script MathJax</label>
+	[<span class='erreur_message'>(#GET{erreurs})</span>]
+	
+	<div class="choix">
+	<p>Pour choisir le mode de chargement direct depuis votre serveur, il vous faudra télécharger la libraire à l'adresse suivante <a href="https://github.com/mathjax/MathJax/zipball/v1.1a" title="Télécharger la librairie">https://github.com/mathjax/MathJax/zipball/v1.1a</a>, en extraire son contenu, puis le déplacer dans le dossier <em>lib/mathjax-1.1a/</em> (à créer si besoin) à la racine du site.</p>
+		<input type="radio" name="mode_dappel" class="radio" id='champ_mode_dappel_cdn'[ (#ENV{mode_dappel,cdn}|=={cdn}|oui)checked="checked"] value='cdn' />
+		<label for="champ_mode_dappel_cdn">Par CDN (plus efficace en termes de performances mais nécessite que le serveur soit connecté à internet)</label>
+	</div>
+	<div class="choix">
+		<input type="radio" name="mode_dappel" class="radio" id='champ_mode_dappel_download'[ (#ENV{mode_dappel,cdn}|=={download}|oui)checked="checked"] value='download' />
+		<label for="champ_mode_dappel_download">Par chargement direct depuis votre serveur</label>
+	</div>
+</li>
+</ul>
+<p class="boutons">
+	<input type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" class="submit" />
+</p>
+</div>
+</form>
+</div>
