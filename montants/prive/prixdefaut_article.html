@@ -1,46 +1,16 @@
-[(#REM) 
-Tester pour afficher le prix si
-- l'objet 'article' est bien demande
-- un de ses parents est demande
-- ou l'id_article est demande
-]
+[(#SET{prix,[(#PRIX{#OBJET,#ID_OBJET})]})]
 
-[(#REM) Trouver au moins (sinon false) un montant ou objet = article]
-<BOUCLE_verifier(MONTANTS){objet=#ENV{objet}}>
-[(#IDS_OBJET|=={''}|oui)
-#SET{id_montant,#ID_MONTANT}
-]
-	[(#ENV{id_objet}|in_array{[(#IDS_OBJET|explode{','})]}|oui) 
-	#SET{id_montant,#ID_MONTANT}
-	]
-</BOUCLE_verifier>
-
-[(#SET{textprix,<:montants:prix_defaut:>})]
-
-	[(#REM) parents = array des rubriques parentes de l'article en cours ]
-	#SET{parents,#ARRAY}
-	<BOUCLE_lobjet(ARTICLES){id_article=#ENV{id_objet}}>
-		<BOUCLE_hi(HIERARCHIE) {id_article}>
-		#SET{parents, #GET{parents}|push{#ID_RUBRIQUE}}
-		</BOUCLE_hi>
-	</BOUCLE_lobjet>
+	[(#REM) soit texte pour prix par defaut]
+	[(#SET{textprix,<:montants:prix_defaut:>})]
 	
-	[(#REM) Trouver un montant ou le_parent demandé est dans parents ...]
-	<BOUCLE_setmontants(MONTANTS){objet=#ENV{objet}}{le_parent IN #GET{parents}}>
-	#SET{prix,#PRIX_HT}
-	</BOUCLE_setmontants>
-	
-	[(#REM) ....ou bien le montant de l'article contenu dans sa liste]
-	<BOUCLE_artinlist(MONTANTS){objet=#ENV{objet}}{id_montant=#GET{id_montant}}>
-	#SET{prix,#PRIX_HT}
-	</BOUCLE_artinlist>
-	
-	[(#REM) ....ou bien le prix de l'article dans son champ]
-	<BOUCLE_article(ARTICLES){objet=#OBJET}{id_article=#ID_OBJET}>
-	#SET{prix,#PRIX_HT}
-	[(#SET{textprix,<:montants:prix:>})]
+	[(#REM) soit texte pour prix de l'objet]
+	<BOUCLE_article(ARTICLES){id_article=#ID_OBJET}{prix=#PRIX*{#OBJET,#ID_OBJET}}>
+		[(#SET{textprix,<:montants:prix:>})]
 	</BOUCLE_article>
 	
+	[(#PRIX*{#OBJET,#ID_OBJET}|=={'999.99'}|oui) 
+		[(#SET{prix,<:montants:aucun_prix:>})]
+	]
 	
 		[
 		<div class="liste-elements" style="padding:1em">
@@ -50,5 +20,3 @@ Tester pour afficher le prix si
 			]
 		</div>
 		]
-	
-</B_verifier>

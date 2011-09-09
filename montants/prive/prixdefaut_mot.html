@@ -1,41 +1,22 @@
-[(#REM) Tester pour afficher le prix si
-- l'objet 'mot' est bien demande
-- son groupe est demande
-- ou l'id_mot est demande
-]
+[(#SET{prix,[(#PRIX{#OBJET,#ID_OBJET})]})]
 
-[(#REM) Trouver au moins (sinon false) un montant ou objet = mot]
-<BOUCLE_verifier(MONTANTS){objet=#ENV{objet}}>
-[(#IDS_OBJET|=={''}|oui)
-#SET{id_montant,#ID_MONTANT}
-]
-	[(#ENV{id_objet}|in_array{[(#IDS_OBJET|explode{','})]}|oui) 
-	#SET{id_montant,#ID_MONTANT}
+	[(#REM) soit texte pour prix par defaut]
+	[(#SET{textprix,<:montants:prix_defaut:>})]
+	
+	[(#REM) soit texte pour prix de l'objet]
+	<BOUCLE_mot(MOTS){id_mot=#ID_OBJET}{prix=#PRIX*{#OBJET,#ID_OBJET}}>
+	[(#SET{textprix,<:montants:prix:>})]
+	</BOUCLE_mot>
+	
+	[(#PRIX*{#OBJET,#ID_OBJET}|=={'999.99'}|oui) 
+		[(#SET{prix,<:montants:aucun_prix:>})]
 	]
-</BOUCLE_verifier>
-
-	[(#REM) groupe du mot en cours ]
-	<BOUCLE_lobjet(MOTS){id_mot=#ENV{id_objet}}>
-		#SET{parents, #ID_GROUPE}
-	</BOUCLE_lobjet>
-	
-	[(#REM) Trouver un montant ou le_parent demandé est id_groupe ...]
-	<BOUCLE_setmontants(MONTANTS){objet=#ENV{objet}}{le_parent IN #GET{parents}}>
-	#SET{prix,#PRIX_HT}
-	</BOUCLE_setmontants>
-	
-	[(#REM) ....ou bien le montant du mot contenu dans sa liste]
-	<BOUCLE_artinlist(MONTANTS){objet=#ENV{objet}}{id_montant=#GET{id_montant}}>
-	#SET{prix,#PRIX_HT}
-	</BOUCLE_artinlist>
-	
 	
 		[
 		<div class="liste-elements" style="padding:1em">
-		<:montants:prix_defaut:>
-		<strong>(#GET{prix})</strong>
-		<a href="#URL_ECRIRE{montants}"><:montants:modifier_prix_defaut:></a>
+		[<strong>(#GET{textprix})</strong> ](#GET{prix})
+			[(#GET{textprix}|=={<:montants:prix_defaut:>}|oui)
+			<a href="#URL_ECRIRE{montants}"><:montants:modifier_prix_defaut:></a>
+			]
 		</div>
 		]
-	
-</B_verifier>
