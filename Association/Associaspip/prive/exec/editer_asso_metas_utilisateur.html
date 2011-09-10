@@ -1,0 +1,24 @@
+<!--#hierarchie-->
+#SET{titre, asso:editer_asso_metas_utilisateur}
+#ONGLETS_ASSOCIATION{#GET{titre}|_T}
+<!--/#hierarchie-->
+
+<B_metas>
+<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>
+	<tr style='background-color: #DBE1C5;'>
+		<th><strong><:asso:nom_meta_utilisateur:></strong></th>
+		<th colspan="2"><strong><:asso:action_meta_utilisateur:></strong></th>
+	</tr>
+<BOUCLE_metas(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
+	<tr>
+		<td>[(#NOM|replace{^meta_utilisateur_}|replace{_,&nbsp;})]</td>
+		<td><a title="<:asso:editer_meta_utilisateur:>" href="#URL_ECRIRE{editer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/edit-12.gif}"/></a></td>
+		<td><a title="<:asso:supprimer_meta_utilisateur:>" href="#URL_ECRIRE{supprimer_asso_meta_utilisateur,nom_meta_ut=#NOM}"><img src="#CHEMIN{img_pack/poubelle-12.gif}"/></a></td>
+	</tr>
+</BOUCLE_metas>
+</table>
+</B_metas>
+<p class="bouton"><a href="#URL_ECRIRE{editer_asso_meta_utilisateur}"><:asso:ajouter_meta_utilisateur:></a></p>
+<!--#navigation-->
+<div class='cadre cadre-info'><div class="cadre_padding"><p><:asso:meta_utilisateur_note:></p></div></div>
+<!--/#navigation-->

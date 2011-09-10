@@ -1,0 +1,8 @@
+[(#AUTORISER{configurer})
+<!--#hierarchie-->
+#SET{titre, asso:supprimer_meta_utilisateur}
+#ONGLETS_ASSOCIATION{#GET{titre}|_T|concat{' ',#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;}}}
+<!--/#hierarchie-->
+<p><:asso:avertissement_suppression_meta_utilisateur:> <strong>[(#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;})]</strong></p>
+<a href="[(#URL_ACTION_AUTEUR{supprimer_meta_utilisateur, [(#ENV{nom_meta_ut})], ./?exec=editer_asso_metas_utilisateur})]"><:asso:supprimer:></a> - <a href="#URL_ECRIRE{editer_asso_metas_utilisateur}"><:asso:annuler:>
+]

@@ -46,6 +46,12 @@
 								<label for="prefet"><strong><:asso:config_libelle_prefet:></strong></label>
 								<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet"  class='formo'/>
 							</li>
+						<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
+							<li>
+								<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|replace{_,&nbsp;}|ucfirst)]</strong></label>
+								<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM"  class='formo'/>
+							</li>	
+						</BOUCLE_metas_utilisateur>
 						</ul>
 					</fieldset>
 				</li>

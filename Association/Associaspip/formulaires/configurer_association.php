@@ -146,7 +146,15 @@ function formulaires_configurer_association_traiter_dist($form) {
 	$vars = formulaires_configurer_metas_recense($infos['path'], PREG_PATTERN_ORDER);
 	$meta = $infos['meta'];
 	/* fin du code directement copie depuis formulaires_configurer_metas_traiter_dist */
+
 	$metas_list = array_flip(array_unique($vars[2])); /* on recupere tous les noms des metas comme cles d'un tableau */
+	
+	/* on ajoute toutes les metas utilisateurs: presentes avec le prefixe meta_utilisateur_ dans la table spip_association_metas */
+	$query = sql_select('nom', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
+	while ($row = sql_fetch($query)) {
+		$metas_list[$row['nom']]=0;
+		spip_log("META UT: ".$row['nom']);
+	}
 
 	/* ignorer les changements fait dans un module non active */
 	$dons = _request('dons');

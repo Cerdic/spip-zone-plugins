@@ -1,0 +1,10 @@
+<!--#hierarchie-->
+#SET{titre, asso:editer_meta_utilisateur}
+#ONGLETS_ASSOCIATION{#GET{titre}|_T|concat{' ',#ENV{nom_meta_ut}|replace{meta_utilisateur_}|replace{_,&nbsp;}}}
+<!--/#hierarchie-->
+
+#FORMULAIRE_EDITER_ASSO_META_UTILISATEUR{#ENV{nom_meta_ut}}
+
+<!--#navigation-->
+<div class='cadre cadre-info'><div class="cadre_padding"><p><:asso:meta_utilisateur_limitation_note:></p></div></div>
+<!--/#navigation-->

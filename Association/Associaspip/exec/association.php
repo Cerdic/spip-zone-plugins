@@ -51,6 +51,11 @@ function exec_association() {
 		echo $GLOBALS['association_metas']['siret']."<br />\n";
 		echo $GLOBALS['association_metas']['declaration']."<br />\n";
 		echo $GLOBALS['association_metas']['prefet']."<br />\n";
+		/* afficher les metas definies par l'utilisateur si il y en a */
+		$query = sql_select('nom,valeur', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
+		while ($row = sql_fetch($query)) {
+			echo ucfirst(str_replace('_', ' ', str_replace('meta_utilisateur_', '', $row['nom']))).'&nbsp;:&nbsp;'.$row['valeur'].'<br>';
+		}
 		echo fin_cadre_formulaire(true);
 		
 		$coordonnees_actif = test_plugin_actif('COORDONNEES');

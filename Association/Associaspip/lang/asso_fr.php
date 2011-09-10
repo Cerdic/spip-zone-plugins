@@ -87,6 +87,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',
 	'import_nom_auteur_prenom_nom' => 'Pr&eacute;nom Nom',
 	'import_nom_auteur_nom' => 'Nom',
+	
+	# Meta utilisateurs
+	'editer_meta_utilisateur' => 'Editer le champs utilisateur',
+	'supprimer_meta_utilisateur' => 'Supprimer le champs utilisateur',
+	'nom_meta_utilisateur' => 'Nom',
+	'action_meta_utilisateur' => 'Action',
+	'avertissement_suppression_meta_utilisateur' => 'Vous vous appr&ecirc;tez &agrave; supprimer le champs utilisateur',
+	'editer_asso_metas_utilisateur_lien' => 'G&eacute;rer les champs suppl&eacute;mentaires du profil de l\'association',
+	'ajouter_meta_utilisateur' => 'Cr&eacute;er un nouveau champs',
+	'editer_asso_metas_utilisateur' => 'Edition des champs utilisateurs',
+	'meta_utilisateur_note' => '<p>Note :</p><p>Cette page permet de cr&eacute;er ou d\'&eacute;diter(renommer/supprimer) des champs suppl&eacute;mentaires qui apparaissent dans le profil de votre association.</p><p>Une fois cr&eacute;&eacute;s les champs suppl&eacute;mentaires apparaissent dans la page de profil de l\'association o&ugrave; vous pourrez leur associer une valeur.</p>',
+	'meta_utilisateur_limitation_note' => '<p>Note :</p>Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.',
+	'erreur_nom_meta_utilisateur_incorrect' => 'Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.',
+	'erreur_nom_meta_utilisateur_trop_long' => 'Le nom d\'un champs est limit&eacute; &agrave; 237 caract&egrave;res',
+	'erreur_pas_de_nom_meta_utilisateur' => 'Le nom d\'un champs ne peut pas &ecirc;tre vide, si vous voulez supprimer un champs, utilisez le bouton supprimer sur la page listant tous les champs utilisateur.',
+	
 		
 	# Entetes globales
 	'entete_id' => 'ID',
@@ -652,6 +668,7 @@ Commentaire: @commentaire@
 'supprime' => 'Supprim&eacute;',
 'supprimer_le_don' => 'Supprimer le don',
 'supprimer' => 'Supprimer',
+'annuler' => 'Annuler',
 'telephone' => 'T&eacute;l&eacute;phone',
 'tous_les_membres_a_relancer' => 'Tous les membres &agrave; relancer',
 'toutes_les_etiquettes_a_generer' => 'Toutes les &eacute;tiquettes &agrave; g&eacute;n&eacute;rer',

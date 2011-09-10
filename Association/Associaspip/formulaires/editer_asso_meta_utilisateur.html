@@ -1,0 +1,18 @@
+<div class="formulaire_spip formulaire_#FORM">
+[<span class='erreur'>(#ENV*{message_erreur})</span>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		#SET{erreurs,#ENV**{erreurs}|table_valeur{nom_meta}}
+		<li class="editer_nom_meta">
+			[<span class='erreur_message'>(#GET{erreurs})</span>]
+			<label for="nom_meta"><strong><:asso:nom_meta_utilisateur:></strong></label>
+			<input type="text" name="nom_meta" [value="(#ENV{nom_meta})"] id="nom_meta"  class='formo'/>
+		</li>
+	</ul>
+
+<p class="boutons"><input type="submit" value="<:pass_ok:>" class="submit" /></p>
+
+</div>
+</form>
+</div>
