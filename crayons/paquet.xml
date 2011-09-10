@@ -4,7 +4,7 @@
 	version="1.13.0"
 	etat="stable"
 	compatibilite="[1.9.0;3.0.0]"
-	logo="images/crayon-128.png"
+	logo="images/crayon-32.png"
 	documentation="http://www.spip-contrib.net/Les-Crayons"
 >
 	<nom>Crayons</nom>
