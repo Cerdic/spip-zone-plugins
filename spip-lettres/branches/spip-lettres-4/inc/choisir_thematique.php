@@ -14,13 +14,14 @@ function theme_rubrique ($id_rubrique) {
 	return sql_getfetsel("titre", "spip_themes", "id_rubrique=".intval($id_rubrique));
 };
 
-function choisir_thematique ($id_rubrique=0) {
-	if (!lettres_nombre_themes() or $id_rubrique
+function choisir_thematique ($id_rubrique=0, $toutes="oui") {
+	if (!lettres_nombre_themes()
 		or ($GLOBALS['meta']['spip_lettres_admin_abo_toutes_rubriques']=='oui')) {
 		$selecteur_rubrique = charger_fonction('chercher_rubrique', 'inc');
 		return $selecteur_rubrique($id_rubrique, 'rubrique', false);
 	} else
-		return recuperer_fond("formulaires/selecteur/thematiques", "");
+		return recuperer_fond("formulaires/selecteur/thematiques", array("id_rubrique"=>$id_rubrique, "toutes"=>$toutes));
 };
+
 
 ?>

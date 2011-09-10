@@ -38,6 +38,8 @@
 		if (!$new) {
 			$lettre = new lettre($id_lettre);
 		} else {
+			if (!$id_rubrique) $id_rubrique = lettres_rubrique_theme_par_defaut();
+			if ($id_rubrique<0) $id_rubrique = 0;
 			if (!$id_rubrique) $id_rubrique = sql_getfetsel('id_rubrique', 'spip_themes', '', 'id_rubrique', '1');
 			if (!$id_rubrique) $id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', 'statut="publie"', 'id_rubrique', '1');
 			if (!$id_rubrique) $id_rubrique = sql_getfetsel('id_rubrique', 'spip_rubriques', '', 'id_rubrique', '1');

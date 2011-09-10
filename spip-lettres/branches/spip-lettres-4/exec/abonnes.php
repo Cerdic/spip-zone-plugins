@@ -58,6 +58,13 @@
 		echo '<p>'.$abonne->id_abonne.'</p>';
 		echo '</div>';
 
+		if ($abonne->objet != 'abonne') { // en fait : 'auteur'
+			echo '<ul class="instituer instituer_article">';
+			echo '<li>';
+			echo '<strong>'._T($abonne->objet).'</strong> <a href="'.generer_url_ecrire('auteur_infos', "id_auteur=".$abonne->id_objet, true).'"> '.$abonne->id_objet." </a>";
+			echo '</li></ul>';
+		}
+
 		echo '<ul class="instituer instituer_article">';
 		echo '<li>';
 		echo '<strong>'._T('lettresprive:cet_abonne').'</strong>';
