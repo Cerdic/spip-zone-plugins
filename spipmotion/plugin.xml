@@ -9,7 +9,7 @@
 	<icon>images/spipmotion.png</icon>
 	<auteur>kent1 (kent1@arscenic.info)</auteur>
 	<licence>GNU/GPL v3</licence>
-	<version>0.9.1</version>
+	<version>0.9.2</version>
 	<version_base>0.7.8</version_base>
 	<etat>test</etat>
 	<description>
@@ -76,6 +76,10 @@
     </pipeline>
 	<pipeline>
 		<nom>document_desc_actions</nom>
+		<inclure>spipmotion_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>pre_boucle</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
 	<bouton id='spipmotion_file' parent='naviguer'>

@@ -306,4 +306,16 @@ function spipmotion_post_spipmotion_encodage($flux){
 	
 	return $flux;
 }
+
+
+function spipmotion_pre_boucle($boucle){
+	if ($boucle->type_requete == 'documents') {
+		// Restreindre aux mots cles non techniques
+		if (!isset($boucle->modificateur['criteres']['id_orig']) && 
+			!isset($boucle->modificateur['tout'])) {
+				$boucle->where[]= array("'='", "'id_orig'", "'0'");
+		}		
+	}
+	return $boucle;
+}
 ?>
