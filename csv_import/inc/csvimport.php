@@ -228,18 +228,23 @@ function csvimport_table_visu_extrait($nom_table, $nombre_lignes = 0){
 	$trouver_table = charger_fonction('trouver_table', 'base');
 	$desc = $trouver_table($nom_table);
 	
-	//if ( in_array('maj', $desc['field']) ) // (Ne marchait pas...)
-	if ( isset($desc['field']['maj']) )
+	
+	if ( isset($desc['field']['maj']) ) // TRI par 'maj'
 	{
 		$maj_exist = true;
 		$result = sql_select("*", $nom_table, "", "", "maj DESC", $limit);
 		
-	} elseif( isset($desc['field']['id_article']) )
+	} elseif( isset($desc['field']['id_donnee']) ) // TRI par 'id_donnee'
+	{
+		$maj_exist = false;
+		$result = sql_select("*", $nom_table, "", "", "id_donnee DESC", $limit);
+		
+	} elseif( isset($desc['field']['id_article']) ) // TRI par 'id_article'
 	{
 		$maj_exist = false;
 		$result = sql_select("*", $nom_table, "", "", "id_article DESC", $limit);
 		
-	} else {
+	} else { // Pas de TRI
 		$maj_exist = false;
 		$result = sql_select("*", $nom_table, "", "", "", $limit);
 	}
