@@ -79,7 +79,8 @@ var geocoder;]
 					#SET{icon_w,#GET{logo_doc}|extraire_attribut{src}|largeur}
 					#SET{icon_h,#GET{logo_doc}|extraire_attribut{src}|hauteur}
 					["icon": (#GET{logo_doc}|extraire_attribut{src}|url_absolue|json_encode)],
-					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]]
+					"icon_size": [(#VAL{91}|chr)]#GET{icon_w},#GET{icon_h}[(#VAL{93}|chr)]],
+					"icon_anchor": [(#VAL{91}|chr)][(#GET{icon_w}|div{2})],[(#GET{icon_h}|div{2})][(#VAL{93}|chr)]
 				}[(#VAL{93}|chr)]
 		}
 		form_map.addJSON(data);]
