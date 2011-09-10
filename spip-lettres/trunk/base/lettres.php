@@ -330,7 +330,7 @@
 			array ('sql_updateq', 'spip_abonnes', array('objet'=>'abonne'), "objet='abonnes'"));
 			
 		$maj['5.4'] = array(
-			array ('sql_alter', "TABLE spip_lettres CHANGE objet objet VARCHAR(255) NOT NULL DEFAULT 'abonne'"));
+			array ('sql_alter', "TABLE spip_abonnes CHANGE objet objet VARCHAR(255) NOT NULL DEFAULT 'abonne'"));
 				
 		include_spip('base/upgrade');
 		maj_plugin($nom_meta_base_version, $version_cible, $maj);
