@@ -37,7 +37,7 @@
 		var $format = 'mixte';
 		var $extra;
 
-		var $existe = false;
+		var $existe = false;	// = correspondance en BDD
 
 
 		/**
@@ -52,7 +52,7 @@
 			if (intval($id_abonne) != 0) {
 				$this->id_abonne = intval($id_abonne);
 				$spip_abonne = sql_select('*', 'spip_abonnes', 'id_abonne='.$this->id_abonne);
-				if (sql_count($spip_abonne) == 1) {
+				if (sql_count($spip_abonne)) { // 0 ou 1 normalement
 					$abo = sql_fetch($spip_abonne);
 					$table			= $table_des_abonnes[$abo['objet']]['table'];
 					$champ_email	= $table_des_abonnes[$abo['objet']]['champ_email'];
@@ -78,9 +78,9 @@
 					$spip_objets = @sql_select('*', 'spip_'.$valeur['table'], $valeur['champ_email'].'='.sql_quote($this->email));
 					if ($arr = sql_fetch($spip_objets)) {
 						$this->nom			= $arr[$valeur['champ_nom']];
-						$this->objet		= $valeur['table'];
+						$this->objet		= objet_type($valeur['table']);
 						$this->id_objet		= $arr[$valeur['champ_id']];
-						$spip_abonnes = sql_select('*', 'spip_abonnes', 'objet="'.$valeur['table'].'" AND id_objet='.$arr[$valeur['champ_id']]);
+						$spip_abonnes = sql_select('*', 'spip_abonnes', 'objet="'.$this->objet.'" AND id_objet='.$arr[$valeur['champ_id']]);
 						if (sql_count($spip_abonnes) == 1) {
 							$abo = sql_fetch($spip_abonnes);
 							$this->id_abonne	= $abo['id_abonne'];

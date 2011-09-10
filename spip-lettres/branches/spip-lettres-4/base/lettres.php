@@ -388,6 +388,10 @@
 				sql_updateq('spip_abonnes', array('objet'=>'abonne'), "objet='abonnes'");
 				ecrire_meta($nom_meta_base_version,$current_version='4.3','non');
 			}
+			if (version_compare ($current_version, '4.4','<')) {
+				echo "SPIP-Lettres MAJ 4.4<br/>";
+				sql_alter("TABLE spip_lettres CHANGE objet objet VARCHAR(255) NOT NULL DEFAULT 'abonne'");
+			}
 		}
 	}
 
