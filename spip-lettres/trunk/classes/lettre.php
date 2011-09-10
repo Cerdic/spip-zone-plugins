@@ -140,6 +140,8 @@
 			$auteurs = sql_select('A.email', 'spip_auteurs AS A INNER JOIN spip_auteurs_lettres AS AL ON AL.id_auteur=A.id_auteur', 'AL.id_lettre='.intval($this->id_lettre));
 			while ($auteur = sql_fetch($auteurs)) {
 				$abonne = new abonne(0, $auteur['email']);
+				if (!$abonne->existe)
+					$abonne->enregistrer();
 				if (!$abonne->envoyer_lettre($this->id_lettre)) {
 					$resultat = false;
 					break;
