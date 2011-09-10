@@ -4,8 +4,9 @@
 ]
 #SET{dates, #ARRAY}
 #SET{nombre_date,#ARRAY}
+#SET{class,row_even}
 <B_profils>
-<table class="spipmotion" id="graph_stats_table">
+<table class="spipmotion spip liste" id="graph_stats_table">
 	<thead>
 		<tr class="row_first">
 			<th><:spipmotion:thead_template_encodage:></th>
@@ -26,7 +27,8 @@
 		#SET{stat_duree_#EXTENSION,#GET{stat_duree_#EXTENSION}|plus{#GET{encodage_duree_seconde}}}
 		#SET{stat_octet_#EXTENSION,#GET{stat_octet_#EXTENSION}|plus{#GET{encodage_octet_seconde}}}
 		</BOUCLE_last10>
-		<tr class="tr_liste">
+		<tr class="tr_liste[ (#GET{class})]">
+			[(#GET{class}|=={row_even}|?{[(#SET{class,row_odd})],[(#SET{class,row_even})]})]
 			<td class="format">
 				#VALEUR
 			</td>

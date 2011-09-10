@@ -40,7 +40,7 @@
 #SET{total,#GRAND_TOTAL}
 <p><:spipmotion:info_nombre_encodes{nb=#GET{total}}:></p>
 #ANCRE_PAGINATION
-<table class="spipmotion">
+<table class="spipmotion spip liste">
 	<thead>
 		<tr class="row_first">
 			<th><:spipmotion:thead_id_file:></th>
@@ -54,7 +54,7 @@
 	</thead>
 	<tbody class="ajax">
 <BOUCLE_spipmotion_encodes(SPIPMOTION_ATTENTES){encode = oui}{par id_spipmotion_attente}{inverse}{pagination #ENV{pagination,20}}>
-	<tr class="tr_liste">
+	<tr class="tr_liste[ (#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]">
 		<td>##ID_SPIPMOTION_ATTENTE</td>
 		<td>
 			<a href="[(#SELF|parametre_url{id_document,#ID_DOCUMENT})]" title="<:spipmotion:titre_previsu:>" class="ajax">
@@ -98,7 +98,7 @@
 <h1><:spipmotion:titre_page_file_encodes_jour:></h1>
 #SET{total,#GRAND_TOTAL}
 #ANCRE_PAGINATION
-<table class="spipmotion" id="graph_encodages_dates_table">
+<table class="spipmotion spip list" id="graph_encodages_dates_table">
 	<thead>
 		<tr class="row_first">
 			<th><:spipmotion:thead_date:></th>
@@ -107,7 +107,7 @@
 	</thead>
 	<tbody class="ajax">
 	<BOUCLE_spipmotion_encodes_jours(POUR){tableau #GET{dates}}{pagination #ENV{pagination,15}}{par valeur}{inverse}>
-		<tr class="tr_liste">
+		<tr class="tr_liste[ (#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]">
 			<td class="date">
 				<abbr title="#VALEUR">
 					[(#VALEUR|affdate)]

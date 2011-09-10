@@ -8,7 +8,7 @@
 #SET{total,#GRAND_TOTAL}
 [<p>(#GET{total}|singulier_ou_pluriel{<:spipmotion:info_nombre_encodage_attente:>,<:spipmotion:info_nombre_encodages_attentes:>})</p>]
 #ANCRE_PAGINATION
-<table class="spipmotion" id="spipmotion_file">
+<table class="spipmotion spip liste" id="spipmotion_file">
 	<thead>
 		<tr class="row_first">
 			<th><:spipmotion:thead_id_file:></th>
@@ -21,8 +21,8 @@
 		</tr>
 	</thead>
 	<tbody class="ajax">
-<BOUCLE_spipmotion_file(SPIPMOTION_ATTENTES){encode != oui}{par id_spipmotion_attente}{inverse}{pagination #ENV{pagination,20}}>
-	<tr class="tr_liste">
+<BOUCLE_spipmotion_file(SPIPMOTION_ATTENTES){encode != oui}{par id_spipmotion_attente}{pagination #ENV{pagination,20}}>
+	<tr class="tr_liste[ (#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]">
 		<td>##ID_SPIPMOTION_ATTENTE</td>
 		<td>
 			#ID_DOCUMENT
@@ -36,7 +36,7 @@
 		<td>
 			#EXTENSION
 		</td>
-		<td>[(#MAJ)]</td>
+		<td>[(#MAJ|affdate)]</td>
 		<td>[(#ENCODE|=={erreur}|oui)
 				#SET{erreur,oui}
 				[(#AUTORISER{relancer_encodage,spipmotion,#ID_SPIPMOTION_ATTENTE}|oui)
