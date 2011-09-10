@@ -55,6 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">View documentation</a>',
 
 	// M
+	'message_voir_configuration' => 'Look at the notification setup',
 	'messagerie_interne' => 'Private messages',
 	'messagerie_interne_signaler' => '<strong>Notify new private messages</strong>&nbsp;: activate this to get redactors notified when they haven\'t seen a Private Message had been sent to them. Redactors get notified 20 minutes after the Private Message is sent, in order to avoid spam, when the redactor is connected to the private area.',
 	'moderateur' => '<strong>Moderator</strong>',

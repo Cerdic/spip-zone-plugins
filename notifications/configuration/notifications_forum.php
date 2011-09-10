@@ -21,7 +21,7 @@ function configuration_notifications_forum_dist()
 	global $spip_lang_left;
 
 	$res = "<div class='verdana2'>"
-		. "<a href='".generer_url_ecrire('cfg', 'cfg=notifications')."'>"._L('voir la configuration des notifications')."</a>\n";
+		. "<a href='".generer_url_ecrire('cfg', 'cfg=notifications')."'>"._T('notifications:message_voir_configuration')."</a>\n";
 	$res .= "</div>\n";
 
 	$res = debut_cadre_trait_couleur("", true, "", _L('Notifications'))

@@ -70,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'lien_documentation' => '<a href="http://www.spip-contrib.net/Notifications" class="spip_out">Cf. documentation</a>',
 	
 	// M
+	'message_voir_configuration' => 'Voir la configuration des notifications',
 	'messagerie_interne' => 'Messagerie interne',
 	'messagerie_interne_signaler' => '<strong>Signaler les nouveaux messages priv&#233;s</strong>&nbsp;: activer cette option pour que le site envoie une notification lorsqu\'un r&#233;dacteur n\'a pas vu un nouveau message dans sa messagerie. Le syst&#232;me attend 20 minutes avant de notifier le r&#233;dacteur, de mani&#232;re &#224; ne pas spammer un r&#233;dacteur d&#233;j&#224; en ligne dans l\'espace priv&#233;.',
 	'moderateur' => '<strong>Mod&#233;rateur</strong>',
