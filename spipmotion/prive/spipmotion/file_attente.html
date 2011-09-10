@@ -52,7 +52,7 @@
 </BOUCLE_spipmotion_file>
 	</tbody>
 </table>
-[<div class="pagination pagination_spipmotion">(#PAGINATION{page_precedent_suivant})</div>]
+[<div class="pagination pagination_spipmotion">(#PAGINATION{page})</div>]
 [(#GET{erreur}|=={oui}|et{#AUTORISER{configurer}}|oui)
 <div class="actions">
 	[(#BOUTON_ACTION{<:spipmotion:info_relancer_erreurs:>,[(#URL_ACTION_AUTEUR{spipmotion_relancer_encodage,'tout',[(#SELF|parametre_url{log,''}|parametre_url{relance,''})]})],'','',''})]
