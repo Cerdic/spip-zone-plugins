@@ -56,8 +56,8 @@ function plugins_preparer_sql_plugin($plugin)
 	// Nom :	on repere dans le nom du plugin un chiffre en fin de nom
 	//			et on l'ampute de ce numero pour le normaliser
 	//			et on passe tout en unicode avec le charset du site
-	$plugin['nom'] = entite2charset($plugin['nom']);
-	$champs['nom'] = normaliser_nom($plugin['nom'], 'fr', false);
+	$champs['nom'] = trim(entite2charset($plugin['nom']));
+	$champs['nom'] = normaliser_nom($plugin['nom'], '', false);
 
 	// Extraction de la compatibilite SPIP et construction de la liste des branches spip supportees
 	$champs['compatibilite_spip'] = ($plugin['compatibilite']) ? $plugin['compatibilite'] : '';
@@ -84,7 +84,7 @@ function normaliser_nom($nom, $langue='', $supprimer_numero=true) {
 	// On extrait les traductions de l'eventuel multi
 	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
 	$noms = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $nom, $nbr_replace));
-	$multi = ($nbr_replace > 0 AND !langue) ? true : false;
+	$multi = ($nbr_replace > 0 AND !$langue) ? true : false;
 
 	$nouveau_nom = '';
 	foreach ($noms as $_lang => $_nom) {
@@ -103,7 +103,7 @@ function normaliser_nom($nom, $langue='', $supprimer_numero=true) {
 	if ($nouveau_nom)
 		// On renvoie un nouveau nom multi ou pas sans la valeur de la branche 
 		$nouveau_nom = (($multi) ? '<multi>' : '') . $nouveau_nom . (($multi) ? '</multi>' : '');
-		
+
 	return $nouveau_nom;
 }
 
