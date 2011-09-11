@@ -1,5 +1,5 @@
 <plugin>
-	<nom>Plugin AMAP pour Spip 2</nom>
+	<nom>Plugin AMAP</nom>
 	<auteur>St&eacute;phane Moulinet - dadaprod - Adaptation pour Spip 2 : E-cosystems, [Pierre KUHN->http://www.pierre-kuhn.org] </auteur>
 	<version>2.1.2</version>
 	<version_base>0.8</version_base>
