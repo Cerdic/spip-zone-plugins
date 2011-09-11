@@ -216,10 +216,4 @@ function normaliser_multi($texte)
 	return $trads;
 }
 
-function entite2charset($texte) {
-	if (!$texte) return;
-	include_spip('inc/charsets');
-	return unicode2charset(html_entity_decode(preg_replace('/&([lg]t;)/S', '&amp;\1', $texte), ENT_NOQUOTES, $GLOBALS['meta']['charset']));
-}
-
 ?>

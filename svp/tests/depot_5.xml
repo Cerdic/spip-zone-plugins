@@ -7,6 +7,83 @@
 </depot>
 
 <archives>
+
+<archive id="notifications.zip" dtd="paquet">
+<zip>
+	<file>notifications.zip</file>
+	<size>45744</size>
+	<date>1315666832</date>
+	<source>_plugins_/notifications</source>
+	<last_commit>2011-09-10 17:00:27</last_commit>
+</zip>
+<traductions>
+<traduction module="notifications" reference="fr">
+	<langue code="en" />
+</traduction>
+</traductions>
+
+<paquet
+	prefix="notifications"
+	categorie="communication"
+	version="0.5.5"
+	etat="test"
+	schema="12309"
+	compatibilite="[3.0.0-alpha2;3.0.*]"
+	logo="notifications-32.png"
+	documentation="http://www.spip-contrib.net/Notifications,2360"
+	developpement="http://blog.smellup.net/spip.php?article37"
+	demonstration="http://www.sarka-spip.net"
+>
+	<nom>Notifications</nom>
+
+	<auteur>fil@rezo.net</auteur>
+	<auteur lien="http://magraine.net/">Matthieu Marcillaud</auteur>
+		
+	<credit lien="http://people.freedesktop.org/~jimmac/icons/#oxygen">Logo de Jakub 'jimmac' Steiner</credit>
+	<credit lien="http://www.famfamfam.com/">FamFamFam (Icones)</credit>
+
+	<licence>GNU/GPL</licence>
+	<copyright>2001-2011</copyright>
+
+	<traduire gestionnaire="salvatore" module="crayons" reference="fr" />
+
+	<pipeline nom="taches_generales_cron" inclure="notifications_pipelines.php" />
+	<pipeline nom="post_edition" inclure="notifications_pipelines.php"/>
+	<pipeline nom="notifications_destinataires" inclure="notifications_pipelines.php"/>
+	<pipeline nom="notifications_envoyer_mails" inclure="notifications_pipelines.php"/>
+
+	<pipeline nom="notifications" inclure="notifications_pipelines.php" action="" />
+
+	<necessite nom="cfg" compatibilite="[1.0.0;]" />
+	<necessite nom="forum" compatibilite="[1.7.0;]" />
+
+	<utilise nom='Zpip' compatibilite="[;]" />
+	<utilise nom='rainette' compatibilite="[;]" />
+
+</paquet>
+<multis>
+<nom>
+<multi>
+[en]Notifications
+[fr]Notifications
+</multi>
+</nom>
+<slogan>
+<multi>
+[en]Advanced notifications
+[fr]Notifications avanc√©es
+</multi>
+</slogan>
+<description>
+<multi>
+[en]Sends mail notifications for certain actions : forums posts and answers notified to users, private messages notified to redactors or articles publication notified to their authors.
+[fr]Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l'espace priv&#233;, permet &#233;galement l'envoi d'un mail aux auteurs lors de la publication de leurs articles.
+</multi>
+</description>
+</multis>
+
+</archive>
+
 <archive id="spip-bonux.zip">
 <zip>
 	<file>spip-bonux.zip</file>
@@ -154,6 +231,64 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 		<inclure>fancybox_pipelines.php</inclure>
 	</pipeline>
 	<categorie>multimedia</categorie>
+</plugin>
+</archive>
+
+<archive id="paquet1.zip">
+<zip>
+	<file>paquet1.zip</file>
+	<size>16862</size>
+	<date>1274302824</date>
+	<source>_plugins_/plugin_1</source>
+	<last_commit>2011-03-10 21:21:10</last_commit>
+</zip>
+<traductions>
+	<traduction module="a2a" reference="fr">
+		<langue code="en" />
+		<langue code="es" />
+		<langue code="it" />
+	</traduction>
+	<traduction module="a2a_prive" reference="fr">
+		<langue code="en" />
+	</traduction>
+</traductions>
+<plugin>
+    <prefix>plugin1</prefix>
+	<nom>
+		<multi>
+		[fr]Plugin_1
+		[en]Plugin_1 in english
+		</multi>
+	</nom>
+    <icon>images/a2a-64.png</icon>
+	<categorie>navigation</categorie>
+
+    <auteur>Collectif SPIP</auteur>
+    <version>0.3</version>
+    <version_base>0.3</version_base>
+    <etat>stable</etat>
+    <licence>GPL 3</licence>
+    <description>Petit plugin qui permet de lier un article &agrave; un ou plusieurs autre(s). Ensuite on s'en fout.</description>
+    <lien>http://www.spip-contrib.net/a2a</lien>
+    <fonctions>a2a_fonctions.php</fonctions>
+    <options>a2a_options.php</options>
+    <options>a2a2_options.php</options>
+    <install>base/a2a_upgrade.php</install>
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="cfg" version="[1.14.1;]" />
+	<necessite id="spip_bonux" version="[1.8.7;]" />
+	<necessite id="lib:jquery-ui-1.8.9" src="http://jquery-ui.googlecode.com/files/jquery-ui-1.8.9.zip" />
+	<utilise id="noizetier" version="[0.8.1;]" />
+	<utilise id="saisies" version="[1.9.3;]" />
+	<utilise id="agenda" version="[2.2.0;]" />
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>affiche_milieu</action>
+		<inclure>a2a_pipelines.php</inclure>
+	</pipeline>
+	<chemin dir="spip_200" />
+	<traduire gestionnaire="salvatore" module="a2a" reference="fr" />
+	<traduire gestionnaire="salvatore" module="a2a_prive" reference="fr" />
 </plugin>
 </archive>
 

@@ -93,9 +93,13 @@ function svp_phraser_archives($archives) {
 
 // Phrase le contenu du xml, soit la ou les balises <plugin> ou <paquet> suivant la DTD
 // (peut etre appelee via archives.xml ou via un xml de plugin)
+// et phrase la balise <multis> dans le cas d'une DTD paquet qui contient les traductions du 
+// nom, slogan et description 
 function svp_phraser_plugin($dtd, $contenu) {
+	static $balises_multis = array('nom', 'slogan', 'description');
 	$plugin = array();
 	
+	// On initialise les informations du plugin avec le contenu du plugin.xml ou paquet.xml
 	$regexp = ($dtd == 'plugin') ? _SVP_REGEXP_BALISE_PLUGIN : _SVP_REGEXP_BALISE_PAQUET;
 	if ($nb_balises = preg_match_all($regexp, $contenu, $matches)) {
 		$plugins = array();
@@ -112,9 +116,23 @@ function svp_phraser_plugin($dtd, $contenu) {
 			$plugin = $fusionner($plugins);
 		}
 		else
-			$plugin = $plugins[0];
+			$plugin = ($dtd == 'plugin') ? $plugins[0] : $plugins[0][0];
 	}
-	
+
+	// Pour la DTD paquet, les traductions du nom, slogan et description sont compilees dans une balise
+	// du fichier archives.xml. Il faut donc completer les informations precedentes avec cette balise
+	if (($dtd == _SVP_DTD_PAQUET) AND (preg_match(_SVP_REGEXP_BALISE_MULTIS, $contenu, $matches))) {
+		$multis = array();
+		if (is_array($arbre = spip_xml_parse($matches[1])))
+			$multis = svp_aplatir_balises($balises_multis, $arbre);
+		// Le nom peut etre traduit ou pas, il faut donc le tester
+		if ($multis['nom'])
+			$plugin['nom'] = $multis['nom'];
+		// Slogan et description sont forcement des items de langue 
+		$plugin['slogan'] = $multis['slogan'];
+		$plugin['description'] = $multis['description'];
+	}
+
 	return $plugin;
 }
 
