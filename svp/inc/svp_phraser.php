@@ -68,25 +68,26 @@ function svp_phraser_archives($archives) {
 			$zip = svp_phraser_zip($matches[1]);
 			if ($zip) {
 				// Affectation des informations du zip
-				$paquets[$zip[file]] = $zip;
-			
+				$paquets[$zip['file']] = $zip;
+		
 				// Extraction de la balise traductions
-				$paquets[$zip[file]]['traductions'] = array();
+				$paquets[$zip['file']]['traductions'] = array();
 				if (preg_match(_SVP_REGEXP_BALISE_TRADUCTIONS, $_archive, $matches))
-					$paquets[$zip[file]]['traductions'] = svp_phraser_traductions($matches[1]);
+					$paquets[$zip['file']]['traductions'] = svp_phraser_traductions($matches[1]);
 				
 				// La balise <archive> peut posseder un attribut qui precise la DTD utilisee pour les plugins (plugin ou paquet)
 				// Sinon, c'est la DTD plugin qui est utilisee
 				list($tag, $attributs) = spip_xml_decompose_tag($_archive);
 				// -- On stocke la DTD d'extraction des infos du plugin
-				$paquets[$zip[file]]['dtd'] = (isset($attributs['dtd'])) ? $attributs['dtd'] : _SVP_DTD_PLUGIN;
+				$paquets[$zip['file']]['dtd'] = (isset($attributs['dtd']) AND $attributs['dtd']) ? $attributs['dtd'] : _SVP_DTD_PLUGIN;
 
 				// Extraction *des balises* plugin ou *de la balise* paquet suivant la DTD et la version SPIP
 				// -- DTD : si on utilise plugin.xml on extrait la balise <plugin> sinon la balise <paquet>
-				$paquets[$zip[file]]['plugin'] = svp_phraser_plugin($paquets[$zip[file]]['dtd'], $_archive);
+				$paquets[$zip['file']]['plugin'] = svp_phraser_plugin($paquets[$zip['file']]['dtd'], $_archive);
 			}
 		}
 	}
+
 	return $paquets;
 }
 
@@ -117,20 +118,20 @@ function svp_phraser_plugin($dtd, $contenu) {
 		}
 		else
 			$plugin = ($dtd == 'plugin') ? $plugins[0] : $plugins[0][0];
-	}
 
-	// Pour la DTD paquet, les traductions du nom, slogan et description sont compilees dans une balise
-	// du fichier archives.xml. Il faut donc completer les informations precedentes avec cette balise
-	if (($dtd == _SVP_DTD_PAQUET) AND (preg_match(_SVP_REGEXP_BALISE_MULTIS, $contenu, $matches))) {
-		$multis = array();
-		if (is_array($arbre = spip_xml_parse($matches[1])))
-			$multis = svp_aplatir_balises($balises_multis, $arbre);
-		// Le nom peut etre traduit ou pas, il faut donc le tester
-		if ($multis['nom'])
-			$plugin['nom'] = $multis['nom'];
-		// Slogan et description sont forcement des items de langue 
-		$plugin['slogan'] = $multis['slogan'];
-		$plugin['description'] = $multis['description'];
+		// Pour la DTD paquet, les traductions du nom, slogan et description sont compilees dans une balise
+		// du fichier archives.xml. Il faut donc completer les informations precedentes avec cette balise
+		if (($dtd == _SVP_DTD_PAQUET) AND (preg_match(_SVP_REGEXP_BALISE_MULTIS, $contenu, $matches))) {
+			$multis = array();
+			if (is_array($arbre = spip_xml_parse($matches[1])))
+				$multis = svp_aplatir_balises($balises_multis, $arbre);
+			// Le nom peut etre traduit ou pas, il faut donc le tester
+			if ($multis['nom'])
+				$plugin['nom'] = $multis['nom'];
+			// Slogan et description sont forcement des items de langue 
+			$plugin['slogan'] = $multis['slogan'];
+			$plugin['description'] = $multis['description'];
+		}
 	}
 
 	return $plugin;
