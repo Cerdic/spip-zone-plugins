@@ -57,7 +57,6 @@ function plugins_preparer_sql_plugin($plugin)
 	//			et on l'ampute de ce numero pour le normaliser
 	//			et on passe tout en unicode avec le charset du site
 	$champs['nom'] = trim(entite2charset($plugin['nom']));
-	$champs['nom'] = normaliser_nom($plugin['nom'], '', false);
 
 	// Extraction de la compatibilite SPIP et construction de la liste des branches spip supportees
 	$champs['compatibilite_spip'] = ($plugin['compatibilite']) ? $plugin['compatibilite'] : '';
