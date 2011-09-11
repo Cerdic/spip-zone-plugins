@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="3.0.3"
 	etat="test"
-	compatibilite="[3.0.0-alpha2;["
+	compatibilite="[3.0.0-alpha2;3.0.*["
 	logo="prive/themes/spip/images/comment-32.png"
 	documentation="http://www.spip-contrib.net/?article3448"
 >
@@ -11,7 +11,7 @@
 	<nom>Comments</nom>
 	<!-- Gestion des forums privés et publics dans SPIP -->
 
-	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+	<auteur lien="http://romy.tetue.net">Romy</auteur>
 	<copyright>2009-2011</copyright>
 	<licence>GPL</licence>
 
@@ -20,11 +20,9 @@
 	<chemin path="./" />
 	<chemin path="feed/" />
 
-	<necessite nom="SPIP" compatibilite="[3.0.0-dev;]" />
 	<necessite nom="forum" compatibilite="[1.7.0;]" />
 
 	<utilise nom='Zpip' compatibilite="[;]" />
-
 
 	<pipeline nom="pre_boucle" inclure="comments_fonctions.php" />
 	<pipeline nom="autoriser" inclure="comments_fonctions.php" />
@@ -32,5 +30,4 @@
 	<pipeline nom="formulaire_traiter" inclure="comments_fonctions.php" />
 
 	<menu nom="comments" titre="comments:titre_comments" parent="menu_squelette" icone="images/comment-16.png" action="configurer_comments" />
-
 </paquet>
