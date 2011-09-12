@@ -1,0 +1,87 @@
+<paquet
+	prefix="gis"
+	categorie="divers"
+	version="3.0.8"
+	schema="2.0.2"
+	etat="dev"
+	compatibilite="[3.0.0-dev;3.0.*["
+	logo="images/gis.png"
+	documentation="http://www.spip-contrib.net/GIS2"
+>
+
+	<nom>GIS</nom>
+	<!-- Système d'information géographique -->
+
+	<auteur>b_b</auteur>
+	<auteur>kent1</auteur>
+	<copyright>2011</copyright>
+	<licence>GPL v3</licence>
+	<credit lien="http://mattrich.deviantart.com/art/Picnic-101256405">Icône de mattrich sous licence CC BY-NC-SA</credit>
+
+	<traduire module="gis" reference="fr" gestionnaire="salvatore" />
+	<traduire module="paquet-gis" reference="fr" gestionnaire="salvatore" />
+
+	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
+	<necessite nom="saisies" compatibilite="[1.7.1;]" />
+	<lib nom="mxn-2.0.17" lien="https://github.com/downloads/mapstraction/mxn/mxn-2.0.17.zip" />
+
+	<pipeline
+		nom="declarer_tables_interfaces"
+		inclure="base/gis.php"
+	/>
+	<pipeline
+		nom="declarer_tables_principales"
+		inclure="base/gis.php"
+	/>
+	<pipeline
+		nom="declarer_tables_auxiliaires"
+		inclure="base/gis.php"
+	/>
+	<pipeline
+		nom="insert_head"
+		action="inserer_javascript"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="header_prive"
+		action="inserer_javascript"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="affiche_milieu"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="post_edition"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="taches_generales_cron"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="rechercher_liste_des_champs"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="autoriser"
+		inclure="gis_autoriser.php"
+	/>
+	<pipeline
+		nom="declarer_tables_objets_surnoms"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="declarer_type_surnoms"
+		inclure="gis_pipelines.php"
+	/>
+	<pipeline
+		nom="formulaire_traiter"
+		inclure="formulaires/configurer_gis.php"
+		action="gis_configurer_gis_post_traitement"
+	/>
+	
+	<menu nom="gis_tous" titre="gis:icone_gis_tous" parent="menu_edition" icone="images/gis-16.png" />
+	<menu nom="configurer_gis" titre="gis:cfg_titre_gis" parent="menu_configuration" icone="images/gis-16.png" />
+	<menu nom="gis_nouveau" titre="gis:editer_gis_nouveau" parent="outils_rapides" icone="images/gis-new-16.png" parametres="new=oui" />
+</paquet>
