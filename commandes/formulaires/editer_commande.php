@@ -44,7 +44,22 @@ function formulaires_editer_commande_verifier($id_commande='new', $id_auteur, $r
 }
 
 function formulaires_editer_commande_traiter($id_commande='new', $id_auteur, $retour=''){
-	include_spip('inc/editer');
+	include_spip('inc/editer');	
+	
+	//array des champs dates
+	$type_dates=array('date','date_envoi','date_paiement');
+	
+	foreach ($type_dates as $type_date){
+		$date = _request($type_date);	
+		if($date){
+			list($jour, $mois, $annee) = explode('/',$date);
+			$date =$annee.'-'.$mois.'-'.$jour;
+			set_request($type_date,$date);
+			}		
+	
+	spip_log("commande_set pour $id_commande avec $type_date = $date",'test_commande');
+	}
+	
 	$retours = formulaires_editer_objet_traiter('commande',$id_commande,'','',$retour,'',$champs);
 	return $retours;
 }
