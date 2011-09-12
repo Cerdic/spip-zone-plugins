@@ -13,9 +13,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_modifier' => 'Modifier',
 
 	// C
-	'contact_label'=>'Contact',
-	'reference_label'=>'Référence',
-	'statut_label'=>'Statut',
+	'contact_label'=>'Contact :',
+	'reference_label'=>'Référence :',
+	'statut_label'=>'Statut :',
 	'commande_client' => 'Client',
 	'commande_date' => 'Date',
 	'commande_date_paiement' => 'Date de paiement',
@@ -29,10 +29,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'contenu' => 'Contenu',
 
 	// D
-	'date_commande_label'=>'Date de création',
-	'date_envoi_label'=>'Date d\'envoi',
-	'date_maj_label'=>'Date de mise à jour',
-	'date_paiement_label' => 'Date de paiement',
+	'date_commande_label'=>'Date de création :',
+	'date_envoi_label'=>'Date d\'envoi :',
+	'date_maj_label'=>'Date de mise à jour :',
+	'date_paiement_label' => 'Date de paiement :',
 	'designation' => 'Désignation',
 
 	// E
