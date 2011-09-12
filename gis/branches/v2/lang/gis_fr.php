@@ -34,7 +34,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_microsoft' => 'Microsoft Bing',
 	'cfg_lbl_api_openlayers' => 'OpenLayers',
 	'cfg_lbl_api_ovi' => 'Ovi Nokia',
-	'cfg_lbl_api_yahoo' => 'Yahoo',
 	'cfg_lbl_api_yandex' => 'Yandex',
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'Centrer la carte sur l\'emplacement de l\'utilisateur &agrave; la cr&eacute;ation',
