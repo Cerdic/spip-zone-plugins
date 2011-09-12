@@ -12,6 +12,14 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
 	xmlns:atom="http://www.w3.org/2005/Atom"
 >
+#SET{tout_assignes,#ARRAY}
+<BOUCLE_tout_assignes(TICKETS){fusion id_assigne}>#SET{tout_assignes,#GET{tout_assignes}|push{#ID_ASSIGNE}}</BOUCLE_tout_assignes>
+#SET{tout_auteurs,#ARRAY}
+<BOUCLE_tout_auteurs(TICKETS){fusion id_auteur}>#SET{tout_auteurs,#GET{tout_auteurs}|push{#ID_AUTEUR}}</BOUCLE_tout_auteurs>
+#SET{tout_statuts,#ARRAY}
+<BOUCLE_statuts(TICKETS){fusion statut}>#SET{tout_statuts,#GET{tout_statuts}|push{#STATUT}}</BOUCLE_statuts>
+#SET{tout_trackers,#ARRAY}
+<BOUCLE_trackers(TICKETS){fusion tracker}>#SET{tout_trackers,#GET{tout_trackers}|push{#TRACKER}}</BOUCLE_trackers>
 [[(#SET{nom,[(#INFO_NOM{auteur,#ENV{id_auteur}})]})](#ENV{id_auteur}|oui)]
 [[(#SET{nom,[(#INFO_NOM{auteur,#ENV{id_assigne}})]})](#ENV{id_assigne}|oui)]
 [[(#SET{titre,[(#INFO_TITRE{ticket,#ENV{id_ticket}})]})](#ENV{id_ticket}|oui)]
@@ -37,7 +45,7 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 		[<width>(#LOGO_SITE_SPIP||image_reduire{144,400}|extraire_attribut{width})</width>]
 	</image>
 ]
-<BOUCLE_recents(TICKETS){id_auteur?}{id_auteur !IN #ENV{id_auteur_non,''}}{id_ticket?}{id_assigne?}{severite?}{statut?}{tracker?}{projet?}{composant?}{version?}{jalon?}{navigateur?}{par date}{inverse}{0,#ENV{limit,10}}{unique}>
+<BOUCLE_recents(TICKETS){id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{severite?}{statut?}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{projet?}{composant?}{version?}{jalon?}{navigateur?}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{par date}{inverse}{0,#ENV{limit,10}}{unique}>
 [(#REM) on ne met que les forums si un ticket dans l'environnement]
 [(#ENV{id_ticket}|non)
 <INCLURE{fond=inclure/rss-item-ticket,id_ticket}>]

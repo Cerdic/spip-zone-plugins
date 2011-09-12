@@ -77,7 +77,7 @@
 		[<div class="ajax">
 		(#INCLURE{fond=inclure/liste_tickets,env,ajax,afficher_filtres=oui,tri=statut,statut=#GET{statut},titre=<:tickets:tickets_tries:>}|sinon{<h3><:tickets:tickets_tries:> (0)</h3><p><:tickets:message_aucun_ticket_recherche:></p>}|trim)
 			<div class="actions rss">
-				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statuts,#ENV{statuts}}|parametre_url{auteurs,#ENV{auteurs}}|parametre_url{assignes,#ENV{assignes}}|parametre_url{trackers,#ENV{trackers}}|parametre_url{composant,#ENV{composant}}|parametre_url{projet,#ENV{projet}}|parametre_url{severite,#ENV{severite}}|parametre_url{version,#ENV{version}}|parametre_url{jalon,#ENV{jalon}}|parametre_url{navigateur,#ENV{navigateur}}|parametre_url{date_debut,#ENV{date_debut}}|parametre_url{date_fin,#ENV{date_fin}})]"><:tickets:suivre_tickets_rss:></a>
 			</div>
 		</div>]
 	]

@@ -65,9 +65,27 @@
 <BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
 	[(#ENV{recherche}|oui)
 		<p><:tickets:champ_recherche:> #ENV{recherche}</p>
-	][(#ENV{tracker}|oui)
-		<p><:tickets:champ_tracker:> #ENV{tracker}</p>
-	][(#ENV{projet}|oui)
+	][(#ENV{date_debut}|oui)
+		<p><:tickets:champ_date_debut:> [(#ENV{date_debut}|affdate)]</p>
+	][(#ENV{date_fin}|oui)
+		<p><:tickets:champ_date_fin:> [(#ENV{date_fin}|affdate)]</p>
+	]
+	<B_pour_statuts>
+	<p><:tickets:champ_statut:> 
+	<BOUCLE_pour_statuts(POUR){tableau #ENV{statuts,#ARRAY}}{', '}>[(#VALEUR|tickets_texte_statut)]</BOUCLE_pour_statuts>
+	</p>
+	</B_pour_statuts>
+
+	<B_pour_trackers>
+	<p><:tickets:champ_type:> 
+	<BOUCLE_pour_trackers(POUR){tableau #ENV{trackers}}{', '}>[(#VALEUR|tickets_texte_tracker)]</BOUCLE_pour_trackers>
+	</p>
+	</B_pour_trackers>
+	[(#ENV{tracker}|oui)
+		<p><:tickets:champ_tracker:> [(#ENV{tracker}|tickets_texte_tracker)]</p>
+	]
+	
+	[(#ENV{projet}|oui)
 		<p><:tickets:champ_projet:> #ENV{projet}</p>
 	][(#ENV{composant}|oui)
 		<p><:tickets:champ_composant:> #ENV{composant}</p>
@@ -180,7 +198,7 @@
 		</tr>
 	</thead>
 	<tbody
-	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{statut IN #ENV{statut,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
