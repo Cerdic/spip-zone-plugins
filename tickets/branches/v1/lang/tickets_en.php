@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_paginer_par' => 'Paginate by&nbsp;:',
+	'lien_filtrer' => 'Filter bug reports',
 	'lien_supprimer_filtres' => 'Delete all filters',
 	
 	// M

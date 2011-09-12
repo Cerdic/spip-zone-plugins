@@ -4,3 +4,19 @@
 [<link rel="alternate" type="application/rss+xml" title="<:tickets:syndiquer_tickets:>" href="(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}})" />]
 <INCLURE{fond=inclure/head}>
 [<link rel="stylesheet" href="(#CHEMIN{tickets.css})" type="text/css" media="projection, screen, tv" />]
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		jQuery('.formulaire_trier_tickets').hide();
+		jQuery('.formulaire_trier_tickets').before('<div class="actions"><a href="#" class="afficher_filtres"><:tickets:lien_filtrer:><\/div>');
+		jQuery('.afficher_filtres').click(function(){
+			var form = jQuery(this).parent().next('.formulaire_trier_tickets');
+			if(form.is(':hidden')){
+				form.slideDown('slow');
+			}else{
+				form.slideUp('slow');
+			}
+			return false;
+		});
+	});
+</script>
