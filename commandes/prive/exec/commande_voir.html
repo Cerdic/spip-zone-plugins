@@ -19,7 +19,7 @@
 	[(#AUTORISER{modifier,commande,#ID_COMMANDE})
 		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone{<:commandes:commande_editer:>,#CHEMIN{images/commande-24.png},right})]
 	]
-	<h1><:commandes:reference:>#REFERENCE</h1>
+	<h1><:commandes:reference_ref{ref=#REFERENCE}:></h1>
 
 	<div id='wysiwyg'>
 	<INCLURE{fond=prive/objets/contenu/commande,id=#ID_COMMANDE,ajax=wysiwyg}>
