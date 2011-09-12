@@ -31,6 +31,16 @@
 				<option value="ferme"[(#VAL{ferme}|in_array{#GET{statuts}}|oui)selected="selected"]>[(#VAL{ferme}|tickets_texte_statut)]</option>
 			</select>
 		</li>
+		<B_severites>
+		<li class="editer_severites">
+			<label for="severites"><:tickets:champ_severite:></label>
+			<select name="severites[]" id="severites" multiple="multiple" size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
+			<BOUCLE_severites(TICKETS){fusion severite}{severite != ''}>
+				<option value="#SEVERITE"[(#SEVERITE|in_array{#ENV{severites,#ARRAY}}|oui)selected="selected"]>[(#SEVERITE|tickets_texte_severite)]</option>]
+			</BOUCLE_severites>
+			</select>
+		</li>
+		</B_severites>
 		<B_trackers>
 		<li class="editer_trackers">
 			<label for="trackers"><:tickets:champ_type:></label>

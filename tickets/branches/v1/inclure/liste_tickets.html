@@ -14,6 +14,8 @@
 	-* id_assigne_non = int/array	Un id numérique ou un array des id_assigne que l'on ne souhaite pas voir
 	-* tracker = int				L'id du tracker (1|2|3|4), anciennement type
 	-* trackers = array				Un array de trackers
+	-* severite = int				L'id de severite
+	-* severites = array			Un array de severites
 	-* statut = string				Le statut
 	-* statuts = array				Un array de statuts
 	-* version = string				La version
@@ -58,43 +60,69 @@
 <BOUCLE_statuts(TICKETS){fusion statut}>#SET{tout_statuts,#GET{tout_statuts}|push{#STATUT}}</BOUCLE_statuts>
 #SET{tout_trackers,#ARRAY}
 <BOUCLE_trackers(TICKETS){fusion tracker}>#SET{tout_trackers,#GET{tout_trackers}|push{#TRACKER}}</BOUCLE_trackers>
+#SET{tout_severites,#ARRAY}
+<BOUCLE_severites(TICKETS){fusion severite}>#SET{tout_severites,#GET{tout_severites}|push{#SEVERITE}}</BOUCLE_severites>
 
 <B_detaillee>
 [<h3>(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
 
 <BOUCLE_si_afficher_filtres(CONDITION){si #ENV{afficher_filtres}|=={oui}|oui}>
+	[(#SET{url_defiltrer,[(#SELF|parametre_url{recherche|date_debut|date_fin|statut|trackers|tracker|projet|composant|jalon|severite|severites|version|auteurs|id_auteur|assignes|id_assigne|navigateur,''})]})]
 	[(#ENV{recherche}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{recherche,''})]})]
 		<p><:tickets:champ_recherche:> #ENV{recherche}</p>
 	][(#ENV{date_debut}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_debut,''})]})]
 		<p><:tickets:champ_date_debut:> [(#ENV{date_debut}|affdate)]</p>
 	][(#ENV{date_fin}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{date_fin,''})]})]
 		<p><:tickets:champ_date_fin:> [(#ENV{date_fin}|affdate)]</p>
 	]
 	<B_pour_statuts>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{statuts,''})]})]
 	<p><:tickets:champ_statut:> 
 	<BOUCLE_pour_statuts(POUR){tableau #ENV{statuts,#ARRAY}}{', '}>[(#VALEUR|tickets_texte_statut)]</BOUCLE_pour_statuts>
 	</p>
 	</B_pour_statuts>
-
+	<B_pour_severites>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severites,''})]})]
+	<p><:tickets:champ_type:> 
+	<BOUCLE_pour_severites(POUR){tableau #ENV{severites}}{', '}>[(#VALEUR|tickets_texte_severite)]</BOUCLE_pour_severites>
+	</p>
+	</B_pour_severites>
+	[(#ENV{severite}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{severite,''})]})]
+		<p><:tickets:champ_severite:> [(#ENV{severite}|tickets_texte_severite)]</p>
+	]
 	<B_pour_trackers>
+	[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{trackers,''})]})]
 	<p><:tickets:champ_type:> 
 	<BOUCLE_pour_trackers(POUR){tableau #ENV{trackers}}{', '}>[(#VALEUR|tickets_texte_tracker)]</BOUCLE_pour_trackers>
 	</p>
 	</B_pour_trackers>
 	[(#ENV{tracker}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{tracker,''})]})]
 		<p><:tickets:champ_tracker:> [(#ENV{tracker}|tickets_texte_tracker)]</p>
 	]
-	
 	[(#ENV{projet}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{projet,''})]})]
 		<p><:tickets:champ_projet:> #ENV{projet}</p>
 	][(#ENV{composant}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{composant,''})]})]
 		<p><:tickets:champ_composant:> #ENV{composant}</p>
 	][(#ENV{jalon}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{jalon,''})]})]
 		<p><:tickets:champ_jalon:> #ENV{jalon}</p>
 	][(#ENV{version}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{version,''})]})]
 		<p><:tickets:champ_version:> #ENV{version}</p>
+	][(#ENV{navigateur}|oui)
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{navigateur,''})]})]
+		<p><:tickets:champ_navigateur:> #ENV{navigateur}</p>
 	]
 	<B_auteurs>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{auteurs,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_auteur,''})]})]
 		<p><:tickets:champ_id_auteur:> 
 		<BOUCLE_auteurs(AUTEURS){id_auteur IN #ENV{auteurs,#ENV{id_auteur}}}{', '}>
 		#NOM
@@ -102,12 +130,18 @@
 		</p>
 	</B_auteurs>
 	<B_assignes>
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{assignes,''})]})]
+		[(#SET{url_defiltrer,[(#GET{url_defiltrer}|parametre_url{id_assigne,''})]})]
 		<p><:tickets:champ_id_assigne:>
 		<BOUCLE_assignes(AUTEURS){id_auteur IN #ENV{assignes,#ENV{id_assigne}}}{', '}>
 		#NOM
 		</BOUCLE_assignes>
 		</p>
 	</B_assignes>
+	[(#ENV{url_defiltrer}|=={oui}|oui)
+	<div class="actions">
+		<a href="#GET{url_defiltrer}"><:tickets:lien_supprimer_filtres:></a>
+	</div>]
 </BOUCLE_si_afficher_filtres>
 <div class="ticket">
 [(#ANCRE_PAGINATION)]
@@ -198,7 +232,7 @@
 		</tr>
 	</thead>
 	<tbody
-	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur IN #ENV{auteurs,#GET{tout_auteurs}}}{id_auteur !IN #ENV{id_auteur_non,#ARRAY{0,999999999999}}}{id_assigne?}{id_assigne IN #ENV{assignes,#GET{tout_assignes}}}{id_assigne !IN #ENV{id_assigne_non,#ARRAY{0,999999999999}}}{statut IN #ENV{statuts,#GET{tout_statuts}}}{tracker?}{tracker IN #ENV{trackers,#GET{tout_trackers}}}{severite?}{severite IN #ENV{severites,#GET{tout_severites}}}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>

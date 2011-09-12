@@ -123,6 +123,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
 	'label_paginer_par' => 'Paginer par&nbsp;:',
+	'lien_supprimer_filtres' => 'Enlever tous les filtres',
 	
 	// M
 	'mail_texte_message_auto' => 'Ceci est un message automatique : n\'y repondez pas.',
