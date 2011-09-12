@@ -8,7 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_titre_accordeon' => 'Menu jQuery Accordéon',
 	
 	// E
-	'explication_options'=>'Vous pouvez mettre ici les options à passer au script d\'effet accordéon. <a href="http://jqueryui.com/demos/accordion/">Voir la documentation d\'accordéon</a>. Ne pas mettre les accolades. Saisir par exemple <strong>collapsible: true, active: \'.accordeon li.on a\'</strong>, pour ouvrir le menu de classe accordeon sur l\'élément courant',
+	'explication_options'=>'Vous pouvez mettre ici les options à passer au script d\'effet accordéon. <a href="http://jqueryui.com/demos/accordion/">Voir la documentation d\'accordéon</a>. Ne pas mettre les accolades. Saisir par exemple <br /><strong>collapsible: true, active: $(".accordeon > li.on > a,.accordeon > li:first-child > a").last()</strong><br /> pour ouvrir le menu de classe accordeon sur l\'élément courant ou sinon sur le premier du DOM',
 
 	// L
 	'label_options' => 'Animation',
