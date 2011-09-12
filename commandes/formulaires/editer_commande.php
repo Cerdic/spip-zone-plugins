@@ -55,9 +55,9 @@ function formulaires_editer_commande_traiter($id_commande='new', $id_auteur, $re
 			list($jour, $mois, $annee) = explode('/',$date);
 			$date =$annee.'-'.$mois.'-'.$jour;
 			set_request($type_date,$date);
+			spip_log("commande_traiter pour id_commande=$id_commande $type_date = $date",'commande');
 			}		
 	
-	spip_log("commande_set pour $id_commande avec $type_date = $date",'test_commande');
 	}
 	
 	$retours = formulaires_editer_objet_traiter('commande',$id_commande,'','',$retour,'',$champs);
