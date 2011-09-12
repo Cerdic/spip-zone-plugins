@@ -1,0 +1,122 @@
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+<form method="post" action="#ENV{action}"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="editer_recherche">
+			<label for="recherche_texte"><:tickets:champ_recherche:></label>
+			<input type="text" class="text" size="40" name="recherche" id="recherche_texte"[ value="(#ENV{recherche})"] accesskey="4" />
+		</li>
+		<li class="editer_dates[(#ENV**{erreurs}|table_valeur{date_debut}|ou{[(#ENV**{erreurs}|table_valeur{date_fin})]}|oui)erreur]">
+			<label><:tickets:champ_date:></label>
+			<div class="choix">
+				<label for="date_debut"><:tickets:champ_date_debut:></label>
+				<input type="text" class="date text" size="10" maxlength="10" name="date_debut" id="date_debut"[ value="(#ENV{date_debut})"] />
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_debut})</p>]
+			</div>
+			<div class="choix">
+				<label for="date_fin"><:tickets:champ_date_fin:></label>
+				<input type="text" class="date text" size="10" maxlength="10" name="date_fin" id="date_fin"[ value="(#ENV{date_fin})"] />
+				[<p class='erreur_message'>(#ENV**{erreurs}|table_valeur{date_fin})</p>]
+			</div>
+		</li>
+		[(#SET{statut,[(#ENV{statut}|is_array|?{#ENV{statut},#ARRAY})]})]
+		<li class="editer_statut">
+			<label for="statut"><:tickets:champ_statut:></label>
+			<select name="statut[]" id="statut" multiple="multiple" size="4">
+				<option value="ouvert"[(#VAL{ouvert}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
+				<option value="resolu"[(#VAL{resolu}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{resolu}|tickets_texte_statut)]</option>
+				<option value="redac"[(#VAL{redac}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{redac}|tickets_texte_statut)]</option>
+				<option value="ferme"[(#VAL{ferme}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{ferme}|tickets_texte_statut)]</option>
+			</select>
+		</li>
+		<B_projets>
+		<li class="editer_projet">
+			<label for="projet"><:tickets:champ_projet:></label>
+			<select name="projet" id="projet">
+				<option value=""> - </option>
+			<BOUCLE_projets(TICKETS){fusion projet}{projet != ''}>
+				<option value="#PROJET"[(#PROJET|=={#ENV{projet}}|oui)selected="selected"]>#PROJET</option>]
+			</BOUCLE_projets>
+			</select>
+		</li>
+		</B_projets>
+		<B_composants>
+		<li class="editer_composant">
+			<label for="composant"><:tickets:champ_composant:></label>
+			<select name="composant" id="composant">
+				<option value=""> - </option>
+			<BOUCLE_composants(TICKETS){fusion composant}{composant != ''}>
+				<option value="#COMPOSANT"[(#COMPOSANT|=={#ENV{composant}}|oui)selected="selected"]>#COMPOSANT</option>]
+			</BOUCLE_composants>
+			</select>
+		</li>
+		</B_composants>
+		<B_versions>
+		<li class="editer_version">
+			<label for="version"><:tickets:champ_version:></label>
+			<select name="version" id="version">
+				<option value=""> - </option>
+			<BOUCLE_versions(TICKETS){fusion version}{version != ' '}>
+				<option value="#VERSION"[(#VERSION|=={#ENV{version}}|oui)selected="selected"]>#VERSION</option>]
+			</BOUCLE_versions>
+			</select>
+		</li>
+		</B_versions>
+		<B_jalons>
+		<li class="editer_jalon">
+			<label for="jalon"><:tickets:champ_jalon:></label>
+			<select name="jalon" id="jalon">
+				<option value=""> - </option>
+			<BOUCLE_jalons(TICKETS){fusion jalon}{jalon != ''}>
+				<option value="#JALON"[(#JALON|=={#ENV{jalon}}|oui)selected="selected"]>#JALON</option>]
+			</BOUCLE_jalons>
+			</select>
+		</li>
+		</B_jalons>
+		<B_navigateurs>
+		<li class="editer_navigateur">
+			<label for="navigateur"><:tickets:champ_navigateur:></label>
+			<select name="navigateur" id="navigateur">
+				<option value=""> - </option>
+			<BOUCLE_navigateurs(TICKETS){fusion navigateur}{navigateur != ' '}>
+				<option value="#NAVIGATEUR"[(#NAVIGATEUR|=={#ENV{navigateur}}|oui)selected="selected"]>#NAVIGATEUR</option>]
+			</BOUCLE_navigateurs>
+			</select>
+		</li>
+		</B_navigateurs>
+		<B_auteurs>
+		<li class="editer_auteur">
+			<label for="id_auteur"><:tickets:champ_id_auteur:></label>
+			<select id="id_auteur" name="id_auteur">
+				<option value=""> - </option>
+				<BOUCLE_auteurs(TICKETS){fusion id_auteur}>
+					<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{id_auteur}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_AUTEUR}</option>
+				</BOUCLE_auteurs>
+			</select>
+		</li>
+		</B_auteurs>
+		<B_assignes>
+		<li class="editer_auteur">
+			<label for="id_auteur"><:tickets:champ_id_assigne:></label>
+			<select id="id_assigne" name="id_assigne">
+				<option value=""> - </option>
+				<BOUCLE_assignes(TICKETS){fusion id_assigne}{id_assigne != ''}>
+					<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{id_assigne}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_AUTEUR}</option>
+				</BOUCLE_assignes>
+			</select>
+		</li>
+		</B_assignes>
+	</ul>
+	<p class="boutons">
+		<input type="submit" class="submit" value="<:bouton_valider:>" title="<:info_rechercher:>" />
+	</p>
+	#SET{date_min,''}
+	<BOUCLE_date_debut(ARTICLES){par date}{0,1}>
+	#SET{date_min,#DATE|affdate{d/m/Y}}
+	</BOUCLE_date_debut>
+	[(#INCLURE{fond=formulaires/dateur/inc-dateur,startDate=#GET{date_min},endDate=[(#ENV{date}|affdate{d/m/Y})]})]
+</div>
+</form>
+</div>

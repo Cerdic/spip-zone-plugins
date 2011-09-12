@@ -54,11 +54,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_composant' => 'Component:',
 	'champ_createur' => 'Created by:',
 	'champ_date' => 'Date:',
+	'champ_date_debut' => 'From:',
+	'champ_date_fin' => 'To:',
 	'champ_date_modif' => 'Modified on',
 	'champ_description' => 'Description of the bug report',
 	'champ_exemple' => 'Example:',
 	'champ_fichier' => 'Add a file',
 	'champ_id' => 'Number',
+	'champ_id_auteur' => 'Author:',
+	'champ_id_assigne' => 'Assigned to:',
 	'champ_importance' => 'Importance:',
 	'champ_jalon' => 'Milestone:',
 	'champ_maj' => 'Update:',
@@ -66,6 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_navigateur' => 'Browser:',
 	'champ_nouveau_commentaire' => 'New comment',
 	'champ_projet' => 'Project:',
+	'champ_recherche' => 'Search:',
 	'champ_severite' => 'Severity:',
 	'champ_titre' => 'Abstract',
 	'champ_titre_ticket' => 'Title of the bug report',
@@ -121,6 +126,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// M
 	'mail_texte_message_auto' => 'This is an automatic message: please don\'t answer.',
+	'message_aucun_ticket_recherche' => 'No bug report match your criteria',
 	'message_automatique' => 'This is an automatic message: please don\'t answer.',
 	'message_le' => 'on @date@',
 	'message_poste_par' => 'Message posted by',
@@ -179,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Bug report or comment only available for registered users.
 	",
 	'tickets_traites' => 'All processed bug reports',
+	'tickets_tries' => 'Bug reports matching your criteria',
 	'titre' => 'Bug reports, bug tracking',
 	'titre_identification' => 'Authentication',
 	'titre_liste' => 'List of the bug reports',
@@ -192,6 +199,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// V
 	'vos_tickets_assignes' => 'Bug reports assigned to you',
+	'vos_tickets_assignes_auteur' => 'Bug reports from @nom@ assigned to you',
 	'vos_tickets_en_cours' => 'Your bug reports being editing'
 );
 

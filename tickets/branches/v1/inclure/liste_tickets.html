@@ -17,6 +17,10 @@
 	-* projet = string				Le projet
 	-* order = string				Le paramètre de tri (défaut date mais peut être maj|titre|tracker|jalon|version|composant|projet|severite|id_ticket)
 	-* pagination = int				Le nombre d'élément à afficher dans la pagination
+	-* recherche = string			Une chaine recherchée dans les tickets
+	-* afficher_filtres				Affiche les filtres passés en argument
+	-* date_debut = date (sql)		La date des premiers à afficher
+	-* date_fin = date (sql)		La date des derniers à afficher
 ]
 
 #CACHE{0}
@@ -44,6 +48,26 @@
 <B_detaillee>
 [<h3>(#ENV{titre})[ ((#GRAND_TOTAL))]</h3>]
 <div class="ticket">
+[(#ENV{afficher_filtres}|=={oui}|oui)
+	[(#ENV{id_auteur}|oui)
+		<p><:tickets:champ_id_auteur:> #INFO_NOM{auteur,#ENV{id_auteur}}</p>
+	][(#ENV{id_assigne}|oui)
+		<p><:tickets:champ_id_assigne:> #INFO_NOM{auteur,#ENV{id_assigne}}</p>
+	][(#ENV{recherche}|oui)
+		<p><:tickets:champ_recherche:> #ENV{recherche}</p>
+	][(#ENV{tracker}|oui)
+		<p><:tickets:champ_tracker:> #ENV{tracker}</p>
+	][(#ENV{projet}|oui)
+		<p><:tickets:champ_projet:> #ENV{projet}</p>
+	][(#ENV{composant}|oui)
+		<p><:tickets:champ_composant:> #ENV{composant}</p>
+	][(#ENV{jalon}|oui)
+		<p><:tickets:champ_jalon:> #ENV{jalon}</p>
+	][(#ENV{version}|oui)
+		<p><:tickets:champ_version:> #ENV{version}</p>
+	]
+]
+
 [(#ANCRE_PAGINATION)]
 [<p class="pagination">(#PAGINATION)</p>]
 [(#COMPTEUR_BOUCLE|>{10}|oui)
@@ -132,7 +156,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_detaillee(TICKETS){id_auteur?}{id_auteur !IN #ENV{id_auteur_non,''}}{id_assigne?}{id_assigne !IN #ENV{id_assigne_non,''}}{statut IN #ENV{statut,.*}}{tracker?}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
+	<BOUCLE_detaillee(TICKETS){recherche?}{id_auteur?}{id_auteur !IN #ENV{id_auteur_non,''}}{id_assigne?}{id_assigne !IN #ENV{id_assigne_non,''}}{statut IN #ENV{statut,.*}}{tracker?}{version?}{jalon?}{composant?}{projet?}{tri #ENV{order,date},#GET{defaut_tri}}{date > #ENV{date_debut,2000-01-01}}{date < #ENV{date_fin,2100-01-01}}{pagination #ENV{pagination_#GET{hash_pagination},#ENV{pagination,10}} #GET{hash_pagination}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
 			<td><img[ src="(#CHEMIN{[prive/images/(#STATUT|tickets_icone_statut)]})"][ alt="(#STATUT|tickets_texte_statut)"][ title="(#STATUT|tickets_texte_statut)"] /></td>
 			<td><strong class="#EDIT{titre}"><a href="[(#URL_TICKET)]">##ID_TICKET</a></strong></td>
