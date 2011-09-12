@@ -29,7 +29,7 @@ function cextras_declarer_tables_objets_sql($tables){
 					if ($ponderation === 'on' OR $ponderation === true) {
 						$ponderation = 2;
 					} else {
-						$ponderation = intval($r);
+						$ponderation = intval($ponderation);
 					}
 					$tables[$table]['rechercher_champs'][$nom] = $ponderation;
 				}
