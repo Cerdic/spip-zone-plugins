@@ -62,4 +62,26 @@ function commandes_optimiser_base_disparus($flux){
 	return $flux;
 }
 
+
+/**
+ * Ajouter une boite sur la fiche de commande
+ *
+ * @param string $flux
+ * @return string
+ */
+function commandes_affiche_gauche($flux) {
+		
+	if ($flux['args']['exec'] == 'commande_edit'
+		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
+		AND $type = objet_type($table)
+		AND $id_table_objet = id_table_objet($type)
+		AND ($id = intval($flux['args'][$id_table_objet]))
+	  AND (autoriser('modifier', 'commande', 0))) {
+		//un test pour todo ajouter un objet (produit,document,article,abonnement,rubrique ...)
+			$flux['data'] .= recuperer_fond('prive/editer/colonne_document',array('objet'=>$type,'id_objet'=>$id));
+		}
+	
+	return $flux;
+}
+
 ?>
