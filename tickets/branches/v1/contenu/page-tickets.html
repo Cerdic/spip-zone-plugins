@@ -14,14 +14,22 @@
 	]
 	
 	[(#ENV{id_auteur}
+		|ou{#ENV{auteurs}}
 		|ou{#ENV{id_assigne}}
+		|ou{#ENV{assignes}}
+		|ou{#ENV{statut}}
+		|ou{#ENV{statuts}}
+		|ou{#ENV{date_debut}}
+		|ou{#ENV{date_fin}}
+		|ou{#ENV{tracker}}
+		|ou{#ENV{trackers}}
 		|ou{#ENV{recherche}}
 		|ou{#ENV{jalon}}
 		|ou{#ENV{composant}}
 		|ou{#ENV{version}}
 		|ou{#ENV{navigateur}}
 		|oui)
-		#SET{tickets_tries,oui}	
+		[(#SET{tickets_tries,oui})]	
 	]
 	
 	[(#GET{tickets_tries}|!={oui}|oui)
@@ -67,7 +75,7 @@
 	[(#GET{tickets_tries}|=={oui}|oui)
 		[(#SET{statut,[(#ENV{statut}|is_array|?{#ENV{statut},#ARRAY{0,ouvert,1,redac,2,resolu,3,ferme}})]})]
 		[<div class="ajax">
-		(#INCLURE{fond=inclure/liste_tickets,env,ajax,afficher_filtres=oui,tri=statut,statut=#GET{statut},titre=<:tickets:tickets_tries:>}|sinon{<p><:tickets:message_aucun_ticket_recherche:></p>}|trim)
+		(#INCLURE{fond=inclure/liste_tickets,env,ajax,afficher_filtres=oui,tri=statut,statut=#GET{statut},titre=<:tickets:tickets_tries:>}|sinon{<h3><:tickets:tickets_tries:> (0)</h3><p><:tickets:message_aucun_ticket_recherche:></p>}|trim)
 			<div class="actions rss">
 				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{statut,#ARRAY{0,resolu,1,ferme}})]"><:tickets:suivre_tickets_rss:></a>
 			</div>

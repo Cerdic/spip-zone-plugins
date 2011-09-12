@@ -22,15 +22,25 @@
 			</div>
 		</li>
 		[(#SET{statut,[(#ENV{statut}|is_array|?{#ENV{statut},#ARRAY})]})]
-		<li class="editer_statut">
-			<label for="statut"><:tickets:champ_statut:></label>
-			<select name="statut[]" id="statut" multiple="multiple" size="4">
+		<li class="editer_statuts">
+			<label for="statuts"><:tickets:champ_statut:></label>
+			<select name="statuts[]" id="statuts" multiple="multiple" size="4">
 				<option value="ouvert"[(#VAL{ouvert}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{ouvert}|tickets_texte_statut)]</option>
 				<option value="resolu"[(#VAL{resolu}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{resolu}|tickets_texte_statut)]</option>
 				<option value="redac"[(#VAL{redac}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{redac}|tickets_texte_statut)]</option>
 				<option value="ferme"[(#VAL{ferme}|in_array{#GET{statut}}|oui)selected="selected"]>[(#VAL{ferme}|tickets_texte_statut)]</option>
 			</select>
 		</li>
+		<B_trackers>
+		<li class="editer_trackers">
+			<label for="trackers"><:tickets:champ_type:></label>
+			<select name="trackers[]" id="trackers" multiple="multiple" size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
+			<BOUCLE_trackers(TICKETS){fusion tracker}{tracker != ''}>
+				<option value="#TRACKER"[(#TRACKER|in_array{#ENV{trackers,#ARRAY}}|oui)selected="selected"]>[(#TRACKER|tickets_texte_tracker)]</option>]
+			</BOUCLE_trackers>
+			</select>
+		</li>
+		</B_trackers>
 		<B_projets>
 		<li class="editer_projet">
 			<label for="projet"><:tickets:champ_projet:></label>
@@ -87,23 +97,21 @@
 		</li>
 		</B_navigateurs>
 		<B_auteurs>
-		<li class="editer_auteur">
-			<label for="id_auteur"><:tickets:champ_id_auteur:></label>
-			<select id="id_auteur" name="id_auteur">
-				<option value=""> - </option>
+		<li class="editer_auteurs">
+			<label for="auteurs"><:tickets:champ_id_auteur:></label>
+			<select id="auteurs" name="auteurs[]" multiple="multiple" size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
 				<BOUCLE_auteurs(TICKETS){fusion id_auteur}>
-					<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{id_auteur}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_AUTEUR}</option>
+					<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{auteurs,#ARRAY}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_AUTEUR}</option>
 				</BOUCLE_auteurs>
 			</select>
 		</li>
 		</B_auteurs>
 		<B_assignes>
-		<li class="editer_auteur">
-			<label for="id_auteur"><:tickets:champ_id_assigne:></label>
-			<select id="id_assigne" name="id_assigne">
-				<option value=""> - </option>
+		<li class="editer_assignes">
+			<label for="assignes"><:tickets:champ_id_assigne:></label>
+			<select id="assignes" name="assignes[]" multiple="multiple" size="[(#GRAND_TOTAL|>{4}|?{4,#GRAND_TOTAL})]">
 				<BOUCLE_assignes(TICKETS){fusion id_assigne}{id_assigne != ''}>
-					<option value="#ID_AUTEUR"[(#ID_AUTEUR|=={#ENV{id_assigne}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_AUTEUR}</option>
+					<option value="#ID_AUTEUR"[(#ID_AUTEUR|in_array{#ENV{assignes,#ARRAY}}|oui)selected="selected"]>#INFO_NOM{auteurs,#ID_AUTEUR}</option>
 				</BOUCLE_assignes>
 			</select>
 		</li>

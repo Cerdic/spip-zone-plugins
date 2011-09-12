@@ -16,7 +16,7 @@ function formulaires_trier_tickets_charger_dist($lien_filtre = NULL,$lien_arg = 
 			'editable' => 'oui'
 		);
 		
-	foreach(array('recherche','id_auteur','date_debut','date_fin','jalon','version','composant','projet','navigateur','id_assigne','statut') as $recherche){
+	foreach(array('recherche','auteurs','date_debut','date_fin','jalon','version','composant','projet','navigateur','assignes','statuts','trackers') as $recherche){
 		$valeurs[$recherche] = _request($recherche);
 		if(in_array($recherche,array('date_debut','date_fin')) && $valeurs[$recherche]){
 			if($valeurs[$recherche] == 0){
@@ -63,7 +63,7 @@ function formulaires_trier_tickets_traiter_dist($lien_filtre = NULL,$lien_arg = 
 	$action = ($lien ? $lien : generer_url_public('tickets'));
 	$horaire = false;
 	
-	foreach(array('recherche','id_auteur','date_debut','date_fin','jalon','version','composant','projet','navigateur','id_assigne','statut') as $recherche){
+	foreach(array('recherche','auteurs','date_debut','date_fin','jalon','version','composant','projet','navigateur','assignes','statuts','trackers') as $recherche){
 		if(($recherche == 'date_debut') && _request('date_debut')){
 			$date_debut = date('Y-m-d H:i:s',verifier_corriger_date_saisie('debut',$horaire,$erreurs));
 			$action = parametre_url($action,$recherche,$date_debut);
