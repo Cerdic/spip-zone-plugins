@@ -24,8 +24,8 @@ function formulaires_editer_commande_saisies($id_commande='new', $id_auteur, $re
 		array(
 			'saisie' => 'date',
 			'options' => array(
-				'nom' => 'date',
-				'label' => _T('commandes:date_commande_label'),
+				'nom' => 'date_paiement',
+				'label' => _T('commandes:date_paiement_label'),
 			)
 		),
 	);
