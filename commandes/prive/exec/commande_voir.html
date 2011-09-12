@@ -1,0 +1,52 @@
+<BOUCLE_commande(COMMANDES){id_commande}{tout}>
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE" class="racine"><:info_racine_site:></a>
+	</span>
+	<span class="bloc">
+		<em> &gt; </em>
+		<a href="#URL_ECRIRE{commandes}"><:commandes:nom_bouton_plugin:></a>
+		[<em> &gt; </em>
+		<a class="on" href="#SELF">(#ENV{id_commande}|oui)#INFO_TITRE{commande,#ENV{id_commande}}</a>
+		]
+	</span>
+</div>
+<!--/#hierarchie-->
+
+
+<div class='fiche_objet'>
+	[(#AUTORISER{modifier,commande,#ID_COMMANDE})
+		[(#URL_ECRIRE{commande_edit,id_commande=#ID_COMMANDE}|icone{<:commandes:commande_editer:>,#CHEMIN{images/commande-24.png},right})]
+	]
+	<h1><:commandes:reference:>#REFERENCE</h1>
+
+	<div id='wysiwyg'>
+	<INCLURE{fond=prive/objets/contenu/commande,id=#ID_COMMANDE,ajax=wysiwyg}>
+	</div>
+	
+	#INCLURE{fond=prive/contenu/portfolio_document,objet=commande,id_objet=#ID_COMMANDE}
+
+	#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,commande,id,#ID_COMMANDE},data,'<div class="nettoyeur"></div>'}}
+</div>
+
+<!--#navigation-->
+[(#REM) Ce pipeline charge prive/infos/$type ]
+[<div class='cadre cadre-info'>
+	(#PIPELINE{boite_infos,[(#ARRAY{
+		args,[(#ARRAY{
+			type,commande,
+			id,#ID_COMMANDE})],
+		data,''})]})
+</div>]
+
+<!--/#navigation-->
+
+<!--#extra-->
+[(#INCLURE{fond=prive/liste/details,objet=commande,id_objet=#ID_COMMANDE})]
+
+[(#REM) todo
+[(#INCLURE{fond=prive/boite/lier_commande_contact}{id_commande=#ID_COMMANDE}{redirect=#SELF})]
+]
+<!--/#extra-->
+</BOUCLE_commande>

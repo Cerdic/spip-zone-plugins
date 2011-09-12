@@ -1,0 +1,42 @@
+<BOUCLE_autoriser(CONDITION){si #ENV{id_commande}|et{#AUTORISER{modifier,commande,#ENV{id_commande}}}|ou{#ENV{id_commande}|non}}>
+#SET{id_auteur,#ENV{id_auteur}|sinon{#INFO_ID_AUTEUR{commande,#ENV{id_commande}}}}
+
+<!--#hierarchie-->
+<div id="chemin">
+	<span class="bloc">
+		<a href="#URL_ECRIRE" class="racine"><:info_racine_site:></a>
+	</span>
+	<span class="bloc">
+		<em> &gt; </em>
+		<a href="#URL_ECRIRE{commandes}"><:commandes:nom_bouton_plugin:></a>
+		[<em> &gt; </em>
+		<a class="on" href="#SELF">(#ENV{id_commande}|oui)#INFO_TITRE{commande,#ENV{id_commande}}</a>
+		]
+	</span>
+</div>
+<!--/#hierarchie-->
+
+#SET{redirect,#ENV{redirect}|sinon{#URL_ECRIRE{commande_voir,id_commande=#ID_COMMANDE}}}
+
+<div class="cadre-formulaire-editer">
+	<div class="entete-formulaire">
+		[(#GET{redirect}|icone{<:icone_retour:>,#CHEMIN{images/commande-24.png}})]
+		<:commandes:commande_modifier:>
+		<h1>
+			[(#ENV{id_commande}|oui)#INFO_TITRE{commande,#ENV{id_commande}}]
+			[(#ENV{id_commande}|non)<:commandes:commande_nouvelle:>]
+		</h1>
+	</div>
+
+	<div class="">
+		#FORMULAIRE_EDITER_COMMANDE{#ENV{id_commande,oui},#ENV{id_auteur},#GET{redirect}}
+	</div>
+</div>
+
+
+<!--#extra-->
+
+<!--/#extra-->
+</BOUCLE_autoriser>
+
+
