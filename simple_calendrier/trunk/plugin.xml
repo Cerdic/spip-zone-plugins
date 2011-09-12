@@ -1,0 +1,168 @@
+<plugin>
+	<nom>
+        <multi>[fr]Simple Calendrier[en]Simple calendar</multi>    
+    </nom>
+	<auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
+    <licence>GPL &#169; 2010-2011</licence>
+	<version>1.0</version>
+    <version_base>1.2</version_base>
+	<etat>stable</etat>
+	
+	<description>
+    <multi>
+    [fr]Un simple calendrier pour planifier des &eacute;v&egrave;nements.
+_ - utilise la librairie javascript [jquery.ui.datepicker->http://jqueryui.com]
+_ - themes css pour le datepicker provenant du [themeroller-> http://jqueryui.com/themeroller/]
+    [en]A simple calendar for events planification.
+    </multi>
+	</description>
+    
+    <lien>http://www.spip-contrib.net/Simple-Calendrier-v1</lien>
+	<icon>img_pack/simplecal-logo-32.png</icon>
+	
+	<prefix>simplecal</prefix>
+    <!-- 2.1.2 min conseillé à cause du Logo. (Patch plus propre en 2.1.2 qu'en 2.1.0 mais ça fonctionne quand même en 2.1.0...) -->
+	<necessite id="SPIP" version="[2.1.0;]" />
+    
+    <categorie>date</categorie>
+	
+	<options>simplecal_options.php</options>
+    <fonctions>simplecal_fonctions.php</fonctions>
+
+	<!-- Installation/desinstallation des tables supplementaires -->
+	<install>base/simplecal_upgrade.php</install>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>simplecal_autoriser.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/simplecal_base.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/simplecal_base.php</inclure>
+	</pipeline> 
+
+	<pipeline>
+		  <nom>declarer_tables_interfaces</nom>
+		  <inclure>base/simplecal_base.php</inclure>
+	</pipeline> 
+
+	<pipeline>
+		  <nom>declarer_tables_objets_surnoms</nom>
+		  <inclure>base/simplecal_base.php</inclure>
+	</pipeline> 
+	
+	<pipeline>
+		  <nom>configurer_liste_metas</nom>
+		  <inclure>simplecal_pipelines.php</inclure>
+	</pipeline> 
+    
+	<!-- Pipeline : champs de recherche des nouveaux objets -->
+	<pipeline>
+		  <nom>rechercher_liste_des_champs</nom>
+		  <inclure>simplecal_pipelines.php</inclure>
+	</pipeline> 
+
+
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>header_prive</action>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+
+	<pipeline>
+		<nom>boite_infos</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+	    
+    <pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+    
+    <pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+    
+    <!-- Contenu des formulaires CVT. -->
+    <pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+    
+    <!-- Associer un libelle aux types d'objets (exec/mots_tous) -->
+	<pipeline>
+		<nom>libelle_association_mots</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+    
+    <!-- Listing des nombres d'objet par mot clé (exec/mot_tous -> inc/grouper_mots) -->
+    <pipeline>
+		<nom>afficher_nombre_objets_associes_a</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline> 
+    
+    <pipeline>
+		<nom>accueil_encours</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+    
+    <pipeline>
+		<nom>accueil_informations</nom>
+		<inclure>simplecal_pipelines.php</inclure>
+	</pipeline>
+    
+    <pipeline>
+        <nom>compter_contributions_auteur</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+    
+    <!-- prise en compte du squelette evenement.html pour les urls de type spip.php?evenement123 -->
+    <pipeline>
+        <nom>declarer_url_objets</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+    
+    <pipeline>
+        <nom>propres_creer_chaine_url</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+    
+    <pipeline>
+        <nom>taches_generales_cron</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+    
+    <!-- Prendre en compte la table des évènements dans les recherches -->
+    <pipeline>
+        <nom>rechercher_liste_des_champs</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+    
+    <!-- Filtrer les rubriques exclues par le plugin Acces restreint -->
+    <pipeline>
+        <nom>pre_boucle</nom>
+        <inclure>public/simplecal_boucles.php</inclure>
+    </pipeline>
+    
+    
+	<bouton id="bt_simplecal_accueil" parent="naviguer">
+		<icone>img_pack/simplecal-logo-24.png</icone>
+		<titre>simplecal:bouton_entree</titre>	
+		<url>evenement_tous&mode=avenir</url>	
+	</bouton>
+
+	
+
+</plugin>
