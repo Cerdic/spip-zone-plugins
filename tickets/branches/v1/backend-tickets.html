@@ -14,12 +14,19 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 >
 [[(#SET{nom,[(#INFO_NOM{auteur,#ENV{id_auteur}})]})](#ENV{id_auteur}|oui)]
 [[(#SET{nom,[(#INFO_NOM{auteur,#ENV{id_assigne}})]})](#ENV{id_assigne}|oui)]
+[[(#SET{titre,[(#INFO_TITRE{ticket,#ENV{id_ticket}})]})](#ENV{id_ticket}|oui)]
 <channel[ xml:lang="(#LANG)"]>
-	<title>&#91;[(#NOM_SITE_SPIP|textebrut|texte_backend)]&#93; [<:tickets:suivre_tickets_de{nom=#GET{nom}}:>(#ENV{id_auteur}|oui)][<:tickets:suivre_tickets_assignes_a{nom=#GET{nom}}:>(#ENV{id_assigne}|oui)][<:tickets:suivre_tickets_statut:> [(#ENV{statut}|is_array|?{[(#ENV{statut}|implode{', '})],#ENV{statut}})](#ENV{statut}|oui)][<:tickets:suivre_tickets_tous:>(#ENV{id_auteur,#ENV{id_assigne,#ENV{statut}}}|non)]</title>
-	<link>[(#URL_PAGE{tickets}|parametre_url{id_auteur,#ENV{id_auteur}}|parametre_url{id_assigne,#ENV{id_assigne}}|url_absolue)]</link>
-	[<description>(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)</description>]
+	<title>&#91;[(#NOM_SITE_SPIP|textebrut|texte_backend)]&#93;&#32;[
+	<:tickets:suivre_tickets_de{nom=#GET{nom}}:>(#ENV{id_auteur}|oui)][
+	<:tickets:suivre_tickets_assignes_a{nom=#GET{nom}}:>(#ENV{id_assigne}|oui)][
+	<:tickets:suivre_tickets_statut:> [(#ENV{statut}|is_array|?{[(#ENV{statut}|implode{', '})],#ENV{statut}})](#ENV{statut}|oui)][
+	<:tickets:suivre_tickets_id{id=#ENV{id_ticket},titre=#GET{titre}}:>(#ENV{id_ticket}|oui)][
+	<:tickets:suivre_tickets_tous:>(#ENV{id_auteur,#ENV{id_assigne,#ENV{statut,#ENV{id_ticket}}}}|non)]
+	</title>
+	<link>[(#ENV{id_ticket}|?{[(#URL_TICKET{#ENV{id_ticket}}|url_absolue)],[(#URL_PAGE{tickets}|parametre_url{id_auteur,#ENV{id_auteur}}|parametre_url{id_assigne,#ENV{id_assigne}}|url_absolue)]})]</link>
+	[<description>(#ENV{id_ticket}|?{[(#INFO_TEXTE{ticket,#ENV{id_ticket}}|supprimer_tags|texte_backend)],[(#DESCRIPTIF_SITE_SPIP|supprimer_tags|texte_backend)]})</description>]
 	<language>#LANG</language>
-	<generator>SPIP - www.spip.net</generator>
+	<generator>SPIP #SPIP_VERSION (http://www.spip.net)</generator>
 	<atom:link href="[(#SELF|url_absolue)]" rel="self" type="application/rss+xml" />
 
 [	<image>
@@ -31,9 +38,12 @@ version="1.0"[ encoding="(#CHARSET)"]?>
 	</image>
 ]
 <BOUCLE_recents(TICKETS){id_auteur?}{id_auteur !IN #ENV{id_auteur_non,''}}{id_ticket?}{id_assigne?}{severite?}{statut?}{tracker?}{projet?}{composant?}{version?}{jalon?}{navigateur?}{par date}{inverse}{0,#ENV{limit,10}}{unique}>
-<INCLURE{fond=inclure/rss-item-ticket,id_ticket}>
+[(#REM) on ne met que les forums si un ticket dans l'environnement]
+[(#ENV{id_ticket}|non)
+<INCLURE{fond=inclure/rss-item-ticket,id_ticket}>]
 </BOUCLE_recents>
-
+<BOUCLE_recents_forums_tickets(FORUMS){id_ticket}{par date}{inverse}{0,#ENV{limit,10}}{unique}>
+<INCLURE{fond=inclure/rss-item-ticket_forum,id_forum,id_ticket}>
+</BOUCLE_recents_forums_tickets>
 </channel>
-
 </rss>

@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_sans_previsu' => 'Attention&nbsp;: pas de pr&eacute;visualisation&nbsp;; votre message est publi&eacute; imm&eacute;diatement.',
 
 	// I
+	'info_commentaire' => 'Commentaire #@id@ :',
 	'info_document_ajoute' => 'Ajouté :',
 	'info_liste_tickets' => 'Tickets',
 	'info_numero_ticket' => 'TICKET NUM&Eacute;RO&nbsp;:',
@@ -157,8 +158,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_resolu_long' => 'Tous les tickets r&eacute;solus',
 	'suivre_tickets_assignes_a' => 'Tickets assignés à @nom@',
 	'suivre_tickets_de' => 'Les tickets de @nom@',
+	'suivre_tickets_id' => 'Suivi du ticket #@id@ : @titre@',
 	'suivre_tickets_statut' => 'Les tickets ayant le ou les statuts :',
 	'suivre_tickets_rss' => 'Suivre ces tickets par RSS',
+	'suivre_tickets_rss_unique' => 'Suivre ce ticket par RSS',
 	'suivre_tickets_tous' => 'Tous les tickets',
 	'syndiquer_ticket' => 'Syndiquer le ticket&nbsp;:',
 	'syndiquer_tickets' => 'Syndiquer les tickets du site',

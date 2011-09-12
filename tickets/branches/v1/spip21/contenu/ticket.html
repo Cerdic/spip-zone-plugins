@@ -8,6 +8,9 @@
 		<a class="i_edit" href="[(#URL_PAGE{editer_ticket}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:icone_modifier_ticket:></a>
 	]
 		<h1 class="h1 titre #EDIT{titre}"><:tickets:ticket:> <small>##ID_TICKET</small> : #TITRE</h1>
+		<div class="actions rss">
+			<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_ticket,#ID_TICKET})]"><:tickets:suivre_tickets_rss_unique:></a>
+		</div>
 	</div>
 
 	[(#REM) Statut, severite, assignement]

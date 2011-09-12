@@ -106,6 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'forum_sans_previsu' => 'Warning: pas de pr&eacute;visualisation&nbsp;; votre message est publi&eacute; imm&eacute;diatement.',
 
 	// I
+	'info_commentaire' => 'Comment #@id@ :',
 	'info_document_ajoute' => 'Added:',
 	'info_liste_tickets' => 'Bug reports',
 	'info_numero_ticket' => 'BUG REPORT NUMBER:',
@@ -157,8 +158,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'statut_resolu_long' => 'All the resolved bug reports',
 	'suivre_tickets_assignes_a' => 'Bug reports assigned to @nom@',
 	'suivre_tickets_de' => 'Bug reports of @nom@',
+	'suivre_tickets_id' => 'Tracking of the bug report #@id@ : @titre@',
 	'suivre_tickets_statut' => 'Bug reports having the statut(s):',
 	'suivre_tickets_rss' => 'Follow these bug reports by RSS',
+	'suivre_tickets_rss_unique' => 'Follow this bug report by RSS',
 	'suivre_tickets_tous' => 'All bug reports',
 	'syndiquer_ticket' => 'Syndicate the bug report:',
 	'syndiquer_tickets' => 'Syndicate the bug reports of the website',
