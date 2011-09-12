@@ -1,0 +1,47 @@
+<plugin>
+	<nom>Sitra Exports</nom>
+	<auteur>Dominique Wojylac Sivu Inforoutes de l'Ardeche</auteur>
+	<version>0.4</version>
+	<etat>test</etat>
+	<description>Utilisation des exports sitra</description>
+	<icon>images/sitra-64.png</icon>
+	<prefix>sitra</prefix>
+	<!-- fonctions et options -->
+	<options>sitra_options.php</options>
+	<fonctions>sitra_fonctions.php</fonctions>
+	<!-- menu configuration -->
+	<bouton id="sitra_admin" parent="naviguer">
+		<icone>images/sitra-24.png</icone>
+		<titre>sitra:administration_sitra</titre>
+		<url>admin_sitra</url>
+	</bouton>
+	<bouton id="bando_sitra_admin" parent="bando_edition">
+		<icone>images/sitra-24.png</icone>
+		<titre>sitra:administration_sitra</titre>
+		<url>admin_sitra</url>
+	</bouton>
+	<!-- base -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/tables_sitra.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/tables_sitra.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_url_objets</nom>
+		<inclure>sitra_pipelines.php</inclure>
+	</pipeline>
+	<!-- autorisations -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>sitra_autoriser.php</inclure>
+	</pipeline>
+	<version_base>1.0</version_base>
+	<install>sitra_installations.php</install>
+
+	<categorie>outils</categorie>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="cfg" version="[1.16.0;]" />
+</plugin>

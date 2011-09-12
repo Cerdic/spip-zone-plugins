@@ -1,0 +1,71 @@
+#CACHE{0}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+
+<head>
+<title>maj sitra</title>
+<meta http-equiv="content-type" content="text/html; charset=#CHARSET" />
+</head>
+
+<body>
+
+<?php
+// initialisation des variables
+$config = lire_config('sitra_config');
+
+// mode debug (pas de destruction des fichiers xml)
+define('SITRA_DEBUG',($config['sitra_debug'] == 'oui'));
+
+// identifiant du site
+define('SITRA_ID_SITE',$config['id_site']);
+
+// dossier de stockage des fichiers exports xml sitra
+define('SITRA_DIR',$config['sitra_dir']);
+
+// langues exportées
+define('SITRA_LANGUES',$config['langues']);
+
+// erreur
+$GLOBALS['sitra_config']['erreur'] = false;
+$GLOBALS['sitra_config']['mail_objet'] = '';
+$GLOBALS['sitra_config']['mail_message'] = '';
+
+// chemin de images initialisé dans sitra_options car on en a besoin pour les fonctions aussi du côté public
+
+// include des fonctions diverses de mise à jour
+include_spip('inclure/sitra_utils_maj');
+
+if (!is_dir($config['sitra_dir']) or !is_dir(SITRA_CHEMIN_IMAGES)){
+	echo '<h1>Dossiers sitra ou images_sitra non présents !</h1>';
+	exit;
+}
+
+if ($config['mode_compresse'] == 'oui')
+	include_spip('inclure/sitra_decompresse_maj');
+
+// suppression des objets supprimés de la base sitra
+if (!$GLOBALS['sitra_config']['erreur'])
+	include_spip('inclure/sitra_suppr_objets');
+
+// pas d'erreur sur les suppressions on continue
+if (!$GLOBALS['sitra_config']['erreur'])
+	include_spip('inclure/sitra_maj_selections');
+
+// pas d'erreur sur les selections on continue
+if (!$GLOBALS['sitra_config']['erreur'])
+	include_spip('inclure/sitra_maj_objets');
+
+// pas d'erreur sur les objets on continue
+if (!$GLOBALS['sitra_config']['erreur'])
+	include_spip('inclure/sitra_maj_images');
+
+// envoi des emails
+if (!SITRA_DEBUG)
+	include_spip('inclure/sitra_maj_email');
+
+message($nl.'/// Fin du traitement');
+echo '<h1>Mise à jour terminée !</h1>';
+?>
+
+</body>
+</html>

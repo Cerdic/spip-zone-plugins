@@ -1,0 +1,10 @@
+<div>&lt; <a href="javascript:history.go(-1)"><:sitra:retour:></a></div>
+
+[<h3><:sitra:objets_disponibles_pour_critere:> : (#ENV{id_critere})</h3>]
+<B_b>
+[<div class="pagination">(#PAGINATION)</div>]
+<ul>
+<BOUCLE_b(SITRA_OBJETS){id_critere}{par titre}{pagination 20}>
+	[<li><a href="[(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,un_objet}|parametre_url{id_sitra,#ID_SITRA})]">(#ID_SITRA)</a>[ - <em>(#TITRE)</em>][ - <strong>Id (#ID_SITRA_OBJET)</strong>]</li>]
+</BOUCLE_b>
+</ul></B_b>

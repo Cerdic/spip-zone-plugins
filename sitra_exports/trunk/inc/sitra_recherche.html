@@ -1,0 +1,6 @@
+<h3><:sitra:rechercher:></h3>
+[(#FORMULAIRE_SITRA_RECHERCHE)]
+
+[(#ENV{titre}|ou{#ENV{id_sitra}}|oui)
+	<INCLURE{fond=inc/sitra_recherche_inc,env}>
+]

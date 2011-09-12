@@ -1,0 +1,36 @@
+<B_a>
+<div class="action_clic"><span class="afficher_masquer"><:sitra:afficher_masquer:></span></div>
+[<div class="pagination">(#PAGINATION)</div>]
+<dl id="liste_objets">
+<BOUCLE_a (SITRA_OBJETS){titre ?like %#ENV{titre}%}{id_sitra ?like %#ENV{id_sitra}%}{par titre}{pagination 20}>
+	[<dt><strong id="o-#ID_SITRA">(#TITRE)</strong><em>[ - (#ID_SITRA)]</em></dt>]
+	<dd class="o-#ID_SITRA">
+		<strong><:sitra:renseignements:></strong>
+		<ul>
+		[<li><:sitra:obj_adresse:> : (#ADRESSE|sitra_expand_liste)</li>]
+		[<li><:sitra:obj_commune:> :#CODE_POSTAL (#COMMUNE)</li>]
+		</ul>
+		<B_b><strong><:sitra:categories:></strong>
+		<ul>
+		<BOUCLE_b (SITRA_CATEGORIES){id_sitra}>
+			[<li>(#ID_CATEGORIE) - <em>#CATEGORIE</em></li>]
+		</BOUCLE_b>
+		</ul></B_b>
+		<B_c><strong><:sitra:selections:></strong>
+		<ul>
+		<BOUCLE_c (SITRA_SELECTIONS){id_sitra}>
+			[<li>(#ID_SELECTION) - <em>#SELECTION</em></li>]
+		</BOUCLE_c>
+		</ul></B_c>
+		<B_d><strong><:sitra:criteres:></strong>
+		<ul>
+		<BOUCLE_d (SITRA_CRITERES){id_sitra}>
+			[<li>(#ID_CRITERE)</li>]
+		</BOUCLE_d>
+		</ul></B_d>
+		<div class="action_clic"><a href="[(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,un_objet}|parametre_url{id_sitra,#ID_SITRA})]"><:sitra:plus_de_details:></a></div>
+	</dd>
+</BOUCLE_a>
+</dl>
+<p>#GRAND_TOTAL <:sitra:resultats:></p></B_a>
+<h3><:sitra:aucun_resultat:></h3><//B_a>

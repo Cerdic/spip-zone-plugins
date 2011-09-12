@@ -1,0 +1,9 @@
+<h3><:sitra:criteres_disponibles:></h3>
+<B_a>
+[<div class="pagination">(#PAGINATION)</div>]
+<ul>
+<BOUCLE_a (SITRA_CRITERES){fusion id_critere}{par id_critere}{pagination 20}>
+[<li><a href="[(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,sitra_objets_critere}|parametre_url{id_critere,#ID_CRITERE})]">(#ID_CRITERE)</a></li>]
+</BOUCLE_a>
+</ul>
+</B_a>
