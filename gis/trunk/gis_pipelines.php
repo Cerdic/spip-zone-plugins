@@ -259,7 +259,8 @@ function gis_post_edition($flux){
 			if($infos){
 				if(is_numeric($latitude = $infos['latitude']) && is_numeric($longitude = $infos['longitude'])){
 					$c = array(
-						'titre' => basename($fichier),
+						'titre' => $infos['titre'] ? $infos['titre'] : basename($fichier),
+						'descriptif' => $infos['descriptif'],
 						'lat'=> $latitude,
 						'lon' => $longitude,
 						'zoom' => $config['zoom'] ? $config['zoom'] :'4'
@@ -319,7 +320,7 @@ function gis_declarer_type_surnoms($surnoms){
 	return $surnoms;
 }
 
-function gis_declarer_objets_surnoms($surnoms){
+function gis_declarer_tables_objets_surnoms($surnoms){
 	$surnoms['gis'] = 'gis';
 	return $surnoms;
 }
