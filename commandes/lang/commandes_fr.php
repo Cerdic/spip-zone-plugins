@@ -56,6 +56,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// R
 	'reference' => 'Référence',
+	'reference_ref'=>'Référence @ref@',
 
 	// S
 	'statut_attente' => 'En attente de validation',
