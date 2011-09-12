@@ -53,6 +53,13 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		maj_tables('spip_tickets');
 		ecrire_meta($nom_meta_base_version,$current_version="1.2");
 	}
+	if (version_compare($current_version,"1.3","<")){
+		// modifications de la table spip_tickets,
+		// ajout du champ navigateur
+		sql_alter("TABLE spip_tickets DROP tracker");
+		sql_alter("TABLE spip_tickets CHANGE type tracker integer DEFAULT '0' NOT NULL");
+		ecrire_meta($nom_meta_base_version,$current_version="1.3");
+	}
 }
 
 function tickets_vider_tables($nom_meta_base_version) {
