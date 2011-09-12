@@ -1,10 +1,11 @@
 <plugin>
 	<nom>Sitra Exports</nom>
-	<auteur>Dominique Wojylac Sivu Inforoutes de l'Ardeche</auteur>
-	<version>0.4</version>
+	<auteur>Dominique Wojylac - [Sivu Inforoutes de l'Ard&egrave;che->http://www.inforoutes.fr]</auteur>
+	<version>0.6</version>
 	<etat>test</etat>
-	<description>Utilisation des exports sitra</description>
+	<description>R&eacute;cup&eacute;ration et mise en base des exports SITRA, gestion des exports multilingues en un seul fichier compress&eacute;s ou non. Importation des images principales, r&eacute;cup&eacute;ration des images distantes (principales, secondaires ou logos). R&eacute;cup&eacute;ration des s&eacute;lections SITRA, des cat&eacute;gories et sous-cat&eacute;gories des objets, des crit&egrave;res internes affect&eacute;s.</description>
 	<icon>images/sitra-64.png</icon>
+	<licence>GPL 3 - &#169; 2011</licence>
 	<prefix>sitra</prefix>
 	<!-- fonctions et options -->
 	<options>sitra_options.php</options>
