@@ -1,9 +1,0 @@
-<h3><:sitra:selections_disponibles:></h3>
-<B_a>
-[<div class="pagination">(#PAGINATION)</div>]
-<ul>
-<BOUCLE_a (SITRA_SELECTIONS){fusion selection}{par selection}{pagination 20}>
-[<li><a href="[(#URL_ECRIRE{admin_sitra}|parametre_url{fonction,sitra_objets_selection}|parametre_url{id_selection,#ID_SELECTION})]">(#ID_SELECTION)</a>[ - <em>(#SELECTION)</em>]</li>]
-</BOUCLE_a>
-</ul>
-</B_a>
