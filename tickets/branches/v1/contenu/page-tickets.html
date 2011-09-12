@@ -48,5 +48,8 @@
 	[<div class="ajax">
 	(#INCLURE{fond=inclure/liste_commentaires_tickets,env,ajax,tracker="",
 		titre=<:tickets:tickets_derniers_commentaires:>}|trim)
+	</div>
+	<div class="actions rss">
+		<a href="[(#URL_PAGE{backend-tickets_comments}|parametre_url{lang,#ENV{lang}})]"><:tickets:suivre_tickets_comments_rss:></a>
 	</div>]
 </div>
