@@ -29,7 +29,7 @@
 		{statut ?IN commande,paye}{tri #ENV{order,date},#GET{defaut_tri}}
 		{pagination #ENV{nb,30}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td class='id'>#ID_COMMANDE</td>
+			<td class='id'><a href="#URL_ECRIRE{commande_voir,id_commande=#ID_COMMANDE}">#ID_COMMANDE</a></td>
 			<td class='reference'>#REFERENCE</td>
 			<td class='etat'>[(#STATUT|commandes_lister_statuts)]</td>
 			<td class='qui'><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">#INFO_NOM{auteur, #ID_AUTEUR}</a></td>
