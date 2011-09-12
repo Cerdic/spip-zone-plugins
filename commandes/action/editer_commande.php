@@ -158,17 +158,9 @@ function instituer_commande($id_commande, $c, $calcul_details=true){
 		//else
 		//	spip_log("editer_commande $id_commande refus " . join(' ', $c),'commande');
 
-		// En cas de paiement, fixer la date a "maintenant"
-		// sauf si $c commande autre chose
-		// ou si la commande est deja date dans le futur
-		// En cas de proposition d'une commande (mais pas depublication), idem
-		if ($champs['statut'] == 'paye'
-			or ($champs['statut'] == 'encours' and ($d or !in_array($statut_ancien, array('paye', 'encours'))))
-		){
-			if ($d or strtotime($d=$date)>time())
-				$champs['date'] = $date = $d;
-			else
-				$champs['date'] = $date = date('Y-m-d H:i:s');
+		// Si on doit changer la date explicitement
+		if ($d){
+			$champs['date'] = $date = $d;
 		}
 	}
 	
