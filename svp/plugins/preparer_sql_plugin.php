@@ -121,6 +121,7 @@ function normaliser_lien($url) {
 // - transformation en attribut des balises A
 // - interpretation des balises BR et LI et de la virgule et du espace+tiret comme separateurs
 function normaliser_auteur_licence($texte, $balise) {
+	include_spip('inc/filtres');
 	include_spip('inc/lien');
 	
 	// On extrait le multi si besoin et on selectionne la traduction francaise
@@ -200,8 +201,9 @@ function normaliser_auteur_licence($texte, $balise) {
 
 
 // Expanse les multi en un tableau de textes complets, un par langue
-function normaliser_multi($texte)
-{
+function normaliser_multi($texte) {
+	include_spip('inc/filtres');
+
 	if (!preg_match_all(_EXTRAIRE_MULTI, $texte, $regs, PREG_SET_ORDER))
 		return array('fr' => $texte);
 	$trads = array();
