@@ -2,7 +2,7 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) return;
 include_spip('inc/plugin');
-include_spip('inc/svp_intervaller');
+include_spip('inc/svp_outiller');
 
 // Fusion des informations de chaque balise plugin en considerant la compatibilite SPIP
 function plugins_fusion_plugin($plugins) {

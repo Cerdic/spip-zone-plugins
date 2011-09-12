@@ -4,8 +4,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 function plugins_preparer_sql_plugin($plugin)
 {
-	include_spip('inc/svp_intervaller');
-	include_spip('svp_fonctions');
+	include_spip('inc/svp_outiller');
 
 	$champs = array();
 	if (!$plugin)
