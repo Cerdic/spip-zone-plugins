@@ -9,12 +9,12 @@
 
 
 <BOUCLE_mot_evenements(MOTS){type=Type}>
-<h3 class="agenda">#DESCRIPTIF</h3>
+<h3 class="agenda">[(#DESCRIPTIF|attribut_html)]</h3>
 	<BOUCLE_mot_articles(MOTS){type=Catégorie}>
 		<BOUCLE_article_evenement(ARTICLES){titre_mot=#TITRE}{par num titre}{inverse}>
 			<B_agenda_evenement>
 			<ul>
-			<li><h4>#_mot_articles:TITRE</h4></li>
+			<li><h4>[(#_mot_articles:TITRE|unique)]</h4></li>
 			<BOUCLE_agenda_evenement(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article}{id_rubrique?}{titre_mot=#_mot_evenements:TITRE}{id_evenement_source?}{pagination}>
 
 				<ul class='liste_items evenements'>

@@ -1,9 +1,5 @@
 <div id="seminaire">
 <BOUCLE_seminaire(ARTICLES){id_article}>
-		[(#REM)A décommenter quand ça marchera
-		[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=noisettes/agenda_#ENV{type,semaine}}{type} {delais=900}{annee}{mois}{jour}{echelle}{partie_cal}{theme}>] [(#REM)agenda hebdomadaire]
-		<INCLURE{fond=agenda/navigation/agenda_evenements}{env}>[(#REM)navigation mensuelle]
-		]
 		<INCLURE{fond=agenda/contenu/agenda_evenements}{env}{self}><!-- liste des seminaires-->
 </BOUCLE_seminaire>
 </div><!--fin du bloc seminaire-->
