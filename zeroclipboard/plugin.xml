@@ -1,14 +1,14 @@
 <plugin>
     <nom><multi>[fr]Copier coller facile[en]Easy copy / paste</multi></nom>
     <auteur>kent1</auteur>
-    <licence>&#169; 2010 GNU/GPL</licence>
-    <version>0.1</version>
+    <licence>&#169; 2010-2011 GNU/GPL</licence>
+    <version>0.1.1</version>
 	<icon>images/zeroclipboard_logo.png</icon>
     <etat>dev</etat>
     <description>
 		<multi>
 			[fr]Ajoute un lien "Copier" avant chaque &#233;l&#233;ment de class <code>.copypaste</code> permettant de mettre son contenu dans presse-papier
-			[en]Adds a "Copy" link before each element with the class <code>.copypaste</code> and place its contents into the clipboard
+			[en]Adds a "Copy" link before each element with the class <code>.copypaste</code> and place its contents into the clipboard when clicked
 		</multi>
     </description>
     <prefix>zeroclipboard</prefix>

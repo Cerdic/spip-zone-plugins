@@ -13,7 +13,7 @@ $(function(){
 	clip.setHandCursor(true);
 	clip.addEventListener('mouseOver',function(client){});
 	clip.addEventListener('complete',clipcomplete);
-
+	clip.reposition();
 	function clipcomplete(client,text){
 		$(client.domElement)
 			.html('<:zeroclipboard:link_text_copied:>')
@@ -31,26 +31,20 @@ $(function(){
 
 	var copypaste_init = function(){
 		$('.copypaste').each(function(){
-			clip.reposition(this);
 			if(!$(this).prev().is('.copypaste_container'))
 				$(this).before('<div class="copypaste_container" style="position:relative"><a title="<:zeroclipboard:link_title_copy:>" class="copypaste_link"><:zeroclipboard:link_text_copy:></a></div>');
 			$(this).prev('div').find('a').unbind('mouseover').mouseover( function() {
 					clip.setText($(this).parent().next('.copypaste').val());
-	
-					// reposition the movie over our element
-					// or create it if this is the first time
-					if (clip.div) {
-						clip.receiveEvent('mouseout', null);
-						clip.reposition(this);
-					}
-					else clip.glue(this);
-	
-					// gotta force these events due to the Flash movie
-					// moving all around.  This insures the CSS effects
-					// are properly updated.
+					clip.glue(this);
 					clip.receiveEvent('mouseover', null);
 				} );
 		});
+		var copies = $('.copypaste_container');
+		if(copies.size() && !clip.div){
+			clip.setText($('.copypaste').eq(0).val());
+			clip.glue($('.copypaste_container')[0]);
+			clip.receiveEvent('mouseover', null);
+		}
 	}
 	copypaste_init();
 	onAjaxLoad(copypaste_init);
