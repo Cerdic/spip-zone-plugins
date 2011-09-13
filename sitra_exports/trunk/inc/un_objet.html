@@ -23,5 +23,13 @@
 	<li><:sitra:obj_classement:> : #CLASSEMENT</li>
 </ul>
 </dd>
+<B_b><dd style="overflow: hidden">
+<BOUCLE_b (SITRA_IMAGES){id_sitra}{par type_image}>
+	[<dl class="spip_documents spip_documents_left" style="float: left; width: 120px;">
+	<dt>(#URL_IMAGE|url_image_sitra{#LIEN,'../'}|image_reduire{120,120}|sinon{#URL_IMAGE - #LIEN})</dt>
+	[<dt>(#TYPE_IMAGE) - #TITRE</dt>]
+	</dl>]
+</BOUCLE_b>
+</dd></B_b>
 </BOUCLE_objet>
 </dl></B_objet>

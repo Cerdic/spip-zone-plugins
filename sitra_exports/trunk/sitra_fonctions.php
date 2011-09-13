@@ -4,11 +4,12 @@
 teste si une copie locale existe pour les images principales
 obtenues à partir de l'archive zip
 **/
-function url_image_locale($url=''){
+function url_image_locale($url='',$chemin=''){
 	if (!$url) return;
 	$path_parts = pathinfo($url);
 	$fichier_image = strtolower($path_parts['basename']);
-	$fichier_image = SITRA_CHEMIN_IMAGES.$fichier_image;
+	$fichier_image = $chemin.SITRA_CHEMIN_IMAGES.$fichier_image;
+	
 	if (file_exists($fichier_image))
 		return $fichier_image;
 	else
@@ -30,13 +31,14 @@ function url_image_distante($url=''){
 
 /**
 copie locale ou distante en fonction du type image distante (O ou N)
+$chemin a utiliser pour la partie privée
 **/
-function url_image_sitra($url='', $lien=''){
+function url_image_sitra($url='', $lien='', $chemin=''){
 	switch ($lien){
 		// image importée par zip sitra
-		case 'N': return url_image_locale($url); break;
+		case 'N': return url_image_locale($url,$chemin); break;
 		// image distante
-		case 'O': return url_image_distante($url); break;
+		case 'O': return $chemin.url_image_distante($url); break;
 		default : return; break;
 	}
 }

@@ -9,7 +9,7 @@
 	[<li>web : (#WEB|sitra_expand_web)</li>]
 	<BOUCLE_b (SITRA_IMAGES){id_sitra}{type_image=principale}>
 		<BOUCLE_c (SITRA_IMAGES_DETAILS){id_sitra}{num_image}{lang}>
-			[<li>(#URL_IMAGE|url_image_sitra{#LIEN}|image_reduire{#ENV{taille,'150,150'}})</li>]
+			[<li>(#URL_IMAGE|url_image_sitra{#LIEN}|url_absolue|image_reduire{150,150})</li>]
 			[<li>(#TITRE)</li>]
 			[<li>(#DESCRIPTIF)</li>]
 			[<li>(#COPYRIGHT)</li>]
