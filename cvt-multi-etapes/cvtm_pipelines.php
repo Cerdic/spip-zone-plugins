@@ -155,6 +155,7 @@ function cvtm_formulaire_verifier($flux){
 		// recuperer l'etape saisie et le nombre d'etapes total
 		list($etape,$etapes) = $e;
 		$etape_demandee = _request('aller_a_etape'); // possibilite de poster en entier dans _etape
+		set_request('aller_a_etape'); // vider pour reperer si un verifier() le modifie
 
 		// lancer les verifs pour chaque etape deja saisie de 1 a $etape
 		$erreurs = array();
@@ -175,6 +176,12 @@ function cvtm_formulaire_verifier($flux){
 			// possibilite de poster dans _retour_etape_x
 			if (!is_null(_request("_retour_etape_$e")))
 				$etape_demandee = $e;
+			if (!is_null(_request("aller_a_etape"))){
+				$etape_demandee = _request("aller_a_etape");
+				if ($etape_demandee>$etape+1)
+					$etape = $etape_demandee-1;
+				set_request('aller_a_etape'); // vider pour reperer si un verifier() le modifie
+			}
 		}
 
 		// si la derniere etape OK etait la derniere
