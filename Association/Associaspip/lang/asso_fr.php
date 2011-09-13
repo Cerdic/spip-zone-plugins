@@ -40,7 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'titre_onglet_prets' => 'Gestion des pr&ecirc;ts',
 			
 #Configuration
-	# Libell�
+	# Libelle
 	'config_libelle_nom' => 'Nom',
 	'config_libelle_email' => 'Adresse courriel',
 	'config_libelle_adresse' => 'Adresse',
@@ -82,6 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_gerer_champs_membres' => 'La fiche des membres contient les champs :',
 	'config_erreur_pas_de_destination_definie' => 'Pas de destination comptable d&eacute;finie',
 	'config_plan_comptable_prerenseigne' => 'Activer l\'aide &agrave; la d&eacute;claration du plan comptable (fran&ccedil;ais uniquement)',
+	'config_libelle_categorie_par_defaut' => 'Cat&eacute;gorie de cotisation des nouveaux membres',
+	'aucune_categorie_par_defaut' => 'Aucune cat&eacute;gorie par d&eacute;faut',
 
 	# Options
 	'import_nom_auteur_nom_prenom' => 'Nom Pr&eacute;nom',

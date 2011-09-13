@@ -83,6 +83,17 @@
 									<option value="nom" [(#ENV{import_nom_auteur}|=={nom}|?{selected="selected"})]><:asso:import_nom_auteur_nom:></option>
 								</select>
 							</li>
+							<B_categories>
+							<li>
+								<label><strong><:asso:config_libelle_categorie_par_defaut:></strong></label>
+								<select name="categorie_par_defaut" id="categorie_par_defaut">
+									<option value=""><:asso:aucune_categorie_par_defaut:></option>
+									<BOUCLE_categories(ASSO_CATEGORIES){par valeur}>
+										<option value="#ID_CATEGORIE" [(#ENV{categorie_par_defaut}|=={#ID_CATEGORIE}|?{selected="selected"})]>#VALEUR</option>
+									</BOUCLE_categories>
+								</select>
+							</li>
+							</B_categories>
 						</ul>
 					</fieldset>
 				</li>

@@ -21,13 +21,18 @@ function formulaires_editer_cotisations_charger_dist($id_auteur, $nom_prenom, $c
 	}
 	
 	/* la validite et le montant de la cotisation */
-	$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));
-	list($annee, $mois, $jour) = explode("-",$validite);
-	if ($jour==0 OR $mois==0 OR $annee==0)
-		list($annee, $mois, $jour) = explode("-",date('Y-m-d'));
-	$mois += $categorie['duree'];
-	$contexte['validite'] = date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
-	$contexte['montant'] = $categorie['cotisation'];
+	if ($categorie) { /* si le membre a une categorie */
+		$categorie = sql_fetsel("duree, cotisation", "spip_asso_categories", "id_categorie=" . intval($categorie));
+		list($annee, $mois, $jour) = explode("-",$validite);
+		if ($jour==0 OR $mois==0 OR $annee==0)
+			list($annee, $mois, $jour) = explode("-",date('Y-m-d'));
+		$mois += $categorie['duree'];
+		$contexte['validite'] = date("Y-m-d", mktime(0, 0, 0, $mois, $jour, $annee));
+		$contexte['montant'] = $categorie['cotisation'];	
+	} else {
+		$contexte['validite'] = date("Y-m-d");
+		$contexte['montant'] = 0;	
+	}
 
 	/* la justification */
 	$contexte['justification'] = _T('asso:nouvelle_cotisation') . " [$nom_prenom" . "->membre$id_auteur]";

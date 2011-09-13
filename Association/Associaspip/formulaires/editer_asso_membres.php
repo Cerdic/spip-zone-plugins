@@ -16,6 +16,11 @@ include_spip('inc/autoriser');
 function formulaires_editer_asso_membres_charger_dist($id_auteur) {
 	/* cet appel va charger dans $contexte tous les champs de la table spip_asso_membres associes a l'id_auteur passe en param */
 	$contexte = formulaires_editer_objet_charger('asso_membres', $id_auteur, '', '',  generer_url_ecrire('adherents'), '');
+	
+	/* on verifie que la date de validite n'est pas nulle et si oui on la met a hier */
+	list($annee, $mois, $jour) = explode("-",$contexte['validite']);
+	if ($jour==0 OR $mois==0 OR $annee==0)
+		$contexte['validite'] = date("Y-m-d", mktime(0, 0, 0, date("m")  , date("d")-1, date("Y")));
 
 	/* on a ajoute dans le contexte les metas de gestion optionnelle des champs Civilite, Prenom et Ref. Interne */
 	$contexte['meta_civilite'] = $GLOBALS['association_metas']['civilite'];

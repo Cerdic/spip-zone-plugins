@@ -62,14 +62,10 @@ function update_spip_asso_membre($id_auteur)
 		$modif['nom_famille'] = $nom;		$modif['prenom'] = $prenom;
 		$modif['statut_interne'] = 'prospect';
 		$modif['id_auteur'] = $id_auteur;
+		/* on verifie si il existe une categorie par defaut */
+		if ($GLOBALS['association_metas']['categorie_par_defaut'] != '') {
+			$modif['categorie'] = $GLOBALS['association_metas']['categorie_par_defaut'];
+		}
 		sql_insertq('spip_asso_membres', $modif);
 	}
-}
-
-function telephone_std($num)
-{
-	$num = preg_replace('/\D/', '', $num);
-	if ($num AND strlen($num) < 10) $num = '0'.$num;
-	$num = preg_replace('/(\d\d)/', '\1 ', $num);
-	return rtrim($num);
 }?>
