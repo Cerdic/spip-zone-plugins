@@ -118,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_profils_video' => 'Profil(s) d\'encodage vidéo',
 	'info_reencoder' => '(Ré)encoder',
 	'info_relancer_erreurs' => 'Relancer tous les encodages en erreur',
+	'info_rotation' => 'Angle de rotation&nbsp;:',
 	'info_selectionner_fichier_encoder' => 'Vous pouvez encoder un des fichiers suivants',
 	'info_statut_encode_en_cours' => 'En cours',
 	'info_statut_encode_erreur' => 'En erreur',

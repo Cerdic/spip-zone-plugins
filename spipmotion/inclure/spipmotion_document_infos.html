@@ -34,9 +34,15 @@
 	</p>]
 	[<p>
 		<strong>
-			<:spipmotion:info_pixelformat:>
+			<:spipmotion:info_bitrate:>
 		</strong>
-		(#PIXELFORMAT)
+		(#BITRATE|<{1000}|?{#BITRATE,[(#BITRATE|div{1000}|floor)]}) kb/s.
+	</p>]
+	[<p>
+		<strong>
+			<:spipmotion:info_videocodec:>
+		</strong>
+		(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})
 	</p>]
 	[<p>
 		<strong>
@@ -46,9 +52,15 @@
 	</p>]
 	[<p>
 		<strong>
-			<:spipmotion:info_bitrate:>
+			<:spipmotion:info_pixelformat:>
 		</strong>
-		(#BITRATE|<{1000}|?{#BITRATE,[(#BITRATE|div{1000}|floor)]}) kb/s.
+		(#PIXELFORMAT)
+	</p>]
+	[(#ROTATION|!={0}|oui)[[<p>
+		<strong>
+			<:spipmotion:info_rotation:>
+		</strong>
+		(#ROTATION)&#176;
 	</p>]
 	[<p>
 		<strong>
@@ -56,13 +68,6 @@
 		</strong>
 		(#VIDEOBITRATE|div{1000}|round) kb/s.
 	</p>]
-	[<p>
-		<strong>
-			<:spipmotion:info_videocodec:>
-		</strong>
-		(#VIDEOCODEC|intval|?{[(#VIDEOCODEC|flv_video_codec_type_to_type)],#VIDEOCODEC})
-	</p>]
-
 	[<p>
 		<strong>
 			<:spipmotion:info_audiocodec:>
