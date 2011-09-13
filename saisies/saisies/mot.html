@@ -13,7 +13,7 @@
 		label=<:plugin:en_region:>})]
 ]
 
-<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur_forcee,#ENV{valeur}})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ value="(#ENV{valeur_forcee,#ENV{valeur}})"][ disabled="(#ENV{disable})"]>
 [(#ENV{cacher_option_intro}|non)
 	<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_mots(MOTS){par id_groupe, num titre, titre}{id_groupe ?}>

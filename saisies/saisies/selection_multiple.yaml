@@ -56,12 +56,6 @@ options:
           nom: 'disable_avec_post'
           label: '<:saisies:option_disable_avec_post_label:>'
           explication: '<:saisies:option_disable_avec_post_explication:>'
-      -
-        saisie: 'oui_non'
-        options:
-          nom: 'readonly'
-          label: '<:saisies:option_readonly_label:>'
-          explication: '<:saisies:option_readonly_explication:>'
   -
     saisie: 'fieldset'
     options:

@@ -9,6 +9,6 @@
 	[(#SAISIE{selecteur_langue,lang,
 		label=<:plugin:info_langue:>})] 
 ]
-<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ readonly="(#ENV{readonly})"]>
+<select name="#ENV{nom}" id="champ_#ENV{nom}"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"]>
 [(#VAL{changer_lang}|liste_options_langues{[(#ENV{valeur_forcee,#ENV{valeur,#ENV{defaut,''}})]})]
 </select>
