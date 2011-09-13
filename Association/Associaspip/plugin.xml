@@ -45,6 +45,11 @@
 		<inclure>inc/post_edition.php</inclure>
 	</pipeline>
 	
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>inc/lien_page_auteur.php</inclure>
+	</pipeline>
+	
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;]" />
 	<utilise id="coordonnees" version="[1.4.5;]" />
