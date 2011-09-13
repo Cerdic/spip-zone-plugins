@@ -1,5 +1,10 @@
 <?php
 
+// Mode d'utilisation de SVP runtime ou pas :
+// - En mode runtime (true), on ne charge que les plugins compatibles avec la version courante
+// - En mode non runtime (false) on charge tous les plugins : cas du site Plugins SPIP
+define('_SVP_MODE_RUNTIME', false);
+
 // Mise a jour automatique des depots (CRON)
 // - Flag de declenchement
 define('_SVP_CRON_ACTUALISATION_DEPOTS', true);

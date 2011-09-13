@@ -89,11 +89,6 @@ function svp_afficher_langues($langues, $sep=', '){
 	return $texte;
 }
 
-function svp_afficher_voirenligne($id_depot) {
-	$url = generer_url_action('redirect', "type=depot&id=$id_depot&var_mode=calcul");
-	return icone_horizontale(_T('voir_en_ligne'), $url, 'racine-24.gif', 'rien.gif', 0);
-}
-
 
 function svp_afficher_statistiques_globales($id_depot=0){
 	$info = '';
@@ -295,36 +290,6 @@ function svp_traduire_type_depot($type) {
 		$traduction = _T('svp:info_type_depot_' . $type);
 	}
 	return $traduction;
-}
-
-// Surcharge du filtre foreach pour qu'il passe des parametres au modele
-// Pour l'instant ces parametres sont passes sous la forme Vi=Ei
-// mais peut-etre qu'un tableau serait plus approprie ???
-// Le foreach est toutefois renomme
-function filtre_iterer_modele($balise_deserializee, $modele ='foreach') {
-		
-	$parametres = func_get_args();
-	unset($parametres[0], $parametres[1]);
-
-	$texte = '';
-	$i = 0;
-	$contexte = array();
-	if(is_array($balise_deserializee)) {
-		foreach ($balise_deserializee as $k => $v) {
-			$i++;
-			$contexte = array_merge(array('iteration' => $i, 'cle' => $k), (is_array($v) ? $v : array('valeur' => $v))) ;
-			if (is_array($parametres)){
-				foreach($parametres as $_p){
-					if (preg_match(",^([^=]*)=(.*)$,", $_p, $matches)) {
-						$contexte[$matches[1]] = $matches[2];
-					}
-				}	
-			}
-			$texte .= recuperer_fond('modeles/'.$modele, $contexte);
-		}
-	}
-
-	return $texte;
 }
 
 /**

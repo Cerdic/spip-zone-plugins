@@ -54,7 +54,10 @@ function svp_phraser_depot($url) {
 	// - <traductions> : contient la compilation des informations de traduction (facultatif)
 	// - <plugin> ou <paquet> suivant la DTD : le contenu du fichier plugin.xml ou paquet.xml (facultatif)
 function svp_phraser_archives($archives) {
+	include_spip('inc/plugin');
+
 	$paquets = array();
+	$version_spip = $GLOBALS['spip_version_branche'].".".$GLOBALS['spip_version_code'];
 
 	// On verifie qu'il existe au moins une archive
 	if (!$archives)
@@ -67,23 +70,31 @@ function svp_phraser_archives($archives) {
 			// Extraction de la balise <zip>
 			$zip = svp_phraser_zip($matches[1]);
 			if ($zip) {
-				// Affectation des informations du zip
-				$paquets[$zip['file']] = $zip;
-		
 				// Extraction de la balise traductions
-				$paquets[$zip['file']]['traductions'] = array();
+				$traductions = array();
 				if (preg_match(_SVP_REGEXP_BALISE_TRADUCTIONS, $_archive, $matches))
-					$paquets[$zip['file']]['traductions'] = svp_phraser_traductions($matches[1]);
+					$traductions = svp_phraser_traductions($matches[1]);
 				
 				// La balise <archive> peut posseder un attribut qui precise la DTD utilisee pour les plugins (plugin ou paquet)
 				// Sinon, c'est la DTD plugin qui est utilisee
 				list($tag, $attributs) = spip_xml_decompose_tag($_archive);
 				// -- On stocke la DTD d'extraction des infos du plugin
-				$paquets[$zip['file']]['dtd'] = (isset($attributs['dtd']) AND $attributs['dtd']) ? $attributs['dtd'] : _SVP_DTD_PLUGIN;
+				$dtd = (isset($attributs['dtd']) AND $attributs['dtd']) ? $attributs['dtd'] : _SVP_DTD_PLUGIN;
 
 				// Extraction *des balises* plugin ou *de la balise* paquet suivant la DTD et la version SPIP
 				// -- DTD : si on utilise plugin.xml on extrait la balise <plugin> sinon la balise <paquet>
-				$paquets[$zip['file']]['plugin'] = svp_phraser_plugin($paquets[$zip['file']]['dtd'], $_archive);
+				$xml = svp_phraser_plugin($dtd, $_archive);
+				
+				// Si on est en mode runtime, on est seulement interesse par les plugins compatibles avec
+				// la version courant de SPIP. On ne stocke donc pas les autres plugins.
+				// Si on est pas en mode runtime on prend tout !
+				if (!_SVP_MODE_RUNTIME
+				OR (_SVP_MODE_RUNTIME AND plugin_version_compatible($xml['compatibilite'], $version_spip))) {
+					$paquets[$zip['file']] = $zip;
+					$paquets[$zip['file']]['traductions'] = $traductions;
+					$paquets[$zip['file']]['dtd'] = $dtd;
+					$paquets[$zip['file']]['plugin'] = $xml;
+				}
 			}
 		}
 	}
