@@ -12,12 +12,15 @@
 }
 .cNavKeys#NIC ul li a {
   display: inline-block;
-  padding: 5px;
-  border: thin solid #f8f8f8;
+  padding: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'Margin'},5px};
+  border: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Width'},thin}[ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Style'},outset})][ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Color'},#dfdfdf})];
   border-radius: 5px;
   -moz-border-radius: 5px;
   -khtml-border-radius: 5px;
 }
 .cNavKeys#NIC ul li a:hover {
-  border: thin outset #dfdfdf;
+  border: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'BordHover/Width'},thin}[ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'BordHover/Style'},inset})][ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'BordHover/Color'},#dfdfdf})];
+}
+.cNavKeys#NIC ul li img.spip_logos {
+  margin: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'Margin'},5px};
 }

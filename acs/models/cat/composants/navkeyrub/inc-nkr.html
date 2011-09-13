@@ -1,0 +1,34 @@
+[(#CACHE{0})][(#SET{idG,#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'GroupeMots'}}})]
+<div class="cNavKeyRub[ cNavKeyRub(#NIC)] bsize">
+  <BOUCLE_groupe(GROUPES_MOTS){id_groupe=#GET{idG}}>
+    <B_mots>
+    [(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Titre'}}|!={non}|?{' '})<div class="bloc-title"><a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]" title="#TITRE">[(#TITRE|supprimer_numero|couper{80})]</a></div>]
+    <ul>
+    <BOUCLE_mots(MOTS){id_groupe}>[(#SET{cl,##LOGO_MOT|couleur_extraire})]
+      <li class="menu-item">
+        <B_rubriques>
+            <ul class="hidden">
+              <BOUCLE_rubriques(RUBRIQUES){tout}{id_mot}{par num titre,titre}>
+                [(#SET{AFILLES,""})]<BOUCLE_test_sousrub(RUBRIQUES){tout}{id_parent}{0,1}>[(#SET{AFILLES,menu-item-haschilds})]</BOUCLE_test_sousrub>
+                <li class="menu-item"><a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]" class="[(#GET{AFILLES})]"><span class="titre">[(#TITRE|supprimer_numero|couper{80})]</span></a>
+                  <B_sous_rubriques>
+                    <ul class="hidden">
+                      <BOUCLE_sous_rubriques(RUBRIQUES){tout}{id_parent}{par num titre,titre}>[(#SET{AFILLES,""})]<BOUCLE_test_soussousrub(RUBRIQUES){tout}{id_parent}{0,1}>[(#SET{AFILLES,menu-item-haschilds})]</BOUCLE_test_soussousrub>
+                      <li class="menu-item"><a id="rub#ID_RUBRIQUE" href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)]"[ class="(#GET{AFILLES})"]><span class="titre">[(#TITRE|supprimer_numero|couper{80})]</span></a><BOUCLE_rehidden(BOUCLE_sous_rubriques)></BOUCLE_rehidden></li>
+                      </BOUCLE_sous_rubriques>
+                    </ul>
+                  </B_sous_rubriques>
+                </li>
+              </BOUCLE_rubriques>
+            </ul>[(#SET{AFILLES,menu-item-haschilds})]
+        </B_rubriques>
+        <a href="#URL_MOT"[ title="(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)"] class="[(#GET{AFILLES})]"><span class="titre"[ style="color:(#GET{cl})"]>[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMot'}}|!={non}|?{" "})[(#LOGO_MOT|image_reduire{20})]][(#TITRE|supprimer_numero|couper{80})]</span></a>
+      </li>
+    </BOUCLE_mots>
+    </ul>
+    </B_mots>
+  </BOUCLE_groupe>
+    <a href="#URL_ECRIRE{acs,onglet=composants&composant=navkeyrub}">Click here to define the keywords group.</a>
+  <//B_groupe>
+</div>
+[(#VAR{acsFondSpacer}|?{' '})<div class="spacer"></div>]

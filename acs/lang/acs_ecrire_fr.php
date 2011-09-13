@@ -96,8 +96,7 @@ Pour utiliser des composants ACS dans d\'autres squelettes que ceux du modèles 
   'afterUpdate_not_callable' => 'M&eacute;thode afterUpdate introuvable',
   'echec_afterUpdate' => 'Echec afterUpdate',
   'err_aucun_composant' => 'Aucun composant actif pour ',
-  'spip_trop_ancien' => 'Ne fonctionne pas correctement avec spip < @min@',
-  'spip_non_supporte' => 'Non valid&eacute; avec spip > @max@',  
+	'require' => '@class@ <b>@version@</b> n&eacute;cessite'
 
 );
 ?>

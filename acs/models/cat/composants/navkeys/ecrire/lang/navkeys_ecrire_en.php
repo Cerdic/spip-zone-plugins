@@ -6,6 +6,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nom' => 'NavKeys',
 'NavKeys' => 'Navigation by keywords menu.',
 'info' => 'Display a menu composed with the logo of selected keywords or with optionnal icons.',
-'help' => ''
+'help' => '',
+
+'BordHover' => 'Hover'
 );
 ?>

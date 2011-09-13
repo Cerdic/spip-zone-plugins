@@ -17,7 +17,21 @@
   <variable>
     <nom>Nom</nom>
     <type>text</type>
-  </variable>  
+  </variable>
+
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+  <variable>
+    <nom>BordHover</nom>
+    <type>bord</type>
+  </variable>
+
+  <variable>
+    <nom>Margin</nom>
+    <type>text</type>
+  </variable>
   
   <variable>
     <nom>1</nom>

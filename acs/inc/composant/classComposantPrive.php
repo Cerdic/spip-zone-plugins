@@ -289,7 +289,7 @@ class AdminComposant {
 		acs_plieur('plieur_pu'.$n,
 			'pu'.$n,
 			'#',
-			false,
+			true,
 			'if (typeof done'.$n.' == \'undefined\') {
 				AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->class.($this->nic ? '&nic='.$this->nic: '').'\', \'puAjax'.$n.'\');
 				done'.$n.' = true;
@@ -297,19 +297,32 @@ class AdminComposant {
 			_T('acs:dev_infos')
 		).
 		'</div>
-		<div class="pu'.$n.' pliable">';
+		<div class="pu'.$n.'">';
 		
 		if (count($this->cvars))
 			$r .= '<br /><div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
 						'<div class="onlinehelplayer">'.$this->get_cvars_html().'</div>';
 		$r .= '<div id="puAjax'.$n.'" class="puAjax'.$n.'"></div>';
-		$r .= '<hr /><div>'._T('version').' '.$this->class.' <b>'.(($this->version != acs_version()) ? '<span class="alert">'.$this->version.'</span>' : $this->version).'</b></div>';
-		/*
-		if ($spip_version_code < $this->version_spip_min)
-			$r .= '<div class="alert">'._T('acs:spip_trop_ancien', array('min' => spip_version_texte($this->version_spip_min))).'</div>';
-		elseif ($spip_version_code > $this->version_spip_max)
-			$r .= '<div class="alert">'._T('acs:spip_non_supporte', array('max' => spip_version_texte($this->version_spip_max))).'</div>';
-*/
+		$r .= '<hr /><div>'._T('acs:require', array('class' => $this->class, 'version' => $this->version)).' :<br />';
+		foreach($this->necessite as $nec) {
+			$get_version = $nec['id'].'_version';
+			$current_version = is_callable($get_version) ? $get_version() : '';
+			$version = substr($nec['version'], 1, -1);
+			$version = explode(';',$version);
+			$min_version = $version[0];
+			$max_version = $version[1];
+			if (version_compare($min_version, $current_version, '>=')) {
+				$class = 'alert';
+			}
+			else {
+				$class = '';
+			}
+			$necessite .= '<li><span class="'.$class.'">'.$nec['id'].' >= '.$min_version.'</span> : <b>'.$current_version.'</b></li>';
+		}
+		if ($necessite) {
+			$r .= '<ul style="list-style-type: disc;list-style-position: inside;">'.$necessite.'</ul>';
+		}
+		$r .= '</div>';
 		$r .= '</div>';
 		return $r;
 	}

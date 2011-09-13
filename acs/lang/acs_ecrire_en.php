@@ -87,7 +87,6 @@ To use some components from an ACS model in your own SPIP templates, you need to
   'afterUpdate_not_callable' => 'afterUpdate method not found',
   'echec_afterUpdate' => 'afterUpdate failure',
   'err_aucun_composant' => 'No active component for ',
-  'spip_trop_ancien' => 'Do not fit with spip < @min@',
-  'spip_non_supporte' => 'Not approved yet with spip > @max@',
+	'require' => 'require'
 );
 ?>
