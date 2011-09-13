@@ -35,7 +35,7 @@
 		</multi>
 	</nom>
 	<auteur>Fil, kent1</auteur>
-	<version>0.7.1</version>
+	<version>0.7.2</version>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
 	<description>
@@ -53,8 +53,12 @@
 		<action>inserer_javascript</action>
 		<inclure>selecteur_generique_pipelines.php</inclure>
 	</pipeline>
-		<pipeline>
+	<pipeline>
 		<nom>jqueryui_forcer</nom>
+		<inclure>selecteur_generique_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>jquery_plugins</nom>
 		<inclure>selecteur_generique_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />

@@ -8,6 +8,15 @@ function SelecteurGenerique_jqueryui_forcer($plugins){
 	$plugins[] = 'jquery.ui.autocomplete';
 	return $plugins;
 }
+
+function SelecteurGenerique_jquery_plugins($plugins){
+	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
+	AND DESACTIVER_SELECTEUR_GENERIQUE)
+		return $plugins;
+	
+	$plugins[] = 'javascript/jquery.ui.autocomplete.html.js';
+	return $plugins;
+}
 function SelecteurGenerique_inserer_auteur() {
 
 	$ac = generer_url_ecrire('selecteur_generique');
@@ -36,6 +45,7 @@ function SelecteurGenerique_inserer_auteur() {
 					});
 				},
 				delay: 300,
+				html:true,
 				select: function( event, ui ) {
 					if (ui.item.result > 0) {
 						me.attr('name', 'old_value')
