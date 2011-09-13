@@ -1,0 +1,19 @@
+<BOUCLE_spip_organisations(SPIP_ORGANISATIONS){id_auteur}>
+<h4>Mon organisation</h4>
+ <p>[(#NOM)<br />]
+   [Statut&nbsp;:&nbsp;(#STATUT_JURIDIQUE)<br />]
+   [Siret&nbsp;:&nbsp;(#IDENTIFICATION)<br />]
+   [Activit&eacute;&nbsp;:&nbsp;(#ACTIVITE)<br />]
+   [Cr&eacute;&eacute;e le&nbsp;:&nbsp;(#DATE_CREATION)<br />]
+    [Description&nbsp;:&nbsp;(#DESCRIPTIF)</p>
+</BOUCLE_spip_organisations>
+
+
+<B_spip_contacts>
+<h4>Contacts:</h4>
+<BOUCLE_spip_contacts(SPIP_CONTACTS){id_auteur}>
+<p>[#CIVILITE (#NOM) #PRENOM<br />]
+[Fonction&nbsp;:&nbsp;(#FONCTION)<br />]
+[Anniversaire&nbsp;:&nbsp;(#DATE_NAISSANCE)<br />]
+</p>
+</BOUCLE_spip_contacts>     
