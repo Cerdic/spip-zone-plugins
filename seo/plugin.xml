@@ -5,7 +5,7 @@
 	<icon>seo.png</icon>
 	<description>
 		<multi>
-			[fr]SEO est un plugin qui ajoute la possibilité d'insérer dans la partie head de votre site web : meta tags, URL canonique, Google webmaster tools Meta Code et Google Analytics javascript. Il est configurable dans la page de configuration de SPIP ainsi que dans chaque rubrique et article pour les meta tags.
+			[fr]SEO est un plugin qui ajoute la possibilit&#233; d'ins&#233;rer dans la partie head de votre site web : meta tags, URL canonique, Google webmaster tools Meta Code et Google Analytics javascript. Il est configurable dans la page de configuration de SPIP ainsi que dans chaque rubrique et article pour les meta tags.
 			[en]SEO is a plugin who add the possibility to insert in the head of your website: meta tags, canoical URL, Google webmaster tools Meta Code and Google Analytics javascript code. It is fully configurable in the SPIP configuration page and in each article or rubrique page for meta tags.
 		</multi>
 	</description>
