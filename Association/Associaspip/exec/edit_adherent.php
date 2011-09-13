@@ -69,7 +69,7 @@ function exec_edit_adherent_args($id_auteur)
 		echo '</p></a></div></div>';
 
 		$nom = htmlspecialchars($nom_membre);
-		$adh = generer_url_ecrire('edit_adherent',"id=$id_auteur");
+		$adh = generer_url_ecrire('voir_adherent',"id=$id_auteur");
 		$nom = "<a href='$adh' title=\"" . _T('asso:adherent_label_modifier_membre') . "\">" . $nom . "</a>";
 		$coord = '<div style="font-weight: bold; text-align: center" class="verdana1 spip_xx-small">';
 		if ($adresses[$id_auteur]) $coord .= '<br />' . $adresses[$id_auteur] . '<br/>';
