@@ -69,7 +69,7 @@
 	</bouton> 
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
-	<necessite id="projets" version="[0.2;]" />
+	<necessite id="projet" version="[0.2;]" />
 	
 	<categorie>outils</categorie>
 
