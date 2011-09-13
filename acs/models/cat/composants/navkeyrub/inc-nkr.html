@@ -4,7 +4,7 @@
     <B_mots>
     [(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'Titre'}}|!={non}|?{' '})<div class="bloc-title"><a href="[(#URL_PAGE{mots}|parametre_url{id_groupe,#ID_GROUPE})]" title="#TITRE">[(#TITRE|supprimer_numero|couper{80})]</a></div>]
     <ul>
-    <BOUCLE_mots(MOTS){id_groupe}>[(#SET{cl,##LOGO_MOT|couleur_extraire})]
+    <BOUCLE_mots(MOTS){id_groupe}{par num titre,titre}>[(#SET{cl,##LOGO_MOT|couleur_extraire})]
       <li class="menu-item">
         <B_rubriques>
             <ul class="hidden">
