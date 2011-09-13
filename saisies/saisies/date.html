@@ -14,4 +14,4 @@
             valeur=#GET{valeur},
             type=#HTML5|?{date,text},
             class=[(#ENV{class}) ]date})]
-[(#INCLURE{fond=formulaires/dateur/inc-dateur})]
+[(#ENV{disable}|non|et{#ENV{readonly}|non})[(#INCLURE{fond=formulaires/dateur/inc-dateur})]]
