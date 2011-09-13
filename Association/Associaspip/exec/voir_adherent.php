@@ -21,7 +21,8 @@ function exec_voir_adherent(){
 	$id_auteur= intval($_GET['id']);
 	$full = autoriser('associer', 'adherents');
 	$data = sql_fetsel("m.sexe, m.nom_famille, m.prenom, m.validite, m.id_asso, c.libelle",'spip_asso_membres as m LEFT JOIN spip_asso_categories as c ON m.categorie=c.id_categorie', "m.id_auteur=$id_auteur");
-	if ((!$full AND ($id_auteur !== $GLOBALS['visiteur_session']['id_auteur'])) OR !$data) {
+
+	if ((!$full AND ($id_auteur !== intval($GLOBALS['visiteur_session']['id_auteur']))) OR !$data) {
 		include_spip('inc/minipres');
 		echo minipres();
 	} else {
@@ -94,6 +95,10 @@ function exec_voir_adherent(){
 
 		// FICHE HISTORIQUE COTISATIONS
 		echo '<fieldset><legend>'._T('asso:adherent_titre_historique_cotisations').'</legend>';
+		/* si on a l'autorisation admin, on ajoute un bouton pour ajouter une cotisation */
+		if ($full) {
+			echo '<a href="'.generer_url_ecrire('ajout_cotisation', 'id='.$id_auteur).'">'._T('asso:adherent_label_ajouter_cotisation').'</a>';
+		}
 		echo voir_adherent_cotisations($id_auteur, $full);
 
 		echo '</fieldset>';
