@@ -34,6 +34,7 @@ $i = 0;
 foreach ($xml -> Selection as $selection){
 	$id_selection = $selection['code'];
 	$nom_selection = normalise_nom($selection['nom']);
+	message('Selection : '.$selection['nom'].' == '.$nom_selection);
 	foreach($selection -> identifier as $val){
 		$selections[$i]['id_sitra'] = $val;
 		$selections[$i]['id_selection'] = $id_selection;
@@ -42,17 +43,18 @@ foreach ($xml -> Selection as $selection){
 	}
 }
 
-if (SITRA_DEBUG)
+if (SITRA_DEBUG) {
 	echo $hr;
 	sitra_debug('selections',$selections);
-	
-sql_delete('spip_sitra_selections');
+}
 
-if (count($selections))
-	sql_insertq_multi('spip_sitra_selections',$selections);
-else
-	message('Aucune selection', 'erreur');
-	
+if (count($selections)){
+		sql_delete('spip_sitra_selections');
+		sql_insertq_multi('spip_sitra_selections',$selections);
+	} else {
+		message('Aucune selection', 'erreur');
+	}
+
 // si pas en mode debug on supprime le fichier importé
 if (!SITRA_DEBUG) {
 	unlink($fichier_selection);
