@@ -46,12 +46,9 @@ function exec_coloriagedist(){
     			ecrire_metas();    		
     	}	  
 	  }
-	  if ($flag) { 	
-      // FIXME : supprimer uniquement trouver le fichier squelette CSS, cf inc/invalideur	   	
-      //purger_repertoire(_DIR_CACHE, 0); // bourrin: on vide tout le cache
-       suivre_invalideur("page LIKE '%css_coloriage'"); // syntaxe correcte ? 
-    }
-	
+	  if ($flag) 	
+        suivre_invalideur("id=css_coloriage'"); 
+    
 
 	  echo gros_titre(_T('coloriagedist:change_fond'),'', false);
 
