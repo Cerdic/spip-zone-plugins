@@ -31,8 +31,8 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 			return false;
 		}
 
-		if($GLOBALS['meta']['spipmotion_safe_mode'] == 'oui'){
-			$spipmotion_sh = $GLOBALS['meta']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
+		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
+			$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
 		}else{
 			$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
 		}
@@ -133,7 +133,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 					'fullname'	=> $formats[3][$i]
 				);
 			}
-			ecrire_meta('spipmotion_formats',serialize($data['spipmotion_formats']));
+			ecrire_meta('spipmotion_formats',serialize($data['spipmotion_formats']),'','spipmotion_metas');
 
 			/**
 			 * Récupération des codecs disponibles
@@ -163,25 +163,25 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				if(($codecs[2][$i] == 'E') && ($codecs[3][$i] == 'V'))
 					$data['spipmotion_codecs_video_encode'][] = trim($codecs[7][$i]);
 			}
-			ecrire_meta('spipmotion_codecs',serialize($data['spipmotion_codecs']));
-			ecrire_meta('spipmotion_codecs_audio_decode',serialize($data['spipmotion_codecs_audio_decode']));
-			ecrire_meta('spipmotion_codecs_video_decode',serialize($data['spipmotion_codecs_video_decode']));
-			ecrire_meta('spipmotion_codecs_audio_encode',serialize($data['spipmotion_codecs_audio_encode']));
-			ecrire_meta('spipmotion_codecs_video_encode',serialize($data['spipmotion_codecs_video_encode']));
+			ecrire_meta('spipmotion_codecs',serialize($data['spipmotion_codecs']),'','spipmotion_metas');
+			ecrire_meta('spipmotion_codecs_audio_decode',serialize($data['spipmotion_codecs_audio_decode']),'','spipmotion_metas');
+			ecrire_meta('spipmotion_codecs_video_decode',serialize($data['spipmotion_codecs_video_decode']),'','spipmotion_metas');
+			ecrire_meta('spipmotion_codecs_audio_encode',serialize($data['spipmotion_codecs_audio_encode']),'','spipmotion_metas');
+			ecrire_meta('spipmotion_codecs_video_encode',serialize($data['spipmotion_codecs_video_encode']),'','spipmotion_metas');
 
 			/**
 			 * On récupère les filtres bitstream disponibles
 			 */
 			$bitstream_filters = trim($matches[$indexs['bitstream_filters']]);
 			$data['spipmotion_bitstream_filters'] = empty($bitstream_filters) ? array() : preg_split('/\n/', $bitstream_filters);
-			ecrire_meta('spipmotion_bitstream_filters',serialize($data['spipmotion_bitstream_filters']));
+			ecrire_meta('spipmotion_bitstream_filters',serialize($data['spipmotion_bitstream_filters']),'','spipmotion_metas');
 
 			/**
 			 * On récupère les protocoles disponibles
 			 */
 			$protocols = trim($matches[$indexs['protocols']]);
 			$data['spipmotion_protocols'] = empty($protocols) ? array() : preg_split('/\n/', str_replace(':', '', $protocols));
-			ecrire_meta('spipmotion_protocols',serialize($data['spipmotion_protocols']));
+			ecrire_meta('spipmotion_protocols',serialize($data['spipmotion_protocols']),'','spipmotion_metas');
 
 			/**
 			 * On récupère la liste des filtres avfilter
@@ -198,9 +198,9 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_compiler']['avfilter-support'] = false;
 			ksort($data['spipmotion_avfilters']);
 
-			ecrire_meta('spipmotion_avfilters',serialize($data['spipmotion_avfilters']));
+			ecrire_meta('spipmotion_avfilters',serialize($data['spipmotion_avfilters']),'','spipmotion_metas');
 
-			ecrire_meta('spipmotion_compiler',serialize($data['spipmotion_compiler']));
+			ecrire_meta('spipmotion_compiler',serialize($data['spipmotion_compiler']),'','spipmotion_metas');
 
 			/**
 			 * On regarde si ffmpeg2theora est installé
@@ -214,7 +214,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				$data['spipmotion_ffmpeg2theora']['ffmpeg2theora'] = true;
 				$data['spipmotion_ffmpeg2theora']['version'] = $infos[1];
 				$data['spipmotion_ffmpeg2theora']['libtheora_version'] = $infos[2];
-				ecrire_meta('spipmotion_ffmpeg2theora',serialize($data['spipmotion_ffmpeg2theora']));
+				ecrire_meta('spipmotion_ffmpeg2theora',serialize($data['spipmotion_ffmpeg2theora']),'','spipmotion_metas');
 			}
 			
 			/**
@@ -228,7 +228,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				preg_match('/FLVTool2 ([0-9a-z].*)/s',$info,$infos);
 				$data['spipmotion_flvtool2']['flvtool2'] = true;
 				$data['spipmotion_flvtool2']['version'] = $infos[1];
-				ecrire_meta('spipmotion_flvtool2',serialize($data['spipmotion_flvtool2']));
+				ecrire_meta('spipmotion_flvtool2',serialize($data['spipmotion_flvtool2']),'','spipmotion_metas');
 			}
 			
 			/**
@@ -242,7 +242,7 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				preg_match('/flvtool\+\+ ([0-9a-z].*)/s',$info,$infos);
 				$data['spipmotion_flvtoolplus']['flvtoolplus'] = true;
 				$data['spipmotion_flvtoolplus']['version'] = $infos[1];
-				ecrire_meta('spipmotion_flvtoolplus',serialize($data['spipmotion_flvtoolplus']));
+				ecrire_meta('spipmotion_flvtoolplus',serialize($data['spipmotion_flvtoolplus']),'','spipmotion_metas');
 			}
 			
 			/**
@@ -256,20 +256,24 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 				preg_match('/MediaInfoLib - ([0-9a-z].*)/s',$info,$infos);
 				$data['spipmotion_mediainfo']['mediainfo'] = true;
 				$data['spipmotion_mediainfo']['version'] = $infos[1];
-				ecrire_meta('spipmotion_mediainfo',serialize($data['spipmotion_mediainfo']));
+				ecrire_meta('spipmotion_mediainfo',serialize($data['spipmotion_mediainfo']),'','spipmotion_metas');
 			}
+			$inc_meta = charger_fonction('meta', 'inc');
+			$inc_meta('spipmotion_metas');
 		}
 	}else{
-		$data['spipmotion_compiler'] = unserialize($GLOBALS['meta']['spipmotion_compiler']);
-		$data['spipmotion_formats'] = unserialize($GLOBALS['meta']['spipmotion_formats']);
-		$data['spipmotion_codecs'] = unserialize($GLOBALS['meta']['spipmotion_codecs']);
-		$data['spipmotion_bitstream_filters'] = unserialize($GLOBALS['meta']['spipmotion_bitstream_filters']);
-		$data['spipmotion_protocols'] = unserialize($GLOBALS['meta']['spipmotion_protocols']);
-		$data['spipmotion_avfilters'] = unserialize($GLOBALS['meta']['spipmotion_avfilters']);
-		$data['spipmotion_ffmpeg2theora'] = unserialize($GLOBALS['meta']['spipmotion_ffmpeg2theora']);
-		$data['spipmotion_flvtool2'] = unserialize($GLOBALS['meta']['spipmotion_flvtool2']);
-		$data['spipmotion_flvtoolplus'] = unserialize($GLOBALS['meta']['spipmotion_flvtoolplus']);
-		$data['spipmotion_mediainfo'] = unserialize($GLOBALS['meta']['spipmotion_mediainfo']);
+		$data = array();
+		$data['spipmotion_compiler'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
+		$data['spipmotion_formats'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_formats']);
+		$data['spipmotion_codecs'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_codecs']);
+		$data['spipmotion_bitstream_filters'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_bitstream_filters']);
+		$data['spipmotion_protocols'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_protocols']);
+		$data['spipmotion_avfilters'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_avfilters']);
+		$data['spipmotion_ffmpeg2theora'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffmpeg2theora']);
+		$data['spipmotion_flvtool2'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
+		$data['spipmotion_flvtoolplus'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
+		$data['spipmotion_mediainfo'] = unserialize($GLOBALS['spipmotion_metas']['spipmotion_mediainfo']);
+		spip_log($data,'test');
 	}
 	return $data;
 }

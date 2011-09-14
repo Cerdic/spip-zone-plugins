@@ -21,10 +21,13 @@
 				[(#REM)
 					On teste si ffmpeg est compilé avec libvpx
 				]
-				[(#VAL{--enable-libvpx}|in_array{#CONFIG**{spipmotion_compiler/configuration}}|oui)
+				#SET{spipmotion_compiler, #EVAL{$GLOBALS['spipmotion_metas']['spipmotion_compiler']}}
+				#SET{spipmotion_compiler,#GET{spipmotion_compiler}|unserialize|table_valeur{configuration}}
+				[(#GET{spipmotion_compiler}|is_array|oui)
+				[(#VAL{--enable-libvpx}|in_array{#GET{spipmotion_compiler}}|oui)
 					#SET{videos_sortie,#GET{videos_sortie}|push{webm}}
 					#SET{size,5}
-				]
+				]]
 				<label for="fichiers_videos_sortie"><:spipmotion:extensions_video:></label>
 				<select name="fichiers_videos_sortie[]" multiple="multiple" size="#GET{size}">
 					<BOUCLE_videos1_sortie(TYPES_DOCUMENTS){extension IN #GET{videos_sortie}}{par extension}>

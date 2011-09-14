@@ -12,7 +12,7 @@
 			48000,48000 Hz
 		}})]
 
-	#SET{acodecs_existants,#EVAL{$GLOBALS['meta']['spipmotion_codecs_audio_encode']}}
+	#SET{acodecs_existants,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_codecs_audio_encode']}}
 
 	<BOUCLE_ogg(CONDITION){si #ENV{valeur}|in_array{#ARRAY|push{ogg}|push{oga}}|oui}>
 		#SET{acodecs_possibles,#ARRAY|push{libvorbis}}

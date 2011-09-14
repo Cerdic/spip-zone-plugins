@@ -58,7 +58,27 @@ function spipmotion_declarer_tables_principales($tables_principales){
 // Declarer dans la table des tables pour sauvegarde
 function spipmotion_declarer_tables_interfaces($interfaces){
 	$interfaces['table_des_tables']['spipmotion_attentes'] = 'spipmotion_attentes';
+	$interfaces['table_des_tables']['spipmotion_metas'] = 'spipmotion_metas';
 	return $interfaces;
 }
 
+/**
+ * 
+ */
+function spipmotion_declarer_tables_auxiliaires($tables_auxiliaires){	
+	$spip_spipmotion_metas = array(
+		"nom" => "VARCHAR (255) NOT NULL",
+		"valeur" => "text DEFAULT ''",
+		"impt"  => "VARCHAR(3) DEFAULT 'oui' NOT NULL",
+		"maj"   => "TIMESTAMP");
+
+	$spip_spipmotion_metas_key = array(
+		"PRIMARY KEY"   => "nom");
+
+	$tables_auxiliaires['spip_spipmotion_metas'] = array(
+		'field' => &$spip_spipmotion_metas, 
+		'key' => &$spip_spipmotion_metas_key
+	);
+	return $tables_auxiliaires;
+}
 ?>

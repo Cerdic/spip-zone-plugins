@@ -115,8 +115,8 @@
 			[(#REM)
 				On récupère les codecs disponibles dans FFMPEG que l'on a mis dans les métas
 			]
-			#SET{acodecs_existants,#EVAL{$GLOBALS['meta']['spipmotion_codecs_audio_encode']}}
-			#SET{vcodecs_existants,#EVAL{$GLOBALS['meta']['spipmotion_codecs_video_encode']}}
+			#SET{acodecs_existants,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_codecs_audio_encode']}}
+			#SET{vcodecs_existants,#EVAL{$GLOBALS['spipmotion_metas']['spipmotion_codecs_video_encode']}}
 		
 			[(#REM)
 				On récupère l'intersection des codecs disponibles avec les codecs possibles

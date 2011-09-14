@@ -34,11 +34,11 @@ function inc_spipmotion_recuperer_infos($id_document){
 		 * -* flvtool++
 		 * -* flvtool2
 		 */
-		if(isset($GLOBALS['meta']['spipmotion_flvtoolplus'])){
-			$flvtoolplus = unserialize($GLOBALS['meta']['spipmotion_flvtoolplus']);
+		if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus'])){
+			$flvtoolplus = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtoolplus']);
 		}
-		if(isset($GLOBALS['meta']['spipmotion_flvtool2'])){
-			$flvtool2 = unserialize($GLOBALS['meta']['spipmotion_flvtool2']);
+		if(isset($GLOBALS['spipmotion_metas']['spipmotion_flvtool2'])){
+			$flvtool2 = unserialize($GLOBALS['spipmotion_metas']['spipmotion_flvtool2']);
 		}
 		if($flvtoolplus['flvtoolplus']){
 			$movie_chemin_tmp = $movie_chemin.'_tmp';

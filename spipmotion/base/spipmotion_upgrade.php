@@ -15,8 +15,8 @@ include_spip('inc/meta');
 
 function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
-	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
+		|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		include_spip('base/spipmotion');
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
@@ -227,6 +227,34 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 					'', $serveur);
 			}
 			ecrire_meta($nom_meta_base_version,$current_version='0.7.8');
+		}if (version_compare($current_version,'0.7.9','<')){
+			creer_base();
+			effacer_meta('spipmotion_formats');
+			effacer_meta('spipmotion_codecs');
+			effacer_meta('spipmotion_codecs_audio_decode');
+			effacer_meta('spipmotion_codecs_video_decode');
+			effacer_meta('spipmotion_codecs_audio_encode');
+			effacer_meta('spipmotion_codecs_video_encode');
+			effacer_meta('spipmotion_bitstream_filters');
+			effacer_meta('spipmotion_protocols');
+			effacer_meta('spipmotion_avfilters');
+			effacer_meta('spipmotion_compiler');
+			effacer_meta('spipmotion_ffmpeg2theora');
+			effacer_meta('spipmotion_flvtool2');
+			effacer_meta('spipmotion_flvtoolplus');
+			effacer_meta('spipmotion_mediainfo');
+			effacer_meta('spipmotion_ffmpeg_casse');
+			effacer_meta('spipmotion_ffmpeg2theora_casse');
+			effacer_meta('spipmotion_flvtool_casse');
+			effacer_meta('spipmotion_flvtoolplus_casse');
+			effacer_meta('spipmotion_qt-faststart_casse');
+			effacer_meta('spipmotion_spipmotionsh_casse');
+			effacer_meta('spipmotion_ffmpeg-php_casse');
+			effacer_meta('safe_mode');
+			effacer_meta('spipmotion_safe_mode_exec_dir');
+			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
+			$ffmpeg_infos(true);
+			ecrire_meta($nom_meta_base_version,$current_version='0.7.9');
 		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/
@@ -252,15 +280,7 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 function spipmotion_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_drop_table("spip_spipmotion_attentes");
+	sql_drop_table("spip_spipmotion_metas");
 	effacer_meta($nom_meta_base_version);
-	effacer_meta('spipmotion_ffmpeg_casse');
-	effacer_meta('spipmotion_casse');
-	effacer_meta('spipmotion_ffmpeg2theora_casse');
-	effacer_meta('spipmotion_flvtool_casse');
-	effacer_meta('spipmotion_qt-faststart_casse');
-	effacer_meta('spipmotion_spipmotionsh_casse');
-	effacer_meta('spipmotion_ffmpeg-php_casse');
-	effacer_meta('safe_mode');
-	effacer_meta('spipmotion_safe_mode_exec_dir');
 }
 ?>

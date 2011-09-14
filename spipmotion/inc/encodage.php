@@ -75,8 +75,8 @@ function encodage($source,$doc_attente){
 	if($GLOBALS['meta']['spipmotion_casse'] == 'oui')
 		return;
 
-	
-	$ffmpeg_version = lire_config('spipmotion_compiler/ffmpeg_version','0.7');
+	$spimotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
+	$ffmpeg_version = $spipmotion_compiler['ffmpeg_version'] ? $spipmotion_compiler['ffmpeg_version'] : '0.7';
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
 	
 	/**
@@ -259,8 +259,8 @@ function encodage($source,$doc_attente){
 		}
 	}
 
-	if($GLOBALS['meta']['spipmotion_safe_mode'] == 'oui'){
-		$spipmotion_sh = $GLOBALS['meta']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
+	if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
+		$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
 	}else{
 		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
 	}
@@ -364,7 +364,7 @@ function encodage($source,$doc_attente){
 		 */
 		if($vcodec == '--vcodec libx264'){
 			$preset_quality = lire_config("spipmotion/vpreset_$extension_attente",'slow');
-			if(in_array('--enable-pthreads',lire_config('spipmotion_compiler/configuration'))){
+			if(in_array('--enable-pthreads',@unserialize($spipmotion_compiler['configuration']))){
 				$infos_sup_normal .= "-threads 0";
 			}
 			/**
@@ -400,7 +400,8 @@ function encodage($source,$doc_attente){
 		spip_log("on est en $passes passe(s)","spipmotion");
 		$pass_log_file = $dossier.$query.'-pass';
 		
-		if(($encodeur == 'ffmpeg2theora') && (lire_config('spipmotion_ffmpeg2theora/version') > 0)){
+		$ffmpeg2theora = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_ffmpeg2theora']);
+		if(($encodeur == 'ffmpeg2theora') && ($ffmpeg2theora['version'] > 0)){
 			if($passes == 2)
 				$deux_passes = '--two-pass';
 			$encodage = $spipmotion_sh." --force true $video_size --e $chemin --videoquality ".lire_config('spipmotion/qualite_video_ffmpeg2theora_'.$extension_attente,7)." $fps $bitrate $audiofreq $audiobitrate_ffmpeg2theora $audiochannels_ffmpeg2theora --s $fichier_temp $deux_passes --log $fichier_log --encodeur ffmpeg2theora";
@@ -421,9 +422,7 @@ function encodage($source,$doc_attente){
 				}
 				$infos_sup_normal_1 = "--params_supp \"-an $preset_1 -passlogfile $pass_log_file $infos_sup_normal $rotation\"";
 				$encodage_1 = $spipmotion_sh." --force true --pass 1 $video_size --e $chemin $vcodec $fps $bitrate $infos_sup_normal_1 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
-				spip_log($encodage_1,'spipmotion');
 				$lancement_encodage_1 = exec($encodage_1,$retour_1,$retour_int_1);
-				spip_log($retour_int_1,'spipmotion');
 				/**
 				 * La première passe est ok 
 				 * On lance la seconde
@@ -435,10 +434,13 @@ function encodage($source,$doc_attente){
 					}else{
 						$infos_sup_normal = $preset_quality ? "-preset $preset_quality $infos_sup_normal" : $infos_sup_normal;
 					}
-					$metadatas = "-map_meta_data $fichier_temp:$chemin";
-					$infos_sup_normal_2 = "--params_supp \"-passlogfile $pass_log_file $infos_sup_normal $rotation $metadatas\"";
+					$metadatas = "-map_metadata 0:0";
+					$metadatas_supp = '';
+					$metas_orig = @unserialize($source['metas']);
+					
+					$infos_sup_normal_2 = '--params_supp \'-passlogfile '.$pass_log_file.' '.$infos_sup_normal.' '.$rotation.' '.$metadatas.'\'';
 					$fichier_log = "$fichier_log-pass2.log";
-					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2 --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
+					$encodage = $spipmotion_sh." --force true --pass 2 $audiofreq $audiobitrate_ffmpeg $audiochannels_ffmpeg $video_size --e $chemin $acodec $vcodec $fps $bitrate $infos_sup_normal_2  --fpre $fichier_texte --s $fichier_temp --p ".lire_config("spipmotion/chemin","/usr/local/bin/ffmpeg")." --log $fichier_log";
 					spip_log($encodage,'spipmotion');
 					$lancement_encodage = exec($encodage,$retour,$retour_int);
 					spip_log($retour_int,'spipmotion');
@@ -455,7 +457,7 @@ function encodage($source,$doc_attente){
 				if($source['rotation'] == '90'){
 					$rotation = "-vf transpose=1";
 				}
-				$infos_sup_normal .= " -map_meta_data $fichier_temp:$chemin $rotation";
+				$infos_sup_normal .= " -map_metadata 0:0";
 				if($infos_sup_normal){
 					$infos_sup_normal = "--params_supp \"$infos_sup_normal\"";
 				}
@@ -554,6 +556,12 @@ function encodage($source,$doc_attente){
 
 	if(file_exists(_DIR_RACINE.$query.'-0.log')){
 		supprimer_fichier(_DIR_RACINE.$query.'-0.log');
+	}
+	if(file_exists($pass_log_file)){
+		supprimer_fichier($pass_log_file);
+	}
+	if(file_exists($pass_log_file.'.mbtree')){
+		supprimer_fichier($pass_log_file.'.mbtree');
 	}
 	if(file_exists(_DIR_RACINE.$query.'.mbtree')){
 		supprimer_fichier(_DIR_RACINE.$query.'.mbtree');
