@@ -20,7 +20,7 @@
   
  <fieldset><legend><:rssarticle:cron_interval:></legend>
   <p>
-    <label><:rssarticle:cron_interval_timer:><input type="text" name="cron_interval_value" value="[(#ENV{cron_interval_value})]" size="6" class="fondl" />
+    <label><:rssarticle:cron_interval_timer:><input type="text" name="cron_interval_value" value="[(#ENV{cron_interval_value}|!={''}|?{#ENV{cron_interval_value},600})]" size="6" class="fondl" />
     </label>
   </p>
   </fieldset>
@@ -45,7 +45,6 @@
   </fieldset>
  
  
-  <input type="submit" name="_cfg_ok" value="<:OK:>"  class="fondo"/>
-  <input type="reset" value="<:Reset:>" class="fondo" />
+  <input type="submit" name="_cfg_ok" value="<:OK:>"  class="fondo"/>  
   <input type="submit" name="_cfg_delete" value="<:Supprimer:>" class="fondo" />
 </form>
