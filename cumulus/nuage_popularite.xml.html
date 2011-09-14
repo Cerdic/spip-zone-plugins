@@ -1,6 +1,6 @@
-﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<tags>
+﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})][(#SET{notid,[(#CONFIG{cumulus/groupes_mots_exclus}|sinon{#ARRAY}|implode{|}|sinon{-1})]})]<tags>
 #SET{max,0}
-<BOUCLE_maxmot(MOTS){id_groupe!==^((#ENV{notid,-1}))$}>
+<BOUCLE_maxmot(MOTS){id_groupe!==^((#GET{notid,-1}))$}>
         #SET{pop,0}
         <BOUCLE_pop(ARTICLES) {id_mot}>
                 [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
@@ -10,14 +10,16 @@
         ]
 </BOUCLE_maxmot>
 
-<BOUCLE_tags(MOTS){id_groupe!==^((#ENV{notid,-1}))$} {par num titre,titre}>
+<BOUCLE_tags(MOTS){id_groupe!==^((#GET{notid,-1}))$} {par num titre,titre}>
     #SET{pop,0}
     <BOUCLE_popularite(ARTICLES) {id_mot}>
         [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
     </BOUCLE_popularite>
 [(#GET{pop}|>{0}|oui)
-<a href="#URL_MOT" rel="tag" title="[(#GET{pop})/#GET{max}]" style="font-size:[(#EVAL{#GET{max}/#GET{pop}+6}|round)]pt">[(#TITRE|texte_backend|oeuf)]</a>
+[(#SET{poids,[(#EVAL{#GET{max}/#GET{pop}+80})]})] 
+<a href="#URL_MOT" rel="tag" title="[(#GET{pop})/#GET{max}]" style="font-size:[(#GET{poids}|unique|filtre_max{doc}|coef{[(#GET{poids})],350}|sqrt|ceil)]pt">[(#TITRE|texte_backend|oeuf)]</a>
 ]
+
 </BOUCLE_tags>
 </B_tags>
 </tags>
