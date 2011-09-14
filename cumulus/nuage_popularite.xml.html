@@ -1,0 +1,32 @@
+﻿[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<tags>
+#SET{max,0}
+<BOUCLE_maxmot(MOTS){id_groupe!==^((#ENV{notid,-1}))$}>
+        #SET{pop,0}
+        <BOUCLE_pop(ARTICLES) {id_mot}>
+                [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
+        </BOUCLE_pop>
+        [(#GET{pop}|>{[(#GET{max})]}|oui)
+                [(#SET{max,[(#GET{pop})]})]
+        ]
+</BOUCLE_maxmot>
+
+<BOUCLE_tags(MOTS){id_groupe!==^((#ENV{notid,-1}))$} {par num titre,titre}>
+    [(#REM) définir les mot exposés]
+    #SET{expose,''}
+    <BOUCLE_expose(ARTICLES){id_article}{id_mot}{0,1}>
+        #SET{expose,' '}
+    </BOUCLE_expose>
+    [(#ENV{id_mot}|=={#ID_MOT}|oui)
+        #SET{expose,' '}
+    ]
+
+    #SET{pop,0}
+    <BOUCLE_popularite(ARTICLES) {id_mot}>
+        [(#SET{pop,[(#POPULARITE|plus{#GET{pop}})]})]
+    </BOUCLE_popularite>
+[(#GET{pop}|>{0}|oui)
+<a href="#URL_MOT" rel="tag" title="[(#GET{pop})/#GET{max}]" style="font-size:[(#EVAL{#GET{max}/#GET{pop}+6}|round)]pt">[(#TITRE|texte_backend|oeuf)]</a>
+]
+</BOUCLE_tags>
+</B_tags>
+</tags>
