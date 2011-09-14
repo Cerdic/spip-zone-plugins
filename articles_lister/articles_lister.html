@@ -1,0 +1,182 @@
+[<!-- (#REM)
+
+	Lister les articles
+	
+	Squelettes permttant de lister les articles d'un site
+	avec tri par en-tete du tableau.
+
+	@see http://www.quesaco.org/plugin-spip-articles-lister
+	
+	// $LastChangedBy$
+	// $LastChangedDate$
+
+-->][<!-- (#REM)
+
+	Si pas de session, ne rien cacher, 
+	Renvoyer sur la page d'accueil du site.
+
+-->][(#AUTORISER{voirstats,auteur,#ID_AUTEUR}|non)
+	#HTTP_HEADER{Location: #URL_SITE_SPIP}]<!DOCTYPE html>
+<html>[<!-- (#REM)
+
+	Récupérer la valeur de la variable 'tri' si transmise en URL (REQUEST_URL)
+
+-->]#SET{tri,#ENV{tri}} [<!-- (#REM)
+
+
+	Preparer le titre de la page
+	
+	Les traductions de la légende
+	à afficher en complément du titre
+	sont placées dans un tableau.
+
+
+-->][(#SET{legendes_tri,#ARRAY{
+	titre,<:alis:titre:>,
+	date,<:alis:date_publication:>,
+	date_modif,<:alis:date_modification:>,
+	visites,<:alis:nombre_visites:>,
+	popularite,<:alis:popularite:>
+}})
+] [<!-- (#REM)
+
+	Chaine de lang classique, avec array()
+	pour le complément interprété par _T()
+
+-->]#SET{titre_texte_lang,alis:inventaire_articles_par_tri}
+	#SET{page_titre,#GET{titre_texte_lang}
+		|_T{#ARRAY{tri,#GET{legendes_tri}|table_valeur{#GET{tri,visites}}}}
+		|trim
+		}
+[<!-- (#REM)
+
+	Nombre d'items par pagination
+
+-->][(#SET{items_per_page,30})]
+[<!-- (#REM)
+
+	Le contenu de la page !
+
+-->]
+<head>
+<title>#GET{page_titre}</title>
+<meta http-equiv='Content-Type' content='text/html; charset=#CHARSET' />
+<meta name="robots" content="none" />
+<style type="text/css">
+html { font-size: 100%; } 
+body { margin: 0; padding: 0;
+	font-family: "Luxi sans", "Lucida Grande", Lucida, "Lucida Sans Unicode", sans-serif;
+	font-size: 90%; 
+	line-height: 1.4;
+	color: #333; 
+	background: #fff;
+	text-align:center;
+}
+#ventre {
+	margin:0 auto;
+	width:1000px;
+	text-align:#LANG_LEFT
+}
+h1 {
+	text-align:center;
+	font-size: 1.75em; 
+}
+p {
+	font-size:90%;
+	margin: .75em 0;
+	text-align:center;
+} 
+table {
+	width:1000px;
+	margin: 0 auto; 
+	border: 1px solid #666;
+	border-collapse: collapse;
+	border-spacing: 4px; 
+} 
+table td, table th { 
+	padding: 0.25em 2ex;
+	border: 1px solid #ccc;
+	text-align:center;
+	overflow:hidden;
+	text-wrap:none;
+	height:1.4em;
+}
+table th {
+	background-color:#00f;
+	color:#ccf;
+}
+table th.on {
+	background-color:#f00;
+}
+table th a {
+	color:#0f0;
+}
+table tr.pair {}
+table tr.impair { background-color:#cfcfff }
+table td.row_first, table th.row_first {
+	text-align:left;
+}
+.spip-admin-float { display:none }
+</style>
+</head>
+<body> 
+[<!-- (#REM)
+
+	Si tri est transmis par l'url, définir tri=visites
+
+-->]
+<div id="ventre">
+	
+	<h1>#GET{page_titre}</h1>
+
+	<B_articles_lister>
+		[(#ANCRE_PAGINATION)]
+	<table style='font-size:80%;text-align:left'>
+		<tr>
+			<th class="row_first[ (#GET{tri}|=={titre}|?{on})]"><a href="[(#SELF
+				|parametre_url{tri,titre})]"><:alis:titre:></a></th>
+			<th><:alis:long_desc:></th>
+			<th [class="(#GET{tri}|=={date}|?{on})"
+				 ]title="<:alis:date_publication:>"><a href="[(#SELF
+				|parametre_url{tri,date})]"><:alis:date_publication:></a></th>
+			<th [class="(#GET{tri}|=={date_modif}|?{on})"
+				 ]title="<:alis:date_modification:>"><a href="[(#SELF
+				|parametre_url{tri,date_modif})]"><:alis:modification:></a></th>
+			<th [class="(#GET{tri}|=={visites}|?{on})"
+				 ]title="<:alis:nombre_visites:>"><a href="[(#SELF
+				|parametre_url{tri,visites})]">Visites</a></th>
+			<th [class="(#GET{tri}|=={popularite}|?{on})"
+				 ]title="<:popularite:>"><a href="[(#SELF
+				|parametre_url{tri,popularite})]"><:popularite:></a></th>
+		</tr>
+		<BOUCLE_articles_lister(ARTICLES)
+					{par #GET{tri,visites}}
+					{inverse}
+					{pagination #GET{items_per_page}}>
+		<tr[ class="(#COMPTEUR_BOUCLE|alterner{pair,impair})"]>
+			<td class="row_first">
+				<a href="[(#TEST|generer_url_ecrire{exec=articles&id_article=#ID_ARTICLE})]"
+				   title="<:alis:editer_cet_article:> (id=#ID_ARTICLE)">
+					#TITRE
+				</a>
+			</td>
+			<td>[(#DESCRIPTIF|strlen)]</td>
+			<td>#DATE</td>
+			<td>#DATE_MODIF</td>
+			<td>#VISITES</td>
+			<td>#POPULARITE</td>
+		</tr>
+		</BOUCLE_articles_lister>
+	</table>
+	[<p class="pagination">(#PAGINATION) (<:info_total:> #GRAND_TOTAL)</p>]
+	</B_articles_lister>
+	<:vide:>
+	<//B_articles_lister>
+</div>
+<p id="menu_pied">
+	<a href="[(#TEST|generer_url_ecrire)]"><:alis:retour_espace_prive:></a>
+	-
+	<a href="[(#URL_SITE_SPIP|parametre_url{page,articles_lister_export})]"><:alis:exporter_csv:></a>
+</p>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<plugin>
+	<!--  
+
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	 -->
+	<nom>Articles Lister (ALis)</nom>
+	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
+	<version>1.00.00</version>
+	<etat>stable</etat>
+	<icon>images/articles-64.png</icon>
+	
+	<description><strong>ALis</strong> pour lister tous les articles du site.
+		Propose un lien pour l'édition de l'article en espace privé.
+	</description>
+
+	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/plugin-spip-articles-lister]</lien>
+	
+	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	
+	<prefix>alis</prefix>
+	
+	<fonctions>alis_fonctions.php</fonctions>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>alis_autoriser.php</inclure>
+	</pipeline>
+	
+	<bouton id='articles_lister' parent='statistiques_visites'>
+		<icone>images/articles-24.png</icone>
+		<titre>Lister les articles</titre>
+	</bouton>
+
+	<necessite id="SPIP" version="[2.1.6;]" />
+	<categorie>maintenance</categorie>
+</plugin>

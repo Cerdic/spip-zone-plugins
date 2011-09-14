@@ -1,0 +1,41 @@
+[<!-- (#REM)
+
+	Export de la liste des articles au format CSV
+	
+	// $LastChangedBy$
+	// $LastChangedDate$
+	
+	@see http://www.quesaco.org/plugin-spip-articles-lister
+
+-->][<!-- (#REM)
+
+	Si pas de session, ne rien cacher, 
+	Renvoyer sur la page d'accueil du site.
+
+-->][(#AUTORISER{voirstats,auteur,#ID_AUTEUR}|non)
+	#HTTP_HEADER{Location: #URL_SITE_SPIP}]
+[<!-- (#REM)
+
+	Sinon, faire le job.
+	
+	Envoyer directement le fichier...
+	
+-->]#HTTP_HEADER{Content-type: text/plain}
+#HTTP_HEADER{Content-Disposition: attachment; filename="export_liste_articles_#DATE.csv"}
+[<!-- (#REM)
+
+	Ne pas afficher les boutons admin
+
+-->]#EVAL{$GLOBALS['flag_preserver']=1}
+[<!-- (#REM)
+
+	La ligne de titres de colonnes
+
+-->]<:alis:titre:> _ALIS_SEPARATOR_ID _ALIS_SEPARATOR_<:alis:long_desc:> _ALIS_SEPARATOR_<:alis:date_publication:> _ALIS_SEPARATOR_<:alis:date_modification:> _ALIS_SEPARATOR_<:alis:nombre_visites:> _ALIS_SEPARATOR_<:alis:popularite:> _ALIS_SEPARATOR_<:auteur:>
+<B_articles_lister>
+		<BOUCLE_articles_lister(ARTICLES){par date}{inverse}>
+#TITRE _ALIS_SEPARATOR_##ID_ARTICLE _ALIS_SEPARATOR_[(#DESCRIPTIF|strlen)] _ALIS_SEPARATOR_#DATE _ALIS_SEPARATOR_#DATE_MODIF _ALIS_SEPARATOR_#VISITES _ALIS_SEPARATOR_#POPULARITE _ALIS_SEPARATOR_#LESAUTEURS
+		</BOUCLE_articles_lister>
+	</B_articles_lister>
+	<:vide:>
+	<//B_articles_lister>#FILTRE{alis_nettoyer_export}
