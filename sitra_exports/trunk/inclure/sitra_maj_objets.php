@@ -169,6 +169,19 @@ foreach($langues as $langue){
 			$objet_details['langues'] = serialize_non_vide($langues);
 		}
 		
+		// Capacités
+		if ($oi -> Capacites){
+			$capacites = array();
+			foreach ($oi -> Capacites -> CapacitesPrestations as $presta_capacite){
+				foreach($presta_capacite -> DetailCapacitePrestation as $val){
+					$capa = $val -> Capacite;
+					if ($val['utilise'] == 'O' and $capa)
+						ajoute_si_present($capacites, $capa['libelle'].': '.$capa);
+				}
+			}
+			$objet_details['capacites'] = serialize_non_vide($capacites);
+		}
+		
 		// Criteres internes
 		if ($oi -> CriteresInternes  and $premiere_langue){
 			$i = 0;

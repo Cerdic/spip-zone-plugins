@@ -59,7 +59,8 @@ $sitra_objets_details_field = array(
 	'presta_equipements' => 'text NOT NULL',
 	'presta_services' => 'text NOT NULL',
 	'presta_sitra' => 'text NOT NULL',
-	'langues' => 'text NOT NULL'
+	'langues' => 'text NOT NULL',
+	'capacites' => 'text NOT NULL'
 	);
 
 $sitra_objets_details_key = array(

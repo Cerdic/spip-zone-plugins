@@ -98,7 +98,7 @@ function sitra_code_email($mail=''){
 
 
 // affichage normalise des telephones
-function sitra_norme_tel($num, $sep=' ') {
+function sitra_norme_tel($num, $sep='&nbsp;') {
 	$num = preg_replace('`[^\d]`', '', $num);
 	if (!$num)
 		return;
