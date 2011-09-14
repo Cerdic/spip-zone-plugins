@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>Cumulus</nom>
 	<auteur>Adaptation Anne-lise Martenot
@@ -6,10 +5,11 @@ _ Licence GNU/GPL
 	</auteur>
 	<lien>http://www.spip-contrib.net/</lien>
 	<icon>cumulus.png</icon>
-	<version>1.0</version>
+	<version>1.1</version>
 	<etat>stable</etat>
 <description>
 Ce plugin permet d'utiliser WP-cumulus voir http://www.roytanck.com/2008/03/15/wp-cumulus-released/
+ <a href="/?page=cumulus_exemple">Demo avec nuage version 3.2.1</a>
 </description>
 	<prefix>cumulus</prefix>
   <fonctions>cumulus_fonctions.php</fonctions>
@@ -18,4 +18,5 @@ Ce plugin permet d'utiliser WP-cumulus voir http://www.roytanck.com/2008/03/15/w
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="nuage" version="[1.4;]" />
 	<utilise id="palette" version="[1.0;]" />
+    <necessite id="lib:swfobject" src="http://swfobject.googlecode.com/files/swfobject_2_2.zip" />
 </plugin>

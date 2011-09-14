@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>Exemple Cumulus XML - CFG swfobject 2.2</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+#INSERT_HEAD
+[<!--(#REM) debut partie du code a recopier dans la balise <head> de votre page -->]
+[(#REM) Cumulus ]
+[(#SET{gmt,[(#CONFIG{cumulus/groupes_mots_exclus}|implode{|}|sinon{-1})]})]
+<script type="text/javascript" src="#CHEMIN{lib/swfobject/swfobject.js}"></script>
+<script type="text/javascript">
+	var flashvars = {};
+		flashvars.tcolor="0x[(#CONFIG{cumulus/couleur_1}|no_diese|sinon{333333})]";
+		flashvars.tcolor2= "0x[(#CONFIG{cumulus/couleur_2}|no_diese|sinon{009900})]";
+		flashvars.hicolor="0x[(#CONFIG{cumulus/couleur_survol}|no_diese|sinon{000000})]";
+		flashvars.tspeed="[(#CONFIG{cumulus/vitesse}|sinon{100})]";
+		flashvars.distr="true";
+		flashvars.xmlpath="[(#URL_PAGE{nuage_popularite.xml})[&notid=(#GET{gmt})]]";
+	var params = {};
+		params.quality = "best";
+		params.wmode = "[(#CONFIG{cumulus/transparent}|=={on}|?{transparent,''})]";
+		params.bgcolor = "[(#CONFIG{cumulus/couleur_fond}|sinon{#FFFFFF})]";
+	var attributes = {};
+	attributes.align = "middle";
+		swfobject.embedSWF("#CHEMIN{tagcloud.swf}", "[(#CONFIG{cumulus/bloc_cumulus}|sinon{cumulus})]", "[(#CONFIG{cumulus/largeur}|sinon{200})]", "[(#CONFIG{cumulus/hauteur}|sinon{200})]", "9.0.0", "expressInstall.swf", flashvars, params, attributes);
+</script
+[<!--(#REM) fin partie du code a recopier dans la balise <head> de votre page -->]
+
+</head>
+	<body> 
+	<h5> Cet exemple s'utilise avec le dernier plugin nuage version 3.2.1</h5>
+[<!--(#REM) debut partie du code a recopier ou vous voulez dans la balise <body> de votre page-->]        
+	[<div id="[(#CONFIG{cumulus/bloc_cumulus}|sinon{cumulus})]">
+            <h2><:mots_clefs:></h2> 
+        (#MODELE{nuage_popularite,notid=#GET{gmt}})
+        </div>]
+[<!--(#REM) fin partie du code a recopier ou vous voulez dans la balise <body> de votre page-->]	
+	</body>
+
+</html>
+
+	[(#REM) voir aussi
+	http://code.google.com/p/swfobject/
+	http://egypte.olympe-network.com/swfobject-francais.html#methode-dynamique
+	http://www.bobbyvandersluis.com/swfobject/generator/index.html
+	http://www.roytanck.com/2009/03/11/how-to-use-wp-cumulus-shortcodes/
+	]
