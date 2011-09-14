@@ -39,15 +39,23 @@
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 	</pipeline>
-	
+
+	<!-- Ajout automatique de l'auteur edité comme membre -->
 	<pipeline>
 		<nom>post_edition</nom>
 		<inclure>inc/post_edition.php</inclure>
 	</pipeline>
 	
+	<!-- Interface avec la page auteur infos-->
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>inc/lien_page_auteur.php</inclure>
+	</pipeline>
+
+	<!-- Autorisations -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>association_autorisations.php</inclure>
 	</pipeline>
 	
 	<categorie>divers</categorie>
