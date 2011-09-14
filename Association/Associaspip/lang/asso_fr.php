@@ -248,6 +248,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_label_voir_membre' => 'Voir le membre',
 	'adherent_label_page_du_membre' => 'Page du membre',
 	'adherent_label_voir_operation' => 'Voir l\'op&eacute;ration comptable',
+	'adherent_label_rejoindre_association' => 'Devenir membre de l\'association',
 
 	# Message
 	'suppression_des_adherents' => 'Suppression des adh&eacute;rents',

@@ -1,0 +1,22 @@
+<BOUCLE_auteurs(ASSO_MEMBRES){id_auteur=#ENV{id_auteur}}>
+<div class="iconifier">
+	<div class="cadre cadre-r">
+		<img class="cadre-icone" src="#CHEMIN{'img_pack/annonce.gif'}">
+		<a href="#URL_ECRIRE{voir_adherent, id=#ID_AUTEUR}">
+			<div class="titrem"><:asso:adherent_label_page_du_membre:></div>
+		</a>
+	</div>
+</div>
+</BOUCLE_auteurs>
+</B_auteurs>
+	[(#AUTORISER{associer, adherents})
+		<div class="iconifier">
+			<div class="cadre cadre-r">
+				<img class="cadre-icone" src="#CHEMIN{'img_pack/annonce.gif'}">
+				<a href="#URL_ACTION_AUTEUR{ajouter_membre, #ID_AUTEUR, ./?exec=voir_adherent&id=#ID_AUTEUR}">
+					<div class="titrem"><:asso:adherent_label_rejoindre_association:></div>
+				</a>
+		</div>
+	</div>
+	]
+<//B_auteurs>
