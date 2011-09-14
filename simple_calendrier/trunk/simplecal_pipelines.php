@@ -15,27 +15,16 @@ include_spip('inc/simplecal_utils');
 // Pipeline. Entete des pages de l'espace privé
 function simplecal_header_prive($flux){
     $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'simplecal_style_prive.css" />';
-    
-    //  CSS DatePicker : voir dans 'prive/css/datepicker/' - plus de thèmes : http://jqueryui.com/themeroller/
-    $theme_prive = $GLOBALS['meta']['simplecal_themeprive'];
-    // ---
-    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.theme.css" />';
-    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.core.css" />';
-    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.datepicker.css" />';
-    // ---    
-    
     return $flux;
 }
 
 // Pipeline. Entete des pages de l'espace public
 function simplecal_insert_head($flux) {
-    
-    //  CSS DatePicker : voir dans 'prive/css/datepicker/' - plus de thèmes : http://jqueryui.com/themeroller/
+    //  CSS DatePicker : voir dans 'prive/css/datepicker/' - thèmes basé sur : http://jqueryui.com/themeroller/
     $theme_public = $GLOBALS['meta']['simplecal_themepublic'];
     // ---
-    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.theme.css" />';
-    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.core.css" />';
-    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.datepicker.css" />';
+    $rc = "\n";
+    $flux .= $rc.'<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'.css" />';
     // ---    
     
     return $flux;
@@ -102,7 +91,7 @@ function simplecal_affiche_milieu($flux) {
     
     // On se trouve sur un article
     if ($exec == 'articles'){
-                
+        
     }
     
     // On se trouve sur la page d'un mot clé
@@ -157,7 +146,6 @@ function simplecal_configurer_liste_metas($metas) {
     $metas['simplecal_autorisation_redac'] = 'non'; // [oui, non]
     $metas['simplecal_rubrique'] = 'non'; // [non, secteur, partout]
     $metas['simplecal_refobj'] = 'non';   // [oui, non]
-    $metas['simplecal_themeprive'] = 'base';
     $metas['simplecal_themepublic'] = 'base';
     return $metas;
 }
@@ -334,5 +322,13 @@ function simplecal_rechercher_liste_des_champs($tables){
 
     return $tables;
 }
+
+
+// pipeline : pour que le plugin spip-jqueryui rappatrie jquery-ui
+function simplecal_jqueryui_forcer($scripts){
+    $scripts[] = "jquery.ui.datepicker";
+    return $scripts;
+}
+
 
 ?>

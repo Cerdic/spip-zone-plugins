@@ -4,15 +4,15 @@
     </nom>
 	<auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
     <licence>GPL &#169; 2010-2011</licence>
-	<version>1.0</version>
-    <version_base>1.2</version_base>
+	<version>1.1</version>
+    <version_base>1.3</version_base>
 	<etat>stable</etat>
+    <necessite id="jqueryui" version="[1.8.15;]" />
 	
 	<description>
     <multi>
     [fr]Un simple calendrier pour planifier des &eacute;v&egrave;nements.
-_ - utilise la librairie javascript [jquery.ui.datepicker->http://jqueryui.com]
-_ - themes css pour le datepicker provenant du [themeroller-> http://jqueryui.com/themeroller/]
+_   (Th&egrave;mes pour le mini-calendrier bas&eacute;s sur [jquery-ui themeroller-> http://jqueryui.com/themeroller/])
     [en]A simple calendar for events planification.
     </multi>
 	</description>
@@ -155,6 +155,13 @@ _ - themes css pour le datepicker provenant du [themeroller-> http://jqueryui.co
         <nom>pre_boucle</nom>
         <inclure>public/simplecal_boucles.php</inclure>
     </pipeline>
+    
+    <!-- Pour l'integration de jquery-ui -->
+    <pipeline>
+        <nom>jqueryui_forcer</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+
     
     
 	<bouton id="bt_simplecal_accueil" parent="naviguer">

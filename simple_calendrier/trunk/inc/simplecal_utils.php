@@ -244,20 +244,15 @@ function simplecal_get_where_rubrique_exclure($avec_and=true){
 
 
 function simplecal_liste_themes($select_name, $choix){
-    // Version Php5 : ne fonctionne pas facilement sous OVH
-    //$dir_theme = _DIR_SIMPLECAL_PRIVE.'css/datepicker/';
-    //$dirs = scandir($dir_theme, 0);
-    //$dirs = array_slice ($dirs, 2); 
-
     // Version Php4                    
     $dir_theme = _DIR_SIMPLECAL_PRIVE.'css/datepicker/';
     $dh  = opendir($dir_theme);
     while (false !== ($filename = readdir($dh))) {
-        $dirs[] = $filename;
+        if (substr($filename, -4, 4) == ".css"){
+            $dirs[] = substr($filename, 0, strlen($filename)-4);
+        }
     }
     sort($dirs);
-    $dirs = array_slice ($dirs, 2); // retire les 2 premiers dossiers (. et ..)
-
     // -----
     
     $s="";

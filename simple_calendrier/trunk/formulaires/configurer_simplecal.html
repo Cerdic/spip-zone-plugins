@@ -92,19 +92,9 @@
             <ul>
                 <li>
                     <p><:simplecal:config_themes_explication:></p>
-                    [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_themeprive})</span>]
                     [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_themepublic})</span>]
                     
                     <table>
-                    <tr>
-                        <th>
-                            <:simplecal:config_themeprive:> :
-                            <br /><small>(<:simplecal:config_datepicker:>)</small>
-                        </th>
-                        <td valign="top">
-                            [(#VAL{simplecal_themeprive}|simplecal_liste_themes{#ENV{simplecal_themeprive}})]
-                        </td>
-                    </tr>
                     <tr>
                         <th>
                             <:simplecal:config_themepublic:> :

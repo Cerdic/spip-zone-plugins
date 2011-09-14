@@ -80,6 +80,18 @@ function simplecal_upgrade($simplecal_base_version, $version_cible){
             ecrire_meta($simplecal_base_version, $current_version=1.2);
             spip_log("- Opération terminée : MDD du plugin simple-calendrier : v1.1 -> v1.2", "simplecal");
         }
+        
+        // Si la version courante est inférieure à la version 1.3
+        if ($current_version < 1.3){
+            spip_log("- Mise à jour MDD du plugin simple-calendrier vers la version 1.3", "simplecal");
+            
+            echo "Simple calendrier - m.a.j MDD v1.3<br />";
+            effacer_meta('simplecal_themeprive');
+            
+            // -- Mise à jour de la version de la base
+            ecrire_meta($simplecal_base_version, $current_version=1.3);
+            spip_log("- Opération terminée : MDD du plugin simple-calendrier : v1.2 -> v1.3", "simplecal");
+        }
     }
 
 }
@@ -99,7 +111,6 @@ function simplecal_vider_tables($simplecal_base_version) {
     effacer_meta('simplecal_autorisation_redac');
     effacer_meta('simplecal_rubrique');
     effacer_meta('simplecal_refobj');
-    effacer_meta('simplecal_themeprive');
     effacer_meta('simplecal_themepublic');
 
     spip_log("- Opération terminée : désinstallation du plugin Simple-calendrier.", "simplecal");
