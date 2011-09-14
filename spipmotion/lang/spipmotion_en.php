@@ -8,8 +8,8 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// B
-	'bitrate' => 'Video bitrate of the output in kb/s: ',
-	'bitrate_audio' => 'Audio bitrate of the output in kb/s: ',
+	'bitrate' => 'Video bitrate of the output in kb/s',
+	'bitrate_audio' => 'Audio bitrate of the output in kb/s',
 	'bouton_encoder' => 'Encode',
 	'bouton_reencoder_tout' => 'Encode again all files',
 	'bouton_reencoder_tout_format' => 'Encode again all files in @format@',
@@ -20,7 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'caption_avfilter_geres' => 'Video filters (avfilters) managed',
 	'caption_codecs_geres' => 'Supported Codecs',
 	'caption_formats_geres' => 'Supported formats',
-	'chemin_executable' => 'Path to FFmpeg on the server:',
+	'chemin_executable' => 'Path to FFmpeg on the server',
 	'choix_debug_mode' => 'In debug mode, the webmaster receives mail information to each succeeded or failed encoding',
 	'choix_encodage_auto' => 'The files will be automatically added in the encoding queue when they are inserted to the database',
 	'codec_type_audio' => 'Audio',
@@ -38,7 +38,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_binaire' => 'One or several softwares needed for the plugin are not available on the system.',
 	'erreur_chemin_ffmpeg' => 'No encoding can be performed because the path does not work.',
 	'erreur_document_plus_disponible' => 'This document is not available on the website anymore',
+	'erreur_formulaire_configuration' => 'The form contains at least one error.',
 	'erreur_script_spipmotion_non_executable' => 'The script spipmotion.sh was not found or is not executable.',
+	'erreur_valeur_int' => 'This value must be an integer.',
+	'erreur_valeur_int_superieur' => 'This value must be greater than @val@.',
 	'erreur_verifier_droits' => 'The encoding script "script_bash/spipmotion.sh" is not executable.',
 	'explication_encodeur' => 'If you choose the ffmpeg2theora encoder to your Ogg video, the choice of audio and video codecs become useless.',
 	'explication_framerate' => 'Leave this field blank to keep the same framerate than the original',
@@ -55,15 +58,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ffmpeg2theora_install' => 'FFMpeg2Theora on your server:',
 	'flvtool2_install' => 'Flvtool2 on your server:',
 	'flvtoolplus_install' => 'FLVtool + + on your server:',
-	'framerate' => 'Frame rate: ',
-	'frequence_audio' => 'Audio frequency: ',
+	'framerate' => 'Frame rate',
+	'frequence_audio' => 'Audio frequency',
 
 	// G
 	'gestion_format_entree' => 'Management of input formats',
 	'gestion_format_sortie' => 'Management of output formats',
 
 	// H
-	'height_video' => 'Height of the output in px: ',
+	'height_video' => 'Height of the output in px',
 
 	// I
 	'info_aucun_resultat_attente' => 'No documents awaiting encoding.',
@@ -117,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_profils_video' => 'Video encoding profile(s)',
 	'info_reencoder' => 'Encode (again)',
 	'info_relancer_erreurs' => 'Resume all encodings in error',
-	'info_rotation' => 'Rotation angle:',
+	'info_rotation' => 'Angle of rotation:',
 	'info_selectionner_fichier_encoder' => 'You can encode one of the following files',
 	'info_statut_encode_en_cours' => 'Ongoing',
 	'info_statut_encode_erreur' => 'Error',
@@ -201,7 +204,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'select_all' => 'Select all',
 	'spipmotion_boite' => 'Configuration of SPIPmotion',
 	'spipmotion_descriptif' => 'This plugin allows to encode audio and video files.',
-	'spipmotion_liens' => 'Additional links: ',
 
 	// T
 	'th_avfilter_description' => 'Description',
@@ -239,7 +241,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'version_encodee_de' => 'This document is an encoded version of the document ID @id_orig@',
 
 	// W
-	'width_video' => 'Width of the output in px: '
+	'width_video' => 'Width of the output in px'
 );
 
 ?>
