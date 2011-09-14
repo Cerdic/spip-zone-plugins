@@ -20,12 +20,12 @@ et si vous utilisez agenda,[ le flux spip2spip (agenda)->../spip.php?page=backen
 	<fonctions>spiptospip_fonctions.php</fonctions>
 	<bouton id='spip2spip1' parent='naviguer'>
 		<titre>spiptospip:titre</titre>
-		<icone>img_pack/icon.png</icone>
+		<icone>img_pack/icon_spip2spip.png</icone>
 		<url>spip2spip</url>
 	</bouton>
 	<bouton id='spip2spip2' parent='bando_activite'>
 		<titre>spiptospip:titre</titre>
-		<icone>img_pack/icon.png</icone>
+		<icone>img_pack/icon_spip2spip.png</icone>
 		<url>spip2spip</url>
 	</bouton>	
 	<!-- pipelines -->	
