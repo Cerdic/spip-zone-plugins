@@ -23,6 +23,7 @@ include_once _DIR_RESTREINT."inc/envoyer_mail.php";
  *     string nom_envoyeur : un nom d'envoyeur pour completer l'email from
  *     string cc : destinataires en copie conforme
  *     string bcc : destinataires en copie conforme cachee
+ *     string|array repondre_a : une ou plusieurs adresses à qui répondre
  *     string adresse_erreur : addresse de retour en cas d'erreur d'envoi
  *     array pieces_jointes : listes de pieces a embarquer dans l'email, chacune au format array :
  *       string chemin : chemin file system pour trouver le fichier a embarquer
@@ -39,7 +40,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 	$message_texte	= '';
 
 	// si $corps est un tableau -> fonctionnalites etendues
-	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur
+	// avec entrees possible : html, texte, pieces_jointes, nom_envoyeur, ...
 	if (is_array($corps)) {
 		$message_html	= $corps['html'];
 		$message_texte	= nettoyer_caracteres_mail($corps['texte']);
@@ -48,6 +49,7 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 		$from = (isset($corps['from'])?$corps['from']:$from);
 		$cc = $corps['cc'];
 		$bcc = $corps['bcc'];
+		$repondre_a = $corps['repondre_a'];
 		$adresse_erreur = $corps['adresse_erreur'];
 		$headers = (isset($corps['headers'])?$corps['headers']:$headers);
 		if (is_string($headers))
@@ -119,6 +121,15 @@ function inc_envoyer_mail($destinataire, $sujet, $corps, $from = "", $headers = 
 				$facteur->AddBCC($courriel);
 		else
 			$facteur->AddBCC($bcc);
+	}
+	
+	// S'il y a des copies cachées à envoyer
+	if ($repondre_a){
+		if (is_array($repondre_a))
+			foreach ($repondre_a as $courriel)
+				$facteur->AddReplyTo($courriel);
+		else
+			$facteur->AddReplyTo($repondre_a);
 	}
 	
 	// S'il y a des pièces jointes on les ajoute proprement
