@@ -4,15 +4,18 @@
  *
  */
 function rssarticle_taches_generales_cron($taches_generales){
+  $delai =  60*10; // valeur defaut: ts les 10 min 
+  
   // si cfg dispo, on charge les valeurs
   if (function_exists(lire_config))  {
-        $delai = intval(lire_config('rssarticle/cron_interval_value')); 
-        if ($delai<10)    
-                  $delai=10;        // securite pour les valeurs absurdes ou si CFG n'est pas renseigne
-        $taches_generales['rssarticle_copie'] = $delai;        
-  } else { // sinon valeur par defaut
-	      $taches_generales['rssarticle_copie'] = 60*10; // ts les 10 min 
-  }
+        if (lire_config('rssarticle/cron_interval_value')!="") {    // verifier si champs CFG a ete renseigne sur ce plugin (retro-compat)       
+            $delai = intval(lire_config('rssarticle/cron_interval_value')); 
+            if ($delai<10)    
+                      $delai=10;        // securite pour les valeurs absurdes             
+        }      
+  } 
+	$taches_generales['rssarticle_copie'] = $delai;
+  
 	return $taches_generales;
 }
 
