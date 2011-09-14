@@ -15,7 +15,7 @@ et si vous utilisez agenda,[ le flux spip2spip (agenda)->../spip.php?page=backen
 	<install>base/spip2spip_upgrade.php</install>
 	<categorie>edition</categorie>
 	<prefix>spip2spip</prefix>
-	<icon>img_pack/icon.png</icon>
+	<icon>img_pack/icon_spip2spip.png</icon>
 	<options>spiptospip_options.php</options>
 	<fonctions>spiptospip_fonctions.php</fonctions>
 	<bouton id='spip2spip1' parent='naviguer'>
