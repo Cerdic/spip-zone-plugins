@@ -1,6 +1,6 @@
 <BOUCLE0(AUTEURS){tout}{id_auteur=#ENV{id}}{lang_select}><?php
 if ([(#ID_AUTEUR|securiser_acces{#ENV{cle},transmettre,#ENV{op}, #ENV{args}}|?{1,0})]) {
-?><BOUCLE1(spip_mesabonnes){par date_modif}>#NOM,#EMAIL,#LANG,[(#DATE_MODIF|affdate{Y-m-d})]
+?><BOUCLE1(spip_mesabonnes){par date_modif}{statut=publie}>#NOM,#EMAIL,#LANG,[(#DATE_MODIF|affdate{Y-m-d})]
 </BOUCLE1>
 <?php
 } else {

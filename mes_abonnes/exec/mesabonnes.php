@@ -16,23 +16,37 @@ function exec_mesabonnes(){
     
     echo debut_gauche('',  true);
     echo debut_droite('', true);
-    echo "<p>"._T('mesabonnes:export_abonnes')."</p>";
+    echo "<h1>"._T('mesabonnes:export_abonnes')."</h1>";
     
-    // inspi ecrire/inc/stastiques.php		
-		include_spip('inc/acces');		
-		$args = array();
-		$args['id_article']='-mesabonnes-'.date('Y-m-d');
-		$fond = "mesabonnes";
-	  $args = param_low_sec($fond, $args, '', 'transmettre');
-	  $url = generer_url_public('transmettre', $args);
-	  echo "<ul><li><a href='$url'>"._T('mesabonnes:export_abonnes_csv')."</a></li>";
-	  
-	  $args = array();
-	  $args['id_article']='-mesabonnes-bulk-'.date('Y-m-d');
-	  $fond = "mesabonnes_maxbulk";
-	  $args = param_low_sec($fond, $args, '', 'transmettre');
-	  $url = generer_url_public('transmettre', $args);
-	  echo "<li><a href='$url'>"._T('mesabonnes:export_abonnes_csv_bulk')."</a></li></ul>";
+    if ($res = sql_select('id_abonne', 'spip_mesabonnes','statut="publie"')) {         
+        if ($res and sql_count($res)>0) {
+	          // inspi ecrire/inc/stastiques.php	
+            include_spip('inc/invalideur');
+          	include_spip('inc/acces');		
+        		$args = array();
+        		$args['id_article']='-mesabonnes-'.date('Y-m-d'); 
+            suivre_invalideur("id='".$args['id_article']."'");	   // on purge le cache pour avoir l'export a jour	
+        		$fond = "mesabonnes";
+        	  $args = param_low_sec($fond, $args, '', 'transmettre');
+        	  $url = generer_url_public('transmettre', $args);
+        	  echo "<ul><li><a href='$url'>"._T('mesabonnes:export_abonnes_csv')."</a></li>";
+        	  
+        	  $args = array();
+        	  $args['id_article']='-mesabonnes-bulk-'.date('Y-m-d');
+        	  suivre_invalideur("id='".$args['id_article']."'");	   // on purge le cache pour avoir l'export a jour
+        	  $fond = "mesabonnes_maxbulk";
+        	  $args = param_low_sec($fond, $args, '', 'transmettre');
+        	  $url = generer_url_public('transmettre', $args);
+        	  echo "<li><a href='$url'>"._T('mesabonnes:export_abonnes_csv_bulk')."</a></li></ul>"; 
+            
+            echo "<p>"._T('mesabonnes:export_abonnes_compte', array('compte' => sql_count($res)))."</p>";              
+        }  else {
+            echo "<p><i>"._T('mesabonnes:export_abonnes_rien')."</i></p>";
+        }
+    }
+
+    
+
 		
 	}	else { 
 		echo "<strong>Vous n'avez pas acc&egrave;s &agrave; cette page.</strong>"; 
