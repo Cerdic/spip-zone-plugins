@@ -15,7 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'back' => 'retour',
 
 // C
-'copy_spip2spip' => 'Spip2Spip: Copie SPIP &agrave;  SPIP',
+'copy_spip2spip' => 'Spip2Spip: Copie SPIP &agrave; SPIP',
 'config_spip2spip' => 'Configurer',
 
 // F
@@ -24,12 +24,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_s2s_3' => 'Ajouter ce site',
 
 // H
-'how_to' => 'Pensez &agrave;  bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
+'how_to' => 'Pensez &agrave; bien attribuer les mots-cl&eacute;s du groupe - spip2spip - [<a href=\'?exec=mots_tous\'>Voir le groupe</a>]<br /><br />
 - attribuez les mots cl&eacute;s de ce groupe aux <strong>articles</strong> dont vous voulez envoyer le contenu vers les autres spip2spip<br /><br />
-- attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s &agrave;  une th&eacute;matique donn&eacute;e.',
+- attribuez les mots cl&eacute;s de ce groupe aux <strong>rubriques</strong> dans lequelles vous voulez importer les articles spip2spip li&eacute;s &agrave; une th&eacute;matique donn&eacute;e.',
 
 // I
-'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP &agrave;  l\'autre.</p>',
+'intro_spip2spip' => '<strong>SPIP 2 SPIP</strong><br /><p>Permet de recopier automatiquement des articles d\'un SPIP &agrave; l\'autre.</p>',
 'install_spip2spip' => 'Installation des tables de spip2spip',
 'install_spip2spip_1' => 'Cr&eacute;ation de la table SQL',
 'install_spip2spip_2' => 'Ajout des flux backends',
@@ -39,25 +39,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 -* attribuez les mots cl&eacute;s de ce groupe aux {{articles}} que vous voulez envoyer vers les sites utilisant spip2spip.
 -* attribuez les mots cl&eacute;s de ce groupe aux {{rubriques}} dans lequelles vous voulez importer les articles spip2spip sur cette th&eacute;matique',
 'install_spip2spip_99' => '<p>Installation de SPIP2SPIP compl&egrave;te !</p><a href=\'?exec=spip2spip\'>Retourner sur l\'interface principale de SPIP2SPIP</a>',
-'imported_already' => 'Article d&eacute;j&agrave;  import&eacute;',
+'imported_already' => 'Article d&eacute;j&agrave; import&eacute;',
 'imported_new' => 'Nouvel article',
 'imported_update' => 'Article mis &agrave; jour  ',
 'event_ok' => 'Ajout d\'un &eacute;v&eacute;nement ',
 'imported_view' => 'Consulter l\'article import&eacute;',
-'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave;  rien</p>',
+'installed' => 'spip2spip est install&eacute;. cette page ne sert plus &agrave; rien</p>',
 
 // L
 'last_syndic' => 'Derni&egrave;re syndication',
 
 // N
-'no_target' => 'aucune rubrique li&eacute;e &agrave;  ce mot cl&eacute;',
+'no_target' => 'aucune rubrique li&eacute;e &agrave; ce mot cl&eacute;',
 'not_installed' => 'spip2spip n\'est pas encore install&eacute;.<p><a href=\'?exec=spip2spip_install\'>installer spip2spip</a></p>',
 
 // O
 'origin_url' => 'L\'adresse originale de cet article est',
 
 // S
-'site_manage' => 'Gestion des sites &agrave;  synchroniser',
+'site_manage' => 'Gestion des sites &agrave; synchroniser',
 'site_available' => 'Sites inscrits',
 'site_add' => 'Ajouter un nouveau site',
 
