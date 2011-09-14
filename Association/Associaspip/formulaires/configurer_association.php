@@ -153,7 +153,6 @@ function formulaires_configurer_association_traiter_dist($form) {
 	$query = sql_select('nom', 'spip_association_metas', "nom LIKE 'meta_utilisateur_%'");
 	while ($row = sql_fetch($query)) {
 		$metas_list[$row['nom']]=0;
-		spip_log("META UT: ".$row['nom']);
 	}
 
 	/* ignorer les changements fait dans un module non active */
