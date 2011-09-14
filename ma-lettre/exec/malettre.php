@@ -50,20 +50,25 @@ function exec_malettre(){
 
   // si cfg dispo, on charge les valeurs
   if (function_exists(lire_config))  {
-      $id_article_edito = lire_config('malettre/id_article_edito');
-      //choix listes
-      $lister_articles=lire_config('malettre/lister_articles');
-      $lister_evenements=lire_config('malettre/lister_evenements');
-      $expediteurs = array();
-      for ($i=1;$i<4;$i++) {
-        if (trim(lire_config("malettre/expediteur_email$i"))!="")
-              $expediteurs[lire_config("malettre/expediteur_nom$i")] = lire_config("malettre/expediteur_email$i");
-      }
-      $adresses = array();
-      for ($i=1;$i<8;$i++) {
-        if (trim(lire_config("malettre/adresse_email$i"))!="")
-              $adresses[lire_config("malettre/adresse_nom$i")] = lire_config("malettre/adresse_email$i");
-      }
+      if (lire_config('malettre')!="") {   // CFG installe et configurer sur Ma-lettre
+        $id_article_edito = lire_config('malettre/id_article_edito');
+        
+        //choix listes
+        $lister_articles=lire_config('malettre/lister_articles');
+        $lister_evenements=lire_config('malettre/lister_evenements');
+        $expediteurs = array();
+        for ($i=1;$i<4;$i++) {
+          if (trim(lire_config("malettre/expediteur_email$i"))!="")
+                $expediteurs[lire_config("malettre/expediteur_nom$i")] = lire_config("malettre/expediteur_email$i");
+        }
+        $adresses = array();
+        for ($i=1;$i<8;$i++) {
+          if (trim(lire_config("malettre/adresse_email$i"))!="")
+                $adresses[lire_config("malettre/adresse_nom$i")] = lire_config("malettre/adresse_email$i");
+        }
+      } else {    // si CFG est installe mais pas configurer sur Ma-lettre
+         $lister_articles="on";
+      }        
   } else $lister_articles="on";
     
   
@@ -375,8 +380,8 @@ function exec_malettre(){
               if($lister_articles=="on"){
               	      #on peut affiner le contexte au besoin
               	      $contexte = array(
-			'lang'=> $cond_lang_sql,
-			);
+                			'lang'=> $cond_lang_sql,
+                			);
                 $malettre_articles=recuperer_fond("prive/listes/inc-lister-articlesmalettre",$contexte, array('ajax'=>true));	
 
               }
@@ -384,8 +389,8 @@ function exec_malettre(){
               if($lister_evenements=="on"){
               	 #on peut affiner le contexte au besoin
               	      $contexte = array(
-			'lang'=> $cond_lang_sql,
-			);
+                			'lang'=> $cond_lang_sql,
+                			);
                 $malettre_evenements=recuperer_fond("prive/listes/inc-lister-evenementsmalettre",$contexte, array('ajax'=>true));	
      
               }; 
