@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Par',
 
 	// C
-	'cfg_description' => 'Ce plugin permet d\'ajouter aisément des tags aux articles.',
+	'cfg_description' => 'Ce plugin permet d\'ajouter aisément des tags aux articles.', # MODIF
 
 	// E
 	'explication_ajout_tag' => 'Pour ajouter plusieurs tags à la fois, utilise le séparateur : "@separateur@".',
@@ -46,12 +46,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tag_deja_present' => 'Tu avais déjà ajouté ce tag.',
 	'tag_supprime' => 'Tu as supprimé le tag :<br />@name@',
 	'tags' => 'Tags :',
-	'tags_ajoutes' => 'Tu as ajouté plusieurs tags :<br />@name@',
-	'tags_supprimes' => 'Tu as supprimé plusieurs tags :<br />@name@',
+	'tags_ajoutes' => 'Tu as ajouté plusieurs tags :<br />@name@', # MODIF
+	'tags_supprimes' => 'Tu as supprimé plusieurs tags :<br />@name@', # MODIF
 	'title_tag_utilise_nb' => 'Ce mot clé est associé par @nb@ personnes.',
 	'title_tag_utilise_un' => 'Ce mot clé est associé par une personne.',
 	'to' => 'avec',
-	'types_utilisateurs' => 'Qui a accès au formulaire ?',
+	'types_utilisateurs' => 'Qui a accès au formulaire ?', # MODIF
 
 	// V
 	'vos_tags' => 'Tes tags (modification)',

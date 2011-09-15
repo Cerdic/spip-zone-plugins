@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Per',
 
 	// C
-	'cfg_description' => 'Aquest connector permet afegir fàcilment etiquetes als articles.',
+	'cfg_description' => 'Aquest connector permet afegir fàcilment etiquetes als articles.', # MODIF
 
 	// E
 	'explication_ajout_tag' => 'Per afegir diverses etiquetes a la vegada, utilitzeu el separador: "@separateur@".',
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'title_tag_utilise_nb' => 'Aquesta paraula clau està associada per @nb@ persones.',
 	'title_tag_utilise_un' => 'Aquesta paraula clau està associada per una persona.',
 	'to' => 'amb',
-	'types_utilisateurs' => 'Qui té accés al formulari?',
+	'types_utilisateurs' => 'Qui té accés al formulari?', # MODIF
 
 	// V
 	'vos_tags' => 'Les vostres etiquetes (modificació)',

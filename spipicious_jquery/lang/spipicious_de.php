@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Von',
 
 	// C
-	'cfg_description' => 'Dieses Plugin ermöglicht einfaches Taggen von Artikeln.',
+	'cfg_description' => 'Dieses Plugin ermöglicht einfaches Taggen von Artikeln.', # MODIF
 
 	// E
 	'explication_ajout_tag' => 'Um mehrere Tags auf einmal zuzuordnen, verwenden sie bitte das Trennzeichen "@separateur@".',
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'title_tag_utilise_nb' => 'Dieses Schlagwort wurde von @nb@ Besuchern zugeordnet.',
 	'title_tag_utilise_un' => 'Dieses Schlagwort wurde von einem Besucher zugeordnet.',
 	'to' => 'mit',
-	'types_utilisateurs' => 'Wer hat Zugriff auf das Formular?',
+	'types_utilisateurs' => 'Wer hat Zugriff auf das Formular?', # MODIF
 
 	// V
 	'vos_tags' => 'Ihre Tages (Änderung)',

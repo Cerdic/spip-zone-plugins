@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'Por',
 
 	// C
-	'cfg_description' => 'Esti complementu permite amestar fácilmente etiquetes a los artículos.',
+	'cfg_description' => 'Esti complementu permite amestar fácilmente etiquetes a los artículos.', # MODIF
 
 	// E
 	'explication_ajout_tag' => 'P\'amestar delles etiquetes a la vez, utiliza el separador: "@separateur@".',
@@ -46,12 +46,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tag_deja_present' => 'Yá teníes amestao esta etiqueta.',
 	'tag_supprime' => 'Desaniciasti la etiqueta:<br />@name@',
 	'tags' => 'Etiquetes:',
-	'tags_ajoutes' => 'Vienes d\'amestar delles etiquetes:<br />@name@',
-	'tags_supprimes' => 'Vienes de desaniciar delles etiquetes:<br />@name@',
+	'tags_ajoutes' => 'Vienes d\'amestar delles etiquetes:<br />@name@', # MODIF
+	'tags_supprimes' => 'Vienes de desaniciar delles etiquetes:<br />@name@', # MODIF
 	'title_tag_utilise_nb' => 'Esta pallabra clave la usaron @nb@ persones.',
 	'title_tag_utilise_un' => 'Esta pallabra clave la utilizó una persona.',
 	'to' => 'con',
-	'types_utilisateurs' => '¿Quién tien accesu al formulariu?',
+	'types_utilisateurs' => '¿Quién tien accesu al formulariu?', # MODIF
 
 	// V
 	'vos_tags' => 'Les tos etiquetes (cambéu)',
