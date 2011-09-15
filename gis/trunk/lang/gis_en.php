@@ -17,12 +17,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_supprimer_lien' => 'Remove this link',
 
 	// C
-	'cfg_descr_gis' => 'Geographic Information System.<br />Link to the documentation.',
+	'cfg_descr_gis' => 'Geographic Information System.<br />Link to the documentation.', # MODIF
 	'cfg_inf_adresse' => 'Displays additional address fields (country, city, state, address ...)',
 	'cfg_inf_cloudmade' => 'This API needs a key you can create on <a href=\'@url@\'>the CloudMade website</a>.',
 	'cfg_inf_geocoder' => 'Enable search function in form.', # MODIF
 	'cfg_inf_geolocaliser_user_html5' => 'If the user\'s browser allows it, its approximate geographic location is retrieved to give the default position when creating a new point.',
 	'cfg_inf_google' => 'This API needs a key you can create on <a href=\'@url@\'>the GoogleMaps website</a>.',
+	'cfg_inf_yandex' => 'Cette API n&eacute;cessite une cl&eacute; &agrave; cr&eacute;er sur <a href=\'@url@\'>le site de Yandex</a>.', # NEW
 	'cfg_lbl_adresse' => 'Show address fields',
 	'cfg_lbl_api' => 'Geolocation API',
 	'cfg_lbl_api_cloudmade' => 'CloudMade',
@@ -30,12 +31,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_api_googlev3' => 'Google Maps v3',
 	'cfg_lbl_api_key_cloudmade' => 'CloudMade API key',
 	'cfg_lbl_api_key_google' => 'GoogleMaps API key',
+	'cfg_lbl_api_key_yandex' => 'Cl&eacute; Yandex', # NEW
 	'cfg_lbl_api_mapquest' => 'MapQuest',
 	'cfg_lbl_api_microsoft' => 'Microsoft Bing',
-	'cfg_lbl_api_multimap' => 'MultiMap',
 	'cfg_lbl_api_openlayers' => 'OpenLayers',
-	'cfg_lbl_api_openspace' => 'OpenSpace',
-	'cfg_lbl_api_yahoo' => 'Yahoo',
+	'cfg_lbl_api_ovi' => 'Ovi Nokia', # NEW
+	'cfg_lbl_api_yandex' => 'Yandex', # NEW
 	'cfg_lbl_geocoder' => 'Geocoder',
 	'cfg_lbl_geolocaliser_user_html5' => 'At the creation step, center the map on the location of the user',
 	'cfg_titre_gis' => 'GIS',
@@ -46,6 +47,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'editer_gis_nouveau' => 'Create a new point',
 	'editer_gis_titre' => 'The geolocated points',
 	'erreur_recherche_pas_resultats' => 'No point corresponds to the searched text.',
+	'explication_api_forcee' => 'L\'API est imposée par un autre plugin ou squelette.', # NEW
 
 	// F
 	'formulaire_creer_gis' => 'Create a new geolocated point :',
