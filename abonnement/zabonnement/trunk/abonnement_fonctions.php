@@ -12,11 +12,11 @@ function modifier_date($givendate,$day=0,$mth=0,$yr=0)
 
 /**
 
-filtre unique pour determiner l'accès (en cascade) d'un auteur à un objet, ce filtre teste si l'auteur 
-- est lié à la zone restreinte à laquelle appartient la rubrique
+filtre unique pour determiner l'acces (en cascade) d'un auteur e un objet, ce filtre teste si l'auteur 
+- est lie e la zone restreinte e laquelle appartient la rubrique
 - a un abonnement direct si article 
 - a un abonnement direct si rubrique
-- a un abonnement à la rubrique parente si article
+- a un abonnement e la rubrique parente si article
 - a un abonnement si la date de validite correspond a la date_utile de la rubrique si exact est demande
 
 [(#SESSION{id_auteur}|abonne_objet{rubrique,#ID_RUBRIQUE}|oui) <:acces_ouvert:> ]
@@ -47,7 +47,7 @@ if (is_numeric($id_objet)){
 	
 	$rubrique = sql_fetsel('date_utile,id_parent','spip_rubriques',"id_rubrique=".intval($id_rubrique));
 
-	//si l'auteur a accès a la rubrique via une zone
+	//si l'auteur a acces a la rubrique via une zone
 	$zones=accesrestreint_zones_rubrique($id_rubrique);
 	//ou si id_parent est dans la zone -> deprotege la rubrique enfant
 	$id_parent=$rubrique['id_parent'];
@@ -59,7 +59,7 @@ if (is_numeric($id_objet)){
 	}
 	
 	foreach($objets as $objet => $id_objet){
-	//si l'auteur a accès a l'article - ou sa rubrique - ou a la rubrique elle meme
+	//si l'auteur a acc‚àö¬©s a l'article - ou sa rubrique - ou a la rubrique elle meme
 		$where = array();
 		$where[] = "id_objet=".intval($id_objet);
 		$where[] = "objet='$objet'";

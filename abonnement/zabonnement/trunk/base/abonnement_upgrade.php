@@ -5,7 +5,7 @@
 * Copyright (c) 2011
 * Anne-lise Martenot elastick.net / BoOz booz@rezo.net 
 * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
-* Pour plus de details voir le fichier COPYING.txt.
+* Pour plus de details voir le fichier COPYING.txt
 *  
 **/
 

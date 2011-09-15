@@ -72,12 +72,18 @@ function action_valider_paiement_fictif_dist($arg=null) {
 		}
 
 	// maintenant on decide que la commande est paye (statut peut etre > attente,partiel,erreur) 
-	//cf plugin commandes_paypal
-	//ça bloque là
+	$statut_nouveau = 'paye';
+	//cf plugin commandes_paypal _pipelines
+			// Si c'est bon, on appelle une notification
+		if($reponse_banque=='ok'){
+			$id_auteur = $commande['id_auteur'];
+			$fonction_notif = charger_fonction('notifications', 'inc/');
+			$fonction_notif('commande_instituer', $id_commande, array('ancien_statut' => $statut_commande, 'nouveau_statut' => $statut_nouveau));
+		}
 	
-		include_spip('action/instituer_commande');
-		$statut_commande='paye';
-		action_instituer_commande($id_commande,$id_auteur,$statut_commande);
+		//include_spip('action/instituer_commande');
+		//$statut_commande='paye';
+		//action_instituer_commande($id_commande,$id_auteur,$statut_commande);
 	
 	//ici quelque soit le produit, l'abonnnement, l'article etc
 	//on envoie le mail (de confirmation ou d'echec) de la commande? avec code d'acces au compte

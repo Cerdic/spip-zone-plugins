@@ -36,7 +36,7 @@
 			<td class='commande'>
 			#SET{id_commande,''}
 				<BOUCLE_quellecommand(COMMANDES_DETAILS){id_commandes_detail}>
-				<a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a>#SET{id_commande,#ID_COMMANDE}
+				[<a href="#URL_ECRIRE{commande_voir,id_commande=#ID_COMMANDE}">(#ID_COMMANDE)</a>]#SET{id_commande,#ID_COMMANDE}
 				</BOUCLE_quellecommand><:abo:aucune_commande:><//B_quellecommand>
 			</td>
 			<td class='relance'>[(#STADE_RELANCE)]</td>

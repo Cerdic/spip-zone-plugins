@@ -4,7 +4,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function editer_contactabonnement($arg=null)
 {
-
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
@@ -22,7 +21,7 @@ function editer_contactabonnement($arg=null)
 	$id_commandes_detail=$arg['id_commandes_detail'];
 	$stade_relance=$arg['stade_relance'];
 	
-	if (_DEBUG_ABONNEMENT) spip_log("editer_contactabonnement1 $objet et ".$ids[0],'abonnement');
+	if (_DEBUG_ABONNEMENT) spip_log("editer_contactabonnement $objet ".$ids[0]." pour $id_auteur",'abonnement');
 
 	if(is_array($ids) && $id_auteur>0)
 	foreach($ids as $key => $id_objet)
@@ -31,6 +30,8 @@ function editer_contactabonnement($arg=null)
 		{
 			//objet = rubrique, article ou abonnement
 			$verif = sql_fetsel('*', $table, 'id_'."$objet = " . $id_objet);
+			//le statut change-t-il?
+			$contact_abo = sql_fetsel('statut_abonnement', 'spip_contacts_abonnements', 'id_commandes_detail='.$id_commandes_detail);
 			if (!$verif) 
 			{
 				if (_DEBUG_ABONNEMENT) spip_log("$objet $id_objet inexistant",'abonnement');
@@ -43,6 +44,7 @@ function editer_contactabonnement($arg=null)
 			//la duree par defaut est fixee a 3 jours
 			$duree=($arg['duree'])?$arg['duree']:'3';
 			$periode=($arg['periode'])?$arg['periode']:'jours';
+			include_spip('abonnement_fonctions');
 			$validite = modifier_date($date,$duree);
 			
 			//specific a abonnement
@@ -81,8 +83,16 @@ function editer_contactabonnement($arg=null)
 					'id_commandes_detail'=>$id_commandes_detail,
 					'statut_abonnement'=>$statut
 					));
-			}else{
+			}else{					
 				if (_DEBUG_ABONNEMENT) spip_log("editer_contactabonnement pour auteur=$id_auteur $objet $id_objet existe deja",'abonnement');
+
+				//si le statut est different on le modifie
+				//attention dans la page auteur modification chaque fois todo a revoir
+				if($contact_abo['statut_abonnement']!=$statut){
+				sql_updateq("spip_contacts_abonnements",array('statut_abonnement'=>$statut),
+					'id_auteur='.$id_auteur.' and id_objet='.sql_quote($id_objet)." and objet='$objet'");
+				if (_DEBUG_ABONNEMENT) spip_log("editer_contactabonnement modification du statut car ".$contact_abo['statut_abonnement']."!=$statut",'abonnement');
+				}
 				//modif des dates d'echeances
 				$echeances = _request('validites');
 				if($echeances[$key]!='' && ($echeances[$key]!=$deja['validite'])){

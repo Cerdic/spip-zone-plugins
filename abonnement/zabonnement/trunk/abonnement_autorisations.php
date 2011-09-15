@@ -10,7 +10,7 @@ function autoriser_abonnement_bouton_dist($faire, $type, $id, $qui, $opt) {
 }
 
 function autoriser_abonnement_configurer_dist($faire, $type, $id, $qui, $opt) {
-	return autoriser('configurer', '', $id, $qui, $opt);
+	return in_array($qui['statut'], array('0minirezo'));
 }
 
 function autoriser_abonnement_modifier_dist($faire, $type, $id, $qui, $opt) {
