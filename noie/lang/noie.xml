@@ -11,6 +11,9 @@
 		<traducteur nom="mark_baber" />
 	</langue>
 	<langue code="es" />
+	<langue code="eu">
+		<traducteur nom="otalazt" />
+	</langue>
 	<langue code="fa" />
 	<langue code="fi" />
 	<langue code="fr_tu" />
