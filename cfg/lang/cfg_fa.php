@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_changement' => 'تغييري در <b>@nom@</b> يافت نشد',
 
 	// R
-	'refus_configuration_administrateur' => 'فقط مديرا سايت مجازاند اين پارامتر‌ها را اصلاح كنند. ',
+	'refus_configuration_administrateur' => 'فقط مديران سايت مجازاند اين پارامتر‌ها را اصلاح كنند. ',
 	'refus_configuration_webmestre' => 'فقط وب‌ مسترهاي سايت مجازند اين پارامترها را اسلاح كنند. ',
 	'reset' => 'حذف ',
 

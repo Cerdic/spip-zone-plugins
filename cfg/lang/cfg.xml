@@ -13,7 +13,9 @@
 	<langue code="es">
 		<traducteur nom="filou" />
 	</langue>
-	<langue code="fa" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>
