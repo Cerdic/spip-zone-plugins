@@ -14,33 +14,33 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_parcourir_mediatheque' => 'Mediathek durchsuchen',
 
 	// C
-	'construire_action_annuler' => 'Annuler', # NEW
-	'construire_action_configurer' => 'Configurer', # NEW
-	'construire_action_deplacer' => 'Déplacer', # NEW
-	'construire_action_dupliquer' => 'Dupliquer', # NEW
-	'construire_action_dupliquer_copie' => '(copie)', # NEW
-	'construire_action_supprimer' => 'Supprimer', # NEW
-	'construire_ajouter_champ' => 'Ajouter un champ', # NEW
-	'construire_attention_enregistrer' => 'N\'oubliez pas d\'enregistrer vos modifications !', # NEW
-	'construire_attention_modifie' => 'Le formulaire ci-dessous est diff&eacute;rent du formulaire initial. Vous avez la possibilit&eacute; de le r&eacute;initialiser &agrave; son &eacute;tat avant vos modifications.', # NEW
-	'construire_attention_supprime' => 'Vos modifications comportent des suppressions de champs. Veuillez confirmer l\'enregistrement de cette nouvelle version du formulaire.', # NEW
-	'construire_aucun_champs' => 'Il n\'y a pour l\'instant aucun champ dans ce formulaire.', # NEW
-	'construire_confirmer_supprimer_champ' => 'Voulez-vous vraiment supprimer ce champ ?', # NEW
-	'construire_info_nb_champs_masques' => '@nb@ champ(s) masqué(s) le temps de configurer le groupe.', # NEW
-	'construire_position_explication' => 'Indiquez devant quel autre champ sera plac&eacute; celui-ci.', # NEW
-	'construire_position_fin_formulaire' => '&Agrave; la fin du formulaire', # NEW
-	'construire_position_fin_groupe' => '&Agrave; la fin du groupe @groupe@', # NEW
-	'construire_position_label' => 'Position du champ', # NEW
-	'construire_reinitialiser' => 'R&eacute;initialiser le formulaire', # NEW
-	'construire_reinitialiser_confirmer' => 'Vous allez perdre toutes vos modifications. &Ecirc;tes-vous s&ucirc;r de vouloir revenir au formulaire initial ?', # NEW
-	'construire_verifications_aucune' => 'Aucune', # NEW
-	'construire_verifications_label' => 'Type de v&eacute;rification &agrave; effectuer', # NEW
+	'construire_action_annuler' => 'Abbrechen',
+	'construire_action_configurer' => 'Konfigurieren',
+	'construire_action_deplacer' => 'Verschieben',
+	'construire_action_dupliquer' => 'Duplizieren',
+	'construire_action_dupliquer_copie' => '(Kopie)',
+	'construire_action_supprimer' => 'Löschen',
+	'construire_ajouter_champ' => 'Feld hinzufügen',
+	'construire_attention_enregistrer' => 'Vergessen Sie nicht, Ihre Änderungen zu speichern.',
+	'construire_attention_modifie' => 'Das untere Formular unterscheidet sich vom ursprünglichen. Sie können es in den Zustand vor den Änderungen zurücksetzen.',
+	'construire_attention_supprime' => 'Ihre Änderungen umfassen das Löschen von Feldern. Bitte bestätigen das Speichern dieser neuen Version des Formulars.',
+	'construire_aucun_champs' => 'Dieses Formular enthält noch keine Felder.',
+	'construire_confirmer_supprimer_champ' => 'Wollen Sie dieses Feld wirklich löschen?',
+	'construire_info_nb_champs_masques' => '@nb@ Feld/er während der Konfiguration der Gruppe ausgeblendet.',
+	'construire_position_explication' => 'Geben Sie an, vor welchem anderen Feld dieses erscheinen soll.',
+	'construire_position_fin_formulaire' => 'Am Ende des Formulars',
+	'construire_position_fin_groupe' => 'Am Ende der Gruppe @groupe@',
+	'construire_position_label' => 'Feldposition',
+	'construire_reinitialiser' => 'Formular neu initialisieren',
+	'construire_reinitialiser_confirmer' => 'Alle Ihre Änderungen werden verlorengehen. Wollen Sie wirklich das ursprüngliche Formular wieder herstellen?',
+	'construire_verifications_aucune' => 'Keine',
+	'construire_verifications_label' => 'Art der Überprüfung',
 
 	// E
-	'erreur_option_nom_unique' => 'Ce nom est déjà utilisé par un autre champ et il doit être unique dans ce formulaire.', # NEW
+	'erreur_option_nom_unique' => 'Dieser Name wird bereits für ein anderes Feld verwendet; er kann in diesem Formular nur einmal verwendet werden.',
 
 	// I
-	'info_configurer_saisies' => 'Page de test des Saisies', # NEW
+	'info_configurer_saisies' => 'Testseite der Eingabefelder.',
 
 	// L
 	'label_annee' => 'Jahr',
@@ -56,11 +56,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_aff_rub_interface_label' => 'Mehrsprachige Anzeige',
 	'option_attention_explication' => 'Nachricht wichtiger als Meldung',
 	'option_attention_label' => 'Achtung',
-	'option_autocomplete_defaut' => 'Laisser par défaut', # NEW
-	'option_autocomplete_explication' => 'Au chargement de la page, votre navigateur peut pré-remplir le champ en fonction de son historique', # NEW
-	'option_autocomplete_label' => 'Pré-remplissage du champ', # NEW
-	'option_autocomplete_off' => 'Désactiver', # NEW
-	'option_autocomplete_on' => 'Activer', # NEW
+	'option_autocomplete_defaut' => 'Standardeinstellung belassen',
+	'option_autocomplete_explication' => 'Beim Laden der Seite kann Ihr Browser das Feld mit bereits verwendeten Werten vorausfüllen.',
+	'option_autocomplete_label' => 'Feld vorausfüllen',
+	'option_autocomplete_off' => 'Deaktivieren',
+	'option_autocomplete_on' => 'Aktivieren',
 	'option_cacher_option_intro_label' => 'Erste leere Auswahl ausblenden',
 	'option_choix_destinataires_explication' => 'Einer oder mehrere Empfänger, welche der Besucher auswählen kann. Wenn er keine Auswahl trifft, geht die Nachricht an den ersten Administrator (Autor 1).',
 	'option_choix_destinataires_label' => 'Mögliche Empfänger',
