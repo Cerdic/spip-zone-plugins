@@ -10,7 +10,7 @@
 <BOUCLE_a(TRADLANG tradlang_modules){id_tradlang}>
 <li class="editer_statut">
 	<label><:tradlang:label_tradlang_status:></label>
-	<select class="text crayon_active" name="#ENV{name_statut}">
+	<select class="text crayon_active" name="#ENV{name_statut}" id="statut">
 		<option value="OK"[(#STATUT|=={OK}|oui)selected="selected"]><:tradlang:str_status_traduit:></option>
 		<option value="MODIF"[(#STATUT|=={MODIF}|oui)selected="selected"]><:tradlang:str_status_modif:></option>
 		<option value="NEW"[(#STATUT|=={NEW}|oui)selected="selected"]><:tradlang:str_status_new:></option>
@@ -30,7 +30,7 @@
 	<label><:tradlang:label_proposition_google_translate:></label>
 	<textarea readonly="readonly" id="google_translate" class="crayon-active" style="width:#ENV{largeur}px;">[(#VALEUR|table_valeur{translatedText})]</textarea>
 	</div>
-	<p><a href="#" onclick="cQuery('#str').val(cQuery('#google_translate').val());return false;"><:tradlang:lien_utiliser_google_translate:></a></p>]
+	<p><a href="#" onclick="cQuery('#str').val(cQuery('#google_translate').val());cQuery('#statut').val('OK');return false;"><:tradlang:lien_utiliser_google_translate:></a></p>]
 	</BOUCLE_google_translate>
 </li>
 </BOUCLE_orig>

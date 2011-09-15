@@ -7,46 +7,48 @@
 <//B_strings_ok>
 </BOUCLE_langues_sort>
 #SET{langues,#GET{langues}|langues_sort}
-<B_modules>
+<B_langues_totales>
 <table class="bilan spip liste">
 	<thead>
 		<tr class="first_row">
-			<th class="lang">
-			<BOUCLE_modules(TRADLANG_MODULES){par id_tradlang_module}>
-			<th class="module #MODULE" title="[(#NOM_MOD|attribut_html)]">
-				<abbr title="[(#NOM_MOD|attribut_html)]">[(#NOM_MOD|couper{10})]</abbr>
+			<th></th>
+			<BOUCLE_langues_totales(POUR){tableau #GET{langues}}>
+			<th class="lang #CLE" title="[(#CLE|traduire_nom_langue)]">
+				<abbr title="[(#CLE|traduire_nom_langue)]">[(#CLE)]</abbr>
 			</th>
-			</BOUCLE_modules>
+			</BOUCLE_langues_totales>
 		</tr>
 	</thead>
-	<B_langues>
+	<B_modules_lang>
 	<tbody>
-	<BOUCLE_langues(POUR){tableau #GET{langues}}>
-	<tr class="#CLE[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" title="#CLE">
-		<td>[(#CLE|traduire_nom_langue)]</td>
-		<BOUCLE_modules_langue(TRADLANG_MODULES){par id_tradlang_module}>
-			#SET{full,''}
-			#SET{langue_mere,#LANG_MERE}
-			<BOUCLE_compte_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_mere>
-			#SET{full,#TOTAL_BOUCLE}
-			</B_compte_mere>
-			<BOUCLE_compte(TRADLANG){module}{lang=#_langues:CLE}{statut=OK}> </BOUCLE_compte>
+	<BOUCLE_modules_lang(TRADLANG_MODULES){par module,nom_mod,id_tradlang_module}>
+	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]" title="[(#NOM_MOD|attribut_html)]">
+		<td>[(#NOM_MOD)]</td>
+		#SET{full,''}
+		#SET{langue_mere,#LANG_MERE}
+		<BOUCLE_compte_langue_mere(TRADLANG){module}{lang=#LANG_MERE}> </BOUCLE_compte_langue_mere>
+		#SET{full,#GRAND_TOTAL}
+		</B_compte_langue_mere>
+		<BOUCLE_langue_module(POUR){tableau #GET{langues}}>
+			<BOUCLE_compte_tradlang(TRADLANG){module}{lang=#CLE}{statut=OK}> </BOUCLE_compte_tradlang>
 			#SET{class,'non_traduit'}
 			[(#TOTAL_BOUCLE|=={#GET{full}}|oui)#SET{class,traduit_full}]
 			[(#TOTAL_BOUCLE|=={#GET{full}}|non)
 			[(#TOTAL_BOUCLE|>={#GET{full}|div{100}|mult{60}}|oui)#SET{class,traduit}]]
-			[(#_langues:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#_langues:CLE})]">#TOTAL_BOUCLE</a></td>]
-			[(#_langues:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#TOTAL_BOUCLE</td>]
-			</B_compte>
-			<td class="non_traduit"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#_langues:CLE})]"> - </a></td>
-			<//B_compte>
-		</BOUCLE_modules_langue>
+			[(#_langue_module:CLE|!={#GET{langue_mere}}|oui)<td class="#GET{class}"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#CLE})]">#TOTAL_BOUCLE</a></td>]
+			[(#_langue_module:CLE|=={#GET{langue_mere}}|oui)<td class="[(#GET{class})] lang_mere">#TOTAL_BOUCLE</td>]
+			</B_compte_tradlang>
+			<td class="non_traduit"><a href="[(#URL_PAGE{traduction}|parametre_url{etape,traduction}|parametre_url{module,#MODULE}|parametre_url{lang_cible,#CLE})]"> - </a></td>
+			<//B_compte_tradlang>
+		</BOUCLE_langue_module>
 	</tr>
-	</BOUCLE_langues>
+	</BOUCLE_modules_lang>
 	</tbody>
-	</B_langues>
+	</B_modules_lang>
 </table>
-</B_modules>
+</B_langues_totales>
+bof
+<//B_langues_totales>
 <script type='text/javascript'><!--
 var modules = [];
 $('table.bilan th').each(function(i){
