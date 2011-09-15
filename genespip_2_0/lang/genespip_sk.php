@@ -10,7 +10,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A
 	'a_ete_mise_a_la_poubelle' => 'bol hodený do koša',
 	'acces_non' => 'Prístupové práva » obmedzené',
-	'acces_oui' => 'Droits d´accès » détails des fiches', # NEW
+	'acces_oui' => 'Prístupové práva » Podrobnosti o súboroch',
 	'acces_restreint' => 'Prístup na túto stránku je obmedzený',
 	'administrateur' => 'Administrátor',
 	'adresse' => 'Adresa',
@@ -23,203 +23,203 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'arbre_asc' => 'Spodná časť stromu',
 	'article_spip_lie' => 'Odkaz na článok v SPIPE číslo',
 	'aucune_fiche_possede_numero' => 'Takéto číslo nemá žiaden záznam ',
-	'avec' => 'avec', # NEW
+	'avec' => 's',
 
 	// B
 	'base_contient' => 'Databáza obsahuje',
-	'base_genespip' => 'Base GeneSpip', # NEW
+	'base_genespip' => 'Databáza GeneSpip',
 
 	// C
-	'cellules_creees' => 'Cellules créées', # NEW
-	'cellules_occupees' => 'Cellules occupées', # NEW
-	'centans' => 'Interdire l‘affichage des dates de moins de 100 ans', # NEW
-	'charger' => 'Charger', # NEW
-	'choisir' => 'Choisir', # NEW
-	'cliquer_ici_pour_lier_article_avec_fiche' => 'Cliquer ici pour lier l´article à la fiche', # NEW
-	'confirmer' => 'Confirmer', # NEW
-	'contact' => 'Contact', # NEW
-	'continuer' => 'Continuer', # NEW
-	'creation_annulee' => 'Création annulée', # NEW
-	'creation_fiche' => 'Création de la fiche', # NEW
-	'creer' => 'Créer', # NEW
-	'creer_document' => '›› Créer un document ››', # NEW
+	'cellules_creees' => 'Bunky vytvorené',
+	'cellules_occupees' => 'Bunky obsadené',
+	'centans' => 'Zakázať zobrazenie dátumov spred viac ako 100 rokov',
+	'charger' => 'Nahrať',
+	'choisir' => 'Vybrať',
+	'cliquer_ici_pour_lier_article_avec_fiche' => 'Ak chcete pripojiť článok k listu, kliknite sem',
+	'confirmer' => 'Potvrdiť',
+	'contact' => 'Kontakt',
+	'continuer' => 'Pokračovať',
+	'creation_annulee' => 'Vytváranie zrušené',
+	'creation_fiche' => 'Vytvoriť súbor',
+	'creer' => 'Vytvoriť',
+	'creer_document' => '"Vytvoriť dokument"',
 
 	// D
-	'date' => 'Date', # NEW
-	'debut_gedcom' => 'Début GedCom', # NEW
-	'deces' => 'Décès', # NEW
-	'dep' => 'Dep.', # NEW
-	'departement' => 'Département', # NEW
-	'derniere_modif_le' => 'Derniére moodif le', # NEW
-	'derniere_modification' => 'Dernière mise à jour de la fiche', # NEW
-	'descriptif_cfg' => '<p>Cette zone permet de configurer les variables de base du plugin.</p><p> Pour fonctionner correctement ce plugin doit être installé en parallèle avec le plugin cfg</p>', # NEW
-	'detail_fiche' => 'Détail fiche', # NEW
-	'document' => 'Documents', # NEW
+	'date' => 'Dátum',
+	'debut_gedcom' => 'Spustiť GedCom',
+	'deces' => 'Smrť',
+	'dep' => 'Okr.',
+	'departement' => 'Okres',
+	'derniere_modif_le' => 'Naposledy zmenené',
+	'derniere_modification' => 'Posledná zmena súboru',
+	'descriptif_cfg' => '<p>Táto zóna sa používa na nastavenie základných premenných zásuvného modulu.</p><p> Na to, aby tento modul správne fungoval, musí byť nainštalovaný spolu so zásuvným modulom cfg</p>',
+	'detail_fiche' => 'Podrobnosti o súbore',
+	'document' => 'Dokumenty',
 
 	// E
-	'enfant' => 'enfant', # NEW
-	'enfants' => 'Enfants', # NEW
-	'enfants_couple' => 'Enfants du couple', # NEW
-	'epouse' => 'épouse', # NEW
-	'epoux' => 'époux', # NEW
-	'est_present_dans_base' => 'est prèsent dans la base', # NEW
-	'evenement' => 'Évènement', # NEW
-	'evenements' => 'Évènements', # NEW
-	'evenements_lies' => 'Evènements liés', # NEW
-	'export_gedcom' => 'Export GedCom', # NEW
-	'export_termine' => 'Export terminé', # NEW
-	'exporter' => 'Exporter', # NEW
+	'enfant' => 'dieťa',
+	'enfants' => 'Deti',
+	'enfants_couple' => 'Deti manželského páru',
+	'epouse' => 'manželka',
+	'epoux' => 'manžel',
+	'est_present_dans_base' => 'existuje v databáze',
+	'evenement' => 'Udalosť',
+	'evenements' => 'Udalosti',
+	'evenements_lies' => 'Prepojené udalosti',
+	'export_gedcom' => 'Export v GedCome',
+	'export_termine' => 'Export dokončený',
+	'exporter' => 'Exportovať',
 
 	// F
-	'famille' => 'Famille', # NEW
-	'fermer' => 'Fermer', # NEW
-	'fiche_de' => 'Fiche de', # NEW
-	'fiche_detail' => 'Fiche détail', # NEW
-	'fiche_document' => 'Fiche document', # NEW
-	'fiche_enfant' => 'Fiche enfant', # NEW
-	'fiche_evt_par_lieu' => 'Fiche évènements par lieu', # NEW
-	'fiche_lieux' => 'Fiche lieux', # NEW
-	'fiche_no' => 'Fiche nº', # NEW
-	'fiche_num' => 'Fiche N°', # NEW
-	'fiche_parents' => 'Fiche parents', # NEW
-	'fiche_union' => 'Fiche union', # NEW
-	'fiches' => 'Fiches', # NEW
-	'fichier' => 'Fichier', # NEW
-	'fichier_gedcom' => 'Fichier GedCom', # NEW
+	'famille' => 'Rodina',
+	'fermer' => 'Zatvoriť',
+	'fiche_de' => 'Súbor na',
+	'fiche_detail' => 'Podrobnosti o súbore',
+	'fiche_document' => 'Dokument',
+	'fiche_enfant' => 'Súbor detí',
+	'fiche_evt_par_lieu' => 'Súbor udalostí pre miesto',
+	'fiche_lieux' => 'Súbor s miestami',
+	'fiche_no' => 'Súbor č.',
+	'fiche_num' => 'Súbor č.',
+	'fiche_parents' => 'Súbor rodičov',
+	'fiche_union' => 'Súbor zväzku',
+	'fiches' => 'Súbory',
+	'fichier' => 'Súbor',
+	'fichier_gedcom' => 'Súbor GedComu',
 
 	// G
-	'galerie' => 'Galerie', # NEW
-	'gedcom' => 'GedCom', # NEW
-	'genealogie' => 'Généalogie', # NEW
-	'genespip' => 'GeneSPIP', # NEW
+	'galerie' => 'Galéria',
+	'gedcom' => 'GedCom',
+	'genealogie' => 'Genealógia (rodokmeň)',
+	'genespip' => 'GeneSPIP',
 
 	// I
-	'indication_format_photo' => '<br />Poid max. 100 ko', # NEW
-	'individu' => 'individu', # NEW
-	'info_centans' => '<p>Interdire systématiquement l‘affichage des dates ayant moins de 100 ans.<br />Cette option ne s‘applique que pour les visiteurs<br />Si cette option est désactivée, il est possible de limiter l‘affichage fiche par fiche.</p>', # NEW
-	'info_deces' => 'Info décés', # NEW
-	'info_doc' => '<p>Plugin de généalogie.</p> <p>Publier votre généalogie sur internet à partir d´un site SPIP.</p>', # NEW
-	'info_gedcom_etape1' => 'Votre arbre est vide, importer un fichier GedCom (1 Mo Max) ou créer une nouvelle fiche.<br />', # NEW
-	'info_gedcom_etape2' => 'Afin d´importer votre fichier GedCom, GeneSPIP a besoin de connaître votre méthode de traitement de l´entrée &quot;PLAC&quot;<br />GeneSPIP a sélectionner les 5 premières entrées &quot;PLAC&quot;, Choisissez en une qui servira de référence pour la suite', # NEW
-	'info_gedcom_etape3' => 'A partir de l´entrée choisie, sélectionnez pour chaque information la manière dont GeneSPIP doit la traduire', # NEW
-	'info_mariage' => 'Info mariage', # NEW
-	'info_multilingue' => '<p>Afficher la bannière multilingue sur le site.<br />Allez dans le menu multilingue de SPIP pour désactiver les langues inutiles</p>', # NEW
-	'info_naissance' => 'Info naissance', # NEW
-	'info_pub' => '<p>Les revenus publicitaires sont déstinés au créateur de GeneSPIP, vous pouvez placer votre propre banniere publicitaire en modifiant le contenu du fichier pub/200x200genespip.html, abonnez-vous au programme google adsense si vous souhaitez créer votre banniere</p>', # NEW
-	'info_restriction_acces' => '<p>Limiter les accès aux détails des fiches sur le site public</p>', # NEW
-	'info_restriction_acces0' => '<b>0</b> : Limitation aux administrateurs', # NEW
-	'info_restriction_acces1' => '<b>1</b> : Limitation aux administrateurs et rédacteurs', # NEW
-	'info_restriction_acces2' => '<b>2</b> : Limitation aux administrateurs, rédacteurs et visiteurs(privée)', # NEW
-	'info_restriction_acces3' => '<b>3</b> : Aucune limitation', # NEW
-	'informations_sur_la_base' => 'Informations sur la base', # NEW
-	'inscription' => 'Inscription', # NEW
-	'invalide' => 'Invalide', # NEW
+	'indication_format_photo' => '<br />Maximálna veľkosť 100 kB',
+	'individu' => 'samostatný',
+	'info_centans' => '<p>Natrvalo zakáže zobrazovanie dátumov spred 100 rokov.<br />Táto možnosť sa použije iba pri návštevníkoch stránky.<br />Ak bola deaktivovaná, zobrazenie sa stále dá obmedziť samostatne pri každom súbore.</p>',
+	'info_deces' => 'Údaje o smrti',
+	'info_doc' => '<p>Genealogický zásuvný modul.</p> <p>Publikujte svoj rodokmeň na internete pomocou stránky v SPIPe.</p>',
+	'info_gedcom_etape1' => 'Váš rodostrom je prázdny &ndash; nahrajte súbor GedCom (max. 1 MB) alebo vytvorte nový súbor.<br />',
+	'info_gedcom_etape2' => 'Na nahratie súboru GedCom GeneSPIP potrebuje vedieť, ako chcete spracúvať vstup"PLAC"<br />GeneSPIP vybral prvých 5 vstupov "PLAC", vyberte jeden z nich, ktorý bude pre ostatné slúžiť ako referenčný bod',
+	'info_gedcom_etape3' => 'Počnúc prvým vstupom vyberte, ako má GeneSPIP každý údaj preložiť',
+	'info_mariage' => 'Údaje o manželstve',
+	'info_multilingue' => '<p>Na stránke zobraziť viacjazyčnú hlavičku.<br />Na deaktivovanie všetkých nepoužívaných jazykov použite viacjazyčné menu SPIPu</p>',
+	'info_naissance' => 'Údaj o narodení',
+	'info_pub' => '<p>Príjmy z reklamy sú určené pre autora GeneSPIPu a vy môžete vložiť svoju vlastnú hlavičku s reklamou tak, že upravíte obsah súboru: pub/200x200genespip.html &ndash; prihláste sa na odber reklamy to google adsense, ak si chcete vytvoriť vlastnú hlavičku</p>',
+	'info_restriction_acces' => '<p>Obmedziť prístup k údajom na liste na verejne prístupnej stránke</p>',
+	'info_restriction_acces0' => '<b>0:</b> Vyhradené pre administrátorov',
+	'info_restriction_acces1' => '<b>1:</b> Vyhradené pre administrátorov a redaktorov',
+	'info_restriction_acces2' => '<b>2:</b> Vyhradené pre administrátorov, redaktorov a zaregistrovaných návštevníkov',
+	'info_restriction_acces3' => '<b>3:</b> Žiadne obmedzenia',
+	'informations_sur_la_base' => 'Informácie o databáze',
+	'inscription' => 'Odoberanie',
+	'invalide' => 'Neplatný',
 
 	// J
-	'journal' => 'Journal d‘évènements', # NEW
+	'journal' => 'Súbor protokolu',
 
 	// L
-	'le' => 'le', # NEW
-	'les_3_dernieres_publications_dans' => 'Les 3 dernières publications dans', # NEW
-	'lieu' => 'lieu', # NEW
-	'lieux' => 'Lieux', # NEW
-	'limitation' => 'Rendre invisible les dates sur le site publique', # NEW
-	'limitation_non' => '(» Dates visibles)', # NEW
-	'limitation_oui' => '(» Dates invisibles)', # NEW
-	'liste_des_articles' => 'Liste des articles SPIP', # NEW
-	'liste_des_enfants' => 'Liste des enfants', # NEW
-	'liste_des_lieux' => 'Liste des lieux', # NEW
-	'liste_des_personnes_nees' => 'Listes des personnes nées', # NEW
-	'liste_des_unions' => 'Liste des unions', # NEW
-	'liste_noms' => 'Liste des noms', # NEW
-	'liste_patronyme' => 'Liste des patronymes', # NEW
+	'le' => 'dňa',
+	'les_3_dernieres_publications_dans' => '3 najnovšie publikované v',
+	'lieu' => 'miesto',
+	'lieux' => 'Miesta',
+	'limitation' => 'Nezobrazovať dátumy na verejne prístupnej stránke',
+	'limitation_non' => '(» Dátumy sú viditeľné)',
+	'limitation_oui' => '(» Dátumy sú neviditeľné)',
+	'liste_des_articles' => 'Zoznam článkov v SPIPe',
+	'liste_des_enfants' => 'Zoznam detí',
+	'liste_des_lieux' => 'Zoznam miest',
+	'liste_des_personnes_nees' => 'Zoznam ľudí narodených',
+	'liste_des_unions' => 'Zoznam zväzkov',
+	'liste_noms' => 'Zoznam mien',
+	'liste_patronyme' => 'Zoznam priezvisk',
 
 	// M
-	'mariage' => 'mariage', # NEW
-	'mariage_le' => 'Mariage le', # NEW
-	'media' => 'Média', # NEW
-	'mere' => 'Mère', # NEW
-	'mere_inconnu' => 'Mère inconnu', # NEW
-	'metier' => 'Métier', # NEW
-	'mettre_jour_base_fichier_gedcom' => 'Mettre à jour la base avec un fichier GedCom (1 Mo Max)', # NEW
-	'mise_a_jour_liste_eclair' => 'Mise à jour de la liste éclair', # NEW
-	'modifier' => 'Modifier', # NEW
-	'modifier_fiche' => 'Modifier la fiche', # NEW
-	'mon_pagerank' => 'Mon PageRank', # NEW
-	'multilingue' => 'Site multilingue', # NEW
+	'mariage' => 'manželstvo',
+	'mariage_le' => 'Dátum sobáša',
+	'media' => 'Multimédiá',
+	'mere' => 'Matka',
+	'mere_inconnu' => 'Matka neznáma',
+	'metier' => 'Zamestnanie',
+	'mettre_jour_base_fichier_gedcom' => 'Aktualizovať databázu s listom GedCom (maximálne 1 MB)',
+	'mise_a_jour_liste_eclair' => 'Aktualizovať čistý zoznam',
+	'modifier' => 'Upraviť',
+	'modifier_fiche' => 'Upraviť súbor',
+	'mon_pagerank' => 'Môj pageRank',
+	'multilingue' => 'Viacjazyčná stránka',
 
 	// N
-	'naissance' => 'Naissance', # NEW
-	'nettoyage_champ_nom' => 'Nettoyage champ NOM', # NEW
-	'nettoyage_table_lieux' => 'Nettoyage table LIEUX', # NEW
-	'nom' => 'Nom', # NEW
-	'nombre_de_fiches' => 'Nombre de fiches', # NEW
-	'nombre_de_patronymes' => 'Nombre de patronymes', # NEW
-	'note' => 'Note', # NEW
-	'note_individu' => 'Note individu', # NEW
-	'nouvelle_fiche' => 'Nouvelle fiche', # NEW
-	'nouvelle_liaison_document_realise' => 'Nouvelle liaison ”document“ réalisée', # NEW
-	'nouvelle_union' => 'Nouvelle union', # NEW
-	'num_departement' => 'Nº Dép.', # NEW
+	'naissance' => 'Dátum narodenia',
+	'nettoyage_champ_nom' => 'Prázdne pole MENO',
+	'nettoyage_table_lieux' => 'Prázdna tabuľka s miestami',
+	'nom' => 'Meno',
+	'nombre_de_fiches' => 'Počet súborov',
+	'nombre_de_patronymes' => 'Počet priezvisk',
+	'note' => 'Poznámka',
+	'note_individu' => 'Samostatná poznámka',
+	'nouvelle_fiche' => 'Nový súbor',
+	'nouvelle_liaison_document_realise' => 'Prepojenie s novým dokumentom vytvorené',
+	'nouvelle_union' => 'Nový zväzok',
+	'num_departement' => 'Dpt. č. (pre Francúzsko)',
 
 	// P
-	'pagerank_actuel' => 'PageRank actuel', # NEW
-	'parente' => 'Parenté', # NEW
-	'parents' => 'Parents', # NEW
-	'patronymes' => 'Patronymes', # NEW
-	'pays' => 'Pays', # NEW
-	'pere' => 'Père', # NEW
-	'pere_inconnu' => 'Père inconnu', # NEW
-	'photo' => 'Photo', # NEW
-	'photos' => 'Photos', # NEW
-	'portrait' => 'Portrait', # NEW
-	'poubelle' => 'Poubelle', # NEW
-	'prenom' => 'Prénom', # NEW
-	'pub' => 'pub', # NEW
-	'publication' => 'Publication', # NEW
+	'pagerank_actuel' => 'Aktuálny PageRank',
+	'parente' => 'Vzťah',
+	'parents' => 'Rodičia',
+	'patronymes' => 'Priezviská',
+	'pays' => 'Krajina',
+	'pere' => 'Otec',
+	'pere_inconnu' => 'Otec neznámy',
+	'photo' => 'Fotka',
+	'photos' => 'Fotky',
+	'portrait' => 'Portrét/Fotografia/Obrázok',
+	'poubelle' => 'Kôš',
+	'prenom' => 'Krstné mená',
+	'pub' => 'Reklama',
+	'publication' => 'Publikovanie',
 
 	// R
-	'redacteur' => 'Rédacteur', # NEW
-	'region' => 'Région', # NEW
-	'requete' => 'Requête', # NEW
-	'requete_invalide' => 'Requête invalide', # NEW
-	'restaure' => 'Restaure', # NEW
-	'restreint' => 'Restreint', # NEW
-	'restriction_acces' => 'Restriction d´accès', # NEW
-	'retour_fiche' => 'Retour fiche', # NEW
-	'retour_sur_fiche' => 'Retour sur la fiche', # NEW
-	'retour_sur_fiche_sans_enregistrer' => 'Retour sur la fiche sans enregistrer', # NEW
+	'redacteur' => 'Redaktor',
+	'region' => 'Región',
+	'requete' => 'Požiadavka',
+	'requete_invalide' => 'Neplatná požiadavka',
+	'restaure' => 'Obnoviť',
+	'restreint' => 'Obmedzený',
+	'restriction_acces' => 'Obmedzenie prístupu',
+	'retour_fiche' => 'Vrátiť súbor',
+	'retour_sur_fiche' => 'Návrat k súboru',
+	'retour_sur_fiche_sans_enregistrer' => 'Návrat k súboru bez uloženia',
 
 	// S
-	'sexe' => 'Sexe', # NEW
-	'signature' => 'Signature', # NEW
-	'signatures' => 'Signatures', # NEW
-	'site_genealogie_genespip' => 'Site de généalogie par GENESPIP', # NEW
-	'source' => 'Source', # NEW
-	'statistiques' => 'Statistiques', # NEW
-	'suppression_table_temporaire' => 'Suppresion de la table temporaire', # NEW
-	'supprimer' => 'Supprimer', # NEW
+	'sexe' => 'Pohlavie',
+	'signature' => 'Podpis',
+	'signatures' => 'Podpisy',
+	'site_genealogie_genespip' => 'Genealogická stránka GENESPIP ',
+	'source' => 'Zdroj',
+	'statistiques' => 'Štatistiky',
+	'suppression_table_temporaire' => 'Vymazať dočasnú tabuľku',
+	'supprimer' => 'Vymazať',
 
 	// T
-	'table_lieux_cree' => 'Table des lieux créé', # NEW
-	'tableau_ocupe_a' => 'Tableau occupé à', # NEW
-	'telecharger' => 'Télécharger', # NEW
-	'telecharger_succes' => 'Télécharger avec succés', # NEW
-	'theme' => 'Thème', # NEW
-	'themes' => 'Thèmes', # NEW
-	'titre_menu_genespip' => 'GeneSPIP', # NEW
+	'table_lieux_cree' => 'Tabuľka s miestami vytvorená',
+	'tableau_ocupe_a' => 'Tabuľka zaplnená',
+	'telecharger' => 'Prenos súboru',
+	'telecharger_succes' => 'Súbor bol úspešne prenesený',
+	'theme' => 'Skin',
+	'themes' => 'Skiny',
+	'titre_menu_genespip' => 'GeneSPIP',
 
 	// U
-	'union' => 'Unions, mariages', # NEW
-	'union_fiche_no' => 'Union fiche n&ordm', # NEW
+	'union' => 'Zväzky, manželstvá',
+	'union_fiche_no' => 'Súbor zväzkov č.',
 
 	// V
-	'valider' => 'Valider', # NEW
-	'version_base_genespip' => 'Version Base GeneSPIP', # NEW
-	'version_plugin' => 'Version Plugin', # NEW
-	'version_squelette' => 'Version Squelette', # NEW
-	'ville' => 'Ville', # NEW
-	'visiteur' => 'Visiteur' # NEW
+	'valider' => 'OK',
+	'version_base_genespip' => 'Verzia databázy GeneSPIP ',
+	'version_plugin' => 'Verzia zásuvného modulu',
+	'version_squelette' => 'Verzia šablóny',
+	'ville' => 'Mesto',
+	'visiteur' => 'Návštevník'
 );
 
 ?>
