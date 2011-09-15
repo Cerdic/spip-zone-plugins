@@ -32,6 +32,7 @@
 
 <!--#navigation-->
 [(#REM) Ce pipeline charge prive/infos/$type ]
+	[(#VAL{inc/presentation}|include_spip|non)]
 [<div class='cadre cadre-info'>
 	(#PIPELINE{boite_infos,[(#ARRAY{
 		args,[(#ARRAY{
