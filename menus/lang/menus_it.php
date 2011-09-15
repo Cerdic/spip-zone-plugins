@@ -87,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Si è verificato un errore durante l\'aggiornamento del database.',
 	'erreur_parametres' => 'C\'è un errore nei parametri della pagina',
 	'erreur_type_menu' => 'Devi scegliere un tipo di menù',
+	'erreur_type_menu_inexistant' => 'Ce type de menu n\'est pas/plus disponible', # NEW
 
 	// F
 	'formulaire_ajouter_entree' => 'Aggiungi una voce',

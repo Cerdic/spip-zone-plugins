@@ -4,8 +4,15 @@
 		<traducteur nom="klaus" />
 	</langue>
 	<langue code="en">
+		<traducteur nom="suske" />
 		<traducteur nom="mark_baber" />
+	</langue>
+	<langue code="es">
+		<traducteur nom="tin" />
 	</langue>
 	<langue code="it" />
 	<langue code="ru" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>

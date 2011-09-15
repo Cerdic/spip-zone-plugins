@@ -15,13 +15,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'description_menu_articles_rubrique' => 'Display the list of articles in a section.',
 	'description_menu_deconnecter' => 'If the visitor is connected, add an entry offering disconnection.',
 	'description_menu_espace_prive' => 'Link enabling the connection to the site if you aren\'t already connected, and then to enter the private space if you are authorised to do so.',
-	'description_menu_groupes_mots' => 'Automatically lists the keyword groups and the articles linked to them. By default the list shows keyword groups and the keywords within them. If a groupes_mots.html template exists, the link to the group is used.',
+	'description_menu_groupes_mots' => 'Automatically lists the keyword groups and the articles linked to them. By default the list shows keyword groups and the keywords within them. If a groupes_mots.html template exists, the link to the group is used.', # MODIF
 	'description_menu_lien' => 'Adds an individually specified link, either an internal one (relative URL), or an external one (http://...).',
 	'description_menu_mapage' => 'If visitors are connected, add a link to their author page.',
 	'description_menu_mots' => 'Automatically shows a menu listing the articles linked to a keyword.',
 	'description_menu_objet' => 'Creates a link to s SPIP object: article, section or other. By default, the entry will bear the the title of the object.',
 	'description_menu_page_speciale' => 'Adds a link to a page template using a URL of the form <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> Such pages are often used by plugins.',
-	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> This requires a Z type template and the <a href="http://www.spip-contrib.net/MediaBox">médiabox</a> plugin.',
+	'description_menu_page_speciale_zajax' => 'Add a link to a block in a page accessible by a URL of the type <code>spip.php?page=name&amp;param1=xx&amp;param2=yyy...</code> This requires a Z type template and the <a href="http://www.spip-contrib.net/MediaBox">médiabox</a> plugin.', # MODIF
 	'description_menu_rubriques' => 'Displays a list of sections and, if desired, the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
 	'description_menu_rubriques_articles' => 'Display a list of sections, optionally including sub-sections and articles nested to several levels. By default, all sections will be displayed starting from the site root and sorted by title (numerically then alphabetically).Articles in a given section will always be listed after any sub-sections.',
 	'description_menu_secteurlangue' => 'This entry can be used by sites which have one language per sector. It displays a menu which lists the sections of the sector corresponding to the language of the page, and if desired the subsections to several levels. By default, all sections are shown from the site root, sorted by title (numerically then alphabetically).',
@@ -55,7 +55,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_mapage' => 'My page',
 	'entree_masquer_articles_uniques' => 'Si oui et si une rubrique contient un seul article, le masquer ? (mettre "oui" pour cela)', # NEW
 	'entree_niveau' => 'Sub-sections level',
-	'entree_nombre_articles' => 'Maximum number of articles (0 by default)',
+	'entree_nombre_articles' => 'Maximum number of articles (0 by default)', # MODIF
 	'entree_page' => 'Name of the page',
 	'entree_parametres' => 'List of parameters',
 	'entree_rubriques_max_affichees' => 'Si oui, limiter le nombre de rubriques list&eacute;s &agrave; xx maximum (suivis d\'un item "... Toutes les rubriques" comportant un lien vers la rubrique parente) ? (indiquer le nombre maximum de rubriques, laissez vide pour afficher toutes les rubriques)', # NEW
@@ -78,7 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'entree_tri_num_inverse' => 'Inverser le critère de tri numérique ? (mettre "oui" pour cela)', # NEW
 	'entree_type_objet' => 'Object type',
 	'entree_url' => 'URL',
-	'entree_url_public' => 'Return address after logging in',
+	'entree_url_public' => 'Return address after logging in', # MODIF
 	'erreur_aucun_type' => 'No item type was found.',
 	'erreur_autorisation' => 'You are not allowed to modify menus.',
 	'erreur_identifiant_deja' => 'This identifier is already used by another menu.',
@@ -87,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'An error occured during database update.',
 	'erreur_parametres' => 'There is an error in the parameters of the page',
 	'erreur_type_menu' => 'You need to choose a type of menu',
+	'erreur_type_menu_inexistant' => 'Ce type de menu n\'est pas/plus disponible', # NEW
 
 	// F
 	'formulaire_ajouter_entree' => 'Add a menu item',

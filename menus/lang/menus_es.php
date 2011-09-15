@@ -3,7 +3,7 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -87,6 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_mise_a_jour' => 'Se produjo un error durante la actualización de la base de datos.',
 	'erreur_parametres' => 'Hubo un error en los parámetros de la página',
 	'erreur_type_menu' => 'Debes elegir un tipo de menú',
+	'erreur_type_menu_inexistant' => 'Ce type de menu n\'est pas/plus disponible', # NEW
 
 	// F
 	'formulaire_ajouter_entree' => 'Añadir una entrada',
@@ -100,8 +101,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'formulaire_identifiant_explication' => 'Una palabra clave única que te permite llamar a tu menú fácilmente.',
 	'formulaire_ieconfig_choisir_menus_a_importer' => 'Elija el que (s) de menú (s) que desea importar.',
 	'formulaire_ieconfig_importer' => 'Importar',
-	'formulaire_ieconfig_menus_a_exporter' => 'Menús a exportar :',
 	'formulaire_ieconfig_menu_meme_identifiant' => 'ATENCION : un menú con el mismo identificador ya existe en tu sitio !',
+	'formulaire_ieconfig_menus_a_exporter' => 'Menús a exportar :',
 	'formulaire_ieconfig_ne_pas_importer' => 'No importar',
 	'formulaire_ieconfig_remplacer' => 'Reemplazar el menú actual por el menú importado',
 	'formulaire_ieconfig_renommer' => 'Renombrar el menú antes de importar',
