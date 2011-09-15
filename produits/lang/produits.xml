@@ -2,4 +2,7 @@
 	<langue code="en">
 		<traducteur nom="RastaPopoulos" />
 	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
