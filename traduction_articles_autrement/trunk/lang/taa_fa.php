@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_edition_seule' => 'فقط نمايش مقالات در حالت ويرايش ',
+	'affichage_edition_seule' => ' نمايش مقالات فقط در حالت ويرايش ',
 	'affichage_liste_compacte' => 'نمايش فشرده‌ي فهرست مقالات',
 
 	// C
@@ -30,7 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'options' => 'اصلاح گزينه‌هاي زبان ',
 
 	// R
-	'rang' => 'Rang', # NEW
+	'rang' => 'رتبه',
 
 	// T
 	'titre_plugin' => 'ترجمه‌ي متفاوت متقالات',
