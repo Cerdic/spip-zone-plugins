@@ -8,140 +8,140 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'abbreviation_genre_label' => 'Abbrev. / Genre', # NEW
-	'admin_legend' => 'Concernant l\'administration du site', # NEW
-	'administrateur_aussi_comment' => 'Cochez cette case si la structure dont il s\'agit est &eacute;galement <b>administrateur</b> du site.', # NEW
-	'administrateur_aussi_label' => 'Organisme administrateur du site', # NEW
-	'administrateur_mail_label' => 'Adresse mail de contact administratif du site', # NEW
-	'adresse_comment' => 'Remplissez ces champs de mani&egrave;re la plus pr&eacute;cise et simple possible. Si vos entr&eacute;es le permettent, un lien vers une carte GoogleMap sera g&eacute;n&eacute;r&eacute;.', # NEW
-	'adresse_legend' => 'Adresse de la structure', # NEW
+	'abbreviation_genre_label' => 'Skratka/Typ',
+	'admin_legend' => 'Na riadenie stránky',
+	'administrateur_aussi_comment' => 'Skúste tu, ak do danej štruktúry patrí aj~<b>administrátor</b> stránky.',
+	'administrateur_aussi_label' => 'Administrátor pre organizáciu stránky',
+	'administrateur_mail_label' => 'Kontaktná e-mailová adresa pre riadenie stránky',
+	'adresse_comment' => 'Tieto polia vyplňte tak presne, ako sa dá. Ak to vaše údaje umožnia, vytvorí sa odkaz na GoogleMap.',
+	'adresse_legend' => 'Adresa štruktúry',
 	'all_site' => 'Celá stránka',
-	'au_capital_de' => ' au capital de ', # NEW
+	'au_capital_de' => ' s hlavným mestom',
 
 	// B
-	'bouton_auto_fr' => 'Champs automatiques pour la France', # NEW
-	'bouton_exporter' => 'Lancer l&#039;exportation', # NEW
-	'bouton_importer' => 'Lancer l&#039;importation', # NEW
-	'bouton_saisie_libre' => 'Saisie libre', # NEW
+	'bouton_auto_fr' => 'Automatické polia pre Francúzsko',
+	'bouton_exporter' => 'Spustiť export',
+	'bouton_importer' => 'Spustiť import',
+	'bouton_saisie_libre' => 'Voľný vstup',
 
 	// C
-	'capital' => ' au capital de ', # NEW
-	'capital_social_comment' => 'Pr&eacute;cisez la monnaie le cas &eacute;ch&eacute;ant (<i>&euro; &dollar;</i>).', # NEW
-	'capital_social_label' => 'Capital social', # NEW
-	'cnil_comment' => 'Si vous avez effectu&eacute; une d&eacute;claration aupr&egrave;s de la CNIL, pr&eacute;cisez ici &agrave; quelle date et sous quel r&eacute;c&eacute;piss&eacute;.', # NEW
-	'cnil_date_label' => 'Date du d&eacute;p&ocirc;t', # NEW
-	'cnil_legend' => 'Informations CNIL', # NEW
-	'cnil_numero_label' => 'N&deg; de r&eacute;c&eacute;piss&eacute;', # NEW
+	'capital' => ' s hlavným mestom',
+	'capital_social_comment' => 'Uveďte vhodnú peňažnú menu (<i>€ &dollar;</i>).',
+	'capital_social_label' => 'Hlavné mesto',
+	'cnil_comment' => 'Ak ste vykonali deklaráciou do CNIL, uveďte s~akým dátumom a~číslom dokladu.',
+	'cnil_date_label' => 'Dátum podania',
+	'cnil_legend' => 'Informácie o CNIL',
+	'cnil_numero_label' => 'Č. dokladu',
 	'code_postal_label' => 'PSČ',
-	'conditions_utilisation' => 'Conditions d\'utilisation', # NEW
-	'coordonnees_adresse' => 'Adr.', # NEW
-	'coordonnees_capital' => ' au capital de ', # NEW
-	'coordonnees_fax' => 'Fax', # NEW
-	'coordonnees_mail' => 'Courriel', # NEW
-	'coordonnees_mailto_ttl' => 'Nous contacter par email', # NEW
-	'coordonnees_tel' => 'T&eacute;l.', # NEW
-	'copyright_annee_label' => 'Ann&eacute;e de c&eacute;ation', # NEW
-	'copyright_comment' => 'Pour rappel, en France, il n\'est pas n&eacute;cessaire d\'avoir d&eacute;pos&eacute; votre copyright aupr&egrave;s d\'un organisme pour qu\'une protection soit effective. Les informations de copyright peuvent donc &ecirc;tre mentionn&eacute;es par d&eacute;faut.', # NEW
-	'copyright_comment_label' => 'Mention de protection', # NEW
-	'copyright_complement_label' => 'Compl&eacute;ment', # NEW
-	'copyright_default_comment' => 'La reproduction, m&ecirc;me partielle, des contenus des pages de ce site sans accord pr&eacute;alable est strictement interdite (les citations courtes sont autoris&eacute;es par le droit fran&ccedil;ais pour commentaires et critiques, tant que ceux-ci y sont strictement concomitants et que sont pr&eacute;cis&eacute;s l\'auteur original et le lien Internet vers la page source).', # NEW
-	'copyright_default_comment_multi' => '<multi>Reproduction, even partial, of the contents of pages on this site without prior consent is strictly prohibited (short citations are permitted by French law for comments and criticism, as they are strictly concurrent, and are specified the original author and the Internet link to the source page).[fr]La reproduction, m&ecirc;me partielle, des contenus des pages de ce site sans accord pr&eacute;alable est strictement interdite (les citations sont autoris&eacute;es par le droit fran&ccedil;ais pour commentaires et critiques, tant que ceux-ci y sont strictement concomitants et que sont pr&eacute;cis&eacute;s l\'auteur original et le lien Internet vers la page source).</multi>', # NEW
-	'copyright_legend' => 'Informations de copyright', # NEW
-	'createur' => 'cr&#233;ateur', # NEW
+	'conditions_utilisation' => 'Podmienky používania',
+	'coordonnees_adresse' => 'Adresa',
+	'coordonnees_capital' => ' s hlavným mestom',
+	'coordonnees_fax' => 'Fax',
+	'coordonnees_mail' => 'E-mail',
+	'coordonnees_mailto_ttl' => 'Kontaktujte nás e-mailom',
+	'coordonnees_tel' => 'Tel.',
+	'copyright_annee_label' => 'Rok vytvorenia',
+	'copyright_comment' => 'Majte na pamäti, že vo Francúzsku netreba autorské práva zapísať aj so spoločnosťou, pre ktorú platia. Informácia o autorských právach môže byť uvedená v predvolených nastaveniach.',
+	'copyright_comment_label' => 'Záznam o ochrane',
+	'copyright_complement_label' => 'Doplnenie',
+	'copyright_default_comment' => 'Reprodukcia obsahu stránok tejto internetovej stránky (aj čiastočná) bez predchádzajúceho súhlasu je prísne zakázaná (francúzsky právny poriadok povoľuje krátke citácie do komentárov a kritík, pod podmienkou, že sú striktne označené a uvádzajú autora originálu a hypertextový odkaz na pôvodnú stránku).',
+	'copyright_default_comment_multi' => '<multi>Reprodukcia obsahu stránok tohto webu, aj čiastočná, je bez predošlého súhlasu prísne zakázaná (francúzsky právny poriadok povoľuje krátke citácie do komentárov a kritík pod podmienkou, že sa zhodujú s originálom a uvádzajú autora originálu i hypertextový odkaz na pôvodnú stránku).[fr]La reproduction, même partielle, des contenus des pages de ce site sans accord préalable est strictement interdite (les citations sont autorisées par le droit français pour commentaires et critiques, tant que ceux-ci y sont strictement concomitants et que sont précisés l\'auteur original et le lien Internet vers la page source).</multi>',
+	'copyright_legend' => 'Informácie o autorských právach',
+	'createur' => 'Autor',
 
 	// D
-	'de_la' => ' de la ', # NEW
-	'du' => ' du ', # NEW
+	'de_la' => ' od ',
+	'du' => ' do ',
 
 	// E
-	'enregistre_pres' => ' enregistr&eacute; aupr&egrave;s ', # NEW
-	'enregistree_pres' => ' enregistr&eacute;e aupr&egrave;s ', # NEW
-	'enregistrement_numero_label' => 'Sous le N&deg;', # NEW
-	'enregistrement_organisme_comment' => 'Registre du Commerce et des Soci&eacute;t&eacute;s, Maison des artistes ...', # NEW
-	'enregistrement_organisme_label' => 'Enregistr&eacute; aupr&egrave;s de', # NEW
-	'enregistrement_ou_label' => 'Saisie automatique pour la France (<i>option rempla&ccedil;ant le champ ci-dessus</i>)', # NEW
-	'enregistrement_siren_comment' => 'ex.: 123 456 78 (9: cl&eacute; automatique)', # NEW
-	'enregistrement_siren_label' => 'SIREN [<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises - code INSEE unique d&#233;signant la personne juridique de l&#039;entreprise">?</abbr>]', # NEW
-	'enregistrement_siren_title' => 'R&#233;f&#233;rence de l&#039;entreprise &#224; neuf chiffres, vous pouvez n&#039;indiquer que les huit premiers chiffres.', # NEW
-	'enregistrement_siret_comment' => 'ex.: 1234 (5: cl&eacute; automatique)', # NEW
-	'enregistrement_siret_label' => 'SIRET (NIC) [<abbr title="Identifiant d&#039;&#233;tablissement - Num&#233;ro Interne de Classement">?</abbr>]', # NEW
-	'enregistrement_siret_title' => 'R&#233;f&#233;rence d&#039;&#233;tablissement &#224; cinq chiffres, vous pouvez ne pas indiquer les z&#233;ros initiaux ni le dernier chiffre.', # NEW
-	'enregistrement_tvaintra_comment' => 'ex.: FR 45 (automatique)', # NEW
-	'enregistrement_tvaintra_label' => 'TVA Intra. [<abbr title="Num&#233;ro de T.V.A. Intracommunautaire">?</abbr>]', # NEW
-	'enregistrement_tvaintra_title' => 'Calcul&#233; automatiquement &#224; partir du SIREN.', # NEW
-	'erreur_config' => '!! - Une erreur inconnue est survenue _', # NEW
-	'erreur_export' => '!! - Une erreur inconnue est survenue _', # NEW
-	'erreur_import' => '!! - Une erreur inconnue est survenue _', # NEW
-	'exporter_configuration' => 'Exporter la configuration (<i>informations sur le propri&eacute;taire, l\'&eacute;diteur ...</i>)', # NEW
-	'exporter_fichiers_langues' => 'Exporter les cha&icirc;nes de langues propres au site', # NEW
-	'exporter_importer' => 'Exporter/Importer', # NEW
+	'enregistre_pres' => ' zaregistrované s ',
+	'enregistree_pres' => ' zaregistrované s ',
+	'enregistrement_numero_label' => 'Pod č. ',
+	'enregistrement_organisme_comment' => 'Obchodný register, Register umelcov...',
+	'enregistrement_organisme_label' => 'Zaregistrované u',
+	'enregistrement_ou_label' => 'Automatický údaj pre Francúzsko (<i>možnosť, ktorá nahradí pole, ktoré sa nachádza vyššie</i>)',
+	'enregistrement_siren_comment' => 'napr. 123 456 78 (9: automatický kľúč)',
+	'enregistrement_siren_label' => 'SIREN [<abbr title="Système d\'Identification du Répertoire des ENtreprises &ndash; kód INSEE, ktorý označuje legálny podnik (ako naše IČO)">?</abbr>]',
+	'enregistrement_siren_title' => '9-miestny kód spoločnosti, môžete zadať len prvých osem číslic.',
+	'enregistrement_siret_comment' => 'napr. 1234 (5: automatický kľúč)',
+	'enregistrement_siret_label' => 'SIRET (NIC) [<abbr title="Č. podniku &ndash; Č. podľa vnútornej klasifikácie">?</abbr>]',
+	'enregistrement_siret_title' => 'Zadajte 5 číslic, nemôžete zadať nuly ani posledné číslice.',
+	'enregistrement_tvaintra_comment' => 'napr. FR 45 (automaticky)',
+	'enregistrement_tvaintra_label' => 'Daňové identifikačné číslo',
+	'enregistrement_tvaintra_title' => 'Automaticky zistiť z čísla SIREN.',
+	'erreur_config' => '!! - Nastala neznáma chyba _',
+	'erreur_export' => '!! - Nastala neznáma chyba _',
+	'erreur_import' => '!! - Nastala neznáma chyba _',
+	'exporter_configuration' => 'Nastavenia exportu (<i>informácie o vlastníkovi, redaktorovi a pod.</i>',
+	'exporter_fichiers_langues' => 'Reťazce z jazykov stránky na export',
+	'exporter_importer' => 'Exportovať/Importovať',
 
 	// F
 	'fax' => 'Fax',
-	'fax_abbrev' => 'Fax', # NEW
-	'feminin' => 'f&#233;minin', # NEW
-	'fonction_administrateur' => 'Administrateur', # NEW
-	'fonction_webmaster' => 'Webmestre', # NEW
+	'fax_abbrev' => 'Fax',
+	'feminin' => 'ženský rod',
+	'fonction_administrateur' => 'Administrátor',
+	'fonction_webmaster' => 'Webmaster',
 	'forme' => 'Právnický',
-	'forme_comment' => 'Soci&eacute;t&eacute; (<i>pr&eacute;cisez le statut ...</i>), association ...', # NEW
-	'forme_label' => 'Forme juridique', # NEW
+	'forme_comment' => 'Enterprise (<i>precise status ...</i>), association ...', # NEW
+	'forme_label' => 'Právna forma',
 
 	// H
-	'hebergeur' => 'h&#233;bergeur', # NEW
+	'hebergeur' => 'hosting',
 	'home_page' => 'Úvodná stránka',
 
 	// I
-	'idem_label' => 'M&ecirc;me structure que', # NEW
-	'import_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : cela effacera votre configuration courante et vos cha&icirc;nes de langue !<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>', # NEW
-	'importer_dump' => '<strong>Importer le fichier :</strong> ', # NEW
-	'infos_createur' => 'Informations cr&eacute;ateur', # NEW
-	'infos_hebergeur' => 'Informations h&eacute;bergeur', # NEW
-	'infos_idem' => 'M&ecirc;me structure', # NEW
-	'infos_legend' => 'Informations g&eacute;n&eacute;rales', # NEW
-	'infos_proprietaire' => 'Informations propri&eacute;taire', # NEW
+	'idem_label' => 'Tá istá štruktúra ako',
+	'import_avertissement' => 'Nemeňte hodnoty, keď si sami nie ste istí: toto vymaže vaše súčasné nastavenie a reťazce jazyka!<br /><br /><b>Veľmi sa odporúča prenechať riadenie tejto stránky webmasterovi hlavnej stránky.</b>',
+	'importer_dump' => '<strong>Nahrať súbor:</strong> ',
+	'infos_createur' => 'Informácie o autorovi',
+	'infos_hebergeur' => 'Informácie o hostingu',
+	'infos_idem' => 'Rovnaká štruktúra',
+	'infos_legend' => 'Všeobecné informácie',
+	'infos_proprietaire' => 'Informácie o vlastníkovi',
 
 	// L
-	'la' => 'la ', # NEW
-	'le' => 'le ', # NEW
-	'legal_comment' => 'Ces informations sont optionnelles. Si elles sont saisies, elles seront mentionn&eacute;es dans le bloc d\'information g&eacute;n&eacute;r&eacute;.', # NEW
-	'legal_legend' => 'Informations l&eacute;gales de la structure', # NEW
-	'libelle_comment' => 'Compl&eacute;ment associ&eacute; au nom de structure.', # NEW
-	'libelle_label' => 'Libell&eacute;', # NEW
+	'la' => 'dňa',
+	'le' => ' ',
+	'legal_comment' => 'Tento údaj je nepovinný. Ak ho zadáte, uvedie sa vo vytvorenom bloku údajov.',
+	'legal_legend' => 'Právne informácie o štruktúre',
+	'libelle_comment' => 'Doplnok pripojený k názvu štruktúry.',
+	'libelle_label' => 'Štylizácia',
 
 	// M
-	'mail_label' => 'Adresse mail de contact', # NEW
-	'mail_to' => 'Contacter cette adresse', # NEW
-	'masculin' => 'masculin', # NEW
-	'mel' => 'Courriel', # NEW
-	'mentions_legales' => 'Mentions l&eacute;gales', # NEW
+	'mail_label' => 'E-mailový kontakt',
+	'mail_to' => 'Kontaktovať túto adresu',
+	'masculin' => 'mužský rod',
+	'mel' => 'E-mail',
+	'mentions_legales' => 'Informácie právneho charakteru',
 
 	// N
-	'new_window' => 'Nouvelle fen&ecirc;tre', # NEW
-	'news' => 'Br&#232;ves', # NEW
-	'nom_label' => 'Nom de la structure', # NEW
-	'notes' => 'NOTES', # NEW
-	'num_invalide' => 'Num. invalide', # NEW
-	'numero_maj' => 'N&deg;', # NEW
+	'new_window' => 'Nové okno',
+	'news' => 'Novinky',
+	'nom_label' => 'Názov štruktúry',
+	'notes' => 'POZNÁMKY',
+	'num_invalide' => 'Číslo neplatné',
+	'numero_maj' => 'Č',
 
 	// O
-	'ok_config' => 'OK - Les valeurs ont &eacute;t&eacute; enregistr&eacute;es _', # NEW
-	'ok_export' => 'OK - Votre configuration a &eacute;t&eacute; export&eacute;e dans le fichier :<br />"<strong>@fichier@</strong>"', # NEW
-	'ok_import' => 'OK - Votre configuration a bien &eacute;t&eacute; restaur&eacute;e', # NEW
-	'outil_exporter' => 'Outil de sauvegarde', # NEW
-	'outil_importer' => 'Outil de restauration', # NEW
-	'outils_de_communication' => 'Outils de communication', # NEW
+	'ok_config' => 'V poriadku &ndash; hodnoty boli zaznamenané _',
+	'ok_export' => 'V poriadku &ndash; vaše nastavenia boli exportované do súboru:<br />"<strong>@fichier@</strong>"',
+	'ok_import' => 'V poriadku &ndash; vaše nastavenia boli obnovené',
+	'outil_exporter' => 'Zálohovacie nástroje',
+	'outil_importer' => 'Obnovovacie nástroje',
+	'outils_de_communication' => 'Komunikačné nástroje',
 
 	// P
-	'pays_label' => 'Pays', # NEW
-	'pconfig_avertissement' => 'Ne modifiez ces valeurs que lorsque vous &ecirc;tes s&ucirc;r de vous : ces valeurs sont valables sur l\'ensemble du site.<br /><br /><b>Il est fortement conseill&eacute; de laisser la charge de cette page au webmestre principal de votre site.</b>', # NEW
-	'pconfig_divers_legend' => 'Informations compl&eacute;mentaires', # NEW
-	'pconfig_texte' => 'Vous pouvez ici d&eacute;finir les coordonn&eacute;es de l\'organisme @type@ ainsi que ses informations l&eacute;gales.', # NEW
-	'pconfig_texte_ajouts' => '<br />Le syst&egrave;me pr&eacute;sentera les informations qui sont pr&eacute;cis&eacute;es.<br />Notez cependant que certaines fonctionnalit&eacute;s du plugin, notamment la construction automatique d\'informations l&eacute;gales et de conditions d\'utilisation du site, n&eacute;cessitent qu\'un maximum d\'informations soient saisies.', # NEW
-	'pconfig_texte_lien_doc' => '<br /><br />Le bouton ci-dessous pr&eacute;sente le r&eacute;sultat des diff&eacute;rentes fonctionnalit&eacute;s pour v&eacute;rifications&nbsp;:', # NEW
-	'pconfig_texte_notes' => '<span style="color: red;">*</span><small>Les champs marqu&eacute;s d\'une ast&eacute;risque rouge peuvent comporter un bloc \'multi\'.<br /></small>', # NEW
-	'pconfig_titre_page' => 'Configuration propri&eacute;taire', # NEW
-	'pconfig_titre_page_short' => 'Configuration', # NEW
-	'pourquoi_ce_plugin' => 'Pourquoi ce plugin ? (<i>rappels l&eacute;gaux</i>)', # NEW
+	'pays_label' => 'Krajina',
+	'pconfig_avertissement' => 'Nemeňte tieto hodnoty, ak si nie ste istí: tieto hodnoty platia pre celú stránku.<br /><br /><b>Odporúča sa prenechať túto stránku hlavnému webmasterovi.</b>',
+	'pconfig_divers_legend' => 'Ďalšie údaje',
+	'pconfig_texte' => 'Môžete zadať súradnice @type@ inštitúcie a údaje právneho charakteru.',
+	'pconfig_texte_ajouts' => '<br />Systém zobrazí údaje, ktoré uvediete. <br />Majte na pamäti, že niektoré funkcie zásuvného modulu, vrátane automatického vytvárania "informácií právneho charakteru" a "podmienok používania" si vyžadujú, aby bol údaj zadaný.',
+	'pconfig_texte_lien_doc' => '<br /><br />Tlačidlo nižšie ukazuje výsledok rôznych funkcií na schválenie:',
+	'pconfig_texte_notes' => '<span style="color: red;">*</span><small>Polia označené červenou hviezdičkou môžu obsahovať "viacnásobný" blok.<br /></small>',
+	'pconfig_titre_page' => 'Nastavenia',
+	'pconfig_titre_page_short' => 'Nastavenia',
+	'pourquoi_ce_plugin' => 'Prečo tento zásuvný modul ? (<i>upozornenia právneho charakteru</i>)',
 	'presentation' => '{{{Obligations l&eacute;gales fran&ccedil;aises concernant tout site internet}}}
 
 Tout site Internet, qu’il soit professionnel ou "de loisirs", doit respecter un ensemble d’obligations l&eacute;gales dict&eacute;es par la [LCEN|Voir le texte sur legifrance.fr->http://www.legifrance.gouv.fr/affichTexte.do?cidTexte=JORFTEXT000000801164] ({Loi pour la confiance dans l’&eacute;conomie num&eacute;rique}) de juin 2004. Ces informations doivent &ecirc;tre clairement accessibles &agrave; tout internaute utilisant le site et l’&eacute;diteur du site, son propri&eacute;taire, a le devoir de contr&ocirc;ler son contenu, autant en terme r&eacute;dactionnel que concernant les commentaires laiss&eacute;s par les internautes.
@@ -225,93 +225,93 @@ Pour finir, des mod&egrave;les de squelettes d’en-t&ecirc;te et de pieds de pa
 
 Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelettes cit&eacute;s plus haut. Pour les visualiser, ajoutez simplement "_zpip" aux noms de squelettes ci-dessus. Le contenu de ces squelettes est disponible dans le r&eacute;pertoire "public/contenu/".
 ', # NEW
-	'proprietaire' => 'propri&#233;taire', # NEW
+	'proprietaire' => 'vlastník',
 	'proprietaire_export_import' => 'Mentions L&eacute;gales : maintenance', # NEW
-	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos cha&icirc;nes personnelles de langues, ou les restaurer depuis une pr&eacute;c&eacute;dente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />', # NEW
-	'proprietaire_retour_plateforme' => 'Retour &agrave; la plateforme', # NEW
-	'proprietaire_texte' => 'Vous pouvez ici d&eacute;finir les options g&eacute;n&eacute;rales du site utilis&eacute;es par le plugin <b>Mentions L&eacute;gales</b>.<br /><br />Vous pouvez &eacute;galement d&eacute;finir des cha&icirc;nes de langues particuli&egrave;res dont l\'utilisation est rappel&eacute;e sur la page concern&eacute;e.<br />', # NEW
-	'proprietaire_texte_supp' => 'Ce plugin vous propose de centraliser et automatiser la gestion d\'un site \'institutionnel\' ou \'professionnel\' fonctionnant sous SPIP.<br /><br />Il vous permet notamment de saisir un ensemble d\'informations sur le <b>propri&eacute;taire</b> du site, organisme, soci&eacute;t&eacute;, institution ou particulier, afin de les pr&eacute;senter de divers mani&egrave;res et, &eacute;ventuellement, de g&eacute;n&eacute;rer automatiquement des informations de Copyright, des \'Mentions l&eacute;gales\' et des \'Conditions d\'utilisation\' propres au site.', # NEW
-	'proprietaire_titre_page' => 'Plateforme Mentions L&eacute;gales', # NEW
-	'proprietaire_titre_page_short' => 'Plateforme', # NEW
-	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de d&eacute;finir les informations concernant les <b>Cr&eacute;ateur</b> et <b>H&eacute;bergeur</b> du site afin de mettre en place automatiquement des <b>Mentions L&eacute;gales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes repr&eacute;sentent <u>le minimum l&eacute;gal pour tout site web</u> et sont tr&egrave;s g&eacute;n&eacute;riques ... Ils doivent &ecirc;tre consid&eacute;r&eacute;s comme une base de travail pour cr&eacute;er vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propri&eacute;taire\' si vous activez l\'option ci-dessous.', # NEW
-	'pskels_legal_legend_createur' => 'Informations sur le cr&eacute;ateur du site', # NEW
-	'pskels_legal_legend_hebergeur' => 'Informations sur l\'h&eacute;bergeur du site', # NEW
-	'pskels_titre_page' => 'Configuration des squelettes', # NEW
-	'ptexte_cliquez_pour_editer' => 'Cliquez ici pour &eacute;diter l&prime;entr&eacute;e avec les raccourcis de mise en page', # NEW
-	'ptexte_editable_ttl' => 'Cliquez sur la ligne pour la modifier ...', # NEW
-	'ptexte_form_titre' => '&Eacute;dition compl&egrave;te / Nouvelle entr&eacute;e', # NEW
-	'ptexte_info_supp' => '<br /><b>Utilisation des cha&icirc;nes de cette page</b><br /><br />Les cha&icirc;nes de cette page sont enregistr&eacute;es dans un fichier de langue nomm&eacute; \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette fa&ccedil;on :<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />o&ugrave; "arguments" correspond &agrave; un array des arguments &agrave; passer &agrave; la cha&icirc;ne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par d&eacute;faut</i>).', # NEW
-	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent &ecirc;tre indiqu&eacute;s comme &eacute;crit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags pr&eacute;sents dans les textes ne sont pas list&eacute;s ici, conservez-les ...', # NEW
-	'ptexte_info_texte' => '<ul><li><b>Les fichiers de langue</b><br />Les entr&eacute;es des fichiers de langue se d&eacute;finissent en indiquant une cha&icirc;ne d\'appel (<i>les entr&eacute;es \'raccourci\' du tableau</i>) &agrave; laquelle correspond un texte complet (<i>les entr&eacute;es \'texte affich&eacute;\' du tableau</i>), qui peut contenir une mise en forme et &ecirc;tre aussi long que souhait&eacute;.<br /></li><li><b>Nomenclature des raccourcis</b><br />Les raccourcis doivent &ecirc;tre des cha&icirc;nes de texte <u>sans espace et sans caract&egrave;res sp&eacute;ciaux</u> (<i>vous pouvez ici saisir vos raccourcis avec des espaces, qui seront remplac&eacute;s par des underscore</i>).</li><li><b>Mise en forme des textes</b><br />Vous pouvez r&eacute;diger vos textes de la m&ecirc;me mani&egrave;re que vos articles SPIP ...</li></ul>', # NEW
-	'ptexte_info_titre' => 'Aide / Rappels ...', # NEW
-	'ptexte_supprimer' => 'Supprimer l\'entr&eacute;e', # NEW
-	'ptexte_texte' => 'Cette page vous permet de g&eacute;rer certains textes n&eacute;cessaires au site sans passer par le mode d\'&eacute;dition habituel (<i>modification du fichier de langue sur le serveur</i>).<br /><br />Les entr&eacute;es \'Texte affich&eacute;\' du tableau sont &eacute;ditables par un simple clic sur la ligne \'raccourci\' correspondante. Vous pouvez &eacute;galement ajouter des entr&eacute;es en utilisant le formulaire \'&Eacute;dition compl&egrave;te\'.', # NEW
-	'ptexte_titre_page' => 'Textes de langue propri&eacute;taire', # NEW
-	'ptexte_titre_page_short' => 'Textes de langue', # NEW
+	'proprietaire_export_import_texte_supp' => 'You can here save your current configuration and your personal language strings, or restore them from a previous backup (<i>including from another site</i>) ...<br /><br />', # NEW
+	'proprietaire_retour_plateforme' => 'Back to the platform', # NEW
+	'proprietaire_texte' => 'Here you can set global options for the site used by the plugin <b>Mentions L&eacute;gales</b>.<br /><br />You can also set strings specific languages ​​whose usage is recalled on the specific page.<br />', # NEW
+	'proprietaire_texte_supp' => 'This plugin offers you to automate and centralize the management of an \'institutional\' or \'professional\' website running SPIP.<br /><br />It allows you to enter a set of information about <b>the owner</b> of the site, organization, company, institution or individual in order to present various ways and eventually generate automatically copyright information, some \'Legal Statement\' and \'Terms of Use\'.', # NEW
+	'proprietaire_titre_page' => 'Plateform Mentions L&eacute;gales', # NEW
+	'proprietaire_titre_page_short' => 'Plateform', # NEW
+	'pskels_info_mentions_legales' => 'The blocks below provide information about defining the <b>creator</b> and <b>hosting</b> of the site to establish automatically some <b>Legal Statement</b> and <b>Terms of Use</b>.<br /><br /><u>These texts represent the statutory minimum for any website</u> and are very generic ... The should be considered as a working basis for creating your own texts.<br /><br />You can edit them on page \'Owner language texts\' if you enable the option below.', # NEW
+	'pskels_legal_legend_createur' => 'Information on site creator', # NEW
+	'pskels_legal_legend_hebergeur' => 'Information on site hosting', # NEW
+	'pskels_titre_page' => 'Configuration ok skeletons', # NEW
+	'ptexte_cliquez_pour_editer' => 'Click here to edit the entry with shortcuts formatting', # NEW
+	'ptexte_editable_ttl' => 'Click the line to edit ...', # NEW
+	'ptexte_form_titre' => 'Complete edition / New entry', # NEW
+	'ptexte_info_supp' => '<br /><b>Usage of strings on this page</b><br /><br />Strings on this page are saved in a language file called \'<b>proprietaire</b>\', so you can call them in your templates using the formula:<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />Note that if you use shortcuts in typing your text, you must add to the call above the filter \'<b>|propre</b>\'. This would give a call to the example above, the shape:<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />You can more simply use the tag <b>TEXTES_PROPRIETAIRE</b> this way:<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />shortcut,<br />arguments,<br />treatement}</code></center><br />where "arguments" corresponds to an array of arguments passed to the string and "treatement" to the name of the function of text processing (<i>"propre" by default</i>).', # NEW
+	'ptexte_info_tags' => '<br /><b>You can use the tags below into your texts (<i>they should be reported as written here: ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>This list is <b>not exhaustive</b> tag if present in the texts are not listed here, keep them ...', # NEW
+	'ptexte_info_texte' => '<ul><li><b>Languages files</b><br />The language file entries are defined by specifying a string\'s call (<i>entries \'shortcut\' of the table</i>) which corresponds to a full text (<i>entries \'displayed text\' of the table</i>), that can contain formatting and be as long as desired.<br /></li><li><b>Shortcuts Nomenclature</b><br />Shortcuts must be strings of text <u>without spaces or special characters</u> (<i>here you can enter your shortcuts with spaces, which will be replaced by underscore</i>).</li><li><b>Texts formatting</b><br />You can write your text in the same way that your SPIP articles ...</li></ul>', # NEW
+	'ptexte_info_titre' => 'Help / Reminders ...', # NEW
+	'ptexte_supprimer' => 'Vymazať vstup',
+	'ptexte_texte' => 'This page allows you to manage certain owner texts necessary for the site without the regular edition mode (<i>modified language file on the server</i>).<br /><br />Entries \'Text displayed\' in the table are editable by clicking on the \'shortcut\' correspondent. You can also add entries using the form \'Complete Edition\'.', # NEW
+	'ptexte_titre_page' => 'Language owner texts', # NEW
+	'ptexte_titre_page_short' => 'Texty jazyka',
 
 	// R
-	'responsable_fonction_label' => 'Fonction du responsable', # NEW
-	'responsable_mail_label' => 'Adresse mail du responsable', # NEW
-	'responsable_nom_label' => 'Nom du responsable', # NEW
-	'retour' => 'Retour', # NEW
-	'rue_label' => 'N&deg; et Rue', # NEW
+	'responsable_fonction_label' => 'Responsible function', # NEW
+	'responsable_mail_label' => 'Responsible email', # NEW
+	'responsable_nom_label' => 'Responsible name', # NEW
+	'retour' => 'Späť',
+	'rue_label' => 'Ulica',
 
 	// S
-	'sauvegardes_dans_dump' => 'Vos sauvegardes sont &agrave; placer dans le r&eacute;pertoire \'tmp/dump/\'.', # NEW
-	'serveur_legend' => 'Informations sur le serveur h&eacute;bergeant le site', # NEW
-	'serveur_os_comment' => 'OS install&eacute; sur ce serveur.', # NEW
-	'serveur_os_label' => 'Fonctionnant sur un syst&egrave;me', # NEW
-	'serveur_os_web_label' => 'Lien web d\'informations sur ce syst&egrave;me', # NEW
-	'serveur_type_comment' => 'Caract&eacute;ristiques techniques du serveur qui h&eacute;berge le site.', # NEW
-	'serveur_type_label' => 'Type du serveur', # NEW
-	'siege' => 'Si&egrave;ge', # NEW
-	'siren' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ENtreprises">SIREN</abbr>', # NEW
-	'siren_abbrev' => 'Siren', # NEW
-	'siret' => '<abbr title="Syst&#232;me d&#039;Identification du R&#233;pertoire des ETablissements">SIRET</abbr>', # NEW
-	'siret_abbrev' => 'Siret', # NEW
-	'site_web_label' => 'Adresse de site web', # NEW
-	'sous_le_numero' => ' sous le num&eacute;ro ', # NEW
-	'spip_proprio' => 'Mentions L&eacute;gales', # NEW
+	'sauvegardes_dans_dump' => 'Zálohy majú byť umiestnené v priečinku "tmp/dump/".',
+	'serveur_legend' => 'Údaje o serveri, na ktorom sa nachádza stránka',
+	'serveur_os_comment' => 'Operačný systém nainštalovaný na tomto serveri.',
+	'serveur_os_label' => 'Beží na systéme',
+	'serveur_os_web_label' => 'Odkaz s informáciami o tomto systéme na internete',
+	'serveur_type_comment' => 'Technické parametre servera, na ktorom sa stránka nachádza.',
+	'serveur_type_label' => 'Typ servera',
+	'siege' => 'Centrála',
+	'siren' => '<abbr title="French Système d\'Identification du Répertoire des ENtreprises">SIREN</abbr>',
+	'siren_abbrev' => 'Siren',
+	'siret' => '<abbr title="French Système d\'Identification du Répertoire des ETablissements">SIRET</abbr>',
+	'siret_abbrev' => 'Siret',
+	'site_web_label' => 'Adresa internetovej stránky',
+	'sous_le_numero' => ' pod číslom',
+	'spip_proprio' => 'Informácie právneho charakteru',
 
 	// T
-	'tel' => 'T&eacute;l&eacute;phone', # NEW
-	'tel_abbrev' => 'T&eacute;l', # NEW
-	'telecopie_label' => 'Num&eacute;ro de t&eacute;l&eacute;copie', # NEW
-	'telephone_label' => 'Num&eacute;ro de t&eacute;l&eacute;phone', # NEW
-	'testing_page_bloc' => 'Bloc d\'informations', # NEW
-	'testing_page_bloc_complet' => 'Bloc de contact complet', # NEW
-	'testing_page_business_cards' => 'Business Cards (<i>v-card et cartes de visite</i>)', # NEW
-	'testing_page_business_cards_complet' => 'Textes "business cards" complet', # NEW
-	'testing_page_carte_visite' => 'Cartes de visite (<i>en d&eacute;veloppement</i>)', # NEW
-	'testing_page_carte_visite_administrateur' => 'Carte de visite adminitrateur', # NEW
-	'testing_page_carte_visite_chef' => 'Carte de visite du responsable', # NEW
-	'testing_page_carte_visite_normale' => 'Carte de visite "classique" (<i>d&eacute;faut</i>)', # NEW
-	'testing_page_carte_visite_site' => 'Carte de visite compl&egrave;te du site (<i>liens web</i>)', # NEW
-	'testing_page_carte_visite_webmaster' => 'Carte de visite du webmestre', # NEW
-	'testing_page_code' => 'Code : ', # NEW
-	'testing_page_copyright' => 'Informations de copyright', # NEW
-	'testing_page_footer' => 'Information de copyright', # NEW
-	'testing_page_googlemap' => 'Googlemap', # NEW
-	'testing_page_intro' => 'Cette page vous permet de visualiser les diff&eacute;rents agencements d’informations propos&eacute;s par le plugin. Pour chaque entr&eacute;e est indiqu&eacute; le code d’appel ({balise ou mod&egrave;les}) &agrave; indiquer dans vos squelettes.
-	
-Nous vous conseillons &eacute;galement de jeter un oeil au squelette [mentions l&eacute;gales->@mentions_legales@].', # NEW
-	'testing_page_liens_cartes_visite' => 'Information et lien vers les cartes de visite', # NEW
-	'testing_page_modele' => 'Mod&egrave;le : ', # NEW
-	'testing_page_public' => 'Page de test', # NEW
-	'testing_page_textes_proprietaire' => 'Utilisation des textes propri&eacute;taires', # NEW
-	'testing_page_titre' => 'Test de la configuration propri&eacute;taire', # NEW
-	'testing_page_vcard' => 'Information et lien vers la "vCard"', # NEW
-	'tva_intracommunautaire' => 'T.V.A. Intracommunautaire', # NEW
-	'tva_intracommunautaire_abbrev' => 'TVA intr.', # NEW
-	'tva_non_applicable' => 'TVA non-applicable selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr>', # NEW
-	'tva_nonapplicable_comment' => 'Non soumis &agrave; la TVA selon l\'article 293B du <abbr title="Code G&#233;n&#233;ral des Imp&#244;ts">CGI</abbr> ; r&eacute;gime micro-social.', # NEW
-	'tva_nonapplicable_label' => 'TVA non-applicable', # NEW
+	'tel' => 'Telefón',
+	'tel_abbrev' => 'Tel.',
+	'telecopie_label' => 'Fax',
+	'telephone_label' => 'Telefónne číslo',
+	'testing_page_bloc' => 'Blok údajov',
+	'testing_page_bloc_complet' => 'Blok s celým kontaktom',
+	'testing_page_business_cards' => 'Vizitky (<i>v-karty a vizitky</i>)',
+	'testing_page_business_cards_complet' => 'Celé texty vizitiek',
+	'testing_page_carte_visite' => 'Vizitky (<i>vo vývoji</i>)',
+	'testing_page_carte_visite_administrateur' => 'Vizitka administrátora',
+	'testing_page_carte_visite_chef' => 'Responsible card', # NEW
+	'testing_page_carte_visite_normale' => 'Klasická vizitka (<i>predvolené</i>)',
+	'testing_page_carte_visite_site' => 'Vizitka celej stránky (<i>internetové odkazy</i>)',
+	'testing_page_carte_visite_webmaster' => 'Vizitka webmastera',
+	'testing_page_code' => 'Kód: ',
+	'testing_page_copyright' => 'Údaje o autorských právach',
+	'testing_page_footer' => 'Informácie o autorských právach',
+	'testing_page_googlemap' => 'Googlemap',
+	'testing_page_intro' => 'Táto stránka vám umožňuje vyskúšať si vzhľad údajov, ktoré poskytuje tento zásuvný modul. Pre každý údaj je určený vyvolávací kód({model alebo tag}) na zaradenie do šablón.
+ 
+Tiež vám odporúčame, aby ste sa pozreli na  [informácie právneho charakteru->@mentions_legales@] o šablóne.',
+	'testing_page_liens_cartes_visite' => 'Informácie o kartách a odkazy na ne',
+	'testing_page_modele' => 'Model: ',
+	'testing_page_public' => 'Testovacia stránka',
+	'testing_page_textes_proprietaire' => 'Použitie textov vlastníka',
+	'testing_page_titre' => 'Test nastavení vlastníka',
+	'testing_page_vcard' => 'Informácie o "vCard" a odkazy na ňu',
+	'tva_intracommunautaire' => 'DIČ',
+	'tva_intracommunautaire_abbrev' => 'DIČ',
+	'tva_non_applicable' => 'Nepodlieha DPH podľa odseku 293B <abbr title="French Code Général des Impôts">CGI</abbr>',
+	'tva_nonapplicable_comment' => 'nepodlieha DPH podľa odseku 293B <abbr title="French Code Général des Impôts">CGI</abbr> ; micro-social regime.',
+	'tva_nonapplicable_label' => 'Nepodlieha DPH',
 
 	// U
-	'utiliser_ce_plugin' => 'Utiliser ce plugin ...', # NEW
+	'utiliser_ce_plugin' => 'Použitie tohto zásuvného modulu',
 
 	// V
-	'ville_label' => 'Ville' # NEW
+	'ville_label' => 'Mesto'
 );
 
 ?>
