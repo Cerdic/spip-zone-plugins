@@ -1,7 +1,7 @@
 <plugin>
 
 	<nom>Pr&eacute;-prod</nom>
- 	<version>1.1.5</version>
+ 	<version>1.1.6</version>
 
  	<prefix>preprod</prefix>
  	<categorie>outil</categorie>
@@ -49,6 +49,8 @@
 		<url>preprod</url> 
 	</bouton>
 	
-	<utilise id="tickets" version="[1.65;]" />
-	<utilise id="mediabox" version="[0.6.9;]" />
+	<necessite id="ticketskiss" version="[1.0;]" />
+	<necessite id="mediabox" version="[0.6.9;]" />
+	<necessite id="yaml" version="[1.5;]" />
+	
 </plugin>

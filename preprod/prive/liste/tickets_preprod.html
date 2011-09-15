@@ -41,6 +41,7 @@
             
                 <tbody>
                 <BOUCLE_tickets(TICKETS)
+                    {id_assigne?}
                     {statut?}
                     {statut!='ferme'}
                     {id_livrable}
@@ -48,7 +49,7 @@
                     {pagination #ENV{nb,200}}
                 >
                 
-                    [(#REM) On rÃ©cupere les forums liÃ©s au ticket ]
+                    [(#REM) On recupere les forums lies au ticket ]
                     [(#SET{discussion,''})]
                     <BOUCLE_forum(TICKETS_FORUM){id_ticket}{!par date}>
                     [(#SET{discussion,[(#GET{discussion}|concat{[(#TEXTE|PtoBR)],'
