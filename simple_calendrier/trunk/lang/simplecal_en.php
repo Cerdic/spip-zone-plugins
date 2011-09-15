@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'bouton_admin' => 'Event',
 
 // C
-    'description_plugin' => 'Calendar',
+    'calendrier' => "calendar",
     'corbeille_tous' => "@nb@ events in garbage",
     'corbeille_un' => "1 event in garbage",
     'config_titre' => "Simple calendrier",
@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     
 
 // D
+    'description_plugin' => 'Calendar',
     'date' => 'Date',
     'dates' => 'Dates',
     'date_du_au' => 'from @date_debut@ to @date_fin@',

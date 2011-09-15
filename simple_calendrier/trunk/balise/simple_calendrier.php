@@ -110,7 +110,9 @@ function simplecal_generer_calendrier($mois, $annee, $tab_dates){
     $s .= $rc.'    </div>';
     $s .= $rc.'</div>';
     
-    $s .= $rc.'<table class="ui-datepicker-calendar">';
+    $resume = ucfirst(_T('simplecal:calendrier'))." : ".$nom_mois[$mois].' '.$annee;
+    
+    $s .= $rc.'<table class="ui-datepicker-calendar" summary="'.$resume.'">';
     $s .= $rc.'<thead>';
     $s .= $rc.'<tr>';
     $s .= $rc.'    <th title="'.ucfirst(_T('date_jour_2')).'">'._T('simplecal:date_lundi_abbr').'</th>';

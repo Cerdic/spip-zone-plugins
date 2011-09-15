@@ -22,7 +22,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'bouton_admin' => 'Ev&egrave;nement',
 
 // C
-    'description_plugin' => 'Calendrier',
+    'calendrier' => "calendrier",
     'corbeille_tous' => "@nb@ &eacute;v&egrave;nements dans la corbeille",
     'corbeille_un' => "1 &eacute;v&egrave;nement dans la corbeille",
     'config_titre' => "Simple calendrier",
@@ -45,6 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'config_rubrique_non' => 'Non, cela n\'a pas de sens pour moi.',
     
 // D
+    'description_plugin' => 'Calendrier',
     'date' => 'Date',
     'dates' => 'Dates',
     'date_du_au' => 'du @date_debut@ au @date_fin@',

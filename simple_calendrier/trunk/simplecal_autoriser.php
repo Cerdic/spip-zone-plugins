@@ -32,7 +32,7 @@ function autoriser_bt_simplecal_accueil($faire, $type, $id, $qui, $opt) {
 // Le plugin "Acces restreint 3" la déclare également mais ne l'utilise pas (surement pour le plugin Agenda 2).
 // Ce qui pose problème car basé sur une table evenement différente de celle du plugin "simple-calendrier" !
 // il est donc normal que le plugin "simple-calendrier" la déclare pour son usage propre.
-// => celle du plugin "Acces restreint" ne sera donc pas utilisée. 
+// => celle du plugin "Acces restreint" ne sera donc pas utilisée (sauf si chargée en 1er => crash... cf. doc. pb connus) 
 // => cela tombe bien puisqu'il ne s'en sert pas lui-même 
 //    et que les plugins "simple-calendrier" et "agenda 2" sont naturellement incompatibles)
 function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {
