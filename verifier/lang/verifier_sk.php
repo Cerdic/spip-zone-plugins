@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_max' => 'Hodnota musí byť menšia ako @max@.',
 	'erreur_entier_min' => 'Hodnota musí byť väčšia ako @min@.',
 	'erreur_id_document' => 'Tento identifikátor dokumentu nie je platný.',
+	'erreur_inconnue_generique' => 'Le format n\'est pas correct.', # NEW
 	'erreur_numerique' => 'Formát čísla je neplatný.',
 	'erreur_regex' => 'Reťazec pravidelného výrazu má nesprávny formát.',
 	'erreur_siren' => 'IČO je neplatné.',

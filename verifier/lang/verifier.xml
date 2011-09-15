@@ -6,8 +6,12 @@
 	<langue code="en">
 		<traducteur nom="RastaPopoulos" />
 		<traducteur nom="mark_baber" />
+		<traducteur nom="davood" />
 	</langue>
 	<langue code="es" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>

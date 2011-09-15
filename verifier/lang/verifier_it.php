@@ -26,6 +26,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_entier_max' => 'Il valore deve essere minore di @max@.',
 	'erreur_entier_min' => 'Il valore deve essere maggiore di @min@.',
 	'erreur_id_document' => 'L\'id del documento non è valido.',
+	'erreur_inconnue_generique' => 'Le format n\'est pas correct.', # NEW
 	'erreur_numerique' => 'Il formato del numero non è valido.',
 	'erreur_regex' => 'Il formato non è valido.',
 	'erreur_siren' => 'Il numero di SIREN non è valido.',
