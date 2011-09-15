@@ -9,7 +9,9 @@
 		<traducteur nom="mark_baber" />
 	</langue>
 	<langue code="es" />
-	<langue code="fa" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>
