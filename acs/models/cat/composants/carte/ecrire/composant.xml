@@ -6,7 +6,7 @@
   <version>0.8.5</version>
   <necessite id='acs' version='[0.7.1;]' />
   <necessite id='gis' version='[0.2;]' />
-  <necessite id='openlayers' version='[0.0.2;]' />
+  <necessite id='open_layers' version='[0.0.2;]' />
 
   <param>
     <nom>preview</nom>

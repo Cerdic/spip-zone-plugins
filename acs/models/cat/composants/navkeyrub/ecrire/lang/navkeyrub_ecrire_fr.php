@@ -13,6 +13,7 @@ Les propriétés CSS des rubriques sont héritées du composant Rubnav.',
 'TitreFond' => 'Fond',
 'Bord2Color' => 'Bord des sous-menus',
 'GroupeMots' => 'Groupe de mots-cl&eacute;s',
-'LogoMot' => 'Logos des mots-cl&eacute;s'
+'LogoMot' => 'Logos des mots-cl&eacute;s',
+'CouleurMot' => 'Mots de la couleur dominante de leur logo'
 );
 ?>

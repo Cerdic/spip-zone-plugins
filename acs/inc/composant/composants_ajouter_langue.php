@@ -33,7 +33,8 @@ function composants_ajouter_langue($dir='') {
     if (!$langfile)
       $langfile = find_in_path("composants/$c/".($dir ? $dir.'/' : '')."lang/$c".'_'.($dir ? $dir.'_' : '').'fr.php');
     if (!$langfile)
-      continue;
+    	continue;
+
     require_once($langfile);
     if (is_array($GLOBALS[$idx_tmp])) {
       $cla = array();
@@ -42,6 +43,8 @@ function composants_ajouter_langue($dir='') {
       }
       $GLOBALS[$idx] = array_merge($GLOBALS[$idx], $cla);
     }
+    else
+    	acs_log('ERROR in composants_ajouter_langue() : $GLOBALS[\''.$idx.'\'] from lang file "'.$langfile.'" is not an array.');
     unset($GLOBALS[$idx_tmp]);
   }
   $GLOBALS['idx_lang'] = $idx;
@@ -56,7 +59,8 @@ function acs_addLang($langfile) {
 	if (!is_array($current))
 		$current = array();
 	include_spip($langfile);
-	$GLOBALS[$GLOBALS['idx_lang']] = array_merge($current, $GLOBALS[$GLOBALS['idx_lang']]);
+	if ($current != $GLOBALS[$GLOBALS['idx_lang']])
+		$GLOBALS[$GLOBALS['idx_lang']] = array_merge($current, $GLOBALS[$GLOBALS['idx_lang']]);
 }
 
 /**

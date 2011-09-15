@@ -282,9 +282,9 @@ class ctlChoix extends Controle {
           $label = _T('acs:non');
           break;
         default:
-          $label = _TC($this->composant, $this->nom.ucfirst($option));
+          $label = _TC($this->composant, $this->nom.$option);
           // S'il n'existe pas de traduction propre au composant, on cherche une traduction ACS generique pour cette option
-          if ($label == strtolower(str_replace('_', ' ', $this->nom.$option)))
+          if ($label == str_replace('_', ' ', $this->nom.$option))
             $label = _T('acs:'.strtolower($option));
       }
       $r .= '<td>&nbsp;'.acs_bouton_radio(

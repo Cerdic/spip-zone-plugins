@@ -306,12 +306,19 @@ class AdminComposant {
 		$r .= '<hr /><div>'._T('acs:require', array('class' => $this->class, 'version' => $this->version)).' :<br />';
 		foreach($this->necessite as $nec) {
 			$get_version = $nec['id'].'_version';
-			$current_version = is_callable($get_version) ? $get_version() : '';
+			if (is_callable($get_version)) // la fonction existe pour spip et pour acs
+				$current_version = $get_version();
+			elseif ($f = chercher_filtre('info_plugin')) { // pour les plugins sans fonction plugin_version()
+				if (is_callable($f))
+					$current_version = $f($nec['id'],'version');
+			}
+			if (!$current_version)
+				$current_version = '?';
 			$version = substr($nec['version'], 1, -1);
 			$version = explode(';',$version);
 			$min_version = $version[0];
 			$max_version = $version[1];
-			if (version_compare($min_version, $current_version, '>=')) {
+			if (version_compare($min_version, $current_version, '>')) {
 				$class = 'alert';
 			}
 			else {
