@@ -8,76 +8,76 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'activation_barre_impossible' => 'Un autre plugin interdit l\'usage du porte-plume dans l\'espace public.', # NEW
-	'annuler' => 'Cancel', # MODIF
+	'activation_barre_impossible' => 'Iný zásuvný modul bráni použitiu porte-plume na verejne prístupnej stránke.',
+	'annuler' => 'Zrušiť',
 
 	// B
-	'bouton_supprimer' => 'Supprimer', # NEW
+	'bouton_supprimer' => 'Odstrániť',
 
 	// D
-	'deja_modifie' => 'Already modified', # MODIF
-	'donnees_mal_formatees' => 'Invalid request format', # MODIF
+	'deja_modifie' => 'Už upravený',
+	'donnees_mal_formatees' => 'Neplatný formát požiadavky',
 
 	// E
-	'editer' => 'Edit', # MODIF
-	'editer_@type@_@id@' => 'Edit the whole @type@ @id@', # MODIF
-	'editer_tout' => 'Edit as a whole', # MODIF
-	'effets' => 'Effets', # NEW
-	'explication_exec_autorise' => 'Pages autorisées à la modification
-		(?exec=...) : (, pour séparer les exec - * pour toutes).', # NEW
-	'explication_introduction_article' => 'L\'introduction d\'un article affiche le descriptif de l\'article, sinon affiche ses 600 premiers caractères (chapeau puis texte).', # NEW
-	'explication_reduire_logo' => 'Réduire le logo s\'il dépasse
-		la taille maximale indiquée en pixels. Exemple : 100. (0 = jamais)', # NEW
+	'editer' => 'Upraviť',
+	'editer_@type@_@id@' => 'Upraviť celý @type@ @id@',
+	'editer_tout' => 'Upravovať ako celok',
+	'effets' => 'Efekty',
+	'explication_exec_autorise' => 'Stránky, na ktorých je povolené vykonávať zmeny
+  (?exec=...): (, na oddelenie viacerých stránok, * pre všetky).',
+	'explication_introduction_article' => 'Ako úvod článku sa zobrazí popis článku, ak nejaký existuje, v opačnom prípade sa zobrazí prvých 600 znakov (úvodného odseku a textu).',
+	'explication_reduire_logo' => 'Zmenšiť veľkosť loga, ak presahuje
+  maximálnu veľkosť (v pixeloch). Príklad: 100 (0 = nikdy).',
 
 	// L
-	'label_activer_barre_typo' => 'Activer la barre typographique dans les crayons ?', # NEW
-	'label_activer_crayons_prive' => 'Activer crayons pour la partie privée.', # NEW
-	'label_barre_typo' => 'Barre typographique', # NEW
-	'label_clickhide' => 'Un clic en-dehors masque les crayons', # NEW
-	'label_effets' => 'Choix des effets', # NEW
-	'label_espaceprive' => 'Crayons dans le privé ?', # NEW
-	'label_exec_autorise' => 'Pages autorisées', # NEW
-	'label_filet' => 'Filet', # NEW
-	'label_message' => 'Obtenir un message', # NEW
-	'label_msg_abandon' => 'Sur abandon', # NEW
-	'label_msg_no_change' => 'Si pas de changement', # NEW
-	'label_reduire_logo' => 'Réduire les logos', # NEW
-	'label_yellow_fade' => 'Fade', # NEW
-	'legend_controleur_hyperlien' => 'Hyperlien', # NEW
-	'legend_controleur_logo' => 'Choisir un logo :', # NEW
-	'legend_controleur_logo_remplacer' => 'Remplacer ce logo', # NEW
-	'legend_controleur_qui' => 'Qui ?', # NEW
-	'legend_controleur_vignette' => 'Choisir une vignette :', # NEW
-	'legend_controleur_vignette_remplacer' => 'Remplacer cette vignette', # NEW
-	'legend_editer_prive' => 'Éditer l\'espace privé (expérimental)', # NEW
-	'legend_introduction_article' => 'Texte introductif de l\'article', # NEW
+	'label_activer_barre_typo' => 'Aktivovať klávesový panel pre "Farbičky"?',
+	'label_activer_crayons_prive' => 'Aktivovať "Farbičky" pre súkromnú zónu.',
+	'label_barre_typo' => 'Klávesový panel',
+	'label_clickhide' => 'Klikom mimo oblasti zatvoríte ceruzky',
+	'label_effets' => 'Výber efektov',
+	'label_espaceprive' => 'Používať "ceruzky" v súkromnej zóne?',
+	'label_exec_autorise' => 'Stránky povolené',
+	'label_filet' => 'Čiara',
+	'label_message' => 'Zobraziť správu',
+	'label_msg_abandon' => 'Pri zrušení',
+	'label_msg_no_change' => 'Ak sa neurobí žiadna zmena',
+	'label_reduire_logo' => 'Zmenšiť logá',
+	'label_yellow_fade' => 'Tieň',
+	'legend_controleur_hyperlien' => 'Hypertextový odkaz',
+	'legend_controleur_logo' => 'Vyberte logo:',
+	'legend_controleur_logo_remplacer' => 'Nahradiť toto logo',
+	'legend_controleur_qui' => 'Kto?',
+	'legend_controleur_vignette' => 'Vyberte miniatúru:',
+	'legend_controleur_vignette_remplacer' => 'Nahradiť túto miniatúru',
+	'legend_editer_prive' => 'Použiť v súkromnej zóne (experimentálne)',
+	'legend_introduction_article' => 'Úvodný text článku',
 
 	// M
-	'message_image_obligatoire' => 'Il faut choisir une image', # NEW
-	'messages' => 'Messages', # NEW
-	'modifie_par_ailleurs' => 'Was modified elsewhere in the meantime', # MODIF
+	'message_image_obligatoire' => 'Musíte si vybrať obrázok',
+	'messages' => 'Správy',
+	'modifie_par_ailleurs' => 'Medzitým bol zmenený inde',
 
 	// N
-	'non_autorise' => 'Not allowed', # MODIF
-	'non_implemente' => 'Not implemented', # MODIF
+	'non_autorise' => 'Nepovolené',
+	'non_implemente' => 'Nezavedené',
 
 	// P
-	'pas_de_modification' => 'No change', # MODIF
-	'pas_de_valeur' => 'No value for this id', # MODIF
+	'pas_de_modification' => 'Žiadna zmena',
+	'pas_de_valeur' => 'Toto ID nemá žiadnu hodnotu',
 
 	// S
 	'sauvegarder' => 'Uložiť zmeny?',
-	'svp_copier_coller' => 'Sorry, copy/paste your changes and retry', # MODIF
+	'svp_copier_coller' => 'Prepáčte, skopírujte/prilepte svoje zmeny a skúste znova',
 
 	// T
-	'titre_config_crayons' => 'Configurer les crayons', # NEW
-	'titre_crayons' => 'Crayons', # NEW
+	'titre_config_crayons' => 'Nastaviť "Farbičky"',
+	'titre_crayons' => 'Farbičky',
 
 	// U
-	'update_impossible' => 'La mise à jour a échoué.', # NEW
+	'update_impossible' => 'Aktualizácia neprebehla úspešne.',
 
 	// V
-	'veuillez_patienter' => 'Searching ...' # MODIF
+	'veuillez_patienter' => 'Vyhľadáva sa...'
 );
 
 ?>

@@ -13,7 +13,9 @@
 		<traducteur nom="kent1" />
 	</langue>
 	<langue code="eo" />
-	<langue code="es" />
+	<langue code="es">
+		<traducteur nom="severo" />
+	</langue>
 	<langue code="eu" />
 	<langue code="fa">
 		<traducteur nom="davood" />
@@ -31,7 +33,9 @@
 	<langue code="nl" />
 	<langue code="oc_lnc" />
 	<langue code="ro" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="sv" />
 	<langue code="tr" />
 	<langue code="tw" />
