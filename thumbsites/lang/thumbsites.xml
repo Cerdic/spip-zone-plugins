@@ -4,11 +4,18 @@
 	</langue>
 	<langue code="ca" />
 	<langue code="de" />
-	<langue code="en" />
-	<langue code="fa" />
+	<langue code="en">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu" />
 	<langue code="gl" />
 	<langue code="pt_br">
 		<traducteur nom="rporto" />
+	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
 	</langue>
 </traduction>
