@@ -186,7 +186,7 @@ function cvtm_formulaire_verifier($flux){
 
 		// si la derniere etape OK etait la derniere
 		// on renvoie le flux inchange et ca declenche traiter
-		if ($derniere_etape_ok==$etapes AND !$etape_demandee){
+		if ($derniere_etape_ok==$etapes AND (!$etape_demandee OR $etape_demandee>$etapes)){
 			return $flux;
 		}
 		else {
