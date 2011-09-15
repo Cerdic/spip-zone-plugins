@@ -106,6 +106,8 @@ function polyhier_formulaire_verifier($flux){
 			$id_parent = _request('parents');
 			$id_parent = explode('|',is_array($id_parent)?reset($id_parent):"rubrique|0");
 			set_request('id_parent',intval(end($id_parent)));
+			// Puisque c'est ok, on enlève l'éventuelle erreur que SPIP aurait mis sur "id_parent"
+			unset($flux['data']['id_parent']);
 		}
 
 	}
