@@ -13,6 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_titre' => 'Importateur de contacts',
 'info_aucun_contact' => 'Aucun contact n\'a été trouvé pour ce compte.',
 'info_nb_contacts' => '@nb@ contacts ont été récupérés.',
+'info_nb_contacts_erreur' => '@nb@ contacts ont été récupérés mais n\'ont pu être utilisés.',
 );
 
 ?>
