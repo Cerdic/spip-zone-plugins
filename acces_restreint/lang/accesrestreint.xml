@@ -17,9 +17,12 @@
 		<traducteur nom="boyquotes" />
 	</langue>
 	<langue code="eu" />
-	<langue code="fa" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
+		<traducteur nom="orlammd" />
 	</langue>
 	<langue code="gl" />
 	<langue code="it" />
