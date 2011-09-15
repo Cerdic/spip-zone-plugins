@@ -8,82 +8,82 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'adresse_perso' => 'Domicile', # NEW
+	'adresse_perso' => 'Domov',
 	'adresse_pro' => 'Do práce',
 	'adresses' => 'Adresy',
 	'ajouter_adresse' => 'Pridať adresu',
 	'ajouter_email' => 'Pridať e-mail',
-	'ajouter_telephone' => 'Pridať telefónne číslo',
+	'ajouter_telephone' => 'Pridať telefónne číslo', # MODIF
 	'articles' => 'Articles', # NEW
 	'auteurs' => 'Auteurs', # NEW
 
 	// C
 	'configuration_coordonnees' => 'Configuration des coordonnées', # NEW
-	'confirmer_suppression_adresse' => 'Voulez-vous vraiment supprimer cette adresse ?', # NEW
-	'confirmer_suppression_email' => 'Voulez-vous vraiment supprimer ce courriel ?', # NEW
-	'confirmer_suppression_numero' => 'Voulez-vous vraiment supprimer ce num&eacute;ro ?', # NEW
+	'confirmer_suppression_adresse' => 'Určite chcete odstrániť túto adresu?',
+	'confirmer_suppression_email' => 'Určite chcete odstrániť tento e-mail?',
+	'confirmer_suppression_numero' => 'Určite chcete odstrániť toto telefónne číslo?',
 
 	// E
-	'editer_adresse' => '&Eacute;diter une adresse', # NEW
-	'editer_email' => '&Eacute;diter un courriel', # NEW
-	'editer_numero' => '&Eacute;diter un num&eacute;ro', # NEW
-	'emails' => 'Courriels', # NEW
+	'editer_adresse' => 'Upraviť adresu',
+	'editer_email' => 'Upraviť e-mail',
+	'editer_numero' => 'Upraviť telefónne číslo',
+	'emails' => 'E-maily',
 	'explication_objets_actifs' => 'Sur quels objets éditoriaux proposer les coordonnées ?', # NEW
-	'explication_type_adresse' => 'Le type peut être \'perso\' ou \'pro\'.', # NEW
-	'explication_type_email' => 'Le type peut être \'perso\' ou \'pro\'.', # NEW
-	'explication_type_numero' => 'Le type peut être \'perso\' ou \'pro\' ou \'fax\'.', # NEW
+	'explication_type_adresse' => 'Typ môže byť súkromný alebo do práce',
+	'explication_type_email' => 'Typ môže byť súkromný alebo do práce',
+	'explication_type_numero' => 'Typ môže byť súkromný, do práce, alebo fax',
 
 	// F
-	'fax' => 'Fax.', # NEW
+	'fax' => 'Fax.',
 
 	// I
-	'info_adresse_utilisee_par' => 'Adresse utilis&eacute;e par :', # NEW
-	'info_email_utilise_par' => 'Courriel utilis&eacute; par :', # NEW
-	'info_gauche_numero_adresse' => 'N° Adresse', # NEW
-	'info_gauche_numero_email' => 'N° Email', # NEW
-	'info_gauche_numero_numero' => 'N° Num&eacute;ro', # NEW
-	'info_numero_utilise_par' => 'Num&eacute;ro utilis&eacute; par :', # NEW
-	'item_nouveau_numero' => 'Nouveau num&eacute;ro', # NEW
-	'item_nouvel_email' => 'Nouveau courriel', # NEW
-	'item_nouvelle_adresse' => 'Nouvelle adresse', # NEW
+	'info_adresse_utilisee_par' => 'Túto adresu používa:',
+	'info_email_utilise_par' => 'Tento e-mail používa:',
+	'info_gauche_numero_adresse' => 'Č. adresy',
+	'info_gauche_numero_email' => 'Č. e-mailu',
+	'info_gauche_numero_numero' => 'P. č. tel. čísla',
+	'info_numero_utilise_par' => 'Toto telefónne číslo používa:',
+	'item_nouveau_numero' => 'Nové telefónne číslo',
+	'item_nouvel_email' => 'Nový e-mail',
+	'item_nouvelle_adresse' => 'Nová adresa',
 
 	// L
-	'label_boite_postale' => 'Boîte Postale', # NEW
-	'label_code_postal' => 'Code Postal', # NEW
-	'label_complement' => 'Compl&eacute;ment', # NEW
-	'label_email' => 'Courriel', # NEW
-	'label_numero' => 'Num&eacute;ro', # NEW
+	'label_boite_postale' => 'Poštová schránka',
+	'label_code_postal' => 'PSČ',
+	'label_complement' => 'Doplňujúce informácie',
+	'label_email' => 'E-mail',
+	'label_numero' => 'Telefónne číslo',
 	'label_objets_actifs' => 'Objets', # NEW
-	'label_pays' => 'Pays', # NEW
+	'label_pays' => 'Krajina',
 	'label_titre' => 'Titre', # NEW
-	'label_type_adresse' => 'Type d\'adresse', # NEW
-	'label_type_email' => 'Type de courriel', # NEW
-	'label_type_numero' => 'Type de num&eacute;ro', # NEW
-	'label_ville' => 'Ville', # NEW
-	'label_voie' => 'Adresse', # NEW
+	'label_type_adresse' => 'Typ adresy',
+	'label_type_email' => 'Typ e-mailu',
+	'label_type_numero' => 'Typ telefónneho čísla',
+	'label_ville' => 'Mesto',
+	'label_voie' => 'Adresa',
 
 	// M
-	'mobile' => 'Mobile', # NEW
-	'modifier_adresse' => 'Modifier cette adresse', # NEW
-	'modifier_email' => 'Modifier ce courriel', # NEW
-	'modifier_numero' => 'Modifier ce num&eacute;ro', # NEW
+	'mobile' => 'Mobil',
+	'modifier_adresse' => 'Upraviť túto adresu',
+	'modifier_email' => 'Upraviť tento e-mail',
+	'modifier_numero' => 'Upraviť toto telefónne číslo',
 
 	// N
-	'nouveau_numero' => 'Nouveau num&eacute;ro', # NEW
-	'nouvel_email' => 'Nouveau courriel', # NEW
-	'nouvelle_adresse' => 'Nouvelle adresse', # NEW
-	'numeros' => 'Num&eacute;ros', # NEW
+	'nouveau_numero' => 'Nové telefónne číslo',
+	'nouvel_email' => 'Nový e-mail',
+	'nouvelle_adresse' => 'Nová adresa',
+	'numeros' => 'Telefónne čísla',
 
 	// R
 	'rubriques' => 'Rubriques', # NEW
 
 	// S
-	'supprimer_adresse' => 'Supprimer cette adresse', # NEW
-	'supprimer_email' => 'Supprimer ce courriel', # NEW
-	'supprimer_numero' => 'Supprimer ce num&eacute;ro', # NEW
+	'supprimer_adresse' => 'Odstrániť túto adresu',
+	'supprimer_email' => 'Odstrániť tento e-mail',
+	'supprimer_numero' => 'Odstrániť toto telefónne číslo',
 
 	// T
-	'titre_coordonnees' => 'Coordonn&eacute;es' # NEW
+	'titre_coordonnees' => 'Adresár'
 );
 
 ?>

@@ -1,5 +1,10 @@
 <traduction module="coordonnees" gestionnaire="salvatore" reference="fr">
-	<langue code="en" />
+	<langue code="en">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
 	</langue>
