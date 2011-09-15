@@ -111,7 +111,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// N
 	'noisette_label_afficher_titre_noisette' => 'Zobraziť názov?',
-	'noisette_label_niveau_titre' => 'Choisir le niveau du titre', # NEW
+	'noisette_label_niveau_titre' => 'Vyberte úroveň nadpisu',
 	'noisette_label_titre_noisette' => 'Názov:',
 	'noisette_label_titre_noisette_perso' => 'Ak je to vlastný názov:',
 	'noisette_titre_perso' => 'Vlastný názov',
