@@ -37,13 +37,30 @@ function commandes_paypal_traitement_paypal($flux){
 		else{
 			$statut_nouveau = 'erreur';
 		}
-
-		spip_log("envoi vers instituer $id_commande-$statut_nouveau",'commandes_paypal_traitement');
 		
-		//on institue la commande
-		$action = charger_fonction('instituer_commande', 'action/');
-		$action('$id_commande-$statut_nouveau');
-
+		// On change le statut de la commande
+		$changements = array(
+			'statut' => $statut_nouveau
+		);
+		
+		// Si le statut est "paye" alors on ajoute la date de paiement
+		if ($statut_nouveau == 'paye'){
+			$changements['date_paiement'] = date('Y-m-d H:i:s');
+		}
+		
+		// On fait la mise à jour
+		$ok = sql_updateq(
+			'spip_commandes',
+			$changements,
+			'id_commande = '.$id_commande
+		);
+		
+		// Si c'est bon, on appelle une notification
+		if ($ok){
+			$id_auteur = $commande['id_auteur'];
+			$fonction_notif = charger_fonction('notifications', 'inc/');
+			$fonction_notif('commande_instituer', $id_commande, array('ancien_statut' => $statut_commande, 'nouveau_statut' => $statut_nouveau));
+		}
 	}
 	
 	return $flux;
