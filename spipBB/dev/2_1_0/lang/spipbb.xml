@@ -3,7 +3,9 @@
 		<traducteur nom="xuacu" />
 	</langue>
 	<langue code="bg" />
-	<langue code="ca" />
+	<langue code="ca">
+		<traducteur nom="merce" />
+	</langue>
 	<langue code="cs" />
 	<langue code="da" />
 	<langue code="de">
@@ -11,6 +13,7 @@
 	</langue>
 	<langue code="en">
 		<traducteur nom="mark_baber" />
+		<traducteur nom="davood" />
 	</langue>
 	<langue code="es" />
 	<langue code="fr_tu">
