@@ -23,7 +23,7 @@
 
 	<utilise nom="selecteur_generique" compatibilite="[1.12;]" />
 	<necessite nom="saisies" compatibilite="[1.7.1;]" />
-	<lib nom="mxn-gis-2.0.9" lien="http://www.mediaspip.net/sites/www.mediaspip.net/squelettes/paquets/librairies/mxn-gis-2.0.9.zip" />
+	<lib nom="mxn-gis-2.0.9" lien="http://www.mediaspip.net/sites/www.mediaspip.net/squelettes/paquets/mxn-gis/mxn-gis-2.0.9.zip" />
 
 	<pipeline
 		nom="declarer_tables_interfaces"
