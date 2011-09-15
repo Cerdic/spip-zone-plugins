@@ -23,7 +23,9 @@
 	<langue code="pl" />
 	<langue code="pt" />
 	<langue code="ro" />
-	<langue code="sk" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 	<langue code="tr" />
 	<langue code="uk" />
 </traduction>

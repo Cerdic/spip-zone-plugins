@@ -24,9 +24,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_tous' => 'إنشاء كل فهارس FULLTEXT المقترحة',
 
 	// D
-	'des_utilisations' => '@nb@ utilisations', # NEW
-	'descriptif' => 'Descriptif', # NEW
-	'documents_proteges' => 'Documents prot&eacute;g&eacute;s', # NEW
+	'des_utilisations' => '@nb@ استخدام',
+	'descriptif' => 'الوصف',
+	'documents_proteges' => 'مستندات محمية',
 
 	// E
 	'enfan' => 'ولد',
@@ -36,8 +36,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'enfantillage' => 'ولدن',
 	'enfants' => 'ولد',
 	'erreur_doc_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات doc.',
-	'erreur_intervalle_cron' => 'Vous devez indiquer un intervalle sup&eacute;rieur &agrave; une seconde.', # NEW
-	'erreur_nb_docs' => 'Vous devez indiquer un nombre de documents &agrave; traiter par it&eacute;ration sup&eacute;rieur &agrave; un.', # NEW
+	'erreur_intervalle_cron' => 'يجب تحديد مدة تفوق الثانية',
+	'erreur_nb_docs' => 'يجب تحديد عدد مستندات للمعالجة يفوق المستند الواحد.',
 	'erreur_pdf_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات pdf.',
 	'erreur_ppt_bin' => 'يجب تحديد التطبيق المستخدم لاسترجاع ملفات ppt.',
 	'erreur_taille_index' => 'يجب فهرسة حرف واحد على الأقل.',
@@ -56,18 +56,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'general' => 'عام',
 
 	// I
-	'id' => 'ID', # NEW
+	'id' => 'الرقم التسلسلي',
 	'il_faut_myisam' => 'يجب ان يكون نوع الجداول MyISAM',
 	'incoherence_charset' => 'قد يؤدي عدم تجانس بين طقم أحرف موقعك وطقم أحرف جداول قاعدة البيانات الى تحريف نتائج البحث للعديد من الأحرف:',
 	'index_regenere' => 'فهارس الجدول المعاد إنتاجها',
 	'index_reinitialise' => 'تمت إعادة تأصيل المستندات الخاطئة',
-	'index_reinitialise_ptg' => 'Les documents protégés ont tous été réinitialisés', # NEW
+	'index_reinitialise_ptg' => 'تمت اعادة تأصيل المستندات المحمية',
 	'index_reinitialise_totalement' => 'تمت إعادة تأصيل كل المستندات',
 	'index_supprime' => 'تم حذف الفهرس',
 	'indiquer_chemin_bin' => 'تحديد مسار التطبيق الدي يعالج فهرسة',
 	'indiquer_options_bin' => 'تحديد خيارات فهرسة',
-	'infos' => 'Informations', # NEW
-	'infos_documents_proteges' => 'Vous trouverez ici la liste des documents protégés et donc non-indexés par Fulltext', # NEW
+	'infos' => 'المعلومات',
+	'infos_documents_proteges' => 'ستجد هنا قائمة بالمستندات المحمية والتي لم تتم فهرستها',
 	'infos_fulltext_document' => 'يمكن من هنا اختيار اي نوع من المستندات يخضع لفهرسة الملحق وإعداد التطبيقات المستخدمة وخياراتها.', # MODIF
 	'intervalle_cron' => 'Intervalle de temps entre deux passages du CRON (en secondes).', # NEW
 
