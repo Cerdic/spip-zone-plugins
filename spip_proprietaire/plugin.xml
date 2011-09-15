@@ -1,14 +1,15 @@
 <plugin>
-	<nom>SPIP Mentions L&#233;gales</nom>
+	<!--
+	Versions / Etat
+	-->
 	<version>1.61</version>
 	<etat>stable</etat>
+	<!--
+	Infos SPIP
+	-->
+	<nom>SPIP Mentions L&#233;gales</nom>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
 	<licence>[GPLv3->http://www.opensource.org/licenses/gpl-3.0.html]</licence>
- 	<prefix>spip_proprio</prefix>
-	<chemin dir='public' type='public' />
-	<chemin dir='prive' type='prive' />
-	<chemin dir='' />
-	<lien>[Documentation->http://www.spip-contrib.net/?article3516]</lien>
 	<description>
 Ce plugin vous propose la g&#233;n&#233;ration automatique de {{Mentions L&#233;gales}}, {{Conditions d'Utilisation}} et informations de {{Copyright}} propres &#224; votre site SPIP.
 
@@ -23,15 +24,44 @@ Certaines ic&#244;nes du plugin, dans les mod&#232;les publics, proviennent du s
 Les ic&#244;nes de l'espace priv&#233; proviennent du projet {{[GNOME->http://www.gnome.org/]}}.
 	</description>
  	<icon>images/idisk-dir-36.png</icon>
-	<options>spip_proprio_options.php</options>
-	<fonctions>spip_proprio_fonctions.php</fonctions>
-	<onglet id="spip_proprio" parent="configuration">
-	    <icone>images/idisk-dir-24.png</icone>
-	    <titre>spipproprio:spip_proprio</titre>  
-	    <url>spip_proprio</url>
-	</onglet>
+	<!--
+	Infos SPIP-Contrib
+	-->
+	<lien>[Documentation->http://www.spip-contrib.net/?article3516]</lien>
+	<!--
+	Infos SPIP-Zone
+	-->
 	<necessite id='SPIP' version='[2.0.0;]' />
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="spipproprio" reference="fr" />
 	<traduire gestionnaire="salvatore" module="texteslegaux" reference="fr" />
+	<!--
+	Options / Fonctions / Installation
+	-->
+ 	<prefix>spip_proprio</prefix>
+	<options>spip_proprio_options.php</options>
+	<fonctions>spip_proprio_fonctions.php</fonctions>
+	<!--
+	Chemins
+	-->
+	<chemin dir='public' type='public' />
+	<chemin dir='prive' type='prive' />
+	<chemin dir='' />
+	<!--
+	Onglet 
+	-->
+	<onglet id="spip_proprio" parent="configuration">
+	  <icone>images/idisk-dir-24.png</icone>
+	  <titre>spipproprio:spip_proprio</titre>  
+    <url>spip_proprio</url>
+	</onglet>
+	<!--
+	Boutons compatibles avec le plugin [Bandeau->http://www.spip-contrib.net/?article3556]
+	et SPIP 3
+	-->
+	<bouton id='spip_proprio_bando' parent='bando_configuration'>
+	  <icone>images/idisk-dir-16.png</icone>
+	  <titre>spipproprio:spip_proprio</titre>  
+    <url>spip_proprio</url>
+	</bouton>
 </plugin>
