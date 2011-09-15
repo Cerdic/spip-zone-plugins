@@ -97,9 +97,9 @@ Exemples : <code>#SET{x,1}#SET_PLUS{x,2}</code> ou <code>#SET{x,avions}#SET_REPL
 
 @puce@ En cochant «oui» ci-dessous, l\'état des blocs numérotés sera stocké dans un cookie le temps de la session, afin de conserver l\'aspect de la page en cas de retour.[[%blocs_cookie%]]
 
-@puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisis ici une autre balise &lt;hN&gt; :[[%bloc_h4%]]
+@puce@ Le Couteau Suisse utilise par défaut la balise HTML &lt;h4&gt; pour le titre des blocs dépliables. Choisissez ici une autre balise &lt;hN&gt; :[[%bloc_h4%]]
 
-@puce@ Afin d\'obtenir un effet plus doux au moment du clic, tes blocs dépliables peuvent s\'animer à la manière d\'un \\"glissement\\".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]', # MODIF
+@puce@ Afin d\'obtenir un effet plus doux au moment du clic, tes blocs dépliables peuvent s\'animer à la manière d\'un "glissement".[[%blocs_slide%]][[->%blocs_millisec% millisecondes]]',
 	'blocs:nom' => 'Blocs Dépliables',
 	'boites_privees:description' => 'Toutes les boîtes décrites ci-dessous apparaissent ici ou là dans la partie privée.[[%cs_rss%]][[->%format_spip%]][[->%stat_auteurs%]][[->%qui_webmasters%]][[->%bp_urls_propres%]][[->%bp_tri_auteurs%]]
 - {{Les révisions du Couteau Suisse}} : un cadre sur la présente page de configuration, indiquant les dernières modifications apportées au code du plugin ([Source->@_CS_RSS_SOURCE@]).
@@ -151,7 +151,7 @@ Tu peux ici définir certains raccourcis de SPIP. Une valeur vide équivaut à u
 SPIP utilise habituellement la balise &lt;h3&gt; pour les intertitres. Choisis ici un autre remplacement :[[%racc_h1%]][[->%racc_h2%]]',
 	'class_spip:description4' => '
 
-SPIP a choisi d\'utiliser la balise &lt;strong> pour transcrire les gras. Mais &lt;b> aurait pu également convenir, avec ou sans style. À toi de voir :[[%racc_g1%]][[->%racc_g2%]]
+SPIP a choisi d\'utiliser la balise &lt;strong> pour transcrire les gras. Mais &lt;b> aurait pu également convenir, avec ou sans style. À vous de voir :[[%racc_g1%]][[->%racc_g2%]]
 
 SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &lt;em> aurait pu également convenir, avec ou sans style. À toi de voir :[[%racc_i1%]][[->%racc_i2%]]
 
@@ -159,7 +159,7 @@ SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &
 
  Tu peux définir le code ouvrant et fermant pour les notes de bas de pages : [[%ouvre_note%]][[->%ferme_note%]]
 
-@puce@ {{Les styles de SPIP par défaut}}. Jusqu\'à la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises systématiquement affublés du style \\"spip\\". Par exemple : <code><p class=\\"spip\\"></code>. Tu peux ici définir le style de ces balises en fonction de tes feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqué.
+@puce@ {{Les styles de SPIP par défaut}}. Jusqu\'à la version 1.92 de SPIP, les raccourcis typographiques produisaient des balises systématiquement affublés du style "spip". Par exemple : <code><p class="spip"></code>. Tu peux ici définir le style de ces balises en fonction de tes feuilles de style. Une case vide signifie qu\'aucun style particulier ne sera appliqué.
 
 {Attention : si certains raccourcis (ligne horizontale, intertitre, italique, gras) ont été modifiés ci-dessus, alors les styles ci-dessous ne seront pas appliqués.}
 
@@ -167,7 +167,7 @@ SPIP a choisi d\'utiliser la balise &lt;i> pour transcrire les italiques. Mais &
 _ {{1.}} Balises &lt;p&gt;, &lt;i&gt;, &lt;strong&gt; :[[%style_p%]]
 _ {{2.}} Balises &lt;tables&gt;, &lt;hr&gt;, &lt;h3&gt;, &lt;blockquote&gt; et les listes (&lt;ol&gt;, &lt;ul&gt;, etc.) :[[%style_h%]]
 
-Note bien : en modifiant ce deuxième style, tu perds alors les styles standards de SPIP associés à ces balises.</q1>', # MODIF
+Note bien : en modifiant ce deuxième style, tu perds alors les styles standards de SPIP associés à ces balises.</q1>',
 	'class_spip:nom' => 'SPIP et ses raccourcis…',
 	'code_css' => 'CSS',
 	'code_fonctions' => 'Fonctions',
@@ -306,7 +306,7 @@ En cas de mise à jour officielle, actualise le fichier distant associé (clique
 	'en_travaux:description' => 'Pendant une phase de maintenance, permet d\'afficher un message personalisable sur tout le site public, éventuellement la partie privée.
 [[%message_travaux%]][[%titre_travaux%]][[%admin_travaux%]][[-><admin_travaux valeur="1">%avertir_travaux%</admin_travaux>]][[%prive_travaux%]]',
 	'en_travaux:nom' => 'Site en travaux',
-	'erreur:bt' => '<span style=\\"color:red;\\">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.', # MODIF
+	'erreur:bt' => '<span style="color:red;">Attention :</span> la barre typographique (version @version@) semble ancienne.<br />Le Couteau Suisse est compatible avec une version supérieure ou égale à @mini@.',
 	'erreur:description' => 'id manquant dans la définition de l\'outil !',
 	'erreur:distant' => 'le serveur distant',
 	'erreur:jquery' => '{{Note}} : la librairie {jQuery} semble inactive sur cette page. Consulte [ici->http://www.spip-contrib.net/?article2166] le paragraphe sur les dépendances du plugin ou recharger cette page.',
@@ -370,10 +370,10 @@ Les blocs multi s\'affichent alors toujours dans la langue demandée par le visi
 	// H
 	'help' => '{{Cette page est uniquement accessible aux responsables du site.}} Elle permet la configuration des différentes fonctions supplémentaires apportées par le plugin «{{Le Couteau Suisse}}».',
 	'help2' => 'Version locale : @version@',
-	'help3' => '<p>Liens de documentation :<br />• [{{Le&nbsp;Couteau&nbsp;Suisse}}->http://www.spip-contrib.net/?article2166]@contribs@</p><p>R&eacute;initialisations :
-_ • [Des outils cach&eacute;s|Revenir &agrave; l\'apparence initiale de cette page->@hide@]
-_ • [De tout le plugin|Revenir &agrave; l\'&eacute;tat initial du plugin->@reset@]@install@
-</p>', # MODIF
+	'help3' => '<p>Liens de documentation :@contribs@</p><p>Réinitialisations :
+_ • [Des outils cachés|Revenir à l\'apparence initiale de cette page->@hide@]
+_ • [De tout le plugin|Revenir à l\'état initial du plugin->@reset@]@install@
+</p>',
 	'horloge:description' => 'Outil en cours de développement. T\'offre une horloge JavaScript . Balise : <code>#HORLOGE</code>. Modèle : <code><horloge></code>
 
 Arguments disponibles : {zone}, {format} et/ou {id}.',
@@ -536,11 +536,11 @@ _ • {Par d&eacute;faut} : remplacement automatique d\'origine (&agrave; partir
 	// M
 	'mailcrypt:description' => 'Masque tous les liens de courriels présents dans tes textes en les remplaçant par un lien JavaScript permettant quand même d\'activer la messagerie du lecteur. Cet outil antispam tente d\'empêcher les robots de collecter les adresses électroniques laissées en clair dans les forums ou dans les balises de tes squelettes.',
 	'mailcrypt:nom' => 'MailCrypt',
-	'maj_auto:description' => 'Cet outil te permet de gérer facilement la mise à jour de vos différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
+	'maj_auto:description' => 'Cet outil te permet de gérer facilement la mise à jour de tes différents plugins, récupérant notamment le numéro de révision contenu dans le fichier <code>svn.revision</code> et le comparant avec celui trouvé sur <code>zone.spip.org</code>.
 
-La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tentez de procéder manuellement à la mise à jour du plugin.
+La liste ci-dessus offre la possibilité de lancer le processus de mise à jour automatique de SPIP sur chacun des plugins préalablement installés dans le dossier <code>plugins/auto/</code>. Les autres plugins se trouvant dans le dossier <code>plugins/</code> ou <code>extensions/</code> sont simplement listés à titre d\'information. Si la révision distante n\'a pas pu être trouvée, alors tente de procéder manuellement à la mise à jour du plugin.
 
-Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que tu sois  obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.', # MODIF
+Note : les paquets <code>.zip</code> n\'étant pas reconstruits instantanément, il se peut que tu sois obligé d\'attendre un certain délai avant de pouvoir effectuer la totale mise à jour d\'un plugin tout récemment modifié.',
 	'maj_auto:nom' => 'Mises à jour automatiques',
 	'masquer:description' => 'Cet outil permet de masquer sur le site public et sans modification particulière de tes squelettes, les contenus (rubriques ou articles) qui ont le mot-clé défini ci-dessous. Si une rubrique est masquée, toute sa branche l\'est aussi.[[%mot_masquer%]]
 
@@ -696,12 +696,12 @@ Ce sommaire est compatible avec « [.->decoupe] » et « [.->titres_typo] »
 <q1>• Pour une expression avec des espaces, place-la entre guillemets.
 _ • Pour spécifier un mot entier, mets-le entre parenthèses. Exemple~:~{(asses)}.
 _ • Pour une expression régulière, vérifie bien la syntaxe et place-la entre slashes puis entre guillemets.
-_ Exemple~:~{<html>\\"/@test\\.(com|fr)/\\"</html>}.
-_ • Pour une expression régulière devant agir sur des caractères HTML, place le test entre «&#» et «;».
-_ Exemple~:~{<html>\\"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/\\"</html>}.</q1>
+_ Exemple~:~{<html>"/@test\\.(com|fr)/"</html>}.
+_ • Pour une expression régulière devant agir sur des caractères HTML, placez le test entre «&#» et «;».
+_ Exemple~:~{<html>"/&#(?:1[4-9][0-9]{3}|[23][0-9]{4});/"</html>}.</q1>
 
-@puce@ Certaines adresses IP peuvent également être bloquées à la source. Note toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
-<q1>• Utilise le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>', # MODIF
+@puce@ Certaines adresses IP peuvent également être bloquées à la source. Sache toutefois que derrière ces adresses (souvent variables), il peut y avoir plusieurs utilisateurs, voire un réseau entier.[[%spam_ips%]]
+<q1>• Utilise le caractère «*» pour plusieurs chiffres, «?» pour un seul et les crochets pour des classes de chiffres.</q1>',
 	'spam:nom' => 'Lutte contre le SPAM',
 	'spam_ip' => 'Blocage IP de @ip@ :',
 	'spam_test_ko' => 'Ce message serait bloqué par le filtre anti-SPAM !',
@@ -903,10 +903,10 @@ Choisis ici de mettre en exposant certains raccourcis supplémentaires, malgré 
 _ version_texte : extrait le contenu texte d\'une page html à l\'exclusion de quelques balises élémentaires.
 _ version_plein_texte : extrait le contenu texte d\'une page html pour rendre du texte brut.',
 	'verstexte:nom' => 'Version texte',
-	'visiteurs_connectes:description' => 'Offre une noisette pour ton squelette qui affiche le nombre de visiteurs connectés sur le site public.
+	'visiteurs_connectes:description' => 'Offre une noisette pour votre squelette qui affiche le nombre de visiteurs connectés sur le site public.
 
-Ajoute simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans tes pages.', # MODIF
-	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.', # NEW
+Ajoute simplement <code><INCLURE{fond=fonds/visiteurs_connectes}></code> dans tes pages après avoir activé les statistiques de ton site.',
+	'visiteurs_connectes:inactif' => 'Attention : les statistiques du site ne sont pas activées.',
 	'visiteurs_connectes:nom' => 'Visiteurs connectés',
 	'voir' => 'Voir : @voir@',
 	'votre_choix' => 'Ton choix :',
