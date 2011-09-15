@@ -8,6 +8,7 @@
 	<langue code="de" />
 	<langue code="en">
 		<traducteur nom="filou" />
+		<traducteur nom="davood" />
 		<traducteur nom="mark_baber" />
 	</langue>
 	<langue code="es">
@@ -18,6 +19,7 @@
 	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
+		<traducteur nom="orlammd" />
 	</langue>
 	<langue code="pt_br">
 		<traducteur nom="rporto" />
