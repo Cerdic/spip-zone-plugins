@@ -3,146 +3,146 @@
 // extrait automatiquement de http://www.spip.net/trad-lang/
 // ** ne pas modifier le fichier **
 
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
-	'coucher_soleil' => '<NEW>z&aacute;pad slnka',
+	'coucher_soleil' => 'západ slnka',
 
 	// D
-	'demain' => '<NEW>zajtra',
-	'derniere_maj' => '<NEW>aktualizovan&eacute;',
-	'direction_E' => '<NEW>v&yacute;chod',
-	'direction_ENE' => '<NEW>v&yacute;chod severov&yacute;chod',
-	'direction_ESE' => '<NEW>v&yacute;chod juhov&yacute;chod',
-	'direction_N' => '<NEW>sever',
-	'direction_NE' => '<NEW>severov&yacute;chod',
-	'direction_NNE' => '<NEW>sever severov&yacute;chod',
-	'direction_NNW' => '<NEW>sever severoz&aacute;pad',
-	'direction_NW' => '<NEW>severoz&aacute;pad',
-	'direction_S' => '<NEW>juh',
-	'direction_SE' => '<NEW>juhov&yacute;chod',
-	'direction_SSE' => '<NEW>juh juhov&yacute;chod',
-	'direction_SSW' => '<NEW>juh juhoz&aacute;pad',
-	'direction_SW' => '<NEW>juhoz&aacute;pad',
-	'direction_W' => '<NEW>z&aacute;pad',
-	'direction_WNW' => '<NEW>z&aacute;pad severoz&aacute;pad',
-	'direction_WSW' => '<NEW>z&aacute;pad juhoz&aacute;pad',
+	'demain' => 'zajtra',
+	'derniere_maj' => 'aktualizované',
+	'direction_E' => 'východ',
+	'direction_ENE' => 'východ severovýchod',
+	'direction_ESE' => 'východ juhovýchod',
+	'direction_N' => 'sever',
+	'direction_NE' => 'severovýchod',
+	'direction_NNE' => 'sever severovýchod',
+	'direction_NNW' => 'sever severozápad',
+	'direction_NW' => 'severozápad',
+	'direction_S' => 'juh',
+	'direction_SE' => 'juhovýchod',
+	'direction_SSE' => 'juh juhovýchod',
+	'direction_SSW' => 'juh juhozápad',
+	'direction_SW' => 'juhozápad',
+	'direction_W' => 'západ',
+	'direction_WNW' => 'západ severozápad',
+	'direction_WSW' => 'západ juhozápad',
 
 	// H
-	'humidite' => '<NEW>vlhkos&#357; vzduchu',
+	'humidite' => 'vlhkosť vzduchu',
 
 	// J
-	'jour' => '<NEW>de&#328;',
+	'jour' => 'deň',
 
 	// L
-	'latitude' => '<NEW>zemepisn&aacute; &#353;&iacute;rka',
-	'lever_soleil' => '<NEW>v&yacute;chod slnka',
-	'longitude' => '<NEW>zemepisn&aacute; d&#314;&#382;ka',
+	'latitude' => 'zemepisná šírka',
+	'lever_soleil' => 'východ slnka',
+	'longitude' => 'zemepisná dĺžka',
 
 	// M
-	'meteo' => '<NEW>po&#269;asie',
-	'meteo_0' => '<NEW>torn&aacute;do',
-	'meteo_1' => '<NEW>tropick&aacute; b&uacute;rka',
-	'meteo_10' => '<NEW>mrzn&uacute;ci d&aacute;&#382;&#271;',
-	'meteo_11' => '<NEW>preh&aacute;nky',
-	'meteo_12' => '<NEW>preh&aacute;nky',
-	'meteo_13' => 'snow flurries', # MODIF
-	'meteo_14' => 'light snow showers', # MODIF
-	'meteo_15' => '<NEW>snehov&aacute; metelica',
-	'meteo_16' => '<NEW>sneh',
-	'meteo_17' => '<NEW>&#318;adovec',
-	'meteo_18' => '<NEW>p&#318;u&#353;&#357;',
-	'meteo_19' => '<NEW>prach',
-	'meteo_2' => '<NEW>hurik&aacute;n',
-	'meteo_20' => '<NEW>hmla',
-	'meteo_21' => 'haze', # MODIF
-	'meteo_22' => 'smoky', # MODIF
-	'meteo_23' => '<NEW>b&uacute;rliv&eacute;',
-	'meteo_24' => '<NEW>veterno',
-	'meteo_25' => '<NEW>chladno',
-	'meteo_26' => '<NEW>zamra&#269;en&eacute;',
-	'meteo_27' => '<NEW>zv&auml;&#269;&#353;a zamra&#269;en&eacute; (noc)',
-	'meteo_28' => '<NEW>zv&auml;&#269;&#353;a zamra&#269;en&eacute; (de&#328;)',
-	'meteo_29' => '<NEW>s&#269;asti zamra&#269;en&eacute; (noc)',
-	'meteo_3' => '<NEW>prudk&eacute; b&uacute;rky',
-	'meteo_30' => '<NEW>s&#269;asti zamra&#269;en&eacute; (de&#328;)',
-	'meteo_31' => '<NEW>jasno (noc)',
-	'meteo_32' => '<NEW>slne&#269;no',
-	'meteo_33' => 'fair (night)', # MODIF
-	'meteo_34' => 'fair (day)', # MODIF
-	'meteo_35' => '<NEW>d&aacute;&#382;&#271; zmie&#353;an&yacute; s &#318;adovcom',
-	'meteo_36' => '<NEW>hor&uacute;co',
-	'meteo_37' => '<NEW>lok&aacute;lne b&uacute;rky',
-	'meteo_38' => '<NEW>miestami b&uacute;rky',
-	'meteo_39' => '<NEW>miestami b&uacute;rky',
-	'meteo_4' => '<NEW>b&uacute;rky',
-	'meteo_40' => '<NEW>miestami preh&aacute;nky',
-	'meteo_41' => '<NEW>intenz&iacute;vne sne&#382;enie',
-	'meteo_42' => '<NEW>miestami snehov&eacute; preh&aacute;nky',
-	'meteo_43' => '<NEW>intenz&iacute;vne sne&#382;enie',
-	'meteo_44' => '<NEW>s&#269;asti zamra&#269;en&eacute;',
-	'meteo_45' => '<NEW>b&uacute;rky',
-	'meteo_46' => '<NEW>snehov&eacute; preh&aacute;nky',
-	'meteo_47' => '<NEW>lok&aacute;lne b&uacute;rky',
-	'meteo_5' => '<NEW>d&aacute;&#382;&#271; so snehom',
-	'meteo_6' => '',
-	'meteo_7' => 'mixed snow and sleet', # MODIF
-	'meteo_8' => '<NEW>mrzn&uacute;ce mrholenie',
-	'meteo_9' => '<NEW>mrholenie',
-	'meteo_conditions' => '<NEW>aktu&aacute;lne podmienky',
-	'meteo_consultation' => '<NEW>Po&#269;asie v meste @ville@ ',
-	'meteo_de' => '<NEW>po&#269;asie v meste @ville@',
-	'meteo_na' => '<NEW>nezn&aacute;me',
-	'meteo_previsions' => '<NEW>predpove&#271;',
-	'meteo_previsions_aujourdhui' => '<NEW>predpove&#271; na dnes',
-	'meteo_previsions_n_jours' => '<NEW>Predpove&#271; na @nbj@ dn&iacute;',
+	'meteo' => 'počasie',
+	'meteo_0' => 'tornádo',
+	'meteo_1' => 'tropická búrka',
+	'meteo_10' => 'mrznúci dážď',
+	'meteo_11' => 'prehánky',
+	'meteo_12' => 'prehánky',
+	'meteo_13' => 'prívaly snehu',
+	'meteo_14' => 'jemné snehové prehánky',
+	'meteo_15' => 'zvírený sneh',
+	'meteo_16' => 'sneh',
+	'meteo_17' => 'krupobitie',
+	'meteo_18' => 'dážď so snehom',
+	'meteo_19' => 'prach',
+	'meteo_2' => 'hurikán',
+	'meteo_20' => 'hmlisto',
+	'meteo_21' => 'opar',
+	'meteo_22' => 'hmla',
+	'meteo_23' => 'nárazový vietor',
+	'meteo_24' => 'veterno',
+	'meteo_25' => 'chladno',
+	'meteo_26' => 'zamračené',
+	'meteo_27' => 'zväčša zamračené (noc)',
+	'meteo_28' => 'zväčša zamračené (deň)',
+	'meteo_29' => 'miestami zamračené (noc)',
+	'meteo_3' => 'silné búrky',
+	'meteo_30' => 'miestami zamračené (deň)',
+	'meteo_31' => 'jasno (noc)',
+	'meteo_32' => 'slnečno',
+	'meteo_33' => 'fair (night)',
+	'meteo_34' => 'fair (day)',
+	'meteo_35' => 'dážď s krúpami',
+	'meteo_36' => 'horúco',
+	'meteo_37' => 'lokálne búrky',
+	'meteo_38' => 'rozptýlené búrky',
+	'meteo_39' => 'rozptýlené búrky',
+	'meteo_4' => 'búrky',
+	'meteo_40' => 'ojedinelé prehánky',
+	'meteo_41' => 'silné sneženie',
+	'meteo_42' => 'ojedinelé snehové prehánky',
+	'meteo_43' => 'silné sneženie',
+	'meteo_44' => 'miestami zamračené',
+	'meteo_45' => 'búrkové prehánky',
+	'meteo_46' => 'snehové prehánky',
+	'meteo_47' => 'lokálne thundershowers',
+	'meteo_5' => 'dážď so snehom',
+	'meteo_6' => 'dážď a poľadovica',
+	'meteo_7' => 'sneh a poľadovica',
+	'meteo_8' => 'mrznúce mrholenie',
+	'meteo_9' => 'mrholenie',
+	'meteo_conditions' => 'súčasné poveternostné podmienky',
+	'meteo_consultation' => 'Počasie pre @ville@ ',
+	'meteo_de' => 'Počasie &ndash; @ville@ ',
+	'meteo_na' => 'neznáme',
+	'meteo_previsions' => 'predpovedané poveternostné podmienky',
+	'meteo_previsions_aujourdhui' => 'predpoveď na dnes',
+	'meteo_previsions_n_jours' => '@nbj@-dňová predpoveď',
 
 	// N
-	'nuit' => '<NEW>noc',
+	'nuit' => 'noc',
 
 	// P
-	'point_rosee' => 'dew point', # MODIF
-	'pression' => '<NEW>tlak',
+	'point_rosee' => 'dew point',
+	'pression' => 'tlak',
 
 	// R
-	'risque_precipitation' => 'precipitation', # MODIF
+	'risque_precipitation' => 'zrážky',
 
 	// S
-	'station_observation' => '<NEW>stanica',
+	'station_observation' => 'stanica',
 
 	// T
-	'temperature_max' => '<NEW>maxim&aacute;lna',
-	'temperature_min' => '<NEW>minim&aacute;lna',
-	'temperature_ressentie' => '<NEW>na pocit je',
-	'tendance_symbole_falling' => '<NEW>&#8595;',
-	'tendance_symbole_rising' => '<NEW>&#8593;',
-	'tendance_symbole_steady' => '<NEW>&#8594;',
-	'tendance_texte_falling' => '<NEW>kles&aacute;',
-	'tendance_texte_rising' => '<NEW>st&uacute;pa',
-	'tendance_texte_steady' => '<NEW>ust&aacute;len&aacute;',
+	'temperature_max' => 'maximum',
+	'temperature_min' => 'minimum',
+	'temperature_ressentie' => 'na pocit',
+	'tendance_symbole_falling' => '↓',
+	'tendance_symbole_rising' => '↑',
+	'tendance_symbole_steady' => '→',
+	'tendance_texte_falling' => 'klesá',
+	'tendance_texte_rising' => 'stúpa',
+	'tendance_texte_steady' => 'stagnuje',
 
 	// U
-	'unite_angle_metrique' => '&deg;', # MODIF
-	'unite_angle_standard' => '&deg;', # MODIF
-	'unite_distance_metrique' => 'km', # MODIF
-	'unite_distance_standard' => 'm&iacute;&#318;', # MODIF
-	'unite_pourcentage_metrique' => '%', # MODIF
-	'unite_pourcentage_standard' => '%', # MODIF
-	'unite_precipitation_metrique' => 'mm', # MODIF
-	'unite_precipitation_standard' => 'palcov', # MODIF
-	'unite_pression_metrique' => 'mbar', # MODIF
-	'unite_pression_standard' => 'palcov', # MODIF
-	'unite_temperature_metrique' => '&deg;C', # MODIF
-	'unite_temperature_standard' => '&deg;F', # MODIF
-	'unite_vitesse_metrique' => 'km/h', # MODIF
-	'unite_vitesse_standard' => 'm/h', # MODIF
+	'unite_angle_metrique' => '°',
+	'unite_angle_standard' => '°',
+	'unite_distance_metrique' => 'km',
+	'unite_distance_standard' => 'míľ',
+	'unite_pourcentage_metrique' => '%',
+	'unite_pourcentage_standard' => '%',
+	'unite_precipitation_metrique' => 'mm',
+	'unite_precipitation_standard' => 'palcov',
+	'unite_pression_metrique' => 'mbar',
+	'unite_pression_standard' => 'palcov',
+	'unite_temperature_metrique' => '°C',
+	'unite_temperature_standard' => '°F',
+	'unite_vitesse_metrique' => 'km/h',
+	'unite_vitesse_standard' => 'm/h',
 
 	// V
-	'valeur_indeterminee' => 'N/A', # MODIF
-	'vent' => '<NEW>vietor',
-	'visibilite' => '<NEW>vidite&#318;nos&#357;'
+	'valeur_indeterminee' => 'N/A',
+	'vent' => 'vietor',
+	'visibilite' => 'viditeľnosť'
 );
 
 ?>
