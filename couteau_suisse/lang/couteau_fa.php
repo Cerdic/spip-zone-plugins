@@ -80,9 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'page_suivante' => 'صفحه‌ي پسين',
 	'plug_actifs' => 'پلاگين‌هاي فعال ',
 	'plug_inactifs' => 'پلاگين‌هاي غيرفعال ',
-	'plugin_xml' => 'فهرستي از ابزارهاي كوچك و مفيد براي بهبود مديريت سايت شما را يكجا در يك پلاگين فراهم مي‌آورد.
+	'plugin_xml' => 'مجموعه‌اي از ابزارهاي كوچك و مفيد براي بهبود مديريت سايت شما در يك پلاگين .
 
-هر ابزار مي‌تواند از [صفحه‌ي ادمين پلاگين >./?exec=admin_couteau_suisse] فعال/غيرفعال شود.
+هر ابزار مي‌تواند از [از صفحه‌ي پيكربندي پلاگين->./?exec=admin_couteau_suisse] فعال/غيرفعال شود
  
 بران تنظيم گزينه‌ها، روي {{پيكربندي}} كليك كرده، سپس تب {{چاقوي سوئيسي -Swiss Knife}} انتخاب كنيد.
 
@@ -92,8 +92,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
  
 بنگريد به مقالات استنادي در: [spip-contrib.net->http://www.spip-contrib.net/Le-Couteau-Suisse].
 
-تطابق: SPIP 1.92xو ورژن 2 .0.ط و ورژن 2.1.x', # MODIF
-	'pp_autobr' => 'گنجاندن با پيوندهاي خود ارجاع به آن', # MODIF
+تطابق: SPIP 1.92xو ورژن 2 .0.ط و ورژن 2.1.x',
+	'pp_autobr' => 'گنجاندن يك بلوك متن كه ارجاع‌ها به آن با يك لينك خودكار باشد',
 	'pp_blocs_bloc' => 'گنجاندن يك بلوك فروريخته',
 	'pp_blocs_visible' => 'گنجاندن يك بلوك گسترش يافته',
 	'pp_chatons_inserer' => 'گنجاندن صورتك « @chaton@ »',
@@ -133,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tri_monter' => 'بالا بردن اين نويسنده',
 
 	// U
-	'url_verrouillee' => 'URL verrouillée', # NEW
+	'url_verrouillee' => 'يوآرال قفل شده',
 	'urls_propres_erreur' => 'اين فرمت URLهاي فهرست شده در زير را به حساب نمي‌آورد.',
 	'urls_propres_format' => '<فرمت هاي URL‌هاي جاري عبارتند از:{{« @. format@ »}}[<span>[Configuration->@url@]</span>][Configuration->@url@]</span>]',
 	'urls_propres_lien' => 'پيوند در دسترس همگاني ',
