@@ -10,4 +10,7 @@
 		<traducteur nom="beatnick" />
 	</langue>
 	<langue code="it" />
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
 </traduction>
