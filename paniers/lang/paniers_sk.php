@@ -11,24 +11,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action_ajouter' => 'Pridať do vozíka',
 
 	// M
-	'mon_panier' => 'Mon panier', # NEW
-	'mon_panier_modifier' => 'Modifier mon panier', # NEW
-	'mon_panier_voir' => 'Voir mon panier', # NEW
+	'mon_panier' => 'Môj nákupný vozík',
+	'mon_panier_modifier' => 'Upraviť môj nákupný vozík',
+	'mon_panier_voir' => 'Zobraziť môj nákupný vozík',
 
 	// P
-	'panier_description' => 'Description', # NEW
-	'panier_erreur_quantites' => 'Les quantités doivent être des nombres entiers.', # NEW
-	'panier_montant' => 'Montant', # NEW
-	'panier_prix_unitaire' => 'Prix unitaire', # NEW
-	'panier_quantite' => 'Quantité', # NEW
-	'panier_quantite_ok' => 'Les quantités ont bien été modifiées.', # NEW
-	'panier_recalculer' => 'Recalculer', # NEW
-	'panier_taxes' => 'Dont taxes', # NEW
-	'panier_total_ht' => 'Total hors taxe', # NEW
-	'panier_total_ttc' => 'Total', # NEW
-	'panier_valider' => 'Valider mon panier', # NEW
-	'panier_vide' => 'Le panier est vide.', # NEW
-	'paniers' => 'Paniers' # NEW
+	'panier_description' => 'Popis',
+	'panier_erreur_quantites' => 'Množstvá musia byť celé čísla.',
+	'panier_montant' => 'Množstvo',
+	'panier_prix_unitaire' => 'Cena za jednotku',
+	'panier_quantite' => 'Množstvo',
+	'panier_quantite_ok' => 'Množstvá boli zmenené.',
+	'panier_recalculer' => 'Prepočítať',
+	'panier_taxes' => 'S daňou',
+	'panier_total_ht' => 'Celkom bez dane',
+	'panier_total_ttc' => 'Celkom',
+	'panier_valider' => 'Potvrdiť nákupný vozík',
+	'panier_vide' => 'Nákupný vozík je prázdny.',
+	'paniers' => 'Nákupné vozíky'
 );
 
 ?>
