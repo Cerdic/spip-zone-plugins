@@ -8,10 +8,14 @@
 	<langue code="de" />
 	<langue code="en">
 		<traducteur nom="mark_baber" />
+		<traducteur nom="davood" />
 	</langue>
-	<langue code="fa" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
+		<traducteur nom="orlammd" />
 	</langue>
 	<langue code="pt_br">
 		<traducteur nom="rporto" />
