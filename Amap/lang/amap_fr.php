@@ -8,6 +8,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'action' => 'Action ?',
 	'action_modifier' => 'Modifier',
 	'action_supprimer' => 'Supprimer',
+	'adherent' => 'Adhérent', 
 	'adherent_sans_type_panier' => 'Vos adhérents n\'ont pas encore de type de panier affecté.', 
 	'adhesion' => 'Adhésion (ex:2008)',
 	'adhesion_auteur' => 'Adhésion :',
@@ -78,6 +79,7 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 	'pas_date_distributions' => 'Pas de date de distribution renseigné.',
 	'pas_paniers' => 'Vous ne disposez d\'aucun panier durant cette saison, en effet aucun contrat vous concernant n\'est actuellement en cours',
 	'petit' => 'Petit',
+	'producteur' => 'Producteur',
 
 	// R
 	'reste_panier_distribuer' => 'Il nous reste encore 1 panier à distribuer',
@@ -94,6 +96,8 @@ Je mets à disposition le panier du @date_distribution@, pour le récupérer sui
 					<br />Elle ne contient aucun enregistrement.',
 	'type_panier' => 'Type de panier',
 	'type_panier_auteur' => 'Type de panier :',
+	'type_adherent' => 'Type d\'adhérent',
+	'type_adherent_auteur' => 'Type d\'adhérent :',
 
 	//U
 	'utiliser_entete_colone_tri' => 'Utiliser les entêtes de colonne pour classer les amapiens (en noir l\'ordre de tri actif et en vert les ordres disponibles).',

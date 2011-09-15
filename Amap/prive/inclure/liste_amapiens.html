@@ -7,6 +7,7 @@
 		<th>[(#TRI{nom,<:nom:>})]</th>
 		<th>[(#TRI{adhesion,<:amap:adhesion:>})]</th>
 		<th>[(#TRI{type_panier,<:amap:type_panier:>})]</th>
+		<th>[(#TRI{type_adherent,<:amap:type_adherent:>})]</th>
 	</tr>
 	</thead>
 	<tbody>
@@ -22,6 +23,10 @@
 		<td>
 			[(#TYPE_PANIER|=={'petit'}|oui)<:amap:petit:>]
 			[(#TYPE_PANIER|=={'grand'}|oui)<:amap:grand:>]
+		</td>
+		<td>
+			[(#TYPE_ADHERENT|=={'adherent'}|oui)<:amap:adherent:>]
+			[(#TYPE_ADHERENT|=={'producteur'}|oui)<:amap:producteur:>]
 		</td>
 	</tr>
 	</BOUCLE_auteurs>

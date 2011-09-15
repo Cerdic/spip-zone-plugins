@@ -125,14 +125,23 @@ function amap_declarer_tables_principales($tables_principales){
 
 //creation de champs extra
 function amap_declarer_champs_extras($champs = array()){
-	// table auteurs un cham adhésion
+	// table auteur un champ adherent
+	$champs[] = new ChampExtra(array(
+		'table' => 'auteurs', // sur quelle table ?
+		'champ' => 'type_adherent', // nom sql
+		'label' => 'amap:type_adherent_auteur', // chaine de langue 'prefix:cle'
+		'type' => 'menu-radio', // type de saisie
+		'enum' => array(
+			"adherent" => _T('amap:adherent'),
+			"producteur" => _T('amap:producteur'),
+		),
+		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
+	));
+	// table auteurs un champ adhésion
 	$champs[] = new ChampExtra(array(
 		'table' => 'auteurs', // sur quelle table ?
 		'champ' => 'adhesion', // nom sql
 		'label' => 'amap:adhesion_auteur', // chaine de langue 'prefix:cle'
-		'precisions' => '', // precisions sur le champ
-		'obligatoire' => false, // 'oui' ou '' (ou false)
-		'rechercher' => false, // false, ou true ou directement la valeur de ponderation (de 1 à 8 generalement)
 		'type' => 'input', // type de saisie
 		'sql' => "bigint NULL", // declaration sql
 	));

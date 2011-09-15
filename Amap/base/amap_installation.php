@@ -23,6 +23,7 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 			amap_declarer_champs_extras();
 			sql_alter("TABLE spip_auteurs ADD adhesion text NULL");
 			sql_alter("TABLE spip_auteurs ADD type_panier text NULL");
+			sql_alter("TABLE spip_auteurs ADD type_adherent text NULL");
 			create_rubrique("000. Agenda de la saison", "0");
 			$id_rubrique = id_rubrique("000. Agenda de la saison");
 			if ($id_rubrique >0) {
@@ -39,6 +40,12 @@ function amap_upgrade($nom_meta_version_base, $version_cible){
 			sql_drop_table('spip_paniers');
 			create_rubrique("001. Archives", "0");
 			spip_log("Creation de la table amap_livraisons et amap_paniers V0.8", "amap_installation");
+			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
+			}
+		if (version_compare($current_version,'0.9','<')) {
+			amap_declarer_champs_extras();
+			sql_alter("TABLE spip_auteurs ADD type_adherent text NULL");
+			spip_log("Creation du champ type_adherent V0.9", "amap_installation");
 			ecrire_meta($nom_meta_version_base, $current_version=$version_cible, 'non');
 			}
 		}
