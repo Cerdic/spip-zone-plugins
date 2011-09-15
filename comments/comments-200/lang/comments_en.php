@@ -11,17 +11,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_forum_longueur' => 'Length of messages',
 	'cfg_forum_longueur_maxi' => 'Maximum length',
 	'cfg_forum_longueur_mini' => 'Minimum length',
-	'cfg_option_aucun' => 'Aucun', # NEW
-	'cfg_option_compteur' => 'Compteur (1.)', # NEW
-	'cfg_option_diese' => 'Dièse (#)', # NEW
-	'cfg_option_liste' => 'Liste de commentaires (à plat)', # NEW
-	'cfg_option_picto' => 'Picto', # NEW
-	'cfg_option_thread' => 'Enfilade de commentaires (en thread)', # NEW
-	'cfg_option_thread_un' => 'Enfilade de commentaires (en thread) à un niveau', # NEW
-	'cfg_permalien_label' => 'Apparence du lien permanent vers le commentaire', # NEW
-	'cfg_permalien_legende' => 'Permalien', # NEW
-	'cfg_type_label' => 'Présentation du&nbsp;fil de discussion', # NEW
-	'cfg_type_legende' => 'Liste ou thread ?', # NEW
+	'cfg_option_aucun' => 'None',
+	'cfg_option_compteur' => 'Counter (1.)',
+	'cfg_option_diese' => 'Sharp (#)',
+	'cfg_option_liste' => 'List of comments (flat)',
+	'cfg_option_picto' => 'Pictogram',
+	'cfg_option_thread' => 'Threaded comments',
+	'cfg_option_thread_un' => 'Threaded comments (one level)',
+	'cfg_permalien_label' => 'Appearance of the permanent link to the comment',
+	'cfg_permalien_legende' => 'Permalink',
+	'cfg_type_label' => 'Presentation of the thread',
+	'cfg_type_legende' => 'List or thread ?',
 	'comment' => 'comment',
 	'comments' => 'comments',
 	'comments_h' => 'Your comments',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_le' => 'On',
 
 	// F
-	'forum_attention_peu_caracteres' => '<b>Attention ! </b>votre message est trop court (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas être inférieur à @min@ caractères.', # NEW
+	'forum_attention_peu_caracteres' => '<b>Warning ! </b>your message is too short (@compte@ characters) : in order to be saved, it must not be less than @min@ characters.',
 	'forum_qui_etes_vous' => 'Who are you?',
 
 	// L

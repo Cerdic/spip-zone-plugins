@@ -11,17 +11,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_forum_longueur' => 'درازاي پيام‌ها',
 	'cfg_forum_longueur_maxi' => 'بيشترين درازا',
 	'cfg_forum_longueur_mini' => 'كم‌ترين درازا',
-	'cfg_option_aucun' => 'Aucun', # NEW
-	'cfg_option_compteur' => 'Compteur (1.)', # NEW
-	'cfg_option_diese' => 'Dièse (#)', # NEW
-	'cfg_option_liste' => 'Liste de commentaires (à plat)', # NEW
-	'cfg_option_picto' => 'Picto', # NEW
-	'cfg_option_thread' => 'Enfilade de commentaires (en thread)', # NEW
-	'cfg_option_thread_un' => 'Enfilade de commentaires (en thread) à un niveau', # NEW
-	'cfg_permalien_label' => 'Apparence du lien permanent vers le commentaire', # NEW
-	'cfg_permalien_legende' => 'Permalien', # NEW
-	'cfg_type_label' => 'Présentation du&nbsp;fil de discussion', # NEW
-	'cfg_type_legende' => 'Liste ou thread ?', # NEW
+	'cfg_option_aucun' => 'هيچ',
+	'cfg_option_compteur' => 'كامپيوتر (1.)',
+	'cfg_option_diese' => 'تيز (#)',
+	'cfg_option_liste' => 'فهرست نظر‌ها (تخت)',
+	'cfg_option_picto' => 'تصويرنگار',
+	'cfg_option_thread' => 'نظرات دسته‌بندي شده',
+	'cfg_option_thread_un' => 'نظرات دسته‌بندي شده (در يك سطح)',
+	'cfg_permalien_label' => 'نمايش پيوند هميشگي به نظر',
+	'cfg_permalien_legende' => 'پيوند دائم',
+	'cfg_type_label' => 'نمايش خط سير بحث',
+	'cfg_type_legende' => 'فهرست يا خط سير؟ ',
 	'comment' => 'نظر',
 	'comments' => 'نظرها',
 	'comments_h' => 'نظرهاي شما',
@@ -31,7 +31,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'date_jour_le' => 'در',
 
 	// F
-	'forum_attention_peu_caracteres' => '<b>Attention ! </b>votre message est trop court (@compte@ caractères) : pour pouvoir être enregistré, il ne doit pas être inférieur à @min@ caractères.', # NEW
+	'forum_attention_peu_caracteres' => '<b>توجه!</b< پيام شما خيلي كوتاه است (@compte@ ;كاراكتر): براي آنكه ضبط شود نبايد كم‌تر از@min@ باشد.',
 	'forum_qui_etes_vous' => 'كي‌ هستيد؟ ',
 
 	// L
