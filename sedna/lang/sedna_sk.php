@@ -8,41 +8,41 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'aff_resume' => 'Show summaries',
+	'aff_resume' => 'Zobraziť zhrnutia',
 	'afficher_sources' => 'Zobraziť tento zdroj',
-	'annee' => 'Last year',
-	'articles_recents_court' => 'Recent posts',
+	'annee' => 'Rok',
+	'articles_recents_court' => 'Najnovšie články',
 
 	// C
 	'connexion' => 'Prihlásenie',
 
 	// D
-	'deconnexion' => 'Odhlásiť',
-	'derniere_syndication' => 'Last syndication of this feed performed',
-	'deuxjours' => 'Posledné dva dni',
+	'deconnexion' => 'Odhlásiť sa',
+	'derniere_syndication' => 'Posledná syndikácia tohto kanála sa vykonala',
+	'deuxjours' => 'Dva dni',
 
 	// L
-	'liens' => 'príspevok',
-	'liens_pluriel' => 'príspevkov',
+	'liens' => 'článok',
+	'liens_pluriel' => 'články',
 
 	// M
-	'masquer_resume' => 'Hide summaries',
+	'masquer_resume' => 'Schovať zhrnutia',
 	'masquer_sources' => 'Schovať tento zdroj',
-	'mois' => 'Minulý mesiac',
+	'mois' => 'Mesiac',
 
 	// P
-	'pas_articles' => 'No post within this period of time!',
-	'pas_synchro' => 'Nesynchronizuj',
-	'preferences' => 'Nastavenia',
-	'probleme_de_syndication' => 'Syndication problem',
+	'pas_articles' => 'Žiaden príspevok v tomto časovom úseku!',
+	'pas_synchro' => 'Nesynchronizovať',
+	'preferences' => 'Predvoľby',
+	'probleme_de_syndication' => 'Problém pri syndikácii',
 
 	// S
-	'semaine' => 'Minulý týždeň',
+	'semaine' => 'Týždeň',
 	'sources' => 'Zdroje',
-	'synchro' => 'Synchronizuj',
-	'synchro_titre' => 'Uložiť zoznam prečítaných príspevkov na stránke',
-	'syndication_ajour' => 'Update now',
-	'syndication_fait' => 'Syndication done',
+	'synchro' => 'Synchronizovať',
+	'synchro_titre' => 'Uložiť na stránke zoznam prečítaných článkov',
+	'syndication_ajour' => 'Aktualizovať teraz',
+	'syndication_fait' => 'Syndikácia vykonaná',
 
 	// T
 	'toutes' => 'Všetky'
