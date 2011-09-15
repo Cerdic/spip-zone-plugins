@@ -8,13 +8,16 @@
 <script type="text/javascript">
 	jQuery(document).ready(function(){
 		jQuery('.formulaire_trier_tickets').hide();
-		jQuery('.formulaire_trier_tickets').before('<div class="actions"><a href="#" class="afficher_filtres"><:tickets:lien_filtrer:><\/div>');
+		jQuery('.formulaire_trier_tickets').before('<div class="actions filtrer_tickets"><a href="#" class="afficher_filtres"><:tickets:lien_filtrer:><\/div>');
 		jQuery('.afficher_filtres').click(function(){
 			var form = jQuery(this).parent().next('.formulaire_trier_tickets');
 			if(form.is(':hidden')){
+				jQuery(this).removeClass('off').addClass('on');
 				form.slideDown('slow');
-			}else{
+			}
+			else{
 				form.slideUp('slow');
+				jQuery(this).removeClass('on').addClass('off');
 			}
 			return false;
 		});
