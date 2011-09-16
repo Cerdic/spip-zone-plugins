@@ -143,6 +143,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	
 	',
 	'profil_de_lassociation' => 'Profil de l\'association',
+	'le_bureau' => 'Bureau de l\'association',
 	
 # Adherents
  # Titres
@@ -294,7 +295,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	# cotisation
 	'gestion_cotisations_limitee' => 'La gestion comptable &eacute;tant desactiv&eacute;e, seule la date de validit&eacute; est prise en charge par la gestion des cotisations.',
 
-	# ACTIVITES
+# ACTIVITES
 		
 	# Titres
 	'activite_titre_action_sur_inscriptions' => 'Action sur les inscriptions',
@@ -303,11 +304,11 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_titre_toutes_activites' => 'Toutes les activit&eacute;s',
 	'activite_titre_inscriptions_activites' => 'Inscriptions aux activit&eacute;s',
 
- # Sous-titres
+	# Sous-titres
 	'activite_mise_a_jour_inscription' => 'Mettre &agrave; jour une inscription',
 	'activite_ajouter_inscription' => 'Ajouter une inscription',
 	
-# Libelle
+	# Libelle
 	'activite_libelle_inscription' => 'Inscription n&deg;',
 	'activite_libelle_date' => 'Date',
 	'activite_libelle_nomcomplet' => 'Nom complet',
@@ -326,7 +327,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_libelle_statut' => 'Statut',
 	'activite_libelle_commentaires' => 'Commentaires',
 
- # En-tete
+	# En-tete
 	'activite_entete_id' => 'ID',
 	'activite_entete_date' => 'Date',
 	'activite_entete_heure' => 'Heure',
@@ -341,7 +342,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_entete_montant' => 'Montant',
 	'activite_entete_commentaire' => 'Commentaire',
 
- # Bouton
+	# Bouton
 	'activite_bouton_ajouter' => 'Ajouter',
 	'activite_bouton_envoyer' => 'Envoyer',
 	'activite_bouton_confirmer' => 'Confirmer',
@@ -349,7 +350,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'activite_bouton_modifier_article' => 'Modifier l\'article',
 	'activite_bouton_ajouter_inscription' => 'Ajouter une inscription',
 	'activite_bouton_voir_liste_inscriptions' => 'Voir la liste des inscriptions',
- 'activite_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
+	'activite_bouton_maj_inscription' => 'Mettre &agrave; jour l\'inscription',
 
 	# Liste
 	'activite_liste_legende' => 'En bleu : Inscription non valid&eacute;e <br /> En vert : Inscription valid&eacute;e',
@@ -394,63 +395,64 @@ Commentaire: @commentaire@
 	'date_du_jour' => 'Nous sommes le '.date('d/m/Y'),
 	'date_du_jour_heure' => 'Nous sommes le '.date('d/m/Y').' et il est '.date('H:i'),
 	
-	# VENTES
+# VENTES
 		
-		#Entetes
-			'vente_entete_id' => 'ID',
-			'vente_entete_date' => 'Date',
-			'vente_entete_article' => 'Article',
-			'vente_entete_quantites' => 'Quantit&eacute;',
-			'vente_entete_date_envoi' => 'Date d\'envoi',
+	#Entetes
+		'vente_entete_id' => 'ID',
+		'vente_entete_date' => 'Date',
+		'vente_entete_article' => 'Article',
+		'vente_entete_quantites' => 'Quantit&eacute;',
+		'vente_entete_date_envoi' => 'Date d\'envoi',
 			
-			'dons_titre_mise_a_jour' => 'Mise &agrave; jour des dons',
-	# RESSOURCES
+		'dons_titre_mise_a_jour' => 'Mise &agrave; jour des dons',
+
+# RESSOURCES
 		
-		#Messages
+	#Messages
 		'ressources_info' => 'Vous pouvez g&eacute;rer ici les diff&eacute;rentes ressources pr&ecirc;t&eacute;es aux membres (livres, mat&eacute;riels, ...)<br />La puce indique la disponibilit&eacute; des diff&eacute;rentes ressources',
 		'ressources_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer l\'article n&deg; @id_ressource@ !',
 		
-		# Titres
-			'ressources_titre_gestion_ressources' => 'Gestion des ressources',
-			'ressources_titre_edition_ressources' => 'Edition de ressource',
-			'ressources_titre_suppression_ressources' => 'Suppression de ressource',
-			'ressources_titre_liste_ressources' => 'Liste des ressources',
-			'ressources_titre_mise_a_jour' => 'Mise &agrave; jour des ventes',
+	# Titres
+		'ressources_titre_gestion_ressources' => 'Gestion des ressources',
+		'ressources_titre_edition_ressources' => 'Edition de ressource',
+		'ressources_titre_suppression_ressources' => 'Suppression de ressource',
+		'ressources_titre_liste_ressources' => 'Liste des ressources',
+		'ressources_titre_mise_a_jour' => 'Mise &agrave; jour des ventes',
 		
-		# En-tete
-			'ressources_entete_intitule' => 'Article',
-			'ressources_entete_code' => 'Code',
-			'ressources_entete_montant' => 'Montant',
+	# En-tete
+		'ressources_entete_intitule' => 'Article',
+		'ressources_entete_code' => 'Code',
+		'ressources_entete_montant' => 'Montant',
 		
-		# Navigation
-			'ressources_nav_gestion_' => 'Gestion des ressources',
-			'ressources_nav_ajouter' => 'Ajouter une ressource',
-			'ressources_nav_supprimer' => 'Supprimer la ressource',
-			'ressources_nav_editer' => 'Editer la ressource',	
+	# Navigation
+		'ressources_nav_gestion_' => 'Gestion des ressources',
+		'ressources_nav_ajouter' => 'Ajouter une ressource',
+		'ressources_nav_supprimer' => 'Supprimer la ressource',
+		'ressources_nav_editer' => 'Editer la ressource',	
 		
-		# Libelle
-			'ressources_num' => 'RESSOURCE N&deg;',
-			'ressources_libelle_code' => 'Code',
-			'ressources_libelle_intitule' => 'Article',	
-			'ressources_libelle_date_acquisition' => 'Date d\'acquisition (AAAA-MM-JJ)',
-			'ressources_libelle_prix_location' => 'Prix de la location (en euros)',
-			'ressources_libelle_statut' => 'Statut',
-			'ressources_libelle_statut_ok' => 'Libre',
-			'ressources_libelle_statut_reserve' => 'R&eacute;serv&eacute;',
-			'ressources_libelle_statut_suspendu' => 'En suspend',
-			'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
-			'ressources_libelle_commentaires' => 'Commentaires',
-		
-		# Prêts
+	# Libelle
+		'ressources_num' => 'RESSOURCE N&deg;',
+		'ressources_libelle_code' => 'Code',
+		'ressources_libelle_intitule' => 'Article',	
+		'ressources_libelle_date_acquisition' => 'Date d\'acquisition (AAAA-MM-JJ)',
+		'ressources_libelle_prix_location' => 'Prix de la location (en euros)',
+		'ressources_libelle_statut' => 'Statut',
+		'ressources_libelle_statut_ok' => 'Libre',
+		'ressources_libelle_statut_reserve' => 'R&eacute;serv&eacute;',
+		'ressources_libelle_statut_suspendu' => 'En suspend',
+		'ressources_libelle_statut_sorti' => 'D&eacute;saffect&eacute;',
+		'ressources_libelle_commentaires' => 'Commentaires',
+	
+	# Prêts
 			
-			#Messages
-				'prets_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer la r&eacute;servation n&deg; @id_pret@ !',
+	    #Messages
+		'prets_danger_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer la r&eacute;servation n&deg; @id_pret@ !',
 			
-			# Titres
-				'prets_titre_gestion_prets' => 'Gestion des r&eacute;servations',
-				'prets_titre_edition_prets' => 'Edition de r&eacute;servation',
-				'prets_titre_suppression_prets' => 'Suppression de r&eacute;servation',
-				'prets_titre_liste_reservations' => 'Liste des r&eacute;servations',
+	    # Titres
+		'prets_titre_gestion_prets' => 'Gestion des r&eacute;servations',
+		'prets_titre_edition_prets' => 'Edition de r&eacute;servation',
+		'prets_titre_suppression_prets' => 'Suppression de r&eacute;servation',
+		'prets_titre_liste_reservations' => 'Liste des r&eacute;servations',
 			
 			# En-tete
 				'prets_entete_date_sortie' => 'Date sortie',
@@ -486,6 +488,7 @@ Commentaire: @commentaire@
 		#Message
 			'plan_info' => 'Vous pouvez d&eacute;finir ici les comptes de votre plan comptable.<br />Vous devez au minimum d&eacute;finir les comptes de produits n&eacute;cessaires &agrave; la configuration du plugin et les comptes financiers relatifs aux diff&eacute;rentes modes de paiement.',
                         'edit_plan' => '<p>Vous devez choisir d\'abord une "CLASSE" puis un "CODE" dont le 1er chiffre doit correspondre &agrave; la "classe". Par exemple : classe 5 et code 5171</p>Si vous avez activ&eacute; l\'aide &agrave; la d&eacute;claration du plan comptable fran&ccedil;ais, un s&eacute;lecteur de code listant tous les codes et intitul&eacute;s correspondant vous permettra de remplir directement les cases code et intitul&eacute; que vous pourrez modifier ensuite, ce sont elles qui seront consid&eacute;r&eacute;es et non le s&eacute;lecteur.',
+			'non_implemente' => 'Fonctionnalit&eacute; non encore impl&eacute;ment&eacute;e !',
 		# Titres
 			'plan_comptable' => 'Plan comptable',
 		
@@ -503,7 +506,7 @@ Commentaire: @commentaire@
 			'plan_libelle_oui' => 'oui',
 			'plan_libelle_non' => 'non',
 			'direction_plan' => 'Type d\'op&eacute;rations',
-	# Destination comptable
+		# Destination comptable
 			'ajouter_destination' => 'ajouter une destination',
 			'supprimer_destination' => 'supprimer',
 		# Titres
@@ -513,10 +516,27 @@ Commentaire: @commentaire@
 			'destination_nav_ajouter' => 'Ajouter une destination comptable',
 		# Bilan
 			'toutes_destination' => 'toutes destinations',
-	# Comptes
-			'compte_financier' => 'Compte financier',
+		# Comptes
+			'compte_financier' => 'Compte financier',			
+			'bilan' => 'Bilan',	
 
-	# Verifications
+		# Compte de Resultat
+			'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
+			'cpte_resultat_bouton_voir' => 'Voir',
+			'cpte_resultat_titre_charges' => 'CHARGES',
+			'cpte_resultat_titre_produits' => 'PRODUITS',
+			'cpte_resultat_titre_benevolat' => 'CONTRIBUTIONS VOLONTAIRES',
+			'cpte_resultat_total_charges' => 'Total des Charges',
+			'cpte_resultat_total_produits' => 'Total des Produits',
+			'cpte_resultat_perte' => 'Perte',
+			'cpte_resultat_benefice' => 'B&eacute;n&eacute;fice',
+			'cpte_resultat_recette_evaluee' => 'Recette<br />&eacute;valu&eacute;e',
+			'cpte_resultat_depense_evaluee' => 'D&eacutepense<br />&eacute;valu&eacute;e',
+
+		# annexe
+			'annexe_titre_general' => 'Annexe',
+
+		# Verifications
 			'erreur_titre' => 'Une erreur est pr&eacute;sente dans votre saisie',
 			'erreur_recette_depense' => 'Une op&eacute;ration ne peut contenir simultan&eacute;ment des d&eacute;penses et recettes. Par ailleurs les d&eacute;penses ou recettes ne peuvent pas etre n&eacute;gatives ou toutes les deux nulles',
 			'erreur_montant_destination' => 'La somme des montants affect&eacute;s aux diff&eacute;rentes destinations ne correspond pas au montant global de l\'op&eacute;ration',

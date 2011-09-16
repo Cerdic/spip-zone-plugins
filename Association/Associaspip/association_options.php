@@ -23,6 +23,16 @@ $GLOBALS['association_styles_des_statuts'] = array(
 	"sorti" => "sortie"
 );
 
+$GLOBALS['association_classes'] = array(
+	"capital" => "1",
+	"immob" => "2",
+	"stock" => "3",
+	"tier" => "4",
+    "financier" => "5",
+    "charge" => "6",
+    "produit" => "7",
+    "contribution_volontaire" => "8"
+ );
 
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
@@ -159,7 +169,25 @@ function association_header_prive($flux){
 function association_delete_tables($flux){
   spip_unlink(cache_meta('association_metas'));
 }
-
+// Filtre pour "afficher" ou "cacher" un bloc div
+// Utilise dans le formulaire cvt "editer_asso_comptes.html"
+function affichage_div($type_operation,$list_operation) {
+	if(strpos($list_operation, '-')) {
+		$operations = explode('-', $list_operation);
+		$res = 'cachediv';
+		for($i=0;$i<count($operations);$i++) {
+			$operation = $GLOBALS['association_classes'][$operations[$i]];
+			if($type_operation===$operation) {
+				$res = '';
+				break;
+			}
+		}
+	}
+	else {
+		$res = ($type_operation===$GLOBALS['association_classes'][$list_operation])?'':'cachediv';
+	}
+	return $res;
+}
 
 function encadre($texte,$avant='[',$apres=']') {
     return ($texte=='')?'':$avant.$texte.$apres;

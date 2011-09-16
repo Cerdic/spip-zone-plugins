@@ -69,8 +69,12 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 	echo $totaux;
 	echo fin_boite_info(true);	
 	
-	$url_bilan = generer_url_ecrire('bilan', "annee=$annee");		
-	$res = association_icone(_T('Bilan') . " $annee",  $url_bilan, 'finances.jpg')
+	$url_bilan = generer_url_ecrire('bilan', "annee=$annee");
+	$url_compte_resultat = generer_url_ecrire('compte_resultat', "annee=$annee");
+	$url_annexe = generer_url_ecrire('annexe', "annee=$annee"); 
+	$res = association_icone(_T('asso:cpte_resultat_titre_general') . " $annee",  $url_compte_resultat, 'finances.jpg')
+	. association_icone(_T('asso:bilan') . " $annee",  $url_bilan, 'finances.jpg')
+	. association_icone(_T('asso:annexe_titre_general') . " $annee",  $url_annexe, 'finances.jpg')
 	. association_icone(_T('asso:ajouter_une_operation'),  generer_url_ecrire('edit_compte'), 'ajout_don.png');
 
 	echo bloc_des_raccourcis($res);
@@ -90,7 +94,8 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 	echo '<option value="%" ';
 	if ($imputation=="%") { echo ' selected="selected"'; }
 	echo '>Tous</option>';
-	$sql = sqL_select('code, classe, intitule', 'spip_asso_plan','', '', "classe,code");
+	/* ne pas afficher les codes de la classe financiere : ce n'est pas une imputation et les inactifs  */
+	$sql = sql_select('code, classe, intitule', 'spip_asso_plan','classe <> '.$GLOBALS['association_metas']['classe_banques'].' AND active' , '', "classe,code");
 	while ($plan = sql_fetch($sql)) {
 		echo '<option value="'.$plan['code'].'" ';
 		if ($imputation==$plan['code']) { echo ' selected="selected"'; }
@@ -136,12 +141,12 @@ function exec_comptes_args($annee, $vu, $imputation, $debut, $max_par_page, $id_
 		
 		$table = "<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>"
 		. "<tr style='background-color: #DBE1C5;'>\n"
-		. '<th style="text-align: right;">' . _T('asso:id'). "</th>\n"
-		. '<th style="text-align: right;">' . _T('asso:date') . "</th>\n"
-		. '<th>' . _T('asso:compte') . "</th>\n"
-		. '<th>' . _T('asso:justification') . "</th>\n"
+		. '<th style="text-align: center;">' . _T('asso:id'). "</th>\n"
+		. '<th style="text-align: center;">' . _T('asso:date') . "</th>\n"
+		. '<th style="text-align: right;">' . _T('asso:compte') . "</th>\n"
+		. '<th>&nbsp;' . _T('asso:justification') . "</th>\n"
 		. '<th style="text-align: right;">' . _T('asso:montant') . "</th>\n"
-		. '<th>' . _T('asso:financier') . "</th>\n"
+		. '<th>&nbsp;' . _T('asso:financier') . "</th>\n"
 		. '<td colspan="3" style="text-align: center;"><strong>&nbsp;</strong></td>'
 		. '</tr>'
 		. $table
@@ -174,19 +179,19 @@ function comptes_while($where, $limit, $id_compte)
 		. $class. ' border1" style="text-align:right;">'
 		.$id
 		. "</td>\n<td class=\""
-		. $class. ' border1" style="text-align:right;">'
+		. $class. ' border1" style="text-align:center;">'
 		. association_datefr($data['date'])
 		. "</td>\n<td class=\""
-		. $class. ' border1">'
+		. $class. ' border1" style="text-align:right;">'
 		. $data['imputation']
 		. "</td>\n<td class=\""
 		. $class. ' border1">'
-		. propre($data['justification'])
+		. propre('&nbsp;'.$data['justification'])
 		. "</td>\n<td class=\""
 		. $class. ' border1" style="text-align:right;">'
 		. association_nbrefr($data['recette']-$data['depense'])
 		. "</td>\n<td class=\""
-		. $class. ' border1">'
+		. $class. ' border1">&nbsp;'
 		. $data['journal']
 		. '</td>'
 		. ($data['vu'] ?

@@ -41,7 +41,7 @@ function exec_bilan(){
 		echo $commencer_page(propre(_T('asso:titre_gestion_pour_association')), "", _DIR_PLUGIN_ASSOCIATION_ICONES.'finances.jpg','rien.gif');
 		association_onglets(_T('asso:titre_onglet_comptes'));		
 
-		echo debut_gauche("",true);
+		echo debut_gauche("",true);		
 		
 		echo debut_boite_info(true);
 		echo association_date_du_jour();
@@ -69,18 +69,25 @@ function exec_bilan(){
 			echo '</div></form>';
 		}
 		echo fin_boite_info(true);
+
+		$url_compte_resultat = generer_url_ecrire('compte_resultat', "annee=$annee");
+		$url_annexe = generer_url_ecrire('annexe', "annee=$annee");
+		$res = association_icone(_T('asso:cpte_resultat_titre_general') . " $annee",  $url_compte_resultat, 'finances.jpg')
+		. association_icone(_T('asso:annexe_titre_general') . " $annee",  $url_annexe, 'finances.jpg');
+		
+		echo bloc_des_raccourcis($res);
+
 		echo debut_droite("",true);
 		
 		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' .propre( _T('asso:bilans_comptables')));
 		
-		
-
-		$clas=$GLOBALS['association_metas']['classe_banques'];
+		$clas_banque=$GLOBALS['association_metas']['classe_banques'];
+		$clas_contrib_volontaire=$GLOBALS['association_classes']['contribution_volontaire']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		
 		if ($plan) {
 			$join = " RIGHT JOIN spip_asso_plan ON imputation=code";
 			$sel = ", code, intitule, classe";
-			$having =  " AND classe <> " . sql_quote($clas);
+			$having =  " AND classe <> " . sql_quote($clas_banque). " AND classe <> " .sql_quote($clas_contrib_volontaire);
 			$order = "code,";
 		} else $join = $sel = $having = $order = '';		
 		
@@ -99,7 +106,7 @@ function exec_bilan(){
 			}
 
 			echo "\n<fieldset>";
-			echo '<legend><strong>', _T('asso:resultat_courant') . ' ' . $annee. ' ' .$intutile_destination_bilan. '</strong></legend>';
+			echo '<legend><strong>'. _T('asso:resultat_courant') . ' ' . $annee. ' ' .$intutile_destination_bilan. '</strong></legend>';
 			echo "\n<table border='0' cellpadding='2' cellspacing='0' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>\n";
 			echo "<tr style='background-color: #DBE1C5;'>\n";
 			echo '<td><strong>&nbsp;</strong></td>';
@@ -175,7 +182,9 @@ function bilan_encaisse($annee)
 	echo '</tr>';
 	$clas=$GLOBALS['association_metas']['classe_banques'];
 	$query = sql_select('*', 'spip_asso_plan', "classe='$clas'", '',  "code" );
-		
+
+	$date_du_jour = date('Y-m-d'); # pour ne pas comptabiliser les opérations au delà d'aujourd'hui !!!!
+
 	while ($banque = sql_fetch($query)) {
 		$date_solde=$banque['date_anterieure'];
 		$journal=$banque['code'];
@@ -185,8 +194,9 @@ function bilan_encaisse($annee)
 		echo "\n<td class='arial11 border1'>" . $banque['code'] . ' : ' . $banque['intitule'] . '</td>';
 		echo "\n<td class='arial11 border1' style='text-align:right;'>".association_datefr($date_solde).'</td>'; 
 		echo "\n<td class='arial11 border1' style='text-align:right;'>".number_format($solde, 2, ',', ' ').'</td>'; 
-			
-		$compte = sql_fetsel("sum( recette ) AS recettes, sum( depense ) AS depenses, date", "spip_asso_comptes", "date >= '$date_solde' AND journal = '$journal'", 'journal');
+
+		/* ne pas comptabiliser les opérations au delà d'aujourd'hui meme si il y a des echeances futures !!!! */
+		$compte = sql_fetsel("sum( recette ) AS recettes, sum( depense ) AS depenses, date", "spip_asso_comptes", "date >= '$date_solde' AND date <= '$date_du_jour' AND journal = '$journal'", 'journal');
 			
 		if ($compte)
 			$solde += ($compte['recettes'] -$compte['depenses']);
