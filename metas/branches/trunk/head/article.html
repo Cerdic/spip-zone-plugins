@@ -1,0 +1,12 @@
+<BOUCLE_article(ARTICLES) {id_article}>
+<BOUCLE_metas_article(METAS){id_article}>
+<title>[(#TITRE|sinon{#_article:TITRE|couper{80}}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTION|sinon{#_article:DESCRIPTIF}|sinon{#_article:INTRODUCTION{250}}|sinon{#METAS_DESCRIPTION}|PtoBR|attribut_html)" />]
+[<meta name="keywords" content="(#KEYWORDS|sinon{#METAS_KEYWORDS}|attribut_html)" />]
+</BOUCLE_metas_article>
+<title>[(#TITRE|couper{80}|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF|sinon{#INTRODUCTION|couper{250}}|sinon{#METAS_DESCRIPTION}|PtoBR|attribut_html)" />]
+<//B_metas_article>
+[<link rel="canonical" href="(#URL_ARTICLE|url_absolue)" />]
+</BOUCLE_article>
+[(#PLUGIN{Z,version}|>={2}|oui)<INCLURE{fond=inclure/head}>]
