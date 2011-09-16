@@ -18,7 +18,7 @@ function inc_acs_sr() {
 	$repertoire = _DIR_DUMP.'acs/';
 	
 	// Sauvegarder
-	$nom_fichier = lire_meta('acsModel').date("ymdHi", lire_meta("acsDerniereModif"));
+	$nom_fichier = lire_meta('acsSet').date("ymdHi", lire_meta("acsDerniereModif"));
 	$file = $repertoire.$nom_fichier;
 	$res = '<span class="onlinehelp">
     <b><u>'._T('acs:save').' :</u></b>'.acs_help_call('acs_save_bloc').

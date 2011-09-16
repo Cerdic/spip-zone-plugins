@@ -51,10 +51,10 @@ function acs_save($repertoire, $nom_fichier) {
 			$file .= "'$vn'=>'".str_replace("'", "\'", $meta[$vn])."',\n";
 	}
 	if ($file) {
-		$file = "<?php # backup of ".$meta['acsModel']."\n\$def=array(\n".
+		$file = "<?php # backup of ".$meta['acsSet']."\n\$def=array(\n".
 			"'ACS_VERSION'=>'".acs_version()."',\n".
 			"'ACS_RELEASE'=>'".acs_release()."',\n".
-			"'acsModel'=>'".$meta['acsModel']."',\n".
+			"'acsSet'=>'".$meta['acsSet']."',\n".
 			($meta['acsSqueletteOverACS'] ? "'acsSqueletteOverACS'=>'".$meta['acsSqueletteOverACS']."',\n" : '').
   		"'ACS_VOIR_ONGLET_VARS'=>'".$meta['ACS_VOIR_ONGLET_VARS']."',\n".
   		"'ACS_VOIR_PAGES_COMPOSANTS'=>'".$meta['ACS_VOIR_PAGES_COMPOSANTS']."',\n".

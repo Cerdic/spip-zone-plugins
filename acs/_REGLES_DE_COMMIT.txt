@@ -2,7 +2,7 @@ Règle "contrôle strict" : « nul ne peut intervenir sur les fichiers de cette 
 sans avoir au préalable envoyé un patch au format diff -pu aux responsables de la branche,
 et reçu de l'un d'eux un "OK" formel. »
 
-Des règles particulières existent pour les créateurs de nouveaux modèles ACS: voir /models/_REGLES_DE_COMMIT.txt dans le dossier /models/
+Des règles particulières existent pour les créateurs de nouveaux jeux de composants ACS: voir /sets/_REGLES_DE_COMMIT.txt dans le dossier /sets/
 
 ----------------------------------------------------------------------------------------------------------------
 Conventions de presentation du code source :

@@ -10,12 +10,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'assistant_configuration_squelettes' => 'Site design wizard',
   'acs' => 'ACS',
 
-  'model_actif' => 'ACS active model: <b>@model@</b>',
+  'set_actif' => 'ACS active set: <b>@set@</b>',
   'overriden_by' => ', overriden by skeletons from <u>@over@</u>',
-  'model_actif2' => '.',
+  'set_actif2' => '.',
 
   'onglet_pages_description' => 'Schema and source.',
-  'onglet_pages_info' => 'In pages list, underlined ones are read in the <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">override</span> directory, bolded in current <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">ACS model</span>, italicized from <span style="color: darkgreen; font-weight: normal; font-style: underline; text-decoration: none">plugins</span>, and thoses without any font decoration from <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">spip distribution</span>.',
+  'onglet_pages_info' => 'In pages list, underlined ones are read in the <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: underline">override</span> directory, bolded in current <span style="color: darkgreen; font-weight: bold; font-style: normal; text-decoration: none">ACS set</span>, italicized from <span style="color: darkgreen; font-weight: normal; font-style: underline; text-decoration: none">plugins</span>, and thoses without any font decoration from <span style="color: darkgreen; font-weight: normal; font-style: normal; text-decoration: none">spip distribution</span>.',
   'onglet_pages_help' => 'ACS add to spip customizables pages made with customizables components.
 <br /><br />Click on the little black triangle to display a more detailed schema.
 <br /><br />
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
   'onglet_adm_description' => 'Configuration',
   'onglet_adm_info' => 'ACS components set and templates choice, administration, backup / restore.',
-  'onglet_adm_help' => '<b>Model</b>:<br />Model is a set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the model and/or its components. If more than one is needed, separator is ":"  between paths.
+  'onglet_adm_help' => '<b>Set</b>:<br />A set of ACS components-based spip skeletons (templates). Skeleton(s) is optionnal. It override the set and/or its components. If more than one is needed, separator is ":"  between paths.
 <br />
-To use some components from an ACS model in your own SPIP templates, you need to fill in this field with your SPIP templates directory.
+To use some components from an ACS set in your own SPIP templates, you need to fill in this field with your SPIP templates directory.
 <br />
 <br />
 <b>ACS administrators</b>:<br />ACS administrators only are authorized to configure the website. Configuration pages are no more accessible to other administrators.<br /><br /><b>ACS access control</b>:<br />You can lock access to other spip "ecrire" area pages: creat a new group, look for the exec=dosomething parameter in the page-to-control url, add "something" in the "ACS administrated" list (separated by comma), validate, and add the page-to-control administrator(s).<br /><br /><b>Display all variables</b>:<br /> All variables display created components variables, whenever components are used or not.<br /><br /><b>Display component\'s pages</b>:<br />Display component\'s pages in "Pages" pane.',
@@ -64,7 +64,7 @@ To use some components from an ACS model in your own SPIP templates, you need to
   'groupes' => 'Groups',
   'lien_retirer_admin' => 'Retire from admins',
   'locked_pages' => 'Protected pages',
-  'model' => 'Model',
+  'set' => 'Set',
   'squelette' => 'Skeleton(s)',
   'voir_pages_composants' => 'Components pages',
   'voir_pages_preview_composants' => 'Preview pages',

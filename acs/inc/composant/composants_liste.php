@@ -48,15 +48,15 @@ function composants_liste(){
     return $cl; // Return result if done once
 
   require_once _DIR_ACS.'inc/acs_cache.php';
-  $model = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');  
-  $cl = cache('lecture_composants_liste', 'a_'.$GLOBALS['meta']['acsModel'].'_cl');
+  $set = (isset($GLOBALS['meta']['acsSet']) ? $GLOBALS['meta']['acsSet'] : 'cat');
+  $cl = cache('lecture_composants_liste', 'a_'.$set.'_cl', array($set));
   $cl = $cl[0];
   return $cl;
 }
 
-function lecture_composants_liste() {
+function lecture_composants_liste($set) {
   // Liste des composants du modèle ACS actif
-  $dirc = _DIR_PLUGIN_ACS.'models/'.$GLOBALS['meta']['acsModel'].'/composants';
+  $dirc = _DIR_PLUGIN_ACS.'sets/'.$set.'/composants';
   $cl = lit_liste_composants($dirc);
 
   // Si override, il faut ajouter la liste des composants du ou des dossiers d'override

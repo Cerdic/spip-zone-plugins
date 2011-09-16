@@ -14,14 +14,14 @@ include_spip('inc/acs_version');
  */
 
 function acs_adm() {
-  if (isset($_POST['changer_model']) && ($_POST['changer_model'] == 'oui')) {
+  if (isset($_POST['changer_set']) && ($_POST['changer_set'] == 'oui')) {
     if (
-        ($GLOBALS['meta']['acsModel'] != $_POST['acsModel']) ||
+        ($GLOBALS['meta']['acsSet'] != $_POST['acsSet']) ||
         ($GLOBALS['meta']['acsSqueletteOverACS'] != $_POST['acsSqueletteOverACS'])
       ) {
-      ecrire_meta('acsModel', $_POST['acsModel']);
+      ecrire_meta('acsSet', $_POST['acsSet']);
       ecrire_meta('acsSqueletteOverACS', $_POST['acsSqueletteOverACS']);
-      $GLOBALS['dossier_squelettes'] = (isset($GLOBALS['meta']['acsSqueletteOverACS']) ? $GLOBALS['meta']['acsSqueletteOverACS'].':' : '')._DIR_PLUGIN_ACS.'models/'.$_POST['acsModel'];
+      $GLOBALS['dossier_squelettes'] = (isset($GLOBALS['meta']['acsSqueletteOverACS']) ? $GLOBALS['meta']['acsSqueletteOverACS'].':' : '')._DIR_PLUGIN_ACS.'sets/'.$_POST['acsSet'];
       ecrire_metas();
     }
   }  
@@ -31,8 +31,8 @@ function acs_adm() {
   if (isset($_POST['changer_pages']) && ($_POST['changer_pages'] == 'oui'))
     acs_group_update_pages(acs_grid($_POST['group']), $_POST['pages']);
 
-  $r = acs_box(_T('acs:model').' '._T('acs:acs').acs_help_call('model'),
-    acs_help_div('model', _T('acs:model_help').'<br /><br />').acs_model()
+  $r = acs_box(_T('acs:set').' '._T('acs:acs').acs_help_call('set'),
+    acs_help_div('set', _T('acs:set_help').'<br /><br />').acs_set()
     ,
     _DIR_PLUGIN_ACS.'images/composant-24.gif'
   );
@@ -99,10 +99,10 @@ function acs_adm_droite() {
   return $r;
 }
 
-function acs_model() {
-  $r = '<form name="acs_model" action="?exec=acs" method="post">'.
-        '<input type="hidden" name="onglet" value="adm"><input type="hidden" name="changer_model" value="oui">';
-  $r .= '<table width="100%"><tr><td>'.ctlInput('acsModel', _T('acs:model'), select_model());
+function acs_set() {
+  $r = '<form name="acs_set" action="?exec=acs" method="post">'.
+        '<input type="hidden" name="onglet" value="adm"><input type="hidden" name="changer_set" value="oui">';
+  $r .= '<table width="100%"><tr><td>'.ctlInput('acsSet', _T('acs:set'), select_set());
   $r .= '</td><td>'.ctlInput('acsSqueletteOverACS', _T('acs:squelette'), '<input type="text" name="acsSqueletteOverACS" value="'.$GLOBALS['meta']['acsSqueletteOverACS'].'" class="forml" />').'</td></tr></table>';
 
   $r .= '<div style="text-align:'.$GLOBALS['spip_lang_right'].';"><input type="submit" name="'._T('bouton_valider').
@@ -117,22 +117,22 @@ function ctlInput($nom, $txt, $content) {
 /**
  * Retourne un sélecteur de squelette,
  */
-function select_model() {
-  $r = '<select name="acsModel" class="forml">';
-  foreach(list_models() as $sq)
-    $r .= '<option name="'.$sq.'" value="'.$sq.'"'.(($sq == $GLOBALS['meta']['acsModel']) ? ' selected': '').'>'.$sq.'</option>';
+function select_set() {
+  $r = '<select name="acsSet" class="forml">';
+  foreach(list_sets() as $sq)
+    $r .= '<option name="'.$sq.'" value="'.$sq.'"'.(($sq == $GLOBALS['meta']['acsSet']) ? ' selected': '').'>'.$sq.'</option>';
   $r .= '</select>';
   return $r;
 }
 
 /**
- * Lit la liste des modèles de squelettes
+ * Lit la liste des jeux de composants
  */
-function list_models(){
+function list_sets(){
   $squelettes = array();
-  if ($d = @opendir(_DIR_PLUGIN_ACS.'models')) {
+  if ($d = @opendir(_DIR_PLUGIN_ACS.'sets')) {
     while (false !== ($file = @readdir($d))) {
-      if ($file != "." && $file != ".." && substr($file, 0, 1) != '.' && @is_dir(_DIR_PLUGIN_ACS.'models/'.$file)) {
+      if ($file != "." && $file != ".." && substr($file, 0, 1) != '.' && @is_dir(_DIR_PLUGIN_ACS.'sets/'.$file)) {
         $squelettes[] = $file;
       }
     }
@@ -141,7 +141,7 @@ function list_models(){
     return $squelettes;
   }
   else {
-    return 'Impossible d\'ouvrir le dossier de modeles "'._DIR_PLUGIN_ACS.'models"';
+    return 'Impossible d\'ouvrir le jeu de composants "'._DIR_PLUGIN_ACS.'sets"';
   }
 }
 

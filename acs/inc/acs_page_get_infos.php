@@ -18,13 +18,13 @@ function acs_page_get_infos($page, $mode, $detail) {
   include_spip('inc/acs_cache');
   $mode_source = ($mode == 'source');
   $mode = $mode_source ? '_source' : '_infos'.$detail;
-  $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail));
+  $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsSet'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail));
   
   // Si le fichier a été modifié depuis la mise en cache, on force le recalcul
   $pg = find_in_path($page.'.html');
   $pg_derniere_modif = filemtime($pg);
   if ($r[2] < $pg_derniere_modif)
-    $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsModel'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail), true);
+    $r = cache('page_get_infos', 'pg_'.$GLOBALS['meta']['acsSet'].'_'.urlencode($page).$mode, array($page, $mode_source, $detail), true);
   return $r[0];
 }
 

@@ -23,9 +23,11 @@ include_spip('inc/composant/composant_infos');
 function exec_composant_get_infos() {
   $c = _request('c');
   $nic = _request('nic');
+  $var_mode = _request('var_mode');
+
   $err = '<span class="alert" title="'._T('acs:err_cache').'">*</span>';
 
-  $r = cache('composant_infos', 'c_'.$GLOBALS['meta']['acsModel'].'_'.$c.$nic.'_infos',array('c' => $c,'nic'=>$nic));
+  $r = cache('composant_infos', 'c_'.$GLOBALS['meta']['acsSet'].'_'.$c.$nic.'_infos', array('c' => $c,'nic'=>$nic), ($var_mode == 'recalcul'));
   if(!is_array($r) || count($r) < 2)
     ajax_retour($err);
   if ($r[1] != 'err')

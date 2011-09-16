@@ -18,24 +18,26 @@ require_once _DIR_ACS.'inc/composant/composants_liste.php';
  * 3. langue par défaut depuis dossier(s) squelettes_over_acs
  * 4. langue par défaut depuis dossier modèle acs actif
  * 
- * @params : $dir est soit vide soit egal a "ecrire"
+ * @params : $dir (="" ou "ecrire").
  */
 function composants_ajouter_langue($dir='') {
-  $idx = $GLOBALS['idx_lang'];
-  $idx_tmp = $idx.'_tmp';
-  $GLOBALS['idx_lang'] = $idx_tmp;
-
   foreach (composants_liste() as $c => $composant) {
   	// On teste si au moins une instance du composant est active
     if (!composant_actif($composant)) continue;
 
+    // Cherche le fichier de langue du composant :
     $langfile = find_in_path("composants/$c/".($dir ? $dir.'/' : '')."lang/$c".'_'.($dir ? $dir.'_' : '').$GLOBALS['spip_lang'].'.php');
     if (!$langfile)
       $langfile = find_in_path("composants/$c/".($dir ? $dir.'/' : '')."lang/$c".'_'.($dir ? $dir.'_' : '').'fr.php');
     if (!$langfile)
     	continue;
 
+    $idx = $GLOBALS['idx_lang'];
+    $idx_tmp = $idx.'_tmp';
+    $GLOBALS['idx_lang'] = $idx_tmp;
+    // Charge le fichier de langue
     require_once($langfile);
+    // Affecte les traductions chargée au composant :
     if (is_array($GLOBALS[$idx_tmp])) {
       $cla = array();
       foreach($GLOBALS[$idx_tmp] as $k => $v) {
@@ -45,14 +47,15 @@ function composants_ajouter_langue($dir='') {
     }
     else
     	acs_log('ERROR in composants_ajouter_langue() : $GLOBALS[\''.$idx.'\'] from lang file "'.$langfile.'" is not an array.');
+    // On efface le tableau temporaire et on restaure la valeur originale de $GLOBALS['idx_lang'] :
     unset($GLOBALS[$idx_tmp]);
-  }
-  $GLOBALS['idx_lang'] = $idx;
+    $GLOBALS['idx_lang'] = $idx;
+  }  
 }
 
 /**
  * Ajoute un fichier de langue à la langue en cours
- * @param $langfile
+ * @param $langfile : chemin d'un fichier de langue à partir d'un path SPIP (chemins où SPIP cherche ses includes)
  */
 function acs_addLang($langfile) {
 	$current = $GLOBALS[$GLOBALS['idx_lang']];

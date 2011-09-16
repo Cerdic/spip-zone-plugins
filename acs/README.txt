@@ -1,7 +1,7 @@
 
              Assistant de Configuration du Site
 
-Version : 0.8.5
+Version : 0.8.6
 
 Documentation : http:// acs.geomaticien.org
 Licence: cf LICENCES.txt

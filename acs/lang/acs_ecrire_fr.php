@@ -10,9 +10,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'assistant_configuration_squelettes' => 'Assistant Conception du Site',
   'acs' => 'ACS',
 
-  'model_actif' => 'Mod&egrave;le ACS actif: <b>@model@</b>',
+  'set_actif' => 'Jeu de composants ACS actif: <b>@set@</b>',
   'overriden_by' => ', surcharg&eacute; par les squelettes de <u>@over@</u>',
-  'model_actif2' => '.',
+  'set_actif2' => '.',
   'onglet_pages_info' => 'ACS ajoute à spip des mod&egrave;les de pages personnalisables par assemblage de composants eux-même personnalisables.',
 
   'pg_help' => 'Le <b>sch&eacute;ma</b> de la page pr&eacute;sente les <span class="col_BOUCLE">boucles spip</span> et les inclusions. Un clic sur le petit triangle noir affiche un <b>sch&eacute;ma d&eacute;taill&eacute;</b>.
@@ -65,9 +65,10 @@ Ce sont des <i>"noisettes"</i>, c\'est à dire des squelettes de blocs fonctionn
   'groupes' => 'Groupes',
   'lien_retirer_admin' => 'Retirer des admins',
   'locked_pages' => 'Pages protégées',
-  'model' => 'Mod&egrave;le',
-  'model_help' => 'Le mod&egrave;le est un jeu de squelettes Spip basés sur des composants ACS. Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>).<br />
-Pour utiliser des composants ACS dans d\'autres squelettes que ceux du modèles ACS actif, vous devez y indiquer le dossier de vos squelettes pour qu\'ils surchargent ceux du modèle actif.',
+  'set' => 'Set',
+  'set_help' => 'Le set est un jeu de squelettes Spip basés sur des composants ACS.
+<br /><br />
+Squelette(s) est optionnel, et sert à surcharger le mod&egrave;le et/ou ses composants. Pour avoir plusieurs niveaux d\'override, on sépare les chemins par deux points (<b>:</b>). Pour utiliser des composants ACS dans d\'autres squelettes que ceux du modèles ACS actif, vous devez y indiquer le dossier de vos squelettes pour qu\'ils surchargent ceux du modèle actif.',
   'squelette' => 'Squelette(s)',
   'voir_pages_composants' => 'Pages des composants',
   'voir_pages_composants_help' => 'Affiche les pages des composants dans l\'onglet "Pages" (squelette <i>un_composant</i>.html).',

@@ -16,7 +16,7 @@ function acs_insert_head($flux) {
   // On ajoute au début une css rien que pour les administrateurs ACS
   if (acs_autorise())
   	$r .= '<link rel="stylesheet" href="'.direction_css(generer_url_public('acs_style_prive.css')).'" type="text/css" media="projection, screen, tv" />';
-  $model =$GLOBALS['meta']['acsModel'];
+  $model =$GLOBALS['meta']['acsSet'];
   $css_model = find_in_path($model.'.css.html');
   if ($css_model)
     $r .= '<link rel="stylesheet" href="spip.php?page='.$model.'.css&v='.$GLOBALS["meta"]["acsDerniereModif"].'" type="text/css" media="projection, screen, tv" />';

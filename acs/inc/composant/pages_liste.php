@@ -20,8 +20,8 @@ function pages_liste() {
 
   if (!count($liste)) {
     include_spip('inc/acs_cache');
-    $model = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
-    $liste =  cache('pages_du_site', 'a_'.$model.'_pages_liste');
+    $set = (isset($GLOBALS['meta']['acsSet']) ? $GLOBALS['meta']['acsSet'] : 'cat');
+    $liste =  cache('pages_du_site', 'a_'.$set.'_pages_liste');
   }
   return $liste[0];
 }
@@ -37,8 +37,8 @@ function pages_du_site() {
     $squelettes['over'.$numover] = _ACS_DIR_SITE_ROOT.$dir;
     $numover += 1;
   }
-  // Squelettes du modele ACS actif:
-  $squelettes['acs'] = _DIR_PLUGIN_ACS.'models/'.(isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
+  // Squelettes du set ACS actif:
+  $squelettes['acs'] = _DIR_PLUGIN_ACS.'sets/'.(isset($GLOBALS['meta']['acsSet']) ? $GLOBALS['meta']['acsSet'] : 'cat');
   // On ajoute les squelettes de plugins actifs - Add skeletons from active plugins
   $plugins = unserialize($GLOBALS['meta']['plugin']);
   foreach ($plugins as $NAME=>$plugin) {

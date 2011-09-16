@@ -122,10 +122,9 @@ class AdminComposant {
 				$updated = true;
 			}
 		}
-		
-		$this->vars[0] = array('nom' => 'Use',
-													 'valeur' => $GLOBALS['meta'][$this->fullname.'Use']
-													);
+
+		$this->vars[0] = array('nom' => 'Use', 'valeur' => $GLOBALS['meta'][$this->fullname.'Use']);
+
 		if (is_array($c['variable'])) {
 			foreach($c['variable'] as $k=>$var) {
 				if (!is_array($var))
@@ -288,7 +287,7 @@ class AdminComposant {
 		$r .= '<div class="onlinehelp">'.
 		acs_plieur('plieur_pu'.$n,
 			'pu'.$n,
-			'#',
+			'#plieur_pu'.$n,
 			true,
 			'if (typeof done'.$n.' == \'undefined\') {
 				AjaxSqueeze(\'?exec=composant_get_infos&c='.$this->class.($this->nic ? '&nic='.$this->nic: '').'\', \'puAjax'.$n.'\');
@@ -303,33 +302,6 @@ class AdminComposant {
 			$r .= '<br /><div class="onlinehelp">'._T('acs:references_autres_composants').'</div>'.
 						'<div class="onlinehelplayer">'.$this->get_cvars_html().'</div>';
 		$r .= '<div id="puAjax'.$n.'" class="puAjax'.$n.'"></div>';
-		$r .= '<hr /><div>'._T('acs:require', array('class' => $this->class, 'version' => $this->version)).' :<br />';
-		foreach($this->necessite as $nec) {
-			$get_version = $nec['id'].'_version';
-			if (is_callable($get_version)) // la fonction existe pour spip et pour acs
-				$current_version = $get_version();
-			elseif ($f = chercher_filtre('info_plugin')) { // pour les plugins sans fonction plugin_version()
-				if (is_callable($f))
-					$current_version = $f($nec['id'],'version');
-			}
-			if (!$current_version)
-				$current_version = '?';
-			$version = substr($nec['version'], 1, -1);
-			$version = explode(';',$version);
-			$min_version = $version[0];
-			$max_version = $version[1];
-			if (version_compare($min_version, $current_version, '>')) {
-				$class = 'alert';
-			}
-			else {
-				$class = '';
-			}
-			$necessite .= '<li><span class="'.$class.'">'.$nec['id'].' >= '.$min_version.'</span> : <b>'.$current_version.'</b></li>';
-		}
-		if ($necessite) {
-			$r .= '<ul style="list-style-type: disc;list-style-position: inside;">'.$necessite.'</ul>';
-		}
-		$r .= '</div>';
 		$r .= '</div>';
 		return $r;
 	}
@@ -375,7 +347,7 @@ class AdminComposant {
 		switch($this->preview_type) {
 			case 'inline':
 				 require_once _DIR_ACS.'balise/acs_balises.php';
-				 $preview = '<script type="text/javascript" src="../spip.php?page=acs.js"></script><link rel="stylesheet" href="../spip.php?page='.$GLOBALS['acsModel'].'.css" type="text/css" media="projection, screen, tv" /><div id="'.$this->fullname.'" style="border:0;overflow: auto; width: 100%; height: '.(is_numeric($this->preview) ? $this->preview : 80).'px">'.recuperer_fond('vues/composant', array(
+				 $preview = '<script type="text/javascript" src="../spip.php?page=acs.js"></script><link rel="stylesheet" href="../spip.php?page='.$GLOBALS['acsSet'].'.css" type="text/css" media="projection, screen, tv" /><div id="'.$this->fullname.'" style="border:0;overflow: auto; width: 100%; height: '.(is_numeric($this->preview) ? $this->preview : 80).'px">'.recuperer_fond('vues/composant', array(
 				 'c' => 'composants/'.$this->class.'/'.$this->class,
 				 'nic' => $this->nic,
 				 'lang' => $GLOBALS['spip_lang']

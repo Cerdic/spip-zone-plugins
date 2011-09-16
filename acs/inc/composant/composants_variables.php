@@ -18,8 +18,8 @@ function composants_variables() {
   
   include_spip('inc/composant/composants_liste');
   include_spip('inc/acs_cache');
-  $model = (isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat');
-  $cv = cache('lecture_composants_variables', 'a_'.$model.'_cv');
+  $set = (isset($GLOBALS['meta']['acsSet']) ? $GLOBALS['meta']['acsSet'] : 'cat');
+  $cv = cache('lecture_composants_variables', 'a_'.$set.'_cv');
   $cv = $cv[0];
 
   return $cv;

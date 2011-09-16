@@ -1,4 +1,4 @@
-Suivi des principales révisions - Version ACS actuelle : 0.8.5
+Suivi des principales révisions - Version ACS actuelle : 0.8.6
 
 ACS version 0.8
 - nouvelle option de configuration d'ACS : Désactiver le cache de SPIP (lors du développement d'un site).
@@ -11,9 +11,10 @@ ACS version 0.8
 - nouveau type de contrôle : KeyGgroup (choix d'un groupe de mots-clefs)
 - formulaire administration de SPIP enrichi d'un accès direct à l'édition de la page et du bouton inclusions
 - modèle wiki pour faire des liens de type wiki.
+- le dossier "models" est renommé "sets" pour éviter toute confusion avec les modèles SPIP. La variable acsModel devient acsSet.
  
 Modele Cat pour ACS vesion 0.8 :
-- nouveaux composants Carte, Diapo, NavGroup et NavKeys;
+- nouveaux composants Carte, Diapo, NavGroup, NavKeys, Navkeygroup, Versions;
 - gestion amelioree des droits d'acces a un article par mot-cle;
 - suppression du modèle doc au profit de celui de la dist;
 - un modèle spécifique, "c", permet désormais d'utiliser n'importe quel composant comme un modèle SPIP (donc dans un article, par exemple);

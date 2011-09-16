@@ -34,11 +34,12 @@ define('_ACS_TMP_DIR', _ACS_DIR_SITE_ROOT._NOM_TEMPORAIRES_INACCESSIBLES.'cache/
 if ($GLOBALS['meta']['ACS_CACHE_SPIP_OFF'] == 'on')
   define('_NO_CACHE',-1); // Desactive totalement le cache de SPIP (aucune creation des pages en cache)
 
-// Modèle ACS par defaut - Default ACS model
-$GLOBALS['meta']['acsModel'] = isset($GLOBALS['meta']['acsModel']) ? $GLOBALS['meta']['acsModel'] : 'cat';
+// Set ACS par defaut - Default ACS set
+if (!isset($GLOBALS['meta']['acsSet']))
+	$GLOBALS['meta']['acsSet'] = 'cat';
 
-// Dossier des images du modèle ACS actif - Active ACS model images directory
-$GLOBALS['ACS_CHEMIN'] = $dir_site_absolu._NOM_PERMANENTS_ACCESSIBLES.'_acs/'.$GLOBALS['meta']['acsModel'];
+// Dossier des images du set ACS actif - Active ACS set images directory
+$GLOBALS['ACS_CHEMIN'] = $dir_site_absolu._NOM_PERMANENTS_ACCESSIBLES.'_acs/'.$GLOBALS['meta']['acsSet'];
 
 define('_DIR_ACS', _DIR_PLUGINS.acs_get_from_active_plugin('ACS', 'dir').'/'); // Chemin valable espace public aussi, pas comme _DIR_PLUGIN_ACS, qui est à proscrire
 
@@ -60,7 +61,7 @@ if (isset($GLOBALS['meta']['acsSqueletteOverACS']) && $GLOBALS['meta']['acsSquel
 if (isset($GLOBALS['dossier_squelettes']) && $GLOBALS['dossier_squelettes'])
   $GLOBALS['dossier_squelettes'] .= ':';
 // On ajoute le chemin du modèle cat actif
-$GLOBALS['dossier_squelettes'] .= 'plugins/'.acs_get_from_active_plugin('ACS', 'dir').'/'.'models/'.$GLOBALS['meta']['acsModel'];
+$GLOBALS['dossier_squelettes'] .= 'plugins/'.acs_get_from_active_plugin('ACS', 'dir').'/'.'sets/'.$GLOBALS['meta']['acsSet'];
 
 // dossier des composants :
 define('_DIR_COMPOSANTS', find_in_path('composants'));

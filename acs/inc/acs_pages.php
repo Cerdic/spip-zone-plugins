@@ -16,13 +16,13 @@ function acs_pages($page) {
 function acs_pages_droite($page) {
   return acs_info_box(
     _T('acs:acs'),
-    _T('acs:model_actif', array('model' => $GLOBALS['meta']['acsModel'])).
+    _T('acs:set_actif', array('set' => $GLOBALS['meta']['acsSet'])).
     (($GLOBALS['meta']['acsSqueletteOverACS']) ? 
       _T('acs:overriden_by', array('over' => str_replace(':', ' ', $GLOBALS['meta']['acsSqueletteOverACS'])))
        :
       ''
     ).
-    _T('acs:model_actif2').
+    _T('acs:set_actif2').
     '<br /><br />',
     false,
     _T('acs:onglet_pages_info'),
