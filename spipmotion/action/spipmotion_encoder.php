@@ -82,7 +82,7 @@ function action_spipmotion_encoder_dist(){
 	}else if(lire_config('spipmotion_casse') == 'oui'){
 		spip_log('Attention, problème dans la configuration','spipmotion');
 	}else if(intval($en_cours['id_spipmotion_attente']) && ($en_cours['maj'] < date('Y-m-d H:i:s',mktime(date('H')-5)))){
-		spip_log("L'id". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage depuis plus de 5 h (".$en_cours['maj']."), on doit le réinitialiser",'spipmotion');
+		spip_log("L'id ". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage depuis plus de 5 h (".$en_cours['maj']."), on doit le réinitialiser",'spipmotion');
 		sql_updateq('spip_spipmotion_attentes',array('encode' => 'non'),'id_spipmotion_attente ='.intval($en_cours['id_spipmotion_attente']));
 	}else if(intval($en_cours['id_spipmotion_attente'])){
 		spip_log("L'id ". $en_cours['id_spipmotion_attente']." de la file d'attente est en cours d'encodage",'spipmotion');

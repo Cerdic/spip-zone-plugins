@@ -50,6 +50,12 @@ function inc_spipmotion_mediainfo_dist($chemin){
 			}
 		}
 	}
+	if(!$infos['hasaudio']){
+		$infos['hasaudio'] = 'non';
+	}
+	if(!$infos['hasvideo']){
+		$infos['hasvideo'] = 'non';
+	}
 	$infos['metas'] = serialize($metas);
 	return $infos;
 }

@@ -125,6 +125,9 @@ function encodage($source,$doc_attente){
 		$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
 		$recuperer_infos($source['id_document']);
 		$source = sql_fetsel('*','spip_documents','id_document ='.intval($source['id_document']));
+		if(!$source['hasaudio'] OR !$source['hasvideo']){
+			return false;
+		}
 	}
 
 	/**

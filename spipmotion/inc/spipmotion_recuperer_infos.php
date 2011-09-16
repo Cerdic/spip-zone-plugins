@@ -15,8 +15,10 @@
  */
 function inc_spipmotion_recuperer_infos($id_document){
 	spip_log("SPIPMOTION : recuperation des infos du document $id_document","spipmotion");
-	if(!intval($id_document) OR ($GLOBALS['meta']['spipmotion_casse'] == 'oui'))
+	if(!intval($id_document) OR ($GLOBALS['meta']['spipmotion_casse'] == 'oui')){
+		spip_log('SPIPMOTION est cassé','spipmotion');
 		return false;
+	}
 
 	include_spip('inc/documents');
 	$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
