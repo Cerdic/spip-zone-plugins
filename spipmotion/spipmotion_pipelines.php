@@ -307,12 +307,19 @@ function spipmotion_post_spipmotion_encodage($flux){
 	return $flux;
 }
 
-
+/**
+ * Insertion dans le pipeline pre_boucle de SPIP
+ * Si on ne passe pas certains critères aux boucles documents, on n'affiche pas les versions :
+ * -* tout
+ * -* id_orig
+ * -* id_document 
+ */
 function spipmotion_pre_boucle($boucle){
 	if ($boucle->type_requete == 'documents') {
 		// Restreindre aux mots cles non techniques
 		if (!isset($boucle->modificateur['criteres']['id_orig']) && 
-			!isset($boucle->modificateur['tout'])) {
+			!isset($boucle->modificateur['tout']) &&
+			!isset($boucle->modificateur['criteres']['id_document'])) {
 				$boucle->where[]= array("'='", "'id_orig'", "'0'");
 		}		
 	}
