@@ -20,7 +20,8 @@
 					<strong>(#FICHIER|basename)</strong>
 					</td>
 				</tr>]
-
+				
+				[(#LARGEUR|>{0}|et{#HAUTEUR}|>{0}|oui)
 				<tr>
 					<td class="video_left">
 						<:spipmotion:info_format:>
@@ -28,7 +29,7 @@
 					<td >
 					<strong>#LARGEUR/#HAUTEUR px</strong>
 					</td>
-				</tr>
+				</tr>]
 
 				[<tr>
 					<td class="video_left">
@@ -66,23 +67,23 @@
 					</td>
 				</tr>]
 
-				[<tr>
+				[(#BITRATE|>{0}|oui)[<tr>
 					<td class="video_left">
 						<:spipmotion:info_bitrate:>
 					</td>
 					<td >
-					<strong>(#BITRATE|div{1000}|floor) kb/s</strong>
+					<strong>(#BITRATE|>{1000}|?{[(#BITRATE|div{1000}|floor) kb/s],[(#BITRATE) kb/s]})</strong>
 					</td>
-				</tr>]
+				</tr>]]
 
-				[<tr>
+				[(#VIDEOBITRATE|>{0}|oui)[<tr>
 					<td class="video_left">
 						<:spipmotion:info_videobitrate:>
 					</td>
 					<td >
 					<strong>(#VIDEOBITRATE|div{1000}|floor) kb/s</strong>
 					</td>
-				</tr>]
+				</tr>]]
 
 				[<tr>
 					<td class="video_left">
