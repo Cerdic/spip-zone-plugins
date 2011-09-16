@@ -1,0 +1,33 @@
+<paquet
+	prefix="metas"
+	categorie="outil"
+	version="1.4.0"
+	etat="stable"
+	compatibilite="[3.0.0-alpha2;["
+	logo="images/metas-24.png"
+	schema="1.0"
+    documentation="http://www.spip-contrib.net/?rubrique1250"
+>
+
+	<nom>Metas</nom>
+
+
+	<auteur>[Quentin de Serres-Justiniac->http://www.spip-contrib.net/?auteur10451]
+_ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
+
+    <pipeline nom="ieconfig_metas" inclure="metas_ieconfig_metas.php" />
+    <pipeline nom="pre_propre" inclure="metas.php<" />
+    <pipeline nom="affiche_milieu" action="formulaire" inclure="metas.php" />
+    <pipeline nom="declarer_tables_interfaces" inclure="base/metas.php" />
+    <pipeline nom="declarer_tables_principales" inclure="base/metas.php" />
+    <pipeline nom="declarer_tables_auxiliaires" inclure="base/metas.php" />
+    <pipeline nom="autoriser" inclure="metas_autorisations.php" />
+
+	<utilise id="Z" />
+
+    <!-- reste le menu mais je vois pas bien où on va le mettre , à faire plus tard
+    <onglet id="metas" parent="configuration">		<icone>images/metas-24.png</icone>		<titre>metas:configuration_metas</titre>	</onglet>
+    -->
+
+    
+</paquet>
