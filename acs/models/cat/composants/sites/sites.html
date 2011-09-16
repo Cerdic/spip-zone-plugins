@@ -1,9 +1,0 @@
-[(#CACHE{0})][(#REM)
-
-Liste des sites syndiqués ou affichage d'un site
-
-]
-<div class=#PINCEAU{sites}>[
-(#ID_SYNDIC|!={''}|?{' '})<INCLURE{fond=composants/sites/inc-site}{id_syndic}>][
-(#ID_SYNDIC|=={''}|?{' '})<INCLURE{fond=composants/sites/inc-sites}>]
-</div>
