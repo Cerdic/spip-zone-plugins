@@ -59,7 +59,7 @@
   <variable>
     <nom>BordRond</nom>
     <type>text</type>
-  </variable>  
+  </variable>
   <variable>
     <nom>Text</nom>
     <type>color</type>

@@ -20,12 +20,31 @@
   </variable>
 
   <variable>
+    <nom>Orientation</nom>
+    <type>choix</type>
+    <option>vertical</option>
+    <option>horizontal</option>
+    <valeur>horizontal</valeur>
+  </variable>
+  <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+
+  <variable>
     <nom>Bord</nom>
     <type>bord</type>
   </variable>
   <variable>
     <nom>BordHover</nom>
     <type>bord</type>
+  </variable>
+  <variable>
+    <nom>BordRond</nom>
+    <type>text</type>
   </variable>
 
   <variable>

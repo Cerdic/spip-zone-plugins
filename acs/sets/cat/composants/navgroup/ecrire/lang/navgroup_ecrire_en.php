@@ -5,7 +5,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'nom' => 'Navgroup',
 'description' => 'Navigation by keywords groups.',
-'help' => 'Display a navigation block with keywords groups.'
+'help' => 'Display a navigation block with keywords groups.',
+
+'Ids' => 'Groups',
+'IdsHelp' => 'Identifier of keywords groups, separated by "|".'
 
 );
 ?>

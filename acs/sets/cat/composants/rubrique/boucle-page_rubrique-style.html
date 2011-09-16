@@ -14,4 +14,4 @@ si le champ descriptif du mot-clé du groupe de mot-clés #VAR{acsRubriqueStyleP
 
 Section page styled according to a keyword
 
-][(#SET{id_groupe_style_rubrique,#VAR{acsRubriqueStylePage}})]#SET{_rp,<nic-page=([0-9]*)>}<BOUCLE_rubrique(RUBRIQUES){tous}{id_rubrique}><BOUCLE_style_rubrique(MOTS){id_rubrique}{id_groupe=#GET{id_groupe_style_rubrique}}{0,1}>[(#SET{nic,[(#DESCRIPTIF|match{#GET{_rp},Uims,1})]})]</BOUCLE_style_rubrique><INCLURE{fond=composants/rubrique/page_rubrique}{nic=#GET{nic,2060}}{self}{env}{id_rubrique}{titre=#TITRE}{mdescription=#GET{mdescription}}></BOUCLE_rubrique>
+][(#SET{id_groupe_style_rubrique,#VAR{acsRubriqueStylePage}})]#SET{_rp,<nic-page=([0-9]*)>}<BOUCLE_rubrique(RUBRIQUES){tous}{id_rubrique}><BOUCLE_style_rubrique(MOTS){id_rubrique}{id_groupe=#GET{id_groupe_style_rubrique}}{0,1}>[(#SET{nic,[(#DESCRIPTIF|match{#GET{_rp},Uims,1})]})]</BOUCLE_style_rubrique><INCLURE{fond=composants/rubrique/page_rubrique}{nic=#GET{nic,2060}}{self}{env}{id_rubrique}{titre=#TITRE|supprimer_numero}{mdescription=#GET{mdescription}}></BOUCLE_rubrique>

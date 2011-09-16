@@ -4,19 +4,18 @@
   width: 100%;
   margin-bottom: #VAR{acsFondSpacer, 10px};
 }
-.cNavKeys#NIC div {
+.cNavKeys#NIC ul {
   display: inline-block;
 }
+[(#VAR{#EVAL{'acsNavkeys'.'#NIC'.'Orientation'},vertical}|=={horizontal}|?{" "})
 .cNavKeys#NIC ul li {
   float: left;
-}
+}]
 .cNavKeys#NIC ul li a {
   display: inline-block;
   padding: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'Margin'},5px};
-  border: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Width'},thin}[ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Style'},outset})][ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Color'},#dfdfdf})];
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -khtml-border-radius: 5px;
+  border: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Width'},thin}[ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Style'},outset})][ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'Bord/Color'},#dfdfdf})];[
+  (#MODELE{c_css_border-radius}{c=Navkeys}{nic=#NIC}{var=BordRond})]
 }
 .cNavKeys#NIC ul li a:hover {
   border: #VAR{#EVAL{'acsNavkeys'.'#NIC'.'BordHover/Width'},thin}[ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'BordHover/Style'},inset})][ (#VAR{#EVAL{'acsNavkeys'.'#NIC'.'BordHover/Color'},#dfdfdf})];
