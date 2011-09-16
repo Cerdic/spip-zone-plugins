@@ -1,0 +1,75 @@
+[(#CACHE{0})][(#REM)
+
+***** Mise en page d'un article *****
+
+].cArticle .entete, .cArticle .article {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 5px;
+}
+.cArticle .entete {
+  border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
+  border-left: 0;
+  border-right:0;
+}
+.cArticle .entete p {
+  margin :0;
+}
+.cArticle .titre {
+  font-weight: bold;
+}
+.cArticle .traductions {
+  float: right;
+}
+.cArticle .texte, .cArticle .chapo {
+  text-align: justify;
+}[(#VAR{acsArticleChapoGras}|!={non}|?{" "})
+.cArticle .chapo {
+  font-weight: bold;
+}
+].cArticle .sommaire {
+  float:  #LANG_RIGHT;
+  margin: 5px;
+  border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
+}
+.cArticle .titresommaire {
+  text-align: center;
+}
+.cArticle .stats {
+  float: #LANG_RIGHT;
+}
+[(#CONFIG{articles_versions}|=={oui}|?{" "})
+.cArticle .diff-para-ajoute, .cArticle .diff-ajoute {
+  background-color: #VAR{acsArticleAdded};
+}
+.cArticle .diff-para-supprime, .cArticle .diff-supprime {
+  background-color: #VAR{acsArticleDeleted};
+  text-decoration: line-through;
+}
+.cArticle .version a {
+  float: left;
+  display: block;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: #VAR{acsArticleBord/Width,thin}[ (#VAR{acsArticleBord/Style,dotted})][ (#VAR{acsArticleBord/Color})];
+  border-bottom: 0;
+}
+.cArticle .version a.actif, .cArticle .version a:hover {
+  [background-color: (#VAR{acsArticleTitreFond});]
+  [background: url('(#ACS_CHEMIN{trame/#VAR{acsArticleTitreFondImage}})') repeat top left;]
+}
+.cArticle .version a.actif {
+  font-weight: bold;
+}
+].cArticle #forum_lire_tous, #forum_repondre[(#PLUGIN{notation}|?{' '}), .cArticle .notation ]{
+  margin-left: 5px;
+  margin-right: 5px;
+}[(#PLUGIN{recommander}|?{' '})
+#recommander {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+#recommander h2.menu-titre {
+  cursor: pointer;
+}
+]

@@ -1,0 +1,24 @@
+[(#CACHE{86400})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Tous les groupes de mots-cles
+
+Cette page peut dépendre du groupe de mot-clés: si son champ descriptif contient 
+"<nic-page=nnnn>", alors le cadre de la page est le cadre n° nnnn à la place
+du cadre par défaut (nic=2050).
+
+]<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">[
+  (#CONFIG{langues_utilisees}|detecte_langue{#SELF})
+]#SET{_rp,<nic-page=([0-9]*)>}<BOUCLE_groupes(GROUPES_MOTS){id_groupe}>[
+(#SET{title,[(#TITRE|supprimer_numero|textebrut|couper{80}) ][(#NOM_SITE_SPIP|textebrut)]})
+][(#SET{nic,[(#DESCRIPTIF|match{#GET{_rp},Uims,1})]})]
+<INCLURE{fond=composants/fond/entete}{self=#SELF}{title=#GET{title}}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=#GET{nic,2050}}{mrobots=none}{mexpires=86400}{page=mots}>
+<INCLURE{fond=composants/fond/pied}{self=#SELF}>
+</BOUCLE_groupes>

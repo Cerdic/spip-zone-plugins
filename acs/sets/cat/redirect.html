@@ -1,0 +1,13 @@
+[(#CACHE{0})][(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+
+Redirection vers la page #URL_REDIRECT puis vers la page #URL
+
+][(#SET{ur,#ENV{url_redirect}|parametre_url{url,#ENV{url}}})][(#HTTP_HEADER{"Location: #GET{ur}"})][(#HTTP_HEADER{"Refresh: 0; url=#GET{ur}"})][(#HTTP_HEADER{"Cache-Control: no-store, no-cache, must-revalidate"})][(#HTTP_HEADER{"Pragma: no-cache"})]
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" xml:lang="#LANG" lang="#LANG"><head><meta http-equiv="refresh" content="0; url=#GET{ur}"></head><body><h1><:ecrire:avis_acces_interdit:></h1><a href="#GET{ur}"><:navigateur_pas_redirige:></a></body></html>

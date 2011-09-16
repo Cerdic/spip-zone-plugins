@@ -1,0 +1,24 @@
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Modèle cols (colonnes)
+
+Permet une présentation en colonnes de tous styles dans un article
+(ou plus généralement dans tout champ texte de SPIP)
+
+Variables:
+- csstab : styles CSS du tableau (séparés par ";")
+- cssrow : styles CSS de la ligne
+- css: styles CSS d'une colonne
+
+Exemple (3 colonnes larges de 33% de la largeur du conteneur) :
+
+<cols1|csstab=width:99%|css=width:33%>contenu colonne 1<col2|css=width:33%>contenu colonne 2<col3|css=width:33%>contenu colonne 3<colsend1>
+
+]<table[ style="(#ENV{csstab})"]><tr[ style="(#ENV{cssrow})"]><td[ style="(#ENV{css})"]>

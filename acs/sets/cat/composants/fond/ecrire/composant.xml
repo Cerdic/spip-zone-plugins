@@ -1,0 +1,123 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Fond</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.6</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>260</valeur>
+  </param>
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+
+  <variable>
+    <nom>Favicon</nom>
+    <type>img</type>
+		<chemin>favicon</chemin>
+  </variable>
+  <variable>
+    <nom>Color</nom>
+    <type>color</type>
+    <valeur>#ffffff</valeur>
+  </variable>
+  <variable>
+    <nom>Text</nom>
+    <type>color</type>
+    <valeur>#000000</valeur>
+  </variable>
+  <variable>
+    <nom>Link</nom>
+    <type>color</type>
+    <valeur>#00008d</valeur>
+  </variable>
+  <variable>
+    <nom>LinkHover</nom>
+    <type>color</type>
+    <valeur>#0000ff</valeur>
+  </variable>
+  <variable>
+    <nom>Image</nom>
+    <type>img</type>
+    <chemin>trame</chemin>
+    <label>non</label>
+  </variable>
+
+  <variable>
+    <nom>Spacer</nom>
+    <type>text</type>
+		<valeur>10px</valeur>
+  </variable>
+  
+  <variable>
+    <nom>FontSize</nom>
+    <type>text</type>
+		<valeur>0.88em</valeur>
+  </variable>
+  <variable>
+    <nom>FontFamily</nom>
+    <type>fontFamily</type>
+		<valeur>sans-serif</valeur>
+  </variable>
+  <variable>
+    <nom>Font</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>PoesieFontSize</nom>
+    <type>text</type>
+		<valeur>1.09em</valeur>
+  </variable>
+  <variable>
+    <nom>PoesieFontFamily</nom>
+    <type>fontFamily</type>
+    <valeur>serif</valeur>
+  </variable>
+  <variable>
+    <nom>PoesieFont</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>TitleSize</nom>
+    <type>text</type>
+		<valeur>1.15em</valeur>
+  </variable>
+  <variable>
+    <nom>STSize</nom>
+    <type>text</type>
+		<valeur>1.09em</valeur>
+  </variable>
+  <variable>
+    <nom>BlocSize</nom>
+    <type>text</type>
+		<valeur>0.82em</valeur>
+  </variable>
+  <variable>
+    <nom>NavSize</nom>
+    <type>text</type>
+		<valeur>0.65em</valeur>
+  </variable>
+
+  <variable>
+    <nom>TabBord</nom>
+    <type>bord</type>
+  </variable>
+  <variable>
+    <nom>TabFirst</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabOdd</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TabEven</nom>
+    <type>color</type>
+  </variable>
+</composant>

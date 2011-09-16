@@ -1,0 +1,27 @@
+Modèle cat
+
+Dernière mise à jour de ce fichier le 22/09/2010, par dF (version provisoire)
+
+Cat est un modèle ACS. Cat signifie "catalogue": cat est un squelette-type multilingue dont le cahier des charges exige qu'il fonctionne avec tous les composants ACS, qu'ils soient activés ou non.
+
+Cat est à la fois un jeu de squelettes spip particulièrement riche fonctionnellement, et une plate-forme de validation de nouveaux composants ACS.
+
+Cat est un modèle xhtml1.0 en css. Ce choix impose des contraintes fortes aux composants de ce modèle pour fonctionner correctement sur tous les explorateurs web.
+
+La compatibilité avec le modèle cat est donc l'une des exigence de validation d'un nouveau composant, parce qu'un composant compatible cat a de très fortes chance d'être compatible avec n'importe quel squelette spip. (Dans l'avenir, d'autres modèles répondant à d'autres cahiers des charges pourront être ajoutés à ACS)
+
+Validation d'un composant:
+
+- doit fonctionner quelles que soient les feuilles de style utilisées sur le site: un espace de nommage des styles propres au composant doit être défini (tous les styles propres aux composants ne s'appliquent QUE pour des sous-classes de la classe ou de l'id du composant)
+
+- multilinguisme et gestion du sens d'écriture.
+
+- héritage, encapsulation, et polymorphisme:
+     ~ "héritage": les composants doivent pouvoir être overridés (~ "héritage").
+     - encapuslation:  Tout ce qui dépend d'un composant doit être encapsulé dans le composant: aucune dépendance externe (à spip ou à ACS) inconditionnelle n'est admise. Des dépendances externes CONDITIONNELLES sont déconseillées mais tolérées. Dans ce cas, des tests assurent un fonctionnement correct même en l'absence de ces dépendances.
+     - Polymorphisme: les composants doivent pouvoir être remplacés par des équivalents stricts au niveau fonctionnel qui ajoutent de nouvelles fonctionnalités ou modifient le fonctionnement standard du composant sans briser la compatibilité. Par exemple, il peut exister dans le même modèle ACS plusieurs composants de navigation par rubrique, sous réserve qu'ils soient compatibles et  interchangeables sans intervention sur les squelettes (Donc ils doivent tous gérer plusieurs blocs de rubriques). Les composants utilisant Ajax doivent tous disposer d'un mode dégradé assurant un fonctionnement le plus possible identique sans Ajax (javascripts non intrusifs). Les composants utilisant Flash ou d'autres technologies non disponibles dans 100% des cas doivent fournir un mode dégradé avec au minimum un affichage informatif et un lien de téléchargement.
+
+- cross-browser: un composant doit fonctionner au minimum avec les dernières versions de Firefox, IE, Safari, et Konqueror, et ne pas entraîner de bugs d'affichage rédhibitoires sur un pda ou un smartphone (avec Minimo ou IE "pocket"). Le traitement du cross-browser en javascript doit reposer sur les librairies intégrées à spip (jQuery), et ne pas générer d'erreurs ou d'avertissements javascript.
+
+
+Situation transitoire: en phase de test, les composants de cat peuvent encore ne pas respecter tous ce cahier des charges à 100%. ACS version 1.0 sortira quand le jeu de composants de son modèle "cat" sera 100% conforme à son cahier des charges.

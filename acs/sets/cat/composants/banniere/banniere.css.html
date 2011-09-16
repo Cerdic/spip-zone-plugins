@@ -1,0 +1,45 @@
+#CACHE{0}
+
+#banniere {
+  width: 100%;
+  text-align: #VAR{acsBanniereAlign,center};
+  height: #VAR{acsBanniereHauteur,60px};
+  [background: (#VAR{acsBanniereFond})[ url("(#ACS_CHEMIN{trame/#VAR{acsBanniereFondImage}})")][ (#VAR{acsBanniereFondImageRepeatX}|=={non}|?{[(#VAR{acsBanniereFondImageRepeatY}|=={non}|?{"no-repeat","repeat-y"})],[(#VAR{acsBanniereFondImageRepeatY}|=={non}|?{"repeat-x","repeat"})]})][ (#VAR{acsBanniereFondAlign, center})][ (#VAR{acsBanniereFondVerticalAlign, middle})];]
+  font-family: [(#VAR{acsBanniereFont}), ]#VAR{acsBanniereFontFamily};
+}
+
+#banniere .logo {
+  position: absolute;
+  border: 0;
+  top: 0;
+  [(#VAR{acsBanniereLogoAlign,left}|=={left}|?{left: 0,right: 0});]
+}
+
+#banniere .bantab {
+  height:100%;
+  width: 100%;
+}
+
+#banniere .bantd {
+  vertical-align: #VAR{acsBanniereValign};
+}
+
+#banniere .banimg {
+  position: relative;
+  border: 0;
+}
+
+#banniere a.nom_site {
+  position: relative;
+  font-size: 40px;
+  [color: (#VAR{acsBanniereTextColor});]
+}
+[#banniere a.nom_site:hover {
+  color: (#VAR{acsBanniereTextColorOver});
+}]
+#banniere .extralink {
+  margin-top: -#VAR{acsBanniereHauteur,60px};
+  padding-top: #VAR{acsBanniereExtraTop,5px};
+  margin-right: 5px;
+  float: right;
+}

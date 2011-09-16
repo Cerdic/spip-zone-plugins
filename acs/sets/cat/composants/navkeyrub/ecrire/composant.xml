@@ -1,0 +1,87 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Navkeyrub</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.6</version>
+  <necessite id='acs' version='[0.7.2;]' />
+  <necessite id='spip' version='[1.9.2;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>250</valeur>
+  </param>
+  <param>
+    <nom>instanciable</nom>
+  </param>
+
+  <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+  <variable>
+    <nom>Bord2</nom>
+    <type>bord</type>
+  </variable>
+  <variable>
+    <nom>BordRond</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+    <nom>ShadowBlur</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>GroupeMots</nom>
+    <type>keygroup</type>
+  </variable>
+
+  <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>trame</chemin>
+    <label>non</label>
+  </variable>
+
+  <variable>
+    <nom>LogoMot</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+  <variable>
+    <nom>CouleurMot</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+
+</composant>

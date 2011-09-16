@@ -1,0 +1,137 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Diapo</nom>
+
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.6</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>250</valeur>
+  </param>
+  <param>
+    <nom>instanciable</nom>
+  </param>
+
+  <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>Nb</nom>
+    <type>text</type>
+    <valeur>3</valeur>
+  </variable>
+  <variable>
+    <nom>NbCol</nom>
+    <type>text</type>
+    <valeur>8</valeur>
+  </variable>
+  <variable>
+    <nom>Vu</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
+    <nom>Titre</nom>
+    <type>choix</type>
+    <option>over</option>
+    <option>under</option>
+    <option>non</option>
+    <valeur>over</valeur>
+  </variable>
+
+  <variable>
+    <nom>Img</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+  </variable>
+  <variable>
+    <nom>ImgG</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+  </variable>
+  <variable>
+    <nom>ImgD</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+  </variable>
+
+  <variable>
+    <nom>ImgGoff</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+  </variable>
+  <variable>
+    <nom>ImgGon</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+  </variable>
+  <variable>
+    <nom>ImgDoff</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+  </variable>
+  <variable>
+    <nom>ImgDon</nom>
+    <type>img</type>
+    <chemin>diapo</chemin>
+    <valeur>filmdon.gif</valeur>
+  </variable>
+
+  <variable>
+    <nom>Width</nom>
+    <type>text</type>
+    <valeur>100</valeur>
+  </variable>
+  <variable>
+    <nom>Height</nom>
+    <type>text</type>
+    <valeur>75</valeur>
+  </variable>
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+
+  <variable>
+    <nom>Link</nom>
+    <type>color</type>
+    <valeur>#dfff00</valeur>
+  </variable>
+  <variable>
+    <nom>LinkHover</nom>
+    <type>color</type>
+    <valeur>#afff00</valeur>
+  </variable>
+
+  <variable>
+    <nom>Viewer</nom>
+    <type>text</type>
+    <valeur>http://docs.google.com/viewer?embedded=true&url=</valeur>
+  </variable>
+  <variable>
+    <nom>ExtViewer</nom>
+    <type>text</type>
+    <valeur>pdf|odt|ods|doc|docx|xls|xlsx|ppt|pptx|wmf|pages|ai|psd|dxf|svg|eps|ps|ttf|xps</valeur>
+  </variable>
+  <variable>
+    <nom>ExtEmbed</nom>
+    <type>text</type>
+    <valeur>gif|jpg|tif|png|swf</valeur>
+  </variable>
+    <variable>
+    <nom>ExtPlayer</nom>
+    <type>text</type>
+    <valeur>mp3|flv|mp4|ogv|webm</valeur>
+  </variable>
+</composant>

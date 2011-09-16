@@ -1,0 +1,60 @@
+[(#CACHE{0})][(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+][(#SET{h,[(#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'Img'}}}|hauteur)]})][
+(#SET{w,[(#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'Img'}}}|largeur)]})][
+(#SET{dh,[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Height'},75}|moins{#VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Width'},0}|mult{2}})]})][
+(#SET{dw,[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Width'},100}|moins{#VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Width'},0}|mult{2}})]})
+].iDiapo#NIC div.diapo {
+  width: #GET{w, #GET{dw}}px;
+  height: #GET{h, #GET{dh}}px;[
+  background: url((#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'Img'}}})) top left repeat-x;]
+}
+.iDiapo#NIC a.vignette:link {
+  height: #GET{dh}px;
+  margin-top: [(#GET{h, #GET{dh}}|moins{#GET{dh}}|div{2}|moins{#VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Width'},0}})]px;
+  width: #GET{dw}px;[
+  background-color: (#VAR{acsDiapo[(#NIC)]Fond});][
+  border: #VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Width'}}[ (#VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Style'}})](#VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Color'}});]
+}
+[.iDiapo#NIC a:link {
+  color: (#VAR{#EVAL{'acsDiapo'.'#NIC'.'Link'}});
+}][
+.iDiapo#NIC a:hover {
+  color: (#VAR{#EVAL{'acsDiapo'.'#NIC'.'LinkHover'}});
+}]
+.iDiapo#NIC div.titreDiapo {
+  width: [(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Width'},100})px];
+}
+.iDiapo#NIC .diapog {
+  height: #GET{h, #GET{dh}}px;[
+  background: url((#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'ImgG'}}})) top right no-repeat;]
+}
+.iDiapo#NIC .diapog a.ajax:link {
+  display: block;
+  height: #GET{h, #GET{dh}}px;
+  width: 25px;[
+  background: url((#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'ImgGoff'},filmgoff.gif}})) center center no-repeat;]
+}
+[.iDiapo#NIC .diapog a.ajax:hover {
+  background: url((#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'ImgGon'},filmgon.gif}})) center center no-repeat;
+}]
+.iDiapo#NIC .diapod a.ajax:link {
+  display: block;
+  height: #GET{h, #GET{dh}}px;
+  width: 25px;[
+  background: url((#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'ImgDoff'},filmdoff.gif}})) center center no-repeat;]
+}
+[.iDiapo#NIC .diapod a.ajax:hover {
+  background: url((#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'ImgDon'},filmdon.gif}})) center center no-repeat;
+}]
+.iDiapo#NIC .diapod {
+  height: #GET{h, #GET{dh}}px;[
+  background: url((#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'ImgD'}}})) top right no-repeat;]
+}

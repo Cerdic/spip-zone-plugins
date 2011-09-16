@@ -1,0 +1,18 @@
+#CACHE{900}
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Affiche un agenda par périodes choisies
+
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][
+(#SET{mkeywords,[(#ANNEE)][,(#MOIS)][,(#JOUR)][,(#EVAL{'_T("acs:entete_meta_page_agenda").","._T("acs:entete_meta_keywords")'})]})][
+(#SET{mdescription,<:acs:fond_meta_page_agenda:>})
+]<INCLURE{fond=composants/fond/entete}{self}{env}{title=#GET{mdescription}}{mdescription=#GET{mdescription}}{mkeywords=#GET{mkeywords}}{mrobots=none}>
+<INCLURE{fond=composants/cadre/cadre}{nic=2080}{self}{env} {type} {delais=900} {annee} {mois} {jour} {echelle} {partie_cal} {theme}>
+<INCLURE{fond=composants/fond/pied}{self}>

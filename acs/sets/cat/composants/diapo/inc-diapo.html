@@ -1,0 +1,48 @@
+[(#CACHE{86400})][(#REM)
+
+Affiche les vignettes des documents d'un article, d'une rubrique, ou du site, 
+sous forme de diapos. Utilise le plugin Mediabox.
+
+Paramètres :
+c : chemin du composant. Il est défini si le composant Diapo est appelé depuis le modèle composant, et nul sinon. Utilisé dans le nom du diaporama.
+id_article : documents de l'article.
+id_rubrique : documents de la rubrique.
+recherche : documents résultats d'une recherche.
+nic: numéro d'instance du composant.
+
+Fonctionnement: la première boucle affiche les documents paginés par groupes de "Nb" documents. La seconde définit, avec la première, le contenu du diaporama affiché dans la mediabox. Et la troisième et dernière boucle affiche tous les documents non affichés par les deux premières boucles.
+
+][(#SET{types_diapos,[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtPlayer'},mp3|flv|mp4|ogv|webm})|][(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtEmbed'},gif|jpg|tif|png|swf})|][(#VAR{#EVAL{'acsDiapo'.'#NIC'.'ExtViewer'},pdf|odt|ods|doc|docx|xls|xlsx|ppt|pptx|wmf|pages|ai|psd|dxf|svg|eps|ps|ttf|xps})]})][
+(#SET{nom_diaporama,dp[(#ENV{c}|?{c})][(#NIC)][_art(#ID_ARTICLE)][_rub(#ID_RUBRIQUE)]})][
+(#SET{vu,[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Vu'}}|=={oui}|?{(oui|non),(non)})]})]<B_doc>
+<div class="cDiapo iDiapo[(#NIC)]" align="center">
+<B_doc>
+  <div class="diapog">[(#PAGINATION{btnprecedent}{nic=#NIC})]</div>
+<BOUCLE_doc(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu==#GET{vu}}{doublons diapos}{pagination #VAR{#EVAL{'acsDiapo'.'#NIC'.'Nb'},3}}><div class="diapo"><a class="vignette nsize"[(#PLUGIN{mediabox}|?{" "}) rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] type="#MIME_TYPE" href="#URL_DOCUMENT"[ title="(#TITRE|supprimer_numero|coupe{18,"..."})"] style="background-image:url([(#LOGO_DOCUMENT||image_reduire{#VAR{#EVAL{'acsDiapo'.'#NIC'.'Width'},100},#VAR{#EVAL{'acsDiapo'.'#NIC'.'Height'},75}}|extraire_attribut{src})])">[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Titre'}}|=={over}|?{" "})[(#TITRE|supprimer_numero|coupe{100,...})][<br/>(#DESCRIPTION|coupe{100,...})]]</a>[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Titre'}}|=={under}|?{" "})<div class="titreDiapo"><a class="nsize"[(#PLUGIN{mediabox}|?{" "}) rel="#GET{nom_diaporama}_titre" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] type="#MIME_TYPE" href="#URL_DOCUMENT">[(#TITRE|supprimer_numero|coupe{100,...})][<br/>(#DESCRIPTION|coupe{100,...})]</a></div>]</div>[(#COMPTEUR_BOUCLE|modulo{#VAR{#EVAL{'acsDiapo'.'#NIC'.'NbCol'}}}|=={0}|?{" "})
+  [(#COMPTEUR_BOUCLE|<{#TOTAL_BOUCLE|plus{#ENV{debut_doc}}}|?{" "})<div class="diapod"></div><div class="diapog" style="clear:left"></div>]
+]</BOUCLE_doc>
+  <div class="diapod">[(#PAGINATION{btnsuivant}{nic=#NIC})]</div>
+  <BOUCLE_dp(DOCUMENTS){mode=document}{extension==(#GET{types_diapos})}{id_article ?}{id_rubrique ?}{recherche ?}{!par date}{vu==#GET{vu}}{doublons diapos}><a style="display:none" [(#PLUGIN{mediabox}|?{" "}) class="diapo" rel="#GET{nom_diaporama}" longdesc="id_document=#ID_DOCUMENT[&id_article=(#ID_ARTICLE)][&id_rubrique=(#ID_RUBRIQUE)]"] href="#URL_DOCUMENT" type="#MIME_TYPE" title="[(#TITRE|supprimer_numero|coupe{18,"..."}) ]"></a>
+  </BOUCLE_dp>
+</B_doc>
+</div>[(#REM)
+
+  Liste des autres documents joints (d'après squelettes-dist/inc-documents.html)
+  Indispensable car sinon ces documents ne sont listés nulle part.
+
+]<B_documents_joints>
+<div class="spacer"></div>
+  <div class="bsize" id="documents_joints">
+  <h2><:titre_documents_joints:></h2>
+  <ul>
+    <BOUCLE_documents_joints(DOCUMENTS){mode=document}{id_article ?}{id_rubrique ?}{recherche ?}{vu==#GET{vu}}{doublons diapos}{par num titre, date}>[
+    <li>
+      <strong><a href="(#URL_DOCUMENT)" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a></strong>
+      <small>(<span>#TYPE_DOCUMENT[ &ndash; (#TAILLE|taille_en_octets)]</span>)</small>
+      #DESCRIPTIF
+    ]</li>
+    </BOUCLE_documents_joints>
+  </ul>
+  </div>
+</B_documents_joints>
+<div class="spacer"></div>

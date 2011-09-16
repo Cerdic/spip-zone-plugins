@@ -1,0 +1,34 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Custom</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.6</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>150</valeur>
+  </param>
+  <param>
+    <nom>instanciable</nom>
+  </param>
+
+  <variable>
+    <nom>Align</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <valeur>center</valeur>
+  </variable>
+  <variable>
+    <nom>Contenu</nom>
+    <type>textarea</type>
+    <lines>5</lines>
+  </variable>
+  <variable>
+    <nom>Nom</nom>
+    <type>text</type>
+  </variable>
+</composant>

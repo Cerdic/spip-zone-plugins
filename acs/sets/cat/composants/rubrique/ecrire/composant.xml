@@ -1,0 +1,77 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Rubrique</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.6</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+  <param>
+    <nom>optionnel</nom>
+    <valeur>no</valeur>
+  </param>
+  <param>
+    <nom>preview</nom>
+    <valeur>200</valeur>
+  </param>
+
+  <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Souligne</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+  </variable>
+  <variable>
+    <nom>LogoAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>right</option>
+    <valeur>right</valeur>
+  </variable>
+  <variable>
+    <nom>TitreAlign</nom>
+    <type>choix</type>
+    <option>left</option>
+    <option>center</option>
+    <option>right</option>
+    <valeur>left</valeur>
+  </variable>
+  
+  <variable>
+    <nom>Article</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+    
+  <variable>
+    <nom>MaJ</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>oui</valeur>
+  </variable>
+
+  <variable>
+    <nom>Lock</nom>
+    <type>choix</type>
+    <option>oui</option>
+    <option>non</option>
+    <valeur>non</valeur>
+  </variable>
+  <variable>
+    <nom>StylePage</nom>
+    <type>KeyGroup</type>
+  </variable>
+</composant>

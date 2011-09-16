@@ -1,0 +1,23 @@
+[(#REM)
+Articles
+par popularité ou par note,
+sans doublons,
+pour la langue en cours,
+
+]<B_articles>
+<div class="liste-articles">
+  [(#ANCRE_PAGINATION)]
+  <span class="nav nsize" style="float:right"><i><:articles:>[ </i>(#RUBRIQUE|supprimer_numero)<i>], [(#CONFIG{activer_statistiques}|=={oui}|?{[(#CLASSEMENT|=={note}|?{<:acs:articles_classes_par_note_ponderee:></i> (<a href="#URL" class="ajax"><:acs:articles_classes_par_popularite:></a>),<:acs:articles_classes_par_popularite:>:</i> (<a href="#URL&amp;classement=note" class="ajax"><:acs:articles_classes_par_note_ponderee:></a>)})],<:acs:articles_classes_par_note_ponderee:></i>})]</span>
+  [<p class="pagination">(#PAGINATION)</p>]
+  <br class="nettoyeur" />
+  <div class="liste-articles">
+    <ul>
+    <BOUCLE_articles(ARTICLES) {notation} {par (#CLASSEMENT|=={note}|?{moyenne_ponderee,popularite})}{inverse} {doublons} {pagination #VAR{acsArticlesPagination,10}} {lang=#LANG}>
+      <INCLURE{fond=composants/articles/li-article}{id_article}{id_rubrique}{titre}{surtitre}{soustitre}{texte=#INTRODUCTION}{auteurs=#LESAUTEURS}{date}{date_redac}{date_modif}{urla=#URL_ARTICLE}{note=#NOTATION_MOYENNE_PONDEREE}{coupe=#VAR{acsArticlesNbLettres,200}}>
+    </BOUCLE_articles>
+    </ul>
+  </div>
+</div>
+</B_articles>
+<div class="extrait"><:acs:articles_aucun_article_note:></div>
+<//B_articles>

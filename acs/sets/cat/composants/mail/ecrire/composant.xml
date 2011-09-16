@@ -1,0 +1,26 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Mail</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2011 - licence GPL</auteur>
+  <version>0.8.6</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+	<variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+</composant>

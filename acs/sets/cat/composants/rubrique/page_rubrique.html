@@ -1,0 +1,22 @@
+[(#CACHE{7200})][(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Page rubrique
+
+Les mots-clés des tags meta de la page sont extraits du titre de la rubrique.
+
+Paramètres:
+- sans_titre=oui : masque le titre et son soulignement.
+
+Section page
+
+Keywords meta-tags come from section title.
+
+][(#SET{title,#TITRE[ - (#NOM_SITE_SPIP)]})][(#SET{mkeywords,[(#TITRE|askeywords)]})][(#INCLURE{fond=composants/fond/entete}{title=#GET{title}}{mkeywords=#GET{mkeywords}}{mdescription})][(#INCLURE{fond=composants/cadre/cadre}{self}{env}{nic})][(#INCLURE{fond=composants/fond/pied})]

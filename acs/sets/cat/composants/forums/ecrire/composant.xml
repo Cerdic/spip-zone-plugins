@@ -1,0 +1,76 @@
+<composant>
+  <!-- Nom du composant -->
+  <nom>Forums</nom>
+  <!-- Auteur du composant -->
+  <auteur>Daniel FAIVRE &copy; 2008-2009 - licence GPL</auteur>
+  <version>0.8.6</version>
+  <necessite id='acs' version='[0.7.1;]' />
+
+  <param>
+    <nom>preview</nom>
+    <valeur>350</valeur>
+  </param>
+
+  <variable>
+    <nom>TitreFond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>TitreFondImage</nom>
+    <type>img</type>
+    <chemin>trame</chemin>
+    <label>non</label>
+  </variable>
+  <variable>
+    <nom>Fond</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Bord</nom>
+    <type>bord</type>
+  </variable>
+
+	<variable>
+    <nom>Shadow</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>ShadowSize</nom>
+    <type>text</type>
+  </variable>
+  <variable>
+  	<nom>ShadowBlur</nom>
+    <type>text</type>
+  </variable>
+
+  <variable>
+    <nom>Fond1</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond2</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond3</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond4</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond5</nom>
+    <type>color</type>
+  </variable>
+  <variable>
+    <nom>Fond6</nom>
+    <type>color</type>
+  </variable>
+
+    <variable>
+    <nom>Nb</nom>
+    <type>text</type>
+    <valeur>10</valeur>
+  </variable>
+</composant>

@@ -1,0 +1,26 @@
+[(#CACHE{0})]<div id="banniere" class="#PINCEAU{banniere}">
+  [(#VAR{acsBanniereLogo}|=={oui}|?{' '})
+    [(#REM) Afficher le logo ou le titre du site ]
+    <a rel="start" href="#URL_SITE_SPIP/">
+    [(#LOGO_SITE_SPIP||?{
+    [(#LOGO_SITE_SPIP
+      ||image_reduire{770,200}
+      |inserer_attribut{alt,[(#NOM_SITE_SPIP|textebrut)]}
+      |inserer_attribut{title,[(#NOM_SITE_SPIP|textebrut)]}
+      |inserer_attribut{class,logo}
+      )]
+    ,
+    <span id="nom_site_spip" class="logo">#NOM_SITE_SPIP</span>
+    })]
+    </a>
+  ]
+  <table class="bantab">
+    <tr>
+      <td class="bantd">
+        [(#VAR{acsBanniereImage}|=={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site">#NOM_SITE_SPIP</a>]
+        [(#VAR{acsBanniereImage}|!={''}|?{' '}) <a href="#URL_SITE_SPIP" class="nom_site"><img class="banimg" src="[(#ACS_CHEMIN{banniere/#VAR{acsBanniereImage}})]" title="#NOM_SITE_SPIP" onmouseover="this.src='spip.php?action=wrap&amp;cadre=#CHEMIN{composants/banniere/bnr/banner.php}&amp;exclut=#VAR{acsBanniereImage}';" onmouseout="this.src='[(#ACS_CHEMIN{banniere/#VAR{acsBanniereImage}})]';" alt="#NOM_SITE_SPIP" /></a>]
+      </td>
+    </tr>
+  </table>
+  [<span class="extralink"><a href="(#VAR{acsBanniereExtraLink})"><img src="[(#ACS_CHEMIN{banniere/extra/#VAR{acsBanniereExtraImg}})]" alt="#VAR{acsBanniereExtraLabel}" title="#VAR{acsBanniereExtraLabel}"></a></span>]
+</div>

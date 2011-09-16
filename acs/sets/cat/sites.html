@@ -1,0 +1,17 @@
+#CACHE{7200}
+[(#REM)
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Sites syndiques 
+Syndicated websites
+
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#SET{mdescription,<:autres_sites:>})
+]<INCLURE{fond=composants/fond/entete}{page=sites}{title=#GET{mdescription}}{mkeywords=#EVAL{'_T("acs:fond_meta_page_sites").","._T("acs:fond_meta_keywords")'}}{mdescription=#GET{mdescription}}{mabstract=<:acs:fond_meta_page_sites:>}>
+<INCLURE{fond=composants/cadre/cadre}{self=#SELF}{env=#ENV}{nic=2030}{current=sites}>[(#REM) Bloc principal de la page sites ]
+<INCLURE{fond=composants/fond/pied}{self=#SELF}{env=#ENV}>[(#REM) Pied de page ]

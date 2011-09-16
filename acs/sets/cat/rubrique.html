@@ -1,0 +1,19 @@
+[(#CACHE{0})][(#REM)
+
+             ACS
+         (Plugin Spip)
+         Squelette Cat
+    http://acs.geomaticien.org
+
+Copyright Daniel FAIVRE, 2007-2011
+Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
+
+Page rubrique
+
+Le contenu affiché par cette page peut dépendre du choix d'un mot-clé. Cliquez <u><a href="?exec=acs&onglet=pages&pg=composants/rubrique/page_rubrique">ici</a></u> pour voir le schéma de la page ou <u><a href="?exec=acs&onglet=composants&composant=cadre&nic=2060">là</a></u> pour modifier son contenu par défaut.
+
+Section page
+
+These page design could depend on a keyword: click <u><a href="?exec=acs&onglet=pages&pg=composants/rubrique/page_rubrique">here</a></u> to see page schema or <u><a href="?exec=acs&onglet=composants&composant=cadre&nic=2060">there</a></u> to change its default content.
+
+][(#CONFIG{langues_utilisees}|detecte_langue{#SELF})][(#VAR{acsRubriqueLock}|=={oui}|?{' '})[(#INCLURE{fond=composants/rubrique/test-acces-page}{env}{self})]][(#VAR{acsRubriqueLock}|!={oui}|?{' '})[(#INCLURE{fond=composants/rubrique/test-style-page}{env}{self})]]
