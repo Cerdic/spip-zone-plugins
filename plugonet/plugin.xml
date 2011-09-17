@@ -23,14 +23,6 @@ une aide sur chaque balise de la nouvelle DTD.
 		<nom>autoriser</nom>
 		<inclure>inc/plugonet_autoriser.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>affiche_droite</nom>
-		<inclure>inc/plugonet_afficher.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>affiche_gauche</nom>
-		<inclure>inc/plugonet_afficher.php</inclure>
-	</pipeline>
 
 	<bouton id="plugonet-21" parent="bando_administration">
 		<icone>images/plugonet-16.png</icone>
