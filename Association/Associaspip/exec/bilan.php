@@ -82,7 +82,7 @@ function exec_bilan(){
 		debut_cadre_relief(_DIR_PLUGIN_ASSOCIATION_ICONES."finances.jpg", false, "", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' .propre( _T('asso:bilans_comptables')));
 		
 		$clas_banque=$GLOBALS['association_metas']['classe_banques'];
-		$clas_contrib_volontaire=$GLOBALS['association_classes']['contribution_volontaire']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
+		$clas_contrib_volontaire=$GLOBALS['association_metas']['classe_contributions_volontaires']; // une contribution benevole ne doit pas etre comptabilisee en charge/produit
 		
 		if ($plan) {
 			$join = " RIGHT JOIN spip_asso_plan ON imputation=code";

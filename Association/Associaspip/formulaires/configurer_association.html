@@ -46,7 +46,7 @@
 								<label for="prefet"><strong><:asso:config_libelle_prefet:></strong></label>
 								<input type="text" name="prefet" [value="(#ENV{prefet})"] id="prefet"  class='formo'/>
 							</li>
-						<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
+							<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
 							<li>
 								<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|replace{_,&nbsp;}|ucfirst)]</strong></label>
 								<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM"  class='formo'/>
@@ -126,6 +126,40 @@
 								</BOUCLE_classe_banques>
 					</select>
 					</li>
+
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{classe_charges}}
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<li>
+					<label><strong><:asso:config_libelle_classe_charges:></strong> </label>
+					<select name="classe_charges" id="classe_charges" >
+				<BOUCLE_classe_charges(ASSO_PLAN){fusion classe}{par classe}>
+					<option value="#CLASSE" [(#ENV{classe_charges}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
+								</BOUCLE_classe_charges>
+					</select>
+					</li>
+
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{classe_produits}}
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<li>
+					<label><strong><:asso:config_libelle_classe_produits:></strong> </label>
+					<select name="classe_produits" id="classe_produits" >
+				<BOUCLE_classe_produits(ASSO_PLAN){fusion classe}{par classe}>
+					<option value="#CLASSE" [(#ENV{classe_produits}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
+								</BOUCLE_classe_produits>
+					</select>
+					</li>
+					
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{classe_contributions_volontaires}}
+					[<span class='erreur_message'>(#GET{erreurs})</span>]
+					<li>
+					<label><strong><:asso:config_libelle_classe_contributions_volontaires:></strong> </label>
+					<select name="classe_contributions_volontaires" id="classe_contributions_volontaires" >
+				<BOUCLE_classe_contributions_volontaires(ASSO_PLAN){fusion classe}{par classe}>
+					<option value="#CLASSE" [(#ENV{classe_contributions_volontaires}|=={#CLASSE}|?{selected="selected"})]>#CLASSE </option>
+								</BOUCLE_classe_contributions_volontaires>
+					</select>
+					</li>
+
 							<li>
 								<div class="choix">
 									<input type="checkbox" name="destinations" [(#ENV{destinations}|=={on}|?{checked="checked"})] id="destinations" />

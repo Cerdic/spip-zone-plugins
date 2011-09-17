@@ -64,16 +64,16 @@ function exec_compte_resultat() {
 
 		echo "<table border='0' cellpadding='2' cellspacing='6' width='100%' class='arial2' style='border: 1px solid #aaaaaa;'>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
-		$depenses = compte_resultat_charges_produits($annee, $join, $sel, $having, $order, intval($GLOBALS['association_classes']['charge']));
+		$depenses = compte_resultat_charges_produits($annee, $join, $sel, $having, $order, intval($GLOBALS['association_metas']['classe_charges']));
 		echo "</td></tr>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
-		$recettes = compte_resultat_charges_produits($annee, $join, $sel, $having, $order, intval($GLOBALS['association_classes']['produit']));
+		$recettes = compte_resultat_charges_produits($annee, $join, $sel, $having, $order, intval($GLOBALS['association_metas']['classe_produits']));
 		echo "</td></tr>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
 		compte_resultat_benefice_perte($recettes, $depenses);
 		echo "</td></tr>";
 		echo "<tr style='background-color: #DBE1C5;'><td>";
-		compte_resultat_benevolat($annee, $join, $sel, $having, $order, intval($GLOBALS['association_classes']['contribution_volontaire']));
+		compte_resultat_benevolat($annee, $join, $sel, $having, $order, intval($GLOBALS['association_metas']['classe_contributions_volontaires']));
 		echo "</td></tr></table>";
 
 		fin_cadre_relief();
@@ -90,7 +90,7 @@ function compte_resultat_charges_produits($annee, $join, $sel, $having, $order, 
 	echo "<td><strong>" . (($class == '6') ? _T('asso:cpte_resultat_titre_charges') : _T('asso:cpte_resultat_titre_produits')) . "</strong></td>";
 	echo "<td width='50'><strong>&nbsp;</strong></td>";
 	echo "</tr>";
-	$quoi = (($class == $GLOBALS['association_classes']['charge']) ? ("sum(depense) AS valeurs") : ("sum(recette) AS valeurs"));
+	$quoi = (($class == $GLOBALS['association_metas']['classe_charges']) ? ("sum(depense) AS valeurs") : ("sum(recette) AS valeurs"));
 	$query = sql_select("imputation, " . $quoi . ", date_format(date, '%Y') AS annee$sel",
 			"spip_asso_comptes$join",
 			"",

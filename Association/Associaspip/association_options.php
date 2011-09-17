@@ -23,17 +23,6 @@ $GLOBALS['association_styles_des_statuts'] = array(
 	"sorti" => "sortie"
 );
 
-$GLOBALS['association_classes'] = array(
-	"capital" => "1",
-	"immob" => "2",
-	"stock" => "3",
-	"tier" => "4",
-    "financier" => "5",
-    "charge" => "6",
-    "produit" => "7",
-    "contribution_volontaire" => "8"
- );
-
 define('_DIR_PLUGIN_ASSOCIATION_ICONES', _DIR_PLUGIN_ASSOCIATION.'img_pack/');
 
 function association_icone($texte, $lien, $image, $sup='rien.gif')
@@ -176,7 +165,7 @@ function affichage_div($type_operation,$list_operation) {
 		$operations = explode('-', $list_operation);
 		$res = 'cachediv';
 		for($i=0;$i<count($operations);$i++) {
-			$operation = $GLOBALS['association_classes'][$operations[$i]];
+			$operation = $GLOBALS['association_metas'][$operations[$i]];
 			if($type_operation===$operation) {
 				$res = '';
 				break;
@@ -184,7 +173,7 @@ function affichage_div($type_operation,$list_operation) {
 		}
 	}
 	else {
-		$res = ($type_operation===$GLOBALS['association_classes'][$list_operation])?'':'cachediv';
+		$res = ($type_operation===$GLOBALS['association_metas'][$list_operation])?'':'cachediv';
 	}
 	return $res;
 }

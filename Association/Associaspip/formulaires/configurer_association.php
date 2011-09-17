@@ -30,6 +30,7 @@ function formulaires_configurer_association_verifier_dist() {
 
 	// si la gestion comptable est activee, on valide le plan comptable
 	$ref_attribuee = array();
+	$classe_attribuee = array();
 	if ($comptes) {
 		include_spip('inc/association_comptabilite');
 		if (!association_valider_plan_comptable()) {	
@@ -39,10 +40,33 @@ function formulaires_configurer_association_verifier_dist() {
 
 		// on verifie qu'il n'a pas deux fois la meme reference comptable en incluant celle des cotisations ou qu'on n'a pas attribue aux cotisations ou modules de gestion une reference comptable de la classe des comptes financiers
 		$classe_financier = _request('classe_banques');
+		$classe_attribuee[$classe_financier]='classe_banques';
 		$ref_attribuee[$pc_cotisations]='pc_cotisations';
 	
 		// le premier caractere du code de la reference comptable est sa classe 
 		if ($pc_cotisations[0] == $classe_financier) $erreurs['pc_cotisations'] = _T('asso:erreur_configurer_association_reference_financier');
+
+		// on verifie que les classes sont uniques
+		$classe_charge = _request('classe_charges');
+		if(array_key_exists($classe_charge, $classe_attribuee)) {
+			$erreurs['classe_charges'] = _T('asso:erreur_configurer_association_classe_identique');
+			$erreurs[$ref_attribuee[$classe_charge]] = _T('asso:erreur_configurer_association_classe_identique');
+		}
+		$classe_attribuee[$classe_charge]='classe_charges';
+
+		$classe_produit = _request('classe_produits');
+		if(array_key_exists($classe_produit, $classe_attribuee)) {
+			$erreurs['classe_produits'] = _T('asso:erreur_configurer_association_classe_identique');
+			$erreurs[$ref_attribuee[$classe_produit]] = _T('asso:erreur_configurer_association_rclasse_identique');
+		}
+		$classe_attribuee[$classe_produit]='classe_produits';
+
+		$classe_contribution_volontaire = _request('classe_contributions_volontaires');
+		if(array_key_exists($classe_contribution_volontaire, $classe_attribuee)) {
+			$erreurs['classe_contributions_volontaires'] = _T('asso:erreur_configurer_association_classe_identique');
+			$erreurs[$ref_attribuee[$classe_contribution_volontaire]] = _T('asso:erreur_configurer_association_classe_identique');
+		}
+		$classe_attribuee[$classe_contribution_volontaire]='classe_contributions_volontaires';
 	}
 
 	if ($dons == 'on') {
