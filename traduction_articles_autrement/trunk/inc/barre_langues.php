@@ -1,15 +1,15 @@
 <?php
 function inc_barre_langues_dist($id_article){
-		$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
+	$row = sql_fetsel("*", "spip_articles", "id_article=$id_article");
 		
-		$id_rubrique = $row['id_rubrique'];
-		$id_trad = $row["id_trad"];
+	$id_rubrique = $row['id_rubrique'];
+	$id_trad = $row["id_trad"];
 		
-		$virtuel = (strncmp($row["chapo"],'=',1)!==0) ? '' :
-		chapo_redirige(substr($row["chapo"], 1));
+	$virtuel = (strncmp($row["chapo"],'=',1)!==0) ? '' :
+	chapo_redirige(substr($row["chapo"], 1));
 		
-
-	
+	if($version = $GLOBALS['spip_version_branche']<3) $objet='articles';
+	else $objet='article';	
 	
 	/*création des onglets traduction*/
 	
@@ -39,7 +39,7 @@ function inc_barre_langues_dist($id_article){
 		$clic = _T('trad_delier');	
 		
 		// possibilité de délier l'article
-		$options = '<div class="options delier">'.icone_inline($clic, ajax_action_auteur("referencer_traduction","$id_article,-$id_trad",'articles', "id_article=$id_article",array($clic)), "traductions-24.gif", "supprimer.gif",'right', false).'</div>';		
+		$options = '<div class="options delier">'.icone_inline($clic, ajax_action_auteur("referencer_traduction","$id_article",$objet, "id_article=$id_article",array($clic)), "traductions-24.gif", "supprimer.gif",'right', false).'</div>';		
 		
 		}
 	// L'article n'est pas traduit	
@@ -69,8 +69,7 @@ function inc_barre_langues_dist($id_article){
 	foreach($langues_dispos as $key => $value){
 		$class='';
 		$span='';	
-		if($version = $GLOBALS['spip_version_branche']<3) $objet='articles';
-		else $objet='article';
+
 		// les boutons hors article présent
 		if($traductions[$value]!=$id_article){
 					
@@ -113,7 +112,7 @@ function inc_barre_langues_dist($id_article){
 			if($traductions[$value]==$id_trad){
 					$span=$span_content;					
 					}
-			$onglets_traduction.='<div class="onglet_off onglet">'.$span.traduire_nom_langue($value).'</div>';
+			$onglets_traduction.='<div class="onglet_off on onglet">'.$span.traduire_nom_langue($value).'</div>';
 			}
 		}
 	}
@@ -123,7 +122,9 @@ function inc_barre_langues_dist($id_article){
 		'options'=>$options,
 		'langue_article'=>$langue_article,
 		'changer_traduction'=>$changer_traduction,
-		'edition_seule'=>$edition_seule,					
+		'edition_seule'=>$edition_seule,
+		'id_article'=>$id_article,	
+		'voir'=>_request('voir'),									
 		);
 		
 		$retour=recuperer_fond('prive/editer/barre_traductions_article',$contexte,array('ajax'=>true));

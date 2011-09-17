@@ -11,8 +11,10 @@ function taa_header_prive($flux){
     $form = $flux['args']['form'];
    if ($form=='editer_article'){
 
-	$flux['data']['lang_dest'] .= _request('lang_dest');		
+	$flux['data']['lang_dest'] .= _request('lang_dest');
+			
 	$flux['data']['_hidden'] .= '<input type="hidden" name="lang_dest" value="'._request('lang_dest').'"/>';
+	if($version = $GLOBALS['spip_version_branche']>=3) $flux['data']['_hidden'] .= '<input type="hidden" name="changer_lang" value="'._request('lang_dest').'"/>';
     }
     return $flux;
 }
@@ -54,7 +56,7 @@ return $flux;
 function taa_recuperer_fond($flux){
     if ($flux['args']['fond'] == 'prive/squelettes/contenu/article'){
     	
-    	$id_article= _request('id_article');
+    	$id_article= $flux['args']['contexte']['id_article'];
 				
 		$barre=charger_fonction('barre_langues','inc');
 		$barre_langue=$barre($id_article);
