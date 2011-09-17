@@ -26,13 +26,31 @@ body { text-align: center; }
 .nav ul li a { float: left; display: block; text-decoration: none; }
 .nav ul li.on a {}
 
-/* Gabarit d'impression */
+/* Gabarit d'impression
+------------------------------------------ */
 @media print {
+	.page,
+	.content { width: auto; }
 	.nav,
 	.aside,
 	.footer { display: none; }
-	.page,
-	.content { width: auto; }
+}
+
+/* Affichage sur petits ecrans
+Cf.: http://www.alsacreations.com/astuce/lire/1177
+------------------------------------------ */
+@media (max-width: 640px) {
+
+/* passer tous les éléments de largeur fixe en largeur automatique */
+body,
+.page,
+.content,
+.aside { width: auto !important; margin: auto !important; padding: auto !important; }
+
+/* Passer à une seule colonne (à appliquer aux éléments multi-colonnes) */
+.content,
+.aside { clear: both; float: none !important; width: auto !important; }
+
 }
 
 /* end */

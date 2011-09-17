@@ -139,4 +139,22 @@ a[hreflang]:after { content: "\0000a0(" attr(hreflang) ")"; }
 	h2, h3 { page-break-after: avoid; }
 }
 
+/* Affichage sur petits ecrans
+Cf.: http://www.alsacreations.com/astuce/lire/1177
+------------------------------------------ */
+@media (max-width: 640px) {
+
+	/* fixer une largeur maximale  de 100 % aux éléments potentiellement problématiques */
+	img, table, td, blockquote, code, pre, textarea, input, iframe, object, embed, video { max-width: 100% !important; }
+	
+	/* gestion des mots longs */
+	textarea, table, td, th, code, pre, samp { word-wrap: break-word; /* césure forcée */ }
+	code, pre, samp { white-space: pre-line; /* passage à la ligne spécifique pour les éléments à châsse fixe */ }
+
+}
+
+@media screen and (max-width:640px) and (orientation: landscape) {
+	body { -webkit-text-size-adjust: 70%; }
+}
+
 /* end */
