@@ -37,16 +37,30 @@ return $flux;
 /*Modifie l'affichage de l'article dans l'espace interne*/
  function taa_afficher_fiche_objet($flux){
     $type = $flux['args']['type'];
-
-   if ($type=='article'){
-	$id_article= _request('id_article');
-	$barre=charger_fonction('barre_langues','inc');
-	$barre_langue=$barre($id_article);
-	
-	$flux['data'] =preg_replace('/<div class=\'boite_onglets\'/',$barre_langue.'<div id=\'boite_onglets\'',$flux['data']);
-	}
+    
+	if($version = $GLOBALS['spip_version_branche']<3) {
+		if ($type=='article'){
+				$id_article= _request('id_article');
+				$barre=charger_fonction('barre_langues','inc');
+				$barre_langue=$barre($id_article);
+			
+				$flux['data'] =preg_replace('/<div class=\'boite_onglets\'/',$barre_langue.'<div id=\'boite_onglets\'',$flux['data']);
+				
+			}
+		}
 return $flux;
 }
 
+function taa_recuperer_fond($flux){
+    if ($flux['args']['fond'] == 'prive/squelettes/contenu/article'){
+    	
+    	$id_article= _request('id_article');
+				
+		$barre=charger_fonction('barre_langues','inc');
+		$barre_langue=$barre($id_article);
 
+        $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
+    }
+    return $flux;
+}
 ?>

@@ -52,7 +52,11 @@
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>taa_pipelines.php</inclure>
-        </pipeline>	
+    </pipeline>	
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>taa_pipelines.php</inclure>
+    </pipeline>		
 	<fonctions>taa_fonctions.php</fonctions>
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.10;]" />

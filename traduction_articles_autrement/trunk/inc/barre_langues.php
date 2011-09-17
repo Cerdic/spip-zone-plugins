@@ -69,7 +69,8 @@ function inc_barre_langues_dist($id_article){
 	foreach($langues_dispos as $key => $value){
 		$class='';
 		$span='';	
-		
+		if($version = $GLOBALS['spip_version_branche']<3) $objet='articles';
+		else $objet='article';
 		// les boutons hors article présent
 		if($traductions[$value]!=$id_article){
 					
@@ -79,7 +80,7 @@ function inc_barre_langues_dist($id_article){
 				if($traductions[$value]==$id_trad){
 					$span=$span_content;					
 					}
-				$onglets_traduction.='<div class="traduit onglet ajax">'.$span.'<a href="'.generer_url_ecrire('articles','id_article='.$traductions[$value]).'">'.traduire_nom_langue($value).'</a></div>';					
+				$onglets_traduction.='<div class="traduit onglet ajax">'.$span.'<a href="'.generer_url_ecrire($objet,'id_article='.$traductions[$value]).'">'.traduire_nom_langue($value).'</a></div>';					
 			}
 			// Sinon on crée un nouvel article dans la langue souhaitée
 			else{
@@ -87,19 +88,19 @@ function inc_barre_langues_dist($id_article){
 				if ($trad_rub=test_plugin_actif('tradrub')) {
 					$id_rubrique_traduite=rubrique_traduction($value,$id_rubrique);
 					
-					$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire('articles_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';					
+					$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';					
 					
 					$section='oui';
 
 					}
 				else{
-					$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire('articles_edit','new=oui&lier_trad='.$id_trad.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';				
+					$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';				
 				}
 
 				
 				
 			
-				$action=redirige_action_auteur ('changer_langue',$id_article,'articles',"id_article=$id_article");
+				$action=redirige_action_auteur ('changer_langue',$id_article,$objet,"id_article=$id_article");
 				// Si le plugin traduction rubriques est activé on affiche pas les onglets changement de langue car la langue se change en modifiant la rubrique
 				if(!$section){
 					$changer_traduction.='<div class="lang onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></div>';					
