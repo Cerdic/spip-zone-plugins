@@ -100,6 +100,21 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 			}
 			ecrire_meta($nom_meta_base_version,$current_version='0.6.1','non');
 		}
+		if(version_compare($current_version,'0.6.2','<')){
+			maj_tables(array('spip_spipicious'));
+			$spipicious = sql_select('*','spip_spipicious');
+			while($iter = sql_fetch($spipicious)){
+				$table = table_objet_sql($iter['objet']);
+				$id_table_objet = id_table_objet($iter['objet']);
+				$objet = sql_fetsel('*',$table,$id_table_objet.'='.intval($iter['id_objet']));
+				if(isset($objet['statut']) && $objet['statut'] != 'publie'){
+					sql_updateq('spip_spipicious',array('statut'=>'prop'),'id_objet='.intval($iter['id_objet'].' AND objet='.sql_quote($iter['objet'])));
+				}else if(!is_array($objet)){
+					sql_updateq('spip_spipicious',array('statut'=>'prop'),'id_objet='.intval($iter['id_objet'].' AND objet='.sql_quote($iter['objet'])));
+				}
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.6.2','non');
+		}
 		ecrire_metas();
 	}
 }

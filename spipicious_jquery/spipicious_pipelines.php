@@ -222,4 +222,37 @@ function spipicious_optimiser_base_disparus($flux){
 	}
 	return $flux;
 }
+
+/**
+ * Insertion dans le pipeline pre_boucle de SPIP
+ * Si on ne passe pas le critère tout ni statut aux boucles spipicious, on n'affiche pas ceux pas publiés 
+ */
+function spipicious_pre_boucle($boucle){
+	if ($boucle->type_requete == 'spipicious') {
+		$id_table = $boucle->id_table;
+		$mstatut = $id_table .'.statut';
+		if (!isset($boucle->modificateur['criteres']['tout'])
+			&& !isset($boucle->modificateur['criteres']['statut'])) {
+			$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
+		}
+	}
+	return $boucle;
+}
+
+/**
+ * Insertion dans le pipeline de post-edition
+ * A l'institution d'un objet (changement de statut), si l'objet n'a pas le statut publié et qu'il a des liens spipicious, on passe ses liens en prop
+ * sinon, on les publie
+ */
+function spipicious_post_edition($flux){
+	if($flux['args']['action'] == 'instituer'){
+		$objet = objet_type($flux['args']['table']);
+		if($flux['data']['statut'] != 'publie'){
+			sql_updateq('spip_spipicious',array('statut'=>'prop'),'id_objet='.intval($flux['args']['id_objet']).' AND objet='.sql_quote($objet).' AND statut="publie"');
+		}else{
+			sql_updateq('spip_spipicious',array('statut'=>'publie'),'id_objet='.intval($flux['args']['id_objet']).' AND objet='.sql_quote($objet).' AND statut="prop"');
+		}
+	}
+	return $flux;
+}
 ?>

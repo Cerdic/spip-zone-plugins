@@ -1,6 +1,9 @@
 [(#SET{id_groupe,#ENV{id_groupe,#CONFIG{spipicious/groupe_mot,1}}})]
-<BOUCLE_motsElement(SPIPICIOUS mots){id_auteur?}{mots.id_groupe=#GET{id_groupe}}{par #ENV{tri,titre}}>
+[(#SET{mots,#ARRAY})]
+<BOUCLE_motsElement(SPIPICIOUS mots){id_auteur?}{mots.id_groupe=#GET{id_groupe}}{fusion spipicious.id_mot}{par #ENV{tri,titre}}>
+	[(#SET{mots,[(#GET{mots}|push{#ID_MOT})]})]
 	[(#ID_MOT|nuage{#TITRE,[(#ENV{url}|?{[(#ENV{url}|parametre_url{id_mot,#ID_MOT})],#URL_MOT})]})]
-	<BOUCLE_nb(SPIPICIOUS){id_mot}></BOUCLE_nb>[(#ID_MOT|nuage{'','',#TOTAL_BOUCLE})]<//B_nb>
+	<BOUCLE_nb(SPIPICIOUS){id_mot}> </BOUCLE_nb>[(#ID_MOT|nuage{'','',#GRAND_TOTAL})]</B_nb><//B_nb>
 </BOUCLE_motsElement>
-[(#NUAGE|nuage_tri{#ENV{tri,titre}}|nuage_affiche{#ENV{max, -1}})]
+[(#GET{mots}|count|>{0}|oui)
+[(#NUAGE|nuage_tri{#ENV{tri,titre}}|nuage_affiche{#ENV{max, -1}})]]
