@@ -13,7 +13,7 @@ function clevermail_verification_adresses_email($adresses) {
 }
 
 function clevermail_chaine_email_en_tableau($adresses) {
-  return array_unique(explode(' ', trim(ereg_replace("[,;\t\n\r ]+", " ", $adresses))));
+	return array_unique(explode(' ', trim(preg_replace('`[,;\t\n\r ]+`', ' ', $adresses))));
 }
 
 function clevermail_abonnes_ajout($lst_ids, $lsr_mode, $adresses) {
