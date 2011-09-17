@@ -12,6 +12,8 @@
 	<nom>Coordonn&eacute;es</nom>
 	
 	<auteur>Matthieu Marcillaud</auteur>
+	<auteur lien="http://www.cym.fr">Cyril MARION</auteur>
+	
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 	

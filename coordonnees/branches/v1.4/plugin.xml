@@ -14,6 +14,8 @@
 	<etat>test</etat>
 	
 	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
+	
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
 	
