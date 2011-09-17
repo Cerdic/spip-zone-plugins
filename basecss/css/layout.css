@@ -41,13 +41,13 @@ Cf.: http://www.alsacreations.com/astuce/lire/1177
 ------------------------------------------ */
 @media (max-width: 640px) {
 
-/* passer tous les éléments de largeur fixe en largeur automatique */
+/* passer tous les elements de largeur fixe en largeur automatique */
 body,
 .page,
 .content,
 .aside { width: auto !important; margin: auto !important; padding: auto !important; }
 
-/* Passer à une seule colonne (à appliquer aux éléments multi-colonnes) */
+/* Passer à une seule colonne (a appliquer aux elements multi-colonnes) */
 .content,
 .aside { clear: both; float: none !important; width: auto !important; }
 
