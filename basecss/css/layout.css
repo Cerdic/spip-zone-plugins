@@ -47,7 +47,7 @@ body,
 .content,
 .aside { width: auto !important; margin: auto !important; padding: auto !important; }
 
-/* Passer à une seule colonne (a appliquer aux elements multi-colonnes) */
+/* Passer a une seule colonne (a appliquer aux elements multi-colonnes) */
 .content,
 .aside { clear: both; float: none !important; width: auto !important; }
 
