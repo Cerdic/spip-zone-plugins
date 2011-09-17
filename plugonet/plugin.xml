@@ -1,7 +1,7 @@
 <plugin>
 	<nom>PlugOnet</nom>
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
-	<version>0.4.5</version>
+	<version>0.5.0</version>
 	<etat>stable</etat>
 	<licence>GNU/GPL v3</licence>
 	<icon>prive/themes/spip/images/plugonet-32.png</icon>
@@ -32,11 +32,6 @@ une aide sur chaque balise de la nouvelle DTD.
 		<inclure>inc/plugonet_afficher.php</inclure>
 	</pipeline>
 
-	<bouton id="plugonet" parent="configuration">
-		<icone>prive/themes/spip/images/plugonet-24.png</icone>
-		<titre>plugonet:bouton_plugonet</titre>
-		<url>plugonet_generer</url>
-	</bouton>
 	<bouton id="plugonet-21" parent="bando_administration">
 		<icone>images/plugonet-16.png</icone>
 		<titre>plugonet:bouton_plugonet</titre>
@@ -59,8 +54,7 @@ une aide sur chaque balise de la nouvelle DTD.
 		<url>plugonet_valider</url>
 	</onglet>
 
-	<necessite id="SPIP" version="[2.1.10;3.0.0-dev)" />
+	<necessite id="SPIP" version="[3.0.0-dev;3.0.*]" />
 	<necessite id="langonet" version="[0.6.3;]" />
-	<necessite id="Iterateurs" version="[0.3.0;]" />
 	<categorie>outil</categorie>
 </plugin>
