@@ -172,6 +172,7 @@
 <option value="publie" [(#ENV{StatutArt}|=={publie}|?{selected="selected"})]><:opconfig:statut_valide:></option>
 </select>
 </p>
+<p><:opconfig:expliq_statut_publie:></p>
 <p>
 <input type="checkbox" name="Notification" value="yes"  [(#ENV{Notification}|=={yes}|?{checked="yes"})] /><:opconfig:post_notification:><br />
 </p>
@@ -202,6 +203,7 @@
 <p><:opconfig:expliq_renvois:></p>
 
 <p style="background:#fff; border: 1px dotted #000;">
+#PUCE<input type="checkbox" name="UrlPagePubliee" value="yes" [(#ENV{UrlPagePubliee}|=={yes}|?{checked="yes"})] /><:opconfig:post_urlpagepubliee:><br />
 #PUCE<label><:opconfig:renvois_url_validation:></label>
 <input type="text" name="UrlValidation" value="#ENV{UrlValidation}" size="30" />
 <br />

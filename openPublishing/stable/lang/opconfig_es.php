@@ -40,6 +40,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_insertion' => 'error en la inserci&oacute;n de tu art&iacute;culo en la base de datos. Contacta a los/as responsables del sitio',
 'erreur_upload' => 'error de upload.  El archivo temporal es imposible de encontrar. Este puede ser consecuencia de que est&aacute;s intentando subir un archivo demasiado grande. El tamaño m&aacute;ximo permitido es de 5 Mb.',
 'erreur_extension' => 'error de upload. El tipo de archivo que intentas subir no est&aacute; permitido.',
+'expliq_statut_publie' => 'Si vous avez choisi le statut "Valid&eacute;", vous pouvez provoquer l\'affichage de l\'article directement dans la partie publique du site en cochant la case correspondante dans la section "Gestion des renvois", ci-dessous.',
 
 //G
 'gestion_agenda' => 'Gesti&oacute;n de la agenda',
@@ -99,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'op_configuration_titre_lateral' => 'M&oacute;dulos incluidos en el t&iacute;tulo lateral.',
 'op_configuration_menu_principal' => 'Elementos del men&uacute; principal de navigaci&oacute;n.',
 'op_configuration_barre_laterale' => 'M&oacute;dulos incluidos en la barra lateral.',
-'op_configuration_mentions_techniques' => 'M&oacute;dulos incluidos en el pi&eacute; de p&aacute;gina.',	
+'op_configuration_mentions_techniques' => 'M&oacute;dulos incluidos en el pi&eacute; de p&aacute;gina.',
 'op_info_base_ok' => 'Se instal&oacute; correctamente el plugin openPublishing',
 'op_info_base_ko' => 'Las tablas de dato del plugin openPublishing fueron instaladas.',
 'op_info_deja_ko' => 'Las tablas de dato del plugin openPublishing fueron  desinstaladas.',
@@ -147,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'rubrique_liste' => 'lista de secciones openPublishing :',
 'rubrique_explique' => 'Indica aqu&iacute; las secciones sobre las cuales permiten el openPublishing. ¡Atenci&oacute;n, las secciones deben existir! Presione la cruz para suprimir tu selecci&oacute;n.',
 'resultat' => 'resultados ...',
+'post_urlpagepubliee' => ' Cocher pour afficher le nouvel article publi&eacute; si vous avez choisi le statut \"valid&eacute;\" ci-dessus.<br/> Ou bien : ' ,
 
 // S
 'statut_select' => 'Cu&aacute;l ser&aacute; el estado para los art&iacute;culos recibidos ?&nbsp;',
@@ -181,4 +183,4 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 );
 
 ?>
- 
+

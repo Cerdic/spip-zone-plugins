@@ -46,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'expliq_options' => 'Ces options permettre d\'&eacute;tendre ou de restreindre les fonctionnalit&eacute;s du plugin "Publication Ouverte". Les options coch&eacute;es seront disponibles dans l\'espace de r&eacute;daction',
 'expliq_composition_article' => 'Un article peut &ecirc;tre compos&eacute; de plusieurs champs qui ne sont pas forc&eacute;ment utilis&eacute; par tous les sites. Vous pouvez donc activer ou pas les champs ci-dessous. L\'espace de r&eacute;daction ne proposera aux r&eacute;dacteurs que les champs coch&eacute;s (ainsi que, \'&eacute;videmment, le titre et le texte de l\'article).',
 'expliq_statut' => 'Une fois que le r&eacute;dacteur a valid&eacute; son article, celui-ci appara&icirc;tra dans l\'espace priv&eacute;e de votre site avec le statut suivant :',
+'expliq_statut_publie' => 'Si vous avez choisi le statut "Valid&eacute;", vous pouvez provoquer l\'affichage de l\'article directement dans la partie publique du site en cochant la case correspondante dans la section "Gestion des renvois", ci-dessous.',
 'expliq_posttraitement' => 'Il s\'agit ici d\'effectuer des traitements de protection sur l\'article. Ces options s\'appliqueront apr&egrave;s la validation de l\'article par le r&eacute;dacteur.',
 'expliq_renvois' => 'Lorsqu\'un r&eacute;dacteur valide un article ou abandonne, le formulaire affiche un message et redirige le r&eacute;dacteur au bout de quelques secondes vers une autre page du site. Les options ci-dessous permettent de configurer cela. Attention, il faut indiquer des urls de type : &laquo; /spip.php?page=ma_page &raquo;, le plugin compl&eacute;tera automatiquement l\'url.',
 
@@ -90,13 +91,14 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'publie_chapo' => 'Chapeau :',
 'publie_descriptif' => 'Descriptif rapide :',
 'publie_ps' => 'Post-scriptum :',
-'post_traitement' => 'Post-traitement',
+'post_traitement' => 'Post-traitement des articles',
 'post_notification' => 'Activer la notification mail lors de la publication des articles (vous devez avoir activ&eacute; "Suivi de l\'activit&eacute; &eacute;ditoriale" dans votre configuration SPIP)',
 'post_majuscule' => 'Autoriser les majuscules dans les titres',
 'post_antispam' => 'Protection anti-spam sur les adresses mails',
 'post_taille_min' => 'Taille minimal du titre :',
 'post_pipeline' => 'Activer l\'interactivit&eacute; avec les autres plugins (cf. documentation sur spip-contrib)',
 'post_char' => 'caract&egrave;res',
+'post_urlpagepubliee' => ' Cocher pour afficher le nouvel article publi&eacute; si vous avez choisi le statut "valid&eacute;" dans la section "Statut des articles après la rédaction" ci-dessus.<br/> Ou bien : ' ,
 
 // R
 'revenir_haut' => 'Revenir en haut.',
@@ -136,7 +138,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 
 // V
 'votre_nom' => 'Votre nom ou pseudo',
-'votre_mail' => 'Votre email',
+'votre_mail' => 'Votre email'
 
 /**
 // v 0.4
@@ -376,7 +378,7 @@ pour le retrouver lors d\'une recherche par th&eacute;matique.',
 'op_configuration_titre_lateral' => 'Modules inclus dans le titre lat&eacute;ral.',
 'op_configuration_menu_principal' => 'El&eacute;ments du menu principal de navigation.',
 'op_configuration_barre_laterale' => 'Modules inclus dans la barre lat&eacute;rale.',
-'op_configuration_mentions_techniques' => 'Modules inclus dans le pied de page',	
+'op_configuration_mentions_techniques' => 'Modules inclus dans le pied de page',
 'op_info_base_ok' => 'Le plugin openPublishing est correctement install&eacute;',
 'op_info_base_ko' => 'Les tables de donn&eacute;e du plugin openPublishing doivent-&ecirc;tre install&eacute;es.',
 'op_info_deja_ko' => 'Les tables de donn&eacute;e du plugin openPublishing a &eacute;t&eacute; d&eacute;sinstall&eacute;e',

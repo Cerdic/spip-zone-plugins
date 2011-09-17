@@ -3,7 +3,7 @@
 /* Test de sécurité */
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-/* 
+/*
  * Les includes de spip utilisé dans cette balise
  */
 
@@ -11,7 +11,7 @@ include_spip('inc/ajouter_documents'); // pour l'ajout de documents
 include_spip('inc/barre');
 
 
-/* 
+/*
  * Les includes propre au plugin
  */
 
@@ -61,7 +61,7 @@ if (!$ret['code'])
 		$message .='<li>'.$m.'</li>';
 	}
 	$message .='</ul><p>'._T('opconfig:erreur_configuration_page').'</p>';
-	
+
 	return $message;
 }
 
@@ -206,7 +206,7 @@ if ($config['DocIncAuto'] == 'yes') {
 $documents_actifs = array();
 $lang = _request('var_lang');
 
-// remise à zero 
+// remise à zero
 $variables['champs_pri']['formulaire_previsu'] = '';
 $variables['champs_pri']['bouton'] = '';
 $variables['champs_pri']['mess_error'] = '';
@@ -244,13 +244,13 @@ if (!empty($variables['actions']['abandonner'])) {
 			array('spip_mots_articles'),
 		 	array('id_article = '.sql_quote($variables['champs_pri']['id_article']).' LIMIT 1')
 		);
-	
+
 
 	// suppression du logo si il existe
 	if ($config['Logo'] == 'yes') {
 		$nom = 'arton' . $variables['champs_pri']['id_article'];
 		$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
-	
+
 		foreach ($formats_logos as $format) {
 			if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
 				@unlink($d);
@@ -260,7 +260,7 @@ if (!empty($variables['actions']['abandonner'])) {
 	// construction de la page de retour
 	$url_retour = $variables['champs_aux']['url_site'] . $config['UrlAbandon'] ;
 	$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextAbandon'];
-	
+
 	return $message;
 } // FIN action Abandonner
 
@@ -292,10 +292,10 @@ if ($identifiant == true) {
 // Action Valider
 if(!empty($variables['actions']['valider'])) {
 	// vérification avant mise en Base de donnée
-	
+
 	// récupération du statut par défaut de l'article
 	$statut = $config['StatutArt'];
-	
+
 	/*
 	 * création pipeline pre_validation
 	 * ce pipeline permet aux plugins d'effectuer des traitements avant la validation
@@ -327,7 +327,7 @@ if(!empty($variables['actions']['valider'])) {
 		$variables['flag_erreur'] = true;
 		$variables['champs_pri']['mess_error'] = _T('opconfig:erreur_min_len') . $config['TitreMin'] . _T('opconfig:caracteres');
 	}
-	
+
 	/*
 	 * création pipeline validation
 	 * ce pipeline permet aux plugins d'effectuer une validation "alternative"
@@ -503,7 +503,7 @@ if(!empty($variables['actions']['valider'])) {
 			));
 		$id_secteur = $row['id_secteur'];
 		$lang_rub = $row['lang'];
-	
+
 		// La langue a la creation : si les liens de traduction sont autorises
 		// dans les rubriques, on essaie avec la langue de l'auteur,
 		// ou a defaut celle de la rubrique
@@ -515,7 +515,7 @@ if(!empty($variables['actions']['valider'])) {
 				$lang = $GLOBALS['spip_lang'];
 			}
 		}
-		
+
 		if (!$lang) {
 			$lang = $lang_rub ? $lang_rub : $GLOBALS['meta']['langue_site'];
 		}
@@ -543,7 +543,7 @@ if(!empty($variables['actions']['valider'])) {
 			'statut' => $statut,
 			'extra' => $extra
 		);
-		
+
 		// calcul la date
 		$champs['date'] = date('Y-m-d H:i:s');
 
@@ -580,7 +580,7 @@ if(!empty($variables['actions']['valider'])) {
 			 array("id_article=".$variables['champs_pri']['id_article'])
 		);
 
-		
+
 		if ($config['AuteurSpip'] == 'yes') {
 			// si auteur SPIP, attribuer l'article à l'auteur et non à "anonyme"
 			if ($variables['champs_aux']['choix_AuteurSpip'] != 'OK') {
@@ -631,7 +631,7 @@ if(!empty($variables['actions']['valider'])) {
 				)
 			);
 		}
-		
+
 		// notification
 		if (($config['Notification'] == "yes") && (!$variables['flag_erreur'])) {
 			include_spip('inc/mail');
@@ -645,10 +645,14 @@ if(!empty($variables['actions']['valider'])) {
 			}
 		}
 	}
-	
+
 	if (!$variables['flag_erreur']) { // si pas d'erreur : on sort :)
 		// construction de la page de retour
-		$url_retour = $variables['champs_aux']['url_site'] . $config['UrlValidation'];
+		if ($config['UrlPagePubliee'] == 'yes') { // si l'article est automatiquement publie, on peut l'afficher
+                    $url_retour = $variables['champs_aux']['url_site'] . '/spip.php?article' .$variables['champs_pri']['id_article'] ;
+                }else{
+                   $url_retour = $variables['champs_aux']['url_site'] . $config['UrlValidation'];
+                }
 		$message = '<META HTTP-EQUIV="refresh" content="'.$config['TempsAtt'].'; url='.$url_retour.'">' . $config['TextValidation'];
 		$message = $message . $retour .'<br />';
 		return $message;
@@ -692,12 +696,12 @@ if ($config['AuteurSpip'] == 'yes') { // si la configuration autorise les auteur
 if (!empty($variables['actions']['sup_logo'])) {
 	$nom = 'arton' . $variables['champs_pri']['id_article'];
 	$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
-	
+
 	foreach ($formats_logos as $format) {
 		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
 			@unlink($d);
 	}
-}	
+}
 
 // si l'auteur demande la prévisualisation
 if(!empty($variables['actions']['previsualiser'])) {
@@ -733,11 +737,11 @@ if(!empty($variables['actions']['previsualiser'])) {
 	}
 
 	// on rempli le formulaire de prévisualisation
-	$variables['champs_pri']['formulaire_article_previsu'] = 
+	$variables['champs_pri']['formulaire_article_previsu'] =
 		inclure_balise_dynamique(array('formulaires/formulaire_article_previsu', 0, $tab_env ), false);
 }
 
-	
+
 // si l'auteur ajoute un documents
 if(!empty($variables['actions']['media'])) {
 
@@ -745,7 +749,7 @@ if(!empty($variables['actions']['media'])) {
 	if (empty($variables['champs_aux']['url_doc'])) {
 		// compatibilité php < 4.1
 		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
-			
+
 		// récupération des variables
 		$fichier = $_FILES['doc']['name'];
 		$size = $_FILES['doc']['size'];
@@ -771,12 +775,12 @@ if(!empty($variables['actions']['media'])) {
 		// verification si extention OK
 		$tableau = explode('.', $fichier);
 		$type_ext = $tableau[1];
-	
+
 		// renomme les extensions
 		if (strcmp($type_ext,"jpeg")==0) $type_ext = "jpg";
 		// attention a la case : tout en minuscule
 		$type_ext = strtolower($type_ext);
-		
+
 		$return = sql_fetch(sql_select(
 			array('extension'),
 			array('spip_types_documents'),
@@ -797,7 +801,7 @@ if(!empty($variables['actions']['media'])) {
 					$formats_logos = Array('jpg' ,'png', 'gif', 'bmp', 'tif');
 					if (in_array($type_ext,$formats_logos)) {
 						$poids = filesize($f);
-	
+
 						if (_LOGO_MAX_SIZE > 0
 						AND $poids > _LOGO_MAX_SIZE*1024) {
 							@unlink ($f);
@@ -805,7 +809,7 @@ if(!empty($variables['actions']['media'])) {
 								array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
 								'actuel' => taille_en_octets($poids)));
 						}
-			
+
 						if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
 						AND ($size[0] > _LOGO_MAX_WIDTH
 						OR $size[1] > _LOGO_MAX_HEIGHT)) {
@@ -827,7 +831,7 @@ if(!empty($variables['actions']['media'])) {
 					}
 					else {
 						@unlink ($f);
-	
+
 						// ERREUR
 						$variables['champs_pri']['mess_error'] = _T('info_logo_format_interdit',
 									array('formats' => join(', ', $formats_logos)));
@@ -847,7 +851,7 @@ if(!empty($variables['actions']['media'])) {
 					array('MAX(id_document) as id_document'),
 					array('spip_documents')
 				));
-		
+
 				$id_document = $ret['id_document'];
 
 				// création champs dans la table documents
@@ -870,7 +874,7 @@ if(!empty($variables['actions']['media'])) {
 // cas d'un nouvel article ou re-affichage du formulaire
 if ($config['Agenda'] == 'yes') {
 	// Gestion de l'agenda
-	$variables['champs_pri']['formulaire_agenda'] = 
+	$variables['champs_pri']['formulaire_agenda'] =
 		inclure_balise_dynamique(
 			array('formulaires/formulaire_agenda',	0,
 				array(
@@ -916,7 +920,7 @@ if ($config['AuteurSpip'] == 'yes') {
 
 	// si l'utilisateur est loggé
 	if ($GLOBALS['auteur_session']) {
-		
+
 		$variables['champs_pri']['formulaire_auteurspip'] =
 			inclure_balise_dynamique(
 				array('formulaires/formulaire_auteurspip', 0,
