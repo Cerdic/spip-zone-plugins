@@ -18,10 +18,10 @@
 	</B_array>
 	[(#CLE|!={build_date}|oui)
 		[(#CLE|!={build_date_timestamp}|oui)
-			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</p>
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|?{[(#VALEUR|=={1}|?{<:item_oui:>,#VALEUR})],<:item_non:>})]</p>
 		]
 		[(#CLE|=={build_date_timestamp}|oui)
-			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] : [(#VALEUR|normaliser_date|affdate)]</p>
+			<p>[(#VAL{spipmotion:info_compiler_#CLE}|_T)] [(#VALEUR|normaliser_date|affdate)]</p>
 		]
 	]
 	<//B_array>
@@ -31,7 +31,7 @@
 	<h3 class="h3"><:spipmotion:ffmpeg2theora_install:></h3>
 	<BOUCLE_ffmpeg2theora(POUR){tableau #ENV{spipmotion_ffmpeg2theora}}>
 		[(#CLE|=={ffmpeg2theora}|non)
-			<p>[(#VAL{spipmotion:info_ffmpeg2theora_#CLE}|_T)] : [(#VALEUR)]</p>
+			<p>[(#VAL{spipmotion:info_ffmpeg2theora_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_ffmpeg2theora>
 	</BOUCLE_siffmpeg2theora>
@@ -40,7 +40,7 @@
 	<h3 class="h3"><:spipmotion:flvtool2_install:></h3>
 	<BOUCLE_flvtool2(POUR){tableau #ENV{spipmotion_flvtool2}}>
 		[(#CLE|=={flvtool2}|non)
-			<p>[(#VAL{spipmotion:info_flvtool2_#CLE}|_T)] : [(#VALEUR)]</p>
+			<p>[(#VAL{spipmotion:info_flvtool2_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_flvtool2>
 	</BOUCLE_siflvtool2>
@@ -49,7 +49,7 @@
 	<h3 class="h3"><:spipmotion:flvtoolplus_install:></h3>
 	<BOUCLE_flvtoolplus(POUR){tableau #ENV{spipmotion_flvtoolplus}}>
 		[(#CLE|=={flvtoolplus}|non)
-			<p>[(#VAL{spipmotion:info_flvtoolplus_#CLE}|_T)] : [(#VALEUR)]</p>
+			<p>[(#VAL{spipmotion:info_flvtoolplus_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_flvtoolplus>
 	</BOUCLE_siflvtoolplus>
@@ -58,7 +58,7 @@
 	<h3 class="h3"><:spipmotion:mediainfo_install:></h3>
 	<BOUCLE_mediainfo(POUR){tableau #ENV{spipmotion_mediainfo}}>
 		[(#CLE|=={mediainfo}|non)
-			<p>[(#VAL{spipmotion:info_mediainfo_#CLE}|_T)] : [(#VALEUR)]</p>
+			<p>[(#VAL{spipmotion:info_mediainfo_#CLE}|_T)] [(#VALEUR)]</p>
 		]
 	</BOUCLE_mediainfo>
 	</BOUCLE_simediainfo>
