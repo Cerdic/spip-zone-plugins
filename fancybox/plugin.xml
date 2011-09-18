@@ -1,22 +1,22 @@
 <plugin>
-	<nom>FancyBox</nom>
-	<auteur>
-	FancyBox par [fancybox.net->http://fancybox.net/]
-_ Mis en plugin par b_b
-	</auteur>
-	<version>0.4</version>
-	<etat>test</etat>
-	<description>
-Fen&#234;tre de dialogue ou de galerie photo
-_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
-	</description>
+	<categorie>multimedia</categorie>
+	<version>0.6.1</version>
 	<lien>http://www.spip-contrib.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
-	<necessite id="SPIP" version="[2.0;]" />
+	<etat>test</etat>
+
+	<nom>FancyBox</nom>
+	<auteur>b_b, [FancyBox->http://fancybox.net/]</auteur>
+	<slogan>Fen&#234;tre de dialogue ou de galerie photo</slogan>
+	<description>Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code></description>
+
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<utilise id="cfg" version="[1.12;]" />
+
 	<chemin dir='' />
 	<chemin dir='spip20/' />
+
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>spip20/fancybox_pipelines.php</inclure>
@@ -26,30 +26,28 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 		<action>insert_head</action>
 		<inclure>spip20/fancybox_pipelines.php</inclure>
 	</pipeline>
-	<categorie>multimedia</categorie>
 </plugin>
-<plugin spip='[2.1.0-beta;]' >
-	<nom>FancyBox</nom>
-	<auteur>
-	FancyBox par [fancybox.net->http://fancybox.net/]
-_ Mis en plugin par b_b
-	</auteur>
-	<version>0.6</version>
-	<icon></icon>
-	<etat>test</etat>
-	<description>
-Fen&#234;tre de dialogue ou de galerie photo
-_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
-	</description>
+<plugin spip='[2.1.0-beta;2.1.99]' >
+	<categorie>multimedia</categorie>
+	<version>0.6.1</version>
 	<lien>http://www.spip-contrib.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
+	<etat>test</etat>
+
+	<nom>FancyBox</nom>
+	<auteur>b_b, [FancyBox->http://fancybox.net/]</auteur>
+	<slogan>Fen&#234;tre de dialogue ou de galerie photo</slogan>
+	<description>Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code></description>
+
 	<options>fancybox_options.php</options>
-	<utilise id="cfg" version="[1.12;]" />
+
 	<necessite id="saisies" version="[1.7.1;]" />
 	<!-- pour les boucles pour de saisies, je ne suis pas desole :p  -->
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="lib:jquery.fancybox-1.3.4" src="http://fancybox.googlecode.com/files/jquery.fancybox-1.3.4.zip" />
+	<utilise id="cfg" version="[1.12;]" />
+
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>fancybox_pipelines.php</inclure>
@@ -59,5 +57,4 @@ _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_H
 		<action>insert_head</action>
 		<inclure>fancybox_pipelines.php</inclure>
 	</pipeline>
-	<categorie>multimedia</categorie>
 </plugin>
