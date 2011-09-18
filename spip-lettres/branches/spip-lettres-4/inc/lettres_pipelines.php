@@ -140,8 +140,8 @@
 		//   et emails / lettre_html ($GLOBALS['meta']['spip_lettres_fond_lettre_html']), lettre_texte ($GLOBALS['meta']['spip_lettres_fond_lettre_html'])
 		//   et indirectement emails / lettre_titre, inc-haut, inc-bas...
 		if ( 	isset ($flux['args']['contexte']['id_lettre'])
-			// la rubrique de la lettre doit-elle être prioritaire vis a vis d'un éventuel id_rubrique déjà utilisable ?
-			// and (!isset ($flux['args']['id_rubrique']) OR !$flux['args']['id_rubrique'])
+			// la rubrique de la lettre n'est pas prioritaire vis a vis d'un éventuel id_rubrique déjà utilisable
+				and (!isset ($flux['args']['id_rubrique']) OR !$flux['args']['id_rubrique'])
 			) {
 			$id_lettre = intval ($flux['args']['contexte']['id_lettre']);
 			
