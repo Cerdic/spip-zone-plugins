@@ -217,8 +217,8 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	'adherent_entete_action' => 'Action',
 	'adherent_entete_notes' => 'Notes',
 	'adherent_entete_tous' => 'Tous',
-	'adherent_entete_supprimer_abrev' => 'Sup.',
-	'adherent_entete_desactiver_abrev' => 'D&eacute;s.',
+	'adherent_entete_supprimer_abrev' => 'Sup.<br /><abbr title="Pour supprimer plusieurs adh&eacute;rents. Si des adh&eacute;rents sont coch&eacute;s pour &ecirc;tre d&eacute;sactiv&eacute;s, ils seront seulement d&eacute;sactiv&eacute;s !">???</abbr>',
+	'adherent_entete_desactiver_abrev' => 'D&eacute;s.<br /><abbr title="Pour d&eacute;sactiver plusieurs adh&eacute;rents sans passer par leur &eacute;dition">???</abbr> ',
 
 	'adherent_entete_statut' => 'Statut',
 	'adherent_entete_statut_defaut' => 'Actifs',
@@ -258,13 +258,21 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 
 	# Message
 	'suppression_des_adherents' => 'Suppression des adh&eacute;rents',
+	'desactivation_des_adherents' => 'D&eacute;sactivation des adh&eacute;rents',
+	'activation_des_adherents' => 'Activation des adh&eacute;rents',
 	'adherent_message_ajout_adherent' => '@prenom@ @nom@ a &eacute;t&eacute; ajout&eacute; dans le fichier',
 	'adherent_message_ajout_adherent_suite' => 'et enregistr&eacute; comme visiteur',
 	'adherent_message_email_invalide' => 'L\'email n\'est pas valide !',
 	'adherent_message_maj_adherent' => 'Les donn&eacute;es de @prenom@ @nom@ ont &eacute;t&eacute; mises &agrave; jour !',
 	'adherent_message_confirmer_suppression' => 'Vous vous appr&ecirc;tez &agrave; effacer les membres',
+	'adherent_message_confirmer_desactivation' => 'Vous vous appr&ecirc;tez &agrave; d&eacute;sactiver les membres',
+	'adherent_message_confirmer_activation' => 'Vous vous appr&ecirc;tez &agrave; r&eacute;activer les membres',
 	'adherent_message_suppression_faite' => 'Suppression effectu&eacute;e !',
+	'adherent_message_desactivation_faite' => 'D&eacute;sactivation effectu&eacute;e !',
+	'adherent_message_activation_faite' => 'R&eacute;activation effectu&eacute;e !',
 	'adherent_message_detail_suppression' => 'Les adh&eacute;rents supprim&eacute;s le sont uniquement de la liste des membres de l\'association. Si vous souhaitez supprimer aussi l\'auteur spip, il faut passer par la page de gestion des auteurs.',
+	'adherent_message_detail_desactivation' => 'Les adh&eacute;rents d&eacute;sactiv&eacute;s ne sont pas supprim&eacute;s. Il suffit de faire afficher les adh&eacute;rents désactiv&eacute;s pour les r&eacute;-activ&eacute;s &agrave; nouveau.',
+	'adherent_message_detail_activation' => 'Les adh&eacute;rents seront r&eacute;activ&eacute;s avec le statut \'prospect\'',
 	
 	# Liste
 	'adherent_liste_legende' => 'En bleu : Relanc&eacute;<br />En rose : A &eacute;ch&eacute;ance<br />En vert : A jour<br />En brun : D&eacute;sactiv&eacute;<br />En jaune paille : Prospect',

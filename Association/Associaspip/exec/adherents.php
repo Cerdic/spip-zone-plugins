@@ -2,7 +2,7 @@
 /***************************************************************************\
  *  Associaspip, extension de SPIP pour gestion d'associations             *
  *                                                                         *
- *  Copyright (c) 2007 Bernard Blazin & François de Montlivault (V1)       *
+ *  Copyright (c) 2007 Bernard Blazin & Franï¿½ois de Montlivault (V1)       *
  *  Copyright (c) 2010-2011 Emmanuel Saint-James & Jeannot Lapin (V2)       *
  *                                                                         *
  *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
@@ -234,6 +234,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 		. '<td class="'.$class. '">'
 		. association_bouton(_T('asso:adherent_label_voir_membre'), 'voir-12.png', 'voir_adherent','id='.$id_auteur)
 		. "</td>\n"
+		. '<td class="'.$class. '"><input name="desactive[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. '<td class="'.$class. '"><input name="delete[]" type="checkbox" value="'.$id_auteur.'" /></td>'
 		. "</tr>\n";
 	}
@@ -249,6 +250,7 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	$res .= "<th>"._T('asso:adherent_libelle_categorie')."</th>\n"
 	. "<th>"._T('asso:adherent_libelle_validite')."</th>\n"
 	. '<th colspan="4" style="text-align:center;">'._T('asso:adherent_entete_action')."</th>\n"
+	. "<th>"._T('asso:adherent_entete_desactiver_abrev')."</th>\n"
 	. "<th>"._T('asso:adherent_entete_supprimer_abrev')."</th>\n"
 	. '</tr>'
 	. $auteurs
@@ -274,7 +276,8 @@ function adherents_liste($debut, $lettre, $critere, $statut_interne)
 	}
 	
 	$res .= "\n<div style='float:right;'>\n"
-	.  (!$auteurs ? '' : ('<input type="submit" value="'._T('asso:bouton_supprimer').'" class="fondo" />'))
+	.  (!$auteurs ? '' : ('<input type="submit" value="'._T('asso:bouton_confirmer').'" class="fondo" />'))
+	. '<input type="hidden" name="statut_courant" value="'.$statut_interne.'" />'
 	.  '</div>';
 
 	return 	array($liste_id_auteurs, generer_form_ecrire('action_adherents', $res));
