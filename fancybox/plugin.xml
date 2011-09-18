@@ -4,7 +4,7 @@
 	<lien>http://www.spip-contrib.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
-	<etat>test</etat>
+	<etat>stable</etat>
 
 	<nom>FancyBox</nom>
 	<auteur>b_b, [FancyBox->http://fancybox.net/]</auteur>
@@ -33,7 +33,7 @@
 	<lien>http://www.spip-contrib.net/FancyBox</lien>
 	<prefix>fancybox</prefix>
 	<icon>images/fancybox-32.png</icon>
-	<etat>test</etat>
+	<etat>stable</etat>
 
 	<nom>FancyBox</nom>
 	<auteur>b_b, [FancyBox->http://fancybox.net/]</auteur>
