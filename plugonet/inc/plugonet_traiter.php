@@ -67,7 +67,7 @@ function inc_plugonet_traiter($traitement, $files, $forcer_paquetxml=false, $sim
 					
 					// Si aucune erreur de validation de paquet.xml, on peut ecrire les fichiers de sortie :
 					// -- paquet.xml dans le repertoire du plugin
-					// -- les ${prefixe}-paquet_${langue}.php pour chaque langue trouvee dans le 
+					// -- les paquet-${prefixe}_${langue}.php pour chaque langue trouvee dans le 
 					//    repertoire lang/ du plugin
 					// -- le fichier des commandes svn
 					if (!$erreurs[$nom]['validation_paquetxml'] OR $forcer_paquetxml ) {
@@ -111,8 +111,9 @@ function plugin2paquet($plugins) {
 	$commandes = array();
 	if (count($plugins) == 1 ) {
 		$cle_min_min = $cle_min_max = 0;
-		if ($plugins[$cle_min_min]['compatible'])
-			$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatible'];
+		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_min]['auteur'][0];
+		if ($plugins[$cle_min_min]['compatibilite'])
+			$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatibilite'];
 	}
 	else {
 		// Cas de plusieurs balises plugin
@@ -124,9 +125,9 @@ function plugin2paquet($plugins) {
 		$borne_min_min = '4.0.0';
 		$compatibilite_paquet = '';
 		foreach ($plugins as $_cle => $_plugin) {
-			if (!$_plugin['compatible'])
+			if (!$_plugin['compatibilite'])
 				$borne_min = '1.9.0';
-			$bornes_spip = extraire_bornes($_plugin['compatible']);
+			$bornes_spip = extraire_bornes($_plugin['compatibilite']);
 			$borne_min = ($bornes_spip['min']['valeur']) ? $bornes_spip['min']['valeur'] : '1.9.0';
 			if (spip_version_compare($borne_min_max, $borne_min, '<=')) {
 				$cle_min_max = $_cle;
@@ -137,22 +138,22 @@ function plugin2paquet($plugins) {
 				$borne_min_min = $borne_min;
 			}
 			$compatibilite_paquet = (!$compatibilite_paquet) 
-				? $_plugin['compatible']
-				: fusionner_intervalles($compatibilite_paquet, $_plugin['compatible']);
+				? $_plugin['compatibilite']
+				: fusionner_intervalles($compatibilite_paquet, $_plugin['compatibilite']);
 		}
 
 		// On initialise les informations non techniques du bloc de compatibilite la moins elevee avec celles
 		// du bloc dont la borne min de compatibilite SPIP est la plus elevee.
 		$plugins[$cle_min_min]['prefix'] = $plugins[$cle_min_max]['prefix'];
 		$plugins[$cle_min_min]['categorie'] = $plugins[$cle_min_max]['categorie'];
-		$plugins[$cle_min_min]['icon'] = $plugins[$cle_min_max]['icon'];
+		$plugins[$cle_min_min]['logo'] = $plugins[$cle_min_max]['logo'];
 		$plugins[$cle_min_min]['version'] = $plugins[$cle_min_max]['version'];
 		$plugins[$cle_min_min]['etat'] = $plugins[$cle_min_max]['etat'];
-		$plugins[$cle_min_min]['version_base'] = $plugins[$cle_min_max]['version_base'];
+		$plugins[$cle_min_min]['schema'] = $plugins[$cle_min_max]['schema'];
 		$plugins[$cle_min_min]['meta'] = $plugins[$cle_min_max]['meta'];
-		$plugins[$cle_min_min]['lien'] = $plugins[$cle_min_max]['lien'];
+		$plugins[$cle_min_min]['documentation'] = $plugins[$cle_min_max]['documentation'];
 		$plugins[$cle_min_min]['nom'] = $plugins[$cle_min_max]['nom'];
-		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'];
+		$plugins[$cle_min_min]['auteur'] = $plugins[$cle_min_max]['auteur'][0];
 		$plugins[$cle_min_min]['licence'] = $plugins[$cle_min_max]['licence'];
 		$plugins[$cle_min_min]['slogan'] = $plugins[$cle_min_max]['slogan'];
 		$plugins[$cle_min_min]['description'] = $plugins[$cle_min_max]['description'];
@@ -167,7 +168,7 @@ function plugin2paquet($plugins) {
 			if ($_cle <> $cle_min_min) {
 				list($spip, $commandes_spip,) = plugin2balise($_plugin, 'spip');
 				$balises_spip .= "\n\n$spip";
-				$commandes['balise_spip'][$_plugin['compatible']] = $commandes_spip;
+				$commandes['balise_spip'][$_plugin['compatibilite']] = $commandes_spip;
 			}
 		}
 	}
@@ -195,12 +196,12 @@ function plugin2balise($D, $balise, $balises_spip='') {
 		// Extraction des attributs de la balise paquet
 		$categorie = $D['categorie'];
 		$etat = $D['etat'];
-		$lien = $D['lien'];
-		$logo = $D['icon'];
+		$lien = $D['documentation'];
+		$logo = $D['logo'];
 		$meta = $D['meta'];
 		$prefix = $D['prefix'];
 		$version = $D['version'];
-		$version_base = $D['version_base'];
+		$version_base = $D['schema'];
 		$compatible =  plugin2intervalle(extraire_bornes($D['compatibilite_paquet']));
 
 		$attributs =
@@ -224,7 +225,7 @@ function plugin2balise($D, $balise, $balises_spip='') {
 	}
 	else {
 		// Balise spip
-		$compatible =  plugin2intervalle(extraire_bornes($D['compatible']));
+		$compatible =  plugin2intervalle(extraire_bornes($D['compatibilite']));
 		$attributs =
 			($compatible ? " compatibilite=\"$compatible\"" : '');
 		// raz des balises non utilisees
@@ -234,10 +235,10 @@ function plugin2balise($D, $balise, $balises_spip='') {
 
 	// Toutes les balises techniques sont autorisees dans paquet et spip
 	$pipeline = is_array($D['pipeline']) ? plugin2balise_pipeline($D['pipeline']) :'';
-	$chemin = is_array($D['path']) ? plugin2balise_chemin($D) :'';
+	$chemin = is_array($D['chemin']) ? plugin2balise_chemin($D) :'';
 	$necessite = (is_array($D['necessite']) OR is_array($D['lib'])) ? plugin2balise_necessite($D) :'';
 	$utilise = is_array($D['utilise']) ? plugin2balise_utilise($D['utilise']) :'';
-	$bouton = is_array($D['bouton']) ? plugin2balise_exec($D, 'bouton') :'';
+	$bouton = is_array($D['menu']) ? plugin2balise_exec($D, 'menu') :'';
 	$onglet = is_array($D['onglet']) ? plugin2balise_exec($D, 'onglet') :'';
 
 	// On accumule dans un tableau les commandes de toutes les balises paquet et spip
@@ -303,6 +304,7 @@ function plugin2balise_commentaire($nom, $description, $slogan, $prefixe) {
 // - transformation en attribut des balises A
 // - interpretation des balises BR et LI et de la virgule et du espace+tiret comme separateurs
 function plugin2balise_copy($texte, $balise) {
+	include_spip('inc/lien');
 
 	// On extrait le multi si besoin et on selectionne la traduction francaise
 	$t = traiter_multi($texte);
@@ -419,7 +421,7 @@ function plugin2balise_pipeline($D) {
 function plugin2balise_chemin($D) {
 	$res = '';
 	$chemin_vide_trouve = false;
-	foreach($D['path'] as $i) {
+	foreach($D['chemin'] as $i) {
 		$t = empty($i['type']) ? '' : (" type=\"" . $i['type'] . "\"");
 		$p = $i['dir'];
 		if (!$t AND (!$p OR $p==='.' OR $p==='./')) {
@@ -477,9 +479,8 @@ function plugin2balise_utilise($D) {
 // Extraction des boutons et onglets
 function plugin2balise_exec($D, $balise) {
 	$res = '';
-	$balise_finale = ($balise=='bouton') ? 'menu' : $balise;
 	foreach($D[$balise] as $nom => $i) {
-		$res .= "\n\t<$balise_finale" .
+		$res .= "\n\t<$balise" .
 			" nom=\"" . $nom . "\"" .
 			plugin2attribut('titre', @$i['titre']) .
 			plugin2attribut('parent', @$i['parent']) .
@@ -609,8 +610,9 @@ function plugin2balise_migration($commandes, $plugin_xml) {
 // - formatage d'un attribut de balise
 
 // Expanse les multi en un tableau de textes complets, un par langue
-function traiter_multi($texte)
-{
+function traiter_multi($texte) {
+	include_spip('inc/filtres');
+
 	if (!preg_match_all(_EXTRAIRE_MULTI, $texte, $regs, PREG_SET_ORDER))
 		return array('fr' => $texte);
 	$trads = array();
