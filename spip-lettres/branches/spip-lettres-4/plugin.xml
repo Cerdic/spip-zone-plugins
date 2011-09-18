@@ -2,7 +2,7 @@
 <plugin>
 	<nom>SPIP-Lettres</nom>
 	<auteur>[Art&#233;go->http://www.artego.fr], Cedric Morin [->www.yterium.net]</auteur>
-	<version>4.5.16</version>
+	<version>4.6.0</version>
 	<version_base>4.4</version_base>
 	<etat>dev</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
@@ -80,6 +80,11 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>inc/lettres_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>styliser</nom>
+		<inclure>inc/lettres_pipelines.php</inclure>
+	</pipeline>
+
 
 	<bouton id="lettres_tous" parent="naviguer">
 		<icone>prive/images/lettre-24.png</icone>
@@ -105,6 +110,7 @@
 		<titre>lettresprive:lettres_information</titre>
 		<url>config_lettres_formulaire</url>
 	</bouton>
+
 
 	<onglet id="config_lettres_formulaire_top" parent="configuration">
 		<icone>prive/images/lettre-24.png</icone>

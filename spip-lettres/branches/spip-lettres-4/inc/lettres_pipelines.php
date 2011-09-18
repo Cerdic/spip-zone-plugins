@@ -132,5 +132,26 @@
 		$taches_generales['lettres_surveillance'] = 300; // toutes les 5 minutes
 		return $taches_generales;
 	}
+	
+	function lettres_styliser($flux) {
+		// quand il y a une id_lettre en argument on va chercher l'éventuelle variante de squelette par rubrique
+		// une alternative à l'automatisme serait de comparer $fond = $flux['args']['fond'] avec toutes les squelettes concernés :
+		//   lettre_preview, lettre, 
+		//   et emails / lettre_html ($GLOBALS['meta']['spip_lettres_fond_lettre_html']), lettre_texte ($GLOBALS['meta']['spip_lettres_fond_lettre_html'])
+		//   et indirectement emails / lettre_titre, inc-haut, inc-bas...
+		if ( 	isset ($flux['args']['contexte']['id_lettre'])
+			// la rubrique de la lettre doit-elle être prioritaire vis a vis d'un éventuel id_rubrique déjà utilisable ?
+			// and (!isset ($flux['args']['id_rubrique']) OR !$flux['args']['id_rubrique'])
+			) {
+			$id_lettre = intval ($flux['args']['contexte']['id_lettre']);
+			
+			$id_rubrique = intval(sql_getfetsel ("id_rubrique", "spip_lettres", "id_lettre=$id_lettre"));
+//			spip_log ("lettre $id_lettre de la rubrique $id_rubrique", "_styliser");
+			
+			$flux['args']['id_rubrique'] = $id_rubrique;
+		};
+		return $flux;
+	}
+
 
 ?>
