@@ -116,7 +116,7 @@ function plugin2paquet($plugins) {
 			$plugins[$cle_min_min]['compatibilite_paquet'] = $plugins[$cle_min_min]['compatibilite'];
 	}
 	else {
-		// Cas de plusieurs balises plugin
+		// Cas de plusieurs balises plugin (limite a 2)
 		// -- On determine le bloc dont la borne min de compatibilite SPIP est la plus elevee
 		//     et celui dont la borne min est la moins elevee
 		// -- On construit l'intervalle de compatibilite maximal

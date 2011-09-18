@@ -31,17 +31,17 @@ une aide sur chaque balise de la nouvelle DTD.
 	</bouton>
 
 	<onglet id="plugonet_verifier" parent="plugonet">
-		<icone>prive/themes/spip/images/plugonet-verifier.png</icone>
+		<icone>images/plugonet-verifier.png</icone>
 		<titre>plugonet:onglet_verifier</titre>
 		<url>plugonet_verifier</url>
 	</onglet>
 	<onglet id="plugonet_generer" parent="plugonet">
-		<icone>prive/themes/spip/images/plugonet-generer.png</icone>
+		<icone>images/plugonet-generer.png</icone>
 		<titre>plugonet:onglet_generer</titre>
 		<url>plugonet_generer</url>
 	</onglet>	
 	<onglet id="plugonet_valider" parent="plugonet">
-		<icone>prive/themes/spip/images/plugonet-valider.png</icone>
+		<icone>images/plugonet-valider.png</icone>
 		<titre>plugonet:onglet_valider</titre>
 		<url>plugonet_valider</url>
 	</onglet>
