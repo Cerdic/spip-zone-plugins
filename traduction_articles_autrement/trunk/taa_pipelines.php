@@ -21,7 +21,7 @@ function taa_header_prive($flux){
 
 
 /*Prise en compte de la langue de traduction dans le traitement du formulaire edition_article*/ 
-function taa_pre_insertion($flux){
+/*function taa_pre_insertion($flux){
     if ($flux['args']['table']=='spip_articles'){
 		if($lang=_request('lang_dest')){
 			$flux['data']['lang'] =  $lang;
@@ -34,24 +34,8 @@ function taa_pre_insertion($flux){
 			}
     	}
 return $flux;
-}
+}*/
 
-/*Modifie l'affichage de l'article dans l'espace interne*/
- function taa_afficher_fiche_objet($flux){
-    $type = $flux['args']['type'];
-    
-	if($version = $GLOBALS['spip_version_branche']<3) {
-		if ($type=='article'){
-				$id_article= _request('id_article');
-				$barre=charger_fonction('barre_langues','inc');
-				$barre_langue=$barre($id_article);
-			
-				$flux['data'] =preg_replace('/<div class=\'boite_onglets\'/',$barre_langue.'<div id=\'boite_onglets\'',$flux['data']);
-				
-			}
-		}
-return $flux;
-}
 
 function taa_recuperer_fond($flux){
     if ($flux['args']['fond'] == 'prive/squelettes/contenu/article'){

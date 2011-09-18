@@ -8,13 +8,8 @@
 	padding:0; 
 }
 
-.onglets_traduction div.onglet, .changer div.onglet{
-	vertical-align: text-bottom;
-	 margin-right:2px; float:left;
-	  -moz-border-radius: 5px;
-	 -webkit-border-radius :5px;
-	 -khtml-border-radius :5px; 
-	 border-radius: 5px;
+.onglets_traduction li.box_onglet{
+
 }
 
 .changer div.onglet{background:#F2F2F2; font-style:italic;}
@@ -32,8 +27,8 @@
 	background:#ffffff;
 	height :auto;
 }
-
-div.non_traduit{background-color: #EEEEEE;font-style:italic;}
+.barre_onglet a,.barre_onglet strong  {padding:5px}
+.barre_onglet .non_traduit a{background:#eeeeee;font-style:italic;}
 
 .pagination{text-align:left;}
 

@@ -8,8 +8,7 @@ function inc_barre_langues_dist($id_article){
 	$virtuel = (strncmp($row["chapo"],'=',1)!==0) ? '' :
 	chapo_redirige(substr($row["chapo"], 1));
 		
-	if($version = $GLOBALS['spip_version_branche']<3) $objet='articles';
-	else $objet='article';	
+	$objet='article';	
 	
 	/*création des onglets traduction*/
 	
@@ -34,12 +33,7 @@ function inc_barre_langues_dist($id_article){
 		while($row=sql_fetch($sql)){
 			$traductions[$row['lang']]=$row['id_article'];
 			}
-			
-		// Le menu des options
-		$clic = _T('trad_delier');	
-		
-		// possibilité de délier l'article
-		$options = '<div class="options delier">'.icone_inline($clic, ajax_action_auteur("referencer_traduction","$id_article",$objet, "id_article=$id_article",array($clic)), "traductions-24.gif", "supprimer.gif",'right', false).'</div>';		
+					
 		
 		}
 	// L'article n'est pas traduit	
@@ -49,16 +43,6 @@ function inc_barre_langues_dist($id_article){
 		
 		// Seul l'aticle présent est pris dans l'array traductions
 		$traductions[$row['lang']]=$row['id_article'];
-		
-		// Le menu des options
-		$options =  '<div class="options form_lier"><h2>'._T('taa:lier_traduction').'</h2>'.redirige_action_auteur("referencer_traduction",
-			$id_article,
-			"articles&id_article=$id_article",
-			"id_article=$id_article",
-			("<label for='lier_trad'>" . _T('trad_lier') . "</label>" .
-			"\n<input type='text' class='fondl' name='lier_trad' id='lier_trad' size='5' />\n"),
-			_T('bouton_valider'),
-			" class='fondl'").'</div>';
 		}
 	
 	// Pour chaque langue présente on crée un bouton
@@ -79,7 +63,7 @@ function inc_barre_langues_dist($id_article){
 				if($traductions[$value]==$id_trad){
 					$span=$span_content;					
 					}
-				$onglets_traduction.='<div class="traduit onglet ajax">'.$span.'<a href="'.generer_url_ecrire($objet,'id_article='.$traductions[$value]).'">'.traduire_nom_langue($value).'</a></div>';					
+				$onglets_traduction.='<li class="traduit box_onglet ajax">'.$span.'<a href="'.generer_url_ecrire($objet,'id_article='.$traductions[$value]).'">'.traduire_nom_langue($value).'</a></li>';					
 			}
 			// Sinon on crée un nouvel article dans la langue souhaitée
 			else{
@@ -87,13 +71,13 @@ function inc_barre_langues_dist($id_article){
 				if ($trad_rub=test_plugin_actif('tradrub')) {
 					$id_rubrique_traduite=rubrique_traduction($value,$id_rubrique);
 					
-					$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';					
+					$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&id_rubrique='.$id_rubrique_traduite.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';					
 					
 					$section='oui';
 
 					}
 				else{
-					$onglets_traduction.= '<div class="non_traduit onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></div>';				
+					$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';				
 				}
 
 				
@@ -102,7 +86,7 @@ function inc_barre_langues_dist($id_article){
 				$action=redirige_action_auteur ('changer_langue',$id_article,$objet,"id_article=$id_article");
 				// Si le plugin traduction rubriques est activé on affiche pas les onglets changement de langue car la langue se change en modifiant la rubrique
 				if(!$section){
-					$changer_traduction.='<div class="lang onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></div>';					
+					$changer_traduction.='<li class="lang box_onglet"><a href="'.parametre_url($action,'changer_lang',$value).'">'.traduire_nom_langue($value).'</a></li>';					
 					}
 
 				}
@@ -112,7 +96,7 @@ function inc_barre_langues_dist($id_article){
 			if($traductions[$value]==$id_trad){
 					$span=$span_content;					
 					}
-			$onglets_traduction.='<div class="onglet_off on onglet">'.$span.traduire_nom_langue($value).'</div>';
+			$onglets_traduction.='<li class="box_onglet"><strong class="on">'.$span.traduire_nom_langue($value).'</strong></li>';
 			}
 		}
 	}

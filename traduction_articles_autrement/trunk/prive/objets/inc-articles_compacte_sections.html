@@ -24,7 +24,7 @@
 	<tbody>
 	<BOUCLE_liste_art(ARTICLES){id_rubrique?}{id_mot?}{id_auteur?}{where?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 	#SET{class,#COMPTEUR_BOUCLE|alterner{row_odd,row_even}}
-		<INCLURE{fond=prive/liste/inc-articles_row}{env}{trads=oui}{id_article}{class=#GET{class}}{ajax}/>
+		<INCLURE{fond=prive/objets/liste/inc-articles_row}{env}{trads=oui}{id_article}{class=#GET{class}}{ajax}/>
 	</BOUCLE_liste_art>
 	</tbody>
 </table>
