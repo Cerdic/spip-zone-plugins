@@ -19,7 +19,7 @@ $GLOBALS['index_aide_plugonet'] = array(
 	'paqxmlpath',
 	'paqxmlspip',
 	'paqxmlfoi',
-	'paqxmldtd'
+	'paqxmlexe'
 );
 
 // Version SPIP minimale quand un plugin ne le precise pas
