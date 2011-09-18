@@ -121,14 +121,14 @@ function plugin2paquet($plugins) {
 		//     et celui dont la borne min est la moins elevee
 		// -- On construit l'intervalle de compatibilite maximal
 		$cle_min_max = $cle_min_min = -1;
-		$borne_min_max = '1.9.0';
-		$borne_min_min = '4.0.0';
+		$borne_min_max = _PLUGONET_VERSION_SPIP_MIN;
+		$borne_min_min = _PLUGONET_VERSION_SPIP_MAX;
 		$compatibilite_paquet = '';
 		foreach ($plugins as $_cle => $_plugin) {
 			if (!$_plugin['compatibilite'])
-				$borne_min = '1.9.0';
+				$borne_min = _PLUGONET_VERSION_SPIP_MIN;
 			$bornes_spip = extraire_bornes($_plugin['compatibilite']);
-			$borne_min = ($bornes_spip['min']['valeur']) ? $bornes_spip['min']['valeur'] : '1.9.0';
+			$borne_min = ($bornes_spip['min']['valeur']) ? $bornes_spip['min']['valeur'] : _PLUGONET_VERSION_SPIP_MIN;
 			if (spip_version_compare($borne_min_max, $borne_min, '<=')) {
 				$cle_min_max = $_cle;
 				$borne_min_max = $borne_min;
@@ -668,11 +668,13 @@ function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 }
 
 function extraire_bornes($intervalle) {
+	include_spip('inc/plugin');
+
 	static $borne_vide = array('valeur' => '', 'incluse' => false);
 	$bornes = array('min' => $borne_vide, 'max' => $borne_vide);
 
 	if ($intervalle
-	AND preg_match(',^[\[\(]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-]*)[\]\)]$,Uis', $intervalle, $matches)) {
+	AND preg_match(_EXTRAIRE_INTERVALLE, $intervalle, $matches)) {
 		if ($matches[1]) {
 			$bornes['min']['valeur'] = trim($matches[1]);
 			$bornes['min']['incluse'] = ($intervalle{0} == "[");
@@ -702,9 +704,9 @@ function fusionner_intervalles($intervalle_a, $intervalle_b) {
 
 	// On initialise la borne min de chaque intervalle a 1.9.0 si vide
 	if (!$borne_a['min']['valeur'])
-		$borne_a['min']['valeur'] = '1.9.0';
+		$borne_a['min']['valeur'] = _PLUGONET_VERSION_SPIP_MIN;
 	if (!$borne_b['min']['valeur'])
-		$borne_b['min']['valeur'] = '1.9.0';
+		$borne_b['min']['valeur'] = _PLUGONET_VERSION_SPIP_MIN;
 
 	// On calcul maintenant :
 	// -- la borne min de l'intervalle fusionne = min(min_a, min_b)

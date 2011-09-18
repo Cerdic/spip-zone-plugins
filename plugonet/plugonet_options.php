@@ -22,4 +22,10 @@ $GLOBALS['index_aide_plugonet'] = array(
 	'paqxmldtd'
 );
 
+// Version SPIP minimale quand un plugin ne le precise pas
+// -- Version SPIP correspondant a l'apparition des plugins
+define('_PLUGONET_VERSION_SPIP_MIN', '1.9.0');
+// -- Pour l'instant on ne connait pas la borne sup exacte
+define('_PLUGONET_VERSION_SPIP_MAX', '3.0.99');
+
 ?>
