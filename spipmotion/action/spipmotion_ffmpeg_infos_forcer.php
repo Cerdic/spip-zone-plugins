@@ -25,7 +25,7 @@ function action_spipmotion_ffmpeg_infos_forcer_dist(){
 	suivre_invalideur("1");
 
 	if(_request('redirect')){
-		$redirect = urldecode(_request('redirect'));
+		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
 		redirige_par_entete($redirect);
 	}else{
 		redirige_par_entete(parametre_url(self(),'maj_infos','ok','&'));
