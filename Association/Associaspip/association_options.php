@@ -158,6 +158,7 @@ function association_header_prive($flux){
 function association_delete_tables($flux){
   spip_unlink(cache_meta('association_metas'));
 }
+
 // Filtre pour "afficher" ou "cacher" un bloc div
 // Utilise dans le formulaire cvt "editer_asso_comptes.html"
 function affichage_div($type_operation,$list_operation) {
@@ -165,7 +166,7 @@ function affichage_div($type_operation,$list_operation) {
 		$operations = explode('-', $list_operation);
 		$res = 'cachediv';
 		for($i=0;$i<count($operations);$i++) {
-			$operation = $GLOBALS['association_metas'][$operations[$i]];
+			$operation = $GLOBALS['association_metas']["classe_".$operations[$i]];
 			if($type_operation===$operation) {
 				$res = '';
 				break;
@@ -173,7 +174,7 @@ function affichage_div($type_operation,$list_operation) {
 		}
 	}
 	else {
-		$res = ($type_operation===$GLOBALS['association_metas'][$list_operation])?'':'cachediv';
+		$res = ($type_operation===$GLOBALS['association_metas']["classe_".$list_operation])?'':'cachediv';
 	}
 	return $res;
 }
