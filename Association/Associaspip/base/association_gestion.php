@@ -435,4 +435,11 @@ function association_maj_48466()
 	effacer_meta('indexation', 'association_metas');
 }
 $GLOBALS['association_maj'][48466] = array(array('association_maj_48466'));
+
+function association_maj_51602()
+{
+	sql_alter("TABLE spip_asso_membres ADD date_adhesion DATE AFTER id_asso");
+}
+$GLOBALS['association_maj'][51602] = array(array('association_maj_51602'));
+
 ?>
