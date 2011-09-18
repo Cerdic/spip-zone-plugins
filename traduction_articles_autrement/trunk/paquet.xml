@@ -3,15 +3,19 @@
 	   categorie="edition"
 	   version="1.0.0"
 	   etat="test"
-	   compatibilite="[3.0.0-alpha2;["
+	   compatibilite="[3.0.0-alpha2;3.0.*]"
 	   logo="img_pack/Translation-icon_32.png"
 	   schema="2.0.0"
 	   documentation="http://www.spip-contrib.net/Traductions-d-articles-autrement"
 	   >	
+
 	<nom>Traduction d'articles autrement</nom>
-	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>		
-	<licence>GPL 3</licence>	
+
+	<auteur lien="http://www.mychacra.net">Rainer Müller</auteur>	
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GPL 3</licence>
+
 	<traduire module="taa" reference="fr" gestionnaire="salvatore" />	
+
 	<pipeline nom="header_prive" inclure="taa_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="taa_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="taa_pipelines.php" />
