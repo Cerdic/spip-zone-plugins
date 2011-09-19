@@ -18,7 +18,7 @@
 			<table border="0" width="100%">
 			<BOUCLE_rub(RUBRIQUES){titre = '001. Distribution'}>
 			<B_paniers>
-				<BOUCLE_paniers(EVENEMENTS){id_rubrique}{age<0}{par date_debut}>
+				<BOUCLE_paniers(EVENEMENTS){id_rubrique}{par date_debut}>
 					[(#COMPTEUR_BOUCLE|alterner{'<tr>','','','',''})]
 						<td class="center">
 							<BOUCLE_paniers_distribution(AMAP_PANIERS){date_distribution=#DATE_DEBUT}{0,1}>
