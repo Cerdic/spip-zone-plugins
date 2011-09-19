@@ -20,6 +20,7 @@ function googleplus1_insert_head($flux){
 	if (intval($GLOBALS['spip_version_branche'])<3)
 	$flux .= googleplus1_css();
 
+	include_spip('inc/config');
 	$googleplus1_lang = lire_config('langue_site');
 	$flux .= '
 		<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
