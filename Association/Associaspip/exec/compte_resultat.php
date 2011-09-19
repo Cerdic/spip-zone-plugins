@@ -87,7 +87,7 @@ function compte_resultat_charges_produits($annee, $join, $sel, $having, $order, 
 	echo "<tr style='background-color: #DBE1C5;'>";
 	echo "<td width='10'><strong>&nbsp;</strong></td>";
 	echo "<td width='30'><strong>&nbsp;</strong></td>";
-	echo "<td><strong>" . (($class == '6') ? _T('asso:cpte_resultat_titre_charges') : _T('asso:cpte_resultat_titre_produits')) . "</strong></td>";
+	echo "<td><strong>" . (($class == $GLOBALS['association_metas']['classe_charges']) ? _T('asso:cpte_resultat_titre_charges') : _T('asso:cpte_resultat_titre_produits')) . "</strong></td>";
 	echo "<td width='50'><strong>&nbsp;</strong></td>";
 	echo "</tr>";
 	$quoi = (($class == $GLOBALS['association_metas']['classe_charges']) ? ("sum(depense) AS valeurs") : ("sum(recette) AS valeurs"));
