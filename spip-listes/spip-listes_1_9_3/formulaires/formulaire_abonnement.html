@@ -118,10 +118,12 @@
 		
 	-->]
 	<B_id_liste>
-	<BOUCLE_id_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{id_liste=#ENV{id_liste}} {0,(#ENV{mode_login}|?{1,0})}>
+	<BOUCLE_id_liste(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}
+							 {id_liste=#ENV{id_liste}}
+							 {0,(#ENV{mode_login}|?{1,0})}>
 		[<fieldset>
-			[<legend><span>(#TITRE)</span></legend>]
-			(#TEXTE)
+			<legend><span>(#TITRE)</span></legend>
+			#TEXTE
 		</fieldset>]
 	</BOUCLE_id_liste>
 	</B_id_liste>
@@ -132,7 +134,8 @@
 			<:spiplistes:abo_1_lettre:>
 			,<:spiplistes:listes_de_diffusion_:>})] : </span></legend>
 	<ul class='liste-des-listes'>
-	<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}{0,(#ENV{mode_login}|?{100,0})}>
+	<BOUCLE_listes(LISTES) {statut IN 'liste','pub_jour','pub_hebdo','pub_7jours','pub_mensul','pub_mois','pub_an'}
+						   {0,(#ENV{mode_login}|?{100,0})}>
 			[(#TOTAL_BOUCLE|=={1}|?{' ',''})
 			<li>
 			[<!--(#REM) 
