@@ -1,5 +1,7 @@
 <?php
 
+@define('_CS_AUTOBR_BR', '<br />');
+
 // pipeline pre_typo, appel automatique si defined('_CS_AUTOBR_RACC')
 function autobr_alinea($flux) {
 	while ($fin = strpos($flux, '</alinea>')) {
@@ -7,7 +9,7 @@ function autobr_alinea($flux) {
 		if(($deb = strpos($zone, '<alinea>'))!==false)	$zone = substr($zone, $deb + 8);
 		$flux = substr($flux, 0, $deb) 
 			// protection des echappement eventuels
-			. str_replace('@ABR@', 'base64', post_autobr(trim(str_replace('base64', '@ABR@', $zone)), '<br />')) 
+			. str_replace('@ABR@', 'base64', post_autobr(trim(str_replace('base64', '@ABR@', $zone)), _CS_AUTOBR_BR)) 
 			. substr($flux, $fin + strlen('</alinea>'));
 	}
 	return $flux;
@@ -18,7 +20,7 @@ function autobr_pre_propre($flux) {
 	// post_autobr() est une fonction de traitement qui possede son propre systeme d'echappement
 	// on traite, sauf si la balise alinea est detectee
 	if(defined('_CS_AUTOBR_TRAIT') && (!defined('_CS_AUTOBR_RACC') || strpos($flux, '<alinea>')===false))
-		$flux = cs_echappe_balises('html|code|cadre|frame|script|jeux', 'post_autobr', $flux, '<br />');
+		$flux = cs_echappe_balises('html|code|cadre|frame|script|jeux', 'post_autobr', $flux, _CS_AUTOBR_BR);
 	return $flux;
 }
 
