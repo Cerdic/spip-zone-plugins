@@ -68,12 +68,45 @@
 		return intval($id_parent);
 	}
 
-
+	// Traiter les raccourcis au moment de l'envoi, pour plus grande personnalisation du mail
+	// %%CHAMP%%
+	// %%CHAMP|texte sinon%%
+	// %%[texte avant(#CHAMP|filtre ou valeur sinon) texte après]%%
 	function lettres_remplacer_raccourci($raccourci, $valeur, $texte) {
 		$texte = str_replace('&nbsp;!', '!', $texte);
 		$texte = str_replace(' !', '!', $texte);
-		$motif_complexe = '`%%'.strtoupper($raccourci).'\|([^%]+)%%`';
-		$motif_simple = '`%%'.strtoupper($raccourci).'%%`';
+		
+		$$raccourci = strtoupper($raccourci);
+		
+		// i: insensible à la casse, s : capturer les fins de lignes. U : ungreedy
+		$motif_simple = "`%%$raccourci%%`i";
+		$motif_complexe = "`%%$raccourci\|([^%]+)%%`i";
+		$motif_calcul = "`%%\[(.*)\(#$raccourci(\|.*)\)(.*)\]%%`isU";
+
+		if (preg_match_all($motif_calcul, $texte, $regs, PREG_SET_ORDER)) {
+			foreach ($regs as $r) {
+				$avant = $r[1];
+				$pipe = $r[2];
+
+				$apres = $r[3];
+				$cherche = $r[0];
+				
+				if ($pipe) {
+					$filtre = trim($sinon=substr($pipe,1));
+					if (function_exists($filtre))
+						$remplace = $filtre($valeur);
+					else
+						$remplace = ($valeur ? $valeur : $sinon); // homogénéïté avec motif_complexe, surtout utile pour faire un sinon alors qu'il n'y a pas d'arguments pour les filtres
+				}
+				else
+					$remplace = $valeur;
+
+				if ($remplace)
+					$texte = str_replace($cherche, $avant.$remplace.$apres, $texte);
+				else $texte = str_replace($cherche, "", $texte);
+			}
+		}
+
 		if (preg_match_all($motif_complexe, $texte, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $r) {
 				$sinon = $r[1];
@@ -89,7 +122,7 @@
 			foreach ($regs as $r) {
 				$cherche = $r[0];
 				$remplace = $valeur;
-				$texte = str_replace($cherche, $remplace, $texte);
+				$texte = str_replace ($cherche, $remplace, $texte);
 			}
 		}
 		return $texte;
