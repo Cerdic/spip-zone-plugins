@@ -19,20 +19,35 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_en_bas' => 'En bas de chaque page',
 	'cfg_exemples' => 'Exemples (sur les squelettes dist) :',
 	'cfg_explication_boite_info' => 'Ici vous pouvez choisir les sites de partages de vos articles.',
-	'cfg_inserer' => 'Ins&#233;rer le bloc social-tags en-dessous du bloc suivant :',
+	'cfg_inserer' => 'Insérer le bloc social-tags en-dessous du bloc suivant :',
 	'cfg_insertion' => 'Insertion dans les pages :',
 	'cfg_liste_site' => 'Liste des sites sociaux',
 	'cfg_plusone' => 'Google plus one',
 	'cfg_plusone_existe' => 'Pour activer Google+1, installer le plugin (<a href="http://www.spip-contrib.net/Google-1" class="spip_out">aide sur spip-contrib</a>).',
-	'cfg_referer' => 'N\'afficher le badge et les boutons que pour les visiteurs originaires des sites concern&#233;s.',
-	'cfg_selector' => 'S&#233;lecteur :',
+	'cfg_referer' => 'N\'afficher le badge et les boutons que pour les visiteurs originaires des sites concernés.',
+	'cfg_selector' => 'Sélecteur :',
 	'cfg_sous_bloc' => 'Sous le bloc de titre des pages article',
-	'cfg_sous_div' => 'Sous la div nomm&#233;e id=socialtags',
+	'cfg_sous_div' => 'Sous la div nommée id=socialtags',
 	'cfg_titre_boite_info' => 'Configuration du plugin Social tags',
 	'cfg_titre_socialtags' => 'Social tags',
 	'cfg_tout_cocher' => 'Tout cocher',
-	'cfg_tout_decocher' => 'Tout d&#233;cocher',
+	'cfg_tout_decocher' => 'Tout décocher',
 
+	// D
+	'description_noisette' => 'Display the Facebook badge defined in the configuration page',
+
+	// N
+	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
+   'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
+	'noisette_label_titre_noisette' => 'Titre :',
+	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :',
+	'noisette_titre_perso' => 'Titre personnalisé',
+	'nom_noisette' => 'Badge Facebook',
+
+	// T
+	'titre_sur_facebook' => 'Sur Facebook',
+	'titre_mon_badge_facebook' => 'Mon badge facebook',
+	'titre_perso' => 'Titre personnalisé',
 
 );
 ?>

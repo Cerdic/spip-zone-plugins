@@ -33,5 +33,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_tout_cocher' => 'Check all',
 	'cfg_tout_decocher' => 'Uncheck all',
 
+	// D
+	'description_noisette' => 'Display press materials included in an article',
+
+	// N
+	'noisette_label_afficher_titre_noisette' => 'Display a title?',
+   'noisette_label_niveau_titre' => 'Choose the title level',
+	'noisette_label_titre_noisette' => 'Title:',
+	'noisette_label_titre_noisette_perso' => 'If custom title:',
+	'noisette_titre_perso' => 'Custom title',
+	'nom_noisette' => 'Facebook badge',
+
+	// T
+	'titre_sur_facebook' => 'On Facebook',
+	'titre_mon_badge_facebook' => 'My Facebook badge',
+	'titre_perso' => 'Custom title',
+
+
 );
 ?>

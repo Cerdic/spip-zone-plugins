@@ -1,0 +1,40 @@
+nom: '<:socialtags:nom_noisette:>'
+description: '<:socialtags:description_noisette:>'
+icon: 'socialtags-fb-24.png'
+parametres:
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_titre_noisette'
+      label: '<:socialtags:noisette_label_afficher_titre_noisette:>'
+      defaut: ''
+  -
+    saisie: 'selection'
+    options:
+      nom: 'titre_noisette'
+      label: '<:socialtags:noisette_label_titre_noisette:>'
+      defaut: 'socialtags:titre_sur_facebook'
+      cacher_option_intro: 'oui'
+      datas:
+        'socialtags:titre_sur_facebook': '<:socialtags:titre_sur_facebook:>'
+        'socialtags:titre_mon_badge_facebook': '<:socialtags:titre_mon_badge_facebook:>'
+        titre_perso: '<:socialtags:noisette_titre_perso:>'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
+  -
+    saisie: 'input'
+    options:
+      nom: 'titre_noisette_perso'
+      label: '<:socialtags:noisette_label_titre_noisette_perso:>'
+      afficher_si: '@afficher_titre_noisette@ == "on" && @titre_noisette@ == "titre_perso"'
+  -
+    saisie: 'selection'
+    options:
+      nom: 'niveau_titre'
+      label: '<:socialtags:noisette_label_niveau_titre:>'
+      defaut: 'h2'
+      cacher_option_intro: 'oui'
+      datas:
+        h1: 'h1'
+        h2: 'h2'
+        h3: 'h3'
+      afficher_si: '@afficher_titre_noisette@ == "on"'
