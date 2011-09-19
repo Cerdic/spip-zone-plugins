@@ -1,7 +1,7 @@
 <?php
 $GLOBALS['medias_exec_colonne_document'][] = 'evenements_edit';
 $GLOBALS['medias_liste_champs'][] = 'descriptif';
-function docs_logos_agenda2_post_edition($flux){return $flux}
+function docs_logos_agenda2_post_edition($flux){return $flux;}
 function docs_logos_agenda2_affiche_gauche($flux){
     if (($flux['args']['exec'] == 'evenements_edit')
 		AND $table = preg_replace(",_edit$,","",$flux['args']['exec'])
