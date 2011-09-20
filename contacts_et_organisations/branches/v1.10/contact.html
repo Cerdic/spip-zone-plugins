@@ -1,8 +1,0 @@
-<BOUCLE_contact(CONTACTS){id_contact}>
-<INCLURE{fond=structure}{env}{id_contact=#ENV{id_contact,#ID_ORGANISATION)}}{type=contact}{composition=#ENV{composition,#COMPOSITION}} />
-</BOUCLE_contact>
-</B_contact>
-
-[(#REM) Si aucun contact en parametre, j'appelle la page contact du formulaire de contact avancé ]
-<INCLURE{fond=structure}{env}{type=page}{composition=contact}/>
-<//B_contact>

@@ -1,8 +1,0 @@
-[(#VAL{inc/presentation}|include_spip|oui)]
-[(#CHEMIN{images/contact-24.png}
-	|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:contacts:lier_contact:>})],0})]
-#SET{rien,0}#SET{contact,0}
-	<div class='ajax'>
-	[(#FORMULAIRE_LIER_CONTACT{#ENV{id_organisation}, #ENV{redirect}})]
-	</div>
-[(#EVAL{true}|fin_cadre_relief)]
