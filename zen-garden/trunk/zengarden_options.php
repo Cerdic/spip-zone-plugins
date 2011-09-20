@@ -6,9 +6,6 @@
  */
 
 if (!defined('_DIR_PLUGIN_THEME')){
-	if (!defined('_DIR_THEMES'))
-		define('_DIR_THEMES',_DIR_RACINE."themes/");
-	
 	// si on est en mode apercu, il suffit de repasser dans l'espace prive pour desactiver l'apercu
 	if (test_espace_prive()){
 		if (isset($_COOKIE['spip_zengarden_theme'])){
@@ -16,6 +13,7 @@ if (!defined('_DIR_PLUGIN_THEME')){
 			spip_setcookie('spip_zengarden_theme',$_COOKIE['spip_zengarden_theme']='',-1);
 		}
 	}
+	// si le switcher est actif ou la globale var_theme
 	elseif(isset($GLOBALS['meta']['zengarden_switcher']) OR defined('_ZEN_VAR_THEME')){
 		if (!is_null($arg = _request('var_theme'))){
 			include_spip('inc/cookie');
@@ -36,9 +34,9 @@ if (!defined('_DIR_PLUGIN_THEME')){
 		// ou un theme est vraiment selectionne
 		(isset($GLOBALS['meta']['zengarden_theme']) AND $t = $GLOBALS['meta']['zengarden_theme'])
 	)
-	AND is_dir(_DIR_THEMES . $t)){
-		_chemin(_DIR_THEMES.$t);
-		$GLOBALS['marqueur'] = (isset($GLOBALS['marqueur'])?$GLOBALS['marqueur']:"").":$t";
+	AND is_dir(_DIR_RACINE . $t)){
+		_chemin(_DIR_RACINE . $t);
+		$GLOBALS['marqueur'] = (isset($GLOBALS['marqueur'])?$GLOBALS['marqueur']:"").":theme-$t";
 		// @experimental : sauver le nom du repertoire theme utilise
 		// a defaut de connaitre le vrai prefixe
 		if (!defined('NOM_THEME')) { define('NOM_THEME', basename($t));}

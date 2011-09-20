@@ -2,7 +2,7 @@
 <ul class='liste_items themes'>
 <BOUCLE_sel(POUR){tableau #ENV{themes}}{cle=#ENV{selection}}>
 <li class='item on'>
-[(#EVAL{_DIR_THEMES}|concat{#CLE,'/',#VALEUR{logo}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left}|inserer_attribut{alt,#VALEUR{nom}|typo|extraire_multi})]
+[(#EVAL{_DIR_RACINE}|concat{#CLE,'/',#VALEUR{logo}}|image_reduire{200,150}|inserer_attribut{class,spip_documents_left}|inserer_attribut{alt,#VALEUR{nom}|typo|extraire_multi})]
 <h2><:zengarden:theme_actif:></h2>
 <h3>[(#VALEUR{nom}|typo|extraire_multi)]</h3>
 <div class='descriptif'>[(#VALEUR{description}|propre)]</div>

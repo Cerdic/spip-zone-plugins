@@ -6,7 +6,7 @@
 <BOUCLE_themes(POUR){tableau #GET{themes}}{cle!=#ENV{selection}}{par tri}{pagination 20}>
 	<li class='theme'>
 		<div class="qTip target_leftMiddle tooltip_rightMiddle">
-		[(#EVAL{_DIR_THEMES}|concat{#CLE,'/',#VALEUR{logo}}
+		[(#EVAL{_DIR_RACINE}|concat{#CLE,'/',#VALEUR{logo}}
 		|image_reduire{#ENV{largeur_previsu,100},#ENV{hauteur_previsu,75}}
 		|inserer_attribut{class,''}
 		|inserer_attribut{alt,#VALEUR|table_valeur{nom}|typo|extraire_multi})]

@@ -6,6 +6,8 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined('_DIR_THEMES'))
+	define('_DIR_THEMES',_DIR_RACINE."themes/");
 
 function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false){
 	$themes = array();
@@ -15,19 +17,20 @@ function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false){
 	if (count($files)) {
 		$get_infos = charger_fonction('get_infos','plugins');
 		foreach($files as $k=>$file){
-			$files[$k] = substr(dirname($file),strlen($dir));
+			$files[$k] = substr(dirname($file),strlen(_DIR_RACINE));
 		}
 
-		$themes = $get_infos($files,false,$dir);
+		$themes = $get_infos($files,false,_DIR_RACINE);
 
-		foreach($themes as $dir=>$info){
+		foreach($themes as $d=>$info){
 			if ($info['categorie']!='theme'
 			  OR (!$tous AND $info['etat']!=='stable'))
-				unset($themes[$dir]);
+				unset($themes[$d]);
 			else
-				$themes[$dir]['tri'] = strtolower($dir);
+				$themes[$d]['tri'] = strtolower($dir);
 		}
 	}
+
 	return $themes;
 }
 
