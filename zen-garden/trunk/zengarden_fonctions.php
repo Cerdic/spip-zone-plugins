@@ -35,7 +35,33 @@ function zengarden_affiche_version_compatible($intervalle){
  */
 function 	zengarden_liste_themes($tous){
 	include_spip('inc/zengarden');
-	return zengarden_charge_themes(_DIR_THEMES,$tous);
+
+	$themes = array();
+
+	// charger les themes de themes/
+	if (is_dir(_DIR_THEMES))
+		$themes = array_merge($themes,zengarden_charge_themes(_DIR_THEMES,$tous));
+
+	// ceux de squelettes/themes/
+	if (is_dir($skels=_DIR_RACINE."squelettes/themes/"))
+		$themes = array_merge($themes,zengarden_charge_themes($skels,$tous));
+
+	// ceux de chaque  dossier_squelettes/themes/
+	if (strlen($GLOBALS['dossier_squelettes'])){
+		$s = explode(":",$GLOBALS['dossier_squelettes']);
+		foreach($s as $d){
+			if (_DIR_RACINE AND strncmp($d,_DIR_RACINE,strlen(_DIR_RACINE))!==0)
+				$d = _DIR_RACINE . $d;
+			if (is_dir($f="$d/themes/") AND $f!=$skels)
+				$themes = array_merge($themes,zengarden_charge_themes($f,$tous));
+		}
+	}
+
+	// ceux de plugins/
+	$themes = array_merge($themes,zengarden_charge_themes(_DIR_PLUGINS,$tous));
+
+	// et voila
+	return $themes;
 }
 
 
