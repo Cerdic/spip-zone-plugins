@@ -2,10 +2,12 @@
 
 Affichage de style accordéon (nécessite le plugin jQueryUI) 
 
+Le filtre typo sur le nom permet l'usage d'un champ multi.
+
 ]#SET{gids,#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Ids'},.*}}
 <B_groupes>
 <div class="cNavGroup">[(#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Titre'}}|!={non}|?{' '})
-  <div class="bloc-title bsize"><:mots_clefs:></div>
+  <div class="bloc-title bsize">(#VAR{#EVAL{'acsNavgroup'.'#NIC'.'Nom'},<:mots_clefs:>}|typo)</div>
   ]<BOUCLE_groupes(GROUPES_MOTS){id_groupe==^(#GET{gids})$}{par titre}{titre!==(_.*)}>
   <B_mots><div class="groups#NIC">  
   <h3 class="bloc-title bsize"><a href="#URL_GROUPE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>

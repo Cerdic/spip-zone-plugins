@@ -17,7 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'non' => 'No',
 
 	'fond' => 'Background',
-	'titrefond' => 'Title background',
+	'titrefond' => 'Title&nbsp;background',
 
   'bordcolor' => 'Border',
   'bordlargeur' => 'border width',
