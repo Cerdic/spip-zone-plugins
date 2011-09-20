@@ -1,6 +1,6 @@
 <?php
 
-define('_DIR_JQUERYUI_JS',_DIR_PLUGIN_JQUERYUI.'javascript/jquery-ui-1.8.16/ui/');
+define('_DIR_JQUERYUI_JS','javascript/jquery-ui-1.8.16/ui/');
 define('_DIR_JQUERYUI_CSS',_DIR_PLUGIN_JQUERYUI.'javascript/jquery-ui-1.8.16/themes/');
 
 /**
