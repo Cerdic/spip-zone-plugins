@@ -6,7 +6,7 @@ function tw_echappe_code_latex($code){
 function tw_code_latex($code){
 	$lang = strtolower($code[2]);
 		if ($lang == 'php'){
-		$options =	'[startinline]';	// Permet d'avoir le php coloré même sans <?php nécéssite la version 1.7 de minted.sty. À télécharger : http://minted.googlecode.com/hg/minted.sty . Mettre le fichier .sty à côté du fichier latex principal, à compiler. En attendant que l'auteur ait le temps de sortir la release
+		$options =	'[startinline]';	// Permet d'avoir le php coloré même sans <?php nécéssite la version 1.7 de minted.sty.
 	}
 	else 
 		$options = '';
