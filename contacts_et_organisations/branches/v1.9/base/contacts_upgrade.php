@@ -194,7 +194,60 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.4.2");
 	}
 
+	/*
+	Il s'agissait de supprimer spip_organisations_contacts
+	pour le mettre dans spip_organisations_liens...
+	ce qui s'est avere tres bugge un spip 2.1...
+	la version 1.6.0 fait l'inverse de 1.5.0 du coup, pour remettre dans l'ordre
 
+	if (version_compare($current_version,"1.5.0","<")){
+		$contacts = sql_allfetsel(array('id_contact', 'id_organisation','type_liaison'), 'spip_organisations_contacts', 'id_contact > 0');
+		if ($contacts) {
+			foreach ($contacts as $r) {
+				// possibilité d'erreur sql si la ligne est déjà là.
+				// rien de dramatique
+				sql_insertq('spip_organisations_liens', array(
+					'id_organisation' => $r['id_organisation'],
+					'id_objet' => $r['id_contact'],
+					'objet' => 'contact',
+                    'type_liaison' => $r['type_liaison'],
+				));
+			}
+		}
+		sql_drop_table('spip_organisations_contacts');
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.5.0");
+	}
+	*/
+
+	if (version_compare($current_version,"1.6.0","<")) {
+		include_spip('base/create');
+		// remettre spip_organisations_contacts si besoin
+		creer_base();
+		// repeupler
+		$contacts = sql_allfetsel(
+			array('id_objet AS id_contact', 'id_organisation', 'type_liaison'),
+			'spip_organisations_liens',
+			array('objet='.sql_quote('contact'), 'id_objet > 0'));
+		if ($contacts) {
+			$inserts = array();
+			foreach ($contacts as $r) {
+				$inserts[] = array(
+					'id_organisation' => $r['id_organisation'],
+					'id_contact' => $r['id_contact'],
+                    'type_liaison' => $r['type_liaison'],
+				);
+			}
+			if ($inserts) {
+				sql_insertq_multi('spip_organisations_contacts', $inserts);
+			}
+		}
+
+		// enlever les contacts de spip_organisations_liens
+		sql_delete('spip_organisations_liens', 'objet='.sql_quote('contact'));
+
+		ecrire_meta($nom_meta_base_version, $current_version="1.6.0");
+	}
 }
 
 
