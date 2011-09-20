@@ -250,7 +250,7 @@ function widgy($composant, $param, $label='', $indentation=0, $nic = '', $recurs
 	if (isset($GLOBALS['meta'][$cvn])) {
 		$lbl = $GLOBALS['meta'][$cvn];
 		$title = $label.($nic ? ' '.$nic : ''). ' ('.$lbl.')';
-		$lbl = str_replace(' ', '&nbsp;', couper($lbl, 18));
+		$lbl = str_replace(' ', '&nbsp;', couper(typo($lbl), 18));
 	}
 	else {
 		$lbl =  $label.($nic ? '&nbsp;'.$nic : '');
