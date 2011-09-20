@@ -16,8 +16,8 @@
 	<auteur lien="http://www.spip-contrib.net/?auteur1343">Olivier Gendrin</auteur>
 
 	<pipeline nom="ieconfig_metas" inclure="metas_ieconfig_metas.php" />
-	<pipeline nom="pre_propre" inclure="metas.php" />
-	<pipeline nom="affiche_milieu" action="formulaire" inclure="metas.php" />
+	<pipeline nom="pre_propre" inclure="metas_fonctions.php" />
+	<pipeline nom="affiche_milieu" inclure="metas_pipelines.php" />
 	<pipeline nom="declarer_tables_interfaces" inclure="base/metas.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/metas.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/metas.php" />

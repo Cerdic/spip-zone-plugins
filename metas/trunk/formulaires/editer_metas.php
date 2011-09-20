@@ -16,10 +16,11 @@ include_spip('inc/actions');
 include_spip('inc/editer');
 
 /**
- * @param string $id_meta
+ * @param $objet
+ * @param $id_objet
  * @return
  */
-function formulaires_editer_metas_charger_dist($id_meta='new'){
+function formulaires_editer_metas_charger_dist($objet,$id_objet){
 	$valeurs ;
 	return $valeurs;
 }
