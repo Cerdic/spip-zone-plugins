@@ -20,14 +20,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'item_mots_cles_association_auteurs' => 'aux auteurs',
 	'item_mots_cles_association_documents' => 'aux documents',
 		
-	// L
-	'liste_mots' => 'Liste des mots cl&eacute; attribu&eacute;s &agrave; cet auteur.',
+
 
 	// O
 	'objet_auteurs' => 'Auteurs',
 	
 	// T
 	'titre_mots' => 'Mots cl&eacute;',
+	'titre_mot_auteurs' => 'Les auteurs li&eacute;s &agrave; ce mot-cl&eacute;',
+	'titre_mot_documents' => 'Les documents li&eacute;s &agrave; ce mot-cl&eacute;',
 	
 );
 

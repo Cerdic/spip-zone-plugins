@@ -5,10 +5,10 @@
 	<icon>images/tag_purple-32.png</icon>
 	
 	<licence>GNU/GPL</licence>
-	<version>0.4.3</version>
+	<version>1.0.0</version>
 	<version_base>0.2</version_base>
 	
-	<etat>test</etat>
+	<etat>stable</etat>
 	<lien></lien>
 	
 	<description>
@@ -78,6 +78,7 @@
 
 	
 	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="afficher_objets" version="[1.2.0;]" />
 
 	<categorie>navigation</categorie>
 

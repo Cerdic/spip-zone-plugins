@@ -22,6 +22,7 @@ class declaration_liaison_mots {
 	var $pluriel = ''; // 'auteurs'
 	var $libelle_objet = ''; // 'mots_objets:objet_auteurs' 	= 'Auteurs'
 	var $libelle_liaisons_objets = ''; // 'mots_objets:item_mots_cles_association_auteurs'	= 'aux auteurs'
+	var $titre_mot_objets = ''; // 'mots_objets:titre_mot_objets'	= 'Les auteurs lies a ce mot-clé'
 
 	var $squelette_liste = ''; // 'auteurs' (prive/liste/auteurs) (avec plugin afficher_objets)
 	
@@ -65,6 +66,7 @@ function gouverneur_de_mots() {
 				'pluriel'   => "mots_objets:info_nombre_auteurs",
 				'libelle_objet' => "mots_objets:objet_auteurs",
 				'libelle_liaisons_objets' => "mots_objets:item_mots_cles_association_auteurs",
+				'titre_mot_objets' => "mots_objets:titre_mot_auteurs",
 			)),
 			
 			'documents' => new declaration_liaison_mots('documents', array(
@@ -74,6 +76,7 @@ function gouverneur_de_mots() {
 				'pluriel'   => "medias:des_documents", //"mediatheque:des_documents",
 				'libelle_objet' => "medias:objet_documents",
 				'libelle_liaisons_objets' => "mots_objets:item_mots_cles_association_documents",
+				'titre_mot_objets' => "mots_objets:titre_mot_documents",
 			))
 		));
 

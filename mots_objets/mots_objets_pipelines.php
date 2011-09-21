@@ -22,6 +22,19 @@ function mots_objets_affiche_milieu($flux) {
 		$ou = mots_objets_get_affiche_milieu();
 	}
 
+	// afficher les listes de nouveaux objets sur la page de mots
+	if ($flux['args']['exec'] == 'mots_edit' AND !_request('edit')) {
+		foreach (gouverneur_de_mots() as $objet=>$desc) {
+			if (find_in_path("prive/listes/mots_$objet." . _EXTENSION_SQUELETTES)) {
+				$flux['data'] .= recuperer_fond("prive/listes/mots_$objet", array(
+					'id_mot' => $flux['args']['id_mot'],
+					'titre' => _T($desc->titre_mot_objets),
+				));
+			}
+		}
+	}
+
+	// afficher le formulaire de liaison de mots sur les nouveaux objets
 	// si on est sur une page ou il faut inserer les mots cles...
 	if (in_array($flux['args']['exec'], array_keys($ou))) {
 
