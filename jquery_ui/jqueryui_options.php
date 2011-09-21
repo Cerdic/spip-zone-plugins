@@ -1,7 +1,7 @@
 <?php
 
 define('_DIR_JQUERYUI_JS','javascript/jquery-ui-1.8.16/ui/');
-define('_DIR_JQUERYUI_CSS',_DIR_PLUGIN_JQUERYUI.'javascript/jquery-ui-1.8.16/themes/');
+define('_DIR_JQUERYUI_CSS','javascript/jquery-ui-1.8.16/themes/');
 
 /**
  * Fonction pour lister les ss-repertoires de themes/ de jQuery UI
@@ -10,9 +10,9 @@ define('_DIR_JQUERYUI_CSS',_DIR_PLUGIN_JQUERYUI.'javascript/jquery-ui-1.8.16/the
  */ 
 function jqueryui_array_themes() {
 	$Tthemes = array();
-    if ($pointeur = opendir('../'._DIR_JQUERYUI_CSS)) {  
+    if ($pointeur = opendir(find_in_path(_DIR_JQUERYUI_CSS))) {  
         while (false !== ($rep = readdir($pointeur))) {
-            if ($rep != "." AND $rep != ".." AND is_dir('../'._DIR_JQUERYUI_CSS.$rep)) {
+            if ($rep != "." AND $rep != ".." AND $rep != ".svn" AND is_dir(find_in_path(_DIR_JQUERYUI_CSS).$rep)) {
                 $Tthemes[$rep] = $rep;
             }
         }
@@ -20,7 +20,6 @@ function jqueryui_array_themes() {
     }
     if(!defined('_JQUERYUI_FORCER_CSS'))
     	$Tthemes['no_css'] = _T('jqueryui:cfg_no_css');
-    
 	return $Tthemes;
 }
 
