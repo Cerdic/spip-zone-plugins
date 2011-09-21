@@ -65,4 +65,13 @@ function 	zengarden_liste_themes($tous){
 }
 
 
+function zengarden_filtrer_liste_plugins($flux){
+	foreach($flux['data'] as $d=>$info){
+		if ($info['categorie']=='theme'){
+			unset($flux['data'][$d]);
+		}
+	}
+	return $flux;
+}
+
 ?>

@@ -1,7 +1,7 @@
 <paquet
 	prefix="zengarden"
 	categorie="maintenance"
-	version="2.2.0"
+	version="2.3.0"
 	etat="test"
 	compatibilite="[3.0.0-alpha2;["
 	logo="images/themes-32.png"
@@ -11,6 +11,7 @@
   <auteur lien='http://www.yterium.com'>Cedric Morin, Yterium</auteur>
 
 	<pipeline nom="affichage_final" />
+	<pipeline nom="filtrer_liste_plugins" inclure="zengarden_fonctions.php" />
 
 	<menu nom='zengarden' parent='menu_squelette' titre="zengarden:themes" icone="images/themes-16.png" />
 
