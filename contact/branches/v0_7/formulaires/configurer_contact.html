@@ -109,7 +109,7 @@
 			</BOUCLE_champs>
 		</ol>
 	</fieldset>
-[(#PLUGIN{porte_plume,version}|version_compare{'1.5','>='}|oui)
+[(#PLUGIN{porte_plume,version}|spip_version_compare{'1.5','>='}|oui)
 	<fieldset>
 		<legend><:contact:configuration_champs_message:></legend>
 		[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:contact:configuration_barre_impossible:></p>]

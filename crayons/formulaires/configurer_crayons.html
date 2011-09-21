@@ -22,7 +22,7 @@
 	<div class="choix">
 		<input type="checkbox" name="barretypo" class="checkbox"  value='on' id='barretypo'[ (#ENV{barretypo}|oui)checked="checked"] />
 		<label for='barretypo'><:crayons:label_activer_barre_typo:></label>
-		[(#PLUGIN{porte_plume,version}|version_compare{'1.5','>='}|oui)[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:crayons:activation_barre_impossible:></p>]]
+		[(#PLUGIN{porte_plume,version}|spip_version_compare{'1.5','>='}|oui)[<p class="attention">(#EVAL{PORTE_PLUME_PUBLIC}|non|ou{#CONFIG{barre_outils_public}|=={non}|oui})<:crayons:activation_barre_impossible:></p>]]
 	</div>
 </li>
 
