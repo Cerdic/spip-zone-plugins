@@ -55,7 +55,8 @@ function balise_ORGANISATIONS_dist($p) {
 // a modifier pour les appeler "dist"
 function trouve_prenom($id_auteur) {
 	
-	$prenom = sql_getfetsel("prenom","spip_contacts LEFT JOIN spip_contacts_liens ON (spip_contacts.id_contact=spip_contacts_liens.id_contact AND objet='auteur')", "id_objet=" . intval($id_auteur));
+	// $prenom = sql_getfetsel("prenom","spip_contacts LEFT JOIN spip_contacts_liens ON (spip_contacts.id_contact=spip_contacts_liens.id_contact AND objet='auteur')", "id_objet=" . intval($id_auteur));
+	$prenom = sql_getfetsel("prenom","spip_contacts", "id_auteur=" . intval($id_auteur));
 	
 	if (!empty($prenom))
 		return $prenom;
@@ -73,7 +74,8 @@ function balise_PRENOM_AUTEUR($p) {
 // a modifier pour les appeler "dist"
 function trouve_civilite($id_auteur) {
 	
-	$civilite = sql_getfetsel("civilite","spip_contacts LEFT JOIN spip_contacts_liens ON (spip_contacts.id_contact=spip_contacts_liens.id_contact AND objet='auteur')", "id_objet=" . intval($id_auteur));
+	// $civilite = sql_getfetsel("civilite","spip_contacts LEFT JOIN spip_contacts_liens ON (spip_contacts.id_contact=spip_contacts_liens.id_contact AND objet='auteur')", "id_objet=" . intval($id_auteur));
+	$civilite = sql_getfetsel("civilite","spip_contacts", "id_auteur=" . intval($id_auteur));
 	
 	if (!empty($civilite))
 		return $civilite;
