@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_organisations(ORGANISATIONS organisations_liens rubriques){id_rubrique=#ENV{id_rubrique}}{pagination, 10}{tri nom}>
+	<BOUCLE_organisations(organisations_liens organisations){objet=rubrique}{id_objet=#ID_RUBRIQUE}{pagination, 10}{tri nom}>
 		[(#REM) sur boucle pour le crayon ]
 		<tr class="[(#_organisations:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_ORGANISATION|generer_url_entite{organisation})]">[(#LOGO_RUBRIQUE|sinon{[<img src="(#CHEMIN{images/organisation-24.png})" alt="Picto organisation" class="spip_logos" />]}|image_reduire{20,26})]</a>
