@@ -121,11 +121,11 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<titre>contacts:bouton_repertoire</titre>
 	</onglet>
 	<onglet id='organisations' parent="contacts">
-		<icone>images/organisation-24.png</icone>
+		<icone>images/co_organisation-24.png</icone>
 		<titre>contacts:bouton_organisations</titre>
 	</onglet>
 	<onglet id='contacts' parent="contacts">
-		<icone>images/contact-24.png</icone>
+		<icone>images/co_contact-24.png</icone>
 		<titre>contacts:bouton_contacts</titre>
 	</onglet>
 	

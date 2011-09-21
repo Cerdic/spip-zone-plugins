@@ -22,8 +22,8 @@
 		<tbody>
 	<BOUCLE_resultats(AUTEURS){recherche #ENV{recherche_auteur}}{par points}{tout}{pagination 10}>
 		#SET{co,''}
-		<BOUCLE_o(ORGANISATIONS_LIENS){id_auteur}>#SET{co,images/organisation-24.png}</BOUCLE_o>
-		<BOUCLE_c(CONTACTS){id_auteur}>#SET{co,images/contact-24.png}</BOUCLE_c>
+		<BOUCLE_o(ORGANISATIONS_LIENS){id_auteur}>#SET{co,images/co_organisation-24.png}</BOUCLE_o>
+		<BOUCLE_c(CONTACTS){id_auteur}>#SET{co,images/co_contact-24.png}</BOUCLE_c>
 		<//B_o>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR

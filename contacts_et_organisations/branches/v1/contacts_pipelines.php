@@ -53,7 +53,7 @@ function contacts_afficher_contenu_objet($flux)
 				{
 					$texte = _T('contacts:contact_editer');
 					$lien = parametre_url(generer_url_ecrire('contact_edit', 'id_contact='.$id_contact), 'redirect' , $self);
-					$fond = find_in_path('images/contact-24.png');				
+					$fond = find_in_path('images/co_contact-24.png');				
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur" />' ;
 				}
 			}
@@ -68,7 +68,7 @@ function contacts_afficher_contenu_objet($flux)
 				{
 					$texte = _T('contacts:organisation_editer');
 					$lien = parametre_url(generer_url_ecrire('organisation_edit', 'id_organisation='.$id_organisation), 'redirect' , $self);
-					$fond = find_in_path('images/organisation-24.png');				
+					$fond = find_in_path('images/co_organisation-24.png');				
 					$bouton_edit = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur" />' ;
 				}
 			}
@@ -144,7 +144,7 @@ function contacts_affiche_gauche($flux){
 				{
 					$texte = _T('contacts:contact_creer');
 					$lien = generer_url_ecrire('contact_edit', 'new=oui&id_organisation='.$id_organisation.'&redirect='.$self);
-					$fond = find_in_path('images/contact-24.png');				
+					$fond = find_in_path('images/co_contact-24.png');				
 					$flux['data'] .= icone($texte, $lien, $fond, '', 'right') ;
 				}
 	
@@ -221,7 +221,7 @@ function contacts_affiche_milieu($flux){
 				{
 					$texte = _T('contacts:organisation_creer_fille');
 					$lien = generer_url_ecrire('organisation_edit', 'new=oui&id_parent='.$id_organisation.'&redirect='.$self);
-					$fond = find_in_path('images/organisation-24.png');				
+					$fond = find_in_path('images/co_organisation-24.png');				
 					$ajout = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur">'. $ajout ;
 				}
 
