@@ -33,7 +33,6 @@ function contacts_header_prive($flux)
 function contacts_afficher_contenu_objet($flux)
 {
 	if ($flux["args"]["type"] == "auteur") {
-	
 		$id = $flux["args"]["id_objet"];
 		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
 		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
@@ -116,8 +115,8 @@ function contacts_affiche_gauche($flux){
 	if ($flux['args']['exec'] == 'auteur_infos'){
 
 		$id = $flux["args"]["id_auteur"];
-		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
-		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
+		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur=' . intval($id));
+		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
 
 		if ($id_contact || $id_organisation)
 		{
@@ -139,6 +138,7 @@ function contacts_affiche_gauche($flux){
 	
 			else if ($id_organisation)
 			{
+				
 				// bouton "Créer un contact"
 				if ( autoriser('creer', 'contact') )
 				{
@@ -184,8 +184,8 @@ function contacts_affiche_milieu($flux){
 	if ($flux['args']['exec'] == 'auteur_infos')
 	{
 		$id = $flux["args"]["id_auteur"];
-		$id_contact = sql_getfetsel('id_contact', 'spip_contacts_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
-		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations_liens', array('objet=' . sql_quote('auteur'), 'id_objet=' . intval($id)));
+		$id_contact = sql_getfetsel('id_contact', 'spip_contacts', 'id_auteur=' . intval($id));
+		$id_organisation = sql_getfetsel('id_organisation', 'spip_organisations', 'id_auteur=' . intval($id));
 
 		if ( $id_contact || $id_organisation )
 		{
@@ -224,7 +224,7 @@ function contacts_affiche_milieu($flux){
 					$fond = find_in_path('images/organisation-24.png');				
 					$ajout = icone_inline($texte, $lien, $fond, '', 'right') . '<br class="nettoyeur">'. $ajout ;
 				}
-	
+
 			}
 
 			// portfolio documents

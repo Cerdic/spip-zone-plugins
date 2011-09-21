@@ -27,29 +27,13 @@ function action_creer_auteur_lie_dist($arg=null) {
 						"nom"		=>  $nom,
 						"statut"	=> "1comite"
 					));
-				sql_insertq("spip_contacts_liens", array(
-						"objet"      => "auteur",
-						"id_objet"   => $id_auteur,
-						"id_contact" => $arg[1],
+				sql_updateq("spip_contacts", 
+						array("id_auteur" => $id_auteur),
+						"id_contact =" . $arg[1],
 					));
 				break;
 
 			case 'organisation': 
-				/*
-				// Code pour quand on aura une liaison externe auteur/organisation
-				$organisation = sql_getfetsel("nom", "spip_organisations", "id_organisation=$arg[1]"); 
-				$nom = ltrim($organisation);
-				$id_auteur = sql_insertq("spip_auteurs", array (
-						"nom"				=>  $nom,
-						"statut"			=> "1comite"
-					));
-				sql_insertq("spip_organisations_liens", array(
-						"objet"      		=> "auteur",
-						"id_objet"   		=> $id_auteur,
-						"id_organisation" 	=> $arg[1],
-					));
-				break;
-				*/
 				
 				// Code pour le cas present ou le id_auteur est dans la table organisations...
 				$organisation = sql_getfetsel("nom", "spip_organisations", "id_organisation=$arg[1]"); 

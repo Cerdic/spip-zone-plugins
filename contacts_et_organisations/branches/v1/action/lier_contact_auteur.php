@@ -29,20 +29,10 @@ function action_lier_contact_auteur_post($id_contact, $id_auteur) {
 	$id_auteur = intval($id_auteur); // id_auteur peut valoir 0 pour une deliaison
 	$id_contact = intval($id_contact);
 	if ($id_contact) {
-		if (!$id_auteur) {
-			sql_delete('spip_contacts_liens', array(
-				'id_contact=' . $id_contact,
-				'objet=' . sql_quote('auteur')));
-		} else {
-			sql_insertq("spip_contacts_liens", array(
-				"objet"      => "auteur",
-				"id_objet"   => $id_auteur,
-				"id_contact" => $id_contact,
-			));
-		}
-
+		sql_updateq('spip_contacts', array('id_auteur' => $id_auteur), 'id_contact=' . $id_contact);
+	
 		include_spip('inc/invalideur');
-		suivre_invalideur("id='id_organisation/$id_organisation'");
+		suivre_invalideur("id='id_contact/$id_contact'");
 	}
 }
 

@@ -19,7 +19,7 @@
 	<tbody>
 	<BOUCLE_liste_contacts(CONTACTS)
 		{id_organisation?}{recherche ?}
-		{auteurs.statut == #ENV{statut,.*}}
+		{auteurs.statut ?= #ENV{statut,''}}
 		{tri #ENV{order,nom},#GET{defaut_tri}}{pagination #ENV{nb,20}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<BOUCLE_lien_contact(contacts_liens){id_contact}>

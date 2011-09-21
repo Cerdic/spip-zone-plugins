@@ -29,17 +29,7 @@ function action_lier_organisation_auteur_post($id_organisation, $id_auteur) {
 	$id_auteur = intval($id_auteur); // id_auteur peut valoir 0 pour une deliaison
 	$id_organisation = intval($id_organisation);
 	if ($id_organisation) {
-		if (!$id_auteur) {
-			sql_delete('spip_organisations_liens', array(
-				'id_organisation=' . $id_organisation,
-				'objet=' . sql_quote('auteur')));
-		} else {
-			sql_insertq("spip_organisations_liens", array(
-				"objet"      => "auteur",
-				"id_objet"   => $id_auteur,
-				"id_organisation" => $id_organisation,
-			));
-		}
+		sql_updateq('spip_organisations', array('id_auteur' => $id_auteur), 'id_organisation=' . $id_organisation);
 
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_organisation/$id_organisation'");

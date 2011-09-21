@@ -13,10 +13,12 @@ function contacts_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['organisations_contacts'] = 'organisations_contacts';
 	
 	// -- Liaisons organisations/auteurs, contacts/auteurs et organisations/contacts
+	$interface['tables_jointures']['spip_contacts'][]= 'auteurs';
 	$interface['tables_jointures']['spip_contacts'][]= 'contacts_liens';
-	$interface['tables_jointures']['spip_auteurs'][]= 'contacts_liens';
+	$interface['tables_jointures']['spip_auteurs'][] = 'contacts';
+	$interface['tables_jointures']['spip_organisations'][] = 'auteurs';
 	$interface['tables_jointures']['spip_organisations'][] = 'organisations_liens';
-	$interface['tables_jointures']['spip_auteurs'][]= 'organisations_liens';
+	$interface['tables_jointures']['spip_auteurs'][] = 'organisations';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'contacts';
 	$interface['tables_jointures']['spip_organisations_contacts'][]= 'organisations';
 	$interface['tables_jointures']['spip_contacts'][]= 'organisations_contacts';
@@ -50,6 +52,7 @@ function contacts_declarer_tables_principales($tables_principales){
 	$organisations = array(
 		"id_organisation" 	=> "bigint(21) NOT NULL auto_increment",
 		"id_parent"			=> "bigint(21) NOT NULL default 0",
+		"id_auteur"   		=> "bigint(21) NOT NULL default 0",
 		"nom" 				=> "tinytext DEFAULT '' NOT NULL",
         "statut_juridique"	=> "tinytext DEFAULT '' NOT NULL", // forme juridique : SA, SARL, association, etc.
         "identification"	=> "tinytext DEFAULT '' NOT NULL", // N° d'identification : SIRET, SIREN, N° TVA...
@@ -59,19 +62,22 @@ function contacts_declarer_tables_principales($tables_principales){
 		"maj"				=> "TIMESTAMP"
 		);
 	$organisations_key = array(
-		"PRIMARY KEY"		=> "id_organisation"
+		"PRIMARY KEY"		=> "id_organisation",
+		"KEY id_auteur"		=> "id_auteur",
 		);
-/*	$organisations_join = array(
+	$organisations_join = array(
 		// sinon (ORGANISATIONS){auteurs.statut = xxx} ne fonctionne pas...
 		// va comprendre...
-		"id_organisation" 	=> "id_organisation"
-	);*/
+		"id_organisation" 	=> "id_organisation",
+		"id_auteur" 	=> "id_auteur"
+	);
 	$tables_principales['spip_organisations'] =
-		array('field' => &$organisations, 'key' => &$organisations_key,/* 'join' => &$organisations_join*/);
+		array('field' => &$organisations, 'key' => &$organisations_key, 'join' => &$organisations_join);
 
 	//-- Table contacts ------------------------------------------
 	$contacts = array(
-		"id_contact"	=> "bigint(21) NOT NULL auto_increment", 
+		"id_contact"	=> "bigint(21) NOT NULL auto_increment",
+		"id_auteur"   	=> "bigint(21) NOT NULL default 0",
 		"civilite" 		=> "tinytext DEFAULT '' NOT NULL",
 		"nom" 			=> "tinytext DEFAULT '' NOT NULL",
 		"prenom"		=> "tinytext NOT NULL DEFAULT ''",
@@ -82,12 +88,14 @@ function contacts_declarer_tables_principales($tables_principales){
 		);
 	$contacts_key = array(
 		"PRIMARY KEY"	=> "id_contact",
+		"KEY id_auteur"	=> "id_auteur",
 		);
-/*	$contacts_join = array(
-		"id_contact" => "id_contact"
-	);*/
+	$contacts_join = array(
+		"id_contact" => "id_contact",
+		"id_auteur"  => "id_auteur"
+	);
 	$tables_principales['spip_contacts'] =
-		array('field' => &$contacts, 'key' => &$contacts_key, /*'join' => &$contacts_join*/);
+		array('field' => &$contacts, 'key' => &$contacts_key, 'join' => &$contacts_join);
 
 	return $tables_principales;
 

@@ -43,7 +43,8 @@ function insert_contact($id_auteur=0) {
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
 
 	$champs = array(
-		'nom' => $nom
+		'nom' => $nom,
+		'id_auteur' => $id_auteur
 	);
 	
 	// Envoyer aux plugins
@@ -55,7 +56,6 @@ function insert_contact($id_auteur=0) {
 	));
 
 	$id_contact = sql_insertq("spip_contacts", $champs);
-	sql_insertq('spip_contacts_liens',array('id_objet' => $id_auteur,'objet' => 'auteur',"id_contact"=>$id_contact));
 	return $id_contact;
 }
 
@@ -65,7 +65,8 @@ function insert_organisation($id_auteur=0) {
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
 
 	$champs = array(
-		'nom' => $nom
+		'nom' => $nom,
+		'id_auteur' => $id_auteur
 	);
 	
 	// Envoyer aux plugins
@@ -77,7 +78,6 @@ function insert_organisation($id_auteur=0) {
 	));
 
 	$id_organisation = sql_insertq("spip_organisations", $champs);
-	sql_insertq('spip_organisations_liens',array('id_objet' => $id_auteur,'objet' => 'auteur',"id_organisation"=>$id_organisation));
 	return $id_organisation;
 }
 

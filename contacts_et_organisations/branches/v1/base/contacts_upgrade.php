@@ -94,30 +94,32 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.1");
 	}
 
-	if (version_compare($current_version,"1.3.2","<")){
+/*
+	// on utilise la table spip_contacts_liens
+	// pour stocker le id_auteur de spip_contacts
+    if (version_compare($current_version,"1.3.2","<")){
 		maj_tables('spip_contacts_liens');
-		$res = sql_select(array("id_auteur","id_contact"),"spip_contacts");
-		while ($row = sql_fetch($res)) {
-		    sql_insertq(
-		        'spip_contacts_liens',
-                array(
-                    "id_objet" => $row['id_auteur'],
-                    "objet" => "auteur",
-                    "id_contact" => $row['id_contact']
-                )
-		    );
+		$auteurs = sql_allfetsel(array('id_auteur', 'id_contacts'), 'spip_contacts', 'id_auteur > 0');
+		if ($auteurs) {
+			$inserts = array();
+			foreach ($auteurs as $r) {
+				// possibilité d'erreur sql si la ligne est déjà là.
+				// rien de dramatique
+				$inserts = array(
+					'id_contact' => $r['id_contact'],
+					'id_objet' => $r['id_auteur'],
+					'objet' => 'auteur',
+				);
+			}
+			if ($inserts) {
+				sql_insertq_multi('spip_contacts_liens', $inserts);
+			}
 		}
-
-		if (!sql_alter("TABLE spip_contacts DROP id_auteur")) {
-			spip_log('Probleme lors de la modif de la table spip_contacts','contacts');
-		} else {
-			spip_log('Table spip_contacts correctement passsée en version 1.3.2','contacts');
-		}
-
-		
-		spip_log('Tables correctement passsées en version 1.3.2','contacts');
+		sql_alter('TABLE spip_contacts DROP INDEX id_auteur');
+		sql_alter('TABLE spip_contacts DROP COLUMN id_auteur');
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.2");
-    }
+	}
+*/	
 
 	// le champ descriptif ne changeait pas sur les nouvelles installations (c'etait encore declare tinytext
     if (version_compare($current_version,"1.3.3","<")){
@@ -153,26 +155,32 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		maj_tables('spip_organisations_liens');
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.7");
 	}
-	
+
+/*	
 	// on utilise la table spip_organisations_liens
 	// pour stocker le id_auteur de spip_organisations
     if (version_compare($current_version,"1.4.0","<")){
 		$auteurs = sql_allfetsel(array('id_auteur', 'id_organisation'), 'spip_organisations', 'id_auteur > 0');
 		if ($auteurs) {
+			$inserts = array();
 			foreach ($auteurs as $r) {
 				// possibilité d'erreur sql si la ligne est déjà là.
 				// rien de dramatique
-				sql_insertq('spip_organisations_liens', array(
+				$inserts = array(
 					'id_organisation' => $r['id_organisation'],
 					'id_objet' => $r['id_auteur'],
 					'objet' => 'auteur',
-				));
+				);
+			}
+			if ($inserts) {
+				sql_insertq_multi('spip_organisations_liens', $inserts);
 			}
 		}
 		sql_alter('TABLE spip_organisations DROP INDEX id_auteur');
 		sql_alter('TABLE spip_organisations DROP COLUMN id_auteur');
 		ecrire_meta($nom_meta_base_version, $current_version="1.4.0");
 	}
+*/
 
 	// coquille sur la clé de spip_organisations_liens
 	if (version_compare($current_version,"1.4.1","<")){
@@ -184,8 +192,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 
 	// rajout d'un type_liaison dans les liens
 	if (version_compare($current_version,"1.4.2","<")){
-		maj_tables('spip_contacts_liens');
-		maj_tables('spip_organisations_liens');
+		maj_tables(array('spip_contacts_liens', 'spip_organisations_liens'));
         sql_alter('TABLE `spip_organisations_liens` DROP PRIMARY KEY');
         sql_alter('TABLE `spip_organisations_liens` ADD PRIMARY KEY ( `id_organisation` , `id_objet` , `objet`, `type_liaison`(25)) ');
         sql_alter('TABLE `spip_contacts_liens` DROP PRIMARY KEY');
@@ -203,15 +210,19 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	if (version_compare($current_version,"1.5.0","<")){
 		$contacts = sql_allfetsel(array('id_contact', 'id_organisation','type_liaison'), 'spip_organisations_contacts', 'id_contact > 0');
 		if ($contacts) {
+			$inserts = array();
 			foreach ($contacts as $r) {
 				// possibilité d'erreur sql si la ligne est déjà là.
 				// rien de dramatique
-				sql_insertq('spip_organisations_liens', array(
+				$inserts[] = array(
 					'id_organisation' => $r['id_organisation'],
 					'id_objet' => $r['id_contact'],
 					'objet' => 'contact',
                     'type_liaison' => $r['type_liaison'],
-				));
+				);
+			}
+			if ($inserts) {
+				sql_insertq_multi('spip_organisations_liens', $inserts);
 			}
 		}
 		sql_drop_table('spip_organisations_contacts');
@@ -248,6 +259,12 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 
 		ecrire_meta($nom_meta_base_version, $current_version="1.6.0");
 	}
+
+
+	if (version_compare($current_version,"1.7.0","<")) {
+		contacts_migrer_liens_auteurs();
+		ecrire_meta($nom_meta_base_version, $current_version="1.7.0");
+	}
 }
 
 
@@ -258,6 +275,41 @@ function contacts_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_organisations_contacts");	
 	
 	effacer_meta($nom_meta_base_version);
+}
+
+
+
+function contacts_migrer_liens_auteurs() {
+	// remettre id_auteur sur spip_contacts et spip_organisations
+	include_spip('base/create');
+	maj_tables(array('spip_contacts', 'spip_organisations'));
+	sql_alter('TABLE spip_contacts ADD INDEX (id_auteur)');
+	sql_alter('TABLE spip_organisations ADD INDEX (id_auteur)');
+
+	// pour chaque table, remettre les petits auteurs dans les tables
+	foreach (array('spip_contacts', 'spip_organisations') as $table) {
+		$_id = id_table_objet($table);
+		$auteurs = sql_allfetsel(
+			array($_id, 'id_objet AS id_auteur'),
+			$table . '_liens',
+			array('objet='.sql_quote('auteur'), 'id_objet > 0'));
+		if ($auteurs) {
+			// on supprime 1 par 1 en cas de timeout
+			foreach ($auteurs as $r) {
+				sql_updateq($table, array('id_auteur' => $r['id_auteur']), $_id . '=' . $r[$_id]);
+				sql_delete($table . '_liens',
+					array('objet='.sql_quote('auteur'), 'id_objet=' . $r['id_auteur'], $_id . '=' . $r[$_id]));
+			}
+			$auteurs = sql_allfetsel(
+				array($_id, 'id_objet AS id_auteur'),
+				$table . '_liens',
+				array('objet='.sql_quote('auteur'), 'id_objet > 0'));
+			if (!$auteurs) {
+				// enlever eventuellement des id_auteur = 0 ?
+				sql_delete($table . '_liens', 'objet='.sql_quote('auteur'));
+			} 
+		}
+	}
 }
 
 ?>
