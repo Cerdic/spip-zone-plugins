@@ -32,16 +32,15 @@ function formulaires_lier_objets_abonne_verifier($objet, $source, $id_source, $i
 
 function formulaires_lier_objets_abonne_traiter($objet, $source, $id_source, $identifiant){
 	$id_objet = _request('pid_objet');
-	include_spip('action/editer_contactabonnement');
+	include_spip('action/editer_contacts_abonnement');
 			$arg=array(
 				'id_auteur'=>$id_objet,
 				'objet'=>$source,
-				'table'=>"spip_".$source."s",
-				'ids' => array($id_source), //tjs envoyer un array
-				'statut'=>'offert',//puisque espace prive
+				'id_objet' => $id_source,
+				'statut_abonnement'=>'offert',//puisque espace prive
 				);
 
-			editer_contactabonnement($arg);
+			insert_contacts_abonnement($arg);
 	
 	return array(true,''); // permettre d'editer encore le formulaire
 }

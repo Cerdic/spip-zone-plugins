@@ -4,9 +4,9 @@
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:abo:liste_des_abonnements:>})</strong></caption>]
 	<thead>
-	<tr>
+	<tr>	<th><:abo:id:></th>
 		<th><:abo:label_titre:></th>
-		<th ><:abo:label_duree:></th>
+		<th><:abo:label_duree:></th>
 		<th><:abo:label_zones_ouvrir:></th>
 		<th><:abo:exact:></th>
 		<th><:abo:label_prix:></th>
@@ -14,8 +14,9 @@
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_abonnements(ABONNEMENTS){pagination 10}{par num titre}>
+	<BOUCLE_liste_abonnements(ABONNEMENTS){pagination 10}{par id_abonnement}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td>#ID_ABONNEMENT</td>
 			<td class="#EDIT{titre}" style="width:30%">#TITRE</td>
 			<td>#DUREE #PERIODE</td>
 			<td>

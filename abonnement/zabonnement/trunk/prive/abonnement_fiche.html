@@ -1,29 +1,43 @@
 #SET{today,#DATE}
-[(#SET{icone,[(#CHEMIN{images/abonnement_22.png}|url_absolue)]})]
-[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:abo:abonnements:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
-
-<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=abonnement}{par validite}>
-	<div class="liste-elements abos" style="background:#FFFFFF;font-size: 1em;padding: 0 1em;">
+<B_actifs>
+#ANCRE_PAGINATION
+<div id='contacts_#ENV{objet}_#ID_AUTEUR' class="liste-elements abonnement">
+<table class='spip liste'>
+	<tbody>
+<BOUCLE_actifs(CONTACTS_ABONNEMENTS){id_auteur}{objet=#ENV{objet}}{par validite}{pagination #ENV{nb,10}}>
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+	<td>
 	<BOUCLE_lib0(ABONNEMENTS){id_abonnement=#ID_OBJET}>
-	<p><strong><:abo:titre:></strong> : <a href="#URL_ECRIRE{abonnements}">#TITRE</a></p>
+	<p><strong><:abo:abonnement:></strong> : <a href="#URL_ECRIRE{abonnement_edit,id_abonnement=#ID_ABONNEMENT}">#TITRE</a></p>
 	</BOUCLE_lib0> 
 	<p><strong><:abo:statut_abonnement:></strong> : [(#VAL{abo:statut_#STATUT_ABONNEMENT}|_T)]</p>
 	<p><strong><:abo:echeance:></strong> : [(#VALIDITE|affdate)][ (#VALIDITE|<{#GET{today}}|oui) (<:abo:terme_echu:>)]</p>
 	<BOUCLE_quellecommande(COMMANDES_DETAILS){id_commandes_detail}>
 	<p><:abo:liaison_commande:><a href="#URL_ECRIRE{commandes}">#ID_COMMANDE</a></p>
 	</BOUCLE_quellecommande><!--<p><:abo:aucune_liaison_commande:></p>--><//B_quellecommande>
-	
-		<div style="float:right; text-align:right; width:30px; position:relative; top:-30px">
-		[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
-	[(#BOUTON_ACTION{
-			[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_abonnement:>})],
-			[(#URL_ACTION_AUTEUR{supprimer_contactabonnement,contactabonnement-#ID_AUTEUR-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
-			ajax,
-			<:abo:confirmer_supprimer_element:>})
-	]
-		]
-		</div>
-	</div>
+	</td>
+		<td class='action' style="vertical-align:bottom">
+			[(#AUTORISER{modifier,auteur,#ID_AUTEUR}|oui)
+				[(#BOUTON_ACTION{[(#CHEMIN{images/editer-16.png}
+					|balise_img{<:abo:modifier_abonnement:>})],
+					[(#URL_ECRIRE{contacts_abonnement_edit}
+						|parametre_url{id_contacts_abonnement,#ID_CONTACTS_ABONNEMENT}
+						|parametre_url{objet,#OBJET}
+						|parametre_url{id_objet,#ID_OBJET}
+						|parametre_url{retour,[(#ENV{retour,#SELF})]})],ajax})]
+						
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_abonnement:>})],
+					[(#URL_ACTION_AUTEUR{supprimer_contacts_abonnement,contacts_abonnement-#ID_CONTACTS_ABONNEMENT-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
+					ajax,
+					<:abo:confirmer_supprimer_element:>})]
+			]
+		</td>
+	</tr>
 </BOUCLE_actifs>
-[(#VAL{e}|fin_cadre)]
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_actifs>
 

@@ -1,0 +1,74 @@
+[(#VAL{inc/presentation}|include_spip|oui)]
+[(#SET{identifiant,[(#VAL{abonnements_#ID_AUTEUR})]})]
+[(#SET{icone,[(#CHEMIN{images/abonnement_22.png}|url_absolue)]})]
+[(#SET{plie,0})][(#SET{form,0})]
+[(#REM)
+	si on est en ajax, on peut recevoir un id_xx
+	pour afficher les formulaires correspondants
+]
+
+[(#ENV{objet}|=={abonnement}|ou{#ENV{objet}|=={rubrique}}|ou{#ENV{objet}|=={article}}|ou{#ENV{new}}|oui)
+	[(#SET{plie,1})]
+	[(#SET{form,1})]
+]
+
+[(#SET{retour,[(#ENV{retour,#SELF}
+		|parametre_url{id_contacts_abonnement,''}
+		)]})]
+
+[(#VAL{e}|debut_cadre{#GET{icone},'',[(#VAL{<:abo:abonnements:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})]})]
+
+	[(#INCLURE{fond=prive/abonnement_fiche, objet=abonnement, id_auteur, retour=#GET{retour}})]
+	[(#INCLURE{fond=prive/zaborubrique_fiche, objet=rubrique, id_auteur, retour=#GET{retour}})]
+	[(#INCLURE{fond=prive/zaboarticle_fiche, objet=article, id_auteur, retour=#GET{retour}})]
+ 	
+[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
+
+	[(#AUTORISER{modifier,auteur,#ENV{id_auteur}})
+
+		[(#GET{form}|oui)
+			[(#ENV{new}|=={abonnement}|ou{[(#ENV{objet}|=={abonnement})]}|oui)
+				<h3>[(#ENV{id_contacts_abonnement}|intval|?{<:abo:editer_abonnement:>,<:abo:nouvel_abonnement:>})]</h3>
+				<div class='ajax'>[(#FORMULAIRE_EDITER_CONTACTS_ABONNEMENT{#ENV{id_contacts_abonnement,new},abonnement,#ENV{id_objet},#ENV{id_auteur},#GET{retour}#abonnement_#ENV{id_contacts_abonnement},#ENV{page_envoi}})]</div>
+			]
+			[(#ENV{new}|=={rubrique}|ou{[(#ENV{objet}|=={rubrique})]}|oui)
+				<h3>[(#ENV{id_contacts_abonnement}|intval|?{<:abo:editer_rubrique:>,<:abo:abonner_rubrique:>})]</h3>
+				<div class='ajax'>[(#FORMULAIRE_EDITER_CONTACTS_ABONNEMENT{#ENV{id_contacts_abonnement,new},rubrique,#ENV{id_objet},#ENV{id_auteur},#GET{retour}#rubrique_#ENV{id_contacts_abonnement},#ENV{page_envoi}})]</div>
+			]
+			[(#ENV{new}|=={article}|ou{[(#ENV{objet}|=={article})]}|oui)
+				<h3>[(#ENV{id_contacts_abonnement}|intval|?{<:abo:editer_article:>,<:abo:abonner_article:>})]</h3>
+				<div class='ajax'>[(#FORMULAIRE_EDITER_CONTACTS_ABONNEMENT{#ENV{id_contacts_abonnement,new},article,#ENV{id_objet},#ENV{id_auteur},#GET{retour}#article_#ENV{id_contacts_abonnement},#ENV{page_envoi}})]</div>
+			]
+		]
+
+
+		<div class='boutons'>
+		[(#BOUTON_ACTION{[(#CHEMIN{images/abonnement-add-24.png}
+			|balise_img{<:abo:bouton_ajouter_contactabonnement:>}
+			|concat{' ',<:abo:bouton_ajouter_contactabonnement:>})],
+			[(#URL_ECRIRE{contacts_abonnement_edit}
+				|parametre_url{id_auteur,#ENV{id_auteur}}
+				|parametre_url{new,abonnement}
+				|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
+
+		[(#BOUTON_ACTION{[(#CHEMIN{images/rubrique-add-24.png}
+			|balise_img{<:abo:bouton_ajouter_contactabonnement_rubrique:>}
+			|concat{' ',<:abo:bouton_ajouter_contactabonnement_rubrique:>})],
+			[(#URL_ECRIRE{contacts_abonnement_edit}
+				|parametre_url{id_auteur,#ENV{id_auteur}}
+				|parametre_url{new,rubrique}
+				|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
+
+		[(#BOUTON_ACTION{[(#CHEMIN{images/article-add-24.png}
+			|balise_img{<:abo:bouton_ajouter_contactabonnement_article:>}
+			|concat{' ',<:abo:bouton_ajouter_contactabonnement_article:>})],
+			[(#URL_ECRIRE{contacts_abonnement_edit}
+				|parametre_url{id_auteur,#ENV{id_auteur}}
+				|parametre_url{new,article}
+				|parametre_url{retour,[(#GET{retour,#SELF})]})],ajax})]
+		</div>
+	]
+
+[(#GET{plie}|fin_block)]
+[(#VAL{e}|fin_cadre)]
+

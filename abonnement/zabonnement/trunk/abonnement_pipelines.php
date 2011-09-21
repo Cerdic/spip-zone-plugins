@@ -58,51 +58,8 @@ function abonnement_inserer_javascript($flux){
 // espace public
 // si sql spip_commandes_details => gerer l'abonnement aux objets avec statut_commande repris
 function abonnement_post_insertion($flux){
-	//pour les details (a la modif de la commande)
-	if (
-		$flux['args']['table'] == 'spip_commandes'
-		and ($id_commande = intval($flux['args']['id_objet'])) > 0
-		and ($id_auteur = intval($flux['data']['id_auteur'])) > 0
-	){
-			
-		//statut de la commande
-		$statut=$flux['data']['statut'];
-		
-		if (_DEBUG_ABONNEMENT) spip_log("a_p_i id_commande=$id_commande statut=$statut pour auteur=$id_auteur",'abonnement');
-		
-		// si dans les details de la commande il y a abonnement, article ou rubrique en objet
-		$objets=array('article','rubrique','abonnement');
-		foreach($objets as $objet){
-			if (_DEBUG_ABONNEMENT) spip_log("a_p_i objet= $objet",'abonnement');		
-
-			$commande_abos = sql_allfetsel(
-				'*',
-				'spip_commandes_details',
-				'id_commande = '.$id_commande." AND objet='$objet'"
-			);
-			
-				// Pour chaque commande contenant article ou rubrique en objet
-				foreach($commande_abos as $abo){
-
-					$arg=array(
-						'id_auteur'=>$id_auteur,
-						'objet'=>$abo['objet'],
-						'table'=>"spip_".$objet."s",
-						'ids' => array($abo['id_objet']), //tjs envoyer un array
-						'prix'=>$abo['prix_unitaire_ht'],
-						'duree'=>3,
-						'periode'=>'jour',
-						'id_commandes_detail'=>$abo['id_commandes_detail'],
-						'statut'=>$statut,
-						);
-
-					include_spip('action/editer_contactabonnement');
-					editer_contactabonnement($arg);
-				}
-		}
-
-	}
-	//pour les details (au passage de panier2commande)
+	
+	//pour les details (voir panier2commande) a la creation des details de la commande
 	if (
 		$flux['args']['table'] == 'spip_commandes_details'
 		and ($id_commande_detail = intval($flux['args']['id_objet'])) > 0
@@ -124,23 +81,62 @@ function abonnement_post_insertion($flux){
 			$id_objet=$flux['data']['id_objet'];
 			$prix=$flux['data']['prix_unitaire_ht'];
 			
-		if (_DEBUG_ABONNEMENT) spip_log("a_p_i id_auteur=".$commande['id_auteur']." $statut pour objet = $objet id_commande_detail= $id_commande_detail",'abonnement');
+		if (_DEBUG_ABONNEMENT) spip_log("flux details id_auteur=".$commande['id_auteur']." $statut pour objet = $objet id_commande_detail= $id_commande_detail",'abonnement');
 
 					$arg=array(
 						'id_auteur'=>$commande['id_auteur'],
 						'objet'=>$objet,
-						'table'=>"spip_".$objet."s",
-						'ids' => array($id_objet), //tjs envoyer un array
-						'prix'=>$prix,
-						'duree'=>3,
-						'periode'=>'jour',
+						'id_objet' => $id_objet,
 						'id_commandes_detail'=>$id_commande_detail,
-						'statut'=>$commande['statut'],
+						'statut_abonnement'=>$commande['statut'],
 						);
-
-					include_spip('action/editer_contactabonnement');
-					editer_contactabonnement($arg);
+					include_spip('action/editer_contacts_abonnement');
+					insert_contacts_abonnement($arg);
 		}
+	}
+	
+	//pour les details a la modif de la commande
+	if (
+		$flux['args']['table'] == 'spip_commandes'
+		and ($id_commande = intval($flux['args']['id_objet'])) > 0
+		and ($id_auteur = intval($flux['data']['id_auteur'])) > 0
+	){
+			
+		//statut de la commande
+		$statut=$flux['data']['statut'];
+		
+		if (_DEBUG_ABONNEMENT) spip_log("modif id_commande=$id_commande statut=$statut pour auteur=$id_auteur",'abonnement');
+		
+		// si dans les details de la commande il y a abonnement, article ou rubrique en objet
+		$objets=array('article','rubrique','abonnement');
+		foreach($objets as $objet){
+			if (_DEBUG_ABONNEMENT) spip_log("a_p_i objet= $objet",'abonnement');		
+
+			$commande_abos = sql_allfetsel(
+				'*',
+				'spip_commandes_details',
+				'id_commande = '.$id_commande." AND objet='$objet'"
+			);
+			
+				// Pour chaque commande contenant article ou rubrique en objet
+				foreach($commande_abos as $abo){
+					
+					$id_commandes_detail=$abo['id_commandes_detail'];
+					//$id_objet=$abo['id_objet'];
+					
+					//recupere id_contacts_abonnement si il existe
+					$contact_abo = sql_fetsel('id_contacts_abonnement,statut_abonnement', 'spip_contacts_abonnements', 'id_commandes_detail='.$id_commandes_detail);
+					
+					$id_contacts_abonnement=$contact_abo['id_contacts_abonnement'];
+					if (_DEBUG_ABONNEMENT) spip_log("pour id_contacts_abonnement = $id_contacts_abonnement on fait ".'id_commandes_detail='.$id_commandes_detail,'abonnement');
+
+					
+					//on institue le contacts_abonnement
+					$action = charger_fonction('instituer_contacts_abonnement', 'action');
+					$action($id_contacts_abonnement."-".$statut);
+				}
+		}
+
 	}
 
 return $flux;
@@ -151,9 +147,9 @@ return $flux;
 //espace prive
 //affiche les abonnements auxquels l'auteur est abonne (sur auteur_infos)
 function abonnement_affiche_milieu($flux){
-	if($flux['args']['exec'] == 'auteur_infos') {
-		$legender_auteur_supp = recuperer_fond('prive/abonnement_fiche',array('id_auteur'=>$flux['args']['id_auteur']));
-		$flux['data'] .= $legender_auteur_supp;
+	if($flux['args']['exec'] == 'auteur_infos' && $id_auteur=$flux['args']['id_auteur']) {
+		include_spip('inc/presentation');
+		$flux['data'] .= recuperer_fond('prive/boite/contacts_abonnements', array('page_envoi'=>'auteur_infos','id_auteur'=>$id_auteur), array('ajax'=>true));
 	}
 
 	if ($exec = $flux['args']['exec']){
@@ -183,8 +179,8 @@ function abonnement_affiche_milieu($flux){
 		}
 		if ($source && intval($id_source)) {
 	
-//todo a partir de source et id_source on essaie de retrouver les abonnes en cascade?
-//on les affichera avec l'icone de leur abonnement (article-rubrique-abonnement)?
+//a partir de source et id_source on retrouve les abonnes en cascade
+//on les affiche avec l'icone de leur abonnement (article-rubrique-abonnement)?
 
 		$contexte= array(
 			'objet' => 'auteurs',
@@ -206,12 +202,8 @@ include_spip('inc/autoriser');
 
 //affiche liste des abonnements pour s'abonner dans le formulaire d'un auteur
 function abonnement_editer_contenu_objet($flux){
-	if ($flux['args']['type']=='auteur') {
-		if (autoriser('modifier','abonnement')){
-		$abonnement = recuperer_fond('prive/abonnement_fiche_modif',array('id_auteur'=>$flux['args']['id']));
-		$flux['data'] = preg_replace('%(<li class="editer_pgp(.*?)</li>)%is', '$1'."\n".$abonnement, $flux['data']);
-		}
-	}
+
+	
 	return $flux;
 }
 
@@ -231,42 +223,13 @@ $flux['args']['action'] = modifier
  ne sert actuellement que dans le backoffice en 'cadeau' (statut paye sans lien a une commande = offert)
  */
 function abonnement_post_edition($flux){
-		
-	// lors de l'edition d'un auteur
-	if ($flux['args']['table']=='spip_auteurs') {
-		
-		//valable 3 jours, todo in config
-		$statut ='offert';
-		$duree = 3; 
-		$id_auteur=$flux['args']['id_objet'];
-		
-		$objets=array('article','rubrique','abonnement');
-		
-		foreach($objets as $objet){
-			$ids=_request($objet.'s');
-			if ($ids && is_array($ids)) {				
-				$args=array(
-				'id_auteur'=> $id_auteur,
-				'objet'=>$objet,
-				'table'=>"spip_".$objet."s",
-				'ids' => $ids,
-				'duree'=>$duree,
-				'statut'=>$statut
-				);
-				if (_DEBUG_ABONNEMENT) spip_log("APE args ".$args['table'] ." ids0=".$args['ids'][0],'abonnement');
-				include_spip('action/editer_contactabonnement');
-				editer_contactabonnement($args);
-			}	
-		}
-
-	}
 
 		
 //reprendre la meme fonction que post_insertion pour traiter les details de la commande
 		if (
 			$flux['args']['table'] == 'spip_commandes'
 		){
-		spip_log("abonnement_post_edition args ".join(",\n", $flux['args'])."data= ".join(",\n", $flux['data']),'commande');
+		if (_DEBUG_ABONNEMENT) spip_log("abonnement_post_edition args ".join(",\n", $flux['args'])." data= ".join(",\n", $flux['data']),'commande');
 		$flux = abonnement_post_insertion($flux);
 		}
 

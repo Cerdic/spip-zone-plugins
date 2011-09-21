@@ -1,0 +1,51 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_contacts_abonnement,nouveau}'>
+
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable}|oui)
+		<form method='post' action='[(#ENV{action})]'><div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<input type="hidden" name='id_contacts_abonnement' value='#ENV{id_contacts_abonnement}' />
+				<ul>
+				
+				[(#REM) si on cree un contacts_abonnement alors on cache]
+				[(#ENV{id_contacts_abonnement}|intval|oui)
+					[(#SAISIE{date, date, label=<:abo:date_debut:>})]
+					[(#SAISIE{date, validite, label=<:abo:date_fin:>})]
+				]
+				
+				[(#REM) si on modifie la fiche auteur on passe en hidden]
+				[(#ENV{page_envoi}|!={'auteur_infos'}|oui)
+				[(#SAISIE{input, id_auteur, label=<:abo:id_auteur:>})]
+				[(#SAISIE{input, objet, label=<:abo:objet:>})]
+				[(#SAISIE{input, stade_relance, label=<:abo:stade_relance:>})]
+				]
+				[(#ENV{page_envoi}|=={'auteur_infos'}|oui)
+				[(#SAISIE{hidden, id_auteur, label=<:abo:id_auteur:>})]
+				[(#SAISIE{hidden, objet, label=<:abo:objet:>})]
+				[(#SAISIE{hidden, stade_relance, label=<:abo:stade_relance:>})]
+				]
+				
+				[(#SAISIE{input, id_objet, label=[(#VAL{abo:id_#ENV{objet}}|_T)]})]
+				[(#SAISIE{selection, statut_abonnement, 
+					label=<:abo:statut_abonnement:>,
+					defaut=offert,
+					datas=#ARRAY{
+						offert,<:abo:statut_offert:>,
+						paye,<:abo:statut_paye:>,
+						encours,<:abo:statut_encours:>,
+						attente,<:abo:statut_attente:>
+							}})] 
+				
+
+				</ul>
+			[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+			<!--extra-->
+			<p class='boutons'>
+				<input type='submit' class='submit' name='enregistrer' value='<:bouton_enregistrer:>' />
+			</p>
+			
+		</div></form>
+	]
+</div>

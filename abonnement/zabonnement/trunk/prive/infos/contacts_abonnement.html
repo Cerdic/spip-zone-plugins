@@ -1,0 +1,19 @@
+<BOUCLE_contacts_abonnement_info(CONTACTS_ABONNEMENTS){id_contacts_abonnement=#ENV{id}}{tout}>
+<div class='infos'>
+	<div class='numero'>
+		<:abo:info_gauche_numero_contacts_abonnement:>
+		<p>#ID_CONTACTS_ABONNEMENT</p>
+	</div>
+
+	<div class='utilisation'>
+		<h4 style='margin:0.5em 0 0; font-weight:normal'><:abo:info_contacts_abonne:></h4>
+		<a href="[(#ID_AUTEUR|generer_url_entite{AUTEUR})]">#INFO_NOM{auteur,#ID_AUTEUR}</a>
+		<h4 style='margin:0.5em 0 0; font-weight:normal'><:abo:info_contacts_objet:></h4>
+		[(#OBJET) ]<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INFO_TITRE{#OBJET,#ID_OBJET}</a>
+		<h4 style='margin:0.5em 0 0; font-weight:normal'><:abo:info_contacts_commande_liee:></h4>
+		<BOUCLE_quellecommand(COMMANDES_DETAILS){id_commandes_detail}>
+				[<a href="#URL_ECRIRE{commande_voir,id_commande=#ID_COMMANDE}">(#ID_COMMANDE)</a>]#SET{id_commande,#ID_COMMANDE}
+		</BOUCLE_quellecommand><:abo:aucune_commande:><//B_quellecommand>
+	</div>
+</div>
+</BOUCLE_contacts_abonnement_info>
