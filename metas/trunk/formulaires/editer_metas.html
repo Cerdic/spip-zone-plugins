@@ -1,7 +1,8 @@
-<div class='formulaire_spip formulaire_editer formulaire_editer_metas formulaire_editer_metas-#ENV{id_meta,nouveau}'>
-	<!-- <br class='bugajaxie' /> -->
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+<div class="ajax formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+    <h3 class="titrem"><:metas:configuration_metas:></h3>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
 	[(#ENV{editable})
 	<form method='post' action='#ENV{action}'><div>
 		[(#REM) declarer les hidden qui declencheront le service du formulaire 
@@ -10,19 +11,21 @@
 	  <input type='hidden' name='id_meta' value='#ENV{id_meta}' />
 	  <ul>
 	    <li class="editer editer_titre obligatoire[ (#ENV**{erreurs}|table_valeur{titre}|oui)erreur]">
-				<label for="titre"><:metas:title_defaut_explication:></label>[
+				<label for="titre"><:metas:title:></label>[
 				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{titre})</span>
-				]<input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" />
+				]<p class="explication"><:metas:title_defaut_explication:></p>
+                <input type='text' class='text' name='titre' id='titre' value="[(#ENV**{titre})]" />
 	    </li>	
           <li class="editer editer_description[ (#ENV**{erreurs}|table_valeur{description}|oui)erreur]">
-                  <label for="description"><:metas:meta_description_defaut_explication:></label>[
+                  <label for="description"><:metas:meta_description:></label>[
                   <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{description})</span>
-                  ]<textarea name='description' id='description' rows='4' cols='40'>[(#ENV**{description})]</textarea>
+                  ]<p class="explication"><:metas:meta_description_defaut_explication:></p>
+              <textarea name='description' id='description' rows='4' cols='40'>[(#ENV**{description})]</textarea>
           </li>
           <li class="editer editer_keywords[ (#ENV**{erreurs}|table_valeur{keywords}|oui)erreur]">
-                  <label for="keywords"><:metas:meta_keywords_defaut_explication:></label>[
+                  <label for="keywords"><:metas:meta_keywords:></label>[
                   <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{keywords})</span>
-                  ]<textarea name='keywords' id='keywords' rows='4' cols='40'>[(#ENV**{keywords})]</textarea>
+                  ]<p class="explication"><:metas:meta_keywords_defaut_explication:></p><textarea name='keywords' id='keywords' rows='4' cols='40'>[(#ENV**{keywords})]</textarea>
           </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]

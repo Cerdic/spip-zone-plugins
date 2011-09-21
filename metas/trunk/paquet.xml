@@ -14,17 +14,22 @@
 
 	<auteur lien="http://www.spip-contrib.net/?auteur10451">Quentin de Serres-Justiniac</auteur>
 	<auteur lien="http://www.spip-contrib.net/?auteur1343">Olivier Gendrin</auteur>
-
+<!--
 	<pipeline nom="ieconfig_metas" inclure="metas_ieconfig_metas.php" />
 	<pipeline nom="pre_propre" inclure="metas_fonctions.php" />
+	-->
+
 	<pipeline nom="affiche_milieu" inclure="metas_pipelines.php" />
-	<pipeline nom="declarer_tables_interfaces" inclure="base/metas.php" />
+    <pipeline nom="declarer_tables_interfaces" inclure="base/metas.php" />
 	<pipeline nom="declarer_tables_principales" inclure="base/metas.php" />
 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/metas.php" />
 	<pipeline nom="autoriser" inclure="metas_autorisations.php" />
 
+    <!--
 	<utilise nom="Z" />
+-->
 
+    
     <!-- reste le menu mais je vois pas bien où on va le mettre , à faire plus tard
     <onglet id="metas" parent="configuration">		<icone>images/metas-24.png</icone>		<titre>metas:configuration_metas</titre>	</onglet>
     -->
