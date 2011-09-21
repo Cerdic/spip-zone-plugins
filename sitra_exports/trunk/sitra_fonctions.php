@@ -3,6 +3,7 @@
 /**
 teste si une copie locale existe pour les images principales
 obtenues à partir de l'archive zip
+$chemin n'est utilisé que pour l'affichage dans l'espace privé
 **/
 function url_image_locale($url='',$chemin=''){
 	if (!$url) return;
@@ -50,18 +51,6 @@ function sitra_lat_lon($data){
 	return str_replace(',', '.', $data);
 }
 
-
-/**
-balise #SITRA_AUJOURDHUI
-**/
-function sitra_aujourdhui() {
-	return date('Y-m-d 00:00:00');
-}
-
-function balise_SITRA_AUJOUDHUI_dist($p) {
-	$p -> code = 'sitra_aujourdhui()';
-	return $p;
-}
 
 // normalise les noms de categorie et de selection et autres
 function normalise_nom($text){
@@ -167,11 +156,11 @@ function sitra_expand_web($liste, $delim = ' - '){
 /**
 pour les horaires
 **/
-function sitra_heure_manif($date){
-	$h = 1*heures($date);
-	$m = minutes($date);
-	if ($m == '00')
-		$m = '';
+function sitra_heure($heure){
+	$h = 1*substr($heure,0,2);
+	$mim = substr($heure,3);
+	if ($mim == '00')
+		$mim = '';
 		
 	return $h.'h'.$m;
 }
@@ -224,18 +213,18 @@ function sitra_date_debut_fin($date_debut = '0000-00-00 00:00:00', $date_fin = '
 	$h_debut = $h_fin = '';
 	// horaires
 	if ($horaire == 'oui'){ 
-		$h_debut = sitra_heure_manif($date_debut);
-		$h_fin = sitra_heure_manif($date_fin);
+		$h_debut = affdate($date_debut,'H:i');
+		$h_fin = affdate($date_fin,'H:i');
 		
-		if ($h_debut != '0h'){
-			if ($h_fin == '0h')
+		if ($h_debut != '00:00'){
+			if ($h_fin == '00:00')
 				$h_fin = $h_debut;
 			if ($h_debut == $h_fin)
-				$text_fin = _T('sitra:heure_debut_a').' '.$h_debut;
+				$text_fin .= ' '._T('sitra:heure_debut_a').' '.sitra_heure($h_debut);
 			else {
-				$h_debut = _T('sitra:heure_debut_de').' '.$h_debut;
-				$h_fin = _T('sitra:heure_fin_a').' '.$h_fin;
-				$text_fin .= ' '.$h_debut.' '.$h_fin;
+				$h_debut = ' '._T('sitra:heure_debut_de').' '.sitra_heure($h_debut);
+				$h_fin = _T('sitra:heure_fin_a').' '.sitra_heure($h_fin);
+				$text_fin .= $h_debut.' '.$h_fin;
 			}
 		}
 	}
@@ -315,6 +304,7 @@ function sitra_date_UTC($date_debut = '0000-00-00 00:00:00', $date_fin = '0000-0
 	}
 	return $result;
 }
+
 /**
 détermine une date dans le passé ou l'avenir à partir d'une autre
 $date doit etre au format YYYY-MM-DD HH:MM:SS

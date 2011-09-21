@@ -100,6 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // S
 'selections' => 'Sélections',
 'selections_disponibles' => 'Sélections disponibles',
+'sitra' => 'SITRA',
 
 // T
 'titre_objet' => 'Titre',

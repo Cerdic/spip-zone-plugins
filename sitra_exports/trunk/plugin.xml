@@ -13,12 +13,12 @@
 	<!-- menu configuration -->
 	<bouton id="sitra_admin" parent="naviguer">
 		<icone>images/sitra-24.png</icone>
-		<titre>sitra:administration_sitra</titre>
+		<titre>sitra:sitra</titre>
 		<url>admin_sitra</url>
 	</bouton>
 	<bouton id="bando_sitra_admin" parent="bando_edition">
 		<icone>images/sitra-24.png</icone>
-		<titre>sitra:administration_sitra</titre>
+		<titre>sitra:sitra</titre>
 		<url>admin_sitra</url>
 	</bouton>
 	<!-- base -->
