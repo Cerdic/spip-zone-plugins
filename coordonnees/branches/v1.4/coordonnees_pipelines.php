@@ -78,7 +78,7 @@ function coordonnees_affiche_milieu($flux) {
 		// c'est un exec que l'on peut afficher
 		// verifions qu'il est coche dans la conf
 		$conf = unserialize($GLOBALS['meta']['coordonnees']);
-		if (in_array($type, $conf['objets'])) {
+		if (is_array($conf['objets']) AND in_array($type, $conf['objets'])) {
 			// on doit l'afficher
 			// seulement si on a un identifiant
 			if (!isset($_id)) {
