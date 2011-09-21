@@ -118,6 +118,7 @@ function formulaires_editer_metas_traiter_dist($objet, $id_objet)
 
 
     }
+    $res['editable']=true;
 
     return $res;
 }
