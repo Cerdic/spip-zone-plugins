@@ -27,4 +27,3 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'DeplierBasOver' => 'au survol'
 );
 ?>
-

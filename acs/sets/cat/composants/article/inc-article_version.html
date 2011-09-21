@@ -33,5 +33,5 @@
     que les documents associés à l'article soient visibles.
   ][(#VAR{acsDiapoUse}|!={oui}|?{" "})[(#INCLURE{fond=inc-documents}{id_article}{env})]]
 
-  [(#VAR{acsArticlesStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div class="stats nsize">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
+  [(#VAR{acsArticleStats}|=={oui}|?{[(#CONFIG{activer_statistiques}|=={oui}|?{' '}) <div class="stats nsize">[Lu par (#VISITES) personnes depuis le ] [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]</div>]})]
 </div>[(#REM) fin div article ]

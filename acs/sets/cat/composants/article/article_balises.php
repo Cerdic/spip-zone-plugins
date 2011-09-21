@@ -45,7 +45,7 @@ function affiche_diff($id_objet, $objet, $id_version, $format='complet', $id_dif
       'lang' => $GLOBALS['spip_lang']
   );
   $contexte = array_merge($contexte, $textes);
-  return recuperer_fond('composants/articles/inc-article_version', $contexte);
+  return recuperer_fond('composants/article/inc-article_version', $contexte);
 }
 
 /**

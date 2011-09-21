@@ -5,7 +5,7 @@
     ]</BOUCLE_articles_multiples>
   </B_articles_multiples>
     <B_article_unique><BOUCLE_article_unique(ARTICLES){id_rubrique}{0,1}{lang}>[(#TOTAL_BOUCLE|<{2}|?{' ',''})
-      <INCLURE{fond=composants/articles/article}{id_article=#ID_ARTICLE}{self}{env}{lang=#LANG}>]
+      <INCLURE{fond=composants/article/article}{id_article=#ID_ARTICLE}{self}{env}{lang=#LANG}>]
     </BOUCLE_article_unique>
       <INCLURE{fond=composants/rubrique/inc-rubrique}{lang=#LANG}{self}{env}{id_rubrique=#ID_RUBRIQUE}>
     <//B_article_unique>
