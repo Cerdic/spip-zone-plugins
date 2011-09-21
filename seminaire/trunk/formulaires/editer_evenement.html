@@ -61,6 +61,11 @@
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>
 			]<input type='text' class='text' name='lieu' id='lieu' value="[(#ENV{lieu})]" />
 	    </li>
+	    <li class="editer_adresse[ (#ENV**{erreurs}|table_valeur{adresse}|oui)erreur]">
+			<label for="adresse"><:agenda:evenement_adresse:></label>[
+			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{adresse})</span>
+			]<textarea name='adresse' rows='3' id='adresse'>[(#ENV{adresse})]</textarea>
+	    </li>
 	  </ul>
 	  [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
 	<!--extra-->
