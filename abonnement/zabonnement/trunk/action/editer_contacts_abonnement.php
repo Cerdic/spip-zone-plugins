@@ -209,9 +209,7 @@ function instituer_contacts_abonnement($id_contacts_abonnement, $c){
 	}
 	
 	
-
 	$champs['id_auteur'] = $id_auteur;
-	spip_log("date est ".$c['date'],'contacts_abonnement');
 
 	
 	// Envoyer aux plugins
