@@ -1,12 +1,11 @@
 <BOUCLE_article_corps(ARTICLES){id_article}>
 
-<!-- Affichage de l'article -->
+[(#REM) Affichage de l'article]
 
 <div class="groupetitre">
   [<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
   [<h2 class="#EDIT{titre}">(#TITRE|supprimer_numero)</h2>]
   [<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
-  <!--[<p class="auteur"><:par_auteur:> (#LESAUTEURS)[ - (#DATE|affdate_jourcourt)]</p>]-->
 </div>
 
 [<span class="vignette">(#LOGO_ARTICLE)</span>]
@@ -45,6 +44,6 @@
 </B_documents_joints>
 
 
-<!-- Fin de l'affichage de l'article -->
+[(#REM) Fin de l'affichage de l'article]
 
 </BOUCLE_article_corps>

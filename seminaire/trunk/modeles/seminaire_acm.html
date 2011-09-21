@@ -1,9 +1,10 @@
 <BOUCLE_vevent(EVENEMENTS){id_evenement=#ENV{id,#ENV{id_evenement}}}{tout}>
 <div class="vevent id_#ID_EVENEMENT">
 		<h3 class="summary">
+		[(#INSCRIPTION|?{' ',''})<p class="inscrits">#NB_INSCRITS[/(#PLACES) ]<:agenda:inscrits:></p>]
 			<ACM.[(#DATE_DEBUT|affdate{'Ymd'})]>
 			[(#DATE_DEBUT|agenda_affdate_debut_fin{#DATE_FIN,#HORAIRE,'hcal'}) - ][(#REM)date de l'evenement]
-			<ACM.nom><span class="#EDIT{name} name">#NAME</span> [- <span class="#EDIT{origin} origin">(#ORIGIN)</span>]</ACM.nom>[(#REM)nom de l'intervenant et etablissement d'origine]
+			<ACM.nom><span class="#EDIT{name} name">#NAME</span> [- <span class="#EDIT{origin} origin">(#ORIGIN)</span>]</ACM.nom>
 		</h3>
 		<ACM.titre>
 			<span class="#EDIT{titre} titre">#TITRE</span> [(#REM)titre de l'evenement]
