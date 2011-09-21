@@ -151,7 +151,7 @@ function balise_CSS_dist($p) {
 		$msg = array('zbug_balise_sans_argument',	array('balise' => ' CSS'));
 		erreur_squelette($msg, $p);
 	} else {
-		$p->code = "direction_css(find_in_path($_css))";
+		$p->code = "timestamp(direction_css(trouver_fond($_css)?produire_fond_statique($_css,array('format'=>'css')):find_in_path($_css)))";
 	}
 	$p->interdire_scripts = false;
 	return $p;
