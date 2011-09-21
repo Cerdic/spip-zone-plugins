@@ -24,7 +24,10 @@ function basecss_pied_de_biche($head){
  * @return string
  */
 function basecss_insert_head($flux){
-	$flux .= "<"."?php header(\"X-Spip-Filtre: basecss_pied_de_biche\"); ?".">";
+	if (!test_plugin_actif('Zcore')){
+		$flux .= "<"."?php header(\"X-Spip-Filtre: basecss_pied_de_biche\"); ?".">";
+	}
 	return $flux;
 }
+
 ?>
