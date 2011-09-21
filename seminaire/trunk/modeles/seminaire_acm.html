@@ -1,5 +1,5 @@
 <BOUCLE_vevent(EVENEMENTS){id_evenement=#ENV{id,#ENV{id_evenement}}}{tout}>
-<div class="vevent id_#ID_EVENEMENT">
+<div class="vevent id_#ID_EVENEMENT" id="hcalendar-event-title">
 		<h3 class="summary">
 		[(#INSCRIPTION|?{' ',''})<p class="inscrits">#NB_INSCRITS[/(#PLACES) ]<:agenda:inscrits:></p>]
 			<ACM.[(#DATE_DEBUT|affdate{'Ymd'})]>
@@ -11,13 +11,10 @@
 		</ACM.titre>
 		<ACM.msc>	
 			[<p class="#EDIT{abstract} abstract"><strong><:seminaire:abstract:> :</strong> (#ABSTRACT|propre|PtoBR)</p>][(#REM)abstract de l'evenement le filtre est là pour que les maths soient interprétés dans l'abstract (marche aussi avec le filtre typo)]
-			[<p class="#EDIT{lieu} lieu"><strong><:seminaire:lieu:> :</strong> (#LIEU|textebrut)</p>]
+			[<p class="lieu"><strong><:seminaire:lieu:> : </strong><span class="location #EDIT{lieu}">(#LIEU|textebrut)</span></p>]
 			[<p class="#EDIT{notes} notes"><strong><:seminaire:notes:> :</strong> (#CHAMP_SQL{notes}|typo)</p>][(#REM)NOTES reprenait les notes de l'article au lieu du champs note (merci marcimat) et typo plutôt que propre sinon passage à la ligne non désiré]
 		</ACM.msc>
 
 </div>
-
-
-
 </BOUCLE_vevent>
 <div class="espace"></div>
