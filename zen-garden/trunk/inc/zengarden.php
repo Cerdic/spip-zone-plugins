@@ -23,11 +23,13 @@ function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = fal
 		$t = $get_infos($files,$force,$dir);
 		$themes = array();
 
-		foreach($t as $d=>$info){
-			if ($info['categorie']=='theme'
-			  AND ($tous OR $info['etat']=='stable')){
-				$info['tri'] = strtolower($dir);
-				$themes[substr($dir.$d,strlen(_DIR_RACINE))] = $info;
+		foreach($files as $d){
+			if (isset($t[$d])){
+				if ($t[$d]['categorie']=='theme'
+				  AND ($tous OR $t[$d]['etat']=='stable')){
+					$t[$d]['tri'] = strtolower($dir);
+					$themes[substr($dir.$d,strlen(_DIR_RACINE))] = $t[$d];
+				}
 			}
 			unset($t[$d]);
 		}
