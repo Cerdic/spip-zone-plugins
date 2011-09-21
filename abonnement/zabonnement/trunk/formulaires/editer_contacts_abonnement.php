@@ -30,7 +30,21 @@ function formulaires_editer_contacts_abonnement_traiter_dist($id_contacts_abonne
 	// si redirection demandee, on refuse le traitement en ajax
 	if ($retour) refuser_traiter_formulaire_ajax();	
 	
-	return formulaires_editer_objet_traiter('contacts_abonnement', $id_contacts_abonnement, '', 0, $retour);	
+			//array des champs dates
+			$type_dates=array('date','validite');
+			
+			foreach ($type_dates as $type_date){
+				$date = _request($type_date);	
+				if($date){
+					list($jour, $mois, $annee) = explode('/',$date);
+					$date =$annee.'-'.$mois.'-'.$jour;
+					set_request($type_date,$date);
+					spip_log("commande_traiter pour id_commande=$id_commande $type_date = $date",'commande');
+					}		
+			
+			}
+			
+	return formulaires_editer_objet_traiter('contacts_abonnement', $id_contacts_abonnement, '', 0, $retour,'',$champs);	
 		
 }
 

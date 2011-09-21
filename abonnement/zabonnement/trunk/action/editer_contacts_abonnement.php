@@ -140,21 +140,6 @@ function contacts_abonnement_set($id_contacts_abonnement, $set=null) {
 	else
 		$c = $set;
 		
-				
-		//array des champs dates
-			$type_dates=array('date','validite');
-			
-			foreach ($type_dates as $type_date){
-				$date = $c[$type_date];	
-				if($date){
-					list($jour, $mois, $annee) = explode('/',$date);
-					$date =$annee.'-'.$mois.'-'.$jour;
-					$c[$type_date]=$date;
-					}	
-					
-			
-			}
-		
 
 	if (_DEBUG_ABONNEMENT) spip_log("contacts_abonnement_set ".join(' | ',$c),"contacts_abonnement");
 	
@@ -164,7 +149,7 @@ function contacts_abonnement_set($id_contacts_abonnement, $set=null) {
 	// Modification de statut
 	$c = array();
 	foreach (array(
-		'id_auteur', 'date', 'statut_abonnement', 
+		'id_auteur', 'date', 'validite', 'statut_abonnement', 
 	) as $champ)
 		$c[$champ] = _request($champ, $set);
 	$err .= instituer_contacts_abonnement($id_contacts_abonnement, $c);
@@ -226,6 +211,7 @@ function instituer_contacts_abonnement($id_contacts_abonnement, $c){
 	
 
 	$champs['id_auteur'] = $id_auteur;
+	spip_log("date est ".$c['date'],'contacts_abonnement');
 
 	
 	// Envoyer aux plugins
