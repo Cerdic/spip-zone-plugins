@@ -29,8 +29,8 @@ function action_creer_auteur_lie_dist($arg=null) {
 					));
 				sql_updateq("spip_contacts", 
 						array("id_auteur" => $id_auteur),
-						"id_contact =" . $arg[1],
-					));
+						"id_contact =" . $arg[1]
+					);
 				break;
 
 			case 'organisation': 
