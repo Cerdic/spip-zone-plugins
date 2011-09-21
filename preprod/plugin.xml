@@ -49,7 +49,9 @@
 		<url>preprod</url> 
 	</bouton>
 	
+	<necessite id="spip" version="[2.1;2.1.99]" />
 	<necessite id="ticketskiss" version="[1.0;]" />
+	<necessite id="livrables" version="[0.1;]" />
 	<necessite id="mediabox" version="[0.6.9;]" />
 	<necessite id="yaml" version="[1.5;]" />
 	
