@@ -59,10 +59,20 @@ $GLOBALS['formulaires']['editer_formulaire'] = array(
 			'datas' => array(
 				'formulaire' => _T('formidable:editer_apres_choix_formulaire'),
 				'valeurs' => _T('formidable:editer_apres_choix_valeurs'),
-				'rien' => _T('formidable:editer_apres_choix_rien')
+				'rien' => _T('formidable:editer_apres_choix_rien'),
+				'redirige' => _T('formidable:editer_apres_choix_redirige'),
 			),
 			'defaut' => 'formulaire',
 			'cacher_option_intro' => 'on'
+		)
+	),
+	array(
+		'saisie' => 'input',
+		'options' => array(
+			'nom' => 'url_redirect',			
+			'label' => '<:formidable:editer_redirige_url:>', 
+			'explication' => '<:formidable:editer_redirige_url_explication:>',
+			'obligatoire' => 'non'
 		)
 	)
 );

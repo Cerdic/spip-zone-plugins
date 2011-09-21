@@ -38,9 +38,17 @@ function formidable_upgrade($nom_meta_version_base, $version_cible){
 		
 		if (version_compare($version_actuelle,'0.5.7','<')){	
 			include_spip('base/create');
-            maj_tables('spip_formulaires');
+      maj_tables('spip_formulaires');
 			
 			echo "Mise à jour du plugin formidable en version 0.5.7<br/>";
+			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
+		}
+		
+		if (version_compare($version_actuelle,'0.6.5','<')){	
+			include_spip('base/create');
+      maj_tables('spip_formulaires');
+			
+			echo "Mise à jour du plugin formidable en version 0.6.5<br/>";
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 	}

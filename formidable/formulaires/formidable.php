@@ -144,6 +144,13 @@ function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_fo
 	$retours['editable'] = ($formulaire['apres']=='formulaire');
 	$retours['formidable_afficher_apres'] = $formulaire['apres'];
 	
+	// Si on a une redirection valide
+	if (($formulaire['apres']== "redirige") AND ($formulaire['url_redirect']!="")){
+		     refuser_traiter_formulaire_ajax();
+         $retours['redirect'] = $formulaire['url_redirect']; 
+  }
+	
+	// Si on a des traitements 
 	if (is_array($traitements) and !empty($traitements)){
 		foreach($traitements as $type_traitement=>$options){
 			if ($appliquer_traitement = charger_fonction($type_traitement, 'traiter/', true))
@@ -161,7 +168,7 @@ function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_fo
 			$retours['message_ok'] = _T_ou_typo($formulaire['message_retour']);
 	}
 	else{
-		$retours['message_ok'] = _T('formidable:retour_aucun_traitement');
+		  $retours['message_ok'] = _T('formidable:retour_aucun_traitement');
 	}
 	
 	return $retours;
