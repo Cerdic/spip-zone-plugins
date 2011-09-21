@@ -12,13 +12,11 @@ if (!defined('_DIR_THEMES'))
 function zengarden_charge_themes($dir = _DIR_THEMES, $tous = false, $force = false){
 	$themes = array();
 
-	$files = preg_files($dir,"/plugin.xml$");
+	include_spip('inc/plugin');
+	$files = liste_plugin_files($dir);
 
 	if (count($files)) {
 		$get_infos = charger_fonction('get_infos','plugins');
-		foreach($files as $k=>$file){
-			$files[$k] = substr(dirname($file),strlen($dir));
-		}
 
 		$t = $get_infos($files,$force,$dir);
 		$themes = array();
