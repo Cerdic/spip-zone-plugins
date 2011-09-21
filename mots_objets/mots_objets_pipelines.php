@@ -29,7 +29,7 @@ function mots_objets_affiche_milieu($flux) {
 				$flux['data'] .= recuperer_fond("prive/listes/mots_$objet", array(
 					'id_mot' => $flux['args']['id_mot'],
 					'titre' => _T($desc->titre_mot_objets),
-				));
+				), array('ajax' => true));
 			}
 		}
 	}
