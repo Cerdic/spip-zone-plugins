@@ -2,25 +2,17 @@
 	<nom>Z-aboarticle</nom>
 	<auteur>Anne-lise Martenot (elastick.net) - BoOz (booz@reo.net)
 	</auteur>
-	<version>0.3.2</version>
+	<version>0.3.3</version>
 	<etat>
 	test
 	</etat>
 	<icon>images/zaboarticle_48.png</icon>
 	<description>
    G&eacute;rer des abonnements aux articles et aux rubriques, n&eacute;cessite les plugins acces restreint et abonnement.
-   On peut ajouter un systeme de commande payant li&eacute; ˆ l'abonnement.
+   On peut ajouter un systeme de commande payant li&eacute; Ã  l'abonnement.
     </description>
 	<lien>http://www.spip-contrib.net/</lien>
 	<prefix>zaboarticle</prefix>
-	<pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>zaboarticle_pipelines.php</inclure>
-	</pipeline>
-	<pipeline>
-		<nom>editer_contenu_objet</nom>
-		<inclure>zaboarticle_pipelines.php</inclure>
-	</pipeline>
  	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>zaboarticle_autorisations.php</inclure>
