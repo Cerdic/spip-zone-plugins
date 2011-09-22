@@ -120,5 +120,10 @@ function skeleditor_codemirror($filename,$editable=true){
 		. $js
 		. "<script src='".find_in_path("javascript/codemirror_init.js")."' type='text/javascript'></script>\n";
 
+	// compresser le tout si possible !
+	if (include_spip('compresseur_fonctions')
+		AND function_exists('compacte_head'))
+		$script = compacte_head($script);
+
 	return $script;
 }
