@@ -5,7 +5,7 @@
 	etat="test"
 	compatibilite="[3.0.0-alpha2;["
 	logo="images/metas-24.png"
-	schema="1.1"
+	schema="1.2"
   documentation="http://www.spip-contrib.net/?rubrique1250"
 >
 
