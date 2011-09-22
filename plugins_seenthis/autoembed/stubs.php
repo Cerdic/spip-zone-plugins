@@ -707,6 +707,14 @@ $AutoEmbed_stubs = array(
     'embed-height' => '300',
   ),
   array(
+    'title' => 'Jamendo',
+    'website' => 'http://www.jamendo.com',
+    'url-match' => 'http://(?:www\.|widgets\.)?jamendo\.com/(?:[a-z0-9]*?)/track/(?:\?album_id=)?([0-9]{1,10})',
+    'embed-src' => 'http://widgets.jamendo.com/fr/track/?playertype=2008&track_id=$2',
+    'embed-width' => '200',
+    'embed-height' => '300',
+  ),
+  array(
     'title' => 'Jokeroo',
     'website' => 'http://www.jokeroo.com',
     'url-match' => 'http://(?:www\.)?jokeroo\.com/(auto|educational|financial|health|howto|lawyers|politics|travel|extremesports|funnyvideos)/((?:(?:[0-9a-z]*?)/){0,3})?([0-9a-z_]*?)\.htm',
@@ -764,6 +772,16 @@ $AutoEmbed_stubs = array(
     'embed-height' => '221',
     'flashvars' => 'lang=en&amp;lfmMode=playlist&amp;FOD=true&amp;resname=$3&amp;restype=track&amp;artist=$2',
   ),
+  /*
+  array(
+    'title' => 'Last.fm (Audio)',
+    'website' => 'http://www.last.fm',
+    'url-match' => 'http://(?:www\.)?last\.fm/music/([0-9a-z%\+_-]*?)/_/([0-9\+a-z_-]*)',
+    'embed-src' => 'http://cdn.last.fm/webclient/s12n/s/53/lfmPlayer.swf',
+    'embed-width' => '300',
+    'embed-height' => '221',
+    'flashvars' => 'lang=en&amp;lfmMode=playlist&amp;FOD=true&amp;resname=$3&amp;restype=track&amp;artist=$2',
+  ),
   array(
     'title' => 'Last.fm (Video)',
     'website' => 'http://www.last.fm',
@@ -773,6 +791,7 @@ $AutoEmbed_stubs = array(
     'embed-height' => '289',
     'flashvars' => 'uniqueName=$3&amp;FSSupport=true&amp;'
   ),
+  */
   array(
     'title' => 'Libero',
     'website' => 'http://www.libero.it',
@@ -1421,6 +1440,22 @@ $AutoEmbed_stubs = array(
     'website' => 'http://www.twitpic.com',
     'url-match' => 'twitpic\.com\/([a-z0-9]*)\/?',
     'image-src' => 'http://twitpic.com/show/full/$2',
+  ),
+ array(
+    'title' => 'MixCloud',
+    'website' => 'http://www.mixcloud.com',
+    'url-match' => '(http:\/\/www\.mixcloud\.com\/.*)',
+    'embed-width' => '200',
+    'embed-height' => '200',
+    'embed-src' => 'http://www.mixcloud.com/media/swf/player/mixcloudLoader.swf?feed=$2',
+  ),
+ array(
+    'title' => 'Zero-Inch',
+    'website' => 'http://www.zero-inch.com',
+    'url-match' => 'http:\/\/www\.zero\-inch\.com\/.*\/([0-9]+)',
+    'embed-width' => '200',
+    'embed-height' => '200',
+    'embed-src' => 'http://www.zero-inch.com/widgets/release_xl.swf?productId=$2',
   ),
  array(
     'title' => 'Grooveshark',
