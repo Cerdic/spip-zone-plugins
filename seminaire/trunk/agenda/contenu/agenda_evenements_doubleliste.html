@@ -11,11 +11,11 @@
 <script type='text/javascript'>
 function set_vevent(){
 jQuery('ul.evenements li.item')
-.find('h3.summary')
+.find('h3.resume')
 .parents('li.item').not('.on')
 .addClass('court')
 .end()
-.find('h3.summary').not('.clicable')
+.find('h3.resume').not('.clicable')
 .click(function(){
 var p=jQuery(this).parent().parent();
 p.toggleClass('court');
