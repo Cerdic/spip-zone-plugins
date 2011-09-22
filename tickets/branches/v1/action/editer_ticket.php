@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Plugin Tickets pour Spip 2.0
- * Licence GPL (c) 2008-2009
+ * Plugin Tickets pour Spip 2.x
+ * Licence GPL (c) 2008-2011
  *
  */
 
@@ -143,7 +143,7 @@ function instituer_ticket($id_ticket, $c) {
 
 		// En cas de publication, fixer la date a "maintenant"
 		// sauf si $c commande autre chose
-		if ($champs['statut'] == 'ouvert' AND !in_array($statut_ancien, array('ouvert'))) {
+		if ($champs['statut'] == 'ouvert' AND in_array($statut_ancien, array('redac'))) {
 			if (!is_null($date))
 				$champs['date'] = $date;
 			else
