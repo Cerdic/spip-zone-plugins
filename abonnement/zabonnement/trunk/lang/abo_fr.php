@@ -9,11 +9,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_ajouter_contactabonnement_rubrique' => 'Ajouter une rubrique',
 	'bouton_ajouter_contactabonnement_article' => 'Ajouter un article',
 	'bouton_chercher' => 'Chercher',
-	'confirmer_supprimer_element'=>'Attention, vous avez demandé &agrave; supprimer un élément. Souhaitez-vous continuer?',
+	'confirmer_supprimer_element'=>'Attention, vous avez demandé à supprimer un élément. Souhaitez-vous continuer?',
 	'rubriques'=>'Rubriques',
 	"abonnement_client"=>"Client",
 	'abonnement_archives'=>'Abonnement aux archives, commence aujourd\'hui moins le nombre de jours',
-	'label_archives'=>'Entrer un chiffre pour le nombre de jours &agrave; soustraire',
+	'label_archives'=>'Entrer un chiffre pour le nombre de jours à soustraire',
 	"abonnement_debut"=>"Début",
 	"abonnement_fin"=>"échéance",
 	'delier'=>'Délier',
@@ -38,9 +38,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"aucune_commande"=>"Non",
 	'abo_valide_jusqu_au'=>'Votre abonnement est valable jusqu\'au @date@',
 	'valide_echu_depuis'=>'Votre abonnement n\'est plus valable depuis le @date@',
-	'abonnes_article'=>'Les abonnés &agrave; cet article',
-	'abonnes_rubrique'=>'Les abonnés &agrave; cette rubrique',
-	'titre_les_abonnes'=>'LES ABONNéS',
+	'abonnes_article'=>'Les abonnés à cet article',
+	'abonnes_rubrique'=>'Les abonnés à cette rubrique',
+	'titre_les_abonnes'=>'LES ABONNÉS',
 	'je_renouvelle'=>'Je renouvelle',
 	'je_me_reabonne'=>'Je me réabonne',
 	'je_m_abonne'=>'Je m\'abonne',
@@ -48,7 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_vos_abonnements'=>'Vos abonnements',
 	'date_utile'=>'Date de publication',
 	'aucun_acces'=>'Aucune rubrique ne correspond!',
-	'acces_ouvert'=>'Vous pouvez accéder &agrave; :',
+	'acces_ouvert'=>'Vous pouvez accéder à :',
 	'acces_rubriques_restreintes'=>'Accès aux rubriques restreintes',
 	'acces_articles_restreints'=>'Accès aux articles restreints',
 	'rubrique_abonnement'=>'Rubrique',
@@ -61,9 +61,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'pas_de_identifiant' => 'Nom inconnu',
 
 	"editer_abonnement" => "Editer un abonnement",
-	"creer_abonnement" => "Creer un abonnement",
+	"creer_abonnement" => "Créer un abonnement",
 	"titre"=>"Titre",
-	"aucune_liaison_commande"=>"pas de commande li&eacutee",
+	"aucune_liaison_commande"=>"pas de commande liée",
 	'liaison_commande'=>"Attention commande liée: ",
 	
 	// actions
@@ -105,7 +105,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"label_environnement" => "Environnement de travail",
 	"label_environnement_test" => "Environnement de test",
 	"label_environnement_prod" => "Environnement de production",
-	"label_ids_zone"=>"Identifiants des zones &agrave; ouvrir",
+	"label_ids_zone"=>"Identifiants des zones à ouvrir",
 	"explication_ids_zone"=>"Séparer les numeros par une virgule. Laisser vide signifie qu'aucune zone restreinte ne sera ouverte.",
 	"explication_environnement" => "Vous pouvez utiliser des fichiers de tests
 		pour vérifier que les abonnements fonctionnent correctement.
@@ -149,7 +149,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"nombre_acheteurs_differents" => "acheteurs différents : ",
 	"diffusion_payee" => "Nb.",
 	"abonnes" => "Abonnés",
-	"nombre_abonnes_a_jour" => "abonnés &agrave; jour :",
+	"nombre_abonnes_a_jour" => "abonnés à jour :",
 	"nombre_abonnes_dechus" => "abonnements échus :",
 	"nombre_abonnes_relances" => "abonnés relancés :",
 	"nombre_abonnes_inscrits" => "abonnés inscrits :",
@@ -161,8 +161,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'echeance_le' => 'échéance le @date@',
 	'echeance' => 'Echéance',
 	'vos_articles' => 'Vos articles',
-	'echeance_abonnement_proche' => "Votre abonnement <i>@titre@</i> arrive &agrave; échéance le @date@.",
-	'echeance_abonnement_passee' => "Votre abonnement <i>@titre@</i> est arrivé &agrave; échéance le @date@.",
+	'echeance_abonnement_proche' => "Votre abonnement <i>@titre@</i> arrive à échéance le @date@.",
+	'echeance_abonnement_passee' => "Votre abonnement <i>@titre@</i> est arrivé à échéance le @date@.",
 	'renouveler_abonnement_proche' => "Vous pouvez le renouveller dès aujourd'hui ou bien choisir une autre formule ci-dessous.",
 	'renouveler_abonnement_passe' => "Vous pouvez le renouveller ou bien choisir une autre formule ci-dessous.",
 
@@ -172,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'choisir_son_abonnement' => "Choisir son abonnement",
 	'commander_article' => "Commande de l'article :",
 	
-	'erreur_identification' => "Vous devez &ecirc;tre identifié pour pouvoir vous abonner",
+	'erreur_identification' => "Vous devez être identifié pour pouvoir vous abonner",
 	'erreur_presente' => "Une erreur est présente dans votre saisie",
 	'erreur_selection_abonnement' => "Vous devez choisir un abonnement !",
 
@@ -201,11 +201,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	"aucune_zone"=>"Aucune",
 	// page article_restreint
-	"acces_refuse" => 'Votre abonnement ne permet pas un accès complet &agrave; cette page.',
-	"acces_complet" => 'Votre abonnement permet un accès complet &agrave; cette page.',
-	"connexion_deja_abonne" => "Si vous &ecirc;tes déj&agrave; abonné, vous pouvez vous connecter &agrave; l'aide du formulaire ci-dessous",
-	"abonner_ou_acheter_article" => "Vous pouvez vous abonner, ou bien acheter cet article &agrave; l'unité.",
-	"abonner_ou_acheter_rubrique" => "Vous pouvez vous abonner, ou bien acheter cette rubrique &agrave; l'unité.",
+	"acces_refuse" => 'Votre abonnement ne permet pas un accès complet à cette page.',
+	"acces_complet" => 'Votre abonnement permet un accès complet à cette page.',
+	"connexion_deja_abonne" => "Si vous êtes déjà abonné, vous pouvez vous connecter à l'aide du formulaire ci-dessous",
+	"abonner_ou_acheter_article" => "Vous pouvez vous abonner, ou bien acheter cet article à l'unité.",
+	"abonner_ou_acheter_rubrique" => "Vous pouvez vous abonner, ou bien acheter cette rubrique à l'unité.",
 
 	);
 ?>

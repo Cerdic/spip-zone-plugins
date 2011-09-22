@@ -19,13 +19,14 @@
 	<td class='arial1'>[(#VAL{abo:statut_#STATUT_ABONNEMENT}|_T)]</td>
 	[(#ENV{editable})
 	<td class='arial1'>
-	[(#BOUTON_ACTION{
-			[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_abonnement:>})],
-			[(#URL_ACTION_AUTEUR{supprimer_contacts_abonnement,contacts_abonnement-#ID_CONTACTS_ABONNEMENT-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
-			ajax,
-			<:abo:confirmer_supprimer_element:>})
-	]
-		</td>
+	[(#SESSION{statut}|=={0minirezo}|oui)
+		[(#BOUTON_ACTION{
+				[(#CHEMIN{images/supprimer-16.png}|balise_img{<:abo:supprimer_abonnement:>})],
+				[(#URL_ACTION_AUTEUR{supprimer_contacts_abonnement,contacts_abonnement-#ID_CONTACTS_ABONNEMENT-#ID_OBJET-#OBJET,[(#ENV{retour,#SELF})]})],
+				ajax,
+				<:abo:confirmer_supprimer_element:>})
+		]
+	]</td>
 ]</tr>
 </BOUCLE_liste>
 </table>
