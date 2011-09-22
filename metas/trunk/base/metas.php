@@ -26,7 +26,8 @@ function metas_declarer_tables_principales($tables_principales){
 		"id_meta" => "BIGINT(21) NOT NULL auto_increment",
 	    "titre" => "VARCHAR(255) NOT NULL",
 	    "description" => "VARCHAR(255) NOT NULL",
-	    "keywords" => "TEXT NOT NULL",
+        "keywords" => "TEXT NOT NULL",
+        "canonical" => "TEXT NOT NULL",
 		"maj" 	=> "TIMESTAMP");
 
 	// definir les cle primaire et secondaires

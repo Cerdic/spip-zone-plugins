@@ -4,40 +4,48 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 
 // fonction d'installation, mise a jour de la base
-function metas_upgrade($nom_meta_base_version, $version_cible){
-	include_spip('inc/meta');
-	// migration depuis l'ancien systeme de maj
-	if (isset($GLOBALS['meta']['spip_metas_version'])
-		AND !isset($GLOBALS['meta'][$nom_meta_base_version])){
-		ecrire_meta($nom_meta_base_version,$GLOBALS['meta']['spip_metas_version'],'non');
-		effacer_meta('spip_metas_version');
-	}
-	
-	$current_version = '0.0';
-	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]))
-			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
-		include_spip('base/serial');
-		include_spip('base/aux');
-		if (version_compare($current_version,'0.0','<=')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
-			// cette fonction cree les tables declarees manquantes
-			// ou ajoute des champs declares, manquants
-			creer_base();
-			echo "Installation du plugin M&eacute;tas effectu&eacute;e correctement !<br/>";
-			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
-		}
-	}
+function metas_upgrade($nom_meta_base_version, $version_cible)
+{
+    // cas particulier :
+    // si plugin pas installe mais que la table existe
+    // considerer que c'est un upgrade depuis v 1.0.0
+    // pour gerer l'historique des installations SPIP <=2.1
+    if (!isset($GLOBALS['meta'][$nom_meta_base_version])) {
+        $trouver_table = charger_fonction('trouver_table', 'base');
+        if ($desc = $trouver_table('spip_signatures')
+            AND isset($desc['field']['id_article'])
+        ) {
+            ecrire_meta($nom_meta_base_version, '1.0.0');
+        }
+        // si pas de table en base, on fera une simple creation de base
+    }
+
+
+    $maj = array();
+    $maj['create'] = array(
+        array('maj_tables', array('spip_metas')),
+    );
+
+    // comme c'est un ajout de colonne, pas besoin d'utiliser un sqal_alter
+    $maj['1.2'] = array(
+        array('sql_alter',"TABLE spip_metas ADD canonical TEXT NOT NULL DEFAULT ''"),
+    );
+
+    include_spip('base/upgrade');
+    maj_plugin($nom_meta_base_version, $version_cible, $maj);
+
 }
 
 // fonction de desinstallation
-function metas_vider_tables($nom_meta_base_version) {
-	sql_drop_table("spip_metas");
-	sql_drop_table("spip_metas_liens");
-	effacer_meta('spip_metas_title');
-	effacer_meta('spip_metas_description');
-	effacer_meta('spip_metas_mots_importants');
-	effacer_meta('spip_metas_mots_keywords');
-	effacer_meta($nom_meta_base_version);
+function metas_vider_tables($nom_meta_base_version)
+{
+    sql_drop_table("spip_metas");
+    sql_drop_table("spip_metas_liens");
+    effacer_meta('spip_metas_title');
+    effacer_meta('spip_metas_description');
+    effacer_meta('spip_metas_mots_importants');
+    effacer_meta('spip_metas_mots_keywords');
+    effacer_meta($nom_meta_base_version);
 }
+
 ?>

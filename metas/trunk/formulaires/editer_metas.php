@@ -28,7 +28,8 @@ function formulaires_editer_metas_charger_dist($objet, $id_objet)
         $valeurs = array(
             'titre' => '',
             'description' => '',
-            'keywords' => ''
+            'keywords' => '',
+            'canonical' => ''
         );
     }
     return $valeurs;
@@ -75,6 +76,7 @@ function formulaires_editer_metas_traiter_dist($objet, $id_objet)
                  'titre' => _request('titre'),
                  'description' => _request('description'),
                  'keywords' => _request('keywords'),
+                 'canonical' => _request('canonical'),
                  'maj' => date('Y-m-d H:i:s'),
             ),
             "id_meta=" . intval($id_meta)
@@ -97,6 +99,7 @@ function formulaires_editer_metas_traiter_dist($objet, $id_objet)
                             array(
                                  'titre' => _request('titre'),
                                  'description' => _request('description'),
+                                 'canonical' => _request('canonical'),
                                  'keywords' => _request('keywords'),
                                  'maj' => date('Y-m-d H:i:s'),
                             )
