@@ -110,24 +110,30 @@ foreach (array('severite', 'tracker', 'statut', 'navigateur') as $nom){
 	}");
 }
 
-function tickets_icone_statut ($niveau) {
+function tickets_icone_statut ($niveau,$full=false) {
 	$img = array(
 		"redac" => "puce-blanche.gif",
 		"ouvert" => "puce-orange.gif",
 		"resolu" => "puce-verte.gif",
 		"ferme" => "puce-poubelle.gif"
 		);
-	return $img[$niveau];
+	if($full)
+		return '<img src="'.find_in_path('prive/images/'.$img[$niveau]).'" alt="'.tickets_texte_statut($niveau).'" />';
+	else
+		return $img[$niveau];
 }
 
-function tickets_icone_severite ($niveau) {
+function tickets_icone_severite ($niveau,$full=false) {
 	$img = array(
 		1 => "puce-rouge-breve.gif",
 		2 => "puce-orange-breve.gif",
 		3 => "puce-verte-breve.gif",
 		4 => "puce-poubelle-breve.gif"
 		);
-	return $img[$niveau];
+	if($full)
+		return '<img src="'.find_in_path('prive/images/'.$img[$niveau]).'" alt="'.tickets_texte_severite($niveau).'" />';
+	else
+		return $img[$niveau];
 }
 
 function tickets_liste_statut($connecte = true){
