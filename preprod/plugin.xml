@@ -4,16 +4,18 @@
  	<version>1.1.6</version>
 
  	<prefix>preprod</prefix>
- 	<categorie>outil</categorie>
+	
+	<categorie>outil</categorie>
 
 	<slogan>
-		Faciliter la mise en prod.
+		Faciliter la mise en prod de sites lourds.
 	</slogan>
+
 	<description>
-		Ajoute des indications utiles lors de la mise en prod.
+		Ce plugin est destin&eacute; &agrave; facilter la mise en production de gros sites SPIP. Il peremet aux webmestres de savoir quel est le type de page (type=page ou type=objet &eacute;ditorial) et quelle est la composition de chaque page du site. En conjonction avec les plugins "ticketskiss" ou "tickets" le plugin preprod permet de poster un ticket directement depuis une page publique sans passer par l'interface privée (&eacute;vite ainsi d'avoir &agrave; saisir l'url). Si les plugins "livrables" et "projets" sont actif, le plugin preprod permet de s&eacute;lectionner le livrable auquel se rapporte le ticket.
 	</description>
 
-	<etat>dev</etat>
+	<etat>test</etat>
 
  	<auteur>
 	Cyril Marion [Ateliers CYM->http://www.cym.fr]
