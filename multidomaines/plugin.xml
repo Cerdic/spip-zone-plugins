@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Multidomaines</nom>
-	<version>1.0</version>
+	<version>1.1</version>
 	<prefix>multidomaines</prefix>
 	<etat>test</etat>
 	<icon>images/logo-72.png</icon>
@@ -9,7 +9,6 @@
 	<description>
 		Multidomaines permet d'associer des secteurs &agrave; un domaine
 	</description>
-	<necessite id="cextras" version="[0.8;]" />
 	<install>base/multidomaines_upgrade.php</install>
 	<fonctions>base/multidomaines_fonctions.php</fonctions>
 	<options>base/multidomaines_options.php</options>
@@ -19,7 +18,15 @@
 	</pipeline>
 	<bouton id="multidomaines" parent="configuration">
 		<icone>images/logo-24.png</icone>
-		<titre>Multidomaines</titre>
+		<titre>multidomaines:titre_multidomaines</titre>
+		<url>multidomaines</url>
 	</bouton>
+	<bouton id="multidomaines_bandeau" parent="bando_configuration">
+		<icone>images/logo-16.png</icone>
+		<titre>multidomaines:titre_multidomaines</titre>
+		<url>multidomaines</url>
+	</bouton>
+	<necessite id="spip" version="[2.0.10;2.1.99]" />
+	<necessite id="cextras" version="[0.8;]" />
 	<categorie>maintenance</categorie>
 </plugin>
