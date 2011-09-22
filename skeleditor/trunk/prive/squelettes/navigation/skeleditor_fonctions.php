@@ -40,7 +40,8 @@ function skeleditor_afficher_dir_skel($path_base,$current_file) {
 		if (preg_match(',('._SE_EXTENSIONS_IMG.')$,',$file))
 			$icon = "image";
 
-		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($path_base.$file))."' class='$class'>"
+		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($f=$path_base.$file))."' class='$class'
+		onclick=\"jQuery('#contenu > :first').ajaxReload({args:{f:'$f'}});return false;\">"
 						. "<img src='"._DIR_PLUGIN_SKELEDITOR."images/se-$icon-16.png' alt='$icon' /> "
 						.basename($file)."</a>";
 	}
