@@ -6,7 +6,7 @@
  * Licence GPL-v3
  *
  */
-
+include_spip('prive/squelettes/contenu/skeleditor_fonctions');
 
 /**
  * Afficher l'arborescence du dossier squelette

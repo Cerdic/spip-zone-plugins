@@ -1,4 +1,6 @@
 [(#AUTORISER{skeleditor}|sinon_interdire_acces)]
+#SET{path,#REM|skeleditor_dossier}
+
 
 [(#ENV{retour}|=={'./'}|?{[(#SET{retour,../})],[(#SET{retour,[(#VAL{../}|concat{#ENV{retour,''}})]})]})]
 [<a class="retour" href="[(#GET{retour,''})]"><:retour:> <span>(#ENV{retour})</span></a>]
