@@ -10,13 +10,7 @@
 [(#CONFIG{spipmotion_casse}|=={oui}|oui)
 	#SET{erreur_chemin,true}
 	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_chemin_ffmpeg:></p>
-	[(#CONFIG{spipmotion_ffmpeg_casse}|=={oui}|ou{
-		#CONFIG{spipmotion_ffmpeg2theora_casse}|=={oui}}|ou{
-		#CONFIG{spipmotion_flvtool_casse}|=={oui}}|ou{
-		#CONFIG{spipmotion_spipmotionsh_casse}|=={oui}}|ou{
-		#CONFIG{spipmotion_qt-faststart_casse}|=={oui}}|oui)
-		<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_binaire:></p>
-	]
+	<p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_binaire:></p>
 	[(#BOUTON_ACTION{<:spipmotion:label_verifier_logiciels:>,#URL_ACTION_AUTEUR{spipmotion_verifier_binaires,1,#SELF}})]
 ]
 
@@ -121,13 +115,11 @@
 						<li><a href="#spipmotion_#VALEUR">#VALEUR</a></li>
 						</BOUCLE_profils_son_top>
 					</ul>
-					<div id="spipmotion_formats">
-						<BOUCLE_profils_son(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
-						<ul id="spipmotion_#VALEUR">
-							<INCLURE{fond=formulaires/spipmotion_encodage_son}{valeur=#VALEUR}{env}>
-						</ul>
-						</BOUCLE_profils_son>
+					<BOUCLE_profils_son(POUR){tableau #CONFIG{spipmotion/fichiers_audios_sortie}}>
+					<div id="spipmotion_#VALEUR">
+						<INCLURE{fond=formulaires/spipmotion_encodage_son}{valeur=#VALEUR}{env}>
 					</div>
+					</BOUCLE_profils_son>
 				</div>
 			</fieldset>
 		</li>
@@ -161,25 +153,17 @@
 </div>
 </form>
 <script type="text/javascript"><!--
-jQuery(document).ready(function(){
-	jQuery('a.select_all').click(function(){
-		jQuery(this).parent().prev('select').find('option').attr('selected', true);
+$(function() {
+	$('a.select_all').click(function(){
+		$(this).parent().prev('select').find('option').attr('selected', true);
 		return false;
 	});
-	jQuery('a.unselect_all').click(function(){
-		jQuery(this).parent().prev('select').find('option').attr('selected', false);
+	$('a.unselect_all').click(function(){
+		$(this).parent().prev('select').find('option').attr('selected', false);
 		return false;
 	});
+	$('.spipmotion_formats').tabs();
 });
-
-var spipmotion_tabs = function(){
-    $('.spipmotion_formats').tabs();
-};
-
-jQuery(document).ready(function(){
-	spipmotion_tabs();
-});
-onAjaxLoad(spipmotion_tabs);
 // --></script>
 </BOUCLE_script_perms>
 <p class="reponse_formulaire reponse_formulaire_erreur"><:spipmotion:erreur_verifier_droits:></p>
