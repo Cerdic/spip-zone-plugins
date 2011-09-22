@@ -147,7 +147,15 @@ function formulaires_formidable_traiter($id_formulaire, $valeurs=array(), $id_fo
 	// Si on a une redirection valide
 	if (($formulaire['apres']== "redirige") AND ($formulaire['url_redirect']!="")){
 		     refuser_traiter_formulaire_ajax();
-         $retours['redirect'] = $formulaire['url_redirect']; 
+		     // traiter les raccourcis artX, brX
+         include_spip("inc/lien");
+		     $url_redirect = typer_raccourci($formulaire['url_redirect']);
+		     if (count($url_redirect)>2) 
+		        $url_redirect = $url_redirect[0].$url_redirect[2];
+          else  
+             $url_redirect = $formulaire['url_redirect'];      // URL classique
+		     
+         $retours['redirect'] = $url_redirect; 
   }
 	
 	// Si on a des traitements 
