@@ -46,20 +46,6 @@ function menu_colonne () {
 	return $ret;
 }
 
-// Pipeline menu a droite
-function tickets_droite ($flux) {
-	$exec = $flux["args"]["exec"];
-
-// 	if ($exec == "accueil") {
-// 		$data = $flux["data"];
-//
-// 		$ret = menu_colonne();
-//
-// 		$flux["data"] = $data.$ret;
-// 	}
-	return $flux;
-}
-
 /**
  * Insertion dans le pipeline affiche_aguche
  * @param object $flux
