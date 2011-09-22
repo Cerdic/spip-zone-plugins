@@ -1416,10 +1416,16 @@ $AutoEmbed_stubs = array(
     'embed-height' => '55',
     'embed-src' => 'http://www.deezer.com/embedded/small-widget-v2.swf?idSong=$2',
   ),
-  array(
+   array(
+    'title' => 'Twitpic',
+    'website' => 'http://www.twitpic.com',
+    'url-match' => 'twitpic\.com\/([a-z0-9]*)\/?',
+    'image-src' => 'http://twitpic.com/show/full/$2',
+  ),
+ array(
     'title' => 'Grooveshark',
     'website' => 'http://www.grooveshark.com',
-    'fetch-match' => 'rel\=\"video_src\" href\=\"http\:\/\/grooveshark\.com\/facebookWidget\.swf\?songID\=([0-9]*)\"',
+    'fetch-match' => 'http\:\/\/grooveshark\.com\/facebookWidget\.swf\?songID\=([0-9]*)\"',
     'embed-width' => '250',
     'embed-height' => '40',
     'embed-src' => 'http://grooveshark.com/songWidget.swf?songID=$2',

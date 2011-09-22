@@ -58,7 +58,7 @@ function embed_url($url) {
 			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
 			
 		}
-		else if (preg_match("/^http\:\/\/(www\.)?twitpic\.com/i", $url)) {
+/*		else if (preg_match("/^http\:\/\/(www\.)?twitpic\.com/i", $url)) {
 			$html = join("", file($url));
 			
 
@@ -70,7 +70,7 @@ function embed_url($url) {
 				$img =$regs[0];	
 				$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Twitpic' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
 			}
-		}
+		}*/
 		else if (preg_match("/^http\:\/\/(www\.)?yfrog\.com/i", $url)) {
 			$oembed = "http://www.yfrog.com/api/oembed?url?format=json&url=".$url;
 			$json = join("",file($oembed));
@@ -99,11 +99,9 @@ function embed_url($url) {
 		} 
 		else {
 			$url = str_replace("/#/", "/", $url);
-		
 			include "AutoEmbed.class.php";
 			$AE = new AutoEmbed();
 	
-			
 			// load the embed source from a remote url
 			if (!$AE->parseUrl($url)) {
 				$code_ae = "";
@@ -123,15 +121,19 @@ function embed_url($url) {
 					
 					$AE->setWidth($w);
 					$AE->setHeight($h);
-					
 				}	
 				
-				
+
 				$embed = $AE->getEmbedCode();
 				$vignette = $AE->getImageURL();
-				if (strlen($vignette) >  5) {
+				
+				$source = $AE->getStub("title");
+								
+				if ($source == "YouTube") {
 					$embed = rawurlencode($embed);
 					$embed = "<div onclick=\"$(this).html(decodeURIComponent('$embed'));\" style='width: ".$w."px; height: ".$h."px; background: url($vignette) center center; cursor: pointer;'></div>";
+				} else if ($source == "Twitpic") {
+					$embed = "<a href='$url'><img src='$vignette' alt='' style='max-width:200px; max-height: 200px;' /></a>";
 				}
 				
 				$code_ae = "<div class='oembed-container'>".$embed."</div>";	
