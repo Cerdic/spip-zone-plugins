@@ -47,7 +47,7 @@ function tickets_set($id_ticket) {
 
 	$c = array();
 	foreach (array(
-		'titre', 'texte', 'severite', 'tracker', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur'
+		'titre', 'texte', 'severite', 'tracker', 'id_assigne', 'exemple', 'composant','jalon','version','projet','navigateur','sticked'
 	) as $champ)
 		$c[$champ] = trim(_request($champ));
 

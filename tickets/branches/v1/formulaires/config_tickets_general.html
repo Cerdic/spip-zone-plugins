@@ -60,8 +60,13 @@
 			</li>
 			
 			<li class="fieldset">
-				<h3 class="legend"><:tickets:cfg_lgd_champs_optionnels:></h3>
+				<h3 class="legend"><:tickets:cfg_lgd_champs_options_autres:></h3>
 				<ul>
+				[(#SAISIE{oui_non, cacher_moteurs,
+					label=<:tickets:cfg_lbl_cacher_moteurs:>,
+					defaut=on,
+					label_case=<:tickets:cfg_lbl_cacher_moteurs:>})]
+				
 				[(#SAISIE{case, notification_publique,
 					label=<:tickets:cfg_lbl_notification_publique:>,
 					label_case=<:tickets:cfg_lbl_case_notification_publique:>})]

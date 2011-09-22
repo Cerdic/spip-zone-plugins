@@ -9,6 +9,7 @@
 	</div>
 
 	#FORMULAIRE_TRIER_TICKETS
+	
 	[(#ENV{id_auteur}|oui)
 		[(#SET{nom,[(#INFO_NOM{auteur,[(#ENV{id_auteur})]})]})]
 	]
@@ -33,14 +34,23 @@
 	]
 	
 	[(#GET{tickets_tries}|!={oui}|oui)
+		[<div class="ajax">
+			(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert,1,redac,2,resolu,3,ferme},sticked=on,
+				recherche,jalon,composant,version,navigateur,projet,id_auteur,
+				titre=<:tickets:tickets_sticked:>}|trim)
+			<div class="actions rss">
+				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{sticked,on})]"><:tickets:suivre_tickets_rss:></a>
+			</div>
+		</div>[(#SET{affiche,oui})]]
+	
 		[(#SESSION{id_auteur}|oui)
 			[<div class="ajax">
-			(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_assigne=#SESSION{id_auteur},
-				recherche,jalon,composant,version,navigateur,projet,id_auteur,
-				titre=<:tickets:vos_tickets_assignes:>}|trim)
-			<div class="actions rss">
-				<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_assigne,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
-			</div>
+				(#INCLURE{fond=inclure/liste_tickets,env,ajax,tracker="",statuts=#ARRAY{0,ouvert},id_assigne=#SESSION{id_auteur},
+					recherche,jalon,composant,version,navigateur,projet,id_auteur,
+					titre=<:tickets:vos_tickets_assignes:>}|trim)
+				<div class="actions rss">
+					<a href="[(#URL_PAGE{backend-tickets}|parametre_url{lang,#ENV{lang}}|parametre_url{id_assigne,#SESSION{id_auteur}})]"><:tickets:suivre_tickets_rss:></a>
+				</div>
 			</div>[(#SET{affiche,oui})]]
 		]
 		[(#SESSION{id_auteur}|oui)

@@ -20,6 +20,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_form_tickets_autorisations' => 'Setting up permissions',
 	'cfg_form_tickets_general' => 'General setup',
 	'cfg_descr_tickets' => 'Configuration of the Bug reports plugin for SPIP',
+	'cfg_explication_cacher_moteurs' => 'Hide the bug reports from the search engines asking them to avoid their indexation when they are shown in public space.',
 	'cfg_explication_composants' => 'Separate the components with the character ":".',
 	'cfg_explication_jalons' => 'Separate the milestones with the character ":".',
 	'cfg_explication_projets' => 'Separate the projects with the character ":".',
@@ -29,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => '	Allow list of authors',
 	'cfg_lbl_autorisation_statuts' => 'Allow by authors status',
 	'cfg_lbl_autorisation_webmestre' => 'Allow webmasters only',
+	'cfg_lbl_cacher_moteurs' => 'Hide from search engines',
 	'cfg_lbl_case_joindre_fichiers' => 'Allow to add one or several files to the bug reports',
 	'cfg_lbl_case_notification_publique' => 'Be notified in public rather than private space (Requires Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Having a browser selector in the bug report form',
@@ -48,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lgd_autorisation_ecrire' => 'Write bug reports',
 	'cfg_lgd_autorisation_modifier' => 'Modify bug reports',
 	'cfg_lgd_champs_optionnels' => 'Optional fields',
+	'cfg_lgd_champs_options_autres' => 'Other options',
 	'cfg_lgd_notifs_forums' => 'Forums and notifications',
 	'cfg_titre_tickets' => 'Bug reports',
 	'champ_assigner' => 'Assign to:',
@@ -72,11 +75,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_projet' => 'Project:',
 	'champ_recherche' => 'Search:',
 	'champ_severite' => 'Severity:',
+	'champ_statut' => 'Status:',
+	'champ_sticked' => 'Sticked',
+	'champ_texte' => 'Text',
 	'champ_titre' => 'Abstract',
 	'champ_titre_ticket' => 'Title of the bug report',
 	'champ_type' => 'Type:',
-	'champ_texte' => 'Text',
-	'champ_statut' => 'Status:',
 	'champ_url_exemple' => 'Example URL',
 	'champ_version' => 'Version:',
 	'changement_statut_mail' => 'The status of this bug report has been changed from "@ancien@" to "@nouveau@".',
@@ -97,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_texte_longueur_mini' => 'The minimum length of text is @nb@ characters.',
 	'erreur_verifier_formulaire' => 'Verify your form',
+	'explication_champ_sticked' => 'Sticked bug reports are allways shown first, not depending on their status.',
 	'explication_description_ticket' => 'Describe as precisely as possible the need or problem.
 	Indicate in particular if it occurs consistently or occasionally.
 	If it is a display problem, specify with what browser you are experiencing it.',
@@ -183,6 +188,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_autorisations' => 'Authorizations',
 	'tickets_derniers_commentaires' => 'Last comments',
 	'tickets_general' => 'General',
+	'tickets_sticked' => 'Sticked bug reports',
 	'tickets_sur_inscription' => "
 		Bug report or comment only available for registered users.
 	",

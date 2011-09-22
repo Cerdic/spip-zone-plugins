@@ -18,6 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cfg_bouton_radio_desactiver_forum_public' => "Désactiver l'utilisation des forums publics.",
 	'cfg_descr_tickets' => 'Configuration du plugin Tickets pour SPIP',
+	'cfg_explication_cacher_moteurs' => 'Cache les tickets des moteurs de recherche en leur demandant de ne pas indexer leur contenus lorsqu\'ils sont affichés dans l\'espace public.',
 	'cfg_explication_composants' => 'Séparez les composants par le caractère ":".',
 	'cfg_explication_jalons' => 'Séparez les jalons par le caractère ":".',
 	'cfg_explication_projets' => 'Séparez les projets par le caractère ":".',
@@ -29,6 +30,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_autorisation_auteurs' => 'Autoriser par liste d\'auteurs',
 	'cfg_lbl_autorisation_statuts' => 'Autoriser par statut d\'auteurs',
 	'cfg_lbl_autorisation_webmestre' => 'Autoriser les webmestres uniquement',
+	'cfg_lbl_cacher_moteurs' => 'Cacher des moteurs de recherche',
 	'cfg_lbl_case_joindre_fichiers' => 'Autoriser à joindre un ou plusieurs fichiers aux tickets',
 	'cfg_lbl_case_notification_publique' => 'Être notifié dans l\'espace public plut&ocirc;t que dans l\'espace privé (Nécessite Zpip)',
 	'cfg_lbl_case_selecteur_navigateur' => 'Disposer d\'un sélecteur de navigateur dans le formulaire d\'édition de ticket',
@@ -44,10 +46,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_lbl_type_autorisation' => 'Méthode d\'autorisation',
 	'cfg_lbl_versions' => 'Versions',
 	'cfg_lgd_autorisation_assigner' => 'Assigner les tickets',
-	'cfg_lgd_autorisation_ecrire' => 'écrire les tickets',
+	'cfg_lgd_autorisation_ecrire' => 'Écrire les tickets',
 	'cfg_lgd_autorisation_modifier' => 'Modifier les tickets',
 	'cfg_lgd_autorisation_commenter' => 'Commenter les tickets',
 	'cfg_lgd_champs_optionnels' => 'Champs optionnels',
+	'cfg_lgd_champs_options_autres' => 'Autres options',
 	'cfg_lgd_notifs_forums' => 'Forums et notifications',
 	'cfg_titre_tickets' => 'Tickets',
 	'champ_assigner' => 'Assigner à&nbsp;:',
@@ -72,11 +75,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'champ_projet' => 'Projet&nbsp;:',
 	'champ_recherche' => 'Recherche&nbsp;:',
 	'champ_severite' => 'Sévérité&nbsp;:',
+	'champ_statut' => 'Statut&nbsp;:',
+	'champ_sticked' => 'Épinglé&nbsp;:',
+	'champ_texte' => 'Texte',
 	'champ_titre' => 'Résumé',
 	'champ_titre_ticket' => 'Titre du ticket',
 	'champ_type' => 'Type&nbsp;:',
-	'champ_texte' => 'Texte',
-	'champ_statut' => 'Statut&nbsp;:',
 	'champ_url_exemple' => 'URL d&rsquo;exemple',
 	'champ_version' => 'Version&nbsp;:',
 	'changement_statut_mail' => 'Le statut de ce ticket a été modifié de "@ancien@" à "@nouveau@".',
@@ -97,6 +101,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// E
 	'erreur_texte_longueur_mini' => 'La longueur minimale du texte est de @nb@ caractères.',
 	'erreur_verifier_formulaire' => 'Vérifiez votre formulaire',
+	'explication_champ_sticked' => 'Les tickets épinglés sont toujours affichés en premier, quelque soit leur statut.',
 	'explication_description_ticket' => 'Décrivez aussi précisément que possible le besoin ou le problème rencontré.
 	Indiquez en particulier s&rsquo;il se produit systématiquement ou occasionnellement.
 	S&rsquo;il s&rsquo;agit d&rsquo;un problème d\'affichage, précisez avec quel navigateur vous le rencontrez.',
@@ -184,6 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tickets_derniers_commentaires' => 'Les derniers commentaires',
 	'tickets_en_cours_auteur' => 'Les tickets de @nom@ en cours de traitement',
 	'tickets_general' => 'Général',
+	'tickets_sticked' => 'Tickets épinglés',
 	'tickets_sur_inscription' => "
 		L'écriture des tickets ou commentaires n'est
 		possible qu'aux personnes identifiées.

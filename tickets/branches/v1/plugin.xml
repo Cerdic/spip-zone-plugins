@@ -131,8 +131,8 @@
 	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
 
-	<version>1.8.5</version>
-	<version_base>1.3</version_base>
+	<version>1.8.6</version>
+	<version_base>1.4</version_base>
 	<etat>stable</etat>
 
 	<prefix>tickets</prefix>

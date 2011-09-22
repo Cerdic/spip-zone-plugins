@@ -4,6 +4,8 @@ include_spip('base/create');
 
 function tickets_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = "0.0";
+	include_spip('base/tickets_install');
+	
 	// On traite le cas de la premiere version de Tickets sans version_base
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version])) && tickets_existe())
 		$current_version = "0.1";
@@ -12,7 +14,6 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		$current_version = $GLOBALS['meta'][$nom_meta_base_version];
 		
 	if ($current_version=="0.0") {
-		include_spip('base/tickets_install');
 		creer_base();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
@@ -59,6 +60,12 @@ function tickets_upgrade($nom_meta_base_version,$version_cible){
 		sql_alter("TABLE spip_tickets DROP tracker");
 		sql_alter("TABLE spip_tickets CHANGE type tracker integer DEFAULT '0' NOT NULL");
 		ecrire_meta($nom_meta_base_version,$current_version="1.3");
+	}
+	if (version_compare($current_version,"1.4","<")){
+		// modifications de la table spip_tickets,
+		// ajout du champ sticked
+		maj_tables('spip_tickets');
+		ecrire_meta($nom_meta_base_version,$current_version="1.4");
 	}
 }
 
