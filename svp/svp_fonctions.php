@@ -57,7 +57,7 @@ function svp_afficher_credits($balise_serialisee, $sep=', ') {
 	$texte = '';
 	
 	$credits = unserialize($balise_serialisee);
-	if ($credits) {
+	if (is_array($credits)) {
 		foreach ($credits as $_credit) {
 			if ($texte) 
 				$texte .= $sep;
