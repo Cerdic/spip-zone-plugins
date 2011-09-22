@@ -7,87 +7,7 @@
  *
  */
  
- 
-/**
- * Génère les appels js ou les css selon $type, correspondants à l'extension du fichier édité
- *
- * @param string $extension
- * @param string $type
- * @return string
- */
-function skeleditor_dir($extension, $type) {
-	if (!$extension)
-		return "";
 
-	switch($extension){
-		case 'sh':
-		case 'txt':
-		case 'nfo':
-		case 'log':
-		case 'csv':
-			$mode = null;
-			break;
-		case 'as':
-		case 'js':
-			$mode = array("javascript");
-			// autoMatchParens: true
-			break;
-		case 'css':
-			$mode = array("css");
-			break;
-		case 'xml':
-		case 'svg':
-		case 'rdf':
-			$mode = array("xml");
-			#continuousScanning: 500,
-			break;
-/* 		case 'sql':
-			$parsers = array("../contrib/sql/js/parsesql.js");
-			$css = array("css/sqlcolors.css");
-			#textWrapping: false,
-			break;
-		case 'py':
-			$parsers = array("../contrib/python/js/parsepython.js");
-			$css = array("css/pythoncolors.css");
-      #  lineNumbers: true,
-      #  textWrapping: false,
-      #  indentUnit: 4,
-      #  parserConfig: {'pythonVersion': 2, 'strictErrors': true}
-			break; */
-
-		case 'php':
-		case 'html':
-		case 'htm':
-		default:
-			$mode = array("xml", "css", "javascript",
-                     "clike","php");
-			break;
-	}
-	if(!$type)
-	return false;
-
-	$dir = _DIR_PLUGIN_SKELEDITOR;
-	if ($type == "css") {
-	$files .= "
-	<link rel='stylesheet' href='".$dir."codemirror/lib/codemirror.css' type='text/css' />
-	<link rel='stylesheet' href='".$dir."codemirror/theme/default.css' type='text/css' />
-	<link rel='stylesheet' href='".$dir."css/skeleditor.css' type='text/css' />";	
-	}
-	if ($type =="js")
-	$files .= "<script src='".$dir."codemirror/lib/codemirror.js' type='text/javascript'></script>";
-	foreach($mode as $cle=>$valeur) {
-		
-		$test = $dir."codemirror/mode/".$valeur."/".$valeur.".".$type;
- 			if (find_in_path($test)) {
-				if ($type == "css")
-				$files .= "<link rel='stylesheet' href='".$test."' type='text/css' />";
-				if ($type =="js")
-				$files .= "<script src='".$test."' type='text/javascript'></script>";
- 			}
-	}
-	
-	return $files;
-}
 
 /**
  * Tester avec _request si on est dans l'edition de skeleditor et si oui, retourne l'extension du nom du fichier
@@ -134,14 +54,14 @@ return $flux;
  * @return string
  */ 
 function skeleditor_insert_head($flux){
-
+/*
 	$extension = test_skeleditor_edition();
 		if($extension) {
 		$type = "js";
 		$script = skeleditor_dir($extension, $type);
-		$flux = skeleditor_insert_head_css($flux); // au cas ou il n'est pas implemente */
+		$flux = skeleditor_insert_head_css($flux); // au cas ou il n'est pas implemente
 		$flux .= $script;
-		}
+		}*/
 	return $flux;
 }
 

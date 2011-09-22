@@ -1,0 +1,10 @@
+[(#AUTORISER{skeleditor}|sinon_interdire_acces)]
+
+[(#ENV{retour}|=={'./'}|?{[(#SET{retour,../})],[(#SET{retour,[(#VAL{../}|concat{#ENV{retour,''}})]})]})]
+[<a class="retour" href="[(#GET{retour,''})]"><:retour:> <span>(#ENV{retour})</span></a>]
+[<a class="retour" href="(#GET{retour,''}|parametre_url{var_mode,inclure})"><:retour:> <span>var_mode=inclure</span></a>]
+<div class="cadre cadre-info">
+	<:skeleditor:skeleditor_description:>
+	<p><strong>[(#GET{path}|joli_repertoire)]</strong></p>
+	[(#GET{path}|skeleditor_afficher_dir_skel{#GET{file}})]
+</div>

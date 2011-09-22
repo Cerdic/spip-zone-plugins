@@ -7,51 +7,10 @@
  *
  */
 
+include_spip('inc/skeleditor_codemiror');
 function skeleditor_dossier(){
 	include_spip('inc/skeleditor');
 	return skeleditor_path_editable();
-}
-
-
-/**
- * Afficher l'arborescence du dossier squelette
- *
- * @param string $path_base
- * @param string $current_file
- * @return string
- */
-function skeleditor_afficher_dir_skel($path_base,$current_file) {
-	include_spip('inc/skeleditor');
-	include_spip('inc/presentation');
-	$file_list = skeleditor_files_editables($path_base);
-	$current_file = substr($current_file,strlen($path_base));
-
-  $output = "<div id='arbo'><div class='dir'>\n";
-	$init_dir = $current_dir = "";
-	foreach($file_list as $file){
-		$dir = substr(dirname($file),strlen($path_base));
-		$file = substr($file,strlen($path_base));
-
-		if ($dir != $current_dir)
-			$output .= skeleditor_tree_open_close_dir($current_dir,$dir,$current_file);
-
-		$class="fichier";
-		if (!is_writable($path_base.$dir))
-			$class .= " readonly";
-
-		$class .= ($file==$current_file?" on":'');
-
-		$icon = "file";
-		if (preg_match(',('._SE_EXTENSIONS_IMG.')$,',$file))
-			$icon = "image";
-
-		$output .= "<a href='".generer_url_ecrire('skeleditor','f='.urlencode($path_base.$file))."' class='$class'>"
-						. "<img src='"._DIR_PLUGIN_SKELEDITOR."images/se-$icon-16.png' alt='$icon' /> "
-						.basename($file)."</a>";
-	}
-	$output .= skeleditor_tree_open_close_dir($current_dir,$init_dir,$current_file);
-  $output .= "</div></div>\n";
-  return $output;
 }
 
 
@@ -224,91 +183,5 @@ function get_plugin_squelette() {
   return $plugin_squelette;
 }
 
-/**
- * Détermine le mime_type pour le mode de codemirror à afficher, selon l'extension du nom du fichier edité
- *
- * @param string $filename
- * @return string
- */ 
-function determine_mime_type($filename) {
-	if($filename
-	AND $infos = pathinfo($filename)
-	AND $extension = $infos['extension'])
-  $mime_types = array(
-            'txt' => 'text/plain',
-            'htm' => 'text/html',
-            'html' => 'text/html',
-            'php' => 'application/x-httpd-php',
-            'css' => 'text/css',
-//          'js' => 'application/javascript', codemirror2 ne doit pas avoir de mode définit pour les js
-            'json' => 'application/json',
-            'xml' => 'application/xml',
-        );		
-		if (array_key_exists($extension, $mime_types)) {
-			$mode= 'mode:"'.$mime_types[$extension].'",';
-            return $mode;
-        }
-}
 
-/**
- * Génére le script d'appel de codemirror
- *
- * @param string $filename
- * @param bool $editable
- * @return string
- */ 
-function skeleditor_codemirror($filename,$editable=true){
-	if (!$filename)
-		return "";
-
-	$readonly = true;
-	if (!$editable)
-		$readonly = "readonly: true,\n";
-	$mode= determine_mime_type($filename);
-	
-$script = '<script type="text/javascript">
-var editor = CodeMirror.fromTextArea(document.getElementById(\'code\'), {
-        lineNumbers: true,
-        matchBrackets: true,
-        indentUnit: 6,
-        indentWithTabs: true,
-        enterMode: "keep",
-        tabMode: "shift",
-		'.$mode.'
-		});
-var lastPos = null, lastQuery = null, marked = [];
- 
-function unmark() {
-  for (var i = 0; i < marked.length; ++i) marked[i]();
-  marked.length = 0;
-}
- 
-function search() {
-  unmark();                     
-  var text = document.getElementById("query").value;
-  if (!text) return;
-  for (var cursor = editor.getSearchCursor(text); cursor.findNext();)
-    marked.push(editor.markText(cursor.from(), cursor.to(), "searched"));
- 
-  if (lastQuery != text) lastPos = null;
-  var cursor = editor.getSearchCursor(text, lastPos || editor.getCursor());
-  if (!cursor.findNext()) {
-    cursor = editor.getSearchCursor(text);
-    if (!cursor.findNext()) return;
-  }
-  editor.setSelection(cursor.from(), cursor.to());
-  lastQuery = text; lastPos = cursor.to();
-}
- 
-function replace() {
-  unmark();
-  var text = document.getElementById("query").value,
-      replace = document.getElementById("replace").value;
-  if (!text) return;
-  for (var cursor = editor.getSearchCursor(text); cursor.findNext();)
-    editor.replaceRange(replace, cursor.from(), cursor.to());
-}
-</script>';
-	return $script;
-}
 ?>
