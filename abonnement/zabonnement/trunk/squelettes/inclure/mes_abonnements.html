@@ -1,98 +1,23 @@
 #CACHE{0}
-[(#SET{date_future,[(#ENV{date}|modifier_date{7})]})]
 
 #SET{today,#DATE}
-
 <BOUCLE_auteur(AUTEURS){id_auteur = #SESSION{id_auteur}}{tout}>
-<BOUCLE_count(CONTACTS_ABONNEMENTS){id_auteur}{validite >= #GET{today}}{statut_abonnement IN paye,offert}>
-</BOUCLE_count><h2><:abo:liste_vos_abonnements:></h2></B_count>
-
-	[(#REM) Si on a un abonnement valide, on l'affiche]
-	<B_abo_valide>
-			[(#TOTAL_BOUCLE|=={1}|oui)<h3 class="h3"><:abo:votre_abonnement:></h3>]
-			[(#TOTAL_BOUCLE|>{1}|oui)<h3 class="h3"><:abo:vos_abonnements:></h3>]
-			<ul class="liste_abonnement">
-	<BOUCLE_abo_valide(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite > #GET{date_future}}{statut_abonnement IN paye,offert}>
-
-		#SET{ladate,#VALIDITE|affdate}
-		<BOUCLE_abo(ABONNEMENTS){id_abonnement=#ID_OBJET}>
-		<li><a href="[(#URL_PAGE{abonnement}|parametre_url{id_abonnement,#ID_ABONNEMENT})]">#TITRE</a>
-		</BOUCLE_abo><span><:abo:echeance_le{date=#GET{ladate}}:></span>
-		</li>
-	</BOUCLE_abo_valide>
-	</ul>
-	</B_abo_valide>
-
-		[(#REM) Sinon on teste si l'abonnement est perime ]	
-		<BOUCLE_abo_echu(CONTACTS_ABONNEMENTS){objet=abonnement}{id_auteur}{validite < #GET{date_future}}{statut_abonnement IN paye,offert}>
-
-			[(#ENV{reabo}|non)
-				<h3 class="h3"><:abo:votre_abonnement:></h3>
-				
-				<div class="abonnement_echeance">
-				<p>
-				#SET{ladate,#VALIDITE|affdate}
-				#SET{proche,#VALIDITE|>{#ENV{date}}|oui}
-				[(#GET{proche}|non)<:abo:echance_abonnement_passee{date=#GET{ladate},titre=#TITRE}:>]
-				[(#GET{proche}|oui)<:abo:echance_abonnement_proche{date=#GET{ladate},titre=#TITRE}:>]
-				</p>
-				<p>
-				[(#GET{proche}|non)<:abo:renouveler_abonnement_passe{date=#GET{ladate},titre=#TITRE}:>]
-				[(#GET{proche}|oui)<:abo:renouveler_abonnement_proche{date=#GET{ladate},titre=#TITRE}:>]
-				</p>
-				</div>
-			]
-			
-			
-		</BOUCLE_abo_echu>
-			#SET{pas_abo,oui}
-		<//B_abo_echu>
 		
-		[(#REM)La liste des elements de l'abonne]
-				<B_abo_objets_valide>
-			<h3 class="h3"><:abo:vos_acces_objets:></h3>
+		[(#REM)La liste des objets de l'abonne > aujourdhui]
+		<B_abo_objets_valide>
+		<h2><:abo:liste_vos_abonnements:></h2>
 			<ul class="liste_abonnement">
-			<BOUCLE_abo_objets_valide(CONTACTS_ABONNEMENTS){id_auteur}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
-#INFO_TITRE{#OBJET,#ID_OBJET}			
-			[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
-			</BOUCLE_abo_objets_valide>
+				<BOUCLE_abo_objets_valide(CONTACTS_ABONNEMENTS){id_auteur}{validite>=#GET{today}}{statut_abonnement IN paye,offert}{par objet}>
+					[(#OBJET|unique|oui)
+					[<h3 class="h3">(#VAL{abo:info_acces_a_#OBJET}|_T)</h3>]
+					]
+					[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
+					<li>
+					<a href="[(#ID_OBJET|generer_url_entite{#OBJET})]">#INFO_TITRE{#OBJET,#ID_OBJET}</a>	
+					<span> <:abo:echeance_le{date=#GET{datefin}}:></span>
+					</li>
+				</BOUCLE_abo_objets_valide>
 			</ul>
 		</B_abo_objets_valide>
 		
-		
-		
-		[(#REM)
-		la liste des acces aux rubriques
-		]			
-		<B_abo_rubriques_valide>
-			<h3 class="h3"><:abo:vos_acces_rubriques:></h3>
-			<ul class="liste_abonnement">
-			<BOUCLE_abo_rubriques_valide(CONTACTS_ABONNEMENTS){objet=rubrique}{id_auteur}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
-				<BOUCLE_rubriquev(RUBRIQUES){id_rubrique=#ID_OBJET}{tout_voir}>
-	[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
-	<li><a href="#URL_RUBRIQUE">#TITRE</a>
-				<span> <:abo:jusqu_au{date=#GET{datefin}}:></span></li>
-				</BOUCLE_rubriquev>
-			</BOUCLE_abo_rubriques_valide>
-			</ul>
-		</B_abo_rubriques_valide>
-		
-		
-		[(#REM)
-		la liste des acces aux articles
-		]			
-		<B_abo_articles_valide>
-			<h3 class="h3"><:abo:vos_acces_articles:></h3>
-			<ul class="liste_abonnement">
-			<BOUCLE_abo_articles_valide(CONTACTS_ABONNEMENTS){objet=article}{id_auteur}{validite>=#GET{today}}{statut_abonnement IN paye,offert}>
-				<BOUCLE_articlev(ARTICLES){id_article=#ID_OBJET}{tout_voir}>
-	[(#SET{datefin,[(#VALIDITE|affdate{nom_jour})] [(#VALIDITE|affdate)]})]
-	<li><a href="#URL_ARTICLE">#TITRE</a>
-				<span> <:abo:jusqu_au{date=#GET{datefin}}:></span></li>
-				</BOUCLE_articlev>
-			</BOUCLE_abo_articles_valide>
-			</ul>
-		</B_abo_articles_valide>
-		
-				
 </BOUCLE_auteur>
