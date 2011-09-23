@@ -2,14 +2,6 @@
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 	<div class="actions">
-		<div class="add">
-		[(#AUTORISER{creerdans,squelette,#ENV{path_base}}|oui)
-			[(#BOUTON_ACTION{#CHEMIN{images/se-file-add-16.png}|balise_img{'new'}|concat{' ',<:skeleditor:action_nouveau:>},#URL_ECRIRE{skeleditor}})]
-		]
-		[(#AUTORISER{upload,squelette,#ENV{path_base}}|oui)
-			[(#BOUTON_ACTION{#CHEMIN{images/se-upload-16.png}|balise_img{'upload'}|concat{' ',<:skeleditor:action_upload:>},#URL_ECRIRE{skeleditor,upload=oui}})]
-		]
-		</div>
 		<div class="context">
 		[(#ENV{editable}|non|et{#ENV{fichier}})
 			[(#BOUTON_ACTION{#CHEMIN{images/se-file-copy-16.png}|balise_img{'copy'}|concat{' ',<:skeleditor:personaliser:>},#URL_ACTION_AUTEUR{skeleditor_new_from,#ENV{fichier},#SELF|parametre_url{f,''}}})]
