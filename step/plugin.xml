@@ -9,7 +9,7 @@
 	</slogan>
 	<auteur>Matthieu Marcillaud</auteur>
 	<licence>&#169; 2008 2011 GPL</licence>
-	<version>0.15.4</version>
+	<version>0.15.5</version>
 	<version_base>0.6</version_base>
 	<install>base/step_upgrade.php</install>
 
@@ -57,7 +57,7 @@
 		<nom>taches_generales_cron</nom>
 		<inclure>step_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;3.0.0-dev)" />
 
 	<categorie>maintenance</categorie>
 
