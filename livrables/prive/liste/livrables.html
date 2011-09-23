@@ -18,6 +18,7 @@
             <th class=''>[(#TRI{'statut_atelier',<:livrables:label_statut_atelier:>,ajax})]</th>
             <th class=''>[(#TRI{'statut_client',<:livrables:label_statut_client:>,ajax})]</th>
 			<th class='url'>[(#TRI{url,<:livrables:label_url:>,ajax})]</th>
+   			<th class='url'>[(#TRI{ref,<:livrables:label_ref:>,ajax})]</th>
             <th class='nb_tickets'>[(#TRI{'tickets_en_cours',<:livrables:label_tickets_en_cours:>,ajax})]</th>
             <th class='nb_tickets'>[(#TRI{'tickets_finis',<:livrables:label_tickets_finis:>,ajax})]</th>
             <th class='objet'>[(#TRI{'objet',<:livrables:label_objet:>,ajax})]</th>
@@ -42,6 +43,7 @@
             <td class='statut #EDIT{statut_atelier}'>[<img src="(#CHEMIN{[images/(#STATUT_ATELIER|livrables_icone_statut)]})"[ alt="(#STATUT_ATELIER|livrables_explication_statut)"] />]</td>
             <td class='statut #EDIT{statut_client}'>[<img src="(#CHEMIN{[images/(#STATUT_CLIENT|livrables_icone_statut)]})"[ alt="(#STATUT_CLIENT|livrables_explication_statut)"] />]</td>
 			<td class='url #EDIT{url}'>[<a href="(#URL)" target="_blank"><img src="#CHEMIN{images/voir_en_ligne-24.png}" alt="<:livrables:voir_en_ligne:>" /></a>]</td>
+			<td class='ref #EDIT{ref}'>[<a href="(#REF)" target="_blank"><img src="#CHEMIN{images/voir_modele-24.png}" alt="<:livrables:voir_modele:>" /></a>]</td>
             <td class='nb_tickets'>[<div class="carre rouge"><a href="#URL_ECRIRE{preprod}#livrable_#ID_LIVRABLE">(#TICKETS_EN_COURS{#ID_LIVRABLE})</a></div>]</td>
             <td class='nb_tickets'>[<div class="carre vert"><a href="#URL_ECRIRE{preprod}#livrable_#ID_LIVRABLE">(#TICKETS_FINIS{#ID_LIVRABLE})</a></div>]</td>
             <td class='objet #EDIT{livrable_objet}'>[(#OBJET)]</td>

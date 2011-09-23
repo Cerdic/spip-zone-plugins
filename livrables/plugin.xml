@@ -2,8 +2,8 @@
 	<nom>Livrables</nom>
 	<auteur>Cyril Marion - Ateliers CYM</auteur>
 	<licence>&#169; 2011 GPL</licence>
-	<version>0.1.7</version>
-	<version_base>0.8</version_base>
+	<version>0.1.8</version>
+	<version_base>0.9</version_base>
 	<install>base/livrables_upgrade.php</install>
 
 	<icon>images/composants-32.png</icon>

@@ -41,8 +41,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	"explication_statut_abandonne"	=> "D&eacute;veloppement arr&ecirc;t&eacute; ou abandonn&eacute;.",
 	
 	// I
-	'info_tous_les_composants' => 'Tous les composants',
-	'info_tous_les_livrables' => 'Tous les livrables',
+	'info_tous_les_composants'	=> 'Tous les composants',
+	'info_tous_les_livrables'	=> 'Tous les livrables',
 	
 	// L
 	'label_descriptif' 			=> 'Descriptif du livrable',
@@ -57,6 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_objet'				=> 'Objet &eacute;dit.', // 'Adresse du livrable',
 	'label_compo'				=> 'Nom compo.', // 'Adresse du livrable',
 	'label_url'					=> 'URL de test', // 'Adresse du livrable',
+	'label_ref'					=> 'URL de r&eacute;f.', // 'Adresse de la reference ou modele qui permettra de construire le livrable',
 	'label_statut_client' 		=> 'Statut Client',
 	'label_statut_atelier' 		=> 'Statut Atelier',
 	'libelle_compo_neant'		=> 'Dist', // 'Par d&eacute;faut', // 'Dist (aucune composition).',
@@ -97,10 +98,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// T
 	'titre' => 'Titre',
 	'type' => 'Type',
+	
 	// U
 	
 	// V
 	'voir_composant' 	=> 'D&eacute;tails',
+	'voir_modele'		=> 'Voir une r&eacute;f&eacute;rence du livrable',
 	'voir_en_ligne'		=> 'Voir en ligne',
 	'voir_livrable' 	=> 'D&eacute;tails',
 

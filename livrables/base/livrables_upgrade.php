@@ -63,11 +63,16 @@ function livrables_upgrade($nom_meta_base_version,$version_cible){
 			sql_updateq("spip_livrables",array("statut_atelier" => "non_livre"),"statut_atelier IS NULL OR statut_atelier == ''");
 			ecrire_meta($nom_meta_base_version,$current_version="0.7");
 		}
-		// ajout des champs "objet", "type" et "composition"
+		// suppression du champ "type" et de son index
 		if (version_compare($current_version,"0.8","<")){
 			sql_alter("TABLE spip_livrables DROP COLUMN type");
 			sql_alter("TABLE spip_livrables DROP INDEX (type)");
 			ecrire_meta($nom_meta_base_version,$current_version="0.8");
+		}
+		// ajout du champ "ref" (une reference pouvant etre un modele, une maquette, un wireframe, etc.)
+		if (version_compare($current_version,"0.9","<")){
+			sql_alter("TABLE spip_livrables ADD ref VARCHAR(255) NOT NULL AFTER url");
+			ecrire_meta($nom_meta_base_version,$current_version="0.9");
 		}
 	}
 }

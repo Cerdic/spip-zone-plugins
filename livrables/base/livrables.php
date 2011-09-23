@@ -22,11 +22,17 @@ function livrables_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
+/**
+ * Decrit plutot un livrable de type "web"
+ * Non adapte pour l'instant a un livrable de type "train" :-)
+ * Voir pour sortir cette table dans une version "livrables web"
+ **/
 function livrables_declarer_tables_principales($tables_principales){
 	$spip_livrables = array(
 		"id_livrable" 			=> "bigint(21) NOT NULL",
 		"id_projet"				=> "bigint(21) NOT NULL",
-		"url"					=> "varchar(255) DEFAULT '' NOT NULL",
+		"url"					=> "varchar(255) DEFAULT '' NOT NULL", // url ou on peut voir le livrable en ligne
+		"ref"					=> "varchar(255) DEFAULT '' NOT NULL", // vers quoi se referer pour construire le livrable (p.ex. une maquette)
 		"statut_client"			=> "varchar(10) DEFAULT 'non_vue' NOT NULL",
 		"statut_atelier"		=> "varchar(10) DEFAULT 'non_livre' NOT NULL",
 		"titre" 				=> "varchar(255) DEFAULT '' NOT NULL",
