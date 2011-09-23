@@ -1,6 +1,6 @@
-nom: '<:socialtags:nom_noisette:>'
-description: '<:socialtags:description_noisette:>'
-icon: 'socialtags-fb-24.png'
+nom: '<:socialtags:nom_noisette_badge_facebook:>'
+description: '<:socialtags:description_noisette_badge_facebook:>'
+icon: 'noisettes/socialtags_badge_fb.png'
 parametres:
   -
     saisie: 'oui_non'

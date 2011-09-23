@@ -34,15 +34,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_tout_decocher' => 'Uncheck all',
 
 	// D
-	'description_noisette' => 'Display press materials included in an article',
+	'description_noisette_badge_facebook' => 'Display the Facebook badge defined in the configuration page',
+	'description_noisette_facebook_like' => 'Display the <b>Like</b> or <b>Recommand</b> and eventually <b>Send</b> button',
 
 	// N
+	'noisette_action_like' => 'Like',
+	'noisette_action_recommand' => 'Recommand',
+	'noisette_label_action' => 'Action' ,
+	'noisette_label_afficher_send' => 'Send button?',
 	'noisette_label_afficher_titre_noisette' => 'Display a title?',
    'noisette_label_niveau_titre' => 'Choose the title level',
 	'noisette_label_titre_noisette' => 'Title:',
 	'noisette_label_titre_noisette_perso' => 'If custom title:',
+	'noisette_label_width' => 'Width',
 	'noisette_titre_perso' => 'Custom title',
-	'nom_noisette' => 'Facebook badge',
+	'nom_noisette_badge_facebook' => 'Facebook badge',
+	'nom_noisette_facebook_like' => 'Facebook-like button',
 
 	// T
 	'titre_sur_facebook' => 'On Facebook',

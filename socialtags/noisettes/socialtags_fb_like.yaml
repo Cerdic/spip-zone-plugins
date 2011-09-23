@@ -1,0 +1,27 @@
+nom: '<:socialtags:nom_noisette_facebook_like:>'
+description: '<:socialtags:description_noisette_facebook_like:>'
+icon: 'noisettes/socialtags_facebook_like.png'
+parametres:
+  -
+    saisie: 'radio'
+    options:
+      nom: 'bouton_action'
+      label: '<:socialtags:noisette_label_action:>'
+      defaut: 'like'
+      datas:
+        like: '<:socialtags:noisette_action_like:>'
+        recommend: '<:socialtags:noisette_action_recommand:>'
+  -
+    saisie: 'oui_non'
+    options:
+      nom: 'afficher_send'
+      label: '<:socialtags:noisette_label_afficher_send:>'
+      defaut: ''
+  -
+    saisie: 'input'
+    options:
+      nom: 'width'
+      label: '<:socialtags:noisette_label_width:>'
+      defaut: '490'
+    verifier:
+      type: 'entier'

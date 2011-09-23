@@ -34,15 +34,22 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_tout_decocher' => 'Tout décocher',
 
 	// D
-	'description_noisette' => 'Display the Facebook badge defined in the configuration page',
+	'description_noisette_badge_facebook' => 'Affiche le badge Facebook défini dans la page de configuration',
+	'description_noisette_facebook_like' => 'Affiche le bouton <b>J\'aime</b> ou <b>Recommander</b> et éventuellement <b>Envoyer</b>',
 
 	// N
+	'noisette_action_like' => 'J\'aime',
+	'noisette_action_recommand' => 'Recommander',
+	'noisette_label_action' => 'Action' ,
+	'noisette_label_afficher_send' => 'Bouton Envoyer ?',
 	'noisette_label_afficher_titre_noisette' => 'Afficher un titre ?',
    'noisette_label_niveau_titre' => 'Choisir le niveau du titre',
 	'noisette_label_titre_noisette' => 'Titre :',
 	'noisette_label_titre_noisette_perso' => 'Si titre personnalisé :',
+	'noisette_label_width' => 'Largeur',
 	'noisette_titre_perso' => 'Titre personnalisé',
-	'nom_noisette' => 'Badge Facebook',
+	'nom_noisette_badge_facebook' => 'Badge Facebook',
+	'nom_noisette_facebook_like' => 'Bouton Facebook-like',
 
 	// T
 	'titre_sur_facebook' => 'Sur Facebook',

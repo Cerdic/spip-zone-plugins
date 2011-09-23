@@ -1,0 +1,16 @@
+#SET{width,#ENV{width,490}}
+#SET{bouton_action,#ENV{bouton_action,like}}
+[(#SET{code,#LANG|concat{_}|concat{#LANG|strtoupper}})]
+
+<div id="fb-root"></div>
+<script type="application/javascript">/*<!#EVAL{chr(91)}CDATA#EVAL{chr(91)}*/
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/#GET{code}/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+/*#EVAL{chr(93)}[(#EVAL{chr(93)})]>*/</script>
+
+<div class="fb-like" [(#ENV{afficher_send}|oui)data-send="true"] data-width="#GET{width}" data-show-faces="true" data-action="#GET{bouton_action}" data-font="arial"></div>
