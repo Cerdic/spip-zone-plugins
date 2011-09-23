@@ -1,14 +1,14 @@
-[(#AUTORISER{modifier,#ENV{objet},#ENV{id_objet}}|oui)
 	<!--#hierarchie-->
 	<div id="chemin">
 		<span class="bloc">
 		<a href="#URL_ECRIRE{abonnements}"><:abo:abonnements:></a>
 		</span>
 		<span class="bloc">
-		<em> &gt; </em>[(#ENV{id_abonnement}|intval|?{<:abo:editer_abonnement:>,<:abo:creer_abonnement:>})]
+		<em> &gt; </em>[(#ENV{id_abonnement}|intval|?{<:abo:editer_offre_abonnement:>,<:abo:creer_offre_abo:>})]
 		</span>
 	</div>
 	<!--/#hierarchie-->
+	
 	 
 	<!--#navigation-->
 	[(#REM) Ce pipeline charge prive/infos/$type ]
@@ -21,15 +21,25 @@
 			data,''})]})
 	</div>]
 	<!--/#navigation-->
-	 
+	
+[(#AUTORISER{creer,abonnement}|oui)	 
 	<div class='cadre-formulaire-editer'>
-	<div class="entete-formulaire">
-		[(#ENV{retour,#URL_ECRIRE{abonnements}}|icone{<:icone_retour:>, #CHEMIN{images/abonnement_22.png}, #LANG_LEFT})]
-
-		<h1>[(#ENV{id_abonnement}|intval|?{<:abo:editer_abonnement:>,<:abo:creer_abonnement:>})]</h1>
-	</div>
+		<div class="entete-formulaire">
+			[(#ENV{retour,#URL_ECRIRE{abonnements}}|icone{<:icone_retour:>, #CHEMIN{images/abonnement_22.png}, #LANG_LEFT})]
+	
+			<h1>[(#ENV{id_abonnement}|intval|?{<:abo:editer_offre_abonnement:>,<:abo:creer_offre_abo:>})]</h1>
+		</div>
 		<div class='ajax'>
 		[(#FORMULAIRE_EDITER_ABONNEMENT{#ENV{id_abonnement,new},#ENV{retour}})]
 		</div>
+	</div>
+]
+[(#AUTORISER{creer,abonnement}|non)
+	<div class="fiche_objet">
+		<h1>#INFO_TITRE{abonnement,#ENV{id_abonnement}}</h1>
+<div class="champ contenu_texte">
+#INFO_DESCRIPTIF{abonnement,#ENV{id_abonnement}}
+</div>
+	<div class="liste-elements"><:abo:uniquement_webmestres:></div>
 	</div>
 ]

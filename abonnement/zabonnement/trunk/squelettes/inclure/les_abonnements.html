@@ -5,10 +5,7 @@
 	<table class="spip">
 		<BOUCLE_abonnements(ABONNEMENTS){par num titre, titre}>
 		<tr class="row_[(#COMPTEUR_BOUCLE|alterner{odd, even})]">
-			<BOUCLE_documents(DOCUMENTS){id_abonnement}{0,1}>
-			<td>[(#URL_DOCUMENT|image_reduire{100})]</td>
-			</BOUCLE_documents>
-			
+		<td>[(#LOGO_ABONNEMENT|image_reduire{100})]</td>	
 		<td><a href="[(#URL_PAGE{abonnement}|parametre_url{id_abonnement,#ID_ABONNEMENT})]" title="<:abo:en_savoir_plus:>">#TITRE</a></td>
 		<td style="display:none">#DESCRIPTIF</td>
 		<td>#PRIX</td>

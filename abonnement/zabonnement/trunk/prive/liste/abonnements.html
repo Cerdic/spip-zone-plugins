@@ -2,7 +2,7 @@
 #ANCRE_PAGINATION
 <div class="liste-elements abonnements">
 <table class='spip liste'>
-[<caption><strong class="caption">(#ENV*{titre,<:abo:liste_des_abonnements:>})</strong></caption>]
+[<caption><strong class="caption">(#ENV*{titre,<:abo:liste_des_offres:>})</strong></caption>]
 	<thead>
 	<tr>	<th><:abo:id:></th>
 		<th><:abo:label_titre:></th>
@@ -31,7 +31,13 @@
 			<td>#EXACT</td>
 			<td>#PRIX</td>
 			<td>
-				[(#AUTORISER{modifier,abonnement}|oui)
+			[(#AUTORISER{creer,abonnement}|non)
+				<a href="[(#URL_ECRIRE{abonnement_edit}|parametre_url{id_abonnement,#ID_ABONNEMENT})]">
+					<:abo:voir:>
+				</a>
+			]
+			[(#AUTORISER{creer,abonnement}|oui)
+
 					<a href="[(#URL_ECRIRE{abonnement_edit}|parametre_url{id_abonnement,#ID_ABONNEMENT}|parametre_url{redirect,#SELF})]">
 						<:abo:action_editer:>
 					</a> | 
@@ -39,7 +45,7 @@
 						<:abo:action_supprimer:>,
 						#URL_ACTION_AUTEUR{supprimer_abonnement,-#ID_ABONNEMENT,#SELF},
 						ajax,<:abo:confirmer_supprimer_element:>})]
-				]
+			]
 			</td>
 		</tr>
 	</BOUCLE_liste_abonnements>

@@ -1,6 +1,8 @@
 [(#AUTORISER{configurer,plugins})
-	<h1><:abo:abonnements:></h1>
-	
+	<h1><:abo:les_abonnements:></h1>
+		[(#AUTORISER{creer,abonnement}|non)
+			<div><:abo:uniquement_webmestres:></div>
+		]
 	<!--#navigation-->
 	<div class="cadre cadre-info">
 	<INCLURE{fond=prive/menu_abonnement} />
@@ -13,12 +15,12 @@
 	
 
 	
-	[(#AUTORISER{modifier,abonnement}|oui)
+	[(#AUTORISER{creer,abonnement}|oui)
 		[(#URL_ECRIRE{abonnement_edit}
 			|parametre_url{id_abonnement,new}
 			|parametre_url{redirect,#SELF}
 			|icone{
-				<:abo:action_creer_nouvel_abonnement:>,
+				<:abo:action_creer_offre_abo:>,
 				[(#CHEMIN{images/abonnement_22.png})],
 				right,creer.gif}
 		)]

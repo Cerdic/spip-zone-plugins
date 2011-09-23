@@ -16,7 +16,7 @@
 			<th class='statut_abo'>[(#TRI{statut_abonnement,<:abo:statut:>,ajax})]</th>
 			<th class='commande'><:abo:commande:></th>
 			<th class='relance'>[(#TRI{stade_relance,<:abo:relance:>,ajax})]</th>
-			<th class='qui'>[(#TRI{id_auteur,<:abo:abonnement_client:>,ajax})]</th>
+			<th class='qui'>[(#TRI{id_auteur,<:abo:abonne:>,ajax})]</th>
 			<th class='date'>[(#TRI{date,<:abo:abonnement_debut:>,ajax})]</th>
 			<th class='validite'>[(#TRI{validite,<:abo:abonnement_fin:>,ajax})]</th>
 			<th class='descriptif'>[(#TRI{objet,<:abo:contenu:>,ajax})]</th>
@@ -65,7 +65,7 @@
 						|parametre_url{id_commande,#GET{id_commande}})"><:abo:facture:></a>]
 				]
 			]
-				[(#AUTORISER{supprimer,abonnement,#ID_ABONNEMENT})
+				[(#AUTORISER{configurer,abonnement,#ID_ABONNEMENT})
 					[(#BOUTON_ACTION{				
 						<:abo:supprimer:>,
 						[(#URL_ACTION_AUTEUR{supprimer_contacts_abonnement,contacts_abonnement-#ID_CONTACTS_ABONNEMENT-#ID_OBJET-#OBJET}|parametre_url{redirect,#SELF})],

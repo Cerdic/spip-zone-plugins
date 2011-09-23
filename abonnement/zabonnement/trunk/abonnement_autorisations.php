@@ -16,4 +16,13 @@ function autoriser_abonnement_configurer_dist($faire, $type, $id, $qui, $opt) {
 function autoriser_abonnement_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return autoriser('configurer', '', $id, $qui, $opt);
 }
+
+function autoriser_abonnement_creer_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('webmestre');
+}
+
+function autoriser_abonnement_supprimer_dist($faire, $type, $id, $qui, $opt) {
+	return autoriser('webmestre');
+}
+
 ?>
