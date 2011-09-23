@@ -23,10 +23,10 @@ function exec_acs() {
 
   // Affichage
   // (spip-hack: le debut_page doit se trouver avant la création d'un objet composant pour disposer des bons include spip⁾)
-  echo acs_commencer_page(_T('acs:assistant_configuration_squelettes'), "configuration", "acs");
+  echo acs_commencer_page(_T('acs:acs_description'), "configuration", "acs");
 
   echo "<br />";
-  echo acs_gros_titre(_T('acs:assistant_configuration_squelettes'));
+  echo acs_gros_titre(_T('acs:acs_description'));
 
   switch($onglet) {
     case 'pages':
@@ -68,7 +68,10 @@ function exec_acs() {
       $col3 = composants_droite($$c);
       break;
   }
-  $si_premiere_fois = isset($GLOBALS['meta']['ACS_ADMINS']) ? '' : avertissement_config();
+
+  // la fonction avertissement_config disparait dans SPIP 3
+  $si_premiere_fois = isset($GLOBALS['meta']['ACS_ADMINS']) ? '' : (is_callable("avertissement_config") ? avertissement_config() : '');
+  
 	echo debut_onglet();
 	echo onglet(_T('acs:pages'), generer_url_ecrire('acs', 'onglet=pages'), $onglet, 'pages', _DIR_PLUGIN_ACS."/images/pages-24.gif");
 	echo onglet(_T('acs:composants'), generer_url_ecrire('acs', 'onglet=composants'), $onglet, 'composants', _DIR_PLUGIN_ACS."/images/composant-24.gif");

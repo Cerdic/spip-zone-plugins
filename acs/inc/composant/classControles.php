@@ -284,7 +284,7 @@ class ctlChoix extends Controle {
         default:
           $label = _TC($this->composant, $this->nom.$option);
           // S'il n'existe pas de traduction propre au composant, on cherche une traduction ACS generique pour cette option
-          if ($label == str_replace('_', ' ', $this->nom.$option))
+          if ( ($label == str_replace('_', ' ', $this->nom.$option)) || (substr($label, 0, 12) == '<blink style'))
             $label = _T('acs:'.strtolower($option));
       }
       $r .= '<td>&nbsp;'.acs_bouton_radio(
@@ -447,15 +447,15 @@ class ctlHidden extends Controle {
 function _TC($composant, $texte) {
 	// traduction ACS propre au composant
 	$t = _T('acs:'.$composant.'_'.$texte);
-	if ($t != str_replace('_', ' ', $composant.'_'.$texte))
+	if ($t != str_replace('_', ' ', $composant.'_'.$texte) && (substr($t, 0, 12) != '<blink style')) // 2 tests : pré et post SPIP 3
 		return $t;
 	// traduction ACS generique 
 	$t = _T('acs:'.strtolower($texte));
-	if ($t != str_replace('_', ' ', strtolower($texte)))
+	if ($t != str_replace('_', ' ', strtolower($texte)) && (substr($t, 0, 12) != '<blink style'))
 		return $t;
 	// traduction SPIP generique 
 	$t = _T(strtolower($texte));
-	if ($t != str_replace('_', ' ', strtolower($texte)))
+	if ($t != str_replace('_', ' ', strtolower($texte)) && (substr($t, 0, 12) != '<blink style'))
 		return $t;
 	return $texte;
 }

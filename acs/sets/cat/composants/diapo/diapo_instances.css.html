@@ -11,7 +11,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 (#SET{w,[(#ACS_CHEMIN{diapo/#VAR{#EVAL{'acsDiapo'.'#NIC'.'Img'}}}|largeur)]})][
 (#SET{dh,[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Height'},75}|moins{#VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Width'},0}|mult{2}})]})][
 (#SET{dw,[(#VAR{#EVAL{'acsDiapo'.'#NIC'.'Width'},100}|moins{#VAR{#EVAL{'acsDiapo'.'#NIC'.'Bord/Width'},0}|mult{2}})]})
-].iDiapo#NIC div.diaporama, .iDiapo#NIC div.diapo, .iDiapo#NIC div.diapog, .iDiapo#NIC div.diapod, .iDiapo#NIC a.ajax , .iDiapo#NIC a.ajax span {
+].iDiapo#NIC div.diapo, .iDiapo#NIC div.diapog, .iDiapo#NIC div.diapod, .iDiapo#NIC a.ajax , .iDiapo#NIC a.ajax span {
   height: #GET{h, #GET{dh}}px;
 }
 .iDiapo#NIC div.diapo {

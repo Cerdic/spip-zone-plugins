@@ -267,7 +267,19 @@ class AdminComposant {
 	}
 
 	function T($string) {
-		return _T('acs:'.$this->class.'_'.$string);
+		$s = $this->class.'_'.$string;
+		$t = _T('acs:'.$s);
+
+		// On retourne la chaine si elle n'a pas été traduite (test pré-SPIP 3) :
+		if ($t == str_replace('_', ' ', $s))
+			return $string;
+
+		// On s'adapte à SPIP 3 svn :
+		if (substr($t, 0, 12) == '<blink style')
+			return $string;
+
+		// On retourne la traduction
+		return $t;
 	}
 	
 /**
@@ -277,10 +289,10 @@ class AdminComposant {
 	function gauche() {
 		global $spip_version_code;
 
-		if ($this->T('description') != str_replace('_', ' ', $this->class.' description'))
+		if ($this->T('description') != 'description')
 			$r .= '<div>'.$this->T('description').'</div><br />';
 
-		if ($this->T('info') != str_replace('_', ' ', $this->class.' info'))
+		if ($this->T('info') != 'info')
 			$r .= '<div class="onlinehelp" style="text-align: justify">'.$this->T('info').'</div><br />';
 
 		$n = 999;

@@ -57,6 +57,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   'shadowblur' => 'Blur',
 
 	'Nom' => 'Name',
-	'nb' => 'Number'
+	'nb' => 'Number',
+
+	'vertical' => 'vertical',
+	'horizontal' => 'horizontal'
 );
 ?>

@@ -65,11 +65,23 @@
 
   <install>base/acs_install.php</install>
 
+	<!-- le pipeline ajouter_bouton est conservé pour la compatibilité avec les versions antérieures à SPIP 3 -->
   <pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBouton</action>
 		<inclure>inc/acs_pipeline_ecrire.php</inclure>
 	</pipeline>
+	<!-- Bouton pour SPIP >=3 -->
+  <bouton id="acs" parent="menu_squelette">
+    <icone>images/acs_32x32.gif</icone>
+    <titre>acs:acs</titre>
+    <url>acs</url>
+  </bouton>
+  <pipeline>
+    <nom>autoriser</nom>
+    <inclure>inc/acs_autoriser.php</inclure>
+  </pipeline>
+
   <pipeline>
     <nom>header_prive</nom>
     <inclure>inc/acs_pipeline_ecrire.php</inclure>

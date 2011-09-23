@@ -4,11 +4,10 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-  'configurer_site' => 'Conception du site',
   'documentation' => 'Documentation',
 
-  'assistant_configuration_squelettes' => 'Assistant Conception du Site',
   'acs' => 'ACS',
+	'acs_description' => 'Conception du Site',
 
   'set_actif' => 'Jeu de composants ACS actif: <b>@set@</b>',
   'overriden_by' => ', surcharg&eacute; par les squelettes de <u>@over@</u>',

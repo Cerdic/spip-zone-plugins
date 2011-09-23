@@ -24,7 +24,7 @@ Copyleft: licence GPL - Cf. LICENCES.txt
 
 [(#REM) On DOIT redéfinir la couleur du body pour overrider la couleur définie
 dans la feuille de style du modèle, qui est chargée.
-]body {
+]body.acs {
   background: #ffffff;
 }
 
@@ -38,7 +38,7 @@ dans la feuille de style du modèle, qui est chargée.
   color: red;
 }
 
-/* Mise en page en colonnes - ne PAS mettre margin/padding là-dedans ! */
+[(#REM) Mise en page en colonnes - ne PAS mettre margin/padding là-dedans ! ]
 .acs_colonnes {
   display: block;
   padding: 0;
@@ -286,12 +286,13 @@ fieldset.apercu {
 .widgy_unused {
   background: #dfdfdf;
 }
-.widgy_included {
+.acs .widgy_included {
   border: thin dotted #GET{claire};
   border-right: 0;
   border-bottom: 0;
   background: none;
   vertical-align: top;
+  padding: 2px;
 }
 .widgy_included_label {
   text-align : right;

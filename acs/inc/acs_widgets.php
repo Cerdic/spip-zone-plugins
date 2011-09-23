@@ -14,7 +14,7 @@ function liste_widgets($visible = true) {
 	$composants = composants_liste();
 	// On renvoie directement une liste vide si aucun composant n'est trouvé
 	if (!is_array($composants))
-		return acs_box('0 '.strtolower(_T('composants')), '&nbsp;', _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
+		return acs_box('0 '.strtolower(_T('acs:composants')), '&nbsp;', _DIR_PLUGIN_ACS."/images/composant-24.gif", 'acs_box_composants');
 
   $elts = '';
   $cadres = '';
@@ -30,10 +30,10 @@ function liste_widgets($visible = true) {
       }
       else {
       	$nom = ucfirst(str_replace('_', ' ', $class)).($nic ? ' '.$nic : '');
-      	$title = _T('composant');
+      	$title = _T('acs:composant');
       }
   		$html = '<div id="widget_'.$class.($nic ? '-'.$nic : '').'" class="'.get_widget_class($cp['over'], $c['on'], 'widget').'">'.
-        '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('composant').'">'.widget_icon($class, $nic).'</a>'.
+        '<table><tr><td><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'._T('acs:composant').'">'.widget_icon($class, $nic).'</a>'.
         '</td><td title="'.$title.'" style="width: 95%;"><div><a href="'._DIR_RESTREINT.'?exec=acs&amp;onglet=composants&amp;composant='.$class.($nic ? '&amp;nic='.$nic : '').'" title="'.$title.'">'.$nom.'</a></div></td></tr></table>'.
       '</div>';
   		if ($class == 'cadre')

@@ -4,12 +4,11 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-  'configurer_site' => 'Website design',
   'documentation' => 'Documentation',
 
-  'assistant_configuration_squelettes' => 'Site design wizard',
   'acs' => 'ACS',
-
+	'acs_description' => 'Site design wizard',
+	
   'set_actif' => 'ACS active set: <b>@set@</b>',
   'overriden_by' => ', overriden by skeletons from <u>@over@</u>',
   'set_actif2' => '.',

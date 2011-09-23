@@ -110,7 +110,7 @@ function page_get_infos($page, $mode_source=false, $detail='') {
   }
   else {
     if (count($includes['tags'])) {
-      $r .= '<div class="onlinehelp">'._T('acs:structure_page').' : </div><div>';
+      $r .= '<div class="onlinehelp">'._T('acs:structure_page').' : </div><div class="structure_page">';
       foreach ($includes['tags'] as $debut=>$tag) {
         $schema .= ' '.$tag['contenu'];
       }

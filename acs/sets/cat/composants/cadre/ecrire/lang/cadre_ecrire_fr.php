@@ -11,5 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'Orientation' => 'Orientation',
 'OrientationVertical' => 'verticale',
 'OrientationHorizontal' => 'horizontale',
+'style' => 'Style CSS'
 );
 ?>
