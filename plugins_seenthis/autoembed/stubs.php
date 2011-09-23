@@ -1501,6 +1501,14 @@ $AutoEmbed_stubs = array(
     'embed-height' => '400',
     'embed-src' => 'http://media.kyte.tv/flash/MarbachLoader.swf?buildNum=110819_1140&c=$2&s=$3',
   ),
+ array(
+    'title' => 'Arte Video',
+    'website' => 'http://videos.arte.tv',
+    'url-match' => '(http://videos\.arte\.tv/fr/videos/(.*\-([0-9]+))\.html)',
+    'embed-width' => '450',
+    'embed-height' => '303',
+    'embed-src' => 'http://videos.arte.tv/videoplayer.swf?mode=prod&lang=fr&configFileUrl=http%3A//videos%2Earte%2Etv/cae/static/flash/player/config%2Exml&localizedPathUrl=http%3A//videos%2Earte%2Etv/cae/static/flash/player/&videoId=$4&autoPlay=true&admin=false&videorefFileUrl=http%3A//videos%2Earte%2Etv/fr/do%5Fdelegate/videos/$3%2Cview%2CasPlayerXml%2Exml&embed=true&autoPlay=false',
+  ),
 array(
     'title' => 'BandCamp (track)',
     'website' => 'http://www.bandcamp.com',
