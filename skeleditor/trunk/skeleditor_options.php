@@ -112,8 +112,10 @@ function skeleditor_affichage_final($texte){
 			$retour = self();
 			$url = generer_url_ecrire('skeleditor','retour='.$retour.'&f=');			
 			$inserer = "<script type='text/javascript'>jQuery(function(){jQuery('.inclure_blocs h6:first-child').each(function(){
-				jQuery(this).html(\"<a href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'<'+'/a>');
-			})});</script></body>";
+				jQuery(this).html(\"<a class='sepopin' href='$url\"+jQuery(this).html()+\"'>\"+jQuery(this).html()+'<'+'/a>');
+			});"
+			//."jQuery('a.sepopin').click(function(){if (jQuery.modalbox) jQuery.modalbox(parametre_url(this.href,'var_zajax','contenu'));return false;});"
+			."});</script></body>";
 			$texte = preg_replace(",</body>,",$inserer,$texte);
 			
 			$css = skeleditor_extraire_css($texte);

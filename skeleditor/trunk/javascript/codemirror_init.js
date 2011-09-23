@@ -9,8 +9,12 @@ var cm_options = {
 if (cm_mode.length)
 	cm_options.mode = cm_mode;
 
-var editor = CodeMirror.fromTextArea(document.getElementById('code'), cm_options);
+var editor;
 var lastPos = null, lastQuery = null, marked = [];
+
+function editor_init(){
+	editor = CodeMirror.fromTextArea(document.getElementById('code'), cm_options);
+}
 
 function unmark() {
   for (var i = 0; i < marked.length; ++i) marked[i]();
@@ -42,3 +46,5 @@ function replace() {
   for (var cursor = editor.getSearchCursor(text); cursor.findNext();)
     editor.replaceRange(replace, cursor.from(), cursor.to());
 }
+
+setTimeout(editor_init,300);

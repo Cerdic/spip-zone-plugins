@@ -4,13 +4,13 @@
 	<div class="actions">
 		<div class="context">
 		[(#ENV{editable}|non|et{#ENV{fichier}})
-			[(#BOUTON_ACTION{#CHEMIN{images/se-file-copy-16.png}|balise_img{'copy'}|concat{' ',<:skeleditor:personaliser:>},#URL_ACTION_AUTEUR{skeleditor_new_from,#ENV{fichier},#SELF|parametre_url{f,''}}})]
+			[(#BOUTON_ACTION{#CHEMIN{images/se-file-copy-16.png}|balise_img{'copy'}|liens_absolus|concat{' ',<:skeleditor:personaliser:>},#URL_ACTION_AUTEUR{skeleditor_new_from,#ENV{fichier},#SELF|parametre_url{f,''}}})]
 		]
 		[(#AUTORISER{download,squelette,#ENV{fichier}}|oui)
-			[(#BOUTON_ACTION{#CHEMIN{images/se-download-16.png}|balise_img{'download'}|concat{' ',<:skeleditor:action_download:>},#URL_ACTION_AUTEUR{skeleditor_dl,#ENV{fichier}}})]
+			[(#BOUTON_ACTION{#CHEMIN{images/se-download-16.png}|balise_img{'download'}|liens_absolus|concat{' ',<:skeleditor:action_download:>},#URL_ACTION_AUTEUR{skeleditor_dl,#ENV{fichier}}})]
 		]
 		[(#AUTORISER{supprimer,squelette,#ENV{fichier}}|oui)
-			[(#BOUTON_ACTION{#CHEMIN{images/se-file-delete-16.png}|balise_img{'delete'}|concat{' ',<:skeleditor:action_supprimer:>},#URL_ACTION_AUTEUR{skeleditor_delete,#ENV{fichier},#SELF|parametre_url{f,''}},'',<:skeleditor:effacer_confirme:>})]
+			[(#BOUTON_ACTION{#CHEMIN{images/se-file-delete-16.png}|balise_img{'delete'}|liens_absolus|concat{' ',<:skeleditor:action_supprimer:>},#URL_ACTION_AUTEUR{skeleditor_delete,#ENV{fichier},#SELF|parametre_url{f,''}},'',<:skeleditor:effacer_confirme:>})]
 		]
 		</div>
 	</div>
