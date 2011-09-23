@@ -53,8 +53,6 @@ class AutoEmbed {
       if ( preg_match('~'.$stub['url-match'].'~imu', $url, $match) ) {
         $this->_stub = $stub;
         
-        print_r($stub);
-        
         if ( isset($stub['fetch-match'] ) ) {
           return $this->_parseLink($url);
 

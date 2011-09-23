@@ -160,6 +160,16 @@ $AutoEmbed_stubs = array(
     'embed-width' => '425',
     'embed-height' => '354',
   ),
+   array(
+    'title' => 'Grooveshark',
+    'website' => 'http://www.grooveshark.com',
+    'url-match' => 'http://(www\.)?grooveshark\.com(.*)',
+    'fetch-match' => 'http://grooveshark\.com\/facebookWidget\.swf\?songID\=([0-9]*)\"',
+    'embed-width' => '250',
+    'embed-height' => '40',
+    'embed-src' => 'http://grooveshark.com/songWidget.swf?songID=$2',
+  ),
+
   array(
     'title' => 'Island Tickle Video',
     'website' => 'http://www.islandticklevideo.com',
@@ -872,6 +882,7 @@ $AutoEmbed_stubs = array(
     'embed-width' => '425',
     'embed-height' => '350',
   ),
+  /*
   array(
     'title' => 'Mp3tube',
     'website' => 'http://www.mp3tube.net',
@@ -880,6 +891,7 @@ $AutoEmbed_stubs = array(
     'embed-width' => '260',
     'embed-height' => '60',
   ),
+  */
   array(
     'title' => 'MtvU (Usa Only)',
     'website' => 'http://www.mtvu.com',
@@ -1160,7 +1172,15 @@ $AutoEmbed_stubs = array(
     'embed-height' => '270',
     'iframe-player' => 'http://www.theonion.com/video_embed/?id=$2',
   ),
-  array(
+   array(
+    'title' => 'PDF file',
+    'website' => '',
+    'url-match' => '(.*\.(pdf|doc|docx|xls|xlsx|ppt|pptx|pages|ai|psd|tiff|dxf|eps|ps))$',
+    'embed-width' => '480',
+    'embed-height' => '520',
+    'iframe-player' => 'http://docs.google.com/gview?url=$2&amp;embedded=true',
+  ),
+ array(
     'title' => 'TinyPic',
     'website' => 'http://www.tinypic.com',
     'url-match' => 'http://(?:www\.)?tinypic\.com/player\.php\?v=([0-9a-z-&=]{1,12})',
@@ -1450,6 +1470,22 @@ $AutoEmbed_stubs = array(
     'embed-src' => 'http://www.mixcloud.com/media/swf/player/mixcloudLoader.swf?feed=$2',
   ),
  array(
+    'title' => 'TrailerSpy',
+    'website' => 'http://www.trailerspy.com',
+    'url-match' => 'http://www\.trailerspy\.com/trailer/([0-9]+)/.*',
+    'embed-width' => '480',
+    'embed-height' => '295',
+    'embed-src' => 'http://www.trailerspy.com/xmoov_flv/player/$2/va_l/',
+  ),
+ array(
+    'title' => 'Gogoyoko',
+    'website' => 'http://www.gogoyoko.com',
+    'url-match' => 'http://www\.gogoyoko\.com/song/([0-9]+)',
+    'embed-width' => '460',
+    'embed-height' => '105',
+    'embed-src' => 'http://www.gogoyoko.com/object/widget_player.swf?songId=$2',
+  ),
+ array(
     'title' => 'Zero-Inch',
     'website' => 'http://www.zero-inch.com',
     'url-match' => 'http:\/\/www\.zero\-inch\.com\/.*\/([0-9]+)',
@@ -1458,13 +1494,42 @@ $AutoEmbed_stubs = array(
     'embed-src' => 'http://www.zero-inch.com/widgets/release_xl.swf?productId=$2',
   ),
  array(
-    'title' => 'Grooveshark',
-    'website' => 'http://www.grooveshark.com',
-    'fetch-match' => 'http\:\/\/grooveshark\.com\/facebookWidget\.swf\?songID\=([0-9]*)\"',
-    'embed-width' => '250',
-    'embed-height' => '40',
-    'embed-src' => 'http://grooveshark.com/songWidget.swf?songID=$2',
+    'title' => 'NatoChannel',
+    'website' => 'http://www.natochannel.tv',
+    'url-match' => 'http://www\.natochannel\.tv/\?uri\=channels/([0-9]+)/([0-9]+)',
+    'embed-width' => '480',
+    'embed-height' => '400',
+    'embed-src' => 'http://media.kyte.tv/flash/MarbachLoader.swf?buildNum=110819_1140&c=$2&s=$3',
   ),
+array(
+    'title' => 'BandCamp (track)',
+    'website' => 'http://www.bandcamp.com',
+    'url-match' => 'http://(.*\.)?bandcamp\.com/track/.*',
+    'fetch-match' => 'http://bandcamp\.com/EmbeddedPlayer\.swf/size=venti/track\=([0-9]*)/',
+    'embed-width' => '300',
+    'embed-height' => '100',
+    'iframe-player' => 'http://bandcamp.com/EmbeddedPlayer/v=2/track=$2/size=grande/bgcol=FFFFFF/linkcol=4285BB/transparent=true/',
+  ),
+array(
+    'title' => 'BandCamp (album)',
+    'website' => 'http://www.bandcamp.com',
+    'url-match' => 'http://(.*\.)?bandcamp\.com/album/.*',
+    'fetch-match' => 'http://bandcamp\.com/EmbeddedPlayer\.swf/size=venti/album\=([0-9]*)/',
+    'embed-width' => '300',
+    'embed-height' => '410',
+    'iframe-player' => 'http://bandcamp.com/EmbeddedPlayer/v=2/album=$2/size=grande3/bgcol=FFFFFF/linkcol=4285BB/transparent=true/',
+  ),
+
+  /*
+ array(
+    'title' => 'Radionomy',
+    'website' => 'http://www.radionomy.com',
+    'fetch-match' => 'BannerEmbed\.swf\?RadUID=([a-z0-9\-]*)&amp',
+    'embed-width' => '240',
+    'embed-height' => '300',
+    'embed-src' => 'http://www.radionomy.com/Flash/BannerEmbed.swf?RadUID=$2&amp;lang=fr&amp;autoplay=true',
+  ),
+  */
 
   array(
     'title' => 'Local Content',

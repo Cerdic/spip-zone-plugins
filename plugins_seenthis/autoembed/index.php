@@ -17,8 +17,6 @@ function embed_url($url) {
 	// Si l'embed a deja été sauvegardé
 	if (file_exists("cache/$host/$dossier/$fichier")) {
 		$html = implode("", file("cache/$host/$dossier/$fichier"));
-		echo $html;
-		
 	} else { // Si pas sauvegardé
 	
 		// Créer dossier si nécessaire
