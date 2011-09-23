@@ -26,7 +26,7 @@ function autoriser_ml_gerer_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * Fonction gerant l'autorisation d'administration des ML
+ * Fonction gerant l'autorisation d'administration des ML et de l'affichage du menu du bandeau
  *
 */
 function autoriser_ml_administrer_dist($faire,$quoi,$id,$qui,$options) {
@@ -34,9 +34,9 @@ function autoriser_ml_administrer_dist($faire,$quoi,$id,$qui,$options) {
 }
 
 function autoriser_gestionml21_bouton_dist($faire,$quoi,$id,$qui,$options) {
-	return autoriser('administrer','gestionml',$id,$qui,$options);
+	return autoriser('administrer','ml',$id,$qui,$options);
 }
 function autoriser_gestionml_bouton_dist($faire,$quoi,$id,$qui,$options) {
-	return autoriser('administrer','gestionml',$id,$qui,$options);
+	return autoriser('administrer','ml',$id,$qui,$options);
 }
 ?>

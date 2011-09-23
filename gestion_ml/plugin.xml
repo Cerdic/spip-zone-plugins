@@ -2,7 +2,7 @@
 <plugin>
 	<nom>Gestion ML</nom>
 	<auteur>Yffic</auteur>
-	<version>0.2</version>
+	<version>0.3</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>Gestion de Mailling Lists externes. Ne fonctionne actuellement que chez OVH avec le robot ezmlm via SoAPI</description>
