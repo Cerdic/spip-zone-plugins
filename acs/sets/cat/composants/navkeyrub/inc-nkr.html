@@ -23,7 +23,7 @@
             </ul>[(#SET{AFILLES,menu-item-haschilds})]
         </B_rubriques>[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'CouleurMot'}}|!={non}|?{" "})
           <style>[
-            a#nkr#ID_MOT:link {color:#(#LOGO_MOT|couleur_extraire|sinon{#VAR{acsFondLink}|substr{1}})}][
+            a#nkr#ID_MOT:link, a#nkr#ID_MOT:visited {color:#(#LOGO_MOT|couleur_extraire|sinon{#VAR{acsFondLink}|substr{1}})}][
             a#nkr#ID_MOT:hover {color:#(#LOGO_MOT_SURVOL|couleur_extraire|sinon{#VAR{acsFondLinkHover}|substr{1}})}]
           </style>
         ]<a id="nkr#ID_MOT" href="#URL_MOT"[ title="(#DESCRIPTIF|textebrut|couper{80}|sans_guillemets)"][ class="(#GET{AFILLES})"]><span class="titre">[(#VAR{#EVAL{'acsNavkeyrub'.'#NIC'.'LogoMot'}}|!={non}|?{" "})[(#LOGO_MOT|image_reduire{20})]][(#TITRE|supprimer_numero|couper{80})]</span></a>

@@ -13,8 +13,6 @@ Bouton precedant
 #SET{bornes,#ENV{page_courante}|bornes_pagination{#ENV{nombre_pages},10}}
 #SET{premiere, #GET{bornes}|reset}
 #SET{i,#ENV{page_courante}|moins{1}}
-[(#GET{i}|>{0}|?{' ',''})[
-  (#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })
-  ]<a href='[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}})]' class="ajax" title="<:spip:precedent:> ([(#GET{i})][/(#ENV{nombre_pages})])">&nbsp;</a>
-	#SET{i,#GET{i}|plus{2}}
+[(#GET{i}|>{0}|?{' ',''})[(#SET{item, #GET{i}|moins{1}|mult{#ENV{pas}} })]
+<a href='[(#ENV{url}|parametre_url{#ENV{debut},#GET{item}})]' class="ajax" title="<:spip:precedent:> ([(#GET{i})][/(#ENV{nombre_pages})])"><span>&lt;</span></a>
 ]

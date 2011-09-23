@@ -7,7 +7,13 @@
 Copyright Daniel FAIVRE, 2007-2011
 Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
 
-].cDiapo div {
+].cDiapo {
+  text-align: center;
+}
+.cDiapo div.diaporama {
+  display: inline-block;
+}
+.cDiapo div.diapo, .cDiapo div.diapog, .cDiapo div.diapod {
   float: left;
 }
 .cDiapo div.diapo {
@@ -28,13 +34,19 @@ Copyleft: licence GPL - Cf. LICENCES.txt in acs plugin dir
   text-align: center;
 }
 .cDiapo .diapog, .cDiapo .diapod {
+  display: block;
   width: 25px;
-  min-width: 25px;
   text-align: center;
 }
-.cDiapo .diapog a.ajax:link, .cDiapo .diapod a.ajax:link {
+.cDiapo a.ajax:link {
   display: block;
   outline: none;
+  width: 25px;
+}
+.cDiapo a.ajax span {
+  display: block;
+  width: 25px;
+  text-indent: -10000px;
 }
 #cboxLoadedContent .spip_documents {
   margin: 0;
