@@ -30,9 +30,10 @@
 		<inclure>base/association.php</inclure>
 	</pipeline>
 	<pipeline>
-        <nom>declarer_tables_interfaces</nom>
-        <inclure>base/association.php</inclure>
+        	<nom>declarer_tables_interfaces</nom>
+        	<inclure>base/association.php</inclure>
 	</pipeline>
+
 
 
 	<pipeline>
@@ -52,6 +53,12 @@
 		<inclure>inc/lien_page_auteur.php</inclure>
 	</pipeline>
 
+	<!-- Interface avec plugin champs extras 2 -->
+	<pipeline>
+		<nom>objets_extensibles</nom>
+		<inclure>inc/champs_extras.php</inclure>
+	</pipeline>
+
 	<!-- Autorisations -->
 	<pipeline>
 		<nom>autoriser</nom>
@@ -61,4 +68,5 @@
 	<categorie>divers</categorie>
 	<necessite id="SPIP" version="[2.1.8;]" />
 	<utilise id="coordonnees" version="[1.4.5;]" />
+	<utilise id="cextras" version="[0.8;]" />
 </plugin>
