@@ -15,7 +15,9 @@ include_spip('inc/svp_phraser');
 
 // $url		=> url du fichier xml de description du depot
 // $erreur	=> message d'erreur a afficher
-function svp_ajouter_depot($url, &$erreur=''){
+function svp_ajouter_depot($url, &$erreur='') {
+	include_spip('inc/distant');
+
 	// On considere que l'url a deja ete validee (correcte et nouveau depot)
 	$url = trim($url);
 
@@ -28,6 +30,7 @@ function svp_ajouter_depot($url, &$erreur=''){
 	
 	// Ajout du depot dans la table spip_depots. Les compteurs de paquets et de plugins
 	// sont mis a jour apres le traitement des paquets
+	$fichier_xml = _DIR_RACINE . copie_locale($url, 'force');
 	$champs = array('titre' => filtrer_entites($infos['depot']['titre']), 
 					'descriptif' => filtrer_entites($infos['depot']['descriptif']),
 					'type' => $infos['depot']['type'],
@@ -35,7 +38,7 @@ function svp_ajouter_depot($url, &$erreur=''){
 					'url_brouteur' => $infos['depot']['url_brouteur'],
 					'url_archives' => $infos['depot']['url_archives'],
 					'xml_paquets'=> $url,
-					'sha_paquets'=> sha1_file($url),
+					'sha_paquets'=> sha1_file($fichier_xml),
 					'nbr_paquets' => 0,
 					'nbr_plugins' => 0,
 					'nbr_autres' => 0);
@@ -152,6 +155,8 @@ function svp_nettoyer_apres_suppression($id_depot, $vmax) {
 
 // $id	=> id_depot de l'objet depot dans la table spip_depots
 function svp_actualiser_depot($id){
+	include_spip('inc/distant');
+	
 	$id = intval($id);
 	
 	// pas de depot a cet id ?
@@ -159,7 +164,8 @@ function svp_actualiser_depot($id){
 		return false;
 	}
 
-	$sha = sha1_file($depot['xml_paquets']);
+	$fichier_xml = _DIR_RACINE . copie_locale($depot['xml_paquets'], 'force');
+	$sha = sha1_file($fichier_xml);
 	if ($depot['sha_paquets'] == $sha) {
 		// Le fichier n'a pas change (meme sha1) alors on ne fait qu'actualiser la date 
 		// de mise a jour du depot en mettant a jour *inutilement* le sha1
