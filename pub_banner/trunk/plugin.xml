@@ -2,7 +2,7 @@
 	<!--
 	Versions / Etat
 	-->
-	<version>1.28</version>
+	<version>1.28.0</version>
 	<version_base>0.8</version_base>
 	<etat>dev</etat>
 	<!--
@@ -11,9 +11,8 @@
 	<nom>Pub Banner</nom>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
 	<licence>[Creative Commons BY-SA|Creative Commons - Paternite - Distribution a l'Identique->http://creativecommons.org/licenses/by-sa/3.0/]</licence>
+	<slogan>Gestionnaire de banni&#232;res publicitaires</slogan>
 	<description>
-{{Pub Banner :: Gestionnaire de banni&#232;res publicitaires}}
-
 Gestion et statistiques de banni&#232;res publicitaires pour int&#233;gr&#233;es aux squelettes SPIP ...
 
 {{UTILISATION}}
@@ -26,7 +25,7 @@ Gestion et statistiques de banni&#232;res publicitaires pour int&#233;gr&#233;es
 
 {{AIDE / DOC}}
 -* Une explication ainsi qu'un exemple complet sont disponibles dans la documentation, qui vous permettra &#233;galement de visualiser l'int&#233;gration des banni&#232;res dans vos squelettes.
-Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique [pubban_documentation->/?page=pubban_documentation].
+Cette documentation est disponible, si le plugin est actif sur votre site, sur la page publique "pubban_documentation".
 
 -* La page de statistiques du plugin est une adaptation libre du script '{{[VRG pub->http://vrgpub.frankdevelopper.com/]}}' d&#233;velopp&#233; par {{Vincent Roseberry}} ({sous licence GPL &#224; l'&#233;poque}).
 	</description>
