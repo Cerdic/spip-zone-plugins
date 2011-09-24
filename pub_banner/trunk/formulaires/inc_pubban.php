@@ -15,11 +15,11 @@ function formulaires_inc_pubban_charger_dist(){
 	$id_banniere = _request('empl');
 	$tout = _request('tout') ? _request('tout') : false;
 	$banniere = pubban_recuperer_banniere_par_nom($id_banniere);
-	if(!$tout && $banniere['statut'] != '2actif') return;
+	if(empty($banniere) || (!$tout && $banniere['statut'] != '2actif')) return;
 
 	$list_pub = pubban_pubs_de_la_banniere($banniere['id'], false);
 	$nbpub = count($list_pub);
-	if($nbpub == 0) return;
+	if(empty($list_pub) || $nbpub == 0) return;
 	$nbpub = $nbpub-1;
 	$banaffi = rand(0, $nbpub);
 

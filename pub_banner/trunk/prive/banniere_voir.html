@@ -40,6 +40,7 @@
 	<strong>&nbsp;<:pubban:listing_empl:></strong>
 </div>
 
+#SET{pub_pleine,1}
 <B_pourpub>
 <div class='cadre cadre-liste' style='margin-top: 20px;'>
 <div class='titrem replie' onmouseover="jQuery(this).depliant('#pubban_liste_contenu_pub');"><a href='#' onclick="return jQuery(this).depliant_clicancre('#pubban_liste_contenu_pub');" class='titremancre'></a><:pubban:btn_see_liste:></div>
@@ -103,13 +104,18 @@
 </div>
 </div>
 </B_pourpub>
+#SET{pub_pleine,0}
 <p><:pubban:no_pub_yet:></p>
 <//B_pourpub>
 
 <div class='cadre cadre-e' style='margin-top: 20px;'>
 	<strong>&nbsp;<:pubban:apercu:></strong>
 </div>
-	#PUBBAN{#TITRE_ID,tout}
+[(#GET{pub_pleine}|=={0}|non)
+	[(#PUBBAN{#TITRE_ID,tout})]
+][(#GET{pub_pleine}|=={0}|oui)
+	<p><:pubban:apercu_indisponible:></p>
+]
 <div class='nettoyeur'></div>
 	</BOUCLE_pubban>
 </B_pubban>

@@ -18,6 +18,7 @@ $GLOBALS['i18n_pubban_fr'] = array(
 	'affi_txt' => 'affichage(s)',
 	'au' => ' au ',
 	'apercu' => 'Aper&ccedil;u',
+	'apercu_indisponible' => 'Aper&ccedil;u non-disponible',
 
 // B //
 	'btn_modifier' => 'Modifier',
