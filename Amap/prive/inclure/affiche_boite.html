@@ -1,3 +1,4 @@
+#CACHE{0}
 <div class="cadre cadre-r" style="">
 	<img class="cadre-icone" width="24" height="24" alt="" src="#CHEMIN{prive/themes/spip/images/amapconfig-24.gif}">
 	<div class="titrem"><:amap:information_amap:></div>
@@ -9,6 +10,7 @@
 		</BOUCLE_panier>
 			<BOUCLE_aut1(AUTEURS){id_auteur}{tous}>
 				<:amap:aucun_panier_pour_nom{nom=#NOM}:>
+				<a href="[(#URL_ECRIRE{panier_enregistre})]"><:amap:creer_paniers_pour_nom{nom=#NOM}:></a>
 			</BOUCLE_aut1>
 		<//B_panier>
 	</div>
