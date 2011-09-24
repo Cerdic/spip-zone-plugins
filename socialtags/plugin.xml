@@ -1,12 +1,19 @@
 <plugin>
 	<nom>Social tags</nom>
-	<auteur>phil... et d autres</auteur>
+	<auteur>phil</auteur>
 	<icon>socialtags-32.png</icon>
 	<version>0.9.10</version>
 	<etat>stable</etat>
-	<description>
-		<multi>[fr]Active les r&eacute;seaux sociaux de partage de liens.
+	<slogan>
+		<multi>[fr]Activer des boutons de partage de liens sur les r&#233;seaux sociaux.
 		[en]Activate the social link sharing network buttons.</multi>
+	</slogan>
+	<description>
+		<multi>
+[fr]Le plugin Social Tags permet d'ajouter des ic&#224;nes de partage de liens vers les sites tels que Digg, Facebook, Delicious....
+_ A partir de la version 0.8, une option permet de r&#233;server l'affichage du bouton de partage aux seuls utilisateurs en provenance de Facebook. 
+En outre, si le plugin Google+1 est actif, il est possible de rajouter le bouton correspondanr dans la liste des liens de Social tags.
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Social-tags</lien>
 	<prefix>socialtags</prefix>
@@ -20,19 +27,26 @@
 		<action>insert_head</action>
 		<inclure>socialtags_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;2.2.0)" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id='cfg' version='[1.10.4;]' />
 	<categorie>communication</categorie>
 </plugin>
 <plugin spip="[3.0.0-dev;3.0.*]">
 	<nom>Social tags</nom>
-	<auteur>phil...  et d autres</auteur>
+	<auteur>phil</auteur>
 	<icon>socialtags-32.png</icon>
 	<version>0.9.10</version>
 	<etat>stable</etat>
-	<description>
-		<multi>[fr]Active les r&eacute;seaux sociaux de partage de liens.
+	<slogan>
+		<multi>[fr]Active les boutons de partage de liens sur les r&#233;;seaux sociaux.
 		[en]Activate the social link sharing network buttons.</multi>
+	</slogan>
+	<description>
+		<multi>
+[fr]Le plugin Social Tags permet d'ajouter des ic&#224;nes de partage de liens vers les sites tels que Digg, Facebook, Delicious, Technorati...
+_ A partir de la version 0.8, une option permet aussi de r&#233;server l'affichage du bouton de partage aux seuls utilisateurs en provenance de Facebook. 
+En outre, si le plugin Google+1 est actif, il est possible de rajouter le bouton correspondant dans la liste des liens de Social tags.
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Social-tags</lien>
 	<prefix>socialtags</prefix>
