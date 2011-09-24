@@ -4,14 +4,14 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-'js_nouvelle_fenetre' => '(nouvelle fen&ecirc;tre)',
+'js_nouvelle_fenetre' => '(nouvelle fenêtre)',
 'lien_externe' => 'Lien externe',
-'lien_ouvrant' => 'Lien ouvrant une nouvelle fen&ecirc;tre',
+'lien_ouvrant' => 'Lien ouvrant une nouvelle fenêtre',
 'titre_menu_liens' => 'Liens explicites',
-'message_ok_configuration' => 'Enregistrement de vos pr&eacute;f&eacute;rences termin&eacute;',
-'message_ok_update_configuration' => 'Mise &agrave; jour de vos pr&eacute;f&eacute;rences termin&eacute;e',
-'erreur_choisir_liens_ouvrants' => 'Merci de choisir au moins un &eacute;l&eacute;ment&nbsp;!',
-'erreur_choisir_extensions' => 'Merci d\'indiquer les extensions des fichiers &agrave; ouvrir dans une nouvelle fen&ecirc;tre&nbsp;!'
+'message_ok_configuration' => 'Enregistrement de vos préférences terminé',
+'message_ok_update_configuration' => 'Mise à jour de vos préférences terminée',
+'erreur_choisir_liens_ouvrants' => 'Merci de choisir au moins un élément !',
+'erreur_choisir_extensions' => 'Merci d\'indiquer les extensions des fichiers à ouvrir dans une nouvelle fenêtre !'
 
 );
 

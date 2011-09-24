@@ -20,7 +20,7 @@ function links_insert_head($flux) {
 	if($links['window'] == 'on'){
 		//Ouverture dune nouvelel fenetre sur les liens externes
 		if($links['external'] == 'on'){
-			$flux .= '<script type="text/javascript">var js_nouvelle_fenetre=\''.html_entity_decode(_T('links:js_nouvelle_fenetre'),ENT_QUOTES).'\';var links_site = \''.$GLOBALS['meta']['adresse_site'].'\';</script>';
+			$flux .= '<script type="text/javascript">var js_nouvelle_fenetre=\''._T('links:js_nouvelle_fenetre').'\';var links_site = \''.$GLOBALS['meta']['adresse_site'].'\';</script>';
 		}
 		//Ouverture d'une nouvelle fenetre sur les documents (extensions a preciser)
 		if(($links['download'] == 'on')&&($links['doc_list'])){
