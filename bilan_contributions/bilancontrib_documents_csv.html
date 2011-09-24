@@ -1,0 +1,16 @@
+#CACHE{6*3600}#HTTP_HEADER{Content-type:text/csv; charset=#CHARSET}[(#SET{fichier,#VAL{bilan_contributions_documents_}|concat{#NOM_SITE_SPIP}})][(#HTTP_HEADER{Content-type: text/csv[; charset=(#CHARSET)]})][(#HTTP_HEADER{Pragma: no-cache})][(#HTTP_HEADER{Content-Disposition: attachment[; filename="(#GET{fichier}|concat{.csv})"]})][
+(#REM) Chercher les annees utilisees ][
+(#SET{annees,#ARRAY})]<BOUCLE_articles_annees(ARTICLES){tout}>[(#DATE|annee|unique|oui)#SET{annees, #GET{annees}|push{#DATE|annee}}]</BOUCLE_articles_annees>[
+(#REM) Chercher les extensions utilisees ][
+(#SET{extensions,#ARRAY})]<BOUCLE_extensions(DOCUMENTS){tout}{par extension}{statut=publie}>[(#EXTENSION|unique|oui)#SET{extensions, #GET{extensions}|push{#EXTENSION}]</BOUCLE_extensions><:plugins_liste_extensions:>;<BOUCLE_annees_head_documents(POUR){tableau #GET{annees}}{par cle}>#VALEUR;;</BOUCLE_annees_head_documents><BOUCLE_types_documents(POUR){tableau #GET{extensions}}{par cle}>
+"#VALEUR";[
+(#SET{extension,#VALEUR})][
+(#SET{total,0})][
+(#SET{taille_totale,0})]<BOUCLE_annees_documents(POUR){tableau #GET{annees}}{par cle}>[
+(#SET{taille,0})]<BOUCLE_documents_a(DOCUMENTS){documents_liens.objet = article}{articles.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>[
+(#SET{taille,#GET{taille}|plus{#TAILLE}})]</BOUCLE_documents_a>[
+(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})][
+(#SET{taille_totale,#GET{taille_totale}|plus{#GET{taille}}})]</B_documents_a><BOUCLE_documents_r(DOCUMENTS){documents_liens.objet = rubrique}{rubriques.id_secteur?}{extension=#GET{extension}}{annee=#VALEUR}>[
+(#SET{taille,#GET{taille}|plus{#TAILLE}})]</BOUCLE_documents_r>[
+(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})][
+(#SET{taille_totale,#GET{taille_totale}|plus{#GET{taille}}})]</B_documents_r>[(#_documents_a:TOTAL_BOUCLE|plus{#_documents_r:TOTAL_BOUCLE})];[(#GET{taille}|div{1024}|ceil)];</BOUCLE_annees_documents></BOUCLE_types_documents>

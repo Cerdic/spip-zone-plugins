@@ -1,0 +1,49 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+body.bilancontrib #contenu {
+	width:100%;
+	margin-right:0;
+}
+body.bilancontrib #navigation {
+	display:none;
+}
+
+.cadre-bilancontrib {
+	margin-top: 40px;
+}
+
+.cadre-bilancontrib th.annee, .bilancontrib th.total, .bilancontrib th.extension, .bilancontrib th.objet {
+	text-align:center;
+}
+
+.cadre-bilancontrib .objets td.nb, .bilancontrib .auteurs td.nb{
+	text-align:center;
+}
+
+.cadre-bilancontrib .documents td.extension, .bilancontrib .objets td.objet{
+	text-align:center;
+}
+.cadre-bilancontrib .documents td.nb{
+	text-align:right;
+}
+.cadre-bilancontrib .documents td.taille{
+	text-align:right;
+}
+
+.cadre-bilancontrib td.nb, .bilancontrib th.annee, .bilancontrib th.total {
+    border-left: 1px solid #999;
+}
+.cadre-bilancontrib .tr_foot td {
+    border-top: 1px solid #333;
+    font-weight:bold;
+}
+.cadre-bilancontrib thead th {
+    border-bottom: 1px solid #333;
+}
+.cadre-bilancontrib .exportcsv{
+    position: absolute;
+    right: -15px;
+    top: -13px;
+}

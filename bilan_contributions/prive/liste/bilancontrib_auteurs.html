@@ -1,0 +1,69 @@
+<div class="cadre cadre-trait-couleur cadre-bilancontrib">
+	[(#CHEMIN{images/auteur-24.gif}|balise_img{'',cadre-icone})]
+   <div class="titrem"><b><:bilancontrib:titre_contrib_auteurs:>[ (Secteur (#ENV{id_secteur}))]</b>&nbsp;
+   <a href="#URL_PAGE{bilancontrib_auteurs_csv}" title="<:bilancontrib:exporter_csv:>">		
+   	[(#CHEMIN{images/exportcsv-40.png}|balise_img{'',exportcsv}|inserer_attribut{alt,<:bilancontrib:exporter_csv:>})]
+   </a></div>
+   <div class="auteurs">
+   
+   [(#REM) Chercher les auteurs ayant publie ]
+   #SET{auteurs,#ARRAY}
+   <BOUCLE_articles_auteurs(AUTEURS){compteur articles}{! par compteur_articles}>
+   	#SET{auteurs, #GET{auteurs}|push{#ID_AUTEUR}
+   </BOUCLE_articles_auteurs>
+
+   <table width="100%" cellspacing="0" cellpadding="2" border="0">
+      <thead>
+         <tr class="row_first tr_liste tr_liste_auteurs">
+            <th><:auteur:></th>
+            <th><:bilancontrib:derniere_connexion:></th>
+            <BOUCLE_annees_head_articles(POUR){tableau #ENV{annees}}{par cle}>
+            <th class="annee">#VALEUR</th>
+            </BOUCLE_annees_head_articles>
+            <th class="total"><:bilancontrib:total:></th>
+         </tr>
+      </thead>
+      <tbody>
+         #SET{total_annuel,#ARRAY}
+         <B_auteurs>
+         <BOUCLE_auteurs(POUR){tableau #GET{auteurs}}{par cle}>
+         <BOUCLE_auteur(AUTEURS){id_auteur=#VALEUR}>
+         <tr class="tr_liste">
+            <td>[(#STATUT|bilancontrib_icone_auteur{#WEBMESTRE,#ID_AUTEUR,#NOM|couper{20}})]</td>
+            <td>[(#EN_LIGNE|affdate|=={0000}|?{<:bilancontrib:jamais_connecte:>,#EN_LIGNE|affdate})]</td>
+            #SET{total,0}
+            <BOUCLE_annees_articles(POUR){tableau #ENV{annees}}{par cle}>
+               <BOUCLE_articles(ARTICLES){id_secteur?}{id_auteur}{annee=#VALEUR}> </BOUCLE_articles>
+                  #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
+                  #SET{total_annee,#GET{total_annuel}|table_valeur{annee#VALEUR}|plus{#TOTAL_BOUCLE}}
+                  #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{annee#VALEUR,#GET{total_annee}}}}
+                  <td class="nb">#TOTAL_BOUCLE</td>
+               </B_articles>
+                  <td class="nb">0</td>
+               <//B_articles>
+            </BOUCLE_annees_articles>
+
+         	[(#REM) Total lignes ]
+            <td class="nb">#GET{total}</td>
+            #SET{total_annee,#GET{total_annuel}|table_valeur{total}|plus{#GET{total}}}
+            #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{total,#GET{total_annee}}}}
+         </tr>
+         </BOUCLE_auteur>
+         </BOUCLE_auteurs>
+
+      	[(#REM) Total colonnes ]
+         <tr class="tr_liste tr_foot">
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <BOUCLE_annees_articles_total(POUR){tableau #ENV{annees}}{par cle}>
+            <td class="nb">[(#GET{total_annuel}|table_valeur{annee#VALEUR})]</td>
+            </BOUCLE_annees_articles_total>
+            <td class="nb">[(#GET{total_annuel}|table_valeur{total})]</td>
+         </tr>
+      </tbody>
+   </table>
+
+
+   <div class="nettoyeur"></div>
+   </div>
+</div>

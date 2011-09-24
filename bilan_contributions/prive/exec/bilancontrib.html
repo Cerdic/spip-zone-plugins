@@ -1,0 +1,19 @@
+<BOUCLE_condition(CONDITION){si #AUTORISER{afficher,bilancontrib}|oui}>
+   [(#CHEMIN{images/bilancontrib-64.png}|balise_img{'','logo_titre'})]
+   <h1><:bilancontrib:nom_plugin:></h1>
+   
+   <h4><:bilancontrib:slogan:></h4>
+
+   #FORMULAIRE_CHOIX_SECTEUR
+    
+   [(#REM) Chercher les annees utilisees ]
+   #SET{annees,#ARRAY}
+   <BOUCLE_articles_annees(ARTICLES){tout}>
+      [(#DATE|annee|unique|oui)
+       #SET{annees, #GET{annees}|push{#DATE|annee}}]
+   </BOUCLE_articles_annees>
+   
+   <INCLURE{fond=prive/liste/bilancontrib_objets,annees=#GET{annees},id_secteur=#ENV{secteur}} />
+   <INCLURE{fond=prive/liste/bilancontrib_auteurs,annees=#GET{annees},id_secteur=#ENV{secteur}} />
+   <INCLURE{fond=prive/liste/bilancontrib_documents,annees=#GET{annees},id_secteur=#ENV{secteur}} />
+</BOUCLE_condition>

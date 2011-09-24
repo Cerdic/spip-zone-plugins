@@ -1,0 +1,23 @@
+<plugin>
+	<nom>Bilan des contributions</nom>
+	<auteur>Yffic</auteur>
+	<licence>GPL v3</licence>
+	<version>0.1</version>
+	<etat>dev</etat>
+	<description>
+		<multi>
+		[fr]Plugin permettant au webmaster d'afficher dans l'espace privé un bilan annuel des contributions : combien d'articles (total et par auteur), de brèves, de documents (nombre et taille) publiés par an... Export possible en csv.
+		</multi>
+	</description>
+	<icon>images/bilancontrib-32.png</icon>
+	<prefix>bilancontrib</prefix>
+	<fonctions>bilancontrib_fonctions.php</fonctions>
+	<bouton id="bilancontrib" parent="bando_publication">
+		<icone>images/bilancontrib-16.png</icone>
+		<titre>bilancontrib:nom_plugin</titre>       
+		<url>bilancontrib</url>
+	</bouton>
+	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="spip_bonux" version="[1.9.3;]" />
+	<categorie>maintenance</categorie>
+</plugin>

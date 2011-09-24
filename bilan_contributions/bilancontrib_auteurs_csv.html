@@ -1,0 +1,8 @@
+#CACHE{6*3600}#HTTP_HEADER{Content-type:text/csv; charset=#CHARSET}[(#SET{fichier,#VAL{bilan_contributions_auteurs_}|concat{#NOM_SITE_SPIP}})][(#HTTP_HEADER{Content-type: text/csv[; charset=(#CHARSET)]})][(#HTTP_HEADER{Pragma: no-cache})][(#HTTP_HEADER{Content-Disposition: attachment[; filename="(#GET{fichier}|concat{.csv})"]})][
+(#REM) Chercher les annees utilisees ][
+(#SET{annees,#ARRAY})]<BOUCLE_articles_annees(ARTICLES){tout}>[(#DATE|annee|unique|oui)#SET{annees, #GET{annees}|push{#DATE|annee}}]</BOUCLE_articles_annees>[
+(#REM) Chercher les auteurs ayant publie ][
+(#SET{auteurs,#ARRAY})]<BOUCLE_articles_auteurs(AUTEURS){compteur articles}{! par compteur_articles}>#SET{auteurs, #GET{auteurs}|push{#ID_AUTEUR}</BOUCLE_articles_auteurs><:auteur:>;<:bilancontrib:derniere_connexion:>;<BOUCLE_annees_head_articles(POUR){tableau #GET{annees}}{par cle}>#VALEUR;</BOUCLE_annees_head_articles><:bilancontrib:total:>;<BOUCLE_auteurs(POUR){tableau #GET{auteurs}}{par cle}>
+<BOUCLE_auteur(AUTEURS){id_auteur=#VALEUR}>"#NOM";[(#EN_LIGNE|affdate|=={0000}|?{<:bilancontrib:jamais_connecte:>,#EN_LIGNE})];[
+(#SET{total,0})]<BOUCLE_annees_articles(POUR){tableau #GET{annees}}{par cle}><BOUCLE_articles(ARTICLES){id_secteur?}{id_auteur}{annee=#VALEUR} />[
+(#SET{total,#GET{total}|plus{#TOTAL_BOUCLE}})]#TOTAL_BOUCLE;<//B_articles></BOUCLE_annees_articles>#GET{total};</BOUCLE_auteur></BOUCLE_auteurs>
