@@ -2,7 +2,7 @@
 	<nom>ACS</nom>
 	<slogan>
 		<multi>
-			[fr]Assistant de Conception du Site</slogan>
+			[fr]Assistant de Conception du Site
 			[en]ACS Site Design Wizard
 		</multi>
 	</slogan>
@@ -41,7 +41,7 @@ Some components take care of these optionnal plugins :
 	</description>
 	<lien>http://acs.geomaticien.org</lien>
 	<auteur>Daniel FAIVRE</auteur>
-	<licence>GPL - &copy; 2007-2011</licence>
+	<licence>GPL - (c) 2007-2011</licence>
 	<version>0.8.6</version>
 	<etat>stable</etat>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
