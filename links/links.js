@@ -2,7 +2,7 @@ function targetLinks() {
 	var where;
 	where="_blank";
 
-	jQuery("a[href*='://']:not([href^="+links_site+"]):not([href^=javascript:]):not([href^=mailto:])")
+	jQuery("(a|area)[href*='://']:not([href^="+links_site+"]):not([href^=javascript:]):not([href^=mailto:])")
 	  .attr('target',where)
 		.attr('rel','external')
 		.addClass('external')
@@ -20,7 +20,7 @@ function targetLinks() {
 		if (typeof links_doc != "undefined") {
 			var extensions = links_doc.split(',');
 			for(var i = 0; i < extensions.length; i++){
-				jQuery("a[href$='"+extensions[i]+"']")
+				jQuery("(a|area)[href$='"+extensions[i]+"']")
 				  .attr('target',where)
 					.attr('rel','blank')
 					.addClass('blank')
