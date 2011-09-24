@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Livrables</nom>
 	<auteur>Cyril Marion - Ateliers CYM</auteur>
-	<licence>&#169; 2011 GPL</licence>
+	<licence>&#169; 2011 - GPL</licence>
 	<version>0.1.8</version>
 	<version_base>0.9</version_base>
 	<install>base/livrables_upgrade.php</install>
@@ -9,6 +9,7 @@
 	<icon>images/composants-32.png</icon>
 
 	<etat>dev</etat>
+	<slogan>Gestion de l'objet Livrable d'un projet</slogan>
     <description>
     	<multi>
     		[fr]Ce plugin crée un objet de type "livrable" en tant que partie d'un projet web. Un livrable est essentiellement une page web.
@@ -68,10 +69,9 @@
 		<titre>livrables:nom_bouton_plugin</titre> 
 	</bouton> 
 	
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="projet" version="[0.2;]" />
 	<necessite id="compositions" version="[2.0.0;]" />
 	
-	<categorie>outils</categorie>
-
+	<categorie>divers</categorie>
 </plugin>
