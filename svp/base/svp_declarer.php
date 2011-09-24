@@ -80,7 +80,7 @@ function svp_declarer_tables_objets_sql($tables) {
 		'principale'			=> 'oui',
 
 		// Titre, date et gestion du statut
-		'titre'					=> "nom AS titre, '' AS lang",
+		'titre'					=> "prefixe AS titre, '' AS lang",
 		
 		// Edition, affichage et recherche
 		'page'					=> 'plugin',

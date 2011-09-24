@@ -66,4 +66,7 @@ $GLOBALS['infos_branches_spip'] = array(
 // Le squelette qui les propose doit definir la constante en suivant l'exemple ci-dessous :
 // define('_SVP_PAGES_OBJET_PUBLIQUES', 'depot:plugin');
 
+// urls propres en minuscules
+define ('_url_minuscules',1);
+
 ?>
