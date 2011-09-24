@@ -1,18 +1,17 @@
 <plugin>
-	<nom>Association_2</nom>
+	<nom>Associaspip</nom>
 	<auteur>
-	Bernard Blazin - Fran&ccedil;ois de Montlivault - Emmanuel Saint-James
+	Bernard Blazin - Fran&#231;ois de Montlivault - Emmanuel Saint-James
 	</auteur>
-	<version>0.65</version>
+	<version>1.0.0</version>
 	<version_base>42024</version_base>
 	<meta>association_metas</meta>
 	<etat>stable</etat>
+	<slogan>Gestion d'associations</slogan>
 	<description>Gestion d'associations</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
-	<lien>
-         [Documentation->http://www.spip-contrib.net/Plugin-Gestion-d-associations]
-    </lien>
+	<lien>http://www.spip-contrib.net/Plugin-Gestion-d-associations</lien>
     <icon>img_pack/annonce.gif</icon>
 
 	<options>association_options.php</options>
@@ -31,5 +30,5 @@
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.1;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.0)" />
 </plugin>
