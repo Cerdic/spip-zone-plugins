@@ -1,22 +1,14 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>
-	[fr]Squelette editeur
-  [en]Template editor 
-	[it]Redattore di scheletro 
-	[es]Redactor esquel&#233;tico
-	[de]Skeleton Herausgeber
-	</multi>
-	</nom>
+	<nom>SkelEditor</nom>
 	<icon>spip_200/img_pack/logo_skeleditor.png</icon>
 	<auteur>[erational->http://www.erational.org]</auteur>
 	<licence>GNU/GPL v3</licence>
-	<version>0.11</version>
+	<version>2.0.1</version>
 	<etat>dev</etat>
 	<description>
 	<multi>
 	[fr]Dans l'espace priv&#233;, permet d'&#233;diter les fichiers squelettes
-  [en]Edit template files in the backoffice
+  	[en]Edit template files in the backoffice
 	[it]Nello spazio riservato, concede a redattore gli scheletri delle lime
 	[es]En espacio privado, no prohibe a redactor los esqueletos de los archivos
 	[de] Im privaten Raum erlaubt Herausgeber die Aktenskelette 
@@ -43,10 +35,10 @@
   </pipeline>
   <!-- necessite -->
 	<chemin dir="spip_200" />
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.0)" />
 	<categorie>outil</categorie>
 </plugin>
-<plugin version="[2.1.0;]" >
+<plugin version="[2.1.0;2.1.99]" >
 	<nom>SkelEditor</nom>
 	<icon>spip_210/img_pack/skeleditor-32.png</icon>
 	<auteur>[erational->http://www.erational.org], [C&eacute;dric Morin->http://www.yterium.net]</auteur>
@@ -87,6 +79,5 @@
   </pipeline>
 
 	<chemin dir="spip_210/" />
-	<necessite id="SPIP" version="[2.1.0-beta;)" />
 	<categorie>outil</categorie>
 </plugin>
