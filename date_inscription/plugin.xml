@@ -9,7 +9,7 @@
 	[fr] Une date d'inscription pour les auteurs
 	[en] A registration date for authors
 	[es] Una fecha de inscripci&#243;n para los autores
-	</slogan></description>
+	</multi></slogan>
 	<description><multi>
 	[fr] Un champ suppl&eacute;mentaire pour la table auteurs : date_inscription
 	[en] An additional field on authors table: date_inscription (registration date)
