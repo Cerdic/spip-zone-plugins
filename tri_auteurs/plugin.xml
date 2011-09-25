@@ -15,11 +15,18 @@
 	<etat>
 	  stable
 	</etat>
-	<description>	  
+	<slogan>
 	  <multi>
-		[fr]pour trier les auteurs d'un article.
-		[en]this plugin gives a way to sort authors of an article.
-		[it]questo plugin permette di ordinare gli autori di un articolo.
+		[fr]Ordonner les auteurs d'un article
+		[en]Sort authors' article
+		[it]Ordinare gli autori di un articolo
+		</multi>
+	</slogan>
+	<description>
+	  <multi>
+		[fr]Pour trier les auteurs d'un article.
+		[en]This plugin gives a way to sort authors of an article.
+		[it]Questo plugin permette di ordinare gli autori di un articolo.
 		</multi>
 	</description>
 	<lien>
