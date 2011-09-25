@@ -199,9 +199,12 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       include_spip('base/abstract_sql');
       include_spip('base/create');
       creer_base();
-      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_FROM', 'set_value' => $GLOBALS['meta']['email_webmaster']));
-      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_ADMIN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
-      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_RETURN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
+      // pas besoin d'insert si pas de mail webmaster défini
+      if ($GLOBALS['meta']['email_webmaster']){
+	      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_FROM', 'set_value' => $GLOBALS['meta']['email_webmaster']));
+	      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_ADMIN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
+	      sql_insertq('spip_cm_settings',  array('set_name' => 'CM_MAIL_RETURN', 'set_value' => $GLOBALS['meta']['email_webmaster']));
+	  }
       sql_insertq('spip_cm_settings',  array('set_name' => 'CM_SEND_NUMBER', 'set_value' => 50));
       ecrire_meta($nom_meta_base_version,$current_version="0.1",'non');
       spip_log('Installation des tables du plugin CleverMail en version 0.1', 'clevermail');
@@ -244,7 +247,7 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       include_spip('base/abstract_sql');
       include_spip('base/create');
       maj_tables('spip_cm_lists');
-      sql_updateq("spip_cm_lists", "lst_auto_week_days=lst_auto_week_day");
+      sql_updateq("spip_cm_lists", array('lst_auto_week_days' => 1),"lst_auto_week_days='lst_auto_week_day'");
       sql_alter("TABLE spip_cm_lists DROP lst_auto_week_day");
       ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
       spip_log('Mise à jour des tables du plugin CleverMail en version 0.6', 'clevermail');
