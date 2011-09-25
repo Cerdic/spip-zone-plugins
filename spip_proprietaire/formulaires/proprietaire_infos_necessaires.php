@@ -34,7 +34,7 @@ function formulaires_proprietaire_infos_necessaires_verifier_dist($who='propriet
 		$erreurs['mail_administratif'] = _T('info_obligatoire');
 	elseif($adminmail AND strlen($adminmail) AND !email_valide($adminmail))
 		$erreurs['mail_administratif'] = _T('form_prop_indiquer_email');
-	var_export($erreurs);
+//	var_export($erreurs);
 	return $erreurs;
 }
 
