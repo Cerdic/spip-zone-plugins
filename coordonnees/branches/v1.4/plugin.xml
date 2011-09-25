@@ -1,8 +1,14 @@
 <plugin>
-	<nom><multi>[fr]Coordonnées[en]Address book</multi></nom>
+	<nom><multi>[fr]Coordonn&#233;es[en]Address book</multi></nom>
+	<slogan>
+	<multi>
+	[fr]Des coordonn&#233;es postales, t&#233;l&#233;phoniques... pour vos auteurs
+	[en]Postal adresses , phone numbers... for your authors
+	</multi>
+	</slogan>
 	<description>
-	<multi>[fr]Ajoute la possibilité de donner des coordonnées postales (adresses, mails, téléphones)
-	aux objets de SPIP, tout particulièrement aux auteurs. Plusieurs adresses et numéros de téléphone peuvent ainsi être donnés à chaque auteur.
+	<multi>[fr]Ajoute la possibilit&#233; de donner des coordonn&#233;es postales (adresses, mails, t&#233;l&#233;phones)
+	aux objets de SPIP, tout particuli&#232;rement aux auteurs. Plusieurs adresses et num&#233;ros de t&#233;l&#233;phone peuvent ainsi &#234;tre donn&#233;s &#224; chaque auteur.
 	[en]Provides the ability to add postal details (addresses, e-mail, phone numbers) to SPIP objects, specifically to authors. Several addresses or phone numbers can be given to each single author.
 	</multi>
 	</description>
@@ -13,8 +19,7 @@
 	<version_base>1.5</version_base>
 	<etat>test</etat>
 	
-	<auteur>Matthieu Marcillaud</auteur>
-	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
+	<auteur>Matthieu Marcillaud - Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
 	
 	<licence>GNU/GPL</licence>
 	<traduire gestionnaire="salvatore" module="coordonnees" reference="fr" />
