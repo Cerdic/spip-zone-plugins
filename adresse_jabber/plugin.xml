@@ -2,9 +2,12 @@
 	<nom>Adresse Jabber (JID)</nom>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<version_base>0.1</version_base>
 	<icon>img/chat.png</icon>
+	<slogan>
+Une adresse Jabber pour les auteurs
+	</slogan>
 	<description>
 Permet de disposer d'un champ "JID" (adresse Jabber) sur les auteurs de SPIP.
 
@@ -19,6 +22,7 @@ balise correspondante est <code>#JID</code> (appellation standard de l'identifia
 	</description>
 	<etat>test</etat>
 	<prefix>jabberid</prefix>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[0.7;]" />
 	<install>base/jabberid_install.php</install>
 	<pipeline>
