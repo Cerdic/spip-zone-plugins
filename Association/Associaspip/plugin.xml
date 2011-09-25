@@ -55,7 +55,7 @@
 	<!-- Interface avec plugin champs extras 2 -->
 	<pipeline>
 		<nom>objets_extensibles</nom>
-		<inclure>inc/champs_extras.php</inclure>
+		<inclure>inc/association_cextras.php</inclure>
 	</pipeline>
 
 	<!-- Autorisations -->
