@@ -8,7 +8,7 @@
 	<etat>test</etat>
 	<slogan>
 		<multi>
-		[fr]Initialiser la liste des auteurs &@224; partir d’un annuaire LDAP
+		[fr]Initialiser la liste des auteurs &#224; partir d’un annuaire LDAP
 		[en]Initialise authors using LDAP
 		</multi>
 	</slogan>
