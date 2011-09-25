@@ -8,21 +8,28 @@
 	<version>3.3.1</version>
 	<version_base>0.3.0.2</version_base>
 	<etat>stable</etat>
+	<slogan>
+	<multi>
+	[fr]Gestion de zones d'acces restreint
+	[es]Gesti&oacute;n de zonas de acceso restringido
+	[de]Verwaltung von Bereichen mit Zugangskontrolle
+	</multi>
+	</slogan>
 	<description>
 	<multi>
-	[fr] Gestion de zones d'acces restreint.
+	[fr]
 _ Chaque zone contient des rubriques.
 _ Les auteurs peuvent etre associes a des zones pour avoir le droit d'y acceder.
 _ Toutes les boucles natives de SPIP sont surchargees pour en filtrer les resultats en fonction des droits du visiteur.
-	[es] Gesti&oacute;n de zonas de acceso restringido.
+	[es]
 _ Cada zona contiene secciones.
 _ Los autores podr&aacute;n ser asociados a ciertas zonas restringidas para tener derechos de acceso a ellas.
 _ Todos los bucles nativos de SPIP quedan modificados para filtrar los resultados en funci&oacute;n de los derechos del visitante.
-	[en]Restricted access management.
+	[en]
 _ Each area contains sections.
 _ Authors can be associated with these areas to gain access to them.
 _ All SPIP's loops are loaded with the necessary tools to filter the results according to the visitors' access priviliges.
-	[de] Verwaltung von Bereichen mit Zugangskontrolle
+	[de]
 _ Jeder Bereich enthält Rubriken.
 _ Einzelnen Autoren können Zugangsrechte für Bereiche zugeordnet werden.
 _ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Überprüfung der Rechte des jeweiligen Sitebesuchers ergänzt.
@@ -91,7 +98,7 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Über
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
 	<necessite id='spip_bonux' version='[1.0;]' />
 	<categorie>auteur</categorie>
 	<traduire gestionnaire="salvatore" module="accesrestreint" reference="fr" />
