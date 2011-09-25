@@ -1,22 +1,21 @@
 <plugin>
-	<nom>
-	<multi>[fr]Peuplement LDAP[en]LDAP Populate</multi>
-	</nom>
+	<nom><multi>[fr]Peuplement LDAP[en]LDAP Populate</multi></nom>
 	<icon>img_pack/ldap.png</icon>
-	<auteur>
- 		spip.peuplement.ldap@gmail.com
-		<multi>
-			2008[fr]Distribu&#233; sous licence GPL
-			[es]Distribuido bajo licencia GPL 
-			[en]Distribued under GPL license
-		</multi>
-	</auteur>
-	<version>1.0</version>
+	<auteur>[Benjamin->spip.peuplement.ldap@gmail.com]</auteur>
+	<licence>(c) 2008 - GPL</licence>
+	<version>2.0.0</version>
 	<version_base>2.0.0</version_base>
 	<etat>test</etat>
+	<slogan>
+		<multi>
+		[fr]Initialiser la liste des auteurs &@224; partir d’un annuaire LDAP
+		[en]Initialise authors using LDAP
+		</multi>
+	</slogan>
 	<description>
 		<multi>
-			[fr] Initialise la liste des auteurs du site en fonction d'un critere de recherche sur l'annuaire Ldap.
+		[fr]Ce plugin permet &#224; partir d'une recherche sur l’annuaire LDAP de pr&#233;-enregistrer les auteurs. 
+		Ainsi, l'administrateur du site peut commencer &#224; attribuer des droits personnalis&#233;s sans avoir &#224; attendre la premi&#232;re connexion de l'auteur.
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Peuplement-LDAP</lien> <!-- URI de documentation -->
@@ -28,6 +27,6 @@
 		<action>ajouterBoutons</action>
 		<inclure>peuplement_ldap_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>auteur</categorie>
 </plugin>
