@@ -1,10 +1,5 @@
 <plugin>
-    <nom>
-    <multi>
-    [fr]cfg: moteur de configuration
-    [de]CFG: Konfigurationsmodul
-    </multi>
-    </nom>
+    <nom>CFG</nom>
     <auteur>bertrand Gugger, Matthieu Marcillaud</auteur>
     <licence>&#169; 2009 - GNU/LGPL</licence>
     <version>
@@ -13,15 +8,22 @@
     <etat>
     stable
     </etat>
+    <slogan>
+		<multi>
+		[fr]Moteur de configuration
+		[en]Configuration tool
+		[de]Konfigurationsmodul
+		</multi>
+    </slogan>
     <description>
-    <multi>
-[fr]Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
-
-Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
-[en]This plugin manage some configuration graphic user interfaces for some modules.
-[de]Dieses Plugin stellt die Konfigurationsschnittstelle f&uuml;r zahlreiche Plugins bereit.
-Es kann auch f&uuml; die Konfiguration von Skeletten verwendet werden.
-    </multi>
+		<multi>
+		[fr]Ce plugin permet de g&#233;rer tr&#232;s simplement des interfaces de configuration pour diff&#233;rents modules.
+		
+		Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
+		[en]This plugin manage some configuration graphic user interfaces for some modules.
+		[de]Dieses Plugin stellt die Konfigurationsschnittstelle f&uuml;r zahlreiche Plugins bereit.
+		Es kann auch f&uuml; die Konfiguration von Skeletten verwendet werden.
+		</multi>
     </description>
     <lien>http://www.spip-contrib.net/?rubrique575</lien>
     <prefix>
@@ -70,7 +72,7 @@ Es kann auch f&uuml; die Konfiguration von Skeletten verwendet werden.
         <nom>editer_contenu_formulaire_cfg</nom>
         <inclure>cfg_pipeline.php</inclure>
     </pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="cfg" reference="fr" />
 </plugin>
