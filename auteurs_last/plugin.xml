@@ -4,7 +4,7 @@
 	<version>1.2.0</version>
 	<icon>images/aula-64.png</icon>
 	<etat>stable</etat>
-	<slogan>Etat des derni&#232;res connexions des auteurs</slogan>
+	<slogan>&#201;tat des derni&#232;res connexions des auteurs</slogan>
 	<description>
 {{Aula}} affiche dans la liste des auteurs l'&#233;tat des derni&#232;res connexions, &#224; savoir :
 -* auteur actuellement connect&#233;, 
