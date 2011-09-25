@@ -1,7 +1,7 @@
 <?php
 include_spip('base/abstract_sql');
 function formulaires_clevermail_charger_dist($lst_id_force = 0, $lsr_mode_force = false, $cbox='') {
-	$default = array('editable' => ' ', 'lsr_mode' => 0, 'sub_email' => '', 'lst_id_force' => 0, 'lst_ids' => array());
+	$default = array('lsr_mode' => 0, 'sub_email' => '', 'lst_id_force' => 0, 'lst_ids' => array());
 	if ($cbox == 'box') {
 	  $default['cbox'] = $cbox;
 	}
@@ -225,6 +225,6 @@ function formulaires_clevermail_traiter_dist($lst_id = 0, $lsr_mode_force = fals
   	}
   }
 
-	return array('message_ok' => $message, 'editable' => '');
+	return array('message_ok' => $message);
 }
 ?>
