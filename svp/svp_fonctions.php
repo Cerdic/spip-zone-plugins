@@ -4,7 +4,7 @@ function svp_afficher_intervalle($intervalle, $logiciel){
 	if (!strlen($intervalle)) return '';
 	if (!preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,Uis',$intervalle,$regs)) return false;
 	$mineure = $regs[1];
-	$majeure = $regs[2];
+	$majeure = preg_replace(',\.99$,', '.*', $regs[2]);
 	$mineure_inc = $intervalle{0}=="[";
 	$majeure_inc = substr($intervalle,-1)=="]";
 	if (strlen($mineure)){
