@@ -73,6 +73,7 @@ h4 {
 
 /* Actions sur les lettres */
 
+
 .liste_lettres .actions li.lettre_modifier {
   background: url(../prive/themes/spip/images/fatcow/16/email_edit.png) top left no-repeat;
 }
@@ -86,6 +87,11 @@ h4 {
 }
 
 /* Actions sur les messages */
+.liste_messages .actions {text-align: left;}
+
+.liste_messages .actions li.message_actualiser {
+  background: url(../prive/themes/spip/images/fatcow/16/update.png) top left no-repeat;
+}
 
 .liste_messages .actions li.message_apercu_html {
   background: url(../prive/themes/spip/images/fatcow/16/page_white_code.png) top left no-repeat;

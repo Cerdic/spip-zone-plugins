@@ -22,8 +22,10 @@
 	          [(#PST_DATE_UPDATE|>{0}|oui)<li><:clevermail:modifie:> le [(#PST_DATE_UPDATE|cm_date)] à [(#PST_DATE_UPDATE|cm_heure)]</li>]
 		      </ul>
 			    <ul class="actions">
+			    <li class="message_actualiser">[(#BOUTON_ACTION{<:clevermail:actualiser:>,#URL_ACTION_AUTEUR{clevermail_post_update,#PST_ID,#SELF},ajax})]</li>
 	          <li class="message_apercu_html"><a href="[(#URL_PAGE{#GET{preview_html}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_html:></a></li>
 				    <li class="message_apercu_texte"><a href="[(#URL_PAGE{#GET{preview_text}}|parametre_url{pst_id,#PST_ID})]" target="_blank"><:clevermail:apercu_texte:></a></li>
+				 </ul><ul class="actions">
 				    <li class="message_modifier"><a href="[(#URL_ECRIRE{clevermail_post_edit}|parametre_url{pst_id,#PST_ID})]"><:clevermail:modifier:></a></li>
 		        <li class="message_supprimer">[(#BOUTON_ACTION{<:clevermail:supprimer:>,#URL_ACTION_AUTEUR{clevermail_post_remove,#PST_ID,#SELF},ajax,<:clevermail:supprimer_confirmer:>})]</li>
 	          [(#GET{nbSubs}|>{0}|oui)
