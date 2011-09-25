@@ -1,26 +1,18 @@
 <plugin>
-	<!--  
-
-	// aula plugin.xml
-
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-	
-	 -->
 	<nom>Auteurs Last (AuLa)</nom>
 	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
-	<version>1.02</version>
+	<version>1.2.0</version>
 	<icon>images/aula-64.png</icon>
 	<etat>stable</etat>
-
-	<description><strong>Aula</strong> affiche dans la liste des auteurs l'&#233;tat des derni&#232;res 
-connexions (auteur actuellement connect&#233;, date et heure de derni&#232;re 
-connexion, jamais connect&#233;).
+	<slogan>Etat des derni&#232;res connexions des auteurs</slogan>
+	<description>
+{{Aula}} affiche dans la liste des auteurs l'&#233;tat des derni&#232;res connexions, &#224; savoir :
+-* auteur actuellement connect&#233;, 
+-* ou date et heure de derni&#232;re connexion,
+-* ou jamais connect&#233;.
 	</description>
-
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Lister-les-auteurs-avec-date-de]</lien>
-	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<lien>http://www.quesaco.org/Lister-les-auteurs-avec-date-de</lien>
+	<licence>GPLv3</licence>
 	
 	<prefix>aula</prefix>
 
@@ -31,6 +23,6 @@ connexion, jamais connect&#233;).
 		<inclure>inc/aula_pipeline_header_prive.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>auteur</categorie>
 </plugin>
