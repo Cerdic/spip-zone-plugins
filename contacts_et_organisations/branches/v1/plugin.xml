@@ -1,23 +1,25 @@
 <plugin>
-	<nom>Contacts &amp; Organisations</nom>
-	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
-	<auteur>Matthieu Marcillaud - [Ma Graine->http://magraine.net]</auteur>
-	
+	<nom>Contacts &#38; Organisations</nom>
+	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr] - Matthieu Marcillaud - [Ma Graine->http://magraine.net]</auteur>
 	<etat>test</etat>
-	
+	<slogan>
+		<multi>
+		[fr]Ajouter un gestionnaire de contacts &#224; SPIP
+		[en]Enhance SPIP with a contact management system
+		</multi>
+	</slogan>
 	<description>
 		<multi>
-[fr] Ajoute &agrave; SPIP les fonctionnalit&eacute;s d'un gestionnaire de contacts.
+[fr] Ajoute &#224; SPIP les fonctionnalit&#233;s d'un gestionnaire de contacts.
 Distingue les personnes pysiques (contacts) des personnes morales (organisations) en conservant tous les attributs des auteurs SPIP.
-Permet d'attribuer des droits d'acc&egrave;s &agrave; des organisations avec un mot de passe unique.
- Permet d'&eacute;tendre &agrave; la fois les champs unitaires (pr&eacute;nom, date de naissance...)
- et les champs multipes (num&eacute;ros de t&eacute;l&eacute;phone, adresses mail...).
+_ Permet d'attribuer des droits d'acc&#232;s &#224; des organisations avec un mot de passe unique et d'&#233;tendre &#224; la fois les champs unitaires (pr&#233;nom, date de naissance...) et les champs multipes (num&#233;ros de t&#233;l&#233;phone, adresses mail...).
 
-Plugin d&eacute;velopp&eacute; dans le cadre du gestionnaire de projets [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] et du plugin [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue].
+Plugin d&#233;velopp&#233; dans le cadre du gestionnaire de projets [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] et du plugin [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue].
 
-[en] Gives SPIP the functionnalities of a contact management system. Makes a difference between companies (organisations) and persons (contacts) while keeping all the SPIP author's attributes. Allows to give access rights to accounts with unique password. Allows to extend unique fields (such as frist name, date of birth...) together with multiple fields (phone numbers, mail addresses...).
+[en] Enhances SPIP with the functionnalities of a contact management system. Makes a difference between companies (organisations) and persons (contacts) while keeping all the SPIP author's attributes. Allows to give access rights to accounts with unique password. Allows to extend unique fields (such as frist name, date of birth...) together with multiple fields (phone numbers, mail addresses...).
 
-This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] and [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue] projects.	</multi>
+This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.net/Plugin-Spipmine] and [Catalogue->http://www.spip-contrib.net/Plugin-Catalogue] projects.
+		</multi>
 	</description>
 	
 	<lien>http://www.spip-contrib.net/Plugin-Contacts-Organisations</lien>
@@ -131,11 +133,8 @@ This plugin has been developped inside the [SPIPMINE->http://www.spip-contrib.ne
 		<nom>objets_extensibles</nom>
 		<inclure>contacts_pipelines.php</inclure>
 	</pipeline>
-	
-	
-
 	    
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.7.7;]" />
 	<necessite id="spip_bonux" version="[2;]" />
 	<!-- coordonnees postales : cop -->
