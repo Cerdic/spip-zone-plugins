@@ -8,6 +8,8 @@
  * @subpackage	Pages exec
  */
 if (!defined("_ECRIRE_INC_VERSION")) return;
+//ini_set('display_errors','1'); error_reporting(E_ALL);
+include_spip('inc/actions');
 
 function exec_pubban_puce_activation_dist() {
 	if(!_request('id')) return;
