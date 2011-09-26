@@ -61,7 +61,8 @@ function insert_contacts_abonnement($champs=array()) {
 		//creation
 			$calculer_prix = charger_fonction('prix', 'inc/');
 			$prix=($statut=='offert')?'':$calculer_prix($objet,$id_objet);//pas de prix puisque offert
-			$date = date('Y-m-d H:i:s');
+			//si la date est spécifiée en amont
+			$date = $champs['date']?$champs['date']:date('Y-m-d H:i:s');
 			//la duree par defaut est fixee a 3 jours
 			$duree=($arg['duree'])?$arg['duree']:'3';
 			$periode=($arg['periode'])?$arg['periode']:'jours';
@@ -88,9 +89,12 @@ function insert_contacts_abonnement($champs=array()) {
 				ouvrir_zone($id_auteur,$ids_zone);
 			
 			$champs['date']=$date;
-			$champs['validite']=$validite;
+			//si la validite est spécifiée en amont
+			$validi = $champs['validite']?$champs['validite']:$validite;
+			$champs['validite']=$validi;
 			$champs['prix']=$prix;
 	}
+
 	
 	// Envoyer aux plugins avant insertion
 	$champs = pipeline('pre_insertion',

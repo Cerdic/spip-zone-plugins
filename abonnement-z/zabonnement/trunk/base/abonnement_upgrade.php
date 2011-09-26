@@ -20,9 +20,11 @@ function abonnement_upgrade($nom_meta_base_version,$version_cible){
 
 
 	if (version_compare($current_version,"0.75","<=")){
-		if (_DEBUG_ABONNEMENT) spip_log('il faut renommer les tables spip_abonnements','abonnement');
+		if (_DEBUG_ABONNEMENT) spip_log('Renommage des champs de abonnements et bascule des champs auteurs_elargis','abonnement');
 		abonnement_modifier_tables($nom_meta_base_version);
 		creer_base();
+			recuperer_auteurs_elargis_abonnements();
+			recuperer_auteurs_elargis_articles();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 	
@@ -43,6 +45,7 @@ function abonnement_upgrade($nom_meta_base_version,$version_cible){
 		creer_base();
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
+	
 
 }
 
@@ -52,11 +55,53 @@ function abonnement_vider_tables($nom_meta_base_version) {
 	effacer_meta($nom_meta_base_version);
 }
 
-//ancien
-//id_abonnement libelle duree 	periode 	montant 	commentaire 	maj
-//nouveau
-// id_abonnement titre 	duree 	periode 	ids_zone 	prix 	descriptif 	maj 
-// + court = sql_alter('TABLE spip_abonnements RENAME TO spip_abonnementsOLD');
+//bascule de spip_auteurs_elargis_abonnements
+function recuperer_auteurs_elargis_abonnements(){
+	$lignes = sql_allfetsel(
+				'*',
+				'spip_auteurs_elargis_abonnements'
+			);
+	include_spip('action/editer_contacts_abonnement');
+	foreach($lignes as $abo){
+		if($abo['statut_paiement']=='ok')
+			$statut_abonnement="paye";
+		else $statut_abonnement=$abo['statut_paiement'];
+		
+		$arg['objet']='abonnement';			
+		$arg['id_auteur']=$abo['id_auteur'];
+		$arg['id_objet']=$abo['id_abonnement'];
+		$arg['prix']=$abo['montant'];
+		$arg['date']=$abo['date'];
+		$arg['validite']=$abo['validite'];
+		$arg['statut_abonnement']=$statut_abonnement;
+		$arg['stade_relance']=$abo['stade_relance'];
+		//on bascule les champs sur la nouvelle table
+		insert_contacts_abonnement($arg);	
+	}
+}
+
+//bascule de spip_auteurs_elargis_articles
+function recuperer_auteurs_elargis_articles(){
+	$lignes = sql_allfetsel(
+				'*',
+				'spip_auteurs_elargis_articles'
+			);
+	include_spip('action/editer_contacts_abonnement');
+	foreach($lignes as $abo){
+		if($abo['statut_paiement']=='ok')
+			$statut_abonnement="paye";
+		else $statut_abonnement=$abo['statut_paiement'];
+		
+		$arg['objet']='article';			
+		$arg['id_auteur']=$abo['id_auteur_elargi'];
+		$arg['id_objet']=$abo['id_article'];
+		$arg['date']=$abo['date'];
+		$arg['prix']=$abo['montant'];
+		$arg['statut_abonnement']=$abo['statut_paiement'];
+		//on bascule les champs sur la nouvelle table
+		insert_contacts_abonnement($arg);	
+	}
+}
 
 function abonnement_modifier_tables($nom_meta_base_version) {
 sql_alter("TABLE spip_abonnements CHANGE `libelle` titre text DEFAULT '' NOT NULL");

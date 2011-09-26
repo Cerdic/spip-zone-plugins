@@ -46,7 +46,6 @@ function abonnement_declarer_tables_principales($tables_principales){
 		'key' => &$abonnements_key);
 
 	//table contacts_abonnements
-	// prix pas necessaire? todo
 	$contacts_abonnements = array(
 		'id_contacts_abonnement' => 'bigint(21) not null',
 		"id_auteur" 	=> "bigint(21)  NOT NULL",
