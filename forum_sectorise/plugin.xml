@@ -1,12 +1,15 @@
 <plugin>
-	<nom>Forum Sectoris&eacute;</nom>
+	<nom>Forum Sectoris&#233;</nom>
+	<slogan>Autoriser les forums sur un secteur particulier</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
 	<version>0.2</version>
 	<version_base>0.2</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
-	<multi>[fr]Ce plugin permet d'activer les forums publics uniquement sur un secteur du site. Tous les nouveaux articles cr&eacute;&eacute;s dans ce secteur se verront attribuer le type de forum d&eacute;fini dans la configuration du plugin. Evidemment ce plugin n'a un int&eacute;r&egrave;t que si les forums sont d&eacute;sactiv&eacute;s dans la configuration g&eacute;n&eacute;rale du site.</multi>
+		<multi>
+			[fr]Ce plugin permet d'activer les forums publics uniquement sur un secteur du site. Tous les nouveaux articles cr&#233;&#233;s dans ce secteur se verront attribuer le type de forum d&#233;fini dans la configuration du plugin. Evidemment ce plugin n'a un int&#233;r&#232;t que si les forums sont d&#233;sactiv&#233;s dans la configuration g&#233;n&#233;rale du site.
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Forum-sectorise</lien>
 	<icon>images/forumsectorise-32.png</icon>
@@ -18,7 +21,7 @@
 		<inclure>forumsectorise_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10;]" />
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<categorie>communication</categorie>
