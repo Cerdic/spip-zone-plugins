@@ -13,7 +13,7 @@
 	</multi>
 	</description>
 	<icon>images/manuelsite-32.png</icon>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Manuel-de-redaction-du-site</lien>
 	<prefix>manuelsite</prefix>
 	<install>base/manuelsite_install.php</install>
 	<pipeline>
