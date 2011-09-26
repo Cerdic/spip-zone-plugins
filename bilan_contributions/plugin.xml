@@ -2,7 +2,7 @@
 	<nom>Bilan des contributions</nom>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<etat>dev</etat>
 	<description>
 		<multi>
@@ -17,7 +17,7 @@
 		<titre>bilancontrib:nom_plugin</titre>       
 		<url>bilancontrib</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
 	<necessite id="iterateurs" version="[0.2.6;]" />
 	<categorie>maintenance</categorie>
