@@ -20,15 +20,15 @@
 function getid3_editer_contenu_objet($flux){
 	$id_document = $flux['args']['id'];
 	if(in_array($flux['args']['type'],array('case_document'))){
-		$son = array("mp3","ogg","flac","aiff","aif","wav");
-		$document = sql_fetsel("docs.extension,docs.distant,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".sql_quote($id_document));
+		$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
+		$document = sql_fetsel("docs.extension,docs.distant,L.objet,L.id_objet", "spip_documents AS docs INNER JOIN spip_documents_liens AS L ON L.id_document=docs.id_document","L.id_document=".intval($id_document));
 		$extension = $document['extension'];
 		$type = $document['objet'];
 		$id = $document['id_objet'];
-		if(in_array($extension,$son) && ($document['distant'] == 'non')){
+		if(in_array($extension,$son_recup_id3) && ($document['distant'] == 'non')){
 			$infos_son = charger_fonction('infos_son', 'inc');
 			$flux['data'] .= $infos_son($id,$id_document,$type,$extension);
-		}else if(in_array($extension,$son) && ($document['distant'] == 'oui')){
+		}else if(in_array($extension,$son_recup_id3) && ($document['distant'] == 'oui')){
 			$flux['data'] .= '<p>'._T('getid3:message_infos_document_distant').'</p>';
 		}
 	}
@@ -45,7 +45,7 @@ function getid3_editer_contenu_objet($flux){
 function getid3_post_edition($flux){
 	$id_document = $flux['args']['id_objet'];
 	$son_modif_id3 = array("mp3");
-	$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav");
+	$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
 	$extensions_vignettes = array("png","gif","jpg");
 	$conf_id3 = lire_config('getid3/reecriture_tags',array());
 	$document_orig = sql_fetsel('*','spip_documents','id_vignette='.intval($id_document));
@@ -154,16 +154,23 @@ function getid3_post_edition($flux){
  */
 function getid3_document_desc_actions($flux){
 	$infos = sql_fetsel('distant,extension','spip_documents','id_document='.intval($flux['args']['id_document']));
-	if(($infos['distant'] == 'non') && in_array($infos['extension'],array('mp3','ogg','flac','mpc'))){
+	$son_recup_id3 = array("mp3","ogg","flac","aiff","aif","wav","m4a","oga");
+	$son_modif_id3 = lire_config('getid3_write',array('mp3'));
+	$id_document = $flux['args']['id_document'];
+	if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_modif_id3)){
 		$redirect = self();
-		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.$flux['args']['id_document']),'redirect',$redirect);
+		$url = parametre_url(generer_url_ecrire('document_id3_editer','id_document='.intval($id_document)),'redirect',$redirect);
 		$texte = _T('getid3:lien_modifier_id3');
 		if($flux['args']['position'] == 'galerie'){
 		$flux['data'] .= "[<a href='$url'>$texte</a>]";
 		}else{
 			$flux['data'] .= "<span class='sep'> | </span><a href='$url'>$texte</a>";
 		}
-	}	
+	}if(($infos['distant'] == 'non') && in_array($infos['extension'],$son_recup_id3)){
+		$texte2 = _T('getid3:recuperer_infos');
+		$action2 = generer_action_auteur('getid3_infos', "0/article/$id_document", $redirect);
+		$flux['data'] .= "<span class='sep'> | </span><a href='$action2'>$texte2</a>";
+	}
 	return $flux;
 }
 
