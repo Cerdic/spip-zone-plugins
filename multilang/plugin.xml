@@ -14,6 +14,7 @@
 		</multi>
 	</description>
 	<prefix>multilang</prefix>
+	<lien>http://www.spip-contrib.net/Multilang</lien>
 	<icon>images/multilang-32.png</icon>
 	<install>base/multilang_install.php</install>
 	<pipeline>
