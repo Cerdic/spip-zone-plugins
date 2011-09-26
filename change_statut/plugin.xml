@@ -1,13 +1,19 @@
 <plugin>
 	<nom>Change Statut</nom>
+	<slogan>Modifier, le temps d'un test, son statut de webmestre</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.2.1</version>
 	<version_base>0.1</version_base>
-	<etat>dev</etat>
-	<description>Changer temporairement et d'un clic son statut de webmestre en administrateur ou rédacteur. Puis revenir &agrave; la situation originale</description>
+	<etat>test</etat>
+	<description>
+		<multi>
+			[fr]Changer temporairement et d'un clic son statut de webmestre en administrateur ou r&#233;dacteur. Puis revenir &#224; la situation originale.
+		</multi>
+	</description>
 	<icon>images/changestatut-32.png</icon>
 	<prefix>changestatut</prefix>
+	<lien>http://www.spip-contrib.net/Change-Statut</lien>
 	<install>base/changestatut_install.php</install>
 	<pipeline>
 		<nom>header_prive</nom>
@@ -35,7 +41,7 @@
 		<url>changestatut</url>
 		<args>statut=webmestre</args>
 	</bouton>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="bando" version="[1.1.;]" />
 	<categorie>outil</categorie>
 </plugin>
