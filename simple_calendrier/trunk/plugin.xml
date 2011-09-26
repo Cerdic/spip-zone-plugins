@@ -4,7 +4,7 @@
     </nom>
 	<auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
     <licence>GPL &#169; 2010-2011</licence>
-	<version>1.1</version>
+	<version>1.2b</version>
     <version_base>1.3</version_base>
 	<etat>stable</etat>
     <necessite id="jqueryui" version="[1.8.15;]" />
@@ -169,7 +169,12 @@ _   (Th&egrave;mes pour le mini-calendrier bas&eacute;s sur [jquery-ui themeroll
 		<titre>simplecal:bouton_entree</titre>	
 		<url>evenement_tous&mode=avenir</url>	
 	</bouton>
-
-	
+    
+    <!-- Pour l'integration dans plugin 'bando' -->
+    <bouton id="bt_simplecal_accueil_bando" parent="bando_edition">
+		<icone>img_pack/simplecal-logo-16.png</icone>
+		<titre>simplecal:bouton_entree</titre>	
+		<url>evenement_tous&mode=avenir</url>	
+	</bouton>	
 
 </plugin>

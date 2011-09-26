@@ -27,6 +27,10 @@ function autoriser_bt_simplecal_accueil($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
+// Idem mais pour le plugin 'bando'
+function autoriser_bt_simplecal_accueil_bando($faire, $type, $id, $qui, $opt) {
+	return in_array($qui['statut'], array('0minirezo', '1comite'));
+}
 
 // Remarque : Cette fonction est aussi appelée au niveau du core (API des listings - cf. inc/afficher_objets.php)
 // Le plugin "Acces restreint 3" la déclare également mais ne l'utilise pas (surement pour le plugin Agenda 2).
