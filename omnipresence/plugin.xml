@@ -1,23 +1,24 @@
 <plugin>
-	<nom>Omnipr&eacute;sence</nom>
+	<nom>Omnipr&#233;sence</nom>
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>images/bulb.png</icon>
-	<version>0.1</version>
-        <version_base>0.1</version_base>
+	<version>0.1.0</version>
+	<version_base>0.1</version_base>
 	<etat>dev</etat>
+	<slogan>Pr&#233;sence &#233;tendue et d'activit&#233; d'un utilisateur Jabber</slogan>
 	<description>
-Permet d'acc&eacute;der aux infos de présence étendue et d'activité d'un utilisateur Jabber, via plusieurs
+Permet d'acc&#233;der aux infos de présence étendue et d'activité d'un utilisateur Jabber, via plusieurs
 nouvelles balises :
 - Avatar&nbsp;: <code>#JABBER_AVATAR</code>
 - Présence et statut&nbsp;: <code>#JABBER_STATUS</code>, <code>#JABBER_STATUS_ICON</code>, <code>#JABBER_STATUS_TEXT</code>
 - Humeur du moment&nbsp;: <code>#JABBER_MOOD</code>, <code>#JABBER_MOOD_ICON</code>, <code>#JABBER_MOOD_TEXT</code>
-- Activit&eacute;&nbsp;: <code>#JABBER_ACTIVITY</code>, <code>#JABBER_ACTIVITY_ICON</code>, <code>#JABBER_ACTIVITY_TEXT</code>
+- Activit&#233;&nbsp;: <code>#JABBER_ACTIVITY</code>, <code>#JABBER_ACTIVITY_ICON</code>, <code>#JABBER_ACTIVITY_TEXT</code>
 - [Musique en cours d'écoute->http://xmpp.org/extensions/xep-0118.html]&nbsp;: <code>#JABBER_TUNE_ARTIST</code>, <code>#JABBER_TUNE_TITLE</code>
 
-La balise <code>#LOGO_AUTEUR</code> est &eacute;galement &eacute;tendue pour renvoyer l'avatar Jabber si aucun logo n'est d&eacute;fini.
+La balise <code>#LOGO_AUTEUR</code> est &#233;galement &#233;tendue pour renvoyer l'avatar Jabber si aucun logo n'est d&#233;fini.
 
-Les informations sont récupérées par un serveur (sp&eacute;cifiable par l'utilisateur) faisant tourner le logiciel [Omnipresence->http://codingteam.net/project/omnipresence],
-&agrave; condition que l'utilisateur l'y ait autoris&eacute;. Par exemple, voir [les instructions->http://presence.jabberfr.org/]
+Les informations sont récupérées par un serveur (sp&#233;cifiable par l'utilisateur) faisant tourner le logiciel [Omnipresence->http://codingteam.net/project/omnipresence],
+&#224; condition que l'utilisateur l'y ait autoris&#233;. Par exemple, voir [les instructions->http://presence.jabberfr.org/]
 pour utiliser celui de {jabberfr.org}.
 	</description>
 	<prefix>omnipresence</prefix>
@@ -33,7 +34,7 @@ pour utiliser celui de {jabberfr.org}.
                 <inclure>base/omnipresence.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id="cextras" version="[0.8;]" />
 	<necessite id="jabberid" version="[0.1;]" />
 	<utilise id="cfg" version="[1.10.5;]" />
