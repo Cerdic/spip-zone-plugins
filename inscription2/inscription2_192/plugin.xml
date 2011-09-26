@@ -1,25 +1,20 @@
 <plugin>
-	<nom>
-		Inscription2
-	</nom>
-	<auteur>
-		&copy; cmtmt2003 - 2007 - Distribu&eacute; sous licence GNU/LGPL
-	</auteur>
-	<version>
-		0.61
-	</version>
-	<etat>
-		test
-	</etat>
+	<nom>Inscription2</nom>
+	<auteur>cmtmt</auteur>
+	<licence>&copy; 2003-2007 - GNU/LGPL</licence>
+	<version>0.61.0</version>
+	<etat>test</etat>
+	<slogan>
+		&#201;tendre les informations sur les auteurs
+	</slogan>
 	<description>
 		Inscription personnalis&eacute;e au site par l&rsquo;ajout de champs compl&eacute;mentaires
-		<h4><a href="?exec=cfg&amp;cfg=inscription2">Configuration</a></h4>
 	</description>
 	<icon>images/inscription2.png</icon>
 	<prefix>
 		  Inscription2
 	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<necessite id='cfg' version='[1.5.0;]' />
 	<install>base/inscription2_installer.php</install>
 	<options>
@@ -50,6 +45,5 @@
 		<nom>affiche_milieu</nom>
 		<inclure>inscription2_ajouter_onglets.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;1.9.3)" />
 	<categorie>auteur</categorie>
 </plugin>
