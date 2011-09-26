@@ -1,14 +1,17 @@
 <plugin>
 	<nom>jQuery Masonry</nom>
+	<slogan>Le plugin qui range vos blocs</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
 	<version>0.1</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
-		Le plugin qui range vos blocs... Une adaptation pour Spip du plugin JQuery Masonry : <a href="http://masonry.desandro.com/" title="plugin JQuery Masonry">http://masonry.desandro.com/</a>
+		<multi>[fr]Une adaptation pour Spip du plugin [JQuery Masonry->http://masonry.desandro.com/]
+		</multi>
 	</description>
 	<icon>images/jquerymasonry-32.png</icon>
+	<lien>http://www.spip-contrib.net/JQuery-Masonry</lien>
 	<prefix>jquerymasonry</prefix>
 	<install>base/jquerymasonry_install.php</install>
 	<pipeline>
@@ -16,7 +19,7 @@
 		<inclure>jquerymasonry_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10;]" />
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="Iterateurs" version="[0.3.0;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
