@@ -30,13 +30,13 @@ function inc_recuperer_id3_dist($fichier,$info=null,$mime=null){
 	// Scan file - should parse correctly if file is not corrupted
 	$file_info = $getID3->analyze($fichier);
 	getid3_lib::CopyTagsToComments($file_info);
-
 	if(sizeof($file_info)>0){
 		// Cover art?
 		if(isset($file_info['id3v2']['APIC'])){
 			foreach($file_info['id3v2']['APIC'] as $cle=>$val){
 				if (isset($file_info['id3v2']['APIC'][$cle]['data']) && isset($file_info['id3v2']['APIC'][$cle]['image_mime']) && isset($file_info['id3v2']['APIC'][$cle]['dataoffset'])) {
-		            $imagechunkcheck = getid3_lib::GetDataImageSize($file_info['id3v2']['APIC'][$cle]['data']);
+					$imageinfo = array();
+		            $imagechunkcheck = getid3_lib::GetDataImageSize($file_info['id3v2']['APIC'][$cle]['data'],$imageinfo);
 		            $extension = getid3_lib::ImageTypesLookup($imagechunkcheck[2]);
 		            if($extension == 'jpeg')
 		            	$extension = 'jpg';
