@@ -44,6 +44,8 @@ function fblogin_vider_tables($nom_meta_base_version) {
 	include_spip('base/abstract_sql');
 	sql_alter('table spip_auteurs drop fb_uid');
 	effacer_meta($nom_meta_base_version);
+	// Effacer la configuration
+	effacer_meta('fblogin');
 }
 
 ?>

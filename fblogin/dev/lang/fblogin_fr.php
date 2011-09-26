@@ -4,13 +4,20 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
-
+	// C
+	'config_menu' => 'Connexion Facebook',
+	'config_app_id_label' => 'Identifiant de l\'application',
+	'config_secret_key_label' => 'Clé secrète',
+	'config_titre' => 'Configurer la connexion Facebook',
+	
 	// E
+	'erreur_client' => 'Impossible de se connecter à Facebook. Contacter le webmestre pour vérifier la configuration du site.',
 	'erreur_fblogin' => 'Cette adresse fblogin ne semble pas valide',
 	'erreur_librairies' => 'Impossible de trouver les librairies d\'authenfication fblogin',
 	'erreur_fblogin_info_manquantes' => 'Votre fournisseur fblogin ne nous a pas envoy&eacute; toutes les informations n&eacute;cessaires',
 	
 	// F
+	'form_inscription_facebook' => 'S\'inscrire avec Facebook',
 	'form_login_fblogin' => 'Vous pouvez aussi utiliser un identifiant fblogin (<a href="http://www.fbloginfrance.fr/" target="_blank" rel="external">aide</a>)',
 	'form_forum_indiquer_fblogin' => 'Vous pouvez vous inscrire sur ce site en indiquant un identifiant fblogin.',
 	'form_login_fblogin_ok' => 'Cet identifiant utilise fblogin.',
