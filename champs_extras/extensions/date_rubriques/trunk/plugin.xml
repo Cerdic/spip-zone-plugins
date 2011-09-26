@@ -1,5 +1,6 @@
 <plugin>
 	<nom><multi>[fr]Date pour Rubriques[en]Date for Sections</multi></nom>
+	<slogan>Prendre la main sur le champ date des rubriques</slogan>
 	<auteur>Yffic - Touti</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.1.1</version>
@@ -7,11 +8,12 @@
 	<icon>images/drextras-64.png</icon>
 	<description>
 		<multi>
-		[fr]Ajoute un champ "date" sur les rubriques de SPIP
-		[en]Add a "date" field for SPIP sections
+		[fr]Ajoute un champ "date" sur les rubriques de SPIP g&#233;rable par le r&#233;dacteur (le champ date par d&#233;faut de spip &#233;tant modifi&#233; automatiquement lors des mises &#224; jour des articles contenus dans les rubriques)
+		[en]Add a "date" field for SPIP sections manageable by the author (the default date field is modified automatically when there is updates of the articles)
 		</multi>
 	</description>
 	<etat>dev</etat>
+	<lien>http://www.spip-contrib.net/Date-pour-Rubriques</lien>
 	<prefix>daterubriques</prefix>
 	<install>base/daterubriques_install.php</install>
    <fonctions>daterubriques_fonctions.php</fonctions>
@@ -28,9 +30,10 @@
 		<icone>images/drextras-16.png</icone>
 		<url>date_rubriques</url>
 	</bouton>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="cextras" version="[0.7;]" />
 	<necessite id="spip_bonux" version="[1.2;]" />
 	<necessite id="saisies" version="[1.6.1;]" />
-	<categorie>outil</categorie>
+	<categorie>date</categorie>
 	<traduire gestionnaire="salvatore" module="daterubriques" reference="fr" />
 </plugin>
