@@ -3,7 +3,7 @@
 	<auteur>VincentL</auteur>
 	<licence>&#169; 2009 - GPL</auteur>
 	<lien>http://www.spip-contrib.net/LDAP</lien>
-	<icon>ldaplus.png<icon>
+	<icon>ldaplus.png</icon>
 	<version>0.1.0</version>
 	<etat>dev</etat>
     <slogan>Lier les auteurs &#224; un annuaire LDAP</slogan>
