@@ -1,9 +1,9 @@
 <plugin>
 	<nom>Spip jQuery Corner</nom>
-	<slogan>Le plugin qui arrondi les angles</slogan>
+	<slogan>Le plugin qui arrondit les angles</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
