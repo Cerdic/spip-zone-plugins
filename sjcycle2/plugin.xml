@@ -1,20 +1,14 @@
 <plugin>
-	<nom>Spip jQuery Cycle Plugin : sjcycle2</nom>
-	<auteur>
-		[Minimalteck->http://www.minimalteck.fr/]. Port&#233; pour spip 2 par Yffic
-	</auteur>
+	<nom>Spip jQuery Cycle 2</nom>
+	<slogan>Un diaporama param&#232;trable pour Spip</slogan>
+	<auteur>Yffic d'apr&#232;s la version 1 de [Minimalteck->http://www.minimalteck.fr/]</auteur>
 	<version>1.7.1</version>
 	<version_base>0.5</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
-Diaporama param&#233;trable pour Spip bas&#233; sur la librairie javascript <a href="http://jquery.com/" title="Site officiel de jQuery">jQuery</a> et les plugins :
--* <a href="http://malsup.com/jquery/cycle/" title="Site officiel du jQuery Cycle Plugin">jQuery Cycle Plugin</a>;
--* FancyBox (via le <a href="http://www.spip-contrib.net/FancyBox,3020" title="Plugin fancybox pour Spip">plugin fancybox pour spip</a>);
--* <a href="http://bassistance.de/jquery-plugins/jquery-plugin-tooltip/" title="Site officiel du jQuery Tooltip Plugin">Tooltip</a>.
-
-Int&#233;gration pour Spip [2.0.x] 
--* bas&#233;e sur les formulaires <a href="http://www.spip.net/fr_article3800.html" title="Les formulaires CVT de SPIP 2.0 sur Spip.net">CVT</a>;
--* utilisant le moteur de configuration <a href="http://www.spip-contrib.net/Config-cfg" title="CFG sur Spip-Contrib">CFG</a> [1.10].
+		<multi>
+		[fr]Diaporama param&#233;trable pour Spip bas&#233; sur le plugin [jQuery Cycle->http://malsup.com/jquery/cycle/]. Le diaporama peut s'ins&#233;rer dans le texte de vos articles. Le plugin fournit &#233;galement des mod&#232;les permettant par exemple d'ajouter un diaporama al&#233;atoire d'images ou un diaporama des sites syndiqu&#233;s dans un squelette...
+		</multi>
 	</description>
 	<icon>images/sjcycle-32.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-Spip-jQuery-Cycle-2</lien>
@@ -40,7 +34,7 @@ Int&#233;gration pour Spip [2.0.x]
 		<inclure>sjcycle_prive_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10;]" />
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="palette" version="[1.2.2;]" />
