@@ -1,5 +1,6 @@
 <plugin>
-	<nom>Manuel de r&eacute;daction du site</nom>
+	<nom>Manuel de r&#233;daction du site</nom>
+	<slogan>Un manuel sp&#233;cifique &#224; votre site pour vos r&#233;dacteurs</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
 	<version>0.5</version>
@@ -7,7 +8,7 @@
 	<etat>stable</etat>
 	<description>
 	<multi>
-		[fr]Ce plugin installe une ic&ocirc;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&eacute; le manuel de r&eacute;daction du site. Ce manuel est un article du site.
+		[fr]Ce plugin installe une ic&#244;ne d'aide permettant d'afficher depuis n'importe quelle page de l'espace priv&#233; le manuel de r&#233;daction du site. Ce manuel est un article du site.
 		[en]This plugin installs an help icon making it possible to post since any page of private space the Website Editor Manual. This manual is an article of the website.
 	</multi>
 	</description>
@@ -32,7 +33,7 @@
 		<inclure>manuelsite_prive_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="cfg" version="[1.10;]" />
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<necessite id="yaml" version="[1.1;]" />
