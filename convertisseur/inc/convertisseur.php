@@ -377,7 +377,7 @@ function conversion_format($conv_in, $format) {
 			if ($cv AND !$conv_out)
 				$log = "<span style='color:red'>"
 					._T("convertisseur:erreur_extracteur")
-					."</span>";
+					." $cv</span>";
 			}
 			if (!$cv)
 				$log = "<span style='color:red'>"
@@ -440,22 +440,46 @@ function inserer_conversion($texte, $id_rubrique, $f=null) {
 			'id_rubrique='.intval($id_rubrique)
 		);
 
-		$id_article = sql_insertq('spip_articles',
-			array(
+		$champs = array(
 			'titre' => $ps,
 			'statut' => 'prepa',
 			'id_rubrique' => $id_rubrique,
 			'id_secteur' => $q['id_secteur'],
 			'lang' => $q['lang'],
 			'ps' => $ps
-			)
-		);
-		sql_insertq('spip_auteurs_articles',
+			);
+
+		// Envoyer aux plugins
+		$champs = pipeline('pre_insertion',
 			array(
-			'id_article' => $id_article,
-			'id_auteur' => $id_auteur
+				'args' => array(
+					'table' => 'spip_articles',
+				),
+				'data' => $champs
 			)
 		);
+
+		$id_article = sql_insertq('spip_articles', $champs);
+
+		pipeline('post_insertion',
+			array(
+				'args' => array(
+					'table' => 'spip_articles',
+					'id_objet' => $id_article
+				),
+				'data' => $champs
+			)
+		);
+
+		if ($id_article>0
+		AND $id_auteur>0) {
+			sql_insertq('spip_auteurs_articles',
+				array(
+				'id_article' => $id_article,
+				'id_auteur' => $id_auteur
+				)
+			);
+		}
 	}
 
 	// en cas d'echec de l'insertion
