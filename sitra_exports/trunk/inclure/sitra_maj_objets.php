@@ -131,7 +131,11 @@ foreach($langues as $langue){
 						$images[$i]['num_image'] = $i;
 						$images[$i]['type_image'] = $types_images['i_'.$val['type']];
 						$images[$i]['url_image'] = $val -> URL;
-						$images[$i]['lien'] = $val['lien'];
+						// seules les images principales sont importées eventuellement
+						if ($images[$i]['type_image'] != 'principale')
+							$images[$i]['lien'] = 'N';
+						else
+							$images[$i]['lien'] = $val['lien'];
 					} // fin if premiere_langue
 					$images_details[$i]['id_sitra'] = $id_sitra;
 					$images_details[$i]['num_image'] = $i;
