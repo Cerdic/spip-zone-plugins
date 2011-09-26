@@ -106,7 +106,8 @@ foreach($langues as $langue){
 		} // fin if contact
 		
 		// classement
-		if($oi -> Classements -> DetailClassement -> Classement and $premiere_langue){
+		if($oi -> Classements -> DetailClassement and $premiere_langue){
+			$objet['classement_orga'] = $oi -> Classements -> DetailClassement['libelle'];
 			$objet['classement_code'] = $oi -> Classements -> DetailClassement -> Classement['type'];
 			$objet['classement'] = $oi -> Classements -> DetailClassement -> Classement;
 		}
@@ -267,7 +268,7 @@ foreach($langues as $langue){
 		if ($premiere_langue) {
 			// on cherche si objet déjà présent dans la table pour mise à jour ou création
 			$id_sitra_objet = 0;
-			$id_sitra_objet = sql_getfetsel('id_sitra','spip_sitra_objets',$where);
+			$id_sitra_objet = sql_getfetsel('id_sitra_objet','spip_sitra_objets',$where);
 			// mise à jour ou insertion dans sitra_objets
 			if ($id_sitra_objet)
 				$r = sql_updateq('spip_sitra_objets',$objet,'id_sitra_objet='.$id_sitra_objet);

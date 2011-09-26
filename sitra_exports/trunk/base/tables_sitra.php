@@ -19,6 +19,7 @@ $sitra_objets_field = array(
 	'latitude' => 'varchar(12) NOT NULL',
 	'longitude' => 'varchar(12) NOT NULL',
 	'altitude' => 'varchar(5) NOT NULL',
+	'classement_orga' => 'varchar(32) NOT NULL',
 	'classement_code' => 'varchar(32) NOT NULL',
 	'classement' => 'varchar(32) NOT NULL',
 	);
