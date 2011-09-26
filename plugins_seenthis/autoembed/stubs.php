@@ -1528,6 +1528,15 @@ array(
     'iframe-player' => 'http://bandcamp.com/EmbeddedPlayer/v=2/album=$2/size=grande3/bgcol=FFFFFF/linkcol=4285BB/transparent=true/',
   ),
 
+array(
+    'title' => 'Qwiki',
+    'website' => 'http://www.qwiki.com',
+    'url-match' => 'http://www\.qwiki\.com/q/(.*)',
+    'embed-width' => '480',
+    'embed-height' => '255',
+    'iframe-player' => 'http://www.qwiki.com/embed/$2',
+  ),
+
   /*
  array(
     'title' => 'Radionomy',

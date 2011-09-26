@@ -5,6 +5,9 @@ function embed_url($url) {
 	$max_w = 440;
 	$max_i = 300;
 
+	$url = str_replace("/#/", "/", $url);
+	$url = str_replace("/#!/", "/", $url);
+
 
 	$p = parse_url($url);
 	$host = $p["host"];
@@ -17,6 +20,7 @@ function embed_url($url) {
 	// Si l'embed a deja été sauvegardé
 	if (file_exists("cache/$host/$dossier/$fichier")) {
 		$html = implode("", file("cache/$host/$dossier/$fichier"));
+		if (strlen($html) > 0) echo "$html";
 	} else { // Si pas sauvegardé
 	
 		// Créer dossier si nécessaire
@@ -56,19 +60,6 @@ function embed_url($url) {
 			$code_ae = "<div class='oembed-container oembed-code'>$html</div>";
 			
 		}
-/*		else if (preg_match("/^http\:\/\/(www\.)?twitpic\.com/i", $url)) {
-			$html = join("", file($url));
-			
-
-			if (preg_match(",http://(hot)?proxy[0-9]+.twitpic.com/photos/(full|large)/[a-z0-9]+.(jpg|gif|png),i", $html, $regs)){
-				$img =$regs[0];	
-				$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Twitpic' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
-			}
-			else if (preg_match(",http://s[0-9]+.amazonaws.com/twitpic/photos/(full|large)/[a-z0-9]+.(jpg|gif|png)\?[^'\"]*,i", $html, $regs)){
-				$img =$regs[0];	
-				$code_ae = "<div class='oembed-container oembed-img'><a href='$url'><img src='$img' alt='Twitpic' style='max-width: ".$max_i."px; max-height: ".$max_i."px;'/></a></div>";	
-			}
-		}*/
 		else if (preg_match("/^http\:\/\/(www\.)?yfrog\.com/i", $url)) {
 			$oembed = "http://www.yfrog.com/api/oembed?url?format=json&url=".$url;
 			$json = join("",file($oembed));
@@ -96,9 +87,10 @@ function embed_url($url) {
 			}
 		} 
 		else {
-			$url = str_replace("/#/", "/", $url);
 			include "AutoEmbed.class.php";
 			$AE = new AutoEmbed();
+	
+	
 	
 			// load the embed source from a remote url
 			if (!$AE->parseUrl($url)) {
