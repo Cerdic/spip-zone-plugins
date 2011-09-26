@@ -5,7 +5,7 @@
 		label=' '})]
 ]
 <B_mots>
-	<BOUCLE_mots(SPIPICIOUS mots){id_objet}{objet}{id_auteur=#SESSION{id_auteur}}>
+	<BOUCLE_mots(SPIPICIOUS mots){id_objet}{objet}{id_auteur=#SESSION{id_auteur}}{statut?}>
 		<div class="choix">
 			<input type="checkbox" name="#ENV{nom}[]" id="champ_#ENV{nom}_#COMPTEUR_BOUCLE" class="checkbox" value="#ID_MOT"[ (#ID_MOT|in_any{[(#ENV{valeur}|sinon{#GET{defaut}})]}|oui)checked='checked'] />
 			<label for="champ_#ENV{nom}_#COMPTEUR_BOUCLE">#TITRE</label>
