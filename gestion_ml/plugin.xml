@@ -1,11 +1,15 @@
-<?xml version="1.0"?>
 <plugin>
 	<nom>Gestion ML</nom>
+	<slogan>Un plugin pour g&#233;rer vos mailing lists chez OVH</slogan>
 	<auteur>Yffic</auteur>
 	<version>0.3</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
-	<description>Gestion de Mailling Lists externes. Ne fonctionne actuellement que chez OVH avec le robot ezmlm via SoAPI</description>
+	<description>
+		<multi>
+			[fr]Gestion de Mailling Lists externes. Ne fonctionne actuellement que chez OVH avec le robot ezmlm via SoAPI
+		</multi>
+	</description>
 	<prefix>gestionml</prefix>
 	<install>base/gestionml_install.php</install>
 	<icon>images/gestionml-64.png</icon>
@@ -24,7 +28,7 @@
 		<url>gestionml</url>
 	</bouton>
 	<fonctions>inc/gestionml_api.php</fonctions>
-	<necessite id="SPIP" version="[2.0.x;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="cfg" version="[1.10;]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<necessite id="YAML" version="[1.5;]" />
