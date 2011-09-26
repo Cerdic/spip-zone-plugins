@@ -1,16 +1,16 @@
 <plugin>
-	<nom>
-		Groupes
-	</nom>
-	<auteur>
-		&copy; VincentL - 2009 - Distribu&eacute; sous licence GNU/LGPL
-	</auteur>
-	<version>0.2</version>
+	<nom>Groupes</nom>
+	<auteur>VincentL</auteur>
+	<licence>&copy; 2009 - GNU/LGPL</licence>
+	<version>0.2.0</version>
 	<version_base>0.63</version_base>
 	<etat>dev</etat>
+	<lien>http://www.spip-contrib.net/Gestion-de-Groupes-d-auteurs-2,3135</lien>
+	<slogan>
+		Cr&#233;er des groupes d'auteurs
+	</description>
 	<description>
-		Création de groupes d'utilisateurs
-		<a href="?exec=groupes">Page de gestion</a>
+		Ce plugin permet de cr&#233;er des groupes d'auteurs et de les associer &#233;ventuellement aux zones du plugin Acc&#232;s restreint.
 	</description>
 	<prefix>groupes</prefix>
 	<install>base/groupes_install.php</install>
@@ -37,5 +37,6 @@
         <nom>declarer_tables_interfaces</nom>
         <inclure>base/groupes_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<categorie>auteur</categorie>
 </plugin>
