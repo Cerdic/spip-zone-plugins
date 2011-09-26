@@ -1,6 +1,4 @@
 <INCLURE{fond=entete}{type_page=agenda}{lang}>
-[(#REM) A décommenter quand l'agenda marchera
-[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=noisettes/agenda_#ENV{type,semaine}}{type} {delais=900}{annee}{mois}{jour}{echelle}{partie_cal}{theme}>]
 
 <div id="navigation-seminaire"><!-- mettre ce div dans le div suivant -->
 <INCLURE{fond=agenda/navigation/agenda_evenements}{env}>

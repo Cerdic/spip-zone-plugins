@@ -8,14 +8,21 @@
 <auteur>Amaury Adon</auteur>
 <licence>GNU/GPL</licence>
 <version>1.4.0</version>
-<etat>test</etat>
 <version_base>0.1</version_base>
+<etat>test</etat>
+<slogan>
+	<multi>
+	[fr]
+	Surcouche au plugin Agenda2 pour gérer les séminaires et autres événements d'un laboratoire de recherche. 
+	[en]
+	</multi>
+</slogan>
 <description>
 	<multi>
-[fr]
-Surcouche au plugin Agenda2  pour  gérer les séminaires et autres événements d'un laboratoire de recherche. 
-[en]
-</multi>
+	[fr]
+	Chaque événement est muni d'un mot clé qui permet de les trier selon les types (séminaire, colloque,...) et selon le laboratoire ou l'organisme l'organisant.
+	[en]
+	</multi>
 </description>
 
 	<lien></lien>
@@ -25,7 +32,7 @@ Surcouche au plugin Agenda2  pour  gérer les séminaires et autres événements
 	<necessite id="agenda" version="[2.0;]" src="http://files.spip.org/spip-zone/agenda2.zip"/>
 	<necessite id="cextras" version="[1.0.1;]" />
 	<utilise id="kitcnrs" version="[4.0.8;]" src="http://www.harmoweb.cnrs.fr/spip.php?article79"/>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 
 
 	<options>seminaire_options.php</options>
