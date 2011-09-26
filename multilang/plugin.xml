@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Multilang</nom>
-	<slogan>Un plugin pour g&#233;rer l'affichage des tags multi</slogan>
+	<slogan>G&#233;rer l'affichage du contenu des tags multi par un menu</slogan>
 	<auteur>Renato Formato, Kent1, Yffic</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.3.5</version>
