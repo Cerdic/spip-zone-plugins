@@ -178,9 +178,14 @@ foreach($langues as $langue){
 			$capacites = array();
 			foreach ($oi -> Capacites -> CapacitesPrestations as $presta_capacite){
 				foreach($presta_capacite -> DetailCapacitePrestation as $val){
-					$capa = $val -> Capacite;
-					if ($val['utilise'] == 'O' and $capa)
-						ajoute_si_present($capacites, $capa['libelle'].': '.$capa);
+					if ($val['utilise'] == 'O'){
+						$qtite = 0;
+						foreach($val -> Capacite as $capa){
+							$qtite += $capa;
+						}
+						if ($qtite > 0)
+							ajoute_si_present($capacites, $qtite.' '.$val['libelle']);
+					}
 				}
 			}
 			$objet_details['capacites'] = serialize_non_vide($capacites);
@@ -254,6 +259,7 @@ foreach($langues as $langue){
 		}
 		
 		// On met à jour la base
+		
 		
 		$where = 'id_sitra = \''.$id_sitra.'\'';
 		$where_langue = 'lang = \''.$langue.'\'';
