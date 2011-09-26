@@ -205,13 +205,14 @@ function spipmotion_post_edition($flux){
 
 				$invalider = true;
 			}
-
 			/**
 			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 			 */
 			$fichier = basename(get_spip_doc($document['fichier']));
-			$racine = preg_replace('/-encoded-(\d+)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
-			$racine = preg_replace('/-encoded/','',substr($fichier,0,-(strlen($document['extension'])+1)));
+			spip_log($fichier,'spipmotion');
+			$racine = preg_replace('/-encoded-(\d)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
+			$racine = preg_replace('/-encoded-(\d+)/','',$racine);
+			$racine = preg_replace('/-encoded/','',$racine);
 			$id_doc = sql_getfetsel('id_document','spip_documents',"fichier LIKE '%$racine%' AND id_document != $id_document AND id_orig=0");
 			if(($GLOBALS['meta']['spipmotion_casse'] != 'oui') && !preg_match('/-encoded/',$document['fichier']) OR !$id_doc){
 				include_spip('action/spipmotion_ajouter_file_encodage');
@@ -309,19 +310,21 @@ function spipmotion_post_spipmotion_encodage($flux){
 
 /**
  * Insertion dans le pipeline pre_boucle de SPIP
- * Si on ne passe pas certains critères aux boucles documents, on n'affiche pas les versions :
+ * Si on ne passe pas certains critères aux boucles documents dans l'espace public, on n'affiche pas les versions :
  * -* tout
  * -* id_orig
  * -* id_document 
  */
 function spipmotion_pre_boucle($boucle){
 	if ($boucle->type_requete == 'documents') {
-		// Restreindre aux mots cles non techniques
-		if (!isset($boucle->modificateur['criteres']['id_orig']) && 
-			!isset($boucle->modificateur['tout']) &&
-			!isset($boucle->modificateur['criteres']['id_document'])) {
-				$boucle->where[]= array("'='", "'id_orig'", "'0'");
-		}		
+		if(!test_espace_prive()){
+			// Restreindre aux mots cles non techniques
+			if (!isset($boucle->modificateur['criteres']['id_orig']) && 
+				!isset($boucle->modificateur['tout']) &&
+				!isset($boucle->modificateur['criteres']['id_document'])) {
+					$boucle->where[]= array("'='", "'id_orig'", "'0'");
+			}		
+		}
 	}
 	return $boucle;
 }
