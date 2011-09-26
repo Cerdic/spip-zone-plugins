@@ -40,6 +40,25 @@
             #SET{total_annuel,#GET{total_annuel}|array_merge{#ARRAY{total,#GET{total_annee}}}}
          </tr>
 
+         [(#REM) Articles par secteur ou branche ]
+         <BOUCLE_articles_branches(RUBRIQUES){id_parent=#ENV{id_secteur,0}}>
+         <tr class="tr_liste sousrub">
+         	<td class="objet">#TITRE</td>
+            #SET{total,0}
+            <BOUCLE_annees_articles_branche(POUR){tableau #ENV{annees}}{par cle}>
+               <BOUCLE_articles_branche(ARTICLES){branche}{annee=#VALEUR}> </BOUCLE_articles_branche>
+                  #SET{total,#GET{total}|plus{#TOTAL_BOUCLE}}
+                  <td class="nb">#TOTAL_BOUCLE</td>
+               </B_articles_branche>
+                  <td class="nb">0</td>
+               <//B_articles_branche>
+            </BOUCLE_annees_articles_branche>
+
+         	[(#REM) Total lignes ]
+            <td class="nb">#GET{total}</td>
+			</tr>
+         </BOUCLE_articles_branches>
+
          [(#REM) Breves ]
          <tr class="tr_liste">
             <td class="objet"><:breves:></td>
