@@ -134,7 +134,7 @@ foreach($langues as $langue){
 						$images[$i]['url_image'] = $val -> URL;
 						// seules les images principales sont importées eventuellement
 						if ($images[$i]['type_image'] != 'principale')
-							$images[$i]['lien'] = 'N';
+							$images[$i]['lien'] = 'O';
 						else
 							$images[$i]['lien'] = $val['lien'];
 					} // fin if premiere_langue
