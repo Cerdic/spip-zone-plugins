@@ -1,29 +1,19 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<!--  
-
-	// lilo plugin.xml
-
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-	
-	 -->
 	<nom>Login Logout (LiLo)</nom>
-	<auteur>cpaulus@quesaco.org</auteur>
-	<version>0.43</version>
+	<auteur>[cpaulus->cpaulus@quesaco.org]</auteur>
+	<version>0.43.0</version>
 	<version_base>0.01</version_base>
 	<icon>images/lilo-64.png</icon>
 	<etat>test</etat>
-
+	<slogan>Une alternative au formulaire de login de SPIP</slogan>
 	<description>Login-Logout (LiLo) propose une page login, un bloc login et une boite de statut.
-	La page login est appel&eacute;e lors de la tentative d'acc&egrave;s &agrave; l'espace priv&eacute;. 
-	Le bloc login est construit par l'appel &agrave; la balise LOGIN_PUBLIC.
-	La boite statut appara&icirc;t dans l'espace public lorsque le visiteur est authentifi&eacute;.
-	Page login et boite statut param&eacute;trables apr&egrave;s activation [via la page de configuration->./?exec=configuration].
+	La page login est appel&#233;e lors de la tentative d'acc&#232;s &#224; l'espace priv&#233;. 
+	Le bloc login est construit par l'appel &#224; la balise LOGIN_PUBLIC.
+	La boite statut appara&icirc;t dans l'espace public lorsque le visiteur est authentifi&#233;.
+	Page login et boite statut param&#233;trables apr&#232;s activation.
 	</description>
 
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Page-de-login-et-boite-statut-pour]</lien>
+	<lien>http://www.quesaco.org/Page-de-login-et-boite-statut-pour</lien>
 	
 	<prefix>lilo</prefix>
 
@@ -50,6 +40,6 @@
 		<inclure>inc/lilo_pipeline_insert_head.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>auteur</categorie>
 </plugin>
