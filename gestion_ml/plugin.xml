@@ -1,8 +1,8 @@
 <plugin>
 	<nom>Gestion ML</nom>
-	<slogan>Un plugin pour g&#233;rer vos mailing lists chez OVH</slogan>
+	<slogan>G&#233;rer vos mailing lists chez OVH</slogan>
 	<auteur>Yffic</auteur>
-	<version>0.3</version>
+	<version>0.3.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
