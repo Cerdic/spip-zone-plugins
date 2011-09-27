@@ -51,7 +51,7 @@
 	<chemin dir="" />
 	<chemin dir="feed/" />
 	
-	<necessite id="SPIP" version="[2.0.9;2.2.0)" />
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
 	<utilise id='Z' version="[;]" />
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="comments" reference="fr" />
