@@ -4,8 +4,10 @@
 _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
 	</auteur>
 	<slogan>
-[fr]Tagger tous les objets
-[en]Tag each objects
+		<multi>
+		[fr]Tagger tous les objets
+		[en]Tag each objects
+		</multi>
 	</slogan>
 	<licence>
 		&#169; 2007-2011 - GNU/GPL v2
