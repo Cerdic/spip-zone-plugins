@@ -24,7 +24,7 @@ function action_editer_abonnement_dist()
 
 	$c = $opt = array();
 	foreach (array(
-		'titre', 'duree', 'periode','exact','ids_zone', 'prix',  'descriptif'
+		'titre', 'duree', 'periode','exact','nb_rub','ids_zone', 'prix',  'descriptif'
 	) as $champ)
 		$c[$champ] = _request($champ);
 

@@ -40,6 +40,12 @@ function abonnement_upgrade($nom_meta_base_version,$version_cible){
 		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 	}
 	
+	if (version_compare($current_version,"1.3","<=")){
+		sql_alter("TABLE spip_abonnements ADD nb_rub bigint(21) not null default 0 AFTER exact");
+		creer_base();
+		ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
+	}
+	
 	//jamais installe
 	if ($current_version==0.0){
 		creer_base();

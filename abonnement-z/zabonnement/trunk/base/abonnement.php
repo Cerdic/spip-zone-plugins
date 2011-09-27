@@ -31,6 +31,7 @@ function abonnement_declarer_tables_principales($tables_principales){
 		"duree" 	=> "text NOT NULL",
 		"periode" 	=> "text NOT NULL",
 		"exact" 	=> "ENUM('oui','non') NOT NULL DEFAULT 'non'",
+		'nb_rub'	=> 'bigint(21) not null default 0',
 		"ids_zone"	=> "text NOT NULL",	
 		"prix"          => 'float not null default 0',
 		"descriptif" 	=> "text NOT NULL",

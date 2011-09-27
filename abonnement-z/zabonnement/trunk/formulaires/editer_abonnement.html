@@ -24,26 +24,33 @@
 
 	  	[(#SAISIE{input,prix,obligatoire=oui,
 			label=<:abo:label_prix:>})]
+          
+		<li class="fieldset">
+			<fieldset>
+				<h3 class="legend"><:abo:acces_internet_explication:></h3>
+				<ul>
+					[(#SAISIE{radio, exact,
+					label=<:abo:acces_internet_nozone:>,
+					datas=#ARRAY{
+						non,<:abo:acces_internet_explication_non:>,
+						oui,<:abo:acces_internet_explication_oui:>}}
+					)]
+						
+					[(#SAISIE{input,nb_rub,
+					explication=<:abo:acces_internet_nb_rub_explication:>,
+					label=<:abo:acces_internet_nb_rub:>}
+					)]
+					
+					[(#SAISIE{input,ids_zone,
+					explication=<:abo:acces_internet_ids_zone_explication:>,
+					label=<:abo:acces_internet_ids_zone:> [<br /><a href="(#URL_ECRIRE{acces_restreint})]"><:abo:voir_zones:></a>}
+					)]
+				</ul>
+			</fieldset>
+		</li>
 		
-		[(#SAISIE{input,ids_zone,
-			explication=<:abo:explication_ids_zone:>,
-			label=<:abo:label_ids_zone:>})]
 		
-		[(#SAISIE{radio, exact,
-		label=<:abo:dates_exactes:>,
-		explication=<:abo:abonnement_coordonne_dates:>,
-		datas=#ARRAY{
-			non,<:abo:non_toutes_dates:>,
-			oui,<:abo:oui_dates_exactes:>}})]
-			
-	[(#REM)	<!-- archives automatiques (fusionner avec exact et trouver un autre nom?) 
-	Abonnement aux archives, commence aujourd\'hui moins le nombre de jours
-	-->
-		[(#SAISIE{input, archives,
-		label=<:abo:dates_exactes:>,
-		explication=<:abo:abonnement_archives:>,
-		label=<:abo:label_archives:>})]
-	]
+		
 			
 	  	[(#SAISIE{textarea,descriptif,
 			label=<:abo:label_descriptif:>,

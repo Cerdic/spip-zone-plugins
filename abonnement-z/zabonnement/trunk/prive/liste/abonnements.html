@@ -1,36 +1,50 @@
-<B_liste_abonnements>
+[(#SET{defaut_tri,#ARRAY{
+	date,-1,
+	periode,-1,
+	titre,1,
+	id_abonnement,1
+	prix,1
+}})
+]<B_liste_abonnements>
 #ANCRE_PAGINATION
 <div class="liste-elements abonnements">
 <table class='spip liste'>
 [<caption><strong class="caption">(#ENV*{titre,<:abo:liste_des_offres:>})</strong></caption>]
 	<thead>
-	<tr>	<th><:abo:id:></th>
-		<th><:abo:label_titre:></th>
-		<th><:abo:label_duree:></th>
-		<th><:abo:label_zones_ouvrir:></th>
-		<th><:abo:exact:></th>
-		<th><:abo:label_prix:></th>
-		<th><:abo:label_action:></th>
+	<tr class='first_row'>
+			<th class='id' style='width:3%;'>[(#TRI{id_abonnement,<:info_numero_abbreviation:>,ajax})]</th>
+			<th class='logo'><:abo:logo:></th>
+			<th class='titre'>[(#TRI{titre,<:abo:label_titre:>,ajax})]</th>
+			<th class='periode'>[(#TRI{periode,<:abo:label_duree:>,ajax})]</th>
+			<th class='prix'>[(#TRI{prix,<:abo:label_prix:>,ajax})]</th>
+			<th class='ids_zone'>[(#TRI{ids_zone,<:abo:label_zones_ouvrir:>,ajax})]</th>
+			<th class='exact'>[(#TRI{exact,<:abo:acces_label:>,ajax})]</th>
+			<th class='nb_rub'>[(#TRI{nb_rub,<:abo:num:>,ajax})]</th>
+			<th class='action'><:abo:label_action:></th>
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_abonnements(ABONNEMENTS){pagination 10}{par id_abonnement}>
+	<BOUCLE_liste_abonnements(ABONNEMENTS)
+			{id_abonnement?}{where?}{titre?}
+		{duree ?}{prix ?}{tri #ENV{order,id_abonnement},#GET{defaut_tri}}
+		{pagination #ENV{nb,30}}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-			<td>#ID_ABONNEMENT</td>
-			<td class="#EDIT{titre}" style="width:30%">#TITRE</td>
+			<td class='id'>#ID_ABONNEMENT</td>
+			<td class='logo'>[(#LOGO_ABONNEMENT|image_reduire{24})]</td>
+			<td class="titre">#TITRE</td>
 			<td>#DUREE #PERIODE</td>
+			<td class='prix'>#PRIX</td>
 			<td>
 			[(#SET{id_zones,#ARRAY})]
 			[(#SET{id_zones,[(#IDS_ZONE|explode{','})]})]
 			<BOUCLE_zones(ZONES){id_zone IN #GET{id_zones}}>
 			<a href="[(#URL_ECRIRE{acces_restreint})]" title="#TITRE">#ID_ZONE</a>
 			</BOUCLE_zones>
-			<:abo:aucune_zone:>
 			<//B_zones>
 			</td>
-			<td>#EXACT</td>
-			<td>#PRIX</td>
-			<td>
+			<td class='exact'>#EXACT</td>
+			<td class='nb_rub'>#NB_RUB</td>
+			<td class='action'>
 			[(#AUTORISER{creer,abonnement}|non)
 				<a href="[(#URL_ECRIRE{abonnement_edit}|parametre_url{id_abonnement,#ID_ABONNEMENT})]">
 					<:abo:voir:>

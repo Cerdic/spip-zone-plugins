@@ -4,7 +4,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abonnement' => 'Abonnement',	
 	'abonnements' => 'Abonnements',
 	'abonnement_archives'=>'Abonnement aux archives, commence aujourd\'hui moins le nombre de jours',
-	'abonnement_coordonne_dates'=>'Seules les rubriques avec une date comprise dans la période de l\'abonnement seront accessibles.',
 	'abonnement_debut'=>'Début',
 	'abonnements_echus' => 'Abonnements échus',
 	'abonnement_fin'=>'échéance',
@@ -21,6 +20,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'abo_valide_jusqu_au'=>'Votre abonnement est valable jusqu\'au @date@',
 
 	'acces_complet' => 'Votre abonnement permet un accès complet à cette page.',
+	'acces_label'=>'Accès',
+	'acces_internet_explication'=>'Faut-il accorder un accès internet personnel le temps que dure l\'abonnement?',
+	'acces_internet_nozone' =>'Accorder un accès',
+	'acces_internet_explication_non'=>'Non, aucun accès internet (c\'est un abonnement papier).',
+	'acces_internet_explication_oui'=>'Oui, accès aux rubriques des dates de l\'abonnement.',
+	'acces_internet_nb_rub'=>'Nombre de rubriques accessibles',
+	'acces_internet_nb_rub_explication'=>'Si vous n\'êtes pas certain des dates de publication, précisez le nombre de rubriques accessibles pour cet abonnement.',
+	'acces_internet_ids_zone'=>'Accès à une zone restreinte',
+	'acces_internet_ids_zone_explication'=>'Accès à une zone, quelque soit la date des rubriques. <br />Séparer les identifiants des zones à ouvrir par une virgule.',
+
 	'acces_refuse' => 'Votre abonnement ne permet pas un accès complet à cette page.',
 	'action_creer_offre_abo' => 'Créer une offre d\'abonnement',
 	'action_editer' => 'éditer',
@@ -54,7 +63,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'creer_abonnement' => 'Créer un abonnement',
 
 //D
-	'dates_exactes'=>'Dates en correspondance exacte',
 	'date_utile'=>'Date de publication',
 	'date_abonnement'=>'Date',
 	'donnees_correspondances' => 'Mes données de correspondance',
@@ -76,7 +84,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_identification' => 'Vous devez être identifié pour pouvoir vous abonner',
 	'erreur_presente' => 'Une erreur est présente dans votre saisie',
 	'erreur_selection_abonnement' => 'Vous devez choisir un abonnement !',
-	'explication_ids_zone'=>'Séparer les numeros par une virgule. Laisser vide signifie qu\'aucune zone restreinte ne sera ouverte.',
 	'explication_environnement' => 'Vous pouvez utiliser des fichiers de tests
 		pour vérifier que les abonnements fonctionnent correctement.
 		Une fois en production,	ces fichiers de tests seront inaccessibles
@@ -122,7 +129,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_environnement' => 'Environnement de travail',
 	'label_environnement_test' => 'Environnement de test',
 	'label_environnement_prod' => 'Environnement de production',
-	'label_ids_zone'=>'Identifiants des zones à ouvrir',
 	'label_proposer_paiement' => 'Proposer le paiement à l\'inscription',
 	'label_action' => 'Action',
 	'label_titre' => 'Titre',
@@ -153,6 +159,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'liste_vos_abonnements'=>'Liste de vos abonnements',
 	'liste_des_offres'=>'Liste des offres d\'abonnements',
 	'les_abonnements'=>'Les offres d\'abonnements',
+	'logo'=>'Logo',
 
 
 //M
@@ -169,13 +176,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nombre_abonnes_dechus' => 'abonnements échus :',
 	'nombre_abonnes_relances' => 'abonnés relancés :',
 	'nombre_abonnes_inscrits' => 'abonnés inscrits :',
-	'non_toutes_dates'=>'Non, les dates de publication sont indifférentes',
 	'nombre_acheteurs_differents' => 'acheteurs différents : ',
+	'num'=>'Num',
 	
 	
 //O
 	'offres_abonnement'=>'Offres d\'abonnements',
-	'oui_dates_exactes'=>'Oui, restreindre aux dates de l\'abonnement',
 
 //P
 	'paiement' => 'Paiement',
@@ -208,6 +214,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 //V
 	'valide_echu_depuis'=>'Votre abonnement n\'est plus valable depuis le @date@',
 	'voir'=>'Voir',
+	'voir_zones'=>'Voir les zones',
 	'vos_articles' => 'Vos articles',
 	'vos_acces_articles'=>'Vous avez accès aux articles suivants :',
 	'vos_acces_articles_echus'=>'Vous n\'avez plus accès aux articles suivants :',
