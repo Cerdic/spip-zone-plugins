@@ -1,7 +1,7 @@
 <!--#navigation-->
 <div class="cadre-r amap-nav">
 <ul>
-	<li class="subMenu"><a href="[(#URL_ECRIRE{amapiens}|parametre_url{tri_auteurs,id_auteur})]" class="page_accueil" title="<:amap:liste_amapiens:>"><:amap:liste_amapiens:></a></li>
+	<li class="subMenu"><a href="#URL_ECRIRE{amapiens}" class="page_accueil" title="<:amap:liste_amapiens:>"><:amap:liste_amapiens:></a></li>
 	<li class="subMenu"><a href="#URL_ECRIRE{panier_liste}" class="page_accueil on" title="<:amap:liste_paniers:>"><:amap:liste_paniers:></a></li>
 	<li class="subMenu"><a href="#URL_ECRIRE{panier_enregistre}" class="options" title="<:amap:enregistrement:>"><:amap:enregistrement:></a></li>
 	<li class="subMenu"><a href="#URL_ECRIRE{panier_livraison}" class="options" title="<:amap:livraison:>"><:amap:livraison:></a></li>
@@ -29,6 +29,6 @@
 	    </p>
 	</div>
 	<div class="cadre_padding">
-		<INCLURE{fond=prive/inclure/liste_paniers}>
+		<INCLURE{fond=prive/inclure/liste_paniers,env,ajax}>
 	</div>
 </div>

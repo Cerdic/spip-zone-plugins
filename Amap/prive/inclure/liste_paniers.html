@@ -3,14 +3,14 @@
 <table class="amap spip">
 	<thead>
 	<tr>
-		<th><:amap:nom:></th>
-		<th><:amap:date_distribution:></th>
+		<th>[(#TRI{nom,<:nom:>})]</th>
+		<th>[(#TRI{date_distribution,<:amap:date_distribution:>})]</th>
 		<th><:amap:type_panier:></th>
 		<th><:amap:action:></th>
 	</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_paniers(AMAP_PANIERS auteurs) {pagination 20} {par date_distribution}{age<0}>
+	<BOUCLE_paniers(AMAP_PANIERS auteurs) {tri date_distribution} {pagination 20}{age<0}>
 	<tr>
 		<td>#NOM</td>
 		<td>[(#DATE_DISTRIBUTION|affdate{'d/m/Y'})]</td>
