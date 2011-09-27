@@ -1,10 +1,11 @@
 <plugin>
-	<nom>Mod&egrave;les &lt;cite&gt;</nom>
+	<nom>Mod&#232;les &#60;cite&#62;</nom>
+	<slogan>Fournir des mod&#232;les pour ins&#233;rer des r&#233;f&#233;rences bibliographiques.</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.3.0</version>
 	<etat>test</etat>
-	<description>Ce plugin fournit des mod&egrave;les pour ins&eacute;rer des r&eacute;f&eacute;rences bibliographiques.</description>
+	<description>Le plugin Cite fournit des mod&#232;les permettant de citer proprement des r&#233;f&#233;rences bibliographiques dans vos articles tout en offrant un export dans des formats bibliographiques courants.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3698</lien>
 	<icon>images/cite-64.png</icon>
 	<prefix>cite</prefix>
