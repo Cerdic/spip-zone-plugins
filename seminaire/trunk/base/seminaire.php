@@ -25,7 +25,7 @@ function seminaire_declarer_champs_extras($champs = array()){
 		'precisions' => 'seminaire:precisions_abstract', //precisions sur le champ abstract		
 		'type' => 'bloc', // type de saisie
 		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-		'options' => array(
+		'saisie_parametres' => array(
 			'class' => 'inserer_barre_edition'
 		)
 	));	
@@ -36,7 +36,7 @@ function seminaire_declarer_champs_extras($champs = array()){
 		'precisions' => 'seminaire:precisions_notes', //precisions sur le champ namenotes
 		'type' => 'bloc', // type de saisie
 		'sql' => "text NOT NULL DEFAULT ''", // declaration sql
-		'options' => array(
+		'saisie_parametres' => array(
 			'class' => 'inserer_barre_edition'
 		),
 	));
