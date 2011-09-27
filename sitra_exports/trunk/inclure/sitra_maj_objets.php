@@ -219,12 +219,13 @@ foreach($langues as $langue){
 			foreach ($oi -> Capacites -> CapacitesPrestations as $presta_capacite){
 				foreach($presta_capacite -> DetailCapacitePrestation as $val){
 					if ($val['utilise'] == 'O'){
-						$qtite = 0;
+						$details = '';
 						foreach($val -> Capacite as $capa){
-							$qtite += $capa;
+							if ($capa > 0)
+								$details .= $capa.' '.strtolower(substr($capa['libelle'],0,1)).'. ';
 						}
-						if ($qtite > 0)
-							ajoute_si_present($capacites, $qtite.' '.$val['libelle']);
+						if ($details)
+							ajoute_si_present($capacites, $val['libelle'].': '.$details);
 					}
 				}
 			}
