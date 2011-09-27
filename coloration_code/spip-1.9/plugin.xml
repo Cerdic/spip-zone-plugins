@@ -1,13 +1,13 @@
 <plugin>
 	<nom> <!-- Coloration code , geshi -->
 	  <multi>
-		[fr]Coloration Code pour 1.9.1 et 1.9.2
-		[en]Code higlighting for 1.9.1 and 1.9.2
-		[it]Colorazione del codice per 1.9.1 i 1.9.2
+		[fr]Coloration Code
+		[en]Code higlighting
+		[it]Colorazione del codice
 		</multi>
 	</nom>
 	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) &#38; ARNO*
+	  Pierre Andrews (Mortimer) - ARNO*
 	</auteur>
 	<version>
 	  0.3
@@ -15,10 +15,16 @@
 	<etat>
 	  stable
 	</etat>
+	<slogan>
+		<multi>
+		[fr]Coloration syntaxique du code source dans les articles
+		[en]Syntax higlighting of code placed in articles
+		[it]Colorazione sintattica del codice utilizzato nel testo
+		</multi>
+	</slogan>
 	<description>
 	<multi>
 	[fr]
-{{{Coloration syntaxique du code source dans les articles SPIP}}}
 Il suffit de mettre le code entre
 _ {{&lt;code class="langage">...&lt;/code>}}
 _ ou avec un cadre
@@ -31,7 +37,6 @@ Il peut &#234;tre forc&#233; localement en rajoutant la classe "sans_telechargem
 
 Vous pouvez aussi utiliser le filtre {coloration_code_color} dans un squelette comme #TEXTE**|coloration_code_color&#123;spip,code&#125;: colore #TEXTE avec le language spip en format code (sans cadre), voir exemple lecode.html. L'url depuis l'article serait &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV#123;id_article#125;" title="voir le code de article" class="spip_in"&gt;Voir le code de l'article&lt;/a&gt;
 	  [en]
-{{{Syntax higlighting of code placed in SPIP articles.}}}
 You just have to put it between the tags:
 _ {{&lt;code class="language">...&lt;/code>}}
 _ or with a frame
@@ -44,7 +49,6 @@ It may also be forced locally by adding a class "sans_telechargement" in a way o
 
 You may also use {coloration_code_color} as a filter in a squelette as #TEXTE**|coloration_code_color&#123;spip,code&#125;: highlights #TEXTE with langage "spip" in format code (without frame), see example lecode.html. From article url would be &lt;a&nbsp;href="#URL_SITE_SPIP/spip.php?page=lecode&amp;id_article=#ENV#123;id_article#125;" title="view article's code" class="spip_in"&gt;View article's code&lt;/a&gt;
 	[it]
-{{{Colorazione sintattica del codice utilizzato nel testo.}}}
 Dovete solo utilizzare il segnaposto:
 _ {{&lt;code class="linguaggio">...&lt;/code>}}
 _ o con riquadro
