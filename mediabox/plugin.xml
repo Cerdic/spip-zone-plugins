@@ -2,9 +2,17 @@
 	<nom>
 		<multi>
 			[fr]MediaBox
+			[en]MediaBox
 			[ar]&#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1601;&#1585;&#1580;&#1577;
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]Bo&#238;te multim&#233;dia
+			[en]Media box
+			[ar]&#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1601;&#1585;&#1580;&#1577;
+		</multi>
+	</slogan>
 	<auteur>
 	[ColorPowered->http://colorpowered.com/colorbox/] <multi>[fr]pour la ColorBox
 _ Mis en plugin pour SPIP par [Cedric->http://www.yterium.com]
@@ -15,10 +23,9 @@ _ setup as a SPIP plugin by [Cedric->http://www.yterium.com]</multi>
 	</auteur>
 	<version>0.6.9</version>
 	<icon>prive/themes/spip/images/mediabox-32.png</icon>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description><multi>
-[fr]Bo&#238;te multim&#233;dia
-_ Par d&#233;faut, tous les liens vers des images (avec un attribut type d&#233;crivant le mime/type de l'image) ainsi que
+[fr]Par d&#233;faut, tous les liens vers des images (avec un attribut type d&#233;crivant le mime/type de l'image) ainsi que
 les liens avec la classe <code>.mediabox</code> sont enrichis par la bo&#238;te multimedia.
 
 Il est possible de configurer chaque lien au cas par cas avec des classes suppl&#233;mentaires :
@@ -30,8 +37,7 @@ Un panneau de configuration vous permet de modifier les r&#233;glages g&#233;n&#
 ainsi que l'aspect de la bo&#238;te parmi les habillages disponibles.
 
 Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
-[ar]&#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1601;&#1585;&#1580;&#1577;
-_ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;&#1578;&#1605; &#1573;&#1590;&#1601;&#1575;&#1569; &#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1601;&#1585;&#1580;&#1577; &#1593;&#1604;&#1609; &#1603;&#1604; &#1575;&#1604;&#1608;&#1589;&#1604;&#1575;&#1578; &#1575;&#1604;&#1609; &#1575;&#1604;&#1589;&#1608;&#1585; (&#1604;&#1607;&#1575; &#1606;&#1608;&#1593; &#1582;&#1575;&#1589;&#1610;&#1577; &#1610;&#1589;&#1601; mime/type &#1575;&#1604;&#1589;&#1608;&#1585;&#1577;) &#1573;&#1590;&#1575;&#1601;&#1577; &#1575;&#1604;&#1609; &#1575;&#1604;&#1608;&#1589;&#1604;&#1575;&#1578; &#1575;&#1604;&#1605;&#1586;&#1608;&#1583;&#1577; &#1576;&#1606;&#1605;&#1591; mediabox.
+[ar]&#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;&#1578;&#1605; &#1573;&#1590;&#1601;&#1575;&#1569; &#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1601;&#1585;&#1580;&#1577; &#1593;&#1604;&#1609; &#1603;&#1604; &#1575;&#1604;&#1608;&#1589;&#1604;&#1575;&#1578; &#1575;&#1604;&#1609; &#1575;&#1604;&#1589;&#1608;&#1585; (&#1604;&#1607;&#1575; &#1606;&#1608;&#1593; &#1582;&#1575;&#1589;&#1610;&#1577; &#1610;&#1589;&#1601; mime/type &#1575;&#1604;&#1589;&#1608;&#1585;&#1577;) &#1573;&#1590;&#1575;&#1601;&#1577; &#1575;&#1604;&#1609; &#1575;&#1604;&#1608;&#1589;&#1604;&#1575;&#1578; &#1575;&#1604;&#1605;&#1586;&#1608;&#1583;&#1577; &#1576;&#1606;&#1605;&#1591; mediabox.
 
 &#1605;&#1606; &#1575;&#1604;&#1605;&#1605;&#1603;&#1606; &#1573;&#1593;&#1583;&#1575;&#1583; &#1603;&#1604; &#1608;&#1589;&#1604;&#1577; &#1593;&#1604;&#1609; &#1581;&#1583;&#1577; &#1605;&#1606; &#1582;&#1604;&#1575;&#1604; &#1571;&#1606;&#1605;&#1575;&#1591; &#1573;&#1590;&#1575;&#1601;&#1610;&#1577;:
 -* &#1610;&#1578;&#1610;&#1581; <code>boxIframe</code>  &#1601;&#1578;&#1581; &#1575;&#1604;&#1608;&#1589;&#1604;&#1577; &#1601;&#1610; &#1573;&#1591;&#1575;&#1585; iframe
@@ -39,8 +45,7 @@ _ &#1575;&#1601;&#1578;&#1585;&#1575;&#1590;&#1610;&#1575;&#1611;&#1548; &#1610;
 -* &#1610;&#1578;&#1610;&#1581; <code>boxHeight-90pc</code> &#1578;&#1581;&#1583;&#1610;&#1583; &#1575;&#1585;&#1578;&#1601;&#1575;&#1593; &#1641;&#1632;&#1642; &#1604;&#1604;&#1573;&#1591;&#1575;&#1585;
 
 &#1608;&#1578;&#1578;&#1610;&#1581; &#1604;&#1608;&#1581;&#1577; &#1573;&#1593;&#1583;&#1575;&#1583; &#1578;&#1593;&#1583;&#1610;&#1604; &#1575;&#1604;&#1573;&#1593;&#1583;&#1575;&#1583;&#1575;&#1578; &#1575;&#1604;&#1593;&#1575;&#1605;&#1577; &#1581;&#1587;&#1576; &#1575;&#1604;&#1585;&#1594;&#1576;&#1577; &#1603;&#1605;&#1575; &#1578;&#1578;&#1610;&#1581; &#1575;&#1582;&#1578;&#1610;&#1575;&#1585; &#1588;&#1603;&#1604; &#1575;&#1604;&#1589;&#1606;&#1583;&#1608;&#1602; &#1605;&#1606; &#1576;&#1610;&#1606; &#1575;&#1604;&#1571;&#1588;&#1603;&#1575;&#1604; &#1575;&#1604;&#1605;&#1578;&#1575;&#1581;&#1577;
-[en]Media box
-_ By default, all links to pictures (with a type attribute describing the mime/type of the picture) and
+[en]By default, all links to pictures (with a type attribute describing the mime/type of the picture) and
 links with the class <code>.mediabox</code> are enriched by multimedia box.
 
 You can configure each link on a case by case basis with additional classes:
@@ -52,9 +57,9 @@ A configuration panel lets you change the general settings to your liking, and t
 
 This plugin works on skeletons which have the <code>#INSERT_HEAD</code> tag.
 	</multi></description>
-	<lien>http://colorpowered.com/colorbox/</lien>
+	<lien>http://www.spip-contrib.net/MediaBox/</lien>
 	<prefix>mediabox</prefix>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	<pipeline>
 		<nom>insert_head_css</nom>
