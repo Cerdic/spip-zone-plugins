@@ -1,16 +1,19 @@
 <plugin>
     <!-- Nom du plugin -->
-    <nom> Rubrique &agrave; l'inscription </nom>
+    <nom>Rubrique &#224; l'inscription</nom>
+    <slogan>Cr&#233;er une rubrique &#224; l'inscription d'un admin</slogan>
 
     <!-- Auteur du plugin -->
-    <auteur>Ma&iuml;eul Rouquette sur une id&eacute;e de Jean-No&euml;l Moreau</auteur>
-    <version>0.6</version>
+    <auteur>Ma&#239;eul Rouquette sur une id&#233;e de Jean-No&#235;l Moreau</auteur>
+    <version>0.6.0</version>
     <version_base>0.3</version_base>
   
     <etat>stable</etat>
+    <lien>http://www.spip-contrib.net/Rubrique-a-l-inscription</lien>
 
-    <description> Si le formulaire d'inscription est passé avec l'argument 0minirezo (<code>#FORMULAIRE_INSCRIPTION{0minirezo}</code>), une rubrique est automatiquement créée, où l'auteur est admin restreint.</description>
-      <prefix>rubrique_a_linscription</prefix>
+    <description> Si le formulaire d'inscription est pass&#233; avec l'argument 0minirezo (<code>#FORMULAIRE_INSCRIPTION{0minirezo}</code>), une rubrique est automatiquement cr&#233;&#233;e, o&#249; l'auteur est admin restreint.</description>
+    <icon>rubrique_a_linscription.png</icon>
+    <prefix>rubrique_a_linscription</prefix>
 	<inscription>base/rubrique_a_linscription.php</inscription>
 	<onglet id="rubriquelinscription" parent="configuration">
 		<icone>prive/images/admin-12.gif</icone>
@@ -36,6 +39,6 @@
 	</pipeline>
 
 	<install>base/rubrique_a_linscription.php</install>
-  	<necessite id="SPIP" version="[2.0;]" />
+  	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>auteur</categorie>
 </plugin>
