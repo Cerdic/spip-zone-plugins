@@ -129,7 +129,7 @@ function coloration_code_color($code, $language, $cadre='cadre', $englobant='div
 		style='text-align: $spip_lang_right;'>
 		<a href='$fichier'
 		style='font-family: verdana, arial, sans; font-weight: bold; font-style: normal;'>" .
-		  _T('bouton_telecharger') .
+		  _T('bouton_download') .
 				"</a></div>";
 	}
 	return $rempl.'</' . $englobant . '>';
