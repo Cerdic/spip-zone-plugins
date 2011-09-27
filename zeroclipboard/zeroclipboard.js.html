@@ -9,11 +9,6 @@ var clip = null;
 ;(function($){
 
 $(function(){
-	clip = new ZeroClipboard.Client();
-	clip.setHandCursor(true);
-	clip.addEventListener('mouseOver',function(client){});
-	clip.addEventListener('complete',clipcomplete);
-	clip.reposition();
 	function clipcomplete(client,text){
 		$(client.domElement)
 			.html('<:zeroclipboard:link_text_copied:>')
@@ -21,6 +16,13 @@ $(function(){
 			.addClass('copypaste_copied')
 			.attr('title','<:zeroclipboard:link_title_copied:>');
 		$(client.domElement).parent().next('.copypaste').focus().select();
+		var width = $(client.domElement).width();
+		var height = $(client.domElement).height();
+		clip.div.innerHTML = clip.getHTML(width,height);
+		clip.reposition(client.domElement);
+		var style = clip.div.style;
+		style.width = '' + width + 'px';
+		style.height = '' + height + 'px';
 		$('.copypaste_copied').not($(client.domElement)[0]).each(function(){
 			$(this)
 				.html('<:zeroclipboard:link_text_copy:>')
@@ -30,14 +32,31 @@ $(function(){
 	}
 
 	var copypaste_init = function(){
+		if(clip){
+			clip.destroy();
+		}
+		clip = new ZeroClipboard.Client();
+		clip.setHandCursor(true);
+		clip.addEventListener('mouseOver',function(client){});
+		clip.addEventListener('complete',clipcomplete);
 		$('.copypaste').each(function(){
 			if(!$(this).prev().is('.copypaste_container'))
 				$(this).before('<div class="copypaste_container" style="position:relative"><a title="<:zeroclipboard:link_title_copy:>" class="copypaste_link"><:zeroclipboard:link_text_copy:></a></div>');
 			$(this).prev('div').find('a').unbind('mouseover').mouseover( function() {
 					clip.setText($(this).parent().next('.copypaste').val());
-					clip.glue(this);
 					clip.receiveEvent('mouseover', null);
-				} );
+					if(!clip.div)
+						clip.glue(this);
+					else{
+						clip.reposition(this);
+						var width = $(this).width();
+						var height = $(this).height();
+						clip.div.innerHTML = clip.getHTML(width,height);
+						var style = clip.div.style;
+						style.width = '' + width + 'px';
+						style.height = '' + height + 'px';
+					}
+				});
 		});
 		var copies = $('.copypaste_container');
 		if(copies.size() && !clip.div){
