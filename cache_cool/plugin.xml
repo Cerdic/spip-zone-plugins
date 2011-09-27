@@ -5,7 +5,7 @@
 	<etat>test</etat>
 	<icon>images/cache_cool-128.png</icon>
 	<slogan>Servir au plus vite !</slogan>
-	<description>Servir le cache froid pour aller plus vite, et calculer en diff&eacute;r&eacute; en t&acirc;che de fond</description>
+	<description>Servir le cache froid pour aller plus vite, et calculer en diff&#233r&#233 en t&#226;che de fond</description>
 	<options>cache_cool_options.php</options>
 	<lien>http://www.spip-contrib.net/Cache-Cool</lien> <!-- URI de documentation -->
 	<prefix>cache_cool</prefix>
