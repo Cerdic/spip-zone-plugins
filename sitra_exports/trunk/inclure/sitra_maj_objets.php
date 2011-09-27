@@ -36,18 +36,57 @@ foreach($langues as $langue){
 	
 	// analyse de chaque objet
 	foreach ($xml -> OI as $oi){
-		$objet = array();
-		$objet['id_sitra'] = $id_sitra = $oi -> DublinCore -> identifier;
-		$objet['titre'] = $titre_objet = $oi -> DublinCore -> title;
 		
-		if (SITRA_DEBUG) echo $hr;
-		message('Traitement '.$titre_objet.' - '.$objet['id_sitra'].' - '.$langue);
+		$id_sitra = $oi -> DublinCore -> identifier;
+		$titre_objet = $oi -> DublinCore -> title;
+		// initialiser complétement le tableau, si une donnée n'est plus présente la mise à jour du champ doit se faire
+		$objet = array(
+			'id_sitra' => $id_sitra,
+			'titre' => $titre_objet,
+			'adresse' => '',
+			'commune' => '',
+			'code_postal' => '',
+			'insee' => '',
+			'telephone' => '',
+			'fax' => '',
+			'tel_fax' => '',
+			'email' => '',
+			'web' => '',
+			'date_debut' => '0000-00-00 00:00:00',
+			'date_fin' => '0000-00-00 00:00:00',
+			'latitude' => '',
+			'longitude' => '',
+			'altitude' => '',
+			'classement_orga' => '',
+			'classement_code' => '',
+			'classement' => ''
+		);
 		
-				
+		// même chose pour les détails
 		$objet_details = array(
 			'id_sitra' => $id_sitra,
-			'lang' => $langue
+			'lang' => $langue,
+			'titre_lang' => '',
+			'lieu' => '',
+			'description' => '',
+			'description_courte' => '',
+			'observation_dates' => '',
+			'tarifs_en_clair' => '',
+			'tarifs_complementaires' => '',
+			'presta_accessibilite' => '',
+			'presta_activites' => '',
+			'presta_confort' => '',
+			'presta_encadrement' => '',
+			'presta_equipements' => '',
+			'presta_services' => '',
+			'presta_sitra' => '',
+			'langues' => '',
+			'capacites' => ''
 			);
+		
+		if (SITRA_DEBUG) echo $hr;
+		message('Traitement '.$titre_objet.' - '.$id_sitra.' - '.$langue);
+		
 		// les prestations
 		if ($oi -> OffresPrestations){
 			foreach ($oi -> OffresPrestations -> DetailOffrePrestation as $val) {
@@ -169,7 +208,7 @@ foreach($langues as $langue){
 		if ($oi -> Langues -> Usage -> Langue){
 			$langues = array();
 			foreach ($oi -> Langues -> Usage as $val){
-				ajoute_si_present($langues, $val-> Langue);
+				ajoute_si_present($langues, $val -> Langue);
 			}
 			$objet_details['langues'] = serialize_non_vide($langues);
 		}
