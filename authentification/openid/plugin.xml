@@ -1,23 +1,22 @@
 <plugin>
 	<nom>OpenID</nom>
-	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, Cedric Morin [->yterium.net], Fil</auteur>
-	<licence>
-		<multi>
-		[fr]_ &#169; 2007-2009 - Distribu&eacute; sous licence GNU/GPL
-		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
-		</multi>
-	</licence>
+	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, [Cedric Morin->yterium.net], Fil</auteur>
+	<licence>&#169; 2007-2009 - GNU/GPL</licence>
 	<version>1.0.8</version>
 	<version_base>0.3</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
+	<slogan>
+		<multi>
+[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID
+[en]Authenticates users with their OpenID
+		</multi>
+	</slogan>
 	<description>
 		<multi>
-			[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID.
-			<br />{Utilisation&nbsp;:} Un utilisateur qui souhaite utiliser son OpenID pour acc&#233;der au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
-			[en]Authenticates users with their OpenID.
-			<br />{Using this plugin:} a user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.
-		 </multi>
+[fr]Un utilisateur qui souhaite utiliser son OpenID pour acc&#233;der au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
+[en]A user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.
+		</multi>
 	</description>
 	<options>openid_options.php</options>
 	<lien>http://www.spip-contrib.net/Plugin-d-authentification-OpenID</lien><!-- URI de documentation -->
@@ -62,25 +61,24 @@
 </plugin>
 
 
-<plugin spip="[2.1.0-dev;3.0.0]">
+<plugin spip="[2.1.0;3.0.99]">
 	<nom>OpenID</nom>
-	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, Cedric Morin [->yterium.net], Fil</auteur>
-	<licence>
-		<multi>
-		[fr]_ &#169; 2007-2009 - Distribu&eacute; sous licence GNU/GPL
-		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
-		</multi>
-	</licence>
+	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, [Cedric Morin->yterium.net], Fil</auteur>
+	<licence>&#169; 2007-2009 - GNU/GPL</licence>
 	<version>1.1.8</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<icon>images/openid-100.png</icon>
+	<slogan>
+		<multi>
+[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID
+[en]Authenticates users with their OpenID
+		</multi>
+	</slogan>
 	<description>
 		<multi>
-		[fr]Authentification des auteurs et visiteurs &#224; l'aide de leur OpenID.
-		<br />{Utilisation&nbsp;:} Un utilisateur qui souhaite utiliser son OpenID pour acc&#233;der au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
-		[en]Authenticates users with their OpenID.
-		<br />{Using this plugin:} a user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.
+[fr]Un utilisateur qui souhaite utiliser son OpenID pour acc&#233;der au site doit l'entrer comme adresse de son site web dans son profil. Ensuite, au lieu de mettre son login ou adresse email, il suffit d'entrer son OpenID pour se logguer.
+[en]A user wishing to authenticate with her OpenID should enter it as her web site address in her profile. Then, instead of entering her login or email address in the authentication page, she should enter her OpenID.
 		</multi>
 	</description>
 	<options>openid_options.php</options>
