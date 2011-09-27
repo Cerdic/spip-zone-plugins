@@ -5,6 +5,12 @@
 			[en]Captions
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]L&#233;gender ses photos
+			[en]Add captions on photos
+		</multi>
+	</slogan>
 	<auteur>b_b</auteur>
 	<version>0.1.6</version>
 	<version_base>0.1</version_base>
@@ -13,8 +19,8 @@
 	<categorie>multimedia</categorie>
 	<description>
 		<multi>
-			[fr]L&#233;gender ses photos
-			[en]Add captions on photos
+			[fr]Un plugin pour ajouter des l&#233;gendes &#224; ses images comme sur Flickr. Inspir&#233; de [Fotonotes->http://www.fotonotes.net/] et bas&#233; sur le script [jQuery Image Annotation->http://www.flipbit.co.uk/jquery-image-annotation.html].
+			[en]A plugin to add captions on pictures as Flickr. inspired from [Fotonotes->http://www.fotonotes.net/] and based on the script [jQuery Image Annotation->http://www.flipbit.co.uk/jquery-image-annotation.html].
 		</multi>
 	</description>
 	<licence>GNU/GPL</licence>
@@ -47,7 +53,7 @@
 		<inclure>legendes_pipelines.php</inclure>
 	</pipeline>
 	<necessite id="saisies" version="[1.1;]" />
- 	<necessite id='SPIP' version='[2.1.0;]' />
+ 	<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 	<necessite id="jqueryui" version="[1.8.2;]" />
 	<utilise id="cfg" version="[1.14.4;]" />
 </plugin>
