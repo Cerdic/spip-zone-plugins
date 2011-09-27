@@ -1,13 +1,11 @@
 <plugin>
 	<nom>Import/Export de Champs Extras</nom>
+	<slogan>Importer / Exporter des descriptions de champs extras</slogan>
 	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.2</version>
-	<description>
-	Pour importer ou exporter les descriptions des Champs Extras
-	install&eacute; sur un SPIP
-	</description>
-	<lien>http://www.spip-contrib.net/Champs-Extras-2</lien>
+	<version>0.2.0</version>
+	<description>Pour importer ou exporter les descriptions des Champs Extras install&#233;s sur un SPIP</description>
+	<lien>http://www.spip-contrib.net/Importer-Exporter-des-descriptions-de-champs-extras</lien>
 	<icon>images/ieextras-64.png</icon>
 	<etat>test</etat>
 	<prefix>ie_extras</prefix>
