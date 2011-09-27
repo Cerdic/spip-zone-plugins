@@ -3,6 +3,10 @@
 	<auteur>kent1 (kent1@arscenic.info)
 _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
 	</auteur>
+	<slogan>
+		[fr] Tagger tous les objets
+		[en] Tag each objects
+	</slogan>
 	<licence>
 		&#169; 2007-2011 - GNU/GPL v2
 	</licence>
@@ -55,12 +59,11 @@ _ Icon from [Pawel Kadysz->http://oneseventyseven.com/]
 		<nom>post_edition</nom>
 		<inclure>spipicious_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version='[2.0.9;2.1.99]' />
 	<necessite id="SelecteurGenerique" version="[0.7;]" />
 	<necessite id='cfg' version='[1.10.1;]' />
-	<necessite id="SPIP" version='[2.0.9;]' />
 	<necessite id="saisies" version='[1.1;]' />
 	<utilise id="nuage" version='[3.2.1;]' />
-	<chemin dir='' />
 	<categorie>communication</categorie>
 	<traduire gestionnaire="salvatore" module="spipicious" reference="fr" />
 </plugin>
