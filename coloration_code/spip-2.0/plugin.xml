@@ -1,21 +1,16 @@
 <plugin>
-	<nom> <!-- Coloration code , geshi -->
+	<nom>
 	  <multi>
-		[fr]Coloration Code pour 2.0
-		[en]Code higlighting for 2.0
-		[it]Colorazione del codice in 2.0
+		[fr]Coloration Code
+		[en]Code higlighting
+		[it]Colorazione del codice
 		</multi>
 	</nom>
+	<slogan>coloriser du code source pour diff&#233;rents langages (HTML, PHP, SPIP...)</slogan>
 	<icon>coloration-32.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) &#38; ARNO*
-	</auteur>
-	<version>
-	  0.6.1
-	</version>
-	<etat>
-	  stable
-	</etat>
+	<auteur>Pierre Andrews (Mortimer) &#38; ARNO*</auteur>
+	<version>0.6.1</version>
+	<etat>stable</etat>
 	<description>
 	<multi>
 	[fr]
@@ -71,13 +66,11 @@ _ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in
 
 	  </multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-  <fonctions> <!-- charge a chaque recalul de page , donc filtre et surrimpression de traiter_echap_code_dist-->
+	<lien>http://www.spip-contrib.net/Coloration-Code,2938</lien>
+   <fonctions> <!-- charge a chaque recalul de page , donc filtre et surrimpression de traiter_echap_code_dist-->
         coloration_code.php
-  </fonctions>
-	<prefix> 
-	  coloration_code
-	</prefix>
-	<necessite id="SPIP" version="[2.0;]" />
+   </fonctions>
+	<prefix>coloration_code</prefix>
+	<necessite id="SPIP" version="[2.0;3.0.*]" />
 	<categorie>edition</categorie>
 </plugin>
