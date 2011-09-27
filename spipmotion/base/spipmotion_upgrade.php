@@ -20,6 +20,7 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 		include_spip('base/spipmotion');
 		include_spip('base/create');
 		include_spip('base/abstract_sql');
+		include_spip('inc/acces');
 		if (version_compare($current_version,'0.0','<=')){
 			creer_base();
 			maj_tables('spip_documents');
@@ -255,6 +256,17 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			$ffmpeg_infos = charger_fonction('ffmpeg_infos','inc');
 			$ffmpeg_infos(true);
 			ecrire_meta($nom_meta_base_version,$current_version='0.7.9');
+		}
+		if (version_compare($current_version,'0.8.0','<')){
+			/**
+			 * On change le champs metas en metadatas
+			 */
+			sql_alter("TABLE spip_documents CHANGE `metas` `metadatas` TEXT DEFAULT '' NOT NULL");
+			/**
+			 * Génération d'un htaccess dans le répertoire script_bash
+			 */
+			
+			ecrire_meta($nom_meta_base_version,$current_version='0.8.0');
 		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/

@@ -1,20 +1,31 @@
 #!/bin/bash
-# SPIPmotion : A shell program to convert multimedia files
-# Version 0.3.3
+# SPIPMotion : 
+# Un programme shell de conversion de fichiers audios et vidéos
 #
-# Dependancies :
-#   * ffmpeg with libmp3lame support
+# Version 0.3.4
+#
+# Dependances :
+#   * ffmpeg avec le support de libmp3lame
 #	* ffmpeg2theora
 #
-# Credits prealables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
+# Credits préalables : aozeo - http://www.aozeo.com/blog/40-linux-convertir-videos-flv-ffmpeg-telephone-portable
+#
+# Pour l'installation des binaires nécessaires :
+# -* Compilation de librairies nécessaires à FFMpeg : 
+#    http://technique.arscenic.org/compilation-de-logiciel/article/compilation-et-installation-de
+# -* Compilation de FFMpeg lui-même : 
+#    http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg
+# -* Compilation de FFMpeg2theora :
+#    http://technique.arscenic.org/compilation-de-logiciel/article/ffmpeg2theora
+#
 
-VERSION="0.3.3"
+VERSION="0.3.4"
 
 ################ LOCALISATION #####################
 messageaide="
 SPIPmotion v$VERSION
 
-Utilisation : ./spipmotion arguments
+Utilisation : ./spipmotion.sh arguments
 ou arguments doit inclure le fichier source et le fichier de sortie et éventuellement :
 * la taille de la video ex : --size 320x240
 * le bitrate de la video ex : --bitrate 448
@@ -31,7 +42,7 @@ Exemples :
 #########################################################################################
 ##  Ce programme recquiert une version de ffmpeg                                       ##
 ##        compilée avec le support libmp3lame                                          ##
-## Voir http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg1 ##
+## Voir http://technique.arscenic.org/compilation-de-logiciel/article/compiler-ffmpeg ##
 #########################################################################################
 "
 		formatsortie="SPIPmotion : le fichier de sortie doit se terminer par une extension reconnue : flv flac ogg ogv oga mp3 mp4 mov m4v webm"
@@ -55,6 +66,11 @@ Si non, le fichier déjà présent sera renommé."
 ################ ARGUMENTS ######################
 
 FORCE="false";
+
+if [ -z "$log" ];then
+	log="/dev/null"
+fi
+
 while test -n "${1}"; do
 	case "${1}" in
 		--help|-h) echo "$messageaide";
@@ -132,12 +148,8 @@ case "$chemin" in
   		chemin=$(which ffmpeg)
 	fi
 esac
-
-if [ -z "$log" ];then
-	log="/dev/null"
-fi
         
-function spipmotion_encodage_ffmpeg (){
+spipmotion_encodage_ffmpeg (){
 
 	########## TRAITEMENT DES ARGUMENTS ###############
 	
@@ -206,20 +218,20 @@ function spipmotion_encodage_ffmpeg (){
 	
 	On encode un son
 	"
-		echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2> $log >> $log" >> $log
-	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2> $log >> $log ;;
+		echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log" > $log
+	  	nice -19 "$chemin" -i $entree $acodec $audiobitrate_quality_ffmpeg $audiofreq_ffmpeg $ac_ffmpeg -y $sortie 2>> $log >> $log ;;
 	  *".flv"|*".mp4"|*".ogv"|*".mov"|*".m4v"|*".webm" )
 	  	echo "SPIPmotion v$VERSION
 	
 	On encode une video
 	"
-	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2> $log >> $log" >> $log
-	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2> $log >> $log ;;
+	  	echo "nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie 2>> $log >> $log" >> $log
+	  	nice -19 $chemin -i $entree $acodec $audiobitrate_quality_ffmpeg $ac_ffmpeg $audiofreq_ffmpeg $pass $fps_ffmpeg -s $size $vcodec $bitrate_ffmpeg $params_sup $fpre -y $sortie  2>> $log >> $log
 	esac
 	exit $?
 }
 
-function spipmotion_encodage_ffmpeg2theora ()
+spipmotion_encodage_ffmpeg2theora ()
 {
 	echo "SPIPmotion v$VERSION
 	
@@ -230,7 +242,7 @@ function spipmotion_encodage_ffmpeg2theora ()
 	exit $?	
 }
 
-function ffmpeg_infos ()
+ffmpeg_infos ()
 {
 	[ -z "$info" ] && return 1
 

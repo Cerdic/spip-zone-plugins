@@ -1,5 +1,5 @@
 <plugin>
-	<nom>SPIPmotion</nom>
+	<nom>SPIPMotion</nom>
 	<slogan>
 		<multi>
 			[fr]Encodage de documents multimedia
@@ -9,25 +9,22 @@
 	<icon>images/spipmotion.png</icon>
 	<auteur>kent1 (kent1@arscenic.info)</auteur>
 	<licence>GNU/GPL v3</licence>
-	<version>0.9.3</version>
-	<version_base>0.7.9</version_base>
-	<etat>test</etat>
 	<description>
-	<multi>
-	[fr] Faire un Youtube ou Dailymotion avec SPIP...
-	[en] Create a Youtube or Dailymotion with SPIP...
-	</multi>
+		<multi>
+			[fr] Faire un site à la Youtube ou Dailymotion ...
+			[en] Create a Youtube or Dailymotion like website...
+		</multi>
 	</description>
-	<lien>http://kent1.sklunk.net/spip.php?article93</lien>
-	<options>
-	spipmotion_options.php
-	</options>
-	<fonctions>
-	spipmotion_fonctions.php
-	</fonctions>
-	<prefix>
-	spipmotion
-	</prefix>
+	<lien>http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/</lien>
+	
+	<version>0.9.4</version>
+	<version_base>0.8.0</version_base>
+	<etat>test</etat>
+	<prefix>spipmotion</prefix>
+	
+	<options>spipmotion_options.php</options>
+	<fonctions>spipmotion_fonctions.php</fonctions>
+	
 	<pipeline>
 		<nom>editer_contenu_objet</nom>
 		<action>editer_contenu_objet</action>
@@ -86,6 +83,7 @@
 		<nom>pre_boucle</nom>
 		<inclure>spipmotion_pipelines.php</inclure>
 	</pipeline>
+	
 	<bouton id='spipmotion_file' parent='naviguer'>
 		<titre>spipmotion:titre_page_file</titre>
 		<icone>images/spipmotion-24.png</icone>
@@ -106,9 +104,10 @@
 		<icone>images/spipmotion-16.png</icone>
 		<url>ffmpeg_infos</url>
 	</bouton>
+	
 	<install>base/spipmotion_upgrade.php</install>
 
-	<necessite id="SPIP" version="[2.1.1;]" />
+	<necessite id="SPIP" version="[2.1.1;2.1.99]" />
 	<necessite id='cfg' version='[1.13;]' />
 	<necessite id='saisies' version='[1.0;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
@@ -116,7 +115,9 @@
 	<necessite id='queue' version='[0.3.1;]' />
 	<necessite id="jqueryui" version="[1.8.5;]" />
 	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.6.zip" />
+	
 	<utilise id='podcast' />
 	<utilise id='fonctions_images' version='[0.5.1]' />
+	
 	<categorie>multimedia</categorie>
 </plugin>

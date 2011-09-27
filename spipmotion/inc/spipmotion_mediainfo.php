@@ -13,7 +13,7 @@
  * Récupération des métadonnées via MediaInfo
  * @param string $chemin
  */
-function inc_spipmotion_mediainfo_dist($chemin){
+function inc_spipmotion_mediainfo_dist($chemin,$id_document,$only_cover=false){
 	$infos = array();
 	if(file_exists($chemin)){
 		$metadatas = shell_exec("mediainfo -f --Output=XML $chemin");
@@ -22,9 +22,8 @@ function inc_spipmotion_mediainfo_dist($chemin){
 		spip_xml_match_nodes(",^track type,",$arbre, $tracks);
 		foreach($tracks as $track => $info){
 			$metas[$track] = $info;
-			//spip_log($info,'spipmotion');
 			if($track == 'track type="General"'){
-				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : $info[0]['Movie_name'][0];
+				$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : ($info[0]['Movie_name'][0] ? $info[0]['Movie_name'][0] : $info[0]['Track_name '][0]);
 				$infos['descriptif'] = $info[0]['Description'][0] ? $info[0]['Description'][0] : $info[0]['desc'][0];
 				$infos['credits'] .= $info[0]['Performer'][0]? $info[0]['Performer'][0].($info[0]['Copyright'][0] ? ' - '.$info[0]['Copyright'][0] : '') : $info[0]['Copyright'][0] ;
 				$infos['duree'] = $info[0]['Duration'][0] / 1000;
@@ -56,7 +55,7 @@ function inc_spipmotion_mediainfo_dist($chemin){
 	if(!$infos['hasvideo']){
 		$infos['hasvideo'] = 'non';
 	}
-	$infos['metas'] = serialize($metas);
+	$infos['metadatas'] = serialize($metas);
 	return $infos;
 }
 ?>

@@ -209,7 +209,6 @@ function spipmotion_post_edition($flux){
 			 * On l'ajoute dans la file d'attente d'encodage si nécessaire
 			 */
 			$fichier = basename(get_spip_doc($document['fichier']));
-			spip_log($fichier,'spipmotion');
 			$racine = preg_replace('/-encoded-(\d)/','',substr($fichier,0,-(strlen($document['extension'])+1)));
 			$racine = preg_replace('/-encoded-(\d+)/','',$racine);
 			$racine = preg_replace('/-encoded/','',$racine);

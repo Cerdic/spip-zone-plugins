@@ -12,6 +12,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_encodage_dist($source,$attente,$format=''){
+	if(!is_array($GLOBALS['spipmotion_metas'])){
+		$inc_meta = charger_fonction('meta', 'inc');
+		$inc_meta('spipmotion_metas');
+	}
+	
 	/**
 	 * On vérifie que l'on n'a pas déjà une version dans le format souhaité
 	 * Si oui on la supprime avant de la réencoder
@@ -78,14 +83,6 @@ function encodage($source,$doc_attente){
 	$spimotion_compiler = @unserialize($GLOBALS['spipmotion_metas']['spipmotion_compiler']);
 	$ffmpeg_version = $spipmotion_compiler['ffmpeg_version'] ? $spipmotion_compiler['ffmpeg_version'] : '0.7';
 	$rep_dest = sous_repertoire(_DIR_VAR, 'cache-spipmotion');
-	
-	/**
-	 * On change le statut d'encodage à en_cours pour
-	 * - changer les messages sur le site (ce media est en cours d'encodage par exemple)
-	 * - indiquer si nécessaire le statut
-	 */
-	$infos_encodage = array('debut_encodage' => time());
-	sql_updateq("spip_spipmotion_attentes",array('encode'=>'en_cours','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
 
 	$attente = sql_fetsel("*","spip_spipmotion_attentes","id_spipmotion_attente=".intval($doc_attente));
 	$extension_attente = $attente['extension'];
@@ -102,6 +99,7 @@ function encodage($source,$doc_attente){
 	spip_log("encodage de $chemin","spipmotion");
 
 	$fichier = basename($source['fichier']);
+
 	/**
 	 * Génération des noms temporaires et finaux
 	 * - Le nom du dossier temporaire (tmp/spipmotion)
@@ -115,17 +113,19 @@ function encodage($source,$doc_attente){
 	$fichier_temp = "$dossier$query.$extension_attente";
 	$fichier_log = "$dossier$query.log";
 	spip_log("le nom temporaire durant l'encodage est $fichier_temp","spipmotion");
-
+	
 	/**
 	 * Si on n'a pas l'info hasaudio c'est que la récupération d'infos n'a pas eu lieu
 	 * On relance la récupération d'infos sur le document
 	 * On refais une requête pour récupérer les nouvelles infos
 	 */
 	if(!$source['hasaudio'] OR !$source['hasvideo']){
+		spip_log('on récup les infos pour vérif audio','spipmotion');
 		$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
 		$recuperer_infos($source['id_document']);
 		$source = sql_fetsel('*','spip_documents','id_document ='.intval($source['id_document']));
 		if(!$source['hasaudio'] OR !$source['hasvideo']){
+			spip_log('La source n a ni audio ni video','spipmotion');
 			return false;
 		}
 	}
@@ -212,7 +212,6 @@ function encodage($source,$doc_attente){
 			 */
 			if(($source['audiochannels'] > 2) && ($encodeur != 'ffmpeg2theora')){
 				$samplerate = $source['audiosamplerate'];
-				spip_log($acodec,'spipmotion');
 				if($acodec == '--acodec libmp3lame'){
 					$acodec = '--acodec libfaac';
 					$audiobitrate_ffmpeg = $audiobitrate_ffmpeg2theora = "--audiobitrate 128";
@@ -241,7 +240,7 @@ function encodage($source,$doc_attente){
 		}
 		$audiofreq = "--audiofreq ".$samplerate;
 		$texte .= "ar=$samplerate\n";
-
+		
 		/**
 		 * On passe en stereo ce qui a plus de 2 canaux et ce qui a un canal et dont
 		 * le format choisi est vorbis (l'encodeur vorbis de ffmpeg ne gère pas le mono)
@@ -268,6 +267,14 @@ function encodage($source,$doc_attente){
 		$spipmotion_sh = find_in_path('script_bash/spipmotion.sh');
 	}
 	
+	/**
+	 * On change le statut d'encodage à en_cours pour
+	 * - changer les messages sur le site (ce media est en cours d'encodage par exemple)
+	 * - indiquer si nécessaire le statut
+	 */
+	$infos_encodage = array('debut_encodage' => time());
+	sql_updateq("spip_spipmotion_attentes",array('encode'=>'en_cours','infos' => serialize($infos_encodage)),"id_spipmotion_attente=".intval($doc_attente));
+
 	/**
 	 * Encodage
 	 * Cas d'un fichier audio
@@ -480,7 +487,6 @@ function encodage($source,$doc_attente){
 	}
 
 	if($encodage_ok && file_exists(get_spip_doc($source['fichier']))){
-		spip_log('on ajoute le document dans la base','spipmotion');
 		/**
 		 * Ajout du nouveau document dans la base de donnée de SPIP
 		 * NB : la récupération des infos et du logo est faite automatiquement par

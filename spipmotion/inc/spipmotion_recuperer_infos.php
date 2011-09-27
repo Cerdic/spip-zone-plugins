@@ -68,7 +68,7 @@ function inc_spipmotion_recuperer_infos($id_document){
 	 */
 	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
 		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
-		$infos = $mediainfo($movie_chemin);
+		$infos = $mediainfo($movie_chemin,$id_document);
 	}
 	else if(class_exists('ffmpeg_movie')){
 		$movie = new ffmpeg_movie($movie_chemin, 0);
