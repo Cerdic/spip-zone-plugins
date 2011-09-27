@@ -2,16 +2,19 @@
 	<nom>
 		<multi>[fr]Type pour les articles</multi>
 	</nom>
+	<slogan>
+		<multi>[fr]Ajouter un champ "type" &#224; vos articles</multi>
+	</slogan>
 	<description>
 		<multi>
-		[fr] Ajoute un champ "type" à l'objet éditorial article.
+		[fr]Ajoute un champ "type" &#224; l'objet &#233;ditorial article. Les libell&#233;s des types possibles sont surchargeables dans votre fichier de langue
 		</multi>
 	</description>	
 	<auteur>[xdjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
 	
-	<version>0.3</version>
+	<version>0.3.0</version>
 	<version_base>0.1</version_base>
 	<icon>images/type_articles-64.png</icon>
 
