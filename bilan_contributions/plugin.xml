@@ -1,24 +1,32 @@
 <plugin>
 	<nom>Bilan des contributions</nom>
+	<slogan>En m&#234;me temps, les chiffres, on peut leur faire dire ce qu'on veut !</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<etat>dev</etat>
 	<description>
 		<multi>
-		[fr]Plugin permettant au webmaster d'afficher dans l'espace privé un bilan annuel des contributions : combien d'articles (total et par auteur), de brèves, de documents (nombre et taille) publiés par an... Export possible en csv.
+		[fr]Plugin permettant au webmaster d'afficher dans l'espace priv&#233; un bilan annuel des contributions : combien d'articles (total et par auteur), de br&#232;ves, de documents (nombre et taille) publi&#233;s par an... Export possible au format csv.
 		</multi>
 	</description>
 	<icon>images/bilancontrib-32.png</icon>
+	<lien>http://www.spip-contrib.net/JQuery-Corner</lien>
 	<prefix>bilancontrib</prefix>
 	<fonctions>bilancontrib_fonctions.php</fonctions>
-	<bouton id="bilancontrib" parent="bando_publication">
+	<bouton id='bilancontrib' parent='accueil'>
+		<titre>bilancontrib:nom_plugin</titre>
+		<icone>images/bilancontrib-24.png</icone>
+		<url>bilancontrib</url>
+	</bouton>
+	<bouton id="bilancontrib21" parent="bando_publication">
 		<icone>images/bilancontrib-16.png</icone>
 		<titre>bilancontrib:nom_plugin</titre>       
 		<url>bilancontrib</url>
 	</bouton>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="medias" version="[1.6.0;]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
-	<necessite id="iterateurs" version="[0.2.6;]" />
+	<necessite id="saisies" version="[1.1;]" />
 	<categorie>maintenance</categorie>
 </plugin>
