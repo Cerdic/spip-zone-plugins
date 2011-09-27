@@ -1,15 +1,20 @@
 <plugin>
 <nom>Liens explicites</nom>
+<slogan>Styles et pictos explicitant les liens du site</slogan>
 <icon>prive/themes/spip/images/links.png</icon>
-<description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. (avec ouverture possible en nouvelle fen&ecirc;tre).</description>
+<description>
+	<multi>
+		[fr]Styles et pictos explicitant les liens du site : documents &#224; t&#233;l&#233;charger, liens externes, mailto, etc. (avec ouverture possible en nouvelle fen&#234;tre).
+	</multi>
+</description>
 <lien>http://www.spip-contrib.net/?article3706</lien>
-<auteur>[romy.tetue.net->http://romy.tetue.net], C&eacute;dric Morin et Gael Chareyre</auteur>
+<auteur>[romy.tetue.net->http://romy.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
 <version>2.3.4</version>
 <etat>stable</etat>
 <prefix>links</prefix>
 <fonctions>links_fonctions.php</fonctions>
-<necessite id='SPIP' version='[2.0.0;]' />
+<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 <necessite id="spip_bonux" version="[2.2.18;]" />
 <pipeline>
 	<nom>insert_head_css</nom>
@@ -33,10 +38,15 @@
 </plugin>
 <plugin spip="[3.0.0-dev;3.0.*]">
 <nom>Liens explicites</nom>
+<slogan>Styles et pictos explicitant les liens du site</slogan>
 <icon>prive/themes/spip/images/links.png</icon>
-<description>Styles et pictos explicitant les liens du site&nbsp;: documents &agrave; t&eacute;l&eacute;charger, liens externes, mailto, etc. (avec ouverture possible en nouvelle fen&ecirc;tre).</description>
+<description>
+	<multi>
+		[fr]Styles et pictos explicitant les liens du site : documents &#224; t&#233;l&#233;charger, liens externes, mailto, etc. (avec ouverture possible en nouvelle fen&#234;tre).
+	</multi>
+</description>
 <lien>http://www.spip-contrib.net/?article3706</lien>
-<auteur>[romy.tetue.net->http://romy.tetue.net], C&eacute;dric Morin et Gael Chareyre</auteur>
+<auteur>[romy.tetue.net->http://romy.tetue.net], C&#233;dric Morin et Gael Chareyre</auteur>
 <licence>GPL 2011</licence>
 <version>2.3.4</version>
 <etat>stable</etat>
