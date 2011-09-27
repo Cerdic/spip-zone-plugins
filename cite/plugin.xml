@@ -1,6 +1,6 @@
 <plugin>
-	<nom>Mod&#232;les &#60;cite&#62;</nom>
-	<slogan>Fournir des mod&#232;les pour ins&#233;rer des r&#233;f&#233;rences bibliographiques.</slogan>
+	<nom>Cite&#62;</nom>
+	<slogan>Ins&#233;rer des r&#233;f&#233;rences bibliographiques.</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.3.0</version>
@@ -11,5 +11,6 @@
 	<prefix>cite</prefix>
 	<fonctions>cite_fonctions.php</fonctions>
 	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<utilise id="verifier" version="[0.1.8;]" />
 </plugin>
