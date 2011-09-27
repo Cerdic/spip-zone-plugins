@@ -1,8 +1,14 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Vid&eacute;o(s)
+			[fr]Vid&#233;o(s)
 			[en]Video(s)
+		</multi>
+	</nom>
+	<nom>
+		<multi>
+			[fr]Interface de gestion et mod&#232;les d'insertion de(s) vid&#233;o(s)
+			[en]Management interface and integration models of video(s)
 		</multi>
 	</nom>
 	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
@@ -18,19 +24,10 @@
 	<etat>dev</etat>
 	<description>
 		<multi>
-			[fr]Interface de gestion et mod&egrave;les d'insertion de(s) vid&eacute;o(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
-			-* Fichiers MP4/H264/WebM/OGG/MKV
-			-* Dailymotion
-			-* Vimeo
-			-* Youtube
-			-* CultureBox
-			[en]Management interface and integration models of video(s) (HTML5, multi navs, iPad, iPhone, Android, etc.) :
-			-* MP4/H264/WebM/OGG/MKV files
-			-* Dailymotion
-			-* Vimeo
-			-* Youtube
-			-* CultureBox
-		</multi></description>
+		   [fr]Ce plugin permet d’int&#233;grer, &#224; partir d’un simple copier/coller d’URL, des vid&#233;os h&#233;berg&#233;es sur les principales plateformes (Dailymotion, Vimeo, Youtube, CultureBox) et de les g&#233;rer comme des documents spip. Il permet &#233;galement l’affichage HTML5 des vid&#233;os aux formats MP4, H264, Ogg, WebM et Mkv m&#234;me dans les navigateurs mobiles.
+			[en]This plugin allows the integration, using a simple copy/paste of URL, of videos hosted on major platforms (Dailymotion, Vimeo, YouTube, Culturebox) and manage them as spip documents. It also allows the HTML5 display of video in MP4, H.264, Ogg, WebM anf Mkv formats, even in mobile browsers.
+		</multi>
+	</description>
 	<lien>http://www.spip-contrib.net/?article3636</lien>
 	<prefix>videos</prefix>
 	<!-- Base de données -->
@@ -61,7 +58,7 @@
 		<url>configurer_videos</url>
 	</bouton>
 	
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="medias" version="[1.6.0;]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	
