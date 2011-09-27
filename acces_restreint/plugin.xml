@@ -35,7 +35,7 @@ _ Einzelnen Autoren können Zugangsrechte für Bereiche zugeordnet werden.
 _ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Überprüfung der Rechte des jeweiligen Sitebesuchers ergänzt.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/Acces-restreint-V1</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Acces-Restreint-3-0</lien>
 	<options>acces_restreint_options.php</options>
 	<fonctions>acces_restreint_fonctions.php</fonctions>
 	<fonctions>public/acces_restreint.php</fonctions>
