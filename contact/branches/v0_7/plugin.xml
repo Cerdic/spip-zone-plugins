@@ -1,8 +1,16 @@
 <plugin>
-	<nom><multi>[fr]Formulaire de contact avanc&eacute;
-	[en]Advanced Contact Form
-	[ar]&#1573;&#1587;&#1578;&#1605;&#1575;&#1585;&#1577; &#1575;&#1604;&#1575;&#1578;&#1589;&#1575;&#1604; &#1575;&#1604;&#1605;&#1578;&#1602;&#1583;&#1605;&#1577;
-	</multi></nom>
+	<nom>
+		<multi>
+			[fr]Formulaire de contact avanc&#233;
+			[en]Advanced Contact Form
+			[ar]&#1573;&#1587;&#1578;&#1605;&#1575;&#1585;&#1577; &#1575;&#1604;&#1575;&#1578;&#1589;&#1575;&#1604; &#1575;&#1604;&#1605;&#1578;&#1602;&#1583;&#1605;&#1577;
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Un formulaire de contact configurable, avec de multiples options
+			[en]A configurable contact form, with multiple options
+	</slogan>
 	<auteur>
 		<multi>
 			[fr]Pierre Fiches, RastaPopoulos, Superyms (traduction) 
@@ -13,10 +21,13 @@
 	<licence>GPL v3</licence>
 	<version>0.7.3</version>
 	<etat>stable</etat>
-	<description><multi>[fr]Cette extension propose un formulaire de contact avec de multiples options.
-	[en]This extension provides a contact form with multiple options.
-	[ar]&#1607;&#1584;&#1575; &#1575;&#1604;&#1578;&#1605;&#1583;&#1610;&#1583; &#1610;&#1608;&#1601;&#1585; &#1588;&#1603;&#1604; &#1605;&#1606; &#1571;&#1588;&#1603;&#1575;&#1604; &#1575;&#1604;&#1575;&#1578;&#1589;&#1575;&#1604; &#1605;&#1593; &#1582;&#1610;&#1575;&#1585;&#1575;&#1578; &#1605;&#1578;&#1593;&#1583;&#1583;&#1577;.
-	</multi></description>
+	<description>
+		<multi>
+			[fr]Ce plugin permet de composer librement un formulaire de contact (nom, pr&#233;nom, adresse, t&#233;l&#233;phone,...)et de choisir la liste des destinataires qui recevront par mail les informations collect&#233;es.
+			[en]This plugin allows you to compose a contact form (name, address, phone number,...) and to choose the recipient list to receive collected informations by email.
+			[ar]&#1607;&#1584;&#1575; &#1575;&#1604;&#1578;&#1605;&#1583;&#1610;&#1583; &#1610;&#1608;&#1601;&#1585; &#1588;&#1603;&#1604; &#1605;&#1606; &#1571;&#1588;&#1603;&#1575;&#1604; &#1575;&#1604;&#1575;&#1578;&#1589;&#1575;&#1604; &#1605;&#1593; &#1582;&#1610;&#1575;&#1585;&#1575;&#1578; &#1605;&#1578;&#1593;&#1583;&#1583;&#1577;.
+		</multi>
+	</description>
 	<lien>http://www.spip-contrib.net/Formulaire-de-contact-avance</lien>
 	<options>contact_options.php</options>
 	<prefix>contact</prefix>
@@ -51,9 +62,9 @@
 		<url>contact_messages</url>
 	</bouton>
 	
-	<necessite id='SPIP' version="[2.0.0;3.0.0-dev)" />
+	<necessite id='SPIP' version="[2.0.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.8;]" />
-	<necessite id="jqueryui" version="[1.6;]" />
+	<necessite id="jqueryui" version="[1.6.0;]" />
 	<utilise id="facteur" />
 	<utilise id="inserer_modeles" version="[0.4.3;]" />
 	<categorie>communication</categorie>
