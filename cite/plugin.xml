@@ -1,6 +1,6 @@
 <plugin>
-	<nom>Cite&#62;</nom>
-	<slogan>Ins&#233;rer des r&#233;f&#233;rences bibliographiques.</slogan>
+	<nom>Cite</nom>
+	<slogan>Ins&#233;rer des r&#233;f&#233;rences bibliographiques</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.3.0</version>
