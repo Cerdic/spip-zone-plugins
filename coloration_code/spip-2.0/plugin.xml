@@ -70,6 +70,6 @@ _ Potete utilizzare {coloration_code_color} anche come un filtro in scheletro in
         coloration_code.php
    </fonctions>
 	<prefix>coloration_code</prefix>
-	<necessite id="SPIP" version="[2.0.0;3.0.*]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<categorie>edition</categorie>
 </plugin>

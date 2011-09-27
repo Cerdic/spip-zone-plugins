@@ -10,11 +10,12 @@
 	  Pierre Andrews (Mortimer) - ARNO*
 	</auteur>
 	<version>
-	  0.3
+	  0.3.0
 	</version>
 	<etat>
 	  stable
 	</etat>
+	<lien>http://www.spip-contrib.net/Coloration-Code,2938</lien>
 	<slogan>
 		<multi>
 		[fr]Coloration syntaxique du code source dans les articles
