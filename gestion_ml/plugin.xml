@@ -1,13 +1,13 @@
 <plugin>
-	<nom>Gestion ML</nom>
-	<slogan>G&#233;rer vos mailing lists chez OVH</slogan>
+	<nom>Gestion ML avec SOAP</nom>
+	<slogan>G&#233;rer les mailing lists chez votre h&#233;bergeur avec le protocole SOAP</slogan>
 	<auteur>Yffic</auteur>
 	<version>0.3.0</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Gestion de Mailling Lists externes. Ne fonctionne actuellement que chez OVH avec le robot ezmlm via SoAPI
+			[fr]Ce plugin permet de d&#233;l&#233;guer la gestion de mailing lists &#224; certains administrateurs du site. L'interface avec les ML chez votre h&#233;bergeur se fait gr&#226;ce au protocole SOAP. Il ne fonctionne actuellement qu’avec les listes ezmlm de l’h&#233;bergeur OVH.
 		</multi>
 	</description>
 	<prefix>gestionml</prefix>
