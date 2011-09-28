@@ -28,7 +28,7 @@ function _esi_microcache($id, $fond) {
 		ecrire_fichier($microcache, $contenu);
 	}
 	
-	return "<esi:include src=\"$microcache\"/>";
+	return "<esi:include src=\"/$microcache\" />";
 }
 
 function _microcache($id, $fond, $calcul=false) {

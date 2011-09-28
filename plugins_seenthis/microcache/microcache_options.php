@@ -10,4 +10,9 @@ function microcache($id, $fond, $calcul=false) {
 	return _microcache($id, $fond, $calcul);
 }
 
+function esi_microcache($id, $fond) {
+	include_spip("inc/microcache");
+	return _esi_microcache($id, $fond);
+}
+
 ?>
