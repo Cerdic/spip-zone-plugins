@@ -1,5 +1,6 @@
 <BOUCLE_branche(RUBRIQUES){id_rubrique=#ENV{limite_branche}}{statut?}>
-#SET{rubriques_branche,#ARRAY}<BOUCLE_rubriques_branches(RUBRIQUES){branche}{exclus}{statut?}>#SET{rubriques_branche,#GET{rubriques_branche}|push{#ID_RUBRIQUE}}</BOUCLE_rubriques_branches>
+[(#SET{titre_branche,[(#TITRE)]})]
+[(#SET{rubriques_branche,#ARRAY})]<BOUCLE_rubriques_branches(RUBRIQUES){branche}{exclus}{statut?}>#SET{rubriques_branche,#GET{rubriques_branche}|push{#ID_RUBRIQUE}}</BOUCLE_rubriques_branches>
 </BOUCLE_branche>
 	<BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_r,#ENV{id_rubrique}}}{statut?}>
 		<div class='chemin'>
@@ -22,6 +23,6 @@
 		</BOUCLE_contenu>
 
 	</BOUCLE_rub>
-	<div class='chemin'><strong class='on'><:info_racine_site:></strong></div>
-	<div class='frame total_0 frame_0'><h2><:info_racine_site:></h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=0}{env})]</div>
+	<div class='chemin'><strong class='on'>[(#GET{titre_branche,<:info_racine_site:>})]</strong></div>
+	<div class='frame total_0 frame_0'><h2>[(#GET{titre_branche,<:info_racine_site:>})]</h2>[(#INCLURE{fond=formulaires/selecteur/inc-nav-rubriques}{id_rubrique=#ENV{limite_branche,0}}{env})]</div>
 	<//B_rub>
