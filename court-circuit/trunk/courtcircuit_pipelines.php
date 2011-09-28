@@ -4,7 +4,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
- * Pipeline styliser pour cour-circuiter les rubriques
+ * Pipeline styliser pour court-circuiter les rubriques
  *
  * @param array $flux
  * @return array

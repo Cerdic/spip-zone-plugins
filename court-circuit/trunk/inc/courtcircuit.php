@@ -7,8 +7,8 @@ function courtcircuit_url_redirection($id_rubrique) {
 	if (isset($GLOBALS['meta']['courtcircuit']))
 		$config = unserialize($GLOBALS['meta']['courtcircuit']);
 	else $config = array();
-	// Tester d'abord les variantes de squelettes
-	if (isset($config['variantes_squelettes']) && $config['variantes_squelettes']=='oui') {
+	// Tester d'abord les variantes de squelettes (si on ne les court-circuite pas)
+	if (!isset($config['variantes_squelettes']) || $config['variantes_squelettes']=='oui') {
 		$squelette_rubrique = substr(find_in_path('rubrique.html'),0,-5);
 		$flux = array(
 			'data' => $squelette_rubrique,
@@ -22,6 +22,12 @@ function courtcircuit_url_redirection($id_rubrique) {
 		if ($flux['data'] != $squelette_rubrique)
 			return '';
 	}
+	// Tester ensuite si la rubrique a une composition (si on ne court-circuite pas les compositions)
+	if ((!isset($config['composition_rubrique']) || $config['composition_rubrique']=='oui') && defined('_DIR_PLUGIN_COMPOSITIONS')) {
+		if (strlen(compositions_determiner('rubrique', $id_rubrique)))
+			return '';
+	}
+	// On teste si on doit rediriger
 	$redirect_article = recuperer_fond(
 		'courtcircuit_selection_article', 
 		array_merge(array('id_rubrique' => $id_rubrique),$config)

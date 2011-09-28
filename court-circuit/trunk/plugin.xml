@@ -3,9 +3,9 @@
 	<icon>images/courtcircuit-128.png</icon>
 	<description>Acc&eacute;s direct aux articles.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3831</lien>
-	<version>2.2.2</version>
+	<version>2.3.0</version>
 	<etat>test</etat>
-	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph] - 2011</auteur>
+	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph]</auteur>
 	<prefix>courtcircuit</prefix>
 	<fonctions>courtcircuit_fonctions.php</fonctions>
 	<pipeline>

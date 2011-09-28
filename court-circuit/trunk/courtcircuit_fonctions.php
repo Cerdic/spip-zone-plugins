@@ -12,7 +12,13 @@ function balise_URL_RUBRIQUE_dist($p) {
 function courtcircuit_calculer_balise_URL_RUBRIQUE ($id_rubrique) {
 	$url_base = generer_url_entite(intval($id_rubrique), 'rubrique', '', '', true);
 	include_spip('inc/courtcircuit');
-	$url_redirect = courtcircuit_url_redirection($id_rubrique);
+	if (isset($GLOBALS['meta']['courtcircuit']))
+		$config = unserialize($GLOBALS['meta']['courtcircuit']);
+	else $config = array();
+	if (isset($config['liens_rubriques']) && $config['liens_rubriques']=='oui')
+		$url_redirect = courtcircuit_url_redirection($id_rubrique);
+	else
+		$url_redirect = '';
 	return ($url_redirect!='') ? $url_redirect : $url_base;
 }
 
