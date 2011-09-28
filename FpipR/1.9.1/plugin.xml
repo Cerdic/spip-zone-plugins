@@ -1,30 +1,17 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	  FpipR
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (mortimer.pa@free.fr)
-	</auteur>
-	<version>
-	  0.2
-	</version>
-	<etat>
-		test
-	</etat>
+	<nom>FpipR</nom>
+   <slogan>Int&#233;grer ses photos Flickr dans SPIP</slogan>
+	<auteur>[Pierre Andrews->mortimer.pa@free.fr]</auteur>
+	<version>0.2.0</version>
+	<etat>test</etat>
 	<description>
 	  <multi>
-		[fr] associer des photos et sets Flickr.com &#224; vos articles et rubriques. voir le fichier lisezmoi
-_ La version 0.2 ajoute des boucles pour acceder &#224; l'API Flickr depuis vos squelettes.
-		[en] add photos and sets from your Flickr.com account to articles and sections. see the lisezmoi file.
-_ version 0.2 introduces SPIP loops to access Flickr's API from your templates.
+		[fr]Associer des photos et sets Flickr.com &#224; vos articles et rubriques. voir le fichier lisezmoi. La version 0.2 ajoute des boucles pour acceder &#224; l'API Flickr depuis vos squelettes
+		[en] add photos and sets from your Flickr.com account to articles and sections. see the lisezmoi file. Version 0.2 introduces SPIP loops to access Flickr's API from your templates.
 	  </multi>
 	</description>
-	<lien>
-	  http://trac.rezo.net/trac/spip-zone/wiki/FpipR
-	</lien>
-	<prefix> 
-	  FpipR
-	</prefix>
+	<lien>http://www.spip-contrib.net/Le-plugin-FpipR</lien>
+	<prefix>FpipR</prefix>
 	<pipeline>
 	  <nom>affiche_milieu</nom>
 	  <inclure>FpipR.php</inclure>
@@ -39,6 +26,6 @@ _ version 0.2 introduces SPIP loops to access Flickr's API from your templates.
 	<fonctions>
 	  FpipR_fonctions.php
 	</fonctions>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.1]" />
 	<categorie>multimedia</categorie>
 </plugin>
