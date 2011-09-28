@@ -56,24 +56,31 @@
         
 
         [(#REM) 'Lieu' est un champ optionnel]
+        [(#ENV{config_lieu}|=={oui}|oui)
         <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{lieu}|oui)erreur]">
             <label for="lieu"><:simplecal:info_lieu:> : </label>
             [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lieu})</span>]
             <input type="text" id="lieu" name="lieu" value="#ENV{lieu}" class="text" size="20" />
         </li>
+        ]
         
     
         [(#REM) 'Descriptif' est un champ obligatoire]
+        [(#ENV{config_descriptif}|=={oui}|oui)
         <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
             <label for="ta_descriptif"><:simplecal:info_descriptif_rapide:> : </label>
             [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>]
             <textarea name='descriptif' id='ta_descriptif'[ lang='(#LANG)'] rows='5' cols='40'>[(#ENV**{descriptif})]</textarea>
         </li>
+        ]
         
         [(#REM) 'Reference' est un champ optionnel]
         [(#ENV{config_reference}|=={oui}|oui)
         <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{ref}|oui)erreur]">
-            <label for="ref"><:simplecal:info_ref:></label>
+            <label for="ref">
+                [(#ENV{config_texte}|=={oui}|oui)<:simplecal:info_ref_1pos:>]
+                [(#ENV{config_texte}|=={non}|oui)<:simplecal:info_ref:>]
+            </label>
             [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ref})</span>]
             <div class="explication"><:simplecal:explication_ref:></div>
             <input type="text" id="ref" name="ref" value="#ENV{ref}" class="text" size="20" />
@@ -81,6 +88,7 @@
         ]
         
         [(#REM) 'Texte' est un champ optionnel]
+        [(#ENV{config_texte}|=={oui}|oui)
         <li class="editer_descriptif[ (#ENV**{erreurs}|table_valeur{texte}|oui)erreur]">
             <label for="texte">
                 [(#ENV{config_reference}|=={non}|oui)<:simplecal:info_texte:>]
@@ -90,6 +98,29 @@
             <div class="explication"><:simplecal:explication_texte:></div>
             <textarea name='texte' id='texte' class='inserer_barre_edition inserer_previsualisation'[ lang='(#LANG)'] rows='20' cols='40'>[(#ENV**{texte})]</textarea>
         </li>
+        ]
+        
+        [(#ENV{config_lien}|=={oui}|oui)
+        <li class="editer_liens_sites fieldset">
+            <fieldset>
+            <h3 class="legend"><:entree_liens_sites:></h3>
+            <ul>
+                <li class="editer_lien_titre[ (#ENV**{erreurs}|table_valeur{lien_titre}|oui)erreur]">
+                    <label for="lien_titre"><:info_titre:><em class='aide'>#AIDER{lien_titre}</em></label>[
+                    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_titre})</span>
+                    ]<input type='text' class='text' name='lien_titre' id='lien_titre' value="[(#ENV**{lien_titre})]" />
+                </li>
+                <li class="editer_lien_url[ (#ENV**{erreurs}|table_valeur{lien_url}|oui)erreur]">
+                    <label for="lien_url"><:info_url:></label>[
+                    <span class='erreur_message'>(#ENV**{erreurs}|table_valeur{lien_url})</span>
+                    ]<input type='text' class='text' name='lien_url' id='lien_url' value="[(#ENV**{lien_url})]" />
+                </li>
+            </ul>
+            </fieldset>
+        </li>
+        ]
+        
+        
         </ul>
           
           

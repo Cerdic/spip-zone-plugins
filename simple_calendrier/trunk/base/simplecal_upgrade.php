@@ -92,6 +92,23 @@ function simplecal_upgrade($simplecal_base_version, $version_cible){
             ecrire_meta($simplecal_base_version, $current_version=1.3);
             spip_log("- Opération terminée : MDD du plugin simple-calendrier : v1.2 -> v1.3", "simplecal");
         }
+        
+        // Si la version courante est inférieure à la version 1.4
+        if ($current_version < 1.4){
+            spip_log("- Mise à jour MDD du plugin simple-calendrier vers la version 1.4", "simplecal");
+            
+            echo "Simple calendrier - m.a.j MDD v1.4<br />";
+            sql_alter("TABLE spip_evenements ADD lien_titre VARCHAR(255) NOT NULL AFTER texte");
+            sql_alter("TABLE spip_evenements ADD lien_url VARCHAR(255) NOT NULL AFTER lien_titre");
+            ecrire_meta('simplecal_descriptif', 'oui');
+            ecrire_meta('simplecal_texte', 'oui');
+            ecrire_meta('simplecal_lieu', 'oui');
+            ecrire_meta('simplecal_lien', 'non');
+            
+            // -- Mise à jour de la version de la base
+            ecrire_meta($simplecal_base_version, $current_version=1.4);
+            spip_log("- Opération terminée : MDD du plugin simple-calendrier : v1.3 -> v1.4", "simplecal");
+        }
     }
 
 }

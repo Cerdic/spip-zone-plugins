@@ -217,7 +217,19 @@ function evenements_edit_ok($param_idevt, $param_new, $param_retour, $param_idru
 
     $config_reference = $GLOBALS['meta']['simplecal_refobj'];
     $config_rubrique = $GLOBALS['meta']['simplecal_rubrique'];
+    $config_descriptif = $GLOBALS['meta']['simplecal_descriptif'];
+    $config_texte = $GLOBALS['meta']['simplecal_texte'];
+    $config_lieu = $GLOBALS['meta']['simplecal_lieu'];
+    $config_lien = $GLOBALS['meta']['simplecal_lien'];
     
+    $config = array(
+        "simplecal_rubrique" => $config_rubrique,
+        "simplecal_reference" => $config_reference,
+        "simplecal_descriptif" => $config_descriptif,
+        "simplecal_texte" => $config_texte,
+        "simplecal_lieu" => $config_lieu,
+        "simplecal_lien" => $config_lien
+    );
     
 	// Contexte qui sera transmis au formulaire
 	$contexte = array(
@@ -227,8 +239,7 @@ function evenements_edit_ok($param_idevt, $param_new, $param_retour, $param_idru
         'id_evenement'=>$param_idevt,
         'row'=>$row,
         'new'=>$param_new,
-        'config_rubrique'=>$config_rubrique,
-        'config_reference'=>$config_reference
+        'config'=>$config
 	);
 
     // On recupere et affiche le fond (transmission du contexte)

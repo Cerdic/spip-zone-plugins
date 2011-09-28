@@ -33,7 +33,7 @@ function evenements_edit_config($row) {
 }
 
 // C comme Charger 
-function formulaires_editer_evenement_charger_dist($new='', $id_evenement='', $row=array(), $redirect='', $config_rubrique='non', $config_reference='non'){
+function formulaires_editer_evenement_charger_dist($new='', $id_evenement='', $row=array(), $redirect='', $config=array()){
     
     $valeurs = array(
         'id_evenement'=>'',
@@ -46,8 +46,14 @@ function formulaires_editer_evenement_charger_dist($new='', $id_evenement='', $r
         'descriptif'=>'',
         'texte'=>'',
         'ref'=>'',
+        'lien_titre'=>'',
+        'lien_url'=>'',
         'config_rubrique'=>'',
-        'config_reference'=>'');
+        'config_reference'=>'',
+        'config_descriptif'=>'',
+        'config_texte'=>'',
+        'config_lieu'=>'',
+        'config_lien'=>'');
     
     
     $valeurs['id_evenement'] = $id_evenement;
@@ -77,18 +83,28 @@ function formulaires_editer_evenement_charger_dist($new='', $id_evenement='', $r
     }
     if (!empty($row['texte'])){
         $valeurs['texte'] = $row['texte'];
+    }    
+    if (!empty($row['lien_titre'])){
+        $valeurs['lien_titre'] = $row['lien_titre'];
+    }
+    if (!empty($row['lien_url'])){
+        $valeurs['lien_url'] = $row['lien_url'];
     }
 
     $valeurs['ref'] = simplecal_get_ref_from_obj($row['type'], $row['id_objet']);
-    $valeurs['config_rubrique'] = $config_rubrique;
-    $valeurs['config_reference'] = $config_reference;
+    $valeurs['config_rubrique'] = $config['simplecal_rubrique'];
+    $valeurs['config_reference'] = $config['simplecal_reference'];
+    $valeurs['config_descriptif'] = $config['simplecal_descriptif'];
+    $valeurs['config_texte'] = $config['simplecal_texte'];
+    $valeurs['config_lieu'] = $config['simplecal_lieu'];
+    $valeurs['config_lien'] = $config['simplecal_lien'];
     
     return $valeurs;
 }
 
 
 // V comme Verifier
-function formulaires_editer_evenement_verifier_dist($new='', $id_evenement='', $row=array(), $redirect='', $config_rubrique='non', $config_reference='non'){
+function formulaires_editer_evenement_verifier_dist($new='', $id_evenement='', $row=array(), $redirect='', $config=array()){
 
     $erreurs = array();
     
@@ -117,7 +133,7 @@ function formulaires_editer_evenement_verifier_dist($new='', $id_evenement='', $
         $erreurs['date_fin'] = _T('simplecal:validation_date_format');
     }
     
-    if ($config_reference == 'oui'){
+    if ($config['simplecal_reference'] == 'oui'){
         // Ref saisie correctement ?
         $ref = trim(_request('ref'));
         if ($ref){
@@ -138,7 +154,7 @@ function formulaires_editer_evenement_verifier_dist($new='', $id_evenement='', $
         }
     }
     
-    if ($config_rubrique != 'non'){
+    if ($config['simplecal_rubrique'] != 'non'){
         $id_parent = intval(_request('id_parent'));
         if ($id_parent == 0){
             $erreurs['id_parent'] = _T('simplecal:validation_rubrique');
@@ -158,7 +174,7 @@ function formulaires_editer_evenement_verifier_dist($new='', $id_evenement='', $
 
 
 // T comme Traiter
-function formulaires_editer_evenement_traiter_dist($new='', $id_evenement='', $row=array(), $redirect='', $config_rubrique='non', $config_reference='non'){
+function formulaires_editer_evenement_traiter_dist($new='', $id_evenement='', $row=array(), $redirect='', $config=array()){
     
     //die("statut=".$row['statut']);
     include_spip('base/abstract_sql');
@@ -172,6 +188,8 @@ function formulaires_editer_evenement_traiter_dist($new='', $id_evenement='', $r
     $descriptif = trim(_request('descriptif'));
     $ref = trim(_request('ref'));
     $texte = trim(_request('texte'));
+    $lien_titre = trim(_request('lien_titre'));
+    $lien_url = trim(_request('lien_url'));
     
     // parent
     $id_parent = trim(_request('id_parent'));
@@ -205,11 +223,34 @@ function formulaires_editer_evenement_traiter_dist($new='', $id_evenement='', $r
     $data['titre'] = $titre;
     $data['date_debut'] = $date_debut;
     $data['date_fin'] = $date_fin;
-    $data['lieu'] = $lieu;
-    $data['descriptif'] = $descriptif;
-    $data['texte'] = $texte;
     
-    if ($config_rubrique != 'non'){
+    if ($config['simplecal_lieu'] != 'non'){
+        $data['lieu'] = $lieu;
+    } else {
+        // si gestion du lieu desactivée
+        // => on ne touche pas aux données qu'ils pourraient y avoir... (réactivation ultérieure ?)
+    }    
+    if ($config['simplecal_descriptif'] != 'non'){
+        $data['descriptif'] = $descriptif;
+    } else {
+        // si gestion du descriptif desactivée
+        // => on ne touche pas aux données qu'ils pourraient y avoir... (réactivation ultérieure ?)
+    }
+    if ($config['simplecal_texte'] != 'non'){
+        $data['texte'] = $texte;
+    } else {
+        // si gestion du texte desactivée
+        // => on ne touche pas aux données qu'ils pourraient y avoir... (réactivation ultérieure ?)
+    }
+    if ($config['simplecal_lien'] != 'non'){
+        $data['lien_titre'] = $lien_titre;
+        $data['lien_url'] = $lien_url;
+    } else {
+        // si gestion du lien desactivée
+        // => on ne touche pas aux données qu'ils pourraient y avoir... (réactivation ultérieure ?)
+    }
+    
+    if ($config['simplecal_rubrique'] != 'non'){
         $data['id_rubrique'] = $id_parent;
         $data['id_secteur'] = $id_secteur;
     } else {
@@ -217,7 +258,7 @@ function formulaires_editer_evenement_traiter_dist($new='', $id_evenement='', $r
         // => on ne touche pas aux données qu'ils pourraient y avoir... (réactivation ultérieure ?)
     }
     
-    if ($config_reference == 'oui'){
+    if ($config['simplecal_reference'] == 'oui'){
         if (empty($ref)){
             $data['type'] = '';
             $data['id_objet'] = 0;

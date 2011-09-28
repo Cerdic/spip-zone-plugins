@@ -45,6 +45,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'config_rubrique_partout' => 'Yes, create events in folder.',
     'config_rubrique_secteur' => 'Yes, create events in 1st level folder (sector).',
     'config_rubrique_non' => 'No, it makes no sens for me.',
+    'config_champs' => 'Events content',
+    'config_champs_explication' => 'Based on the layout chosen for your site, you can decide which elements in the following list should be available.',
     
 
 // D
@@ -105,7 +107,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_date_fin' => 'Last date',
     'info_lieu' => 'Place',
     'info_descriptif_rapide' => 'Brief description',
-    'info_ref' => 'Text : by reference (1\'st possibility)',
+    'info_ref_1pos' => 'Text : by reference (1\'st possibility)',
+    'info_ref' => 'Text : by reference',
     'info_texte' => 'Text',
     'info_texte_2possibilites' => 'Text : specific (2\'nd possibility)',
     'info_gauche_numero_evenement' => 'EVENT NUMBER',

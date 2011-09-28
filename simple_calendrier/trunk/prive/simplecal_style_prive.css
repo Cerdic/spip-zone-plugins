@@ -19,7 +19,7 @@
 #configurer-simplecal .submit { float:right; }
 #configurer-simplecal label.actif { font-weight:bold; }
 #configurer-simplecal th small { font-weight: normal; }
-
+#configurer-simplecal .titre-champ { display:inline-block; width:120px; }
 
 .simplecal-nbinrub { margin-bottom:0.5em; padding:0 0.5em 0.5em; border-bottom:1px dotted #000000; }
 

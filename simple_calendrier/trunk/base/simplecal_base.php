@@ -24,6 +24,8 @@ function simplecal_declarer_tables_principales($tables_principales){
         "lieu"         => "varchar(255) NOT NULL",
         "descriptif"   => "text NOT NULL",
         "texte"        => "text NOT NULL",
+        "lien_titre"   => "varchar(255) NOT NULL",
+        "lien_url"     => "varchar(255) NOT NULL",
         "date"         => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // création ou publication (selon statut) 
         "statut"       => "varchar(8) NOT NULL",
         "maj"          => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"

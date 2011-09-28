@@ -4,8 +4,8 @@
     </nom>
 	<auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
     <licence>GPL &#169; 2010-2011</licence>
-	<version>1.2b</version>
-    <version_base>1.3</version_base>
+	<version>1.2c</version>
+    <version_base>1.4</version_base>
 	<etat>stable</etat>
     <necessite id="jqueryui" version="[1.8.15;]" />
 	
@@ -22,7 +22,7 @@ _   (Th&egrave;mes pour le mini-calendrier bas&eacute;s sur [jquery-ui themeroll
 	
 	<prefix>simplecal</prefix>
     <!-- 2.1.2 min conseillé à cause du Logo. (Patch plus propre en 2.1.2 qu'en 2.1.0 mais ça fonctionne quand même en 2.1.0...) -->
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;3.0)" />
     
     <categorie>date</categorie>
 	

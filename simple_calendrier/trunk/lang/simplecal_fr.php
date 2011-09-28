@@ -43,6 +43,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'config_rubrique_partout' => 'Oui, cr&eacute;er les &eacute;v&egrave;nements dans les rubriques.',
     'config_rubrique_secteur' => 'Oui, cr&eacute;er les &eacute;v&egrave;nements dans les secteurs seulement.',
     'config_rubrique_non' => 'Non, cela n\'a pas de sens pour moi.',
+    'config_champs' => 'Contenu des &eacute;v&egrave;nements',
+    'config_champs_explication' => 'Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider quels champs doivent &ecirc;tre disponibles.',
     
 // D
     'description_plugin' => 'Calendrier',
@@ -103,7 +105,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_date_fin' => 'Date de fin',
     'info_lieu' => 'Lieu',
     'info_descriptif_rapide' => 'Descriptif rapide',
-    'info_ref' => 'Texte : par r&eacute;f&eacute;rence (1&egrave;re possibilit&eacute;)',
+    'info_ref_1pos' => 'Texte : par r&eacute;f&eacute;rence (1&egrave;re possibilit&eacute;)',
+    'info_ref' => 'Texte : par r&eacute;f&eacute;rence',
     'info_texte' => 'Texte',
     'info_texte_2possibilites' => 'Texte : sp&eacute;cifique (2&egrave;me possibilit&eacute;)',
     'info_gauche_numero_evenement' => '&Eacute;V&Egrave;NEMENT NUM&Eacute;RO',
