@@ -1,8 +1,8 @@
 <a id="#FORM"></a>
 <div class="formulaire_spip formulaire_editer formulaire_#FORM" id="formulaire_#FORM-#ENV{id,new}">
-  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+  [<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})[<br /><a href="(#SELF)"><:clevermail:procedure_termine:></a>]</p>]
   [(#ENV{editable})
-	  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	  [<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})[<br /><a href="(#SELF)"><:clevermail:procedure_termine:></a>]</p>]
 	  <form action="[(#ENV{action}|ancre_url{#FORM})]" method="post" enctype="multipart/form-data"><div>
 	    #ACTION_FORMULAIRE{#ENV{action}}
 	        [(#ENV{lst_id_force}|oui)
