@@ -247,7 +247,7 @@ function clevermail_upgrade($nom_meta_base_version, $version_cible) {
       include_spip('base/abstract_sql');
       include_spip('base/create');
       maj_tables('spip_cm_lists');
-      sql_update('spip_cm_lists', array('lst_auto_week_days' => 'lst_auto_week_day'); 
+      sql_update('spip_cm_lists', array('lst_auto_week_days' => 'lst_auto_week_day')); 
       sql_alter("TABLE spip_cm_lists DROP lst_auto_week_day");
       ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
       spip_log('Mise à jour des tables du plugin CleverMail en version 0.6', 'clevermail');
