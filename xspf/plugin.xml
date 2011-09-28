@@ -3,7 +3,7 @@
 	<slogan><multi>
 		[en]XSPF documents lists and multimedia players models
 		[fr]Liste de documents XSPF et mod&#232;les de lecteurs multim&#233;dia
-	</slogan></nom>
+	</slogan>
 	<auteur>Collectif spip</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.4.0</version>
