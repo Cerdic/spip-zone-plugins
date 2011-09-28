@@ -62,6 +62,7 @@ veuillez cliquer sur ce lien :
  @@URL_CONFIRMATION@@
 
 Merci',
+'procedure_termine' => 'Cliquez ici pour terminer',
 
 	  // Back Office : toutes pages
     'administration' => 'CleverMail',
