@@ -3,7 +3,7 @@
 	<slogan>En m&#234;me temps, les chiffres, on peut leur faire dire ce qu'on veut !</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.1</version>
+	<version>0.2.2</version>
 	<etat>dev</etat>
 	<description>
 		<multi>
@@ -14,6 +14,10 @@
 	<lien>http://www.spip-contrib.net/JQuery-Corner</lien>
 	<prefix>bilancontrib</prefix>
 	<fonctions>bilancontrib_fonctions.php</fonctions>
+	<pipeline>
+		 <nom>autoriser</nom>
+		 <inclure>inc/bilancontrib_autoriser.php</inclure>
+	</pipeline>
 	<bouton id='bilancontrib' parent='accueil'>
 		<titre>bilancontrib:nom_plugin</titre>
 		<icone>images/bilancontrib-24.png</icone>
