@@ -1,0 +1,49 @@
+<plugin spip="[2.1.0;3.0.0-dev)" >
+<nom>Base CSS</nom>
+<version>2.3.0</version>
+<etat>stable</etat>
+<icon>prive/img/petronille.png</icon>
+<slogan>Framework CSS pour SPIP</slogan>
+<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
+de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
+</description>
+<lien>http://www.spip-contrib.net/3752</lien>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - &#169; 2010</auteur>
+<categorie>outil</categorie>
+<prefix>basecss</prefix>
+<necessite id="spip_bonux" version="[2.2.19;]"/>
+<bouton id='basecss' parent='bando_squelette'>
+	<icone>prive/img/petronille-16.png</icone>
+	<titre>Base&nbsp;CSS</titre>
+	<url>configurer_basecss</url>
+</bouton>
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>basecss_pipelines.php</inclure>
+</pipeline>
+<utilise id="typoenluminee" />
+</plugin>
+<plugin spip="[3.0.0-dev;]" >
+<nom>Base CSS</nom>
+<version>2.3.0</version>
+<etat>stable</etat>
+<icon>prive/img/petronille.png</icon>
+<slogan>Framework CSS pour SPIP</slogan>
+<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
+de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
+</description>
+<lien>http://www.spip-contrib.net/3752</lien>
+<auteur>[romy.tetue.net->http://romy.tetue.net] - &#169; 2010</auteur>
+<categorie>outil</categorie>
+<prefix>basecss</prefix>
+<bouton id='basecss' parent='bando_squelette'>
+	<icone>prive/img/petronille-16.png</icone>
+	<titre>Base&nbsp;CSS</titre>
+	<url>configurer_basecss</url>
+</bouton>
+<pipeline>
+	<nom>insert_head</nom>
+	<inclure>basecss_pipelines.php</inclure>
+</pipeline>
+<utilise id="typoenluminee" />
+</plugin>

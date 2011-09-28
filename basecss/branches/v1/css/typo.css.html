@@ -1,0 +1,110 @@
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+[(#REM)<style>
+]/* --------------------------------------------------------------
+
+   typo.css.html
+   Base typographique
+   Petronille - romy.tetue.net - 2010
+
+-------------------------------------------------------------- */
+
+/* Valeurs par defaut :
+#SET{font-size,#CONFIG{petronille/typo/font-size,1em}} [ font-size: (#GET{font-size});]
+#SET{line-height,#CONFIG{petronille/typo/line-height,1.5em}} [ line-height: (#GET{line-height});]
+#SET{margin-bottom,#CONFIG{petronille/typo/margin-bottom,1.5em}} [ margin-bottom: (#GET{margin-bottom});]
+#SET{text-indent,#CONFIG{petronille/typo/text-indent,50px}} [ text-indent: (#GET{text-indent});]
+#SET{font-family,#CONFIG{petronille/typo/font-family,'Verdana, Geneva, sans-serif'}} [ font-family: (#GET{font-family});]
+#SET{background-color,#CONFIG{petronille/typo/background-color,#FFFFFF}} [ background-color : (#GET{background-color});]
+#SET{color,#CONFIG{petronille/typo/color,#666666}} [ color: (#GET{color});]
+*/
+
+html { font-size: 100%; } /* Cf.: http://www.pompage.net/pompe/definir-des-tailles-de-polices-en-CSS/ */
+body { background: #GET{background-color}; font: #GET{font-size}/#GET{line-height}[ (#GET{font-family})]; color: #GET{color}; }
+
+/* Titraille / Intertitres */
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 { margin: 0;[ margin-bottom: (#GET{margin-bottom});] padding: 0; font-size: 100%; font-weight: normal; }
+hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET{color}; color: #GET{color}; }
+
+/*h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: .5em; }
+h2,.h2 { font-size: 2em; margin-bottom: .75em; }
+h3,.h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4,.h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6,.h6 { font-size: 1em; font-weight: bold; }*/
+
+/* Enrichissements typographiques */
+strong { font-weight: bold; }
+em { font-style: italic; }
+small,.small { font-size: .9em; }
+abbr,acronym { border-bottom: 1px dotted; font-variant: small-caps; cursor: help; }
+dfn { font-weight: bold; font-style: italic; }
+del { text-decoration: line-through; }
+ins { text-decoration: none; }
+ins, ins * { color: red; }
+sup, sub { font-size: .8em; font-variant: normal; line-height: 0; }
+sup { vertical-align: super; }
+sub { vertical-align: sub; }
+
+/* Listes / Listes SPIP */
+ul, ol, li, dl, dt, dd {}
+ul ul, ol ol, ul ol, ol ul { margin-top: 0; margin-bottom: 0; }
+
+ul.spip, ol.spip { margin-left: #GET{text-indent}; }
+ul.spip { list-style-type: square;[ list-style-image: url((#CHEMIN{css/img/puce-li.gif}));] }
+li ul.spip { list-style-type: circle;[ list-style-image: url((#CHEMIN{css/img/puce-li-li.gif}));] }
+ol { list-style-type: decimal; }
+ol.spip {}
+
+dl dt { font-weight: bold; }
+dl.spip dt,
+dl.spip dd { padding-left: #GET{text-indent}; }
+dl.spip dt { clear: both;[ background: url((#CHEMIN{css/img/puce-dt.gif})) no-repeat 0 center;] }
+dl.spip dd {}
+
+/* Tableaux */
+table { border-collapse: collapse; border-spacing: 0; }
+table,caption,th,td { vertical-align: middle; }
+caption,th,td { padding: 4px 5px; border: 1px solid; text-align: left; font-weight: normal; }
+caption { background: #CCC; border-bottom: 0; caption-side: top; /* bottom pas pris en compte par IE */ }
+th { font-weight: bold; }
+thead th { background: #FFC; }
+tr.odd td { background: #DDD; }
+tr.even td { background: #EEE; }
+tfoot { font-style: italic; }
+
+/* Tableaux SPIP */
+table.spip {}
+table.spip caption {}
+table.spip tr.row_first {}
+table.spip tr.row_odd {}
+table.spip tr.row_even {}
+
+/* Citations, code et poesie */
+q { font-style: italic; }
+blockquote { min-height: 48px; padding: 0 #GET{text-indent};[ background: url((#CHEMIN{css/img/quote.gif})) no-repeat;] }
+blockquote.spip {}
+.spip_poesie {}
+.spip_poesie div { margin-left: #GET{text-indent}; text-indent: -#GET{text-indent}; }
+cite { background-color: #FFFCDF; font-style: italic; }
+
+address { font-style: italic; }
+
+pre,code,kbd,samp,var,tt,
+.spip_code,.spip_cadre { font-family: 'andale mono','lucida console',monospace; font-size: 1em; }
+pre { margin:[ (#GET{margin-bottom}) ]0; white-space: pre; }
+kbd { background-color: #GET{color}; color: #GET{background-color}; }
+samp { font-weight: bold; }
+var { font-style: italic; }
+
+/* Paragraphes */
+p, .p, dl, dd, blockquote, address, pre, table, fieldset,
+div.spip, ul.spip, ol.spip, .spip_poesie, .spip_cadre, div.spip_code, .spip_documents.spip_documents_center { margin-bottom: #GET{margin-bottom}; }
+
+/* Liens */
+a {}
+a:hover {}
+
+/* end */
