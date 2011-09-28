@@ -1,38 +1,23 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>
-	[fr]Gallery 2
-	</multi>
-	</nom>
-	<auteur>contribution initiale (spip 1.8): E. Lafargue, 
-    portage spip 1.9: job, 
-    passage en plugin (spip 2.0): philippe GRISON, cy_altern
-_ &#169; 2009 - distribu&#233; sous licence GNU/LGPL
-  </auteur>
-	<version>
-	   1.2.0
-	</version>
-	<etat>
-	test
-	</etat>
-	<description>
-    <multi>[fr]Integration de Gallery 2 dans SPIP sous forme d'une page de squelette et de modeles
-	 </multi>
-  </description>
-	<lien>http://www.spip-contrib.net/Gallery2-pour-SPIP</lien> <!-- URI de documentation -->
-	<prefix>
-	 g2
-	</prefix>
-  <fonctions>gallery_fonctions.php</fonctions>
-  <options>gallery_options.php</options>
+	<nom>Gallery 2</nom>
+	<slogan>Int&#233;gration de l'application Gallery 2</slogan>
+	<auteur>Contribution initiale (spip 1.8) E. Lafargue, portage spip 1.9 job, passage en plugin (spip 2.0) philippe GRISON, cy_altern</auteur>
+	<version>1.2.0</version>
+	<etat>test</etat>
+	<licence>GNU/GPL</licence>
+	<description>Int&#233;gration de l'application Gallery 2 dans SPIP sous forme d'une page de squelette et de mod&#232;les</description>
+	<lien>http://www.spip-contrib.net/Gallery2-pour-SPIP</lien>
+	<prefix>g2</prefix>
+	<fonctions>gallery_fonctions.php</fonctions>
+	<options>gallery_options.php</options>
 	<icon>g2.png</icon>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.0;]" />
-	<necessite id="cfg" version="[1.10.2;]" />
-	<necessite id="spip_bonux" version="[1.8;]" />	
 	<onglet id="g2" parent="configuration">
 		<icone>g2-24.png</icone>
 		<titre>Gallery 2</titre>
 	</onglet>  
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="cfg" version="[1.10.2;]" />
+	<necessite id="spip_bonux" version="[1.8;]" />	
 	<categorie>multimedia</categorie>
 </plugin>
