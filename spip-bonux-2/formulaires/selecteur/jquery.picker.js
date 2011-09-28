@@ -52,7 +52,7 @@ jQuery.fn.item_pick = function(id_item,name,title,type){
 		picked.html('');
 	else
 		jQuery('li.on',picked).removeClass('on');
-	var sel=jQuery('input[value='+id_item+']',picked);
+	var sel=jQuery('input[value="'+id_item+'"]',picked);
 	if (sel.length==0){
 		picked.addClass('changing').animeajax();
 		// simulons de la latence pour l'oeil de l'utilisateur
