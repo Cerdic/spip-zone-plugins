@@ -31,7 +31,7 @@ _ Utilisation de [jquery.tooltips de Bassistance.de->http://bassistance.de/jquer
 	</multi></description>
 	<lien>http://kent1.sklunk.net/spip.php?article96</lien>
 	<prefix>xspf</prefix>
-	<necessite id='SPIP' version='[2.0.0;2.0.99]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<necessite id='cfg' version='[1.10.0;]' />
 	<necessite id='palette' version='[1.1;]' />
 	<necessite id="lib:jquery-tooltip" src="http://plugins.jquery.com/files/jquery.tooltip_1.zip" />
