@@ -9,7 +9,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function action_instituer_commande($arg=null) {
-		spip_log("action_instituer_commande",'commande');
 	
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');

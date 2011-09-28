@@ -92,7 +92,6 @@ function commande_set($id_commande, $set=null) {
 	foreach ($champs as $champ)
 		$c[$champ] = _request($champ,$set);
 	
-	spip_log("commande_set pour $id_commande " . join(' ', $c),'test_commande');
 	
 	include_spip('inc/modifier');
 	revision_commande($id_commande, $c);
@@ -136,7 +135,6 @@ function revision_commande($id_commande, $c=false) {
  * @return
  */
 function instituer_commande($id_commande, $c, $calcul_details=true){
-	spip_log("instituer_commande $id_commande " . join(' ', $c),'commande');
 
 	include_spip('inc/autoriser');
 	include_spip('inc/modifier');
