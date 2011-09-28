@@ -1,27 +1,34 @@
 <plugin>
 	<nom>
-	<multi>[fr]Mediath&egrave;que
-	[it]Gestione dei documenti
-	[es]Gesti&oacute;n de los documentos
-	[ar]&#1605;&#1603;&#1578;&#1576;&#1577; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578;
-	[en]Media library
-	[de]Mediathek
-	</multi>
+		<multi>
+		[fr]Mediath&#232;que
+		[it]Gestione dei documenti
+		[es]Gesti&#243;n de los documentos
+		[ar]&#1605;&#1603;&#1578;&#1576;&#1577; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578;
+		[en]Media library
+		[de]Mediathek
+		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]G&#232;rer tous vos documents de façon centralis&#232;e
+			[en]Manage all your documents in a centralized way
+		</multi>
+	</slogan>
 	<icon>img_pack/portfolio-64.png</icon>
-	<auteur>[Cedric MORIN->http://www.yterium.net] &amp; [romy.tetue.net->http://romy.tetue.net] &amp; superyms--(traduction)</auteur>
+	<auteur>[Cedric MORIN->http://www.yterium.net], [romy.tetue.net->http://romy.tetue.net], superyms--(traduction)</auteur>
 	<version>1.6.7</version>
 	<version_base>0.11</version_base>
 	<etat>stable</etat>
 	<description><multi>
-	[fr]Outils de gestion des documents, avec page r&eacute;capitulative listant tous les documents du site.
-	[it]Utility di gestione dei documenti : una pagina che mostra tutti i documenti.
-	[es]Utilidad de gesti&oacute;n de los documentos: una p&aacute;gina que resume todos los documentos del sitio.
-	[ar]&#1571;&#1583;&#1575;&#1577; &#1604;&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578; &#1605;&#1606; &#1582;&#1604;&#1575;&#1604; &#1589;&#1601;&#1581;&#1577; &#1580;&#1575;&#1605;&#1593;&#1577; &#1578;&#1593;&#1585;&#1590; &#1603;&#1604; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578; &#1605;&#1606; &#1589;&#1608;&#1585; &#1608;&#1605;&#1604;&#1601;&#1575;&#1578; &#1605;&#1603;&#1578;&#1576;&#1610;&#1577; &#1608;&#1608;&#1587;&#1575;&#1574;&#1591; &#1605;&#1578;&#1593;&#1583;&#1583;&#1577;.
-	[en]Document management tools, with summary page listing all the documents on the site.
-	[de]Dokumentenverwaltung mit &Uuml;bersichtsseite f&uuml;r alle Dokumente der Website und erweiterten Funktionen f&uuml;r Dokumente in Artikeln und Rubriken.
+		[fr]Outils de gestion des documents, avec page r&#233;capitulative listant tous les documents du site.
+		[it]Utility di gestione dei documenti : una pagina che mostra tutti i documenti.
+		[es]Utilidad de gesti&#243;n de los documentos: una p&#225;gina que resume todos los documentos del sitio.
+		[ar]&#1571;&#1583;&#1575;&#1577; &#1604;&#1573;&#1583;&#1575;&#1585;&#1577; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578; &#1605;&#1606; &#1582;&#1604;&#1575;&#1604; &#1589;&#1601;&#1581;&#1577; &#1580;&#1575;&#1605;&#1593;&#1577; &#1578;&#1593;&#1585;&#1590; &#1603;&#1604; &#1575;&#1604;&#1605;&#1587;&#1578;&#1606;&#1583;&#1575;&#1578; &#1605;&#1606; &#1589;&#1608;&#1585; &#1608;&#1605;&#1604;&#1601;&#1575;&#1578; &#1605;&#1603;&#1578;&#1576;&#1610;&#1577; &#1608;&#1608;&#1587;&#1575;&#1574;&#1591; &#1605;&#1578;&#1593;&#1583;&#1583;&#1577;.
+		[en]Document management tools, with summary page listing all the documents on the site.
+		[de]Dokumentenverwaltung mit &#220;bersichtsseite f&#252;r alle Dokumente der Website und erweiterten Funktionen f&#252;r Dokumente in Artikeln und Rubriken.
 	</multi></description>
-	<lien>http://www.spip-contrib.net/mediatheque</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/mediatheque</lien>
 	<install>base/medias.php</install>
 	<fonctions>medias_fonctions.php</fonctions>
 	<prefix>medias</prefix>
@@ -80,7 +87,7 @@
 	</bouton>
 	<chemin dir="" />
 	<chemin dir="squelettes" />
-	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="Z" version="[1.2.1;]" />
 	<utilise id="mediabox" version="[0.5.0;]" />
