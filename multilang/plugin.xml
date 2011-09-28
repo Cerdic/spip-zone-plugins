@@ -1,16 +1,21 @@
 <plugin>
 	<nom>Multilang</nom>
-	<slogan>G&#233;rer l'affichage du contenu des tags multi par un menu</slogan>
-	<auteur>Renato Formato, Kent1, Yffic</auteur>
+	<slogan>
+		<multi>
+			[fr]G&#233;rer l'affichage du contenu des tags multi par un menu
+			[en]Control the display of the contents of multi tags with a language menu
+		</multi>
+	</slogan>
+	<auteur>Renato Formato, kent1, Yffic</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.3.5</version>
+	<version>0.3.6</version>
 	<version_base>0.1</version_base>
 	<etat>test</etat>
 	<description>
 		<multi>
 			[fr]Ce plugin rajoute un menu de langues du type <code>[fr] [en] [it]</code> au dessus de chaque formulaire, en fonction des langues activ&#233;es dans la configuration du site.
 			[it]Questo plugin aggiunge un menu di linguaggi di tipo <code>[fr] [it] [it]</code> nella parte superiore di ogni modulo, a seconda della lingua selezionata nella configurazione del sito.
-			[en]This plugin adds a menu of languages ​​like <code>[fr] [en] [it]</code> at the top of each form, depending on the language selected in the site configuration.
+			[en]This plugin adds a language menu like <code>[fr] [en] [it]</code> at the top of each form, depending on the language selected in the site configuration.
 		</multi>
 	</description>
 	<prefix>multilang</prefix>

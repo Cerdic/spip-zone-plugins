@@ -512,28 +512,34 @@ function multilang_field_set_background(el,lang) {
 	if(lang != 'full'){
 		if(el.totreat){
 			$(el).removeAttr('readonly');
-			$($(el).attr('class').split(" ")).each(function(){
-				var m = this.match(/^multi_lang_*/);
-				if(m!=null)
-					$(el).removeClass(m.input).addClass('multi_lang_'+lang);
-			});
+			if(typeof($(el).attr('class')) != 'undefined'){
+				$($(el).attr('class').split(' ')).each(function(){
+					var m = this.match(/^multi_lang_*/);
+					if(m!=null)
+						$(el).removeClass(m.input).addClass('multi_lang_'+lang);
+				});
+			}
 			$(el).addClass('multi_lang_'+(el.multi?lang:'no_multi'));
 		}
 		else{
-			$($(el).attr('class').split(" ")).each(function(){
-				var m = this.match(/^multi_lang_*/);
-				if(m!=null)
-					$(el).removeClass(m.input);
-			});
+			if(typeof($(el).attr('class')) != 'undefined'){
+				$($(el).attr('class').split(' ')).each(function(){
+					var m = this.match(/^multi_lang_*/);
+					if(m!=null)
+						$(el).removeClass(m.input);
+				});
+			}
 			$(el).css({"background":"url("+multilang_dir_plugin+"/images/multi_forbidden.png) no-repeat right top"});
 		}
 	}else{
 		$(el).attr('readonly','readonly');
-		$($(el).attr('class').split(" ")).each(function(){
-			var m = this.match(/^multi_lang_*/);
-			if(m!=null)
-				$(el).removeClass(m.input);
-		});
+		if(typeof($(el).attr('class')) != 'undefined'){
+			$($(el).attr('class').split(' ')).each(function(){
+				var m = this.match(/^multi_lang_*/);
+				if(m!=null)
+					$(el).removeClass(m.input);
+			});
+		}
 	}
 }
 
