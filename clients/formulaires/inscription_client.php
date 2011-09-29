@@ -123,6 +123,9 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		list($id_contact, $err) = $editer_contact('nouveau');
 		//On lie le contact à l'auteur
 		sql_insertq('spip_contacts_liens',array('id_objet' => $id_auteur,'objet' => 'auteur',"id_contact"=>$id_contact));
+		//assurer la compatibilite
+		sql_updateq('spip_contacts',array('id_auteur' => $id_auteur),"id_contact=".intval($id_contact));
+
 		
 		// On crée l'adresse
 		$editer_adresse = charger_fonction('editer_adresse', 'action/');
