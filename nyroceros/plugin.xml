@@ -1,19 +1,15 @@
 <plugin>
 	<nom>Nyroceros</nom>
-	<auteur>
-	Nyromodal par [Nyrodev->http://www.nyrodev.com/]
-_ Mis en plugin par SmeL, b_b et mis en marche par Fil :-)
-	</auteur>
+	<slogan>Affiche une fen&#234;tre modale hautement configurable</slogan>
+	<auteur>Nyromodal par [Nyrodev->http://www.nyrodev.com/], mis en plugin par SmeL, b_b et mis en marche par Fil :-)</auteur>
 	<version>0.2.1</version>
 	<icon>nyroceros-64.png</icon>
-	<etat>dev</etat>
-	<description>
-Fen&#234;tre de dialogue ou de galerie photo
-_ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
+	<etat>stable</etat>
+	<description>Fen&#234;tre de dialogue ou de galerie photo bas&#233;e sur le script [jQuery Nyromodal->http://plugins.jquery.com/project/nyroModal]
 	</description>
-	<lien>http://nyromodal.nyrodev.com/indexFr.php</lien>
+	<lien>http://www.spip-contrib.net/Nyroceros,2909</lien>
 	<prefix>Nyro</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	<utilise id="palette" version="[1.0;]" />
 	<pipeline>
