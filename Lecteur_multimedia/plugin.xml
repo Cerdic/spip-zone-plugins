@@ -9,28 +9,19 @@
 	// $LastChangedDate$
 	
 	 -->
-	<nom> <!-- Nom du plugin -->
-	Lecteur Multim&eacute;dia en Flash (MP3,flv)
-	</nom>
+	<nom>Lecteur Multim&#233;dia</nom>
+	<slogan>Lire des sons et des vid&#233;os</slogan>
 	<icon>images/logo-32.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
-	<a href="http://www.spip-contrib.net/BoOz,502">BoOz</a>,C&#233;dric, erational, CP.
-	</auteur>
-	<version>
-	0.77
-	</version>
-	<etat>
-	dev
-	</etat>
-	<description>
-	- <code><docXX|player></code> affiche un lecteur flash audio ou video. (plusieurs lecteurs au choix)<br />
-	- Le plugin ajoute un lecteur aux liens <a href="http://mon_site/mon_son.mp3" rel="enclosure">mon son</a> dans la page<br />
-	- Le plugin ajoute un rel="enclosure" et un lecteur aux liens absolus vers un fichier mp3 <code> [mon son->http://mon_site/mon_son.mp3].</code> dans un texte SPIP<br />
-	- Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3 <br />
-	- Avec <code>[(#MODELE{playliste_video}{id_article=XX})]</code> vous pouvez afficher une playliste video.
-_ <a href="?exec=player_admin">configurer le plugin</a> || 
-	<a href="http://spip-zone.info/spip.php?article18">documentation</a>
+	<auteur>BoOz, C&#233;dric, erational, CP.</auteur>
+	<version>0.77.0</version>
+	<etat>stable</etat>
+	<description>Ce plugin permet la lecture et l’affichage de sons ou de vid&#233;os. Il ajoute des lecteurs flash adapt&#233;s aux formats .mp3 et .flv. Il agit sur tous les <code><docXX|player></code> ins&#233;r&#233;s dans les textes, aussi bien que dans les squelettes.
+
+-* <code><docXX|player></code> affiche un lecteur flash audio ou vid&#233;o. (plusieurs lecteurs au choix)
+-* Avec <code>#MODELE{playliste}</code> vous pouvez afficher une playliste des derniers mp3
+-* Avec <code>[(#MODELE{playliste_video}{id_article=XX})]</code> vous pouvez afficher une playliste video.
 	</description>
+	<lien>http://www.spip-contrib.net/Lecteur-Multimedia</lien>
 	<options>player_options.php</options>
 	<fonctions>player_fonctions.php</fonctions>
 	<prefix>Player</prefix>
@@ -41,7 +32,6 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 		<titre>player:player_nom</titre>
 		<url>player_admin</url>
 	</bouton>
-	
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
 	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
 	-->
@@ -72,8 +62,7 @@ _ <a href="?exec=player_admin">configurer le plugin</a> ||
 		<nom>affiche_milieu</nom>
 		<inclure>inc/player_pipeline_affiche_milieu.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
