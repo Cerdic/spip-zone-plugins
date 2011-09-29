@@ -30,7 +30,7 @@
 
 [(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
 [(#SET{height,#ENV{height,#ENV{hauteur,400px}}})]
-[(#SET{id,#ENV{id_carte_gis,#ENV{id_map,1}}})]
+[(#SET{id,#ENV{id_carte_gis,#ENV{id_map,#ENV{id,1}}}})]
 [(#REM) -- compat gis v1 -- ]
 [(#SET{lat,#ENV{lat,#ENV{latit,#ENV{latitude,#CONFIG{gis/lat,0}}}}})]
 [(#SET{lon,#ENV{lon,#ENV{lonxit,#ENV{longitude,#CONFIG{gis/lon,0}}}}})]
