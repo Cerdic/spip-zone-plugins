@@ -1,0 +1,37 @@
+
+*** A l'attention des developpeurs ou developpeuses qui souhaitent intervenir sur le projete C&O ***
+
+Avant d'intervenir sur ce plugin (notamment pour l'instant au moins dans sa branche v1) merci de bien vouloir lire les quelques lignes qui suivent.
+
+CONCEPTION
+----------
+Un objet 'contact' ou 'organisation' a ete imagine comme une extention de l'objet 'auteur'.
+
+
+LIAISONS
+--------
+Les liaisons entre des auteurs et d'autres objets SPIP (qui ne sont pas des auteurs) peuvent s'envisager avec une table classique spip_xxx_liens, contenant des enregistrements id_xxx, id_objet et objet = 'auteur'. Il en va par exemple des liaisons entre mots cle et auteurs, avec la table spip_mots_liens, et des enregistrements du type id_mot, id_objet, et objet = 'auteur'.
+
+En revanche, les liaisions "entre auteurs" tout a fait legitimes d'ailleurs, du type :
+- auteurs <> contacts
+- auteurs <> organisations
+- organisations <> contacts
+
+doivent etre vues comme des liaisons d'un auteur vers un autre auteur, et ne peuvent donc pas, a ce titre, s'imaginer avec le systeme de liaison natif de SPIP.
+
+Ainsi, pour lier un auteur avec un contact, on utilise le champ id_auteur de la table spip_contacts.
+Pour lier un auteur avec une organisation, on utilise le champ id_auteur de la table spip_organisations.
+Et pour lier un contact avec une ou plusieurs organisations, on utilise la table spip_organisations_contacts.
+
+
+RECOMMANDATIONS
+---------------
+
+Ce plugin etant en production sur plusieurs gros sites importants, il faut veiller lors des ameliorations apportees par les developpeurs et developpeuses, a respecter la structure des tables et notamment des tables de liaisons. Il est recommande notament de ne pas supprimer le champ id_auteur des tables spip_contacts et spip_organisations, et de ne pas supprimer la table de liaison specifique spip_organisations_contacts.
+
+
+Merci pour la lecture de ces lignes,
+RDV sur la zone et/ou sur spip-contrib pour partager d'autres idees et commentaires ;-)
+
+C.MARION
+
