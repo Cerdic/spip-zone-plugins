@@ -1,14 +1,14 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Metadonn&#233;es photo (EXIF, IPTC et histogramme)
-			[en]Photo metadata (EXIF, IPTC and histogram)
+			[fr]Metadonn&#233;es photo
+			[en]Photo metadata
 		</multi>
 	</nom>
 	<nom>
 		<multi>
-			[fr]Afficher les infos EXIF, GPS et IPTC d'un fichier JPEG.
-			[en]Display EXIF, IPTC and GPS data from a JPEG file.
+			[fr]Afficher les infos EXIF, GPS et IPTC d'un fichier JPEG
+			[en]Display EXIF, IPTC and GPS data from a JPEG file
 		</multi>
 	</nom>
 	<auteur>ARNO*</auteur>
