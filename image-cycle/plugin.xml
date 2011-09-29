@@ -1,26 +1,15 @@
 <plugin>
-	<nom>
-image-cycle
-	</nom>
-	<auteur>
-    christophe vallois
-	</auteur>
-	<version>
-		0.2
-	</version>
-	<etat>
-		test
-	</etat>
-	<description>
-Affiche al&eacute;atoirement 5 images tir&eacute;es de l'ensemble des images du site et les affiches dans un encadr&eacute; avec un le javascript Plugin cycle<br/>
- <h4>[Configuration->.?exec=cfg&amp;cfg=imagecycle]</h4>
+	<nom>Image Cycle</nom>
+	<slogan>Afficher al&#233;atoirement 5 images</slogan>
+	<auteur>Christophe Vallois</auteur>
+	<version>0.2.0</version>
+	<etat>test</etat>
+	<description>Ce plugin permet d'afficher une image aléatoire provenant de toutes les images du site et renvoyant sur l’article d’origine de l’image. Utilise le plugin [jQuery Cycle->http://jquery.malsup.com/cycle/]
 	</description>
 	<icon>css/images/logo_article.png</icon>
 	<lien>http://www.spip-contrib.net/Une-image-aleatoire-en-page-d</lien>
-	<prefix>
-	imagecycle
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<prefix>imagecycle</prefix>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id='cfg' version='[1.3.8;]' />
 	<categorie>multimedia</categorie>
 </plugin>
