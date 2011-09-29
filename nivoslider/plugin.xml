@@ -1,14 +1,21 @@
 <plugin>
 	<nom>Nivo Slider</nom>
-	<auteur>[Grégory Pascal->http://www.spip-contrib.net/ngombe], distribu&#233; sous licence GNU/GPL</auteur>
+	<slogan>
+		<multi>
+			[fr]Diaporama jQuery avec de belles transitions !
+			[en]JQuery slideshow with nice transitions!
+		</multi>
+	</slogan>
+	<auteur>[Gr&#233;gory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
 	<version>0.1.1</version>
+	<licence>GNU/GPL</licence>
 	<etat>test</etat>
 	<description><multi>
-	[fr] Ajoute les balises {{&lt;nivosliderXX&gt;}}, {{&lt;nivoslider_doc&gt;}} et {{&lt;nivoslider_rub&gt;}} pour cr&#233;er un diaporama <a href="http://nivo.dev7studios.com/" title="dev7studio">"Nivo Slider" </a> param&#233;trable via <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
-	[en] Add {{&lt;nivosliderXX&gt;}}, {{&lt;nivoslider_doc&gt;}} and {{&lt;nivoslider_rub&gt;}} tags to create a <a href="http://nivo.dev7studios.com/" title="dev7studio">"Nivo Slider" </a> using <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a>.
+	[fr]Ajoute les balises <code><nivosliderXX></code>, <code><nivoslider_doc></code> et <code><nivoslider_rub></code> pour cr&#233;er un diaporama [Nivo Slider->http://nivo.dev7studios.com/] param&#233;trable.
+	[en]Add <code><nivosliderXX></code>, <code><nivoslider_doc></code> and <code><nivoslider_rub></code> tags to create a [Nivo Slider->http://nivo.dev7studios.com/] slideshow.
 	</multi></description>
 	<lien>http://www.spip-contrib.net/Nivo-Slider-pour-SPIP</lien>
-		<icon>img_pack/nivoslider-32.png</icon>
+	<icon>img_pack/nivoslider-32.png</icon>
 	<prefix>nivoslider</prefix>
 	<pipeline>
 		<nom>insert_head_css</nom>
@@ -26,6 +33,6 @@
 	<noisette>modeles/nivoslider_doc.html</noisette>
 	<noisette>modeles/nivoslider_rub.html</noisette>
 	<categorie>multimedia</categorie>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]]" />
 	<necessite id='cfg' version='[1.16.0;]' />
 </plugin>
