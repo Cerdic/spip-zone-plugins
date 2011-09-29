@@ -1,25 +1,25 @@
 <plugin>
 	<nom>GetId3</nom>
-	<auteur>
- 	BoOz (booz@rezo.net) & kent1 (kent1@arscenic.info)
+	<slogan>
+		<multi>
+			[fr]Lire et ecrire les tags audio
+			[en]Read and write audio tags
+		</multi>
+	</slogan>
+	<auteur>[BoOz->booz@rezo.net], [kent1->kent1@arscenic.info]
 	</auteur>
 	<icon>images/id3v2.png</icon>
 	<licence>(c) 2008-2011 GPL</licence>
-	<version>
-	0.5.0
-	</version>
-	<version_base>
-	0.3.1
-	</version_base>
-	<etat>
-	test
-	</etat>
+	<version>0.5.0</version>
+	<version_base>0.3.1</version_base>
+	<etat>test</etat>
 	<description>
 		<multi>
 			[fr]Lire et ecrire les tags audio sur les documents de type audio
 _ [->http://getid3.sourceforge.net/]
 			[en]Read and write audio tags to audio documents
 _ [->http://getid3.sourceforge.net/]
+		</multi>
 	</description>
 	<options>
 	getid3_options.php
@@ -53,7 +53,7 @@ _ [->http://getid3.sourceforge.net/]
 		<inclure>getid3_pipelines.php</inclure>
 	</pipeline>
 	<install>base/getid3_upgrade.php</install>
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
 	<utilise id="cfg" />
 	<utilise id="medias" />
 	<categorie>multimedia</categorie>
