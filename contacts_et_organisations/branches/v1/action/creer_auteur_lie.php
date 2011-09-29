@@ -27,7 +27,7 @@ function action_creer_auteur_lie_dist($arg=null) {
 						"nom"		=>  $nom,
 						"statut"	=> "1comite"
 					));
-				sql_insertq("spip_contacts", 
+				sql_updateq("spip_contacts", 
 						array("id_auteur" => $id_auteur),
 						"id_contact =" . $arg[1]
 					);
@@ -37,7 +37,7 @@ function action_creer_auteur_lie_dist($arg=null) {
 						'objet' => 'auteur',
 						'id_objet' => $id_auteur
 					);
-					sql_insertq("spip_contacts_liens", $champs);
+					sql_updateq("spip_contacts_liens", $champs);
 	
 				break;
 
