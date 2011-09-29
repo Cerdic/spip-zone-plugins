@@ -1,41 +1,18 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Player Flash MP3
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric, d'apr&#232;s Booz. Mod&egrave;le ajout&eacute; par Olivier G..
-	</auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	stable
-	</etat>
-	<description>
-	Flashons les urls des mp3 pour &#234;tre a la mode&nbsp;!
-	</description>
-	<lien>http://www.guiderdoni.net/Le-plugin-dewplayer-pour-SPIP-un.html</lien> <!-- URI de documentation -->
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	dew_player.php
-	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	dewplayer
-	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
-	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
-	-->
+	<nom>Player Flash MP3</nom>
+	<slogan>Flashons les mp3 pour &#234;tre &#224; la mode !</slogan>
+	<auteur>Cedric, d'apr&#232;s Booz. Mod&#232;le ajout&#233; par Olivier G.</auteur>
+	<version>0.2.0</version>
+	<etat>stable</etat>
+	<description>Ce plugin a pour effet de rajouter le player Flash dewplayer &#224; la fin des articles dont le texte contient des url de fichiers mp3. Un mod&#232;le est &#233;galement fourni et permet d'ins&#233;rer le player dans un article en utilisant le raccourci <code><docXX|dewplayer></code>.</description>
+	<lien>http://www.guiderdoni.net/Le-plugin-dewplayer-pour-SPIP-un.html</lien>
+	<prefix>dewplayer</prefix>
+	<fonctions>dew_player.php</fonctions>
 	<pipeline>
 		<nom>post_propre</nom>
 		<action>post_propre</action>
 		<inclure>dew_player.php</inclure>
 	</pipeline>
-		<!-- Le parametre action est facultatif : en son absence la fonction portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
-
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
