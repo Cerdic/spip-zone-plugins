@@ -1,16 +1,10 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Agenda pour SPIP 1.9.2
-	</nom>
+	<nom>Agenda</nom>
 	<icon>img_pack/agenda-48.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN 	[notre-ville.net->http://www.notre-ville.net]
+	<auteur>Cedric MORIN 	[notre-ville.net->http://www.notre-ville.net]
 _ patrice.vanneufville@laposte.net pour la saisie rapide
-_ &#169; 2006 - Licence GPL
-	</auteur>
-	<version>
-	0.14
-	</version>
+_ &#169; 2006</auteur>
+	<version>0.14</version>
 	<etat>stable</etat>
 	<description>
 	Agenda Ev&#233;nementiel

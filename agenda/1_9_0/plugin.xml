@@ -1,37 +1,19 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Agenda pour SPIP 1.9.0
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN
- 	[notre-ville.net->http://www.notre-ville.net]
-_ &#169; 2006 - Licence GPL
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
-	<description>
-	Agenda Ev&#233;nementiel
-_ {{Ce plugin n&#233;cessite le plugin Widget Calendar}}
-	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/AgenDa</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	agenda_mes_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	agenda_mes_fonctions.php
-	</fonctions>
+	<nom>Agenda</nom>
+	<auteur>Cedric MORIN - &#169; 2006</auteur>
+	<version>0.1</version>
+	<licence>GPL</licence>
+	<etat>stable</etat>
+	<description>Agenda Ev&#233;nementiel</description>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/AgenDa</lien>
+	<options>agenda_mes_options.php</options>
+	<fonctions>agenda_mes_fonctions.php</fonctions>
 	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
 	sur le mode Rien::
 	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
 	ce parametre est obligatoire et doit etre non vide
 	-->
-	<prefix> 
-	Agenda
-	</prefix>
+	<prefix>Agenda</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_onglets</nom>
