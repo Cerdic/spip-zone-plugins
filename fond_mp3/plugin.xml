@@ -8,6 +8,7 @@
 	 -->
 
 	<nom>Fond MP3</nom>
+	<slogan>Illustration sonore pour un article, une rubrique ou le site entier.</slogan>
 	<auteur>
 		[Christian Paulus->http://www.quesaco.org/]<br />
 		Avec l'aide du plugin jQuery jmp3 de [Sean O->http://www.sean-o.com/jquery/jmp3/]
@@ -15,14 +16,12 @@
 	</auteur>
 
 	<description>
-		Illustration sonore pour un article, une rubrique ou le site entier.
+		Ce plugin permet de jouer un son mp3 en guise d’illustration sonore pour un article, une rubrique, ou l’ensemble de votre site.
 	</description>
 	
-	<lien>
-		[Documentation sur www.quesaco.org->http://quesaco.org/Illustration-sonore-mp3]
-	</lien>
+	<lien>http://www.quesaco.org/Illustration-sonore-mp3</lien>
 	
-	<version>1.11</version>
+	<version>1.11.0</version>
 	<etat>stable</etat>
 	<icon>images/fmp3-64.png</icon>
 	
@@ -49,7 +48,7 @@
 		<inclure>inc/fmp3_pipeline_insert_head.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	
 	<categorie>multimedia</categorie>
 	
