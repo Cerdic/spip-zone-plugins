@@ -38,10 +38,6 @@ div.pagination_spipmotion{
 	height:300px;
 }
 
-.tr_liste{background-color:#eee;}
-.tr_liste_over,.tr_liste:hover{background-color:#fff;}
-.tr_liste td,.tr_liste:hover td,.tr_liste_over td{border-bottom:1px solid #ddd;}
-
 .spipmotion_info_log{
 	margin:10px 0;
 }
@@ -58,4 +54,8 @@ cadre{
 	overflow:auto;
 	padding:5px;
 	text-align:left;
+}
+
+.spipmotion_graphs{
+	margin-bottom:15px;
 }

@@ -11,16 +11,17 @@
 
 /**
  * Fonction de vérification que les binaires utilisés soient correctement installés
- * et exécutables
+ * et exécutables ainsi que quelques éléments de configuration de PHP :
  * 
- * -* ffmpeg
- * -* ffmpeg2theora
- * -* flvtool2
- * -* flvtool++
- * -* qt-faststart
- * -* le script spipmotion.sh
- * -* la class ffmpeg-php
- * -* mediainfo
+ * -* l'état du safe_mode;
+ * -* ffmpeg;
+ * -* ffmpeg2theora;
+ * -* flvtool2;
+ * -* flvtool++;
+ * -* qt-faststart;
+ * -* le script spipmotion.sh;
+ * -* la class ffmpeg-php;
+ * -* mediainfo;
  *
  * Si le safe_mode est activé, on l'inscrit dans les metas ainsi que son exec_dir
  * afin de retrouver le script spipmotion.sh qui doit s'y trouver

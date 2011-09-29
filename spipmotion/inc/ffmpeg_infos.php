@@ -30,7 +30,12 @@ function ffmpeg_recuperer_infos_codecs($forcer){
 		if(!$chemin){
 			return false;
 		}
-
+		
+		/**
+		 * On recharge les logiciels
+		 */
+		$verifier_binaires = charger_fonction('spipmotion_verifier_binaires','inc');
+		$verifier_binaires();
 		if($GLOBALS['spipmotion_metas']['spipmotion_safe_mode'] == 'oui'){
 			$spipmotion_sh = $GLOBALS['spipmotion_metas']['spipmotion_safe_mode_exec_dir'].'/spipmotion.sh'; 
 		}else{

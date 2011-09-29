@@ -17,7 +17,7 @@
 	</description>
 	<lien>http://www.mediaspip.net/technical-documentation/plugins-used-by-mediaspip/spipmotion/</lien>
 	
-	<version>0.9.4</version>
+	<version>0.9.5</version>
 	<version_base>0.8.0</version_base>
 	<etat>test</etat>
 	<prefix>spipmotion</prefix>
@@ -114,7 +114,7 @@
 	<necessite id='getid3' version='[0.2;]' />
 	<necessite id='queue' version='[0.3.1;]' />
 	<necessite id="jqueryui" version="[1.8.5;]" />
-	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.6.zip" />
+	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.7.zip" />
 	
 	<utilise id='podcast' />
 	<utilise id='fonctions_images' version='[0.5.1]' />
