@@ -60,10 +60,14 @@
 </B_spipmotion_file>
 <p><:spipmotion:info_aucun_resultat_attente:></p>
 <//B_spipmotion_file>
+<div class="actions">
 <a href="[(#SELF|parametre_url{relance,''}|parametre_url{hasard,[(#VAL{0}|rand{10000000000})]})]" id="spipmotion_recharge_file" class="ajax"><:spipmotion:lien_recharger:></a>
+</div>
 <script type="text/javascript">
 	var refresh = function(){
-		$('#spipmotion_recharge_file').click();
+		if($('#spipmotion_file tbody tr').size() > 0){
+			$('#spipmotion_recharge_file').click();
+		}
 	}
 	setTimeout(refresh,30000);
 </script>
