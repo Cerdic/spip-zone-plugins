@@ -2,8 +2,8 @@
 	<nom>Image Rotator</nom>
 	<auteur>[Grégory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
 	<slogan><multi>
-	[fr]Ajoute un diaporama JW Image Rotator
-	[en]Add a JW Image Rotator slideshow
+	[fr]Afficher un diaporama JW Image Rotator
+	[en]Display a JW Image Rotator slideshow
 	</multi></slogan>
 	<version>0.1.0</version>
 	<licence>GNU/GPL</licence>
