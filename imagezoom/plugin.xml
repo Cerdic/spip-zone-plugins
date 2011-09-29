@@ -1,35 +1,24 @@
 <plugin>
-	<nom>
-	  Loupe Photo
-	</nom>
-	<auteur>
-Pierre Andrews (mortimer.pa@free.fr)
-_ J&agrave;nos T&ograve;th
-_ &#169; 2008 - Distribu&eacute; sous licence GPL.
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>Loupe Photo</nom>
+	<auteur>[Pierre Andrews->mortimer.pa@free.fr], J&#224;nos T&#242;th</auteur>
+	<licence>GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>stable</etat>
 	<description>
-	  Ce plugin ajoute un mod&#232;le pour afficher une loupe et offrir un agrandissement localis&#233; : <code>&lt;img|zoom&gt;</code>.
+	  Ce plugin ajoute un mod&#232;le pour afficher une loupe et offrir un agrandissement localis&#233; : <code><img|zoom></code>.
 
 Encore mieux, on peut utiliser une image de plus forte r&#233;solution pour l'agrandissement, mais laisser une petite vignette pour l'image de base.
 
-La [page de configuration->./?exec=cfg&amp;cfg=tjpzoom] permet de sp&eacute;cifier un style pour la loupe et des styles personalis&eacute;s peuvent &ecirc;tre cr&eacute;&eacute;s.
+La page de configuration permet de sp&#233;cifier un style pour la loupe et des styles personalis&#233;s peuvent&#234;tre cr&#233;&#233;s.
 
-Le code est bas&eacute; sur [TJPZoom->http://valid.tjp.hu/tjpzoom/] par J&agrave;nos T&ograve;th.
+Le code est bas&#233; sur [TJPZoom->http://valid.tjp.hu/tjpzoom/] par J&#224;nos T&#242;th.
 
 Le plugin ne marche qu'avec les squelettes utilisant la balise <code>#INSERT_HEAD</code>
 
-Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la biblioth&egrave;que javascript [TJPZoom->http://valid.tjp.hu/tjpzoom/tjpzoom.zip] et placer le contenu de l'archive dans un r&eacute;pertoire {tjpzoom} dans votre r&eacute;pertoire {squelettes}. Si vous avec SPIP 2, cela sera fait automatiquement pour vous.
+Si vous utilisez SPIP 1.9.2, il faut t&#233;l&#233;charger la biblioth&#232;que javascript [TJPZoom->http://valid.tjp.hu/tjpzoom/tjpzoom.zip] et placer le contenu de l'archive dans un r&#233;pertoire {tjpzoom} dans votre r&#233;pertoire {squelettes}. Si vous avec SPIP 2, cela sera fait automatiquement pour vous.
 	</description>
 	<lien>http://www.spip-contrib.net/Une-loupe-pour-vos-vignette</lien>
-	<prefix> 
-	tjpzoom
-	</prefix>
+	<prefix>tjpzoom</prefix>
 
 	<pipeline>
 		<nom>insert_head</nom> 
@@ -42,7 +31,7 @@ Si vous utilisez SPIP 1.9.2, il faut t&eacute;l&eacute;charger la biblioth&egrav
 	</pipeline>
 
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	<necessite id='CFG' version='[1.10.3;]' />
 	<necessite id="lib:tjpzoom" src="http://valid.tjp.hu/tjpzoom/tjpzoom.zip" />
 	<categorie>multimedia</categorie>
