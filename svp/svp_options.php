@@ -52,6 +52,9 @@ define('_SVP_VERSION_SPIP_MIN', '1.9.0');
 // -- Pour l'instant on ne connait pas la borne sup exacte
 define('_SVP_VERSION_SPIP_MAX', '3.0.99');
 
+// Branche SPIP stable
+define('_SVP_BRANCHE_STABLE', '2.1');
+
 // Liste des branches significatives de SPIP et de leurs bornes (versions min et max)
 // A mettre a jour en fonction des sorties
 $GLOBALS['infos_branches_spip'] = array(
