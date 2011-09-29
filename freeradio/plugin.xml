@@ -1,13 +1,11 @@
 <plugin>
 	<nom>FreeRadio</nom>
-	<slogan>Lecteur de flux audio écrit en Flash actionscript</slogan>
+	<slogan>Lecteur de radio web</slogan>
 	<icon>img_pack/freeRadioLogo.png</icon>
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<categorie>multimedia</categorie>
 	<description>
-{{Un lecteur de radio Web}}
-
 <u>Caract&#233;ristiques :</u>
 -* Le lecteur FreeRadio est &#233;crit en actionscript 3. Il est ins&#233;r&#233; dans la page et ex&#233;cut&#233; gr&#226;ce au plugin Flash Player.
 -* Il permet de lire des flux audios (comme les radios) ou des sons mp3.
@@ -40,7 +38,7 @@ Tous ces param&#232;tres sont optionnels et peuvent &ecirc;tre utilis&#233;s con
 
 	</description>
 	<auteur>	<!-- Auteur du plugin -->
-[Frank RUZZIN->mailto:franck@lededansdubocal.net], mai 2011
+[Frank RUZZIN->mailto:franck@lededansdubocal.net], (c) 2011
 	</auteur>
 	<lien>http://lededansdubocal.net/Le-plugin-SPIP-FreeRadio-1-0.html</lien>
 	<prefix>freeradio</prefix>	
