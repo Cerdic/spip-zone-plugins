@@ -32,37 +32,37 @@ function pays_upgrade($nom_meta_base_version, $version_cible){
 	}
 
 	if (version_compare($current_version,"1.2","<")){
-        // on renomme IR en 00 (il n'existe pas de code ISO numérique)
+        // on renomme IR en 00 (il n'existera jamais de code ISO 0)
         sql_update("spip_pays",
                 array("code" => "0"),
-                array("code='IR'",));
+                array("code='IR'", "id_pays=109", ));
 
         // on renomme IQ en IR (qui etait du coup libre)
         sql_update("spip_pays",
                 array("code" => "IR"),
-                array("code='IQ'",));
+                array("code='IQ'", "id_pays=110", ));
         // on renomme IX en IQ (qui etait du coup libre)
         sql_update("spip_pays",
                 array("code" => "IQ"),
-                array("code='0'",));
+                array("code='0'", "id_pays=109", ));
         // IR et IQ sont echanges ;) log et maj meta maintenant
         ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
     }   
 
 	if (version_compare($current_version,"1.2.1","<")){
-        // on renomme KR en '0' (il n'existe pas de code ISO numérique)
+        // on renomme KR en '0' (il n'existera pas de code ISO 0)
         sql_update("spip_pays",
                 array("code" => "0"),
-                array("code='KR'",));
+                array("code='KR'", "id_pays=52", ));
 
         // on renomme KP en KR (qui etait du coup libre)
         sql_update("spip_pays",
                 array("code" => "KP"),
-                array("code='KR'",));
+                array("code='KR'", "id_pays=51", ));
         // on renomme KR en KP (qui etait du coup libre)
         sql_update("spip_pays",
                 array("code" => "KP"),
-                array("code='0'",));
+                array("code='0'", "id_pays=52", ));
         // IR et IQ sont echanges ;) log et maj meta maintenant
         ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
     }
