@@ -3,6 +3,12 @@
 	<auteur>Camille Lafitte</auteur>
 	<version>1.0.3</version>
 	<etat>stable</etat>
+	<slogan>
+		<multi>
+			[fr]Convertir des documents textuels &#224; la vol&#232;e
+			[en]Convert text documents on the fly
+		</multi>
+	</slogan>
     <description><multi>
     	[fr]Ce plugin permet de convertir &#224; la vol&#232;e des pdf, tiff en image. Ces images sont ensuite exploitable via une boucle.
 		[en]This plugin will convert on the fly pdf, tiff ... documents in image(s). These images can then be exploited via a loop.
@@ -30,7 +36,7 @@
        <inclure>doc2img_pipeline.php</inclure>
    </pipeline>
 
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="cfg" version="[1.9;]" />
    <categorie>edition</categorie>
 </plugin>
