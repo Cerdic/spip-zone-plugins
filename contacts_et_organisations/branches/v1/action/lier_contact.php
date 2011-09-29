@@ -15,7 +15,7 @@ function action_lier_contact_dist($arg=null) {
 
 	// cas liaison id_contact / id_organisation
 	if (intval($arg[0]) and intval($arg[1])) {
-		// spip_log("appel à l'action_lier_contact_dist avec $arg[0] / $arg[1] comme argument");
+		// spip_log("appel Ã  l'action_lier_contact_dist avec $arg[0] / $arg[1] comme argument");
 		action_lier_contact_post($arg[0], $arg[1]);
 	}
 
@@ -32,6 +32,15 @@ function action_lier_contact_post($id_contact, $id_organisation) {
 			"id_contact" => sql_quote($id_contact),
 			"id_organisation" => sql_quote($id_organisation)
 		));
+			
+				//compatibilite
+					$champs = array(
+						'id_organisation' => sql_quote($id_organisation),
+						'objet' => 'contact',
+						'id_objet' => $id_contact
+					);
+					sql_insertq("spip_organisations_liens", $champs);
+
 		
 		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_contact/$id_contact'");

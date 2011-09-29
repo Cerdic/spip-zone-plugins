@@ -27,10 +27,18 @@ function action_creer_auteur_lie_dist($arg=null) {
 						"nom"		=>  $nom,
 						"statut"	=> "1comite"
 					));
-				sql_updateq("spip_contacts", 
+				sql_insertq("spip_contacts", 
 						array("id_auteur" => $id_auteur),
 						"id_contact =" . $arg[1]
 					);
+				//compatibilite
+					$champs = array(
+						'id_contact' => $arg[1],
+						'objet' => 'auteur',
+						'id_objet' => $id_auteur
+					);
+					sql_insertq("spip_contacts_liens", $champs);
+	
 				break;
 
 			case 'organisation': 
@@ -43,6 +51,15 @@ function action_creer_auteur_lie_dist($arg=null) {
 						"statut"			=> "1comite"
 					));
 				sql_updateq('spip_organisations',array('id_auteur'=>$id_auteur),"id_organisation=".$arg[1]);
+				
+				//compatibilite
+					$champs = array(
+						'id_organisation' => $arg[1],
+						'objet' => 'auteur',
+						'id_objet' => $id_auteur
+					);
+					sql_insertq("spip_organisations_liens", $champs);
+					
 				break;
 
 			default : break;

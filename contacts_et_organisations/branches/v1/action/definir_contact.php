@@ -13,15 +13,15 @@ function action_definir_contact_dist($arg=null) {
 	}
 	$arg = explode('/', $arg);
 
-	// Si on défini un contact
+	// Si on dÃ©fini un contact
 	if ($arg[0] == 'contact' and intval($arg[1])) {
 		return action_definir_contact_post($arg[1]);
 	}
-	// Si on défini une organisation
+	// Si on dÃ©fini une organisation
 	elseif ($arg[0] == 'organisation' and intval($arg[1])) {
 		return action_definir_organisation_post($arg[1]);
 	}	
-	// Sinon ça veut rien dire
+	// Sinon Ã§a veut rien dire
 	else {
 		spip_log("action_definir_contact_dist $arg pas compris");
 	}
@@ -39,7 +39,7 @@ function action_definir_organisation_post($id_auteur) {
 
 
 function insert_contact($id_auteur=0) {
-	// récupérer le nom
+	// rÃ©cupÃ©rer le nom
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
 
 	$champs = array(
@@ -56,12 +56,21 @@ function insert_contact($id_auteur=0) {
 	));
 
 	$id_contact = sql_insertq("spip_contacts", $champs);
+	
+	//compatibilite
+		$champs = array(
+			'id_contact' => $id_contact,
+			'objet' => 'auteur',
+			'id_objet' => $id_auteur
+		);
+		sql_insertq("spip_contacts_liens", $champs);
+	
 	return $id_contact;
 }
 
 function insert_organisation($id_auteur=0) {
 
-	// récupérer le nom
+	// rÃ©cupÃ©rer le nom
 	$nom = sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . $id_auteur);	
 
 	$champs = array(

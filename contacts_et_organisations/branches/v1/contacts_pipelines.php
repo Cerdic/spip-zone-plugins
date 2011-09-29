@@ -83,7 +83,7 @@ function contacts_afficher_contenu_objet($flux)
 
 
 function contacts_boite_infos($flux){
-	/*
+	
 	if ($flux['args']['type'] == 'contact'){
 
 		$id_auteur = sql_getfetsel('id_objet', 
@@ -99,7 +99,7 @@ function contacts_boite_infos($flux){
 	}
 	
 	$flux['data']			=  $flux['data'] ;
-	*/
+	
 	return $flux;
 }
 

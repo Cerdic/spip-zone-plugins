@@ -15,7 +15,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	
 	if ($current_version=="0.0") {
 		creer_base();
-		spip_log('Tables C&O correctement créées','contacts');
+		spip_log('Tables C&O correctement creees','contacts');
 		ecrire_meta($nom_meta_base_version, $current_version=$version_cible);
 	}
 	if (version_compare($current_version,"1.1.0","<")){
@@ -56,13 +56,13 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		sql_alter("TABLE spip_organisations CHANGE type statut_juridique TINYTEXT NOT NULL DEFAULT ''"); // renomme le champ 'type' en 'statut_juridique'
 		sql_alter("TABLE spip_organisations CHANGE siret identification TINYTEXT NOT NULL DEFAULT ''"); // renomme le champ 'siret' en 'identification'
 		sql_alter("TABLE spip_organisations ADD activite TINYTEXT NOT NULL DEFAULT '' AFTER identification"); // ajoute le champ 'activite'
-		spip_log('Tables correctement passsées en version 1.2.1','contacts');
+		spip_log('Tables correctement passsees en version 1.2.1','contacts');
 		ecrire_meta($nom_meta_base_version, $current_version="1.2.1");
 	}
 	if (version_compare($current_version,"1.3.0","<")){
-		// les clés primaires des tables contacts et organisations
+		// les cles primaires des tables contacts et organisations
 		// passent sur le id_contact et id_organisation au lieu du id_auteur
-		// afin de gérer éventuellement des contacts/organisations autonomes.
+		// afin de gerer eventuellement des contacts/organisations autonomes.
 		sql_alter('TABLE spip_organisations DROP INDEX id_organisation');
 		sql_alter('TABLE spip_organisations DROP PRIMARY KEY');
 		sql_alter('TABLE spip_organisations CHANGE id_auteur id_auteur bigint(21) NOT NULL'); 
@@ -75,7 +75,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		sql_alter('TABLE spip_contacts CHANGE id_contact id_contact bigint(21) NOT NULL auto_increment PRIMARY KEY');
 		sql_alter('TABLE spip_contacts ADD INDEX (id_auteur)');
 		
-		spip_log('Tables correctement passsées en version 1.3.0','contacts');
+		spip_log('Tables correctement passsees en version 1.3.0','contacts');
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.0");
 	}
 
@@ -83,12 +83,12 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		if (!sql_alter("TABLE spip_contacts CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL")) {
 			spip_log('Probleme lors de la modif de la table spip_contacts','contacts');
 		} else {
-			spip_log('Table spip_contacts correctement passsée en version 1.3.1','contacts');
+			spip_log('Table spip_contacts correctement passsee en version 1.3.1','contacts');
 		}
 		if (!sql_alter("TABLE spip_organisations CHANGE descriptif descriptif TEXT DEFAULT '' NOT NULL")) {
 			spip_log('Probleme lors de la modif de la table spip_organisations','contacts');
 		} else {
-			spip_log('Table spip_organisations correctement passsée en version 1.3.1','contacts');
+			spip_log('Table spip_organisations correctement passsee en version 1.3.1','contacts');
 		}
 
 		ecrire_meta($nom_meta_base_version, $current_version="1.3.1");
@@ -103,7 +103,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		if ($auteurs) {
 			$inserts = array();
 			foreach ($auteurs as $r) {
-				// possibilité d'erreur sql si la ligne est déjà là.
+				// possibilitÃ© d'erreur sql si la ligne est dÃ©jÃ  lÃ .
 				// rien de dramatique
 				$inserts = array(
 					'id_contact' => $r['id_contact'],
@@ -164,7 +164,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		if ($auteurs) {
 			$inserts = array();
 			foreach ($auteurs as $r) {
-				// possibilité d'erreur sql si la ligne est déjà là.
+				// possibilitÃ© d'erreur sql si la ligne est dÃ©jÃ  lÃ .
 				// rien de dramatique
 				$inserts = array(
 					'id_organisation' => $r['id_organisation'],
@@ -182,7 +182,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 	}
 */
 
-	// coquille sur la clé de spip_organisations_liens
+	// coquille sur la cle de spip_organisations_liens
 	if (version_compare($current_version,"1.4.1","<")){
 		sql_alter('TABLE spip_organisations DROP INDEX id_contact');
 		sql_alter('TABLE spip_organisations ADD INDEX (id_organisation)');
@@ -212,7 +212,7 @@ function contacts_upgrade($nom_meta_base_version, $version_cible){
 		if ($contacts) {
 			$inserts = array();
 			foreach ($contacts as $r) {
-				// possibilité d'erreur sql si la ligne est déjà là.
+				// possibilitÃ© d'erreur sql si la ligne est dÃ©jÃ  lÃ .
 				// rien de dramatique
 				$inserts[] = array(
 					'id_organisation' => $r['id_organisation'],
