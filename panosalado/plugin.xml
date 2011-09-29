@@ -1,22 +1,22 @@
 <plugin>
-    <nom>Panosalado Modele</nom>
-    <auteur>Franck Barbenoire</auteur>
-    <version>0.3.2</version>
-    <etat>dev</etat>
-    <description>
-    Ce plugin propose un mod&egrave;le permettant d'afficher un panorama à l'aide de Panosalado.
-    </description>
-    <licence>GNU/GPL</licence>
-    <icon>img_pack/panosalado_logo.png</icon>
-    <lien>http://www.spip.net</lien>
-    <prefix>panosaladomodele</prefix>
-    <pipeline>
-    <nom>insert_head</nom>
-    <inclure>panosaladomodele_pipeline.php</inclure>
-    </pipeline>
-    <pipeline>
-    <nom>header_prive</nom>
-    <inclure>panosaladomodele_pipeline.php</inclure>
-    </pipeline>
-    <categorie>multimedia</categorie>
+	<nom>Panosalado</nom>
+	<slogan>Afficher un panorama &#224; l'aide de Panosalado</slogan>
+	<auteur>Franck Barbenoire</auteur>
+	<version>0.3.2</version>
+	<etat>dev</etat>
+	<description>Ce plugin fournit un mod&#232;le qui permet l’affichage d’images panoramiques sph&#233;riques (360&#176; x 180&#176;) et cylindriques (360&#176;). Il utilise la technologie Flash [PanoSalado->http://os.ivrpa.org/panosalado/]</description>
+	<licence>GNU/GPL</licence>
+	<icon>img_pack/panosalado_logo.png</icon>
+	<lien>http://www.spip-contrib.net/Panosalado</lien>
+	<prefix>panosaladomodele</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>panosaladomodele_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>panosaladomodele_pipeline.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]]" />
+	<categorie>multimedia</categorie>
 </plugin>
