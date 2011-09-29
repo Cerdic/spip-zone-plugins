@@ -1,7 +1,8 @@
 <plugin>
 	<nom>FreeRadio</nom>
+	<slogan>Lecteur de flux audio écrit en Flash actionscript</slogan>
 	<icon>img_pack/freeRadioLogo.png</icon>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
 	<categorie>multimedia</categorie>
 	<description>
@@ -41,9 +42,7 @@ Tous ces param&#232;tres sont optionnels et peuvent &ecirc;tre utilis&#233;s con
 	<auteur>	<!-- Auteur du plugin -->
 [Frank RUZZIN->mailto:franck@lededansdubocal.net], mai 2011
 	</auteur>
-	<lien>
-Plus d'infos ? - [Le dedans du bocal->http://lededansdubocal.net]
-	</lien>
+	<lien>http://lededansdubocal.net/Le-plugin-SPIP-FreeRadio-1-0.html</lien>
 	<prefix>freeradio</prefix>	
     <fonctions> <!-- fichier charge au calcul des squelettes (espace public) -->
 		freeradio_mes_fonctions.php
@@ -52,4 +51,5 @@ Plus d'infos ? - [Le dedans du bocal->http://lededansdubocal.net]
 		<nom>insert_head</nom>
 		<inclure>freeradio_pipeline.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
