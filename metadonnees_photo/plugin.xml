@@ -5,8 +5,14 @@
 			[en]Photo metadata (EXIF, IPTC and histogram)
 		</multi>
 	</nom>
+	<nom>
+		<multi>
+			[fr]Afficher les infos EXIF, GPS et IPTC d'un fichier JPEG.
+			[en]Display EXIF, IPTC and GPS data from a JPEG file.
+		</multi>
+	</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.2</version>
+	<version>1.2.0</version>
 	<icon>imgs_photo/logo-pb_plugin.png</icon>
 	<etat>stable</etat>
 	<description>
@@ -25,14 +31,13 @@ IPTC informations requires the "iptcparse" PHP function and use the class "class
 	</description>
 	<licence>LGPL</licence>
 	<fonctions>photo_infos_fonctions.php</fonctions>
-	<lien>http://plugins.spip.net/spip.php?article6</lien>
 	<prefix>photo_infos</prefix>
 	<pipeline>
 		<nom>afficher_contenu_objet</nom>
 		<action>pave</action>
 		<inclure>photo_infos.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
 
