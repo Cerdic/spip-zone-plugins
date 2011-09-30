@@ -1,20 +1,25 @@
 <plugin>
 	<nom>
 		<multi>
-		[fr]ACTIvit&eacute; du JOUR
-		[es]ACTIvidad del D&Iacute;A
+		[fr]ACTIvit&#233; du JOUR
+		[es]ACTIvidad del D&#205;A
 		[en]Daily ACTivity
 		</multi>
 	</nom>
 	<icon>img_pack/activ_jour.gif</icon>
-	<auteur>scoty@koakidi.com, ordilibre@yahoo.fr</auteur>
+	<auteur>[Scoty->scoty@koakidi.com], ordilibre@yahoo.fr</auteur>
 	<version>2.1.0</version>
 	<etat>dev</etat>
+	<slogan>
+		<multi>
+		[fr]Statistiques de l'activit&#233; &#233;ditoriale du jour et de la veille
+		</multi>
+	</slogan>
 	<description>
 		<multi>
-		[fr]Activit&eacute; du jour et de la veille : Visites, petitions, referers ... (spip 2.x)
-		[es]Actividad del d&iacute;a y de la v&iacute;spera: visitas, peticiones, referers ... (spip 2.x)
-		[en]Daily activity of today and the eve: visits, petitions, referers... (spip 2.x)
+		[fr]Activit&eacute; du jour et de la veille : Visites, petitions, referers...
+		[es]Actividad del d&iacute;a y de la v&iacute;spera: visitas, peticiones, referers...
+		[en]Daily activity of today and the eve: visits, petitions, referers...
 		</multi>
 	</description>
 	<prefix>actijour</prefix>
