@@ -5,12 +5,12 @@
 			[en]Photo metadata
 		</multi>
 	</nom>
-	<nom>
+	<slogan>
 		<multi>
 			[fr]Afficher les infos EXIF, GPS et IPTC d'un fichier JPEG
 			[en]Display EXIF, IPTC and GPS data from a JPEG file
 		</multi>
-	</nom>
+	</slogan>
 	<auteur>ARNO*</auteur>
 	<version>1.2.0</version>
 	<icon>imgs_photo/logo-pb_plugin.png</icon>
