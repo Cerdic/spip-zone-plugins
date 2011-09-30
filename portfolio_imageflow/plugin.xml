@@ -8,44 +8,28 @@
 	 -->
 
 	<nom>Portfolio ImageFlow</nom>
-	<auteur>
-		[Christian Paulus->http://www.quesaco.org/]<br />
-		- Auteur du script javascript : [Finn Rudolph->http://imageflow.finnrudolph.de/]<br />
-		- Auteur du script Reflect : [Richard Davey->http://reflection.corephp.co.uk/v3.php]<br />
-		- Adaptation du squelette pour SPIP : [St&#233;phane Kus->http://www.spip-contrib.net/ImageFlow-pour-SPIP]
-	</auteur>
+	<slogan>Portfolio avec effet de reflet sur les vignettes</slogan>
+	<auteur>[Christian Paulus->http://www.quesaco.org/], [Finn Rudolph (script JS)->http://imageflow.finnrudolph.de/], [Richard Davey (script Reflect)->http://reflection.corephp.co.uk/v3.php], [St&#233;phane Kus (squelette)->http://www.spip-contrib.net/ImageFlow-pour-SPIP]</auteur>
 
-	<description>
-		Portfolio et son menu avec effet de reflet sur les vignettes.
-	</description>
-	
-	<lien>
-		[Documentation sur www.quesaco.org->http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP]
-	</lien>
-	
-	<version>1.31</version>
+	<description>Ce plugin permet d’afficher un menu d&#233;roulant d’images et la s&#233;lection de l’une d’elles pour affichage. Les vignette du menu d&#233;roulant sont accompagn&#233;es d’un effet de reflet. La navigation entre les images peut &#234;tre réalis&#233;e en d&#233;pla&#231;ant le curseur sur la ligne ou via la roulette de la souris.</description>
+	<lien>http://www.quesaco.org/Portfolio-ImageFlow-pour-SPIP</lien>
+	<version>1.31.0</version>
 	<etat>stable</etat>
 	<icon>images/imageflow.png</icon>
-	
-	<!-- espace de nommage -->
 	<prefix>imageflow</prefix>
-	
 	<options>imageflow_options.php</options>
-
 	<fonctions>imageflow_fonctions.php</fonctions>
-	
 	<install>base/imageflow_init.php</install>
 	
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<inclure>inc/imageflow_pipeline_ajouter_onglets.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>inc/imageflow_pipeline_header_prive.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>multimedia</categorie>
 </plugin>
