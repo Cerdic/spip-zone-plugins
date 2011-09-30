@@ -1,7 +1,7 @@
 <plugin>
 <nom>Actes Etat civil</nom>
 <etat>stable</etat>
-<version>1.0.a</version>
+<version>1.0.1</version>
 <auteur>Dominique Wojylac / Sivu Inforoutes Ard&egrave;che</auteur>
 <description>
 Formulaire multi-&eacute;tapes de demande d'acte d'&eacute;tat civil en ligne
@@ -14,6 +14,6 @@ Formulaire multi-&eacute;tapes de demande d'acte d'&eacute;tat civil en ligne
 	<inclure>actes_etat_civil.php</inclure>
 </pipeline>
 <necessite id='cvtm' version='[0.1.0;]' />
-<necessite id='SPIP' version='[2.1.0;]' />
+<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 <categorie>communication</categorie>
 </plugin>
