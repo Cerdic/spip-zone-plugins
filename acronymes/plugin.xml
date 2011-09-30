@@ -1,19 +1,12 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Acronymes
-	</nom>
+	<nom>Acronymes</nom>
 	<icon>img_pack/acronym-24.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN
- 	[notre-ville.net->http://www.notre-ville.net]
-_ &#169; 2006 - Licence GPL
-	</auteur>
-	<version>0.13</version>
+	<auteur>Cedric MORIN</auteur>
+	<licence>GPL - (c) 2006</licence>
+	<version>0.13.0</version>
 	<version_base>0.1</version_base>
 	<install>base/acronymes_upgrade.php</install>
-	<etat>
-	stable
-	</etat>
+	<etat>stable</etat>
 	<description>
 	D&#233;tection et ajout des d&#233;finitions des acronymes &#224; partir d'une base syndiqu&#233;e ou d'une rubrique.
 	Les acronymes sont d&#233;finis dans des articles, le titre correspond &#224; l'acronyme
@@ -22,15 +15,11 @@ _ &#169; 2006 - Licence GPL
 
 	Pour d&#233;finir la rubrique et/ou le site, aller dessus dans l'interface d'admin et cliquer selectionnez-le dans le cadre blanc situ&#233; en bas &#224; gauche (ou en haut a droite si vous &#232;tes en &#233;cran large)
 
-	Une page de test ([spip.php?page=acronymes_voir->../spip.php?page=acronymes_voir]) boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
+	Une page de test boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
-	<prefix>
-	acronymes
-	</prefix>
-	<fonctions>
-	acronymes_filtres.php
-	</fonctions>
+	<prefix>acronymes</prefix>
+	<fonctions>acronymes_filtres.php</fonctions>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>acronymes_pipeline.php</inclure>
@@ -50,7 +39,7 @@ _ &#169; 2006 - Licence GPL
 		<action>config</action>
 		<inclure>acronymes_config.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
 	<necessite id="forms" version="[0.301;]" />
 	<chemin dir='' />
 	<categorie>edition</categorie>
