@@ -1,10 +1,9 @@
 <plugin>
 	<nom>Pub Banner</nom>
+	<slogan>Gestionnaire de banni&#232;res publicitaires</slogan>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
-	<licence>&#169; 2009 [Creative Commons BY-NC-SA|Creative Commons - Paternite - Pas d'Utilisation Commerciale - Distribution a l'Identique->http://creativecommons.org/licenses/by-nc-sa/3.0/]</licence>
+	<licence>Creative Commons BY-NC-SA</licence>
 	<description>
-{{Pub Banner :: Gestionnaire de banni&#232;res publicitaires}}
-
 Gestion et statistiques de banni&#232;res publicitaires pour un site SPIP int&#233;gr&#233;es aux squelettes ...
 
 {{UTILISATION}}
@@ -24,7 +23,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 {{CHARGEMENT AUTOMATIQUE / MISE A JOUR}}
 -* Ce plugin est disponible en chargement automatique ou en version mise &#224; jour &#224; l'adresse : [->http://projets.pierowbmstr.fr/SPIP_paquets/pub_banner.zip].
 	</description>
-	<version>1.22</version>
+	<version>1.22.0</version>
 	<version_base>0.4</version_base>
 	<etat>stable</etat>
  	<icon>img/ico-pubban.png</icon>
@@ -32,7 +31,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 	<fonctions>pubban_fonctions.php</fonctions>
 	<install>base/pubban_upgrade.php</install>
  	<prefix>pubban</prefix>
-	<lien>[Documentation->http://www.spip-contrib.net/?article3637]</lien>
+	<lien>http://www.spip-contrib.net/?article3637</lien>
 	<chemin dir='public' type='public' />
 	<chemin dir='prive' type='prive' />
 	<chemin dir='' />
@@ -61,7 +60,7 @@ Cette documentation est disponible, si le plugin est actif sur votre site, sur l
 		<titre>pubban:pubban_titre</titre>
 		<url>pubban_admin</url>
 	</bouton>
- 	<necessite id='SPIP' version='[2.0.0;]' />
+ 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<necessite id='spip_bonux' version='[1.3;]' />
 	<categorie>multimedia</categorie>
 	<traduire gestionnaire="salvatore" module="pubban" reference="fr" />
