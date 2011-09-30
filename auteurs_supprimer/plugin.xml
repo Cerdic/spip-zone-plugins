@@ -9,19 +9,21 @@
 	
 	 -->
 	<nom>Auteurs Supprimer (AuSu)</nom>
+	<slogan>Supprimer rapidement un ou plusieurs auteurs en un seul clic</slogan>
 	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
-	<version>1.00.05</version>
+	<version>1.0.5</version>
 	<icon>images/ausu-64.png</icon>
 	<etat>stable</etat>
 
-	<description><strong>AuSu</strong> permet de supprimer rapidement
-	un ou plusieurs auteurs via un seul formulaire.<br />
-	Si SPIP-Listes est pr&#233;sent, <strong>AuSu</strong> supprime &#233;galement
-	les abonnements et les formats de r&#233;ception des auteurs concern&#233;s.
+	<description>Supprimer plusieurs auteurs dans une base SPIP n&#233;cessite de la patience. Autant de clics que d’auteurs &#224; supprimer. Mais il faut bien le reconna&#238;tre, en production, le sc&#233;nario se pr&#233;sente rarement. Par contre, dans un site en d&#233;veloppement, les tests sont quotidiens. Cet outil est donc plus destin&#233; aux d&#233;veloppeurs de sites SPIP.
+
+L’interface du formulaire est des plus sommaire. C’est volontaire. Ce plugin n’est pas destin&#233; &#224; une utilisation conviviale. Juste &#234;tre efficace de temps en temps. Son utilisation sera probablement exceptionnelle.
+
+Si SPIP-Listes est pr&#233;sent, {{AuSu}} supprime &#233;galement	les abonnements et les formats de r&#233;ception des auteurs concern&#233;s.
 	</description>
 
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Formulaire-de-suppression-d-auteurs]</lien>
-	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<lien>http://www.quesaco.org/Formulaire-de-suppression-d-auteurs</lien>
+	<licence>GPL</licence>
 	
 	<prefix>ausu</prefix>
 	
@@ -30,6 +32,6 @@
 		<titre>Supprimer les auteurs</titre>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.1.10;]" />
-	<categorie>maintenance </categorie>
+	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
+	<categorie>maintenance</categorie>
 </plugin>
