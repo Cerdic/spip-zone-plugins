@@ -1,25 +1,26 @@
 <plugin>
 	<nom>Belles puces</nom>
 	<prefix>bellespuces</prefix>
-
-	<version>0.1</version>
+	<icon>bellespuces.png</icon>
+	
+	<version>0.1.1</version>
 	<etat>stable</etat>
-
+	
 	<auteur>[J&#233;r&#244;me Combaz->http://conseil-recherche-innovation.net/le-cri/jerome-combaz]</auteur>
 	<licence>GNU/GPL</licence>
-
-	<slogan>De belles puces normalis&eacute;es pour les listes de vos articles</slogan>
+	
+	<slogan>De vraies listes &agrave; puces avec &laquo;&nbsp;<code>-</code>&nbsp;&raquo;, comme &laquo;&nbsp;<code>-*</code>&nbsp;&raquo; !</slogan>
 	<description>
-Ce plugin remplace les puces <code>-</code> (tiret) des articles par des puces <code>-*</code> g&eacute;n&eacute;ratrices de 
-vraies listes HTML non ordonn&eacute;es (&lt;li&gt;...)
+	Ce plugin traite le raccourci SPIP &laquo;&nbsp;<code>-</code>&nbsp;&raquo; comme &laquo;&nbsp;<code>-*</code>&nbsp;&raquo;, g&eacute;n&eacute;rant de vraies listes (<code>ul/li</code>) dans les deux cas.
 	</description>
-
+	<lien>http://www.spip-contrib.net/3724</lien>
+	
 	<pipeline>
 		<nom>pre_typo</nom>
 		<action>pre_typo</action>
-		<inclure>bellespuces.php</inclure>
+	<inclure>bellespuces.php</inclure>
 	</pipeline>
-
+	
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[1.9.0;)" />
 </plugin>
