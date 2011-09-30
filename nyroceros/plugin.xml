@@ -8,7 +8,7 @@
 	<description>Fen&#234;tre de dialogue ou de galerie photo bas&#233;e sur le script [jQuery Nyromodal->http://plugins.jquery.com/project/nyroModal]</description>
 	<lien>http://www.spip-contrib.net/Nyroceros,2909</lien>
 	<prefix>Nyro</prefix>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	<utilise id="palette" version="[1.0;]" />
 	<pipeline>
