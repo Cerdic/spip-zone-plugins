@@ -1,13 +1,12 @@
 <plugin>
 	<nom>SPIP-Album</nom>
-	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr] &#224; partir d&#039;une ide&#233;es de [Matthieu->http://www.plugandspip.com/?article17]
-_ &#169; 2006-2009 - Distribu&#233; sous licence GNU/GPL.</auteur>
-	<lien>http://xebiaut.free.fr/?article287</lien><!-- URI de documentation -->
-	<version>2.05</version>
+	<slogan>Afficher d'une galerie de photo</slogan>
+	<auteur>[Xavier BUROT->mailto:xebiaut@free.fr] &#224; partir d&#039;une ide&#233;es de [Matthieu->http://www.plugandspip.com/?article17]</auteur>
+	<licence>&#169; 2006-2009 GNU/GPL</licence>
+	<lien>http://xebiaut.free.fr/?article287</lien>
+	<version>2.5.0</version>
 	<etat>test</etat>
-	<description>Plugin permettant l'affichage d'une galerie de photo
-		Pour plus d&#039;information, consulter la [Documentation->http://xebiaut.free.fr/?article287].
-	</description>
+	<description>Ce plugin permet l'affichage d'une galerie de photo en utilisant le plugin [jQuery ImageBox->http://interface.eyecon.ro/docs/imagebox]</description>
 	<prefix>album</prefix>
 	<icon>img_pack/album.png</icon>
 	<options>inc/album_options.php</options>
@@ -20,6 +19,6 @@ _ &#169; 2006-2009 - Distribu&#233; sous licence GNU/GPL.</auteur>
 		<nom>insert_head</nom>
 		<inclure>album_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>multimedia</categorie>
 </plugin>
