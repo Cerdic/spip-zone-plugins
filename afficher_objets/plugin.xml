@@ -1,25 +1,24 @@
 <plugin>
-	<nom><multi>[fr]Afficher Objets[en]View objects</multi></nom>
+	<nom>
+		<multi>
+			[fr]Afficher Objets
+			[en]View objects
+		</multi>
+	</nom>
 	<version>1.2.0</version>
 	<prefix>afficher_objets</prefix>
 	
 	<!-- Oxygen theme spreadsheet : http://www.iconfinder.com/icondetails/8909/128/spreadsheet_icon -->
 	<icon>afficher_objets-64.png</icon>
-
 	<etat>test</etat>
-
 	<auteur>cerdic, marcimat</auteur>
 	<licence>GNU/GPL</licence>
 	<description>
-	Permet de présenter les listes d'éléments de l'espace privé
-	sous forme de squelettes SPIP.
-
-	{Ce plugin est intégré à SPIP 2.3-dev}
+	Permet de pr&#233;senter les listes d'&#233;l&#233;ments de l'espace priv&#233; sous forme de squelettes SPIP. {Ce plugin est int&#233;gr&#233; à SPIP 3}
 	</description>
 
 	<fonctions>afficher_objets_fonctions.php</fonctions>
-
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.2;]" />
-	<necessite id="SPIP" version="[2.0.10;]" />
 	<categorie>navigation</categorie>
 </plugin>
