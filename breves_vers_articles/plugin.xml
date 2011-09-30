@@ -1,9 +1,10 @@
 <plugin>
-	<nom>Breves vers articles</nom>
-	<auteur>Didier, JLuc, [http://www.ouhpla.net]</auteur>
+	<nom>Br&#232;ves vers articles</nom>
+	<slogan>Convertir des brèves en articles</slogan>
+	<auteur>Didier, [JLuc->http://www.ouhpla.net]</auteur>
 	<licence>GNU/GLP</licence>
 	<description>
-	Transforme les br&egrave;ves d'un site en articles, les range dans une rubrique, leur attribue un auteur, fait suivre les logos et les forums, et convertit les liens raccourcis, permet d'assurer la redirection vis a vis des moteurs de recherche.
+	Transforme les br&#232;ves d'un site en articles, les range dans une rubrique, leur attribue un auteur, fait suivre les logos et les forums, et convertit les liens raccourcis, permet d'assurer la redirection vis a vis des moteurs de recherche.
 	</description>
 	<lien>http://www.spip-contrib.net/3835</lien>
 	<categorie>maintenance</categorie>
@@ -23,5 +24,6 @@
 		<url>breves_vers_articles</url>
 		<titre>Breves vers articles</titre>
 	</bouton>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
 
