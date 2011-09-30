@@ -2,13 +2,13 @@
   <nom>Agr&#233;gateurs sql</nom>
   <auteur>Renato, Cedric Morin, Marcimat, BoOz</auteur>
   <icon></icon>
-  <licence>(c) 2008 GPL</licence>
-  <version>1.0</version>
+  <licence>GPL - (c) 2008</licence>
+  <version>1.0.0</version>
   <etat>test</etat>
   <description>Ajout des expressions, notamment d'agr&#233;gation, dans le select sql : count(), sum(), max(), etc...</description>
   <lien></lien>
   <fonctions>public/agregateurs_sql_criteres.php</fonctions>
   <fonctions>public/agregateurs_sql_balises.php</fonctions>
   <prefix>agregateurs_sql</prefix>
-  <necessite id='SPIP' version='[2.0.0;]' />
+  <necessite id='SPIP' version='[2.0.0;2.0.99]' />
 </plugin>
