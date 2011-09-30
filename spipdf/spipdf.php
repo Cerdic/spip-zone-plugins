@@ -124,10 +124,10 @@ function spipdf_nettoyer_html($html,$params_pdf=array()) {
     function remplaceIdParName($matches) { return str_replace('id=\'', 'name=\'', $matches[0]); }
 	$html = preg_replace_callback($patterns_note, 'remplaceIdParName', $html);
 
-    // float sur les puces graphiques
+    // float sur les puces graphiques TODO
 	$patterns_puce = '/<a.*href.*class=\'puce\'.*>/iUms';
     function remplaceFloatPuce($matches) { return str_replace('style=\'', 'style=\'float:left;', $matches[0]); }
-	$html = preg_replace_callback($patterns_puce, 'remplaceFloatPuce', $html);
+	//$html = preg_replace_callback($patterns_puce, 'remplaceFloatPuce', $html);
     //img src="local/cache-vignettes/L8xH11/puce-32883.gif" class="puce" alt="-" style="height: 11px; width: 8px;" height="11" width="8">
 
 	// supprimer les dl autour des images centrer
