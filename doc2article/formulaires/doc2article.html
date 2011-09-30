@@ -6,7 +6,7 @@
 	<div>
 	#ACTION_FORMULAIRE{#ENV{action}}
 	<ul>
-		[<li class="select_fihciers[ (#ENV**{erreurs}|table_valeur{fichiers}|oui)erreur]">
+		[<li class="select_fichiers[ (#ENV**{erreurs}|table_valeur{fichiers}|oui)erreur]">
 			<label for="fichiers"><:doc2article:label_fichiers:></label>
 			[<span class="erreur_message">(#ENV**{erreurs}|table_valeur{fichiers})</span>]
 			<p class='explication'><:doc2article:explication_fichiers{repertoire=tmp/upload}:></p>
