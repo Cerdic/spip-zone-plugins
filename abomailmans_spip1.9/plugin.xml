@@ -30,6 +30,6 @@
 		<inclure>abomailmans_interface.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;1.9.99]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
 	<categorie>communication</categorie>
 </plugin>
