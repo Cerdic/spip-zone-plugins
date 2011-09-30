@@ -1,11 +1,12 @@
 <plugin>
 	<nom>En travaux</nom>
+	<slogan>Indiquer une phase de maintenance</slogan>
 	<icon>prive/themes/spip/images/entravaux-32.png</icon>
 	<auteur><multi>
-	[fr][Arnaud Ventre->ventrea@gmail.com], [C&eacute;dric Morin->http://www.yterium.com] - 2006-2009
-	[en][Arnaud Ventre->ventrea@gmail.com], [C&eacute;dric Morin->http://www.yterium.com] - 2006-2009
+	[fr][Arnaud Ventre->ventrea@gmail.com], [C&#233;dric Morin->http://www.yterium.com] - 2006-2009
+	[en][Arnaud Ventre->ventrea@gmail.com], [C&#233;dric Morin->http://www.yterium.com] - 2006-2009
 	_ Translated from French by Etienne B. [->http://www.loiseau2nuit.net]
-	[it][Arnaud Ventre->ventrea@gmail.com], [C&eacute;dric Morin->http://www.yterium.com] - 2006-2009
+	[it][Arnaud Ventre->ventrea@gmail.com], [C&#233;dric Morin->http://www.yterium.com] - 2006-2009
 	</multi>
 	</auteur>
 	<licence>GPL</licence>
@@ -13,10 +14,9 @@
 	<version_base>0.2.0</version_base>
 	<etat>stable</etat>
 	<description><multi>
-	[fr] &Agrave; activer avant une phase de maintenance, ce plugin affiche aussit&ocirc;t une page d'avertissement, <strong>&agrave; la place</strong> du site public.
-	_ Attention : seul le webmestre acc&eacute;de encore &agrave; l'espace priv&eacute; et au site public.
-	[en] Displays a defined page during maintenance period on all your public pages.
-	[it] Consente di visualizzare un messaggio personalizzabile durante una sessione di manutenzione su tutte le pagine del sito pubblico.
+	[fr]&#192; activer avant une phase de maintenance, ce plugin affiche aussit&#244;t une page d'avertissement, {{&#224; la place}} du site public. Attention : seul le webmestre acc&#232;de encore &agrave; l'espace priv&#233; et au site public.
+	[en]Displays a defined page during maintenance period on all your public pages.
+	[it]Consente di visualizzare un messaggio personalizzabile durante una sessione di manutenzione su tutte le pagine del sito pubblico.
 	</multi></description>
 	<lien>http://www.spip-contrib.net/plugin-en-travaux-2-0</lien>
 	<prefix>entravaux</prefix>
@@ -31,6 +31,6 @@
 	<pipeline>
 		<nom>affiche_milieu</nom>
 	</pipeline>
-	<necessite id="SPIP" version="[3.0.0-dev;3.0.*]" />
+	<necessite id="SPIP" version="[3.0.0;3.0.99]" />
 	<categorie>maintenance</categorie>
 </plugin>
