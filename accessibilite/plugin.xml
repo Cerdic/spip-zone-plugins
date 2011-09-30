@@ -1,23 +1,14 @@
 <plugin>
-	<nom>
-	Accessibilit&#233;
-	</nom>
-	<auteur>
-	Goetsu et RealET &#169; 2011 - GNU/GPL
-	</auteur>
-	<version>
-	0.8.3
-	</version>
-	<etat>
-	dev
-	</etat>
+	<nom>Accessibilit&#233;</nom>
+	<auteur>Goetsu et [RealET->http://www.spip-contrib.net/_RealET_]</auteur>
+	<licence>GNU/LGPL - (c) 2011</licence>
+	<version>0.8.3</version>
+	<etat>dev</etat>
 	<description>
 	Diverses am&#233;liorations d'acessibilit&#233;.
 	</description>
 	<lien>http://www.spip-contrib.net/?article3547</lien>
-	<prefix>
-	Accessibilite
-	</prefix>
+	<prefix>Accessibilite</prefix>
 	<icon>img_pack/wcag1AAA.png</icon>
 	<pipeline>
 		<nom>pre_liens</nom>
@@ -25,7 +16,7 @@
 	</pipeline>
 	
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<utilise id="gestdoc" version="[1.1.2;]" />
 	<utilise id="medias" version="[1.5.0;]" />
 	<categorie>navigation</categorie>
