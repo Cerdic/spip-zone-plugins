@@ -3,7 +3,7 @@
 	categorie="communication"
 	version="0.4.0"
 	etat="stable"
-	compatibilite="[3.0.0-alpha2;3.0.*]"
+	compatibilite="[2.0.10;3.0.*]"
 	documentation="http://www.spip-contrib.net/Google-1"
 	logo="images/plusone-32.png"
 >
