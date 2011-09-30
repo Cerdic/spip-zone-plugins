@@ -12,7 +12,7 @@
 		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
 		</multi>
 	</licence>
-	<version>0.2.0</version>
+	<version>0.3.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<icon>images/fb-login-64.png</icon>
@@ -42,6 +42,10 @@
 	</pipeline>
 	<pipeline>
 		<nom>formulaire_verifier</nom>
+		<inclure>fblogin_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>formulaire_traiter</nom>
 		<inclure>fblogin_pipelines.php</inclure>
 	</pipeline>
 	<categorie>auteur</categorie>

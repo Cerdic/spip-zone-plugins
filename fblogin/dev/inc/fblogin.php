@@ -116,7 +116,6 @@ function fblogin_demander_authentification($retour){
  * renvoie une chaîne d'erreur en cas d'erreur
  * un tableau decrivant l'utilisateur en cas de succès
  *
- * @param string $retour
  * @return mixed
  */
 function fblogin_terminer_authentification(){
@@ -144,6 +143,7 @@ function fblogin_terminer_authentification(){
 			$identite['email'] = $email;
 			$identite['nom'] = isset($profil['name']) ? $profil['name'] : $identite['login'];
 			$identite['fb_uid'] = $fb_uid;
+			// Un pipeline pour ajouter des informations en plus de celles de base, à partir du profil récupéré
 			$identite = pipeline(
 				'fblogin_recuperer_identite',
 				array(
