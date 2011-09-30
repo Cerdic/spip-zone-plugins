@@ -6,18 +6,21 @@
 	
 	 -->
 	<nom>Articles Lister (ALis)</nom>
+	<slogan>Un inventaire de vos articles</slogan>
 	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
-	<version>1.00.00</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
 	<icon>images/articles-64.png</icon>
 	
-	<description><strong>ALis</strong> pour lister tous les articles du site.
-		Propose un lien pour l'édition de l'article en espace privé.
+	<description>
+		Des dizaines, des centaines d’articles disponibles sur votre site SPIP ? Comment rep&#233;rer rapidement les articles obsol&#232;tes, ceux m&#233;ritant une optimisation, le nombre de visites, la popularit&#233; ?
+
+Le plugin Articles_Lister (Alis) propose d’ajouter au menu des statistiques un tableau des articles, sorte d’inventaire, permettant de consulter en quelques clics ces informations.
 	</description>
 
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/plugin-spip-articles-lister]</lien>
+	<lien>http://www.quesaco.org/plugin-spip-articles-lister</lien>
 	
-	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<licence>GPL v3</licence>
 	
 	<prefix>alis</prefix>
 	
@@ -33,6 +36,6 @@
 		<titre>Lister les articles</titre>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.1.6;]" />
+	<necessite id="SPIP" version="[2.1.6;2.1.99]" />
 	<categorie>maintenance</categorie>
 </plugin>
