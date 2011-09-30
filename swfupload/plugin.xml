@@ -1,14 +1,12 @@
 <plugin>
 	<nom>SWFupload</nom>
+	<slogan>T&#233;l&#233;chargement par lot de fichiers sans FTP</slogan>
 	<auteur>Phil 2008, [erational->http://www.erational.org]</auteur>
 	<version>0.6.1</version>
 	<etat>dev</etat>
-	<description>Permet de t&eacute;l&eacute;charger des images par lot dans le dossier upload sans acc&egrave;s FTP
-_ Permet de t&eacute;l&eacute;charger des images par dans un article.
-_ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
-  </description>
+	<description>Ce plugin permet de t&#233;l&#233;charger des images par lot, sans acc&#232;s FTP, directement dans un article. Les fichiers t&#233;l&#233;charg&#233;s apparaissent apr&#232;s avoir actualis&#233; la page. Ils sont de plus accessibles dans le dossier upload.</description>
 	<icon>images/swfupload-24.png</icon>
-	<lien>[->http://www.spip-contrib.net/Un-plugin-SWFUpload]</lien>
+	<lien>http://www.spip-contrib.net/Un-plugin-SWFUpload</lien>
 	<prefix>swfupload</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
@@ -23,6 +21,6 @@ _ si vous avez cfg: [configuration->index.php?exec=cfg&amp;cfg=swfupload]
     	<nom>affiche_milieu</nom>
         <inclure>swfupload_pipelines.php</inclure>
     </pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
