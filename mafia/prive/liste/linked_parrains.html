@@ -1,0 +1,42 @@
+[(#SET{defaut_tri,#ARRAY{
+	nom,1,
+	type_liaison,1
+}})
+]<B_mafias>
+#ANCRE_PAGINATION
+<div class="liste-elements mafias">
+<table class='spip liste'>
+[<caption><strong class="caption">(#ENV*{titre,<:mafia:info_toutes_mafias:>})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class="logo"></th>
+			<th class='nom'>[(#TRI{nom,<:info_nom:>,ajax})]</th>
+			[(#ENV{court}|non)
+			<th class="type">[(#TRI{type_liaison,<:mafia:label_type_liaison:>,ajax})]</th>
+			]
+			<th class='action'></th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_mafias(MAFIAS){id_filleul}{tri #ENV{order,id_filleul},#GET{defaut_tri}}{pagination #ENV{nb,10}}>
+		[(#REM) sur boucle pour le crayon ]
+		<tr class="[(#_mafias:COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+			<td class="logo"><a href="[(#ID_AUTEUR|generer_url_entite{auteur})]">[(#LOGO_AUTEUR|sinon{[<img src="(#CHEMIN{images/co_mafia-24.png})" alt="Picto mafia" class="spip_logos" />]}|image_reduire{20,26})]</a>
+			<td class='nom'><a href="[(#ID_PARRAIN|generer_url_entite{auteur})]">
+					#INFO_NOM{auteur,#ID_PARRAIN}
+			</a></td>
+			<td class='action'>[(#AUTORISER{modifier, auteur, #ID_FILLEUL}|oui)
+				[(#BOUTON_ACTION{
+					[(#CHEMIN{images/delier-16.png}|balise_img{<:mafia:delier_mafia:>})],
+					[(#URL_ACTION_AUTEUR{delier_filleul,[(#ID_PARRAIN)/#ID_FILLEUL],[(#ENV{redirect,#SELF})]})],
+					ajax,<:mafia:confirmer_delier_parrain:>})]
+			]</td>
+		</tr>
+	</BOUCLE_mafias>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_mafias>[
+<div class="liste-elements mafias"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_mafias>

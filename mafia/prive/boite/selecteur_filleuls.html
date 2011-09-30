@@ -1,0 +1,34 @@
+[(#VAL{inc/presentation}|include_spip|oui)]
+[(#SET{identifiant,[(#VAL{mafias_#ENV{id_auteur}})]})]
+[(#SET{plie,0})]
+[(#CHEMIN{images/mafia-48.png}|image_reduire{24}|extraire_attribut{src}|debut_cadre_relief{#EVAL{true},'',[(#VAL{<:mafia:infos_mafia:>}|bouton_block_depliable{[(#GET{plie}?{#EVAL{true},#EVAL{false}})],#GET{identifiant}})],0})]
+
+<BOUCLE_est_un_parrain(MAFIAS){id_parrain=#ID_AUTEUR}>
+</BOUCLE_est_un_parrain>
+		[(#INCLURE{fond=prive/liste/linked_filleuls,id_parrain=#ID_AUTEUR,
+			titre=<:mafia:les_filleuls:>,
+			court=oui,ajax})]
+</B_est_un_parrain>
+
+
+
+<BOUCLE_est_un_filleul(MAFIAS){id_filleul=#ID_AUTEUR}>
+</BOUCLE_est_un_filleul>
+		[(#INCLURE{fond=prive/liste/linked_parrains,id_filleul=#ID_AUTEUR,
+			titre=<:mafia:les_parrains:>,
+			court=oui,ajax})]
+</B_est_un_filleul>
+
+	
+[(#GET{plie}|debut_block_depliable{#GET{identifiant}})]
+
+	[(#AUTORISER{modifier,auteur,#ENV{id_auteur}})
+				<h3 class='h3'><:mafia:lier_filleul:></h3>
+				<div class='ajax'>
+				[(#FORMULAIRE_LIER_FILLEUL{#ENV{id_auteur}})]
+				</div>
+	]
+	
+[(#GET{plie}|fin_block)]
+
+[(#EVAL{true}|fin_cadre_relief)]
