@@ -12,7 +12,7 @@
 	<categorie>navigation</categorie>
 
 	<auteur>cy_altern</auteur>
-	<licence>GNU/LGPL - &#169; 2010</licence>
+	<licence>GNU/LGPL - (c) 2010</licence>
 
 	<slogan>Afficher un article sur la page de sommaire du site</slogan>
 	<description>
@@ -33,6 +33,6 @@ Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il 
 		<inclure>aa_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<necessite id="cfg" version="[1.0.0;]" />
 </plugin>
