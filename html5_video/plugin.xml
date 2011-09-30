@@ -1,8 +1,13 @@
 <plugin>
- <nom>Video HTML5</nom>
-  <version>2010.05.20</version>
- <prefix>html5_video</prefix>
- <auteur>Pierre Rudloff ([contact->mailto:rudloff.p@gmail.com])</auteur>
- <description>Ce plugin remplace la balise &lt;video&gt; par un lecteur en HTML5.</description>
- <categorie>multimedia</categorie>
+	<nom>Vid&#233;o HTML5</nom>
+	<slogan>Afficher des vid&#233;os en HTML5</slogan>
+	<version>0.1.0</version>
+	<prefix>html5_video</prefix>
+	<auteur>[Pierre Rudloff->mailto:rudloff.p@gmail.com]</auteur>
+	<description>Ce plugin remplace la balise <code><video></code> par un lecteur en HTML5. Il utilise le code propos&#233; par [Video for Everybody!->http://camendesign.com/code/video_for_everybody].
+	
+	{{Ce plugin n’est plus mis &#224; jour ! Vous devriez utiliser [ce plugin->http://www.spip-contrib.net/Plugin-Video-s] &#224; la place.}}</description>
+	<lien>http://www.spip-contrib.net/Plugin-video-HTML5</lien>
+	<necessite id="SPIP" version='[2.1.0;2.1.99]' />
+	<categorie>multimedia</categorie>
 </plugin>
