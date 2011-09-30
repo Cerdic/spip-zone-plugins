@@ -11,19 +11,19 @@
 	<icon>images/xifish.gif</icon>
 	<description><multi>
 [en]This plugin provides a template which generate a [XSPF->http://www.xspf.org/] format documents list.
-_  
-_ It proposes multimedia players models such as:
-_ {{&#60;buttonplayer123&#62;}}  where 123 is an id article providing mp3, {{&#60;slimplayer123&#62;}} and {{&#60;musicplayer123&#62;}}. [Musicplayer->http://musicplayer.sourceforge.net/]
-_ {{&#60;rotator123&#62;}} where 123 is an id article providing images and {{&#60;mediaplayer123&#62;}}. [Jeroen Wijering->http://www.longtailvideo.com/players/]
+
+It proposes multimedia players models such as:
+-* <code><buttonplayer123></code>  where 123 is an id article providing mp3, <code><slimplayer123></code> and <code><musicplayer123></code>. [Musicplayer->http://musicplayer.sourceforge.net/]
+-* <code><rotator123></code> where 123 is an id article providing images and <code><mediaplayer123></code>. [Jeroen Wijering->http://www.longtailvideo.com/players/]
 
 Beware that the three last players licence is half-commerciale, this is why they are not included in this distribution. 
 [fr]Ce plugin fournit un squelette produisant des listes de documents au format [XSPF->http://www.xspf.org/].
 
 Il est actuellement accompagn&#233; de cinq mod&#232;les pour agr&#233;menter votre site :
-_ {{&#60;buttonplayer123&#62;}}  o&#249; 123 est un id article fournissant les mp3, {{&#60;slimplayer123&#62;}} et {{&#60;musicplayer123&#62;}}. [Musicplayer->http://musicplayer.sourceforge.net/]
-_ {{&#60;rotator123&#62;}} o&#249; 123 est un id article fournissant les images et {{&#60;mediaplayer123&#62;}}. [Jeroen Wijering->http://www.longtailvideo.com/players/]
-_ 
-_ Attention, la licence de ces trois derniers lecteurs est semi-commerciale, c'est pourquoi ils ne sont pas inclus dans cette contribution.
+-* <code><buttonplayer123></code>  o&#249; 123 est un id article fournissant les mp3, <code><slimplayer123></code> et <code><musicplayer123></code>. [Musicplayer->http://musicplayer.sourceforge.net/]
+-* <code><rotator123></code> o&#249; 123 est un id article fournissant les images et <code><mediaplayer123></code>. [Jeroen Wijering->http://www.longtailvideo.com/players/]
+
+Attention, la licence de ces trois derniers lecteurs est semi-commerciale, c'est pourquoi ils ne sont pas inclus dans cette contribution.
 
 Le logo xifish.gif est la propri&#233;t&#233; de [->http://www.xiph.org/], tout droit r&#233;serv&#233;
 _ Utilisation [swfobject.js->http://blog.deconcept.com/swfobject/] pour faciliter l'inclusion des contenus Flash.
