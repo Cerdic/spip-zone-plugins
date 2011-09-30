@@ -33,6 +33,6 @@
 	<noisette>modeles/nivoslider_doc.html</noisette>
 	<noisette>modeles/nivoslider_rub.html</noisette>
 	<categorie>multimedia</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.0.99]]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<necessite id='cfg' version='[1.16.0;]' />
 </plugin>
