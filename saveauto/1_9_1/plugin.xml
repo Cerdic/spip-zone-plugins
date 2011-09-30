@@ -1,52 +1,51 @@
 <plugin>
-        <nom> <!-- Nom du plugin -->
-          <multi>
-					[fr]sauvegarde automatique
-					[it]Salvataggio automatico
-					</multi>
-        </nom>
-        <auteur>        <!-- Auteur du plugin -->
-          <multi>
-					[fr]cy_altern d'apr&#232;s une contrib de Silicium (silicium@japanim.net)
-					[it]cy_altern - basato su un contrib di Silicium (silicium@japanim.net)
-					</multi>
-        </auteur>
-        <version>
-        0.2
-        </version>
-        <etat>
-          test
-        </etat>
-        <description>
-        <multi>
-					[fr]Permet de r&#233;aliser une sauvegarde de toute la base de donn&#233;es utilis&#233;e par SPIP.
-          Le fichier .gz obtenu est stock&#233; dans un r&#233;pertoire (par d&#233;faut ecrire/data, configurable)
-          et peut &#234;tre envoy&#233; par mail.<br />
-          La sauvegarde est d&#233;clench&#233;e lors d'une visite dans l'espace priv&#233; si le d&#233;lais
-          depuis la derni&#232;re sauvegarde est sup&#233;rieur &#224; celui configur&#233; comme fr&#233;quence.
-          Les sauvegardes stock&#233;es consid&#233;r&#233;es comme obsol&#232;tes (en fonction du param&#232;tre de config correspondant)
-          sont automatiquement d&#233;truites.
-          [it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
-          Il file .gz o .sql ottenuto &#232; memorizzato all'interno di una cartella (in maniera predefinita ecrire/data, configurabile)
-          e pu&ograve; essere inviato per posta elettronica.<br />
-          Il salvataggio &#232; effettuato al momento della visita della redazione se l'ultimo salvataggio &#232;
-          pi&ugrave; vecchio della frequenza di salvataggio specificata nella configurazione.
-          I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
-          vengono automaticamente cancellati.
-          </multi>
-        </description>
-		<lien>
-		[Documentation sur contrib->http://www.spip-contrib.net/?article1442],
-		et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=saveauto]
-		</lien>
-        <icon>img_pack/saveauto-24.png</icon>
-        <prefix>
-          saveauto
-        </prefix>
-        <pipeline>
-        		<nom>ajouter_boutons</nom>
-            <inclure>inc_saveauto.php</inclure>
-        </pipeline>	
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<nom>
+		<multi>
+			[fr]sauvegarde automatique
+			[it]Salvataggio automatico
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+			[fr]Sauvegarde automatique de la base de donn&#233;es de SPIP
+			[it]Salvataggio automatico di la base dati utilizzata da SPIP
+		</multi>
+	</slogan>
+	<auteur>
+		<multi>
+			[fr]cy_altern d'apr&#232;s une contrib de Silicium (silicium@japanim.net)
+			[it]cy_altern - basato su un contrib di Silicium (silicium@japanim.net)
+		</multi>
+	</auteur>
+	<version>0.2.0</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+			[fr]Permet de r&#233;aliser une sauvegarde de toute la base de donn&#233;es utilis&#233;e par SPIP.
+			Le fichier .gz obtenu est stock&#233; dans un r&#233;pertoire (par d&#233;faut ecrire/data, configurable)
+			et peut &#234;tre envoy&#233; par mail.
+			
+			La sauvegarde est d&#233;clench&#233;e lors d'une visite dans l'espace priv&#233; si le d&#233;lais
+			depuis la derni&#232;re sauvegarde est sup&#233;rieur &#224; celui configur&#233; comme fr&#233;quence.
+			Les sauvegardes stock&#233;es consid&#233;r&#233;es comme obsol&#232;tes (en fonction du param&#232;tre de config correspondant)
+			sont automatiquement d&#233;truites.
+			[it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
+			Il file .gz o .sql ottenuto &#232; memorizzato all'interno di una cartella (in maniera predefinita ecrire/data, configurabile)
+			e pu&ograve; essere inviato per posta elettronica.
+			
+			Il salvataggio &#232; effettuato al momento della visita della redazione se l'ultimo salvataggio &#232;
+			pi&ugrave; vecchio della frequenza di salvataggio specificata nella configurazione.
+			I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
+			vengono automaticamente cancellati.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/?article1442</lien>
+	<icon>img_pack/saveauto-24.png</icon>
+	<prefix>saveauto</prefix>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>inc_saveauto.php</inclure>
+	</pipeline>	
+	<necessite id="SPIP" version="[1.9.0;1.9.1]" />
 	<categorie>maintenance</categorie>
 </plugin>

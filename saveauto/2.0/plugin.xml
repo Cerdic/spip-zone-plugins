@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom>
 		<multi>
-[fr]Sauvegarde automatique
-[it]Salvataggio automatico
+			[fr]sauvegarde automatique
+			[it]Salvataggio automatico
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]Sauvegarde automatique de la base de donn&#233;es de SPIP
+			[it]Salvataggio automatico di la base dati utilizzata da SPIP
+		</multi>
+	</slogan>
 	<auteur>
 		<multi>
-[fr]cy_altern, Eric Lupinacci d'apr&#232;s une contrib de Silicium (silicium@japanim.net)
-[it]cy_altern, Eric Lupinacci - basato su un contrib di Silicium (silicium@japanim.net)
+			[fr]cy_altern, Eric Lupinacci d'apr&#232;s une contrib de Silicium (silicium@japanim.net)
+			[it]cy_altern, Eric Lupinacci - basato su un contrib di Silicium (silicium@japanim.net)
 		</multi>
 	</auteur>
 	<version>0.5.3</version>
@@ -17,28 +23,28 @@
 	<prefix>saveauto</prefix>
 	<description>
 		<multi>
-[fr]Permet de r&#233;aliser une sauvegarde de toute la base de donn&#233;es utilis&#233;e par SPIP.
-Le fichier .gz obtenu est stock&#233; dans un r&#233;pertoire (par d&#233;faut /tmp, configurable)
-et peut &#234;tre envoy&#233; par mail.
-
-La sauvegarde est d&#233;clench&#233;e lors d'une visite dans l'espace priv&#233; si le d&#233;lais
-depuis la derni&#232;re sauvegarde est sup&#233;rieur &#224; celui configur&#233; comme fr&#233;quence.
-Les sauvegardes stock&#233;es consid&#233;r&#233;es comme obsol&#232;tes (en fonction du param&#232;tre de config correspondant)
-sont automatiquement d&#233;truites.
-
-{{Attention !}} cette version de {{Sauvegarde automatique}}, compatible avec SPIP 2.0, n&#233;cessite le plugin {{CFG}} pour fonctionner !
-
-[it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
-Il file .gz o .sql ottenuto &#232; memorizzato all'interno di una cartella (in maniera predefinita /tmp, configurabile)
-e pu&ograve; essere inviato per posta elettronica.
-
-Il salvataggio &#232; effettuato al momento della visita della redazione se l'ultimo salvataggio &#232;
-pi&ugrave; vecchio della frequenza di salvataggio specificata nella configurazione.
-I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
-vengono automaticamente cancellati.
+			[fr]Permet de r&#233;aliser une sauvegarde de toute la base de donn&#233;es utilis&#233;e par SPIP.
+			Le fichier .gz obtenu est stock&#233; dans un r&#233;pertoire (par d&#233;faut /tmp, configurable)
+			et peut &#234;tre envoy&#233; par mail.
+			
+			La sauvegarde est d&#233;clench&#233;e lors d'une visite dans l'espace priv&#233; si le d&#233;lais
+			depuis la derni&#232;re sauvegarde est sup&#233;rieur &#224; celui configur&#233; comme fr&#233;quence.
+			Les sauvegardes stock&#233;es consid&#233;r&#233;es comme obsol&#232;tes (en fonction du param&#232;tre de config correspondant)
+			sont automatiquement d&#233;truites.
+			
+			{{Attention !}} cette version de {{Sauvegarde automatique}}, compatible avec SPIP 2.0, n&#233;cessite le plugin {{CFG}} pour fonctionner !
+			
+			[it]Consente di effettuare un salvataggio di tutta la base dati utilizzata da SPIP.
+			Il file .gz o .sql ottenuto &#232; memorizzato all'interno di una cartella (in maniera predefinita /tmp, configurabile)
+			e pu&ograve; essere inviato per posta elettronica.
+			
+			Il salvataggio &#232; effettuato al momento della visita della redazione se l'ultimo salvataggio &#232;
+			pi&ugrave; vecchio della frequenza di salvataggio specificata nella configurazione.
+			I salvataggi memorizzati considerati obsoleti (in funzione del parametro di configurazione corrispondente)
+			vengono automaticamente cancellati.
 		</multi>
 	</description>
-	<lien>[->http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde]</lien>
+	<lien>http://www.spip-contrib.net/Le-plugin-saveauto-sauvegarde</lien>
 	<icon>img_pack/saveauto-24.png</icon>
 	
 	<pipeline>
@@ -50,7 +56,7 @@ vengono automaticamente cancellati.
 		<inclure>saveauto_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id="cfg" version="[1.0.0;]" />
 	<chemin dir='' type='prive' />
 	<categorie>maintenance</categorie>
