@@ -1,38 +1,21 @@
 <plugin>
-
-	<version>beta</version>
-
-	<nom>Actunite - Actualit&eacute;s "Unite Like"</nom>
-
+	<nom>Actunite - Actualit&#233;s "Unite Like"</nom>
 	<prefix>actunite</prefix>
-
+	<version>beta</version>
 	<auteur>Cyril MARION</auteur>
-
-    <licence>&#169; 2009 Ateliers CYM - PARIS - Licence GNU/GPL</licence>
-
+    <licence>GNU/GPL - (c) 2009</licence>
 	<etat>dev</etat>
-
 	<description>
-	Ajoute un bloc de 4 actualit&eacute;s sur votre site.
-
-<p>La position d'insertion, les dimensions et le nombre d'actus sont param&eacute;trables via [CFG->./index.php?exec=cfg&amp;cfg=actunite].</p>
-
+	Ajoute un bloc de 4 actualit&#233;s sur votre site. La position d'insertion, les dimensions et le nombre d'actus sont param&#233;trables.</p>
 	</description>
-
-	<lien>
-	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Acunite?var_mode=preview]
-	</lien>
-
+	<lien>http://www.spip-contrib.net/Plugin-Acunite</lien>
 	<icon>img_pack/picto_actunite_64x64.png</icon>
-
 	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
 		<inclure>actunite_fonctions.php</inclure>
 	</pipeline>
-
-	<necessite id="SPIP" version="[1.9.0;]" />
-
+	<necessite id="SPIP" version="[2.0.0.0;2.0.99]" />
 	<necessite id='cfg' version='[1.0;]' />
 	<categorie>communication</categorie>
 </plugin>
