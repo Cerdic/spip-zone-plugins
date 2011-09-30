@@ -15,18 +15,24 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // http://doc.spip.org/@naviguer_doc
 function inc_documenter_objet_dist($id, $type = "article", $script, $flag_editable=true) {
 	$serveur = '';
-	// avant de documenter un objet, on verifie que ses documents vus sont bien lies !
-	$spip_table_objet = table_objet_sql($type);
-	$table_objet = table_objet($type);
-	$id_table_objet = id_table_objet($type,$serveur);
-	$champs = sql_fetsel('*',$spip_table_objet,addslashes($id_table_objet)."=".intval($id));
+	// Joindre ?
+	if  ($GLOBALS['meta']["documents_$type"]=='non'
+	OR !autoriser('joindredocument', $type, $id)
+	OR !$flag_editable)
+		$res = '';
+	else {
+		// avant de documenter un objet, on verifie que ses documents vus sont bien lies !
+		$spip_table_objet = table_objet_sql($type);
+		$table_objet = table_objet($type);
+		$id_table_objet = id_table_objet($type,$serveur);
+		$champs = sql_fetsel('*',$spip_table_objet,addslashes($id_table_objet)."=".intval($id));
 
-	$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
-	$marquer_doublons_doc($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, '', $serveur);
+		$marquer_doublons_doc = charger_fonction('marquer_doublons_doc','inc');
+		$marquer_doublons_doc($champs,$id,$type,$id_table_objet,$table_objet,$spip_table_objet, '', $serveur);
 
-	$contexte = array('objet'=>$type,'id_objet'=>$id);
-	return recuperer_fond('prive/contenu/portfolio_document',array_merge($_GET,$contexte));
-
+		$contexte = array('objet'=>$type,'id_objet'=>$id);
+		return recuperer_fond('prive/contenu/portfolio_document',array_merge($_GET,$contexte));
+	}
 
 }
 
