@@ -2,21 +2,15 @@
 	<nom>ABP FORUM</nom>
 	<auteur>mmmx</auteur>
 	<licence>GNU/GLP</licence>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<description>
 	<multi>
-	[it]
-		Questo plugin permette di avere forum su abbonamento e moderati a priori allo stesso tempo
-
-		Attivato il plugin si avr&agrave; la relativa opzione nella configurazione del sito e dei forum
-
-		Per Spip 1.9
-	[en]
-		This plugin allow to have forum both on inscription and with a priori moderation
-
-		Once plugin has been activated the relative option will appear in the site configuration and in the forum configuration panels
-
-		Actually Spip 1.9 version ONLY
+	[it]Questo plugin permette di avere forum su abbonamento e moderati a priori allo stesso tempo. Attivato il plugin si avr&agrave; la relativa 
+	opzione nella configurazione del sito e dei forum.
+	[en]This plugin allow to have forum both on inscription and with a priori moderation. Once plugin has been activated the relative option will 
+	appear in the site configuration and in the forum configuration panels.
+	[fr]Ce plugin permet d'avoir un forum à la fois sur l'inscription et avec une modération a priori. Une fois le plugin a été activé l'option 
+	relatifs apparaîtra dans la configuration du site et dans les panneaux de configuration du forum.
 	</multi>
 		{{{Info tecniche}}}
 		Surcharge di file:
@@ -32,5 +26,7 @@
 	</description>
 	<etat>stable</etat>
 	<prefix>abpforum</prefix>
+
+	<necessite id="SPIP" version="[1.9.2;2.0.0)" />
 	<categorie>communication</categorie>
 </plugin>
