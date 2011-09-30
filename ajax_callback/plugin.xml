@@ -1,28 +1,18 @@
 <plugin>
-	<nom>
-	Ajax callback
-	</nom>
-	<auteur>	
-		[Renato Formato->mailto:renatoformato@virgilio.it]
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	dev
-	</etat>
+	<nom>Ajax callback</nom>
+	<auteur>[Renato Formato->mailto:renatoformato@virgilio.it]</auteur>
+	<version>0.1.0</version>
+	<etat>dev</etat>
 	<description>
 	A wrapper around jQuery ajax calls to reinitialize async content.
 _ An alternative way to call $(document).ready() on the content loaded by an ajax request, made by whichever  
 _ plugin, adding a custom function to the onAjaxLoad event.      
 	</description>
 	<lien></lien> <!-- URI de documentation -->
-	<prefix>
-	ajaxcallback
-	</prefix>
+	<prefix>ajaxcallback</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 </plugin>
