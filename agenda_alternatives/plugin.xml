@@ -1,32 +1,26 @@
 <plugin>
 	<nom>Mini Calendrier pour Alternatives</nom>
 	<icon>img_pack/agenda-48.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
- 	[Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net]
-_ &#169; 2007 - Distribu&#233; sous licence GPL
-	</auteur>
-	<version>0.8</version>
+	<auteur>[Patrice VANNEUFVILLE->mailto:patrice.vanneufville@laposte.net]</auteur>
+	<licence>GPL - (c) 2007</licence>
+	<version>0.8.0</version>
 	<etat>test</etat>
-	<description>Permet l'utilisation des plugins Agenda &amp; Widget Calendar dans le squelettes Alternatives, et donc la gestion des &eacute;v&egrave;nements.
+	<description>Permet l'utilisation des plugins Agenda &amp; Widget Calendar dans le squelettes Alternatives, et donc la gestion des &#233;v&egrave;nements.
 
 Fonctions :
 - 1. Un mini calendrier dans le cadre de gauche
-- 2. Un encart 'Agenda' dans le cadre de droite avec les prochains &eacute;v&egrave;nements
-- 3. Un bouton 'Agenda' suppl&eacute;mentaire en haut, menant &agrave; :
-- 4. Une page 'evenements' qui liste les &eacute;v&egrave;nements (du jour/du mois, prochains, pass&eacute;s)
-- 5. La liste des &eacute;v&egrave;nements associ&eacute;s au bas de chaque article
+- 2. Un encart 'Agenda' dans le cadre de droite avec les prochains &#233;v&egrave;nements
+- 3. Un bouton 'Agenda' suppl&#233;mentaire en haut, menant &agrave; :
+- 4. Une page 'evenements' qui liste les &#233;v&egrave;nements (du jour/du mois, prochains, pass&#233;s)
+- 5. La liste des &#233;v&egrave;nements associ&#233;s au bas de chaque article
 
 Pour en savoir plus, lire le fichier {{plugins/agenda_alternatives/lisezmoi.txt}}.
-_ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.2c et Alternatives v1.9.2c
+_ Ce plugin a &#233;t&#233; test&#233; sous Spip v1.9.2c et Alternatives v1.9.2c
 </description>
 	<lien></lien> <!-- URI de documentation -->
 	<fonctions>minicalalter_fonctions.php</fonctions>
 	<options>minicalalter_options.php</options>
 	<prefix>CalAlter</prefix>
-	<chemin dir='' type='public' />
-	<necessite id="SPIP" version="[1.9.0;]" />
-	<necessite id="Agenda" version="[0.1;]" />
-	<necessite id="WCalendar" version="[0.11;]" />
 	<categorie>date</categorie>
 	<pipeline>
 		<nom>insert_head</nom> 
@@ -36,4 +30,8 @@ _ Ce plugin a &eacute;t&eacute; test&eacute; sous Spip v1.9.2c et Alternatives v
 		<nom>header_prive</nom>
 		<inclure>minicalalter_pipelines.php</inclure>
 	</pipeline>
+	<chemin dir='' type='public' />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
+	<necessite id="Agenda" version="[0.1;]" />
+	<necessite id="WCalendar" version="[0.11;]" />
 </plugin>
