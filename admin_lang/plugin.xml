@@ -1,22 +1,11 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	admin_lang
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 	aurelien levy , alm()elastick.net
-_ Daniel Vi&ntilde;ar Ulriksen, dani (a) belvil.net
-_ &#169; 2006 - Distribu&eacute; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	test
-	</etat>
-	<description>
-	permet de g&#233;rer les traductions dans les fichiers de langues
-	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<nom>Admin Lang</nom>
+	<auteur>Aurelien Levy , alm()elastick.net et [Daniel Vi&ntilde;ar Ulriksen->dani (a) belvil.net]</auteur>
+	<licence>GNU/GPL - (c) 2006</licence>
+	<version>0.2.0</version>
+	<etat>test</etat>
+	<description>Permet de g&#233;rer les traductions dans les fichiers de langues</description>
+	<lien></lien>
 	<options>admin_lang_options.php</options>
  	<pipeline>
 		<nom>ajouter_onglets</nom>
