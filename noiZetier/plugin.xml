@@ -1,11 +1,12 @@
 <plugin>
 	<nom><multi>[fr]noiZetier[de]Nussbaum</multi></nom>
+	<slogan><multi>[fr]Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z[de]Verwaltung der Code-N&#239;sse, als Erg&#228;nzung der Z-Squelette oder als eigenst&#228;ndiges Modu.</multi></slogan>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
 	<version>0.12.1</version>
 	<version_base>0.4</version_base>
 	<etat>stable</etat>
-	<description><multi>[fr]Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z.[de]Verwaltung der Code-Nüsse, als Ergänzung der Z-Squelette oder als eigenständiges Modul.</multi></description>
+	<description>Le noiZetier fournit une interface dans l’espace priv&#233; permettant de choisir, pour chaque page, des noisettes &#224; ajouter aux blocs contenu, navigation et extra de chaque page. Les noisettes viennent ainsi compl&#233;ter les contenus par d&#233;faut pr&#233;vus par le squelette.</description>
 	<lien>http://www.spip-contrib.net/noiZetier</lien>
 	<icon>img/noizetier-128.png</icon>
 	<prefix>noizetier</prefix>
@@ -77,7 +78,7 @@
 		<icone>images/noizetier-16.png</icone>
 	</bouton>
 	<categorie>maintenance</categorie>
-	<necessite id="SPIP" version="[2.1.0;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="YAML" version="[1.4.1;]" />
 	<necessite id="saisies" version="[1.8.5;]" />
