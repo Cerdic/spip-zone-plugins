@@ -1,100 +1,89 @@
 <plugin>
-        <nom>Dépublication</nom>
-        <auteur>
-        	[Equipe Nouveaux Territoires->mailto:equipe@nouveauxterritoires.fr] 
-        	<br/>
-        	[NouveauxTerritoires->http://www.nouveauxterritoires.fr]
- 			<br/><br/>
- 			- Copyright &#169; 2007-2010 NouveauxTerritoires
- 		</auteur>
- 		<icon>img/depublication-24.png</icon>
- 		<licence>(&copy;) 2007-2010 [GNU/GPL v3->http://www.gnu.org/copyleft/gpl.html]&nbsp;<a href="http://www.gnu.org/copyleft/gpl.html"><img src="../plugins/depublication/images/gplv3-88x31.png"/></a></licence>
-        
-        <version>1.0.5</version>
-        <version_base>0.8</version_base>
-        
-        <etat>test</etat>
-        <description>
-        	Permet de spécifier une date de dépubication automatique pour les articles ou une date d'expiration pour les auteurs. 
-        	Les articles passent alors dans un état prédéfini (proposé,validé,poubelle ou un état spécifique créé par l'utilisateur), les auteurs passent eux à la poubelle.
-        </description>
-        <lien>http://spipdoc.nouveauxterritoires.fr/Comment-depublier-un-article-a-une.html</lien>
-        <prefix>depublication</prefix>
-		
-		<install>base/depublication_install.php</install>
-		
-		<necessite id='SPIP' version='[2.0.0;]' />
-		<necessite id='cfg' version='[1.10.0;]' />
-		<necessite id="lib:DataTables-1.7.4" src="http://www.datatables.net/releases/DataTables-1.7.4.zip" />
-		
-		
-		<chemin dir='' />
-		<categorie>maintenance</categorie>
-		
-		<bouton id='depublication_list' parent='naviguer'>
-			<icone>img/depublication-24.png</icone>
-			<titre>depublication:depublication</titre>
-			<url>depublication_list_articles</url>
-	  	</bouton>
-	  	<bouton id='depublication_list2' parent='bando_edition'>
-			<icone>img/depublication-24.png</icone>
-			<titre>depublication:depublication</titre>
-			<url>depublication_list_articles</url>
-	  	</bouton>	  	
-
-
+	<nom>D&#233;publication</nom>
+	<slogan>Sp&#233;cifier une date de d&#233;publication d'article ou de suppression d'auteur</slogan>
+	<auteur>[Equipe Nouveaux Territoires->mailto:equipe@nouveauxterritoires.fr], [NouveauxTerritoires->http://www.nouveauxterritoires.fr]</auteur>
+	<icon>img/depublication-24.png</icon>
+	<licence>(c) 2007-2010 GNU/GPL</licence>
 	
-	  	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-		<!--<options>depublication_options.php</options>	
-		<fonctions>depublication_fonctions.php</fonctions>
-		-->
-		
-		<onglet id='depublication_list_articles' parent='depublication_list'>
-			<icone>img/depublication-24.png</icone>
-			<titre>depublication:depublication_articles</titre>
-			<url>depublication_list_articles</url>
-		</onglet>
-		<onglet id='depublication_list_auteurs' parent='depublication_list'>
-			<icone>img/depublication-24.png</icone>
-			<titre>depublication:expiration_auteurs</titre>
-			<url>depublication_list_auteurs</url>
-		</onglet>
+	<version>1.0.5</version>
+	<version_base>0.8</version_base>
 	
-		<pipeline>
-			<nom>autoriser</nom>
-			<inclure>depublication_autorisations.php</inclure>
-		</pipeline>
-		
-		<pipeline>
-			<nom>affiche_milieu</nom>
-			<action>execution</action>
-			<inclure>depublication_pipelines.php</inclure>
-		</pipeline>
-		<pipeline>
-			<nom>header_prive</nom>		
-			<inclure>depublication_pipelines.php</inclure>
-		</pipeline>
-		
-		<pipeline>
-			<nom>declarer_tables_objets_surnoms</nom>
-			<inclure>base/depublication.php</inclure>
-		</pipeline>
-		<pipeline>
-	        <nom>declarer_tables_interfaces</nom>
-	        <inclure>base/depublication.php</inclure>
-		</pipeline>
-		<pipeline>
-	        <nom>declarer_tables_principales</nom>
-	        <inclure>base/depublication.php</inclure>
-		</pipeline>
-		<pipeline>
-	        <nom>declarer_tables_auxiliaires</nom>
-	        <inclure>base/depublication.php</inclure>
-		</pipeline>
+	<etat>test</etat>
+	<description>Parfois des articles n’ont plus d’int&#233;r&#234;t &#234; une date donn&#233;e et vous souhaitez programmer leur d&#233;publication pour qu’elle s’effectue automatiquement. Les articles passent alors dans un &#233;tat pr&#233;d&#233;fini (propos&#233;, valid&#233;, poubelle ou un &#233;tat sp&#233;cifique cr&#233;&#233; par l'utilisateur). Vous pouvez aussi renseigner une date d’expiration des droits d’un auteur. A la date donn&#233;e, l’utilisateur sera mis automatiquement &#224; la poubelle et il ne pourra donc plus se connecter sur l’applicatif.
+	</description>
+	<lien>http://www.spip-contrib.net/Depublication,3642</lien>
+	<prefix>depublication</prefix>
 	
-		<pipeline>
-			<nom>taches_generales_cron</nom>
-			<inclure>depublication_pipelines.php</inclure>
-		</pipeline>
-
+	<install>base/depublication_install.php</install>
+	
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<necessite id='cfg' version='[1.10.0;]' />
+	<necessite id="lib:DataTables-1.7.4" src="http://www.datatables.net/releases/DataTables-1.7.4.zip" />
+	
+	
+	<chemin dir='' />
+	<categorie>maintenance</categorie>
+	
+	<bouton id='depublication_list' parent='naviguer'>
+		<icone>img/depublication-24.png</icone>
+		<titre>depublication:depublication</titre>
+		<url>depublication_list_articles</url>
+	</bouton>
+	<bouton id='depublication_list2' parent='bando_edition'>
+		<icone>img/depublication-24.png</icone>
+		<titre>depublication:depublication</titre>
+		<url>depublication_list_articles</url>
+	</bouton>	  	
+	
+	
+	
+	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<!--<options>depublication_options.php</options>	
+	<fonctions>depublication_fonctions.php</fonctions>
+	-->
+	
+	<onglet id='depublication_list_articles' parent='depublication_list'>
+		<icone>img/depublication-24.png</icone>
+		<titre>depublication:depublication_articles</titre>
+		<url>depublication_list_articles</url>
+	</onglet>
+	<onglet id='depublication_list_auteurs' parent='depublication_list'>
+		<icone>img/depublication-24.png</icone>
+		<titre>depublication:expiration_auteurs</titre>
+		<url>depublication_list_auteurs</url>
+	</onglet>
+	
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>depublication_autorisations.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>execution</action>
+		<inclure>depublication_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>		
+		<inclure>depublication_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_objets_surnoms</nom>
+		<inclure>base/depublication.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/depublication.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/depublication.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/depublication.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>depublication_pipelines.php</inclure>
+	</pipeline>
 </plugin>
