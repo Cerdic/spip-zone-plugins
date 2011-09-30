@@ -1,31 +1,19 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom>
-	    Afficher les plugins de la Zone
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	    cy_altern - &#169; 2008   Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	    0.1
-	</version>
-	<etat>
-	    test
-	</etat>
+	<nom>Afficher les plugins de la Zone</nom>
+	<auteur>cy_altern</auteur>
+	<licence>GNU/GPL - (c) 2008</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
 	<description>
 	    trier/classer/afficher les plugins de la Zone &agrave; partir du flux RSS. 
       Trois formats de sortie: RSS, page spip et carte freemind.
 	</description>
 	<lien>http://spip-contrib.net/spip.php?article2733</lien>
-  <icon>aff_zone.png</icon>
-	<necessite id="SPIP" version="[1.9.0;]" />
-  <necessite id="cfg" version="[1.7.5;]" />
-  <categorie>divers</categorie>
-  <options>aff_zone_options.php</options><!-- gere l'appel de base/aff_zone_tables.php -->
-  <fonctions>aff_zone_fonctions.php</fonctions>
-	<prefix> 
-	   aff_zone
-	</prefix>
+	<icon>aff_zone.png</icon>
+	<categorie>divers</categorie>
+	<options>aff_zone_options.php</options><!-- gere l'appel de base/aff_zone_tables.php -->
+	<fonctions>aff_zone_fonctions.php</fonctions>
+	<prefix>aff_zone</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<inclure>aff_zone_pipeline.php</inclure>
@@ -34,6 +22,8 @@
 		<nom>header_prive</nom>
 		<inclure>aff_zone_pipeline.php</inclure>
 	</pipeline>
-  <install>base/aff_zone_install.php</install>
-	<chemin dir='' />	
+	<install>base/aff_zone_install.php</install>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<necessite id="cfg" version="[1.7.5;]" />
 </plugin>
