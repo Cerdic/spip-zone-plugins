@@ -5,6 +5,12 @@
 			[en]My files
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]Archiver ses fichiers dump, IMG, squelettes...
+			[en]Archive files dump, IMG, squelettes...
+		</multi>
+	</slogan>
 	<auteur>
 		<multi>
 			[fr]Eric Lupinacci, kent1, d'apr&#232;s la version initiale de James
@@ -12,7 +18,7 @@
 		</multi>
 	</auteur>
 	<version>1.0.1</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<licence>GPL v3</licence>
 	<icon>prive/themes/spip/images/mes_fichiers-64.png</icon>
 	<description><multi>
@@ -43,7 +49,7 @@ It is also possible to initiate an automatic daily backup of all customization f
 		<titre>mes_fichiers:bouton_mes_fichiers</titre>
 		<url>mes_fichiers</url>
 	</bouton>
-	<necessite id="SPIP" version='[2.1.0;]' />
+	<necessite id="SPIP" version='[2.1.0;2.1.99]' />
 	<necessite id='spip_bonux' version='[1.8.1;]' />
 	<necessite id='cfg' version='[1.14.4;]' />
 	<categorie>maintenance</categorie>
