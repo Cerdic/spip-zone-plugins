@@ -1,17 +1,18 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	 <multi>
-		 [fr]Authentification Facebook Connect
-		 [en]Facebook Connect Authentication
-	 </multi>
-	</nom>
-	<auteur>[Edouard Lafargue->mailto:edouard@lafargue.name], Mathieu Marcillaud, Cedric Morin [->yterium.net], Fil</auteur>
-	<licence>
+	<nom>
 		<multi>
-		[fr]_ &#169; 2007-2009 - Distribu&eacute; sous licence GNU/GPL
-		[en]_ &#169; 2007-2009 - Distributed under GNU/GPL License
+		 [fr]Identification Facebook
+		 [en]Facebook identification
 		</multi>
-	</licence>
+	</nom>
+	<slogan>
+		<multi>
+		 [fr]Inscription et authentification avec Facebook Connect
+		 [en]Facebook Connect sign-in and authentication
+		</multi>
+	</slogan>
+	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<licence>GPL v3</licence>
 	<version>0.3.0</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
@@ -52,4 +53,5 @@
 	
 	<necessite id="lib:facebook-php-sdk-9513f08" src="https://github.com/facebook/php-sdk/zipball/v3.1.1" />
 	<necessite id="spip_bonux" version="[2.2.22;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>

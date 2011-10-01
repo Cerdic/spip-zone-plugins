@@ -111,8 +111,6 @@ function fblogin_demander_authentification($retour){
 
 /**
  * Finir l'authentification apres le retour depuis le serveur Facebook
- * analyse le retour de la requete openID
- * utilise l'URL de retour pour vérifier la demande
  * renvoie une chaîne d'erreur en cas d'erreur
  * un tableau decrivant l'utilisateur en cas de succès
  *

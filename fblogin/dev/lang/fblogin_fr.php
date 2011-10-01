@@ -27,7 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'form_forum_fblogin' => 'Inscription par fblogin',
 	'form_pet_votre_fblogin' => 'Votre adresse fblogin',
 	'form_login_fblogin_inconnu' => 'Cette adresse fblogin est inconnue. Corrigez, ou enregistrez-la dans votre profil.',
-	'form_login_statut_nouveau' => 'Pour votre premi&egrave;re connexion, vous devez utiliser le mot de passe qui vous a &eacute;t&eacute; envoy&eacute; par mail',
+	'form_login_statut_nouveau' => 'Pour votre première connexion, vous devez utiliser le mot de passe qui vous a été envoyé par courriel.',
 	
 	// O
 	'fblogin' => 'fblogin',
