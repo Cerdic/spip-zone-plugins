@@ -1,0 +1,158 @@
+[(#CACHE{3600})][(#HTTP_HEADER{Content-type: #ENV{mime,text/xml}[; charset=(#CHARSET)]})][(#SET{prefix, #ENV{prefix,gmm}})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xmlns:#GET{prefix}="#URL_SITE_SPIP/schemas/GeoMarkers/1.0"[
+	 xsi:SchemaLocation="#URL_SITE_SPIP/schemas/GeoMarkers/1.0 (#URL_FICHIER{schemas/GeoMarkers/1.0/geomarkers.xsd}|url_absolue)"]>
+
+<Document>
+  
+[(#REM) Boucle sur les articles, documents et sous-rubriques d'une rubrique]
+<B_rubriques>
+	<!-- Points sur la rubrique #ID_RUBRIQUE -->
+<BOUCLE_rubriques(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}>
+	[<name>(#TITRE|textebrut)</name>]
+	[<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{"chr(93)"}#EVAL{"chr(93)"}></description>]
+	<visibility>1</visibility>
+	<open>0</open>
+	[<atom:link href="(#URL_RUBRIQUE|url_absolue)"/>]
+	
+	[(#REM) Sous-rubriques ]
+	<B_rub_rubriques>
+	<!-- Sous-rubriques : -->
+	<BOUCLE_rub_rubriques(RUBRIQUES){id_parent}>
+		<BOUCLE_rub_rubriques_points(GEOPOINTS){id_rubrique}{meilleur}>
+	<Placemark>
+		[<name>(#TITRE|textebrut)</name>]
+		[<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>
+		[<atom:link href="(#URL_RUBRIQUE|url_absolue)"/>]
+		[<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapRubrique})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>
+		[<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET})#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+		</BOUCLE_rub_rubriques_points>
+	</BOUCLE_rub_rubriques>
+	</B_rub_rubriques>
+	
+	[(#REM) Articles]
+	<B_rub_articles>
+	<!-- Articles : -->
+	<BOUCLE_rub_articles(ARTICLES){id_rubrique}>
+		<BOUCLE_rub_articles_points(GEOPOINTS){id_article}{meilleur}>
+	<Placemark>
+		[<name>(#TITRE|textebrut)</name>]
+		[<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>
+		[<atom:link href="(#URL_ARTICLE|url_absolue)"/>]
+		[<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapArticle})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>
+		[<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET})#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+		</BOUCLE_rub_articles_points>
+	</BOUCLE_rub_articles>
+	</B_rub_articles>
+	
+	[(#REM) Documents]
+	<B_rub_documents>
+	<!-- Documents : -->
+	<BOUCLE_rub_documents(DOCUMENTS){id_rubrique}>
+		<BOUCLE_rub_documents_points(GEOPOINTS){id_document}{visible}{meilleur}>
+	<Placemark>
+		[<name>(#TITRE|sinon{doc#ID_DOCUMENT}|textebrut)[ - (#TAILLE|taille_en_octets|textebrut)]</name>]
+		[<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>
+		[<atom:link href="(#URL_DOCUMENT|url_absolue)"/>]
+		[<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapDocument})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>
+		[<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP{objet_parent=#_rubriques:OBJET,id_objet_parent=#_rubriques:ID_OBJET})#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+		</BOUCLE_rub_documents_points>
+	</BOUCLE_rub_documents>
+	</B_rub_documents>
+	
+</BOUCLE_rubriques>
+</B_rubriques>
+
+
+[(#REM) Boucle sur les documents d'un article]
+<B_articles>
+	<!-- Points sur l'article #ID_ARTICLE -->
+<BOUCLE_articles(ARTICLES){id_article=#ENV{id_article}}>
+	[<name>(#TITRE|textebrut)</name>]
+	[<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{"chr(93)"}#EVAL{"chr(93)"}></description>]
+	<visibility>1</visibility>
+	<open>0</open>
+	[<atom:link href="(#URL_ARTICLE|url_absolue)"/>]
+
+	[(#REM) Documents]
+	<B_art_documents>
+	<!-- Documents : -->
+	<BOUCLE_art_documents(DOCUMENTS){id_article}>
+		<BOUCLE_art_documents_points(GEOPOINTS){id_document}{visible}{meilleur}>
+	<Placemark>
+		[<name>(#TITRE|sinon{doc#ID_DOCUMENT}|textebrut)[ - (#TAILLE|taille_en_octets|textebrut)]</name>]
+		[<description><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#DESCRIPTIF)#EVAL{'chr(93)'}#EVAL{'chr(93)'}></description>]
+		<visibility>1</visibility>
+		<open>0</open>
+		[<atom:link href="(#URL_DOCUMENT|url_absolue)"/>]
+		[<styleUrl>(#URL_PAGE{gmap-styles-default}|ancre_url{GMapDocument})</styleUrl>]
+		<ExtendedData>[
+			(#GEOMARKERICONS{format=kml,prefix=#GET{prefix}})]
+			<[(#GET{prefix}):]markerParams[ type="(#TYPE_POINT)"][ zoom="(#ZOOM)"][ objectName="(#OBJET)"][ objectId="(#ID_OBJET)"][ visible="(#VISIBLE)"][ priority="(#PRIORITE)"] />
+		</ExtendedData>
+		[<Style>
+			<BalloonStyle>
+				<bgColor>ffffffff</bgColor>
+				<text><!#EVAL{"chr(91)"}CDATA#EVAL{"chr(91)"}(#GEOPOPUP{objet_parent=article,id_objet_parent=#_articles:ID_ARTICLE})#EVAL{'chr(93)'}#EVAL{'chr(93)'}></text>
+			</BalloonStyle>
+		</Style>]
+		<Point>
+			<coordinates>#LONGITUDE,#LATITUDE,0</coordinates>
+		</Point>
+	</Placemark>
+		</BOUCLE_art_documents_points>
+	</BOUCLE_art_documents>
+	</B_art_documents>
+	
+</BOUCLE_articles>
+</B_articles>
+
+</Document>
+
+</kml>

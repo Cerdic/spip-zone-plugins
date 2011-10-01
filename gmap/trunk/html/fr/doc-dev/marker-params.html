@@ -1,0 +1,25 @@
+<html>
+<head>
+	<title>Param&egrave;tres utilisables lors de la cr&eacute;ation d'un marqueur</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+	<p class="ariane"><a href="../doc/index.html">Sommaire</a>&nbsp;><a href="index.html">Documentation de d&eacute;veloppement</a>&nbsp;> Param&egrave;tres utilisables lors de la cr&eacute;ation d'un marqueur</p>
+
+	<h1>Impl&eacute;mentations Google Maps V2 et V3&nbsp;:</h1>
+	<p>Un certain nombre de param&egrave;tres sont communs aux deux impl&eacute;mentations. Il serait &eacute;galement bon qu'ils restent identiques dans de futures impl&eacute;mentations mais ce n'est pas garanti.</p>
+	<table>
+		<tr><th>Champ</th><th>Description</th><th>Si absent</th></tr>
+		<tr><td>click</td><td>Op&eacute;ration effectu&eacute;e pour un clic sur le marqueur, parmi&nbsp::<br /><table><tr><td>showInfoWindow</td><td>Ouverture d'une bulle d'information</td></tr><tr><td>custom</td><td>Envoi d'un &eacute;v&egrave;nement "click-on-marker" sur la carte</td></tr></table></td><td>aucune action</td></tr>
+		<tr><td>dblclk</td><td>Op&eacute;ration effectu&eacute;e pour un double-clic sur le marqueur, parmi&nbsp::<br /><table><tr><td>custom</td><td>Envoi d'un &eacute;v&egrave;nement "dblclick-on-marker" sur la carte</td></tr></table></td><td>aucune action</td></tr>
+		<tr><td>draggable</td><td>Indique si le marqueur peut-&ecirc;tre d&eacute;plac&eacute; par glisser-d&eacute;placer (true/false)</td><td>false</td></tr>
+		<tr><td>html</td><td>Code HTML affich&eacute; dans la bulle d'information</td><td>rien</td></tr>
+		<tr><td>icon</td><td>Nom de l'icone utilis&eacute;e</td><td>icone par d&eacute;faut du plugin</td></tr>
+		<tr><td>latitude</td><td>Latitude du point</td><td>latitude du centre de la carte au moment de l'ajout</td></tr>
+		<tr><td>longitude</td><td>Longitude du point</td><td>longitude du centre de la carte au moment de l'ajout</td></tr>
+		<tr><td>title</td><td>Texte du point, affich&eacute; en infobulle</td><td>pas d'infobulle affich&eacute;e</td></tr>
+		<tr><td>zorder</td><td>Position du marqueur (>0)</td><td>0, c'est-&agrave;-dire la position g&eacute;r&eacute;e par la couche cartographique</td></tr>
+	</table>
+
+</body>
+</html>

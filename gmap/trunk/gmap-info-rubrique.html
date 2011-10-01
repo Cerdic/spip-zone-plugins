@@ -1,0 +1,21 @@
+[(#REM)
+
+	Modèle pour la description d'une rubrique dans les info-bulles de la carte.
+	
+]<BOUCLE_rubrique(RUBRIQUES){id_rubrique}><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>[
+	<title>(#TITRE|textebrut)</title>][
+	<link href="(#URL_FICHIER{style/gmap-balloon.css}|url_absolue)" rel="stylesheet" type="text/css" />]
+</head>
+<body class="balloon">
+<div class="gmap-balloon">[
+	<h1><a[ href="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE)</a></h1>][
+	<p class="description">(#DESCRIPTIF)</p>][
+	<div class="contents">
+		<div class="lire"><a href='(#URL_RUBRIQUE|url_absolue)'[ title='(#TITRE|attribut_html)']>voir en ligne</a></div>
+	</div>]
+</div>
+</body>
+</html>
+</BOUCLE_rubrique>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Param&eacute;trage du plugin</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> Param&eacute;trage du plugin</p>
+	
+	<h1>Acc&egrave;s aux pages de param&eacute;trage</h1>
+	<p>Le param&eacute;trage du plugin GMap peut &ecirc;tre atteint depuis le menu Configuration de SPIP en cliquant sur l'icone GMap&nbsp;:</p>
+	<p class="illustration"><img src="images/parametrage-2.jpg" alt="Barre de param&eacute;trage" /></p>
+	<p>&nbsp;</p>
+	<p>Le param&eacute;trage est d&eacute;compos&eacute; en quatre sections&nbsp;: <i>Syst&egrave;me</i>, <i>Interface utilisateur</i>, <i>Import / export</i> et <i>Aide</i>.</p>
+	<p class="illustration"><img src="images/parametrage-1.jpg" alt="Barre de param&eacute;trage" /></p>
+	<p>La partie <i>Aide</i> est constitu&eacute;e des pages que vous &ecirc;tes en train de lire.</p>
+
+	<h1>Page <i>Syst&egrave;me</i></h1>
+	
+	<h2>Choix de l'API cartographique</h2>
+	<p class="illustration"><img src="images/parametrage-3-1.jpg" alt="Param&eacute;trage de l'API" /></p>
+	<p>Cette section permet de choisir l'impl&eacute;mentation de la couche cartographique <i>client</i>. Actuellement, le plugin ne contient d'impl&eacute;mentation que pour les API Google Maps.</p>
+	<p>Les choix suivants sont possibles (le param&eacute;trage par d&eacute;faut est en gras)&nbsp;:</p>
+	<ul>
+		<li>Google Maps API V2&nbsp;: API not&eacute;e <i>deprecated</i> par Google, mais elle est plus l&eacute;g&agrave; (malgr&eacute; ce que pr&eacute;tend le site) et permet d'ajouter de nombreux plugins. L'int&eacute;gration du plugin Google Earth est meilleure.</li>
+		<li><b>Google Maps API V3</b>&nbsp;: maintenant l'API officielle, mais elle semble un peu lourde, parfois, sur Internet Explorer. De plus l'int&eacute;gration native de Google Earth a disparue, ce qui force le recours à une extension <i>Googleearth</i> plus fragile. C'est n&eacute;anmoins le choix &agrave; privil&eacute;gier et le param&eacute;trage par d&eacute;faut du plugin. Elle pr&eacute;sente &eacute;galement le gros avantage de ne pas n&eacute;cessiter de clef d'enregistrement.</li>
+	</ul>
+	
+	<h2>Param&egrave;tres sp&eacute;cifiques de l'API</h2>
+	<p>Ces param&egrave;tres d&eacute;pendent de l'API.</p>
+	
+	<h3>Google Maps V2</h3>
+	<p class="illustration"><img src="images/parametrage-3-2-gma2.jpg" alt="Param&eacute;trage sp&eacute;cifique &agrave; de l'API Google Maps V2" /></p>
+	<p>Pour que les cartes s'affichent, il est indispensable de fournir une clef d'enregistrement (suivre le lien indiqu&eacute; dans l'interface pour en obtenir une). Si la clef n'est pas renseign&eacute;e, les cartes seront d&eacute;sactiv&eacute;es sur l'ensemble du site (y compris dans la partie priv&eacute;e).</p>
+	<p>Le second param&egrave;tre permet de sp&eacute;cifier la version de l'API &agrave; utiliser. Il est recommand&eacute; d'utiliser la "version courante r&eacute;cente mais stable" pendant le d&eacute;veloppement puis de figer la version quand le site passe en production afin d'&eacute;viter les mauvaises surprises.</p>
+	
+	<h3>Google Maps V3</h3>
+	<p class="illustration"><img src="images/parametrage-3-2-gma3.jpg" alt="Param&eacute;trage sp&eacute;cifique &agrave; de l'API Google Maps V3" /></p>
+	<p>Comme l'indique le commentaire, la clef n'est n&eacute;cessaire que pour charger l'API Google Earth (au travers de l'extension Googleearth qui se charge de l'int&eacute;gration dans Google Maps V3). Si elle n'est pas fournie, les cartes s'afficheront normalement mais la visualisation "earth" sera indisponible.</p>
+	<p>Le second param&egrave;tre permet de sp&eacute;cifier la version de l'API &agrave; utiliser. Google recommande d'utiliser la "version trunk" pendant le d&eacute;veloppement puis de figer la version quand le site passe en production afin d'&eacute;viter les mauvaises surprises.</p>
+
+	<h2>Objets g&eacute;olocalisables</h2>
+	<p class="illustration"><img src="images/parametrage-5.jpg" alt="Objets g&eacute;olocalisables" /></p>
+	<p>Par d&eacute;faut, le plugin est param&eacute;tr&eacute; pour permettre de g&eacute;olocaliser tous les types d'objets support&eacute;s sur tout le site. Cette section de param&eacute;trage permet de limiter l'&eacute;tendue, d'une part &agrave; seulement un sous-ensemble des objets support&eacute;s, d'autre part &agrave; une ou plusieurs branches du site.</p>
+	<p>&nbsp;</p>
+	<p>Pour interdire la g&eacute;olocalisation sur certains objets il suffit de d&eacute;cocher la case correspondante. Le fait de d&eacute;cocher une case ne va ni d&eacute;truire les points d&eacute;j&agrave; saisis sur les objets ni emp&ecirc;cher les cartes de les repr&eacute;senter, cela va seulement supprimer l'interface de g&eacute;olocalisation dans la partie priv&eacute;e.</p>
+	<p>&nbsp;</p>
+	<p>Pour limiter l'utilisation du plugin sur des branches du site, il faut choisir &quot;Restriction &agrave; une liste de rubriques&quot; dans la liste d&eacute;roulante &quot;R&egrave;gle de restriction&quot;. L'interface de choix des rubriques appara&icirc;t alors (voir le plugin SPIP-Bonux). L&agrave; aussi, les points d&eacute;j&agrave; saisis et leur repr&eacute;sentation sur des cartes n'est pas alt&eacute;r&eacute;e par ce choix.</p>
+	<p class="illustration"><img src="images/parametrage-5-1.jpg" alt="Objets g&eacute;olocalisables" /></p>
+	<p>&nbsp;</p>
+	<p>Pour restreindre la repr&eacute;sentation des points sur les cartes, ou la pr&eacute;sence de carte, il faut se servir des squelettes.</p>
+	
+	<h2>Param&eacute;trage de la saisie dans l'espace priv&eacute;</h2>
+	<p class="illustration"><img src="images/parametrage-6.jpg" alt="Param&eacute;trage de la saisie dans l'espace priv&eacute;" /></p>
+	
+	<h3>Acc&egrave;s &agrave; la g&eacute;olocalisation</h3>
+	<p>Cette option concerne l'acc&egrave;s &agrave; l'interface de modification des documents propos&eacute;es par le plugin M&eacute;diath&egrave;que&nbsp;: par d&eacute;faut, quand on clique sur le lien &quot;modifier&quot;, l'interface de modification du document appara&icirc;t dans une popup et l'interface de g&eacute;olocalisation ne peut appara&icirc;tre. L'option permet de d&eacute;sactiver cette fonctionnalit&eacute; et de la remplacer par l'affichage de la page de modification ind&eacute;pendante, normalement accessible depuis la m&eacute;diath&egrave;que.</p>
+	
+	<h3>Affichage des objets voisins lors de la saisie</h3>
+	<p>L'interface de g&eacute;olocalisation propose la liste des objets voisin aund on g&eacute;olocalise un article ou un document. Les &quot;voisins&quot; sont calcul&eacute;s en fonction de la date. Plut&ocirc;t que d'utiliser un crit&egrave;re de proximit&eacute;, le plugin limite le nombre de voisins au &lt;i&gt;n&lt;/i&gt; plus proches. On peut &eacute;galement limiter la requ&ecirc;te sur les voisins au objet d'un m&ecirc;me parent (rubrique pour les articles, articles pour les documents).</p>
+	
+	<h1>Page <i>Interface utilisateur</i></h1>
+	
+	<h2>Apparence par d&eacute;faut des cartes</h2>
+	<p>Ces options d&eacute;pendent enti&egrave;rement de l'impl&eacute;mentation choisie dans la section &quot;Choix de l'API cartographique&quot;. Elles contiennent forc&eacute;ment le choix d'un positionnement par d&eacute;faut pour les cartes du site.</p>
+	
+	<h3>Google Maps V2 & V3</h3>
+	<p class="illustration"><img src="images/parametrage-7-gma.jpg" alt="Apparence par d&eacute;faut des cartes" /></p>
+	<p>Pour les deux impl&eacute;mentation Google Maps, les rubriques de param&eacute;trage sont identiques, mais le contenu de chacune d&eacute;pend de ce que l'impl&eacute;mentation permet. Les rubriques sont&nbsp;:</p>
+	<ul>
+		<li><b>Fonds des cartes</b>&nbsp;: choix du fond de carte par d&eacute;faut et des choix disponibles dans l'interface publique.</li>
+		<li><b>Commandes disponibles sur les cartes</b>&nbsp;: contr&ocirc;les disponibles sur les cartes publiques (zoom, street-view, etc.).</li>
+		<li>Exemple de carte, permettant de visualiser en instantan&eacute; les modification faites.</li>
+		<li><b>Positionnement par d&eacute;faut</b>&nbsp;: centre de la carte et zoom.</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>Le centre de la carte est positionn&eacute; en d&eacute;pla&ccedil;ant le curseur jaune qui se trouve au centre. On peut aussi &eacute;diter directement la latitude, la longitude et le zoom dans les zones de saisies. Dans ce cas, une interface de validation appara&icirc;t pour que les modifications soient prises en compte sur la carte&nbsp;:</p>
+	<p class="illustration"><img src="images/parametrage-7-gma-2.jpg" alt="Validation des modification de saisie" /></p>
+	<p>&nbsp;</p>
+	<p>La recherche par adresse propose &eacute;galement une interface sp&eacute;cifique qui permet de choisir parmi les diff&eacute;rentes possibilit&eacute;s renvoy&eacute;es par le geocoder&nbsp;:</p>
+	<p class="illustration"><img src="images/parametrage-7-gma-1.jpg" alt="Interface de recherche poar adresse" /></p>
+	
+	<h2>Comportement des marqueurs</h2>
+	<p>Ces param&egrave;tres sont communs aux impl&eacute;mentations Google Maps V2 et V3, mais ils pourraient &ecirc;tre diff&eacute;rents, ou ne pas exister dans d'autres impl&eacute;mentations.</p>
+	<p class="illustration"><img src="images/parametrage-8.jpg" alt="Comportement des marqueurs" /></p>
+	<p>Il arrive souvent, si on g&eacute;olocalise de nombreux documents, que les points soient suffisament proches pour se superposer. Le fonctionnement par d&eacute;faut des API Google Maps fait alors que seul le dernier point ajout&eacute; est cliquable, les autres sont cach&eacute;s.</p>
+	<p>Pour contourner ce probl&egrave;me, le plugin GMap propose une fonction de regroupement des bulles d&rsquo;information qui permet de naviguer entre les descriptions des diff&eacute;rents points affich&eacute;s. La barre de navigation permet &eacute;galement de zoomer la carte pour diff&eacute;rencier les points.</p>
+	<p class="illustration"><img src="images/GEOMAP-2.jpg" alt="Regroupement des info-bulles" /></p>
+	<p>Cette fonction est d&eacute;sactiv&eacute;e par d&eacute;faut car c&rsquo;est un traitement effectu&eacute; c&ocirc;t&eacute; client qui pourrait &ecirc;tre co&ucirc;teux quand il y a trop de points.</p>
+	<p>&nbsp;</p>
+	<p>Les autres param&egrave;tres permettent de restreindre la largeur des info-bulles. En effet, surtout sur Google Maps V3, il arrive souvent que les info-bulles qui contiennent beaucoup de texte deviennent trop larges par rapport &agrave; la carte.</p>
+	
+	<h2>Types de marqueurs</h2>
+	<p class="illustration"><img src="images/parametrage-9.jpg" alt="Types de marqueurs" /></p>
+	<p>GMap permet d'associer plusieurs point &agrave; un m&ecirc;me objet, et chacun des points peu avoir un r&ocirc;le sp&eacute;cifique (par exemple le point d'o&ugrave; a &eacute;t&eacute; pris une photo et le point qui &eacute;tait dans la vis&eacute;e). Un certain nombre de types sont pr&eacute;d&eacute;finis mais il est possible de les modificer, de les supprimer et d'en ajouter.</p>
+	<p>L'interface montre la liste des types d&eacute;finis, les colonnes du tableau sont&nbsp;:</p>
+	<ul>
+		<li><b>Objet</b>&nbsp;: le type d'objet auquel est associ&eacute; le type de point, ou &quot;tous&quot; pour un type pouvant s'appliquer &agrave; n'importe quel objet. L'interface de g&eacute;olocalisation ne propose que les types de points compatibles avec le type d'objet &eacute;dit&eacute;.</li>
+		<li><b>Nom</b>&nbsp;: nom court du type de point.</li>
+		<li><b>Descriptif</b>&nbsp;: description du type de point.</li>
+		<li><b>Visible</b>&nbsp;: est-ce que ce point peut-&ecirc;tre repr&eacute;sent&eacute; par un marqueur sur les cartes (crit&egrave;re <i>{visible}</i> des boucles GEOPOINTS).</li>
+		<li><b>Priorit&eacute;</b>&nbsp;: priorit&eacute; du point si l'on veut en retirer un seul sur l'objet (crit&egrave;re <i>{meilleur}</i> des boucles GEOPOINTS).</li>
+		<li><b>Points</b>&nbsp;: nombre de points utilisant actuellement ce type. Un type utilis&eacute; par un point ne peut pas &ecirc;tre supprim&eacute;.</li>
+	</ul>
+
+	<h1>Page <i>Imports / exports</i></h1>
+	
+	<h2>Import des données gis/geomap</h2>
+	<p>Cette zone permet d'importer les points d&eacute;finis dans le plugin Google Maps API.</p>
+
+</body>
+</html>

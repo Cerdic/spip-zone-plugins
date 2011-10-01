@@ -1,0 +1,19 @@
+[(#REM)
+
+	Modèle par défaut pour les info-bulle.
+	Ce modèle est utilisé dans les styles par défaut KML, il réutilise les autres champs
+	du KML par l'intermédiaire des balise $[xxx].
+	
+]<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"> 
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>
+	<title>$[name]</title>[
+	<link href="(#URL_FICHIER{style/gmap-balloon.css}|url_absolue)" rel="stylesheet" type="text/css" />]
+</head>
+<body class="balloon">
+<div class="gmap-balloon">
+	<h1><a href="$[atom:link]">$[name]</a></h1>
+	<p class="description">$[description]</p>
+</div>
+</body>
+</html>

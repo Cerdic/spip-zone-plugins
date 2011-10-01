@@ -1,0 +1,75 @@
+<plugin>
+	<nom>G&eacute;olocalisation et cartographie dans SPIP</nom>
+	<icon>images/logo-gmap-32.png</icon>
+	<version>0.1.1</version>
+	<version_base>1.0</version_base>
+	<etat>dev</etat>
+	<auteur>F. ALBERT</auteur>
+	<description>
+	<multi>
+	[fr]Int&eacute;gration de cartes dans les parties priv&eacute;e et publique de votre site SPIP.<br />Dans la partie priv&eacute;e, vous pouvez ajouter plusieurs points sur les rubriques, les articles, les documents (avec le plugin M&eacute;diath&egrave;que), les auteurs, les br&egrave;ves et les mots-clefs).<br />Dans la partie publique, vous pouvez ajouter des cartes dans vos squelettes.
+	</multi>
+	</description>
+	 
+	<install>base/gmap_install.php</install>
+	<prefix>gmap</prefix>
+	<chemin dir='' />
+	
+	<bouton id="configurer_gmap" parent="configuration">
+		<icone>images/logo-config-title.gif</icone>
+		<titre>gmap:config_titre_bouton</titre>
+	</bouton>
+	
+    <!-- Options SPIP -->
+	<options>gmap_options.php</options>
+
+    <!-- Installation de la base de données -->
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/gmap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/gmap_tables.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_auxiliaires</nom>
+		<inclure>base/gmap_tables.php</inclure>
+	</pipeline>
+
+	<!-- Autorisations, pour le boutons -->
+	<pipeline>
+		<nom>autoriser</nom>
+		<inclure>gmap_autoriser.php</inclure>
+	</pipeline>
+	
+	<!-- Saisie dans la zone privée -->
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>insert_head_prive</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<action>saisie_geo_info</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>information_exif</nom>
+		<action>get_position</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+	
+	<!-- Affichage dans la zone publique -->
+	<fonctions>boucle/gmap_boucles.php</fonctions>
+	<fonctions>balise/gmap_balises.php</fonctions>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>gmap_pipeline.php</inclure>
+	</pipeline>
+		
+	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="spip_bonux" version="[1.8.1;]" />
+	
+</plugin>

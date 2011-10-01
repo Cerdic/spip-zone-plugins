@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOKML</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> La balise #GEOKML</p>
+	
+	<h1>R&ocirc;le</h1>
+	<p>Cette balise permet d&rsquo;ajouter un fichier KML sur la carte.</p>
+	<p>Par exemple&nbsp;:</p>
+	<pre class="code"><span class="spip-balise">#GEOKML</span><span class="spip-syntax">{url=http://code.google.com/p/kml-samples/source/browse/trunk/kml/Placemark/placemark.kmz}</span>
+<span class="spip-balise">#GEOKML</span><span class="spip-syntax">{id_document=1962}</span></pre>
+	<ul>
+		<li>La premi&egrave;re forme ajoute un fichier KML dont l&rsquo;url est donn&eacute;e explicitement.</li>
+		<li>La deuxi&egrave;me forme ajoute un fichier KML pr&eacute;sent dans SPIP sous la forme d&rsquo;un document.</li>
+	</ul>
+	<p>Si plusieurs balises GEOMAP sont pr&eacute;sentes, on peut utiliser le param&egrave;tre map=X pour donner un num&eacute;ro &agrave; la carte et lever les ambigu&iuml;t&eacute;s. Sans ce param&egrave;tre, le marqueur sera ajout&eacute; sur la derni&egrave;re carte cr&eacute;&eacute;e au moment o&ugrave; la balise GEOKML est interpr&eacute;t&eacute;e.</p>
+
+	<h1>Param&egrave;tres</h1>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>map</td>
+			<td>Identifiant unique de la carte.</td>
+			<td>Identifiant num&eacute;rique correspondant au param&egrave;tre <i>map</i> d'une balise <i>GEOMAP</i> ins&eacute;r&eacute;e dans le m&ecirc;me document.</td>
+		</tr>
+		<tr>
+			<td>id_document</td>
+			<td>Identifiant d'un document qui est un fichier KML.</td>
+			<td>{id_document} ou {id_document=39}</td>
+		</tr>
+		<tr>
+			<td>url</td>
+			<td>URL d'un fichier KML externe &agrave; SPIP.</td>
+			<td>http://...</td>
+		</tr>
+		<tr>
+			<td>id</td>
+			<td>Dans le cas o&ugrave; une url est fournie, permet de donner explicitement un identifiant unique au fichier KML, ce qui permet ensuite de le manipuler.</td>
+			<td>Identifiant num&eacute;rique.</td>
+		</tr>
+	</table>
+	
+</body>
+</html>

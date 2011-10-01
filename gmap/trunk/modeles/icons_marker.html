@@ -1,0 +1,19 @@
+[(#REM)
+
+	Liste des icones en version longue.
+	Ce modèle n'est plus utilisé.
+	
+]<B_icons>
+<[(#ENV{prefix}):]markers[ id="(#ENV{name})"]>
+<BOUCLE_icons(POUR){tableau #ENV{icons}}>
+	<[(#ENV{prefix}):]icon[ type="(#VALEUR|table_valeur{type})"][ state="(#VALEUR|table_valeur{state})"]>[
+		<[(#ENV{prefix}):]image>(#URL_FICHIER{#VALEUR|table_valeur{image}}|url_absolue)</[(#ENV{prefix}):]image>][
+		<[(#ENV{prefix}):]size x="(#VALEUR|table_valeur{cxSize})"[ y="(#VALEUR|table_valeur{cySize})"] />][
+		<[(#ENV{prefix}):]anchor x="(#VALEUR|table_valeur{xAnchor})"[ y="(#VALEUR|table_valeur{yAnchor})"] />][
+		<[(#ENV{prefix}):]offset x="(#VALEUR|table_valeur{xOffset})"[ y="(#VALEUR|table_valeur{yOffset})"] />]
+	</[(#ENV{prefix}):]icon>
+</BOUCLE_icons>
+</[(#ENV{prefix}):]markers>
+</B_icons>
+<[(#ENV{prefix}):]markers[ ref="(#ENV{name})"] />
+<//B_icons>

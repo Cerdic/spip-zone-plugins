@@ -1,0 +1,126 @@
+/*
+ * Styles pour les info-bulles sur les marqueurs
+ */
+
+/* Div principale */
+.gmap-balloon {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: black;
+	margin: 0; padding: 0; border: 0;
+}
+.gmap-balloon a {
+	color: black;
+	text-decoration: none;
+}
+.gmap-balloon a:hover {
+	color: navy;
+	text-decoration: none;
+}
+.gmap-balloon h1 {
+	font-size: 1.2em;
+	margin: 0 0 10px 0;
+	text-align: left;
+}
+
+/* Description */
+.gmap-balloon div.description {
+	font-size: 1em;
+	text-align: justify;
+	margin: 10px 0 10px 0;
+}
+
+/* Contenu */
+.gmap-balloon div.contents {
+	margin: 10px 0 0 0;
+}
+.gmap-balloon div.image {
+	float: right;
+	margin: 0 0 10px 5px;
+}
+.gmap-balloon div.soustitre {
+	font-style: italic;
+	font-size: 1.1em;
+	margin: 5px 0 5px 0;
+}
+.gmap-balloon div.texte {
+	font-size: 1em;
+	text-align: justify;
+	margin: 5px 0 5px 0;
+}
+.gmap-balloon div.signature {
+	clear: both;
+	font-size: 0.8em;
+	text-align: right;
+	margin: 5px 0 0 0;
+}
+.gmap-balloon div.lire {
+	clear: both;
+	font-size: 0.9em;
+	text-align: right;
+	margin: 0 0 5px 0;
+}
+
+
+/*
+ * Styles pour les marqueurs fusionnés
+ */
+
+/* Fond du navigateur */ 
+table#miw-navigator {
+	margin: 0; padding: 0;
+    background-repeat: repeat-x;
+    background-position: bottom left;
+	background-image: url('../images/miw-bkgnd');
+	border: none;
+	color: rgb(255,255,255);
+	font-size: 10px;
+	width: 100%;
+}
+table#miw-navigator tr {
+	margin: 0; border: 0; padding: 0;
+}
+table#miw-navigator td {
+	border-collapse:collapse;
+	margin: 0; border: 0; padding: 0;
+	vertical-align: middle;
+}
+
+/* Flèches & boutons */
+table#miw-navigator td.miw-arrow {
+	width: 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+table#miw-navigator td.miw-navigator-first {
+	cursor: pointer;
+    background-image: url('../images/miw-first.png');
+}
+table#miw-navigator td.miw-navigator-prev {
+	cursor: pointer;
+    background-image: url('../images/miw-prev.png');
+}
+table#miw-navigator td.miw-navigator-next {
+	cursor: pointer;
+    background-image: url('../images/miw-next.png');
+}
+table#miw-navigator td.miw-navigator-last {
+	cursor: pointer;
+    background-image: url('../images/miw-last.png');
+}
+table#miw-navigator td.miw-zoom {
+	width: 16px;
+	cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/miw-zoom.png');
+}
+
+/* Liens directs */
+table#miw-navigator td.miw-navigator-links {
+	padding: 2px;
+	display: block;
+}
+table#miw-navigator td.miw-navigator-links select {
+	width: 150px;
+}

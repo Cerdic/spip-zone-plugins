@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOCAPABILITY</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> La balise #GEOCAPABILITY</p>
+	
+	<h1>R&ocirc;le</h1>
+	<p>Cette balise permet de tester qu'une fonctionnalit&eacute; est pr&eacute;sente dans l'impl&eacute;mentation s&eacute;lectionn&eacute;e pour les cartes (voir le param&eacute;trage du plugin).</p>
+	<p>Par exemple&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">[(</span><span class="spip-balise">#GEOCAPABILITY</span><span class="spip-syntax">{LayerAuto}|oui) ... <span class="spip-syntax">]</span></pre>
+	<p>Permet d'ajouter du code si la fonction <i>LayerAuto</i> (correspondant par exemple &agrave; la couche Wikipedia disponible en Google Maps V2) est accessible.</p>
+
+	<h1>Param&egrave;tres</h1>
+	<p>La balise n'utilise qu'un param&egrave;tre qui n'est pas nomm&eacute;.</p>
+	<p>Les valeurs suivantes sont actuellement utilis&eacute;es&nbsp;:</p>
+	<ul>
+		<li><b>markers</b>&nbsp;: la carte gère les marqueurs.</li>
+		<li><b>LayerKML</b>&nbsp;: la carte gère les fichiers KML.</li>
+		<li><b>LayerAuto</b>&nbsp;: la carte gère les fichiers KML automatiques comme la couche Wikipedia.</li>
+	</ul>
+	
+</body>
+</html>

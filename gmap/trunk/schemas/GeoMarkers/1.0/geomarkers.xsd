@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:markers="http://www.loceanique.org/schemas/GeoMarkers/1.0"
+	targetNamespace="http://www.loceanique.org/schemas/GeoMarkers/1.0"
+	elementFormDefault="qualified"
+	version="1.0">
+  
+	<annotation>
+		<appinfo>geomarkers.xsd 2011-05-14</appinfo>
+		<documentation>Schema pour l'extension markers sur KML</documentation>
+	</annotation>
+
+	<!-- Définition d'une icone -->
+	<element name="icon">
+		<complexType>
+			<all>
+				<element name="image" type="anyURI" minOccurs="1" maxOccurs="1" />
+				<element name="size" minOccurs="1" maxOccurs="1">
+					<complexType>
+						<attribute name="x" type="integer" use="required" />
+						<attribute name="y" type="integer" use="required" />
+					</complexType>
+				</element>
+				<element name="anchor" minOccurs="0" maxOccurs="1">
+					<complexType>
+						<attribute name="x" type="integer" use="required" />
+						<attribute name="y" type="integer" use="required" />
+					</complexType>
+				</element>
+				<element name="offset" minOccurs="0" maxOccurs="1">
+					<complexType>
+						<attribute name="x" type="integer" use="required" />
+						<attribute name="y" type="integer" use="required" />
+					</complexType>
+				</element>
+			</all>
+			<attribute name="state" default="normal">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="normal" />
+						<enumeration value="selected" />
+					</restriction>
+				</simpleType>
+			</attribute>
+			<attribute name="type" default="simple">
+				<simpleType name="T_type">
+					<restriction base="string">
+						<enumeration value="simple" />
+						<enumeration value="complete" />
+						<enumeration value="shadow" />
+					</restriction>
+				</simpleType>
+			</attribute>
+		</complexType>
+	</element>
+
+	<!-- Définition d'une version courte -->
+	<element name="iconShort">
+		<complexType>
+			<attribute name="state" default="normal">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="normal" />
+						<enumeration value="selected" />
+					</restriction>
+				</simpleType>
+			</attribute>
+			<attribute name="type" default="simple">
+				<simpleType name="T_type">
+					<restriction base="string">
+						<enumeration value="simple" />
+						<enumeration value="complete" />
+						<enumeration value="shadow" />
+					</restriction>
+				</simpleType>
+			</attribute>
+			<attribute name="url" type="anyURI" use="required" />
+			<attribute name="cxSize" type="integer" />
+			<attribute name="cySize" type="integer" />
+			<attribute name="xAnchor" type="integer" />
+			<attribute name="yAnchor" type="integer" />
+			<attribute name="xOffset" type="integer" />
+			<attribute name="yOffset" type="integer" />
+		</complexType>
+	</element>
+
+	<!-- Zoom -->
+	<element name="markerParams">
+		<complexType>
+			<attribute name="type" type="string" />
+			<attribute name="zoom" type="integer" />
+			<attribute name="objectName" type="string" />
+			<attribute name="objectId" type="integer" />
+			<attribute name="visible" type="string" />
+			<attribute name="priority" type="integer" />
+		</complexType>
+	</element>
+	
+	<!-- Définition d'un marqueur, i.e. plusieurs icones (complète, image seule, ombre, sélectionnée...) -->
+	<element name="markers">
+		<complexType>
+			<sequence>
+				<union minOccurs="0" maxOccurs="unbounded">
+					<element ref="icon">
+					<element ref="iconShort">
+				</union>
+			</sequence>
+			<attribute name="id" type="string" />
+			<attribute name="ref" type="string" />
+		</complexType>
+	</element>
+	
+</schema>

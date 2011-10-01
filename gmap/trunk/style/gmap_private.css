@@ -1,0 +1,471 @@
+
+/*
+ * Style généraux dans la partie privée
+ */
+ 
+/* Styles généraux de présentation */
+.ligne_boutons {
+	clear: both;
+	margin: 0;
+}
+.hidden {
+	display: none;
+}
+
+/* sous-blocs dépliables */
+.sbd_main {
+	display: block;
+	clear: both;
+}
+.sbd_replie > div.sbd_closed {
+	display: block;
+}
+.sbd_replie > div.sbd_opened {
+	display: none;
+}
+.sbd_deplie > div.sbd_closed {
+	display: none;
+}
+.sbd_deplie > div.sbd_opened {
+	display: block;
+}
+.sbd-btn-bloc
+{
+	margin: 0px;
+	display: block;
+	float: left;
+}
+.sbd-btn
+{
+	margin: 2px;
+}
+.sbd-btn-down
+{
+	background-image: url(../images/sbd_down.png);
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center top;
+	float: left;
+	width: 12px;
+	height: 12px;
+}
+.sbd-btn-up
+{
+	background-image: url(../images/sbd_up.png);
+	display: inline-block;
+	background-repeat: no-repeat;
+	background-position: center top;
+	float: left;
+	width: 12px;
+	height: 12px;
+}
+
+
+
+/*
+ * Système de saisie des marqueurs
+ */
+ 
+table.edit_markers {
+	font-size: 0.8em;
+	border-collapse: collapse;
+	padding: 0;
+}
+table.edit_markers td{
+	padding: 0;
+}
+table.edit_markers tr {
+	background-color: rgb(240,240,240);
+}
+table.edit_markers tr.header {
+	background-color: rgb(220,220,220);
+}
+table.edit_markers tr.active {
+	background-color: rgb(255,220,220);
+}
+table.edit_markers tr.deleted {
+	background-color: rgb(190,190,190);
+}
+table.edit_markers tr input.text {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.95em;
+    border-style: etched;
+	border-width: 1px;
+	border-color: rgb(167,167,167);
+    background-color: rgb(255,255,255);
+}
+table.edit_markers tr.active input.text {
+    border-style: inset;
+	border-width: 1px;
+	border-color: rgb(255,167,167);
+    background-color: rgb(255,192,192);
+}
+table.edit_markers tr.deleted input.text {
+    border-style: inset;
+	border-width: 1px;
+	border-color: lightgray;
+    background-color: rgb(168,168,168);
+}
+table.edit_markers tr select.text {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1em;
+    border-style: etched;
+	border-width: 1px;
+	border-color: rgb(167,167,167);
+    background-color: rgb(255,255,255);
+}
+table.edit_markers tr.active select.text {
+    border-style: inset;
+	border-width: 1px;
+	border-color: rgb(255,167,167);
+    background-color: rgb(255,192,192);
+}
+table.edit_markers tr.deleted select.text {
+    border-style: inset;
+	border-width: 1px;
+	border-color: lightgray;
+    background-color: rgb(168,168,168);
+}
+table.edit_markers .btn_activate {
+	display: block;
+    width: 12px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/btn-marker.png');
+	cursor: pointer;
+}
+table.edit_markers .btn_marker_delete {
+	display: block;
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/item-remove.png');
+	cursor: pointer;
+}
+table.edit_markers tr.deleted .btn_marker_delete {
+    background-image: url('../images/item-add.png');
+}
+.btn_marker_add {
+	display: inline;
+    height: 10px;
+	padding-left: 15px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-image: url('../images/item-add.png');
+	cursor: pointer;
+}
+.btn_marker_copy {
+	display: inline;
+    height: 10px;
+	padding-left: 15px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-image: url('../images/item-copy.png');
+	cursor: pointer;
+}
+table.edit_markers .btn_marker_validate {
+	display: none;
+}
+table.edit_markers tr.active .btn_activate {
+    background-image: url('../images/btn-marker-active.png');
+}
+table.edit_markers tr.deleted .btn_activate {
+    background-image: none;
+}
+table.edit_markers th {
+    text-align: left;
+	padding: 1px 3px;
+}
+table.edit_markers td {
+	padding: 1px 3px;
+}
+.markers_set_cmds {
+	margin: 0;
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+
+/*
+ * Siblings
+ */
+ 
+table.edit_siblings .btn_activate {
+	display: block;
+    width: 12px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/btn-sibling.png');
+	cursor: pointer;
+}
+table.edit_siblings tr.active .btn_activate {
+	display: block;
+    width: 12px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/btn-sibling-active.png');
+	cursor: pointer;
+}
+
+
+
+
+/*
+ * Geocoder
+ */
+
+/* Saisie de l'adresse */ 
+.geoedit_subform input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.95em;
+}
+.geoedit_subform input.empty-edit {
+	color: rgb(164,164,164);
+	font-style: italic;
+}
+
+/* Résultats */
+.geoedit_subform .geocoder-results {
+	margin: 5px 0 0 0;
+}
+
+
+
+/*
+ * Page de paramétrage du plugin
+ */
+ 
+/* Styles de texte */
+.configurer_gmap {
+}
+.configurer_gmap .texte {
+	margin: 0;
+}
+.configurer_gmap .msg_result {
+	margin: 0;
+	color: rgb(0, 128, 0);
+	font-weight: bold;
+	font-style: italic;
+	display: list-item;
+	list-style-position: inside;
+	list-style-image: url("../images/msg_result.gif");
+}
+.configurer_gmap .warning_block {
+	margin: 1em 0.5em;
+	border: 1px solid red;
+}
+.configurer_gmap .warning_title {
+}
+.configurer_gmap .warning {
+	margin: 0.5em;
+	text-align : center;
+	color: rgb(128, 0, 0);
+	font-weight: bold;
+}
+
+/* Saisies */
+.configurer_gmap input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.9em;
+}
+.configurer_gmap select {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 0.8em;
+}
+
+/* Regroupements */
+.configurer_gmap .config_group {
+	clear: both;
+	margin: 1em 0.5em;
+}
+.configurer_gmap .config_group .padding {
+	margin: 0.5em;
+}
+.configurer_gmap .config_group .interior {
+	margin: 0;
+}
+.configurer_gmap .config_group .liste_choix {
+	width: 60%;
+	margin: 1em auto;
+}
+.configurer_gmap .config_group .suivi {
+	margin-bottom: 0;
+}
+.configurer_gmap .config_group .suivant {
+	margin-top: 0;
+}
+.configurer_gmap .config_group .explications {
+	font-size: 0.9em;
+	margin: 0;
+}
+.configurer_gmap .config_group .droite {
+	text-align: right;
+}
+.configurer_gmap .sub-fieldset {
+	clear: both;
+	margin: 11px 0 0 0;
+}
+.configurer_gmap .sub-fieldset p.label {
+	font-weight: bold;
+	margin: 0;
+}
+
+/* Styles spécifiques */
+.configurer_gmap .config_group input#cle_api {
+	width: 98%;
+}
+.configurer_gmap .config_group select#api_version {
+	width: 98%;
+}
+.configurer_gmap .config_group .num_other_version_container {
+	margin: 0;
+}
+.configurer_gmap .config_group .num_other_version_container input#num_other_version{
+	width: 100px;
+}
+
+/* Tableau de la position par défaut */
+.configurer_gmap table#marker {
+	float: left;
+	margin: 0 10px 0 0;
+}
+.configurer_gmap table#marker #validate {
+	display: none;
+    height: 10px;
+	padding-left: 15px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-image: url('../images/item-copy.png');
+	cursor: pointer;
+}
+.configurer_gmap table#marker #validate.active {
+	display: inline;
+}
+.configurer_gmap #marker-warning {
+	text-align: left;
+	color: red;
+	font-size: 0.8em;
+}
+
+/* Carte */
+.carte_configurer_gmap {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 400px;
+	margin: 5px auto;
+	background-color: rgb(192,192,192);
+}
+
+
+/*
+ * Tableau des types de marqueurs dans la configuration
+ */
+ 
+table.edit_types {
+	font-size: 0.9em;
+	border-collapse: collapse;
+	padding: 0;
+}
+table.edit_types th{
+    text-align: left;
+	padding: 1px 3px;
+}
+table.edit_types td{
+	padding: 1px 3px;
+}
+table.edit_types tr {
+	background-color: rgb(240,240,240);
+}
+table.edit_types tr.header {
+	background-color: rgb(220,220,220);
+}
+table.edit_types tr input {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1em;
+    border-style: etched;
+	border-width: 1px;
+	border-color: rgb(167,167,167);
+    background-color: rgb(255,255,255);
+}
+table.edit_types tr input.nom {
+	width: 80px;
+}
+table.edit_types tr input.descriptif {
+	width: 150px;
+}
+table.edit_types tr input.priorite {
+	width: 20px;
+}
+table.edit_types tr select {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 1em;
+    border-style: etched;
+	border-width: 1px;
+	border-color: rgb(167,167,167);
+    background-color: rgb(255,255,255);
+}
+table.edit_types .btn_delete {
+	display: block;
+    width: 10px;
+    height: 10px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url('../images/item-remove.png');
+	cursor: pointer;
+}
+.btn_add_type {
+	display: inline;
+    height: 10px;
+	padding-left: 15px;
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-image: url('../images/item-add.png');
+	cursor: pointer;
+}
+
+
+
+/*
+ * Formulaire de géolocalisation
+ */
+
+/* Carte */ 
+.carte_editer_gmap {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+	height: 400px;
+	min-height: 150px;
+	max-height: 600px;
+	margin: 5px auto;
+	background-color: rgb(192,192,192);
+}
+
+
+
+/*
+ * Aide de GMap
+ */
+ 
+/* Erreur sur l'aide */
+.help-error {
+	text-align: center;
+	border: 1px solid rgb(255,92,92);
+	background: rgb(255,192,192);
+	color: rgb(92,0,0);
+	margin: 10px 10px 1em 10px;
+	padding: 10px;
+}
+.help-error  p {
+	margin: 0;
+}
+
+/* Titraille et autre typographie */
+#help-contents {
+	margin: 10px;
+}

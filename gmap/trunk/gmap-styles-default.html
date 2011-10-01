@@ -1,0 +1,49 @@
+[(#CACHE{1})][(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml version="1.0"[ encoding="(#CHARSET)"]?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+
+<Document>
+	<Schema name="GMAPExtension" id="GMAPExtensionId">
+		<SimpleField type="string" name="BalloonContents">
+			<displayName><![CDATA[Contents of the ballon info]]></displayName>
+		</SimpleField>
+	</Schema>
+	
+	<!-- Style par défaut -->
+	<Style id="GMapDefault">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{images/gmap-marker-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	
+	<!-- Rubriques -->
+	<Style id="GMapRubrique">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{images/gmap-marker-rubrique-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+	
+	<!-- Articles -->
+	<Style id="GMapArticle">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{images/gmap-marker-article-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+
+	<!-- Documents -->
+	<Style id="GMapDocument">
+		<IconStyle>
+			[<Icon>
+				<href>(#URL_FICHIER{images/gmap-marker-photo-full.png}|url_absolue)</href>
+			</Icon>]
+		</IconStyle>
+	</Style>
+
+</Document>
+
+</kml>

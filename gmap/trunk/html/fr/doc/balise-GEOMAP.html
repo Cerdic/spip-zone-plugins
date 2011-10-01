@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOMAP</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> La balise #GEOMAP</p>
+	
+	<h1>R&ocirc;le</h1>
+	<p>La balise #GEOMAP permet de faire afficher une carte depuis un squelette. Elle permet &eacute;galement, selon les param&egrave;tres qui lui sont pass&eacute;s d'ajouter des <i>marqueurs</i> sur cette carte.</p>
+	<p>&nbsp;</p>
+	<p>Au plus simple, la balise GEOMAP peut &ecirc;tre int&eacute;gr&eacute;e dans un squelette sans aucun param&egrave;tres&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">[</span>&lt;div style=&quot;position: relative; display: block; width: 600px; height: 400px;&quot;&gt;
+  <span class="spip-syntax">(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">)</span>
+&lt;/div&gt;<span class="spip-syntax">]</span></pre>
+	<p>&nbsp;</p>
+	<p>Il faut cependant qu&rsquo;elle soit int&eacute;gr&eacute;e dans une div ayant une hauteur explicite (en pixels), la largeur peut &ecirc;tre exprim&eacute;e en pourcentage.</p>
+	<p>Sous cette forme simplifi&eacute;e, la balise produira une carte nue, sans aucun point. Si la balise est plac&eacute;e dans une boucle, la carte sera centr&eacute;e sur l&rsquo;&eacute;l&eacute;ment de la boucle. On peut ensuite se servir des balises #GEOKML et #GEOMARKER pour ajouter du contenu.</p>
+	<p>&nbsp;</p>
+	<p>Mais l&rsquo;usage le plus courant de la balise est de d&eacute;signer explicitement &agrave; la carte un objet de r&eacute;f&eacute;rence (fournissant &agrave; la fois le positionnement initial de la carte et la r&eacute;f&eacute;rence pour chercher les points &agrave; ajouter), et des points&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">[</span>&lt;div style=&quot;position: relative; display: block; width: 600px; height: 400px;&quot;&gt;
+  <span class="spip-syntax">(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">{id_rubrique, markers=query}</span><span class="spip-syntax">)</span>
+&lt;/div&gt;<span class="spip-syntax">]</span></pre>
+	<p>&nbsp;</p>
+	<p>Sous cette forme la carte affichera les articles g&eacute;olocalis&eacute;s de la rubrique.</p>
+ 	<p class="illustration"><img src="images/GEOMAP-1.jpg" alt="Affichage d'une carte simple" /></p>
+	<p>&nbsp;</p>
+	<p>Le param&egrave;tre markers peut prendre les valeurs suivantes&nbsp;:</p>
+	<ul>
+		<li><b>query</b>&nbsp;: les points sont ajout&eacute;s en faisant une requ&ecirc;te ajax vers le serveur, par d&eacute;faut vers le squelette <span class="code">gmap-query-default.html</span> du plugin. Mais on peut red&eacute;finir ce comportement en ajoutant un param&egrave;tre <span class="code">query=url</span>.</li>
+		<li><b>local</b>&nbsp;: ajoute seulement le point de l&rsquo;objet de r&eacute;f&eacute;rence.</li>
+		<li><b>childs</b>&nbsp;: ajoute un point pour chaque objet fils g&eacute;olocalis&eacute;.</li>
+		<li><b>recursive</b>&nbsp;: ajoute un point pour chacun des descendants g&eacute;olocalis&eacute;s.</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>La balise #GEOMAP accepte de nombreux autres param&egrave;tres, d&eacute;crits ci-dessous, qui permettent de surcharger toute l&rsquo;apparence de la carte (et dont beaucoup d&eacute;pendent de la couche d&rsquo;impl&eacute;mentation de la carte).</p>
+	
+	
+	<h1>Param&egrave;tres</h1>
+	<p>Tous les param&egrave;tres sont optionnels.</p>
+	
+	<h2>Param&egrave;tres communs &agrave; toutes les impl&eacute;mentations&nbsp;:</h2>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>map</td>
+			<td>Identifiant unique de la carte.</td>
+			<td>Identifiant num&eacute;rique.</td>
+		</tr>
+		<tr>
+			<td>id_article/id_rubrique...</td>
+			<td>Objet &agrave; partir duquel est affich&eacute;e la carte. S'il n'est pas g&eacute;olocalis&eacute;, la carte n'est pas affich&eacute;e, s'il l'est, la carte est centr&eacute;e dessus, et il sert de base &agrave; la recherche des marqueurs</td>
+			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
+		</tr>
+		<tr>
+			<td>markers</td>
+			<td>D&eacute;finition des marqueurs</td>
+			<td>
+				<ul>
+					<li><b>local</b>&nbsp;: seul(s) le(s) marqueur(s) de l'objet sont affich&eacute;s</li>
+					<li><b>childs</b>&nbsp;: les marqueurs de l'objet et de ses descendants de niveau 1 sont affich&eacute;s</li>
+					<li><b>recursive</b>&nbsp;: les marqueurs de l'objet et de tous ses descendants sont affich&eacute;s</li>
+					<li><b>query</b>&nbsp;: la liste des marqueurs provient d'une requ&ecirc;te ajax</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td>query</td>
+			<td>Nom du fichier ajax de requ&ecirc;te (si <i>markers=query</i>)</td>
+			<td>Nom du fichier ajax, sous la racine de SPIP</td>
+		</tr>
+		<tr>
+			<td>latitude</td>
+			<td>Latitude du centre de la carte</td>
+			<td>-38.5911137761474</td>
+		</tr>
+		<tr>
+			<td>longitude</td>
+			<td>Longitude du centre de la carte</td>
+			<td>143.036499023438</td>
+		</tr>
+		<tr>
+			<td>zoom</td>
+			<td>Zoom initial de la carte</td>
+			<td></td>
+		</tr>
+	</table>
+	
+	<h2>Param&egrave;tres pour Google Maps V2&nbsp;:</h2>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>fond</td>
+			<td>Fond de carte par d&eacute;faut</td>
+			<td>Parmi <i>plan</i>, <i>satellite</i>, <i>mixte</i>, <i>physic</i>, <i>earth</i></td>
+		</tr>
+		<tr>
+			<td>ctrl_fond</td>
+			<td>Style du contr&ocirc;le de changement du fond de carte</td>
+			<td>Parmi none / button / menu</td>
+		</tr>
+		<tr>
+			<td>ctrl_nav</td>
+			<td>Style du contr&ocirc;le de navigation</td>
+			<td>Parmi none / small / large / 3D</td>
+		</tr>
+		<tr>
+			<td>option_dblclk_zoom</td>
+			<td>Activation du zoom par doucle-click sur la carte</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_soft_zoom</td>
+			<td>Activation du zoom continu</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_wheel_zoom</td>
+			<td>Activation du zoom par la molette</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+	</table>
+	
+	<h2>Param&egrave;tres pour Google Maps V3&nbsp;:</h2>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>fond</td>
+			<td>Fond de carte par d&eacute;faut</td>
+			<td>Parmi <i>plan</i>, <i>satellite</i>, <i>mixte</i>, <i>physic</i>, <i>earth</i></td>
+		</tr>
+		<tr>
+			<td>ctrl_fond</td>
+			<td>Style du contr&ocirc;le de changement du fond de carte</td>
+			<td>Parmi none / button / menu</td>
+		</tr>
+		<tr>
+			<td>ctrl_zoom</td>
+			<td>Style du contr&ocirc;le d'&eacute;chelle</td>
+			<td>Parmi none / auto / small / large</td>
+		</tr>
+		<tr>
+			<td>ctrl_pan</td>
+			<td>Style du contr&ocirc;le de d&eacute;placement</td>
+			<td>Parmi none / large</td>
+		</tr>
+		<tr>
+			<td>ctrl_scale</td>
+			<td>Affichage de l'&eacute;chelle</td>
+			<td>Parmi none / default</td>
+		</tr>
+		<tr>
+			<td>ctrl_street</td>
+			<td>Affichage de l'acc&egrave;s &agrave; StreetView</td>
+			<td>Parmi none / default</td>
+		</tr>
+		<tr>
+			<td>ctrl_rotate</td>
+			<td>Affichage du contr&ocirc;le de rotation</td>
+			<td>Parmi none / default</td>
+		</tr>
+		<tr>
+			<td>ctrl_overview</td>
+			<td>Affichage du contr&ocirc;le de localisation rapide</td>
+			<td>Parmi none / open / close</td>
+		</tr>
+		<tr>
+			<td>option_dblclk_zoom</td>
+			<td>Activation du zoom par doucle-click sur la carte</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_drag</td>
+			<td>Activation du d&eacute;placement de la carte avec la main</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_wheel_zoom</td>
+			<td>Activation du zoom par la molette</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+		<tr>
+			<td>option_keyboard</td>
+			<td>Activation des commandes clavier</td>
+			<td><i>oui</i> ou <i>non</i></td>
+		</tr>
+	</table>
+	
+</body>
+</html>

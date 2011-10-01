@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Boucle GEOTEST</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> Boucle GEOTEST</p>
+	
+	<h1>R&ocirc;le</h1>
+	<p>La boucle GEOTEST sert &agrave; tester si un objet est g&eacute;olocalis&eacute; et/ou a des descendants g&eacute;olocalis&eacute;s. Elle permet &eacute;galement de tester si le plugin est actif.</p>
+	<p>Elle peut &ecirc;tre utilis&eacute;e dans les squelettes autour d'un balise #GEOMAP pour tester s'il y a lieu, ou non, d'afficher une carte.</p>
+
+	<h1>Utilisation</h1>
+	<p>La syntaxe est la suivante&nbsp;:</p>
+	<pre class="code"><span class="spip-boucle">&lt;B_geo&gt;</span>
+<span class="spip-boucle">&lt;BOUCLE_geo(GEOTEST){<i>identificateur d'objet</i>}[{recursif}]&gt;</span><span class="spip-syntax">
+...
+<span class="spip-boucle">&lt;/BOUCLE_geo&gt;</span>
+<span class="spip-boucle">&lt;/B_geo&gt;</span></pre>
+	<p>Le crit&egrave;re <span class="code">{<i>identificateur d'objet</i>}</span> est obligatoire, il permet d'identifier l'objet que l'on est en train de tester. Il peut s'agir de crit&egrave;re faisant r&eacute;f&eacute;rence au contexte des boucles, comme <span class="code">{id_article}</span>, ou une indication explicite comme <span class="code">{id_rubrique=2}</span>, ou encore un couple <span class="code">{objet=document}{id_objet=123}</span>.</p>
+	<p>Le crit&egrave;re <span class="code">{recursif}</span> indique qu'il faut &eacute;galement tester si l'objet poss&egrave;de des descendants g&eacute;olocalis&eacute;s.</p>
+	<p>Il suffit que l'objet lui-m&ecirc;me ou qu'un seul de ses descendants soit g&eacute;olocalis&eacute; pour que le contenu de la boucle s'ex&eacute;cute.</p>
+	
+	<h1>Exemple</h1>
+	<pre class="code"><span class="spip-boucle">&lt;B_geo&gt;</span>
+<span class="spip-boucle">&lt;BOUCLE_geo(GEOTEST){id_article}&gt;</span><span class="spip-syntax">[
+	(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">{</span>id_article,markers=query<span class="spip-syntax">})
+]</span><span class="spip-boucle">&lt;/BOUCLE_geo&gt;</span>
+<span class="spip-boucle">&lt;/B_geo&gt;</span></pre>
+
+	<h1>Limitations</h1>
+	<p>Par rapport aux possibilit&eacute;s offertes pour l'ajout des marqueurs, le test effectu&eacute; est assez limit&eacute;.</p>
+	<p>Par exemple, il arrive assez souvent que l'on veuille afficher une carte contenant les descendants mais pas l'objet lui-m&ecirc;me, il faudrait donc tester si au moins un descendant est g&eacute;olocalis&eacute;, ind&eacute;pendemment de l'objet lui-m&ecirc;me.</p>
+
+</body>
+</html>

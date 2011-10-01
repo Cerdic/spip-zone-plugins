@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Boucle GEOTEST</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> Boucle GEOTEST</p>
+	
+	<h1>R&ocirc;le</h1>
+	<p>La boucle GEOPOINTS sert &agrave; parcourir les points g&eacute;ographiques d&eacute;finis sur un &eacute;l&eacute;ment SPIP. Elle est directement reli&eacute;e &agrave; la table &lt;i&gt;gmap_points&lt;/i&gt; qui contient les points d&eacute;finis dans l'interface de g&eacute;olocalisation.</p>
+	<p>Cette boucle peut-&ecirc;tre utilis&eacute;e pour ajouter les marqueurs correspondants aux points sur les cartes de l'interface publique. Elle s'utilise donc dans deux cas&nbsp;:</p>
+	<ul>
+		<li>Le cas le plus courant est la red&eacute;finition d'un fichier de requ&ecirc;te permettant de r&eacute;cup&eacute;rer les points selon des crit&egrave;res sp&eacute;cifiques. Le fichier par d&eacute;faut <span class="code">gmap-query-default.html</span> peut servir d'exemple pour d&eacute;finir de tels fichiers. Ce sont des squelettes SPIP qui produisent des fichiers au format KML.</li>
+		<li>Un cas moins courant serait l'ajout manuel de marqueurs gr&acirc;ce &agrave; la <a href="balise-GEOMARKER">balise #GEOMARKER</a>. L'utilisation de la boucle est la m&ecirc;me.</li>
+	</ul>
+
+	<h1>Utilisation</h1>
+	<p>La syntaxe est la suivante&nbsp;:</p>
+	<pre class="code"><span class="spip-boucle">&lt;B_points&gt;</span>
+<span class="spip-boucle">&lt;BOUCLE_points(GEOPOINTS){<i>identificateur d'objet</i>}[{visible}][{meilleur}]&gt;</span><span class="spip-syntax">
+...
+<span class="spip-boucle">&lt;/BOUCLE_points&gt;</span>
+<span class="spip-boucle">&lt;/B_points&gt;</span></pre>
+	<p>Le crit&egrave;re <span class="code">{<i>identificateur d'objet</i>}</span> est obligatoire, il permet d'identifier l'objet duquel on cherche les points. Il peut s'agir de crit&egrave;re faisant r&eacute;f&eacute;rence au contexte des boucles, comme <span class="code">{id_article}</span>, ou une indication explicite comme <span class="code">{id_rubrique=2}</span>, ou encore un couple <span class="code">{objet=document}{id_objet=123}</span>.</p>
+	<p>Le crit&egrave;re <span class="code">{visible}</span> indique que seuls les points dont le type est marqu&eacute; visible seront renvoy&eacute;s.</p>
+	<p>Le crit&egrave;re <span class="code">{meilleur}</span> indique que l'on souhaite ne récupérer qu'un seul point. La requête recherche alors le point défini sur l'objet ayant le meilleur niveau de priorité, c'est-à-dire le plus faible champ <i>priorite</i> de la table <i>gmap_types</i>.</p>
+
+	<h1>Balises</h1>
+	<p>Dans le contexte de la boucle GEOPOINTS, on peut utiliser les balises suivantes&nbsp;:</p>
+	<ul>
+		<li><b>#ID_POINT</b>&nbsp;: identifiant du point (a priori inutile).</li>
+		<li><b>#LATITUDE</b>&nbsp;: latitude du point.</li>
+		<li><b>#LONGITUDE</b>&nbsp;: longitude du point.</li>
+		<li><b>#ZOOM</b>&nbsp;: facteur de zoom associ&eacute; au point.</li>
+		<li><b>#OBJET</b>&nbsp;: type de l'objet par lequel on a acc&eacute;der au point (sachant qu'un point pourrait &agrave; l'avenir &ecirc;tre li&eacute; &agrave; plusieurs objets).</li>
+		<li><b>#ID_OBJET</b>&nbsp;: identifiant de l'objet par lequel on a acc&eacute;der au point (idem).</li>
+		<li><b>#TYPE_POINT</b>&nbsp;: nom du type de point.</li>
+		<li><b>#DESCRIPTIF</b>&nbsp;: descriptif du type de point.</li>
+		<li><b>#VISIBLE</b>&nbsp;: oui/non selon que le type de point est visible ou non.</li>
+		<li><b>#PRIORITE</b>&nbsp;: niveau de priorit&eacute; du type de point.</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>Dans le contexte de la cr&eacute;ation d'un fichier KML, on peut &eacute;galement utiliser les balises sp&eacute;ciales (parce que non li&eacute;e &agrave; la base de donn&eacute;es) suivantes&nbsp;:</p>
+	<ul>
+		<li><b>#GEOMARKERICONS</b>&nbsp;: ajout des information sur l'icone du marqueur, dans un format sp&eacute;cifique aux KML de GMap.</li>
+		<li><b>#GEOPOPUP</b>&nbsp;: ajout du contenu de l'info-bulle associ&eacute;e &agrave; un objet.</li>
+	</ul>
+	
+	<h1>Exemple</h1>
+	<pre class="code"><span class="spip-boucle">&lt;BOUCLE_art_documents(DOCUMENTS){id_article}&gt;</span>
+<span class="spip-boucle">&lt;BOUCLE_art_documents_points(GEOPOINTS){id_document}{visible}{meilleur}&gt;</span>
+&lt;Placemark&gt;
+  <span class="spip-syntax">[</span>&lt;styleUrl&gt;(#URL_PAGE{gmap-styles-default}|ancre_url{GMapDocument})&lt;/styleUrl&gt;<span class="spip-syntax">]</span>
+  &lt;ExtendedData&gt;<span class="spip-syntax">[
+    (</span><span class="spip-balise">#GEOMARKERICONS</span><span class="spip-syntax">{format=kml})]</span>
+    &lt;markerParams<span class="spip-syntax">[</span> type="<span class="spip-syntax">(</span><span class="spip-balise">#TYPE_POINT</span><span class="spip-syntax">)</span>"<span class="spip-syntax">][</span> zoom="<span class="spip-syntax">(</span><span class="spip-balise">#ZOOM</span><span class="spip-syntax">)</span>"<span class="spip-syntax">][</span> objectName="<span class="spip-syntax">(</span><span class="spip-balise">#OBJET</span><span class="spip-syntax">)</span>"<span class="spip-syntax">][</span> objectId="<span class="spip-syntax">(</span><span class="spip-balise">#ID_OBJET</span><span class="spip-syntax">)</span>"<span class="spip-syntax">][</span> visible="<span class="spip-syntax">(</span><span class="spip-balise">#VISIBLE</span><span class="spip-syntax">)</span><span class="spip-syntax">][</span> priority="<span class="spip-syntax">(</span><span class="spip-balise">#PRIORITE</span><span class="spip-syntax">)</span>"<span class="spip-syntax">]</span> /&gt;
+  &lt;/ExtendedData&gt;
+  <span class="spip-syntax">[</span>&lt;Style&gt;
+    &lt;BalloonStyle&gt;
+      &lt;bgColor&gt;ffffffff&lt;/bgColor&gt;
+      &lt;text&gt;<span class="spip-syntax">(</span><span class="spip-balise">#GEOPOPUP</span>{objet_parent=article,id_objet_parent=#_articles:ID_ARTICLE}<span class="spip-syntax">)</span>&lt;/text&gt;
+    &lt;/BalloonStyle&gt;
+  &lt;/Style&gt;<span class="spip-syntax">]</span>
+  &lt;Point&gt;
+    &lt;coordinates&gt;<span class="spip-balise">#LONGITUDE</span>,<span class="spip-balise">#LATITUDE</span>,0&lt;/coordinates&gt;
+  &lt;/Point&gt;
+&lt;/Placemark&gt;
+<span class="spip-boucle">&lt;/BOUCLE_art_documents_points&gt;</span>
+<span class="spip-boucle">&lt;/BOUCLE_art_documents&gt;</span></pre>
+
+</body>
+</html>

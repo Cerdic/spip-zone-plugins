@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8">
+<markers xmlns="http://www.loceanique.org/schemas/geomarkers/1.0"
+	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	 xsi:SchemaLocation="http://www/loceanique.org/schemas/GeoMarkers/1.0 http://www/loceanique.org/schemas/GeoMarkers/1.0/geomarkers.xsd"
+	 id="gmap-marker-document">
+
+<icon type="shadow">
+	<image>images/gmap-shadow.png</image>
+	<size x="32" y="32" />
+	<anchor x="11" y="31" />
+</icon>
+
+<icon state="normal" type="simple">
+	<image>images/gmap-marker-photo-prise.png</image>
+	<size x="32" y="32" />
+	<anchor x="11" y="31" />
+	<offset x="12" y="15" />
+</icon>
+
+<icon state="normal" type="complete">
+	<image>images/gmap-marker-photo-prise-full.png</image>
+	<size x="32" y="32" />
+	<anchor x="11" y="31" />
+	<offset x="12" y="15" />
+</icon>
+
+<icon state="selected" type="simple">
+	<image>images/gmap-marker-photo-prise-high.png</image>
+	<size x="32" y="32" />
+	<anchor x="11" y="31" />
+	<offset x="12" y="15" />
+</icon>
+
+<icon state="selected" type="complete">
+	<image>images/gmap-marker-photo-prise-full-high.png</image>
+	<size x="32" y="32" />
+	<anchor x="11" y="31" />
+	<offset x="12" y="15" />
+</icon>
+
+</markers>

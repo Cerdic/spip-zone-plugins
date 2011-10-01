@@ -1,0 +1,25 @@
+[(#REM)
+
+	Modèle pour la description d'un article dans les info-bulles de la carte.
+	
+]<BOUCLE_article(ARTICLES){id_article}><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="#LANG_DIR" lang="#LANG">
+<head>[
+	<title>(#TITRE|textebrut)</title>][
+	<link href="(#URL_FICHIER{style/gmap-balloon.css}|url_absolue)" rel="stylesheet" type="text/css" />]
+</head>
+<body class="balloon">
+<div class="gmap-balloon">[
+	<h1><a[ href="(#URL_ARTICLE|url_absolue)"]>(#TITRE)</a></h1>][
+	<p class="description">(#DESCRIPTIF)</p>]
+	<div class="contents">
+	<BOUCLE_rub_articles_images(DOCUMENTS){id_article}{extension==jpg|png|gif}{par hasard}{0,1}><div class="image"><a href='[(#URL_ARTICLE|url_absolue)]' [title='(#TITRE|attribut_html)']><img src='[(#LOGO_DOCUMENT|fichier|url_absolue)]'[ height='(#LOGO_DOCUMENT||hauteur)'][ width='(#LOGO_DOCUMENT||largeur)'][ alt='(#TITRE|sinon{Image}|attribut_html)'] /></a></div></BOUCLE_rub_articles_images>[
+		<p class="soustitre">(#SOUSTITRE|supprimer_tags|texte_backend)</p>][
+		<div class="texte">(#INTRODUCTION{200}|supprimer_tags|texte_backend)</div>][
+		<div class="signature">[(#DATE|date_iso)], <:par_auteur:> (#LESAUTEURS|supprimer_tags|texte_backend)</div>][
+		<div class="lire"><a href='(#URL_ARTICLE|url_absolue)'[ title='(#TITRE|attribut_html)']>voir en ligne</a></div>]
+	</div>
+</div>
+</body>
+</html>
+</BOUCLE_article>

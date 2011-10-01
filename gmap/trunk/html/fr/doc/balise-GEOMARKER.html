@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOMARKER</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> La balise #GEOMARKER</p>
+	
+	<h1>R&ocirc;le</h1>
+	<p>Cette balise permet d&rsquo;ajouter manuellement des points sur la carte. Les coordonn&eacute;es peuvent &ecirc;tre fournies explicitement, ou elle peuvent provenir d&rsquo;un &eacute;l&eacute;ment g&eacute;olocalis&eacute; dans SPIP.</p>
+	<p>Par exemple&nbsp;:</p>
+	<pre class="code"><span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_article}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_article=23}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{id_document=119, type=visee}</span>
+<span class="spip-balise">#GEOMARKER</span><span class="spip-syntax">{latitude=38, longitude=-6, titre=un marqueur manuel, icon=gmap-marker-article, texte=toto}</span></pre>
+	<ul>
+		<li>La premi&egrave;re forme ajoute un point correspondant &agrave; l&rsquo;article qui se trouve dans le contexte.</li>
+		<li>La deuxi&egrave;me ajoute le point correspondant &agrave; un article identifi&eacute;.</li>
+		<li>La troisi&egrave;me ajoute le point de types <span class="code">visee</span> associée au document 119.</li>
+		<li>La quatri&egrave;me ajoute un point dont la position est d&eacute;finie manuellement.</li>
+	</ul>
+	<p>Si plusieurs balises GEOMAP sont pr&eacute;sentes, on peut utiliser le param&egrave;tre map=X pour donner un num&eacute;ro &agrave; la carte et lever les ambigu&iuml;t&eacute;s. Sans ce param&egrave;tre, le marqueur sera ajout&eacute; sur la derni&egrave;re carte cr&eacute;&eacute;e au moment o&ugrave; la balise GEOMARKER est interpr&eacute;t&eacute;e.</p>
+
+	<h1>Param&egrave;tres</h1>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>map</td>
+			<td>Identifiant unique de la carte.</td>
+			<td>Identifiant num&eacute;rique correspondant au param&egrave;tre <i>map</i> d'une balise <i>GEOMAP</i> ins&eacute;r&eacute;e dans le m&ecirc;me document.</td>
+		</tr>
+		<tr>
+			<td>id_article/id_rubrique...</td>
+			<td>Objet &agrave; partir duquel est affich&eacute;e la carte. S'il n'est pas g&eacute;olocalis&eacute;, la carte n'est pas affich&eacute;e, s'il l'est, la carte est centr&eacute;e dessus, et il sert de base &agrave; la recherche des marqueurs</td>
+			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td>Type du marqueur recherch&eacute; sur un &eacute;l&eacute;ment.</td>
+			<td>Parmi les types d&eacute;finis dans le param&eacute;trage du plugin.</td>
+		</tr>
+		<tr>
+			<td>latitude</td>
+			<td>Latitude du centre de la carte</td>
+			<td>-38.5911137761474</td>
+		</tr>
+		<tr>
+			<td>longitude</td>
+			<td>Longitude du centre de la carte</td>
+			<td>143.036499023438</td>
+		</tr>
+		<tr>
+			<td>titre</td>
+			<td>Titre du point, affich&eacute; sur le survol du marqueur.</td>
+			<td>texte</td>
+		</tr>
+		<tr>
+			<td>texte</td>
+			<td>Texte du point, affich&eacute; dans l'info-bulle.</td>
+			<td>texte / html</td>
+		</tr>
+		<tr>
+			<td>icon</td>
+			<td>Nom de l'icone utilis&eacute;e pour le marqueur.</td>
+			<td>Nom d'un fichier XML du type gmd. Le plugin d&eacute;fini par exemple un fichier <span class="code">gmap-marker-default.gmd</span>, pour le d&eacute;signer, le param&egrave;tre <i>icon</i> doit contenir <i>gmap-marker-default</i>. Ces fichiers sont recherch&eacute;s dans le path de SPIP, ils peuvent donc &ecirc;tre positionn&eacute;s dans le dossier <i>squelettes</i>.</td>
+		</tr>
+	</table>
+	
+</body>
+</html>

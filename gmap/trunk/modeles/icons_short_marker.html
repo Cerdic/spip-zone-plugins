@@ -1,0 +1,16 @@
+[(#REM)
+
+	Liste des icones écrite dans les fichiers KML, mais à destination des cartes du plugin GMap
+	Les icones de type "complete" ne sont pas reproduites puisqu'elles ne servent à rien pour 
+	le plugin (elles devraient être utilisées pour les IconStyle à destination de GoogleEarth.
+	
+]<B_icons>
+<[(#ENV{prefix}):]markers[ id="(#ENV{name})"]>
+<BOUCLE_icons(POUR){tableau #ENV{icons}}>[
+(#VALEUR|table_valeur{type}|!={complete}|?{" ",""})
+	<[(#ENV{prefix}):]iconShort[ type="(#VALEUR|table_valeur{type})"][ state="(#VALEUR|table_valeur{state})"][ url="(#URL_FICHIER{#VALEUR|table_valeur{image}}|url_absolue)"][ cxSize="(#VALEUR|table_valeur{cxSize})"][ cySize="(#VALEUR|table_valeur{cySize})"][ xAnchor="(#VALEUR|table_valeur{xAnchor})"][ yAnchor="(#VALEUR|table_valeur{yAnchor})"][ xOffset="(#VALEUR|table_valeur{xOffset})"][ yOffset="(#VALEUR|table_valeur{yOffset})"] />
+]</BOUCLE_icons>
+</[(#ENV{prefix}):]markers>
+</B_icons>
+<[(#ENV{prefix}):]markers[ ref="(#ENV{name})"] />
+<//B_icons>
