@@ -1,38 +1,15 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-		SPIP Bisous !
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 		RastaPopoulos
-	</auteur>
-	<licence>
-		GPL
-	</licence>
-	<version> <!-- Version du plugin -->
-		0.2
-	</version>
-	<version_base>
-		0.2
-	</version_base>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-		dev
-	</etat>
-	<description>
-Vous &ecirc;tes en col&egrave;re ? Il vous faut des bisous !
-
-Vous &ecirc;tes content ? Il vous faut des bisous !
-	</description>
+	<nom>SPIP Bisous !</nom>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL</licence>
+	<version>0.2.0</version>
+	<version_base>0.2</version_base>
+	<etat>dev</etat>
+	<description>Vous &#234;tes en col&#232;re ? Il vous faut des bisous ! Vous &#234;tes content ? Il vous faut des bisous !</description>
 	<lien></lien> <!-- URI de documentation -->
-	<prefix> 
-		bisous
-	</prefix>
-	<icon>
-		images/amour.png
-	</icon>
-	
-	<install>
-		base/bisous_installation.php
-	</install>
+	<prefix>bisous</prefix>
+	<icon>images/amour.png</icon>
+	<install>base/bisous_installation.php</install>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/bisous_tables.php</inclure>
@@ -45,6 +22,6 @@ Vous &ecirc;tes content ? Il vous faut des bisous !
 	   <nom>affiche_gauche</nom>
 	   <inclure>bisous_pipelines.php</inclure>
     </pipeline>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<categorie>communication</categorie>
 </plugin>
