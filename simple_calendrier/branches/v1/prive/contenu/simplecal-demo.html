@@ -1,0 +1,69 @@
+<p>
+    <:simplecal:demo_description:>
+    <br /><:simplecal:demo_voir:> /plugins/simple-calendrier/prive/contenu/simplecal-demo.html
+</p>
+
+#SIMPLE_CALENDRIER
+
+<script type="text/javascript">
+    $(".ui-datepicker").show();
+</script>
+
+
+<h2><:simplecal:demo_les_evenements_critere:> {du_mois}</h2>
+<B_evta>
+<ul>
+<BOUCLE_evta(EVENEMENTS) {du_mois} {par date_debut}>
+    <li>
+        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+    </li>
+</BOUCLE_evta>
+</ul>
+</B_evta>
+<:simplecal:demo_aucun:>
+<//B_evta>
+
+
+
+<h2><:simplecal:demo_les_evenements_critere:> {du_mois}{a_venir}</h2>
+<B_evtb>
+<ul>
+<BOUCLE_evtb(EVENEMENTS) {du_mois}{a_venir} {par date_debut}>
+    <li>
+        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+    </li>
+</BOUCLE_evtb>
+</ul>
+</B_evtb>
+<:simplecal:demo_aucun:>
+<//B_evtb>
+
+<h2><:simplecal:demo_les_evenements_critere:> {du_mois}{!a_venir}</h2>
+<B_evtc>
+<ul>
+<BOUCLE_evtc(EVENEMENTS) {du_mois}{!a_venir} {par date_debut}>
+    <li>
+        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+    </li>
+</BOUCLE_evtc>
+</ul>
+</B_evtc>
+<:simplecal:demo_aucun:>
+<//B_evtc>
+
+
+
+<h2><:simplecal:demo_les_evenements_critere:> {a_venir}</h2>
+<B_evtd>
+<ul>
+<BOUCLE_evtd(EVENEMENTS) {a_venir} {par date_debut} {0,10}>
+    <li>
+        [(#DATE_DEBUT|simplecal_affdates{#DATE_FIN})] : #TITRE [- <strong>(#LIEU)</strong>]
+        #LOGO
+    </li>
+</BOUCLE_evtd>
+</ul>
+</B_evtd>
+<:simplecal:demo_aucun:>
+<//B_evtd>
+
