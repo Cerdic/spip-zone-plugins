@@ -1,46 +1,33 @@
 <plugin>
-	<nom>	<!-- Nom du plugin -->
-		Mod&eacute;ration Mod&eacute;r&eacute;e
-	</nom>
-	<icon>
-		img_pack/icone.png
-	</icon>
-	<auteur>	<!-- Auteur du plugin -->
-		Yohann
-	</auteur>
-	<version>
-		1
-	</version>
-	<etat>
-		stable
-	</etat>
+	<nom>Mod&#233;ration Mod&#233;r&#233;e</nom>
+	<slogan>Am&#233;lioration de la mod&#233;ration</slogan>
+	<icon>img_pack/icone.png</icon>
+	<auteur>Yohann</auteur>
+	<version>1.0.0</version>
+	<etat>stable</etat>
 	<description>
-		Ce plugin permet aux utilisateurs des forums publics configur&eacute;s {apriori}, 
-		qui sont enregsitr&eacute;s et logu&eacute;s en tant que visiteur r&eacute;dacteur ou admin, 
-		de ne pas subir ce type de mod&eacute;ration. Leur commentaire est automatiquement 
-		valid&eacute; sans qu'il y ait une action de la part d'un 
-		mod&eacute;rateur des forums depuis l'espace priv&eacute;e.<br />
-		Ceci ne fonctionne que pour les forums publics {{a priori}}.<br />
-		On peut choisir quels types de commentateur auront 
-		droit &agrave; la mod&eacute;ration mod&eacute;r&eacute;e 
-		(visiteur / r&eacute;dacteur / admin) mais ils 
-		doivent tous &ecirc;tre logu&eacute;s.
+		Ce plugin permet aux utilisateurs des forums publics configur&#233;s {apriori}, 
+		qui sont enregsitr&#233;s et logu&#233;s en tant que visiteur r&#233;dacteur ou admin, 
+		de ne pas subir ce type de mod&#233;ration. Leur commentaire est automatiquement 
+		valid&#233; sans qu'il y ait une action de la part d'un 
+		mod&#233;rateur des forums depuis l'espace priv&#233;e.
+		_ Ceci ne fonctionne que pour les forums publics {{a priori}}.
+		_ On peut choisir quels types de commentateur auront 
+		droit &agrave; la mod&#233;ration mod&#233;r&#233;e 
+		(visiteur / r&#233;dacteur / admin) mais ils 
+		doivent tous &ecirc;tre logu&#233;s.
 	</description>
-	<lien>
-		[MM sur Contrib->http://www.spip-contrib.net/Moderation-Moderee]
-	</lien>
-	<prefix>
-		moderation
-	</prefix>
+	<lien>http://www.spip-contrib.net/Moderation-Moderee</lien>
+	<prefix>moderation</prefix>
 	<pipeline>
 		<nom>pre_edition</nom>
 		<action>vip</action>
 		<inclure>fonctions_mod.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<bouton id='moderation' parent='forum'>
 		<icone>img_pack/icone.png</icone>
-		<titre>Mod&eacute;ration Mod&eacute;r&eacute;e</titre>
+		<titre>Mod&#233;ration Mod&#233;r&#233;e</titre>
 	</bouton>
 	<categorie>communication</categorie>
 </plugin>
