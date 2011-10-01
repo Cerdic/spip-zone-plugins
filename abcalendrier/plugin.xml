@@ -7,7 +7,7 @@
 		[en]Mini Calendar for Articles and News
 		</multi>
 	</slogan>
-	<auteur>mmmxvvv@tiscali.it</auteur>
+	<auteur>[mmmxvvv->mmmxvvv@tiscali.it]</auteur>
 	<licence>GNU/GPL - (c) 2007 - 2009</licence>
 	<version>0.73.1</version>
 	<etat>test</etat>
@@ -18,18 +18,17 @@
 		Utilizza un campo {evento} aggiunto alle brevi.
 		Il codice &#232; stato riscritto utilizzando le #BALISE per il codice, piuttosto che un modelle che utilizzava includeva il PHP. Inoltre &#232; stata implementata la localizzazione con i file multilingua e usando i relativi file di spip
 		Inoltre &#232; stato aggiunto il supporto a pi&#249; eventi nella stessa giornata
-		<hr/>
+
 		{{{Istallazione:}}} attivare il plugin,
 		creare la parola chiave {mini-calendrier}
-		<hr/>
 		{{{Uso:}}}
 		Per aggiungere un articolo al calendario, aggiungere la parola chiave mini-calendrier e inserire la data evento come data di redazione anteriore (da attivare dal pannello di configurazione)
 		Per aggiungere una breve al calendario, aggiungere la parola chiave mini-calendrier, salvare, e inserire la data evento
 		Inserire il segnaposto #ABCALENDRIER nei modelli. &#232; possinile anche scrivere #ABCALENDRIER{7} per limitare la lista di eventi visualizzati sotto il calendario a 7.
-		<hr/>
+
 		to do:
 		nomi al campo e alle funzioni adeguate
-		<hr/>
+
 		{{{Ringraziamenti}}}
 		Ringraziamenti agli autori [minicalendrier pour eva-&gt;http://eva-web.edres74.net/spip.php?article35] Olivier Gautier e a tutti coloro che contribuiscono a arricchire la documentazione sullo sviluppo dei plugin.
 		[en]
@@ -37,15 +36,15 @@
 		A new field {evento} is added to table spip_breves in the DB.
 		Code as been rewritten to use spip tags #BALISE, so it's not needed to include php in the model file; multilanguage support added;
 		Is now possible to add more events in the same day
-		<hr/>
+
 		{{{Installation:}}} activate plugin as usual; create the key-word {mini-calendrier}
-		<hr/>
+
 		{{{Usage:}}}
 		To add an article to calendar set the keyword mini-calendrier and use "Date of earlier publishing" as event date
 		(be sure to activete it in the configuration panel)
 		To add a news to calendar save it, set the keyword mini-calendrier and then set the event date
 		Insert the tag #ABCALENDRIER in your models. You can also write #ABCALENDRIER{7} to limit the list of events to 7 or the number you want.
-		<hr/>
+
 		{{{Thanks}}}
 		I want to thanks authors of [minicalendrier pour eva-&gt;http://eva-web.edres74.net/spip.php?article35] Olivier Gautier and all people contributing plugin developing documentation
 		[fr]
@@ -53,14 +52,14 @@
 		Un nouveau champ {evento} est ajout&#233; &#224; la table spip_breves dans la base de donn&#233;es.
 		Le code a &#233;t&#233; r&#233;-&#233;crit pour utiliser le tags #BALISE de spip, ce qui &#233;vite d'ins&#233;rer du php dans les squelettes ; la compatibilit&#233; multilingue a &#233;t&#233; ajout&#233;e.
 		Il est maintenant possible d'ajouter plus d'&#233;v&#232;nements sur le m&#234;me jour.
-		<hr/>
+
 		{{{Installation:}}} Activez le plugin de mani&#232;re classique. Cr&#233;ez un mot-cl&#233; {mini-calendrier}
-		<hr/>
+
 		{{{Utilisation:}}}
 		Pour ajouter un article au calendrier, ajoutez le mot-cl&#233; mini-calendrier et utilisez la date de r&#233;daction ant&#233;rieure comme date d'&#233;v&#232;nement (assurez-vous de l'avoir activ&#233;e dans le panneau de configuration)
 		Pour ajouter une br&#232;ves dans le calendrier, validez la br&#232;ve puis ajoutez le mot-cl&#233; mini-calendrier et param&#233;trez la date de l'&#233;v&#232;nement.
 		Ins&#233;rez le tag #ABCALENDRIER dans les squelettes. Il est possible d'&#233;crire #ABCALENDRIER{7} pour limiter la liste d'&#233;v&#232;nements visualis&#233;s sous le calendrier &#224; 7.
-		<hr/>
+
 		{{{Merci}}}
 		Je remercie les auteurs du [minicalendrier pour Eva-&gt;http://eva-web.edres74.net/spip.php?article35], Olivier Gautier et tous ceux qui ont contribu&#233; au d&#233;veloppement de la documentation du plugin. Enfin un remerciement sp&eacute;cial &agrave; [Tropicaloo->http://www.spip-contrib.net/Tropicaloo] pour les traductions
 		</multi>
