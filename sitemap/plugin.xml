@@ -1,39 +1,23 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Google siteMap
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN
- 	[notre-ville.net->http://www.notre-ville.net]
-_ &#169; 2006 - Licence GPL
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>Google siteMap</nom>
+	<slogan>Cr&#233;&#233; dynamiquement un fichier sitemap</slogan>
+	<auteur>Cedric MORIN	[notre-ville.net->http://www.notre-ville.net]</auteur>
+	<licence>&#169; 2006 - GPL</licence>
+	<version>0.1.0</version>
+	<etat>stable</etat>
 	<description>
-	<multi>
-	[fr]
-	Ce plugin cr&#233;e dynamiquement un [sitemap Google->http://www.google.com/webmasters/sitemaps/]
-_ Le contenu le plus proche de la racine est prioritaire
-_ La pr&#233;sence des squelettes article, br&#232;ve... est test&#233;e pour chaque type d'objet
-
-Usage : d&#233;clarer l'[URL du SiteMap->../spip.php?page=sitemap] dans Google (utiliser /?page=sitemap directement ne fonctionnera pas). On peut aussi d&#233;clarer l'URL du SiteMap dans un fichier robots.txt contenant "Sitemap: http://www.example.com/spip.php?page=sitemap".
-	[it]
-	Questo plugin crea dinamicamente una [sitemap per Google->http://www.google.com/webmasters/sitemaps/]
-_ Il contenuto pi&ugrave; vicino alla radice del sito ha una priorit&#224; pi&ugrave; alta
-_ La presenza dei modelli article, breve... &#232; verificata per ogni tipo di oggetto
-
-Modali&#224; di utilizzo: dichiarare l'[URL della SiteMap->../spip.php?page=sitemap] in Google (inserendo direttamente /?page=sitemap la SiteMap non funzioner&#224;).
-	</multi>
+		<multi>
+		[fr]Ce plugin cr&#233;e dynamiquement un [sitemap Google->http://www.google.com/webmasters/sitemaps/]. Le contenu le plus proche de la racine est prioritaire. La pr&#233;sence des squelettes article, br&#232;ve... est test&#233;e pour chaque type d'objet.
+	
+{{Usage :}} d&#233;clarer l'URL du SiteMap dans Google : <code>http://www.example.com/spip.php?page=sitemap</code> (utiliser <code>http://www.example.com/?page=sitemap</code> directement ne fonctionnera pas). On peut aussi d&#233;clarer l'URL du SiteMap dans un fichier robots.txt contenant <code>Sitemap: http://www.example.com/spip.php?page=sitemap</code>.
+		[it]Questo plugin crea dinamicamente una [sitemap per Google->http://www.google.com/webmasters/sitemaps/]. Il contenuto pi&#249; vicino alla radice del sito ha una priorit&#224; pi&#249; alta. La presenza dei modelli article, breve... &#232; verificata per ogni tipo di oggetto.
+	
+{{Modali&#224; di utilizzo:}} dichiarare l'URL della SiteMap in Google: <code>http://www.example.com/spip.php?page=sitemap</code> (inserendo direttamente <code>http://www.example.com/?page=sitemap</code> la SiteMap non funzioner&#224;).
+		</multi>
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/SiteMap</lien> <!-- URI de documentation -->
-	<prefix> 
-	siteMap
-	</prefix>
+	<lien>http://zone.spip.org/trac/spip-zone/wiki/SiteMap</lien>
+	<prefix>siteMap</prefix>
 	<chemin dir='' type='public' />	
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>maintenance</categorie>
 </plugin>
