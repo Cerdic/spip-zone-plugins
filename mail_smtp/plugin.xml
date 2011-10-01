@@ -1,19 +1,18 @@
 <plugin>
 	<nom>Mail SMTP</nom>
-	<auteur>Cedric &#38; Booz</auteur>
+	<auteur>Cedric et Booz</auteur>
 	<version>1.9.3</version>
 	<etat>test</etat>
 	<description>Utilisation d'un serveur SMTP pour l'envoi des mails par SPIP
 _ Les param&#232;tres du serveur SMTP sont configur&#233;s dans la panneau de configuration des fonctions avanc&#233;es.	
-_ N&#233;cessite SPIP 1.9.2
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Le-plugin-Mail-SMTP-test</lien> <!-- URI de documentation -->
 	<prefix>smtp</prefix>
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>smtp_config_fonctions.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>communication</categorie>
 </plugin>
