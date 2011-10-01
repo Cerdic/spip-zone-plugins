@@ -5,20 +5,20 @@
     <version>0.1.0</version>
     <etat>test</etat>
     <description>
-    {{Articles sous forme de news avec d&#233;filement automatique}}<br />
-    - Publier une s&#233;rie d'articles dans un bloc avec des effets<br />
-    - Liste des effets possibles : sans effet, fade out/in, slide up/down, left/right<br />
-    - Temporisation r&#233;glable<br /><br />
+    {{Articles sous forme de news avec d&#233;filement automatique}}
+    _ - Publier une s&#233;rie d'articles dans un bloc avec des effets
+    _ - Liste des effets possibles : sans effet, fade out/in, slide up/down, left/right
+    _ - Temporisation r&#233;glable
 	 
-	 {{Utilisation :}}<br/>
-	 {Avec des squelettes autres que eva-web 4 :}<br />
-	 Vous devez ins&#233;rer la ligne <code>&lt;INCLURE {fond=articles_news}{ajax}&gt;</code> dans votre squelette &agrave; l'endroit où doit apparaître le bloc de news<br/><br />
-	 {Avec eva-web 4 :}<br />
-	 Rendez-vous dans l'onglet "structure" du plugin eva-habillage.<br />
-	 Dans le deuxi&#232;me bloc intitul&#233; "Choisir la position des blocs dans les pages",
-	 allez &agrave; la ligne "Ins&#233;rer un squelette personnel de type bloc dans une des pages...".<br />
-	 A l'&#233;tape 2, dans la zone de texte "Nom du squelette", tapez "articles_news", puis validez.<br /><br/>
-	 <br/>
+	 {{Utilisation :}}
+	 _ {Avec des squelettes autres que eva-web 4 :}
+	 _ Vous devez ins&#233;rer la ligne <code>&lt;INCLURE {fond=articles_news}{ajax}&gt;</code> dans votre squelette &agrave; l'endroit où doit apparaître le bloc de news<br/>
+	 _ {Avec eva-web 4 :}
+	 _ Rendez-vous dans l'onglet "structure" du plugin eva-habillage.
+	 _ Dans le deuxi&#232;me bloc intitul&#233; "Choisir la position des blocs dans les pages",
+	 _ allez &agrave; la ligne "Ins&#233;rer un squelette personnel de type bloc dans une des pages...".
+	 _ A l'&#233;tape 2, dans la zone de texte "Nom du squelette", tapez "articles_news", puis validez.
+
     Bas&#233; sur [EASYNEWS->http://www.ezjquery.com/cgi-bin/webapp.rb?r=access#] 
     </description>
     <lien>http://eva-web.edres74.net</lien>
