@@ -1,21 +1,20 @@
 <plugin>
-	<nom>DW2 pour SPIP 2.0</nom>
+	<nom>DW2</nom>
+	<slogan>Compteur de t&#233;l&#233;chargements</slogan>
 	<auteur>scoty@koakidi.com</auteur>
-	<version>3.06</version>
+	<version>3.6.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>
-		[en] Keep track of the documents available on this site.
-		[es] Gesti&oacute;n y seguimiento de los documentos propuestos para descarga desde el sitio.
-		[fr] Gestion et suivi des documents propos&eacute;s en t&eacute;l&eacute;chargement sur ce site.
+		[en]Keep track of the documents available on this site.
+		[es]Gesti&#243;n y seguimiento de los documentos propuestos para descarga desde el sitio.
+		[fr]Gestion et suivi des documents propos&#233;s en t&#233;l&#233;chargement sur ce site.
 		</multi>
 	</description>
 	<options>dw2_mesoptions.php</options>
 	<fonctions>dw2_mesfonctions.php</fonctions>
 	<prefix>dw2</prefix>
-	<lien>
-		[Documentation (fr)->http://www.koakidi.com/rub_aide_dw2.php]
-	</lien>
+	<lien>http://www.koakidi.com/rub_aide_dw2.php</lien>
 	<install>base/dw2_upgrade.php</install>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
@@ -48,6 +47,6 @@
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/dw2_tables.php</inclure>
 	</pipeline>	
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>maintenance</categorie>
 </plugin>
