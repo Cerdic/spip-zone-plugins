@@ -1,15 +1,14 @@
 <plugin>
-	<nom>Interface en couleurs &laquo;babies&raquo;</nom>
-	<auteur>	<!-- Auteur du plugin -->
-		Diala &amp; ARNO*
-	</auteur>
+	<nom>Interface en couleurs &#171;babies&#187;</nom>
+	<slogan>Modifier les couleurs de l'interface priv&#233;e de Spip</slogan>
+	<auteur>Diala, ARNO*</auteur>
 	<icon>logo_babies.png</icon>
 	<licence>GPL 3 - &#169; 2006-2008</licence>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
-	<description>Ce plugin change les couleurs de l'interface et leur fait adopter des tonalit&eacute;s &laquo;babies&raquo;.</description>
-	<lien></lien> <!-- URI de documentation -->
- 	<necessite id='SPIP' version='[2.0.0;]' />
+	<description>Ce plugin change les couleurs de l'interface et leur fait adopter des tonalit&#233;s &#171;babies&#187;.</description>
+	<lien></lien>
+ 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<prefix>interface_babies</prefix>
 	<categorie>maintenance</categorie>
 </plugin>
