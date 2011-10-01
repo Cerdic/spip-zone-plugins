@@ -1,127 +1,128 @@
 <plugin>
-	<nom>
+    <nom>
         <multi>[fr]Simple Calendrier[en]Simple calendar</multi>    
     </nom>
-	<auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
+    <auteur>[Julien Lanfrey->http://www.spip-contrib.net/ju3873]</auteur>
     <licence>GPL &#169; 2010-2011</licence>
-	<version>1.2c</version>
+    <version>1.2.0</version>
     <version_base>1.4</version_base>
-	<etat>stable</etat>
+    <etat>stable</etat>
+    
+    <!-- 2.1.2 min conseillé à cause du Logo. (Patch plus propre en 2.1.2 qu'en 2.1.0 mais ça fonctionne quand même en 2.1.0...) -->
+    <necessite id="SPIP" version="[2.1.0;2.1.99]" />
     <necessite id="jqueryui" version="[1.8.15;]" />
-	
-	<description>
+    
+    <slogan>Un simple calendrier pour planifier des &eacute;v&egrave;nements.</slogan> 
+    <description>
     <multi>
     [fr]Un simple calendrier pour planifier des &eacute;v&egrave;nements.
 _   (Th&egrave;mes pour le mini-calendrier bas&eacute;s sur [jquery-ui themeroller-> http://jqueryui.com/themeroller/])
     [en]A simple calendar for events planification.
     </multi>
-	</description>
+    </description>
     
     <lien>http://www.spip-contrib.net/Simple-Calendrier-v1</lien>
-	<icon>img_pack/simplecal-logo-32.png</icon>
-	
-	<prefix>simplecal</prefix>
-    <!-- 2.1.2 min conseillé à cause du Logo. (Patch plus propre en 2.1.2 qu'en 2.1.0 mais ça fonctionne quand même en 2.1.0...) -->
-	<necessite id="SPIP" version="[2.1.0;3.0)" />
+    <icon>img_pack/simplecal-logo-32.png</icon>
     
+    <prefix>simplecal</prefix>
     <categorie>date</categorie>
-	
-	<options>simplecal_options.php</options>
+    
+    <options>simplecal_options.php</options>
     <fonctions>simplecal_fonctions.php</fonctions>
 
-	<!-- Installation/desinstallation des tables supplementaires -->
-	<install>base/simplecal_upgrade.php</install>
-	
-	<pipeline>
-		<nom>autoriser</nom>
-		<inclure>simplecal_autoriser.php</inclure>
-	</pipeline>
-
-	<pipeline>
-		<nom>declarer_tables_principales</nom>
-		<inclure>base/simplecal_base.php</inclure>
-	</pipeline>
-
-	<pipeline>
-		<nom>declarer_tables_auxiliaires</nom>
-		<inclure>base/simplecal_base.php</inclure>
-	</pipeline> 
-
-	<pipeline>
-		  <nom>declarer_tables_interfaces</nom>
-		  <inclure>base/simplecal_base.php</inclure>
-	</pipeline> 
-
-	<pipeline>
-		  <nom>declarer_tables_objets_surnoms</nom>
-		  <inclure>base/simplecal_base.php</inclure>
-	</pipeline> 
-	
-	<pipeline>
-		  <nom>configurer_liste_metas</nom>
-		  <inclure>simplecal_pipelines.php</inclure>
-	</pipeline> 
-    
-	<!-- Pipeline : champs de recherche des nouveaux objets -->
-	<pipeline>
-		  <nom>rechercher_liste_des_champs</nom>
-		  <inclure>simplecal_pipelines.php</inclure>
-	</pipeline> 
-
-
-	<pipeline>
-		<nom>insert_head</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
-
-	<pipeline>
-		<nom>header_prive</nom>
-		<action>header_prive</action>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
-
-	<pipeline>
-		<nom>boite_infos</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
-	    
-    <pipeline>
-		<nom>affiche_milieu</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
+    <!-- Installation/desinstallation des tables supplementaires -->
+    <install>base/simplecal_upgrade.php</install>
     
     <pipeline>
-		<nom>affiche_gauche</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
+        <nom>autoriser</nom>
+        <inclure>simplecal_autoriser.php</inclure>
+    </pipeline>
+
+    <pipeline>
+        <nom>declarer_tables_principales</nom>
+        <inclure>base/simplecal_base.php</inclure>
+    </pipeline>
+
+    <pipeline>
+        <nom>declarer_tables_auxiliaires</nom>
+        <inclure>base/simplecal_base.php</inclure>
+    </pipeline> 
+
+    <pipeline>
+          <nom>declarer_tables_interfaces</nom>
+          <inclure>base/simplecal_base.php</inclure>
+    </pipeline> 
+
+    <pipeline>
+          <nom>declarer_tables_objets_surnoms</nom>
+          <inclure>base/simplecal_base.php</inclure>
+    </pipeline> 
+    
+    <pipeline>
+          <nom>configurer_liste_metas</nom>
+          <inclure>simplecal_pipelines.php</inclure>
+    </pipeline> 
+    
+    <!-- Pipeline : champs de recherche des nouveaux objets -->
+    <pipeline>
+          <nom>rechercher_liste_des_champs</nom>
+          <inclure>simplecal_pipelines.php</inclure>
+    </pipeline> 
+
+
+    <pipeline>
+        <nom>insert_head</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+
+    <pipeline>
+        <nom>header_prive</nom>
+        <action>header_prive</action>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+
+    <pipeline>
+        <nom>boite_infos</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+        
+    <pipeline>
+        <nom>affiche_milieu</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
+    
+    <pipeline>
+        <nom>affiche_gauche</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
     
     <!-- Contenu des formulaires CVT. -->
     <pipeline>
-		<nom>editer_contenu_objet</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
+        <nom>editer_contenu_objet</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
     
     <!-- Associer un libelle aux types d'objets (exec/mots_tous) -->
-	<pipeline>
-		<nom>libelle_association_mots</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
+    <pipeline>
+        <nom>libelle_association_mots</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
     
     <!-- Listing des nombres d'objet par mot clé (exec/mot_tous -> inc/grouper_mots) -->
     <pipeline>
-		<nom>afficher_nombre_objets_associes_a</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline> 
+        <nom>afficher_nombre_objets_associes_a</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline> 
     
     <pipeline>
-		<nom>accueil_encours</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
+        <nom>accueil_encours</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
     
     <pipeline>
-		<nom>accueil_informations</nom>
-		<inclure>simplecal_pipelines.php</inclure>
-	</pipeline>
+        <nom>accueil_informations</nom>
+        <inclure>simplecal_pipelines.php</inclure>
+    </pipeline>
     
     <pipeline>
         <nom>compter_contributions_auteur</nom>
@@ -164,17 +165,17 @@ _   (Th&egrave;mes pour le mini-calendrier bas&eacute;s sur [jquery-ui themeroll
 
     
     
-	<bouton id="bt_simplecal_accueil" parent="naviguer">
-		<icone>img_pack/simplecal-logo-24.png</icone>
-		<titre>simplecal:bouton_entree</titre>	
-		<url>evenement_tous&mode=avenir</url>	
-	</bouton>
+    <bouton id="bt_simplecal_accueil" parent="naviguer">
+        <icone>img_pack/simplecal-logo-24.png</icone>
+        <titre>simplecal:bouton_entree</titre>	
+        <url>evenement_tous&mode=avenir</url>	
+    </bouton>
     
     <!-- Pour l'integration dans plugin 'bando' -->
     <bouton id="bt_simplecal_accueil_bando" parent="bando_edition">
-		<icone>img_pack/simplecal-logo-16.png</icone>
-		<titre>simplecal:bouton_entree</titre>	
-		<url>evenement_tous&mode=avenir</url>	
-	</bouton>	
+        <icone>img_pack/simplecal-logo-16.png</icone>
+        <titre>simplecal:bouton_entree</titre>	
+        <url>evenement_tous&mode=avenir</url>	
+    </bouton>	
 
 </plugin>
