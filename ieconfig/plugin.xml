@@ -1,10 +1,11 @@
 <plugin>
-	<nom>Importeur / Exporteur de configurations</nom>
+	<nom>Import-Export</nom>
+	<nom>Importer, exporter des configurations de plugins</nom>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.2.6</version>
 	<etat>test</etat>
-	<description>Importeur / Exporteur de configurations. Ce plugin permet d'exporter la configuration de SPIP et des plugins compatibles dans un seul et unique fichier au format YAML. Ces fichiers de configuration peuvent ensuite &ecirc;tre import&eacute;s.</description>
+	<description>Ce plugin permet d'exporter la configuration de SPIP et des plugins compatibles dans un seul et unique fichier au format YAML. Ces fichiers de configuration peuvent ensuite &#234;tre import&#233;s.</description>
 	<lien>http://www.spip-contrib.net/spip.php?article3703</lien>
 	<icon>img/ieconfig-128.png</icon>
 	<prefix>ieconfig</prefix>
@@ -38,7 +39,7 @@
 		<inclure>ieconfig_mes_fichiers_a_sauver.php</inclure>
 	</pipeline>
 	<categorie>maintenance</categorie>
-	<necessite id="SPIP" version="[2.1.0;2.2)" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="saisies" version="[1.7.9;]" />
 	<necessite id="verifier" />
