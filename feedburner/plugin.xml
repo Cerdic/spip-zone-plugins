@@ -1,17 +1,17 @@
 <plugin>
-<nom>FeedBurner</nom>
-<icon>feedburner-64.png</icon>
-<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
-<licence>&copy; 2008 GPL</licence>
-<version>1.0</version>
-<etat>stable</etat>
-<description>
-Utilisez [FeedBurner->http://www.feedburner.com] sur votre site ! Proposez &agrave; vos internautes de {{s'abonner par mail et/ou flux RSS}}, &agrave; leur choix, simplement, pour recevoir les derniers articles du site, proprement.
-</description>
-<lien>http://www.spip-contrib.net/feedburner</lien>
-<prefix>feedburner</prefix>
-<options>feedburner_options.php</options>
-<necessite id='SPIP' version='[2.0.0;]' />
-<necessite id='cfg' version='[1.0.5;]' />
+	<nom>FeedBurner</nom>
+	<icon>feedburner-64.png</icon>
+	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
+	<licence>GPL - (c) 2008</licence>
+	<version>1.0.0</version>
+	<etat>stable</etat>
+	<description>
+	Utilisez [FeedBurner->http://www.feedburner.com] sur votre site ! Proposez &agrave; vos internautes de {{s'abonner par mail et/ou flux RSS}}, &agrave; leur choix, simplement, pour recevoir les derniers articles du site, proprement.
+	</description>
+	<lien>http://www.spip-contrib.net/feedburner</lien>
+	<prefix>feedburner</prefix>
+	<options>feedburner_options.php</options>
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<necessite id='cfg' version='[1.0.5;]' />
 	<categorie>communication</categorie>
 </plugin>
