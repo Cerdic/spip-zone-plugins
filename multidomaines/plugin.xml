@@ -1,17 +1,16 @@
 <plugin>
 	<nom>Multidomaines</nom>
-	<version>1.1</version>
+	<slogan>Associer des secteurs &#224; un domaine</slogan>
+	<version>1.1.0</version>
 	<prefix>multidomaines</prefix>
 	<etat>test</etat>
 	<icon>images/logo-72.png</icon>
-	<lien>http://www.spip-contrib.net/article3127</lien> <!-- URI de documentation -->
-	<auteur>[Nathana&euml;l Louison->mailto:bennetteson@free.fr]</auteur>
-	<description>
-		Multidomaines permet d'associer des secteurs &agrave; un domaine
-	</description>
+	<lien>http://www.spip-contrib.net/article3127</lien>
+	<auteur>[Nathana&#235;l Louison->mailto:bennetteson@free.fr]</auteur>
 	<install>base/multidomaines_upgrade.php</install>
 	<fonctions>base/multidomaines_fonctions.php</fonctions>
 	<options>base/multidomaines_options.php</options>
+	<description>Le plug-in Multidomaines permet d’associer un nom de domaine ou un sous-domaine &#224; un secteur spip. Les balises rajout&#233;es permettent de pointer un lien absolu aussi facilement qu’avec les balises originales. Il offre la possibilit&#233; de faire plusieurs sites avec les m&#234;mes donn&#233;es et/ou un site internet sur plusieurs domaines diff&#233;rents.</description>
 	<pipeline>
 		<nom>declarer_champs_extras</nom>
 		<inclure>base/multidomaines_pipelines.php</inclure>
