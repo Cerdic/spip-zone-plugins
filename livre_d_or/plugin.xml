@@ -1,27 +1,19 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<!--  
-
-	// lido plugin.xml
-
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-	
-	 -->
 	<nom>Livre d'or (LiDo)</nom>
-	<auteur>cpaulus@quesaco.org</auteur>
-	<version>1.02</version>
+	<slogan>Un livre d'or pour votre site.</slogan>
+	<auteur>[cpaulus->cpaulus@quesaco.org]</auteur>
+	<licence>GNU</licence>
+	<version>1.02.0</version>
 	<version_base>0.01</version_base>
 	<icon>images/lido-64.png</icon>
 	<etat>stable</etat>
 
-	<description><strong>Livre d'or</strong> (Lido)<br />
-		<strong>LiDo</strong> est principalement un formulaire de saisie pour l'espace public. 
-		Ce formulaire propose au visiteur de laisser quelques mots sur le Livre d'or, 
-		optionnellement de signer son commentaire.</description>
+	<description><strong>Livre d'or</strong> (Lido)
+		_ <strong>LiDo</strong> est principalement un formulaire de saisie pour l'espace public. 
+		Ce formulaire propose au visiteur de laisser quelques mots sur le Livre d'or, optionnellement de signer son commentaire.
+	</description>
 
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Livre-d-or-en-rubrique]</lien>
+	<lien>http://www.quesaco.org/Livre-d-or-en-rubrique</lien>
 	
 	<prefix>lido</prefix>
 
@@ -40,6 +32,6 @@
 		<inclure>inc/lido_pipeline_ajouter_onglets.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>communication</categorie>
 </plugin>
