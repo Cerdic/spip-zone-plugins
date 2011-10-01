@@ -1,20 +1,13 @@
 <plugin>
 	<nom>Notifications</nom>
-	<auteur>fil@rezo.net</auteur>
+	<auteur>[fil->fil@rezo.net]</auteur>
 	<version>0.5.5</version>
 	<etat>test</etat>
 	<icon>notifications.png</icon>
 	<description>
 		<multi>
-			[fr]
-				Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l'espace priv&#233;, permet &#233;galement l'envoi d'un mail aux auteurs lors de la publication de leurs articles.
-
-				[Documentation sur Spip-Contrib->http://www.spip-contrib.net/Le-plugin-notifications]
-
-			[en]
-				Sends mail notifications for certain actions : forums posts and answers notified to users, private messages notified to redactors or articles publication notified to their authors.
-
-				[Documentation on Spip-Contrib->http://www.spip-contrib.net/Le-plugin-notifications] (Fr. not yet available in English)
+			[fr]Active les notifications par email de certaines actions, notamment des forums et de la messagerie de l'espace priv&#233;, permet &#233;galement l'envoi d'un mail aux auteurs lors de la publication de leurs articles.
+			[en]Sends mail notifications for certain actions : forums posts and answers notified to users, private messages notified to redactors or articles publication notified to their authors.
 		</multi>
 	</description>
 	<prefix>notifications</prefix>
@@ -47,7 +40,7 @@
 		<inclure>notifications_pipelines.php</inclure>
 	</pipeline>
 
-	<lien>http://www.spip-contrib.net/Notifications,2360</lien>
+	<lien>http://www.spip-contrib.net/Le-plugin-notifications</lien>
 
 	<necessite id='spip' version='[2.0.10;2.1.99]' />
 	<necessite id='cfg' version='[1.0;]' />
