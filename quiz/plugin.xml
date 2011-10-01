@@ -2,7 +2,7 @@
 
     <nom>SPIP Quiz - R&eacute;aliser de vrais quiz sous SPIP</nom>
 	
-	<version>0.2</version>
+	<version>0.2.0</version>
 	
 	<prefix>quiz</prefix>
 	
@@ -44,7 +44,10 @@ La pr&eacute;sente version a &eacute;t&eacute; d&eacute;velopp&eacute;e dans le 
 		<nom>affiche_milieu</nom>
 		<inclure>quiz_pipelines.php</inclure>
 	</pipeline>
-	<categorie>communication</categorie>
+	
+	<categorie>divers</categorie>
+	
+ 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 
 </plugin>
 	
