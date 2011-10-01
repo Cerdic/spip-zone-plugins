@@ -6,7 +6,7 @@
     <licence>GPL &#169; 2010-2011</licence>
     <version>1.2.0</version>
     <version_base>1.4</version_base>
-    <etat>stable</etat>
+    <etat>dev</etat>
     
     <!-- 2.1.2 min conseillé à cause du Logo. (Patch plus propre en 2.1.2 qu'en 2.1.0 mais ça fonctionne quand même en 2.1.0...) -->
     <necessite id="SPIP" version="[2.1.0;2.1.99]" />
