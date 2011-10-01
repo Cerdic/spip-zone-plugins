@@ -1,14 +1,13 @@
 <plugin>
-	<nom>messagerie</nom>
-	<auteur>Cedric MORIN
- 	[yterium.net->http://www.yterium.net]
-_ &#169; 2008 - Licence GPL
-	</auteur>
+	<nom>Messagerie</nom>
+	<slogan>une messagerie interne</slogan>
+	<auteur>[Cedric MORIN->http://www.yterium.net]</auteur>
+	<licence>GPL - (c) 2008</licence>
 	<icon>habillage/messagerie-32.png</icon>
 	<version>2.0.1</version>
 	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Messagerie-entre-membres</lien>
 	<description>
 	Gestion de la messagerie interne entre auteurs dans les squelettes publics.
 	</description>
@@ -28,6 +27,6 @@ _ &#169; 2008 - Licence GPL
 		<nom>notifications</nom>
 		<inclure>messagerie_pipelines.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<categorie>communication</categorie>
 </plugin>
