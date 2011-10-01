@@ -1,22 +1,20 @@
 <plugin>
-	<nom>Motus : groupes de mots par rubrique</nom>
-	<auteur>Matthieu Marcillaud [->magraine.net]</auteur>
+	<nom>Motus</nom>
+	<slogan>Groupes de mots par rubrique</slogan>
+	<auteur>[Matthieu Marcillaud->magraine.net]</auteur>
 	<icon>images/motus.png</icon>
 	<licence>GNU/GPL</licence>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<version_base>0.1</version_base>
-	<description>
-	Ce plugin permet de restreindre dans l'interface priv&eacute;e
-	l'ajout des certains groupes de mots
-	&agrave; certaines rubriques (et leurs enfants et objets).
+	<description>Ce plugin permet de restreindre dans l'interface priv&#233;e l'ajout des certains groupes de mots &#224; certaines rubriques (et leurs enfants et objets).
 
-	Ce qui peut faciliter la prise en main d'un site par des r&eacute;dacteurs
-	en n'affichant uniquement les groupes de mots utiles
-	sur un espace d&eacute;termin&eacute;.
+Ce qui peut faciliter la prise en main d'un site par des r&#233;dacteurs en n'affichant uniquement les groupes de mots utiles sur un espace d&#233;termin&#233;.
 	</description>
 	<etat>test</etat>
 	<prefix>motus</prefix>
+	<lien>http://www.spip-contrib.net/Motus</lien>
 	
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[1.4.3;]" />
 	<necessite id="saisies" version="[1.6.6;]" />
 	<necessite id="spip_bonux" version="[1.8.6;]" />
