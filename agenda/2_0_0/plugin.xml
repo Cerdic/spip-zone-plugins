@@ -2,12 +2,13 @@
 	<nom>Agenda</nom>
 	<icon>icon.png</icon>
 	<auteur>	<!-- Auteur du plugin -->
-	[C&eacute;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net], [Julien Tessier->http://www.cahri.com]
+	[C&#233;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net], [Julien Tessier->http://www.cahri.com]
 	</auteur>
 	<licence>GPL 3 - &#169; 2006-2010</licence>
 	<version>2.2.1</version>
 	<version_base>0.23</version_base>
 	<etat>stable</etat>
+	<slogan>Agenda &#233;v&#233;nementiel</slogan>
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://www.spip-contrib.net/article2858</lien> <!-- URI de documentation -->
 	<options>agenda_options.php</options>
