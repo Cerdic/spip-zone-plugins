@@ -1,21 +1,18 @@
 <plugin>
-	<nom>Commentaires PhpBB </nom>
+	<nom>Commentaires PhpBB</nom>
 	<icon>img_pack/comments_phpbb.png</icon>
-	<version>0.6</version>
+	<version>0.6.0</version>
 	<version_base>0.5</version_base>
 	<prefix>comments_phpbb</prefix>
 	<etat>test</etat>
 	<auteur>jfefe, Dorch</auteur>
-	<description>Ce plugin cr&eacute;e un nouveau sujet sur votre forum PhpBB &agrave; chaque publication d'un nouvel article dans SPIP, afin d'y accueillir les commentaires des forumeurs.
+	<description>Ce plugin cr&#233;e un nouveau sujet sur votre forum PhpBB &agrave; chaque publication d'un nouvel article dans SPIP, afin d'y accueillir les commentaires des forumeurs.
 
-Deux nouvelles balises pour les squelettes (boucles ARTICLES) :
-- #NB_COMMENTAIRES : affiche le nombre de commentaires dans le topic phpBB
-- #TOPIC_ID : identifiant du topic cr&#233;e dans phpBB (pour faire un lien vers le topic : http://leforum.tld/viewtopic.php?t=#TOPIC_ID)
-
-
-[Configuration->.?exec=cfg&amp;cfg=comments_phpbb]</description>
-<lien>http://www.spip-contrib.net/article3015</lien>
-	<necessite id='CFG' version='[1.10.5;]' />
+	Deux nouvelles balises pour les squelettes (boucles ARTICLES) :
+	- #NB_COMMENTAIRES : affiche le nombre de commentaires dans le topic phpBB
+	- #TOPIC_ID : identifiant du topic cr&#233;e dans phpBB (pour faire un lien vers le topic : http://leforum.tld/viewtopic.php?t=#TOPIC_ID)
+	</description>
+	<lien>http://www.spip-contrib.net/article3015</lien>
 	
 	<install>base/comments_phpbb_upgrade.php</install>
 	
@@ -26,12 +23,12 @@ Deux nouvelles balises pour les squelettes (boucles ARTICLES) :
 		<inclure>base/comments_phpbb.php</inclure>
 		<action>declarer_tables_principales</action>
 	</pipeline>
-	
-
 	<pipeline>
 		<nom>post_edition</nom>
 		<action>new</action>
 		<inclure>comments_phpbb_pipeline.php</inclure>
 	</pipeline>
 	<categorie>communication</categorie>
+	<necessite id='spip' version='[2.0.0;2.0.99]' />
+	<necessite id='CFG' version='[1.10.5;]' />
 </plugin>
