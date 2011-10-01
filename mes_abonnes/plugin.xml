@@ -9,7 +9,7 @@
 	<prefix>mesabonnes</prefix>
 	<icon>images/logo_mesabonnes_48.png</icon>
 	<install>base/mesabonnes_upgrade.php</install>
-	<necessite id="SPIP" version="[2.1;]" />	
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />	
 	<bouton id='mesabonnes1' parent='naviguer'>
 		<titre>mesabonnes:mes_abonnes</titre>
 		<icone>images/logo_mesabonnes_24.png</icone>
