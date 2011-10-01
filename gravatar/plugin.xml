@@ -1,15 +1,6 @@
 <plugin>
 	<nom>Gravatar</nom>
-	<auteur>
-		<multi>
-			[fr]Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] pour <code>#GRAVATAR</code>
-	<br />Fil - [SPIP->www.spip.net] pour <code>#LOGO_AUTEUR</code>
-	<br />Cedric pour la configuration et l'extension &#224; monsterid/wavatar/identicons
-			[en]Thomas Beaumanoir - [Clever Age->http://www.clever-age.com] for <code>#GRAVATAR</code>
-	<br />Fil - [SPIP->www.spip.net] for <code>#LOGO_AUTEUR</code>
-	<br />Cedric for the configuration and extension to monsterid/wavatar/identicons
-		</multi>
-	</auteur>
+	<auteur>Thomas Beaumanoir, [Clever Age->http://www.clever-age.com], Fil et Cedric</auteur>
 	<icon>images/gravatar-64.png</icon>
 	<version>1.2.1</version>
 	<etat>stable</etat>
