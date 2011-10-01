@@ -1,13 +1,15 @@
 <plugin>
-	<nom>Formitable, nouveau traitement pour formidable</nom>
+	<nom>Formitable</nom>
+	<slogan>Nouveau traitement pour formidable</slogan>
 	<auteur>JLuc</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<version_base>0.2</version_base>
 	<etat>test</etat>
-	<description>Enregistrement des données d'un formulaire formidable dans une table utilisateur, avec correspondance de chaque champ du formulaire vers un champ de la table utilisateur, et traitement optionnel des données.</description>
+	<description>Enregistrement des donn&#233;es d'un formulaire formidable dans une table utilisateur, avec correspondance de chaque champ du formulaire vers un champ de la table utilisateur, et traitement optionnel des données.</description>
 	<lien>http://www.spip-contrib.net/FormiTable</lien>
 	<prefix>formitable</prefix>
+	<necessite id="spip" version="[2.0.0;2.1.99]"/>
 	<necessite id="formidable" />
 	<categorie>communication</categorie>
 </plugin>
