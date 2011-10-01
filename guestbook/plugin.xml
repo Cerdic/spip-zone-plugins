@@ -1,12 +1,13 @@
 <plugin>
 	<nom>GuestBook</nom>
-	<auteur>Yohann Prigent (potter64) - 2010</auteur>
+	<auteur>Yohann Prigent (potter64)</auteur>
+	<licence>GPL - (c) 2010</licence>
 	<version>2.5.1</version>
 	<version_base>2.1</version_base>
 	<icon>prive/images/guestbook_logo.png</icon>
 	<etat>stable</etat>
 	<description>Guestbook vous procure un Livre d'or pour votre site Spip. Passez la souris sur le bouton Forum pour voir apparaitre l'interface de mod&eacute;ration</description>
-	<lien>[Documentation->http://www.spip-contrib.net/Guestbook]</lien>
+	<lien>http://www.spip-contrib.net/Guestbook</lien>
 	<prefix>guestbook</prefix>
 	<fonctions>guestbook_fonctions.php</fonctions>
 	<install>base/guestbook_upgrade.php</install>
@@ -30,7 +31,7 @@
 		<nom>insert_head</nom>
 		<inclure>guestbook_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version='[2.1.0;]' />
+	<necessite id="SPIP" version='[2.1.0;2.1.99]' />
 	<utilise id="nospam" version='[0.8;]' />
 	<bouton id='livredor' parent='naviguer'>
 		<icone>prive/images/guestbook.png</icone>
