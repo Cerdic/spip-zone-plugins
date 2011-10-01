@@ -59,7 +59,8 @@ foreach($langues as $langue){
 			'altitude' => '',
 			'classement_orga' => '',
 			'classement_code' => '',
-			'classement' => ''
+			'classement' => '',
+			'reservation_url' => ''
 		);
 		
 		// même chose pour les détails
@@ -152,11 +153,11 @@ foreach($langues as $langue){
 		}
 		
 		// Images et logo
-		$images = array();
-		$images_details = array();
+		$docs = array();
+		$docs_details = array();
 		
 		// tjs le problème des clés qui doivent être des alphanum
-		$types_images = array(
+		$types_docs = array(
 			'i_03.01.05' => 'principale',
 			'i_03.01.01' => 'secondaire',
 			'i_03.01.08' => 'logo'
@@ -165,24 +166,26 @@ foreach($langues as $langue){
 		if($oi -> Multimedia -> DetailMultimedia){
 			$i = 0;
 			foreach ($oi -> Multimedia -> DetailMultimedia as $val){
-				if (array_key_exists('i_'.$val['type'],$types_images)){
+				if (array_key_exists('i_'.$val['type'],$types_docs)){
 					if ($premiere_langue){
-						$images[$i]['id_sitra'] = $id_sitra;
-						$images[$i]['num_image'] = $i;
-						$images[$i]['type_image'] = $types_images['i_'.$val['type']];
-						$images[$i]['url_image'] = $val -> URL;
+						$docs[$i]['id_sitra'] = $id_sitra;
+						$docs[$i]['num_doc'] = $i;
+						$docs[$i]['type_doc'] = $types_docs['i_'.$val['type']];
+						$docs[$i]['url_doc'] = $val -> URL;
 						// seules les images principales sont importées eventuellement
-						if ($images[$i]['type_image'] != 'principale')
-							$images[$i]['lien'] = 'O';
+						if ($docs[$i]['type_doc'] != 'principale')
+							$docs[$i]['lien'] = 'O';
 						else
-							$images[$i]['lien'] = $val['lien'];
+							$docs[$i]['lien'] = $val['lien'];
+						$extension = substr(strrchr($val -> URL,'.'),1);
+						$docs[$i]['extension'] = strtolower($extension);
 					} // fin if premiere_langue
-					$images_details[$i]['id_sitra'] = $id_sitra;
-					$images_details[$i]['num_image'] = $i;
-					$images_details[$i]['lang'] = $langue;
-					$images_details[$i]['titre'] = $val -> Nom;
-					$images_details[$i]['descriptif'] = $val -> LegendeRessource;
-					$images_details[$i]['copyright'] = $val -> Copyright;
+					$docs_details[$i]['id_sitra'] = $id_sitra;
+					$docs_details[$i]['num_doc'] = $i;
+					$docs_details[$i]['lang'] = $langue;
+					$docs_details[$i]['titre'] = $val -> Nom;
+					$docs_details[$i]['descriptif'] = $val -> LegendeRessource;
+					$docs_details[$i]['copyright'] = $val -> Copyright;
 					$i++;
 				} // fin if
 			} // fin foreach
@@ -288,14 +291,24 @@ foreach($langues as $langue){
 				}
 			}
 		}
+		
+		// reservation
+		if ($oi -> ModesReservations -> DetailModeReservation -> Contacts and $premiere_langue){
+			$reservation_url = array();
+			foreach($oi -> ModesReservations -> DetailModeReservation -> Contacts -> DetailContact -> Adresses -> DetailAdresse -> Personnes -> DetailPersonne -> MoyensCommunications -> DetailMoyenCom as $val){
+				if ($val['type'] == '04.02.05')
+					ajoute_si_present($reservation_url, $val -> Coord);
+			}
+			$objet['reservation_url'] = serialize_non_vide($reservation_url);
+		} // fin resa
 
 		// controle des valeurs de $obj
 		if (SITRA_DEBUG){
 			sitra_debug('objet', $objet);
 			sitra_debug('objet_details',$objet_details);
 			sitra_debug('categories',$categories);
-			sitra_debug('images',$images);
-			sitra_debug('images_details',$images_details);
+			sitra_debug('docs',$docs);
+			sitra_debug('docs_details',$docs_details);
 			sitra_debug('criteres',$criteres);
 		}
 		
@@ -325,22 +338,22 @@ foreach($langues as $langue){
 			if (count($criteres))
 				sql_insertq_multi('spip_sitra_criteres', $criteres);
 			
-			// images
-			sql_delete('spip_sitra_images', $where);
-			if (count($images))
-				sql_insertq_multi('spip_sitra_images',$images);
+			// docs
+			sql_delete('spip_sitra_docs', $where);
+			if (count($docs))
+				sql_insertq_multi('spip_sitra_docs',$docs);
 			
 			// on supprime toutes les données dans les tables annexes qqsoit la langue
-			sql_delete('spip_sitra_images_details', $where);
+			sql_delete('spip_sitra_docs_details', $where);
 			sql_delete('spip_sitra_objets_details', $where);
 		} // fin if premiere_langue
 		
 		// les details
 			$r = sql_insertq('spip_sitra_objets_details',$objet_details);
 		
-		// les details images
-		if (count($images_details))
-			$r = sql_insertq_multi('spip_sitra_images_details',$images_details);
+		// les details docs
+		if (count($docs_details))
+			$r = sql_insertq_multi('spip_sitra_docs_details',$docs_details);
 		
 		if (SITRA_DEBUG) echo '//////';
 		if ($id_sitra_objet)

@@ -18,11 +18,11 @@ function url_image_locale($url='',$chemin=''){
 }
 
 /**
-Pour les images distantes
+Pour les docs distants
 teste si une copie locale existe sinon la force
 retourne l'url de la copie locale
 **/
-function url_image_distante($url=''){
+function url_doc_distant($url=''){
 	if (!$url) return;
 	$result = copie_locale($url,'test');
 	if (!$result)
@@ -32,14 +32,14 @@ function url_image_distante($url=''){
 
 /**
 copie locale ou distante en fonction du type image distante (O ou N)
-$chemin a utiliser pour la partie privée
+$chemin a utiliser pour affichage dans la partie privée
 **/
-function url_image_sitra($url='', $lien='', $chemin=''){
+function url_doc_sitra($url='', $lien='', $chemin=''){
 	switch ($lien){
 		// image importée par zip sitra
 		case 'N': return url_image_locale($url,$chemin); break;
-		// image distante
-		case 'O': return $chemin.url_image_distante($url); break;
+		// doc distant
+		case 'O': return $chemin.url_doc_distant($url); break;
 		default : return; break;
 	}
 }

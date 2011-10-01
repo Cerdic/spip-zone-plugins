@@ -17,8 +17,8 @@ function sitra_vider_tables($nom_meta_base_version) {
 	sql_drop_table('spip_sitra_objets',true);
 	sql_drop_table('spip_sitra_objets_details',true);
 	sql_drop_table('spip_sitra_categories',true);
-	sql_drop_table('spip_sitra_images',true);
-	sql_drop_table('spip_sitra_images_details',true);
+	sql_drop_table('spip_sitra_docs',true);
+	sql_drop_table('spip_sitra_docs_details',true);
 	sql_drop_table('spip_sitra_selections',true);
 	sql_drop_table('spip_sitra_criteres',true);
 	effacer_meta($nom_meta_base_version);

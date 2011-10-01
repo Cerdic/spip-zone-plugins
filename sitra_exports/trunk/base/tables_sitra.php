@@ -22,6 +22,7 @@ $sitra_objets_field = array(
 	'classement_orga' => 'varchar(32) NOT NULL',
 	'classement_code' => 'varchar(32) NOT NULL',
 	'classement' => 'varchar(32) NOT NULL',
+	'reservation_url' => 'text NOT NULL',
 	);
 
 $sitra_objets_key = array(
@@ -124,53 +125,54 @@ $tables_principales['spip_sitra_selections'] = array(
 	);
 
 
-// Table SITRA_IMAGES
-$sitra_images_field = array(
+// Table SITRA_DOCS
+$sitra_docs_field = array(
 	'id_sitra' => 'varchar(32) NOT NULL',
-	'num_image' => 'integer NOT NULL',
-	'url_image' => 'varchar(255) NOT NULL',
-	'type_image' => 'varchar(12) NOT NULL',
-	'lien' => 'varchar(3) NOT NULL'
+	'num_doc' => 'integer NOT NULL',
+	'url_doc' => 'varchar(255) NOT NULL',
+	'type_doc' => 'varchar(12) NOT NULL',
+	'lien' => 'varchar(3) NOT NULL',
+	'extension' => 'varchar(10) NOT NULL'
 	);
 
-$sitra_images_key = array(
-	'PRIMARY KEY' => 'id_sitra, num_image',
+$sitra_docs_key = array(
+	'PRIMARY KEY' => 'id_sitra, num_doc',
 	);
 
-$sitra_images_join = array(
+$sitra_docs_join = array(
 	'id_sitra' => 'id_sitra',
-	'num_image' => 'num_image'
+	'num_doc' => 'num_doc'
 	);
 
-$tables_principales['spip_sitra_images'] = array(
-	'field' => &$sitra_images_field,
-	'key' => &$sitra_images_key,
-	'join' => &$sitra_images_join
+$tables_principales['spip_sitra_docs'] = array(
+	'field' => &$sitra_docs_field,
+	'key' => &$sitra_docs_key,
+	'join' => &$sitra_docs_join
 );
 
 // Table SITRA_IMAGES_DETAILS
-$sitra_images_details_field = array(
+$sitra_docs_details_field = array(
 	'id_sitra' => 'varchar(32) NOT NULL',
-	'num_image' => 'integer NOT NULL',
+	'num_doc' => 'integer NOT NULL',
 	'lang' => 'varchar(3) NOT NULL',
 	'titre' => 'text NOT NULL',
   	'descriptif' => 'text NOT NULL',
   	'copyright' => 'text NOT NULL'
 	);
 
-$sitra_images_details_key = array(
-	'PRIMARY KEY' => 'id_sitra, num_image, lang',
+$sitra_docs_details_key = array(
+	'PRIMARY KEY' => 'id_sitra, num_doc, lang',
 	);
 
-$sitra_images_details_join = array(
+$sitra_docs_details_join = array(
 	'id_sitra' => 'id_sitra',
-	'num_image' => 'num_image'
+	'num_doc' => 'num_doc'
 	);
 
-$tables_principales['spip_sitra_images_details'] = array(
-	'field' => &$sitra_images_details_field,
-	'key' => &$sitra_images_details_key,
-	'join' => &$sitra_images_details_join
+$tables_principales['spip_sitra_docs_details'] = array(
+	'field' => &$sitra_docs_details_field,
+	'key' => &$sitra_docs_details_key,
+	'join' => &$sitra_docs_details_join
 );
 
 // table critères internes
@@ -204,23 +206,23 @@ function sitra_declarer_tables_interfaces($interface){
 	$interface['table_des_tables']['sitra_objets_details'] = 'sitra_objets_details';
 	$interface['table_des_tables']['sitra_categories'] = 'sitra_categories';
 	$interface['table_des_tables']['sitra_selections'] = 'sitra_selections';
-	$interface['table_des_tables']['sitra_images'] = 'sitra_images';
-	$interface['table_des_tables']['sitra_images_details'] = 'sitra_images_details';
+	$interface['table_des_tables']['sitra_docs'] = 'sitra_docs';
+	$interface['table_des_tables']['sitra_docs_details'] = 'sitra_docs_details';
 	$interface['table_des_tables']['sitra_criteres'] = 'sitra_criteres';
 	
 	// les jointures 
 	$interface['tables_jointures']['spip_sitra_objets'][]= 'sitra_categories';
 	$interface['tables_jointures']['spip_sitra_objets'][]= 'sitra_selections';
 	$interface['tables_jointures']['spip_sitra_objets'][]= 'sitra_objets_details';
-	$interface['tables_jointures']['spip_sitra_objets'][]= 'sitra_images';
+	$interface['tables_jointures']['spip_sitra_objets'][]= 'sitra_docs';
 	$interface['tables_jointures']['spip_sitra_objets'][]= 'sitra_criteres';
 	
 	$interface['tables_jointures']['spip_sitra_categories'][] = 'sitra_objets';
 	$interface['tables_jointures']['spip_sitra_selections'][] = 'sitra_objets';
 	$interface['tables_jointures']['spip_sitra_criteres'][] = 'sitra_objets';
 	
-	$interface['tables_jointures']['spip_sitra_images'][] = 'sitra_images_details';
-	$interface['tables_jointures']['spip_sitra_images_details'][] = 'sitra_images';
+	$interface['tables_jointures']['spip_sitra_docs'][] = 'sitra_docs_details';
+	$interface['tables_jointures']['spip_sitra_docs_details'][] = 'sitra_docs';
 	
 	// les dates	
 	$interface['table_date']['sitra_objets'] = 'date_debut';

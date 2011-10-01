@@ -79,6 +79,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'obj_lieu' => 'Lieu',
 'obj_longitude' => 'Longitude',
 'obj_n_insee' => 'N° insee',
+'obj_reservation_url' => 'Url réservation',
 'obj_tel_fax' => 'Téléphone-Fax',
 'obj_telephone' => 'Téléphone',
 'obj_web' => 'Web',

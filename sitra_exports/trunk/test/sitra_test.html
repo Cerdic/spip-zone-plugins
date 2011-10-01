@@ -7,9 +7,9 @@
 	[<li>email : (#EMAIL|sitra_expand_liste)</li>]
 	[<li>telephone : (#TELEPHONE|sitra_expand_telephone)</li>]
 	[<li>web : (#WEB|sitra_expand_web)</li>]
-	<BOUCLE_b (SITRA_IMAGES){id_sitra}{type_image=principale}>
-		<BOUCLE_c (SITRA_IMAGES_DETAILS){id_sitra}{num_image}{lang}>
-			[<li>(#URL_IMAGE|url_image_sitra{#LIEN}|url_absolue|image_reduire{150,150})</li>]
+	<BOUCLE_b (SITRA_DOCS){id_sitra}{type_doc=principale}>
+		<BOUCLE_c (SITRA_DOCS_DETAILS){id_sitra}{num_doc}{lang}>
+			[<li>(#URL_DOC|url_doc_sitra{#LIEN}|url_absolue|image_reduire{150,150})</li>]
 			[<li>(#TITRE)</li>]
 			[<li>(#DESCRIPTIF)</li>]
 			[<li>(#COPYRIGHT)</li>]

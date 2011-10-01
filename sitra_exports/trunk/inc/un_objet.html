@@ -22,13 +22,14 @@
 	<li><:sitra:obj_classement_orga:> : #CLASSEMENT_ORGA</li>
 	<li><:sitra:obj_classement_code:> : #CLASSEMENT_CODE</li>
 	<li><:sitra:obj_classement:> : #CLASSEMENT</li>
+	<li><:sitra:obj_reservation_url:> : [(#RESERVATION_URL|sitra_expand_liste)]</li>
 </ul>
 </dd>
 <B_b><dd style="overflow: hidden">
-<BOUCLE_b (SITRA_IMAGES){id_sitra}{par type_image}>
+<BOUCLE_b (SITRA_DOCS){id_sitra}{par type_doc}>
 	[<dl class="spip_documents spip_documents_left" style="float: left; width: 120px;">
-	<dt>(#URL_IMAGE|url_image_sitra{#LIEN,'../'}|image_reduire{120,120}|sinon{#URL_IMAGE - #LIEN})</dt>
-	[<dt>(#TYPE_IMAGE) - #TITRE</dt>]
+	<dt>(#URL_DOC|url_doc_sitra{#LIEN,'../'}|image_reduire{120,120}|sinon{#URL_DOC - #LIEN})</dt>
+	[<dt>(#TYPE_DOC)</dt>]
 	</dl>]
 </BOUCLE_b>
 </dd></B_b>

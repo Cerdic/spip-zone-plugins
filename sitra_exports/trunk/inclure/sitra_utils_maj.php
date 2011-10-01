@@ -86,13 +86,13 @@ function trouver_fichier_prefixe($dir, $prefix){
 	return $le_fichier;
 }
 
-// supprime une image d'un repertoire
-function suppr_image($url_img = ''){
-	if ($url_img){
-		if (unlink($url_img)) {
-			message('Suppression image :'.$url_img);
+// supprime un doc d'un repertoire
+function suppr_doc($url_doc = ''){
+	if ($url_doc){
+		if (unlink($url_doc)) {
+			message('Suppression document :'.$url_doc);
 		} else {
-			message('Probleme suppression image :'.$url_img, 'erreur');
+			message('Probleme suppression document :'.$url_doc, 'erreur');
 		}
 	}
 }
