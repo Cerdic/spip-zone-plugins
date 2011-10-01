@@ -20,7 +20,7 @@
 #SET{dates,#GET{dates}|array_unique}
 
 <BOUCLE_doc_previsu(DOCUMENTS){id_document=#ENV{id_document}}{tout}>
-[(#ENV{id_document}|et{#PLUGIN{html5_player}}|oui)
+[(#ENV{id_document}|et{#PLUGIN{mediaspip_player}}|oui)
 	<h3><:spipmotion:titre_previsu:></h3>
 	<p><a href="[(#SELF|parametre_url{id_document,''})]" class="ajax"><:spipmotion:lien_enlever_previsu:></a></p>
 	[(#MODELE{emb,id_document=#ID_DOCUMENT,controls=oui,autobuffer=non,largeur=400,infos=non})]
