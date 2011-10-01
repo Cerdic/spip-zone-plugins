@@ -12,6 +12,6 @@
 	<licence>GPL</licence>
 	<categorie>communication</categorie>
 	<options>contact_libre_options.php</options>
- 	<necessite id='SPIP' version='[2.0.6;]' />
+ 	<necessite id='SPIP' version='[2.0.6;2.1.99]' />
  	<utilise id="nospam" version="[0.6;]" />
 </plugin>
