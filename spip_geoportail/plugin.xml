@@ -5,12 +5,16 @@
 	<auteur>	<!-- Auteur du plugin -->
 	  [Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]
 	</auteur>
+	<slogan>
+		Affichage des objets SPIP sur une carte Geoportail, OpenStreetMap, GoogleMap ou Yahoo!
+	</slogan>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<licence>GNU/GPL, BSD pour l'API Geoportail/OpenLayers</licence>
 	<version>1.02</version>
 	<icon>img/geoportail.gif</icon>
-	<etat>
-		test
-	</etat>
+	<etat>test</etat>
 	<description>
+	
 Affichage de cartes dans SPIP (G&eacute;oportail, OpenStreetMap, Google Maps, Yahoo!...).
 _ Utilisation de l'API G&eacute;oportail (Openlayers) et g&eacute;or&eacute;f&eacute;rencement des objets SPIP :
 - cr&eacute;ation d'une table de GEOPOSITIONS de position pour les objets SPIP
@@ -18,8 +22,6 @@ _ Utilisation de l'API G&eacute;oportail (Openlayers) et g&eacute;or&eacute;f&ea
 - int&eacute;gration de geoservices WMS,WFS,...
 - crit&egrave;re geoposition pour jointure avec les tables SPIP
 
-Vous devez param&eacute;trer l'API G&eacute;oportail avant utilisation : 
-<a href="?exec=geoportail_config">param&eacute;trer l'API</a>.
 	</description>
 	<lien>
 		[Plugin SPIP-Geoportail ->http://www.spip-contrib.net/Plugin-SPIP-Geoportail] :
