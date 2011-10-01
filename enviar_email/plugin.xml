@@ -1,43 +1,29 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>
-	<multi>
-	[es]Enviar email
-	[fr]Envoyer par mail
-	</multi>
+		<multi>
+		[es]Enviar email
+		[fr]Envoyer par mail
+		</multi>
 	</nom>
-	<auteur>
-joseluis@digital77.com
-_ CopyLeft - 2006
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<auteur>[joseluis->joseluis@digital77.com]</auteur>
+	<licence>GPL - (c) 2006</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
 	<description>
 		<multi>	
-[es]Enviar la referencia al artículo o a la breve por email
-- Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
-- Los dos ** asteriscos son importantes, no los olvides.
-[fr]Envoyer la r&eacute;f&eacute;rence de l'article par mail
-- Pour l'utiliser coller la balise #ENVIAR_EMAIL** dans votre squelette<br />	
-- les deux ast&eacute;risques sont indispensables<br />
+			[es]Enviar la referencia al artículo o a la breve por email
+			- Para utilizarla coloca la baliza #ENVIAR_EMAIL** donde quieras que aparezca el enlace (artículos o breves)
+			- Los dos ** asteriscos son importantes, no los olvides.
+			[fr]Envoyer la r&#233;f&#233;rence de l'article par mail
+			- Pour l'utiliser coller la balise #ENVIAR_EMAIL** dans votre squelette
+			- les deux ast&#233;risques sont indispensables
 		</multi>
 	</description>
-	
-	<lien> 
-		[es] [Documentaci&oacute;n sobre contrib->http://www.spip-contrib.net/?article1407]
-		[fr] [Documentation sur contrib->http://www.spip-contrib.net/?article2228]<br />
-	</lien>
+
+	<lien>http://www.spip-contrib.net/?article2228</lien>
 	<icon>sobre.gif</icon>
-	<fonctions>
-	baliza_enviar_email.php
-	</fonctions>
-	<prefix> 
-	enviar_email
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<fonctions>baliza_enviar_email.php</fonctions>
+	<prefix>enviar_email</prefix>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>communication</categorie>
 </plugin>
