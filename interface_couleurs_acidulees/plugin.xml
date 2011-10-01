@@ -1,15 +1,14 @@
 <plugin>
-	<nom>Interface en couleurs &laquo;bonbons acidul&eacute;es&raquo;</nom>
-	<auteur>	<!-- Auteur du plugin -->
-		ARNO*
-	</auteur>
+	<nom>Interface en couleurs &#171;bonbons acidul&#233;s&#187;</nom>
+	<slogan>Aciduler les couleurs de l'interface priv&#233;e de Spip</slogan>
+	<auteur>ARNO*</auteur>
 	<icon>logo_acidulees.png</icon>
 	<licence>GPL 3 - &#169; 2006-2008</licence>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
-	<description>Ce plugin change les couleurs de l'interface et leur fait adopter des couleurs &laquo;bonbons acidul&eacute;es&raquo;.</description>
-	<lien></lien> <!-- URI de documentation -->
- 	<necessite id='SPIP' version='[2.0.0;]' />
+	<description>Ce plugin change les couleurs de l'interface et leur fait adopter des couleurs &#171;bonbons acidul&#233;s&#187;.</description>
+	<lien></lien>
+ 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<prefix>interface_couleurs_acidulees</prefix>
 	<categorie>maintenance</categorie>
 </plugin>
