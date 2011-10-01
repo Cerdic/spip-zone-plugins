@@ -1,10 +1,11 @@
 <plugin>
 <nom>Actes Etat civil</nom>
+<slogan>Concevoir des actes en ligne</slogan>
 <etat>stable</etat>
 <version>1.0.1</version>
-<auteur>Dominique Wojylac / Sivu Inforoutes Ard&egrave;che</auteur>
+<auteur>Dominique Wojylac / Sivu Inforoutes Ard&#232;che</auteur>
 <description>
-Formulaire multi-&eacute;tapes de demande d'acte d'&eacute;tat civil en ligne
+Formulaire multi-&#233;tapes de demande d'acte d'&#233;tat civil en ligne
 </description>
 <fonctions>actes_etat_civil_fonctions.php</fonctions>
 <prefix>actes_etat_civil</prefix>
