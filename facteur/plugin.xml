@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <plugin>
 	<nom>
 		<multi>
@@ -6,11 +5,12 @@
 			[en]Postman
 		</multi>
 	</nom>
+	<slogan>Il distribue votre courrier</slogan>
 	<auteur>Collectif SPIP</auteur>
 	<version>1.7.3</version>
 	<version_base>1.1</version_base>
 	<etat>stable</etat>
-	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
+	<licence>GPL</licence>
 	<description>
 		<multi>
 			[fr]Facteur s'occupe de la distribution des courriels au format HTML, texte ou mixte ; via SMTP ou non
@@ -18,8 +18,6 @@
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Facteur</lien>
- 	<necessite id="SPIP" version="[2.0.3;]" />
-	<utilise id="bando" version="[;]" />
 	<install>base/facteur.php</install>
 	<icon>prive/images/facteur-48.png</icon>
 	<prefix>facteur</prefix>
@@ -45,4 +43,6 @@
 		<url>facteur</url>
 	</bouton>
 	<categorie>communication</categorie>
+ 	<necessite id="SPIP" version="[2.0.3;2.1.99]" />
+	<utilise id="bando" version="[;]" />
 </plugin>
