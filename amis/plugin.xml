@@ -1,10 +1,8 @@
 <plugin>
 	<nom>Amis</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 	[Cedric Morin->http://www.yterium.net]
-_ &#169; 2008 - Licence GPL
-	</auteur>
-	<version>0.1</version>
+	<auteur>[Cedric Morin->http://www.yterium.net]</auteur>
+	<licence>GPL - (c) 2008</licence>
+	<version>0.1.0</version>
 	<version_base>0.10</version_base>
 	<etat>stable</etat>
 	<description>Gestion des amis</description>
@@ -14,13 +12,14 @@ _ &#169; 2008 - Licence GPL
 	<install>base/amis_upgrade.php</install>
 	<fonctions>amis_fonctions.php</fonctions>
 	<prefix>amis</prefix>
-  <pipeline>
-  	<nom>declarer_tables_interfaces</nom>
-  	<inclure>base/amis.php</inclure>
-  </pipeline>
-  <pipeline>
-  	<nom>declarer_tables_principales</nom>
-  	<inclure>base/amis.php</inclure>
-  </pipeline>
-  <necessite id='messagerie' version="[2.0.1;]" />
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/amis.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/amis.php</inclure>
+	</pipeline>
+	<necessite id='SPIP' version='[2.0.0;2.0.99]' />
+	<necessite id='messagerie' version="[2.0.1;]" />
 </plugin>
