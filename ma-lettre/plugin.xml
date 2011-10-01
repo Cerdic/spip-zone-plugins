@@ -1,21 +1,14 @@
 <plugin>
 	<nom>Ma lettre</nom>
-	<auteur>
-	[erational->http://www.erational.org]
-_ &copy; 2006-2010 - Distribu&eacute; sous licence GNU/GPL v.3
-	</auteur>
-	<version>2.3</version>
+	<auteur>[erational->http://www.erational.org]</auteur>
+	<licence>GNU/GPL - (c) 2006-2010</licence>
+	<version>2.3.0</version>
 	<etat>stable</etat>
 	<description>
-		<multi>
-	[fr] Permet de composer une lettre en s&eacute;lectionnant manuellement les articles que l'on d&eacute;sire ajouter  pour l'envoyer 
-	sur une lettre de diffusion g&eacute;r&eacute;e ext&eacute;rieurement &agrave; SPIP (de type [SYMPA->http://www.sympa.org], [Mailman->http://www.gnu.org/software/mailman/]...).
-	</multi>
+		Permet de composer une lettre en s&#233;lectionnant manuellement les articles que l'on d&#233;sire ajouter  pour l'envoyer 
+	sur une lettre de diffusion g&#233;r&#233;e ext&#233;rieurement &agrave; SPIP (de type [SYMPA->http://www.sympa.org], [Mailman->http://www.gnu.org/software/mailman/]...).
 	</description>
-	<lien>
-	[Documentation->http://www.spip-contrib.net/Plugin-Ma-lettre] 
-  et si vous avez [Config (cfg)->.?exec=cfg&amp;cfg=malettre]
-	</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Ma-lettre</lien>
 	<prefix>malettre</prefix>
 	<icon>img/malettre.png</icon>
 	<pipeline>
@@ -32,7 +25,7 @@ _ &copy; 2006-2010 - Distribu&eacute; sous licence GNU/GPL v.3
 		<icone>img/icon_malettre.png</icone>
 		<url>malettre</url>
 	</bouton>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id='spip_bonux' version='[1.3;]' />
 	<categorie>communication</categorie>
 </plugin>
