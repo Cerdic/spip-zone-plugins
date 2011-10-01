@@ -1,5 +1,6 @@
 <plugin>
-	<nom>Formidable, g&#233;n&#233;rateur de formulaires</nom>
+	<nom>Formidable</nom>
+	<slogan>G&#233;n&#233;rateur de formulaires</slogan>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
 	<version>0.6.5</version>
