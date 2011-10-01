@@ -1,6 +1,7 @@
 <plugin>
 	<nom>Mise &#224; jour</nom>
-	<version>0.2</version>
+	<slogan>Cr&#233;er, mettre &#224; jour ou restaurer une archives de fichiers personnels</slogan>
+	<version>0.2.0</version>
 	<version_base>0.3</version_base>
 	<prefix>maj</prefix>
 	<icon>images/maj128.png</icon>
@@ -11,9 +12,6 @@
 		<inclure>maj_fonctions.php</inclure>
 	</pipeline>
 	<description>
-[Cr&#233;er, Mettre &#224; Jour ou Restaurer une archives de 
-mes fichiers personnels->./?exec=admin_tech]
-
 Un utilisateur (par d&#233;faut, l'administrateur num&#233;ro 1) est autoris&#233;
 &#224; faire une mise &#224; jour du site via le script spip_loader.php, qui doit donc
 &#234;tre pr&#233;sent &#224; la racine de votre site, ou l'utilitaire SVN.
@@ -38,6 +36,6 @@ _ source est detect&#233; car il s'agit d'une url commançant par svn:// ou http
 et permet le selection de l'outil appropri&#233;
 _ si SVN alors destination est obligatoire m&#234;me si .
 	</description>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>maintenance</categorie>
 </plugin>
