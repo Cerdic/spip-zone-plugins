@@ -1,27 +1,13 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Desactiver le cache
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	[Cedric MORIN->mailto:cedric.morin@yterium.com]
-_ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	experimental
-	</etat>
-	<description>
-	Inhibition du cache de SPIP pour le d&#233;veloppement du site.
-	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<prefix> 
-	InhibeCache
-	</prefix>
-	<options>
-	desactiver_cache.php
-	</options>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<nom>D&#233;sactiver le cache</nom>
+	<auteur>[Cedric MORIN->mailto:cedric.morin@yterium.com]</auteur>
+	<licence>&#169; 2006 - GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>experimental</etat>
+	<description>Inhibition du cache de SPIP pour le d&#233;veloppement du site.</description>
+	<lien></lien>
+	<prefix>InhibeCache</prefix>
+	<options>desactiver_cache.php</options>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>maintenance</categorie>
 </plugin>
