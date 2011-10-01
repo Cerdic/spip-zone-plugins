@@ -1,13 +1,12 @@
 <plugin>
 	<nom>Interface adoucie</nom>
-	<auteur>	<!-- Auteur du plugin -->
-		ARNO*
-	</auteur>
+	<slogan>Interface priv&#233;e subtilement moins contrastr&#233;e</slogan>
+	<auteur>ARNO*</auteur>
 	<licence>GPL 3 - &#169; 2006-2008</licence>
-	<version>1.3</version>
+	<version>1.3.0</version>
 	<etat>stable</etat>
-	<description>Une &eacute;volution de l'interface priv&eacute;e, subtilement moins contrastr&eacute;e. Le plugin intervient en modifiant les feuilles de style de l'espace priv&eacute;.</description>
- 	<necessite id='SPIP' version='[2.0.0;]' />
+	<description>Une &#233;volution de l'interface priv&#233;e, subtilement moins contrastr&#233;e. Le plugin intervient en modifiant les feuilles de style de l'espace priv&#233;</description>
+ 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<prefix>interface_adoucie</prefix>
 	<categorie>maintenance</categorie>
 </plugin>
