@@ -1,5 +1,5 @@
 <plugin>
-	<nom><multi>[fr]noiZetier[de]Nussbaum</multi></nom>
+	<nom><multi>[fr]NoiZetier[de]Nussbaum</multi></nom>
 	<slogan><multi>[fr]Gestionnaire de noisettes, nativement fonctionnel avec les squelettes Z[de]Verwaltung der Code-N&#239;sse, als Erg&#228;nzung der Z-Squelette oder als eigenst&#228;ndiges Modu.</multi></slogan>
 	<auteur>Joseph, Matthieu Marcillaud</auteur>
 	<licence>GPL v3</licence>
