@@ -1,52 +1,39 @@
 <plugin>
-
-    <nom>SPIP Quiz - R&eacute;aliser de vrais quiz sous SPIP</nom>
-	
+    <nom>SPIP Quiz</nom>
 	<version>0.2.0</version>
-	
 	<prefix>quiz</prefix>
-	
 	<icon>img/quiz_32x32.png</icon>
-	
 	<auteur>Cyril MARION - Ateliers CYM</auteur>
-	
-	<description>Le plugin &laquo; quiz &raquo; pour SPIP propose de r&eacute;aliser des quiz de type qcm avec SPIP. Il utilise les tables natives de SPIP pour g&eacute;rer les quiz eux m&ecirc;mes (rubriques), les questions (articles) et les th&eacute;matiques (mots cl&eacute;s). Il ajoute simplement une table spip_reponses, chaque r&eacute;ponse &eacute;tant li&eacute;e &agrave; une question/article, et une table spip_corrections, contenant l'id de la r&eacute;ponse juste et &eacute;ventuellement un corrig&eacute;.
+	<slogan>R&#233;aliser de vrais quiz sous SPIP</slogan>
+	<description>Ce plugin permet de r&#233;aliser des quiz de type QCM. Il utilise les tables natives de SPIP pour g&#233;rer les quiz eux-m&ecirc;mes (rubriques), les questions (articles) et les th&#233;matiques (mots cl&#233;s). Il ajoute simplement une table spip_reponses, chaque r&#233;ponse &#233;tant li&#233;e &#224; une question/article, et une table spip_corrections, contenant l'id de la r&#233;ponse juste et &#233;ventuellement un corrig&#233;.
 
-Dans une future version il est envisag&eacute; de g&eacute;rer d'autres types de questions, comme par exemple les questions o&ugrave; l'on peut apporter plusieurs r&eacute;ponses ou les questions de type &laquo; valeur &raquo; (curseur).
+Dans une future version il est envisag&#233; de g&#233;rer d'autres types de questions, comme par exemple les questions o&ugrave; l'on peut apporter plusieurs r&#233;ponses ou les questions de type &laquo; valeur &raquo; (curseur).
 
-La pr&eacute;sente version a &eacute;t&eacute; d&eacute;velopp&eacute;e dans le but de faciliter la saisie et le classement des quiz, puis d'automatiser la sortie du fichier texte contenant les donn&eacute;es n&eacute;cessaires &agrave; la compilation d'un quiz en Flash.</description>
+La pr&#233;sente version a &#233;t&#233; d&#233;velopp&#233;e dans le but de faciliter la saisie et le classement des quiz, puis d'automatiser la sortie du fichier texte contenant les donn&#233;es n&#233;cessaires &#224; la compilation d'un quiz en Flash.</description>
 	
 	<etat>dev</etat>
-
 	<version_base>0.1</version_base>
-	
+	<lien>http://www.spip-contrib.net/Des-quiz-SPIP-exportables</lien>
+
 	<install>base/quiz_upgrade.php</install>
-	
 	<bouton id='quiz' parent='naviguer'>
 		<icone>img/quiz_32x32.png</icone>
 		<url>quiz_tous</url>
 		<titre>quiz:nom_bouton_plugin</titre>
 	</bouton>
-	
-	<lien>[Le plugin SPIP Quiz sur la zone->http://www.spip-contrib.net/Des-quiz-SPIP-exportables]</lien>
-
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/quiz_tables.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/quiz_tables_interfaces.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>quiz_pipelines.php</inclure>
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	
  	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
-
 </plugin>
