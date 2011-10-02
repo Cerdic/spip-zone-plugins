@@ -1,41 +1,30 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Switcher
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Philippe Drouot, adaptation en plugin de la contrib switcher de Fil
-_ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Switcher</nom>
+	<slogan>Switcher de squelettes</slogan>
+	<auteur>Philippe Drouot, adaptation en plugin de la contrib switcher de Fil</auteur>
+	<licence>&#169; 2006 - GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
 	<description>
-	<multi>
-	[fr]
-	Ajoute une liste d&#233;roulante permettant de basculer entre les squelettes par d&#233;faut du site, les squelettes de la dist de SPIP et l'ensemble des squelettes contenus dans le r&#233;pertoire nomm&#233; <code>squelettes-test</code>	(un sous-r&#233;pertoire par jeu de squelettes).
-
-	Si vous souhaitez modifier le nom du r&#233;pertoire contenant les squelettes, &#233;ditez le fichier <code>inc/switcher_config.php</code>. Il est &#233;galement possible dans ce m&#234;me fichier de sp&#233;cifier si les non administrateurs ont la possibilit&#233; de jouer avec les jeux de squelettes en mettant a FALSE la variable <code>$afficherSeulementPourLesAdmins</code>.
-
-	Pour se faire une id&#233;e, voir [d&#233;mo->http://spiptest.africa-web.org/].
-	[it]
-	Aggiunge un menù a tendina che permette di scegliere tra diversi modelli, quello di default del sito. La scelta &#232; tra i modelli della dist di SPIP e tutti i modelli contenuti nella cartelle squelettes-test (una sottocartella di modelli di prova). 
+		<multi>
+		[fr]
+		Ajoute une liste d&#233;roulante permettant de basculer entre les squelettes par d&#233;faut du site, les squelettes de la dist de SPIP et l'ensemble des squelettes contenus dans le r&#233;pertoire nomm&#233; <code>squelettes-test</code>	(un sous-r&#233;pertoire par jeu de squelettes).
 	
-	Se desiderate modificare il nome della cartella che contiene i modelli, modificate il file inc/switcher_config.php. In questo file &#232; anche possibile precisare se assegnare ai non amministratori la possibilit&#224; di modificare le impostazioni di modelli, impostando FALSE la variabile <code>$afficherSeulementPourLesAdmins</code>.
+		Si vous souhaitez modifier le nom du r&#233;pertoire contenant les squelettes, &#233;ditez le fichier <code>inc/switcher_config.php</code>. Il est &#233;galement possible dans ce m&#234;me fichier de sp&#233;cifier si les non administrateurs ont la possibilit&#233; de jouer avec les jeux de squelettes en mettant a FALSE la variable <code>$afficherSeulementPourLesAdmins</code>.
 	
-	Per farsi un'idea, vedere [d&#233;mo->http://spiptest.africa-web.org/].
-	</multi>
+		Pour se faire une id&#233;e, voir [d&#233;mo->http://spiptest.africa-web.org/].
+		[it]
+		Aggiunge un menù a tendina che permette di scegliere tra diversi modelli, quello di default del sito. La scelta &#232; tra i modelli della dist di SPIP e tutti i modelli contenuti nella cartelle squelettes-test (una sottocartella di modelli di prova). 
+		
+		Se desiderate modificare il nome della cartella che contiene i modelli, modificate il file inc/switcher_config.php. In questo file &#232; anche possibile precisare se assegnare ai non amministratori la possibilit&#224; di modificare le impostazioni di modelli, impostando FALSE la variabile <code>$afficherSeulementPourLesAdmins</code>.
+		
+		Per farsi un'idea, vedere [d&#233;mo->http://spiptest.africa-web.org/].
+		</multi>
 	</description>
 	<lien>http://zine.spip.org/spip.php?article8</lien>
-	<prefix> 
-	switcher
-	</prefix>	
-	<options>
-	switcher.php
-	</options>
+	<prefix>switcher</prefix>	
+	<options>switcher.php</options>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
@@ -45,6 +34,6 @@ _ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>maintenance</categorie>
 </plugin>
