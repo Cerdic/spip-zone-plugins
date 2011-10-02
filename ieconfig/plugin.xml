@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Import-Export</nom>
-	<nom>Importer, exporter des configurations de plugins</nom>
+	<slogan>Importer, exporter des configurations de plugins</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.2.6</version>
