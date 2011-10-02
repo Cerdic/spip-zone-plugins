@@ -1,14 +1,14 @@
 <plugin>
     <nom>Disqus</nom>
     <auteur> 
-    [Martín Gaitán->http://nqnwebs.com]
+    [Martín Gait&#225;n->http://nqnwebs.com]
     </auteur>
     <version>0.1.0 </version>
     <icon>disqus-logo.png</icon>
     <etat>dev</etat>
     <slogan>
         <multi>
-        [fr]La plate-forme de commentaires Disqus adapt&#233; &#224; SPIP
+        [fr]La plate-forme de commentaires Disqus adapt&#233;e &#224; SPIP
         [en]Disqus comment platform for SPIP
         [es]Plataforma de comentarios Disqus para SPIP
         </multi>
