@@ -15,6 +15,7 @@
 	</multi></description>
 	<icon>images/scenari-32.png</icon>
 	<lien>http://www.spip-contrib.net/Scenari-pour-SPIP</lien>
+	<necessite id="SPIP" version='[2.1.0;3.0.99]' />
 	<bouton id='scenari_2' parent='naviguer'>
 		<icone>images/scenari-24.png</icone>
 		<titre>scenari:scenari</titre>
