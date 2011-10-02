@@ -1,11 +1,12 @@
 <plugin>
 	<nom>Stockage S3</nom>
+	<slogan>Stockage des documents sur S3</slogan>
 	<auteur>Natxo</auteur>
 	<icon>stockageS3.png</icon>
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<etat>test</etat>
-	<description>Stockage des documents sur S3</description>
-	<lien></lien> <!-- URI de documentation -->
+	<description>Ce plugin interface Spip avec un syst&#232;me de stockage des documents sur serveur de type Amazon Simple Storage Service. Amazon S3 est pens&#233; pour mettre &#224; disposition des d&#233;veloppeurs web un espace de stockage virtuel illimit&#233;, factur&#233; &#224; l’utilisation.</description>
+	<lien></lien>
 	<prefix>stockageS3</prefix>
 	<pipeline>
 		<nom>document_desc_actions</nom>
@@ -20,7 +21,7 @@
 		<inclure>stockageS3_pipeline.php</inclure>
 	</pipeline>
 	<fonctions>inc/s3.php</fonctions>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<categorie>maintenance</categorie>
 
 	<pipeline>
