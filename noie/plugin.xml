@@ -1,18 +1,22 @@
 <plugin>
-<nom>Changez de navigateur !</nom>
-<icon>icon.gif</icon>
-<auteur>Fil, [romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
-<licence>GPL</licence>
-<version>1.2</version>
-<etat>stable</etat>
-<description>Ce plugin permet d'afficher un gentil message aux internautes surfant avec Internet Explorer afin de les pr&eacute;venir qu'ils ne visitent pas le site dans les meilleures conditions.</description>
-<lien>http://www.spip-contrib.net/Changez-de-navigateur</lien>
-<prefix>noie</prefix>
-<pipeline>
-	<nom>affichage_final</nom>
-	<inclure>insere_campagne.php</inclure>
-</pipeline>
-<categorie>performance</categorie>
-<necessite id='SPIP' version='[1.9.0;]' />
+	<nom>Changez de navigateur !</nom>
+	<prefix>noie</prefix>
+	<icon>icon.gif</icon>
+	
+	<version>1.2.0</version>
+	<etat>stable</etat>
+	<categorie>performance</categorie>
+	
+	<slogan>Changez de navigateur pour mieux voir le Web&nbsp;!</slogan>
+	<description>Affichez un gentil message aux internautes surfant avec Internet Explorer afin de les pr&eacute;venir qu'ils ne visitent pas le site dans les meilleures conditions.</description>
+	<lien>http://www.spip-contrib.net/?rubrique774</lien>
+	<auteur>Fil, [romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
+	<licence>GPL</licence>
+	
+	<pipeline>
+		<nom>affichage_final</nom>
+		<inclure>insere_campagne.php</inclure>
+	</pipeline>
 	<traduire gestionnaire="salvatore" module="noie" reference="fr" />
+	<necessite id='SPIP' version='[1.9.0;3.0.0-dev)' />
 </plugin>
