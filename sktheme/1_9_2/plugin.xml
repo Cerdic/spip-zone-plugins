@@ -1,40 +1,33 @@
 <plugin>
- <nom>SkTheme (SPIP 1.9.2)</nom>
- <version>0.6</version>
- <etat>stable</etat>
- <auteur>Skedus
-<multi>
-_ &#169; September 2006 - distributed under GNU/GPL licence.
-[fr]_ &#169; Septembre 2006 - distribu&#233; sous license GNU/GPL.
-</multi>
-</auteur>
-<description>
-<multi>
-Manage theme for SPIP
-_ WATCH OUT: You need to desactivate switcher plugin (quite incompatible because using same process - this means i copied it inside this plugin and i would like to thank  its authors Philippe Drouot and Fil for this nice switcher plugin)
-_ Activate this plugin and manage themes in the {{Configuration}} menu.
-[fr]
-Gestion des th&#232;mes de SPIP
-_ ATTENTION: D&#233;sactivez le plugin switcher (ils sont quelque peu incompatibles, car il est monstreusement copi&#233; dans ce plugin, merci aux auteurs Philippe Drouot et Fil)
-_ Activez ce plugin et g&#233;rez les th&#232;mes dans le menu {{Configuration}}.
-</multi>
-</description>
-	<lien>http://skedus.free.fr/spip/spip.php?article8</lien> <!-- URI de documentation -->
- <prefix>sktheme</prefix>
- <options>sktheme_options.php</options>
- <pipeline>
-    <nom>ajouter_boutons</nom>
-    <inclure>sktheme_fonctions.php</inclure>
- </pipeline>
- <pipeline>
-    <nom>affichage_final</nom>
-    <action>affichage_final</action>
-    <inclure>sktheme_fonctions.php</inclure>
- </pipeline>
- <pipeline>
-   <nom>insert_head</nom>
-      <inclure>sktheme_head.php</inclure>
- </pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<nom>SkTheme</nom>
+	<slogan>Gestion de th&#232;mes</slogan>
+	<version>0.6.0</version>
+	<etat>stable</etat>
+	<auteur>Skedus</auteur>
+	<licence>&#169; 2006 - GNU/GPL</licence>
+	<description>
+		<multi>
+			[en]Quick and easy to give a little color to your SPIP site. {{WATCH OUT:}} You need to desactivate switcher plugin (quite incompatible because using same process - this means i copied it inside this plugin and i would like to thank  its authors Philippe Drouot and Fil for this nice switcher plugin)
+			_ Activate this plugin and manage themes in the {{Configuration}} menu.
+			[fr]Rapide et simple pour donner un peu de couleur &#224; votre site SPIP. {{ATTENTION:}} d&#233;sactivez le plugin switcher (ils sont quelque peu incompatibles, car il est monstreusement copi&#233; dans ce plugin, merci aux auteurs Philippe Drouot et Fil).
+		</multi>
+	</description>
+	<lien>http://skedus.free.fr/spip.php?article15</lien>
+	<prefix>sktheme</prefix>
+	<options>sktheme_options.php</options>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>sktheme_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affichage_final</nom>
+		<action>affichage_final</action>
+		<inclure>sktheme_fonctions.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>sktheme_head.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>maintenance</categorie>
 </plugin>
