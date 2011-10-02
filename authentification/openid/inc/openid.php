@@ -40,7 +40,8 @@ function openid_login_form($texte,$contexte){
 	.".explication {margin:5px 0;}"
 	."//--></style>"
 	."<script type='text/javascript'>"
-	."/*<![CDATA[*/"
+	."/*<![CDATA[*/
+	jQuery('#var_login').parents('form').addClass('openid');"
 	."var memopass='';"
 	."function toggle_password(show){
 if (show) {
