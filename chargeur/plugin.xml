@@ -1,24 +1,24 @@
 <plugin>
 	<nom>Chargeur</nom>
 	<slogan>T&#233;l&#233;charger des zip et/ou activer des plugins</slogan>
-	<auteur>bertrand Gugger [->http://toggg.com/]</auteur>
-	<slogan>&#169; 2007 GNU/LGPL</slogan>
+	<auteur>[bertrand Gugger->http://toggg.com/]</auteur>
+	<slogan>&#169; 2007 - GNU/LGPL</slogan>
 	<version>1.0.0</version>
 	<etat>test</etat>
 	<description>Ce plugin fournit l'action {{charger}} qui charge un zip, le d&#233;compresse et si plugin, l'active:
 
-- charger un plugin, le d&#233;compresser et l'activer: <code>spip.php?action=charger&amp;plugin=nom</code>
-- charger un zip et le d&#233;compresser: <code>spip.php?action=charger&amp;zip=archive</code> (sans .zip)
+-* charger un plugin, le d&#233;compresser et l'activer: <code>spip.php?action=charger&amp;plugin=nom</code>
+-* charger un zip et le d&#233;compresser: <code>spip.php?action=charger&amp;zip=archive</code> (sans .zip)
 
 Si le nom du zip diff&#232;re de son nom local, mettre &#224; la fois {zip} et {plugin}:
-- <code>spip.php?action=charger&amp;plugin=nom&amp;zip=archive</code>
+-* <code>spip.php?action=charger&amp;plugin=nom&amp;zip=archive</code>
 
 Options suppl&#233;mentaires:
-- &amp;url_retour=[url retour], d&#233;faut ecrire/
-- &amp;depot=[url du depot des zip] defaut http://files.spip.org/spip-zone/
+-* &amp;url_retour=[url retour], d&#233;faut ecrire/
+-* &amp;depot=[url du depot des zip] defaut http://files.spip.org/spip-zone/
 
 On peut aussi simplement activer un plugin d&#233;j&#224; pr&#233;sent par:
-- <code>spip.php?action=charger&amp;activer=nom</code>
+-* <code>spip.php?action=charger&amp;activer=nom</code>
 	</description>
 	<lien>http://www.spip-contrib.net/Chargeur-Activateur</lien>
 	<prefix>chargeur</prefix>
