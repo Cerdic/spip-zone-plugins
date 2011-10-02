@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_frais_envoi'=> 'frais d\'envoi',
 	'config_libelle_comptes'=> 'Gestion comptable',
 	'config_libelle_activer_comptes'=> 'Activer la gestion comptable',
-	'config_libelle_destinations'=> 'Gestion des destinations comptables',
+	'config_libelle_destinations'=> 'Activer la gestion des destinations comptables',
 	'config_libelle_activites'=> 'Gestion des inscriptions aux activit&eacute;s (n&eacute;cessite le plugin Agenda)',
 	'config_libelle_activer_activites'=> 'Activer la gestion des inscriptions aux activit&eacute;s',
 	'config_libelle_prets'=> 'Gestion des pr&egrave;ts et ressources',
@@ -512,7 +512,8 @@ Commentaire: @commentaire@
 			'plan_nav_ajouter' => 'Ajouter une r&eacute;f&eacute;rence comptable',
 			'operations_comptables' => 'Op&eacute;rations comptables',
 			'liens_vers_les_justificatifs' => 'Liens vers les justificatifs',
-		
+		'destination_nav_ajouter' => 'Ajouter une destination comptable',
+
 		#Libelle
 			'plan_libelle_comptes_actifs' => 'Comptes actifs',
 			'plan_libelle_comptes_desactives' => 'Comptes d&eacute;sactiv&eacute;s',
@@ -524,14 +525,13 @@ Commentaire: @commentaire@
 			'supprimer_destination' => 'supprimer',
 		# Titres
 			'destination_comptable' => 'Destination comptable',
-		
-		# Navigation
-			'destination_nav_ajouter' => 'Ajouter une destination comptable',
 		# Bilan
 			'toutes_destination' => 'toutes destinations',
 		# Comptes
 			'compte_financier' => 'Compte financier',			
-			'bilan' => 'Bilan',	
+			'bilan' => 'Bilan',
+			'compte_cree_automatiquement' => 'Compte cr&eacute;&eacute; automatiquement par Associaspip',
+			'virement_interne' => 'Virement interne',
 
 		# Compte de Resultat
 			'cpte_resultat_titre_general' => 'Compte de R&eacute;sultat',
@@ -545,6 +545,7 @@ Commentaire: @commentaire@
 			'cpte_resultat_benefice' => 'B&eacute;n&eacute;fice',
 			'cpte_resultat_recette_evaluee' => 'Recette<br />&eacute;valu&eacute;e',
 			'cpte_resultat_depense_evaluee' => 'D&eacutepense<br />&eacute;valu&eacute;e',
+			'cpte_resultat_mode_exportation' => 'Exporter le Compte de R&eacute;sultat en ',
 
 		# annexe
 			'annexe_titre_general' => 'Annexe',

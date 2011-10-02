@@ -61,18 +61,18 @@
 						<h3 class="legend"><:asso:config_info_membres:></h3>
 						<ul>
 							<li>
-								<label for="nom"><strong><:asso:config_libelle_gerer_champs_membres:></strong></label><br/>
+								<label><strong><:asso:config_libelle_gerer_champs_membres:></strong></label>
 								<div class="choix">
 									<input type="checkbox" name="civilite" [(#ENV{civilite}|=={on}|?{checked="checked"})] id="civilite" />
-										   <label for="nom"><strong><:asso:adherent_libelle_sexe:></strong></label><br/>
+										   <label for="civilite"><strong><:asso:adherent_libelle_sexe:></strong></label><br/>
 								</div>
 								<div class="choix">
 									<input type="checkbox" name="prenom" [(#ENV{prenom}|=={on}|?{checked="checked"})] id="prenom" />
-										   <label for="nom"><strong><:asso:adherent_libelle_prenom:></strong></label><br/>
+										   <label for="prenom"><strong><:asso:adherent_libelle_prenom:></strong></label><br/>
 								</div>
 								<div class="choix">
 									<input type="checkbox" name="id_asso" [(#ENV{id_asso}|=={on}|?{checked="checked"})] id="id_asso" />
-										   <label for="nom"><strong><:asso:config_libelle_utiliser_champ_id_asso:></strong></label>
+										   <label for="id_asso"><strong><:asso:config_libelle_utiliser_champ_id_asso:></strong></label>
 								</div>
 							</li>
 							<li>
@@ -107,18 +107,24 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 								<li>
 									<div class="choix">
-										<input name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|=={on}|?{checked="checked"})] id="plan_comptable_prerenseigne" type="checkbox"/>
-											   <label><strong><:asso:config_plan_comptable_prerenseigne:></strong></label>
+										<input type="checkbox" name="plan_comptable_prerenseigne" [(#ENV{plan_comptable_prerenseigne}|=={on}|?{checked="checked"})] id="plan_comptable_prerenseigne" />
+										<label for="plan_comptable_prerenseigne"><strong><:asso:config_plan_comptable_prerenseigne:></strong></label>
 									</div>
 								</li>
+								<li>
+								<div class="choix">
+									<input type="checkbox" name="destinations" [(#ENV{destinations}|=={on}|?{checked="checked"})] id="destinations" />
+									   <label for="destinations"><strong><:asso:config_libelle_destinations:></strong></label>
+								</div>
+							</li>
 								<li>
 								<B_classe_banques>
 									<div class="choix">
 										<input name= "comptes" [(#ENV{comptes}|=={on}|?{checked="checked"})] id="comptes" type="checkbox"/>
-											   <label><strong><:asso:config_libelle_activer_comptes:></strong></label>
+											   <label for="comptes"><strong><:asso:config_libelle_activer_comptes:></strong></label>
 									</div>
 								</li>
-				<li>
+								<li>
 					<label><strong><:asso:config_libelle_classe_banques:></strong> </label>
 					<select name="classe_banques" id="classe_banques" >
 				<BOUCLE_classe_banques(ASSO_PLAN){fusion classe}{par classe}>
@@ -160,19 +166,19 @@
 					</select>
 					</li>
 
-							<li>
-								<div class="choix">
-									<input type="checkbox" name="destinations" [(#ENV{destinations}|=={on}|?{checked="checked"})] id="destinations" />
-									   <label><strong><:asso:config_libelle_destinations:></strong></label>
-								</div>
-							</li>
-							<li>
+							</ul>
+				</fieldset>
+			</li>
+
+			<li class="fieldset">
+				<!-- Options du plugin: gestion des cotisations -->
+				<fieldset>
+					<h3 class="legend"><:asso:config_libelle_cotisations:></h3>
+					<ul>
+						<li>
 				#SET{erreurs,#ENV**{erreurs}|table_valeur{pc_cotisations}}
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
-								<label><strong><:asso:config_libelle_cotisations:></strong> </label>
-							</li>
-							<li>
-								<label><strong><:asso:config_libelle_num_pc:></strong> </label>
+							<label><strong><:asso:config_libelle_num_pc:></strong> </label>
 								<B_pc_cotisations>
 								<select name="pc_cotisations" id="pc_cotisations">
 								<BOUCLE_pc_cotisations(ASSO_PLAN){par classe}{par code}>
@@ -212,7 +218,7 @@
 						<B_pc_dons>
 							<div class="choix">
 								<input type="checkbox" name="dons" [(#ENV{dons}|=={on}|?{checked="checked"})] id="dons" />
-									   <label><strong><:asso:config_libelle_activer_dons:></strong> </label>
+									   <label for="dons"><strong><:asso:config_libelle_activer_dons:></strong> </label>
 							</div>
 							</li>
 							<li>
@@ -241,6 +247,7 @@
 					</ul>
 				</fieldset>
 			</li>
+
 			<li class="fieldset">
 				<!-- Options du plugin: gestion des ventes -->
 				<fieldset>
@@ -250,9 +257,9 @@
 				[<span class='erreur_message'>(#GET{erreurs})</span>]
 						<li>
 						<B_pc_ventes>
-							<div class="choix"
+							<div class="choix">
 								 <input type="checkbox" name="ventes" [(#ENV{ventes}|=={on}|?{checked="checked"})] id="ventes" />
-								   <label><strong><:asso:config_libelle_activer_ventes:></strong> </label>
+								   <label for="ventes"><strong><:asso:config_libelle_activer_ventes:></strong> </label>
 							</div>
 							</li>
 							<li>
@@ -302,7 +309,7 @@
 						<B_pc_activites>
 							<div class="choix">
 								<input type="checkbox" name="activites" [(#ENV{activites}|=={on}|?{checked="checked"})] id="activites" />
-									   <label><strong><:asso:config_libelle_activer_activites:></strong></label> <br />
+									   <label for="activites"><strong><:asso:config_libelle_activer_activites:></strong></label> <br />
 							</div>
 							</li>
 							<li>
@@ -330,7 +337,7 @@
 						<B_pc_prets>
 							<div class="choix">
 								<input type="checkbox" name="prets" [(#ENV{prets}|=={on}|?{checked="checked"})] id="prets" />
-									   <label><strong><:asso:config_libelle_activer_prets:></strong> </label><br />
+									   <label for="prets"><strong><:asso:config_libelle_activer_prets:></strong> </label><br />
 							</div>
 							</li>
 							<li>

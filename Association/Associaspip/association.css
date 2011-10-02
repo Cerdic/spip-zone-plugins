@@ -84,7 +84,9 @@ h1.asso_titre { text-align:center; }
 	display:block;
 }
 
-.spip_forms .spip_form_choix_unique input, .spip_forms .spip_form_choix_unique input.fondo, .spip_forms .spip_form_choix_unique input.fondl {
+.spip_forms .spip_form_choix_unique input,
+.spip_forms .spip_form_choix_unique input.fondo,
+.spip_forms .spip_form_choix_unique input.fondl {
 	width:auto;
 }
 
@@ -92,12 +94,20 @@ h1.asso_titre { text-align:center; }
 	margin:0 0 5px 0;
 }
 
-.spip_forms .spip_form_choix_multiple input, .spip_forms .spip_form_choix_multiple input.fondo, .spip_forms .spip_form_choix_multiple input.fondl, ul.choix_mots li input {
+.spip_forms .spip_form_choix_multiple input,
+.spip_forms .spip_form_choix_multiple input.fondo,
+.spip_forms .spip_form_choix_multiple input.fondl,
+ul.choix_mots li input {
 	width:auto;
 	margin:0 5px 0 0;
 }
-.spip_forms ul.choix_mots,.spip_forms ul.spip_form_choix_multiple,.spip_forms ul.spip_form_choix_unique{
-list-style:none;float:left;padding-left:5px;width:45%;
+.spip_forms ul.choix_mots,
+.spip_forms ul.spip_form_choix_multiple,
+.spip_forms ul.spip_form_choix_unique{
+	list-style:none;
+	float:left;
+	padding-left:5px;
+	width:45%;
 }
 
 .spip_forms .spip_sondage {
@@ -160,7 +170,8 @@ list-style:none;float:left;padding-left:5px;width:45%;
 	padding: 2px;
 	white-space: nowrap;
 }
-.spip_forms .forml, .spip_forms .formo {
+.spip_forms .forml,
+.spip_forms .formo {
 	width:85%;
 	border-bottom:solid 1px #E2CEC1;
 	border-right:solid 1px #E2CEC1;
@@ -169,12 +180,14 @@ list-style:none;float:left;padding-left:5px;width:45%;
 	font-size:1em;
 	padding:.25em;
 }
-.spip_forms .forml, .spip_forms .fondl {
+.spip_forms .forml,
+.spip_forms .fondl {
 	background: #FFFDE7;
 	color:#4A4336;
 	width:85%;
 }
-.spip_forms .formo, .spip_forms .fondo {
+.spip_forms .formo,
+.spip_forms .fondo {
 	background-color: white;
 	color:#4A4336;
 	width:85%;
@@ -182,7 +195,10 @@ list-style:none;float:left;padding-left:5px;width:45%;
 .spip_forms .champ_obli_oubli {
 	border:2px solid red;
 }
-.spip_forms form .forml-focus, .spip_forms form input.forml-focus:focus, .spip_forms form textarea.forml-focus:focus, .forml-focus {
+.spip_forms form .forml-focus,
+.spip_forms form input.forml-focus:focus,
+.spip_forms form textarea.forml-focus:focus,
+.forml-focus {
 	border-bottom:solid 1px #C9AB97;
 	border-right:solid 1px #C9AB97;
 	border-top:1px solid #81593E;
@@ -194,7 +210,10 @@ list-style:none;float:left;padding-left:5px;width:45%;
 	padding:.25em;
 	width:85%;
 }
-.spip_forms form .formo-focus, .spip_forms form input.formo-focus:focus, .spip_forms form textarea.formo-focus:focus, .spip_forms .formo-focus {
+.spip_forms form .formo-focus,
+.spip_forms form input.formo-focus:focus,
+.spip_forms form textarea.formo-focus:focus,
+.spip_forms .formo-focus {
 	border-bottom:solid 1px #C9AB97;
 	border-right:solid 1px #C9AB97;
 	border-top:1px solid #81593E;
@@ -206,7 +225,9 @@ list-style:none;float:left;padding-left:5px;width:45%;
 	padding:.25em;
 	width:85%;
 }
-.spip_forms form .champ_obli_oubli-focus, form input.champ_obli_oubli-focus:focus, form textarea.champ_obli_oubli-focus:focus {
+.spip_forms form .champ_obli_oubli-focus,
+form input.champ_obli_oubli-focus:focus,
+form textarea.champ_obli_oubli-focus:focus {
 	border-top:solid 2px #980F1B;
 	border-left:solid 2px #980F1B;
 	border-bottom:2px solid #F3192B;
@@ -250,17 +271,37 @@ list-style:none;float:left;padding-left:5px;width:45%;
 	color:#F8F5EC;
 	text-decoration:none;
 }
-.spip_forms p.spip_form_ok, .spip_forms p.spip_form_erreur, .spip_forms form {
+.spip_forms p.spip_form_ok,
+.spip_forms p.spip_form_erreur,
+.spip_forms form {
 	clear:both;
 }
 span.nettoyeur{
-	clear:both;line-height:1px;font-size:1px;display:block;
+	clear:both;
+	line-height:1px;
+	font-size:1px;
+	display:block;
 }
-span.erreur { display:block; color:red;}
+
+span.erreur {
+	display:block;
+	color:red;
+}
 
 .formulaire_spip li div.formulaire_edition_destinations div li {
 	padding:0px;
 	display:inline;
 }
 
-.formulaire_spip .editer_statut .choix {display:inline;}
+.formulaire_spip .editer_statut .choix,
+.formulaire_spip .editer_type_operation .choix {
+    display:inline;
+}
+
+.cachediv {
+    visibility: hidden;
+    overflow: hidden;
+    height: 1px;
+    margin-top: -1px;
+    position: absolute;
+}
