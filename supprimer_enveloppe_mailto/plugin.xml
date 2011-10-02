@@ -7,7 +7,7 @@
 	<description>SPIP ajoute automatiquement une petite enveloppe sur les liens hypertextes de type &#171;mailto&#187;. 
 	Ce plugin, ultra-simple, supprime cette petite enveloppe sur le site public (mais pas dans l'espace priv&#233;). &#192; condition de bien utiliser <code>#INSERT_HEAD</code> dans ses squelettes.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-supprimer-l-enveloppe-du</lien> <!-- URI de documentation -->
 	<licence>GPL 3</licence>
 	<prefix>supprimer_enveloppe_mailto</prefix>
 
