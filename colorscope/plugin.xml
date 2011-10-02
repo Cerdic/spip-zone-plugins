@@ -4,12 +4,12 @@
 	
 	<nom>Colorscope</nom>
 
-	<shortdesc>
+	<slogan>
 		<multi>
-		[fr] Colorise les codes hexa
-		[en] Give colours to hex codes
+		[fr]Colorer les codes hexa
+		[en]Give colours to hex codes
 		</multi>
-	</shortdesc>
+	</sloganc>
 	
 	<prefix>colorscope</prefix>
 
@@ -25,7 +25,7 @@
 
 	<description>
 		<multi>
-		[fr]Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en rappelant son code &agrave; l'interieur.
+		[fr]Remplace les codes hexa des couleurs dans un texte SPIP, par un bloc de la dite couleur, en conservant son code &agrave; l'interieur.
 		[en]Replaces hexadecimal color codes in a SPIP text, with a bloc with the relevant color in background, mentionning its hexa code.
 		</multi>
 	</description>
