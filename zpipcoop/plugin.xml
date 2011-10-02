@@ -1,19 +1,19 @@
 <plugin>
 	<nom>Zpipcoop</nom>
-	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Valéry-Xavier Lentz, Teddy Payet
-	&copy; 2010 - 2011</auteur>
+	<slogan>Avoir un site enti&#232;rement restreint.</slogan>
+	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org], Valéry-Xavier Lentz, Teddy Payet</auteur>
 	<icon></icon>
-	<licence>GPL</licence>
-	<version>0.5</version>
+	<licence>GPL - (c) 2010-2011</licence>
+	<version>0.5.1</version>
 	<etat>dev</etat>
 	<description>
-	Un plugin compatible avec le concept Z. Un squelette avec un acc&eacute;s enti&egrave;rement restreint.
+	Un plugin compatible avec le concept Z.
 	</description>
 	<prefix>zpipcoop</prefix>
 	<fonctions>zpipcoop_fonctions.php</fonctions>
 
 	<categorie>squelette</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="Z" version="[1.5.1;]" />
 	<utilise id="autorite" version='[0.9.6;]' />
 	<utilise id="clevermail" version='[2.3.5;]' />
