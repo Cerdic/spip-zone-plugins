@@ -3,11 +3,11 @@
 	<slogan>Cr&#233;&#233; dynamiquement un fichier sitemap</slogan>
 	<auteur>Cedric MORIN	[notre-ville.net->http://www.notre-ville.net]</auteur>
 	<licence>&#169; 2006 - GPL</licence>
-	<version>0.1.0</version>
+	<version>0.1.1</version>
 	<etat>stable</etat>
 	<description>
 		<multi>
-		[fr]Ce plugin cr&#233;e dynamiquement un [sitemap Google->http://www.google.com/webmasters/sitemaps/]. Le contenu le plus proche de la racine est prioritaire. La pr&#233;sence des squelettes article, br&#232;ve... est test&#233;e pour chaque type d'objet.
+		[fr] Attention, depuis f&#233;vrier 2009, SPIP 2 fournit un sitemap par d&#233;faut. Ce plugin cr&#233;e dynamiquement un [sitemap Google->http://www.google.com/webmasters/sitemaps/]. Le contenu le plus proche de la racine est prioritaire. La pr&#233;sence des squelettes article, br&#232;ve... est test&#233;e pour chaque type d'objet.
 	
 {{Usage :}} d&#233;clarer l'URL du SiteMap dans Google : <code>http://www.example.com/spip.php?page=sitemap</code> (utiliser <code>http://www.example.com/?page=sitemap</code> directement ne fonctionnera pas). On peut aussi d&#233;clarer l'URL du SiteMap dans un fichier robots.txt contenant <code>Sitemap: http://www.example.com/spip.php?page=sitemap</code>.
 		[it]Questo plugin crea dinamicamente una [sitemap per Google->http://www.google.com/webmasters/sitemaps/]. Il contenuto pi&#249; vicino alla radice del sito ha una priorit&#224; pi&#249; alta. La presenza dei modelli article, breve... &#232; verificata per ogni tipo di oggetto.
