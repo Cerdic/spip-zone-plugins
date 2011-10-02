@@ -117,7 +117,6 @@
 	<necessite id="lib:flot" src="http://flot.googlecode.com/files/flot-0.7.zip" />
 	
 	<utilise id='podcast' />
-	<utilise id='mediaspip_player' />
 	<utilise id='fonctions_images' version='[0.5.1]' />
 	
 	<categorie>multimedia</categorie>
