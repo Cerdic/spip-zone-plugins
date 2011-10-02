@@ -3,7 +3,12 @@
 	<version>2.1.4</version>
 	<etat>stable</etat>
 	<icon>icon.png</icon>
-	<description>Menu d&#233;roulant dynamique full CSS, qui plonge en profondeur, sans limitation de niveaux de hi&#233;rarchie.</description>
+	<slogan>
+	Menu d&#233;roulant en CSS sans limitation de profondeur
+	</slogan>
+	<description>
+	Menu d&#233;roulant dynamique full CSS, qui plonge en profondeur, sans limitation de niveaux de hi&#233;rarchie.
+	</description>
 	<lien>http://www.spip-contrib.net/?article3804</lien>
 	<auteur>[cedric@notre-ville.net->http://www.notre-ville.net]</auteur>
 	<prefix>menuder</prefix>
@@ -16,6 +21,6 @@
 		<nom>insert_head</nom>
 		<inclure>menuder_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
