@@ -1,19 +1,25 @@
 <plugin>
 	<nom>Propaganda</nom>
-	<version>0.2</version>
+	<slogan>
+		<multi>
+			[fr]Envoi de cartes postales num&eacute;riques.
+			[es]Env&iacute;o de tarjetas postales electr&oacute;nicas.
+		</multi>
+	</slogan>
+	<version>0.2.0</version>
 	<etat>dev</etat>
 	<auteur>[kent1->http://kent1.sklunk.net], [dani->http://abuelo.belvil.net/]</auteur>
 	<description>
-	<multi>
-		[fr]Envoi de cartes postales num&eacute;riques depuis un site SPIP. Requiert le plugin CFG.
-		[es]Env&iacute;o de tarjetas postales electr&oacute;nicas desde un sitio SPIP. Requiere el plugin CFG.
-	</multi>
+		<multi>
+			[fr]Envoi de cartes postales num&eacute;riques depuis un site SPIP.
+			[es]Env&iacute;o de tarjetas postales electr&oacute;nicas desde un sitio SPIP.
+		</multi>
 	</description>
 	<lien>http://wiki.bellinux.org/index.php/SPIP-postal</lien>
 	<install>base/propaganda_upgrade.php</install>
  
 	<prefix>propaganda</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<necessite id="cfg" version="[1.0;]" />
 	<categorie>communication</categorie>
 </plugin>
