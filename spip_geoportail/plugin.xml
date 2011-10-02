@@ -1,5 +1,5 @@
 <plugin>
-	<nom>SPIP-G&eacute;oportail</nom>
+	<nom>SPIP-G&#233;oportail</nom>
 	<auteur>[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]</auteur>
 	<slogan>Afficher des objets SPIP sur une carte</slogan>
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
@@ -8,11 +8,11 @@
 	<icon>img/geoportail.gif</icon>
 	<etat>test</etat>
 	<description>
-Ce plugin permet, en utilisant l'API G&eacute;oportail (Openlayers), le g&eacute;or&eacute;f&eacute;rencement des objets SPIP et leur affichage dans des cartes G&eacute;oportail, OpenStreetMap, Google Maps, Yahoo!...
-- cr&eacute;ation d'une table de GEOPOSITIONS de position pour les objets SPIP
+Ce plugin permet, en utilisant l'API G&#233;oportail (Openlayers), le g&#233;or&#233;f&#233;rencement des objets SPIP et leur affichage dans des cartes G&#233;oportail, OpenStreetMap, Google Maps, Yahoo!...
+- cr&#233;ation d'une table de GEOPOSITIONS de position pour les objets SPIP
 - formulaire pour la saisie du geopositionnement des objets SPIP (articles, auteurs, etc.)
-- int&eacute;gration de geoservices WMS,WFS,...
-- crit&egrave;re geoposition pour jointure avec les tables SPIP
+- int&#233;gration de geoservices WMS,WFS,...
+- crit&#232;re geoposition pour jointure avec les tables SPIP
 
 Pour visualiser des exemples d'affichage de carte Geoportail, OSM, Google Maps, Yahoo! veuillez vous rendre &#224; l'adresse suivante : [->http://grafreex.free.fr/?-Geoportail-].
 	</description>
