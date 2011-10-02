@@ -27,7 +27,12 @@ function action_spipmotion_infos_dist(){
 	}
 	else{
 		action_spipmotion_infos_post($r);
-		spip_log("action spipmotion_infos","spipmotion");
+		if(_request("iframe") == 'iframe') {
+			$redirect = parametre_url(urldecode($iframe_redirect),"show_video_infos",join(',',$documents_actifs),'&')."&iframe=iframe";
+		}else if(_request('redirect')){
+			$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
+		}
+		return $redirect;
 	}
 }
 
@@ -36,12 +41,7 @@ function action_spipmotion_infos_post($r){
 
 	$recuperer_infos = charger_fonction('spipmotion_recuperer_infos','inc');
 	$infos = $recuperer_infos($id_document);
-	if(_request("iframe") == 'iframe') {
-		$redirect = parametre_url(urldecode($iframe_redirect),"show_video_infos",join(',',$documents_actifs),'&')."&iframe=iframe";
-	}else{
-		$redirect = urldecode(_request('redirect'));
-	}
-	return $redirect;
+
 }
 
 ?>
