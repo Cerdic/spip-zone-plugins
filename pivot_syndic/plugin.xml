@@ -1,17 +1,19 @@
 <plugin>
 	<nom>Pivot de syndication</nom>
+	<slogan>Gestion des formats de syndication</slogan>
 	<auteur>[Nicolas Hoizey->http://www.gasteroprod.com/]</auteur>
 	<version>0.0.1</version>
-  <version_base>0.1</version_base>
+	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Transformation des nombreux formats de syndication RSS, Atom et d&eacute;riv&eacute;s en un unique format pivot utile à SPIP.</description>
-  <icon>images/pivot_syndic.png</icon>
-  <lien>http://www.spip-contrib.net/Pivot-de-syndication</lien>
-  <prefix>pivotsyndic</prefix>
-  <chemin dir='' />
-  <pipeline>
-    <nom>pre_syndication</nom>
-    <inclure>pivotsyndic_pipelines.php</inclure>
-  </pipeline>
+	<description>Transformation des nombreux formats de syndication RSS, Atom et d&#233;riv&#233;s en un unique format pivot utile &agrave; SPIP.</description>
+	<icon>images/pivot_syndic.png</icon>
+	<lien>http://www.spip-contrib.net/Pivot-de-syndication</lien>
+	<prefix>pivotsyndic</prefix>
+	<chemin dir='' />
+	<pipeline>
+		<nom>pre_syndication</nom>
+		<inclure>pivotsyndic_pipelines.php</inclure>
+	</pipeline>
 	<categorie>communication</categorie>
+	<necessite id="spip" version="[2.1.0;2.1.99]" />
 </plugin>
