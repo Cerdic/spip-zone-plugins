@@ -35,12 +35,12 @@ hr { height: 1px; margin:[ (#GET{margin-bottom})] 0; border: 0; background: #GET
 
 /* Titraille Blueprint
 Cf. : http://www.blueprintcss.org/tests/parts/elements.html
-h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
-h2 { font-size: 2em; margin-bottom: 0.75em; }
-h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
-h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
-h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
-h6 { font-size: 1em; font-weight: bold; }*/
+h1,.h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2,.h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3,.h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4,.h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5,.h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6,.h6 { font-size: 1em; font-weight: bold; }*/
 
 h1,.h1 {font-size: 2em; line-height:#GET{line-height};margin-bottom: [(#GET{margin-bottom}|div{2})em]; }
 #SET{coeff,#GET{line-height}|plus{2}|div{2}|div{#GET{line-height}}}
