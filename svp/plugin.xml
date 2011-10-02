@@ -44,7 +44,7 @@
 		<inclure>svp_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version='[3.0.0;3.0.*]' />
+	<necessite id="SPIP" version='[3.0.0-dev;3.0.*]' />
 
 	<categorie>maintenance</categorie>
 </plugin>
