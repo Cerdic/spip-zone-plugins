@@ -1,21 +1,22 @@
 <plugin>
-    <nom>A2A</nom>
-    <auteur>Collectif SPIP</auteur>
-    <version>0.4.2</version>
-    <version_base>0.4</version_base>
-    <etat>stable</etat>
-    <icon>images/a2a-64.png</icon>
-    <description>
-    	<multi>
-    		[fr]Petit plugin qui permet de lier un article &#224; un ou plusieurs autre(s)
-			[en]Plugin to link an article to one or some others
+	<nom>A2A</nom>
+	<slogan>Pour lier des articles</slogan>
+	<auteur>Collectif SPIP</auteur>
+	<version>0.4.2</version>
+	<version_base>0.4</version_base>
+	<etat>stable</etat>
+	<icon>images/a2a-64.png</icon>
+	<description>
+		<multi>
+		[fr]Ce plugin permet de lier des articles de fa&#231;on ponctuelle sans avoir à utiliser les mots-cl&#233;s de SPIP. Il peut &#234;tre utilis&#233; pour mettre en place des liens de type « Lire aussi ».
+		[en]This plugin allows you to link items in a timely manner without having to use keywords of SPIP. It can be used to set up links such as "See also".
 		</multi>
 	</description>
-    <lien>http://www.spip-contrib.net/a2a</lien>
-    <prefix>a2a</prefix>
-    <fonctions>a2a_fonctions.php</fonctions>
-    <options>a2a_options.php</options>
-    <install>base/a2a_upgrade.php</install>
+	<lien>http://www.spip-contrib.net/a2a</lien>
+	<prefix>a2a</prefix>
+	<fonctions>a2a_fonctions.php</fonctions>
+	<options>a2a_options.php</options>
+	<install>base/a2a_upgrade.php</install>
 	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
 	<necessite id="cfg" version="[1.14.1;]" />
 	<necessite id="spip_bonux" version="[1.8.7;]" />
