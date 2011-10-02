@@ -1,11 +1,11 @@
 <plugin>
-	<nom>Supprimer la petite enveloppe des liens &laquo;mailto&raquo;</nom>
+	<nom>Supprimer enveloppe &#171;mailto&#187;</nom>
+	<nom>Supprimer la petite enveloppe des liens &#171;mailto&#187;</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
-	<description>
-	SPIP ajoute automatiquement une petite enveloppe sur les liens hypertextes de type &laquo;mailto&raquo;. 
-	Ce plugin, ultra-simple, supprime cette petite enveloppe sur le site public (mais pas dans l'espace priv&eacute;). &Agrave; condition de bien utiliser <code>#INSERT_HEAD</code> dans ses squelettes.
+	<description>SPIP ajoute automatiquement une petite enveloppe sur les liens hypertextes de type &#171;mailto&#187;. 
+	Ce plugin, ultra-simple, supprime cette petite enveloppe sur le site public (mais pas dans l'espace priv&#233;). &#192; condition de bien utiliser <code>#INSERT_HEAD</code> dans ses squelettes.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<licence>GPL 3</licence>
@@ -17,7 +17,7 @@
 	</pipeline>
 
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>maintenance</categorie>
 </plugin>
 
