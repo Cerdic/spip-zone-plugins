@@ -27,7 +27,7 @@
 #SET{defaut, #ENV{defaut}}
 #SET{defaut, #GET{defaut}|is_string|?{(#GET{defaut}|saisies_chaine2tableau), (#GET{defaut}|sinon{#ARRAY})}}
 
-<select name="#ENV{nom}[]" id="champ_#ENV{nom}" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size})"]>
+<select name="#ENV{nom}[]" id="champ_#ENV{nom}" multiple="multiple"[ class="(#ENV{class})"][ disabled="(#ENV{disable})"][ size="(#ENV{size,10})"]>
 [(#ENV{cacher_option_intro}|non)<option value="">[(#ENV{option_intro})]</option>]
 <BOUCLE_selection(POUR){tableau #GET{datas}}>
 	<option value="#CLE" [(#CLE|in_array{#ENV{valeur_forcee,#ENV{valeur,#GET{defaut}}}}|oui) selected="selected"]>#VALEUR</option>
