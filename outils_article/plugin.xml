@@ -1,54 +1,35 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-        <nom> <!-- Nom du plugin -->
-			<multi>
-					[fr]Boite &agrave; outils pour articles
-					[es]Caja de herramientas
-			</multi>		
-        </nom>
-        <auteur>        <!-- Auteur du plugin -->
-			<multi>
-          
-										[fr]christophe vallois
-_ &#169; 2007 - Distribu&#233; sous licence GNU/LGPL
-					[es] [christophe vallois->http://www.spip-contrib.net/_vcris_] - distribuido bajo licencia GNU/GPL
-					[en] [christophe vallois->http://www.spip-contrib.net/_vcris_] - distributed under GNU/GPL licence
-					
-			</multi>		
-        </auteur>
-        <version>
-          0.3
-        </version>
-        <etat>
-          stable
-        </etat>
-        <description>
-			<multi>
-        
-					[fr]ins&eacute;rer une panoplie d'outils pour vos articles sous forme de barre ou de boite gr&acirc;ce &agrave; deux noisettes &agrave; ins&eacute;rer dans vos squelettes : 
-					<ul>
-					<li><code>[(#INCLURE{fond=inc-barre-outils}{id_article})]</code> pour la version en barre</li>
-					<li><code>[(#INCLURE{fond=inc-boite-outils}{id_article})]</code> pour la version en boite</li>
-					</ul>
-					[es]insertar una panoplia de herramientas para sus artículos en forma de barra o de cojea con dos avellanas que deben insertarse en sus esqueletos : 
-					<ul>
-					<li><code>[(#INCLURE{fond=inc-barre-outils}{id_article})]</code> para la versi&oacute;n barra </li>
-					<li><code>[(#INCLURE{fond=inc-boite-outils}{id_article})]</code> para la versi&oacute;n cojea </li>
-					</ul>
-			</multi>
-        </description>
-		    <lien>
-              [Documentation sur contrib->http://www.spip-contrib.net/Boite-a-outils-pour-articles],
-		      et si vous avez cfg: [Configuration des &eacute;l&eacute;ments &agrave; afficher->.?exec=cfg&amp;cfg=outils_article]
-		    </lien>
-        <icon>img_pack/icone-plugin1.png</icon>
-		<fonctions>boiteoutils_fonctions.php</fonctions>
-        <prefix>
-          outils_article
-        </prefix>
-        
-				
-				<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<nom>
+		<multi>
+		[fr]Boite &#224; outils
+		[es]Caja de herramientas
+		</multi>		
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Collection d'outils pour articles
+		[es]Colecci&#242;n de herramientas a los artículos
+		</multi>		
+	</slogan>
+	<auteur>[Christophe Vallois->http://www.spip-contrib.net/_vcris_]</auteur>
+	<licence>&#169; 2007 GNU/GPL</licence>
+	<version>0.3.0</version>
+	<etat>stable</etat>
+	<description>
+		<multi>[fr]Ins&#233;rer une panoplie d'outils pour vos articles sous forme de barre ou de boite gr&#226;ce &#224; deux noisettes &#224; ins&#233;rer dans vos squelettes : 
+-* <code>[(#INCLURE{fond=inc-barre-outils}{id_article})]</code> pour la version en barre
+-* <code>[(#INCLURE{fond=inc-boite-outils}{id_article})]</code> pour la version en boite
+[es]Insertar una panoplia de herramientas para sus art&#237;culos en forma de barra o de cojea con dos avellanas que deben insertarse en sus esqueletos : 
+-* <code>[(#INCLURE{fond=inc-barre-outils}{id_article})]</code> para la versi&oacute;n barra
+-* <code>[(#INCLURE{fond=inc-boite-outils}{id_article})]</code> para la versi&oacute;n cojea
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Boite-a-outils-pour-articles</lien>
+	<icon>img_pack/icone-plugin1.png</icon>
+	<fonctions>boiteoutils_fonctions.php</fonctions>
+	<prefix>outils_article</prefix>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
