@@ -1,11 +1,18 @@
 <plugin>
-	<nom>Thèmes pour l'interface privée</nom>
+	<nom>Th&#232;mes interface priv&#233;e</nom>
+	<slogan>Des interfaces alternatives pour SPIP 2.1.</slogan>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
-	<description>
-		Des interfaces alternatives pour SPIP 2.1.
-	</description>
+	<description>Ce plugin permet &#224; chaque participant &#224; l’espace priv&#233; de s&#233;lectionner sa propre interface graphique en fonction de ses go&#251;ts ou de ses crit&#232;res pour son confort de lecture &#224; l’&#233;cran. Un s&#233;lecteur d’interfaces est ajout&#233; dans le menu de configuration de l’interface. Une collection d’interfaces est livr&#233;e avec le plugin.
+
+{{Les trois premi&#232;res interfaces}} sont des variantes de l’interface standard de SPIP. La premi&#232;re, « standard », est l’interface standard de SPIP 2.1, sans modification. La seconde interface est une d&#233;clinaison de l’interface standard agr&#233;ment&#233;e des effets de relief propres &#224; SPIP 2.0. La troisi&#232;me interface r&#233;tablit les effets de fort contraste de SPIP 2.0 (et de Bonux). On y retrouve l’omnipr&#233;sence des filets noirs tr&#232;s marqu&#233;s.
+
+{{L’interface « &#192; la façon de Word­press »}} s’inspire de l’espace d’administration de Word­press : interface largement grise, subtils effets de d&#233;grad&#233;, arrondis omnipr&#233;sents, et pr&#233;sentation assez marqu&#233;e des formulaires. Les effets d’arrondi demandent un butineur r&#233;cent (et sans doute pas Internet Explorer). Dans cette version, les petits triangles « plier/​d&#233;plier » passent &#224; droite des titres des pav&#233;s.
+
+{{L’interface « Menthe et chocolat »}} propose une variante plus charg&#233;e. À noter : dans cette version, les &#233;l&#233;ments des sous-​​menus du bandeau principal sont pr&#233;sent&#233;s &#224; la verticale, les uns sous les autres.
+
+{{L’interface « blanche »}} est une tentative de cr&#233;ation d’une interface beaucoup plus diff&#233;renci&#233;e, int&#233;gralement sur fond blanc, et avec des pav&#233;s sensiblement diff&#233;rents de la logique habituelle de SPIP.</description>
 	<lien></lien> <!-- URI de documentation -->
 	<licence>GPL 3</licence>
 	<prefix>themes_interface_privee</prefix>
@@ -14,7 +21,7 @@
 		<nom>header_prive</nom>
 		<inclure>themes_interface_privee_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0-beta;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="css_imbriques" version="[1.3;]" />
 	<categorie>maintenance</categorie>
 </plugin>
