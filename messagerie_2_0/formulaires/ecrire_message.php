@@ -28,14 +28,21 @@ function formulaires_ecrire_message_charger_dist($redirect="",$destinataire=""){
 		$valeurs['destinataires'] = '';
 	}
 	if ($repondre = _request('repondre')){
-		$row = sql_fetsel('id_auteur,titre,texte,date_heure','spip_messages','id_message='.intval($repondre));
-		if (isset($valeurs['destinataires']))
-			$valeurs['destinataires'] = array($row['id_auteur']);
-		$valeurs['objet'] = "Re : ".textebrut($row['titre']);
-		$valeurs['texte_message'] = "\n\n\n<quote>\n"
-		. sql_getfetsel('nom','spip_auteurs','id_auteur='.intval($row['id_auteur']))
-		. " - " . affdate($row['date_heure']) . "\n\n "
-		. $row['texte'] . "</quote>\n";
+
+		$row = sql_fetsel('id_auteur','spip_auteurs_messages','id_message='.intval($repondre));
+		if (isset($row["id_auteur"]) && $row["id_auteur"] == $GLOBALS['visiteur_session']['id_auteur']){
+		    $row = sql_fetsel('id_auteur,titre,texte,date_heure','spip_messages','id_message='.intval($repondre));
+		    if (isset($valeurs['destinataires']))
+			    $valeurs['destinataires'] = array($row['id_auteur']);
+		    $valeurs['objet'] = "Re : ".textebrut($row['titre']);
+		    $valeurs['texte_message'] = "\n\n\n<quote>\n"
+		    . sql_getfetsel('nom','spip_auteurs','id_auteur='.intval($row['id_auteur']))
+		    . " - " . affdate($row['date_heure']) . "\n\n "
+		    . $row['texte'] . "</quote>\n";
+
+		} else {
+		    // tentative de "hack"
+		}
 	}
 	if (is_numeric($destinataire)){
 		$dest = sql_getfetsel('id_auteur','spip_auteurs','id_auteur='.intval($destinataire));
