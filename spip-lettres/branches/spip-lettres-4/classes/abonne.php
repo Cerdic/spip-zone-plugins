@@ -250,36 +250,19 @@
 			}
 			$parametres = 'lang='.$arguments['lang'].$chaine_rubriques.'&code='.$this->code.'&email='.$this->email.$chaine_format;
 
-			switch ($action) {
+			$objet			= recuperer_fond("emails/lettres_".$action."_titre", $arguments);
+			$message_html	= recuperer_fond("emails/lettres_".$action."_html", $arguments);
+			$message_texte	= recuperer_fond("emails/lettres_".$action."_texte", $arguments);
 
-				case 'abonnements':
-					$objet			= recuperer_fond('emails/lettres_abonnements_titre', $arguments);
-					$message_html	= recuperer_fond('emails/lettres_abonnements_html', $arguments);
-					$message_texte	= recuperer_fond('emails/lettres_abonnements_texte', $arguments);
-					$url_action_validation_abonnements = url_absolue(generer_url_action('validation_abonnements', $parametres, true));
-					$message_html	= str_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_html);
-					$message_texte	= str_replace("%%URL_VALIDATION_ABONNEMENTS%%", $url_action_validation_abonnements, $message_texte);
-					break;
-					
-				case 'desabonnements':
-					$objet			= recuperer_fond('emails/lettres_desabonnements_titre', $arguments);
-					$message_html	= recuperer_fond('emails/lettres_desabonnements_html', $arguments);
-					$message_texte	= recuperer_fond('emails/lettres_desabonnements_texte', $arguments);
-					$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
-					$message_html	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
-					$message_texte	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
-					break;
-					
-				case 'changement_format':
-					$objet			= recuperer_fond('emails/lettres_changement_format_titre', $arguments);
-					$message_html	= recuperer_fond('emails/lettres_changement_format_html', $arguments);
-					$message_texte	= recuperer_fond('emails/lettres_changement_format_texte', $arguments);
-					$url_action_validation_changement_format = url_absolue(generer_url_action('validation_changement_format', $parametres, true));
-					$message_html	= str_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_html);
-					$message_texte	= str_replace("%%URL_VALIDATION_CHANGEMENT_FORMAT%%", $url_action_validation_changement_format, $message_texte);
-					break;
-					
-			}
+			$url_action = url_absolue(generer_url_action("validation_$action", $parametres, true));
+			$message_html	= str_replace("%%URL_VALIDATION_".strtoupper($action)."%%", $url_action, $message_html);
+			$message_texte	= str_replace("%%URL_VALIDATION_".strtoupper($action)."%%", $url_action, $message_texte);
+			
+// Il peut y avoir aussi un lien de désabonnement dans le mail... par exemple dans inc-bas.html
+// donc on repasse une couche spécialement pour lui...
+			$url_action_validation_desabonnements = url_absolue(generer_url_action('validation_desabonnements', $parametres, true));
+			$message_html	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_html);
+			$message_texte	= str_replace("%%URL_VALIDATION_DESABONNEMENTS%%", $url_action_validation_desabonnements, $message_texte);
 
 			switch ($this->format) {
 				case 'html':
@@ -297,7 +280,6 @@
 			$envoyer_mail = charger_fonction('envoyer_mail', 'inc');
 			return $envoyer_mail($this->email, $objet, $corps);
 		}
-
 
 		function envoyer_lettre($id_lettre) {
 			if (!$this->existe)
