@@ -4,9 +4,14 @@
 	<version>0.0.1</version>
 	<etat>test</etat>
 	<prefix>scenari</prefix>
+    <categorie>edition</categorie>
+	<slogan><multi>
+	[fr]Ajouter des archives scenari dans les articles
+	[en]Add scenari archives in articles
+	</multi></slogan>
 	<description><multi>
-	[fr] Permet d'ajouter facilement une archive <a href="http://scenari-platform.org/">scenari</a> dans un article spip.
-	[en] Make it easy to add a <a href="http://scenari-platform.org/">scenari</a> in articles.
+	[fr] Permet d'ajouter facilement une archive [scenari->http://scenari-platform.org/] dans un article SPIP.
+	[en] Make it easy to add a [scenari->http://scenari-platform.org/] archive in articles.
 	</multi></description>
 	<icon>images/scenari-32.png</icon>
 	<lien>http://www.spip-contrib.net/Scenari-pour-SPIP</lien>
