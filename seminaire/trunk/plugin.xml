@@ -7,9 +7,10 @@
 	</nom>
 	<auteur>Amaury Adon</auteur>
 	<licence>GNU/GPL</licence>
-	<version>1.4.0</version>
+	<version>1.4.1</version>
 	<version_base>0.1</version_base>
-	<etat>test</etat>
+	<lien>http://www.spip-contrib.net/Seminaire-LATP</lien> 
+	<etat>stable</etat>
 	<slogan>
 		<multi>
 		[fr]G&#233;rer les &#233;v&#233;nements d'un laboratoire de recherche 
