@@ -1,19 +1,19 @@
 <plugin>
-	<nom><multi>[en]Invoices &amp; Quotations[fr]Factures &amp; Devis</multi></nom>
+	<nom><multi>[en]Invoices &#39; Quotations[fr]Factures &#39; Devis</multi></nom>
 	<icon>images/factures-32.png</icon>
 
 	<version>0.0.2</version>
 	<version_base>1.0.1</version_base>
 	<install>base/factures_upgrade.php</install>
 
-	<auteur>Cyril Marion, [Ateliers CYM->http://www.cym.fr], Camille Lafitte, [Webelys->http://www.webelys.com] et Matthieu Marcillaud, [Magraine->http://magraine.net]</auteur>	
+	<auteur>Cyril Marion, [Ateliers CYM->http://www.cym.fr], Camille Lafitte, [Webelys->http://www.webelys.com], Matthieu Marcillaud, [Magraine->http://magraine.net]</auteur>	
 	<licence>GPL</licence>
 	<etat>experimental</etat>
 	
-	<shortdesc><multi>
-	[fr]Faire des devis et facturer avec SPIP...
-	[en]Making quotations and invoicing with SPIP...
-	</multi></shortdesc>
+	<slogan><multi>
+	[fr]Faire des devis et facturer
+	[en]Making quotations and invoicing
+	</multi></slogan>
 
 	<description><multi>
 	[fr]Le plugin Factures & Devis permet de créer facilement des offres commeciales et des factures avec SPIP.
@@ -76,7 +76,7 @@ Le plugin utilise (sans les nécessiter) les plugins suivants :
 		<nom>insert_head</nom>
 		<inclure>factures_pipelines.php</inclure>
 	</pipeline-->
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="contacts" version="[1.0.0;]" />
 
 	<!-- utilise id="spimine" version="[1.0;]" /-->
