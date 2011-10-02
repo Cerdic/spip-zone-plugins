@@ -11,8 +11,8 @@
 	<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
 	de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
 	</description>
-	<lien>http://www.spip-contrib.net/3752</lien>
-	<auteur>[romy.tetue.net->http://romy.tetue.net] - &#169; 2010</auteur>
+	<lien>http://www.spip-contrib.net/?rubrique214</lien>
+	<auteur>[romy.tetue.net->http://romy.tetue.net] - GPL 2010</auteur>
 	
 	<necessite id="spip_bonux" version="[2.2.19;]"/>
 	<bouton id='basecss' parent='bando_squelette'>
@@ -39,8 +39,8 @@
 	<description>Ce framework CSS pour SPIP fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles
 	de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.
 	</description>
-	<lien>http://www.spip-contrib.net/3752</lien>
-	<auteur>[romy.tetue.net->http://romy.tetue.net] - &#169; 2010</auteur>
+	<lien>http://www.spip-contrib.net/?rubrique214</lien>
+	<auteur>[romy.tetue.net->http://romy.tetue.net] - GPL 2010</auteur>
 	
 	<bouton id='basecss' parent='bando_squelette'>
 		<icone>prive/img/basecss-16.png</icone>
