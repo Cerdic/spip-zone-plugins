@@ -11,7 +11,7 @@
 	Ce plugin fournit une API permettant de collecter, d'effectuer des recherches multi-crit&#232;res et de pr&#233;senter les informations 
 	sur les plugins SPIP - modules fonctionnels, th&#232;mes et squelettes. Cette API sert aussi de base au plugin STP.
 	</description>
-	<lien></lien>
+	<lien>http://blog.smellup.net/spip.php?rubrique1</lien>
 	<prefix>svp</prefix>
 
 	<options>svp_options.php</options>
@@ -44,7 +44,7 @@
 		<inclure>svp_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version='[3.0.0-dev;3.0.*]' />
+	<necessite id="SPIP" version='[3.0.0;3.0.*]' />
 
 	<categorie>maintenance</categorie>
 </plugin>
