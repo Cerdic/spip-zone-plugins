@@ -26,7 +26,7 @@
 	</pipeline>
 	<utilise id="typoenluminee" />
 </plugin>
-<plugin spip="[3.0.0-dev;]" >
+<plugin spip="[3.0.0-dev;3.0.99]" >
 	<nom>Base CSS</nom>
 	<prefix>basecss</prefix>
 	<icon>prive/img/petronille.png</icon>

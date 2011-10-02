@@ -1,5 +1,5 @@
 <plugin>
-	<nom>P&eacute;tronille</nom>
+	<nom>P&#233;tronille</nom>
 	<prefix>basecss</prefix>
 	<icon>icon.png</icon>
 	
@@ -7,15 +7,15 @@
 	<etat>stable</etat>
 	<categorie>outil</categorie>
 	
-	<description>Framework CSS pour SPIP, P&eacute;tronille fournit une base de travail pour l'int&eacute;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&eacute;trables, proposant les pr&eacute;r&eacute;glages fondamentaux.</description>
+	<description>Framework CSS pour SPIP, P&#233;tronille fournit une base de travail pour l'int&#233;gration, sous la forme d'un jeu de feuilles de style dynamiques et param&#233;trables, proposant les pr&#233;r&#233;glages fondamentaux.</description>
 	<lien>http://www.spip-contrib.net/petronille</lien>
-	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
+	<auteur>[romy.tetue.net->http://romy.tetue.net] - (c) 2010</auteur>
 	
-	<necessite id="SPIP" version="[;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.0)" />
 	<necessite id="spip_bonux" version="[2.2.13;]" />
 	<bouton id='petronille' parent='bando_squelette'>
 		<icone>icon-16.png</icone>
-		<titre>P&eacute;tronille</titre>
+		<titre>P&#233;tronille</titre>
 		<url>configurer_petronille</url>
 	</bouton>
 	<pipeline>
