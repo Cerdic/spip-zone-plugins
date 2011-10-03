@@ -1,18 +1,19 @@
 <plugin>
-	<version>1.1</version>
 	<nom>jolirecherche</nom>
+	<slogan>Jolie bo&#238;te de recherche</slogan>
+	<auteur>Fil, Sarah</auteur>
+	<licence>Copyleft</licence>
+	<version>1.1.0</version>
 	<prefix>recherche</prefix>
-	<auteur>Copyleft - all rights reversed.</auteur>
 	<etat>stable</etat>
-	<description>Remplace le formulaire recherche par de jolie bo&#238;te de saisie.</description>
-	<icon>
-	images/jolirecherche.png
-	</icon>
+	<description>Ce plugin remplace le formulaire de recherche de Spip par de jolie bo&#238;te de saisie</description>
+	<icon>images/jolirecherche.png</icon>
+	<lien>http://www.spip-contrib.net/Plugin-Jolie-Recherche</lien>
 	<pipeline>
 		<nom>insert_head</nom> 
 		<inclure>recherche_public.php</inclure>
 		<action>insert_head</action>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
