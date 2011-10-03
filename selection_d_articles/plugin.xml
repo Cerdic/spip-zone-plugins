@@ -1,23 +1,26 @@
 <plugin>
-	<nom><multi>[fr]S&eacute;lection d'articles[de]Artikelauswahl</multi></nom>
+	<nom><multi>[fr]S&#233;lection d'articles[de]Artikelauswahl</multi></nom>
+	<slogan><multi>[fr]S&#233;lectionner des articles &#224; en avant[de]W&#228;hle die Artikeln nach vorne</multi></slogan>
 	<auteur>ARNO*</auteur>
 	<version>1.3.1</version>
 	<version_base>0.3.1</version_base>
 	<etat>stable</etat>
 	<description>
-	<multi>	[fr]Le plugin S&eacute;lection d'articles permet de
-	 cr&eacute;er des s&eacute;lections d'articles dans les rubriques. 
-	 Il ne doit &ecirc;tre utilis&eacute; que ponctuellement, pour 
-	 r&eacute;aliser par exemple des pages de Une (l&agrave; o&ugrave;, 
-	 auparavant, on utilisait des mots-cl&eacute;s du type Une1, Une2...).
-	[de]Das Plugin Artikelauswahl erm&ouml;glicht eine Auswahl an Artikeln
-        aus mehreren Rubriken zusammzustellen. Es sollte nur punktuell eingesetzt
-        werden, z.B. um gezielt Artikel auf die Startseite zu stellen.
-        Das Plugin Artikelauswahl stellt eine Alternative zur Verwendung
-        von Schlagworten f&uuml;r die Zusammenstellung von Artikeln dar.</multi>
-	 </description>
+		<multi>
+		[fr]Le plugin S&#233;lection d'articles permet de
+		 cr&#233;er des s&#233;lections d'articles dans les rubriques. 
+		 Il ne doit &#234;tre utilis&#233; que ponctuellement, pour 
+		 r&#233;aliser par exemple des pages de Une (l&#224; o&#249;, 
+		 auparavant, on utilisait des mots-cl&#233;s du type Une1, Une2...).
+		[de]Das Plugin Artikelauswahl erm&#246;glicht eine Auswahl an Artikeln
+			  aus mehreren Rubriken zusammzustellen. Es sollte nur punktuell eingesetzt
+			  werden, z.B. um gezielt Artikel auf die Startseite zu stellen.
+			  Das Plugin Artikelauswahl stellt eine Alternative zur Verwendung
+			  von Schlagworten f&#252;r die Zusammenstellung von Artikeln dar.
+		</multi>
+	</description>
 	<icon>imgs/emblem-favorite-32.png</icon>
-	<lien>http://plugins.spip.net/selection-d-articles</lien> <!-- URI de documentation -->
+	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-selection-d-articles</lien>
 	<licence>GPL 3</licence>
 	<prefix>pb_selection</prefix>
 	<install>base/pb_selection_upgrade.php</install>
@@ -31,7 +34,7 @@
 		<inclure>pb_selection.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
 
