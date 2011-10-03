@@ -5,20 +5,12 @@
 			[en]Recommend to a friend
 		</multi>
 	</nom>
-	<auteur>
-	[fil@rezo.net->mailto:fil@rezo.net]
-	</auteur>
-	<licence>
-		<multi>
-			[fr]&#169; 2006-2010 - Distribu&#233; sous licence GNU/GPL
-			[en]&#169; 2006-2010 - Released under GNU/GPL License
-		</multi>
-	</licence>
-	<icon>
-		images/recommander_logo.png
-	</icon>
+	<auteur>[fil@rezo.net->mailto:fil@rezo.net]</auteur>
+	<licence>GNU/GPL - (c) 2006-2010</licence>
+	<icon>images/recommander_logo.png</icon>
 	<version>1.0.0</version>
 	<etat>stable</etat>
+	<lien>http://www.spip-contrib.net/Recommander</lien>
 	<description>
 		<multi>
 			[fr]Fonction recommander un article &#224; un ami.
@@ -39,6 +31,6 @@ _ for example
 _ Url, introduction and subject are optionals.</multi>
 	</description>
 	<prefix>recommander</prefix>
-	<necessite id="SPIP" version="[2.0.12;]" />
+	<necessite id="SPIP" version="[2.0.12;2.1.99]" />
 	<categorie>communication</categorie>
 </plugin>
