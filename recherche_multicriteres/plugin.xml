@@ -1,29 +1,23 @@
 <?xml version="1.0.1" encoding="ISO-8859-1"?>
 <plugin>
-	<nom><multi>[fr]Recherche Multi-Crit&egrave;res[en]Multi Keywords Research</multi></nom>
+	<nom><multi>[fr]Recherche multi-crit&#232;res[en]Multi-criteria search</multi></nom>
+	<slogan>
+		<multi>
+		[fr]Recherche multi-crit&#232;res par mots-cl&#233;s
+		[en]Multi-criteria search by keywords
+		</multi>
+	</slogan>
 	<description>
 		<multi>
-		[fr]Recherche Multi-crit&egrave;res par mots-cl&eacute;s.<br />
-		La recherche multicrit&egrave;res par mots-cl&eacute;s permet de rechercher des articles s&eacute;lectionnant un ou plusieurs mots-cl&eacute;. La recherche retournera la liste d&rsquo;articles associ&eacute;s &agrave; ces mots-cl&eacute;<br />
-		Vous pouvez choisir le type d&rsquo;affichage des groupes de mots dans le formulaire (<i>liste d&eacute;roulante &agrave; choix multiple, liste d&eacute;roulantes, cases &agrave; cocher &#224; choix unique ou  cases &agrave; cocher &#224; choix multiple. </i>)
-		Vous pouvez rechercher les articles associ&eacute;s &agrave; tous les mots ou non (et/ou)<br />
-		Vous pouvez limiter la recherche par date de publication des articles (-7 jours, -1 mois, -3 mois, -12 mois, tous)<br />
-		Dans le cas de l&rsquo;affichage par rubriques, vous pouvez limiter ou non la recherche &agrave; la rubrique en cours.<br />
-		<strong>Ce plugin n&eacute;cessite cfg v 1.3.8 ou sup&eacute;rieur.</strong><br />
-		[en]Multi Keywords Research<br />
-		The multicriteria search by keywords to search for items by selecting one or more keywords. The search will return a list of items associated with these keywords<br />
-		You can choose the type of display groups of words in the form (dropdown or checkboxes)<br />
-		You can search articles associated with all the words or not (and / or)<br />
-		You can narrow your search by date of publication of articles (-7 days, -1 month, -3 months -12 months, all)<br />
-		In the case of the display sections, you can limit or not looking at the current line.<br />
-		<strong>This plugin requires cfg v 1.3.8 or higher.</strong>
+		[fr]La recherche multicrit&#232;res par mots-cl&#233;s permet de rechercher des articles s&#233;lectionnant un ou plusieurs mots-cl&#233;. La recherche retournera la liste d'articles associ&#233;s &#224; ces mots-cl&#233;.	Vous pouvez choisir le type d'affichage des groupes de mots dans le formulaire ({liste d&#233;roulante &#224; choix multiple, liste d&#233;roulante, cases &#224; cocher &#224; choix unique ou cases &#224; cocher &#224; choix multiple}). Vous pouvez rechercher les articles associ&#233;s &#224; tous les mots ou non (et/ou). Vous pouvez limiter la recherche par date de publication des articles (-7 jours, -1 mois, -3 mois, -12 mois, tous). Dans le cas de l'affichage par rubriques, vous pouvez limiter ou non la recherche &#224; la rubrique en cours.<br />
+		[en]The multicriteria search by keywords to search for items by selecting one or more keywords. The search will return a list of items associated with these keywords. You can choose the type of display groups of words in the form (dropdown or checkboxes). You can search articles associated with all the words or not (and / or). You can narrow your search by date of publication of articles (-7 days, -1 month, -3 months -12 months, all). In the case of the display sections, you can limit or not looking at the current line.
 		</multi>
 	</description>
-	<lien>http://www.etab.ac-caen.fr/bureaudestests/TiSpip/spip.php?article189</lien>
-	<version>0.1</version>
+	<lien></lien>
+	<version>0.1.0</version>
 	<prefix>rec_mc</prefix>
 	<etat>dev</etat>
-	<auteur>Dom Lepaisant - d&rsquo;apr&egrave;s une contrib de <a href="http://www.netdeveloppeur.com/tutoriaux-et-astuces-spip/spip-recherche-multicriteres-article34.html">Paul Sanchez - NetDeveloppeur</a></auteur>
+	<auteur>Dom Lepaisant - d'apr&#232;s une contrib de [Paul Sanchez, NetDeveloppeur->http://www.spip-contrib.net/Recherche-multi-critere-par-mots]</auteur>
 	<icon>img_pack/rec_mc-48.png</icon>
 	<install>base/rec_mc_upgrade.php</install>
 	<pipeline>
@@ -41,6 +35,6 @@
 		<inclure>rec_mc_pipe.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<necessite id="cfg" version="[1.3.8;]" />
 </plugin>
