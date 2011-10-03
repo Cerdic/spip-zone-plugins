@@ -1,58 +1,29 @@
 <plugin>
-	<!-- Nom du plugin -->
 	<nom>
 		<multi>
-			[fr]Menus deroulants Babbibel
-			[en]Babbibel Dropdown
+			[fr]Menu Babbibel
+			[en]Babbibel Menu
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]Menu d&#233;roulant horizontal en jQuery
+			[en]Horizontal dropdown menu with jQuery
+		</multi>
+	</slogan>
 	<version>2.2.1</version>
 	<prefix>babbi</prefix>
-	<!-- Fin des balises indispensables -->
-
-	<!-- Auteur du plugin -->
-	<auteur>
-		<multi>
-			[fr][babbibel->http://www.spip-contrib.net/babbibel]			
-			<br />Exemple: [Le Cri du peuple->http://www.cridupeuple.com]
-			<br /> &copy; 2009 - Distribué sous licence GNU/GPL
-			[en][babbibel->http://www.spip-contrib.net/babbibel]
-			<br />Exemple: [Le Cri du peuple->http://www.cridupeuple.com]
-			<br />_ &copy; 2009 - distributed under GNU/GPL licence
-		</multi>
-	</auteur>
+	<auteur>[babbibel->http://www.spip-contrib.net/babbibel]</auteur>
+	<licence>(c) 2009 GNU/GPL</licence>
 	<icon>img/logo_menu.png</icon>
 	<etat>stable</etat>
-
-	<description><multi>
-	[fr]Le menu d&#233;roulant propose diff&eacute;rent types de menu. Rendez-vous &agrave; la page de configuration.
-	<br />Ce plugin fonctionne sur les squelettes disposant de la balise #_INSERT_HEAD
-	<br />Il n&#233;cessite:
-	<ol>
-		<li>le plugin [CFG->http://www.spip-contrib.net/cfg-references] version > 1.14.0</li>
-		<li>le plugin [jQuery->http://plugins.spip.net/Jquery-1-2-6-pour-SPIP-1-92x] pour les versions de SPIP &lt; 1.9.2.</li>
-	</ol>
-
-	Pour configurer et tester les diff&#233;rents menus cliquez sur 
-	<ul>
-		<li>[CFG Menu Babbibel->./?exec=cfg&cfg=babbi]</li>
-	</ul>
-	
-	[en]The menu offer several types of menu. Go to cfg to configure.
-	<br />
-	<ol>
-		<li>This plugin works with the skeletons of the tag #_INSERT_HEAD</li>
-		<li>It requires the cfg plugin</li>
-		<li>It requires the jQuery plugin for versions of SPIP &lt;1.9.2</li>
-	</ol>
-	
-	To configure and  try them go to 
-	<ul>
-		<li>[CFG Babbibel Dropdown->./?exec=cfg&cfg=babbi]</li>
-	</ul>
-	</multi></description>
-	<!-- URI de documentation -->
-	<lien>Doc [spip-contrib.net->http://www.spip-contrib.net/Le-menu-deroulant-Babbibel]</lien>
+	<description>
+		<multi>
+		[fr]Ce plugin propose un menu d&#233;roulant horizontal s’appuyant sur la librairie jQuery, sans limitation de profondeur et configurable avec CFG. Le code &#233;tant tr&#232;s simple, le menu est facile &#224; personnaliser. Il n&#233;cessite le plugin jQuery pour les versions de SPIP ant&#233;rieures &#224; 1.9.2.
+		[en]This plugin provides a horizontal dropdown menu based on jQuery library, without depth limitation and configurable with CFG. The code is very simple, the menu is easy to customize. It requires the jQuery plugin for versions of SPIP < 1.9.2.
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/Le-menu-deroulant-Babbibel</lien>
 	
 	<fonctions>fonctions_menu.php</fonctions>
 
@@ -69,7 +40,7 @@
 	</pipeline>
 
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.2x;)" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<necessite id="cfg" version="[1.14.0;)" />
 	<utilise id="jQuery pour SPIP 1.9.2x" version="1.1.0">
 </plugin>
