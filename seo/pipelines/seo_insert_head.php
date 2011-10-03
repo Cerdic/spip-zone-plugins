@@ -14,16 +14,17 @@ function seo_insert_head($flux) {
 	/* CONFIG */
 	$config = unserialize($GLOBALS['meta']['seo']);
 	if ($config['insert_head']['activate'] == 'yes') {
-		if (count($GLOBALS['contexte']) == 0) {
+		$contexte = $GLOBALS['contexte'];
+		unset($contexte['lang']);
+		if (count($contexte) == 0) {
 			$type_object = 'sommaire';
-		} elseif (isSet($GLOBALS['contexte']['id_article'])) {
-			$id_object   = $GLOBALS['contexte']['id_article'];
+		} elseif (isset($contexte['id_article'])) {
+			$id_object   = $contexte['id_article'];
 			$type_object = 'article';
-		} elseif (isSet($GLOBALS['contexte']['id_rubrique'])) {
-			$id_object   = $GLOBALS['contexte']['id_rubrique'];
+		} elseif (isset($contexte['id_rubrique'])) {
+			$id_object   = $contexte['id_rubrique'];
 			$type_object = 'rubrique';
 		}
-		
 		/* META TAGS */
 		if ($config['meta_tags']['activate'] == 'yes') {
 			$flux .= generer_meta_tags();
