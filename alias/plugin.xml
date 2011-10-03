@@ -6,22 +6,30 @@
 			[ru]Ссылки на статьи
 		</multi>
 	</nom>
-	<auteur>cedric.morin@yterium.com</auteur>
-	<version>0.1</version>
-	<etat>stable</etat>
-	<description>
+	<slogan>
 		<multi>
 			[fr]Creer des Alias d'articles
 			[en]Allow to create aliases for articles
 			[ru]Позволяет создавать ссылки или ярлыки на статьи
 		</multi>
+	</slogan>
+	<auteur>cedric.morin@yterium.com</auteur>
+	<version>0.1.0</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+			[fr]Il est assez fr&#233;quent de vouloir afficher une contenu identique en plusieurs endroits d’une arborescence. M&#234;me si ce genre de pratique n’est pas souhaitable, et si elle doit toujours nous amener &#224; nous poser la question de la pertinence de notre rubriquage, elle n’en demeure pas moins n&#233;cessaire dans certains cas. Ce plugin permet donc de cr&#233;er rapidement des Alias d’article, pour afficher un contenu identique en plusieurs endroits d’une arborescence.
+			[en]It is quite common to want to display a same content in multiple locations in a tree. While this practice is not desirable, and if it must always lead us to question the relevance of our sectioning, it is nonetheless necessary in some cases. This plugin makes it possible to quickly create aliases, to display the same content in multiple locations in a tree.
+			[ru]Позволяет создавать ссылки или ярлыки на статьи
+		</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Alias-d-Article,2854</lien>
+	<icon>img_pack/article-alias-32.png</icon>
 	<prefix>alias</prefix>
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<inclure>alias_pipeline.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 </plugin>
