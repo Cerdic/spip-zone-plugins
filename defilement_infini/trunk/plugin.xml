@@ -1,17 +1,14 @@
 <plugin>
-    <nom>D&eacute;filement infini</nom>
-    <auteur>d'après Arnaud Bosquet http://www.arnaudbosquet.fr/developpement/comment-faire-un-infinite-scroll-en-jquery - mis en plugin pour SPIP par jfefe </auteur>
-    <version>1.0</version>
+    <nom>D&#233;filement infini</nom>
+    <slogan>Activer un d&#233;filement infini sur les listes d'articles</slogan>
+    <auteur>D'apr&#234;s [Arnaud Bosquet->http://www.arnaudbosquet.fr/developpement/comment-faire-un-infinite-scroll-en-jquery], mis en plugin pour SPIP par jfefe</auteur>
+    <version>1.0.0</version>
     <etat>stable</etat>
    <!--  <icon>images/infinite-scroll-64.png</icon> -->
-    <description>
-    	<multi>
-    		[fr]Plugin qui active un d&eacute;filement infini sur les listes d'articles
-	</multi>
-    </description>
-    <lien>http://www.spip-contrib.net/?article3914</lien>
-    <prefix>defilement_infini</prefix>
-	<necessite id="SPIP" version="[2.1;]" />
+	<description>Ce plugin active un d&#233;filement infini sur les listes d'articles. Le principe de l'&#171; Infinite Scroll &#187; est de charger du contenu pendant que la barre de d&#233;filement descend. Concr&#234;tement, cela permet de ne pas avoir &#224; mettre en place une pagination et &#233;vite aux utilisateurs d'avoir &#224; cliquer sur des liens &#171; pages suivantes &#187;. On all&#232;ge aussi le chargement de ces pages en affichant uniquement le d&#233;but.</description>
+	<lien>http://www.spip-contrib.net/?article3914</lien>
+	<prefix>defilement_infini</prefix>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 
 	<pipeline>
 		<nom>jquery_plugins</nom>
