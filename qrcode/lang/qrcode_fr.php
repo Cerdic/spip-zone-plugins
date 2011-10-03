@@ -17,7 +17,7 @@ peuvent contenir diverses informations par exemple : des URL permettant de tél�
 	'explication_taille_aide' => 'Chaque élément du QRcode fera la taille spécifiée.',
 
 	// I
-	'instructions' => 'Vous pouvez configurer comment les QRcodes apparaîtront dans vos articles SPIP.',
+	'instructions' => 'Vous pouvez configurer comment les QRcodes apparaîtront dans vos articles.',
 
 	// L
 	'label_css' => 'Classe CSS : ',
