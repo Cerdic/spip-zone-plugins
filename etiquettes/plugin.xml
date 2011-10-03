@@ -1,34 +1,22 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-		&Eacute;tiquettes
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 		RastaPopoulos - Distribu&eacute; sous licence GPL
-	</auteur>
-	<version> <!-- Version du plugin -->
-		0.6.5
-	</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-		test
-	</etat>
+	<nom>&#201;tiquettes</nom>
+	<slogan>Ajouter facilement des mots-cl&#233;s &#224; tout et n’importe quoi</slogan>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL</licence>
+	<version>0.6.5</version>
+	<etat>test</etat>
 	<description>
-Le plugin &Eacute;tiquettes permet de cr&eacute;er facilement des formulaire pour ajouter des mots-cl&eacute;s "&agrave; la vol&eacute;e" sur n'importe quel &eacute;l&eacute;ment les acceptant (articles, forums, etc, et plus encore si vous avez le plugin Mots Partout ou si vous savez programmer).
+Le plugin &#201;tiquettes permet de cr&#233;er facilement des formulaires pour ajouter des mots-cl&#233;s "&#224; la vol&#233;e" sur n'importe quel &#233;l&#233;ment les acceptant (articles, forums, etc, et plus encore si vous avez le plugin Mots Partout ou si vous savez programmer).
 
-Il propose donc une balise avec param&egrave;tres qui va g&eacute;n&eacute;rer un champ de texte pour taper les mots-cl&#233;s, et &eacute;ventuellement une aide qui pourra &ecirc;tre de diff&eacute;rente sorte suivant les plugins disponibles :
--* * Un nuage des mots les plus fr&eacute;quents
-_ (si vous avez le plugin Nuage)
--* * Une liste d&eacute;roulante qui s'actualise en fonction de ce que vous tapez
-_ (si vous avez le plugin S&eacute;lecteur g&eacute;n&eacute;rique)
--* * Une liste &#224; cliquer (sur les m&#234;mes principes que les cases &#224; cocher)
--* * Aucune aide
+Il propose donc une balise avec param&#232;tres qui va g&#233;n&#233;rer un champ de texte pour taper les mots-cl&#233;s, et &#233;ventuellement une aide qui pourra &#234;tre de diff&#233;rente sorte suivant les plugins disponibles :
+-* Un nuage des mots les plus fr&#233;quents (si vous avez le plugin Nuage)
+-* Une liste d&#233;roulante qui s'actualise en fonction de ce que vous tapez (si vous avez le plugin S&#233;lecteur g&#233;n&#233;rique)
+-* Une liste &#224; cliquer (sur les m&#234;mes principes que les cases &#224; cocher)
+-* Aucune aide
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Etiquettes</lien> <!-- URI de documentation -->
-	<prefix> 
-		etiquettes
-	</prefix>
-	<icon>
-		images/etiquettes.png
-	</icon>
+	<lien>http://www.spip-contrib.net/Plugin-Etiquettes</lien>
+	<prefix>etiquettes</prefix>
+	<icon>images/etiquettes.png</icon>
 	<options>etiquettes_options.php</options>
 	<fonctions>etiquettes_fonctions.php</fonctions>
 	
@@ -40,5 +28,6 @@ _ (si vous avez le plugin S&eacute;lecteur g&eacute;n&eacute;rique)
 		<nom>autoriser</nom> 
 		<inclure>inc/etiquettes_autoriser.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
