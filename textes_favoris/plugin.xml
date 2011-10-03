@@ -1,27 +1,20 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	favoris
-	</nom>
-	<auteur>Bernard Blazin </auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Favoris</nom>
+	<slogan>Mettre des articles en favoris</slogan>
+	<auteur>Bernard Blazin</auteur>
+	<version>0.2.0</version>
+	<etat>test</etat>
 	<icon>img_pack/favo.gif</icon>
-	<description>
-	Permet aux auteurs connect&eacute;s de choisir une liste d'articles favoris dans la partie publique du site
-	</description>
-	<prefix> 
-	favotexte
-	</prefix>
+	<description>Ce plugin permet &#224; tout r&#233;dacteur, administrateur ou visiteur connect&#233; de mettre des articles en favoris afin de les retrouver plus facilement. Il n’utilise pas le syst&#234;me des cookies mais ajoute une toute petite table dans la base de donn&#233;es.</description>
+	<prefix>favotexte</prefix>
+	<icon>img_pack/Favoris32_2.png</icon>
+	<lien>http://www.spip-contrib.net/Plugin-Textes-Favoris</lien>
 	<install>base/favotexte_init.php</install>
-	 <bouton id='favoris' parent='naviguer'>
+	<bouton id='favoris' parent='naviguer'>
       <icone>img_pack/favo.gif</icone>
       <titre>Favoris</titre>
-  </bouton>
-			<fonctions>favoris_fonctions.php</fonctions>
-		<necessite id="SPIP" version="[2.0.0;]" />
+	</bouton>
+	<fonctions>favoris_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<categorie>navigation</categorie>
 </plugin>
