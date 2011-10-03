@@ -156,6 +156,9 @@ function fblogin_terminer_authentification(){
 			if ($error = _request('error')){
 				return _request('error_description');
 			}
+			else{
+				return _T('fblogin:erreur_utilisateur');
+			}
 		}
 	}
 	else{

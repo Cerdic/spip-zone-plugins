@@ -12,9 +12,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
 	// E
 	'erreur_client' => 'Impossible de se connecter à Facebook. Contacter le webmestre pour vérifier la configuration du site.',
-	'erreur_fblogin' => 'Cette adresse fblogin ne semble pas valide',
-	'erreur_librairies' => 'Impossible de trouver les librairies d\'authenfication fblogin',
-	'erreur_fblogin_info_manquantes' => 'Votre fournisseur fblogin ne nous a pas envoy&eacute; toutes les informations n&eacute;cessaires',
+	'erreur_info_manquantes' => 'Facebook ne nous a pas envoyé toutes les informations nécessaires',
+	'erreur_librairies' => 'Impossible de trouver les librairies d\'authenfication Facebook',
+	'erreur_utilisateur' => 'Impossible de trouver une connexion Facebook, veuillez réessayer.',
 	
 	// F
 	'form_inscription_facebook' => 'S\'inscrire avec Facebook',
