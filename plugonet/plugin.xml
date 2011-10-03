@@ -1,17 +1,17 @@
 <plugin>
 	<nom>PlugOnet</nom>
 	<auteur>Eric Lupinacci, Emmanuel Saint-James</auteur>
-	<version>0.5.1</version>
+	<version>0.5.2</version>
 	<etat>stable</etat>
 	<licence>GNU/GPL v3</licence>
 	<icon>prive/themes/spip/images/plugonet-32.png</icon>
-	<slogan>Migrer de la DTD plugin &agrave; celle de paquet</slogan>
+	<slogan>Migrer de la DTD plugin &#224; celle de paquet</slogan>
 	<description>
-Ce plugin permet de produire le nouveau fichier paquet.xml &agrave; partir du fichier
-plugin.xml. Des options de v&eacute;rification sont disponibles pour nettoyer au pr&eacute;alable
+Ce plugin permet de produire le nouveau fichier paquet.xml &#224; partir du fichier
+plugin.xml. Des options de v&#233;rification sont disponibles pour nettoyer au pr&#233;alable
 certaines balises du fichier d'origine.
 
-En outre, PlugOnet permet de valider des fichiers paquet.xml &eacute;crits manuellement et fournit
+En outre, PlugOnet permet de valider des fichiers paquet.xml &#233;crits manuellement et fournit
 une aide sur chaque balise de la nouvelle DTD.
 	</description>
 	<lien>http://blog.smellup.net/spip.php?article7</lien>
@@ -46,7 +46,7 @@ une aide sur chaque balise de la nouvelle DTD.
 		<url>plugonet_valider</url>
 	</onglet>
 
-	<necessite id="SPIP" version="[3.0.0-aplha2;3.0.*]" />
+	<necessite id="SPIP" version="[3.0.0-alpha2;3.0.*]" />
 	<necessite id="langonet" version="[0.6.3;]" />
 	<categorie>outil</categorie>
 </plugin>
