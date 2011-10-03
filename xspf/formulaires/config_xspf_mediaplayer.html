@@ -69,6 +69,12 @@
 								<label for="mplplaylistsize"><a href="#mplplaylistsize" title="<:xspf:playlistsize:> - <:xspf:desc_playlistsize:>"><:xspf:playlistsize:></a></label>
 								<input type="text" name="mplplaylistsize" class="text" style="width:4em;" id="mplplaylistsize" value="#CONFIG{xspf/mplplaylistsize}" />&nbsp;<i>px</i>
 							</li>
+							<li>
+								<label for="mplskin"><a href="#mplskin" title="<:xspf:skin:> - <:xspf:desc_skin:>"><:xspf:skin:></a></label>
+								<select name="mplskin" id="mplskin" class="text">
+								[(#ENV{mplskin}|xspf_liste_skins)]
+								</select>
+							</li>
 						</ul>
 					</fieldset>
 				</li>
@@ -84,7 +90,7 @@
 										<:xspf:backcolor:>
 									</a>
 								</label>
-								<input type="text" name="mplbackcolor" class="palette text" style="width:100px;" id="mplbackcolor" value="[(#CONFIG{xspf/mplbackcolor}|sinon{#000000})]" maxlength="7" />
+								<input type="text" name="mplbackcolor" class="palette text" style="width:100px;" id="mplbackcolor" value="[(#ENV{mplbackcolor})]" maxlength="7" />
 							</li>
 							<li>
 								<label for="mplfrontcolor">
@@ -92,7 +98,7 @@
 										<:xspf:frontcolor:>
 									</a>
 								</label>
-								<input type="text" name="mplfrontcolor" class="palette text" style="width:100px;" id="mplfrontcolor" value="[(#CONFIG{xspf/mplfrontcolor}|sinon{#CCCCCC})]" maxlength="7" />
+								<input type="text" name="mplfrontcolor" class="palette text" style="width:100px;" id="mplfrontcolor" value="[(#ENV{mplfrontcolor}|)]" maxlength="7" />
 							</li>
 							<li>
 								<label for="mpllightcolor">
@@ -100,7 +106,7 @@
 										<:xspf:lightcolor:>
 									</a>
 								</label>
-								<input type="text" name="mpllightcolor" class="palette text" style="width:100px;" id="mpllightcolor" value="[(#CONFIG{xspf/mpllightcolor}|sinon{#996600})]" maxlength="7" />
+								<input type="text" name="mpllightcolor" class="palette text" style="width:100px;" id="mpllightcolor" value="[(#ENV{mpllightcolor})]" maxlength="7" />
 							</li>
 							<li>
 								<label for="mplscreencolor">
@@ -108,7 +114,7 @@
 										<:xspf:screencolor:>
 									</a>
 								</label>
-								<input type="text" name="mplscreencolor" class="palette" style="width:100px;" id="mplscreencolor" value="[(#CONFIG{xspf/mplscreencolor}|sinon{#000000})]" maxlength="7" />
+								<input type="text" name="mplscreencolor" class="palette" style="width:100px;" id="mplscreencolor" value="[(#ENV{mplscreencolor})]" maxlength="7" />
 							</li>
 						</ul>
 					</fieldset>

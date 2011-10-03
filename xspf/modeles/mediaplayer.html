@@ -118,6 +118,7 @@ Plusieurs methodes d'insertion :
 [(#SET{height,#ENV{height,#CONFIG{xspf/mplheigth}|sinon{240}}})]
 [(#SET{playliste,#ENV{playliste,#CONFIG{xspf/mplplayliste,none}}})]
 [(#SET{playlistesize,#ENV{playlistesize,#CONFIG{xspf/mplplaylistsize}|sinon{180}}})]
+[(#SET{skin,#ENV{skin,#CONFIG{xspf/mplskin}}})]
 
 [(#SET{backcolor,#CONFIG{xspf/mplbackcolor}|replace{#,0x}|sinon{0x000000}})]
 [(#SET{frontcolor,#CONFIG{xspf/mplfrontcolor}|replace{#,0x}|sinon{0xCCCCCC}})]
@@ -166,6 +167,7 @@ Plusieurs methodes d'insertion :
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].width = "#GET{width}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].playlist = "#GET{playliste}";
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].playlistsize = "#GET{playlistesize}";
+		flashvars[_(#ENV{id})][_(#GET{objet_val})].skin = "#GET{skin}";
 		
 		// Colors
 		flashvars[_(#ENV{id})][_(#GET{objet_val})].backcolor = "#GET{backcolor}";
