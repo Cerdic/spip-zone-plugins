@@ -1,6 +1,6 @@
 [(#REM) #FORMULAIRE_TROUVER_OBJET{'mot','groupes_mots',#ID_GROUPE,trouver_mots_#ID_GROUPE,mot_du_groupe,id_mot}
 ]
-<div class="trouver_objet #ENV{ajax}" id="trouver_#ENV{objet}_#ID_SOURCE">
+<div class="formulaire_spip trouver_objet #ENV{ajax}" id="trouver_#ENV{objet}_#ID_SOURCE">
 		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
 		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
 		
@@ -16,11 +16,11 @@
 		[(#ACTION_FORMULAIRE{#ENV{action}})]
 		<ul>
 			<li class="nom_objet [ (#ENV**{erreurs}|table_valeur{nom_objet}|oui)erreur]">
-				<label for="nom_objet"><:grappes:bouton_chercher:></label>
+				<label for="nom_objet"><:trouvobjet:bouton_chercher:></label>
 				[<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom_objet})</span>]
 				<input type='text' class='text' name='nom_objet' id='nom_objet' value="#ENV{nom_objet}" />
 		<input type="hidden" name="pid_objet" id="pid_objet" value="" />
-				<input type='submit' class='submit' value='<:trouver:>' />
+				<input type='submit' class='submit' value='<:trouvobjet:bouton_trouver:>' />
 			</li>
 		</ul>
 	</form>

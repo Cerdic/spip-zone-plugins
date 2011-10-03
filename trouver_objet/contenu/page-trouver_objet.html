@@ -12,21 +12,24 @@
 // --></script>
 
 
-Rechercher un mot dans <strong>#TITRE</strong>
+	<:trouvobjet:trouver_mot_in{titre=#TITRE}:>
+	
+	[(#REM)
+	<!--objet_a_trouver, table_ou_trouver, id_sur_table, $identifiant,selecteurs/liste_XYZ, url_retour-->
+	]
+	
+	#FORMULAIRE_TROUVER_OBJET{'mot','groupes_mots',#ID_GROUPE,trouver_mots_#ID_GROUPE,mot_du_groupe}
 
-[(#REM) {objet_a_trouver, table_ou_trouver, id_sur_table, $identifiant,selecteurs/liste_XYZ} ] 
-#FORMULAIRE_TROUVER_OBJET{'mot','groupes_mots',#ID_GROUPE,trouver_mots_#ID_GROUPE,mot_du_groupe}
 </BOUCLE_groupemots>
 
-<h3>Choisissez un groupe de mots</h3>
-<//B_groupemots>
-<B_lister_groupes>
-	<ul>
-	<BOUCLE_lister_groupes(GROUPES_MOTS)>
-	<li><a href="[(#SELF|parametre_url{id_groupe,#ID_GROUPE}|parametre_url{id_rubrique,''})]">#TITRE</a></li>
-	</BOUCLE_lister_groupes>
-	</ul>
-</B_lister_groupes>
+	<B_lister_groupes>
+		<h3><:trouvobjet:choisir_groupe:></h3>
+		<ul>
+		<BOUCLE_lister_groupes(GROUPES_MOTS)>
+		<li><a href="[(#SELF|parametre_url{id_groupe,#ID_GROUPE}|parametre_url{id_rubrique,''})]">#TITRE</a></li>
+		</BOUCLE_lister_groupes>
+		</ul>
+	</B_lister_groupes>
 
 
 <BOUCLE_rubriques(RUBRIQUES) {id_rubrique}>
@@ -41,18 +44,19 @@ Rechercher un mot dans <strong>#TITRE</strong>
 		onAjaxLoad(function(){setTimeout(rechercher_trouver_articles_#ID_RUBRIQUE, 200);
 		});
 // --></script>
-Rechercher un article dans <strong>#TITRE</strong>
 
-[(#REM) {objet_a_trouver, table_ou_trouver, id_sur_table, $identifiant,selecteurs/liste_XYZ} ]
-#FORMULAIRE_TROUVER_OBJET{'article','rubriques',#ID_RUBRIQUE,trouver_articles_#ID_RUBRIQUE,article_de_rubriques}
+	<:trouvobjet:trouver_article_in{titre=#TITRE}:>
+	
+	[(#REM) <!--objet_a_trouver, table_ou_trouver, id_sur_table, $identifiant,selecteurs/liste_XYZ, url_retour -->]
+	#FORMULAIRE_TROUVER_OBJET{'article','rubriques',#ID_RUBRIQUE,trouver_articles_#ID_RUBRIQUE,article_de_rubriques}
 </BOUCLE_rubriques>
-<h3>Choisissez une rubrique</h3>
-<//B_groupearticles>
-<B_lister_rubriques>
-	<ul>
-	<BOUCLE_lister_rubriques(RUBRIQUES){racine}>
-	<li><a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_groupe,''})]">#TITRE</a></li>
-	</BOUCLE_lister_rubriques>
-	</ul>
-</B_lister_rubriques>
+
+	<B_lister_rubriques>
+	<h3><:trouvobjet:choisir_rubrique:></h3>
+		<ul>
+		<BOUCLE_lister_rubriques(RUBRIQUES){racine}>
+		<li><a href="[(#SELF|parametre_url{id_rubrique,#ID_RUBRIQUE}|parametre_url{id_groupe,''})]">#TITRE</a></li>
+		</BOUCLE_lister_rubriques>
+		</ul>
+	</B_lister_rubriques>
 
