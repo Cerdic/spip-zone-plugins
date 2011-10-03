@@ -6,6 +6,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_spip('inc/actions');
+
 /**
  * Action nécessaire à la conversion d'un document
  *
@@ -29,15 +31,9 @@ function action_doc2img_convert_dist(){
     	suivre_invalideur("id='id_document/$id_document'");
     }
 
-    $redirect = _request('redirect');
-    //charge la page donnée par $redirect à defaut la page appelante
-	if (!$redirect){
-        $redirect = $_SERVER['HTTP_REFERER'];
-	}else {
-		$redirect = urldecode($redirect);
+    if(_request('redirect')){
+		$redirect = str_replace('&amp;','&',urldecode(_request('redirect')));
 	}
-
-	include_spip('inc/headers');
-    redirige_par_entete($redirect);
+	return $redirect;
 }
 ?>
