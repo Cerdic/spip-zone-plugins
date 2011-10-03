@@ -1,12 +1,12 @@
 <plugin>
+	<nom>D&#233;finitions et FAQ</nom>
+	<Slogan>Mettre en valeur les d&#233;finitions et Foire aux Questions</Slogan>
+	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
 	<icon>themes/spip/images/faq-32.png</icon>
-	<nom>D&eacute;finitions et FAQ</nom>
-	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2009</auteur>
-	<licence>GPL</licence>
+	<licence>(c) 2009 GPL</licence>
 	<version>1.0.1</version>
 	<etat>stable</etat>
-	<necessite id="SPIP" version="[2.0;3.0.0]" />
-	<description>Ce petit plugin valorise les termes d&eacute;finis (<code>dfn</code>) et les listes de d&eacute;finitions (<code>dl</code>, <code>dt</code>, <code>dd</code>). Il&nbsp;transforme les listes de d&eacute;finitions marqu&eacute;es &laquo;&nbsp;<code>faq</code>&nbsp;&raquo; en <abbr title="Foire Aux Questions">FAQ</abbr> d&eacute;pliable.</description>
+	<description>Ce petit plugin valorise les termes d&#233;finis (<code>dfn</code>) et les listes de d&#233;finitions (<code>dl</code>, <code>dt</code>, <code>dd</code>). Il transforme les listes de d&#233;finitions marqu&#233;es &#171;<code>faq</code>&#187; en <abbr title="Foire Aux Questions">FAQ</abbr> d&#233;pliable.</description>
 	<lien>http://www.spip-contrib.net/?rubrique891</lien>
 	<prefix>faq</prefix>
 	<pipeline>
@@ -17,5 +17,6 @@
 		<nom>insert_head_css</nom>
 		<inclure>faq_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;3.0.0]" />
 	<categorie>navigation</categorie>
 </plugin>
