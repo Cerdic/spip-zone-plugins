@@ -1,11 +1,13 @@
 <plugin>
 	<nom>Accessibilit&#233;</nom>
+	<slogan>Am&#233;liorations de l'acessibilit&#233; pour les r&#233;dacteurs</slogan>
 	<auteur>Goetsu et [RealET->http://www.spip-contrib.net/_RealET_]</auteur>
-	<licence>GNU/LGPL - (c) 2011</licence>
+	<licence>GNU/LGPL (c) 2011</licence>
 	<version>0.8.3</version>
 	<etat>dev</etat>
-	<description>
-	Diverses am&#233;liorations d'acessibilit&#233;.
+	<description>Depuis le 29 octobre 2009, les services de communication publique en ligne doivent se mettre en conformit&#233; par rapport au R&#233;f&#233;rentiel G&#233;n&#233;ral d’Accessibilit&#233; pour les Administrations (RGAA) qui demande &#224; ce que les sites web publics soient accessibles au plus grand nombre, notamment les personnes en situations de handicaps.
+
+L’objectif de ce plugin et de sa documentation associ&#233;e n’est pas de pr&#233;senter le contenu du RGAA ou l’int&#233;r&#234;t d’une d&#233;marche d’accessibilit&#233; mais de voir th&#233;matique par th&#233;matique en quoi SPIP permet, nativement ou avec quelques ajouts, de produire du contenu accessible pour un r&#233;dacteur.
 	</description>
 	<lien>http://www.spip-contrib.net/?article3547</lien>
 	<prefix>Accessibilite</prefix>
