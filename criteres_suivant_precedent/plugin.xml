@@ -1,10 +1,17 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Crit&#232;res Suivant / Précédent
+			[fr]Crit&#232;res Suivant / Pr&#233;c&#233;dent
 			[en]Next / Previous criteria
 		</multi>
 	</nom>
+	
+	<slogan>
+		<multi>
+			[fr]Ajoute des crit&#232;res de boucles <code>{suivant}</code> et <code>{precedent}</code>
+			[en]Adds loops criteria <code>{suivant}</code> and <code>{precedent}</code>
+		</multi>
+	</slogan>
 	
 	<version>1.3.1</version>
 	
@@ -13,8 +20,8 @@
 
 	<description>
 		<multi>
-			[fr]Ajoute des crit&#232;res de boucles <code>{suivant}</code> et <code>{precedent}</code>
-			[en]Adds loops criteria <code>{suivant}</code> and <code>{precedent}</code>
+			[fr]Ce plugin est une exp&#233;rimentation permettant de trouver, dans une boucle donn&#233;e, l’&#233;l&#233;ment suivant ou l’&#233;l&#233;ment pr&#233;c&#233;dent. Cet usage est principalement utile pour cr&#233;er des navigations par rubrique ou par th&#232;me (mots-cl&#233;s).
+			[en]This plugin is an experiment allowing to find in a given loop, the next or previous item. This usage is primarily useful when creating navigation by category or by topic (keywords).
 		</multi>
 	</description>
 	
@@ -27,6 +34,6 @@
 	
 	<fonctions>public/suivant_precedent_criteres.php</fonctions>
 	
-	<necessite id="SPIP" version="[2.1;]" />
+	<necessite id="SPIP" version="[2.1;2.1.99]" />
 	<categorie>navigation</categorie>	
 </plugin>
