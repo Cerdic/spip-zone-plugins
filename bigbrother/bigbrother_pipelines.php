@@ -80,11 +80,8 @@ function bigbrother_post_edition($flux){
 				$faire = $flux['args']['operation'];
 				$texte = "bigbrother:action_$faire";
 			}
-
-			spip_log($flux,'journal');
 		}
 		else{
-			spip_log($flux,'journal');
 			$faire = 'modifier';
 			$texte = 'bigbrother:action_modifier_objet';
 			/**
