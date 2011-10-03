@@ -1,5 +1,5 @@
 [(#SET{defaut_tri,#ARRAY{
-	date,#ENV{date_sens,-1},
+	date_utile,#ENV{date_sens,1},
 	titre,1,
 	num titre,1,
 	id_rubrique,1
@@ -19,10 +19,10 @@
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_date(RUBRIQUES){id_secteur?}{id_rubrique?}{id_mot?}{id_article?}{statut?}{tri #ENV{order,date},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
+	<BOUCLE_liste_date(RUBRIQUES){id_secteur?}{id_rubrique?}{id_mot?}{id_article?}{statut?}{tri #ENV{order,date_utile},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 			<td class='statut'>[(#ID_RUBRIQUE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,rubrique})]</td>
-			<td class='titre'>[(#LOGO_RUBRIQUE||image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|supprimer_numero)]</a></td>
+			<td class='titre'>[(#LOGO_RUBRIQUE|image_reduire{20,26})]<a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]">[(#TITRE|supprimer_numero)]</a></td>
 			<td class='date'><BOUCLE_articles(ARTICLES){id_rubrique}{par date}{0,1}>[(#DATE|affdate{d/m/Y})] <a href="#URL_ECRIRE{articles,id_article=#ID_ARTICLE}" title="#TITRE">article#ID_ARTICLE</a></BOUCLE_articles><:daterubriques:aucun:><//B_articles></td>
 			<td class='date'>[(#DATE_UTILE|affdate{d/m/Y})]</td>
 			<td class='id'>[(#AUTORISER{modifier,rubrique,#ID_RUBRIQUE}|?{
