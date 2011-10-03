@@ -1,70 +1,101 @@
 <?php
-// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
-// -- pour les fichiers .php et la detection de _L
-define("_LANGONET_TROUVER_FONCTION_L_P", "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm");
-
+/// @file
 /**
- * Vérification de l'utilisation de la fonction _L() dans le code PHP 
+ * Verification de l'utilisation de la fonction _L() dans le code PHP 
  *
- * @param string $ou_fichier
- * @return array
  */
 
-// $ou_fichier   => racine de l'arborescence a verifier
+/// Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
+/// -- pour les fichiers .php et la detection de _L
+define("_LANGONET_FONCTION_L", 
+#       "`_L\([\"'](.+)(?:[,\"']|[\"'][,].*)\)`iUm"); # old
+	'#\b_L *[(] *"([^"]*)"[^)]*#');
+
+define("_LANGONET_FONCTION_L2", 
+	"#\b_L *[(] *'([^']*)'[^)]*#");
+
+/// Si une erreur se produit lors du deroulement de la fonction,
+/// le tableau resultat contient le libelle
+/// de l'erreur dans $resultats['erreur'];
+/// sinon, cet index n'existe pas.
+
+/// $ou_fichier   => racine de l'arborescence a verifier
+/// On n'examine pas les ultimes sous-repertoires charsets/,lang/ , req/ et /.
+/// On n'examine que les fichiers php
+/// (voir le fichier regexp.txt).
+
+define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
+
+/// Construit le tableau des occurrences du premier argument de _L.
+/// Ce tableau est indexe par un representant canonique de chaque chaine trouvee
+/// Les valeurs de ce tableau sont des sous-tableaux indexes par le nom du fichier
+/// Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne,
+/// pointant sur un sous-sous-sous-tableau des appels complets de _L
+
+/// @param string $ou_fichier
+/// @return array
+
 function inc_langonet_verifier_l($ou_fichier) {
 
-	// Initialisation du tableau des resultats
-	// Si une erreur se produit lors du deroulement de la fonction, le tableau contient le libelle
-	// de l'erreur dans $resultats['erreur'].
-	// Sinon, cet index n'existe pas
-	$resultats = array();
-
-	// On cherche l'ensemble des items utilises dans l'arborescence $ou_fichier
-	$utilises_brut = array('items' => array());
-	// On ne scanne pas dans les ultimes sous-repertoires charsets/ ,
-	// lang/ , req/ . On ne scanne que les fichiers php
-	// (voir le fichier regexp.txt).
-	foreach (preg_files(_DIR_RACINE.$ou_fichier, '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$') as $_fichier) {
-		foreach ($contenu = file($_fichier) as $ligne => $texte) {
-			$trouver_item = _LANGONET_TROUVER_FONCTION_L_P;
-			if (preg_match_all($trouver_item, $texte, $matches)) {
-				$utilises_brut['items'] = array_merge($utilises_brut['items'], $matches[1]);
-				// On collecte pour chaque item trouve les lignes et fichiers dans lesquels il est utilise
-				foreach ($matches[1] as $_item_val) {
-					$item_val = addcslashes($_item_val,"$()");
-					preg_match("`.{0,8}_L\([\"']".$item_val.".{0,20}`is", $texte, $extrait);
-					// On indexe avec le md5 de la valeur de _L() car parfois cette valeur
-					// contient des caracteres non echappes qui perturbent l'indexation du tableau
-					// Il faudra donc traiter l'affichage correspondant a cette option
-					$item_tous[md5($_item_val)][$_fichier][$ligne][] = trim($extrait[0]);
-				}
-			}
-		}
-	}
-
-	// On affine le tableau resultant en supprimant les doublons
-	// et on construit la liste des items utilises mais non definis
-	$item_non = array();
 	$item_md5 = array();
 	$fichier_non = array();
-	foreach ($utilises_brut['items'] as $_cle => $_valeur) {
-		if (!in_array($_valeur, $item_non)) {
-			$item_non[] = $_valeur;
-			$index = md5($_valeur);
-			$item_md5[$index] = $_valeur;
-			if (is_array($item_tous[$index])) {
-				$fichier_non[$index] = $item_tous[$index];
-			}
+	$files = preg_files(_DIR_RACINE.$ou_fichier, _LANGONET_FILES);
+	foreach ($files as $_fichier) {
+		foreach ($contenu = file($_fichier) as $ligne => $texte) {
+			if (preg_match_all(_LANGONET_FONCTION_L, $texte, $m, PREG_SET_ORDER))
+				foreach ($m as $occ) {
+					$index = langonet_index_l($occ[1], $item_md5);
+					$item_md5[$index] = $occ[1];
+					$fichier_non[$index][$_fichier][$ligne][] = trim($occ[0]);
+				}
+			if (preg_match_all(_LANGONET_FONCTION_L2, $texte, $m, PREG_SET_ORDER))
+				foreach ($m as $occ) {
+					$index = langonet_index_l($occ[1], $item_md5);
+					$item_md5[$index] = $occ[1];
+					$fichier_non[$index][$_fichier][$ligne][] = trim($occ[0]);
+				}
 		}
 	}
 
-	// On prepare le tableau des resultats
-	$resultats['ou_fichier'] = $ou_fichier;
-	$resultats['item_non'] = $item_non;
-	$resultats['fichier_non'] = $fichier_non;
-	$resultats['item_md5'] = $item_md5;
-	
-	return $resultats;
+	return array('ou_fichier' => $ou_fichier,
+		     'item_non' => array_values($item_md5), // est-ce utile ? 
+		     'fichier_non' => $fichier_non,
+		     'item_md5' => $item_md5);
 }
 
+/// Calcul du representant canonique d'un premier argument de _L.
+/// C'est un transcodage ASCII, reduits aux 32 premiers caracteres,
+/// les caracteres non alphabetiques etant remplaces par un souligne.
+/// On elimine les repetitions de mots pour evacuer le cas frequent truc: @truc@
+/// Si plus que 32 caracteres, on elimine les mots de moins de 3 lettres.
+/// Si toujours trop, on coupe au dernier mot complet avant 32 caracteres.
+/// C'est donc le tableau des chaines de langues manquant;
+/// toutefois, en cas d'homonymie d'index, on prend le md5, qui est illisible.
+
+/// @param string $occ
+/// @param array item_md5
+/// @return string
+
+function langonet_index_l($occ, $item_md5)
+{
+	$index = textebrut($occ);
+	$index = preg_replace('/\\\\[nt]/', ' ', $index);
+	$index = strtolower(translitteration($index));
+	$index = trim(preg_replace('/\W+/', ' ', $index));
+	$index = preg_replace('/\b(\w+)\W+\1/', '\1', $index);
+	if (strlen($index) > 32) {
+	  // trop long: abandonner les petits mots
+		$index = preg_replace('/\b\w{1,3}\W/', '', $index);
+		if (strlen($index) > 32) {
+			// tant pis mais couper proprement
+			$index = substr($index, 0, 32);
+			$index = substr($index, 0, strrpos($index,' '));
+		}
+	}
+	$index = str_replace(' ', '_', trim($index));
+	if (isset($item_md5[$index]) AND $item_md5[$index] !== $occ)
+		$index = md5($occ);
+
+	return $index;
+}
 ?>
