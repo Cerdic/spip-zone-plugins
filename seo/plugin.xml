@@ -13,7 +13,7 @@
 	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
 	<etat>test</etat>
 	
-	<version>1.4</version>
+	<version>1.5.0</version>
 	<version_base>1.0.1</version_base>
 
 	<install>base/seo_installation.php</install>

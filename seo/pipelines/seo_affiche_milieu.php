@@ -16,11 +16,11 @@ function seo_affiche_milieu($vars) {
 	
 	$config = unserialize($GLOBALS['meta']['seo']);
 	
-	// If it's a rebrique
+	// Rubrique
 	if ( $vars["args"]["exec"] == 'naviguer' && $vars["args"]["id_rubrique"] != '') {
 		$type_object = 'rubrique';
 		$id_object   = $vars["args"]["id_rubrique"];
-	// If it's an article
+	// Article
 	} elseif ( $vars["args"]["exec"] == 'articles' && $vars["args"]["id_article"] != '') {
 		$type_object = 'article';
 		$id_object   = $vars["args"]["id_article"];
@@ -98,4 +98,3 @@ function seo_affiche_milieu($vars) {
 	
 	return $vars;
 }
-

@@ -15,7 +15,7 @@ function seo_ajouter_onglets($flux) {
 
 	global $connect_statut, $connect_toutes_rubriques;
 
-	// seul les webmestres ont acces au bouton de configuration
+	// seul les administrateurs globaux ont acces au bouton de configuration
 	if($connect_statut 	&& $connect_toutes_rubriques) {
 		if ($flux['args'] == 'configuration') {
 			$flux['data']['seo'] = new Bouton(_DIR_PLUGIN_SEO."img_pack/seo-24.png", _T("seo:seo"), generer_url_ecrire('seo_config'));
