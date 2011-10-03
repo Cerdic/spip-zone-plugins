@@ -1,4 +1,9 @@
 <?php
+/// @file
+/**
+ * Formulaire principal
+ *
+ */
 
 function formulaires_langonet_verifier_charger() {
 	return array('verification' => _request('verification'),
@@ -19,23 +24,26 @@ function formulaires_langonet_verifier_verifier() {
 	return $erreurs;
 }
 
+
+
+///Recuperation des champs du formulaire
+///  $verification -> type de verification
+///                  'definition' ou 'utilisation'
+///  $rep          -> nom du repertoire parent de lang/
+///                   'langonet' pour 'langonet/lang/'
+///                   correspond generalement au 'nom' du plugin
+///  $module       -> prefixe du fichier de langue
+///                   'langonet' pour 'langonet_fr.php'
+///                   parfois different du 'nom' du plugin
+///  $langue       -> index du nom de langue
+///                   'fr' pour 'langonet_fr.php'
+///  $ou_langue    -> chemin vers le fichier de langue a verifier
+///                   'plugins/auto/langonet/lang'
+///  $ou_fichier   -> racine de l'arborescence a verifier
+///                   'plugins/auto/langonet'
+
 function formulaires_langonet_verifier_traiter() {
 
-	// Recuperation des champs du formulaire
-	//   $verification -> type de verification
-	//                   'definition' ou 'utilisation'
-	//   $rep          -> nom du repertoire parent de lang/
-	//                    'langonet' pour 'langonet/lang/'
-	//                    correspond generalement au 'nom' du plugin
-	//   $module       -> prefixe du fichier de langue
-	//                    'langonet' pour 'langonet_fr.php'
-	//                    parfois different du 'nom' du plugin
-	//   $langue       -> index du nom de langue
-	//                    'fr' pour 'langonet_fr.php'
-	//   $ou_langue    -> chemin vers le fichier de langue a verifier
-	//                    'plugins/auto/langonet/lang'
-	//   $ou_fichier   -> racine de l'arborescence a verifier
-	//                    'plugins/auto/langonet'
 	$verification = _request('verification');
 	$ou_fichier = _request('dossier_scan');
 	if ($verification != 'fonction_l') {
@@ -75,14 +83,15 @@ function formulaires_langonet_verifier_traiter() {
 		// Verification et formatage des resultats pour affichage
 		$retour = array();
 		$resultats = $langonet_verifier_items($ou_fichier);
+		$langue = 'fr'; // trouver comment generaliser
 	}
 
-	// Traitement des résultats
+	// Traitement des resultats
 	if ($resultats['erreur']) {
 		$retour['message_erreur'] = $resultats['erreur'];
 	}
 	else {
-		$retour = formater_resultats($verification, $resultats, $corrections);
+		$retour = formater_resultats($verification, $resultats, $corrections, $langue);
 	}
 	$retour['editable'] = true;
 	return $retour;
@@ -97,23 +106,23 @@ function formulaires_langonet_verifier_traiter() {
  * @return array
  */
 
-// $resultats    => tableau des resultats (11 sous-tableaux) :
-//                    ["module"] => intitule module
-//                    ["ou_fichier"] => rep plugin
-//                    ["langue"] => nom fichier de lang
-//                    ["item_non"][] => intitule item
-//                    ["fichier_non"][item][fichier utilisant][num de la ligne][] => extrait ligne
-//                    ["item_non_mais_nok"][] => intitule item
-//                    ["fichier_non_mais_nok"][item][fichier utilisant][num de la ligne][] => extrait ligne
-//                    ["definition_non_mais_nok"][item][] => nom fichier de lang
-//                    ["item_non_mais"][] => intitule item
-//                    ["fichier_non_mais"][item][fichier utilisant][num de la ligne][] => extrait ligne
-//                    ["definition_non_mais"][item][] => nom fichier de lang
-//                    ["item_peut_etre"][] => intitule partiel item
-//                    ["fichier_peut_etre"][item][fichier utilisant][num de la ligne][] => extrait ligne
-// $verification => type de verification effectuee (definition ou utilisation)
-// $corrections  => tableau des resultats de la generation du fichier de langue corrige
-function formater_resultats($verification, $resultats, $corrections) {
+/// $resultats    => tableau des resultats (11 sous-tableaux) :
+///                    ["module"] => intitule module
+///                    ["ou_fichier"] => rep plugin
+///                    ["langue"] => nom fichier de lang
+///                    ["item_non"][] => intitule item
+///                    ["fichier_non"][item][fichier utilisant][num de la ligne][] => extrait ligne
+///                    ["item_non_mais_nok"][] => intitule item
+///                    ["fichier_non_mais_nok"][item][fichier utilisant][num de la ligne][] => extrait ligne
+///                    ["definition_non_mais_nok"][item][] => nom fichier de lang
+///                    ["item_non_mais"][] => intitule item
+///                    ["fichier_non_mais"][item][fichier utilisant][num de la ligne][] => extrait ligne
+///                    ["definition_non_mais"][item][] => nom fichier de lang
+///                    ["item_peut_etre"][] => intitule partiel item
+///                    ["fichier_peut_etre"][item][fichier utilisant][num de la ligne][] => extrait ligne
+/// $verification => type de verification effectuee (definition ou utilisation)
+/// $corrections  => tableau des resultats de la generation du fichier de langue corrige
+function formater_resultats($verification, $resultats, $corrections, $langue) {
 
 	include_spip('inc/actions');
 
@@ -233,8 +242,8 @@ function formater_resultats($verification, $resultats, $corrections) {
 			}
 			$texte['non'] .= "</div><br />\n";
 			$texte['non'] .= bouton_action(_T('langonet:bouton_corriger_definition'), 
-											generer_action_auteur('langonet_telecharger', $corrections['fichier']),
-											"", "", _T('langonet:bulle_corriger_definition'));
+							generer_action_auteur('langonet_telecharger', $corrections['fichier']),
+							"", "", _T('langonet:bulle_corriger_definition'));
 			$texte['non'] .= "</div>\n";
 		}
 		else {
@@ -286,7 +295,7 @@ function formater_resultats($verification, $resultats, $corrections) {
 	}
 
 	// Generation du fichier de log contenant le texte complet des resultats
-	$ok = creer_log($verification, $resultats, $texte, $log_fichier);
+	$ok = creer_log($verification, $resultats, $texte, $log_fichier, $langue);
 	if (!$ok) {
 		$retour['message_erreur'] .= _T('langonet:message_nok_fichier_log');
 		spip_log("echec de creation du fichier $log_fichier", "langonet");
@@ -309,11 +318,11 @@ function formater_resultats($verification, $resultats, $corrections) {
  * @return string
  */
 
-// $type	  	=> le type de resultats (non, non_mais, non_mais_nok, peut_etre)
-// $tableau   	=> [item][fichier utilisant][num ligne][] => extrait ligne
-// $extra	  	=> [item][] => fichier de langue ou item est defini
-//			  	ou [md5(item)] => item, ou l'item est l'argument de _L()
-// $f_coloriser	=> la fonction de colorisation ou NULL si le plugin coloration_code n'est pas actif  
+/// $type	  	=> le type de resultats (non, non_mais, non_mais_nok, peut_etre)
+/// $tableau   	=> [item][fichier utilisant][num ligne][] => extrait ligne
+/// $extra	  	=> [item][] => fichier de langue ou item est defini
+///			  	ou [codage(item)] => item, ou l'item est l'argument de _L()
+/// $f_coloriser	=> la fonction de colorisation ou NULL si le plugin coloration_code n'est pas actif  
 function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 
 	include_spip('inc/layer');
@@ -321,29 +330,24 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 	// Detail des fichiers utilisant les items de langue
 	ksort($tableau);
 	foreach ($tableau as $item => $detail) {
-		if (preg_match(",[a-f0-9]{32},", $item))
-			// Cas de la verification fonction _L()
-			$item_affiche = htmlentities($extra[$item]);
-		else
-			$item_affiche = $item;
-		$liste_lignes .= bouton_block_depliable($item_affiche, false) .
+		$liste_lignes .= bouton_block_depliable($item, false) .
 		                 debut_block_depliable(false) .
 		                 "<p style=\"padding-left:2em;\">\n  ".
 		                 _T('langonet:texte_item_utilise_ou')."\n<br />";	
-		foreach ($tableau[$item] as $fichier => $ligne) {
+		foreach ($detail as $fichier => $lignes) {
 			$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier. "</span><br />\n";
-			foreach ($tableau[$item][$fichier] as $ligne_n => $ligne_t) {
-				$L = intval($ligne_n+1);
+			foreach ($lignes as $ligne_n => $ligne_t) {
+				$L = sprintf("%04s", intval($ligne_n+1));
+				$T = '... '.$ligne_t[0].' ...';
 				if ($f_coloriser) {
 					// Traitement de la coloration de l'extrait. C'est la fonction de coloration qui s'occupe des
 					// entites html
 					$infos = pathinfo($fichier);
 					$extension = ($infos['extension'] == 'html') ? 'html4strict' : $infos['extension'];
-					$T = $f_coloriser('... '.$ligne_t[0].' ...',  $extension, 'code', 'span');
-				}
-				else
-					$T = '... '.htmlentities($ligne_t[0]).' ...';
-				$liste_lignes .= "\t\t" . '<code style="padding-left:4em;text-indent: -5em;">L.'. sprintf("%04s", $L) .' : '.$T. "</code><br />\n";
+					$T = $f_coloriser($T,  $extension, 'code', 'span');
+				} else $T = htmlspecialchars($T);
+
+				$liste_lignes .= "\t\t<code style='padding-left:4em;text-indent: -5em;'>L$L : $T</code><br />\n";
 			}
 		}
 		$liste_lignes .= "</p>";
@@ -354,29 +358,84 @@ function afficher_lignes($type, $tableau, $extra=array(), $f_coloriser) {
 				$liste_lignes .= "\t<span style=\"font-weight:bold;padding-left:2em;\">" .$fichier_def. "</span><br />\n";
 			}
 			$liste_lignes .= "</p>\n";
-		}
-		else
-			if ($type == 'non_mais_nok') {
+		} elseif ($type == 'non_mais_nok') {
 				$liste_lignes .= "<p style=\"padding-left:2em;\">  " . _T('langonet:texte_item_non_defini') . "</p>\n<br />\n";
-			}
+		}
 		$liste_lignes .= fin_block();
 	}
 
 	return $liste_lignes;
 }
 
+/// Construit un script Shell s'appliquant sur les fichiers contenant _L
+/// et affichant les ajouts au fichier de langue de ce qu'on evacue
+
+function evacue_L($resultats, $ou, $langue)
+{
+	$prefix = (strpos($ou, 'plugins') !== false) 
+		? (strtolower(basename($ou)) .':') : '';
+
+	$sed = $items = array();
+	foreach ($resultats['fichier_non'] as $index => $val) {
+		$val = array_shift($val);
+		$val = array_shift($val);
+		$val = array_shift($val);
+		// gestion des backslash imparfaite, mais c'est deja ca
+		if (preg_match(_LANGONET_FONCTION_L, $val, $m))
+			$occ = str_replace('\\', '.', $m[1]);
+		elseif (preg_match(_LANGONET_FONCTION_L2, $val, $m))
+			$occ = $m[1];
+		else continue;
+		// Un item avec $ est intraduisible.
+		if (strpos($occ, '$') !== false)  continue;
+		$items[$index]= $m[1];
+		$occ = str_replace('%', '\\%', $occ);
+		$cite = "s%_L *( *.$occ *.%_T('$prefix$index'%;";
+		$sed[$cite]=strlen($occ); 
+	}
+
+	// Trier par ordre decroissant des longueurs des items a remplacer:
+	// "truc_x" doit etre traite avant "truc"
+	arsort($sed);
+
+	// Lister les fichiers concernes
+	$files = array();
+	foreach ($resultats["fichier_non"] as $j) {
+		foreach($j as $f => $l) $files[$f]= str_replace(_DIR_RACINE . $ou, '', $f);
+	}
+	include_spip('inc/langonet_generer_fichier');
+	$producteur = "Produit automatiquement par le plugin LangOnet collectant les appels de la fonction _L";
+	$items = produire_fichier_langue($langue, $prefix, $items, $producteur);
+	return "echo executer ce script dans $ou\n" .
+		'if [ "$*" == "mv" ]; then comm=mv; else comm=diff; fi' .
+		"\nfor i in " .
+		join(" ", $files) .
+		"\ndo\nr=\$(basename \$i)\nsed \"\n" .
+		join("\n", array_keys($sed)) .
+		"\n\" \$i > /tmp/\$r\n\$comm /tmp/\$r \$i\ndone\n" .
+	  	"\necho \"****  A mettre en fichier de langue (sans \\ devant \$) ***\"\n\n" .
+		"cat <<-EOF\n" .
+		str_replace('$', '\$', $items) .
+	  	"\nEOF" .
+		"\n\nif [ \"$*\" != 'mv' ]; then echo \"Si correct, rappeler ce script avec 'mv' comme argument\"; fi";
+}
+
 /**
- * Cree le fichier de log avec le texte des resultats
+ * Cree le fichier de log avec le texte des resultats.
+ * Dans le cas _L cree un shell-script a executer.
  *
  * @param string $verification
  * @param array $resultats
  * @param string $texte
  * @param string &$log_fichier (nom du fichier cree retourne par reference)
+ * @param string $langue
  * @return boolean
  */
-function creer_log($verification, $resultats, $texte, &$log_fichier) {
+
+function creer_log($verification, $resultats, $texte, &$log_fichier, $langue) {
 	// Fichier de log dans tmp/langonet/
-	$log_prefixe = ($verification == 'fonction_l') ? str_replace("/", "%", $resultats['ou_fichier']) : basename($resultats['langue'], '.php') . '_';
+	$ou =  $resultats['ou_fichier'];
+	$log_prefixe = ($verification == 'fonction_l') ? str_replace("/", "%", $ou) : basename($resultats['langue'], '.php') . '_';
 	$log_nom = $log_prefixe . $verification[0] . '_' . date("Ymd_His").'.log';
 	$log_rep = sous_repertoire(_DIR_TMP, "langonet");
 	$log_rep = sous_repertoire($log_rep, "verification");
@@ -385,52 +444,66 @@ function creer_log($verification, $resultats, $texte, &$log_fichier) {
 
 	// Texte du fichier en UTF-8
 	include_spip('inc/langonet_utils');
-	// -- En-tete resumant la verification
-	$log_texte = "/* *****************************************************************************\n" .
-	" * LangOnet : " . entite2utf(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s'))))."\n" .
-	" * *****************************************************************************\n" .
-	" * " . entite2utf(_T('langonet:label_verification')) . " : " . entite2utf(_T('langonet:label_verification_'.$verification)) . "\n";
-	if ($verification != 'fonction_l') {
-		$log_texte .= " * " . entite2utf(_T('langonet:label_module')) . " : " . entite2utf($resultats['module']) . "\n" .
-		" * " . entite2utf(_T('langonet:label_fichier_verifie')) . " : " . entite2utf($resultats['langue']) . "\n";
-	}
-	$log_texte .= " * " . entite2utf(_T('langonet:label_arborescence_scannee')) . " : " . entite2utf($resultats['ou_fichier']) . "\n" .
-	" * *****************************************************************************\n" .
-	" * " . entite2utf(_T('langonet:label_erreur')) . " : " . strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok'])) . "\n";
-	if ($verification != 'fonction_l') {
-		$log_texte .= " * " . entite2utf(_T('langonet:label_avertissement')) . " : " . strval(count($resultats['item_non_mais'])+count($resultats['item_peut_etre'])) . "\n";
-	}
-	$log_texte .= " * *****************************************************************************/\n";
 
-	// -- Texte des resultats: erreur (non definis ou non utilises)
-	$log_texte .= "\n\n/* *****************************************************************************\n" .
-	" * " . entite2utf(_T('langonet:entete_log_erreur_'.$verification)) . "\n" .
-	" * *****************************************************************************/\n" .
-	texte2log($texte['non']);
+	$sep = str_repeat('*', 77);
+
+	// -- En-tete resumant la verification
+	$log_texte = "# $sep\n# LangOnet : " . 
+	  entite2utf(_T('langonet:entete_log_date_creation', array('log_date_jour' => affdate(date('Y-m-d H:i:s')), 'log_date_heure' => date('H:i:s')))) .
+	  "\n# $sep\n# " .
+	  entite2utf(_T('langonet:label_verification')) . " : " .
+	  entite2utf(_T('langonet:label_verification_'.$verification)) .
+	  "\n";
+
+	if ($verification != 'fonction_l') {
+		$log_texte .= " * " . 
+		  entite2utf(_T('langonet:label_module')) . " : " .
+		  entite2utf($resultats['module']) . "\n# " .
+		  entite2utf(_T('langonet:label_fichier_verifie')) . " : " .
+		  entite2utf($resultats['langue']) . "\n";
+	}
+
+	$log_texte .= "\n# " .
+	  entite2utf(_T('langonet:label_arborescence_scannee')) . " : " .
+	  entite2utf($resultats['ou_fichier']) . 
+	  "\n# $sep\n# " .
+	  entite2utf(_T('langonet:label_erreur')) . " : " .
+	  strval(count($resultats['item_non'])+count($resultats['item_non_mais_nok'])) .
+	  "\n# $sep\n";
+
+	if ($verification != 'fonction_l') {
+		$log_texte .= "\n# " . entite2utf(_T('langonet:label_avertissement')) . " : " . strval(count($resultats['item_non_mais'])+count($resultats['item_peut_etre'])) . "\n";
+
+		// -- Texte des resultats: erreur (non definis ou non utilises)
+		$log_texte .= "\n# $sep\n * " .
+		  entite2utf(_T('langonet:entete_log_erreur_'.$verification)) .
+		  "\n# $sep\n" .
+		  texte2log($texte['non']);
+	}
+
+	if ($verification == 'definition') {
 
 	// -- Texte des resultats: erreur (non definis mais n'appartenant pas au module en cours de verification)
-	if ($verification == 'definition') {
-		$log_texte .= "\n\n/* *****************************************************************************\n" .
-		" * " . entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) . "\n" .
-		" * *****************************************************************************/\n" .
-		texte2log($texte['non_mais_nok']);
-	}
+
+		$log_texte .= "\n\n# $sep\n# " . 
+		  entite2utf(_T('langonet:entete_log_erreur_definition_nonmais')) .
+		  "\n# $sep\n" .
+		  texte2log($texte['non_mais_nok']);
 
 	// -- Texte des resultats: avertissement (definis mais dans un autre module)
-	if ($verification == 'definition') {
-		$log_texte .= "\n\n/* *****************************************************************************\n" .
-		" * " . entite2utf(_T('langonet:entete_log_avertissement_nonmais')) . "\n" .
-		" * *****************************************************************************/\n" .
-		texte2log($texte['non_mais']);
+		$log_texte .= "\n\n# $sep\n# " . 
+		  entite2utf(_T('langonet:entete_log_avertissement_nonmais')) .
+		  "\n# $sep\n" .
+		  texte2log($texte['non_mais']);
 	}
 
 	// -- Texte des resultats: avertissement (non definis ou non utilises sans certitude)
 	if ($verification != 'fonction_l') {
-		$log_texte .= "\n\n/* *****************************************************************************\n" .
-		" * " . entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . "\n" .
-		" * *****************************************************************************/\n" .
+		$log_texte .= "\n\n# $sep\n# " . 
+		  entite2utf(_T('langonet:entete_log_avertissement_peutetre_'.$verification)) . 
+		  "\n# $sep\n" .
 		texte2log($texte['peut_etre']);
-	}
+	} else $log_texte .= evacue_L($resultats, $ou, $langue);
 
 	$ok = ecrire_fichier($log_fichier, $log_texte);
 	return $ok;
