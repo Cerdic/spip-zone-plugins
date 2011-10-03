@@ -17,7 +17,7 @@ define('_DIR_PLUGIN_ACTIJOUR',(_DIR_PLUGINS.end($p)));
 	# style + js
 	function actijour_header_prive($flux) {
 		$exec = _request('exec');
-		if(ereg('^(actijour_).*',$exec)) {
+		if(preg_match('@^(actijour_).*@i',$exec)) {
 		$flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_PLUGIN_ACTIJOUR.'actijour_styles.css" />'."\n";
 		$flux .= '<script type="text/javascript" src="'._DIR_PLUGIN_ACTIJOUR.'func_js_acj.js"></script>'."\n";
 		}

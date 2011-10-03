@@ -605,7 +605,7 @@ if ($GLOBALS['accepte_svg']) {
 					echo http_img_rien($largeur, 1, 'background-color:#333333;');
 					echo http_img_rien($largeur, $difference, '', $tagtitle);
 					echo http_img_rien($largeur,1,"background-color:$couleur_foncee;");
-					if (ereg("-01",$key)){ // janvier en couleur foncee
+					if (preg_match("-01",$key)){ // janvier en couleur foncee
 					  echo http_img_rien($largeur,$hauteur,"background-color:$couleur_foncee;", $tagtitle);
 					} 
 					else {
@@ -615,7 +615,7 @@ if ($GLOBALS['accepte_svg']) {
 				else if ($hauteur_moyenne < $hauteur) {
 					$difference = ($hauteur - $hauteur_moyenne) -1;
 					echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
-					if (ereg("-01",$key)){ // janvier en couleur foncee
+					if (preg_match("-01",$key)){ // janvier en couleur foncee
 						$couleur =  $couleur_foncee;
 					} 
 					else {
@@ -627,7 +627,7 @@ if ($GLOBALS['accepte_svg']) {
 				}
 				else {
 				  echo http_img_rien($largeur,1,"background-color:$couleur_foncee;", $tagtitle);
-					if (ereg("-01",$key)){ // janvier en couleur foncee
+					if (preg_match("-01",$key)){ // janvier en couleur foncee
 					  echo http_img_rien($largeur, $hauteur, "background-color:$couleur_foncee;", $tagtitle);
 					} 
 					else {

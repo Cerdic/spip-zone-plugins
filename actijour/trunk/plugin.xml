@@ -8,7 +8,7 @@
 	</nom>
 	<icon>img_pack/activ_jour.gif</icon>
 	<auteur>scoty@koakidi.com, ordilibre@yahoo.fr</auteur>
-	<version>2.1.0</version>
+	<version>2.1.1</version>
 	<etat>dev</etat>
 	<description>
 		<multi>
@@ -18,7 +18,7 @@
 		</multi>
 	</description>
 	<prefix>actijour</prefix>
-	<lien>http://www.koakidi.com/spip.php?article205</lien>
+	<lien>http://www.spip-contrib.net/Activite-du-jour</lien>
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>actijour_pipe.php</inclure>
