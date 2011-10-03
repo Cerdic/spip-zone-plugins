@@ -8,27 +8,28 @@
 	// $LastChangedBy$
 	// $LastChangedDate$
 	 -->
-	<nom>Barre d'accessibilit&eacute; (BarrAc)</nom>
+	<nom>BarrAc</nom>
+	<slogan>Barre d'accessibilit&#233;</slogan>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>1.03</version>
+	<version>1.3.1</version>
 	<version_base>0.01</version_base>
 
 	<etat>stable</etat>
 
 	<icon>images/barrac-02-64.png</icon>
 
-	<description><strong>BarrAc</strong> installe une barre d'accessibilit&eacute; en espace 
-   public. Cette barre d'accessibilit&eacute; permet :<br />
-   - de placer le curseur graphique en d&eacute;but de texte (le contenu) ;<br />
-   - de modifier la taille des caract&egrave;res ;<br />
-	- d'espacer les liens (url) inclus dans le texte ;<br />
-   - d'encadrer le texte ;<br />
-   - d'inverser les couleurs de la page ;<br />
-   - de d&eacute;colorer la page.<br />
-	Ces actions peuvent &ecirc;tre effectu&eacute;es automatiquement (par d&eacute;faut) 
-	ou personnalis&eacute;es via une feuille de style CSS adapt&eacute;e (conseill&eacute;). </description>
+	<description>Ce plugin installe une barre d'accessibilit&#233; en espace public. Cette barre d'accessibilit&#233; permet :
+-* de placer le curseur graphique en d&#233;but de texte (le contenu)
+-* de modifier la taille des caract&#233;res
+-* d'espacer les liens (url) inclus dans le texte
+-* d'encadrer le texte
+-* d'inverser les couleurs de la page
+-* de d&#233;colorer la page
 
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Barre-d-accessibilite-pour-SPIP]</lien>
+Ces actions peuvent &#234;tre effectu&#233;es automatiquement (par d&#233;faut) ou personnalis&#233;es via une feuille de style CSS adapt&#233;e (conseill&#233;)
+	</description>
+
+	<lien>http://www.quesaco.org/Barre-d-accessibilite-pour-SPIP</lien>
 	
 	<prefix>barrac</prefix>
 
@@ -61,6 +62,6 @@
 	</pipeline>
 
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>navigation</categorie>
 </plugin>
