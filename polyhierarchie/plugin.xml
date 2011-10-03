@@ -1,10 +1,14 @@
 <plugin>
-	<nom><multi>[fr]PolyHierarchie[en]PolyHierarchy</multi></nom>
+	<nom><multi>[fr]PolyHi&#233;rarchie[en]PolyHierarchy</multi></nom>
+	<slogan>
+		<multi>
+		[fr]Rattacher un article ou une rubrique &#224; plusieurs rubriques parentes
+		[en]Attach an article or a section on several parent sections.
+		</multi>
+	</slogan>
 	<icon>images/polyhier-128.png</icon>
-	<auteur>[Cedric Morin->http://www.yterium.com]
-_ &#169; 2009-2010
-	</auteur>
-	<licence>GPL</licence>
+	<auteur>[Cedric Morin->http://www.yterium.com]</auteur>
+	<licence>&#169; 2009-2010 GPL</licence>
 	<version>0.3.1</version>
 	<version_base>0.1.0</version_base>
 	<etat>test</etat>
@@ -12,7 +16,7 @@ _ &#169; 2009-2010
 	[fr]Plugin permettant de cr&#233;er des liens transversaux en rattachant des rubriques
 	et articles &#224; d'autres rubriques que leur parent direct.
 	[en]Plugin for creating cross-links by referencing sections
-	and articles to other sections that their their direct parent.
+	and articles to other sections that their direct parent.
 	</multi></description>
 	<lien>http://www.spip-contrib.net/Polyhierarchie</lien>
 	<prefix>polyhier</prefix>
@@ -62,7 +66,7 @@ _ &#169; 2009-2010
 		<nom>post_edition</nom>
 		<inclure>polyhier_pipeline.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.0.10;]' />
+ 	<necessite id='SPIP' version='[2.0.10;2.1.99]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
 	<categorie>navigation</categorie>
 </plugin>
