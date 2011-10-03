@@ -1,64 +1,30 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
-	<multi>
-	[fr]Recherche Etendue
-	[it]Ricerca avanzata
-	</multi>
+		<multi>
+		[fr]Recherche &#233;tendue
+		[it]Ricerca avanzata
+		</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	<multi>
-	[fr]
-	cedric.morin@yterium.com
-_ pdepaepe et Nicolas Steinmetz pour google_like
-_ Fil pour le panneau admin_index d'origine
-_ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
-	[it]
-	cedric.morin@yterium.com
-_ pdepaepe e Nicolas Steinmetz per google_like
-_ Fil per il pannello di amministrazione admin_index originale
-_ &#169; 2006 - Distribuito sotto licenza GNU/GPL	
-_ Traduzione italiana a cura di Diego Weisz
-	</multi>
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
+	<slogan>Outils pour l’indexation de la recherche</slogan>
+	<auteur>cedric.morin@yterium.com, pdepaepe et Nicolas Steinmetz pour google_like, Fil pour le panneau admin_index d'origine</auteur>
+	<licence>&#169; 2006 GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>stable</etat>
 	<description>
-	<multi>
-	[fr]
-	Plugin d'outils pour la recherche et l'indexation
-_ Panneaux de controle admin_index et index_tous
-_ Boucle INDEX
-_ Filtre google_like
-	[it]
-	Strumenti per la ricerca e l'indicizzazione
-_ Pannello di controllo admin_index e index_tous
-_ Ciclo INDEX
-_ Filtro google_like	
-	</multi>
+		<multi>
+		[fr]Le moteur de recherche de SPIP pour la partie publique utilise une table d’indexation. Pour &#233;viter une surcharge de calcul, l’analyse et le remplissage de cette table est r&#233;alis&#233;e en t&#226;che de fond lors des visites du site. La cons&#233;quence est que si vos pages sont peu visit&#233;es, alors la table d’indexation se remplit trop lentement, et votre recherche publique renvoit des r&#233;sultats incomplets.
+
+Le plugin « Recherche &#233;tendue » permet de g&#233;rer ce probl&#232;me, notamment pour forcer manuellement l’indexation de votre base.
+		[it]Strumenti per la ricerca e l'indicizzazione. Pannello di controllo admin_index e index_tous, ciclo INDEX, filtro google_like	
+		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/article2188.html</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	recherche_etendue_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	boucle_indexation.php
-	</fonctions>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	recherche_etendue.php
-	</fonctions>
+	<lien>http://www.spip-contrib.net/article2188.html</lien>
+	<options>recherche_etendue_options.php</options>
+	<fonctions>boucle_indexation.php</fonctions>
+	<fonctions>recherche_etendue.php</fonctions>
 	<install>inc/indexation_etendue.php</install>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	RechercheEtendue
-	</prefix>
+	<icon>img_pack/stock_book-alt.png</icon>
+	<prefix>RechercheEtendue</prefix>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
@@ -72,7 +38,6 @@ _ Filtro google_like
 		<nom>affiche_droite</nom>
 		<inclure>recherche_etendue_pipeline.php</inclure>
 	</pipeline>
-<!--	<necessite id="SPIP" version="[;1.925)" /> -->
-	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>navigation</categorie>
 </plugin>
