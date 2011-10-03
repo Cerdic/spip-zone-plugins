@@ -1,24 +1,21 @@
 <plugin>
- <nom>Google Ajax Search</nom>
- <version>0.1.1</version>
- <version_base>0.1.1</version_base>
- <etat>dev</etat>
- <auteur>[erational->http://www.erational.org] 
-_ &copy; 2007-2008 - Licence GPL</auteur>
- <description>
-    <multi>[fr]Permet d'ajouter un formulaire de recherche google dans votre squelette.
-_ Pour ajouter le formulaire de recherche dans vos squelettes: utiliser la balise: #FORMULAIRE_RECHERCHE_GOOGLE
-_ <br />
-_ {{Requis :}} Utiliser #INSERT_HEAD dans votre squelette
-_ {{R&eacute;f&eacute;rence :}} [API Google Search.->http://code.google.com/apis/ajaxsearch/documentation/reference.html]</multi></description> 
- <lien>http://www.spip-contrib.net/Plugin-Google-Ajax-Search</lien>
- <prefix>googleajaxsearch</prefix>
- <icon>img_pack/google_but.png</icon>
- <pipeline>
+	<nom>Google Ajax Search</nom>
+	<slogan>Un formulaire de recherche Google dans votre site</slogan>
+	<version>0.1.1</version>
+	<version_base>0.1.1</version_base>
+	<etat>dev</etat>
+	<auteur>[erational->http://www.erational.org]</auteur>
+	<licence>(c) 2007-2008 GPL</licence>
+	<description>Ce plugin permet d'ajouter un moteur de recherche suppl&#233;mentaire &#224; votre SPIP pour remplacer ou compl&#233;ter le moteur de recherche existant.. {{R&#233;f&#233;rence :}} [API Google Search->http://code.google.com/apis/ajaxsearch/documentation/reference.html]
+	</description> 
+	<lien>http://www.spip-contrib.net/Plugin-Google-Ajax-Search</lien>
+	<prefix>googleajaxsearch</prefix>
+	<icon>img_pack/google_but.png</icon>
+	<pipeline>
 		<nom>insert_head</nom>
 		<action>insert_head</action>
 		<inclure>googleajaxsearch_pipeline.php</inclure>
 	</pipeline>	
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 </plugin>
