@@ -18,9 +18,8 @@ function spipicious_upgrade($nom_meta_base_version,$version_cible){
 	if ((!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
 		include_spip('base/spipicious');
+		include_spip('base/create');
 		if (version_compare($current_version,'0.0','<=')){
-			include_spip('base/create');
-			include_spip('base/abstract_sql');
 			creer_base();
 			ecrire_meta($nom_meta_base_version,$current_version=$version_base,'non');
 

@@ -1,8 +1,6 @@
 <plugin>
 	<nom>spip.icio.us</nom>
-	<auteur>[kent1->kent1@arscenic.info]
-_ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://www.erational.org]
-	</auteur>
+	<auteur>[kent1->kent1@arscenic.info], [erational->http://www.erational.org]</auteur>
 	<slogan>
 		<multi>
 		[fr]Tagger tous les objets
@@ -12,7 +10,7 @@ _ R&#233;utilisation de code du plugin r&#233;alis&#233; par [erational->http://
 	<licence>
 		&#169; 2007-2011 - GNU/GPL v2
 	</licence>
-	<version>0.7.4</version>
+	<version>0.7.5</version>
 	<version_base>0.6.2</version_base>
 	<etat>stable</etat>
 	<description>
