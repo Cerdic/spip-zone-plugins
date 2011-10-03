@@ -1,34 +1,31 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>
-	[fr]Indexation
-	[it]Indicizzazione
-	</multi>
+	<nom>
+		<multi>
+		[fr]Indexation
+		[it]Indicizzazione
+		</multi>
 	</nom>
-	<auteur></auteur>
-	<version>
-	0.4
-	</version>
-	<etat>
-	dev
-	</etat>
-	<description>
-	Indexation du contenu pour acc&#233;l&#233;rer le moteur de recherche
-	<ul>
-	<li>exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]</li>
-	<li>Avec ses {extracteurs}, ce plugin permet d'indexer les fichiers PDF etc.</li>
-	</ul>
+	<slogan>
+		<multi>
+		[fr]Indexer la base de données
+		[it]Indice del database
+		</multi>
+	</slogan>
+	<auteur>Fil</auteur>
+	<version>0.4.0</version>
+	<version_base>0.4</version_base>
+	<etat>dev</etat>
+	<description>Indexation du contenu pour acc&#233;l&#233;rer le moteur de recherche
+-* exploite le mode FULLTEXT SEARCH IN BOOLEAN MODE de MySQL, Cf. [->http://dev.mysql.com/doc/refman/5.0/fr/fulltext-boolean.html]
+-* Avec ses {extracteurs}, ce plugin permet d'indexer les fichiers PDF etc.
+
+Ce plugin n’est plus en d&#233;veloppement actif, les efforts se tournant vers le plugin [Fulltext->http://www.spip-contrib.net/Fulltext] qui reprend le concept, mais de façon beaucoup plus performante.
 	</description>
-	<lien>http://www.spip-contrib.net/Le-plugin-Indexation</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-		indexation_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalcul de page -->
-		indexation_fonctions.php
-	</fonctions>
-	<prefix>
-	Indexation
-	</prefix>
+	<lien>http://www.spip-contrib.net/Le-plugin-Indexation</lien>
+	<options>indexation_options.php</options>
+	<fonctions>indexation_fonctions.php</fonctions>
+	<prefix>Indexation</prefix>
+	<install>base/indexation_upgrade.php</install>
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
@@ -38,11 +35,7 @@
 		<inclure>inc/indexation.php</inclure>
 	</pipeline>
 
-
-	<version_base>0.4</version_base>
-	<install>base/indexation_upgrade.php</install>
-
 	<chemin dir='' />
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 </plugin>
