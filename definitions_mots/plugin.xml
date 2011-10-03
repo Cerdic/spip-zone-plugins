@@ -1,54 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	D&eacute;finitions de mots clefs
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Arnault Pachot - [OpenStudio->http://www.openstudio.fr]
-	</auteur>
-	<version>
-	1.1
-	</version>
-	<etat>
-	test
-	</etat>
-	<description>
-	{{{Pr&eacute;sentation}}}
-Recherche chaque mot clef pr&eacute;sent dans le texte et propose un lien interactif vers sa d&eacute;finition.
+	<nom>D&#233;finitions de mots cl&#233;s</nom>
+	<slogan>Afficher les d&#233;finitions de mots cl&#233;s &#224; l’int&#233;rieur du texte</slogan>
+	<auteur>Arnault Pachot - [OpenStudio->http://www.openstudio.fr]</auteur>
+	<version>1.1.0</version>
+	<etat>test</etat>
+	<description>Ce plugin recherche chaque mot cl&#233; pr&#233;sent dans le texte et propose un lien interactif vers sa d&#233;finition. Une petite fen&#234;tre s'affiche alors &#224; l'int&#233;rieur du texte et pr&#233;sente un r&#233;sum&#233; de la d&#233;finition du mot cl&#233;. Le visiteur peut ensuite choisir de fermer cette fen&#234;tre ou bien d'en savoir plus sur le mot cl&#233; et d'afficher ainsi la d&#233;finition compl&#232;te. C'est la page {mot} qui sera alors appel&#233;e.
 
-Ce plugin a &eacute;t&eacute; developp&eacute; dans le cadre du projet {{Casa d'Art}} : site internet p&eacute;dagogique autour des m&eacute;tiers d'art du plateau de la Chaise-Dieu en Haute-Loire (Auvergne). 
+Ce plugin a &#233;t&#233; d&#233;velopp&#233; dans le cadre du projet {{Casa d'Art}} : site internet p&#233;dagogique autour des m&#233;tiers d'art du plateau de la Chaise-Dieu en Haute-Loire (Auvergne). 
 
-{{{Description}}}
-Ce plugin met automatiquement en surbrillance tous les mots clefs du site qui sont pr&eacute;sents dans un texte. Le visiteur du site est alors invit&eacute; &agrave; cliquer sur le mot clefs pour en afficher sa d&eacute;finition (r&eacute;sum&eacute;).
+(c) 2007 [Casa d'Art->http://www.casadart.fr] et [OpenStudio->http://www.openstudio.fr]
+	</description>
 
-Une petite fen&#234;tre s'affiche alors &agrave; l'interieur du texte et pr&eacute;sente un r&eacute;sum&eacute; de la d&eacute;finition du mot clefs. Le visiteur peut ensuite choisir de fermer cette fenetre ou bien d'en savoir plus sur le mot clefs et d'afficher ainsi la d&eacute;finition compl&#232;te. C'est la page {mot} qui sera alors appel&eacute;e.
+	<licence>GNU/GPL</licence>
 
-
-
-{{{Installation}}}
-- Installer le plugin en copiant le r&eacute;pertoire /definitions_mots &agrave; l'interieur du r&eacute;pertoire /plugins
-- activez le plugin depuis l'espace priv&eacute;
-- appelez le filtre {definitions_mots} dans vos squelettes lorsque vous souhaitez activer le plugin (pages sommaire, article, rubrique...etc...). Exemple : <code>[(#TEXTE|definitions_mots)]</code>
-
-{{{D&eacute;monstration}}}
-Vous trouverez un exemple d'utilisation de ce plugin sur le site de Casa d'Art : [->http://www.casadart.fr]
-
-{{{Licence}}}
-Licence GNU/GPL. 
-Copyright (c) 2007 [Casa d'Art->http://www.casadart.fr] &amp; [OpenStudio->http://www.openstudio.fr]
-
-</description>
-	<lien>http://www.spip-contrib.net/Afficher-les-definitions-de-mots</lien> <!-- URI de documentation -->
-	<prefix>
-	definitions
-	</prefix>
+	<lien>http://www.spip-contrib.net/Afficher-les-definitions-de-mots</lien>
+	<prefix>definitions</prefix>
 	<fonctions>definitions_mes_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>definitions_head.php</inclure>
 	</pipeline>
-	
-	
-	<necessite id="SPIP" version="[1.9.0;]" />
+
+	<necessite id="SPIP" version="[1.9.1;1.9.2]" />
 	<categorie>navigation</categorie>
 </plugin>
