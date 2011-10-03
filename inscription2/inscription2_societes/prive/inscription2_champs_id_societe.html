@@ -1,9 +1,17 @@
+[(#CONFIG{i2_societes/forme}|=={multiple}|oui)
+	#SET{multiple,oui}
+]
+#SET{societes_auteurs,#ARRAY}
+<BOUCLE_societes_auteurs(SOCIETES auteurs_liens){id_auteur}>
+[(#SET{societes_auteurs,[(#GET{societes_auteurs}|push{#ID_SOCIETE})]})]
+</BOUCLE_societes_auteurs>
+
 <li>
-	<label><:societe:societe:></label>
-	<select id='id_societe' class='text' style='width:auto'[(#CONFIG{i2_societes/forme}|=={multiple}|oui) name='id_societe&#91;&#93' multiple][(#CONFIG{i2_societes/forme}|=={multiple}|non) name='id_societe']>
-		<option value=''><:societe:societe_choisir:></option>
+	<label><:societe:societe:> #ENV{id_auteur}</label>
+	<select id='id_societe' class='text' style='width:auto'[(#GET{multiple}|oui) name='id_societe&#91;&#93' multiple][(#GET{multiple}|non) name='id_societe']>
+		[(#GET{multiple}|non)<option value=''><:societe:societe_choisir:></option>]
 		<BOUCLE_societe(SOCIETES){par nom}>
-			<option value='#ID_SOCIETE'[(#ID_SOCIETE|=={#ENV{val}}|oui) selected='selected']>#NOM</option>
+			<option value='#ID_SOCIETE'[(#ID_SOCIETE|in_array{[(#GET{societes_auteurs})]}|oui) selected='selected']>#NOM</option>
 		</BOUCLE_societe>
 	</select>
 </li>

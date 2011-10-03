@@ -6,8 +6,11 @@
 		&copy; Azerttyu et kent1 - 2009 - Distribu&eacute; sous licence GNU/LGPL
 	</auteur>
 	<version>
-		0.02
+		0.03
 	</version>
+	<version_base>
+		0.03
+	</version_base>
 	<etat>
 		dev
 	</etat>
@@ -33,6 +36,22 @@
 	</pipeline>
 	<pipeline>
 		<nom>affiche_droite</nom>
+		<inclure>i2_societes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_exceptions_des_champs_auteurs_elargis</nom>
+		<inclure>i2_societes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>i2_exceptions_chargement_champs_auteurs_elargis</nom>
+		<inclure>i2_societes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>editer_contenu_objet</nom>
+		<inclure>i2_societes_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>post_edition</nom>
 		<inclure>i2_societes_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>
