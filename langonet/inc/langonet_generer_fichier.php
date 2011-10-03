@@ -1,4 +1,5 @@
 <?php
+/// @file
 /**
  * Ecriture des fichiers de langue
  * 
@@ -34,7 +35,7 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 
 	$dir = sous_repertoire(_DIR_TMP,"langonet");
 	$dir = sous_repertoire($dir,"generation");
-	$producteur = "\n// Produit automatiquement par le plugin LangOnet a partir de la langue source $langue_source";
+	$producteur = "Produit automatiquement par le plugin LangOnet a partir de la langue source $langue_source";
 	$ok = ecrire_fichier_langue_php($dir, $langue_cible, $module, $source, $producteur);
 
 	if (!$ok) {
@@ -87,37 +88,49 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 	return $source;
 }
 
-// Produit un fichier de langues a partir d'un tableau (index => trad)
-// Si trad n'est pas une chaine mais un tableau, on le met en commentaire
+/// Produit un fichier de langues a partir d'un tableau (index => trad)
+/// Si trad n'est pas une chaine mais un tableau, on le met en commentaire
 
-function ecrire_fichier_langue_php($dir, $langue, $module, $items, $producteur='')
+function produire_fichier_langue($langue, $module, $items, $producteur='')
 {
-	$contenu = '<'.'?php' . "\n" . '
-// Ceci est un fichier langue de SPIP -- This is a SPIP language file'
-. $producteur . '
-// Module: ' . $module . '
-// Langue: ' . $langue . '
-// Date: ' . date('d-m-Y H:i:s') . '
-// Items: ' . count($items) . '
+	ksort($items);
+	$initiale = '';
+	$contenu = array();
+	foreach($items as $k => $v) {
+		if ($initiale != strtoupper($k[0])) {
+			$initiale = strtoupper($k[0]);
+			$contenu[]= "// $initiale";
+		}
+		if (!is_string($v))
+			$contenu[]= "/*\t" . $v[0] ."\n\t'" . $k . "' => '" . addslashes($v[1]) ."',*/\n"; 
+		else {
+			$v = addslashes($v);
+			$v = str_replace('\\\\n', "' . \"\\n\" .'", $v);
+			$contenu[]= "\t'" . $k . "' => '$v',";
+		}
+	}
+
+	return '<'.'?php' . "\n" . '
+/// @file
+/// Ceci est un fichier langue de SPIP -- This is a SPIP language file' . '
+/// ' . preg_replace(",\\n[/#]*,", "\n/// ", $producteur) . '
+/// Module: ' . $module . '
+/// Langue: ' . $langue . '
+/// Date: ' . date('d-m-Y H:i:s') . '
+/// Items: ' . count($items) . '
 
 if (!defined(\'_ECRIRE_INC_VERSION\')) return;
 
 $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
-';
-	ksort($items);
-	$initiale = '';
-	foreach($items as $k => $v) {
-		if ($initiale != strtoupper($k[0])) {
-			$initiale = strtoupper($k[0]);
-			$contenu .= "\n// $initiale";
-		}
-		if (is_string($v))
-			$contenu .= "\n\t'" . $k . "' => '" . addslashes($v) . "',";
-		else $contenu .= "\n/*\t" . $v[0] ."\n\t'" . $k . "' => '" . addslashes($v[1]) ."',*/\n"; 
-	}
-	$contenu .= "\n);\n?".'>';
+' .
+	  join("\n", $contenu)  .
+	  "\n);\n?".'>';
+}
 
+function ecrire_fichier_langue_php($dir, $langue, $module, $items, $producteur='')
+{
 	$nom = $dir . $module . "_" . $langue   . '.php';
-	return ecrire_fichier($nom, $contenu) ? $nom : false;
+	$c = produire_fichier_langue($langue, $module, $items, $producteur);
+	return ecrire_fichier($nom, $c) ? $nom : false;
 }
 ?>
