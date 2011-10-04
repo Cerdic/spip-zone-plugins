@@ -6,8 +6,8 @@
 	
 	<slogan>
 		<multi>
-		[fr]Outils pour cr&#233;er du faux texte
-		[en]Tools to create fake text
+		[fr]Outils pour cr&#233;er du faux texte dans les articles ou les squelettes.
+		[en]Tools to create fake text in templates or articles.
 		</multi>
 	</slogan>
 	
@@ -40,6 +40,8 @@
 
 	<fonctions>bolo_fonctions.php</fonctions>
 	
-	<categorie>outil</categorie>
+	<categorie>edition</categorie>
+	
+	<necessite id="SPIP" version='[1.9.0;]' />
 	
 </plugin>
