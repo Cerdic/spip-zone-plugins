@@ -40,7 +40,7 @@
 		<inclure>acronymes_config.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;2.1.99)" />
-	<necessite id="forms" version="[0.301;]" />
+	<necessite id="forms" version="[0.4.1;]" />
 	<chemin dir='' />
 	<categorie>edition</categorie>
 </plugin>
