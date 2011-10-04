@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Lire aussi...</nom>
-	<nom>Grouper des articler et proposer un lien "lire aussi..."</nom>
+	<slogan>Grouper des articler et proposer un lien "lire aussi..."</slogan>
 	<auteur>ARNO*</auteur>
 	<version>1.0.0</version>
 	<version_base>1.0</version_base>
@@ -18,7 +18,6 @@
 	</pipeline>
 	
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
-	
+	<necessite id="SPIP" version="[1.9.0;2.O.99]" />
 </plugin>
 
