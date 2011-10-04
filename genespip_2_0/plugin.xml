@@ -1,21 +1,22 @@
 <plugin>
     <nom>GeneSPIP</nom>
+    <slogan>Gestion de la g&#233;n&#233;alogie.</slogan>
     <auteur>Christophe RENOU</auteur>
-    <version>2.0</version>
+    <version>2.0.1</version>
     <version_base>0.2</version_base>
     <etat>test</etat>
-    <description>genespip pour SPIP 2.0</description>
+    <description>Permet de faire ça g&#233;n&#233;alogie sur un site, gestion des individu, lieu, ...</description>
     <prefix>genespip</prefix>
-    <icon>logo_genespip.png</icon>
+    <icon>logo_genespip-24.png</icon>
     <install>base/genespip_base.php</install>
 
 	<bouton id='genespip_bandeau' parent='bando_edition'>
-		<icone>logo_genespip.png</icone>
+		<icone>logo_genespip-16.png</icone>
 		<titre>genespip:genespip</titre>
 		<url>genespip</url>
 	</bouton>
 	<bouton id='genespip' parent='naviguer'>
-		<icone>logo_genespip.png</icone>
+		<icone>logo_genespip-24.png</icone>
 		<titre>genespip:genespip</titre>
 		<url>genespip</url>
 	</bouton>
@@ -31,7 +32,7 @@
 
 	<fonctions>genespip_fonctions.php</fonctions>
 
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
 	<necessite id="CFG" version='[1.15.2;]' />
 	<traduire gestionnaire="salvatore" module="genespip" reference="fr" />
 </plugin>

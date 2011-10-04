@@ -105,7 +105,6 @@
 
 	//********************Gestion des fiches**************
 	//Création fiche
-
 	function genespip_ajout_fiche() {
 		$date_update=date("Y-m-d H:i:s");
 		$date_update2=date("Y-m-d");
