@@ -1,13 +1,14 @@
 <plugin>
-	<nom>Liste d'articles complètes</nom>
+	<nom>Listes d'articles compl&#232;tes</nom>
+	<slogan>Modifier la pr&#233;sentation des listes d’articles dans l’espace priv&#233;</slogan>
 	<auteur>ARNO*</auteur>
 	<licence>GPL v3</licence>
 	<description>
-		Dans l'espace priv&eacute;, les listes d'articles affich&eacute;es sont compl&eacute;t&eacute;es: surtitre et titre, nombre de visites et popularit&eacute;, logos plus gros.
+		Dans l'espace priv&#233;, les listes d'articles affich&#233;es sont compl&#233;t&#233;es : surtitre et titre, nombre de visites et popularit&#233;, logos plus gros.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/plugin-listes-d-articles-completes</lien>
 
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<etat>stable</etat>
 
 	<prefix>listes_articles_completes</prefix>
@@ -19,6 +20,6 @@
 		<inclure>listes_articles_completes.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
