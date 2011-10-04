@@ -22,6 +22,7 @@ function notation_en_etoile($nb, $id, $clicable=false){
 		$needjs = " notation_note_on_load";
 		$class = $clicable ? 'auto-submit-star' : 'star';
 		$disabled = $clicable ? '' : " disabled='disabled'";
+		$ret .= "<input name='notation-$id' type='radio' class='$class rating-cancel' value='-1'$checked$disabled />\n";
 		for ($i=1; $i<=notation_get_nb_notes(); $i++){
 			$checked = ($i==$nb) ? " checked='checked'" : "";
 			$ret .= "<input name='notation-$id' type='radio' class='$class' value='$i'$checked$disabled />\n";
