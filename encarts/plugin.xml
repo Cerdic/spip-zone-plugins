@@ -6,15 +6,17 @@
 
 	<licence>&#169; 2011 - GNU/LGPL</licence>
 
-	<version>1.3</version>
+	<version>1.3.0</version>
 	
 	<version_base>1.0</version_base>
+	
+	<slogan><multi>[fr]Agr&eacute;mente les articles SPIP d'encarts (ou "notes de marge", ou encore "encadr&eacute;s").[en]Enhances SPIP articles with aside notes (or framed texts).</slogan></slogan>
 
 	<icon>img/frame_edit-32.png</icon>
 
-	<etat>dev</etat>
+	<etat>stable</etat>
 
-	<description><multi>[fr]Permet aux r&eacute;dacteurs d'ajouter des encarts (ou encadr&eacute;s) dans leurs articles, et aux graphistes les placer n'importe o&ugrave; dans leurs mises-en-page.[en]Allows authors to add framed texts int their articles, and grpahists to place those frames anywher in their layouts.</multi></description>
+	<description><multi>[fr]Permet aux r&eacute;dacteurs d'ajouter des encarts (ou encadr&eacute;s) dans leurs articles, et aux graphistes les placer n'importe o&ugrave; dans leurs mises-en-page.[en]Allows authors to add framed texts int their articles, and graphists to place those frames anywher in their layouts.</multi></description>
 
 	<prefix>encarts</prefix>
 
@@ -53,7 +55,7 @@
 
 	<categorie>edition</categorie>
 
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="afficher_objets" version="[1.1;]" />
 	<necessite id="saisies" version="[1.8;]" />
 
