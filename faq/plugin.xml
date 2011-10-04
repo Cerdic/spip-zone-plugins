@@ -1,6 +1,6 @@
 <plugin>
 	<nom>D&#233;finitions et FAQ</nom>
-	<Slogan>Mettre en valeur les d&#233;finitions et Foire aux Questions</Slogan>
+	<slogan>Mettre en valeur les d&#233;finitions et Foire aux Questions</slogan>
 	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
 	<icon>themes/spip/images/faq-32.png</icon>
 	<licence>(c) 2009 GPL</licence>
