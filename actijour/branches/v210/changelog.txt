@@ -1,3 +1,4 @@
+* 06/02/2011 - > 2.1 Adaptation pour Spip 2.1
 * 09/06/09 -> 2.0 Adaptation pour spip 2.0
 * 08/05/08 -> 1.55 ************************************************************
 	TODO .. completer trad [ES], [EN]

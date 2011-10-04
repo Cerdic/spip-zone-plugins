@@ -1,11 +1,13 @@
 <?php
 /*
 +--------------------------------------------+
-| ACTIVITE DU JOUR v. 2.0 - 06/2009 - SPIP 2.x
+| ACTIVITE DU JOUR v. 2.1 - 06/2011 - SPIP 2.1
 +--------------------------------------------+
 | H. AROUX . Scoty . koakidi.com
 | D. Chiche . pour la maj 2.0
+| T. Payet . pour la maj 2.1
 | Script certifie KOAK2.0 strict, mais si !
+
 +--------------------------------------------+
 | date de derniere connexion de tous spip-auteurs
 +--------------------------------------------+
