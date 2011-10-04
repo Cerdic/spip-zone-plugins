@@ -10,7 +10,7 @@ $GLOBALS['extracteur']['pdf'] = 'extracteur_pdf';
 // dans le charset iso-8859-1
 
 // http://doc.spip.org/@extracteur_pdf
-function extracteur_pdf($fichier, &$charset, $bin, $opt = '') {
+function extracteur_pdf($fichier, &$charset, $bin='', $opt = '') {
   $charset = 'iso-8859-1';
 	
   $texte = '';

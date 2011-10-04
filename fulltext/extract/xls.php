@@ -17,7 +17,7 @@ $GLOBALS['extracteur']['xls'] = 'extracteur_xls';
 // Ce n'est pas forcemment l'ideal mais l'indexation semble fonctionner
 
 // http://doc.spip.org/@extracteur_xls
-function extracteur_xls($fichier, &$charset, $bin, $opt = '') {
+function extracteur_xls($fichier, &$charset, $bin='', $opt = '') {
   $charset = 'iso-8859-1';
 	
   $texte = '';

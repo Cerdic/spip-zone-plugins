@@ -13,7 +13,7 @@ $GLOBALS['extracteur']['ppt'] = 'extracteur_ppt';
 // Exemple pour utilisation en local sous Windows : define("_FULLTEXT_PPT_EXE","C:\catdoc\catppt.exe");
 // Exemple pour utilisation sous Linux : define("_FULLTEXT_PPT_EXE","/usr/local/bin/catppt");
 // http://doc.spip.org/@extracteur_ppt
-function extracteur_ppt($fichier, &$charset, $bin, $opt = '') {
+function extracteur_ppt($fichier, &$charset, $bin='', $opt = '') {
   $charset = 'iso-8859-1';
 	
   $texte = '';

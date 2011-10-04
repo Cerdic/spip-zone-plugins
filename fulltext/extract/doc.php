@@ -14,14 +14,14 @@ $GLOBALS['extracteur']['doc'] = 'extracteur_doc';
 // Exemple d'option pour extraction de .doc au format Windows vers format iso-8859-1  : define("_FULLTEXT_DOC_CMD_OPTIONS","-s cp1252 -d 8859-1 ");
 // Les anciens developpements pour les autres librairies (metamail, wvText, antiword) ont ete conservee.
 // http://doc.spip.org/@extracteur_doc
-function extracteur_doc($fichier, &$charset, $bin, $opt = '') {
+function extracteur_doc($fichier, &$charset, $bin='', $opt = '') {
 
 	$charset = 'iso-8859-1';
 	if ((defined('_FULLTEXT_DOC_EXE'))||($bin)) {
 		$exe = $bin ? $bin : _FULLTEXT_DOC_EXE;
 	} else {
 		// TODO : essayer de trouver tout seul l'executable
-		spip_log('Erreur extraction DOC : Il faut spécifier _FULLTEXT_DOC_EXE dans mes_options.php ou dans le panneau de configuration');
+		spip_log('Erreur extraction DOC : Il faut spï¿½cifier _FULLTEXT_DOC_EXE dans mes_options.php ou dans le panneau de configuration');
 		return false;
 	}
 	if ((defined('_FULLTEXT_DOC_CMD_OPTIONS') && '' != _FULLTEXT_DOC_CMD_OPTIONS)||($opt)) {
@@ -35,7 +35,7 @@ function extracteur_doc($fichier, &$charset, $bin, $opt = '') {
 	$sortie = exec($cmd, $output, $return_var); 
 	if($return_var != 0){
 	    if ($return_var == 3) {
-	      $erreur = "Le contenu de ce fichier DOC est protégé.";
+	      $erreur = "Le contenu de ce fichier DOC est protï¿½gï¿½.";
 		  spip_log('Erreur extraction '.$fichier.' protege (code '.$return_var.') : '.$erreur, 'extract');
 		  return $return_var;
 	    }else{
