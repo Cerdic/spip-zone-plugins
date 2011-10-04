@@ -2,7 +2,7 @@
 	<nom>Langue pr&#233;f&#233;&#233;e</nom>
 	<slogan>Diriger l'internaute vers le secteur de sa langue</slogan>
 	<auteur>Nicolas Hoizey, Chryjs, BobCaTT</auteur>
-	<licence>&#169; 2007-2009 GNU/GPL</auteur>
+	<licence>&#169; 2007-2009 GNU/GPL</licence>
 	<version>0.4.0</version>
 	<etat>test</etat>
 	<icon>langue-preferee.png</icon>
