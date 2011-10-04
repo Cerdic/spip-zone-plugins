@@ -1,15 +1,14 @@
 <plugin>
-	<nom>Lire aussi... (groupes d'articles)</nom>
+	<nom>Lire aussi...</nom>
+	<nom>Grouper des articler et proposer un lien "lire aussi..."</nom>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<version_base>1.0</version_base>
 	<etat>stable</etat>
 	<description>
-		Ce plugin permet de grouper des articles, 
-		afin de proposer ponctuellement des articles en "lire aussi..." 
-		sans avoir &agrave; cr&eacute;er des mots-cl&eacute;s &agrave; chaque occasion.
+		Ce plugin permet de grouper des articles, afin de proposer ponctuellement des articles en "lire aussi..." sans avoir &#224; cr&#233;er des mots-cl&#233;s &#224; chaque occasion.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-lire-aussi</lien>
 	<prefix>lire_aussi</prefix>
 	<install>base/lire_aussi_install.php</install>
 	<pipeline>
@@ -19,7 +18,7 @@
 	</pipeline>
 	
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	
 </plugin>
 
