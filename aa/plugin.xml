@@ -1,28 +1,22 @@
 <plugin>
 	<nom>
 		<multi>
-		[fr]Article accueil
-		[en]Article summary
+		[fr]Tutoriel CFG (Article accueil)
+		[en]CFG Tutorial (Article summary)
 		</multi>
 	</nom>
+	<slogan>Coder un plugin simple avec cfg</slogan>
 	<prefix>aa</prefix>
 	<version>1.0.1</version>
-	<etat>dev</etat>
+	<etat>experimental</etat>
 	<icon>plugin-24.gif</icon>
 	<categorie>navigation</categorie>
 
 	<auteur>cy_altern</auteur>
 	<licence>GNU/LGPL - (c) 2010</licence>
 
-	<slogan>Afficher un article sur la page de sommaire du site</slogan>
-	<description>
-Les &#233;l&#233;ments de l'article choisi dans l'interface de configuration seront affich&#233;s sur la page sommaire du site:
--* dans une balise <code><div id="aa"></code> si il en existe une dans le squelette {{sommaire.html}}.
--* sinon, pour le squelette Z ou le squelette par d&#233;faut (dist), juste avant la liste des derniers articles .
-
-Si vous utilisez un autre squelette et que l'article n'est pas affich&#233;, il faut ajouter la balise <code><div id="aa"></code> dans {{sommaire.html}}.
-		</description>
-	    <lien>http://www.spip-contrib.net/?article1605</lien>
+	<description>Ce plugin extra-simple (aa) est le résultat d'un [tutoriel de spip-contrib->http://www.spip-contrib.net/?article1605] ayant pour sujet l'apprentissage du plugin CFG, qui permet de gérer les paramètres de configuration d’un plugin de façon simple</description>
+	<icon>aa.png</icon>
 
 	<pipeline>
 		<nom>ajouter_boutons</nom>
