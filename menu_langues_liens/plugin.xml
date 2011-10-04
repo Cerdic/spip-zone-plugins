@@ -1,30 +1,30 @@
 <plugin>
 	<nom>
 		<multi>
-			[fr]Menu de langues sous forme de liens
+			[fr]Menu de langues avec liens
 			[en]Language menu as links
 		</multi>
 	</nom>
-	<auteur>
-		[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]
-	</auteur>
-	<licence>&#169; 2009 - GNU/GPL</licence>
+	<slogan>
+		<multi>
+		[fr]Afficher les langues sous forme de liens cliquables
+		[en]View languages ​​as clickable links
+		</multi>
+	</slogan>
+	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]</auteur>
+	<licence>&#169; 2009 GNU/GPL</licence>
 	<lien>http://www.spip-contrib.net/Menu-de-langues-sous-forme-de-liens</lien>
 	<version>1.0.2</version>
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Remplace le menu d&#233;roulant de langues par un menu clicable.
-
-Ce menu n'est affich&#233; que s'il y a au moins 2 langues vraiment utilis&#233;es dans le site.
-			[en]Replace the original language menu by a clickable menu.
-			
-This menu is displayed only if at least two languages are ​​actually used on the site.
+			[fr]Remplace le menu d&#233;roulant de langues par un menu cliquable. Ce menu n'est affich&#233; que s'il y a au moins 2 langues vraiment utilis&#233;es dans le site.
+			[en]Replace the original language menu by a clickable menu. This menu is displayed only if at least two languages are ​​actually used on the site.
 		</multi>
 	</description>
 	<prefix>mll</prefix>
 	<icon>img_pack/menu_langues_liens.png</icon>
 	<options>mll_options.php</options>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
