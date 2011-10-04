@@ -1,12 +1,18 @@
 <plugin>
 	<nom>Shoutbox</nom>
-	<slogan>Une bo&#238;te &#224; discussion</slogan>
+	<slogan>Un mini tchat avec messages persistants</slogan>
 	<version>0.2.0</version>
 	<auteur>Fil</auteur>
 	<etat>test</etat>
 	<lien>http://www.spip-contrib.net/Shoutbox-pour-SPIP</lien>
 	<prefix>shoutbox</prefix>
-	<description>Chaque objet du site peut avoir sa shoutbox, qui permet &#224; tout visiteur de laisser un commentaire rapide. Balise &lt;code&gt;#SHOUTBOX&lt;/code&gt;, ou &lt;code&gt;#SHOUTBOX{article,#ID_ARTICLE}&lt;/code&gt;</description>
+	<description>
+Chaque objet du site peut avoir sa shoutbox, qui permet &#224; tout visiteur de laisser un commentaire rapide. Contrairement au tchat classique :
+-* les messages shoutbox sont persistants, un nouveau venu pouvant voir les messages ant&#233;rieurs,
+-* et il n’y a pas de liste des personnes connectées.
+
+Utlisation : balise <code>#SHOUTBOX</code>, ou <code>#SHOUTBOX{article,#ID_ARTICLE}</code>
+	</description>
 	<icon>shoutbox.png</icon>
 	<version_base>0.1</version_base>
 	<install>base/shoutbox_upgrade.php</install>
