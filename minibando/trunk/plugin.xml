@@ -4,14 +4,14 @@
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<prefix>minibando</prefix>
-	<slogan>Un minibando pour un maximum de fonctionnalités !</slogan>
+	<slogan>Un minibando pour un maximum de fonctionnalit&#233;s !</slogan>
 	<description>
-	Un mini bandeau pour SPIP qui remplace les boutons d'administation.
+	Le plugin minibando remplace les boutons d’administration de SPIP par une barre d'outils qui reprend les &#233;l&#233;ments disponibles dans la navigation haute de l’espace priv&#233; de SPIP.
 	</description>
 	<lien>http://www.spip-contrib.net/minibando</lien>
 	<licence>GPL</licence>
 	<icon>images/minibando-64.png</icon>
-	<necessite id="SPIP" version="[3.0.0-dev;]" />
+	<necessite id="SPIP" version="[3.0.0-dev;3.0.99]" />
 	<categorie>navigation</categorie>
 	<traduire gestionnaire="salvatore" module="minibando" reference="fr" />
 </plugin>
