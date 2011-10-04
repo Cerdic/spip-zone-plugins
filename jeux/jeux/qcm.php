@@ -162,7 +162,7 @@ function qcm_affiche_la_question($indexJeux, $indexQCM, $corriger, $gestionPoint
   global $qcms, $qcm_score, $qcm_score_detaille;
   $indexQCM_1 = $indexQCM + 1;
   if (!$qcms[$indexQCM]['nbpropositions'] || !$qcms[$indexQCM]['maxscore']) 
-  	return "<div class=\"jeux_question\">".definir_puce()._T('jeux:erreur_syntaxe').'</div><br />';
+  	return "<div class=\"jeux_question\">".definir_puce()._T('jeux:erreur_syntaxe').'</div>';
 
   // Initialisation du code a retourner
   $nomVarSelect = "var{$indexJeux}_Q{$indexQCM}";
