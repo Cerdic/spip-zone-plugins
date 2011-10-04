@@ -1,30 +1,22 @@
 <plugin>
-  <nom> <!-- Nom du plugin -->
-  Memobox
-  </nom>
-  <auteur>        <!-- Auteur du plugin -->
-  [Renato Formato->mailto:renatoformato@virgilio.it]
-  </auteur>
-  <version>
-  0.1
-  </version>
-  <etat>
-  test
-  </etat>
-  <description>
-  <multi>[it]Mostra un box per consentire agli utenti di memorizzare i link preferiti del proprio sito
-	[en]A box to let your users store their favourite links of your own site
-        [fr]Une bo&icirc;te qui permet aux utilisateurs de m&eacute;moriser leurs liens pr&eacute;f&eacute;r&eacute;s sur votre site.
-  </multi>
-  </description>
+	<nom>Memobox</nom>
+	<slogan>M&#233;moriser les liens pr&#233;f&#233;r&#233;s</slogan>
+	<auteur>[Renato Formato->mailto:renatoformato@virgilio.it]</auteur>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[it]Mostra un box per consentire agli utenti di memorizzare i link preferiti del proprio sito
+		[en]A box to let your users store their favourite links of your own site
+		[fr]Une bo&#238;te qui permet aux utilisateurs de m&#233;moriser leurs liens pr&#233;f&#233;r&#233;s sur votre site.
+		</multi>
+	</description>
 	<lien></lien> <!-- URI de documentation -->
-  <prefix>
-  memobox
-  </prefix>
-  <pipeline>
-  	<nom>insert_head</nom>
-  	<inclure>memobox_pipelines.php</inclure>
-  </pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<prefix>memobox</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>memobox_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>navigation</categorie>
 </plugin>
