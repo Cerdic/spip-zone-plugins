@@ -4,15 +4,16 @@ include_spip('inc/meta');
 
 function formulaires_configurer_seo_webmaster_tools_charger_dist(){
 	global $visiteur_session;
+	
+	$config = unserialize($GLOBALS['meta']['seo']);
+	$valeurs = $config['webmaster_tools'];
+	$valeurs['webmaster_tools_id'] = $valeurs['id'];
+	
 	$valeurs['editable'] = true;
 	
 	if (!autoriser('configurer', 'configuration',$visiteur_session)) {
 		$valeurs['editable'] = false;
 	}
-	
-	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['webmaster_tools'];
-	$valeurs['webmaster_tools_id'] = $valeurs['id'];
 
 	return $valeurs;
 }

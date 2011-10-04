@@ -4,15 +4,16 @@ include_spip('inc/meta');
 
 function formulaires_configurer_seo_ganalytics_charger_dist(){
 	global $visiteur_session;
+	
+	$config = unserialize($GLOBALS['meta']['seo']);
+	$valeurs = $config['analytics'];
+	$valeurs['analytics_id'] = $valeurs['id'];
+	
 	$valeurs['editable'] = true;
 	
 	if (!autoriser('configurer', 'configuration',$visiteur_session)) {
 		$valeurs['editable'] = false;
 	}
-	
-	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['analytics'];
-	$valeurs['analytics_id'] = $valeurs['id'];
 	
 	return $valeurs;
 }

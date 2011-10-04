@@ -4,15 +4,16 @@ include_spip('inc/meta');
 
 function formulaires_configurer_seo_insert_head_charger_dist(){
 	global $visiteur_session;
+	
+	$config = unserialize($GLOBALS['meta']['seo']);
+	$valeurs = $config['insert_head'];
+
 	$valeurs['editable'] = true;
 	
 	if (!autoriser('configurer', 'configuration',$visiteur_session)) {
 		$valeurs['editable'] = false;
 	}
 	
-	$config = unserialize($GLOBALS['meta']['seo']);
-	$valeurs = $config['insert_head'];
-
 	return $valeurs;
 }
 
