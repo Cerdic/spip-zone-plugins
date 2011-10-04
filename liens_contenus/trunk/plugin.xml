@@ -1,32 +1,33 @@
 <plugin>
 	<nom>Liens entre contenus</nom>
+	<slogan>Emp&#234;cher la suppression d'un objet si d’autres pointent vers lui</slogan>
 	<auteur>Nicolas Hoizey</auteur>
 	<licence>GNU/GPL</licence>
-	<version>0.29</version>
+	<version>0.29.0</version>
 	<version_base>0.4</version_base>
 	<install>base/lienscontenus_upgrade.php</install>
 	<etat>test</etat>
 	<description>
-Ce plugin (pour SPIP 2.1.0+) permet d'identifier les liens existants entre les contenus au sein de leurs &eacute;l&eacute;ments textuels, et donc notamment d'{{&eacute;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&egrave;ve, d'un site, d'un document ou m&ecirc;me d'un mod&egrave;le, vers lesquels pointent d'autres contenus.
+Ce plugin permet d'identifier les liens existants entre les contenus au sein de leurs &#233;l&#233;ments textuels, et donc notamment d'{{&#233;viter la suppression par erreur}} d'une rubrique, d'un article, d'une br&#232;ve, d'un site, d'un document ou m&#234;me d'un mod&#232;le, vers lesquels pointent d'autres contenus.
 
-Reste &agrave; faire :
--* Etendre le contr&ocirc;le de d&eacute;publication aux actions dans les listes
+Reste &#224; faire :
+-* Etendre le contr&#244;le de d&#233;publication aux actions dans les listes
 -* Proposer une option de configuration pour ne pas mettre d'alertes
--* Proposer une option de configuration pour interdire la suppression d'objets li&eacute;s depuis des objets en ligne ou juste alerter
--* R&eacute;f&eacute;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&eacute;dric ?)
+-* Proposer une option de configuration pour interdire la suppression d'objets li&#233;s depuis des objets en ligne ou juste alerter
+-* R&#233;f&#233;rencement des liens externes ? (rapprochement avec le plugin {checklink} de C&#233;dric ?)
 
-Ic&ocirc;ne issue de la collection [Farm-Fresh Web Icons->http://www.fatcow.com/free-icons] de FatCow.
+Ic&#244;ne issue de la collection [Farm-Fresh Web Icons->http://www.fatcow.com/free-icons] de FatCow.
 	</description>
-    <lien>http://www.spip-contrib.net/Liens-entre-contenus</lien>
+   <lien>http://www.spip-contrib.net/Liens-entre-contenus</lien>
 	<icon>images/liens_contenus.png</icon>
-  <chemin dir='' />
+   <chemin dir='' />
 	<prefix>lienscontenus</prefix>
 	<options>lienscontenus_options.php</options>
 	<fonctions>lienscontenus_fonctions.php</fonctions>
-  <pipeline>
-    <nom>declarer_tables_principales</nom>
-    <inclure>base/lienscontenus.php</inclure>
-  </pipeline>
+   <pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/lienscontenus.php</inclure>
+   </pipeline>
 	<pipeline>
 		<nom>pre_edition</nom>
 		<inclure>lienscontenus_pipelines.php</inclure>
@@ -41,11 +42,11 @@ Ic&ocirc;ne issue de la collection [Farm-Fresh Web Icons->http://www.fatcow.com/
 		<action>header_prive</action>
 		<inclure>lienscontenus_pipelines.php</inclure>
 	</pipeline>
-    <pipeline>
-        <nom>taches_generales_cron</nom>
-        <inclure>lienscontenus_pipelines.php</inclure>
-    </pipeline>
+   <pipeline>
+       <nom>taches_generales_cron</nom>
+       <inclure>lienscontenus_pipelines.php</inclure>
+   </pipeline>
 	<categorie>navigation</categorie>
-    <necessite id='SPIP' version='[2.1.0;]' />
+   <necessite id='SPIP' version='[2.1.0;2.1.99]' />
 	<traduire gestionnaire='salvatore' module='lienscontenus' reference='fr' />
 </plugin>
