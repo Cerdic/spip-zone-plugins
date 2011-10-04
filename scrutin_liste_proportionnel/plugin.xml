@@ -1,13 +1,12 @@
 <plugin>
-	<nom>Scrutin de liste &#224; la proportionnelle</nom>
+	<nom>Scrutin de liste &#225; la proportionnelle</nom>
 	<etat>stable</etat>
-	<version>1.3</version>
-	<auteur>Ma&iuml;eul Rouquette
-GPL
-	</auteur>
-	<lien>[->http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la]</lien>
+	<version>1.2.1</version>
+	<auteur>Ma&iuml;eul Rouquette</auteur>
+	<licence>GPL</licence>
+	<lien>http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la</lien>
 	<description>
-	Vous pouvez ins&eacute;rer dans un article un formulaire de la mani&egrave;re suivante.
+	Vous pouvez ins&#233;rer dans un article un formulaire de la mani&#232;re suivante.
 	&lt;formulaire|scrut_prop|liste=A;B;C;...|&gt;
 	ou A;B;C,... sont des noms de liste.
 	
@@ -15,26 +14,21 @@ GPL
 -* de remplir les voix pour chaque liste.
 -* de remplir le nombre de blanc ou nul.
 -* de remplir le nombre d'inscrits.
--* de dire le nombre de si&egrave;ges &agrave; pourvoir.
+-* de dire le nombre de si&#232;ges &#225; pourvoir.
 -* de dire si le scrutin se fait au plus fort reste ou &agrave; la plus forte moyenne.
--* de fixer un seuil de voix (en pourcentage) &agrave; pour obtenir des si&egrave;ges (le nombre de voix est arrondis &agrave; l'inf&eacute;rieur.)
+-* de fixer un seuil de voix (en pourcentage) &agrave; pour obtenir des si&#225;ges (le nombre de voix est arrondis &#225; l'inf&#232;rieur.)
 -* de proposer une prime majoritaire (depuis la version 1.1)
-	
-	Un fois rempli, le formulaire test si les valeurs sont coh&eacute;rentes (pas plus de votants que d'inscrits par exemple !). Puis il calcul la r&eacute;partition de si&egrave;ges.
-	
-	N&eacute;c&eacute;ssite Spip-Bonux
-	
-	Documentation compl&egrave;te sur [Contrib->http://www.spip-contrib.net/Plugin-scrutin-de-liste-a-la].
-	</description>
 
+	Un fois rempli, le formulaire test si les valeurs sont coh&#233;rentes (pas plus de votants que d'inscrits par exemple !). Puis il calcul la r&eacute;partition de si&#225;ges.
+
+	</description>
 	<prefix>scrut_prop</prefix>
-	
 	<pipeline>
-	   
-		<nom>insert_head</nom>
-		<inclure>scrut_prop_pip.php</inclure>
+	   <nom>insert_head</nom>
+	   <inclure>scrut_prop_pip.php</inclure>
 	</pipeline>
 	<fonctions>scrut_prop_fonctions.php</fonctions>
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
 	<necessite id="spip_bonux" />
 
 	<categorie>communication</categorie>
