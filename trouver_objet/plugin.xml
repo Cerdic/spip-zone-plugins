@@ -3,7 +3,7 @@
 	<icon>loupe.png</icon>
 	<auteur>Anne-lise Martenot [->http://elastick.net]</auteur>
 	<licence>GPL 3 - &#169; 2010</licence>
-	<version>0.2.0</version>
+	<version>0.2.1</version>
 	<etat>test</etat>
     <slogan>Trouver rapidement un objet</slogan>
 	<description>Champ input avec un selecteur javascript pour trouver un objet SPIP comme un article ou un mot, renvoie vers la page de l'objet s'il existe.</description>
