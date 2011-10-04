@@ -1,11 +1,12 @@
 <plugin>
 	<nom>minibando</nom>
+	<slogan>Un minibando pour un maximum de fonctionnalit&#233;s !</slogan>
 	<auteur>b_b</auteur>
 	<version>0.1.5</version>
 	<etat>stable</etat>
 	<prefix>minibando</prefix>
 	<description>
-	Un mini bandeau pour SPIP qui remplace les boutons d'administation.
+	Le plugin minibando remplace les boutons d’administration de SPIP par une barre d'outils qui reprend les &#233;l&#233;ments disponibles dans la navigation haute de l’espace priv&#233; de SPIP.
 	</description>
 	<lien>http://www.spip-contrib.net/minibando</lien>
 	<licence>GPL</licence>
@@ -14,7 +15,7 @@
 		<nom>formulaire_admin</nom>
 		<inclure>minibando_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.3;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.0.3;2.1.99]" />
 	<necessite id="bando" version="[1.1.5;]" />
 	<categorie>navigation</categorie>
 </plugin>
