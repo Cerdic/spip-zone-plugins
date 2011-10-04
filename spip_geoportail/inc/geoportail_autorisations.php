@@ -26,7 +26,7 @@ function autoriser_geoservice_iconifier ($faire, $type, $id, $qui, $opt)
 * API d'autorisation
 * Un auteur peut modifier son geopositionnement
 */
-function autoriser_auteur_positionner ($faire, $type, $id, $qui, $opt)
+function autoriser_auteur_positionner_dist ($faire, $type, $id, $qui, $opt)
 {	return 
 	(	(($qui['statut'] == '0minirezo') && !$qui['restreint'])
 	||	($qui['id_auteur'] == $id)
