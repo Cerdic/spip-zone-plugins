@@ -1,12 +1,13 @@
 <plugin>
-	<nom>Mes Favoris</nom>
+	<nom>Mes Favoris 2</nom>
+	<slogan>S&#233;lection de favoris</slogan>
 	<icon>images/mesfavoris-128.png</icon>
 	<version>2.1.2</version>
 	<version_base>1.0.0</version_base>
 	<etat>stable</etat>
 	<prefix>mesfavoris</prefix>
-	<auteur>Olivier Sallou, [Cedric Morin->yterium.net]</auteur>
-	<description>(De)Selectionne un article pour g&eacute;rer des articles favoris pour un visiteur authentifi&eacute;</description>
+	<auteur>Olivier Sallou, [C&#233;dric Morin->yterium.net]</auteur>
+	<description>(D&#233;)S&#233;lectionne un article pour g&#233;rer des articles favoris pour un visiteur authentifi&#233;</description>
 	<install>base/mesfavoris.php</install>
 	<lien>http://www.spip-contrib.net/Mes-Favoris-2-0</lien>
 	<pipeline>
@@ -21,5 +22,6 @@
 		<nom>insert_head_css</nom>
 		<inclure>mesfavoris_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
