@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Supprimer enveloppe &#171;mailto&#187;</nom>
-	<nom>Supprimer la petite enveloppe des liens &#171;mailto&#187;</nom>
+	<slogan>Supprimer la petite enveloppe des liens &#171;mailto&#187;</slogan>
 	<auteur>ARNO*</auteur>
 	<version>1.0.0</version>
 	<etat>stable</etat>
@@ -15,7 +15,6 @@
 		<nom>insert_head</nom>
 		<inclure>supprimer_enveloppe_mailto_pipelines.php</inclure>
 	</pipeline>
-
 
 	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>maintenance</categorie>
