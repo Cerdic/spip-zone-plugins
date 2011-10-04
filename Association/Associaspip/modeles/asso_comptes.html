@@ -8,10 +8,10 @@ parametres =
 - rpp (entier = 10) : nombre de resultats par page (i.e. pas de pagination)
 - vide (texte = 'aucun') : chaine conntenant le message a afficher en absence de resultat
 
-maj:2011-10-04; version:0.7.0; licence:GPL; copyleft:gilcot; -->]
+maj:2011-10-05; version:0.7.1; licence:GPL; copyleft:gilcot; -->]
 
 #SET{est_membre,non}
-<BOUCLE_membre(ASSO_MEMBRES){id_auteur=#SESSION{id_auteur}}{statut_interne>0}>
+<BOUCLE_membre(ASSO_MEMBRES){id_auteur=#SESSION{id_auteur}}>
 	#SET{est_membre,oui}
 </BOUCLE_membre>
 <BOUCLE_acces(CONDITION ?){si #GET{est_membre}|=={oui} }>
