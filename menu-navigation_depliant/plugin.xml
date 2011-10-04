@@ -10,7 +10,7 @@
 	
 	 -->
 	<nom>MenuDep</nom>
-	<nom>Menu de navigation d&#233;pliant</nom>
+	<slogan>Menu de navigation d&#233;pliant</slogan>
 	<auteur>cpaulus@quesaco.org</auteur>
 	<version>1.9.0</version>
 	<version_base>0.01</version_base>
