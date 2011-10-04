@@ -18,7 +18,7 @@
 	</pipeline>
 	
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	
 </plugin>
 
