@@ -9,17 +9,17 @@
 	// $LastChangedDate$
 	
 	 -->
-	<nom>Menu de navigation d&eacute;pliant (MenuDep)</nom>
+	<nom>MenuDep</nom>
+	<nom>Menu de navigation d&#233;pliant</nom>
 	<auteur>cpaulus@quesaco.org</auteur>
-	<version>1.09</version>
+	<version>1.9.0</version>
 	<version_base>0.01</version_base>
 	<icon>images/menudep-64.png</icon>
 	<etat>stable</etat>
 
-	<description>Menu de navigation d&eacute;pliant avec sous-menus incrust&eacute;s ou d&eacute;tach&eacute;s. 
-		Animations param&eacute;trables [via la page de configuration->/ecrire/?exec=configuration].</description>
+	<description>Menu de navigation d&#233;pliant avec sous-menus incrust&#233;s ou d&#233;tach&#233;s. Animations param&#233;trables via la page de configuration</description>
 
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/menu-navigation-depliant-spip]</lien>
+	<lien>http://www.quesaco.org/menu-navigation-depliant-spip</lien>
 	
 	<prefix>menudep</prefix>
 
@@ -45,6 +45,6 @@
 		<inclure>inc/menudep_pipeline_insert_head.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
