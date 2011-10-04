@@ -1,31 +1,14 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-		Marque-pages
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 		RastaPopoulos
-	</auteur>
-	<licence>
-		GPL v3
-	</licence>
-	<version> <!-- Version du plugin -->
-		0.2
-	</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-		dev
-	</etat>
-	<description>
-Des outils pour d&eacute;velopper un syst&egrave;me de marque-pages en ligne, du style Scuttle.
-
-N&eacute;cessite le plugin &#201;tiquettes et CFG.
-	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Marque-pages</lien> <!-- URI de documentation -->
-	<prefix> 
-		marquepages
-	</prefix>
-	<icon>
-		images/marquepages.png
-	</icon>
+	<nom>Marque-pages</nom>
+	<slogan>Syst&#232;me de marque-pages en ligne</slogan>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL v3</licence>
+	<version>0.2.0</version>
+	<etat>dev</etat>
+	<description>Des outils pour d&#233;velopper un syst&#232;me de marque-pages en ligne, du style [Scuttle->http://scuttle.org/].</description>
+	<lien>http://www.spip-contrib.net/Plugin-Marque-pages</lien>
+	<prefix>marquepages</prefix>
+	<icon>images/marquepages.png</icon>
 	
 	<options>marquepages_options.php</options>
 	<fonctions>marquepages_fonctions.php</fonctions>
@@ -59,7 +42,7 @@ N&eacute;cessite le plugin &#201;tiquettes et CFG.
 	</pipeline>
 	
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[2.0.8;]" />
+	<necessite id="SPIP" version="[2.0.8;2.1.99]" />
 	<necessite id='cfg' version='[1.10;]' />
 	<necessite id='etiquettes' version='[0.6.5;]' />
 	<necessite id='nuage' version='[1.4;]' />
