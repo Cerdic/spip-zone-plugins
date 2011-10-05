@@ -1,30 +1,20 @@
 <plugin>
-	<nom>
-Cambiar esqueleto
-	</nom>
-	<auteur>
-joseluis@digital77.com
-_ CopyLeft - 2006
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Cambiar esqueleto</nom>
+	<slogan>Sistema de selecci&#243;n de esqueletos por men&#250; desplegable</slogan>
+	<auteur>[->joseluis@digital77.com]</auteur>
+	<licence>CopyLeft 2006</licence>
+	<version>0.1.0</version>
+	<etat>test</etat>
 	<description>
-Sistema de selecci&oacute;n de esqueletos por men&uacute; desplegable
-_ Para utilizarlo:
--* Crea en la ra&iacute;z del sitio una carpeta llamada "esqueletos"
--* Pon en esa carpeta los esqueletos que quieras, cada uno en una subcarpeta y a una ll&aacute;mala "predeterminada"
--* Coloca la baliza #CAMBIAR_ESQUELETO donde quieras que aparezca el desplegable (cabecera del sitio, men&uacute; de navegaci&oacute;n,...)
+Sistema de selecci&#243;n de esqueletos por men&#250; desplegable. Para utilizarlo:
+-* Crea en la ra&#237;z del sitio una carpeta llamada "esqueletos"
+-* Pon en esa carpeta los esqueletos que quieras, cada uno en una subcarpeta y a una ll&#225;mala "predeterminada"
+-* Coloca la baliza #CAMBIAR_ESQUELETO donde quieras que aparezca el desplegable (cabecera del sitio, men&#250; de navegaci&#243;n,...)
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-		<prefix> 
-	cambiar_esqueleto
-	</prefix>
+	<lien>http://www.spip-contrib.net/Plugin-para-cambiar-la</lien>
+	<prefix>cambiar_esqueleto</prefix>
 	<options>cambiar_esqueleto_options.php</options>
 	<fonctions>baliza_cambiar_esqueleto.php</fonctions>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>outil</categorie>
 </plugin>
