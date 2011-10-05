@@ -1,18 +1,7 @@
-<plugin>
- <nom>Glossaire interne</nom>
- <version>0.1</version>
- <prefix>Glossaire</prefix>
- <etat>experimental</etat>
- <auteur>Fran&#231;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]).
-_ Plugin&#233; par fred (homere1974[at]yahoo.fr)
-_ &#169; 2003 - Distribu&#233; sous licence GNU/GPL</auteur>
-<description>Gestion d'un glossaire interne li&#233; &#224; un groupe de mots cl&#233;s nomm&#233; &quot;glossaire&quot;.
-_ Filtre lier_au_glossaire.
-_ Les squelettes doivent disposer de la balise <code>#INSERT_HEAD</code>.</description>
-	<lien></lien> <!-- URI de documentation -->
-<fonctions>glossaire_fonctions.php</fonctions>
-<pipeline>
-<nom>insert_head</nom>
-</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
-</plugin>
+<plugin>	<nom>Glossaire interne</nom>
+	<slogan>Gestion automatique d'un glossaire interne au site.</slogan>	<version>1.0.0</version>	<prefix>Glossaire</prefix>	<etat>stable</etat>
+	<licence>GNU/GPL</licence>	<auteur>Fran&#231;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]), fred ([->homere1974@yahoo.fr]), Philippe Auriol.</auteur>	<description>
+-* Le glossaire est li&#233; &#224; un groupe de mots-cl&#233;s «glossaire» &#224; cr&#233;er;
+-* Filtre <code>lier_au_glossaire</code> &#224; appliquer aux champs de texte dans les squelettes;-* N&#233;cessite la balise <code>#INSERT_HEAD</code>.</description>	<lien>http://www.spip-contrib.net/1459</lien>	<fonctions>glossaire_fonctions.php</fonctions>	<pipeline>		<nom>insert_head</nom>	</pipeline>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" /></plugin>
