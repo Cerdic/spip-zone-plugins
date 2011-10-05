@@ -7,7 +7,7 @@
 	</nom>
 	<version>1.2.0</version>
 	<prefix>afficher_objets</prefix>
-	
+    <slogan>Lister les &#233;l&#233;ments de l'espace priv&#233;</slogan>
 	<!-- Oxygen theme spreadsheet : http://www.iconfinder.com/icondetails/8909/128/spreadsheet_icon -->
 	<icon>afficher_objets-64.png</icon>
 	<etat>test</etat>
