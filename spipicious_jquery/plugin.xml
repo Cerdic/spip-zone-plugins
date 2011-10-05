@@ -1,5 +1,5 @@
 <plugin>
-	<nom>spip.icio.us</nom>
+	<nom>Spipicious</nom>
 	<auteur>[kent1->kent1@arscenic.info], [erational->http://www.erational.org]</auteur>
 	<slogan>
 		<multi>
@@ -7,9 +7,7 @@
 		[en]Tag each objects
 		</multi>
 	</slogan>
-	<licence>
-		&#169; 2007-2011 - GNU/GPL v2
-	</licence>
+	<licence>GNU/GPLv2 - (c) 2007-2011</licence>
 	<version>0.7.5</version>
 	<version_base>0.6.2</version_base>
 	<etat>stable</etat>
