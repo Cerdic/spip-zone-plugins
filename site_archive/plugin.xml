@@ -6,10 +6,9 @@
 	
 	 -->
 	<nom>Site Archive (SiA)</nom>
-	<auteur>
-		[Christian Paulus->http://www.quesaco.org/]
-	</auteur>
-	<licence>&#169; 2010 [GNU/GPL 3->http://fr.wikipedia.org/wiki/Licence_publique_g&#233;n&#233;rale_GNU]</licence>
+	<slogan>Archiver tout ou partie de son site Spip</slogan>
+	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
+	<licence>&#169; 2010 GNU/GPL 3</licence>
 
 	<description>
 		Maintenance d&#39;archives de rubriques ou d&#39;articles 
@@ -20,13 +19,12 @@
 		hors connexion Internet.<br />
 		N&#233;cessite les commandes syst&#232;mes batch, wget, zip.
 	</description>
-	<icon>images/sia-64.png
-	</icon>
+	<icon>images/sia-64.png</icon>
 	
 	<!-- documentation -->
 	<lien>http://www.quesaco.org/Archive-de-site-Website-archiver</lien>
 	
-	<version>0.3.01</version>
+	<version>0.3.1</version>
 	<etat>test</etat>
 	
 	<!-- espace de nommage -->
@@ -36,7 +34,7 @@
 	
 	<fonctions>sia_fonctions.php</fonctions>
 	
-	<necessite id='SPIP' version='[2.1.2;]' />
+	<necessite id='SPIP' version='[2.1.2;2.1.99]' />
 	
 	<utilise id="cfg" version="[1.15.0;]" />
 	
