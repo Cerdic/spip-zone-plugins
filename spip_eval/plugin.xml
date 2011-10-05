@@ -1,74 +1,53 @@
 <plugin>
-
-	<nom>SPIP &Eacute;val - &Eacute;valuation d'&eacute;l&eacute;ments SPIP</nom>
-
-	<auteur>Cyril MARION - (c) 2010  Ateliers CYM - Paris</auteur>
-
-	<licence>Distribu&eacute; sous licence GPL</licence>
-	
-	<version>0.1</version>
-	
+	<nom>SPIP &#201;val</nom>
+	<slogan>&#201;valuation d'&#233;l&#233;ments</slogan>
+	<auteur>Cyril MARION</auteur>
+	<licence>GPL - (c) 2010</licence>
+	<version>0.1.0</version>
 	<version_base>0.1</version_base>
-	
 	<etat>dev</etat>
-
 	<icon>img/ateliers_cym-24.gif</icon>
-
 	<install>base/eval_upgrade.php</install>
-
 	<description>
-Gestion de campagnes d'&eacute;valuations.
-
-Extension du plugin &quot;notations&quot; permettant d'ajouter des commentaires, un fil de discussions, et de sp&eacute;cifier des campagnes et des th&egrave;mes.
-
-Une campagne peut &ecirc;tre par exemple : un concours photo.
-
-Un th&egrave;me pourrait &ecirc;tre par exemple, pour des photos : le cadrage, l'exposition, l'int&eacute;r&ecirc;t de la sc&egrave;ne...
-
-Le plugin notations permet d&eacute;ja par construction de noter les &eacute;lements &eacute;ditoriaux de SPIP (notamment les documents joints). Il ne sera donc pas n&eacute;cessaire de modifier cette partie. 
-
-En revanche il manque la possibilit&eacute; 
+_ Gestion de campagnes d'&#233;valuations.
+_ Extension du plugin &#34;notations&#34; permettant d'ajouter des commentaires, un fil de discussions, et de sp&#233;cifier des campagnes et des th&#232;mes.
+_ Une campagne peut &#234;tre par exemple : un concours photo.
+_ Un th&#232;me pourrait &#234;tre par exemple, pour des photos : le cadrage, l'exposition, l'int&#233;r&#234;t de la sc&#232;ne...
+_ Le plugin notations permet d&#233;ja par construction de noter les &#233;lements &#233;ditoriaux de SPIP (notamment les documents joints). Il ne sera donc pas n&#233;cessaire de modifier cette partie. 
+_ En revanche il manque la possibilit&#233; 
 _ - d'ajouter un commentaire sous forme de texte en plus de la note, 
-_ - de noter l'&eacute;l&eacute;ment sur un ou plusieurs th&egrave;mes de notations, 
-_ - de regrouper les notations dans des campagnes, et &eacute;ventuellement 
-_ - de lier une discution (un forum) &agrave; une notation.
+_ - de noter l'&#233;l&#233;ment sur un ou plusieurs th&#232;mes de notations, 
+_ - de regrouper les notations dans des campagnes, et &#233;ventuellement 
+_ - de lier une discution (un forum) &#224; une notation.
 
-Dans l'exemple donn&eacute; en lien ci-dessous, il est question de :
-| rate | notation (les &eacute;toiles) |
+Dans l'exemple donn&#233; en lien ci-dessous, il est question de :
+| rate | notation (les &#233;toiles) |
 | review | commentaires |
 | conversation | forum |
 
 Il manque :
-| le th&egrave;me | mot_cle |
+| le th&#232;me | mot_cle |
 | la campagne | id_rubrique |
 	</description>
-	
-	<lien>[Un exemple de site de notation en ligne->http://www.sitejabber.com/reviews/www.spip.net?trk=ff_plugin]<br /></lien>
-	
-	<lien>[Ce &agrave; quoi &ccedil;a pourrait ressembler->http://imagebin.org/91358]</lien>
-	
-	<prefix>eval</prefix>
-	
-	<fonctions>eval_fonctions.php</fonctions>
 
+	<prefix>eval</prefix>
+	<fonctions>eval_fonctions.php</fonctions>
 	<options>eval_options.php</options>
-	
+
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/eval_tables.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/eval_tables_auxiliaires.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/eval_tables_interfaces.php</inclure>
 	</pipeline>
 	
-	<necessite id="spip" version="[2.0.0;]" />
+	<necessite id="spip" version="[2.0.0;2.1.11]" />
 	<necessite id="notation" version="[0.7.1;]" />
 	<categorie>communication</categorie>
 	
