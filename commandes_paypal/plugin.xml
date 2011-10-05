@@ -4,6 +4,7 @@
 	<licence>GPL v3</licence>
 	<version>0.2.3</version>
 	<etat>dev</etat>
+    <slogan>Gére les retours Paypal</slogan>
 	<description>Ce plugin permet de gérer les retours d'un payement Paypal pour savoir quel commande a été payée, et donc changer son statut.</description>
 	<categorie>divers</categorie>
 	<icon></icon>
@@ -15,7 +16,7 @@
 		<inclure>commandes_paypal_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="commandes" version="[0.4.0;]" />
 	<necessite id="paypal" version="[0.1.0;]" />
 </plugin>
