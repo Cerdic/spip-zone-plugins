@@ -4,9 +4,15 @@
 	[Matthieu Marcillaud->http://magraine.net/], [Les Développements Durables->http://www.ldd.fr]
 	</auteur>
 	<licence>GPL v3</licence>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<icon>img/paypal_logo.gif</icon>
 	<options>paypal_options.php</options>
+    <slogan>
+    <multi>
+    [fr] Utiliser Paypal sur SPIP
+    [en] Use Paypal on SPIP
+    </multi>
+    </slogan>
 	<description>
 	Pouvoir utiliser Paypal sur SPIP
 	Peut/pourra aussi fonctionner avec le plugin "abonnement"
@@ -15,4 +21,5 @@
 	<prefix>paypal</prefix>
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="paypal" reference="fr" />
+    <necessite id="SPIP" version="[2.1.8;2.1.99]" />
 </plugin>
