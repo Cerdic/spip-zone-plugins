@@ -1,16 +1,17 @@
 <plugin>
 	<nom>Formulaires Uniform</nom>
+	<slogan>Uniformisation automatique de formulaires</slogan>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>test</etat>
 	<description>
-		Uniformise certains &eacute;l&eacute;ments de formulaires, en utilisant le [plugin Uniform de PixelMatrix->http://pixelmatrixdesign.com/uniform/].
+		Uniformise certains &#233;l&#233;ments de formulaires, en utilisant le [plugin Uniform de PixelMatrix->http://pixelmatrixdesign.com/uniform/].
 		
-		Attention&nbsp;: l&rsquo;affichage est d&eacute;faillant sous MSIE 7 et sous Firefox 2; n'activer ce plugin que si vous &ecirc;tes seul(e) &agrave; utiliser votre site avec un navigateur compatible.
+		Attention&#160;: l&#8217;affichage est d&#233;faillant sous MSIE 7 et sous Firefox 2; n'activer ce plugin que si vous &#234;tes seul(e) &#224; utiliser votre site avec un navigateur compatible.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<licence>MIT</licence>
- 	<necessite id='SPIP' version='[2.0;]' />
+ 	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<prefix>form_uniform</prefix>
 
 	<pipeline>
