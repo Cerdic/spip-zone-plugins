@@ -5,6 +5,12 @@
 			[en]Generic selector
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]Am&#233;lioration des s&#233;lecteurs de l'espace priv&#233;
+			[en]Improving the selectors of private space
+		</multi>
+	</slogan>	
 	<auteur>Fil, kent1</auteur>
 	<version>0.7.1</version>
 	<licence>GNU/GPL</licence>
@@ -24,16 +30,22 @@
 		<inclure>inserer_javascript.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0;2.1.9)" />
+	<necessite id="SPIP" version="[2.0;2.1.9]" />
 	<categorie>outil</categorie>
 </plugin>
-<plugin spip='[2.1.10;]'>
+<plugin spip='[2.1.10;2.1.99]'>
   <nom>
 		<multi>
 			[fr]S&#233;lecteur g&#233;n&#233;rique
 			[en]Generic selector
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]Am&#233;lioration des s&#233;lecteurs de l'espace priv&#233;
+			[en]Improving the selectors of private space
+		</multi>
+	</slogan>	
 	<auteur>Fil, kent1</auteur>
 	<version>0.7.2</version>
 	<licence>GNU/GPL</licence>
@@ -62,7 +74,7 @@
 		<inclure>selecteur_generique_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
 	<necessite id="jqueryui" version="[1.8.15;]" />
 	<categorie>outil</categorie>
 </plugin>
