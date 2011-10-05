@@ -5,10 +5,10 @@
 	<licence>GPL 3 - &#169; 2010</licence>
 	<version>0.2.1</version>
 	<etat>test</etat>
-    <slogan>Trouver rapidement un objet</slogan>
-	<description>Champ input avec un selecteur javascript pour trouver un objet SPIP comme un article ou un mot, renvoie vers la page de l'objet s'il existe.</description>
+   <slogan>Trouver rapidement un objet</slogan>
+	<description>Champ input avec un s&#233;lecteur javascript pour trouver un objet SPIP comme un article ou un mot, renvoie vers la page de l'objet s'il existe.</description>
 	<prefix>trouver_objet</prefix>
- 	<necessite id='SPIP' version='[2.0.9;]' />
+ 	<necessite id='SPIP' version='[2.0.9;2.1.99]' />
 	<categorie>navigation</categorie>
 	<pipeline>
 		<nom>insert_head</nom>
