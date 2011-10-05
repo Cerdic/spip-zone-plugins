@@ -1,14 +1,15 @@
 <plugin>
 	<nom>HTML5 dans SPIP</nom>
+	<slogan>Bases pour faire un site en HTML5</slogan>
 	<auteur>davux</auteur>
 	<icon>html5.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>0.2.1</version>
 	<etat>dev</etat>
-        <description>Ce plugin pose les bases pour faire un site en HTML5. Il fournit actuellement:
--* un sol commun pratique : reset CSS et un petit fichier javascript pour faire "voir" les balises &agrave; Internet Explorer
+   <description>Ce plugin pose les bases pour faire un site en HTML5. Il fournit actuellement:
+-* un sol commun pratique : reset CSS et un petit fichier javascript pour faire "voir" les balises &#224; Internet Explorer
 -* une surcharge de certains formulaires de SPIP pour utiliser les nouveaux types d'<code><input></code>
-        </description>
+   </description>
 	<prefix>html5</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
@@ -20,6 +21,6 @@
 		<action>insert_head_css</action>
 		<inclure>html5_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>outil</categorie>
 </plugin>
