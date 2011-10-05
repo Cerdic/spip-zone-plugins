@@ -5,6 +5,7 @@
 	<version>0.4.6</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
+    <slogan>Gérer des commandes</slogan>
 	<description><multi>
 	[fr]Permet de gerer des commandes.
 	</multi></description>
@@ -62,6 +63,6 @@
 			<titre>commandes:nom_bouton_plugin</titre> 
 	</bouton> 
 	
-	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
 	<necessite id="prix" version="[0.1;]" />
 </plugin>
