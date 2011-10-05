@@ -1,23 +1,11 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Timeline
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-mortimer et cedric
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
-	<description>
-Affichage d'un timeline des &#233;v&#233;nements du site : ?page=timeline&amp;agenda=1
-	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<prefix> 
-	timeline
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<nom>Timeline</nom>
+	<auteur>mortimer et cedric</auteur>
+	<version>0.1.0</version>
+	<etat>stable</etat>
+	<description>Affichage d'un timeline des &#233;v&#233;nements du site.</description>
+	<lien></lien>
+	<prefix>timeline</prefix>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>date</categorie>
 </plugin>
