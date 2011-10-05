@@ -1,63 +1,52 @@
-<!-- En date du 17 fevrier 2006, des explications sur les plugins se trouvent ici :  
-http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>
-	[fr]
-	  Squelette par mot clef
-	[en]
-	  Template selection by keyword
-	[it]
-	  Scelta del modello mediante una parola chiave
-	</multi>
+	<nom>
+		<multi>
+		[fr]Squelette par mot clef
+		[en]Template by keyword
+		[it]Modello mediante una parola chiave
+		</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer), d'apr&#232;s un code propos&#233; par D&#233;esse A.
-	</auteur>
-	<version>
-	  2.1
-	</version>
-	<etat>
-	  test
-	</etat>
+	<slogan>
+		<multi>
+		[fr]Permet de choisir le squelette en fonction d'un mot clef
+		[en]Provides selection of template using keywords
+		[it]Scegliere un modello mediante una parola chiave
+		</multi>
+	</slogan>
+	<auteur>Pierre Andrews (Mortimer), d'apr&#232;s un code propos&#233; par D&#233;esse A.</auteur>
+	<version>2.1.0</version>
+	<etat>test</etat>
 	<description>
-	<multi>
-	[fr]
-	  Permet de choisir le squelette en fonction d'un mot clef.
-
+		<multi>
+		[fr]Ce plugin permet de choisir le squelette en fonction d'un mot clef.
+	  
       La page de configuration permet de cr&#233;er des r&#232;gles liant:
 -* un type d'&#233;l&#233;ment, 
 -* un groupe de mot clef sp&#233;cifiant le squelette 
 -* un fond.
 
-	Ainsi, les auteurs n'ont plus qu'&#224; associer le bon mot clef &#224;
-	leur article (par exemple) pour s&#233;lectionner sa mise en page.
-	[en]
-	This plugin provides selection of template using keywords.
+	  Ainsi, les auteurs n'ont plus qu'&#224; associer le bon mot clef &#224; leur article (par exemple) pour s&#233;lectionner sa mise en page.
+	[en]This plugin provides selection of template using keywords.
 
-	You can create rules on the configuration page to link:
+	  You can create rules on the configuration page to link:
 -* an element type,
 -* a group of keyword specifying the template
 -* a template base name.
-
-	Then, the authors only have to associate a keyword to their article (for example) to
-	set its layout.
-	[it]
-	Questo plugin permette di scegliere un modello mediante una parola chiave.
+	  
+	  Then, the authors only have to associate a keyword to their article (for example) to set its layout.
+	[it]Questo plugin permette di scegliere un modello mediante una parola chiave.
 
 	La pagina di configurazione permette di creare regole per legare:
 -* un tipo di elemento,
 -* un gruppo di parole chiave per scegliere il modello,
 -* un sfondo,
 
-	Cos&igrave;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
-     </multi>
+	Cos&#236;, gli autori devono solamente scegliere la parola chiave giusta per cambiare il modello de la pagina che visualizza l'elemento (l'articolo per esempio)
+		</multi>
 	</description>
 	<icon>spip_death.png</icon>
-	<lien>http://www.spip-contrib.net/Choix-des-squelettes-par-mot-clef</lien>
-	<prefix> 
-	  SquelettesMots
-	</prefix>
+	<lien>http://www.spip-contrib.net/SPMC-Squelette-par-mot-cle-V2-0</lien>
+	<prefix>SquelettesMots</prefix>
 	<pipeline>
 	  <nom>header_prive</nom>
 	  <inclure>SquelettesMots.php</inclure>
@@ -73,7 +62,7 @@ http://listes.rezo.net/archives/spip-core/2005-10/msg00002.html -->
 		<titre>squelettesmots:titre_onglet</titre>
 	</onglet>
 	
-	<necessite id="spip" version="[2.0.6;]" />
+	<necessite id="spip" version="[2.0.6;2.1.99]" />
 	<categorie>outil</categorie>
 	<chemin dir='' />
 </plugin>
