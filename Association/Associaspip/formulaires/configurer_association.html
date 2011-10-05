@@ -39,6 +39,10 @@
 								<input type="text" name="siret" [value="(#ENV{siret})"] id="siret"  class='formo'/>
 							</li>
 							<li>
+								<label for="tva"><:asso:config_libelle_tva:></label>
+								<input type="text" name="tva" [value="(#ENV{tva})"] id="tva"  class='formo'/>
+							</li>
+							<li>
 								<label for="declaration"><strong><:asso:config_libelle_declaration:></strong></label>
 								<input type="text" name="declaration" [value="(#ENV{declaration})"] id="declaration"  class='formo'/>
 							</li>
@@ -48,7 +52,7 @@
 							</li>
 							<BOUCLE_metas_utilisateur(ASSOCIATION_METAS){nom LIKE meta_utilisateur_%}{par nom}>
 							<li>
-								<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|replace{_,&nbsp;}|ucfirst)]</strong></label>
+								<label for="#NOM"><strong>[(#NOM|replace{meta_utilisateur}|_T)]</strong></label>
 								<input type="text" name="#NOM" [value="(#VALEUR)"] id="#NOM"  class='formo'/>
 							</li>	
 						</BOUCLE_metas_utilisateur>

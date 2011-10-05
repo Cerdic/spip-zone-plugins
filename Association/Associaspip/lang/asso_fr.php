@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_libelle_codepostal' => 'Code Postal',
 	'config_libelle_telephone' => 'T&eacute;l&eacute;phone',
 	'config_libelle_siret' => 'N&deg; SIRET',
+	'config_libelle_tva' => 'N&deg; TVA',
 	'config_libelle_declaration' => 'N&deg; de d&eacute;claration',
 	'config_libelle_prefet' => 'Pr&eacute;fecture ou Sous-pr&eacute;fecture',
 	'config_info_asso' => 'Donn&eacute;es de l\'association',
@@ -94,16 +95,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'import_nom_auteur_nom' => 'Nom',
 	
 	# Meta utilisateurs
-	'editer_meta_utilisateur' => 'Editer le champs utilisateur',
+	'editer_meta_utilisateur' => '&Eacute;diter le champs utilisateur',
 	'supprimer_meta_utilisateur' => 'Supprimer le champs utilisateur',
 	'nom_meta_utilisateur' => 'Nom',
 	'action_meta_utilisateur' => 'Action',
 	'avertissement_suppression_meta_utilisateur' => 'Vous vous appr&ecirc;tez &agrave; supprimer le champs utilisateur',
 	'editer_asso_metas_utilisateur_lien' => 'G&eacute;rer les champs suppl&eacute;mentaires du profil de l\'association',
 	'ajouter_meta_utilisateur' => 'Cr&eacute;er un nouveau champs',
-	'editer_asso_metas_utilisateur' => 'Edition des champs utilisateurs',
+	'editer_asso_metas_utilisateur' => '&Eacute;dition des champs utilisateurs',
 	'meta_utilisateur_note' => '<p>Note :</p><p>Cette page permet de cr&eacute;er ou d\'&eacute;diter(renommer/supprimer) des champs suppl&eacute;mentaires qui apparaissent dans le profil de votre association.</p><p>Une fois cr&eacute;&eacute;s les champs suppl&eacute;mentaires apparaissent dans la page de profil de l\'association o&ugrave; vous pourrez leur associer une valeur.</p>',
-	'meta_utilisateur_limitation_note' => '<p>Note :</p><p>Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.</p><p>Bien que conservant la casse dans leur affichage, la gestion du nom des champs y est insensible, vous ne pouvez donc pas cr&eacute;er deux champs identiques différenci&eacute;s par leur casse. Ex : "Nouveau Champs" et "nouveau champs" ne peuvent pas cohabiter.</p>',
+	'meta_utilisateur_limitation_note' => '<p>Notes :</p><p>Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.</p><p>Bien que conservant la casse dans leur affichage, la gestion du nom des champs y est insensible, vous ne pouvez donc pas cr&eacute;er deux champs identiques différenci&eacute;s par leur casse. Ex : "Nouveau Champs" et "nouveau champs" ne peuvent pas cohabiter.</p><p>Le nom de champ peut &ecirc;tre renseign&eacute; dans le fichier de langues <tt>local</tt> pour indiquer le texte accentu&eacute; ou traduit associ&eacute;.</p>',
 	'erreur_nom_meta_utilisateur_incorrect' => 'Le nom d\'un champs est limit&eacute; aux caract&egrave;res alphanum&eacute;riques: A-Z a-z 0-9 et espaces, pas de caract&egrave;res accentu&eacute;s ni ponctuation.',
 	'erreur_nom_meta_utilisateur_trop_long' => 'Le nom d\'un champs est limit&eacute; &agrave; 237 caract&egrave;res',
 	'erreur_pas_de_nom_meta_utilisateur' => 'Le nom d\'un champs ne peut pas &ecirc;tre vide, si vous voulez supprimer un champs, utilisez le bouton supprimer sur la page listant tous les champs utilisateur.',
@@ -147,7 +148,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	
 	',
 	'profil_de_lassociation' => 'Profil de l\'association',
-	'le_bureau' => 'Bureau de l\'association',
+	'le_bureau' => 'Les contacts de l\'association',
 	
 # Adherents
  # Titres
