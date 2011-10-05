@@ -148,7 +148,7 @@ Merci de ne pas r&eacute;pondre directement &agrave; ce message automatique
 	
 	',
 	'profil_de_lassociation' => 'Profil de l\'association',
-	'le_bureau' => 'Les contacts de l\'association',
+	'le_bureau' => 'Bureau de l\'association',
 	
 # Adherents
  # Titres

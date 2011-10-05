@@ -447,8 +447,8 @@ $GLOBALS['association_maj'][52476] = array(
 	array('sql_update', 'spip_association_metas', array('nom' => "'meta_utilisateur_n_siret'" ), "nom='siret' AND valeur<>''" ),
 	array('sql_delete', 'spip_association_metas', "nom='siret' AND valeur=''" ),
 	array('sql_update', 'spip_association_metas', array('nom' => "'meta_utilisateur_n_tva'" ), "nom='tva' AND valeur<>''" ),
-	);
 	array('sql_delete', 'spip_association_metas', "nom='tva' AND valeur=''" ),
+	);
 
 
 ?>
