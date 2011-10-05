@@ -1,14 +1,15 @@
 <plugin>
-	<nom>Transaction, module de paiement pour Formidable</nom>
+	<nom>Transaction</nom>
+	<slogan>Module de paiement pour Formidable</slogan>
 	<auteur>Arnault Pachot, Emmanuel Nurit</auteur>
 	<licence>GPL v3</licence>
 	<version>0.3</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Champs additionnels de paiement en ligne pour le plugin Formidable<br />
-	Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointscoeur.org/]
+	<description>Champs additionnels de paiement en ligne pour le plugin Formidable
+_ Exemples sur le site de [l'Association Point-C&oelig;ur->http://france.pointscoeur.org/]
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Transaction-creer-des-formulaires-avec-paiement-en</lien>
 	<icon>images/transaction-64.png</icon>
 	<prefix>transaction</prefix>
 	<install>base/transaction_upgrade.php</install>
@@ -25,7 +26,7 @@
 	  	<inclure>base/transaction.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.9.3;]" />
 	<necessite id="saisies" version="[1.7.5;]" />
 	<necessite id="verifier" version="[0.1;]" />
