@@ -1,14 +1,16 @@
 <plugin>
-	<nom>Bonne ann&eacute;e</nom>
+	<nom>Bonne ann&#233;e</nom>
+	<slogan>Souhaiter la bonne ann&#233;e sur votre site.</slogan>
 	<auteur>Phil</auteur>
-	<version>0.0</version>
+	<version>0.1.0</version>
 	<etat>stable</etat>
 	<description>
-	Affiche tous les ans, durant le mois de janvier, un message souhaitant une bonne ann&eacute;e.<br />
-	Ajouter <code>#INCLURE{fond=bonne_annee}</code> dans vos pages.
+_ Affiche tous les ans, durant le mois de janvier, un message souhaitant une bonne ann&#233;e.
+_ Ajouter <code>#INCLURE{fond=bonne_annee}</code> dans vos pages.
 	</description>
 	<categorie>date</categorie>
 	<prefix>bonne_annee</prefix>
 	<icon>bonne_annee.png</icon>
-	<lien>http://www.spip-contrib.net/Plugin-Bonne-annee</lien>	
+	<lien>http://www.spip-contrib.net/Plugin-Bonne-annee</lien>
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
 </plugin>
