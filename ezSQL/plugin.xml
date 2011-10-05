@@ -1,11 +1,12 @@
 <plugin>
-   <nom>ezSQL : requetes SQL et export CSV</nom>
-   <auteur><ul><li>G. VLAVONOU</li><li>Y. EDAHE</li><li>C. PROTIERE</li></ul>ODB - Janvier 2008</auteur>
-   <version>1.0</version>
+   <nom>ezSQL</nom>
+   <slogan>Requ&#232;tes SQL et export CSV</slogan>
+   <auteur>G. VLAVONOU, Y. EDAHE, C. PROTIERE, [->www.officedubacbenin.bj]</auteur>
+   <version>1.0.0</version>
    <version_base>0.1</version_base>
    <etat>stable</etat>
-   <description>Permet d'executer des requetes SQL, d'afficher la structure de la base et d'exporter le resultat d'un SELECT sous forme de fichier CSV</description>
-   <lien>http://www.officedubacbenin.bj</lien> <!-- URI de documentation -->
+   <description>Permet d'ex&#233;cuter des requ&#232;tes SQL, d'afficher la structure de la base et d'exporter le resultat d'un SELECT sous forme de fichier CSV</description>
+   <lien>http://www.spip-contrib.net/ezSQL-requetes-SQL-et-export-CSV</lien>
    <icon>img_pack/logo_odb_150.png</icon>
    <prefix>ezsql</prefix>
    <pipeline>
@@ -13,9 +14,7 @@
       <action>ajouterBoutons</action>
       <inclure>inc-ezsql.php</inclure>
    </pipeline>
-   <!-- Chemin du fichier d'installation et de mise à jour -->
-   <!-- a decommenter le jour ou quelqu'un comprend comment l'installation auto fonctionne  <install>base/ezsql_install.php</install>-->
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>outil</categorie>
 </plugin>
