@@ -1,30 +1,19 @@
 <plugin>
-	<nom>
-	<multi>[fr]iCal priv&eacute; &eacute;tendu pour 1.9.2</multi>
-	</nom>
-	<auteur>
-	Joseph LARMARANGE - http://joseph.larmarange.net
-	</auteur>
+	<nom>iCal priv&#233; &#233;tendu</nom>
+	<slogan>Am&#233;lioration de l'agenda priv&#233;</slogan>
+	<auteur>[Joseph LARMARANGE->http://joseph.larmarange.net]</auteur>
 	<icon>images/calendrier-24.gif</icon>
-	<version>
-	1.0
-	</version>
-	<etat>
-	stable
-	</etat>
+	<version>1.0.0</version>
+	<etat>stable</etat>
 	<description>
-	<multi>
-	[fr] Ce plugin vient surcharger le flux {iCal} priv&eacute; g&eacute;n&eacute;r&eacute; par SPIP pour y inclure l'ensemble des messages
-	et annonces de la messagerie interne ainsi que l'ensemble des articles et des br&egrave;ves du site (quelque soit leur statut). 
-	Pour chaque auteur, le plugin v&eacute;rifie les droits de visualiser un article ou une br&egrave;ve. Chaque auteur ne verra donc que les 
-	articles et les br&egrave;ves qu'il peut visualiser dans l'espace priv&eacute;. En ce sens, ce plugin est compatible avec acces_restreint. 
-	Si celui-ci est activ&eacute;, alors chaque r&eacute;dacteur ne verra dans ce flux que s'il est autoris&eacute; &agrave; voir dans l'espace priv&eacute;.
-	</multi>
+_ Ce plugin vient surcharger le flux {iCal} priv&#233; g&#233;n&#233;r&#233; par SPIP pour y inclure l'ensemble des messages
+ et annonces de la messagerie interne ainsi que l'ensemble des articles et des br&#232;ves du site (quelque soit leur statut). 
+_ Pour chaque auteur, le plugin v&#233;rifie les droits de visualiser un article ou une br&#232;ve. Chaque auteur ne verra donc que les
+ articles et les br&#232;ves qu'il peut visualiser dans l'espace priv&#233;. En ce sens, ce plugin est compatible avec acces_restreint. 
+_ Si celui-ci est activ&#233;, alors chaque r&#233;dacteur ne verra dans ce flux que s'il est autoris&#233; &#224; voir dans l'espace priv&#233;.
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article2500</lien> <!-- URI de documentation -->
-	<prefix>
-	icpe
-	</prefix>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<lien>http://www.spip-contrib.net/spip.php?article2500</lien>
+	<prefix>icpe</prefix>
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>date</categorie>
 </plugin>
