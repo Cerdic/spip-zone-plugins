@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Abonnement</nom>
 	<auteur>Anne-lise Martenot (elastick.net) - BoOz (booz@reo.net)</auteur>
-	<version>1.4</version>
+	<version>1.4.1</version>
 	<version_base>1.3</version_base>
 	<etat>test</etat>
     <slogan>
@@ -12,10 +12,10 @@
     </slogan>
 	<icon>images/abonnement_48.png</icon>
 	<description>
-    - gerer des abonnements
-    - vendre en 'panier' des acces aux objets
-    - Necessite ou utilise les plugins Z, Z-commerce et montants.
-    - Le plugin inscription2 est &agrave; remplacer par le plugin clients.
+    - G&#233;rer des abonnements
+    - Vendre en 'panier' des acces aux objets
+    - N&#233;cessite ou utilise les plugins Z, Z-commerce et montants.
+    - Le plugin inscription2 est &#224; remplac&#233; par le plugin clients.
 	</description>
 	<lien>http://www.spip-contrib.net/</lien>
 	<prefix>abonnement</prefix>
@@ -69,15 +69,12 @@
 		<icone>images/abonnement_22.png</icone>
 		<url>abonnements</url>
 	</bouton>
-	
-	<chemin dir='' />
-	<chemin dir="squelettes" />
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="facteur" version="[1.0;]" />
 	<utilise id="zcommerce" version="[0.1;[" />
 	<necessite id="daterubriques" version="[1.1;]" />
     
 	<categorie>divers</categorie>
-        <traduire gestionnaire="salvatore" module="abo" reference="fr" />
+    <traduire gestionnaire="salvatore" module="abo" reference="fr" />
 
 </plugin>

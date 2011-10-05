@@ -2,14 +2,18 @@
 	<nom>Z-aboarticle</nom>
 	<auteur>Anne-lise Martenot (elastick.net) - BoOz (booz@reo.net)
 	</auteur>
-	<version>0.3.5</version>
-	<etat>
-	test
-	</etat>
+	<version>0.3.6</version>
+	<etat>test</etat>
 	<icon>images/zaboarticle_48.png</icon>
+    <slogan>
+        <multi>
+            [fr]Abonnements aux rubriques et articles
+            [en]Subscriptions to sections or articles
+        </multi>
+    </slogan>
 	<description>
-   G&eacute;rer des abonnements aux articles et aux rubriques, n&eacute;cessite les plugins acces restreint et abonnement.
-   On peut ajouter un systeme de commande payant li&eacute; à l'abonnement.
+   G&#233;rer des abonnements aux articles et aux rubriques, n&#233;cessite les plugins acces restreint et abonnement.
+   On peut ajouter un systeme de commande payant li&#233; à l'abonnement.
     </description>
 	<lien>http://www.spip-contrib.net/</lien>
 	<prefix>zaboarticle</prefix>
@@ -20,7 +24,7 @@
 
     <chemin dir='' />
 	<chemin dir="squelettes" />
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="abonnement" version="[1.0;]" />
 	<necessite id="montants" version="[0.1;]" />
 
