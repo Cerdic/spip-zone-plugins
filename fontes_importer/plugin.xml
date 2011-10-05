@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 
 	<!--  
@@ -12,25 +11,20 @@
 	 -->
 	 	
 	<nom>Fontes Importer (FonI)</nom>
-	<auteur>
-		[Christian Paulus->http://www.quesaco.org/]
-	</auteur>
-
+	<slogan>G&#233;rer des polices de caract&#232;res</slogan>
+	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
 	<icon>images/fontes_importer-64.png</icon>
 	
 	<description>
-		Facilite la gestion des fontes (polices de caract&#232;res)
-		polices de caract&#232;res.<br />
-		Permet le lien via url ou l&#39;importation des fontes 
-		directement dans la page web.
+		Facilite la gestion des fontes (polices de caract&#232;res). Permet le lien via url ou l'importation des fontes directement dans la page web.
 	</description>
 	
-	<lien>[Documentation sur www.quesaco.org->http://www.quesaco.org/Polices-de-caracteres-pour-site-web]</lien>
+	<lien>http://www.quesaco.org/Polices-de-caracteres-pour-site-web</lien>
 	
-	<version>1.01.04</version>
+	<version>1.1.4</version>
 	<etat>stable</etat>
 	
-	<licence>&#169; 2010 MIT &#38; GNU/GPL</licence>
+	<licence>&#169; 2010 GNU/GPL</licence>
 	
 	<!-- espace de nommage -->
 	<prefix>foni</prefix>
@@ -54,7 +48,7 @@
 		<inclure>inc/foni_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	
 	<categorie>outil</categorie>
 	
