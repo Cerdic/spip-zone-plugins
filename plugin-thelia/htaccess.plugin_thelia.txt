@@ -7,6 +7,9 @@ RewriteEngine On
 
 #RewriteBase /sous/repertoire/
 
+# Pour THELIA 1.5
+RewriteCond %{QUERY_STRING} ^fond=(.*)$
+RewriteRule ^(.*)$ spip.php?page=%1
 
 RewriteRule ^(adresse|cheque|commande|commande_detail|commande_visualiser|compte_modifier|compte_modifiererr|connexion|creercompte|formulerr|imgpop|livraison_adresse|mdpoublie|merci|moncompte|nouveau|panier|produit|regret|virement)\.php$	spip.php?page=$1 [QSA,L]
 RewriteRule ^(rubrique)\.php$	spip.php?page=$1_thelia [QSA,L]
