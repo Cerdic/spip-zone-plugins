@@ -1,20 +1,11 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Boucles XML
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN [notre-ville.net->http://notre-ville.net]
-_ &#169; 2006 Licence GPL
-	</auteur>
-	<version>
-	0.10
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Boucles XML</nom>
+	<slogan>Parser du xml avec les boucles SPIP</slogan>
+	<auteur>[C&#233;dric MORIN->http://notre-ville.net]</auteur>
+	<licence>&#169; 2006 Licence GPL</licence>
+	<version>0.10.0</version>
+	<etat>test</etat>
 	<description>
-	Parser du xml avec les boucles SPIP
-	
 	Le plugin introduit un type de boucle XML qui permet de parcourir l'arborescence d'un fichier au format
 xml au moyen des boucles spip. Les crit&#232;res disponibles sont
 -* <code>{xml=fichier.xml}</code> pour aller chercher fichier.xml dans le path
@@ -28,18 +19,11 @@ xml au moyen des boucles spip. Les crit&#232;res disponibles sont
 
 Les balises utilis&#233;es sont #XPATH, #NOEUD, #ATTRIBUTS (sur laquelle on utilisera le filtre <code>|extraire{}</code>), et #TEXTE pour les feuilles (vide pour les noeuds)
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	xml_options.php
-	</options>
-	<fonctions> <!-- fichier charge a chaque recalul de page -->
-	xml_fonctions.php
-	</fonctions>
-	<prefix> 
-	xml
-	</prefix>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<lien></lien>
+	<options>xml_options.php</options>
+	<fonctions>xml_fonctions.php</fonctions>
+	<prefix>xml</prefix>
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	<categorie>outil</categorie>
 </plugin>
