@@ -1,16 +1,17 @@
 <plugin>
-	<nom>Numerotation Rapide</nom>
+	<nom>Num&#233;rotation Rapide</nom>
+	<slogan>G&#233;rer facilement la num&#233;rotation des articles et rubriques</slogan>
 	<icon>icon.gif</icon>
 	<auteur>cedric.morin@yterium.com</auteur>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<etat>stable</etat>
-	<description>Une boite pour gerer facilement la numerotation des articles et rubriques</description>
+	<description>Ce plugin permet d'un clic de num&#233;roter/re-num&#233;roter/d&#233;-num&#233;roter tous les articles ou sous-rubriques d'une rubrique.</description>
 	<lien>http://www.spip-contrib.net/Numerotation-Rapide</lien> <!-- URI de documentation -->
 	<prefix>numero</prefix>
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<inclure>numero_pipeline.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
