@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom>Mots Partout Spip2</nom>
-	<auteur>Pierre Andrews (Mortimer)</auteur>
-	<auteur>Stephane Laurent (Bill)</auteur>
-	<auteur>Yoann Nogues (Zerax)</auteur>
-	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
+	<nom>Mots Partout</nom>
+	<slogan>G&#233;rer des mots clefs sur tous les &#233;l&#233;ments SPIP</slogan>
+	<auteur>Pierre Andrews (Mortimer), Stephane Laurent (Bill), Yoann Nogues (Zerax)</auteur>
+	<lien>http://www.spip-contrib.net/mot-clefs-partout</lien>
 	<version>0.5.1</version>
 	<etat>test</etat>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<categorie>navigation</categorie>
 	<description>
-	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
-	  Cette version int&eacute;gre les mots clefs arborescents.
-
-	  La documentation [c'est ici->http://www.spip-contrib.net/Plugin-mots-partout-dev-Groupe-de]
+		Cette contribution fournit une nouvelle page pour l’interface priv&#233;e permettant d'ajouter facilement des mots sur les &#233;l&#233;ments spip que l'on veut. Cette version int&#233;gre les mots clefs arborescents. 
 	</description>
 	<prefix>MotsPartout</prefix>
 	<options>mots_partout_choses.php</options>

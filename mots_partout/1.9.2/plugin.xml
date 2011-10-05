@@ -1,48 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Mots Partout
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Pierre Andrews (Mortimer)
-	</auteur>
-	<auteur>
-	Stephane Laurent (Bill)
-	</auteur>
-	<auteur>
-	Yoann Nogues (Zerax)
-	</auteur>
-	<lien>http://www.spip-contrib.net/Des-mots-clefs-partout</lien>
-	<version>
-	  0.4.1
-	</version>
-	<etat>
-	  test
-	</etat>
+	<nom>Mots Partout</nom>
+	<slogan>G&#233;rer des mots clefs sur tous les &#233;l&#233;ments SPIP</slogan>
+	<auteur>Pierre Andrews (Mortimer), Stephane Laurent (Bill), Yoann Nogues (Zerax)</auteur>
+	<lien>http://www.spip-contrib.net/mot-clefs-partout</lien>
+	<version>0.4.1</version>
+	<etat>test</etat>
 	<description>
-	  Gestion des mots clefs sur tous les &eacute;l&eacute;ments SPIP.
-	  Cette version int&#233;gre les mots clefs arborescents. 
-
-	  La documentation [c'est ici->http://www.spip-contrib.net/Plugin-mots-partout-dev-Groupe-de]
+		Cette contribution fournit une nouvelle page pour l’interface priv&#233;e permettant d'ajouter facilement des mots sur les &#233;l&#233;ments spip que l'on veut. Cette version int&#233;gre les mots clefs arborescents. 
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	  MotsPartout
-	</prefix>
-	<options>
-	  mots_partout_choses.php
-	</options>
-	<fonctions>
-	  motspartout_fonctions.php
-	</fonctions>
-	<install>
-	 base/motspartout_install.php
-	</install>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>MotsPartout</prefix>
+	<options>mots_partout_choses.php</options>
+	<fonctions>motspartout_fonctions.php</fonctions>
+	<install>base/motspartout_install.php</install>
+
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
@@ -58,8 +29,7 @@
 		<action>afficherMots</action>
 		<inclure>mots_partout.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>navigation</categorie>
 </plugin>
