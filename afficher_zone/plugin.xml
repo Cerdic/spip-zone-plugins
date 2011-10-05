@@ -5,7 +5,7 @@
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<description>
-	    trier/classer/afficher les plugins de la Zone &agrave; partir du flux RSS. 
+	    trier/classer/afficher les plugins de la Zone &#224; partir du flux RSS. 
       Trois formats de sortie: RSS, page spip et carte freemind.
 	</description>
 	<lien>http://spip-contrib.net/spip.php?article2733</lien>
