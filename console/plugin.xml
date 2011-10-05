@@ -1,34 +1,19 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Console de supervision des fichiers log spip
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Fil, Booz et C&#233;dric
-_ mail : fil@rezo.net
-_ adaptation en plugin par booz@rezo.net
-_ integration dans un flash/xml par cedric.morin@yterium.com
-_ &#169; 2005-2008 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	experimental
-	</etat>
+	<nom>Console de log</nom>
+	<slogan>Console de supervision des fichiers log spip</slogan>
+	<auteur>Fil, Booz (adaptation en plugin), C&#233;dric (int&#233;gration dans un flash/xml)</auteur>
+	<licence>&#169; 2005-2008 GNU/GPL</licence>
+	<version>0.2.0</version>
+	<etat>experimental</etat>
 	<description>
 	Console de supervision des fichiers log spip et sql, affich&#233;e en superposition dans l'espace priv&#233; ou dans une popup ind&#233;pendante.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
+	<lien></lien>
 	<prefix> 
 	Console
 	</prefix>
 	<options>console_options.php</options>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
@@ -40,6 +25,6 @@ _ &#169; 2005-2008 - Distribu&#233; sous licence GNU/GPL
 		<inclure>console_boutons.php</inclure>
 	</pipeline>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>outil</categorie>
 </plugin>
