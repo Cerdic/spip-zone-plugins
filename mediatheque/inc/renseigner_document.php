@@ -65,6 +65,10 @@ function renseigner_taille_dimension_image($fichier,$ext){
 		return _T('medias:erreur_copie_fichier',array('nom'=> $fichier));
 	}
 
+	if($taille == '2147483647'){
+		$taille = sprintf("%u", filesize($fichier));
+	}
+	
 	// VIDEOS : Prevoir traitement specifique ?
 	// (http://www.getid3.org/ peut-etre)
 	if ($ext == "mov") {
