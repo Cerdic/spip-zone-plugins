@@ -12,6 +12,6 @@ _ Support, questions/r&#233;ponses via la liste de discussion [spip-zone@rezo.ne
 _ Icone de [Tempest->http://tempest.deviantart.com/] sous licence CC BY-NC-ND.</description>
 	<fonctions>minical_fonctions.php</fonctions>
 	<prefix>CalendrierMini</prefix>
-	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>date</categorie>
 </plugin>
