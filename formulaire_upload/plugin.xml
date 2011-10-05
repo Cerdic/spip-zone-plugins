@@ -1,10 +1,11 @@
 <plugin>
 	<nom> <!-- Nom du plugin -->
 	<multi>
-	Formulaire Upload
-	[it] Modulo di upload
+	[fr]Formulaire Upload
+	[it]Modulo di upload
 	</multi>
 	</nom>
+	<slogan>Un dossier d'upload par r&#233;dacteur</slogan>
 	<auteur>	<!-- Auteur du plugin -->
 	fil@rezo.net
 	</auteur>
@@ -17,15 +18,14 @@
 	<icon>images/formupload-32.png</icon>
 	<description>
 		<multi>
-		Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso
-		[it]
-		Consente ad ogni redattore di effettuare l'upload di documenti in un suo spazio personale
+		[fr]Permet &#224; chaque r&#233;dacteur d'uploader des documents dans sa bo&#238;te perso
+		[it]Consente ad ogni redattore di effettuare l'upload di documenti in un suo spazio personale
 		</multi>
 	</description>
 	<prefix>
 		FormulaireUpload
 	</prefix>
-	<lien>http://www.spip-contrib.net/Formulaire-Upload</lien>
+	<lien>http://www.spip-contrib.net/Formulaire-upload,952</lien>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/formulaire_upload.php</inclure>
@@ -34,6 +34,6 @@
 		<nom>insert_head</nom>
 		<inclure>formulaire_upload_pipelines.php</inclure>
 	</pipeline>
-	<necessite id='spip' version='[2.0.0;]' />
+	<necessite id='spip' version='[2.0.0;2.1.99]' />
 	<categorie>outil</categorie>
 </plugin>
