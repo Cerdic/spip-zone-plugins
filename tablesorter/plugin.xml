@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
-	<nom>Tablesorter pour SPIP</nom>
-	<auteur>Chistian Bach http://lovepeacenukes.com/<br />
-	Portage sous SPIP par cym, b_b, Eric Lupinacci et BoOz.
-	</auteur>
-	<version>1.2</version>
+	<nom>Tablesorter</nom>
+	<slogan>Avec tableSorter, le tri sera top !</slogan>
+	<auteur>[Chistian Bach->http://lovepeacenukes.com/], portage sous SPIP par cym, b_b, Eric Lupinacci et BoOz</auteur>
+	<version>1.2.0</version>
 	<etat>stable</etat>
 	<icon>images/tablesorter-32.png</icon>
 	<description>
-	Ce plugin permet de trier les tableaux portant la class CSS "spip" en cliquant simplement sur l'ent&ecirc;te d'une colonne (le tableau HTML doit donc posséder les tags thead et tbody).<br />Voir en ligne toutes les options de tri, sur le site de <a href="http://tablesorter.com/">http://tablesorter.com</a>.
+	Ce plugin permet de trier les tableaux portant la class CSS "spip" en cliquant simplement sur l'ent&#234;te d'une colonne (le tableau HTML doit donc poss&#233;der les tags thead et tbody). Voir en ligne toutes les options de tri, sur le site de [->http://tablesorter.com].
 	</description>
+	<lien>http://www.spip-contrib.net/Tablesorter-pour-SPIP</lien>
 	<prefix>tablesorter</prefix>
 	<pipeline>
 		<nom>insert_head_css</nom>
@@ -23,5 +23,6 @@
 		<nom>header_prive</nom>
 		<inclure>tablesorter_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
