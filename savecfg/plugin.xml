@@ -1,8 +1,8 @@
 <plugin>
 	<nom>SaveCFG</nom>
-	</slogan>Import/export des configurations de CFG</slogan>
+	<slogan>Import/export des configurations de CFG</slogan>
 	<auteur>Yohann Prigent (potter64), [Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_]</auteur>
-	<licence>(c) 2009</licence>
+	<licence>(c) 2009-2011 GNU/GPL</licence>
 	<version>2.6.0</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
