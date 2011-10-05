@@ -8,7 +8,7 @@
 	</slogan>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
 	<version>1.0.5</version>
-	<licence>GPLv3</licence>
+	<licence>GPLv3 - (c) 2009-2011</licence>
 	<etat>stable</etat>
 	<description>
 _ Ce plugin propose un formulaire complet pour envoyer une page d'un site SPIP ({n'importe laquelle}) &#224; une liste d'adresses e-mail.
