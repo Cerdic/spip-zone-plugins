@@ -1,60 +1,37 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Champs homonymes
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 	francois.vachon@iago.ca
-_ &#169; 2006 - 2007 - Distribue sous licence GNU/GPL
- 	[iago.ca->http://www.iago.ca]
-	</auteur>
-	<version>
-	0.3
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Champs homonymes</nom>
+	<slogan>Gestion des nouveaux champs dans les tables SPIP</slogan>
+	<auteur>[->mailto:francois.vachon@iago.ca]</auteur>
+	<licence>&#169; 2006 - 2007 GNU/GPL</licence>
+	<version>0.3.0</version>
+	<etat>test</etat>
 	<description>
-	Rendre possible la visualisation et la mise &agrave; jour de nouveaux champs ajout&eacute;s dans plusieurs tables de SPIP gr&acirc;ce aux champs EXTRA.
-<hr />
-Ce plugin...
-<ul>
-<li>-surcharge le fichier extra.php<br /></li>
-<li>-permet d'utiliser le multilinguime avec les balises &lt;multi&gt; dans les champs EXTRA <br /></li>
-<li>-ne modifie pas la base de donn&eacute;es de SPIP (la modification des tables est &agrave; votre discression)<br /></li>
-<li>-synchronise les mises &agrave; jour des champs EXTRA avec leur champ homonyme<br /></li>
-</ul>
-<hr />
-Une fois activ&eacute;, ce plugin offre en option des [pages de test autodocument&#233;es->../spip.php?page=homonymes_plus2] qui permettent
-<ul>
-<li>-de cr&eacute;er temporairement certains champs extra<br /></li>
-<li>-d'ajouter temporairement des nouveaux champs homonymes dans certaines tables de SPIP<br /></li>
-<li>-de choisir entre synchroniser les nouveaux champs homonymes avec les valeurs pr&eacute;sentes dans les champs EXTRA ou synchroniser les champs EXTRA  avec les valeurs pr&eacute;sentes dans les nouveaux champs homonymes<br /> </li>
-<li>-de visualiser le r&eacute;sultat de la syncronisation de l'ensemble des champs homonymes</li>
-<li>-de supprimer ces nouveaux champs temporaires pour revenir &agrave; la version originale des tables de SPIP </li>
-</ul>
-<em>Seul un administrateur non restreint peut faire ces tests.</em>
-<hr />
-Pour SPIP 1.9.2a [8878]
-<hr />
-Pour plus d'informations ou pour nous laisser vos commentaires: [->www.monsitespip.com/spip.php?article7]
+	Rendre possible la visualisation et la mise &#224; jour de nouveaux champs ajout&#233;s dans plusieurs tables de SPIP gr&#226;ce aux champs EXTRA.
+
+Ce plugin:
+-* surcharge le fichier extra.php
+-* permet d'utiliser le multilinguime avec les balises <multi> dans les champs EXTRA
+-* ne modifie pas la base de donn&#233;es de SPIP (la modification des tables est &#224; votre discression)
+-* synchronise les mises &#224; jour des champs EXTRA avec leur champ homonyme
+
+
+Une fois activ&#233;, ce plugin offre en option des pages de test autodocument&#233;es (<code>/spip.php?page=homonymes_plus2</code>) qui permettent:
+-* de cr&#233;er temporairement certains champs extra
+-* d'ajouter temporairement des nouveaux champs homonymes dans certaines tables de SPIP
+-* de choisir entre synchroniser les nouveaux champs homonymes avec les valeurs pr&#233;sentes dans les champs EXTRA ou synchroniser les champs EXTRA  avec les valeurs pr&#233;sentes dans les nouveaux champs homonymes
+-* de visualiser le r&#233;sultat de la syncronisation de l'ensemble des champs homonymes
+-* de supprimer ces nouveaux champs temporaires pour revenir &#224; la version originale des tables de SPIP
+
+Seul un administrateur non restreint peut faire ces tests.
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	homonymes
-	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>homonymes</prefix>
 	<fonctions>
 	mes_fonctions_homonymes.php
 	</fonctions>
 	<options>
 	mes_options_homonymes.php
 	</options>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>outil</categorie>
 </plugin>
