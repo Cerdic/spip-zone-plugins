@@ -31,7 +31,7 @@ function gis_inserer_javascript($flux){
 		$flux .="\n".'<script type="text/javascript" src="http://api.maps.ovi.com/jsl.js"></script>'."\n";
 	if ($config['api'] == 'yandex')
 		$flux .="\n".'<script type="text/javascript" src="http://api-maps.yandex.ru/1.1/index.xml?key='.$config['api_key_yandex'].'"></script>'."\n";
-	
+		
 	// insertion de la lib mapstraction
 	if(in_array($config['api'],array('cartociudad','google','googlev3','yandex'))){
 		$geocoder = ($config['geocoder']) ? ',[geocoder]' : '';
