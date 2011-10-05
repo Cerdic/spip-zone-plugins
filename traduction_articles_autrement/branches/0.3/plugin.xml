@@ -55,7 +55,7 @@
         </pipeline>	
 	<fonctions>taa_fonctions.php</fonctions>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<utilise id="afficher_objets" version="[1.1.8;]" />	
 	<utilise id="cfg" version="[ 1.15.1;]" />	
 	<utilise id="medias" version='[1.6.1;]'/>	
