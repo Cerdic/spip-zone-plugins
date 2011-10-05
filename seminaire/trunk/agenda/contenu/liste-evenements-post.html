@@ -13,7 +13,7 @@
 <ul class='liste_items evenements'>
 	<li>
 		<ul>
-			<BOUCLE_agenda(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination}>
+			<BOUCLE_agenda(EVENEMENTS){par date_debut}{age_relatif_debut<=0}{id_evenement?}{id_article?}{id_rubrique?}{titre_mot=#TITRE}{id_evenement_source?}{pagination #ENV{pas,9}}>
 				<li class='item[ (#EXPOSE)][ (#ID_EVENEMENT_SOURCE|oui)repetition]'>
 					[(#MODELE{seminaire_acm}|trim|sinon{'?'})]
 				</li>
