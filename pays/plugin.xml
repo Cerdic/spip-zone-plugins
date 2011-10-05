@@ -1,9 +1,14 @@
 <plugin>
 	<nom><multi>[fr]Pays - ISO 3166-1[en]Countries- ISO 3166-1</multi></nom>
-	
+	<slogan>
+		<multi>
+		[fr]Liste officielle des pays
+		[en]Official list of countries
+		</multi>
+	</slogan>
 	<auteur>Collectif SPIP</auteur>
 	
-	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
+	<auteur>[Cyril MARION - Ateliers CYM->http://www.cym.fr]</auteur>
 	
 	<icon>img/pays_32x32.png</icon>
 	
@@ -15,12 +20,12 @@
 	
 	<etat>stable</etat>
 	
-	<lien>http://www.spip-contrib.net/Liste-des-pays-avec-codes-ISO-3166-1?var_mode=calcul</lien>
+	<lien>http://www.spip-contrib.net/Liste-des-pays-avec-codes-ISO-3166-1</lien>
 	
 	<description>
 	<multi>
-	[fr] Fournit la liste officielle des pays &eacute;labor&eacute;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La base comporte le champ num&eacute;rique id_pays issu du plugin spip_geographie, le code ISO3166-1 et le nom en multi-lingue.
-	[en] Includes the official list of countries provided by the [International Orgnisation for Standardization->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. The fields are the same id_pays (integer) as in spip_geogrpahe as primary key, ISO 3166-1 2 character code as key, and name of the country in different languages.
+	[fr]Ce plugin fournit la liste officielle des pays &#233;labor&#233;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La base comporte le champ num&#233;rique id_pays issu du plugin spip_geographie, le code ISO3166-1 et le nom en multi-lingue.
+	[en]This plugin includes the official list of countries provided by the [International Orgnisation for Standardization->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. The fields are the same id_pays (integer) as in spip_geogrpahe as primary key, ISO 3166-1 2 character code as key, and name of the country in different languages.
 	</multi>
 	</description>
 	
@@ -38,7 +43,7 @@
 		<inclure>base/pays_tables.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.0.9;3.0.0]" />
+	<necessite id="SPIP" version="[2.0.9;3.0.99]" />
 	<utilise id="saisies" />
 
 	<categorie>outil</categorie>
