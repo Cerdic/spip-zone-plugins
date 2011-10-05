@@ -1,12 +1,13 @@
 <plugin>
   <nom>Pagination Simple</nom>
-  <auteur>Shazaam [->www.mutins.net], Cedric Morin</auteur>
+  <slogan>Un mod&#232;le de pagination ultra simple pour vos &#233;l&#233;ments SPIP</slogan>
+  <auteur>[Shazaam->http://www.mutins.net], C&#233;dric Morin</auteur>
   <licence>(c) 2009 GPL</licence>
-  <version>1.0</version>
-	<lien>http://www.spip-contrib.net/Pagination_simple</lien><!-- URI de documentation -->
+  <version>1.0.0</version>
+	<lien>http://www.spip-contrib.net/Pagination_simple</lien>
   <etat>stable</etat>
-  <description>Une pagination simple</description>
+  <description>Ce plugin propose un mod&#232;le de pagination ultra simple pour vos &#233;l&#233;ments SPIP</description>
   <prefix>paginationsimple</prefix>
-  <necessite id="SPIP" version="[1.9.2;]" />
+  <necessite id="SPIP" version="[1.9.2;2.1.99]" />
   <categorie>navigation</categorie>
 </plugin>
