@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Clients</nom>
-	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
 	<version>0.5.1</version>
 	<version_base>0.1</version_base>
@@ -11,7 +11,7 @@
 		[en]Shopper forms
 		</multi>
 	</slogan>
-	<description>Permet l'inscription facile et configurable pour des clients, en les inscrivant comme utilisateurs et contacts dans le même temps. Ils peuvent ensuite modifier leur profil.</description>
+	<description>Permet l'inscription facile et configurable pour des clients, en les inscrivant comme utilisateurs et contacts dans le m&#234;me temps. Ils peuvent ensuite modifier leur profil.</description>
 	<categorie>auteur</categorie>
 	<icon></icon>
 	
