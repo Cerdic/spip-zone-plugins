@@ -17,7 +17,7 @@
 	
 	<prefix>clients</prefix>
 	
-	<necessite id="SPIP" version="[2.1.10;]" />
+	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
 	<necessite id="saisies" version="[1.9.0;]" />
 	<necessite id="contacts" version="[1.13;]" />
