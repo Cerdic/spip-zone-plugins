@@ -1,41 +1,35 @@
 <plugin>
 	<nom>Associaspip</nom>
-	<auteur>
-	Bernard Blazin - Fran&#231;ois de Montlivault 
-	</auteur>
+	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault</auteur>
 	<version>0.7.0</version>
 	<etat>test</etat>
 	<slogan>Gestion d'associations</slogan>
-	<description>
-Gestion de petites associations.
-_ Ce plugin n&#233;cessite l'installation des plugins cfg et Inscription2
-	</description>
+	<description>Gestion de petites associations.</description>
 	<prefix>association</prefix>	
 	<install>base/association_gestion.php</install>
 	<lien>http://www.spip-contrib.net/Plugin-Gestion-d-associations</lien>
     <icon>annonce.gif</icon>
 
-    <fonctions>association_fonctions.php</fonctions>  <!-- fichier charge a chaque recalul de page (espace public) -->
+    <fonctions>association_fonctions.php</fonctions>
 
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
 		<inclure>inc_association.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>	
-			<nom>affiche_milieu</nom>
+		<nom>affiche_milieu</nom>
 		<action>affiche_milieu</action>
 		<inclure>inc_association.php</inclure>
 	</pipeline>
-	
+
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>header_prive</action>		
 		<inclure>association_fonctions.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="(1.9.1;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<utilise id="cfg" version="[1.0;]" />
 	<utilise id="Inscription2" version="[0.1;]" />
 	<categorie>divers</categorie>

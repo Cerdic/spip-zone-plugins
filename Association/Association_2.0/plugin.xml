@@ -1,8 +1,6 @@
 <plugin>
 	<nom>Associaspip</nom>
-	<auteur>
-	Bernard Blazin - Fran&#231;ois de Montlivault - Emmanuel Saint-James
-	</auteur>
+	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault, Emmanuel Saint-James</auteur>
 	<version>1.0.0</version>
 	<version_base>42024</version_base>
 	<meta>association_metas</meta>
@@ -30,5 +28,5 @@
 	</pipeline>
 	
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;2.1.0)" />
+	<necessite id="SPIP" version="[2.0.0;2.0.99" />
 </plugin>

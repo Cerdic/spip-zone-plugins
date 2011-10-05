@@ -1,8 +1,6 @@
 <plugin>
 	<nom>Associaspip</nom>
-	<auteur>
-	Bernard Blazin - Fran&#231;ois de Montlivault - [plugandspip->http://www.plugandspip.com]
-	</auteur>
+	<auteur>Bernard Blazin, Fran&#231;ois de Montlivault</auteur>
 	<version>0.5.0</version>
 	<etat>dev</etat>
 	<lien>http://www.plugandspip.com/spip.php?page=explications</lien>
