@@ -1,12 +1,12 @@
 <plugin>
 	<nom>SPIP Suggest</nom>
+	<slogan>Afficher des suggestions pour le formulaire de recherche</slogan>
 	<auteur>Yohann Prigent, Fil</auteur>
 	<prefix>spip_suggest</prefix>
 	<fonctions>suggest_fonctions.php</fonctions>
 	<version>2.1.1</version>
 	<etat>experimental</etat>
-	<description>SPIP Suggest permet d'afficher des suggestions pour le formulaire de recherche "&#224; la Google Suggest". Le plugin n&#233;cessite le programme
-	Myisam_fulltext disponible sous licence GPL. Plus d'infos sur la documentation</description>
+	<description>SPIP Suggest permet d'afficher des suggestions pour le formulaire de recherche "&#224; la Google Suggest". Le plugin n&#233;cessite le programme Myisam_fulltext disponible sous licence GPL.</description>
 	<lien>http://www.spip-contrib.net/?rubrique1303</lien>
 	<pipeline>
 		<nom>insert_head_css</nom>
@@ -16,6 +16,7 @@
 		<nom>insert_head</nom>
 		<inclure>suggest_fonctions.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;2.0.99]" />
 	<necessite id="Fulltext" version="[0.3;]" />
 	<necessite id="cfg" version="[1.13.0;]" />
 	<categorie>navigation</categorie>
