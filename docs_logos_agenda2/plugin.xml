@@ -1,12 +1,13 @@
 <plugin>
 	<nom>
 	<multi>
-	[fr]Documents et Logo sur les &eacute;v&egrave;nements agenda 2
+	[fr]Documents et logo sur &#233;v&#233;nements
 	[es]Documentos y el logotipo en los eventos
 	[en]Documents and logo on the events
 	[de]Dokumente und logo auf der Event
 	</multi>
 	</nom>
+	<slogan>Pour des &#233;v&#233;nements illustr&#233;s</slogan>
 	<auteur>Guy Cesaro</auteur>
 	<version>1.3.1</version>
 	<prefix>docs_logos_agenda2</prefix>
@@ -14,12 +15,13 @@
 	<etat>test</etat>
 	<description>
 	<multi>
-	[fr]Des documents et logos sur les &eacute;v&egrave;nements d&#39;Agenda 2
+	[fr]Ce plugin propose un formulaire d'ajout de logo et de documents sur l'&#233;dition d’un &#233;v&#233;nement d'Agenda 2, de la m&#234;me mani&#232;re que pour un objet spip standard (comme un article, une rubrique...).
 	[es]Documentos y logos en los eventos del Agenda 2
 	[en]Documents and logos on the events of Agenda 2
 	[de]Dokumente und Logos die auf die event der Agenda 2
 	</multi>
 	</description>
+	<lien>http://www.spip-contrib.net/Documents-et-logo-des-evenements-Agenda-2,3444</lien>
 	<fonctions>agenda_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>
@@ -30,7 +32,7 @@
 		<inclure>docs_logos_agenda2_pipelines.php</inclure>
 	</pipeline>
 	<categorie>outil</categorie>
-	<necessite id='SPIP' version='[2.0;]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<necessite id="agenda" version='[2.0.3;]'/>
 	<necessite id="medias" version='[1.5.0;]'/>
 </plugin>
