@@ -1,28 +1,17 @@
 <plugin>
-	<nom>Booksearch
-	</nom>
-	<auteur>
-	Fil
-	</auteur>
-	<licence>
-		&#169; 2010-2011 - GNU/GPL
-	</licence>
-	<version>
-	0.2.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Booksearch</nom>
+	<slogan>Faire des boucles sur des livres</slogan>
+	<auteur>Fil</auteur>
+	<licence>&#169; 2010-2011 - GNU/GPL</licence>
+	<version>0.2.1</version>
+	<etat>test</etat>
 	<description>
-	Faire des boucles sur des livres (recherche sur Amazon ou google
-	books)
+	Ce plugin a pour vocation de servir de passerelle vers des webservices s’int&#233;ressant aux livres.
 	</description>
-	<prefix>
-	booksearch
-	</prefix>
+	<prefix>booksearch</prefix>
 	<icon>booksearch.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-Booksearch</lien>
 	<chemin dir='' />
 	<categorie>outil</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
