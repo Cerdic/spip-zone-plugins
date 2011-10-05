@@ -1,14 +1,14 @@
 <plugin>
-	<nom><multi>[fr]Pays - ISO 3166-1[en]Countries- ISO 3166-1</multi></nom>
+	<nom><multi>[fr]Pays ISO 3166-1[en]Countries ISO 3166-1</multi></nom>
 	<slogan>
 		<multi>
 		[fr]Liste officielle des pays
-		[en]Official list of countries
+		[en]Official country names and codes list
 		</multi>
 	</slogan>
-	<auteur>Collectif SPIP</auteur>
+	<auteur></auteur>
 	
-	<auteur>[Cyril MARION - Ateliers CYM->http://www.cym.fr]</auteur>
+	<auteur>Collectif SPIP, [Cyril MARION->http://www.cym.fr], [Ateliers CYM->http://www.cym.fr]</auteur>
 	
 	<icon>img/pays_32x32.png</icon>
 	
@@ -24,8 +24,8 @@
 	
 	<description>
 	<multi>
-	[fr]Ce plugin fournit la liste officielle des pays &#233;labor&#233;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La base comporte le champ num&#233;rique id_pays issu du plugin spip_geographie, le code ISO3166-1 et le nom en multi-lingue.
-	[en]This plugin includes the official list of countries provided by the [International Orgnisation for Standardization->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. The fields are the same id_pays (integer) as in spip_geogrpahe as primary key, ISO 3166-1 2 character code as key, and name of the country in different languages.
+	[fr]Ce plugin fournit la liste officielle des pays &#233;labor&#233;e par l'[Organisation Internationale de Normalisation->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. La table des pays inclut le champ num&#233;rique id_pays issu du plugin spip_geographie, le code ISO3166-1 et le nom du pays dans diff&#233;rents langages.
+	[en]This plugin includes the official country names and codes list provided by the [International Orgnisation for Standardization->http://www.iso.org/iso/fr/country_codes/iso_3166_code_lists.htm]. The country table includes a primary key id_pays used by spip_geographie plugin, an ISO 3166-1 2 code as key, and country names in different languages.
 	</multi>
 	</description>
 	
@@ -46,6 +46,6 @@
 	<necessite id="SPIP" version="[2.0.9;3.0.99]" />
 	<utilise id="saisies" />
 
-	<categorie>outil</categorie>
+	<categorie>divers</categorie>
 
 </plugin>
