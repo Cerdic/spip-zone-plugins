@@ -1,22 +1,22 @@
 <plugin>
 	<nom>Agenda</nom>
 	<icon>icon.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
+	<auteur>
 	[C&#233;dric MORIN->http://www.yterium.net], [b_b->http://www.spip-contrib.net/b_b], [romy.tetue.net->http://romy.tetue.net], [Julien Tessier->http://www.cahri.com]
 	</auteur>
-	<licence>GPL 3 - &#169; 2006-2010</licence>
+	<licence>GPL 3 - (c) 2006-2010</licence>
 	<version>2.2.1</version>
 	<version_base>0.23</version_base>
 	<etat>stable</etat>
 	<slogan>Agenda &#233;v&#233;nementiel</slogan>
 	<description>Agenda Ev&#233;nementiel</description>
-	<lien>http://www.spip-contrib.net/article2858</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/article2858</lien>
 	<options>agenda_options.php</options>
 	<fonctions>public/agenda.php</fonctions>
 	<fonctions>agenda_fonctions.php</fonctions>
 	<prefix>agenda</prefix>
 	<install>base/agenda_upgrade.php</install>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+
 	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>agenda_autoriser.php</inclure>

@@ -1,20 +1,14 @@
 <plugin>
 	<nom>Agenda</nom>
-	<auteur>Cedric MORIN - &#169; 2006</auteur>
-	<version>0.1</version>
-	<licence>GPL</licence>
+	<auteur>Cedric MORIN</auteur>
+	<version>0.1.0</version>
+	<licence>GPL - (c) 2006</licence>
 	<etat>stable</etat>
 	<description>Agenda Ev&#233;nementiel</description>
 	<lien>http://zone.spip.org/trac/spip-zone/wiki/AgenDa</lien>
 	<options>agenda_mes_options.php</options>
 	<fonctions>agenda_mes_fonctions.php</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
 	<prefix>Agenda</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<pipeline>
 		<nom>ajouter_onglets</nom>
 		<inclure>agenda.php</inclure>
@@ -39,9 +33,6 @@
 	<pipeline>
 		<nom>taches_generales_cron</nom>
 	</pipeline>
-
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
-
 	<necessite id="SPIP" version="[1.9.0;1.9.1)" />
 	<categorie>date</categorie>
 </plugin>
