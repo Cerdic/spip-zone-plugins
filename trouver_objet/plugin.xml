@@ -2,8 +2,8 @@
 	<nom>Trouver objet</nom>
 	<icon>loupe.png</icon>
 	<auteur>Anne-lise Martenot [->http://elastick.net]</auteur>
-	<licence>GPL 3 - &#169; 2010</licence>
-	<version>0.2.1</version>
+	<licence>GPL 3 - &#169; 2011</licence>
+	<version>0.2.2</version>
 	<etat>test</etat>
    <slogan>Trouver rapidement un objet</slogan>
 	<description>Champ input avec un s&#233;lecteur javascript pour trouver un objet SPIP comme un article ou un mot, renvoie vers la page de l'objet s'il existe.</description>
