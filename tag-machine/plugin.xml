@@ -1,23 +1,16 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	  tag-machine
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (mortimer.pa@free.fr), BoOz (booz@rezo.net)
-	</auteur>
-	<version>
-	  0.1
-	</version>
-	<etat>
-	  dev
-	</etat>
+	<nom>Tag Machine</nom>
+	<slogan>Outil pour ajouter des tags</slogan>
+	<auteur>[Pierre Andrews->mortimer.pa@free.fr], [BoOz->booz@rezo.net]</auteur>
+	<version>0.1.0</version>
+	<etat>dev</etat>
 	<description>
 	  <multi>
-		[fr] outil pour ajouter des tags (mots clefs) (un peu le bordel actuellement). Necessite un groupe de mot cles nomme tags
-		[en] tool to add tags (keywords) (a bit of a mess right now)
+		[fr]Outil pour ajouter des tags (mots cl&#233;s). N&#233;cessite un groupe de mot cl&#233;s nomm&#233; tags
+		[en]Tool to add tags (keywords)
 	  </multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien></lien>
 	<options>
 		tag-machine_options.php
 	</options>
@@ -27,7 +20,6 @@
 	<prefix>
 	  tag-machine
 	</prefix>
-	<!--rien d'autre, on fournit juste un inc-->
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 </plugin>
