@@ -64,5 +64,5 @@
 	</bouton> 
 	
 	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
-	<necessite id="prix" version="[0.1;]" />
+	<necessite id="prix" version="[0.1.0;]" />
 </plugin>
