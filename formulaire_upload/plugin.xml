@@ -1,20 +1,14 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
+	<nom>
 	<multi>
 	[fr]Formulaire Upload
 	[it]Modulo di upload
 	</multi>
 	</nom>
-	<slogan>Un dossier d'upload par r&#233;dacteur</slogan>
-	<auteur>	<!-- Auteur du plugin -->
-	fil@rezo.net
-	</auteur>
-	<version>
-	0.3.1
-	</version>
-	<etat>
-	dev
-	</etat>
+	<slogan>Formulaire public pour charger des documents</slogan>
+	<auteur>fil@rezo.net</auteur>
+	<version>0.3.2</version>
+	<etat>dev</etat>
 	<icon>images/formupload-32.png</icon>
 	<description>
 		<multi>
@@ -22,9 +16,7 @@
 		[it]Consente ad ogni redattore di effettuare l'upload di documenti in un suo spazio personale
 		</multi>
 	</description>
-	<prefix>
-		FormulaireUpload
-	</prefix>
+	<prefix>FormulaireUpload</prefix>
 	<lien>http://www.spip-contrib.net/Formulaire-upload,952</lien>
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
