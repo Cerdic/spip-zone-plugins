@@ -1,29 +1,27 @@
 <plugin>
-	<nom><multi>[fr]GCalendar, Google Calendar pour SPIP[en]GCalendar, Google Calendar for SPIP[ar]GCalendar, Google Calendar &#1604; SPIP</multi></nom>
-	<auteur>Auteur Principal : Gilles Quiniou [contact->mailto:gilles@quiniou.net]<br />Co-Auteur : [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com]</auteur>
+	<nom>GCalendar</nom>
+	<slogan>
+		<multi>
+			[fr]Google Calendar
+			[en]Google Calendar
+			[ar]Google Calendar
+		</multi>
+	</slogan>
+	<auteur>[Gilles Quiniou->mailto:gilles@quiniou.net], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com]</auteur>
+	<licence>GNU/GPL</licence>
 	<version>1.0.9</version>
 	<etat>test</etat>
+	<lien>http://www.spip-contrib.net/Plugin-Agenda-Google-pour-SPIP</lien>
     <description>
-<multi>
-[fr]
-Ce plugin int&egrave;gre Google Calendar &agrave; SPIP.
-
-N&#233;cessite : CFG	
-[en]
-This plugin integrates Google Calendar to SPIP.
-		
-Need/Require : CFG	
-[ar]
-&#1610;&#1583;&#1605;&#1580; &#1607;&#1584;&#1575; &#1575;&#1604;&#1576;&#1585;&#1606;&#1575;&#1605;&#1580; &#1575;&#1604;&#1605;&#1587;&#1575;&#1593;&#1583; Google Calendar &#1604; SPIP.
-
-&#1575;&#1604;&#1581;&#1575;&#1580;&#1577; / &#1578;&#1588;&#1578;&#1585;&#1591; : CFG
-</multi>		
-
-{{Licence :}} [GNU/GPL->http://www.gnu.org/licenses/old-licenses/gpl-1.0.html]
+		<multi>
+			[fr]Ce plugin int&egrave;gre Google Calendar &agrave; SPIP.
+			[en]This plugin integrates Google Calendar to SPIP.
+			[ar]&#1610;&#1583;&#1605;&#1580; &#1607;&#1584;&#1575; &#1575;&#1604;&#1576;&#1585;&#1606;&#1575;&#1605;&#1580; &#1575;&#1604;&#1605;&#1587;&#1575;&#1593;&#1583; Google Calendar &#1604; SPIP.
+		</multi>
 	</description>
 	<prefix>gcalendar</prefix>
 	<icon>img_pack/logo_gc.gif</icon>
-	<necessite id='SPIP' version='[1.9.2;]' />
+	<necessite id='SPIP' version='[1.9.2;2.1.99]' />
 	<necessite id='cfg' version='[1.4;]' />
- <categorie>date</categorie>
+	<categorie>date</categorie>
 </plugin>
