@@ -442,4 +442,11 @@ function association_maj_51602()
 }
 $GLOBALS['association_maj'][51602] = array(array('association_maj_51602'));
 
+/* Ces champs de configuration n'etant plus geres par defaut, les passer en personalises pour ceux qui les utilisent */
+$GLOBALS['association_maj'][52476] = array(
+	array('sql_update', 'spip_association_metas', array('nom' => "'meta_utilisateur_n_siret'" ), "nom='siret' AND valeur<>''" ),
+	array('sql_update', 'spip_association_metas', array('nom' => "'meta_utilisateur_n_tva'" ), "nom='tva' AND valeur<>''" ),
+	);
+
+
 ?>
