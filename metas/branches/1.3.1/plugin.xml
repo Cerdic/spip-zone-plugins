@@ -1,18 +1,18 @@
 <plugin>
-	<nom><multi>[fr]M&eacute;tas[en]Meta[ru]Мета-данные</multi></nom>
+	<nom><multi>[fr]M&#233;tas[en]Meta[ru]&#1052;&#1077;&#1090;&#1072;-&#1076;&#1072;&#1085;&#1085;&#1099;&#1077;</multi></nom>
+	<slogan>Gestion des m&#233;tas des articles et rubriques</slogan>
 	<version>1.3.1</version>
 	<version_base>1.0</version_base>
 	<etat>stable</etat>
 	<icon>images/metas-24.png</icon>
 	<auteur>[Quentin de Serres-Justiniac->http://www.spip-contrib.net/?auteur10451]
-_ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
+, (d'apr&egrave;s une id&#233;e originale d'[Olivier Gendrin->http://www.spip-contrib.net/?auteur1343])</auteur>
 	<description><multi>
-	[fr]Gestion des m&eacute;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.
+	[fr]Gestion des m&#233;tas <code>title</code>, <code>description</code> et <code>keywords</code> des articles et rubriques de SPIP, et mise en exergue de mots importants.
     [en]This plugin makes possible to create and edit the META data for articles and rubriques of SPIP site.
-    [ru]Плагин позволяет создавать и редактировать META заголовки для страниц и разделов сайта. Перевод плагина - http://www.aloha.kiev.ua.
+    [ru]&#1055;&#1083;&#1072;&#1075;&#1080;&#1085; &#1087;&#1086;&#1079;&#1074;&#1086;&#1083;&#1103;&#1077;&#1090; &#1089;&#1086;&#1079;&#1076;&#1072;&#1074;&#1072;&#1090;&#1100; &#1080; &#1088;&#1077;&#1076;&#1072;&#1082;&#1090;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100; META &#1079;&#1072;&#1075;&#1086;&#1083;&#1086;&#1074;&#1082;&#1080; &#1076;&#1083;&#1103; &#1089;&#1090;&#1088;&#1072;&#1085;&#1080;&#1094; &#1080; &#1088;&#1072;&#1079;&#1076;&#1077;&#1083;&#1086;&#1074; &#1089;&#1072;&#1081;&#1090;&#1072;. &#1055;&#1077;&#1088;&#1077;&#1074;&#1086;&#1076; &#1087;&#1083;&#1072;&#1075;&#1080;&#1085;&#1072;
 	</description>
 	<lien>http://www.spip-contrib.net/?rubrique1250</lien>
-	<necessite id="SPIP" version="[2.0.0;]" />
 	<prefix>metas</prefix>
 	<fonctions>metas.php</fonctions>
 	<pipeline>
@@ -51,5 +51,6 @@ _ (d'apr&egrave;s une id&eacute;e originale d'[Olivier Gendrin->http://www.spip-
 		<inclure>metas_autorisations.php</inclure>
 	</pipeline>
 	<categorie>outil</categorie>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<utilise id="Z" />
 </plugin>
