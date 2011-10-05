@@ -2,9 +2,10 @@
 	<nom>Montants</nom>
 	<auteur>Anne-lise Martenot - elastick.net</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<version_base>0.3</version_base>
 	<etat>dev</etat>
+    <slogan>Définir un prix par d&#233;faut</slogan>
 	<description>Ce plugin -grace au pipeline_prix- permet d'avoir un prix par defaut pour tout objet SPIP:
 	article, mot, document, rubrique... ou autre. On peut configurer la liste des identifiants ou du parent de la branche.
 	</description>
@@ -44,8 +45,8 @@
 		<url>montants</url>
 	</bouton>
 	
-	<necessite id="SPIP" version="[2.1.8;]" />
-    <necessite id="prix" version="[0.1;]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
+    <necessite id="prix" version="[0.1.0;]" />
     <traduire gestionnaire="salvatore" module="montants" reference="fr" />
 
 </plugin>
