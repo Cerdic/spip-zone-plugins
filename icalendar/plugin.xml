@@ -1,27 +1,14 @@
 <plugin>
-	<nom>iCalendar
-	</nom>
-	<auteur>
-	Fil
-	</auteur>
-	<licence>
-		&#169; 2010-2011 - GNU/GPL
-	</licence>
-	<version>
-	0.2
-	</version>
-	<etat>
-	dev
-	</etat>
-	<description>
-	Faire des boucles iCalendar (format ics)
-	</description>
-	<prefix>
-	icalendar
-	</prefix>
+	<nom>iCalendar</nom>
+	<auteur>Fil</auteur>
+	<licence>GNU/GPL - (c) 2010-2011</licence>
+	<version>0.2.0</version>
+	<etat>dev</etat>
+	<description>Faire des boucles iCalendar (format ics)</description>
+	<prefix>icalendar</prefix>
 	<chemin dir='' />
 	<icon>icalendar.png</icon>
 	<lien>http://www.spip-contrib.net/Plugin-iCalendar</lien>
 	<categorie>date</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
