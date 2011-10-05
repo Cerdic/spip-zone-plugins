@@ -1,7 +1,7 @@
 <plugin>
     <nom>CFG</nom>
     <auteur>bertrand Gugger, Matthieu Marcillaud</auteur>
-    <licence>&#169; 2009 - GNU/LGPL</licence>
+    <licence>&#169; 2009 GNU/LGPL</licence>
     <version>
     1.16.0
     </version>
@@ -21,8 +21,8 @@
 		
 		Il est utilis&#233; par de nombreux plugins, mais il peut aussi avoir d'autres usages comme le param&#233;trage de squelettes.
 		[en]This plugin manage some configuration graphic user interfaces for some modules.
-		[de]Dieses Plugin stellt die Konfigurationsschnittstelle f&uuml;r zahlreiche Plugins bereit.
-		Es kann auch f&uuml; die Konfiguration von Skeletten verwendet werden.
+		[de]Dieses Plugin stellt die Konfigurationsschnittstelle f&#252;r zahlreiche Plugins bereit.
+		Es kann auch f&#252; die Konfiguration von Skeletten verwendet werden.
 		</multi>
     </description>
     <lien>http://www.spip-contrib.net/?rubrique575</lien>
