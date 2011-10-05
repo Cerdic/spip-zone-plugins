@@ -32,7 +32,7 @@
 	</pipeline>		
 	<fonctions>trad_rub_fonctions.php</fonctions>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.14;]" />
 	<necessite id="tradrub" version="[2.1.0;]" />	
 	<necessite id="saisies" version="[1.8.12;]" />		
