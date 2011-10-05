@@ -1,11 +1,13 @@
 <plugin>
-<nom>Court-circuit 2</nom>
+	<nom>Court-circuit 2</nom>
 	<icon>images/courtcircuit-128.png</icon>
-	<description>Acc&eacute;s direct aux articles.</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3831</lien>
+	<slogan>Acc&#234;s direct aux articles</slogan>
+	<lien></lien>
 	<version>2.3.0</version>
 	<etat>test</etat>
 	<auteur>[romy.tetue.net->http://romy.tetue.net], [Joseph->http://www.spip-contrib.net/Joseph]</auteur>
+	<description>Court-circuit 2 permet de rediriger certaines rubriques vers un article particulier. Vous pouvez configurer, dans l'espace priv&#233;, les r&#234;gles de redirection &#224; appliquer.
+	</description>
 	<prefix>courtcircuit</prefix>
 	<fonctions>courtcircuit_fonctions.php</fonctions>
 	<pipeline>
@@ -26,7 +28,7 @@
 		<nom>ieconfig_metas</nom>
 		<inclure>courtcircuit_ieconfig_metas.php</inclure>
 	</pipeline>
-	<necessite id='SPIP' version='[2.1.0;]' />
+	<necessite id='SPIP' version='[2.1.0;2.1.99]' />
 	<utilise id="Z" />
 	<utilise id="compositions" />
 	<categorie>outil</categorie>
