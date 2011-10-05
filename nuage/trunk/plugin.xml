@@ -1,24 +1,21 @@
 <plugin>
 	<version>3.2.1</version>
 	<nom>Nuage</nom>
+	<slogan>Afficher les mots-cl&#233;s en faisant varier la taille de la police</slogan>
 	<prefix>nuage</prefix>
 	<auteur>Booz, Fil, James, St&#233;phane et Camille Lafitte</auteur>
 	<licence>2005 - 2011 GNU/GPL</licence>
 	<etat>stable</etat>
 	<description>
-	<strong>Afficher les mots-cl&#233;s en faisant varier la taille de la police</strong>
-	
-	Plusieurs modeles disponibles :
-	- article_nuage : affiche les mots cles de l'article la taille variant en fonction de 
-	la frequence des mots dans les articles du site
-	- rubrique_nuage : affiche les mots cles des articles de la branche, la taille variant
-	 en fonction de la frequence des mots dans les articles de cette branche
-	- nuage_popularite : affiche les mots cles du site (ou d'un groupe), la taille variant
-	 en fonction de sa popularite relative (somme des popularitedes articles ayant ce mot)
+	Ce plugin permet d’afficher les mots cl&#233;s en vrac, en faisant varier la taille de la police en fonction du nombre d'articles associ&#233;s au mot-cl&#233;. En d'autres termes, spip permet de cr&#233;er des &#171; tags &#187; !
+
+	Plusieurs mod&#232;les disponibles :
+-* article_nuage : affiche les mots cl&#233;s de l'article la taille variant en fonction de la fr&#233;quence des mots dans les articles du site
+-* rubrique_nuage : affiche les mots cl&#233;s des articles de la branche, la taille variant en fonction de la fr&#233;quence des mots dans les articles de cette branche
+-* nuage_popularite : affiche les mots cl&#233;s du site (ou d'un groupe), la taille variant en fonction de sa popularit&#233; relative (somme des popularit&#233; des articles ayant ce mot)
 	</description>
-	<icon>
-	images/nuage-64.png
-	</icon>
+	<icon>images/nuage-64.png</icon>
+	<lien>http://www.spip-contrib.net/Nuage-de-mots-cles</lien>
 	<fonctions>nuage_fonctions.php</fonctions>
 	<pipeline>
 		<nom>insert_head_css</nom> 
@@ -29,6 +26,6 @@
 		<inclure>nuage_fonctions.php</inclure>
 	</pipeline>
 	<categorie>navigation</categorie>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.0;]" />
 </plugin>
