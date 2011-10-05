@@ -1,12 +1,13 @@
 <plugin>
 	<nom><multi>[fr]Champs Extras2[de]Zusatzfelder 2[en]Extra fields 2[it]Campi Extra 2</multi></nom>
+	<slogan>De nouveaux champs aux objets d'&#233;dition</slogan>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.10.0</version>
 	<icon>images/cextras-64.png</icon>
 	<description>
 		<multi>
-			[fr]Cr&#233;er de nouveaux champs aux objets d'&#233;dition de SPIP
+			[fr]Ce plugin permet de cr&#233;er et/ou de g&#233;rer des champs suppl&#233;mentaires dans les objets &#233;ditoriaux de SPIP. Il permet donc de prendre en compte et d'afficher de nouveaux &#233;l&#233;ments dans les articles, rubriques, mots, groupes de mots, auteurs et sites.
 			[de]Zus&#228;tzliche Felder f&#252;r die Standardobjekte von SPIP anlegen
 			[en]Create new edit fields for SPIP objects
 			[it]Crea nuovi campi per gli oggetti editoriali di SPIP
@@ -17,7 +18,7 @@
 	<prefix>cextras</prefix>
 	<options>cextras_options.php</options>
 	<fonctions>cextras_balises.php</fonctions>
-	<necessite id="SPIP" version="[2.0;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
  	<pipeline>
 		<nom>autoriser</nom>
 		<inclure>inc/cextras_autoriser.php</inclure>
