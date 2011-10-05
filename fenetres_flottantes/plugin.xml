@@ -1,11 +1,12 @@
 <plugin>
-	<nom>Affichage d'une fen&ecirc;tre flottante</nom>
- 	<version>1.5</version>
+	<nom>Fen&#234;tre flottante</nom>
+	<slogan>Affichage d'une fen&#234;tre flottante</slogan>
+ 	<version>1.5.0</version>
  	<prefix>FenFlo</prefix>
- 	<auteur>[Mathieu Imbert->mailto:mathieu_imbert@hotmail.fr], Arnault Pachot - [OpenStudio->http://www.openstudio.fr], Cyrille Kazis [Kazis &amp; Co->http://www.screencom.com]</auteur>
- 	<description>Plugin permettant d'ouvrir une fen&ecirc;tre flottante,
-	 et si vous avez cfg: [Configuration->.?exec=cfg&amp;cfg=FenFlo]</description>
+ 	<auteur>[Mathieu Imbert->mailto:mathieu_imbert@hotmail.fr], [Arnault Pachot - OpenStudio->http://www.openstudio.fr], [Cyrille Kazis->http://www.screencom.com]</auteur>
+ 	<description>Plugin permettant d'ouvrir une fen&#234;tre flottante avec effet de transparence. Ce plugin impl&#233;mente la fonction floating windows de la biblioth&#234;que interface.js de JQuery</description>
  	<etat>stable</etat>
+	<lien>http://www.spip-contrib.net/Les-fenetres-flottantes</lien>
  	<fonctions></fonctions>
  	<pipeline>
   		<nom>insert_head</nom>
@@ -18,6 +19,6 @@
   		<inclure>fenetre_flottante_define_head.php</inclure>
  	</pipeline>
  	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='spip' version='[1.9.2;]' />
+	<necessite id='spip' version='[1.9.2;2.0.99]' />
 	<categorie>outil</categorie>
 </plugin>
