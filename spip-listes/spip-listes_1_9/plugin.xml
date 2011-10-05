@@ -1,22 +1,22 @@
 <plugin>
-        <nom>Plugin SPIP-Listes</nom>
-        <auteur>BoOz@rezo.net</auteur>
-        <version>1.9</version>
-        <etat>dev</etat>
-        <description>Listes d'informations par email</description>
-        <options>spiplistes_mes_options.php</options>
-        <fonctions>spiplistes_mes_fonctions.php</fonctions>
-        <prefix>spiplistes</prefix>
-		<lien>http://bloog.net/spip-listes</lien>
-        <pipeline>
-                <nom>ajouter_boutons</nom>
-                <action>ajouterBoutons</action>
-                <inclure>spiplistes_boutons.php</inclure>
-        </pipeline>
-        <pipeline>
+	<nom>SPIP-Listes</nom>
+	<auteur>[BoOz->BoOz@rezo.net]</auteur>
+	<version>1.9.0</version>
+	<etat>dev</etat>
+	<description>Listes d'informations par email</description>
+	<options>spiplistes_mes_options.php</options>
+	<fonctions>spiplistes_mes_fonctions.php</fonctions>
+	<prefix>spiplistes</prefix>
+	<lien>http://www.spip-contrib.net/SPIP-Listes</lien>
+	<pipeline>
+		<nom>ajouter_boutons</nom>
+		<action>ajouterBoutons</action>
+		<inclure>spiplistes_boutons.php</inclure>
+	</pipeline>
+	<pipeline>
 		<nom>taches_generales_cron</nom>
-		</pipeline>
+	</pipeline>
       
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>communication</categorie>
 </plugin>

@@ -1,22 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
-	<!--  
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-	 -->
 	<nom><multi>[fr]SPIP-Listes[en]SPIP-Lists[ar]&#1604;&#1608;&#1575;&#1574;&#1581; SPIP[es]SPIP-Listes</multi></nom>
-	<auteur>BoOz@rezo.net</auteur>
-	<version>2.0231</version>
+	<auteur>[BoOz->BoOz@rezo.net]</auteur>
+	<version>2.02.31</version>
 	<version_base>1.98</version_base>
 	<etat>test</etat>
 	<icon>spip-listes.png</icon>
-	<description><multi>[fr]Listes d'informations par email[en]Newsletter by e-mail[ar]&#1606;&#1588;&#1585;&#1577; &#1576;&#1585;&#1610;&#1583;&#1610;&#1577;[es]Listas para informar por email (emails y boletines informativos)</multi></description>
+	<description>
+		<multi>
+			[fr]Listes d'informations par email
+			[en]Newsletter by e-mail
+			[ar]&#1606;&#1588;&#1585;&#1577; &#1576;&#1585;&#1610;&#1583;&#1610;&#1577;
+			[es]Listas para informar por email (emails y boletines informativos)
+		</multi>
+	</description>
 	<options>spiplistes_mes_options.php</options>
 	<fonctions>spiplistes_mes_fonctions.php</fonctions>
 	<prefix>spiplistes</prefix>
 	<install>base/spiplistes_init.php</install>
-	<lien>[Documentation->/ecrire/?exec=spiplistes_aide]</lien>
+	<lien>http://www.spip-contrib.net/SPIP-Listes</lien>
 
 	<pipeline>
 		<nom>affiche_milieu</nom>
@@ -64,6 +65,6 @@
 	</bouton>
 
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>communication</categorie>
 </plugin>
