@@ -6,21 +6,29 @@
 			[it]Interfaccia per i Campi Extra
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+			[fr]Interface de gestion des champs extras dans l'espace pri&#233;
+			[en]Interface to manage the extra fields on SPIP objects
+			[it]Interfaccia per gestire i campi extra.
+		</multi>
+	</slogan>
 	<auteur>Matthieu Marcillaud, Fil</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.3.0</version>
 	<icon>images/iextras-64.png</icon>
 	<description>
 		<multi>
-			[fr]Offre une interface pour g&#233;rer des champs extras.
-			[en]Interface to manage the extra fields on SPIP objects
+			[fr]Pour le bon fonctionnement du plugin champs extras 2 et sa visualisation dans l’espace priv&#233;, il faut mettre en place ce plugin.
+			[en]For the proper functioning of the extra fields plugin 2 and its visualization in the private space, it is necessary to implement this plugin.
 			[it]Interfaccia per gestire i campi extra.
 		</multi>
 	</description>
 	<etat>dev</etat>
 	<prefix>iextras</prefix>
+	<lien>http://www.spip-contrib.net/Champs-Extras-2-Interface</lien>
 	
-	<necessite id="SPIP" version="[2.0.0;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[1.10.0;]" />
 	<necessite id="spip_bonux" version="[2.0.0;]" />
 	<necessite id="saisies" version="[1.13.0;]" />
