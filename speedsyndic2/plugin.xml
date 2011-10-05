@@ -1,18 +1,17 @@
 <plugin>
-    <nom>speedsyndic2</nom>
-    <auteur>
-	Stephane, Piffeo, [Wilco->http://www.ituc-csi.org]
-	</auteur>
-	<version>0.2</version>
+    <nom>Speedsyndic 2</nom>
+    <slogan>Automatiser vos syndication.</slogan>
+    <auteur>Stephane, Piffeo, [Wilco->http://www.ituc-csi.org]</auteur>
+	<version>0.2.0</version>
     <etat>test</etat>
     <description>
 	<multi>
-	[fr]Ce plugin permet d'avoir une syndication automatique en temps r&#233;el de certains sites syndiqu&#233;s choisis. version compatible spip 2
+	[fr]Ce plugin permet d'avoir une syndication automatique en temps r&#233;el de certains sites syndiqu&#233;s choisis.
 	[en]This plugins allows for a faster syndication of certain selected feeds.
     </multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Speedsyndic-2</lien>
-	<necessite id="SPIP" version="[2.0;)" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id='cfg' version='[1.10.0;]' />
 	
     <prefix>speedsyndic</prefix>
