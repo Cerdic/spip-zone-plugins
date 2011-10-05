@@ -1,13 +1,21 @@
 <plugin>
-<nom>Court-circuit</nom>
-<icon>icon.png</icon>
-<description>Acc&eacute;s direct aux articles et reset des squelettes par d&eacute;faut pour &eacute;viter les diffusions intempestives.</description>
-<lien>http://www.spip-contrib.net/court-circuit</lien>
-<version>1.2</version>
-<etat>stable</etat>
-<auteur>[romy.tetue.net->http://romy.tetue.net] - 2011</auteur>
-<prefix>courtcircuit</prefix>
-<necessite id='SPIP' version='[2.0.0;]' />
-<utilise id="Z" />
-<categorie>outil</categorie>
+	<nom>Court-circuit</nom>
+	<slogan>Acc&#233;s direct aux articles et reset des squelettes par d#233;faut</slogan>
+	<icon>icon.png</icon>
+	<description>Acc&#233;s direct aux articles et reset des squelettes par d#233;faut pour #233;viter les diffusions intempestives.
+	
+Ceci n'est pas un jeu de squelettes &#224; utiliser tel quel : c'est un reset qui permet de faire table rase, avant d'ajouter vos squelettes. Ce plugin peut donc &#234;tre n&#233;cessit&#233; par d'autres, sp&#233;cifiquement par des squelettes distribu&#233;s.
+
+Ce plugin court-circuite deux choses :
+-* les squelettes par d&#233;faut de SPIP, qui renvoient en 404,
+-* les rubriques, qui renvoient directement vers un de leurs articles.
+	</description>
+	<lien>http://www.spip-contrib.net/court-circuit</lien>
+	<version>1.2.0</version>
+	<etat>stable</etat>
+	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2011</auteur>
+	<prefix>courtcircuit</prefix>
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
+	<utilise id="Z" />
+	<categorie>outil</categorie>
 </plugin>
