@@ -1,13 +1,13 @@
 <plugin>
 	<nom>Commandes</nom>
-	<auteur>[Ateliers CYM->http://www.cym.fr], [Les Développements Durables->http://www.ldd.fr], [Matthieu Marcillaud->http://magraine.net]</auteur>
+	<auteur>[Ateliers CYM->http://www.cym.fr], [Les D&#233;veloppements Durables->http://www.ldd.fr], [Matthieu Marcillaud->http://magraine.net]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.7</version>
+	<version>0.4.8</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
-    <slogan>Gérer des commandes</slogan>
+    <slogan>G&#233;rer des commandes</slogan>
 	<description><multi>
-	[fr]Permet de gerer des commandes.
+	[fr]Permet de g&#233;rer des commandes.
 	</multi></description>
 	<icon>images/commande.png</icon><!-- http://www.iconfinder.com/icondetails/49596/256/ -->
 	<categorie>divers</categorie>
