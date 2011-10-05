@@ -1,11 +1,11 @@
 <plugin>
-	<nom>Commandes payées avec Paypal</nom>
-	<auteur>[Les Développements Durables->http://www.ldd.fr]</auteur>
+	<nom>Commandes pay&#233;es avec Paypal</nom>
+	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.2.4</version>
+	<version>0.2.5</version>
 	<etat>dev</etat>
-    <slogan>Gére les retours Paypal</slogan>
-	<description>Ce plugin permet de gérer les retours d'un payement Paypal pour savoir quel commande a été payée, et donc changer son statut.</description>
+    <slogan>G&#233;re les retours Paypal</slogan>
+	<description>Ce plugin permet de g&#233;rer les retours d'un payement Paypal pour savoir quel commande a &#233;t&#233; pay&#233;e, et donc changer son statut.</description>
 	<categorie>divers</categorie>
 	<icon></icon>
 	
