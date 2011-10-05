@@ -1,38 +1,25 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-<multi>	Widget Calendrier
-[en]
-Calendar Widget
-</multi>
+	<nom>
+		<multi>
+			[fr]Widget Calendrier
+			[en]Calendar Widget
+		</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric MORIN - [notre-ville.net->http://www.notre-ville.net]
-_ 2006 - Distribu&#233; sous licence GPL
-	</auteur>
-	<version>
-	0.11
-	</version>
-	<etat>
-	stable
-	</etat>
+	<auteur>Cedric MORIN</auteur>
+	<licence>GPL - (c) 2006</licence>
+	<version>0.11.0</version>
+	<etat>stable</etat>
 	<description>
-	<multi>Un Widget Calendrier pr&#234;t &#224; l'emploi pour saisir vos dates
-[en] A Calendar Widget to specify dates.
-</multi>
+		<multi>
+			[fr]Un Widget Calendrier pr&#234;t &#224; l'emploi pour saisir vos dates
+			[en]A Calendar Widget to specify dates.
+		</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<fonctions>
-	inc/calendar.php
-	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	WCalendar
-	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<lien></lien>
+	<fonctions>inc/calendar.php</fonctions>
+
+	<prefix>WCalendar</prefix>
+
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>inc/calendar_init.php</inclure>
@@ -41,8 +28,8 @@ _ 2006 - Distribu&#233; sous licence GPL
 		<nom>body_prive</nom>
 		<inclure>inc/calendar_init.php</inclure>
 	</pipeline>
-<!--	<necessite id="SPIP" version="[;1.925)" /> -->
-	<necessite id="SPIP" version="[1.9.0;2.0.0)" />
+
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>date</categorie>
 	<chemin dir='' type='prive' />
 </plugin>
