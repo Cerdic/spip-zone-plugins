@@ -29,7 +29,7 @@ function formulaires_proprietaire_textes_traiter_dist($raccourci=''){
 	include_spip('spip_proprio_fonctions');
 	$raccourci_nouveau = spip_proprio_formater_nom_fichier( _request('raccourci') );
 
-	if( $a = traiter_textes_proprietaire($raccourci_nouveau) ) {
+	if( $a = traiter_textes_proprietaire($raccourci_nouveau, $GLOBALS['spip_lang']) ) {
 		include_spip('inc/headers');
 		if( $redirect = redirige_formulaire( generer_url_ecrire('spip_proprio', 'page=textes') ) )
 			return $redirect;
