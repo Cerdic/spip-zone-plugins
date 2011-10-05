@@ -1,20 +1,13 @@
 <plugin>
-  <nom> <!-- Nom du plugin -->
-  Pagination intertitre (extension de la BTExtensible)
-  </nom>
-  <auteur>        <!-- Auteur du plugin -->
-  bill (Stephane LAURENT spipcarto@gmail.com)
-  </auteur>
-  <version>
-  0.2
-  </version>
-  <etat>
-  stable
-  </etat>
+  <nom>Pagination intertitre</nom>
+  <slogan>Paginer les articles en les d&#233;coupant selon les intertitres</slogan>
+  <auteur>[bill (Stephane LAURENT)->spipcarto@gmail.com]</auteur>
+  <version>0.2.0</version>
+  <etat>stable</etat>
   <description>
-  Paginer les articles en les decoupant selon les intertitres 
+  Ce plugin est une extension de la BTExtensible. Il permet de paginer les articles en les d&#233;coupant selon les intertitres : 
   <code><h3 class="paginart3">...</h3></code> correspondant au raccourci <code>{p{titre}p}</code> et en 
-  presentant les pages sous forme d'onglets
+  pr&#233;sentant les pages sous forme d'onglets.
   </description>
   <fonctions>
   paginart3_fonctions.php
@@ -37,6 +30,6 @@
   	<nom>BarreTypoEnrichie_boutonsavances</nom>
   	<inclure>paginart3_fonctions.php</inclure>
   </pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>navigation</categorie>
 </plugin>
