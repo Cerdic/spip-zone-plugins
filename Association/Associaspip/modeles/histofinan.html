@@ -8,7 +8,7 @@ remarques =
 - Ce modele ne s'occupe que de l'information comptable, pas plus
   (c'est donc succint en ce qui concerne les dons/ventes/etc.)
 
-maj:2011-10-03; version:0.3.0; licence:GPL; copyleft:gilcot; -->]
+maj:2011-10-03; version:0.4.1; licence:GPL; copyleft:gilcot; -->]
 
 [(#SET{droit_acces, [(#SESSION{id_auteur}|=={#ENV{id}}|ou{#SESSION{statut}|=={0minirezo}}|?{oui,non})] })]
 
@@ -65,7 +65,11 @@ maj:2011-10-03; version:0.3.0; licence:GPL; copyleft:gilcot; -->]
 	})]
 	<br class="nettoyeur" />
 	]
-	[(#MODELE{asso_comptes}{id_journal=#GET{liste_activites},imputation=#META{/association/pc_activites}}{titre=<:asso:adherent_titre_historique_activites:>}{vide=<:aucune_activite_payante_pour_l_instant:>})]
+	[(#GET{liste_activites}|?{
+		[(#MODELE{asso_comptes}{id_journal=#GET{liste_activites},imputation=#META{/association/pc_activites}}{titre=<:asso:adherent_titre_historique_activites:>})]
+	,
+		<:aucune_activite_payante_pour_l_instant:>
+	})]
 	<hr class="nettoyeur" />
 ]
 
@@ -86,7 +90,11 @@ maj:2011-10-03; version:0.3.0; licence:GPL; copyleft:gilcot; -->]
 	})]
 	<br class="nettoyeur" />
 	]
-	[(#MODELE{asso_comptes}{id_journal=#GET{liste_achats},imputation=#META{/association/pc_ventes}}{titre=<:asso:adherent_titre_historique_dons:>}{vide=<:aucun_achat_pour_l_instant:>})]
+	[(#GET{liste_achats}|?{
+		[(#MODELE{asso_comptes}{id_journal=#GET{liste_achats},imputation=#META{/association/pc_ventes}}{titre=<:asso:adherent_titre_historique_ventes:>})]
+	,
+		<:aucun_achat_pour_l_instant:>
+	})]
 	<hr class="nettoyeur" />
 ]
 
@@ -107,7 +115,11 @@ maj:2011-10-03; version:0.3.0; licence:GPL; copyleft:gilcot; -->]
 	})]
 	<br class="nettoyeur" />
 	]
-	[(#MODELE{asso_comptes}{id_journal=#GET{liste_dons},imputation=#META{/association/pc_dons}}{titre=<:asso:adherent_titre_historique_dons:>}{vide=<:aucun_don_pour_l_instant:>})]
+	[(#GET{liste_dons}|?{
+		[(#MODELE{asso_comptes}{id_journal=#GET{liste_dons},imputation=#META{/association/pc_dons}}{titre=<:asso:adherent_titre_historique_dons:>})]
+	,
+		<:aucun_don_pour_l_instant:>
+	})]
 	<hr class="nettoyeur" />
 ]
 
@@ -117,6 +129,10 @@ maj:2011-10-03; version:0.3.0; licence:GPL; copyleft:gilcot; -->]
 	#SET{liste_prets, #GET{liste_prets}|push{#ID_PRET}}
 </BOUCLE_prets>
 [(#META{/association/prets}|=={on}|et{#GET{droit_acces}|=={oui }}|oui)
-	[(#MODELE{asso_comptes}{id_journal=#GET{liste_prets},imputation=#META{/association/pc_prets}}{titre=<:asso:adherent_titre_historique_prets:>}{vide=<:aucun_pret_payant_pour_l_instant:>})]
+	[(#GET{liste_dons}|?{
+		[(#MODELE{asso_comptes}{id_journal=#GET{liste_prets},imputation=#META{/association/pc_prets}}{titre=<:asso:adherent_titre_historique_prets:>})]
+	,
+		<:aucun_pret_payant_pour_l_instant:>
+	})]
 	<hr class="nettoyeur" />
 ]
