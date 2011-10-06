@@ -1,26 +1,17 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-		E-Learning
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 		RastaPopoulos - Distribu&eacute; sous licence GPL
-	</auteur>
-	<version> <!-- Version du plugin -->
-		0.1
-	</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-		dev
-	</etat>
+	<nom>E-Learning</nom>
+	<auteur>RastaPopoulos</auteur>
+	<licence>GPL</licence>
+	<version>0.1.0</version>
+	<etat>dev</etat>
 	<description>
 Ce plugin permet d'utiliser SPIP comme une plateforme simple de E-Learning.
 
-Sur le principe, il est une aggr&eacute;ggation de plusieurs plugins, plus des fonctionnalit&#233;s qui lui sont propres.
+Sur le principe, il est une aggr&#233;ggation de plusieurs plugins, plus des fonctionnalit&#233;s qui lui sont propres.
 _ En plus d'avoir ses cours en ligne, on peut donc faire des tests not&#233;s, voir les connexions et les pages visit&#233;es par les &#233;l&#232;ves, d&#233;finir une progression dans les cours suivant les notes du cours pr&#233;c&#233;dent, etc.
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-E-learning</lien> <!-- URI de documentation -->
-	<prefix> 
-		elearning
-	</prefix>
+	<lien>http://www.spip-contrib.net/Plugin-E-learning</lien>
+	<prefix>elearning</prefix>
 	<options>elearning_options.php</options>
 	<fonctions>elearning_fonctions.php</fonctions>
 	<install>base/elearning_installation.php</install>
@@ -39,6 +30,7 @@ _ En plus d'avoir ses cours en ligne, on peut donc faire des tests not&#233;s, v
 	
 	<categorie>divers</categorie>
 	<!-- Le e-learning dans SPIP nécessite les plugins suivant -->
+	<!--<necessite id="spip" version="[]" />-->
 	<necessite id='cfg' version="[1.10.5;]" />
 	<necessite id='AccesRestreint' version="[0.3.0.3;]" />
 	<necessite id='bigbrother' version="[0.3;]" />
