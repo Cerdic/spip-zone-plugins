@@ -1,10 +1,8 @@
 <plugin>
 	<prefix>imapdepart</prefix>
 	<nom>Image map des d&#233;partements</nom>
-	<auteur>
-	    cy_altern - la carte avec son imagemap est aimablement fournie par Lionel Delvarre (http://www.lion1906.com/)
-_ &#169; 2010   Distribu&#233; sous licence GNU/GPL
-	</auteur>
+	<auteur>cy_altern, </auteur>
+	<licence>GNU/GPL - (c) 2010</licence>
 	<version>0.2.0</version>
 	<etat>dev</etat>
 	<description>
@@ -18,6 +16,9 @@ qui accepte les param&#232;tres suivants:
 -* |mono=1 si on souhaite la carte en monoteinte
 -* |aff_region=1 si on souhaite afficher la r&#233;gion en plus du nom du d&#233;partement dans l'info-bulle au survol
 -* |bullehtml=1 si on pr&#233;fere l'info-bulle native HTML &#224; celle g&#233;n&#233;r&#233;e en javascript (non-accessible lors de la navigation au clavier...)
+
+Cr&#233;dits:
+-* Source de la carte [Lionel Delvarre->http://www.lion1906.com/]
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-image-map-des-departements</lien>
 	<icon>imapdepart.png</icon>
@@ -25,4 +26,5 @@ qui accepte les param&#232;tres suivants:
 	<options>imapdepart_options.php</options><!-- gere l'appel de base/imapdepart_base.php -->
 	<fonctions>imapdepart_fonctions.php</fonctions>
 	<categorie>divers</categorie>
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
 </plugin>
