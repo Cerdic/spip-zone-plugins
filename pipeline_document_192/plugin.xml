@@ -1,14 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
     <!-- Nom du plugin -->
     <nom>pipeline_ajouter_document</nom>
 
     <!-- Auteur du plugin -->
     <auteur>la zone</auteur>
-    <version>0.1</version>
+    <version>0.1.0</version>
     <etat>stable</etat>
     <icon></icon>
-    <description> Permet d'ajouter un pipeline dans ajouter_document(), non natif en 192.</description>
+    <description>Permet d'ajouter un pipeline dans ajouter_document(), non natif en 192.</description>
     <!-- URI de documentation -->
     <lien></lien>
 
@@ -17,7 +16,7 @@
 
 
    <!-- précise les dependances vis-a-vis de d'autres plugins -->
-   <necessite id="spip" version="[1.9.2;1.9.3]" />
+   <necessite id="spip" version="[1.9.2;1.9.2]" />
    <categorie>outil</categorie>
    <chemin dir='' />
 
