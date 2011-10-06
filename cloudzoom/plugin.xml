@@ -1,32 +1,26 @@
 <plugin>
- 	 <nom>cloudzoom</nom>
-
- 	 <auteur>[yves Costiou->http://www.latelier2point0.fr]</auteur>
-
+	<nom>Cloudzoom</nom>
+	<auteur>[yves Costiou->http://www.latelier2point0.fr]</auteur>
 	<licence>GNU/GPL</licence>
-
 	<icon>img/cloudzoom-64.png</icon>
-
- 	 <version>1.0.2</version>
-
- 	 <etat>dev</etat>
-
- 	 <description>Le plugin fournit un bloc image zoomable. <br/>Les pramètres de personnalisation et de réglage sont accessible via un formulaire cfg (paramétrage des options)</description>
-
-	<lien>http://www.spip-contrib.net/Plugin-cloudzoom</lien>
-
- 	 <prefix>cloudzoom</prefix>
-
-   	 <pipeline>
+	<version>1.0.2</version>
+	<etat>dev</etat>
+	<description>
+Le plugin fournit un bloc image zoomable.
+_ Les pram&#232;tres de personnalisation et de r&#233;glage sont accessible via un formulaire cfg (param&#233;trage des options)
+	</description>
+	<lien>http://www.spip-contrib.net/Cloudzoom</lien>
+	<prefix>cloudzoom</prefix>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>cloudzoom_pipelines.php</inclure>
-    	</pipeline>
-
+	</pipeline>
 	<pipeline>
     	<nom>ajouter_boutons</nom>
         <inclure>cloudzoom_pipelines.php</inclure>
    	</pipeline>
 	<categorie>divers</categorie>
-	
+
+	<necessite id="spip" version="[2.1.0;2.1.99]" />
 	<necessite id="cfg"/>
 </plugin>
