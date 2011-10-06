@@ -1,17 +1,20 @@
 <plugin>
-<nom>Varicelle</nom>
-<icon>icon.png</icon>
-<description>De jolis boutons&nbsp;: s&eacute;duisants, l&eacute;gers et performants (en CSS3 sans image), pour styler d'un coup tous les appels &agrave; l'action du site. S'applique &agrave; tout ce qui porte le s&eacute;lecteur .submit (notamment&nbsp;: button, input, a).</description>
-<lien>http://www.spip-contrib.net/varicelle</lien>
-<version>0.1.6</version>
-<etat>stable</etat>
-<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
-<prefix>varicelle</prefix>
-<pipeline>
-	<nom>insert_head_css</nom>
-	<inclure>varicelle_pipelines.php</inclure>
-</pipeline>
-<necessite id="SPIP" version="[1.9.1;3.0.0]" />
-<utilise id="Z" version="[;]" />
-<categorie>outil</categorie>
+	<nom>Varicelle</nom>
+	<slogan>De jolis boutons !</slogan>
+	<icon>icon.png</icon>
+	<description>
+	De jolis boutons : s&#233;duisants, l&#233;gers et performants (en CSS3 sans image), pour styler d'un coup tous les appels &#224; l'action du site. S'applique &#224; tout ce qui porte le s&#233;lecteur .submit (notamment : <code>button, input, a</code>).
+	</description>
+	<lien>http://www.spip-contrib.net/varicelle</lien>
+	<version>0.1.6</version>
+	<etat>stable</etat>
+	<auteur>[romy.tetue.net->http://romy.tetue.net] - 2010</auteur>
+	<prefix>varicelle</prefix>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>varicelle_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.1;3.0.99]" />
+	<utilise id="Z" version="[;]" />
+	<categorie>outil</categorie>
 </plugin>
