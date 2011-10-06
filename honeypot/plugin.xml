@@ -7,19 +7,19 @@
 	</nom>
 	<slogan>
 		<multi>
-		[fr]Pi&#233ger les spammeurs
+		[fr]Pi&#233;ger les spammeurs
 		[en]Trapping the spammers
 		</multi>
 	</slogan>
 	<auteur>Pierre Andrews (mortimer)</auteur>
-	<licence>&#169; 2006 GPL</licence>
+	<licence>&#169; 2006 - GPL</licence>
 	<version>0.4.0</version>
 	<etat>test</etat>
 	<icon>honeypot.png</icon>
 	<description>
 		<multi>
 		[fr]Ajouter des liens vers votre honeypot dans vos page. Necessite l'installation pr&#233;alable du [Project Honey Pot->http://projecthoneypot.org?rf=41080]. Vous pouvez aussi utiliser ce plugin pour limiter l'acc&#233;s &#224; votre site pour visiteurs ayant &#233;t&#233; classifi&#233;s douteux par le project honeypot.
-		[en] Automatically generate trap links to your site honeypot in your SPIP templates. You will first need to install a honeypot from [Project Honey Pot->http://projecthoneypot.org?rf=41080]. You can also use this plugin to limit the access to your site for the visitors that have been classified as suspicious by the P.H.Pot project.
+		[en]Automatically generate trap links to your site honeypot in your SPIP templates. You will first need to install a honeypot from [Project Honey Pot->http://projecthoneypot.org?rf=41080]. You can also use this plugin to limit the access to your site for the visitors that have been classified as suspicious by the P.H.Pot project.
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Projet-Pot-de-Miel</lien>
