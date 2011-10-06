@@ -99,6 +99,9 @@ function formulaires_editer_produit_traiter($id_produit='new', $id_rubrique=0, $
 	
 	// On reformule l'id_parent
 	$id_parent = _request('id_parent');
+    //La saisie retourne normalement un tableau, dans ce cas on considére la premiere valeur comme vrai parent (logique issue de polyhierarchie)
+    if (is_array($id_parent))
+        $id_parent = array_shift($id_parent);
 	$id_parent = str_replace('rubrique|', '', $id_parent);
 	set_request('id_parent', $id_parent);
 		
