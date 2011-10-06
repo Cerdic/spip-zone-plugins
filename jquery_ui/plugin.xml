@@ -1,12 +1,25 @@
 <plugin>
 	<nom>jQuery UI</nom>
-	<slogan>G&#233;rer la bibliothèque jQuery UI</slogan>
+	<slogan>
+		<multi>
+		[fr]G&#233;rer la biblioth&#232;que jQuery UI
+		[en]Manage jQuery UI library
+		</multi>
+	</slogan>
 	<auteur>jQuery Team</auteur>
 	<version>1.6.0</version>
 	<etat>stable</etat>
 	<description><multi>
-		[fr][jQuery UI->http://jqueryui.com/] pour SPIP 2.0.
-		[en][jQuery UI->http://jqueryui.com/] for SPIP 2.0.
+		[fr]De plus en plus de plugins int&#232;grent dans leurs fichiers des morceaux de la biblioth&#232;que [jQuery UI->http://jqueryui.com/] et ce dans des versions plus ou moins &#224; jour imposant ainsi de temps &#224; autre plusieurs versions de cette biblioth&#232;que en fonction du nombre de plugins install&#233;s sur un site.
+
+Ce m&#233;ta plugin s&#8217;occupe de g&#233;rer correctement l'insertion de la biblioth&#232;que jQuery UI dans les squelettes, suivant la demande des plugins clients.
+
+{A noter que la biblioth&#232;que  jQuery UI est int&#233;gr&#233;e dans le core de Spip 3}
+		[en]More and more plugins include in their files parts of the [jQuery UI-> http://jqueryui.com/] library and this in versions more or less up to date and impose from time to time several versions of this library based on the number of plugins installed on a site.
+
+This meta plugin takes care to properly manage the inclusion of the jQuery UI library in the templates, as requested by plugins clients.
+
+{Note that the jQuery UI library is integrated into the core of Spip 3}
 	</multi></description>
 	<lien>http://www.spip-contrib.net/spip.php?article3612</lien>
 	<prefix>jqueryui</prefix>
@@ -22,19 +35,33 @@
 		<action>insert_head</action>
 	</pipeline>
 	<pipeline><nom>jqueryui_forcer</nom></pipeline>
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id="lib:jquery.ui-1.6" src="http://jquery-ui.googlecode.com/files/jquery.ui-1.6.zip" />
 	<necessite id="saisies" />
 	<categorie>outil</categorie>
 </plugin>
 <plugin spip="[2.1.0;2.1.99]">
 	<nom>jQuery UI</nom>
-	<slogan>G&#233;rer la bibliothèque jQuery UI</slogan>
+	<slogan>
+		<multi>
+		[fr]G&#233;rer la biblioth&#232;que jQuery UI
+		[en]Manage jQuery UI library
+		</multi>
+	</slogan>
 	<auteur>jQuery Team</auteur>
 	<version>1.8.16</version>
 	<etat>stable</etat>
 	<description><multi>
-		[fr][jQuery UI->http://jqueryui.com/] pour SPIP 2.1.
-		[en][jQuery UI->http://jqueryui.com/] for SPIP 2.1.
+		[fr]De plus en plus de plugins int&#232;grent dans leurs fichiers des morceaux de la biblioth&#232;que [jQuery UI->http://jqueryui.com/] et ce dans des versions plus ou moins &#224; jour imposant ainsi de temps &#224; autre plusieurs versions de cette biblioth&#232;que en fonction du nombre de plugins install&#233;s sur un site.
+
+Ce m&#233;ta plugin s&#8217;occupe de g&#233;rer correctement l'insertion de la biblioth&#232;que jQuery UI dans les squelettes, suivant la demande des plugins clients.
+
+{A noter que la biblioth&#232;que  jQuery UI est int&#233;gr&#233;e dans le core de Spip 3}
+		[en]More and more plugins include in their files parts of the [jQuery UI-> http://jqueryui.com/] library and this in versions more or less up to date and impose from time to time several versions of this library based on the number of plugins installed on a site.
+
+This meta plugin takes care to properly manage the inclusion of the jQuery UI library in the templates, as requested by plugins clients.
+
+{Note that the jQuery UI library is integrated into the core of Spip 3}
 	</multi></description>
 	<lien>http://www.spip-contrib.net/spip.php?article3612</lien>
 	<prefix>jqueryui</prefix>
