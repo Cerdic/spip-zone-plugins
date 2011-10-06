@@ -30,7 +30,9 @@ function inc_spipmotion_mediainfo_dist($chemin,$id_document,$only_cover=false){
 				$infos['bitrate'] = $info[0]['Overall_bit_rate'][0];
 			}
 			if($track == 'track type="Video"'){
-				$infos['videobitrate'] = $info[0]['Bit_rate'][0];
+				if(!$infos['titre'])
+					$infos['titre'] = $info[0]['Title'][0] ? $info[0]['Title'][0] : '';
+				$infos['videobitrate'] = $info[0]['Bit_rate'][0] ? $info[0]['Bit_rate'][0] : ($info[0]['Nominal_bit_rate'][0] ? $info[0]['Nominal bit rate'][0] : '');
 				$infos['hauteur'] = $info[0]['Height'][0];
 				$infos['largeur'] = $info[0]['Width'][0];
 				$infos['videocodec'] = $info[0]['Format'][0];

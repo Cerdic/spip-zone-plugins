@@ -71,36 +71,33 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 					'', $serveur);
 			}
 
-			echo '<p>'._T('spipmotion:install_creation_base').'</p>';
-			echo '<p>'._T('spipmotion:install_ajout_champs_documents').'</p>';
+			/**
+			 * On change le champs taille en bigint pour avoir des tailles de documents en base > 2Go
+			 */
+			sql_alter("TABLE spip_documents CHANGE `taille` `taille` bigint");
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible,'non');
 		}
 		if (version_compare($current_version,'0.2','<')){
 			sql_alter("TABLE spip_spipmotion_attentes ADD `id_auteur` BIGINT(21) NOT NULL DEFAULT '0' AFTER `id_article`");
 			sql_alter("TABLE spip_spipmotion_attentes ADD INDEX ( `id_auteur` )");
 			ecrire_meta($nom_meta_base_version,$current_version=0.2);
-			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.2)).'</p>';
 		}
 		if (version_compare($current_version,'0.3','<')){
 			maj_tables('spip_documents');
 			ecrire_meta($nom_meta_base_version,$current_version=0.3);
-			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.3)).'</p>';
 		}
 		if (version_compare($current_version,'0.4','<')){
 			sql_alter("TABLE spip_spipmotion_attentes CHANGE `id_article` `id_objet` BIGINT(21) NOT NULL DEFAULT '0'");
 			sql_alter("TABLE spip_spipmotion_attentes ADD `objet` VARCHAR(25) AFTER `id_objet`");
 			ecrire_meta($nom_meta_base_version,$current_version=0.4);
-			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.4)).'</p>';
 		}
 		if (version_compare($current_version,'0.5','<')){
 			maj_tables('spip_documents');
 			ecrire_meta($nom_meta_base_version,$current_version=0.5);
-			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.5)).'</p>';
 		}
 		if (version_compare($current_version,'0.6','<')){
 			maj_tables('spip_spipmotion_attentes');
 			ecrire_meta($nom_meta_base_version,$current_version=0.6);
-			echo '<p>'._T('spipmotion:install_maj_base',array('version'=>0.6)).'</p>';
 		}
 		if (version_compare($current_version,'0.7','<')){
 			maj_tables('spip_documents');
@@ -267,6 +264,13 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			 */
 			
 			ecrire_meta($nom_meta_base_version,$current_version='0.8.0');
+		}
+		if (version_compare($current_version,'0.8.1','<')){
+			/**
+			 * On change le champs taille en bigint pour avoir des tailles de documents en base > 2Go
+			 */
+			sql_alter("TABLE spip_documents CHANGE `taille` `taille` bigint");
+			ecrire_meta($nom_meta_base_version,$current_version='0.8.1');
 		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/

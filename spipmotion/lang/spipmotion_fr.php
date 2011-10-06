@@ -137,7 +137,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_voir_log_erreur' => 'Voir le log',
 	'install_ajout_champs_documents' => 'Ajout des champs sur spip_documents',
 	'install_creation_base' => 'Création de la base de spipmotion',
-	'install_maj_base' => 'Mise à jour de la base de spipmotion &agrave la version @version@',
 
 	// L
 	'label_codec_son' => 'Codec audio à utiliser',

@@ -23,8 +23,8 @@ function inc_spipmotion_recuperer_infos($id_document){
 	include_spip('inc/documents');
 	$document = sql_fetsel("*", "spip_documents","id_document=".intval($id_document));
 	$chemin = $document['fichier'];
-	$movie_chemin = get_spip_doc($chemin);
-
+	$fichier = get_spip_doc($chemin);
+	
 	/**
 	 * Si c'est un flv on lui applique les metadatas pour éviter les problèmes
 	 * Si c'est un mov ou MP4 on applique qt-faststart
@@ -47,19 +47,19 @@ function inc_spipmotion_recuperer_infos($id_document){
 			$metadatas_flv = "flvtool++ $movie_chemin $movie_chemin_tmp";
 			
 		}else if($flvtool2['flvtool2']){
-			$metadatas_flv = "flvtool2 -xUP $movie_chemin";
+			$metadatas_flv = "flvtool2 -xUP $fichier";
 		}
 		if($metadatas_flv){
 			exec($metadatas_flv,$retour,$retour_int);
 			if(file_exists($movie_chemin_tmp)){
-				rename($movie_chemin_tmp,$movie_chemin);
+				rename($movie_chemin_tmp,$fichier);
 			}
 		}
 	}
 	if(in_array($document['extension'],array('mov','mp4','m4v')) && !$GLOBALS['meta']['spipmotion_qt-faststart_casse']){
-		exec("qt-faststart $movie_chemin $movie_chemin._temp",$retour,$retour_int);
-		if(file_exists($movie_chemin.'._temp')){
-			rename($movie_chemin.'._temp',$movie_chemin);
+		exec("qt-faststart $fichier $fichier._temp",$retour,$retour_int);
+		if(file_exists($fichier.'._temp')){
+			rename($fichier.'._temp',$fichier);
 		}
 	}
 	
@@ -68,10 +68,10 @@ function inc_spipmotion_recuperer_infos($id_document){
 	 */
 	if(!$GLOBALS['meta']['spipmotion_mediainfo_casse']){
 		$mediainfo = charger_fonction('spipmotion_mediainfo','inc');
-		$infos = $mediainfo($movie_chemin,$id_document);
+		$infos = $mediainfo($fichier,$id_document);
 	}
 	else if(class_exists('ffmpeg_movie')){
-		$movie = new ffmpeg_movie($movie_chemin, 0);
+		$movie = new ffmpeg_movie($fichier, 0);
 	
 		$infos['bitrate'] = $movie->getBitRate();
 		$infos['duree'] = $movie->getDuration();
@@ -130,7 +130,18 @@ function inc_spipmotion_recuperer_infos($id_document){
 			unset($infos[$key]);
 		}	
 	}
+	
+	$infos['taille'] = @intval(filesize($fichier));
+
+	// Filesize tout seul est limité à 2Go
+	// cf http://php.net/manual/fr/function.filesize.php#refsect1-function.filesize-returnvalues
+	if($infos['taille'] == '2147483647'){
+		$infos['taille'] = sprintf("%u", filesize($fichier));
+	}
+	spip_log($infos['taille'],'test');
+	spip_log(intval(filesize($fichier)),'test');
 	if(count($infos) > 0){
+		spip_log('on modifie','test');
 		include_spip('inc/modifier');
 		revision_document($id_document, $infos);
 	}
