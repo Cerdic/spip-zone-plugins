@@ -1,20 +1,21 @@
 <plugin>
-	<version>0.1</version>
-	<nom><multi>[fr] Mot de Passe Complexe [en] Strong Passwords</multi></nom>
+	<version>0.1.0</version>
+	<nom><multi>[fr]Mots de Passe Complexes[en]Strong Passwords</multi></nom>
+	<slogan>
+		<multi>
+		[fr]V&#233;rifier la complexit&#233; des mots de passes
+		[en]Test the strength of passwords
+		</multi>
+	</slogan>
 	<description>
-<multi>
-[fr]
-	Testeur de complexit&eacute; des mots de passes.
-_ Adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/].
-[en]
-Test the strength of passwords entered when registering to the site.
-_ Adaptation of [->http://dev.digitalspaghetti.me.uk/password/].
-</multi>
-_ [Configuration->./?exec=cfg&amp;cfg=passe_complexe]
+		<multi>
+		[fr]Ce plugin ajoute un testeur de complexité de mot de passes dans les formulaires de choix de mot de passe de SPIP (adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/]).
+		[en]This plugin adds a test of the strength of passwords in the forms of password's choice (Adaptation of [->http://dev.digitalspaghetti.me.uk/password/]).
+		</multi>
 	</description>
 	<etat>test</etat>
-	<lien></lien>
-	<auteur>bruno bergot</auteur>
+	<lien>http://www.spip-contrib.net/Plugin-Mot-de-Passe-Complique</lien>
+	<auteur>Bruno Bergot</auteur>
 	<prefix>passe_complexe</prefix>
 	<pipeline>
 		<nom>header_prive</nom>
@@ -26,7 +27,7 @@ _ [Configuration->./?exec=cfg&amp;cfg=passe_complexe]
 		<action>header_prive</action>
 		<inclure>passe_complexe_options.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<necessite id='cfg' version='[1.0.8;]' />
 	<categorie>performance</categorie>
 </plugin>
