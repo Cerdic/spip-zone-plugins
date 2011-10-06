@@ -129,7 +129,7 @@ function jqueryui_insert_head($flux) {
 
 	// recuperer le repertoire du theme
 	$theme = 'base/';
-	if (isset($config['theme']) AND $config['theme'] != '' AND $config['theme'] != 'no_css')
+	if (isset($config['theme']) AND $config['theme'] != '')
 		$theme = $config['theme'].'/';
 	if ($theme == 'no_css/' && !defined('_JQUERYUI_FORCER_CSS'))
 		return $flux;
