@@ -1,6 +1,6 @@
 <plugin>	<nom>Glossaire interne</nom>
 	<slogan>Gestion automatique d'un glossaire interne au site.</slogan>	<version>1.0.0</version>	<prefix>Glossaire</prefix>	<etat>stable</etat>
-	<licence>GNU/GPL</licence>	<auteur>Fran&#231;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]), fred ([->homere1974@yahoo.fr]), Philippe Auriol.</auteur>	<description>
+	<licence>GNU/GPL</licence>	<auteur>Fran&#231;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]), fred, Philippe Auriol.</auteur>	<description>
 -* Le glossaire est li&#233; &#224; un groupe de mots-cl&#233;s «glossaire» &#224; cr&#233;er;
 -* Filtre <code>lier_au_glossaire</code> &#224; appliquer aux champs de texte dans les squelettes;-* N&#233;cessite la balise <code>#INSERT_HEAD</code>.</description>	<lien>http://www.spip-contrib.net/1459</lien>	<fonctions>glossaire_fonctions.php</fonctions>	<pipeline>		<nom>insert_head</nom>	</pipeline>
 	<categorie>edition</categorie>
