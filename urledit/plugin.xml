@@ -1,18 +1,21 @@
 <plugin>
 	<nom>URLs &#233;ditables</nom>
+	<slogan>&#201;dition libre des URLs</slogan>
 	<icon>img_pack/urledit-48.png</icon>
 	<auteur>[Stephane LAURENT->stephane@rezo.net], [erational->http://www.erational.org]</auteur>
 	<licence>GPL 3 - &#169; 2009-2011</licence>
 	<version>0.5.0</version>
 	<etat>dev</etat>
-	<description>&#201;dition libre des URLs</description>
+	<description>
+	Ce plugin vise &#224; combler un manque de SPIP 2.1 : &#233;diter par soi-m&#234;me les adresses des rubriques, articles, br&#232;ves, mots-cl&#233;s, auteurs et sites syndiqu&#233;s. A priori, cette fonctionnalit&#233; sera int&#233;gr&#233;e sous forme d'extension sous le nom de urls &#233;tendues dans les prochaines versions de SPIP rendant donc ce plugin obsol&#232;te.
+	</description>
 	<lien>http://www.spip-contrib.net/URLs-editables</lien>
 	<prefix>urledit</prefix>
 	<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>urledit_pipelines.php</inclure>
 	</pipeline>
- 	<necessite id='SPIP' version='[2.1.0;]' /> 
+ 	<necessite id='SPIP' version='[2.1.0;2.1.99]' /> 
 	<necessite id="cfg" version="[1.16;]" />	 
  	<categorie>outil</categorie>
 </plugin>
