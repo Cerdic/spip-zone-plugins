@@ -44,6 +44,7 @@
 	
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
     <necessite id="prix" version="[0.1.0;]" />
+    <utilise id="cextras" version="[0.7;]" />
     <traduire gestionnaire="salvatore" module="montants" reference="fr" />
 
 </plugin>
