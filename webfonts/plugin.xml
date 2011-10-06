@@ -1,15 +1,22 @@
 <plugin>
 	<nom>WebFonts</nom>
+	<slogan>Utiliser facilement les WebFonts</slogan>
 	<auteur>[C&eacute;dric Morin->http://www.yterium.net]</auteur>
 	<icon>images/webfonts-32.png</icon>
 	<licence>GNU/GPL</licence>
 	<version>0.1.0</version>
 	<etat>test</etat>
-	<description>Utiliser facilement les WebFonts</description>
+	<description>
+	Les navigateurs modernes permettent l&#8217;utilisation de polices de caract&#232;res enrichies, non disponibles par d&#233;faut sur le poste des utilisateurs. Par un coup de chance, Internet Explorer permet aussi cela (avec quelques diff&#233;rences de syntaxe) ce qui rend la fonctionnalit&#233; utilisable par tous les visiteurs.
+
+Google a mis en place un r&#233;pertoire de polices enrichies utilisables librement, ainsi qu&#8217;une API pour g&#233;rer les diff&#233;rences entre navigateur.
+
+Ce plugin facilite compl&#232;tement l&#8217;utilisation de ces polices, et prenant en charge l&#8217;insertion des directives de chargement depuis le r&#233;pertoire des polices propos&#233;es par Google dans votre site.
+	</description>
 	<prefix>webfonts</prefix>
 	<lien>http://www.spip-contrib.net/Webfonts</lien>
 	<categorie>outil</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>webfonts_pipeline.php</inclure>
