@@ -32,15 +32,16 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;
 	if (   (!isset($GLOBALS['meta'][$nom_meta_base_version]) )
 			|| (($current_version = $GLOBALS['meta'][$nom_meta_base_version])!=$version_cible)){
+			
+		include_spip('base/abstract_sql');
+		
 		if (version_compare($current_version,'0.2','<')){
-			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
 			medias_check_type_media();
 			sql_alter("TABLE spip_documents ADD statut varchar(10) DEFAULT '0' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.2",'non');
 		}
 		if (version_compare($current_version,'0.3','<')){
-			include_spip('base/abstract_sql');
 			// ajouter un champ
 			sql_alter("TABLE spip_documents ADD date_publication datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 			// vider le cache des descriptions de tables
@@ -60,7 +61,6 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version,$current_version="0.4",'non');
 		}
 		if (version_compare($current_version,'0.5','<')){
-			include_spip('base/abstract_sql');
 			// ajouter un champ
 			sql_alter("TABLE spip_documents ADD brise tinyint DEFAULT 0");
 			// vider le cache des descriptions de tables
@@ -69,34 +69,36 @@ function medias_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version,$current_version="0.5",'non');
 		}
 		if (version_compare($current_version,'0.6','<')){
-			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_types_documents ADD media varchar(10) DEFAULT 'file' NOT NULL");
 			medias_check_type_media();
 			ecrire_meta($nom_meta_base_version,$current_version="0.6",'non');
 		}
 		if (version_compare($current_version,'0.7','<')){
-			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_documents ADD credits varchar(255) DEFAULT '' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.7",'non');
 		}
 		if (version_compare($current_version,'0.8','<')){
 			// reset des statut='0' pour forcer un recalcul de tous les statuts
-			include_spip('base/abstract_sql');
 			sql_updateq('spip_documents',array("statut"=>'0'));
 			ecrire_meta($nom_meta_base_version,$current_version="0.8",'non');
 		}
 		// version 0.9 n'avait pas DEFAULT '' sur le champ fichier
 		if (version_compare($current_version,'0.10','<')){
 			// Augmentation de la taille du champ fichier pour permettre les URL longues
-			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_documents CHANGE fichier fichier TEXT NOT NULL DEFAULT ''");
 			ecrire_meta($nom_meta_base_version,$current_version="0.10",'non');
 		}
 		if (version_compare($current_version,'0.11','<')){
 			// Passage du mode en varchar
-			include_spip('base/abstract_sql');
 			sql_alter("TABLE spip_documents CHANGE mode mode varchar(10) DEFAULT 'document' NOT NULL");
 			ecrire_meta($nom_meta_base_version,$current_version="0.11",'non');
+		}
+		if (version_compare($current_version,'0.12','<')){
+			/**
+			 * On change le champs taille en bigint pour avoir des tailles de documents en base > 2Go
+			 */
+			sql_alter("TABLE spip_documents CHANGE `taille` `taille` bigint");
+			ecrire_meta($nom_meta_base_version,$current_version="0.12",'non');
 		}
 	}
 	medias_check_statuts();
