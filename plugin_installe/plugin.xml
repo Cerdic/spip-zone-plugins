@@ -9,13 +9,13 @@
 	<multi>[fr]	
 Ce plugin fournit une balise <code>#PLUGIN_PAS_INSTALLE</code> pour tester qu'un plugin est install&#233;. Ainsi, on peut utiliser une inclusion conditionelle dans le squelette:
 
-{[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})&lt;INCLURE{fond=squelette_plugin}&gt;]}
+<code>[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})&lt;INCLURE{fond=squelette_plugin}&gt;]</code>
 
 Pour que ce test ne fasse pas l'inclusion quand ce plugin n'est pas install&#233;, le test de la balise est "invers&#233;": on test donc qu'un plugin n'est pas install&#233;
 [en]
 This plugin provides a new tag <code>#PLUGIN_PAS_INSTALLE</code> that allows you to test if a plugin is installed or not. This way, you can do a conditional inclusion:
 
-{[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})&lt;INCLURE{fond=squelette_plugin}&gt;]}
+<code>[(#PLUGIN_PAS_INSTALLE{'monplugin'}|?{'',' '})&lt;INCLURE{fond=squelette_plugin}&gt;]</code>
 
 For this test to fail when this plugin is not installed, the test is inverted. Therefore, the tag test if a plugin is NOT installed.
 </multi>
