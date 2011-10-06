@@ -15,7 +15,7 @@
         such as authors, sections, articles (when a dedicated interface exists)...
         in a same universe (just like a bunch of grapes)
 	[es]Permite agrupar elementos de SPIP
-        como autores/as, secciones, art&iacute;culos (cuando hay una interfaz que lo permite)...
+        como autores/as, secciones, art&#237;culos (cuando hay una interfaz que lo permite)...
         en un mismo universo (un racimo)
 	[de]Neue Objekte (Trauben) k&#252;nnen aus SPIP-Objekten zusammengestellt werden,
 		wenn diese ein Interface haben.
@@ -61,7 +61,7 @@
 		<nom>grappes_objets_lies</nom>
 		<inclure>grappes_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="SelecteurGenerique" version="[0.2;]" />
 	<necessite id="spip_bonux" version="[2.2.21;]" />
 	<bouton id='grappes2' parent="naviguer">
