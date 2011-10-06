@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 	<!--  
 	// $LastChangedRevision$
@@ -7,18 +6,15 @@
 	 -->
 	
 	<nom>Raccourci texte perso</nom>
-	
+	<slogan>Surcharger les raccourcis texte utilis&#233;s dans vos squelettes</slogan>
 	<auteur>paladin@quesaco.org</auteur>
 	
-	<version>1.0.03</version>
+	<version>1.0.3</version>
 	
 	<etat>stable</etat>
-	
+	<lien>http://www.quesaco.org/Surcharger-les-raccourcis-texte</lien>
 	<description>
-		Permet de personnaliser les raccourcis &#147;texte&#148; des squelettes via
-		l&#39;espace priv&#233;.<br />
-		Vous pouvez d&#233;l&#233;guer la gestion de ces raccourcis
-		&#224; un administrateur restreint.
+		Permet de personnaliser les raccourcis &#147;texte&#148; des squelettes via l&#39;espace priv&#233;. Vous pouvez d&#233;l&#233;guer la gestion de ces raccourcis	&#224; un administrateur restreint.
 	</description>
 	
 	<prefix>raper</prefix>
@@ -53,6 +49,6 @@
 		<inclure>inc/raper_pipeline_affiche_gauche.php</inclure>
 	</pipeline>
 	
-	<necessite id='spip' version='[1.9.2;]' />
+	<necessite id='spip' version='[1.9.2;2.0.99]' />
 	<categorie>outil</categorie>
 </plugin>
