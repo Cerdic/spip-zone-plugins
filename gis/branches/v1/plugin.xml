@@ -1,39 +1,35 @@
 <plugin>
+	<nom>Escoitar Gis Plugin</nom>
+	<icon></icon>
+	<version>1.0.0</version>
+	<version_base>0.1.7</version_base>
+	<etat>stable</etat>
+	<auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net], [b_b->http://www.spip-contrib.net/b_b]</auteur>
+	<description>
+	<multi>
+[gl] Este plugin, xunto co plugin Google Map API, permite visualizar mapas GoogleMaps nas p&#225;xinas p&#250;blicas do sitio. Os artigos e as palabras chaves do sitio poden ser xeocalizadas por marcadores nos mapas.
 
- <nom>Escoitar Gis Plugin</nom>
- <icon></icon>
- <version>1.0.0</version>
- <version_base>0.1.7</version_base>
- <etat>stable</etat>
+Este plugin engade duas t&#225;boas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_mots}}
 
- <auteur>[Berio Molina->http://www.berio.alg-a.org], [Horaciogd->http://www.vhplab.net], [b_b->http://www.spip-contrib.net/b_b]</auteur>
-
- <description>
- <multi>[gl] Este plugin, xunto co plugin Google Map API, permite visualizar mapas GoogleMaps nas p&aacute;xinas p&uacute;blicas do sitio. Os artigos e as palabras chaves do sitio poden ser xeocalizadas por marcadores nos mapas.
-
-Este plugin engade duas t&aacute;boas sobre a base de datos. Unha chamada {{spip_gis}} e outra chamada {{spip_gis_mots}}
-
-[es]Este plugin, acoplado al plugin Google Map API, permite visualizar mapas GoogleMaps en las p&aacute;ginas p&uacute;blicas del sitio. Los art&iacute;culos y las palabras claves del sitio pueden ser geolocalizadas por marcadores en los mapas.
+[es]Este plugin, acoplado al plugin Google Map API, permite visualizar mapas GoogleMaps en las p&#225;ginas p&#250;blicas del sitio. Los art&#237;culos y las palabras claves del sitio pueden ser geolocalizadas por marcadores en los mapas.
 
 Este plugin introduce dos tablas en la base de datos, una denominada {{spip_gis}} et l'autre {{spip_gis_mots}}
 
-[fr]Ce plugin, coupl&eacute; au plugin Google Map API permet d'afficher des cartes GoogleMaps sur les pages publiques du site. Les articles et mots-cl&eacute;s du site peuvent &ecirc;tre g&eacute;olocalis&eacute;s par des marqueurs sur les cartes.
+[fr]Ce plugin, coupl&#233; au plugin Google Map API permet d'afficher des cartes GoogleMaps sur les pages publiques du site. Les articles et mots-cl&#233;s du site peuvent &#234;tre g&#233;olocalis&#233;s par des marqueurs sur les cartes.
 
-Ce plugin introduit deux tables dans la base de donn&eacute;es. L'une nomm&eacute;e {{spip_gis}} et l'autre {{spip_gis_mots}}
+Ce plugin introduit deux tables dans la base de donn&#233;es. L'une nomm&#233;e {{spip_gis}} et l'autre {{spip_gis_mots}}
 
 [en]This plugin, associated with Google Map API plugin enables GoogleMaps' display on public site's pages. Articles and keywords can be geo-localised with marks on maps.
 
 This plugin adds two talbes to the database, one named {{spip_gis}} and the other {{spip_gis_mots}}.
- </multi>
- </description>
+	</multi>
+	</description>
 
- <lien>http://www.spip-contrib.net/Plugin-Gis-escoitar</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Gis-escoitar</lien>
+	<install>base/gis_upgrade.php</install>
+	<options>gis_options.php</options>
+	<prefix>gis</prefix>
 
- <install>base/gis_upgrade.php</install>
-
- <options>gis_options.php</options>
-
- <prefix>gis</prefix>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<action>affichage_final</action>
@@ -50,7 +46,7 @@ This plugin adds two talbes to the database, one named {{spip_gis}} and the othe
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<necessite id='cfg' version='[1.10.4;]' />
 	<chemin dir='' />
 </plugin>
