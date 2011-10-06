@@ -4,7 +4,7 @@
 	<licence>GPL v3</licence>
 	<version>0.4.2</version>
 	<version_base>0.3</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
     <slogan>Définir un prix par d&#233;faut</slogan>
 	<description>Ce plugin -grace au pipeline_prix- permet d'avoir un prix par defaut pour tout objet SPIP:
 	article, mot, document, rubrique... ou autre. On peut configurer la liste des identifiants ou du parent de la branche.
