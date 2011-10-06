@@ -1,25 +1,16 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	jQuery pour SPIP 1.92x
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-Patrice Vanneufville
-_ Librairie javascript : John Resig pour [jquery.js->http://jquery.com]
-	</auteur>
-	<version>
-	1.2.0
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>jQuery pour SPIP 1.9.2</nom>
+	<auteur>Patrice Vanneufville, Librairie javascript : John Resig pour [jquery.js->http://jquery.com]</auteur>
+	<version>1.2.0</version>
+	<etat>stable</etat>
 	<description>
-D&eacute;sactive l'ancienne librairie {jQuery} distribu&eacute;e avec SPIP 1.92x ({{jquery.js v1.1.1}}) et ajoute un appel &#224; {{jquery.js v1.2.6}} utilis&eacute; par SPIP 2.0.x dans l'ent&#234;te publique (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>).
+D&#233;sactive l'ancienne librairie {jQuery} distribu&#233;e avec SPIP 1.92x ({{jquery.js v1.1.1}}) et ajoute un appel &#224; {{jquery.js v1.2.6}} utilis&#233; par SPIP 2.0.x dans l'ent&#234;te publique (fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>).
 
-Ce plugin vous permet donc de b&eacute;n&eacute;ficier d'une version r&eacute;cente de {jQuery} pour vos squelettes, tout en gardant en partie priv&eacute;e la version originale. Si vous avez install&eacute; le plugin {{CFG}}, choisissez la version de {jQuery} &#224; utiliser : {{v1.1.1}}, {{v1.2.6}} ou {{v1.3.2}}.
+Ce plugin vous permet donc de b&#233;n&#233;ficier d'une version r&#233;cente de {jQuery} pour vos squelettes, tout en gardant en partie priv&#233;e la version originale. Si vous avez install&#233; le plugin {{CFG}}, choisissez la version de {jQuery} &#224; utiliser : {{v1.1.1}}, {{v1.2.6}} ou {{v1.3.2}}.
 
 Ajout au passage du pipeline {jquery_plugins} et des plugins {jquery.form}, {jquery.cookie} et {ajaxCallback}.
 
-{{Important}} : ce plugin ne concerne que les versions 1.92x de SPIP.
+{{Important}} : ce plugin ne concerne que les versions 1.9.2x de SPIP.
 	</description>
 	<lien></lien> <!-- URI de documentation -->
 	<prefix>
@@ -28,6 +19,6 @@ Ajout au passage du pipeline {jquery_plugins} et des plugins {jquery.form}, {jqu
 	<options> <!-- fichier charge a chaque hit -->
 	jquery_192_options.php
 	</options>
-	<necessite id="SPIP" version="[1.9.2;2.0.0)" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>outil</categorie>
 </plugin>
