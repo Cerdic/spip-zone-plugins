@@ -2,7 +2,7 @@
 	<nom> <!-- Nom du plugin -->
 	<multi>[fr]Acces Restreint[es]Acceso restringido[en]Restricted Access[de]Zugangskontrolle</multi>
 	</nom>
-	<icon>img_pack/zones-acces-48.png</icon>
+	<icon>prive/themes/spip/images/zones-acces-48.png</icon>
 	<auteur>[cedric.morin@yterium.com->http://www.yterium.net]</auteur>
 	<licence>GPL &#169; 2007-2008</licence>
 	<version>3.3.1</version>
