@@ -3,26 +3,26 @@
 	<auteur>[davux->http://da.weeno.net/]</auteur>
 	<icon>img/pig-64.png</icon>
 	<version>0.2.0</version>
-        <version_base>0.1</version_base>
+	<version_base>0.1</version_base>
 	<etat>dev</etat>
 	<description><multi>
 [fr] Outils de manipulation de devises internationales.
 
-Dans son &eacute;tat actuel, ce plugin fournit:
--* une balise <code>#DEVISES</code> qui renvoie un tableau contenant les codes &agrave; 3 lettres de toutes les devises existantes (y compris Bitcoin).
+Dans son &#233;tat actuel, ce plugin fournit:
+-* une balise <code>#DEVISES</code> qui renvoie un tableau contenant les codes &#224; 3 lettres de toutes les devises existantes (y compris Bitcoin).
 -* les noms des devises accessibles, sous 3 formes, via des cha&icirc;nes de langue:
 -** le nom de la monnaie (par exemple <code><:devise:EUR:></code> renvoie "Euro")
--** le nom &agrave; utiliser pour des quantit&eacute;s au singulier (ex: <code><:devise:s_EUR:></code> renvoie "euro")
--** le nom &agrave; utiliser pour des quantit&eacute;s au pluriel (ex: <code><:devise:p_EUR:></code> renvoie "euros")
--* un champ "devise" pour les auteurs, accessible via la balise <code>#DEVISE</code>, permettant aux auteurs de sp&eacute;cifier
-   leur balise pr&eacute;f&eacute;r&eacute;e. La valeur renvoy&eacute;e est le code &agrave; 3 lettres.
+-** le nom &#224; utiliser pour des quantit&#233;s au singulier (ex: <code><:devise:s_EUR:></code> renvoie "euro")
+-** le nom &#224; utiliser pour des quantit&#233;s au pluriel (ex: <code><:devise:p_EUR:></code> renvoie "euros")
+-* un champ "devise" pour les auteurs, accessible via la balise <code>#DEVISE</code>, permettant aux auteurs de sp&#233;cifier
+   leur balise pr&#233;f&#233;r&#233;e. La valeur renvoy&#233;e est le code &#224; 3 lettres.
 -* 3 mod&egrave;les: <code>auteur_nom_devise</code>, <code>auteur_devise_singulier</code>, <code>auteur_devise_pluriel</code>.
--* une saisie <code>devise</code> pour faciliter la cr&eacute;ation de formulaires.
+-* une saisie <code>devise</code> pour faciliter la cr&#233;ation de formulaires.
 
-Il serait pratique d'int&eacute;grer une fonction de conversion en temps r&eacute;el (par exemple en utilisant un webservice),
+Il serait pratique d'int&#233;grer une fonction de conversion en temps r&#233;el (par exemple en utilisant un webservice),
 pour s'adapter aux variations de taux de change.
 
-Les noms de devises sont en anglais, fran&ccedil;ais et espagnol.
+Les noms de devises sont en anglais, fran&#231;ais et espagnol.
 [en] Tools for manipulating international currencies.
 
 In its current state, this plugin provides:
@@ -40,34 +40,34 @@ In its current state, this plugin provides:
 It would be useful to include a real-time conversion feature (e.g. through a webservice), in order to use the current exchange rate.
 
 The currency names are in English, French and Spanish.
-[es] Herramientas de manipulaci&oacute;n de divisas internacionales.
+[es] Herramientas de manipulaci&#243;n de divisas internacionales.
 
 En su estado actual, este plugin proporciona:
--* una baliza <code>#DEVISES</code> que devuelve una matriz con todos los c&oacute;digos de 3 letras de las divisas existentes (incluyendo Bitcoin).
--* nombres de divisas en 3 formas, a trav&eacute;s de archivos de idioma:
+-* una baliza <code>#DEVISES</code> que devuelve una matriz con todos los c&#243;digos de 3 letras de las divisas existentes (incluyendo Bitcoin).
+-* nombres de divisas en 3 formas, a trav&#233;s de archivos de idioma:
 -** el nombre de la divisa (p.e. <code><:devise:MXN:></code> devuelve "Peso Mexicano")
 -** el nombre para usar con cantidades singulares (p.e. <code><:devise:s_MXN:></code> devuelve "peso mexicano")
 -** el nombre para usar con cantidades plurales (p.e. <code><:devise:p_MXN:></code> devuelve "pesos mexicanos")
--* un campo "devise" (divisa) para l@s autores/as, disponible a trav&eacute;s de la baliza <code>#DEVISE</code>, que les permite
-   indicar sur divisa preferida. El resultado es el c&oacute;digo de tres letras.
+-* un campo "devise" (divisa) para l@s autores/as, disponible a trav&#233;s de la baliza <code>#DEVISE</code>, que les permite
+   indicar sur divisa preferida. El resultado es el c&#243;digo de tres letras.
 -* 3 modelos en un contexto de autor/a: <code>auteur_nom_devise</code> (nombre de la divisa), <code>auteur_devise_singulier</code>
    (singular), <code>auteur_devise_pluriel</code> (plural).
--* un modulo de entrada ("saisie") llamado <code>devise</code>, para facilitar la creaci&oacute;n de formularios.
+-* un modulo de entrada ("saisie") llamado <code>devise</code>, para facilitar la creaci&#243;n de formularios.
 
-Ser&iacute;a &uacute;til incluir tambi&eacute;n una posibilidad de conversi&oacute;n en tiempo real (p.e. a trav&eacute;s de un
+Ser&#237;a &#250;til incluir tambi&#233;n una posibilidad de conversi&#243;n en tiempo real (p.e. a trav&#233;s de un
 servicio web), para tomar en cuenta las variaciones de tipo de cambio.
 
-Los nombres de divisas est&aacute;n en Ingl&eacute;s, Franc&eacute;s y Espa&ntilde;ol.
+Los nombres de divisas est&#225;n en Ingl&#233;s, Franc&#233;s y Espa&#241;ol.
 	</multi></description>
 	<prefix>devise</prefix>
 	<options>base/devise_options.php</options>
 	<install>base/devise_install.php</install>
 	<pipeline>
 		<nom>declarer_champs_extras</nom>
-                <inclure>base/devise.php</inclure>
+		<inclure>base/devise.php</inclure>
 	</pipeline>
 
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cextras" version="[0.8;]" />
 	<necessite id="saisies" />
 	<categorie>divers</categorie>
