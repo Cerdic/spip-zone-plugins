@@ -1,8 +1,7 @@
 <?php
 function formulaires_configurer_document_fulltext_charger_dist(){
 	//Recuperation de la configuration
-	$fulltext = sql_fetsel('valeur', 'spip_meta', 'nom = "fulltext"');
-	$fulltext = unserialize($fulltext['valeur']);
+	$fulltext = @unserialize($GLOBALS['meta']['fulltext']);
 	//Valeurs prealablement saisie ou par defaut/d'exemple 
 	$valeur = array(
 		'intervalle_cron' =>  $fulltext['intervalle_cron'] ? $fulltext['intervalle_cron'] : 600,
@@ -109,15 +108,8 @@ function formulaires_configurer_document_fulltext_traiter_dist(){
 		'xlsx_index' => _request('xlsx_index'),	
 	));
 	//Insere ou update ?
-	if($fulltext_meta = sql_fetsel('valeur', 'spip_meta', 'nom = "fulltext"')){
-		//On update
-		sql_updateq('spip_meta', array('valeur' => $fulltext, 'impt' => 'oui'), 'nom="fulltext"');
-		$res = array('message_ok'=> _T('fulltext:message_ok_update_configuration'));
-	}else{
-		//On insere
-		$id = sql_insertq('spip_meta', array('nom'=>'fulltext','valeur' => $fulltext, 'impt' => 'oui'));
-		$res = array('message_ok'=>_T('fulltext:message_ok_configuration'));
-	}
+	ecrire_meta('fulltext',$fulltext);
+	$res = array('message_ok'=>_T('fulltext:message_ok_configuration'));
 	return $res;
 	
 }
