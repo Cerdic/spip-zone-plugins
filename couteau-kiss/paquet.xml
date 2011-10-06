@@ -1,0 +1,17 @@
+<paquet
+	prefix="ck"
+	categorie="maintenance"
+	version="1.1.5"
+	etat="stable"
+	compatibilite="[2.0.0;3.0.*]"
+	logo="images/pocket-knife-32.png"
+	documentation="http://www.spip-contrib.net/Couteau-KISS"
+>
+
+	<nom>Couteau Kiss</nom>
+
+	<auteur>C&#233;dric MORIN</auteur>
+	<licence>GPL</licence>
+
+	<menu nom="configurer_ck" titre="ck:titre_page_couteau" parent="menu_configuration" icone="images/pocket-knife-16.png" />
+</paquet>
