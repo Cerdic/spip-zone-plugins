@@ -39,7 +39,7 @@
 	Ajaxforms
 	</prefix>
 	<fonctions>ajaxform_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>outil</categorie>
 	<traduire gestionnaire="salvatore" module="ajaxform" reference="fr" />
 </plugin>
