@@ -44,7 +44,7 @@ function formulaires_editer_montant_traiter_dist($id_montant='new',$retour='', $
 
 	set_request('redirect','');
 	$action_editer = charger_fonction("editer_montant",'action');
-	list($id_grappe, $err) = $action_editer();
+	list($id_montant, $err) = $action_editer();
 	if ($err){
 		$res['message_erreur'] = $err;
 	}

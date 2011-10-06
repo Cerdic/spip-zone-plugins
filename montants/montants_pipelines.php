@@ -8,24 +8,6 @@
  * @param object $flux
  */
 
-//ssi montant existe afficher le prix des objets sur leurs pages
-function montants_affiche_milieu($flux){
-	
-	$pages= array('naviguer'=>'rubrique','articles'=>'article','mots_edit'=>'mot');
-	foreach($pages AS $page => $objet){
-		if($flux['args']['exec'] == $page) {
-			$montant=sql_getfetsel("id_montant","spip_montants","objet='$objet'");
-			if($montant)
-			$flux['data'] .= recuperer_fond("prive/prixdefaut_$objet",
-				array('id_objet'=>$flux['args']['id_'.$objet],	
-				'objet'=>$objet
-				));
-		}
-	}
-	
-return $flux;
-}
-
 		
 function montants_prix_ht($flux){
 	
@@ -61,7 +43,7 @@ function montants_prix_ht($flux){
 					}
 					break;
 				case 'mot':
-					//groupe du mot !obligatoire
+					//groupe du mot attention il est obligatoire
 					$parents[] =sql_getfetsel("id_groupe","spip_mots","id_mot=".$id_objet);
 					break;
 				default: 
@@ -72,7 +54,7 @@ function montants_prix_ht($flux){
 	
 	
 		if(!$prix_ht){
-		// l'objet doit appartenir a un parent spécifique
+		// l'objet doit appartenir a un parent sp√©cifique
 		$prix_ht=sql_getfetsel('prix_ht', 'spip_montants',"objet='".$type_objet."' AND le_parent IN (".join(',',$parents).")");
 		//spip_log("log 0 $type_objet $id_objet prix $prix_ht parents=".join(',',$parents),'montants');
 		}
@@ -96,8 +78,8 @@ function montants_prix_ht($flux){
 	}
 	
 	if ($prix_ht) $flux['data']=$prix_ht;
-	//si aucun prix generer une erreur manifeste = trop chere pour etre vrai a revoir?
-	else $flux['data']=999.99;
+	//si aucun prix retourner 0
+	else $flux['data']=0;
 	
 	}
 	

@@ -1,0 +1,13 @@
+[(#ID_ARTICLE|oui) <!-- on est sur un article--> 
+[(#SET{prix,[(#PRIX{article,[(#ID_ARTICLE)]})]})]
+]
+[(#ID_ARTICLE|non) <!-- on suppose qu'on est sur une rubrique-->
+[(#SET{prix,[(#PRIX{rubrique,#ID_RUBRIQUE})]})]
+]
+
+<li class="editer_[(#ENV{champ_extra})][ (#ENV{obligatoire_extra})][ (#ENV{erreur_extra}|oui)erreur]">
+	<label for="#ENV{champ_extra}">#ENV{label_extra}</label>
+		[<span class='erreur_message'>(#ENV**{erreur_extra})</span>]
+		<p class="explication"><:montants:prix_par_defaut{prix=#GET{prix}}:></p>
+		<input type='text' class='text[ (#ENV{class_extra})]' name='#ENV{champ_extra}' id='#ENV{champ_extra}' value="#ENV{valeur_extra}" />
+</li>

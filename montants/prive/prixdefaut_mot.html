@@ -1,16 +1,13 @@
 [(#SET{prix,[(#PRIX{#OBJET,#ID_OBJET})]})]
 
-	[(#REM) soit texte pour prix par defaut]
+	[(#REM) le texte si on a un prix par defaut]
 	[(#SET{textprix,<:montants:prix_defaut:>})]
 	
-	[(#REM) soit texte pour prix de l'objet]
+	[(#REM) le texte si l'objet a deja son prix]
 	<BOUCLE_mot(MOTS){id_mot=#ID_OBJET}{prix=#PRIX*{#OBJET,#ID_OBJET}}>
 	[(#SET{textprix,<:montants:prix:>})]
 	</BOUCLE_mot>
 	
-	[(#PRIX*{#OBJET,#ID_OBJET}|=={'999.99'}|oui) 
-		[(#SET{prix,<:montants:aucun_prix:>})]
-	]
 	
 		[
 		<div class="liste-elements" style="padding:1em">

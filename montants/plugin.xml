@@ -2,18 +2,20 @@
 	<nom>Montants</nom>
 	<auteur>Anne-lise Martenot - elastick.net</auteur>
 	<licence>GPL v3</licence>
-	<version>0.4.1</version>
+	<version>0.4.2</version>
 	<version_base>0.3</version_base>
 	<etat>dev</etat>
     <slogan>Définir un prix par d&#233;faut</slogan>
 	<description>Ce plugin -grace au pipeline_prix- permet d'avoir un prix par defaut pour tout objet SPIP:
 	article, mot, document, rubrique... ou autre. On peut configurer la liste des identifiants ou du parent de la branche.
+	L'objet contient un champ prix que l'on affiche avec extra-xx prix_defaut.
 	</description>
 	<categorie>divers</categorie>
 	<icon>images/montants-16.png</icon>
 	
 	<prefix>montants</prefix>
 	<install>base/montants_upgrade.php</install>
+	<fonctions>montants_fonctions.php</fonctions>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/montants.php</inclure>
@@ -28,11 +30,6 @@
 	</pipeline>
 	<pipeline>
 		<nom>prix</nom>
-		<inclure>montants_pipelines.php</inclure>
-	</pipeline>
-	<!-- afficher le bloc prix par defaut -->
-	<pipeline>
-		<nom>affiche_milieu</nom>
 		<inclure>montants_pipelines.php</inclure>
 	</pipeline>
 	<pipeline>

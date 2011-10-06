@@ -1,0 +1,23 @@
+[(#SELF|match{naviguer}|oui)
+	#SET{affichage,oui}
+	#SET{objet,rubrique}
+	#SET{id_objet,#ID_RUBRIQUE}	
+]
+
+[(#SELF|match{articles}|oui)
+	#SET{affichage,oui}
+	#SET{objet,article}
+	#SET{id_objet,#ID}
+]
+
+
+[(#SELF|match{mots_edit}|oui)
+	#SET{affichage,oui}
+	#SET{objet,mot}
+	#SET{id_objet,#ID}
+]
+
+[(#GET{affichage}|=={oui}|oui)
+	#INCLURE{fond=prive/prixdefaut_#GET{objet},objet=#GET{objet},id_objet=#GET{id_objet}}
+]
+
