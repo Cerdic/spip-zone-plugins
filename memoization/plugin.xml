@@ -1,31 +1,25 @@
 <plugin>
 	<nom>Memoization</nom>
-	<auteur>Fil
-	&#169; 2009-2011 - GNU/LGPL || MIT
-	</auteur>
-	<version>
-	0.9.8
-	</version>
-	<etat>
-	stable
-	</etat>
+	<slogan>
+		<multi>
+		[fr]Gestion du cache de SPIP par diverses m&#233;thodes.
+		[en] Various methods to process SPIP's cache.
+		</multi>
+	</slogan>
+	<auteur>Fil</auteur>
+	<licence>&#169; 2009-2011 GNU/LGPL || MIT</licence>
+	<version>0.9.8</version>
+	<etat>stable</etat>
 	<description>
 		<multi>
-			[fr] Gestion du cache de SPIP par diverses m&#233;thodes.
-
-	(icone : [laszlo-photo->http://www.flickr.com/photos/laszlo-photo/149047693/])
-
-			[en] Various methods to process SPIP's cache.
-
-	(icon : [laszlo-photo->http://www.flickr.com/photos/laszlo-photo/149047693/])
+			[fr]M&#233;mo&#239;zation est un terme d&#8217;informatique, dont Wikip&#233;dia donne la d&#233;finition suivante : &#171; une technique consistant &#224; r&#233;duire le temps d&#8217;ex&#233;cution d&#8217;une fonction en m&#233;morisant ses r&#233;sultats d&#8217;une fois sur l&#8217;autre &#187;. C&#8217;est aussi le nom d&#8217;une nouvelle librairie de fonctions pour PHP, qui fait suite &#224; mes exp&#233;rimentations sur XCache.
+			[en]Memoization is a computer science term, which Wikipedia defines as "a technique of reducing the execution time of a function by storing the results once on the other." It is also the name of a new function library for PHP, which follows my experiments XCache.
 		</multi>
 	</description>
-    <lien>http://zzz.rezo.net/Memoization.html</lien>
-	<prefix>
-	Memoization
-	</prefix>
-	<icon>memoization.png</icon>
+   <lien>http://zzz.rezo.net/Memoization.html</lien>
+	<prefix>Memoization</prefix>
+	<icon>memoization.png</icon> <!-- icone : http://www.flickr.com/photos/laszlo-photo/149047693/ -->
 	<options>inc/memoization.php</options>
 	<categorie>performance</categorie>
-	<necessite id="SPIP" version="[2.0.0;3.1.0)" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 </plugin>
