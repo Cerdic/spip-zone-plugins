@@ -1,0 +1,34 @@
+#CACHE{0}
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html !
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+#SET{claire,##ENV{couleur_claire,edf3fe}}
+#SET{foncee,##ENV{couleur_foncee,3874b0}}
+#SET{left,#ENV{ltr}|choixsiegal{left,left,right}}
+#SET{right,#ENV{ltr}|choixsiegal{left,right,left}}
+
+.liste_items li.item > .actions {display:block;float:#GET{right};}
+li.item p.actions {float:none;text-align:#GET{right};margin:0;}
+
+li.item.zone .quoi {display:block;padding-left:20px;background:url(#EVAL{_DIR_PLUGIN_ACCESRESTREINT}img_pack/restreint-16.png) center left no-repeat;}
+
+.formulaire_spip ul.hierarchie {margin:0;padding:0;}
+.formulaire_spip ul.hierarchie li {margin:0;margin-#GET{left}:10px;padding:0;}
+.formulaire_spip ul.hierarchie li.checked {background:[#(#GET{claire}|couleur_eclaircir)];}
+.formulaire_spip ul.hierarchie li.checked > .choix label {font-weight:bold;}
+
+.liste_items li.item.ok {background-image:url(#CHEMIN{img_pack/acces-ok-24.png});background-repeat:no-repeat;background-position:top right;}
+.liste_items li.item.interdit {background-image:url(#CHEMIN{img_pack/acces-interdit-24.png});background-repeat:no-repeat;background-position:top right;}
