@@ -1,29 +1,21 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	analyclick
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-		[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]
-	</auteur>
-	<version>0.1</version>
+	<nom>Analyclick</nom>
+	<slogan>Compteur de t&#233;l&#233;chargements pour les documents SPIP</slogan>
+	<auteur>[Jean-Marc Viglino->http://www.spip-contrib.net/_Viglino-Jean-Marc_]</auteur>
+	<version>0.1.0</version>
 	<icon>anaclic.png</icon>
 	<etat>test</etat>
 	<description>
-		Compteur de t&eacute;l&eacute;chargements pour les documents SPIP.
+	Ce plugin permet de compter les t&#233;l&#233;chargements de documents sur son site. Il introduit une balise #URL_DOC_COMPTEUR qui va compter chaque clic fait sur ce lien. Il affiche une page de statistique.
 	</description>
-	<prefix>
-	anaclic
-	</prefix>
-	<!-- Installation de la base -->
+	<prefix>anaclic</prefix>
+	<lien>http://www.spip-contrib.net/Analyclick-un-compteur-de-telechargements</lien>
+
 	<install>base/anaclic_install.php</install>
 	<fonctions>base/anaclic.php</fonctions>
-	<!-- les balises -->
 	<fonctions>balise/anaclic_balise.php</fonctions>
-	<!-- boucle doc_compteurs -->
-	<fonctions>
-		public/anaclic_boucles.php
-	</fonctions>
-	<!-- boutons -->
+	<fonctions>public/anaclic_boucles.php</fonctions>
+
 	<bouton id="statistiques_anaclic_nav" parent='naviguer'>
 		<icone>images/statistiques-24.gif</icone>
 		<url>statistiques_anaclic</url>
@@ -46,5 +38,6 @@
 		<nom>autoriser</nom>
 		<inclure>inc/anaclic_autorisations.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<categorie>statistique</categorie>
 </plugin>
