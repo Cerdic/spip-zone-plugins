@@ -3,9 +3,7 @@
 	<version>0.2.3</version>
 	<etat>test</etat>
 	<auteur>Fil</auteur>
-	<licence>
-		&#169; 2010 - GNU/GPL
-	</licence>
+	<licence>GNU/GPL - (c) 2010</licence>
 	<description>
 		<multi>
 			[fr]Int&#233;gration des microdons Flattr
@@ -13,17 +11,13 @@
 		</multi>
 	</description>
 	<lien>http://zzz.rezo.net/Plugin-Flattr-pour-SPIP.html</lien>
-	<prefix>
-	flattr
-	</prefix>
-	<icon>
-	img/flattr.png
-	</icon>
-<pipeline>
-	<nom>insert_head_css</nom>
-	<inclure>flattr_pipelines.php</inclure>
-</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<prefix>flattr</prefix>
+	<icon>img/flattr.png</icon>
+	<pipeline>
+		<nom>insert_head_css</nom>
+		<inclure>flattr_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<utilise id="cfg" />
 	<categorie>divers</categorie>
 </plugin>
