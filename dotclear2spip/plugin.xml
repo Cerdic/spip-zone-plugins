@@ -1,29 +1,25 @@
 <plugin>
-
-    <nom>Dotclear2SPIP</nom>
+	<nom>Dotclear2SPIP</nom>
 	<icon>dc.png</icon>
-    <categorie>divers</categorie>
-    <auteur>Ma&iuml;eul ROUQUETTE</auteur>
-    <version>0.2</version>
-    <version_base>0.1</version_base>
-  
-    <etat>test</etat>
-
-    <description> Un plugin pour importer du contenu d'une bdd Dotclear 2 dans un site SPIP.</description>
-      <prefix>dot2</prefix>
-    <necessite id="crud" />
-    <necessite id="sale" />
-    <necessite id="SPIP" version="[2.1;)" />
+	<categorie>divers</categorie>
+	<auteur>Ma&#239;eul ROUQUETTE</auteur>
+	<lien>http://www.spip-contrib.net/Doctlear-vers-SPIP</lien>
+	<version>0.2.0</version>
+	<version_base>0.1</version_base>
+	<etat>test</etat>
+	<description> Un plugin pour importer du contenu d'une bdd Dotclear 2 dans un site SPIP.</description>
+	<prefix>dot2</prefix>
+	<necessite id="crud" />
+	<necessite id="sale" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="medias" />
 	<bouton id="dotclear2spip2" parent="bando_administration">
 		<icone>dc.png</icone>
 		<url>dotclear2spip</url>
 		<titre>Migration depuis Dotclear</titre>
 	</bouton>
-	
 	<bouton id="dotclear2spip" parent="configuration">
 		<icone>dc.png</icone>
 		<titre>Migration depuis Dotclear</titre>
 	</bouton>
-
 </plugin>
