@@ -3,10 +3,10 @@
 	<prefix>herbier</prefix>
 	<version>1.0.0</version>
 	<etat>stable</etat>
-	<slogan>Capture d'&eacute;cran d'un site pris au hasard dans l'herbier</slogan>
+	<slogan>Capture d'&#233;cran d'un site pris au hasard dans l'herbier</slogan>
 	<description>
 Ce plugin fournit une noisette permettant d'afficher une capture d'ecran d'un site pris au hasard dans l'herbier. 
-_Pour cela il ajoute &agrave; l'installation la syndication automatique &agrave; l'herbier.
+_Pour cela il ajoute &#224; l'installation la syndication automatique &#224; l'herbier.
 	</description>
 	<install>herbier_install.php</install>
 	<pipeline>
