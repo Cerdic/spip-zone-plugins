@@ -123,7 +123,7 @@ function tourner_selon_exif_orientation($id_document, $fichier) {
 				$rot = -90;
 		}
 		if ($rot)
-			action_tourner_post(array(null,$id_document, $rot));
+			action_tourner_post($id_document, $rot);
 	}
 }
 
