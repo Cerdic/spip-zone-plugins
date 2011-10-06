@@ -1,37 +1,26 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	SVN Update
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Cedric &#38; Fil
-_ &#169; 2006 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.32
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>SVN Update</nom>
+	<slogan>Pouvoir faire une mise &#224; jour SVN du site</slogan>
+	<auteur>Cedric, Fil</auteur>
+	<licence>&#169; 2006 GNU/GPL</licence>
+	<version>0.32.0</version>
+	<etat>stable</etat>
 	<description>
-	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&#233; &#224; faire une mise &#224; jour SVN du site ou de tout autre r&#233;pertoire. Pour cela il doit se rendre sur la page [ecrire/?exec=svn_update->./?exec=svn_update] et s&#233;lectionner les &#233;l&#233;ments &#224; mettre &#224; jour.
-_ Seuls les administrateurs d&#233;clar&#233;s commes webmestres (<code>constante _ID_WEBMESTRES</code>) sont autoris&#233; &#224; g&#233;r&#233;r la configuration du plugin.
+	Un utilisateur (par defaut, l'administrateur numero 1) est autoris&#233; &#224; faire une mise &#224; jour SVN du site ou de tout autre r&#233;pertoire. Pour cela il doit se rendre sur la page <code>ecrire/?exec=svn_update</code> et s&#233;lectionner les &#233;l&#233;ments &#224; mettre &#224; jour.
 
-La configuration se fait dans [le gestionnaire cfg->?exec=cfg&amp;cfg=svn_update] :
-- pour d&#233;finir la liste des administrateurs autoris&#233;s &#224; proc&#233;der aux mises &#224; jour (par d&#233;faut seul l'administrater d'id 1 est autoris&#233;).
-- pour d&#233;clarer la liste des r&#233;pertoires concern&#233;s, en donnant pour chacun une ligne :
-_ <code>source destination [revision] [user]</code>
+Seuls les administrateurs d&#233;clar&#233;s commes webmestres (<code>constante _ID_WEBMESTRES</code>) sont autoris&#233; &#224; g&#233;r&#233;r la configuration du plugin.
+
+La configuration se fait dans le gestionnaire cfg :
+-* pour d&#233;finir la liste des administrateurs autoris&#233;s &#224; proc&#233;der aux mises &#224; jour (par d&#233;faut seul l'administrater d'id 1 est autoris&#233;).
+-* pour d&#233;clarer la liste des r&#233;pertoires concern&#233;s, en donnant pour chacun une ligne : <code>source destination [revision] [user]</code>
 _ Par exemple :
 _ <code>svn://zone.spip.org/spip-zone/_squelettes_/sedna squelettes/sedna</code>
 _ <code>svn://zone.spip.org/spip-zone/_plugins_/_stable_/cfg plugins/cfg</code>
 	</description>
-	<lien>http://www.spip-contrib.net/SVN-Update-Notes</lien> <!-- URI de documentation -->
-	<prefix>
-	svn_update
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<lien>http://www.spip-contrib.net/SVN-Update-Notes</lien>
+	<prefix>svn_update</prefix>
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	<necessite id="cfg" version="[1.0;]"/>
-	<options>
-	    svn_update_options.php
-	</options>
+	<options>svn_update_options.php</options>
 	<categorie>outil</categorie>
 </plugin>
