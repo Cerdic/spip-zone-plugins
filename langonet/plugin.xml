@@ -1,12 +1,13 @@
 <plugin>
 	<nom>LangOnet</nom>
-	<auteur>Eric Lupinacci, denisb avec le support d&eacute;vou&eacute; de Kent1</auteur>
+	<slogan>V&#233;rifier, g&#233;n&#233;rer, retrouver ou afficher les items de langue</slogan>
+	<auteur>Eric Lupinacci, denisb avec le support d&#233;vou&#233; de kent1</auteur>
 	<version>0.6.3</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
 	<icon>prive/themes/spip/images/langonet-64.png</icon>
 	<description>
-Ce plugin permet d'ex&eacute;cuter des actions de v&eacute;rification et de nettoyage des fichiers de langue de SPIP, des plugins ou des squelettes. Il est aussi possible de consulter l'ensemble des items contenus dans les fichiers de langue disponibles sur le site 
+Ce plugin permet d'ex&#233;cuter des actions de v&#233;rification et de nettoyage des fichiers de langue de SPIP, des plugins ou des squelettes. Il est aussi possible de consulter l'ensemble des items contenus dans les fichiers de langue disponibles sur le site 
 et d'effectuer des recherches d'items dans les fichiers de langue de SPIP.
 	</description>
 	<lien>http://www.spip-contrib.net/langOnet-Presentation-generale</lien>
@@ -53,7 +54,7 @@ et d'effectuer des recherches d'items dans les fichiers de langue de SPIP.
 		<url>langonet_rechercher</url>
 	</onglet>	
 
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;3.0.99]" />
 	<necessite id="Iterateurs" version="[0.2.5;]" />
 	<categorie>outil</categorie>
 </plugin>
