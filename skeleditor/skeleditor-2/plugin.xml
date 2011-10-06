@@ -38,7 +38,7 @@
 	<necessite id="SPIP" version="[2.0.0;2.1.0)" />
 	<categorie>outil</categorie>
 </plugin>
-<plugin version="[2.1.0;2.1.99]" >
+<plugin spip="[2.1.0;2.1.99]" >
 	<nom>SkelEditor</nom>
 	<icon>spip_210/img_pack/skeleditor-32.png</icon>
 	<auteur>[erational->http://www.erational.org], [C&eacute;dric Morin->http://www.yterium.net]</auteur>
