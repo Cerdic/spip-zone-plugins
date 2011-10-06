@@ -52,6 +52,16 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 	$tag_analysed = array();
 	$position = 0;
 
+	$statut = 'publie';
+	$table = table_objet_sql($type);
+	$infos_objets = sql_fetsel('*',$table,"$id_table_objet=$id_objet");
+	if(isset($infos_objets['statut']) && ($infos_objets['statut'] != 'publie')){
+		spip_log('Le statut de l objet est pas publié','spipicious');
+		spip_log($infos_objets['statut'],'spipicious');
+		$statut = 'prop';
+	}
+	
+	spip_log($tableau_tags,'spipicious');
 	if (is_array($tableau_tags)) {
 		include_spip('inc/modifier');
 		foreach ($tableau_tags as $k=>$tag) {
@@ -77,11 +87,14 @@ function spipicious_ajouter_tags($tableau_tags=array(),$id_auteur,$id_objet,$typ
 				if (!$result) {
 					sql_insertq("$table_mot",array('id_mot' => intval($id_tag),$id_table_objet => intval($id_objet)));
 				}
-				$result_spipicious = sql_getfetsel("id_mot","spip_spipicious","id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
-				if(!$result_spipicious){
-					sql_insertq("spip_spipicious",array('id_mot' => intval($id_tag),'id_auteur' => intval($id_auteur),'id_objet' => intval($id_objet), 'objet'=>$type, 'position' => intval($position)));
+				$result_spipicious = sql_fetsel("*","spip_spipicious","id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
+				if(!$result_spipicious['id_mot']){
+					sql_insertq("spip_spipicious",array('id_mot' => intval($id_tag),'id_auteur' => intval($id_auteur),'id_objet' => intval($id_objet), 'objet'=>$type, 'position' => intval($position),'statut' => $statut));
 					$message = _T('spipicious:tag_ajoute',array('name'=>$tag));
 					$invalider = true;
+				}
+				else if(isset($result_spipicious['statut']) && ($result_spipicious['statut'] != $statut)){
+					sql_updateq('spip_spipicious',array('statut'=>$statut),"id_mot=".intval($id_tag)." AND id_objet=".intval($id_objet)." AND objet=".sql_quote($type)." AND id_auteur=".intval($id_auteur));
 				}
 				else{
 					$message = _T('spipicious:tag_deja_present');

@@ -247,7 +247,7 @@ function spipicious_pre_boucle($boucle){
 function spipicious_post_edition($flux){
 	if($flux['args']['action'] == 'instituer'){
 		$objet = objet_type($flux['args']['table']);
-		if($flux['data']['statut'] != 'publie'){
+		if(isset($flux['data']['statut']) && ($flux['data']['statut'] != 'publie')){
 			sql_updateq('spip_spipicious',array('statut'=>'prop'),'id_objet='.intval($flux['args']['id_objet']).' AND objet='.sql_quote($objet).' AND statut="publie"');
 		}else{
 			sql_updateq('spip_spipicious',array('statut'=>'publie'),'id_objet='.intval($flux['args']['id_objet']).' AND objet='.sql_quote($objet).' AND statut="prop"');

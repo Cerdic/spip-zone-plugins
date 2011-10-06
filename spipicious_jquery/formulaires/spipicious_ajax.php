@@ -38,7 +38,7 @@ function formulaires_spipicious_ajax_traiter($id_objet,$type,$retour='') {
 		list($message,$invalider,$err) = $supprimer_tags();
 	}
 
-	if((!empty($add_tags))AND (!empty($spipicious_tags))){
+	if((!empty($add_tags)) AND (!empty($spipicious_tags))){
 		$ajouter_tags = charger_fonction('spipicious_ajouter_tags','action');
 		list($message,$invalider,$err) = $ajouter_tags();
 	}
