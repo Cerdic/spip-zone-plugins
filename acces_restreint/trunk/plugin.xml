@@ -7,7 +7,7 @@
 	<licence>GPL &#169; 2007-2008</licence>
 	<version>3.3.1</version>
 	<version_base>0.3.0.2</version_base>
-	<etat>stable</etat>
+	<etat>dev</etat>
 	<slogan>
 	<multi>
 	[fr]Gestion de zones d'acces restreint
@@ -15,6 +15,11 @@
 	[de]Verwaltung von Bereichen mit Zugangskontrolle
 	</multi>
 	</slogan>
+	<bouton id="acces_restreint" parent="bando_configuration">
+		<icone>images/zones-acces-16.png</icone>
+		<titre>accesrestreint:icone_menu_config</titre>
+		<url>acces_restreint</url>
+	</bouton>
 	<description>
 	<multi>
 	[fr]
@@ -48,7 +53,7 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Über
 		<inclure>base/acces_restreint.php</inclure>
 	</pipeline>
 	<pipeline>
-		<nom>declarer_tables_principales</nom>
+		<nom>declarer_tables_objets_sql</nom>
 		<inclure>base/acces_restreint.php</inclure>
 	</pipeline>
 	<pipeline>
@@ -98,8 +103,7 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Über
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
-	<necessite id='spip_bonux' version='[1.0;]' />
+	<necessite id="SPIP" version='[3.0.0-dev;3.1.0)' />
 	<categorie>auteur</categorie>
 	<traduire gestionnaire="salvatore" module="accesrestreint" reference="fr" />
 </plugin>

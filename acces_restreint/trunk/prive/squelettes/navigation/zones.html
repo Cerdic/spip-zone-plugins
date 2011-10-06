@@ -1,0 +1,9 @@
+#BOITE_OUVRIR{'',info}
+	<p><:accesrestreint:info_page:></p>
+#BOITE_FERMER
+
+[(#BOITE_OUVRIR{'','raccourcis'})]
+	[(#AUTORISER{webmestre})
+		[(#URL_ECRIRE{acces_restreint_config}|icone_horizontale{'Configuration des acc&#232;s .htaccess',cadenas-24,'',left})]
+	]
+#BOITE_FERMER

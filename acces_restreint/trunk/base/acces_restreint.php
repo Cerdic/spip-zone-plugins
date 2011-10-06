@@ -26,23 +26,25 @@ function accesrestreint_declarer_tables_interfaces($interface){
 	return $interface;
 }
 
-function accesrestreint_declarer_tables_principales($tables_principales){
-	$spip_zones = array(
-		"id_zone" 	=> "bigint(21) NOT NULL",
-		"titre" 	=> "varchar(255) DEFAULT '' NOT NULL",
-		"descriptif" 	=> "text DEFAULT '' NOT NULL",
-		"publique" 	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
-		"privee" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
-		"maj" 		=> "TIMESTAMP");
+function accesrestreint_declarer_tables_objets_sql($tables){
+	$tables['spip_zones'] = array(
 	
-	$spip_zones_key = array(
-		"PRIMARY KEY" => "id_zone");
+		'principale' => "oui",
+			'field'=> array(
+			"id_zone" 	=> "bigint(21) NOT NULL",
+			"titre" 	=> "varchar(255) DEFAULT '' NOT NULL",
+			"descriptif" 	=> "text DEFAULT '' NOT NULL",
+			"publique" 	=> "ENUM('non', 'oui') DEFAULT 'oui' NOT NULL",
+			"privee" 	=> "ENUM('non', 'oui') DEFAULT 'non' NOT NULL",
+			"maj" 		=> "TIMESTAMP"
+		),
+		'key' => array(
+			"PRIMARY KEY"	=> "id_zone",
+		),
+		'titre' => "titre AS titre, '' AS lang",
+	);
 	
-	$tables_principales['spip_zones'] = array(
-		'field' => &$spip_zones,
-		'key' => &$spip_zones_key);
-		
-	return $tables_principales;
+	return $tables;
 }
 
 function accesrestreint_declarer_tables_auxiliaires($tables_auxiliaires){
