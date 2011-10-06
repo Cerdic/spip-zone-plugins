@@ -1,25 +1,24 @@
 <plugin>
 	<nom>Didaspip</nom>
-	<version>2.9</version>
+	<auteur>[Mo&#239;se Maindron->mailto:moise.maindron@ac-nantes.fr], [Olivier Gautier->mailto:olivier.gautier@ac-rouen.fr]</auteur>
+	<version>2.9.0</version>
 	<prefix>dida</prefix>
 	<etat>test</etat>
 	<categorie>divers</categorie>
-	<slogan>Int&eacute;grer un projet Didapages dans SPIP</slogan>
+	<slogan>Int&#233;grer un projet Didapages dans SPIP</slogan>
 	<description>
-Ce plugin sert &agrave; int&eacute;grer facilement un projet didapages dans un article spip. Il n&eacute;cessite le plugin [cfg->http://www.spip-contrib.net/Config-cfg]. Ce plugin fonctionne avec spip 2.
+Ce plugin sert &#224; int&#233;grer facilement un projet didapages dans un article spip. Il n&#233;cessite le plugin [cfg->http://www.spip-contrib.net/Config-cfg]. Ce plugin fonctionne avec spip 2.
 	
 Ce que permet le plugin Didaspip : 
--* importer et supprimer des projets r&eacute;alis&eacute;s avec didapages 1
+-* importer et supprimer des projets r&#233;alis&#233;s avec didapages 1
 -* afficher les projets dans les articles
 
-Dans l'interface de gestion le menu &eacute;dition vous permettra d'acc&eacute;der &agrave; la gestion des projets didapages qui auront pr&eacute;alablement &eacute;t&eacute; compress&eacute; au format zip. L'installation des projets se fait dans le r&eacute;pertoire IMG/didapages/monprojet du site.
+Dans l'interface de gestion le menu &#233;dition vous permettra d'acc&#233;der &#224; la gestion des projets didapages qui auront pr&#233;alablement &#233;t&#233; compress&#233; au format zip. L'installation des projets se fait dans le r&#233;pertoire IMG/didapages/monprojet du site.
 
-Pour cr&eacute;er le lien vers un projet didapages dans votre article, il suffit de mettre ensuite le code suivant : {{didapages}}{{@monprojet}}{{@}}.
-_ Le plugin ["thickbox"->http://www.spip-contrib.net/Plugin-Thickbox] n'est pas obligatoire mais peut-&ecirc;tre utilis&eacute; selon l'affichage choisi.
+Pour cr&#233;er le lien vers un projet didapages dans votre article, il suffit de mettre ensuite le code suivant : {{didapages}}{{@monprojet}}{{@}}.
+_ Le plugin ["thickbox"->http://www.spip-contrib.net/Plugin-Thickbox] n'est pas obligatoire mais peut-&#234;tre utilis&#233; selon l'affichage choisi.
 </description>
-	<necessite id='CFG' version='[1.0;]' />
 	<lien>http://www.spip-contrib.net/Didaspip</lien>
-	<auteur>[Mo&iuml;se Maindron->mailto:moise.maindron@ac-nantes.fr]. Mis &agrave; jour pour SPIP 2.1 par [Olivier Gautier->mailto:olivier.gautier@ac-rouen.fr]</auteur>
 
 	<pipeline>
 		<nom>ajouter_boutons</nom>
@@ -38,4 +37,6 @@ _ Le plugin ["thickbox"->http://www.spip-contrib.net/Plugin-Thickbox] n'est pas 
 		<inclure>didafonctions.php</inclure>
 	</pipeline>
 	<chemin dir='' type='prive' />
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
+	<necessite id='CFG' version='[1.0;]' />
 </plugin>
