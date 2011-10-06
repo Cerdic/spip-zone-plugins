@@ -1,6 +1,6 @@
 <plugin>
 
-	<nom>Pr&eacute;-prod</nom>
+	<nom>Pr&#233;-prod</nom>
  	<version>1.1.6</version>
 
  	<prefix>preprod</prefix>
@@ -12,7 +12,7 @@
 	</slogan>
 
 	<description>
-		Ce plugin est destin&eacute; &agrave; facilter la mise en production de gros sites SPIP. Il peremet aux webmestres de savoir quel est le type de page (type=page ou type=objet &eacute;ditorial) et quelle est la composition de chaque page du site. En conjonction avec les plugins "ticketskiss" ou "tickets" le plugin preprod permet de poster un ticket directement depuis une page publique sans passer par l'interface privée (&eacute;vite ainsi d'avoir &agrave; saisir l'url). Si les plugins "livrables" et "projets" sont actif, le plugin preprod permet de s&eacute;lectionner le livrable auquel se rapporte le ticket.
+		Ce plugin est destin&#233; &#224; facilter la mise en production de gros sites SPIP. Il peremet aux webmestres de savoir quel est le type de page (type=page ou type=objet &#233;ditorial) et quelle est la composition de chaque page du site. En conjonction avec les plugins "ticketskiss" ou "tickets" le plugin preprod permet de poster un ticket directement depuis une page publique sans passer par l'interface priv&#233;e (&#233;vite ainsi d'avoir &#224; saisir l'url). Si les plugins "livrables" et "projets" sont actif, le plugin preprod permet de s&#233;lectionner le livrable auquel se rapporte le ticket.
 	</description>
 
 	<etat>test</etat>
