@@ -150,15 +150,15 @@
 [(#ANCRE_PAGINATION)]
 [<p class="pagination">(#PAGINATION)</p>]
 [(#COMPTEUR_BOUCLE|>{10}|oui)
-<p class="actions">
+<p class="changer_pagination">
 	<:tickets:label_paginer_par:> 
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{10,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{10,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{50,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{50,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{100,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{100,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{200,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{200,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">200</a>})]]
 </p>]
 <table class="spip">
 	<thead>
@@ -268,15 +268,15 @@
 	</tbody>
 </table>
 [(#COMPTEUR_BOUCLE|>{10}|oui)
-<p class="actions">
+<p class="changer_pagination">
 	<:tickets:label_paginer_par:> 
-	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{10,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">10</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})],#ENV{pagination,10}}|=={10}|?{10,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],10}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">10</a>})]
 	<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{50,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">50</a>})]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={50}|?{50,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],50}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">50</a>})]
 	[(#COMPTEUR_BOUCLE|>{50}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{100,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">100</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={100}|?{100,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],100}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">100</a>})]]
 	[(#COMPTEUR_BOUCLE|>{100}|oui)<span class="sep">|</span>
-	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{200,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax">200</a>})]]
+	[(#ENV{pagination_[(#GET{hash_pagination})]}|=={200}|?{200,<a href="[(#SELF|parametre_url{pagination_[(#GET{hash_pagination})],200}|parametre_url{debut[(#GET{hash_pagination})],''})]" class="ajax bouton">200</a>})]]
 </p>]
 [<p class="pagination">(#PAGINATION)</p>]
 </div>
