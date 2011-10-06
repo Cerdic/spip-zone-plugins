@@ -10,9 +10,8 @@ Travaux originaux :
 _ QCM : Mathieu Giannecchini
 _ Mots crois&#233;s et scores : Ma&#239;eul Rouquette
 _ Diagrammes d'&#233;checs : Fran&#231;ois Schreuer
-
-&#169; 2006-2008 - <multi>[fr]Distribu&#233; sous licence[en]License[de]Vertrieb unter Lizenz</multi> GNU/LGPL
 	</auteur>
+	<licence>GNU/LGPL - (c) 2006-2008</licence>
 	<description>
 Des jeux avec SPIP !
 ----
@@ -26,8 +25,6 @@ Deux solutions :
 
 L'enregistrement et la gestion des scores n'est possible qu'en utilisant la seconde solution.
 
-Syntaxe compl&#232;te : [->http://www.spip-contrib.net/Des-jeux-dans-vos-articles].
-
 Ce plugin fonctionne de fa&#231;on optimale sur les squelettes disposant de la balise [#INSERT_HEAD->http://www.spip.net/fr_article1902.html] et peut &#233;galement &#234;tre test&#233; dans l'espace priv&#233;.
 
 _ Pour les jeux graphiques, il faut avoir les librairies {{GD}} install&#233;es sur votre server.
@@ -37,7 +34,7 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 - soit &#224; placer une {{introduction}} dans votre article entre les balises &#60;intro&#62; et &#60;/intro&#62;,
 - soit &#224; remplir le {{descriptif}} de l'article.
 	</description>
-	<lien>[->http://www.spip-contrib.net/Des-jeux-dans-vos-articles]</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Des-jeux-dans-vos-articles</lien>
 	<fonctions>jeux_fonctions.php</fonctions>
 	<options>jeux_options.php</options>
 	<prefix>jeux</prefix>
@@ -71,7 +68,6 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 		<nom>ajouter_boutons</nom>
 		<inclure>jeux_boutons.php</inclure>
 		<action>ajouterBoutons</action>
-		
 	</pipeline>
 	<pipeline>
 		<nom>affiche_droite</nom>
@@ -89,7 +85,7 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
     <bouton id='jeux' parent='bando_edition'>
        <icone>img/jeu-16.png</icone>
        <titre>jeux:jeux</titre>
-       <url>jeux_tous</url> <!-- nom de l'exec, facultatif, par defaut prend l'id -->
+       <url>jeux_tous</url>
        <args></args>
    </bouton>
 	<bouton id='jeu_creer' parent="outils_rapides">
@@ -100,6 +96,6 @@ Afin d'&#233;viter les mauvaises surprises de pr&#233;sentation (comme l'afficha
 	</bouton>
 	<install>base/jeux_upgrade.php</install>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<utilise id="cfg" version="[1.10.5;]" />
 </plugin>
