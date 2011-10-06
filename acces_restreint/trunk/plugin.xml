@@ -18,7 +18,7 @@
 	<bouton id="acces_restreint" parent="bando_configuration">
 		<icone>images/zones-acces-16.png</icone>
 		<titre>accesrestreint:icone_menu_config</titre>
-		<url>acces_restreint</url>
+		<url>zones</url>
 	</bouton>
 	<description>
 	<multi>
