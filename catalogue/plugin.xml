@@ -1,57 +1,41 @@
 <plugin>
-
 	<nom>Catalogue</nom>
-
-	<auteur>Cyril MARION - [Ateliers CYM->http://www.cym.fr]</auteur>
-
+	<auteur>[Cyril MARION->http://www.cym.fr]</auteur>
 	<version>1.5.0</version>
-	
 	<version_base>1.5</version_base>
-	
 	<etat>test</etat>
-	
 	<description>
-	
 	<multi>
-		[fr] Transforme les articles SPIP en articles de catalogue. Permet de saisir plusieurs variantes d'un m&ecirc;me produit. Permet d'indiquer des prix HT ou TTC, et permet d'ajouter des options.
-		
-		Il utilise le plugin [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts_et_organisations.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des s&eacute;lections d'articles.
-		[en]Transforms SPIP articles in catalogue articles. Allows to edit several variants of a product. Allows to indicate prices with or without taxes, and add options.
-		
-		This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts_et_organisations.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
+[fr]Transforme les articles SPIP en articles de catalogue. Permet de saisir plusieurs variantes d'un m&#234;me produit. Permet d'indiquer des prix HT ou TTC, et permet d'ajouter des options.
+_ Il utilise le plugin [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts_et_organisations.zip] pour la gestion des personnes et [Paniers->http://files.spip.org/spip-zone/paniers.zip] pour la gestion des s&#233;lections d'articles.
+[en]Transforms SPIP articles in catalogue articles. Allows to edit several variants of a product. Allows to indicate prices with or without taxes, and add options.
+_ This plugin requires [Contacts &amp; Organisations->http://files.spip.org/spip-zone/contacts_et_organisations.zip] for the management of people and [Paniers->http://files.spip.org/spip-zone/paniers.zip] to manage articles selections.
 	</multi>
 	</description>
-
 	<lien>http://www.spip-contrib.net/Plugin-Catalogue</lien>
-	
 	<icon>img/picto_catalogue_128x128.png</icon>
-
 	<prefix>catalogue</prefix>
-	
+
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>catalogue_pipelines.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/catalogue.php</inclure>
 	</pipeline>
-	
-	<pipeline>
+		<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/catalogue.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/catalogue.php</inclure>
 	</pipeline>
 
 	<install>base/catalogue_upgrade.php</install>
-	
 	<fonctions>catalogue_fonctions.php</fonctions>
-	
+
 	<!-- les boutons dans l'interface d'admin -->
 	<bouton id='catalogue' parent='naviguer'>
 		<icone>img/picto_catalogue_32x32.png</icone>
@@ -73,14 +57,12 @@
 		<nom>affiche_milieu</nom>
 		<inclure>catalogue_pipelines.php</inclure>
 	</pipeline>
-	
+
 	<categorie>divers</categorie>
-	
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.0;]" />
 	<necessite id="saisies" version="[1.8.0;]" />
 	<!-- pour la deco -->
 	<necessite id="afficher_objets" version="[1.1.0;]" />
-	
 </plugin>
 
