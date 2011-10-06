@@ -1,26 +1,17 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Captcha 2
-	</nom>
+	<nom>Captcha 2</nom>
+	<slogan>Ajoute un cryptogramme visuel &#224; vos formulaires pour les prot&#232;ger du Spam</slogan>
 	<icon>img/logo_captcha2.png</icon>
-	<auteur>	<!-- Auteur du plugin -->
- 	[erational->http://www.erational.org] 
-_ &#169; 2007-2009 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version> <!-- Version du plugin -->
-	0.16
-	</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	dev
-	</etat>
-	
+	<auteur>[erational->http://www.erational.org]</auteur>
+	<licence>&#169; 2007-2009 GNU/GPL</licence>
+	<version>0.16.0</version>
+	<etat>dev</etat>
 	<description>
 Surcharge les formulaires de SPIP en leur ajoutant des [Captchas->http://fr.wikipedia.org/wiki/Captcha] pour limiter le spam
 
-
 Le plugin rej&#232;te aussi:
 -* Les messages contenant trop de caract&#232;res non ASCII (chinois, japonais, russe, ...)
--* Les IPs blacklist&#233;s par  httpbl.abuse.ch (Realtime Blackhole List)
+-* Les IPs blacklist&#233;s par bl.abuse.ch (Realtime Blackhole List)
    
 Formulaires disponibles:
 -* &#035;FORMULAIRE_FORUM
@@ -29,11 +20,11 @@ Formulaires disponibles:
 
 Les autres formulaires &#224; venir bient&#244;t ....
 
-{{Avertissement:}} Utiliser les captchas limite l'accessibilt&eacute; de votre site [information->http://www.yoyodesign.org/doc/w3c/turingtest-20051123/]
+{{Avertissement:}} Utiliser les captchas limite l'accessibilt&#233; de votre site [information->http://www.yoyodesign.org/doc/w3c/turingtest-20051123/]
 	</description>
-	<lien>http://www.spip-contrib.net/Plugin-Captcha2</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/Plugin-Captcha2</lien>
 	<prefix>captcha2</prefix>
   <options>rbl.php</options>
 	<categorie>performance</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 </plugin>
