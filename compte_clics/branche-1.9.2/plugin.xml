@@ -5,34 +5,23 @@
 		[en]Clicks counter
 		</multi>
 	</nom>
-	<auteur>
-		<multi>
-		[fr]Chryjs (chryjs.at.free.fr)
-_ &#169; 2007 - Licence GNU/GPL
-		[en]Chryjs (chryjs.at.free.fr)
-_ &#169; 2007 - Licence GNU/GPL
-		</multi>
-	</auteur>
-	<version>
-		0.6
-	</version>
-	<etat>
-		dev
-	</etat>
+	<slogan>Pour suivre l'utilisation des sites que l'on a r&#233;f&#233;renc&#233;</slogan>
+	<auteur>Chryjs (chryjs.at.free.fr)</auteur>
+	<licence>&#169; 2007 GNU/GPL</licence>
+	<version>0.6.0</version>
+	<etat>dev</etat>
 	<description>
 		<multi>
-		[fr]Permet de compter les clics effectu&eacute;s sur un site syndiqu&eacute;, ainsi que ses articles et rajoute une balise #TOTAL_CLICS.
-_ [D&eacute;monstration sur votre site->../spip.php?page=clic_demo]
-		[en]Makes available click counting related to syndicated websites and its related articles and provides #TOTAL_CLICS balise.
-_ [Preview on your website->../spip.php?page=clic_demo]
+		[fr]Permet de compter les clics effectu&#233;s sur un site syndiqu&#233;, ainsi que ses articles et rajoute une balise <code>#TOTAL_CLICS</code>. D&#233;monstration sur votre site : <code>spip.php?page=clic_demo</code>
+		[en]Makes available click counting related to syndicated websites and its related articles and provides <code>#TOTAL_CLICS</code> balise. Preview on your website : <code>spip.php?page=clic_demo</code>
 		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article2410</lien> <!-- URI de documentation -->
-	<icon>img/compte_clics_icone_48.png</icon> <!-- icone du plugin -->
+	<lien>http://www.spip-contrib.net/spip.php?article2410</lien>
+	<icon>img/compte_clics_icone_48.png</icon>
 
 	<fonctions>compteclics_fonctions.php</fonctions>
 	<prefix>compteclics</prefix>
 	<install>base/compteclics_init.php</install>
-	<necessite id="SPIP" version="[1.9.2;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>statistique</categorie>
 </plugin>
