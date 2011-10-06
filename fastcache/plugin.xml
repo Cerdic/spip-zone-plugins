@@ -1,46 +1,27 @@
 <plugin>
 	<nom>Fast Cache</nom>
-	<auteur>Fil
-	&#169; 2007-2011 - licence GNU/GPL
-	</auteur>
-	<version>
-	0.4
-	</version>
-	<etat>
-	test
-	</etat>
+	<slogan>Servir plus vite les pages les plus sollicit&#233;es</slogan>
+	<auteur>Fil</auteur>
+	<licence>&#169; 2007-2011 GNU/GPL</licence>
+	<version>0.4.0</version>
+	<etat>test</etat>
 	<description>
+Permet de mettre devant certaines pages du site (par exemple, la page d'accueil, la page jquery.js, le flux backend/RSS...) un cache rapide qui &#233;vitera de solliciter toute la machinerie de SPIP &#224; chaque hit ; utile aussi pour un article victime de son buzz.
 
-	Permet de mettre devant certaines pages du site
-	(par exemple, la page d'accueil, la page jquery.js, le flux backend/RSS...)
-	un cache rapide qui &#233;vitera de solliciter toute la machinerie
-	de SPIP &#224; chaque hit ; utile aussi pour un article victime de son buzz.
+Attention: l'installation du plugin est d&#233;licate (il faut modifier spip.php &#224; la racine).
 
-	<br />Attention&nbsp;: l'installation du plugin est
-	d&#233;licate (il faut modifier spip.php &#224; la racine).
+Pour l'activer dans un squelette, ajouter la balise <code>#FASTCACHE</code>.
 
-	<p>Pour l'activer dans un squelette, ajouter la balise #FASTCACHE.</p>
-	<ul>
-	<li>Le syst&#232;me est compatible avec la balises #SESSION,
-	les visiteurs disposant d'une session n'&#233;tant jamais envoy&#233;s sur le
-	cache rapide. En-dehors de ce cas, si  un squelette doit afficher quelque chose
-	de sp&#233;cifique pour chaque visiteur, il n'est pas compatible avec #FASTCACHE.
-	</li>
-	<li>Fast Cache est compatible avec les stats de SPIP, mais son efficacit&#233;
-	est beaucoup plus grande lorsque les statistiques des visites sont
-	d&#233;sactiv&#233;es.
-	</li>
-	</ul>
-
+-* Le syst&#232;me est compatible avec la balises <code>#SESSION</code>, les visiteurs disposant d'une session n'&#233;tant jamais envoy&#233;s sur le
+cache rapide. En-dehors de ce cas, si  un squelette doit afficher quelque chose de sp&#233;cifique pour chaque visiteur, il n'est pas compatible avec <code>#FASTCACHE</code>.
+-* Fast Cache est compatible avec les stats de SPIP, mais son efficacit&#233; est beaucoup plus grande lorsque les statistiques des visites sont d&#233;sactiv&#233;es.
 	</description>
 	<lien>http://www.spip-contrib.net/Le-plugin-Fastcache</lien>
-	<prefix>
- 	Fastcache
-	</prefix>
+	<prefix>Fastcache</prefix>
 	<icon>icon-fastcache.png</icon>
 	<options>fastcache_options.php</options>
 	<fonctions>fastcache_fonctions.php</fonctions>
 	<categorie>performance</categorie>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="memoization" version="[0.3;]" />
 </plugin>
