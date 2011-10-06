@@ -1,44 +1,39 @@
 <plugin>
 	<nom><multi>
-	[fr]Nombres de visiteurs connect&eacute;s
+	[fr]Nombres de visiteurs connect&#233;s
 	[ar]&#1593;&#1583;&#1583; &#1575;&#1604;&#1586;&#1608;&#1575;&#1585; &#1575;&#1604;&#1605;&#1578;&#1589;&#1604;&#1608;&#1606;
 	[en]Number of visitors connected
 	[es]N&#250;mero de visitantes conectados
 	[it]Numero di visitatori collegati
 	[de]Anzahl der Besucher verbunden
 	</multi></nom>
-	<auteur>Phil d'apr&egrave;s spip-contrib, superyms (traduction)</auteur>
-	<version>0.2</version>
+	<slogan>Affiche le nombre de visiteurs connect&#233;s sur le site</slogan>
+	<auteur>Phil, superyms (traduction)</auteur>
+	<version>0.2.0</version>
 	<etat>stable</etat>
 	<description><multi>
-	[fr]
-		- Affiche le nombre de visiteurs connect&eacute;s sur le site.
-		
-		- Ajouter <code><INCLURE{fond=inc-visiteurs}></code> dans vos pages.
-	[ar]
-		- &#1610;&#1593;&#1585;&#1590; &#1593;&#1583;&#1583; &#1575;&#1604;&#1586;&#1608;&#1575;&#1585; &#1593;&#1604;&#1609; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;.
-		
-		- &#1571;&#1590;&#1610;&#1601; <code><INCLURE{fond=inc-visiteurs}></code> &#1601;&#1610; &#1589;&#1601;&#1581;&#1575;&#1578;&#1603;.
-	[en]
-		- Displays the number of visitors connected on the site.
-		
-		- Add <code><INCLURE{fond=inc-visiteurs}></code> in your pages.
-	[es]
-		- Muestra el n&#250;mero de visitantes conectados en el sitio.
-		
-		- Agregar <code><INCLURE{fond=inc-visiteurs}></code> en tus p&#225;ginas.
-	[it]
-		- Visualizza il numero di visitatori collegati sul sito.
-		
-		- Aggiungere <code><INCLURE{fond=inc-visiteurs}></code> nelle vostre pagine.
-	[de]
-		- Zeigt die anzahl der besucher auf der website verbunden.
-		
-		- hinzuf&#252;gen <code><INCLURE{fond=inc-visiteurs}></code> in ihre seiten.
+[fr]
+-* Un plugin gadget qui permet d'afficher le nombre de visiteurs connect&#233;s sur votre site.
+-* Ajouter <code><INCLURE{fond=inc-visiteurs}></code> dans vos pages.
+[ar]
+-* &#1610;&#1593;&#1585;&#1590; &#1593;&#1583;&#1583; &#1575;&#1604;&#1586;&#1608;&#1575;&#1585; &#1593;&#1604;&#1609; &#1575;&#1604;&#1605;&#1608;&#1602;&#1593;.
+-* &#1571;&#1590;&#1610;&#1601; <code><INCLURE{fond=inc-visiteurs}></code> &#1601;&#1610; &#1589;&#1601;&#1581;&#1575;&#1578;&#1603;.
+[en]
+-* Displays the number of visitors connected on the site.
+-* Add <code><INCLURE{fond=inc-visiteurs}></code> in your pages.
+[es]
+-* Muestra el n&#250;mero de visitantes conectados en el sitio.
+-* Agregar <code><INCLURE{fond=inc-visiteurs}></code> en tus p&#225;ginas.
+[it]
+-* Visualizza il numero di visitatori collegati sul sito.
+-* Aggiungere <code><INCLURE{fond=inc-visiteurs}></code> nelle vostre pagine.
+[de]
+-* Zeigt die anzahl der besucher auf der website verbunden.
+-* hinzuf&#252;gen <code><INCLURE{fond=inc-visiteurs}></code> in ihre seiten.
 	<multi></description>
 	<fonctions>visiteurs_fonctions.php</fonctions>
 	<prefix>visiteurs_connectes</prefix>
-	<lien></lien><!-- URI de documentation -->	
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<lien>http://www.spip-contrib.net/Nombres-de-visiteurs-connectes</lien>
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>statistique</categorie>
 </plugin>
