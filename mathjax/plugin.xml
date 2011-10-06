@@ -1,13 +1,13 @@
 <plugin>
     <nom>MathJax for SPIP !</nom>
+	 <slogan>Afficher des &#233;quation, des fonctions math&#233;matiques</slogan>
     <auteur>Yohann</auteur>
-    <licence>&#169; 2010/2011 GNU/GPL</licence>
-    <version>1.1</version>
+    <licence>&#169; 2010-2011 GNU/GPL</licence>
+    <version>1.1.0</version>
     <etat>stable</etat>
     <categorie>outil</categorie>
     
     <description>
-		MathJax for SPIP !
 		Le plugin remplace les balises &#60;math&#62; et &#60;&#47;math&#62; de SPIP.
 	</description>
 	
@@ -26,5 +26,5 @@
     	<inclure>mathjax_spip_pipelines.php</inclure>
     </pipeline>
 	<!--<necessite id="lib:mathjax-1.1a" src="https://github.com/mathjax/MathJax/zipball/v1.1a" />-->
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 </plugin>
