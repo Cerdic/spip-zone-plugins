@@ -1,32 +1,24 @@
 <plugin>
-  <nom>No Cache - D&#233;sactiver les caches de SPIP</nom>
-  <prefix>nocache</prefix>
-
-  <version>1.0</version>
-  <etat>stable</etat>
-  <necessite id="SPIP" version='[1.9.2;]' />
-
-  <icon>images/nocache-64.png</icon>
-  <description>
-    Quand ce plugin est activ&#233;, les diff&#233;rents caches de SPIP ne sont
-    plus utilis&#233;s. SPIP est alors plus lent, mais pendant les tests ou
-    le d&#233;veloppement d'un site, c'est tr&#232;s utile pour &#234;tre s&#251;r qu'un
-    probl&#232;me ne vient pas d'une vieille version du squelette qui
-    serait en cache. Les caches de pages, de balises et de plugin.xml
-    sont g&#233;r&#233;s. Pour utiliser le cache &#224; nouveau, pour la mise en
-    ligne officielle par exemple, il suffit de d&#233;sactiver ce plugin
-    (simplicit&#233; = tranquillit&#233; d'esprit).
-
-    Fonctionne avec SPIP 1.9.2 et SPIP 2.
-  </description>
-  <auteur>
-    [Sylvain Beucler->beuc@beuc.net]
-    - [Cliss XXI->http://www.cliss21.com/]
-    - distribu&#233; sous licence
-    [GPL v3->http://www.april.org/files/groupes/trad-gpl/doc/GPLv3/www.rodage.org/gpl-3.0.fr.html]
-  </auteur>
-  <lien>http://www.spip-contrib.net/NoCache</lien>
-
-  <options>nocache_options.php</options>
+	<nom>No Cache</nom>
+	<slogan>D&#233;sactiver les caches de SPIP</slogan>
+	<prefix>nocache</prefix>
+	<version>1.0.0</version>
+	<etat>stable</etat>
+	<icon>images/nocache-64.png</icon>
+	<description>
+	 Quand ce plugin est activ&#233;, les diff&#233;rents caches de SPIP ne sont
+	 plus utilis&#233;s. SPIP est alors plus lent, mais pendant les tests ou
+	 le d&#233;veloppement d'un site, c'est tr&#232;s utile pour &#234;tre s&#251;r qu'un
+	 probl&#232;me ne vient pas d'une vieille version du squelette qui
+	 serait en cache. Les caches de pages, de balises et de plugin.xml
+	 sont g&#233;r&#233;s. Pour utiliser le cache &#224; nouveau, pour la mise en
+	 ligne officielle par exemple, il suffit de d&#233;sactiver ce plugin
+	 (simplicit&#233; = tranquillit&#233; d'esprit).
+	</description>
+	<auteur>[Sylvain Beucler->beuc@beuc.net], [Cliss XXI->http://www.cliss21.com/]</auteur>
+	<licence>GPL v3</licence>
+	<lien>http://www.spip-contrib.net/NoCache</lien>
+	<options>nocache_options.php</options>
+	<necessite id="SPIP" version='[1.9.2;2.1.99]' />
 	<categorie>outil</categorie>
 </plugin>
