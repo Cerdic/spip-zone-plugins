@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Comarquage</nom>
-	<slogan>Service public avec la Documentation fran&#231;aise flux</slogan>
+	<slogan>Rediffuser le flux de la documentation fran&#231;aise du service public</slogan>
 	<categorie>divers</categorie>
 	<auteur>[Vernalis Interactive->http://vernalis-interactive.fr]</auteur>
 	<licence>GPL</licence>
@@ -9,19 +9,19 @@
 	<etat>dev</etat>
 	<icon>images/picto-comarquage-service-public.png</icon>
 	<description>
-_ Le flux s'ins&#232;re dans un article au moyen du tag :
-_ {&lt;comarquage|categorie=particuliers&gt;}
+Le flux s'ins&#232;re dans un article au moyen du tag :
+<code><comarquage|categorie=particuliers></code>
 
-_ Vous pouvez pr&#233;ciser une page pr&#233;cise en d&#233;finissant les attributs xml et xsl de l'url :
-_ {&lt;comarquage|categorie=particuliers|xml=N333.xml|xsl=spNoeud.xsl&gt;}
+Vous pouvez pr&#233;ciser une page en d&#233;finissant les attributs xml et xsl de l'url :
+_ <code><comarquage|categorie=particuliers|xml=N333.xml|xsl=spNoeud.xsl></code>
 
-_ Par exemple pour appeler la page principale de la rubrique 'Comment faire si' utilisez ce code :
-_ { &lt;comarquage|categorie=particuliers|xml=N13042.xml|xsl=spNoeud.xsl&gt;}
+Par exemple pour appeler la page principale de la rubrique 'Comment faire si' utilisez ce code :
+_ <code><comarquage|categorie=particuliers|xml=N13042.xml|xsl=spNoeud.xsl></code>
 
-_ Pour appeler la page principale de la rubrique 'Associations', insérer ce code :
-_ { &lt;comarquage|categorie=associations|xml=N20.xml|xsl=spNoeud.xsl&gt; }
+Pour appeler la page principale de la rubrique 'Associations', insérer ce code :
+_ <code><comarquage|categorie=associations|xml=N20.xml|xsl=spNoeud.xsl></code>
 
-_ Ce plugin n&#233;ecessite la pr&#233;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&#233;e.
+Ce plugin n&#233;ecessite la pr&#233;sence de libxslt sur votre serveur, utilisable en ligne de commande par 'xsltproc', et que la commande php 'exec' ne soit pas inhib&#233;e.
 	</description>
 	<lien>http://spip-contrib.net/?article3659</lien>
 	<prefix>comarquage</prefix>
