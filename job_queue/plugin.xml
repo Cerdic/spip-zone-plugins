@@ -1,9 +1,15 @@
 <plugin>
   <nom>Job Queue</nom>
-  <auteur>Cedric&amp;Fil</auteur>
+  <slogan>
+  	<multi>
+  		[fr]Gestion d'une file d'attente
+		[en]Managing a queue
+	</multi>
+  </slogan>
+  <auteur>Cedric, Fil</auteur>
   <version>0.6.5</version>
   <version_base>0.3.4</version_base>
-  <necessite id='spip' version='[2.1.0;3.0.0-dev)' />
+  <necessite id='spip' version='[2.1.0;2.1.99]' />
   <etat>test</etat>
   <description>
   	<multi>
