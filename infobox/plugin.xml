@@ -1,25 +1,23 @@
 <plugin>
 
-	<version>beta</version>
+	<version>0.1.0</version>
 	
-	<nom>Infobox - Les squelettes parlent aux r&eacute;dacteurs !</nom>
-	
+	<nom>Infobox</nom>
+	<slogan>Les squelettes parlent aux r&#233;dacteurs !</slogan>
 	<prefix>infobox</prefix>
-	
 	<auteur>Cyril MARION</auteur>
 	
-    <licence>&#169; 2009 Ateliers CYM - PARIS - Licence GNU/GPL</licence>
+   <licence>&#169; 2009 GNU/GPL</licence>
 	
 	<etat>dev</etat> 
 	
-	<description>Affiche des messages en provenance des squelettes &agrave; destination des r&eacute;dacteurs.
-	<p>INFOBOX permet aux concepteurs de squelettes de faire remonter des messages d'alerte &agrave; l'intention des r&eacute;dacteurs.<br />Les messages s'affichent "par dessus" le site public et sont g&eacute;n&eacute;r&eacute;s par des balises #INFOBOX plac&eacute;es à l'int&eacute;rieur des squelettes.</p>
-	<p>[CFG->?exec=cfg&cfg=reperes] permet de param&eacute;trer la position de la fen&ecirc;tre d'affichage et ses diff&eacute;rentes zones.</p>
+	<description>
+Affiche des messages en provenance des squelettes &#224; destination des r&#233;dacteurs.
+
+INFOBOX permet aux concepteurs de squelettes de faire remonter des messages d'alerte &#224; l'intention des r&#233;dacteurs. Les messages s'affichent "par dessus" le site public et sont g&#233;n&#233;r&#233;s par des balises #INFOBOX plac&#233;es &#224; l'int&#233;rieur des squelettes.
 	</description>
 
-	<lien>
-	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Infobox-Les-squelettes?var_mode=preview]
-	</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Infobox-Les-squelettes</lien>
 	
 	<icon>img_pack/picto_infobox_64x64.png</icon>
 	
@@ -31,6 +29,7 @@
 		<inclure>infobox_fonctions.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<necessite id='cfg' version='[1.0;]' />
 	<categorie>outil</categorie>
 	
