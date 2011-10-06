@@ -10,8 +10,8 @@
 	</slogan>
 	<auteur>RastaPopoulos</auteur>
 	<licence>GPL v3</licence>
-	<version>0.8.29</version>
-	<version_base>0.5</version_base>
+	<version>0.9.0</version>
+	<version_base>0.5.0</version_base>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -32,7 +32,7 @@ Le but du plugin {{Menus}} est donc de permettre de facilement &#233;laborer des
 	<fonctions>menus_fonctions.php</fonctions>
 	<options>menus_options.php</options>
 	
-	<install>base/menus_installation.php</install>
+	<install>menus_administrations.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/menus_tables.php</inclure>

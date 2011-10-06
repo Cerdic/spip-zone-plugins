@@ -1,0 +1,20 @@
+
+<h1 class="grostitre"><:menus:editer_menus_titre:></h1>
+<p><:menus:editer_menus_explication:></p>
+
+<B_menus_principaux>
+<ul class="liste_items">
+	<BOUCLE_menus_principaux(MENUS){par titre}>
+	<li class="item">#SET{auth,#AUTORISER{modifier,menu,#ID_MENU}}
+		[(#GET{auth}|oui)<a href="[(#URL_ECRIRE{menus_editer,id_menu=#ID_MENU})]">]#TITRE (#IDENTIFIANT)[(#GET{auth}|oui)</a>]
+		<p class='actions'>
+			[(#AUTORISER{modifier,menu,#ID_MENU})	<span class='lien_modifier'>&#91;<a href='[(#URL_ECRIRE{menus_editer,id_menu=#ID_MENU})]'><:menus:editer_menus_editer:></a>&#93;</span>]
+		</p>
+	</li>
+	</BOUCLE_menus_principaux>
+</ul>
+</B_menus_principaux>
+
+[(#URL_ECRIRE{menus_editer}|parametre_url{nouveau,oui}|icone_verticale{<:menus:editer_menus_nouveau:>,menus-24.png,new,right})]
+
+<div class="nettoyeur"></div>

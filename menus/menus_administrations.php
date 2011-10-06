@@ -14,7 +14,7 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
 	){
 		
-		if (version_compare($version_actuelle,'0.0','=')){
+		if (version_compare($version_actuelle,'0.0.0','=')){
 			// Création des tables
 			include_spip('base/create');
 			include_spip('base/abstract_sql');
@@ -23,7 +23,7 @@ function menus_upgrade($nom_meta_version_base, $version_cible){
 			ecrire_meta($nom_meta_version_base, $version_actuelle=$version_cible, 'non');
 		}
 		
-		if (version_compare($version_actuelle,'0.5','<')){
+		if (version_compare($version_actuelle,'0.5.0','<')){
 			include_spip('base/abstract_sql');
 			
 			// AJout de personalisation CSS sur un menu
