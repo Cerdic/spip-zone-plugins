@@ -1,32 +1,29 @@
 <plugin>
 
-	<version>1.0</version>
+	<version>1.0.0</version>
 	
-	<nom>Rep&egrave;res - Des squelettes au pixel pr&egrave;s !</nom>
+	<nom>Rep&#232;res</nom>
+	<nom>Des squelettes au pixel pr&#232;s !</nom>
 	
 	<prefix>reperes</prefix>
 	
-	<auteur>Cyril MARION</auteur>
-	<auteur>Matthieu Marcillaud</auteur>
+	<auteur>Cyril MARION, Matthieu Marcillaud</auteur>
 	
-    <licence>&#169; 2009 Ateliers CYM - PARIS - Licence GNU/GPL</licence>
+    <licence>&#169; 2009 GNU/GPL</licence>
 	
 	<etat>stable</etat>
 	
 	<icon>img_pack/picto_reperes_64x64.png</icon>
 	
 	<description>
-	Ajoute des rep&egrave;res verticaux et horizontaux &agrave; l'&eacute;cran.
+	Ce plugin ajoute des rep&#232;res verticaux et horizontaux &#224; l'&#233;cran.
 	
-<p>Memes fonctionnalit&eacute;s que le plugin <em>WebDeveloper - Lignes de rep&egrave;res</em> pour FireFox, sauf que :</p>
-- &ccedil;a marche aussi pour IE, pour Safari, pour Opera...
-- les rep&egrave;res ne disparaissent pas au rechargement de la page</p>
-<p>[CFG->./index.php?exec=cfg&amp;cfg=reperes] permet de param&eacute;trer le nombre, la couleur, la position et l'orientation des rep&egrave;res.</p>
+M&#234;mes fonctionnalit&#233;s que le plugin {WebDeveloper - Lignes de rep&#232;res} pour FireFox, sauf que :
+-* &#231;a marche aussi pour IE, pour Safari, pour Opera...
+-* les rep&#232;res ne disparaissent pas au rechargement de la page
 	</description>
 
-	<lien>
-	[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Reperes?var_mode=preview]
-	</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Reperes</lien>
 	
 	<!--pipeline>
 		<nom>insert_head_css</nom>
@@ -48,6 +45,7 @@
 		<inclure>reperes_pipelines.php</inclure>
 	</pipeline>
 
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id='cfg' version='[1.0;]' />
 	<necessite id='saisies' version='[1.0;]' />
 	<necessite id='spip_bonux' version='[1.8;]' />
