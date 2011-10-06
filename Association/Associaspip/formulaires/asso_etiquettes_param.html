@@ -1,87 +1,88 @@
-<div class="formulaire_spip formulaire_asso_etiquette">
+<div class="formulaire_spip formulaire_editer formulaire_asso_etiquette">
 <form action="#ENV{action}" method="post">
 	#ACTION_FORMULAIRE{#ENV{action}}
-	[<p class='formulaire_ok'>(#ENV*{message_ok})</p>]
-	[<p class='formulaire_erreur'>(#ENV*{message_erreur})</p>]
-	<fieldset>	
-		<legend><:asso:contenu_des_etiquettes:></legend>
-		<ul>
-
-
-	<li class="editer_avec_civilite">
-	<label for="avec_civilite"><strong><:asso:eti_avec_civilite:></strong></label>
-			<ul class="choix">
-			<input type="checkbox" name="avec_civilite" value="oui" id="avec_civilite"  class='formo'[(#ENV{avec_civilite}|oui) checked="checked"]/>
-			</ul>
-	</li>
-</ul>
-</fieldset>
-<fieldset>
-<legend><:asso:disposition_des_etiquettes:></legend>
-<ul>
-		
-	<li class="editer_nb_colonne">
-			<label for="nb_colonne"><strong><:asso:eti_nb_colonne:></strong></label>
-			<input type="text" name="nb_colonne" value="[(#ENV{nb_colonne})]" id="nb_colonne"  class='formo'/>
-	</li>
-	
-	<li class="editer_nb_ligne">
-			<label for="nb_ligne"><strong><:asso:eti_nb_ligne:></strong></label>
-			<input type="text" name="nb_ligne" value="[(#ENV{nb_ligne})]" id="nb_ligne"  class='formo'/>
-	</li>
-
-	<li class="editer_largeur_page">
-			<label for="largeur_page"><strong><:asso:eti_largeur_page:></strong></label>
-			<input type="text" name="largeur_page" value="[(#ENV{largeur_page})]" id="largeur_page"  class='formo'/>
-	</li>
-	<li class="editer_hauteur_page">
-			<label for="hauteur_page"><strong><:asso:eti_hauteur_page:></strong></label>
-			<input type="text" name="hauteur_page" value="[(#ENV{hauteur_page})]" id="hauteur_page"  class='formo'/>
-	</li>
-	<li class="editer_marge_haut_page">
-			<label for="marge_haut_page"><strong><:asso:eti_marge_haut_page:></strong></label>
-			<input type="text" name="marge_haut_page" value="[(#ENV{marge_haut_page})]" id="marge_haut_page"  class='formo'/>
-	</li>
-	<li class="editer_marge_bas_page">
-			<label for="marge_bas_page"><strong><:asso:eti_marge_bas_page:></strong></label>
-			<input type="text" name="marge_bas_page" value="[(#ENV{marge_bas_page})]" id="marge_bas_page"  class='formo'/>
-	</li>
-	<li class="editer_marge_gauche_page">
-			<label for="marge_gauche_page"><strong><:asso:eti_marge_gauche_page:></strong></label>
-			<input type="text" name="marge_gauche_page" value="[(#ENV{marge_gauche_page})]" id="marge_gauche_page"  class='formo'/>
-	</li>
-	<li class="editer_marge_droite_page">
-			<label for="marge_droite_page"><strong><:asso:eti_marge_droite_page:></strong></label>
-			<input type="text" name="marge_droite_page" value="[(#ENV{marge_droite_page})]" id="marge_droite_page"  class='formo'/>
-	</li>
-	
-	<li class="editer_marge_haut_etiquette">
-			<label for="marge_haut_etiquette"><strong><:asso:eti_marge_haut_etiquette:></strong></label>
-			<input type="text" name="marge_haut_etiquette" value="[(#ENV{marge_haut_etiquette})]" id="marge_haut_etiquette"  class='formo'/>
-	</li>
-	
-	<li class="editer_marge_gauche_etiquette">
-			<label for="marge_gauche_etiquette"><strong><:asso:eti_marge_gauche_etiquette:></strong></label>
-			<input type="text" name="marge_gauche_etiquette" value="[(#ENV{marge_gauche_etiquette})]" id="marge_gauche_etiquette"  class='formo'/>
-	</li>
-	
-	<li class="editer_marge_droite_etiquette">
-			<label for="marge_droite_etiquette"><strong><:asso:eti_marge_droite_etiquette:></strong></label>
-			<input type="text" name="marge_droite_etiquette" value="[(#ENV{marge_droite_etiquette})]" id="marge_droite_etiquette"  class='formo'/>
-	</li>
-	
-	<li class="editer_espace_etiquettesl">
-			<label for="espace_etiquettesl"><strong><:asso:eti_espace_etiquettesl:></strong></label>
-			<input type="text" name="espace_etiquettesl" value="[(#ENV{espace_etiquettesl})]" id="espace_etiquettesl"  class='formo'/>
-	</li>
-	<li class="editer_espace_etiquettesh">
-			<label for="espace_etiquettesh"><strong><:asso:eti_espace_etiquettesh:></strong></label>
-			<input type="text" name="espace_etiquettesh" value="[(#ENV{espace_etiquettesh})]" id="espace_etiquettesh"  class='formo'/>
-	</li>
-	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<fieldset>
+	<legend><:asso:contenu_des_etiquettes:></legend>
+	<ul>
+		<li class="editer_avec_civilite">
+			<label for="avec_civilite"><:asso:eti_avec_civilite:></label>
+			<div class="choix">
+				<input type="checkbox" name="avec_civilite" value="oui" id="avec_civilite"  class='formo'[(#ENV{avec_civilite}|oui) checked="checked"]/>
+			</div>
+		</li>
 	</ul>
 	</fieldset>
-		<p class="boutons"><input type="submit" class="submit" name="valide" value="<:asso:enregistrer:>" /></p>
+	<fieldset>
+	<legend><:asso:format_des_pages:></legend>
+	<ul>
+		<li class="editer_largeur_page">
+			<label for="largeur_page"><:asso:eti_largeur_page:></label>
+			<input type="text" name="largeur_page" value="[(#ENV{largeur_page})]" id="largeur_page"  class='formo'/>
+		</li>
+		<li class="editer_hauteur_page">
+			<label for="hauteur_page"><:asso:eti_hauteur_page:></label>
+			<input type="text" name="hauteur_page" value="[(#ENV{hauteur_page})]" id="hauteur_page"  class='formo'/>
+		</li>
+		<li class="editer_marge_haut_page">
+			<label for="marge_haut_page"><:asso:eti_marge_haut_page:></label>
+			<input type="text" name="marge_haut_page" value="[(#ENV{marge_haut_page})]" id="marge_haut_page"  class='formo'/>
+		</li>
+		<li class="editer_marge_bas_page">
+			<label for="marge_bas_page"><:asso:eti_marge_bas_page:></label>
+			<input type="text" name="marge_bas_page" value="[(#ENV{marge_bas_page})]" id="marge_bas_page"  class='formo'/>
+		</li>
+		<li class="editer_marge_gauche_page">
+			<label for="marge_gauche_page"><:asso:eti_marge_gauche_page:></label>
+			<input type="text" name="marge_gauche_page" value="[(#ENV{marge_gauche_page})]" id="marge_gauche_page"  class='formo'/>
+		</li>
+		<li class="editer_marge_droite_page">
+			<label for="marge_droite_page"><:asso:eti_marge_droite_page:></label>
+			<input type="text" name="marge_droite_page" value="[(#ENV{marge_droite_page})]" id="marge_droite_page"  class='formo'/>
+		</li>
+	</ul>
+	</fieldset>
+	<fieldset>
+	<legend><:asso:disposition_des_etiquettes:></legend>
+	<ul>
+		<li class="editer_nb_colonne">
+			<label for="nb_colonne"><:asso:eti_nb_colonne:></label>
+			<input type="text" name="nb_colonne" value="[(#ENV{nb_colonne})]" id="nb_colonne"  class='formo'/>
+		</li>
+		<li class="editer_nb_ligne">
+			<label for="nb_ligne"><:asso:eti_nb_ligne:></label>
+			<input type="text" name="nb_ligne" value="[(#ENV{nb_ligne})]" id="nb_ligne"  class='formo'/>
+		</li>
+		<li class="editer_espace_etiquettesl">
+			<label for="espace_etiquettesl"><:asso:eti_espace_etiquettesl:></label>
+			<input type="text" name="espace_etiquettesl" value="[(#ENV{espace_etiquettesl})]" id="espace_etiquettesl"  class='formo'/>
+		</li>
+		<li class="editer_espace_etiquettesh">
+			<label for="espace_etiquettesh"><:asso:eti_espace_etiquettesh:></label>
+			<input type="text" name="espace_etiquettesh" value="[(#ENV{espace_etiquettesh})]" id="espace_etiquettesh"  class='formo'/>
+		</li>
+	</ul>
+	</fieldset>
+	<fieldset>
+	<legend><:asso:marges_des_etiquettes:></legend>
+	<ul>
+		<li class="editer_marge_haut_etiquette">
+			<label for="marge_haut_etiquette"><:asso:eti_marge_haut_etiquette:></label>
+			<input type="text" name="marge_haut_etiquette" value="[(#ENV{marge_haut_etiquette})]" id="marge_haut_etiquette"  class='formo'/>
+		</li>
+		<li class="editer_marge_gauche_etiquette">
+			<label for="marge_gauche_etiquette"><:asso:eti_marge_gauche_etiquette:></label>
+			<input type="text" name="marge_gauche_etiquette" value="[(#ENV{marge_gauche_etiquette})]" id="marge_gauche_etiquette"  class='formo'/>
+		</li>
+		<li class="editer_marge_droite_etiquette">
+			<label for="marge_droite_etiquette"><:asso:eti_marge_droite_etiquette:></label>
+			<input type="text" name="marge_droite_etiquette" value="[(#ENV{marge_droite_etiquette})]" id="marge_droite_etiquette"  class='formo'/>
+		</li>
+	</ul>
+	</fieldset>
+	<p class="boutons">
+		<input type="submit" class="submit" name="valide" value="<:asso:enregistrer:>" />
+	</p>
 </form>
-	
 </div>
