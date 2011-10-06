@@ -1,20 +1,14 @@
 <plugin>
-  <nom>antispam</nom>
+  <nom>Antispam</nom>
+  <slogan>Interdire certaines cha&#238;nes de caract&#232;res dans les forums</slogan>
   <auteur>[bill->stephane@rezo.net]</auteur>
   <licence>(c) 2009 GPL</licence>
-  <version>0.1</version>
+  <version>0.1.0</version>
   <etat>test</etat>
   <description>
-  Permet d'interdire certaines chaines de caracteres dans les forums (voir la page d'[administration du plugin->./?exec=cfg&amp;cfg=antispam]).
-  
-  Pour chaque champ, on liste les "mots" interdits en les separant d'un retour a la ligne.
-  
-  on peut specifier un nombre d'occurrences autorisees en ajoutant le separateur puis le nombre d'occurrences en fin de lignes.
-  
-  par exemple, avec comme separateur ";", si on place dans texte "azerty;2", seule 1 occurences de "azerty" seront utilisables dans le texte du forum ("blabla azerty blabla blabla" passera, mais "blabla azerty blabla azertyblabla" ne passera pas).
-  
+  Permet d'interdire certaines cha&#238;nes de caract&#232;res dans les forums (voir la page d'administration du plugin). Pour chaque champ, on liste les "mots" interdits en les s&#233;parant d'un retour &#224; la ligne. On peut sp&#233;cifier un nombre d'occurrences autoris&#233;es en ajoutant le s&#233;parateur puis le nombre d'occurrences en fin de lignes. Par exemple, avec comme separateur ";", si on place dans texte "azerty;1", seule 1 occurence de "azerty" sera utilisable dans le texte du forum ("blabla azerty blabla blabla" passera, mais "blabla azerty blabla azertyblabla" ne passera pas).
   </description>
   <prefix>antispam</prefix>
-  <necessite id="SPIP" version="[1.9.2;2.0.0)" />
+  <necessite id="SPIP" version="[1.9.2;1.9.2]" />
   <categorie>performance</categorie>
 </plugin>
