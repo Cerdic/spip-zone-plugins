@@ -1,29 +1,24 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom>Mots techniques pour SPIP 2</nom>
-	<auteur>
-	Joseph, Matthieu Marcillaud et toutes les bonnes volont&eacute;s - 2008-09
-	</auteur>
+	<nom>Mots techniques</nom>
+	<slogan>ajoute une sp&#233;cialisation "technique" aux groupes de mots cl&#233;s</slogan>
+	<auteur>Joseph, Matthieu Marcillaud, toutes les bonnes volont&#233;s - 2008-09</auteur>
 	<version>0.7.1</version>
 	<version_base>0.3</version_base>
-	<etat>
-	test
-	</etat>
+	<etat>test</etat>
 	<!-- Icone de MidTone Design : http://www.iconfinder.com/icondetails/10622/48/orange_tag_icon -->
 	<icon>images/mots-techniques-48.png</icon>
 	<description>
 	<multi>
-Ce plugin ajoute une sp&eacute;cialisation "technique" aux groupes de mots cl&eacute;s. 
+Ce plugin ajoute une sp&#233;cialisation "technique" aux groupes de mots cl&#233;s. 
 
-Par d&eacute;faut, les boucles MOTS et GROUPES_MOTS filtreront les mots-cl&eacute;s 
+Par d&#233;faut, les boucles MOTS et GROUPES_MOTS filtreront les mots-cl&#233;s 
 techniques. Cependant, le crit&#232;re {tout} permettra de renvoyer tous 
-les mots cl&eacute;s et le crit&egrave;re {technique=oui} 
-permet de s&eacute;lectionner par type technique
+les mots cl&#233;s et le crit&#232;re {technique=oui} 
+permet de s&#233;lectionner par type technique
 	</multi>
 	</description>
-	<prefix> 
-	mots_techniques
-	</prefix>
+	<prefix>mots_techniques</prefix>
+	<lien>http://www.spip-contrib.net/Mots-techniques</lien>
 	<pipeline>
 		<nom>pre_boucle</nom>
 		<inclure>mots_techniques_pipelines.php</inclure>
@@ -43,7 +38,7 @@ permet de s&eacute;lectionner par type technique
 	<install>base/mots_techniques_install.php</install>
 	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
 	<chemin dir='' />
-	<necessite id="SPIP" version="[2.0.2;]" />
+	<necessite id="SPIP" version="[2.0.2;2.1.99]" />
 	<necessite id="cextras" version="[0.7;]" />
 	<categorie>outil</categorie>
 </plugin>
