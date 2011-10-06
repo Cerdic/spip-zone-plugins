@@ -36,7 +36,7 @@
 		<strong>
 			<:spipmotion:info_bitrate:>
 		</strong>
-		(#BITRATE|<{1000}|?{#BITRATE,[(#BITRATE|div{1000}|floor)]}) kb/s.
+		(#BITRATE|>{0}|oui)[(#BITRATE|div{1000}|round) kb/s.]
 	</p>]
 	[<p>
 		<strong>
