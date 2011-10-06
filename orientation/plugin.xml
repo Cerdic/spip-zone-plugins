@@ -10,6 +10,6 @@
 	<lien>http://www.spip-contrib.net/Portrait-ou-Paysage</lien>
 	<fonctions>orientation.php</fonctions>
 	<prefix>orientation</prefix>
-	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<categorie>outil</categorie>
 </plugin>
