@@ -106,7 +106,7 @@ function pb_getpagerank($url, $racine=false) {
 	if (!$fp) {	
    		return '';
 	} else {
-		$out = "GET /search?client=navclient-auto&ch=".PB_PR_CheckHash(PB_PR_HashURL($url))."&features=Rank&q=info:".$url."&num=100&filter=0 HTTP/1.1\r\n";
+		$out = "GET /tbr?client=navclient-auto&ch=".PB_PR_CheckHash(PB_PR_HashURL($url))."&features=Rank&q=info:".$url."&num=100&filter=0 HTTP/1.1\r\n";
 		$out .= "Host: toolbarqueries.google.com\r\n";
 		$out .= "User-Agent: Mozilla/4.0 (compatible; GoogleToolbar 2.0.114-big; Windows XP 5.1)\r\n";
 		$out .= "Connection: Close\r\n\r\n";
