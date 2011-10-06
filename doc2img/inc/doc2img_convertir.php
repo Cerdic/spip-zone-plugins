@@ -76,11 +76,12 @@ function inc_doc2img_convertir($id_document) {
 
 	    $frame = 0;
 
+		$resolution = $config['resolution'] ? $config['resolution'] : 150;
+		
 	    // chaque page est un fichier qu'on sauve dans la table doc2img indexé
 	    // par son numéro de page
 	    do {
-	        //charge la premiere image
-			$resolution = $config['resolution'] ? $config['resolution'] : 150;
+	    	spip_log("Conversion de la page $frame",'doc2img');
 	        //on accede à la page $frame
 	        if ($version == '0.9') {
 	            imagick_goto($handle, $frame);
