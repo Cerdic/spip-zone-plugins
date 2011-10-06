@@ -11,7 +11,7 @@
 	L'objet contient un champ prix que l'on affiche avec extra-xx prix_defaut.
 	</description>
 	<categorie>divers</categorie>
-	<icon>images/montants-16.png</icon>
+	<icon>images/montants-128.png</icon>
 	
 	<prefix>montants</prefix>
 	<install>base/montants_upgrade.php</install>
