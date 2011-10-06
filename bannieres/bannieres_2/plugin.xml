@@ -1,12 +1,12 @@
 <plugin>
-	<nom>Banni&egrave;res</nom>
-	<auteur>Jeannot, inspir&eacute; de Fran&ccedil;ois de Montlivault et Matthieu Marcillaud, [erational->http://www.erational.org]</auteur>
-	<version>0.28</version>
+	<nom>Banni&#232;res</nom>
+	<auteur>Jeannot, Fran&#231;ois de Montlivault, Matthieu Marcillaud, [erational->http://www.erational.org]</auteur>
+	<version>0.28.0</version>
 	<version_base>0.22</version_base>
-  <licence>&#169; 2009-2011 GNU/GPL</licence>
-  <install>base/bannieres_upgrade.php</install>
-  <etat>dev</etat>
-	<description>Gestion de banni&egrave;res (SPIP 2.0)</description>
+	<licence>GNU/GPL - (c) 2009-2011</licence>
+	<install>base/bannieres_upgrade.php</install>
+	<etat>dev</etat>
+	<description>Gestion de banni&#232;res</description>
 	<lien>http://www.spip-contrib.net/Bannieres-2</lien>
 	<icon>images/bannieres.png</icon>
 	<prefix>bannieres</prefix> 	
@@ -42,7 +42,7 @@
 		<nom>objets_extensibles</nom>
 		<inclure>bannieres_pipelines.php</inclure>
 	</pipeline> 	
-	<necessite id="SPIP" version="[2.0.9;]" />
+	<necessite id="SPIP" version="[2.0.9;2.1.99]" />
 	<!-- facilitons les champs de formulaires -->
 	<necessite id="saisies" version="[1.5.1;]" />
 	<!-- filtre |icone et boucles CONDITIONS -->
