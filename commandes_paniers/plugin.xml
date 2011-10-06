@@ -17,7 +17,7 @@
 		<inclure>panier2commande_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[2.1.8;;2.1.99]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="commandes" version="[0.3.0;]" />
 	<necessite id="paniers" version="[0.1;]" />
 	<necessite id="spip_bonux" version="[2.2.20;]" />
