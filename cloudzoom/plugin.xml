@@ -1,5 +1,6 @@
 <plugin>
 	<nom>Cloudzoom</nom>
+	<slogan>Variante zoomable du mod&#232;le doc</slogan>
 	<auteur>[yves Costiou->http://www.latelier2point0.fr]</auteur>
 	<licence>GNU/GPL</licence>
 	<icon>img/cloudzoom-64.png</icon>
@@ -7,7 +8,7 @@
 	<etat>dev</etat>
 	<description>
 Le plugin fournit un bloc image zoomable.
-_ Les pram&#232;tres de personnalisation et de r&#233;glage sont accessible via un formulaire cfg (param&#233;trage des options)
+_ Les pram&#232;tres de personnalisation et de r&#233;glage sont accessibles via un formulaire cfg (param&#233;trage des options)
 	</description>
 	<lien>http://www.spip-contrib.net/Cloudzoom</lien>
 	<prefix>cloudzoom</prefix>
