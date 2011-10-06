@@ -1,5 +1,6 @@
 <plugin>
 	<nom><multi>[fr]SEO[en]SEO</multi></nom>
+	<slogan>Search Engine Optimisation</slogan>
 	<auteur>[Pierre ROUSSET->p.rousset@gmail.com] for [Bouncing Orange->http://www.bouncingorange.com/]</auteur>
 	<prefix>seo</prefix>
 	<icon>seo.png</icon>
@@ -10,7 +11,7 @@
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/?rubrique1248</lien>
-	<licence>(c) 2009 [GPL v2 Licence->http://www.opensource.org/licenses/gpl-2.0.php]</licence>
+	<licence>(c) 2009 GPL v2</licence>
 	<etat>test</etat>
 	
 	<version>1.5.0</version>
