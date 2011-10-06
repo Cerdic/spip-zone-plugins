@@ -1,15 +1,15 @@
 <plugin>
-	<nom> <multi> [fr]Google Maps API v3 </multi> </nom>
-	<auteur>[XDjuj@apsulis.com->http://demo.apsulis.com]</auteur>
-	<licence>GPL &#169; 2010</licence>
-	<version>0.3</version>
+	<nom>Google Maps API v3</nom>
+	<auteur>[XDjuj->http://demo.apsulis.com]</auteur>
+	<licence>GPL - (c) 2010</licence>
+	<version>0.3.0</version>
 	<version_base>0.2</version_base>
 	<icon>theme/img/gmaps_v3-32.png</icon>
 	<etat>dev</etat>
 	<description><multi>Interface Google Maps API v3</multi></description>
 	<!-- <lien>http://www.spip-contrib.net/?article3632</lien> -->
 	<prefix>gmaps_v3</prefix>
-	
+
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>pipelines/gmaps_v3_insert_head.php</inclure>
@@ -37,7 +37,7 @@
 		<url>configurer_gmaps_v3</url>
 	</bouton>
 	
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="cextras" version="[1.7.1;]" />
 	<utilise id="cfg" version="[1.9.4;]" />
 	
