@@ -18,7 +18,7 @@ function stocks_formulaire_charger($flux) {
             'options' => array(
                 'nom' => 'quantite_produit',
                 'label' => '<:stocks:quantite_produit:>',
-                'defaut' => $quantite
+                'defaut' => isset($quantite) ? $quantite : 0
             )
         );
     }
