@@ -1,56 +1,41 @@
 <plugin>
-<nom>
-	<multi>
-	[en]Chess
-	[fr]Echecs
-	</multi>
-</nom>
-<slogan>
-	<multi>
-	[en]Allow to Show Chess Games with pgn Files
-	[fr]Pour voir des parties d'&#233;checs avec les fichiers pgn
-	</multi>
-</slogan>
-<icon>
-  chess32.png
-</icon>
-<auteur>
-	S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville<br />
-  original script Alf Magne Kalleland owner of DHTMLGoodies
-</auteur>
-<version>
-	0.9.3
-</version>
-<etat>
-	stable
-</etat>
-<description>
-  <multi>
-		[fr]
-  Ce plugin est destin&#233; &#224; lire en ligne des parties d&#39;&#233;checs grace &agrave; des fichiers PGN.
-  Il suffit d&#39;ins&#233;rer dans un article la balise &#60;chessXX&#62; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
-    [en]
-  This plugin allows to read chess games on line with their pgn file.
-  To insert the widget you have just to write in your article the tag   &#60;chessXX&#62; where XX is the number of the article, then upload the pgn files.
-  </multi>
-</description>
+	<nom>
+		<multi>
+		[en]Chess
+		[fr]Echecs
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[en]Allow to Show Chess Games with pgn Files
+		[fr]Pour voir des parties d'&#233;checs avec les fichiers pgn
+		</multi>
+	</slogan>
+	<icon>chess32.png</icon>
+	<auteur>S&#233;bastien Boureux, Jacques Bouthier, Patrice Vanneufville, script original de Alf Magne Kalleland owner of DHTMLGoodies</auteur>
+	<version>0.9.3</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+[fr]Ce plugin est destin&#233; &#224; lire en ligne des parties d&#39;&#233;checs grace &#224; des fichiers PGN.
+_ Il suffit d&#39;ins&#233;rer dans un article la balise &#60;chessXX&#62; o&#249; XX est le num&#233;ro de l&#39;article et de t&#233;l&#233;charger les documents pgn.
+[en]This plugin allows to read chess games on line with their pgn file.
+_ To insert the widget you have just to write in your article the tag &#60;chessXX&#62; where XX is the number of the article, then upload the pgn files.
+	  </multi>
+	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Chess</lien>
-<prefix>
-	chess
-</prefix>
-<fonctions>chess_fonctions.php</fonctions>
+	<prefix>chess</prefix>
+	<fonctions>chess_fonctions.php</fonctions>
 	<pipeline>
-	  <nom>insert_head</nom>
-	  <inclure>chess_fonctions.php</inclure>
-	  <action>insert_head</action>
-  </pipeline>
-  
-  <!-- Definitions des fonctions qui s'inserent dans les pipelines -->
-  <pipeline>
-        <nom>header_prive</nom>
-        <inclure>chess_fonctions.php</inclure>
-    </pipeline>
-<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+		<nom>insert_head</nom>
+		<inclure>chess_fonctions.php</inclure>
+		<action>insert_head</action>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>chess_fonctions.php</inclure>
+	</pipeline>
+	<categorie>divers</categorie>
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 	<utilise id="cfg" version="[1.0.6;]" />
 </plugin>
