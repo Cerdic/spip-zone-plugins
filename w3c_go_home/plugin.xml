@@ -3,7 +3,7 @@
 	<slogan>Mon site est valide...</slogan>
 	<auteur>C&#233;dric MORIN [notre-ville.net->http://www.notre-ville.net]</auteur>
 	<licence>&#169; 2006 GPL</licence>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<version_base>0.1</version_base>
 	<etat>stable</etat>
 	<description>Tableau de bord de validation xhtml et accessibilit&#233; du site</description>
