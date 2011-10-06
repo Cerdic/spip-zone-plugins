@@ -1,14 +1,14 @@
 <plugin>
-<nom>Pagination</nom>
-<icon>prive/themes/spip/images/pagination-32.png</icon>
-<description>Modele et styles de pagination</description>
-<version>0.1.0</version>
-<etat>test</etat>
-<categorie>outil</categorie>
-<auteur>[Cedric->http://yterium.net]</auteur>
-<description>Adaptation de http://mis-algoritmos.com/2007/03/16/some-styles-for-your-pagination/ pour SPIP</description>
-<licence>GPL</licence>
-<prefix>pagination</prefix>
-<necessite id="SPIP" version="[;]" />
-<utilise id="spip_bonux" version="[1.8;]" />
+	<nom>Pagination</nom>
+	<icon>prive/themes/spip/images/pagination-32.png</icon>
+	<slogan>Mod&#232;le et styles de pagination</slogan>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<categorie>outil</categorie>
+	<auteur>[Cedric->http://yterium.net]</auteur>
+	<description>Adaptation de http://mis-algoritmos.com/2007/03/16/some-styles-for-your-pagination/ pour SPIP</description>
+	<licence>GPL</licence>
+	<prefix>pagination</prefix>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<utilise id="spip_bonux" version="[1.8;]" />
 </plugin>
