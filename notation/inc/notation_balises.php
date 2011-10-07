@@ -7,6 +7,7 @@
 * Logiciel libre distribue sous licence GNU/GPL.
 *  
 **/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 define('_NOTATION_AFFICHAGE_RAPIDE',1);
 

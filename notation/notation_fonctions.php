@@ -9,6 +9,8 @@
 *  
 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /** Filtre pour les tableaux :
 * transforme une liste (separee par de ,) en un tableau exploitable avec IN
 */

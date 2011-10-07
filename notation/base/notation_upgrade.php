@@ -6,6 +6,9 @@
 * Copyright (c) 2008
 * Logiciel libre distribue sous licence GNU/GPL.
 **/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/meta');
 include_spip('base/create');
 
@@ -21,7 +24,7 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			// mettre les metas par defaut
 			$config = charger_fonction('config','inc');
 			$config();
-			// Ruse : sur une NOUVELLE installation, on a déjà tout fait, donc $version_cible directement !!!!
+			// Ruse : sur une NOUVELLE installation, on a dï¿½jï¿½ tout fait, donc $version_cible directement !!!!
 			ecrire_meta($nom_meta_base_version,$current_version=$version_cible);
 		}
 		if (version_compare($current_version,"0.5.0","<")){
@@ -95,7 +98,7 @@ function notation_upgrade($nom_meta_base_version,$version_cible){
 			ecrire_meta($nom_meta_base_version,$current_version="0.6.2");
 		}
 		if (version_compare($current_version,"0.6.3","<")){
-			// Pour ceux qui ont installé une 0.6.2 directement avant la correction creant 'accepter_note'
+			// Pour ceux qui ont installï¿½ une 0.6.2 directement avant la correction creant 'accepter_note'
 			maj_tables(array('spip_articles'));
 			ecrire_meta($nom_meta_base_version,$current_version="0.6.3");
 		}

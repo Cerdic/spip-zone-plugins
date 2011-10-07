@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/notation'); // pour fonction |note_ponderee
 
 function cfg_config_notation_ponderation_verifier(&$cfg){

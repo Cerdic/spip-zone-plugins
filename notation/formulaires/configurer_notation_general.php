@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/meta');
 
 function formulaires_configurer_notation_general_charger_dist(){

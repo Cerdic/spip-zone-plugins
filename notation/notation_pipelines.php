@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function notation_header_prive($flux){
 	$flux = notation_insert_head_css($flux);
 	return $flux;
