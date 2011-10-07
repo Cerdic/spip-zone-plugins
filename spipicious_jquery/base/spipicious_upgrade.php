@@ -12,6 +12,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function spipicious_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;

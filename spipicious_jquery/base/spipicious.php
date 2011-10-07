@@ -12,6 +12,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function spipicious_declarer_tables_interfaces($interface){
 	$interface['tables_jointures']['spip_mots'][] = 'spipicious';
 	$interface['tables_jointures']['spip_mots'][]= 'mots_documents';

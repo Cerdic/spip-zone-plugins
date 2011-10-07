@@ -13,6 +13,8 @@
  * Fichiers des pipelines du plugin
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Insertion du code javascript nécessaire dans le head
  *
