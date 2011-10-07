@@ -1,32 +1,23 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	piwik
-	</nom>
-	<auteur> <!-- Auteur du plugin -->
-	jsb
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Piwik</nom>
+	<slogan>Interfacer Spip et Piwik</slogan>
+	<auteur>jsb</auteur>
+	<version>0.1.0</version>
+	<etat>test</etat>
 	<description>
-	Ajoute le script piwik (analyseur de trafic web) dans l'espace public en ins&eacute;rant le code perso de piwik dans l'espace priv&eacute;
- <h4>[Configuration->.?exec=cfg&amp;cfg=piwik]</h4>
+		<multi>
+			[fr]Ajoute le script de statistiques Piwik (analyseur de trafic web) sur les pages du site.
+			[en]Adds the Piwik statistics script (web traffic analyzer) on the pages of the site.
+		</multi>
 	</description>
 	<icon>piwik.png</icon>
-	<lien>
-		[Documentation->http://www.spip-contrib.net/?article2860]
-    </lien>
-	<prefix>
-	piwik
-	</prefix>
+	<lien>http://www.spip-contrib.net/?article2860</lien>
+	<prefix>piwik</prefix>
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<necessite id='cfg' version='[1.4;]' />
 	<categorie>statistique</categorie>
 </plugin>
