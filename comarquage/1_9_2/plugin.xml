@@ -4,7 +4,7 @@
 	<categorie>divers</categorie>
 	<auteur>[Vernalis Interactive->http://vernalis-interactive.fr]</auteur>
 	<licence>GPL</licence>
-	<version>0.2.0</version>
+	<version>0.20.0</version>
 	<etat>test</etat>
 	<description>
 Le flux s'ins&#232;re dans un article au moyen du tag :

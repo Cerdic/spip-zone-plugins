@@ -5,7 +5,7 @@
 	<auteur>[Vernalis Interactive->http://vernalis-interactive.fr]</auteur>
 	<licence>GPL</licence>
 	<fonctions>comarquage_filtres.php</fonctions>
-	<version>0.3.0</version>
+	<version>0.30.0</version>
 	<etat>dev</etat>
 	<icon>images/picto-comarquage-service-public.png</icon>
 	<description>
