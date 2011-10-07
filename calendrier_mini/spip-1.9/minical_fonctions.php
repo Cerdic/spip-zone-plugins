@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
 /* Balise #CALENDRIER_MINI
    Auteur James (c) 2006
    Plugin pour spip 1.9

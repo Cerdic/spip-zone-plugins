@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 	$GLOBALS['i18n_minical_ca'] = array(
 		'date_jour_abbr_1' => 'dg',

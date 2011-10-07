@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
 	$GLOBALS['i18n_minical_fr'] = array(
 		'date_jour_abbr_1' => 'dim.',
 		'date_jour_abbr_2' => 'lun.',
