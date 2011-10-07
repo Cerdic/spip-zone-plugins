@@ -1,21 +1,22 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>[fr]Duplicator</multi>
-	</nom>
+	<nom>Duplicator</nom>
+	<slogan>Dupliquer une rubrique et son contenu</slogan>
 	<icon>images/apsulis.png</icon>
 	<auteur>[Apsulis->http://demo.apsulis.com]</auteur>
 	<licence>GPL &#169; 2010</licence>
-	<version>0.2</version>
+	<version>0.2.0</version>
 
 	<etat>test</etat>
-	<description>
-	<multi>
-	[fr] Duplication des rubriques et des articles
-_ Avec sous-rubriques
-_ Avec ou sans articles
-	</multi>
+	<description>Ce plugin permet de dupliquer une rubrique et son contenu depuis l'espace priv&#233; en ajoutant un bouton dans la navigation de gauche dans l'espace priv&#233; des rubriques.
+
+La duplication reprend :
+-*  les logos
+-*  les articles (leur contenu, leur statut, leurs mots clefs et logos)
+-*  les sous-rubriques (n niveaux), les mots clefs li&#233;s, ses articles (contenu + statut + mots clefs) et ses logos
+
+La nouvelle rubrique est cr&#233;&#233;e au m&#234;me niveau que la rubrique copi&#233;e.
 	</description>
-	<lien>[http://www.spip-contrib.net/Plugin-Duplicator->http://www.spip-contrib.net/Plugin-Duplicator]</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Duplicator</lien>
 	<prefix>duplicator</prefix>
 	
 	<pipeline>
@@ -23,6 +24,6 @@ _ Avec ou sans articles
 		<inclure>duplicator_pipeline.php</inclure>
 	</pipeline>
 	
-    <categorie>edition</categorie> 
-	<necessite id="SPIP" version='[2.0.0;]' />
+   <categorie>edition</categorie> 
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
 </plugin>
