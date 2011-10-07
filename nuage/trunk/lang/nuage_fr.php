@@ -1,6 +1,7 @@
 <?php
 
 // This is a SPIP-forum module file  --  Ceci est un fichier module de SPIP-forum
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 

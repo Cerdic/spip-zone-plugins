@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function critere_popularite($idb, &$boucles, $crit){
 	$op='';
 	$boucle = &$boucles[$idb];
