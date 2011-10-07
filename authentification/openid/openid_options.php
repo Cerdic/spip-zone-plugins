@@ -5,11 +5,13 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS['liste_des_authentifications']['openid'] = 'openid';
 
 /**
- * Pipeline permettant de modifier le tableau des informations passée à l'action
- * finale d'authentification après récupération des informations du provider
+ * Pipeline permettant de modifier le tableau des informations passï¿½e ï¿½ l'action
+ * finale d'authentification aprï¿½s rï¿½cupï¿½ration des informations du provider
  *
  * cf : inc/openid.php
  */
@@ -17,7 +19,7 @@ $GLOBALS['spip_pipeline']['openid_recuperer_identite'] = '';
 
 /**
  * Pipeline permettant de modifier l'url de redirection de l'action
- * finale d'identification pour y ajouter en paramètre les champs demandés
+ * finale d'identification pour y ajouter en paramï¿½tre les champs demandï¿½s
  *
  * cf : action/inscrire_openid.php
  */

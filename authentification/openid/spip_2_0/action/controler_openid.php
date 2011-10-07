@@ -4,7 +4,9 @@
  * Licence GPL (c) 2007-2009 Edouard Lafargue, Mathieu Marcillaud, Cedric Morin, Fil
  *
  */
- 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /*****
  * Utilisation: ce plugin active la reconnaissance des OpenID dans le
  * formulaire de Login. Si un OpenID est identifié, il lance l'authentification

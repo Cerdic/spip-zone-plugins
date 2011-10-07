@@ -5,6 +5,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * ajouter un champ openID sur le formulaire CVT editer_auteur
  *

@@ -5,6 +5,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Cette fonction est appelee lors du retour de l'authentification OpenID
 // Elle doit verifier si l'authent est OK, puis chercher l'utilisateur
