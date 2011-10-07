@@ -170,7 +170,7 @@ function normaliser_auteur_licence($texte, $balise) {
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
 		$licnom = $licurl ='';
-		if (preg_match('/(apache|mit|bsd|lgpl|gnu\/gpl|gpl\s*v*\d*)/i', $v, $r)) {
+		if (preg_match('/\b(apache|mit|bsd|lgpl|gnu\/gpl|gpl\s*v*\d*)\b/i', $v, $r)) {
 			$licnom = strtoupper(trim($r[1]));
 			if (strtolower($licnom) == 'apache') {
 				$licnom = 'Apache Licence, Version 2.0';
