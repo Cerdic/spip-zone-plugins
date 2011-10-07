@@ -1,21 +1,29 @@
 <plugin>
 	<nom><multi>[fr]Edition directe[en]Edition mode[es]Editar directamente[de]Redaktion Modus</multi></nom>
+	<slogan>
+		<multi>
+			[fr]Editer directement les objets spip depuis leur page
+			[en]Permits direct editing of the spip objects from their page
+			[es]Permite editar directamente los objetos spip en el espacio privado
+			[de]Ermöglicht es Spip Objekete im Backoffice direkt auf von deren Seite her zu bearbeiten.
+		</multi>	
+	</slogan>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
 	<version>1.1.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>
-		[fr]
-		Editer directement les objets spip depuis leur page. Les objets à éditer directement doivent être activés via [cfg->?exec=cfg&cfg=edition_directe]
-		[en]
-		Permits direct editing of the spip objects from their page. First you need to activate in [cfg->?exec=cfg&cfg=edition_directe] the objects you want to be shown in direct mode 
-		[es] 
-		Permite editar directamente los objetos spip en el espacio privado. Hay que activar primero los objetos en [cfg->?exec=cfg&cfg=edition_directe] para que sean editables directamente
-		[de] 
-		Ermöglicht es Spip Objekete im Backoffice direkt auf von deren Seite her zu bearbeiten. Die gewünschten Objekte müssen zuerst via [cfg->?exec=cfg&cfg=edition_directe] aktiviert werden
+			[fr]
+			Editer directement les objets spip depuis leur page dans l&#8217;espace priv&#233;. Les objets &#224; &#233;diter directement doivent &#234;tre activ&#233;s via cfg
+			[en]
+			Permits direct editing of the spip objects from their page. First you need to activate in cfg the objects you want to be shown in direct mode 
+			[es] 
+			Permite editar directamente los objetos spip en el espacio privado. Hay que activar primero los objetos en cfg para que sean editables directamente
+			[de] 
+			Erm&#246;glicht es Spip Objekete im Backoffice direkt auf von deren Seite her zu bearbeiten. Die gew&#252;nschten Objekte m&#252;ssen zuerst via cfg aktiviert werden
 		</multi>	
 	</description>
-	<lien>http://www.spip-contrib.net/Articles-en-edition-directe</lien>
+	<lien>http://www.spip-contrib.net/Edition-directe,3840</lien>
 	<licence>GPL 3</licence>
 	<prefix>edition_directe</prefix>
 	<icon>img/logo_aed_edit_32.png</icon>
@@ -34,15 +42,15 @@
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>edition_directe_pipelines.php</inclure>
-        </pipeline>
+   </pipeline>
 	<pipeline>
 		<nom>afficher_config_objet</nom>
 		<inclure>edition_directe_pipelines.php</inclure>
-        </pipeline>	
+   </pipeline>	
 	<fonctions>edition_directe_fonctions.php</fonctions>
 	<options>edition_directe_options.php</options>	
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.14;]" />
+	<necessite id="SPIP" version="[2.0.14;3.0.99]" />
 	<necessite id="medias" version='[1.6.1;]'/>	
 	<necessite id="cfg" version='[1.16.0 ;]'/>
 	<necessite id="spip_bonux" version='[2.2.17;]'/>
@@ -51,4 +59,3 @@
 	<utilise id="sites" version='[1.4.1;]'/>
 	<utilise id="mots" version='[2.1.4;]'/>	
 </plugin>
-
