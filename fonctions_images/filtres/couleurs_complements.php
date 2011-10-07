@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /*
  * http://www.paris-beyrouth.org/Une-palette-de-couleurs
  */
