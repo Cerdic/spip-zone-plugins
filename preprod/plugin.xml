@@ -8,7 +8,7 @@
 	<categorie>outil</categorie>
 
 	<slogan>
-		Faciliter la mise en prod de sites lourds.
+		Faciliter la mise en production de sites lourds.
 	</slogan>
 
 	<description>
@@ -18,7 +18,7 @@
 	<etat>test</etat>
 
  	<auteur>
-	Cyril Marion [Ateliers CYM->http://www.cym.fr]
+	[Cyril Marion / Ateliers CYM->http://www.cym.fr]
  	</auteur>
 
 	<icon>images/ateliers_cym-24.gif</icon>
@@ -51,7 +51,7 @@
 		<url>preprod</url> 
 	</bouton>
 	
-	<necessite id="spip" version="[2.1;2.1.99]" />
+	<necessite id="spip" version="[2.1.0;2.1.99]" />
 	<necessite id="ticketskiss" version="[1.0;]" />
 	<necessite id="livrables" version="[0.1;]" />
 	<necessite id="mediabox" version="[0.6.9;]" />
