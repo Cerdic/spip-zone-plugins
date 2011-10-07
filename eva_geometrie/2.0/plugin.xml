@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Int&#233;gration d'activit&#233;s de g&#233;om&#233;trie</nom>
-	<slogan>Avec les formats suivant: GeoGebra, GeoNext, GeoLabo, C.a.r.Z.u.l. et CarMetal</slogan>
+	<slogan>Ins&#233;rer des appels  GeoGebra, GeoNext, GeoLabo, C.a.r.Z.u.l. et CarMetal</slogan>
 	<auteur>[Olivier Gautier->http://www.eva-web.edres74.ac-grenoble.fr]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.1.0</version>
