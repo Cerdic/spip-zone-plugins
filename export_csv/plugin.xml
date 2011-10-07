@@ -1,45 +1,36 @@
 <plugin>
-	<nom><multi>
-	[fr]Export CSV des articles et p&eacute;titions (SPIP 1.9.2)
-	[en]CSV Extraction for articles and petitions (SPIP 1.9.2)
-	</multi></nom>
+	<nom>
+		<multi>
+		[fr]Export CSV
+		[en]CSV Extraction
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Export CSV des articles et p&#233;titions
+		[en]CSV Extraction for articles and petitions
+		</multi>
+	</slogan>
 	
-	<auteur>St&eacute;phanie De Nada&iuml;
- 	[webdesigneuse.net->http://www.webdesigneuse.net]
-_ &copy; 2008 - 
-	<multi>
-		[fr]Distribu&eacute; sous licence GNU/GPL
-		[fr]<p>L'ic&ocirc;ne du plugin est r&eacute;alis&eacute;e &agrave; base du th&egrave;me [Nuvola pour KDE->http://commons.wikimedia.org/wiki/Nuvola]</p>   
-		[en]Distributed under GNU/GPL license
-		[en]Icon of plugin is made with [Nuvola for KDE->http://commons.wikimedia.org/wiki/Nuvola]
-	 </multi>
-	</auteur>
-	
-	<version>0.2</version>
-	
+	<auteur>[St&#233;phanie De Nada&#239;->http://www.webdesigneuse.net]</auteur>
+	<licence>(c) 2008 GNU/GPL</licence>
+	<version>0.2.0</version>
 	<etat>test</etat>
-	
 	<description>
 		<multi>		
-			[fr]<p>Export pour tableur en fichier C.S.V :</p>
-			<ul><li>des articles / rubriques et leurs mots-cl&eacute;s </li>
-			<li>des p&eacute;titions</li></ul>
-			<p><strong>Ce plugin n&eacute;cessite le [plugin CFG 1.3.4 minimum->http://www.spip-contrib.net/?article1605]</strong></p> 
-			<p>Plugin en phase de test : merci de vos retours (d&eacute;taill&eacute;s).</p></multi>
-			<multi>[en]<p>Export for spreadsheet in C.S.V file :</p>
-			<ul><li>articles / sections and keywords </li>
-			<li>petitions</li></ul>
-			<p><strong>This plugin must be run with [CFG plugin 1.3.4 at least->http://www.spip-contrib.net/?article1605]</strong></p>
-			<p>This plugin is being tested : thanks for backs.</p>
+		[fr]Ce plugin permet d'exporter au format csv :
+-* des articles / rubriques et leurs mots-cl&#233;s
+-* des p&#233;titions
+
+		[en]This plugin allows you to export csv
+-* articles / sections and keywords
+-* petitions
 		</multi>
 	</description>
 	
-	<lien>[Configuration->.?exec=cfg&amp;cfg=exportcsv]</lien>
-	<lien>[Documentation->http://www.webdesigneuse.net/carnet/index.php/2008/03/18/7-export-csv-un-plugin-pour-spip]</lien>
-
+	<lien>http://www.spip-contrib.net/Export-CSV-des-articles-et-petitions-pour-SPIP-1-9-2</lien>
 	<prefix>exportcsv</prefix>
-	
-	<icon>img_pack/exportcsv-72.png</icon>
+	<icon>img_pack/exportcsv-72.png</icon> <!-- http://commons.wikimedia.org/wiki/Nuvola -->
 	
 	<pipeline>
 		<nom>ajouter_boutons</nom>
@@ -64,7 +55,7 @@ _ &copy; 2008 -
 	    <inclure>exportcsv_pipe.php</inclure>
 	</pipeline>
 	
-	 <necessite id="SPIP" version="[1.9.2;]" />
+	 <necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	 <necessite id="cfg" version="[1.3.4;]" />
 	 <categorie>edition</categorie>
 </plugin>
