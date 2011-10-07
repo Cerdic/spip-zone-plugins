@@ -1,5 +1,6 @@
 <plugin>
-	<nom>Extension Changement de langue, pour Porte-Plume</nom>
+	<nom>Changement de langue</nom>
+	<slogan>Extension changement de langue pour Porte-Plume</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.1.0</version>
@@ -17,5 +18,6 @@
 		<inclure>pp_chgt_lg_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
+	<necessite id="SPIP" version="[2.0.3;3.0.99]" />
 	<necessite id="porte_plume" />
 </plugin>
