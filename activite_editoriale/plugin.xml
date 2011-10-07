@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Activit&#233; &#233;ditoriale</nom>
 	<slogan>Un site, c'est bien ! Un site &#224; jour, c'est mieux !</slogan>
-	<auteur>[St&#233;phanie Caron de Clever Age->http://www.clever-age.com/], [Maïeul ROUQUETTE->http://www.maieul.net] (am&#233;lioration), [Thierry Cazalet - Phracktale->http://www.phracktale.com/]</auteur>
+	<auteur>[St&#233;phanie Caron de Clever Age->http://www.clever-age.com/], [Maïeul ROUQUETTE (am&#233;lioration)->http://www.maieul.net], Thierry Cazalet, [Phracktale->http://www.phracktale.com/]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.5.0</version>
 	<version_base>0.1</version_base>
