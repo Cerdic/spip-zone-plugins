@@ -1,11 +1,18 @@
 <plugin>
 	<nom>Dublin Core</nom>
+	<slogan>Des Dublins Core pour vos articles</slogan>
 	<categorie>statistique</categorie>
 	<auteur>Tony Gheeraert, Ma&#239;eul Rouquette, Joseph</auteur>
-	<version>1.3</version>
+	<version>1.3.0</version>
 	<etat>stable</etat>
-	<description>Des Dublins Core pour vos articles, configurables avec le plugin CFG.</description>
-	<lien>http://www.spip-contrib.net/Dublin-Core</lien> <!-- URI de documentation -->
+	<description>
+	Un petit squelette pour l'insertion de m&#233;ta-donn&#233;es Dublin Core dans la partie head des articles.
+	
+	&#171; Le Dublin Core est un sch&#233;ma de m&#233;tadonn&#233;es g&#233;n&#233;rique qui permet de d&#233;crire des ressources num&#233;riques ou physiques et d'&#233;tablir des relations avec d'autres ressources. &#187; ([Wikip&#233;dia->http://fr.wikipedia.org/wiki/Dublin_Core]).
+	
+	[->http://www.dublincore.org/]
+	</description>
+	<lien>http://www.spip-contrib.net/Dublin-Core</lien>
 	<prefix>dublin_core</prefix>
 	<icon>images/dublin_core-48.png</icon>
 	<fonctions>dublin_core_fonctions.php</fonctions>
@@ -18,5 +25,5 @@
 		<inclure>dublin_core_ieconfig_metas.php</inclure>
 	</pipeline>
 	<utilise id="cfg" />
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
