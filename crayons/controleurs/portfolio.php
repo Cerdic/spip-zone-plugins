@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // un controleur php (TODO -- NE FONCTIONNE PAS DU TOUT)
 
 function controleurs_portfolio_dist($regs) {

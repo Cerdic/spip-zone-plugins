@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /* inserer le css et le js externes pour Crayons dans le <head>
  *
  *  Crayons plugin for spip (c) Fil, toggg 2006-2010 -- licence GPL

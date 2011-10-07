@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 ## ceci n'est pas l'original mais la copie pour crayons
 
 // Module de compatibilite pour les plugins qui veulent passer en 1.9.3

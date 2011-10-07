@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // upload d'images
 /*
  * Cette action recoit des fichiers ($_FILES)
@@ -7,6 +9,7 @@
  * puis renvoie la liste des documents joints
  *
  */
+
 function action_crayons_upload() {
 
 	$type = preg_replace('/\W+/', '', strval(_request('type')));

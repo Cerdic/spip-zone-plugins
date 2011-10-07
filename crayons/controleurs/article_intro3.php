@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // un controleur qui n'utilise que php et les inputs défauts
 function controleurs_article_intro3_dist($regs) {
     list(,$crayon,$type,$champ,$id) = $regs;

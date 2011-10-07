@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 //
 // Les crayons ont leur propre copie du pack de Dean Edwards
 // pour compatibilite avec SPIP < [9717]

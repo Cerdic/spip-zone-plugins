@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // un controleur php + html
 // html == avec un modele, controleurs/article_introduction.html)
 function controleurs_article_introduction_dist($regs) {
