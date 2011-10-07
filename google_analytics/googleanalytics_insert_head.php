@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function googleanalytics_insert_head($flux){
 	$id_google = lire_config('googleanalytics/idGoogle');
