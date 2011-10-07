@@ -50,6 +50,7 @@ function tradlang_maj_id_tradlang_modules($affiche = false){
 	  	$strings = array_map('reset',sql_allfetsel('id_tradlang','spip_tradlang',"id_tradlang_module='0'",'','',"0,100"));
 	}
 }
+
 /**
  * Fonction de desinstallation
  *
@@ -60,5 +61,4 @@ function tradlang_vider_tables($nom_meta_base_version) {
 	sql_drop_table("spip_tradlang_modules");
 	effacer_meta($nom_meta_base_version);
 }
-
 ?>

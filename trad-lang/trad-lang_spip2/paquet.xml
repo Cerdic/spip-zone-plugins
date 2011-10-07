@@ -1,0 +1,28 @@
+<paquet
+	prefix="tradlang"
+	categorie="outil"
+	version="1.0"
+	etat="dev"
+	compatibilite="[3.0.0-dev;["
+	logo="images/spip_lang.png"
+	schema="0.3.4"
+>	
+
+	<nom>Trad-Lang</nom>
+	<!-- Un plugin pour gérer directement les fichiers langues depuis l'interface privée -->
+
+	<pipeline nom="declarer_tables_interfaces" inclure="base/tradlang.php" />
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/tradlang.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="tradlang_pipelines.php" />
+	<pipeline nom="declarer_tables_objets_surnoms" inclure="tradlang_pipelines.php" />
+	<pipeline nom="revisions_liste_objets" inclure="tradlang_pipelines.php" />
+	<pipeline nom="post_edition" inclure="tradlang_pipelines.php" />
+	<pipeline nom="autoriser" inclure="tradlang_autoriser.php" />
+	<pipeline nom="forum_objets_depuis_env" inclure="tradlang_autoriser.php" />
+
+	<necessite nom="revisions" compatibilite="[1.4.1;[" />
+	<necessite nom="saisies" compatibilite="[1.9.1;[" />
+	<necessite nom="crayons" compatibilite="[1.9.8;[" />
+
+	<menu nom="configurer_tradlang" titre="tradlang:titre_tradlang" parent="bando_configuration" icone="images/spip_lang-16.png" />
+</paquet>
