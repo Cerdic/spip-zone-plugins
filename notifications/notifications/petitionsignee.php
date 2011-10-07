@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * insertion d'une nouvelle signature => mail aux moderateurs

@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * 
  * Declarer la tache cron de notification lente (messagerie de l'espace prive)

@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * inscription d'un nouvel auteur => mail aux admins

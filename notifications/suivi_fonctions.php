@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (!$GLOBALS['visiteur_session']['id_auteur']) {
 	include_spip('inc/headers');
 	redirige_par_entete(parametre_url(generer_url_public('login'), 'url', self(), '&'));
