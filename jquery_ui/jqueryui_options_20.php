@@ -1,4 +1,6 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 define('_DIR_JQUERYUI_JS','lib/jquery.ui-1.6/ui/');
 define('_DIR_JQUERYUI_CSS','lib/jquery.ui-1.6/themes/');
 

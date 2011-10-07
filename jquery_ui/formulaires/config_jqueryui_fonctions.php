@@ -6,6 +6,8 @@
  * jqueryui_forcer
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function cfg_config_jqueryui_charger(&$cfg){
 	$valeurs = &$cfg->val['plugins'];
 	if(!is_array($valeurs))

@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function jqueryui_jquery_plugins($plugins){
 	$config = @unserialize($GLOBALS['meta']['jqueryui']);
 	
