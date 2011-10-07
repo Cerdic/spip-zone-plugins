@@ -44,7 +44,7 @@
 			</p>
 			<p>
 				<label for="animation"><:zoombox:gallery:></label>
-				<input type="radio" name="zoombox_gallery" value="true" checked="checked" [(#CONFIG{config_zoombox/zoombox_gallery}|=={#VAL{true}}|oui) checked="checked" ]/> <:zoombox:oui:>
+				<input type="radio" name="zoombox_gallery" value="true" [(#CONFIG{config_zoombox/zoombox_gallery}|=={#VAL{true}}|oui) checked="checked" ]/> <:zoombox:oui:>
 				<input type="radio" name="zoombox_gallery" value="false" [(#CONFIG{config_zoombox/zoombox_gallery}|=={#VAL{true}}|non) checked="checked" ]/> <:zoombox:non:>
 			</p>
 			<p>
@@ -55,7 +55,7 @@
 			<p>
 				<label for="animation"><:zoombox:overflow:></label>
 				<input type="radio" name="zoombox_overflow" value="true" [(#CONFIG{config_zoombox/zoombox_overflow}|=={#VAL{true}}|oui) checked="checked" ]/> <:zoombox:oui:>
-				<input type="radio" name="zoombox_overflow" value="false" checked="checked" [(#CONFIG{config_zoombox/zoombox_overflow}|=={#VAL{true}}|non) checked="checked" ]/> <:zoombox:non:>
+				<input type="radio" name="zoombox_overflow" value="false" [(#CONFIG{config_zoombox/zoombox_overflow}|=={#VAL{true}}|non) checked="checked" ]/> <:zoombox:non:>
 			</p>
 			<div class="boutons">
 				<input type="submit" class="fondo" value="<:zoombox:enregistrer:>" name="_cfg_ok">
