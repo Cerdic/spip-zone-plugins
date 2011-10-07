@@ -1,41 +1,29 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Compteurs de visites graphiques
-	</nom>
-	<auteur>
-    Olivier Gautier, &eacute;quipe de d&eacute;veloppement Eva-WEB.
-    <br/>Cette <a href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dc:type">cr&eacute;ation</a> est mise &agrave; disposition sous un <a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/">contrat Creative Commons</a>.
-    <br />&nbsp;<br /><div style="text-align:center;"><a rel="license" href="http://creativecommons.org/licenses/by/2.0/fr/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by/2.0/fr/88x31.png"/></a></div>
-	</auteur>
-	<version>
-	0.4
-	</version>
-    <version_base>0.1</version_base>
-	<etat>
-	stable
-	</etat>
+	<nom>Compteurs graphiques</nom>
+	<slogan>Affiche des compteurs graphiques de visites</slogan>
+	<auteur>Olivier Gautier, &#233;quipe de d&#233;veloppement Eva-WEB</auteur>
+	<licence>Creative Commons by</licence>
+	<version>0.4.0</version>
+   <version_base>0.1</version_base>
+	<etat>stable</etat>
 	<icon>img_pack/CompteurGraphique.gif</icon>
-    <description>
-- Syst&egrave;me de cr&eacute;ation et d'affichage de compteurs de visite
-- Documentation sur le <a href="http://www.eva-web.edres74.ac-grenoble.fr/spip.php?article33">Site EVA-web</a> ou <a href="http://www.spip-contrib.net/Plugin-Compteur-Graphique">Site SPIP-Contrib</a>
-- Certains habillages sont issus du site <a href="http://icons.mysitemyway.com/">Icons Etc</a>
-    </description>
-    <prefix>
-    CompteurGraphique
-    </prefix>
-    <options> <!-- fichier charge a chaque hit --> 
-    CompteurGraphique_mes_options.php
-    </options>
-    <install>CompteurGraphique_install.php</install>
+   <description>
+	Ce plugin, construit dans le cadre du d&#233;veloppement du squelette EVA-web, se propose de g&#233;n&#233;rer des images de compteurs de visites param&#233;trables aussi bien au niveau graphique que fonctionnel. Il peut s'int&#233;grer &#224; n'importe quel site fonctionnant sous SPIP.
+	{Certains habillages sont issus du site [Icons Etc->http://icons.mysitemyway.com/]}
+	</description>
+	<lien>http://www.spip-contrib.net/Plugin-Compteur-Graphique</lien>
+	<prefix>CompteurGraphique</prefix>
+	<options>CompteurGraphique_mes_options.php</options>
+	<install>CompteurGraphique_install.php</install>
 	<bouton id='compteur_graphique' parent='statistiques_visites'>
       <icone>img_pack/CompteurGraphique.gif</icone>
       <titre>Compteurs graphiques</titre>
   	</bouton>
-    <pipeline>
-        <nom>affiche_gauche</nom>
-        <action>AfficheGauche</action>
-        <inclure>CompteurGraphique_pipeline.php</inclure>
-    </pipeline>
-    <necessite id='SPIP' version='[2.0.0;]' />
+   <pipeline>
+		<nom>affiche_gauche</nom>
+		<action>AfficheGauche</action>
+		<inclure>CompteurGraphique_pipeline.php</inclure>
+   </pipeline>
+   <necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<categorie>statistique</categorie>
 </plugin>
