@@ -5,6 +5,8 @@
 #  Licence : GPL                                    #
 #------------------------------------------------- -#
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/session');
 include_spip('base/abstract_sql');
 

@@ -5,6 +5,8 @@
 #  Licence : GPL                                    #
 #------------------------------------------------- -#
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Déclaration des pipelines du plugin
  */

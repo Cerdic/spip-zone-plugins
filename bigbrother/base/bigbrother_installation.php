@@ -5,6 +5,8 @@
 #  Licence : GPL                                    #
 #------------------------------------------------- -#
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // La fonction de base appelée par le gestionnaire de plugins
 function bigbrother_upgrade($nom_meta_base_version,$version_cible){
 	include_spip('inc/meta');

@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction spécifique pour le journal concernant l'action visite_entree
  * @param array $opt les options

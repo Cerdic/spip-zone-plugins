@@ -5,6 +5,8 @@
  * Passe au préalable par balises/formulaire_bigbrother_pagination
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Chargement des valeurs par defaut des champs du formulaire
  * - On récupère le nom de la boucle parente
