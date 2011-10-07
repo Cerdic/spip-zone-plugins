@@ -7,6 +7,8 @@
  * Ce sont entre autres les filtres, balises, ... utiles au plugin
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * d2c_convertir
  *

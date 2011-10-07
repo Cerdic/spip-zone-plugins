@@ -5,6 +5,8 @@
  * Fichier contenant les appels aux pipelines de SPIP
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Insertion dans le pipeline affiche_gauche
  *

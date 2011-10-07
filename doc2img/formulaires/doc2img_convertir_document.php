@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_doc2img_convertir_document_charger($id_article,$redirect=''){
 	$valeurs = array();

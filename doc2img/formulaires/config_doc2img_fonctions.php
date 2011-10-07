@@ -3,6 +3,8 @@
  * Fonctions associées au formulaire de configuration de doc2img
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction de vérification du formulaire de configuration CFG
  */

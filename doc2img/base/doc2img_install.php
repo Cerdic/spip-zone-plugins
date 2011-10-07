@@ -5,6 +5,8 @@
  * Installation / désinstallation du plugin
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  *  Effectue l'ensemble des actions nécessaires au bon fonctionnement du plugin :
  *  - mise en place de la table doc2img
