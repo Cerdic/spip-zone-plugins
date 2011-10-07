@@ -1,19 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
 	<nom>Choix police typo</nom>
-	<auteur>cy_altern 
-_ &#169; 2010 - Distribu&#233; sous licence GPL
-	</auteur>
-	<lien></lien>
+	<slogan>Transformer des portions de textes en image typographiques</slogan>
+	<auteur>cy_altern</auteur>
+	<licence>&#169; 2010 GPL</licence>
 	<icon>choix_police-64.png</icon>
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<etat>test</etat>
   <description>
-Ce plugin permet de choisir une police pour les images typo 
-parmi toutes celles disponibles et de configurer ses param&#232;tres par d&#233;faut via une [interface cfg->?exec=cfg&amp;cfg=choix_police].
-_ Les polices disponibles sont celles du dossier {{/squelettes/polices}} du SPIP ou, s'il n'existe pas, celui du plugin.
-_ Ce plugin fourni un mod&#232;le &lt;typo|texte=bla bla bla&gt; 
-(ou &#91;(#MODELE&#123;typo&#125;&#123;texte=bla bla bla&#125;)&#93;) qui accepte les param&#232;tres suivants:
+Ce plugin permet de choisir une police pour les images typo parmi toutes celles disponibles et de configurer ses param&#232;tres par d&#233;faut via une interface cfg. Les polices disponibles sont celles du dossier {{/squelettes/polices}} du SPIP ou, s'il n'existe pas, celui du plugin. Ce plugin fourni un mod&#232;le <code><typo|texte=bla bla bla></code> (ou <code>[(#MODELE{typo}{texte=bla bla bla})]</code>) qui accepte les param&#232;tres suivants:
 -* |texte= le texte &#224; passer en image ({{obligatoire!}})
 -* |police= le nom du fichier de police (avec l'extension)
 -* |accents=non (si la police ne g&#232;re pas les caract&#232;res accentu&#233;s)
@@ -24,21 +18,11 @@ _ Ce plugin fourni un mod&#232;le &lt;typo|texte=bla bla bla&gt;
 -* |margev= marge au-dessus et dessous de l'image (avec unit&#233;: px ou em au choix)
 -* |margeh= marge &#224; droite et &#224; gauche de l'image (avec unit&#233;: px ou em au choix)
 -* |valign= alignement vertical de l'image typo (valeurs possibles: bottom, baseline, middle, top)
-
-Exemple: 
-_ &lt;typo|texte=bla bla bla
-_ |police=dustismo.ttf
-_ |couleur=DDDDDD
-_ |largeur=720
-_ |padding=5
-_ |margev=30px
-_ |margeh=0px
-_ |valign=top&gt;
 	</description>
 	<lien>http://www.spip-contrib.net/Choix-Police-Typo</lien>
 	<prefix>choix_police</prefix>
-    <fonctions>choix_police_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[2.0.10;]" />
+   <fonctions>choix_police_fonctions.php</fonctions>
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="cfg" version="[1.10.2;]" />
 	<necessite id="spip_bonux" version="[1.8;]" />
 	<utilise id="palette" version="[1.0;]" />
