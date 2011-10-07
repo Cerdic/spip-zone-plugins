@@ -8,10 +8,9 @@
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
 	<description>
-	Ce plugin permet de reprendre une partie des options de configurations du site 
-	(activer les br&#232;ves, la syndication, les mots cl&#233;s, etc.)
-	et de les adapter en fonction des rubriques. De m&#234;me il est possible de personnaliser
-	les champs de saisie de l’espace priv&#233; pour les objets &#233;ditoriaux.
+	Ce plugin permet de reprendre une partie des options de configuration du site 
+	(activer les br&#232;ves, la syndication, les mots cl&#233;s, etc.)	et de les adapter en fonction des rubriques. 
+	De m&#234;me il est possible de personnaliser les champs de saisie de l’espace priv&#233; pour les objets &#233;ditoriaux.
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-personnaliser-l-espace-prive-par-rubriques</lien>
 	<install>base/install_priveperso.php</install>
@@ -20,7 +19,7 @@
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<onglet id='priveperso' parent='configuration'>
 		<url>priveperso</url>
-   	<icone>images/priveperso-24.png</icone>
+   		<icone>images/priveperso-24.png</icone>
     	<titre>priveperso:Prive_perso</titre>
 	</onglet>
 	<pipeline>
@@ -46,5 +45,4 @@
 		<icone>images/priveperso-24.png</icone>
 		<titre>priveperso:Prive_perso</titre>
 	</bouton>
-
 </plugin>
