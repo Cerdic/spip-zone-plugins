@@ -1,6 +1,6 @@
 <plugin>
-	<nom>Ic&ocirc;nes p&#233;dagogiques</nom>
-	<slogan>Des ic&ocirc;nes p&#233;dagogiques pour le Porte Plume</slogan>
+	<nom>Ic&#244;nes p&#233;dagogiques</nom>
+	<slogan>Des ic&#244;nes p&#233;dagogiques pour le Porte Plume</slogan>
 	<auteur>Olivier Gautier, Michel Fraisse</auteur>
 	<licence>&#169; 2009 GNU/GPL</licence>
 	<version>0.1.0</version>
@@ -18,7 +18,7 @@ Les images disponibles sont regroup&#233;es par onglet.
 -* Supports d'&#233;criture
 -* Binettes
 
-Un simple clic sur une ic&ocirc;ne propos&#233;e permet d'ajouter dans le texte de l'article un morceau de code qui sera ensuite interpr&#233;t&#233; par SPIP pour afficher l'image correspondante.
+Un simple clic sur une ic&#244;ne propos&#233;e permet d'ajouter dans le texte de l'article un morceau de code qui sera ensuite interpr&#233;t&#233; par SPIP pour afficher l'image correspondante.
 	</description>
 	<prefix>iconespedago</prefix>
 	<icon>img_pack/iconespedago.png</icon>
