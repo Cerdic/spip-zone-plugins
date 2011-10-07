@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function photo_infos_pave($args) {
 	if ($args["args"]["type"] == "case_document") {
 		$args["data"] .= recuperer_fond("pave_exif",

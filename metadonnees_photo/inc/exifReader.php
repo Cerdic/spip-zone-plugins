@@ -52,6 +52,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /** * Start Of Frame N */
 define("M_SOF0",0xC0);
 /** * N indicates which compression process */

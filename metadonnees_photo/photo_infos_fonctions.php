@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Lire aux:Lens, qui n'est pas du Exif standard
 function lire_aux_lens ($filename) {

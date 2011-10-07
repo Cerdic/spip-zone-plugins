@@ -31,6 +31,7 @@ FIN INFOS SUR LA CLASSE
 
 */ 
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 class class_IPTC 
 { 

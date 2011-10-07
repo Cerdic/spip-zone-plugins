@@ -14,6 +14,8 @@
  *   - Write comments to image
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * PHP Class to read, write and transfer EXIF information
  * that most of the digital camera produces
