@@ -1,0 +1,66 @@
+<div class="formulaire_spip formulaire_configurer formulaire_config_zoombox" style="padding: 5px;">
+	
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form name="formulaire_config_zoombox" method="post" action="#SELF">
+		#ACTION_FORMULAIRE{#SELF}
+		<fieldset>
+			<legend><:zoombox:general_legend:></legend>
+			<p>
+				<label for="opacity"><:zoombox:selecteur:></label>
+				<input type="text" name="zoombox_pointeur" value="[(#CONFIG{zoombox/zoombox_pointeur}|?{#CONFIG{zoombox/zoombox_pointeur},.zoombox})]"/>
+			</p>	
+			<p>
+				<label for="theme"><:zoombox:theme:></label>
+				<select name="zoombox_theme" id="theme" style="width: 200px;">
+					<option value="zoombox" [(#CONFIG{zoombox/zoombox_theme}|=={#VAL{zoombox}}|oui) selected="selected" ]><:zoombox:theme_zoombox:></option>
+					<option value="lightbox" [(#CONFIG{zoombox/zoombox_theme}|=={#VAL{lightbox}}|oui) selected="selected" ]><:zoombox:theme_lightbox:></option>
+					<option value="prettyphoto" [(#CONFIG{zoombox/zoombox_theme}|=={#VAL{prettyphoto}}|oui) selected="selected" ]><:zoombox:theme_prettyphoto:></option>
+					<option value="darkprettyphoto" [(#CONFIG{zoombox/zoombox_theme}|=={#VAL{darkprettyphoto}}|oui) selected="selected" ]><:zoombox:theme_darkprettyphoto:></option>
+					<option value="simple" [(#CONFIG{zoombox/zoombox_theme}|=={#VAL{simple}}|oui) selected="selected" ]><:zoombox:theme_simple:></option>
+				</select>
+			</p>
+			<p>
+				<label for="opacity"><:zoombox:opacity:></label>
+				<input type="text" name="zoombox_opacity" value="[(#CONFIG{zoombox/zoombox_opacity})]"/>
+			</p>
+			<p>
+				<label for="duration"><:zoombox:duration:></label>
+				<input type="text" name="zoombox_duration" value="[(#CONFIG{zoombox/zoombox_duration})]"/>
+			</p>
+			<p>
+				<label for="animation"><:zoombox:animation:></label>
+				<input type="radio" name="zoombox_animation" value="true" [(#CONFIG{zoombox/zoombox_animation}|=={#VAL{false}}|non) checked="checked" ] /> <:zoombox:oui:>
+				<input type="radio" name="zoombox_animation" value="false" [(#CONFIG{zoombox/zoombox_animation}|=={#VAL{false}}|oui) checked="checked" ] /> <:zoombox:non:>
+			</p>
+			<p>
+				<label for="animation"><:zoombox:largeur_video:></label>
+				<input type="text" name="zoombox_width" value="[(#CONFIG{zoombox/zoombox_width})]"/>
+			</p>
+			<p>
+				<label for="animation"><:zoombox:hauteur_video:></label>
+				<input type="text" name="zoombox_height" value="[(#CONFIG{zoombox/zoombox_height})]"/>
+			</p>
+			<p>
+				<label for="animation"><:zoombox:gallery:></label>
+				<input type="radio" name="zoombox_gallery" value="true" checked="checked" [(#CONFIG{zoombox/zoombox_gallery}|=={#VAL{true}}|oui) checked="checked" ]/> <:zoombox:oui:>
+				<input type="radio" name="zoombox_gallery" value="false" [(#CONFIG{zoombox/zoombox_gallery}|=={#VAL{true}}|non) checked="checked" ]/> <:zoombox:non:>
+			</p>
+			<p>
+				<label for="animation"><:zoombox:autoplay:></label>
+				<input type="radio" name="zoombox_autoplay" value="true" [(#CONFIG{zoombox/zoombox_autoplay}|=={#VAL{true}}|oui) checked="checked" ] /> <:zoombox:oui:>
+				<input type="radio" name="zoombox_autoplay" value="false" [(#CONFIG{zoombox/zoombox_autoplay}|=={#VAL{true}}|non) checked="checked" ] /> <:zoombox:non:>
+			</p>
+			<p>
+				<label for="animation"><:zoombox:overflow:></label>
+				<input type="radio" name="zoombox_overflow" value="true" [(#CONFIG{zoombox/zoombox_overflow}|=={#VAL{true}}|oui) checked="checked" ]/> <:zoombox:oui:>
+				<input type="radio" name="zoombox_overflow" value="false" checked="checked" [(#CONFIG{zoombox/zoombox_overflow}|=={#VAL{true}}|non) checked="checked" ]/> <:zoombox:non:>
+			</p>
+			<div class="boutons">
+				<input type="submit" class="fondo" value="<:zoombox:enregistrer:>" name="_cfg_ok">
+				<input type="submit" class="fondo" value="<:zoombox:effacer:>" name="_cfg_delete">
+			</div>
+		</legend>
+	</form>
+</div>
