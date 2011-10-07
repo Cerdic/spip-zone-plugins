@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function googleplus1_css(){
 	return '<link rel="stylesheet" type="text/css" href="'.find_in_path('googleplus1.css').'" media="all" />'."\n";
 }

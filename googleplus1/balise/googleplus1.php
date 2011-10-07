@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function balise_GOOGLEPLUS1_dist ($p) {
 
 	include_spip('inc/config');
