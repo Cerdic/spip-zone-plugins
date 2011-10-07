@@ -1,53 +1,36 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>
-		[fr]Barre typographique multilingue (Extension multilingue pour la barre typographique V2)
-		[en]Multilingual typographical bar (Multilingual extension for the typographical bar V2)
-	</multi>
+	<nom>
+		<multi>
+			[fr]Barre typographique multilingue
+			[en]Multilingual typographical bar
+		</multi>
 	</nom>
-	<auteur><!-- Auteur du plugin -->
-	<br/><multi>[fr]Distribu&#233; sous licence[en]licence</multi> GNU/GPL - &copy; (2007) [Kazis &amp; Co->http://www.screencom.com] 
-	</auteur>
-	<lien></lien>
-	<version>
-	1.3
-	</version>
-	<etat>
-	test
-	</etat>
+	<slogan>
+		<multi>
+			[fr]Des onglets pour g&#233;rer les balises multi
+			[en]Tabs to manage &#8220;multi&#8221; tags
+		</multi>
+	</slogan>
+	<auteur>[Kazis &#38; Co->http://www.screencom.com]</auteur>
+	<licence>(c) 2007 GNU/GPL</licence>
+	<lien>http://www.spip-contrib.net/Barre-typographique-multilingue</lien>
+	<version>1.3.0</version>
+	<etat>test</etat>
 	<description>
-	<multi>[fr]Ajoute des fonctions de multiliguisme &agrave; la barre typographique V2. 
-	
-	<br/>En utilisation conjointe avec la Barre Typographique G&eacute;n&eacute;ralis&eacute;e, ce plugin vous permettra d'utiliser
-	facilement les fonctions de multilinguisme 
-	sur l'ensemble des zones de textes : titres, descriptifs et textes.
-
-	<br/>
-	Le fonctionnement est bas&eacute; sur l'utilisation des balises <tt>&lt;multi&gt;</tt>.
-	<br/>
-	<strong>[Acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]</strong>
-	[en]Add multilingual functionalities to the typographical bar V2 
-	
-	<br/>Used with the generalized typographical bar, this plugin offers to easily use multilingualism on every textareas, such as titles, descriptions, and texts.
-
-	<br/>
-	It is based on the use of <tt>&lt;multi&gt;</tt> tags.
-	<br/>
-	<strong>[Control panel access with cfg->.?exec=cfg&amp;cfg=ExtensionMultilingue]</strong>
-	</multi>
+		<multi>[fr]Ajoute des fonctions de multiliguisme &#224; la barre typographique V2. 
+		
+		En utilisation conjointe avec la Barre Typographique G&#233;n&#233;ralis&#233;e, ce plugin vous permettra d'utiliser facilement les fonctions de multilinguisme sur l'ensemble des zones de textes : titres, descriptifs et textes.
+		
+		Le fonctionnement est bas&#233; sur l'utilisation des balises <code><multi></code>.
+		[en]Add multilingual functionalities to the typographical bar V2 
+		
+		Used with the generalized typographical bar, this plugin offers to easily use multilingualism on every textareas, such as titles, descriptions, and texts.
+		
+		It is based on the use of <code><multi></code>. tags.
+		</multi>
 	</description>
-	<lien></lien> <!-- URI de documentation -->
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	ExtensionMultilingue
-	</prefix>
-	<icon>
-	</icon>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>ExtensionMultilingue</prefix>
+
 	<pipeline>
 		<nom>bt_toolbox</nom>
 		<inclure>extension_multilingue.php</inclure>
@@ -57,12 +40,10 @@
 		<nom>header_prive</nom>
 		<inclure>extension_multilingue.php</inclure>
 	</pipeline>
+
 	<categorie>edition</categorie>
 	<necessite id="CFG" version="[1.0;]" />
 	<necessite id="BarreTypoEnrichie" version="[2.3.1;]" />
 	<necessite id="barre_typo_generalisee" version="[1.4;]" />
-	<necessite id="SPIP" version="[1.9.0;]" />
-	
-	
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 </plugin>
