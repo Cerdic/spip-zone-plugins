@@ -20,35 +20,21 @@ function Zoombox_insert_head($flux){
 
 function Zoombox_call_js() {
 	
-	if(function_exists('lire_config')){
-		$pointeur = lire_config("config_zoombox/zoombox_pointeur", '.zoombox');
-	 Ê Ê$theme = lire_config("zoombox/zoombox_theme", 'zoombox');
-	 Ê Ê$opacity = lire_config("zoombox/zoombox_opacity",'0.8') ;
-	 Ê Ê$duration = lire_config("zoombox/zoombox_duration", '800') ;
-	 Ê Ê$animation = lire_config("zoombox/zoombox_animation", 'true');
-	 Ê Ê$width = lire_config("zoombox/zoombox_width", '600');
-	 Ê Ê$height = lire_config("zoombox/zoombox_height", '400') ;
-	 Ê Ê$gallery = lire_config("zoombox/zoombox_gallery", 'true');
-	 Ê Ê$autoplay = lire_config("zoombox/zoombox_autoplay", 'false');
-	 Ê Ê$overflow = lire_config("zoombox/zoombox_overflow", 'false') ;
- 	}
- 	else{
-		$pointeur = '.zoombox';
-	 Ê Ê$theme = 'zoombox';
-	 Ê Ê$opacity = '0.8';
-	 Ê Ê$duration = '800';
-	 Ê Ê$animation = 'true';
-	 Ê Ê$width = '600';
-	 Ê Ê$height = '400';
-	 Ê Ê$gallery = 'true';
-	 Ê Ê$autoplay = 'false';
-	 Ê Ê$overflow = 'false';
- 	}
+	$pointeur = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_pointeur") != '') ? lire_config("config_zoombox/zoombox_pointeur") : '.zoombox' ;
+	$theme = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_theme") != '') ? lire_config("config_zoombox/zoombox_theme") : 'zoombox' ;
+	$opacity = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_opacity") != '') ? lire_config("config_zoombox/zoombox_opacity") : 0.8 ;
+	$duration = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_duration") != '') ? lire_config("config_zoombox/zoombox_duration") : 800 ;
+	$animation = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_animation") != '') ? lire_config("config_zoombox/zoombox_animation") : true ;
+	$width = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_width") != '') ? lire_config("config_zoombox/zoombox_width") : 600 ;
+	$height = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_height") != '') ? lire_config("config_zoombox/zoombox_height") : 400 ;
+	$gallery = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_gallery") != '') ? lire_config("config_zoombox/zoombox_gallery") : true ;
+	$autoplay = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_autoplay") != '') ? lire_config("config_zoombox/zoombox_autoplay") : false ;
+	$overflow = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_overflow") != '') ? lire_config("config_zoombox/zoombox_overflow") : false ;
 
 	$flux = '<script src=\''.url_absolue(find_in_path('zoombox.js')).'\' type=\'text/javascript\'></script>';
-	$flux .= '<script type="text/javascript"><!--
+	$flux .= '<script type="text/javascript">
 	jQuery(function($){
-		$("'.$pointeur.'").addClass("zoombox");
+		$('.$pointeur.').addClass("zoombox");
     	$(".zoombox").zoombox({
     							theme : "'.$theme.'",
     							opacity : '.$opacity.',
@@ -61,7 +47,7 @@ function Zoombox_call_js() {
     							overflow : '.$overflow.'
     						 });
     });
-// --></script>';
+	</script>';
 	return $flux;
 }
 
