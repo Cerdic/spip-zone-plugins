@@ -1,36 +1,21 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	C&eacute;sure
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	[ARNO*->arno@rezo.net], sur la base du travail de [Yellow Green->http://yellowgreen.de/hyphenation]
-	<br />Licence: [->http://creativecommons.org/licenses/by-sa/3.0/]
-	</auteur>
-	<version>
-	1.1
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>C&#233;sure</nom>
+	<slogan>G&#233;rer les c&#233;sures sur l'affichage public</slogan>
+	<auteur>[ARNO*->arno@rezo.net], sur la base du travail de [Yellow Green->http://yellowgreen.de/hyphenation]</auteur>
+	<licence>Creative Commons by-sa</licence>
+	<version>1.1.0</version>
+	<etat>stable</etat>
 	<description>
-		Ce plugin permet d'ins&eacute;rer les indications de c&eacute;sure optionnelle dans les textes trait&eacute;s par SPIP.
+		Ce plugin permet d'ins&#233;rer les indications de c&#233;sure optionnelle dans les textes trait&#233;s par SPIP.
 		
-		Il faut modifier ainsi les squelettes aux endroits o&ugrave; l'on d&eacute;sire utiliser cette fonction:
-		<cadre>[(#TEXTE|cesure{#LANG})]</cadre>
+		Il faut modifier ainsi les squelettes aux endroits o&#249; l'on d&#233;sire utiliser cette fonction:
+		<code>[(#TEXTE|cesure{#LANG})]</code>
 		
-		Il est actif pour l'allemand, l'anglais et le fran&ccedil;ais.
+		Il est actif pour l'allemand, l'anglais et le fran&#231;ais.
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<fonctions>
-	pb_cesure_fonctions.php
-	</fonctions>
-	<prefix> 
-	pb_cesure
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<lien>http://www.paris-beyrouth.org/tutoriaux-spip/article/le-plugin-de-cesure-html</lien>
+	<fonctions>pb_cesure_fonctions.php</fonctions>
+	<prefix>pb_cesure</prefix>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>edition</categorie>
 </plugin>
