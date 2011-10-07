@@ -6,7 +6,7 @@
 	<icon>choix_police-64.png</icon>
 	<version>0.2.0</version>
 	<etat>test</etat>
-  <description>
+   <description>
 Ce plugin permet de choisir une police pour les images typo parmi toutes celles disponibles et de configurer ses param&#232;tres par d&#233;faut via une interface cfg. Les polices disponibles sont celles du dossier {{/squelettes/polices}} du SPIP ou, s'il n'existe pas, celui du plugin. Ce plugin fourni un mod&#232;le <code><typo|texte=bla bla bla></code> (ou <code>[(#MODELE{typo}{texte=bla bla bla})]</code>) qui accepte les param&#232;tres suivants:
 -* |texte= le texte &#224; passer en image ({{obligatoire!}})
 -* |police= le nom du fichier de police (avec l'extension)
