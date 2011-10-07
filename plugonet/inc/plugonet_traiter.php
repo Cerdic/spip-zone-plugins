@@ -628,6 +628,7 @@ function traiter_multi($texte) {
 
 function extraire_descriptions($nom, $description, $slogan, $prefixe) {
 	include_spip('inc/langonet_utils');
+	include_spip('inc/texte');
 
 	$langs = array();
 	
