@@ -7,6 +7,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // recuperer le nom du serveur,
 // mais pas si c'est un serveur specifique (pour, connexion)
 // attention, en SPIP 2.1, on recupere 'POUR' et non plus 'pour' comme en 2.0

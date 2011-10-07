@@ -9,6 +9,8 @@
  * 
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/charsets');
 
 /**
@@ -46,7 +48,7 @@ function importer_csv_importcharset($texte){
  */
 function importer_csv_nettoie_key($key){
 	return translitteration($key);
-	/*$accents=array('é','è','ê','à','ù',"ô","ç","'");
+	/*$accents=array('ï¿½','ï¿½','ï¿½','ï¿½','ï¿½',"ï¿½","ï¿½","'");
 	$accents_rep=array('e','e','e','a','u',"o","c","_");
 	return str_replace($accents,$accents_rep,$key);*/
 }

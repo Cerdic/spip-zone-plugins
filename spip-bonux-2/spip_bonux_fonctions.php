@@ -7,6 +7,8 @@
  * 
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/core21_filtres');
 
 /**
@@ -196,7 +198,7 @@ function tri_champ_order($t,$table=NULL,$field=NULL){
 	if (strncmp($t,'num ',4)==0){
 		$t = substr($t,4);
 		$t = preg_replace(',\s,','',$t);
-		// Lever une ambiguité possible si le champs fait partie de la table (pour compatibilité de la balise tri avec compteur, somme, etc.)
+		// Lever une ambiguitï¿½ possible si le champs fait partie de la table (pour compatibilitï¿½ de la balise tri avec compteur, somme, etc.)
 		if (!is_null($table) && !is_null($field) && in_array($t,unserialize($field)))
 			$t = "0+$table.$t";
 		else
@@ -208,7 +210,7 @@ function tri_champ_order($t,$table=NULL,$field=NULL){
 	}
 	else {
 		$t = preg_replace(',\s,','',$t);
-		// Lever une ambiguité possible si le champs fait partie de la table (pour compatibilité de la balise tri avec compteur, somme, etc.)
+		// Lever une ambiguitï¿½ possible si le champs fait partie de la table (pour compatibilitï¿½ de la balise tri avec compteur, somme, etc.)
 		if (!is_null($table) && !is_null($field) && in_array($t,unserialize($field)))
 			return $table.'.'.$t;
 		else
@@ -237,7 +239,7 @@ function tri_champ_select($t){
 
 /**
  * Rediriger une page suivant une autorisation,
- * et ce, n'importe où dans un squelette, même dans les inclusions.
+ * et ce, n'importe oï¿½ dans un squelette, mï¿½me dans les inclusions.
  *
  * @param bool $ok Indique si l'on doit rediriger ou pas
  * @param string $url Adresse vers laquelle rediriger
@@ -256,7 +258,7 @@ function filtre_sinon_interdire_acces_dist($ok=false, $url='', $statut=0){
 	
 	// Si aucun argument on essaye de deviner quoi faire
 	if (!$url and !$statut){
-		// Si on est dans l'espace privé, on génère du 403 Forbidden
+		// Si on est dans l'espace privï¿½, on gï¿½nï¿½re du 403 Forbidden
 		if (test_espace_prive()){
 			http_status(403);
 			$echec = charger_fonction('403','exec');
@@ -268,11 +270,11 @@ function filtre_sinon_interdire_acces_dist($ok=false, $url='', $statut=0){
 		}
 	}
 	
-	// Sinon on suit les directives indiquées dans les deux arguments
+	// Sinon on suit les directives indiquï¿½es dans les deux arguments
 	
 	// S'il y a un statut
 	if ($statut){
-		// Dans tous les cas on modifie l'entête avec ce qui est demandé
+		// Dans tous les cas on modifie l'entï¿½te avec ce qui est demandï¿½
 		http_status($statut);
 		// Si le statut est une erreur 4xx on va chercher le squelette
 		if ($statut >= 400)

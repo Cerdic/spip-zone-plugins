@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_once _DIR_RESTREINT.'inc/config.php';
 if (!defined('_DIR_PLUGIN_CFG')){

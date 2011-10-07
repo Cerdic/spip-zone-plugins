@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // s'assurer que les filtres du core sont deja charges
 // pour eviter tout risque de conflit
 include_spip('inc/filtres');

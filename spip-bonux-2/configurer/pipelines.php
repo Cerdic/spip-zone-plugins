@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Proposer un chargement par defaut pour les #FORMULAIRE_CONFIGURER_XXX
  *

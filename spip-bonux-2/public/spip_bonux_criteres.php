@@ -7,6 +7,8 @@
  * 
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS['exception_des_connect'][] = 'pour';
 $GLOBALS['exception_des_connect'][] = 'condition';
 
