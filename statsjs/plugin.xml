@@ -1,21 +1,23 @@
 <plugin>
 	<nom>StatsJS</nom>
+	<slogan>Compter les visites via un mouchard javascript</slogan>
 	<auteur>Fil</auteur>
-	<version>0.1</version>
-	<etat>
-	dev
-	</etat>
+	<version>0.1.0</version>
+	<etat>dev</etat>
 	<description>
-	Compter les visites via un mouchard javascript
+Ce plugin sert &#224; compter les visites &#224; partir d&#8217;un mouchard javascript, au lieu du mouchard PHP classique. 
+Quel int&#233;r&#234;t ?
+-* homog&#233;n&#233;it&#233; : en utilisant un mouchard javascript au lieu de regarder les hits sur les pages HTML, StatsJS permet de compter les visites de la m&#234;me fa&#231;on que les autres syst&#232;mes de statistiques, comme piwik ou google analytics.
+
+-* performance : Si l&#8217;on met son site derri&#232;re un cache (proxy inverse) du type Varnish (http://www.varnish-cache.org/), la plupart des hits sur les pages ne vont plus jusqu&#8217;au serveur PHP, car ils sont servis directement par Varnish. D&#232;s lors, pour comptabiliser les visites, il faut provoquer un autre hit, sur un script sp&#233;cifique.
 	</description>
-	<prefix>
-	StatsJS
-	</prefix>
+	<prefix>StatsJS</prefix>
 	<icon>statsjs.png</icon><!-- by Sergio Sanchez Lopez http://www.iconfinder.com/icondetails/7554/128/javascript_js_icon -->
 	<options>statsjs_pipelines.php</options>
 	<pipeline>
 		<nom>affichage_final</nom>
 	</pipeline>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<categorie>statistique</categorie>
 	<lien>http://www.spip-contrib.net/3753</lien>
 	<chemin dir='' />
