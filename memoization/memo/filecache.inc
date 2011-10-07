@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (!defined('_DIR_TMP')) define('_DIR_TMP', 'tmp/');
 if (!defined('_DIR_FILECACHE')) define('_DIR_FILECACHE', 'cache/');
 
