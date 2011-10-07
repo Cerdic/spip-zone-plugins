@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function formulaires_editer_polyhierarchie_charger($objet, $id_objet, $retour=''){
 	
 	$valeurs['objet'] = $objet;

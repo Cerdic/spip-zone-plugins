@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rubriques');
 if (!function_exists('depublier_rubrique_if')) {
