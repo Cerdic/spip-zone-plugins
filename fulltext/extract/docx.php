@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Sait-on extraire ce format ?
 // TODO: ici tester si les classes fonctionnent
 $GLOBALS['extracteur']['docx'] = 'extracteur_docx';

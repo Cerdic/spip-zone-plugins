@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 //Fonctions necessaires pour l'extraction des fichiers .odt/.docx
 // Necessite PHP 5.2+
 // Necessite php_zip.dll sous Winwows

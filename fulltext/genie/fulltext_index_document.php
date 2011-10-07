@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function genie_fulltext_index_document_dist($t) {
 	//Recuperation de la configuration
 	$fulltext = sql_fetsel('valeur', 'spip_meta', 'nom = "fulltext"');

@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Classe SimpleXLSX php v0.4 de Sergey Schuchkin legerement modifiee pour SPIP
 // MS Excel 2007 workbooks reader
 // Example: 

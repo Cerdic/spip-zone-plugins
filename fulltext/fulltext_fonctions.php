@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function balise_AIDE_RECHERCHE($p) {
 	if (!function_exists('recuperer_fond')) include_spip('public/assembler');
   //    $arg = interprete_argument_balise(1, $p);

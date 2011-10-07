@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Classe SimplePPTX v0.1 pour SPIP.
 // Tres inspire de Zend Search Lucene (http://www.chisimba.com/apidocs/fwdocs/Zend_Search_Lucene/Document/Zend_Search_Lucene_Document_Pptx.html) et de la classe SimpleXLSX de Sergey Schuchkin 
  

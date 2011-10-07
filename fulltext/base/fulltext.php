@@ -2,6 +2,7 @@
 /**
  * Plugin Fulltext
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function fulltext_declarer_tables_principales($tables_principales) {
 	$tables_principales['spip_documents']['field']['contenu'] = "TEXT DEFAULT '' NOT NULL";

@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Sait-on extraire ce format ?
 // TODO: ici tester si les binaires fonctionnent
 $GLOBALS['extracteur']['doc'] = 'extracteur_doc';

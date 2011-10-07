@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function Fulltext_trouver_engine_table($table) {
 	if ($s = sql_query("SHOW CREATE TABLE ".table_objet_sql($table), $serveur)
 	AND $t = sql_fetch($s)
