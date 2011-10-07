@@ -4,6 +4,8 @@
  * Utilisé notamment pour l'insertion dans les pipelines de CFG
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction de verification du formulaire de configuration CFG
  * - On vérifie si dans les cas de cloudmade ou de google (v2), une clé a 

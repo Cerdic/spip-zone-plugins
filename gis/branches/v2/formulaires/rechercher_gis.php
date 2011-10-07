@@ -3,6 +3,8 @@
  * Formulaire de création et d'édition d'un point géolocalisé
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/actions');
 include_spip('inc/editer');
 

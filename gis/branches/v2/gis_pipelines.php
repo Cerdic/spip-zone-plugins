@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function gis_inserer_javascript($flux){
 	
 	// initialisation des valeurs de config
