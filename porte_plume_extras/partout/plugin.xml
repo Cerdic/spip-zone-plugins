@@ -5,6 +5,11 @@
 			[en]Quill everywhere
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+		[fr]Afficher le Porte Plume sur la plupart des champs de saisie
+		[en]Display Quill on most input fields
+	</slogan>
 	<auteur>Pascal M&#233;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
 	<version>1.0.3</version>
@@ -14,29 +19,34 @@
 	<description>
 		<multi>
 			[fr]Porte Plume Partout sert &#224; ajouter la barre d'&#233;dition aux champs DESCRIPTIF, CHAPO et PS
-			[en]Quill everywhere enables the editing toolbar on other text fields (standfirst, description,ps)
+			[en]Quill everywhere enables the editing toolbar on other text fields (standfirst, description, ps)
 		</multi>
 	</description>
 	<etat>test</etat>
-	<prefix>ppp</prefix> <!--important, sert de lien au fichier de pipeline et aussi dans la définition de la fonction incluse-->
+	<prefix>ppp</prefix>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>insert_head_prive</action>
 		<inclure>ppp_pipelines.php</inclure>
 	</pipeline>
 	<necessite id='porte_plume' version='[1.6.4;]' />
-	<necessite id='spip' version='[2.0.10;3.0.0-dev)' />
+	<necessite id='spip' version='[2.0.10;2.1.99]' />
 	<necessite id="cfg" version="[1.14.3;]" />
 	<necessite id="saisies" version="[1.1;]" />
 	<categorie>edition</categorie>
 </plugin>
-<plugin spip='[3.0.0-dev;)'>
+<plugin spip='[3.0.0-dev;3.0.99]'>
 	<nom>
 		<multi>
 			[fr]Porte Plume Partout
 			[en]Quill everywhere
 		</multi>
 	</nom>
+	<slogan>
+		<multi>
+		[fr]Afficher le Porte Plume sur la plupart des champs de saisie
+		[en]Display Quill on most input fields
+	</slogan>
 	<auteur>Pascal M&#233;chin - Matthieu Marcillaud - Jacques Pyrat</auteur>
 	<licence>GPLv3</licence>
 	<version>1.0.5</version>
@@ -46,7 +56,7 @@
 	<description>
 		<multi>
 			[fr]Porte Plume Partout sert &#224; ajouter la barre d'&#233;dition aux champs DESCRIPTIF, CHAPO et PS
-			[en]Quill everywhere enables the editing toolbar on other text fields (standfirst, description,ps)
+			[en]Quill everywhere enables the editing toolbar on other text fields (standfirst, description, ps)
 		</multi>
 	</description>
 	<etat>test</etat>
