@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // pouvoir utiliser _T_ou_typo si present
 function _TT($texte) {
