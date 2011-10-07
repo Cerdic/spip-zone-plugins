@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/config');
 include_spip('configurer/pipelines');
 

@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/presentation');
 include_spip('exec/contact_select_message');
 
