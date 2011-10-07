@@ -1,7 +1,9 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
+
 // Pour par exemple limiter l'action de ancres_douces au div #contenu ou aux divs de classe .ancres_douces,
-// insérez dans votre config/mes_options.php les lignes :
+// inserez dans votre config/mes_options.php les lignes :
 // define ('ANCRES_DOUCES_CONTEXTE','#contenu'); 
 // ou 
 // define ('ANCRES_DOUCES_CONTEXTE','.ancres_douces'); 
