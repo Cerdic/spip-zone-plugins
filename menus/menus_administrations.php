@@ -8,7 +8,7 @@ include_spip('inc/meta');
 // Installation et mise à jour
 function menus_upgrade($nom_meta_version_base, $version_cible){
 
-	$version_actuelle = '0.0';
+	$version_actuelle = '0.0.0';
 	if (
 		(!isset($GLOBALS['meta'][$nom_meta_version_base]))
 		|| (($version_actuelle = $GLOBALS['meta'][$nom_meta_version_base]) != $version_cible)
