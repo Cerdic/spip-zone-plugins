@@ -7,6 +7,7 @@
  * 
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
 
 /**
  * une fonction pour generer une balise img a partir d'un nom de fichier
