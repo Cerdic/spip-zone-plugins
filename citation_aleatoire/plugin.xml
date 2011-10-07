@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 	<!--  
 	// $LastChangedRevision$
@@ -7,22 +6,19 @@
 	 -->
 	
 	<nom>Citation al&#233;atoire</nom>
-	
+	<slogan>Petit gestionnaire de citations</slogan>
 	<auteur>paladin@quesaco.org</auteur>
 	
-	<version>1.0.03</version>
+	<version>1.0.3</version>
 	
 	<etat>stable</etat>
 	
 	<description>
-		Petit gestionnaire de citations.
-		<br />
-		Placer la balise #CITATION dans vos squelettes pour faire apparaitre une citation choisie all&#233;atoirement
+		Placer la balise <code>#CITATION</code> dans vos squelettes pour faire appara&#238;tre une citation choisie all&#233;atoirement
 		dans le fichier de citations (citations_fr.xml).
-		
 	</description>
 	
-	<lien>[Documentation->http://www.quesaco.org/Citation-aleatoire]</lien>
+	<lien>http://www.quesaco.org/Citation-aleatoire</lien>
 	
 	<prefix>cital</prefix>
 	
@@ -37,6 +33,6 @@
 	</pipeline>
 	
 	<categorie>edition</categorie>
-	<necessite id='spip' version='[1.9.1;]' />
+	<necessite id='spip' version='[1.9.1;2.1.99]' />
 	
 </plugin>
