@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // surcharge de la fonction du core de CFG
 // pour autoriser les raccourcis lire_config('~toto')
 // DEPRECIE : declarer le depot systematiquement si different de meta ou metapack

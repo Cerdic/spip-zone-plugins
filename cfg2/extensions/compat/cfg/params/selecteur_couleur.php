@@ -8,6 +8,7 @@
  * Patch de compatibilité avec classe cfg_couleur, OBSOLETE (utilisez la classe palette) 
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function cfg_charger_param_selecteur_couleur($valeur, &$cfg){
 	// si provient d'un CVT, on met inline, sinon dans head

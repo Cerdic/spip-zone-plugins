@@ -8,6 +8,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // restaure des messages serialises dans une meta 'cfg_message_{id_auteur}'
 //
