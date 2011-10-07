@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_once dirname(__FILE__).'/socialtags_fonctions.php';
 
 function socialtags_json($cfg) {

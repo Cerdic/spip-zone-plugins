@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function socialtags_css(){
 	return '<link rel="stylesheet" type="text/css" href="'.find_in_path('socialtags.css').'" media="all" />'."\n";
 }

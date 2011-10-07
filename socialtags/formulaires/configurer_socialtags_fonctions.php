@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function socialtags_choix(){
 	include_spip('socialtags_fonctions');
 	global $couleur_fonce;
