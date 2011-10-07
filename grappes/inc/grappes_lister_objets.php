@@ -4,6 +4,8 @@
  * Licence GPL (c) 2008 Matthieu Marcillaud
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Retourne une liste d'objets lies a un objet source indique
  * Si le visiteur en a les droits un lien pour les délier 
