@@ -1,33 +1,17 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Int&eacute;gration d'activit&eacute;s Freemind
-	</nom>
+	<nom>Int&#233;gration d'activit&#233;s Freemind</nom>
 	<icon>img_pack/freemind_icon-24.png</icon>
-	<auteur>
-	Olivier Gautier, &eacute;quipe de d&eacute;veloppement EVA-web.<br/>
-	Dominique Lepaisant, acad&eacute;mie de Caen.<br />
-	Gilles Quiniou
-	</auteur>
-	<licence>
-	GNU/GPL
-	</licence>
-	<version>
-	1.2
-	</version>
-	<etat>
-	stable
-	</etat>
+	<auteur>[Olivier Gautier->http://www.eva-web.edres74.ac-grenoble.fr], Dominique Lepaisant, Gilles Quiniou</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.2.0</version>
+	<etat>stable</etat>
     <description>
-    Permet d'ins&eacute;rer des animations Freemind (format mm) gr&acirc;ce &agrave; un mod&egrave;le.
-    Plugin cr&eacute;&eacute; gr&acirc;ce &agrave; <a href="http://www.spip-contrib.net/Inserer-une-carte-Freemind-dans-un">l'article de ivandps sur SPIP-Contrib</a>.
-    </description>
-    <lien>
-    [Documentation sur le site eva-web.edres74.ac-grenoble.fr->http://www.eva-web.edres74.ac-grenoble.fr/spip.php?article73]
-    </lien>
-    <prefix>
-    eva_freemind
-    </prefix>
-    <install>eva_freemind_install.php</install>
-    <necessite id="SPIP" version="[2.0.0;]" />
+Permet d'ins&#233;rer des animations Freemind (format mm) gr&#226;ce &#224; un mod&#232;le.
+_ Plugin cr&#233;&#233; gr&#226;ce &#224; l'article de [ivandps sur SPIP-Contrib->http://www.spip-contrib.net/Inserer-une-carte-Freemind-dans-un].
+	</description>
+	<lien>http://www.eva-web.edres74.ac-grenoble.fr/spip.php?article73</lien>
+	<prefix>eva_freemind</prefix>
+	<install>eva_freemind_install.php</install>
 	<categorie>divers</categorie>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 </plugin>
