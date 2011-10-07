@@ -3,6 +3,8 @@
  * Fichier d'installation / upgrade et désinstallation du plugin Multilang
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/meta');
 
 /**

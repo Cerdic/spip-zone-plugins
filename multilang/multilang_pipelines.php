@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Insertion dans le pipeline insert_head_css
  * si on a configuré multilang pour s'insérer dans l'espace public
