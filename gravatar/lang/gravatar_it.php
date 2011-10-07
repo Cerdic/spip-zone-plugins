@@ -1,6 +1,7 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
@@ -12,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'label_image_defaut' => 'immagine standard',
 'explication_image_defaut' => 'Per coloro che non hanno Gravatar, usa:',
-'label_image_defaut_404' => 'Non c\'è immagine',
+'label_image_defaut_404' => 'Non c\'ï¿½ immagine',
 'label_image_defaut_png' => '<tt>images/gravatar.png</tt>',
 'label_image_defaut_gravatar' => 'Logo di Gravatar',
 'label_image_defaut_identicon' => '<i>Identicon</i> (generato dall\'indirizzo email)',

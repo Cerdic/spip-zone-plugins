@@ -13,6 +13,8 @@
  * @version     $Id$
  **/
 
+ if (!defined("_ECRIRE_INC_VERSION")) return;
+ 
 /**
  * On regarde s'il y a un logo, sinon un gravatar, et on renvoie le tout.
  *

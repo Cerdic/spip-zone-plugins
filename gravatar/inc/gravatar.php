@@ -13,6 +13,8 @@
  * @version     $Id$
  **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * notre fonction de recherche de logo
  *

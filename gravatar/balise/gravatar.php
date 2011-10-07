@@ -1,20 +1,22 @@
 <?php
-	/**
-	 *
-	 * Gravatar : Globally Recognized AVATAR
-	 *
-	 * @package     plugins
-	 * @subpackage  gravatar
-	 *
-	 * @author      Thomas Beaumanoir, Clever Age <http://www.clever-age.com>
-	 * @copyright   Copyright (c) 2006
-	 * @license     GNU/GPL
-	 *
-	 * Revisee 2010 C.Morin pour passage en balise statique qui permet l'application de filtrer
-	 * et la mise en cache
-	 *
-	 * @version     $Id$
-	 **/
+/**
+ *
+ * Gravatar : Globally Recognized AVATAR
+ *
+ * @package     plugins
+ * @subpackage  gravatar
+ *
+ * @author      Thomas Beaumanoir, Clever Age <http://www.clever-age.com>
+ * @copyright   Copyright (c) 2006
+ * @license     GNU/GPL
+ *
+ * Revisee 2010 C.Morin pour passage en balise statique qui permet l'application de filtrer
+ * et la mise en cache
+ *
+ * @version     $Id$
+ **/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * balise #GRAVATAR

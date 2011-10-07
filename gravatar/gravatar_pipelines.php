@@ -13,6 +13,7 @@
  * @version     $Id$
  **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Utilisation du pipeline "affiche_gauche" :
