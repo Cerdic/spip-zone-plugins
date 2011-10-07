@@ -1,29 +1,22 @@
 <plugin>
-    <nom> <!-- Nom du plugin -->
-    <multi>
-    [fr]Barre typographique g&eacute;n&eacute;ralis&eacute;e
-    [de]Generalisierte typografische Toolbar
-    </multi>
+    <nom>
+		 <multi>
+		 [fr]Barre typographique g&#233;n&#233;ralis&#233;e
+		 [de]Generalisierte typografische Toolbar
+		 </multi>
     </nom>
-    <auteur>    <!-- Auteur du plugin -->
-    Arnault PACHOT 
-    [OpenStudio->http://www.openstudio.fr] - <multi>[fr]Licence[de]Lizenz</multi> GPL
-    </auteur>
-    <version>
-    1.5
-    </version>
-    <etat>
-    stable
-    </etat>
+	 <slogan>Etendre la barre typo &#224; l'ensemble des zones de texte</slogan>
+    <auteur>[Arnault PACHOT / OpenStudio->http://www.openstudio.fr]</auteur>
+	 <licence>GPL</licence>
+    <version>1.5.0</version>
+    <etat>stable</etat>
     <description>
-    <multi>
-    [fr]Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, sites, mots clefs, etc.),
-     [acc&egrave;s au panneau de configuration avec cfg->.?exec=cfg&amp;cfg=barre_typo_generalisee]
-    [de]Dieses Plugin aktiviert die typografische Toolbar von Spip auf alle Textbereiche (Rubriken, Webseiten, Schlagw&ouml;rter, etc.),
-     [Zugang zur Konfigurationsseite mit cfg->.?exec=cfg&amp;cfg=barre_typo_generalisee]
-    </multi>
+		 <multi>
+		 [fr]Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, sites, mots clefs, etc.)
+		 [de]Dieses Plugin aktiviert die typografische Toolbar von Spip auf alle Textbereiche (Rubriken, Webseiten, Schlagw&#246;rter, etc.)
+		 </multi>
     </description>
-    <lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien> <!-- URI de documentation -->
+    <lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien>
     <pipeline>
         <nom>body_prive</nom>
         <inclure>barre_typo_generalisee_define_prive.php</inclure>
@@ -31,20 +24,8 @@
     <pipeline>
         <nom>header_prive</nom>
         <inclure>barre_typo_generalisee_define_prive.php</inclure>
-    </pipeline>
-
-    <!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-    sur le mode Rien::
-    ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-    ce parametre est obligatoire et doit etre non vide
-    -->
-    <prefix> 
-    barre_typo_generalisee
-    </prefix>
+    </pipeline>barre_typo_generalisee</prefix>
     <categorie>edition</categorie>
     <necessite id="CFG" version="[1.0;]" />
-    <necessite id='spip' version='[1.9.2;]' />
-    
-
-    <!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.   -->
+    <necessite id='spip' version='[1.9.2;1.9.2]' />
 </plugin>
