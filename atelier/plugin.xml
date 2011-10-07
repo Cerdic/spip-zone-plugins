@@ -2,25 +2,23 @@
 	<nom>L'atelier</nom>
 	<icon>images/atelier.png</icon>
 	<version>0.1</version>
-	<auteur>Polez K&#233;vin - edd@riseup.net
-	- &#169; 2008-2009 - Distribu&#233; sous licence GPL</auteur>
+	<auteur>[Polez K&#233;vin->edd@riseup.net]</auteur>
+	<licence>GPL - (c) 2008-2009</licence>
 	<etat>dev</etat>
 	<description>
 Le plugin Atelier est un espace de d&#233;veloppement pour SPIP.
 
-Il propose
-<ul>
-<li>Une gestion des taches et des projets.</li>
-<li>Une gestion des versions et feuilles de routes.</li>
-<li>Visualisation et re-g&#233;n&#233;ration des fichiers temporaires</li>
-<li>Visualisation des "metas"</li>
-<li>Gestion des fichiers langues (ajout, modification et suppression de d&#233;finitions)</li>
-<li>Interface Subversion (checkout, statuts, update, add et commit des projets de la zone)</li>
-<li>G&#233;n&#233;ration de feuilles priv&#233;es et publiques</li>
-<li>Explorateur de fichier</li>
-</ul>
+Il propose :
+_ Une gestion des taches et des projets.
+_ Une gestion des versions et feuilles de routes.
+_ Visualisation et re-g&#233;n&#233;ration des fichiers temporaires
+_ Visualisation des "metas"
+_ Gestion des fichiers langues (ajout, modification et suppression de d&#233;finitions)
+_ Interface Subversion (checkout, statuts, update, add et commit des projets de la zone)
+_ G&#233;n&#233;ration de feuilles priv&#233;es et publiques
+_ Explorateur de fichier
 	</description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Plugin-Atelier</lien>
 	<options>atelier_options.php</options>
 	<fonctions>atelier_fonctions.php</fonctions>
 	<prefix>atelier</prefix>
@@ -30,7 +28,7 @@ Il propose
 	</pipeline>
 	<install>./</install>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	<necessite id='cfg' version='[1.3.7;]' />
 	<categorie>divers</categorie>
 </plugin>
