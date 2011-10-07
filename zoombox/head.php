@@ -20,16 +20,16 @@ function Zoombox_insert_head($flux){
 
 function Zoombox_call_js() {
 	
-	$pointeur = (lire_config($chemin="config_zoombox/zoombox_pointeur") != '') ? lire_config($chemin="config_zoombox/zoombox_pointeur") : '.zoombox' ;
-	$theme = (lire_config($chemin="config_zoombox/zoombox_theme") != '') ? lire_config($chemin="config_zoombox/zoombox_theme") : 'zoombox' ;
-	$opacity = (lire_config($chemin="config_zoombox/zoombox_opacity") != '') ? lire_config($chemin="config_zoombox/zoombox_opacity") : 0.8 ;
-	$duration = (lire_config($chemin="config_zoombox/zoombox_duration") != '') ? lire_config($chemin="config_zoombox/zoombox_duration") : 800 ;
-	$animation = (lire_config($chemin="config_zoombox/zoombox_animation") != '') ? lire_config($chemin="config_zoombox/zoombox_animation") : true ;
-	$width = (lire_config($chemin="config_zoombox/zoombox_width") != '') ? lire_config($chemin="config_zoombox/zoombox_width") : 600 ;
-	$height = (lire_config($chemin="config_zoombox/zoombox_height") != '') ? lire_config($chemin="config_zoombox/zoombox_height") : 400 ;
-	$gallery = (lire_config($chemin="config_zoombox/zoombox_gallery") != '') ? lire_config($chemin="config_zoombox/zoombox_gallery") : true ;
-	$autoplay = (lire_config($chemin="config_zoombox/zoombox_autoplay") != '') ? lire_config($chemin="config_zoombox/zoombox_autoplay") : false ;
-	$overflow = (lire_config($chemin="config_zoombox/zoombox_overflow") != '') ? lire_config($chemin="config_zoombox/zoombox_overflow") : false ;
+	$pointeur = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_pointeur") != '') ? lire_config("config_zoombox/zoombox_pointeur") : '.zoombox' ;
+	$theme = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_theme") != '') ? lire_config("config_zoombox/zoombox_theme") : 'zoombox' ;
+	$opacity = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_opacity") != '') ? lire_config("config_zoombox/zoombox_opacity") : 0.8 ;
+	$duration = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_duration") != '') ? lire_config("config_zoombox/zoombox_duration") : 800 ;
+	$animation = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_animation") != '') ? lire_config("config_zoombox/zoombox_animation") : true ;
+	$width = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_width") != '') ? lire_config("config_zoombox/zoombox_width") : 600 ;
+	$height = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_height") != '') ? lire_config("config_zoombox/zoombox_height") : 400 ;
+	$gallery = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_gallery") != '') ? lire_config("config_zoombox/zoombox_gallery") : true ;
+	$autoplay = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_autoplay") != '') ? lire_config("config_zoombox/zoombox_autoplay") : false ;
+	$overflow = (function_exists("lire_config") && lire_config("config_zoombox/zoombox_overflow") != '') ? lire_config("config_zoombox/zoombox_overflow") : false ;
 
 	$flux = '<script src=\''.url_absolue(find_in_path('zoombox.js')).'\' type=\'text/javascript\'></script>';
 	$flux .= '<script type="text/javascript"><!--
