@@ -5,6 +5,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function medias_declarer_tables_interfaces($interface){
 	$interface['exceptions_des_tables']['documents']['media']=array('types_documents', 'media');
 	return $interface;

@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // On liste tous les champs susceptibles de contenir des documents ou images si on veut que ces derniers soient lies a l objet lorsqu on y fait reference par imgXX docXX ou embXX
 // la dist ne regarde que chapo et texte, on laisse comme ca, mais ca permet d etendre a descriptif ou toto depuis d autre plugin comme agenda ou grappe
 $GLOBALS['medias_liste_champs'][] = 'texte';

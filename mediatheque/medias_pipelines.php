@@ -4,7 +4,7 @@
  * Licence GPL (c) 2006-2008 Cedric Morin, romy.tetue.net
  *
  */
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function medias_post_edition($flux){
 	// si on ajoute un document, mettre son statut a jour
