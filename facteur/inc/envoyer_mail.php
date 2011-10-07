@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('classes/facteur');
 // inclure le fichier natif de SPIP, pour les fonctions annexes

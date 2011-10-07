@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function facteur_ieconfig_metas($table){
 	$table['facteur']['titre'] = _T('facteur:configuration_facteur');
 	$table['facteur']['icone'] = 'prive/images/facteur-24.png';

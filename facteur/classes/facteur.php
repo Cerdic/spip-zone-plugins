@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/charsets');
 include_spip('inc/filtres');
 

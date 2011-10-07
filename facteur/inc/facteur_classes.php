@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /*
  * Compatibilite avec plugins faisant un appel direct a ce fichier
  */
