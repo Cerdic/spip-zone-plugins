@@ -6,7 +6,6 @@
 #entete_tradlang .entete_recherche p{clear:both}
 
 .tradlang_footer{
-	font-size:.8em;
 	border-top: 1px solid #ccc;
 	padding:5px;
 	text-align:right;
@@ -28,20 +27,10 @@
 table.liste_traductions{
 	font-size:.8em;
 	margin:10px 0 15px;
-	text-align:left;
 	width:100%;
-	background-color:#CDCDCD;
-	table-layout:fixed;
-}
-
-table.liste_traductions tr{
-	border-bottom:1px solid #ccc;
 }
 
 table.liste_traductions td {
-	background-color:#FFFFFF;
-	color:#3D3D3D;
-	padding:4px;
 	text-overflow:ellipsis;
 	overflow:hidden;
 }
@@ -50,9 +39,7 @@ table.liste_traductions td.statut{
 	width:50px;
 	vertical-align:middle;
 }
-table.liste_traductions tr.odd td {
-	background-color:#F0F0F6;
-}
+
 
 table.liste_traductions tr.statut_new td.statut,.traducteur #navigation ul.infos p.items_new{
 	background-image:url(images/back_new.png);

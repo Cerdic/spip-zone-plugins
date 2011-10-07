@@ -11,9 +11,9 @@
 #ANCRE_PAGINATION
 <h2 class="h2"><:tradlang:titre_recherche_tradlang:> (#GRAND_TOTAL)</h2>
 #SET{total,#GRAND_TOTAL}
-<table class="liste_traductions">
+<table class="spip liste_traductions">
 	<thead>
-		<tr>
+		<tr class="row_first">
 			<th>
 				[(#TRI{id,<:tradlang:codelangue:>,ajax})]
 			</th>
@@ -37,7 +37,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_recherche_tradlang(TRADLANG){recherche?}{module?}{statut?}{lang==#GET{lang}}{module != attic}{tri #ENV{par,points},#GET{defaut_tri}}{pagination 20}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUT|strtolower)]">
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]">
 		<td>#ID</td>
 		<BOUCLE_module(TRADLANG_MODULES){module=#MODULE}>
 		<td>#MODULE</td>

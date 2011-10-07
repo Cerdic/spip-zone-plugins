@@ -19,7 +19,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_liste_tradlang(TRADLANG){id_tradlang?}{module?}{where?}{statut?}{recherche?}{tri #ENV{par,statut},#GET{defaut_tri}}{pagination #ENV{nb,10}}{!lang_select}>
-		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
+		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]">
 			<td class='statut'>[(#STATUT|puce_statut{tradlang,#ID_TRADLANG})]</td>
 			<td class='titre principale'><a href="[(#ID_TRADLANG|generer_url_entite{tradlang})]"
 				title="<:info_numero_abbreviation|attribut_html:> #ID_TRADLANG">#MODULE : #ID [#LANG]</a></td>

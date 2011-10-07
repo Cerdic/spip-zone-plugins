@@ -2,9 +2,9 @@
 #SET{str_mere,#ARRAY}
 #SET{total_mere,#GRAND_TOTAL}
 <p><:tradlang:nb_items_langue_mere{nb=#GET{total_mere}}:></p>
-<table class="liste_traductions">
+<table class="spip liste_traductions">
 	<thead>
-		<tr>
+		<tr class="row_first">
 			<th>
 				<:tradlang:codelangue:>
 			</th>
@@ -17,7 +17,7 @@
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
 	<BOUCLE_revise(TRADLANG){module}{lang=#LANG_MERE}{id != zz_timestamp_nepastraduire}{par id}>
 	#SET{str_cible,#GET{str_cible}|push{#ID}}
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td>#ID</td>
 		<td class="#EDIT{str_statut}">[&lt;(#STATUT|!={OK}|?{#STATUT})&gt; ][(#STR**|entites_html)]</td>
 	</tr>

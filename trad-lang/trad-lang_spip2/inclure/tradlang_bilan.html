@@ -10,7 +10,7 @@
 <B_langues_totales>
 <table class="bilan spip liste">
 	<thead>
-		<tr class="first_row">
+		<tr class="row_first">
 			<th></th>
 			<BOUCLE_langues_totales(POUR){tableau #GET{langues}}>
 			<th class="lang #CLE" title="[(#CLE|traduire_nom_langue)]">
@@ -22,7 +22,7 @@
 	<B_modules_lang>
 	<tbody>
 	<BOUCLE_modules_lang(TRADLANG_MODULES){par module,nom_mod,id_tradlang_module}>
-	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_even,row_odd})]" title="[(#NOM_MOD|attribut_html)]">
+	<tr class="module #NOM_MOD[ (#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]" title="[(#NOM_MOD|attribut_html)]">
 		<td>[(#NOM_MOD)]</td>
 		#SET{full,''}
 		#SET{langue_mere,#LANG_MERE}

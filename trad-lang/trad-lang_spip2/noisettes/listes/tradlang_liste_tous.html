@@ -40,9 +40,9 @@
 </B_statut>
 
 <B_revise_cible>
-<table class="liste_traductions">
+<table class="spip liste_traductions">
 	<thead>
-		<tr>
+		<tr class="row_first">
 			<th class="code_langue">
 				[(#TRI{id,<:tradlang:codelangue:>,ajax})]
 			</th>
@@ -65,7 +65,7 @@
 	<tbody>
 	[(#REM)on n'affiche que les id qui existent dans la langue mère] 
 	<BOUCLE_revise_cible(TRADLANG){module}{statut ?}{lang=#ENV{lang_cible}}{id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}{tri #ENV{par,statut},#GET{defaut_tri}}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})] statut_[(#STATUT|strtolower)]">
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})] statut_[(#STATUT|strtolower)]">
 		<td class="code_langue">#ID</td>
 		<BOUCLE_revise_orig(TRADLANG){module}{lang=#ENV{lang_orig}}{id=#ID}{id != zz_timestamp_nepastraduire}>
 		<td class="origine">[&lt;(#STATUT|!={OK}|?{#STATUT})&gt; ][(#STR**|entites_html)]</td>
@@ -136,7 +136,7 @@
 	</thead>
 	<tbody>
 	<BOUCLE_revise_en_trop(TRADLANG){module}{lang=#ENV{lang_cible}}{!id IN #GET{str_mere}}{id != zz_timestamp_nepastraduire}>
-	<tr class="[(#COMPTEUR_BOUCLE|alterner{odd,even})]">
+	<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 		<td>#ID</td>
 		<td>[(#STR**|entites_html)]</td>
 		<td>#STATUT</td>
