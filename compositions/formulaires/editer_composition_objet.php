@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/compositions');
 /**
@@ -56,7 +57,7 @@ function formulaires_editer_composition_objet_charger($type,$id,$hide_form=false
 		);
 	}
 	
-	// Si on hérite d'une composition
+	// Si on hï¿½rite d'une composition
 	// On modifie le tableau des compositions
 	if ($valeurs['composition_heritee'] AND $valeurs['composition_heritee'] != '-') {
 		$compo_defaut = $valeurs['_compositions'][$valeurs['composition_heritee']];

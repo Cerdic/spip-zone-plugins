@@ -5,7 +5,9 @@
  * Distribue sous licence GPL
  *
  */
- 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // lister les exec ou apparait l'interface de composition et le type correspondant
 // peut etre etendu par des plugins
 $GLOBALS['compositions_exec']['naviguer'] = 'rubrique';

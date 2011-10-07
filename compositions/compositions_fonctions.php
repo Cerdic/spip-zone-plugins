@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 define('_COMPOSITIONS_MATCH','-([^0-9][^.]*)');
 
 /**
@@ -202,8 +204,8 @@ function compositions_types(){
 }
 
 /**
- * Renvoie la composition qui s'applique à un objet
- * en tenant compte, le cas échéant, de la composition héritée
+ * Renvoie la composition qui s'applique ï¿½ un objet
+ * en tenant compte, le cas ï¿½chï¿½ant, de la composition hï¿½ritï¿½e
  * si etoile=true on renvoi dire le champ sql
  *
  * @param string $type
@@ -243,7 +245,7 @@ function compositions_determiner($type, $id, $serveur='', $etoile = false){
 }
 
 /**
- * Renvoie la composition héritée par un objet selon sa rubrique
+ * Renvoie la composition hï¿½ritï¿½e par un objet selon sa rubrique
  *
  * @param string $type
  * @param integer $id_rubrique
@@ -278,18 +280,18 @@ function compositions_heriter($type, $id_rubrique, $serveur=''){
 
 /**
  * #COMPOSITION
- * Renvoie la composition s'appliquant à un objet
- * en tenant compte, le cas échéant, de l'héritage.
+ * Renvoie la composition s'appliquant ï¿½ un objet
+ * en tenant compte, le cas ï¿½chï¿½ant, de l'hï¿½ritage.
  *
  * Sans precision, l'objet et son identifiant sont pris
- * dans la boucle en cours, mais l'on peut spécifier notre recherche
+ * dans la boucle en cours, mais l'on peut spï¿½cifier notre recherche
  * en passant objet et id_objet en argument de la balise :
  * #COMPOSITION{article, 8}
  *
  * #COMPOSITION* renvoie toujours le champs brut, sans tenir compte de l'heritage
  *
  * @param array $p 	AST au niveau de la balise
- * @return array	AST->code modifié pour calculer le nom de la composition
+ * @return array	AST->code modifiï¿½ pour calculer le nom de la composition
  */
 function balise_COMPOSITION_dist($p) {
 	$_composition = "";
@@ -314,7 +316,7 @@ function balise_COMPOSITION_dist($p) {
 }
 
 /**
- * Indique si la composition d'un objet est verrouillée ou non,
+ * Indique si la composition d'un objet est verrouillï¿½e ou non,
  * auquel cas, seul le webmaster peut la modifier
  *
  * @param string $type
@@ -349,7 +351,7 @@ function compositions_verrouiller($type, $id, $serveur=''){
 }
 
 /**
- * Indique si les objets d'une branche sont verrouillés
+ * Indique si les objets d'une branche sont verrouillï¿½s
  * @param integer $id_rubrique
  * @param string $serveur
  * @return string
