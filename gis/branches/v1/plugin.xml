@@ -46,7 +46,7 @@ This plugin adds two talbes to the database, one named {{spip_gis}} and the othe
 		<inclure>gis_pipeline.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id='cfg' version='[1.10.4;]' />
 	<chemin dir='' />
 </plugin>
