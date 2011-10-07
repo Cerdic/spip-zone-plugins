@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /*
  * Abraham Williams (abraham@abrah.am) http://abrah.am
  *

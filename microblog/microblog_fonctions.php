@@ -8,6 +8,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function generer_url_microblog($id, $entite='article', $args='', $ancre='', $public=true, $type=null){
 	include_spip('inc/filtres_mini');
 	$config = unserialize($GLOBALS['meta']['microblog']);

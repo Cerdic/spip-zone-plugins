@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // vim: foldmethod=marker
 include_spip('inc/json'); #decode&encode
 

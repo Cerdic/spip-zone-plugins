@@ -8,6 +8,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction vérifiant le retour de twitter 
  * Elle met dans la configuration du plugin les tokens 

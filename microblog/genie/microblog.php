@@ -8,6 +8,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 //
 // Alerte sur les articles publies post-dates
 //
