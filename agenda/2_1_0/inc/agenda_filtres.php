@@ -6,6 +6,8 @@
  * Fichier de filtres communs au plugin agenda et PIM_agenda
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Afficher de facon textuelle les dates de debut et fin en fonction des cas
  * - Le lundi 20 fevrier a 18h

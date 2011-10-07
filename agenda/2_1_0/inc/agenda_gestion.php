@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Compat ascendante pour d'autre plugins
  * http://zone.spip.org/trac/spip-zone/changeset/36546

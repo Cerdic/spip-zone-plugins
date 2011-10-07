@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (!defined('_DIR_PLUGIN_BANDO')) {
 	function exec_calendrier(){
 		$mode = _request('mode');

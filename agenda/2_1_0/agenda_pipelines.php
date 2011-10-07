@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function agenda_ajouter_onglets($flux) {
 	if($flux['args']=='calendrier' AND !defined('_DIR_PLUGIN_BANDO')){
 		$flux['data']['agenda']= new Bouton(

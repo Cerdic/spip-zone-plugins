@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function genie_agenda_nettoyer_base_dist($t){
 	# les evenements lies a un article inexistant
 	$res = sql_select("evenements.id_evenement,evenements.id_article","spip_evenements AS evenements

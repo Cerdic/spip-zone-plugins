@@ -5,6 +5,7 @@
  *
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function action_editer_evenement_dist(){
 

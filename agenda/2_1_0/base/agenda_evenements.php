@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function agenda_declarer_tables_interfaces($interface){
 	// 'spip_' dans l'index de $tables_principales
 	$interface['table_des_tables']['evenements']='evenements';

@@ -5,6 +5,9 @@
  *
  *
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/actions');
 include_spip('inc/editer');
 include_spip('inc/autoriser');
