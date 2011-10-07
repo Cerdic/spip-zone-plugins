@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function filtre_test_syndic_article_miroir($id){
 	global $my_sites;
 	if (isset($my_sites[$id]['miroir']) AND $my_sites[$id]['miroir'] == 'oui')
