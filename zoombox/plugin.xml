@@ -1,18 +1,19 @@
 <plugin>
 	<nom>Zoombox</nom>
 	<auteur>
-	[Grafikart->http://www.grafikart.fr] - Mis en plugin par [DevAddict->http://www.devaddict.fr]
+	[Grafikart->http://www.grafikart.fr] - [Mis en plugin par DevAddict->http://www.devaddict.fr]
 	</auteur>
 	<version>1.0</version>
 	<icon>zoombox.png</icon>
 	<etat>stable</etat>
+	<slogan>
+Un effet de zoom sur les images de vos articles
+	</slogan>
 	<description>
-	Ajoute un effet [Zoombox->http://www.grafikart.fr/zoombox] sur les liens de votre choix
-
+	Ajoute un effet [Zoombox->http://www.grafikart.fr/zoombox] sur les liens de votre choix.
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
-_ Il n&#233;cessite le plugin {{jQuery}}
 	</description>
-	<lien>http://www.spip-contrib.net/Zoombox-pour-SPIP</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Zoombox-pour-Spip</lien>
 	<prefix>Zoombox</prefix>
 	<pipeline>
 		<nom>insert_head_css</nom>
@@ -26,7 +27,7 @@ _ Il n&#233;cessite le plugin {{jQuery}}
 	 <nom>insert_js</nom>
 	 <inclure>zoombox_head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0;)" />
+	<necessite id="SPIP" version="[2.0;2.1.99]" />
 	<utilise id='cfg' version='[1.16.0;]' />
 	<categorie>multimedia</categorie>
 </plugin>
