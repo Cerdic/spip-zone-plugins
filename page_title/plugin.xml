@@ -1,25 +1,19 @@
 <plugin>
 	<nom>Page title</nom>
-	<auteur>
-	Fil
-	&#169; 2009-2010 - GNU/GPL
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	dev
-	</etat>
+	<slogan>Ajouter un m&#233;ta title</slogan>
+	<auteur>Fil</auteur>
+	<licence>&#169; 2009-2010 GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>dev</etat>
 	<description>
 	Ajoute un <code><title>...</title></code> aux pages html qui n'en ont pas.
 	</description>
-	<prefix>
-	page_title
-	</prefix>
+	<lien>http://www.spip-contrib.net/Plugin-Page-title</lien>
+	<prefix>page_title</prefix>
 	<pipeline>
 		<nom>affichage_final</nom>
 		<inclure>page_title.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>statistique</categorie>
-	<lien>http://www.spip-contrib.net/Plugin-Page-title</lien>
 </plugin>
