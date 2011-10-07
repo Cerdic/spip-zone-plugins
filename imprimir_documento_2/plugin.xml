@@ -1,33 +1,30 @@
 <plugin>
 	<nom>
-	<multi>[es]Imprimir documento 2[fr]Imprimer document 2</multi>
+		<multi>
+		[es]Imprimir documento
+		[fr]Imprimer document
+		</multi>
 	</nom>
-	<auteur>
-joseluis@digital77.com
-_ CopyLeft - 2006
-	</auteur>
-	<version>
-	0.2
-	</version>
-	<etat>
-	stable
-	</etat>
+	<slogan>
+		<multi>
+		[es]Imprimir art&#237;culos y breves sin cabeceras, ni mens,...
+		[fr]Obtenir une version imprimable des articles et des br&#232;ves...
+		</multi>
+	</slogan>
+	<auteur>joseluis@digital77.com</auteur>
+	<licence>CopyLeft 2006</licence>
+	<version>0.2.0</version>
+	<etat>stable</etat>
 	<description>
-<multi>
-[es]Versi&oacute;n para imprimir art&iacute;culos y breves sin cabeceras, ni mens,...
-_ Para utilizarla coloca la baliza #IMPRIMIR_DOCUMENTO** donde quieras que aparezca el enlace (art&iacute;ulos o breves)
-_ Los dos ** asteriscos son importantes, no los olvides.
-[fr]Plugin pour obtenir une version imprimable des articles et des br&#232;ves...
-_ Pour l'utiliser, il suffit d'ajouter la balise #IMPRIMIR_DOCUMENTO** dans les squelettes sans oublier les deux ast&#233;risques (dans les aricles et br&#232;ves)
-</multi>
+		<multi>
+		[es]Versi&#243;n para imprimir art&#237;culos y breves sin cabeceras, ni mens,... Para utilizarla coloca la baliza <code>#IMPRIMIR_DOCUMENTO**</code> donde quieras que aparezca el enlace (art&#237;ulos o breves). Los dos ** asteriscos son importantes, no los olvides.
+		[fr]Plugin pour obtenir une version imprimable des articles et des br&#232;ves... Pour l'utiliser, il suffit d'ajouter la balise <code>#IMPRIMIR_DOCUMENTO**</code> dans les squelettes sans oublier les deux ast&#233;risques (dans les aricles et br&#232;ves)
+		</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/article1406.html</lien> <!-- URI de documentation -->
-	<fonctions>
-	baliza_imprimir_documento.php
-	</fonctions>
-	<prefix> 
-	imprimir_documento
-	</prefix>
+	<lien>http://www.spip-contrib.net/article1406.html</lien>
+	<icon>imprimir_documento.png</icon>
+	<fonctions>baliza_imprimir_documento.php</fonctions>
+	<prefix>imprimir_documento</prefix>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
 </plugin>
