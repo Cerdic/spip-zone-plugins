@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // Les REGEXP de recherche de l'item de langue (voir le fichier regexp.txt)
 // -- pour les fichiers .html et .php sans detection de _L
 define("_LANGONET_TROUVER_ITEM_HP", ",(?:<:|_[TU]\(['\"])(?:([a-z0-9_]+):)?((?:\\$|[\"\']\s*\.\s*\\$*)?[a-z0-9_]+)((?:{(?:[^\|=>]*=[^\|>]*)})?(?:(?:\|[^>]*)?)(?:['\"]\s*\.\s*[^\s]+)?),iS");

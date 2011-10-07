@@ -1,5 +1,7 @@
 <?php
-/// @file
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Ecriture des fichiers de langue
  * 

@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /// @file
 /**
  * Verification de l'utilisation de la fonction _L() dans le code PHP 

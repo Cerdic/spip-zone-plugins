@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Vérification de l'utilisation des items de langue
  *

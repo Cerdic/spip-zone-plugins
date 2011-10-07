@@ -3,6 +3,8 @@
  *
  */
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+ 
 function action_langonet_telecharger_dist(){
 
 	// Securisation: aucun argument attendu

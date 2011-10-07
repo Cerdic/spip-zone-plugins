@@ -1,17 +1,15 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Creation du tableau des items de langue d'un fichier donne trie par ordre alphabetique
  *
- * @param string $module
- * @param string $langue
- * @param string $ou_langue
+ * @param string $module prefixe du fichier de langue
+ * @param string $langue index du nom de langue
+ * @param string $ou_langue chemin vers le fichier de langue a verifier
  * @return array
  */
-
-// $module       => prefixe du fichier de langue
-// $langue       => index du nom de langue
-// $ou_lang      => chemin vers le fichier de langue a verifier
 function inc_langonet_lister_items($module, $langue, $ou_langue) {
 
 	// Initialisation du tableau des resultats

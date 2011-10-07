@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
  * Recherche d'une chaine dans le texte francais des items de langues de SPIP
  * (ecrire_fr, public_fr et spip_fr)
