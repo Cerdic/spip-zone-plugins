@@ -6,7 +6,7 @@
  * Definitions des fonctions lire_config, ecrire_config et effacer_config. 
  */
 
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // en l'absence du nom de depot (gauche des ::) cette fonction prendra comme suit :
