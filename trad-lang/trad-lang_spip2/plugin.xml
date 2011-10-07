@@ -50,4 +50,5 @@
 	<necessite id="revisions" version="[1.4.1;]" />
 	<necessite id="saisies" version="[1.9.1;]" />
 	<necessite id="crayons" version="[1.9.8;]" />
+	<categorie>outil</categorie>
 </plugin>
