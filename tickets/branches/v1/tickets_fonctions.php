@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Crée la liste des options du select des champs :
  * -* jalon

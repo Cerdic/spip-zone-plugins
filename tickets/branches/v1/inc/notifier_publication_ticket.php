@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function inc_notifier_publication_ticket($id_ticket,$statut_nouveau='',$statut_ancien=''){
 
 	$row = sql_select("*","spip_tickets","id_ticket=$id_ticket");

@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Notification d'un nouveau mesage de forum
  */

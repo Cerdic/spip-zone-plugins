@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Ajout du bouton permettant de se rendre sur la page de gestion des tickets
 function tickets_ajouterBoutons($boutons_admin) {
 	// uniquement si le plugin bandeau n'est pas la (ou SPIP 2.1)

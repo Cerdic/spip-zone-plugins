@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Activer le plugin no_spam sur les tickets
  */
