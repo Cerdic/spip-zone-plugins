@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function licence_declarer_tables_principales($tables_principales){
 	$tables_principales['spip_documents']['field']['id_licence'] = "bigint(21) NOT NULL";

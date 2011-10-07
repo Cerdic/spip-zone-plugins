@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function licence_affiche($id_licence,$logo_non,$lien_non){
 	include_spip('inc/licence');
 	$licence = $GLOBALS['licence_licences'][$id_licence];

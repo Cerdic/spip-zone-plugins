@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function balise_LICENCE_dist ($p){
 	if (($logo = interprete_argument_balise (1, $p))==NULL)
 		$logo = 'oui';

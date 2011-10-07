@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Insertion au centre des pages d'articles dans le privé
  * Affiche un formulaire d'édition de la licence de l'article

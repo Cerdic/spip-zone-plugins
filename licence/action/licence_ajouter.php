@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function action_licence_ajouter_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	if ($id_article = intval($securiser_action())){
