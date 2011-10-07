@@ -1,20 +1,14 @@
 <plugin>
-	<nom>Interface Th&eacute;lia</nom>
+	<nom>Interface Th&#233;lia</nom>
  	<version>1.4.2</version>
 	<prefix>spip_thelia</prefix>
- 	<auteur><br />Arnault Pachot et Gilles Vincent : d&eacute;veloppement<br />Claude Chadoutaud : squelettes pour beeSpip<br />Aur&eacute;lien Dumas : squelettes par d&eacute;faut</auteur>
- 	<description>Plugin permettant d'utiliser les boucles Th&eacute;lia dans vos squelettes <br/>
-	[acc&egrave;s au panneau de configuration du plugin spipTh&eacute;lia->.?exec=cfg&amp;cfg=spip_thelia] 
-	<br/>Distribu&eacute; sous licence GNU/GPL   </description>
-	
-	<lien>http://www.spip-contrib.net/Plugin-Thelia</lien> <!-- URI de documentation -->
+ 	<auteur>Arnault Pachot, Gilles Vincent, Claude Chadoutaud, Aur&#233;lien Dumas, </auteur>
+ 	<description>Plugin permettant d'utiliser les boucles Th&#233;lia dans vos squelettes</description>
+	<licence>GNU/GPL</licence>
+	<lien>http://www.spip-contrib.net/Plugin-Thelia</lien>
  	<etat>stable</etat>
- 	<options> <!-- fichier charge a chaque hit -->
-		spip_thelia_mes_options.php
-	</options>
-	<fonctions>
-		spip_thelia_fonct.php
-	</fonctions>
+ 	<options>spip_thelia_mes_options.php</options>
+	<fonctions>spip_thelia_fonct.php</fonctions>
 	<pipeline>
   		<nom>affichage_final</nom>
   		<action>appeler_moteur_thelia</action>
@@ -50,14 +44,11 @@
   		<action>supprimer_balises_thelia</action>
   		<inclure>spip_thelia_fonct.php</inclure>
 	</pipeline>
-	
+
 	<install>base/spip_thelia_upgrade.php</install>
 	<icon>img_pack/logo_thelia.png</icon>
-	
  	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='SPIP' version='[1.9.0;]' />
+	<necessite id='SPIP' version='[1.9.0;2.1.99]' />
 	<utilise id='Z' version='[1.7.0;]' />
-
 	<categorie>divers</categorie>
-
 </plugin>
