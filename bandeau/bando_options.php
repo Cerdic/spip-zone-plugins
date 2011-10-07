@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 #$GLOBALS['theme_prive_defaut'] = 'basic'; // pour tester un theme
 
 function lister_themes_prives(){
