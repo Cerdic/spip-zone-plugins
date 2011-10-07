@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function palette_insert_head($flux) {
   $cfg = unserialize($GLOBALS['meta']['palette']);
