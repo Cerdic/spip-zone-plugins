@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function SelecteurGenerique_jqueryui_forcer($plugins){
 	if (defined('DESACTIVER_SELECTEUR_GENERIQUE')
 	AND DESACTIVER_SELECTEUR_GENERIQUE)

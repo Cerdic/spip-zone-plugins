@@ -1,4 +1,7 @@
 <?php 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // critere {contenu_auteur_select} , cf. sedna
 function critere_contenu_auteur_select_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];

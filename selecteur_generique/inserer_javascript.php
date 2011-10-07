@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function SelecteurGenerique_inserer_auteur() {
 
 	$ac = generer_url_ecrire('selecteur_generique');
