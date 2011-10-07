@@ -1,6 +1,7 @@
 <plugin>
 	<nom>Balise #TITRE_PARENT</nom>
 	<slogan>Afficher le titre de la rubrique parent</slogan>
+	<auteur>James</auteur>
 	<version>1.0.0</version>
 	<prefix>TitreParent</prefix>
 	<fonctions>titre_parent.php</fonctions>
