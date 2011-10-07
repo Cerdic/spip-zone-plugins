@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Insertion dans le pipeline insert_head
  *
