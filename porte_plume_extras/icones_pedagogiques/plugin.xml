@@ -1,40 +1,28 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Ic&ocirc;nes p&#233;dagogiques  pour SPIP 2 &amp; Porte plume
-	</nom>
-	<auteur><!-- Auteur du plugin -->
-Olivier Gautier &amp; Michel Fraisse
-
-&#169; 2009 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>Ic&ocirc;nes p&#233;dagogiques</nom>
+	<slogan>Des ic&ocirc;nes p&#233;dagogiques pour le Porte Plume</slogan>
+	<auteur>Olivier Gautier, Michel Fraisse</auteur>
+	<licence>&#169; 2009 GNU/GPL</licence>
+	<version>0.1.0</version>
+	<etat>stable</etat>
 	<description>
 Ajoute des boutons au porte plume afin d'ins&#233;rer des ic&ocirc;nes &agrave; orientation p&#233;dagogique ou des smileys.
 
 Les images disponibles sont regroup&#233;es par onglet.
-_ Liste des onglets :
-- Consignes
-- Mat&#233;riel
-- Num&#233;ration : dominos
-- Num&#233;ration : mains
-- Conscience phonologique
-- Supports d'&#233;criture
-- Binettes
+-* Liste des onglets :
+-* Consignes
+-* Mat&#233;riel
+-* Num&#233;ration : dominos
+-* Num&#233;ration : mains
+-* Conscience phonologique
+-* Supports d'&#233;criture
+-* Binettes
 
 Un simple clic sur une ic&ocirc;ne propos&#233;e permet d'ajouter dans le texte de l'article un morceau de code qui sera ensuite interpr&#233;t&#233; par SPIP pour afficher l'image correspondante.
 	</description>
-	<prefix> 
-	iconespedago
-	</prefix>
-	<icon>
-	img_pack/iconespedago.png
-	</icon>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>iconespedago</prefix>
+	<icon>img_pack/iconespedago.png</icon>
+
 	<pipeline>
 		<nom>pre_typo</nom>
 		<inclure>iconespedago.php</inclure>
@@ -48,6 +36,6 @@ Un simple clic sur une ic&ocirc;ne propos&#233;e permet d'ajouter dans le texte 
 		<inclure>iconespedago.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.3;]" />
+	<necessite id="SPIP" version="[2.0.3;2.1.99]" />
 	<necessite id="porte_plume" version="[1.2.2;]" />
 </plugin>
