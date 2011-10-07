@@ -1,34 +1,41 @@
 <plugin>
 	<nom><multi>
-	[fr]Pr&eacute;visualisation pour les articles en cours de r&eacute;daction
+	[fr]Pr&#233;visualisation
+	[ar]&#1593;&#1585;&#1590; &#1605;&#1587;&#1576;&#1602; &#1604;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1601;&#1610; &#1602;&#1610;&#1583; &#1575;&#1604;&#1578;&#1581;&#1585;&#1610;&#1585;
+	[en]Show preview
+	[es]Previsualizar
+	[de]Vorschau
+	</muli></nom>
+	<slogan><multi>
+	[fr]Pr&#233;visualisation pour les articles en cours de r&#233;daction
 	[ar]&#1593;&#1585;&#1590; &#1605;&#1587;&#1576;&#1602; &#1604;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1601;&#1610; &#1602;&#1610;&#1583; &#1575;&#1604;&#1578;&#1581;&#1585;&#1610;&#1585;
 	[en]Show preview for articles editing in progress
 	[es]Previsualizar los art&#237;culos en curso de redacci&#243;n
 	[de]Vorschau anzeigen f&#252;r Artikel in Bearbeitung
-	</muli></nom>
-	<auteur>[Cedric Morin->http://www.yterium.net] &amp; superyms--(traduction)</auteur>
-	<version>1.0</version>
+	</muli></slogan>
+	<auteur>[C&#233;dric Morin->http://www.yterium.net], superyms (traduction)</auteur>
+	<version>1.0.0</version>
 	<etat>stable</etat>
 	<icon>previsu_redaction.png</icon>
-	<licence>GPL 3 - &copy; 2008</licence>
+	<licence>GPL 3 (c) 2008</licence>
 	<description><multi>
-	[fr]Activer la pr&eacute;visualisation pour les articles en cours de r&eacute;daction
+	[fr]Ce plugin permet d&#8217;activer la pr&#233;visualisation des articles &#171; en cours de r&#233;daction &#187; et non plus seulement ceux &#171; propos&#233; &#224; l&#8217;&#233;valuation &#187;.
 	[ar]&#1573;&#1588;&#1593;&#1575;&#1604; &#1575;&#1604;&#1593;&#1585;&#1590; &#1575;&#1604;&#1605;&#1587;&#1576;&#1602; &#1604;&#1604;&#1605;&#1602;&#1575;&#1604;&#1575;&#1578; &#1601;&#1610; &#1602;&#1610;&#1583; &#1575;&#1604;&#1578;&#1581;&#1585;&#1610;&#1585;
-	[en]Activate show preview for articles editing in progress
+	[en]This plugin enables show preview for articles "editing in progress" and not just those "proposed for evaluation".
 	[es]Activar previsualizar de los art&#237;culos en curso de redacci&#243;n
 	[de]Aktivieren vorschau anzeigen f&#252;r Artikel in Bearbeitung
 	</multi></description>
-	<lien></lien>
+	<lien>http://www.spip-contrib.net/Previsualiser-en-cours-de</lien>
 	<prefix>previsu_redac</prefix>	
-  <icon></icon>
-  <pipeline>
-  	<nom>pre_boucle</nom>
-  	<inclure>previsu_redac_pipelines.php</inclure>
-  </pipeline>
-  <pipeline>
-  	<nom>boite_infos</nom>
-  	<inclure>previsu_redac_pipelines.php</inclure>
-  </pipeline>
+   <icon>previsu_redaction.png</icon>
+   <pipeline>
+		<nom>pre_boucle</nom>
+		<inclure>previsu_redac_pipelines.php</inclure>
+   </pipeline>
+   <pipeline>
+		<nom>boite_infos</nom>
+		<inclure>previsu_redac_pipelines.php</inclure>
+   </pipeline>
 	<categorie>edition</categorie>
-	<necessite id='SPIP' version='[2.0.0;]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 </plugin>
