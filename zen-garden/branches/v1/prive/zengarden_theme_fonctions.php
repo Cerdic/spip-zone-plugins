@@ -5,6 +5,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/zengarden');
 include_spip('inc/headers');
 /**

@@ -5,6 +5,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (!defined('_DIR_PLUGIN_THEME')){
 	if (!defined('_DIR_THEMES'))
 		define('_DIR_THEMES',_DIR_RACINE."themes/");

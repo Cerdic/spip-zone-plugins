@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // http://doc.spip.org/@plugin_verifie_conformite
 function plugins_verifie_conformite_dist($plug, &$arbre, $dir_plugins = _DIR_PLUGINS){

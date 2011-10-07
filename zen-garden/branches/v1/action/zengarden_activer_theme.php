@@ -5,6 +5,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function action_zengarden_activer_theme_dist(){
 	$securiser_action = charger_fonction('securiser_action','inc');
 	$arg = $securiser_action();

@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // lecture du fichier de configuration d'un plugin
 // http://doc.spip.org/@plugin_get_infos
