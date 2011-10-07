@@ -13,7 +13,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 // T
-	'tradlang_description' => 'Un plugin pour gérer directement les fichiers de langues depuis SPIP.',
-	'tradlang_slogan' => 'Gérer les fichiers de langue',
+	'tradlang_description' => 'A plugin to manage the language files directly from SPIP.',
+	'tradlang_slogan' => 'Manage the language files',
 );
 ?>
