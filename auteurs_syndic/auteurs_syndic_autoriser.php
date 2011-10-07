@@ -5,6 +5,8 @@
  * Les autorisations
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function auteurs_syndic_autoriser(){}
 
 /**
