@@ -1,8 +1,9 @@
 <plugin>
 	<nom>Acronymes</nom>
+	<slogan>D&#233;tection et ajout de d&#233;finitions d'acronymes</slogan>
 	<icon>img_pack/acronym-24.png</icon>
 	<auteur>Cedric MORIN</auteur>
-	<licence>GPL - (c) 2006</licence>
+	<licence>GPL (c) 2006</licence>
 	<version>0.13.0</version>
 	<version_base>0.1</version_base>
 	<install>base/acronymes_upgrade.php</install>
@@ -17,7 +18,7 @@
 
 	Une page de test boucle sur l'ensemble des articles du site et rep&#232;re tout ce qui ressemble de pr&#232;s ou de loin a un accronyme. Elle permet de v&#233;rifier la compl&#232;tude de votre base.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
+	<lien></lien>
 	<prefix>acronymes</prefix>
 	<fonctions>acronymes_filtres.php</fonctions>
 	<pipeline>
@@ -39,7 +40,7 @@
 		<action>config</action>
 		<inclure>acronymes_config.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;2.1.99)" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<necessite id="forms" version="[0.4.1;]" />
 	<chemin dir='' />
 	<categorie>edition</categorie>
