@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // pour ne pas interferer avec d'eventuelles futures fonctions du core
 // on met le tout dans un namespace ; les fonctions sont autonomes.
 

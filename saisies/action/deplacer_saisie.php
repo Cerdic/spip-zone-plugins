@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function action_deplacer_saisie_dist() {
 	
 	$session 	 = _request('session');
