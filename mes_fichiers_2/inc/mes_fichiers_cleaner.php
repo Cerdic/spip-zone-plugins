@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * La fonction de suppression des fichiers obsolètes
  * Retourne un array() $liste des fichiers supprimés

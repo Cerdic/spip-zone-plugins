@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function notifications_mes_fichiers_cleaner_dist($quoi, $id, $options){
 	$cfg = lire_config('mes_fichiers');
