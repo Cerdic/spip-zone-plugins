@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Limiter la longueur des messages
 if(function_exists('lire_config')){
 	define('_FORUM_LONGUEUR_MINI', lire_config('comments/forum_longueur_mini',10));

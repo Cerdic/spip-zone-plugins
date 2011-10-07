@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/filtres');
 if (!function_exists('barre_typo')){
 	function barre_typo(){return '';}
