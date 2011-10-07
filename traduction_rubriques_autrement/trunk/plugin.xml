@@ -1,7 +1,8 @@
 <plugin>
-	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducción de secciones repensada[de]Rubrikenübersetzung mal Anders</multi></nom>
+	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducci&#243;n de secciones repensada[de]Rubriken&#252;bersetzung mal Anders</multi></nom>
+	<slogan>Naviguer entre les rubriques traduites</slogan>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>0.1.1</version>
+	<version>0.2.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>[fr]Ce plugin, d&eacute;stin&eacute; pour les sites mutlilingue avec [un secteur par langue->http://www.spip-contrib.net/Un-exemple-de-site-multilingue], vous offre une approche similaire au niveau de la navigation et de la gestion de traductions des rubriques &agrave; celle du plugin [Traduction articles autrement->http://files.spip.org/spip-zone/traduction_articles_autrement.zip] dont l'installation est recommand&eacute;. Comme spip ne propose pas nativement la traduction des rubriques l'installation du plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip] est n&eacute;cessaire.</multi>	
@@ -32,7 +33,7 @@
 	</pipeline>		
 	<fonctions>trad_rub_fonctions.php</fonctions>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.14;]" />
 	<necessite id="tradrub" version="[2.1.0;]" />	
 	<necessite id="saisies" version="[1.8.12;]" />		

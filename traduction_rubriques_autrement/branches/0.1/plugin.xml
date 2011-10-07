@@ -1,10 +1,13 @@
 <plugin>
-	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducción de secciones repensada[de]Rubrikenübersetzung mal Anders</multi></nom>
+	<nom><multi>[fr]Traductions de rubriques autrement[en]Section translations differently[es]Traducci&#243;n de secciones repensada[de]Rubriken&#252;bersetzung mal Anders</multi></nom>
+	<slogan>Naviguer entre les rubriques traduites</slogan>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
 	<version>0.1.1</version>
 	<etat>stable</etat>
 	<description>
-		<multi>[fr]Ce plugin, d&eacute;stin&eacute; pour les sites mutlilingue avec [un secteur par langue->http://www.spip-contrib.net/Un-exemple-de-site-multilingue], vous offre une approche similaire au niveau de la navigation et de la gestion de traductions des rubriques &agrave; celle du plugin [Traduction articles autrement->http://files.spip.org/spip-zone/traduction_articles_autrement.zip] dont l'installation est recommand&eacute;. Comme spip ne propose pas nativement la traduction des rubriques l'installation du plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip] est n&eacute;cessaire.</multi>	
+		<multi>
+		[fr]Ce plugin, d&#233;stin&#233; pour les sites mutlilingue avec [un secteur par langue->http://www.spip-contrib.net/Un-exemple-de-site-multilingue], vous offre une approche similaire au niveau de la navigation et de la gestion de traductions des rubriques &#224; celle du plugin [Traduction articles autrement->http://files.spip.org/spip-zone/traduction_articles_autrement.zip] dont l'installation est recommand&#233;. Comme spip ne propose pas nativement la traduction des rubriques l'installation du plugin [Traduction entre rubrique->http://files.spip.org/spip-zone/tradrub.zip] est n&#233;cessaire.
+		</multi>	
 	</description>
 	<lien>http://www.spip-contrib.net/Traduction-de-rubriques-autrement</lien>
 	<licence>GPL 3</licence>
