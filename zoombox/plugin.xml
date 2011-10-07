@@ -27,6 +27,6 @@ _ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
 	 <inclure>head.php</inclure>
 	</pipeline>
 	<necessite id="SPIP" version="[1.9.0;]" />
-	<necessite id='cfg' version='[1.16.0;]' />
+	<utilise id='cfg' version='[1.16.0;]' />
 	<categorie>multimedia</categorie>
 </plugin>
