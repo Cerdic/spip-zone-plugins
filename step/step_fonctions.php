@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!function_exists('img_absolue')){
 function img_absolue($img){

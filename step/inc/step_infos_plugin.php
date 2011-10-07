@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // Fonctions analysant les fichiers plugin.xml et archives.xml en decoulant
 // Il faudrait aussi admettre les fichiers paquet.xml de la 2.2
 

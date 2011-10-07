@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (!defined('_DIR_LIB')) define('_DIR_LIB', _DIR_RACINE . 'lib/');
 
 // pour tests, le chemin vers les plugins est _DIR_PLUGIN2

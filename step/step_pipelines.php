@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Insertion dans le pipeline rechercher_liste_des_champs
  * 

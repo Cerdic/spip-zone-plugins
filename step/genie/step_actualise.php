@@ -1,5 +1,7 @@
 <?php 
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction appelée par le génie de SPIP à intervalle régulier
  * Actualise la liste des plugins disponibles automatiquement

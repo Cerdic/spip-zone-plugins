@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // l'actionneur calcule l'ordre des actions
 // et permet de les stocker et de les effectuer.
 

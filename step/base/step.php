@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // TODO : mettre les keys
 
 function step_declarer_tables_interfaces($interface){
