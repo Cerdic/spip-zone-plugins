@@ -1,20 +1,17 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>[it]Equazioni
-	[fr]Barre Equation
-	[en]Equation Bar
-	</multi>
+	<nom>
+		<multi>
+		[it]Equazioni
+		[fr]Barre d'&#233;quation
+		[en]Equation Bar
+		</multi>
 	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 	mmmxvvv@tiscali.it
-_ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.02
-	</version>
-	<etat>
-	test
-	</etat>
+	<slogan>Ecrire des &#233;quations avec la Barre Typographique V2</slogan>
+	<auteur>mmmxvvv@tiscali.it</auteur>
+	<licence>&#169; 2007-2008 GNU/GPL</licence>
+	<version>0.2.0</version>
+	<etat>test</etat>
+	<lien>http://www.spip-contrib.net/Plugin-SPIP-Equation,2988</lien>
 	<description>
 	<multi>
 	[it]
@@ -37,13 +34,8 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 	Activer le plugin {Barre Typographique V2} et ensuite ce plugin. Dans la barre typographique appara&#238;tra alors un bouton pour ouvrir la barre des formules math&#233;matiques.
 	</multi>
 	</description>
-	<prefix> 
-	TypoEquation
-	</prefix>
-	<icon>
-	img_pack/eqeuler.jpg
-	</icon>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>TypoEquation</prefix>
+	<icon>img_pack/eqeuler.jpg</icon>
 	<pipeline>
 		<nom>bt_toolbox</nom>
 		<inclure>barre_equation.php</inclure>
@@ -53,10 +45,7 @@ _ &#169; 2007 - 2008 - Distribue sous licence GNU/GPL
 		<inclure>barre_equation.php</inclure>
 	</pipeline>
 
-
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
-
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<necessite id="BarreTypoEnrichie" version="[2.5.3;]" />
 	<categorie>edition</categorie>
 </plugin>
