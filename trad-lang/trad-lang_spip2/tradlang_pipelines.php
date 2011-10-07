@@ -7,6 +7,7 @@
  * 
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Insertion dans le pipeline declarer_tables_objets_surnoms (base/connect_sql.php)

@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction de revision d'une chaine de langue
  * Utile particulièrement pour les crayons
