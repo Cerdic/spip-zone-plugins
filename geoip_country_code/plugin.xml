@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
 
 	<!--  
@@ -17,19 +16,16 @@
 	
 	 -->
 	 	
-	<nom>Localisation du pays visiteur</nom>
-	<auteur>
-		[Christian Paulus->http://www.quesaco.org]
-	</auteur>
+	<nom>Localisation du pays du visiteur</nom>
+	<slogan>Afficher le code pays du visiteur</slogan>
+	<auteur>[Christian Paulus->http://www.quesaco.org]</auteur>
 
 	<description>
-		Code pays du visiteur via les services [MaxMind->http://www.maxmind.com/]<br />
-		Placez la balise #GEOIP_COUNTRY_CODE dans votre squelette pour voir apparaitre 
-		le code pays du visiteur. 
+	Ce plugin met &#224; disposition des webma&#238;tres une balise SPIP pour leurs squelettes. Cette balise <code>#GEOIP_COUNTRY_CODE</code> ins&#232;re &#224; la compilation le code pays du visiteur via les services [MaxMind->http://www.maxmind.com/]
 	</description>
 	<lien>http://www.quesaco.org/Localiser-le-pays-du-visiteur</lien>
 	
-	<version>1.00.00</version>
+	<version>1.0.0</version>
 	<etat>stable</etat>
 	
 	<icon>images/geoipcc-64.png</icon>
@@ -44,5 +40,6 @@
 		<nom>ajouter_boutons</nom>
 		<inclure>inc/geoipcc_pipelines.php</inclure>
 	</pipeline>
+   <necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<categorie>statistique</categorie>
 </plugin>
