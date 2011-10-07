@@ -10,7 +10,7 @@
 	Ajoute un effet [Zoombox->http://www.grafikart.fr/zoombox] sur les liens de votre choix
 
 _ Ce plugin fonctionne sur les squelettes disposant de la balise <code>#INSERT_HEAD</code>
-_ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
+_ Il n&#233;cessite le plugin {{jQuery}}
 	</description>
 	<lien>http://www.spip-contrib.net/Zoombox-pour-SPIP</lien>
 	<prefix>Zoombox</prefix>
@@ -26,7 +26,7 @@ _ Il n&#233;cessite le plugin {{jQuery}} pour les versions de SPIP &lt; 1.9.2
 	 <nom>insert_js</nom>
 	 <inclure>zoombox_head.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0;)" />
 	<utilise id='cfg' version='[1.16.0;]' />
 	<categorie>multimedia</categorie>
 </plugin>
