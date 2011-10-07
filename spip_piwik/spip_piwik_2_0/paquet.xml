@@ -1,0 +1,28 @@
+<paquet
+	prefix="piwik"
+	categorie="statistique"
+	version="0.4.6"
+	etat="stable"
+	compatibilite="[2.0.8;3.0.99]"
+	logo="piwik.png"
+	schema="0.1"
+	documentation="http://www.spip-contrib.net/?article2860"
+>	
+
+	<nom>Piwik</nom>
+	<!-- Interfacer Spip et Piwik -->
+
+	<auteur>jsb</auteur>
+	<auteur>kent1</auteur>
+
+	<licence lien="http://www.gnu.org/licenses/gpl-3.0.html">GNU/GPL</licence>
+
+	<traduire module="piwik" reference="fr" gestionnaire="salvatore" />
+
+	<pipeline nom="insert_head" inclure="piwik_pipelines.php" />
+	<pipeline nom="header_prive" inclure="piwik_pipelines.php" />
+
+	<necessite nom="cfg" compatibilite="[1.13.0;[" />
+	<necessite nom="saisies" compatibilite="[1.1;[" />
+	<necessite nom="spip_bonux" compatibilite="[1.8;[" />
+</paquet>
