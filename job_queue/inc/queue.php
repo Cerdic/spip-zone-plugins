@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 @define('_JQ_SCHEDULED',1);
 @define('_JQ_PENDING',0);
 

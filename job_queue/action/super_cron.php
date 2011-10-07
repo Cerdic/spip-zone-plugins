@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Url pour lancer le cron de manière asynchrone si le serveur
  * le permet
