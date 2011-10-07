@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function nospam_hash_env() {
 	static $res ='';
 	if ($res) return $res;

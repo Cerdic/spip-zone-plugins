@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Lister les formulaires a prendre en charge contre le SPAM
  * pour verifier le nobot et le jeton sur un formulaire, l'ajouter a cette liste
