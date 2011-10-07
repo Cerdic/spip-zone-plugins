@@ -1,18 +1,26 @@
 <plugin>
-	<nom><multi>[fr]Articles en édition directe[en]Edition mode for articles[es]Editar artículos directamente[de]Redaktion Modus für Artikel</multi></nom>
+	<nom>
+		<multi>
+		[fr]Articles en &#233;dition directe
+		[en]Edition mode for articles
+		[es]Editar art&#237;culos directamente
+		[de]Redaktion Modus f&#252;r Artikel
+		</multi>
+	</nom>
+	<slogan>
+		<multi>
+		[fr]Afficher le champs d'&#233;dition de l'article au lieu de sa pr&#233;visualisation.
+		[en]Makes the editing  posssible directly from the articles page in the backoffice.
+		[es]Permite editar directamente el art&#237;culo en el epacio privado 
+		[de]Erm&#246;glicht es den Artikel im Backoffice direkt auf der Artikel Seite zu bearbeiten.
+		</multi>	
+	</slogan>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
 	<version>0.1.1</version>
 	<etat>test</etat>
 	<description>
 		<multi>
-		[fr]
-			Afficher le champs d'édition de l'article au lieu de sa prévisualisation.
-		[en]
-			Makes the editing  posssible directly from the articles page in the backoffice.
-		[es] 
-			Permite editar directamente el artículo en el epacio privado 
-		[de] 
-			Ermöglicht es den Artikel im Backoffice direkt auf der Artikel Seite zu bearbeiten.
+		[fr]Ce plugin rend l'article directement &#233;ditable depuis la page article dans l'espace priv&#233;, plus besoin donc d'appuyer sur le bouton modifier cet article. Toutes les manipulations de l'article (modifications, ajouter des mots cl&#233;s, auteurs,...) peuvent se faire depuis une seule page.
 		</multi>	
 	</description>
 	<lien>http://www.spip-contrib.net/Articles-en-edition-directe</lien>
@@ -30,7 +38,7 @@
 	<pipeline>
 		<nom>affiche_gauche</nom>
 		<inclure>aed_pipelines.php</inclure>
-        </pipeline>	
+   </pipeline>	
 	<categorie>edition</categorie>
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="medias" version='[1.6.1;]'/>	
