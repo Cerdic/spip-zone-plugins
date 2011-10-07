@@ -1,45 +1,30 @@
 <plugin>
-    <nom> <!-- Nom du plugin -->
-    <multi>
-    [fr]Article PDF
-    [de]PDF Artikel
-    </multi>
-    </nom>
-    <auteur>    <!-- Auteur du plugin -->
-[chag->http://www.spip-contrib.net/_chag_]
-_ [Paul Sanches->http://www.spip-contrib.net/_Paul-Sanches_]
-_ [Aquinatus->http://www.spip-contrib.net/_Aquinatus_]
-_ [C&#233;dric Morin->http://www.notre-ville.net]
-    </auteur>
-    <version>
-    0.4.5
-    </version>
-    <etat>
-    stable
-    </etat>
-    <description>
-    <multi>
-    [fr]Conversion d'un article au format pdf pour t&#233;l&#233;chargement
-_ N&#233;cessite GD2 sur votre serveur et le telechargement et installation de la librairie FPDF dans le r&eacute;pertoire lib
-_ Inserez la balise #ARTICLE_PDF dans votre squelette pour avoir un lien de t&#233;l&#233;chargement de l'article au format PDF
-    [de]Konvertierung eines Artikels in das PDF Format zum herunterladen
-_ Ben&ouml;tigt GD2 auf Ihrem Server
-_ F&uuml;gen Sie den Tag #ARTICLE_PDF in Ihr Skelett ein um &#252;ber einen Link zum Herunterladen des Artikels im PDF Format zu verf&uuml;gen
-    </multi>
-    </description>
-    <lien>http://www.spip-contrib.net/article2226.html</lien> <!-- URI de documentation -->
+	<nom>
+		<multi>
+		[fr]Article PDF
+		[de]PDF Artikel
+		</multi>
+	</nom>
+	<slogan>Convertir l'article affich&#233; au format pdf</slogan>
+	<auteur>[chag->http://www.spip-contrib.net/_chag_], [Paul Sanches->http://www.spip-contrib.net/_Paul-Sanches_], [Aquinatus->http://www.spip-contrib.net/_Aquinatus_], [C&#233;dric Morin->http://www.notre-ville.net]</auteur>
+	<version>0.4.5</version>
+	<etat>stable</etat>
+	<description>
+		<multi>
+		[fr]Conversion d'un article au format pdf pour t&#233;l&#233;chargement. N&#233;cessite GD2 sur votre serveur et le t&#233;l&#233;chargement et installation de la librairie FPDF dans le r&#233;pertoire lib
+
+Inserez la balise <code>#ARTICLE_PDF</code> dans votre squelette pour avoir un lien de t&#233;l&#233;chargement de l'article au format PDF
+		[de]Konvertierung eines Artikels in das PDF Format zum herunterladen. Ben&#246;tigt GD2 auf Ihrem Server
+
+F&#252;gen Sie den Tag <code>#ARTICLE_PDF</code> in Ihr Skelett ein um &#252;ber einen Link zum Herunterladen des Artikels im PDF Format zu verf&#252;gen
+		</multi>
+	</description>
+	<lien>http://www.spip-contrib.net/article2226.html</lien>
 	<icon>prive/themes/spip/images/article_pdf-64.png</icon>
-    <options> <!-- fichier charge a chaque hit -->
-    article_pdf_mes_options.php
-    </options>
-    <fonctions> <!-- fichier charge a chaque recalcul -->
-    article_pdf_mes_fonctions.php
-    </fonctions>
-    <prefix> 
-    article_pdf
-    </prefix>
-    <categorie>edition</categorie>
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<options>article_pdf_mes_options.php</options>
+	<fonctions>article_pdf_mes_fonctions.php</fonctions>
+	<prefix>article_pdf</prefix>
+	<categorie>edition</categorie>
+	<necessite id="SPIP" version='[2.0.0;3.0.99]' />
 	<necessite id="lib:h5c1accba-fpdf17" src="http://www.fpdf.org/fr/download/fpdf17.zip" />
-	
 </plugin>
