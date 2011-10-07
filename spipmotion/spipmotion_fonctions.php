@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Transforme un type de codec donné par la config de ffmpeg
  * (ffmpec -codecs) en chaine de caractère lisible

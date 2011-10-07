@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Insertion dans le pipeline editer_contenu_objet
  *

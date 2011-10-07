@@ -9,6 +9,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Fonction de récupération de vignette depuis un document video

@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Récupération des informations techniques du document audio ou video
  * @param int $id_document

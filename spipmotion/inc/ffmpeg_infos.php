@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function inc_ffmpeg_infos_dist($forcer=false){
 	$infos_codecs = ffmpeg_recuperer_infos_codecs($forcer);
 	return $infos_codecs;

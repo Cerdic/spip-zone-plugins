@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Récupération des métadonnées via MediaInfo
  * @param string $chemin

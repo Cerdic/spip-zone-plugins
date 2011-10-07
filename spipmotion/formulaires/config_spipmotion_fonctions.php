@@ -11,6 +11,8 @@
  * Fonctions spécifiques au squelette config_spipmotion.html
  **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction de verification du formulaire de configuration CFG 
  */

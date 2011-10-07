@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if(!defined('_DIR_LIB_FLOT')){
 	define('_DIR_LIB_FLOT','lib/flot');
 }

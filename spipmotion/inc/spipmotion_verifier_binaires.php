@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * Fonction de vérification que les binaires utilisés soient correctement installés
  * et exécutables ainsi que quelques éléments de configuration de PHP :
