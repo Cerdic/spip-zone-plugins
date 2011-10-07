@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('mediabox_pipelines');
 
 function box_lister_skins(){

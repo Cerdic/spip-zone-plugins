@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function mediabox_config($public=null){
 	include_spip("inc/filtres");
 	$config = @unserialize($GLOBALS['meta']['mediabox']);
