@@ -850,7 +850,7 @@ jQuery.geoportail =
 					box.info = 0;
 				break;
 				/* */
-				case 'mini': box.info = box.tools = box.layer = 0;				
+				case 'mini': box.info = box.tools = box.layer = '0';				
 				default: 
 					map.addGeoportalLayers(); 
 					// Affichage des des couches ORTHO et CARTO
