@@ -1,34 +1,15 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <plugin>
-
-	<!--  
-
-	// mon_diplome plugin.xml
-
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-	
-	 -->
-	 	
 	<nom>Mon dipl&#244;me</nom>
-	<auteur>
-		[Christian Paulus->cpaulus@quesaco.org]
-		<br />avec l'aide de :
-		<ul>
-			<li><em>html2pdf</em> de Laurent Minguet</li>
-			<li><em>fpdf</em> d'Olivier Plathey</li>
-		</ul>
-	</auteur>
-
+	<auteur>[Christian Paulus->cpaulus@quesaco.org], html2pdf de Laurent Minguet, fpdf d'Olivier Plathey</auteur>
+	<slogan>G&#233;n&#233;ration de dipl&#244;me en ligne</slogan>
 	<description>
-		Balise SPIP de g&#233;n&#233;ration de dipl&#244;me en ligne.
+Ce plugin propose une balise SPIP de g&#233;n&#233;ration de dipl&#244;me en ligne.
 	</description>
 	
 	<!-- documentation -->
 	<lien>http://www.quesaco.org/Mon-diplome-SPIP</lien>
 	
-	<version>1.01.00</version>
+	<version>1.1.0</version>
 	<etat>stable</etat>
 	<icon>images/mon_diplome-64.png</icon>
 	
@@ -38,6 +19,5 @@
 	<options>mon_diplome_options.php</options>
 	
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.2;]" />
-	
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 </plugin>
