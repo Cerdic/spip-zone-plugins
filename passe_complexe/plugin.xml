@@ -3,14 +3,14 @@
 	<nom><multi>[fr]Mots de Passe Complexes[en]Strong Passwords</multi></nom>
 	<slogan>
 		<multi>
-		[fr]V&#233;rifier la complexit&#233; des mots de passes
+		[fr]V&#233;rifier la complexit&#233; des mots de passe
 		[en]Test the strength of passwords
 		</multi>
 	</slogan>
 	<description>
 		<multi>
-		[fr]Ce plugin ajoute un testeur de complexité de mot de passes dans les formulaires de choix de mot de passe de SPIP (adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/]).
-		[en]This plugin adds a test of the strength of passwords in the forms of password's choice (Adaptation of [->http://dev.digitalspaghetti.me.uk/password/]).
+		[fr]Ce plugin ajoute un testeur de complexit&#233;dans les formulaires de choix de mot de passe de SPIP (adaptation du script de [->http://dev.digitalspaghetti.me.uk/password/]).
+		[en]This plugin adds a test of the strength in the forms of password's choice (Adaptation of [->http://dev.digitalspaghetti.me.uk/password/]).
 		</multi>
 	</description>
 	<etat>test</etat>
