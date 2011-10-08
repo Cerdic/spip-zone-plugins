@@ -132,7 +132,7 @@ function normaliser_auteur_licence($texte, $balise) {
 		// On detecte d'abord si le bloc texte en cours contient un eventuel copyright
 		// -- cela generera une balise copyright et non auteur
 		$copy = '';
-		if (preg_match('/(?:\&#169;|©|copyright|\(c\)|&copy;)[\s:]*([\d-]+)/i', $v, $r)) {
+		if (preg_match('/(?:\&#169;|¬©|copyright|\(c\)|&copy;)[\s:]*([\d-]+)/i', $v, $r)) {
 			$copy = trim($r[1]);
 			$v = str_replace($r[0], '', $v);
 			$res['copyright'][] = $copy;
@@ -143,17 +143,21 @@ function normaliser_auteur_licence($texte, $balise) {
 		// -- soit sous la forme d'un raccourci SPIP
 		// Dans les deux cas on garde preferentiellement le contenu de l'ancre ou du raccourci
 		// si il existe
+		$href = $mail = '';
 		if (preg_match('@<a[^>]*href=(\W)(.*?)\1[^>]*>(.*?)</a>@', $v, $r)) {
 			$href = $r[2];
 			$v = str_replace($r[0], $r[3], $v);
 		} elseif (preg_match(_RACCOURCI_LIEN,$v, $r)) {
-			$href = $r[4];
+			if (preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $r[4], $m))
+				$mail = $r[4];
+			else
+				$href = $r[4];
 			$v = ($r[1]) ? $r[1] : str_replace($r[0], '', $v);
 		} else 
 			$href = '';
 		
 		// On detecte ensuite un mail eventuel
-		if (preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $v, $r)) {
+		if (!$mail AND preg_match('/([^\w\d._-]*)(([\w\d._-]+)@([\w\d.-]+))/', $v, $r)) {
 			$mail = $r[2];
 			$v = str_replace($r[2], '', $v);
 			if (!$v) {
@@ -163,8 +167,7 @@ function normaliser_auteur_licence($texte, $balise) {
 				else
 					$v = ucfirst($r[3]);
 			}
-		} else 
-			$mail = '';
+		}
 		
 		// On detecte aussi si le bloc texte en cours contient une eventuelle licence
 		// -- cela generera une balise licence et non auteur
