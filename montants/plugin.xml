@@ -5,8 +5,8 @@
 	<version>0.4.4</version>
 	<version_base>0.2</version_base>
 	<etat>test</etat>
-    <slogan>Définir un prix par d&#233;faut</slogan>
-	<description>Ce plugin -grace au pipeline_prix- permet d'avoir un prix par defaut pour tout objet SPIP:
+    <slogan>D&#233;finir un prix par d&#233;faut</slogan>
+	<description>Ce plugin -grace au pipeline_prix- permet d'avoir un prix par d&#233;faut pour tout objet SPIP:
 	article, mot, document, rubrique... ou autre. On peut configurer la liste des identifiants ou du parent de la branche.
 	L'objet contient un champ prix que l'on affiche avec extra-xx prix_defaut.
 	</description>
