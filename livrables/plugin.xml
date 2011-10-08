@@ -12,7 +12,7 @@
 	<slogan>Gestion de l'objet Livrable d'un projet</slogan>
     <description>
     	<multi>
-    		[fr]Ce plugin crée un objet de type "livrable" en tant que partie d'un projet web. Un livrable est essentiellement une page web.
+    		[fr]Ce plugin cr&#233;e un objet de type &#171;livrable&#187; en tant que partie d'un projet web. Un livrable est la plupart du temps une page web.
 		</multi>
 	</description>
 	<prefix>livrables</prefix>
