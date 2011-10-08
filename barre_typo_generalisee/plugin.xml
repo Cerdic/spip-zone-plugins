@@ -29,5 +29,5 @@
 	</pipeline>barre_typo_generalisee</prefix>
 
 	<necessite id="CFG" version="[1.0;]" />
-	<necessite id='spip' version='[1.9.2;1.9.2]' />
+	<necessite id="spip" version="[1.9.2;1.9.2]" />
 </plugin>
