@@ -12,8 +12,8 @@
 	<etat>stable</etat>
 	<description>
 		<multi>
-		[fr]Ce plugin active la barre typographique de Spip sur toutes les zones de textes (rubriques, sites, mots clefs, etc.)
-		[de]Dieses Plugin aktiviert die typografische Toolbar von Spip auf alle Textbereiche (Rubriken, Webseiten, Schlagw&#246;rter, etc.)
+		[fr]Ce plugin active la barre typographique de SPIP sur toutes les zones de textes (rubriques, sites, mots clefs, etc.)
+		[de]Dieses Plugin aktiviert die typografische Toolbar von SPIP auf alle Textbereiche (Rubriken, Webseiten, Schlagw&#246;rter, etc.)
 		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Barre-typographique-generalisee,15</lien>
