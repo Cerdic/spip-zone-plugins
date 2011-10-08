@@ -8,17 +8,17 @@
 	<categorie>outil</categorie>
 
 	<slogan>
-		Faciliter la mise en production de sites lourds.
+		Faciliter la mise en production de sites lourds
 	</slogan>
 
 	<description>
-		Ce plugin est destin&#233; &#224; facilter la mise en production de gros sites SPIP. Il peremet aux webmestres de savoir quel est le type de page (type=page ou type=objet &#233;ditorial) et quelle est la composition de chaque page du site. En conjonction avec les plugins "ticketskiss" ou "tickets" le plugin preprod permet de poster un ticket directement depuis une page publique sans passer par l'interface priv&#233;e (&#233;vite ainsi d'avoir &#224; saisir l'url). Si les plugins "livrables" et "projets" sont actif, le plugin preprod permet de s&#233;lectionner le livrable auquel se rapporte le ticket.
+		Ce plugin est destin&#233; &#224; facilter la mise en production de gros sites SPIP. Il permet aux webmestres de savoir quel est le type de page (type=page ou type=objet &#233;ditorial) et quelle est la composition de chaque page du site. En conjonction avec les plugins &#171;Tickets Kiss&#187; ou &#171;Tickets&#187 le plugin preprod permet de poster un ticket directement depuis une page publique sans passer par l'interface priv&#233;e (&#233;vite ainsi d'avoir &#224; saisir l'url). Si les plugins "livrables" et "projets" sont actif, le plugin preprod permet de s&#233;lectionner le livrable auquel se rapporte le ticket.
 	</description>
 
 	<etat>test</etat>
 
  	<auteur>
-	[Cyril Marion / Ateliers CYM->http://www.cym.fr]
+	Cyril Marion, [Ateliers CYM->http://www.cym.fr]
  	</auteur>
 
 	<icon>images/ateliers_cym-24.gif</icon>
