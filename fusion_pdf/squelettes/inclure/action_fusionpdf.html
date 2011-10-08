@@ -1,14 +1,28 @@
-[(#REM) a inclure en condition vide de la <//boucle> documents]
+[(#REM) a inclure par exemple en condition vide de la <//boucle> documents]
+<BOUCLE_fusionpdf(ARTICLES){id_article}>
+
 <div class="liste documents documents_joints">
 	<ul class="liste-items"><li class="item">
-	<img width="52" height="52" class="spip_logos" alt="" src="#CHEMIN{prive/vignettes/pdf.png}">
-<strong><:fusionpdf:le_pdf_nexiste_pas:></strong>
+	
+<BOUCLE_documents(DOCUMENTS){id_rubrique}{extension=pdf}{0,1}>
+#SET{path_parent,#FICHIER}
+</BOUCLE_documents>
+
+[(#REM)
+	Pour donner à manger à fusion_pdf:
+	- le chemin complet du pdf de départ
+	- l'interval de type "1-5" ou "1,3,9" ou "all"
+	- le prefix du nom de fichier pdf généré
+	- suivi d'un titre comme #TITRE
+	- l'objet auquel le document pdf généré sera lié
+	- l'id_objet auquel le document pdf généré sera lié
+]
 
 [(#BOUTON_ACTION{<:fusionpdf:generez_le_pdf:>,
-#URL_ACTION_AUTEUR{fusion_pdf,
-document/#ID_ARTICLE/#ID_RUBRIQUE/3-7/PDFusion/35,
-#SELF|parametre_url{pdf,done}},
-ajax})]				
+[(#URL_ACTION_AUTEUR{fusion_pdf,#GET{path_parent}//5-7//FusionPDF//#TITRE//article//#ID_ARTICLE,#SELF
+})],ajax})]	
 
 </li></ul>
 </div>
+
+</BOUCLE_fusionpdf>

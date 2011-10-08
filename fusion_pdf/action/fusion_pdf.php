@@ -1,98 +1,50 @@
 <?php
-
 if (!defined('_ECRIRE_INC_VERSION')) return;
-/*
 
-[(#BOUTON_ACTION{<:fusionpdf:generez_le_pdf:>,
-#URL_ACTION_AUTEUR{fusion_pdf,
-document/#ID_ARTICLE/#ID_RUBRIQUE/3-6/PDFusion/35,
-#SELF|parametre_url{pdf,done}},
-ajax})]	
-
-*/
-
-//pompage de editer_produit (merci Rastapopoulos)
-/**
- * Action de fusion
- * @param unknown_type $arg
- * @return unknown_type
- */
 function action_fusion_pdf_dist($arg=null) {	
 	if (is_null($arg)){
 		$securiser_action = charger_fonction('securiser_action', 'inc');
 		$arg = $securiser_action();
 	}
-		
+ 	
 	// On recupere les infos de l'argument
-	@list($objet, $id_article, $id_rubrique, $pages, $pretitre, $raccourcir) = explode('/', $arg);
-	$id_article = intval($id_article);
-	$id_rubrique = intval($id_rubrique);
-	$raccourcir = intval($raccourcir);
+	@list($path_parent,$interval,$prefix,$titre_sale,$objet,$id_objet) = explode('//', $arg);
+	$id_objet = intval($id_objet);
 	
-	spip_log("fusion pour pdf article $id_article a partir du document de rubrique $id_rubrique",'fusionpdf');
+	spip_log("fusion pour pdf $path_parent, $interval,$prefix,$titre_sale,$objet,$id_objet",'fusionpdf');
 
-	// todo?  AND autoriser('fusion_pdf', 'article',$arg[1]))
-	if ($objet == 'document' and $id_article and $id_rubrique) {
-		$fusion=fusion_pdf_post($objet, $id_article, $id_rubrique, $pages, $pretitre, $raccourcir);
+	// todo autoriser('fusion_pdf', 'article',$arg[1]))
+	if ($path_parent && $interval!=' ') {
+		$fusion=fusion_pdf_post($path_parent, $interval,$prefix, $titre_sale,$objet,$id_objet);
 	}
-	
 	
 	// Invalider les caches
 	include_spip('inc/invalideur');
-	suivre_invalideur("id='id_article/$id_article'");	
+	suivre_invalideur("id='id_$objet/$id_objet'");	
 
 }
 
 
-function fusion_pdf_post($objet, $id_article, $id_rubrique, $pages, $pretitre,$raccourcir){
+function fusion_pdf_post($path_parent, $interval, $prefix,$titre_sale,$objet,$id_objet){
 	
-	include_spip('inc/filtres');
+	$fichier_propre=titrature($titre_sale,$prefix).'.pdf';
+	$outputpdf=_DIR_IMG.'/pdf/'.$fichier_propre;
+	
+	spip_log("fusionpost2 generer $outputpdf a partir de $path_parent",'fusionpdf');	
 
-	//le titre de la rubrique est de style "012. titre"
-	$titre_rubrique=sql_getfetsel('titre','spip_rubriques',"id_rubrique='$id_rubrique'");
-	$numero_rubrique=recuperer_numero($titre_rubrique);
-	$titre_article=sql_getfetsel('titre','spip_articles',"id_article='$id_article'");
 	
-	//retourne un titre pour le fichier pdf court et comprehensible
-	include_spip('inc/fusionpdf_fonctions');
-	$titre_sortie=titrature($titre_article,$numero_rubrique,$pretitre,$raccourcir);
-		
-	//on recupere le chemin du pdf de la rubrique
-	//la condition ici est index et num (cf like)
-	//todo mettre une condition generique sur le titre (Numero ? ou mot clef? ou facon de l'ecrire
-	$type='rubrique';
-	$pdf_rub = sql_select("D.id_document,D.fichier", "spip_documents AS D LEFT JOIN spip_documents_liens AS T ON T.id_document=D.id_document", 
-	"T.id_objet=" . intval($id_rubrique) . " AND T.objet=" . sql_quote($type)
-	." AND D.mode='document' AND D.extension ='pdf'"
-	." AND D.fichier LIKE '%$numero_rubrique%'"
-	." AND D.fichier LIKE '%index%'"
-	);
+	//verifier que ce n'est pas encore dans la base
+	if ($doc = sql_fetsel('id_document', 'spip_documents', 'fichier='.$outputpdf." AND id_$objet=".$id_objet))
+	return false;
 	
-	$doc_depart = sql_fetch($pdf_rub);
-		spip_log("fusionpost2".$doc_depart['fichier']." fera titre = $titre_sortie fin",'fusionpdf');
-
-		if (!$doc_depart) return false;
-
-	$pdf_depart = $doc_depart['fichier'];
-	$fichier_base="pdf/".$titre_sortie.".pdf";
-		$inputpdf=_DIR_IMG.$pdf_depart;
-		$outputpdf=_DIR_IMG.$fichier_base;
-		
-		//verifier que ce n'est pas encore dans la base
-		if ($doc = sql_fetsel('id_document', 'spip_documents', 'fichier='.$fichier_base.' AND id_article='.$id_article))
-		return false;
+	//on extrait les pages et on fusionne
+	fusionner($path_parent,$outputpdf,$interval);
 	
-	//todo > reprendre les numeros des pages de N-N (5-7)
-	// soit champ supp pour article
-	// soit taper dans cvs, mais en cas d'erreur, attention confusion et grosse galre!
-	fusionner($inputpdf,$outputpdf,$pages);
-	
-	if(file_exists($outputpdf)){
-		$date_article=sql_getfetsel('date','spip_articles',"id_article='$id_article'");
+	$date_objet=sql_getfetsel('date',"spip_".$objet."s","id_$objet='$id_objet'");
 		
 	//preparer les champs
-			$champs['date'] = $date_article;
-			$champs['fichier'] = $fichier_base;
+			$champs['date'] = $date_objet;
+			$champs['fichier'] = $outputpdf;
 			$champs['taille'] =  filesize($outputpdf);
 			$champs['largeur'] = 0;
 			$champs['hauteur'] = 0;
@@ -105,37 +57,32 @@ function fusion_pdf_post($objet, $id_article, $id_rubrique, $pages, $pretitre,$r
 
 	if($id_document){
 	
-	//puis sauvegarder le document dans l'article
+	//puis sauvegarder le document dans l'objet demande
 	spip_log("insertion doc= $id_document",'fusionpdf');
 		$document_lien = sql_insertq(
 			'spip_documents_liens',
 			array(
 				'id_document'=>$id_document,
-				'id_objet'=>$id_article,
-				'objet'=>'article',
+				'id_objet'=>$id_objet,
+				'objet'=>$objet,
 				'vu'=>'non'
 			)
 		);
 	}
-	
 
-	}
-
-	
-		return $titre_sortie ." et ". $pdf_depart;
 }
 
 
 //verifier la ligne de modif dans fpdf pour le output
-function fusionner($inputpdf,$outputpdf,$pages) {
+function fusionner($path_parent,$outputpdf,$interval) {
 	// pour fusionner divers pdfs entre eux
-	//le inputpdf pourrait etre un tableau (cheminpdf1=>pages,cheminpdf2=>pages)
+	//le path_parent pourrait etre un tableau (cheminpdf1=>pages,cheminpdf2=>pages)
 	if(include_once(find_in_path('lib/PDFMerger/PDFMerger.php'))){
 	
 	$pdf = new PDFMerger;
-	$pdf->addPDF($inputpdf,$pages)
+	$pdf->addPDF($path_parent,$interval)
 		->merge('file', $outputpdf);			
-	} else 	spip_log("librairie introuvable input= $inputpdf output= $outputpdf",'fusionpdf');
+	} else 	spip_log("librairie introuvable input= $path_parent output= $outputpdf",'fusionpdf');
 
 	
 }
