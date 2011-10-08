@@ -1,62 +1,53 @@
 <plugin>
-
 	<nom>Encarts</nom>
-
-	<auteur>Camille Lafitte [Webelys->http://www.webelys.com], Cyril MARION [Ateliers CYM->http://www.cym.fr]</auteur>
-
-	<licence>&#169; 2011 GNU/LGPL</licence>
-
+	<auteur>Camille Lafitte, [Webelys->http://www.webelys.com], Cyril MARION [Ateliers CYM->http://www.cym.fr]</auteur>
+	<licence>&#169; 2011 - GNU/LGPL</licence>
 	<version>1.3.1</version>
-	
 	<version_base>1.0</version_base>
-	
-	<slogan><multi>[fr]Agr&#233;mente les articles SPIP d'encarts (ou "notes de marge", ou encore "encadr&#233;s").[en]Enhances SPIP articles with aside notes (or framed texts).</multi></slogan>
-
+	<slogan>
+		<multi>
+		[fr]Agr&#233;mente les articles SPIP d'encarts
+		[en]Enhances SPIP articles with aside notes
+		</multi>
+	</slogan>
 	<icon>img/frame_edit-32.png</icon>
-
 	<etat>stable</etat>
-
-	<description><multi>[fr]Permet aux r&#233;dacteurs d'ajouter des encarts (ou encadr&#233;s) dans leurs articles, et aux graphistes les placer n'importe o&#249; dans leurs mises-en-page.[en]Allows authors to add framed texts int their articles, and graphists to place those frames anywher in their layouts.</multi></description>
-
+	<description>
+		<multi>
+		[fr]Permet aux r&#233;dacteurs d'ajouter des encarts (ou encadr&#233;s) dans leurs articles, et aux graphistes de les placer n'importe o&#249; dans leurs mises-en-page.
+		[en]Allows authors to add framed texts int their articles, and graphists to place those frames anywher in their layouts.
+		</multi>
+	</description>
 	<prefix>encarts</prefix>
+	<categorie>edition</categorie>
 
+	<install>base/encarts.php</install>
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/encarts.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>declarer_tables_auxiliaires</nom>
 		<inclure>base/encarts.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>base/encarts.php</inclure>
 	</pipeline>
-
-	<install>base/encarts.php</install>
-
 	<pipeline>
 		<nom>afficher_fiche_objet</nom>
 		<inclure>encarts_pipelines.php</inclure>
 	</pipeline>
-
 	<pipeline>
 		<nom>post_edition</nom>
 		<inclure>encarts_pipelines.php</inclure>
 	</pipeline>
-	
 	<pipeline>
 		<nom>pre_propre</nom>
 		<inclure>encarts_pipelines.php</inclure>
 	</pipeline>
-	
-
-	<categorie>edition</categorie>
 
 	<necessite id="SPIP" version="[2.0.3;2.1.99]" />
 	<necessite id="afficher_objets" version="[1.1;]" />
 	<necessite id="saisies" version="[1.8;]" />
-
 </plugin>
