@@ -2,6 +2,50 @@
 <?php
 
 include_spip('inc/svp_outiller');
+include_spip('plugins/preparer_sql_plugin');
+
+echo '<h2>TESTS FONCTION normaliser_auteur_licence()</h2>';
+// ----------------------------------------------------------------
+echo '<h3>Balise auteur</h3>';
+$b = 'auteur';
+
+$t = 'Jim';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = '[Jim->http://www.tests.net]';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = '[Jim / ateliers pouet->http://www.tests.net]';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = '[Jim->Jim@toto.com]';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = 'M&#233;dard, Jim';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = 'M&#233;dard, Jim GPL';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = 'M&#233;dard, Jim GPL';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = 'M&#233;dard, Jim - GPL - (c) 2001';
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+$t = "M&#233;dard, Jim - GPL (c) 2001-2010, distribu&#233; MIT - Lucien [Roger->http://www.tests.net]";
+echo '<strong>' . $t . '</strong><br />';
+echo var_export(normaliser_auteur_licence($t, 'auteur')), '<br />';
+
+
 echo '<h2>TESTS FONCTION compiler_branches_spip()</h2>';
 
 echo '<h3>Utilises, resultats incorrects, ecritures non valides -> a supprimer</h3>';
