@@ -1,27 +1,33 @@
 <plugin>
-<nom>Couleurs_Spip, couleurs et span pour les textes de spip</nom>
-<etat>stable</etat>
-<version>2.0</version>
-<auteur>Dominique Wojylac</auteur>
-<icon>couleurs_spip.png</icon>
-<description>Pour définir des span dans les éléments textes de spip (#TEXTE, #CHAPO,...) en relation avec une feuille de style.
-_ Compatible 1.9 et 2.0</description>
-<lien>http://www.spip-contrib.net/spip.php?article2408</lien>
-<prefix>couleurs_spip</prefix>
-<pipeline>
-	<nom>post_propre</nom>
-	<action>definirspan</action>
-	<inclure>couleurs_spip.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>header_prive</nom>
-	<action>inclurecss</action>
-	<inclure>couleurs_spip.php</inclure>
-</pipeline>
-<pipeline>
-	<nom>insert_head</nom>
-	<action>inclurecss</action>
-	<inclure>couleurs_spip.php</inclure>
-</pipeline>
-<categorie>edition</categorie>
+	<nom>Couleurs Spip</nom>
+	<slogan>Des textes en couleur</slogan>
+	<etat>stable</etat>
+	<version>2.0.0</version>
+	<auteur>Dominique Wojylac</auteur>
+	<icon>couleurs_spip.png</icon>
+	<description>
+	Ce plugin permet de modifier l'apparence de parties de texte. Pour mettre certains mots en couleur ou modifier leur taille ou toute autre caractéristique typographique, il suffit d'entourer ceux-ci de balises. Par exemple :
+-* Rouge : <code><cs_rouge>le texte en rouge</cs></code>
+-* Orange : <code><cs_orange>le texte en orange</cs></code>
+-* xxl : <code><cs_xxl>le texte en plus gros</cs></code>
+	</description>
+	<lien>http://www.spip-contrib.net/spip.php?article3180</lien>
+	<prefix>couleurs_spip</prefix>
+	<pipeline>
+		<nom>post_propre</nom>
+		<action>definirspan</action>
+		<inclure>couleurs_spip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+		<action>inclurecss</action>
+		<inclure>couleurs_spip.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>insert_head</nom>
+		<action>inclurecss</action>
+		<inclure>couleurs_spip.php</inclure>
+	</pipeline>
+	<necessite id="spip" version="[1.9.2;2.1.99]" />
+	<categorie>edition</categorie>
 </plugin>
