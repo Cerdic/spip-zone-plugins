@@ -1,12 +1,6 @@
 <plugin>
-	<!--  
-	// $LastChangedRevision$
-	// $LastChangedBy$
-	// $LastChangedDate$
-	 -->
-	
 	<nom>Citation al&#233;atoire</nom>
-	<slogan>Petit gestionnaire de citations</slogan>
+	<slogan>Gestionnaire de citations</slogan>
 	<auteur>paladin@quesaco.org</auteur>
 	
 	<version>1.0.3</version>
@@ -14,7 +8,7 @@
 	<etat>stable</etat>
 	
 	<description>
-		Placer la balise <code>#CITATION</code> dans vos squelettes pour faire appara&#238;tre une citation choisie all&#233;atoirement
+		Placer la balise <code>#CITATION</code> dans vos squelettes pour faire appara&#238;tre une citation choisie al&#233;atoirement
 		dans le fichier de citations (citations_fr.xml).
 	</description>
 	
