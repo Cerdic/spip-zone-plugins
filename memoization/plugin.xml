@@ -3,11 +3,11 @@
 	<slogan>
 		<multi>
 		[fr]Gestion du cache de SPIP par diverses m&#233;thodes.
-		[en] Various methods to process SPIP's cache.
+		[en]Various methods to process SPIP's cache.
 		</multi>
 	</slogan>
 	<auteur>Fil</auteur>
-	<licence>&#169; 2009-2011 GNU/LGPL || MIT</licence>
+	<licence>&#169; 2009-2011 - GNU/LGPL - MIT</licence>
 	<version>0.9.8</version>
 	<etat>stable</etat>
 	<description>
@@ -16,7 +16,7 @@
 			[en]Memoization is a computer science term, which Wikipedia defines as "a technique of reducing the execution time of a function by storing the results once on the other." It is also the name of a new function library for PHP, which follows my experiments XCache.
 		</multi>
 	</description>
-   <lien>http://zzz.rezo.net/Memoization.html</lien>
+	<lien>http://zzz.rezo.net/Memoization.html</lien>
 	<prefix>Memoization</prefix>
 	<icon>memoization.png</icon> <!-- icone : http://www.flickr.com/photos/laszlo-photo/149047693/ -->
 	<options>inc/memoization.php</options>
