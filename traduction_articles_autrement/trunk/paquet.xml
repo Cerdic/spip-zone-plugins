@@ -19,4 +19,6 @@
 	<pipeline nom="header_prive" inclure="taa_pipelines.php" />
 	<pipeline nom="formulaire_charger" inclure="taa_pipelines.php" />
 	<pipeline nom="recuperer_fond" inclure="taa_pipelines.php" />
+	
+	<menu nom="configurer_taa" titre="taa:titre_plugin" parent="menu_configuration" icone="img_pack/taa_16.png"/>	
 </paquet>

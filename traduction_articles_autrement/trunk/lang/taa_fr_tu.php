@@ -8,8 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_edition_seule' => 'Affichage des articles seulement en mode édition',
-	'affichage_liste_compacte' => 'Affichage compacte des liste des articles',
+	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles',
 
 	// C
 	'changer_langue' => 'Changer la langue de l\'article',

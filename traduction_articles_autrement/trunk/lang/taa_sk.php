@@ -7,10 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
-	'affichage_edition_seule' => 'Zobrazovať články len v režime úprav',
-	'affichage_liste_compacte' => 'Kompaktné zobrazenie zoznamu článkov',
-
 	// C
 	'changer_langue' => 'Zmeniť jazyk článku',
 

@@ -7,10 +7,6 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-	// A
-	'affichage_edition_seule' => ' نمايش مقالات فقط در حالت ويرايش ',
-	'affichage_liste_compacte' => 'نمايش فشرده‌ي فهرست مقالات',
-
 	// C
 	'changer_langue' => 'تغيير زبان مقاله',
 

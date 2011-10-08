@@ -11,19 +11,12 @@
 			<li class="fieldset">
 				<fieldset><legend><:taa:options:></legend>
 				<ul>
-					
 					#SET{erreurs,#ENV**{erreurs}|table_valeur{affichage_liste_compacte}}
-					<li class="editer_affichage_liste_compacte[ (#GET{erreurs}|oui)erreur]">
+					<li class="editer_liste_compacte_desactive[ (#GET{erreurs}|oui)erreur]">
 						[<span class='erreur_message'>(#GET{erreurs})</span>]
 						<div class="choix">
-							[(#PLUGIN{afficher_objets}|oui)<input type="checkbox" name="liste_compacte" class="checkbox" value="on" id="liste_compacte" [(#ENV{liste_compacte}|oui) checked="checked"] />]
-							<label for='liste_compacte'><:taa:affichage_liste_compacte:></label>
-							[(#PLUGIN{afficher_objets}|non)
-								<b>
-									<:taa:necesite_afficher_objet:>
-									<a href="http://files.spip.org/spip-zone/afficher_objets.zip">Afficher Objets</a> !
-								</b>
-							]
+							<input type="checkbox" name="liste_compacte_desactive" class="checkbox" value="on" id="liste_compacte" [(#ENV{liste_compacte_desactive}|oui) checked="checked"] />
+							<label for='liste_compacte_desactive'><:taa:affichage_liste_compacte_desactive:></label>
 						</div>
 					</li>
 				</ul>
@@ -32,8 +25,7 @@
 		</ul>
 		
 		<p class="boutons">
-			<input type="submit" name="_cfg_ok" class="submit" value="<:cfg:ok:>" />
-			<input type="submit" name="_cfg_delete" class="submit" value="<:cfg:effacer:>" />
+			<input type="submit" name="_cfg_ok" class="submit" value="<:bouton_enregistrer:>" />
 		</p>
 		
 	</div></form>

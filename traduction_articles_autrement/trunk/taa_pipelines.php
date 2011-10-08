@@ -50,7 +50,8 @@ function taa_recuperer_fond($flux){
     }
     
     //Liste compaacte des articles
-    if ($flux['args']['fond'] == 'prive/objets/liste/articles' AND !lire_config('liste_compacte_desactive')){
+    if ($flux['args']['fond'] == 'prive/objets/liste/articles' AND !lire_config('taa/liste_compacte_desactive')){
+
 
     $flux['texte'] = recuperer_fond('prive/objets/liste/articles_compacte',$flux['args']['contexte']);
 
