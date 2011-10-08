@@ -4,6 +4,12 @@
 	<etat>test</etat>
 	<auteur>Fil</auteur>
 	<licence>GNU/GPL - (c) 2010</licence>
+	<slogan>
+		<multi>
+			[fr]Donnez avec Flattr
+			[en]Donate with Flattr
+		</multi>
+	</slogan>
 	<description>
 		<multi>
 			[fr]Int&#233;gration des microdons Flattr
