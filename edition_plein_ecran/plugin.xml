@@ -1,33 +1,21 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	&Eacute;dition plein &eacute;cran
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	[ARNO*->arnaud@paris-beyrouth.net] © GPL 2009.
-	</auteur>
-	<version>
-	1.0
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>&#201;dition plein &#233;cran</nom>
+	<slogan>&#201;diter les textarea en plein &#233;cran</slogan>
+	<auteur>[ARNO*->arnaud@paris-beyrouth.net]</auteur>
+	<licence>(c) 2009 GPL 2009</licence>
+	<version>1.0.0</version>
+	<etat>stable</etat>
 	<description>
-	Tous les champs multilignes (textarea) peuvent d&eacute;sormais &ecirc;tre &eacute;dit&eacute;s en mode plein &eacute;cran. Pour cela: double-cliquer dans un champ: la page dispara&icirc;t et seul le champ d'&eacute;dition occupe tout l'&eacute;cran. Pour sortir de ce mode d'&eacute;dition, utiliser la touche &laquo;Esc&raquo; (escape).
+	Tous les champs multilignes (textarea) peuvent d&#233;sormais &#234;tre &#233;dit&#233;s en mode plein &#233;cran. Pour cela: double-cliquer dans un champ: la page dispara&#238;t et seul le champ d'&#233;dition occupe tout l'&#233;cran. Pour sortir de ce mode d'&#233;dition, utiliser la touche &#171;Esc&#187; (escape).
 	
-	Expérimental. Ne fonctionne pas sous Internet Explorer 6 (mais ne devrait pas provoquer de dysfonctionnement).
+	{Ne fonctionne pas sous Internet Explorer 6 (mais ne devrait pas provoquer de dysfonctionnement).}
 	</description>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	edition_plein_ecran
-	</prefix>
+	<prefix>edition_plein_ecran</prefix>
 	<pipeline>
 		<nom>header_prive</nom>
 		<action>charger_script</action>
 		<inclure>edition_plein_ecran.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>edition</categorie>
 </plugin>
