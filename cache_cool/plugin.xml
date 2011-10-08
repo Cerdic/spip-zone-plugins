@@ -1,10 +1,10 @@
 <plugin>
 	<nom>Cache Cool</nom>
-	<auteur>[Cedric->yterium.net]</auteur>
+	<auteur>[Cedric->http://www.yterium.net]</auteur>
 	<version>0.2.4</version>
 	<etat>test</etat>
 	<icon>images/cache_cool-128.png</icon>
-	<slogan>Servir au plus vite !</slogan>
+	<slogan>Servir les pages au plus vite !</slogan>
 	<description>Servir le cache froid pour aller plus vite, et calculer en diff&#23;3r&#233; en t&#226;che de fond</description>
 	<options>cache_cool_options.php</options>
 	<lien>http://www.spip-contrib.net/Cache-Cool</lien>
