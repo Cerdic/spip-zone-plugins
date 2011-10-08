@@ -1,0 +1,12 @@
+[(#REM)
+<!-- 
+Le seul moyen d'accéder aux parametres mode,anne,mois dans la boucle 
+c'est de les transmettre via un inclure...
+Mettre directement un #GET{where} dans la boucle ne fonctionne pas.
+
+Note : css automatique dans /prive/themes/spip/lists.css.html
+-->
+]
+[(#SET{where,[(#VAL{#ENV{mode,''}}|simplecal_evenements_where{#ENV{annee,''},#ENV{mois,''}})]})]
+
+#INCLURE{fond=prive/objets/liste/evenements-liste,titre=#TITRE,id_auteur=#ID_AUTEUR,id_rubrique=#ID_RUBRIQUE,id_secteur=#ID_SECTEUR,where=#GET{where},statut=#ENV{statut}} 

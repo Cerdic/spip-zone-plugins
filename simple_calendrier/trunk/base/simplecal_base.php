@@ -8,147 +8,123 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-
-// Declaration des tables principales
-function simplecal_declarer_tables_principales($tables_principales){
+function simplecal_declarer_tables_interfaces($interfaces) {
+	$interfaces['table_des_tables']['evenements'] = 'evenements';
 	
-	// Table 'spip_evenements'
-	$evenements = array(        "id_evenement" => "bigint(21) NOT NULL auto_increment",
-        "id_secteur"   => "bigint(21) NOT NULL DEFAULT '0'",
-        "id_rubrique"  => "bigint(21) NOT NULL DEFAULT '0'",
-        "id_objet"     => "bigint(21) NOT NULL DEFAULT '0'",
-        "type"         => "varchar(25) NOT NULL",
-        "titre"        => "varchar(255) NOT NULL",
-        "date_debut"   => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-        "date_fin"     => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
-        "lieu"         => "varchar(255) NOT NULL",
-        "descriptif"   => "text NOT NULL",
-        "texte"        => "text NOT NULL",
-        "lien_titre"   => "varchar(255) NOT NULL",
-        "lien_url"     => "varchar(255) NOT NULL",
-        "date"         => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // création ou publication (selon statut) 
-        "statut"       => "varchar(8) NOT NULL",
-        "maj"          => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+	// Titre pour URL propres
+    //$interface['table_titre']['evenements'] = "titre, '' AS lang";
+    
+    //$interface['table_des_traitements']['DATE_DEBUT'][] = 'normaliser_date(%s)';
+    //$interface['table_des_traitements']['DATE_FIN'][] = 'normaliser_date(%s)';
+    
+    // ---------------------------------------------------------------------------
+	// Champs de type 'date' pour la gestion des critères age, age_relatif, etc.
+    // ---------------------------------------------------------------------------
+    // Note : provoque l'enregistrement de la date de publication (lors de sa modif) dans date
+    //$interface['table_date']['evenements'] = 'date'; 
+    
+	return $interfaces;
+}
+
+
+function simplecal_declarer_tables_objets_sql($tables){
+	
+    // Champs de la table spip_evenements
+	$fields = array(
+        "id_evenement"      => "bigint(21) NOT NULL auto_increment",
+        "id_secteur"        => "bigint(21) NOT NULL DEFAULT '0'",
+        "id_rubrique"       => "bigint(21) NOT NULL DEFAULT '0'",
+        "id_objet"          => "bigint(21) NOT NULL DEFAULT '0'",
+        "type"              => "varchar(25) NOT NULL",
+        "titre"             => "varchar(255) NOT NULL",
+        "date_debut"        => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+        "date_fin"          => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+        "lieu"              => "varchar(255) NOT NULL",
+        "descriptif"        => "text NOT NULL",
+        "texte"             => "text NOT NULL",
+        "date"              => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'", // création ou publication (selon statut) 
+        "statut"            => "varchar(8) NOT NULL",
+        "lang"              => "varchar(10) NOT NULL DEFAULT ''",
+        "langue_choisie"    => "varchar(3) NULL DEFAULT 'non'", 
+        "maj"               => "timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
 	);
     
-    // champs qui possede les cles
-	$evenements_key = array(
+    // champs qui possedent les cles
+	$key = array(
         "PRIMARY KEY"     => "id_evenement",
         "KEY id_secteur"  => "id_secteur",
         "KEY id_rubrique" => "id_rubrique"
 	);
 
     // champs candidats à la jointure
-	$evenements_join = array(
+	$join = array(
 	    "id_evenement" => "id_evenement",
         "id_secteur"   => "id_secteur",
         "id_rubrique"  => "id_rubrique"
 	);
-	
-	// Table des tables
-	$tables_principales['spip_evenements'] = array(
-		'field' => &$evenements,
-		'key' => &$evenements_key,
-		'join' => &$evenements_join
-	);	
+    
+    // champ 'statut'
+    $statut = array(
+        'champ'=>'statut',
+        'publie'=>'publie',
+        'previsu'=>'publie,prop',
+        'exception'=>'statut'
+    );
+    
+    // titre des statuts
+    $statut_titres = array(
+        'prepa'=>'simplecal:titre_evenement_redaction',
+        'prop' => 'simplecal:titre_evenement_propose',
+        'publie' => 'simplecal:titre_evenement_publie',
+        'refuse' => 'simplecal:titre_evenement_refuse',
+		'poubelle'=>'simplecal:titre_evenement_supprime'
+    );
+    
+    $statut_textes_instituer = array(
+        'prepa' => 'texte_statut_en_cours_redaction',
+        'prop' => 'texte_statut_propose_evaluation',
+        'publie' => 'texte_statut_publie', 
+        'refuse' => 'texte_statut_refuse',
+        'poubelle' => 'texte_statut_poubelle'
+    );
+    
+    // La Table
+    $tables['spip_evenements'] = array(
+		'texte_retour' => 'icone_retour',
+		'texte_objets' => 'simplecal:evenements',
+		'texte_objet' => 'simplecal:evenement',
+		'texte_modifier' => 'simplecal:icone_modifier_evenement',
+		'texte_creer' => 'simplecal:icone_nouvel_evenement',
+		'info_aucun_objet'=> 'simplecal:info_aucun_evenement',
+		'info_1_objet' => 'simplecal:info_1_evenement',
+		'info_nb_objets' => 'simplecal:info_nb_evenements',
+		'texte_logo_objet' => 'simplecal:logo_evenement',
+		'titre' => 'titre, lang',
+		'date' => 'date', // indique le nom du field pour le formulaires_dater_charger_dist
+		'principale' => 'oui',
+		'field'=> $fields,
+		'key' => $key,
+		'join' => $join,
+		'statut' =>  array($statut),
+		'statut_titres' => $statut_titres,
+		'statut_textes_instituer' => $statut_textes_instituer,
+        
+        'tables_jointures' => array('id_auteur' => 'auteurs_liens'),
 
-	return $tables_principales;
+		'rechercher_champs' => array('titre'=>8, 'descriptif'=>4, 'texte'=>2),
+        
+		'rechercher_jointures' => array(
+			'document' => array('titre' => 2, 'descriptif' => 1)
+		),
+		'champs_versionnes' => array('id_rubrique', 'titre', 'descriptif', 'texte', 'lieu', 'date_debut', 'date_fin'),
+	);
+    
+    // On peut lire dans :
+    // - Extensions/mots/base/mots.php     : jointures sur les mots pour tous les objets
+    // - Extensions/medias/base/medias.php : jointures sur les documents pour tous les objets
+    // - Extensions/forum/base/forum.php   : jointures sur les forums pour tous les objets
+    
+	return $tables;
 }
-
-// Declarations des tables auxiliaires (de jointures)
-function simplecal_declarer_tables_auxiliaires($tables_auxiliaires){
-    
-	// Table de jointure auteurs_evenements
-	$evenements_auteurs = array(
-		"id_auteur"    => "BIGINT(21) NOT NULL",
-		"id_evenement" => "BIGINT(21) NOT NULL"
-	);
-	$evenements_auteurs_key = array(
-		"PRIMARY KEY" => "id_auteur, id_evenement"
-	);
-
-    // Table de jointure mots_evenements
-	$evenements_mots = array(
-		"id_mot"       => "BIGINT(21) NOT NULL",
-		"id_evenement" => "BIGINT(21) NOT NULL"
-	);
-	$evenements_mots_key = array(
-		"PRIMARY KEY" => "id_mot, id_evenement"
-	);
-	
-
-	// Table des tables
-    $tables_auxiliaires['spip_auteurs_evenements'] = array(
-		'field' => &$evenements_auteurs,
-		'key' => &$evenements_auteurs_key
-	);
-    
-	$tables_auxiliaires['spip_mots_evenements'] = array(
-		'field' => &$evenements_mots,
-		'key' => &$evenements_mots_key
-	);
-
-	return $tables_auxiliaires;
-}
-
-// cf. http://programmer.spip.org/declarer_tables_interfaces,379
-function simplecal_declarer_tables_interfaces($interface){
-
-    // ----------------------------------------
-	// Definir des alias pour les boucles SPIP
-    // ----------------------------------------
-	
-    // Boucle ['evenements'] sur la table spip_evenements
-	$interface['table_des_tables']['evenements'] = 'evenements';
-
-    // ---------------------------------
-	// Indiquer les jointures possibles
-    // ---------------------------------
-  
-    // Jointures entre auteurs et evenements
-	// ci-dessous : INCOMPATIBILITE si d'autres plugin font aussi ['spip_auteurs']['id_auteur'] = ...
-    //$interface['tables_jointures']['spip_auteurs']['id_auteur'] = 'spip_auteurs_evenements'; // permet de faire <BOUCLEn(AUTEURS){id_evenement}>  ATTENTION : incompatible si un autre plugin fait qqch de similaire sur une autre table !!
-	//$interface['tables_jointures']['spip_evenements']['id_evenement'] = 'spip_auteurs_evenements'; // permet de faire <BOUCLEn(EVENEMENTS){id_auteur=123}>
-    $interface['tables_jointures']['spip_auteurs']['id_evenement'] = 'spip_auteurs_evenements';
-    $interface['tables_jointures']['spip_evenements']['id_auteur'] = 'spip_auteurs_evenements';
-    $interface['tables_jointures']['spip_auteurs_evenements']['id_evenement'] = 'spip_evenements';
-    $interface['tables_jointures']['spip_auteurs_evenements']['id_auteur'] = 'spip_auteurs';
-
-    // Jointures entre mots clés et evenements
-    $interface['tables_jointures']['spip_mots']['id_evenement'] = 'mots_evenements'; // permet de faire <BOUCLEn(MOTS){id_evenement}>
-	$interface['tables_jointures']['spip_evenements']['id_mot'] = 'mots_evenements'; // permet de faire <BOUCLEn(EVENEMENTS){id_mot=123}>
-    $interface['tables_jointures']['spip_mots_evenements']['id_evenement'] = 'evenements';
-    $interface['tables_jointures']['spip_mots_evenements']['id_mot'] = 'mots';
-    
-    
-    
-
-    // ------------------------------
-	// Titre pour URL propres
-    // ------------------------------
-    $interface['table_titre']['evenements'] = "titre, '' AS lang";
-
-    // -------------------------------------------
-	// Traitements par défaut sur certains champs
-    // -------------------------------------------
-    $interface['table_des_traitements']['DATE_DEBUT'][] = 'normaliser_date(%s)';
-    $interface['table_des_traitements']['DATE_FIN'][] = 'normaliser_date(%s)';
-    
-   
-    // ---------------------------------------------------------------------------
-	// Champs de type 'date' pour la gestion des critères age, age_relatif, etc.
-    // ---------------------------------------------------------------------------
-    // Note : provoque l'enregistrement de la date de publication (lors de sa modif) dans date
-    $interface['table_date']['evenements'] = 'date'; 
-    // -------
-	return $interface;
-}
-
-function simplecal_declarer_tables_objets_surnoms($surnoms) {
-	// Le type 'evenement' correspond a la table nommee 'evenements'
-	$surnoms['evenement'] = 'evenements';
-	return $surnoms;
-}
-
 
 ?>

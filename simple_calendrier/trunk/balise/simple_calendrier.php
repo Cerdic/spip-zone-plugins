@@ -96,7 +96,7 @@ function simplecal_generer_calendrier($mois, $annee, $tab_dates){
     $rc = "\n";
     
     $s = '';    
-    $s .= $rc.'<div class="ui-datepicker ui-widget ui-widget-content ui-corner-all">';
+    $s .= $rc.'<div class="ui-datepicker ui-widget ui-widget-content ui-corner-all" style="font-size:0.9em;">';
     $s .= $rc.'<div class="ui-datepicker-header ui-widget-header ui-helper-clearfix ui-corner-all">';
     //$s .= '    <a class="ui-datepicker-prev ui-corner-all" title="'._T('simplecal:date_precedent').'" href="#">';
     //$s .= '        <span class="ui-icon ui-icon-circle-triangle-w">'._T('simplecal:date_precedent').'</span>';
@@ -110,9 +110,7 @@ function simplecal_generer_calendrier($mois, $annee, $tab_dates){
     $s .= $rc.'    </div>';
     $s .= $rc.'</div>';
     
-    $resume = ucfirst(_T('simplecal:calendrier'))." : ".$nom_mois[$mois].' '.$annee;
-    
-    $s .= $rc.'<table class="ui-datepicker-calendar" summary="'.$resume.'">';
+    $s .= $rc.'<table class="ui-datepicker-calendar">';
     $s .= $rc.'<thead>';
     $s .= $rc.'<tr>';
     $s .= $rc.'    <th title="'.ucfirst(_T('date_jour_2')).'">'._T('simplecal:date_lundi_abbr').'</th>';

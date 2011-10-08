@@ -1,0 +1,117 @@
+<div class="formulaire_spip formulaire_configurer formulaire_#FORM formulaire_#FORM-#ENV{id,nouveau}">
+<h3 class='titrem'><img src="#CHEMIN_IMAGE{evenement-24.png}" class="cadre-icone" /><:simplecal:titre_evenements:></h3>  
+	
+    
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	<form action="#ENV{action}" method="post">
+    <div>
+		[(#ACTION_FORMULAIRE{#ENV{action}})]
+		
+        <fieldset><legend><:simplecal:config_blocautorisation:></legend>
+        <p><:simplecal:config_autorisation_explication:></p>
+        <ul>
+            <li>
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_autorisation_redac})</span>]
+                
+                <div class='choix'>
+                    <input class='radio' type="radio" name="simplecal_autorisation_redac" value='non'[ (#ENV{simplecal_autorisation_redac}|=={non}|oui)checked="checked"] id="simplecal_autorisation_redac_non"/>
+                    <label for="simplecal_autorisation_redac_non"[(#ENV{simplecal_autorisation_redac}|=={non}|oui) class="actif"]><:simplecal:config_autorisation_redac_non:></label>
+                </div>
+                <div class='choix'>
+                    <input class='radio' type="radio" name="simplecal_autorisation_redac" value='oui'[ (#ENV{simplecal_autorisation_redac}|=={oui}|oui)checked="checked"] id="simplecal_autorisation_redac_oui"/>
+                    <label for="simplecal_autorisation_redac_oui"[(#ENV{simplecal_autorisation_redac}|=={oui}|oui) class="actif"]><:simplecal:config_autorisation_redac_oui:></label>
+                </div>
+            </li>
+        </ul>
+        </fieldset>
+        
+        
+        <fieldset><legend><:simplecal:config_blocrubrique:></legend>
+        <p><:simplecal:config_rubrique_explication:></p>
+        <ul>
+            <li>
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_rubrique})</span>]
+                
+                <div class='choix'>
+                    <input class='radio' type="radio" name="simplecal_rubrique" value='partout'[ (#ENV{simplecal_rubrique}|=={partout}|oui)checked="checked"] id="simplecal_rubrique_partout"/>
+                    <label for="simplecal_rubrique_partout"[ (#ENV{simplecal_rubrique}|=={partout}|oui)class="actif"]><:simplecal:config_rubrique_partout:></label>
+                </div>
+                <div class='choix'>
+                    <input class='radio' type="radio" name="simplecal_rubrique" value='secteur'[ (#ENV{simplecal_rubrique}|=={secteur}|oui)checked="checked"] id="simplecal_rubrique_secteur"/>
+                    <label for="simplecal_rubrique_secteur"[ (#ENV{simplecal_rubrique}|=={secteur}|oui)class="actif"]><:simplecal:config_rubrique_secteur:></label>
+                </div>
+                <div class='choix'>
+                    <input class='radio' type="radio" name="simplecal_rubrique" value='non'[ (#ENV{simplecal_rubrique}|=={non}|oui)checked="checked"] id="simplecal_rubrique_non"/>
+                    <label for="simplecal_rubrique_non"[ (#ENV{simplecal_rubrique}|=={non}|oui)class="actif"]><:simplecal:config_rubrique_non:></label>
+                </div>                    
+            </li>
+        </ul>
+        </fieldset>
+        
+        
+        <fieldset><legend><:simplecal:config_blocreference:></legend>
+        <p><:simplecal:config_refobj_explication:></p>
+        <ul>
+            <li>
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_refobj})</span>]
+                
+                <div class='choix'>
+                    <input class='radio' type="radio" name="simplecal_refobj" value='oui'[ (#ENV{simplecal_refobj}|=={oui}|oui)checked="checked"] id="simplecal_refobj_oui"/>
+                    <label for="simplecal_refobj_oui"[ (#ENV{simplecal_refobj}|=={oui}|oui)class="actif"]><:simplecal:config_refobj_oui:></label>
+                </div>
+                <div class='choix'>
+                    <input class='radio' type="radio" name="simplecal_refobj" value='non'[ (#ENV{simplecal_refobj}|=={non}|oui)checked="checked"] id="simplecal_refobj_non"/>
+                    <label for="simplecal_refobj_non"[ (#ENV{simplecal_refobj}|=={non}|oui)class="actif"]><:simplecal:config_refobj_non:></label>
+                </div>
+            </li>
+        </ul>
+        </fieldset>
+           
+        
+        <fieldset><legend><:simplecal:config_blocthemes:></legend>
+        <p><:simplecal:config_themes_explication:></p>
+        
+        <ul>
+            <li>
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_themeprive})</span>]
+                [<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{simplecal_themepublic})</span>]
+                
+                <table>
+                <tr>
+                    <th>
+                        <:simplecal:config_themeprive:> :
+                        <br /><small>(<:simplecal:config_datepicker:>)</small>
+                    </th>
+                    <td valign="top">
+                        [(#VAL{simplecal_themeprive}|simplecal_liste_themes{#ENV{simplecal_themeprive}})]
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <:simplecal:config_themepublic:> :
+                        <br /><small>(<:simplecal:config_minicalendrier:>)</small>
+                    </th>
+                    <td valign="top">
+                        [(#VAL{simplecal_themepublic}|simplecal_liste_themes{#ENV{simplecal_themepublic}})]
+                    </td>
+                </tr>
+                </table>
+            </li>
+        </ul>
+        </fieldset>
+           
+        
+        [(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+        <!--extra-->
+        <p class='boutons'>
+            <span class='image_loading'>&nbsp;</span>
+            <input type="submit" class="submit" name="ok" value="<:bouton_enregistrer:>" />
+        </p>
+    </div>
+	</form>
+</div>
+    
+
+    

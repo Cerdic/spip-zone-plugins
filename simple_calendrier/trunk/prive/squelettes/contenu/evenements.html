@@ -1,0 +1,12 @@
+[(#AUTORISER{administrer,altitool}|sinon_interdire_acces)]
+
+<h1><:simplecal:liste_des_evenements:></h1>
+
+
+#SET{editable,#AUTORISER{creer,evenement}}
+<INCLURE{fond=prive/objets/liste/evenements,date_like=#ENV{annee},titre=#TITRE,status=#ARRAY{0,prop,1,publie,2,#GET{editable}|?{refuse,xx}},env,ajax} />
+
+[(#GET{editable})
+[(#URL_ECRIRE{evenement_edit,new=oui&retour=liste}|parametre_url{id_rubrique,#ID_RUBRIQUE}|icone_verticale{<:simplecal:raccourcis_ecrire_evenement:>,simplecal_logo-24.png,new,right})]
+]
+<br class='nettoyeur' />

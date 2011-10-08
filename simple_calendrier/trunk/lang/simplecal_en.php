@@ -17,6 +17,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'auteur_msg_erreur' => 'Error',
     'auteur_msg_ajout' => 'Author added !',
     'auteur_msg_retrait' => 'Author removed !',
+    'alt_img_logo' => 'Simple-Calendrier',
     
 
 // B
@@ -24,17 +25,19 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'bouton_admin' => 'Event',
 
 // C
-    'calendrier' => "calendar",
+    'description_plugin' => 'Calendar',
     'corbeille_tous' => "@nb@ events in garbage",
     'corbeille_un' => "1 event in garbage",
     'config_titre' => "Simple calendrier",
     'config_refobj_oui' => "Enable text by reference",
     'config_refobj_non' => "Disable text by reference",
     'config_refobj_explication' => "Enable 'text by reference' to allow articles/breves to be in calendar.",
-    'config_themes_explication' => "You can choose a theme (color set) for the 'little calendar' in public area.",
+    'config_themes_explication' => "You can choose a theme (color set) for the 'datepicker' in private area and for the 'little calendar' in public area.",
     'config_autorisation_explication' => "You can choose if event creation are enabled for editors.",
     'config_rubrique_explication' => "If you want to manage a simple calendar for your site, let this option disabled. It is possible to use keywords for categorised your events.<br />But, if you want to manage multiple calendar, and display distinct events for each folder, you can enable it.",
+    'config_themeprive' => "Private area theme",
     'config_themepublic' => "Public area theme",
+    'config_datepicker' => "date picker",
     'config_minicalendrier' => "little calendar",
     'config_blocreference' => "References",
     'config_blocthemes' => "Themes",
@@ -45,12 +48,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'config_rubrique_partout' => 'Yes, create events in folder.',
     'config_rubrique_secteur' => 'Yes, create events in 1st level folder (sector).',
     'config_rubrique_non' => 'No, it makes no sens for me.',
-    'config_champs' => 'Events content',
-    'config_champs_explication' => 'Based on the layout chosen for your site, you can decide which elements in the following list should be available.',
     
 
 // D
-    'description_plugin' => 'Calendar',
     'date' => 'Date',
     'dates' => 'Dates',
     'date_du_au' => 'from @date_debut@ to @date_fin@',
@@ -93,6 +93,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'explication_texte' => 'Text for event description.',
     'entree_evenement_publie' => 'Status of the event :',
     'enregistrer_dabord_une_fois' => "It's possible ! <br /><br />But first, please save this page one time...",
+    'evenement' => "Event",
+    'evenements' => "Events",
     
 // F
     'filtres' => 'filters',
@@ -107,8 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_date_fin' => 'Last date',
     'info_lieu' => 'Place',
     'info_descriptif_rapide' => 'Brief description',
-    'info_ref_1pos' => 'Text : by reference (1\'st possibility)',
-    'info_ref' => 'Text : by reference',
+    'info_ref' => 'Text : by reference (1\'st possibility)',
     'info_texte' => 'Text',
     'info_texte_2possibilites' => 'Text : specific (2\'nd possibility)',
     'info_gauche_numero_evenement' => 'EVENT NUMBER',
@@ -124,12 +125,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'info_evenement_libelle' => 'Events',
     'inconnu' => 'unknown',
     'info_evenements_liees_mot' => 'Events associated with this keyword',
-    'info_1_evenement' => 'event',
-    'info_n_evenements' => 'events',
+    'info_1_evenement' => '1&nbsp;event',
+    'info_n_evenements' => '@nb@ events',
+    'info_evenement' => 'event',
+    'icone_nouvel_evenement' => 'Write a new event',
+    'icone_evenements' => 'Events',
 
 // L
     'liste_evenements_prop' => "Events submitted for publication.",
-    'liste_evenements_a_valider' => "Events items to be validated.",
     'liste_evenements_publie' => "Events published.",
     'liste_evenements_prepa' => "Events in progress.",
     'liste_evenements_refuse' => "Events rejected.",
@@ -172,6 +175,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     'tous' => 'All',
     'titre_boite_refobj' => 'in calendar',
     'titre_boite_rubrique' => 'Calendar',
+    'texte_objet' => "Event",
+    'texte_objets' => "Events",
     
 // V
     'validation_titre' => 'Title is required !',

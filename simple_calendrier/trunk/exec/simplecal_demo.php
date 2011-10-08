@@ -47,7 +47,7 @@ function exec_simplecal_demo_dist(){
 
     // Affichage du bloc des raccourcis
     $raccourcis = "";
-    $lien = generer_url_ecrire("evenement_tous", "mode=avenir");
+    $lien = generer_url_ecrire("evenements", "mode=avenir");
     $racc_tous = icone_horizontale(_T('simplecal:raccourcis_tous_evenements'), $lien, _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "", false);
     $raccourcis .= $racc_tous;
     echo bloc_des_raccourcis($raccourcis);

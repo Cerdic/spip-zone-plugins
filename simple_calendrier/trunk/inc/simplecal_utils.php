@@ -201,7 +201,7 @@ function simplecal_get_portlet_rubrique($id_rubrique){
     
     $bloc.=$phrase;
     
-    $bloc .= icone_horizontale(_T('simplecal:raccourcis_liste_evenements_rubrique'), generer_url_ecrire("evenement_tous", "id_rubrique=$id_rubrique"), _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "", false);
+    $bloc .= icone_horizontale(_T('simplecal:raccourcis_liste_evenements_rubrique'), generer_url_ecrire("evenements", "id_rubrique=$id_rubrique"), _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "", false);
     if (autoriser('creer', 'evenement', null)){
         $bloc .= icone_horizontale(_T('simplecal:raccourcis_ecrire_evenement'), generer_url_ecrire("evenements_edit", "new=oui&retour=rubrique&id_rubrique=$id_rubrique"), _DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", "creer.gif", false);
     }
@@ -244,15 +244,20 @@ function simplecal_get_where_rubrique_exclure($avec_and=true){
 
 
 function simplecal_liste_themes($select_name, $choix){
+    // Version Php5 : ne fonctionne pas facilement sous OVH
+    //$dir_theme = _DIR_SIMPLECAL_PRIVE.'css/datepicker/';
+    //$dirs = scandir($dir_theme, 0);
+    //$dirs = array_slice ($dirs, 2); 
+
     // Version Php4                    
     $dir_theme = _DIR_SIMPLECAL_PRIVE.'css/datepicker/';
     $dh  = opendir($dir_theme);
     while (false !== ($filename = readdir($dh))) {
-        if (substr($filename, -4, 4) == ".css"){
-            $dirs[] = substr($filename, 0, strlen($filename)-4);
-        }
+        $dirs[] = $filename;
     }
     sort($dirs);
+    $dirs = array_slice ($dirs, 2); // retire les 2 premiers dossiers (. et ..)
+
     // -----
     
     $s="";

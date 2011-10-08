@@ -1,0 +1,17 @@
+#BOITE_OUVRIR{'',info center}
+    [(#CHEMIN_IMAGE{simplecal-logo-96.png}|balise_img|inserer_attribut{alt,<:simplecal:alt_img_logo:>})]
+    <br />
+    <:simplecal:description_plugin:>
+#BOITE_FERMER
+
+
+[(#ENV{id_rubrique}|oui)
+#BOITE_OUVRIR{'',raccourcis}
+    [(#URL_ECRIRE{rubrique,id_rubrique=#ENV{id_rubrique}}|icone_horizontale{<:simplecal:retour_rubrique:>,simplecal_logo,''})]
+    [(#URL_ECRIRE{evenements,mode=avenir}|icone_horizontale{<:simplecal:raccourcis_tous_evenements:>,simplecal_logo,''})]
+#BOITE_FERMER
+]
+
+[#BOITE_OUVRIR{'',basic}
+    (#VAL{#ENV{annee}}|simplecal_classement{#ENV{mois},#ENV{mode},#ENV{id_rubrique}}) 
+#BOITE_FERMER]

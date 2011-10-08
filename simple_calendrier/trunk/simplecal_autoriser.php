@@ -27,16 +27,12 @@ function autoriser_bt_simplecal_accueil($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
-// Idem mais pour le plugin 'bando'
-function autoriser_bt_simplecal_accueil_bando($faire, $type, $id, $qui, $opt) {
-	return in_array($qui['statut'], array('0minirezo', '1comite'));
-}
 
 // Remarque : Cette fonction est aussi appelée au niveau du core (API des listings - cf. inc/afficher_objets.php)
 // Le plugin "Acces restreint 3" la déclare également mais ne l'utilise pas (surement pour le plugin Agenda 2).
 // Ce qui pose problème car basé sur une table evenement différente de celle du plugin "simple-calendrier" !
 // il est donc normal que le plugin "simple-calendrier" la déclare pour son usage propre.
-// => celle du plugin "Acces restreint" ne sera donc pas utilisée (sauf si chargée en 1er => crash... cf. doc. pb connus) 
+// => celle du plugin "Acces restreint" ne sera donc pas utilisée. 
 // => cela tombe bien puisqu'il ne s'en sert pas lui-même 
 //    et que les plugins "simple-calendrier" et "agenda 2" sont naturellement incompatibles)
 function autoriser_evenement_voir($faire, $type, $id, $qui, $opt) {

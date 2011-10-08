@@ -15,16 +15,27 @@ include_spip('inc/simplecal_utils');
 // Pipeline. Entete des pages de l'espace privé
 function simplecal_header_prive($flux){
     $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'simplecal_style_prive.css" />';
+    
+    //  CSS DatePicker : voir dans 'prive/css/datepicker/' - plus de thèmes : http://jqueryui.com/themeroller/
+    $theme_prive = $GLOBALS['meta']['simplecal_themeprive'];
+    // ---
+    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.theme.css" />';
+    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.core.css" />';
+    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_prive.'/ui.datepicker.css" />';
+    // ---    
+    
     return $flux;
 }
 
 // Pipeline. Entete des pages de l'espace public
 function simplecal_insert_head($flux) {
-    //  CSS DatePicker : voir dans 'prive/css/datepicker/' - thèmes basé sur : http://jqueryui.com/themeroller/
+    
+    //  CSS DatePicker : voir dans 'prive/css/datepicker/' - plus de thèmes : http://jqueryui.com/themeroller/
     $theme_public = $GLOBALS['meta']['simplecal_themepublic'];
     // ---
-    $rc = "\n";
-    $flux .= $rc.'<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'.css" />';
+    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.theme.css" />';
+    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.core.css" />';
+    $flux .= '<link rel="stylesheet" type="text/css" href="'._DIR_SIMPLECAL_PRIVE.'css/datepicker/'.$theme_public.'/ui.datepicker.css" />';
     // ---    
     
     return $flux;
@@ -33,111 +44,77 @@ function simplecal_insert_head($flux) {
 
 // Pipeline : éléments 'en cours' de la page d'accueil
 function simplecal_accueil_encours($flux) {
-    
-    $req_select = "e.*, a.id_auteur, a.nom";
-    $req_from = "spip_evenements AS e, spip_auteurs_evenements as lien, spip_auteurs as a";
-    $req_where = "e.id_evenement=lien.id_evenement AND lien.id_auteur = a.id_auteur";
-    $req_orderby = "e.date_debut DESC, e.date_fin DESC";
-      
-    $req = array("SELECT"=>$req_select, "FROM"=>$req_from, "WHERE"=>$req_where." AND e.statut = 'prop'", "ORDER BY"=>$req_orderby);
-        
-    // Liste des evenements  'proposées à l'évaluation'
-    $flux .= afficher_objets('evenement',_T('simplecal:liste_evenements_a_valider'), $req, '', false);
+    $lister_objets = charger_fonction('lister_objets','inc');
 
-    return $flux;
+	$flux .= $lister_objets('evenements', array(
+		'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:info_evenements_valider'),
+		'statut'=>array('prop'),
+		'par'=>'date'));
+
+	return $flux;
 }
 
+
+
 // Pipeline : synthèse des éléments 'publiés' de la page d'accueil
-function simplecal_accueil_informations($flux) {
-    
-    $q = sql_select("COUNT(*) AS cnt, statut", 'spip_evenements', '', 'statut', '','', "COUNT(*)<>0");
-  
-    $cpt = array();
-    while($row = sql_fetch($q)) {
-        $cpt[$row['statut']] = $row['cnt'];
-    }
-    if ($cpt) {
-        $res .= afficher_plus(generer_url_ecrire("evenement_tous",""))."<b>"._T('simplecal:titre_evenements')."</b>";
-        $res .= "<ul style='margin:0px; padding-left: 20px; margin-bottom: 5px;'>";
-        if (isset($cpt['prepa'])) $res .= "<li>"._T("texte_statut_en_cours_redaction").": " . $cpt['prepa'] .'</li>';
-        if (isset($cpt['prop'])) $res .= "<li>"._T("texte_statut_attente_validation").": " . $cpt['prop'] . '</li>';
-        if (isset($cpt['publie'])) $res .= "<li><b>"._T("texte_statut_publies").": " . $cpt['publie'] ."</b>" . '</li>';
-        $res .= "</ul>";
-        
-        // ---
-        $flux .= '<div class="verdana1">';
-        $flux .= $res;
-        $flux .= '</div>';
-    }
-    
-    return $flux;
+function simplecal_accueil_informations($texte) {
+    $texte .= recuperer_fond('prive/squelettes/inclure/evenement-accueil-information', array());
+    return $texte;
 }
 
 // Zone de contenu
 function simplecal_affiche_milieu($flux) {
-
-    global $spip_lang_right;
     $exec =  $flux['args']['exec'];
     
-    // On se trouve sur une rubrique
-    if ($exec == 'naviguer') {
-        $id_rubrique = intval($flux['args']['id_rubrique']);
+    // Page de configuration
+    if ($exec == "configurer_contenu") {
+		$flux["data"] .=  recuperer_fond('prive/squelettes/inclure/configurer',array('configurer'=>'configurer_evenements'));
+	}
+    
+    return $flux;
+}
+
+
+// OK SPIP3
+function simplecal_affiche_auteurs_interventions($flux){
+    $id_auteur = intval($flux['args']['id_auteur']);
+    
+    $lister_objets = charger_fonction('lister_objets','inc');
+	$listing = $lister_objets('evenements', array(
+		'titre'=>afficher_plus_info(generer_url_ecrire('evenements', 'mode=avenir'))._T('simplecal:liste_evenements_auteur'),
+		'id_auteur'=>$id_auteur,
+		'par'=>'date'));
+
+    
+    $flux['data'] .= $listing;
+    return $flux;
+}
+
+
+/**
+ * Afficher le nombre d'evenements de l'auteur ou de la rubrique
+ *
+ */
+function simplecal_boite_infos($flux){
+    $type = $flux['args']['type'];
+    $id = intval($flux['args']['id']);
+    
+    if ($type == 'auteur'){
+        $n_evt = sql_countsel("spip_auteurs_liens", "id_auteur=".$id." and objet='evenement'");
+    } 
+    if ($type == 'rubrique'){
+        $n_evt = sql_countsel("spip_evenements", "statut='publie' and id_rubrique=".$id);
     }
     
-    // On se trouve sur la page d'accueil
-    if ($exec == 'accueil'){
-        // zone au dessous de la liste des rubriques
+    if ($type == 'auteur' or $type == 'rubrique'){
+        if ($n_evt > 0){
+            $aff = '<div>'.singulier_ou_pluriel($n_evt, 'simplecal:info_1_evenement', 'simplecal:info_n_evenements').'</div>';
+        }        
+        if (($pos = strpos($flux['data'],'<!--nb_elements-->'))!==FALSE) {
+            $flux['data'] = substr($flux['data'],0,$pos).$aff.substr($flux['data'],$pos);
+        }     
     }
-    
-    // On se trouve sur un article
-    if ($exec == 'articles'){
         
-    }
-    
-    // On se trouve sur la page d'un mot clé
-    // => liste des evenements liés à ce mot clé.
-    if ($exec == 'mots_edit'){
-        $id_mot = $flux['args']['id_mot'];
-        
-        $req_select = "e.*, a.id_auteur, a.nom";
-        $req_from = "spip_evenements AS e";
-        $req_from .= " LEFT JOIN spip_mots_evenements AS lien_m ON lien_m.id_evenement=e.id_evenement";
-        $req_from .= " LEFT JOIN spip_auteurs_evenements AS lien_a ON lien_a.id_evenement=e.id_evenement";
-        $req_from .= " LEFT JOIN spip_auteurs as a ON lien_a.id_auteur = a.id_auteur";
-        $req_where = "lien_m.id_mot=".$id_mot;
-        $req_orderby = "e.date_debut DESC, e.date_fin DESC";
-        $req = array("SELECT"=>$req_select, "FROM"=>$req_from, "WHERE"=>$req_where, "ORDER BY"=>$req_orderby);
-         
-        $flux['data'] .= afficher_objets('evenement','<b>' . _T('simplecal:info_evenements_liees_mot') . '</b>', $req);
-   }
-    
-    // On se trouve sur un auteur dans la section 'intervention' 
-    // (pipeline ajouté à la main dans auteur_infos.php (fichier customisé du core))
-    if ($exec == 'auteur_infos_interventions'){
-        $id_auteur = intval($flux['args']['id_auteur']);
-        
-        $req_select = "e.*, a.id_auteur, a.nom";
-        $req_from = "spip_evenements AS e, spip_auteurs_evenements as lien, spip_auteurs as a";
-        $req_where = "e.id_evenement=lien.id_evenement AND lien.id_auteur = a.id_auteur AND lien.id_auteur=".$id_auteur;
-        $req_orderby = "e.date_debut DESC, e.date_fin DESC";
-        
-        $req = array("SELECT"=>$req_select, "FROM"=>$req_from, "WHERE"=>$req_where, "ORDER BY"=>$req_orderby);
-        
-        // Liste des évènements
-        $flux['data'] .= afficher_objets('evenement',_T('simplecal:liste_evenements_auteur'), $req, '',false);
-        $flux['data'] .= '<br class="nettoyeur" />';
-    }
-    
-    // Page de configuration 
-    if ($exec == 'config_fonctions'){
-        $s='<br />';
-        $s.=debut_cadre_trait_couleur(_DIR_SIMPLECAL_IMG_PACK."simplecal-logo-24.png", true, "", _T('simplecal:config_titre'));
-        $s.=recuperer_fond('prive/configurer/simplecal', array());
-        $s.=fin_cadre_trait_couleur(true);
-        
-        $flux['data'] .= $s;
-    }
-    
     return $flux;
 }
 
@@ -146,10 +123,7 @@ function simplecal_configurer_liste_metas($metas) {
     $metas['simplecal_autorisation_redac'] = 'non'; // [oui, non]
     $metas['simplecal_rubrique'] = 'non'; // [non, secteur, partout]
     $metas['simplecal_refobj'] = 'non';   // [oui, non]
-    $metas['simplecal_descriptif'] = 'oui';   // [oui, non]
-    $metas['simplecal_texte'] = 'oui';  // [oui, non]
-    $metas['simplecal_lieu'] = 'oui';   // [oui, non]
-    $metas['simplecal_lien'] = 'non';   // [oui, non]
+    $metas['simplecal_themeprive'] = 'base';
     $metas['simplecal_themepublic'] = 'base';
     return $metas;
 }
@@ -326,13 +300,5 @@ function simplecal_rechercher_liste_des_champs($tables){
 
     return $tables;
 }
-
-
-// pipeline : pour que le plugin spip-jqueryui rappatrie jquery-ui
-function simplecal_jqueryui_forcer($scripts){
-    $scripts[] = "jquery.ui.datepicker";
-    return $scripts;
-}
-
 
 ?>

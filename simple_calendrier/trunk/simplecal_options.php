@@ -10,20 +10,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define("_DIR_SIMPLECAL_IMG_PACK", _DIR_PLUGIN_SIMPLECAL."img_pack/");
 define("_DIR_SIMPLECAL_PRIVE", _DIR_PLUGIN_SIMPLECAL."prive/");
 
-
-// Necessaire au bouton d'administration 'Evènement 123' de l'espace public
-// Mais pour le voir, il faut rajouter un 'evenement' dans le foreach de admin_objet() dans /ecrire/balise/formulaire_admin.php
-function generer_url_ecrire_evenement($id, $args='', $ancre='', $statut='', $connect='') {
-	$a = "id_evenement=" . intval($id);
-	if (!$statut) {
-		$statut = sql_getfetsel('statut', 'spip_evenements', $a,'','','','',$connect);
-	}
-	$h = ($statut == 'publie' OR $connect)
-	? generer_url_entite_absolue($id, 'evenement', $args, $ancre, $connect)
-	: (generer_url_ecrire('evenement_voir', $a . ($args ? "&$args" : ''))
-		. ($ancre ? "#$ancre" : ''));
-	return $h;
-}
+include_spip('inc/simplecal_classement'); // pour la page evenements !
 
 
 // ------------------------------------
@@ -36,5 +23,37 @@ $corbeille_params["evenements"] = array (
     "tableliee"  => array("spip_mots_evenements"),
 );
 
+
+// 2008-12-23 -> 2009-02-14
+// 2009-01
+// debut <= 2009-01-31 ET fin >= 2009-01-01
+
+
+
+function simplecal_evenements_where($mode='', $annee='', $mois=''){
+    
+    // Note : date_fin non obligatoire => like nécessaire
+    
+    if ($annee && $mois) {
+        $date_min = $annee."-".$mois."01";
+        $date_max = $annee."-".$mois."31";
+        $req = "((date_debut like '%".$annee."-".$mois."%'";
+        $req .= " OR date_fin like '%".$annee."-".$mois."%')";
+        $req .= " OR (date_debut <= '$date_max' AND date_fin >= '$date_min'))"; 
+    } else if ($annee && !$mois) {
+        $date_min = $annee."-01-01";
+        $date_max = $annee."-12-31";
+        $req = "((date_debut like '%".$annee."%'";
+        $req .= " OR date_fin like '%".$annee."%')";
+        $req .= " OR (date_debut <= '$date_max' AND date_fin >= '$date_min'))"; 
+    } else if ($mode == 'avenir') {
+        $req = "(date_debut >= DATE_FORMAT(NOW(),'%Y-%m-%d')";
+        $req .= " OR date_fin >= DATE_FORMAT(NOW(),'%Y-%m-%d'))";
+    } else {
+        $req = "";
+    }
+    
+    return $req;
+}
 
 ?>

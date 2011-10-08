@@ -1,0 +1,41 @@
+<BOUCLE_evenement(EVENEMENTS){id_evenement}{statut?}{si #ENV{exec}|=={evenement}}>
+
+[(#BOITE_OUVRIR{[
+				
+	[(#AUTORISER{modifier,evenement,#ID_EVENEMENT})
+				
+		[(#ID_EVENEMENT|afficher_qui_edite{evenement}|non)
+			[(#URL_ECRIRE{evenement_edit,id_evenement=#ID_EVENEMENT}|icone_verticale{<:simplecal:icone_modifier_evenement:>,evenement,edit,right})]
+		]
+		[(#ID_EVENEMENT|afficher_qui_edite{evenement}|oui)
+			[(#URL_ECRIRE{evenement_edit,id_evenement=#ID_EVENEMENT}|icone_verticale{#ID_EVENEMENT|afficher_qui_edite{evenement},warning-24,'',right ajax preload})]
+		]
+	]
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{evenement-24.png}|balise_img{evenement,cadre-icone})]</h1>
+],simple fiche_objet})]
+
+
+<div class="ajax">
+    #FORMULAIRE_DATER{evenement,#ID_EVENEMENT}
+</div>
+
+
+<div class="ajax">
+	#FORMULAIRE_EDITER_LIENS{auteurs,evenement,#ID_EVENEMENT}
+</div>
+
+<div id="wysiwyg">
+    <INCLURE{fond=prive/objets/contenu/evenement,id=#ID_EVENEMENT} />
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,evenement,id,#ID_EVENEMENT},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+<script type="text/javascript">if (window.jQuery)
+jQuery(function(){jQuery('#navigation>div').ajaxReload({args:{exec:'evenement'}});})
+</script>
+]
+</BOUCLE_evenement>
+[(#ENV**{exec}|=={evenement_edit}|?{#INCLURE{fond=prive/squelettes/contenu/evenement_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_evenement>

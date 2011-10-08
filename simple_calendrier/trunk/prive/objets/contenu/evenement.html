@@ -1,0 +1,36 @@
+<BOUCLE_afficher_contenu(EVENEMENTS){tout}{id_evenement=#ENV{id}}{statut?}>
+    [<div class="champ contenu_notes">
+        <div class='label'><:simplecal:date_de_debut:> : </div>
+        <div dir='#LANG_DIR' class='#EDIT{date_debut} date_debut'>(#DATE_DEBUT|nom_jour) [(#DATE_DEBUT|affdate_jourcourt)]</div>
+    </div>]
+    [<div class="champ contenu_notes">
+        <div class='label'><:simplecal:date_de_fin:> : </div>
+        <div dir='#LANG_DIR' class='#EDIT{date_fin} date_fin'>(#DATE_FIN|nom_jour) [(#DATE_FIN|affdate_jourcourt)]</div>
+    </div>]
+    [<div class="champ contenu_notes">
+        <div class='label'><:simplecal:lieu:> : </div>
+        <div dir='#LANG_DIR' class='#EDIT{lieu} lieu'>(#LIEU)</div>
+    </div>]
+
+    
+    <div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+        <div class='label'><:simplecal:descriptif:> : </div>
+        <div dir='#LANG_DIR' class='#EDIT{descriptif} descriptif'>[(#DESCRIPTIF|image_reduire{500,0})]</div>
+    </div>
+    
+    <div class="champ contenu_texte[ (#TEXTE*|strlen|?{'',vide})]">
+        <div class='label'><:simplecal:texte:></div>
+        <div dir='#LANG_DIR' class='#EDIT{texte} texte'>[(#TEXTE|image_reduire{500,0})]</div>
+    </div>
+    
+    [(#TYPE|oui)
+    <div class="champ contenu_notes">
+        <div class='label'><:simplecal:texte_issu_autre_objet:></div>
+        <div dir='#LANG_DIR' class='#EDIT{texte} texte'>
+            &rarr;<:simplecal:reference_objet:> 
+            [(#TYPE|=={article}|oui)<a href="?exec=#TYPEs&id_#TYPE=#ID_OBJET">#TYPE#ID_OBJET</a>]
+            [(#TYPE|=={breve}|oui)<a href="?exec=#TYPEs_voir&id_#TYPE=#ID_OBJET">#TYPE#ID_OBJET</a>]
+        </div>
+    </div>]
+    
+</BOUCLE_afficher_contenu>

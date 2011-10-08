@@ -1,7 +1,3 @@
-
-.logo-plugin { text-align:center; }
-.logo-plugin-desc { text-align:center; }
-
 #simplecal-filtres { padding-left:1.5em; margin-left:0; }
 #simplecal-filtres li { padding-left:0px; }
 #simplecal-filtres li ul{ padding-left:2em; margin-left:0; margin-bottom:1em;}
@@ -14,12 +10,10 @@
 .simplecal-formulaire-succes { border:2px solid Chartreuse; background-color:#efe; padding:5px; margin-bottom:10px; }
 .simplecal-formulaire-succes span { color:Green; font-weight:bold; }
 
+.formulaire_configurer_evenements fieldset p { margin-bottom:0px; }
+.formulaire_configurer_evenements ul li { padding-left:2em; }
+.formulaire_configurer_evenements label.actif { font-weight:bold; }
 
-#configurer-simplecal ul { list-style-type:none; padding:0; margin:0; }
-#configurer-simplecal .submit { float:right; }
-#configurer-simplecal label.actif { font-weight:bold; }
-#configurer-simplecal th small { font-weight: normal; }
-#configurer-simplecal .titre-champ { display:inline-block; width:120px; }
 
 .simplecal-nbinrub { margin-bottom:0.5em; padding:0 0.5em 0.5em; border-bottom:1px dotted #000000; }
 

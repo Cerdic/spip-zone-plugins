@@ -1,0 +1,4 @@
+evenement-24.png : 
+- pour l'echafaudage du evenement_edit.html
+- pour l'icone des listes (css automatique dans /prive/themes/spip/lists.css.html)
+

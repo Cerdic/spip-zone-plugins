@@ -6,16 +6,10 @@
  */
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
+include_spip('inc/puce_statut');
 
-// Fonction du core, adaptee ici, qui permet d'afficher
-// un formulaire de changement de statut pour un objet.
-// Appelee par :
-// - prive/infos/evenement_fonctions
-
-
-function inc_instituer_evenement($id_objet, $statut=-1)
-{
-	// le statut n'est pas fournit => on s'arrete.
+// Appelee par : prive/infos/evenement_fonctions
+function inc_instituer_evenement($id_evenement, $statut=-1){
 	if ($statut == -1) return "";
 
 	// Statuts possibles 
@@ -29,7 +23,7 @@ function inc_instituer_evenement($id_objet, $statut=-1)
 	);
     
     // Autorisation => retrait de certains statuts
-    if (!autoriser('publier', 'evenement', $id_objet)) {
+    if (!autoriser('publier', 'evenement', $id_evenement)) {
 		unset($etats['publie']);
 		unset($etats['refuse']);
 	}
@@ -43,32 +37,34 @@ function inc_instituer_evenement($id_objet, $statut=-1)
 
 	// debut de code html du formulaire (partie fixe)	
 	$res =
-	  "<ul id='instituer_sortie-$id_objet' class='instituer_breve instituer'>" 
+	  "<ul id='instituer_evenement-$id_evenement' class='instituer_breve instituer'>" 
 	  . "<li>" . _T('simplecal:entree_evenement_publie') 
 	  ."<ul>";
 	
-	// On y ajoute la suite : partie variable selon le statut en cours.
-	// Le lien de redirection en cas de changement effectif est stocke en attendant la suite.
-	$href = redirige_action_auteur('editer_evenement', $id_objet, 'evenement_voir', "id_evenement=$id_objet");
-	// Pour chaque etat possible du statut,
+    /*
+	$href = redirige_action_auteur('editer_evenement', $id_evenement, 'evenement_voir', "id_evenement=$id_evenement");
 	foreach($etats as $s=>$lib_statut){
-		// 1- On complete le lien de redirection avec les parametres specifiques
 		$href = parametre_url($href, 'statut', $s);
-		// 2- On teste si le statut est actuel ou possible
-		if ($s==$statut)
-			// Si le statut est celui en cours sur l'objet
-			// alors on l'affiche en tant que tel
+		
+		if ($s==$statut) {
 			$res .= "<li class='$s selected'>" . puce_statut($s) . $lib_statut[0] . '</li>';
-		else
-			// Sinon, c'est un nouvel etat possible,
-			// alors on l'affiche avec un lien qui change le statut
+        } else {
 			$res .= "<li class='$s'><a href='$href' onclick='return confirm(confirm_changer_statut);'>" . puce_statut($s) . $lib_statut[0] . '</a></li>';
+        }
+	}
+    */
+    
+    foreach($etats as $s=>$affiche){
+		$href = generer_action_auteur('instituer_evenement',"$id_evenement-$s",self());
+		if ($s==$statut) {
+			$res .= "<li class='$s selected'>" . puce_statut($s) . $affiche[0] . '</li>';
+        } else {
+			$res .= "<li class='$s'><a href='$href' onclick='return confirm(confirm_changer_statut);'>" . puce_statut($s) . $affiche[0] . '</a></li>';
+        }
 	}
 
-	// On y ajoute maintenant la fin du code hmtl (partie fixe)
 	$res .= "</ul></li></ul>";
     
-	// Puis on renvoie le tout !
 	return $res;
 }
 
