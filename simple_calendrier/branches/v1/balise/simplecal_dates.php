@@ -8,7 +8,8 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_DATE_JOUR($p) { 
-    $date_now = date('Y-m-d H:i:s');
+    //$date_now = date('Y-m-d H:i:s');
+    $date_now = date('Y-m-d 00:00:00');
     
     $p->code = "'$date_now'"; 
     return $p; 
