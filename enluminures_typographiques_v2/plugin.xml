@@ -1,22 +1,12 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Enluminures typographiques pour 1.9.2 et suivantes
-	</nom>
-	<auteur><!-- Auteur du plugin -->
-[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_] &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]
-
-&#169; 2007 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<lien>[Exemple d'utilisation->http://www.pyrat.net/Raccourcis-Typographiques-de-SPIP.html]</lien>
-	<version>
-	2.1.4
-	</version>
-	<etat>
-	stable
-	</etat>
-	<description>
-Rajoute des raccourcis typographiques et des boutons &#224; la barre typographique enlumin&#233;e.
-
+	<nom>Enluminures typographiques</nom>
+	<slogan>Plein de raccourcis pour la mise en forme !</slogan>
+	<auteur>[Jacques->http://www.spip-contrib.net/_Jacques-PYRAT_], &#224; partir des raccourcis mis en place par [Fran&#231;ois->http://www.spip-contrib.net/_Francois-Schreuer_]</auteur>
+	<licence>&#169; 2007 GNU/GPL</licence>
+	<lien>http://www.spip-contrib.net/Plugin-Enluminures-typographiques</lien>
+	<version>2.1.4</version>
+	<etat>stable</etat>
+	<description>Ce plugin ajoute au [Plugin Barre Typographique V2->http://www.spip-contrib.net/Plugin-Barre-Typographique-V2] les raccourcis typographiques et les boutons pr&#233;sents dans le [Plugin Barre Typographique Enlumin&#233;e->http://www.spip-contrib.net/Plugin-Barre-Typographique]. Par exemple :
 -* Paragraphes :
 -** {{Sous-titres}} <code>{n{</code>Texte du titre<code>}n}</code>, n variant de 2 &#224; 5, la barre de raccourcis ne proposant que 2 et 3
 -** {{Centrer}} <code>[|</code>Paragraphe centr&#233;<code>|]</code>
@@ -28,52 +18,13 @@ Rajoute des raccourcis typographiques et des boutons &#224; la barre typographiq
 -** {{Mise en exposant}} {&lt;sup&gt;}texte en exposant{&lt;/sup&gt;}
 -** {{Petites capitales}} {&lt;sc&gt;}texte en petite capitales{&lt;/sc&gt;}
 -** {{Biff&#233;}} {&lt;del&gt;}texte biff&#233;{&lt;/del&gt;}
--** {{Bulle d'aide}} <code>[GPL|Gnu Public Licence]</code>
-_ Et aussi sur les entr&#233;es de glossaire <code>[?GPL|Gnu Public Licence]</code>
--** {{Lien avec bulle d'aide}} <code>[texte du lien|Le site officiel de SPIP->http://www.spip.net/]</code>
--** {{Ancre et retour &#224; l'ancre}} {[}definition_ancre&lt;-{]} et {[}retour &#224; l'ancre-&gt;#definition_ancre{]}
 
-{{Param&#233;trage}} : vous pouvez modifier le fonctionnement du plugin par votre fichier ecrire/mes_options.php :
-
-{{Attention}} : le plugin incorpore automatiquement dans vos pages les nouveaux styles (si #INSERT_HEAD est pr&eacute;sent) !
-_ Si vous n'en voulez pas :
-<code>$GLOBALS['BarreTypoEnrichie_Preserve_Header'] = true;</code>
-
-Exemple :
-<code>
-// Pour que les fausses puces soient transformees en vraie listes a puces
-$GLOBALS['barre_typo_pas_de_fausses_puces'] = true;
-
-// Pour commencer la titraille a h2 (et non h3 comme par defaut dans SPIP -- pour des raisons historiques)
-$GLOBALS['debut_intertitre'] = '<h2 class="spip">';
-$GLOBALS['fin_intertitre'] = '</h2>';
-$GLOBALS['debut_intertitre_2'] = '<h3 class="spip">';
-$GLOBALS['fin_intertitre_2'] = '</h3>';
-$GLOBALS['debut_intertitre_3'] = '<h4 class="spip">';
-$GLOBALS['fin_intertitre_3'] = '</h4>';
-$GLOBALS['debut_intertitre_4'] = '<h5 class="spip">';
-$GLOBALS['fin_intertitre_4'] = '</h5>';
-$GLOBALS['debut_intertitre_5'] = '<h6 class="spip">';
-$GLOBALS['fin_intertitre_5'] = '</h6>';
-</code>
-
-Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=bte->./?exec=cfg&amp;cfg=bte] pour configurer ces options (les options de cfg sont priortitaires par rapport &#224; celles de mes_options.php !)
+{{Param&#233;trage}} : vous pouvez modifier le fonctionnement du plugin par votre fichier ecrire/mes_options.php ou en installant le plugin cfg (les options de cfg sont priortitaires par rapport &#224; celles de mes_options.php !)
 
 {Certaines icones proviennent de [FamFamFam->http://www.famfamfam.com/lab/icons/silk/].}
 	</description>
-	<lien>http://zone.spip.org/trac/spip-zone/wiki/BarreTypoEnrichie</lien> <!-- URI de documentation -->
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	TypoEnluminee
-	</prefix>
-	<icon>
-	img_pack/moinecopiste.gif
-	</icon>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>TypoEnluminee</prefix>
+	<icon>img_pack/moinecopiste.gif</icon>
 	<pipeline>
 		<nom>pre_propre</nom>
 		<inclure>typo_enrichie.php</inclure>
@@ -114,9 +65,8 @@ Vous pouvez aussi installer le plugin cfg et utiliser [ecrire/?exec=cfg&amp;cfg=
 		<nom>bt_paragraphes</nom>
 		<inclure>barre_typo_enrichie_pipelines.php</inclure>
 	</pipeline>
-	<!-- Le parametre action est facultatif : en son absence la methode de la classe portant le nom du pipeline est appelee. Le parametre inclure est facultatif.	-->
 
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<necessite id="BarreTypoEnrichie" version="[2.5.3;]" />
 	<categorie>edition</categorie>
 </plugin>
