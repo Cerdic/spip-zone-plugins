@@ -8,14 +8,15 @@ function action_fusion_pdf_dist($arg=null) {
 	}
  	
 	// On recupere les infos de l'argument
-	@list($path_parent,$interval,$prefix,$titre_sale,$objet,$id_objet) = explode('//', $arg);
+	@list($id_document_parent,$interval,$prefix,$objet,$id_objet) = explode('/', $arg);
 	$id_objet = intval($id_objet);
+	$id_document_parent = intval($id_document_parent);
 	
-	spip_log("fusion pour pdf $path_parent, $interval,$prefix,$titre_sale,$objet,$id_objet",'fusionpdf');
+	spip_log("fusion pour pdf $id_document_parent, $interval,$prefix,$objet,$id_objet",'fusionpdf');
 
 	// todo autoriser('fusion_pdf', 'article',$arg[1]))
-	if ($path_parent && $interval!=' ') {
-		$fusion=fusion_pdf_post($path_parent, $interval,$prefix, $titre_sale,$objet,$id_objet);
+	if ($id_document_parent && $interval!=' ') {
+		$fusion=fusion_pdf_post($id_document_parent, $interval,$prefix,$objet,$id_objet);
 	}
 	
 	// Invalider les caches
@@ -25,49 +26,55 @@ function action_fusion_pdf_dist($arg=null) {
 }
 
 
-function fusion_pdf_post($path_parent, $interval, $prefix,$titre_sale,$objet,$id_objet){
+function fusion_pdf_post($id_document_parent, $interval, $prefix,$objet,$id_objet){
 	
-	$fichier_propre=titrature($titre_sale,$prefix).'.pdf';
-	$outputpdf=_DIR_IMG.'/pdf/'.$fichier_propre;
+	$titre=sql_getfetsel('titre', 'spip_'.$objet.'s', "id_$objet=".$id_objet);	
+	$fichier_propre=titrature($titre,$prefix).'.pdf';
+	$outputpdf=_DIR_IMG.'pdf/'.$fichier_propre;
 	
-	spip_log("fusionpost2 generer $outputpdf a partir de $path_parent",'fusionpdf');	
-
+	spip_log("fusionpost2 generer pour $objet $id_objet $outputpdf a partir de $id_document_parent",'fusionpdf');	
+	
+	//recuperer le $path_parent
+	$path_parent= sql_getfetsel('fichier', 'spip_documents', "id_document=".$id_document_parent);
+	$path_parent=_DIR_IMG."$path_parent";
 	
 	//verifier que ce n'est pas encore dans la base
 	if ($doc = sql_fetsel('id_document', 'spip_documents', 'fichier='.$outputpdf." AND id_$objet=".$id_objet))
 	return false;
 	
 	//on extrait les pages et on fusionne
-	fusionner($path_parent,$outputpdf,$interval);
+	$fusion=fusionner($path_parent,$outputpdf,$interval);
 	
-	$date_objet=sql_getfetsel('date',"spip_".$objet."s","id_$objet='$id_objet'");
-		
-	//preparer les champs
-			$champs['date'] = $date_objet;
-			$champs['fichier'] = $outputpdf;
-			$champs['taille'] =  filesize($outputpdf);
-			$champs['largeur'] = 0;
-			$champs['hauteur'] = 0;
-			$champs['mode'] = 'document';
-			$champs['extension'] = 'pdf';
-			$champs['statut'] = 'publie';
+	if($fusion){
+		$date_objet=sql_getfetsel('date',"spip_".$objet."s","id_$objet='$id_objet'");
 			
-	//les inserer avec pipeline adequat	
-	$id_document = insert_document($champs);
-
-	if($id_document){
+		//preparer les champs
+				$champs['date'] = $date_objet;
+				$champs['fichier'] = 'pdf/'.$fichier_propre;
+				$champs['taille'] =  filesize($outputpdf);
+				$champs['largeur'] = 0;
+				$champs['hauteur'] = 0;
+				$champs['mode'] = 'document';
+				$champs['extension'] = 'pdf';
+				$champs['statut'] = 'publie';
+				
+		//les inserer avec pipeline adequat	
+		$id_document = insert_document($champs);
 	
-	//puis sauvegarder le document dans l'objet demande
-	spip_log("insertion doc= $id_document",'fusionpdf');
-		$document_lien = sql_insertq(
-			'spip_documents_liens',
-			array(
-				'id_document'=>$id_document,
-				'id_objet'=>$id_objet,
-				'objet'=>$objet,
-				'vu'=>'non'
-			)
-		);
+		if($id_document){
+		
+		//puis sauvegarder le document dans l'objet demande
+		spip_log("insertion doc= $id_document",'fusionpdf');
+			$document_lien = sql_insertq(
+				'spip_documents_liens',
+				array(
+					'id_document'=>$id_document,
+					'id_objet'=>$id_objet,
+					'objet'=>$objet,
+					'vu'=>'non'
+				)
+			);
+		}
 	}
 
 }
@@ -76,15 +83,15 @@ function fusion_pdf_post($path_parent, $interval, $prefix,$titre_sale,$objet,$id
 //verifier la ligne de modif dans fpdf pour le output
 function fusionner($path_parent,$outputpdf,$interval) {
 	// pour fusionner divers pdfs entre eux
-	//le path_parent pourrait etre un tableau (cheminpdf1=>pages,cheminpdf2=>pages)
+	//le id_document_parent pourrait etre un tableau (cheminpdf1=>pages,cheminpdf2=>pages)
 	if(include_once(find_in_path('lib/PDFMerger/PDFMerger.php'))){
 	
 	$pdf = new PDFMerger;
 	$pdf->addPDF($path_parent,$interval)
 		->merge('file', $outputpdf);			
-	} else 	spip_log("librairie introuvable input= $path_parent output= $outputpdf",'fusionpdf');
-
-	
+	} 
+	if($pdf) return true;
+	else spip_log("librairie introuvable input= $path_parent output= $outputpdf",'fusionpdf');
 }
 
 
