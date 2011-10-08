@@ -25,7 +25,7 @@ $t = '[Jim->Jim@toto.com]';
 echo '<strong>' . $t . '</strong><br />';
 var_dump(normaliser_auteur_licence($t, 'auteur'));
 
-$t = 'M&#233;dard, Jim';
+$t = 'M&#233;dard, Jim, [Edouard Lafargue->mailto:edouard@lafargue.name]';
 echo '<strong>' . $t . '</strong><br />';
 var_dump(normaliser_auteur_licence($t, 'auteur'));
 
@@ -44,6 +44,20 @@ var_dump(normaliser_auteur_licence($t, 'auteur'));
 $t = "M&#233;dard, Jim - GPL (c) 2001-2010, distribu&#233; MIT - Lucien [Roger->http://www.tests.net]";
 echo '<strong>' . $t . '</strong><br />';
 var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+$t = "Camille Lafitte [Webelys->http://www.webelys.com], Cyril MARION [Ateliers CYM->http://www.cym.fr]";
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
+
+// ----------------------------------------------------------------
+echo '<h3>Balise licence</h3>';
+$b = 'licence';
+
+$t = '&#169; 2007 - GNU/GPL';
+echo '<strong>' . $t . '</strong><br />';
+var_dump(normaliser_auteur_licence($t, 'auteur'));
+
 
 
 echo '<h2>TESTS FONCTION compiler_branches_spip()</h2>';
