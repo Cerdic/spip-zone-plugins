@@ -38,8 +38,9 @@ return $flux;
 
 
 function taa_recuperer_fond($flux){
+	//Insertion des onglets de langue
     if ($flux['args']['fond'] == 'prive/squelettes/contenu/article'){
-    	
+
     	$id_article= $flux['args']['contexte']['id_article'];
 				
 		$barre=charger_fonction('barre_langues','inc');
@@ -47,6 +48,15 @@ function taa_recuperer_fond($flux){
 
         $flux['data']['texte'] = str_replace('</h1>', '</h1>' . $barre_langue, $flux['data']['texte']);
     }
-    return $flux;
+    
+    //Liste compaacte des articles
+    if ($flux['args']['fond'] == 'prive/objets/liste/articles' AND !lire_config('liste_compacte_desactive')){
+
+    $flux['texte'] = recuperer_fond('prive/objets/liste/articles_compacte',$flux['args']['contexte']);
+
+    }
+
+ return $flux;   
 }
+
 ?>

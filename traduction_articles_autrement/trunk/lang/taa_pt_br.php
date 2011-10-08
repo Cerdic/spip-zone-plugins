@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_plugin' => 'Tradução das matérias diferentemente',
-	'traductions' => 'Traduções',
+	'traductions' => 'Trad',
 
 	// V
 	'voir_traductions' => 'Ver os detalhes das traduções'

@@ -33,8 +33,6 @@ function inc_barre_langues_dist($id_article){
 		while($row=sql_fetch($sql)){
 			$traductions[$row['lang']]=$row['id_article'];
 			}
-					
-		
 		}
 	// L'article n'est pas traduit	
 	else{
@@ -48,7 +46,7 @@ function inc_barre_langues_dist($id_article){
 	// Pour chaque langue présente on crée un bouton
 	
 	// indique l'article par défaut
-	$span_content='<div class="ref">*<span>'._T('spip:trad_reference').'</span></div>';	
+	$span_content='<div class="ref_article">*<span>'._T('spip:trad_reference').'</span></div>';	
 	
 	foreach($langues_dispos as $key => $value){
 		$class='';
@@ -80,9 +78,6 @@ function inc_barre_langues_dist($id_article){
 					$onglets_traduction.= '<li class="non_traduit box_onglet"><a href="'.generer_url_ecrire($objet.'_edit','new=oui&lier_trad='.$id_trad.'&lang_dest='.$value).'" title="'._T('ecrire:info_tout_site2').'">'.traduire_nom_langue($value).'</a></li>';				
 				}
 
-				
-				
-			
 				$action=redirige_action_auteur ('changer_langue',$id_article,$objet,"id_article=$id_article");
 				// Si le plugin traduction rubriques est activé on affiche pas les onglets changement de langue car la langue se change en modifiant la rubrique
 				if(!$section){
