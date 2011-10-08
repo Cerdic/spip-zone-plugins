@@ -103,7 +103,7 @@ _ ALle Standardschleifen (Abfragen) von SPIP werden überladen, und um die Über
 		<inclure>acces_restreint_pipelines.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version='[3.0.0-dev;3.1.0)' />
+	<necessite id="SPIP" version='[3.0.0-dev;3.0.*]' />
 	<categorie>auteur</categorie>
 	<traduire gestionnaire="salvatore" module="accesrestreint" reference="fr" />
 </plugin>
