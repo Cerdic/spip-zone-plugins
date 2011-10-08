@@ -1,33 +1,18 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	D&eacute;couper un article en plusieurs pages
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 	collectif 
-_ &#169; 2007 - Distribu&eacute; sous licence GPL
-	</auteur>
-	<version> <!-- Version du plugin - identique a la version SPIP avec laquelle il est compatible -->
-	1.9.2
-	</version>
-	<etat> <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
-	test
-	</etat>
-	<icon>
-    decoupenpage.png
-	</icon>
+	<nom>D&#233;coupenpages</nom>
+	<slogan>D&#233;couper un article en plusieurs pages</slogan>
+	<auteur>collectif</auteur>
+	<licence>&#169; 2007 GPL</licence>
+	<version>1.9.2</version><!-- Version du plugin - identique a la version SPIP avec laquelle il est compatible -->
+	<etat>test</etat>
+	<icon>decoupenpage.png</icon>
 	<description>
-	Un plugin pour d&eacute;couper l'affichage public d'un article en plusieurs pages. R&eacute;digez vos articles en utilisant trois signes plus cons&eacute;cutifs (+++) a l'endroit qui doit recevoir la coupure.
+	Un plugin pour d&#233;couper l'affichage public d'un article en plusieurs pages. R&#233;digez vos articles en utilisant trois signes plus cons&#233;cutifs (+++) &#224; l'endroit qui doit recevoir la coupure.
 	</description>
-	<lien>http://www.spip-contrib.net/Decouper-un-article-en-plusieurs</lien> <!-- URI de documentation -->
-	<fonctions><!--  fichier fonctions charge a chaque recalcul (comme l'ancien mes_fonctions.php) !! ne surtout pas l'appeler mes_fonctions -->
-	decouper_fonctions.php
-	</fonctions>
-	<options>
-	decouper_options.php
-	</options>
-	<prefix> 
-	decouper
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<lien>http://www.spip-contrib.net/Decouper-un-article-en-plusieurs</lien>
+	<fonctions>decouper_fonctions.php</fonctions>
+	<options>decouper_options.php</options>
+	<prefix>decouper</prefix>
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>edition</categorie>
 </plugin>
