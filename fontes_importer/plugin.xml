@@ -1,15 +1,4 @@
 <plugin>
-
-	<!--  
-	// fontes_importer plugin.xml
-
-// $LastChangedRevision$
-// $LastChangedBy$
-// $LastChangedDate$
-
-	
-	 -->
-	 	
 	<nom>Fontes Importer (FonI)</nom>
 	<slogan>G&#233;rer des polices de caract&#232;res</slogan>
 	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
@@ -24,7 +13,7 @@
 	<version>1.1.4</version>
 	<etat>stable</etat>
 	
-	<licence>&#169; 2010 GNU/GPL</licence>
+	<licence>&#169; 2010 - GNU/GPL - MIT</licence>
 	
 	<!-- espace de nommage -->
 	<prefix>foni</prefix>
