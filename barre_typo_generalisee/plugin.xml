@@ -10,6 +10,7 @@
 	<licence>GPL</licence>
 	<version>1.5.0</version>
 	<etat>stable</etat>
+	<prefix>barre_typo_generalisee</prefix>
 	<description>
 		<multi>
 		[fr]Ce plugin active la barre typographique de SPIP sur toutes les zones de textes (rubriques, sites, mots clefs, etc.)
