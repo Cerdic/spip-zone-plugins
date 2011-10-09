@@ -1,16 +1,19 @@
 <plugin>
 	<nom>Interdire les retours-chariot</nom>
-	<version>1.0</version>
+	<slogan>No &#60;br&#62; !</slogan>
+	<version>1.0.0</version>
 	<prefix>no_br</prefix>
 	<etat>stable</etat>
 	<auteur>ARNO*</auteur>
 	<icon>logo.png</icon>
-	<description>Les retours-chariot c'est mal, les retours-chariot sont une plaie, les retours-chariot nuisent &agrave; votre sant&eacute;. Ce plugin interdit l'insertion de retours-chariot dans le texte en les rempla&ccedil;ant par des changements de paragraphe (ce qu'ils devraient toujours &ecirc;tre).</description>
+	<description>
+		Les retours-chariot c'est mal, les retours-chariot sont une plaie, les retours-chariot nuisent &#224; votre sant&#233;. Ce plugin interdit l'insertion de retours-chariot dans le texte en les rempla&#231;ant par des changements de paragraphe (ce qu'ils devraient toujours &#234;tre).
+	</description>
 	<pipeline>
 		<nom>pre_propre</nom>
 		<action>interdire_br</action>
 		<inclure>no_br.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
 </plugin>
