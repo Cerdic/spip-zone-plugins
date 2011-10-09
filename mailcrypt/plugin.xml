@@ -1,11 +1,14 @@
 <plugin>
 	<nom>MailCrypt 2</nom>
+	<slogan>Prot&#233;ger les liens de courriels</slogan>
 	<auteur>Alexis Roussel, Paolo, Patrice Vanneufville, Joseph</auteur>
 	<version>2.0.0</version>
 	<icon>images/mailcrypt-256.png</icon>
 	<etat>stable</etat>
-	<description>Remplace les liens de courriels par un lien javascript. Ce plugin vise à emp&ecirc;cher des robots spammeurs de collecter les adresses emails.</description>
-	<lien>http://www.spip-contrib.net/?article3828</lien> <!-- URI de documentation -->
+	<description>
+		MailCrypt remplace les liens de courriels dans vos textes par un lien javascript afin d'&#233;viter que des robots spammeurs ne collectent les emails affich&#233;s sur votre site. La modification est transparente sur un navigateur disposant de javascript. Lorsque javascript n'est pas install&#233;, le mail reste compr&#233;hensible par un &#234;tre humain.
+	</description>
+	<lien>http://www.spip-contrib.net/?article3828</lien>
 	<prefix>mailcrypt</prefix>
 	<categorie>edition</categorie>
 	<fonctions>mailcrypt_fonctions.php</fonctions>
@@ -17,5 +20,5 @@
 		<nom>post_propre</nom>
 		<inclure>mailcrypt_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 </plugin>
