@@ -6,7 +6,16 @@
 	<licence>GNU/GPL - (c) 2009-2011</licence>
 	<install>base/bannieres_upgrade.php</install>
 	<etat>dev</etat>
-	<description>Gestion de banni&#232;res</description>
+	<slogan>G&#233;rer des campagnes d'information compos&#233;es d'images ou d'animations</slogan>
+	<description>
+La balise <code>#BANNIERE</code> permet de positionner facilement cet objet dans vos squelettes. 
+Plusieurs objets peuvent &#234;tre plac&#233;s sur la page et g&#233;r&#233;s en fonction de leur position (ex.: <code>#BANNIERE{1}</code>). 
+
+Si vous lui faites passer des informations de localisation, vous pourrez choisir l'objet &#224; afficher en cons&#233;quence. 
+Un lien est plac&#233; sur les images et le clic est comptabilis&#233;. 
+
+Enfin, la campagne s'affiche pendant la p&#233;riode que vous d&#233;finissez dans l'espace priv&#233;.
+	</description>
 	<lien>http://www.spip-contrib.net/Bannieres-2</lien>
 	<icon>images/bannieres.png</icon>
 	<prefix>bannieres</prefix> 	

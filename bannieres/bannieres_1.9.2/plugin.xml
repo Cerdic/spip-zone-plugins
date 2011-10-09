@@ -1,8 +1,12 @@
 <plugin>
 	<nom>Banni&#232;res</nom>
-	<auteur>Fran&#231;ois de Montlivault </auteur>
-	<version>0.11</version><etat>dev</etat>
-	<description>Gestion de banni&#232;res</description>
+	<auteur>Fran&#231;ois de Montlivault</auteur>
+	<version>0.11.0</version>
+	<etat>dev</etat>
+	<slogan>G&#233;rer des campagnes d'information compos&#233;es d'images ou d'animations</slogan>
+	<description>
+Ce petit plugin met en oeuvre une balise <code>#BANNIERE</code> &#244; installer dans les squelettes, qui g&#233;n&#232;re de fa&#231;on al&#233;atoire une banni&#232;re parmi celles pr&#233;alablement d&#233;finies.
+	</description>
 	<prefix>bannieres</prefix>	
 	<install>base/bannieres_gestion.php</install>
 	<lien>http://www.spip-contrib.net/Plugin-Bannieres</lien>
