@@ -1,18 +1,21 @@
 <plugin>
-	<icon>tablos.png</icon>
 	<nom>Tablos</nom>
-	<auteur>Speciale</auteur>
+	<slogan>Int&#233;grer des tableaux csv</slogan>
+	<icon>tablos.png</icon>
+	<auteur>[Speciale->http://www.luis-speciale.net/]</auteur>
 	<licence>GNU/GLP</licence>
-	<version>1.1</version>
+	<version>1.1.0</version>
 	<etat>dev</etat>
-	<description>Pour presenter des tableaux (Excel ou OpenOffice) au format CSV </description>
-	<lien>http://www.luis-speciale.net</lien>
+	<description>
+		Ce plugin permet d'importer un fichier csv (provenant d'un logiciel tableur) dans un article et de l'afficher en ins&#233;rant la balise <code><embxx></code>.
+	</description>
+	<lien>http://www.spip-contrib.net/Tablos</lien>
 	<prefix>tablos</prefix>	
 	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>tablos_pipelines.php</inclure>
 	</pipeline>
 	<fonctions>tablos_fonctions.php</fonctions>	
-	<necessite id='SPIP' version='[2.0;]' />
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<categorie>edition</categorie>
 </plugin>
