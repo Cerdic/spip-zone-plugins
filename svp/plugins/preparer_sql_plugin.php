@@ -173,7 +173,7 @@ function normaliser_auteur_licence($texte, $balise) {
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
 		$licnom = $licurl ='';
-		if (preg_match('/\b(apache|mit|bsd|lgpl|gnu\/gpl|gpl\s*v*\d*|Creative\s*Commons\s*Attribution\s*2\.5)\b/i', $v, $r)) {
+		if (preg_match('/\b(apache|mit|bsd|lgpl|gnu\/gpl|gpl\s*v*\d*|cc-by-nc-sa|Creative\s*Commons\s*Attribution\s*2\.5)\b/i', $v, $r)) {
 			$licnom = strtoupper(trim($r[1]));
 			if (strtolower($licnom) == 'apache') {
 				$licnom = 'Apache Licence, Version 2.0';
@@ -182,6 +182,10 @@ function normaliser_auteur_licence($texte, $balise) {
 			else if (strtolower($licnom) == 'creative commons attribution 2.5') {
 				$licnom = 'Creative Commons Attribution 2.5';
 				$licurl = 'http://creativecommons.org/licenses/by/2.5';
+			}
+			else if (strtolower($licnom) == 'cc-by-nc-sa') {
+				$licnom = 'CC-BY-NC-SA 2.0';
+				$licurl = 'http://creativecommons.org/licenses/by-nc-sa/2.0';
 			}
 			else if (strtolower($licnom) == 'mit')
 				$licurl = 'http://opensource.org/licenses/mit-license.php';
