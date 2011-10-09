@@ -13,9 +13,9 @@
 	
 	<prefix>colorscope</prefix>
 
-	<auteur>Cyril MARION - &#169; 2010-2011 - [Ateliers CYM->http://www.cym.fr]</auteur>
+	<auteur>[Cyril MARION (Ateliers CYM)->http://www.cym.fr]</auteur>
 	
-    <licence>Licence GNU/GPL</licence>
+   <licence>&#169; 2010-2011 - Licence GNU/GPL</licence>
 
 	<etat>stable</etat>
 	
