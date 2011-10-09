@@ -1,23 +1,11 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Traductions rubriques 1.9.2d
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	Stephane Laurent (Bill)
-	</auteur>
+	<nom>Traductions entre rubriques</nom>
+	<slogan>Gestion de liens de traduction entre les rubriques</slogan>
+	<auteur>Stephane Laurent (Bill)</auteur>
 	<categorie>edition</categorie>
-	<lien></lien>
-	<version>
-	  1.9.2d
-	</version>
-	<etat>
-	  stable
-	</etat>
-	<description>
-	  Gestion de liens de traduction sur les rubriques.
-	</description>
-	<prefix> 
-	  tradrub
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<version>1.9.2</version>
+	<etat>stable</etat>
+	<description>Ce plugin rajoute un syst&#232;me inspir&#233; par celui des traductions des articles : il ajoute un champ id_trad &#224; la table rubriques et lie ainsi les traductions des rubriques.</description>
+	<prefix>tradrub</prefix>
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 </plugin>
