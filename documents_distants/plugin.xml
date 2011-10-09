@@ -1,27 +1,16 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Importer massivement des documents distants
-	</nom>
-	<auteur>
-_ 1.0: Maïeul Rouquette (maieulrouquette @ tele2.fr)
-_ 1.1: BobCaTT (bobcatt CHEZ menfin POINT net)
-_ &#169; 2007 - Licence GPL
-	</auteur>
-	<version>
-	1.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Importation de documents distants</nom>
+	<slogan>Importer massivement des documents distants</slogan>
+	<auteur>Ma&#239;eul Rouquette, BobCaTT</auteur>
+	<licence>&#169; 2007 - GPL</licence>
+	<version>1.1.0</version>
+	<etat>test</etat>
 	<description>
-	Plugin charg&#233; d'importer massivement des documents distants. A partir de la [page suivante->./?exec=documents_distants] 
-	N&#233;c&#233;ssite SPIp 1.9.2
+		Ce plugin permet d'importer &#171; beaucoup &#187; de documents distants d'un seul coup, en les affectant &#224; un article (ou une rubrique, ou une br&#232;ve). &#192; condition d'avoir r&#233;cup&#233;r&#233; toutes les urls des documents &#224; ajouter. Il ne permet pas, par exemple, de r&#233;cup&#233;rer tous les documents situ&#233;s dans un dossier sur le net.
 	</description>
+	<lien>http://www.spip-contrib.net/Le-plugin-d-importation-massive-de-documents-distants</lien>
 
-	<prefix>
-	documents_distants
-	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+	<prefix>documents_distants</prefix>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
         <inclure>documents_distants_pipelines.php</inclure>
@@ -33,5 +22,5 @@ _ &#169; 2007 - Licence GPL
 		<action>affiche_gauche</action>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 </plugin>
