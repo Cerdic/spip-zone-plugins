@@ -1,36 +1,15 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	  Oasis
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	  Cedric
-	</auteur>
-	<version>
-	  0.3
-	</version>
-	<etat>
-	  dev
-	</etat>
+	<nom>Oasis</nom>
+	<slogan>Exporter au format Open Document Text (odt)</slogan>
+	<auteur>C&#233;dric</auteur>
+	<version>0.3.0</version>
+	<etat>dev</etat>
 	<description>
-	Export au format Open Document Text
-	S'utilise dans un squelette avec un appel au modele export_odf :
-_	{ #MODELE&#123;spipoasis,id_article=#ID_ARTICLE,template=article.odt,nom_fichier='#TITRE*'&#125; }
-_ le template et le nom_fichier sont facultatifs.
-_ les templates peuvent &ecirc;tre d&eacute;finis dans un sous dossier templates/ de votre dosier squelette. Ce sont des documents Open Document Text ecrit en SPIP (comportants squelettes et balises)
+	Ce plugin permet d'exporter au article dans le format Open Document Text (odt). Il s'utilise dans un squelette avec un appel au mod&#232;le export_odf : <code>#MODELE{spipoasis,id_article=#ID_ARTICLE,template=article.odt,nom_fichier='#TITRE*'}</code> (le template et le nom du fichier sont facultatifs). Les templates peuvent &#234;tre d&#233;finis dans un sous-dossier templates/ de votre dossier squelette. Ce sont des documents Open Document Text &#233;crit en SPIP (comportant squelettes et balises)
 	</description>
-	<lien>
-	</lien>
-	<fonctions>
-		spipoasis_fonctions.php
-	</fonctions>
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	  spipodf
-	</prefix>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<lien></lien>
+	<fonctions>spipoasis_fonctions.php</fonctions>
+	<prefix>spipodf</prefix>
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	<categorie>edition</categorie>
 </plugin>
