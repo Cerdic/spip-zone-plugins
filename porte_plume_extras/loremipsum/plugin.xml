@@ -18,7 +18,7 @@
 		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>pp_loremipsum_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="spip" version='[2.0.0;2.1.99]' />
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
 	<necessite id="porte_plume" />
 	<categorie>edition</categorie>
 </plugin>
