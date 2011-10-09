@@ -1,27 +1,16 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	R&#233;vision typographique (ins&#233;cables &#38; notes)
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
- 	fil@rezo.net
-_ &#169; 2005-2011 - Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.4
-	</version>
-	<etat>
-	stable
-	</etat>
+	<nom>R&#233;vision typographique (ins&#233;cables &#38; notes)</nom>
+	<slogan>Faciliter la relecture et l'insertion de notes</slogan>
+	<auteur>fil@rezo.net</auteur>
+	<licence>&#169; 2005-2011 - GNU/GPL</licence>
+	<version>0.4.0</version>
+	<etat>stable</etat>
 	<description>
 	Dans l'espace priv&#233;:
-- souligne en gris les espaces ins&#233;cables, en orange les sauts de ligne, pour faciliter la relecture;
-- propose un bouton pour transformer les notes r&#233;dig&#233;es &laquo; en dur &raquo; -- de la forme (1), (2), (3)... -- en raccourcis SPIP.
-
-_ Compatibilit&#233; : SPIP versions 1.9.2 et sup&#233;rieures
+-* souligne en gris les espaces ins&#233;cables, en orange les sauts de ligne, pour faciliter la relecture
+-* propose un bouton pour transformer les notes r&#233;dig&#233;es &#171; en dur &#187; -- de la forme (1), (2), (3)... -- en raccourcis SPIP.
 	</description>
-	<prefix>
-	RevisionNbsp
-	</prefix>
+	<prefix>RevisionNbsp</prefix>
 	<pipeline>
 		<nom>post_typo</nom>
 		<action>revision_nbsp</action>
@@ -33,5 +22,5 @@ _ Compatibilit&#233; : SPIP versions 1.9.2 et sup&#233;rieures
 		<inclure>revision_nbsp.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;2.0.99]" />
 </plugin>
