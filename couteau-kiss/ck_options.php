@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 if (file_exists($f=((defined('_ROOT_CWD')?_ROOT_CWD:'')._DIR_TMP."ck_options.php")))
 	include_once $f;
 

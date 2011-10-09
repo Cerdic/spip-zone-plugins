@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('public/interfaces');
 include_spip('inc/presenter_liste');
 

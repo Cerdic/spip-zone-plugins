@@ -6,6 +6,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function exec_configurer_ck_dist() {
 
 	if (!autoriser('configurer', 'ck')) {
