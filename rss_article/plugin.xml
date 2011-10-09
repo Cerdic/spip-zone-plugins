@@ -1,16 +1,25 @@
 <plugin>
 	<nom>Flux RSS en articles</nom>
+	<slogan>Recopie les flux RSS en articles</slogan>
 	<auteur>[erational->http://www.erational.org]</auteur>
 	<icon>img/logo_rss_article.png</icon>
-	<version>0.5</version>
+	<version>0.5.0</version>
 	<licence>GNU/GPL v3</licence>
 	<etat>stable</etat>
-	<description>Recopie les flux RSS en articles</description>
+	<description>Ce plugin recopie les flux RSS (articles syndiqu&#233;s) en articles
+
+-* reprise du contenu du flux
+-* cr&#233;e l'auteur s'il est mentionn&#233; dans le flux
+-* ajoute les documents distants pr&#233;sents dans le flux
+-* dans le champs URL de l'article on indique l'adresse de l'article d'origine 
+
+Pour &#233;viter les doublons et les imports successifs, une fois l'article cr&#233;e l'article syndiqu&#233; est rejet&#233; (ce qui permet de suivre o&#249; en sont les recopi&#233;s).
+	</description>
 	<lien>http://www.spip-contrib.net/Plugin-Flux-RSS-en-articles</lien>
 	<install>base/rssarticle_upgrade.php</install>
 	<prefix>rssarticle</prefix>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
 		<inclure>base/rssarticle.php</inclure>
