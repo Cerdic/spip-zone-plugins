@@ -1,9 +1,9 @@
 <paquet
 	prefix="couteau_suisse"
 	categorie="maintenance"
-	version="1.8.43.03"
+	version="1.8.44"
 	etat="stable"
-	compatibilite="[3.0.0-dev;["
+	compatibilite="[1.9.2;3.0.99]"
 	logo="img/couteau-50.gif"
 	schema="1.1"
 	documentation="http://www.spip-contrib.net/Le-Couteau-Suisse"

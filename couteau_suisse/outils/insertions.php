@@ -6,10 +6,10 @@
 
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
 function insertions_installe_dist() {
-	if(!defined('_insertions_LISTE')) return NULL;
-cs_log("insertions_installe_dist()");
+	if(!function_exists('_insertions_LISTE')) return NULL;
+cs_log('insertions_installe_dist()');
 	// on decode la liste entree dans la config
-	$liste = preg_split("/[\r\n]+/", trim(_insertions_LISTE));
+	$liste = preg_split("/[\r\n]+/", _insertions_LISTE());
 	$str = $preg = array(array(), array());
 	foreach ($liste as $l) {
 		list($a, $b) = explode("=", $l, 2);

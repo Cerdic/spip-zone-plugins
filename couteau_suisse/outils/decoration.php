@@ -8,10 +8,10 @@
 
 // cette fonction appelee automatiquement a chaque affichage de la page privee du Couteau Suisse renvoie un tableau
 function decoration_installe_dist() {
-	if(!defined('_decoration_BALISES')) return NULL;
+	if(!function_exists('_decoration_BALISES')) return NULL;
 cs_log("decoration_installe_dist()");
 	// on decode les balises entrees dans la config
-	$deco_balises = preg_split("/[\r\n]+/", trim(_decoration_BALISES));
+	$deco_balises = preg_split("/[\r\n]+/", _decoration_BALISES());
 	$aide = $trouve = $remplace = $alias = $auto_balises = $auto_remplace = $BT = array();
 	foreach ($deco_balises as $balise) {
 		if (preg_match('/(span|div|auto)\.([^.]+)\.(class|lang)\s*=(.+)$/', $balise, $regs)) {
@@ -117,7 +117,7 @@ function decoration_rempl($texte) {
 
 // fonction pipeline
 function decoration_pre_typo($texte) {
-	if (strpos($texte, '<')===false || !defined('_decoration_BALISES')) return $texte;
+	if (strpos($texte, '<')===false || !function_exists('_decoration_BALISES')) return $texte;
 	// pour les callbacks
 	global $deco_balises;
 	// lecture des balises et des remplacements

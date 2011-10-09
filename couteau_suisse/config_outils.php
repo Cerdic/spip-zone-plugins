@@ -852,7 +852,7 @@ span.clignote = text-decoration:blink;
 span.surfluo = background-color:#ffff00; padding:0px 2px;
 span.surgris = background-color:#EAEAEC; padding:0px 2px;
 fluo = surfluo"',
-	'code' => "define('_decoration_BALISES', %s);",
+	'code:trim(%s)' => 'function _decoration_BALISES() { return trim(%s); }',
 ));
 add_outil( array(
 	'id' => 'decoration',
@@ -1128,7 +1128,7 @@ add_variables( array(
 
 // coins ronds aux parents !
 .jc_parent"',
-	'code' => "define('_jcorner_CLASSES', %s);",
+	'code:trim(%s)' => 'function _jcorner_CLASSES() { return trim(%s); }',
 ), array(	// variable utilisee par 'pipelinecode:insert_head'
 	'nom' => 'jcorner_plugin',
 	'check' => 'couteauprive:jcorner_plugin',
@@ -1166,7 +1166,7 @@ cceuil = ccueil
 (O[Ee]uvre([rs]?)) = &OElig;uvre$1
 /\b([cC]|[mM].c|[rR]ec)on+ais+a((?:n(?:ce|te?)|ble)s?)\b/ = $1onnaissa$2
 "',
-	'code' => "define('_insertions_LISTE', %s);",
+	'code' => 'function _insertions_LISTE() { return trim(%s); }',
 ));
 add_outil( array(
 	'id' => 'insertions',
