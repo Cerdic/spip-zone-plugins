@@ -4,6 +4,7 @@
 	<auteur>James</auteur>
 	<etat>test</etat>
 	<lien>http://www.spip-contrib.net/Annonces-Publiques</lien>
+ 	<slogan>Annonces pour la messagerie de l'espace priv&#233;</slogan>
 	<description>Ce plugin d&#233;fini une boucle (ANNONCES) permettant d'afficher les annonces
 	&#224; afficher dans le calendrier et publi&#233;es de la messagerie de l'espace priv&#233;
 	d'un site dans sa partie publique.
