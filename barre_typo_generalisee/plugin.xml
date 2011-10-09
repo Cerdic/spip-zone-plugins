@@ -27,8 +27,8 @@
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>barre_typo_generalisee_define_prive.php</inclure>
-	</pipeline>barre_typo_generalisee</prefix>
-
+	</pipeline>
+	
 	<necessite id="CFG" version="[1.0;]" />
 	<necessite id="spip" version="[1.9.2;1.9.2]" />
 </plugin>
