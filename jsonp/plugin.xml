@@ -1,21 +1,24 @@
 <plugin>
-	<nom>jsonp</nom>
+	<nom>Jsonp</nom>
+	<slogan>
+		[fr]G&#233;n&#233;rer un fichier Jsonp contenant les articles publi&#233;s
+		[en]Generate a Jsonp file containing articles
+		[gl]Xerar un arquivo Jsonp que cont&#233;n artigos
+	</slogan>
 	<auteur>Berio Molina (escoitar.com)</auteur>
-	<version>0.1</version>
+	<version>0.1.0</version>
 	<etat>dev</etat>
-	<licence>
-		&#169; 2006-2011 - GNU/GPL
-	</licence>
+	<licence>&#169; 2006-2011 - GNU/GPL</licence>
 	<description>
-	<multi>
-	[gl]Xenera dous arquivos jsonp similares ao rss. Un deles permite acceder a todos os campos dos artigos e o outro &eacute; configurable, permitindo seleccionar estes campos.
-	</multi>
+		<multi>
+		[fr]Cr&#233;er deux fichiers Jsonp similaire &#224; RSS. Le premier permet d'acc&#233;der &#224; tous les domaines et l'autre est configurable, vous permettant de s&#233;lectionner ces domaines.
+		[gl]Xenera dous arquivos Jsonp similares ao rss. Un deles permite acceder a todos os campos dos artigos e o outro &#233; configurable, permitindo seleccionar estes campos.
+		[en]Plugin jsonp that allows SPIP to generate a Jsonp file that contains data about the articles published
+		</multi>
   	</description>
-	<icon>
-	images/jsonp-128.png
-	</icon>
+	<icon>images/jsonp-128.png</icon>
 	<lien>http://imasd.escoitar.com/plugin-jsonp-para-spip/</lien>
 	<prefix>jsonp</prefix>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 </plugin>
