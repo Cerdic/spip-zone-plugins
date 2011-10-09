@@ -1,27 +1,16 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
- <plugin>
- <nom>Intertitres hi&eacute;rarchis&eacute;s et Table des mati&egrave;res</nom>
- <version>0.8.4</version>
- <prefix>IntertitresTdm</prefix>
- <etat>dev</etat>
- <auteur>Mortimer, Chtitux (et Beurt pour la mise en plugin, Paladin pour les ancres nomm&#233;es)</auteur>
- <description>Intertitres hi&eacute;rarchis&eacute;s et Table des mati&egrave;res rajoute des raccourcis 
- typographiques pour g&eacute;rer des niveaux d&#39;intertitres, 
- num&eacute;rot&eacute;s ou non, dans Spip (Ce plugin peut r&eacute;utiliser 
- les intertitres des enluminures typographiques). 
- Il permet aussi d&#39;ajouter dans l&#39;article, 
- une table des mati&egrave;res qui liste les 
- intertitres contenus dans l&#39;article gr&acirc;ce 
- &agrave; un mod&egrave;le. D&#39;autres mod&egrave;les 
- permettent de se r&eacute;f&eacute;rer &agrave; une sous 
- partie d&#39;un article dans un autre article (en citant le titre, extrait ou rien).
-
-Ce plug-in est sous licence GNU/GPL v2</description>
-  <lien>http://www.spip-contrib.net/Des-intertitres-hierarchises-et</lien>
-	<options>
-		intertitres_tdm_options.php
-	</options>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines -->
+<plugin>
+	<nom>Intertitres hi&#233;rarchis&#233;s et table des mati&#232;res</nom>
+	<slogan>G&#233;n&#233;rer automatiquement une table des mati&#232;res</slogan>
+	<version>0.8.4</version>
+	<prefix>IntertitresTdm</prefix>
+	<etat>dev</etat>
+	<auteur>Mortimer, Chtitux, Beurt pour la mise en plugin, Paladin pour les ancres nomm&#233;es</auteur>
+	<description>
+	Ce plugin rajoute des raccourcis typographiques pour g&#233;rer des niveaux d'intertitres, num&#233;rot&#233;s ou non, dans Spip (Ce plugin peut r&#233;utiliser les intertitres des enluminures typographiques). Il permet aussi d&#39;ajouter dans l&#39;article, une table des mati&#232;res qui liste les intertitres contenus dans l'article gr&#226;ce &#224; un mod&#232;le. D'autres mod&#232;les permettent de se r&#233;f&#233;rer &#224; une sous partie d'un article dans un autre article (en citant le titre, extrait ou rien).
+	</description>
+	<licence>GNU/GPL v2</licence>
+	<lien>http://www.spip-contrib.net/Des-intertitres-hierarchises-et</lien>
+	<options>intertitres_tdm_options.php</options>
 	<pipeline>
 		<nom>header_prive</nom>
 		<inclure>intertitres_tdm_fonctions_headers.php</inclure>
@@ -38,7 +27,7 @@ Ce plug-in est sous licence GNU/GPL v2</description>
 		<nom>post_propre</nom>
 		<inclure>intertitres_tdm_fonctions_typo.php</inclure>
 	</pipeline>
- <fonctions>intertitres_tdm_fonctions.php</fonctions>
+	<fonctions>intertitres_tdm_fonctions.php</fonctions>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 </plugin>
