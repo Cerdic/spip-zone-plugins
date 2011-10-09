@@ -1,24 +1,26 @@
 <plugin>
-	<nom>Forcer le choix d&rsquo;une rubrique</nom>
-	<version>1.3</version>
+	<nom>Forcer le choix d'une rubrique</nom>
+	<slogan>Obliger les r&#233;dacteurs &#224; choisir une rubrique</slogan>
+	<auteur>[Vincent Ramos->mailto:www-lansargues@kailaasa.net]</auteur>
+	<licence>GNU/GPL</licence>
+	<version>1.3.0</version>
 	<prefix>forcer_choix_rubrique</prefix>
 	<etat>stable</etat>
-	<auteur>[Vincent Ramos->mailto:www-lansargues@kailaasa.net]</auteur>
 	<categorie>edition</categorie>
-	<slogan>Force&nbsp;&raquo; les r&eacute;dacteurs &agrave; choisir une rubrique</slogan>
+	<lien>http://www.spip-contrib.net/Forcer-le-choix-d-une-rubrique</lien>
 	<description>
-	Ce plugin &laquo;&nbsp;force&nbsp;&raquo; les r&eacute;dacteurs &agrave; choisir une rubrique lorsqu&rsquo;ils cr&eacute;ent un nouvel article&nbsp;: une bo&icirc;te appara&icirc;t au-dessus de la fen&ecirc;tre de r&eacute;daction leur rappelant l&rsquo;importance de ce choix. Celle-ci ne se manifeste que si le r&eacute;dacteur ne naviguait pas dans l&rsquo;arborescence des rubriques avant de cliquer sur le bouton &laquo;&nbsp;&Eacute;crire un nouvel article&nbsp;&raquo;. En effet, dans ce cas le nouvel article est automatiquement class&eacute; dans la rubrique en cours (comportement par d&eacute;faut de SPIP).
+	Ce plugin &#171;&#160;force&#160;&#187; les r&#233;dacteurs &#224; choisir une rubrique lorsqu&#8217;ils cr&#233;ent un nouvel article&#160;: une bo&#238;te appara&#238;t au-dessus de la fen&#234;tre de r&#233;daction leur rappelant l&#8217;importance de ce choix. Celle-ci ne se manifeste que si le r&#233;dacteur ne naviguait pas dans l&#8217;arborescence des rubriques avant de cliquer sur le bouton &#171;&#160;&#201;crire un nouvel article&#160;&#187;. En effet, dans ce cas le nouvel article est automatiquement class&#233; dans la rubrique en cours (comportement par d&#233;faut de SPIP).
 
-	Le message en HTML de la bo&icirc;te peut &ecirc;tre personnalis&eacute; en modifiant le fichier <code>message_boite.inc</code>.
+	Le message en HTML de la bo&#238;te peut &#234;tre personnalis&#233; en modifiant le fichier <code>message_boite.inc</code>.
 
-	Le fichier de configuration <code>forcer_choix_rubrique_options.php</code> permet, si on le d&eacute;sire, de classer par d&eacute;faut les nouveaux articles non rubriqu&eacute;s dans une rubrique pr&eacute;cise, ce qui prend tout son sens avec le plugin <i>[Acc&egrave;s restreint par groupes->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]</i>&nbsp;: on peut ainsi cr&eacute;er une rubrique &laquo;&nbsp;fant&ocirc;me&nbsp;&raquo; (nomm&eacute;e par exemple <i>Choisissez une rubrique</i>) qui ne peut pas appara&icirc;tre dans le site public mais peut recevoir les articles qui resteraient non rubriqu&eacute;s malgr&eacute; l&rsquo;avertissement.
-
-	Ce plugin est distribu&eacute; sous licence GNU/GPL.</description>
+	Le fichier de configuration <code>forcer_choix_rubrique_options.php</code> permet, si on le d&#233;sire, de classer par d&#233;faut les nouveaux articles non rubriqu&#233;s dans une rubrique pr&#233;cise, ce qui prend tout son sens avec le plugin {[Acc&#232;s restreint par groupes->http://www.spip-contrib.net/Le-plugin-acces-restreint-par]}&#160;: on peut ainsi cr&#233;er une rubrique &#171;&#160;fant&#244;me&#160;&#187; (nomm&#233;e par exemple {Choisissez une rubrique}) qui ne peut pas appara&#238;tre dans le site public mais peut recevoir les articles qui resteraient non rubriqu&#233;s malgr&#233; l&#8217;avertissement.
+	</description>
+	<icon>forcer_choix_rubrique.png</icon>
 	<pipeline>
 		<nom>body_prive</nom>
 		<action>boite</action>
 		<inclure>forcer_choix_rubrique.php</inclure>
 	</pipeline>
 	<options>forcer_choix_rubrique_options.php</options>
-	<necessite id="SPIP" version="[1.9.1;2.1]" />
+	<necessite id="SPIP" version="[1.9.1;2.1.99]" />
 </plugin>
