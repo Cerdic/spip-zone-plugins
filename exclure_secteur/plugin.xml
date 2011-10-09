@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Exclure secteur</nom>
-	<slogan>Exclure automatiquement certains secteurs des boucles de Spip</slogan>
+	<slogan>Exclure automatiquement des boucles certains secteurs</slogan>
 	<auteur>Ma&#239;eul Rouquette</auteur>
 	<licence>GPL3</licence>
 	<icon>exclure_secteur.jpg</icon>
@@ -10,14 +10,14 @@
    <description>
 Ce plugin exclut automatiquement les secteurs s&#233;l&#233;ctionn&#233;s des boucles ARTICLES / SITES / RUBRIQUES / BREVES / FORUMS (suivant la r&#233;gle de SPIP, qui ne prend en compte que les forums li&#233;s &#224; des articles).
 
-    Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent &#224; un article du secteur).
-    
-    On peut faire une exception avec le crit&#233;re <code>{tout_secteur}</code>. 
-    Si on pr&#233;cise le secteur explicitement, par <code>{id_secteur=x}</code>, <code>{id_secteur==x}</code> ou <code>{id_secteur IN X}</code>, le r&#233;glage ne sera pas pris en compte.
-    
-    Possibilit&#233; aussi de configurer le plugin pour que <code>{tout}</code> soit &#233;quivalent &#224; <code>{tout_voir}</code>.
-    
-    On peut aussi configurer pour que que si l'id principal du nom de boucle est pass&#233;e via <code>{id_boucle}</code> ou <code>{id_boucle==X}</code> ou <code>{id_boucle=X}</code> ou <code>{id_boucle IN X}</code>, cela fait sauter l'exclusion des secteurs. (Depuis la 1.2)
+Attention, pour le moment, ne le fait pas sur les jointures (par exemple, n'exclura pas les forums qui appartiennent &#224; un article du secteur).
+
+On peut faire une exception avec le crit&#233;re <code>{tout_secteur}</code>. 
+Si on pr&#233;cise le secteur explicitement, par <code>{id_secteur=x}</code>, <code>{id_secteur==x}</code> ou <code>{id_secteur IN X}</code>, le r&#233;glage ne sera pas pris en compte.
+
+Possibilit&#233; aussi de configurer le plugin pour que <code>{tout}</code> soit &#233;quivalent &#224; <code>{tout_voir}</code>.
+
+On peut aussi configurer pour que que si l'id principal du nom de boucle est pass&#233;e via <code>{id_boucle}</code> ou <code>{id_boucle==X}</code> ou <code>{id_boucle=X}</code> ou <code>{id_boucle IN X}</code>, cela fait sauter l'exclusion des secteurs. (Depuis la 1.2)
 	</description>
 	<install>exclure_sect_install.php</install>
 	<prefix>exclure_sect</prefix>
