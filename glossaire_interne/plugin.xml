@@ -1,7 +1,22 @@
-<plugin>	<nom>Glossaire interne</nom>
-	<slogan>Gestion automatique d'un glossaire interne au site.</slogan>	<version>1.0.0</version>	<prefix>Glossaire</prefix>	<etat>stable</etat>
-	<licence>GNU/GPL</licence>	<auteur>Fran&#231;ois Schreuer ([francois.schreuer.org->http://francois.schreuer.org]), fred, Philippe Auriol.</auteur>	<description>
--* Le glossaire est li&#233; &#224; un groupe de mots-cl&#233;s «glossaire» &#224; cr&#233;er;
--* Filtre <code>lier_au_glossaire</code> &#224; appliquer aux champs de texte dans les squelettes;-* N&#233;cessite la balise <code>#INSERT_HEAD</code>.</description>	<lien>http://www.spip-contrib.net/1459</lien>	<fonctions>glossaire_fonctions.php</fonctions>	<pipeline>		<nom>insert_head</nom>	</pipeline>
+<plugin>
+	<nom>Glossaire interne</nom>
+	<slogan>Gestion automatique d'un glossaire interne au site</slogan>
+	<version>1.0.0</version>
+	<prefix>Glossaire</prefix>
+	<etat>stable</etat>
+	<licence>GNU/GPL</licence>
+	<auteur>[Fran&#231;ois Schreuer (francois.schreuer.org)->http://francois.schreuer.org], fred, Philippe Auriol</auteur>
+	<description>
+	Votre site utilise un vocabulaire technique sp&#233;cialis&#233;, vous avez une tendance maladive &#224; jargonner sans vous en rendre compte, voici une solution pour que votre prose reste n&#233;anmoins accessible au commun des mortels.
+-* Le glossaire est li&#233; &#224; un groupe de mots-cl&#233;s «glossaire» &#224; cr&#233;er
+-* Filtre <code>lier_au_glossaire</code> &#224; appliquer aux champs de texte dans les squelettes
+-* N&#233;cessite la balise <code>#INSERT_HEAD</code>
+	</description>
+	<lien>http://www.spip-contrib.net/1459</lien>
+	<fonctions>glossaire_fonctions.php</fonctions>
+	<pipeline>
+		<nom>insert_head</nom>
+	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[1.9.0;3.0.99]" /></plugin>
+	<necessite id="SPIP" version="[1.9.0;3.0.99]" />
+</plugin>
