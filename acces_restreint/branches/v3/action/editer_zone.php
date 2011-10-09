@@ -5,6 +5,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * editer une zone (action apres creation/modif de zone)
  *
