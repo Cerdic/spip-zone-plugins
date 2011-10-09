@@ -1,7 +1,7 @@
 <plugin>
 	<nom>LangOnet</nom>
-	<slogan>V&#233;rifier, g&#233;n&#233;rer, retrouver ou afficher les items de langue</slogan>
-	<auteur>Eric Lupinacci, denisb avec le support d&#233;vou&#233; de kent1</auteur>
+	<slogan>V&#233;rifier, g&#233;n&#233;rer, rechercher ou afficher les items de langue</slogan>
+	<auteur>Eric Lupinacci, denisb, kent1</auteur>
 	<version>0.6.3</version>
 	<etat>stable</etat>
 	<licence>GPL 3</licence>
