@@ -1,32 +1,18 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Mettre des frimousses dans le texte.
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	  Pierre Andrews (Mortimer) 
-	  Bionet
-	</auteur>
-	<version>
-	  0.1
-	</version>
-	<etat>
-	  stable
-	</etat>
+	<nom>Frimousses</nom>
+	<nom>Mettre des smileys dans le texte</nom>
+	<auteur>Pierre Andrews (Mortimer), Bionet</auteur>
+	<version>0.1.0</version>
+	<etat>stable</etat>
 	<description>
-	remplace les codes ASCII pour les frimousses par des petites images.
+	Remplace les codes ASCII pour les frimousses par des petites images.
 	</description>
-	<lien>http://www.spip-contrib.net/Smileys-III-Un-point-d-entree-pour</lien>	 <!-- URI de documentation -->
-
-	<prefix> 
-	  smileys
-	</prefix>
-	<!-- Definitions des fonctions qui s'inserent dans les pipelines 
-	La liste des pipelines disponibles est dans ecrire/inc_version ($spip_pipeline = ... ) 
-	-->
+	<lien></lien>
+	<prefix>smileys</prefix>
 	<pipeline>
 		<nom>pre_propre</nom>
 		<inclure>plug_smileys.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>edition</categorie>
 </plugin>
