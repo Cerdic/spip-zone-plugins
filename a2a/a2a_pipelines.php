@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function a2a_affiche_milieu($flux){
 	include_spip('public/assembler');
         include_spip('inc/layer');
