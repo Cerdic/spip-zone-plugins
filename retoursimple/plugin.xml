@@ -1,12 +1,20 @@
 <plugin>
-	<nom>Retour simple</nom>
+	<nom>Alin&#233;as&#160;: &#171;&#160;Retour simple&#160;&#187;</nom>
 	<slogan>Ne pas ignorer les  retours &#224; la ligne dans du texte</slogan>
 	<licence>GPL</licence>
-	<auteur>Pleins de gens dont Fil, Ma&#239;eul et PatV</auteur>
+	<auteur>[Fil->http://www.spip-contrib.net/auteur4], [Ma&#239;eul->http://www.spip-contrib.net/auteur2650], [PatV->http://www.spip-contrib.net/auteur5714], et d'autres</auteur>
 	<version>0.2.0</version>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description>
-		Permet qu'un retour &#224; la ligne dans le texte de l'article produise bien un retour &#224; la ligne sur le site. Le code <code><br /></code> est automatiquement ajout&#233; dans ce cas, comme lors de l'ajout manuel de <code>_</code> (&#8220;tiret bas&#8221;, &#8220;underscore&#8221;) en d&#233;but de ligne. En revanche, il ne s'agit pas de cr&#233;er des espaces (multiples &#8220;lignes vides&#8221;) par plusieurs retours &#224; la ligne : dans ce cas il est estim&#233; que le comportement de SPIP doit demeurer (qui &#233;limine les espaces multiples), et cr&#233;e un nouveau paragraphe lors de saut(s) de ligne(s).
+Pour le respect automatique des &#171;&#160;retours &#224; la ligne&#160;&#187;, &#171;&#160;allers &#224; la ligne&#160;&#187;, &#171;&#160;retours chariot&#160;&#187;. 
+
+Depuis ses d&#233;buts semble-t-il, SPIP comporte le filtre <code>|post_autobr</code> destin&#233; &#224; assurer le respect des alin&#233;as, mais curieusement ce filtre a &#233;t&#233; n&#233;glig&#233; et aucun plugin n&#8217;en permettait la mise en &#339;uvre. Tel est d&#233;sormais l&#8217;objet du pr&#233;sent plugin. Le code <code><br /></code> est automatiquement ajout&#233; dans ce cas, comme lors de l&#8217;ajout manuel de <code>_</code> (&#8220;tiret bas&#8221;, &#8220;underscore&#8221;, suivi d&#8217;un{e} espace) en d&#233;but de ligne.
+
+En revanche, il ne s&#8217;agit pas de cr&#233;er des espaces (multiples &#8220;lignes vides&#8221;) par plusieurs retours &#224; la ligne&#160;: dans ce cas il est estim&#233; que le comportement de SPIP doit demeurer, qui &#233;limine les espaces multiples, et cr&#233;e un nouveau paragraphe lors de saut(s) de ligne(s).
+
+R&#233;sultat&#160;: Le respect des alin&#233;as obtenu concerne les Rubriques, les Articles (chapeau, texte, post-scriptum), les Br&#232;ves, et leurs Notes de bas de page respectives. Et dans nombre de cas, les champs cr&#233;&#233;s par d&#8217;autres plugins&#160;: tout champ sur lequel les raccourcis typographiques de SPIP sont appel&#233;s doit normalement respecter ces r&#232;gles de &#171;&#160;Retour simple&#160;&#187;, respect des alin&#233;as, avec ce plugin.
+
+P.S.&#160;: S&#8217;agissant des plus r&#233;centes versions de SPIP, le respect des alin&#233;as est assur&#233; directement par SPIP (sans plugin) dans les messages de forums publics sous les articles&#160;: il a &#233;t&#233; donc r&#233;cemment consid&#233;r&#233; dans ce cas que &#171;&#160;le public&#160;&#187; de SPIP doit s&#8217;attendre au respect des alin&#233;as.
 	</description>
 	<lien>http://www.spip-contrib.net/Alineas-Retour-simple</lien>
 	<prefix>retoursimple</prefix>
