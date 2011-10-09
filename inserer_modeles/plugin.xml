@@ -1,10 +1,13 @@
 <plugin>
-	<nom>Ins&eacute;rer Mod&egrave;les</nom>
+	<nom>Ins&#233;rer Mod&#232;les</nom>
+	<slogan>Une aide &#224; l'insertion des mod&#232;les dans vos textes</slogan>
 	<auteur>Joseph</auteur>
 	<licence>GPL v3</licence>
 	<version>0.4.4</version>
 	<etat>test</etat>
-	<description>Ce plugin facilite l'insertion de mod&egrave;les dans vos textes avec des formulaires d'aide &agrave; la saisie.</description>
+	<description>
+		Ce plugin fournit une aide &#224; l'insertion des mod&#232;les dans vos textes &#224; travers des formulaires de saisies. Ces formulaires sont accessibles dans la colonne de droite ou via un bouton dans le porte-plume.
+	</description>
 	<lien>http://www.spip-contrib.net/?article3631</lien>
 	<icon>images/inserer_modeles-48.png</icon>
 	<prefix>inserer_modeles</prefix>
@@ -21,7 +24,7 @@
 		<inclure>inserer_modeles_pipelines.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.1.0;]" />
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.8.10;]" />
 	<necessite id="saisies" version="[1.8.4;]" />
 	<necessite id="verifier" version="[0.1.1;]" />
