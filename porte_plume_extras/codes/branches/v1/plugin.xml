@@ -1,15 +1,14 @@
 <plugin>
-	<nom>Extension Codes Informatiques, pour Porte Plume</nom>
-	<auteur>Matthieu Marcillaud
-_ &#169; 2007 - Distribu&#233; sous licence GPL
-	</auteur>
+	<nom>Codes Informatiques pour Porte Plume</nom>
+	<slogan>Des boutons pour g&#233;rer les codes informatiques</slogan>
+	<auteur>Matthieu Marcillaud</auteur>
+	<licence>&#169; 2007 - GPL</licence>
 	<lien></lien>
 	<version>1.2.1</version>
 	<etat>stable</etat>
 	<icon>images/porte_plume_codes-128.png</icon>
-    <description>
-Gestion de boutons pour ins&#233;rer du code informatique via la barre d'&#233;dition Porte Plume.
-Ajoute aussi un raccourci &#91;&#63;ecrire/inc_versions.php#trac].
+	<description>
+	Gestion de boutons pour ins&#233;rer du code informatique via la barre d'&#233;dition Porte Plume. Ajoute aussi un raccourci &#91;&#63;ecrire/inc_versions.php#trac].
 	</description>
 	<prefix>pp_codes</prefix>
 	<fonctions>pp_codes_fonctions.php</fonctions>
@@ -27,7 +26,7 @@ Ajoute aussi un raccourci &#91;&#63;ecrire/inc_versions.php#trac].
 	</pipeline>
 	<categorie>edition</categorie>
 	<necessite id="porte_plume" />
-	<necessite id="spip" version='[2.0;2.99]' /><!-- Pas pour SPIP 3.x -->
+	<necessite id="spip" version='[2.0.0;2.1.99]' /><!-- Pas pour SPIP 3.x -->
 	<utilise id="cfg" version='[1.14;]' />
 	<utilise id="saisies" version='[1.2;]' />
 </plugin>
