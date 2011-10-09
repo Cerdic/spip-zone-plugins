@@ -12,11 +12,11 @@
     <necessite id="SPIP" version="[2.1.0;2.1.99]" />
     <necessite id="jqueryui" version="[1.8.15;]" />
     
-    <slogan>Un simple calendrier pour planifier des &eacute;v&egrave;nements.</slogan> 
+    <slogan>Un simple calendrier pour planifier des &#233;v&#232;nements.</slogan> 
     <description>
     <multi>
-    [fr]Un simple calendrier pour planifier des &eacute;v&egrave;nements.
-_   (Th&egrave;mes pour le mini-calendrier bas&eacute;s sur [jquery-ui themeroller-> http://jqueryui.com/themeroller/])
+    [fr]Un simple calendrier pour planifier des &#233;v&#232;nements.
+_   (Th&#232;mes pour le mini-calendrier bas&#233;s sur [jquery-ui themeroller-> http://jqueryui.com/themeroller/])
     [en]A simple calendar for events planification.
     </multi>
     </description>
