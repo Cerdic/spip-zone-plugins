@@ -2,6 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 // $Id: abomailmans_fr.php 26976 2009-03-01 00:33:38Z kent1@arscenic.info $
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// A

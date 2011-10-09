@@ -6,7 +6,9 @@
  * Printemps 2007 - 2009
  * $Id: abomailmans_interface.php 31752 2009-09-23 00:09:48Z kent1@arscenic.info $
 */
- 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function abomailmans_autoriser(){}
 
 // acces aux listes abomailmans = tous les admins

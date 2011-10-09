@@ -9,7 +9,7 @@
 	<slogan>Interfacer vos listes de diffusions mailman, ezmlm ou sympa avec votre SPIP</slogan>
 	<icon>img_pack/mailman.gif</icon>
 	<auteur>MaZiaR [NetAktiv->http://www.netaktiv.com]</auteur>
-	<version>0.6.3</version>
+	<version>0.6.4</version>
 	<version_base>0.33</version_base>
 	<prefix>abomailmans</prefix>
 	<etat>stable</etat>

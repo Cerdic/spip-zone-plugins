@@ -9,6 +9,8 @@
  * $Id$
 */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 // a utiliser dans le form de son choix ...
 function abomailman_traiter_abonnement($id_liste,$abonnement){
 	$liste_data = sql_fetsel("*","spip_abomailmans","id_abomailman = $id_liste");

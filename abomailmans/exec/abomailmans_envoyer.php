@@ -9,6 +9,8 @@
  * $Id$
 */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/barre');
 
 function exec_abomailmans_envoyer(){
