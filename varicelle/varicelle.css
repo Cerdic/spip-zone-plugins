@@ -10,11 +10,15 @@
 et en particulier Pretty CSS3 buttons : http://papermashup.com/pretty-css3-buttons/ */
 
 .submit { position: relative; display: inline-block; width: auto; padding: 5px 1em 6px; overflow: visible; cursor: pointer;
-background: #888 url("img/varicelle-sprite.png") left top repeat-x; box-shadow: 0 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
-border: 0; border-bottom: 1px solid rgba(0,0,0,0.25); -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
+background: #888 url(img/varicelle-sprite.png) left top repeat-x;
+-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5); -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+border: 0; border-bottom: 1px solid rgba(0,0,0,0.25);
+-webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;
 font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba(0,0,0,0.25); }
 * html .submit { background-image: none; border: none; color: #FFF !important; } /*IE6*/
-.submit,.submit:visited,.submit * { color: #FFF; text-decoration: none; }
+.submit,
+.submit:visited,
+.submit * { color: #FFF; text-decoration: none; }
 
 .submit:hover { background-color: #777; color: #FFF; text-decoration: none; }
 .submit:focus,
@@ -24,41 +28,43 @@ font-size: 100%; line-height: 1; font-weight: bold; text-shadow: 0 -1px 1px rgba
 .submit::-moz-focus-inner { border: 0 none; padding: 0; }
 
 /* tailles */
-.small.submit { font-size: .9em; padding: 4px 1em; }
-.big.submit { font-size: 1.2em; padding: 8px 1em 9px; }
-.super.submit { font-size: 2em; padding: 8px 1em 9px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+.submit.small			{ font-size: 90%; padding: 4px 1em; }
+.submit.big				{ font-size: 130%; padding: 8px 1em 9px; }
+.submit.super			{ font-size: 200%; padding: 8px 1em 9px; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
 
 /* couleurs */
-.pink.submit { background-color: #e22092; }
-.pink.submit:hover { background-color: #c81e82; }
-.red.submit { background-color: #e62727; }
-.red.submit:hover { background-color: #cf2525; }
-.orange.submit { background-color: #ff5c00; }
-.orange.submit:hover { background-color: #D45500; }
-.yellow.submit { background-color: #FFB515; }
-.yellow.submit:hover { background-color: #FC9200; }
-.green.submit { background-color: #91BD09; }
-.green.submit:hover { background-color: #749A02; }
-.blue.submit { background-color: #2981e4; }
-.blue.submit:hover { background-color: #2575cf; }
-.black.submit { background-color: #222; }
-.black.submit:hover { background-color: #111; }
-.gray.submit { background-color: #888; }
-.gray.submit:hover { background-color: #777; }
-.white.submit { background-color: #FFF; border: 1px solid #CCC; color: #666; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
-.white.submit:hover { background-color: #EEE; }
+.submit.pink			{ background-color: #e22092; }
+.submit.pink:hover		{ background-color: #c81e82; }
+.submit.red.submit		{ background-color: #e62727; }
+.submit.red:hover		{ background-color: #cf2525; }
+.submit.orange			{ background-color: #ff5c00; }
+.submit.orange:hover	{ background-color: #D45500; }
+.submit.yellow			{ background-color: #FFB515; }
+.submit.yellow:hover	{ background-color: #FC9200; }
+.submit.green			{ background-color: #91BD09; }
+.submit.green:hover		{ background-color: #749A02; }
+.submit.blue			{ background-color: #2981e4; }
+.submit.blue:hover		{ background-color: #2575cf; }
+.submit.black			{ background-color: #222; }
+.submit.black:hover		{ background-color: #111; }
+.submit.gray			{ background-color: #888; }
+.submit.gray:hover		{ background-color: #777; }
+.submit.white			{ background-color: #FFF; border: 1px solid #CCC; color: #666; font-weight: normal; text-shadow: 0 1px 1px #FFF; }
+.submit.white:hover		{ background-color: #EEE; }
 
 /* styles */
-.metal.submit { background: #FFF url("img/varicelle-sprite.png") repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
-.metal.submit:hover { background-color: #EEE; border-color: #999; color: #444; }
+.submit.metal			{ background: #FFF url(img/varicelle-sprite.png) repeat-x scroll bottom; border: 1px solid #BBB; -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.1); color: #555 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
+.submit.metal:hover		{ background-color: #EEE; border-color: #999; color: #444; }
 
-.spip.submit { background-color: #75507B; }
-.spip.submit:hover { background-color: purple; }
-.spip.submit:focus, .submit.spip:active { background-color: #F57900 !important; border-color: #F57900 !important; }
+.submit.spip			{ background-color: #75507B; }
+.submit.spip:hover		{ background-color: purple; }
+.submit.spip:focus,
+.submit.spip:active		{ background-color: #F57900 !important; border-color: #F57900 !important; }
 
 /* boutons d'admin SPIP */
-.spip-admin .submit { padding: 3px 9px; background-color: #75507B; border: 0; font-size: .9em; }
-.spip-admin .submit:hover { background-color: purple; }
-.spip-admin .submit:focus, .spip-admin .submit:active { background-color: #F57900 !important; border-color: #F57900 !important; }
+.spip-admin				{ padding: 3px 9px; background-color: #75507B; border: 0; font-size: .9em; }
+.spip-admin :hover		{ background-color: purple; }
+.spip-admin .submit:focus,
+.spip-admin .submit:active { background-color: #F57900 !important; border-color: #F57900 !important; }
 
 /* end */
