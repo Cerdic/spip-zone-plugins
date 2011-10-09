@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function lm2_jquery_plugins($plugins){
 	if(!test_espace_prive()){
 		$plugins[] = _DIR_LIB_SM.'script/soundmanager2.js';

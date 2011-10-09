@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function lm2_joli_titre($titre){
 	$titre = basename($titre);
 	$titre = str_replace('.mp3','',$titre);

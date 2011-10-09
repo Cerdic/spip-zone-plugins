@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('inc/meta');
 
 function lm2_upgrade($nom_meta_base_version,$version_cible){
