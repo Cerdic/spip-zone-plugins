@@ -1,17 +1,18 @@
 <plugin>
 	<nom>Scenari</nom>
-	<auteur>[Grégory Pascal->http://www.spip-contrib.net/ngombe], distribu&#233; sous licence GNU/GPL</auteur>
+	<auteur>[Gr&#233;gory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
+	<licence>GNU/GPL</licence>
 	<version>0.0.1</version>
 	<etat>test</etat>
 	<prefix>scenari</prefix>
-    <categorie>edition</categorie>
+   <categorie>edition</categorie>
 	<slogan><multi>
 	[fr]Ajouter des archives scenari dans les articles
 	[en]Add scenari archives in articles
 	</multi></slogan>
 	<description><multi>
-	[fr] Permet d'ajouter facilement une archive [scenari->http://scenari-platform.org/] dans un article SPIP.
-	[en] Make it easy to add a [scenari->http://scenari-platform.org/] archive in articles.
+	[fr]Permet d'ajouter facilement une archive [scenari->http://scenari-platform.org/] dans un article SPIP.
+	[en]Make it easy to add a [scenari->http://scenari-platform.org/] archive in articles.
 	</multi></description>
 	<icon>images/scenari-32.png</icon>
 	<lien>http://www.spip-contrib.net/Scenari-pour-SPIP</lien>
