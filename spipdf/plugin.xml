@@ -1,21 +1,17 @@
 <plugin>
 	<nom>SpiPDF</nom>
-	<auteur>
-		Yves Tannier [contact->yvestanSANSPAM@gmail.com] / [grafactory.net->http://www.grafactory.net]
-	</auteur>
+	<slogan>Conversion d'article en Pdf</slogan>
+	<auteur>[Yves Tannier->yvestanSANSPAM@gmail.com], [grafactory.net->http://www.grafactory.net]</auteur>
 	<icon>img_pack/spipdf.png</icon>
 	<licence>(c) 2010 GPL</licence>
-	<lien>http://www.spip-contrib.net/spiPDF-generer-des-contenus-sur-mesure-en-PDF</lien>
+	<lien>http://www.spip-contrib.net/spiPDF-v0-2-0-generer-des-contenus-sur-mesure-en-PDF</lien>
 	<version>0.2.1</version>
 	<etat>test</etat>
 	<description>
-		Conversion d'un article au format PDF par le biais d'un simple squelette cod&eacute; en HTML 4.01.<br /><br />
-		Utilise la librairie [HTML2PDF->http://www.html2pdf.fr] ou la librairie [mPDF->http://mpdf.bpm1.com]<br /><br />
-		N&eacute;cessite PHP 5 et <strong>l'installation obligatoire</strong> de [HTML2PDF->http://www.html2pdf.fr] et/ou de [mPDF->http://mpdf.bpm1.com] dans le répertoire lib/ 
-        à la racine de SPIP ou dans le répertoire lib/ du plugin.
+		Ce plugin permet de convertir un article au format PDF par le biais d'un simple squelette cod&#233; en HTML 4.01.	Il utilise la librairie [HTML2PDF->http://www.html2pdf.fr] ou la librairie [mPDF->http://mpdf.bpm1.com]. Il n&#233;cessite PHP 5.
 	</description>
 	<prefix>spipdf</prefix>
-	<necessite id="SPIP" version='[2.0.0;]' />
+	<necessite id="SPIP" version='[2.0.0;2.1.99]' />
 	<pipeline>
 		<nom>pre_typo</nom>
 		<inclure>spipdf.php</inclure>
