@@ -3,6 +3,7 @@
     <auteur>[Jean-Philippe Guihard->http://www.jp.guihard.net/]</auteur>
     <version>0.2.1</version>
     <etat>stable</etat>
+    <slogan>Informer sur la liste des plugins actifs d'un site</slogan>
     <description>
 		<multi>
 [fr]Liste les plugins actifs et affiche une description sommaire de ceux-ci.
