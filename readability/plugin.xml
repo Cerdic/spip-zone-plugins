@@ -2,7 +2,7 @@
 	<nom>Readability</nom>
 	<slogan>Extraire le contenu pertinent d'une page Web</slogan>
 	<auteur>Arc90, Keyvan Minoukadeh, Fil</auteur>
-	<licence>Apache License, Version 2.0</licence>
+	<licence>Apache License Version 2.0</licence>
 	<version>0.1.0</version>
 	<etat>test</etat>
 	<lien>http://www.spip-contrib.net/3758</lien>
