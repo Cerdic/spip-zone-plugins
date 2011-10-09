@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Plugin Install&#233;</nom>
-	<slogan>Pouvoir tester si un plugin est install&#233;</slogan>
+	<slogan>Tester si un plugin est install&#233;</slogan>
 	<auteur>Pierre Andrews (Mortimer)</auteur>
 	<licence>&#169; 2006 GPL</licence>
 	<version>0.1.0</version>
