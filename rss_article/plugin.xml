@@ -19,6 +19,7 @@ Pour &#233;viter les doublons et les imports successifs, une fois l'article cr&#
 	<install>base/rssarticle_upgrade.php</install>
 	<prefix>rssarticle</prefix>
 	<categorie>edition</categorie>
+	<utilise id="cfg" />
 	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<pipeline>
 		<nom>declarer_tables_principales</nom>
