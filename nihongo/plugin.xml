@@ -1,16 +1,17 @@
 <plugin>
-	<version>0.1</version>
 	<nom>Nihongo</nom>
+	<slogan>Ecrire les hiragana et katakana japonais</slogan>
+	<version>0.1.0</version>
 	<prefix>nihongo</prefix>
-	<auteur>[erational->http://www.erational.org]
-_ &copy; 2008 - Distribu&eacute; sous licence GNU/GPL version 3</auteur>
+	<auteur>[erational->http://www.erational.org]</auteur>
+	<licence>(c) 2008 - GNU/GPL V3</licence>
 	<etat>test</etat>
 	<lien>http://www.spip-contrib.net/Plugin-Nihongo</lien>
-	<description><multi>
-[fr]Introduit des mod&egrave;les r&ocirc;maji pour &eacute;crire les hiragana et katakana japonais
-</multi></description>
+	<description>
+		Le plugin Nihongo ajoute un mod&#232;le pour saisir en r&#244;maji des cha&#238;nes hiragana et katakana japonaises
+	</description>
 	<icon>nihongo.png</icon>
 	<fonctions>nihongo_fonctions.php</fonctions>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.0.99]" />
 	<categorie>edition</categorie>
 </plugin>
