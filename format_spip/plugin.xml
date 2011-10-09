@@ -1,28 +1,20 @@
 <plugin>
-	<nom>
-	Format SPIP pour 1.9.2
-	</nom>
+	<nom>Format SPIP</nom>
+	<slogan>Permettre &#224; un r&#233;dacteur de pouvoir copier le code spip d'un article</slogan>
 	<auteur>Joseph LARMARANGE</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	stable
-	</etat>
+	<version>0.1.0</version>
+	<etat>stable</etat>
 	<description>
-	Ce plugin rajoute, sur la page exec=articles, une bo&icirc;te texte contenant le contenu brut d'un article (avec les raccourcis typographiques SPIP), afin qu'un r&eacute;dacteur puisse copier/coller le contenu d'un article m&ecirc;me s'il n'est pas autoris&eacute; &agrave; &eacute;diter l'article source.
+	Ce plugin rajoute, sur la page <code>?exec=articles</code>, une bo&#238;te texte contenant le contenu brut d'un article (avec les raccourcis typographiques SPIP), afin qu'un r&#233;dacteur puisse copier/coller le contenu d'un article m&#234;me s'il n'est pas autoris&#233; &#224; &#233;diter l'article source.
 	</description>
-	<lien>
-	</lien>
-	<prefix>
-	formatspip
-	</prefix>
+	<lien></lien>
+	<prefix>formatspip</prefix>
 	<icon>images/formatspip-48.png</icon>
 		<pipeline>
 		<nom>affiche_milieu</nom>
 		<inclure>formatspip_pipelines.php</inclure>
 	</pipeline>
 	<chemin dir='' type='prive' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>edition</categorie>
 </plugin>
