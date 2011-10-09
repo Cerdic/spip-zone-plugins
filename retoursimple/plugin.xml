@@ -1,21 +1,17 @@
 <plugin>
-
-    <nom> Retour simple </nom>
+	<nom>Retour simple</nom>
+	<slogan>Ne pas ignorer les  retours &#224; la ligne dans du texte</slogan>
 	<licence>GPL</licence>
-    <categorie>edition</categorie>
-    <auteur>Pleins de gens dont Fil, Maïeul et PatV</auteur>
-    <version>0.2</version>
-    
-  
-    <etat>test</etat>
-
-    <description>Permet qu'un retour à la ligne dans le texte de l'article produise bien un retour à la ligne sur le site</description>
-      <prefix>retoursimple</prefix>
-
+	<auteur>Pleins de gens dont Fil, Ma&#239;eul et PatV</auteur>
+	<version>0.2.0</version>
+	<etat>test</etat>
+	<description>
+		Permet qu'un retour &#224; la ligne dans le texte de l'article produise bien un retour &#224; la ligne sur le site. Le code <code><br /></code> est automatiquement ajout&#233; dans ce cas, comme lors de l'ajout manuel de <code>_</code> (&#8220;tiret bas&#8221;, &#8220;underscore&#8221;) en d&#233;but de ligne. En revanche, il ne s'agit pas de cr&#233;er des espaces (multiples &#8220;lignes vides&#8221;) par plusieurs retours &#224; la ligne : dans ce cas il est estim&#233; que le comportement de SPIP doit demeurer (qui &#233;limine les espaces multiples), et cr&#233;e un nouveau paragraphe lors de saut(s) de ligne(s).
+	</description>
+	<lien>http://www.spip-contrib.net/Alineas-Retour-simple</lien>
+	<prefix>retoursimple</prefix>
 	<icon>retoursimple.png</icon>
-
-    <options>retoursimple.php</options>
-
-
-
+	<options>retoursimple.php</options>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<categorie>edition</categorie>
 </plugin>
