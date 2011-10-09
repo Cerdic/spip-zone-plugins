@@ -1,14 +1,13 @@
 <plugin>
-	<nom>Extension Lorem Ipsum, pour Porte Plume</nom>
-	<auteur>Matthieu Marcillaud
-_ &#169; 2007 - Distribu&#233; sous licence GPL
-	</auteur>
+	<nom>Lorem Ipsum pour Porte Plume</nom>
+	<slogan>Des boutons pour cr&#233;er du texte factice</slogan>
+	<auteur>Matthieu Marcillaud</auteur>
+	<licence>&#169; 2007 - GPL</licence>
 	<lien></lien>
-	<version>1.1</version>
+	<version>1.1.0</version>
 	<etat>stable</etat>
-    <description>
-	Cette extension ajoute des boutons pour cr&eacute;er du texte factice
-	dans la barre d'outil de SPIP.
+   <description>
+	Cette extension ajoute des boutons pour cr&#233;er du texte factice dans la barre d'outil de SPIP.
 	</description>
 	<prefix>pp_loremipsum</prefix>
 	<pipeline>
@@ -19,6 +18,7 @@ _ &#169; 2007 - Distribu&#233; sous licence GPL
 		<nom>porte_plume_lien_classe_vers_icone</nom>
 		<inclure>pp_loremipsum_pipelines.php</inclure>
 	</pipeline>
+	<necessite id="spip" version='[2.0.0;2.1.99]' />
 	<necessite id="porte_plume" />
 	<categorie>edition</categorie>
 </plugin>
