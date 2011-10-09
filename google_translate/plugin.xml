@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Google Translate</nom>
 	<slogan>Traduire les articles</slogan>
-	<icon>img_pack/icone.png</icon>
+	<icon>images/icone.png</icon>
 	<auteur>Yohann</auteur>
 	<version>0.5.0</version>
 	<etat>dev</etat>
