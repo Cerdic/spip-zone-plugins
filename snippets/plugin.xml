@@ -1,28 +1,22 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Snippets
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	&#169; 2006 Cedric Morin [notre-ville.net->http://www.notre-ville.net]  Distribu&#233; sous licence GNU/GPL
-	</auteur>
-	<version>
-	0.1
-	</version>
-	<etat>
-	test
-	</etat>
+	<nom>Snippets</nom>
+	<slogan>Import/Export XML g&#233;n&#233;ralis&#233; de contenus</slogan>
+	<auteur>[C&#233;dric Morin (notre-ville.net)->http://www.notre-ville.net]</auteur>
+	<licence>&#169; 2006 - GNU/GPL</licence>
+	<version>0.2.0</version>
+	<etat>test</etat>
 	<description>
-	Import/Export XML g&#233;n&#233;ralis&#233; de contenus
+		Ce plugin fournit une API d'import/export xml de contenu. Il y a 2 modes d'import : la cr&#233;ation et l'ajout. Par exemple :
+-*  depuis une page rubrique, importer un article en cr&#233;e un nouveau
+-*  depuis une page article, importer un article ajoute le contenu de l'import champ &#224; champ &#224; l'article existant.
 	</description>
-	<lien>http://www.spip-contrib.net/Import-export-avec-Snippets</lien> <!-- URI de documentation -->
-	<prefix> 
-	snippets
-	</prefix>
+	<lien>http://www.spip-contrib.net/Import-export-avec-Snippets</lien>
+	<prefix>snippets</prefix>
 	<pipeline>
 		<nom>affiche_droite</nom>
 		<inclure>snippets_pipeline.php</inclure>
 	</pipeline>
 	<chemin dir='' />	
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>edition</categorie>
 </plugin>
