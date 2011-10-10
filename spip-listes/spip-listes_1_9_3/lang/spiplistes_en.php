@@ -460,6 +460,7 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 , 'abonnement_seule_liste_dispo' => "Subscribe to the only list available "
 , 'abo_listes' => 'Subscription'
 , 'abonnement_0' => 'Subscription'
+, 'inscription_newsletter' => 'Subscribe to newsletter'
 , 'abonnement_titre_mail' => 'Change your subscription'
 , 'votre_abo_listes' => "Your mailing list subscription"
 , 'lire' => 'Read'
