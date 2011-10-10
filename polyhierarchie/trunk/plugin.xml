@@ -9,9 +9,9 @@
 	<icon>images/polyhier-128.png</icon>
 	<auteur>[Cedric Morin->http://www.yterium.com]</auteur>
 	<licence>&#169; 2009-2010 GPL</licence>
-	<version>0.3.1</version>
+	<version>1.0.0</version>
 	<version_base>0.1.0</version_base>
-	<etat>test</etat>
+	<etat>stable</etat>
 	<description><multi>
 	[fr]Plugin permettant de cr&#233;er des liens transversaux en rattachant des rubriques
 	et articles &#224; d'autres rubriques que leur parent direct.
