@@ -1,32 +1,28 @@
 <plugin>
- 	 <nom>page twitter pour Zpip</nom>
-
- 	 <auteur>[yves Costiou->http://www.latelier2point0.fr]</auteur>
-
+	<nom>Twitter pour Zpip</nom>
+	<slogan>Affiche les informations d'un compte Twitter</slogan>
+	<auteur>[yves Costiou->http://www.latelier2point0.fr]</auteur>
 	<licence>GNU/GPL</licence>
-
 	<icon>img/twitter-64.png</icon>
+	<version>1.0.1</version>
+	<etat>dev</etat>
+	<description>
+Le plugin fournit un bloc de pr&#233;sentation de votre compte Twitter. Les param&#232;tres de personnalisation et de r&#233;glage sont accessibles via un formulaire cfg (param&#233;trage du compte et des options, r&#233;glage de l'affichage).
 
- 	 <version>1.0.1</version>
-
- 	 <etat>dev</etat>
-
- 	 <description>Le plugin fournit un bloc de présentation de votre compte twitter. <br/>Les pramètres de personnalisation et de réglage sont accessible via un formulaire cfg (paramétrage du compte et des options, réglage de l'affichage)<br/>le bloc est accessible via l'insertion d'un modèle (qui offre la possibilité de passer en paramètre un autre compte que celui décrit par cfg) ou via une page dédié pour les utilisateurs de squelette de type Z (page=mytwitter)</description>
-
+le bloc est accessible via l'insertion d'un mod&#232;le (qui offre la possibilit&#233; de passer en param&#232;tre un autre compte que celui d&#233;crit par cfg) ou via une page d&#233;di&#233; pour les utilisateurs de squelette de type Z (page=mytwitter)
+</description>
 	<lien>http://www.spip-contrib.net/Plugin-Mytwitter</lien>
-
- 	 <prefix>mytwitter</prefix>
-
-   	 <pipeline>
+	<prefix>mytwitter</prefix>
+	<pipeline>
 		<nom>insert_head</nom>
 		<inclure>mytwitter_pipelines.php</inclure>
-    	</pipeline>
-
+	</pipeline>
 	<pipeline>
-    	<nom>ajouter_boutons</nom>
-        <inclure>mytwitter_pipelines.php</inclure>
-   	</pipeline>
+		<nom>ajouter_boutons</nom>
+		<inclure>mytwitter_pipelines.php</inclure>
+	</pipeline>
 	<categorie>divers</categorie>
-	<utilise id="Z"/>
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cfg"/>
+	<utilise id="Z"/>
 </plugin>
