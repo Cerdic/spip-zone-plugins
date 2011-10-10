@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function yaml_sfyaml_encode($struct, $opt = array()) {
 	require_once _DIR_PLUGIN_YAML.'sfyaml/sfYaml.php';

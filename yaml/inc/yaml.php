@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 # textwheel fournit yaml_decode() aussi...
 # include_spip('inc/yaml-mini');
 
@@ -80,7 +82,7 @@ function yaml_decode_file($fichier){
 
 /*
  * Charge les inclusions de YAML dans un tableau
- * Les inclusions sont indiquées dans le tableau via la valeur 'inclure:rep/fichier.yaml' où rep indique le chemin relatif.
+ * Les inclusions sont indiquï¿½es dans le tableau via la valeur 'inclure:rep/fichier.yaml' oï¿½ rep indique le chemin relatif.
  * On passe donc par find_in_path() pour trouver le fichier
  * @param array $tableau
  */

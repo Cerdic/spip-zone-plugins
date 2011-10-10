@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function yaml_article($id_article) {
 	include_spip('inc/yaml');
