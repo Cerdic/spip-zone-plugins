@@ -1,13 +1,15 @@
 <plugin>
-	<nom>SLOGAN</nom>
-	<auteur><multi>[fr]Cedric MORIN (ancienne version du plugin par Mehdi Cherifi)[de]Cedric MORIN (die erste Version des Plugins stammte von Mehdi Cherifi)</multi></auteur>
+	<nom>Slogan</nom>
+	<slogan>Pour mettre en avant le slogan de votre site</slogan>
+	<auteur>C&#233;dric MORIN (ancienne version du plugin par Mehdi Cherifi)</auteur>
 	<licence>GPL</licence>
 	<version>2.0.2</version>
 	<etat>stable</etat>
 	<description>
-	<multi>[fr]{{Ajouter balise #SLOGAN_SITE_SPIP}}<br /><br />
-	Ce plugin vous permet d'ajouter une balise ind&#233;pendante propre au site spip : #SLOGAN_SITE_SPIP.[de]{{Erg&auml;nzt den Tag #SLOGAN_SITE_SPIP}}<br /><br />
-	Dieses Plugin erm&ouml;glicht ihnen, den SPIP-Tag  #SLOGAN_SITE_SPIP in ihren Skeletten zu verwenden.</multi>
+		<multi>
+		[fr]Ce plugin vous permet d'ajouter une balise ind&#233;pendante propre au site spip : <code>#SLOGAN_SITE_SPIP</code>
+		[de]Dieses Plugin erm&#246;glicht ihnen, den SPIP-Tag <code>#SLOGAN_SITE_SPIP</code> in ihren Skeletten zu verwenden
+		</multi>
 	</description>
 	<lien>http://www.spip-contrib.net/Un-slogan-pour-votre-site-SPIP-2-0</lien>
 	<prefix>slogan</prefix>
@@ -16,6 +18,6 @@
 		<nom>declarer_tables_interfaces</nom>
 		<inclure>slogan_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<categorie>divers</categorie>
 </plugin>
