@@ -1,27 +1,16 @@
 <plugin>
-
-	<version>0.1</version>
-	
-	<nom>SPIPMINE - Gestion de projets pour SPIP</nom>
-	
+	<nom>Spipmine</nom>
+	<slogan>Gestion de projets pour SPIP</slogan>
+	<version>0.1.0</version>
 	<prefix>spipmine</prefix>
-
-	<auteur>Cyril MARION - &#169; 2009, 2010 - [Ateliers CYM->http://www.cym.fr]</auteur>
-	
-    <licence>Licence GNU/GPL</licence>
-
+	<auteur>[Cyril MARION (Ateliers CYM)->http://www.cym.fr]</auteur>
+   <licence>&#169; 2009-2010 - GNU/GPL</licence>
 	<etat>dev</etat>
-
 	<icon>img_pack/picto_spip_mine_64x64.png</icon>
-	
-	<description>G&egrave;re une activit&eacute; de production de sites internet.</description>
-
-	<lien>[Doc en ligne, forum, FAQ sur SPIP-Contrib->http://www.spip-contrib.net/Plugin-Spipmine?var_mode=preview]</lien>
-
+	<description>Ce plugin est compos&#233; de diff&#233;rents modules permettant de g&#233;rer au quotidien une activit&#233; de cr&#233;ation de sites.</description>
+	<lien>http://www.spip-contrib.net/Plugin-Spipmine</lien>
 	<fonctions>spipmine_fonctions.php</fonctions>
-	
 	<options>spipmine_options.php</options>
-	
 	<install>base/spipmine_install.php</install>
 	
 	<pipeline>
@@ -39,6 +28,6 @@
 		<inclure>base/spipmine_tables_interfaces.php</inclure>
 	</pipeline>
 	
+	<necessite id="SPIP" version="[2.0.0;2.0.99]" />
 	<categorie>divers</categorie>
-	
 </plugin>
