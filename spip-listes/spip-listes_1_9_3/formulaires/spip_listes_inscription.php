@@ -12,6 +12,8 @@
  // $LastChangedRevision$
  // $LastChangedBy$
  // $LastChangedDate$
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 	
 include_spip('inc/acces');
 include_spip('inc/spiplistes_api');

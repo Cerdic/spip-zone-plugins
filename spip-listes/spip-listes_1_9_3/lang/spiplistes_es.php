@@ -10,6 +10,8 @@
  
 // Este es un archivo para SPIP -- This is a SPIP module file  --  Ceci est un fichier module de SPIP
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS['i18n_spiplistes_es'] = array(
 
 // CP-20081126: clasificado por scripts

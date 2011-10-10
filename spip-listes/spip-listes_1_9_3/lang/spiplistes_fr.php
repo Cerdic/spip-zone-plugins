@@ -7,7 +7,9 @@
  // $LastChangedRevision$
  // $LastChangedBy$
  // $LastChangedDate$
- 
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS['i18n_spiplistes_fr'] = array(
 
 // CP-20081126: classement par scripts

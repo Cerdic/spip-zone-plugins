@@ -7,6 +7,8 @@
  // $LastChangedBy$
  // $LastChangedDate$
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 define('_SPIPLISTES_AGENDA_PERIODE_HEBDO', 10);
 define('_SPIPLISTES_AGENDA_PERIODE_MOIS', 45);
 define('_SPIPLISTES_AGENDA_PERIODE_DEFAUT', _SPIPLISTES_AGENDA_PERIODE_MOIS);

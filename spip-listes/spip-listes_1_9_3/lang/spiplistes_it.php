@@ -8,6 +8,8 @@
  // $LastChangedBy: paladin@quesaco.org $
  // $LastChangedDate: 2011-04-25 19:54:15 +0200 (Lun 25 avr 2011) $
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 $GLOBALS['i18n_spiplistes_it'] = array(
 
 // CP-20081126: classement par scripts
