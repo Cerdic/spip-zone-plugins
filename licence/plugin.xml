@@ -1,25 +1,24 @@
 <plugin>
 	<nom>
 		<multi>
-		[fr]Une Licence pour mes articles et mes documents
+		[fr]Licence
+		[en]License
+		</multi>
+	</nom>
+	<nom>
+		<multi>
+		[fr]Une Licence pour mes articles et documents
 		[en]A license for articles and documents
 		</multi>
 	</nom>
 	<icon>img_pack/licence_logo.png</icon>
-	<auteur>
-		<multi>
-		[fr]fanouch - lesguppies@free.fr
-    	<br />Sur une idée originale de :  <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a>
-		[en]fanouch - lesguppies@free.fr
-		<br />Based on an original idea of : <a href='http://www.spip-contrib.net/Filtre-Licence'>erational</a>
-		</multi>
-	</auteur>
+	<auteur>[fanouch->lesguppies@free.fr], sur une id&#233;e originale de erational</auteur>
 	<version>0.3.5</version>
 	<version_base>0.2</version_base>
 	<etat>test</etat>
 	<description>
 		<multi>
-			[fr]Permet de relier une licence d'utilisation à un article ou un document
+			[fr]Permet de relier une licence d'utilisation &#224; un article ou un document
 			[en]Link a license on articles and documents
 		</multi>
 	</description>
@@ -51,7 +50,7 @@
 		<nom>editer_contenu_objet</nom>
 		<inclure>licence_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="spip_bonux" version="[1.8.7;]" />
 	<categorie>divers</categorie>
 	<traduire gestionnaire="salvatore" module="licence" reference="fr" />
