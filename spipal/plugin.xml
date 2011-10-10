@@ -1,18 +1,19 @@
 <plugin>
-	<nom>spipal</nom>
-	<auteur>
-	[Thierry Schmit->http://www.spip-contrib.net/_madbuilder_] (V1)
-	[Committo Ergo Sum->http://www.spip-contrib.net/Deesse-A] (V2)
-	</auteur>
+	<nom>Spipal</nom>
+	<slogan>Paiement via Paypal</slogan>
+	<auteur>[Thierry Schmit (V1)->http://www.spip-contrib.net/_madbuilder_], [Committo Ergo Sum (V2)->http://www.spip-contrib.net/Deesse-A]</auteur>
 	<version>2.0.0</version>
 	<version_base>1</version_base>
-	 <!-- Etat du plugin, au choix : dev (developpement), test, stable, experimental -->
 	<etat>dev</etat>
 	<icon>img_pack/av_edit.png</icon>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[2.1.8;]" />
+	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<meta>spipal_metas</meta>
-	<description>Paiement via Paypal</description>
+	<description>
+Pour int&#233;grer un syst&#232;me de paiement imm&#233;diat via PayPal &#224; certains de vos articles .
+
+Ce plugin est une mise &#224; niveau pour la version SPIP 2.1.8 du Plugin [GoPayPal->http://www.spip-contrib.net/Vente-ou-don-dans-articles] qui &#233;tait rest&#233; en SPIP 1.9.2 depuis 3 ans. Il change de nom pour ne pas faire trop de pub &#224; une entreprise bancaire critiquable.
+	</description>
 	<lien>http://www.spip-contrib.net/Plugin-SPIPAL</lien>
 	<prefix>spipal</prefix>
 	<install>base/spipal_gestion.php</install>
