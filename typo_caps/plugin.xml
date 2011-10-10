@@ -6,8 +6,8 @@
 	<auteur>Fil</auteur>
 	<slogan>Styler les mots en lettres capitales</slogan>
 	<description>
-Ce plugin propose un filtre qui reconnait les mots &eacte;crits en lettres capitales et les encadrent dans une balise <code><span class="caps"></code>.
-Par exemple, <code>ONU</code> devient <code><span class="caps">ONU</span></code>. De ce fait, les mots en lettres capitales peuvent &ecirc;tre styl&eacute;s en css.
+Ce plugin propose un filtre qui reconnait les mots &#233;crits en lettres capitales et les encadre dans une balise <code><span class="caps"></code>.
+Par exemple, <code>ONU</code> devient <code><span class="caps">ONU</span></code>. De ce fait, les mots en lettres capitales peuvent &#234;tre styl&#233;s en css.
 	</description>
 	<pipeline>
 		<nom>pre_typo</nom>
@@ -15,7 +15,6 @@ Par exemple, <code>ONU</code> devient <code><span class="caps">ONU</span></code>
 		<inclure>typo_caps_fonctions.php</inclure>
 	</pipeline>
 	<categorie>edition</categorie>
-	<lien>http://www.spip-contrib.net/typo-caps</lien>
 	<icon>typo_caps.png</icon>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 </plugin>
