@@ -4,7 +4,7 @@
 	<auteur>James, Ben, Eric Lupinacci et Bruno</auteur>
 	<licence>&#169; 2009 - GNU/GPL</licence>
 	<version>0.2.0</version>
-	<etat>dev</etat>
+	<etat>stable</etat>
 	<prefix>SpipClear</prefix>
 	<description>
 		SpipClear est con&#231;u pour transformer un secteur en blog ou carnet web. Pour cela, il s'inspire de DotClear, un syst&#232;me de gestion de blog d&#233;velopp&#233; en php par Neokraft.net. Il est n&#233;cessaire de cr&#233;er, a minima, les pages sommaire, article-x et rubrique-x pour activer le blog sur le secteur choisi.
