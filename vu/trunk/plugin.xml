@@ -1,19 +1,16 @@
 <plugin>
 	<nom>Vu !</nom>
+	<slogan>Relayez l'information, plut&#244;t que de la (re)publier !</slogan>
 	<auteur>archi02</auteur>
 	<version>0.4.1</version>
 	<version_base>0.2</version_base>
 
 	<icon>img_pack/vu_logo_64.png</icon>
 	<description>
-		<i>&laquo; Relayez l'information, plut&ocirc;t que de la (re)publier ! &raquo;</i>
-
-		Ce plugin propose plusieurs nouveaux objets pour pallier à l'impossibilit&eacute; sur SPIP de <i>relayer</i> simplement de l'information, c'est &agrave; dire publier sans contenu. Typiquement (mais ce n'est qu'un exemple) ceci est très utile pour une activit&eacute; de veille th&eacute;matique.
-
-		[Configuration possible par CFG->?exec=cfg&amp;cfg=vu]
+		Ce plugin propose plusieurs nouveaux objets pour pallier &#224; l'impossibilit&#233; sur SPIP de <i>relayer</i> simplement de l'information, c'est &#224; dire publier sans contenu. Typiquement (mais ce n'est qu'un exemple) ceci est tr&#232;s utile pour une activit&#233; de veille th&#233;matique.
 	</description>
-	<lien>[Pour une pr&eacute;sentation d&eacute;taill&eacute;e du plugin->http://www.spip-contrib.net/article3066]</lien>
-	<licence>&copy; 2009 - Distribu&eacute; sous licence GNU/LGPL</licence>
+	<lien>http://www.spip-contrib.net/article3066</lien>
+	<licence>(c) 2009 - GNU/LGPL</licence>
 
 	<etat>stable</etat>
 
@@ -109,7 +106,7 @@
 		<inclure>vu_pipelines.php</inclure>
 	</pipeline>
 
-	<necessite id="spip" version="[2.0.0;]" />
+	<necessite id="spip" version="[2.0.0;2.1.99]" />
 	<utilise id='CFG' version='[1.0;]' /> 
 
 	<!-- Ajouter bouton de navigation dans l'interface privee -->
