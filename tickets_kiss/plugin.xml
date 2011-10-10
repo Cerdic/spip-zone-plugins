@@ -1,20 +1,15 @@
 <plugin>
-	<nom>Tickets Kiss, syst&egrave;me de suivi de bugs</nom>
+	<nom>Tickets Kiss</nom>
+	<slogan>Des tickets pour suivre les bugs</slogan>
 	<auteur>ARNO*</auteur>
 	<licence>GPL v3</licence>
-	<slogan>Des tickets pour suivre les bugs</slogan>
 	<description>
-<i>Tickets Kiss</i> est un outil de suivi de bugs directement int&eacute;gr&eacute; &agrave; l'espace priv&eacute; de SPIP.
-Il est con&ccedil;u pour faciliter la phase de d&eacute;veloppement du site (notamment les squelettes du site public).
+{Tickets Kiss} est un outil de suivi de bugs directement int&#233;gr&#233; &#224; l'espace priv&#233; de SPIP. Il est con&#231;u pour faciliter la phase de d&#233;veloppement du site (notamment les squelettes du site public).
 
-La version {Kiss} ({Keep it simple, stupid!}) est moins param&eacute;trable que la version {Tickets} disponible par ailleurs. En revanche, elle est imm&eacute;diatement fonctionnelle, sans n&eacute;cessiter l'installation d'autres plugins ni passage par une page de configuration.
+La version {Kiss} ({Keep it simple, stupid!}) est moins param&#233;trable que la version {Tickets} disponible par ailleurs. En revanche, elle est imm&#233;diatement fonctionnelle, sans n&#233;cessiter l'installation d'autres plugins ni passage par une page de configuration.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
 	<icon>imgs/logo-bugs.png</icon>
-
-
-	<version>1.10</version>
-
+	<version>1.10.0</version>
 	<version_base>0.6</version_base>
 	<etat>stable</etat>
 
@@ -67,6 +62,6 @@ La version {Kiss} ({Keep it simple, stupid!}) est moins param&eacute;trable que 
 		<url>ticketskiss</url>
 	</bouton>
 
-	<necessite id="SPIP" version="[2.0.0;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>divers</categorie>
 </plugin>
