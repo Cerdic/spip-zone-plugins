@@ -1,21 +1,21 @@
 <plugin>
-	<nom>Typographie avanc&eacute;e</nom>
+	<nom>Typographie avanc&#233;e</nom>
+	<slogan>C&#233;sures, veuves et orphelines,...</slogan>
 	<auteur>ARNO*</auteur>
-	<version>0.2</version>
+	<version>0.2.0</version>
 	<etat>dev</etat>
 	<description>
-		Ce plugin impl&eacute;mente automatiquement l'extension [PHP-Typography de Kingdesk->http://kingdesk.com/projects/php-typography/]. 
+		Ce plugin impl&#233;mente automatiquement l'extension [PHP-Typography de Kingdesk->http://kingdesk.com/projects/php-typography/]. 
 		Il active notamment:
--* la c&eacute;sure automatique dans plus de 40 langues, de mani&egrave;re intelligente,
--* la gestion des veuves et orphelines (&eacute;viter un mot court isol&eacute; en derni&egrave;re ligne),
--* le contr&ocirc;le par CSS de certains &eacute;l&eacute;ments (espuerl&egrave;te, nombres, mots enti&egrave;rement en majuscules...),
--* le remplacement de certains caract&egrave;res (symboles math&eacute;matiques, trademark, trois points...).
+-* la c&#233;sure automatique dans plus de 40 langues, de mani&#232;re intelligente,
+-* la gestion des veuves et orphelines (&#233;viter un mot court isol&#233; en derni&#232;re ligne),
+-* le contr&#244;le par CSS de certains &#233;l&#233;ments (espuerl&#232;te, nombres, mots enti&#232;rement en majuscules...),
+-* le remplacement de certains caract&#232;res (symboles math&#233;matiques, trademark, trois points...).
 
-{{Attention.}} Ce plugin s'active sur tous les &eacute;l&eacute;ments passant par <code>|typo</code>, il peut donc se montrer tr&egrave;s intrusif. Si vous utilisez ce plugin, n'utilisez plus le plugin &laquo;C&eacute;sure&raquo;.
+{{Attention.}} Ce plugin s'active sur tous les &#233;l&#233;ments passant par <code>|typo</code>, il peut donc se montrer tr&#232;s intrusif. Si vous utilisez ce plugin, n'utilisez plus le plugin &#171;C&#233;sure&#187;.
 
-{{Attention.}} N&eacute;cessite {{PHP~5}} au minimum.
+{{Attention.}} N&#233;cessite {{PHP~5}} au minimum.
 	</description>
-	<lien></lien> <!-- URI de documentation -->
 	<prefix>typo_avancee</prefix>
 	<fonctions>typo_avancee.php</fonctions>
 	<pipeline>
@@ -23,7 +23,7 @@
 		<action>typo</action>
 		<inclure>typo_avancee.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[2.0.0;]" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<categorie>edition</categorie>
 </plugin>
 
