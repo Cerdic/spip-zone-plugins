@@ -1,17 +1,19 @@
 <plugin>
 	<nom>RERS</nom>
-	<version>0.3</version>
+	<slogan>R&#233;seau d'échange de savoirs</slogan>
+	<version>0.3.0</version>
+	<licence> GNU/GPL</licence>
 	<prefix>rers</prefix>
 	<etat>dev</etat>
-	<auteur>Jean-Charles C [contact->mailto:jccdkct-internet@yahoo.fr]</auteur>
+	<auteur>[Jean-Charles C->mailto:jccdkct-internet@yahoo.fr]</auteur>
 	<icon>img/logo_plugin_rers.png</icon>
-	<description>Plugin d&eacute;velopp&eacute; initialement pour le r&eacute;seau 
-         d'&eacute;changes de savoirs RERS du sud de l'aisne en 2009.
-         Distribu&eacute; sous licence GNU/GPL. 
-_        [Documentation->http://www.spip-contrib.net/?article3059] /
-         [Configuragion->.?exec=cfg&amp;cfg=rers]
-        </description>
-	<necessite id='SPIP' version='[2.0.0;]' />
+	<description>
+Utilisez SPIP pour centraliser les offres et demandes de savoirs des adh&#233;rents de votre R&#233;seau d'Echanges de Savoirs. L'espace priv&#233; sera particuli&#232;rement adapt&#233; aux &#233;changes d'informations entre les adh&#233;rents gr&#226;ce &#224; ces squelettes.
+
+Ce plugin a &#233;t&#233; d&#233;velopp&#233; initialement pour le r&#233;seau d'&#233;changes de savoirs RERS du sud de l'aisne en 2009.
+	</description>
+	<lien>http://www.spip-contrib.net/?article3059</lien>
+	<necessite id='SPIP' version='[2.0.0;2.1.99]' />
 	<necessite id='AHUNTSIC' version='[1.0.0;]' />
 	<necessite id='AGENDA' version='[2.0.0;]' />
 	<necessite id="cfg" version="[1.0.0;]" />
