@@ -1,21 +1,16 @@
 <plugin>
 	<nom>Gazette</nom>
+	<slogan>Syndication et pr&#233;sentaion automatique de la Gazette SPIP</slogan>
 	<prefix>gazette</prefix>
-	<version>1</version>
+	<licence>GNU/GPL</licence>
+	<version>1.0.0</version>
 	<etat>stable</etat>
-	<auteur>[L'&Eacute;quipe SPIP-Mag'->http://mag.spip.net/spip.php?auteur193]</auteur>
-	<lien>[Explications->http://mag.spip.net/spip.php?article68]</lien>
+	<auteur>[L'&#233;quipe SPIP-Mag->http://mag.spip.net/spip.php?auteur193]</auteur>
+	<lien>http://mag.spip.net/spip.php?article68</lien>
 	<description>
-	Syndication et pr&eacute;sentaion automatique de la Gazette SPIP.
-
-	La Gazette SPIP est un journal en &#171;&nbsp;papier&nbsp;&#187; distribu&eacute; au format &eacute;lectronique PDF.
+	La Gazette SPIP est un journal en &#171;&#160;papier&#160;&#187; distribu&#233; au format &#233;lectronique PDF. Pour afficher la noisette de t&#233;l&#233;chargement sur votre site ajouter dans votre squelette : <code>#PIPELINE{boussole}</code>
 	
-	pour afficher la noisette de t&#233;l&#233;chargement sur votre site ajouter dans votre squelette :
-	
-	<code>#PIPELINE{boussole}</code>
-
-	Plugin distribu&eacute; sous licence GNU/GPL.
-	Les documents propos&eacute;s en t&eacute;l&eacute;chargement sont distribu&eacute;s sous licence Art Libre.
+	Les documents propos&#233;s en t&#233;l&#233;chargement sont distribu&#233;s sous licence Art Libre.
 	</description>
 	<icon>gazette.jpg</icon>
 	<install>gazette_install.php</install>
@@ -28,5 +23,5 @@
 		<inclure>gazette_pipelines.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 </plugin>
