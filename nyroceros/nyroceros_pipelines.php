@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function Nyro_insert_head($flux){
 	include_spip("inc/filtres");
 	$config = @unserialize($GLOBALS['meta']['nyroceros']);
