@@ -1,45 +1,26 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	Portail Web pour PMB
-	</nom>
-	<auteur>	<!-- Auteur du plugin -->
-	[OpenStudio->http://www.openstudio.fr]
-_ &#169; 2010 - Licence GPL
-	</auteur>
-	<version>
-	1.0.4
-	</version>
+	<nom>Portail Web pour PMB</nom>
+	<slogan>Utiliser SPIP comme portail web du logiciel PMB</slogan>
+	<auteur>[OpenStudio->http://www.openstudio.fr]</auteur>
+	<licence>&#169; 2010 - GPL</licence>
+	<version>1.0.4</version>
 	<icon>img_pack/logo-spip-pmb.png</icon>
-	<etat>
-	stable
-	</etat>
+	<etat>stable</etat>
 	<description>
-	Ce plugin permet d'utiliser SPIP comme portail web du logiciel PMB. <br />
-	[Param&eacute;trage du plugin->.?exec=cfg&amp;cfg=spip_pmb] 
-	</description>
-	<lien>http://www.spip-contrib.net/Portail-Web-pour-PMB</lien> <!-- URI de documentation -->
-	<options> <!-- fichier charge a chaque hit -->
-	pmb_mes_options.php
-	</options>
-	
-	<fonctions> <!-- fichier charge a chaque recalcul -->
-	pmb_mes_fonctions.php</fonctions>
-	<install>base/pmb_tables.php</install>
-	
-	
-	<!-- classe d'implementation : espace de nommage qui prefixera les appels de fonction
-	sur le mode Rien::
-	ainsi les fonctions hors espace de nommage ne peuvent etre appelees
-	ce parametre est obligatoire et doit etre non vide
-	-->
-	<prefix> 
-	pmb
-	</prefix>
+Ce portail web pour [PMB->http://www.pmbservices.fr] contient un squelette pr&#234;t &#224; l&#8217;emploi compatible avec les th&#232;mes ZPIP. L&#8217;interface avec le catalogue pmb s&#8217;effectue par les webservices pmb disponibles &#224; partir de la version 3.3.
 
+PMB est un Sigb (Syst&#232;me Int&#233;gr&#233; de Gestion de Biblioth&#232;que) libre.
+	</description>
+	<lien>http://www.spip-contrib.net/Portail-Web-pour-PMB</lien>
+	<options>pmb_mes_options.php</options>
+	
+	<fonctions>pmb_mes_fonctions.php</fonctions>
+	<install>base/pmb_tables.php</install>
+	<prefix>pmb</prefix>
+
+	<necessite id='spip' version='[2.0.10;2.1.99]' />
  	<necessite id="CFG" version="[1.0;]" />
 	<necessite id="spip_bonux" version="[1.2;]" />
-	<necessite id='spip' version='[2.0.10;]' />
 	<utilise id='Z' version='[1.2.0;]' />
 	<categorie>divers</categorie>
 </plugin>
