@@ -4,10 +4,12 @@
  * Insetar google maps en SPIP
  *
  * Autores :
- * Horacio Gonz‡lez, Berio Molina
- * (c) 2007 - Distribu’do baixo licencia GNU/GPL
+ * Horacio Gonzï¿½lez, Berio Molina
+ * (c) 2007 - Distribuï¿½do baixo licencia GNU/GPL
  *
  */
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_GEOMAP_INIT_dist($p){
 	$p->code = "((\$f=charger_fonction('geomap_script_init','inc',true))?\$f():'')";

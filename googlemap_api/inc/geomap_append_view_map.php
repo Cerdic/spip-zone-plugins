@@ -9,6 +9,8 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function inc_geomap_append_view_map_dist($target_id,$view_lat,$view_long,$view_zoom=NULL,$Markers = NULL,$view_icon = NULL){
 	if (!strlen($view_lat) OR !is_numeric($view_lat)){
 		$view_lat = lire_config('geomap/latitude',0);
