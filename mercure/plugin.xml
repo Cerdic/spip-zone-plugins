@@ -1,24 +1,18 @@
 <plugin>
-	<nom>
-		<multi>
-		[fr]Mercure
-		[en]Mercure
-		</multi>
-	</nom>
+	<nom>Mercure</nom>
+	<slogan>Chat pour R&#233;dacteurs</slogan>
 	<icon>img_pack/mercure.png</icon>
-	<auteur>Patrick Kuchard [contact->patrick@kalaia.net] _ [site->http://www.encyclopedie-incomplete.com]</auteur>
-	<version>0.2</version>
+	<auteur>[Patrick Kuchard->patrick@kalaia.net], [site->http://www.encyclopedie-incomplete.com]</auteur>
+	<version>0.2.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>
-		[fr]Tchat dans l'espace priv&eacute; entre les r&eacute;dacteurs
+		[fr]Tchat dans l'espace priv&#233; entre les r&#233;dacteurs
 		[en]Chat for the redactors in the private area
 		</multi>
 	</description>
 	<prefix>Mercure</prefix>
-	<lien>
-		[Documentation->http://www.encyclopedie-incomplete.com/spip.php?articleXXX]
-	</lien>
+	<lien>http://www.spip-contrib.net/Mercure-Chat-pour-Redacteurs</lien>
 	<pipeline>
 		<nom>ajouter_boutons</nom>
 		<action>ajouterBoutons</action>
@@ -28,5 +22,6 @@
 		<nom>header_prive</nom>
 		<inclure>mercure_pipe.php</inclure>
 	</pipeline>
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>communication</categorie>
 </plugin>
