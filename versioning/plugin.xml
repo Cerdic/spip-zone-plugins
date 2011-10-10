@@ -1,12 +1,11 @@
 <plugin>
 	<nom>Versioning</nom>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<prefix>versioning</prefix>
-	<auteur>michael.courcy@netapsys.fr, mamadou.niagate@netapsys.fr</auteur>
-	<slogan>G&eacute;rer deux versions d'un m&ecirc;me article</slogan>
+	<auteur>[Micha&#235;l Courcy->michael.courcy@netapsys.fr], [Mamadou Niagate->mamadou.niagate@netapsys.fr]</auteur>
+	<slogan>G&#233;rer deux versions d'un m&#234;me article</slogan>
 	<description>
-Ce plugin permet de cr&eacute;er une nouvelle version d'un article sans modifier celle qui est en ligne, puis quand l'administrateur l'estime opportun, 
-de d&eacute;ployer la nouvelle version de l'article &agrave; la place de la premi&egrave;re version, faisant passer cette derni&egrave;re au statut &#171; archiv&eacute; &#187;.
+Ce plugin permet de cr&#233;er une nouvelle version d'un article sans modifier celle qui est en ligne, puis quand l'administrateur l'estime opportun, de d&#233;ployer la nouvelle version de l'article &#224; la place de la premi&#232;re version, faisant passer cette derni&#232;re au statut &#171; archiv&#233; &#187;.
 	</description>
 	<lien>http://www.spip-contrib.net/Plugin-versionning</lien>
 	<options>versioning_options.php</options>
@@ -18,6 +17,6 @@ de d&eacute;ployer la nouvelle version de l'article &agrave; la place de la prem
 		<nom>header_prive</nom>
 		<inclure>versioning_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
 	<categorie>edition</categorie>
 </plugin>
