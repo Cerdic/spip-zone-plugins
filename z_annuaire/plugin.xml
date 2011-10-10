@@ -1,14 +1,10 @@
 <plugin>
+	<nom>Z Annuaire</nom>
 	<nom>Un annuaire pour le concept Z</nom>
-	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]
-	&copy; 2011</auteur>
-	<licence>GPL</licence>
-	<version>0.1</version>
-	<description>
-	<multi>
-	[fr]Faire un annuaire de sites suivant votre th&egrave;me avec le concept Z.
-	</multi>
-	</description>
+	<auteur>[Pierre KUHN->http://www.pierre-kuhn.org]</auteur>
+	<licence>(c) 2011 GPL</licence>
+	<version>0.1.0</version>
+	<description>Faire un annuaire de sites suivant votre th&#232;me avec le concept Z.</description>
 	<lien>http://www.spip-contrib.net/?article3762</lien>
 	<etat>dev</etat>
 	<icon>img/annuaire.jpg</icon>
@@ -29,7 +25,7 @@
 	</bouton>
 
 	<categorie>squelette</categorie>
-	<necessite id="SPIP" version="[2.0.10;]" />
+	<necessite id="SPIP" version="[2.0.10;2.1.99]" />
 	<necessite id="Z" version="[1.5.1;]" />
 	<necessite id="cfg" version='[1.14.3;]' />
 	<necessite id="notation" version='[0.7.0;]' />
