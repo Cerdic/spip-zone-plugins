@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function seo_autoriser(){}
 
 function autoriser_seo_bouton_dist($faire, $type, $id,  $qui, $opt){

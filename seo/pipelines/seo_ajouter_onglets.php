@@ -9,7 +9,7 @@
 * @license    http://opensource.org/licenses/gpl-2.0.php  General Public License (GPL 2.0)
 */
 
-include_spip('inc/spiplistes_api_globales');
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function seo_ajouter_onglets($flux) {
 

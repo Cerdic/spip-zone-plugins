@@ -9,6 +9,8 @@
 * @license    http://opensource.org/licenses/gpl-2.0.php  General Public License (GPL 2.0)
 */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function seo_insert_head($flux) {
 	
 	/* CONFIG */

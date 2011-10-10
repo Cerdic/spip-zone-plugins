@@ -1,4 +1,7 @@
 <?php
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  * #SEO_URL
  * Renvoyer la balise <link> pour URL CANONIQUES
