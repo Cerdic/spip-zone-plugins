@@ -5,6 +5,7 @@
 	<prefix>Calendrier</prefix>
 	<auteur>James</auteur>
 	<licence>GNU/GPL - (c) 2006-2007</licence>
+	<slogan>Outils de pagination chronologique</slogan>
 	<description>Outils simples de squelettes pour besoin simple en mati&#234;re de pagination chronologique.</description>
 	<fonctions>calendrier_fonctions.php</fonctions>
 	<lien>http://www.spip-contrib.net/Gestion-de-dates-et-calendriers</lien>
