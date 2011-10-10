@@ -6,7 +6,7 @@
 
 ]
 #CACHE{3600*100}
-<li class='editer_parents[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
+<li class='editer editer_parents[ (#ENV**{erreurs}|table_valeur{parents}|oui)erreur]'>
 	<label><:polyhier:label_parents:></label>[
 	<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{parents})</span>
 	]<INCLURE{fond=formulaires/selecteur/rubriques}{selected=#ENV{parents}}{name=parents}{sortable=oui}{id_rubrique}{limite_branche}{tri}>

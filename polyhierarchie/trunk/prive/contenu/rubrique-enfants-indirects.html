@@ -6,31 +6,22 @@
 
 ]
 #CACHE{3600*100}
-#SET{div,'<div id="polyhier_enfants_indirects" class="cadre">'}
-<B_polyhier_rub>
-[(#GET{div}|unique)]
-<h3><:polyhier:rubriques_associees:></h3>
-[<p class="pagination">(#PAGINATION)</p>]
-<ul class="liste_items polyhier_rub">
-<BOUCLE_polyhier_rub(RUBRIQUES){enfants_indirects #ID_RUBRIQUE}{statut?}{par titre}{pagination 10}>
-<li class="item"><a href="[(#ID_RUBRIQUE|generer_url_entite{rubrique})]"
-title="<:info_numero_abbreviation:>#ID_RUBRIQUE">[(#TITRE|sinon{<:info_sans_titre:>})]</a></li>
-</BOUCLE_polyhier_rub>
-</ul>
-</BOUCLE_polyhier_rub>
+#SET{div,#BOITE_OUVRIR{#VAL{polyhier:titre_polyhierarchie}|_T|concat{#CHEMIN_IMAGE{polyhier-24.png}|balise_img{'',cadre-icone}},simple}}
 
-<B_polyhier_art>
+#SET{lid,'0'}
+<BOUCLE_polyhier_rub(RUBRIQUES){enfants_indirects #ID_RUBRIQUE}{statut?}>
+#SET{lid,#GET{lid}|concat{',',#ID_RUBRIQUE}}
+</BOUCLE_polyhier_rub>
 [(#GET{div}|unique)]
-<h3><:polyhier:articles_associes:></h3>
-[<p class="pagination">(#PAGINATION)</p>]
-<ul class="liste_items polyhier_art">
-<BOUCLE_polyhier_art(ARTICLES){enfants_indirects #ID_RUBRIQUE}{statut?}{!par date}{pagination 10}>
-<li class="item">[(#ID_ARTICLE|puce_changement_statut{#STATUT,#ID_RUBRIQUE,article,1})]
-<a href="[(#ID_ARTICLE|generer_url_entite{article})]"
-title="<:info_numero_abbreviation:>#ID_ARTICLE">[(#TITRE|sinon{<:info_sans_titre:>})]</a>[,
-<span class="date">(#DATE|affdate)</span>]
-</li>
+<INCLURE{fond=prive/objets/liste/rubriques,id_rubrique=#GET{lid}|explode{','},titre=<:polyhier:rubriques_associees:>} />
+</B_polyhier_rub>
+
+#SET{lid,'0'}
+<BOUCLE_polyhier_art(ARTICLES){enfants_indirects #ID_RUBRIQUE}{statut?}>
+#SET{lid,#GET{lid}|concat{',',#ID_ARTICLE}}
 </BOUCLE_polyhier_art>
-</ul>
-</BOUCLE_polyhier_art>
-[(#GET{div}|unique|?{'','</div>'})]
+[(#GET{div}|unique)]
+<INCLURE{fond=prive/objets/liste/articles,id_article=#GET{lid}|explode{','},titre=<:polyhier:articles_associes:>} />
+</B_polyhier_art>
+	
+[(#GET{div}|unique|?{'',#BOITE_FERMER})]

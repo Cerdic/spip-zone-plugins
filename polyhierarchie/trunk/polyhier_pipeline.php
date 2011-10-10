@@ -133,8 +133,8 @@ function polyhier_editer_contenu_objet($flux){
 		$saisie = recuperer_fond("formulaires/inc-selecteur-parents",$args['contexte']);
 		if (strpos($flux['data'],'<!--polyhier-->')!==FALSE)
 			$flux['data'] = preg_replace(',(.*)(<!--polyhier-->),ims',"\\1$saisie\\2",$flux['data'],1);
-		elseif (preg_match(",<li [^>]*class=[\"']editer_(descriptif|virtuel|chapo|liens_sites|texte),Uims",$flux['data'],$regs)){
-			$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer_".$regs[1]."),Uims",$saisie."\\1",$flux['data'],1);
+		elseif (preg_match(",<li [^>]*class=[\"']editer editer_(descriptif|virtuel|chapo|liens_sites|texte),Uims",$flux['data'],$regs)){
+			$flux['data'] = preg_replace(",(<li [^>]*class=[\"']editer editer_".$regs[1]."),Uims",$saisie."\\1",$flux['data'],1);
 		}
 		elseif (strpos($flux['data'],'<!--extra-->')!==FALSE)
 			$flux['data'] = preg_replace(',(.*)(<!--extra-->),ims',"\\1$saisie\\2",$flux['data'],1);
