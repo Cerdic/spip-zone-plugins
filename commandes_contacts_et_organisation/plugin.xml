@@ -5,8 +5,8 @@
 	<version>0.0.2</version>
 	<version_base>0.0.1</version_base>
 	<etat>dev</etat>
-    <slogan>Lier des commandes</slogan>
-	<description>Permet d'associer des commandes directement à des organisations et contacts.</description>
+    <slogan>Lier des commandes &#224; des contacts</slogan>
+	<description>Permet d'associer des commandes directement &#224; des organisations et contacts.</description>
 	<categorie>divers</categorie>
 	<icon></icon>
 	

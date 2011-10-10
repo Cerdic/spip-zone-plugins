@@ -5,7 +5,8 @@
 	<version>0.4.8</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
-    <slogan>G&#233;rer des commandes</slogan>
+    
+	<slogan>G&#233;rer des commandes</slogan>
 	<description><multi>
 	[fr]Permet de g&#233;rer des commandes.
 	</multi></description>
