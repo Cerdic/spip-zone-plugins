@@ -9,8 +9,9 @@
 	<licence>GNU/GPL</licence>
 	<icon>images/archive-64.png</icon>
 
+	<slogan>Ajouter le statut &#171; archive &#187; aux articles</slogan>
 	<description>
-_ Ce plugin ajoute le statut <b>archive</b> aux articles.
+Ce plugin ajoute le statut <b>archive</b> aux articles.
 _ Pensez &#224; utiliser le crit&#232;re <b>{archive}</b> ou bien <b>archive seulement</b>
 	</description>
 	
