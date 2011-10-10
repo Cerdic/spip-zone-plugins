@@ -272,6 +272,43 @@ function spipmotion_upgrade($nom_meta_base_version,$version_cible){
 			sql_alter("TABLE spip_documents CHANGE `taille` `taille` bigint");
 			ecrire_meta($nom_meta_base_version,$current_version='0.8.1');
 		}
+		if (version_compare($current_version,'0.8.2','<')){
+			global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
+			$tables_mime['y4m'] = 'video/x-raw-yuv';
+			
+			$tables_sequences['y4m'] = 'YUV4MPEG2';
+			
+			// Init ou Re-init ==> replace pas insert
+		
+			$freplace = sql_serveur('replace', $serveur);
+			foreach ($tables_mime as $extension => $type_mime) {
+				if (isset($tables_images[$extension])) {
+					$titre = $tables_images[$extension];
+					$inclus='image';
+				}
+				else if (isset($tables_sequences[$extension])) {
+					$titre = $tables_sequences[$extension];
+					$inclus='embed';
+				}
+				else {
+					$inclus='non';
+					if (isset($tables_documents[$extension]))
+						$titre = $tables_documents[$extension];
+					else
+						$titre = '';
+				}
+		
+				$freplace('spip_types_documents',
+					array('mime_type' => $type_mime,
+						'titre' => $titre,
+						'inclus' => $inclus,
+						'extension' => $extension,
+						'upload' => 'oui'
+					),
+					'', $serveur);
+			}
+			ecrire_meta($nom_meta_base_version,$current_version='0.8.2');
+		}
 		/**
 		 * TODO : générer un htaccess dans le répertoire script_bash/
 		 * TODO : insérer une préconfiguration par défaut
