@@ -1,5 +1,7 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function randomString($length = 8){
 	$passe = "";
 	$consonnes = array("b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "z", "bl", "br", "cl", "cr", "ch", "dr", "fl", "fr", "gl", "gr", "pl", "pr", "qu", "sl", "sr");

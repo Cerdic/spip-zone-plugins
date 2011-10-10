@@ -1,5 +1,7 @@
 <?php 
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function cfg_config_sjcycle_pre_verifier(&$cfg){
 	// verif des valeurs du formulaire 
 	$erreurs = array();
