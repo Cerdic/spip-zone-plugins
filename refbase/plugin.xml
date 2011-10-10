@@ -1,7 +1,6 @@
 <plugin>
-	<nom> <!-- Nom du plugin -->
-	<multi>Refbase</multi>
-	</nom>
+	<nom>Refbase</nom>
+	<slogan>Importer des r&#233;f&#233;rences bibliographiques Refbase</slogan>
 	<icon>img_pack/refbase-48.png</icon>
 	<auteur>Joseph</auteur>
 	<licence>GPL</licence>
@@ -9,21 +8,12 @@
 	<etat>stable</etat>
 	<description>
 	<multi>
-	[fr] Ce plugin permet d'importer des r&eacute;f&eacute;rences bibliographiques contenues dans une ou 
-plusieurs bases de donn&eacute;es [refbase->http://www.refbase.net] et des les afficher simplement dans SPIP 
-&agrave; l'aide du mod&egrave;le &lt;refbase&gt;.
-_ Voir la [documentation->http://www.spip-contrib.net/spip.php?article3036] du plugin pour les diff&eacute;rents param&egrave;tres d'appel
-du mod&egrave;le <code>refbase</code>.
-_ Les param&egrave;tres par d&eacute;faut du plugin peut-&ecirc;tre configur&eacute; &agrave; l'aide de [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&amp;cfg=refbase->./?exec=cfg&amp;cfg=refbase]. 
-_ (L'installation de [cfg->http://www.spip-contrib.net/Config-cfg] n'est pas obligatoire mais est fortement conseill&eacute;e.)
+	[fr]Ce plugin permet d'importer des r&eacute;f&eacute;rences bibliographiques contenues dans une ou plusieurs bases de donn&eacute;es [refbase->http://www.refbase.net] et des les afficher simplement dans SPIP &agrave; l'aide du mod&egrave;le <code>refbase</code>.
 	[en] This plugin allows to import bibliographic references from a [refbase->http://www.refbase.net] database and to display them 
-in SPIP with a model called &lt;refbase&gt;.
-_ Show plugin [documentation->http://www.spip-contrib.net/spip.php?article3036] for the parameters of the model.
-_ Default parameters can be configured with [cfg->http://www.spip-contrib.net/Config-cfg] : [./?exec=cfg&amp;cfg=refbase->./?exec=cfg&amp;cfg=refbase]. 
-_ (Use of [cfg->http://www.spip-contrib.net/Config-cfg] is facultative but highly recommended.)
+in SPIP with a model called <code>refbase</code>.
 	</multi>
 	</description>
-	<lien>http://www.spip-contrib.net/spip.php?article3036</lien> <!-- URI de documentation -->
+	<lien>http://www.spip-contrib.net/spip.php?article3036</lien>
 	<prefix>refbase</prefix>
 	<fonctions>refbase_balise.php</fonctions>
 	<pipeline>
@@ -39,6 +29,6 @@ _ (Use of [cfg->http://www.spip-contrib.net/Config-cfg] is facultative but highl
 		<inclure>refbase_ieconfig_metas.php</inclure>
 	</pipeline>
 	<categorie>divers</categorie>
-	<necessite id="SPIP" version='[2.1.2;]' />
+	<necessite id="SPIP" version='[2.1.2;2.1.99]' />
 	<utilise id="cfg" />
 </plugin>
