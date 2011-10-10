@@ -1,12 +1,6 @@
 <plugin>
 	<nom>GCalendar</nom>
-	<slogan>
-		<multi>
-			[fr]Google Calendar
-			[en]Google Calendar
-			[ar]Google Calendar
-		</multi>
-	</slogan>
+	<slogan>Utiliser Google Calendar</slogan>
 	<auteur>[Gilles Quiniou->mailto:gilles@quiniou.net], [Mehdi Cherifi (Superyms)->mailto:superyms@gmail.com]</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.0.9</version>
