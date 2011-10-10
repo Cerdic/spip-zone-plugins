@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Party</nom>
-	<auteur>James</auteur>
+	<auteur>Collectif Spip</auteur>
 	<prefix>party</prefix>
 	<version>1.0.0</version>
 	<etat>stable</etat>
