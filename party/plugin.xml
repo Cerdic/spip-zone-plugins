@@ -1,12 +1,12 @@
 <plugin>
 	<nom>Party</nom>
+	<auteur>James</auteur>
 	<prefix>party</prefix>
 	<version>1.0.0</version>
 	<etat>stable</etat>
 	<slogan>Les derniers rendez-vous SPIP</slogan>
 	<description>
-Ce plugin fournit une noisette permettant d'afficher la liste des derniers rendez-vous SPIP publi&eacute;s sur SPIP Party. 
-_Pour cela il ajoute &agrave; l'installation la syndication automatique &agrave; SPIP Party.
+Ce plugin fournit une noisette permettant d'afficher la liste des derniers rendez-vous SPIP publi&#233;s sur SPIP Party. Pour cela il ajoute &#224; l'installation la syndication automatique &#224; SPIP Party.
 	</description>
 	<install>party_install.php</install>
 	<options>party_options.php</options>
@@ -18,6 +18,6 @@ _Pour cela il ajoute &agrave; l'installation la syndication automatique &agrave;
 		<nom>boussole</nom> 
 		<inclure>party_pipelines.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>divers</categorie>
 </plugin>
