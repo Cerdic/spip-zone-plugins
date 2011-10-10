@@ -49,31 +49,31 @@ function gis_inserer_javascript($flux){
 function gis_affiche_milieu($flux){
 	if ($exec = $flux['args']['exec']){
 		switch ($exec){
-			case 'articles':
+			case 'article':
 				$objet = 'article';
 				$id_objet = $flux['args']['id_article'];
 				break;
-			case 'auteur_infos':
+			case 'auteur':
 				$objet = 'auteur';
 				$id_objet = $flux['args']['id_auteur'];
 				break;
-			case 'breves_voir':
+			case 'breve':
 				$objet = 'breve';
 				$id_objet = $flux['args']['id_breve'];
 				break;
-			case 'naviguer':
+			case 'rubrique':
 				$objet = 'rubrique';
 				$id_objet = $flux['args']['id_rubrique'];
 				break;
-			case 'mots_edit':
+			case 'mot':
 				$objet = 'mot';
 				$id_objet = $flux['args']['id_mot'];
 				break;
-			case 'sites':
+			case 'site':
 				$objet = 'syndic';
 				$id_objet = $flux['args']['id_syndic'];
 				break;
-			case 'documents_edit':
+			case 'document':
 				$objet = 'document';
 				$id_objet = $flux['args']['id_document'];
 				break;
@@ -84,6 +84,8 @@ function gis_affiche_milieu($flux){
 		if ($objet && $id_objet) {
 			// TODO : seulement si la conf permet de geolocaliser cet objet
 			if (1) {
+				include_spip('inc/layer');
+				include_spip('inc/presentation');
 				$contexte['objet'] = $objet;
 				$contexte['id_objet'] = $id_objet;
 				$flux['data'] .= "<div id='pave_gis'>";
