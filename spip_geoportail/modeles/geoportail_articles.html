@@ -7,6 +7,9 @@
 - id_auteur	 : limiter a un auteur
 - id_rubrique: limiter a une rubrique
 - id_secteur : limiter a un secteur
+- id_mot     : limiter a un mot cle
+- id_groupe  : limiter a un groupe de mot cle
+- recadre    : ajuster l'emprise aux objets
 Parametres issus du modele GEOPORTAIL : 
 - id_geoportail   : si on veux plusieurs cartes
 - lon , lat, zoom, zone, mode, layerctrl, toolbox, infobox, searchtools, measuretools, carto, ortho, width, height
@@ -39,6 +42,7 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 	map.selectionnable(l);
 				
 	// Ajouter les articles
+	var extent = new OpenLayers.Bounds();
 	<BOUCLE_geo_article(ARTICLES){geoposition}{id_article?}{id_auteur?}{id_rubrique?}{id_secteur?}{id_mot?}{id_groupe?}{par date}{inverse}{0,#ENV{max,200}}>
 	{	var lon = #LON;
 		var lat = #LAT;
@@ -55,8 +59,14 @@ function initSpipMap#ENV{id_geoportail,0} (map,id)
 		feature.attributes.url = "[(#URL_ARTICLE|url_absolue)]";
 		feature.attributes.description = "[(#INTRODUCTION|couper{100}|addslashes|replace{\n,''}|replace{\r,''})]";
 		map.rlayer.addFeatures(feature);
+		extent.extend(feature.geometry.getBounds());
 	}
 	</BOUCLE_geo_article>
+	[(#RECADRE|?{" "})
+	// Tout afficher
+	map.getMap().zoomToExtent(extent);
+	if (map.getMap().getZoom() > 16) map.getMap().zoomTo(17);
+	]
 }
 </script>
 [(#MODELE{geoportail}{id_geoportail=#ENV{id_geoportail,0}}{overview=1}{searchtools}{measuretools}{zone}{mode}{lon}{lat}{zoom}{min_zoom}{layerctrl}{toolbox}{infobox}{carto}{ortho}{width}{height})]
