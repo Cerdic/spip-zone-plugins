@@ -1,7 +1,7 @@
 <plugin>
     <nom>jFlipBook</nom>
     <slogan>Livre d'images avec effet de pages tournantes</slogan>
-    <auteur>Samuel "PoongalOO" [->sam@poongaloo.org]</auteur>
+    <auteur>[Samuel "PoongalOO"->sam@poongaloo.org]</auteur>
     <version>0.2.0</version>
     <etat>test</etat>
     <description>
