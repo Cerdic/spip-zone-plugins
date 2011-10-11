@@ -1,15 +1,15 @@
 <plugin>
 	<nom>Flickr CC</nom>
+	<slogan>Ins&#233;rer des images de Flickr sous licence Creative Commons</slogan>
 	<auteur>ARNO*</auteur>
-	<version>1.0</version>
+	<version>1.0.0</version>
 	<etat>test</etat>
 	<description>
-Flickr CC vous permet de rechercher des images Flickr en Creative Commons et de les ins&eacute;rer dans vos articles directement depuis la page d'&eacute;dition d'un article.	
+Flickr CC vous permet de rechercher des images Flickr en Creative Commons et de les ins&#233;rer dans vos articles directement depuis la page d'&#233;dition d'un article.	
 
-Ce produit utilise l'API Flickr mais n'est ni soutenu, ni certifi&eacute; par Flickr.
+Ce produit utilise l'API Flickr mais n'est ni soutenu, ni certifi&#233; par Flickr.
 	</description>
 	<icon>imgs/flickrcc.png</icon>
-	<lien></lien> <!-- URI de documentation -->
 	<prefix>flickr_cc</prefix>
 	<licence>GPL v3</licence>
 	<options>flickr_cc_options.php</options>
@@ -18,7 +18,7 @@ Ce produit utilise l'API Flickr mais n'est ni soutenu, ni certifi&eacute; par Fl
 		<action>interface</action>
 		<inclure>flickr_cc.php</inclure>
 	</pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>multimedia</categorie>
 	<traduire gestionnaire="salvatore" module="flickrcc" reference="fr" />
 </plugin>
