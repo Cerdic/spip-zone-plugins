@@ -5,7 +5,7 @@
 	<version>0.0.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
-	<description>Transformation des nombreux formats de syndication RSS, Atom et d&#233;riv&#233;s en un unique format pivot utile &agrave; SPIP.</description>
+	<description>Transformation des nombreux formats de syndication RSS, Atom et d&#233;riv&#233;s en un unique format pivot utile &#224; SPIP.</description>
 	<icon>images/pivot_syndic.png</icon>
 	<lien>http://www.spip-contrib.net/Pivot-de-syndication</lien>
 	<prefix>pivotsyndic</prefix>
