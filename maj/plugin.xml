@@ -1,6 +1,8 @@
 <plugin>
 	<nom>Mise &#224; jour</nom>
 	<slogan>Cr&#233;er, mettre &#224; jour ou restaurer une archives de fichiers personnels</slogan>
+	<auteur>Collectif Spip</auteur>
+	<etat>test</etat>
 	<version>0.2.0</version>
 	<version_base>0.3</version_base>
 	<prefix>maj</prefix>
