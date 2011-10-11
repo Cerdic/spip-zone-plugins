@@ -5,34 +5,27 @@
 			[en]Images functions
 		</multi>
 	</nom>
-	<auteur>Arnaud Martin  ([->http://www.paris-beyrouth.org/-SPIP-])
-	<multi>
-		[fr]
-_ mis en plugin par Matthieu Marcillaud
-		[en]
-_ released as a plugin by Matthieu Marcillaud
-	</multi>
-	</auteur>
-	<licence>
+	<slogan>
 		<multi>
-			[fr]&#169; 2007-2010 - Distribu&#233; sous licence GPL
-			[en]&#169; 2007-2010 - Released under GNU/GPL license
+		[fr]Filtres pour le traitement des images
+		[en]Filters for images functions
 		</multi>
-	</licence>
+	</slogan>
+	<auteur>[Arnaud Martin->http://www.paris-beyrouth.org/-SPIP-], Matthieu Marcillaud (mise en plugin)</auteur>
+	<licence>&#169; 2007-2010 - GNU/GPL</licence>
 	<version>0.5.2</version>
 	<etat>stable</etat>
-    <description>
+   <description>
     	<multi>
-    		[fr]Fournit des filtres pour le traitement des images, essentiellement
-extraits du site [Paris-Beyrouth->http://www.paris-beyrouth.org/].
+    		[fr]Fournit des filtres pour le traitement des images, essentiellement extraits du site [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
 {{Filtres propos&#233;s :}}
--* en_image (utile pour SPIP &lt; 1.9.3)
+-* en_image (utile pour SPIP &#60; 1.9.3)
 			[en]Provides image processing filters, mainly
 extracted from the website [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 
 {{Proposed filters :}}
--* en_image (usefull for SPIP &lt; 1.9.3)
+-* en_image (usefull for SPIP &#60; 1.9.3)
 		</multi>
 -* couleur_chroma
 -* couleur_saturer
@@ -53,6 +46,6 @@ extracted from the website [Paris-Beyrouth->http://www.paris-beyrouth.org/].
 	<prefix>Fonctions_images</prefix>
     <fonctions>fonctions_images_fonctions.php</fonctions>
 	<chemin dir='' />
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<necessite id="SPIP" version="[1.9.0;2.1.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
