@@ -1,0 +1,64 @@
+<plugin>
+	<nom>CleverMail</nom>
+	<auteur>Thomas Beaumanoir, Nicolas Hoizey, Stéphanie Caron, [Clever Age->http://www.clever-age.com/]</auteur>
+	<version>2.5.8</version>
+	<version_base>0.8</version_base>
+	<etat>stable</etat>
+	<slogan>Gestion de lettres d'information</slogan>
+	<description>
+Ce plugin propose les fonctionnalit&#233;s suivantes :
+-* Gestion de {{multiples lettres}}
+-* Gestion des inscriptions/d&#233;sinscriptions, {{les abonn&#233;s &#233;tant distincts des utilisateurs de SPIP}}
+-* Possibilit&#233; de restreindre la liste des lettres propos&#233;es dans le formulaire d'abonnement
+-* Abonnement au choix de l'utilisateur en version {{texte brut ou multipart simultan&#233; HTML + texte brut}} (attention, Lotus Notes n'aime pas)
+-* Possibilit&#233; de forcer la version dans le formulaire d'abonnement
+-* R&#233;cup&#233;ration des contenus HTML et texte brut &#224; partir de deux URL, donc {{utilisation de squelettes SPIP}} d&#233;di&#233;s possible
+-* {{Automatisation des envois}} avec une fr&#233;quence quotidienne, hebdomadaire (multiples jours de la semaine possibles) ou mensuelle
+-* {{Automatisation des inscriptions}} depuis un fichier distant
+
+-* Possibilit&#233; de regrouper les lettres par cat&#233;gories en pr&#233;fixant le nom de la lettre avec le nom de la cat&#233;gorie suivi d'un "/", et utilisation du formulaire <code>#FORMULAIRE_CLEVERMAIL_MULTIPLE</code>
+
+Ic&#244;nes issues de la collection [FatCow->http://www.fatcow.com/free-icons].
+	</description>
+	<lien>http://www.spip-contrib.net/CleverMail</lien>
+	<icon>prive/themes/spip/images/fatcow/32/email_open.png</icon>
+	<install>base/clevermail.php</install>
+	<options>clevermail_options.php</options>
+  <fonctions>clevermail_fonctions.php</fonctions>
+	<prefix>clevermail</prefix>
+  <pipeline>
+    <nom>declarer_tables_principales</nom>
+    <inclure>base/clevermail.php</inclure>
+  </pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/clevermail.php</inclure>
+	</pipeline>
+  <pipeline>
+    <nom>autoriser</nom>
+    <inclure>clevermail_autoriser.php</inclure>
+  </pipeline>
+	<pipeline>
+		<nom>header_prive</nom>
+    <inclure>clevermail_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>taches_generales_cron</nom>
+		<inclure>clevermail_pipelines.php</inclure>
+	</pipeline>
+	<chemin dir='' />
+	<necessite id="SPIP" version="[2.0.8;2.1.99]" />
+	<necessite id="facteur" version="[1.0;]" />
+  <necessite id="spip_bonux" version="[1.3;]" />
+  <bouton id='clevermail' parent='bando_publication' position='-1'>
+    <icone>images/fatcow/16/email_open.png</icone>
+    <titre>CleverMail</titre>
+    <url>clevermail_lists</url>
+  </bouton>
+  <bouton id='clevermail2' parent='naviguer'> 
+    <titre>CleverMail</titre> 
+    <icone>prive/themes/spip/images/fatcow/32/email_open.png</icone> 
+    <url>clevermail_lists</url>
+  </bouton>
+	<categorie>communication</categorie>
+</plugin>

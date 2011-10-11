@@ -1,0 +1,29 @@
+<!--#hierarchie-->
+<ul id="chemin">
+  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+  <li>&gt;  <:clevermail:abonnes_majuscule:></li>
+</ul>
+<!--/#hierarchie-->
+<h1><:clevermail:abonnes_majuscule:></h1>
+<form action="[(#URL_ECRIRE{clevermail_subscribers}|parametre_url{filtre_email,#ENV{filtre_email}}|parametre_url{lst_id,#ENV{lst_id}}|parametre_url{ok,#ENV{ok}})]" method="get">
+  <input type="hidden" id="exec" name="exec" value="clevermail_subscribers" />
+ 	<label for="filtre_email">Filtre sur l'adresse e-mail : </label>
+ 	<input type="text" id="filtre_email" name="filtre_email" value="#ENV{filtre_email}" size="20" /><br />
+ 	<label for="lst_id">Filtre sur la liste : </label>
+ 	<select id="lst_id" name="lst_id">
+ 	  <option value=""><:clevermail:choix_toutes_les_listes:></option>
+ 	  <BOUCLE_lists(CM_LISTS){par lst_name}>
+ 	    <option value="#LST_ID"[ (#LST_ID|=={#ENV{lst_id}}|oui)selected="selected"]>#LST_NAME</option>
+ 	  </BOUCLE_lists>
+ 	</select>
+ 	<input type="submit" id="ok" name="ok" value="filtrer !" />
+ </form>
+ <INCLURE{fond=prive/listes/clevermail_subscribers}{env}>
+
+<!--#navigation-->
+<INCLURE{fond=prive/menu}>
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->

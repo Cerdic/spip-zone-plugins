@@ -1,0 +1,23 @@
+[(#REM)
+
+	Ce squelette definit les styles de l'espace prive
+
+	Note: l'entete "Vary:" sert a repousser l'entete par
+	defaut "Vary: Cookie,Accept-Encoding", qui est (un peu)
+	genant en cas de "rotation du cookie de session" apres
+	un changement d'IP (effet de clignotement).
+
+	ATTENTION: il faut absolument le charset sinon Firefox croit que
+	c'est du text/html ! (iso-8859-15 - utf-8 )
+]
+#CACHE{3600*100,cache-client}
+#HTTP_HEADER{Content-Type: text/css; charset=iso-8859-15}
+#HTTP_HEADER{Vary: Accept-Encoding}
+
+table.abonnes {width:100%;}
+table.abonnes  th {padding-right:10px;background:#ddd;}
+table.abonnes  td {padding:2px 10px 2px 2px;}
+table.abonnes .actions {width:38%;}
+table.abonnes .actions form span input {padding:0 2px;color: #f59;}
+table.abonnes .pair {color:#222;background:#ccc;}
+table.abonnes .impair {color:#222;background:#eee;}

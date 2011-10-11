@@ -1,0 +1,47 @@
+[(#ENV{lst_id,-1}|=={-1}|oui)
+  <!--#hierarchie-->
+  <ul id="chemin">
+    <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+    <li>&gt; <:clevermail:creer_lettre:></li>
+  </ul>
+  <!--/#hierarchie-->
+  <h1><:clevermail:creer_lettre:></h1>
+]
+[(#ENV{lst_id,-1}|=={-1}|non)
+  <!--#hierarchie-->
+  <ul id="chemin">
+    <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+    <li>&gt; <:clevermail:editer_lettre:></li>
+  </ul>
+  <!--/#hierarchie-->
+  <h1><:clevermail:editer_lettre:></h1>
+]
+[(#REM)<div class="ajax">]
+  #FORMULAIRE_CLEVERMAIL_LIST_EDIT{#ENV{lst_id,-1}}
+[(#REM)</div>]
+<!--#navigation-->
+  <INCLURE{fond=prive/menu}>
+<!--/#navigation-->
+<!--#extra-->
+<div class="cadre cadre-info">
+  <p><strong><:clevermail:moderation:></strong></p>
+  <ul>
+    <li><:clevermail:mod_explication_open:></li>
+    <li><:clevermail:mod_explication_email:></li>
+    [(#REM)<li><:clevermail:mod_explication_mod:></li> pas géré]
+    <li><:clevermail:mod_explication_closed:></li>
+  </ul>
+	<strong><:clevermail:tags_specifiques:> :</strong>
+	<ul>
+	  <li>@@NOM_LETTRE@@</li>
+	  <li>@@NOM_CATEGORIE@@</li>
+	  <li>@@NOM_COMPLET@@</li>
+	  <li>@@URL_LETTRE@@</li>
+	  <li>@@DESCRIPTION@@</li>
+	  <li>@@FORMAT_INSCRIPTION@@</li>
+	  <li>@@EMAIL@@</li>
+	  <li>@@URL_CONFIRMATION@@</li>
+	  <li>@@URL_DESINSCRIPTION@@</li>
+	</ul>
+</div>
+<!--/#extra-->

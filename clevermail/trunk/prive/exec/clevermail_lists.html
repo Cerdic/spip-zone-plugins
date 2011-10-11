@@ -1,0 +1,45 @@
+<!--#hierarchie-->
+<ul id="chemin">
+  <li><a href="#URL_ECRIRE{clevermail}"><:clevermail:administration:></a></li>
+  <li>&gt; <:clevermail:liste_lettres:></li>
+</ul>
+<!--/#hierarchie-->
+<h1>
+  <:clevermail:liste_lettres:>
+</h1>
+<B_lists_groups>
+  #SET{group,''}
+<BOUCLE_lists_groups(CM_LISTS){lst_name==/}{par lst_name}{doublons}>
+  #SET{newGroup,#LST_NAME|replace{"/.*$",""}}
+  [(#GET{newGroup}|!={#GET{group}}|oui)
+    [(#GET{group}|!={''}|oui)
+      </ul>
+    ]
+    #SET{group,#GET{newGroup}}
+    <h2>#GET{group}</h2>
+    <ul class="liste_items liste_lettres">
+  ]
+  <INCLURE{fond=noisettes/clevermail_list_info}{lst_id}>
+</BOUCLE_lists_groups>
+  </ul>
+</B_lists_groups>
+
+<B_lists>
+  <h2><:clevermail:lettres_non_classees:></h2>
+  <ul class="liste_items liste_lettres">
+<BOUCLE_lists(CM_LISTS){par lst_name}{doublons}>
+  <INCLURE{fond=noisettes/clevermail_list_info}{lst_id}>
+</BOUCLE_lists>
+  </ul>
+</B_lists>
+  <p><:clevermail:liste_lettres_aucune:></p>
+  [<p><a href="(#URL_ECRIRE{clevermail_list_edit}|parametre_url{lst_id,-1})" class="creer_lettre"><:clevermail:creer_lettre:></a></p>]
+<//B_lists>
+
+<!--#navigation-->
+<INCLURE{fond=prive/menu}>
+<!--/#navigation-->
+
+<!--#extra-->
+
+<!--/#extra-->
