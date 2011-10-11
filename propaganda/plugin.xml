@@ -2,8 +2,8 @@
 	<nom>Propaganda</nom>
 	<slogan>
 		<multi>
-			[fr]Envoi de cartes postales num&eacute;riques.
-			[es]Env&iacute;o de tarjetas postales electr&oacute;nicas.
+			[fr]Envoi de cartes postales num&#233;riques.
+			[es]Env&#237;o de tarjetas postales electr&#243;nicas.
 		</multi>
 	</slogan>
 	<version>0.2.0</version>
@@ -11,11 +11,11 @@
 	<auteur>[kent1->http://kent1.sklunk.net], [dani->http://abuelo.belvil.net/]</auteur>
 	<description>
 		<multi>
-			[fr]Envoi de cartes postales num&eacute;riques depuis un site SPIP.
-			[es]Env&iacute;o de tarjetas postales electr&oacute;nicas desde un sitio SPIP.
+			[fr]Envoi de cartes postales num&#233;riques depuis un site SPIP.
+			[es]Env&#237;o de tarjetas postales electr&#243;nicas desde un sitio SPIP.
 		</multi>
 	</description>
-	<lien>http://wiki.bellinux.org/index.php/SPIP-postal</lien>
+	<lien>http://www.spip-contrib.net/Plugin-Propaganda</lien>
 	<install>base/propaganda_upgrade.php</install>
  
 	<prefix>propaganda</prefix>
