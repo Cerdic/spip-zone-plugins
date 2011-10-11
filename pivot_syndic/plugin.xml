@@ -2,6 +2,7 @@
 	<nom>Pivot de syndication</nom>
 	<slogan>Gestion des formats de syndication</slogan>
 	<auteur>[Nicolas Hoizey->http://www.gasteroprod.com/]</auteur>
+	<licence>&#169; 2007-2009 GNU/GPL</licence>
 	<version>0.0.1</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
