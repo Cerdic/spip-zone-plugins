@@ -1,6 +1,7 @@
 <plugin>
-	<nom>spixplorer</nom>
+	<nom>Spixplorer</nom>
 	<slogan>Quixplorer pour spip</slogan>
+	<auteur>Collectif Spip</auteur>
 	<prefix>spixplorer</prefix>
 	<version>0.0.1</version>
 	<description>G&#233;rer ses fichiers comme le serveur et si besoin par FTP. Un fork, adapt&#233;, s&#233;curis&#233; et &#233;tendu de [quixplorer->http://quixplorer.sourceforge.net/]. Utilisation : bouton sous l'accueil.</description>
