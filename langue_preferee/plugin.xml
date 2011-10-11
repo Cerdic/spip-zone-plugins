@@ -31,6 +31,6 @@ It's possible to let the visitor choose it's own preferred language, that may be
    <chemin dir='' />
 	<prefix>languepreferee</prefix>
 	<options>languepreferee_options.php</options>
-	<necessite id="SPIP" version="[1.9.2;2.0.99]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>navigation</categorie>
 </plugin>
