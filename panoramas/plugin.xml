@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Panoramas 360&#176;</nom>
 	<slogan>Cr&#233;ation de visites virtuelles</slogan>
-	<auteur>Arnault PACHOT [OpenStudio->http://www.openstudio.fr]</auteur>
+	<auteur>[Arnault PACHOT OpenStudio->http://www.openstudio.fr]</auteur>
 	<version>3.1.0</version>
 	<licence>GNU/GPL</licence>
 	<etat>dev</etat>
