@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Y Media Player</nom>
 	<slogan>Utilisez le m&#233;dia player de Yahoo !</slogan>
-	<auteur>Adaptation de [Y Media Player->http://developer.yahoo.com/mediaplayer/] par [Mathieu Drouet (IZO)->http://www.takeasip.net]</auteur>
+	<auteur>[Adaptation de Y Media Player->http://developer.yahoo.com/mediaplayer/], [Mathieu Drouet (IZO)->http://www.takeasip.net]</auteur>
 	<licence>&#169; 2009 GNU/GPL</licence>
 	<version>1.0.0</version>
 	<etat>stable</etat>
