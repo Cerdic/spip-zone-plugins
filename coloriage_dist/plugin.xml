@@ -3,7 +3,7 @@
 	<slogan>Changer simplement les couleurs du squelette par d&#233;faut</slogan>
 	<icon>img_pack/icon_coloriedist_24.png</icon>
 	<auteur>
-		[erational->http://www.erational.org], le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtastic] sous licence GPL
+		[erational->http://www.erational.org], [le module de choix de couleur par Steven Wittens->http://acko.net/dev/farbtastic]
 	</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.5.0</version>
