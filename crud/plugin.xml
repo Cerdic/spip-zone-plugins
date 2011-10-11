@@ -1,11 +1,11 @@
 <plugin>
 	<nom>C(R)UD Interface</nom>
-	<slogan>Une interface C(r)UD pour SPIP</slogan>
+	<slogan>Interface de cr&#233;ation, mise &#224; jour et suppression d'un objet</slogan>
 	<auteur>C&#233;dric Morin</auteur>
 	<licence>GNU/GPL</licence>
 	<version>0.3.4</version>
 	<etat>dev</etat>
-	<description>Une interface C(r)UD pour SPIP qui peut s'utiliser par appel action par url, ou par appel direct.</description>
+	<description>Une interface C(r)UD pour SPIP qui peut s'utiliser par l'interm&#233;diaire d'une action d&#233;finie par son url ou par appel direct.</description>
 	<prefix>crud</prefix>
 	<categorie>outil</categorie>
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
