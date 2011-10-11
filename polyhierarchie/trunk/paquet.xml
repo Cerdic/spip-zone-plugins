@@ -1,13 +1,13 @@
 <paquet
 	prefix="polyhier"
 	categorie="navigation"
-	version="2.0.0"
-	etat="test"
+	version="3.0.0"
+	etat="experimental"
 	compatibilite="[3.0.0-beta;["
 	logo="images/polyhier-32.png"
 	schema="0.1.0"
 	documentation="http://www.spip-contrib.net/Polyhierarchie"
->	
+>
 
 	<nom>PolyHierarchy</nom>
 	<auteur lien="http://www.yterium.com">C&#233;dric Morin</auteur>

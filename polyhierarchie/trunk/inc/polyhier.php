@@ -9,57 +9,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/rubriques');
-if (!function_exists('depublier_rubrique_if')) {
-
-	/**
-	 * Depublier une rubrique si aucun contenu publie connu
-	 * retourne true si la rubrique a ete depubliee
-	 *
-	 * @param int $id_rubrique
-	 * @param string $date
-	 * @return bool
-	 */
-	function depublier_rubrique_if($id_rubrique,$date=null){
-		if (is_null($date))
-			$date = date('Y-m-d H:i:s');
-		$postdates = ($GLOBALS['meta']["post_dates"] == "non") ?
-			" AND date <= ".sql_quote($date) : '';
-
-		if (!$id_rubrique=intval($id_rubrique))
-			return false;
-
-		// verifier qu'elle existe et est bien publiee
-		$r = sql_fetsel('id_rubrique,statut','spip_rubriques',"id_rubrique=$id_rubrique");
-		if (!$r OR $r['statut']!=='publie')
-			return false;
-
-		if (sql_countsel("spip_articles",  "id_rubrique=$id_rubrique AND statut='publie'$postdates"))
-			return false;
-
-		if (sql_countsel("spip_breves",  "id_rubrique=$id_rubrique AND statut='publie'"))
-			return false;
-
-		if (sql_countsel("spip_syndic",  "id_rubrique=$id_rubrique AND statut='publie'"))
-			return false;
-
-		if (sql_countsel("spip_rubriques",  "id_parent=$id_rubrique AND statut='publie'"))
-			return false;
-
-		if (sql_countsel("spip_documents_liens",  "id_objet=$id_rubrique AND objet='rubrique'"))
-			return false;
-
-		$compte = pipeline('objet_compte_enfants',array('args'=>array('objet'=>'rubrique','id_objet'=>$id_rubrique,'statut'=>'publie','date'=>$date),'data'=>array()));
-		foreach($compte as $objet => $n)
-			if ($n)
-				return false;
-
-		sql_updateq("spip_rubriques", array("statut" => '0'), "id_rubrique=$id_rubrique");
-		#		spip_log("depublier_rubrique $id_rubrique");
-		return true;
-	}
-
-}
-
 
 /**
  * Mettre a jour les parents d'un objet
@@ -68,6 +17,7 @@ if (!function_exists('depublier_rubrique_if')) {
  * @param string $objet
  * @param array $id_parents
  * @param string $serveur
+ * @return array
  */
 function polyhier_set_parents($id_objet,$objet,$id_parents,$serveur=''){
 	if (is_string($id_parents))
@@ -106,7 +56,7 @@ function polyhier_set_parents($id_objet,$objet,$id_parents,$serveur=''){
 
 /**
  *
- * @param int/array $id_objet
+ * @param int|array $id_objet
  * @param string $objet
  * @param string $serveur
  * @return array
@@ -126,7 +76,7 @@ function polyhier_get_parents($id_objet,$objet,$serveur=''){
 /**
  * Retrouver tous les parents, directs et indirects
  * 
- * @param int/array $id_objet
+ * @param int|array $id_objet
  * @param string $objet
  * @param string $serveur
  * @return array
@@ -149,10 +99,9 @@ function polyhier_get_allparents($id_objet,$objet,$serveur=''){
 /**
  * Publier une rubrique et ses parents directs/indirects
  *
- * @param int/array $id_rubrique
+ * @param int|array $id_rubrique
  * @param string $date
- * @param <type> $maxiter
- * @return <type>
+ * @return bool
  */
 function polyhier_publier_branche_rubrique($id_rubrique, $date=null){
 	if (is_null($date))
@@ -189,7 +138,7 @@ function polyhier_publier_branche_rubrique($id_rubrique, $date=null){
  *
  * http://doc.spip.org/@depublier_branche_rubrique_if
  *
- * @param int/array $id_rubrique
+ * @param int|array $id_rubrique
  * @return bool
  */
 function polyhier_depublier_branche_rubrique_if($id_rubrique){
@@ -247,7 +196,7 @@ function polyhier_depublier_branche_rubrique_if($id_rubrique){
  * @param array $id_parents
  * @param array $modifs
  * @param string $statut_ancien
- * @param string $postdate
+ * @param bool|string $postdate
  */
 function polyhier_calculer_rubriques_if ($id_parents, $modifs, $statut_ancien='', $postdate = false){
 	$neuf = false;
