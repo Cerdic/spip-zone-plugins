@@ -1,6 +1,6 @@
 <plugin>
 	<nom>SPIP &#201;val</nom>
-	<slogan>&#201;valuation d'&#233;l&#233;ments</slogan>
+	<slogan>Gestion de campagnes d'&#233;valuations</slogan>
 	<auteur>Cyril MARION</auteur>
 	<licence>GPL - (c) 2010</licence>
 	<version>0.1.0</version>
@@ -9,16 +9,16 @@
 	<icon>img/ateliers_cym-24.gif</icon>
 	<install>base/eval_upgrade.php</install>
 	<description>
-_ Gestion de campagnes d'&#233;valuations.
-_ Extension du plugin &#34;notations&#34; permettant d'ajouter des commentaires, un fil de discussions, et de sp&#233;cifier des campagnes et des th&#232;mes.
-_ Une campagne peut &#234;tre par exemple : un concours photo.
-_ Un th&#232;me pourrait &#234;tre par exemple, pour des photos : le cadrage, l'exposition, l'int&#233;r&#234;t de la sc&#232;ne...
-_ Le plugin notations permet d&#233;ja par construction de noter les &#233;lements &#233;ditoriaux de SPIP (notamment les documents joints). Il ne sera donc pas n&#233;cessaire de modifier cette partie. 
-_ En revanche il manque la possibilit&#233; 
-_ - d'ajouter un commentaire sous forme de texte en plus de la note, 
-_ - de noter l'&#233;l&#233;ment sur un ou plusieurs th&#232;mes de notations, 
-_ - de regrouper les notations dans des campagnes, et &#233;ventuellement 
-_ - de lier une discution (un forum) &#224; une notation.
+Extension du plugin &#34;notations&#34; permettant d'ajouter des commentaires, un fil de discussions, et de sp&#233;cifier des campagnes et des th&#232;mes. 
+Une campagne peut &#234;tre par exemple : un concours photo.
+Un th&#232;me pourrait &#234;tre par exemple, pour des photos : le cadrage, l'exposition, l'int&#233;r&#234;t de la sc&#232;ne...
+
+Le plugin notations permet d&#233;ja par construction de noter les &#233;lements &#233;ditoriaux de SPIP (notamment les documents joints). Il ne sera donc pas n&#233;cessaire de modifier cette partie. 
+En revanche il manque la possibilit&#233; 
+-* d'ajouter un commentaire sous forme de texte en plus de la note, 
+-* de noter l'&#233;l&#233;ment sur un ou plusieurs th&#232;mes de notations, 
+-* de regrouper les notations dans des campagnes, et &#233;ventuellement 
+-* de lier une discution (un forum) &#224; une notation.
 
 Dans l'exemple donn&#233; en lien ci-dessous, il est question de :
 | rate | notation (les &#233;toiles) |
