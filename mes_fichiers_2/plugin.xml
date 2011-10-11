@@ -11,12 +11,7 @@
 			[en]Archive files dump, IMG, squelettes...
 		</multi>
 	</slogan>
-	<auteur>
-		<multi>
-			[fr]Eric Lupinacci, kent1, d'apr&#232;s la version initiale de James
-			[en]Eric Lupinacci, kent1, according to the initial version of James
-		</multi>
-	</auteur>
+	<auteur>Eric Lupinacci, kent1, d'apr&#232;s la version initiale de James</auteur>
 	<version>1.0.1</version>
 	<etat>stable</etat>
 	<licence>GPL v3</licence>
