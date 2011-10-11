@@ -82,5 +82,6 @@ This meta plugin takes care to properly manage the inclusion of the jQuery UI li
 	</pipeline>
 	<pipeline><nom>jqueryui_forcer</nom></pipeline>
 	<necessite id="saisies" />
+	<utilise id="spip_bonux" />
 	<categorie>outil</categorie>
 </plugin>

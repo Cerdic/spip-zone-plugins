@@ -4,6 +4,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 	
+	//A
+	'afficher_calendrier' => 'Afficher le calendrier',
+	
 	//C
 	'cfg_boite_jqueryui' => 'Configuration de jQuery UI',
 	'cfg_explication_plugins' => 'Choisissez les plugins &agrave; ins&eacute;rer dans l\'ent&ecirc;te des pages publiques.',
@@ -43,7 +46,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'cfg_val_ui_slider' => 'UI slider',
 	'cfg_val_ui_sortable' => 'UI sortable',
 	'cfg_val_ui_tabs' => 'UI tabs',
-	'cfg_val_ui_widget' => 'UI widget'
+	'cfg_val_ui_widget' => 'UI widget',
+	
+	//D
+	'date_mois_10_abbr' => 'oct.',
+	'date_mois_11_abbr' => 'nov.',
+	'date_mois_12_abbr' => 'déc.',
+	'date_mois_1_abbr' => 'janv.',
+	'date_mois_2_abbr' => 'févr.',
+	'date_mois_3_abbr' => 'mars',
+	'date_mois_4_abbr' => 'avr.',
+	'date_mois_5_abbr' => 'mai',
+	'date_mois_6_abbr' => 'juin',
+	'date_mois_7_abbr' => 'juil.',
+	'date_mois_8_abbr' => 'août',
+	'date_mois_9_abbr' => 'sept.'
 	
 );
 ?>
