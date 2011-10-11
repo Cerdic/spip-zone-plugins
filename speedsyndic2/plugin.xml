@@ -1,6 +1,6 @@
 <plugin>
-    <nom>Speedsyndic 2</nom>
-    <slogan>Automatiser vos syndication.</slogan>
+    <nom>Speedsyndic</nom>
+    <slogan>Automatiser vos syndications</slogan>
     <auteur>Stephane, Piffeo, [Wilco->http://www.ituc-csi.org]</auteur>
 	<version>0.2.0</version>
     <etat>test</etat>
