@@ -1,6 +1,6 @@
 <B_ls>
 <select name="fichiers[]" multiple="multiple" size="10">
-<BOUCLE_ls(DATA){source glob, #CHEMIN{tmp/upload/}|concat{*.*}}>
+<BOUCLE_ls(DATA){source glob, #CHEMIN{tmp/upload/}|concat{*.*}}{par valeur}>
 [<option value="#VALEUR">(#VALEUR|basename)</option>]
 </BOUCLE_ls>
 </select>
