@@ -70,7 +70,13 @@
     
     // Store ananymous function in variable since it's used twice.
     var showPicker = function() {
-      $tpDiv.show(); // Show picker.
+      // Correction proposée par Manuel Schmalstieg <webdev@ms-studio.net>:
+      // http://code.google.com/p/jquery-timepicker/issues/detail?id=7
+      // original: $tpDiv.show(); // Show picker.
+      var elmOffset = $(elm).offset();
+      $tpDiv.show().css({'top':elmOffset.top, 'left':elmOffset.left});
+      // This forces css position calculation when after the element is appended to the page.
+      // Fin de correction 20111011
       $tpDiv.mouseover(function() { // Have to use mouseover instead of mousedown because of Opera
         tpOver = true;
       }).mouseout(function() {
