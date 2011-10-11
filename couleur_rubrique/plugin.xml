@@ -3,13 +3,13 @@
 	<slogan>Une couleur pour chaque rubrique</slogan>
 	<icon>img_pack/icon.png</icon>
 	<auteur>
-	[ARNO*->arno@rezo.net], sur la base du travail d'[erational->http://www.erational.org], le module de choix de couleur par [Steven Wittens->http://acko.net/dev/farbtastic] sous licence GPL
+	[ARNO*->arno@rezo.net], [sur la base du travail d'erational->http://www.erational.org], [le module de choix de couleur par Steven Wittens->http://acko.net/dev/farbtastic]
 	</auteur>
 	<licence>GNU/GPL</licence>
 	<version>1.6.0</version>
 	<etat>stable</etat>
 	<description>
-		Ce plugin permet de choisir une couleur pour chaque rubrique du site. Une fois activé, il ne demande aucune configuration suppl&#233;mentaire. Il ajoute simplement un pav&#233; dans la colonne de gauche des pages des rubriques permettant de choisir une couleur.
+		Ce plugin permet de choisir une couleur pour chaque rubrique du site. Une fois activÃ©, il ne demande aucune configuration suppl&#233;mentaire. Il ajoute simplement un pav&#233; dans la colonne de gauche des pages des rubriques permettant de choisir une couleur.
 
 		Pour afficher la couleur d'une rubrique dans un squelette, il suffit d'utiliser le code: <code>[#(#ID_RUBRIQUE|couleur_rubrique)]</code>.
 
