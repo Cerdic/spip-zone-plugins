@@ -1,28 +1,20 @@
 <plugin>
-  <nom> <!-- Nom du plugin -->
-  Fading Rollover Effect
-  </nom>
-  <auteur>        <!-- Auteur du plugin -->
-  [Renato Formato->mailto:renatoformato@virgilio.it]
-  </auteur>
-  <version>
-  0.1
-  </version>
-  <etat>
-  test
-  </etat>
-  <description>
-  <multi>[it]Un effetto rollover che cambia colore allo sfondo degli elementi in modo graduale  
-	</multi>
-  </description>
-	<lien></lien> <!-- URI de documentation -->
-  <prefix>
-  fadingrollover
-  </prefix>
-  <pipeline>
-  	<nom>insert_head</nom>
-  	<inclure>fadingrollover_pipelines.php</inclure>
-  </pipeline>
-	<necessite id="SPIP" version="[1.9.0;]" />
+	<nom>Fading Rollover Effect</nom>
+	<slogan>Doux changement de couleur au survol</slogan>
+	<auteur>[Renato Formato->mailto:renatoformato@virgilio.it]</auteur>
+	<version>0.1.0</version>
+	<etat>test</etat>
+	<description>
+		<multi>
+		[it]Un effetto rollover che cambia colore allo sfondo degli elementi in modo graduale
+		[fr]Un effet de survol qui change la couleur de fond des &#233;l&#233;ments de mani&#232;re progressive
+		</multi>
+	</description>
+	<prefix>fadingrollover</prefix>
+	<pipeline>
+		<nom>insert_head</nom>
+		<inclure>fadingrollover_pipelines.php</inclure>
+	</pipeline>
+	<necessite id="SPIP" version="[1.9.0;1.9.2]" />
 	<categorie>multimedia</categorie>
 </plugin>
