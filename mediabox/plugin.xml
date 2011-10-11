@@ -13,14 +13,7 @@
 			[ar]&#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1601;&#1585;&#1580;&#1577;
 		</multi>
 	</slogan>
-	<auteur>
-	[ColorPowered->http://colorpowered.com/colorbox/] <multi>[fr]pour la ColorBox
-_ Mis en plugin pour SPIP par [Cedric->http://www.yterium.com]
-[ar]&#1604;&#1589;&#1606;&#1583;&#1608;&#1602; &#1575;&#1604;&#1571;&#1604;&#1608;&#1575;&#1606;
-_ &#1581;&#1608;&#1604;&#1607; &#1575;&#1604;&#1609; &#1605;&#1604;&#1581;&#1602; [Cedric->http://www.yterium.com]
-[en] for the ColorBox
-_ setup as a SPIP plugin by [Cedric->http://www.yterium.com]</multi>
-	</auteur>
+	<auteur>[ColorPowered->http://colorpowered.com/colorbox/], [Mis en plugin pour SPIP par C&#233;dric->http://www.yterium.com]</auteur>
 	<version>0.6.10</version>
 	<icon>prive/themes/spip/images/mediabox-32.png</icon>
 	<etat>stable</etat>
