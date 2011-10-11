@@ -1,7 +1,7 @@
 <plugin>
 	<nom>SkTheme</nom>
 	<slogan>Gestion de th&#232;mes</slogan>
-	<version>0.6.0</version>
+	<version>0.7.0</version>
 	<etat>stable</etat>
 	<auteur>Skedus</auteur>
 	<licence>&#169; 2006 - GNU/GPL</licence>
