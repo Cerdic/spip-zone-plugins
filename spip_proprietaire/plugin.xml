@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Mentions L&#233;gales</nom>
-	<slogan>G&#233;n&#233;ration automatique de {{Mentions L&#233;gales}}</slogan>
+	<slogan>G&#233;n&#233;ration automatique de Mentions L&#233;gales</slogan>
 	<version>1.61.0</version>
 	<etat>stable</etat>
 	<auteur>[Piero Wbmstr->http://www.spip-contrib.net/PieroWbmstr]</auteur>
