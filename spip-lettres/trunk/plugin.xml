@@ -6,7 +6,8 @@
 	<version_base>5.4</version_base>
 	<etat>dev</etat>
 	<licence>[GPLv3->http://www.gnu.org/licenses/gpl-3.0.html]</licence>
-	<description>Gestion de lettres d'information par mail</description>
+	<slogan>Gestion de lettres d'information</slogan>
+	<description>Gestion de lettres d'information par mail : plusieurs thematiques pour les abonnements, import-export de liste d'abonnes, construction des lettres par squelettes personnalisables, suivi des envois en temps reel, statistiques d'envois et de clics</description>
 	<necessite id="SPIP" version="[3.0.0-dev;]" />
 	<necessite id="facteur" version="[1.5.1;]" />
 	<necessite id="YAML" version="[1.5;]" />

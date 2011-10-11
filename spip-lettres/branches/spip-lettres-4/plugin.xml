@@ -3,10 +3,10 @@
 	<auteur>[Art&#233;go->http://www.artego.fr], [C&#233;dric Morin->www.yterium.net]</auteur>
 	<version>4.7.1</version>
 	<version_base>4.4</version_base>
-	<etat>dev</etat>
+	<etat>test</etat>
 	<licence>GPLv3</licence>
 	<slogan>Gestion de lettres d'information</slogan>
-	<description>Gestion de lettres d'information par mail</description>
+	<description>Gestion de lettres d'information par mail : plusieurs thematiques pour les abonnements, import-export de liste d'abonnes, construction des lettres par squelettes personnalisables, suivi des envois en temps reel, statistiques d'envois et de clics</description>
 	<chemin dir='' />
 	<chemin dir='spip20/' type='prive' />
 	<chemin dir='crayons/' type='public' />
