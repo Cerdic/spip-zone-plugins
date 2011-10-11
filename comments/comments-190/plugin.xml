@@ -1,9 +1,10 @@
 <plugin>
 	<nom>Commentaires</nom>
+	<slogan>Des commentaires, tout simplement</slogan>
 	<icon>icon.png</icon>
 	<auteur>[romy.tetue.net->http://romy.tetue.net]</auteur>
-	<licence>GPL - (c)2009</licence>
-	<version>1.0</version>
+	<licence>GPL - (c) 2009</licence>
+	<version>1.0.0</version>
 	<etat>stable</etat>
 	<description>Remplace le traditionnel <code>#FORMULAIRE_FORUM</code> de SPIP par un formulaire de commentaires simplifi&#232;.</description>
 	<lien>http://www.spip-contrib.net/?article3362</lien>
