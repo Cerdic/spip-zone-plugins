@@ -1,15 +1,7 @@
 <plugin>
-	<nom>
-		<multi>[fr]Type pour les articles</multi>
-	</nom>
-	<slogan>
-		<multi>[fr]Ajouter un champ "type" &#224; vos articles</multi>
-	</slogan>
-	<description>
-		<multi>
-		[fr]Ajoute un champ "type" &#224; l'objet &#233;ditorial article. Les libell&#233;s des types possibles sont surchargeables dans votre fichier de langue
-		</multi>
-	</description>	
+	<nom>Type pour les articles</nom>
+	<slogan>Ajouter un champ "type" &#224; vos articles</slogan>
+	<description>Ajoute un champ "type" &#224; l'objet &#233;ditorial article. Les libell&#233;s des types possibles sont surchargeables dans votre fichier de langue</description>	
 	<auteur>[xdjuj@apsulis.com->http://demo.apsulis.com]</auteur>
 	<licence>GNU/GPL</licence>
 	<etat>stable</etat>
