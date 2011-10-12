@@ -13,6 +13,10 @@
 // Ce script ne sert plus qu'à illustrer la balise #T
 // Elle n'est plus activée dans Raper v.1
 
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
 include_spip('inc/raper_api_globales');
 raper_log("lecture fonctions");
 function balise_T ($p) {

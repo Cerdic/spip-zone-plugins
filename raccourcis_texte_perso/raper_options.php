@@ -50,6 +50,13 @@
 
 // *_options est appelé à chaque hit
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
+
+if (version_compare($GLOBALS['spip_version_code'], '1.9300', '>')) {
+	include_spip('inc/lang');
+}
+
 if(!defined('_DIR_PLUGIN_RAPER')) {
 	$p = explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
 	define('_DIR_PLUGIN_RAPER',(_DIR_PLUGINS.end($p)).'/');

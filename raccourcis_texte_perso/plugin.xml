@@ -7,7 +7,7 @@
 	
 	<nom>Raccourci texte perso</nom>
 	<slogan>Surcharger les raccourcis texte utilis&#233;s dans vos squelettes</slogan>
-	<auteur>paladin@quesaco.org</auteur>
+	<auteur>[Christian Paulus->http://www.quesaco.org/]</auteur>
 	
 	<version>1.0.3</version>
 	
@@ -49,6 +49,6 @@
 		<inclure>inc/raper_pipeline_affiche_gauche.php</inclure>
 	</pipeline>
 	
-	<necessite id='spip' version='[1.9.2;2.0.99]' />
+	<necessite id='spip' version='[1.9.2;2.1.99]' />
 	<categorie>outil</categorie>
 </plugin>
