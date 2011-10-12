@@ -30,6 +30,6 @@
 		<inclure>inc/imageflow_pipeline_header_prive.php</inclure>
 	</pipeline>
 	
-	<necessite id="SPIP" version="[1.9.2;1.9.2]" />
+	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
 	<categorie>multimedia</categorie>
 </plugin>
