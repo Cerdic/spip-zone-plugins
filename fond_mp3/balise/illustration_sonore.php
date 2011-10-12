@@ -133,6 +133,8 @@ function balise_ILLUSTRATION_SONORE_dyn ($opt) {
 				$id_objet = $env['id_objet'];
 			}
 		}
+		
+		if (!$objet) { $objet = 'site'; $id_objet = 0; }
 
 		fmp3_log('balise: cherche son pour '.$objet.' '.$id_objet, null, _FMP3_DEBUG);
 		
