@@ -158,11 +158,11 @@ pour les horaires
 **/
 function sitra_heure($heure){
 	$h = 1*substr($heure,0,2);
-	$mim = substr($heure,3);
-	if ($mim == '00')
-		$mim = '';
+	$min = substr($heure,3);
+	if ($min == '00')
+		$min = '';
 		
-	return $h.'h'.$m;
+	return $h.'h'.$min;
 }
 
 
