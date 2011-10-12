@@ -1,0 +1,18 @@
+<a name="#FORM"></a>
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_#FORM">
+<form name="#FORM" id="#FORM" method="post" action="#ENV{action}" enctype="multipart/form-data">
+#ACTION_FORMULAIRE{#ENV{action}}
+<fieldset>
+	<legend><:sitra_select:legend_configuration_sitra_select:></legend>
+	<ul>
+		[<!-- (#REM) noisettes affichage -->]
+		<li><label for="sitra_select_noisettes"><:sitra_select:noisettes_affichage:></label>
+			<p class='explication'><:sitra_select:explication_noisettes_affichage:></p>
+			<input type="text" name="sitra_select_noisettes" class="text" id="sitra_select_noisettes" value="#ENV{sitra_select_noisettes}" />
+		</li>
+		
+	</ul>
+</fieldset><!-- /fieldset noisettes affichage -->
+<p class="boutons"><input type="submit" name="_cfg_ok" value="<:sitra_select:enregistrer:>" /></p>
+</form>
+</div>

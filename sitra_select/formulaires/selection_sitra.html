@@ -1,0 +1,82 @@
+<a id="#FORM"></a>
+<div class="formulaire_spip formulaire_#FORM" id="#FORM">
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV{message_erreur})</p>]
+	<form name="#FORM" id="#FORM" method="post" action="#ENV{action}" enctype="multipart/form-data">
+	[<!--(#REM) declarer les hidden -->]
+	[<input type="hidden" name="id_article" value="(#ENV{id_article})" />]
+	#ACTION_FORMULAIRE{#ENV{action},#FORM}
+	<ul>
+	
+		[<li>
+		<label for="noisette" id="label_noisette"><:sitra_select:noisette_affichage:></label>
+		<select name="noisette" id="noisette" class="select">
+			<option[ (#ENV{noisette}|non)selected="selected"] value="">--</option>
+				(#CONFIG{sitra_select_config/sitra_select_noisettes}|generer_sitra_select{#ENV{noisette}})
+			</select>
+		</li>]
+		[<!-- (#REM) selection -->]
+		<B_selections>
+		<li>
+		<label for="id_selection" id="label_id_selection"><:sitra_select:selection:></label>
+		<select name="id_selection" id="id_selection" class="select">
+			<option[ (#ENV{id_selection}|non)selected="selected"] value="">--</option>
+		<BOUCLE_selections (SITRA_SELECTIONS){fusion id_selection}{par id_selection}>
+			[<option[ (#ENV{id_selection}|=={#ID_SELECTION}|oui)selected="selected"] value="#ID_SELECTION">(#SELECTION)</option>]
+		</BOUCLE_selections>
+		</select>
+		</li>
+		</B_selections>
+		[<!-- (#REM) categorie -->]
+		<B_categories>
+		<li>
+		<label for="id_categorie" id="label_id_categorie"><:sitra_select:categorie:></label>
+		<select name="id_categorie" id="id_categorie" class="select">
+		<option[ (#ENV{id_categorie}|non)selected="selected"] value="">--</option>
+		<BOUCLE_categories (SITRA_CATEGORIES){fusion id_categorie}{par id_categorie}>
+			[<option[ (#ENV{id_categorie}|=={#ID_CATEGORIE}|oui)selected="selected"] value="#ID_CATEGORIE">(#CATEGORIE)</option>]
+		</BOUCLE_categories>
+		</select>
+		</li>
+		</B_categories>
+		[<!-- (#REM) criteres -->]
+		<B_criteres>
+		<li>
+		<label for="id_critere" id="label_id_critere"><:sitra_select:critere:></label>
+		<select name="id_critere" id="id_critere" class="select">
+		<option[ (#ENV{id_critere}|non)selected="selected"] value="">--</option>
+		<BOUCLE_criteres (SITRA_CRITERES){fusion id_critere}{par id_critere}>
+			[<option[ (#ENV{id_critere}|=={#ID_CRITERE}|oui)selected="selected"] value="#ID_CRITERE">(#ID_CRITERE)</option>]
+		</BOUCLE_criteres>
+		</select>
+		</li>
+		</B_criteres>
+		
+		[<li>
+		<label for="tri" id="label_tri"><:sitra_select:tri_affichage:></label>
+		<select name="tri" id="tri" class="select">
+			<option[ (#ENV{tri}|non)selected="selected"] value="">--</option>
+				(#VAL{'titre,commune,insee,classement,id_critere,id_categorie,hasard'}|generer_sitra_select{#ENV{tri}})
+			</select>
+		</li>]
+		
+		<li>
+		<label for="sens_tri" id="label_sens_tri"><:sitra_select:sens_tri:></label>
+		<select name="sens_tri" id="sens_tri" class="select">
+			<option[ (#ENV{sens_tri,0}|=={0}|oui)selected="selected"] value="0"><:sitra_select:sens_tri_direct:></option>
+			<option[ (#ENV{sens_tri,0}|=={1}|oui)selected="selected"] value="1"><:sitra_select:sens_tri_inverse:></option>
+			</select>
+		</li>
+		
+		<li>
+		<label for="extra" id="label_extra"><:sitra_select:extra:></label>
+		<input type="text" name="extra" id="extra" class="text" value="#ENV{extra}" />
+		</li>
+
+		
+	</ul>
+	[<!--(#REM) pour extra et autre -->]
+		<!--extra-->
+	<p class="boutons"><input type="submit" class="submit" name="valider" id="valider" value="<:sitra_select:enregistrer:>" /></p>
+	</form>
+</div>

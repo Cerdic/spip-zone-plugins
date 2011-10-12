@@ -1,0 +1,32 @@
+<plugin>
+	<nom>Sitra Select</nom>
+	<auteur>[Dominique Wojylac - Sivu Inforoutes de l'Ard&#232;che->http://www.inforoutes.fr]</auteur>
+	<version>0.6.0</version>
+	<etat>test</etat>
+	<icon>images/sitra-64.png</icon>
+	<licence>GPL 3 - &#169; 2011</licence>
+	<lien></lien>
+	<slogan>Une interface de gestion des noisettes pour SITRA dans SPIP</slogan>
+	<description>Gestion des noisettes pour l'affichage des donn&#233;es SITRA dans les squelettes par formulaire de s&#233;lection des des cat&#233;gories et sous-cat&#233;gories des objets, des crit&#232;res internes et autres.</description>
+	<prefix>sitra_select</prefix>
+	<version_base>1.0</version_base>
+	<fonctions>sitra_select_fonctions.php</fonctions>
+	<install>sitra_select_installations.php</install>
+	<pipeline>
+		<nom>declarer_tables_principales</nom>
+		<inclure>base/tables_sitra_select.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>declarer_tables_interfaces</nom>
+		<inclure>base/tables_sitra_select.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>sitra_select_pipelines.php</inclure>
+	</pipeline>
+
+	<categorie>outil</categorie>
+	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
+	<necessite id="sitra" version="[0.8.0;]" />
+	<necessite id="cfg" version="[1.16.0;]" />
+</plugin>
