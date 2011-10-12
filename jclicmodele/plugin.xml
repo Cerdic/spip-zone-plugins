@@ -1,11 +1,11 @@
 <plugin>
 	<nom>Jclic Mod&#232;le</nom>
-	<slogan>Mod&#232;le permettant d'insérer des activit&#233;s Jclic</slogan>
+	<slogan>Mod&#232;le permettant d&#8217;ins&#233;rer des activit&#233;s Jclic</slogan>
 	<auteur>Olivier Gautier</auteur>
 	<version>0.1.0</version>
 	<etat>stable</etat>
 	<description>
-	Ce plugin propose un mod&#232;le permettant d'ins&#233;rer des activit&#233;s Jclic dans votre site.
+	Ce plugin propose un mod&#232;le permettant d&#8217;ins&#233;rer des activit&#233;s Jclic dans votre site.
 	</description>
 	<lien>http://www.spip-contrib.net/Jclic-Modele</lien>
 	<licence>GNU/GPL</licence>
