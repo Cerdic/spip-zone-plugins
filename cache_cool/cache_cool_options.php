@@ -5,6 +5,7 @@
  * Distribue sous licence GPL
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Fonction chargee de produire le cache pour un contexte et un fond donne
