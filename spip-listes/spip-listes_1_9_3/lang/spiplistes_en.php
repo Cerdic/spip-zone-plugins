@@ -600,6 +600,9 @@ $GLOBALS['i18n_spiplistes_en'] = array(
 
 , 'jquery_inactif' => "jQuery not detected. Thank you to activate it."
 
+// spiplistes_mes_fonctions.php
+, 'date_depuis' => 'since @delai@'
+
 );
 
 // English translation: Pierre ROUSSET : p.rousset@gmail.com from the transalation by Simon simon@okko.org

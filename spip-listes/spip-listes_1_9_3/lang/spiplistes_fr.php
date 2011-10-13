@@ -672,6 +672,10 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'si_mail_par_erreur' => 'Si ce mail vous a &#233;t&#233; d&#233;livr&#233; par erreur,
 		merci de pr&#233;venir votre correspondant et de supprimer ce message.'
 
+// spiplistes_mes_fonctions.php
+, 'date_depuis' => 'depuis @delai@'
+
+
 // tableau items *_options
 , 'liste_de_destination' => 'Liste de destination'
 , 'listes_1_du_mois' => 'Publiques, 1<sup><small>er</small></sup> du mois.'
@@ -873,7 +877,6 @@ $GLOBALS['i18n_spiplistes_fr'] = array(
 , 'definir_squel_texte' => 'Si vous disposez des codes d&#8217;acc&egrave;s au FTP, vous pouvez ajouter des squelettes SPIP dans le r&#233;pertoire /patrons (&#224; la racine de votre site Spip).'
 , 'dernier_envoi' => 'Dernier envoi il y a'
 , 'desabonnement_confirm' => 'Vous &ecirc;tes sur le point de r&#233;silier votre abonnement &#224; la lettre d&#8217;information'
-, 'date_depuis' => 'depuis @delai@'
 , 'envoi_charset' => 'Charset de l&#8217;envoi'
 , 'envoi_nouv' => 'Envoi des nouveaut&#233;s'
 , 'envoi_program' => 'Envoi programm&#233;'
