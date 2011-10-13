@@ -7,7 +7,111 @@ include_spip('inc/filtres');
 
 function formulaires_inscription_client_saisies_dist($retour=''){
 	$mode = tester_config(0);
+	
+	$conf=lire_config('clients/elm',array());
+	
+	$civilite=array();
+	if (in_array("civilite", $conf) and !in_array("obli_civilite", $conf)) {
+		$civ=lire_config('clients/elm_civ',array('m', 'mme'));
+		$civ_t=array();
+		foreach($civ as $v){
+			// pas moyen de faire marcher array_merge ici
+				array_push($civ_t, _T($v));
+		}
+		$civ_t = array_values($civ_t);
+		$civ_t = array_combine($civ_t, $civ_t);
+		$civilite=array(
+			'saisie' => 'radio',
+			'options' => array(
+				'nom' => 'civilite',
+				'label' => _T('contacts:label_civilite'),
+				'datas' => $civ_t
+			)
+		);
+	}elseif (in_array("civilite", $conf) and in_array("obli_civilite", $conf)) {
+		$civ=lire_config('clients/elm_civ',array('m', 'mme'));
+		$civ_t=array();
+		foreach($civ as $v){
+			// pas moyen de faire marcher array_merge ici
+				array_push($civ_t, _T($v));
+		}
+		$civ_t = array_values($civ_t);
+		$civ_t = array_combine($civ_t, $civ_t);
+		$civilite=array(
+			'saisie' => 'radio',
+			'options' => array(
+				'nom' => 'civilite',
+				'label' => _T('contacts:label_civilite'),
+				'obligatoire' => 'oui',
+				'datas' => $civ_t
+			)
+		);
+	}
+	
+	$complement=array();
+	if (in_array("complement", $conf) and !in_array("obli_complement", $conf)) {
+		$complement=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'complement',
+				'label' => _T('coordonnees:label_complement'),
+			)
+		);
+	}elseif (in_array("complement", $conf) and in_array("obli_complement", $conf)) {
+		$complement=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'complement',
+				'label' => _T('coordonnees:label_complement'),
+				'obligatoire' => 'oui'
+			)
+		);
+	}
+	
+	$numero=array();
+	if (in_array("numero", $conf) and !in_array("obli_numero", $conf)) {
+		$numero=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'numero',
+				'label' => _T('coordonnees:label_numero'),
+			)
+		);
+	}elseif (in_array("numero", $conf) and in_array("obli_numero", $conf)) {
+		$numero=array(
+			'saisie' => 'input',
+			'options' => array(
+				'nom' => 'numero',
+				'label' => _T('coordonnees:label_numero'),
+				'obligatoire' => 'oui'
+			)
+		);
+	}
+	
+	$pays=array();
+	if (in_array("pays", $conf) and !in_array("obli_pays", $conf)) {
+		$pays=array(
+			'saisie' => 'pays',
+			'options' => array(
+				'nom' => 'pays',				
+				'code_pays' => 'oui',
+				'label' => _T('coordonnees:label_pays'),
+			)
+		);
+	}elseif (in_array("pays", $conf) and in_array("obli_pays", $conf)) {
+		$pays=array(
+			'saisie' => 'pays',
+			'options' => array(
+				'nom' => 'pays',				
+				'code_pays' => 'oui',
+				'label' => _T('coordonnees:label_pays'),
+				'obligatoire' => 'oui'
+			)
+		);
+	}
+	
 	return array(
+		$civilite,
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -35,6 +139,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 				'type' => 'email'
 			)
 		),
+		$numero,
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -43,13 +148,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 				'obligatoire' => 'oui'
 			)
 		),
-		array(
-			'saisie' => 'input',
-			'options' => array(
-				'nom' => 'complement',
-				'label' => _T('coordonnees:label_complement'),
-			)
-		),
+		$complement,
 		array(
 			'saisie' => 'input',
 			'options' => array(
@@ -66,15 +165,7 @@ function formulaires_inscription_client_saisies_dist($retour=''){
 				'obligatoire' => 'oui'
 			)
 		),
-		array(
-			'saisie' => 'pays',
-			'options' => array(
-				'nom' => 'pays',
-				'code_pays' => 'oui',
-				'label' => _T('coordonnees:label_pays'),
-				'obligatoire' => 'oui'
-			)
-		),
+		$pays
 	);
 }
 
@@ -104,7 +195,7 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 	if ($retour) refuser_traiter_formulaire_ajax();
 	
 	// Le pseudo SPIP est construit
-	set_request('nom_inscription', _request('prenom').' '._request('nom'));
+	set_request('nom_inscription', trim(_request('prenom').' '._request('nom')));
 	
 	// On active le traitement du formulaire d'inscription classique, donc on crée un nouvel utilisateur
 	$mode = tester_config(0);
@@ -130,6 +221,10 @@ function formulaires_inscription_client_traiter_dist($retour=''){
 		// On crée l'adresse
 		$editer_adresse = charger_fonction('editer_adresse', 'action/');
 		$editer_adresse('oui');
+		
+		// On crée le numero de tel
+		$editer_numero = charger_fonction('editer_numero', 'action/');
+		$editer_numero('oui');
 	}
 	
 	if ($retour) $retours['redirect'] = $retour;

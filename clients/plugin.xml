@@ -2,7 +2,7 @@
 	<nom>Clients</nom>
 	<auteur>[Les D&#233;veloppements Durables->http://www.ldd.fr]</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.1</version>
+	<version>0.5.2</version>
 	<version_base>0.1</version_base>
 	<etat>dev</etat>
     <slogan>
@@ -16,6 +16,17 @@
 	<icon></icon>
 	
 	<prefix>clients</prefix>
+	
+	<pipeline>
+		<nom>header_prive</nom>
+		<inclure>clients_pipelines.php</inclure>
+	</pipeline>
+	
+	<bouton id='configurer_clients' parent="bando_configuration">
+		<titre>clients:clients_titre</titre>
+		<icone>images/auteur-6forum-16.png</icone>
+		<url>configurer_clients</url>
+	</bouton>
 	
 	<necessite id="SPIP" version="[2.1.10;2.1.99]" />
 	<necessite id="spip_bonux" version="[2.2.17;]" />
