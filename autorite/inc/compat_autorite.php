@@ -45,6 +45,7 @@ AND $f = charger_fonction('compat', 'inc'))
 // la version commune a tous est developpee sur
 // svn://zone.spip.org/spip-zone/_dev_/compat/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inc_compat_autorite_dist($quoi = NULL) {
 	if (!function_exists($f = 'compat_autorite_defs')) $f .= '_dist';
