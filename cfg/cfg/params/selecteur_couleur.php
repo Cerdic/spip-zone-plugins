@@ -12,6 +12,7 @@
  * @version    $Id$
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Patch de compatibilité avec classe cfg_couleur,

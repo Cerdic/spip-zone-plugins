@@ -11,6 +11,7 @@
  * @link       http://www.spip-contrib.net/
  * @version    $Id$
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Le controlleur de CFG

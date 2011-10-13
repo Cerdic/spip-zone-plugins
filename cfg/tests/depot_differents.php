@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	// nom du test
 	$test = 'cfg:depot_metapack';

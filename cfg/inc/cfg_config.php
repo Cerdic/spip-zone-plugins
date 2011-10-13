@@ -11,6 +11,7 @@
  * @version    $Id$
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * charge le depot qui va bien en fonction de l'argument demande
