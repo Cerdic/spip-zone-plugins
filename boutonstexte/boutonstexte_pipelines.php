@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 // insert le css et le js externes pour boutonstexte dans le <head> du document (#INSERT_HEAD)
 function boutonstexte_insert_head_css($flux) 
 {

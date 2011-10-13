@@ -1,6 +1,7 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 'textes_icones' => '&#1606;&#1589; &#1576;&#1575;&#1604;&#1608;&#1606;&#1575;&#1578; &#1575;&#1604;&#1605;&#1587;&#1575;&#1593;&#1583;&#1577;',
