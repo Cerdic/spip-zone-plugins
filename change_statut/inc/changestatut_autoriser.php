@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function changestatut_autoriser(){}
 
 function autoriser_changestatut_dist($faire, $type, $id, $qui, $opt) {
