@@ -1,32 +1,19 @@
 <plugin>
-    <!-- Nom du plugin -->
 	<nom>Thumbsites</nom>
-
-    <!-- Auteur du plugin -->
+	<slogan>Une vignette pour les objets sites</slogan>
 	<auteur>Camille Lafitte, Eric Lupinacci</auteur>
-	<licence>GNU/GPL - &#169; 2008-&#224; plus tard</licence>
+	<licence>GNU/GPL - &#169; 2008</licence>
 	<version>0.5.1</version>
 	<etat>stable</etat>
-
-    <!-- spécifie une icone pour le plugin -->
 	<icon>prive/themes/spip/images/thumbsites-32.png</icon>
-	<slogan>Une vignette pour les objets sites</slogan>
 	<description>
-Thumbsites fournit un syst&egrave;me de capture d'&eacute;cran de site g&eacute;n&eacute;r&eacute;e par des serveurs d&eacute;di&eacute;s. Le plugin propose des balises, des filtres et des mod&egrave;les pour afficher la vignette d'un site donn&eacute;.
-_ Ce plugin g&egrave;re aussi un cache qui permet de pallier les indisponibilit&eacute;s fr&eacute;quentes des serveurs et d'acc&eacute;l&eacute;rer les affichages. Une configuration est disponible dans l'espace priv&eacute;.
+Thumbsites fournit un syst&#232;me de capture d'&#233;cran de site g&#233;n&#233;r&#233;e par des serveurs d&#233;di&#233;s. Le plugin propose des balises, des filtres et des mod&#232;les pour afficher la vignette d'un site donn&#233;. Ce plugin g&#232;re aussi un cache qui permet de pallier les indisponibilit&#233;s fr&#233;quentes des serveurs et d'acc&#233;l&#233;rer les affichages. Une configuration est disponible dans l'espace priv&#233;.
 	</description>
-
-    <!-- URI de documentation -->
 	<lien>http://www.spip-contrib.net/?article2584</lien>
-
-    <!-- precise le prefixe utilisé pour toutes les fonctions du plugin, en general le nom du plugin -->
 	<prefix>thumbsites</prefix>
-
-    <!-- précise les dependances vis-a-vis de d'autres plugins -->
-	<necessite id="SPIP" version="[2.0.0;3.0.0-dev)" />
+	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
 	<necessite id="cfg" version="[1.7.6;]" />
 
-    <!-- mes fonctions -->
 	<fonctions>thumbsites_fonctions.php</fonctions>
 	<pipeline>
 		<nom>affiche_gauche</nom>
