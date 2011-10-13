@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function ie_extras_affiche_gauche($flux){
 	if ($flux['args']['exec'] == 'iextras'){
