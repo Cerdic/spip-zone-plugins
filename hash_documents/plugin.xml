@@ -25,4 +25,5 @@
 	</pipeline>
 	<chemin dir='' />
 	<necessite id="SPIP" version="[1.9.2;2.1.99]" />
+	<categorie>performance</categorie>
 </plugin>
