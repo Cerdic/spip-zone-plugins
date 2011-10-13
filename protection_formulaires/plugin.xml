@@ -1,6 +1,6 @@
 <plugin>
 	<nom>Protection des formulaires</nom>
-	<slogan>Bloquer les liens d&#232;s qu'on a modifié#233; un formulaire</slogan>
+	<slogan>Bloquer les liens d&#232;s qu'on a modifi&#233; un formulaire</slogan>
 	<icon>img_pack/protection_formulaires-24.png</icon>
 	<auteur>[ARNO*->arnaud@paris-beyrouth.net]</auteur>
 	<licence>(c) 2009 - GPL</licence>
