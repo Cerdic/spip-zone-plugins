@@ -40,8 +40,10 @@ function initDiapos() {
 }
 jQuery(document).ready(
   function() {
-    initDiapos();
-    onAjaxLoad(initDiapos);
+  	if (typeof(mediabox) != 'undefined') {
+  		initDiapos();
+  		onAjaxLoad(initDiapos);
+  	}
   }
 );
 jQuery(document).unload(function() {
