@@ -9,7 +9,7 @@
 			<legend><:zoombox:general_legend:></legend>
 			<p>
 				<label for="opacity"><:zoombox:selecteur:></label>
-				<input type="text" name="zoombox_pointeur" value="[(#CONFIG{config_zoombox/zoombox_pointeur}|?{#CONFIG{config_zoombox/zoombox_pointeur},.zoombox})]"/>
+				<input type="text" name="zoombox_pointeur" value="[(#CONFIG{config_zoombox/zoombox_pointeur}|?{[(#CONFIG{config_zoombox/zoombox_pointeur}|htmlentities)],.zoombox})]"/>
 			</p>	
 			<p>
 				<label for="theme"><:zoombox:theme:></label>

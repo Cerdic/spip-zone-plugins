@@ -34,7 +34,7 @@ function Zoombox_call_js() {
 	$flux = '<script src=\''.url_absolue(find_in_path('zoombox.js')).'\' type=\'text/javascript\'></script>';
 	$flux .= '<script type="text/javascript">
 	jQuery(function($){
-		$('.$pointeur.').addClass("zoombox");
+		$("'.mysql_escape_string($pointeur).'").addClass("zoombox");
     	$(".zoombox").zoombox({
     							theme : "'.$theme.'",
     							opacity : '.$opacity.',
