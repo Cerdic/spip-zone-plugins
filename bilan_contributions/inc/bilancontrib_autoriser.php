@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // declarer la fonction du pipeline
 function bilancontrib_autoriser(){}
