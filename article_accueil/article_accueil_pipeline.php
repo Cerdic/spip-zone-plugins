@@ -6,6 +6,7 @@
  *
  */
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Affichage du formulaire de selection de l'article d'accueil
