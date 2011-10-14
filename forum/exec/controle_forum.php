@@ -6,6 +6,7 @@
  * Distribue sous licence GPL3
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_controle_forum_dist()
 {
