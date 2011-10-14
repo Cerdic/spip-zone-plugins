@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function videos_upgrade($nom_meta_base_version,$version_cible){
 	$current_version = 0.0;

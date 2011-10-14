@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_insertion_video_charger_dist($id_objet,$objet){
 	$valeurs = array(
 		'id_objet' => $id_objet,

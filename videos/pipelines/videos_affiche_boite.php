@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function videos_affiche_gauche($flux) {
 	
 	include_spip('inc/autoriser');
