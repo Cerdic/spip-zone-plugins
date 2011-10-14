@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Gerer les articles virtuels rediriges
 // on ne traite que les #URL_ARTICLE, pas les #URL_ARTICLE{13}

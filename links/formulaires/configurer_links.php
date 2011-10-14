@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function formulaires_configurer_links_charger_dist(){
 	$links = sql_fetsel('valeur', 'spip_meta', 'nom = "links"');
 	$links = unserialize($links['valeur']);

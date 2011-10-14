@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function links_insert_head_css($flux) {
 	//Recuperation de la configuration
