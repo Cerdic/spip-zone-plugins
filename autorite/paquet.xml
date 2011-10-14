@@ -3,20 +3,23 @@
 	categorie="auteur"
 	version="0.9.10"
 	etat="test"
-	compatibilite="[3.0.0-dev;3.0.*]"
+	compatibilite="[1.9.2;3.0.*]"
 	logo="illuminati-32.png"
 	documentation="http://www.spip-contrib.net/Le-plugin-Autorite"
->
+>	
 
 	<nom>Autorit&#233;</nom>
-	<!-- Gestion des brèves dans SPIP -->
+	<!-- Quelques réglages d'autorisations (ajoutez les vôtres !) -->
 
 	<auteur>Fil</auteur>
 	<auteur>James</auteur>
 	<auteur>Superyms</auteur>
 
-	<licence>GNU/LGPL</licence>
+	<licence lien="http://www.gnu.org/licenses/lgpl-3.0.html">GNU/LGPL</licence>
 
 	<traduire module="autorite" reference="fr" gestionnaire="salvatore" />
 
+	<spip compatibilite="[1.9.2;2.1.99]">	
+		<necessite id='cfg' version='[1.5.0;]' />
+	</spip>
 </paquet>
