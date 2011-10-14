@@ -9,6 +9,7 @@
  * \param $url_site url du site à consulter
  * \return url de l'image générée par le serveur
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 if (!function_exists('url_thumbsite')) {
 	function url_thumbsite($url_site) {
 		$url_serveur = '';

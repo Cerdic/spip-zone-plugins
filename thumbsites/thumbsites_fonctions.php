@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 /*! \file thumbsites_fonctions.php 
  *  \brief Fichier mes_fonctions propre au plugin
  *         

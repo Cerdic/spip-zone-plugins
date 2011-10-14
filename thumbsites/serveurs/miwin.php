@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
     /*! \file miwin.php 
      *  \brief Fichier de fonctions personnalisées au serveur miwin
      *         

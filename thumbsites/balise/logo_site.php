@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // on regarde s'il y a un logo, sinon un thumbshot, et on renvoie le tout
 // pour ca il faut modifier un peu le code produit par #LOGO_*, pour introduire

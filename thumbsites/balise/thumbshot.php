@@ -5,6 +5,7 @@
  * Un peu desuet maintenant mais permet quand même de choisir la vignette simplement
  *
  **/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_THUMBSHOT($p) {
 	return calculer_balise_dynamique($p, 'THUMBSHOT', array());

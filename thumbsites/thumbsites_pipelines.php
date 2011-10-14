@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function thumbsites_affiche_gauche($flux) {
 	if ((_request('exec') == 'sites')) {
