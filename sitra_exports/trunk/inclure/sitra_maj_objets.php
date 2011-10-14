@@ -264,7 +264,8 @@ foreach($langues as $langue){
 		$date_debut = $date_fin = $observations_dates = '';
 		if ($oi -> Periodes -> DetailPeriode  and $premiere_langue){
 			foreach ($oi -> Periodes -> DetailPeriode as $val) {
-				if ($val['type']=='09.01.06') {
+				if (($val['type'] == '09.01.06' and !$val['id_recurrente']) or ($val['type'] == '09.01.13') or ($val['type'] == '09.01.14')) {
+					echo $val['type'],' -/- ';
 					$objet['date_debut'] = date_norme($val -> Dates -> DetailDates -> DateDebut);
 					$objet['date_fin'] = date_norme($val -> Dates -> DetailDates -> DateFin);
 					$objet_details['observation_dates'] = $val -> Dates -> DetailDates -> ObservationDates;
