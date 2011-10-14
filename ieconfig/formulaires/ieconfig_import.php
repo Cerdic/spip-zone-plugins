@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function ieconfig_saisies_import() {
 	// Etape de selection du fichier

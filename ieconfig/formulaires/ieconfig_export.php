@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function ieconfig_saisies_export() {
 	$saisies = array (
