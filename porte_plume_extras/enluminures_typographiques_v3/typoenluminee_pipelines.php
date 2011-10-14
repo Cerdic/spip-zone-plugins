@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // insert le css pour les styles supplementaires de la BTE dans le <head> du document (#INSERT_HEAD)
 function TypoEnluminee_insert_head_css($flux) {

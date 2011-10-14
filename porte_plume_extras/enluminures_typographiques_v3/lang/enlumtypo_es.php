@@ -1,5 +1,6 @@
 <?php
 // This is a SPIP language file  --  Esto es un archivo de idioma SPIP
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 

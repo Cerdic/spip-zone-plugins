@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 function typoenluminee_porte_plume_barre_pre_charger($barres){
 	$barre = &$barres['edition'];
 	
