@@ -12,6 +12,7 @@
 	 *  
 	 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	function lettres_declarer_tables_objets_surnoms($surnoms) {
 		$surnoms['lettre'] = 'lettres';

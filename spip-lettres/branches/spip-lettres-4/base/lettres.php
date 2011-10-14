@@ -11,6 +11,7 @@
 	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
 	 *  
 	 **/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	global $table_des_abonnes;
 	$table_des_abonnes['abonne'] = array(

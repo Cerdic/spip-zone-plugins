@@ -10,6 +10,7 @@
  *
  **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function lettres_autoriser() {}
 

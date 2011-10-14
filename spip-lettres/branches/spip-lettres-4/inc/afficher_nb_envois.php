@@ -12,6 +12,7 @@
 	 *  
 	 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	function inc_afficher_nb_envois($titre, $requete, $formater) {
 		$tmp_var = 't_' . substr(md5(join('', $requete)), 0, 4);

@@ -12,6 +12,7 @@
 	 *  
 	 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	/**
 	 * balise_URL_FORMULAIRE_LETTRES

@@ -12,6 +12,7 @@
 	 *  
 	 **/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	function inc_afficher_crons($titre, $requete, $formater) {
 		if ($titre == _T("autres"))

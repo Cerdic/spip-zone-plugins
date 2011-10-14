@@ -9,6 +9,7 @@
 	 * Pour plus de details voir http://www.gnu.org/licenses/gpl-3.0.html
 	 *  
 	 **/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function theme_rubrique ($id_rubrique) {
 	return sql_getfetsel("titre", "spip_themes", "id_rubrique=".intval($id_rubrique));

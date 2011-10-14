@@ -7,6 +7,7 @@
 //
 // Auteur : JLuc
 //
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/lettres_fonctions');
 include_spip('classes/lettre');

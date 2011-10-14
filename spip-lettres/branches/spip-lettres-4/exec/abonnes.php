@@ -12,7 +12,6 @@
 	 *  
 	 **/
 
-
 	if (!defined("_ECRIRE_INC_VERSION")) return;
 	include_spip('lettres_fonctions');
 	include_spip('inc/presentation');
