@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function jquerycorner_insert_head($flux){
 	$les_effets="";

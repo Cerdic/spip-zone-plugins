@@ -2,6 +2,7 @@
 /**
  * Fichier d'installation / upgrade et désinstallation du plugin Spip Jquery Corner
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 
