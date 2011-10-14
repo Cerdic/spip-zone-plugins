@@ -18,6 +18,7 @@ aucune information n'a ete trouvee. Par defaut, les guillements sont alors
 de la forme &ldquo;mot&rdquo;, sauf si la barre d'insertion de SPIP proposait
 deja une autre forme.
 */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function typo_guillemets_remplacements($texte) {
 

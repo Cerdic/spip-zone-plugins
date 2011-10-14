@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 ## pour les liens, on transforme les guill « » des titres en guill “”
 include _DIR_RESTREINT.'inc/lien.php';
