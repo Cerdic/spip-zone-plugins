@@ -5,6 +5,7 @@
  * Distribue sous licence GPL
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 #var_dump($GLOBALS['meta']['entravaux_id_auteur']);
 
