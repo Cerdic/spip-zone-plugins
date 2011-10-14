@@ -5,6 +5,7 @@
  * Adaptation Cyril MARION - (c) 2010 Ateliers CYM http://www.cym.fr
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/meta');
 include_spip('base/create');

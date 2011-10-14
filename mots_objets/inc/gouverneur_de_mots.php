@@ -9,6 +9,7 @@
  *
  *
 **/
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 class declaration_liaison_mots {

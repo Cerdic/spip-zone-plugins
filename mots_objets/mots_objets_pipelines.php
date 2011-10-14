@@ -6,6 +6,7 @@
  * Grâce au soutien actif de Matthieu Marcillaud - Magraine
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/gouverneur_de_mots');
  

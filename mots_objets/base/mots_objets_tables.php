@@ -5,6 +5,7 @@
  * Adaptation Cyril MARION - (c) 2010 Ateliers CYM http://www.cym.fr
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function mots_objets_declarer_tables_interfaces($tables_interface){
 	include_spip('inc/gouverneur_de_mots');

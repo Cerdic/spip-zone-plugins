@@ -6,6 +6,7 @@
  * Grâce au soutien actif de Matthieu Marcillaud - Magraine
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 // fonction du pipeline, n'a rien a faire.
 function mots_objets_autoriser() {}
 
