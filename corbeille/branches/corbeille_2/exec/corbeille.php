@@ -5,6 +5,7 @@
  * Collectif
  * Licence GPL
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function exec_corbeille_dist(){
 	if (!autoriser('administrer','corbeille')){

@@ -5,6 +5,7 @@
  * Collectif
  * Licence GPL
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Parametres de configuration personnalisables/surchargeables de la corbeille :

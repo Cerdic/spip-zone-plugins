@@ -2,6 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP -- Esto es un fichero de idioma de SPIP
 // Traducido al español, JSJ septiembre 2006, octubre 06
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
   

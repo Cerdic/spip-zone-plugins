@@ -7,7 +7,8 @@
  */
 /* public static */
 
- 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 /**
  *Corbeille_icone_poubelle() affiche l'icone poubelle (vide ou pleine)
  * @param $total_table nb d'elments supprimable pour un objet donn
