@@ -8,6 +8,7 @@
  * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/abstract_sql');
 include_spip('inc/vieilles_defs');
 include_spip('inc/autoriser');

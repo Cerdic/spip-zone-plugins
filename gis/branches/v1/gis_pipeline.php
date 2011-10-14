@@ -8,6 +8,7 @@
  * (c) 2007 - Distribudo baixo licencia GNU/GPL
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function gis_gismot($flux){

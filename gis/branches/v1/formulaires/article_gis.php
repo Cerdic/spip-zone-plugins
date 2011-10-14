@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/session');
 include_spip('inc/securiser_action');

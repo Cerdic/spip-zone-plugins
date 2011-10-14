@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_editer_gis_charger_dist($id_article, $recherche='', $retour=''){
 
