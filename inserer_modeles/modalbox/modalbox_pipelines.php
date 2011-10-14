@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function inserer_modeles_modalbox_insert_head($flux){
 	if (!defined('_DIR_PLUGIN_MEDIABOX') && !defined('_DIR_PLUGIN_GESTDOC') && !defined('_DIR_PLUGIN_MEDIAS')) {

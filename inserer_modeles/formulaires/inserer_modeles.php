@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_inserer_modeles_charger_dist($id_article,$id_rubrique,$id_breve,$formulaire_modele='',$modalbox='') {
 	include_spip('inc/inserer_modeles');

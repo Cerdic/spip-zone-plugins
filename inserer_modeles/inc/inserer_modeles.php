@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Lister les formulaires de modèles disponibles dans les dossiers modeles/

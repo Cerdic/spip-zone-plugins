@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // On passe pour le moment via affiche_droite
 // Mais envisager dans le futur une intégration au porte plume
