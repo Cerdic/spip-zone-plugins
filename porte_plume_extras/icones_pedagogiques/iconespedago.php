@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function iconespedago_pre_typo($chaine) {
 	$chemin = '<img alt="icones_peda" src="'._DIR_PLUGIN_ICONESPEDAGO.'/img_pack/';
