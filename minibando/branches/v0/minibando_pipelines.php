@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // surcharger les boutons d'administration
 function minibando_formulaire_admin($flux) {
