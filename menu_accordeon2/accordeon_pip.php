@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function accordeon_jqueryui_forcer($array){
 	$array[] ='jquery.ui.accordion';
