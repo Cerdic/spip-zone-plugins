@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Pipeline ieconfig pour l'import/export de configuration
