@@ -1,0 +1,81 @@
+[(#REM)<!-- 
+	Ce sous-modele est celui utilise par defaut par Rainette pour presenter les conditions temps reel d'une ville
+	Il est appelee par le filtre rainette_croaaaaa_conditions
+ -->
+]
+<style>/* CONDITIONS: Styles utilises par le modele rainette_conditions */
+.rainette_conditions {
+	float: left;
+	width: 280px;
+	background: #fcfcfc;
+	border: none;
+	margin: 5px 0 20px 0;
+	padding:0 0 5px 0;}
+.rainette_conditions .statut {float: left; width: 260px;}
+.rainette_conditions .cadre {
+	float: left;
+	width: 265px;
+	border: 1px solid #000;
+	background: #ffffff;
+	margin: 11px 0 0 11px;
+	padding:0 0 5px 0;}
+.rainette_conditions .icone {float: left; margin: 3px 0 -5px 7px;}
+.rainette_conditions .t_reelle {
+	float: left;
+	color: #333333;
+	font-size: 33px;
+	font-weight: bold;
+	line-height: 1em;
+	margin: 20px 0 0 15px;
+}
+.rainette_conditions .t_ressentie {float: left; width: 95px; color: #333333; margin: 0 0 0 15px;}
+.rainette_conditions .resume {text-align: center; font-weight: bold; padding-top: 5px;}
+.rainette_conditions .maj {
+	float: left;
+	font-size: 10px;
+	color: #000000;
+	width: 236px;
+	padding: 6px 0 0 11px;
+}
+.rainette_conditions .details {
+	float: left;
+	color: #000000;
+	line-height: 12px;
+	margin-left:30px;
+	width: 200px;
+	padding: 12px 5px 5px 1px;
+}
+.rainette_conditions .details  span {color: #6E6E6E; font-weight: bold;}
+</style>
+
+<div class="rainette_conditions">
+	<div class="statut">
+		<div class="cadre">
+			<div class="icone">[(#ENV{code_icone}|rainette_icone_meteo{grand})]</div>
+			<div class="t_reelle">[(#ENV{temperature_reelle}|rainette_afficher_unite{temperature})]</div>
+			<div class="t_ressentie"><:rainette:temperature_ressentie:>&nbsp;:[&nbsp;(#ENV{temperature_ressentie}|rainette_afficher_unite{temperature})]<br/></div>
+			<br clear="all"/>
+			<div class="resume">[(#ENV{code_icone}|rainette_resume_meteo)]</div>
+		</div>
+		<div class="maj">
+			<:rainette:derniere_maj|ucfirst:>&nbsp;:[&nbsp;(#ENV{derniere_maj}|affdate_heure)]<br/>
+			<:rainette:station_observation|ucfirst:>&nbsp;:[&nbsp;(#ENV{station})]
+		</div>
+	</div>
+	
+	
+	
+	<div class="detail">
+		<span><:rainette:vent|ucfirst:></span><br/>
+		[(#ENV{vitesse_vent}|rainette_afficher_unite{vitesse})]
+		[ - (#ENV{direction_vent}|rainette_afficher_direction)]<br/><br/>
+		<span><:rainette:humidite|ucfirst:></span><br/>
+		[(#ENV{humidite}|rainette_afficher_unite{pourcentage})]<br/><br/>
+		<span><:rainette:pression|ucfirst:></span><br/>
+		[(#ENV{pression}|rainette_afficher_unite{pression})]
+		[ (#ENV{tendance_pression}|rainette_afficher_tendance{icone})]<br/><br/>
+	</div>
+	
+	
+	
+</div>

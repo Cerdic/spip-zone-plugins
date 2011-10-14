@@ -1,0 +1,127 @@
+	<BOUCLE_profil(AUTEURS) {id_auteur=#SESSION{id_auteur}}>
+		<div class="portlet-content">
+						
+			<div class="logo-profil">[(#LOGO_AUTEUR|image_reduire{0,100})]</div>
+
+			<div class="info-profil">
+				
+				<B_contact>
+				
+				<BOUCLE_contact(CONTACTS){id_auteur=#SESSION{id_auteur}}>
+					
+					[<p class="#EDIT{nom} nom">(#NOM)</p>]				  
+					[<p class="#EDIT{prenom} prenom">(#PRENOM)</p>]
+					[<p class="#EDIT{fonction} fonction">(#FONCTION)</p>]
+					[<p>(#DATE_NAISSANCE|affdate)</p>]
+				</BOUCLE_contact>
+				</B_contact>
+					#NOM
+				<//B_contact>
+				
+				</div>
+				
+			<div class="detail-profil">	
+					<p>
+					<div class="head">D&eacute;tails</div>
+					<div class="content">
+						
+						[<p class="#EDIT{email} email">(#EMAIL)</p>]
+						[<p class="#EDIT{bio} bio">(#BIO)</p>]
+					</p>	
+					</div>
+				</BOUCLE_profil>
+				
+				<p>
+				<div class="head">R&eacute;glages</div>
+				<div class="content">
+				
+				
+				<form action="" method="get">
+				<fieldset style="border:none">
+					
+					[(#CONFIG{profil_public/articles}|?{' ',''})
+					<p class="formulaire">						
+						<input id="case-articles" type="checkbox" name="articles" checked="checked" value="0"/>
+						<label for="case-articles">Mes articles</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/com}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-com" type="checkbox" name="com" checked="checked" value="0"/>
+						<label for="case-annonce" class="left">Mes commentaires</label>						
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/aide}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-aide" type="checkbox" name="aide" checked="checked" value="0"/>
+						<label for="case-aide" class="left">Aides</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/fav}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-fav" type="checkbox" name="fav" checked="checked" value="0"/>
+						<label for="case-fav" class="left">Favoris</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/messages}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-messages" type="checkbox" name="messages" checked="checked" value="0"/>
+						<label for="case-messages" class="left">Messagerie</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/nav}|?{' ',''})
+				   <p class="formulaire">
+						<input id="case-nav" type="checkbox" name="nav" checked="checked" value="0"/>
+						<label for="case-nav" class="left">Navigation</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/annonce}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-annonce" type="checkbox" name="annonce" checked="checked" value="0"/>
+						<label for="case-annonce" class="left">Annonce</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/rainette}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-rainette" type="checkbox" name="rainette" checked="checked" value="0"/>
+						<label for="case-rainette" class="left">M&eacute;t&eacute;o</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/tag}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-tag" type="checkbox" name="tag" checked="checked" value="0"/>
+						<label for="case-tag" class="left">Tags</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/image}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-image" type="checkbox" name="image" checked="checked" value="0"/>
+						<label for="case-image" class="left">Images</label>
+					</p>
+					]
+					
+					[(#CONFIG{profil_public/rss}|?{' ',''})
+					<p class="formulaire">
+						<input id="case-rss" type="checkbox" name="rss" checked="checked" value="0"/>
+						<label for="case-rss" class="left">Flux rss</label>
+					</p>
+					]
+				
+					
+				</fieldset>
+				</form>
+				</div>
+				
+				</p>
+				
+			</div>
+		</div>

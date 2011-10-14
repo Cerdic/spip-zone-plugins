@@ -1,0 +1,23 @@
+<script>
+	$(function() {
+	$( "#tabs" ).tabs();
+	});
+</script>
+
+<div id="tabs">
+					<ul>
+						<li><a href="#tabs-1">Envoyés</a></li>
+						<li><a href="#tabs-2">Reçus</a></li>
+						<li><a href="#tabs-3">Ecrire</a></li>
+					</ul>
+					<div id="tabs-1">
+						<p>#FORMULAIRE_MESSAGES_ENVOYES{id_auteur}</p>
+					</div>
+					<div id="tabs-2">
+						<p>#FORMULAIRE_MESSAGES_RECUS{id_auteur}</p>
+					</div>
+					<div id="tabs-3">
+						<p>#FORMULAIRE_ECRIRE_MESSAGE{id_auteur}</p>
+					</div>
+				
+				</div>

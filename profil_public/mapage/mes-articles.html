@@ -1,0 +1,26 @@
+[(#REM) Articles de l'auteur ]
+		
+	<div class="portlet-content">
+        	
+		<B_articles>
+		<div class="menu articles">
+			#ANCRE_PAGINATION
+			
+			<p class='pagination tri'>[(#TRI{titre,<:par_titre:>})] | [(#TRI{popularite,<:par_popularite:>})] |
+			[(#TRI{date,<:par_date:>})]</p>
+			
+			<ul>
+				<BOUCLE_articles(ARTICLES){id_auteur=#SESSION{id_auteur}}{tri popularite,#ARRAY{date,-1,titre,1}}{pagination 8}>
+						<li><a href="#URL_ARTICLE">#TITRE</a></li>
+				</BOUCLE_articles>
+			</ul>
+			[<p class="pagination">(#PAGINATION)</p>]
+		</div>
+		</B_articles>
+			Pas d'articles publi&eacute;s
+		<//B_articles>
+	
+	</div>
+		
+		
+		

@@ -1,0 +1,6 @@
+[(#REM) Favoris de l'auteur ]
+				<BOUCLE_auteur(AUTEURS) {id_auteur=#SESSION{id_auteur}}{tout}>
+				[(#INCLURE{fond=inclure/mesfavoris}{env}{id_auteur}{ajax})]
+				</BOUCLE_auteur>
+				Veuillez vous identifier !
+				<//B_auteur>

@@ -1,0 +1,28 @@
+	
+	<p><a href="rubrique48">Aide &agrave; la r&eacute;daction</a></p>
+	
+	<p><a href="article557">Suivre la vie du site</a></p>
+	
+	<p><a href="ecrire/?exec=articles_edit&new=oui&id_rubrique=15">Ecrire un article</a></p>
+	
+	<p>
+	<div class="head">Ajouter un &eacute;v&egrave;nement &agrave; l'agenda</div>
+	<div class="content">
+		[(#FORMULAIRE_EDITER_EVENEMENT)]
+	</div>
+	</p>
+		
+	<p>	
+	<div class="head">Questionnez le responsable du site</div>
+	<div class="content">
+	<BOUCLE_contact(AUTEURS){id_auteur=5}>#FORMULAIRE_ECRIRE_AUTEUR</BOUCLE_contact>
+	</div>
+	</p>
+	
+	<p>
+	<div class="head">Proposez un site à r&eacute;f&eacute;rencer</div>
+	<div class="content">
+	<BOUCLE_ajout_site(RUBRIQUES){id_rubrique=15}>#FORMULAIRE_SITE</BOUCLE_ajout_site>
+	</div>
+	</p>
+	

@@ -1,0 +1,193 @@
+#CACHE{0}
+<BOUCLE_principale(AUTEURS) {id_auteur=#SESSION{id_auteur}}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" lang="#LANG" dir="#LANG_DIR">
+<head>
+<title>[(#NOM|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#BIO|couper{150}|attribut_html)" />]
+<INCLURE{fond=inc-head} />
+
+[(#REM) Favicon personnalisee a partir du logo (si filtres d'image) ]
+[(#MODELE{favicon}{favicon=#LOGO_AUTEUR})]
+
+
+[(#REM) Lien vers le flux RSS des articles de l'auteur ]
+<link rel="alternate" type="application/rss+xml" title="[(#NOM|textebrut)]" href="[(#URL_PAGE{backend}|parametre_url{id_auteur,#ID_AUTEUR})]" />
+
+</head>
+
+<body class="page_profil">
+<div id="page">
+
+  [(#REM) Entete de la page + titre du site ]
+  <INCLURE{fond=inc-entete}>
+
+   
+	
+	
+	<style>
+	
+	</style>
+	<script>
+	$(document).ready(function(){
+	$(".fade").fadeTransition({
+				pauseTime: 4000,
+                transitionTime: 2000,
+				delayStart: 4000,
+                pauseOnMouseOver: true,
+				createNavButtons: true
+                
+			});
+	});
+	
+	</script>
+	
+	 	
+	
+	<div id="conteneur">
+    	
+	<div class="column" id="col1">
+	
+		[(#REM) Infos sur l'auteur ]
+		<div class="portlet"id="box-profil">
+		<div class="portlet-header">Mes infos</div>
+			<INCLURE{fond=mapage/w-profil}{env}{ajaxload}>	
+		</div>
+		
+		[(#REM) Articles de l'auteur ]
+		[(#CONFIG{profil_public/articles}|?{' ',''})
+		<div class="portlet" id="box-articles">
+		<div class="portlet-header">Mes articles </div>
+			<INCLURE{fond=mapage/mes-articles}{env}{ajax}>	       
+		</div>
+		]
+		
+		[(#REM) Commentaires de l'auteur ]
+		[(#CONFIG{profil_public/com}|?{' ',''})
+		<div class="portlet" id="box-com">
+		<div class="portlet-header">Mes commentaires</div>
+			<INCLURE{fond=mapage/forum}{env}{ajax}>				
+		</div>
+		]
+		
+	</div><!-- fin colonne 2-->
+
+	<div class="column" id="col2">
+	
+		[(#CONFIG{profil_public/aide}|?{' ',''})
+		<div class="portlet" id="box-aide">
+			<div class="portlet-header">Aides</div>
+			<div class="portlet-content">
+				<INCLURE{fond=mapage/w-aide}{env}{ajaxload}>			
+			</div>
+		</div>
+		]
+
+		[(#REM) Favoris de l'auteur ]
+		[(#CONFIG{profil_public/fav}|?{' ',''})
+		<div class="portlet" id="box-fav">
+			<div class="portlet-header">Favoris</div>
+			<div class="portlet-content">
+			<INCLURE{fond=mapage/w-fav}{env}{ajaxload}>
+			</div>
+		</div>
+		]
+		
+		
+		[(#REM) Messagerie de l'auteur avec le plugin messagerie ]
+		[(#CONFIG{profil_public/messages}|?{' ',''})
+		<div class="portlet" id="box-messages">
+			<div class="portlet-header">Messagerie</div>
+			<div class="portlet-content">
+			[(#ONGLETS_DEBUT{Envoyés})]
+			#FORMULAIRE_MESSAGES_ENVOYES{id_auteur}
+			[(#ONGLETS_TITRE{Reçus})]
+			#FORMULAIRE_MESSAGES_RECUS{id_auteur}
+			[(#ONGLETS_TITRE{Ecrire})]
+			#FORMULAIRE_ECRIRE_MESSAGE{id_auteur}
+			#ONGLETS_FIN
+			</div>
+		</div>
+		]
+		
+		[(#CONFIG{profil_public/rss}|?{' ',''})	
+		<div class="portlet" id="box-rss">
+			<div class="portlet-header">Flux rss</div>
+			<div class="portlet-content">
+			<INCLURE{fond=mapage/w-rss}{env}{ajaxload}>
+			</div>
+		</div>
+		]
+		
+		[(#CONFIG{profil_public/annonce}|?{' ',''})
+		
+		<div class="portlet" id="box-annonce">
+			<div class="portlet-header">Annonces publiques</div>
+			<div class="portlet-content">
+				<div class="fade">
+				<INCLURE{fond=mapage/w-annonce}{env}{ajaxload}>
+				</div>			
+			</div>
+		</div>
+		
+		]
+	
+		
+		
+				
+	</div><!-- fin colonne 2-->
+
+	<div class="column" id="col3">
+	
+		[(#REM) plan des rubriques ]
+		[(#CONFIG{profil_public/nav}|?{' ',''})
+		<div class="portlet"id="box-nav">		
+		<INCLURE{fond=mapage/plan-rubriques}{env}{ajaxload}>
+		</div>
+		]
+		
+				
+		[(#REM) images du site ]
+		[(#CONFIG{profil_public/image}|?{' ',''})
+		<div class="portlet" id="box-image">
+			<div class="portlet-header">Images</div>
+			<INCLURE{fond=mapage/w-image}{env}{ajaxload}>
+			<div class="portlet-content">
+			</div>
+		</div>
+		]
+		
+		[(#REM) mot cle]	
+		[(#CONFIG{profil_public/tag}|?{' ',''})
+		<div class="portlet" id="box-tag">
+			<div class="portlet-header">Mot cle</div>
+			<div class="portlet-content">
+			<div class="box-tag"><INCLURE{fond=tagsphere}></div></div>
+		</div>
+		]
+		
+			
+		
+		[(#REM) widget meteo ]
+		[(#CONFIG{profil_public/rainette}|?{' ',''})
+		<div class="portlet" id="box-rainette">
+			<div class="portlet-header">M&eacute;t&eacute;o</div>
+			<div class="portlet-content">
+			<INCLURE{fond=mapage/w-rainette}>
+			</div>
+		]
+		</div>
+		
+
+	</div><!-- fin colonne 3 -->
+	
+
+</div><!-- fin conteneur -->  
+	
+    [(#REM) Pied de page ]
+  <INCLURE{fond=inc-pied}{skel=#SQUELETTE}>
+
+</div><!--#page-->
+</body>
+</html>
+</BOUCLE_principale>

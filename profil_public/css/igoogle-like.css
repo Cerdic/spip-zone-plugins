@@ -1,0 +1,77 @@
+	/*pagination igoogle */
+	.column { width: 310px; float: left; padding-bottom: 100px; margin-top:30px; margin-left:10px;}
+	.portlet { margin: 0 1em 1em 0; }
+	.portlet-header { margin: 0; padding-bottom: 4px; padding-left: 0.2em;  }
+	.portlet-header .ui-icon { float: right; }
+	.portlet-content { padding: 0.4em; }
+	.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 100px !important; }
+	.ui-sortable-placeholder * { visibility: hidden; }
+	
+	.ui-widget-header  {border:none;
+	padding-top:5px;
+	padding-right:10px;
+	height:20px;
+	text-align:center;
+	 /* Anciens navigateurs */
+	background: aliceblue url("css/bleu-bg.png") repeat-x top;
+	  -o-background-size: 100% 100%;
+	  -moz-background-size: 100% 100%;
+	  -webkit-background-size: 100% 100%;
+	  background-size: 100% 100%;
+	  /* Internet Explorer */
+	  *background: aliceblue;
+	  background: aliceblue\0/;
+	  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr=#FF6495ED, endColorstr=#FFF0F8FF);
+	  
+	  /* Navigateurs recents */
+    background-image: -moz-linear-gradient(
+    top,
+    cornflowerblue,
+    aliceblue
+	);
+	background-image: -webkit-gradient(
+	  linear, 
+	  0% 0%, 0% 100%, 
+	  from(cornflowerblue), 
+	  to(aliceblue));
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+	
+	/*style du collapse */
+	.head {padding-left:20px;}
+	
+	.deroule{
+    display : block;   
+    background: url(fleches.png) no-repeat left -134px;
+	}	
+
+	.enroule {
+	background: url(fleches.png) no-repeat left 2px;
+	}
+	
+	
+	 /*style des widgets */
+	#box-splickr .portlet-content {width:250px; }
+	.splickrbox {width:250px; margin-left:25px;}
+	.box-tag {margin-left:50px; width:200px;}
+	
+	.fade {height:200px; width:230px; margin:15px;}
+	
+	.rainette_previsions_24h {margin-left:15px;}
+	
+	/*style du widget profil */
+	.logo-profil {width:110px; float:left;}
+	.info-profil {width: 170px;float:right;}
+	.detail-profil {margin-top:15px; float:left;}
+	
+	 /*style de la barre de navigation du fader */
+	div.fadenav { position: absolute; bottom: 5px; right: 5px; }
+	div.fadenav a { display: block; background: #ccc; width: 12px; height: 12px; margin: 0 0 0 2px; float: left; overflow: hidden; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; border: 1px solid #000; }
+	div.fadenav a:hover { text-decoration: none; }
+	div.fadenav a.current { background: cornflowerblue; }
+	
+		
+	
+	
+	

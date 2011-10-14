@@ -1,0 +1,100 @@
+
+
+[(#REM) descriptif=
+<h4><legend>Page de profil pour les auteurs</legend></h4>
+Vous pouvez configurer les &eacute;l&eacute;ments &agrave; afficher dans le profil public<br />
+Documentation sur <a href="http://www.spip-contrib.net">spip-contrib</a><br />
+
+Plugins complémentaires
+<ul>
+<li><a href="http://www.spip-contrib.net/Messagerie-entre-membres">Messagerie entre membre</a>
+
+<li><a href="http://www.spip-contrib.net/Mes-Favoris-2-0">Mes favoris</a>
+
+<li><a href="http://www.spip-contrib.net/Plugin-Contacts-Organisations">Contact et organisation</a>
+
+<li><a href="http://www.spip-contrib.net/Annonces-Publiques">annonces publiques</a>
+
+<li><a href="http://www.spip-contrib.net/Plugin-TagSphere">Tagsphere</a>
+
+<li><a href="http://www.spip-contrib.net/cfg-references">Plugin cfg</a>
+
+</ul>
+]
+
+[(#REM) titre=profil public]
+[(#REM) icone=img/icone-cfg.png]
+
+#CACHE{0}
+
+<form method="post">[(#ENV{_cfg_}|form_hidden)]
+
+<fieldset><legend><:profilpublic:elements:></legend>
+   
+   <p>
+   <input type="checkbox" name="articles" [checked="(#ENV{articles})"] />
+   <label><:profilpublic:articles:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="com" [checked="(#ENV{com})"] />
+   <label><:profilpublic:com:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="aide" [checked="(#ENV{aide})"] />
+   <label><:profilpublic:aide:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="fav" [checked="(#ENV{fav})"] />
+   <label><:profilpublic:fav:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="messages" [checked="(#ENV{messages})"] />
+   <label><:profilpublic:messages:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="rss"[checked="(#ENV{rss})"] />
+   <label><:profilpublic:rss:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="annonce" [checked="(#ENV{annonce})"] />	
+   <label><:profilpublic:annonce:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="nav" [checked="(#ENV{nav})"] />
+   <label><:profilpublic:nav:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="image" [checked="(#ENV{image})"] />
+   <label><:profilpublic:image:></label><br/>
+	<p>
+	   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="fader" [checked="(#ENV{fader})"] />
+	   <label><:profilpublic:fader:></label><br/>
+	   &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="splickrbox" [checked="(#ENV{splickrbox})"] />
+	   <label><:profilpublic:splickrbox:></label><br/>
+	</p>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="tag" [checked="(#ENV{tag})"] />
+   <label><:profilpublic:tag:></label>
+   </p>
+   
+   <p>
+   <input type="checkbox" name="rainette" [checked="(#ENV{rainette})"] />
+   <label><:profilpublic:rainette:></label>
+   </p>
+   
+</fieldset>
+
+<input type="submit" name="_cfg_ok" value="<:OK:>" />
+<input type="reset" value="<:Reset:>" />
+<input type="submit" name="_cfg_delete" value="<:Supprimer:>" />
+</form>

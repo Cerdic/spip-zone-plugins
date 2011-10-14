@@ -1,0 +1,30 @@
+	
+	<B_forums>
+			#ANCRE_PAGINATION
+			<div class="portlet-content menu">
+           				
+		
+			<ul>
+            <BOUCLE_forums(FORUMS) {id_auteur=#SESSION{id_auteur}}
+            {!par date_heure} {plat} {pagination 5}
+            
+            >
+            <li>[(#DATE|affdate_court) &ndash; ]
+            [(#STATUT|=={publie}|?{
+	            <a href="#URL_FORUM"[
+	            title="(#TITRE|couper{80}|texte_backend)"]>[(#TEXTE|couper{80})]</a>
+			,
+				[(#TEXTE|couper{80})]
+			})]
+
+			[(#REM) todo: une couleur pour les statuts autres que 'publie',
+			attention aussi aux messages de l'espace prive ; doivent-ils
+			etre mentionnes sur cette page ?]
+            <small>(#STATUT)</small>
+
+            </li>
+            </BOUCLE_forums>
+            </ul>
+			[<p class="pagination">(#PAGINATION)</p>]
+			</div>
+			</B_forums>

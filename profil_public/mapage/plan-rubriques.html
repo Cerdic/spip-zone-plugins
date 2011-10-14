@@ -1,0 +1,42 @@
+<B_rubriques>
+		<div class="portlet-header"><:rubriques:></div>
+		<div class="portlet-content">
+		<script>
+	$(function() {
+		$( "#accordion" ).accordion({
+			animated: 'bounceslide',
+			active: false,
+			icons: { 'header': 'ui-icon-plus', 'headerSelected': 'ui-icon-minus' },
+			collapsible: true
+			});
+	});
+	</script>
+
+
+
+
+
+<div >
+		
+			<ul id="accordion">
+			<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}>
+				<li>
+					<h3><a href="#">[(#TITRE|couper{80})]</a></h3>
+					<div>
+					<B_sous_rubriques>
+					<ul>
+						<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}>
+							<li><a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
+						</B_test_expose></BOUCLE_sous_rubriques>
+					</ul>
+					</B_sous_rubriques>
+					<div>
+				</li>
+			</BOUCLE_rubriques>
+
+			</ul>
+		</div>
+	</B_rubriques>
+	</div>
+		
+	
