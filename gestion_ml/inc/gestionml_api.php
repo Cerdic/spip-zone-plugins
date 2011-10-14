@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * Fonction permettant de tester la connexion au serveur Soap

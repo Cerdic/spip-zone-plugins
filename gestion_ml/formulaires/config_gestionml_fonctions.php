@@ -1,4 +1,5 @@
 <?php 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function cfg_config_gestionml_verifier(&$cfg){
    // vérif des valeurs 
