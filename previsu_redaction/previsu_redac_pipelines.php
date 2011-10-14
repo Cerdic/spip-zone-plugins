@@ -5,6 +5,7 @@
  * Licence GPL 3
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function previsu_redac_pre_boucle(&$boucle){
 	$id_table = $boucle->id_table;
