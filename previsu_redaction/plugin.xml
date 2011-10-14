@@ -16,7 +16,6 @@
 	<auteur>[C&#233;dric Morin->http://www.yterium.net], superyms (traduction)</auteur>
 	<version>1.0.0</version>
 	<etat>stable</etat>
-	<icon>previsu_redaction.png</icon>
 	<licence>GPL 3 (c) 2008</licence>
 	<description><multi>
 	[fr]Ce plugin permet d&#8217;activer la pr&#233;visualisation des articles &#171; en cours de r&#233;daction &#187; et non plus seulement ceux &#171; propos&#233; &#224; l&#8217;&#233;valuation &#187;.
