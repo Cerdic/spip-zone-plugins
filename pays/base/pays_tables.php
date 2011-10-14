@@ -7,6 +7,7 @@
  * Portage sous SPIP par Cyril MARION - Ateliers CYM http://www.cym.fr
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function pays_declarer_tables_interfaces($interface){
 
