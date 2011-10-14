@@ -5,6 +5,7 @@
  * Collectif
  * Licence GPL
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_editer_corbeille_charger_dist($table){
 	include_spip('action/corbeille_vider');
