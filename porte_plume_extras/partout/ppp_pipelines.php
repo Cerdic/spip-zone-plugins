@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //Appel du pipeline qui ajoute des barres de porte-plume partout dans Descriptif, chapo, PS, Bio et Descriptif du site
 function ppp_insert_head_prive($flux){
