@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function generer_sitra_select($str = '',$select){
 	if (!$str)
 		return;

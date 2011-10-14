@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 // pipeline affiche milieu
 // affichage saisie des selections pour les articles
 function sitra_select_affiche_milieu($flux){

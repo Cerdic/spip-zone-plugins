@@ -1,4 +1,7 @@
 <?php
+
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 function sitra_select_declarer_tables_principales($tables_principales){
 // Table SITRA_OBJETS
 $sitra_select_field = array(
