@@ -1,7 +1,7 @@
 <plugin>
 	<nom>Sitra Select</nom>
 	<auteur>[Dominique Wojylac - Sivu Inforoutes de l'Ard&#232;che->http://www.inforoutes.fr]</auteur>
-	<version>0.6.1</version>
+	<version>0.6.2</version>
 	<etat>test</etat>
 	<icon>images/sitra-64.png</icon>
 	<licence>GPL 3 - &#169; 2011</licence>
