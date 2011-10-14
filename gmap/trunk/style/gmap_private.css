@@ -465,6 +465,43 @@ table.edit_types .btn_delete {
 	margin: 0;
 }
 
+/* Plan & navigation */
+#help-plan {
+	margin: 0; padding: 0; border: 0;
+}
+#help-plan a {
+	color: rgb(128,128,128);
+}
+#help-plan a:hover {
+	color: rgb(92,92,192);
+	text-decoration: underline;
+}
+#help-plan h1 {
+	margin: 0 0 10px 0;
+	color: black;
+}
+#help-plan h2 {
+	margin: 8px 0 0 0;
+}
+#help-plan a h2 {
+	color: rgb(92,92,92);
+}
+#help-plan a:hover h2 {
+	color: rgb(64,64,128);
+}
+#help-plan ul {
+	margin: 0 0 5px 0;
+	padding: 0; border: 0;
+}
+#help-plan li {
+	display: block;
+	padding: 0 0 0 5px;
+	margin: 0; border: 0;
+}
+#help-plan a.active li, #help-plan a.active h2 {
+	background: rgb(220,220,220);
+}
+
 /* Titraille et autre typographie */
 #help-contents {
 	margin: 10px;

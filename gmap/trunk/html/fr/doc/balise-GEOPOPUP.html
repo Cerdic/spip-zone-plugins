@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOPOPUP</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<h2>R&ocirc;le</h2>
+	<p>Cette balise est utilis&eacute;e dans les squelettes de fichier KML (comme <span class="code">gmap-query-default.html</span>) pour d&eacute;clarer automatiquement le texte correspondant à un point.</p>
+	<p>Le texte est utilis&eacute; dnas les info-bulles, autant par GMap lui-m&ecirc;me que par des clients classique de fichiers KML comme Google Earth.</p>
+	<p>Le texte est extraits des fichiers <span class="code">gmap-info-<i>objet</i>[(=|-)<i>id_rubrique</i>].html</<span>. Ces fichiers sont des squelettes SPIP dans lesquels on peut donc utiliser des boucles et des balises.</p>
+	<p>Le plugin GMap d&eacute;fini des fichiers par d&eacute;faut : <span class="code">gmap-info-default.html</span>, <span class="code">gmap-info-rubrique.html</span>, <span class="code">gmap-info-article.html</span> et <span class="code">gmap-info-document.html</span>.</p>
+	
+	<h2>Exemple</h2>
+	<p>Voir le fichier <span class="code">gmap-query-default.html</span>.</p>
+
+	<h2>Param&egrave;tres</h2>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>id_article/id_rubrique...</td>
+			<td>Objet &agrave; partir duquel les points sont compt&eacute;s. Ce param&egrave;tre est habituellement pris de l'environnement de la balise (la boucle englobante).</td>
+			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
+		</tr>
+		<tr>
+			<td>type_point</td>
+			<td>Type du marqueur recherch&eacute; sur un &eacute;l&eacute;ment.</td>
+			<td>Parmi les types d&eacute;finis dans le param&eacute;trage du plugin.</td>
+		</tr>
+		<tr>
+			<td>objet_parent</td>
+			<td>Type de l'objet parent, pass&eacute; au squelette pour faire r&eacute;f&eacute;rence, par exemple &agrave; l'article auquel appartient un document.</td>
+			<td>Nom d'un objet SPIP.</td>
+		</tr>
+		<tr>
+			<td>id_objet_parent</td>
+			<td>Identifiant de l'objet parent, pass&eacute; au squelette pour faire r&eacute;f&eacute;rence, par exemple &agrave; l'article auquel appartient un document.</td>
+			<td>Identifiant numérique.</td>
+		</tr>
+	</table>
+	
+</body>
+</html>

@@ -23,13 +23,14 @@ function mapimpl_gma3_public_script_init_dist()
 	// Récupérer la configuration de la version
 	$key = gmap_lire_config('gmap_api_gma3', 'key', "");
 	$version = gmap_lire_config('gmap_api_gma3', 'version', "3");
+	$isEarth = (gmap_lire_config('gmap_gma3_interface', 'type_carte_earth', "non") === 'oui') ? true : false;
 	
 	// Inclure le script
 	$google = 'http://maps.google.com/maps/api/js?sensor=false&v='.$version.'&language='.$GLOBALS['spip_lang'];
 	$out .= '<script type="text/javascript" src="'.$google.'"></script>'."\n";
 	
-	// Google load & Google Earth, seulement si on a une clef
-	if (strlen($key) > 0)
+	// Google load & Google Earth, seulement si on a une clef et que earth est demandé
+	if ($isEarth && (strlen($key) > 0))
 	{
 		// Google API loader
 		$gload = 'https://www.google.com/jsapi?key='.$key;

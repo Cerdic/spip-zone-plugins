@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Modification des comportements par d&eacute;faut</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<p>Le plugin repose beaucoup sur la r&eacute;cup&eacute;ration de fichiers dont le nom est construit dynamiquement, un peu comme SPIP le fait pour les squelettes. On peut donc surcharger le comportement par d&eacute;faut du plugin en ajoutant des fichiers dans le dossier <span class="code">squelettes</span> de SPIP (ou dans un plugin). Ces fichiers peuvent &ecirc;tre sp&eacute;cifiques &agrave; un type d&rsquo;objet g&eacute;olocalis&eacute;, &agrave; une branche, voire &agrave; un type de pointeur (pour les icones et les info-bulles).</p>
+	
+	<h2>D&eacute;finition des points</h2>
+	<p>Lorsque les points sont obtenus par une requ&ecirc;te (param&eacute;tre <span class="code">markers=query</span> de la balise <a href="balise-GEOMAP.html">#GEOMAP</a>) et que cette requ&ecirc;te n&rsquo;est pas d&eacute;sign&eacute;e explicitement (c'est-&agrave;-dire qu'il n&rsquo;y pas de param&egrave;tre <span class="code">query=url</span>), le plugin cherche &agrave; t&eacute;l&eacute;charger un fichier&nbsp;:<br />
+		<span class="code">gmap-query-(&lt;<em>nom d&rsquo;objet</em>&gt;|default)[(-|=)&lt;<em>identifiant de rubrique</em>&gt;]</span>.</p>
+	<p>&nbsp;</p>
+	<p>Par exemple, pour trouver les points associ&eacute;s &agrave; un article qui se trouve dans la sous-rubrique 23, secteur 2, le plugin va chercher les fichiers dans l&rsquo;ordre suivant&nbsp;:</p>
+	<ol>
+		<li><span class="code">gmap-query-<em>article=23</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles et &agrave; la rubrique.</li>
+		<li><span class="code">gmap-query-<em>article-23</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles et &agrave; la branche.</li>
+		<li><span class="code">gmap-query-<em>article-2</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles et &agrave; aux branches des anc&ecirc;tres.</li>
+		<li><span class="code">gmap-query-<em>article</em>.html</span>&nbsp;: fichier sp&eacute;cifique aux articles, pour tout le site.</li>
+		<li><span class="code">gmap-query-<em>default=23</em>.html</span>&nbsp;: fichier sp&eacute;cifique &agrave; la rubrique, pour tous les objets.</li>
+		<li><span class="code">gmap-query-<em>default-23</em>.html</span>&nbsp;: fichier sp&eacute;cifique &agrave; la branche, pour tous les objets.</li>
+		<li><span class="code">gmap-query-<em>default-2</em>.html</span>&nbsp;: fichier sp&eacute;cifique &agrave; aux branches des anc&ecirc;tres, pour tous les objets.</li>
+		<li><span class="code">gmap-query-<em>default</em>.html</span>&nbsp;: fichier générique inclu dans le plugin et valable pour tous les objets de tout le site.</li>
+	</ol>
+	<p>&nbsp;</p>
+	<p>Ces fichiers sont recherch&eacute;s dans le path de SPIP, c&rsquo;est-&agrave;-dire le dossier squelettes et les racines des plugins. Le dernier fichier est forc&eacute;ment trouv&eacute; puisqu&rsquo;il est inclu dans GMap.</p>
+	<p>&nbsp;</p>
+	<p>Ces fichiers sont des squelettes qui renvoient un fichier XML, ils peuvent donc contenir des boucles. Vous pouvez vous baser sur le fichier <span class="code">gmap-query-default.html</span> pour en cr&eacute;er de nouveaux.</p>
+	
+	<h2>Apparence des points sur les cartes du site</h2>
+	<p>Les images utilis&eacute;es pour les points sont embarqu&eacute;es dans le plugin dans le dossier <span class="code">images/</span>. Elles sont nomm&eacute;es selon le sch&eacute;ma suivant&nbsp;:<br />
+		<span class="code">gmap-marker[-&lt;<em>nom d&rsquo;objet</em>&gt;][-&lt;<em>type de point</em>&gt;][-full][-high].png</span>.</p>
+	<p>Au plus simple, on peut changer l&rsquo;apparence des points en red&eacute;finissant ces fichiers dans le dossier </span class="code">squelettes/images/</span>, mais il faut alors que les images aient la m&ecirc;me taille (32x32) et le m&ecirc;me point d&rsquo;ancrage.</p>
+	<p>&nbsp;</p>
+	<p>En amont, les icones (selon le terme utilis&eacute; dans Google Maps), sont d&eacute;finies dans des fichiers XML recherch&eacute;s dans le path de SPIP selon le sch&eacute;ma suivant&nbsp;:<br/>
+		<span class="code">gmap-marker-(&lt;<em>nom d&rsquo;objet</em>&gt;|default)[-&lt;<em>type de point</em>&gt;][(-|=)&lt;<em>identifiant de rubrique</em>&gt;].gmd</span>.</p>
+	<p>Ces fichiers XML contiennent toute l&rsquo;information n&eacute;cessaire&nbsp;: taille, point d&rsquo;ancrage, point de d&eacute;part de l&rsquo;info-bulle, image normale, image s&eacute;lectionn&eacute;e, ombre et image compl&egrave;te (image+ombre, utilis&eacute;e pour Google Earth).</p>
+	<p>C&rsquo;est en red&eacute;finissant ses fichiers dans le dossier <span class="code">squelettes/</span> que l&rsquo;on peut le mieux red&eacute;finir l&rsquo;apparence d&rsquo;un point.</p>
+	
+	<h2>Apparence des points dans les fichiers KML</h2>
+	<p>Il y a moins de possibilit&eacute;s de param&eacute;trage en ce qui concerne l'interpr&eacute;tation des fichiers KML, par exemple par Google Earth.</p>
+	<p>En effet, la grammaire KML d&eacute;finit les icones soit dans des fichiers de styles isol&eacute;s, soit pour chaque <i>placemark</i> directement dans le KML. Dans l'un comme l'autre cas, le report de toutes les possibilit&eacute;s ci-dessus aurait conduit soit &agrave; une profusion de requ&ecirc;tes sur le serveur, soit &agrave; une profusion de styles &agrave; g&eacute;rer c&ocirc;t&eacute; client.</p>
+	<p>Les styles KML sont donc simplifi&eacute;s&amp;nbsp;: on peut seulement d&eacute;finir une icone par type d'objet, ou, en surchargeant le fichier de requ&ecirc;te <span class="code">gmap-query-default.html</span>, d&eacute;finir des icone sp&eacute;cifiques.</p>
+	<p>&nbsp;</p>
+	<p>Les styles sont d&eacute;finis dans le fichier <span class="code">gmap-styles-default.html</span> situ&eacute; &agrave; la racine du plugin. On peut le surcharger dans le dossier <span class="code">squelettes/</span>.</p>
+	<p>Ce fichier d&eacute;fini les styles <i>GMapDefault</i>, <i>GMapRubrique</i>, <i>GMapArticle</i> et <i>GMapDocument</i> utilis&eacute;s par <span class="code">gmap-styles-default.html</span>.</p>
+	<p>&nbsp;</p>
+	<p>La red&eacute;finition du fichier <span class="code">gmap-styles-default.html</span>, qui produit le fichier KML, offre &eacute;videmment plus de posibilit&eacute;s de personnalisation.</p>
+	<p>Comme on peut d&eacute;finir un autre fichier de style, on peut ajouter autant de styles que n&eacute;cessaire, en &eacute;tant seulement limit&eacute; par la logique des boucles.</p>
+		
+	<h2>Contenu des bulles d’information</h2>
+	<p>Selon le m&ecirc;me principe, le contenu des bulles d&rsquo;information est d&eacute;fini dans des fichiers squelettes nomm&eacute;s&nbsp;:<br />
+		<span class="code">gmap-info-(&lt;<em>nom d&rsquo;objet</em>&gt;|default)[-&lt;<em>type de point</em>&gt;][(-|=)&lt;<em>identifiant de rubrique</em>&gt;].html</span>.</p>
+	<p>Ce sont des fichiers squelettes dans lesquels on peut utiliser des boucles SPIP.</p>
+	<p>&nbsp;</p>
+	<p>Le stylage des info-bulles est contenu dans un fichier <span class="code">style/gmap-balloon.css</span>, il permet de red&eacute;finir le look des bulles sans toucher &agrave; leur contenu.</p>
+	<p><b>Attention</b>&nbsp;: en red&eacute;finissant les fichiers <span class="code">gmap-info-*.html</span>, on pourrait penser s&rsquo;affranchir de <span class="code">gmap-balloon.css</span>, mais ce n&rsquo;est vrai que pour les fichiers KML lus dans Google Earth. En effet, en interne, seul le contenu de la balise <span class="code">&lt;body&gt;&lt;/body&gt;</span> est conserv&eacute; et le style des info-bulles se fait en int&eacute;grant <span class="code">gmap-balloon.css</span> dans la page HTML qui contient la carte.</p>
+	<p>&nbsp;</p>
+	<p>Lorsque la fonction de regroupement des info-bulles est activ&eacute;e, l&rsquo;apparence de la barre de navigation est fig&eacute;e, on ne peut la modifier qu&rsquo;en red&eacute;finissant le fichier <span class="code">style/gmap-balloon.css</span>.</p>
+
+	
+</body>
+</html>

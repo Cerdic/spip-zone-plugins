@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Mod&egrave;le &lt;marker&gt;</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<h2>R&ocirc;le</h2>
+	<p>Ce mod&egrave;le est l'&eacute;quivalent de la balise <a href="balise-GEOMARKER.html">#GEOMARKER</a>&nbsp;: il permet d'ajouter des points sur une carte cr&eacute;&eacute;e par le mod&egrave;le <a href="modele-map.html">&lt;map&gt;</a> ou la balise <a href="balise-GEOMAP.html">#GEOMAP</a>.</p>
+	
+	<h2>Param&egrave;tres</h2>
+	<p>Le mod&egrave;le accepte les m&ecirc;mes param&egrave;tres que la balise&nbsp;:</p>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th><th>D&eacute;faut</th></tr>
+		<tr>
+			<td>carte</td>
+			<td>Identifiant unique de la carte.</td>
+			<td>Identifiant num&eacute;rique correspondant au param&egrave;tre <i>map</i> d'une balise <i>GEOMAP</i>, ou au param&egrave;tre <i>carte</i> d'un mod&egrave;le <i>&lt;map&gt;</i>, ins&eacute;r&eacute;e dans le m&ecirc;me document.</td>
+			<td>absent, donc la derni&egrave;re carte ajout&eacute;e est utilis&eacute;e</td>
+		</tr>
+		<tr>
+			<td>id_rubrique, id_article, id_breve, id_document, id_auteur, id_mot ou objet+id_objet</td>
+			<td>Objet dont la localisation est utilis&eacute;e</td>
+			<td><span class="code">id_article=39</span> ou <span class="code">objet=article, id_objet=39</span></td>
+			<td>absent</td>
+		</tr>
+		<tr>
+			<td>id_article/id_rubrique...</td>
+			<td>Objet &agrave; partir duquel est affich&eacute;e la carte. S'il n'est pas g&eacute;olocalis&eacute;, la carte n'est pas affich&eacute;e, s'il l'est, la carte est centr&eacute;e dessus, et il sert de base &agrave; la recherche des marqueurs</td>
+			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
+			<td>absent</td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td>Type du marqueur recherch&eacute; sur un &eacute;l&eacute;ment.</td>
+			<td>Parmi les types d&eacute;finis dans le param&eacute;trage du plugin.</td>
+			<td>Défaut</td>
+		</tr>
+		<tr>
+			<td>latitude</td>
+			<td>Latitude du point</td>
+			<td>-38.5911137761474</td>
+			<td>absent</td>
+		</tr>
+		<tr>
+			<td>longitude</td>
+			<td>Longitude du point</td>
+			<td>143.036499023438</td>
+			<td>absent</td>
+		</tr>
+		<tr>
+			<td>titre</td>
+			<td>Titre du point, affich&eacute; sur le survol du marqueur.</td>
+			<td>texte</td>
+			<td>absent</td>
+		</tr>
+		<tr>
+			<td>texte</td>
+			<td>Texte du point, affich&eacute; dans l'info-bulle.</td>
+			<td>texte / html</td>
+			<td>absent</td>
+		</tr>
+		<tr>
+			<td>icon</td>
+			<td>Nom de l'icone utilis&eacute;e pour le marqueur.</td>
+			<td>Nom d'un fichier XML du type gmd. Le plugin d&eacute;fini par exemple un fichier <span class="code">gmap-marker-default.gmd</span>, pour le d&eacute;signer, le param&egrave;tre <i>icon</i> doit contenir <i>gmap-marker-default</i>. Ces fichiers sont recherch&eacute;s dans le path de SPIP, ils peuvent donc &ecirc;tre positionn&eacute;s dans le dossier <i>squelettes</i>.</td>
+			<td>absent</td>
+		</tr>
+	</table>
+	<p>&nbsp;</p>
+	<p>Tous les identifiants doivent &ecirc;tre accompagn&eacute;s d&rsquo;une valeur num&eacute;rique car le mod&egrave;le n&rsquo;acc&egrave;de pas au contexte.</p>
+
+	<h2>Exemples</h2>
+	<p>Le code suivant ajoute une carte positionn&eacute;e selon les param&egrave;tre et ajoute un point positionn&eacute; par des param&egrave;tres et un point positionn&eacute; selon la g&eacute;olocalisation de la rubrique 1&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">&lt;map|latitude=10|longitude=45|zoom=3&gt;
+&lt;marker|latitude=10|longitude=45|titre=un marqueur|texte=turlututu chapeau pointu&gt;
+&lt;marker|id_rubrique=1&gt;</span></pre>
+	<p>&nbsp;</p>
+	<p>On peut donner un num&eacute;ro &agrave; la carte par le param&egrave;tre carte, ceci permet de placer les marqueurs avant ou apr&egrave;s la carte elle-m&ecirc;me :</p>
+	<pre class="code"><span class="spip-syntax">&lt;marker|carte=10|id_article=1&gt;
+&lt;map|carte=10&gt;
+&lt;marker|carte=10|latitude=10|longitude=45|titre=un marqueur|texte=turlututu chapeau pointu&gt;</span></pre>
+
+</body>
+</html>

@@ -106,8 +106,12 @@ jQuery(document).ready(function()
 	</div></div>
 </fieldset>';
 	
-	return gmap_formulaire_ajax('config_bloc_gmap', 'rubgeo', 'configurer_gmap', $corps,
+	return gmap_formulaire_submit('configuration_rubgeo', $corps,
 		find_in_path('images/logo-config-rubgeo.png'),
 		_T('gmap:configuration_rubriques'));
+// Plus en ajax à cause du panneau gauche qui ne serait plus raffraichi...
+//	return gmap_formulaire_ajax('config_bloc_gmap', 'rubgeo', 'configurer_gmap', $corps,
+//		find_in_path('images/logo-config-rubgeo.png'),
+//		_T('gmap:configuration_rubriques'));
 }
 ?>

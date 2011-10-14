@@ -1,9 +1,9 @@
 <plugin>
 	<nom>G&eacute;olocalisation et cartographie dans SPIP</nom>
 	<icon>images/logo-gmap-32.png</icon>
-	<version>0.1.1</version>
-	<version_base>1.0</version_base>
-	<etat>dev</etat>
+	<version>0.1.2</version>
+	<version_base>1.0.0</version_base>
+	<etat>test</etat>
 	<auteur>F. ALBERT</auteur>
 	<description>
 	<multi>

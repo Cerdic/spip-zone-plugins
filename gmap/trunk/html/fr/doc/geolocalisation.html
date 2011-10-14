@@ -1,20 +1,19 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>Param&eacute;trage du plugin</title>
+	<title>G&eacute;olocalisation des objets</title>
 	<link href="doc.css" type="text/css" rel="stylesheet" />
 </head>
 
-<body>
-	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> G&eacute;olocalisation des objets</p>
+<body class="help-page">
 	
-	<h1>Acc&egrave;s &agrave; la g&eacute;olocalisation</h1>
+	<h2>Acc&egrave;s &agrave; la g&eacute;olocalisation</h2>
 	<p>Le plugin ins&egrave;re dans les pages d&rsquo;&eacute;dition des objets SPIP (rubrique, article, document, br&egrave;ve, mot-clef et auteur) une interface qui permet de g&eacute;olocaliser l&rsquo;objet. Pour les documents, il faut avoir install&eacute; le plugin M&eacute;diath&egrave;que pour avoir acc&egrave;s &agrave; la page de modification d&rsquo;un document.</p>
 	<p>&nbsp;</p>
 	<p>L&rsquo;interface comporte principalement une carte, une zone d&rsquo;&eacute;dition des marqueurs et un bouton &quot;Enregistrer&quot; qui permet d&rsquo;enregistrer les modifications en base de donn&eacute;es.</p>
  	<p class="illustration"><img src="images/geolocalisation-1.jpg" alt="Interface de g&eacute;olocalisation" /></p>
 	
-	<h1>&Eacute;dition des marqueurs</h1>
+	<h2>&Eacute;dition des marqueurs</h2>
 	<p>Il est possible d&rsquo;associer plusieurs points &agrave; chaque objet SPIP (la base de donn&eacute;es supporte &eacute;galement l&rsquo;inverse mais je n&rsquo;ai pas encore impl&eacute;ment&eacute; cette fonctionnalit&eacute;).</p>
 	<p>L&rsquo;interface est constitu&eacute;e d&rsquo;un tableau des marqueurs d&eacute;fini, dont un seul, surlign&eacute; en rouge est actif sur la carte&nbsp;:</p>
  	<p class="illustration"><img src="images/geolocalisation-4.jpg" alt="&Eacute;dition des marqueurs" /></p>
@@ -25,19 +24,19 @@
 	<p>&nbsp;</p>
 	<p>Les types de marqueurs peuvent &ecirc;tre &eacute;dit&eacute;s depuis l&rsquo;interface de param&eacute;trage du plugin.</p> 
 
-	<h1>R&eacute;cup&eacute;ration des coordonn&eacute;es des voisins</h1>
+	<h2>R&eacute;cup&eacute;ration des coordonn&eacute;es des voisins</h2>
 	<p>Pour les articles et les documents, il m&rsquo;a sembl&eacute; int&eacute;ressant de pouvoir r&eacute;cup&eacute;rer les coordonn&eacute;es des articles ou documents proches dans le temps pour copier leur position.</p>
 	<p>&nbsp;</p>
 	<p>Cette fonctionnalit&eacute; est accessible en d&eacute;ployant le groupe &quot;Copie des coordonn&eacute;es des voisins&quot; de l&rsquo;interface. Cela ouvre une petite section dans laquelle apparaissent les articles et/ou documents les plus proches dans le temps&nbsp;:</p>
  	<p class="illustration"><img src="images/geolocalisation-2.jpg" alt="R&eacute;cup&eacute;ration des coordonn&eacute;es des voisins" /></p>
 	<p>En cliquant sur la coche verte &agrave; droite de chaque ligne on copie les coordonn&eacute;es sur le marqueur actif (il faut qu&rsquo;il y en ait un&hellip;).</p>
  
-	<h1>Recherche par adresse</h1>
+	<h2>Recherche par adresse</h2>
 	<p>Le groupe &quot;Recherche par adresse&quot; permet de rechercher une position selon son adresse (avec le GeoCoder de Google Maps)&nbsp;:</p>
  	<p class="illustration"><img src="images/geolocalisation-3.jpg" alt="Recherche par adresse" /></p>
 	<p>Apr&egrave;s avoir cliqu&eacute; sur le bouton &quot;Rechercher&quot;, une liste des r&eacute;sultats possibles est affich&eacute;e et il n&rsquo;y a plus qu&rsquo;&agrave; cliquer sur la coche verte de la ligne qui semble la plus pertinente.</p>
  
-	<h1>Cas des documents</h1>
+	<h2>Cas des documents</h2>
 	<p>Par d&eacute;faut, seule la page de modification accessible par la m&eacute;diath&egrave;que permet de g&eacute;olocaliser le document, la popup qui s&rsquo;ouvre depuis l&rsquo;&eacute;dition d&rsquo;un article n&rsquo;y donne pas acc&egrave;s (c&rsquo;est un bug que je n&rsquo;ai pas pu corriger : l&rsquo;appel &agrave; l&rsquo;interface se faisant en ajax, je n&rsquo;arrive pas &agrave; initialiser les cartes correctement&hellip; Si quelqu&rsquo;un a une id&eacute;e&hellip;).</p>
 	<p>Pour palier ce petit d&eacute;sagr&eacute;ment, j&rsquo;ai ajout&eacute; un param&eacute;trage dans le plugin pour d&eacute;sactiver automatiquement l&rsquo;ouverture du popup : le bouton &quot;modifier&quot; renvoie alors sur la page d&rsquo;&eacute;dition d&rsquo;un document.</p>
 	<p>Pour activer ce comportement, il faut cocher la case &quot;D&eacute;sactiver l&rsquo;&eacute;dition des documents par bo&icirc;te modale depuis un article&quot; dans la partie &quot;Param&eacute;trage de la saisie dans l&rsquo;espace priv&eacute;&quot; de l&rsquo;onglet &quot;Syst&egrave;me&quot; du param&eacute;trage du plugin.</p>

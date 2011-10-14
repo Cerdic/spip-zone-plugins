@@ -5,10 +5,9 @@
 	<link href="doc.css" type="text/css" rel="stylesheet" />
 </head>
 
-<body>
-	<p class="ariane"><a href="index.html">Sommaire</a>&nbsp;> Boucle GEOTEST</p>
+<body class="help-page">
 	
-	<h1>R&ocirc;le</h1>
+	<h2>R&ocirc;le</h2>
 	<p>La boucle GEOPOINTS sert &agrave; parcourir les points g&eacute;ographiques d&eacute;finis sur un &eacute;l&eacute;ment SPIP. Elle est directement reli&eacute;e &agrave; la table &lt;i&gt;gmap_points&lt;/i&gt; qui contient les points d&eacute;finis dans l'interface de g&eacute;olocalisation.</p>
 	<p>Cette boucle peut-&ecirc;tre utilis&eacute;e pour ajouter les marqueurs correspondants aux points sur les cartes de l'interface publique. Elle s'utilise donc dans deux cas&nbsp;:</p>
 	<ul>
@@ -16,7 +15,7 @@
 		<li>Un cas moins courant serait l'ajout manuel de marqueurs gr&acirc;ce &agrave; la <a href="balise-GEOMARKER">balise #GEOMARKER</a>. L'utilisation de la boucle est la m&ecirc;me.</li>
 	</ul>
 
-	<h1>Utilisation</h1>
+	<h2>Utilisation</h2>
 	<p>La syntaxe est la suivante&nbsp;:</p>
 	<pre class="code"><span class="spip-boucle">&lt;B_points&gt;</span>
 <span class="spip-boucle">&lt;BOUCLE_points(GEOPOINTS){<i>identificateur d'objet</i>}[{visible}][{meilleur}]&gt;</span><span class="spip-syntax">
@@ -27,7 +26,7 @@
 	<p>Le crit&egrave;re <span class="code">{visible}</span> indique que seuls les points dont le type est marqu&eacute; visible seront renvoy&eacute;s.</p>
 	<p>Le crit&egrave;re <span class="code">{meilleur}</span> indique que l'on souhaite ne récupérer qu'un seul point. La requête recherche alors le point défini sur l'objet ayant le meilleur niveau de priorité, c'est-à-dire le plus faible champ <i>priorite</i> de la table <i>gmap_types</i>.</p>
 
-	<h1>Balises</h1>
+	<h2>Balises</h2>
 	<p>Dans le contexte de la boucle GEOPOINTS, on peut utiliser les balises suivantes&nbsp;:</p>
 	<ul>
 		<li><b>#ID_POINT</b>&nbsp;: identifiant du point (a priori inutile).</li>
@@ -48,7 +47,7 @@
 		<li><b>#GEOPOPUP</b>&nbsp;: ajout du contenu de l'info-bulle associ&eacute;e &agrave; un objet.</li>
 	</ul>
 	
-	<h1>Exemple</h1>
+	<h2>Exemple</h2>
 	<pre class="code"><span class="spip-boucle">&lt;BOUCLE_art_documents(DOCUMENTS){id_article}&gt;</span>
 <span class="spip-boucle">&lt;BOUCLE_art_documents_points(GEOPOINTS){id_document}{visible}{meilleur}&gt;</span>
 &lt;Placemark&gt;

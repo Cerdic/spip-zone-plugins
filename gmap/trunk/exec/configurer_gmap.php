@@ -75,6 +75,81 @@ function gmap_formulaire_configuration_gis_action()
 	gmap_ecrire_config('gmap_api', 'api', _request('api_code'));
 }
 
+// Boîtes d'information gauche
+function boite_info_help()
+{
+	$flux = '';
+	
+	// Début de la boîte d'information
+	$flux .= debut_boite_info(true);
+	
+	// Info globale
+	$flux .= propre(_T('gmap:info_configuration_gmap'));
+	
+	// Lien sur l'aide
+	$url = generer_url_ecrire('configurer_gmap_html').'&page=doc/parametrage#paramSystem';
+	$flux .= propre('<a href="'.$url.'">'._T('gmap:info_configuration_help').'</a>');
+	
+	// Fin de la boîte
+	$flux .= fin_boite_info(true);
+	
+	return $flux;
+}
+function boite_info_important()
+{
+	$flux = '';
+
+	if (gmap_est_actif())
+	{
+		// Début de la boîte d'information
+		$flux .= debut_boite_info(true);
+		
+		// Affichage de l'API
+		$api = gmap_lire_config('gmap_api', 'api', 'gma3');
+		$apis = gmap_apis_connues();
+		$api_desc = $apis[$api]['name'];
+		$flux .= propre(_T('gmap:info_configuration_gmap_api').'<br />'.$api_desc);
+		
+		// Zones du site
+		$bIsObject =
+			(gmap_lire_config('gmap_objets_geo', 'type_rubriques', "oui") === 'oui') ||
+			(gmap_lire_config('gmap_objets_geo', 'type_articles', "oui") === 'oui') ||
+			(gmap_lire_config('gmap_objets_geo', 'type_documents', "oui") === 'oui') ||
+			(gmap_lire_config('gmap_objets_geo', 'type_breves', "oui") === 'oui') ||
+			(gmap_lire_config('gmap_objets_geo', 'type_mots', "oui") === 'oui') ||
+			(gmap_lire_config('gmap_objets_geo', 'type_auteurs', "oui") === 'oui');
+		if (!$bIsObject)
+			$flux .= propre(_T('gmap:info_configuration_gmap_no_object'));
+		$tout_le_site = (gmap_lire_config('gmap_objets_geo', 'tout_le_site', "oui") === 'oui') ? true : false;
+		if ($tout_le_site)
+			$flux .= propre(_T('gmap:info_configuration_gmap_site'));
+		else
+		{
+			$simple_rubs = gmap_lire_config('gmap_objets_geo', 'liste', "");
+			$flux .= propre(_T('gmap:info_configuration_gmap_rubriques'));
+			$flux .= '<ul>'."\n";
+			foreach ($simple_rubs as $rub)
+			{
+				$nom = sql_getfetsel('titre', 'spip_rubriques', 'id_rubrique=' . intval($rub));
+				$flux .= '<li>'.$nom.'</li>'."\n";
+			}
+			$flux .= '</ul>'."\n";
+		}
+		
+		// Fin de la boîte
+		$flux .= fin_boite_info(true);
+	}
+	else
+	{
+		$flux .= debut_boite_alerte();
+		$flux .= propre(_T('gmap:alerte_gmap_inactif'));
+		$flux .= fin_boite_alerte();
+	}
+	
+	return $flux;
+}
+
+
 // Page de configuration
 function exec_configurer_gmap_dist($class = null)
 {
@@ -95,11 +170,16 @@ function exec_configurer_gmap_dist($class = null)
 		$faire_api = charger_fonction('faire_api', 'configuration');
 		$faire_api();
 	}
+	else if (_request('config') == 'configuration_rubgeo')
+	{
+		$faire_rubgeo = charger_fonction('faire_rubgeo', 'configuration');
+		$faire_rubgeo();
+	}
 	
 	// Pipeline pour customiser
 	pipeline('exec_init',array('args'=>array('exec'=>'configurer_gmap'),'data'=>''));
 	
-	// affichages de SPIP
+	// Affichages de SPIP
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('gmap:configuration_titre'), 'configurer_gmap', 'configurer_gmap');
 	echo "<br /><br /><br />\n";
@@ -107,6 +187,12 @@ function exec_configurer_gmap_dist($class = null)
 	echo gros_titre(_T('gmap:configuration_titre'), $logo, false);
 	echo barre_onglets("configurer_gmap", "cg_main");
 	echo debut_gauche('', true);
+	
+	// Informations sur la colonne gauche
+	echo boite_info_help();
+	echo boite_info_important();
+	
+	// Suite des affichages SPIP
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configurer_gmap'),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'configurer_gmap'),'data'=>''));
@@ -119,15 +205,23 @@ function exec_configurer_gmap_dist($class = null)
 	// Selon l'API, autre paramétrages
 	// Cette partie n'est pas en ajax, parce que les autres paramètres en dépendent
 	$api_conf = charger_fonction('api', 'configuration');
-	echo $api_conf();
+	if ($api_conf)
+		echo $api_conf();
 
 	// Configuration des rubriques géolocalisables
 	$rubgeo = charger_fonction('rubgeo', 'configuration');
-	echo $rubgeo();
+	if ($rubgeo)
+		echo $rubgeo();
 
+	// configuration des types de marqueurs et de leurs icônes
+	$markers = charger_fonction('markers', 'configuration');
+	if ($markers)
+		echo $markers();
+	
 	// Configuration des rubriques géolocalisables
 	$eparams = charger_fonction('editparams', 'configuration');
-	echo $eparams();
+	if ($eparams)
+		echo $eparams();
 
 	// pied de page SPIP
 	echo fin_gauche() . fin_page();

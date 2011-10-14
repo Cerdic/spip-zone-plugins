@@ -1,0 +1,84 @@
+<html>
+<head>
+	<title>Ajout d&rsquo;une impl&eacute;mentation de carte</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+<body class="help-page">
+
+	<h2>Couche d'abstraction propri&eacute;taire</h2>
+	<p>Le plugin a &eacute;t&eacute; con&ccedil;u pour permettre l'ajout d'impl&eacute;mentation de carte. Le m&eacute;canisme a &eacute;t&eacute; test&eacute; lors de l'ajout d'une impl&eacute;mentation en Google Maps V3 alors que le plugin a initialement &eacute;t&eacute; d&eacute;velopp&eacute; en Google Maps V2.</p>
+	<p>&nbsp;</p>
+	<p>Le m&eacute;canisme est assez simple&nbsp;: tous les fichiers sp&eacute;cifiques &agrave; une impl&eacute;mentation sont regroup&eacute;s dans un dossier sp&eacute;cial et un <i>pipeline</i> permet de d&eacute;clarer une nouvelle impl&eacute;mentation.</p>
+	
+	<h3>Pourquoi ne pas utiliser une librairie existante&nbsp;?</h3>
+	<p>Tout d'abord par ce que je n'en connaissais aucune quand j'ai commenc&eacute; ce plugin&nbsp;! Ensuite parce que ce n'est pas forc&eacute;ment une bonne id&eacute;e.</p>
+	<p>Par exemple, il y a la librairie <a href="http://mapstraction.com/">Mapstraction</a> (utilis&eacute;e par le plugin GIS2). Elle permet d'afficher des cartes Google Maps, Open Layers, Yahoo, Bing. Il est s&ucirc;r que l'ajout d'une impl&eacute;mentation Mapstraction &agrave; GMap lui donnerait plus de possibilit&eacute;s.</p>
+	<p>Cependant&nbsp;:</p>
+	<ul>
+		<li>La conception d'une couche d'abstraction prend toujours le plus petit d&eacute;nominateur commun des possibilit&eacute;s des impl&eacute;mentations sous-jacentes. En clair&nbsp;: la couche d'abstraction ne rajoute aucune fonctionnalit&eacute;. C'est aussi vrai pour une librairie du commerce que pour une couche propri&eacute;taire, mais dans une couche propri&eacute;taire on peut fouiller plus profond&eacute;ment les points utiles (par exemple en cherchant des plugin qui comblent les lacunes) et laisser tomber tout ce qui ne sert pas dans le but du d&eacute;veloppement.</li>
+		<li>Le d&eacute;veloppeur de la couche doit faire des arbitrages sp&eacute;cifiques &agrave; telle ou telle utilisation. En d&eacute;veloppant une couche propri&eacute;taire, on doit &eacute;galement faire des arbitrages, mais on les prend dans la direction la mieux adapt&eacute;e au but de d&eacute;veloppement.</li>
+		<li>On peut ajouter une impl&eacute;mentation g&eacute;n&eacute;rique comme Mapstraction sur une couche d'abstraction propri&eacute;taire, on peut plus difficilement modifier le code de la couche g&eacute;n&eacute;rique.</li>
+		<li>Apr&egrave;s tout, est-ce si important d'utiliser Yahoo Maps, Bing Maps ou Google Maps&nbsp;? Je laisse d&eacute;lib&eacute;rement de c&ocirc;t&eacute; Open Layers pour lequel il pourrait y avoir une position id&eacute;ologique.</li>
+	</ul>
+	
+	<h3>O&ugrave; se trouvent les fichiers d'impl&eacute;mentation&nbsp;?</h3>
+	<p>Les impl&eacute;mentations sont regroup&eacute;es dans le dossier <span class="code">mapimpl/</span> situ&eacute; &agrave; la racine du plugin.</p>
+	<p>De nouvelles impl&eacute;mentations peuvent &ecirc;tre ajout&eacute;es soit dans ce dossier, soit dans un dossier <span class="code">squelettes/mapimpl/</span>, soit encore dans le dossier <span class="code">mapimpl/</span> d'un plugin.</p>
+	<p>Les impl&eacute;mentations sont identifi&eacute;es par un code qui sert de nom de dossier pour les fichiers. GMap inclut une impl&eacute;mentation Google Maps V2 identifi&eacute;e par <i>gma2</i> et une impl&eacute;mentation Google Maps V3 identifi&eacute;e par <i>gma3</i>. On trouve donc des dossiers <span class="code">mapimpl/gma2</span> et <span class="code">mapimpl/gma3</span>.</p>
+	<p>Sous ces dossiers, les fichiers sont encore regroupés selon leur fonction&nbsp;:</p>
+	<ul>
+		<li><b>javascript</b>&nbsp;: le fichier principal de l'impl&eacute;mentation, en javascript.</li>
+		<li><b>prive</b>&nbsp;: les fichiers PHP utilis&eacute;s dans la partie priv&eacute;e.</li>
+		<li><b>public</b>&nbsp;: les fichiers PHP utilis&eacute;s dans la partie publique.</li>
+		<li><b>style</b>&nbsp;: les feuilles de styles spécifiques.</li>
+	</ul>
+	
+	<h3>D'autres impl&eacute;mentations&nbsp;?</h3>
+	<p>Le plus urgent est certainement de d&eacute;velopper une impl&eacute;mentation OpenLayers.</p>
+	<p>Ajouter une impl&eacute;mentation Mapstraction pourrait ouvrir les possibilit&eacute;s sur Yahoo et Bing &agrave; moindres frais.</p>
+	
+	<h2>Détails de l'ajout d'une implémentation</h2>
+	
+	<h3>Déclaration de l'implémentation</h3>
+	<p>Le plugin utilise un <i>pipeline</i> nomm&eacute; <b>gmap_implementations</b> pour r&eacute;cup&eacute;rer la liste des impl&eacute;mentations.</p>
+	<p>Le pipeline re&ccedil;oit en param&egrave;tre un tableau index&eacute; dont la clef est le code de l'impl&eacute;mentation.</p>
+	<p>La fonction qui traite le pipeline devrait faire &ecirc;tre de la forme suivante&nbsp;:</p>
+	<pre class="code">function myplug_gmap_implementations($apis)
+{
+  $apis['<em>code</em>'] = array( 'name' => "<em>nom de l'impl&eacute;mentation</em>", 'explic' => "<em>explications affich&eacute;es sur la page de param&eacute;trage</em>");
+  return $apis;
+}</pre>
+	<p>&nbsp;</p>
+	<p>Gr&acirc;ce &agrave; cette d&eacute;claration, GMap sait qu'une impl&eacute;mentation &quot;code&quot; existe, il va donc la proposer dans les pages de param&eacute;trage et utiliser les fichier du dossier <span class="code">mapimpl/<em>code</em>/</span>.</p>
+	
+	<h3>Le script d'implémentation</h3>
+	<p>Le script principal de l'impl&eacute;mentation est une classe <b>MapWrapper</b> (autant que javascript permet de faire des &quot;classes&quot;) qui impl&eacute;mente les m&eacute;thodes utilis&eacute;es par GMap.</p>
+	<p>Il y a certainement des progr&egrave;s &agrave; faire pour faciliter l'impl&eacute;mentation des fonctions. Actuellement, le plus simple est de partir d'un fichier existant et de recoder toutes les fonctions qui ne sont pas pr&eacute;fix&eacute;es par un &quot;_&quot;.</p>
+	
+	<h3>Les fonctions PHP pour la partie publique</h3>
+	<p>Le dossier <span class="code">public/</span> doit contenir&nbsp;:</p>
+	<ul>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_public_script_init_dist</span> dans un fichier <span class="code">script_init.php</span>&nbsp;: elle renvoie le code &agrave; ins&eacute;rer dans le header des pages de la partie publique <u>et de la partie priv&eacute;e</u>.</li>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_public_test_actif_dist</span> dans un fichier <span class="code">test_actif.php</span>&nbsp;: elle renvoie <span class="code">true</span> si l'impl&eacute;mentation est correctement param&eacute;tr&eacute;e, <span class="code">false</span> sinon.</li>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_public_capabilities_dist</span> dans un fichier <span class="code">capabilities.php</span>&nbsp;: qui teste si l'impl&eacute;mentation est capable de fournir un service dont le code est pass&eacute; en param&egrave;tre.</li>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_public_parametre_carte_dist</span> dans un fichier <span class="code">parametre_carte.php</span>&nbsp;: qui renvoie un bout de code javascript utilis&eacute; pour param&eacute;trer la carte (selon les param&eacute;trages par d&eacute;faut ou les param&egrave;tres de la balise #GEOMAP).</li>
+	</ul>
+	
+	<h3>Les pages de paramétrage (partie privée)</h3>
+	<p>Le dossier <span class="code">prive/</span> contient les fonctions PHP utilis&eacute;es pour initialiser, afficher et trait&eacute; les param&egrave;tres sp&eacute;cifiques &agrave; l'impl&eacute;mentation.</p>
+	<p>Actuellement, les param&egrave;tres sont regroup&eacute;s en trois blocs&nbsp;:</p>
+	<ul>
+		<li><b>api</b>&nbsp;: obligatoire, param&egrave;tres de l'API apparaissant sur la page syst&egrave;me (version, codes d'activation, etc.)</li>
+		<li><b>map_defaults</b>&nbsp;: obligatoire, param&egrave;tre par d&eacute;faut de la carte, y compris latitude et longitude par d&eacute;afut du site.</li>
+		<li><b>markers_behavior</b>&nbsp;: comportement des marqueurs, par exemple la taille des info-bulles, et la fonction de regroupement des info-bulles.</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>Pour chaque bloc de paramètres, il faut trois fonctions&nbsp;:</p>
+	<ul>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_prive_init_<em>nom-du-bloc</em>_dist</span> dans un fichier <span class="code">init_<em>nom-du-bloc</em>.php</span>, charg&eacute;e d'initialiser les param&egrave;tres &agrave; l'installation du plugin.</li>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_prive_show_<em>nom-du-bloc</em>_dist</span> dans un fichier <span class="code">show_<em>nom-du-bloc</em>.php</span>, charg&eacute;e d'afficher l'interface de modification des param&egrave;tres qui sera affich&eacute;e depuis les pages de param&eacute;trage de GMap.</li>
+		<li>Une fonction <span class="code">mapimpl_<em>code</em>_prive_faire_<em>nom-du-bloc</em>_dist</span> dans un fichier <span class="code">faire_<em>nom-du-bloc</em>.php</span>, charg&eacute;e de récupérer les données de formulaire et de sauvegarder le paramétrage.</li>
+	</ul>
+	
+</body>
+</html>

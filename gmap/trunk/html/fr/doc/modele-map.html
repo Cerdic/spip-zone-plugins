@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Mod&egrave;le &lt;map&gt;</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<h2>R&ocirc;le</h2>
+	<p>Ce mod&egrave;le est l'&eacute;quivalent de la balise <a href="balise-GEOMAP.html">#GEOMAP</a>&nbsp;: il permet d'ins&eacute;rer des cartes dans les textes de SPIP.</p>
+	
+	<h2>Param&egrave;tres</h2>
+	<p>Le mod&egrave;le accepte les m&ecirc;mes param&egrave;tres que la balise, &agrave; l'exclusion des param&egrave;tres sp&eacute;cifiques &agrave; l'impl&eacute;mentation. Pour l'apparence des cartes, il faut donc se reposer sur le param&eacute;trage global du site.</p>
+	<p>Les param&egrave;tres sont&nbsp;:</p>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th><th>Défaut</th></tr>
+		<tr>
+			<td>carte</td>
+			<td>Identifiant unique de la carte, si plusieurs cartes peuvent appara&icirc;tre dans la m&ecirc;me page finale.</td>
+			<td>Identifiant num&eacute;rique.</td>
+			<td>absent, la carte est nomm&eacute;e automatiquement</td>
+		</tr>
+		<tr>
+			<td>largeur</td>
+			<td>Largeur de la carte en pixels ou en pourcentage.</td>
+			<td>Largeur selon le format CSS&nbsp;: <span class="code">XXXpx</span> ou <span class="code">XXX%</span>.</td>
+			<td>100%</td>
+		</tr>
+		<tr>
+			<td>hauteur</td>
+			<td>Largeur de la carte en pixels.</td>
+			<td>Largeur selon le format CSS&nbsp;: <span class="code">XXXpx</span>.</td>
+			<td>400px</td>
+		</tr>
+		<tr>
+			<td>id_rubrique, id_article, id_breve, id_document, id_auteur, id_mot ou objet+id_objet</td>
+			<td>Objet &agrave; partir duquel est affich&eacute;e la carte. S'il n'est pas g&eacute;olocalis&eacute;, la carte n'est pas affich&eacute;e, s'il l'est, la carte est centr&eacute;e dessus, et il sert de base &agrave; la recherche des marqueurs</td>
+			<td><span class="code">id_article=39</span> ou <span class="code">objet=article, id_objet=39</span></td>
+			<td>absent, la carte est centr&eacute;e sur le param&eacute;trage par d&eacute;faut</td>
+		</tr>
+		<tr>
+			<td>latitude</td>
+			<td>Latitude du centre de la carte</td>
+			<td>-38.5911137761474</td>
+			<td>absent</td>
+		</tr>
+		<tr>
+			<td>longitude</td>
+			<td>Longitude du centre de la carte</td>
+			<td>143.036499023438</td>
+			<td>absent, donc le param&eacute;trage par d&eacute;faut est utilis&eacute;</td>
+		</tr>
+		<tr>
+			<td>zoom</td>
+			<td>Zoom initial de la carte</td>
+			<td>de 1 au maximum autoris&eacute; par l'impl&eacute;mentation</td>
+			<td>absent, donc le param&eacute;trage par d&eacute;faut est utilis&eacute;</td>
+		</tr>
+		<tr>
+			<td>markers</td>
+			<td>D&eacute;finition des marqueurs</td>
+			<td>
+				<ul>
+					<li><b>local</b>&nbsp;: seul(s) le(s) marqueur(s) de l'objet sont affich&eacute;s</li>
+					<li><b>childs</b>&nbsp;: les marqueurs de l'objet et de ses descendants de niveau 1 sont affich&eacute;s</li>
+					<li><b>recursive</b>&nbsp;: les marqueurs de l'objet et de tous ses descendants sont affich&eacute;s</li>
+					<li><b>query</b>&nbsp;: la liste des marqueurs provient d'une requ&ecirc;te ajax</li>
+				</ul>
+			</td>
+			<td>absent, donc aucun marqueur n'est ajout&eacute;</td>
+		</tr>
+		<tr>
+			<td>query</td>
+			<td>Nom du fichier ajax de requ&ecirc;te (si <i>markers=query</i>)</td>
+			<td>Nom du fichier ajax, sous la racine de SPIP</td>
+			<td>absent, donc requête par défaut si <span class="code">markers=query</span></td>
+		</tr>
+		<tr>
+			<td>type</td>
+			<td>Fond de carte</td>
+			<td>Parmi <i>plan</i>, <i>satellite</i>, <i>mixte</i>, <i>physic</i>, <i>earth</i></td>
+			<td>absent, donc le param&eacute;trage par d&eacute;faut est utilis&eacute;</td>
+		</tr>
+	</table>
+	<p>&nbsp;</p>
+	<p>Tous les identifiants doivent &ecirc;tre accompagn&eacute;s d&rsquo;une valeur num&eacute;rique car le mod&egrave;le n&rsquo;acc&egrave;de pas au contexte.</p>
+
+	<h2>Exemples</h2>
+	<p>Le code suivant affiche une carte positionn&eacute;e selon les param&egrave;tres de l&rsquo;article 1 et ajoute le point correspondant&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">&lt;map|id_article=1|markers=local&gt;</span></pre>
+	<p>&nbsp;</p>
+	<p>Le code suivant affiche une carte positionn&eacute;e selon les param&egrave;tres de l&rsquo;auteur 1 et ajoute le point correspondant&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">&lt;map|id_auteur=1|markers=local&gt;</span></pre>
+	<p>&nbsp;</p>
+	<p>Le code suivant affiche une carte positionn&eacute;e selon les param&egrave;tres de la rubrique 1 et ajoute les points correspondants &agrave; tous ses articles et documents g&eacute;olocalis&eacute;s&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">&lt;map|id_rubrique=1|markers=query&gt;</span></pre>
+
+</body>
+</html>

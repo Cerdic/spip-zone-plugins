@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Cr&eacute;ation de fichiers KML</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+
+	<h2>Utilisation interne du format KML</h2>
+	<p>Pour transmettre les points &agrave; afficher au navigateur, le plugin utilise le format KML. C'est un choix qui permet &eacute;galement de t&eacute;l&eacute;charger un fichier KML repr&eacute;sentant les points, par exemple pour l&rsquo;afficher dans Google Earth.</p>
+
+	<h2>Ajout d'un lien vers un fichier KML</h2>
+	<p>En int&eacute;grant le lien suivant dans un squelette, on permet au visiteur de t&eacute;l&eacute;charger le fichier KML et de l'ouvrir automatiquement dans Google Earth&nbsp;:</p>
+	<pre class="code"><span class="spip-syntax">[</span>&lt;a href=&quot;<span class="spip-syntax">(</span><span class="spip-balise">#URL_PAGE</span><span class="spip-syntax">{gmap-query-default}|parametre_url{'id_rubrique',</span><span class="spip-balise">#ID_RUBRIQUE</span><span class="spip-syntax">}|parametre_url{mime,application/vnd.google-earth.kml+xml})</span>&quot; title=&quot;<span class="spip-syntax">&lt;:bouton_telecharger:&gt;</span>&quot; type=&quot;application/vnd.google-earth.kml+xml&quot;&gt;<span class="spip-syntax">(&lt;:bouton_telecharger:&gt;)</span>&lt;/a&gt;<span class="spip-syntax">]</span></pre>
+	<p>Le lien qui apparaitra sera&nbsp;: <span class="code">http://mondomaine/spip.php?page=gmap-query-default&id_rubrique=1&mime=application%2Fvnd.google-earth.kml%2Bxml</span></p>
+
+	<h2>Restrictions</h2>
+	<p>En interne, GMap utilise des extensions propri&eacute;taire du format KML (correctement d&eacute;clar&eacute;e dans un sch&eacute;ma XML). En effet, la d&eacute;finition des icones utilis&eacute;e pour chaque point diff&egrave;re entre le format KML et l'API Google Maps&nbsp;.<p>
+	<p>De plus, l'utilisation des icones d&eacute;finies en fonction des objets li&eacute;s au point et du type de point aurait conduit &agrave; dupliquer le format des points.</p>
+	<p>&nbsp;</p>
+	<p>Pour ces raisons, le format des points, selon les moyens standards du format KML, est simplifi&eacute;e&nbsp;: il n'y a qu'une repr&eacute;sentation possible par type d'objet (article, rubrique, etc.).</p>
+	<p>Les images utilis&eacute;es sont d&eacute;finies dans le fichier <span class="code">gmap-styles-default.html</span>, que l'on peut &eacute;videmment surcharger en incluant un fichier dans le dossier squelettes.</p>
+	<p>Si l'on red&eacute;finit un fichier de requ&ecirc;te (en remplacement du fichier <span class="code">gmap-query-default.html</span>, on peut aussi changer le nom de ce fichier par de style et/ou les tags qui indiquent le style &agrave; utiliser.</p>
+	<p>&nbsp;</p>
+	<p>Par contre, le contenu des bulles d'information est exploit&eacute; de la m&ecirc;me fa&ccedil;on par GMap que par des clients ext&eacute;rieurs, il sera donc identique.</p>
+	
+</body>
+</html>

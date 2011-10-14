@@ -3,23 +3,22 @@
 	<title>Boucles et balises</title>
 	<link href="doc.css" type="text/css" rel="stylesheet" />
 </head>
-<body>
-	<p class="ariane"><a href="../doc/index.html">Sommaire</a>&nbsp;><a href="index.html">Documentation de d&eacute;veloppement</a>&nbsp;> Boucles et balises</p>
+<body class="help-page">
 
 	<p>J'ai &eacute;t&eacute; confront&eacute; &agrave; de nombreux probl&egrave;mes lors du d&eacute;veloppement des boucles et balises de ce plugin. &Ccedil;a marche, mais la fa&ccedil;on dont c'est cod&eacute; n'est peut-&ecirc;ter pas tr&egrave;s orthodoxe par rapport au fonctionnement interne de SPIP que j'ai d&eacute;couvert peu &agrave; peu.</p>
 	<p>Pour les balises, &ccedil;a va &agrave; peu pr&egrave;s, c'est pour les boucles que ma fa&ccedil;on de faire est surtout &quot;limite&quot;.</p>
 	
-	<h1>Boucles</h1>
+	<h2>Boucles</h2>
 	<p>Les boucles de SPIP doivent forc&eacute;ment s'apputer sur des tables SQL d&eacute;clar&eacute;es. Dans le cas de GMap, il y a deux boucles : GEOPOINTS et GEOTEST.</p>
 	
-	<h2>GEOPOINTS</h2>
+	<h3>GEOPOINTS</h3>
 	<p>la boucle GEOPOINTS correspond effectivement &agrave; une requ&ecirc;te SQL sur la table <i>gmap_points</i>.</p>
 	<p>Une correspondance est d&eacute;clar&eacute;e dans la fonction <span class="code">gmap_declarer_tables_interfaces</span> du fichier <span class="code">base/gmap_tables.php</span>&nbsp;:</p>
 	<pre class="code">$interface['table_des_tables']['gmap_points'] = 'gmap_points';
 $interface['table_des_tables']['geopoints'] = 'gmap_points';</pre>
 	<p>Au-del&agrave; du fonctionnement de base, j'ai seulement ajout&eacute; deux crit&egrave;res <span class="code">{visible}</span> et <span class="code">{meilleur}</span> pour, respectivement, ne r&eacute;cup&eacute;rer que les points dont le type est not&eacute; <i>visible</i> et ne r&eacute;cup&eacute;rer que le meilleur point par objet en se basant sur le champs <i>priorite</i> du type de points.</p>
 	
-	<h2>GEOTEST</h2>
+	<h3>GEOTEST</h3>
 	<p>Le cas de la boucle GEOTEST est plus probl&eacute;matique car elle n'est pas forc&eacute;ment li&eacute;e &agrave; une requ&ecirc;te SQL sur la table des points, en tout cas ce n'est pas l'option que j'ai choisi car je voulais avoir les main libre sur le traitement effectu&eacute;.</p>
 	<p>C'est &eacute;galement une boucle particuli&egrave;re car elle ne doit s'ex&eacute;cuter qu'un fois&nbsp;: soit le code est ex&eacute;cut&eacute; une fois soit il n'est pas ex&eacute;cut&eacute; du tout.</p>
 	<p>&nbsp;</p>
@@ -32,7 +31,7 @@ $interface['table_des_tables']['geopoints'] = 'gmap_points';</pre>
 	<p>&nbsp;</p>
 	<p>Je suis ouvert &agrave; toute critique &agrave; ce sujet du moment qu'elle sera constructive.</p>
 
-	<h1>Balises</h1>
+	<h2>Balises</h2>
 	<p>Il y a moins de probl&egrave;me avec les balises car j'ai pu les int&eacute;grer &agrave; un fonctionnement standard de SPIP.</p>
 	<p>J'ai utilis&eacute; la plupart du temps le principe des balises dynamique qui offre un moyen pratique d'acc&eacute;der aux param&egrave;tres de la balise et au contenu des boucles englobantes.</p>
 	<p>Pour les boucles plus simples, j'ai utilis&eacute; la fonction <span class="code">interprete_argument_balise</span> pour acc&eacute;der aux arguments.</p>

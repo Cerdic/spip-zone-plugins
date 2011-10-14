@@ -18,6 +18,27 @@ include_spip('configuration/gmap_config_onglets');
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+// Boîtes d'information gauche
+function boite_info_help()
+{
+	$flux = '';
+	
+	// Début de la boîte d'information
+	$flux .= debut_boite_info(true);
+	
+	// Info globale
+	$flux .= propre(_T('gmap:info_configuration_gmap_import'));
+	
+	// Lien sur l'aide
+	$url = generer_url_ecrire('configurer_gmap_html').'&page=doc/parametrage#paramImportExport';
+	$flux .= propre('<a href="'.$url.'">'._T('gmap:info_configuration_help').'</a>');
+	
+	// Fin de la boîte
+	$flux .= fin_boite_info(true);
+	
+	return $flux;
+}
+
 // Page de configuration
 function exec_configurer_gmap_import_dist($class = null)
 {
@@ -40,6 +61,11 @@ function exec_configurer_gmap_import_dist($class = null)
 	echo gros_titre(_T('gmap:configuration_titre'), $logo, false);
 	echo barre_onglets("configurer_gmap", "cg_import");
 	echo debut_gauche('', true);
+	
+	// Informations sur la colonne gauche
+	echo boite_info_help();
+	
+	// Suite des affichages SPIP
 	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'configurer_gmap_import'),'data'=>''));
 	echo creer_colonne_droite('', true);
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'configurer_gmap_import'),'data'=>''));

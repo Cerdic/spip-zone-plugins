@@ -1,0 +1,24 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>Agr&eacute;gation des info-bulles</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+
+	<h2>Comportement impl&eacute;ment&eacute;</h2>
+	<p>Il arrive souvent, si on g&eacute;olocalise de nombreux documents, que les points soient suffisament proches pour se superposer. Le fonctionnement par d&eacute;faut des API Google Maps fait alors que seul le dernier point ajout&eacute; est cliquable, les autres sont cach&eacute;s.</p>
+	<p>Pour contourner ce probl&egrave;me, le plugin propose une fonction de regroupement des bulles d&rsquo;information qui permet de naviguer entre les descriptions des diff&eacute;rents points affich&eacute;s. La barre de navigation permet &eacute;galement de zoomer la carte pour diff&eacute;rencier les points.</p>
+ 	<p class="illustration"><img src="images/GEOMAP-2.jpg" alt="Barre de navigation dans une info-bulle" /></p>
+	<p>&nbsp;</p>
+	<p>Cette fonction est d&eacute;sactiv&eacute;e par d&eacute;faut car c&rsquo;est un traitement effectu&eacute; c&ocirc;t&eacute; client qui pourrait &ecirc;tre co&ucirc;teux quand il y a trop de points. Elle s&rsquo;active depuis le param&eacute;trage de l&rsquo;interface.</p>
+ 	<p class="illustration"><img src="images/GEOMAP-2-1.jpg" alt="Activation du regroupement des info-bulles" /></p>
+	<p>&nbsp;</p>
+	<p>Cette fonction est sp&eacute;cifique &agrave; l&rsquo;impl&eacute;mentation, elle est impl&eacute;ment&eacute;e pour Google Maps V2 et V3 mais ne le sera pas obligatoirement sur de futures impl&eacute;mentations.</p>
+	
+	<h2>&Eacute;volutions futures</h2>
+	<p>Le plugin &quot;clusterer&quot; pour Google Maps (en V2 et V3) permet de regrouper visuellement les points. &Agrave; l'avenir la fonction de <i>clusterer</i> pourrait &ecirc;tre int&eacute;gr&eacute;e &agrave; GMap et combin&eacute;e avec le regroupement des info-bulles.</p>
+	
+</body>
+</html>

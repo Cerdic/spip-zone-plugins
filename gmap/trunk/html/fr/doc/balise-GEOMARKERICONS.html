@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>La balise #GEOMARKERICONS</title>
+	<link href="doc.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body class="help-page">
+	
+	<h2>R&ocirc;le</h2>
+	<p>Cette balise est utilis&eacute;e dans les squelettes de fichier KML (comme <span class="code">gmap-query-default.html</span>) pour d&eacute;clarer automatiquement les icones utilis&eacute;es pour repr&eacute;senter un point.</p>
+	<p>Ces icones ne sont utilis&eacute;es que lorsque le fichier KML est interpr&eacute;t&eacute; par GMap, elles ne sont pas comprise si la destination du fichier est un client classique (comme Google Earth) car elles utilisent une extension du sch&eacute;ma XML du fichier KML.</p>
+	<p>Chaque icone est repr&eacute;sent&eacute;e dans un fichier <span class="code">.gmd</span> recherch&eacute; &agrave; partir de l'objet et du type de point. Un m&ecirc;me fichier d&eacute;fini des icones normales et des icones s&eacute;lectionn&eacute;es.</p>
+	
+	<h2>Exemple</h2>
+	<p>Voir le fichier <span class="code">gmap-query-default.html</span>.</p>
+	
+
+	<h2>Sch&eacute;ma XML</h2>
+	<p>Pour que le fichier KML g&eacute;n&eacute;r&eacute; soit correct, il faut ajouter dans l'ent&ecirc;te&nbsp;:</p>
+	<pre class="code">&lt;kml xmlns=&quot;http://www.opengis.net/kml/2.2&quot; xmlns:atom=&quot;http://www.w3.org/2005/Atom&quot;
+ xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+ <b>xmlns:<span class="spip-balise">#GET</span><span class="spip-syntax">{prefix}</span>="<span class="spip-balise">#URL_SITE_SPIP</span>/schemas/GeoMarkers/1.0"<span class="spip-syntax">[</span>
+ xsi:SchemaLocation="<span class="spip-balise">#URL_SITE_SPIP</span>/schemas/GeoMarkers/1.0 <span class="spip-syntax">(</span><span class="spip-balise">#URL_FICHIER</span><span class="spip-syntax">{schemas/GeoMarkers/1.0/geomarkers.xsd}|url_absolue)</span>"<span class="spip-syntax">]</span></b>&gt;</pre>
+	 <p>&nbsp;</p>
+	 <p>Le schéma est inclu dans le plugin, dans le fichier <span class="code">schemas/GeoMarkers/1.0/geomarkers.xsd</span>.</p>
+	
+	<h2>Mod&egrave;les</h2>
+	<p>Après avoir recherché les icones qui correspondent à l'objet passé en paramètre, la balise utilise les modèles <span class="code">icons_marker.html</span> ou <span class="code">icons_short_marker.html</span> pour générer le code XML.</p>
+	
+	<h2>Param&egrave;tres</h2>
+	<table>
+		<tr><th>Nom</th><th>Description</th><th>Valeur</th></tr>
+		<tr>
+			<td>id_article/id_rubrique...</td>
+			<td>Objet &agrave; partir duquel les points sont compt&eacute;s. Ce param&egrave;tre est habituellement pris de l'environnement de la balise (la boucle englobante).</td>
+			<td>{id_article} ou {id_article=39}, {id_rubrique}, {id_document}, {id_breve}, {id_mot}, {id_auteur}</td>
+		</tr>
+		<tr>
+			<td>type_point</td>
+			<td>Type du marqueur recherch&eacute; sur un &eacute;l&eacute;ment.</td>
+			<td>Parmi les types d&eacute;finis dans le param&eacute;trage du plugin.</td>
+		</tr>
+		<tr>
+			<td>format</td>
+			<td>Param&egrave;tre actuellement non utilis&eacute;, peut-&ecirc;tre omis. La valeur par d&eacute;faut est &quot;kml&quot;.</td>
+			<td>kml</td>
+		</tr>
+		<tr>
+			<td>prefix</td>
+			<td>Pr&eacute;fixe du sch&eacute;ma XML qui d&eacute;crit les icones. Il doit correspondre &agrave; ce qui est indiqu&eacute; dans l'attribut xmlns de la balise racine du fichier XML cible.</td>
+			<td>Cha&icirc;ne de caract&egrave;re, &quot;gmn&quot; par d&eacute;faut.</td>
+		</tr>
+		<tr>
+			<td>tag</td>
+			<td>Indique si les icones doivent être ajoutées selon un format court ou long.</td>
+			<td><b>short</b> / long</td>
+		</tr>
+	</table>
+	
+</body>
+</html>

@@ -3,46 +3,47 @@
 	<title>Fonctions javascript</title>
 	<link href="doc.css" type="text/css" rel="stylesheet" />
 </head>
-<body>
-	<p class="ariane"><a href="../doc/index.html">Sommaire</a>&nbsp;><a href="index.html">Documentation de d&eacute;veloppement</a>&nbsp;> Fonctions javascript</p>
+<body class="help-page">
 
-	<h2>gmap_getMap(mapId)</h2>
+	<p>Les fonctions suivantes peuvent &ecirc;tre utilis&eacute;es pour manipuler les cartes depuis des scripts embarqu&eacute;s dans les pages g&eacute;n&eacute;r&eacute;es par SPIP.</p>
+
+	<h3>gmap_getMap(mapId)</h3>
 	<p>Permet de récupérer l'objet gMap à partir d'un identifiant de carte.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_setViewportOnMarkers(mapId)</h2>
+	<h3>gmap_setViewportOnMarkers(mapId)</h3>
 	<p>D&eacute;place le centre de la carte pour que les marqueurs soient visibles. Cette fonction de modifie pas le zoom (voir <i>gmap_gotoMarkers</i>).</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_gotoMarkers(objectName, objectId, mapId)</h2>
+	<h3>gmap_gotoMarkers(objectName, objectId, mapId)</h3>
 	<p>Ajuste le centre et le zoom de la carte pour que tous les marqueurs soient visibles.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_showMarkers(bShow, mapId)</h2>
+	<h3>gmap_showMarkers(bShow, mapId)</h3>
 	<p>Affiche ou cache tous les marqueurs ajout&eacute;s sur la carte.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_bounceMarker(oneId, mapId)</h2>
+	<h3>gmap_bounceMarker(oneId, mapId)</h3>
 	<p>S&eacute;lectionne un marqueur, c'est-&agrave;-dire le repr&eacute;sente avec l'icone <i>highlighted</i> si elle existe.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_bounceMarkers(objectName, objectId, mapId)</h2>
+	<h3>gmap_bounceMarkers(objectName, objectId, mapId)</h3>
 	<p>S&eacute;lectionne tous les marqueurs associ&eacute;s &agrave; un objet SPIP.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_unbounceAll(mapId)</h2>
+	<h3>gmap_unbounceAll(mapId)</h3>
 	<p>D&eacute;selectionne tous les marqueurs.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_showKMLLayer(id, bShow, mapId)</h2>
+	<h3>gmap_showKMLLayer(id, bShow, mapId)</h3>
 	<p>Affiche ou cache un fichier KML ajout&eacute; &agrave; la carte.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_setViewportOnKMLLayer(id, mapId)</h2>
+	<h3>gmap_setViewportOnKMLLayer(id, mapId)</h3>
 	<p>Ajuste le centre et le zoom de la carte pour montrer un fichier KML.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>
 	
-	<h2>gmap_showWikipediaLayer(show, mapId)</h2>
+	<h3>gmap_showWikipediaLayer(show, mapId)</h3>
 	<p><b>Attention&nbsp;:</b> Cette fonction de marche que pour l'impl&eacute;mentation Google Maps V2.</p>
 	<p>Permet d'afficher ou de masquer la couche Wikipedia sur la carte.</p>
 	<p>Si l'identifiant <i>mapId</i> n'est pas fourni, 1 est utilis&eacute;. Si plusieurs cartes apparaissent sur la page HTML, il faut leur donner des identifiants explicites en utilisant le param&egrave;tre <i>map</i> de la balise GEOMAP.</p>

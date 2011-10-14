@@ -1,5 +1,5 @@
-/* Titraille et autre typographie */
-#help-contents h1 {
+/* Titraille */
+#help-contents h1 { /* non utilisé pour compatibilité avec inclusion des pages */
 	font-size: 1.8em;
 	color: rgb(130, 130, 140);
 	margin: 30px 0 15px 0;
@@ -19,25 +19,27 @@
 	color: rgb(120, 120, 160);
 	margin: 5px 0 2px 0;
 }
-#help-contents p {
+
+/* Typographie classique */
+.help-page p {
 	margin: 0; padding: 0; border: 0;
 }
-#help-contents p.title {
+.help-page p.title {
 	color: rgb(130, 130, 140);
 	font-size: 2.5em;
 	font-weight: bold;
 	margin: 0 auto 30px auto;
 	padding: 0; border: 0;
 }
-#help-contents p.title {
+.help-page p.title {
 	vertical-align: middle;
 }
-#help-contents ul, #help-contents ol {
+.help-page ul, .help-page ol {
 	margin: 0 0 10px 0;
 	padding: 0 0 0 20pt;
 	border: 0;
 }
-#help-contents ul li, #help-contents ol li {
+.help-page ul li, .help-page ol li {
 	margin: 0; padding: 0; border: 0;
 }
 #help-contents a {
@@ -49,27 +51,19 @@
 	text-decoration: underline;
 }
 
-/* Fil d'ariane */
-#help-contents .ariane {
-	text-align: left;
-	margin-top: 0;
-	margin-bottom: 1em;
-	font-size: 0.9em;
-}
-
 /* Images */
-.illustration {
+.help-page .illustration {
 	margin: 0;
 	text-align: center;
 }
 
 /* Tableaux */
-#help-contents table {
+.help-page table {
 	border: 1px solid black;
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-#help-contents table td, #help-contents table th {
+.help-page table td, .help-page table th {
 	border-top: 1px solid rgb(128,128,128);
 	border-right: 1px solid rgb(192,192,192);
 	border-bottom: 1px solid rgb(128,128,128);
@@ -77,25 +71,25 @@
 	padding: 3px 5px;
 	vertical-align: top;
 }
-#help-contents table th {
+.help-page table th {
 	background-color: rgb(192,128,100);
 }
-#help-contents table tr:nth-child(odd) {
+.help-page table tr:nth-child(odd) {
 	background-color: rgb(255,192,100);
 }
-#help-contents table tr:nth-child(even) {
+.help-page table tr:nth-child(even) {
 	background-color: rgb(255,255,192);
 }
-#help-contents table ul {
+.help-page table ul {
 	margin: 0;
 	padding: 0 0 2px 12px;
 }
 
 /* Code inclus */
-#help-contents .code {
+.help-page .code {
 	font-family: 'Courier New';
 }
-#help-contents pre.code {
+.help-page pre.code {
 	background-color: rgb(255,255,240);
 	border-left: rgb(255,230,180) 2px solid;
 	margin: 0 20px;
@@ -105,21 +99,25 @@
 	color: #000000;
 	overflow-x: scroll;
 }
-#help-contents pre.code span.spip-boucle {
+.help-page .code span.spip-boucle {
 	color: rgb(0,0,160);
 }
-#help-contents pre.code span.spip-balise {
+.help-page .code span.spip-balise {
 	color: rgb(160,0,0);
 	font-weight: bold;
 }
-#help-contents pre.code span.spip-syntax {
+.help-page .code span.spip-syntax {
 	color: rgb(0,160,0);
 	font-weight: bold;
 }
-#help-contents pre.code span.html-tag {
+.help-page .code span.html-tag {
 	color: rgb(0,0,200);
 }
-#help-contents pre.code span.html-attr {
+.help-page .code span.html-attr {
 	color: rgb(200,200,100);
+}
+.help-page .code em {
+	color: rgb(255,0,0);
+	font-style: italic;
 }
 

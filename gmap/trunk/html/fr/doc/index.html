@@ -5,91 +5,92 @@
   <link href="doc.css" type="text/css" rel="stylesheet" />
 </head>
 
-<body>
-<p class="title"><img src="images/logo-gmap.png">&nbsp;Aide GMap</p>
-<p class="nettoyeur">&nbsp;</p>
-<p>&nbsp;</p>
-<p>Le plugin GMap permet de g&eacute;olocaliser les objets de SPIP (rubriques, articles, documents, br&egrave;ves, mots-clefs et auteurs) et d'ins&eacute;rer, dans les squelettes et les articles, des cartes qui repr&eacute;sentent ces objets.</p>
-<p>Plus explicitement, le plugin permet&nbsp;:</p>
-<ul>
-	<li>De g&eacute;olicaliser la plupart des objets de SPIP (pour les documents, il faut le plugin M&eacute;diath&egrave;que) depuis la partie priv&eacute;e du site;</li>
-	<li>D'ins&eacute;rer dans les squelettes des balises permettant d'afficher des cartes et de repr&eacute;ter les objet g&eacute;olicalis&eacute;s dessus, ainsi que d'y ajouter des marqueurs suppl&eacute;mentaires et des fichiers KML;</li>
-	<li>D'ins&eacute;rer dans les textes des articles, rubriques, br&egrave;ves, ces m&ecirc;mes cartes et objets (marqueurs et fichier KML).</li>
-</ul>
-<p>&nbsp;</p>
-<p>Les cartes utilisent les API Google Maps V2 ou V3, mais il est possible d'ajouter des impl&eacute;mentations de carte. Une impl&eacute;mentation OpenLayers serait par exemple souhaitable.</p>
+<body class="help-page">
 
-<h1>Mise en route</h1>
-<p>Pour faire fonctionner le plugin, vous devez au minimum&nbsp;:</p>
-<ol>
-  <li>Param&eacute;trer un type de repr&eacute;sentation (par exemple pour l'impl&eacute;mentation Google Maps V2, donner une clef d'enregistrement Google), cf. <a href="parametrage.html">param&eacute;trage du plugin</a>.</li>
-  <li>Int&eacute;grer une balise <a href="balise-GEOMAP.html">#GEOMAP</a> dans un squelette, ou un modèle <a href="modele-map.html">&lt;map&gt;</a> dans un texte.</li>
-</ol>
-<p>Mais le plus int&eacute;ressant sera tout de m&ecirc;me de g&eacute;olocaliser les objets SPIP de votre site.</p>
-<p>&nbsp;</p>
-<p>Par exemple, le code suivant permet d'afficher une carte sur les objets g&eacute;olicalis&eacute;s&nbsp;:</p>
-<pre class="code"><span class="spip-boucle">&lt;B_geo&gt;</span>
+	<p class="title"><img src="images/logo-gmap.png">&nbsp;Aide GMap</p>
+	<p class="nettoyeur">&nbsp;</p>
+	<p>&nbsp;</p>
+	<p>Le plugin GMap permet de g&eacute;olocaliser les objets de SPIP (rubriques, articles, documents, br&egrave;ves, mots-clefs et auteurs) et d'ins&eacute;rer, dans les squelettes et les articles, des cartes qui repr&eacute;sentent ces objets.</p>
+	<p>Plus explicitement, le plugin permet&nbsp;:</p>
+	<ul>
+		<li>De g&eacute;olicaliser la plupart des objets de SPIP (pour les documents, il faut le plugin M&eacute;diath&egrave;que) depuis la partie priv&eacute;e du site;</li>
+		<li>D'ins&eacute;rer dans les squelettes des balises permettant d'afficher des cartes et de repr&eacute;ter les objet g&eacute;olicalis&eacute;s dessus, ainsi que d'y ajouter des marqueurs suppl&eacute;mentaires et des fichiers KML;</li>
+		<li>D'ins&eacute;rer dans les textes des articles, rubriques, br&egrave;ves, ces m&ecirc;mes cartes et objets (marqueurs et fichier KML).</li>
+	</ul>
+	<p>&nbsp;</p>
+	<p>Les cartes utilisent les API Google Maps V2 ou V3, mais il est possible d'ajouter des impl&eacute;mentations de carte. Une impl&eacute;mentation OpenLayers serait par exemple souhaitable.</p>
+
+	<h2>Mise en route</h2>
+	<p>Pour faire fonctionner le plugin, vous devez au minimum&nbsp;:</p>
+	<ol>
+		<li>Param&eacute;trer un type de repr&eacute;sentation (par exemple pour l'impl&eacute;mentation Google Maps V2, donner une clef d'enregistrement Google), cf. <a href="parametrage.html">param&eacute;trage du plugin</a>.</li>
+		<li>Int&eacute;grer une balise <a href="balise-GEOMAP.html">#GEOMAP</a> dans un squelette, ou un modèle <a href="modele-map.html">&lt;map&gt;</a> dans un texte.</li>
+	</ol>
+	<p>Mais le plus int&eacute;ressant sera tout de m&ecirc;me de g&eacute;olocaliser les objets SPIP de votre site.</p>
+	<p>&nbsp;</p>
+	<p>Par exemple, le code suivant permet d'afficher une carte sur les objets g&eacute;olicalis&eacute;s&nbsp;:</p>
+	<pre class="code"><span class="spip-boucle">&lt;B_geo&gt;</span>
 <span class="spip-boucle">&lt;BOUCLE_geo(GEOTEST){id_article}&gt;</span><span class="spip-syntax">[
 	(</span><span class="spip-balise">#GEOMAP</span><span class="spip-syntax">{</span>id_article,markers=query<span class="spip-syntax">})
 ]</span><span class="spip-boucle">&lt;/BOUCLE_geo&gt;</span>
 <span class="spip-boucle">&lt;/B_geo&gt;</span></pre>
 
-<h1>Informations d&eacute;taill&eacute;es</h1>
+	<h2>Informations d&eacute;taill&eacute;es</h2>
 
-<h2>Partie priv&eacute;e&nbsp;/ G&eacute;olocalisation</h2>
-<p>Dans la partie priv&eacute;e, le plugin permet d'effectuer les par&eacute;mtrages n&eacute;cessaires &agrave; son fonctionnement, et, surtout, de g&eacute;olocaliser les objets de SPIP.</p>
-<ul>
-  <li><a href="parametrage.html">Param&eacute;trage du plugin</a>.</li>
-  <li><a href="geolocalisation.html">G&eacute;olicalisation des objets</a>.</li>
-</ul>
+	<h3>Partie priv&eacute;e&nbsp;/ G&eacute;olocalisation</h3>
+	<p>Dans la partie priv&eacute;e, le plugin permet d'effectuer les par&eacute;mtrages n&eacute;cessaires &agrave; son fonctionnement, et, surtout, de g&eacute;olocaliser les objets de SPIP.</p>
+	<ul>
+		<li><a href="parametrage.html">Param&eacute;trage du plugin</a>.</li>
+		<li><a href="geolocalisation.html">G&eacute;olicalisation des objets</a>.</li>
+	</ul>
 
-<h2>Partie publique&nbsp;/ Affichage</h2>
+	<h3>Partie publique&nbsp;/ Affichage</h3>
 
-<h3>Boucles</h3>
-<p>Les boucles sont utilis&eacute;es dans les squelettes pour parcourir l'information g&eacute;olocalis&eacute;e.</p>
-<ul>
-  <li>Boucle <a href="boucle-GEOTEST.html">GEOTEST</a>&nbsp;: test s'il y a des informations&nbsp;g&eacute;olocalis&eacute;es&nbsp;sur un objet.</li>
-  <li>Boucle <a href="boucle-GEOPOINTS.html">GEOPOINTS</a>&nbsp;: parcours des points g&eacute;olocalis&eacute;s selon les crit&egrave;res SQL.</li>
-</ul>
+	<h4>Boucles</h4>
+	<p>Les boucles sont utilis&eacute;es dans les squelettes pour parcourir l'information g&eacute;olocalis&eacute;e.</p>
+	<ul>
+		<li>Boucle <a href="boucle-GEOTEST.html">GEOTEST</a>&nbsp;: test s'il y a des informations&nbsp;g&eacute;olocalis&eacute;es&nbsp;sur un objet.</li>
+		<li>Boucle <a href="boucle-GEOPOINTS.html">GEOPOINTS</a>&nbsp;: parcours des points g&eacute;olocalis&eacute;s selon les crit&egrave;res SQL.</li>
+	</ul>
 
-<h3>Balises</h3>
-<p>Balises d'usage courant dans les squelettes&nbsp;:</p>
-<ul>
-  <li>Balise <a href="balise-GEOMAP.html">#GEOMAP</a>&nbsp;: insertion d'une carte dans les squelettes.</li>
-  <li>Balise <a href="balise-GEOMARKER.html">#GEOMARKER</a>&nbsp;: ajout manuel d'un marqueur sur une carte.</li>
-  <li>Balise <a href="balise-GEOKML.html">#GEOKML</a>&nbsp;: ajout d'un fichier KML sur une carte.</li>
-  <li>Balise <a href="balise-GEOCAPABILITY.html">#GEOCAPABILITY</a>&nbsp;: test des possibilit&eacute;s d'un impl&eacute;mentation de carte.</li>
-  <li>Balise <a href="balise-GEOPOINTS.html">#GEOPOINTS</a>&nbsp;: renvoie le nombre de points associ&eacute;s &agrave; un objet.</li>
-</ul>
-<p>Balises d'usage plus rare, en cas d'ajout de fichiers KML ou de d&eacute;veloppement d'extensions :</p>
-<ul>
-  <li>Balise <a href="balise-GEOMARKERICONS.html">#GEOMARKERICONS</a>&nbsp;: ajout des icones d'un marqueur dans un fichier KML.</li>
-  <li>Balise <a href="balise-GEOPOPUP.html">#GEOPOPUP</a>&nbsp;: ajout du contenu de la bulle d'information associ&eacute;e &agrave; un marqueur dans un fichier KML.</li>
-  <li>Balise <a href="balise-URL_FICHIER.html">#URL_FICHIER</a>&nbsp;: chemin d'acc&egrave;s SPIP &agrave; un fichier.&nbsp;</li>
-</ul>
+	<h4>Balises</h4>
+	<p>Balises d'usage courant dans les squelettes&nbsp;:</p>
+	<ul>
+		<li>Balise <a href="balise-GEOMAP.html">#GEOMAP</a>&nbsp;: insertion d'une carte dans les squelettes.</li>
+		<li>Balise <a href="balise-GEOMARKER.html">#GEOMARKER</a>&nbsp;: ajout manuel d'un marqueur sur une carte.</li>
+		<li>Balise <a href="balise-GEOKML.html">#GEOKML</a>&nbsp;: ajout d'un fichier KML sur une carte.</li>
+		<li>Balise <a href="balise-GEOCAPABILITY.html">#GEOCAPABILITY</a>&nbsp;: test des possibilit&eacute;s d'un impl&eacute;mentation de carte.</li>
+		<li>Balise <a href="balise-GEOPOINTS.html">#GEOPOINTS</a>&nbsp;: renvoie le nombre de points associ&eacute;s &agrave; un objet.</li>
+	</ul>
+	<p>Balises d'usage plus rare, en cas d'ajout de fichiers KML ou de d&eacute;veloppement d'extensions :</p>
+	<ul>
+		<li>Balise <a href="balise-GEOMARKERICONS.html">#GEOMARKERICONS</a>&nbsp;: ajout des icones d'un marqueur dans un fichier KML.</li>
+		<li>Balise <a href="balise-GEOPOPUP.html">#GEOPOPUP</a>&nbsp;: ajout du contenu de la bulle d'information associ&eacute;e &agrave; un marqueur dans un fichier KML.</li>
+		<li>Balise <a href="balise-URL_FICHIER.html">#URL_FICHIER</a>&nbsp;: chemin d'acc&egrave;s SPIP &agrave; un fichier.&nbsp;</li>
+	</ul>
 
-<h3>Mod&egrave;s</h3>
-<ul>
-  <li>Mod&egrave;le <a href="modele-map.html">&lt;map&gt;</a>&nbsp;: insertion d'une carte dans les textes.</li>
-  <li>Mod&egrave;le <a href="modele-marker.html">&lt;marker&gt;</a>&nbsp;: ajout manuel d'un marqueur depuis un texte.</li>
-</ul>
+	<h4>Mod&egrave;les</h4>
+	<ul>
+		<li>Mod&egrave;le <a href="modele-map.html">&lt;map&gt;</a>&nbsp;: insertion d'une carte dans les textes.</li>
+		<li>Mod&egrave;le <a href="modele-marker.html">&lt;marker&gt;</a>&nbsp;: ajout manuel d'un marqueur depuis un texte.</li>
+	</ul>
 
-<h3>Autres fonctionnalit&eacute;s</h3>
-<ul>
-  <li><a href="function-KML.html">Export de fichiers KML</a>;</li>
-  <li><a href="function-MIW.html">Regroupement des info-bulles</a>.</li>
-</ul>
+	<h4>Autres fonctionnalit&eacute;s</h4>
+	<ul>
+		<li><a href="function-KML.html">Export de fichiers KML</a>.</li>
+		<li><a href="function-MIW.html">Regroupement des info-bulles</a>.</li>
+	</ul>
 
-<h1><a href="customisation.html">Modification des comportements par d&eacute;faut</a></h1>
+	<h2><a href="customisation.html">Modification des comportements par d&eacute;faut</a></h2>
 
-<h1>Exemples</h1>
-<p>Ce plugin a &eacute;t&eacute; d&eacute;velopp&eacute; pour la partie <a href="http://www.loceanique.org/voyages">Carnet de voyage</a> du site <a href="http://www.loceanique.org">L'Oc&eacute;anique</a>.</p>
+	<h2>Exemples</h2>
+	<p>Ce plugin a &eacute;t&eacute; d&eacute;velopp&eacute; pour les parties <a href="http://www.loceanique.org/photos">Galerie de photos</a> et <a href="http://www.loceanique.org/voyages">Carnet de voyage</a> du site <a href="http://www.loceanique.org">L'Oc&eacute;anique</a>.</p>
 
-<p class="nettoyeur">&nbsp;</p>
+	<p class="nettoyeur">&nbsp;</p>
 
-<h1><a href="../doc-dev/index.html">Documentation de d&eacute;veloppement</a></h1>
+	<h2><a href="../doc-dev/index.html">Documentation de d&eacute;veloppement</a></h2>
 
-<h1><a href="../credits/index.html">Cr&eacute;dits</a></h1>
+	<h2><a href="../credits/index.html">Cr&eacute;dits</a></h2>
 
 </body>
 </html>

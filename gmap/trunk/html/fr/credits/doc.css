@@ -1,6 +1,123 @@
-.ariane {
-	text-align: left;
-	margin-top: 0;
-	margin-bottom: 1em;
-	font-size: 0.9em;
+/* Titraille */
+#help-contents h1 { /* non utilisé pour compatibilité avec inclusion des pages */
+	font-size: 1.8em;
+	color: rgb(130, 130, 140);
+	margin: 30px 0 15px 0;
 }
+#help-contents h2 {
+	font-size: 1.6em;
+	color: rgb(120, 120, 160);
+	margin: 20px 0 10px 0;
+}
+#help-contents h3 {
+	font-size: 1.4em;
+	color: rgb(120, 120, 160);
+	margin: 10px 0 5px 0;
+}
+#help-contents h4 {
+	font-size: 1.2em;
+	color: rgb(120, 120, 160);
+	margin: 5px 0 2px 0;
+}
+
+/* Typographie classique */
+.help-page p {
+	margin: 0; padding: 0; border: 0;
+}
+.help-page p.title {
+	color: rgb(130, 130, 140);
+	font-size: 2.5em;
+	font-weight: bold;
+	margin: 0 auto 30px auto;
+	padding: 0; border: 0;
+}
+.help-page p.title {
+	vertical-align: middle;
+}
+.help-page ul, .help-page ol {
+	margin: 0 0 10px 0;
+	padding: 0 0 0 20pt;
+	border: 0;
+}
+.help-page ul li, .help-page ol li {
+	margin: 0; padding: 0; border: 0;
+}
+#help-contents a {
+	color: rgb(0, 0, 150);
+	text-decoration: none;
+}
+#help-contents a:hover {
+	color: rgb(0, 0, 210);
+	text-decoration: underline;
+}
+
+/* Images */
+.help-page .illustration {
+	margin: 0;
+	text-align: center;
+}
+
+/* Tableaux */
+.help-page table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.help-page table td, .help-page table th {
+	border-top: 1px solid rgb(128,128,128);
+	border-right: 1px solid rgb(192,192,192);
+	border-bottom: 1px solid rgb(128,128,128);
+	border-left: 1px solid rgb(192,192,192);
+	padding: 3px 5px;
+	vertical-align: top;
+}
+.help-page table th {
+	background-color: rgb(192,128,100);
+}
+.help-page table tr:nth-child(odd) {
+	background-color: rgb(255,192,100);
+}
+.help-page table tr:nth-child(even) {
+	background-color: rgb(255,255,192);
+}
+.help-page table ul {
+	margin: 0;
+	padding: 0 0 2px 12px;
+}
+
+/* Code inclus */
+.help-page .code {
+	font-family: 'Courier New';
+}
+.help-page pre.code {
+	background-color: rgb(255,255,240);
+	border-left: rgb(255,230,180) 2px solid;
+	margin: 0 20px;
+	padding: 5px;
+	font-family: 'Courier New';
+	font-size: 8pt;
+	color: #000000;
+	overflow-x: scroll;
+}
+.help-page .code span.spip-boucle {
+	color: rgb(0,0,160);
+}
+.help-page .code span.spip-balise {
+	color: rgb(160,0,0);
+	font-weight: bold;
+}
+.help-page .code span.spip-syntax {
+	color: rgb(0,160,0);
+	font-weight: bold;
+}
+.help-page .code span.html-tag {
+	color: rgb(0,0,200);
+}
+.help-page .code span.html-attr {
+	color: rgb(200,200,100);
+}
+.help-page .code em {
+	color: rgb(255,0,0);
+	font-style: italic;
+}
+

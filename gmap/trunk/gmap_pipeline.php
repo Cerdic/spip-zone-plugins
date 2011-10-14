@@ -162,7 +162,38 @@ jQuery(document).ready(function()
 	return $flux;
 }
 
+// Insertion des styles et script dans le header
+function gmap_insert_head($flux)
+{
+	// Si la carte n'est pas complètement fonctionelle, inutile de faire quoi que ce soit : il faut d'abord paramétrer
+	if (!gmap_est_actif())
+		return $flux;
+		
+	// Init du retour
+	$flux .= "\n" . '<!-- Header GMAP -->' . "\n";
+	
+	// Inclure le style
+	$css_public = _DIR_PLUGIN_GMAP . 'style/gmap_public.css';
+	$flux .= '<link rel="stylesheet" type="text/css" media="screen" href="'.$css_public.'" />' . "\n";
+	$css_balloon = _DIR_PLUGIN_GMAP . 'style/gmap-balloon.css';
+	$flux .= '<link rel="stylesheet" type="text/css" media="screen" href="'.$css_balloon.'" />' . "\n";
+	
+	// Inclure les outils de base
+	$js_utils = _DIR_PLUGIN_GMAP . 'javascript/gmap_js_utils.js';
+	$flux .= '<script type="text/javascript" src="'.$js_utils.'"></script>' . "\n";
+		
+	// Inclure le script google
+	$gmap_script_init = charger_fonction('gmap_script_init','inc');
+	$flux .= $gmap_script_init();
+	
+	// Fin d'inclusion
+	$flux .= '<!-- Fin header GMAP -->' . "\n";
+	
+	return $flux;
+}
+
 // Inserer les scripts dans la partie publique
+// Ancienne fonction, avant l'ajout du pipeline insert_head
 function gmap_affichage_final($flux)
 {
 	// Si la carte n'est pas complètement fonctionelle, inutile de faire quoi que ce soit : il faut d'abord paramétrer
@@ -172,32 +203,11 @@ function gmap_affichage_final($flux)
 	// S'il y a une carte, insérer le script
     if (strpos($flux, '<div id="gmap_cont') !== FALSE)
 	{
-		// Init du retour
-		$incHead .= "\n" . '<!-- Header GMAP -->' . "\n";
-		
-		// Inclure le style
-		$css_public = _DIR_PLUGIN_GMAP . 'style/gmap_public.css';
-		$incHead .= '<link rel="stylesheet" type="text/css" media="screen" href="'.$css_public.'" />' . "\n";
-		$css_balloon = _DIR_PLUGIN_GMAP . 'style/gmap-balloon.css';
-		$incHead .= '<link rel="stylesheet" type="text/css" media="screen" href="'.$css_balloon.'" />' . "\n";
-		
-		// On n'inclut pas les scripts si la clef Google Maps n'est pas définie
-		if (gmap_est_actif())
-		{
-			// Inclure les outils de base
-			$js_utils = _DIR_PLUGIN_GMAP . 'javascript/gmap_js_utils.js';
-			$incHead .= '<script type="text/javascript" src="'.$js_utils.'"></script>' . "\n";
-			
-			// Inclure le script google
-			$gmap_script_init = charger_fonction('gmap_script_init','inc');
-			$incHead .= $gmap_script_init();
-			
-			// Fin d'inclusion
-			$incHead .= '<!-- Fin header GMAP -->' . "\n";
-		}
-		
-		// Ajouter dans l'entête
-        return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
+		$incHead = gmap_insert_head('');
+		if (strlen($incHead) == 0)
+			return $flux;
+		else
+			return substr_replace($flux, $incHead, strpos($flux, '</head>'), 0);
     }
 	else
 		return $flux;
