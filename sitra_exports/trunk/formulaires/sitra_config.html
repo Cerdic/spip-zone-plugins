@@ -9,9 +9,9 @@
 		[<!-- (#REM) mode debug -->]
 		<li><label for="sitra_debug"><:sitra:mode_debug:></label>
 			<p class='explication'><:sitra:explication_mode_debug:></p>
-			<select class="select" name="sitra_debug" size="1" id="sitra_debug">
-				<option value="oui"[(#ENV{sitra_debug,oui}|=={oui}|oui) selected="selected"]><:sitra:mode_debug:></option>
-				<option value="non"[(#ENV{sitra_debug}|=={non}|oui) selected="selected"]><:sitra:mode_production:></option>
+			<select name="sitra_debug" class="select" id="sitra_debug">
+				<option[ (#ENV{sitra_debug,oui}|=={oui}|oui)selected="selected"] value="oui"><:sitra:mode_debug:></option>
+				<option[ (#ENV{sitra_debug,oui}|=={non}|oui)selected="selected"] value="non"><:sitra:mode_production:></option>
 			</select>
 		</li>
 		
@@ -24,7 +24,7 @@
 		[<!-- (#REM) mode de transmission des xml compressés ou pas -->]
 		<li><label for="mode_compresse"><:sitra:mode_compresse:></label>
 			<p class='explication'><:sitra:explication_mode_compresse:></p>
-			<select class="select" name="mode_compresse" size="1" id="mode_compresse">
+			<select name="mode_compresse" class="select" id="mode_compresse">
 				<option value="oui"[(#ENV{mode_compresse,oui}|=={oui}|oui) selected="selected"]><:sitra:mode_compresse_oui:></option>
 				<option value="non"[(#ENV{mode_compresse}|=={non}|oui) selected="selected"]><:sitra:mode_compresse_non:></option>
 			</select>

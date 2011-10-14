@@ -1,5 +1,7 @@
 <?php
 
+if (!defined('_ECRIRE_INC_VERSION')) return;
+
 /**
 teste si une copie locale existe pour les images principales
 obtenues à partir de l'archive zip
