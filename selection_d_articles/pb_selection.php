@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 	function pb_selection_interface ( $vars="" ) {
 		$exec = $vars["args"]["exec"];
