@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 /**
  * saveauto : plugin de sauvegarde automatique de la base de donnees de SPIP
  *

@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function notifications_saveauto_save_dist($quoi, $id, $options){
 	$cfg = lire_config('saveauto');

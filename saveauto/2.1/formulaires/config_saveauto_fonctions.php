@@ -5,6 +5,7 @@
  * Ce programme est un logiciel libre distribue sous licence GNU/GPL.
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //function cfg_config_saveauto_post_traiter(&$cfg){}
 

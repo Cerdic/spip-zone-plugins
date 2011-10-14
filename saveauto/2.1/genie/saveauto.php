@@ -1,5 +1,6 @@
 <?php
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /**
  * La fonction à exécuter par le cron
