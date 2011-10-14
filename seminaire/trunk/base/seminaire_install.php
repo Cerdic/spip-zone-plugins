@@ -22,7 +22,7 @@ function seminaire_upgrade($nom_meta_base_version,$version_cible){
 		sql_insertq('spip_mots', 
 			array('titre'=>$st, 'descriptif'=>$st, 'id_groupe'=>$id_groupe, 'type'=>'Type')
 				);
-		if (sql_error() != '') $Terreurs[] = (_T('erreur_creation_mot_cle')).$st.': '.sql_error();
+		if (sql_error() != '') $Terreur[] = (_T('erreur_creation_mot_cle')).$st.': '.sql_error();
     	};
 	};//fin du if
 
