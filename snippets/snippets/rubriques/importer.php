@@ -8,6 +8,7 @@
  * © 2006 - Distribue sous licence GNU/GPL
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function snippets_rubriques_importer($id_target,$arbre,$contexte){

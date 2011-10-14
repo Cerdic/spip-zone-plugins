@@ -8,6 +8,7 @@
  * © 2006 - Distribue sous licence GNU/GPL
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/snippets');
 

@@ -8,6 +8,7 @@
  * � 2006 - Distribue sous licence GNU/GPL
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function snippets_fonction_importer($table){
 	if (substr($table,0,5)=="spip_") $table = substr($table,5);
