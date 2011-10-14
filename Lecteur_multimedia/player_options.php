@@ -6,6 +6,7 @@
 	// $LastChangedRevision$
 	// $LastChangedBy$
 	// $LastChangedDate$
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 	define("_PLAYER_PREFIX", "player");	

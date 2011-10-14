@@ -7,6 +7,7 @@
 	// $LastChangedDate$
 
 // CP-20080321 : creation de la table
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 /*

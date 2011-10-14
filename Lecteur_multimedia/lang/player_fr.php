@@ -5,6 +5,7 @@
 	// $LastChangedRevision$
 	// $LastChangedBy$
 	// $LastChangedDate$
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['i18n_'._PLAYER_PREFIX.'_fr'] = array(
 

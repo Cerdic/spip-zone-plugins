@@ -7,6 +7,7 @@
 	// $LastChangedDate: 2009-03-16 17:31:40 +0100 (Mon, 16 Mar 2009) $
 
 	// might be perfectible. Thanks in advance for future enhencments. (Etienne "Loiseau2nuit" Brackers)
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['i18n_'._PLAYER_PREFIX.'_en'] = array(
 

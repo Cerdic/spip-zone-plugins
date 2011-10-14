@@ -8,6 +8,7 @@
 
 // CP-20080321 : correction style (tous les formul en espace prive utilisent verdana2)
 // CP-20080321 : deplacement de la fonction initiale ici. Pour ajax
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function player_affiche_config_form ($exec_page){
 

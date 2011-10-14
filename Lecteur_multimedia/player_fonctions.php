@@ -5,6 +5,7 @@
 	// $LastChangedRevision: 35894 $
 	// $LastChangedBy$
 	// $LastChangedDate$
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 if (!defined('_DIR_PLUGIN_PLAYER')){ // defini automatiquement par SPIP 1.9.2
 	$p=explode(basename(_DIR_PLUGINS)."/",str_replace('\\','/',realpath(dirname(__FILE__))));
