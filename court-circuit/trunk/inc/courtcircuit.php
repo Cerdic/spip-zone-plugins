@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function courtcircuit_url_redirection($id_rubrique) {
 	$url = '';

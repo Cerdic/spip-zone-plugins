@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function balise_URL_RUBRIQUE_dist($p) {
 	$id_rubrique = interprete_argument_balise(1,$p);
