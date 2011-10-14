@@ -1,4 +1,5 @@
 ﻿<?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 	// Adapté à partir de RefBase
 	// tableau $transtab_unicode_bibtex transformé en fonction transtab_unicode_bibtex()
 
@@ -1007,7 +1008,7 @@
 		// <U02DD> <U0022>
 
 		// GREEK NUMERAL SIGN
-		"ʹ" => "'",
+		"ʹ" => "'",
 		// <U0374> <U0027>
 
 		// GREEK LOWER NUMERAL SIGN
@@ -1015,7 +1016,7 @@
 		// <U0375> <U002C>
 
 		// GREEK QUESTION MARK
-		";" => ";",
+		";" => ";",
 		// <U037E> <U003B>
 
 		// LATIN CAPITAL LETTER B WITH DOT ABOVE
@@ -1107,11 +1108,11 @@
 		// <U1EF3> <U0079>
 
 		// EN QUAD
-		" " => " ",
+		" " => " ",
 		// <U2000> <U0020>
 
 		// EM QUAD
-		" " => "  ",
+		" " => "  ",
 		// <U2001> "<U0020><U0020>"
 
 		// EN SPACE
@@ -1475,15 +1476,15 @@
 		// <U2122> "<U005B><U0054><U004D><U005D>"
 
 		// OHM SIGN
-		"Ω" => "{\\textohm}", // "Ω", "O"
+		"Ω" => "{\\textohm}", // "Ω", "O"
 		// <U2126> <U03A9>;"<U006F><U0068><U006D>";<U004F>
 
 		// KELVIN SIGN
-		"K" => "K",
+		"K" => "K",
 		// <U212A> <U004B>
 
 		// ANGSTROM SIGN
-		"Å" => "A", // "Å"
+		"Å" => "A", // "Å"
 		// <U212B> <U00C5>
 
 		// ESTIMATED SYMBOL
@@ -1835,11 +1836,11 @@
 		// <U22EF> "<U002E><U002E><U002E>"
 
 		// LEFT-POINTING ANGLE BRACKET
-		"〈" => "{\\textlangle}",
+		"〈" => "{\\textlangle}",
 		// <U2329> <U003C>
 
 		// RIGHT-POINTING ANGLE BRACKET
-		"〉" => "{\\textrangle}",
+		"〉" => "{\\textrangle}",
 		// <U232A> <U003E>
 
 		// SYMBOL FOR NULL

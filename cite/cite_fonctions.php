@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function cite_authors_ris ($auts) {
 	if (trim($auts)) {
