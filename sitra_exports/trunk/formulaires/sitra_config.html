@@ -7,9 +7,9 @@
 	<legend><:sitra:legend_configuration_export:></legend>
 	<ul>
 		[<!-- (#REM) mode debug -->]
-		<li><label for="sitra_debug"><:sitra:mode_debug:></label>
+		<li><label for="sitra_debug" id="sitra_debug_label"><:sitra:mode_debug:></label>
 			<p class='explication'><:sitra:explication_mode_debug:></p>
-			<select name="sitra_debug" class="select" id="sitra_debug">
+			<select name="sitra_debug" id="sitra_debug" class="select">
 				<option[ (#ENV{sitra_debug,oui}|=={oui}|oui)selected="selected"] value="oui"><:sitra:mode_debug:></option>
 				<option[ (#ENV{sitra_debug,oui}|=={non}|oui)selected="selected"] value="non"><:sitra:mode_production:></option>
 			</select>
@@ -22,28 +22,28 @@
 		</li>
 		
 		[<!-- (#REM) mode de transmission des xml compressés ou pas -->]
-		<li><label for="mode_compresse"><:sitra:mode_compresse:></label>
+		<li><label for="mode_compresse" id="mode_compresse_label"><:sitra:mode_compresse:></label>
 			<p class='explication'><:sitra:explication_mode_compresse:></p>
-			<select name="mode_compresse" class="select" id="mode_compresse">
+			<select name="mode_compresse" id="mode_compresse" class="select">
 				<option value="oui"[(#ENV{mode_compresse,oui}|=={oui}|oui) selected="selected"]><:sitra:mode_compresse_oui:></option>
 				<option value="non"[(#ENV{mode_compresse}|=={non}|oui) selected="selected"]><:sitra:mode_compresse_non:></option>
 			</select>
 		</li>
 		
 		[<!-- (#REM) dossier d'export des xml -->]
-		<li><label for="sitra_dir"><:sitra:dossier_sitra:></label>
+		<li><label for="sitra_dir" id="sitra_dir_label"><:sitra:dossier_sitra:></label>
 			<p class='explication'><:sitra:explication_dossier_sitra:></p>
 			<input type="text" name="sitra_dir" id="sitra_dir" class="text" value="#ENV{sitra_dir}" />
 		</li>
 		
 		[<!-- (#REM) dossier de stockage des images -->]
-		<li><label for="chemin_images"><:sitra:chemin_images:></label>
+		<li><label for="chemin_images" id="chemin_images_label"><:sitra:chemin_images:></label>
 			<p class='explication'><:sitra:explication_chemin_images:></p>
 			<input type="text" name="chemin_images" id="chemin_images" class="text" value="#ENV{chemin_images}" />
 		</li>
 		
 		[<!-- (#REM) langues exportées -->]
-		<li><label for="langues"><:sitra:langues:></label>
+		<li><label for="langues" id="langues_label"><:sitra:langues:></label>
 			<p class='explication'><:sitra:explication_langues:></p>
 			<input type="text" name="langues" id="langues" class="text" value="#ENV{langues}" />
 		</li>
@@ -53,15 +53,15 @@
 	<legend><:sitra:legend_envoi_email:></legend>
 	<ul>
 		[<!-- (#REM) email expedition alertes -->]
-		<li><label for="mail_from"><:sitra:mail_from:></label>
+		<li><label for="mail_from" id="mail_from_label"><:sitra:mail_from:></label>
 			<p class='explication'><:sitra:explication_mail_from:></p>
 			<input type="text" name="mail_from" id="mail_from" class="text" value="#ENV{mail_from}" />
 		</li>
 		
 		[<!-- (#REM) email destinataires alertes -->]
-		<li><label for="mail_dest"><:sitra:mail_dest:></label>
+		<li><label for="mail_dest" id="mail_dest_label"><:sitra:mail_dest:></label>
 			<p class='explication'><:sitra:explication_mail_dest:></p>
-			<input type="text" name="mail_dest" id="mail_dest" class="text" value="#ENV{mail_dest}" />
+			<input name="mail_dest" type="text" id="mail_dest" class="text" value="#ENV{mail_dest}" />
 		</li>
 	
 	</ul>
