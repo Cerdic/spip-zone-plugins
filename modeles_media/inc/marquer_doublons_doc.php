@@ -3,6 +3,7 @@
  * Surcharge pour identifier également les modèles <media> en attendant une solution plus élégante (pipeline adéquat par exemple)
  *
  */
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // On liste tous les champs susceptibles de contenir des documents ou images si on veut que ces derniers soient lies a l objet lorsqu on y fait reference par imgXX docXX ou embXX ou mediaXX
 $GLOBALS['medias_liste_champs'][] = 'texte';

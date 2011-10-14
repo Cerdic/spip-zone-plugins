@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function formulaires_media_inserer_modeles_traiter_dist($champs){
 	$code = '<'._request('modele');
