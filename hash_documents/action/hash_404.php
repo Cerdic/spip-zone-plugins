@@ -1,4 +1,5 @@
 <?php
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 ## fichier appele par le .htaccess de IMG/ ; lequel doit contenir :
 
