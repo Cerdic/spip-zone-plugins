@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'adresses' => 'نشاني‌ها',
 	'ajouter_adresse' => 'افزودن نشاني',
 	'ajouter_email' => 'افزودن ايميل',
-	'ajouter_telephone' => 'افزودن تلفن', # MODIF
+	'ajouter_telephone' => 'افزودن شماره‌ي تلفن',
 	'articles' => 'مقاله‌ها',
 	'auteurs' => 'نويسندگان',
 

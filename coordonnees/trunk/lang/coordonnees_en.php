@@ -15,10 +15,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'ajouter_email' => 'Add an email',
 	'ajouter_telephone' => 'Add a phone number', # MODIF
 	'articles' => 'Articles', # NEW
-	'auteurs' => 'Auteurs', # NEW
+	'auteurs' => 'Authors',
 
 	// C
-	'configuration_coordonnees' => 'Configuration des coordonnées', # NEW
+	'configuration_coordonnees' => 'Configuration of Address book',
 	'confirmer_suppression_adresse' => 'Are you sure you want to detele this address ?',
 	'confirmer_suppression_email' => 'Are you sure you want to detele this email ?',
 	'confirmer_suppression_numero' => 'Are you sure you want to detele this phone number ?', # MODIF
@@ -53,9 +53,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_complement' => 'Additional information', # MODIF
 	'label_email' => 'Email',
 	'label_numero' => 'Phone number', # MODIF
-	'label_objets_actifs' => 'Objets', # NEW
+	'label_objets_actifs' => 'Objects',
 	'label_pays' => 'Country',
-	'label_titre' => 'Titre', # NEW
+	'label_titre' => 'Title',
 	'label_type_adresse' => 'Address type',
 	'label_type_email' => 'Type of email',
 	'label_type_numero' => 'Type of phone number', # MODIF
@@ -75,7 +75,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'numeros' => 'Phone numbers', # MODIF
 
 	// R
-	'rubriques' => 'Rubriques', # NEW
+	'rubriques' => 'Sections',
 
 	// S
 	'supprimer_adresse' => 'Delette this address',
