@@ -7,6 +7,9 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
+	// A
+	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
+
 	// C
 	'changer_langue' => 'Cambiar el idioma del artículo',
 
@@ -30,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_plugin' => 'Traducción de articulos repensada',
-	'traductions' => 'Trad',
+	'traductions' => 'Traducciones', # MODIF
 
 	// V
 	'voir_traductions' => 'Ver las traducciones en detalle'

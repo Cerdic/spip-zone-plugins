@@ -8,8 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
-	'affichage_edition_seule' => 'Exibição das matérias apenas em modo de edição',
-	'affichage_liste_compacte' => 'Exibição compacta da lista de matérias',
+	'affichage_liste_compacte_desactive' => 'Désactivet l\'affichage compacte des liste des articles', # NEW
 
 	// C
 	'changer_langue' => 'Alterar o idioma da matéria',
@@ -34,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// T
 	'titre_plugin' => 'Tradução das matérias diferentemente',
-	'traductions' => 'Trad',
+	'traductions' => 'Traduções', # MODIF
 
 	// V
 	'voir_traductions' => 'Ver os detalhes das traduções'
