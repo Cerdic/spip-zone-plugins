@@ -3,7 +3,7 @@
 	<slogan>Un manuel sp&#233;cifique &#224; votre site pour vos r&#233;dacteurs</slogan>
 	<auteur>Yffic</auteur>
 	<licence>GPL v3</licence>
-	<version>0.5.0</version>
+	<version>0.5.1</version>
 	<version_base>0.2</version_base>
 	<etat>stable</etat>
 	<description>
@@ -32,6 +32,7 @@
 		<nom>affiche_droite</nom>
 		<inclure>manuelsite_prive_pipelines.php</inclure>
 	</pipeline>
+	<fonctions>manuelsite_fonctions.php</fonctions>
 	<necessite id="cfg" version="[1.10;]" />
 	<necessite id="SPIP" version="[2.1.0;2.1.99]" />
 	<necessite id="saisies" version="[1.1;]" />
