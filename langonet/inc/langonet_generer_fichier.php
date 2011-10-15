@@ -15,22 +15,21 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
  * @return 
  */
 function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $langue_cible='en', $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
-
 	include_spip('inc/traduire');
 	$var_source = "i18n_".$module."_".$langue_source;
-	spip_log($GLOBALS[$var_source],'langonet');
 	if (empty($GLOBALS[$var_source])) {
 		if (!file_exists($source = _DIR_RACINE.$ou_langue.$module.'_'.$langue_source.'.php'))
 			return array('message_erreur' =>  _T('langonet:message_nok_fichier_langue',  array('langue' => $langue_source, 'module' => $module, 'dossier' => $ou_langue)));
+		$GLOBALS['idx_lang'] = $var_source;	
 		include($source);
 	}
-	$GLOBALS['idx_lang'] = $var_source;	
 
 	$var_cible = "i18n_".$module."_".$langue_cible;
 	if (empty($GLOBALS[$var_cible])) {
-		$GLOBALS['idx_lang'] = $var_cible;
-		if ( file_exists($cible = _DIR_RACINE.$ou_langue.$module.'_'.$langue_cible.'.php'))
+		if (file_exists($cible = _DIR_RACINE.$ou_langue.$module.'_'.$langue_cible.'.php')) {
+			$GLOBALS['idx_lang'] = $var_cible;
 			include($cible);
+		}
 	}
 
 	$source = langonet_generer_couples($module, $var_source, $var_cible, $mode, $encodage, $oublis_inutiles);
@@ -50,8 +49,8 @@ function inc_langonet_generer_fichier($module, $langue_source, $ou_langue, $lang
 	return $resultats;
 }
 
-function langonet_generer_couples($module, $var_source, $var_cible, $mode='index', $encodage, $oublis_inutiles=array())
-{
+function langonet_generer_couples($module, $var_source, $var_cible, $mode='index', $encodage='utf8', $oublis_inutiles=array()) {
+
 	if ($encodage == 'utf8') include_spip('inc/langonet_utils');
 
 	// On recupere les items du fichier de langue si celui ci n'est pas vide
@@ -90,8 +89,8 @@ function langonet_generer_couples($module, $var_source, $var_cible, $mode='index
 	return $source;
 }
 
-/// Produit un fichier de langues a partir d'un tableau (index => trad)
-/// Si trad n'est pas une chaine mais un tableau, on le met en commentaire
+// Produit un fichier de langues a partir d'un tableau (index => trad)
+// Si trad n'est pas une chaine mais un tableau, on le met en commentaire
 
 function produire_fichier_langue($langue, $module, $items, $producteur='')
 {
@@ -113,13 +112,12 @@ function produire_fichier_langue($langue, $module, $items, $producteur='')
 	}
 
 	return '<'.'?php' . "\n" . '
-/// @file
-/// Ceci est un fichier langue de SPIP -- This is a SPIP language file' . '
-/// ' . preg_replace(",\\n[/#]*,", "\n/// ", $producteur) . '
-/// Module: ' . $module . '
-/// Langue: ' . $langue . '
-/// Date: ' . date('d-m-Y H:i:s') . '
-/// Items: ' . count($items) . '
+// Ceci est un fichier langue de SPIP -- This is a SPIP language file' . '
+// ' . preg_replace(",\\n[/#]*,", "\n/// ", $producteur) . '
+// Module: ' . $module . '
+// Langue: ' . $langue . '
+// Date: ' . date('d-m-Y H:i:s') . '
+// Items: ' . count($items) . '
 
 if (!defined(\'_ECRIRE_INC_VERSION\')) return;
 
@@ -132,7 +130,7 @@ $GLOBALS[$GLOBALS[\'idx_lang\']] = array(
 function ecrire_fichier_langue_php($dir, $langue, $module, $items, $producteur='')
 {
 	$nom = $dir . $module . "_" . $langue   . '.php';
-	$c = produire_fichier_langue($langue, $module, $items, $producteur);
-	return ecrire_fichier($nom, $c) ? $nom : false;
+	$contenu = produire_fichier_langue($langue, $module, $items, $producteur);
+	return ecrire_fichier($nom, $contenu) ? $nom : false;
 }
 ?>
