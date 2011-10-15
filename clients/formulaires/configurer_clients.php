@@ -32,6 +32,7 @@ return array(
 		),
 		array(
 			'saisie' => 'checkbox',
+			'editable' => (!in_array('civilite',lire_config('clients/elm',array()))) ? false : true,
 			'options' => array(
 				'nom' => 'elm_civ',
 				'label' => _T('clients:label_elm_civ'),
