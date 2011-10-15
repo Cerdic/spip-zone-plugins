@@ -35,7 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_taille_entre' => 'La valeur doit comprendre entre @min@ et @max@ caractères.',
 	'erreur_taille_max' => 'La valeur doit comprendre au maximum @max@ caractères.',
 	'erreur_taille_min' => 'La valeur doit comprendre au minimum @min@ caractères.',
-	'erreur_telephone' => 'Le numéro n\'est pas valide.',
+	'erreur_telephone' => 'Le numéro n\'est pas valide.', # MODIF
 	'erreur_url' => 'L\'adresse <em>@url@</em> n\'est pas valide.',
 	'erreur_url_protocole' => 'L\'adresse saisie <em>(@url@)</em> doit commencer par @protocole@',
 	'erreur_url_protocole_exact' => 'L\'adresse saisie <em>(@url@)</em> ne commence pas par un protocole valide (http:// par exemple)',
@@ -51,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_entier_max_label' => 'Valeur maximum',
 	'option_entier_min_label' => 'Valeur minimum',
 	'option_regex_modele_label' => 'La valeur doit correspondre au masque suivant',
-	'option_siren_siret_mode_label' => 'Que veux-tu vérifier ?',
+	'option_siren_siret_mode_label' => 'Que veux-tu vérifier ?', # MODIF
 	'option_siren_siret_mode_siren' => 'le SIREN',
 	'option_siren_siret_mode_siret' => 'le SIRET',
 	'option_taille_max_label' => 'Taille maximum',
@@ -59,7 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'option_url_mode_complet' => 'Vérification complète de l\'url',
 	'option_url_mode_label' => 'Mode de vérification des urls',
 	'option_url_mode_php_filter' => 'Vérification complète de l\'url via le filtre FILTER_VALIDATE_URL de php',
-	'option_url_mode_protocole_seul' => 'Vérification uniquement de la présence d\'un protocole',
+	'option_url_mode_protocole_seul' => 'Vérification uniquement de la présence d\'un protocole', # MODIF
 	'option_url_protocole_label' => 'Nom du protocole à vérifier',
 	'option_url_type_protocole_exact' => 'Saisir un protocole ci-dessous :',
 	'option_url_type_protocole_ftp' => 'Protocoles ftp : ftp ou sftp',
@@ -80,7 +80,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'type_entier' => 'Nombre entier',
 	'type_entier_description' => 'Vérifie que la valeur est un entier, avec la possibilité de restreindre entre deux valeurs.',
 	'type_regex' => 'Expression régulière',
-	'type_regex_description' => 'Vérifie que la valeur correspond au masque demandé. Pour l\'utilisation des masques, reporte-toi à <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l\'aide en ligne de PHP</a>.',
+	'type_regex_description' => 'Vérifie que la valeur correspond au masque demandé. Pour l\'utilisation des masques, reporte-toi à <a href="http://fr2.php.net/manual/fr/reference.pcre.pattern.syntax.php">l\'aide en ligne de PHP</a>.', # MODIF
 	'type_siren_siret' => 'SIREN ou SIRET',
 	'type_siren_siret_description' => 'V&eacute;rifie que la valeur est un num&eacute;ro valide du <a href="http://fr.wikipedia.org/wiki/SIREN">Syst&egrave;me d’Identification du R&eacute;pertoire des ENtreprises</a> fran&ccedil;ais.',
 	'type_taille' => 'Taille',
