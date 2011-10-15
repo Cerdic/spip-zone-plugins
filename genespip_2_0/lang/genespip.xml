@@ -1,4 +1,7 @@
 <traduction module="genespip" gestionnaire="salvatore" reference="fr">
+	<langue code="ca">
+		<traducteur nom="merce" />
+	</langue>
 	<langue code="en">
 		<traducteur nom="paolo2" />
 	</langue>
