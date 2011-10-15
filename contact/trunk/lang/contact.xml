@@ -12,8 +12,12 @@
 		<traducteur nom="mark_baber" />
 		<traducteur nom="kandalaft" />
 		<traducteur nom="kent1" />
+		<traducteur nom="davood" />
 	</langue>
 	<langue code="es" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="fr_tu">
 		<traducteur nom="beatnick" />
 	</langue>
