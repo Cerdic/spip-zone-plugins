@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fant' => 'ild',
 	'fonctionnement_recherche' => 'How the search mechanism works on this site',
 	'fulltext_cree' => 'FULLTEXT created',
+	'fulltext_creer' => 'Créer l\'index @index@', # NEW
 	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
 
 	// G
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'This table\'s format is',
 	'table_non_reconnue' => 'unrecognised table',
 	'textes_premier' => 'but shows first the texts which contain',
+	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
 
 	// U
 	'une_utilisation' => '1 utilisation', # NEW

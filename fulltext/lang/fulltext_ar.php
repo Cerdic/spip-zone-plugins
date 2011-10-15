@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'المحرك يتجاهل العلامات النطقية (فإدخال «déjà» او «deja» يعطي «déjà» و«dejà» و«déja»...)',
-	'activer_indexation' => 'تفعيل فهرسة',
+	'activer_indexation' => 'تفعيل فهرسة', # MODIF
 	'asie' => 'آسيا',
 	'asterisque_terminale' => 'لا يعطي شيئاً: فالنجمة يجب ان تكون في الآخر',
 	'aussi' => 'أيضاً',
@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fant' => 'لدي',
 	'fonctionnement_recherche' => '<strong>طريقة عمل محرك البحث</strong>',
 	'fulltext_cree' => 'تم إنشاء FULLTEXT',
+	'fulltext_creer' => 'Créer l\'index @index@', # NEW
 	'fulltext_documentation' => 'لمزيد من المعلومات حول الإعداد، راجع التعليمات الفورية:',
 
 	// G
@@ -85,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Index&eacute;s', # NEW
 	'nb_non_index' => 'Non-index&eacute;s', # NEW
 	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', # NEW
-	'necessite_version_php' => '(يتطلب PHP 5.2 الأقل وخيار -enable-zip)',
+	'necessite_version_php' => '(يتطلب PHP 5.2 الأقل وخيار -enable-zip)', # MODIF
 	'nombre_caracteres' => 'عدد الحروف المفهرسة (من بداية المستند).',
 	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
 
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'تنسيق هذا الجدول هو',
 	'table_non_reconnue' => 'جدول غير معروف',
 	'textes_premier' => 'ولكن يعرض أولاً النصوص التي تحتوي',
+	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
 
 	// U
 	'une_utilisation' => '1 utilisation', # NEW

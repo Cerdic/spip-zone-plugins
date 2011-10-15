@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Prízvuky sa neberú do úvahu ("článok" alebo "clanok", dá rovnaký výsledok, to isté "článok", "članok", "clánok"...)',
-	'activer_indexation' => 'Aktivovať indexovanie',
+	'activer_indexation' => 'Aktivovať indexovanie', # MODIF
 	'asie' => 'Ázia',
 	'asterisque_terminale' => 'nevyhľadá žiadne výsledky: hviezdička musí byť na konci',
 	'aussi' => 'tiež',
@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fant' => 'udz',
 	'fonctionnement_recherche' => 'Ako funguje vyhľadávací systém na tejto stránke ',
 	'fulltext_cree' => 'FULLTEXT vytvorený',
+	'fulltext_creer' => 'Créer l\'index @index@', # NEW
 	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
 
 	// G
@@ -85,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Indexov',
 	'nb_non_index' => 'Nezaindexovaných',
 	'nb_ptg' => 'Chránených (nezaindexovaných)',
-	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)', # NEW
+	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)', # MODIF
 	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).', # NEW
 	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
 
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'Formát tejto tabuľky je',
 	'table_non_reconnue' => 'obsah tabuľky je neznámy',
 	'textes_premier' => 'ale zobrazuje najskôr texty, ktoré obsahujú',
+	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
 
 	// U
 	'une_utilisation' => '1 použitie',

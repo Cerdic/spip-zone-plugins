@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'آكسن‌ها در نظر گرفته نمي‌شوند  ( در فرانسه « déjà » يا « deja » نتايج يك ساني خواهند داشت،‌ از جمله: « déjà »،« dejà »،« déja »...) ',
-	'activer_indexation' => 'Activer l\'indexation des', # NEW
+	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'آسيا',
 	'asterisque_terminale' => 'هيج نتيجه‌‌اي ندارد: ستاره * بايد آخر باشد',
 	'aussi' => 'نيز ',
@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fant' => 'fant',
 	'fonctionnement_recherche' => 'روش سازوكار جستجو در اين سايت ',
 	'fulltext_cree' => 'فول تكست(FULLTEXT)ايجاد شده',
+	'fulltext_creer' => 'Créer l\'index @index@', # NEW
 	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
 
 	// G
@@ -85,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Index&eacute;s', # NEW
 	'nb_non_index' => 'Non-index&eacute;s', # NEW
 	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', # NEW
-	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)', # NEW
+	'necessite_version_php' => 'N&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # NEW
 	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).', # NEW
 	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
 
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'اين جدول به اين فرمت است: ',
 	'table_non_reconnue' => 'جدول شناخته نشده',
 	'textes_premier' => 'اما اول تكست‌ها را با محتوا نشان مي‌دهد',
+	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
 
 	// U
 	'une_utilisation' => '1 utilisation', # NEW

@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Akzente werden nicht berücksichtigt, es werden die selben Ausdrücke gefunden, egal ob Sie « déjà » oder « deja » eingeben.',
-	'activer_indexation' => 'Activer l\'indexation des', # NEW
+	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'Asien',
 	'asterisque_terminale' => 'kein Ausdruck wird gefunden: Das Sternchen * muß am Ende stehen.',
 	'aussi' => 'auch',
@@ -50,6 +50,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fant' => 'ind',
 	'fonctionnement_recherche' => 'Funktionsweise der Suchmaschine dieser Website',
 	'fulltext_cree' => 'FULLTEXT angelegt',
+	'fulltext_creer' => 'Créer l\'index @index@', # NEW
 	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :', # NEW
 
 	// G
@@ -85,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Index&eacute;s', # NEW
 	'nb_non_index' => 'Non-index&eacute;s', # NEW
 	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', # NEW
-	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)', # NEW
+	'necessite_version_php' => 'N&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # NEW
 	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).', # NEW
 	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
 
@@ -120,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'Diese Tabelle ist im Format',
 	'table_non_reconnue' => 'Tabelle nicht erkannt',
 	'textes_premier' => 'sondern zeigt als erstes die Texte, die folgendes enthalten:',
+	'titre_page_fulltext_index' => 'Configuration des index de recherche', # NEW
 
 	// U
 	'une_utilisation' => '1 utilisation', # NEW
