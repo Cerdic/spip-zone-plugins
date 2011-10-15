@@ -69,6 +69,8 @@
 		<icone>images/abonnement_22.png</icone>
 		<url>abonnements</url>
 	</bouton>
+    <chemin dir='' />
+	<chemin dir="squelettes" />
 	<necessite id="SPIP" version="[2.1.8;2.1.99]" />
 	<necessite id="facteur" version="[1.0;]" />
 	<utilise id="zcommerce" version="[0.1;[" />
