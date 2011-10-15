@@ -136,12 +136,11 @@ function inc_recherche_to_array_dist($recherche, $options=null) {
 		if (is_array($jointures[$table]))
 		foreach(array_keys($jointures[$table]) as $jtable) {
 			$i++;
+			spip_log($pe,'recherche');
 			if ($mkeys = fulltext_keys($jtable, 'obj'.$i, $serveur)) {
-				$score[] = "SUM(MATCH(".implode($mkeys,',').") AGAINST ($pe".($boolean ?' IN BOOLEAN MODE':'')."))";
+				$score[] = "SUM(MATCH(".implode($mkeys,',').") AGAINST ($p".($boolean ?' IN BOOLEAN MODE':'')."))";
 				$_id_join = id_table_objet($jtable);
 				$table_join = table_objet($jtable);
-
-
 				$lesliens = recherche_tables_liens();
 				if (in_array($jtable, $lesliens))
 					$from .= "
