@@ -43,6 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'et' => 'ET',
 	'etranger' => 'étranger',
 	'exemples' => 'Exemples d\'utilisation',
+	'explication_option_readonly' => 'Cette option est forcée sur ce site et n\'est donc pas configurable.',
 
 	// F
 	'fant' => 'fant',

@@ -35,6 +35,38 @@ function formulaires_configurer_document_fulltext_charger_dist(){
 		
 		'xlsx_index' => $fulltext['xlsx_index'] ? $fulltext['xlsx_index'] : 'off',
 	);
+	if(defined('_FULLTEXT_DOC_EXE')){
+		$valeur['doc_bin'] = _FULLTEXT_DOC_EXE;
+		$valeur['doc_bin_readonly'] = true;
+	}
+	if(defined('_FULLTEXT_DOC_CMD_OPTIONS')){
+		$valeur['doc_opt'] = _FULLTEXT_DOC_CMD_OPTIONS;
+		$valeur['doc_opt_readonly'] = true;
+	}
+	if(defined('_FULLTEXT_PDF_EXE')){
+		$valeur['pdf_bin'] = _FULLTEXT_PDF_EXE;
+		$valeur['pdf_bin_readonly'] = true;	
+	}
+	if(defined('_FULLTEXT_PDF_CMD_OPTIONS')){
+		$valeur['pdf_opt'] = _FULLTEXT_PDF_CMD_OPTIONS;
+		$valeur['pdf_opt_readonly'] = true;
+	}
+	if(defined('_FULLTEXT_PPT_EXE')){
+		$valeur['ppt_bin'] = _FULLTEXT_PPT_EXE;
+		$valeur['ppt_bin_readonly'] = true;	
+	}
+	if(defined('_FULLTEXT_PPT_CMD_OPTIONS')){
+		$valeur['ppt_opt'] = _FULLTEXT_PPT_CMD_OPTIONS;
+		$valeur['ppt_opt_readonly'] = true;
+	}
+	if(defined('_FULLTEXT_XLS_EXE')){
+		$valeur['xls_bin'] = _FULLTEXT_XLS_EXE;
+		$valeur['xls_bin_readonly'] = true;	
+	}
+	if(defined('_FULLTEXT_XLS_CMD_OPTIONS')){
+		$valeur['xls_opt'] = _FULLTEXT_XLS_CMD_OPTIONS;
+		$valeur['xls_opt_readonly'] = true;	
+	}
 
 	return $valeur;
 }

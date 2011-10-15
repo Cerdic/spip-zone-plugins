@@ -39,14 +39,16 @@
 						</div>
 					</li>
 					<li class="fulltext_pdf_bin[ (#ENV**{erreurs}|table_valeur{pdf_bin}|oui)erreur]">
-						<label for="pdf_bin"><:fulltext:indiquer_chemin_bin:> .pdf</label>[
+						<label for="pdf_bin"><:fulltext:indiquer_chemin_bin:> .pdf</label>
+						[(#ENV{pdf_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{pdf_bin})</span>
-						]<input type="text" class="text" name="pdf_bin" id="pdf_bin" value="[(#ENV{pdf_bin})]" />
+						]<input type="text" class="text" name="pdf_bin" id="pdf_bin" value="[(#ENV{pdf_bin})]"[(#ENV{pdf_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_pdf_opt[ (#ENV**{erreurs}|table_valeur{pdf_opt}|oui)erreur]">
-						<label for="pdf_opt"><:fulltext:indiquer_options_bin:> .pdf</label>[
+						<label for="pdf_opt"><:fulltext:indiquer_options_bin:> .pdf</label>
+						[(#ENV{pdf_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{pdf_opt})</span>
-						]<input type="text" class="text" name="pdf_opt" id="pdf_opt" value="[(#ENV{pdf_opt})]" />
+						]<input type="text" class="text" name="pdf_opt" id="pdf_opt" value="[(#ENV{pdf_opt})]"[(#ENV{pdf_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
 			</li>
@@ -83,14 +85,16 @@
 						</div>
 					</li>
 					<li class="fulltext_doc_bin[ (#ENV**{erreurs}|table_valeur{doc_bin}|oui)erreur]">
-						<label for="doc_bin"><:fulltext:indiquer_chemin_bin:> .doc</label>[
+						<label for="doc_bin"><:fulltext:indiquer_chemin_bin:> .doc</label>
+						[(#ENV{doc_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{doc_bin})</span>
-						]<input type="text" class="text" name="doc_bin" id="doc_bin" value="[(#ENV{doc_bin})]" />
+						]<input type="text" class="text" name="doc_bin" id="doc_bin" value="[(#ENV{doc_bin})]"[(#ENV{doc_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_doc_opt[ (#ENV**{erreurs}|table_valeur{doc_opt}|oui)erreur]">
-						<label for="doc_opt"><:fulltext:indiquer_options_bin:> .doc</label>[
+						<label for="doc_opt"><:fulltext:indiquer_options_bin:> .doc</label>
+						[(#ENV{doc_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{doc_opt})</span>
-						]<input type="text" class="text" name="doc_opt" id="doc_opt" value="[(#ENV{doc_opt})]" />
+						]<input type="text" class="text" name="doc_opt" id="doc_opt" value="[(#ENV{doc_opt})]"[(#ENV{doc_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
 			</li>
@@ -127,14 +131,16 @@
 						</div>
 					</li>
 					<li class="fulltext_ppt_bin[ (#ENV**{erreurs}|table_valeur{ppt_bin}|oui)erreur]">
-						<label for="ppt_bin"><:fulltext:indiquer_chemin_bin:> .ppt</label>[
+						<label for="ppt_bin"><:fulltext:indiquer_chemin_bin:> .ppt</label>
+						[(#ENV{ppt_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{ppt_bin})</span>
-						]<input type="text" class="text" name="ppt_bin" id="ppt_bin" value="[(#ENV{ppt_bin})]" />
+						]<input type="text" class="text" name="ppt_bin" id="ppt_bin" value="[(#ENV{ppt_bin})]"[(#ENV{ppt_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_ppt_opt[ (#ENV**{erreurs}|table_valeur{ppt_opt}|oui)erreur]">
-						<label for="ppt_opt"><:fulltext:indiquer_options_bin:> .ppt</label>[
+						<label for="ppt_opt"><:fulltext:indiquer_options_bin:> .ppt</label>
+						[(#ENV{ppt_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{ppt_opt})</span>
-						]<input type="text" class="text" name="ppt_opt" id="ppt_opt" value="[(#ENV{ppt_opt})]" />
+						]<input type="text" class="text" name="ppt_opt" id="ppt_opt" value="[(#ENV{ppt_opt})]"[(#ENV{ppt_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
 			</li>	
@@ -171,14 +177,16 @@
 						</div>
 					</li>
 					<li class="fulltext_xls_bin[ (#ENV**{erreurs}|table_valeur{xls_bin}|oui)erreur]">
-						<label for="xls_bin"><:fulltext:indiquer_chemin_bin:> .xls</label>[
+						<label for="xls_bin"><:fulltext:indiquer_chemin_bin:> .xls</label>
+						[(#ENV{xls_bin_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{xls_bin})</span>
-						]<input type="text" class="text" name="xls_bin" id="xls_bin" value="[(#ENV{xls_bin})]" />
+						]<input type="text" class="text" name="xls_bin" id="xls_bin" value="[(#ENV{xls_bin})]"[(#ENV{xls_bin_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 					<li class="fulltext_xls_opt[ (#ENV**{erreurs}|table_valeur{xls_opt}|oui)erreur]">
-						<label for="xls_opt"><:fulltext:indiquer_options_bin:> .xls</label>[
+						<label for="xls_opt"><:fulltext:indiquer_options_bin:> .xls</label>
+						[(#ENV{xls_opt_readonly}|oui)<p class="explication"><:fulltext:explication_option_readonly:></p>][
 						<span class='erreur'>(#ENV**{erreurs}|table_valeur{xls_opt})</span>
-						]<input type="text" class="text" name="xls_opt" id="xls_opt" value="[(#ENV{xls_opt})]" />
+						]<input type="text" class="text" name="xls_opt" id="xls_opt" value="[(#ENV{xls_opt})]"[(#ENV{xls_opt_readonly}|oui) readonly="readonly" disabled="disabled"] />
 					</li>
 				</ul>
 			</li>
