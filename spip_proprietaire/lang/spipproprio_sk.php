@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fonction_administrateur' => 'Administrátor',
 	'fonction_webmaster' => 'Webmaster',
 	'forme' => 'Právnický',
-	'forme_comment' => 'Enterprise (<i>precise status ...</i>), association ...', # NEW
+	'forme_comment' => 'Soci&eacute;t&eacute; (<i>pr&eacute;cisez le statut ...</i>), association ...', # NEW
 	'forme_label' => 'Právna forma',
 
 	// H
@@ -227,32 +227,32 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 ', # NEW
 	'proprietaire' => 'vlastník',
 	'proprietaire_export_import' => 'Mentions L&eacute;gales : maintenance', # NEW
-	'proprietaire_export_import_texte_supp' => 'You can here save your current configuration and your personal language strings, or restore them from a previous backup (<i>including from another site</i>) ...<br /><br />', # NEW
-	'proprietaire_retour_plateforme' => 'Back to the platform', # NEW
-	'proprietaire_texte' => 'Here you can set global options for the site used by the plugin <b>Mentions L&eacute;gales</b>.<br /><br />You can also set strings specific languages ​​whose usage is recalled on the specific page.<br />', # NEW
-	'proprietaire_texte_supp' => 'This plugin offers you to automate and centralize the management of an \'institutional\' or \'professional\' website running SPIP.<br /><br />It allows you to enter a set of information about <b>the owner</b> of the site, organization, company, institution or individual in order to present various ways and eventually generate automatically copyright information, some \'Legal Statement\' and \'Terms of Use\'.', # NEW
-	'proprietaire_titre_page' => 'Plateform Mentions L&eacute;gales', # NEW
-	'proprietaire_titre_page_short' => 'Plateform', # NEW
-	'pskels_info_mentions_legales' => 'The blocks below provide information about defining the <b>creator</b> and <b>hosting</b> of the site to establish automatically some <b>Legal Statement</b> and <b>Terms of Use</b>.<br /><br /><u>These texts represent the statutory minimum for any website</u> and are very generic ... The should be considered as a working basis for creating your own texts.<br /><br />You can edit them on page \'Owner language texts\' if you enable the option below.', # NEW
-	'pskels_legal_legend_createur' => 'Information on site creator', # NEW
-	'pskels_legal_legend_hebergeur' => 'Information on site hosting', # NEW
-	'pskels_titre_page' => 'Configuration ok skeletons', # NEW
-	'ptexte_cliquez_pour_editer' => 'Click here to edit the entry with shortcuts formatting', # NEW
-	'ptexte_editable_ttl' => 'Click the line to edit ...', # NEW
-	'ptexte_form_titre' => 'Complete edition / New entry', # NEW
-	'ptexte_info_supp' => '<br /><b>Usage of strings on this page</b><br /><br />Strings on this page are saved in a language file called \'<b>proprietaire</b>\', so you can call them in your templates using the formula:<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />Note that if you use shortcuts in typing your text, you must add to the call above the filter \'<b>|propre</b>\'. This would give a call to the example above, the shape:<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />You can more simply use the tag <b>TEXTES_PROPRIETAIRE</b> this way:<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />shortcut,<br />arguments,<br />treatement}</code></center><br />where "arguments" corresponds to an array of arguments passed to the string and "treatement" to the name of the function of text processing (<i>"propre" by default</i>).', # NEW
-	'ptexte_info_tags' => '<br /><b>You can use the tags below into your texts (<i>they should be reported as written here: ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>This list is <b>not exhaustive</b> tag if present in the texts are not listed here, keep them ...', # NEW
-	'ptexte_info_texte' => '<ul><li><b>Languages files</b><br />The language file entries are defined by specifying a string\'s call (<i>entries \'shortcut\' of the table</i>) which corresponds to a full text (<i>entries \'displayed text\' of the table</i>), that can contain formatting and be as long as desired.<br /></li><li><b>Shortcuts Nomenclature</b><br />Shortcuts must be strings of text <u>without spaces or special characters</u> (<i>here you can enter your shortcuts with spaces, which will be replaced by underscore</i>).</li><li><b>Texts formatting</b><br />You can write your text in the same way that your SPIP articles ...</li></ul>', # NEW
-	'ptexte_info_titre' => 'Help / Reminders ...', # NEW
+	'proprietaire_export_import_texte_supp' => 'Vous pouvez ici sauvegarder votre configuration courante et vos cha&icirc;nes personnelles de langues, ou les restaurer depuis une pr&eacute;c&eacute;dente sauvegarde (<i>y compris depuis un autre site</i>) ...<br /><br />', # NEW
+	'proprietaire_retour_plateforme' => 'Retour &agrave; la plateforme', # NEW
+	'proprietaire_texte' => 'Vous pouvez ici d&eacute;finir les options g&eacute;n&eacute;rales du site utilis&eacute;es par le plugin <b>Mentions L&eacute;gales</b>.<br /><br />Vous pouvez &eacute;galement d&eacute;finir des cha&icirc;nes de langues particuli&egrave;res dont l\'utilisation est rappel&eacute;e sur la page concern&eacute;e.<br />', # NEW
+	'proprietaire_texte_supp' => 'Ce plugin vous propose de centraliser et automatiser la gestion d\'un site \'institutionnel\' ou \'professionnel\' fonctionnant sous SPIP.<br /><br />Il vous permet notamment de saisir un ensemble d\'informations sur le <b>propri&eacute;taire</b> du site, organisme, soci&eacute;t&eacute;, institution ou particulier, afin de les pr&eacute;senter de divers mani&egrave;res et, &eacute;ventuellement, de g&eacute;n&eacute;rer automatiquement des informations de Copyright, des \'Mentions l&eacute;gales\' et des \'Conditions d\'utilisation\' propres au site.', # NEW
+	'proprietaire_titre_page' => 'Plateforme Mentions L&eacute;gales', # NEW
+	'proprietaire_titre_page_short' => 'Plateforme', # NEW
+	'pskels_info_mentions_legales' => 'Les blocs ci-dessous permettent de d&eacute;finir les informations concernant les <b>Cr&eacute;ateur</b> et <b>H&eacute;bergeur</b> du site afin de mettre en place automatiquement des <b>Mentions L&eacute;gales</b> et <b >Conditions d\'Utilisation</b>.<br /><br />Ces textes repr&eacute;sentent <u>le minimum l&eacute;gal pour tout site web</u> et sont tr&egrave;s g&eacute;n&eacute;riques ... Ils doivent &ecirc;tre consid&eacute;r&eacute;s comme une base de travail pour cr&eacute;er vos propres textes.<br /><br />Vous pouvez les modifier sur la page \'Textes de langue propri&eacute;taire\' si vous activez l\'option ci-dessous.', # NEW
+	'pskels_legal_legend_createur' => 'Informations sur le cr&eacute;ateur du site', # NEW
+	'pskels_legal_legend_hebergeur' => 'Informations sur l\'h&eacute;bergeur du site', # NEW
+	'pskels_titre_page' => 'Configuration des squelettes', # NEW
+	'ptexte_cliquez_pour_editer' => 'Cliquez ici pour &eacute;diter l&prime;entr&eacute;e avec les raccourcis de mise en page', # NEW
+	'ptexte_editable_ttl' => 'Cliquez sur la ligne pour la modifier ...', # NEW
+	'ptexte_form_titre' => '&Eacute;dition compl&egrave;te / Nouvelle entr&eacute;e', # NEW
+	'ptexte_info_supp' => '<br /><b>Utilisation des cha&icirc;nes de cette page</b><br /><br />Les cha&icirc;nes de cette page sont enregistr&eacute;es dans un fichier de langue nomm&eacute; \'<b>proprietaire</b>\', vous pourrez donc les appeler dans vos squelettes en utilisant la formulation :<br /><br /><center><code>&lt;:proprietaire:raccourci:&gt;</code></center><br />A noter que, si vous utilisez des raccourcis typographiques dans vos textes, il vous faut ajouter dans l\'appel ci-dessus le filtre \'<b>|propre</b>\'. Cela donnerait un appel, pour l\'exemple ci-dessus, de la forme :<br /><br /><center><code>&lt;:proprietaire:raccourci|propre:&gt;</code></center><br />Vous pouvez, plus simplement, utiliser la balise <b>TEXTES_PROPRIETAIRE</b> de cette fa&ccedil;on :<br /><br /><center><code>&#035;TEXTES_PROPRIETAIRE{<br />raccourci,<br />arguments,<br />traitement}</code></center><br />o&ugrave; "arguments" correspond &agrave; un array des arguments &agrave; passer &agrave; la cha&icirc;ne et "traitement" au nom de la fonction de traitement du texte (<i>"propre" par d&eacute;faut</i>).', # NEW
+	'ptexte_info_tags' => '<br /><b>Vous pouvez utiliser les tags ci-dessous dans vos textes (<i>ils doivent &ecirc;tre indiqu&eacute;s comme &eacute;crit ici : ’@texte@’</i>) :</b><ul><li>@nom_site@</li><li>@url_site@</li><li>@descriptif_site@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom@</li><li>@proprietaire_forme@</li><li>@proprietaire_nom _responsable@</li><li>@proprietaire_fonction_ responsable_texte@</li><li>@proprietaire_ mail_administratif@</li></ul>Cette liste est <b>non-exhaustive</b>, si des tags pr&eacute;sents dans les textes ne sont pas list&eacute;s ici, conservez-les ...', # NEW
+	'ptexte_info_texte' => '<ul><li><b>Les fichiers de langue</b><br />Les entr&eacute;es des fichiers de langue se d&eacute;finissent en indiquant une cha&icirc;ne d\'appel (<i>les entr&eacute;es \'raccourci\' du tableau</i>) &agrave; laquelle correspond un texte complet (<i>les entr&eacute;es \'texte affich&eacute;\' du tableau</i>), qui peut contenir une mise en forme et &ecirc;tre aussi long que souhait&eacute;.<br /></li><li><b>Nomenclature des raccourcis</b><br />Les raccourcis doivent &ecirc;tre des cha&icirc;nes de texte <u>sans espace et sans caract&egrave;res sp&eacute;ciaux</u> (<i>vous pouvez ici saisir vos raccourcis avec des espaces, qui seront remplac&eacute;s par des underscore</i>).</li><li><b>Mise en forme des textes</b><br />Vous pouvez r&eacute;diger vos textes de la m&ecirc;me mani&egrave;re que vos articles SPIP ...</li></ul>', # NEW
+	'ptexte_info_titre' => 'Aide / Rappels ...', # NEW
 	'ptexte_supprimer' => 'Vymazať vstup',
-	'ptexte_texte' => 'This page allows you to manage certain owner texts necessary for the site without the regular edition mode (<i>modified language file on the server</i>).<br /><br />Entries \'Text displayed\' in the table are editable by clicking on the \'shortcut\' correspondent. You can also add entries using the form \'Complete Edition\'.', # NEW
-	'ptexte_titre_page' => 'Language owner texts', # NEW
+	'ptexte_texte' => 'Cette page vous permet de g&eacute;rer certains textes n&eacute;cessaires au site sans passer par le mode d\'&eacute;dition habituel (<i>modification du fichier de langue sur le serveur</i>).<br /><br />Les entr&eacute;es \'Texte affich&eacute;\' du tableau sont &eacute;ditables par un simple clic sur la ligne \'raccourci\' correspondante. Vous pouvez &eacute;galement ajouter des entr&eacute;es en utilisant le formulaire \'&Eacute;dition compl&egrave;te\'.', # NEW
+	'ptexte_titre_page' => 'Textes de langue propri&eacute;taire', # NEW
 	'ptexte_titre_page_short' => 'Texty jazyka',
 
 	// R
-	'responsable_fonction_label' => 'Responsible function', # NEW
-	'responsable_mail_label' => 'Responsible email', # NEW
-	'responsable_nom_label' => 'Responsible name', # NEW
+	'responsable_fonction_label' => 'Fonction du responsable', # NEW
+	'responsable_mail_label' => 'Adresse mail du responsable', # NEW
+	'responsable_nom_label' => 'Nom du responsable', # NEW
 	'retour' => 'Späť',
 	'rue_label' => 'Ulica',
 
@@ -284,7 +284,7 @@ Depuis sa version 1.1, le plugin propose une adaptation Z-compatible des squelet
 	'testing_page_business_cards_complet' => 'Celé texty vizitiek',
 	'testing_page_carte_visite' => 'Vizitky (<i>vo vývoji</i>)',
 	'testing_page_carte_visite_administrateur' => 'Vizitka administrátora',
-	'testing_page_carte_visite_chef' => 'Responsible card', # NEW
+	'testing_page_carte_visite_chef' => 'Carte de visite du responsable', # NEW
 	'testing_page_carte_visite_normale' => 'Klasická vizitka (<i>predvolené</i>)',
 	'testing_page_carte_visite_site' => 'Vizitka celej stránky (<i>internetové odkazy</i>)',
 	'testing_page_carte_visite_webmaster' => 'Vizitka webmastera',

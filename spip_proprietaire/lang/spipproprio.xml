@@ -1,8 +1,10 @@
 <traduction module="spipproprio" gestionnaire="salvatore" reference="fr">
 	<langue code="en">
 		<traducteur nom="merce" />
+		<traducteur nom="davood" />
 	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
+		<traducteur nom="merce" />
 	</langue>
 </traduction>
