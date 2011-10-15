@@ -1,0 +1,12 @@
+[(#REM) Squelette pour l'intégration du mini-fullcalendar dans sarkaspip
+		si l'agenda n'est pas automatiquement surchargé il suffit de 
+		placer de fichier dans votre répertoire squelettes/noisettes/agenda/
+]
+[(#SET{mini_id, #CONFIG{fullcalendar/mini_id,0} })] 
+[(#SET{events_nuts, #CONFIG{fullcalendar/events_nuts,1} })]
+[(#GET{events_nuts}|?{'',' '})
+	<div id="noisette_miniagenda" class="noisette">[(#MODELE{minifullcalendar}{id_minifullcalendar=#GET{mini_id}})]</div>
+]
+[(#GET{events_nuts}|?{' ',''})
+	<INCLURE{fond=noisettes/agenda/inc_mini_agenda_fullcalendar}{id_fullcalendar=#GET{mini_id}}>
+]

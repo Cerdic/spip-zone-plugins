@@ -8,27 +8,19 @@ function fullcalendar_insert_head_css($flux_ = '', $prive = false){
 	static $done = false;
 	if($done) return $flux_;
 	$done = true;
-	$flux  = "<!-- FULLCALENDAR INSERT HEAD CSS START -->
-";
-	$flux .= "<link rel='stylesheet' type='text/css' href='".find_in_path('css/redmond/theme.css')."' />
+	$flux .= "<link rel='stylesheet' type='text/css' href='".find_in_path('css/cupertino/theme.css')."' />
 ";
 	$flux .= "<link rel='stylesheet' type='text/css' href='".find_in_path('css/fullcalendar.css')."' />
 ";
-	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(generer_url_public('css_fullcalendar'))."' media='all' />
-";
-	$flux .= "<!-- FULLCALENDAR INSERT HEAD CSS END -->
+	$flux .= "<link rel='stylesheet' type='text/css' media='print' href='".find_in_path('css/fullcalendar.print.css')."' />
 ";
 	return $flux_ . $flux;
 }
 
 function fullcalendar_insert_head($flux_){
-	$flux  = "<!-- FULLCALENDAR INSERT HEAD START -->
-";
 	$flux .= "<script type='text/javascript' src='".find_in_path('js/fullcalendar.js')."'></script>
 ";
 	$flux .= "<script type='text/javascript' src='".find_in_path('js/gcal.js')."'></script>
-";
-	$flux .= "<!-- FULLCALENDAR INSERT HEAD END -->
 ";
 	return $flux_ . fullcalendar_insert_head_css() . $flux;
 }
@@ -58,7 +50,7 @@ function fullcalendar_header_prive($flux_){
 ";
 	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/jquery-ui-timepicker.css'))."' />
 ";
-	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/redmond/theme.css'))."' />
+	$flux .= "<link rel='stylesheet' type='text/css' href='".find_in_path('css/cupertino/theme.css')."' />
 ";
 	$flux .= "<link rel='stylesheet' type='text/css' href='".url_absolue(find_in_path('css/fullcalendar.css'))."' />
 ";
@@ -66,6 +58,31 @@ function fullcalendar_header_prive($flux_){
 ";
 	return $flux_ . $flux;
 }
+
+function fullcalendar_affiche_milieu($flux) {
+#	$exec = $flux["args"]["exec"];
+#	if ($exec == "naviguer") {
+#		if($flux['args']['id_rubrique']){
+#			$ret = "<div id='pave_selection'>";
+#			$ret .= recuperer_fond("prive/contenu/fullcalendar_rubriques", array('id_auteur'=>$flux['args']['id_rubrique']));
+#			$ret .= "</div>";
+#			$flux["data"] .= $ret;
+#		}
+#	}
+	return $flux;
+}
+
+function fullcalendar_affiche_gauche($flux){
+#	include_spip('inc/presentation');
+#	if ($flux['args']['exec'] == 'articles'){
+#		$flux['data'] .=
+#		debut_cadre_relief('',true,'', _T('fullcalendar:fullcalendar')) . 
+#		recuperer_fond('prive/contenu/fullcalendar_articles', array('id_auteur'=>$flux['args']['id_article'])) .
+#		fin_cadre_relief(true);
+#	}
+	return $flux;
+}
+
 
 /*************
  * JQUERY UI *
@@ -78,6 +95,7 @@ function fullcalendar_jqueryui_forcer($scripts){
 	$scripts[] = "jquery.ui.datepicker";
 	$scripts[] = "jquery.effects.scale";
 	$scripts[] = "jquery.ui.dialog";
+	$scripts[] = "jquery.ui.tabs";
 	return $scripts;
 }
 

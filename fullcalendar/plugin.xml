@@ -1,18 +1,27 @@
 <plugin>
 	<nom>FullCalendar</nom>
-	<auteur>[Grégory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
+	<slogan>
+		<multi>
+		[fr]Calendriers JQuery FullCalendar dans SPIP!
+		[en]JQuery FullCalendar for SPIP!
+		</multi>
+	</slogan>
+	<auteur>[Gr&#233;gory Pascal->http://www.spip-contrib.net/ngombe]</auteur>
+	<version>0.1.4</version>
 	<licence>GNU/GPL</licence>
-	<version>0.1.3</version>
 	<etat>test</etat>
-	<slogan>Calendriers pour l'espace public</slogan>
 	<description>
-		Gestion de calendriers pour l'espace public bas&#233;e sur [FullCalendar v1.4.10->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/], [CFG->http://www.spip-contrib.net/Config-cfg] et le plugin [jQuery UI->http://www.spip-contrib.net/jQuery-UI-pour-SPIP].
+		<multi>
+			[fr]Gestion de calendriers pour l'espace public bas&#233;e sur [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/] de [Adam Shaw->http://arshaw.com/], <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a> et le plugin [jQuery UI->http://www.spip-contrib.net/jQuery-UI-pour-SPIP].
+			[en]Calendar suite for SPIP, based on [Adam Shaw->http://arshaw.com/]'s [FullCalendar v1.5.2->http://arshaw.com/fullcalendar/], <a href="http://www.spip-contrib.net/Config-cfg" title="CFG">CFG</a> and [jQuery UI->http://www.spip-contrib.net/jQuery-UI-pour-SPIP].
+		</multi>
 	</description>
-	<icon>img_pack/fullcalendar-32.png</icon>
-	<lien>http://www.spip-contrib.net/FullCalendar,3736</lien>
+	<icon>prive/themes/spip/images/fullcalendar-32.png</icon>
+	<lien>http://www.spip-contrib.net/Fullcalendar</lien>
 	<prefix>fullcalendar</prefix>
 	<install>base/fullcalendar_init.php</install>
 	<noisette>modeles/fullcalendar.html</noisette>
+	<noisette>modeles/minifullcalendar.html</noisette>
 	<pipeline>
 		<nom>insert_head_css</nom>
 		<inclure>fullcalendar_pipelines.php</inclure>
@@ -25,13 +34,27 @@
 		<nom>header_prive</nom>
 		<inclure>fullcalendar_pipelines.php</inclure>
 	</pipeline>
-	<bouton id='config_fullcalendar' parent='configuration'>
-	      <icone>img_pack/fullcalendar-24.png</icone>
-	      <titre>FullCalendar</titre>
-	      <url>fullcalendar_add</url>
+	<pipeline>
+		<nom>affiche_milieu</nom>
+		<inclure>fullcalendar_pipelines.php</inclure>
+	</pipeline>
+	<pipeline>
+		<nom>affiche_gauche</nom>
+		<inclure>fullcalendar_pipelines.php</inclure>
+	</pipeline>
+		<bouton id="fullcalendar" parent="configuration">
+		<icone>prive/themes/spip/images/fullcalendar-24.png</icone>
+		<titre>fullcalendar:cfg_titre_accueil</titre>
+		<url>fullcalendar_add</url>
+	</bouton>
+	<bouton id='fullcalendar2' parent='bando_squelette'>
+		<icone>images/fullcalendar-16.png</icone>
+		<titre>fullcalendar:cfg_titre_accueil</titre>
+		<url>fullcalendar_add</url>
 	</bouton>
 	<categorie>date</categorie>
-	<necessite id="jqueryui" version="[1.8.5;]" />
-	<necessite id="SPIP" version="[2.0.0;2.1.99]" />
+	<necessite id="jqueryui" version="[1.6;)" />
+	<necessite id="SPIP" version="[2.0;3.0]" />
 	<necessite id='cfg' version='[1.0.4;]' />
+	<utilise id="palette" />
 </plugin>

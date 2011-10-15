@@ -1,0 +1,67 @@
+<?php 
+
+# if(is_file('lib_add_fullcalendar.inc.php')) include_once('lib_add_fullcalendar.inc.php');
+# else return;
+
+# if(isset($_POST['id_auteur'])
+#	 && isset($_POST['id_fullcalendar'])
+#	 && intval($_POST['id_fullcalendar'])>0
+# ) traite_POST($_POST);
+
+/* STILL BETA SORRY :-/
+
+<script type='text/javascript'>
+	$(document).ready(function() {
+		$('.Date_Debut').datepicker($.extend({},
+			$.datepicker.regional["fr"], {
+			onSelect: function(date) {
+				var day =$('.Date_Debut').datepicker('getDate');
+				$('.Date_Fin').datepicker('option','minDate',day);
+				$('.Date_Fin').datepicker('setDate',day);
+				}, 
+			minDate: "0d",
+			showStatus: true,
+			showWeeks: true,
+			highlightWeek: true, 
+			showOn: "both",
+			numberOfMonths: 1,
+			firstDay: 1
+		}));
+		$('.Date_Fin').datepicker($.extend({},
+			$.datepicker.regional["fr"], { 
+				minDate: "0d",
+				showStatus: true,
+				showWeeks: true,
+				highlightWeek: true, 
+				showOn: "both",
+				numberOfMonths: 1,
+				firstDay: 1
+		}));
+		$('.HeureFin').timepickr({trigger: 'click',convention:24,updateLive: false});
+		$('.HeureDebut').timepickr({trigger: 'click',convention:24,updateLive: false});
+	});
+
+	function ValidForm(){
+		var error=0;
+		if(!error) document.Formulaire.submit();
+	}
+</script>
+
+<form name='Formulaire' action='spip.php?article#ENV{id_article}&var_mode=calcul' method='POST'>
+<input type='hidden' name='id_fullcalendar' value='#ENV{id_fullcalendar}'>
+<input type='hidden' name='id_auteur' value='[(#SESSION{id_auteur})]'>
+  <div _style="float:left">
+   Du : <input type='text' name='Date' id='Date' class='Date_Debut' size='8' class="ui-widget ui-state-default" value="<?php print Date("d/m/Y");?>">
+   &nbsp;&nbsp; De : <input type='text' name='HeureDebut' class='HeureDebut' id='HeureDebut' size='3' class="ui-widget ui-state-default" value="<?php print Date("H:m");?>"><br/>
+   <br/>
+   Au : <input type='text' name='Date_Fin' id='Date_Fin' class='Date_Fin' size='8' class="ui-widget ui-state-default" value="<?php print Date("d/m/Y");?>">
+   &nbsp;&nbsp; A : <input type='text' name='HeureFin' class='HeureFin' id='HeureFin' size='3' class="ui-widget ui-state-default" value="<?php print Date("H:m");?>">
+  </div>
+  <br class="clear"><br/>
+ </div>
+ <br/>
+ <center><input type='button' value="Enregistrer" class="ui-widget ui-state-default" onclick="ValidForm()"></center>
+</form>
+
+*/
+?>

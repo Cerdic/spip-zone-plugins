@@ -1,0 +1,66 @@
+[(#REM) Squelette pour l'intégration du mini-fullcalendar dans sarkaspip
+		si l'agenda n'est pas automatiquement surchargé il suffit de 
+		placer de fichier dans votre répertoire squelettes/noisettes/agenda/
+]
+[(#SET{mini_limite, #CONFIG{fullcalendar/mini_limite,0} })]
+[(#SET{max_height, #CONFIG{fullcalendar/max_height,200} })]
+[(#SET{evt_avenir,''})]
+<B_calendrier>
+<div id="noisette_miniagenda" class="noisette">[(#MODELE{minifullcalendar}{id_minifullcalendar=#ID_FULLCALENDAR})]</div>
+<BOUCLE_calendrier(spip_fullcalendar_main){id_fullcalendar=#ID_FULLCALENDAR}>
+	<BOUCLE_evenement(spip_fullcalendar_events){id_fullcalendar=#ID_FULLCALENDAR}{start>=#DATE}{par start}{doublons}{0, #GET{mini_limite}}>
+		[(#SET{style,''})]
+		<BOUCLE_styles(spip_fullcalendar_styles){id_style=#ID_STYLE}>
+			[(#SET{style,background-color:#BGCOLOR;color:#TEXTCOLOR;border:1px solid #BORDERCOLOR})]
+		</BOUCLE_styles>
+		[(#SET{titre,#TITRE|entites_html})]
+		[(#LIEN|=={''}|?{'',' '})
+			[(#SET{titre,[<a class="intitule" href="[(#LIEN)]">(#TITRE|entites_html)</a>]})]
+		]
+		[(#SET{evt_avenir, #GET{evt_avenir}
+			|concat{'<li class="texte" style="'}
+			|concat{#GET{style}}
+			|concat{'" title="'}
+			|concat{#START|date_relative}
+			|concat{'">'}
+			|concat{<b>#START|affdate{'d/m'}}
+			|concat{</b> : #GET{titre}</li>}
+			})]
+	</BOUCLE_evenement>
+	<B_evenement_encours>
+	<div id="noisette_miniagenda_events" class="noisette">
+		<div class="contenu">
+		<h2 class="titre_bloc">En cours ...</h2>
+		<ul  class="texte" style="overflow:auto;max-height:#GET{max_height}px">
+		<BOUCLE_evenement_encours(spip_fullcalendar_events){id_fullcalendar=#ID_FULLCALENDAR}{end>=#DATE}{start<=#DATE}{doublons}{par start}>
+			[(#SET{style,''})]
+			<B_styles_encours>
+			<BOUCLE_styles_encours(spip_fullcalendar_styles){id_style=#ID_STYLE}>
+				[(#SET{style,background-color:#BGCOLOR;color:#TEXTCOLOR;border:1px solid #BORDERCOLOR})]
+			</BOUCLE_styles_encours>
+			</B_styles_encours>
+			<li class="texte" style="#GET{style}" title="[(#START|date_relative)]">
+				[(#START|affdate{'d/m'})] : 
+				[(#SET{titre,<b>#TITRE</b>})]
+				[(#LIEN|=={''}|?{'',' '})
+					[(#SET{titre,[<a class="intitule" href="[(#LIEN)]"><b>(#TITRE)</b></a>]})]
+				]
+				#GET{titre}
+			</li>
+		</BOUCLE_evenement_encours>
+		</ul>
+		</div>
+	</div>
+	</B_evenement_encours>
+	[(#GET{evt_avenir}|=={''}|?{'',' '})
+		<div id="noisette_miniagenda_events" class="noisette">
+			<div class="contenu">
+			<h2 class="titre_bloc">#NOM</h2>
+			<ul  class="texte" style="overflow:auto;max-height:#GET{max_height}px">
+			[(#GET{evt_avenir})]
+			</ul>
+			</div>
+		</div>
+	]
+</BOUCLE_calendrier>
+</B_calendrier>

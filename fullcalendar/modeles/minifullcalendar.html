@@ -1,10 +1,10 @@
-[(#REM) L'appel depuis un article se fait par < fullcalendarXX >, alors id_fullcalendar=XX
- ou par un modele CROCHET(# MODELE{fullcalendar}{id_fullcalendar=XX})CROCHET , alors id_fullcalendar=XX
+[(#REM) L'appel depuis un article se fait par < minifullcalendarXX >, alors id_minifullcalendar=XX
+ ou par un modele CROCHET(# MODELE{minifullcalendar}{id_minifullcalendar=XX})CROCHET 
 ]
 
 <?php
 
-	$id = '[(#ENV{id_fullcalendar,0}|texte_script)]';
+	$id = '[(#ENV{id_minifullcalendar, #CONFIG{fullcalendar/mini_id, 0}}|texte_script)]';
 
 	# Quelle source de donnée ?
 
@@ -40,8 +40,8 @@
 							"spip_articles AS A",
 							"spip_rubriques AS R" ),
 					array(
-							"A.id_rubrique='".intval($row['lien'])."'",
 							"A.statut='publie'",
+							"A.id_rubrique='".intval($row['lien'])."'",
 							"A.id_rubrique=R.id_rubrique" ),
 					"",
 					"A.date ASC");
@@ -57,12 +57,12 @@
 							$url="url:'spip.php?article".$row['id_article']."',";
 							if($date!='0000-00-00'&&$date_fin!='0000-00-00')
 							$events.="{title: '".texte_script(supprimer_numero($row['titre']))."',start:new Date(parseInt('".$date[0]."',10) , parseInt('".($date[1]-1)."',10) , parseInt('".$date[2]."',10), parseInt('".$start[0]."',10) , parseInt('".$start[1]."',10)),end: new Date(parseInt('".$date_fin[0]."',10), parseInt('".($date_fin[1]-1)."',10), parseInt('".$date_fin[2]."',10), parseInt('".$end[0]."',10), parseInt('".$end[1]."',10)),$url allDay: false},";
-
 					}
 			$events=substr($events,0,strlen($events)-1);
 			$events.=']';
 
 			break;
+
 
 			# AGENDA BASE SUR LES ARTICLES
 
@@ -74,7 +74,9 @@
 			if(!$row['lien']) return;
 
 			# Récupère les article liés à ce mot clé
-			$events='events: [';
+			$events='events: [
+
+			';
 
 			$req = sql_select(
 				array(
@@ -86,8 +88,8 @@
 					"spip_articles AS A",
 					"spip_mots_articles AS M" ),
 				array(
-					"M.id_mot='".intval($row['lien'])."'",
 					"A.statut='publie'",
+					"M.id_mot='".intval($row['lien'])."'",
 					"A.id_article=M.id_article" ),
 				"",
 				"A.date ASC");
@@ -187,16 +189,16 @@
 		$aspectRatio 				= "[(#ENV{aspectRatio,#CONFIG{fullcalendar/aspectRatio,'1.35'}}|texte_script)]";
 		$useTheme 					= "[(#ENV{useTheme,#CONFIG{fullcalendar/useTheme,true}}|texte_script)]";
 		$useTheme					= ($useTheme=='true')? 'theme: true,' : '' ;
-		$weekends 					= "[(#ENV{weekends,#CONFIG{fullcalendar/weekends,true}}|texte_script)]";
+		$weekends 					= "[(#ENV{weekends,#CONFIG{fullcalendar/miniweekends,false}}|texte_script)]";
 		$defaultView 				= "[(#ENV{defaultView,#CONFIG{fullcalendar/defaultView,month}}|texte_script)]";
 
-		$headerLeft 				= "[(#CONFIG{fullcalendar/headerLeft, 'prev,next'}|texte_script)]";
-		$headerCenter 				= "[(#CONFIG{fullcalendar/headerCenter, 'title'}|texte_script)]";
-		$headerRight 				= "[(#CONFIG{fullcalendar/headerRight, 'month,agendaWeek,agendaDay'}|texte_script)]";
+		$headerLeft 				= "[(#CONFIG{fullcalendar/miniheaderLeft, 'today'}|texte_script)]";
+		$headerCenter 				= "[(#CONFIG{fullcalendar/miniheaderCenter, 'title'}|texte_script)]";
+		$headerRight 				= "[(#CONFIG{fullcalendar/miniheaderRight, 'prev,next'}|texte_script)]";
 		$firstDay					= "[(#CONFIG{fullcalendar/firstDay, '1'}|texte_script)]";
-		$month_titleFormat 			= "[(#CONFIG{fullcalendar/month_titleFormat, 'MMMM yyyy'}|texte_script)]";
-		$month_columnFormat 		= "[(#CONFIG{fullcalendar/month_columnFormat, 'dddd'}|texte_script)]";
-		$month_timeFormat 			= "[(#CONFIG{fullcalendar/month_timeFormat, ''}|texte_script)]";
+		$month_titleFormat 			= "[(#CONFIG{fullcalendar/minimonth_titleFormat, 'MMM yy'}|texte_script)]";
+		$month_columnFormat 		= "[(#CONFIG{fullcalendar/minimonth_columnFormat, 'ddd'}|texte_script)]";
+		$month_timeFormat 			= "[(#CONFIG{fullcalendar/minimonth_timeFormat, ''}|texte_script)]";
 		#$week_titleFormat 			= "[(#CONFIG{fullcalendar/week_titleFormat, 'd [(#VAL{91}|chr)]MMMM[(#VAL{93}|chr)] [(#VAL{91}|chr)] yyyy[(#VAL{93}|chr)][(#VAL{123}|chr)]  -  d MMMM yyyy[(#VAL{125}|chr)]' }|texte_script)]";
 		$week_titleFormat 			= "[(#CONFIG{fullcalendar/week_titleFormat, 'd MMMM  yyyy{  -  d MMMM yyyy}'}|texte_script)]";
 		$week_columnFormat 			= "[(#CONFIG{fullcalendar/week_columnFormat, 'dddd d'}|texte_script)]";
@@ -213,8 +215,8 @@
 		print "
 		<script type='text/javascript'>
 		$(document).ready(function() {
-			if( ! $('#calendar".$rand."').data('fullcalendar_set') ) {
-				$('#calendar".$rand."').fullCalendar({
+			if( ! $('#minicalendar".$rand."').data('fullcalendar_set') ) {
+				$('#minicalendar".$rand."').fullCalendar({
 					".$useTheme."
 					firstDay: ".$firstDay.",
 					defaultView: '".$defaultView."',
@@ -242,15 +244,54 @@
 						basicDay:   \"".$day_timeFormat_basic."\",
 						'': 'H(:mm)'
 					},
+					eventMouseover: function(event, jsEvent, view) {
+						if (view.name !== 'agendaDay') {
+							$(jsEvent.target).attr('title', event.title);
+						}
+					}
 				});
 			}
-			$('#calendar".$rand."').data('fullcalendar_set', 1);
+			$('#minicalendar".$rand."').data('fullcalendar_set', 1);
+
 		});
 		</script>
 
-		<div id='calendar".$rand."'></div>
+		<div id='minicalendar".$rand."' class='minicalendar'></div>
 
 		";
 
 	}
 ?>
+
+<style type="text/css">
+<!--
+.minicalendar {
+	width: #CONFIG{fullcalendar/mini_width, 200}px;
+	margin: 0 auto;
+	font-size: 10px;
+}
+.minicalendar .fc-header-title {
+	font-size: #CONFIG{fullcalendar/mini_font, 1}em;
+	padding-top:5px;
+	white-space: normal !important;
+}
+.minicalendar .fc-view-month .fc-event, .fc-view-agendaWeek .fc-event {
+	font-size: 0;
+	overflow: hidden;
+	height: 2px;
+}
+.minicalendar.fc-view-agendaWeek .fc-event-vert {
+	font-size: 0;
+	overflow: hidden;
+	width: 2px !important;
+}
+.minicalendar .fc-agenda-axis {
+	width: 20px !important;
+	font-size: .7em;
+}
+
+.minicalendar .fc-button-content {
+	padding: 0;
+}
+-->
+</style>

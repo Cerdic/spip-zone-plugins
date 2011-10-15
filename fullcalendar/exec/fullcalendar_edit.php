@@ -7,7 +7,7 @@
  * Formulaires d'ajout et modification des évènements
  *
  * Auteur : Grégory PASCAL - ngombe at gmail dot com
- * Modifs : 06/04/2011
+ * Modifs : 10/10/2011
  *
  */
 
@@ -51,7 +51,7 @@ function exec_fullcalendar_edit(){
 		&& $_POST['id_calendrier']
 		&& strlen($_POST['id_mot'])
 	){
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'une mot clé pour cet agenda.</center><br/>";
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:action_mot_add').".</center><br/>";
 		sql_insert('spip_fullcalendar_events', '(id_fullcalendar, lien)', "(".sql_quote(intval($_POST['id_calendrier'])).", ".sql_quote(intval($_POST['id_mot'])).")");
 	}
 
@@ -65,8 +65,36 @@ function exec_fullcalendar_edit(){
 		&& $_POST['id_calendrier']
 		&& strlen($_POST['id_mot'])
 	){
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Mise à jour du mot clé pour cet agenda.</center><br/>";
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:action_mot_edit').".</center><br/>";
 		sql_update('spip_fullcalendar_events', array('lien' => sql_quote(intval($_POST['id_mot'])) ), "id_fullcalendar=".sql_quote(intval($_POST['id_calendrier'])) );
+	}
+
+	########################
+	# Ajout d'une rubrique #
+	########################
+
+	if(
+			$_POST['action_to_take']=='add_rubrique'
+			&& $_POST['ajouter']
+			&& $_POST['id_calendrier']
+			&& strlen($_POST['id_rubrique'])
+	){
+			$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:action_rub_add').".</center><br/>";
+			sql_insert('spip_fullcalendar_events', '(id_fullcalendar, lien)', "(".sql_quote(intval($_POST['id_calendrier'])).", ".sql_quote(intval($_POST['id_rubrique'])).")");
+	}
+
+	########################
+	# Modifier la rubrique #
+	########################
+
+	if(
+			$_POST['action_to_take']=='update_rubrique'
+			&& $_POST['ajouter']
+			&& $_POST['id_calendrier']
+			&& strlen($_POST['id_rubrique'])
+	){
+			$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:action_rub_edit').".</center><br/>";
+			sql_update('spip_fullcalendar_events', array('lien' => sql_quote(intval($_POST['id_rubrique'])) ), "id_fullcalendar=".sql_quote(intval($_POST['id_calendrier'])) );
 	}
 
 	##########################
@@ -79,7 +107,7 @@ function exec_fullcalendar_edit(){
 		&& $_POST['id_calendrier']
 		&& strlen($_POST['gcalID'])
 	){
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'une clé Google Agenda.</center><br/>";
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:action_key_add').".</center><br/>";
 		sql_insert('spip_fullcalendar_events', '(id_fullcalendar, lien)', "(".sql_quote(intval($_POST['id_calendrier'])).", ".sql_quote($_POST['gcalID']).")");
 	}
 
@@ -93,7 +121,7 @@ function exec_fullcalendar_edit(){
 		&& $_POST['id_calendrier']
 		&& strlen($_POST['gcalID'])
 	){
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Mise à jour de la clé pour cet agenda.</center><br/>";
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:action_key_edit').".</center><br/>";
 		sql_update('spip_fullcalendar_events', array('lien' => sql_quote(trim($_POST['gcalID'])) ), "id_fullcalendar=".sql_quote(intval($_POST['id_calendrier'])) );
 	}
 
@@ -108,9 +136,9 @@ function exec_fullcalendar_edit(){
 	){
 
 		$t = explode('/',$_POST['Date']);
-		$date = $t[2].'-'.$t[1].'-'.$t[0];
+		$date = $t['2'].'-'.$t['1'].'-'.$t['0'];
 		$t = explode('/',$_POST['Date_Fin']);
-		$date_fin = $t[2].'-'.$t[1].'-'.$t[0];
+		$date_fin = $t['2'].'-'.$t['1'].'-'.$t['0'];
 		unset($t);
 
 		sql_insert("spip_fullcalendar_events",
@@ -124,7 +152,7 @@ function exec_fullcalendar_edit(){
 		 ".sql_quote($date_fin." ".$_POST['HeureFin'].":00")."
 		 )");
 
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Ajout d'un nouvel évènement.</center><br/>";
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:event_add').".</center><br/>";
 
 	}
 
@@ -157,7 +185,7 @@ function exec_fullcalendar_edit(){
 			"id_event=".sql_quote(intval($_POST['id_evenement']))
 		);
 
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Modification d'un évènement.</center><br/>";
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:event_edit').".</center><br/>";
 
 	}
 
@@ -171,7 +199,7 @@ function exec_fullcalendar_edit(){
 		&& $_POST['id_evenement']
 	){
 		sql_delete("spip_fullcalendar_events", "id_event=".sql_quote(intval($_POST['id_evenement'])) );
-		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/ok.png'> &nbsp; Efface un évènement !</center><br/>";
+		$INFO="<center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/ok.png'> &nbsp; "._T('fullcalendar:event_del')."</center><br/>";
 	}
 
 	#################################
@@ -180,7 +208,7 @@ function exec_fullcalendar_edit(){
 
 	$req = sql_select('*', 'spip_fullcalendar_main', 'id_fullcalendar='.$id_fullcalendar);
 	$num_calendar = sql_count($req);
-	if(!$num_calendar) $INFO="<center style=\"color:red\">Ce calendrier n'existe plus !</center><br/>";
+	if(!$num_calendar) $INFO="<center style=\"color:red\">"._T('fullcalendar:unknown_error')."</center><br/>";
 	else {
 
 		$row  = sql_fetch($req);
@@ -193,9 +221,9 @@ function exec_fullcalendar_edit(){
 
 		$req = sql_select('*', 'spip_fullcalendar_styles');
 		$num_style = sql_count($req);
-		if(!$num_style) $STYLES="Vous n'avez pas définit de style pour vos évènements, il seront donc affichés avec les couleurs par défaut. Pour créer un nouveau style d'évènement <a href=\"?exec=fullcalendar_css\">cliquez ici</a>.";
+		if(!$num_style) $STYLES=_T('fullcalendar:no_style');
 		else {
-			$STYLES="<p>Style de l'évènement:<select name='id_style' id='id_style'>";
+			$STYLES="<p>"._T('fullcalendar:event_style').":<select name='id_style' id='id_style'>";
 			while ($rw = sql_fetch($req)) {
 				$STYLES.="<option value=\"".$rw['id_style']."\">".$rw['titre']."</option>";
 			}
@@ -227,7 +255,7 @@ function exec_fullcalendar_edit(){
 			$DATE_FIN = DateFromMysql(substr($rw['end'],0,10));
 			$START = substr($rw['start'],11,5);
 			$END = substr($rw['end'],11,5);
-			$BUTTON = "<input type=\"submit\" name=\"enregistrer\" value=\" Enregistrer \" class=\"fondo\" />";
+			$BUTTON = "<input type=\"submit\" name=\"enregistrer\" value=\" "._T('bouton_enregistrer')." \" class=\"fondo\" />";
 
 		} else {
 
@@ -237,25 +265,37 @@ function exec_fullcalendar_edit(){
 			$DATE_FIN=(strlen($_POST['Date_Fin'])==10)?stripslashes($_POST['Date_Fin']):Date("d/m/Y");
 			$START=(strlen($_POST['HeureDebut'])==5)?stripslashes($_POST['HeureDebut']):Date("H:m");
 			$END=(strlen($_POST['HeureFin'])==5)?stripslashes($_POST['HeureFin']):Date("H:m");
-			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Ajouter \" class=\"fondo\" />";
+			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" "._T('fullcalendar:add')." \" class=\"fondo\" />";
 
 		}
+
+			# Récupère les style css
+			$HTML.="<style type='text/css'>";
+			$result = sql_select('*', 'spip_fullcalendar_styles');
+			while ( $row = sql_fetch($result)){
+				$HTML.=".f_".$row['id_style'].", .f_".$row['id_style']." a {background-color:".$row['bgcolor'].";border-color:".$row['bordercolor'].";color:".$row['textcolor'].";}\n";
+				$style[$row['id_style']]['back'] = $row['bgcolor'];
+				$style[$row['id_style']]['text'] = $row['textcolor'];
+				$style[$row['id_style']]['bord'] = $row['bordercolor'];
+			}
+			sql_free($result);
+			$HTML.="</style>";
 
 			# Récupère les évènements du calendrier MySQL
 
 			$events='';
 			$req = sql_select('*', 'spip_fullcalendar_events', 'id_fullcalendar='.$id_fullcalendar, '', 'start ASC');
 			$num_events = sql_count($req);
-			if(!$num_events) $INFO.="Aucun évènement dans ce calendrier!";
+			if(!$num_events) $INFO.=_T('fullcalendar:no_event');
 			else {
 
-				$HTML="
+				$HTML.="
 
 				<script type=\"text/javascript\">
 				//<!--
 				function EffacerEvenement(id){
 					if(!document.getElementById) return false;
-					if(confirm('Effacer cet évènement ?')){
+					if(confirm('"._T('fullcalendar:delete_event')."')){
 						document.Formulaire.id_evenement.value=id;
 						document.Formulaire.action_to_take.value='del';
 						document.Formulaire.submit();
@@ -274,11 +314,12 @@ function exec_fullcalendar_edit(){
 				</script>
 
 				<table width=\"100%\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\">
-					<tbody>
-					<tr>
-						<th>Nom</th>
-						<th>Début</th>
-						<th>Fin</th>
+					<tbody>";
+
+				$entete="<tr>
+						<th>"._T('fullcalendar:event_title')."</th>
+						<th>"._T('fullcalendar:event_start')."</th>
+						<th>"._T('fullcalendar:event_end')."</th>
 						<th>&nbsp;</th>
 					</tr>";
 
@@ -295,25 +336,36 @@ function exec_fullcalendar_edit(){
 					$fc_start = explode(':',substr($row['start'],11,5));
 					$fc_end = explode(':',substr($row['end'],11,5));
 
-					if(strlen($row['id_style']))
-						$class=",className: 'f_".$row['id_style']."'";
+					if($row['id_style']>0){
+						$class=",backgroundColor: '".$style[$row['id_style']]['back']."', textColor: '".$style[$row['id_style']]['text']."', borderColor: '".$style[$row['id_style']]['bord']."'";
+					} else $class='';
 
 					if(strlen(trim($row['lien']))){
 							$lien_start="<a href=\"".$row['lien']."\">";
 							$lien_end="</a>";
 					}
 
+					$bloc='';
+					$t=substr($date,5,2);
+					if($bloc_mois!=$t){
+						$bloc_mois=$t;
+						$annee=substr($date,0,4);
+						$bloc.="<tr class='spip_large'><th colspan=4 style=\"border-bottom:1px solid #000;padding-top:4px;\">
+						".MyMonth($t)." ".$annee."
+						</th></tr>".$entete;
+					}
+
 					$url="url:\"javascript:ModifierEvenement('".$row['id_event']."')\",";
 
 					$events.="{title: '".texte_script($row['titre'])."',start: new Date(".$fc_date[0].", ".($fc_date[1]-1).", ".$fc_date[2].", ".$fc_start[0].", ".$fc_start[1]."),end: new Date(".$fc_date_fin[0].", ".($fc_date_fin[1]-1).", ".$fc_date_fin[2].", ".$fc_end[0].", ".$fc_end[1]."),".$url." allDay: false ".$class."},";
 
-					$HTML.= "<tr class=\"tr_liste\">
+					$HTML.= "$bloc<tr class=\"tr_liste f_".$row['id_style']."\">
 								<td class=\"verdana12\">".$lien_start."".$row['titre']."".$lien_end."</td>
 								<td class=\"arial1\">".MyDateEnLettre ($date)."<br/>".$start."</td>
 								<td class=\"arial1\">".MyDateEnLettre ($date_fin)."<br/>".$end."</td>
 								<td>
-									<a href=\"javascript:ModifierEvenement('".$row['id_event']."')\"><img src=\""._DIR_PLUGIN_FULLCALENDAR."img_pack/event_edit.png\"></a> &nbsp;
-									<a href=\"javascript:EffacerEvenement('".$row['id_event']."')\"><img src=\""._DIR_PLUGIN_FULLCALENDAR."img_pack/event_remove.png\"></a>
+									<a href=\"javascript:ModifierEvenement('".$row['id_event']."')\"><img src=\""._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/event_edit.png\"></a> &nbsp;
+									<a href=\"javascript:EffacerEvenement('".$row['id_event']."')\"><img src=\""._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/event_remove.png\"></a>
 								</td>
 							 </tr>
 							";
@@ -323,15 +375,6 @@ function exec_fullcalendar_edit(){
 				$HTML.="</table>";
 
 				$events=substr($events,0,strlen($events)-1);
-
-				# Pond la CSS des évènements
-
-				$HTML.="<style type='text/css'>";
-				$res = sql_select('*', 'spip_fullcalendar_styles');
-				while ( $row = sql_fetch($res))
-					$HTML.=".f_".$row['id_style'].", .fc-agenda .f_".$row['id_style']." .fc-event-time, .f_".$row['id_style']." a {background-color:".$row['bgcolor'].";border-color:".$row['bordercolor'].";color:".$row['textcolor'].";}\n";
-				$HTML.="</style>";
-				sql_free($res);
 
 			}
 
@@ -346,23 +389,23 @@ function exec_fullcalendar_edit(){
 
 			$.datepicker.regional['fr'] = {
 				closeText: 'Fermer',
-                prevText: '&#x3c;Préc',
-                nextText: 'Suiv&#x3e;',
-                currentText: 'Courant',
-                monthNames: ['Janvier','F&eacute;vrier','Mars','Avril','Mai','Juin',
-                'Juillet','Ao&ucirc;t','Septembre','Octobre','Novembre','D&eacute;cembre'],
-                monthNamesShort: ['Jan','F&eacute;v','Mar','Avr','Mai','Jun',
-                'Jul','Ao&ucirc;','Sep','Oct','Nov','Déc'],
-                dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
-                dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
-                dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
-                weekHeader: 'Sm',
-                dateFormat: 'dd/mm/yy',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''
-            };
+				prevText: '&#x3c;Préc',
+				nextText: 'Suiv&#x3e;',
+				currentText: 'Courant',
+				monthNames: ['Janvier','F&eacute;vrier','Mars','Avril','Mai','Juin',
+				'Juillet','Ao&ucirc;t','Septembre','Octobre','Novembre','D&eacute;cembre'],
+				monthNamesShort: ['Jan','F&eacute;v','Mar','Avr','Mai','Jun',
+				'Jul','Ao&ucirc;','Sep','Oct','Nov','Déc'],
+				dayNames: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+				dayNamesShort: ['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],
+				dayNamesMin: ['Di','Lu','Ma','Me','Je','Ve','Sa'],
+				weekHeader: 'Sm',
+				dateFormat: 'dd/mm/yy',
+				firstDay: 1,
+				isRTL: false,
+				showMonthAfterYear: false,
+				yearSuffix: ''
+			};
 
 			$.datepicker.setDefaults($.datepicker.regional['fr']);
 
@@ -403,6 +446,8 @@ function exec_fullcalendar_edit(){
 					}
 				}));
 
+			var day =$('#Date').datepicker('getDate');
+			$('#Date_Fin').datepicker('option','minDate',day);
 
 			$('#calendar_aff').fullCalendar({
 					theme: 0,
@@ -445,24 +490,19 @@ function exec_fullcalendar_edit(){
 			<div id='calendar_aff'></div><br/>
 			<div class=\"formulaire_spip formulaire_config\">
 				<div class=\"cadre_padding\">
-
 				<form class=\"noajax\" action=\"\" name=\"Formulaire\" method=\"POST\">
 				<input type=\"hidden\" name=\"action_to_take\" value=\"".$ACTION."\">
 				<input type=\"hidden\" name=\"id_evenement\" value=\"".$ID_EVENEMENT."\">
-				<p>Calendrier : <select name=\"id_calendrier\">".$LISTE_CALENDRIER."</select></p>
-
-				<p>Du :
-				<input type='text' name='Date' id='Date' size='10' value=\"".$DATE."\">
+				<p>"._T('fullcalendar:calendar')." : <select name=\"id_calendrier\" style=\"width:84%\">".$LISTE_CALENDRIER."</select></p>
+				<p>"._T('fullcalendar:event_from')." : <input type='text' name='Date' id='Date' size='10' value=\"".$DATE."\">
 				<input type='text' name='HeureDebut' id='HeureDebut' size='5' value=\"".$START."\">
-				&nbsp;&nbsp; Au : <input type='text' name='Date_Fin' id='Date_Fin' size='10' value=\"".$DATE_FIN."\">
-				<input type='text' name='HeureFin' id='HeureFin' size='5' value=\"".$END."\"></p>
-
-<p>Titre de l'évènement : <input type='text' name='Nom_Evenement' class=\"forml\" style=\"width:98%\" value=\"".$NOM."\"></p>
-
-				<p>Lien : <input type='text' name='Lien_Evenement' class=\"forml\" style=\"width:98%\" value=\"".$LIEN."\"></p>
-
+				</p>
+				<p>"._T('fullcalendar:event_to')." : <input type='text' name='Date_Fin' id='Date_Fin' size='10' value=\"".$DATE_FIN."\">
+				<input type='text' name='HeureFin' id='HeureFin' size='5' value=\"".$END."\">
+				</p>
+				<p>"._T('fullcalendar:event_title')." : <input type='text' name='Nom_Evenement' class=\"forml\" style=\"width:98%\" value=\"".$NOM."\"></p>
 				".$STYLES."
-
+				<p>"._T('fullcalendar:lien')." : <input type='text' name='Lien_Evenement' class=\"forml\" style=\"width:98%\" value=\"".$LIEN."\"></p>
 				</div>
 				<div class=\"boutons\">".$BUTTON."</div>
 				</form>
@@ -471,7 +511,7 @@ function exec_fullcalendar_edit(){
 
 		} else if($type=='google') {
 
-		$INFO="<b>Agenda Google</b><br/><br/>Vérifier bien que votre agenda est <u>public</u> puis renseignez l'ID dans le formulaire ci-contre.<br/><br/>".$INFO;
+		$INFO="<b>"._T('fullcalendar:google_agenda')."</b><br/><br/>"._T('fullcalendar:google_agenda_info')."<br/><br/>".$INFO;
 
 		# Récupère le lien Google dans les évènements
 
@@ -482,33 +522,161 @@ function exec_fullcalendar_edit(){
 			$gcalID=$rw['lien'];
 			$URL_AGENDA = "http://www.google.com/calendar/feeds/".$rw['lien']."/public/basic";
 			$ACTION='update';
-			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Modifier cette clé \" class=\"fondo\" />";
+			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" "._T('fullcalendar:key_update')." \" class=\"fondo\" />";
 		} else { # on ajoute la clé
 			$ACTION='add';
 			$gcalID='';
-			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Enregistrer la clé \" class=\"fondo\" />";
+			$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" "._T('fullcalendar:key_save')." \" class=\"fondo\" />";
 		}
 
 
 		$INTERFACE='
 			<div class="formulaire_spip formulaire_config">
 				<div class="cadre_padding">
-
 				<form action="" name="Formulaire" method="POST">
 				<input type="hidden" name="action_to_take" value="'.$ACTION.'">
 				<input type="hidden" name="id_calendrier" value="'.$id.'">
-				<p><label>ID de l\'agenda : <input type="text" name="gcalID" style="width:75%"	value="'.$gcalID.'" /></label></p>
-
+				<p><label>'._T('fullcalendar:google_agenda_id').' : <input type="text" name="gcalID" style="width:75%" value="'.$gcalID.'" /></label></p>
 				</div>
 				<div class="boutons">'.$BUTTON.'</div>
 				</form>
-			</div>
+			</div>';
 
-		 ';
+		} else if($type=='rub')     {
+
+			$INFO="<b>"._T('fullcalendar:rub_agenda')."</b><br/><br/>"._T('fullcalendar:rub_agenda_info')."<br/><br/>".$INFO;
+
+			# Récupère le secteur utilisé pour les évènements
+
+			$req = sql_select('lien', 'spip_fullcalendar_events', 'id_fullcalendar='.$id);
+			if(sql_count($req)){ # Une rubrique est déjà renseignée
+					$rw = sql_fetch($req);
+					$ID_MOT=intval($rw['lien']);
+					sql_free($req);
+					$ACTION='update_rubrique';
+					$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" "._T('fullcalendar:rub_agenda_change')." \" class=\"fondo\" />";
+			} else { # on ajoute la clé
+					$ACTION='add_rubrique';
+					$ID_MOT='';
+					$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" "._T('bouton_enregistrer')." \" class=\"fondo\" />";
+			}
+
+			# Rubriques du site (contenant des articles)
+
+			$LISTE_RUBRIQUES='';
+
+			$req = sql_select(
+					array(
+							"DISTINCT R.id_rubrique",
+							"R.titre" ),
+					array(
+							"spip_rubriques AS R",
+							"spip_articles AS A" ),
+					array(
+							"R.id_parent=0",
+							"R.id_rubrique=A.id_rubrique",
+							"R.id_parent=0" ),
+					"",
+					"R.titre ASC");
+
+			if(sql_count($req)){
+
+					while ($row = sql_fetch($req)) {
+							$LISTE_RUBRIQUES.="<option value=\"".$row['id_rubrique']."\"";
+							$LISTE_RUBRIQUES.=($row['id_rubrique']==$ID_MOT)?' SELECTED':'';
+							$LISTE_RUBRIQUES.=">".$row['titre']."</option>";
+					}
+					sql_free($req);
+
+			}
+
+			$INTERFACE="
+			<div class=\"formulaire_spip formulaire_config\">
+					<div class=\"cadre_padding\">
+							<form class=\"noajax\" action=\"\" name=\"Formulaire\" method=\"POST\">
+							<input type=\"hidden\" name=\"action_to_take\" value=\"".$ACTION."\">
+							<input type=\"hidden\" name=\"id_calendrier\" value=\"".$id."\">
+							<p>"._T('fullcalendar:rub_agenda_source')." : <select name=\"id_rubrique\">".$LISTE_RUBRIQUES."</select></p>
+					</div>
+					<div class=\"boutons\">".$BUTTON."</div>
+			</form>
+			</div>";
+
+			# dans le cas de sous-rubriques, récupère les ids des rubriques filles
+
+			$req = sql_select(
+					array(
+							"id_rubrique",
+							),
+					array(
+							"spip_rubriques" ),
+					array(
+					"id_parent='".$ID_MOT."'"
+					),
+					"",
+					"");
+
+			while ($row = sql_fetch($req)) {
+				$ID_RUBRIQUES.="'".$row['id_rubrique']."',";
+			}
+
+			$ID_RUBRIQUES.="'".$ID_MOT."'";
+
+			# Récupère les article liés à ce secteur/rubrique
+
+			$req = sql_select(
+					array(
+							"A.id_article",
+							"A.titre",
+							"A.date",
+							"A.date_redac" ),
+					array(
+							"spip_articles AS A",
+							"spip_rubriques AS R" ),
+					array(
+							"A.id_rubrique IN (".$ID_RUBRIQUES.")",
+							"A.id_rubrique=R.id_rubrique" ),
+					"",
+					"A.date ASC");
+
+			$num_events = sql_count($req);
+			if(!$num_events) $INFO.=_T('fullcalendar:no_event');
+			else {
+					$HTML="
+					<table width=\"100%\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\">
+							<tbody>
+							<tr>
+									<th>"._T('fullcalendar:event_title')."</th>
+									<th>"._T('fullcalendar:event_start')."</th>
+									<th>"._T('fullcalendar:event_end')."</th>
+							</tr>";
+					while ($row = sql_fetch($req)) {
+							$date = substr($row['date'],0,10);
+							$date_fin = substr($row['date_redac'],0,10);
+							$start = substr($row['date'],11,5);
+							$end = substr($row['date_redac'],11,5);
+							$erreur = ($date_fin=="0000-00-00")?' ortho':'';
+							# repère un incohérence dans les dates 
+							$test_debut = $row['date'];
+							$test_fin = $row['date_redac'];
+							$diff = strtotime($test_fin) - strtotime($test_debut); // Ecart en secondes
+							if($diff<0){
+								$erreur =' ortho';
+								$end.="<- <b>"._T('fullcalendar:event_error')."</b>";
+							}
+							$HTML.= "<tr class=\"tr_liste\">
+										<td class=\"verdana12\"><a href=\"?exec=articles&id_article=".$row['id_article']."\">".supprimer_numero($row['titre'])."</a></td>
+										<td class=\"arial1\">".MyDateEnLettre ($date)."<br/>".$start."</td>
+										<td class=\"arial1".$erreur."\">".MyDateEnLettre ($date_fin)."<br/>".$end."</td>
+									 </tr>";
+						}
+					sql_free($req);
+					$HTML.="</table>";
+				}
 
 		} else if($type=='article')	{
 
-			$INFO="<b>Agenda d'articles avec mot clé</b><br/><br/>Sélectionnez le mot clé à lier aux articles qui serviront d'évènements pour ce calendrier.<br/><br/>".$INFO;
+			$INFO="<b>"._T('fullcalendar:mot_agenda')."</b><br/><br/>"._T('fullcalendar:mot_agenda_info')."<br/><br/>".$INFO;
 
 			# Récupère le mot clé dans les évènements
 
@@ -518,11 +686,11 @@ function exec_fullcalendar_edit(){
 				$ID_MOT=intval($rw['lien']);
 				sql_free($req);
 				$ACTION='update_mot';
-				$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Modifier ce mot clé \" class=\"fondo\" />";
+				$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" "._T('fullcalendar:mot_agenda_change')." \" class=\"fondo\" />";
 			} else { # on ajoute la clé
 				$ACTION='add_mot';
 				$ID_MOT='';
-				$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" Enregistrer \" class=\"fondo\" />";
+				$BUTTON = "<input type=\"submit\" name=\"ajouter\" value=\" "._T('bouton_enregistrer')." \" class=\"fondo\" />";
 			}
 
 			# Mots clés du site (des groupes liés aux articles)
@@ -583,30 +751,36 @@ function exec_fullcalendar_edit(){
 				"A.date ASC");
 
 			$num_events = sql_count($req);
-			if(!$num_events) $INFO.="Aucun évènement dans ce calendrier!";
+			if(!$num_events) $INFO.=_T('fullcalendar:no_event');
 			else {
 				$HTML="
 				<table width=\"100%\" border=\"0\" cellpadding=\"2\" cellspacing=\"0\">
 					<tbody>
 					<tr>
-						<th>Article</th>
-						<th>Début</th>
-						<th>Fin</th>
+						<th>"._T('fullcalendar:event_title')."</th>
+						<th>"._T('fullcalendar:event_start')."</th>
+						<th>"._T('fullcalendar:event_end')."</th>
 					</tr>";
 
 				while ($row = sql_fetch($req)) {
-
 					$date = substr($row['date'],0,10);
 					$date_fin = substr($row['date_redac'],0,10);
 					$start = substr($row['date'],11,5);
 					$end = substr($row['date_redac'],11,5);
 					$erreur = ($date_fin=="0000-00-00")?' ortho':'';
+					# repère un incohérence dans les dates 
+					$test_debut = $row['date'];
+					$test_fin = $row['date_redac'];
+					$diff = strtotime($test_fin) - strtotime($test_debut); // Ecart en secondes
+					if($diff<0){
+						$erreur =' ortho';
+						$end.="<- <b>"._T('fullcalendar:event_error')."</b>";
+					}
 					$HTML.= "<tr class=\"tr_liste\">
 								<td class=\"verdana12\"><a href=\"?exec=articles&id_article=".$row['id_article']."\">".supprimer_numero($row['titre'])."</a></td>
 								<td class=\"arial1\">".MyDateEnLettre ($date)."<br/>".$start."</td>
 								<td class=\"arial1".$erreur."\">".MyDateEnLettre ($date_fin)."<br/>".$end."</td>
-							 </tr>
-							";
+							 </tr>";
 				}
 				sql_free($req);
 				$HTML.="</table>";
@@ -617,40 +791,40 @@ function exec_fullcalendar_edit(){
 	}
 
  $commencer_page = charger_fonction('commencer_page', 'inc');
- print $commencer_page(_T('Fullcalendar'), "", "") ;
+ print $commencer_page(_T('fullcalendar:fullcalendar'), "", "") ;
  print "<br/><br/>";
- print gros_titre(_T('Gestion des évènements'),'',false);
+ print gros_titre(_T('fullcalendar:fullcalendar')." : "._T('fullcalendar:gestion_evenements'),'',false); 
  print debut_gauche ("",true);
 
  print debut_boite_info(true);
- print "<center><b>"._T('FullCalendar')."</b></center>";
- print "<br/><center><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/fullcalendar.jpg'></center><br/>";
+ print "<center><b>"._T('fullcalendar:fullcalendar')."</b></center>";
+ print "<br/><center><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/fullcalendar.jpg'></center><br/>";
  print $INFO;
  print fin_boite_info(true);
 
  print debut_cadre_enfonce('',true,'','','');
  print "<table class=\"cellule-h-table\" style=\"vertical-align: middle;\" cellpadding=\"0\"><tbody><tr>
- <td><a href=\"?exec=cfg&cfg=fullcalendar\" class=\"cellule-h\"><span class=\"cell-i\"><img src='../plugins/cfg/cfg-22.png' alt=\"CFG : configuration\"></span></a></td>
- <td class=\"cellule-h-lien\"><a href=\"?exec=cfg&cfg=fullcalendar\" class=\"cellule-h\">CFG - configuration</a></td>
+ <td><a href=\"?exec=cfg&cfg=fullcalendar\" class=\"cellule-h\"><span class=\"cell-i\"><img src='../plugins/cfg/cfg-22.png' alt=\"CFG : "._T('fullcalendar:configuration')."\"></span></a></td>
+ <td class=\"cellule-h-lien\"><a href=\"?exec=cfg&cfg=fullcalendar\" class=\"cellule-h\">CFG - "._T('fullcalendar:configuration')."</a></td>
  </tr></tbody></table>";
  print fin_cadre_enfonce(true);
 
  print debut_cadre_enfonce('',true,'','','');
  print "<table class=\"cellule-h-table\" style=\"vertical-align: middle;\" cellpadding=\"0\"><tbody><tr>
- <td><a href=\"?exec=fullcalendar_add\" class=\"cellule-h\"><span class=\"cell-i\"><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/calendar.png' alt=\"Agenda fullcalendar : configuration\"></span></a></td>
- <td class=\"cellule-h-lien\"><a href=\"?exec=fullcalendar_add\" class=\"cellule-h\">FullCalendar - Gestion</a></td>
+ <td><a href=\"?exec=fullcalendar_add\" class=\"cellule-h\"><span class=\"cell-i\"><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/calendar.png' alt=\""._T('fullcalendar:fullcalendar')." : "._T('fullcalendar:gestion')."\"></span></a></td>
+ <td class=\"cellule-h-lien\"><a href=\"?exec=fullcalendar_add\" class=\"cellule-h\">FullCalendar - "._T('fullcalendar:gestion')."</a></td>
  </tr></tbody></table>";
  print fin_cadre_enfonce(true);
 
  print debut_cadre_enfonce('',true,'','','');
  print "<table class=\"cellule-h-table\" style=\"vertical-align: middle;\" cellpadding=\"0\"><tbody><tr>
- <td><a href=\"?exec=fullcalendar_css\" class=\"cellule-h\"><span class=\"cell-i\"><img src='"._DIR_PLUGIN_FULLCALENDAR."img_pack/edit_css.png' alt=\"Styles de fullcalendar : configuration\"></span></a></td>
- <td class=\"cellule-h-lien\"><a href=\"?exec=fullcalendar_css\" class=\"cellule-h\">CSS - configuration</a></td>
+ <td><a href=\"?exec=fullcalendar_css\" class=\"cellule-h\"><span class=\"cell-i\"><img src='"._DIR_PLUGIN_FULLCALENDAR."prive/themes/spip/images/edit_css.png' alt=\"CSS : "._T('fullcalendar:configuration')."\"></span></a></td>
+ <td class=\"cellule-h-lien\"><a href=\"?exec=fullcalendar_css\" class=\"cellule-h\">CSS - "._T('fullcalendar:configuration')."</a></td>
  </tr></tbody></table>";
  print fin_cadre_enfonce(true);
 
  if(strlen($LISTE)){
-	print debut_cadre_enfonce('',true,'',_T('Vos calendriers'),'');
+	print debut_cadre_enfonce('',true,'',_T('fullcalendar:vos_calendriers'),'');
 	print $LISTE;
 	print fin_cadre_enfonce(true);
  }
@@ -665,24 +839,31 @@ function exec_fullcalendar_edit(){
 
  # GESTION DES EVENEMENTS
 
- if(($type=='mysql'||$type=='article')
+ if(($type=='mysql'||$type=='article'||$type=='rub')
 	 && strlen($HTML)
 	){
-	print debut_cadre_relief("", false,"", $titre = _T('Tous les évènements de ce calendrier'));
+	print debut_cadre_relief("", false,"", $titre = _T('fullcalendar:tous_evenements'));
 	print $HTML;
 	print fin_cadre_relief(false);
  }else if(strlen($URL_AGENDA)){
-	print debut_cadre_enfonce('',true,'',_T('Aperçu du flux'),'');
-	print "Votre lien : <a href='".$URL_AGENDA."'>".$URL_AGENDA."</a>";
+	print debut_cadre_enfonce('',true,'',_T('fullcalendar:flux'),'');
+	print _T('fullcalendar:votre_lien')." : <a href='".$URL_AGENDA."'>".$URL_AGENDA."</a>";
 	print "<iframe src=\"".$URL_AGENDA."\" style=\"width:98%;height:250px\"></iframe>";
 	print fin_cadre_enfonce(true);
 
  }
 
  print fin_cadre_trait_couleur(true);
+ 
  print fin_gauche();
  print fin_page();
 
+}
+
+function MyMonth($v){
+	$mois = array("","Janvier","F&eacute;vrier","Mars","Avril","Mai","Juin","Juillet","Ao&ucirc;t","Septembre","Octobre","Novembre","D&eacute;cembre");
+	$v=intval($v);
+	return $mois[$v];
 }
 
 /* Formate un DATETIME mysql en locale fr */
