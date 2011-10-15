@@ -1,4 +1,7 @@
 <traduction module="prix" gestionnaire="salvatore" reference="fr">
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
 	<langue code="sk">
 		<traducteur nom="jaro" />
 	</langue>
