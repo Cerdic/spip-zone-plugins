@@ -16,7 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'by' => 'به وسيله‌ي ',
 
 	// C
-	'cfg_description' => 'اين پلاگين افزودن ساده‌ي تگ‌ها به مقالات را مجاز مي‌سازد. ', # MODIF
+	'cfg_description' => 'اين پلاگين به بازديدكنندگان اجازه مي‌دهد تا به سادگي به مقاله‌ها تگ اضافه كنند.',
 
 	// E
 	'explication_ajout_tag' => 'براي افزودن چندين تگ در يك زمان از اين جداساز استفاده كنيد: "@separateur@".',
@@ -46,12 +46,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'tag_deja_present' => 'اين تگ را افزوديد.',
 	'tag_supprime' => 'اين تگ را حذف كرديد: @br />@name> ',
 	'tags' => 'تگ‌ها : ',
-	'tags_ajoutes' => 'چند تگ را افزوديد: @br />@name>', # MODIF
-	'tags_supprimes' => 'اين چند تگ را حذف كرديد: @br />@name> ', # MODIF
+	'tags_ajoutes' => 'شما @nb@ تگ را اضافه كرديد: @br />@name>',
+	'tags_supprimes' => 'شما @nb@ تگ را حذف كرديد: @br />@name> ',
 	'title_tag_utilise_nb' => 'اين كليدواژه به وسيله‌ي @nb@ نفر افزوده شده',
 	'title_tag_utilise_un' => 'اين كليدواژه به وسيله‌ي يك نفر وابسته شده',
 	'to' => 'با',
-	'types_utilisateurs' => 'كي‌ به فرم دسترسي داره؟', # MODIF
+	'types_utilisateurs' => 'چه كسي‌ به فرم افزودن تگ دسترسي دارد؟',
 
 	// V
 	'vos_tags' => 'نگ‌هاي شما (اصلاح)',
