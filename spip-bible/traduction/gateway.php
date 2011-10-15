@@ -1,6 +1,6 @@
 <?php
 function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut='',$chapitre_fin='',$verset_fin='',$gateway,$lang){
-	$param_cache=array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapotre_fin'=>$chapitre_fin,'$verset_fin'=>$verset_fin,'gateway'=>$gateway);
+	$param_cache=array('livre'=>$livre,'chapitre_debut'=>$chapitre_debut,'verset_debut'=>$verset_debut,'chapitre_fin'=>$chapitre_fin,'$verset_fin'=>$verset_fin,'gateway'=>$gateway);
 	//Vérifions qu'on a pas en cache
 	if (_NO_CACHE == 0){
 		include_spip('inc/bible_cache');
@@ -9,7 +9,6 @@ function recuperer_passage_gateway($livre='',$chapitre_debut='',$verset_debut=''
 			return $cache;	
 		}
 	}
-
 	$id_trad = $gateway[0];
 	$nom_trad = $gateway[1];
 	
@@ -170,7 +169,7 @@ function supprimer_note($texte){
 
 function gateway_supprimer_intertitre($code){
     
-    $tableau = explode('<h5>',$code); // on fait un tableau
+    $tableau = explode('<h5 class="passage-header">',$code); // on fait un tableau
     $i = 0;
     
     foreach($tableau as $chaine){   // on parcour le tableau, et on supprimer ce qu'il y a avant le </h5>
