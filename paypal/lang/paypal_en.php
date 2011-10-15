@@ -19,10 +19,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'explication_account' => 'Corresponds to email the seller\'s account',
-	'explication_environnement' => '<NEW>Vous pouvez indiquer dans ce formulaire des données
-  qui concernent le site de test de Paypal (Sandbox, pour le développement)
-  ainsi que celles valables uniquement pour de vraies transactions.
-  Quel environnement souhaitez-vous utiliser ?',
+	'explication_environnement' => 'Vous pouvez indiquer dans ce formulaire des donn&eacute;es
+		qui concernent le site de test de Paypal (Sandbox, pour le d&eacute;veloppement)
+		ainsi que celles valables uniquement pour de vraies transactions.
+		Quel environnement souhaitez-vous utiliser ?', # NEW
 	'explication_identifiant_vendeur' => 'Corresponds to email the seller\'s account',
 	'explication_soumission' => 'On what page of Paypal is submitted the form?',
 	'explication_tax' => 'Eventually the value of the tax to apply (for example, French VAT: 19.60)',
