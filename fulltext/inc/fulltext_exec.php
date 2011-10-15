@@ -58,7 +58,7 @@ function Fulltext_lien_creer_index($table, $champs, $nom=null) {
 	$url = generer_url_ecrire(_request('exec'),
 		'table='.$table.'&nom='.$nom
 	);
-	return "<p><a href='$url'>Cr&#233;er l'index ".Fulltext_index($table,$champs,$nom)."</a></p>\n";
+	return "<p><a href='$url'>"._T('fulltext:fulltext_creer',array('index'=>Fulltext_index($table,$champs,$nom)))."</a></p>\n";
 }
 
 function Fulltext_supprimer_index($table, $nom='tout') {

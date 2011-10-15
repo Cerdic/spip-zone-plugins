@@ -48,6 +48,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fant' => 'fant',
 	'fonctionnement_recherche' => 'Fonctionnement du moteur de recherche de ce site',
 	'fulltext_cree' => 'FULLTEXT créé',
+	'fulltext_creer' => 'Créer l\'index @index@',
 	'fulltext_documentation' => 'Pour plus d\'information sur la configuration, consultez la documentation en ligne :',
 
 	// G
