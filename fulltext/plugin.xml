@@ -1,8 +1,13 @@
 <plugin>
 	<nom>Fulltext</nom>
-	<slogan>Indexation FULLTEXT pour acc&#233;l&#233;rer les recherches</slogan>
+	<slogan>
+		<multi>
+			[fr]Indexation FULLTEXT pour acc&#233;l&#233;rer les recherches
+			[en]FULLTEXT indexation to speed up searches
+		</multi>
+	</slogan>
 	<auteur>Fil, Gael Chareyre</auteur>
-	<version>0.6.4</version>
+	<version>0.6.5</version>
 	<version_base>0.2</version_base>
 	<etat>dev</etat>
 	<licence>&#169; 2009-2011 GNU/GPL</licence>
@@ -42,7 +47,11 @@ Pour un fonctionnement optimal, il faut installer des programmes compl&#233;ment
 		<titre>Fulltext</titre>
 	</onglet>
 	<bouton id='fulltext' parent='bando_configuration'>
-		<titre>Fulltext</titre>
+		<titre>Fulltext - Index</titre>
+		<icone>images/fulltext-22.png</icone>
+	</bouton>
+	<bouton id='fulltext_document' parent='bando_configuration'>
+		<titre>Fulltext - Documents</titre>
 		<icone>images/fulltext-22.png</icone>
 	</bouton>
 	<pipeline>

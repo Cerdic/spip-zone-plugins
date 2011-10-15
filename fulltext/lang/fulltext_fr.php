@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Les accents ne sont pas pris en compte (« déjà » ou « deja », retourneront à l\'identique « déjà », « dejà », « déja »...)',
-	'activer_indexation' => 'Activer l\'indexation des',
+	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@',
 	'asie' => 'asie',
 	'asterisque_terminale' => 'ne retournera rien: l\'astérisque * doit être terminale',
 	'aussi' => 'aussi',
@@ -83,7 +83,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Index&eacute;s',
 	'nb_non_index' => 'Non-index&eacute;s',
 	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)',
-	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)',
+	'necessite_version_php' => 'N&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.',
 	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).',
 	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON',
 
@@ -118,6 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'table_format' => 'Cette table est au format',
 	'table_non_reconnue' => 'table non reconnue',
 	'textes_premier' => 'mais présente en premier les textes qui contiennent',
+	'titre_page_fulltext_index' => 'Configuration des index de recherche',
 
 	// U
 	'une_utilisation' => '1 utilisation',

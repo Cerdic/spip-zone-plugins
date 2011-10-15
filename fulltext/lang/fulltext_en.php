@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'accents_pas_pris' => 'Accents are not taken into account ("déjà" or "deja", will return the same results, including "déjà", "dejà", "déja"...)',
-	'activer_indexation' => 'Activer l\'indexation des', # NEW
+	'activer_indexation' => 'Activer l\'indexation des fichiers @ext@', # NEW
 	'asie' => 'asia',
 	'asterisque_terminale' => 'will return no results: the asterisk must be final',
 	'aussi' => 'also',
@@ -85,7 +85,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'nb_index' => 'Index&eacute;s', # NEW
 	'nb_non_index' => 'Non-index&eacute;s', # NEW
 	'nb_ptg' => 'Prot&eacute;g&eacute;s (non-index&eacute;s)', # NEW
-	'necessite_version_php' => '(n&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip)', # NEW
+	'necessite_version_php' => 'N&eacute;cessite PHP 5.2 au minimum, ainsi que l\'option -enable-zip.', # NEW
 	'nombre_caracteres' => 'Nombre de caract&egrave;res index&eacute;s (depuis le debut du document).', # NEW
 	'nombre_documents' => 'Nombre de documents &agrave; traiter par it&eacute;ration du CRON', # NEW
 

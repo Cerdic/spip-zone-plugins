@@ -11,19 +11,35 @@ function exec_fulltext()
 {
 	pipeline('exec_init',array('args'=>array('exec'=>'fulltext'),'data'=>''));
 
+	include_spip('inc/autoriser');
+	if(!autoriser('webmestre')){
+		include_spip('inc/minipres');
+		echo minipres();
+	}
+	
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page("Fulltext", "accueil", "accueil");
+	echo $commencer_page("Fulltext", "configuration", "fulltext");
 
+	echo gros_titre(_T('fulltext:titre_page_fulltext_index'),'',false);
+	
 	echo debut_gauche("",true);
-
-	echo creer_colonne_droite("", true);
-
+	echo pipeline('affiche_gauche',array('args'=>array('exec'=>'agenda_inscriptions', 'id_evenement'=>$id_evenement),'data'=>''));
+	
 	echo pipeline('affiche_droite',array('args'=>array('exec'=>'fulltext'),'data'=>''));
-
+	
+	echo debut_boite_info(true);
 	echo "<img src='".find_in_path('fulltext.png')."' />\n";
 
 	echo propre(_T('fulltext:liste_tables_connues')." [->http://www.spip-contrib.net/Fulltext].");
 	
+	$url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
+	echo "<p><a href='$url'>"._T('fulltext:regenerer_tous')."</a></p>\n";
+	
+	echo fin_boite_info(true);
+
+	echo creer_colonne_droite('', true);
+	
+	echo debut_boite_info(true);
 	$url = generer_url_ecrire('fulltext_document');
 	echo propre(_T('fulltext:configurer_egalement_doc'))."<a href='$url'>"._T('fulltext:configuration_indexation_document')."</a>";
 	
@@ -49,14 +65,28 @@ function exec_fulltext()
 		echo "<a href='$url'>"._T('fulltext:voir_doc_ptg')."</a><br />";	
 	}
 	echo _T('fulltext:nb_err')." : <strong>".$nb_err.'</strong><br />';
-
+	
+	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document');
+	echo "<p><a href='$url'>"._T('fulltext:reinitialise_index_doc')."</a></p>\n";
+	
+	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document_ptg');
+	echo "<p><a href='$url'>"._T('fulltext:reinitialise_index_ptg')."</a></p>\n";
+	
+	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document_tout');
+	echo "<p><a href='$url'>"._T('fulltext:reinitialise_totalement_doc')."</a></p>\n";
+	
+	echo fin_boite_info(true);
+	
+	echo pipeline('affiche_droite',
+			      array('args' => array(
+						    'exec'=>'fulltext'),
+				    'data'=>'')
+			      );
+				  
 	echo debut_droite("", true);
-
-
-	include_spip('inc/autoriser');
-	if(!autoriser('webmestre'))
-		die(_T('fulltext:reserve_webmestres'));
-
+	
+	echo debut_cadre_trait_couleur(find_in_path('images/fulltext-24.png'),true,'',"",'fulltext');
+	
 	// on va chercher les tables avec liste_des_champs()
 	include_spip('inc/rechercher');
 	include_spip('base/abstract_sql');
@@ -153,22 +183,7 @@ function exec_fulltext()
 		$url = generer_url_ecrire(_request('exec'), 'myisam=tous');
 		echo "<p><b><a href='$url'>"._T('fulltext:convertir_toutes')."</a></b></p>\n";
 	}
-
-	//Liens vers la configuration des documents
-	$url = generer_url_ecrire('fulltext_document');
-	echo "<p><b><a href='$url'>"._T('fulltext:configuration_indexation_document')."</a></b></p>\n";
 	
-	$url = generer_url_ecrire(_request('exec'), 'regenerer=tous');
-	echo "<p><b><a href='$url'>"._T('fulltext:regenerer_tous')."</a></b></p>\n";
-
-	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document');
-	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_index_doc')."</a></b></p>\n";
-	
-	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document_ptg');
-	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_index_ptg')."</a></b></p>\n";
-	
-	$url = generer_url_ecrire(_request('exec'), 'reinitialise=document_tout');
-	echo "<p><b><a href='$url'>"._T('fulltext:reinitialise_totalement_doc')."</a></b></p>\n";	
 	// charset site
 	$charset = strtolower(str_replace('-','',$GLOBALS['meta']['charset']));
 	$necessite_conversion = false;
@@ -185,6 +200,8 @@ function exec_fulltext()
 		echo "<p>"._T('fulltext:incoherence_charset')."<b><a href='$url'>"._T('fulltext:convertir_utf8')."</a></b></p>\n";
 	}
 
+	fin_cadre_trait_couleur(true);
+	
 	echo fin_gauche(), fin_page();
 
 }
