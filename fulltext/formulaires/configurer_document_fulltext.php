@@ -126,8 +126,6 @@ function formulaires_configurer_document_fulltext_verifier_dist(){
 			$erreurs['xls_bin'] = _T('fulltext:erreur_xls_bin');
 		}else{
 			@exec(_request('xls_bin'),$retour_xls_bin,$retour_xls_bin_int);
-			spip_log($retour_xls_bin,'test');
-			spip_log($retour_xls_bin_int,'test');
 			if($retour_xls_bin_int != 0 && $retour_xls_bin_int != 139){
 				$erreurs['xls_bin'] = _T('fulltext:erreur_binaire_indisponible');
 			}
