@@ -482,7 +482,7 @@ function creer_script_l($resultats, $script) {
 				OR $resultats['module'] == 'ecrire' 
 				OR $resultats['module'] == 'public') ? '' : $resultats['module'] . ':' ;
 
-	$sed = $items = array();
+	$sed = array();
 	foreach ($resultats['fichier_non'] as $index => $val) {
 		$val = array_shift($val);
 		$val = array_shift($val);
@@ -511,15 +511,16 @@ function creer_script_l($resultats, $script) {
 	}
 
 	// Creer le texte du script
-	$texte = "echo \"executer ce script dans $ou\"\n" .
+	$in = _L('executer ce script dans ');
+	$out = _L("Si correct, rappeler ce script avec 'mv' comme argument pour remplacer _L par _T dans les fichiers.");
+	$texte = "echo \"$in $ou\"\n" .
 		'if [ "$*" == "mv" ]; then comm=mv; else comm=diff; fi' .
 		"\nfor i in " .
 		join(" ", $files) .
 		"\ndo\nr=\$(basename \$i)\nsed \"\n" .
 		join("\n", array_keys($sed)) .
 		"\n\" \$i > /tmp/\$r\n\$comm /tmp/\$r \$i\ndone\n" .
-	  	"\necho \"****  A mettre en fichier de langue (sans \\ devant \$) ***\"\n" .
-		"\nif [ \"$*\" != 'mv' ]; then echo \"Si correct, rappeler ce script avec 'mv' comme argument\"; fi";
+		"\nif [ \"$*\" != 'mv' ]; then echo \"$out\"; fi";
 
 	$ok = ecrire_fichier($script, $texte);
 	return $ok;
