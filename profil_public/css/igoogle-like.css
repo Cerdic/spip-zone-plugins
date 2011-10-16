@@ -1,13 +1,14 @@
-	/*pagination igoogle */
-	.column { width: 310px; float: left; padding-bottom: 100px; margin-top:30px; margin-left:10px;}
-	.portlet { margin: 0 1em 1em 0; }
-	.portlet-header { margin: 0; padding-bottom: 4px; padding-left: 0.2em;  }
-	.portlet-header .ui-icon { float: right; }
-	.portlet-content { padding: 0.4em; }
-	.ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 100px !important; }
-	.ui-sortable-placeholder * { visibility: hidden; }
 	
-	.ui-widget-header  {border:none;
+	/*pagination igoogle */
+	#conteneur .column { width: 310px; float: left; padding-bottom: 100px; margin-top:30px; margin-left:10px;}
+	#conteneur .portlet { margin: 0 1em 1em 0; }
+	#conteneur .portlet-header { margin: 0; padding-bottom: 4px; padding-left: 0.2em;  }
+	#conteneur .portlet-header .ui-icon { float: right; }
+	#conteneur .portlet-content { padding: 0.4em; }
+	#conteneur .ui-sortable-placeholder { border: 1px dotted black; visibility: visible !important; height: 100px !important; }
+	#conteneur .ui-sortable-placeholder * { visibility: hidden; }
+	
+	#conteneur .ui-widget-header  {border:none;
 	padding-top:5px;
 	padding-right:10px;
 	height:20px;
@@ -39,14 +40,14 @@
 }
 	
 	/*style du collapse */
-	.head {padding-left:20px;}
+	#conteneur .head {padding-left:20px;}
 	
-	.deroule{
+	#conteneur .deroule{
     display : block;   
     background: url(fleches.png) no-repeat left -134px;
 	}	
 
-	.enroule {
+	#conteneur .enroule {
 	background: url(fleches.png) no-repeat left 2px;
 	}
 	
@@ -58,7 +59,7 @@
 	
 	.fade {height:200px; width:230px; margin:15px;}
 	
-	.rainette_previsions_24h {margin-left:15px;}
+	
 	
 	/*style du widget profil */
 	.logo-profil {width:110px; float:left;}
@@ -70,6 +71,53 @@
 	div.fadenav a { display: block; background: #ccc; width: 12px; height: 12px; margin: 0 0 0 2px; float: left; overflow: hidden; -moz-border-radius: 50%; -webkit-border-radius: 50%; border-radius: 50%; border: 1px solid #000; }
 	div.fadenav a:hover { text-decoration: none; }
 	div.fadenav a.current { background: cornflowerblue; }
+	
+	/* CONDITIONS: Styles utilises par le modele rainette_conditions */
+	.rainette_previsions_24h {margin-left:15px;}
+	
+.rainette_conditions {
+	float: left;
+	width: 280px;
+	background: #fcfcfc;
+	border: none;
+	margin: 5px 0 20px 0;
+	padding:0 0 5px 0;}
+.rainette_conditions .statut {float: left; width: 260px;}
+.rainette_conditions .cadre {
+	float: left;
+	width: 265px;
+	border: 1px solid #000;
+	background: #ffffff;
+	margin: 11px 0 0 11px;
+	padding:0 0 5px 0;}
+.rainette_conditions .icone {float: left; margin: 3px 0 -5px 7px;}
+.rainette_conditions .t_reelle {
+	float: left;
+	color: #333333;
+	font-size: 33px;
+	font-weight: bold;
+	line-height: 1em;
+	margin: 20px 0 0 15px;
+}
+.rainette_conditions .t_ressentie {float: left; width: 95px; color: #333333; margin: 0 0 0 15px;}
+.rainette_conditions .resume {text-align: center; font-weight: bold; padding-top: 5px;}
+.rainette_conditions .maj {
+	float: left;
+	font-size: 10px;
+	color: #000000;
+	width: 236px;
+	padding: 6px 0 0 11px;
+}
+.rainette_conditions .details {
+	float: left;
+	color: #000000;
+	line-height: 12px;
+	margin-left:30px;
+	width: 200px;
+	padding: 12px 5px 5px 1px;
+}
+.rainette_conditions .details  span {color: #6E6E6E; font-weight: bold;}
+</style>
 	
 		
 	
