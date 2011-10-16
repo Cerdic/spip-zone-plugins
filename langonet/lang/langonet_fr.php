@@ -6,7 +6,7 @@ if (!defined('_ECRIRE_INC_VERSION')) return;
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
-	'bouton_corriger_definition' => 'Obtenir les corrections',
+	'bouton_corriger' => 'Obtenir les corrections',
 	'bouton_generer' => 'G&eacute;n&eacute;rer',
 	'bouton_langonet' => 'LangOnet',
 	'bouton_lister' => 'Afficher',
@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_verifier' => 'V&eacute;rifier',
 	'bulle_afficher_fichier_log' => 'Afficher le log du @date@',
 	'bulle_afficher_fichier_lang' => 'Afficher le fichier de langue g&eacute;n&eacute;r&eacute; le @date@',
-	'bulle_corriger_definition' => 'T&eacute;l&eacute;charger le fichier de langue corrig&eacute;',
+	'bulle_corriger' => 'T&eacute;l&eacute;charger le fichier de langue corrig&eacute;',
 	'bulle_telecharger_fichier_lang' => 'T&eacute;l&eacute;charger le fichier de langue g&eacute;n&eacute;r&eacute; le @date@',
 	'bulle_telecharger_fichier_log' => 'T&eacute;l&eacute;charger le log du @date@',
 
@@ -80,12 +80,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_ecriture_fichier' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; n\'a pas &eacute;t&eacute; cr&eacute;&eacute; car une erreur s\'est produite lors de son &eacute;criture&nbsp;!',
 	'message_nok_fichier_langue' => 'La g&eacute;n&eacute;ration a &eacute;chou&eacute; car le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; est introuvable dans le r&eacute;pertoire &laquo;<em>@dossier@</em>&raquo;&nbsp;!',
 	'message_nok_fichier_log' => 'Le fichier de log contenant les r&eacute;sultats de la v&eacute;rification n\'a pas pu &ecirc;tre cr&eacute;&eacute;!',
+	'message_nok_fichier_script' => 'Le fichier de script contenant les commandes de remplacement des fonctions _L par _T n\'a pas pu &ecirc;tre cr&eacute;&eacute;!',
 	'message_nok_item_trouve' => 'Aucun item de langue ne correspond &agrave; la recherche&nbsp;!',
 	'message_ok_definis_incertains_0' => 'Aucun item de langue n\'est utilis&eacute; dans un contexte complexe, comme par exemple, _T(\'@module@:item_\'.$variable).',
 	'message_ok_definis_incertains_1' => 'L\'item de langue ci-dessous est utilis&eacute; dans un contexte complexe et pourrait &ecirc;tre non d&eacute;fini dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; le v&eacute;rifier&nbsp;:',
 	'message_ok_definis_incertains_n' => 'Les @nberr@ items de langue ci-dessous sont utilis&eacute;s dans un contexte complexe et pourraient &ecirc;tre non d&eacute;finis dans le fichier de langue  &laquo;<em>@langue@</em>&raquo;. Nous vous invitons &agrave; les v&eacute;rifier un par un&nbsp;:',
 	'message_ok_fichier_genere' => 'Le fichier de langue &laquo;<em>@langue@</em>&raquo; du module &laquo;<em>@module@</em>&raquo; a &eacute;t&eacute; g&eacute;n&eacute;r&eacute; correctement.<br />Vous pouvez r&eacute;cup&eacute;rer le fichier &laquo;<em>@fichier@</em>&raquo;.',
 	'message_ok_fichier_log' => 'La v&eacute;rification s\'est correctement d&eacute;roul&eacute;e. Vous pouvez consultez les r&eacute;sultats plus bas dans le formulaire.<br />Le fichier &laquo;<em>@log_fichier@</em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats.',
+	'message_ok_fichier_log_script' => 'La v&eacute;rification s\'est correctement d&eacute;roul&eacute;e. Vous pouvez consultez les r&eacute;sultats plus bas dans le formulaire.<br />Le fichier &laquo;<em>@log_fichier@</em>&raquo; a &eacute;t&eacute; cr&eacute;&eacute; pour sauvegarder ces r&eacute;sultats ainsi que le fichier des commandes de remplacement _L en _T, &laquo;<em>@script@</em>&raquo;.',
 	'message_ok_fonction_l_0' => 'Aucun cas d\'utilisation de la fonction _L() n\'a &eacute;t&eacute; d&eacute;tect&eacute; dans les fichiers PHP du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo;.',
 	'message_ok_fonction_l_1' => 'Un seul cas d\'utilisation de la fonction _L() a &eacute;t&eacute; d&eacute;tect&eacute; dans les fichiers PHP du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; :',
 	'message_ok_fonction_l_n' => '@nberr@ cas d\'utilisation de la fonction _L() ont &eacute;t&eacute; d&eacute;tect&eacute;s dans les fichiers PHP du r&eacute;pertoire &laquo;<em>@ou_fichier@</em>&raquo; :',

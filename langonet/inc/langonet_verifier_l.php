@@ -33,10 +33,11 @@ define('_LANGONET_FILES', '(?<!/charsets|/lang|/req)(/[^/]*\.(php))$');
 // Chacun a pour valeur un sous-sous-tableau indexe par le numero de ligne,
 // pointant sur un sous-sous-sous-tableau des appels complets de _L
 
+// @param string $module
 // @param string $ou_fichier
 // @return array
 
-function inc_langonet_verifier_l($ou_fichier) {
+function inc_langonet_verifier_l($module, $ou_fichier) {
 
 	$item_md5 = array();
 	$fichier_non = array();
@@ -58,10 +59,12 @@ function inc_langonet_verifier_l($ou_fichier) {
 		}
 	}
 
-	return array('ou_fichier' => $ou_fichier,
-		     'item_non' => array_keys($item_md5), // est-ce utile ? 
-		     'fichier_non' => $fichier_non,
-		     'item_md5' => $item_md5);
+	$resultats['module'] = $module;
+	$resultats['ou_fichier'] = $ou_fichier;
+	$resultats['item_non'] = array_keys($item_md5);
+	$resultats['fichier_non'] = $fichier_non;
+	$resultats['item_md5'] = $item_md5;
+	return $resultats;
 }
 
 // Calcul du representant canonique d'un premier argument de _L.
