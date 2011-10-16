@@ -9,7 +9,7 @@
 		</multi>	
 	</slogan>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>1.1.0</version>
+	<version>2.0.0</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -43,19 +43,13 @@
 		<nom>affiche_gauche</nom>
 		<inclure>edition_directe_pipelines.php</inclure>
 	</pipeline>
-	<pipeline>
-		<nom>afficher_config_objet</nom>
-		<inclure>edition_directe_pipelines.php</inclure>
-	</pipeline>	
 	<fonctions>edition_directe_fonctions.php</fonctions>
 	<options>edition_directe_options.php</options>	
 	<categorie>edition</categorie>
-	<necessite id="SPIP" version="[2.0.14;3.0.99]" />
+	<necessite id="SPIP" version="[2.0.14;2.1.99]" />
 	<necessite id="medias" version='[1.6.1;]'/>	
 	<necessite id="cfg" version='[1.16.0 ;]'/>
 	<necessite id="spip_bonux" version='[2.2.17;]'/>
 	<necessite id="saisies" version='[1.9.9;]'/>
-	<utilise id="breves" version='[1.1.4;]'/>
-	<utilise id="sites" version='[1.4.1;]'/>
-	<utilise id="mots" version='[2.1.4;]'/>	
+
 </plugin>

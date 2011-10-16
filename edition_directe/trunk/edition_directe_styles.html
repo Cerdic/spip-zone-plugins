@@ -1,31 +1,6 @@
 #HTTP_HEADER{Content-Type: text/css;}
 
-[(#REM)Style pour les version inférieure à SPIP3]
 
-[(#SPIP_VERSION|<{3}|oui)
-	[(#VAL{article}|objet_edition_directe|oui)
-		.articles #wysiwyg,.articles .bandeau_actions .icone36{display:none;}
-		.articles_versions #wysiwyg{display:block;}
-		]	
-		
-	[(#VAL{rubrique}|objet_edition_directe|oui)
-		.rubriques .bandeau_actions .icone36 {display:none;}
-		.rubriques .bandeau_actions .danger {display:block;}
-		]
-		
-	[(#VAL{breve}|objet_edition_directe|oui)
-		.breves .bandeau_actions .icone36 {display:none;}
-		]
-		
-	[(#VAL{site}|objet_edition_directe|oui)
-		.sites .bandeau_actions .icone36 {display:none;}
-		]
-	]	
-
-
-
-[(#REM)Style pour SPIP3]
-[(#SPIP_VERSION|>={3}|oui)
 .edition_directe {
     border: 0 none;
     cursor: pointer;
@@ -37,24 +12,23 @@
 }		
 		
 		
-	.edition_directe img{
-	    background-color: #EEEEEE;
-	    background-position: center center;
-	    background-repeat: no-repeat;
-	    border: 2px solid #9DBA00;
-	    display: inline;
-	    margin: 0 auto;
-	    padding: 4px;
-	}		
-			
-	.inner .edition_directe b{
-	    color: #9DBA00;
-	    display: block;
-	    font-size: 0.9em;
-	    font-weight: 700;
-	    height: 3.07778em;
-	    line-height: 1;
-	    margin: 2px auto;
-	    width: 100%;
-	    }	
-]
+.edition_directe img{
+    background-color: #EEEEEE;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border: 2px solid #9DBA00;
+    display: inline;
+    margin: 0 auto;
+    padding: 4px;
+}		
+		
+.inner .edition_directe b{
+    color: #9DBA00;
+    display: block;
+    font-size: 0.9em;
+    font-weight: 700;
+    height: 3.07778em;
+    line-height: 1;
+    margin: 2px auto;
+    width: 100%;
+    }	
