@@ -9,7 +9,7 @@
 		</multi>	
 	</slogan>
 	<auteur>[Rainer Müller->http://www.mychacra.net]</auteur>
-	<version>2.0.0</version>
+	<version>2.0.1</version>
 	<etat>test</etat>
 	<description>
 		<multi>
@@ -43,6 +43,11 @@
 		<nom>affiche_gauche</nom>
 		<inclure>edition_directe_pipelines.php</inclure>
 	</pipeline>
+	<pipeline>
+		<nom>recuperer_fond</nom>
+		<inclure>edition_directe_pipelines.php</inclure>
+	</pipeline>
+	
 	<fonctions>edition_directe_fonctions.php</fonctions>
 	<options>edition_directe_options.php</options>	
 	<categorie>edition</categorie>

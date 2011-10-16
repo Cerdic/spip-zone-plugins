@@ -1,6 +1,7 @@
 <?php
 
 function edition_directe_header_prive($flux){
+	include_spip('edition_directe_fonctions');
 	$config=lire_config('edition_directe');
 	
 	$objet=$_REQUEST['exec'];
@@ -60,6 +61,7 @@ function edition_directe_afficher_contenu_objet($flux){
 
     $type = $flux['args']['type'];
 	// objet rubrique
+
 	if ($type=='rubrique' AND objet_edition_directe($type)){
 	
 	$id_rubrique= _request('id_rubrique');
@@ -113,6 +115,31 @@ function edition_directe_afficher_contenu_objet($flux){
 	return $flux;
 }
 
+
+function edition_directe_recuperer_fond($flux){
+	//Enlever la prévisualisation des rubriques
+    if ($flux['args']['fond'] == 'prive/contenu/rubrique'){
+
+
+        $flux['data']['texte'] = '';
+    }
+ 	
+ 	//Enlever la prévisualisation des sites
+    if ($flux['args']['fond'] == 'prive/contenu/site'){
+
+
+        $flux['data']['texte'] = '';
+    } 
+    
+ 	//Enlever la prévisualisation des breves
+    if ($flux['args']['fond'] == 'prive/contenu/breve'){
+
+
+        $flux['data']['texte'] = '';
+    } 
+
+ return $flux;   
+}
 
 // affichage du formulaire de téléchargement des docs
 function edition_directe_affiche_gauche($flux){
