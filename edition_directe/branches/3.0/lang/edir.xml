@@ -1,0 +1,12 @@
+<traduction module="edir" gestionnaire="salvatore" reference="fr">
+	<langue code="de">
+		<traducteur nom="abelass1" />
+	</langue>
+	<langue code="en" />
+	<langue code="fa">
+		<traducteur nom="davood" />
+	</langue>
+	<langue code="sk">
+		<traducteur nom="jaro" />
+	</langue>
+</traduction>
